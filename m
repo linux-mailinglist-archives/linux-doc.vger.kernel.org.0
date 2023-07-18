@@ -2,237 +2,211 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D104E757365
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Jul 2023 07:50:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3C9BD757393
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Jul 2023 08:04:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229625AbjGRFu1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 Jul 2023 01:50:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45022 "EHLO
+        id S230519AbjGRGEg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 Jul 2023 02:04:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50614 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229458AbjGRFu0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Jul 2023 01:50:26 -0400
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com [IPv6:2607:f8b0:4864:20::635])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F1BF5E55;
-        Mon, 17 Jul 2023 22:50:24 -0700 (PDT)
-Received: by mail-pl1-x635.google.com with SMTP id d9443c01a7336-1b89114266dso42617675ad.0;
-        Mon, 17 Jul 2023 22:50:24 -0700 (PDT)
+        with ESMTP id S230419AbjGRGEe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Jul 2023 02:04:34 -0400
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com [IPv6:2a00:1450:4864:20::62b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 99D45ED
+        for <linux-doc@vger.kernel.org>; Mon, 17 Jul 2023 23:04:28 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id a640c23a62f3a-991f956fb5aso655762966b.0
+        for <linux-doc@vger.kernel.org>; Mon, 17 Jul 2023 23:04:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689659424; x=1692251424;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
+        d=linaro.org; s=google; t=1689660267; x=1692252267;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=gga9IzaJCX3VSwGofmNS+NNP6GAiPOUQ3G8Z12KqV+w=;
-        b=S8Smn9fJOljvaaVmEISGQfSKJ4dZL5LIWPTTiZg1DuhVf+1V912GvyFw/XuUVJOc9R
-         M1fSlhP/wxDBLahScFNn/b+tSq2JRuUPDRdf7Rx2mrfl+d/paNUTVKLrSav7ggXBL1Uy
-         /kt0r4Q3y8BC5m82raWtOaHMootriX4N749vjwj2uQ7RKs34I/u0hq39Iiwbhrzma5NJ
-         v1W3fX0svObu3oryimKWpecNu9dbwnv39aJ1aklFn6gfBo3hE9azTwx28emGPUp4hO1V
-         91bc3Bo2n1xLVm9t4WhgraDxfygCKpGFYCdogoxG0EYoMfr751lgmyJk+Kaz13zk6Cbe
-         1yVw==
+        bh=g5f7NuoL+/s8bYQq96dyzOfuTIeGEJ1Q95iMxVbPcgI=;
+        b=MHy1+SYOHT+v734z3zl3xn74SFQLQkv9kc8FKVktNOw56L3SKY61lRQ78NIIT3vUvo
+         ulEO0QRsuhEpb++gPsLvHzmZR9h1DhUbLG+tnxxmWjOQNTgFAM/zzIPRJN5S564tH9aG
+         LKIoq5w8p7yTYcR2U+mEg4zzpFSaGpI7TSg03jHUaydmbWxAr6QYzKjJxs4VunuwN9Y5
+         erITxs2iEJt++4glBFj7M9wvY+9uDAsrKqiQfwy++246qnXAKWZ/LswXgt+Zlm093oxp
+         LflpWgjGKXAiljfK4QfjQrV0dyBSIuLuX3rZEV8tjv21Lw/kBNmk6WPdQKFb3W6UYtuw
+         9iMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689659424; x=1692251424;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
+        d=1e100.net; s=20221208; t=1689660267; x=1692252267;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=gga9IzaJCX3VSwGofmNS+NNP6GAiPOUQ3G8Z12KqV+w=;
-        b=Smuparp8B3pxDNW88od8xHRcvtfqgsHvXe031uEcsz8mErOCMhzRgQJGkPjx569zwJ
-         Pj88Tw1xipmqqqPVBmrqJUcRVnUGHkZChNzSvkgQYhd2lKJIbWTczXUYmY+p4GnJIqGK
-         733P2UlMUQWT5uiJ6dUK8t6eJSRS25gF8JheCF+ktNHPoTp0jVaiFXUchx0e+unE7opn
-         sGOtac274bW/RAaUb1zHzhTH8ujnRFkC8KaoXEDgNJyKj6ogIu0H8uNY//5B/kKNLKFi
-         hg+riZJL4kftQwFdaOz39D0KXRE3oA3HdksydupAcj0dI0I5oskewfJ4LVrTlzBdxB+6
-         ntug==
-X-Gm-Message-State: ABy/qLb6vR0N5fgZX/doL/LDW5hckhV99LmF5+/8RFO5OYuwQRQmPtyw
-        qH/7Hk8nFPSauPmoKQ69kcE=
-X-Google-Smtp-Source: APBJJlGDklalLU/jpOzk9HrL7DjNmsurU4Ks+fW9fRuI1cFSPNs3NyB+6/aasRpcLZCBqtae3jheHA==
-X-Received: by 2002:a17:903:2581:b0:1b9:d961:69b7 with SMTP id jb1-20020a170903258100b001b9d96169b7mr13452653plb.10.1689659424421;
-        Mon, 17 Jul 2023 22:50:24 -0700 (PDT)
-Received: from ?IPV6:2601:1c2:980:9ec0::2764? ([2601:1c2:980:9ec0::2764])
-        by smtp.gmail.com with ESMTPSA id l8-20020a170902f68800b001b80de83b10sm823737plg.301.2023.07.17.22.50.23
+        bh=g5f7NuoL+/s8bYQq96dyzOfuTIeGEJ1Q95iMxVbPcgI=;
+        b=T7TZr3aYBoXXq6y5TRDYxYT2tvQibmBwhUQDnz2MA09WmMudyMDynzbWR+jllp0UJn
+         cRM4NyE6kZMOlUoJRFpaxXEm3Hv1+oZMm7Rwg4MPyPPrqMD2bTyDrMgE+NWgjvIzmLiG
+         pnTUWmHvAk6VyyxA/GnlTDgzf5Pg5MjOWKpmkSdMLLEaPLjT8CtdCe43OCcZV+peewmS
+         5feZ2q49pIELGnn80icohJbRsQwVxAcBVQ5VIRlcncvs7cZHwMNEnP+uMojc5V5ekp1A
+         3VYckDubt04qQtAevTGWqwEggDIjoolQy3CDgy11GQb+qOFhUk+WqTLznaCea5JKFje0
+         EMIw==
+X-Gm-Message-State: ABy/qLY+5PpfIeUqcScWMy25yIODiefqX0P0KmPm8hFr80uuY6LkgS5I
+        /HK2XUElC4pMzUvZ/K2sxHdlZQ==
+X-Google-Smtp-Source: APBJJlFZbIMU5j4Cb+CtvRvuwgexr97UBWi37cXm30GLf2vtnoY8xEMV54HgvT+rU0dOhPyaqKQscQ==
+X-Received: by 2002:a17:906:e17:b0:993:ffcb:ad4e with SMTP id l23-20020a1709060e1700b00993ffcbad4emr10760990eji.13.1689660267020;
+        Mon, 17 Jul 2023 23:04:27 -0700 (PDT)
+Received: from [192.168.1.20] ([178.197.223.104])
+        by smtp.gmail.com with ESMTPSA id l22-20020a170906231600b00992e4d8cc89sm571966eja.57.2023.07.17.23.04.25
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 Jul 2023 22:50:24 -0700 (PDT)
-Message-ID: <aa7d96d5-bbd9-0a37-f43b-5c8c62d9a9dc@gmail.com>
-Date:   Mon, 17 Jul 2023 22:50:22 -0700
+        Mon, 17 Jul 2023 23:04:26 -0700 (PDT)
+Message-ID: <3756dffd-1407-d656-485a-9cf1eefd9ae1@linaro.org>
+Date:   Tue, 18 Jul 2023 08:04:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: [PATCH] docs: move s390 under arch
+Subject: Re: [v6 2/4] dt-bindings: hwmon: Add ASPEED TACH Control
+ documentation
+To:     =?UTF-8?B?6JSh5om/6YGU?= <billyking19920205@gmail.com>
+Cc:     Guenter Roeck <linux@roeck-us.net>,
+        "jdelvare@suse.com" <jdelvare@suse.com>,
+        "robh+dt@kernel.org" <robh+dt@kernel.org>,
+        "krzysztof.kozlowski+dt@linaro.org" 
+        <krzysztof.kozlowski+dt@linaro.org>,
+        "joel@jms.id.au" <joel@jms.id.au>,
+        "andrew@aj.id.au" <andrew@aj.id.au>,
+        "thierry.reding@gmail.com" <thierry.reding@gmail.com>,
+        "u.kleine-koenig@pengutronix.de" <u.kleine-koenig@pengutronix.de>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "p.zabel@pengutronix.de" <p.zabel@pengutronix.de>,
+        "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
+        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>,
+        "linux-aspeed@lists.ozlabs.org" <linux-aspeed@lists.ozlabs.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-pwm@vger.kernel.org" <linux-pwm@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "patrick@stwcx.xyz" <patrick@stwcx.xyz>,
+        Billy Tsai <billy_tsai@aspeedtech.com>
+References: <CAGUgbhCqOJaEPjS96o2au21uW4NhqFScm4Ayd8PzOQvqxQ94SQ@mail.gmail.com>
+ <0b9dd5cf-f4ca-2e6b-624d-0b451bbc2f30@linaro.org>
+ <0ba3767c-d481-6e2c-2d32-b79af0e1efd8@roeck-us.net>
+ <CAGUgbhC34-pUp4ECULc0ScaN7hUF1L-z69h+ji-TiVrv4gKd3Q@mail.gmail.com>
+ <7b198d57-ddec-3074-314a-3e5e5b8f48f9@roeck-us.net>
+ <CAGUgbhDbFedVe-pc+muD_NtDpjHpGqMDdrS3A73C-QbxeHn4oQ@mail.gmail.com>
+ <cf91edc9-1093-495b-48eb-6b05198c2541@linaro.org>
+ <7a69bda1-5f4c-5b1f-8eb6-6fd58917a9b1@roeck-us.net>
+ <CAGUgbhCTDPGt_vpbfaEreX+iuLJ3WUBqt4kppxyaFZQus9Zf0Q@mail.gmail.com>
+ <b22b2ccc-6760-0db6-067b-109c3864d2e8@linaro.org>
+ <CAGUgbhDmXnyxYCL9h9C0P4ByDSTstWnGqW=uFoDVVHeK3BerHA@mail.gmail.com>
 Content-Language: en-US
-To:     Costa Shulyupin <costa.shul@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Alexander Gordeev <agordeev@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Sven Schnelle <svens@linux.ibm.com>,
-        Niklas Schnelle <schnelle@linux.ibm.com>,
-        Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
-        Tony Krowiak <akrowiak@linux.ibm.com>,
-        Halil Pasic <pasic@linux.ibm.com>,
-        Jason Herne <jjherne@linux.ibm.com>,
-        Eric Farman <farman@linux.ibm.com>,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        "Steven Rostedt (Google)" <rostedt@goodmis.org>,
-        Kim Phillips <kim.phillips@amd.com>,
-        Yantengsi <siyanteng@loongson.cn>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Vineet Gupta <vgupta@kernel.org>,
-        Jason Gunthorpe <jgg@ziepe.ca>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Kevin Tian <kevin.tian@intel.com>,
-        Kirti Wankhede <kwankhede@nvidia.com>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Mikhail Zaslonko <zaslonko@linux.ibm.com>,
-        Eric DeVolder <eric.devolder@oracle.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        open list <linux-kernel@vger.kernel.org>,
-        "open list:S390 ARCHITECTURE" <linux-s390@vger.kernel.org>,
-        "open list:S390 VFIO-CCW DRIVER" <kvm@vger.kernel.org>
-References: <20230718045550.495428-1-costa.shul@redhat.com>
-From:   Randy Dunlap <rd.dunlab@gmail.com>
-In-Reply-To: <20230718045550.495428-1-costa.shul@redhat.com>
+From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+In-Reply-To: <CAGUgbhDmXnyxYCL9h9C0P4ByDSTstWnGqW=uFoDVVHeK3BerHA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 7/17/23 21:55, Costa Shulyupin wrote:
-> and fix all in-tree references.
+On 18/07/2023 06:01, 蔡承達 wrote:
+>>
+>> On 17/07/2023 11:01, 蔡承達 wrote:
+>>> Guenter Roeck <linux@roeck-us.net> 於 2023年7月17日 週一 上午1:00寫道：
+>>>>
+>>>> On 7/16/23 09:08, Krzysztof Kozlowski wrote:
+>>>>
+>>>> [ ... ]
+>>>>
+>>>>>>
+>>>>>> This patch serial doesn't use to binding the fan control h/w. It is
+>>>>>> used to binding the two independent h/w blocks.
+>>>>>> One is used to provide pwm output and another is used to monitor the
+>>>>>> speed of the input.
+>>>>>> My patch is used to point out that the pwm and the tach is the
+>>>>>> different function and don't need to
+>>>>>> bind together. You can not only combine them as the fan usage but also
+>>>>>> treat them as the individual module for
+>>>>>> use. For example: the pwm can use to be the beeper (pwm-beeper.c), the
+>>>>>> tach can be used to monitor the heart beat signal.
+>>>>>
+>>>>> Isn't this exactly the same as in every other SoC? PWMs can be used in
+>>>>> different ways?
+>>>>>
+>>>>
+>>>> ... and in every fan controller. Not that it really makes sense because
+>>>> normally the pwm controller part of such chips is tied to the fan input,
+>>>> to enable automatic fan control, but it is technically possible.
+>>>> In many cases this is also the case in SoCs, for example, in ast2500.
+>>>> Apparently this was redesigned in ast2600 where they two blocks are
+>>>> only lightly coupled (there are two pwm status bits in the fan status
+>>>> register, but I have no idea what those mean). If the blocks are tightly
+>>>> coupled, separate drivers don't really make sense.
+>>>>
+>>>> There are multiple ways to separate the pwm controller part from the
+>>>> fan inputs if that is really necessary. One would be to provide a
+>>>> sequence of address mappings, the other would be to pass the memory
+>>>> region from an mfd driver. It is not necessary to have N instances
+>>>> of the fan controller, even if the address space is not continuous.
+>>>>
+>>>
+>>> Hi Guenter,
+>>>
+>>> May I ask about the meaning of the sequence of address mappings? It appears
+>>> to consist of multiple tuples within the 'reg' property, indicating
+>>> the usage of PWM/Tach
+>>> registers within a single instance. After that I can use the dts like following:
+>>>
+>>> pwm: pwm@1e610000 {
+>>> ...
+>>> reg = <0x1e610000 0x8
+>>> 0x1e610010 0x8
+>>> 0x1e610020 0x8
+>>> 0x1e610030 0x8
+>>> 0x1e610040 0x8
+>>> 0x1e610050 0x8
+>>> 0x1e610060 0x8
+>>> 0x1e610070 0x8
+>>> 0x1e610080 0x8
+>>> 0x1e610090 0x8
+>>> 0x1e6100A0 0x8
+>>> 0x1e6100B0 0x8
+>>> 0x1e6100C0 0x8
+>>> 0x1e6100D0 0x8
+>>> 0x1e6100E0 0x8
+>>> 0x1e6100F0 0x8>;
+>>
+>>
+>> Uh, no... I mean, why? We keep pointing out that this should not be done
+>> differently than any other SoC. Open any other SoC PWM controller and
+>> tell me why this is different? Why this cannot be one address space?
 > 
-> Architecture-specific documentation is being moved into Documentation/arch/
-> as a way of cleaning up the top-level documentation directory and making
-> the docs hierarchy more closely match the source hierarchy.
+> Hi Krzysztof,
 > 
-> Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
+> This is because the register layout for PWM and Tach is not continuous.
+> Each PWM/Tach instance has its own set of controller registers, and they
+> are independent of each other.
 
-Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
-Thanks.
+Register layout is not continuous in many other devices, so again - why
+this must be different?
 
-> ---
->  Documentation/admin-guide/kernel-parameters.txt   | 4 ++--
->  Documentation/arch/index.rst                      | 2 +-
->  Documentation/{ => arch}/s390/3270.ChangeLog      | 0
->  Documentation/{ => arch}/s390/3270.rst            | 4 ++--
->  Documentation/{ => arch}/s390/cds.rst             | 2 +-
->  Documentation/{ => arch}/s390/common_io.rst       | 2 +-
->  Documentation/{ => arch}/s390/config3270.sh       | 0
->  Documentation/{ => arch}/s390/driver-model.rst    | 0
->  Documentation/{ => arch}/s390/features.rst        | 0
->  Documentation/{ => arch}/s390/index.rst           | 0
->  Documentation/{ => arch}/s390/monreader.rst       | 0
->  Documentation/{ => arch}/s390/pci.rst             | 2 +-
->  Documentation/{ => arch}/s390/qeth.rst            | 0
->  Documentation/{ => arch}/s390/s390dbf.rst         | 0
->  Documentation/{ => arch}/s390/text_files.rst      | 0
->  Documentation/{ => arch}/s390/vfio-ap-locking.rst | 0
->  Documentation/{ => arch}/s390/vfio-ap.rst         | 0
->  Documentation/{ => arch}/s390/vfio-ccw.rst        | 2 +-
->  Documentation/{ => arch}/s390/zfcpdump.rst        | 0
->  Documentation/driver-api/s390-drivers.rst         | 4 ++--
->  MAINTAINERS                                       | 8 ++++----
->  arch/s390/Kconfig                                 | 4 ++--
->  arch/s390/include/asm/debug.h                     | 4 ++--
->  drivers/s390/char/zcore.c                         | 2 +-
->  kernel/Kconfig.kexec                              | 2 +-
->  25 files changed, 21 insertions(+), 21 deletions(-)
->  rename Documentation/{ => arch}/s390/3270.ChangeLog (100%)
->  rename Documentation/{ => arch}/s390/3270.rst (99%)
->  rename Documentation/{ => arch}/s390/cds.rst (99%)
->  rename Documentation/{ => arch}/s390/common_io.rst (98%)
->  rename Documentation/{ => arch}/s390/config3270.sh (100%)
->  rename Documentation/{ => arch}/s390/driver-model.rst (100%)
->  rename Documentation/{ => arch}/s390/features.rst (100%)
->  rename Documentation/{ => arch}/s390/index.rst (100%)
->  rename Documentation/{ => arch}/s390/monreader.rst (100%)
->  rename Documentation/{ => arch}/s390/pci.rst (99%)
->  rename Documentation/{ => arch}/s390/qeth.rst (100%)
->  rename Documentation/{ => arch}/s390/s390dbf.rst (100%)
->  rename Documentation/{ => arch}/s390/text_files.rst (100%)
->  rename Documentation/{ => arch}/s390/vfio-ap-locking.rst (100%)
->  rename Documentation/{ => arch}/s390/vfio-ap.rst (100%)
->  rename Documentation/{ => arch}/s390/vfio-ccw.rst (99%)
->  rename Documentation/{ => arch}/s390/zfcpdump.rst (100%)
 > 
+> For example:
+> PWM0 uses registers 0x0 and 0x4, while Tach0 uses registers 0x8 and 0xc.
+> PWM1 uses registers 0x10 and 0x14, while Tach1 uses registers 0x18 and 0x1c.
+> ...
+> 
+> To separate the PWM controller part from the fan inputs, Guenter has
+> provided two methods.
+> The first method involves passing the memory region from an MFD
+> driver, which was the
 
-> diff --git a/Documentation/s390/3270.ChangeLog b/Documentation/arch/s390/3270.ChangeLog
-> similarity index 100%
-> rename from Documentation/s390/3270.ChangeLog
-> rename to Documentation/arch/s390/3270.ChangeLog
-> diff --git a/Documentation/s390/3270.rst b/Documentation/arch/s390/3270.rst
-> similarity index 99%
-> rename from Documentation/s390/3270.rst
-> rename to Documentation/arch/s390/3270.rst
+I have no clue how can you pass memory region
+(Documentation/devicetree/bindings/reserved-memory/) from MFD and why
+does it make sense here.
 
-> diff --git a/Documentation/s390/cds.rst b/Documentation/arch/s390/cds.rst
-> similarity index 99%
-> rename from Documentation/s390/cds.rst
-> rename to Documentation/arch/s390/cds.rst
+> initial method I intended to use. However, it seems that this method
+> does not make sense to you.
+> 
+> Therefore, I would like to explore the second method suggested by
+> Guenter, which involves providing
+> a sequence of address mappings.
 
-> diff --git a/Documentation/s390/common_io.rst b/Documentation/arch/s390/common_io.rst
-> similarity index 98%
-> rename from Documentation/s390/common_io.rst
-> rename to Documentation/arch/s390/common_io.rst
+Best regards,
+Krzysztof
 
-> diff --git a/Documentation/s390/config3270.sh b/Documentation/arch/s390/config3270.sh
-> similarity index 100%
-> rename from Documentation/s390/config3270.sh
-> rename to Documentation/arch/s390/config3270.sh
-> diff --git a/Documentation/s390/driver-model.rst b/Documentation/arch/s390/driver-model.rst
-> similarity index 100%
-> rename from Documentation/s390/driver-model.rst
-> rename to Documentation/arch/s390/driver-model.rst
-> diff --git a/Documentation/s390/features.rst b/Documentation/arch/s390/features.rst
-> similarity index 100%
-> rename from Documentation/s390/features.rst
-> rename to Documentation/arch/s390/features.rst
-> diff --git a/Documentation/s390/index.rst b/Documentation/arch/s390/index.rst
-> similarity index 100%
-> rename from Documentation/s390/index.rst
-> rename to Documentation/arch/s390/index.rst
-> diff --git a/Documentation/s390/monreader.rst b/Documentation/arch/s390/monreader.rst
-> similarity index 100%
-> rename from Documentation/s390/monreader.rst
-> rename to Documentation/arch/s390/monreader.rst
-> diff --git a/Documentation/s390/pci.rst b/Documentation/arch/s390/pci.rst
-> similarity index 99%
-> rename from Documentation/s390/pci.rst
-> rename to Documentation/arch/s390/pci.rst
-
-> diff --git a/Documentation/s390/qeth.rst b/Documentation/arch/s390/qeth.rst
-> similarity index 100%
-> rename from Documentation/s390/qeth.rst
-> rename to Documentation/arch/s390/qeth.rst
-> diff --git a/Documentation/s390/s390dbf.rst b/Documentation/arch/s390/s390dbf.rst
-> similarity index 100%
-> rename from Documentation/s390/s390dbf.rst
-> rename to Documentation/arch/s390/s390dbf.rst
-> diff --git a/Documentation/s390/text_files.rst b/Documentation/arch/s390/text_files.rst
-> similarity index 100%
-> rename from Documentation/s390/text_files.rst
-> rename to Documentation/arch/s390/text_files.rst
-> diff --git a/Documentation/s390/vfio-ap-locking.rst b/Documentation/arch/s390/vfio-ap-locking.rst
-> similarity index 100%
-> rename from Documentation/s390/vfio-ap-locking.rst
-> rename to Documentation/arch/s390/vfio-ap-locking.rst
-> diff --git a/Documentation/s390/vfio-ap.rst b/Documentation/arch/s390/vfio-ap.rst
-> similarity index 100%
-> rename from Documentation/s390/vfio-ap.rst
-> rename to Documentation/arch/s390/vfio-ap.rst
-> diff --git a/Documentation/s390/vfio-ccw.rst b/Documentation/arch/s390/vfio-ccw.rst
-> similarity index 99%
-> rename from Documentation/s390/vfio-ccw.rst
-> rename to Documentation/arch/s390/vfio-ccw.rst
-
-
--- 
-~Randy
