@@ -2,96 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AC86C75805A
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Jul 2023 17:05:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 01616758092
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Jul 2023 17:15:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232049AbjGRPFb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 Jul 2023 11:05:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44688 "EHLO
+        id S233041AbjGRPPp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 Jul 2023 11:15:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50148 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230209AbjGRPFa (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Jul 2023 11:05:30 -0400
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3483510CB;
-        Tue, 18 Jul 2023 08:05:29 -0700 (PDT)
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 36I6REAM009677;
-        Tue, 18 Jul 2023 15:03:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=qcppdkim1;
- bh=l8jXQmV2PvUFWpCgMtL+9QUJ1C8Jq0rbIFdYtG4s468=;
- b=HQ9Dgbuumrk6U3TYMHXPq+XpXX9aBMnpORf4iEOsVGRbBqub7T8X+mfRSz0DyoLXaIjn
- xkLGBiYDNLsy00U0pnVKVirunJmzSzCLpz3rp4dAHEIqpNKSlGQ19d+FUgDiJnxxGA7i
- nLBhulwd1tMkmF2XEFKUBXnAtLsOVY8ljQGFD7eM4JzaZ+y9RRs1U0N4gXLwkTuxbtDK
- ALjGS3NomUPnCVtonoSLZq2+59J3WycjQbkdM3LY/4L7I/ZVFzCbJRFUhXoqexqHtiQ4
- 0D9Q4nBsNOViMtNAXINSLB6ynVIz/koB8TI4dTE3JuAJnt+SA0str0xN8Wp62oQ1HUOA ug== 
-Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3rwfj79vw4-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 18 Jul 2023 15:03:59 +0000
-Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com [10.45.79.139])
-        by NASANPPMTA03.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 36IF3wiL010970
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 18 Jul 2023 15:03:58 GMT
-Received: from [10.216.47.173] (10.80.80.8) by nasanex01c.na.qualcomm.com
- (10.45.79.139) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.30; Tue, 18 Jul
- 2023 08:03:49 -0700
-Message-ID: <c0284d98-4cb2-cb78-9123-54d83fc31101@quicinc.com>
-Date:   Tue, 18 Jul 2023 20:33:44 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v4 00/21] Add Qualcomm Minidump kernel driver related
- support
-Content-Language: en-US
-To:     Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Trilok Soni <quic_tsoni@quicinc.com>
-CC:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Greg KH <gregkh@linuxfoundation.org>, <corbet@lwn.net>,
-        <agross@kernel.org>, <andersson@kernel.org>,
-        <konrad.dybcio@linaro.org>, <krzysztof.kozlowski+dt@linaro.org>,
-        <conor+dt@kernel.org>, <keescook@chromium.org>,
-        <tony.luck@intel.com>, <gpiccoli@igalia.com>,
-        <catalin.marinas@arm.com>, <will@kernel.org>,
-        <linus.walleij@linaro.org>, <andy.shevchenko@gmail.com>,
+        with ESMTP id S230313AbjGRPPn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Jul 2023 11:15:43 -0400
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2040.outbound.protection.outlook.com [40.107.236.40])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7026B1711;
+        Tue, 18 Jul 2023 08:15:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ERjfGXwCACr+JbA2ZAWuul7vM/nEnrP+waaAb5MAWtkhzCa2+gNfozqtOlG6Z+eSEMyI3ewgfoy3Iij8QfOk3GAUryXHloHpm2mt/uZ+TzV+Y0eZmbFkUgIgJr890GSpQJ8omoYO3J/iK1QmY1h1SDY3ICdv/KV2OnebIcYdeTKjVdLRzUoeMkkTaZbg12pHBtwW2Lm0eBWllRV6+qjJeZOhUGq8G6UOORIS1r6ROHIHG620kwthsZbSOv3hBmFnJKgB3DNrlieRxIKw6RLySXOvfLcJ0HLrl+AWCRkJXdofVXDWmA+5dy1GtHBzRq06m+m+uclrNCrVFMyhY08bgw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bWX9MsSHsjjjJVU4J9iB/jNe5RF9dAvoOinWs+RGHNY=;
+ b=JpusonQzFP4JTsWvWeLpfgbQFK30lZtW7b5TT9Pi4fGSrnLsV2sSY0HDKvHmolrJOJDQgYV4AVV9bc8B1wztNxwvs9VCxlB8gLcm5GQCFrqnG+LdInYycgffRhB9qWptkRgxq2ytx/BZIUGRnQAoUQz+Q+JxbnDYwRK8OMS9Hx++h3h+fOe03D+JGFWPb+hzs+gXW40MenyrdbhpJ18FnmYuFkOFQ36fGnM9ubirWCL48usL4x+M8Omi+qBLeVw4kj3O2/2cBjCiuHJzqJm9vGf3NNzJjHgtAv/DNLJF54X0cwUqm2v+o3/l/vnie7yb2eQcJw7Q7Cxm7u2RbYdMZg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lwn.net smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bWX9MsSHsjjjJVU4J9iB/jNe5RF9dAvoOinWs+RGHNY=;
+ b=ZNZJf88au8SMlXmT0Qed/UPu4PV8wiThAcxA2+wKXUJ0LfUhvc4u4O0QDF3OyUXwpP19lT36IHhoZlRjVIy956Hm2yDSVe+kMKi+LG/99GZ65z77/IYtMEcBVeoX1LK1OhrBA4nUaf3HK+Fz/rSxJR/5zL90v6kG9xgj2IJjUS8=
+Received: from MW4PR03CA0029.namprd03.prod.outlook.com (2603:10b6:303:8f::34)
+ by BN9PR12MB5099.namprd12.prod.outlook.com (2603:10b6:408:118::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6588.33; Tue, 18 Jul
+ 2023 15:15:39 +0000
+Received: from CO1NAM11FT104.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:8f:cafe::49) by MW4PR03CA0029.outlook.office365.com
+ (2603:10b6:303:8f::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6588.33 via Frontend
+ Transport; Tue, 18 Jul 2023 15:15:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1NAM11FT104.mail.protection.outlook.com (10.13.174.220) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6588.33 via Frontend Transport; Tue, 18 Jul 2023 15:15:36 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Tue, 18 Jul
+ 2023 10:15:35 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Tue, 18 Jul
+ 2023 10:15:35 -0500
+Received: from iron-maiden.amd.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.23 via Frontend
+ Transport; Tue, 18 Jul 2023 10:15:35 -0500
+From:   Carlos Bilbao <carlos.bilbao@amd.com>
+To:     <corbet@lwn.net>, <ojeda@kernel.org>
+CC:     <jani.nikula@linux.intel.com>, <rdunlap@infradead.org>,
         <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-hardening@vger.kernel.org>,
-        <linux-remoteproc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-gpio@vger.kernel.org>, Alex Elder <elder@linaro.org>
-References: <1687955688-20809-1-git-send-email-quic_mojha@quicinc.com>
- <2023062814-chance-flounder-f002@gregkh>
- <CAL_JsqLO9yey2-4FcWsaGxijiS6hGL0SH9VoMuiyei-u9=Cv=w@mail.gmail.com>
- <cc30660f-dd72-aade-6346-a93c6ad4b695@quicinc.com>
- <29af84dc-7db8-0c43-07b6-eb743cf25e57@linaro.org>
- <957a3cdb-6091-8679-ddb0-296db2347291@quicinc.com> <ZKb3wz2eXS6h1yIW@p14s>
-From:   Mukesh Ojha <quic_mojha@quicinc.com>
-In-Reply-To: <ZKb3wz2eXS6h1yIW@p14s>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01c.na.qualcomm.com (10.45.79.139)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: 5wVB4_xXDRj5tnrwuwAq9UgRU4sEv_dd
-X-Proofpoint-ORIG-GUID: 5wVB4_xXDRj5tnrwuwAq9UgRU4sEv_dd
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-07-18_11,2023-07-18_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 adultscore=0
- mlxlogscore=999 impostorscore=0 clxscore=1011 phishscore=0 spamscore=0
- lowpriorityscore=0 priorityscore=1501 mlxscore=0 bulkscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2306200000 definitions=main-2307180138
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        <konstantin@linuxfoundation.org>, <rust-for-linux@vger.kernel.org>,
+        "Carlos Bilbao" <carlos.bilbao@amd.com>
+Subject: [PATCH v8 0/2] docs: Integrate rustdoc into Rust documentation
+Date:   Tue, 18 Jul 2023 10:15:32 -0500
+Message-ID: <20230718151534.4067460-1-carlos.bilbao@amd.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT104:EE_|BN9PR12MB5099:EE_
+X-MS-Office365-Filtering-Correlation-Id: 92d4ee4d-0af3-455b-066c-08db87a1d6f1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: RfMkzBdXWlLDQ97aXwjiDBqC+M7EY5/yrexRspEMDZrdvCmpWt1EkDqlafJNEF3DA3n/fJEnvf7QyXcmVVR/95XI3LLEkGZJVSY1E9+3qaO/NkXmbUcVX1gz8X4yfPOZRYZO7bqHfhOGNaa23o3xpCHCj2L3iCSUwnR41B97ksGN7HAZjMiUaPEc0gLg78l9QcpIbsHVx1uq+UAdAV0L8QzdpBj8U+VZyBqpF+1EbdaclVZEHt2AP3I8yTBW7ygNZufJbpGUs657+CmtqpUxri277E/A839nfgDRqcI3R5IZ0magDjgyKolD6LOvtr9HfzwNZ0qt91AcLF1AwkU/en9Q3PwInJ9tlHS3JlQLRZB048tw53x3QE5PheSaz1LeGEEedST4ZVTr0WlnPP+MyiFkxrRDPn4jY0xxVO1eZSpYjXuNnO9MHjYcpaVUCMeE4zRJjMKRogXR2qsOY7GTzRHXw+m8T98hqCVYgIApZEj2iXe9veUzHVWqxNkS5QJCa8h28RK5afBuHlhGflDTXIr6Zra5aBl3XShBGOqyQwwjLEik2Q7uaYE1eBoJJbg2stemePL6hK2R1RtQTQ1IXEZt79CdlT/Kka2qt0mYtmvfgpx4NlDnDTeccH6f9KSw2WJUwQFNsCQ5X0fj3CG3arWNJHU2vuh65KI4T/R9qTqQ2BhMenW5EK28g/q733W6HgL2vuogAp2oIf4IpHQBNpOeMpslNtVBaZzI3QEXBlMMwijVJk/VYtgwADZjCbiSOi1vUvsZalFY3qV272Jfbcgo1Rs1ZeZ/fokMEBDKqik=
+X-Forefront-Antispam-Report: CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(396003)(346002)(39860400002)(376002)(136003)(451199021)(82310400008)(36840700001)(46966006)(40470700004)(478600001)(7696005)(6666004)(110136005)(54906003)(83380400001)(426003)(2616005)(336012)(47076005)(40460700003)(36756003)(86362001)(36860700001)(40480700001)(356005)(186003)(26005)(44832011)(966005)(1076003)(2906002)(316002)(70206006)(81166007)(70586007)(4326008)(41300700001)(8936002)(82740400003)(8676002)(5660300002)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2023 15:15:36.6943
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 92d4ee4d-0af3-455b-066c-08db87a1d6f1
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT104.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR12MB5099
+X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=no autolearn_force=no
         version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -99,78 +103,50 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Include HTML output generated with rustdoc into the Linux kernel
+documentation on Rust.
 
+Carlos Bilbao:
+ docs: Move rustdoc output, cross-reference it
+ docs: Integrate rustdoc generation into htmldocs
 
-On 7/6/2023 10:50 PM, Mathieu Poirier wrote:
-> On Mon, Jul 03, 2023 at 02:05:58PM -0700, Trilok Soni wrote:
->> On 7/2/2023 1:29 AM, Krzysztof Kozlowski wrote:
->>> On 30/06/2023 18:04, Mukesh Ojha wrote:
->>>>>
->>>>>> We don't add layers when they are not needed, and never when there is no
->>>>>> actual user.  If you need the extra "complexity" later, then add it
->>>>>> later when it is needed as who knows when that will ever be.
->>>>>>
->>>>>> Please redo this series based on that, thanks.
->>>>>
->>>>> My bigger issue with this whole series is what would this all look
->>>>> like if every SoC vendor upstreamed their own custom dumping
->>>>> mechanism. That would be a mess. (I have similar opinions on the
->>>>> $soc-vendor hypervisors.)
->>>
->>> Mukesh,
->>>
->>> LPC CFP is still open. There will be also Android and Kernel Debugging
->>> LPC microconference tracks. Coming with a unified solution could be a
->>> great topic for LPC. Solutions targeting only one user are quite often
->>> frowned upon.
->>
->> LPC is far out and in November. Can we not have others speak up if they have
->> the similar solution now? We can expand this to linux-kernel and ask for the
->> other SOC vendors to chime in. I am sure that we may have existing solutions
->> which came in for the one user first like Intel RDT if I remember. I am sure
->> ARM MPAM usecase was present at that time but Intel RDT based solution which
->> was x86 specific but accepted.
-> 
-> I am not familiar with Intel RDT and Arm MPAM but the community is always
-> improving on the way it does things.
-> 
-> LPC is indeed far out in November but it is an opportunity to cover the
-> groundwork needed to have this discussion.  It is always best to improve on
-> something then introduce something new.  Even better if something specific such
-> as Intel RDT and Arm MPAM can be made more generic.  A perfect example is
-> hwtracing Linus referred to.  The perf framework wasn't a perfect fit but it was
-> enhanced to accommodate our requirements.  I suggest to look at what is currently
-> available and come up with a strategy to be presented at LPC - event better if
-> you have a prototype.  If you can't find anything or the drawbacks inherent to
-> each avenue outweigh the benefits then we can have that conversation at LPC.
+---
+V7 is https://lore.kernel.org/lkml/20230717151624.3470714-1-carlos.bilbao@amd.com/T/#m5dcab9c7775e85331c0d067d411fe246ed39af1e
+Changes since V7:
+ - Use lowercase for rustdoc_output and define it with `:=`.
+ - Remove messages that would be printed when skipping Rust documentation.
 
-I was checking hwtracing[1] and pmu interface introduction of
-address filtering[3] from analogy point of view, which i think you
-meant that perf framework was extended to accommodate this.
+V6 is https://lore.kernel.org/lkml/20230127165728.119507-1-carl...
+Changes since V6:
+ - Skip Rust document generation entirely if .config doesn't exist.
 
-Minidump is quite different and simple in its way to address the problem
-of debugging on end user devices with minimum data captured to debug 
-crashes and this patch series is inline with similar (core + backend)
-implementation done for stm patches[1] where stm core was developed
-and intel trace hub get hooked into it and later it got reused in [2] by 
-coresight-stm driver.
+Changes since V5:
+ - Continue executing htmldocs even if rustdoc fails.
 
-I am still exploring if something available we can reuse but it seems 
-unlikely at the moment to already available something in the kernel with
-similar use case.
+Changes since V4:
+ - Limit rustdoc note only to html outputs.
 
--Mukesh
+Changes since V3:
+ - Added Reviewed-Bys from Akira Yokosawa.
+ - PATCH 1/2: Avoid error 404 adding tag `rustdoc` for Sphinx.
+ - PATCH 1/2: Don't use "here" as link text, describe destination instead.
+ - PATCH 2/2: Check CONFIG_RUST in a way that allows us to skip generation.
+ - PATCH 2/2: Reoder Sphinx runs so they complete even if rustdoc fails.
 
-[1]
-https://lwn.net/Articles/650245/
+Changes since V2:
+ - Split v2 into two-patch series.
+ - Add "only:: html" directive in Documentation/rust/index.rst reference
 
-[2]
-https://lwn.net/Articles/674201/
+Changes since V1:
+ - Work on top of v6.1-rc1.
+ - Don't use rustdoc.rst, instead add link to Documentation/rust/index.rst.
+ - In Documentation/Makefile, replace @make rustdoc for $(Q)$(MAKE) rustdoc.
+ - Don't do LLVM=1 for all rustdoc generation within `make htmldocs`.
+ - Add spaces on definition of RUSTDOC_OUTPUT, for consistency.
 
-[3]
-https://lore.kernel.org/lkml/1461771888-10409-1-git-send-email-alexander.shishkin@linux.intel.com/
+---
+ Documentation/Makefile       | 16 ++++++++++++++++
+ Documentation/rust/index.rst |  8 ++++++++
+ rust/Makefile                | 15 +++++++++------
+ 3 files changed, 33 insertions(+), 6 deletions(-)
 
-
-> 
->>
->> ---Trilok Soni
