@@ -2,178 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5276775847B
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Jul 2023 20:19:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B814E75851D
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Jul 2023 20:54:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229644AbjGRSTX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 Jul 2023 14:19:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53834 "EHLO
+        id S229528AbjGRSyT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 Jul 2023 14:54:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42594 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229693AbjGRSTW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Jul 2023 14:19:22 -0400
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6C66212F
-        for <linux-doc@vger.kernel.org>; Tue, 18 Jul 2023 11:19:13 -0700 (PDT)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-        by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        (Exim 4.92)
-        (envelope-from <ukl@pengutronix.de>)
-        id 1qLpHo-0001ns-EY; Tue, 18 Jul 2023 20:19:00 +0200
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
-        by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
-        (envelope-from <ukl@pengutronix.de>)
-        id 1qLpHj-000QmQ-Rx; Tue, 18 Jul 2023 20:18:55 +0200
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
-        (envelope-from <ukl@pengutronix.de>)
-        id 1qLpHj-005unT-9J; Tue, 18 Jul 2023 20:18:55 +0200
-From:   =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= 
-        <u.kleine-koenig@pengutronix.de>
+        with ESMTP id S229949AbjGRSyT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Jul 2023 14:54:19 -0400
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B7EC0126;
+        Tue, 18 Jul 2023 11:54:03 -0700 (PDT)
+Received: by mail-qt1-f177.google.com with SMTP id d75a77b69052e-4039a2b71c1so34218491cf.0;
+        Tue, 18 Jul 2023 11:54:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1689706443; x=1692298443;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=J/CrsgelAy4D5Z8podo/b2JgC3WEAES3DxJp/G1efUs=;
+        b=Tlp0jl/6iTEc+3lhwQJ/MM+AjX6CGjfXpB4UCVWw7NTyh8c32HZcIN2mUwOYHLCOx7
+         XEOfK4v78aG2381SGqx5fBTFkhyJ/HlrmZDn0ZHwWGi2aXWxrmbyWXfVHGOV0EQktLAO
+         NHiUl8aWP3FUK2Eojxj1V21okaqFOtQyyXkdiodKK0XbE8NqA5dp0J21hwkk1loLzrPA
+         0tkQp36uRCpfYL3bLTc6Tve4i72sz3Gn0QnKzoWOIrtdSpy+beA//GFxElrfgjNQ+jKH
+         nuM7WYS78VatHpCyAwkm8AbGVkmLf/FBckfwM0m94WcxrgwygCta8DmEvdpN4kQ7KfOe
+         57SA==
+X-Gm-Message-State: ABy/qLbNVFmfOldM0rUmaxXqMubUmCxYry8vNTaimEDvVNg6LVkZP+Hp
+        DHat+3CTsyZA+dJczMveXJo=
+X-Google-Smtp-Source: APBJJlHrH0/tybuohRWeYrtPu0nss6uiitUDZIQ0BdYifYGlbtDGiSDLznYA5LAHpCalYHNjzZpXag==
+X-Received: by 2002:ac8:5f95:0:b0:403:c74e:3999 with SMTP id j21-20020ac85f95000000b00403c74e3999mr17336292qta.45.1689706442750;
+        Tue, 18 Jul 2023 11:54:02 -0700 (PDT)
+Received: from costa-tp.bos2.lab ([5.29.20.9])
+        by smtp.gmail.com with ESMTPSA id hg5-20020a05622a610500b0040353ea0827sm825193qtb.56.2023.07.18.11.54.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 18 Jul 2023 11:54:02 -0700 (PDT)
+From:   Costa Shulyupin <costa.shul@redhat.com>
 To:     Jonathan Corbet <corbet@lwn.net>,
-        Thierry Reding <thierry.reding@gmail.com>,
-        Yang Yingliang <yangyingliang@huawei.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Mark Brown <broonie@kernel.org>,
-        Matti Vaittinen <mazziesaccount@gmail.com>,
-        James Clark <james.clark@arm.com>
-Cc:     linux-doc@vger.kernel.org, kernel@pengutronix.de,
-        linux-pwm@vger.kernel.org
-Subject: [PATCH 01/18] pwm: Provide devm_pwmchip_alloc() function
-Date:   Tue, 18 Jul 2023 20:18:32 +0200
-Message-Id: <20230718181849.3947851-2-u.kleine-koenig@pengutronix.de>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230718181849.3947851-1-u.kleine-koenig@pengutronix.de>
-References: <20230718181849.3947851-1-u.kleine-koenig@pengutronix.de>
+        linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+        linux-kernel@vger.kernel.org (open list)
+Cc:     Costa Shulyupin <costa.shul@redhat.com>
+Subject: [PATCH] docs: remove tree links from the main index
+Date:   Tue, 18 Jul 2023 21:51:55 +0300
+Message-ID: <20230718185156.1015753-1-costa.shul@redhat.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4520; i=u.kleine-koenig@pengutronix.de; h=from:subject; bh=TKVgLtf5gColk18OkwLza2/HJ7pw09i8jZEvHcwXgpA=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBkttboXaaUw3bRtUP9CmjrriG6LdFD+1tYcHLY9 gRoCdvY3q6JATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCZLbW6AAKCRCPgPtYfRL+ TnkXB/9J2DZMRqQBuHEDgigZUNh9x+wqfkwIal0Vfb82YwrUurnqyhojMseWRBIcDQbhpXtoHKd sr4OoFKC8R4CRrX/WmJVtVtby3plkTO4QRoMk13NZ0WuuG38L3Caigl/5D0WtSiu9CNujvPRKdj +JVuLwq0M57/UyJsAf4GPf+eIMPhbw8Mmp8lMOf5mK4bSY28nt+EUZaDaX+OLyZB/4gR1J4qfCy X9QXvJxzPP0XK2zo8+ApsCUvdP27CWucMYJM9ELwBGQHpC+Qu+GC1Pf4lvB8RK6teTnG0jK4451 hvCg+CDEqQl5y7eLsHhV1fUDTWlmuTa6qkNRCfgBenOcUcX0
-X-Developer-Key: i=u.kleine-koenig@pengutronix.de; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=1.9 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
+        RCVD_IN_SBL_CSS,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: *
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This function allocates a struct pwm_chip and driver data. Compared to
-the status quo the split into pwm_chip and driver data is new, otherwise
-it doesn't change anything relevant (yet).
+and leave only their neighbor subsystem-apis
 
-The intention is that after all drivers are switched to use this
-allocation function, its possible to add a struct device to struct
-pwm_chip to properly track the latter's lifetime without touching all
-drivers again. Proper lifetime tracking is a necessary precondition to
-introduce character device support for PWMs (that implements atomic
-setting and doesn't suffer from the sysfs overhead of the /sys/class/pwm
-userspace support).
+because these links are already listed under
+section "Core subsystems" of Documentation/subsystem-apis.rst:
 
-The new function pwmchip_priv() (obviously?) only works for chips
-allocated with devm_pwmchip_alloc().
+    Core subsystems
+    ---------------
 
-Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+    .. toctree::
+       :maxdepth: 1
+
+       core-api/index
+       driver-api/index
+       mm/index
+       power/index
+       scheduler/index
+       timers/index
+       locking/index
+
+Reference:
+- https://www.kernel.org/doc/html/next/subsystem-apis.html#core-subsystems
+
+Motivation:
+- make the documentation more organized
+- increase consistency, observability and maintainability
+- improve balance of ToC tree by reducing overly populated lists
+- avoid duplicate parallel links
+- escape tangling of links
+- intention to fit the main index into one page
+
+Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
 ---
- .../driver-api/driver-model/devres.rst        |  1 +
- Documentation/driver-api/pwm.rst              | 10 ++++----
- drivers/pwm/core.c                            | 23 +++++++++++++++++++
- include/linux/pwm.h                           |  4 ++++
- 4 files changed, 33 insertions(+), 5 deletions(-)
+ Documentation/index.rst | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/Documentation/driver-api/driver-model/devres.rst b/Documentation/driver-api/driver-model/devres.rst
-index 8be086b3f829..73a9ee074737 100644
---- a/Documentation/driver-api/driver-model/devres.rst
-+++ b/Documentation/driver-api/driver-model/devres.rst
-@@ -414,6 +414,7 @@ POWER
-   devm_reboot_mode_unregister()
+diff --git a/Documentation/index.rst b/Documentation/index.rst
+index 9dfdc826618c..8d8b7eab1131 100644
+--- a/Documentation/index.rst
++++ b/Documentation/index.rst
+@@ -38,10 +38,7 @@ kernel.
+ .. toctree::
+    :maxdepth: 1
  
- PWM
-+  devm_pwmchip_alloc()
-   devm_pwmchip_add()
-   devm_pwm_get()
-   devm_fwnode_pwm_get()
-diff --git a/Documentation/driver-api/pwm.rst b/Documentation/driver-api/pwm.rst
-index 3fdc95f7a1d1..a3824bd58e4c 100644
---- a/Documentation/driver-api/pwm.rst
-+++ b/Documentation/driver-api/pwm.rst
-@@ -134,11 +134,11 @@ to implement the pwm_*() functions itself. This means that it's impossible
- to have multiple PWM drivers in the system. For this reason it's mandatory
- for new drivers to use the generic PWM framework.
+-   core-api/index
+-   driver-api/index
+    subsystem-apis
+-   Locking in the kernel <locking/index>
  
--A new PWM controller/chip can be added using pwmchip_add() and removed
--again with pwmchip_remove(). pwmchip_add() takes a filled in struct
--pwm_chip as argument which provides a description of the PWM chip, the
--number of PWM devices provided by the chip and the chip-specific
--implementation of the supported PWM operations to the framework.
-+A new PWM controller/chip can be allocated using devm_pwmchip_alloc, then added
-+using pwmchip_add() and removed again with pwmchip_remove(). pwmchip_add()
-+takes a filled in struct pwm_chip as argument which provides a description of
-+the PWM chip, the number of PWM devices provided by the chip and the
-+chip-specific implementation of the supported PWM operations to the framework.
- 
- When implementing polarity support in a PWM driver, make sure to respect the
- signal conventions in the PWM framework. By definition, normal polarity
-diff --git a/drivers/pwm/core.c b/drivers/pwm/core.c
-index 81d176142403..3f4c2d940d64 100644
---- a/drivers/pwm/core.c
-+++ b/drivers/pwm/core.c
-@@ -304,6 +304,29 @@ void pwmchip_remove(struct pwm_chip *chip)
- }
- EXPORT_SYMBOL_GPL(pwmchip_remove);
- 
-+void *pwmchip_priv(struct pwm_chip *chip)
-+{
-+	return (char *)chip + ALIGN(sizeof(*chip), 32);
-+}
-+EXPORT_SYMBOL_GPL(pwmchip_priv);
-+
-+struct pwm_chip *devm_pwmchip_alloc(struct device *parent, size_t sizeof_priv)
-+{
-+	struct pwm_chip *chip;
-+	size_t alloc_size;
-+
-+	alloc_size = ALIGN(sizeof(*chip), 32) + sizeof_priv;
-+
-+	chip = devm_kzalloc(parent, alloc_size, GFP_KERNEL);
-+	if (!chip)
-+		return NULL;
-+
-+	chip->dev = parent;
-+
-+	return chip;
-+}
-+EXPORT_SYMBOL_GPL(devm_pwmchip_alloc);
-+
- static void devm_pwmchip_remove(void *data)
- {
- 	struct pwm_chip *chip = data;
-diff --git a/include/linux/pwm.h b/include/linux/pwm.h
-index 10bea923a1d5..648009c8499b 100644
---- a/include/linux/pwm.h
-+++ b/include/linux/pwm.h
-@@ -5,6 +5,7 @@
- #include <linux/err.h>
- #include <linux/mutex.h>
- #include <linux/of.h>
-+#include <linux/compiler_attributes.h>
- 
- struct pwm_chip;
- 
-@@ -385,6 +386,9 @@ int pwm_capture(struct pwm_device *pwm, struct pwm_capture *result,
- int pwmchip_add(struct pwm_chip *chip);
- void pwmchip_remove(struct pwm_chip *chip);
- 
-+void *pwmchip_priv(struct pwm_chip *chip) __attribute_const__;
-+
-+struct pwm_chip *devm_pwmchip_alloc(struct device *parent, size_t sizeof_priv);
- int devm_pwmchip_add(struct device *dev, struct pwm_chip *chip);
- 
- struct pwm_device *pwm_request_from_chip(struct pwm_chip *chip,
+ Development tools and processes
+ ===============================
 -- 
-2.39.2
+2.41.0
 
