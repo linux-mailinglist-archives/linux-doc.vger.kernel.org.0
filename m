@@ -2,29 +2,28 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 184AB75DDD3
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Jul 2023 19:31:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7E0AE75DE0D
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Jul 2023 20:16:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229689AbjGVRbP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 22 Jul 2023 13:31:15 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37806 "EHLO
+        id S229591AbjGVSQf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 22 Jul 2023 14:16:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45078 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229476AbjGVRbM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Jul 2023 13:31:12 -0400
-X-Greylist: delayed 300 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sat, 22 Jul 2023 10:31:10 PDT
-Received: from so254-32.mailgun.net (so254-32.mailgun.net [198.61.254.32])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B95411BE4
-        for <linux-doc@vger.kernel.org>; Sat, 22 Jul 2023 10:31:10 -0700 (PDT)
+        with ESMTP id S229682AbjGVSQc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Jul 2023 14:16:32 -0400
+Received: from rs227.mailgun.us (rs227.mailgun.us [209.61.151.227])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7399410E9
+        for <linux-doc@vger.kernel.org>; Sat, 22 Jul 2023 11:16:30 -0700 (PDT)
 DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=equiv.tech; q=dns/txt;
- s=mx; t=1690047070; x=1690054270; h=Content-Transfer-Encoding: MIME-Version:
+ s=mx; t=1690049789; x=1690056989; h=Content-Transfer-Encoding: MIME-Version:
  References: In-Reply-To: Message-Id: Date: Subject: Subject: Cc: To: To:
- From: From: Sender: Sender; bh=gBGdbi7zMsDc4jLtV1jMwsUxbQ0E089NfPCcUt+Wu1E=;
- b=Nyc5Ud47dz2emmmwJoKzbVFZ+ee022avYs0+M/2S5eoVUyuBSUTdrhJYRQyQJdNnfass/7aw9lRLcOPnNOQDu47tsE9aX7lzF3A92w1vHGW30XO+CwsEpshUwECW/CG4d/Cd3yDtKHeHwRVL13l2vyc0osZa7o3G2r3toAczzkZYKlARP8nfR66fv38bmzSWKzuw0Pvm3u6bZYHm4DIvJomrU9pMidXqRdf67Y0Vfebiv04fneOWj+5wppTmCACrDtKJCRgtVd/yd8eUgVkcGpaYFn9Hy75s0RnryVVHUE87jXwQuITiiOZxuUNdKKsUiqJQDJ83Ya9Y7bFvakqCFg==
-X-Mailgun-Sending-Ip: 198.61.254.32
+ From: From: Sender: Sender; bh=KTX5c2W9IC0se4k6UfvNshruBo0qc1MufVYnBdWH05Q=;
+ b=lLFzIWw0nQLkUKZwVRv0AakQgFi6o91BfdmdkSXozSt9zP6o0j8Sq6I+5CXzc/s5xIKkIllljSPtUcEy8YRoLl4dCQLSc7QXZpSuYoqMpbYZ00cR7ZuQH1a8sO13AGc/UkV4Wh0pOJg5EhGHNsfF0sMVgOdpHYvrxkW2e6VQwlfFwFwxQeQWlYcge1AuJdJINPbIJyGh961PSBhOqO60B5gbPqEkQdtzrgG9qMFckbRajN2HbiMNDMoFbp+QEIUYfHtwdSFF/VBGJBmWz3sBrsO3PhKw1PMWtN5/MSI/j+yGv9bSt1LeiNYuVu4Z6TWAD3RyduOxnP3hg2ynr8AgRw==
+X-Mailgun-Sending-Ip: 209.61.151.227
 X-Mailgun-Sid: WyIxNjU3YyIsImxpbnV4LWRvY0B2Z2VyLmtlcm5lbC5vcmciLCI5M2Q1YWIiXQ==
-Received: from mail.equiv.tech (equiv.tech [142.93.28.83]) by 1b08b7c1fb5c with SMTP id
- 64bc11319b55128dd86e2552 (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Sat, 22 Jul 2023 17:26:09 GMT
+Received: from mail.equiv.tech (equiv.tech [142.93.28.83]) by 34081948f2f3 with SMTP id
+ 64bc11259b55128dd86df008 (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Sat, 22 Jul 2023 17:25:57 GMT
 Sender: james@equiv.tech
 From:   James Seo <james@equiv.tech>
 To:     Jean Delvare <jdelvare@suse.com>,
@@ -33,47 +32,64 @@ Cc:     James Seo <james@equiv.tech>, linux-hwmon@vger.kernel.org,
         platform-driver-x86@vger.kernel.org,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: [PATCH 2/2] docs: hwmon: hp-wmi-sensors: Change document title
-Date:   Sat, 22 Jul 2023 10:25:14 -0700
-Message-Id: <20230722172513.9324-3-james@equiv.tech>
+Subject: [PATCH 1/2] hwmon: hp-wmi-sensors: Get WMI instance count from WMI driver core
+Date:   Sat, 22 Jul 2023 10:25:13 -0700
+Message-Id: <20230722172513.9324-2-james@equiv.tech>
 In-Reply-To: <20230722172513.9324-1-james@equiv.tech>
 References: <20230722172513.9324-1-james@equiv.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Change title to "Kernel driver hp-wmi-sensors" for consistency with
-most of the rest of Documentation/hwmon.
----
- Documentation/hwmon/hp-wmi-sensors.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+2a2b13ae50cf ("platform/x86: wmi: Allow retrieving the number of WMI
+object instances") means we no longer need to find this ourselves.
 
-diff --git a/Documentation/hwmon/hp-wmi-sensors.rst b/Documentation/hwmon/hp-wmi-sensors.rst
-index a6bca9aecdde..a611c6263074 100644
---- a/Documentation/hwmon/hp-wmi-sensors.rst
-+++ b/Documentation/hwmon/hp-wmi-sensors.rst
-@@ -2,9 +2,9 @@
+Signed-off-by: James Seo <james@equiv.tech>
+---
+ drivers/hwmon/hp-wmi-sensors.c | 20 +++-----------------
+ 1 file changed, 3 insertions(+), 17 deletions(-)
+
+diff --git a/drivers/hwmon/hp-wmi-sensors.c b/drivers/hwmon/hp-wmi-sensors.c
+index ebe2fb513480..3a99cc5f44b2 100644
+--- a/drivers/hwmon/hp-wmi-sensors.c
++++ b/drivers/hwmon/hp-wmi-sensors.c
+@@ -435,25 +435,11 @@ static union acpi_object *hp_wmi_get_wobj(const char *guid, u8 instance)
+ /* hp_wmi_wobj_instance_count - find count of WMI object instances */
+ static u8 hp_wmi_wobj_instance_count(const char *guid)
+ {
+-	u8 hi = HP_WMI_MAX_INSTANCES;
+-	union acpi_object *wobj;
+-	u8 lo = 0;
+-	u8 mid;
+-
+-	while (lo < hi) {
+-		mid = (lo + hi) / 2;
+-
+-		wobj = hp_wmi_get_wobj(guid, mid);
+-		if (!wobj) {
+-			hi = mid;
+-			continue;
+-		}
++	int count;
  
- .. include:: <isonum.txt>
+-		lo = mid + 1;
+-		kfree(wobj);
+-	}
++	count = wmi_instance_count(guid);
  
--===========================
--Linux HP WMI Sensors Driver
--===========================
-+============================
-+Kernel driver hp-wmi-sensors
-+============================
+-	return lo;
++	return clamp(count, 0, (int)HP_WMI_MAX_INSTANCES);
+ }
  
- :Copyright: |copy| 2023 James Seo <james@equiv.tech>
- 
+ static int check_wobj(const union acpi_object *wobj,
 -- 
 2.39.2
 
