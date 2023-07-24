@@ -2,102 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C077F75EC0A
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Jul 2023 08:54:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 566F475EB88
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Jul 2023 08:33:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229578AbjGXGyz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Jul 2023 02:54:55 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46742 "EHLO
+        id S229973AbjGXGdv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Jul 2023 02:33:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58528 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230504AbjGXGyk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Jul 2023 02:54:40 -0400
-X-Greylist: delayed 1807 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sun, 23 Jul 2023 23:54:34 PDT
-Received: from east.greatpeers.com (east.greatpeers.com [88.209.206.55])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BBD34E49
-        for <linux-doc@vger.kernel.org>; Sun, 23 Jul 2023 23:54:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=dkim; d=greatpeers.com;
- h=Reply-To:From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding; i=doris@greatpeers.com;
- bh=VMMvdtI9ESggb4LTYK3x03znzTI=;
- b=IIx+Am+8YsF5z4jPEuo/Q8S3mR8unih7VdQNyS8FXpj6i5+cA50e2L/8xU+excCNdDJ6TTrST5ey
-   rqu51ZJmKcSHe+XSUgt4ggwvQ6s/IvWoTg3om25b7xO17TDlJD1Qh6rBZYzdSYJE/3wwBHdoKxul
-   DK9KmTOPY+/PwtqoiXinMSQEoc8ek8sdM9TKZE0d1vq012L3svR58nUEV6mvjat0MRYkerN4ETnr
-   eWD2dKxsMqypcKj3Gdkj8BTOuXuVKFfNBZODh4x1IWKA9im5XXQMs5P+Ewbc8mVX6R6hkHOxjGBO
-   mMEVvfxTt7N2qDAT5fuOq1M3A0eRzFLidizYtw==
-DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=dkim; d=greatpeers.com;
- b=ClBjN13Ct7apF4YBn0kobV2bjwavF/sjVNPXVV64EaebOvDGmigrKYA0ii7DBNKSLdZFbei/CYBY
-   Amxke14rrcT6oh0u+MyEi4jxvS9Y+LWYHvqFuo4Yww2vY5WW+1JS9Y8pJxQDNJjBd7plI+hlZ/Ha
-   e44/C+o2YgSVtJFEz8z5PBdsgnipeRY7I8L20P8FxQVRM2Rwk44Ss84JmTjB4mtnjykHjWNiA9bf
-   dI+C84uSjOxeSqutuyLvUKllxtgpwN8/rTCT6RfcMCI6yfXeBShzPDzLr6p2dHRZIhGR5LkORmCI
-   ab56+PW2J4hzxllMaKJJNgdU87TDj7kdMRjhHA==;
-Reply-To: sales@tavantabir.co
-From:   doris@greatpeers.com
-To:     linux-doc@vger.kernel.org
-Subject: Request for quote from Tavantabir  group
-Date:   23 Jul 2023 23:24:24 -0700
-Message-ID: <20230723232424.482802B41BA78B94@greatpeers.com>
+        with ESMTP id S229537AbjGXGdu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Jul 2023 02:33:50 -0400
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D439ED2;
+        Sun, 23 Jul 2023 23:33:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+        MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+        Content-ID:Content-Description:In-Reply-To:References;
+        bh=xi02gFW93Id0bT7Sh+4wBXdpqlJzFPayUdH3m+EHzPM=; b=BSdcx4WoALDgeHupsuSnOLc1rn
+        gERe7ONSyqR4QdO2pdzHlgtJabW3mHKBgo9gz+fGGpRUX+vnDhZJ5AOedAXhwikUVAL0+SmhjwbxN
+        /N0VWSoe1u1O8qFlW0Q/15iF3i1+4nL3KQEXy6vAxvUZONFG/WTS+I9t67a82XbLG7OfvoNZTxlTI
+        kjMZrhFr7XVvcCGYfNtO/vTmnvsfUi39W5AF55O0z+mC8Pv0FcqpRQ7u2UZsTkfqp6YEEL95yW2ps
+        /w1IpB+gf6iGr6PMeyaMEROi7+ys87t30fRl2tQhbDcxqjeRIsrAXvlidl94WCiUtoYWe74OlVV2m
+        HuQe1YPw==;
+Received: from [2601:1c2:980:9ec0::2764] (helo=bombadil.infradead.org)
+        by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+        id 1qNp8c-002ySv-17;
+        Mon, 24 Jul 2023 06:33:46 +0000
+From:   Randy Dunlap <rdunlap@infradead.org>
+To:     linux-kernel@vger.kernel.org
+Cc:     Randy Dunlap <rdunlap@infradead.org>,
+        Timur Tabi <timur@kernel.org>,
+        Kumar Gala <galak@kernel.crashing.org>,
+        linuxppc-dev@lists.ozlabs.org,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jiri Slaby <jirislaby@kernel.org>,
+        linux-serial@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        linux-doc@vger.kernel.org
+Subject: [PATCH] Documentation: devices.txt: reconcile serial/ucc_uart minor numers
+Date:   Sun, 23 Jul 2023 23:33:41 -0700
+Message-ID: <20230724063341.28198-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: Yes, score=7.4 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_MSPIKE_BL,
-        RCVD_IN_MSPIKE_L3,RCVD_IN_SBL_CSS,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,URIBL_CSS_A,URIBL_DBL_MALWARE autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Report: *  2.5 URIBL_DBL_MALWARE Contains a malware URL listed in the Spamhaus
-        *       DBL blocklist
-        *      [URIs: greatpeers.com]
-        *  3.3 RCVD_IN_SBL_CSS RBL: Received via a relay in Spamhaus SBL-CSS
-        *      [88.209.206.55 listed in zen.spamhaus.org]
-        *  0.1 URIBL_CSS_A Contains URL's A record listed in the Spamhaus CSS
-        *      blocklist
-        *      [URIs: greatpeers.com]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5173]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.9 RCVD_IN_MSPIKE_L3 RBL: Low reputation (-3)
-        *      [88.209.206.55 listed in bl.mailspike.net]
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  0.0 RCVD_IN_MSPIKE_BL Mailspike blocklisted
-X-Spam-Level: *******
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello
+Reconcile devices.txt with serial/ucc_uart.c regarding device number
+assignments. ucc_uart.c supports 4 ports and uses minor devnums
+46-49, so update devices.txt with that info.
+Then update ucc_uart.c's reference to the location of the devices.txt
+list in the kernel source tree.
 
-My name is monika from Tavantabir  Group located in Czech=20
-Republic
+Fixes: d7584ed2b994 ("[POWERPC] qe-uart: add support for Freescale QUICCEngine UART")
+Fixes: 1da177e4c3f4 ("Linux-2.6.12-rc2")
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Cc: Timur Tabi <timur@kernel.org>
+Cc: Kumar Gala <galak@kernel.crashing.org>
+Cc: linuxppc-dev@lists.ozlabs.org
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Jiri Slaby <jirislaby@kernel.org>
+Cc: linux-serial@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+---
+ Documentation/admin-guide/devices.txt |    2 +-
+ drivers/tty/serial/ucc_uart.c         |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-we would like to know if you can export to Czech Republic as we=20
-need 
-
-some of your products.
-
-Kindly give us a reply so we can send you the full specifications
-
-and details of what we would like to order.
-
-Expecting your reply to my email
-
-Thanks & Best Regards
-
-Monika Novotny
-
-sales cordinator 
-
-sales@tavantabir.co
-
-
-
-
+diff -- a/drivers/tty/serial/ucc_uart.c b/drivers/tty/serial/ucc_uart.c
+--- a/drivers/tty/serial/ucc_uart.c
++++ b/drivers/tty/serial/ucc_uart.c
+@@ -59,7 +59,7 @@ static int firmware_loaded;
+ /* #define LOOPBACK */
+ 
+ /* The major and minor device numbers are defined in
+- * http://www.lanana.org/docs/device-list/devices-2.6+.txt.  For the QE
++ * Documentation/admin-guide/devices.txt.  For the QE
+  * UART, we have major number 204 and minor numbers 46 - 49, which are the
+  * same as for the CPM2.  This decision was made because no Freescale part
+  * has both a CPM and a QE.
+diff -- a/Documentation/admin-guide/devices.txt b/Documentation/admin-guide/devices.txt
+--- a/Documentation/admin-guide/devices.txt
++++ b/Documentation/admin-guide/devices.txt
+@@ -2691,7 +2691,7 @@
+ 		 45 = /dev/ttyMM1		Marvell MPSC - port 1 (obsolete unused)
+ 		 46 = /dev/ttyCPM0		PPC CPM (SCC or SMC) - port 0
+ 		    ...
+-		 47 = /dev/ttyCPM5		PPC CPM (SCC or SMC) - port 5
++		 49 = /dev/ttyCPM5		PPC CPM (SCC or SMC) - port 3
+ 		 50 = /dev/ttyIOC0		Altix serial card
+ 		    ...
+ 		 81 = /dev/ttyIOC31		Altix serial card
