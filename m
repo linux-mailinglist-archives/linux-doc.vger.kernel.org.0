@@ -2,108 +2,57 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CB6C3761A26
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Jul 2023 15:39:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 447CD761A59
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Jul 2023 15:46:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231225AbjGYNjo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 25 Jul 2023 09:39:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35534 "EHLO
+        id S231429AbjGYNqz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 25 Jul 2023 09:46:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40242 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231221AbjGYNjn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Jul 2023 09:39:43 -0400
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7E6D2BE;
-        Tue, 25 Jul 2023 06:39:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Transfer-Encoding:
-        Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
-        Sender:Reply-To:Content-ID:Content-Description;
-        bh=AqhhXygkgYbNIUoMbam6nKKv+65xhkGjy3g6V0cI3YE=; b=hU0juKjhnKQNMPcWxGTglXF1kD
-        xBeNXFwO6bnr7cRSGSRHFONAWDnx+6524lg/8FLjxvB00LuNdyZOyZfcpfPUYsI9/m4/wxx3XADTa
-        IhO/K2oW4GRTfGIQ608wBXqm9GjRT1kOVe8WYSkXmy8R6Xy4Kmol7TQFesj4k3+2Ucyms3qwYaJY7
-        jLJUnGnJNEcVrXPXgDy1IK44aIJfxkS+/FqW0+yWhU8qeyJh4cu9RXzeK/Gb1Zl8copgtkKLHoxDF
-        JMGM13VNEgUa451vGA877Yf6lodJWN7+QQiNx8EG7C7Z5r9rUdrUihkgPelx/JvMdyFS4IfyITpst
-        ZPZuwbig==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
-        by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-        id 1qOIGH-004AGP-0U;
-        Tue, 25 Jul 2023 13:39:38 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
+        with ESMTP id S231452AbjGYNqw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Jul 2023 09:46:52 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EE6D81FF7;
+        Tue, 25 Jul 2023 06:46:38 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits))
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id C0A9B300095;
-        Tue, 25 Jul 2023 15:39:36 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id A54B92CCD6B85; Tue, 25 Jul 2023 15:39:36 +0200 (CEST)
-Date:   Tue, 25 Jul 2023 15:39:36 +0200
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Joel Fernandes <joel@joelfernandes.org>
-Cc:     Valentin Schneider <vschneid@redhat.com>,
-        linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, kvm@vger.kernel.org, linux-mm@kvack.org,
-        bpf@vger.kernel.org, x86@kernel.org, rcu@vger.kernel.org,
-        linux-kselftest@vger.kernel.org,
-        Nicolas Saenz Julienne <nsaenzju@redhat.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Andy Lutomirski <luto@kernel.org>,
-        Frederic Weisbecker <frederic@kernel.org>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Neeraj Upadhyay <quic_neeraju@quicinc.com>,
-        Josh Triplett <josh@joshtriplett.org>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        Zqiang <qiang.zhang1211@gmail.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Uladzislau Rezki <urezki@gmail.com>,
-        Christoph Hellwig <hch@infradead.org>,
-        Lorenzo Stoakes <lstoakes@gmail.com>,
-        Josh Poimboeuf <jpoimboe@kernel.org>,
-        Jason Baron <jbaron@akamai.com>,
-        Kees Cook <keescook@chromium.org>,
-        Sami Tolvanen <samitolvanen@google.com>,
-        Ard Biesheuvel <ardb@kernel.org>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        Juerg Haefliger <juerg.haefliger@canonical.com>,
-        Nicolas Saenz Julienne <nsaenz@kernel.org>,
-        "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
-        Nadav Amit <namit@vmware.com>,
-        Dan Carpenter <error27@gmail.com>,
-        Chuang Wang <nashuiliang@gmail.com>,
-        Yang Jihong <yangjihong1@huawei.com>,
-        Petr Mladek <pmladek@suse.com>,
-        "Jason A. Donenfeld" <Jason@zx2c4.com>, Song Liu <song@kernel.org>,
-        Julian Pidancet <julian.pidancet@oracle.com>,
-        Tom Lendacky <thomas.lendacky@amd.com>,
-        Dionna Glaze <dionnaglaze@google.com>,
-        Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Daniel Bristot de Oliveira <bristot@redhat.com>,
-        Marcelo Tosatti <mtosatti@redhat.com>,
-        Yair Podemsky <ypodemsk@redhat.com>
-Subject: Re: [RFC PATCH v2 18/20] context_tracking,x86: Defer kernel text
- patching IPIs
-Message-ID: <20230725133936.GM3765278@hirez.programming.kicks-ass.net>
-References: <20230720163056.2564824-19-vschneid@redhat.com>
- <6EBAEEED-6F38-472D-BA31-9C61179EFA2F@joelfernandes.org>
+         key-exchange X25519 server-signature RSA-PSS (2048 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 837006171E;
+        Tue, 25 Jul 2023 13:46:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C76EC433C7;
+        Tue, 25 Jul 2023 13:46:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1690292798;
+        bh=JZqrPn+/DHRI6pWh4me2MAQvwy7w4laz7lhHcxIHSxA=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=Z2gILGbcAHKPc+dC4tnYImKJ8Lz6VQz6UgiEbMc2w+TJIzDMlkPw8kkC7EiZd7Q0B
+         wSjleOQqtX3QaxF1h1zqruU/AmEW6FGOtR0GlWzOVrStTevaYkxa9L54+ZlNo2k0KF
+         bSOqTF2M7wgBcoxCWLMNJkrapbSqbOc2KVI+ZZSzeBqVaTwQ0li+mP4VgWBWpkgTcw
+         JpS0rtVsjdNM11gXgUxMho0Qbs6wGzV+7TUPE3fadPTOhTofY0/ipoEcWTSBaxA8bj
+         Vf85uFdzOGyVZ08wyPOT1ge0v6F5uUwQQBuATHRD4QCRdE+A0oHjmSK9n7FUyjLDFc
+         R45KWZoFXkrDg==
+Date:   Tue, 25 Jul 2023 14:46:33 +0100
+From:   Mark Brown <broonie@kernel.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Stephen Rothwell <sfr@canb.auug.org.au>,
+        Randy Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH v2 1/1] Documentation: core-api: Drop :export: for
+ int_log.h
+Message-ID: <b761d010-ef21-4be6-b6c3-678498b7fa71@sirena.org.uk>
+References: <20230725104956.47806-1-andriy.shevchenko@linux.intel.com>
+ <87a5vkb0ee.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="sx+tKS4ZQ5MXdS0r"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <6EBAEEED-6F38-472D-BA31-9C61179EFA2F@joelfernandes.org>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
+In-Reply-To: <87a5vkb0ee.fsf@meer.lwn.net>
+X-Cookie: Happiness is the greatest good.
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -111,39 +60,37 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jul 25, 2023 at 06:49:45AM -0400, Joel Fernandes wrote:
-> Interesting series Valentin. Some high-level question/comments on this one:
-> 
-> > On Jul 20, 2023, at 12:34 PM, Valentin Schneider <vschneid@redhat.com> wrote:
-> > 
-> > ﻿text_poke_bp_batch() sends IPIs to all online CPUs to synchronize
-> > them vs the newly patched instruction. CPUs that are executing in userspace
-> > do not need this synchronization to happen immediately, and this is
-> > actually harmful interference for NOHZ_FULL CPUs.
-> 
-> Does the amount of harm not correspond to practical frequency of text_poke? 
-> How often does instruction patching really happen? If it is very infrequent
-> then I am not sure if it is that harmful.
 
-Well, it can happen quite a bit, also from things people would not
-typically 'expect' it.
+--sx+tKS4ZQ5MXdS0r
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-For instance, the moment you create the first per-task perf event we
-frob some jump-labels (and again some second after the last one goes
-away).
+On Tue, Jul 25, 2023 at 07:12:25AM -0600, Jonathan Corbet wrote:
+> Andy Shevchenko <andriy.shevchenko@linux.intel.com> writes:
 
-The same for a bunch of runtime network configurations.
+> > The :export: keyword makes sense only for C-files, where EXPORT_SYMBOL()
+> > might appear. Otherwise kernel-doc may not produce anything out of this
+> > file.
 
-> > As the synchronization IPIs are sent using a blocking call, returning from
-> > text_poke_bp_batch() implies all CPUs will observe the patched
-> > instruction(s), and this should be preserved even if the IPI is deferred.
-> > In other words, to safely defer this synchronization, any kernel
-> > instruction leading to the execution of the deferred instruction
-> > sync (ct_work_flush()) must *not* be mutable (patchable) at runtime.
-> 
-> If it is not infrequent, then are you handling the case where userland
-> spends multiple seconds before entering the kernel, and all this while
-> the blocking call waits? Perhaps in such situation you want the real IPI
-> to be sent out instead of the deferred one?
+> So I still can't take this patch for the reasons described before.  It
+> looks like Mark took the patch that added the problem, so perhaps he
+> should be a recipient of this one too?  I'll add him to the CC...
 
-Please re-read what Valentin wrote -- nobody is waiting on anything.
+Is this the same patch I applied yesterday or a different one?
+
+--sx+tKS4ZQ5MXdS0r
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmS/0jUACgkQJNaLcl1U
+h9AVuQf/eS2VDsEqbQkWzEHHEkArGf8F18F0Qgg37XCfM2YZnAuFeYTHC7GheM44
+6cOWRRWa/PeOO4ywBCddgHokVy54IgzKeRoTP4au9slwbskxrrdfd3cjy2FMzQe0
+iUJmMSeky1zuvf+tZeNKTcrrV7bYF0chIpD8HhLcq9qsdiz+I8sxCuYmsu+U50L7
+pUJeVlVB+LZ8CmhTpc8MYYMUcavdGoCbW3/0GDB2onqn/MsJQQBGYAOdRbGGl3Wc
+t6HD3Fo6QCF5PA3wm0+rgI1qtAT8hVhKukGEdS2A6xnUqN3hmftjbFX1kS9pmSZa
+J2bDUU7+2DwkR91t1L8bANya5PrSbg==
+=d9c9
+-----END PGP SIGNATURE-----
+
+--sx+tKS4ZQ5MXdS0r--
