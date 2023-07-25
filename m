@@ -2,114 +2,138 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0E240761AC3
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Jul 2023 15:56:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 68345761A4D
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Jul 2023 15:45:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232129AbjGYN4i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 25 Jul 2023 09:56:38 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49600 "EHLO
+        id S231428AbjGYNpl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 25 Jul 2023 09:45:41 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40136 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232154AbjGYN4L (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Jul 2023 09:56:11 -0400
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com [209.85.222.176])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AA7E02102;
-        Tue, 25 Jul 2023 06:56:00 -0700 (PDT)
-Received: by mail-qk1-f176.google.com with SMTP id af79cd13be357-7659db6339eso257706485a.1;
-        Tue, 25 Jul 2023 06:56:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690293360; x=1690898160;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=88QG+EwF/eDKfWMz+zR4yw2Isf3lGky7V/U2bBHNF5o=;
-        b=XP964ku1yxqdbpoD7JJLDdTOgIzA9ME5AKAS7k+xxrldqTy3BBZFbTbvTUmT2q5knn
-         nUpQYOV3HGAhn+7/ND3iosIre+fAd445F1uG9QSoaPKR7AFPf0jRtWr9bn9CMn+1FUYm
-         HKK6iQ6O9K7YEkeWHLk8xtyalYpoeeEhns3e445HH2dNdgck8ox0Zd34ZBD4v5J2e0Yq
-         xgLL3+9pQyi+PF7QThbuSwynvN3cSb1S082SxzReXhvKUIPJMzb+GhsEZMvHzlxBel6+
-         x7vKwnR2YDa2VL1K8HyGm0zaBacQxn9Szhq0ZidBtwJQmz/lW66Be8er39Qb2enZ77vJ
-         H3/w==
-X-Gm-Message-State: ABy/qLaqA4pud5Tkm8Kc7y4/JRPun3snPtKbHi8F/7fBN9CIcRGsGeIC
-        TRH1oECW9Mv/Q8ZCASiyA8/IsuzPFLHIacYi
-X-Google-Smtp-Source: APBJJlHjJYvouLEUKwC5K67LVNqpOUfHAQyg2Hzatnvf+//We1oa/BaWucDLiwV1hIfi940pFSbRhQ==
-X-Received: by 2002:a05:620a:28cb:b0:767:dc46:eb6c with SMTP id l11-20020a05620a28cb00b00767dc46eb6cmr2954089qkp.0.1690293359653;
-        Tue, 25 Jul 2023 06:55:59 -0700 (PDT)
-Received: from costa-tp.bos2.lab ([2a00:a040:199:8930:2c90:cb9e:b154:73dc])
-        by smtp.gmail.com with ESMTPSA id i16-20020a0cf390000000b0063646f1147asm4340406qvk.135.2023.07.25.06.55.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Jul 2023 06:55:59 -0700 (PDT)
-From:   Costa Shulyupin <costa.shul@redhat.com>
-To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc:     Costa Shulyupin <costa.shul@redhat.com>
-Subject: [PATCH] docs: consolidate embedded interfaces
-Date:   Tue, 25 Jul 2023 16:55:36 +0300
-Message-ID: <20230725135537.2534212-1-costa.shul@redhat.com>
-X-Mailer: git-send-email 2.41.0
+        with ESMTP id S231424AbjGYNpj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 25 Jul 2023 09:45:39 -0400
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61F782129;
+        Tue, 25 Jul 2023 06:45:12 -0700 (PDT)
+Received: from dggpemm500016.china.huawei.com (unknown [172.30.72.55])
+        by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4R9J970C40zCrLk;
+        Tue, 25 Jul 2023 21:41:47 +0800 (CST)
+Received: from huawei.com (10.67.174.205) by dggpemm500016.china.huawei.com
+ (7.185.36.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 25 Jul
+ 2023 21:45:09 +0800
+From:   Chen Jiahao <chenjiahao16@huawei.com>
+To:     <linux-kernel@vger.kernel.org>, <linux-riscv@lists.infradead.org>,
+        <kexec@lists.infradead.org>, <linux-doc@vger.kernel.org>,
+        <paul.walmsley@sifive.com>, <palmer@dabbelt.com>,
+        <conor.dooley@microchip.com>, <guoren@kernel.org>,
+        <heiko@sntech.de>, <bjorn@rivosinc.com>, <alex@ghiti.fr>,
+        <akpm@linux-foundation.org>, <atishp@rivosinc.com>,
+        <bhe@redhat.com>, <thunder.leizhen@huawei.com>, <horms@kernel.org>
+CC:     <chenjiahao16@huawei.com>
+Subject: [PATCH -next v8 0/2] support allocating crashkernel above 4G explicitly on riscv
+Date:   Tue, 25 Jul 2023 21:44:10 +0000
+Message-ID: <20230725214413.2488159-1-chenjiahao16@huawei.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
-        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.67.174.205]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ dggpemm500016.china.huawei.com (7.185.36.25)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-2.3 required=5.0 tests=BAYES_00,DATE_IN_FUTURE_06_12,
+        RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-to make page Subsystems APIs more organized as requested
+On riscv, the current crash kernel allocation logic is trying to
+allocate within 32bit addressible memory region by default, if
+failed, try to allocate without 4G restriction.
 
-Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
----
- Documentation/subsystem-apis.rst | 21 ++++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
+In need of saving DMA zone memory while allocating a relatively large
+crash kernel region, allocating the reserved memory top down in
+high memory, without overlapping the DMA zone, is a mature solution.
+Hence this patchset introduces the parameter option crashkernel=X,[high,low].
 
-diff --git a/Documentation/subsystem-apis.rst b/Documentation/subsystem-apis.rst
-index 90a0535a932a..7453586114d4 100644
---- a/Documentation/subsystem-apis.rst
-+++ b/Documentation/subsystem-apis.rst
-@@ -60,20 +60,28 @@ Storage interfaces
-    scsi/index
-    target/index
- 
--**Fixme**: much more organizational work is needed here.
-+Embedded interfaces
-+-------------------
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   iio/index
-+   spi/index
-+   i2c/index
-+   fpga/index
-+   w1/index
-+   misc-devices/index
-+
-+**Fixme**: some organizational work is still needed here.
- 
- .. toctree::
-    :maxdepth: 1
- 
-    accounting/index
-    cpu-freq/index
--   fpga/index
--   i2c/index
--   iio/index
-    leds/index
-    pcmcia/index
--   spi/index
--   w1/index
-    watchdog/index
-    virt/index
-    hwmon/index
-@@ -83,6 +91,5 @@ Storage interfaces
-    bpf/index
-    usb/index
-    PCI/index
--   misc-devices/index
-    peci/index
-    wmi/index
+One can reserve the crash kernel from high memory above DMA zone range
+by explicitly passing "crashkernel=X,high"; or reserve a memory range
+below 4G with "crashkernel=X,low". Besides, there are few rules need
+to take notice:
+1. "crashkernel=X,[high,low]" will be ignored if "crashkernel=size"
+   is specified.
+2. "crashkernel=X,low" is valid only when "crashkernel=X,high" is passed
+   and there is enough memory to be allocated under 4G.
+3. When allocating crashkernel above 4G and no "crashkernel=X,low" is
+   specified, a 128M low memory will be allocated automatically for
+   swiotlb bounce buffer.
+See Documentation/admin-guide/kernel-parameters.txt for more information.
+
+To verify loading the crashkernel, adapted kexec-tools is attached below:
+https://github.com/chenjh005/kexec-tools/tree/build-test-riscv-v2
+
+Following test cases have been performed as expected:
+1) crashkernel=256M                          //low=256M
+2) crashkernel=1G                            //low=1G
+3) crashkernel=4G                            //high=4G, low=128M(default)
+4) crashkernel=4G crashkernel=256M,high      //high=4G, low=128M(default), high is ignored
+5) crashkernel=4G crashkernel=256M,low       //high=4G, low=128M(default), low is ignored
+6) crashkernel=4G,high                       //high=4G, low=128M(default)
+7) crashkernel=256M,low                      //low=0M, invalid
+8) crashkernel=4G,high crashkernel=256M,low  //high=4G, low=256M
+9) crashkernel=4G,high crashkernel=4G,low    //high=0M, low=0M, invalid
+10) crashkernel=512M@0xd0000000              //low=512M
+11) crashkernel=1G,high crashkernel=0M,low   //high=1G, low=0M
+
+Changes since [v8]:
+1. Rebase to newest mainline head, not modifying any code logic.
+
+Changes since [v7]:
+1. Minor refactor: move crash_low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE
+   into the !high branch when the first allocation fails. Not changing
+   the result but further align with Arm64 logic, refer to Baoquan's
+   comment.
+2. Add test case "crashkernel=1G,high crashkernel=0M,low", the result
+   also matches our expectation.
+
+Changes since [v6]:
+1. Introduce the "high" flag to mark whether "crashkernel=X,high"
+   is passed. Fix the retrying logic between "crashkernel=X,high"
+   case and others when the first allocation attempt fails.
+
+Changes since [v5]:
+1. Update the crashkernel allocation logic when crashkernel=X,high
+   is specified. In this case, region above 4G will directly get
+   reserved as crashkernel, rather than trying lower 32bit allocation
+   first.
+
+Changes since [v4]:
+1. Update some imprecise code comments for cmdline parsing.
+
+Changes since [v3]:
+1. Update to print warning and return explicitly on failure when
+   crashkernel=size@offset is specified. Not changing the result
+   in this case but making the logic more straightforward.
+2. Some minor cleanup.
+
+Changes since [v2]:
+1. Update the allocation logic to ensure the high crashkernel
+   region is reserved strictly above dma32_phys_limit.
+2. Clean up some minor format problems.
+
+Chen Jiahao (2):
+  riscv: kdump: Implement crashkernel=X,[high,low]
+  docs: kdump: Update the crashkernel description for riscv
+
+ .../admin-guide/kernel-parameters.txt         | 15 +--
+ arch/riscv/kernel/setup.c                     |  5 +
+ arch/riscv/mm/init.c                          | 93 +++++++++++++++++--
+ 3 files changed, 99 insertions(+), 14 deletions(-)
+
 -- 
-2.41.0
+2.34.1
 
