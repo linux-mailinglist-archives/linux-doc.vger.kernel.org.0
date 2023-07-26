@@ -2,114 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D28B2763DDE
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Jul 2023 19:46:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 81F20764009
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Jul 2023 21:55:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229577AbjGZRp7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Jul 2023 13:45:59 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41046 "EHLO
+        id S232347AbjGZTze (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Jul 2023 15:55:34 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44498 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229545AbjGZRp6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Jul 2023 13:45:58 -0400
-Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com [64.147.123.21])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B5F712697;
-        Wed, 26 Jul 2023 10:45:55 -0700 (PDT)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-        by mailout.west.internal (Postfix) with ESMTP id 6C7493200958;
-        Wed, 26 Jul 2023 13:45:53 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute1.internal (MEProxy); Wed, 26 Jul 2023 13:45:55 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=anarazel.de; h=
-        cc:cc:content-type:content-type:date:date:from:from:in-reply-to
-        :in-reply-to:message-id:mime-version:references:reply-to:sender
-        :subject:subject:to:to; s=fm3; t=1690393552; x=1690479952; bh=6+
-        BtwAiVSxh1iYhM2LPLsKH6+zDmGG6P7lMP2V1Zi70=; b=Qmd4H+Br8tMw1XghlU
-        Nlz7bHPXrAx6O7RV5E6WKRL6rQQP51jw9IPDGgQwag+n2TQEAtFZeu+B4DkVRixu
-        knbljF++UyO50c9qQcu39POEQdRSvN7SSKrqiRYeb9C7kJAjmG2fFMYqkuhu4GiD
-        6VCz+CUcl2MUy+kMtmsZhZ5ifKaav7aJaGHf56Yn82fgUkEAzFjgak/wYvduI1sG
-        6IF0ct+HP96ffssE6OE1JGDPOr25oJtN13dEqt4NBL53rvwAC2j2aDKigCuLANHh
-        qmagOEN2ZyXd09Lq5nVCQbFaExvslxhr1v8z9FdOAR9NaHTjync2HAoe4yGmNKnB
-        AZ2w==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=cc:cc:content-type:content-type:date:date
-        :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-        :message-id:mime-version:references:reply-to:sender:subject
-        :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-        :x-sasl-enc; s=fm3; t=1690393552; x=1690479952; bh=6+BtwAiVSxh1i
-        YhM2LPLsKH6+zDmGG6P7lMP2V1Zi70=; b=rDnqFY0bc6eP7jdogZERouKz7ECYX
-        6nCbYyW334nUrGDCwxfK7/t5D6yySDQAmtx4tZu5+0F8dqDdh4YgaVnuHhHHpvRv
-        73SZ0NmZRL0fQmLeuEcMaZisoC4N+/Yx+OyTqT625Le6AZqzIGUCEAxAiO37HmA+
-        V007MCKdZ+uMeFf+HS0YTyOZY41MFohQV/7Si/H9ITky/9F9WHX9RVz7AB3ntGJJ
-        h5JOpBGdJ2K4jjiqu5HQTyPL93LnAUhe7xSV1O6h0l9s5KN5hCknYIVymL4wERnT
-        72mJzFjvbKnSkDnHeN900WH0UYs/v5mviuONbcPLyBhBxLlMbXtle5yjQ==
-X-ME-Sender: <xms:0FvBZC0Tryiu1D6O4NZbVVbVzDLWI1bD1Z4-AqT3CmXiTH9DQQ7JIA>
-    <xme:0FvBZFG0N5nR_MVs_OL-pvmicF_iP3pEiteKryyMhJDDowCACQwNcD37H3bphf0mu
-    RVjmdYPY8RmP8t7WA>
-X-ME-Received: <xmr:0FvBZK7kxLgOSa_vrT3uuwJqKJ_M38nXYdrha9UV3p4mGcDCfRHElIP6L6i9CzU_z2JUe7MZ5Hl2pqfpg6dBEHVJJfyT84iCFAGbbFvHPOEF0Gb6TkOiMqgXoHW1>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedriedvgdduudegucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvfevuffkfhggtggujgesthdtredttddtvdenucfhrhhomheptehnughr
-    vghsucfhrhgvuhhnugcuoegrnhgurhgvshesrghnrghrrgiivghlrdguvgeqnecuggftrf
-    grthhtvghrnhepvdfffeevhfetveffgeeiteefhfdtvdffjeevhfeuteegleduheetvedu
-    ieettddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomh
-    eprghnughrvghssegrnhgrrhgriigvlhdruggv
-X-ME-Proxy: <xmx:0FvBZD0elYr1hQwUGBen7BvOVriKMtEmoAFtRr5poakX9SUE7dz-pQ>
-    <xmx:0FvBZFFyKP3XOu7msWLMIV8gYPAE-RIJoXY3I5o9WlioId0J5vQRlw>
-    <xmx:0FvBZM8OgEJ2xjxfOjgaF7kcJSMl_vJ2gXKsLuCdPG7miNwX7vKO7g>
-    <xmx:0FvBZD8JXMKwcfwFm9JcCrLET6MyEpTBP1XchL84iDs0O9I04wlMIQ>
-Feedback-ID: id4a34324:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 26 Jul 2023 13:45:51 -0400 (EDT)
-Date:   Wed, 26 Jul 2023 10:45:49 -0700
-From:   Andres Freund <andres@anarazel.de>
-To:     Matteo Rizzo <matteorizzo@google.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        io-uring@vger.kernel.org, axboe@kernel.dk, asml.silence@gmail.com,
-        corbet@lwn.net, akpm@linux-foundation.org, keescook@chromium.org,
-        ribalda@chromium.org, rostedt@goodmis.org, jannh@google.com,
-        chenhuacai@kernel.org, gpiccoli@igalia.com, ldufour@linux.ibm.com,
-        evn@google.com, poprdi@google.com, jordyzomer@google.com,
-        jmoyer@redhat.com, krisman@suse.de
-Subject: Re: [PATCH v3 1/1] io_uring: add a sysctl to disable io_uring
- system-wide
-Message-ID: <20230726174549.cg4jgx2d33fom4rb@awork3.anarazel.de>
-References: <20230630151003.3622786-1-matteorizzo@google.com>
- <20230630151003.3622786-2-matteorizzo@google.com>
+        with ESMTP id S232421AbjGZTzX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Jul 2023 15:55:23 -0400
+Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E2F502691;
+        Wed, 26 Jul 2023 12:55:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=XyTW0Ej/ctvX5mhAYSsUtLai+EJ8srqN7zialJMkLmE=; b=hM1wJiCXTM2z10qaH70Y3td19Q
+        RcNkzv2osxtg8g5vj9sDJvWhn20I2tyHdnfNRVCieOfO++Y9Q3cl6+xO7wjUeov18fOZuZlG+hbPi
+        HUDwSYX/Nlfs1QoXzUQehGHWijgiU7cp3U79zFxvgoVlpDsyGPAVt9iOYENQ8E8R5m7zRPHoMFiF4
+        2ZCQVJm86wwBgM+/ZGkpklArFaA1/clBOci/PfKeaZ+ldYZjK2AbJ+Nk0Xdxb+TDkrL1/+XoWsVXa
+        ujTRXxt/hpfEFtfai3OXujo2NVSNvmdOm/34N4u2U50WMJAYFE8mlQjPbUeqxEX36eEWrTdxEevL9
+        xAj7AhOg==;
+Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
+        by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+        id 1qOkan-005ynS-0H;
+        Wed, 26 Jul 2023 19:54:41 +0000
+Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (4096 bits))
+        (Client did not present a certificate)
+        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 465A730056F;
+        Wed, 26 Jul 2023 21:54:39 +0200 (CEST)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+        id 0952E201BD673; Wed, 26 Jul 2023 12:25:12 +0200 (CEST)
+Date:   Wed, 26 Jul 2023 12:25:12 +0200
+From:   Peter Zijlstra <peterz@infradead.org>
+To:     Waiman Long <longman@redhat.com>
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Josh Poimboeuf <jpoimboe@kernel.org>,
+        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+        Jacob Pan <jacob.jun.pan@linux.intel.com>,
+        Len Brown <lenb@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        x86@kernel.org, linux-pm@vger.kernel.org,
+        Robin Jarry <rjarry@redhat.com>, Joe Mario <jmario@redhat.com>,
+        Randy Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH v5 4/4] intel_idle: Add ibrs_off module parameter to
+ force disable IBRS
+Message-ID: <20230726102512.GD3802077@hirez.programming.kicks-ass.net>
+References: <20230710194857.2898284-1-longman@redhat.com>
+ <20230710194857.2898284-5-longman@redhat.com>
+ <f5f25279-bbb5-e040-aeaa-dd3d8686c670@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230630151003.3622786-2-matteorizzo@google.com>
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_PASS,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
-        autolearn_force=no version=3.4.6
+In-Reply-To: <f5f25279-bbb5-e040-aeaa-dd3d8686c670@redhat.com>
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,DATE_IN_PAST_06_12,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+On Tue, Jul 25, 2023 at 04:45:49PM -0400, Waiman Long wrote:
+> On 7/10/23 15:48, Waiman Long wrote:
+> > Commit bf5835bcdb96 ("intel_idle: Disable IBRS during long idle")
+> > disables IBRS when the cstate is 6 or lower. However, there are
+> > some use cases where a customer may want to use max_cstate=1 to
+> > lower latency. Such use cases will suffer from the performance
+> > degradation caused by the enabling of IBRS in the sibling idle thread.
+> > Add a "ibrs_off" module parameter to force disable IBRS and the
+> > CPUIDLE_FLAG_IRQ_ENABLE flag if set.
+> > 
+> > In the case of a Skylake server with max_cstate=1, this new ibrs_off
+> > option will likely increase the IRQ response latency as IRQ will now
+> > be disabled.
+> > 
+> > When running SPECjbb2015 with cstates set to C1 on a Skylake system.
+> > 
+> > First test when the kernel is booted with: "intel_idle.ibrs_off"
+> >    max-jOPS = 117828, critical-jOPS = 66047
+> > 
+> > Then retest when the kernel is booted without the "intel_idle.ibrs_off"
+> > added.
+> >    max-jOPS = 116408, critical-jOPS = 58958
+> > 
+> > That means booting with "intel_idle.ibrs_off" improves performance by:
+> >    max-jOPS:   1.2%, which could be considered noise range.
+> >    critical-jOPS: 12%, which is definitely a solid improvement.
+> > 
+> > The admin-guide/pm/intel_idle.rst file is updated to add a description
+> > about the new "ibrs_off" module parameter.
+> > 
+> > Signed-off-by: Waiman Long <longman@redhat.com>
+> > Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+> > ---
+> >   Documentation/admin-guide/pm/intel_idle.rst | 17 ++++++++++++++++-
+> >   drivers/idle/intel_idle.c                   | 11 ++++++++++-
+> >   2 files changed, 26 insertions(+), 2 deletions(-)
+> 
+> Ping! Is there further suggested changes for this patch series or is it good
+> enough to be merged?
 
-On 2023-06-30 15:10:03 +0000, Matteo Rizzo wrote:
-> Introduce a new sysctl (io_uring_disabled) which can be either 0, 1,
-> or 2. When 0 (the default), all processes are allowed to create io_uring
-> instances, which is the current behavior. When 1, all calls to
-> io_uring_setup fail with -EPERM unless the calling process has
-> CAP_SYS_ADMIN. When 2, calls to io_uring_setup fail with -EPERM
-> regardless of privilege.
-
-Hm, is there a chance that instead of requiring CAP_SYS_ADMIN, a certain group
-could be required (similar to hugetlb_shm_group)? Requiring CAP_SYS_ADMIN
-could have the unintended consequence of io_uring requiring tasks being run
-with more privileges than needed... Or some other more granular way of
-granting the right to use io_uring?
-
-ISTM that it'd be nice if e.g. a systemd service specification could allow
-some services to use io_uring, without allowing it for everyone, or requiring
-to run services effectively as root.
-
-Greetings,
-
-Andres Freund
+I suppose I'll go stick it in x86/core unless someone objects.
