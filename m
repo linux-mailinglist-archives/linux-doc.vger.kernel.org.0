@@ -2,174 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E6C03763CA4
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Jul 2023 18:40:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E9E35763CD4
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Jul 2023 18:46:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229919AbjGZQkm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Jul 2023 12:40:42 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55812 "EHLO
+        id S229919AbjGZQqe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Jul 2023 12:46:34 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33166 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229896AbjGZQkl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Jul 2023 12:40:41 -0400
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D881226B9;
-        Wed, 26 Jul 2023 09:40:40 -0700 (PDT)
-Received: from pps.filterd (m0333521.ppops.net [127.0.0.1])
-        by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 36QGEKNh017717;
-        Wed, 26 Jul 2023 16:40:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=date : from : to : cc
- : subject : message-id : references : content-type : in-reply-to :
- mime-version; s=corp-2023-03-30;
- bh=hkIRTuo7KbVSLLVWs5msstgZV9M+097rwl6Cs39rYaQ=;
- b=eadIIswwGEIlqHEclx2va7+LGMOwbBmLLMAesojoBqBdwkSWQSat0x5nUBRFotwfwhV8
- V6nD5V8uH6bagfxFZMv3ctUdTfTQpMlI9hXGpBOGYAvUBsZq/SMPiuCfoLjuwvNA5qq0
- oMOwhO8/kwz7nnqBwRauDyYf8PUmPlJ5A3n+/ZyXKa9MDYyatZO4DFVcE1scVJqbBdSD
- hynX8u5gXyIW80KjgLZiDetk4Up95C+Jsv6wdz1ZWmOKzOLx8z3FUXxCgTgNIL+2Kex/
- kBjWE9PKZLNN5lKyWR2PDKKM0O+SQcRDe6V22pc1do7se9El6WcixRUK+HndC3nQ1HPt NQ== 
-Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
-        by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3s061c7yv2-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 26 Jul 2023 16:40:01 +0000
-Received: from pps.filterd (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
-        by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 36QFZWNh025271;
-        Wed, 26 Jul 2023 16:40:00 GMT
-Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2174.outbound.protection.outlook.com [104.47.59.174])
-        by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 3s05j6xxkd-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 26 Jul 2023 16:40:00 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ibDN3jfnW4DJiYlpekfH3dNMULFnFPGTx5s3av9X/JfKhQ2FOHgGmT5Rkk+23PAOsjmjeeIvHxBlfRjw8f3h4ETrqTb8YqTZVRMsbEiX8z6SbGK7+lUWAg1ePw2BFg+/q2Z6eDQpX3B0QITHdoQzohghdhkLLcpiYsAUJL3a7qu8szJ5Zopos8BVp3uW6Ehh5sQh/di1n0aEQx5W9svRbD8Ne927Et/n9J2tf4j3IHHgQCIIWjFvoeOH0Vaj02fYtbyF4xj6CQWOYkNWhYXl+wu86tt1H/nDUyKCOUL9TIHFigvUCeV4DOZzYH51CxwJ9B4P8k2NA+kPBSX2PiRQVQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hkIRTuo7KbVSLLVWs5msstgZV9M+097rwl6Cs39rYaQ=;
- b=P2hR/18f3xZhnLxaMYeXryfgUBzuXFrobragRgFSokVIviDF75rJoJ/KL4oJbzaQohGMrlNWmkOgiLxVAif06S77SYWOvkoMc2DIIblztvrYeqnwUJETktnjGLnLFuelhUrabEPqK41tDAjcmXYMzpuBEKsos5JvQlRd4fCTlGZyKKVIHj/0pab9KKxNLRBGbzALdrXn0NMrgVmnifoLk/850K3J5DCB22bJ3BfKhJr3fXibWUtzY/rwiB1iXmAZSOsn2DjG2M+ryqk7WFOR24Ik1ETOdrZ/T4fe0NuDNij5QI4w84EyzcU5a5fVsaY6xZkKKaQaH1divVbgMsH18w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
+        with ESMTP id S230364AbjGZQqd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Jul 2023 12:46:33 -0400
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com [IPv6:2607:f8b0:4864:20::630])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1C5822707
+        for <linux-doc@vger.kernel.org>; Wed, 26 Jul 2023 09:46:30 -0700 (PDT)
+Received: by mail-pl1-x630.google.com with SMTP id d9443c01a7336-1bb8a89b975so23509105ad.1
+        for <linux-doc@vger.kernel.org>; Wed, 26 Jul 2023 09:46:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hkIRTuo7KbVSLLVWs5msstgZV9M+097rwl6Cs39rYaQ=;
- b=ppR/BJT324dvfHvtdLFHDDx+Es0IuwjUXHwgt+aDcDJBzT11/biscRpK3lwbmtNNtQp5AhiYZs98hptYkBQo7YrEzMxRUsYBPlL9DZJZW5akEhaL6r1y3a4SRefXjgKy2sbED8pMazho8yCXcuhL1fTIa4k/IAT5QWhPFkyPxgc=
-Received: from SN6PR10MB3022.namprd10.prod.outlook.com (2603:10b6:805:d8::25)
- by CH0PR10MB7411.namprd10.prod.outlook.com (2603:10b6:610:187::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6631.29; Wed, 26 Jul
- 2023 16:39:58 +0000
-Received: from SN6PR10MB3022.namprd10.prod.outlook.com
- ([fe80::26d3:6f41:6415:8c35]) by SN6PR10MB3022.namprd10.prod.outlook.com
- ([fe80::26d3:6f41:6415:8c35%3]) with mapi id 15.20.6631.026; Wed, 26 Jul 2023
- 16:39:58 +0000
-Date:   Wed, 26 Jul 2023 12:39:55 -0400
-From:   "Liam R. Howlett" <Liam.Howlett@Oracle.com>
-To:     Peng Zhang <zhangpeng.00@bytedance.com>
-Cc:     corbet@lwn.net, akpm@linux-foundation.org, willy@infradead.org,
-        brauner@kernel.org, surenb@google.com, michael.christie@oracle.com,
-        peterz@infradead.org, mathieu.desnoyers@efficios.com,
-        npiggin@gmail.com, avagin@gmail.com, linux-mm@kvack.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH 10/11] MAINTAINERS: Add co-maintainer for maple tree
-Message-ID: <20230726163955.r47vbkgjrcbg6iwv@revolver>
-Mail-Followup-To: "Liam R. Howlett" <Liam.Howlett@Oracle.com>,
-        Peng Zhang <zhangpeng.00@bytedance.com>, corbet@lwn.net,
-        akpm@linux-foundation.org, willy@infradead.org, brauner@kernel.org,
-        surenb@google.com, michael.christie@oracle.com,
-        peterz@infradead.org, mathieu.desnoyers@efficios.com,
-        npiggin@gmail.com, avagin@gmail.com, linux-mm@kvack.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org
-References: <20230726080916.17454-1-zhangpeng.00@bytedance.com>
- <20230726080916.17454-11-zhangpeng.00@bytedance.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230726080916.17454-11-zhangpeng.00@bytedance.com>
-User-Agent: NeoMutt/20220429
-X-ClientProxiedBy: YTBP288CA0030.CANP288.PROD.OUTLOOK.COM
- (2603:10b6:b01:14::43) To SN6PR10MB3022.namprd10.prod.outlook.com
- (2603:10b6:805:d8::25)
+        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1690389989; x=1690994789;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=taA43ETpLC9XelDxU6ZtNji2uVvqZo51XsvT9ZpAUOw=;
+        b=VZu9MJSwZY921d+CgkyRoxwMZ9iNSRGcNwXdvnISwMB6ZrvGY+S7PdYNnCTN09Ml//
+         9OT/zZSv24aoMTT4p8YMqfNMaKALTuecJg7AAfyMvLYvUtCBWMHD8HmcPWG3A6DhHADY
+         9zndIIv6HUn5DPGDsaK9svaN+56XhvqriI612ahHA8eL4BMQerz9GE7C7DWqrlrqyhrD
+         2oFORFcvVABTahHZpXH/yATcrYwkLWjanAhlDeD98fff8tZGesgkvYndd+KcVx+PyB7n
+         x3UZ7zYxPGWO/u8h37KPbndip2DXWlV/eE+HdzkbisNcgPAZzhTJsRw9oxmYcPU+eeIu
+         4kFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690389989; x=1690994789;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=taA43ETpLC9XelDxU6ZtNji2uVvqZo51XsvT9ZpAUOw=;
+        b=c7N15hA2x8SUN+7xfv/GydvaKvwRzmW/Hg5C+AdkSYKIQ5LH89jsTY/fCbX9rEJI+2
+         sACKYyZdRJ4P7d/YszPHr8BU0rXrRdNGKP/0Q7XSQrwQc76QW06y57GG0ZxKcq7IGzHd
+         tdhBp5v9e5Nb5QOqv3oJEQqlqafA1dINGiUeTEh+N4YfSPiWKFCZlZW14Y56ixIB/prU
+         sVI5vRpLz29+Pdi6yOjN+CvI0Wv30NO9aJtEU2okeLBzl7PbOstqCLbHh0ViAgLM+OrP
+         JEp0EnmFZqYzd6qPR1v2KV6vNo8Ucgb3wPcd+YZRb0vV/xQcNqPcFqva00SWfAe4LhaP
+         Ga2g==
+X-Gm-Message-State: ABy/qLYVlOVOo02MfZ9qNqEJukMgtP9YA20WmeVEzyPQhdKqvUYfPx3I
+        OKxvl6GWKn1UM/Em4b11oL1bOg==
+X-Google-Smtp-Source: APBJJlH6j0Ww1otYztDyN7R8yPQEX4DMdjE4EaTSbvjzsuEj6+yeD2BZI9v3UPAjEZlsbhq1mBWpeg==
+X-Received: by 2002:a17:903:2308:b0:1b8:aef2:773e with SMTP id d8-20020a170903230800b001b8aef2773emr2582222plh.46.1690389989599;
+        Wed, 26 Jul 2023 09:46:29 -0700 (PDT)
+Received: from charlie.ba.rivosinc.com ([66.220.2.162])
+        by smtp.gmail.com with ESMTPSA id h5-20020a170902f54500b001bb6c5ff4edsm11628870plf.173.2023.07.26.09.46.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 26 Jul 2023 09:46:29 -0700 (PDT)
+From:   Charlie Jenkins <charlie@rivosinc.com>
+To:     linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org
+Cc:     charlie@rivosinc.com, conor@kernel.org, paul.walmsley@sifive.com,
+        palmer@rivosinc.com, aou@eecs.berkeley.edu, anup@brainfault.org,
+        konstantin@linuxfoundation.org, linux-doc@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
+        mick@ics.forth.gr, jrtc27@jrtc27.com, rdunlap@infradead.org,
+        alexghiti@rivosinc.com
+Subject: [PATCH v7 0/4] RISC-V: mm: Make SV48 the default address space
+Date:   Wed, 26 Jul 2023 09:45:54 -0700
+Message-ID: <20230726164620.717288-1-charlie@rivosinc.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR10MB3022:EE_|CH0PR10MB7411:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0aaf7d44-0f0a-4027-ac18-08db8df6f306
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: xPo3QIYngoI+8MZNmz2tq8zkg5jgpwM4W8DWF5Ewzo1k91nUG12EhjnvfzcJ64cnw+60DsDgydM2+p73GRp52bOQclDQPzE3RR6ucwKz/uWSLSP3AkSr+BU7Cbfhztdro6X/O8X3FzfAhN86d5yEkzNCp8b9BcoBY4mSHyZFWXCJ9zR6Yl8S4rbQocSqwokMcrLAvthBNxgSQwBJd2tHsLRuLADRw+OK/Jg+m8oviS/i2MYFgBdgFOyYIA4id1fyv+f8gVZFs2ixn5PzI89myOL83leyVWoEr3mCPCVEyYMNTrVMs8D4z7eVYLUHpIwZXQZ9ZpzuO28Y0Cxi0VIbDiBaE1QloBOhlZRQnGCumKdYYDzcvAsyC2T6TOny5BGsrw8fEZ7AArHoVPIsJi6Oui4wCn46auTkvdNqHLXqeDd5Bf4wAUwlwKTCX8uGDhdBxjq0xS4+lSAEie9ln8GZLcntUZzTr87LZA7mzM0YqYiRMnq8WAfSXA9W1y6/EKUMUj7y29la3x6cuxcW8mwIWi5e6E+CQ9dqwFjmHixMuo3Qql6PFvPqBQToQMigJ99m
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR10MB3022.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(7916004)(136003)(376002)(346002)(39860400002)(396003)(366004)(451199021)(86362001)(33716001)(2906002)(4744005)(7416002)(186003)(6506007)(1076003)(26005)(9686003)(6512007)(6486002)(38100700002)(478600001)(6666004)(66556008)(8936002)(8676002)(66946007)(66476007)(6916009)(316002)(4326008)(41300700001)(5660300002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tbgSfOukiPWiF9Zkcwu2dwKyCenQpHYomYkeUOm3Ljz40NA2NNXJipZ/EtMe?=
- =?us-ascii?Q?D19KTEbUh+kawLpiF6PoD7S+tmrH55uW/GH6hftVn2Vl2+tMGiouq7Eire4v?=
- =?us-ascii?Q?4CsYl+InXQrLbwdG65hzPX8EEP76ib0PeSCnVqUozjS8JhX2/iSSjj5rQQDZ?=
- =?us-ascii?Q?jirCCx9/8qXGv8K5yE7g3lt8RyADK5hBHu1giaucfxo2Hw67Fu+b8XrG0LjE?=
- =?us-ascii?Q?sir1wrEn0v9/us0LHVYn9W8eY/bgSuLAGim+SGcY6yIcz6nMPaCqIiytgczV?=
- =?us-ascii?Q?bn/2eO7nZkjY4KRxZuVail1LdtmGn4kcpKgpjaIvtJRNRDC20SGvUjBb/Ox6?=
- =?us-ascii?Q?afgkUQmpTfhebFPqv+QHFm7j6B2a6glINYMFsqk5ABOOlAXmFohms7ez9r4Q?=
- =?us-ascii?Q?2O+mNcOTVZyDGlEpHdfCpoZWNs+lFjvCOFY24C7QH40HhZawOop6U31KAjyy?=
- =?us-ascii?Q?Lt0kgvVDy2B3wtQYJlNSdhXiKLfycElMpknPSJ/n1IXhkcDyqGN/taDRGxXU?=
- =?us-ascii?Q?ebN0dzBD0fz1h6mRBbMBZK11kM6I+bIee+tsnj4GtiBJFtj1dfHB3wczBDyf?=
- =?us-ascii?Q?G9wIolmxGJow1pQMHKokivqbeQT5BvPfNTBJooVMVxImZPwM2vAIZ7Ycxz7p?=
- =?us-ascii?Q?Ssm+LVmPMPMIjw9HsJFO25xsNfm/BjAoau+smrHyt5lbLC0DBl4dhm03BS91?=
- =?us-ascii?Q?xkS1o3VXYUZWYyHIVbcAKIwRiludxL1ktExprCQaUPOhbWmdxUT45woGTvxY?=
- =?us-ascii?Q?+D7tBf4xYxew7BTPTfoWJ/k8HsvXquOP2nYxu8BN9V2Khc/jUpie3sC8aDvI?=
- =?us-ascii?Q?PIdNdyy30fu5l2edAvlFhPqZ62cbg4iQM0qa6VzyUGc3XfeQfV8FVdN9CAaB?=
- =?us-ascii?Q?ZWgT1uSZsk+tcf2LIt/swSujSVr8vmTUGk5sfU/z8aOKArnn30ZcFkI/OGI3?=
- =?us-ascii?Q?xGFWmKtr4lrFEQbD5Y1xNVYKHatDnON7lu/eBQX/krVs1+aQL1U/E9ZJbrdb?=
- =?us-ascii?Q?oActSjmG5f4XO3GF4Bk4Djj9lMtxzsXSMUDF4O1GyUDt6a/GtAnMOT9oFQZc?=
- =?us-ascii?Q?jHDsUssqnFgxaVtnq680qZ/7WW78H1eLAtzA7fv5+jgEwAl0+IHNCL8YJUzp?=
- =?us-ascii?Q?AbTJl095X/lEQu3PN6EX+7pQROaB7eNG+ckjT+DiW7Bjj34H5VBekHzXNODP?=
- =?us-ascii?Q?MChHPnzTMsvLrmdNohF2r4nu8MqtByvBH4NIF9u3hPHtLpQfCgNPdKMnHO+r?=
- =?us-ascii?Q?3LkfXoFCenbnu39hTvL0WdLr3i2h/FrG4VS4yCNJt/d/sWOZSYifIwONkEfN?=
- =?us-ascii?Q?b/ItE4w/0gYvLtXWkToqBP7M0w1OX2RlWPbUgd0ov7sjW5WtlaDFBEDRfS4c?=
- =?us-ascii?Q?psXsZsJqQZ8EAmHKAnV1afijpLHf7U2pYLLErZO68UmXHqCUZOVzlb1C9QI4?=
- =?us-ascii?Q?HlOxmN8tvAqoEm4N70nGgQ6tddQft/35yRRGsaWv+93o67RiDp4/+F4BgUHM?=
- =?us-ascii?Q?jf0MAH7TlYENTyBDptQEWY682kpM9F5lB+1uRQ56G5QNzMIREmr2YskAnAoS?=
- =?us-ascii?Q?9Du1aeOuHq/JKlNdMlYPAdiGzhi0O7EjA2f3i7gD0woHDRBzeBf4tJCi4TQJ?=
- =?us-ascii?Q?cw=3D=3D?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: =?us-ascii?Q?1Pu6LnWKd+5PDPMFbhuVPUoAPB6q8GQNbpm2XS/2icW9yZc2sxl5EMkvmek1?=
- =?us-ascii?Q?9SzAVqrzEKu4ZLsYo/rNxl6Wh4nlrZLpCVyeDYwjxrLhG3DyOEqiZ6PJHDdw?=
- =?us-ascii?Q?3AsGbpRTHGKz/CECYmlQfjagSavU5wn3dHs78oiSH503u/dUQkJePJZfJOxV?=
- =?us-ascii?Q?QXDV0kunBGm5JqfdMyq3p0hBDr6O4xBStLzep0V53hOeE87VzQaflGc+pRDW?=
- =?us-ascii?Q?4ejhNgrr7e3sHFHAY/1gjNgEtDgPGdYdUTsxmCTQpE8B3ojl5t2hZPcAvpxF?=
- =?us-ascii?Q?XUeTjKdb6yb0ZJL8LgcqXYh5fyM3OJaHvOoBEbVGmQUrYyUCCNgj1nH7MeR9?=
- =?us-ascii?Q?eVBPzDztQcsRLq9XEskLCCO2o35lA5BN0gY7huuIITLJycM1+m6ek4xnOSTx?=
- =?us-ascii?Q?KZkRcxMBYibkgiuNncj4+X4WD+paHxY9vW8IX6qOZ8RxIaIwwUjnJIaxSp3T?=
- =?us-ascii?Q?NgdA1rk7zgdZB5hLNl4XimyFuXW5p7l8x9Ep0zf4d4bOZeV+2+cuOE4XJljW?=
- =?us-ascii?Q?P5mNzoJnfW78fszAF1qEcJTwWekcg74i9a64+6mO1hfZaKIeC2SSqiWukco8?=
- =?us-ascii?Q?uk62rBCfi4/njK7HTtbg4YmRtq+Vb09HvegmMczIsD2GPXAD8E1KvpouHpyT?=
- =?us-ascii?Q?vg47EDSkVwowk4zTOjTiuDww/MRzxI+EnOgw5Y/c8EUDhtvUwf8FtTCizi4H?=
- =?us-ascii?Q?XGmr3iaHT1lGX9jjnQDPx1E1MdrJFieLj3MM+yeIR8AzRtNrxXDZau4ZmqiW?=
- =?us-ascii?Q?X80YbeA+UnUVcogXBxuHhCJwevfaNmrx4eZsQeDnKb31YREV6j/xiQBaIkna?=
- =?us-ascii?Q?Hhn5CaiRDzyfPvdTTD0I87JRM5cfrVsldo8oRoifaO9a20fYbQyJjFijYPi0?=
- =?us-ascii?Q?Be8p9va4KTQKDl/Gbyfhum8otgOZC+1D3QBbujWqgjYMQy2YUKh8ottaubMe?=
- =?us-ascii?Q?n297S4JpM9NBa5wrAUR405RaHHc3lMA6uWE3Zt8rfuXj0EocTlDKnMNFDh0T?=
- =?us-ascii?Q?HXY//kQbIvh4eKJXXioWMq0UuQ3gCpChLyA2g2R2tFM/Sm8/jiHrp4NMoPcn?=
- =?us-ascii?Q?KvyzdwNN?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0aaf7d44-0f0a-4027-ac18-08db8df6f306
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR10MB3022.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jul 2023 16:39:58.3701
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9OSM51ZOZoAcj7Ax11bBjn3aw2m1IcM+6n99vkQ/EvL3rAmKjQhpXYouAMF0u4anR+B2rb9d0QL3JOua2nN2PA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB7411
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-07-26_07,2023-07-26_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 mlxlogscore=999
- adultscore=0 mlxscore=0 phishscore=0 suspectscore=0 bulkscore=0
- spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2306200000 definitions=main-2307260148
-X-Proofpoint-ORIG-GUID: iqhqqJ2KOt1lBw-eisdjjClDDV8HW4nx
-X-Proofpoint-GUID: iqhqqJ2KOt1lBw-eisdjjClDDV8HW4nx
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
         T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -177,37 +71,73 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-* Peng Zhang <zhangpeng.00@bytedance.com> [230726 04:10]:
-> Add myself as co-maintainer for maple tree. I would like to assist
-> Liam R. Howlett in maintaining maple tree. I will continue to contribute
-> to the development of maple tree in the future.
+Make sv48 the default address space for mmap as some applications
+currently depend on this assumption. Users can now select a
+desired address space using a non-zero hint address to mmap. Previously,
+requesting the default address space from mmap by passing zero as the hint
+address would result in using the largest address space possible. Some
+applications depend on empty bits in the virtual address space, like Go and
+Java, so this patch provides more flexibility for application developers.
 
-Sorry, but no.
+-Charlie
 
-I appreciate the patches, bug fixes, and code review but there is no
-need for another maintainer for the tree at this time.
+---
+v7:
+- Changing RLIMIT_STACK inside of an executing program does not trigger
+  arch_pick_mmap_layout(), so rewrite tests to change RLIMIT_STACK from a
+  script before executing tests. RLIMIT_STACK of infinity forces bottomup
+  mmap allocation.
+- Make arch_get_mmap_base macro more readible by extracting out the rnd
+  calculation.
+- Use MMAP_MIN_VA_BITS in TASK_UNMAPPED_BASE to support case when mmap
+  attempts to allocate address smaller than DEFAULT_MAP_WINDOW.
+- Fix incorrect wording in documentation.
 
-Thank you,
-Liam
+v6:
+- Rebase onto the correct base
 
-> 
-> Signed-off-by: Peng Zhang <zhangpeng.00@bytedance.com>
-> ---
->  MAINTAINERS | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index ddc71b815791..8cfedd492509 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -12526,6 +12526,7 @@ F:	net/mctp/
->  
->  MAPLE TREE
->  M:	Liam R. Howlett <Liam.Howlett@oracle.com>
-> +M:	Peng Zhang <zhangpeng.00@bytedance.com>
->  L:	linux-mm@kvack.org
->  S:	Supported
->  F:	Documentation/core-api/maple_tree.rst
-> -- 
-> 2.20.1
-> 
+v5:
+- Minor wording change in documentation
+- Change some parenthesis in arch_get_mmap_ macros
+- Added case for addr==0 in arch_get_mmap_ because without this, programs would
+  crash if RLIMIT_STACK was modified before executing the program. This was
+  tested using the libhugetlbfs tests. 
+
+v4:
+- Split testcases/document patch into test cases, in-code documentation, and
+  formal documentation patches
+- Modified the mmap_base macro to be more legible and better represent memory
+  layout
+- Fixed documentation to better reflect the implmentation
+- Renamed DEFAULT_VA_BITS to MMAP_VA_BITS
+- Added additional test case for rlimit changes
+---
+
+Charlie Jenkins (4):
+  RISC-V: mm: Restrict address space for sv39,sv48,sv57
+  RISC-V: mm: Add tests for RISC-V mm
+  RISC-V: mm: Update pgtable comment documentation
+  RISC-V: mm: Document mmap changes
+
+ Documentation/riscv/vm-layout.rst             | 22 +++++++
+ arch/riscv/include/asm/elf.h                  |  2 +-
+ arch/riscv/include/asm/pgtable.h              | 21 ++++--
+ arch/riscv/include/asm/processor.h            | 47 ++++++++++++--
+ tools/testing/selftests/riscv/Makefile        |  2 +-
+ tools/testing/selftests/riscv/mm/.gitignore   |  2 +
+ tools/testing/selftests/riscv/mm/Makefile     | 15 +++++
+ .../riscv/mm/testcases/mmap_bottomup.c        | 35 ++++++++++
+ .../riscv/mm/testcases/mmap_default.c         | 35 ++++++++++
+ .../selftests/riscv/mm/testcases/mmap_test.h  | 64 +++++++++++++++++++
+ .../selftests/riscv/mm/testcases/run_mmap.sh  | 12 ++++
+ 11 files changed, 244 insertions(+), 13 deletions(-)
+ create mode 100644 tools/testing/selftests/riscv/mm/.gitignore
+ create mode 100644 tools/testing/selftests/riscv/mm/Makefile
+ create mode 100644 tools/testing/selftests/riscv/mm/testcases/mmap_bottomup.c
+ create mode 100644 tools/testing/selftests/riscv/mm/testcases/mmap_default.c
+ create mode 100644 tools/testing/selftests/riscv/mm/testcases/mmap_test.h
+ create mode 100755 tools/testing/selftests/riscv/mm/testcases/run_mmap.sh
+
+-- 
+2.41.0
+
