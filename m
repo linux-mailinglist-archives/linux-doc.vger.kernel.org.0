@@ -2,114 +2,157 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 81F20764009
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Jul 2023 21:55:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4A793763EF8
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Jul 2023 20:51:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232347AbjGZTze (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Jul 2023 15:55:34 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44498 "EHLO
+        id S229720AbjGZSv1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Jul 2023 14:51:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46412 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232421AbjGZTzX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Jul 2023 15:55:23 -0400
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E2F502691;
-        Wed, 26 Jul 2023 12:55:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=XyTW0Ej/ctvX5mhAYSsUtLai+EJ8srqN7zialJMkLmE=; b=hM1wJiCXTM2z10qaH70Y3td19Q
-        RcNkzv2osxtg8g5vj9sDJvWhn20I2tyHdnfNRVCieOfO++Y9Q3cl6+xO7wjUeov18fOZuZlG+hbPi
-        HUDwSYX/Nlfs1QoXzUQehGHWijgiU7cp3U79zFxvgoVlpDsyGPAVt9iOYENQ8E8R5m7zRPHoMFiF4
-        2ZCQVJm86wwBgM+/ZGkpklArFaA1/clBOci/PfKeaZ+ldYZjK2AbJ+Nk0Xdxb+TDkrL1/+XoWsVXa
-        ujTRXxt/hpfEFtfai3OXujo2NVSNvmdOm/34N4u2U50WMJAYFE8mlQjPbUeqxEX36eEWrTdxEevL9
-        xAj7AhOg==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
-        by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-        id 1qOkan-005ynS-0H;
-        Wed, 26 Jul 2023 19:54:41 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits))
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 465A730056F;
-        Wed, 26 Jul 2023 21:54:39 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 0952E201BD673; Wed, 26 Jul 2023 12:25:12 +0200 (CEST)
-Date:   Wed, 26 Jul 2023 12:25:12 +0200
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Waiman Long <longman@redhat.com>
-Cc:     Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Josh Poimboeuf <jpoimboe@kernel.org>,
-        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-        Jacob Pan <jacob.jun.pan@linux.intel.com>,
-        Len Brown <lenb@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        x86@kernel.org, linux-pm@vger.kernel.org,
-        Robin Jarry <rjarry@redhat.com>, Joe Mario <jmario@redhat.com>,
-        Randy Dunlap <rdunlap@infradead.org>
-Subject: Re: [PATCH v5 4/4] intel_idle: Add ibrs_off module parameter to
- force disable IBRS
-Message-ID: <20230726102512.GD3802077@hirez.programming.kicks-ass.net>
-References: <20230710194857.2898284-1-longman@redhat.com>
- <20230710194857.2898284-5-longman@redhat.com>
- <f5f25279-bbb5-e040-aeaa-dd3d8686c670@redhat.com>
+        with ESMTP id S229572AbjGZSv0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Jul 2023 14:51:26 -0400
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com [209.85.222.176])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 93BBC1FEC;
+        Wed, 26 Jul 2023 11:51:25 -0700 (PDT)
+Received: by mail-qk1-f176.google.com with SMTP id af79cd13be357-7672073e7b9so11358485a.0;
+        Wed, 26 Jul 2023 11:51:25 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690397484; x=1691002284;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ZHyX3wq0ojFXPUI8SahCi1FQW7IJesz87c8DpSzeOCw=;
+        b=kkUQgqr8T6q3+LtXE/B8F6jrpfBEFq856rQ0WmbhThXP00OupGuaodeYaegjscoJap
+         whz2SE9rnmKYuX7eq/ABaH+Fl3XQZX29+4RjCKmFygh/dWXbeyrn8THH1hZn8d4OMpsa
+         S6xPdiDP/j7DVZ6VbvLq+u0l245iOkEN3mmtf9nuINfdA/S51QzQe6H/qkmgU9bZD5fc
+         PM25HJnBOaqhV5gd9+KuAW+fKLtkz1FwSyLeq2v1XCdaq1afihmcsyHNGItpeW5zyMyR
+         lIuEhPaX3B9k8Ra+L+OkfEM5PeWXAZ99kG/5ehj/zOtrjvLpSTSOsr7498QJFr9Zt8Kb
+         5byA==
+X-Gm-Message-State: ABy/qLaKfRxj8QuO4kCCx5fmWcf+n9iHB5TL4AzREuDPPIqX1LpRTb3v
+        F8rUQUqEbbsiaDdReabo2T4blv02G+iBTg==
+X-Google-Smtp-Source: APBJJlEiIiMrCuHBh5EMrE6WULrKvE/VQouJQAx/LwvKSQ27NngFdA8c3ZBXCKmZCev8BLTyEDFsfg==
+X-Received: by 2002:ac8:5bd5:0:b0:403:a4d3:a633 with SMTP id b21-20020ac85bd5000000b00403a4d3a633mr3560424qtb.66.1690397484502;
+        Wed, 26 Jul 2023 11:51:24 -0700 (PDT)
+Received: from costa-tp.bos2.lab ([2a00:a040:199:8930:2c90:cb9e:b154:73dc])
+        by smtp.gmail.com with ESMTPSA id b3-20020ac86783000000b0040324785e4csm4939197qtp.13.2023.07.26.11.51.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 26 Jul 2023 11:51:24 -0700 (PDT)
+From:   Costa Shulyupin <costa.shul@redhat.com>
+To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, workflows@vger.kernel.org
+Cc:     Costa Shulyupin <costa.shul@redhat.com>
+Subject: [RFC PATCH v2] docs: rework "Working with the development community"
+Date:   Wed, 26 Jul 2023 21:49:37 +0300
+Message-ID: <20230726184939.3118350-1-costa.shul@redhat.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <87ila9atuk.fsf@meer.lwn.net>
+References: <87ila9atuk.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <f5f25279-bbb5-e040-aeaa-dd3d8686c670@redhat.com>
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,DATE_IN_PAST_06_12,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=no autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jul 25, 2023 at 04:45:49PM -0400, Waiman Long wrote:
-> On 7/10/23 15:48, Waiman Long wrote:
-> > Commit bf5835bcdb96 ("intel_idle: Disable IBRS during long idle")
-> > disables IBRS when the cstate is 6 or lower. However, there are
-> > some use cases where a customer may want to use max_cstate=1 to
-> > lower latency. Such use cases will suffer from the performance
-> > degradation caused by the enabling of IBRS in the sibling idle thread.
-> > Add a "ibrs_off" module parameter to force disable IBRS and the
-> > CPUIDLE_FLAG_IRQ_ENABLE flag if set.
-> > 
-> > In the case of a Skylake server with max_cstate=1, this new ibrs_off
-> > option will likely increase the IRQ response latency as IRQ will now
-> > be disabled.
-> > 
-> > When running SPECjbb2015 with cstates set to C1 on a Skylake system.
-> > 
-> > First test when the kernel is booted with: "intel_idle.ibrs_off"
-> >    max-jOPS = 117828, critical-jOPS = 66047
-> > 
-> > Then retest when the kernel is booted without the "intel_idle.ibrs_off"
-> > added.
-> >    max-jOPS = 116408, critical-jOPS = 58958
-> > 
-> > That means booting with "intel_idle.ibrs_off" improves performance by:
-> >    max-jOPS:   1.2%, which could be considered noise range.
-> >    critical-jOPS: 12%, which is definitely a solid improvement.
-> > 
-> > The admin-guide/pm/intel_idle.rst file is updated to add a description
-> > about the new "ibrs_off" module parameter.
-> > 
-> > Signed-off-by: Waiman Long <longman@redhat.com>
-> > Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-> > ---
-> >   Documentation/admin-guide/pm/intel_idle.rst | 17 ++++++++++++++++-
-> >   drivers/idle/intel_idle.c                   | 11 ++++++++++-
-> >   2 files changed, 26 insertions(+), 2 deletions(-)
-> 
-> Ping! Is there further suggested changes for this patch series or is it good
-> enough to be merged?
+Mission: Make the documentation more readable, organized and maintainable.
 
-I suppose I'll go stick it in x86/core unless someone objects.
+NB: no information content is lost of changed on the rendered top page.
+
+This patch demonstrates rework of the only the first section
+of the top page for review. The proposal is to rework all sections.
+
+Summary of changes:
+- Heading "Working with the development community" is converted into
+  branch of toctree and visually moved after the text
+  "The essential guides for interacting ..."
+- toctree list is split into separated file. Please don't worry, the
+  content of the list is incorporated to the top page because of
+  `:maxdepth: 2`
+- vertical bar '|' add empty line for better visual distribution
+
+Technical explanations:
+Template {{ toctree(maxdepth=3) }} in
+Documentation/sphinx/templates/kernel-toc.html
+uses directives toctree and doesn't use sections on the top page
+Documentation/index.rst
+to generate expandable toc on the sidebar.
+
+BTW, other template {{ toc }} uses only sections, and doesn't
+use directives toctree.
+
+Benefit:
+- toc on side bar is expandable and collapsible
+
+---
+
+References:
+- https://www.sphinx-doc.org/en/master/development/templating.html#toctree
+- https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-toctree
+- https://www.sphinx-doc.org/en/master/development/templating.html#toc
+- https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#sections
+- https://sphinx-rtd-theme.readthedocs.io/
+
+Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
+---
+ Documentation/index.rst        | 12 +++---------
+ Documentation/process/main.rst | 13 +++++++++++++
+ 2 files changed, 16 insertions(+), 9 deletions(-)
+ create mode 100644 Documentation/process/main.rst
+
+diff --git a/Documentation/index.rst b/Documentation/index.rst
+index 9dfdc826618c..560eb0bc78dd 100644
+--- a/Documentation/index.rst
++++ b/Documentation/index.rst
+@@ -13,21 +13,15 @@ documents into a coherent whole.  Please note that improvements to the
+ documentation are welcome; join the linux-doc list at vger.kernel.org if
+ you want to help out.
+ 
+-Working with the development community
+-======================================
++|
+ 
+ The essential guides for interacting with the kernel's development
+ community and getting your work upstream.
+ 
+ .. toctree::
+-   :maxdepth: 1
+-
+-   process/development-process
+-   process/submitting-patches
+-   Code of conduct <process/code-of-conduct>
+-   maintainer/index
+-   All development-process docs <process/index>
++   :maxdepth: 2
+ 
++   process/main
+ 
+ Internal API manuals
+ ====================
+diff --git a/Documentation/process/main.rst b/Documentation/process/main.rst
+new file mode 100644
+index 000000000000..40bab4ff8198
+--- /dev/null
++++ b/Documentation/process/main.rst
+@@ -0,0 +1,13 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++Working with the development community
++======================================
++
++.. toctree::
++   :maxdepth: 1
++
++   development-process
++   submitting-patches
++   Code of conduct <code-of-conduct>
++   ../maintainer/index
++   All development-process docs <../process/index>
+-- 
+2.41.0
+
