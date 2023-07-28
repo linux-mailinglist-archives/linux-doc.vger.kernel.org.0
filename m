@@ -2,63 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B4976766BB3
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Jul 2023 13:31:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6BCAF766C69
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Jul 2023 14:02:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233597AbjG1Lbm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 28 Jul 2023 07:31:42 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37474 "EHLO
+        id S236433AbjG1MBu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 28 Jul 2023 08:01:50 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52846 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229601AbjG1Lbl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 28 Jul 2023 07:31:41 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0D45F2D5B;
-        Fri, 28 Jul 2023 04:31:40 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 9CE5B62101;
-        Fri, 28 Jul 2023 11:31:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C216C433C8;
-        Fri, 28 Jul 2023 11:31:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1690543899;
-        bh=mQamHmOgyjxhff4tf13gl/WJXm01xBH8XpNyYc9u4CU=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=oEq86SlctDT6n2xRRfUW6BXg07k0GOYkhjEmq11FHtLbCgAdef74cw05oPdwlJMxM
-         nMFKaz3L5nKPQEiU/c9j4ostFrLN6rWdsaFn+Tg3bcNhTzdRyFcDzEzmeXulEYunm8
-         GZxgykpDgWSNe+PLNwW8xOiTCxWwSoyBE9/aq9OSJj9/cN5dI5yKh35KUDbqp9nCSp
-         FzD7ww99o97k5yFbC619m7SskfC2XbDCZTgPthSqUSdVLHsGGeU5z3WFzvqKDea9iO
-         tYBWjY4vjuS0WJO0oninAReyBrrpmped45vPoIZgt+kFoOBDqZ+vIQcKAb6xbCaxE0
-         tPf0W4jFPJCmA==
-Date:   Fri, 28 Jul 2023 13:31:36 +0200
-From:   Maxime Ripard <mripard@kernel.org>
-To:     Danilo Krummrich <dakr@redhat.com>
-Cc:     airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
-        corbet@lwn.net, christian.koenig@amd.com, bskeggs@redhat.com,
-        Liam.Howlett@oracle.com, matthew.brost@intel.com,
-        boris.brezillon@collabora.com, alexdeucher@gmail.com,
-        ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
-        jason@jlekstrand.net, donald.robson@imgtec.com,
-        dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Thomas =?utf-8?Q?Hellstr=C3=B6m?= 
-        <thomas.hellstrom@linux.intel.com>,
-        Dave Airlie <airlied@redhat.com>
-Subject: Re: [PATCH drm-misc-next v8 01/12] drm: manager to keep track of
- GPUs VA mappings
-Message-ID: <hi5magp4icayy5dxmylfyxws52cu63jvlhu4yj5xem3acoaylk@msf7zthcr3lg>
-References: <20230720001443.2380-1-dakr@redhat.com>
- <20230720001443.2380-2-dakr@redhat.com>
+        with ESMTP id S236446AbjG1MBX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 28 Jul 2023 08:01:23 -0400
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com [IPv6:2a00:1450:4864:20::430])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DDC82449A;
+        Fri, 28 Jul 2023 05:01:01 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id ffacd0b85a97d-307d58b3efbso1949078f8f.0;
+        Fri, 28 Jul 2023 05:01:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1690545660; x=1691150460;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=CWHxp6BYdj1hUJAaAzWGPFjl679471PQKsgA5+VvHzI=;
+        b=WcjR4GrSPK9AcULOwlcp9u5LCac4D8DTrx8onXlvQ+V3Xrrf9fMg93DLHFgJBCzrOI
+         uA/wFSCt5zIuCe1WNavuKIga+bIlAQS5N7XckyoYHdxI08iFU6faB0Qz7inZzrC8NP3z
+         xLdpI0ZtQxxfwp9L5wsdhktuj1tsEyGmLWy6X2mwWnjY5NOi8UXfATZJAuuPtP8/tmTN
+         4p9+zR7YinSSbsrmAZOjLCfMrSHJmEaDH7OH2Z7a7Ddq+ZPaC+Db80JI48/xgAhuoFEQ
+         2fiw4KBZWDiFyX8DtVsR9tObg/FAa7PFFPHKa/GdQ0bq8A9RBefHKUHdIUx6AHJLGyyU
+         1PKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690545660; x=1691150460;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=CWHxp6BYdj1hUJAaAzWGPFjl679471PQKsgA5+VvHzI=;
+        b=OjHhVR1+fDckH4mkg2tRLaDHpdf9GPoSb+BQwvq9gRvYA/osiUNbDKVY3wXS8zUkWG
+         Ql32KRgrqrSRVyPvchPfwBqruLiUfIs26j0y8lQ45smalp35D5UUNU1Kdi78yiEQ1Vn8
+         1Zb6pRVucDZYqu6PiBbk7BdnZRySOgt51IzWakuG8N3FTZjZ8nAZgZ678TlgbvLM1HaJ
+         WqKDPU/eUBGNNd7k8SWNuBssrLD8eZZsQBDnU1sH3vTtibEo2fejgpbiyud1FogQWDR0
+         k/fVQEU88sBPzwAn+df9EmfaJOVwHUvR6vFlteJccTc00iHY5/4BJykCcZ5FUmV2vNx4
+         h0IA==
+X-Gm-Message-State: ABy/qLaOaVqCQyDPpBaWOgAvNnyXylA9ZgPcXip++VOZLKcLCx1QJxyR
+        oN/8sM7NZZmweHGBuvKrJk0=
+X-Google-Smtp-Source: APBJJlEUUYRrKzptH8xy7CAmo7/9D1YkWZXuZn+2o4ZW8I6hH44ezT5uhOjJmRR/1W6WyQd0ln8xgA==
+X-Received: by 2002:a5d:474c:0:b0:30f:b7b4:3e55 with SMTP id o12-20020a5d474c000000b0030fb7b43e55mr1528699wrs.19.1690545659659;
+        Fri, 28 Jul 2023 05:00:59 -0700 (PDT)
+Received: from localhost.localdomain (host-95-244-91-78.retail.telecomitalia.it. [95.244.91.78])
+        by smtp.gmail.com with ESMTPSA id p16-20020a5d68d0000000b003140f47224csm4645454wrw.15.2023.07.28.05.00.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 28 Jul 2023 05:00:59 -0700 (PDT)
+From:   "Fabio M. De Francesco" <fmdefrancesco@gmail.com>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Mike Rapoport <rppt@kernel.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org
+Cc:     "Fabio M. De Francesco" <fmdefrancesco@gmail.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Ira Weiny <ira.weiny@intel.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH] Documentation/page_tables: Add info about MMU/TLB and Page Faults
+Date:   Fri, 28 Jul 2023 13:53:01 +0200
+Message-ID: <20230728120054.12306-1-fmdefrancesco@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="3n5o5ss2bit7ecey"
-Content-Disposition: inline
-In-Reply-To: <20230720001443.2380-2-dakr@redhat.com>
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -66,122 +75,147 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Extend page_tables.rst by adding a section about the role of MMU and TLB
+in translating between virtual addresses and physical page frames.
+Furthermore explain the concept behind Page Faults and how the Linux
+kernel handles TLB misses. Finally briefly explain how and why to disable
+the page faults handler.
 
---3n5o5ss2bit7ecey
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Ira Weiny <ira.weiny@intel.com>
+Cc: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Linus Walleij <linus.walleij@linaro.org>
+Cc: Matthew Wilcox <willy@infradead.org>
+Cc: Mike Rapoport <rppt@kernel.org>
+Cc: Randy Dunlap <rdunlap@infradead.org>
+Signed-off-by: Fabio M. De Francesco <fmdefrancesco@gmail.com>
+---
 
-Hi Danilo,
+This has been an RFC PATCH in its 2nd version for a week or so. I received
+comments and suggestions on it from Jonathan Cameron (thanks!), and so it has
+now been modified to a real patch. I hope that other people want to add their
+comments on this document in order to further improve and extend it.
 
-On Thu, Jul 20, 2023 at 02:14:22AM +0200, Danilo Krummrich wrote:
-> Add infrastructure to keep track of GPU virtual address (VA) mappings
-> with a decicated VA space manager implementation.
->=20
-> New UAPIs, motivated by Vulkan sparse memory bindings graphics drivers
-> start implementing, allow userspace applications to request multiple and
-> arbitrary GPU VA mappings of buffer objects. The DRM GPU VA manager is
-> intended to serve the following purposes in this context.
->=20
-> 1) Provide infrastructure to track GPU VA allocations and mappings,
->    making using an interval tree (RB-tree).
->=20
-> 2) Generically connect GPU VA mappings to their backing buffers, in
->    particular DRM GEM objects.
->=20
-> 3) Provide a common implementation to perform more complex mapping
->    operations on the GPU VA space. In particular splitting and merging
->    of GPU VA mappings, e.g. for intersecting mapping requests or partial
->    unmap requests.
->=20
-> Acked-by: Thomas Hellstr=F6m <thomas.hellstrom@linux.intel.com>
-> Acked-by: Matthew Brost <matthew.brost@intel.com>
-> Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
-> Tested-by: Matthew Brost <matthew.brost@intel.com>
-> Tested-by: Donald Robson <donald.robson@imgtec.com>
-> Suggested-by: Dave Airlie <airlied@redhat.com>
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+The link to the thread with the RFC PATCH v2 and the messages between Jonathan
+and me start at https://lore.kernel.org/all/20230723120721.7139-1-fmdefrancesco@gmail.com/#r
 
-For some reason this breaks the drm_exec kunit patches:
+ Documentation/mm/page_tables.rst | 105 +++++++++++++++++++++++++++++++
+ 1 file changed, 105 insertions(+)
 
+diff --git a/Documentation/mm/page_tables.rst b/Documentation/mm/page_tables.rst
+index 7840c1891751..6ecfd6d2f1f3 100644
+--- a/Documentation/mm/page_tables.rst
++++ b/Documentation/mm/page_tables.rst
+@@ -152,3 +152,108 @@ Page table handling code that wishes to be architecture-neutral, such as the
+ virtual memory manager, will need to be written so that it traverses all of the
+ currently five levels. This style should also be preferred for
+ architecture-specific code, so as to be robust to future changes.
++
++
++MMU, TLB, and Page Faults
++=========================
++
++The `Memory Management Unit (MMU)` is a hardware component that handles virtual
++to physical address translations. It may use relatively small caches in hardware
++called `Translation Lookaside Buffers (TLBs)` and `Page Walk Caches` to speed up
++these translations.
++
++When a process wants to access a memory location, the CPU provides a virtual
++address to the MMU, which then uses the MMU to check access permissions and
++dirty bits, and if possible it resolves the physical address and consents the
++requested type of access to the corresponding physical address.
++
++If the TLBs have not yet any recorded translations, the MMU may use the Page
++Walk Caches and complete or restart the page tables walks until a physical
++address can finally be resolved. Permissions and dirty bits are checked.
++
++In the context of a virtual memory system, like the one used by the Linux
++kernel, each page of memory has associated permission and dirty bits.
++
++The dirty bit for a page is set (i.e., turned on) when the page is written
++to. This indicates that the page has been modified since it was loaded into
++memory. It probably needs to be written on disk or other cores may need to
++be informed about previous changes before allowing further operations.
++
++If nothing prevents it, eventually the physical memory can be accessed and
++the requested operation on the physical frame is performed.
++
++There are several reasons why the MMU can't find certain translations. It
++could happen because the process is trying to access a range of memory that is
++not allowed to, or because the data is not present into RAM.
++
++When these conditions happen, the MMU triggers page faults, which are types
++of exceptions that signal the CPU to pause the current process and run a special
++function to handle the mentioned page faults.
++
++One cause of page faults is due to bugs (or maliciously crafted addresses) and
++happens when a process tries to access a range of memory that it doesn't have
++permission to. This could be because the memory is reserved for the kernel or
++for another process, or because the process is trying to write to a read-only
++section of memory. When this happens, the kernel sends a Segmentation Fault
++(SIGSEGV) signal to the process, which usually causes the process to terminate.
++
++An expected and more common cause of page faults is an optimization called "lazy
++allocation". This is a technique used by the Kernel to improve memory efficiency
++and reduce footprint. Instead of allocating physical memory to a process as soon
++as it's requested, the Kernel waits until the process actually tries to use the
++memory. This can save a significant amount of memory in cases where a process
++requests a large block but only uses a small portion of it.
++
++A related technique is called "Copy-on-Write" (CoW), where the Kernel allows
++multiple processes to share the same physical memory as long as they're only
++reading from it. If a process tries to write to the shared memory, the kernel
++triggers a page fault and allocates a separate copy of the memory for the
++process. This allows the Kernel to save memory and avoid unnecessary data
++copying and, by doing so, it reduces latency and space occupation.
++
++Now, let's see how the Linux kernel handles these page faults:
++
++1. For most architectures, `do_page_fault()` is the primary interrupt handler
++   for page faults. It delegates the actual handling of the page fault to
++   `handle_mm_fault()`. This function checks the cause of the page fault and
++   takes the appropriate action, such as loading the required page into
++   memory, granting the process the necessary permissions, or sending a
++   SIGSEGV signal to the process.
++
++2. In the specific case of the x86 architecture, the interrupt handler is
++   defined by the `DEFINE_IDTENTRY_RAW_ERRORCODE()` macro, which calls
++   `handle_page_fault()`. This function then calls either
++   `do_user_addr_fault()` or `do_kern_addr_fault()`, depending on whether
++   the fault occurred in user space or kernel space. Both of these functions
++   eventually lead to `handle_mm_fault()`, similar to the workflow in other
++   architectures.
++
++`handle_mm_fault()` (likely) ends up calling `__handle_mm_fault()` to carry
++out the actual work of allocation of the page tables. It works by using
++several functions to find the entry's offsets of the 4 - 5 layers of tables
++and allocate the tables it needs to. The functions that look for the offset
++have names like `*_offset()`, where the "*" is for pgd, p4d, pud, pmd, pte;
++instead the functions to allocate the corresponding tables, layer by layer,
++are named `*_alloc`, with the above mentioned convention to name them after
++the corresponding types of tables in the hierarchy.
++
++At the very end of the walk with allocations, if it didn't return errors,
++`__handle_mm_fault()` finally calls `handle_pte_fault()`, which via
++`do_fault()` performs one of `do_read_fault()`, `do_cow_fault()`,
++`do_shared_fault()`. "read", "cow", "shared" give hints about the reasons
++and the kind of fault it's handling.
++
++The actual implementation of the workflow is very complex. Its design allows
++Linux to handle page faults in a way that is tailored to the specific
++characteristics of each architecture, while still sharing a common overall
++structure.
++
++To conclude this brief overview from very high altitude of how Linux handles
++page faults, let's add that page faults handler can be disabled and enabled
++respectively with `pagefault_disable()` and `pagefault_enable()`.
++
++Several code path make use of the latter two functions because they need to
++disable traps into the page faults handler, mostly to prevent deadlocks.[1]
++
++[1] mm/userfaultfd: Replace kmap/kmap_atomic() with kmap_local_page()
++https://lore.kernel.org/all/20221025220136.2366143-1-ira.weiny@intel.com/
+-- 
+2.41.0
 
-$ ./tools/testing/kunit/kunit.py run --kunitconfig=3Ddrivers/gpu/drm/tests =
-  --cross_compile aarch64-linux-gnu- --arch arm64 --raw_output drm_exec.tes=
-t_lock
-[13:31:14] Configuring KUnit Kernel ...
-[13:31:14] Building KUnit Kernel ...
-Populating config with:
-$ make ARCH=3Darm64 O=3D.kunit olddefconfig CROSS_COMPILE=3Daarch64-linux-g=
-nu-
-Building with:
-$ make ARCH=3Darm64 O=3D.kunit --jobs=3D32 CROSS_COMPILE=3Daarch64-linux-gn=
-u-
-[13:31:16] Starting KUnit Kernel (1/1)...
-Running tests with:
-$ qemu-system-aarch64 -nodefaults -m 1024 -kernel .kunit/arch/arm64/boot/Im=
-age.gz -append 'kunit.filter_glob=3Ddrm_exec.test_lock kunit.enable=3D1 con=
-sole=3DttyAMA0 kunit_shutdown=3Dreboot' -no-reboot -nographic -serial stdio=
- -machine virt -cpu cortex-a57
-KTAP version 1
-1..1
-    KTAP version 1
-    # Subtest: drm_exec
-    1..1
-Unable to handle kernel NULL pointer dereference at virtual address 0000000=
-0000000b0
-Mem abort info:
-  ESR =3D 0x0000000096000005
-  EC =3D 0x25: DABT (current EL), IL =3D 32 bits
-  SET =3D 0, FnV =3D 0
-  EA =3D 0, S1PTW =3D 0
-  FSC =3D 0x05: level 1 translation fault
-Data abort info:
-  ISV =3D 0, ISS =3D 0x00000005
-  CM =3D 0, WnR =3D 0
-[00000000000000b0] user address but active_mm is swapper
-Internal error: Oops: 0000000096000005 [#1] SMP
-CPU: 0 PID: 21 Comm: kunit_try_catch Tainted: G                 N 6.4.0-rc7=
--02032-ge6303f323b1a #17
-Hardware name: linux,dummy-virt (DT)
-pstate: 40000005 (nZcv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=3D--)
-pc : drm_gem_private_object_init+0x54/0xa8
-lr : drm_gem_private_object_init+0x44/0xa8
-sp : ffffffc008763c10
-x29: ffffffc008763c10 x28: 0000000000000000 x27: 0000000000000000
-x26: 0000000000000000 x25: 0000000000000000 x24: ffffffc00800bb90
-x23: ffffffc00820d3e4 x22: ffffff8000fb8880 x21: ffffffc008763db8
-x20: ffffffc0086171d8 x19: ffffffc008763cb8 x18: ffffffffffffffff
-x17: ffffffc0085b0da8 x16: 000000005a832b7d x15: 0000000000000000
-x14: 0000000000000001 x13: 0000000000000000 x12: ffffff8000cbe380
-x11: ffffff8000ca0000 x10: 00000000000007b0 x9 : 0000000000000000
-x8 : ffffffc008763cb8 x7 : 0000000000000000 x6 : 000000000000003f
-x5 : 0000000000000040 x4 : 0000000000000008 x3 : 0000000000000030
-x2 : ffffffc0085b9118 x1 : 0000000000000000 x0 : 0000000000000000
-Call trace:
- drm_gem_private_object_init+0x54/0xa8
- test_lock+0x58/0xf4
- kunit_try_run_case+0x48/0xa8
- kunit_generic_run_threadfn_adapter+0x20/0x2c
- kthread+0xd4/0xd8
- ret_from_fork+0x10/0x20
-Code: f9407e60 b40002a0 f9401a80 b9406a81 (b940b000)
----[ end trace 0000000000000000 ]---
-^CERROR:root:Build interruption occurred. Cleaning console.
-qemu-system-aarch64: terminating on signal 2
-[13:31:17] Elapsed time: 3.396s total, 0.001s configuring, 1.978s building,=
- 1.417s running
-
-Maxime
-
---3n5o5ss2bit7ecey
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZMOnGAAKCRDj7w1vZxhR
-xSR2AP9tE8/f72q5jHIMHjhhir0PsVypUMPCWXU4fR+59oPfOgD/ZE9aH6tsf2Vd
-FouLH8frZRDzfA2nPV3qd89JLuV60wM=
-=Gn76
------END PGP SIGNATURE-----
-
---3n5o5ss2bit7ecey--
