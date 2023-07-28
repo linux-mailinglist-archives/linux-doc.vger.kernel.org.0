@@ -2,325 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3B173766C42
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Jul 2023 13:59:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 25C68766D30
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Jul 2023 14:27:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235817AbjG1L67 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 28 Jul 2023 07:58:59 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51184 "EHLO
+        id S236663AbjG1M1P (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 28 Jul 2023 08:27:15 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44454 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235196AbjG1L6z (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 28 Jul 2023 07:58:55 -0400
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9CA501B8;
-        Fri, 28 Jul 2023 04:58:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-        s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-        References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-        Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-        List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=xFu7mnlDXbmlXbWasCgI2PC9m5jQyD3JuPUGhFojfqI=; b=dZAFz116nQgxUH6DhndYf36rcP
-        zgt6ImWhZZKDbWXV//Pc9c8kwS9LGj8/h6IPx6HH5L9STwfXMXYyrwliPZXGltlxIt/r81cQikA2+
-        suvSboKEeiHfL4PVA/EZLeDI9HA+cuu9dj4U5hlnHYcrF3PNvIZdgQeweZO8pjGgjVggp4uCW7Ryv
-        HmjaMVzKU4VWD/P4KAElt4AXkx+tSlck/tUS6Wtzolmmtp+C6I/p+rF0hSrxWxAuuZlTMG1WqTB4H
-        Xwq7TN8M2Cu6K+wkPQvjbgAdwOratZawi/KdobO9IkHWoWEpLl+wTD/7Q3DE6PaFbNu1jzgbviQib
-        +cZOJRjA==;
-Received: from [187.36.235.191] (helo=[192.168.1.212])
-        by fanzine2.igalia.com with esmtpsa 
-        (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
-        id 1qPM7J-0059q5-GQ; Fri, 28 Jul 2023 13:58:46 +0200
-Message-ID: <a92b05d0-65d4-c37d-c1d0-72366754e6a4@igalia.com>
-Date:   Fri, 28 Jul 2023 08:58:34 -0300
+        with ESMTP id S236539AbjG1M0k (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 28 Jul 2023 08:26:40 -0400
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5FF0435A8;
+        Fri, 28 Jul 2023 05:26:18 -0700 (PDT)
+Received: from localhost (unknown [IPv6:2a01:e0a:2c:6930:5cf4:84a1:2763:fe0d])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+        (No client certificate requested)
+        (Authenticated sender: bbrezillon)
+        by madras.collabora.co.uk (Postfix) with ESMTPSA id 12AE3660716E;
+        Fri, 28 Jul 2023 13:26:16 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+        s=mail; t=1690547176;
+        bh=Zuw3jk8mejPhGkU4q+qt5KLfIfe2BfW1w5UKG2oKYJg=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=CXGHqz2KdwadkHCSRUxB388XGBuPyDuOkH/TrBhRLZROG/LJGdIUiKsxWjDGrpq4p
+         qo62jLxKl2bRNl0su1D73yldGjEM8xmC7S6jweG06y1u/2tdWXnRJ1Ih3nTbb6NqqO
+         wr4FNBwH9u9F3NcqB+YHRkHgfxNn2B5BNlWKL5lTmxLCijitlJKZvpmHFwbbqWBJLy
+         /GJr77MVKq5v7GXuNvAsYQyljhdYDnkgmKqRKhFp2vHptb0+cgMZO+bysK4IXV+iTv
+         GQr5a7eoXjcskeHopo9TIa31E4yMY/mhd/BctWaqitn2DLsO7b6Dnpz4dzx4WtVtpo
+         nmLCKxDNuKVKQ==
+Date:   Fri, 28 Jul 2023 14:26:12 +0200
+From:   Boris Brezillon <boris.brezillon@collabora.com>
+To:     Maxime Ripard <mripard@kernel.org>
+Cc:     Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com,
+        daniel@ffwll.ch, tzimmermann@suse.de, corbet@lwn.net,
+        christian.koenig@amd.com, bskeggs@redhat.com,
+        Liam.Howlett@oracle.com, matthew.brost@intel.com,
+        alexdeucher@gmail.com, ogabbay@kernel.org, bagasdotme@gmail.com,
+        willy@infradead.org, jason@jlekstrand.net,
+        donald.robson@imgtec.com, dri-devel@lists.freedesktop.org,
+        nouveau@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Thomas =?UTF-8?B?SGVsbHN0csO2bQ==?= 
+        <thomas.hellstrom@linux.intel.com>,
+        Dave Airlie <airlied@redhat.com>
+Subject: Re: [PATCH drm-misc-next v8 01/12] drm: manager to keep track of
+ GPUs VA mappings
+Message-ID: <20230728142612.2ecf99ef@collabora.com>
+In-Reply-To: <hi5magp4icayy5dxmylfyxws52cu63jvlhu4yj5xem3acoaylk@msf7zthcr3lg>
+References: <20230720001443.2380-1-dakr@redhat.com>
+        <20230720001443.2380-2-dakr@redhat.com>
+        <hi5magp4icayy5dxmylfyxws52cu63jvlhu4yj5xem3acoaylk@msf7zthcr3lg>
+Organization: Collabora
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH v10] drm: Add initial ci/ subdirectory
-Content-Language: en-US
-To:     Helen Koike <helen.koike@collabora.com>,
-        dri-devel@lists.freedesktop.org
-Cc:     emma@anholt.net, linux-doc@vger.kernel.org,
-        david.heidelberg@collabora.com, linux-amlogic@lists.infradead.org,
-        jbrunet@baylibre.com, robdclark@google.com, corbet@lwn.net,
-        khilman@baylibre.com, sergi.blanch.torne@collabora.com,
-        gustavo.padovan@collabora.com, linux-rockchip@lists.infradead.org,
-        daniels@collabora.com, martin.blumenstingl@googlemail.com,
-        robclark@freedesktop.org, anholt@google.com,
-        linux-mediatek@lists.infradead.org, mripard@kernel.org,
-        matthias.bgg@gmail.com, linux-arm-kernel@lists.infradead.org,
-        angelogioacchino.delregno@collabora.com, neil.armstrong@linaro.org,
-        guilherme.gallo@collabora.com, linux-kernel@vger.kernel.org,
-        tzimmermann@suse.de
-References: <20230720152737.102382-1-helen.koike@collabora.com>
-From:   Maira Canal <mcanal@igalia.com>
-In-Reply-To: <20230720152737.102382-1-helen.koike@collabora.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Helen,
+On Fri, 28 Jul 2023 13:31:36 +0200
+Maxime Ripard <mripard@kernel.org> wrote:
 
-Great to see this coming to the DRM!
+> Hi Danilo,
+>=20
+> On Thu, Jul 20, 2023 at 02:14:22AM +0200, Danilo Krummrich wrote:
+> > Add infrastructure to keep track of GPU virtual address (VA) mappings
+> > with a decicated VA space manager implementation.
+> >=20
+> > New UAPIs, motivated by Vulkan sparse memory bindings graphics drivers
+> > start implementing, allow userspace applications to request multiple and
+> > arbitrary GPU VA mappings of buffer objects. The DRM GPU VA manager is
+> > intended to serve the following purposes in this context.
+> >=20
+> > 1) Provide infrastructure to track GPU VA allocations and mappings,
+> >    making using an interval tree (RB-tree).
+> >=20
+> > 2) Generically connect GPU VA mappings to their backing buffers, in
+> >    particular DRM GEM objects.
+> >=20
+> > 3) Provide a common implementation to perform more complex mapping
+> >    operations on the GPU VA space. In particular splitting and merging
+> >    of GPU VA mappings, e.g. for intersecting mapping requests or partial
+> >    unmap requests.
+> >=20
+> > Acked-by: Thomas Hellstr=C3=B6m <thomas.hellstrom@linux.intel.com>
+> > Acked-by: Matthew Brost <matthew.brost@intel.com>
+> > Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
+> > Tested-by: Matthew Brost <matthew.brost@intel.com>
+> > Tested-by: Donald Robson <donald.robson@imgtec.com>
+> > Suggested-by: Dave Airlie <airlied@redhat.com>
+> > Signed-off-by: Danilo Krummrich <dakr@redhat.com> =20
+>=20
+> For some reason this breaks the drm_exec kunit patches:
 
-Just wondering, any chance we could add a stage to perform tests on
-VKMS? The main way of validating VKMS is through IGT tests, so I feel
-it would be a perfect match to have VKMS as a stage on the CI. As a
-generic KMS driver, VKMS is also great to validate changes on DRM core.
+Fix available here [1].
 
-Another question, could we add V3D to the default arm and arm64 config?
-
-Best Regards,
-- Maíra
-
-On 7/20/23 12:27, Helen Koike wrote:
-> From: Tomeu Vizoso <tomeu.vizoso@collabora.com>
-> 
-> Developers can easily execute several tests on different devices
-> by just pushing their branch to their fork in a repository hosted
-> on gitlab.freedesktop.org which has an infrastructure to run jobs
-> in several runners and farms with different devices.
-> 
-> There are also other automated tools that uprev dependencies,
-> monitor the infra, and so on that are already used by the Mesa
-> project, and we can reuse them too.
-> 
-> Also, store expectations about what the DRM drivers are supposed
-> to pass in the IGT test suite. By storing the test expectations
-> along with the code, we can make sure both stay in sync with each
-> other so we can know when a code change breaks those expectations.
-> 
-> Also, include a configuration file that points to the out-of-tree
-> CI scripts.
-> 
-> This will allow all contributors to drm to reuse the infrastructure
-> already in gitlab.freedesktop.org to test the driver on several
-> generations of the hardware.
-> 
-> Signed-off-by: Tomeu Vizoso <tomeu.vizoso@collabora.com>
-> Signed-off-by: Helen Koike <helen.koike@collabora.com>
-> 
-> ---
-> 
-> Hello,
-> 
-> I'm re-spining this patch sent originally by Tomeu.
-> 
-> This is meant to be an auxiliary tool where developers and
-> maintainers can just submit their code to fdo and see if
-> tests passes, than they can decide if it is worthy merging
-> it or not.
-> 
-> This tool has proven its value on the Mesa community
-> and it can bring a lot of value here too.
-> 
-> Please review and let me know your thoughts.
-> 
-> You can also see this patch on
-> https://gitlab.freedesktop.org/helen.fornazier/linux/-/tree/drm-ci-tests
-> 
-> Thanks!
-> 
-> v2:
->    - Fix names of result expectation files to match SoC
->    - Don't execute tests that are going to skip on all boards
-> 
-> v3:
->    - Remove tracking of dmesg output during test execution
-> 
-> v4:
->    - Move up to drivers/gpu/drm
->    - Add support for a bunch of other drivers
->    - Explain how to incorporate fixes for CI from a
->      ${TARGET_BRANCH}-external-fixes branch
->    - Remove tests that pass from expected results file, to reduce the
->      size of in-tree files
->    - Add docs about how to deal with outages in automated testing labs
->    - Specify the exact SHA of the CI scripts to be used
-> 
-> v5:
->    - Remove unneeded skips from Meson expectations file
->    - Use a more advanced runner that detects flakes automatically
->    - Use a more succint format for the expectations
->    - Run many more tests (and use sharding to finish in time)
->    - Use skip lists to avoid hanging machines
->    - Add some build testing
->    - Build IGT in each pipeline for faster uprevs
->    - List failures in the GitLab UI
-> 
-> v6:
->    - Rebase on top of latest drm-next
->    - Lower priority of LAVA jobs to not impact Mesa CI as much
->    - Update docs
-> 
-> v7:
->    - Rebase on top of latest drm-next
-> 
-> v8:
->    - Move all files specific to testing the kernel into the kernel tree
->      (thus I have dropped the r-bs I had collected so far)
->    - Uprev Gitlab CI infrastructure scripts to the latest from Mesa
->    - Add MAINTAINERS entry
->    - Fix boot on MT8173 by adding some Kconfigs that are now needed
->    - Link to the docs from index.rst and hard-wrap the file
-> 
-> v9:
->    - Only automatically run the pipelines for merge requests
->    - Switch to zstd for the build artifacts to align with Mesa
->    - Add Qcom USB PHYs to config as they are now =m in the defconfig
-> 
-> v10:
->    - Include ci yml files from mesa/mesa (where the development is
->      current active) instead of a spin off project.
->    - Uprev Gitlab CI infrastructure scripts to the latest from Mesa
->    - Update MAINTAINERS entry
->    - Uprev igt tool
->    - add LAVA_JOB_PRIORITY: 30
->    - pipeline example:
->    https://gitlab.freedesktop.org/helen.fornazier/linux/-/pipelines/940506
-> ---
->   Documentation/gpu/automated_testing.rst       |  144 +
->   Documentation/gpu/index.rst                   |    1 +
->   MAINTAINERS                                   |    8 +
->   drivers/gpu/drm/ci/arm.config                 |   69 +
->   drivers/gpu/drm/ci/arm64.config               |  199 ++
->   drivers/gpu/drm/ci/build-igt.sh               |   35 +
->   drivers/gpu/drm/ci/build.sh                   |  157 +
->   drivers/gpu/drm/ci/build.yml                  |  110 +
->   drivers/gpu/drm/ci/check-patch.py             |   57 +
->   drivers/gpu/drm/ci/container.yml              |   61 +
->   drivers/gpu/drm/ci/gitlab-ci.yml              |  252 ++
->   drivers/gpu/drm/ci/igt_runner.sh              |   77 +
->   drivers/gpu/drm/ci/image-tags.yml             |   15 +
->   drivers/gpu/drm/ci/lava-submit.sh             |   57 +
->   drivers/gpu/drm/ci/static-checks.yml          |   12 +
->   drivers/gpu/drm/ci/test.yml                   |  335 ++
->   drivers/gpu/drm/ci/testlist.txt               | 2912 +++++++++++++++++
->   drivers/gpu/drm/ci/x86_64.config              |  111 +
->   .../gpu/drm/ci/xfails/amdgpu-stoney-fails.txt |   22 +
->   .../drm/ci/xfails/amdgpu-stoney-flakes.txt    |   19 +
->   .../gpu/drm/ci/xfails/amdgpu-stoney-skips.txt |    2 +
->   drivers/gpu/drm/ci/xfails/i915-amly-fails.txt |   17 +
->   .../gpu/drm/ci/xfails/i915-amly-flakes.txt    |   32 +
->   drivers/gpu/drm/ci/xfails/i915-amly-skips.txt |    4 +
->   drivers/gpu/drm/ci/xfails/i915-apl-fails.txt  |   57 +
->   drivers/gpu/drm/ci/xfails/i915-apl-flakes.txt |    1 +
->   drivers/gpu/drm/ci/xfails/i915-apl-skips.txt  |    4 +
->   drivers/gpu/drm/ci/xfails/i915-cml-fails.txt  |   18 +
->   drivers/gpu/drm/ci/xfails/i915-cml-flakes.txt |   37 +
->   drivers/gpu/drm/ci/xfails/i915-cml-skips.txt  |    2 +
->   drivers/gpu/drm/ci/xfails/i915-glk-fails.txt  |   18 +
->   drivers/gpu/drm/ci/xfails/i915-glk-flakes.txt |   41 +
->   drivers/gpu/drm/ci/xfails/i915-glk-skips.txt  |    5 +
->   drivers/gpu/drm/ci/xfails/i915-kbl-fails.txt  |   26 +
->   drivers/gpu/drm/ci/xfails/i915-kbl-flakes.txt |   25 +
->   drivers/gpu/drm/ci/xfails/i915-kbl-skips.txt  |    5 +
->   drivers/gpu/drm/ci/xfails/i915-tgl-fails.txt  |   37 +
->   drivers/gpu/drm/ci/xfails/i915-tgl-flakes.txt |    5 +
->   drivers/gpu/drm/ci/xfails/i915-tgl-skips.txt  |   11 +
->   drivers/gpu/drm/ci/xfails/i915-whl-fails.txt  |   47 +
->   drivers/gpu/drm/ci/xfails/i915-whl-flakes.txt |    1 +
->   drivers/gpu/drm/ci/xfails/i915-whl-skips.txt  |    2 +
->   .../drm/ci/xfails/mediatek-mt8173-fails.txt   |   29 +
->   .../drm/ci/xfails/mediatek-mt8173-flakes.txt  |    0
->   .../drm/ci/xfails/mediatek-mt8183-fails.txt   |   10 +
->   .../drm/ci/xfails/mediatek-mt8183-flakes.txt  |   14 +
->   .../gpu/drm/ci/xfails/meson-g12b-fails.txt    |   12 +
->   .../gpu/drm/ci/xfails/meson-g12b-flakes.txt   |    4 +
->   .../gpu/drm/ci/xfails/msm-apq8016-fails.txt   |   15 +
->   .../gpu/drm/ci/xfails/msm-apq8016-flakes.txt  |    4 +
->   .../gpu/drm/ci/xfails/msm-apq8096-fails.txt   |    2 +
->   .../gpu/drm/ci/xfails/msm-apq8096-flakes.txt  |    4 +
->   .../gpu/drm/ci/xfails/msm-apq8096-skips.txt   |    2 +
->   .../gpu/drm/ci/xfails/msm-sc7180-fails.txt    |   25 +
->   .../gpu/drm/ci/xfails/msm-sc7180-flakes.txt   |    7 +
->   .../gpu/drm/ci/xfails/msm-sc7180-skips.txt    |   23 +
->   .../gpu/drm/ci/xfails/msm-sdm845-fails.txt    |   68 +
->   .../gpu/drm/ci/xfails/msm-sdm845-flakes.txt   |   11 +
->   .../gpu/drm/ci/xfails/msm-sdm845-skips.txt    |    2 +
->   .../drm/ci/xfails/rockchip-rk3288-fails.txt   |   49 +
->   .../drm/ci/xfails/rockchip-rk3288-flakes.txt  |    8 +
->   .../drm/ci/xfails/rockchip-rk3288-skips.txt   |   52 +
->   .../drm/ci/xfails/rockchip-rk3399-fails.txt   |   39 +
->   .../drm/ci/xfails/rockchip-rk3399-flakes.txt  |   23 +
->   .../drm/ci/xfails/rockchip-rk3399-skips.txt   |    5 +
->   .../drm/ci/xfails/virtio_gpu-none-fails.txt   |   38 +
->   .../drm/ci/xfails/virtio_gpu-none-flakes.txt  |    0
->   .../drm/ci/xfails/virtio_gpu-none-skips.txt   |    6 +
->   test                                          |    0
->   69 files changed, 5502 insertions(+)
->   create mode 100644 Documentation/gpu/automated_testing.rst
->   create mode 100644 drivers/gpu/drm/ci/arm.config
->   create mode 100644 drivers/gpu/drm/ci/arm64.config
->   create mode 100644 drivers/gpu/drm/ci/build-igt.sh
->   create mode 100644 drivers/gpu/drm/ci/build.sh
->   create mode 100644 drivers/gpu/drm/ci/build.yml
->   create mode 100755 drivers/gpu/drm/ci/check-patch.py
->   create mode 100644 drivers/gpu/drm/ci/container.yml
->   create mode 100644 drivers/gpu/drm/ci/gitlab-ci.yml
->   create mode 100755 drivers/gpu/drm/ci/igt_runner.sh
->   create mode 100644 drivers/gpu/drm/ci/image-tags.yml
->   create mode 100755 drivers/gpu/drm/ci/lava-submit.sh
->   create mode 100644 drivers/gpu/drm/ci/static-checks.yml
->   create mode 100644 drivers/gpu/drm/ci/test.yml
->   create mode 100644 drivers/gpu/drm/ci/testlist.txt
->   create mode 100644 drivers/gpu/drm/ci/x86_64.config
->   create mode 100644 drivers/gpu/drm/ci/xfails/amdgpu-stoney-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/amdgpu-stoney-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/amdgpu-stoney-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-amly-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-amly-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-amly-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-apl-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-apl-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-apl-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-cml-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-cml-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-cml-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-glk-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-glk-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-glk-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-kbl-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-kbl-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-kbl-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-tgl-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-tgl-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-tgl-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-whl-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-whl-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/i915-whl-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/mediatek-mt8173-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/mediatek-mt8173-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/mediatek-mt8183-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/mediatek-mt8183-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/meson-g12b-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/meson-g12b-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-apq8016-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-apq8016-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-apq8096-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-apq8096-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-apq8096-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-sc7180-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-sc7180-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-sc7180-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-sdm845-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-sdm845-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/msm-sdm845-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/rockchip-rk3288-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/rockchip-rk3288-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/rockchip-rk3288-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/rockchip-rk3399-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/rockchip-rk3399-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/rockchip-rk3399-skips.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/virtio_gpu-none-fails.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/virtio_gpu-none-flakes.txt
->   create mode 100644 drivers/gpu/drm/ci/xfails/virtio_gpu-none-skips.txt
->   create mode 100644 test
->
+[1]https://lore.kernel.org/dri-devel/cbf4ccf9-8131-27a0-332c-6942866340d1@i=
+galia.com/T/#t
