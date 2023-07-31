@@ -2,160 +2,139 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4E1F476A335
-	for <lists+linux-doc@lfdr.de>; Mon, 31 Jul 2023 23:46:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B068076A3DA
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Aug 2023 00:02:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229570AbjGaVqW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 31 Jul 2023 17:46:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56390 "EHLO
+        id S231611AbjGaWCT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 31 Jul 2023 18:02:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38194 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229486AbjGaVqV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Jul 2023 17:46:21 -0400
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 747AB130;
-        Mon, 31 Jul 2023 14:46:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=vTIB+9jOZpp5OUrJxulSYIOZhA9Dpc6dGOGdH6SgMUw=; b=CztjLyfqcdrFKznDsLQyVMumAI
-        MN3Xna4qhxwpkV4FiIedm9yhrd8/l9X3R1rELIM6w6jiAUYNvsWeUNfNX0kRxnWuibkdN56xgYU3F
-        WqI7lUf1lNSIxS51cJCvE4zW3pDRLHuMSlh2ESprJKMTkPFNV+FTAdXNCdTAMqBOQJeRw+5TDcwPk
-        WLl4wnTsMUR97Exiyc0+o18OmIW+qTmQmfo7V4o+svym0ooDszJ6obRAKyK/Cz9rCAlkte3H+V4xv
-        TjvBifgNXlOtGpzS09pMJuV8fsPGfHcZH+mMOCpPjhyJY51SrujtQrMqBzVhk2Ji3cQ0Vp4WSlYXg
-        X1xkQqJQ==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
-        by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-        id 1qQaiU-00D67l-29;
-        Mon, 31 Jul 2023 21:46:15 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits))
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 9831D300134;
-        Mon, 31 Jul 2023 23:46:12 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 7BAE620D70602; Mon, 31 Jul 2023 23:46:12 +0200 (CEST)
-Date:   Mon, 31 Jul 2023 23:46:12 +0200
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Josh Poimboeuf <jpoimboe@kernel.org>
-Cc:     Valentin Schneider <vschneid@redhat.com>,
-        linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, kvm@vger.kernel.org, linux-mm@kvack.org,
-        bpf@vger.kernel.org, x86@kernel.org, rcu@vger.kernel.org,
-        linux-kselftest@vger.kernel.org,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Andy Lutomirski <luto@kernel.org>,
-        Frederic Weisbecker <frederic@kernel.org>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Neeraj Upadhyay <quic_neeraju@quicinc.com>,
-        Joel Fernandes <joel@joelfernandes.org>,
-        Josh Triplett <josh@joshtriplett.org>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        Zqiang <qiang.zhang1211@gmail.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Uladzislau Rezki <urezki@gmail.com>,
-        Christoph Hellwig <hch@infradead.org>,
-        Lorenzo Stoakes <lstoakes@gmail.com>,
-        Jason Baron <jbaron@akamai.com>,
-        Kees Cook <keescook@chromium.org>,
-        Sami Tolvanen <samitolvanen@google.com>,
-        Ard Biesheuvel <ardb@kernel.org>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        Juerg Haefliger <juerg.haefliger@canonical.com>,
-        Nicolas Saenz Julienne <nsaenz@kernel.org>,
-        "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
-        Nadav Amit <namit@vmware.com>,
-        Dan Carpenter <error27@gmail.com>,
-        Chuang Wang <nashuiliang@gmail.com>,
-        Yang Jihong <yangjihong1@huawei.com>,
-        Petr Mladek <pmladek@suse.com>,
-        "Jason A. Donenfeld" <Jason@zx2c4.com>, Song Liu <song@kernel.org>,
-        Julian Pidancet <julian.pidancet@oracle.com>,
-        Tom Lendacky <thomas.lendacky@amd.com>,
-        Dionna Glaze <dionnaglaze@google.com>,
-        Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Daniel Bristot de Oliveira <bristot@redhat.com>,
-        Marcelo Tosatti <mtosatti@redhat.com>,
-        Yair Podemsky <ypodemsk@redhat.com>
-Subject: Re: [RFC PATCH v2 11/20] objtool: Flesh out warning related to
- pv_ops[] calls
-Message-ID: <20230731214612.GC51835@hirez.programming.kicks-ass.net>
-References: <20230720163056.2564824-1-vschneid@redhat.com>
- <20230720163056.2564824-12-vschneid@redhat.com>
- <20230728153334.myvh5sxppvjzd3oz@treble>
- <xhsmh8raws53o.mognet@vschneid.remote.csb>
- <20230731213631.pywytiwdqgtgx4ps@treble>
+        with ESMTP id S229881AbjGaWCS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Jul 2023 18:02:18 -0400
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com [IPv6:2607:f8b0:4864:20::629])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 994C8E7
+        for <linux-doc@vger.kernel.org>; Mon, 31 Jul 2023 15:02:17 -0700 (PDT)
+Received: by mail-pl1-x629.google.com with SMTP id d9443c01a7336-1b9c5e07c1bso42805565ad.2
+        for <linux-doc@vger.kernel.org>; Mon, 31 Jul 2023 15:02:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20221208; t=1690840937; x=1691445737;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=sZXwDT7lSpqyD7OTKZuyX3OzGyE3jIs1AadqKpDkW4k=;
+        b=tOj5Wt8YaFbV9ywN8nWXCNvxhO7wQxvdH1VuIunjBBAFvrIRXATc1vv1fhcuEb/L70
+         6vI9iaVn3df/+UxPaojvO5Rgor46IcxGgiooU1s5haTR0pdIPEwSRwcvZPAXGyFiH3bw
+         yaFnfDJ4DE+SoVu9fyI8CWeoD2XZ2V0l7OrojyOM4pj17/rkfyxy9wlEneag46uAQUZ6
+         FYmKPIhBnvgFvsP3VgHD5an3SyGSlka7JM5wUfGW++JWly0Ywc3x1k5DWdL3frlpoAfc
+         VHK8LiITN+JKqZJy9ty314CUeJBBEZGXdkDUPtSeoOOnQYNH5vnTVmuxi6DPv/+A/NJk
+         VRXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690840937; x=1691445737;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=sZXwDT7lSpqyD7OTKZuyX3OzGyE3jIs1AadqKpDkW4k=;
+        b=j9vo20pmNnibJARxziQAYrH6IjbpibzQ1d6RYO/yCzlI3t00nHDbt+qFN0TRRZY7kD
+         WBiIS1wzO+6epWK8xV3wHb1Zuz8c0Y0CqJo1Ah4RUl4m4Wj2UcPU86E2aKDihC4OMA7r
+         OUW1N5myLhX/ibmeDsJhNduuqDTKOZptGa4JMqPMih90zYZhGdLVzmkLKGn84UBZywE9
+         1nwtlnBaba4YVjMiz8QsGzjcfathK5RciKCBDzZ3o0yZBsz71L/nHRiHyDVxLwQoKbrx
+         +6hWTHAxS1FkMc6tWRPAKf/dDDeqtI0QDQ9QllUWXv3x5Ls+AD0xNsurTAAFcvdHg0JR
+         0Rig==
+X-Gm-Message-State: ABy/qLZMKyIIjsmy6IkIxk5rxLngveSLQ+xX4hYMnfQMoH6BCDCnCkc0
+        ZsLP5cfLcLfxAqcHBumJjtGOQQ==
+X-Google-Smtp-Source: APBJJlG/7TIXArFl9nzqfXiuLGmMf5q7GAr+Ricr4oDD2rfNy25Ng3+2Iw3hd1zL6TZ5ztIEFXv3mQ==
+X-Received: by 2002:a17:902:cec7:b0:1bc:6c8:cded with SMTP id d7-20020a170902cec700b001bc06c8cdedmr8032979plg.67.1690840936879;
+        Mon, 31 Jul 2023 15:02:16 -0700 (PDT)
+Received: from google.com (176.13.105.34.bc.googleusercontent.com. [34.105.13.176])
+        by smtp.gmail.com with ESMTPSA id f16-20020a170902ce9000b001b016313b1dsm9052782plg.86.2023.07.31.15.02.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 31 Jul 2023 15:02:16 -0700 (PDT)
+Date:   Mon, 31 Jul 2023 22:02:12 +0000
+From:   Mingwei Zhang <mizhang@google.com>
+To:     Sean Christopherson <seanjc@google.com>
+Cc:     Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Kai Huang <kai.huang@intel.com>,
+        Jim Mattson <jmattson@google.com>,
+        David Matlack <dmatlack@google.com>,
+        Ben Gardon <bgardon@google.com>, Xu Yilun <yilun.xu@intel.com>,
+        Zhi Wang <zhi.wang.linux@gmail.com>
+Subject: Re: [PATCH v2 5/6] KVM: Documentation: Add the missing description
+ for mmu_valid_gen into kvm_mmu_page
+Message-ID: <ZMgvZA+4FhtWB4Dl@google.com>
+References: <20230626182016.4127366-1-mizhang@google.com>
+ <20230626182016.4127366-6-mizhang@google.com>
+ <ZJsKsQNWVq4zNmGk@google.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230731213631.pywytiwdqgtgx4ps@treble>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+In-Reply-To: <ZJsKsQNWVq4zNmGk@google.com>
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,FSL_HELO_FAKE,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jul 31, 2023 at 04:36:31PM -0500, Josh Poimboeuf wrote:
-> On Mon, Jul 31, 2023 at 12:16:59PM +0100, Valentin Schneider wrote:
-> > You're quite right - fabricating an artificial warning with a call to __flush_tlb_local():
+On Tue, Jun 27, 2023, Sean Christopherson wrote:
+> On Mon, Jun 26, 2023, Mingwei Zhang wrote:
+> > Add the description for mmu_valid_gen into kvm_mmu_page description.
+> > mmu_valid_gen is used in shadow MMU for fast zapping. Update the doc to
+> > reflect that.
 > > 
-> >   vmlinux.o: warning: objtool: pv_ops[1]: indirect call to native_flush_tlb_local() leaves .noinstr.text section
-> >   vmlinux.o: warning: objtool: __flush_tlb_all_noinstr+0x4: call to {dynamic}() leaves .noinstr.text section
+> > Signed-off-by: Mingwei Zhang <mizhang@google.com>
+> > Reviewed-by: Kai Huang <kai.huang@intel.com>
+> > ---
+> >  Documentation/virt/kvm/x86/mmu.rst | 4 ++++
+> >  1 file changed, 4 insertions(+)
 > > 
-> > Interestingly the second one doesn't seem to have triggered the "pv_ops"
-> > bit of call_dest_name. Seems like any call to insn_reloc(NULL, x) will
-> > return NULL.
+> > diff --git a/Documentation/virt/kvm/x86/mmu.rst b/Documentation/virt/kvm/x86/mmu.rst
+> > index 97d695207e11..cc4bd190c93d 100644
+> > --- a/Documentation/virt/kvm/x86/mmu.rst
+> > +++ b/Documentation/virt/kvm/x86/mmu.rst
+> > @@ -208,6 +208,10 @@ Shadow pages contain the following information:
+> >      The page is not backed by a guest page table, but its first entry
+> >      points to one.  This is set if NPT uses 5-level page tables (host
+> >      CR4.LA57=1) and is shadowing L1's 4-level NPT (L1 CR4.LA57=1).
+> > +  mmu_valid_gen:
+> > +    Used by comparing against kvm->arch.mmu_valid_gen to check whether the
 > 
-> Yeah, that's weird.
+> This needs to explain what the generation is, and where it comes from.
 > 
-> > Trickling down the file yields:
-> > 
-> >   vmlinux.o: warning: objtool: pv_ops[1]: indirect call to native_flush_tlb_local() leaves .noinstr.text section
-> >   vmlinux.o: warning: objtool: __flush_tlb_all_noinstr+0x4: call to pv_ops[0]() leaves .noinstr.text section
-> > 
-> > In my case (!PARAVIRT_XXL) pv_ops should look like:
-> >   [0]: .cpu.io_delay
-> >   [1]: .mmu.flush_tlb_user()
-> > 
-> > so pv_ops[1] looks right. Seems like pv_call_dest() gets it right because
-> > it uses arch_dest_reloc_offset().
-> > 
-> > If I use the above to fix up validate_call(), would we still need
-> > pv_call_dest() & co?
+>   The MMU generation of this page, used to effect a "fast" zap of all MMU pages
+>   across all roots.  To zap all pages in all roots without blocking vCPUs, e.g.
+>   when deleting a memslot, KVM updates the per-VM valid MMU generation to mark
+>   all existing pages and roots invalid/obsolete.  Obsolete pages can't be used,
+>   e.g. vCPUs must load a new, valid root before re-entering the guest.
 > 
-> The functionality in pv_call_dest() is still needed because it goes
-> through all the possible targets for the .mmu.flush_tlb_user() pointer
-> -- xen_flush_tlb() and native_flush_tlb_local() -- and makes sure
-> they're noinstr.
+>   The MMU generation is only ever '0' or '1', as slots_lock must be held until
+>   all obsolete pages are zapped and freed, i.e. there is exactly one valid
+>   generation and (at most) one invalid generation.
 > 
-> Ideally it would only print a single warning for this case, something
-> like:
-> 
->   vmlinux.o: warning: objtool: __flush_tlb_all_noinstr+0x4: indirect call to native_flush_tlb_local() leaves .noinstr.text section
+>   Note, the TDP MMU doesn't use mmu_gen as non-root TDP MMU pages are reachable
+>   only from their owning root, whereas all pages for shadow MMUs are reachable
+>   via the hash map.  The TDP MMU uses role.invalid to track obsolete roots.
 
-But then what for the case where there are multiple implementations and
-more than one isn't noinstr? IIRC that is where these double prints came
-from. One is the callsite (always one) and the second is the offending
-implementation (but there could be more).
-
-> I left out "pv_ops[1]" because it's already long enough :-)
-
-The index number is useful when also looking at the assembler, which
-IIRC is an indexed indirect call.
+Sean, thanks for the detailed explanation. I will pick the most of the
+content and get into the next version.
+> 
+> And then big bonus points if you add
+> 
+>   Page Role
+>   =========
+> 
+> to explain the purpose of the role, and how/when it's used in the shadow MMU versus
+> the TDP MMU.  The shadow MMU's use of a hash map is a fundemental aspect that really
+> should be documented here.
+> 
+> > +    shadow page is obsolete thus a convenient variable for fast zapping.
+> > +    Note that TDP MMU does not use mmu_valid_gen.
+> >    gfn:
+> >      Either the guest page table containing the translations shadowed by this
+> >      page, or the base page frame for linear translations.  See role.direct.
+> > -- 
+> > 2.41.0.162.gfafddb0af9-goog
+> > 
