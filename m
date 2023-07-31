@@ -2,47 +2,57 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F06CF769BE6
-	for <lists+linux-doc@lfdr.de>; Mon, 31 Jul 2023 18:09:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DEDE2769C42
+	for <lists+linux-doc@lfdr.de>; Mon, 31 Jul 2023 18:23:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232628AbjGaQJU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 31 Jul 2023 12:09:20 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45566 "EHLO
+        id S233090AbjGaQXZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 31 Jul 2023 12:23:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56156 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233169AbjGaQJT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Jul 2023 12:09:19 -0400
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B8A76A7;
-        Mon, 31 Jul 2023 09:09:18 -0700 (PDT)
+        with ESMTP id S232880AbjGaQXW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Jul 2023 12:23:22 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 29D9410D0;
+        Mon, 31 Jul 2023 09:23:18 -0700 (PDT)
 Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 4EA1C2C5;
-        Mon, 31 Jul 2023 16:09:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 4EA1C2C5
+        by ms.lwn.net (Postfix) with ESMTPSA id AA2B02C5;
+        Mon, 31 Jul 2023 16:23:17 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net AA2B02C5
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1690819758; bh=eR4erEXoskpp2wPOIwLWNs9bI1tDQ8zmatEAa2TxJko=;
+        t=1690820597; bh=yFSfFyUQXT4DT++sxUWwAVT0WoQ6QyQTZaoT9AgNIvo=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=giDX3j07+6YKkFOlgHrvH/C9aZ5BMxdkh7WUT52j8zdqmjqxjVCC5IowbLhmPiamw
-         Fj2dGwGGEE0sp1nvv12wEZeFzFc7EKDxE+RO/CA5+OPH6ZgQ3ADe20ifgIqhUA+kE/
-         hJ0QlcEwSRxqGBNxLU60pqqTEqtRXmXXLYUniXyGD0ycXxsm/LX1kLUASl1LSLRRvt
-         aaDiYzKIMYQ34imaJKHR7YXb0sL7le9rlIqIxf8bfT/aA1CKb8Tiq/6EXdJTOZGaHL
-         jSQ/WzqZ27Iy9HXGOXteZMTeRJDrKefwSgD5qIia3B1fMZsTqnFDcnxEi92woPtFFi
-         mWlJQ9ngp/F7Q==
+        b=Ru3FR0Ekg1gFV8rnHsCa289Fm+t2lemULUPWgU0OBPUqHBb0cX5+t91PdIKIxqQXi
+         UnD3psVJrhfeNBShkC6Rr9BGZCV0fYyST7yWz7fEO34BCv/a4ECniDKDIMfGJlt8Y4
+         c/IpuvyFTykpBy9+3Hv71ns/wX328fRUGSQP5x+/YzepM9sqnYBTqtojGHBclwn1v5
+         HDzQxgTqbehGT9Ri4skj8w5fzfCXaUfGf721/SF1TfVFt+xSj0cavFfdWa3Dz7TccC
+         Ko0oCeZAJodwZSGFoMmHBYwnEzqTpYxc45CGHlDs08S0XlgfnCoCb2b9zlb8fUGkXk
+         83MhZs3vc+j5w==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Hu Haowen <src.res.211@gmail.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 0/6] docs/zh_TW: update zh_TW's documentation from an
- ascensive aspect
-In-Reply-To: <87h6pm4ui5.fsf@meer.lwn.net>
-References: <20230724041715.20050-1-src.res.211@gmail.com>
- <6ae7f65b-593f-75bc-2f34-c08de719b2fc@gmail.com>
- <87h6pm4ui5.fsf@meer.lwn.net>
-Date:   Mon, 31 Jul 2023 10:09:16 -0600
-Message-ID: <877cqgdpw3.fsf@meer.lwn.net>
+To:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Alim Akhtar <alim.akhtar@samsung.com>,
+        Andy Gross <agross@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konrad.dybcio@linaro.org>,
+        devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-samsung-soc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
+        Olof Johansson <olof@lixom.net>, soc@kernel.org,
+        workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+        arm@kernel.org
+Cc:     Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+        Randy Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH v3 1/3] MAINTAINERS: soc: reference maintainer profile
+In-Reply-To: <20230723131924.78190-1-krzysztof.kozlowski@linaro.org>
+References: <20230723131924.78190-1-krzysztof.kozlowski@linaro.org>
+Date:   Mon, 31 Jul 2023 10:23:17 -0600
+Message-ID: <87y1iwcaoa.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
         SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
@@ -53,33 +63,13 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Jonathan Corbet <corbet@lwn.net> writes:
+Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org> writes:
 
-> Hu Haowen <src.res.211@gmail.com> writes:
+> Mention the SoC maintainer profile in P: entry.
 >
->> Did you receive my patches? Please get down to them soon because I have
->> another series of patches pending on until the current patches are
->> resolved.
->
-> Yes, I receive your patches.
->
-> I'll ask you again: please be a little more patient.  I will get to
-> them.
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+> Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
 
-I still cannot apply your patches:
-
-> WARNING: Message contains suspicious unicode control characters!
->          Subject: [PATCH v2 5/6] docs/zh_TW: update process
->             Line:  =EF=BB=BF.. _tw_process_statement_kernel:
->             -------^
->             Char: ZERO WIDTH NO-BREAK SPACE (0xfeff)
->          If you are sure about this, rerun with the right flag to allow.
-> AM FAILED
->=20
-
-I'll ask again: please send me a version lacking weird Unicode control
-characters.
-
-Thanks,
+I've applied this series, thanks.
 
 jon
