@@ -2,187 +2,156 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9A0F47699B9
-	for <lists+linux-doc@lfdr.de>; Mon, 31 Jul 2023 16:40:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7B76D769A1A
+	for <lists+linux-doc@lfdr.de>; Mon, 31 Jul 2023 16:51:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232548AbjGaOkQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 31 Jul 2023 10:40:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47928 "EHLO
+        id S230320AbjGaOvb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 31 Jul 2023 10:51:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54194 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232547AbjGaOkM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Jul 2023 10:40:12 -0400
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com [IPv6:2a00:1450:4864:20::12d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3272411B;
-        Mon, 31 Jul 2023 07:40:11 -0700 (PDT)
-Received: by mail-lf1-x12d.google.com with SMTP id 2adb3069b0e04-4fe07f0636bso7408256e87.1;
-        Mon, 31 Jul 2023 07:40:11 -0700 (PDT)
+        with ESMTP id S233131AbjGaOvZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Jul 2023 10:51:25 -0400
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com [IPv6:2a00:1450:4864:20::434])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1BA4CE78;
+        Mon, 31 Jul 2023 07:51:21 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id ffacd0b85a97d-314417861b9so3867611f8f.0;
+        Mon, 31 Jul 2023 07:51:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1690815079; x=1691419879;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fAPrkbK19s/j5Zx9BvuYAYuY534VPCFu5UMSEPN+FAE=;
+        b=ONefshDkN1jXMyg0wZ8QEmmAPXYcp3mA7Y4rLHbZ0B/sSm8FGewPffgqtdxTL/X1iT
+         AtnNYgJ+osFjNol3DgEwCoRMsRzED9sEjdYo+XNB6jA/vpUD06z0WPGVpFwk6veFO9OU
+         ibatrDvsrl3GB3m2uFuEY1sklgbBbV+M1ieeB/BLXlqQriOZZEEhJRnlTc6k3zry1pGI
+         8gT4pqVcCYAqeSjkliWxyT6pMGXOg8y1USl58BKNqUR4FGu0Ju4rskBjkX0SaL4zQ9IR
+         mABJjkmvgdQUqRb0sebjRifxOKcjyv4RmV6FD7aKFsKCahByl3oE/ln33nEvLUOnN/IR
+         cPxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690814409; x=1691419209;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:dkim-signature:dkim-signature
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=KIcJ+DY3XhMKETlUOqbLoo1KBmrfR4L+ppXQy9TiybY=;
-        b=bFrZb4Z/FRUqbtue3Y+DlLb1h1KKltes1ux9peFukrSYQ2xeIkPul8DIeiS+FcE9lH
-         jtWgfUCQUOomA3zRIT3NVXvGNYKCkC/EwfzQeGSenYifgPHBWaFJTgVGKMEZ0ce+y1bB
-         zIwOFPCKn+2+Jo5lvGolRF5/sFr8AtXWk6e8TBffmP39t+US/kKNKTD3YdGfaKtfCMQA
-         31TJBuHaTEP20dzXwGcoShkEw47RGiG+yLPOm1Yxm05hU9+wZPLG3Jw+rUVtwXCBl8lL
-         KrfaoiKtFdF+GAKqluzDiQvkYlDTJlVh9Fcgs66B9yb1MBEmBgMI5GEr4syM6sO9x2T5
-         tgKA==
-X-Gm-Message-State: ABy/qLY6e7mSO98a0jVHPXfzSlrqCwp3k2ttQpNzG5Xfl7RAdBznM5Dr
-        0YyHrSqs4Z8yFmr8aG2gTeLIjmoJswSX8g==
-X-Google-Smtp-Source: APBJJlHnyjEPfM97oZA/PBYKRALe+VOrckMFRUITH2pYSAXDSoQbz2pW1+SpRj8uVg5J49X8Q98zyQ==
-X-Received: by 2002:ac2:504d:0:b0:4fe:82c:5c8a with SMTP id a13-20020ac2504d000000b004fe082c5c8amr2823lfm.58.1690814409202;
-        Mon, 31 Jul 2023 07:40:09 -0700 (PDT)
-Received: from flawful.org (c-f5f0e255.011-101-6d6c6d3.bbcust.telenor.se. [85.226.240.245])
-        by smtp.gmail.com with ESMTPSA id w3-20020ac24423000000b004fe1f02db22sm1719645lfl.186.2023.07.31.07.40.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Jul 2023 07:40:08 -0700 (PDT)
-Received: by flawful.org (Postfix, from userid 112)
-        id E90CE3F6E; Mon, 31 Jul 2023 16:40:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=flawful.org; s=mail;
-        t=1690814408; bh=edDMj8QumS1e68jpdMyw7e897DoL0c2jDNcs9yDf72g=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=eeZmWMPqvK2vQiM76FVe7Ffv+XblGp3w968KUIPkyAO5CnfP3Hg5QBizHaw9kPqX/
-         eourhuX0vNP3g8/UVHDUbB4EcXvtoevX5VaNvl2Reb1/IM6wpGl7NHPADr76TtlwC1
-         Mwvryww13FLsquxKcF6sOmWB2W6ZZOxBZ7/n6IWE=
+        d=1e100.net; s=20221208; t=1690815079; x=1691419879;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=fAPrkbK19s/j5Zx9BvuYAYuY534VPCFu5UMSEPN+FAE=;
+        b=EdkSzJe4WXKljAkSuv6Tp5vkScZYwp2APQQ6e98Cr/gZ/TGLmYiADEgYwRNXnImXeB
+         1NBkZyx35/Es/EOuUmYt3U9hLimN4+Yc5BKYTmGNjyM4z4VPX33ICVxfTBZdjBPSExK5
+         aI25fSquP9JRudKjSGgt/ZSN/fJ4BHCNzws0v3t/n5cOUGB/mIOZcPRYp3VSBLpOHCwn
+         FEnaYxwWPKh6ITwnpYuLVa1jrlqV/neqqikLm71217Q50+6c1xoOjnUOH6/q9plt/wun
+         hxl+dPglZ9qA55tjUARp8AjL/MDVC33jOnxb+KmLZzauRqdlwabNhGt3eEcY5vwGCmGU
+         NinQ==
+X-Gm-Message-State: ABy/qLZOx1f+WHqxdRaTwqlLiHDkGzooLPXnmuoe4RNYPNuS2RaAjfIv
+        4bl9IWyr9i/gJYvhcm83hoqFzTKxXCFEdjSi8D4=
+X-Google-Smtp-Source: APBJJlHp9CxGwet2vmvPctm3AruUc8MW3kWbH5+YX2xIIUpW5tevxLfL1O+U73H0pP1U9NLaYEZRubIxIr3M2m/csAQ=
+X-Received: by 2002:adf:e752:0:b0:314:3f98:a788 with SMTP id
+ c18-20020adfe752000000b003143f98a788mr58676wrn.7.1690815079341; Mon, 31 Jul
+ 2023 07:51:19 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAF6AEGtan-bQ7syKAwOKDY=044aKu26SLPQ0j1ieLqXNyQQS3g@mail.gmail.com>
+ <282e-64c7a800-77-46253680@38053863>
+In-Reply-To: <282e-64c7a800-77-46253680@38053863>
+From:   Rob Clark <robdclark@gmail.com>
+Date:   Mon, 31 Jul 2023 07:51:07 -0700
+Message-ID: <CAF6AEGufEzyOygPt6-tCbSC75GSD7sOB=FHE4nNGwPre6kHuOA@mail.gmail.com>
+Subject: Re: [PATCH v10] drm: Add initial ci/ subdirectory
+To:     Helen Mae Koike Fornazier <helen.koike@collabora.com>
+Cc:     Daniel Stone <daniel@fooishbar.org>, emma@anholt.net,
+        linux-doc@vger.kernel.org, david.heidelberg@collabora.com,
+        dri-devel@lists.freedesktop.org, linux-amlogic@lists.infradead.org,
+        jbrunet@baylibre.com, robdclark@google.com, corbet@lwn.net,
+        khilman@baylibre.com, sergi.blanch.torne@collabora.com,
+        gustavo.padovan@collabora.com, linux-rockchip@lists.infradead.org,
+        daniels@collabora.com, martin.blumenstingl@googlemail.com,
+        mripard@kernel.org, anholt@google.com,
+        linux-mediatek@lists.infradead.org, robclark@freedesktop.org,
+        matthias.bgg@gmail.com, linux-arm-kernel@lists.infradead.org,
+        angelogioacchino.delregno@collabora.com, neil.armstrong@linaro.org,
+        guilherme.gallo@collabora.com, linux-kernel@vger.kernel.org,
+        tzimmermann@suse.de, Dave Airlie <airlied@gmail.com>,
+        Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
-        version=3.4.6
-Received: from x1-carbon.lan (OpenWrt.lan [192.168.1.1])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (No client certificate requested)
-        by flawful.org (Postfix) with ESMTPSA id D440657C0;
-        Mon, 31 Jul 2023 16:35:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=flawful.org; s=mail;
-        t=1690814104; bh=edDMj8QumS1e68jpdMyw7e897DoL0c2jDNcs9yDf72g=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=NmYfmLEj/FOULU54oOsnSNCfgS93+RAYDd9H3fxC+SkAw5t0isGIJB/8SyOVVUifH
-         uz4qIxHicsgmX7z8it/zlhc1DZRLSu6jg6Zvs+fLIJjZgk++KSDaMlIj6GyqSWmuHq
-         sVNLZ0v1d02BNmfJGr8qzxiTg++wzGUbDg9nx4yA=
-From:   Niklas Cassel <nks@flawful.org>
-To:     Damien Le Moal <dlemoal@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Sergey Shtylyov <s.shtylyov@omp.ru>
-Cc:     Hannes Reinecke <hare@suse.com>,
-        John Garry <john.g.garry@oracle.com>,
-        linux-ide@vger.kernel.org, linux-scsi@vger.kernel.org,
-        Niklas Cassel <niklas.cassel@wdc.com>,
-        Jason Yan <yanaijie@huawei.com>, linux-doc@vger.kernel.org
-Subject: [PATCH v4 10/10] ata: remove deprecated EH callbacks
-Date:   Mon, 31 Jul 2023 16:34:21 +0200
-Message-ID: <20230731143432.58886-11-nks@flawful.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230731143432.58886-1-nks@flawful.org>
-References: <20230731143432.58886-1-nks@flawful.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Niklas Cassel <niklas.cassel@wdc.com>
+On Mon, Jul 31, 2023 at 5:25=E2=80=AFAM Helen Mae Koike Fornazier
+<helen.koike@collabora.com> wrote:
+>
+> Hello all,
+>
+> Thanks for your comments.
+>
+> On Friday, July 28, 2023 11:37 -03, Rob Clark <robdclark@gmail.com> wrote=
+:
+>
+> > On Thu, Jul 27, 2023 at 10:26=E2=80=AFPM Daniel Stone <daniel@fooishbar=
+.org> wrote:
+> > >
+> > > On Thu, 27 Jul 2023 at 22:47, Rob Clark <robdclark@gmail.com> wrote:
+> > > > > I did run into a bit of a chicken vs. egg problem with testing th=
+e "in
+> > > > > tree" version (compared to earlier versions which kept most of th=
+e yml
+> > > > > and scripts in a separate tree), is that it actually requires thi=
+s
+> > > > > commit to exist in the branch you want to run CI on.  My earlier
+> > > > > workaround of pulling the drm/ci commit in via
+> > > > > ${branchname}-external-fixes no longer works.
+> > > >
+> > > > After unwinding some more gitlab repo settings that were for the
+> > > > previous out-of-tree yml setup, I have this working.
+> > > >
+> > > > Tested-by: Rob Clark <robdclark@gmail.com>
+> > > > Acked-by: Rob Clark <robdclark@gmail.com>
+> > >
+> > > And it's also:
+> > > Acked-by: Daniel Stone <daniels@collabora.com>
+> > >
+> > > It's been back and forth a few times by now and reviewed pretty
+> > > heavily by all the people who are across the CI details. I think the
+> > > next step is to answer all the workflow questions by actually getting
+> > > it into trees and using it in anger. There was some discussion about
+> > > whether this should come in from drm-misc, or the core DRM tree, or a
+> > > completely separate pull, but I'm not sure what the conclusion was ..=
+.
+> > > maintainers, thoughts?
+> >
+> > I'd prefer a separate pull, so that I could merge it into msm-next as
+> > well without having to pull in all of drm-misc
+>
+> Should we create a drm-ci ?
 
-Now when all libata drivers have migrated to use the error_handler
-callback, remove the deprecated phy_reset and eng_timeout callbacks.
+I guess we can just wait and see how often it is that drm/ci updates
+need to be merged into multiple driver trees.  Hopefully most of the
+drm/ci changes are just expectation file updates which should go via
+driver tree.  Maybe i-g-t uprevs, if they have a lot of expectation
+changes would be something drivers would want to merge into their own
+tree?  But I guess we can see how it goes.
 
-Also remove references to non-existent functions sata_phy_reset and
-ata_qc_timeout from Documentation/driver-api/libata.rst.
+> >
+> > Possibly some other driver trees would like to do similar?
+> >
+> > BR,
+> > -R
+>
+> Also, please wait for v11, I have a few adjustments to make as pointer by
+> some comments, and also regarding xfails list and how the configs should
+> be organized (unless if you are fine merging this version and I can submi=
+t
+> the adjustments later).
 
-Signed-off-by: Niklas Cassel <niklas.cassel@wdc.com>
-Reviewed-by: John Garry <john.g.garry@oracle.com>
-Reviewed-by: Sergey Shtylyov <s.shtylyov@omp.ru>
-Reviewed-by: Jason Yan <yanaijie@huawei.com>
----
- Documentation/driver-api/libata.rst | 22 ++++++----------------
- drivers/ata/pata_sl82c105.c         |  3 +--
- include/linux/libata.h              |  6 ------
- 3 files changed, 7 insertions(+), 24 deletions(-)
+Ok
 
-diff --git a/Documentation/driver-api/libata.rst b/Documentation/driver-api/libata.rst
-index eecb8b81e185..5da27a749246 100644
---- a/Documentation/driver-api/libata.rst
-+++ b/Documentation/driver-api/libata.rst
-@@ -256,14 +256,6 @@ advanced drivers implement their own ``->qc_issue``.
- Exception and probe handling (EH)
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
--::
--
--    void (*eng_timeout) (struct ata_port *ap);
--    void (*phy_reset) (struct ata_port *ap);
--
--
--Deprecated. Use ``->error_handler()`` instead.
--
- ::
- 
-     void (*freeze) (struct ata_port *ap);
-@@ -348,8 +340,7 @@ SATA phy read/write
-                        u32 val);
- 
- 
--Read and write standard SATA phy registers. Currently only used if
--``->phy_reset`` hook called the :c:func:`sata_phy_reset` helper function.
-+Read and write standard SATA phy registers.
- sc_reg is one of SCR_STATUS, SCR_CONTROL, SCR_ERROR, or SCR_ACTIVE.
- 
- Init and shutdown
-@@ -520,13 +511,12 @@ to return without deallocating the qc. This leads us to
- 
- :c:func:`ata_scsi_error` is the current ``transportt->eh_strategy_handler()``
- for libata. As discussed above, this will be entered in two cases -
--timeout and ATAPI error completion. This function calls low level libata
--driver's :c:func:`eng_timeout` callback, the standard callback for which is
--:c:func:`ata_eng_timeout`. It checks if a qc is active and calls
--:c:func:`ata_qc_timeout` on the qc if so. Actual error handling occurs in
--:c:func:`ata_qc_timeout`.
-+timeout and ATAPI error completion. This function will check if a qc is active
-+and has not failed yet. Such a qc will be marked with AC_ERR_TIMEOUT such that
-+EH will know to handle it later. Then it calls low level libata driver's
-+:c:func:`error_handler` callback.
- 
--If EH is invoked for timeout, :c:func:`ata_qc_timeout` stops BMDMA and
-+When the :c:func:`error_handler` callback is invoked it stops BMDMA and
- completes the qc. Note that as we're currently in EH, we cannot call
- scsi_done. As described in SCSI EH doc, a recovered scmd should be
- either retried with :c:func:`scsi_queue_insert` or finished with
-diff --git a/drivers/ata/pata_sl82c105.c b/drivers/ata/pata_sl82c105.c
-index 3b62ea482f1a..93882e976ede 100644
---- a/drivers/ata/pata_sl82c105.c
-+++ b/drivers/ata/pata_sl82c105.c
-@@ -180,8 +180,7 @@ static void sl82c105_bmdma_start(struct ata_queued_cmd *qc)
-  *	document.
-  *
-  *	This function is also called to turn off DMA when a timeout occurs
-- *	during DMA operation. In both cases we need to reset the engine,
-- *	so no actual eng_timeout handler is required.
-+ *	during DMA operation. In both cases we need to reset the engine.
-  *
-  *	We assume bmdma_stop is always called if bmdma_start as called. If
-  *	not then we may need to wrap qc_issue.
-diff --git a/include/linux/libata.h b/include/linux/libata.h
-index 049159905a28..7a9cbc28472d 100644
---- a/include/linux/libata.h
-+++ b/include/linux/libata.h
-@@ -975,12 +975,6 @@ struct ata_port_operations {
- 	ssize_t (*transmit_led_message)(struct ata_port *ap, u32 state,
- 					ssize_t size);
- 
--	/*
--	 * Obsolete
--	 */
--	void (*phy_reset)(struct ata_port *ap);
--	void (*eng_timeout)(struct ata_port *ap);
--
- 	/*
- 	 * ->inherits must be the last field and all the preceding
- 	 * fields must be pointers.
--- 
-2.41.0
+BR,
+-R
 
+> Thanks,
+> Helen
+>
