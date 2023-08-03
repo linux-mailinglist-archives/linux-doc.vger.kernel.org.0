@@ -2,60 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 98D9B76EDA2
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Aug 2023 17:10:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 804C176EE3B
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Aug 2023 17:35:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236802AbjHCPK1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Aug 2023 11:10:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42338 "EHLO
+        id S235668AbjHCPf0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Aug 2023 11:35:26 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58826 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236060AbjHCPK0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Aug 2023 11:10:26 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4D6D910D2;
-        Thu,  3 Aug 2023 08:10:24 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id BE35A61DF4;
-        Thu,  3 Aug 2023 15:10:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 226B5C433CA;
-        Thu,  3 Aug 2023 15:10:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1691075423;
-        bh=tZJ7tXVDkdspZw9aq8GHx3NudtBiKp17JwhiNPFjWqY=;
-        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-        b=vE+IQSLw+4DWc8DAqB9eWzLVYCnRl49lI14R1eMMNF3ZE/PFk05i+2io8QpOkdVY3
-         Sd7UkDfcVeLZ6v3ym2r86oqnUC+htOED3yhAZbFnqy1FQdFy+w7/+Yp1SgpkdDN9N0
-         il9Eh2yPQgJKxWqdDwRHf7bY/rTI7CDRdco+bs4PNpCsfGB2rh6z0m9LV6Q1+v6vZt
-         gSMK1uaWurqRh7TmcRplXhEQ20RLbch25mwLX7k/rIQKAQinRbZO5VNc1NNjyUedyI
-         gsEWgl9YuZbrKJalAlXvO3qyKc7cCC4JrUPhye+URlYBsV4+TAagOiojQ8mCoWXyo6
-         Gr5GbX7dvGo3A==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
-        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 0A960C595D1;
-        Thu,  3 Aug 2023 15:10:23 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+        with ESMTP id S235173AbjHCPfY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Aug 2023 11:35:24 -0400
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com [IPv6:2a00:1450:4864:20::234])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B824B30FF
+        for <linux-doc@vger.kernel.org>; Thu,  3 Aug 2023 08:35:22 -0700 (PDT)
+Received: by mail-lj1-x234.google.com with SMTP id 38308e7fff4ca-2b9fa64db41so17500881fa.1
+        for <linux-doc@vger.kernel.org>; Thu, 03 Aug 2023 08:35:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=umich.edu; s=google-2016-06-03; t=1691076921; x=1691681721;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+oypXlWJh1usCB/TTGcantnU/B7Uqzl56Nf26cP4N8s=;
+        b=OK1VuHd3EGGmJr0c72gzI4bUbGLQX/zaO7kzw0oeYvMGZjAYwVTDZxOpXEBAp3cT32
+         XWXoAtkwgC1kAmdnvuxCfhsPzX+tc+Q0VDXmtMOe1iBbs/l+1u6dlILAMlmQ5NVQX+Yb
+         u3Y+wb1SzLbptfcMbIh49YJkEXOu31DLnuIR+P4FycBrD387mzhqR0hmnVmQfsqaJZJ2
+         BJV54K2VxJtvjjRuiidNUpUak3vlA5Suz5TytjSj5qoT3F2Ms1KhzvRIHHH72oSbl3G2
+         pdpxzs4yN8SenTS6HqDMoqkBTZWYKa4cbiEflYsG5AeprWMUX2gOlKFI592WlPeFtuDm
+         qd0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1691076921; x=1691681721;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=+oypXlWJh1usCB/TTGcantnU/B7Uqzl56Nf26cP4N8s=;
+        b=KUiS2wYcMm7mPoMJ0nEWYS6qsnGW/Pu73Dp3WdPoPUvj3BWrHK4ERvKhon2K7LMLZF
+         5Vc9L6FlFh+oupYlilUCdiBOYoCQBvOgcvVo6nQT0PssSyrPWdHjXVApCETmrgx8ZvN1
+         8Sfce6U9BaeKCdnz741a60/4b+i749PErno62bEBwUvXKmm/fyMlMrE3ijiGG+SZiuuX
+         ksVF4nHEQlQIHP296DLT+SIC/bO5wHYBkcq1/qny+GW/dFINv6VpkXEXxP2N9tx3Nk5K
+         9/W9259Y/AO3za456xSRMWqEdTXsSD5ZzZ9BFfR/CjxEBe0RsLRiAjYDH6k6AUICOGOd
+         oo3w==
+X-Gm-Message-State: ABy/qLYQnd4tuzTeVe1yO5KDGM+bVN7Gnv7jWBR4ApM6FBYG1OloDEn8
+        3w04dPMmdY2J/TZEqGdfgyNNnhwMnkJdT+euXb4uiw==
+X-Google-Smtp-Source: APBJJlFz7X3QQCzZ4sS5qgWNz0sG56PeYqCF3hekjBGrBXE+ulfD04T5qgJZYLBZ4lwtoyZuYBx1P7XFD4RLFwOz9JI=
+X-Received: by 2002:a2e:b70e:0:b0:2b6:df71:cff1 with SMTP id
+ j14-20020a2eb70e000000b002b6df71cff1mr7872137ljo.52.1691076920952; Thu, 03
+ Aug 2023 08:35:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [RESEND PATCH -fixes 1/2] riscv: Export va_kernel_pa_offset in
- vmcoreinfo
-From:   patchwork-bot+linux-riscv@kernel.org
-Message-Id: <169107542303.19238.12982353248491606719.git-patchwork-notify@kernel.org>
-Date:   Thu, 03 Aug 2023 15:10:23 +0000
-References: <20230724100917.309061-1-suagrfillet@gmail.com>
-In-Reply-To: <20230724100917.309061-1-suagrfillet@gmail.com>
-To:     Song Shuai <suagrfillet@gmail.com>
-Cc:     linux-riscv@lists.infradead.org, bhe@redhat.com, vgoyal@redhat.com,
-        dyoung@redhat.com, corbet@lwn.net, paul.walmsley@sifive.com,
-        palmer@dabbelt.com, aou@eecs.berkeley.edu,
-        xianting.tian@linux.alibaba.com, anup@brainfault.org,
-        robh@kernel.org, ajones@ventanamicro.com, alexghiti@rivosinc.com,
-        conor.dooley@microchip.com, kexec@lists.infradead.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+References: <20230803093418.51872-1-tmgross@umich.edu> <CANiq72nhsqWsxHKmyNWLtV8AwdA1hAq5ooyJ0WNVrnzRnpjAFA@mail.gmail.com>
+In-Reply-To: <CANiq72nhsqWsxHKmyNWLtV8AwdA1hAq5ooyJ0WNVrnzRnpjAFA@mail.gmail.com>
+From:   Trevor Gross <tmgross@umich.edu>
+Date:   Thu, 3 Aug 2023 11:35:09 -0400
+Message-ID: <CALNs47tYsLq8wo3aiqU5Kmi8OFJgf6cugiRLJNiXZGUYdaVojQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/2] Generate API documentation for 'bindings' crate
+To:     Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Cc:     Miguel Ojeda <ojeda@kernel.org>,
+        Alex Gaynor <alex.gaynor@gmail.com>,
+        Wedson Almeida Filho <wedsonaf@gmail.com>,
+        Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+        =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+        Benno Lossin <benno.lossin@proton.me>,
+        rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -63,30 +74,88 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello:
+On Thu, Aug 3, 2023 at 10:08=E2=80=AFAM Miguel Ojeda
+<miguel.ojeda.sandonis@gmail.com> wrote:
+> I think the first question to answer would be whether we want to
+> expose `bindings`, i.e. what are the advantages/disadvantages?
+>
+> If `kernel` were a "normal library", then I would say we shouldn't,
+> because users should not need to care; and, in addition, the goal is
+> that leaf modules do not need to access them directly.
+>
+> But, as sometimes happen, it may still be quite useful for some
+> developers nevertheless (the same way documenting the internal/private
+> details could be).
+>
+> So, it would be nice to have an overview from your point of view on
+> why it should be done (or not).
 
-This series was applied to riscv/linux.git (fixes)
-by Palmer Dabbelt <palmer@rivosinc.com>:
+I do understand that dilemma, but am not sure what the happy medium is
+between rendering them and hiding them. Where I see value is:
 
-On Mon, 24 Jul 2023 18:09:16 +0800 you wrote:
-> Since RISC-V Linux v6.4, the commit 3335068f8721 ("riscv: Use
-> PUD/P4D/PGD pages for the linear mapping") changes phys_ram_base
-> from the physical start of the kernel to the actual start of the DRAM.
-> 
-> The Crash-utility's VTOP() still uses phys_ram_base and kernel_map.virt_addr
-> to translate kernel virtual address, that failed the Crash with Linux v6.4 [1].
-> 
-> [...]
+1. For anyone reading/writing abstractions, it's useful to quickly see
+how exactly bindgen did the C -> Rust mapping
+2. Abstractions may want to link to the C side somehow, linking the
+bindings is an easier first step than linking to sphinx (in the future
+we may be able to do a bindings -> sphinx link)
 
-Here is the summary with links:
-  - [RESEND,-fixes,1/2] riscv: Export va_kernel_pa_offset in vmcoreinfo
-    https://git.kernel.org/riscv/c/fbe7d19d2b7f
-  - [RESEND,-fixes,2/2] Documentation: kdump: Add va_kernel_pa_offset for RISCV64
-    https://git.kernel.org/riscv/c/640c503d7dbd
+Maybe a stronger "prefer abstractions over bindings" message would
+suffice to discourage use outside of reference?
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+In any case, I will put this behind a flag so it is not enabled by
+default. While I'm at it - is there value in adding a config option to
+pass `--document-private-items` to the kernel crate, or supporting
+`RUSTDOCFLAGS` like Cargo does?
 
+> > 1. Do we want to make this the default, or a separate target/
+> >    configuration? I don't think there is much downside to always
+> >    generating.
+>
+> One downside of doing it by default would be going against the "avoid
+> `bindings`" guideline (ideally rule).
+>
+> Another one is render time (the C side is trying to reduce it), I
+> guess, especially if we keep adding headers over time.
 
+That makes sense, I will add the flag option.
+
+> > 2. The entire '.config' file could be included in the doc output, to
+> >    make it easy to tell what settings the documentation was generated
+> >    with. Would this be desired? Maybe with a '--cfg
+> >    include-dotcfg=3D".config"' flag so published docs would have the
+> >    option (unsure whether it may ever have sensitive information).
+>
+> This may be useful orthogonally to rendering `bindings` or not.
+>
+
+I will add this in a separate patch.
+
+> > Bindgen is currently invoked with '--no-doc-comments', I think this may
+> > be because some blocks were mistakenly interpreted as doctests. Once we
+> > upgrade our bindgen version we might be able to remove this.
+>
+> Yes, that is https://github.com/Rust-for-Linux/linux/issues/323 and
+> https://github.com/rust-lang/rust-bindgen/issues/2057, which led to
+> the addition of `process_comments` to `bindgen` in v0.63.0.
+
+How would switching to the library work? Since that seems like a more
+involved discussion, would postprocesing `generated_bindings.rs` be
+acceptable instead? I have been playing around with a python script
+that extracts the `#[doc ...]` blocks and (1) fixes the escaping and
+(2) formats parameters and fixes their spacing, I could extract this
+to a separate patch if it may be a while before we can use the
+library.
+
+> > Side note, 'rust/Makefile' seems to have a mix of tabs and spaces - is
+> > this intentional?
+>
+> Yes, it is intentional. For instance, the command definitions use
+> spaces like the vast majority of the kernel `Makefile`s.
+
+Ah thanks, it just looks a bit weird in the diff.
+
+> Cheers,
+> Miguel
+
+Thanks!
+Trevor
