@@ -2,65 +2,49 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5270A76F1EF
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Aug 2023 20:36:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 65E0176F3C5
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Aug 2023 22:02:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232868AbjHCSgQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Aug 2023 14:36:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55864 "EHLO
+        id S231547AbjHCUCm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Aug 2023 16:02:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41490 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229836AbjHCSgP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Aug 2023 14:36:15 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B609312B;
-        Thu,  3 Aug 2023 11:36:14 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 52C4161E48;
-        Thu,  3 Aug 2023 18:36:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A2C5C433C7;
-        Thu,  3 Aug 2023 18:36:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1691087773;
-        bh=EPrIzhnHngRmYcpriOSsv2C4b5KD1vrTxnytJvuJaq0=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=Q3m576+o47BBOW0zkBUz47OGhhZvDB4sdkQTE+y7N7fCmm010mcLqCDZedn1T5ob1
-         uMwMzjE71THOEPJ9pZb0QnnZEpCheaqphUenUm7XMOyYUarNpGWAD/nmjtHMDGdout
-         oaYx3ASWxF+VsVbwvAu+kNiylGg3EpW35CMpxQIU=
-Date:   Thu, 3 Aug 2023 20:36:10 +0200
-From:   Greg KH <gregkh@linuxfoundation.org>
-To:     Eric DeVolder <eric.devolder@oracle.com>
-Cc:     linux-kernel@vger.kernel.org, david@redhat.com, osalvador@suse.de,
-        corbet@lwn.net, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, bhe@redhat.com,
-        ebiederm@xmission.com, kexec@lists.infradead.org, hpa@zytor.com,
-        rafael@kernel.org, vgoyal@redhat.com, dyoung@redhat.com,
-        lf32.dev@gmail.com, akpm@linux-foundation.org,
-        naveen.n.rao@linux.vnet.ibm.com, zohar@linux.ibm.com,
-        bhelgaas@google.com, vbabka@suse.cz, tiwai@suse.de,
-        seanjc@google.com, linux@weissschuh.net, vschneid@redhat.com,
-        linux-mm@kvack.org, linux-doc@vger.kernel.org,
-        sourabhjain@linux.ibm.com, konrad.wilk@oracle.com,
-        boris.ostrovsky@oracle.com
-Subject: Re: [PATCH v25 01/10] drivers/base: refactor cpu.c to use
- .is_visible()
-Message-ID: <2023080320-dinner-ravine-7d18@gregkh>
-References: <20230629192119.6613-1-eric.devolder@oracle.com>
- <20230629192119.6613-2-eric.devolder@oracle.com>
- <2023070342-human-spill-a62c@gregkh>
- <31c1393d-4285-0032-7675-737737d21f71@oracle.com>
- <6d2811f5-a5ee-a49d-012d-b519b2c6ee26@oracle.com>
- <a6dd6e27-e8a7-09ac-f33d-03318dd5695c@oracle.com>
+        with ESMTP id S229835AbjHCUCl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Aug 2023 16:02:41 -0400
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B859D420A;
+        Thu,  3 Aug 2023 13:02:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=nNerFmd6ptjo+dv4OPvS78cjhai5tEdqMXx2pR/SI/I=; b=WR/rzPm+JY2QxPYgET1mIU+C5x
+        8KD0+ZN0p+sroepubAVdtu73DUl9tnEE94Fq4xzOh+zQiEX7s1Y5RliaBgXwJP4agZ5tjj93FRvlN
+        G7ZWkMkD/UETQnfbr9CAydgZDIOF/hkYY/LFJCsnMbWS/iEouFbTrQ2u1nQlg0G7Ft46oMOg9oyl0
+        YtM7hc+gRCJudFz2SKh8OORMfryYGvVsEe6bMTmptF6PaqRXe7HElvQwRMzmYv8ZKY+XUXsh3DRsB
+        UY8zXU/s6C4OHUNMMIbSZHWXuwNKCuTVWVAmDBtVs6R4/H/dzOgjs+2clZr3KNQyCS/5EeDQzJ0gh
+        n4GFOUIA==;
+Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1qReWj-005eRN-8r; Thu, 03 Aug 2023 20:02:29 +0000
+Date:   Thu, 3 Aug 2023 21:02:29 +0100
+From:   Matthew Wilcox <willy@infradead.org>
+To:     kernel test robot <lkp@intel.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Linux Memory Management List <linux-mm@kvack.org>,
+        linux-arm-msm@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-rtc@vger.kernel.org, linux-serial@vger.kernel.org,
+        Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+Subject: Re: [linux-next:master] BUILD REGRESSION
+ fb4327106e5250ee360d0d8b056c1eef7eeb9a98
+Message-ID: <ZMwH1WuEb1JEtZ4o@casper.infradead.org>
+References: <202308040141.gUjtZ32J-lkp@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <a6dd6e27-e8a7-09ac-f33d-03318dd5695c@oracle.com>
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham
+In-Reply-To: <202308040141.gUjtZ32J-lkp@intel.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -68,73 +52,23 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Aug 03, 2023 at 01:20:28PM -0500, Eric DeVolder wrote:
-> 
-> 
-> On 7/21/23 11:32, Eric DeVolder wrote:
-> > 
-> > 
-> > On 7/3/23 11:53, Eric DeVolder wrote:
-> > > 
-> > > 
-> > > On 7/3/23 08:05, Greg KH wrote:
-> > > > On Thu, Jun 29, 2023 at 03:21:10PM -0400, Eric DeVolder wrote:
-> > > > >   - the function body of the callback functions are now wrapped with
-> > > > >     IS_ENABLED(); as the callback function must exist now that the
-> > > > >     attribute is always compiled-in (though not necessarily visible).
-> > > > 
-> > > > Why do you need to do this last thing?  Is it a code savings goal?  Or
-> > > > something else?  The file will not be present in the system if the
-> > > > option is not enabled, so it should be safe to not do this unless you
-> > > > feel it's necessary for some reason?
-> > > 
-> > > To accommodate the request, all DEVICE_ATTR() must be
-> > > unconditionally present in this file. The DEVICE_ATTR() requires the
-> > > .show() callback. As the callback is referenced from a data
-> > > structure, the callback has to be present for link. All the
-> > > callbacks for these attributes are in this file.
-> > > 
-> > > I have two basic choices for gutting the function body if the config
-> > > feature is not enabled. I can either use #ifdef or IS_ENABLED().
-> > > Thomas has made it clear I need to use IS_ENABLED(). I can certainly
-> > > use #ifdef (which is what I did in v24).
-> > > 
-> > > > 
-> > > > Not doing this would make the diff easier to read :)
-> > > 
-> > > I agree this is messy. I'm not really sure what this request/effort
-> > > achieves as these attributes are not strongly related (unlike
-> > > cacheinfo) and the way the file was before results in less code.
-> > > 
-> > > At any rate, please indicate if you'd rather I use #ifdef.
-> > > Thanks for your time!
-> > > eric
-> > > 
-> > > > 
-> > > > thanks,
-> > > > 
-> > > > greg k-h
-> > 
-> > Hi Greg,
-> > I was wondering if you might weigh-in so that I can proceed.
-> > 
-> > I think there are three options on the table:
-> > - use #ifdef to comment out these function bodies, which keeps the diff much more readable
-> > - use IS_ENABLED() as Thomas has requested I do, but makes the diff more difficult to read
-> > - remove this refactor altogether, perhaps post-poning until after this
-> > crash hotplug series merges, as this refactor is largely unrelated to
-> > crash hotplug.
-> > 
-> > Thank you for your time on this topic!
-> > eric
-> 
-> Hi Greg,
-> If you have an opinion on how to proceed, please provide.
+On Fri, Aug 04, 2023 at 01:34:01AM +0800, kernel test robot wrote:
+> arm-linux-gnueabi-ld: storage.c:(.text+0x27c): undefined reference to `__brelse'
+> arm-linux-gnueabi-ld: storage.c:(.text+0x9c): undefined reference to `__bread_gfp'
+> storage.c:(.text+0x22c): undefined reference to `__bread_gfp'
+> storage.c:(.text+0x64): undefined reference to `__brelse'
 
-Sorry, totally swamped by "stuff".  I don't know, use your judgement
-here and send a new version, don't wait for me to weigh in on design
-decisions for longer than a week.
+I think something like this would fix it.  Jens?  Christoph?
 
-thanks,
++++ b/fs/romfs/Kconfig
+@@ -2,6 +2,7 @@
+ config ROMFS_FS
+        tristate "ROM file system support"
+        depends on BLOCK || MTD
++       select BUFFER_HEAD
+        help
+          This is a very small read-only file system mainly intended for
+          initial ram disks of installation disks, but it could be used for
 
-greg k-h
+romfs has a few options and I spent no time looking at this closely;
+maybe not every version of romfs needs buffer heads.
