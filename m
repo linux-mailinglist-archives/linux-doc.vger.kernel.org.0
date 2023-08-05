@@ -2,73 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8FEB8770E28
-	for <lists+linux-doc@lfdr.de>; Sat,  5 Aug 2023 08:43:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 90F08770E55
+	for <lists+linux-doc@lfdr.de>; Sat,  5 Aug 2023 09:21:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229584AbjHEGnz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 5 Aug 2023 02:43:55 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38058 "EHLO
+        id S229808AbjHEHVj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 5 Aug 2023 03:21:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43742 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229579AbjHEGnw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 5 Aug 2023 02:43:52 -0400
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com [IPv6:2a00:1450:4864:20::62a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 67FF71BE
-        for <linux-doc@vger.kernel.org>; Fri,  4 Aug 2023 23:43:51 -0700 (PDT)
-Received: by mail-ej1-x62a.google.com with SMTP id a640c23a62f3a-9936b3d0286so407435266b.0
-        for <linux-doc@vger.kernel.org>; Fri, 04 Aug 2023 23:43:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1691217830; x=1691822630;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Fyaf0OHfvWgaqfRiwRufcy49gz6rXRNyNLf1qH0Ffk0=;
-        b=fI0IdoXOvcDFp/TFe6tNB54+yAWSvxH8Zh+XLrDZpTuld3fJbS+DuZSFLqW9YgqseX
-         4akrMUkIlH8A0RNQ6uZlBhD2vSl/tI88Emx+HHrckk6iT4w9aEIRRx+1k6VfpsVQDKET
-         TY22K+Oh1gjSIPZJLmNpRq1eDvzRJ4UevCHDGQX0lehvFOsopQgcVZQ+2WZIbRPkfP53
-         4qU8wFITjBLvOLBE7aLOQSW/jJAUxTtZKtAszb8gjPMsXb0fS9ZtB5x9eatYR8U5kLFU
-         lWiQGpOnzqf4wyGILyBl9gEPbX9iLal1b1N5lJPHKxYkC8AjSMUaS8OwwptUs5POiCPI
-         EyDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691217830; x=1691822630;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Fyaf0OHfvWgaqfRiwRufcy49gz6rXRNyNLf1qH0Ffk0=;
-        b=AOi6keCzIUx4BDPpP9Vu7udauv955nPmkhLsW199qgcj57iAAkevig/4kEdiOWj96p
-         cgGqwdT8WjXNObE2AhEwtvBYRyV+Zes0JXFRd5Yo9udOMNKc+KgU6KEXByGchGNxJiB5
-         JtSVcfr7Mvm3g3B5ky57yiMdOxocEWVSWA5Y3rRItlRwKYOQhjcBqIDcTu1ZgEwxf6md
-         78qEh55K4Y/rHDs4PWsB7LJ/JDlMQn3PYjVd6ezpKFIIfVI7c8+hFUTg5KRP5/MFlouX
-         2V6lKqU3ylD7a9flaXL2ko2l5sVAEOymNboNK56EVA78oVs9HwP43bqe9fV48s1pDo8v
-         ccmA==
-X-Gm-Message-State: AOJu0YwJswnc8IiqQFduv4lS1InEWPitxcmpD64TDUmfMkXhpCWPBq7O
-        HwRY7hbdbmeQqVZQw2kw9tSKtKgiqGuQhgFyB30=
-X-Google-Smtp-Source: AGHT+IEl1NuIN82xxyrBQD+s/Zn0M7QFkGsXZ4ZFmr6qZ9EP5GvkrTWFyE2VXvpsTcPx0h/SafTKp5lqA2W+yRb//ws=
-X-Received: by 2002:a17:906:1c7:b0:99b:22dd:f83d with SMTP id
- 7-20020a17090601c700b0099b22ddf83dmr3797948ejj.55.1691217829572; Fri, 04 Aug
- 2023 23:43:49 -0700 (PDT)
+        with ESMTP id S229479AbjHEHVh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 5 Aug 2023 03:21:37 -0400
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1107C4EC4;
+        Sat,  5 Aug 2023 00:21:35 -0700 (PDT)
+Received: from ip4d148da6.dynamic.kabel-deutschland.de ([77.20.141.166] helo=truhe.fritz.box); authenticated
+        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        id 1qSBbS-0002p2-Cx; Sat, 05 Aug 2023 09:21:34 +0200
+From:   Thorsten Leemhuis <linux@leemhuis.info>
+To:     Greg KH <gregkh@linuxfoundation.org>, stable@vger.kernel.org
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v1 0/5] docs: stable-kernel-rules: improve structure and a few tweaks
+Date:   Sat,  5 Aug 2023 09:21:28 +0200
+Message-Id: <cover.1691219455.git.linux@leemhuis.info>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Received: by 2002:a05:7412:6629:b0:df:940:19b1 with HTTP; Fri, 4 Aug 2023
- 23:43:49 -0700 (PDT)
-Reply-To: bintu37999@gmail.com
-From:   Bintu Felicia <bimmtu@gmail.com>
-Date:   Sat, 5 Aug 2023 07:43:49 +0100
-Message-ID: <CAAF5Ruxz2Ewx0JS8DadqixYJ1dMiUNHqMW7dT=ZCAgF3-FRb0w@mail.gmail.com>
-Subject: HELLO...,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.5 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Transfer-Encoding: 8bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1691220096;232e9b6a;
+X-HE-SMSGID: 1qSBbS-0002p2-Cx
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-How are you today? I hope you are fine. My name is Miss
-Bintu Felicia . l am single looking for honest and nice
-person whom i can partner with . I don't care about
-your color, ethnicity, Status or Sex. Upon your reply to
-this mail I will tell you more about myself and send you
-more of my picture .I am sending you this beautiful mail
-with a wish for much happiness
+When adding something to this document earlier I noticed that readers
+need to perform some back and forth to fully understand things; I also
+noticed a few other aspects that seemed somewhat odd for me with my
+background on writing and editing texts.
+
+Find attached a few patches to improve things. The first three are
+mainly moving text around to a structure which is somewhat clearer. They
+leave quite a few rough edges behind that are fixed in in the last patch
+of the series, which changes a few other changes as well; thx to the
+prep patches the diff should be relative straight-forward to understand.
+
+These patches are on-top of the following series that currently is in the 
+driver-core-testing branch:
+https://lore.kernel.org/all/cover.1689056247.git.linux@leemhuis.info/
+
+Ciao, Thorsten
+
+v1:
+* new patch-set based on patch 3/3 and other feedback to the following
+  patchset[1], but slit off into a seperate set with four distinct
+  patches to make it easier to see what is actually changed
+  https://lore.kernel.org/linux-doc/d30686781c47c83927e0a41f6a1167a679fa822c.1689008220.git.linux@leemhuis.info/
+* append one more patch for something that came up
+
+Thorsten Leemhuis (5):
+  docs: stable-kernel-rules: improve structure by changing headlines
+  docs: stable-kernel-rules: move text around to improve flow
+  docs: stable-kernel-rules: make the examples for option 1 a proper
+    list
+  docs: stable-kernel-rules: fine-tune various details
+  docs: stable-kernel-rules: mention that regressions must be prevented
+
+ Documentation/process/stable-kernel-rules.rst | 165 ++++++++++--------
+ 1 file changed, 91 insertions(+), 74 deletions(-)
+
+
+base-commit: 016571b6d52deb473676fb4d24baf8ed3667ae21
+prerequisite-patch-id: b00970f680f3032fe8a7d0e3843b76d60c2f0458
+prerequisite-patch-id: 9926a13726e99d51800f52cb84e26ae971757467
+-- 
+2.40.1
+
