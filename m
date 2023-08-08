@@ -2,103 +2,85 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id ED679774BF8
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Aug 2023 23:01:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0EFE9774D8D
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Aug 2023 23:59:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234273AbjHHVBp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Aug 2023 17:01:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41418 "EHLO
+        id S230117AbjHHV7l (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Aug 2023 17:59:41 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59790 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234589AbjHHVBa (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Aug 2023 17:01:30 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 43FC961B6;
-        Tue,  8 Aug 2023 14:00:54 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id E6946734;
-        Tue,  8 Aug 2023 21:00:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net E6946734
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1691528453; bh=4qu8DsXzJEWOLf19QHJhbRU0BX8VweH67rlHSUdngy4=;
-        h=From:To:Cc:Subject:Date:From;
-        b=qWQRZcnXARK7vKJq0hckl7/qctvnNRDtj5Vuo2plijP/oO1fJar9sxFJpsgzYrNw8
-         ZKhQ9eylUYp4O+x9io7rUec8LV7rjswGY/xsXUz4dVe7z+RSfBFAv+J4pePoqY6f7c
-         61lmIyWKdlZPjH3YGEvJsUSgXxefmvgETPnxxgoCvJV6fLWJCSG9XfbieY96yzTD/A
-         MK33IDRb7nLKy8ZPq0XAIgrGRnQuYrEFixtQ+jtK7K0guOO7AfGNyAs1DgB0Q3xxNj
-         uy80GQWtQiFUT57HVARx4S+63h+omQPhNwFzoMLOZrJbsh4P/MhK2TMZnV7kC+GdIB
-         5mlh3x6EVmtZQ==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Linus Torvalds <torvalds@linux-foundation.org>,
-        Christian Brauner <brauner@kernel.org>
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: [PATCH] docs: vfs: clean up after the iterate() removal
-Date:   Tue, 08 Aug 2023 15:00:52 -0600
-Message-ID: <874jl945bv.fsf@meer.lwn.net>
+        with ESMTP id S229737AbjHHV7k (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Aug 2023 17:59:40 -0400
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com [IPv6:2a00:1450:4864:20::633])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CFCFAE72
+        for <linux-doc@vger.kernel.org>; Tue,  8 Aug 2023 14:59:39 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id a640c23a62f3a-99cce6f7de2so445904266b.3
+        for <linux-doc@vger.kernel.org>; Tue, 08 Aug 2023 14:59:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linux-foundation.org; s=google; t=1691531978; x=1692136778;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=9vjVFfWFImhbbV+PvD1bDCoF45rIONe5KGNnouWDJ7A=;
+        b=VPeoi0aK0FbUNYIS4YhPmyNq1Ylc3RUKJ/XvDTbL16kpHv2dYA5Xba3ITMXv+tObCt
+         29+LnjVzEKb+A7Ldz1LI0DHOuDV89LEQIZETqkPtqTA1RMhcyTT1F/ZfHtSd2XCPmV3s
+         pqJ4txZx3XcR9e6yuaw16KEpNXJcz1kZFvipo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1691531978; x=1692136778;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=9vjVFfWFImhbbV+PvD1bDCoF45rIONe5KGNnouWDJ7A=;
+        b=ON4SLXxCSmoHhHDuvJMd+aTWOL+SG61d6j5brQxZC1O9DX0et/7oZzf39eXZnBKqhe
+         oUhKJwnELdQrwY3ZUumxwiPo4SxvWfqzVrpISdg76pw9x3j6QfwbJV3IjQcCj4fyiTFk
+         hOzae236w8QdzdxJQKJZ3tOPQeC0qI5OJAysrkl0BtSyfJcJoSI7O+6RwUO6rL7J24IB
+         CVPB7V/SG12nhwklZFfnat5dO4ALbQWVk+OrO8X/x5nupMZ2GcRX/vVwuYEX4LXR65eO
+         wJRyGLnWJXy10hiR8gVKMwde1eVPDakExzw2cFiNYdT3kj+XuUlsgx11vg1sJJSE4Ad1
+         Do8A==
+X-Gm-Message-State: AOJu0Yx/t/a5tswyQfnIfJUtxVbp6Z3TNTgsOeSdyppyG4LIwO/nSvVu
+        Rpu6RWcZyO9Lf5TqPqNrJs85HIzzkTvU2cQc+nDgvmoK
+X-Google-Smtp-Source: AGHT+IGlAiJnf9CS98iTCrGq4zlkVJ3I9XGrP6gwaBW7YCksCFW1rZrKMhRl+5b3OQZlRtMyVEiMHw==
+X-Received: by 2002:a17:906:3091:b0:99c:56d1:1266 with SMTP id 17-20020a170906309100b0099c56d11266mr741270ejv.72.1691531978327;
+        Tue, 08 Aug 2023 14:59:38 -0700 (PDT)
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com. [209.85.218.43])
+        by smtp.gmail.com with ESMTPSA id kd5-20020a17090798c500b0099d0a8ccb5fsm144159ejc.152.2023.08.08.14.59.37
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 08 Aug 2023 14:59:37 -0700 (PDT)
+Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-99c47ef365cso910563466b.0
+        for <linux-doc@vger.kernel.org>; Tue, 08 Aug 2023 14:59:37 -0700 (PDT)
+X-Received: by 2002:a17:907:7629:b0:99c:75f7:19c1 with SMTP id
+ jy9-20020a170907762900b0099c75f719c1mr684831ejc.39.1691531976818; Tue, 08 Aug
+ 2023 14:59:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+References: <874jl945bv.fsf@meer.lwn.net>
+In-Reply-To: <874jl945bv.fsf@meer.lwn.net>
+From:   Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Tue, 8 Aug 2023 14:59:20 -0700
+X-Gmail-Original-Message-ID: <CAHk-=wipcJKtWRtBHDDjRx7UXyZAD2eswjCiD19tuz+XwjUxhQ@mail.gmail.com>
+Message-ID: <CAHk-=wipcJKtWRtBHDDjRx7UXyZAD2eswjCiD19tuz+XwjUxhQ@mail.gmail.com>
+Subject: Re: [PATCH] docs: vfs: clean up after the iterate() removal
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Christian Brauner <brauner@kernel.org>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Commit 3e3271549670 ("vfs: get rid of old '->iterate' directory operation")
-removed the iterate() file_operations member, but neglected to clean up the
-associated documentation.  Get rid of the leftovers.
+On Tue, 8 Aug 2023 at 14:00, Jonathan Corbet <corbet@lwn.net> wrote:
+>
+> If nobody objects (or beats me to it) I'll drop this into docs-next
+> shortly.
 
-Signed-off-by: Jonathan Corbet <corbet@lwn.net>
----
-If nobody objects (or beats me to it) I'll drop this into docs-next
-shortly.
+LGTM.
 
- Documentation/filesystems/locking.rst | 1 -
- Documentation/filesystems/vfs.rst     | 7 +------
- 2 files changed, 1 insertion(+), 7 deletions(-)
+I did grep for old uses of iterate - including in docs - but I clearly
+only grepped for the "->iterate()" and ".iterate =" forms.
 
-diff --git a/Documentation/filesystems/locking.rst b/Documentation/filesystems/locking.rst
-index 0ca479dbb1cd..aeed0a5a80eb 100644
---- a/Documentation/filesystems/locking.rst
-+++ b/Documentation/filesystems/locking.rst
-@@ -509,7 +509,6 @@ prototypes::
- 	ssize_t (*read_iter) (struct kiocb *, struct iov_iter *);
- 	ssize_t (*write_iter) (struct kiocb *, struct iov_iter *);
- 	int (*iopoll) (struct kiocb *kiocb, bool spin);
--	int (*iterate) (struct file *, struct dir_context *);
- 	int (*iterate_shared) (struct file *, struct dir_context *);
- 	__poll_t (*poll) (struct file *, struct poll_table_struct *);
- 	long (*unlocked_ioctl) (struct file *, unsigned int, unsigned long);
-diff --git a/Documentation/filesystems/vfs.rst b/Documentation/filesystems/vfs.rst
-index cb2a97e49872..a751f6d01eb2 100644
---- a/Documentation/filesystems/vfs.rst
-+++ b/Documentation/filesystems/vfs.rst
-@@ -1074,7 +1074,6 @@ This describes how the VFS can manipulate an open file.  As of kernel
- 		ssize_t (*read_iter) (struct kiocb *, struct iov_iter *);
- 		ssize_t (*write_iter) (struct kiocb *, struct iov_iter *);
- 		int (*iopoll)(struct kiocb *kiocb, bool spin);
--		int (*iterate) (struct file *, struct dir_context *);
- 		int (*iterate_shared) (struct file *, struct dir_context *);
- 		__poll_t (*poll) (struct file *, struct poll_table_struct *);
- 		long (*unlocked_ioctl) (struct file *, unsigned int, unsigned long);
-@@ -1126,12 +1125,8 @@ otherwise noted.
- ``iopoll``
- 	called when aio wants to poll for completions on HIPRI iocbs
- 
--``iterate``
--	called when the VFS needs to read the directory contents
--
- ``iterate_shared``
--	called when the VFS needs to read the directory contents when
--	filesystem supports concurrent dir iterators
-+	called when the VFS needs to read the directory contents
- 
- ``poll``
- 	called by the VFS when a process wants to check if there is
--- 
-2.41.0
-
+            Linus
