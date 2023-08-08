@@ -2,138 +2,145 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 82151773FD7
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Aug 2023 18:54:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EBD93774363
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Aug 2023 20:03:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233653AbjHHQyS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Aug 2023 12:54:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35706 "EHLO
+        id S233238AbjHHSDM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Aug 2023 14:03:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41384 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233654AbjHHQxq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Aug 2023 12:53:46 -0400
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7DBAB4FB0E;
-        Tue,  8 Aug 2023 08:58:48 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2a01:e0a:2c:6930:5cf4:84a1:2763:fe0d])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-        (No client certificate requested)
-        (Authenticated sender: bbrezillon)
-        by madras.collabora.co.uk (Postfix) with ESMTPSA id ADBD066071E9;
-        Tue,  8 Aug 2023 08:21:20 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-        s=mail; t=1691479281;
-        bh=UXRcgMncZj39YeKfwT0rE7PfhMSJQ8L3/sbxhBni15s=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=NK7ESBq/vynUZ0Aazs9Dv3B48dz4zwMylbAeXJWVjgbX0SRVb4XVKHmOK689nJcsI
-         940GrX/OyXYwglHIez6BsuJ5SnoypyDdhvMlC2dh48xqc5re0LuN0wGfHbaZu7yjPw
-         ihmKR3w23weg0AxJVQWy/DWUzflpbA+9m4O40mHmqts6OB7F45jYaok7FmOlO6nfGK
-         Tvd8zy79/WYRbfuW2OXi7nNEf15+GwtJLaA96nzjdh7VWWlo1DZgC2A17iqiEiWYMP
-         9Xwp9XM2n/jZgg/P/NiZ4YaVImnQoV7VHCDvuGCqKp5cnDSEr2bq3xsXFSnIGHnAx8
-         kMbkoFMYZdQ7g==
-Date:   Tue, 8 Aug 2023 09:21:17 +0200
-From:   Boris Brezillon <boris.brezillon@collabora.com>
-To:     Danilo Krummrich <dakr@redhat.com>
-Cc:     airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
-        mripard@kernel.org, corbet@lwn.net, christian.koenig@amd.com,
-        bskeggs@redhat.com, Liam.Howlett@oracle.com,
-        matthew.brost@intel.com, alexdeucher@gmail.com, ogabbay@kernel.org,
-        bagasdotme@gmail.com, willy@infradead.org, jason@jlekstrand.net,
-        donald.robson@imgtec.com, dri-devel@lists.freedesktop.org,
-        nouveau@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH drm-misc-next v9 01/11] drm/gem: fix lockdep check for
- dma-resv lock
-Message-ID: <20230808092117.7f7fdef9@collabora.com>
-In-Reply-To: <20230803165238.8798-2-dakr@redhat.com>
-References: <20230803165238.8798-1-dakr@redhat.com>
-        <20230803165238.8798-2-dakr@redhat.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-redhat-linux-gnu)
+        with ESMTP id S229643AbjHHSDJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Aug 2023 14:03:09 -0400
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 9C2E43CD27;
+        Tue,  8 Aug 2023 09:41:48 -0700 (PDT)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F1331D75;
+        Tue,  8 Aug 2023 00:46:25 -0700 (PDT)
+Received: from a077893.blr.arm.com (unknown [10.162.40.16])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D96723F6C4;
+        Tue,  8 Aug 2023 00:45:39 -0700 (PDT)
+From:   Anshuman Khandual <anshuman.khandual@arm.com>
+To:     linux-arm-kernel@lists.infradead.org
+Cc:     Al.Grant@arm.com, Anshuman Khandual <anshuman.khandual@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Mike Leach <mike.leach@linaro.org>,
+        James Clark <james.clark@arm.com>,
+        Leo Yan <leo.yan@linaro.org>, coresight@lists.linaro.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] coresight: etm: Make cycle count threshold user configurable
+Date:   Tue,  8 Aug 2023 13:15:33 +0530
+Message-Id: <20230808074533.380537-1-anshuman.khandual@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu,  3 Aug 2023 18:52:20 +0200
-Danilo Krummrich <dakr@redhat.com> wrote:
+Cycle counting is enabled, when requested and supported but with a default
+threshold value ETM_CYC_THRESHOLD_DEFAULT i.e 0x100 getting into TRCCCCTLR,
+representing the minimum interval between cycle count trace packets.
 
-> When no custom lock is set to protect a GEMs GPUVA list, lockdep checks
-> should fall back to the GEM objects dma-resv lock. With the current
-> implementation we're setting the lock_dep_map of the GEM objects 'resv'
-> pointer (in case no custom lock_dep_map is set yet) on
-> drm_gem_private_object_init().
-> 
-> However, the GEM objects 'resv' pointer might still change after
-> drm_gem_private_object_init() is called, e.g. through
-> ttm_bo_init_reserved(). This can result in the wrong lock being tracked.
-> 
-> To fix this, call dma_resv_held() directly from
-> drm_gem_gpuva_assert_lock_held() and fall back to the GEMs lock_dep_map
-> pointer only if an actual custom lock is set.
-> 
-> Fixes: e6303f323b1a ("drm: manager to keep track of GPUs VA mappings")
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+This makes cycle threshold user configurable, from the user space via perf
+event attributes. Although it falls back using ETM_CYC_THRESHOLD_DEFAULT,
+in case no explicit request. As expected it creates a sysfs file as well.
 
-Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
+/sys/bus/event_source/devices/cs_etm/format/cc_threshold
 
-but I'm wondering if it wouldn't be a good thing to add a
-drm_gem_set_resv() helper, so the core can control drm_gem_object::resv
-re-assignments (block them if it's happening after the GEM has been
-exposed to the outside world or update auxiliary data if it's happening
-before that).
+New 'cc_threshold' uses 'event->attr.config3' as no more space is available
+in 'event->attr.config1' or 'event->attr.config2'.
 
-> ---
->  include/drm/drm_gem.h | 15 +++++++++------
->  1 file changed, 9 insertions(+), 6 deletions(-)
-> 
-> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-> index c0b13c43b459..bc9f6aa2f3fe 100644
-> --- a/include/drm/drm_gem.h
-> +++ b/include/drm/drm_gem.h
-> @@ -551,15 +551,17 @@ int drm_gem_evict(struct drm_gem_object *obj);
->   * @lock: the lock used to protect the gpuva list. The locking primitive
->   * must contain a dep_map field.
->   *
-> - * Call this if you're not proctecting access to the gpuva list
-> - * with the dma-resv lock, otherwise, drm_gem_gpuva_init() takes care
-> - * of initializing lock_dep_map for you.
-> + * Call this if you're not proctecting access to the gpuva list with the
-> + * dma-resv lock, but with a custom lock.
->   */
->  #define drm_gem_gpuva_set_lock(obj, lock) \
-> -	if (!(obj)->gpuva.lock_dep_map) \
-> +	if (!WARN((obj)->gpuva.lock_dep_map, \
-> +		  "GEM GPUVA lock should be set only once.")) \
->  		(obj)->gpuva.lock_dep_map = &(lock)->dep_map
->  #define drm_gem_gpuva_assert_lock_held(obj) \
-> -	lockdep_assert(lock_is_held((obj)->gpuva.lock_dep_map))
-> +	lockdep_assert((obj)->gpuva.lock_dep_map ? \
-> +		       lock_is_held((obj)->gpuva.lock_dep_map) : \
-> +		       dma_resv_held((obj)->resv))
->  #else
->  #define drm_gem_gpuva_set_lock(obj, lock) do {} while (0)
->  #define drm_gem_gpuva_assert_lock_held(obj) do {} while (0)
-> @@ -573,11 +575,12 @@ int drm_gem_evict(struct drm_gem_object *obj);
->   *
->   * Calling this function is only necessary for drivers intending to support the
->   * &drm_driver_feature DRIVER_GEM_GPUVA.
-> + *
-> + * See also drm_gem_gpuva_set_lock().
->   */
->  static inline void drm_gem_gpuva_init(struct drm_gem_object *obj)
->  {
->  	INIT_LIST_HEAD(&obj->gpuva.list);
-> -	drm_gem_gpuva_set_lock(obj, &obj->resv->lock.base);
->  }
->  
->  /**
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com>
+Cc: Mike Leach <mike.leach@linaro.org>
+Cc: James Clark <james.clark@arm.com>
+Cc: Leo Yan <leo.yan@linaro.org>
+Cc: coresight@lists.linaro.org
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
+---
+Changes in V2:
+
+- s/treshhold/threshhold
+
+Changes in V1:
+
+https://lore.kernel.org/all/20230804044720.1478900-1-anshuman.khandual@arm.com/
+
+ Documentation/trace/coresight/coresight.rst        |  2 ++
+ drivers/hwtracing/coresight/coresight-etm-perf.c   |  2 ++
+ drivers/hwtracing/coresight/coresight-etm4x-core.c | 12 ++++++++++--
+ 3 files changed, 14 insertions(+), 2 deletions(-)
+
+diff --git a/Documentation/trace/coresight/coresight.rst b/Documentation/trace/coresight/coresight.rst
+index 4a71ea6cb390..a698b07206b5 100644
+--- a/Documentation/trace/coresight/coresight.rst
++++ b/Documentation/trace/coresight/coresight.rst
+@@ -624,6 +624,8 @@ They are also listed in the folder /sys/bus/event_source/devices/cs_etm/format/
+    * - timestamp
+      - Session local version of the system wide setting: :ref:`ETMv4_MODE_TIMESTAMP
+        <coresight-timestamp>`
++   * - cc_threshold
++     - Cycle count threshold value
+ 
+ How to use the STM module
+ -------------------------
+diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.c b/drivers/hwtracing/coresight/coresight-etm-perf.c
+index 5ca6278baff4..09f75dffae60 100644
+--- a/drivers/hwtracing/coresight/coresight-etm-perf.c
++++ b/drivers/hwtracing/coresight/coresight-etm-perf.c
+@@ -68,6 +68,7 @@ PMU_FORMAT_ATTR(preset,		"config:0-3");
+ PMU_FORMAT_ATTR(sinkid,		"config2:0-31");
+ /* config ID - set if a system configuration is selected */
+ PMU_FORMAT_ATTR(configid,	"config2:32-63");
++PMU_FORMAT_ATTR(cc_threshold,	"config3:0-11");
+ 
+ 
+ /*
+@@ -101,6 +102,7 @@ static struct attribute *etm_config_formats_attr[] = {
+ 	&format_attr_preset.attr,
+ 	&format_attr_configid.attr,
+ 	&format_attr_branch_broadcast.attr,
++	&format_attr_cc_threshold.attr,
+ 	NULL,
+ };
+ 
+diff --git a/drivers/hwtracing/coresight/coresight-etm4x-core.c b/drivers/hwtracing/coresight/coresight-etm4x-core.c
+index 9d186af81ea0..a353c0784bab 100644
+--- a/drivers/hwtracing/coresight/coresight-etm4x-core.c
++++ b/drivers/hwtracing/coresight/coresight-etm4x-core.c
+@@ -644,7 +644,7 @@ static int etm4_parse_event_config(struct coresight_device *csdev,
+ 	struct etmv4_config *config = &drvdata->config;
+ 	struct perf_event_attr *attr = &event->attr;
+ 	unsigned long cfg_hash;
+-	int preset;
++	int preset, cc_threshold;
+ 
+ 	/* Clear configuration from previous run */
+ 	memset(config, 0, sizeof(struct etmv4_config));
+@@ -667,7 +667,15 @@ static int etm4_parse_event_config(struct coresight_device *csdev,
+ 	if (attr->config & BIT(ETM_OPT_CYCACC)) {
+ 		config->cfg |= TRCCONFIGR_CCI;
+ 		/* TRM: Must program this for cycacc to work */
+-		config->ccctlr = ETM_CYC_THRESHOLD_DEFAULT;
++		cc_threshold = attr->config3 & ETM_CYC_THRESHOLD_MASK;
++		if (cc_threshold) {
++			if (cc_threshold < drvdata->ccitmin)
++				config->ccctlr = drvdata->ccitmin;
++			else
++				config->ccctlr = cc_threshold;
++		} else {
++			config->ccctlr = ETM_CYC_THRESHOLD_DEFAULT;
++		}
+ 	}
+ 	if (attr->config & BIT(ETM_OPT_TS)) {
+ 		/*
+-- 
+2.25.1
 
