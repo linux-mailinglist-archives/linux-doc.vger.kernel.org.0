@@ -2,145 +2,134 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EBD93774363
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Aug 2023 20:03:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A38AD773E65
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Aug 2023 18:30:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233238AbjHHSDM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Aug 2023 14:03:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41384 "EHLO
+        id S232758AbjHHQaE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Aug 2023 12:30:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46794 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229643AbjHHSDJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Aug 2023 14:03:09 -0400
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 9C2E43CD27;
-        Tue,  8 Aug 2023 09:41:48 -0700 (PDT)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F1331D75;
-        Tue,  8 Aug 2023 00:46:25 -0700 (PDT)
-Received: from a077893.blr.arm.com (unknown [10.162.40.16])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D96723F6C4;
-        Tue,  8 Aug 2023 00:45:39 -0700 (PDT)
-From:   Anshuman Khandual <anshuman.khandual@arm.com>
-To:     linux-arm-kernel@lists.infradead.org
-Cc:     Al.Grant@arm.com, Anshuman Khandual <anshuman.khandual@arm.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        Mike Leach <mike.leach@linaro.org>,
-        James Clark <james.clark@arm.com>,
-        Leo Yan <leo.yan@linaro.org>, coresight@lists.linaro.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] coresight: etm: Make cycle count threshold user configurable
-Date:   Tue,  8 Aug 2023 13:15:33 +0530
-Message-Id: <20230808074533.380537-1-anshuman.khandual@arm.com>
-X-Mailer: git-send-email 2.25.1
+        with ESMTP id S232772AbjHHQ2z (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Aug 2023 12:28:55 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3762812538;
+        Tue,  8 Aug 2023 08:51:10 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 9D43F62461;
+        Tue,  8 Aug 2023 08:41:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8003EC433C8;
+        Tue,  8 Aug 2023 08:41:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1691484113;
+        bh=RmuHI6SnVuFMKUQ2d0Pd88TnzEPcPc2NGqkjG7ikYO4=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=cwr+yMbUV+NM94lVf0ySZk4FQ2nozF+U9wyhfVylYCpXbt1OL0ssrTMJwXSxsdsHi
+         18rTqTqxxueHW+nMM+ermi6IQknqO8+usQdaIiyi1h1tiB82F262sqvPDUGDacSDkO
+         a+eTTnFx91yf6zmVoeagFEWEQ3lln0JhVGRC83P65FbUnGAKxwHLFQyg6fLOXTTdZn
+         A1EoGEKnrrv1NvaNJ3siqRI5n1/LCn3oUKEUABC06gGoEHMihEoitC1g2km+U7SlBq
+         HDlEJ7VYY0XrzBN2J0H3HcQA4IRPSXjHrlCgv6J3k9J5QInU+H7jleqW4Lu80DSrip
+         ExqC2/GRUi8eA==
+Date:   Tue, 8 Aug 2023 09:41:45 +0100
+From:   Conor Dooley <conor@kernel.org>
+To:     Sunil V L <sunilvl@ventanamicro.com>
+Cc:     linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
+        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-acpi@vger.kernel.org, linux-pci@vger.kernel.org,
+        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Atish Kumar Patra <atishp@rivosinc.com>,
+        Conor Dooley <conor.dooley@microchip.com>,
+        Will Deacon <will@kernel.org>, Haibo Xu <haibo1.xu@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Marc Zyngier <maz@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Robert Moore <robert.moore@intel.com>,
+        Andrew Jones <ajones@ventanamicro.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Daniel Scally <djrscally@gmail.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Sakari Ailus <sakari.ailus@linux.intel.com>,
+        Anup Patel <anup@brainfault.org>, Len Brown <lenb@kernel.org>
+Subject: Re: [RFC PATCH v1 20/21] RISC-V: ACPI: Create PLIC platform device
+Message-ID: <20230808-chalice-easing-1369c7386082@spud>
+References: <20230803175916.3174453-1-sunilvl@ventanamicro.com>
+ <20230803175916.3174453-21-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="yKOyY2Nm+bU0Ajrr"
+Content-Disposition: inline
+In-Reply-To: <20230803175916.3174453-21-sunilvl@ventanamicro.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Cycle counting is enabled, when requested and supported but with a default
-threshold value ETM_CYC_THRESHOLD_DEFAULT i.e 0x100 getting into TRCCCCTLR,
-representing the minimum interval between cycle count trace packets.
 
-This makes cycle threshold user configurable, from the user space via perf
-event attributes. Although it falls back using ETM_CYC_THRESHOLD_DEFAULT,
-in case no explicit request. As expected it creates a sysfs file as well.
+--yKOyY2Nm+bU0Ajrr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-/sys/bus/event_source/devices/cs_etm/format/cc_threshold
+On Thu, Aug 03, 2023 at 11:29:15PM +0530, Sunil V L wrote:
+> Since PLIC needs to be a platform device
 
-New 'cc_threshold' uses 'event->attr.config3' as no more space is available
-in 'event->attr.config1' or 'event->attr.config2'.
+For the unwashed, why does the PLCI need to be a platform device?
+(And while you're at that, please try to make use of the extra ~20
+characters per line that you can use here.)
 
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>
-Cc: Mike Leach <mike.leach@linaro.org>
-Cc: James Clark <james.clark@arm.com>
-Cc: Leo Yan <leo.yan@linaro.org>
-Cc: coresight@lists.linaro.org
-Cc: linux-arm-kernel@lists.infradead.org
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
----
-Changes in V2:
+> probe the
+> MADT and create platform devices for each PLIC in the
+> system. Use software node framework for the fwnode
+> which allows to create properties and hence the
+> actual irqchip driver doesn't need to do anything
+> different for ACPI vs DT.
+>=20
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Co-developed-by: Haibo Xu <haibo1.xu@intel.com>
+> Signed-off-by: Haibo Xu <haibo1.xu@intel.com>
 
-- s/treshhold/threshhold
+> +static struct fwnode_handle *acpi_plic_create_fwnode(struct acpi_madt_pl=
+ic *plic)
+> +{
+> +	struct fwnode_handle *fwnode, *parent_fwnode;
+> +	struct riscv_irqchip_list *plic_element;
+> +	struct software_node_ref_args *refs;
+> +	struct property_entry props[8] =3D {};
+> +	int nr_contexts;
+> +
+> +	props[0] =3D PROPERTY_ENTRY_U32("riscv,gsi-base", plic->gsi_base);
+> +	props[1] =3D PROPERTY_ENTRY_U32("riscv,ndev", plic->num_irqs);
+> +	props[2] =3D PROPERTY_ENTRY_U32("riscv,max_prio", plic->max_prio);
 
-Changes in V1:
+My OCD wants to know why this gets an _ but the others have a -.
 
-https://lore.kernel.org/all/20230804044720.1478900-1-anshuman.khandual@arm.com/
+> +	props[3] =3D PROPERTY_ENTRY_U8("riscv,plic-id", plic->id);
+> +	props[4] =3D PROPERTY_ENTRY_U64("riscv,plic-base", plic->base_addr);
+> +	props[5] =3D PROPERTY_ENTRY_U32("riscv,plic-size", plic->size);
 
- Documentation/trace/coresight/coresight.rst        |  2 ++
- drivers/hwtracing/coresight/coresight-etm-perf.c   |  2 ++
- drivers/hwtracing/coresight/coresight-etm4x-core.c | 12 ++++++++++--
- 3 files changed, 14 insertions(+), 2 deletions(-)
+--yKOyY2Nm+bU0Ajrr
+Content-Type: application/pgp-signature; name="signature.asc"
 
-diff --git a/Documentation/trace/coresight/coresight.rst b/Documentation/trace/coresight/coresight.rst
-index 4a71ea6cb390..a698b07206b5 100644
---- a/Documentation/trace/coresight/coresight.rst
-+++ b/Documentation/trace/coresight/coresight.rst
-@@ -624,6 +624,8 @@ They are also listed in the folder /sys/bus/event_source/devices/cs_etm/format/
-    * - timestamp
-      - Session local version of the system wide setting: :ref:`ETMv4_MODE_TIMESTAMP
-        <coresight-timestamp>`
-+   * - cc_threshold
-+     - Cycle count threshold value
- 
- How to use the STM module
- -------------------------
-diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.c b/drivers/hwtracing/coresight/coresight-etm-perf.c
-index 5ca6278baff4..09f75dffae60 100644
---- a/drivers/hwtracing/coresight/coresight-etm-perf.c
-+++ b/drivers/hwtracing/coresight/coresight-etm-perf.c
-@@ -68,6 +68,7 @@ PMU_FORMAT_ATTR(preset,		"config:0-3");
- PMU_FORMAT_ATTR(sinkid,		"config2:0-31");
- /* config ID - set if a system configuration is selected */
- PMU_FORMAT_ATTR(configid,	"config2:32-63");
-+PMU_FORMAT_ATTR(cc_threshold,	"config3:0-11");
- 
- 
- /*
-@@ -101,6 +102,7 @@ static struct attribute *etm_config_formats_attr[] = {
- 	&format_attr_preset.attr,
- 	&format_attr_configid.attr,
- 	&format_attr_branch_broadcast.attr,
-+	&format_attr_cc_threshold.attr,
- 	NULL,
- };
- 
-diff --git a/drivers/hwtracing/coresight/coresight-etm4x-core.c b/drivers/hwtracing/coresight/coresight-etm4x-core.c
-index 9d186af81ea0..a353c0784bab 100644
---- a/drivers/hwtracing/coresight/coresight-etm4x-core.c
-+++ b/drivers/hwtracing/coresight/coresight-etm4x-core.c
-@@ -644,7 +644,7 @@ static int etm4_parse_event_config(struct coresight_device *csdev,
- 	struct etmv4_config *config = &drvdata->config;
- 	struct perf_event_attr *attr = &event->attr;
- 	unsigned long cfg_hash;
--	int preset;
-+	int preset, cc_threshold;
- 
- 	/* Clear configuration from previous run */
- 	memset(config, 0, sizeof(struct etmv4_config));
-@@ -667,7 +667,15 @@ static int etm4_parse_event_config(struct coresight_device *csdev,
- 	if (attr->config & BIT(ETM_OPT_CYCACC)) {
- 		config->cfg |= TRCCONFIGR_CCI;
- 		/* TRM: Must program this for cycacc to work */
--		config->ccctlr = ETM_CYC_THRESHOLD_DEFAULT;
-+		cc_threshold = attr->config3 & ETM_CYC_THRESHOLD_MASK;
-+		if (cc_threshold) {
-+			if (cc_threshold < drvdata->ccitmin)
-+				config->ccctlr = drvdata->ccitmin;
-+			else
-+				config->ccctlr = cc_threshold;
-+		} else {
-+			config->ccctlr = ETM_CYC_THRESHOLD_DEFAULT;
-+		}
- 	}
- 	if (attr->config & BIT(ETM_OPT_TS)) {
- 		/*
--- 
-2.25.1
+-----BEGIN PGP SIGNATURE-----
 
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZNH/yQAKCRB4tDGHoIJi
+0o+oAQCMWQ+6bAgMjck+BSFaQF/FjtKfLfwDUTH+w218stePOwD8DiC9qCq9yuol
+xjAhVIcaeVplSIBN2+Ti/3cDd5sR5AE=
+=0Z4N
+-----END PGP SIGNATURE-----
+
+--yKOyY2Nm+bU0Ajrr--
