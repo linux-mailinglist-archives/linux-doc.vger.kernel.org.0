@@ -2,75 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 36358774286
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Aug 2023 19:46:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B0CD2773CC9
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Aug 2023 18:09:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234937AbjHHRq1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Aug 2023 13:46:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36464 "EHLO
+        id S232003AbjHHQJu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Aug 2023 12:09:50 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49160 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231605AbjHHRpi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Aug 2023 13:45:38 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6FFC325EEB;
-        Tue,  8 Aug 2023 09:20:44 -0700 (PDT)
+        with ESMTP id S231807AbjHHQHy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Aug 2023 12:07:54 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3048976A4;
+        Tue,  8 Aug 2023 08:46:14 -0700 (PDT)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
          key-exchange X25519 server-signature RSA-PSS (2048 bits))
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id F3A61624D6;
-        Tue,  8 Aug 2023 11:30:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B01BDC433C7;
-        Tue,  8 Aug 2023 11:30:05 +0000 (UTC)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 356A762557;
+        Tue,  8 Aug 2023 13:17:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8DE47C433C8;
+        Tue,  8 Aug 2023 13:17:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1691494211;
-        bh=vBWSlCDrZROxYuy5ae4tTgkUDzDtAMFgQOHc2MqMN00=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=MxQAHNSR+7FUjdWOuwilrrz5CHO2ObEjZl4fLBcr+LuMNcCNKtQAKcmtgTOIFV+Yh
-         7cu/EogbhTMQiiZ3g+syK5H83K28a+yereJhUBKnA4a/yOMRSjt3nLsKAHhlUvXYXr
-         htGC6od3JcJbQFmH5LiGxzAIRcVqG+ss/EdoPCxLbX1KOl4Sqdx8QNGbbZeNCDXOMi
-         IDR3emYO4U9d0hpj/LVopgLJRCXwtM1TvG6zIv47LavRbQnw6i8QGtabKCjXXlhWqN
-         1FbmPRagUR0jvtHILpvHSXizSC7kIt/kwtCj1gMpev209vnY2NFhuJbNneA3n1sJyO
-         ZFi+GGQOWIk9g==
-Date:   Tue, 8 Aug 2023 12:30:03 +0100
-From:   Conor Dooley <conor@kernel.org>
-To:     Anup Patel <apatel@ventanamicro.com>
-Cc:     Sunil V L <sunilvl@ventanamicro.com>, linux-doc@vger.kernel.org,
-        linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-acpi@vger.kernel.org,
-        linux-pci@vger.kernel.org,
-        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Atish Kumar Patra <atishp@rivosinc.com>,
-        Conor Dooley <conor.dooley@microchip.com>,
-        Will Deacon <will@kernel.org>, Haibo Xu <haibo1.xu@intel.com>,
+        s=k20201202; t=1691500645;
+        bh=bIdTKs+XJSSYo9nmEk8w4qlYxgAKUeHbpejGGCNfpP8=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=McPNo2lfEjaEdqKynfZ1K+aBmcZ4YYIeVte/2s2vh5nLPjsV4zK8sJIVfpxCc7crr
+         sDBGoRIO5LJCHaR77v68/J53DyRLx71gtm3zc1q1VOESQqBciSKl4OeFOBQVSPMd0S
+         +tBpc5vokh/WWYwp0KB/adwLXL4vh9T5H99097FN3ekyEWjRbxQlUhwtyYf+fLzfY+
+         NItyKZlA8+itKJ2p2ERAxkbIINwuG4v63bcdxovstp+yn724if/OpATk3O8McX4G8m
+         CB3X6UnRJxGyxAaSluC5CbBaGo5curysvokB2eW3Z97rh38FOsSdo5qHmeplImgc93
+         W5ZpsOrULl9RA==
+Received: from sofa.misterjones.org ([185.219.108.64] helo=goblin-girl.misterjones.org)
+        by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        (Exim 4.95)
+        (envelope-from <maz@kernel.org>)
+        id 1qTMaR-0038Tj-Bu;
+        Tue, 08 Aug 2023 14:17:23 +0100
+Date:   Tue, 08 Aug 2023 14:17:22 +0100
+Message-ID: <865y5phdwd.wl-maz@kernel.org>
+From:   Marc Zyngier <maz@kernel.org>
+To:     Sunil V L <sunilvl@ventanamicro.com>
+Cc:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
+        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-acpi@vger.kernel.org, linux-pci@vger.kernel.org,
         Jonathan Corbet <corbet@lwn.net>,
-        Marc Zyngier <maz@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@linaro.org>,
-        Robert Moore <robert.moore@intel.com>,
-        Andrew Jones <ajones@ventanamicro.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
         Paul Walmsley <paul.walmsley@sifive.com>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Daniel Scally <djrscally@gmail.com>,
         Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Len Brown <lenb@kernel.org>,
+        Daniel Scally <djrscally@gmail.com>,
+        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
         Sakari Ailus <sakari.ailus@linux.intel.com>,
-        Anup Patel <anup@brainfault.org>, Len Brown <lenb@kernel.org>
-Subject: Re: [RFC PATCH v1 20/21] RISC-V: ACPI: Create PLIC platform device
-Message-ID: <20230808-ferry-swarm-e2a0abb17165@spud>
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Anup Patel <anup@brainfault.org>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Robert Moore <robert.moore@intel.com>,
+        Haibo Xu <haibo1.xu@intel.com>,
+        Andrew Jones <ajones@ventanamicro.com>,
+        Conor Dooley <conor.dooley@microchip.com>,
+        Atish Kumar Patra <atishp@rivosinc.com>,
+        Anup Patel <apatel@ventanamicro.com>
+Subject: Re: [RFC PATCH v1 11/21] swnode: Add support to create early during boot
+In-Reply-To: <ZMyymUdV63g4eGaT@sunil-laptop>
 References: <20230803175916.3174453-1-sunilvl@ventanamicro.com>
- <20230803175916.3174453-21-sunilvl@ventanamicro.com>
- <20230808-chalice-easing-1369c7386082@spud>
- <CAK9=C2XZ7_tfSK6HNN1Em5fAHrknWBqGaD9gPL8yGs8AzE3vQg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="B+bG6e2jHgiFE7ir"
-Content-Disposition: inline
-In-Reply-To: <CAK9=C2XZ7_tfSK6HNN1Em5fAHrknWBqGaD9gPL8yGs8AzE3vQg@mail.gmail.com>
+        <20230803175916.3174453-12-sunilvl@ventanamicro.com>
+        <ZMyWDDD6Lw8REd1r@smile.fi.intel.com>
+        <ZMyymUdV63g4eGaT@sunil-laptop>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/28.2
+ (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: sunilvl@ventanamicro.com, andriy.shevchenko@linux.intel.com, linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-acpi@vger.kernel.org, linux-pci@vger.kernel.org, corbet@lwn.net, paul.walmsley@sifive.com, palmer@dabbelt.com, aou@eecs.berkeley.edu, catalin.marinas@arm.com, will@kernel.org, rafael@kernel.org, lenb@kernel.org, djrscally@gmail.com, heikki.krogerus@linux.intel.com, sakari.ailus@linux.intel.com, gregkh@linuxfoundation.org, daniel.lezcano@linaro.org, tglx@linutronix.de, anup@brainfault.org, bhelgaas@google.com, robert.moore@intel.com, haibo1.xu@intel.com, ajones@ventanamicro.com, conor.dooley@microchip.com, atishp@rivosinc.com, apatel@ventanamicro.com
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
         RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
@@ -81,81 +93,74 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Fri, 04 Aug 2023 09:11:05 +0100,
+Sunil V L <sunilvl@ventanamicro.com> wrote:
+> 
+> Hi Andy,
+> 
+> On Fri, Aug 04, 2023 at 09:09:16AM +0300, Andy Shevchenko wrote:
+> > On Thu, Aug 03, 2023 at 11:29:06PM +0530, Sunil V L wrote:
+> > > From: Anup Patel <apatel@ventanamicro.com>
+> > > 
+> > > swnode framework can be used to create fwnode for interrupt
+> > > controllers.
+> > 
+> > Why? What is this for?
+> > Can you elaborate? This commit message is poorly written...
+> > 
+> > And why firmware node is not enough for ACPI case?
+> > I assume the fwnode in DT case is already provided by OF.
+> > 
+> Thanks a lot for the review!.
+> 
+> You are right, OF provides the fwnode for irqchip drivers. However, for
+> ACPI case, it is typically created using irq_domain_alloc_named_fwnode
+> or irq_domain_alloc_fwnode since these are not ACPI devices in the
+> namespace but from MADT. The fwnode created using
+> irq_domain_alloc_fwnode() is a simple one which doesn't support properties
+> similar to the one created by OF framework or software node framework.
+> Hence, lot of data from the MADT structures need to be cached as
+> separate structures in the drivers and also would need several ifdefs to
+> check for ACPI and some amount of code duplication is also required due
+> to the way DT driver gets the information vs ACPI.
+> 
+> The beauty of software node framework is, it supports adding properties
+> and also is a supported fwnode type in __irq_domain_create().
 
---B+bG6e2jHgiFE7ir
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+There is no beauty here. Only some extra bloat that we do not need.
 
-On Tue, Aug 08, 2023 at 04:27:16PM +0530, Anup Patel wrote:
-> On Tue, Aug 8, 2023 at 2:12=E2=80=AFPM Conor Dooley <conor@kernel.org> wr=
-ote:
-> >
-> > On Thu, Aug 03, 2023 at 11:29:15PM +0530, Sunil V L wrote:
-> > > Since PLIC needs to be a platform device
-> >
-> > For the unwashed, why does the PLCI need to be a platform device?
-> > (And while you're at that, please try to make use of the extra ~20
-> > characters per line that you can use here.)
->=20
-> As suggested by Marc Z, only timers and IPIs need to be probed early.
-> Everything else needs to be a platform device. The devlink feature of
-> Linux DD framework ensures that platform devices are probed in the
-> right order based on the interdependency.
->=20
-> The PATCH5 of the v7 AIA series converts the PLIC driver into a
-> platform driver. This works perfectly fine.
+DT and ACPI exposes very different attributes. One describe the HW,
+the other one describe an OS abstraction. Pretending that you can
+summon both into the same infrastructure is a fallacy. You'll just end
+up with the cross product of both infrastructure, and pollute the rest
+of the kernel with pointless cruft.
 
-To be clear, I want the explanation of why the "PLIC needs to be a
-platform device" to be in the commit message.
+> So, if we
+> can create the fwnode for these irqchip using software node, we can
+> attach the same properties and the actual irqchip driver which uses the
+> fwnode doesn't need to have any ACPI vs DT checks. Same driver will work
+> seamlessly on both DT and ACPI platforms.  But the challenge is,
+> currently swnode expects to be created with sysfs which won't be
+> available during early boot when irqchip drivers need to be probed. So,
+> adding support to create without dependency on sysfs help us to reuse
+> the same framework for irqchip use case also.
 
-Thanks,
-Conor.
+That's another fallacy.
 
->=20
-> >
-> > > probe the
-> > > MADT and create platform devices for each PLIC in the
-> > > system. Use software node framework for the fwnode
-> > > which allows to create properties and hence the
-> > > actual irqchip driver doesn't need to do anything
-> > > different for ACPI vs DT.
-> > >
-> > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > > Co-developed-by: Haibo Xu <haibo1.xu@intel.com>
-> > > Signed-off-by: Haibo Xu <haibo1.xu@intel.com>
-> >
-> > > +static struct fwnode_handle *acpi_plic_create_fwnode(struct acpi_mad=
-t_plic *plic)
-> > > +{
-> > > +     struct fwnode_handle *fwnode, *parent_fwnode;
-> > > +     struct riscv_irqchip_list *plic_element;
-> > > +     struct software_node_ref_args *refs;
-> > > +     struct property_entry props[8] =3D {};
-> > > +     int nr_contexts;
-> > > +
-> > > +     props[0] =3D PROPERTY_ENTRY_U32("riscv,gsi-base", plic->gsi_bas=
-e);
-> > > +     props[1] =3D PROPERTY_ENTRY_U32("riscv,ndev", plic->num_irqs);
-> > > +     props[2] =3D PROPERTY_ENTRY_U32("riscv,max_prio", plic->max_pri=
-o);
-> >
-> > My OCD wants to know why this gets an _ but the others have a -.
-> >
-> > > +     props[3] =3D PROPERTY_ENTRY_U8("riscv,plic-id", plic->id);
-> > > +     props[4] =3D PROPERTY_ENTRY_U64("riscv,plic-base", plic->base_a=
-ddr);
-> > > +     props[5] =3D PROPERTY_ENTRY_U32("riscv,plic-size", plic->size);
+Most irqchips *DO NOT* need to be probed early. Only the root
+irqchip. Given that this series is about *secondary* interrupt
+controllers, they absolutely don't need to be probed early.
 
---B+bG6e2jHgiFE7ir
-Content-Type: application/pgp-signature; name="signature.asc"
+To be clear: I do not intend to merge anything that:
 
------BEGIN PGP SIGNATURE-----
+- invents yet another way to "abstract" firmware interfaces
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZNInOwAKCRB4tDGHoIJi
-0sLcAQCDXLAw71GxaGzz6Qp83L1Tb3sQIefjSzU544KRvPaIZwEA0NG4WpAU7bh9
-dP9hFr5cEYLKlf5xgRt76/vz3TmyhAM=
-=TeDA
------END PGP SIGNATURE-----
+- adds more "early probe" hacks for non-primary interrupt controllers
 
---B+bG6e2jHgiFE7ir--
+I have already said that in response to Anup's AIA series, and this
+equally applies to this series.
+
+	M.
+
+-- 
+Without deviation from the norm, progress is not possible.
