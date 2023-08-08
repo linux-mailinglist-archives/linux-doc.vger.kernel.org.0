@@ -2,82 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AE3A377404C
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Aug 2023 19:01:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 36358774286
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Aug 2023 19:46:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233971AbjHHRBl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Aug 2023 13:01:41 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49690 "EHLO
+        id S234937AbjHHRq1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Aug 2023 13:46:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36464 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233828AbjHHRBB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Aug 2023 13:01:01 -0400
+        with ESMTP id S231605AbjHHRpi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Aug 2023 13:45:38 -0400
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5A8768681;
-        Tue,  8 Aug 2023 09:00:45 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6FFC325EEB;
+        Tue,  8 Aug 2023 09:20:44 -0700 (PDT)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
          key-exchange X25519 server-signature RSA-PSS (2048 bits))
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 396B8624C2;
-        Tue,  8 Aug 2023 11:12:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 87B77C433C7;
-        Tue,  8 Aug 2023 11:12:09 +0000 (UTC)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id F3A61624D6;
+        Tue,  8 Aug 2023 11:30:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B01BDC433C7;
+        Tue,  8 Aug 2023 11:30:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1691493129;
-        bh=1QMm2qYYenzfqrS9JtfJhviMwybOhFCTNjTSNEl8Uq4=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=Pac1+sdY1mCBsPtQKAp6KfSZke3+ZBoIRZKAq4FOZYbRqr3J1FmN1eYHV24JD+vWP
-         8rXqfnrUS7PT+9ReDUlUeSB3dy8aNma2jcigPfN1Xc7fVYYRfv0ja/Ce83eULQnwpb
-         XViufpw39qsVaOpRvFR8jsCujgepLFVxZ+Su+ULX8NTvV/OGwHjSvwsrKjv5tERC+X
-         BmvFyy5T3jDSNAh6afNl3pVM3QRaYoA+s5iqziwsiQjlcxAHGyso1yzzbzqNGvIa3i
-         n77zRhws7zWBAx27h8GEQwAmQE0Ss/XkGz1YXHZuN2REA6IA8apT+hhHu6ElBm+Csk
-         hrRwlqbGY3yjw==
-Received: from [104.132.45.110] (helo=wait-a-minute.misterjones.org)
-        by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-        (Exim 4.95)
-        (envelope-from <maz@kernel.org>)
-        id 1qTKdC-00377i-VX;
-        Tue, 08 Aug 2023 12:12:07 +0100
-Date:   Tue, 08 Aug 2023 12:12:13 +0100
-Message-ID: <87y1ilpz3m.wl-maz@kernel.org>
-From:   Marc Zyngier <maz@kernel.org>
-To:     Anup Patel <anup@brainfault.org>
-Cc:     oliver.upton@linux.dev, xiaobo55x@gmail.com,
-        ajones@ventanamicro.com, seanjc@google.com,
-        Paolo Bonzini <pbonzini@redhat.com>,
+        s=k20201202; t=1691494211;
+        bh=vBWSlCDrZROxYuy5ae4tTgkUDzDtAMFgQOHc2MqMN00=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=MxQAHNSR+7FUjdWOuwilrrz5CHO2ObEjZl4fLBcr+LuMNcCNKtQAKcmtgTOIFV+Yh
+         7cu/EogbhTMQiiZ3g+syK5H83K28a+yereJhUBKnA4a/yOMRSjt3nLsKAHhlUvXYXr
+         htGC6od3JcJbQFmH5LiGxzAIRcVqG+ss/EdoPCxLbX1KOl4Sqdx8QNGbbZeNCDXOMi
+         IDR3emYO4U9d0hpj/LVopgLJRCXwtM1TvG6zIv47LavRbQnw6i8QGtabKCjXXlhWqN
+         1FbmPRagUR0jvtHILpvHSXizSC7kIt/kwtCj1gMpev209vnY2NFhuJbNneA3n1sJyO
+         ZFi+GGQOWIk9g==
+Date:   Tue, 8 Aug 2023 12:30:03 +0100
+From:   Conor Dooley <conor@kernel.org>
+To:     Anup Patel <apatel@ventanamicro.com>
+Cc:     Sunil V L <sunilvl@ventanamicro.com>, linux-doc@vger.kernel.org,
+        linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-acpi@vger.kernel.org,
+        linux-pci@vger.kernel.org,
+        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Atish Kumar Patra <atishp@rivosinc.com>,
+        Conor Dooley <conor.dooley@microchip.com>,
+        Will Deacon <will@kernel.org>, Haibo Xu <haibo1.xu@intel.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Atish Patra <atishp@atishpatra.org>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
+        Marc Zyngier <maz@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Robert Moore <robert.moore@intel.com>,
+        Andrew Jones <ajones@ventanamicro.com>,
         Albert Ou <aou@eecs.berkeley.edu>,
-        Shuah Khan <shuah@kernel.org>,
-        James Morse <james.morse@arm.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        Zenghui Yu <yuzenghui@huawei.com>,
-        Ricardo Koller <ricarkol@google.com>,
-        Vishal Annapurve <vannapurve@google.com>,
-        Like Xu <likexu@tencent.com>,
-        Vipin Sharma <vipinsh@google.com>,
-        David Matlack <dmatlack@google.com>,
-        Colton Lewis <coltonlewis@google.com>, kvm@vger.kernel.org,
-        Haibo Xu <haibo1.xu@intel.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, kvm-riscv@lists.infradead.org,
-        linux-riscv@lists.infradead.org, linux-kselftest@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev
-Subject: Re: [PATCH v6 00/13] RISCV: Add KVM_GET_REG_LIST API
-In-Reply-To: <CAAhSdy0yug=J0nxnnPoLYL=0MiT0w6qgPYOcv0QwMRe+fsQn8Q@mail.gmail.com>
-References: <cover.1690273969.git.haibo1.xu@intel.com>
-        <CAAhSdy0yug=J0nxnnPoLYL=0MiT0w6qgPYOcv0QwMRe+fsQn8Q@mail.gmail.com>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
- FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/28.2
- (x86_64-pc-linux-gnu) MULE/6.0 (HANACHIRUSATO)
-MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-SA-Exim-Connect-IP: 104.132.45.110
-X-SA-Exim-Rcpt-To: anup@brainfault.org, oliver.upton@linux.dev, xiaobo55x@gmail.com, ajones@ventanamicro.com, seanjc@google.com, pbonzini@redhat.com, corbet@lwn.net, atishp@atishpatra.org, paul.walmsley@sifive.com, palmer@dabbelt.com, aou@eecs.berkeley.edu, shuah@kernel.org, james.morse@arm.com, suzuki.poulose@arm.com, yuzenghui@huawei.com, ricarkol@google.com, vannapurve@google.com, likexu@tencent.com, vipinsh@google.com, dmatlack@google.com, coltonlewis@google.com, kvm@vger.kernel.org, haibo1.xu@intel.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, kvm-riscv@lists.infradead.org, linux-riscv@lists.infradead.org, linux-kselftest@vger.kernel.org, linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev
-X-SA-Exim-Mail-From: maz@kernel.org
-X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Daniel Scally <djrscally@gmail.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Sakari Ailus <sakari.ailus@linux.intel.com>,
+        Anup Patel <anup@brainfault.org>, Len Brown <lenb@kernel.org>
+Subject: Re: [RFC PATCH v1 20/21] RISC-V: ACPI: Create PLIC platform device
+Message-ID: <20230808-ferry-swarm-e2a0abb17165@spud>
+References: <20230803175916.3174453-1-sunilvl@ventanamicro.com>
+ <20230803175916.3174453-21-sunilvl@ventanamicro.com>
+ <20230808-chalice-easing-1369c7386082@spud>
+ <CAK9=C2XZ7_tfSK6HNN1Em5fAHrknWBqGaD9gPL8yGs8AzE3vQg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="B+bG6e2jHgiFE7ir"
+Content-Disposition: inline
+In-Reply-To: <CAK9=C2XZ7_tfSK6HNN1Em5fAHrknWBqGaD9gPL8yGs8AzE3vQg@mail.gmail.com>
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
         RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
@@ -88,68 +81,81 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 07 Aug 2023 04:48:33 +0100,
-Anup Patel <anup@brainfault.org> wrote:
->=20
-> Hi Marc, Hi Oliver,
->=20
-> On Tue, Jul 25, 2023 at 2:05=E2=80=AFPM Haibo Xu <haibo1.xu@intel.com> wr=
+
+--B+bG6e2jHgiFE7ir
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Aug 08, 2023 at 04:27:16PM +0530, Anup Patel wrote:
+> On Tue, Aug 8, 2023 at 2:12=E2=80=AFPM Conor Dooley <conor@kernel.org> wr=
 ote:
 > >
-> > KVM_GET_REG_LIST will dump all register IDs that are available to
-> > KVM_GET/SET_ONE_REG and It's very useful to identify some platform
-> > regression issue during VM migration.
+> > On Thu, Aug 03, 2023 at 11:29:15PM +0530, Sunil V L wrote:
+> > > Since PLIC needs to be a platform device
 > >
-> > Patch 1-7 re-structured the get-reg-list test in aarch64 to make some
-> > of the code as common test framework that can be shared by riscv.
-> >
-> > Patch 8 move reject_set check logic to a function so as to check for
-> > different errno for different registers.
-> > Patch 9 move finalize_vcpu back to run_test so that riscv can implement
-> > its specific operation.
-> > Patch 10 change to do the get/set operation only on present-blessed lis=
-t.
-> > Patch 11 add the skip_set facilities so that riscv can skip set operati=
-on
-> > on some registers.
-> > Patch 12 enabled the KVM_GET_REG_LIST API in riscv.
-> > patch 13 added the corresponding kselftest for checking possible
-> > register regressions.
-> >
-> > The get-reg-list kvm selftest was ported from aarch64 and tested with
-> > Linux v6.5-rc3 on a Qemu riscv64 virt machine.
-> >
-> > ---
-> > Changed since v5:
-> >   * Rebase to v6.5-rc3
-> >   * Minor fix for Andrew's comments
-> >
-> > Andrew Jones (7):
-> >   KVM: arm64: selftests: Replace str_with_index with strdup_printf
-> >   KVM: arm64: selftests: Drop SVE cap check in print_reg
-> >   KVM: arm64: selftests: Remove print_reg's dependency on vcpu_config
-> >   KVM: arm64: selftests: Rename vcpu_config and add to kvm_util.h
-> >   KVM: arm64: selftests: Delete core_reg_fixup
-> >   KVM: arm64: selftests: Split get-reg-list test code
-> >   KVM: arm64: selftests: Finish generalizing get-reg-list
-> >
-> > Haibo Xu (6):
-> >   KVM: arm64: selftests: Move reject_set check logic to a function
-> >   KVM: arm64: selftests: Move finalize_vcpu back to run_test
-> >   KVM: selftests: Only do get/set tests on present blessed list
-> >   KVM: selftests: Add skip_set facility to get_reg_list test
-> >   KVM: riscv: Add KVM_GET_REG_LIST API support
-> >   KVM: riscv: selftests: Add get-reg-list test
+> > For the unwashed, why does the PLCI need to be a platform device?
+> > (And while you're at that, please try to make use of the extra ~20
+> > characters per line that you can use here.)
 >=20
-> Are you okay for this series to go through the KVM RISC-V tree ?
+> As suggested by Marc Z, only timers and IPIs need to be probed early.
+> Everything else needs to be a platform device. The devlink feature of
+> Linux DD framework ensures that platform devices are probed in the
+> right order based on the interdependency.
+>=20
+> The PATCH5 of the v7 AIA series converts the PLIC driver into a
+> platform driver. This works perfectly fine.
 
-Sure, seems fine from my point of view. But please put it on an
-immutable topic branch so that we can also merge it in the arm64 tree,
-should we need to resolve any conflicts.
+To be clear, I want the explanation of why the "PLIC needs to be a
+platform device" to be in the commit message.
 
 Thanks,
+Conor.
 
-	M.
+>=20
+> >
+> > > probe the
+> > > MADT and create platform devices for each PLIC in the
+> > > system. Use software node framework for the fwnode
+> > > which allows to create properties and hence the
+> > > actual irqchip driver doesn't need to do anything
+> > > different for ACPI vs DT.
+> > >
+> > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> > > Co-developed-by: Haibo Xu <haibo1.xu@intel.com>
+> > > Signed-off-by: Haibo Xu <haibo1.xu@intel.com>
+> >
+> > > +static struct fwnode_handle *acpi_plic_create_fwnode(struct acpi_mad=
+t_plic *plic)
+> > > +{
+> > > +     struct fwnode_handle *fwnode, *parent_fwnode;
+> > > +     struct riscv_irqchip_list *plic_element;
+> > > +     struct software_node_ref_args *refs;
+> > > +     struct property_entry props[8] =3D {};
+> > > +     int nr_contexts;
+> > > +
+> > > +     props[0] =3D PROPERTY_ENTRY_U32("riscv,gsi-base", plic->gsi_bas=
+e);
+> > > +     props[1] =3D PROPERTY_ENTRY_U32("riscv,ndev", plic->num_irqs);
+> > > +     props[2] =3D PROPERTY_ENTRY_U32("riscv,max_prio", plic->max_pri=
+o);
+> >
+> > My OCD wants to know why this gets an _ but the others have a -.
+> >
+> > > +     props[3] =3D PROPERTY_ENTRY_U8("riscv,plic-id", plic->id);
+> > > +     props[4] =3D PROPERTY_ENTRY_U64("riscv,plic-base", plic->base_a=
+ddr);
+> > > +     props[5] =3D PROPERTY_ENTRY_U32("riscv,plic-size", plic->size);
 
---=20
-Without deviation from the norm, progress is not possible.
+--B+bG6e2jHgiFE7ir
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZNInOwAKCRB4tDGHoIJi
+0sLcAQCDXLAw71GxaGzz6Qp83L1Tb3sQIefjSzU544KRvPaIZwEA0NG4WpAU7bh9
+dP9hFr5cEYLKlf5xgRt76/vz3TmyhAM=
+=TeDA
+-----END PGP SIGNATURE-----
+
+--B+bG6e2jHgiFE7ir--
