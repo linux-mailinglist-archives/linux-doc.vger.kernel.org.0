@@ -2,177 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BE546777CC5
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Aug 2023 17:53:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6E88A777DFD
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Aug 2023 18:21:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230434AbjHJPxo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Aug 2023 11:53:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50012 "EHLO
+        id S235293AbjHJQVL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Aug 2023 12:21:11 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47852 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236262AbjHJPxl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Aug 2023 11:53:41 -0400
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 5573A1994;
-        Thu, 10 Aug 2023 08:53:40 -0700 (PDT)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 59F86D75;
-        Thu, 10 Aug 2023 08:54:22 -0700 (PDT)
-Received: from [10.1.27.169] (XHFQ2J9959.cambridge.arm.com [10.1.27.169])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6A0653F6C4;
-        Thu, 10 Aug 2023 08:53:35 -0700 (PDT)
-Message-ID: <8fbb5965-28f7-4e9a-ac04-1406ed8fc2d4@arm.com>
-Date:   Thu, 10 Aug 2023 16:53:33 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH mm-unstable fix] mm: userfaultfd: check for start + len
- overflow in validate_range: fix
-Content-Language: en-GB
-To:     Axel Rasmussen <axelrasmussen@google.com>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Brian Geffon <bgeffon@google.com>,
-        Christian Brauner <brauner@kernel.org>,
-        David Hildenbrand <david@redhat.com>,
-        Gaosheng Cui <cuigaosheng1@huawei.com>,
-        Huang Ying <ying.huang@intel.com>,
-        Hugh Dickins <hughd@google.com>,
-        James Houghton <jthoughton@google.com>,
-        Jiaqi Yan <jiaqiyan@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kefeng Wang <wangkefeng.wang@huawei.com>,
-        "Liam R. Howlett" <Liam.Howlett@oracle.com>,
-        Miaohe Lin <linmiaohe@huawei.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        "Mike Rapoport (IBM)" <rppt@kernel.org>,
-        Muchun Song <muchun.song@linux.dev>,
-        Nadav Amit <namit@vmware.com>,
-        Naoya Horiguchi <naoya.horiguchi@nec.com>,
-        Peter Xu <peterx@redhat.com>, Shuah Khan <shuah@kernel.org>,
-        Steven Barrett <steven@liquorix.net>,
-        Suleiman Souhlal <suleiman@google.com>,
-        Suren Baghdasaryan <surenb@google.com>,
-        "T.J. Alumbaugh" <talumbau@google.com>,
-        Yu Zhao <yuzhao@google.com>,
-        ZhangPeng <zhangpeng362@huawei.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
-        linux-kselftest@vger.kernel.org,
-        syzbot+42309678e0bc7b32f8e9@syzkaller.appspotmail.com
-References: <20230714182932.2608735-1-axelrasmussen@google.com>
-From:   Ryan Roberts <ryan.roberts@arm.com>
-In-Reply-To: <20230714182932.2608735-1-axelrasmussen@google.com>
+        with ESMTP id S234494AbjHJQVL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Aug 2023 12:21:11 -0400
+Received: from zju.edu.cn (spam.zju.edu.cn [61.164.42.155])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 8D9AAA8;
+        Thu, 10 Aug 2023 09:21:08 -0700 (PDT)
+Received: from linma$zju.edu.cn ( [10.181.231.207] ) by
+ ajax-webmail-mail-app4 (Coremail) ; Fri, 11 Aug 2023 00:02:24 +0800
+ (GMT+08:00)
+X-Originating-IP: [10.181.231.207]
+Date:   Fri, 11 Aug 2023 00:02:24 +0800 (GMT+08:00)
+X-CM-HeaderCharset: UTF-8
+From:   "Lin Ma" <linma@zju.edu.cn>
+To:     "Simon Horman" <horms@kernel.org>
+Cc:     corbet@lwn.net, davem@davemloft.net, edumazet@google.com,
+        kuba@kernel.org, pabeni@redhat.com, rdunlap@infradead.org,
+        void@manifault.com, jani.nikula@intel.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        netdev@vger.kernel.org
+Subject: Re: [PATCH v2] docs: staging: add netlink attrs best practices
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20220622(41e5976f)
+ Copyright (c) 2002-2023 www.mailtech.cn
+ mispb-4df6dc2c-e274-4d1c-b502-72c5c3dfa9ce-zj.edu.cn
+In-Reply-To: <ZNTw+ApPS9U4VhZI@vergenet.net>
+References: <20230809032552.765663-1-linma@zju.edu.cn>
+ <ZNTw+ApPS9U4VhZI@vergenet.net>
+Content-Transfer-Encoding: base64
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+MIME-Version: 1.0
+Message-ID: <41722e43.1049b3.189e02f50f6.Coremail.linma@zju.edu.cn>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: cS_KCgB3fxcRCtVkdX_VCg--.62776W
+X-CM-SenderInfo: qtrwiiyqvtljo62m3hxhgxhubq/1tbiAwIDEmTUP3sScwAAsF
+X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
+        CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
+        daVFxhVjvjDU=
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 14/07/2023 19:29, Axel Rasmussen wrote:
-> This commit removed an extra check for zero-length ranges, and folded it
-> into the common validate_range() helper used by all UFFD ioctls.
-> 
-> It failed to notice though that UFFDIO_COPY *only* called validate_range
-> on the dst range, not the src range. So removing this check actually let
-> us proceed with zero-length source ranges, eventually hitting a BUG
-> further down in the call stack.
-> 
-> The correct fix seems clear: call validate_range() on the src range too.
-> 
-> Other ioctls are not affected by this, as they only have one range, not
-> two (src + dst).
-> 
-> Reported-by: syzbot+42309678e0bc7b32f8e9@syzkaller.appspotmail.com
-> Closes: https://syzkaller.appspot.com/bug?extid=42309678e0bc7b32f8e9
-> Signed-off-by: Axel Rasmussen <axelrasmussen@google.com>
-> ---
->  fs/userfaultfd.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/fs/userfaultfd.c b/fs/userfaultfd.c
-> index 53a7220c4679..36d233759233 100644
-> --- a/fs/userfaultfd.c
-> +++ b/fs/userfaultfd.c
-> @@ -1759,6 +1759,9 @@ static int userfaultfd_copy(struct userfaultfd_ctx *ctx,
->  			   sizeof(uffdio_copy)-sizeof(__s64)))
->  		goto out;
->  
-> +	ret = validate_range(ctx->mm, uffdio_copy.src, uffdio_copy.len);
-> +	if (ret)
-> +		goto out;
->  	ret = validate_range(ctx->mm, uffdio_copy.dst, uffdio_copy.len);
->  	if (ret)
->  		goto out;
-
-
-Hi Axel,
-
-I've just noticed that this patch, now in mm-unstable, regresses the mkdirty mm
-selftest:
-
-# [INFO] detected THP size: 2048 KiB
-TAP version 13
-1..6
-# [INFO] PTRACE write access
-ok 1 SIGSEGV generated, page not modified
-# [INFO] PTRACE write access to THP
-ok 2 SIGSEGV generated, page not modified
-# [INFO] Page migration
-ok 3 SIGSEGV generated, page not modified
-# [INFO] Page migration of THP
-ok 4 SIGSEGV generated, page not modified
-# [INFO] PTE-mapping a THP
-ok 5 SIGSEGV generated, page not modified
-# [INFO] UFFDIO_COPY
-not ok 6 UFFDIO_COPY failed
-Bail out! 1 out of 6 tests failed
-# Totals: pass:5 fail:1 xfail:0 xpass:0 skip:0 error:0
-
-Whereas all 6 tests pass against v6.5-rc4.
-
-I'm afraid I don't know the test well and haven't looked at what the issue might
-be, but noticed and thought I should point it out.
-
-bisect log:
-
-git bisect start
-# bad: [ad3232df3e410acc2229c9195479c5596c1d1f96] mm/memory_hotplug: embed
-vmem_altmap details in memory block
-git bisect bad ad3232df3e410acc2229c9195479c5596c1d1f96
-# good: [5d0c230f1de8c7515b6567d9afba1f196fb4e2f4] Linux 6.5-rc4
-git bisect good 5d0c230f1de8c7515b6567d9afba1f196fb4e2f4
-# bad: [aa5712770e3f0edb31ae879cd6452d5c2111d4fb] mm: fix obsolete function name
-above debug_pagealloc_enabled_static()
-git bisect bad aa5712770e3f0edb31ae879cd6452d5c2111d4fb
-# bad: [bef1ff8723df303a06cdaffe64d95db2f7e7d4f6] mm: userfaultfd: support
-UFFDIO_POISON for hugetlbfs
-git bisect bad bef1ff8723df303a06cdaffe64d95db2f7e7d4f6
-# good: [4f4469463e8571012d2602b39f14ed3e3dbd972a] selftests/mm: add gup test
-matrix in run_vmtests.sh
-git bisect good 4f4469463e8571012d2602b39f14ed3e3dbd972a
-# good: [5c0d69839ef4f560679919f3483a592741df74f8] memcg: drop kmem.limit_in_bytes
-git bisect good 5c0d69839ef4f560679919f3483a592741df74f8
-# good: [b75f155a299729dc62de0ce6a9400d076298aa4c] mm: compaction: skip the
-memory hole rapidly when isolating free pages
-git bisect good b75f155a299729dc62de0ce6a9400d076298aa4c
-# good: [12b13121d9f4487301dd9fb765265b642b2f6d5d] mm/memcg: minor cleanup for
-MEM_CGROUP_ID_MAX
-git bisect good 12b13121d9f4487301dd9fb765265b642b2f6d5d
-# bad: [c9c368e75919c105aae072896e58d0ad4639e505] mm: userfaultfd: check for
-start + len overflow in validate_range: fix
-git bisect bad c9c368e75919c105aae072896e58d0ad4639e505
-# good: [9e707995021bbdfc67ad83a985f7796bba580bed]
-mm-make-pte_marker_swapin_error-more-general-fix
-git bisect good 9e707995021bbdfc67ad83a985f7796bba580bed
-# good: [46b66377b696c43c89ed4b1cb3f56b64e8fd475b] mm: userfaultfd: check for
-start + len overflow in validate_range
-git bisect good 46b66377b696c43c89ed4b1cb3f56b64e8fd475b
-# first bad commit: [c9c368e75919c105aae072896e58d0ad4639e505] mm: userfaultfd:
-check for start + len overflow in validate_range: fix
-
-Thanks,
-Ryan
-
+SGVsbG8gU2ltb24sCgo+ID4gUHJvdmlkZSBzb21lIHN1Z2dlc3Rpb25zIHRoYXQgd2hvIGRlYWwg
+d2l0aCBOZXRsaW5rIGNvZGUgY291bGQgZm9sbG93Cj4gPiAob2YgY291cnNlIHVzaW5nIHRoZSB3
+b3JkICJiZXN0LXByYWN0aWNlcyIgbWF5IHNvdW5kIHNvbWV3aGF0Cj4gPiBleGFnZ2VyYXRlKS4K
+PiA+IAo+ID4gQWNjb3JkaW5nIHRvIG15IHJlY2VudCBwcmFjdGljZXMsIHRoZSBwYXJzaW5nIG9m
+IHRoZSBOZXRsaW5rIGF0dHJpYnV0ZXMKPiA+IGxhY2tzIGRvY3VtZW50cyBmb3Iga2VybmVsIGRl
+dmVsb3BlcnMuIFNpbmNlIHJlY2VudGx5IHRoZSByZWxldmFudCBkb2NzCj4gPiBmb3IgTmV0bGlu
+ayB1c2VyIHNwYWNlIGdldCByZXBsZW5pc2hlZCwgSSBndWVzcyBpcyBhIGdvb2QgY2hhbmNlIGZv
+cgo+ID4ga2VybmVsIHNwYWNlIHBhcnQgdG8gY2F0Y2ggd2l0aC4KPiA+IAo+ID4gRmlyc3QgdGlt
+ZSB0byB3cml0ZSBhIGRvY3VtZW50IGFuZCBhbnkgcmV2aWV3cyBhcmUgYXBwcmVjaWF0ZWQuCj4g
+PiAKPiA+IFNpZ25lZC1vZmYtYnk6IExpbiBNYSA8bGlubWFAemp1LmVkdS5jbj4KPiAKPiBUaGFu
+a3MgZm9yIHdyaXRpbmcgdGhpcyB1cCwgZnJvbSBteSBwZXJzcGVjdGl2ZSB0aGlzIGlzIHZlcnkg
+dXNlZnVsLgo+IAo+IFNvbWUgdHJpdmlhbCBmZWVkYmFjayBmb2xsb3dzLgoKVGhhbmtzIHNvb29v
+b29vIG11Y2guIEFuZCBmZWVsIHJlYWxseSBzb3JyeSB0aGF0IHRoZSB2MiBzdGlsbCBoYXMgc28g
+bWFueQp0eXBvcywgZ3JhbW1hciBpc3N1ZXMsIGFuZCB3b3JkIG1pc3VzZS4gSSB3aWxsIHByZXBh
+cmUgdGhlIHYzIGNhcmVmdWxseQp3aXRoIGFsbCB0aG9zZSBzdWdnZXN0aW9ucy4gUmVhbGx5IGFw
+cHJlY2lhdGUgdGhhdC4KCj4gCj4gPiAtLS0KPiA+IHYxIC0+IHYyOiBmaXggc29tZSB0eXBvcyBp
+biBGT08gZXhhbXBsZSwKPiA+ICAgICAgICAgICBhZGQgZXh0cmEgc2VjdGlvbiAiQWJvdXQgR2Vu
+ZXJhbCBOZXRsaW5rIENhc2UiIHRvIGF2b2lkIGFueQo+ID4gICAgICAgICAgIGNvbmZ1c2lvbiBm
+b3IgbmV3IGNvZGUgdXNlcnMuCj4gPiAKPiA+ICBEb2N1bWVudGF0aW9uL3N0YWdpbmcvaW5kZXgu
+cnN0ICAgICAgICAgICAgICAgfCAgIDEgKwo+ID4gIC4uLi9zdGFnaW5nL25ldGxpbmstYXR0cnMt
+YmVzdC1wcmFjdGljZXMucnN0ICB8IDU0NCArKysrKysrKysrKysrKysrKysKPiA+ICBNQUlOVEFJ
+TkVSUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDEgKwo+IAo+IFBlcmhh
+cHMgdGhpcyB3YXMgZGlzY3Vzc2VkIGVhcmxpZXIuCj4gQnV0IEknbSBjdXJpb3VzIHRvIGtub3cg
+aWYgdGhlcmUgaXMgYSBwcmVmZXJlbmNlIGZvciBwdXR0aW5nCj4gdGhpcyBpbnRvIHN0YWdpbmcg
+cmF0aGVyIHRoYW4gbmV0d29ya2luZyBvciBlbHNld2hlcmUuCj4gCgpJbiBmYWN0LCBJIGhhdmUg
+bm8gaWRlYSBhYm91dCB0aGF0LiBCdXQgc2luY2UgdGhlIGN1cnJlbnQgTmV0bGluawpkb2N1bWVu
+dGF0aW9uIGlzIG1haW5seSB1c2VyIHNwYWNlIHJlbGF0ZWQgc28gSSBjYW4gY29udmluY2UgbXlz
+ZWxmIG5vdAp0byBwdXQgdGhpcyBkb2N1bWVudCB0aGVyZS4KCkkgZ3Vlc3MgeW91IGFyZSByaWdo
+dCwgbWF5YmUgSSBzaG91bGQgcGxhY2UgaXQgYXQgRG9jdW1lbnRhdGlvbi9uZXR3b3JraW5nLwpm
+b2xkZXIuCgpbc25pcF0KClRoYW5rcyBhZ2FpbgpMaW4K
