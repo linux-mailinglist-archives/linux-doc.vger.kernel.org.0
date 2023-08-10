@@ -2,194 +2,143 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D4D7F778278
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Aug 2023 22:58:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6A8977782D2
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Aug 2023 23:49:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229545AbjHJU6A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Aug 2023 16:58:00 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45052 "EHLO
+        id S230461AbjHJVtP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Aug 2023 17:49:15 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58084 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229543AbjHJU6A (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Aug 2023 16:58:00 -0400
+        with ESMTP id S229481AbjHJVtO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Aug 2023 17:49:14 -0400
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D49EE273E
-        for <linux-doc@vger.kernel.org>; Thu, 10 Aug 2023 13:57:15 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B7552ED
+        for <linux-doc@vger.kernel.org>; Thu, 10 Aug 2023 14:48:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1691701035;
+        s=mimecast20190719; t=1691704106;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
          in-reply-to:in-reply-to:references:references;
-        bh=c57XtBA66AtpZhTDt6oR9gySLUoblqFZkKBt5oz+BZQ=;
-        b=TOA5rMavQKtALE5tN7E67zeqv0cmY+sU8E8T9iA30IfW+Ri4KhYk7PjQaeqJKxylIrB9mx
-        MVzmmQjuHU/ziFnOpGYAkTyWxPLHtH7hpuLu72vM5PvQHwvlohN2sj6evNCAFQxZAy56Ar
-        saM0WREU0F0M5Ucv/k1ONuOmBPmlw0g=
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
+        bh=T1ExLvwy+wUPzZuAeU99YLpuaOF9jFHCSTBDaGG9zOU=;
+        b=LUs2cVeFDd2iS6yDwvFlcXcInj33XEGS9blMqr6ArpDK/Vuuf1V5mjwPY+h3F8BBi7ZsTr
+        9uDLI9fBdJAuHVVDuLJIjm1hup4g5DVov/gSwlHTpMvwg2RtXNirY/ezUEj1/vFe1PdjMD
+        lnX6CqnFt/GShQCMricT/bcnTWeHRoI=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-43-f7_DLEuoOkSYTv5eCySOKA-1; Thu, 10 Aug 2023 16:57:13 -0400
-X-MC-Unique: f7_DLEuoOkSYTv5eCySOKA-1
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-76cb9958d60so32084585a.0
-        for <linux-doc@vger.kernel.org>; Thu, 10 Aug 2023 13:57:13 -0700 (PDT)
+ us-mta-39-uZY0lOTXM12YGv7CPsXGvQ-1; Thu, 10 Aug 2023 17:48:22 -0400
+X-MC-Unique: uZY0lOTXM12YGv7CPsXGvQ-1
+Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-63cc3a44aedso3818586d6.0
+        for <linux-doc@vger.kernel.org>; Thu, 10 Aug 2023 14:48:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691701033; x=1692305833;
+        d=1e100.net; s=20221208; t=1691704101; x=1692308901;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=c57XtBA66AtpZhTDt6oR9gySLUoblqFZkKBt5oz+BZQ=;
-        b=OTG+pOCfNZoQ3I3aWKkbdWkd3QNcjpRIEdrig0Xs7PWQ8tX69WUr6FEj8mMbQ1K5yX
-         V1tqvw1UF9KmPbK5DnJqDoQLlPkKJLMmYTEj+SIBC6EEva5PRF0Dy1o73KqNUK5XKzib
-         0Hldaf1VfyXmct17Rc3rtwfO/snVU6Iol9D1AJSCd1PVzFMEYQwjXHFeE9PHb3bmhzXk
-         PatCl4zGmugvi7oUaMNsWMVqTr91JSQSwpvvuV3c9q8Q/avEcp5Y3+BZVPSf9FVEsALl
-         f6W3tgn4yyv00r48ekqg6IfJxZcXHhgYJ+nhKxialbmrGn7o3D5P72MEpz7zh6wsEISF
-         uuZQ==
-X-Gm-Message-State: AOJu0YwD0sBt10NjxpUA/T5hBa9rio3SCBfAsLWz5uFMi87gYMOQmT9F
-        6X0v7X+EcQc8TXslvOmLgUCJpLapExhfcIAoANesQ/bgRDQYBqlFG3xRptMNyQYWQKf01bbLEOG
-        51vZZ+AsEiQouL6LZCUA/
-X-Received: by 2002:a05:620a:31a0:b0:767:346c:4b37 with SMTP id bi32-20020a05620a31a000b00767346c4b37mr4390979qkb.7.1691701033212;
-        Thu, 10 Aug 2023 13:57:13 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFy2ZcN8TgfL1/LVy5I3Vmk2HDJjfFr+opHM9AF0KOIf/olK85CZeVLDi0THySO2F2YMshvqg==
-X-Received: by 2002:a05:620a:31a0:b0:767:346c:4b37 with SMTP id bi32-20020a05620a31a000b00767346c4b37mr4390952qkb.7.1691701032833;
-        Thu, 10 Aug 2023 13:57:12 -0700 (PDT)
+        bh=T1ExLvwy+wUPzZuAeU99YLpuaOF9jFHCSTBDaGG9zOU=;
+        b=jwvQKHbWd8wOSypMMmmPq5O20qlHLaVwo66jg4DxZnSD+dXX0dARRK1Kk7/vTv4IrM
+         yXXFZF9cfNZ0iIB2mf7HLwXhp3EC7hmAG0cU+sVptslCvc8os2nPgjnuaeumX+s7IaQm
+         VTH+Yjb54qyIuPBXUbC+5gm/m7Bn7sGHMUjijV1+BTZWoQrwhpPqOO3TR2snxUi4Y57q
+         VCoi37fIYJn9cxPJQPoafSvD0fr4EUpmdxMza6bqK9STFrbC5+5Syp3kJn01IOF8AOEh
+         pNxladSv/7ocZpgabYG5PUWKAFIPrfkVgkbVQCLgIz4/vultebt/1GZMte0pPHL+EJOa
+         twoQ==
+X-Gm-Message-State: AOJu0YwPnIH+/kMJTb6LM30MwZWPD7cc4EdCqRUUAGt+A+km4PX1YE1u
+        WB7BN9dHtZbFFHO4TmFhhovOsISCOh/Jw59tk16ofXUD0KG0w2qrBaHnzsqEKpuOvw8b/2bBOs3
+        y3TEwR4QQxMY5A6NxyAng
+X-Received: by 2002:ad4:5f87:0:b0:63c:f852:aa3a with SMTP id jp7-20020ad45f87000000b0063cf852aa3amr3922484qvb.4.1691704101698;
+        Thu, 10 Aug 2023 14:48:21 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFKQjfkLEtHK4TgBS5tvBCJy85maQwvYfEU+5Pht7gJJOOJ/2gXOWy0MnGa+bfiZMEcuCLmRw==
+X-Received: by 2002:ad4:5f87:0:b0:63c:f852:aa3a with SMTP id jp7-20020ad45f87000000b0063cf852aa3amr3922466qvb.4.1691704101441;
+        Thu, 10 Aug 2023 14:48:21 -0700 (PDT)
 Received: from x1n (cpe5c7695f3aee0-cm5c7695f3aede.cpe.net.cable.rogers.com. [99.254.144.39])
-        by smtp.gmail.com with ESMTPSA id a2-20020a05620a102200b007671678e325sm744131qkk.88.2023.08.10.13.57.11
+        by smtp.gmail.com with ESMTPSA id b20-20020a0cf054000000b0062ffec0a18esm758095qvl.84.2023.08.10.14.48.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Aug 2023 13:57:12 -0700 (PDT)
-Date:   Thu, 10 Aug 2023 16:57:11 -0400
+        Thu, 10 Aug 2023 14:48:20 -0700 (PDT)
+Date:   Thu, 10 Aug 2023 17:48:19 -0400
 From:   Peter Xu <peterx@redhat.com>
 To:     David Hildenbrand <david@redhat.com>
-Cc:     Ryan Roberts <ryan.roberts@arm.com>, linux-kernel@vger.kernel.org,
+Cc:     Matthew Wilcox <willy@infradead.org>, linux-kernel@vger.kernel.org,
         linux-mm@kvack.org, linux-doc@vger.kernel.org,
         Andrew Morton <akpm@linux-foundation.org>,
         Jonathan Corbet <corbet@lwn.net>,
         Mike Kravetz <mike.kravetz@oracle.com>,
         Hugh Dickins <hughd@google.com>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Ryan Roberts <ryan.roberts@arm.com>,
         Yin Fengwei <fengwei.yin@intel.com>,
         Yang Shi <shy828301@gmail.com>, Zi Yan <ziy@nvidia.com>
 Subject: Re: [PATCH mm-unstable v1] mm: add a total mapcount for large folios
-Message-ID: <ZNVPJ9xxd2oarR3I@x1n>
+Message-ID: <ZNVbIyHcqeKUDuSg@x1n>
 References: <20230809083256.699513-1-david@redhat.com>
  <ZNQD4pxo8svpGmvX@x1n>
- <e5e29217-11d3-a84b-9e29-44acc72222f3@redhat.com>
- <155bd03e-b75c-4d2d-a89d-a12271ada71b@arm.com>
- <ZNUbNDiciFefJngZ@x1n>
- <db3c4d94-a0a9-6703-6fe0-e1b8851e531f@redhat.com>
+ <ZNRYx8GhYftE4Xeb@casper.infradead.org>
+ <7e31254d-8889-7e79-50e1-2630bd493d59@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <db3c4d94-a0a9-6703-6fe0-e1b8851e531f@redhat.com>
+In-Reply-To: <7e31254d-8889-7e79-50e1-2630bd493d59@redhat.com>
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
         RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,
-        SPF_HELO_NONE,SPF_NONE autolearn=unavailable autolearn_force=no
-        version=3.4.6
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Aug 10, 2023 at 07:47:35PM +0200, David Hildenbrand wrote:
-> On 10.08.23 19:15, Peter Xu wrote:
-> > On Thu, Aug 10, 2023 at 11:48:27AM +0100, Ryan Roberts wrote:
-> > > > For PTE-mapped THP, it might be a bit bigger noise, although I doubt it is
-> > > > really significant (judging from my experience on managing PageAnonExclusive
-> > > > using set_bit/test_bit/clear_bit when (un)mapping anon pages).
+On Thu, Aug 10, 2023 at 10:37:04AM +0200, David Hildenbrand wrote:
+> On 10.08.23 05:25, Matthew Wilcox wrote:
+> > On Wed, Aug 09, 2023 at 05:23:46PM -0400, Peter Xu wrote:
+> > > Hi, David,
+> > > 
+> > > Some pure questions below..
+> > > 
+> > > On Wed, Aug 09, 2023 at 10:32:56AM +0200, David Hildenbrand wrote:
+> > > > Let's track the total mapcount for all large folios in the first subpage.
 > > > > 
-> > > > As folio_add_file_rmap_range() indicates, for PTE-mapped THPs we should be
-> > > > batching where possible (and Ryan is working on some more rmap batching).
+> > > > The total mapcount is what we actually want to know in folio_mapcount()
+> > > > and it is also sufficient for implementing folio_mapped(). This also
+> > > > gets rid of any "raceiness" concerns as expressed in
+> > > > folio_total_mapcount().
 > > > 
-> > > Yes, I've just posted [1] which batches the rmap removal. That would allow you
-> > > to convert the per-page atomic_dec() into a (usually) single per-large-folio
-> > > atomic_sub().
-> > > 
-> > > [1] https://lore.kernel.org/linux-mm/20230810103332.3062143-1-ryan.roberts@arm.com/
+> > > Any more information for that "raciness" described here?
 > > 
-> > Right, that'll definitely make more sense, thanks for the link; I'd be very
-> > happy to read more later (finally I got some free time recently..).  But
-> > then does it mean David's patch can be attached at the end instead of
-> > proposed separately and early?
-> 
-> Not in my opinion. Batching rmap makes sense even without this change, and
-> this change makes sense even without batching.
-> 
+> > UTSL.
 > > 
-> > I was asking mostly because I read it as a standalone patch first, and
-> > honestly I don't know the effect.  It's based on not only the added atomic
-> > ops itself, but also the field changes.
+> >          /*
+> >           * Add all the PTE mappings of those pages mapped by PTE.
+> >           * Limit the loop to folio_nr_pages_mapped()?
+> >           * Perhaps: given all the raciness, that may be a good or a bad idea.
+> >           */
 > > 
-> > For example, this patch moves Hugh's _nr_pages_mapped into the 2nd tail
-> > page, I think it means for any rmap change of any small page of a huge one
-> > we'll need to start touching one more 64B cacheline on x86.  I really have
-> > no idea what does it mean for especially a large SMP: see 292648ac5cf1 on
-> > why I had an impression of that.  But I've no enough experience or clue to
-> > prove it a problem either, maybe would be interesting to measure the time
-> > needed for some pte-mapped loops?  E.g., something like faulting in a thp,
 > 
-> Okay, so your speculation right now is:
-> 
-> 1) The change in cacheline might be problematic.
-> 
-> 2) The additional atomic operation might be problematic.
-> 
-> > then measure the split (by e.g. mprotect() at offset 1M on a 4K?) time it
-> > takes before/after this patch.
-> 
-> I can certainly try getting some numbers on that. If you're aware of other
-> micro-benchmarks that would likely notice slower pte-mapping of THPs, please
-> let me know.
+> Yes, that comment from Hugh primarily discusses how we could possibly
+> optimize the loop, and if relying on folio_nr_pages_mapped() to reduce the
+> iterations would be racy. As far as I can see, there are cases where "it
+> would be certainly a bad idea" :)
 
-Thanks.
+Is the race described about mapcount being changed right after it's read?
+Are you aware of anything specific that will be broken, and will be fixed
+with this patch?
+
+I assume mapcount==1 will be very special in this case when e.g. holding a
+pgtable lock, other than that I won't be surprised if mapcount changes in
+parallel.  But I must confess I don't really have any thorough digests on
+this whole matter.
 
 > 
-> > 
-> > When looking at this, I actually found one thing that is slightly
-> > confusing, not directly relevant to your patch, but regarding the reuse of
-> > tail page 1 on offset 24 bytes.  Current it's Hugh's _nr_pages_mapped,
-> > and you're proposing to replace it with the total mapcount:
-> > 
-> >          atomic_t   _nr_pages_mapped;     /*    88     4 */
-> > 
-> > Now my question is.. isn't byte 24 of tail page 1 used for keeping a
-> > poisoned mapping?  See prep_compound_tail() where it has:
-> > 
-> > 	p->mapping = TAIL_MAPPING;
-> > 
-> > While here mapping is, afaict, also using offset 24 of the tail page 1:
-> > 
-> >          struct address_space * mapping;  /*    24     8 */
-> > 
-> > I hope I did a wrong math somewhere, though.
-> > 
 > 
-> I think your math is correct.
-> 
-> prep_compound_head() is called after prep_compound_tail(), so
-> prep_compound_head() wins.
-> 
-> In __split_huge_page_tail() there is a VM_BUG_ON_PAGE() that explains the
-> situation:
-> 
-> /* ->mapping in first and second tail page is replaced by other uses */
-> VM_BUG_ON_PAGE(tail > 2 && page_tail->mapping != TAIL_MAPPING,
-> 	       page_tail);
-> 
-> Thanks for raising that, I had to look into that myself.
+> In the other comment in that function, it's also made clear what the
+> traditional behavior with PMD-mappable THP was "In the common case, avoid
+> the loop when no pages mapped by PTE", which will no longer hold with
+> sub-PMD THP.
 
-It's so confusing so I did try to document them a bit myself, then I found
-maybe I should just post a patch for it and I just did:
+Having a total mapcount does sound helpful if partial folio is common
+indeed.
 
-https://lore.kernel.org/r/20230810204944.53471-1-peterx@redhat.com
-
-It'll conflict with yours, but I marked RFC so it's never anything urgent,
-but maybe that'll be helpful already for you to introduce any new fields
-like total_mapcounts.
-
-AFAICS if that patch was all correct (while I'm not yet sure..), you can
-actually fit your new total mapcount field into page 1 so even avoid the
-extra cacheline access.  You can have a look: the trick is refcount for
-tail page 1 is still seems to be free on 32 bits (if that was your worry
-before).  Then it'll be very nice if to keep Hugh's counter all in tail 1.
+I'm curious whether that'll be so common after the large anon folio work -
+isn't it be sad if partial folio will be a norm?  It sounds to me that's
+the case when small page sizes should be used.. and it's prone to waste?
 
 -- 
 Peter Xu
