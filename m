@@ -2,117 +2,119 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4F150778D3D
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Aug 2023 13:17:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 865847791B9
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Aug 2023 16:23:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233181AbjHKLRt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Aug 2023 07:17:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46456 "EHLO
+        id S235457AbjHKOXX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Aug 2023 10:23:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41856 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231745AbjHKLRs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Aug 2023 07:17:48 -0400
+        with ESMTP id S232453AbjHKOXW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Aug 2023 10:23:22 -0400
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 45BBDC3;
-        Fri, 11 Aug 2023 04:17:48 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 03C85E53;
+        Fri, 11 Aug 2023 07:23:20 -0700 (PDT)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
          key-exchange X25519 server-signature RSA-PSS (2048 bits))
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id D80AD64D2F;
-        Fri, 11 Aug 2023 11:17:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 008F9C433C7;
-        Fri, 11 Aug 2023 11:17:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1691752667;
-        bh=hxQAmB/8S/2RsXJqhNtMpjCrkAM+LtXclZmynSSBuH4=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=k/5FA/NqE0ukdB0J5oqhAFGoGR2JvsGJAac9wnhbovyPSMZULqojPxXSiWdeWvR4z
-         hi/sPxoCZ8hMFHoepJXuZ+jHhkc3UQ8DSVklePRLzCieplyEuTw0KBXdkaH6aczZZ8
-         mIu+RO1dNGvvl3DRopf1PlfjNl4V2gFB1IBMw3ZuONNGNSkL89lS40aBAGVHLwrNId
-         MjRWIU111G+3FMx7bNp22NYMhW6kdMUqNKs8iFetCosWM5b3l/7CE96J9iKi9HEA6o
-         7IblwZQaFDdadR2KGbQfH+Fs51ZGnu/5F134IbstCnrDUHjbFB7TrZIvOFABXf0pbx
-         eQ3yuuCo9ZaCw==
-Date:   Fri, 11 Aug 2023 12:17:40 +0100
-From:   Will Deacon <will@kernel.org>
-To:     Yicong Yang <yangyicong@huawei.com>
-Cc:     catalin.marinas@arm.com, lpieralisi@kernel.org,
-        mark.rutland@arm.com, robin.murphy@arm.com, guohanjun@huawei.com,
-        corbet@lwn.net, rafael@kernel.org,
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 9695665A33;
+        Fri, 11 Aug 2023 14:23:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85887C433C8;
+        Fri, 11 Aug 2023 14:23:14 +0000 (UTC)
+Date:   Fri, 11 Aug 2023 15:23:12 +0100
+From:   Catalin Marinas <catalin.marinas@arm.com>
+To:     Mark Brown <broonie@kernel.org>
+Cc:     Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Marc Zyngier <maz@kernel.org>,
+        Oliver Upton <oliver.upton@linux.dev>,
+        James Morse <james.morse@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>, Oleg Nesterov <oleg@redhat.com>,
+        Eric Biederman <ebiederm@xmission.com>,
+        Kees Cook <keescook@chromium.org>,
+        Shuah Khan <shuah@kernel.org>,
+        "Rick P. Edgecombe" <rick.p.edgecombe@intel.com>,
+        Deepak Gupta <debug@rivosinc.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Szabolcs Nagy <Szabolcs.Nagy@arm.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
         linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-acpi@vger.kernel.org, linux-kernel@vger.kernel.org,
-        jonathan.cameron@huawei.com, shameerali.kolothum.thodi@huawei.com,
-        hejunhao3@huawei.com, linuxarm@huawei.com,
-        prime.zeng@hisilicon.com, yangyicong@hisilicon.com,
-        zhurui3@huawei.com
-Subject: Re: [PATCH] perf/smmuv3: Enable HiSilicon Erratum 162001900 quirk
- for HIP08/09
-Message-ID: <20230811111739.GD6993@willie-the-truck>
-References: <20230809100654.32036-1-yangyicong@huawei.com>
+        kvmarm@lists.linux.dev, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-mm@kvack.org,
+        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org
+Subject: Re: [PATCH v4 09/36] arm64/mm: Allocate PIE slots for EL0 guarded
+ control stack
+Message-ID: <ZNZEUEqJuHrdEa/c@arm.com>
+References: <20230807-arm64-gcs-v4-0-68cfa37f9069@kernel.org>
+ <20230807-arm64-gcs-v4-9-68cfa37f9069@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230809100654.32036-1-yangyicong@huawei.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+In-Reply-To: <20230807-arm64-gcs-v4-9-68cfa37f9069@kernel.org>
+X-Spam-Status: No, score=-6.7 required=5.0 tests=BAYES_00,
+        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Aug 09, 2023 at 06:06:54PM +0800, Yicong Yang wrote:
-> diff --git a/drivers/perf/arm_smmuv3_pmu.c b/drivers/perf/arm_smmuv3_pmu.c
-> index 25a269d431e4..b854b67b81fc 100644
-> --- a/drivers/perf/arm_smmuv3_pmu.c
-> +++ b/drivers/perf/arm_smmuv3_pmu.c
-> @@ -115,6 +115,7 @@
->  #define SMMU_PMCG_PA_SHIFT              12
+On Mon, Aug 07, 2023 at 11:00:14PM +0100, Mark Brown wrote:
+> diff --git a/arch/arm64/include/asm/pgtable-prot.h b/arch/arm64/include/asm/pgtable-prot.h
+> index eed814b00a38..b157ae0420ed 100644
+> --- a/arch/arm64/include/asm/pgtable-prot.h
+> +++ b/arch/arm64/include/asm/pgtable-prot.h
+> @@ -131,15 +131,23 @@ extern bool arm64_use_ng_mappings;
+>  /* 6:                                PTE_PXN | PTE_WRITE            */
+>  /* 7: PAGE_SHARED_EXEC               PTE_PXN | PTE_WRITE | PTE_USER */
+>  /* 8: PAGE_KERNEL_ROX      PTE_UXN                                  */
+> -/* 9:                      PTE_UXN |                       PTE_USER */
+> +/* 9: PAGE_GCS_RO          PTE_UXN |                       PTE_USER */
+>  /* a: PAGE_KERNEL_EXEC     PTE_UXN |           PTE_WRITE            */
+> -/* b:                      PTE_UXN |           PTE_WRITE | PTE_USER */
+> +/* b: PAGE_GCS             PTE_UXN |           PTE_WRITE | PTE_USER */
+>  /* c: PAGE_KERNEL_RO       PTE_UXN | PTE_PXN                        */
+>  /* d: PAGE_READONLY        PTE_UXN | PTE_PXN |             PTE_USER */
+>  /* e: PAGE_KERNEL          PTE_UXN | PTE_PXN | PTE_WRITE            */
+>  /* f: PAGE_SHARED          PTE_UXN | PTE_PXN | PTE_WRITE | PTE_USER */
 >  
->  #define SMMU_PMCG_EVCNTR_RDONLY         BIT(0)
-> +#define SMMU_PMCG_HARDEN_DISABLE        BIT(1)
+> +#define _PAGE_GCS	(_PAGE_DEFAULT | PTE_UXN | PTE_WRITE | PTE_USER)
+> +#define _PAGE_GCS_RO	(_PAGE_DEFAULT | PTE_UXN | PTE_USER)
+> +
+> +#define PAGE_GCS	__pgprot(_PAGE_GCS)
+> +#define PAGE_GCS_RO	__pgprot(_PAGE_GCS_RO)
+> +
+>  #define PIE_E0	( \
+> +	PIRx_ELx_PERM(pte_pi_index(_PAGE_GCS),           PIE_GCS)  | \
+> +	PIRx_ELx_PERM(pte_pi_index(_PAGE_GCS_RO),        PIE_R)   | \
+>  	PIRx_ELx_PERM(pte_pi_index(_PAGE_EXECONLY),      PIE_X_O) | \
+>  	PIRx_ELx_PERM(pte_pi_index(_PAGE_READONLY_EXEC), PIE_RX)  | \
+>  	PIRx_ELx_PERM(pte_pi_index(_PAGE_SHARED_EXEC),   PIE_RWX) | \
+> @@ -147,6 +155,8 @@ extern bool arm64_use_ng_mappings;
+>  	PIRx_ELx_PERM(pte_pi_index(_PAGE_SHARED),        PIE_RW))
 >  
->  static int cpuhp_state_num;
->  
-> @@ -150,6 +151,22 @@ SMMU_PMU_EVENT_ATTR_EXTRACTOR(filter_stream_id, config1, 0, 31);
->  SMMU_PMU_EVENT_ATTR_EXTRACTOR(filter_span, config1, 32, 32);
->  SMMU_PMU_EVENT_ATTR_EXTRACTOR(filter_enable, config1, 33, 33);
->  
-> +static int smmu_pmu_apply_event_filter(struct smmu_pmu *smmu_pmu,
-> +				       struct perf_event *event, int idx);
-> +
-> +static inline void smmu_pmu_enable_quirk_hip08_09(struct pmu *pmu)
-> +{
-> +	struct smmu_pmu *smmu_pmu = to_smmu_pmu(pmu);
-> +	unsigned int idx;
-> +
-> +	for_each_set_bit(idx, smmu_pmu->used_counters, smmu_pmu->num_counters)
-> +		smmu_pmu_apply_event_filter(smmu_pmu, smmu_pmu->events[idx], idx);
-> +
-> +	writel(SMMU_PMCG_IRQ_CTRL_IRQEN,
-> +	       smmu_pmu->reg_base + SMMU_PMCG_IRQ_CTRL);
-> +	writel(SMMU_PMCG_CR_ENABLE, smmu_pmu->reg_base + SMMU_PMCG_CR);
+>  #define PIE_E1	( \
+> +	PIRx_ELx_PERM(pte_pi_index(_PAGE_GCS),           PIE_RW)      | \
+> +	PIRx_ELx_PERM(pte_pi_index(_PAGE_GCS_RO),        PIE_R)      | \
 
-Can you tail-call smmu_pmu_enable() instead of duplicating it here?
+Had some thoughts on this. Why do we need the EL1 GCS attributes to map
+to RW? The instructions we'd use to write the shadow stack are the GCS
+'T' variants that run as user already.
 
-> +static inline void smmu_pmu_disable_quirk_hip08_09(struct pmu *pmu)
-> +{
-> +	struct smmu_pmu *smmu_pmu = to_smmu_pmu(pmu);
-> +	unsigned int idx;
-> +
-> +	/*
-> +	 * The global disable of PMU sometimes fail to stop the counting.
-> +	 * Harden this by writing an invalid event type to each used counter
-> +	 * to forcibly stop counting.
-> +	 */
-> +	for_each_set_bit(idx, smmu_pmu->used_counters, smmu_pmu->num_counters)
-> +		writel(0xffff, smmu_pmu->reg_base + SMMU_PMCG_EVTYPER(idx));
-> +
-> +	writel(0, smmu_pmu->reg_base + SMMU_PMCG_CR);
-> +	writel(0, smmu_pmu->reg_base + SMMU_PMCG_IRQ_CTRL);
+The only instructions we have in the kernel that would run as EL1 on a
+user address are the exclusives (futex code or the old deprecated
+emulation but we don't care about them in this context). So I wonder
+whether the kernel PIE entry could simply be PIE_NONE_O. Would this be
+too restrictive for future uses? Given the coherency between a GCS
+access and a standard data access, we may want to restrict it now until
+we have a use-case.
 
-Same things here, but with smmu_pmu_disable()
-
-Will
+-- 
+Catalin
