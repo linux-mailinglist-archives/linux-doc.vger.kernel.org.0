@@ -2,148 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 59B6F7792CC
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Aug 2023 17:19:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 82843779327
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Aug 2023 17:32:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236403AbjHKPTd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Aug 2023 11:19:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35532 "EHLO
+        id S236514AbjHKPcT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Aug 2023 11:32:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55534 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236420AbjHKPTX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Aug 2023 11:19:23 -0400
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com [IPv6:2a00:1450:4864:20::435])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 33E2F3594
-        for <linux-doc@vger.kernel.org>; Fri, 11 Aug 2023 08:19:16 -0700 (PDT)
-Received: by mail-wr1-x435.google.com with SMTP id ffacd0b85a97d-3090d3e9c92so1868559f8f.2
-        for <linux-doc@vger.kernel.org>; Fri, 11 Aug 2023 08:19:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1691767155; x=1692371955;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zADELGUWpGyqS4NPi0hC5rU83b70YaTQQPW65NChPlI=;
-        b=PpOJJvvoZpHsn8jNHPEvN1nxCGms1gOAeA/MFe/y/MFBJC1k+8GHowKIfl2C661sWV
-         Oj4csFcuW/OF0LpQ7tVVRV5X3PfQnx11ALct0kqhzNIVb+qQ1PDy8brCBGTvCCt/6BSy
-         R1BPlxoc090EhGp8CeBhDwLVfUDSzemXaw3/9w2TLLI2xTeaqY8yri4zCXDjI3se0J98
-         VwRIEMn3C01rkdVmAfQsmnbW0Aib/IWD9iWEsVQPElZuyH059lYcjrJcJilPApbcz+Y9
-         n/xJGgmLgJ19EuCoRfmld0AUlanWpuf01WR1vAViEsa1d0ZNXOhVrBqAScsj6ZGAd7Nr
-         JRLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691767155; x=1692371955;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=zADELGUWpGyqS4NPi0hC5rU83b70YaTQQPW65NChPlI=;
-        b=doGV/pNw2Z3fwhpaf4CWS2EqHD5ZTjelbrU7PoTgMdcriX8W9qoELuvDaNTuEPkLxG
-         IXm6/B0MQnv9zQowxkhn4iEZMEBom/MkLlQEbx/RF5uluxMOpYAdauA+orCeHe1kytvJ
-         EH9Mfqkm6YyXHlx3FUpjZVyhzZF0afaOa9jl6Xmxs9sC4+M+fOnPy0nXCNjbtGj6nyar
-         iquVvxKEVmmlTVZneNoUCRSdobBthvOuU2At22VPrZEzvsx61qdzTwYRywULSSy8GmYT
-         qU/fRBawMhMk2MA1l2yC1nCaR+ddEQPHNFBIkZlP/fYY0in5wGH7Q0XjCLDiLCRj3HCi
-         sn2A==
-X-Gm-Message-State: AOJu0YxbUN42ysYDF/cTvUKXOY18E/Y6AA+hcWodnpD/ciLnr7UawDNx
-        YQTw1URMiKhXHM7F9kYYQ/ejf4HlZZ6Ua1RwVkvWjw==
-X-Google-Smtp-Source: AGHT+IGFjoN11JGyqXQoLlR2unjvMbQFFXcuLgu03BXMw9TDy8mziYl5bcg3wpOPRTH/LMwE2VWfpYnTL/43MNjFeOQ=
-X-Received: by 2002:a05:6000:507:b0:317:de6f:22cb with SMTP id
- a7-20020a056000050700b00317de6f22cbmr1834346wrf.2.1691767154667; Fri, 11 Aug
- 2023 08:19:14 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230802080328.1213905-1-alexghiti@rivosinc.com>
- <20230802080328.1213905-10-alexghiti@rivosinc.com> <20230802-7c19a712ae071f68030ab5f2@orel>
-In-Reply-To: <20230802-7c19a712ae071f68030ab5f2@orel>
-From:   Alexandre Ghiti <alexghiti@rivosinc.com>
-Date:   Fri, 11 Aug 2023 17:19:03 +0200
-Message-ID: <CAHVXubhfbZsWx9mEFG-XMKgMY3-r=ROY=7gPK7H71WpyqXFwJQ@mail.gmail.com>
-Subject: Re: [PATCH v6 09/10] tools: lib: perf: Implement riscv mmap support
-To:     Andrew Jones <ajones@ventanamicro.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Jiri Olsa <jolsa@kernel.org>,
-        Namhyung Kim <namhyung@kernel.org>,
-        Ian Rogers <irogers@google.com>,
+        with ESMTP id S236500AbjHKPcT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Aug 2023 11:32:19 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8DC9319A5;
+        Fri, 11 Aug 2023 08:32:18 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 214DE65E9D;
+        Fri, 11 Aug 2023 15:32:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD3E1C433C7;
+        Fri, 11 Aug 2023 15:32:12 +0000 (UTC)
+Date:   Fri, 11 Aug 2023 16:32:10 +0100
+From:   Catalin Marinas <catalin.marinas@arm.com>
+To:     Mark Brown <broonie@kernel.org>
+Cc:     Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Marc Zyngier <maz@kernel.org>,
+        Oliver Upton <oliver.upton@linux.dev>,
+        James Morse <james.morse@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>, Oleg Nesterov <oleg@redhat.com>,
+        Eric Biederman <ebiederm@xmission.com>,
+        Kees Cook <keescook@chromium.org>,
+        Shuah Khan <shuah@kernel.org>,
+        "Rick P. Edgecombe" <rick.p.edgecombe@intel.com>,
+        Deepak Gupta <debug@rivosinc.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Szabolcs Nagy <Szabolcs.Nagy@arm.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>,
         Paul Walmsley <paul.walmsley@sifive.com>,
         Palmer Dabbelt <palmer@dabbelt.com>,
         Albert Ou <aou@eecs.berkeley.edu>,
-        Atish Patra <atishp@atishpatra.org>,
-        Anup Patel <anup@brainfault.org>,
-        Will Deacon <will@kernel.org>, Rob Herring <robh@kernel.org>,
-        =?UTF-8?Q?R=C3=A9mi_Denis=2DCourmont?= <remi@remlab.net>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, linux-riscv@lists.infradead.org,
-        linux-arm-kernel@lists.infradead.org,
-        Atish Patra <atishp@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS
-        autolearn=unavailable autolearn_force=no version=3.4.6
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        kvmarm@lists.linux.dev, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-mm@kvack.org,
+        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org
+Subject: Re: [PATCH v4 18/36] arm64/gcs: Context switch GCS state for EL0
+Message-ID: <ZNZUerbrJmzqZzJw@arm.com>
+References: <20230807-arm64-gcs-v4-0-68cfa37f9069@kernel.org>
+ <20230807-arm64-gcs-v4-18-68cfa37f9069@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230807-arm64-gcs-v4-18-68cfa37f9069@kernel.org>
+X-Spam-Status: No, score=-1.6 required=5.0 tests=BAYES_00,
+        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,
+        SPF_PASS autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Andrew,
+On Mon, Aug 07, 2023 at 11:00:23PM +0100, Mark Brown wrote:
+> @@ -271,12 +272,31 @@ static void flush_tagged_addr_state(void)
+>  		clear_thread_flag(TIF_TAGGED_ADDR);
+>  }
+>  
+> +#ifdef CONFIG_ARM64_GCS
+> +
+> +static void flush_gcs(void)
+> +{
+> +	if (system_supports_gcs()) {
 
-On Wed, Aug 2, 2023 at 11:32=E2=80=AFAM Andrew Jones <ajones@ventanamicro.c=
-om> wrote:
->
-> On Wed, Aug 02, 2023 at 10:03:27AM +0200, Alexandre Ghiti wrote:
-> > riscv now supports mmaping hardware counters so add what's needed to
-> > take advantage of that in libperf.
-> >
-> > Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> > Reviewed-by: Atish Patra <atishp@rivosinc.com>
-> > ---
-> >  tools/lib/perf/mmap.c | 66 +++++++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 66 insertions(+)
-> >
-> > diff --git a/tools/lib/perf/mmap.c b/tools/lib/perf/mmap.c
-> > index 0d1634cedf44..2184814b37dd 100644
-> > --- a/tools/lib/perf/mmap.c
-> > +++ b/tools/lib/perf/mmap.c
-> > @@ -392,6 +392,72 @@ static u64 read_perf_counter(unsigned int counter)
-> >
-> >  static u64 read_timestamp(void) { return read_sysreg(cntvct_el0); }
-> >
-> > +/* __riscv_xlen contains the witdh of the native base integer, here 64=
--bit */
-> > +#elif defined(__riscv) && __riscv_xlen =3D=3D 64
-> > +
-> > +/* TODO: implement rv32 support */
-> > +
-> > +#define CSR_CYCLE    0xc00
-> > +#define CSR_TIME     0xc01
-> > +
-> > +#define csr_read(csr)                                                \
-> > +({                                                           \
-> > +     register unsigned long __v;                             \
-> > +             __asm__ __volatile__ ("csrr %0, %1"             \
-> > +              : "=3Dr" (__v)                                   \
-> > +              : "i" (csr) : );                               \
-> > +              __v;                                           \
->
-> nit: no need for the indentation or line wrap,
->
-> ({
->         register unsigned long __v;
->         __asm__ __volatile__ ("csrr %0, %1" : "=3Dr" (__v) : "i" (csr));
->         __v;
-> })
->
-> Thanks,
-> drew
+Nitpick: use "if (system_supports_gcs()) return" when we have more than
+a line in the conditional block (slightly more consistent with other
+places).
 
-Sorry I didn't answer sooner, I was busy finishing everything before
-my holidays :) I won't have time to implement what you proposed, and
-more importantly I don't have a setup for rv32 to test quickly. I'll
-let Palmer decide if we can keep the TODO so that someone can do that
-later on top of this series.
+> +		gcs_free(current);
+> +		current->thread.gcs_el0_mode = 0;
+> +		write_sysreg_s(0, SYS_GCSCRE0_EL1);
+> +		write_sysreg_s(0, SYS_GCSPR_EL0);
+> +	}
+> +}
 
-Thanks anyway for your reviews!
+Do we need and isb() or there's one on this path? If it's only EL0
+making use of this register, we should be fine with the ERET before
+returning to user. Not sure whether the kernel uses this, GCSSTTR
+doesn't need it.
 
-Alex
+> +static void gcs_thread_switch(struct task_struct *next)
+> +{
+> +	if (!system_supports_gcs())
+> +		return;
+> +
+> +	gcs_preserve_current_state();
+> +
+> +	/*
+> +	 * Ensure that GCS changes are observable by/from other PEs in
+> +	 * case of migration.
+> +	 */
+> +	if (task_gcs_el0_enabled(current) || task_gcs_el0_enabled(next))
+> +		gcsb_dsync();
+
+What's this barrier for? The spec (at least the version I have) only
+talks about accesses, nothing to do with the registers that we context
+switch here.
+
+-- 
+Catalin
