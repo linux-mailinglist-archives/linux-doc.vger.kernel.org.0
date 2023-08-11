@@ -2,111 +2,128 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6C6B17797D6
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Aug 2023 21:35:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A6D667797F9
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Aug 2023 21:57:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233609AbjHKTfX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Aug 2023 15:35:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37094 "EHLO
+        id S235037AbjHKT5B (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Aug 2023 15:57:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49524 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229518AbjHKTfW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Aug 2023 15:35:22 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E188330EC
-        for <linux-doc@vger.kernel.org>; Fri, 11 Aug 2023 12:34:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1691782475;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=U4ViBLckjSjhNPhrCupJ24JN3joY3lkNEYQ4wLCKCu0=;
-        b=Zq3NimUceEEtDBKz+FAD6OfFy7Jm3vGJebq3uJY8Q3E5k5oNW1MK4D6P0+YJEzuW6LaHBl
-        7kNi1BYMDR5lQf/9Xi8iLp0IhP3GdjIL0/jYZAT7T/+kMMES/OM0IZt2rVGtEugt0BWgHA
-        OAoQQzPEyonh+DNCvYcpY8ElN2HqRuQ=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-54-Rl9t6dKwP9qAeaYIUQeYSA-1; Fri, 11 Aug 2023 15:34:28 -0400
-X-MC-Unique: Rl9t6dKwP9qAeaYIUQeYSA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com [10.11.54.3])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E3FF685C6F4;
-        Fri, 11 Aug 2023 19:34:23 +0000 (UTC)
-Received: from [10.22.17.82] (unknown [10.22.17.82])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 4ACD11121314;
-        Fri, 11 Aug 2023 19:34:20 +0000 (UTC)
-Message-ID: <ec070d3b-80fb-b625-cde1-80ead49c6227@redhat.com>
-Date:   Fri, 11 Aug 2023 15:34:19 -0400
+        with ESMTP id S229898AbjHKT46 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Aug 2023 15:56:58 -0400
+X-Greylist: delayed 1183 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 11 Aug 2023 12:56:57 PDT
+Received: from 66-220-144-179.mail-mxout.facebook.com (66-220-144-179.mail-mxout.facebook.com [66.220.144.179])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2A24B30F8
+        for <linux-doc@vger.kernel.org>; Fri, 11 Aug 2023 12:56:56 -0700 (PDT)
+Received: by devbig1114.prn1.facebook.com (Postfix, from userid 425415)
+        id E859DA091D51; Fri, 11 Aug 2023 12:36:59 -0700 (PDT)
+From:   Stefan Roesch <shr@devkernel.io>
+To:     kernel-team@fb.com
+Cc:     shr@devkernel.io, akpm@linux-foundation.org, david@redhat.com,
+        hannes@cmpxchg.org, riel@surriel.com, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-doc@vger.kernel.org
+Subject: [PATCH v1] mm/ksm: add pages scanned metric
+Date:   Fri, 11 Aug 2023 12:36:55 -0700
+Message-Id: <20230811193655.2518943-1-shr@devkernel.io>
+X-Mailer: git-send-email 2.39.3
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH V10 04/19] riscv: qspinlock: Add basic queued_spinlock
- support
-Content-Language: en-US
-To:     guoren@kernel.org, paul.walmsley@sifive.com, anup@brainfault.org,
-        peterz@infradead.org, mingo@redhat.com, will@kernel.org,
-        palmer@rivosinc.com, boqun.feng@gmail.com, tglx@linutronix.de,
-        paulmck@kernel.org, rostedt@goodmis.org, rdunlap@infradead.org,
-        catalin.marinas@arm.com, conor.dooley@microchip.com,
-        xiaoguang.xing@sophgo.com, bjorn@rivosinc.com,
-        alexghiti@rivosinc.com, keescook@chromium.org,
-        greentime.hu@sifive.com, ajones@ventanamicro.com,
-        jszhang@kernel.org, wefu@redhat.com, wuwei2016@iscas.ac.cn
-Cc:     linux-arch@vger.kernel.org, linux-riscv@lists.infradead.org,
-        linux-doc@vger.kernel.org, kvm@vger.kernel.org,
-        virtualization@lists.linux-foundation.org,
-        linux-csky@vger.kernel.org, Guo Ren <guoren@linux.alibaba.com>
-References: <20230802164701.192791-1-guoren@kernel.org>
- <20230802164701.192791-5-guoren@kernel.org>
-From:   Waiman Long <longman@redhat.com>
-In-Reply-To: <20230802164701.192791-5-guoren@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
-X-Spam-Status: No, score=-3.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,
-        SPF_HELO_NONE,SPF_NONE autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,
+        RCVD_IN_DNSWL_BLOCKED,RDNS_DYNAMIC,SPF_HELO_PASS,SPF_NEUTRAL,
+        TVD_RCVD_IP autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+ksm currently maintains several statistics, which let you determine how
+successful KSM is at sharing pages. However it does not contain a metric
+to determine how much work it does.
 
-On 8/2/23 12:46, guoren@kernel.org wrote:
-> 	\
-> diff --git a/arch/riscv/include/asm/spinlock.h b/arch/riscv/include/asm/spinlock.h
-> new file mode 100644
-> index 000000000000..c644a92d4548
-> --- /dev/null
-> +++ b/arch/riscv/include/asm/spinlock.h
-> @@ -0,0 +1,17 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +
-> +#ifndef __ASM_RISCV_SPINLOCK_H
-> +#define __ASM_RISCV_SPINLOCK_H
-> +
-> +#ifdef CONFIG_QUEUED_SPINLOCKS
-> +#define _Q_PENDING_LOOPS	(1 << 9)
-> +#endif
-> +
-> +#ifdef CONFIG_QUEUED_SPINLOCKS
+This commit adds the pages scanned metric. This allows the administrator
+to determine how many pages have been scanned over a period of time.
 
-You can merge the two "#ifdef CONFIG_QUEUED_SPINLOCKS" into single one 
-to avoid the duplication.
+Signed-off-by: Stefan Roesch <shr@devkernel.io>
+---
+ Documentation/admin-guide/mm/ksm.rst |  2 ++
+ mm/ksm.c                             | 16 +++++++++++++++-
+ 2 files changed, 17 insertions(+), 1 deletion(-)
 
-Cheers,
-Longman
+diff --git a/Documentation/admin-guide/mm/ksm.rst b/Documentation/admin-g=
+uide/mm/ksm.rst
+index 5c5be7bd84b8..776f244bdae4 100644
+--- a/Documentation/admin-guide/mm/ksm.rst
++++ b/Documentation/admin-guide/mm/ksm.rst
+@@ -159,6 +159,8 @@ The effectiveness of KSM and MADV_MERGEABLE is shown =
+in ``/sys/kernel/mm/ksm/``:
+=20
+ general_profit
+         how effective is KSM. The calculation is explained below.
++pages_scanned
++        how many pages are being scanned for ksm
+ pages_shared
+         how many shared pages are being used
+ pages_sharing
+diff --git a/mm/ksm.c b/mm/ksm.c
+index 6b7b8928fb96..8d6aee05421d 100644
+--- a/mm/ksm.c
++++ b/mm/ksm.c
+@@ -242,6 +242,9 @@ static struct kmem_cache *rmap_item_cache;
+ static struct kmem_cache *stable_node_cache;
+ static struct kmem_cache *mm_slot_cache;
+=20
++/* The number of pages scanned */
++static unsigned long ksm_pages_scanned;
++
+ /* The number of nodes in the stable tree */
+ static unsigned long ksm_pages_shared;
+=20
+@@ -2483,8 +2486,9 @@ static void ksm_do_scan(unsigned int scan_npages)
+ {
+ 	struct ksm_rmap_item *rmap_item;
+ 	struct page *page;
++	unsigned int npages =3D scan_npages;
+=20
+-	while (scan_npages-- && likely(!freezing(current))) {
++	while (npages-- && likely(!freezing(current))) {
+ 		cond_resched();
+ 		rmap_item =3D scan_get_next_rmap_item(&page);
+ 		if (!rmap_item)
+@@ -2492,6 +2496,8 @@ static void ksm_do_scan(unsigned int scan_npages)
+ 		cmp_and_merge_page(page, rmap_item);
+ 		put_page(page);
+ 	}
++
++	ksm_pages_scanned +=3D scan_npages - npages;
+ }
+=20
+ static int ksmd_should_run(void)
+@@ -3332,6 +3338,13 @@ static ssize_t max_page_sharing_store(struct kobje=
+ct *kobj,
+ }
+ KSM_ATTR(max_page_sharing);
+=20
++static ssize_t pages_scanned_show(struct kobject *kobj,
++				  struct kobj_attribute *attr, char *buf)
++{
++	return sysfs_emit(buf, "%lu\n", ksm_pages_scanned);
++}
++KSM_ATTR_RO(pages_scanned);
++
+ static ssize_t pages_shared_show(struct kobject *kobj,
+ 				 struct kobj_attribute *attr, char *buf)
+ {
+@@ -3440,6 +3453,7 @@ static struct attribute *ksm_attrs[] =3D {
+ 	&sleep_millisecs_attr.attr,
+ 	&pages_to_scan_attr.attr,
+ 	&run_attr.attr,
++	&pages_scanned_attr.attr,
+ 	&pages_shared_attr.attr,
+ 	&pages_sharing_attr.attr,
+ 	&pages_unshared_attr.attr,
 
-> +#include <asm/qspinlock.h>
-> +#include <asm/qrwlock.h>
-> +#else
-> +#include <asm-generic/spinlock.h>
-> +#endif
-> +
-> +#endif /* __ASM_RISCV_SPINLOCK_H */
+base-commit: f4a280e5bb4a764a75d3215b61bc0f02b4c26417
+--=20
+2.39.3
 
