@@ -2,111 +2,131 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0C81977957A
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Aug 2023 19:01:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5288077958E
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Aug 2023 19:03:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236052AbjHKRA7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Aug 2023 13:00:59 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55908 "EHLO
+        id S236402AbjHKRDU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Aug 2023 13:03:20 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56896 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235977AbjHKRA6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Aug 2023 13:00:58 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7484B30C1;
-        Fri, 11 Aug 2023 10:00:58 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 09EC160B79;
-        Fri, 11 Aug 2023 17:00:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 691AFC433C9;
-        Fri, 11 Aug 2023 17:00:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1691773257;
-        bh=l1aOISgHLyF1tS0E6wyiBR8uld1+gi5jofN8WS08bZI=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=bIZh4+l26+bumdjG+bZVToiZ3djsVl+GVTghFsSnjne6ExjsxrYrltO5Q9rsFIMfd
-         YeEVvJjZ7VWTWcFvjz5ZWsXfWmyZwO9/S2Cos7G1qdSmXXfUXr4ezYXmclymHemksB
-         5RFlZYC17AaJ2AokgHCtO+4iWICrLv85UxAsiDY+VMnBlMn7JdtD8KyceES26UHWtB
-         3rycLa8T0et++fte67RueG4SLZA1Sy7pwfaRsRPopgKwSgl9vdhlKBP+mh+LoGmPNR
-         0Ng37vhFG53uXvjrDeO0XHuxojFC+5AOpF4IWCoOJU6YnkDHvmVCN7s8T4TeaCiaFz
-         UEc566dSW2TyQ==
-Received: (nullmailer pid 3606791 invoked by uid 1000);
-        Fri, 11 Aug 2023 17:00:54 -0000
-Date:   Fri, 11 Aug 2023 11:00:54 -0600
-From:   Rob Herring <robh@kernel.org>
-To:     Yi-De Wu <yi-de.wu@mediatek.com>
-Cc:     Yingshiuan Pan <yingshiuan.pan@mediatek.com>,
-        Ze-Yu Wang <ze-yu.wang@mediatek.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        AngeloGioacchino Del Regno 
-        <angelogioacchino.delregno@collabora.com>,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-arch@vger.kernel.org, linux-mediatek@lists.infradead.org,
-        David Bradil <dbrazdil@google.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        Ivan Tseng <ivan.tseng@mediatek.com>,
-        Jade Shih <jades.shih@mediatek.com>,
-        My Chuang <my.chuang@mediatek.com>,
-        Shawn Hsiao <shawn.hsiao@mediatek.com>,
-        PeiLun Suei <peilun.suei@mediatek.com>,
-        Liju Chen <liju-clr.chen@mediatek.com>,
-        Willix Yeh <chi-shen.yeh@mediatek.com>
-Subject: Re: [PATCH v5 04/12] virt: geniezone: Add vcpu support
-Message-ID: <20230811170054.GB3593414-robh@kernel.org>
-References: <20230727080005.14474-1-yi-de.wu@mediatek.com>
- <20230727080005.14474-5-yi-de.wu@mediatek.com>
+        with ESMTP id S236434AbjHKRDF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Aug 2023 13:03:05 -0400
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 34857421D;
+        Fri, 11 Aug 2023 10:02:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+        Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+        Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+        bh=WHhV63f1r6eBSTn3NN5qCOu05YzqXap1fhKKqK/JDlg=; b=j9lZIit4MdGMX3PTOkeGs2CJOy
+        DIa78UPva+Gl81fv1o8svdPXlgs/LsHJAnPaLKTyX1wliSvp8gZdpC37t8/5sSxFRDq1DTNlyA3wQ
+        /tG+TnTC9kp4IRg/MNHHMM0wnX45RfCmriS+FHfFaqxWrsoyACbZSNO52J4elEnY+YUFJ+GW5p32E
+        6JIPISjzZ3DIA5E9Vxq+MKL2ww19oIg0dfiAS2DIyGNB9FqlnSvX0mTq5C2h1f7G5PIHIVg8opYpX
+        5So7U0L0SVN6ZCuLuLYA3xrSZgDY7Epr1WP9ToN6XHtjjMYyREuCxJB2M+d5L0rZR1/oY+Q/rprKx
+        AlPdnCaw==;
+Received: from [2601:1c2:980:9ec0::2764]
+        by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+        id 1qUVX1-00BBaH-27;
+        Fri, 11 Aug 2023 17:02:35 +0000
+Message-ID: <273efa43-f87a-1787-3017-e2dbea2e1176@infradead.org>
+Date:   Fri, 11 Aug 2023 10:02:35 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230727080005.14474-5-yi-de.wu@mediatek.com>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH 2/2] docs: sparse: convert TW sparse.txt into sparse.rst
+Content-Language: en-US
+To:     Min-Hua Chen <minhuadotchen@gmail.com>,
+        Hu Haowen <src.res@email.cn>, Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc-tw-discuss@lists.sourceforge.net,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20230811153554.84571-1-minhuadotchen@gmail.com>
+ <20230811153554.84571-3-minhuadotchen@gmail.com>
+From:   Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20230811153554.84571-3-minhuadotchen@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-5.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Jul 27, 2023 at 03:59:57PM +0800, Yi-De Wu wrote:
-> From: "Yingshiuan Pan" <yingshiuan.pan@mediatek.com>
+
+
+On 8/11/23 08:35, Min-Hua Chen wrote:
+> Follow Randy's advice [1] to move
+> Documentation/translations/zh_TW/dev-tools/sparse.txt
+> to
+> Documentation/translations/zh_TW/dev-tools/sparse.rst
 > 
-> VMM use this interface to create vcpu instance which is a fd, and this
-> fd will be for any vcpu operations, such as setting vcpu registers and
-> accepts the most important ioctl GZVM_VCPU_RUN which requests GenieZone
-> hypervisor to do context switch to execute VM's vcpu context.
+> [1] https://lore.kernel.org/lkml/bfab7c5b-e4d3-d8d9-afab-f43c0cdf26cf@infradead.org/
 > 
-> Signed-off-by: Yingshiuan Pan <yingshiuan.pan@mediatek.com>
-> Signed-off-by: Jerry Wang <ze-yu.wang@mediatek.com>
-> Signed-off-by: Liju Chen <liju-clr.chen@mediatek.com>
-> Signed-off-by: Yi-De Wu <yi-de.wu@mediatek.com>
+> Cc: Randy Dunlap <rdunlap@infradead.org>
+> Signed-off-by: Min-Hua Chen <minhuadotchen@gmail.com>
+
+Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Thanks.
+
 > ---
->  arch/arm64/geniezone/Makefile           |   2 +-
->  arch/arm64/geniezone/gzvm_arch_common.h |  20 ++
->  arch/arm64/geniezone/vcpu.c             |  88 +++++++++
->  arch/arm64/geniezone/vm.c               |  11 ++
->  arch/arm64/include/uapi/asm/gzvm_arch.h |  30 +++
+>  .../dev-tools/{sparse.txt => sparse.rst}      | 31 ++++++-------------
+>  1 file changed, 10 insertions(+), 21 deletions(-)
+>  rename Documentation/translations/zh_TW/dev-tools/{sparse.txt => sparse.rst} (71%)
+> 
+> diff --git a/Documentation/translations/zh_TW/dev-tools/sparse.txt b/Documentation/translations/zh_TW/dev-tools/sparse.rst
+> similarity index 71%
+> rename from Documentation/translations/zh_TW/dev-tools/sparse.txt
+> rename to Documentation/translations/zh_TW/dev-tools/sparse.rst
+> index 6d2d088b1060..2f632f6ce8e8 100644
+> --- a/Documentation/translations/zh_TW/dev-tools/sparse.txt
+> +++ b/Documentation/translations/zh_TW/dev-tools/sparse.rst
+> @@ -1,33 +1,22 @@
+> -﻿Chinese translated version of Documentation/dev-tools/sparse.rst
+> -
+> -If you have any comment or update to the content, please contact the
+> -original document maintainer directly.  However, if you have a problem
+> -communicating in English you can also ask the Chinese maintainer for
+> -help.  Contact the Chinese maintainer if this translation is outdated
+> -or if there is a problem with the translation.
+> +﻿Copyright 2004 Linus Torvalds
+> +Copyright 2004 Pavel Machek <pavel@ucw.cz>
+> +Copyright 2006 Bob Copeland <me@bobcopeland.com>
+>  
+> -Traditional Chinese maintainer: Hu Haowen <src.res@email.cn>
+> ----------------------------------------------------------------------
+> -Documentation/dev-tools/sparse.rst 的繁體中文翻譯
+> +.. include:: ../disclaimer-zh_TW.rst
+>  
+> -如果想評論或更新本文的內容，請直接聯繫原文檔的維護者。如果你使用英文
+> -交流有困難的話，也可以向繁體中文版維護者求助。如果本翻譯更新不及時或
+> -者翻譯存在問題，請聯繫繁體中文版維護者。
+> +:Original: Documentation/dev-tools/sparse.rst
+>  
+> -繁體中文版維護者： 胡皓文 Hu Haowen <src.res@email.cn>
+> -繁體中文版翻譯者： 胡皓文 Hu Haowen <src.res@email.cn>
+> +:翻譯:
+>  
+> -以下爲正文
+> ----------------------------------------------------------------------
+> +Traditional Chinese maintainer: Hu Haowen <src.res@email.cn>
+>  
+> -Copyright 2004 Linus Torvalds
+> -Copyright 2004 Pavel Machek <pavel@ucw.cz>
+> -Copyright 2006 Bob Copeland <me@bobcopeland.com>
+> +Sparse
+> +======
+>  
+>  使用 sparse 工具做類型檢查
+>  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+>  
+> -"__bitwise" 是一種類型屬性，所以你應該這樣使用它：
+> +"__bitwise" 是一種類型屬性，所以你應該這樣使用它::
+>  
+>          typedef int __bitwise pm_request_t;
+>  
 
-I'm almost certain that the arm64 maintainers will reject putting this 
-here. What is the purpose of the split with drivers/virt/? Do you plan 
-to support another arch in the near future?
-
-Yes, there's KVM stuff in arch/arm64, but that is multi-arch.
-
->  drivers/virt/geniezone/Makefile         |   3 +-
->  drivers/virt/geniezone/gzvm_vcpu.c      | 250 ++++++++++++++++++++++++
->  drivers/virt/geniezone/gzvm_vm.c        |   5 +
->  include/linux/gzvm_drv.h                |  21 ++
->  include/uapi/linux/gzvm.h               | 136 +++++++++++++
->  10 files changed, 564 insertions(+), 2 deletions(-)
->  create mode 100644 arch/arm64/geniezone/vcpu.c
->  create mode 100644 drivers/virt/geniezone/gzvm_vcpu.c
+-- 
+~Randy
