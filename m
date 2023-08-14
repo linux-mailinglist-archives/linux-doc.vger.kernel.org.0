@@ -2,95 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8A54077B13E
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Aug 2023 08:09:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 82AC477B242
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Aug 2023 09:21:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231696AbjHNGIi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Aug 2023 02:08:38 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39076 "EHLO
+        id S234056AbjHNHUj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Aug 2023 03:20:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36992 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233679AbjHNGId (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Aug 2023 02:08:33 -0400
-Received: from out30-124.freemail.mail.aliyun.com (out30-124.freemail.mail.aliyun.com [115.124.30.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E5CE6F4;
-        Sun, 13 Aug 2023 23:08:31 -0700 (PDT)
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R161e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018046050;MF=renyu.zj@linux.alibaba.com;NM=1;PH=DS;RN=20;SR=0;TI=SMTPD_---0VpgUTN2_1691993304;
-Received: from 30.221.149.204(mailfrom:renyu.zj@linux.alibaba.com fp:SMTPD_---0VpgUTN2_1691993304)
-          by smtp.aliyun-inc.com;
-          Mon, 14 Aug 2023 14:08:26 +0800
-Message-ID: <099acfd1-b32f-e325-ccd1-cfeff6667c58@linux.alibaba.com>
-Date:   Mon, 14 Aug 2023 14:08:24 +0800
+        with ESMTP id S234243AbjHNHUe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Aug 2023 03:20:34 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0FD86E77;
+        Mon, 14 Aug 2023 00:20:24 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 0208F63579;
+        Mon, 14 Aug 2023 07:20:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 563BAC43391;
+        Mon, 14 Aug 2023 07:20:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1691997622;
+        bh=Sk/MwmfdtPqlWCnzyKRYQGPjeiANNitkM94nFXMS1xo=;
+        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+        b=d+5t1PoC4mXgA12Yrr7mDxD7e0CpGoGbQ01Pl+KkXA2aMNPwmE/Y4GDZ4AinU9op1
+         MyiF7yFW/nNGT3tiN0+cD0XwQ6Ddi4mWwRXKrkzpZFzEW1+2Qvw/f3D6PCSXld4hCx
+         UZQCo2f8mmjLjqTyoMBIrZFio5Ugx/6OxgTqe3BJoWtXzAumqY44xtRpiPA01FFcei
+         bPkQmsyXyr6vd2Zl6r06txo2+aINlEfyMhn8iYoFShtw4NAp7V0B/yD6ZYQMB3NhYP
+         kgM9MsxA1EUdLvGxo+JBscHc7p90hRFhp5jffcxg4+RLfZWq8Q89QKs3f9gzwj9VtE
+         C4Torl2DsqMnw==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
+        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 35928C395C5;
+        Mon, 14 Aug 2023 07:20:22 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.13.0
-Subject: Re: [PATCH v6 3/7] perf jevents: Support more event fields
-To:     Ian Rogers <irogers@google.com>
-Cc:     John Garry <john.g.garry@oracle.com>,
-        Will Deacon <will@kernel.org>,
-        James Clark <james.clark@arm.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Mike Leach <mike.leach@linaro.org>,
-        Leo Yan <leo.yan@linaro.org>,
-        Namhyung Kim <namhyung@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Jiri Olsa <jolsa@kernel.org>,
-        Adrian Hunter <adrian.hunter@intel.com>,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-perf-users@vger.kernel.org, linux-doc@vger.kernel.org,
-        Zhuo Song <zhuo.song@linux.alibaba.com>,
-        Shuai Xue <xueshuai@linux.alibaba.com>
-References: <1691394685-61240-1-git-send-email-renyu.zj@linux.alibaba.com>
- <1691394685-61240-4-git-send-email-renyu.zj@linux.alibaba.com>
- <50a8778a-ebe4-5b3b-9367-c8547d6d991d@oracle.com>
-From:   Jing Zhang <renyu.zj@linux.alibaba.com>
-In-Reply-To: <50a8778a-ebe4-5b3b-9367-c8547d6d991d@oracle.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-14.3 required=5.0 tests=BAYES_00,
-        ENV_AND_HDR_SPF_MATCH,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,
-        USER_IN_DEF_SPF_WL autolearn=ham autolearn_force=no version=3.4.6
+Subject: Re: [PATCH net-next v2 1/2] dt-bindings: net: ethernet-controller: add
+ PSGMII mode
+From:   patchwork-bot+netdevbpf@kernel.org
+Message-Id: <169199762221.17065.4040096090781040409.git-patchwork-notify@kernel.org>
+Date:   Mon, 14 Aug 2023 07:20:22 +0000
+References: <20230811111032.231308-1-robert.marko@sartura.hr>
+In-Reply-To: <20230811111032.231308-1-robert.marko@sartura.hr>
+To:     Robert Marko <robert.marko@sartura.hr>
+Cc:     davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+        pabeni@redhat.com, robh+dt@kernel.org,
+        krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
+        andrew@lunn.ch, hkallweit1@gmail.com, linux@armlinux.org.uk,
+        corbet@lwn.net, netdev@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        luka.perkov@sartura.hr, robh@kernel.org
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hello:
 
+This series was applied to netdev/net-next.git (main)
+by David S. Miller <davem@davemloft.net>:
 
-在 2023/8/7 下午5:24, John Garry 写道:
-> On 07/08/2023 08:51, Jing Zhang wrote:
->> The usual event descriptions are "event=xxx" or "config=xxx", while the
->> event descriptions of CMN are "type=xxx, eventid=xxx" or more complex.
->>
->> $cat /sys/bus/event_source/devices/arm_cmn_0/events/hnf_cache_fill
->> type=0x5,eventid=0x3
->>
->> When adding aliases for events described as "event=xxx" or "config=xxx",
->> EventCode or ConfigCode can be used in the JSON files to describe the
->> events. But "eventid=xxx, type=xxx" cannot be supported at present.
->>
->> If EventCode and ConfigCode is not added in the alias JSON file, the
->> event description will add "event=0" by default. So, even if the event
->> field is added to supplement "eventid=xxx" and "type=xxx", the final
->> parsing result will be "event=0, eventid=xxx, type=xxx".
->>
->> Therefore, when EventCode and ConfigCode are missing in JSON, "event=0" is
->> no longer added by default. EventIdCode and Type are added to the event
->> field, and ConfigCode is moved into the event_field array which can also
->> guarantee its original function.
->>
->> Signed-off-by: Jing Zhang <renyu.zj@linux.alibaba.com>
+On Fri, 11 Aug 2023 13:10:06 +0200 you wrote:
+> Add a new PSGMII mode which is similar to QSGMII with the difference being
+> that it combines 5 SGMII lines into a single link compared to 4 on QSGMII.
 > 
-> I'll let Ian check this change as he is more familiar with this code.
+> It is commonly used by Qualcomm on their QCA807x PHY series.
 > 
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> Acked-by: Rob Herring <robh@kernel.org>
+> 
+> [...]
 
-Hi Ian,
+Here is the summary with links:
+  - [net-next,v2,1/2] dt-bindings: net: ethernet-controller: add PSGMII mode
+    https://git.kernel.org/netdev/net-next/c/de875d35e0b0
+  - [net-next,v2,2/2] net: phy: Introduce PSGMII PHY interface mode
+    https://git.kernel.org/netdev/net-next/c/83b5f0253b1e
 
-Could you please help to review this change？:)
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
-Thanks,
-Jing
+
