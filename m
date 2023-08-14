@@ -2,442 +2,202 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0F21877C38A
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Aug 2023 00:37:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8565077C39D
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Aug 2023 00:44:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232455AbjHNWg2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Aug 2023 18:36:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60732 "EHLO
+        id S230200AbjHNWn2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Aug 2023 18:43:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54036 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233341AbjHNWgQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Aug 2023 18:36:16 -0400
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com [IPv6:2607:f8b0:4864:20::830])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 64AC9D7
-        for <linux-doc@vger.kernel.org>; Mon, 14 Aug 2023 15:36:14 -0700 (PDT)
-Received: by mail-qt1-x830.google.com with SMTP id d75a77b69052e-407db3e9669so59001cf.1
-        for <linux-doc@vger.kernel.org>; Mon, 14 Aug 2023 15:36:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20221208; t=1692052573; x=1692657373;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1C4m61aAlyTvnZ9ddi6Qehi7I8S64IaXUtfMsyvoqcA=;
-        b=7lhpUtdqt/Xs7OI04RuTGLkbIWh7/yAb6a0IuFX9hkWkZuDOARGZQP2Gpm2Lfv/oJR
-         zBm+zmtOpuDyrw9DA+3B0x9ZGIdoE9Z95a6o3eXZwUx5r1vCOcIJwNwg/tMgb0N7IdNh
-         4ThIvIUkXO3WTdXk1vudwjS3C3fhbJJZsNbFhwlES+WmJ2cdP+3qZ3oFICjmgpMNZDjp
-         Il7bT9yl6JG4sThxj6Rs2ZsPl2WWS5+ql4BozfEjGcpHgwedeJGn5jPeAV3m6+j1Zfmr
-         9iTj3jjj7PnNpbFGlZijcNrmilYiT+l+fukiwrN4V1FwYaLhFb4eotjYsXfc/cLXr7IW
-         N/Wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692052573; x=1692657373;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1C4m61aAlyTvnZ9ddi6Qehi7I8S64IaXUtfMsyvoqcA=;
-        b=OORF//j3U8v9/5zC1XA163q4LD9UENZgJm60hPxeNWgGgTDDwDm/jBWo4ogMclAPhp
-         Mmgh5XwfxUaG43TdNgeZUZrA0To7RZPW4lTgSdsD5qI7iL3FIYHJweF4p7+KTpx9GMF+
-         g9P2+zTKM5kLuP1R7vjKurLwCAroGQrhi8APJIr0jRolzCdNTjMeWyzgx7EamK7evp3N
-         /mIxpSQ/msu23LW/icVj7d6Ur0/1kVk6DxOiCiFjVnbj23ELINf/HGFZNgSY718Oz01+
-         LHH3dKRj+JLvdTDq95asZ1NZFhZm8ohYwkny0txoL6MKO5v4mRGB6MjIVSuZGfO++ePL
-         eZTw==
-X-Gm-Message-State: AOJu0YwmaEhqNFe3Bmd1reAhtjZ9kWiIZiSKSGblQhxTCosPw8SWB6jt
-        bnVcU4rWmjHNN9ZYW52vIFohMHuwu2OYlea9kMfz6A==
-X-Google-Smtp-Source: AGHT+IFgvtOxDbhWw1QDSy67l3m6qzzvvgJ8g0QuFwDdn4jcXkZuSbNV5gomHHV5ysls30V6ggWNWM56UbY48qVTW8A=
-X-Received: by 2002:a05:622a:18a1:b0:403:b242:3e30 with SMTP id
- v33-20020a05622a18a100b00403b2423e30mr717216qtc.1.1692052573398; Mon, 14 Aug
- 2023 15:36:13 -0700 (PDT)
+        with ESMTP id S233105AbjHNWnC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Aug 2023 18:43:02 -0400
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7E41198;
+        Mon, 14 Aug 2023 15:43:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+        In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+        :Reply-To:Content-ID:Content-Description;
+        bh=so+nIMogsDEjvaVSmTA1TkKUt0VqeGL8iPbeGxQGV44=; b=V9laNy1dvw7FVJMjSINjPje0wq
+        jiL3SO5WjjPgzr9qyzrbQd/GFauY5VmOSLeBaOBfqnEYlPNJMkpiXDSJpgdMOEhGYMXMZRI1me5K3
+        atQIr0hEulDUXTNEEVncS57V2Yry8hA4lwBuqO3QsCLe0wLhP2LASSdDSC/IaESiPWpe1D8qJoMha
+        v72RmhMzR1CVrzs4OjyO9i9qv2nKxYvdgcX3YvDY+lM0OWAYsvBiEc84SSFxiDAb5fMEy1YXNQ3MK
+        S/T+zdsRO5t0uX+9ZV2CVIxHULwdiQe6DnCBdQ/z7frYtQuVt0ilZn0ppAFWZXvD1w42htLE/hwca
+        c+4a+I+A==;
+Received: from [2601:1c2:980:9ec0::577]
+        by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1qVgGn-004eME-OR; Mon, 14 Aug 2023 22:42:42 +0000
+Message-ID: <479a9c1f-9db7-61c8-3485-9b330f777930@infradead.org>
+Date:   Mon, 14 Aug 2023 15:42:34 -0700
 MIME-Version: 1.0
-References: <1691394685-61240-1-git-send-email-renyu.zj@linux.alibaba.com> <1691394685-61240-7-git-send-email-renyu.zj@linux.alibaba.com>
-In-Reply-To: <1691394685-61240-7-git-send-email-renyu.zj@linux.alibaba.com>
-From:   Ian Rogers <irogers@google.com>
-Date:   Mon, 14 Aug 2023 15:36:02 -0700
-Message-ID: <CAP-5=fWyLQrYt=LVS9SoxsuZuR5fmRaNOn+v8qxdYa6WH7WmMA@mail.gmail.com>
-Subject: Re: [PATCH v6 6/7] perf jevents: Add support for Arm CMN PMU aliasing
-To:     Jing Zhang <renyu.zj@linux.alibaba.com>
-Cc:     John Garry <john.g.garry@oracle.com>,
-        Will Deacon <will@kernel.org>,
-        James Clark <james.clark@arm.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Mike Leach <mike.leach@linaro.org>,
-        Leo Yan <leo.yan@linaro.org>,
-        Namhyung Kim <namhyung@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Jiri Olsa <jolsa@kernel.org>,
-        Adrian Hunter <adrian.hunter@intel.com>,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-perf-users@vger.kernel.org, linux-doc@vger.kernel.org,
-        Zhuo Song <zhuo.song@linux.alibaba.com>,
-        Shuai Xue <xueshuai@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,
-        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH net-next v6 5/6] page_pool: update document about frag API
+Content-Language: en-US
+To:     Yunsheng Lin <linyunsheng@huawei.com>, davem@davemloft.net,
+        kuba@kernel.org, pabeni@redhat.com
+Cc:     netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Lorenzo Bianconi <lorenzo@kernel.org>,
+        Alexander Duyck <alexander.duyck@gmail.com>,
+        Liang Chen <liangchen.linux@gmail.com>,
+        Alexander Lobakin <aleksander.lobakin@intel.com>,
+        Jesper Dangaard Brouer <hawk@kernel.org>,
+        Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+        Eric Dumazet <edumazet@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        John Fastabend <john.fastabend@gmail.com>,
+        linux-doc@vger.kernel.org, bpf@vger.kernel.org
+References: <20230814125643.59334-1-linyunsheng@huawei.com>
+ <20230814125643.59334-6-linyunsheng@huawei.com>
+From:   Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20230814125643.59334-6-linyunsheng@huawei.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-6.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Aug 7, 2023 at 12:51=E2=80=AFAM Jing Zhang <renyu.zj@linux.alibaba.=
-com> wrote:
->
-> Currently just add aliases for part of Arm CMN PMU events which
-> are general and compatible for any SoC and CMN-ANY.
->
-> "Compat" value "434*;436*;43c*;43a*" means it is compatible with
-> all CMN600/CMN650/CMN700/Ci700, which can be obtained from
-> commit 7819e05a0dce ("perf/arm-cmn: Revamp model detection").
->
-> The arm-cmn PMU events got from:
+Hi--
 
-nit: The use of the words "events" and "aliases" can be confusing -
-aliases isn't specific as there may be a notion of other aliases like
-for PMU names. I think in the code base we should avoid to use
-"aliases" and just use "events".
-
-Thanks,
-Ian
-
-> [0] https://developer.arm.com/documentation/100180/0302/?lang=3Den
-> [1] https://developer.arm.com/documentation/101408/0100/?lang=3Den
-> [2] https://developer.arm.com/documentation/102308/0302/?lang=3Den
-> [3] https://developer.arm.com/documentation/101569/0300/?lang=3Den
->
-> Signed-off-by: Jing Zhang <renyu.zj@linux.alibaba.com>
-> Reviewed-by: John Garry <john.g.garry@oracle.com>
+On 8/14/23 05:56, Yunsheng Lin wrote:
+> As more drivers begin to use the frag API, update the
+> document about how to decide which API to use for the
+> driver author.
+> 
+> Signed-off-by: Yunsheng Lin <linyunsheng@huawei.com>
+> CC: Lorenzo Bianconi <lorenzo@kernel.org>
+> CC: Alexander Duyck <alexander.duyck@gmail.com>
+> CC: Liang Chen <liangchen.linux@gmail.com>
+> CC: Alexander Lobakin <aleksander.lobakin@intel.com>
 > ---
->  .../pmu-events/arch/arm64/arm/cmn/sys/cmn.json     | 266 +++++++++++++++=
-++++++
->  tools/perf/pmu-events/jevents.py                   |   1 +
->  2 files changed, 267 insertions(+)
->  create mode 100644 tools/perf/pmu-events/arch/arm64/arm/cmn/sys/cmn.json
->
-> diff --git a/tools/perf/pmu-events/arch/arm64/arm/cmn/sys/cmn.json b/tool=
-s/perf/pmu-events/arch/arm64/arm/cmn/sys/cmn.json
-> new file mode 100644
-> index 0000000..e54036c
-> --- /dev/null
-> +++ b/tools/perf/pmu-events/arch/arm64/arm/cmn/sys/cmn.json
-> @@ -0,0 +1,266 @@
-> +[
-> +       {
-> +               "EventName": "hnf_cache_miss",
-> +               "EventIdCode": "0x1",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts total cache misses in first l=
-ookup result (high priority).",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_slc_sf_cache_access",
-> +               "EventIdCode": "0x2",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of cache accesses in f=
-irst access (high priority).",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_cache_fill",
-> +               "EventIdCode": "0x3",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts total allocations in HN SLC (=
-all cache line allocations to SLC).",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_pocq_retry",
-> +               "EventIdCode": "0x4",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of retried requests.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_pocq_reqs_recvd",
-> +               "EventIdCode": "0x5",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of requests that HN re=
-ceives.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_sf_hit",
-> +               "EventIdCode": "0x6",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of SF hits.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_sf_evictions",
-> +               "EventIdCode": "0x7",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of SF eviction cache i=
-nvalidations initiated.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_dir_snoops_sent",
-> +               "EventIdCode": "0x8",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of directed snoops sen=
-t (not including SF back invalidation).",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_brd_snoops_sent",
-> +               "EventIdCode": "0x9",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of multicast snoops se=
-nt (not including SF back invalidation).",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_slc_eviction",
-> +               "EventIdCode": "0xa",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of SLC evictions (dirt=
-y only).",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_slc_fill_invalid_way",
-> +               "EventIdCode": "0xb",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of SLC fills to an inv=
-alid way.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_mc_retries",
-> +               "EventIdCode": "0xc",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of retried transaction=
-s by the MC.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_mc_reqs",
-> +               "EventIdCode": "0xd",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of requests that are s=
-ent to MC.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hnf_qos_hh_retry",
-> +               "EventIdCode": "0xe",
-> +               "Type": "0x5",
-> +               "BriefDescription": "Counts number of times a HighHigh pr=
-iority request is protocolretried at the HN=E2=80=91F.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "rnid_s0_rdata_beats",
-> +               "EventIdCode": "0x1",
-> +               "Type": "0xa",
-> +               "BriefDescription": "Number of RData beats (RVALID and RR=
-EADY) dispatched on port 0. This event measures the read bandwidth, includi=
-ng CMO responses.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "rnid_s1_rdata_beats",
-> +               "EventIdCode": "0x2",
-> +               "Type": "0xa",
-> +               "BriefDescription": "Number of RData beats (RVALID and RR=
-EADY) dispatched on port 1. This event measures the read bandwidth, includi=
-ng CMO responses.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "rnid_s2_rdata_beats",
-> +               "EventIdCode": "0x3",
-> +               "Type": "0xa",
-> +               "BriefDescription": "Number of RData beats (RVALID and RR=
-EADY) dispatched on port 2. This event measures the read bandwidth, includi=
-ng CMO responses.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "rnid_rxdat_flits",
-> +               "EventIdCode": "0x4",
-> +               "Type": "0xa",
-> +               "BriefDescription": "Number of RXDAT flits received. This=
- event measures the true read data bandwidth, excluding CMOs.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "rnid_txdat_flits",
-> +               "EventIdCode": "0x5",
-> +               "Type": "0xa",
-> +               "BriefDescription": "Number of TXDAT flits dispatched. Th=
-is event measures the write bandwidth.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "rnid_txreq_flits_total",
-> +               "EventIdCode": "0x6",
-> +               "Type": "0xa",
-> +               "BriefDescription": "Number of TXREQ flits dispatched. Th=
-is event measures the total request bandwidth.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "rnid_txreq_flits_retried",
-> +               "EventIdCode": "0x7",
-> +               "Type": "0xa",
-> +               "BriefDescription": "Number of retried TXREQ flits dispat=
-ched. This event measures the retry rate.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "sbsx_txrsp_retryack",
-> +               "EventIdCode": "0x4",
-> +               "Type": "0x7",
-> +               "BriefDescription": "Number of RXREQ flits dispatched. Th=
-is event is a measure of the retry rate.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "sbsx_txdat_flitv",
-> +               "EventIdCode": "0x5",
-> +               "Type": "0x7",
-> +               "BriefDescription": "Number of TXDAT flits dispatched fro=
-m XP to SBSX. This event is a measure of the write bandwidth.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "sbsx_arvalid_no_arready",
-> +               "EventIdCode": "0x21",
-> +               "Type": "0x7",
-> +               "BriefDescription": "Number of cycles the SBSX bridge is =
-stalled because of backpressure on AR channel.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "sbsx_awvalid_no_awready",
-> +               "EventIdCode": "0x22",
-> +               "Type": "0x7",
-> +               "BriefDescription": "Number of cycles the SBSX bridge is =
-stalled because of backpressure on AW channel.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "sbsx_wvalid_no_wready",
-> +               "EventIdCode": "0x23",
-> +               "Type": "0x7",
-> +               "BriefDescription": "Number of cycles the SBSX bridge is =
-stalled because of backpressure on W channel.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hni_txrsp_retryack",
-> +               "EventIdCode": "0x2a",
-> +               "Type": "0x4",
-> +               "BriefDescription": "Number of RXREQ flits dispatched. Th=
-is event is a measure of the retry rate.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hni_arvalid_no_arready",
-> +               "EventIdCode": "0x2b",
-> +               "Type": "0x4",
-> +               "BriefDescription": "Number of cycles the HN-I bridge is =
-stalled because of backpressure on AR channel.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hni_arready_no_arvalid",
-> +               "EventIdCode": "0x2c",
-> +               "Type": "0x4",
-> +               "BriefDescription": "Number of cycles the AR channel is w=
-aiting for new requests from HN-I bridge.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hni_awvalid_no_awready",
-> +               "EventIdCode": "0x2d",
-> +               "Type": "0x4",
-> +               "BriefDescription": "Number of cycles the HN-I bridge is =
-stalled because of backpressure on AW channel.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hni_awready_no_awvalid",
-> +               "EventIdCode": "0x2e",
-> +               "Type": "0x4",
-> +               "BriefDescription": "Number of cycles the AW channel is w=
-aiting for new requests from HN-I bridge.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hni_wvalid_no_wready",
-> +               "EventIdCode": "0x2f",
-> +               "Type": "0x4",
-> +               "BriefDescription": "Number of cycles the HN-I bridge is =
-stalled because of backpressure on W channel.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       },
-> +       {
-> +               "EventName": "hni_txdat_stall",
-> +               "EventIdCode": "0x30",
-> +               "Type": "0x4",
-> +               "BriefDescription": "TXDAT valid but no link credit avail=
-able.",
-> +               "Unit": "arm_cmn",
-> +               "Compat": "434*;436*;43c*;43a*"
-> +       }
-> +]
-> diff --git a/tools/perf/pmu-events/jevents.py b/tools/perf/pmu-events/jev=
-ents.py
-> index 9c0f63a..bfdfb67 100755
-> --- a/tools/perf/pmu-events/jevents.py
-> +++ b/tools/perf/pmu-events/jevents.py
-> @@ -272,6 +272,7 @@ class JsonEvent:
->            'DFPMC': 'amd_df',
->            'cpu_core': 'cpu_core',
->            'cpu_atom': 'cpu_atom',
-> +          'arm_cmn': 'arm_cmn',
->        }
->        return table[unit] if unit in table else f'uncore_{unit.lower()}'
->
-> --
-> 1.8.3.1
->
+>   Documentation/networking/page_pool.rst |  4 +-
+>   include/net/page_pool/helpers.h        | 58 +++++++++++++++++++++++---
+>   2 files changed, 55 insertions(+), 7 deletions(-)
+> 
+
+> diff --git a/include/net/page_pool/helpers.h b/include/net/page_pool/helpers.h
+> index b920224f6584..0f1eaa2986f9 100644
+> --- a/include/net/page_pool/helpers.h
+> +++ b/include/net/page_pool/helpers.h
+> @@ -8,13 +8,28 @@
+>   /**
+>    * DOC: page_pool allocator
+>    *
+> - * The page_pool allocator is optimized for the XDP mode that
+> - * uses one frame per-page, but it can fallback on the
+> - * regular page allocator APIs.
+> + * The page_pool allocator is optimized for recycling page or page frag used by
+> + * skb packet and xdp frame.
+>    *
+> - * Basic use involves replacing alloc_pages() calls with the
+> - * page_pool_alloc_pages() call.  Drivers should use
+> - * page_pool_dev_alloc_pages() replacing dev_alloc_pages().
+> + * Basic use involves replacing napi_alloc_frag() and alloc_pages() calls with
+> + * page_pool_cache_alloc() and page_pool_alloc(), which allocate memory with or
+> + * without page splitting depending on the requested memory size.
+> + *
+> + * If the driver knows that it always requires full pages or its allocates are
+
+                                                              allocations
+
+> + * always smaller than half a page, it can use one of the more specific API
+> + * calls:
+> + *
+> + * 1. page_pool_alloc_pages(): allocate memory without page splitting when
+> + * driver knows that the memory it need is always bigger than half of the page
+> + * allocated from page pool. There is no cache line dirtying for 'struct page'
+> + * when a page is recycled back to the page pool.
+> + *
+> + * 2. page_pool_alloc_frag(): allocate memory with page splitting when driver
+> + * knows that the memory it need is always smaller than or equal to half of the
+> + * page allocated from page pool. Page splitting enables memory saving and thus
+> + * avoid TLB/cache miss for data access, but there also is some cost to
+
+       avoids
+
+> + * implement page splitting, mainly some cache line dirtying/bouncing for
+> + * 'struct page' and atomic operation for page->pp_frag_count.
+>    *
+>    * API keeps track of in-flight pages, in order to let API user know
+>    * when it is safe to free a page_pool object.  Thus, API users
+> @@ -100,6 +115,14 @@ static inline struct page *page_pool_alloc_frag(struct page_pool *pool,
+>   	return __page_pool_alloc_frag(pool, offset, size, gfp);
+>   }
+>   
+> +/**
+> + * page_pool_dev_alloc_frag() - allocate a page frag.
+> + * @pool[in]	pool from which to allocate
+> + * @offset[out]	offset to the allocated page
+> + * @size[in]	requested size
+
+Please use kernel-doc syntax/notation here.
+
+> + *
+> + * Get a page frag from the page allocator or page_pool caches.
+> + */
+>   static inline struct page *page_pool_dev_alloc_frag(struct page_pool *pool,
+>   						    unsigned int *offset,
+>   						    unsigned int size)
+> @@ -143,6 +166,14 @@ static inline struct page *page_pool_alloc(struct page_pool *pool,
+>   	return page;
+>   }
+>   
+> +/**
+> + * page_pool_dev_alloc() - allocate a page or a page frag.
+> + * @pool[in]:		pool from which to allocate
+> + * @offset[out]:	offset to the allocated page
+> + * @size[in, out]:	in as the requested size, out as the allocated size
+
+and here.
+
+> + *
+> + * Get a page or a page frag from the page allocator or page_pool caches.
+> + */
+>   static inline struct page *page_pool_dev_alloc(struct page_pool *pool,
+>   					       unsigned int *offset,
+>   					       unsigned int *size)
+> @@ -165,6 +196,13 @@ static inline void *page_pool_cache_alloc(struct page_pool *pool,
+>   	return page_address(page) + offset;
+>   }
+>   
+> +/**
+> + * page_pool_dev_cache_alloc() - allocate a cache.
+> + * @pool[in]:		pool from which to allocate
+> + * @size[in, out]:	in as the requested size, out as the allocated size
+
+and here.
+
+> + *
+> + * Get a cache from the page allocator or page_pool caches.
+> + */
+>   static inline void *page_pool_dev_cache_alloc(struct page_pool *pool,
+>   					      unsigned int *size)
+>   {
+> @@ -316,6 +354,14 @@ static inline void page_pool_recycle_direct(struct page_pool *pool,
+>   	page_pool_put_full_page(pool, page, true);
+>   }
+>   
+> +/**
+> + * page_pool_cache_free() - free a cache into the page_pool
+> + * @pool[in]:		pool from which cache was allocated
+> + * @data[in]:		cache to free
+> + * @allow_direct[in]:	freed by the consumer, allow lockless caching
+
+and here.
+
+> + *
+> + * Free a cache allocated from page_pool_dev_cache_alloc().
+> + */
+>   static inline void page_pool_cache_free(struct page_pool *pool, void *data,
+>   					bool allow_direct)
+>   {
+
+Thanks.
+
