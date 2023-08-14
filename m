@@ -2,91 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 82AC477B242
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Aug 2023 09:21:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2C7DD77B269
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Aug 2023 09:28:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234056AbjHNHUj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Aug 2023 03:20:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36992 "EHLO
+        id S233396AbjHNH1i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Aug 2023 03:27:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52530 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234243AbjHNHUe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Aug 2023 03:20:34 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [IPv6:2604:1380:4641:c500::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0FD86E77;
-        Mon, 14 Aug 2023 00:20:24 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 0208F63579;
-        Mon, 14 Aug 2023 07:20:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 563BAC43391;
-        Mon, 14 Aug 2023 07:20:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1691997622;
-        bh=Sk/MwmfdtPqlWCnzyKRYQGPjeiANNitkM94nFXMS1xo=;
-        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-        b=d+5t1PoC4mXgA12Yrr7mDxD7e0CpGoGbQ01Pl+KkXA2aMNPwmE/Y4GDZ4AinU9op1
-         MyiF7yFW/nNGT3tiN0+cD0XwQ6Ddi4mWwRXKrkzpZFzEW1+2Qvw/f3D6PCSXld4hCx
-         UZQCo2f8mmjLjqTyoMBIrZFio5Ugx/6OxgTqe3BJoWtXzAumqY44xtRpiPA01FFcei
-         bPkQmsyXyr6vd2Zl6r06txo2+aINlEfyMhn8iYoFShtw4NAp7V0B/yD6ZYQMB3NhYP
-         kgM9MsxA1EUdLvGxo+JBscHc7p90hRFhp5jffcxg4+RLfZWq8Q89QKs3f9gzwj9VtE
-         C4Torl2DsqMnw==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
-        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 35928C395C5;
-        Mon, 14 Aug 2023 07:20:22 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+        with ESMTP id S234138AbjHNH1K (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Aug 2023 03:27:10 -0400
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 51831E75
+        for <linux-doc@vger.kernel.org>; Mon, 14 Aug 2023 00:27:07 -0700 (PDT)
+Received: from loongson.cn (unknown [112.20.109.245])
+        by gateway (Coremail) with SMTP id _____8BxJvFK19lkowYYAA--.50100S3;
+        Mon, 14 Aug 2023 15:27:06 +0800 (CST)
+Received: from [192.168.100.8] (unknown [112.20.109.245])
+        by localhost.localdomain (Coremail) with SMTP id AQAAf8AxjiNI19lk05NZAA--.49421S3;
+        Mon, 14 Aug 2023 15:27:06 +0800 (CST)
+Message-ID: <454e0802-7912-4a1d-83b3-70713ddb1360@loongson.cn>
+Date:   Mon, 14 Aug 2023 15:27:04 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] docs/zh_CN: correct regi_chg(),regi_add() to
+ region_chg(),region_add()
+To:     Xueshi Hu <xueshi.hu@smartx.com>
+Cc:     corbet@lwn.net, alexs@kernel.org, linux-doc@vger.kernel.org
+References: <20230813132417.815036-1-xueshi.hu@smartx.com>
+Content-Language: en-US
+From:   Yanteng Si <siyanteng@loongson.cn>
+In-Reply-To: <20230813132417.815036-1-xueshi.hu@smartx.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH net-next v2 1/2] dt-bindings: net: ethernet-controller: add
- PSGMII mode
-From:   patchwork-bot+netdevbpf@kernel.org
-Message-Id: <169199762221.17065.4040096090781040409.git-patchwork-notify@kernel.org>
-Date:   Mon, 14 Aug 2023 07:20:22 +0000
-References: <20230811111032.231308-1-robert.marko@sartura.hr>
-In-Reply-To: <20230811111032.231308-1-robert.marko@sartura.hr>
-To:     Robert Marko <robert.marko@sartura.hr>
-Cc:     davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
-        pabeni@redhat.com, robh+dt@kernel.org,
-        krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
-        andrew@lunn.ch, hkallweit1@gmail.com, linux@armlinux.org.uk,
-        corbet@lwn.net, netdev@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        luka.perkov@sartura.hr, robh@kernel.org
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-CM-TRANSID: AQAAf8AxjiNI19lk05NZAA--.49421S3
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
+X-Coremail-Antispam: 1Uk129KBj93XoW7tFWrKF4xWF17AF4kCr1UCFX_yoW8tFykpa
+        47KFyfW3WxAr1jgr1UK34jvrnYkan7Ja1DCrn7J3yfJwn3J3sF9rZxG39rKan2qr97Aay7
+        W3y0gFZ7CryIkFgCm3ZEXasCq-sJn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7KY7ZEXa
+        sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+        0xBIdaVrnRJUUUkjb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+        IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+        e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+        0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
+        xVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx
+        1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv
+        67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41l42xK82IYc2Ij64
+        vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8G
+        jcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2I
+        x0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK
+        8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I
+        0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07j1WlkUUUUU=
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello:
 
-This series was applied to netdev/net-next.git (main)
-by David S. Miller <davem@davemloft.net>:
+在 2023/8/13 21:24, Xueshi Hu 写道:
+> Minor typo fix in translations.
+>
+> Signed-off-by: Xueshi Hu <xueshi.hu@smartx.com>
 
-On Fri, 11 Aug 2023 13:10:06 +0200 you wrote:
-> Add a new PSGMII mode which is similar to QSGMII with the difference being
-> that it combines 5 SGMII lines into a single link compared to 4 on QSGMII.
-> 
-> It is commonly used by Qualcomm on their QCA807x PHY series.
-> 
-> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
-> Acked-by: Rob Herring <robh@kernel.org>
-> 
-> [...]
+Acked-by: Yanteng Si <siyanteng@loongson.cn>
 
-Here is the summary with links:
-  - [net-next,v2,1/2] dt-bindings: net: ethernet-controller: add PSGMII mode
-    https://git.kernel.org/netdev/net-next/c/de875d35e0b0
-  - [net-next,v2,2/2] net: phy: Introduce PSGMII PHY interface mode
-    https://git.kernel.org/netdev/net-next/c/83b5f0253b1e
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+Thanks,
 
+Yanteng
+
+> ---
+>   Documentation/translations/zh_CN/mm/hugetlbfs_reserv.rst | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/Documentation/translations/zh_CN/mm/hugetlbfs_reserv.rst b/Documentation/translations/zh_CN/mm/hugetlbfs_reserv.rst
+> index b7a0544224ad..45048a30f736 100644
+> --- a/Documentation/translations/zh_CN/mm/hugetlbfs_reserv.rst
+> +++ b/Documentation/translations/zh_CN/mm/hugetlbfs_reserv.rst
+> @@ -296,7 +296,7 @@ COW和预留
+>      调用代码执行全局检查和分配，以确定是否有足够的巨页使操作成功。
+>   
+>   2)
+> -  a) 如果操作能够成功，regi_add()将被调用，以实际修改先前传递给regi_chg()的相同范围
+> +  a) 如果操作能够成功，region_add()将被调用，以实际修改先前传递给region_chg()的相同范围
+>        [f, t]的预留映射。
+>     b) 如果操作不能成功，region_abort被调用，在相同的范围[f, t]内中止操作。
+>   
+> @@ -307,7 +307,7 @@ COW和预留
+>   如上所述，region_chg()确定该范围内当前没有在映射中表示的页面的数量。region_add()返回添加
+>   到映射中的范围内的页数。在大多数情况下， region_add() 的返回值与 region_chg() 的返回值相
+>   同。然而，在共享映射的情况下，有可能在调用 region_chg() 和 region_add() 之间对预留映射进
+> -行更改。在这种情况下，regi_add()的返回值将与regi_chg()的返回值不符。在这种情况下，全局计数
+> +行更改。在这种情况下，region_add()的返回值将与region_chg()的返回值不符。在这种情况下，全局计数
+>   和子池计数很可能是不正确的，需要调整。检查这种情况并进行适当的调整是调用者的责任。
+>   
+>   函数region_del()被调用以从预留映射中移除区域。
 
