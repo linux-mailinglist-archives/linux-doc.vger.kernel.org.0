@@ -2,84 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B831877BE53
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Aug 2023 18:45:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1D03A77BE82
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Aug 2023 18:58:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229730AbjHNQpR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Aug 2023 12:45:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51250 "EHLO
+        id S229469AbjHNQ5i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Aug 2023 12:57:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59236 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231444AbjHNQpL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Aug 2023 12:45:11 -0400
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com [IPv6:2607:f8b0:4864:20::12b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C01EC11D
-        for <linux-doc@vger.kernel.org>; Mon, 14 Aug 2023 09:45:10 -0700 (PDT)
-Received: by mail-il1-x12b.google.com with SMTP id e9e14a558f8ab-3492e05be7cso2525ab.0
-        for <linux-doc@vger.kernel.org>; Mon, 14 Aug 2023 09:45:10 -0700 (PDT)
+        with ESMTP id S231678AbjHNQ5S (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Aug 2023 12:57:18 -0400
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com [IPv6:2607:f8b0:4864:20::c2a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7CA27199F;
+        Mon, 14 Aug 2023 09:56:57 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id 006d021491bc7-56dfe5ce871so1542176eaf.2;
+        Mon, 14 Aug 2023 09:56:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20221208; t=1692031510; x=1692636310;
+        d=gmail.com; s=20221208; t=1692032166; x=1692636966;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=LUOrFLsIZYMXOqsY5xgWwBV0ImqoZShpWf5IuSUgWgI=;
-        b=jI6Gr0FRrjvGeJMEI2J8ZnZVkqk3LIcr8NpGV+Y+d48pChX47ng6l8lIZluFd5qijf
-         Vy4Pc+avZR6i4rP9hCWvkX1U0Vn+evBgb/sam6zB/uLlpDMD8+c3BrrKzjB0JRBdI9H9
-         7LUSfD27s0IiFR2tak8vcZ1D8yQu4Z7UzYsjGDv3sDMH/nB6iDvgaT81tC4SkjjjKM9q
-         uuAHoeR4LGvJ3UXkY+9WMJuQbtdbtNM3VW93Wrwk+G/XZih4HW6Z3xtepuFT9Sxv9vYh
-         8QiKW1e+b3Y7vhVL9vVWPkbMEKrzIbCWOjDTSlDW5MGe7DcgscNk/PPPu6yIi9obT4lZ
-         SbgQ==
+        bh=f9O7uVavugQIWG4+/30ol/uNZ+vUipg1yWncf1HB7Z8=;
+        b=SXLBBu9oNOxnHeWHA3EzDEcQx4zuwk/WnRawLjvMOoFNw7dpzT1cc0Zh3imGGu5biH
+         hF3gj0fRHQ72e59mu7XzFNFxxtuLAL6ZFxOgG2j4wOX+YZAVs3TkYanLQVFe+jZctHSn
+         gRxqqBRQ64EUwLZkoQs6MhwsohiAS+iuZrEPX6LlKTe7wKlVSVqQ5ZUWMS2XWnv3ukdN
+         xlx8rrlrQqId4/tGMozDD2l5xfvpRrFWtivaal0jSX3deLqfh+C3I6DXAEvX5W8/UQJ5
+         CNDQmsfU8Esw1uGGrTs5LBHBGY5zVpcRKJdL/zTQ7JbJGkTBRoprtkOUNrZbBBQ1Hqzm
+         u1xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692031510; x=1692636310;
+        d=1e100.net; s=20221208; t=1692032166; x=1692636966;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=LUOrFLsIZYMXOqsY5xgWwBV0ImqoZShpWf5IuSUgWgI=;
-        b=gqCio8e4BPvhZ5hUk/nWuXJGXoWGJk1y/Nbg5EbALKOUycdC4ghChOKtGBRxTWRmvS
-         liWIa6DhSG+y/7Uw+sMB0iOBKwG98l6ExfMNplzjaoHu2roWmXBzqDpfRiik8B/PBBq0
-         tb65vgJDK71aZlIttbiqjDlQ3sbMoGMsKA+VZFSk2mPWk5C88WzJYceYGPzEwDLjVXeK
-         EGfCXSguvYRgcfi2s/Kt6sCD8Hwa2DVV1/FwvBvwpZRmn4Pk3wknJUS1eFAXDZJ8mq0Z
-         FtQJi5hCXHY0z38yNq0qbQeV8/URlQQLsCd3cEG4fU9s/Dp/GofU4zo0L39fv0ybvTHH
-         +Qyw==
-X-Gm-Message-State: AOJu0YyZ89CY5uPG5XK2vbuqWsnY617UknAsRvqzGDpv4p5PVth0CQxR
-        M5pArawRzYtPPOJk4SI6c2vExEd+3tunOXbqcnPQSw==
-X-Google-Smtp-Source: AGHT+IHaVdS2tL6lFC4JIfMaRKMI72Pka+6x9A1yAAwchBWIR4AFgLTDvCZa48IjUvUxK8db50EWHKlDZ5LeoG7M3q8=
-X-Received: by 2002:a05:6e02:1d0d:b0:346:676f:3517 with SMTP id
- i13-20020a056e021d0d00b00346676f3517mr579011ila.11.1692031510069; Mon, 14 Aug
- 2023 09:45:10 -0700 (PDT)
+        bh=f9O7uVavugQIWG4+/30ol/uNZ+vUipg1yWncf1HB7Z8=;
+        b=CJ7eDssTBGXb/bdDoe+U+BeEtGUEnRw5bZIoXuQ7k+rRcjidn5a+RaMpoIdkCAx21x
+         pNdPwbfR620dSoVDkA5xIAR7pq8oTz0D4LhXP2cXCNXLxWlb+m4L5O2aL8cs9qhJlQ8b
+         qQhF0X5wy0rUswqY3o8Pn7MxiEg4179t+xZguqyizr6duc67ifapgcRVrt9Xi/XUb4iA
+         KyErwI9hMhYwpcpEo95k6cE8sAs/ckWwWpvMpt2W6cpS3HWIpQCBNOPNIgi2s+9BRipV
+         gwxk+nUlFNe5DWWY2AvUua9AEejMr5NKxg2WsyhHnzLv3VW9QR+V7wiIal/OLU6MJ2AE
+         oSLw==
+X-Gm-Message-State: AOJu0YzIl60tqzkn4qfEO/zGmM8hBaKMmXvqTBedwG/lSbY+LGIIMj4Y
+        Xxr4Cmb3ZjYBwY8Ur+fzgdKagOXaNX3qZVJysSQ=
+X-Google-Smtp-Source: AGHT+IGRiUAbrBbY9Vni9Tn8QSBhVGIX9TfUXofBqPCsNnEmk1YYklY4fqhqnWDK5MhusbsyCSnQmJcr7FbUisha/AQ=
+X-Received: by 2002:a05:6358:9212:b0:134:e952:16a8 with SMTP id
+ d18-20020a056358921200b00134e95216a8mr6760283rwb.24.1692032165879; Mon, 14
+ Aug 2023 09:56:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230802080328.1213905-1-alexghiti@rivosinc.com> <20230802080328.1213905-11-alexghiti@rivosinc.com>
-In-Reply-To: <20230802080328.1213905-11-alexghiti@rivosinc.com>
-From:   Ian Rogers <irogers@google.com>
-Date:   Mon, 14 Aug 2023 09:44:58 -0700
-Message-ID: <CAP-5=fVcMg7TL6W_jH61PW6dYMobuTs13d4JDuTAx=mxJ+PNtQ@mail.gmail.com>
-Subject: Re: [PATCH v6 10/10] perf: tests: Adapt mmap-basic.c for riscv
-To:     Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Jiri Olsa <jolsa@kernel.org>,
-        Namhyung Kim <namhyung@kernel.org>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Atish Patra <atishp@atishpatra.org>,
-        Anup Patel <anup@brainfault.org>,
-        Will Deacon <will@kernel.org>, Rob Herring <robh@kernel.org>,
-        Andrew Jones <ajones@ventanamicro.com>,
-        =?UTF-8?Q?R=C3=A9mi_Denis=2DCourmont?= <remi@remlab.net>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, linux-riscv@lists.infradead.org,
-        linux-arm-kernel@lists.infradead.org,
-        Atish Patra <atishp@rivosinc.com>
+References: <CGME20230811105627epcas5p1aa1ef0e58bcd0fc05a072c8b40dcfb96@epcas5p1.samsung.com>
+ <20230811105300.15889-1-nj.shetty@samsung.com> <2cc56fb5-ddba-b6d0-f66b-aa8fffa42af0@acm.org>
+In-Reply-To: <2cc56fb5-ddba-b6d0-f66b-aa8fffa42af0@acm.org>
+From:   Nitesh Shetty <nitheshshetty@gmail.com>
+Date:   Mon, 14 Aug 2023 22:25:54 +0530
+Message-ID: <CAOSviJ1b5ySAugzKExa_ZQgOzvQAOWB3D-ZRMQeGmNpQbaoBSQ@mail.gmail.com>
+Subject: Re: [dm-devel] [PATCH v14 00/11] Implement copy offload support
+To:     Bart Van Assche <bvanassche@acm.org>
+Cc:     Nitesh Shetty <nj.shetty@samsung.com>,
+        Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>,
+        Alasdair Kergon <agk@redhat.com>,
+        Mike Snitzer <snitzer@kernel.org>, dm-devel@redhat.com,
+        Keith Busch <kbusch@kernel.org>,
+        Christoph Hellwig <hch@lst.de>,
+        Sagi Grimberg <sagi@grimberg.me>,
+        Chaitanya Kulkarni <kch@nvidia.com>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Christian Brauner <brauner@kernel.org>,
+        martin.petersen@oracle.com, linux-doc@vger.kernel.org,
+        gost.dev@samsung.com, linux-kernel@vger.kernel.org,
+        linux-nvme@lists.infradead.org, linux-block@vger.kernel.org,
+        mcgrof@kernel.org, dlemoal@kernel.org,
+        linux-fsdevel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,
-        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=ham
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -87,53 +82,49 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Aug 2, 2023 at 1:14=E2=80=AFAM Alexandre Ghiti <alexghiti@rivosinc.=
-com> wrote:
+On Sat, Aug 12, 2023 at 3:42=E2=80=AFAM Bart Van Assche <bvanassche@acm.org=
+> wrote:
 >
-> riscv now supports mmaping hardware counters to userspace so adapt the te=
-st
-> to run on this architecture.
+> On 8/11/23 03:52, Nitesh Shetty wrote:
+> > We achieve copy offload by sending 2 bio's with source and destination
+> > info and merge them to form a request. This request is sent to driver.
+> > So this design works only for request based storage drivers.
 >
-> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> Reviewed-by: Atish Patra <atishp@rivosinc.com>
+> [ ... ]
+>
+> > Overall series supports:
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+> >       1. Driver
+> >               - NVMe Copy command (single NS, TP 4065), including suppo=
+rt
+> >               in nvme-target (for block and file back end).
+> >
+> >       2. Block layer
+> >               - Block-generic copy (REQ_OP_COPY_DST/SRC), operation wit=
+h
+> >                    interface accommodating two block-devs
+> >                  - Merging copy requests in request layer
+> >               - Emulation, for in-kernel user when offload is natively
+> >                  absent
+> >               - dm-linear support (for cases not requiring split)
+> >
+> >       3. User-interface
+> >               - copy_file_range
+>
+> Is this sufficient? The combination of dm-crypt, dm-linear and the NVMe
+> driver is very common. What is the plan for supporting dm-crypt?
 
-Reviewed-by: Ian Rogers <irogers@google.com>
+Plan is to add offload support for other dm targets as part of subsequent
+series once current patchset merges, dm targets can use emulation to
+achieve the same at present.
 
-Thanks,
-Ian
+> Shouldn't bio splitting be supported for dm-linear?
+Handling split is tricky in this case, if we allow splitting, there is
+no easy way
+to match/merge different src/dst bio's. Once we have multi range support th=
+en
+we feel at least src bio's can be split. But this series split won't work.
 
-> ---
->  tools/perf/tests/mmap-basic.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/tools/perf/tests/mmap-basic.c b/tools/perf/tests/mmap-basic.=
-c
-> index e68ca6229756..886a13a77a16 100644
-> --- a/tools/perf/tests/mmap-basic.c
-> +++ b/tools/perf/tests/mmap-basic.c
-> @@ -284,7 +284,8 @@ static struct test_case tests__basic_mmap[] =3D {
->                          "permissions"),
->         TEST_CASE_REASON("User space counter reading of instructions",
->                          mmap_user_read_instr,
-> -#if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)
-> +#if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__) || =
-\
-> +                        (defined(__riscv) && __riscv_xlen =3D=3D 64)
->                          "permissions"
->  #else
->                          "unsupported"
-> @@ -292,7 +293,8 @@ static struct test_case tests__basic_mmap[] =3D {
->                 ),
->         TEST_CASE_REASON("User space counter reading of cycles",
->                          mmap_user_read_cycles,
-> -#if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)
-> +#if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__) || =
-\
-> +                        (defined(__riscv) && __riscv_xlen =3D=3D 64)
->                          "permissions"
->  #else
->                          "unsupported"
-> --
-> 2.39.2
->
+Thank you,
+Nitesh Shetty
