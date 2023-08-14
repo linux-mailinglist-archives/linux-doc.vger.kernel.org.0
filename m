@@ -2,221 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3BE7B77C39C
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Aug 2023 00:44:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A6CF677C3A5
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Aug 2023 00:53:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232869AbjHNWn2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Aug 2023 18:43:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48490 "EHLO
+        id S233390AbjHNWwv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Aug 2023 18:52:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42090 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233348AbjHNWnP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Aug 2023 18:43:15 -0400
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com [IPv6:2607:f8b0:4864:20::b36])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8E21FB3;
-        Mon, 14 Aug 2023 15:43:14 -0700 (PDT)
-Received: by mail-yb1-xb36.google.com with SMTP id 3f1490d57ef6-d3d729a08e4so4753419276.3;
-        Mon, 14 Aug 2023 15:43:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692052994; x=1692657794;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mhP5hF7gsV/m6mRR8ob32YvEhTw2xPeRNUv47TvhXGs=;
-        b=jFQc46cJTRErw+hng9tAokPjEOHl5jJIUhAjcuox1Slixjuhcu1DIUGSAs1PWoZrLE
-         hiiIqXMEagsfhNWwOLggpXHYZ6rveONq5vpWW53M1urIa+/Iyg0RE3ROaMpkg5MuiRhE
-         KhYQEI2TL4wc+ahPZbS0kzDzDC2ICyI9xIvs+1lOJUdVbNLk/LZiiLk+DJso6fdYtvUn
-         Iy3FY70rsN2Ed9FCS6u6Ne33Nmz1jCwOk8RhdG6ofReL11UtsNlJAg4QWNxCbl2SG48u
-         UIM2vEwhMgRn/KtNrFVtSQeBziX2jH+NF6pQ29w1yBZN55rFi7uneB1kg8fRB83uHJzR
-         RNLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692052994; x=1692657794;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=mhP5hF7gsV/m6mRR8ob32YvEhTw2xPeRNUv47TvhXGs=;
-        b=ACikICOp7GlzR1cGskpXlylShxcz/o0EBG4eckPqk4M9Q7kxR04lluEe5DIbvDu+o6
-         yiMNNi6nPDghs7QIIjZwnQVwEeZEoEkHxfzDE7vsf9n6Bwm6RrCwjF75R3tQX9M2ag/0
-         QfIjlE3Sju70hnMlmJUhqjL9RX+sK5sa0Hol0GjkORg48jSs0hn/smNK9xiuMfEpfgZ1
-         7T+GLzVBKmLq7o9a32W5Er7IEIKjXhEp8esiGoVEWIUyYJKuOcB7Sgew0vxThxY81Y9h
-         4uDES/FHg/BmgTOhnM8gmO6n27KIYGMps7NAUbrlrc/DhYIcO2dRbwlCYPR77V9G5ft6
-         arZg==
-X-Gm-Message-State: AOJu0YwrPN2jstgQDwTk7AlS/YHqChloNvyNcJ4AoRfBAM9FC2YMZxLN
-        JLhYi0+L2JOZpKytkr84CLU/7FSOpQkuKO7DS18=
-X-Google-Smtp-Source: AGHT+IFpuYEJ/0nuvpgDua6ryUMqdgSSiGqdAodGAyLQ574FbDaMTr2TGX40TqotWWwvWMfuPrxQaWSx7DG1U9ivXLM=
-X-Received: by 2002:a05:6902:4cf:b0:d43:e64f:bdcf with SMTP id
- v15-20020a05690204cf00b00d43e64fbdcfmr10448281ybs.0.1692052993673; Mon, 14
- Aug 2023 15:43:13 -0700 (PDT)
+        with ESMTP id S233399AbjHNWws (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Aug 2023 18:52:48 -0400
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 66B3E12D;
+        Mon, 14 Aug 2023 15:52:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+        In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+        :Reply-To:Content-ID:Content-Description;
+        bh=N+FDtRfvMDT6hVxzXu0XfcRPzq1+yZ03REJLjq8HX4g=; b=R+MiMl2LJBYZulPd4n0uNnZqli
+        8lTwRuKFU2IYuIXXGSNLbGX0/l0x5+0iuJh8w2SCySZqGy+nrrVzIIhQqS05HVp0KXP/k/1m558YZ
+        yXTGLM7Cq6P6FjL2IdmgmAMyxwg3nKy0ODuYOorEv5DXC4bsPKUxBNgVb5eiIPcsY8e6pyASOd+Hm
+        VHyosJARJ1SlyYmWjrScsGZbfUuT9/VLxWLXxvE6w18NgXtVwQ2uYCfLjs4kMd82L/f5QScUMJPU4
+        h4g2sP64xqPOh6SYEXS/hOh/omtyiRg1Zk5sY+LTIF8AgX7pyqAGP+/SFRZUvNHoIFAzk2XOGcrXc
+        POGqiiRQ==;
+Received: from [2601:1c2:980:9ec0::577]
+        by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+        id 1qVgQS-004h23-MP; Mon, 14 Aug 2023 22:52:41 +0000
+Message-ID: <af8f2613-5a74-3c2e-f076-345f725aaa5a@infradead.org>
+Date:   Mon, 14 Aug 2023 15:52:36 -0700
 MIME-Version: 1.0
-References: <20230612194311.24826-1-aakashsensharma@gmail.com>
-In-Reply-To: <20230612194311.24826-1-aakashsensharma@gmail.com>
-From:   Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date:   Tue, 15 Aug 2023 00:43:02 +0200
-Message-ID: <CANiq72mq34Locyu4EZ7WRmGdTHkSP77sNZt3Xfo0ZWx_bMLMcA@mail.gmail.com>
-Subject: Re: [PATCH] rust: bindgen: upgrade to 0.65.1
-To:     Aakash Sen Sharma <aakashsensharma@gmail.com>
-Cc:     corbet@lwn.net, ojeda@kernel.org, alex.gaynor@gmail.com,
-        wedsonaf@gmail.com, boqun.feng@gmail.com, gary@garyguo.net,
-        bjorn3_gh@protonmail.com, nathan@kernel.org,
-        ndesaulniers@google.com, trix@redhat.com, masahiroy@kernel.org,
-        me@kloenk.de, aliceryhl@google.com, benno.lossin@proton.me,
-        dev@niklasmohrin.de, lina@asahilina.net, hca@linux.ibm.com,
-        rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, llvm@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH 3/3] Documentation: devices.txt: Fix minors for ttyCPM*
+Content-Language: en-US
+To:     Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-serial@vger.kernel.org
+References: <b5deb1222eb92017f0efe5b5cae127ac11983b3d.1691992627.git.christophe.leroy@csgroup.eu>
+ <27d7124cf86157e2a27c2b039e769041994d3f22.1691992627.git.christophe.leroy@csgroup.eu>
+From:   Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <27d7124cf86157e2a27c2b039e769041994d3f22.1691992627.git.christophe.leroy@csgroup.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-6.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jun 12, 2023 at 9:45=E2=80=AFPM Aakash Sen Sharma
-<aakashsensharma@gmail.com> wrote:
->
-> * Rationale:
->
-> Upgrades bindgen to code-generation for anonymous unions, structs, and en=
-ums [7]
-> for LLVM-16 based toolchains.
->
-> The following upgrade also incorporates `noreturn` support from bindgen
-> allowing us to remove useless `loop` calls which was placed as a
-> workaround.
->
-> * Truncated build logs on using bindgen `v0.56.0` prior to LLVM-16 toolch=
-ain:
->
-> ```
-> $ make rustdoc LLVM=3D1 CLIPPY=3D1 -j$(nproc)
->   RUSTC L rust/core.o
->   BINDGEN rust/bindings/bindings_generated.rs
->   BINDGEN rust/bindings/bindings_helpers_generated.rs
->   BINDGEN rust/uapi/uapi_generated.rs
-> thread 'main' panicked at '"ftrace_branch_data_union_(anonymous_at__/_/in=
-clude/linux/compiler_types_h_146_2)" is not a valid Ident', .../proc-macro2=
--1.0.24/src/fallback.rs:693:9
-> ...
-> thread 'main' panicked at '"ftrace_branch_data_union_(anonymous_at__/_/in=
-clude/linux/compiler_types_h_146_2)" is not a valid Ident', .../proc-macro2=
--1.0.24/src/fallback.rs:693:9
-> ...
-> ```
->
-> * LLVM-16 Changes:
->
-> API changes [1] were introduced such that libclang would emit names like
-> "(unnamed union at compiler_types.h:146:2)" for unnamed unions, structs, =
-and
-> enums whereas it previously returned an empty string.
->
-> * Bindgen Changes:
->
-> Bindgen `v0.56.0` on LLVM-16 based toolchains hence was unable to process=
- the
-> anonymous union in `include/linux/compiler_types` `struct ftrace_branch_d=
-ata`
-> and caused subsequent panics as the new `libclang` API emitted name was n=
-ot
-> being handled. The following issue was fixed in Bindgen `v0.62.0` [2].
->
-> Bindgen `v0.58.0` changed the flags `--whitelist-*` and `--blacklist-*`
-> to `--allowlist-*` and `--blocklist-*` respectively [3].
->
-> Bindgen `v0.61.0` added support for `_Noreturn`, `[[noreturn]]`, `__attri=
-bute__((noreturn))` [4],
-> hence the empty `loop`s used to circumvent bindgen returning `!` in place=
- of `()`
-> for noreturn attributes have been removed completely.
->
-> Bindgen `v0.61.0` also changed default functionality to bind `size_t` to =
-`usize` [5] and
-> added the `--no-size_t-is-usize` [5] flag to not bind `size_t` as `usize`=
-.
->
-> Bindgen `v0.65.0` removed `--size_t-is-usize` flag [6].
->
-> Link: https://github.com/llvm/llvm-project/commit/19e984ef8f49bc3ccced156=
-21989fa9703b2cd5b [1]
-> Link: https://github.com/rust-lang/rust-bindgen/pull/2319 [2]
-> Link: https://github.com/rust-lang/rust-bindgen/pull/1990 [3]
-> Link: https://github.com/rust-lang/rust-bindgen/issues/2094 [4]
-> Link: https://github.com/rust-lang/rust-bindgen/commit/cc78b6fdb6e829e5fb=
-8fa1639f2182cb49333569 [5]
-> Link: https://github.com/rust-lang/rust-bindgen/pull/2408 [6]
-> Closes: https://github.com/Rust-for-Linux/linux/issues/1013 [7]
-> Signed-off-by: Aakash Sen Sharma <aakashsensharma@gmail.com>
+Hi,
 
-Applied to `rust-next`, thanks everyone!
+On 8/13/23 23:02, Christophe Leroy wrote:
+> ttyCPM* devices belong to CPM_UART driver at the first place
+> and that driver provides 6 ports.
+> 
+> Fixes: e29c3f81eb89 ("Documentation: devices.txt: reconcile serial/ucc_uart minor numers")
+> Cc: Randy Dunlap <rdunlap@infradead.org>
+> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
 
-I also did these extra changes:
+Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
 
-    [ Reworded commit message. Mentioned the `bindgen-cli` binary crate
-      change, linked to it and updated the Quick Start guide. Re-added a
-      deleted "as" word in a code comment and reflowed comment to respect
-      the maximum length. ]
+I had this on my todo list. Thanks for getting to it before I did.
 
-In particular, I have reworded the commit message a fair bit:
-
-    In LLVM 16, anonymous items may return names like `(unnamed union at ..=
-)`
-    rather than empty names [1], which breaks Rust-enabled builds because
-    bindgen assumed an empty name instead of detecting them via
-    `clang_Cursor_isAnonymous` [2]:
-
-        $ make rustdoc LLVM=3D1 CLIPPY=3D1 -j$(nproc)
-          RUSTC L rust/core.o
-          BINDGEN rust/bindings/bindings_generated.rs
-          BINDGEN rust/bindings/bindings_helpers_generated.rs
-          BINDGEN rust/uapi/uapi_generated.rs
-        thread 'main' panicked at
-'"ftrace_branch_data_union_(anonymous_at__/_/include/linux/compiler_types_h=
-_146_2)"
-is not a valid Ident', .../proc-macro2-1.0.24/src/fallback.rs:693:9
-        ...
-        thread 'main' panicked at
-'"ftrace_branch_data_union_(anonymous_at__/_/include/linux/compiler_types_h=
-_146_2)"
-is not a valid Ident', .../proc-macro2-1.0.24/src/fallback.rs:693:9
-        ...
-
-    This was fixed in bindgen 0.62.0. Therefore, upgrade bindgen to
-    a more recent version, 0.65.1, to support LLVM 16.
-
-    Since bindgen 0.58.0 changed the `--{white,black}list-*` flags to
-    `--{allow,block}list-*` [3], update them on our side too.
-
-    In addition, bindgen 0.61.0 moved its CLI utility into a binary crate
-    called `bindgen-cli` [4]. Thus update the installation command in the
-    Quick Start guide.
-
-    Moreover, bindgen 0.61.0 changed the default functionality to bind
-    `size_t` to `usize` [5] and added the `--no-size_t-is-usize` flag
-    to not bind `size_t` as `usize`. Then bindgen 0.65.0 removed
-    the `--size_t-is-usize` flag [6]. Thus stop passing the flag to bindgen=
-.
-
-    Finally, bindgen 0.61.0 added support for the `noreturn` attribute (in
-    its different forms) [7]. Thus remove the infinite loop in our Rust
-    panic handler after calling `BUG()`, since bindgen now correctly
-    generates a `BUG()` binding that returns `!` instead of `()`.
-
-    Link: https://github.com/llvm/llvm-project/commit/19e984ef8f49bc3ccced1=
-5621989fa9703b2cd5b
-[1]
-    Link: https://github.com/rust-lang/rust-bindgen/pull/2319 [2]
-    Link: https://github.com/rust-lang/rust-bindgen/pull/1990 [3]
-    Link: https://github.com/rust-lang/rust-bindgen/pull/2284 [4]
-    Link: https://github.com/rust-lang/rust-bindgen/commit/cc78b6fdb6e829e5=
-fb8fa1639f2182cb49333569
-[5]
-    Link: https://github.com/rust-lang/rust-bindgen/pull/2408 [6]
-    Link: https://github.com/rust-lang/rust-bindgen/issues/2094 [7]
-
-Aakash: please let me know if that is not OK!
-
-Cheers,
-Miguel
+> ---
+>   Documentation/admin-guide/devices.txt | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/Documentation/admin-guide/devices.txt b/Documentation/admin-guide/devices.txt
+> index 1ba5b7c4973c..839054923530 100644
+> --- a/Documentation/admin-guide/devices.txt
+> +++ b/Documentation/admin-guide/devices.txt
+> @@ -2691,7 +2691,7 @@
+>   		 45 = /dev/ttyMM1		Marvell MPSC - port 1 (obsolete unused)
+>   		 46 = /dev/ttyCPM0		PPC CPM (SCC or SMC) - port 0
+>   		    ...
+> -		 49 = /dev/ttyCPM5		PPC CPM (SCC or SMC) - port 3
+> +		 51 = /dev/ttyCPM5		PPC CPM (SCC or SMC) - port 5
+>   		 82 = /dev/ttyVR0		NEC VR4100 series SIU
+>   		 83 = /dev/ttyVR1		NEC VR4100 series DSIU
+>   		 148 = /dev/ttyPSC0		PPC PSC - port 0
+> @@ -2752,7 +2752,7 @@
+>   		 43 = /dev/ttycusmx2		Callout device for ttySMX2
+>   		 46 = /dev/cucpm0		Callout device for ttyCPM0
+>   		    ...
+> -		 49 = /dev/cucpm5		Callout device for ttyCPM5
+> +		 51 = /dev/cucpm5		Callout device for ttyCPM5
+>   		 82 = /dev/cuvr0		Callout device for ttyVR0
+>   		 83 = /dev/cuvr1		Callout device for ttyVR1
+>   
