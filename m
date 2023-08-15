@@ -2,356 +2,178 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 724E077C7D6
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Aug 2023 08:33:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9573377C7E9
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Aug 2023 08:37:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235052AbjHOGdD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Aug 2023 02:33:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49072 "EHLO
+        id S235147AbjHOGgr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Aug 2023 02:36:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50604 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235061AbjHOGcx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Aug 2023 02:32:53 -0400
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com [IPv6:2607:f8b0:4864:20::330])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F1811173F;
-        Mon, 14 Aug 2023 23:32:51 -0700 (PDT)
-Received: by mail-ot1-x330.google.com with SMTP id 46e09a7af769-6b9cf1997c4so4322903a34.3;
-        Mon, 14 Aug 2023 23:32:51 -0700 (PDT)
+        with ESMTP id S235253AbjHOGgL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Aug 2023 02:36:11 -0400
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (mail-dm6nam11on2092.outbound.protection.outlook.com [40.107.223.92])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E2B2A1736;
+        Mon, 14 Aug 2023 23:36:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lDIC8lEfG7+pnBFYrP6Ro6X7nYIt+dKPbsqQwQjzdrq7Ym6MGG7gmHdLXmkOExbqP0llDtZs81iM4vmlJLmyoLF0qTzbQbd6zdzIheXBFoIvSK5bKO19dfW2ejK0KnuG/AvmW+MeJbSRulo9Xtneg5FuetJftGYOS2DRSz6/qNBy8cgz0Z1a3qce6v7UjU3H6V/KfZkgLfSctrvVv9aGBTHoykBBK6t+ixz89Ua/TeFAarL7jATYSJrsR70wmMX8yGAZ6FwceTTKj8wAbiyhzak5SrFZU/mobc3B9M9Hyc310lXpng+WX0j/p7lLNqIAv6WrJ78sAgOSuQ3Cbn/uhA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HLaJFEvvqoRih8RpT4aYntQcqBfn65/JjyyaELqnYlQ=;
+ b=h5ORennEMtWAYNt3887EqkflMO3MMl/Yr7sKOFrDpJMxYFIroi1AQMYsrlO+6AuSGuj1VK8C/rxzNzogXw3g/bJU/83xUVjpIbf+/snWyV9Fq3VZOuwh8yA6jmUp8JrfcTgG9pkJn9AfL/x+UzC/r0xyPWr7DZX+moaYVZo14d8ik7s98fEWCauB5yozKqWwFXdevuJlOO+nBf55/zcCPe8bzT7dNPzVAMIBxJcOFYCN2gHxjyX933Fy0BgK7EvvYqqvmT2SG9/AzhKXUV1oLBs8xPwzZMniuSAdHWs6XXMCXexhmi1kpDK4NB4B5e9zYkMd4gMtFQYGwBcwmLZ71Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=os.amperecomputing.com; dmarc=pass action=none
+ header.from=os.amperecomputing.com; dkim=pass
+ header.d=os.amperecomputing.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692081171; x=1692685971;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=AXyT0KU7mlgwdolM1slTRqIWpl1oaIGWyvpE5anceUg=;
-        b=k84xQmkASS5F995UZgmnC6LbbGavBDa7l2s9k71XK0MokU0Qt+6LsX3YVqLfZi1sy8
-         9762VTUxfE5Fbb0ihlzt24vTXZN+/L9ALcGOqEA30ICl/wTG7v7jOJ1DgQzAl3UXwvfb
-         FNKzHLSZbgRH3VqIk6Y4PiVVrESUj0vD4vURekRVtRKDBrUbFaYC61v0PwBzHpO6gNPP
-         fZwj3xVxkKnE4kTULo87nbBix6VsmWcIDgyw1F3len1VXb2LEsum71Hnm5q0nRgVFIkJ
-         SSGC5RKiHuxDCfAtBbbnH0XK+CuE31RCgN7CxL6wGMyCzgg784NwznNRYdKjmwZTAGEp
-         EXjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692081171; x=1692685971;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=AXyT0KU7mlgwdolM1slTRqIWpl1oaIGWyvpE5anceUg=;
-        b=CLt1mQ4AxPa23K/n+DYjCcFHSaoo/6lVEotkUm6ED7NXv/33OznS4gpTFoOmz7N3SA
-         pr51RrJbT91nXa/xaHEwnfD71oNQSkQjG7ONqPwxbAhgXFL22hTlOHTdpnrHvg9xskbK
-         EDXgXp/EPJQfZkBUTlY6ULG4S8lzP9uJ2e4PJOFbQge9RtzKDTIvXbqYnVmqJ9/AV+l0
-         7jN2VhdY6UbuPva8FRoSivayH68gBRvKDC+YlSC8Ct9fOBnLNOLGPDdfwH1CfbtHcikM
-         gUPxU8ULaKbIGhQ3jqPUePAYgSL+9n5TK9EVhuKvBdfpcThDbIy2QK68EzUWiULrysVg
-         AFVg==
-X-Gm-Message-State: AOJu0Yx8ST4KkdtjVjglyuOg6K6KK/HM6XyY04zzO/Lw8yjZ3+sFsAQd
-        oJ7ZnrbZp+WOtoYxp8nu1lXHKL/g/8X6NiJSY0s=
-X-Google-Smtp-Source: AGHT+IFDi2OxwWt6jyRqikG/vM1XoLDHRV3Fww5fww8bst+rx3w3FUWw8m3l8Y9ihCnHJUb0Wd3U2xhBp2AnXxvVCpg=
-X-Received: by 2002:a05:6870:9343:b0:1bf:43d2:526c with SMTP id
- j3-20020a056870934300b001bf43d2526cmr11907847oak.15.1692081171162; Mon, 14
- Aug 2023 23:32:51 -0700 (PDT)
+ d=os.amperecomputing.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HLaJFEvvqoRih8RpT4aYntQcqBfn65/JjyyaELqnYlQ=;
+ b=EQqtBkscRdymK8E749RkJcnESPkejImx0kWnmEUhLdlrW//cuhlgGNOaVEdn69X2SaD3FgOJSGXCAKdHwcu/5b7PmPRgpjNMmyN0mMGE96+RGbDN4wetxWJIYkIKzDiTHBn6mum6J03CxhwL72PAZxp0MlnHiy9wzifdz4RPZQA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=os.amperecomputing.com;
+Received: from DM5PR0102MB3590.prod.exchangelabs.com (2603:10b6:4:a4::25) by
+ PH0PR01MB6117.prod.exchangelabs.com (2603:10b6:510:9::18) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6678.26; Tue, 15 Aug 2023 06:36:00 +0000
+Received: from DM5PR0102MB3590.prod.exchangelabs.com
+ ([fe80::ed8c:18b8:dac:2331]) by DM5PR0102MB3590.prod.exchangelabs.com
+ ([fe80::ed8c:18b8:dac:2331%4]) with mapi id 15.20.6678.025; Tue, 15 Aug 2023
+ 06:36:00 +0000
+From:   Ilkka Koskinen <ilkka@os.amperecomputing.com>
+To:     Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+        Besar Wicaksono <bwicaksono@nvidia.com>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Ilkka Koskinen <ilkka@os.amperecomputing.com>,
+        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v6 0/4] perf: arm_cspmu: ampere: Add support for Ampere SoC PMUs
+Date:   Mon, 14 Aug 2023 23:35:22 -0700
+Message-ID: <20230815063526.9022-1-ilkka@os.amperecomputing.com>
+X-Mailer: git-send-email 2.41.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: CH0PR03CA0359.namprd03.prod.outlook.com
+ (2603:10b6:610:11a::19) To DM5PR0102MB3590.prod.exchangelabs.com
+ (2603:10b6:4:a4::25)
 MIME-Version: 1.0
-References: <7b198d57-ddec-3074-314a-3e5e5b8f48f9@roeck-us.net>
- <CAGUgbhDbFedVe-pc+muD_NtDpjHpGqMDdrS3A73C-QbxeHn4oQ@mail.gmail.com>
- <cf91edc9-1093-495b-48eb-6b05198c2541@linaro.org> <7a69bda1-5f4c-5b1f-8eb6-6fd58917a9b1@roeck-us.net>
- <CAGUgbhCTDPGt_vpbfaEreX+iuLJ3WUBqt4kppxyaFZQus9Zf0Q@mail.gmail.com>
- <b22b2ccc-6760-0db6-067b-109c3864d2e8@linaro.org> <CAGUgbhDmXnyxYCL9h9C0P4ByDSTstWnGqW=uFoDVVHeK3BerHA@mail.gmail.com>
- <3756dffd-1407-d656-485a-9cf1eefd9ae1@linaro.org> <ZLYziWcIWcNnzMXR@orome>
- <709d738c-3bf3-d808-4172-468d7ad947d7@roeck-us.net> <ZLY779Bc4LpJ0TER@orome>
-In-Reply-To: <ZLY779Bc4LpJ0TER@orome>
-From:   =?UTF-8?B?6JSh5om/6YGU?= <billyking19920205@gmail.com>
-Date:   Tue, 15 Aug 2023 14:32:39 +0800
-Message-ID: <CAGUgbhCPhG1q-VXihaPbASkkigdmhd8Lo6ynCTEayLV83Y+=VQ@mail.gmail.com>
-Subject: Re: [v6 2/4] dt-bindings: hwmon: Add ASPEED TACH Control documentation
-To:     Thierry Reding <thierry.reding@gmail.com>
-Cc:     Guenter Roeck <linux@roeck-us.net>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
-        "jdelvare@suse.com" <jdelvare@suse.com>,
-        "robh+dt@kernel.org" <robh+dt@kernel.org>,
-        "krzysztof.kozlowski+dt@linaro.org" 
-        <krzysztof.kozlowski+dt@linaro.org>,
-        "joel@jms.id.au" <joel@jms.id.au>,
-        "andrew@aj.id.au" <andrew@aj.id.au>,
-        "u.kleine-koenig@pengutronix.de" <u.kleine-koenig@pengutronix.de>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "p.zabel@pengutronix.de" <p.zabel@pengutronix.de>,
-        "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
-        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>,
-        "linux-aspeed@lists.ozlabs.org" <linux-aspeed@lists.ozlabs.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-pwm@vger.kernel.org" <linux-pwm@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "patrick@stwcx.xyz" <patrick@stwcx.xyz>,
-        Billy Tsai <billy_tsai@aspeedtech.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM5PR0102MB3590:EE_|PH0PR01MB6117:EE_
+X-MS-Office365-Filtering-Correlation-Id: f2dd8264-f522-4605-9283-08db9d59e38b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Daowk2sP1YkwWegMHivvSAkinjRq4+SOsnGaE2L+mvtRHjHvG0U6Dd0luuAkEfb9lif7piKSFVG0nIwvHU80/izO4gQ/dnBAw33c282+EucZxghZ3xTf1JspVNgjMBuoeYyNcsUnoCWNKTgrbzT1NHt/LySG4GHJBI4B/hwvXkXVfWM35LSgy9Jl25TVHTDdEOzB7UlWS/e3M5/qwSELnaRLUo4jF7nrGI4vsvIsIp0mDs5EgR7b1StqSuVxh3UO4Y5cY5vGBoB93CLSjGhNfIG5AEixHGjRZVdU0cngviL6R/SF4iT3/FI63Ea5pRYm9piV11P5ZQ2KAL71Jcufic60dRVM3yXqHO42KJPopNgKn3YSYFn9Pr9wHaRKrcVYungBKxYZqX9oLZEFa0WPNaekfPHLpJi2bHAgnsqg1l0P8Dr9adB1apQx3i60Up/DI/viyVh94uAZeLxdNLnw2C1rNd6624dUgpkoOgjE/h/bxpQTPRCbVHcE4gSQnDEk1oJWXsZ7tfSSDwoJuNOsN0vGjZ4CkHr7kN50b1vNEGsgR75nSGcnb6NExVnPZlPQrj8FWSgOdh2qlgvGd9zkzwKvuhLLlYTkopHNykCSaEQ=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR0102MB3590.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230028)(366004)(376002)(136003)(346002)(396003)(39850400004)(451199021)(186006)(1800799006)(110136005)(86362001)(478600001)(966005)(52116002)(6486002)(6512007)(6666004)(41300700001)(5660300002)(4326008)(66556008)(38350700002)(316002)(38100700002)(66946007)(66476007)(2906002)(8676002)(8936002)(7416002)(1076003)(26005)(6506007)(83380400001)(2616005);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?m7l93JwXNqWios5RxUhVz5DVWn+y5XE0rr55F7PzeUtPlj2lkh1llayFJFQ/?=
+ =?us-ascii?Q?afmYOUuMNfOpy4IKvQHexQx7bCfUwkQ2iyoDCudHkGawDprOSsrtNwqzo8/R?=
+ =?us-ascii?Q?C/5CKcHG96hHACVQoOic0Yvhz84RifpvRZprhzUYLVOBa715CZFkSByx47IW?=
+ =?us-ascii?Q?JJAp8TGl5b9YhyNK7C7HRx0CjTNdDWpMAVrbu6H4lJxV/2xiPI7neLDTqmdS?=
+ =?us-ascii?Q?SfTc1dZn59uy2DyhakbKv016Hrrx2RQ0PmorLxCuV0E4uiIKgQO7VXeBrTzn?=
+ =?us-ascii?Q?iHV8ych2veROHy/WpbInsrcPtLiyCO2jKhUn6Fu7kFs5swGNTFXly/P4xMAj?=
+ =?us-ascii?Q?gUKZKMMD40OzcW93cOrQQuKn58RBcc7YcAi4IapsbZqtZ1q1Plf0J5VS3TWV?=
+ =?us-ascii?Q?bLJC19WueGw02R3jnK7EoIsGTIWxwLBy00GNE/qXqH1Wx5n7LiV31/HBleUg?=
+ =?us-ascii?Q?IYarPjcAyCTxfPUtTG0MdQMR7WuaA1ifAdVexqQzgOkgNySn23LgANmvhZE/?=
+ =?us-ascii?Q?hR9sSFT1FWeag8E91tVRak1JWNXYKIHiXs0jsoE7IVngb+YJYUkDL0+cW8ui?=
+ =?us-ascii?Q?GBWQS2OmEtSBf1LGFUvBCdSt9A4P3kDuDylPuADPwPVqOW1WR+pAuagbC5Ui?=
+ =?us-ascii?Q?V7Z+p0p+knm6cYmI0p1Rf7PU0nL+Ec1VuTix8HzLjMemnWeNYwG34/+UOU75?=
+ =?us-ascii?Q?w6rfCEa4VReJ0Ed+Wft9rY7dnYiZOEi1qot6FqCsSu1Je07ASpGuAukacHkD?=
+ =?us-ascii?Q?Hmn6g8i+WlxGIArezDckGP2DItWOehCMHwbZIYvwFBKJ93gTP+KlaNr9m8Kg?=
+ =?us-ascii?Q?tETAyfV2peT+hkItHctS8nNi3vW7vzq0hX1bjaTIk0qQcv4RR19CbG4lfw+7?=
+ =?us-ascii?Q?sImEm1u3MlgQfaemYJ1trd+QuHBTwyxjakxksMfrQ7q9c4FgHnMwJV59r5h1?=
+ =?us-ascii?Q?5M+SzX6uyoMnke6tlVyjhYg2j8uxXmcMlpJMombmOeXXJOqf8j6i7mn/swzu?=
+ =?us-ascii?Q?idJv7FbSJ8NYTpNqI2CWu82HdPV1jlEkvtEaHQnF0Cqga966uoFA9HyVL0MZ?=
+ =?us-ascii?Q?c3g+kXzjYt55k2F3OJngDY7Kg+jccvwuPEkOVRuXc9T4ozL+J36xrZJAHOlN?=
+ =?us-ascii?Q?YeFx5mk07F47NVKGnUxn8vBasMNBdCrjyAl/dlZALbt1YYNV9AnIZ8nFycmm?=
+ =?us-ascii?Q?obRlM8BBNZEoxyhOUdJ9qo2MWCs2MikS/oc2qDZhdGXtDJ7Bf006Q+3kKhgP?=
+ =?us-ascii?Q?BdzE1HLdHbGefFKB8/7O3KqzPFdGjYSllgF9gX4s57CLbqSlrIOCvushobEp?=
+ =?us-ascii?Q?MstXyUoPDtLxurBHGFvOiHYWW7ivpf5fV/dYG6Tk8hCqaXJBOHJ6k0HvXaio?=
+ =?us-ascii?Q?Pp4ovgAcMARtzQa5y1n+elomswvELI2aqr5VbhgZGEKuFBLy6vXmt0ORDW8f?=
+ =?us-ascii?Q?9IE017FRsYhrM9DUW/4WtKpRmqk7eXj/HrCCay4f6Bd9hI8YQEibLba3F483?=
+ =?us-ascii?Q?BwM9CgSA3dC/RDNIehSjq6zgyK05vaz/Fpfs+TJhCdFo0DgyIGy6YmMogsxC?=
+ =?us-ascii?Q?WIYhkA9s3/k0m5B/eRVswJ1VAqrjx9D/Ugy+g+YjFDGMZsidCjKNimj+nvjw?=
+ =?us-ascii?Q?7BLqLUBCoNki1IGs9mNNqCs=3D?=
+X-OriginatorOrg: os.amperecomputing.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f2dd8264-f522-4605-9283-08db9d59e38b
+X-MS-Exchange-CrossTenant-AuthSource: DM5PR0102MB3590.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Aug 2023 06:35:59.9850
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3bc2b170-fd94-476d-b0ce-4229bdc904a7
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: zLWHJvTjnm2vhiKibK8bkFV+gQd3AQdp3gizvzGg52LKufNWcJoGlGDATK7E9lBSyNl/WUROIBBYPiEjChazMP/j265vfsl42amsEb0YqQHtVzZhCwthK0kkJS5lutuL
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR01MB6117
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,
+        SPF_HELO_PASS,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Thierry Reding <thierry.reding@gmail.com> =E6=96=BC 2023=E5=B9=B47=E6=9C=88=
-18=E6=97=A5 =E9=80=B1=E4=BA=8C =E4=B8=8B=E5=8D=883:14=E5=AF=AB=E9=81=93=EF=
-=BC=9A
->
-> On Mon, Jul 17, 2023 at 11:54:26PM -0700, Guenter Roeck wrote:
-> > On 7/17/23 23:39, Thierry Reding wrote:
-> > > On Tue, Jul 18, 2023 at 08:04:24AM +0200, Krzysztof Kozlowski wrote:
-> > > > On 18/07/2023 06:01, =E8=94=A1=E6=89=BF=E9=81=94 wrote:
-> > > > > >
-> > > > > > On 17/07/2023 11:01, =E8=94=A1=E6=89=BF=E9=81=94 wrote:
-> > > > > > > Guenter Roeck <linux@roeck-us.net> =E6=96=BC 2023=E5=B9=B47=
-=E6=9C=8817=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8A=E5=8D=881:00=E5=AF=AB=E9=
-=81=93=EF=BC=9A
-> > > > > > > >
-> > > > > > > > On 7/16/23 09:08, Krzysztof Kozlowski wrote:
-> > > > > > > >
-> > > > > > > > [ ... ]
-> > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > This patch serial doesn't use to binding the fan contro=
-l h/w. It is
-> > > > > > > > > > used to binding the two independent h/w blocks.
-> > > > > > > > > > One is used to provide pwm output and another is used t=
-o monitor the
-> > > > > > > > > > speed of the input.
-> > > > > > > > > > My patch is used to point out that the pwm and the tach=
- is the
-> > > > > > > > > > different function and don't need to
-> > > > > > > > > > bind together. You can not only combine them as the fan=
- usage but also
-> > > > > > > > > > treat them as the individual module for
-> > > > > > > > > > use. For example: the pwm can use to be the beeper (pwm=
--beeper.c), the
-> > > > > > > > > > tach can be used to monitor the heart beat signal.
-> > > > > > > > >
-> > > > > > > > > Isn't this exactly the same as in every other SoC? PWMs c=
-an be used in
-> > > > > > > > > different ways?
-> > > > > > > > >
-> > > > > > > >
-> > > > > > > > ... and in every fan controller. Not that it really makes s=
-ense because
-> > > > > > > > normally the pwm controller part of such chips is tied to t=
-he fan input,
-> > > > > > > > to enable automatic fan control, but it is technically poss=
-ible.
-> > > > > > > > In many cases this is also the case in SoCs, for example, i=
-n ast2500.
-> > > > > > > > Apparently this was redesigned in ast2600 where they two bl=
-ocks are
-> > > > > > > > only lightly coupled (there are two pwm status bits in the =
-fan status
-> > > > > > > > register, but I have no idea what those mean). If the block=
-s are tightly
-> > > > > > > > coupled, separate drivers don't really make sense.
-> > > > > > > >
-> > > > > > > > There are multiple ways to separate the pwm controller part=
- from the
-> > > > > > > > fan inputs if that is really necessary. One would be to pro=
-vide a
-> > > > > > > > sequence of address mappings, the other would be to pass th=
-e memory
-> > > > > > > > region from an mfd driver. It is not necessary to have N in=
-stances
-> > > > > > > > of the fan controller, even if the address space is not con=
-tinuous.
-> > > > > > > >
-> > > > > > >
-> > > > > > > Hi Guenter,
-> > > > > > >
-> > > > > > > May I ask about the meaning of the sequence of address mappin=
-gs? It appears
-> > > > > > > to consist of multiple tuples within the 'reg' property, indi=
-cating
-> > > > > > > the usage of PWM/Tach
-> > > > > > > registers within a single instance. After that I can use the =
-dts like following:
-> > > > > > >
-> > > > > > > pwm: pwm@1e610000 {
-> > > > > > > ...
-> > > > > > > reg =3D <0x1e610000 0x8
-> > > > > > > 0x1e610010 0x8
-> > > > > > > 0x1e610020 0x8
-> > > > > > > 0x1e610030 0x8
-> > > > > > > 0x1e610040 0x8
-> > > > > > > 0x1e610050 0x8
-> > > > > > > 0x1e610060 0x8
-> > > > > > > 0x1e610070 0x8
-> > > > > > > 0x1e610080 0x8
-> > > > > > > 0x1e610090 0x8
-> > > > > > > 0x1e6100A0 0x8
-> > > > > > > 0x1e6100B0 0x8
-> > > > > > > 0x1e6100C0 0x8
-> > > > > > > 0x1e6100D0 0x8
-> > > > > > > 0x1e6100E0 0x8
-> > > > > > > 0x1e6100F0 0x8>;
-> > > > > >
-> > > > > >
-> > > > > > Uh, no... I mean, why? We keep pointing out that this should no=
-t be done
-> > > > > > differently than any other SoC. Open any other SoC PWM controll=
-er and
-> > > > > > tell me why this is different? Why this cannot be one address s=
-pace?
-> > > > >
-> > > > > Hi Krzysztof,
-> > > > >
-> > > > > This is because the register layout for PWM and Tach is not conti=
-nuous.
-> > > > > Each PWM/Tach instance has its own set of controller registers, a=
-nd they
-> > > > > are independent of each other.
-> > > >
-> > > > Register layout is not continuous in many other devices, so again -=
- why
-> > > > this must be different?
-> > > >
-> > > > >
-> > > > > For example:
-> > > > > PWM0 uses registers 0x0 and 0x4, while Tach0 uses registers 0x8 a=
-nd 0xc.
-> > > > > PWM1 uses registers 0x10 and 0x14, while Tach1 uses registers 0x1=
-8 and 0x1c.
-> > > > > ...
-> > > > >
-> > > > > To separate the PWM controller part from the fan inputs, Guenter =
-has
-> > > > > provided two methods.
-> > > > > The first method involves passing the memory region from an MFD
-> > > > > driver, which was the
-> > > >
-> > > > I have no clue how can you pass memory region
-> > > > (Documentation/devicetree/bindings/reserved-memory/) from MFD and w=
-hy
-> > > > does it make sense here.
-> > > >
-> > > > > initial method I intended to use. However, it seems that this met=
-hod
-> > > > > does not make sense to you.
-> > > > >
-> > > > > Therefore, I would like to explore the second method suggested by
-> > > > > Guenter, which involves providing
-> > > > > a sequence of address mappings.
-> > >
-> > > At the risk of saying what others have said: given that there's a sin=
-gle
-> > > reset line and a single clock line controlling all of these channels =
-and
-> > > given what I recall of how address demuxers work in chips, everything
-> > > indicates that this is a single hardware block/device.
-> > >
-> > > So the way that this should be described in DT is:
-> > >
-> > >     pwm@1e610000 {
-> > >             reg =3D <0x1e610000 0x100>;
-> > >             clocks =3D ...;
-> > >             resets =3D ...
-> > >     };
-> > >
-> > > That'd be the most accurate representation of this hardware in DT. It=
- is
-> > > then up to the driver to expose this in any way you see fit. For Linu=
-x
-> > > it may make sense to expose this as 16 PWM channels and 16 hardware
-> > > monitoring devices. Other operating systems using the same DT may cho=
-ose
-> >
-> > It is single chip. It should be a single hardware monitoring device wit=
-h
-> > 16 channels. I don't even want to think about the mess we'd get if peop=
-le
-> > start modeling a single chip as N hardware monitoring devices, one for
-> > each monitoring channel supported by that chip. It would be even more m=
-essy
-> > if the driver supporting those N devices would be marked for asynchrono=
-us
-> > probe, which would result in random hwmon device assignments.
->
-> Sorry, I badly worded it. What I meant to say was: one hardware
-> monitoring device with 16 channels.
->
-> > > to expose this differently, depending on their frameworks, etc. A sim=
-ple
-> > > operating system may not expose this as separate resources at all but
-> > > instead directly program individual registers from this block.
-> > >
-> > > I'd also like to add that I think trying to split this up into multip=
-le
-> > > drivers in Linux is a bit overkill. In my opinion, though I know not
-> > > everyone shares this view, it's perfectly fine for one driver to expo=
-se
-> > > multiple types of resources. There's plenty of use-cases across the
-> > > kernel where tightly coupled devices like this have a single driver t=
-hat
-> > > registers with multiple subsystems. Going through MFD only because th=
-is
-> > > particular hardware doesn't split registers nicely along Linux subsys=
-tem
-> > > boundaries.
-> > >
-> > > So FWIW, I'm fine carrying hwmon code in a PWM driver and I'm equally
-> > > fine if PWM code ends up in a hwmon driver (or any other subsystem
-> > > really) if that makes sense for a given hardware.
-> > >
-> >
-> > I am fine either way as well, as long as we are talking about a single
-> > hwmon device and not 16 of them.
->
-> Excellent. Should make it pretty clear in which direction this should
-> go.
->
-Hi Thierry,
+Changes since v5:
+    * Implemented the needed parts for vendor registration API
+    * Rebased on top of Besar's patch 
 
-Thank you for organizing and providing guidance on this patch series.
-I'd like to
-confirm my understanding of the next steps. Based on the previous discussio=
-ns,
-I should proceed by combining the PWM and TACH drivers into a single driver=
-.
-This consolidated driver would then be exposed to both the hwmon and
-pwm subsystems.
-Base on this driver the dts node of this would like following:
+      [PATCH v5] perf: arm_cspmu: Separate Arm and vendor module
+      https://lore.kernel.org/all/20230705104745.52255-1-bwicaksono@nvidia.com/
 
-pwm_tach: pwm-tach-controller@1e610000 {
-compatible =3D "aspeed,ast2600-pwm-tach"
-reg =3D <0x1e610000 0x100>;
-clocks =3D <&syscon ASPEED_CLK_AHB>;
-resets =3D <&syscon ASPEED_RESET_PWM>;
-#pwm-cells =3D <3>;
-#address-cells =3D <1>;
-#size-cells =3D <0>;
-fan@0 {
-aspeed,fan-tach-ch =3D /bits/ 8 <0x00>;
-};
-fan@1 {
-aspeed,fan-tach-ch =3D /bits/ 8 <0x01, 0x02>;
-};
-};
+    * v5: https://lore.kernel.org/all/20230714010141.824226-1-ilkka@os.amperecomputing.com/
 
-The subnode of the fan is utilized to create the hwmon interface,
-which facilitates monitoring
-the speed of the input tach pin.
-If users wish to employ PWM for fan or beeper control, they can create
-the necessary configuration
-through the following DTS declaration:
-fan0: pwm-fan0 {
-compatible =3D "pwm-fan";
-pwms =3D <&pwm_tach 0 40000 0>; /* Target freq:25 kHz */
-cooling-min-state =3D <0>;
-cooling-max-state =3D <3>;
-#cooling-cells =3D <2>;
-cooling-levels =3D <0 15 128 255>;
-};
+Changes since v4:
+    * "Support implementation specific filters" patch:
+        - Added comment about filter and impdef registers and reference
+          to the Coresight PMU specification to the commit message
 
-buzzer {
-compatible =3D "pwm-beeper";
-pwms =3D <&pwm_tach 1 500000 0>;
-};
+    * "Add support for Ampere SoC PMU" patch:
+	- Fixed the documentation and added more comments
+        - Changed the incrementing PMU index number to idr_alloc()
+	  (Needs a impdef release hook patch to release unused index)
+	- Fixed style in init_ops() to more reasonable
+	- Moved bank parameter to config1
 
-Thanks
-Best Regards,
-Billy Tsai
+Changes since v3:
+    * use_64b_counter_reg => has_atomic_dword (patch 1/4)
+    * Removed the unnecessary hook for group validation (patch 3/4)
+    * Added group config validation to ampere_cspmu_validate_event() (patch 4/4)
+    * Rebased the patchset
+
+Changes since v2:
+    * Changed to use supports_64bits_atomics() and replaced the split writes
+      with lo_hi_writeq()
+    * Added implementation specific group validation to patch 3
+    * Dropped shared interrupt patch
+    * Removed unnecessary filter_enable parameter from ampere module
+    * Added group validation to ampere module
+
+Changes since v1:
+    * Rather than creating a completely new driver, implemented as a submodule
+      of Arm CoreSight PMU driver
+      * Fixed shared filter handling
+
+Ilkka Koskinen (4):
+  perf: arm_cspmu: Split 64-bit write to 32-bit writes
+  perf: arm_cspmu: Support implementation specific filters
+  perf: arm_cspmu: Support implementation specific validation
+  perf: arm_cspmu: ampere_cspmu: Add support for Ampere SoC PMU
+
+ .../admin-guide/perf/ampere_cspmu.rst         |  29 ++
+ drivers/perf/arm_cspmu/Kconfig                |  10 +
+ drivers/perf/arm_cspmu/Makefile               |   2 +
+ drivers/perf/arm_cspmu/ampere_cspmu.c         | 271 ++++++++++++++++++
+ drivers/perf/arm_cspmu/arm_cspmu.c            |  33 ++-
+ drivers/perf/arm_cspmu/arm_cspmu.h            |   7 +
+ 6 files changed, 346 insertions(+), 6 deletions(-)
+ create mode 100644 Documentation/admin-guide/perf/ampere_cspmu.rst
+ create mode 100644 drivers/perf/arm_cspmu/ampere_cspmu.c
+
+-- 
+2.41.0
+
