@@ -2,76 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7A7E877DCA2
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Aug 2023 10:47:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E541477DC86
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Aug 2023 10:39:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242871AbjHPIqk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Aug 2023 04:46:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58406 "EHLO
+        id S242617AbjHPIif (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Aug 2023 04:38:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59572 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S243040AbjHPIq1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Aug 2023 04:46:27 -0400
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com [IPv6:2a00:1450:4864:20::336])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 69EF51980;
-        Wed, 16 Aug 2023 01:46:26 -0700 (PDT)
-Received: by mail-wm1-x336.google.com with SMTP id 5b1f17b1804b1-3fe4cdb724cso58765155e9.1;
-        Wed, 16 Aug 2023 01:46:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692175585; x=1692780385;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LThw6O09LKod8hs5Ia5G/+pdxo/bQPv6KrOfoWEbepM=;
-        b=mmj8mO8NmSULLpcE1mHfPWIMs/MBlPv7UlMbh2ogx3sKaB6Tez4ASL49IET17C4txn
-         9zx/8gDVqPoHx0ALGRAOgOzvKamztQIOh7Ulo2AQEmH13qXBIveTm4yE+kAnbLPjsgaa
-         WPeJzVJpYo2fDw6z7Jhnx4wKzLmlplzsWvs2hKTgYomji6I9xgurQHBc8H4H+nm875eR
-         2BrvCIgRHumX1rqV1HH9Xk3HO1E3FUuBaEzhh1sdBMJEkp6IenNye7IfbwRc4GIicnjS
-         H07TyYBS4GtGYSJGBUaYSUebsmdLP0z1N5U0xrl42NsNtuPYqF+jud67waflFdyt9G0k
-         tnvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692175585; x=1692780385;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=LThw6O09LKod8hs5Ia5G/+pdxo/bQPv6KrOfoWEbepM=;
-        b=gcOqu9AX38TzPCKDCOSKkJx64sRxgbjTlciv2EQ4/5wRn+ghbmX9KUuz49xpeGB6OL
-         DGe6N43rK+/Mv2TQQInyET1b8Dt9WLtA3qRPoaEdW5e5qF+shh3yIPqkjIsScySRlDd8
-         4Owc3jcW1Xu9DnRtx5kaSZhKyfW2hMfvYcQIQEywyz48Zff+bqVVwURNRgUoT8bCahvq
-         q74txPWznzapRLqqmqsjnbGdqGSX3dfi02uJFfG+YvhGg36rWjhgf1lXYw3T6FsGLITX
-         tvsXkATe/HG3tWCfnCSyuw6coH+imamGsrwHRzCoEB8HYzygvCNJsx3ZimcolnC4xKy6
-         wRqw==
-X-Gm-Message-State: AOJu0YzJ7Zo/CWLIOHUWQ4gMv318IC3R+OjKLnMRX0ZyCPXX+6J28Tss
-        /TviptsPL9a6xLMtZrt6Qmo=
-X-Google-Smtp-Source: AGHT+IF1eauyh+yxvqeCZIlQ/c/CVx92twUDufHoHZwPEfNgWbQwidnyVQEVFBzp0wSrcg1fhRwkQA==
-X-Received: by 2002:a7b:cc8c:0:b0:3f7:cb42:fa28 with SMTP id p12-20020a7bcc8c000000b003f7cb42fa28mr861261wma.28.1692175584868;
-        Wed, 16 Aug 2023 01:46:24 -0700 (PDT)
-Received: from imac ([2a02:8010:60a0:0:79ba:2be3:e281:5f90])
-        by smtp.gmail.com with ESMTPSA id 14-20020a05600c22ce00b003fba2734f1esm23496561wmg.1.2023.08.16.01.46.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Aug 2023 01:46:24 -0700 (PDT)
-From:   Donald Hunter <donald.hunter@gmail.com>
-To:     Jakub Kicinski <kuba@kernel.org>
-Cc:     netdev@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Paolo Abeni <pabeni@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        Stanislav Fomichev <sdf@google.com>,
-        Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>,
-        donald.hunter@redhat.com
-Subject: Re: [PATCH net-next v2 03/10] doc/netlink: Document the netlink-raw
- schema extensions
-In-Reply-To: <20230815195236.3835a60b@kernel.org> (Jakub Kicinski's message of
-        "Tue, 15 Aug 2023 19:52:36 -0700")
-Date:   Wed, 16 Aug 2023 09:32:02 +0100
-Message-ID: <m27cpvjsl9.fsf@gmail.com>
-References: <20230815194254.89570-1-donald.hunter@gmail.com>
-        <20230815194254.89570-4-donald.hunter@gmail.com>
-        <20230815195236.3835a60b@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+        with ESMTP id S243002AbjHPIhj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Aug 2023 04:37:39 -0400
+Received: from frasgout13.his.huawei.com (unknown [14.137.139.46])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 569653C18;
+        Wed, 16 Aug 2023 01:36:45 -0700 (PDT)
+Received: from mail02.huawei.com (unknown [172.18.147.227])
+        by frasgout13.his.huawei.com (SkyGuard) with ESMTP id 4RQh5Q4x4Gz9xrq8;
+        Wed, 16 Aug 2023 16:24:58 +0800 (CST)
+Received: from [10.81.209.179] (unknown [10.81.209.179])
+        by APP1 (Coremail) with SMTP id LxC2BwBXCrpvitxk8zz3AA--.58903S2;
+        Wed, 16 Aug 2023 09:36:13 +0100 (CET)
+Message-ID: <98959e3d-7543-4a8e-9712-05a3ba04d2c8@huaweicloud.com>
+Date:   Wed, 16 Aug 2023 10:35:56 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC][PATCH v2 03/13] integrity/digest_cache: Add functions to
+ populate and search
+Content-Language: en-US
+To:     Jarkko Sakkinen <jarkko@kernel.org>, corbet@lwn.net,
+        zohar@linux.ibm.com, dmitry.kasatkin@gmail.com,
+        paul@paul-moore.com, jmorris@namei.org, serge@hallyn.com
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-integrity@vger.kernel.org,
+        linux-security-module@vger.kernel.org, bpf@vger.kernel.org,
+        pbrobinson@gmail.com, zbyszek@in.waw.pl, hch@lst.de,
+        mjg59@srcf.ucam.org, pmatilai@redhat.com, jannh@google.com,
+        Roberto Sassu <roberto.sassu@huawei.com>
+References: <20230812104616.2190095-1-roberto.sassu@huaweicloud.com>
+ <20230812104616.2190095-4-roberto.sassu@huaweicloud.com>
+ <CUSFPINBGDSS.DQ0I19Z9FNR4@suppilovahvero>
+From:   Roberto Sassu <roberto.sassu@huaweicloud.com>
+In-Reply-To: <CUSFPINBGDSS.DQ0I19Z9FNR4@suppilovahvero>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID: LxC2BwBXCrpvitxk8zz3AA--.58903S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxtr4ftw4kKFyUCry5ZFWfuFg_yoW3Jr1fpa
+        s7CF1UKr4rZr13Gw17AF1ayr1SvryvqF47Gw45Wr1ayr4DZr10y3W8Aw1UWFy5Jr48Wa12
+        yF4jgr15ur1UXaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUk0b4IE77IF4wAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k2
+        6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
+        vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
+        xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxV
+        AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
+        x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
+        0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l42xK82IYc2Ij
+        64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x
+        8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE
+        2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42
+        xK8VAvwI8IcIk0rVWrJr0_WFyUJwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv
+        6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUFDGOUUUUU
+X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAgALBF1jj46tmwAAsE
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,PDS_RDNS_DYNAMIC_FP,
+        RCVD_IN_DNSWL_BLOCKED,RDNS_DYNAMIC,SPF_HELO_NONE,SPF_NONE autolearn=no
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -79,15 +70,220 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Jakub Kicinski <kuba@kernel.org> writes:
+On 8/14/2023 7:13 PM, Jarkko Sakkinen wrote:
+> On Sat Aug 12, 2023 at 1:46 PM EEST, Roberto Sassu wrote:
+>> From: Roberto Sassu <roberto.sassu@huawei.com>
+>>
+>> Add digest_cache_init_htable(), to size a hash table depending on the
+>> number of digests to be added to the cache.
+>>
+>> Add digest_cache_add() and digest_cache_lookup() to respectively add and
+>> lookup a digest in the digest cache.
+>>
+>> Signed-off-by: Roberto Sassu <roberto.sassu@huawei.com>
+>> ---
+>>   security/integrity/digest_cache.c | 131 ++++++++++++++++++++++++++++++
+>>   security/integrity/digest_cache.h |  24 ++++++
+>>   2 files changed, 155 insertions(+)
+>>
+>> diff --git a/security/integrity/digest_cache.c b/security/integrity/digest_cache.c
+>> index 4201c68171a..d14d84b804b 100644
+>> --- a/security/integrity/digest_cache.c
+>> +++ b/security/integrity/digest_cache.c
+>> @@ -315,3 +315,134 @@ struct digest_cache *digest_cache_get(struct dentry *dentry,
+>>   
+>>   	return iint->dig_user;
+>>   }
+>> +
+>> +/**
+>> + * digest_cache_init_htable - Allocate and initialize the hash table
+>> + * @digest_cache: Digest cache
+>> + * @num_digests: Number of digests to add to the digest cache
+>> + *
+>> + * This function allocates and initializes the hash table. Its size is
+>> + * determined by the number of digests to add to the digest cache, known
+>> + * at this point by the parser calling this function.
+>> + *
+>> + * Return: Zero on success, a negative value otherwise.
+>> + */
+>> +int digest_cache_init_htable(struct digest_cache *digest_cache,
+>> +			     u64 num_digests)
+>> +{
+>> +	int i;
+>> +
+>> +	if (!digest_cache)
+>> +		return 0;
+>> +
+>> +	digest_cache->num_slots = num_digests / DIGEST_CACHE_HTABLE_DEPTH;
+>> +	if (!digest_cache->num_slots)
+>> +		digest_cache->num_slots = 1;
+>> +
+>> +	digest_cache->slots = kmalloc_array(num_digests,
+>> +					    sizeof(*digest_cache->slots),
+>> +					    GFP_KERNEL);
+>> +	if (!digest_cache->slots)
+>> +		return -ENOMEM;
+>> +
+>> +	for (i = 0; i < digest_cache->num_slots; i++)
+>> +		INIT_HLIST_HEAD(&digest_cache->slots[i]);
+>> +
+>> +	pr_debug("Initialized %d hash table slots for digest list %s\n",
+>> +		 digest_cache->num_slots, digest_cache->path_str);
+>> +	return 0;
+>> +}
+>> +
+>> +/**
+>> + * digest_cache_add - Add a new digest to the digest cache
+>> + * @digest_cache: Digest cache
+>> + * @digest: Digest to add
+>> + *
+>> + * This function, invoked by a digest list parser, adds a digest extracted
+>> + * from a digest list to the digest cache.
+>> + *
+>> + * Return: Zero on success, a negative value on error.
+> 
+> Nit: previous had a different phrasing "a negative value otherwise".
+> 
+> I would suggest "a POSIX error code otherwise" for both.
 
-> On Tue, 15 Aug 2023 20:42:47 +0100 Donald Hunter wrote:
->> Add description of netlink-raw specific attributes to the ynl spec
->> documentation and refer to the classic netlink documentation.
->
-> I wonder if we should make this a separate doc, similarly to
-> genetlink-legacy. Keep the specs.rst focused on newer stuff?
+Ok.
 
-Sure. I could also include examples, like genetlink-legacy does.
+>> + */
+>> +int digest_cache_add(struct digest_cache *digest_cache, u8 *digest)
+>> +{
+>> +	struct digest_cache_entry *entry;
+>> +	unsigned int key;
+>> +	int digest_len;
+>> +
+>> +	if (!digest_cache)
+>> +		return 0;
+>> +
+>> +	digest_len = hash_digest_size[digest_cache->algo];
+>> +
+>> +	entry = kmalloc(sizeof(*entry) + digest_len, GFP_KERNEL);
+>> +	if (!entry)
+>> +		return -ENOMEM;
+>> +
+>> +	memcpy(entry->digest, digest, digest_len);
+>> +
+>> +	key = digest_cache_hash_key(digest, digest_cache->num_slots);
+>> +	hlist_add_head(&entry->hnext, &digest_cache->slots[key]);
+>> +	pr_debug("Add digest %s:%*phN from digest list %s\n",
+>> +		 hash_algo_name[digest_cache->algo], digest_len, digest,
+>> +		 digest_cache->path_str);
+>> +	return 0;
+>> +}
+>> +
+>> +/**
+>> + * digest_cache_lookup - Searches a digest in the digest cache
+>> + * @digest_cache: Digest cache
+>> + * @digest: Digest to search
+>> + * @algo: Algorithm of the digest to search
+>> + * @pathname: Path of the file whose digest is looked up
+>> + *
+>> + * This function, invoked by IMA or EVM, searches the calculated digest of
+>> + * a file or file metadata in the digest cache acquired with
+>> + * digest_cache_get().
+>> + *
+>> + * Return: Zero if the digest is found, a negative value if not.
+>> + */
+>> +int digest_cache_lookup(struct digest_cache *digest_cache, u8 *digest,
+>> +			enum hash_algo algo, const char *pathname)
+>> +{
+>> +	struct digest_cache_entry *entry;
+>> +	unsigned int key;
+>> +	int digest_len;
+>> +	int search_depth = 0;
+>> +
+>> +	if (!digest_cache)
+>> +		return -ENOENT;
+>> +
+>> +	if (digest_cache->algo == HASH_ALGO__LAST) {
+>> +		pr_debug("Algorithm not set for digest list %s\n",
+>> +			 digest_cache->path_str);
+>> +		return -ENOENT;
+>> +	}
+>> +
+>> +	digest_len = hash_digest_size[digest_cache->algo];
+>> +
+>> +	if (algo != digest_cache->algo) {
+>> +		pr_debug("Algo mismatch for file %s, digest %s:%*phN in digest list %s (%s)\n",
+>> +			 pathname, hash_algo_name[algo], digest_len, digest,
+>> +			 digest_cache->path_str,
+>> +			 hash_algo_name[digest_cache->algo]);
+>> +		return -ENOENT;
+>> +	}
+>> +
+>> +	key = digest_cache_hash_key(digest, digest_cache->num_slots);
+>> +
+>> +	hlist_for_each_entry_rcu(entry, &digest_cache->slots[key], hnext) {
+>> +		if (!memcmp(entry->digest, digest, digest_len)) {
+>> +			pr_debug("Cache hit at depth %d for file %s, digest %s:%*phN in digest list %s\n",
+>> +				 search_depth, pathname, hash_algo_name[algo],
+>> +				 digest_len, digest, digest_cache->path_str);
+>> +			return 0;
+>> +		}
+>> +
+>> +		search_depth++;
+>> +	}
+>> +
+>> +	pr_debug("Cache miss for file %s, digest %s:%*phN in digest list %s\n",
+>> +		 pathname, hash_algo_name[algo], digest_len, digest,
+>> +		 digest_cache->path_str);
+>> +	return -ENOENT;
+>> +}
+>> diff --git a/security/integrity/digest_cache.h b/security/integrity/digest_cache.h
+>> index ff88e8593c6..01cd70f9850 100644
+>> --- a/security/integrity/digest_cache.h
+>> +++ b/security/integrity/digest_cache.h
+>> @@ -66,6 +66,11 @@ static inline unsigned int digest_cache_hash_key(u8 *digest,
+>>   void digest_cache_free(struct digest_cache *digest_cache);
+>>   struct digest_cache *digest_cache_get(struct dentry *dentry,
+>>   				      struct integrity_iint_cache *iint);
+>> +int digest_cache_init_htable(struct digest_cache *digest_cache,
+>> +			     u64 num_digests);
+>> +int digest_cache_add(struct digest_cache *digest_cache, u8 *digest);
+>> +int digest_cache_lookup(struct digest_cache *digest_cache, u8 *digest,
+>> +			enum hash_algo algo, const char *pathname);
+>>   #else
+>>   static inline void digest_cache_free(struct digest_cache *digest_cache)
+>>   {
+>> @@ -77,5 +82,24 @@ digest_cache_get(struct dentry *dentry, struct integrity_iint_cache *iint)
+>>   	return NULL;
+>>   }
+>>   
+>> +static inline int digest_cache_init_htable(struct digest_cache *digest_cache,
+>> +					   u64 num_digests)
+>> +{
+>> +	return -EOPNOTSUPP;
+>> +}
+>> +
+>> +static inline int digest_cache_add(struct digest_cache *digest_cache,
+>> +				   u8 *digest)
+>> +{
+>> +	return -EOPNOTSUPP;
+>> +}
+>> +
+>> +static inline int digest_cache_lookup(struct digest_cache *digest_cache,
+>> +				      u8 *digest, enum hash_algo algo,
+>> +				      const char *pathname)
+>> +{
+>> +	return -ENOENT;
+>> +}
+>> +
+>>   #endif /* CONFIG_INTEGRITY_DIGEST_CACHE */
+>>   #endif /* _DIGEST_CACHE_H */
+>> -- 
+>> 2.34.1
+> 
+> Why all this complexity instead of using xarray?
+> 
+> https://docs.kernel.org/core-api/xarray.html
 
-Thanks!
+Uhm, did I get correctly from the documentation that it isn't the 
+optimal solution for hash tables?
+
+Thanks
+
+Roberto
+
