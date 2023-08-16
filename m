@@ -2,86 +2,155 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A71CB77DC13
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Aug 2023 10:23:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CD47277DCA3
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Aug 2023 10:47:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242864AbjHPIWw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Aug 2023 04:22:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48894 "EHLO
+        id S242944AbjHPIqj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Aug 2023 04:46:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58400 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S242902AbjHPIWk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Aug 2023 04:22:40 -0400
-Received: from frasgout12.his.huawei.com (unknown [14.137.139.154])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B35E21BE8;
-        Wed, 16 Aug 2023 01:22:36 -0700 (PDT)
-Received: from mail02.huawei.com (unknown [172.18.147.227])
-        by frasgout12.his.huawei.com (SkyGuard) with ESMTP id 4RQgkd2NsDz9v7Jj;
-        Wed, 16 Aug 2023 16:08:41 +0800 (CST)
-Received: from [10.81.209.179] (unknown [10.81.209.179])
-        by APP1 (Coremail) with SMTP id LxC2BwAn27okh9xkzRb3AA--.62650S2;
-        Wed, 16 Aug 2023 09:22:07 +0100 (CET)
-Message-ID: <84159dc8-d2e5-4c10-9910-b329500862e0@huaweicloud.com>
-Date:   Wed, 16 Aug 2023 10:21:54 +0200
+        with ESMTP id S243038AbjHPIq0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Aug 2023 04:46:26 -0400
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com [IPv6:2a00:1450:4864:20::332])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 02B0DB5;
+        Wed, 16 Aug 2023 01:46:25 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id 5b1f17b1804b1-3fe4b45a336so56949435e9.1;
+        Wed, 16 Aug 2023 01:46:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1692175583; x=1692780383;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=MSK93UPnB6Klvi+jilJNrTTSvrIQXWHyoQFvggFE/hg=;
+        b=rSSedRXS3WSPaQZ47aVCKfhIbwcK41++sEDaezZKNQqEUjPHGtz2aWn7N7cr76k+Aa
+         KgcUk+0AUzlHNTtX3OU9m6ukcTQq01+jcwsc6tFR9Es8E9bJD3ZeJIyFhXaD0hSKasA4
+         FTab1gFI3yeJ2O81u9Qn/NZRMylMYkolNllT58X75sw9t5BIgrFMV/flmBqfoQ0m0jLV
+         U8aPUC8QTg5Rlr+yv7zfUu1tvbfQJ8Z/ShCJ1RR+jRbH2ArysIyMEM9YrhYKhVpuyDZa
+         4Di4IynbWtE2gVB+dybVEhUwMASie7/oQRtZ5zteqqTlDwHc0FTTgKg38osP6EMMUKW9
+         VS2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692175583; x=1692780383;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MSK93UPnB6Klvi+jilJNrTTSvrIQXWHyoQFvggFE/hg=;
+        b=PlS32euLyr+RQgYGj7/yVZuUC8wIegu8U3hUVJFroUe1n85UmirYT+dB2Sd9VqeoCW
+         03OnPjmoQSAD77wTnRdL/1xmh8HklK/m2P53VE3rsDMIC2QvN5CQMBLSDIj9pAj+4MFv
+         KIEmo4jMZ+W0RJ8WQOyDZaNUlcNQoyCzm6GtFRjutaTnnVSd3U0aVYOMlrNjxdh4YpzF
+         dd5K2vovclpvz94sn0XBk92qbgfkDVzWj8TacgTxM5XKSKY+3hugnM0/24OGsq+m8CW7
+         2hhK9svA+sIbXY2MxjA/JP4y7qvourcYN1IVPQJxLrnwNoqYEte3NePwPgW54Gbbc67u
+         BX/g==
+X-Gm-Message-State: AOJu0YxzVmfVvRKn4N7VKSQwctZSk5Eau9qZfzKA0URjif7AS3vlGvcx
+        JgTMdeaqpeiCOKuTEzTWIvQ=
+X-Google-Smtp-Source: AGHT+IG2RhXsUTXjDF+NstrUD7qep7ZpNhnN6QlRrOe32iBS9XdpxJ1MAN2JqXN5hfrT58J1pRekoQ==
+X-Received: by 2002:a7b:cbd0:0:b0:3fe:34c2:654b with SMTP id n16-20020a7bcbd0000000b003fe34c2654bmr889606wmi.14.1692175583257;
+        Wed, 16 Aug 2023 01:46:23 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:79ba:2be3:e281:5f90])
+        by smtp.gmail.com with ESMTPSA id b8-20020a5d45c8000000b0030ae53550f5sm20735867wrs.51.2023.08.16.01.46.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 16 Aug 2023 01:46:22 -0700 (PDT)
+From:   Donald Hunter <donald.hunter@gmail.com>
+To:     Jakub Kicinski <kuba@kernel.org>
+Cc:     netdev@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Stanislav Fomichev <sdf@google.com>,
+        Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>,
+        donald.hunter@redhat.com
+Subject: Re: [PATCH net-next v2 02/10] doc/netlink: Document the
+ genetlink-legacy schema extensions
+In-Reply-To: <20230815194902.6ce9ae12@kernel.org> (Jakub Kicinski's message of
+        "Tue, 15 Aug 2023 19:49:02 -0700")
+Date:   Wed, 16 Aug 2023 09:25:08 +0100
+Message-ID: <m2bkf7jswr.fsf@gmail.com>
+References: <20230815194254.89570-1-donald.hunter@gmail.com>
+        <20230815194254.89570-3-donald.hunter@gmail.com>
+        <20230815194902.6ce9ae12@kernel.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC][PATCH v2 02/13] integrity: Introduce a digest cache
-Content-Language: en-US
-To:     Jarkko Sakkinen <jarkko@kernel.org>, corbet@lwn.net,
-        zohar@linux.ibm.com, dmitry.kasatkin@gmail.com,
-        paul@paul-moore.com, jmorris@namei.org, serge@hallyn.com
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-integrity@vger.kernel.org,
-        linux-security-module@vger.kernel.org, bpf@vger.kernel.org,
-        pbrobinson@gmail.com, zbyszek@in.waw.pl, hch@lst.de,
-        mjg59@srcf.ucam.org, pmatilai@redhat.com, jannh@google.com,
-        Roberto Sassu <roberto.sassu@huawei.com>
-References: <20230812104616.2190095-1-roberto.sassu@huaweicloud.com>
- <20230812104616.2190095-3-roberto.sassu@huaweicloud.com>
- <CUSFHQGJ3I8F.WBL3ZYT3U5FB@suppilovahvero>
-From:   Roberto Sassu <roberto.sassu@huaweicloud.com>
-In-Reply-To: <CUSFHQGJ3I8F.WBL3ZYT3U5FB@suppilovahvero>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: LxC2BwAn27okh9xkzRb3AA--.62650S2
-X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
-        VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUYj7kC6x804xWl14x267AKxVW5JVWrJwAF
-        c2x0x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII
-        0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xv
-        wVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjc
-        xK6I8E87Iv6xkF7I0E14v26r4j6r4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40E
-        FcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr
-        0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4IIrI8v6xkF7I0E8cxan2IY
-        04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
-        0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y
-        0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
-        W8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Wr1j6rW3Jr1lIxAIcVC2z280aVAFwI0_Jr0_
-        Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IUbG2Nt
-        UUUUU==
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAQALBF1jj5KudAAAs3
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,PDS_RDNS_DYNAMIC_FP,
-        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_BL,RCVD_IN_MSPIKE_L3,RDNS_DYNAMIC,
-        SPF_HELO_NONE,SPF_NONE autolearn=no autolearn_force=no version=3.4.6
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 8/14/2023 7:03 PM, Jarkko Sakkinen wrote:
-> On Sat Aug 12, 2023 at 1:46 PM EEST, Roberto Sassu wrote:
->> From: Roberto Sassu <roberto.sassu@huawei.com>
->>
->> Introduce the digest cache, a structure holding a hash table of digests,
->> extracted from a digest list. Its pointer is stored in the iint of the
-> 
-> What is iint? I honestly don't know what it is. I first thought that it
-> was "int" typoed.
+Jakub Kicinski <kuba@kernel.org> writes:
 
-Ops. It is the integrity_iint_cache structure, to retain the 
-integrity-specific state of an inode. Will explain that in the next version.
+> On Tue, 15 Aug 2023 20:42:46 +0100 Donald Hunter wrote:
+>> Add description of genetlink-legacy specific attributes to the ynl spec
+>> documentation.
+>> 
+>> Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
+>> ---
+>>  Documentation/userspace-api/netlink/specs.rst | 47 +++++++++++++++++++
+>>  1 file changed, 47 insertions(+)
+>
+> Should we merge this with genetlink-legacy.rst?
 
-Thanks
+Sure, I can do that.
 
-Roberto
+>
+>> diff --git a/Documentation/userspace-api/netlink/specs.rst b/Documentation/userspace-api/netlink/specs.rst
+>> index 2e4acde890b7..dde70f9674d4 100644
+>> --- a/Documentation/userspace-api/netlink/specs.rst
+>> +++ b/Documentation/userspace-api/netlink/specs.rst
+>> @@ -443,3 +443,50 @@ nest
+>>  
+>>  Attribute containing other (nested) attributes.
+>>  ``nested-attributes`` specifies which attribute set is used inside.
+>> +
+>> +genetlink-legacy
+>> +================
+>> +
+>> +The genetlink-legacy schema extends the genetlink schema with some additional
+>> +properties that are needed to support legacy genetlink families.
+>> +
+>> +Globals
+>> +-------
+>> +
+>> + - ``kernel-policy`` - Specify whether the kernel input policy is ``global``,
+>> +   ``per-op`` or ``split``.
+>
+> Maybe a few more words:
+>
+>  Specify whether the kernel input policy is ``global`` i.e. the same for
+>  all operation of the family, defined for each operation individually 
+>  (``per-op``), or separately for each operation and operation type
+>  (do vs dump) - ``split``.
 
+Ack. As an aside, what do we mean by "kernel input policy"?
+
+>> +   ``per-op`` or ``split``.
+>
+>> +Struct definitions
+>> +------------------
+>> +
+>> +There is a new type of definition called ``struct`` which is used for declaring
+>> +the C struct format of fixed headers and binary attributes.
+>> +
+>> +members
+>> +~~~~~~~
+>> +
+>> + - ``name`` - The attribute name of the struct member
+>> + - ``type`` - One of the scalar types ``u8``, ``u16``, ``u32``, ``u64``, ``s8``,
+>> +   ``s16``, ``s32``, ``s64``, ``string`` or ``binary``.
+>> + - ``byte-order`` - ``big-endian`` or ``little-endian``
+>> + - ``doc``, ``enum``, ``enum-as-flags``, ``display-hint`` - Same as for
+>> +   attribute definitions.
+>
+> Hm, genetlink-legacy.rst has this:
+>
+> https://docs.kernel.org/next/userspace-api/netlink/genetlink-legacy.html#structures
+>
+> But the larger section is called "Other quirks (todo)"
+> I guess you have tackled most of the items in this section
+> so we shouldn't call it "todo" ?
+
+I'll clean up genetlink-legacy.rst when I merge these changes.
+
+Thanks for the review!
