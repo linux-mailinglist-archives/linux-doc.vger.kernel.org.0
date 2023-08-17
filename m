@@ -2,108 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C6B1077F675
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Aug 2023 14:31:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B12AF77F694
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Aug 2023 14:43:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1350870AbjHQMbB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 17 Aug 2023 08:31:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37642 "EHLO
+        id S1350883AbjHQMm4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Aug 2023 08:42:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40396 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1350868AbjHQMa0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Aug 2023 08:30:26 -0400
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com [IPv6:2a00:1450:4864:20::42b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8930F271B
-        for <linux-doc@vger.kernel.org>; Thu, 17 Aug 2023 05:30:22 -0700 (PDT)
-Received: by mail-wr1-x42b.google.com with SMTP id ffacd0b85a97d-307d20548adso6696769f8f.0
-        for <linux-doc@vger.kernel.org>; Thu, 17 Aug 2023 05:30:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1692275421; x=1692880221;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vuXRQgl4ayeLkSDW0JDXF701tiBxNx39rnIctWWyMXI=;
-        b=aChaWqCmxgNz4ErLIuuWG8YWUTpIMuWQcpYeSAw6ad1zEDeV4yx9J2tNqzpnFbCrns
-         PCQTvhSO/4u2KNK7H2+Yq3qzuuSXjGouARW32o6DufshbycXVEwSU9sycB1bbBuEgGAA
-         8RvslNCsO+5SvuZHAwq5e3DVlYCAbIo09tpG94aUyWECdzd0b1zMjph6aeBhozJPW7or
-         4NGroOxgf38+UejID4sxd23ygh49ZWXhgqlFX1Xg2UkcgjgICCT9tiI/2nvtQyRzVyMG
-         ZUloXEwidFP0HJTqdTEL0HzVsWbstB/2NhIWwxW59IWixATiMTM/iieV2DcqCZWmtRss
-         CgxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692275421; x=1692880221;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=vuXRQgl4ayeLkSDW0JDXF701tiBxNx39rnIctWWyMXI=;
-        b=jpShoJXPRKhl0KXu5kyVGSGyvxqXm5H4FQCvOgALnGFhoQ35q3ojvuyBfnwhTB9PfE
-         dxdkSatNs0VhPWiSFVBvu841PNG2OYg0CSdYY5UH1MTf7tTfh1qMEibEhNOFOwbnAQYv
-         ZECMaY8GMugpQxuYcKCLfIuV1NYXhSu/5YzOGkOOOp3Drw+apEu5IsuZX/4WiA/zGrYc
-         VmQ4E/SPHcGAChe3hrtAFNxvTrRE7R6DFBraUNlnbvwroaPGrhChR7sMpCAHbYAFqmmV
-         P1vqEiTlEzeeJ/XrPCHQRseHopb8iRoyQ4yqXzrMZELCqFM9PyRATJr/PfchLwYNGQug
-         VmVg==
-X-Gm-Message-State: AOJu0YzadZGRp+mLRaxp0WXP0b2dbiOnquXUKFN/2+NrqnuJxQtWIhJP
-        UeFrApfAF/8W/Ix0uJcsqFU9zuuGjIHrWnWKSEe5pw==
-X-Google-Smtp-Source: AGHT+IFUYAZNKpCPoVJxK7pTg2muMvrUAbItalLhCm+pS3KOCxcwVO8wFJ81MCKfe2JRVnuXtvkCmhwyTjkxHmr5bIE=
-X-Received: by 2002:a5d:674d:0:b0:315:a34f:b520 with SMTP id
- l13-20020a5d674d000000b00315a34fb520mr3544053wrw.71.1692275421081; Thu, 17
- Aug 2023 05:30:21 -0700 (PDT)
+        with ESMTP id S1350900AbjHQMmo (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Aug 2023 08:42:44 -0400
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F07142D57;
+        Thu, 17 Aug 2023 05:42:42 -0700 (PDT)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by smtp-out2.suse.de (Postfix) with ESMTPS id AB2CD1F898;
+        Thu, 17 Aug 2023 12:42:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+        t=1692276161;
+        h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+         cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=QNhTOps9azza6vFm3CqXognqOphc0naIHNC5smRzOSk=;
+        b=SJ4qIo703ie/Bpx2kEn5cNtIUAGFFvHxPME7NRYXclUhIjOyJCEchu2xBnG3asLoNrbUxw
+        TqvsAKB7P1raHqXISc2txD6z8gIDtLtHT+kiKI1zPC7hEBL7074qAjYZnoEtQn9aw6kY1M
+        HsVuL9zuk967F/kFvb76PoJTX9ynR9o=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+        s=susede2_ed25519; t=1692276161;
+        h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+         cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=QNhTOps9azza6vFm3CqXognqOphc0naIHNC5smRzOSk=;
+        b=wmVF+JXX2EclwZriIT8PiTNF+wU/EvzABkKyBdIxZU40im35Rl4LCmTiMwpZr68KJ/qMAx
+        feWGozBQ8+4yEuBg==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 780A41392B;
+        Thu, 17 Aug 2023 12:42:41 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+        by imap2.suse-dmz.suse.de with ESMTPSA
+        id vyWTHMEV3mT/ZQAAMHmgww
+        (envelope-from <dsterba@suse.cz>); Thu, 17 Aug 2023 12:42:41 +0000
+Date:   Thu, 17 Aug 2023 14:36:12 +0200
+From:   David Sterba <dsterba@suse.cz>
+To:     Bhaskar Chowdhury <unixbhaskar@gmail.com>
+Cc:     clm@fb.com, josef@toxicpanda.com, dsterba@suse.com, corbet@lwn.net,
+        linux-btrfs@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Doc: fs: Take away the stale url
+Message-ID: <20230817123612.GO2420@twin.jikos.cz>
+Reply-To: dsterba@suse.cz
+References: <20230813065247.655287-1-unixbhaskar@gmail.com>
 MIME-Version: 1.0
-References: <202308151010.JGqiPc9F-lkp@intel.com>
-In-Reply-To: <202308151010.JGqiPc9F-lkp@intel.com>
-From:   Alexandre Ghiti <alexghiti@rivosinc.com>
-Date:   Thu, 17 Aug 2023 14:30:10 +0200
-Message-ID: <CAHVXubjTrGQTCh0paUV9YO-0kbntqLu51FpjAJpfjZHtp-9tCQ@mail.gmail.com>
-Subject: Re: [lwn:docs-next 37/49] htmldocs: Warning: Documentation/riscv/boot.rst
- references a file that doesn't exist: Documentation/arm/uefi.rst
-To:     kernel test robot <lkp@intel.com>
-Cc:     oe-kbuild-all@lists.linux.dev, linux-doc@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>,
-        Conor Dooley <conor.dooley@microchip.com>,
-        Sunil V L <sunilvl@ventanamicro.com>,
-        Andrew Jones <ajones@ventanamicro.com>,
-        Palmer Dabbelt <palmer@rivosinc.com>,
-        Atish Patra <atishp@rivosinc.com>,
-        Song Shuai <songshuaishuai@tinylab.org>,
-        Randy Dunlap <rdunlap@infradead.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230813065247.655287-1-unixbhaskar@gmail.com>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Jon,
+On Sun, Aug 13, 2023 at 12:22:48PM +0530, Bhaskar Chowdhury wrote:
+> That url pointed to non-maintained place. So, take it out.
 
-On Tue, Aug 15, 2023 at 4:36=E2=80=AFAM kernel test robot <lkp@intel.com> w=
-rote:
->
-> tree:   git://git.lwn.net/linux.git docs-next
-> head:   90cd0c18573ad0583dec098a586f86d281947eb9
-> commit: e0bec22f06641e4a7ccd7fb1f8ed4588839b660b [37/49] Documentation: r=
-iscv: Add early boot document
-> reproduce: (https://download.01.org/0day-ci/archive/20230815/202308151010=
-.JGqiPc9F-lkp@intel.com/reproduce)
->
-> If you fix the issue in a separate patch/commit (i.e. not just a new vers=
-ion of
-> the same patch/commit), kindly add following tags
-> | Reported-by: kernel test robot <lkp@intel.com>
-> | Closes: https://lore.kernel.org/oe-kbuild-all/202308151010.JGqiPc9F-lkp=
-@intel.com/
->
-> All warnings (new ones prefixed by >>):
->
-> >> Warning: Documentation/riscv/boot.rst references a file that doesn't e=
-xist: Documentation/arm/uefi.rst
->
-> --
-> 0-DAY CI Kernel Test Service
-> https://github.com/intel/lkp-tests/wiki
-
-Sorry I missed this, I respin another version right now.
-
-Alex
+I found two more references to the wiki, in the MAINTAINERS file and in
+Kconfig, you can replace them by https://btrfs.readthedocs.io and
+resend. Thanks.
