@@ -2,139 +2,248 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EA84C780B11
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Aug 2023 13:26:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 004E7780B75
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Aug 2023 13:57:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1376634AbjHRLZp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 18 Aug 2023 07:25:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57152 "EHLO
+        id S1376734AbjHRLyh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 18 Aug 2023 07:54:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48406 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1376694AbjHRLZn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Aug 2023 07:25:43 -0400
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 51A563C1F;
-        Fri, 18 Aug 2023 04:25:42 -0700 (PDT)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 79704D75;
-        Fri, 18 Aug 2023 04:26:22 -0700 (PDT)
-Received: from [10.57.4.78] (unknown [10.57.4.78])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9DC4C3F762;
-        Fri, 18 Aug 2023 04:25:40 -0700 (PDT)
-Message-ID: <75147373-d5f0-b9cc-cdf8-15b5093fb8e2@arm.com>
-Date:   Fri, 18 Aug 2023 12:25:39 +0100
+        with ESMTP id S1376732AbjHRLyZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Aug 2023 07:54:25 -0400
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com [IPv6:2607:f8b0:4864:20::1035])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 99EF02D4F
+        for <linux-doc@vger.kernel.org>; Fri, 18 Aug 2023 04:53:58 -0700 (PDT)
+Received: by mail-pj1-x1035.google.com with SMTP id 98e67ed59e1d1-26b4c6a5e61so613782a91.1
+        for <linux-doc@vger.kernel.org>; Fri, 18 Aug 2023 04:53:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance.com; s=google; t=1692359638; x=1692964438;
+        h=content-transfer-encoding:in-reply-to:from:references:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fWUAu55Okzaxxflb8/jmAhx5gyfvmuNdSd8uGCqH/Zw=;
+        b=eq248EH06v7v4m/+8bSuN+oJAZuyVZ5P3IhvOfLa0gH7Ftb4Z9KOJPje0UAQJX5er3
+         OhtWSQ0AU0VFJKU4fmVprsd/oJUo2QPwIqoQioP3mBhb4FfKfQ01RO5dO9nKWy2SI/MP
+         uTVk259CT4/3xUyvWB4kB2IWgaSxWKXb9L+hjscXInyvbpHmDBPmpl9M7xDVwBcTenEw
+         Ld10dgJhTAcBMt8SxxJddrMcsX7zxwXVGO8YCYY4siCBLxOEN7kItKjMnnr1ePIcPKvP
+         DAa5MKiQQhtw09iC3rbTHJK2e7KNkDZEtI44JZndbkamNp61O7+cGrXXASEv5pxu3x33
+         qjOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692359638; x=1692964438;
+        h=content-transfer-encoding:in-reply-to:from:references:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=fWUAu55Okzaxxflb8/jmAhx5gyfvmuNdSd8uGCqH/Zw=;
+        b=LbLyZAWA2hTkPwEeAK/9TwaDGX76CYDdr825rHfm1VcULxAeBE6Niz9WpEfv8dgxr8
+         2WuVz6rF0FnIrbsLyBr7cmiX/+STEX2dOcV6GCb9Qh9HxTRoQx4LcgySRkA7IKJG3rub
+         LxN+37q14uWpKu3xjyEsHJQtXp3Di/lFvtlgiyrwWuhqIy/xlfafByYfuzdkGsLvyy2n
+         8MtaEOz2kVYbarXAXAeedhXfNBuFjuHMLnZaqwykyrPDrzBP96ZxGuWehlvMeBmzbNF/
+         NdjY4bsC0n8VhJnrjfmVp3GySep/IJKyAQDQ0HjFNeYGvYaOgaCXqwEsbadzoPRVfVd6
+         s7Fw==
+X-Gm-Message-State: AOJu0YyEyIzyph8njwKVuI3BHWq69LG3ynYIU1pGj0a+DqgwYxLBOVTs
+        EzJ8mRqj+UvYeCWJaODAEup37A==
+X-Google-Smtp-Source: AGHT+IEoDhL7JPYYvqyUCrTfrN7Sp8X7zYiAiDB+7WTz2PRk2dwjF8tQdyEs8B7UpMHhLGp3Zs9ccw==
+X-Received: by 2002:a17:90b:3003:b0:269:33cb:e061 with SMTP id hg3-20020a17090b300300b0026933cbe061mr2118476pjb.24.1692359638052;
+        Fri, 18 Aug 2023 04:53:58 -0700 (PDT)
+Received: from [10.254.252.111] ([139.177.225.249])
+        by smtp.gmail.com with ESMTPSA id l11-20020a17090a598b00b00267b38f5e13sm1336696pji.2.2023.08.18.04.53.51
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 18 Aug 2023 04:53:57 -0700 (PDT)
+Message-ID: <6b6d7ef1-75e4-68a3-1662-82ee19334567@bytedance.com>
+Date:   Fri, 18 Aug 2023 19:53:46 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.14.0
-Subject: Re: [PATCH V4 2/3] coresight: etm: Make cycle count threshold user
- configurable
-To:     Anshuman Khandual <anshuman.khandual@arm.com>,
-        linux-arm-kernel@lists.infradead.org
-Cc:     Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Mike Leach <mike.leach@linaro.org>,
-        James Clark <james.clark@arm.com>,
-        Leo Yan <leo.yan@linaro.org>, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org, coresight@lists.linaro.org,
-        linux-kernel@vger.kernel.org
-References: <20230818112051.594986-1-anshuman.khandual@arm.com>
- <20230818112051.594986-3-anshuman.khandual@arm.com>
-From:   Suzuki K Poulose <suzuki.poulose@arm.com>
-In-Reply-To: <20230818112051.594986-3-anshuman.khandual@arm.com>
+Subject: Re: [PATCH 04/11] maple_tree: Introduce interfaces __mt_dup() and
+ mt_dup()
+To:     "Liam R. Howlett" <Liam.Howlett@Oracle.com>,
+        Peng Zhang <zhangpeng.00@bytedance.com>, willy@infradead.org,
+        michael.christie@oracle.com, surenb@google.com, npiggin@gmail.com,
+        corbet@lwn.net, mathieu.desnoyers@efficios.com, avagin@gmail.com,
+        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        akpm@linux-foundation.org, brauner@kernel.org, peterz@infradead.org
+References: <20230726080916.17454-1-zhangpeng.00@bytedance.com>
+ <20230726080916.17454-5-zhangpeng.00@bytedance.com>
+ <20230726160354.konsgq6hidj7gr5u@revolver>
+ <beaab8b4-180c-017d-bd8d-8766196f302a@bytedance.com>
+ <20230731162714.4x3lzymuyvu2mter@revolver>
+ <3f4e73cc-1a98-95a8-9ab2-47797d236585@bytedance.com>
+ <20230816183029.5rpkbgp2umebrjh5@revolver>
+From:   Peng Zhang <zhangpeng.00@bytedance.com>
+In-Reply-To: <20230816183029.5rpkbgp2umebrjh5@revolver>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-5.4 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-5.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 18/08/2023 12:20, Anshuman Khandual wrote:
-> Cycle counting is enabled, when requested and supported but with a default
-> threshold value ETM_CYC_THRESHOLD_DEFAULT i.e 0x100 getting into TRCCCCTLR,
-> representing the minimum interval between cycle count trace packets.
-> 
-> This makes cycle threshold user configurable, from the user space via perf
-> event attributes. Although it falls back using ETM_CYC_THRESHOLD_DEFAULT,
-> in case no explicit request. As expected it creates a sysfs file as well.
-> 
-> /sys/bus/event_source/devices/cs_etm/format/cc_threshold
-> 
-> New 'cc_threshold' uses 'event->attr.config3' as no more space is available
-> in 'event->attr.config1' or 'event->attr.config2'.
-> 
-> Cc: Suzuki K Poulose <suzuki.poulose@arm.com>
-> Cc: Mike Leach <mike.leach@linaro.org>
-> Cc: James Clark <james.clark@arm.com>
-> Cc: Leo Yan <leo.yan@linaro.org>
-> Cc: coresight@lists.linaro.org
-> Cc: linux-arm-kernel@lists.infradead.org
-> Cc: linux-doc@vger.kernel.org
-> Cc: linux-kernel@vger.kernel.org
-> Reviewed-by: Mike Leach <mike.leach@linaro.org>
-> Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
-> ---
->   drivers/hwtracing/coresight/coresight-etm-perf.c   |  2 ++
->   drivers/hwtracing/coresight/coresight-etm4x-core.c | 12 ++++++++++--
->   2 files changed, 12 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.c b/drivers/hwtracing/coresight/coresight-etm-perf.c
-> index 5ca6278baff4..09f75dffae60 100644
-> --- a/drivers/hwtracing/coresight/coresight-etm-perf.c
-> +++ b/drivers/hwtracing/coresight/coresight-etm-perf.c
-> @@ -68,6 +68,7 @@ PMU_FORMAT_ATTR(preset,		"config:0-3");
->   PMU_FORMAT_ATTR(sinkid,		"config2:0-31");
->   /* config ID - set if a system configuration is selected */
->   PMU_FORMAT_ATTR(configid,	"config2:32-63");
-> +PMU_FORMAT_ATTR(cc_threshold,	"config3:0-11");
->   
->   
->   /*
-> @@ -101,6 +102,7 @@ static struct attribute *etm_config_formats_attr[] = {
->   	&format_attr_preset.attr,
->   	&format_attr_configid.attr,
->   	&format_attr_branch_broadcast.attr,
-> +	&format_attr_cc_threshold.attr,
->   	NULL,
->   };
->   
-> diff --git a/drivers/hwtracing/coresight/coresight-etm4x-core.c b/drivers/hwtracing/coresight/coresight-etm4x-core.c
-> index 591fab73ee79..3193dafa7618 100644
-> --- a/drivers/hwtracing/coresight/coresight-etm4x-core.c
-> +++ b/drivers/hwtracing/coresight/coresight-etm4x-core.c
-> @@ -635,7 +635,7 @@ static int etm4_parse_event_config(struct coresight_device *csdev,
->   	struct etmv4_config *config = &drvdata->config;
->   	struct perf_event_attr *attr = &event->attr;
->   	unsigned long cfg_hash;
-> -	int preset;
-> +	int preset, cc_threshold;
->   
->   	/* Clear configuration from previous run */
->   	memset(config, 0, sizeof(struct etmv4_config));
-> @@ -658,7 +658,15 @@ static int etm4_parse_event_config(struct coresight_device *csdev,
->   	if (attr->config & BIT(ETM_OPT_CYCACC)) {
->   		config->cfg |= TRCCONFIGR_CCI;
->   		/* TRM: Must program this for cycacc to work */
-> -		config->ccctlr = ETM_CYC_THRESHOLD_DEFAULT;
-> +		cc_threshold = attr->config3 & ETM_CYC_THRESHOLD_MASK;
-> +		if (cc_threshold) {
-> +			if (cc_threshold < drvdata->ccitmin)
-> +				config->ccctlr = drvdata->ccitmin;
-> +			else
-> +				config->ccctlr = cc_threshold;
-> +		} else {
-> +			config->ccctlr = ETM_CYC_THRESHOLD_DEFAULT;
 
-Ideally this must be the ccitmin ? Theoretically, default value could be 
-bigger than the minimum value supported by the implementation (i.e., 
-ccitmin)
 
-Suzuki
+在 2023/8/17 02:30, Liam R. Howlett 写道:
+> * Peng Zhang <zhangpeng.00@bytedance.com> [230816 09:42]:
+>>
+>>
+> ...
+> 
+>>>>>> +/**
+>>>>>> + * __mt_dup(): Duplicate a maple tree
+>>>>>> + * @mt: The source maple tree
+>>>>>> + * @new: The new maple tree
+>>>>>> + * @gfp: The GFP_FLAGS to use for allocations
+>>>>>> + *
+>>>>>> + * This function duplicates a maple tree using a faster method than traversing
+>>>>>> + * the source tree and inserting entries into the new tree one by one. The user
+>>>>>> + * needs to lock the source tree manually. Before calling this function, @new
+>>>>>> + * must be an empty tree or an uninitialized tree. If @mt uses an external lock,
+>>>>>> + * we may also need to manually set @new's external lock using
+>>>>>> + * mt_set_external_lock().
+>>>>>> + *
+>>>>>> + * Return: 0 on success, -ENOMEM if memory could not be allocated.
+>>>>>> + */
+>>>>>> +int __mt_dup(struct maple_tree *mt, struct maple_tree *new, gfp_t gfp)
+>>>>>
+>>>>> We use mas_ for things that won't handle the locking and pass in a maple
+>>>>> state.  Considering the leaves need to be altered once this is returned,
+>>>>> I would expect passing in a maple state should be feasible?
+>>>> But we don't really need mas here. What do you think the state of mas
+>>>> should be when this function returns? Make it point to the first entry,
+>>>> or the last entry?
+>>>
+>>> I would write it to point to the first element so that the call to
+>>> replace the first element can just do that without an extra walk and
+>>> document the maple state end point.
+>> Unfortunately, this does not seem to be convenient. Users usually use
+>> mas_for_each() to replace elements. If we set mas to the first element,
+>> the first call to mas_find() in mas_for_each() will get the next
+>> element.
+> 
+> This sounds like the need for another iterator specifically for
+> duplicating.
+> 
+>>
+>> There may also be other scenarios where the user does not necessarily
+>> have to replace every element.
+> 
+> Do you mean a limit or elements that need to be skipped?  We could have
+> a limit on the iteration.
+> 
+>>
+>> Finally, getting the first element in __mt_dup() requires an additional
+>> check to check whether the first element has already been recorded. Such
+>> a check will be performed at each leaf node, which is unnecessary
+>> overhead.
+>>
+>> Of course, the first reason is the main reason, which prevents us from
+>> using mas_for_each(). So I don't want to record the first element.
+> 
+> 
+> I don't like the interface because it can easily be misunderstood and
+> used incorrectly.  I don't know how to make a cleaner interface, but
+> I've gone through a few thoughts:
+> 
+> The first was hide _all of it_ in a new iterator:
+> mas_dup_each(old, new, old_entry) {
+> 	if (don't_dup(old_entry)) {
+> 		mas_erase(new);
+> 		continue;
+> 	}
+> 
+> 	mas_dup_insert(new, new_entry);
+> }
+> 
+> This iterator would check if mas_is_start(old) and dup the tree in that
+> event.  Leave the both new trees pointing to the first element and set
+> old_entry.  I don't know how to handle the failure in duplicating the
+> tree in this case - I guess we could return old_entry = NULL and check
+> if mas_is_err(old) after the loop.  Do you see a problem with this?
+This interface looks OK. But handling the failure case is tricky.
+> 
+> 
+> The second idea was an init of the old tree.  This is closest to what you
+> have:
+> 
+> if (mas_dup_init(old, new))
+> 	goto -ENOMEM;
+> 
+> mas_dup_each(old, new) {
+> 	if (don't_dup(old_entry)) {
+> 		mas_erase(new);
+> 		continue;
+> 	}
+> 
+> 	mas_dup_insert(new, new_entry);
+> }
+I think this interface could be better.
+> 
+> This would duplicate the tree at the start and leave both pointing at
+> the first element so that mas_dup_each() could start on that element.
+> Each subsequent call would go to the next element in both maple states.
+Every element of the new tree is the same as the old tree, and we don't
+need to maintain the mas of the old tree. It is enough to maintain the
+mas of the new tree when traversing.
 
-> +		}
->   	}
->   	if (attr->config & BIT(ETM_OPT_TS)) {
->   		/*
+> It sounds like you don't want this for performance reasons?  Although
+I mean I don't want to record the first element during duplicating. But
+we can get the first element after the duplicate completes. This can
+also still be within the implementation of the interface.
 
+> looking at mas_find() today, I think this could still work since we are
+> checking the maple state for a lot.
+Yes, mas_find() does a whole bunch of checks.
+> 
+> Both ideas could be even faster than what you have if we handle the
+> special cases of mas_is_none()/mas_is_ptr() in a smarter way because we
+> don't need to be as worried about the entry point of the maple state as
+> much as we do with mas_find()/mas_for_each().  I mean, is it possible to
+> get to a mas_is_none() or mas_is_ptr() on duplicating a tree?  How do we
+> handle these users?
+The check for mas_is_none() or mas_is_ptr() in mas_find() is really not
+worth it if we hold the lock. There doesn't seem to be a good way around
+mas_is_ptr() since it needs to enter the loop once. mas_is_none() can be
+solved because it does not enter the loop, we can use it as a condition
+to enter the loop.
+
+Without using mas_find() to avoid the check inside, I have to figure out
+how I can handle mas_is_ptr() properly.
+> 
+> Both ideas still suffer from someone saying "Gee, that {insert function
+> name here} is used in the forking code, so I can totally use that in my
+> code because that's how it work!"  and find out it works for the limited
+> testing they do.  Then it fails later and the emails start flying.
+> 
+> 
+> I almost think we should do something like this on insert:
+> 
+> void mas_dup_insert(old, new, new_entry) {
+> 	WARN_ON_ONCE(old == new);
+> 	WARN_ON_ONCE(old->index != new->index);
+> 	WARN_ON_ONCE(old->last != new->last);
+> 	...
+> }
+Maintaining old mas doesn't feel worth it. If this we have to traverse
+the old tree one more time.
+> 
+> This would at least _require_ someone to have two maple states and
+> hopefully think twice on using it where it should not be used.
+> 
+> The bottom line is that this code is close to what we need to make
+> forking better, but I fear the misuse of the interface.
+> 
+> Something else to think about:
+> In the work items for the Maple Tree, there is a plan to have an enum to
+> specify the type of write that is going to happen.  The idea was for
+> mas_preallocate() to set this type of write so we can just go right to
+> the correct function.  We could use that here and set the maple state
+> write type to a direct replacement.
+This can be the next step. We can do without it for now.
+> 
+> Thanks,
+> Liam
+> 
