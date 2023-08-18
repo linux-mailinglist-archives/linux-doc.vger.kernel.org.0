@@ -2,126 +2,170 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3D53B781413
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Aug 2023 22:07:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 55F2D78143A
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Aug 2023 22:16:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1379878AbjHRUGu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 18 Aug 2023 16:06:50 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39756 "EHLO
+        id S1379953AbjHRUP7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 18 Aug 2023 16:15:59 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47628 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1379886AbjHRUGl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Aug 2023 16:06:41 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8EAD11BD4;
-        Fri, 18 Aug 2023 13:06:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
-        References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-        Content-Type:Content-ID:Content-Description;
-        bh=HEUqudgPIORhVtUepujoEAHkjLRlCh4kIh4ylDVS334=; b=fOFUrOiJoU+PYtWXIoWPp0biHN
-        1Iq2DbevP7Pj0Xo/lF1SpR5VllaM/JQGPznG3Hqk5Xwy0HQgNVBF0kqx56qtEkZ9YveSgLQD5ltey
-        HeNAHPvW1If7K5JSc3kmmXIjsUGO4iKiKBZQUwC3r8p9h2WDYgK3axUogZZCbsRn9hyNh1W20nr5P
-        jSNtiUDZRYo/5plPR1Q6xFGlrqFsptza3FrnkXM1My+Io2Fq3aTUTxMGlURxE9wEeOvYOOEmk1ZYz
-        VuC0LdL2kbXOmnQwLGUSJJ+Ewit+QsdinLFP3OXV0FInJsbi4m5MR5SvQm02k8nwnErrrcqgx38am
-        qKtG6Lqw==;
-Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1qX5js-00BPVE-PK; Fri, 18 Aug 2023 20:06:32 +0000
-From:   "Matthew Wilcox (Oracle)" <willy@infradead.org>
-To:     Andrew Morton <akpm@linux-foundation.org>
-Cc:     "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        linux-mm@kvack.org, Mike Rapoport <rppt@kernel.org>,
-        linux-doc@vger.kernel.org, cgroups@vger.kernel.org
-Subject: [PATCH 4/4] mm: Add orphaned kernel-doc to the rst files.
-Date:   Fri, 18 Aug 2023 21:06:30 +0100
-Message-Id: <20230818200630.2719595-5-willy@infradead.org>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20230818200630.2719595-1-willy@infradead.org>
-References: <20230818200630.2719595-1-willy@infradead.org>
+        with ESMTP id S1379968AbjHRUP1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Aug 2023 16:15:27 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D60B41BD4;
+        Fri, 18 Aug 2023 13:15:25 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id 42CC860DB6;
+        Fri, 18 Aug 2023 20:15:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4FBFC433C7;
+        Fri, 18 Aug 2023 20:15:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1692389724;
+        bh=WCt+HTyPqpQoM8uuU7vN+x57RA6ZJu12mqg0CzvfAKw=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=UWpnqpi65SH3/qdqWBn6Zd1Ci2gAJDST/B3oTk2b0QqR4KzLEHujl/2sXAp34aaQz
+         rYf/Hxv4pGdxI4XtXA71/BlwdSjOlALBF8+7Nh/txVG1Pr0etLTfoxWGUJ+zGSMQ13
+         12qmiSM3fn6coLaVe6HKubfVBJb5Z/QsLDUtopgpRJBemR/BlWB0eyjCHm7pxUeA6y
+         yvGiBvlRhhmOnJmtqJKBgyLZHzlJhtJfhzvqoLPqNP+U1RPimemgLmIq2et3p1jWan
+         qRLwKdKD5hl3mrqoXMp+UCe8E/WSmGnN+WQpVc/+3X3jhGCfNqyeGGCMUIAzmPI1DF
+         i74Qa8ekO6c+g==
+Date:   Fri, 18 Aug 2023 21:15:15 +0100
+From:   Mark Brown <broonie@kernel.org>
+To:     Catalin Marinas <catalin.marinas@arm.com>
+Cc:     Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Marc Zyngier <maz@kernel.org>,
+        Oliver Upton <oliver.upton@linux.dev>,
+        James Morse <james.morse@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>, Oleg Nesterov <oleg@redhat.com>,
+        Eric Biederman <ebiederm@xmission.com>,
+        Kees Cook <keescook@chromium.org>,
+        Shuah Khan <shuah@kernel.org>,
+        "Rick P. Edgecombe" <rick.p.edgecombe@intel.com>,
+        Deepak Gupta <debug@rivosinc.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Szabolcs Nagy <Szabolcs.Nagy@arm.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        kvmarm@lists.linux.dev, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-mm@kvack.org,
+        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org
+Subject: Re: [PATCH v4 19/36] arm64/gcs: Allocate a new GCS for threads with
+ GCS enabled
+Message-ID: <3a01ce20-3365-421b-95ff-211946808174@sirena.org.uk>
+References: <20230807-arm64-gcs-v4-0-68cfa37f9069@kernel.org>
+ <20230807-arm64-gcs-v4-19-68cfa37f9069@kernel.org>
+ <ZNZhG/4rBpTenYVH@arm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_NONE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="45mwPxvFeqYyCSA9"
+Content-Disposition: inline
+In-Reply-To: <ZNZhG/4rBpTenYVH@arm.com>
+X-Cookie: Your aim is high and to the right.
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-There are many files in mm/ that contain kernel-doc which is not
-currently published on kernel.org.  Some of it is easily categorisable,
-but most of it is going into the miscellaneous documentation section to
-be organised later.
 
-Some files aren't ready to be included; they contain documentation with
-build errors.  Or they're nommu.c which duplicates documentation from
-"real" MMU systems.  Those files are noted with a # mark (although really
-anything which isn't a recognised directive would do to prevent inclusion)
+--45mwPxvFeqYyCSA9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
----
- Documentation/core-api/mm-api.rst | 25 +++++++++++++++++++++++++
- Documentation/mm/highmem.rst      |  1 +
- Documentation/mm/zsmalloc.rst     |  5 +++++
- 3 files changed, 31 insertions(+)
+On Fri, Aug 11, 2023 at 05:26:03PM +0100, Catalin Marinas wrote:
+> On Mon, Aug 07, 2023 at 11:00:24PM +0100, Mark Brown wrote:
 
-diff --git a/Documentation/core-api/mm-api.rst b/Documentation/core-api/mm-api.rst
-index f5dde5bceaea..2d091c873d1e 100644
---- a/Documentation/core-api/mm-api.rst
-+++ b/Documentation/core-api/mm-api.rst
-@@ -115,3 +115,28 @@ More Memory Management Functions
- .. kernel-doc:: include/linux/mmzone.h
- .. kernel-doc:: mm/util.c
-    :functions: folio_mapping
-+
-+.. kernel-doc:: mm/rmap.c
-+.. kernel-doc:: mm/migrate.c
-+.. kernel-doc:: mm/mmap.c
-+.. kernel-doc:: mm/kmemleak.c
-+.. #kernel-doc:: mm/hmm.c (build warnings)
-+.. kernel-doc:: mm/memremap.c
-+.. kernel-doc:: mm/hugetlb.c
-+.. kernel-doc:: mm/swap.c
-+.. kernel-doc:: mm/zpool.c
-+.. kernel-doc:: mm/memcontrol.c
-+.. #kernel-doc:: mm/memory-tiers.c (build warnings)
-+.. kernel-doc:: mm/shmem.c
-+.. kernel-doc:: mm/migrate_device.c
-+.. #kernel-doc:: mm/nommu.c (duplicates kernel-doc from other files)
-+.. kernel-doc:: mm/mapping_dirty_helpers.c
-+.. #kernel-doc:: mm/memory-failure.c (build warnings)
-+.. kernel-doc:: mm/percpu.c
-+.. kernel-doc:: mm/maccess.c
-+.. kernel-doc:: mm/vmscan.c
-+.. kernel-doc:: mm/memory_hotplug.c
-+.. kernel-doc:: mm/mmu_notifier.c
-+.. kernel-doc:: mm/balloon_compaction.c
-+.. kernel-doc:: mm/huge_memory.c
-+.. kernel-doc:: mm/io-mapping.c
-diff --git a/Documentation/mm/highmem.rst b/Documentation/mm/highmem.rst
-index fe68e02fc8ff..9d92e3f2b3d6 100644
---- a/Documentation/mm/highmem.rst
-+++ b/Documentation/mm/highmem.rst
-@@ -209,4 +209,5 @@ Functions
- =========
- 
- .. kernel-doc:: include/linux/highmem.h
-+.. kernel-doc:: mm/highmem.c
- .. kernel-doc:: include/linux/highmem-internal.h
-diff --git a/Documentation/mm/zsmalloc.rst b/Documentation/mm/zsmalloc.rst
-index a3c26d587752..76902835e68e 100644
---- a/Documentation/mm/zsmalloc.rst
-+++ b/Documentation/mm/zsmalloc.rst
-@@ -263,3 +263,8 @@ is heavy internal fragmentation and zspool compaction is unable to relocate
- objects and release zspages. In these cases, it is recommended to decrease
- the limit on the size of the zspage chains (as specified by the
- CONFIG_ZSMALLOC_CHAIN_SIZE option).
-+
-+Functions
-+=========
-+
-+.. kernel-doc:: mm/zsmalloc.c
--- 
-2.40.1
+> > +	mmap_write_lock(mm);
+> > +	mapped_addr = do_mmap(NULL, addr, size, PROT_READ, flags,
+> > +			      VM_SHADOW_STACK | VM_WRITE, 0, &unused, NULL);
 
+> Why not PROT_WRITE as well? I guess I need to check the x86 patches
+> since the do_mmap() called here has a different prototype than what's in
+> mainline.
+
+> This gets confusing since currently the VM_* flags are derived from the
+> PROT_* flags passed to mmap(). But you skip the PROT_WRITE in favour of
+> adding VM_WRITE directly.
+
+I have to confess that I inherited this from the x86 code and never
+thought too hard about it.  I've got a horrible feeling the reasoning is
+simply the way in which x86 fits shadow stack into the page tables
+without having a mechanism like permission indirection, these don't
+apply for us.
+
+> I haven't followed the x86 discussion but did we run out of PROT_* bits
+> for a PROT_SHADOW_STACK?
+
+It's more that there are security concerns with having PROT_, especially
+in conjunction with needing to provide a token for stack pivot - we not
+only need to map pages for the GCS, we also need to write a cap token
+into it so that we can pivot to the new stack.  If the GCS can ever be
+written to by userspace via normal means then that's an issue for the
+basic protection model that the feature is trying to implement.  If we
+have the PROT_ but try to check for bad uses of it that makes everything
+messy and complicated which is especially non-ideal for a feature with a
+security focus.  Having a more packaged system call is easier for
+everyone.
+
+More detail in the x86 patch that's currently in -next:
+
+   https://lore.kernel.org/all/20230319001535.23210-34-rick.p.edgecombe@intel.com/
+
+> > +	/* Allocate RLIMIT_STACK with limits of PAGE_SIZE..4G */
+> > +	size = PAGE_ALIGN(min_t(unsigned long long,
+> > +				rlimit(RLIMIT_STACK), SZ_4G));
+> > +	return max(PAGE_SIZE, size);
+> > +}
+
+> I saw Szabolcs commenting on the default size as well. Maybe we should
+> go for RLIMIT_STACK/2 but let's see how the other sub-thread is going.
+
+I've updated it.
+
+> > +	if ((clone_flags & (CLONE_VFORK | CLONE_VM)) != CLONE_VM)
+> > +		return 0;
+
+> Is it safe for CLONE_VFORK not to get a new shadow stack? A syscall for
+> exec could push something to the stack. I guess the GCS pointer in the
+> parent stays the same, so it wouldn't matter.
+
+Yes, pushing should be fine just as for the regular stack.
+
+> That said, I think this check should be somewhere higher up in the
+> caller of gcs_alloc_thread_stack(). The copy_thread_gcs() function
+> already does most of the above checks. Is the GCS allocation called from
+> elsewhere as well?
+
+That's the only place.  I've moved the above check into copy_thread_gcs(),
+you're right that the other checks are redundant as they're done in the
+caller already.
+
+--45mwPxvFeqYyCSA9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmTf0VIACgkQJNaLcl1U
+h9AK7Af8DxBPnoklDhEt6uL9Qzwyg5iHuvMMz45iQs74RTv9fEM/vR1B1L0U0vxL
+LjcRxv98KB+GM2DQ+YOoQK84V2okcpKSNu9l/0CY+hvT8JChP5Ljn/b3azVF3FGY
+QYftbzRipJONW9pKxIZ7Svx8+iZIg03PmcwJTtLRsi36gyykxlFbYhzZm/0VbWH6
+HDuDWH8yMX1/BQGizf3FM7CxbBmhcI/zzi2eUslQ3EPOoSKywy4JXRc49XAvrxbT
+Bu8EbBX7Oapi96h+KlZEAWSiTuD4plJ6pJQsjMdMcELiI//3sTIzNRNqmFxBIgWS
+O2Sp933Ku1aQm9TW9TcOY3MVq5dYiQ==
+=X4OS
+-----END PGP SIGNATURE-----
+
+--45mwPxvFeqYyCSA9--
