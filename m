@@ -2,252 +2,935 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F395A7854FB
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Aug 2023 12:11:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5680578553F
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Aug 2023 12:18:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232690AbjHWKLS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Aug 2023 06:11:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36660 "EHLO
+        id S231919AbjHWKSb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Aug 2023 06:18:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49884 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232729AbjHWKKm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Aug 2023 06:10:42 -0400
-Received: from EUR01-VE1-obe.outbound.protection.outlook.com (mail-ve1eur01on2042.outbound.protection.outlook.com [40.107.14.42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 44303E6A;
-        Wed, 23 Aug 2023 03:10:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IOrDUd+FVk3vNXJqfNKW0UBrz813kwnlFgbS0CSGpQ4=;
- b=UrD5Sad51hJBTozIGdsHOE8HTs+icpKbg/uzZrAqriUEc8rK/FoB/64yetRLJw00Zb4xlQOKy+QQU8Sek3jNrDLVXhdEdDktxwsiJ0ks9ejuFG1gGNDOc2mtOWxdmPjHnyJOYdMh+rv13tpCPtC3eWneIgOFqX75OR6kuXzEBC0=
-Received: from AS9P194CA0018.EURP194.PROD.OUTLOOK.COM (2603:10a6:20b:46d::30)
- by GV2PR08MB8025.eurprd08.prod.outlook.com (2603:10a6:150:ad::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.20; Wed, 23 Aug
- 2023 10:10:29 +0000
-Received: from AM7EUR03FT010.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:46d:cafe::4f) by AS9P194CA0018.outlook.office365.com
- (2603:10a6:20b:46d::30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.25 via Frontend
- Transport; Wed, 23 Aug 2023 10:10:29 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM7EUR03FT010.mail.protection.outlook.com (100.127.141.22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6723.16 via Frontend Transport; Wed, 23 Aug 2023 10:10:29 +0000
-Received: ("Tessian outbound 169aaa6bf2b7:v175"); Wed, 23 Aug 2023 10:10:29 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: c34bbbab1685a211
-X-CR-MTA-TID: 64aa7808
-Received: from b8c08391aad8.1
-        by 64aa7808-outbound-1.mta.getcheckrecipient.com id 09E88E55-B2A1-47F3-9522-AF7217A665DD.1;
-        Wed, 23 Aug 2023 10:10:18 +0000
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id b8c08391aad8.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Wed, 23 Aug 2023 10:10:18 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=I4cvyyzLieK88VVTDZa+Rkyhrd5+ty0Fg3XXIPbYauXyuKVSbtrfToQLmX3GYdFv8hLfs7h9oDx/Bt0rPK7k838fFsHqBAP62U8KR3Br3H2rdPFRTEAK62gGJY7XISOsa0r/bT3ZcqsYmDYxV/k2ktI63fD0WlbhbaLc7m8ausMbdxLbfFFf4ryjBYEQkXcD/TAppkwqXga7MrV5s0zJPkOXZ/9UvoL8wJgtMEBKDaocGtcIM5dBbA0auYBXXxRaQimzUK+/OmN7BjUK2D+EWEmrUb9xKSNhWbac5L9pecOTGOmlUo0+fXm7XcmTcdNF3vQBk2JAdr+cVeUKtPyZrQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IOrDUd+FVk3vNXJqfNKW0UBrz813kwnlFgbS0CSGpQ4=;
- b=Afh1kkua85zYo+g3NMohX6ohRzkM6iGT2UsyrmzahMSHh0lluLzCRzMBbAt/BrpNPuhn8apQEh3IkoprvQXUXS/mdBe0E6glCjDE1ikDIT/XFTghU/MdZWKmYA5lpnKTqjCI2U3NV7xYV1aDn0q7N8OdoKTl6rc6mpixIHup3HIHfRrOlP0oxXkkxRawui/UqI1MS2PNWKXRGFnyQRAtnxgs5iX3RDC9EYW+v5ZuajQdQNKnOHtazUSjzfEy/Vt16lscv2ItPv6tixBuIFg98ucdtDVRFFKD2lEfq5hmQoAq6hVFjWYF8UHpL+8jdnKNs4SHK1NHiQeeOfpCumPBPA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IOrDUd+FVk3vNXJqfNKW0UBrz813kwnlFgbS0CSGpQ4=;
- b=UrD5Sad51hJBTozIGdsHOE8HTs+icpKbg/uzZrAqriUEc8rK/FoB/64yetRLJw00Zb4xlQOKy+QQU8Sek3jNrDLVXhdEdDktxwsiJ0ks9ejuFG1gGNDOc2mtOWxdmPjHnyJOYdMh+rv13tpCPtC3eWneIgOFqX75OR6kuXzEBC0=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from DB9PR08MB7179.eurprd08.prod.outlook.com (2603:10a6:10:2cc::19)
- by DB3PR08MB8794.eurprd08.prod.outlook.com (2603:10a6:10:435::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.25; Wed, 23 Aug
- 2023 10:10:14 +0000
-Received: from DB9PR08MB7179.eurprd08.prod.outlook.com
- ([fe80::adb0:61cb:8733:6db2]) by DB9PR08MB7179.eurprd08.prod.outlook.com
- ([fe80::adb0:61cb:8733:6db2%7]) with mapi id 15.20.6699.026; Wed, 23 Aug 2023
- 10:10:14 +0000
-Date:   Wed, 23 Aug 2023 11:09:59 +0100
-From:   Szabolcs Nagy <Szabolcs.Nagy@arm.com>
-To:     Mark Brown <broonie@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>
-Cc:     Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Marc Zyngier <maz@kernel.org>,
-        Oliver Upton <oliver.upton@linux.dev>,
-        James Morse <james.morse@arm.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        Arnd Bergmann <arnd@arndb.de>, Oleg Nesterov <oleg@redhat.com>,
-        Eric Biederman <ebiederm@xmission.com>,
-        Kees Cook <keescook@chromium.org>,
-        Shuah Khan <shuah@kernel.org>,
-        "Rick P. Edgecombe" <rick.p.edgecombe@intel.com>,
-        Deepak Gupta <debug@rivosinc.com>,
-        Ard Biesheuvel <ardb@kernel.org>,
-        "H.J. Lu" <hjl.tools@gmail.com>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        kvmarm@lists.linux.dev, linux-fsdevel@vger.kernel.org,
-        linux-arch@vger.kernel.org, linux-mm@kvack.org,
-        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-riscv@lists.infradead.org
-Subject: Re: [PATCH v4 03/36] arm64/gcs: Document the ABI for Guarded Control
- Stacks
-Message-ID: <ZOXa98SqwYPwxzNP@arm.com>
-References: <20230807-arm64-gcs-v4-0-68cfa37f9069@kernel.org>
- <20230807-arm64-gcs-v4-3-68cfa37f9069@kernel.org>
- <ZNOhjrYleGBR6Pbs@arm.com>
- <f4cec4b3-c386-4873-aa1d-90528e062f2a@sirena.org.uk>
- <ZN+qki9EaZ6f9XNi@arm.com>
- <aaea542c-929c-4c9b-8caa-ca67e0eb9c1e@sirena.org.uk>
- <ZOTnL1SDJWZjHPUW@arm.com>
- <43ec219d-bf20-47b8-a5f8-32bc3b64d487@sirena.org.uk>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <43ec219d-bf20-47b8-a5f8-32bc3b64d487@sirena.org.uk>
-X-ClientProxiedBy: LO4P123CA0699.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:37b::6) To DB9PR08MB7179.eurprd08.prod.outlook.com
- (2603:10a6:10:2cc::19)
+        with ESMTP id S233721AbjHWKS0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Aug 2023 06:18:26 -0400
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1A4C810C8;
+        Wed, 23 Aug 2023 03:18:01 -0700 (PDT)
+Received: from [IPV6:2a02:2f08:ed0c:7100:2bab:cf35:4185:1f5c] (unknown [IPv6:2a02:2f08:ed0c:7100:2bab:cf35:4185:1f5c])
+        (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+        (No client certificate requested)
+        (Authenticated sender: mvlad)
+        by madras.collabora.co.uk (Postfix) with ESMTPSA id 888DD6607079;
+        Wed, 23 Aug 2023 11:17:20 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+        s=mail; t=1692785842;
+        bh=4yVLBNIqcXImRUtPolN2Z9HoDl9QS3L+7KlvXIfA6+k=;
+        h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+        b=itL5wG4yR2JmL8vnHfCwojEAaHzCjCIproVo5sCMBK0KcWKRpQEf/G9rPCTLk8q7s
+         cQDJw/fXs3fLrg3n0Xr/pqSpzDraI3JJDV0BC+mIK/CW8UiROc/eYe0OrjTrR3GK4D
+         AvRpaEUPyVUqr3nl+HoyPOusraB+hgP2bhk4ZvirIBLqPVhrv4G7W1N4Tewsg7z5bu
+         Y6qSW/03JOQwb37MWJmnjIIpIaUkOpJw3qoggM5d+Zw4RlGbGKyGBaULEdfb5LzGxC
+         sxy3Ems1r2zf/LaFGOBxWlqaqQNtmAsAiw0hl9g47QU4wX2anNnZgcH1FZHLHSxzZR
+         WHqsRINY5HmLw==
+Message-ID: <66b17213-a955-d92a-f48c-d89917def72a@collabora.com>
+Date:   Wed, 23 Aug 2023 13:17:16 +0300
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: DB9PR08MB7179:EE_|DB3PR08MB8794:EE_|AM7EUR03FT010:EE_|GV2PR08MB8025:EE_
-X-MS-Office365-Filtering-Correlation-Id: fe1fb4c9-5c88-4d23-6226-08dba3c12de3
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: 4HQ0xxcgBBCPMnhSSd1T6C9csCC9TL4+zs4YYQeuKQc+0W/Z4RiJV5i1qaLdO1LDs1by7tXNfjKADieew0SnN5v22mpikYrpZLa/Mc1pE3qZtzQrH6gryCEkym4IncFvXo+d5FIRE1yUntf+PjjqTuGpf2KJEHS19IDsIVEk4VEFACENmSQcgwFcT8Je0ersGpNPUMCBR623lDPj3eYgbi2Hes+T0rLrO7QOhY9bcmmUi7O4VaqdZBQePX7VPGymTxhLldgIFIJiQxBzYRJgpRHPpFCVDoQxOFZk0jvXRTJq5rlAF0jeh5M1H8krHdRpsHJBdtTS8Lu5nd4slKla8ogREpIwbl4XJAoXkKe0MZEgPVjkXwjgcNgaEOoOwZXPJHjQs9LaK2DSG6lY5rvrEIN5H1gvlrTvoXe9fe0Asfzjz7jiW7MdEc7HZ2VHvBnS0Sx3U/lYNoThzVKYZvmK8SvebDRSQcjrvU/G1AxzwNQNd6B/QwYfAHXSQRvjJL2WJxZbOs3/SvhWfLElQ+lA/7mFg+C8I3LPtL9foB2qQwYyi39BbNmJW6yKQOqh1kVNFQnlT5Qls/OAmigC35eiYg==
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB9PR08MB7179.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(346002)(39860400002)(376002)(136003)(396003)(1800799009)(186009)(451199024)(478600001)(6486002)(6666004)(966005)(110136005)(26005)(6506007)(2616005)(6512007)(7416002)(2906002)(41300700001)(5660300002)(8936002)(316002)(8676002)(6636002)(66556008)(4326008)(66476007)(66946007)(36756003)(54906003)(86362001)(38100700002)(83380400001)(66899024);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR08MB8794
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM7EUR03FT010.eop-EUR03.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: e78cbee6-df21-40e7-f701-08dba3c12464
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 7FmsQGRNHpqf7tRen0AqAW2QVEKhxnYdomyBhJMwGVUjcHJ+NF4kmsFd+5g16e5/GT4deWlU7fRfflfRFpVXfwjwgwnULjddVzgtmMchB3jM7zccAMOchPfJpfDstbOXV0KhuVbfrfYxYKj8xFOHRSibxgwRaUz9xTT8ToIrpUgCySYg3rqXLY+SsHW42Z6j8DbgYtzXqwh7kileQFL/hsW5dlhMN8AJl5wi4knzLovmxZCBjLvAE+Q206T8TvcGoCVrOgA8kDigx1maACiAehU9YUC0e2s0VRh0VyjLOUyv/Dm7/9XR4FT91Fbonoamw9eMt051Ggde5kye/eIS2lolRdIjzWax3Q4hbivCfDClvrVVd1QZ6zmWEv5vtgSMDY8yYPf36ju0/KiAaFAC2hPVTkf2dZlvzIn4H8We/Zvyt7DXaPGJRSQYrIa5HthQrv0GFV2408b3owomHAee5jQNUMqr35bXR86uW9OUKYOVtS+MY+v+Q6jUTTNOXn132YELO/ETcf8KF5I8PSB82hjYAu62nnrYv9PyyRPTdCltu5KRN7+KlpM11Ev8VHTFeUMcMK28QWyraZQq+qPoSKnEUxkSEjEUoTmHoEndpr37eNCVED+v1KjMyiKl2Co6nDTdUB1kzWyBuQLy6lq5RPu8/wooMaAxcQokGsd8HqJQqu/AwQt8fRrJ0HoEFjFnQvdfD9XVWLoRVbTQ+kZZQXFG0QPs6Gv5h87Z+4YQyofssVOvqgsh+4X3aF0J2CeQ9lOa+ZuW6/Dav9doSr8+AQ==
-X-Forefront-Antispam-Report: CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(4636009)(396003)(39860400002)(376002)(346002)(136003)(186009)(1800799009)(451199024)(82310400011)(36840700001)(40470700004)(46966006)(40480700001)(86362001)(36756003)(356005)(110136005)(40460700003)(41300700001)(70206006)(6636002)(70586007)(54906003)(450100002)(966005)(82740400003)(478600001)(81166007)(316002)(6512007)(6666004)(47076005)(26005)(107886003)(6506007)(336012)(36860700001)(66899024)(83380400001)(4326008)(6486002)(2906002)(8676002)(2616005)(5660300002)(8936002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2023 10:10:29.5386
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fe1fb4c9-5c88-4d23-6226-08dba3c12de3
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM7EUR03FT010.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB8025
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,FORGED_SPF_HELO,RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,
-        SPF_HELO_PASS,SPF_NONE,UNPARSEABLE_RELAY autolearn=no
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.1
+Subject: Re: [PATCH v3 2/7] drm/vkms: Support multiple DRM objects (crtcs,
+ etc.) per VKMS device
+To:     Brandon Pollack <brpol@chromium.org>, jshargo@chromium.org
+Cc:     corbet@lwn.net, dri-devel@lists.freedesktop.org,
+        hamohammed.sa@gmail.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, mairacanal@riseup.net,
+        melissa.srw@gmail.com, mripard@kernel.org,
+        rodrigosiqueiramelo@gmail.com, tzimmermann@suse.de,
+        airlied@gmail.com, daniel@ffwll.ch,
+        maarten.lankhorst@linux.intel.com, mduggan@chromium.org,
+        hirono@chromium.org
+References: <20230818075057.3426088-1-brpol@chromium.org>
+ <20230818075057.3426088-3-brpol@chromium.org>
+Content-Language: en-US
+From:   Marius Vlad <marius.vlad@collabora.com>
+In-Reply-To: <20230818075057.3426088-3-brpol@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-4.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The 08/22/2023 18:53, Mark Brown wrote:
-> On Tue, Aug 22, 2023 at 05:49:51PM +0100, Catalin Marinas wrote:
-> > On Fri, Aug 18, 2023 at 08:38:02PM +0100, Mark Brown wrote:
+Hi Brandon,
+
+A few nits I've found where I'm getting some kernel locking errors, when 
+running this new series.
+
+On 8/18/23 10:43, Brandon Pollack wrote:
+> From: Jim Shargo <jshargo@chromium.org>
 > 
-> > > > stack and pass the pointer/size to clone3()? It saves us from having to
-> > > > guess what the right size we'd need. struct clone_args is extensible.
+> This change supports multiple CRTCs, encoders, connectors instead of one
+> of each per device.
 > 
-> > > I can't recall or locate the specific reasoning there right now, perhaps
-> > > Rick or someone else can?  I'd guess there would be compat concerns for
-> > > things that don't go via libc which would complicate the story with
-> > > identifying and marking things as GCS/SS safe, it's going to be more
-> > > robust to just supply a GCS if the process is using it.  That said
-> > > having a default doesn't preclude us using the extensibility to allow
-> > > userspace directly to control the GCS size, I would certainly be in
-> > > favour of adding support for that.
+> Since ConfigFS-based devices will support multiple crtcs, it's useful to
+> move all of the writeback/composition data from being per-"output" to
+> being per-CRTC.
 > 
-> > It would be good if someone provided a summary of the x86 decision (I'll
-> > get to those thread but most likely in September). I think we concluded
-> > that we can't deploy GCS entirely transparently, so we need a libc
-> > change (apart from the ELF annotations). Since libc is opting in to GCS,
+> Since there's still only ever one CRTC, this should be a no-op refactor.
 > 
-> Right, we need changes for setjmp()/longjmp() for example.
+> Signed-off-by: Jim Shargo <jshargo@chromium.org>
+> Signed-off-by: Brandon Pollack <brpol@chromium.org>
+> ---
+>   drivers/gpu/drm/vkms/vkms_composer.c  |  30 +++----
+>   drivers/gpu/drm/vkms/vkms_crtc.c      | 101 ++++++++++++---------
+>   drivers/gpu/drm/vkms/vkms_drv.c       |  12 +--
+>   drivers/gpu/drm/vkms/vkms_drv.h       |  70 +++++++++------
+>   drivers/gpu/drm/vkms/vkms_output.c    | 122 ++++++++++++++++++--------
+>   drivers/gpu/drm/vkms/vkms_plane.c     |  38 ++++++--
+>   drivers/gpu/drm/vkms/vkms_writeback.c |  33 +++----
+>   7 files changed, 259 insertions(+), 147 deletions(-)
 > 
-> > we could also update the pthread_create() etc. to allocate the shadow
-> > together with the standard stack.
-> 
-> > Anyway, that's my preference but maybe there were good reasons not to do
-> > this.
-> 
-> Yeah, it'd be good to understand.  I've been through quite a lot of old
-> versions of the x86 series (I've not found them all, there's 30 versions
-> or something of the old series plus the current one is on v9) and the
-> code always appears to have been this way with changelogs that explain
-> the what but not the why.  For example roughly the current behaviour was
-> already in place in v10 of the original series:
-> 
->    https://lore.kernel.org/lkml/20200429220732.31602-26-yu-cheng.yu@intel.com/
+> diff --git a/drivers/gpu/drm/vkms/vkms_composer.c b/drivers/gpu/drm/vkms/vkms_composer.c
+> index d5d4f642d367..a59eb75a21c4 100644
+> --- a/drivers/gpu/drm/vkms/vkms_composer.c
+> +++ b/drivers/gpu/drm/vkms/vkms_composer.c
+> @@ -300,13 +300,13 @@ void vkms_composer_worker(struct work_struct *work)
+>   						composer_work);
+>   	struct drm_crtc *crtc = crtc_state->base.crtc;
+>   	struct vkms_writeback_job *active_wb = crtc_state->active_writeback;
+> -	struct vkms_output *out = drm_crtc_to_vkms_output(crtc);
+> +	struct vkms_crtc *vkms_crtc = drm_crtc_to_vkms_crtc(crtc);
+>   	bool crc_pending, wb_pending;
+>   	u64 frame_start, frame_end;
+>   	u32 crc32 = 0;
+>   	int ret;
+>   
+> -	spin_lock_irq(&out->composer_lock);
+> +	spin_lock_irq(&vkms_crtc->composer_lock);
+>   	frame_start = crtc_state->frame_start;
+>   	frame_end = crtc_state->frame_end;
+>   	crc_pending = crtc_state->crc_pending;
+> @@ -330,7 +330,7 @@ void vkms_composer_worker(struct work_struct *work)
+>   		crtc_state->gamma_lut.base = NULL;
+>   	}
+>   
+> -	spin_unlock_irq(&out->composer_lock);
+> +	spin_unlock_irq(&vkms_crtc->composer_lock);
+>   
+>   	/*
+>   	 * We raced with the vblank hrtimer and previous work already computed
+> @@ -348,10 +348,10 @@ void vkms_composer_worker(struct work_struct *work)
+>   		return;
+>   
+>   	if (wb_pending) {
+> -		drm_writeback_signal_completion(&out->wb_connector, 0);
+> -		spin_lock_irq(&out->composer_lock);
+> +		drm_writeback_signal_completion(&vkms_crtc->wb_connector, 0);
+> +		spin_lock_irq(&vkms_crtc->composer_lock);
+>   		crtc_state->wb_pending = false;
+> -		spin_unlock_irq(&out->composer_lock);
+> +		spin_unlock_irq(&vkms_crtc->composer_lock);
+>   	}
+>   
+>   	/*
+> @@ -401,30 +401,30 @@ int vkms_verify_crc_source(struct drm_crtc *crtc, const char *src_name,
+>   	return 0;
+>   }
+>   
+> -void vkms_set_composer(struct vkms_output *out, bool enabled)
+> +void vkms_set_composer(struct vkms_crtc *vkms_crtc, bool enabled)
+>   {
+>   	bool old_enabled;
+>   
+>   	if (enabled)
+> -		drm_crtc_vblank_get(&out->crtc);
+> +		drm_crtc_vblank_get(&vkms_crtc->base);
+>   
+> -	mutex_lock(&out->enabled_lock);
+> -	old_enabled = out->composer_enabled;
+> -	out->composer_enabled = enabled;
+> +	mutex_lock(&vkms_crtc->enabled_lock);
+> +	old_enabled = vkms_crtc->composer_enabled;
+> +	vkms_crtc->composer_enabled = enabled;
+>   
+>   	/* the composition wasn't enabled, so unlock the lock to make sure the lock
+>   	 * will be balanced even if we have a failed commit
+>   	 */
+> -	if (!out->composer_enabled)
+> -		mutex_unlock(&out->enabled_lock);
+> +	if (!vkms_crtc->composer_enabled)
+> +		mutex_unlock(&vkms_crtc->enabled_lock);
+>   
+>   	if (old_enabled)
+> -		drm_crtc_vblank_put(&out->crtc);
+> +		drm_crtc_vblank_put(&vkms_crtc->base);
+>   }
+>   
+>   int vkms_set_crc_source(struct drm_crtc *crtc, const char *src_name)
+>   {
+> -	struct vkms_output *out = drm_crtc_to_vkms_output(crtc);
+> +	struct vkms_crtc *out = drm_crtc_to_vkms_crtc(crtc);
+>   	bool enabled = false;
+>   	int ret = 0;
+>   
+> diff --git a/drivers/gpu/drm/vkms/vkms_crtc.c b/drivers/gpu/drm/vkms/vkms_crtc.c
+> index 3c5ebf106b66..f10a5ec8111d 100644
+> --- a/drivers/gpu/drm/vkms/vkms_crtc.c
+> +++ b/drivers/gpu/drm/vkms/vkms_crtc.c
+> @@ -1,5 +1,6 @@
+>   // SPDX-License-Identifier: GPL-2.0+
+>   
+> +#include "linux/mutex.h"
+>   #include <linux/dma-fence.h>
+>   
+>   #include <drm/drm_atomic.h>
+> @@ -11,27 +12,27 @@
+>   
+>   static enum hrtimer_restart vkms_vblank_simulate(struct hrtimer *timer)
+>   {
+> -	struct vkms_output *output = container_of(timer, struct vkms_output,
+> -						  vblank_hrtimer);
+> -	struct drm_crtc *crtc = &output->crtc;
+> +	struct vkms_crtc *vkms_crtc = timer_to_vkms_crtc(timer);
+> +	struct drm_crtc *crtc = &vkms_crtc->base;
+>   	struct vkms_crtc_state *state;
+>   	u64 ret_overrun;
+>   	bool ret, fence_cookie, composer_enabled;
+>   
+>   	fence_cookie = dma_fence_begin_signalling();
+>   
+> -	ret_overrun = hrtimer_forward_now(&output->vblank_hrtimer,
+> -					  output->period_ns);
+> +	ret_overrun = hrtimer_forward_now(&vkms_crtc->vblank_hrtimer,
+> +					  vkms_crtc->period_ns);
+>   	if (ret_overrun != 1)
+>   		pr_warn("%s: vblank timer overrun\n", __func__);
+>   
+> +	mutex_lock(&vkms_crtc->enabled_lock);
+My impression is that vkms_set_composer() would take this lock, so you 
+don't actually need to take here. See also commit 
+a0e6a017ab56936c0405fe914a793b241ed25ee0.
 
-well the original shstk patches predate clone3 so no surprise there.
-e.g. v6 is from 2018 and clone3 is 2019 linux 5.3
-https://lore.kernel.org/lkml/20181119214809.6086-1-yu-cheng.yu@intel.com/
+>   	ret = drm_crtc_handle_vblank(crtc);
+>   	if (!ret)
+>   		DRM_ERROR("vkms failure on handling vblank");
+>   
+> -	state = output->composer_state;
+> -	composer_enabled = output->composer_enabled;
+> -	mutex_unlock(&output->enabled_lock);
+> +	state = vkms_crtc->composer_state;
+> +	composer_enabled = vkms_crtc->composer_enabled;
+> +	mutex_unlock(&vkms_crtc->enabled_lock);
+>   
+>   	if (state && composer_enabled) {
+>   		u64 frame = drm_crtc_accurate_vblank_count(crtc);
+> @@ -39,7 +40,7 @@ static enum hrtimer_restart vkms_vblank_simulate(struct hrtimer *timer)
+>   		/* update frame_start only if a queued vkms_composer_worker()
+>   		 * has read the data
+>   		 */
+> -		spin_lock(&output->composer_lock);
+> +		spin_lock(&vkms_crtc->composer_lock);
+>   		if (!state->crc_pending)
+>   			state->frame_start = frame;
+>   		else
+> @@ -47,9 +48,10 @@ static enum hrtimer_restart vkms_vblank_simulate(struct hrtimer *timer)
+>   					 state->frame_start, frame);
+>   		state->frame_end = frame;
+>   		state->crc_pending = true;
+> -		spin_unlock(&output->composer_lock);
+> +		spin_unlock(&vkms_crtc->composer_lock);
+>   
+> -		ret = queue_work(output->composer_workq, &state->composer_work);
+> +		ret = queue_work(vkms_crtc->composer_workq,
+> +				 &state->composer_work);
+>   		if (!ret)
+>   			DRM_DEBUG_DRIVER("Composer worker already queued\n");
+>   	}
+> @@ -62,25 +64,27 @@ static enum hrtimer_restart vkms_vblank_simulate(struct hrtimer *timer)
+>   static int vkms_enable_vblank(struct drm_crtc *crtc)
+>   {
+>   	struct drm_device *dev = crtc->dev;
+> +	struct vkms_crtc *vkms_crtc = drm_crtc_to_vkms_crtc(crtc);
+>   	unsigned int pipe = drm_crtc_index(crtc);
+>   	struct drm_vblank_crtc *vblank = &dev->vblank[pipe];
+> -	struct vkms_output *out = drm_crtc_to_vkms_output(crtc);
+>   
+>   	drm_calc_timestamping_constants(crtc, &crtc->mode);
+>   
+> -	hrtimer_init(&out->vblank_hrtimer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+> -	out->vblank_hrtimer.function = &vkms_vblank_simulate;
+> -	out->period_ns = ktime_set(0, vblank->framedur_ns);
+> -	hrtimer_start(&out->vblank_hrtimer, out->period_ns, HRTIMER_MODE_REL);
+> +	hrtimer_init(&vkms_crtc->vblank_hrtimer, CLOCK_MONOTONIC,
+> +		     HRTIMER_MODE_REL);
+> +	vkms_crtc->vblank_hrtimer.function = &vkms_vblank_simulate;
+> +	vkms_crtc->period_ns = ktime_set(0, vblank->framedur_ns);
+> +	hrtimer_start(&vkms_crtc->vblank_hrtimer, vkms_crtc->period_ns,
+> +		      HRTIMER_MODE_REL);
+>   
+>   	return 0;
+>   }
+>   
+>   static void vkms_disable_vblank(struct drm_crtc *crtc)
+>   {
+> -	struct vkms_output *out = drm_crtc_to_vkms_output(crtc);
+> +	struct vkms_crtc *vkms_crtc = drm_crtc_to_vkms_crtc(crtc);
+>   
+> -	hrtimer_cancel(&out->vblank_hrtimer);
+> +	hrtimer_cancel(&vkms_crtc->vblank_hrtimer);
+>   }
+>   
+>   static bool vkms_get_vblank_timestamp(struct drm_crtc *crtc,
+> @@ -88,9 +92,8 @@ static bool vkms_get_vblank_timestamp(struct drm_crtc *crtc,
+>   				      bool in_vblank_irq)
+>   {
+>   	struct drm_device *dev = crtc->dev;
+> +	struct vkms_crtc *vkms_crtc = drm_crtc_to_vkms_crtc(crtc);
+>   	unsigned int pipe = crtc->index;
+> -	struct vkms_device *vkmsdev = drm_device_to_vkms_device(dev);
+> -	struct vkms_output *output = &vkmsdev->output;
+>   	struct drm_vblank_crtc *vblank = &dev->vblank[pipe];
+>   
+>   	if (!READ_ONCE(vblank->enabled)) {
+> @@ -98,7 +101,7 @@ static bool vkms_get_vblank_timestamp(struct drm_crtc *crtc,
+>   		return true;
+>   	}
+>   
+> -	*vblank_time = READ_ONCE(output->vblank_hrtimer.node.expires);
+> +	*vblank_time = READ_ONCE(vkms_crtc->vblank_hrtimer.node.expires);
+>   
+>   	if (WARN_ON(*vblank_time == vblank->time))
+>   		return true;
+> @@ -110,7 +113,7 @@ static bool vkms_get_vblank_timestamp(struct drm_crtc *crtc,
+>   	 * the vblank core expects. Therefore we need to always correct the
+>   	 * timestampe by one frame.
+>   	 */
+> -	*vblank_time -= output->period_ns;
+> +	*vblank_time -= vkms_crtc->period_ns;
+>   
+>   	return true;
+>   }
+> @@ -236,18 +239,18 @@ static void vkms_crtc_atomic_disable(struct drm_crtc *crtc,
+>   static void vkms_crtc_atomic_begin(struct drm_crtc *crtc,
+>   				   struct drm_atomic_state *state)
+>   {
+> -	struct vkms_output *vkms_output = drm_crtc_to_vkms_output(crtc);
+> +	struct vkms_crtc *vkms_crtc = drm_crtc_to_vkms_crtc(crtc);
+>   
+>   	/* This lock is held across the atomic commit to block vblank timer
+>   	 * from scheduling vkms_composer_worker until the composer is updated
+>   	 */
+> -	spin_lock_irq(&vkms_output->lock);
+> +	spin_lock_irq(&vkms_crtc->lock);
+>   }
+>   
+>   static void vkms_crtc_atomic_flush(struct drm_crtc *crtc,
+>   				   struct drm_atomic_state *state)
+>   {
+> -	struct vkms_output *vkms_output = drm_crtc_to_vkms_output(crtc);
+> +	struct vkms_crtc *vkms_crtc = drm_crtc_to_vkms_crtc(crtc);
+>   
+>   	if (crtc->state->event) {
+>   		spin_lock(&crtc->dev->event_lock);
+> @@ -262,9 +265,9 @@ static void vkms_crtc_atomic_flush(struct drm_crtc *crtc,
+>   		crtc->state->event = NULL;
+>   	}
+>   
+> -	vkms_output->composer_state = to_vkms_crtc_state(crtc->state);
+> +	vkms_crtc->composer_state = to_vkms_crtc_state(crtc->state);
+>   
+> -	spin_unlock_irq(&vkms_output->lock);
+> +	spin_unlock_irq(&vkms_crtc->lock);
+>   }
+>   
+>   static const struct drm_crtc_helper_funcs vkms_crtc_helper_funcs = {
+> @@ -275,31 +278,45 @@ static const struct drm_crtc_helper_funcs vkms_crtc_helper_funcs = {
+>   	.atomic_disable	= vkms_crtc_atomic_disable,
+>   };
+>   
+> -int vkms_crtc_init(struct drm_device *dev, struct drm_crtc *crtc,
+> -		   struct drm_plane *primary, struct drm_plane *cursor)
+> +struct vkms_crtc *vkms_crtc_init(struct vkms_device *vkmsdev,
+> +				 struct drm_plane *primary,
+> +				 struct drm_plane *cursor)
+>   {
+> -	struct vkms_output *vkms_out = drm_crtc_to_vkms_output(crtc);
+> +	struct drm_device *dev = &vkmsdev->drm;
+> +	struct vkms_crtc *vkms_crtc;
+>   	int ret;
+>   
+> -	ret = drmm_crtc_init_with_planes(dev, crtc, primary, cursor,
+> +	if (vkmsdev->output.num_crtcs >= VKMS_MAX_OUTPUT_OBJECTS)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	vkms_crtc = &vkmsdev->output.crtcs[vkmsdev->output.num_crtcs++];
+> +
+> +	ret = drmm_crtc_init_with_planes(dev, &vkms_crtc->base, primary, cursor,
+>   					 &vkms_crtc_funcs, NULL);
+>   	if (ret) {
+>   		DRM_ERROR("Failed to init CRTC\n");
+> -		return ret;
+> +		goto out_error;
+>   	}
+>   
+> -	drm_crtc_helper_add(crtc, &vkms_crtc_helper_funcs);
+> +	drm_crtc_helper_add(&vkms_crtc->base, &vkms_crtc_helper_funcs);
+>   
+> -	drm_mode_crtc_set_gamma_size(crtc, VKMS_LUT_SIZE);
+> -	drm_crtc_enable_color_mgmt(crtc, 0, false, VKMS_LUT_SIZE);
+> +	drm_mode_crtc_set_gamma_size(&vkms_crtc->base, VKMS_LUT_SIZE);
+> +	drm_crtc_enable_color_mgmt(&vkms_crtc->base, 0, false, VKMS_LUT_SIZE);
+>   
+> -	spin_lock_init(&vkms_out->lock);
+> -	spin_lock_init(&vkms_out->composer_lock);
+> -	mutex_init(&vkms_out->enabled_lock);
+> +	spin_lock_init(&vkms_crtc->lock);
+> +	spin_lock_init(&vkms_crtc->composer_lock);
+> +	mutex_init(&vkms_crtc->enabled_lock);
+>   
+> -	vkms_out->composer_workq = alloc_ordered_workqueue("vkms_composer", 0);
+> -	if (!vkms_out->composer_workq)
+> -		return -ENOMEM;
+> +	vkms_crtc->composer_workq = alloc_ordered_workqueue("vkms_composer", 0);
+> +	if (!vkms_crtc->composer_workq) {
+> +		ret = -ENOMEM;
+> +		goto out_error;
+> +	}
+> +
+> +	return vkms_crtc;
+>   
+> -	return ret;
+> +out_error:
+> +	memset(vkms_crtc, 0, sizeof(*vkms_crtc));
+> +	vkmsdev->output.num_crtcs -= 1;
+> +	return ERR_PTR(ret);
+>   }
+> diff --git a/drivers/gpu/drm/vkms/vkms_drv.c b/drivers/gpu/drm/vkms/vkms_drv.c
+> index 387c832f5dc9..65b1e2c52106 100644
+> --- a/drivers/gpu/drm/vkms/vkms_drv.c
+> +++ b/drivers/gpu/drm/vkms/vkms_drv.c
+> @@ -57,8 +57,8 @@ static void vkms_release(struct drm_device *dev)
+>   {
+>   	struct vkms_device *vkms = drm_device_to_vkms_device(dev);
+>   
+> -	if (vkms->output.composer_workq)
+> -		destroy_workqueue(vkms->output.composer_workq);
+> +	for (int i = 0; i < vkms->output.num_crtcs; i++)
+> +		destroy_workqueue(vkms->output.crtcs[i].composer_workq);
+>   }
+>   
+>   static void vkms_atomic_commit_tail(struct drm_atomic_state *old_state)
+> @@ -203,15 +203,15 @@ static int vkms_platform_probe(struct platform_device *pdev)
+>   		goto out_release_group;
+>   	}
+>   
+> -	ret = drm_vblank_init(&vkms_device->drm, 1);
+> +	ret = vkms_modeset_init(vkms_device);
+>   	if (ret) {
+> -		DRM_ERROR("Failed to vblank\n");
+> +		DRM_ERROR("Unable to initialize modesetting\n");
+>   		goto out_release_group;
+>   	}
+>   
+> -	ret = vkms_modeset_init(vkms_device);
+> +	ret = drm_vblank_init(&vkms_device->drm, vkms_device->output.num_crtcs);
+>   	if (ret) {
+> -		DRM_ERROR("Unable to initialize modesetting\n");
+> +		DRM_ERROR("Failed to vblank\n");
+>   		goto out_release_group;
+>   	}
+>   
+> diff --git a/drivers/gpu/drm/vkms/vkms_drv.h b/drivers/gpu/drm/vkms/vkms_drv.h
+> index 4c35d6305f2a..761cd809617e 100644
+> --- a/drivers/gpu/drm/vkms/vkms_drv.h
+> +++ b/drivers/gpu/drm/vkms/vkms_drv.h
+> @@ -23,6 +23,10 @@
+>   
+>   #define NUM_OVERLAY_PLANES 8
+>   
+> +
+> +#define VKMS_MAX_OUTPUT_OBJECTS 16
+> +#define VKMS_MAX_PLANES (3 * VKMS_MAX_OUTPUT_OBJECTS)
+> +
+>   #define VKMS_LUT_SIZE 256
+>   
+>   struct vkms_frame_info {
+> @@ -66,6 +70,27 @@ struct vkms_plane {
+>   	struct drm_plane base;
+>   };
+>   
+> +struct vkms_crtc {
+> +	struct drm_crtc base;
+> +
+> +	struct drm_writeback_connector wb_connector;
+> +	struct hrtimer vblank_hrtimer;
+> +	ktime_t period_ns;
+> +	struct drm_pending_vblank_event *event;
+> +	/* ordered wq for composer_work */
+> +	struct workqueue_struct *composer_workq;
+> +	/* protects concurrent access to composer */
+> +	spinlock_t lock;
+> +	/* guarantees that if the composer is enabled, a job will be queued */
+> +	struct mutex enabled_lock;
+> +
+> +	/* protected by @enabled_lock */
+> +	bool composer_enabled;
+> +	struct vkms_crtc_state *composer_state;
+> +
+> +	spinlock_t composer_lock;
+> +};
+> +
+>   struct vkms_color_lut {
+>   	struct drm_color_lut *base;
+>   	size_t lut_length;
+> @@ -97,25 +122,14 @@ struct vkms_crtc_state {
+>   };
+>   
+>   struct vkms_output {
+> -	struct drm_crtc crtc;
+> -	struct drm_encoder encoder;
+> -	struct drm_connector connector;
+> -	struct drm_writeback_connector wb_connector;
+> -	struct hrtimer vblank_hrtimer;
+> -	ktime_t period_ns;
+> -	struct drm_pending_vblank_event *event;
+> -	/* ordered wq for composer_work */
+> -	struct workqueue_struct *composer_workq;
+> -	/* protects concurrent access to composer */
+> -	spinlock_t lock;
+> -	/* guarantees that if the composer is enabled, a job will be queued */
+> -	struct mutex enabled_lock;
+> -
+> -	/* protected by @enabled_lock */
+> -	bool composer_enabled;
+> -	struct vkms_crtc_state *composer_state;
+> -
+> -	spinlock_t composer_lock;
+> +	int num_crtcs;
+> +	struct vkms_crtc crtcs[VKMS_MAX_OUTPUT_OBJECTS];
+> +	int num_encoders;
+> +	struct drm_encoder encoders[VKMS_MAX_OUTPUT_OBJECTS];
+> +	int num_connectors;
+> +	struct drm_connector connectors[VKMS_MAX_OUTPUT_OBJECTS];
+> +	int num_planes;
+> +	struct vkms_plane planes[VKMS_MAX_PLANES];
+>   };
+>   
+>   struct vkms_device;
+> @@ -133,12 +147,14 @@ struct vkms_device {
+>   	struct vkms_config config;
+>   };
+>   
+> -#define drm_crtc_to_vkms_output(target) \
+> -	container_of(target, struct vkms_output, crtc)
+> +#define drm_crtc_to_vkms_crtc(crtc) container_of(crtc, struct vkms_crtc, base)
+>   
+>   #define drm_device_to_vkms_device(target) \
+>   	container_of(target, struct vkms_device, drm)
+>   
+> +#define timer_to_vkms_crtc(timer) \
+> +	container_of(timer, struct vkms_crtc, vblank_hrtimer)
+> +
+>   #define to_vkms_crtc_state(target)\
+>   	container_of(target, struct vkms_crtc_state, base)
+>   
+> @@ -146,13 +162,14 @@ struct vkms_device {
+>   	container_of(target, struct vkms_plane_state, base.base)
+>   
+>   /* CRTC */
+> -int vkms_crtc_init(struct drm_device *dev, struct drm_crtc *crtc,
+> -		   struct drm_plane *primary, struct drm_plane *cursor);
+> +struct vkms_crtc *vkms_crtc_init(struct vkms_device *vkmsdev,
+> +				 struct drm_plane *primary,
+> +				 struct drm_plane *cursor);
+>   
+>   int vkms_output_init(struct vkms_device *vkmsdev, int index);
+>   
+>   struct vkms_plane *vkms_plane_init(struct vkms_device *vkmsdev,
+> -				   enum drm_plane_type type, int index);
+> +				   enum drm_plane_type type);
+>   
+>   /* CRC Support */
+>   const char *const *vkms_get_crc_sources(struct drm_crtc *crtc,
+> @@ -163,11 +180,12 @@ int vkms_verify_crc_source(struct drm_crtc *crtc, const char *source_name,
+>   
+>   /* Composer Support */
+>   void vkms_composer_worker(struct work_struct *work);
+> -void vkms_set_composer(struct vkms_output *out, bool enabled);
+> +void vkms_set_composer(struct vkms_crtc *vkms_crtc, bool enabled);
+>   void vkms_compose_row(struct line_buffer *stage_buffer, struct vkms_plane_state *plane, int y);
+>   void vkms_writeback_row(struct vkms_writeback_job *wb, const struct line_buffer *src_buffer, int y);
+>   
+>   /* Writeback */
+> -int vkms_enable_writeback_connector(struct vkms_device *vkmsdev);
+> +int vkms_enable_writeback_connector(struct vkms_device *vkmsdev,
+> +				    struct vkms_crtc *vkms_crtc);
+>   
+>   #endif /* _VKMS_DRV_H_ */
+> diff --git a/drivers/gpu/drm/vkms/vkms_output.c b/drivers/gpu/drm/vkms/vkms_output.c
+> index 963a64cf068b..86faf94f7408 100644
+> --- a/drivers/gpu/drm/vkms/vkms_output.c
+> +++ b/drivers/gpu/drm/vkms/vkms_output.c
+> @@ -1,9 +1,13 @@
+>   // SPDX-License-Identifier: GPL-2.0+
+>   
+> -#include "vkms_drv.h"
+>   #include <drm/drm_atomic_helper.h>
+> +#include <drm/drm_connector.h>
+>   #include <drm/drm_edid.h>
+> +#include <drm/drm_encoder.h>
+>   #include <drm/drm_probe_helper.h>
+> +#include <drm/drm_simple_kms_helper.h>
+> +
+> +#include "vkms_drv.h"
+>   
+>   static const struct drm_connector_funcs vkms_connector_funcs = {
+>   	.fill_modes = drm_helper_probe_single_connector_modes,
+> @@ -28,74 +32,116 @@ static int vkms_conn_get_modes(struct drm_connector *connector)
+>   }
+>   
+>   static const struct drm_connector_helper_funcs vkms_conn_helper_funcs = {
+> -	.get_modes    = vkms_conn_get_modes,
+> +	.get_modes = vkms_conn_get_modes,
+>   };
+>   
+> -static int vkms_add_overlay_plane(struct vkms_device *vkmsdev, int index,
+> -				  struct drm_crtc *crtc)
+> +static struct drm_connector *
+> +vkms_connector_init(struct vkms_device *vkms_device)
+>   {
+> -	struct vkms_plane *overlay;
+> +	struct drm_connector *connector;
+> +	int ret;
+>   
+> -	overlay = vkms_plane_init(vkmsdev, DRM_PLANE_TYPE_OVERLAY, index);
+> -	if (IS_ERR(overlay))
+> -		return PTR_ERR(overlay);
+> +	if (vkms_device->output.num_connectors >= VKMS_MAX_OUTPUT_OBJECTS)
+> +		return ERR_PTR(-ENOMEM);
+>   
+> -	if (!overlay->base.possible_crtcs)
+> -		overlay->base.possible_crtcs = drm_crtc_mask(crtc);
+> +	connector = &vkms_device->output
+> +			     .connectors[vkms_device->output.num_connectors++];
+> +	ret = drm_connector_init(&vkms_device->drm, connector,
+> +				 &vkms_connector_funcs,
+> +				 DRM_MODE_CONNECTOR_VIRTUAL);
+> +	if (ret) {
+> +		memset(connector, 0, sizeof(*connector));
+> +		vkms_device->output.num_connectors -= 1;
+> +		return ERR_PTR(ret);
+> +	}
+>   
+> -	return 0;
+> +	drm_connector_helper_add(connector, &vkms_conn_helper_funcs);
+> +
+> +	return connector;
+> +}
+> +
+> +static struct drm_encoder *vkms_encoder_init(struct vkms_device *vkms_device)
+> +{
+> +	struct drm_encoder *encoder;
+> +	int ret;
+> +
+> +	if (vkms_device->output.num_encoders >= VKMS_MAX_OUTPUT_OBJECTS)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	encoder = &vkms_device->output
+> +			   .encoders[vkms_device->output.num_encoders++];
+> +	ret = drm_encoder_init(&vkms_device->drm, encoder, &vkms_encoder_funcs,
+> +			       DRM_MODE_ENCODER_VIRTUAL, NULL);
+> +	if (ret) {
+> +		memset(encoder, 0, sizeof(*encoder));
+> +		vkms_device->output.num_encoders -= 1;
+> +		return ERR_PTR(ret);
+> +	}
+> +	return encoder;
+>   }
+>   
+>   int vkms_output_init(struct vkms_device *vkmsdev, int index)
+>   {
+>   	struct vkms_output *output = &vkmsdev->output;
+>   	struct drm_device *dev = &vkmsdev->drm;
+> -	struct drm_connector *connector = &output->connector;
+> -	struct drm_encoder *encoder = &output->encoder;
+> -	struct drm_crtc *crtc = &output->crtc;
+> +	struct drm_connector *connector;
+> +	struct drm_encoder *encoder;
+> +	struct vkms_crtc *vkms_crtc;
+>   	struct vkms_plane *primary, *cursor = NULL;
+>   	int ret;
+>   	int writeback;
+>   	unsigned int n;
+>   
+> -	primary = vkms_plane_init(vkmsdev, DRM_PLANE_TYPE_PRIMARY, index);
+> +	primary = vkms_plane_init(vkmsdev, DRM_PLANE_TYPE_PRIMARY);
+>   	if (IS_ERR(primary))
+>   		return PTR_ERR(primary);
+>   
+>   	if (vkmsdev->config.overlay) {
+>   		for (n = 0; n < NUM_OVERLAY_PLANES; n++) {
+> -			ret = vkms_add_overlay_plane(vkmsdev, index, crtc);
+> -			if (ret)
+> -				return ret;
+> +			struct vkms_plane *overlay = vkms_plane_init(
+> +				vkmsdev, DRM_PLANE_TYPE_OVERLAY);
+> +			if (IS_ERR(overlay)) {
+> +				ret = PTR_ERR(overlay);
+> +				goto err_planes;
+> +			}
+>   		}
+>   	}
+>   
+>   	if (vkmsdev->config.cursor) {
+> -		cursor = vkms_plane_init(vkmsdev, DRM_PLANE_TYPE_CURSOR, index);
+> -		if (IS_ERR(cursor))
+> -			return PTR_ERR(cursor);
+> +		cursor = vkms_plane_init(vkmsdev, DRM_PLANE_TYPE_CURSOR);
+> +		if (IS_ERR(cursor)) {
+> +			ret = PTR_ERR(cursor);
+> +			goto err_planes;
+> +		}
+>   	}
+>   
+> -	ret = vkms_crtc_init(dev, crtc, &primary->base, &cursor->base);
+> -	if (ret)
+> -		return ret;
+> +	vkms_crtc = vkms_crtc_init(vkmsdev, &primary->base,
+> +				   cursor ? &cursor->base : NULL);
+> +	if (IS_ERR(vkms_crtc)) {
+> +		DRM_ERROR("Failed to init crtc\n");
+> +		ret = PTR_ERR(vkms_crtc);
+> +		goto err_planes;
+> +	}
+>   
+> -	ret = drm_connector_init(dev, connector, &vkms_connector_funcs,
+> -				 DRM_MODE_CONNECTOR_VIRTUAL);
+> -	if (ret) {
+> +	for (int i = 0; i < vkmsdev->output.num_planes; i++) {
+> +		vkmsdev->output.planes[i].base.possible_crtcs |=
+> +			drm_crtc_mask(&vkms_crtc->base);
+> +	}
+> +
+> +	connector = vkms_connector_init(vkmsdev);
+> +	if (IS_ERR(connector)) {
+>   		DRM_ERROR("Failed to init connector\n");
+> +		ret = PTR_ERR(connector);
+>   		goto err_connector;
+>   	}
+>   
+> -	drm_connector_helper_add(connector, &vkms_conn_helper_funcs);
+> -
+> -	ret = drm_encoder_init(dev, encoder, &vkms_encoder_funcs,
+> -			       DRM_MODE_ENCODER_VIRTUAL, NULL);
+> -	if (ret) {
+> +	encoder = vkms_encoder_init(vkmsdev);
+> +	if (IS_ERR(encoder)) {
+>   		DRM_ERROR("Failed to init encoder\n");
+> +		ret = PTR_ERR(encoder);
+>   		goto err_encoder;
+>   	}
+> -	encoder->possible_crtcs = 1;
+> +	encoder->possible_crtcs |= drm_crtc_mask(&vkms_crtc->base);
+>   
+>   	ret = drm_connector_attach_encoder(connector, encoder);
+>   	if (ret) {
+> @@ -104,7 +150,7 @@ int vkms_output_init(struct vkms_device *vkmsdev, int index)
+>   	}
+>   
+>   	if (vkmsdev->config.writeback) {
+> -		writeback = vkms_enable_writeback_connector(vkmsdev);
+> +		writeback = vkms_enable_writeback_connector(vkmsdev, vkms_crtc);
+>   		if (writeback)
+>   			DRM_ERROR("Failed to init writeback connector\n");
+>   	}
+> @@ -120,7 +166,13 @@ int vkms_output_init(struct vkms_device *vkmsdev, int index)
+>   	drm_connector_cleanup(connector);
+>   
+>   err_connector:
+> -	drm_crtc_cleanup(crtc);
+> +	drm_crtc_cleanup(&vkms_crtc->base);
+> +
+> +err_planes:
+> +	for (int i = 0; i < output->num_planes; i++)
+> +		drm_plane_cleanup(&output->planes[i].base);
+> +
+> +	memset(output, 0, sizeof(*output));
+>   
+>   	return ret;
+>   }
+> diff --git a/drivers/gpu/drm/vkms/vkms_plane.c b/drivers/gpu/drm/vkms/vkms_plane.c
+> index e5c625ab8e3e..950e6c930273 100644
+> --- a/drivers/gpu/drm/vkms/vkms_plane.c
+> +++ b/drivers/gpu/drm/vkms/vkms_plane.c
+> @@ -8,6 +8,8 @@
+>   #include <drm/drm_fourcc.h>
+>   #include <drm/drm_gem_atomic_helper.h>
+>   #include <drm/drm_gem_framebuffer_helper.h>
+> +#include <drm/drm_plane.h>
+> +#include <drm/drm_plane_helper.h>
+>   
+>   #include "vkms_drv.h"
+>   #include "vkms_formats.h"
+> @@ -65,6 +67,20 @@ static void vkms_plane_destroy_state(struct drm_plane *plane,
+>   	kfree(vkms_state);
+>   }
+>   
+> +static void vkms_plane_destroy(struct drm_plane *plane)
+> +{
+> +	struct vkms_plane *vkms_plane =
+> +		container_of(plane, struct vkms_plane, base);
+> +
+> +	if (plane->state) {
+> +		vkms_plane_destroy_state(plane, plane->state);
+> +		plane->state = NULL;
+> +	}
+> +
+> +	drm_plane_cleanup(plane);
+> +	memset(vkms_plane, 0, sizeof(struct vkms_plane));
+> +}
+> +
+>   static void vkms_plane_reset(struct drm_plane *plane)
+>   {
+>   	struct vkms_plane_state *vkms_state;
+> @@ -86,9 +102,10 @@ static void vkms_plane_reset(struct drm_plane *plane)
+>   static const struct drm_plane_funcs vkms_plane_funcs = {
+>   	.update_plane		= drm_atomic_helper_update_plane,
+>   	.disable_plane		= drm_atomic_helper_disable_plane,
+> +	.destroy = vkms_plane_destroy,
+>   	.reset			= vkms_plane_reset,
+>   	.atomic_duplicate_state = vkms_plane_duplicate_state,
+> -	.atomic_destroy_state	= vkms_plane_destroy_state,
+> +	.atomic_destroy_state = vkms_plane_destroy_state,
+>   };
+>   
+>   static void vkms_plane_atomic_update(struct drm_plane *plane,
+> @@ -198,17 +215,22 @@ static const struct drm_plane_helper_funcs vkms_plane_helper_funcs = {
+>   };
+>   
+>   struct vkms_plane *vkms_plane_init(struct vkms_device *vkmsdev,
+> -				   enum drm_plane_type type, int index)
+> +				   enum drm_plane_type type)
+>   {
+>   	struct drm_device *dev = &vkmsdev->drm;
+> +	struct vkms_output *output = &vkmsdev->output;
+>   	struct vkms_plane *plane;
+> +	int ret;
+>   
+> -	plane = drmm_universal_plane_alloc(dev, struct vkms_plane, base, 1 << index,
+> -					   &vkms_plane_funcs,
+> -					   vkms_formats, ARRAY_SIZE(vkms_formats),
+> -					   NULL, type, NULL);
+> -	if (IS_ERR(plane))
+> -		return plane;
+> +	if (output->num_planes >= VKMS_MAX_PLANES)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	plane = &output->planes[output->num_planes++];
+> +	ret = drm_universal_plane_init(dev, &plane->base, 0, &vkms_plane_funcs,
+> +				       vkms_formats, ARRAY_SIZE(vkms_formats),
+> +				       NULL, type, NULL);
+> +	if (ret)
+> +		return ERR_PTR(ret);
+>   
+>   	drm_plane_helper_add(&plane->base, &vkms_plane_helper_funcs);
+>   
+> diff --git a/drivers/gpu/drm/vkms/vkms_writeback.c b/drivers/gpu/drm/vkms/vkms_writeback.c
+> index d7e63aa14663..92565e3e25f6 100644
+> --- a/drivers/gpu/drm/vkms/vkms_writeback.c
+> +++ b/drivers/gpu/drm/vkms/vkms_writeback.c
+> @@ -1,6 +1,7 @@
+>   // SPDX-License-Identifier: GPL-2.0+
+>   
+>   #include <linux/iosys-map.h>
+> +#include <linux/kernel.h>
+>   
+>   #include <drm/drm_atomic.h>
+>   #include <drm/drm_edid.h>
+> @@ -102,7 +103,8 @@ static void vkms_wb_cleanup_job(struct drm_writeback_connector *connector,
+>   				struct drm_writeback_job *job)
+>   {
+>   	struct vkms_writeback_job *vkmsjob = job->priv;
+> -	struct vkms_device *vkmsdev;
+> +	struct vkms_crtc *vkms_crtc =
+> +		container_of(connector, struct vkms_crtc, wb_connector);
+>   
+>   	if (!job->fb)
+>   		return;
+> @@ -111,8 +113,7 @@ static void vkms_wb_cleanup_job(struct drm_writeback_connector *connector,
+>   
+>   	drm_framebuffer_put(vkmsjob->wb_frame_info.fb);
+>   
+> -	vkmsdev = drm_device_to_vkms_device(job->fb->dev);
+> -	vkms_set_composer(&vkmsdev->output, false);
+> +	vkms_set_composer(vkms_crtc, false);
+>   	kfree(vkmsjob);
+>   }
+>   
+> @@ -121,11 +122,10 @@ static void vkms_wb_atomic_commit(struct drm_connector *conn,
+>   {
+>   	struct drm_connector_state *connector_state = drm_atomic_get_new_connector_state(state,
+>   											 conn);
+> -	struct vkms_device *vkmsdev = drm_device_to_vkms_device(conn->dev);
+> -	struct vkms_output *output = &vkmsdev->output;
+> -	struct drm_writeback_connector *wb_conn = &output->wb_connector;
+> -	struct drm_connector_state *conn_state = wb_conn->base.state;
+> -	struct vkms_crtc_state *crtc_state = output->composer_state;
+> +	struct vkms_crtc *vkms_crtc =
+> +		drm_crtc_to_vkms_crtc(connector_state->crtc);
+> +	struct drm_writeback_connector *wb_conn = &vkms_crtc->wb_connector;
+> +	struct vkms_crtc_state *crtc_state = vkms_crtc->composer_state;
+>   	struct drm_framebuffer *fb = connector_state->writeback_job->fb;
+>   	u16 crtc_height = crtc_state->base.crtc->mode.vdisplay;
+>   	u16 crtc_width = crtc_state->base.crtc->mode.hdisplay;
+> @@ -133,23 +133,25 @@ static void vkms_wb_atomic_commit(struct drm_connector *conn,
+>   	struct vkms_frame_info *wb_frame_info;
+>   	u32 wb_format = fb->format->format;
+>   
+> -	if (!conn_state)
+> +	if (!connector_state)
+>   		return;
+>   
+> -	vkms_set_composer(&vkmsdev->output, true);
+> +	vkms_set_composer(vkms_crtc, true);
+>   
+> -	active_wb = conn_state->writeback_job->priv;
+> +	active_wb = connector_state->writeback_job->priv;
+>   	wb_frame_info = &active_wb->wb_frame_info;
+>   
+> -	spin_lock_irq(&output->composer_lock);
+> +	spin_lock_irq(&vkms_crtc->composer_lock);
+>   	crtc_state->active_writeback = active_wb;
+>   	crtc_state->wb_pending = true;
+> -	spin_unlock_irq(&output->composer_lock);
+> +	spin_unlock_irq(&vkms_crtc->composer_lock);
+>   
+>   	wb_frame_info->offset = fb->offsets[0];
+>   	wb_frame_info->pitch = fb->pitches[0];
+>   	wb_frame_info->cpp = fb->format->cpp[0];
+>   
+> +	crtc_state->wb_pending = true;
+> +	spin_unlock_irq(&vkms_crtc->composer_lock);
 
-> 
-> I do worry about the story for users calling the underlying clone3() API
-> (or legacy clone() for that matter) directly, and we would also need to
-> handle the initial GCS enable via prctl() - that's not insurmountable,
-> we could add a size argument there that only gets interpreted during the
-> initial enable for example.
+Both wb_pending and the composer_lock have been set and unlocked a few 
+lines above, looks like just duplicated lines.
 
-musl and bionic currently use plain clone for threads.
-
-and there is user code doing raw clone threads (such threads are
-technically not allowed to call into libc) it's not immediately
-clear to me if having gcs in those threads is better or worse.
-
-glibc can use clone3 args for gcs, i'd expect the unmap to be more
-annoying than the allocation, but possible (it is certainly more
-work than leaving everything to the kernel).
-
-one difference is that userspace can then set gcspr of a new thread
-and e.g. two threads can have overlapping gcs, however i don't think
-this impacts security much since if clone3 is attacker controlled
-then likely all bets are off.
-
-and yes the main thread gcs can also be libc allocated given we
-have to deal with the prctl anyway.
-
-if gcs size logic is in libc it can depend on env vars and can be
-changed more easily (and adapted to android vs musl vs glibc
-requirements).
-
-sigaltstack with alt gcs was a case where i thought the kernel
-doing it transparently is better (the libc cannot do the same
-as it cannot wrap signal handlers currently so does not know
-when a handler returns or the current alt stack state), but
-others seems to want an explicit sigaltgcs syscall and expose
-it to users. in any case we have no unwinder solution for alt
-gcs nor longjmp solution when the thread gcs is overflowed so
-this is not an issue for now.
-
-> My sense is that they deployment story is going to be smoother with
-> defaults being provided since it avoids dealing with the issue of what
-> to do if userspace creates a thread without a GCS in a GCS enabled
-> process but like I say I'd be totally happy to extend clone3().  I will
-> put some patches together for that (probably once the x86 stuff lands).
-> Given the size of this series it might be better split out for
-> manageability if nothing else.
-
-i would make thread without gcs to implicitly disable gcs, since
-that's what's bw compat with clones outside of libc (the libc can
-guarantee gcs allocation when gcs is enabled).
+>   	drm_writeback_queue_job(wb_conn, connector_state);
+>   	active_wb->pixel_write = get_pixel_write_function(wb_format);
+>   	drm_rect_init(&wb_frame_info->src, 0, 0, crtc_width, crtc_height);
+> @@ -163,9 +165,10 @@ static const struct drm_connector_helper_funcs vkms_wb_conn_helper_funcs = {
+>   	.atomic_commit = vkms_wb_atomic_commit,
+>   };
+>   
+> -int vkms_enable_writeback_connector(struct vkms_device *vkmsdev)
+> +int vkms_enable_writeback_connector(struct vkms_device *vkmsdev,
+> +				    struct vkms_crtc *vkms_crtc)
+>   {
+> -	struct drm_writeback_connector *wb = &vkmsdev->output.wb_connector;
+> +	struct drm_writeback_connector *wb = &vkms_crtc->wb_connector;
+>   
+>   	drm_connector_helper_add(&wb->base, &vkms_wb_conn_helper_funcs);
+>   
