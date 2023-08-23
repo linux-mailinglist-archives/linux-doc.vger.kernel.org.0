@@ -2,122 +2,149 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 135A3785196
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Aug 2023 09:33:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EC8947851C8
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Aug 2023 09:39:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233355AbjHWHdM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Aug 2023 03:33:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44570 "EHLO
+        id S233245AbjHWHjS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Aug 2023 03:39:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45676 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233342AbjHWHdL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Aug 2023 03:33:11 -0400
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 11525128;
-        Wed, 23 Aug 2023 00:33:10 -0700 (PDT)
-From:   Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1692775988;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=/S8aAMC8431wDl9EHieHaDMQtPnYNA9A+BMaoDCWW+Y=;
-        b=p3b//x87LF4MIS/ydL5RQPDyLPAa3wrJ8ZuI1YF5NmpSVzakWWcYXUcNiAmulCkgSMuHfl
-        pBcVXeoFemeMmwv+M+gjYtmZIRggmYr8+3Uub9vjYchbDMXHVderVZWyLbdxL711mzcHoD
-        qLvzmoOnjs3lBLquIAEbSJChuFqOMgF9Wde2tPcNAOJ/riVPcq/Fwg66kWVfH9xP854OuZ
-        QOVRnX0HAXS5yQiti8MJ+LoFLGW3XKk1huGDQCjGVwy3QBUkxR4ygYoLPx9YTGXOonPwUk
-        ivHnhdLU8R8QHpz5oMuk2wpw6QFY7JgqOuC3hvWenp5hKbgonNnwngLeadrJjQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1692775988;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=/S8aAMC8431wDl9EHieHaDMQtPnYNA9A+BMaoDCWW+Y=;
-        b=Sm4+LbiyXoHegImmukuqOtU0ct8r9zucugT0HQj8DWGSLsSpC2ALLcb8vFcgdmq4TAspsd
-        iWBQPT58aDXQGXBQ==
-To:     Chong Cai <chongc@google.com>,
-        Dan Williams <dan.j.williams@intel.com>
-Cc:     Sathyanarayanan Kuppuswamy 
-        <sathyanarayanan.kuppuswamy@linux.intel.com>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        Shuah Khan <shuah@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Wander Lairson Costa <wander@redhat.com>,
-        Erdem Aktas <erdemaktas@google.com>,
-        Dionna Amalie Glaze <dionnaglaze@google.com>,
-        Qinkun Bao <qinkun@apache.org>,
-        Guorui Yu <GuoRui.Yu@linux.alibaba.com>,
-        Du Fan <fan.du@intel.com>, linux-kernel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v3 0/3] TDX Guest Quote generation support
-In-Reply-To: <CALRH0CiHjNeaHS88Oa_57hS_WGXY3-x2_aHco14nQpo-5e9seA@mail.gmail.com>
-References: <cover.1684048511.git.sathyanarayanan.kuppuswamy@linux.intel.com>
- <64966b842becf_142af8294a5@dwillia2-xfh.jf.intel.com.notmuch>
- <cdd04046-4bcb-d6fd-1688-0a85546e7b91@linux.intel.com>
- <649914ab3de4d_8e17829490@dwillia2-xfh.jf.intel.com.notmuch>
- <CALRH0CiHjNeaHS88Oa_57hS_WGXY3-x2_aHco14nQpo-5e9seA@mail.gmail.com>
-Date:   Wed, 23 Aug 2023 09:33:07 +0200
-Message-ID: <87pm3edxho.ffs@tglx>
+        with ESMTP id S232174AbjHWHjR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Aug 2023 03:39:17 -0400
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com [IPv6:2a00:1450:4864:20::22f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DD47F10D0;
+        Wed, 23 Aug 2023 00:38:46 -0700 (PDT)
+Received: by mail-lj1-x22f.google.com with SMTP id 38308e7fff4ca-2b9d07a8d84so83357211fa.3;
+        Wed, 23 Aug 2023 00:38:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1692776318; x=1693381118;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=X93G4juBaauyVG2kaKgcKVH7sFLyXLSIrqncTBPbMm8=;
+        b=MLFKTL/Lu/ep0RXtA1mXz3rTSnwhHLJllV1OR6x3kblt6ivPJmyHwMp80XrgtbY8h1
+         ZhnQqBXDrTxjnYIBp359Oxfe16ufXxq/pJwNlV6imoWIUf4kGWZrsU3rrlOdaChZXYxJ
+         BnoNvw8mKuSP7la+s2qKqwBlgUh1hCr1HnUef1uqndAWgFUEANKZ0NT3z6qMea8AdbhA
+         oLZNAaYryxqrglVkZMIXJJ9ilaOvfmt8ZiS7aYLcK/4Z83wsy2dRRnIlh/U9/N+4+Axw
+         L3B5INBu1aerD01ReVsz8c4sQV1GH5SW4MmhMl6qsVi/d2wgdTKApTeNYgjSFnjx5gYU
+         xjPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692776318; x=1693381118;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=X93G4juBaauyVG2kaKgcKVH7sFLyXLSIrqncTBPbMm8=;
+        b=Pwb2bYQUwb3dcvsZ9JMYLlSCb980iZgCawnG5qrA9X9+tDMCIwEC2YgiiVxXl9ZYnE
+         xQVE3J295PFaVLZiFH4UJLJULMnM+u0REki2eYKrfgXLLicdv8ID+zUgfXo7UJGGqbEk
+         a9zs14mhRk74cFG2MVvrWkB+lA58YChRQxGIkb9LMemiyYJeb1kHmfvatwi0dQ76VGm0
+         GJ2SiV5MCS0h9cjn1luipq83LudDp+z4Et2JKPOLxsoRXp5rfm2J6FjnA52FYcQesEnm
+         T329JfS8kjTLNe/0M6rYLOeZ4LP9jBiOPO4V5RJlpUCnKwNUe04SFBYVaEAL+foLohnH
+         pGwg==
+X-Gm-Message-State: AOJu0Yz5EbChzAI769B+lcCU4aBVrnM0TJYvgYxHwbgUnwnfFoKBGusY
+        c36IIxD/82G4HkA5KRnUQEQ=
+X-Google-Smtp-Source: AGHT+IHDQgIB3D41uwK6kbMsEJIAZTOA1ymV0XNGh9s5VUnZT2ABk6iGLMbj7x/aKp0NMchsurhf4g==
+X-Received: by 2002:a2e:2404:0:b0:2bc:dcdb:b5dc with SMTP id k4-20020a2e2404000000b002bcdcdbb5dcmr668185ljk.39.1692776318221;
+        Wed, 23 Aug 2023 00:38:38 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:e4cf:1132:7b40:4262])
+        by smtp.gmail.com with ESMTPSA id m9-20020a05600c280900b003fe539b83f2sm21436983wmb.42.2023.08.23.00.38.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Aug 2023 00:38:37 -0700 (PDT)
+From:   Donald Hunter <donald.hunter@gmail.com>
+To:     netdev@vger.kernel.org
+Cc:     Jakub Kicinski <kuba@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Stanislav Fomichev <sdf@google.com>,
+        Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>,
+        donald.hunter@redhat.com
+Subject: Re: [PATCH net-next v3 11/12] doc/netlink: Add spec for rt link
+ messages
+In-Reply-To: <20230822194304.87488-12-donald.hunter@gmail.com> (Donald
+        Hunter's message of "Tue, 22 Aug 2023 20:43:03 +0100")
+Date:   Wed, 23 Aug 2023 08:33:53 +0100
+Message-ID: <m2r0nugqla.fsf@gmail.com>
+References: <20230822194304.87488-1-donald.hunter@gmail.com>
+        <20230822194304.87488-12-donald.hunter@gmail.com>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jun 27 2023 at 00:50, Chong Cai wrote:
-> On Sun, Jun 25, 2023 at 9:32=E2=80=AFPM Dan Williams <dan.j.williams@inte=
-l.com> wrote:
->> What I would ask of those who absolutely cannot support the TDVMCALL
->> method is to contribute a solution that intercepts the "upcall" to the
->> platform "guest_attest_ops" and turn it into a typical keys upcall to
->> userspace that can use the report data with a vsock tunnel.
->>
->> That way the end result is still the same, a key established with the
->> TDX Quote evidence contained within a Linux-defined envelope.
+Donald Hunter <donald.hunter@gmail.com> writes:
 >
-> I agree a unified ABI across vendors would be ideal in the long term.
-> However, it sounds like a non-trivial task and could take quite some
-> time to achieve.
-> Given there's already an AMD equivalent approach upstreamed, can we
-> also allow this TDVMCALL patch as an intermediate step to unblock
-> various TDX attestation user cases while targeting unified ABI? The
-> TDVMCALL here is quite isolated and serves a very specific purpose, it
-> should be very low risk to other kernel features and easy to be
-> reverted in the future.
+> +operations:
+> +  enum-model: directional
+> +  list:
+> +    -
+> +      name: newlink
+> +      doc: Create a new link.
+> +      attribute-set: link-attrs
+> +      fixed-header: ifinfomsg
+> +      do:
+> +        request:
+> +          value: 16
+> +          attributes:
+> +            - ifi-index
+> +    -
+> +      name: dellink
+> +      doc: Delete an existing link.
+> +      attribute-set: link-attrs
+> +      fixed-header: ifinfomsg
+> +      do:
+> +        request:
+> +          value: 16
+> +          attributes:
+> +            - ifi-index
+> +    -
+> +      name: getlink
+> +      doc: Get / dump information about a link.
+> +      attribute-set: link-attrs
+> +      fixed-header: ifinfomsg
+> +      do:
+> +        request:
+> +          value: 18
+> +          attributes:
+> +            - ifi-index
+> +        reply:
+> +          value: 16
+> +          attributes:
+> +            - ifi-index
+> +    -
+> +      name: setlink
+> +      doc: Set information about a link.
+> +      value: 19
+> +      attribute-set: link-attrs
+> +      fixed-header: ifinfomsg
+> +      do:
+> +        request:
+> +          attributes:
+> +            - ifname
+> +    -
+> +      name: getstats
+> +      doc: Get / dump link stats.
+> +      attribute-set: stats-attrs
+> +      fixed-header: if_stats_msg
+> +      dump:
+> +        request:
+> +          value: 94
+> +          attributes:
+> +            - ifindex
+> +        reply:
+> +          value: 92
 
-No way. This is exactly how the kernel ends up with an unmaintainable
-mess simply because this creates an user space ABI which is not
-revertable ever.
+The operations are missing detailed attribute lists. I'll fix in a v4.
 
-It's bad enough that nobody paid attention when the AMD muck was merged,
-but that does not make an argument or any form of justification to add
-more of this.
-
-Dan's proposal makes a lot of sense and allows to implement this in a
-mostly vendor agnostic way. While the AMD interface is not going away
-due to that, I'm 100% confident (pun intended) that such an unified
-interface is going to be utilized and supported by AMD (or any other
-vendor) sooner than later simply because the user space people who have
-to implement vendor agnostic orchestration tools will go for it as it
-makes their life easier too.
-
-The time wasted to argue about this TDX ioctl mess could have been spent
-to actually migrate TDX over to this scheme. But sure it's way simpler
-to flog a dead horse instead of actually sitting down and getting useful
-work done.
-
-Thanks,
-
-        tglx
+> +mcast-groups:
+> +  list:
+> +    -
+> +      name: rtnlgrp-link
+> +      value: 1
