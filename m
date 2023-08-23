@@ -2,165 +2,66 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 89A7C7860D7
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Aug 2023 21:42:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C280B786189
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Aug 2023 22:28:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237300AbjHWTlo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Aug 2023 15:41:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56100 "EHLO
+        id S235887AbjHWU2I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Aug 2023 16:28:08 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55524 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238363AbjHWTlQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Aug 2023 15:41:16 -0400
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1CC6110C4;
-        Wed, 23 Aug 2023 12:41:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1692819675; x=1724355675;
-  h=message-id:date:subject:to:cc:references:from:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=QBpbHyJqCtYeR16qjzZELstj0EwzBMoR2Nrjrb/Aqh4=;
-  b=Z6dN11Bc2w5uhW4AnpCxYU/lilRBWYBfkkOG5MVpBQAiER0BRfemg7mA
-   74xyQdpWVggDizIeU5hIM/+mEgfZxi/YHSIh1YyJU5LMFy85s7GViktyb
-   vH4DJs+EsDKiW8JQTuLSPurpV0ua9tCQtFsLVTF1uknLfQiDQW7wy6rB3
-   v5d7REZcYQ0SbrEYwkpnGe8eq6u4QJSIgnXW02yarF5kdfjlmSJEDISo7
-   GqZJJpTYMfWP57tf+0DMsvljS/HJIpRTvadGBjh/TwPTqwhWnuuQf/qdJ
-   /qGep4gSELQdce5nhOTYtUPfOnyremF5x6/yn7X3tRGIzlHAcVUfDs5sE
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10811"; a="378009106"
-X-IronPort-AV: E=Sophos;i="6.01,195,1684825200"; 
-   d="scan'208";a="378009106"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Aug 2023 12:41:14 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10811"; a="910630574"
-X-IronPort-AV: E=Sophos;i="6.01,195,1684825200"; 
-   d="scan'208";a="910630574"
-Received: from orsmsx603.amr.corp.intel.com ([10.22.229.16])
-  by orsmga005.jf.intel.com with ESMTP; 23 Aug 2023 12:41:14 -0700
-Received: from orsmsx610.amr.corp.intel.com (10.22.229.23) by
- ORSMSX603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Wed, 23 Aug 2023 12:41:13 -0700
-Received: from orsmsx610.amr.corp.intel.com (10.22.229.23) by
- ORSMSX610.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Wed, 23 Aug 2023 12:41:13 -0700
-Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
- orsmsx610.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27 via Frontend Transport; Wed, 23 Aug 2023 12:41:13 -0700
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (104.47.55.177)
- by edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.27; Wed, 23 Aug 2023 12:41:12 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WIxtGssPmGXerOra/e68HXElTIcehhAZmbxN0EmWWAnppCv0I6jndvnp0Bmh51xZstiUjTx0a53QMi57oqih4qnHJ+HXfjaLSevCv2v4u/uj1fIenH0k982iyNuOb4Jk1n1V5ql2rrswltWOV6nnYogKS2oUH3es8uHX5AB3SqIKd7kQd3x61kq+36Wxq65SWnDG4XLG72OIOC31HysgeVOiD3oAw8bBjc3i7QTfR3tfJS8d/pR+47bxJmVYvs3ul41XBma8JNrEdeB988w4ySLiy5wAJuO9cdbwVjVVezDG7/TpXyvXsYeNYaIgnrhXPKoy1RaDJbpB51UWGfQtdA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Up19v/Swf9v55HYb8Td8NcxLNU20mleLRAtHcDAE20c=;
- b=Jfj26kTqMnb+j56aQn5pSee3SaLSlImqqhvruiDpdwosWk6/EG6eSdqSHVzjNiWZiBkwLR9/RaNP4Np4u1cE9Qbb4vu8JV+ueUWER0eStKSlNs/2IRF7mToZCRcBvrFZcQL7fqurun21kSG252oQzEd1UOYXIEuLpnTkPVFvyf6+nJNRXsJwYSDU/SHLmprXyBjk7oKCPJXL/D/lyiLmYFG/Z6RyyBmesprXP7WuOJmSos2zEi0kffgj8g6lV2DjbLmHucktwy1ba1oDx/RkHreUk06k60Fp6vIgft2taYzuYoUoemL16jvx8fIU+JzvnQkbFD9BTLTWrN1Hpx0kDw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from CO1PR11MB5089.namprd11.prod.outlook.com (2603:10b6:303:9b::16)
- by IA1PR11MB7173.namprd11.prod.outlook.com (2603:10b6:208:41b::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.26; Wed, 23 Aug
- 2023 19:41:10 +0000
-Received: from CO1PR11MB5089.namprd11.prod.outlook.com
- ([fe80::6a23:786d:65f7:ef0b]) by CO1PR11MB5089.namprd11.prod.outlook.com
- ([fe80::6a23:786d:65f7:ef0b%6]) with mapi id 15.20.6699.022; Wed, 23 Aug 2023
- 19:41:10 +0000
-Message-ID: <6e72fb4e-6f26-3071-995a-d33820d31aa3@intel.com>
-Date:   Wed, 23 Aug 2023 12:41:08 -0700
+        with ESMTP id S236271AbjHWU2B (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Aug 2023 16:28:01 -0400
+X-Greylist: delayed 324 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 23 Aug 2023 13:27:59 PDT
+Received: from mail.scottdial.com (bert.scottdial.com [104.237.142.221])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 03A9210C7;
+        Wed, 23 Aug 2023 13:27:58 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.scottdial.com (Postfix) with ESMTP id A119E111B49E;
+        Wed, 23 Aug 2023 16:22:33 -0400 (EDT)
+Received: from mail.scottdial.com ([127.0.0.1])
+        by localhost (mail.scottdial.com [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id UQH3nC_IfCdB; Wed, 23 Aug 2023 16:22:32 -0400 (EDT)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.scottdial.com (Postfix) with ESMTP id 0AC44111B0C2;
+        Wed, 23 Aug 2023 16:22:32 -0400 (EDT)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.scottdial.com 0AC44111B0C2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=scottdial.com;
+        s=24B7B964-7506-11E8-A7D6-CF6FBF8C6FCF; t=1692822152;
+        bh=4ro6skDZPhNFiMNcHq20oe+J8XwK1HUQS3NB15eFkJY=;
+        h=Message-ID:Date:MIME-Version:To:From;
+        b=yEqAvoZFxTwcGOciJVr6R0XxP7RxINnUUet34rKL5zHpOpL7YpkHO8QkeWYAjSGkz
+         iFOnZATQ2tpnfD3OnCiwScFdVRMacHed37epCFpzAMDplQqU0/zMZIcbJD116ntFmD
+         FWU5+f6ikFCWaMgCq2r3/9nbt7E35rGr5dl9cxU0HrOmJXru9JuGJYhi+pyAoq+jr9
+         6xeMSt778MK0ljTxK/CbLq7XBNiUaX68n3w1NM2MsQw7fbVMXqHdcHn3pTginLWE/X
+         j6w+aLOxbOGQ2aWvR8D+OOXR0DxDVP5TDehHgg1ni89A7l+xuwdbJ9PzNIw7wKokaS
+         G9BXRwnzTO8HA==
+X-Virus-Scanned: amavisd-new at scottdial.com
+Received: from mail.scottdial.com ([127.0.0.1])
+        by localhost (mail.scottdial.com [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id 4nDsxhdqy-ZN; Wed, 23 Aug 2023 16:22:31 -0400 (EDT)
+Received: from [172.17.2.2] (unknown [172.17.2.2])
+        by mail.scottdial.com (Postfix) with ESMTPSA id D4BBC111B49E;
+        Wed, 23 Aug 2023 16:22:31 -0400 (EDT)
+Message-ID: <a9af0c0a-ec7c-fa01-05ac-147fccb94fbf@scottdial.com>
+Date:   Wed, 23 Aug 2023 16:22:31 -0400
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.14.0
-Subject: Re: [PATCH net-next v4 12/12] doc/netlink: Add spec for rt route
- messages
+Subject: Re: [PATCH net-next] macsec: introduce default_async_crypto sysctl
 Content-Language: en-US
-To:     Donald Hunter <donald.hunter@gmail.com>, <netdev@vger.kernel.org>,
-        "Jakub Kicinski" <kuba@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        "Eric Dumazet" <edumazet@google.com>,
-        Paolo Abeni <pabeni@redhat.com>,
-        "Jonathan Corbet" <corbet@lwn.net>, <linux-doc@vger.kernel.org>,
-        Stanislav Fomichev <sdf@google.com>,
-        Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>
-CC:     <donald.hunter@redhat.com>
-References: <20230823114202.5862-1-donald.hunter@gmail.com>
- <20230823114202.5862-13-donald.hunter@gmail.com>
-From:   Jacob Keller <jacob.e.keller@intel.com>
-In-Reply-To: <20230823114202.5862-13-donald.hunter@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+To:     Sabrina Dubroca <sd@queasysnail.net>,
+        Jakub Kicinski <kuba@kernel.org>
+Cc:     netdev@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        linux-doc@vger.kernel.org
+References: <9328d206c5d9f9239cae27e62e74de40b258471d.1692279161.git.sd@queasysnail.net>
+ <20230818184648.127b2ccf@kernel.org> <ZOTWzJ4aEa5geNva@hog>
+From:   Scott Dial <scott@scottdial.com>
+In-Reply-To: <ZOTWzJ4aEa5geNva@hog>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MW4P220CA0019.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:303:115::24) To CO1PR11MB5089.namprd11.prod.outlook.com
- (2603:10b6:303:9b::16)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PR11MB5089:EE_|IA1PR11MB7173:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8a22f14f-ceca-470f-6ff4-08dba410e6a6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: HQ7OzX35E39IIPM0UKJ5HJM6nzUU9VHcbgXUyQIh70XtnWY/22HtPhFRul+YLuWRTTCC3fWykmJRpYE9ZIgIUQ4sPIeJLoAZ50prJqAju+3Fq17MzsN6cbeopZTn41nc2zXniK83x0PRyW3ebnTCOu3TUI+LyjduViQ2VaWNm777k1FSVk8Sfm+qAv5pq7OjAQo95xh40c9O+qOqvie2OXMNmIClUmWqBSp1nzng5NNipzjHls4ceTqIqSj2PhV/WPRl8Kz9nHzMANG/WsC4c0YUFTTLDs+VIuUgWzUaXs6Z8vpJDNrJ+V2hLijHS4xHjtjQML6bVJh642vPiZFyXhSkp8EHar4DknCU8poLvkenlPxmRG/cdTFgVqgD10ksKRUn9F8US7K56mUbGnvr5CEDY/NunYxCpHAWwzWpExj4vx3/8vyN+KqUrTyvRh++mU5MaVqkSMuDIt28MTMbib0tADpHm8ZRBmZhiT5lHG7oowIjNZElZGcqgKnkgr2sddFZesob+7L+lsJvFUYCqExAaLrH4KNEZjAFEZnro9wWmDRfmObDao96hlyKnPranbzhsp/3iaAPf+xbBuLzD7/Z84NWLsHwi4XbgiZB1l1xvThnFc0eV3KMsQi7t+nzbqy8bVMcuaidt5nboHcvn19J0mtzYEKAs42VNzjhxhE=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5089.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(346002)(376002)(366004)(136003)(39860400002)(186009)(451199024)(1800799009)(2616005)(6506007)(6486002)(316002)(6636002)(53546011)(8936002)(8676002)(4326008)(110136005)(66556008)(66946007)(66476007)(6512007)(41300700001)(26005)(7416002)(5660300002)(478600001)(31686004)(4744005)(36756003)(31696002)(86362001)(82960400001)(2906002)(921005)(38100700002)(45980500001)(43740500002);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TTNPQ1k0elp3R2xlMEVTdlRNd0xyZkQyRG9sQjRKeEM3Lys4ZXhHV1d0R0tW?=
- =?utf-8?B?Y0pmR0lXNG1hd0VXcElJekRsTU5wUUpFMjc3ZWk5S005QmRkK1BvSkU3WklY?=
- =?utf-8?B?RjhRUDNieDQwWWt0L1RCUUoydFp3dWlGQ0xPZ3pQMkFhVjE1d3VjUXU0NWN1?=
- =?utf-8?B?K0o5TTZBbjVrTGZvZGxEVWZjZUpWbnl3amJ1dWJkcXFHSHBYbFlOOHdpYlY0?=
- =?utf-8?B?dzZtQlE2Uk5ORlJtOGdsOC9SSXNDSmdyWFhTcDc2UlVvczk4NlcrYkFKb01N?=
- =?utf-8?B?MFVNYitkaGdSMGVQNURIUnljWEMxaVdPeTN4YVdrdWNrdDM5VG5kenVkbmNB?=
- =?utf-8?B?RlJIb2ZVbTZJaGZWMENlQ0VGVS9TMTRCOUtjOWp6cHBPUzltMEdqYTI0TkNj?=
- =?utf-8?B?QnRiMG9mK0lTOFd2NlhiOVR4SEtqVVI2d3k3bjJTRm4vV2VHc3VncFMrWEd6?=
- =?utf-8?B?UlU2RlA3UThCckpCSUNISXIyM3lsS09CTkVzTm8wV1FIN0dLSDlvd3I4ZkE4?=
- =?utf-8?B?aC9DbUUzV2NSeW4rOS9Jei9mTlpDQ0QzS2N2ZDVUN2ZGV2tNRk9rMDI1Qmtz?=
- =?utf-8?B?MzlUdFZQc010MWVDVUFTYUVRV1R5VU9JRDYxQ1Y2Nk1pT1ZIaFFZSGRZaEh4?=
- =?utf-8?B?c1crQUZWclNvSFU3VVVGMXpMd1RaOTJ1Z0I5ZjVwUDRwYnNGVmdjVVNhdTV5?=
- =?utf-8?B?eXJDemtLUzNMclhnTGlKdmFPRGxqMkd3dEpsZE14V0JBVysreXl0OGhodGZD?=
- =?utf-8?B?YlJCYndZeUU2Ny9tOFNxS2p5Ym1sWkxmbGVpdTh3VXFLNzkzK3ZYdHRoTDlG?=
- =?utf-8?B?TVQzMmwyc1I3ZHpPZ2hSV3M0aXZmVitoMjJEM2lyTzdjZ1VtL1JieGNrTVBj?=
- =?utf-8?B?WVZsbzlDSjlTY2h6RVJuRzQ5VDdZdGp2aE5wL1EzMm42eko2WFFRczF5bDh2?=
- =?utf-8?B?dEYxdDhJeHNnUVVIKy9ZcTNBWnRKVDNyT3JwTXZVcnIwOFRhZVJBbGlZVmEx?=
- =?utf-8?B?USthaGppQ0xEdnpENmFKODJHUThkZkhMNDc0MHYrQ0ozSXIzR0tMUHFrT00y?=
- =?utf-8?B?dnpEVU9SZVRuTGlzU2hvLzNzWUxLS0hZTWhoZ21hdUdJK2VxQmhTZ1ZOWE1Q?=
- =?utf-8?B?THdyek1wTEJpdHQvOWZuOEV1UDl1OEtHMlg3QWFrNm5xOGN1dytXZmZaVDNU?=
- =?utf-8?B?TmlCbXk0b1pSN0h2aHE4OGZpRGJDK3RNOU9ndjZnTkdIVXZacHVxVU5XRnNa?=
- =?utf-8?B?NmhpUzJKTU9zVEtWVmhRckNERCtvdkpSU3FmUm5XaFBkeWtMU0VjM0JqblhT?=
- =?utf-8?B?dDJMZzRaUDVWOEVxSndPL0hnTUJydWNFOVk3WUFPSFhlZTROYStzR1NlalUx?=
- =?utf-8?B?Q005WjVRR1JTN01GNVJxUUtSTHZxM2lSaGJzem1MczRIUDJINUNvdDNGM1cw?=
- =?utf-8?B?M0xDUEhoQzM3eVRkOUN6emo3NmRINGVyS0tvdExrQ3BzUitRNDVkbU03VWxV?=
- =?utf-8?B?MXdxSTd6VEs0YlV6WldzY1hCL1B0Kyt1czhhVXZ1eXo3cjJrc3FWSzNiR1cy?=
- =?utf-8?B?bzEvZTNzV3gvOHd1U0tlMHlad0xuWm05TlB4eU5Cam1tYkhFWWFTdXoydGtI?=
- =?utf-8?B?OEJmRGJLUmhqTXM2b0lLV1gzM0VnZmhaSC9SYUgyVWRhbENJY3AwMEpQNEFX?=
- =?utf-8?B?NTdJd0UwbjhjR1IxSTFleG5aTkRKZVZHYTJOVjdoSG1RMjlOcEVTSDROakpw?=
- =?utf-8?B?N2g5b0ljN1BLc1luOGovSjF6ZXhyN3ZwMmN4MEp3aTd3eWwxb1o5ZUJsUUx4?=
- =?utf-8?B?YUx5SmJ4OW5OeTRIcEcrKzJyRnhoNit3LzdFOUEyUm9nUFBFNUhCU1ExNzVT?=
- =?utf-8?B?MklWU3c4ZHVISitOQTNkNlNVTllKc1pSakROV21kNDg4Qm9BMnl5S0hIN0Ft?=
- =?utf-8?B?OHN6ZFhVSXpsNHR0eHZRRXNESm4xWk9MSElHZ2xDUms2T2Q3UEZhTm1YT2NT?=
- =?utf-8?B?WTd0RFA2d1dna2FFT0dMQmU5M2R6Q2hiYnZpMW4zVEVtVE4wR1FMUGJaVThp?=
- =?utf-8?B?QWEveldId1QvYzFQNnJTQlNoVWhDdmwybmxBdDVSWE1BRTRrc0x4Qk44K0Uy?=
- =?utf-8?B?UjlBQlEwajNvUkFFZGI5MFR3Sk5ZcXFHMFZkaWZuTk5MY2NSOHFPRGF5OUk4?=
- =?utf-8?B?U3c9PQ==?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a22f14f-ceca-470f-6ff4-08dba410e6a6
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5089.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2023 19:41:10.0268
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fC9LhIKK5syLfR3c6b/+JX1pNoKqEzWpkjoaekEE4K5m4VBy628r5+YH0glCTcCl3MsDtRAubCQZ8hMQuT9Ihtqmi7Ql5G6czMdQbeP37BQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7173
-X-OriginatorOrg: intel.com
-X-Spam-Status: No, score=-4.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_NONE,URIBL_BLOCKED
+X-Spam-Status: No, score=-4.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_PASS,SPF_PASS,URIBL_BLOCKED
         autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -168,19 +69,80 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+> 2023-08-18, 18:46:48 -0700, Jakub Kicinski wrote:
+>> Can we not fix the ordering problem?
+>> Queue the packets locally if they get out of order?
 
+AES-NI's implementation of gcm(aes) requires the FPU, so if it's busy 
+the decrypt gets stuck on the cryptd queue, but that queue is not 
+order-preserving. If the macsec driver maintained a queue for the netdev 
+that was order-preserving, then you could resolve the issue, but it adds 
+more complexity to the macsec driver, so I assume that's why the 
+maintainers have always desired to revert my patch instead of ensuring 
+packet order.
 
-On 8/23/2023 4:42 AM, Donald Hunter wrote:
-> Add schema for rt route with support for getroute, newroute and
-> delroute.
-> 
-> Routes can be dumped with filter attributes like this:
-> 
-> ./tools/net/ynl/cli.py \
->     --spec Documentation/netlink/specs/rt_route.yaml \
->     --dump getroute --json '{"rtm-family": 2, "rtm-table": 254}'
-> 
-> Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
-> ---
+With respect to AES-NI's implementation of gcm(aes), it's unfortunate 
+that there is not a synchronous version that uses the FPU when available 
+and fallsback to gcm_base(ctr(aes-aesni),ghash-generic) when it's not. 
+In that case, you would get the benefit of the FPU for the majority of 
+time when it's available. When I suggested this to linux-crypto, I was 
+told that relying on synchronous crypto in the macsec driver was wrong:
 
-Reviewed-by: Jacob Keller <jacob.e.keller@intel.com>
+On 12 Aug 2020 10:45:00 +0000, Pascal Van Leeuwen wrote:
+> Forcing the use of sync algorithms only would be detrimental to platforms
+> that do not have CPU accelerated crypto, but do have HW acceleration
+> for crypto external to the CPU. I understand it's much easier to implement,
+> but that is just being lazy IMHO. For bulk crypto of relatively independent
+> blocks (networking packets, disk sectors), ASYNC should always be preferred.
+
+So, I abandoned my suggestion to add a fallback. The complexity of the 
+queueing the macsec driver was beyond the time I had available, and the 
+regression in performance was not significant for my use case, but I 
+understand that others may have different requirements. I would 
+emphasize that benchmarking of network performance should be done by 
+looking at more than just the interface frame rate. For instance, 
+out-of-order deliver of packets can trigger TCP backoff. I was never 
+interested in how many packets the macsec driver could stuff onto the 
+wire, because the impact was my TCP socket stalling and my UDP streams 
+being garbled.
+
+On 8/22/2023 11:39 AM, Sabrina Dubroca wrote:
+> Actually, looking into the crypto API side, I don't see how they can
+> get out of order since commit 81760ea6a95a ("crypto: cryptd - Add
+> helpers to check whether a tfm is queued"):
+> 
+>      [...] ensure that no reordering is introduced because of requests
+>      queued in cryptd with respect to requests being processed in
+>      softirq context.
+> 
+> And cryptd_aead_queued() is used by AESNI (via simd_aead_decrypt()) to
+> decide whether to process the request synchronously or not.
+
+I have not been following linux-crypto changes, but I would be surprised 
+if request is not flagged with CRYPTO_TFM_REQ_MAY_BACKLOG, so it would 
+be queue. If that's not the case, then the attempt to decrypt would 
+return -EBUSY, which would translate to a packet error, since 
+macsec_decrypt MUST handle the skb during the softirq.
+
+> So I really don't get what commit ab046a5d4be4 was trying to fix. I've
+> never been able to reproduce that issue, I guess commit 81760ea6a95a
+> explains why.
+ >
+ > I'd suggest to revert commit ab046a5d4be4, but it feels wrong to
+ > revert it without really understanding what problem Scott hit and why
+ > 81760ea6a95a didn't solve it.
+
+I don't think that commit has any relevance to the issue. For instance 
+with AES-NI, you need to have competing load on the FPU such that 
+crypto_simd_usable() fails to be true. In the past, I replicated this 
+failure mode using two SuperMicro 5018D-FN4T servers directly connected 
+to each other, which is a Xeon-D 1541 w/ Intel 10GbE NIC (ixgbe driver). 
+ From there, I would send /dev/urandom as UDP to the other host. I would 
+get about 1 out of 10k packets queued on cryptd with that setup. My real 
+world case was transporting MPEG TS video streams, each about 1k pps, so 
+that is an decode error in the video stream every 10 seconds.
+
+-- 
+Scott Dial
+scott@scottdial.com
+
