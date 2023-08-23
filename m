@@ -2,62 +2,62 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CBC6E7853E8
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Aug 2023 11:28:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E931E785386
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Aug 2023 11:10:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232255AbjHWJ2j (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Aug 2023 05:28:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59008 "EHLO
+        id S235048AbjHWJKO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Aug 2023 05:10:14 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43832 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235097AbjHWJYR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Aug 2023 05:24:17 -0400
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com [IPv6:2a00:1450:4864:20::635])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3D7A430F1
-        for <linux-doc@vger.kernel.org>; Wed, 23 Aug 2023 01:57:55 -0700 (PDT)
-Received: by mail-ej1-x635.google.com with SMTP id a640c23a62f3a-99c3c8adb27so695767666b.1
-        for <linux-doc@vger.kernel.org>; Wed, 23 Aug 2023 01:57:55 -0700 (PDT)
+        with ESMTP id S235313AbjHWJHy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Aug 2023 05:07:54 -0400
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com [IPv6:2a00:1450:4864:20::62c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E1F491BF6
+        for <linux-doc@vger.kernel.org>; Wed, 23 Aug 2023 02:02:03 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id a640c23a62f3a-997c4107d62so715028066b.0
+        for <linux-doc@vger.kernel.org>; Wed, 23 Aug 2023 02:02:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=szeredi.hu; s=google; t=1692781074; x=1693385874;
+        d=szeredi.hu; s=google; t=1692781314; x=1693386114;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=j94zWW7Vhu+ruknitmkA2V61CnG1G233OM0eLPAXM94=;
-        b=aE8USWDve+ALI4xTEFgpO9tclZQeUCRPADb7topbHxa8xw8n2gjpZWpr25uzUb1d4o
-         4gpCN6Emb7DSX1w/oGpJviJTtYX/bJDMj7FFb+2x3llYXXXXG6N21MPPWNQjQTx95phM
-         6C0E8hjoDSmo7sa8LyQ85wpYsjHjgvBIAKw7Q=
+        bh=htSMjdk85wELugVDXAhr8cuhpjEm2Q5vyQ8twDUxEyk=;
+        b=hG3ilkGGJUfAI8sRdQkgGVOuFHUn22bI04fyKmmYAttiVJlkyoYN3afCusCr4PMbkA
+         pNfZSGNZXoSy2v14RslrgQtlmPD00F52wpUwPUo+INhkkkDq8S5TgiTaX1OmH6cwxhvM
+         K+2F0DAHY0lZgmYME1PI3mNPKJN0EmsDIGstw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692781074; x=1693385874;
+        d=1e100.net; s=20221208; t=1692781314; x=1693386114;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=j94zWW7Vhu+ruknitmkA2V61CnG1G233OM0eLPAXM94=;
-        b=hU+I8bBGQ2CWj0MLc5gqPjGCpuuw1nKPSJzG466Z+2tL8Zs01WdmmTq1HwC882709f
-         H18dBM8KcRX9K6cv4payZBwQBaDTsnbsGPZOId1EGzugw5gJMmwbUFcFjQp4Ihg8vFGK
-         YLWpzagCjebHVJ13oXSrTi3fwHZXOkKu4llmAtu093u6V+gH6GtRz4lnAbkCcmBX2t7q
-         7TT20/aQRttWsYApD/DvRhMd81YFCqx4WmV+xthJt11FcGJZEMYbBT1Gfo/jba9DhJQu
-         Dx3GP1H5SQKRgAClOLGi1yHYLbnVXlmmjkrFe/7bw5jd+NFMVKxLHCqyLcvTqUZsaqBJ
-         Yn5A==
-X-Gm-Message-State: AOJu0Yxq+SyQKb0WCHmViwowahOoU8cLVxEzF1Fzh5ybgTKE9Knhj6u5
-        hPNMBjH4nQoL921lmYNMwF5kDZ5Dw1skXvW4XS9xUg==
-X-Google-Smtp-Source: AGHT+IHu4J7XyCWwQocI/2gqFnASyJynFOF4R6ZFGu4VmMZ/F7bDbjKPAe77MZcL9mjbpK2ZFj2uWOntDLLUgUi3yH4=
-X-Received: by 2002:a17:907:801f:b0:99b:d599:5086 with SMTP id
- ft31-20020a170907801f00b0099bd5995086mr8048062ejc.75.1692781073800; Wed, 23
- Aug 2023 01:57:53 -0700 (PDT)
+        bh=htSMjdk85wELugVDXAhr8cuhpjEm2Q5vyQ8twDUxEyk=;
+        b=SWVOe+RZYotIh6U5BYFpW/wZgHwTSstC33gIl6EmB3oO2ToZjuJHb/pd1E+sH4fya3
+         frnLuUg20tVAawDzZjvPgEyHUliabUL6znOEUNL3sYkN4zfZ0N5Z9WjZcvG85vbuYs0N
+         SThnw4HU62ITw+x1fymkQ50AwB6hA38TVxAEqC6uu0QbXFmDr4fDKaDhdsOJgeOCjchI
+         a957U40zU9hafuf6IfSCYIcPs9SWOu4HOc0jtFCnQVodHkVJYPCOJh0lVKOp91S53FCA
+         tneow9EfolVniUtXB6U5xpkGgnHXXJhM5E7uCMsGO2TUoVigGH2M3W8Ugj5iHkmK+RTZ
+         YBSA==
+X-Gm-Message-State: AOJu0YzRItrOdwBqkrBlLUjgzYqc3nFx9bSAxa+a7/VBqU9MS0IzgHQm
+        l0eyqDkMKseV9nh/UP3LTnt+yYGGLXz9JVtpcrBL6A==
+X-Google-Smtp-Source: AGHT+IETRpv9wXDM4ZeEVu1LHXQq7WY3Gxn4hHYL3/vW0KawK2WFCTMwX7ltbe/FKT2CNlG4aOJ/vzL7dF8Br1Y5zzw=
+X-Received: by 2002:a17:906:1d9:b0:991:b554:e64b with SMTP id
+ 25-20020a17090601d900b00991b554e64bmr10551621ejj.54.1692781313930; Wed, 23
+ Aug 2023 02:01:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230711043405.66256-1-zhangjiachen.jaycee@bytedance.com> <20230711043405.66256-2-zhangjiachen.jaycee@bytedance.com>
-In-Reply-To: <20230711043405.66256-2-zhangjiachen.jaycee@bytedance.com>
+References: <20230711043405.66256-1-zhangjiachen.jaycee@bytedance.com> <20230711043405.66256-4-zhangjiachen.jaycee@bytedance.com>
+In-Reply-To: <20230711043405.66256-4-zhangjiachen.jaycee@bytedance.com>
 From:   Miklos Szeredi <miklos@szeredi.hu>
-Date:   Wed, 23 Aug 2023 10:57:42 +0200
-Message-ID: <CAJfpegvkcYcJYL0Q6XxF1E0MiQ5NxvReP4H=7Ra=yCrDLTqD1A@mail.gmail.com>
-Subject: Re: [PATCH 1/5] fuse: check attributes staleness on fuse_iget()
+Date:   Wed, 23 Aug 2023 11:01:42 +0200
+Message-ID: <CAJfpegtocWjfqVUpdnct-1-pq_DYJXUuvkBWey2N5q6+K=pL_w@mail.gmail.com>
+Subject: Re: [PATCH 3/5] fuse: add FOPEN_INVAL_ATTR
 To:     Jiachen Zhang <zhangjiachen.jaycee@bytedance.com>
 Cc:     Jonathan Corbet <corbet@lwn.net>, linux-fsdevel@vger.kernel.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         me@jcix.top
 Content-Type: text/plain; charset="UTF-8"
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
+        SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
@@ -67,47 +67,38 @@ X-Mailing-List: linux-doc@vger.kernel.org
 On Tue, 11 Jul 2023 at 06:36, Jiachen Zhang
 <zhangjiachen.jaycee@bytedance.com> wrote:
 >
-> Function fuse_direntplus_link() might call fuse_iget() to initialize a new
-> fuse_inode and change its attributes. If fi->attr_version is always
-> initialized with 0, even if the attributes returned by the FUSE_READDIR
-> request is staled, as the new fi->attr_version is 0, fuse_change_attributes
-> will still set the staled attributes to inode. This wrong behaviour may
-> cause file size inconsistency even when there is no changes from
-> server-side.
+> Add FOPEN_INVAL_ATTR so that the fuse daemon can ask kernel to invalidate
+> the attr cache on file open.
 >
-> To reproduce the issue, consider the following 2 programs (A and B) are
-> running concurrently,
+> The fi->attr_version should be increased when handling FOPEN_INVAL_ATTR.
+> Because if a FUSE request returning attributes (getattr, setattr, lookup,
+> and readdirplus) starts before a FUSE_OPEN replying FOPEN_INVAL_ATTR, but
+> finishes after the FUSE_OPEN, staled attributes will be set to the inode
+> and falsely clears the inval_mask.
 >
->         A                                               B
-> ----------------------------------      --------------------------------
-> { /fusemnt/dir/f is a file path in a fuse mount, the size of f is 0. }
+> Signed-off-by: Jiachen Zhang <zhangjiachen.jaycee@bytedance.com>
+> ---
+>  fs/fuse/file.c            | 10 ++++++++++
+>  include/uapi/linux/fuse.h |  2 ++
+>  2 files changed, 12 insertions(+)
 >
-> readdir(/fusemnt/dir) start
-> //Daemon set size 0 to f direntry
->                                         fallocate(f, 1024)
->                                         stat(f) // B see size 1024
->                                         echo 2 > /proc/sys/vm/drop_caches
-> readdir(/fusemnt/dir) reply to kernel
-> Kernel set 0 to the I_NEW inode
->
->                                         stat(f) // B see size 0
->
-> In the above case, only program B is modifying the file size, however, B
-> observes file size changing between the 2 'readonly' stat() calls. To fix
-> this issue, we should make sure readdirplus still follows the rule of
-> attr_version staleness checking even if the fi->attr_version is lost due to
-> inode eviction. So this patch increases fc->attr_version on inode eviction,
-> and compares request attr_version and the fc->attr_version when a
-> FUSE_READDIRPLUS request is finished.
+> diff --git a/fs/fuse/file.c b/fs/fuse/file.c
+> index de37a3a06a71..412824a11b7b 100644
+> --- a/fs/fuse/file.c
+> +++ b/fs/fuse/file.c
+> @@ -215,6 +215,16 @@ void fuse_finish_open(struct inode *inode, struct file *file)
+>                 file_update_time(file);
+>                 fuse_invalidate_attr_mask(inode, FUSE_STATX_MODSIZE);
+>         }
+> +
+> +       if (ff->open_flags & FOPEN_INVAL_ATTR) {
+> +               struct fuse_inode *fi = get_fuse_inode(inode);
+> +
+> +               spin_lock(&fi->lock);
+> +               fi->attr_version = atomic64_inc_return(&fc->attr_version);
 
-Thanks for the report.  It's really interesting that you are the first
-to notice this misbehavior, even though it's been there since the
-beginning.
-
-The fix looks correct but suboptimal: fc->attr_version will get
-incremented due to non-evict events as well, which could lead to false
-positives.   I'd add another counter (e.g. fc->evict_ctr) and manage
-that separately for lookup type operations (LOOKUP/READDIRPLUS).
+No need to add locking or change fi->attr_version.  This will be done
+next time the attributes are updated.
 
 Thanks,
 Miklos
