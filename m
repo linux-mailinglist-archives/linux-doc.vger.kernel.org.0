@@ -2,430 +2,226 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BD135786DB1
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Aug 2023 13:21:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C53C5786EEC
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Aug 2023 14:21:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241012AbjHXLU7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 24 Aug 2023 07:20:59 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44700 "EHLO
+        id S236052AbjHXMVT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 24 Aug 2023 08:21:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38702 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241011AbjHXLUh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Aug 2023 07:20:37 -0400
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com [IPv6:2a00:1450:4864:20::333])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8BD3710FA;
-        Thu, 24 Aug 2023 04:20:31 -0700 (PDT)
-Received: by mail-wm1-x333.google.com with SMTP id 5b1f17b1804b1-40061928e5aso12226605e9.3;
-        Thu, 24 Aug 2023 04:20:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692876029; x=1693480829;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kjfqjRgnje5cPHodoqa0yOt9g/nnGOz6OtgeJ4an+9k=;
-        b=HqT30jT9I9v3xPcWik2GUImh6yPXLn/am2J3XlAVKkRhYfcyx9PU9zKgb2ecXbF48w
-         Xic8/FFID36/Xwf25gJmN+fQQHQj9OyPXZxdIdnePIcRP+3HM58wffeYe6qF3Naohl/7
-         4loSd3Ng7jyeRe2IU31671DQr3Qaipx3pOiyNxumnPougN4AJJjlbmwyPaVEIyq9gj6z
-         rSclmXXb5MnwWIYKe2RY+fCT/iaw6I0LZudt/zRZu+8yZSrp8nYy+MpIiKc8JdG2iuqy
-         zsYefw6qHg7TFoBizuLXff+wrdOaLWgY8pOTFMAThGKMIK3svKYARlfKaMKbXmzUZRsk
-         x8Wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692876029; x=1693480829;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=kjfqjRgnje5cPHodoqa0yOt9g/nnGOz6OtgeJ4an+9k=;
-        b=VRBW5TcbVVv8HHafAvTa/FcqvohLVj//8bcSX+54xQovIm5f+yRnSSVf/Cs1HmbW9/
-         rco/ToYq/CBqsXgBkO+T7pgz8iP2BhsqjwwK9D2zuIQ79bTlra0ZFO/+VEC0xtvOUZ9W
-         KoukWyB/UqnJxfAQIrNOgy+0DdpZQ+TQi/Q42SqFFK70RFBlSIU15O1SMkvDvmt0cjg9
-         SZjpaywzr26KGw871OSQy0LuYbfHPpZQxHOg17UatowI6wOgT6EclA9wtyXF0Xhk0DUA
-         MJ2z/d/I5hQ8adl1/vP8Xs7LSL7R/f58xpjjfhGeYH3FKZk3N8y4GkbmJR1s3cS4tn4x
-         CFGA==
-X-Gm-Message-State: AOJu0YyQnB1xvem2f3p9M4afz+lQVlwuvJZWiP72ka8vlhp4z/4K+IKe
-        n6lJnrxojibj0xUsHki9OMBwlovWsVMzFQ==
-X-Google-Smtp-Source: AGHT+IH5Ayoui4udJ8Ix3BrhMUupuZ1s5VBVfc8o+t1Y0Wb7FmaYPn6LR1uJiBit938hAIKCu0ioNQ==
-X-Received: by 2002:a1c:ed09:0:b0:3f9:82f:bad1 with SMTP id l9-20020a1ced09000000b003f9082fbad1mr11689472wmh.40.1692876029300;
-        Thu, 24 Aug 2023 04:20:29 -0700 (PDT)
-Received: from imac.fritz.box ([2a02:8010:60a0:0:1a5:1436:c34c:226])
-        by smtp.gmail.com with ESMTPSA id i14-20020a5d630e000000b0031980783d78sm21875295wru.54.2023.08.24.04.20.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Aug 2023 04:20:28 -0700 (PDT)
-From:   Donald Hunter <donald.hunter@gmail.com>
-To:     netdev@vger.kernel.org, Jakub Kicinski <kuba@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Paolo Abeni <pabeni@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        Stanislav Fomichev <sdf@google.com>,
-        Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>
-Cc:     donald.hunter@redhat.com, Donald Hunter <donald.hunter@gmail.com>,
-        Jacob Keller <jacob.e.keller@intel.com>
-Subject: [PATCH net-next v5 12/12] doc/netlink: Add spec for rt route messages
-Date:   Thu, 24 Aug 2023 12:20:03 +0100
-Message-ID: <20230824112003.52939-13-donald.hunter@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230824112003.52939-1-donald.hunter@gmail.com>
-References: <20230824112003.52939-1-donald.hunter@gmail.com>
+        with ESMTP id S241342AbjHXMUy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Aug 2023 08:20:54 -0400
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.153.233])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8A78019B0;
+        Thu, 24 Aug 2023 05:20:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1692879651; x=1724415651;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=UniHE8T8CBJsXsp5AUwf/p97KIJh8SiPdFKSRg4PQ+0=;
+  b=gyEZHeBRWxhU1PBDnEAvl5BL3Ah+mmHP+78Eov4u/4B6GNJO4nP2e5nW
+   FHtRlt4+U8B1vZ0GweVHRgqi6xYX5jLzm8mE9WtrlcP+vG1LE9NA/uuro
+   9HXQ/DG6eCoe9KJm+jgT/O6UE8D73+k32rhjR+HbSuv7DfHVt25O3PMUb
+   DX/399keAVBLf5MVHNl241yay4kQFD4pIm5T/Gyvgl/lIiPV405R57G+g
+   FRlyMx3zFyLvunXukOGModDZMCMLqgQHEq2CHq6XuL8st8Ip5jvMda/cT
+   +mgXKNEYjbi4XsuVIV5pLhm1tJuhM+q61MAV+e5cDSfsjI3GNWWAp2K8t
+   Q==;
+X-IronPort-AV: E=Sophos;i="6.02,195,1688454000"; 
+   d="asc'?scan'208";a="1101686"
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+  by esa1.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256; 24 Aug 2023 05:20:49 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Thu, 24 Aug 2023 05:20:49 -0700
+Received: from wendy (10.10.85.11) by chn-vm-ex04.mchp-main.com (10.10.85.152)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21 via Frontend
+ Transport; Thu, 24 Aug 2023 05:20:47 -0700
+Date:   Thu, 24 Aug 2023 13:20:06 +0100
+From:   Conor Dooley <conor.dooley@microchip.com>
+To:     Evan Green <evan@rivosinc.com>
+CC:     Palmer Dabbelt <palmer@rivosinc.com>,
+        Andrew Jones <ajones@ventanamicro.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Anup Patel <apatel@ventanamicro.com>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        Heiko Stuebner <heiko.stuebner@vrull.eu>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Sunil V L <sunilvl@ventanamicro.com>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-riscv@lists.infradead.org>
+Subject: Re: [PATCH v4] RISC-V: Show accurate per-hart isa in /proc/cpuinfo
+Message-ID: <20230824-factual-jawed-2dddd2cf2bdd@wendy>
+References: <20230711201831.2695097-1-evan@rivosinc.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="qk1i/rPebejGNd0P"
+Content-Disposition: inline
+In-Reply-To: <20230711201831.2695097-1-evan@rivosinc.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,
+        SPF_HELO_PASS,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add schema for rt route with support for getroute, newroute and
-delroute.
+--qk1i/rPebejGNd0P
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Routes can be dumped with filter attributes like this:
+On Tue, Jul 11, 2023 at 01:18:30PM -0700, Evan Green wrote:
+> In /proc/cpuinfo, most of the information we show for each processor is
+> specific to that hart: marchid, mvendorid, mimpid, processor, hart,
+> compatible, and the mmu size. But the ISA string gets filtered through a
+> lowest common denominator mask, so that if one CPU is missing an ISA
+> extension, no CPUs will show it.
+>=20
+> Now that we track the ISA extensions for each hart, let's report ISA
+> extension info accurately per-hart in /proc/cpuinfo. We cannot change
+> the "isa:" line, as usermode may be relying on that line to show only
+> the common set of extensions supported across all harts. Add a new "hart
+> isa" line instead, which reports the true set of extensions for that
+> hart. This matches what is returned in riscv_hwprobe() when querying a
+> given hart.
+>=20
+> Signed-off-by: Evan Green <evan@rivosinc.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
+>=20
+> ---
+>=20
+> Changes in v4:
+>  - Documentation: Made the underline match the text line (Conor)
+>  - Documentation: hanged "in question" to "being described" (Andrew)
+>=20
+> Changes in v3:
+>  - Add some documentation (Conor)
+>=20
+> Changes in v2:
+>  - Added new "hart isa" line rather than altering behavior of existing
+>    "isa" line (Conor, Palmer)
+>=20
+>=20
+> I based this series on top of Conor's riscv-extensions-strings branch
+> from July 3rd, since otherwise this change gets hopelessly entangled
+> with that series.
+>=20
+> ---
+>  Documentation/riscv/uabi.rst | 10 ++++++++++
+>  arch/riscv/kernel/cpu.c      | 22 ++++++++++++++++++----
+>  2 files changed, 28 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/Documentation/riscv/uabi.rst b/Documentation/riscv/uabi.rst
+> index 8960fac42c40..afdda580e5a2 100644
+> --- a/Documentation/riscv/uabi.rst
+> +++ b/Documentation/riscv/uabi.rst
+> @@ -42,6 +42,16 @@ An example string following the order is::
+> =20
+>     rv64imadc_zifoo_zigoo_zafoo_sbar_scar_zxmbaz_xqux_xrux
+> =20
+> +"isa" vs "hart isa" lines in /proc/cpuinfo
+> +------------------------------------------
+> +
+> +The "isa" line in /proc/cpuinfo describes the lowest common denominator =
+of
+> +RISC-V ISA extensions understood by the kernel and implemented on all ha=
+rts. The
+> +"hart isa" line, in contrast, describes the set of extensions understood=
+ by the
+> +kernel on the particular hart being described, even if those extensions =
+may not
+> +be present on all harts in the system. The "hart isa" line is consistent=
+ with
+> +what's returned by __riscv_hwprobe() when querying for that specific CPU.
 
-./tools/net/ynl/cli.py \
-    --spec Documentation/netlink/specs/rt_route.yaml \
-    --dump getroute --json '{"rtm-family": 2, "rtm-table": 254}'
+Thinking about this again, I don't think this is true. hwprobe uses
+has_fpu(), has_vector() etc that interact with Kconfig options but the
+percpu isa bitmap isn't affected by these.
 
-Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
-Reviewed-by: Jacob Keller <jacob.e.keller@intel.com>
----
- Documentation/netlink/specs/rt_route.yaml | 327 ++++++++++++++++++++++
- 1 file changed, 327 insertions(+)
- create mode 100644 Documentation/netlink/specs/rt_route.yaml
 
-diff --git a/Documentation/netlink/specs/rt_route.yaml b/Documentation/netlink/specs/rt_route.yaml
-new file mode 100644
-index 000000000000..f4368be0caed
---- /dev/null
-+++ b/Documentation/netlink/specs/rt_route.yaml
-@@ -0,0 +1,327 @@
-+# SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR BSD-3-Clause)
-+
-+name: rt-route
-+protocol: netlink-raw
-+protonum: 0
-+
-+doc:
-+  Route configuration over rtnetlink.
-+
-+definitions:
-+  -
-+    name: rtm-type
-+    name-prefix: rtn-
-+    type: enum
-+    entries:
-+      - unspec
-+      - unicast
-+      - local
-+      - broadcast
-+      - anycast
-+      - multicast
-+      - blackhole
-+      - unreachable
-+      - prohibit
-+      - throw
-+      - nat
-+      - xresolve
-+  -
-+    name: rtmsg
-+    type: struct
-+    members:
-+      -
-+        name: rtm-family
-+        type: u8
-+      -
-+        name: rtm-dst-len
-+        type: u8
-+      -
-+        name: rtm-src-len
-+        type: u8
-+      -
-+        name: rtm-tos
-+        type: u8
-+      -
-+        name: rtm-table
-+        type: u8
-+      -
-+        name: rtm-protocol
-+        type: u8
-+      -
-+        name: rtm-scope
-+        type: u8
-+      -
-+        name: rtm-type
-+        type: u8
-+        enum: rtm-type
-+      -
-+        name: rtm-flags
-+        type: u32
-+  -
-+    name: rta-cacheinfo
-+    type: struct
-+    members:
-+      -
-+        name: rta-clntref
-+        type: u32
-+      -
-+        name: rta-lastuse
-+        type: u32
-+      -
-+        name: rta-expires
-+        type: u32
-+      -
-+        name: rta-error
-+        type: u32
-+      -
-+        name: rta-used
-+        type: u32
-+
-+attribute-sets:
-+  -
-+    name: route-attrs
-+    attributes:
-+      -
-+        name: rta-dst
-+        type: binary
-+        display-hint: ipv4
-+      -
-+        name: rta-src
-+        type: binary
-+        display-hint: ipv4
-+      -
-+        name: rta-iif
-+        type: u32
-+      -
-+        name: rta-oif
-+        type: u32
-+      -
-+        name: rta-gateway
-+        type: binary
-+        display-hint: ipv4
-+      -
-+        name: rta-priority
-+        type: u32
-+      -
-+        name: rta-prefsrc
-+        type: binary
-+        display-hint: ipv4
-+      -
-+        name: rta-metrics
-+        type: nest
-+        nested-attributes: rta-metrics
-+      -
-+        name: rta-multipath
-+        type: binary
-+      -
-+        name: rta-protoinfo # not used
-+        type: binary
-+      -
-+        name: rta-flow
-+        type: u32
-+      -
-+        name: rta-cacheinfo
-+        type: binary
-+        struct: rta-cacheinfo
-+      -
-+        name: rta-session # not used
-+        type: binary
-+      -
-+        name: rta-mp-algo # not used
-+        type: binary
-+      -
-+        name: rta-table
-+        type: u32
-+      -
-+        name: rta-mark
-+        type: u32
-+      -
-+        name: rta-mfc-stats
-+        type: binary
-+      -
-+        name: rta-via
-+        type: binary
-+      -
-+        name: rta-newdst
-+        type: binary
-+      -
-+        name: rta-pref
-+        type: u8
-+      -
-+        name: rta-encap-type
-+        type: u16
-+      -
-+        name: rta-encap
-+        type: binary # tunnel specific nest
-+      -
-+        name: rta-expires
-+        type: u32
-+      -
-+        name: rta-pad
-+        type: binary
-+      -
-+        name: rta-uid
-+        type: u32
-+      -
-+        name: rta-ttl-propagate
-+        type: u8
-+      -
-+        name: rta-ip-proto
-+        type: u8
-+      -
-+        name: rta-sport
-+        type: u16
-+      -
-+        name: rta-dport
-+        type: u16
-+      -
-+        name: rta-nh-id
-+        type: u32
-+  -
-+    name: rta-metrics
-+    attributes:
-+      -
-+        name: rtax-unspec
-+        type: unused
-+        value: 0
-+      -
-+        name: rtax-lock
-+        type: u32
-+      -
-+        name: rtax-mtu
-+        type: u32
-+      -
-+        name: rtax-window
-+        type: u32
-+      -
-+        name: rtax-rtt
-+        type: u32
-+      -
-+        name: rtax-rttvar
-+        type: u32
-+      -
-+        name: rtax-ssthresh
-+        type: u32
-+      -
-+        name: rtax-cwnd
-+        type: u32
-+      -
-+        name: rtax-advmss
-+        type: u32
-+      -
-+        name: rtax-reordering
-+        type: u32
-+      -
-+        name: rtax-hoplimit
-+        type: u32
-+      -
-+        name: rtax-initcwnd
-+        type: u32
-+      -
-+        name: rtax-features
-+        type: u32
-+      -
-+        name: rtax-rto-min
-+        type: u32
-+      -
-+        name: rtax-initrwnd
-+        type: u32
-+      -
-+        name: rtax-quickack
-+        type: u32
-+      -
-+        name: rtax-cc-algo
-+        type: string
-+      -
-+        name: rtax-fastopen-no-cookie
-+        type: u32
-+
-+operations:
-+  enum-model: directional
-+  list:
-+    -
-+      name: getroute
-+      doc: Dump route information.
-+      attribute-set: route-attrs
-+      fixed-header: rtmsg
-+      do:
-+        request:
-+          value: 26
-+          attributes:
-+            - rtm-family
-+            - rta-src
-+            - rtm-src-len
-+            - rta-dst
-+            - rtm-dst-len
-+            - rta-iif
-+            - rta-oif
-+            - rta-ip-proto
-+            - rta-sport
-+            - rta-dport
-+            - rta-mark
-+            - rta-uid
-+        reply:
-+          value: 24
-+          attributes: &all-route-attrs
-+            - rtm-family
-+            - rtm-dst-len
-+            - rtm-src-len
-+            - rtm-tos
-+            - rtm-table
-+            - rtm-protocol
-+            - rtm-scope
-+            - rtm-type
-+            - rtm-flags
-+            - rta-dst
-+            - rta-src
-+            - rta-iif
-+            - rta-oif
-+            - rta-gateway
-+            - rta-priority
-+            - rta-prefsrc
-+            - rta-metrics
-+            - rta-multipath
-+            - rta-flow
-+            - rta-cacheinfo
-+            - rta-table
-+            - rta-mark
-+            - rta-mfc-stats
-+            - rta-via
-+            - rta-newdst
-+            - rta-pref
-+            - rta-encap-type
-+            - rta-encap
-+            - rta-expires
-+            - rta-pad
-+            - rta-uid
-+            - rta-ttl-propagate
-+            - rta-ip-proto
-+            - rta-sport
-+            - rta-dport
-+            - rta-nh-id
-+      dump:
-+        request:
-+          value: 26
-+          attributes:
-+            - rtm-family
-+        reply:
-+          value: 24
-+          attributes: *all-route-attrs
-+    -
-+      name: newroute
-+      doc: Create a new route
-+      attribute-set: route-attrs
-+      fixed-header: rtmsg
-+      do:
-+        request:
-+          value: 24
-+          attributes: *all-route-attrs
-+    -
-+      name: delroute
-+      doc: Delete an existing route
-+      attribute-set: route-attrs
-+      fixed-header: rtmsg
-+      do:
-+        request:
-+          value: 25
-+          attributes: *all-route-attrs
--- 
-2.39.2 (Apple Git-143)
+> +
+>  Misaligned accesses
+>  -------------------
+> =20
+> diff --git a/arch/riscv/kernel/cpu.c b/arch/riscv/kernel/cpu.c
+> index 1acf3679600d..6264b7b94945 100644
+> --- a/arch/riscv/kernel/cpu.c
+> +++ b/arch/riscv/kernel/cpu.c
+> @@ -197,9 +197,8 @@ arch_initcall(riscv_cpuinfo_init);
+> =20
+>  #ifdef CONFIG_PROC_FS
+> =20
+> -static void print_isa(struct seq_file *f)
+> +static void print_isa(struct seq_file *f, const unsigned long *isa_bitma=
+p)
+>  {
+> -	seq_puts(f, "isa\t\t: ");
+> =20
+>  	if (IS_ENABLED(CONFIG_32BIT))
+>  		seq_write(f, "rv32", 4);
+> @@ -207,7 +206,7 @@ static void print_isa(struct seq_file *f)
+>  		seq_write(f, "rv64", 4);
+> =20
+>  	for (int i =3D 0; i < riscv_isa_ext_count; i++) {
+> -		if (!__riscv_isa_extension_available(NULL, riscv_isa_ext[i].id))
+> +		if (!__riscv_isa_extension_available(isa_bitmap, riscv_isa_ext[i].id))
+>  			continue;
+> =20
+>  		/* Only multi-letter extensions are split by underscores */
+> @@ -271,7 +270,15 @@ static int c_show(struct seq_file *m, void *v)
+> =20
+>  	seq_printf(m, "processor\t: %lu\n", cpu_id);
+>  	seq_printf(m, "hart\t\t: %lu\n", cpuid_to_hartid_map(cpu_id));
+> -	print_isa(m);
+> +
+> +	/*
+> +	 * For historical raisins, the isa: line is limited to the lowest common
+> +	 * denominator of extensions supported across all harts. A true list of
+> +	 * extensions supported on this hart is printed later in the hart_isa:
+> +	 * line.
+> +	 */
+> +	seq_puts(m, "isa\t\t: ");
+> +	print_isa(m, NULL);
+>  	print_mmu(m);
+> =20
+>  	if (acpi_disabled) {
+> @@ -287,6 +294,13 @@ static int c_show(struct seq_file *m, void *v)
+>  	seq_printf(m, "mvendorid\t: 0x%lx\n", ci->mvendorid);
+>  	seq_printf(m, "marchid\t\t: 0x%lx\n", ci->marchid);
+>  	seq_printf(m, "mimpid\t\t: 0x%lx\n", ci->mimpid);
+> +
+> +	/*
+> +	 * Print the ISA extensions specific to this hart, which may show
+> +	 * additional extensions not present across all harts.
+> +	 */
+> +	seq_puts(m, "hart isa\t: ");
+> +	print_isa(m, hart_isa[cpu_id].isa);
+>  	seq_puts(m, "\n");
+> =20
+>  	return 0;
+> --=20
+> 2.34.1
+>=20
 
+--qk1i/rPebejGNd0P
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZOdK9gAKCRB4tDGHoIJi
+0liiAP4gl0tcLeJen0DrqHl7mUfFjKLV+rxAVZFw6sBF8FRmaQEAu0Z51JiElsPS
+KyIRZMIWB/CZJgPwPVBoToRKWWbtSAA=
+=u5eg
+-----END PGP SIGNATURE-----
+
+--qk1i/rPebejGNd0P--
