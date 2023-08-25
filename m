@@ -2,131 +2,166 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B4C1978873A
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Aug 2023 14:28:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1C4E5788753
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Aug 2023 14:29:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233288AbjHYM1p (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Aug 2023 08:27:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49246 "EHLO
+        id S244803AbjHYM3X (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Aug 2023 08:29:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49280 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244849AbjHYM1T (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Aug 2023 08:27:19 -0400
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ED0DE2686;
-        Fri, 25 Aug 2023 05:26:48 -0700 (PDT)
-Received: from localhost.localdomain (unknown [171.76.83.99])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-        (No client certificate requested)
-        (Authenticated sender: vignesh)
-        by madras.collabora.co.uk (Postfix) with ESMTPSA id 45CC9660728F;
-        Fri, 25 Aug 2023 13:25:34 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-        s=mail; t=1692966340;
-        bh=rgpvSeZGKF3SGFM/V9KInphj6CaJZryw7a6Wsi7NMHw=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=YUsazqsdd7YYCLplGD/KDgVV9qU8B7rbCgTNMJwelCqQvmG/vZMNdJXYqZEECL/nL
-         EOVV27wzXS6bnAmH2uFcQXqMxz+Dmmq1srKqTdUThEhbUieSsk4iR17OP1aPOn4l0+
-         a5EflmDqvEa2IEboOYZ3DW1zpi9qiaY6mrO0BDCzsyuYe3gv+j0z5FLJtXhPKUOeQ7
-         +bYxU8nK3WN/ucLD9QwgOKn2nMrdDM3qO5Xb5g+FNzQv78xls3x6jMwOttal7xKcOe
-         kQAtjS5VksTlpXSkYKKQ08dDod9zl4c/GXZnUHqwxSYvaCcSAdecYRLqqlEUHutoWK
-         uN3CmS1+MkWKg==
-From:   Vignesh Raman <vignesh.raman@collabora.com>
-To:     dri-devel@lists.freedesktop.org
-Cc:     helen.koike@collabora.com, guilherme.gallo@collabora.com,
-        sergi.blanch.torne@collabora.com, david.heidelberg@collabora.com,
-        daniels@collabora.com, emma@anholt.net, robclark@freedesktop.org,
-        gustavo.padovan@collabora.com, robdclark@google.com,
-        anholt@google.com, maarten.lankhorst@linux.intel.com,
-        mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
-        daniel@ffwll.ch, corbet@lwn.net, matthias.bgg@gmail.com,
-        angelogioacchino.delregno@collabora.com, neil.armstrong@linaro.org,
-        khilman@baylibre.com, jbrunet@baylibre.com,
-        martin.blumenstingl@googlemail.com, heiko@sntech.de,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org,
-        linux-mediatek@lists.infradead.org,
-        linux-amlogic@lists.infradead.org,
-        linux-rockchip@lists.infradead.org
-Subject: [PATCH 6/6] drm: ci: Remove rules
-Date:   Fri, 25 Aug 2023 17:54:35 +0530
-Message-Id: <20230825122435.316272-7-vignesh.raman@collabora.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230825122435.316272-1-vignesh.raman@collabora.com>
-References: <20230825122435.316272-1-vignesh.raman@collabora.com>
+        with ESMTP id S244819AbjHYM24 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Aug 2023 08:28:56 -0400
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com [IPv6:2a00:1450:4864:20::331])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9990D213C;
+        Fri, 25 Aug 2023 05:28:26 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id 5b1f17b1804b1-3fef56f7248so7476855e9.3;
+        Fri, 25 Aug 2023 05:28:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1692966487; x=1693571287;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Wxh0TqxVtXcaHq0ylMyXcEO5QFWRVlnRQVhYAyUGSSM=;
+        b=pOlyHx6fkbCvacawyams8ZM3EuF5a/sPJNj+VQeXjESUdEyR8MZDlkn/3esa+MaWQS
+         UGzcJg5AmpI6z0cSE1QKvLCRsd2xG5EQnuTl9x+vSST7VHotzn0tRBl6H6e/H5q3COCY
+         rcdBkEdxvGmektbRnwllCzxTx+6od4LFTPwb8h+wH9F092LYNP2sNh/82QQ0MGUSWwgH
+         0/JNJ06c8X+iB0ycLsmaBhcbhzj8ifjeMQcyLqr7MCjwSyxm9hQhoFpHq9E9ORuYvc2i
+         bHqfduk1OqzcDcr7a6eNppQxQYF1zIoVywjM7CSfbHQy5J8LdJu6OvJoxNkKLz1WBwwS
+         fe7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692966487; x=1693571287;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Wxh0TqxVtXcaHq0ylMyXcEO5QFWRVlnRQVhYAyUGSSM=;
+        b=jpu/r7/A5vRnxkDZQN2v9PqUEBIiBcqmHXq+ZmUX+V5oEV97ir/s1M/qJmq8aIDdqO
+         mkMCFv+zB8TjDljXdcUkX3pFWfGwZDlaFK4a5X+NCnuJSDYAkpW9lZGbcf226x6mac0s
+         1RNPIttY+sshxbeTB0NjrpVm15MUx72AIBFjEjyjs1pNZF5G9ndeYlBJWzrfzMzmhCiO
+         VkmWev9nXZ5jn38fvrXyUdFJ1V4krgYn/sxCbsJW8F0+o7Ew6243DnCgd+Zh4kd7xI41
+         ynpE6RZ5MSKFwB8V2gNBHiV3PFv0n1E9YiIesHiRWxPWHErqWY0NL0s/DbLKcyzBP6h1
+         j07A==
+X-Gm-Message-State: AOJu0YyIi7ylBebfdDGAVN6uK2WCO3e49jnnAcLxQkUD6tqC8UCZdY42
+        GuHuT5aoI8pUnXN4HeZqYu+eX+AmoEE+Wg==
+X-Google-Smtp-Source: AGHT+IEiThaZDDRW8eH1RMVXmUVcT61Ga0wN1iZ4kGw9Bsg0oay7afRmadpuhLfTio4p6waYawnluQ==
+X-Received: by 2002:a05:600c:3795:b0:400:419c:bbe2 with SMTP id o21-20020a05600c379500b00400419cbbe2mr5325684wmr.24.1692966486483;
+        Fri, 25 Aug 2023 05:28:06 -0700 (PDT)
+Received: from imac.taild7a78.ts.net ([2a02:8010:60a0:0:88fe:5215:b5d:bbee])
+        by smtp.gmail.com with ESMTPSA id 16-20020a05600c229000b003fff96bb62csm2089561wmf.16.2023.08.25.05.28.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Aug 2023 05:28:05 -0700 (PDT)
+From:   Donald Hunter <donald.hunter@gmail.com>
+To:     netdev@vger.kernel.org, Jakub Kicinski <kuba@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Stanislav Fomichev <sdf@google.com>,
+        Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>
+Cc:     donald.hunter@redhat.com, Donald Hunter <donald.hunter@gmail.com>
+Subject: [PATCH net-next v6 00/12] tools/net/ynl: Add support for netlink-raw families
+Date:   Fri, 25 Aug 2023 13:27:43 +0100
+Message-ID: <20230825122756.7603-1-donald.hunter@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Remove the rules from the following jobs, as the issues noted in the
-TODO comments have been resolved. This will ensure that these jobs
-are now included and executed as part of the CI/CD pipeline.
+This patchset adds support for netlink-raw families such as rtnetlink.
 
-msm:apq8016:
-TODO: current issue: it is not fiding the NFS root. Fix and remove this rule.
+Patch 1 fixes a typo in existing schemas
+Patch 2 contains the schema definition
+Patches 3 & 4 update the schema documentation
+Patches 5 - 9 extends ynl
+Patches 10 - 12 add several netlink-raw specs
 
-mediatek:mt8173:
-TODO: current issue: device is hanging. Fix and remove this rule.
+The netlink-raw schema is very similar to genetlink-legacy and I thought
+about making the changes there and symlinking to it. On balance I
+thought that might be problematic for accurate schema validation.
 
-virtio_gpu:none:
-TODO: current issue: malloc(): corrupted top size. Fix and remove this rule.
+rtnetlink doesn't seem to fit into unified or directional message
+enumeration models. It seems like an 'explicit' model would be useful,
+to force the schema author to specify the message ids directly.
 
-Signed-off-by: Vignesh Raman <vignesh.raman@collabora.com>
----
- drivers/gpu/drm/ci/gitlab-ci.yml | 2 +-
- drivers/gpu/drm/ci/test.yml      | 9 ---------
- 2 files changed, 1 insertion(+), 10 deletions(-)
+There is not yet support for notifications because ynl currently doesn't
+support defining 'event' properties on a 'do' operation. The message ids
+are shared so ops need to be both sync and async. I plan to look at this
+in a future patch.
 
-diff --git a/drivers/gpu/drm/ci/gitlab-ci.yml b/drivers/gpu/drm/ci/gitlab-ci.yml
-index 2c4df53f5dfe..d2aac4404914 100644
---- a/drivers/gpu/drm/ci/gitlab-ci.yml
-+++ b/drivers/gpu/drm/ci/gitlab-ci.yml
-@@ -248,4 +248,4 @@ sanity:
- 
- # Jobs that need to pass before spending hardware resources on further testing
- .required-for-hardware-jobs:
--  needs: []
-\ No newline at end of file
-+  needs: []
-diff --git a/drivers/gpu/drm/ci/test.yml b/drivers/gpu/drm/ci/test.yml
-index d85add39f425..1771af21e2d9 100644
---- a/drivers/gpu/drm/ci/test.yml
-+++ b/drivers/gpu/drm/ci/test.yml
-@@ -108,9 +108,6 @@ msm:apq8016:
-     RUNNER_TAG: google-freedreno-db410c
-   script:
-     - ./install/bare-metal/fastboot.sh
--  rules:
--    # TODO: current issue: it is not fiding the NFS root. Fix and remove this rule.
--    - when: never
- 
- msm:apq8096:
-   extends:
-@@ -273,9 +270,6 @@ mediatek:mt8173:
-     DEVICE_TYPE: mt8173-elm-hana
-     GPU_VERSION: mt8173
-     RUNNER_TAG: mesa-ci-x86-64-lava-mt8173-elm-hana
--  rules:
--    # TODO: current issue: device is hanging. Fix and remove this rule.
--    - when: never
- 
- mediatek:mt8183:
-   extends:
-@@ -333,6 +327,3 @@ virtio_gpu:none:
-     - debian/x86_64_test-gl
-     - testing:x86_64
-     - igt:x86_64
--  rules:
--    # TODO: current issue: malloc(): corrupted top size. Fix and remove this rule.
--    - when: never
-\ No newline at end of file
+The link and route messages contain different nested attributes
+dependent on the type of link or route. Decoding these will need some
+kind of attr-space selection that uses the value of another attribute as
+the selector key. These nested attributes have been left with type
+'binary' for now.
+
+v5 -> v6:
+  - Remove explicit value definitions from link-attrs in rt_link.yaml
+
+v4 -> v5:
+  - Fix schema id in netlink-raw schema
+  - Remove doc references to genetlink from netlink-raw schema
+  - Add missing whitespace between classes in ynl.py
+
+v3 -> v4:
+  - Fix incorrect var name in handle_ntf
+  - Update rt_link spec to include operation attributes
+  - Update rt_route spec to refine operation attributes
+
+v2 -> v3:
+  - Fix typo in existing schemas
+  - Rework fixed_header code to fix extack parsing
+  - Add support for CREATE, EXCL, REPLACE and APPEND, needed by rt_route
+
+v1 -> v2:
+  - Put mcast-group changes in separate patch
+  - Put decode_fixed_header refactoring in separate patch
+  - Avoid refactoring decode_enum
+  - Rename NetlinkProtocolFamily -> NetlinkProtocol and
+    GenlProtocolFamily -> GenlProtocol and store in self.nlproto
+  - Add spec for rt link.
+
+Donald Hunter (12):
+  doc/netlink: Fix typo in genetlink-* schemas
+  doc/netlink: Add a schema for netlink-raw families
+  doc/netlink: Update genetlink-legacy documentation
+  doc/netlink: Document the netlink-raw schema extensions
+  tools/ynl: Add mcast-group schema parsing to ynl
+  tools/net/ynl: Fix extack parsing with fixed header genlmsg
+  tools/net/ynl: Add support for netlink-raw families
+  tools/net/ynl: Implement nlattr array-nest decoding in ynl
+  tools/net/ynl: Add support for create flags
+  doc/netlink: Add spec for rt addr messages
+  doc/netlink: Add spec for rt link messages
+  doc/netlink: Add spec for rt route messages
+
+ Documentation/core-api/netlink.rst            |    9 +-
+ Documentation/netlink/genetlink-c.yaml        |    2 +-
+ Documentation/netlink/genetlink-legacy.yaml   |    2 +-
+ Documentation/netlink/netlink-raw.yaml        |  410 +++++
+ Documentation/netlink/specs/rt_addr.yaml      |  179 +++
+ Documentation/netlink/specs/rt_link.yaml      | 1432 +++++++++++++++++
+ Documentation/netlink/specs/rt_route.yaml     |  327 ++++
+ .../netlink/genetlink-legacy.rst              |   26 +-
+ Documentation/userspace-api/netlink/index.rst |    1 +
+ .../userspace-api/netlink/netlink-raw.rst     |   58 +
+ Documentation/userspace-api/netlink/specs.rst |   13 +
+ tools/net/ynl/cli.py                          |   12 +-
+ tools/net/ynl/lib/__init__.py                 |    4 +-
+ tools/net/ynl/lib/nlspec.py                   |   31 +
+ tools/net/ynl/lib/ynl.py                      |  198 ++-
+ 15 files changed, 2632 insertions(+), 72 deletions(-)
+ create mode 100644 Documentation/netlink/netlink-raw.yaml
+ create mode 100644 Documentation/netlink/specs/rt_addr.yaml
+ create mode 100644 Documentation/netlink/specs/rt_link.yaml
+ create mode 100644 Documentation/netlink/specs/rt_route.yaml
+ create mode 100644 Documentation/userspace-api/netlink/netlink-raw.rst
+
 -- 
-2.40.1
+2.41.0
 
