@@ -2,430 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3B29078875F
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Aug 2023 14:29:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F3D497888C9
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Aug 2023 15:38:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244868AbjHYM3a (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Aug 2023 08:29:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46434 "EHLO
+        id S234499AbjHYNiO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Aug 2023 09:38:14 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56740 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244936AbjHYM3Q (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Aug 2023 08:29:16 -0400
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com [IPv6:2a00:1450:4864:20::335])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B2FFA2120;
-        Fri, 25 Aug 2023 05:28:55 -0700 (PDT)
-Received: by mail-wm1-x335.google.com with SMTP id 5b1f17b1804b1-400a087b0bfso7495285e9.2;
-        Fri, 25 Aug 2023 05:28:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692966503; x=1693571303;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vpwPycZDfvKtBkur6NB+pKaDkgLkYk3Zg/JjaDmqaGc=;
-        b=eTWkr2pylSmiuFCfFkJZcyp9biJsLUE5m03CsOk9GmqoYSj83QTxnxsyBPIRrTQ9cS
-         qkpDOmhgfsgzDBi6BO6kuElygLSXyW+cF6oN3m1p5iS/CrUDy9c0XxV7kRjmP7g0jrFb
-         XHk6WIhFr0JUmp92rcynpbCrwdiDdXHjCiwcBPIS1fPGNexzYeiqcUS4Q+ZIsvWtL6ka
-         wAnhGba4g1Gk2rz6wcmuP1YRqdDsWwV3IHKnwB4uAYZUMs3mk48CondHVQHgHoMzR/iE
-         IHRpNkEsCk5dcnvoHo926ei+7Ag8BKSD8WAOC+wjHfWK53Iaj81TwkfxLJxyo3sYUIjI
-         hVGA==
+        with ESMTP id S232572AbjHYNh6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Aug 2023 09:37:58 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 01936213B
+        for <linux-doc@vger.kernel.org>; Fri, 25 Aug 2023 06:36:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1692970583;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=adBV5QdoIxMd11EUvCs5qDeDIAAmKS8CbHIBdJKT2cc=;
+        b=GgzhEudvwkwUISR+ZdSFn6DaeL5nf6d4URfY3mdof6YCrmtPs3tUkV8z/LYlOB4snLVv/S
+        k4T5sLgnHFB4YjgYEvKFZY0bCvqI41hN+MZ4HaEPjBe7vuIPhfcDS1TU2uPLI9fwTvYPAS
+        gYX+7Hsibqv5koaN30oN+OURwed0i+k=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-651-3aOaglZRObqjTREfWm_vgA-1; Fri, 25 Aug 2023 09:36:21 -0400
+X-MC-Unique: 3aOaglZRObqjTREfWm_vgA-1
+Received: by mail-wr1-f70.google.com with SMTP id ffacd0b85a97d-31aecb86dacso657177f8f.1
+        for <linux-doc@vger.kernel.org>; Fri, 25 Aug 2023 06:36:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692966503; x=1693571303;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=vpwPycZDfvKtBkur6NB+pKaDkgLkYk3Zg/JjaDmqaGc=;
-        b=jaMDHEYF2CV9mYfsQh0tqtQ5jTtyPMeqNP8hRXUj3YxwzJKxME7RifwZV14mYygByA
-         GZ4LoG2kci7V9U/1l8VI101Ri46B9rWue78bIIkBEjfRZb1aUgk41tZtgW5vvUsWRpWS
-         1b4RRDgTtOZ61DYEncszq89jk1g0YfYj+wAuAg+ZcuwvrC4mPKqmeF4UodKxGJcuWLOu
-         p/WC7ULyRDGdkOpkj7/eTy/aPJ+Kbq8dQ/sr6xpGnyD851Sw37m8pZGZQR1ngIXTyj51
-         iqmtJyE52auXgyapIxMe1m7phC0uAbpumdoUt3fcWzUHc4ocoDd1wOPAYLQ6YsItza3K
-         W2XQ==
-X-Gm-Message-State: AOJu0YyQnV1kgmFDzyOVedKBCodm1F+BjsHnAJZYmTrYHXz/AXsY49EH
-        LQPXJvf1E1Ux6PlaylfhFjfqUOsBvdo5Ww==
-X-Google-Smtp-Source: AGHT+IHmnPo2PRIhSBpGBkhersl8EVnDxcwjKMp8HtBI+PjacXZg27OMtBN3B3MeAAMhWo9lP0dpKA==
-X-Received: by 2002:a05:600c:3795:b0:400:419c:bbe2 with SMTP id o21-20020a05600c379500b00400419cbbe2mr5326181wmr.24.1692966502653;
-        Fri, 25 Aug 2023 05:28:22 -0700 (PDT)
-Received: from imac.taild7a78.ts.net ([2a02:8010:60a0:0:88fe:5215:b5d:bbee])
-        by smtp.gmail.com with ESMTPSA id 16-20020a05600c229000b003fff96bb62csm2089561wmf.16.2023.08.25.05.28.21
+        d=1e100.net; s=20221208; t=1692970580; x=1693575380;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=adBV5QdoIxMd11EUvCs5qDeDIAAmKS8CbHIBdJKT2cc=;
+        b=FdgjpHz1B8QUsN3MSbD/xBzGmRmYfZ1T/m9TnprulHA277GuhtTAwnct7zKJlWKQ+c
+         GsLeEEh69TtoKHN527AGkrtTv32gqYj9rjccwTxupGDIxt7W6kqoAVgVM4vwka7RVFrQ
+         OxCwHnS52FOxjsP7cq+mGL1Pl0+Pp5KLm0H9HLb2XC4sKpYMCGj5hff90Bi8JUk/a/Lw
+         1JE6VMotXbJRyO+GehufCVU5Ga2H9SiARsu34bk4S5MIIwa3n191dJtfLDJydnRX3rTe
+         K0Dj/z2z9j8qpcAJfm3QHWIqAK8XtDN8KZaqIT9YdkVTrqc/EXLUlo7Hv/7Y48NZL4P2
+         g+8Q==
+X-Gm-Message-State: AOJu0YyViBBrL+kl6zLuW5G3B8oKXSuAu4hMkyRqBN7VrqY5UhyJCVpc
+        PwU7jqdqf9Lm4otpV+87MXdtAYptg35EbEjUVO4zDwN597wnbLD8bahVi3R2CcZzKNWl9piDkMy
+        9gzyjKO8gP4k+0ZfoBls=
+X-Received: by 2002:a5d:4211:0:b0:31c:769d:287c with SMTP id n17-20020a5d4211000000b0031c769d287cmr3990217wrq.50.1692970580506;
+        Fri, 25 Aug 2023 06:36:20 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IESApNQupeVzOoGH4xg/snp9WaQNwtnffnKK9WmFU7GZsNrMOGWLSfcHEOPViwtO0QwkRmx6A==
+X-Received: by 2002:a5d:4211:0:b0:31c:769d:287c with SMTP id n17-20020a5d4211000000b0031c769d287cmr3990199wrq.50.1692970580113;
+        Fri, 25 Aug 2023 06:36:20 -0700 (PDT)
+Received: from klayman.redhat.com (net-2-34-31-124.cust.vodafonedsl.it. [2.34.31.124])
+        by smtp.gmail.com with ESMTPSA id e11-20020adffd0b000000b0031b2c01f342sm2253915wrr.87.2023.08.25.06.36.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Aug 2023 05:28:22 -0700 (PDT)
-From:   Donald Hunter <donald.hunter@gmail.com>
-To:     netdev@vger.kernel.org, Jakub Kicinski <kuba@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>,
-        Paolo Abeni <pabeni@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        Stanislav Fomichev <sdf@google.com>,
-        Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>
-Cc:     donald.hunter@redhat.com, Donald Hunter <donald.hunter@gmail.com>,
-        Jacob Keller <jacob.e.keller@intel.com>
-Subject: [PATCH net-next v6 12/12] doc/netlink: Add spec for rt route messages
-Date:   Fri, 25 Aug 2023 13:27:55 +0100
-Message-ID: <20230825122756.7603-13-donald.hunter@gmail.com>
+        Fri, 25 Aug 2023 06:36:19 -0700 (PDT)
+From:   Marco Pagani <marpagan@redhat.com>
+To:     Jerome Glisse <jglisse@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jason Gunthorpe <jgg@ziepe.ca>
+Cc:     Marco Pagani <marpagan@redhat.com>,
+        Mika Penttila <mpenttil@redhat.com>, linux-mm@kvack.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] docs/mm: remove references to hmm_mirror ops and clean typos
+Date:   Fri, 25 Aug 2023 15:35:46 +0200
+Message-ID: <20230825133546.249683-1-marpagan@redhat.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230825122756.7603-1-donald.hunter@gmail.com>
-References: <20230825122756.7603-1-donald.hunter@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add schema for rt route with support for getroute, newroute and
-delroute.
+Clean typos and remove the reference to the sync_cpu_device_pagetables()
+callback since all hmm_mirror ops have been removed.
 
-Routes can be dumped with filter attributes like this:
-
-./tools/net/ynl/cli.py \
-    --spec Documentation/netlink/specs/rt_route.yaml \
-    --dump getroute --json '{"rtm-family": 2, "rtm-table": 254}'
-
-Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
-Reviewed-by: Jacob Keller <jacob.e.keller@intel.com>
+Fixes: a22dd506400d ("mm/hmm: remove hmm_mirror and related")
+Signed-off-by: Marco Pagani <marpagan@redhat.com>
+Reviewed-by: Mika Penttilä <mpenttil@redhat.com>
 ---
- Documentation/netlink/specs/rt_route.yaml | 327 ++++++++++++++++++++++
- 1 file changed, 327 insertions(+)
- create mode 100644 Documentation/netlink/specs/rt_route.yaml
+ Documentation/mm/hmm.rst | 11 +----------
+ 1 file changed, 1 insertion(+), 10 deletions(-)
 
-diff --git a/Documentation/netlink/specs/rt_route.yaml b/Documentation/netlink/specs/rt_route.yaml
-new file mode 100644
-index 000000000000..f4368be0caed
---- /dev/null
-+++ b/Documentation/netlink/specs/rt_route.yaml
-@@ -0,0 +1,327 @@
-+# SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR BSD-3-Clause)
-+
-+name: rt-route
-+protocol: netlink-raw
-+protonum: 0
-+
-+doc:
-+  Route configuration over rtnetlink.
-+
-+definitions:
-+  -
-+    name: rtm-type
-+    name-prefix: rtn-
-+    type: enum
-+    entries:
-+      - unspec
-+      - unicast
-+      - local
-+      - broadcast
-+      - anycast
-+      - multicast
-+      - blackhole
-+      - unreachable
-+      - prohibit
-+      - throw
-+      - nat
-+      - xresolve
-+  -
-+    name: rtmsg
-+    type: struct
-+    members:
-+      -
-+        name: rtm-family
-+        type: u8
-+      -
-+        name: rtm-dst-len
-+        type: u8
-+      -
-+        name: rtm-src-len
-+        type: u8
-+      -
-+        name: rtm-tos
-+        type: u8
-+      -
-+        name: rtm-table
-+        type: u8
-+      -
-+        name: rtm-protocol
-+        type: u8
-+      -
-+        name: rtm-scope
-+        type: u8
-+      -
-+        name: rtm-type
-+        type: u8
-+        enum: rtm-type
-+      -
-+        name: rtm-flags
-+        type: u32
-+  -
-+    name: rta-cacheinfo
-+    type: struct
-+    members:
-+      -
-+        name: rta-clntref
-+        type: u32
-+      -
-+        name: rta-lastuse
-+        type: u32
-+      -
-+        name: rta-expires
-+        type: u32
-+      -
-+        name: rta-error
-+        type: u32
-+      -
-+        name: rta-used
-+        type: u32
-+
-+attribute-sets:
-+  -
-+    name: route-attrs
-+    attributes:
-+      -
-+        name: rta-dst
-+        type: binary
-+        display-hint: ipv4
-+      -
-+        name: rta-src
-+        type: binary
-+        display-hint: ipv4
-+      -
-+        name: rta-iif
-+        type: u32
-+      -
-+        name: rta-oif
-+        type: u32
-+      -
-+        name: rta-gateway
-+        type: binary
-+        display-hint: ipv4
-+      -
-+        name: rta-priority
-+        type: u32
-+      -
-+        name: rta-prefsrc
-+        type: binary
-+        display-hint: ipv4
-+      -
-+        name: rta-metrics
-+        type: nest
-+        nested-attributes: rta-metrics
-+      -
-+        name: rta-multipath
-+        type: binary
-+      -
-+        name: rta-protoinfo # not used
-+        type: binary
-+      -
-+        name: rta-flow
-+        type: u32
-+      -
-+        name: rta-cacheinfo
-+        type: binary
-+        struct: rta-cacheinfo
-+      -
-+        name: rta-session # not used
-+        type: binary
-+      -
-+        name: rta-mp-algo # not used
-+        type: binary
-+      -
-+        name: rta-table
-+        type: u32
-+      -
-+        name: rta-mark
-+        type: u32
-+      -
-+        name: rta-mfc-stats
-+        type: binary
-+      -
-+        name: rta-via
-+        type: binary
-+      -
-+        name: rta-newdst
-+        type: binary
-+      -
-+        name: rta-pref
-+        type: u8
-+      -
-+        name: rta-encap-type
-+        type: u16
-+      -
-+        name: rta-encap
-+        type: binary # tunnel specific nest
-+      -
-+        name: rta-expires
-+        type: u32
-+      -
-+        name: rta-pad
-+        type: binary
-+      -
-+        name: rta-uid
-+        type: u32
-+      -
-+        name: rta-ttl-propagate
-+        type: u8
-+      -
-+        name: rta-ip-proto
-+        type: u8
-+      -
-+        name: rta-sport
-+        type: u16
-+      -
-+        name: rta-dport
-+        type: u16
-+      -
-+        name: rta-nh-id
-+        type: u32
-+  -
-+    name: rta-metrics
-+    attributes:
-+      -
-+        name: rtax-unspec
-+        type: unused
-+        value: 0
-+      -
-+        name: rtax-lock
-+        type: u32
-+      -
-+        name: rtax-mtu
-+        type: u32
-+      -
-+        name: rtax-window
-+        type: u32
-+      -
-+        name: rtax-rtt
-+        type: u32
-+      -
-+        name: rtax-rttvar
-+        type: u32
-+      -
-+        name: rtax-ssthresh
-+        type: u32
-+      -
-+        name: rtax-cwnd
-+        type: u32
-+      -
-+        name: rtax-advmss
-+        type: u32
-+      -
-+        name: rtax-reordering
-+        type: u32
-+      -
-+        name: rtax-hoplimit
-+        type: u32
-+      -
-+        name: rtax-initcwnd
-+        type: u32
-+      -
-+        name: rtax-features
-+        type: u32
-+      -
-+        name: rtax-rto-min
-+        type: u32
-+      -
-+        name: rtax-initrwnd
-+        type: u32
-+      -
-+        name: rtax-quickack
-+        type: u32
-+      -
-+        name: rtax-cc-algo
-+        type: string
-+      -
-+        name: rtax-fastopen-no-cookie
-+        type: u32
-+
-+operations:
-+  enum-model: directional
-+  list:
-+    -
-+      name: getroute
-+      doc: Dump route information.
-+      attribute-set: route-attrs
-+      fixed-header: rtmsg
-+      do:
-+        request:
-+          value: 26
-+          attributes:
-+            - rtm-family
-+            - rta-src
-+            - rtm-src-len
-+            - rta-dst
-+            - rtm-dst-len
-+            - rta-iif
-+            - rta-oif
-+            - rta-ip-proto
-+            - rta-sport
-+            - rta-dport
-+            - rta-mark
-+            - rta-uid
-+        reply:
-+          value: 24
-+          attributes: &all-route-attrs
-+            - rtm-family
-+            - rtm-dst-len
-+            - rtm-src-len
-+            - rtm-tos
-+            - rtm-table
-+            - rtm-protocol
-+            - rtm-scope
-+            - rtm-type
-+            - rtm-flags
-+            - rta-dst
-+            - rta-src
-+            - rta-iif
-+            - rta-oif
-+            - rta-gateway
-+            - rta-priority
-+            - rta-prefsrc
-+            - rta-metrics
-+            - rta-multipath
-+            - rta-flow
-+            - rta-cacheinfo
-+            - rta-table
-+            - rta-mark
-+            - rta-mfc-stats
-+            - rta-via
-+            - rta-newdst
-+            - rta-pref
-+            - rta-encap-type
-+            - rta-encap
-+            - rta-expires
-+            - rta-pad
-+            - rta-uid
-+            - rta-ttl-propagate
-+            - rta-ip-proto
-+            - rta-sport
-+            - rta-dport
-+            - rta-nh-id
-+      dump:
-+        request:
-+          value: 26
-+          attributes:
-+            - rtm-family
-+        reply:
-+          value: 24
-+          attributes: *all-route-attrs
-+    -
-+      name: newroute
-+      doc: Create a new route
-+      attribute-set: route-attrs
-+      fixed-header: rtmsg
-+      do:
-+        request:
-+          value: 24
-+          attributes: *all-route-attrs
-+    -
-+      name: delroute
-+      doc: Delete an existing route
-+      attribute-set: route-attrs
-+      fixed-header: rtmsg
-+      do:
-+        request:
-+          value: 25
-+          attributes: *all-route-attrs
+diff --git a/Documentation/mm/hmm.rst b/Documentation/mm/hmm.rst
+index 9aa512c3a12c..1e0f2b2f58fb 100644
+--- a/Documentation/mm/hmm.rst
++++ b/Documentation/mm/hmm.rst
+@@ -163,16 +163,7 @@ use::
+ 
+ It will trigger a page fault on missing or read-only entries if write access is
+ requested (see below). Page faults use the generic mm page fault code path just
+-like a CPU page fault.
+-
+-Both functions copy CPU page table entries into their pfns array argument. Each
+-entry in that array corresponds to an address in the virtual range. HMM
+-provides a set of flags to help the driver identify special CPU page table
+-entries.
+-
+-Locking within the sync_cpu_device_pagetables() callback is the most important
+-aspect the driver must respect in order to keep things properly synchronized.
+-The usage pattern is::
++like a CPU page fault. The usage pattern is::
+ 
+  int driver_populate_range(...)
+  {
 -- 
 2.41.0
 
