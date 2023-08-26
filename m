@@ -2,537 +2,165 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8F908789850
-	for <lists+linux-doc@lfdr.de>; Sat, 26 Aug 2023 19:01:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 554277898C4
+	for <lists+linux-doc@lfdr.de>; Sat, 26 Aug 2023 21:12:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229571AbjHZRAy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 26 Aug 2023 13:00:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47280 "EHLO
+        id S229689AbjHZTL3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 26 Aug 2023 15:11:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55112 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229518AbjHZRA2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 26 Aug 2023 13:00:28 -0400
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com [209.85.222.179])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 870CDD2;
-        Sat, 26 Aug 2023 10:00:25 -0700 (PDT)
-Received: by mail-qk1-f179.google.com with SMTP id af79cd13be357-76ef935abaeso103818585a.2;
-        Sat, 26 Aug 2023 10:00:25 -0700 (PDT)
+        with ESMTP id S229920AbjHZTL2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 26 Aug 2023 15:11:28 -0400
+Received: from mail-lj1-x244.google.com (mail-lj1-x244.google.com [IPv6:2a00:1450:4864:20::244])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 309A1E58
+        for <linux-doc@vger.kernel.org>; Sat, 26 Aug 2023 12:11:26 -0700 (PDT)
+Received: by mail-lj1-x244.google.com with SMTP id 38308e7fff4ca-2bceb02fd2bso28857221fa.1
+        for <linux-doc@vger.kernel.org>; Sat, 26 Aug 2023 12:11:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1693077084; x=1693681884;
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=20PRx02HJnVAIbBegfbEzAt6FGsymy7uvpJpjNQVnno=;
+        b=qHTzJqgkulOXFwxUnaAILzOYLVg5ghBYehSwlQUZOtXJ2fKlFTYq4TRd3uOwQ8NgLY
+         +J8msKTeEqJGiKfdXb+7h7dHG2ofcSVQOg72GbLxCwqfri0KnvXj8aGsksD8XlQPNNRD
+         9U/U8LIzw7TNsAha2F1rjJIJ4ztJukTktHXeB+r6HBHvkDCOr7ixEu1Zun4GCIc7NDTt
+         ffXjKw+fRf4NXsxI7A5/J+dCuq03RUP7RFDo66WBGL7u+d5D7C9yFOjshn6zuKApm42O
+         tx3957J+TWRWDeblC9b2ELV8bc36USQYaKrLp3MCIKcLuR7APFQExy7jU1gEe/M4yG/j
+         Uu6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693069224; x=1693674024;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=5oiW9Lm2nWMWfvvlDIk1gze3Y3xzku1+fmafGi1nUCs=;
-        b=EURJESvN07W6rRRlXi5F9Zwxrn6WFdNadH0xJCjUiq5Upx8j9uqbJyvyBuK409xRbQ
-         ydF2eEbqXMwEXJtYlVl0wB3LzPvArt5wSV1CbmVcs+aOaPLu4qGri75LhjLKSNMy2aF0
-         czPqH4r1KZqiJaVRcwUtvNe3OMvI0czNWau0lKtHcKHi4eilZdBTgZJbeZIp3epdDvT0
-         IevDTn9sRNyjBECsivzIbpFKL9/xGxOCsj68Vixsc/Jihq4fvYbhdaHVVe1m7EvEFMs0
-         BR1msCUvg4EKRwsU9JKOLYtVxsM+yvSTy2SGMCIDhyRoOTGePqxR42SNw7aNI5cX9Rky
-         O+pA==
-X-Gm-Message-State: AOJu0YypxaD1PEm50X53t0pPnfCJ6yNcnlwT83k1V0YlBLV85UsHfGQP
-        XwTiPBSmQIAL8Br/EU9Z1/I=
-X-Google-Smtp-Source: AGHT+IFHrI/AzP1Sy1eLvXCrwUrdu2hsBHcnbDM5n/E/shfCEjGWWI5M7YLWQQ7sUbVoH+QsmBMa6A==
-X-Received: by 2002:a05:620a:1a16:b0:76c:dbbd:6df3 with SMTP id bk22-20020a05620a1a1600b0076cdbbd6df3mr25947875qkb.62.1693069224326;
-        Sat, 26 Aug 2023 10:00:24 -0700 (PDT)
-Received: from costa-tp.bos2.lab ([2a00:a040:199:8fff:fff6:56dc:6bcb:5787])
-        by smtp.gmail.com with ESMTPSA id pj47-20020a05620a1daf00b0076cddd12aa4sm1249392qkn.77.2023.08.26.10.00.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Aug 2023 10:00:23 -0700 (PDT)
-From:   Costa Shulyupin <costa.shul@redhat.com>
-To:     Mahesh J Salgaonkar <mahesh@linux.ibm.com>,
-        "Oliver O'Halloran" <oohall@gmail.com>,
-        Linas Vepstas <linasvepstas@gmail.com>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        Christophe Leroy <christophe.leroy@csgroup.eu>,
-        Frederic Barrat <fbarrat@linux.ibm.com>,
-        Andrew Donnellan <ajd@linux.ibm.com>,
-        "Manoj N. Kumar" <manoj@linux.ibm.com>,
-        "Matthew R. Ochs" <mrochs@linux.ibm.com>,
-        Uma Krishnan <ukrishn@linux.ibm.com>,
-        Qiang Zhao <qiang.zhao@nxp.com>, Li Yang <leoyang.li@nxp.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jirislaby@kernel.org>,
-        Costa Shulyupin <costa.shul@redhat.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Yanteng Si <siyanteng@loongson.cn>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-        Nicholas Miehlbradt <nicholas@linux.ibm.com>,
-        Benjamin Gray <bgray@linux.ibm.com>,
-        "Aneesh Kumar K.V" <aneesh.kumar@linux.ibm.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Segher Boessenkool <segher@kernel.crashing.org>,
-        Rohan McLure <rmclure@linux.ibm.com>,
-        Josh Poimboeuf <jpoimboe@kernel.org>,
-        "Naveen N. Rao" <naveen.n.rao@linux.vnet.ibm.com>,
-        Sathvika Vasireddy <sv@linux.ibm.com>,
-        Laurent Dufour <laurent.dufour@fr.ibm.com>,
-        Nathan Lynch <nathanl@linux.ibm.com>,
-        Brian King <brking@linux.vnet.ibm.com>,
-        Wolfram Sang <wsa+renesas@sang-engineering.com>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-        linux-pci@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-scsi@vger.kernel.org, kvm@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-serial@vger.kernel.org
-Subject: [PATCH] docs: move powerpc under arch
-Date:   Sat, 26 Aug 2023 19:56:08 +0300
-Message-ID: <20230826165737.2101199-1-costa.shul@redhat.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <169052340516.4355.10339828466636149348@legolas.ozlabs.org>
-References: <169052340516.4355.10339828466636149348@legolas.ozlabs.org>
+        d=1e100.net; s=20221208; t=1693077084; x=1693681884;
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=20PRx02HJnVAIbBegfbEzAt6FGsymy7uvpJpjNQVnno=;
+        b=C8u9Loty2tlrvQ+tipJ8Doxomfjf0B2bDwqfxRaV7axIhyZhvND8uOsQA7aB8cJgDf
+         5yq3fxxMPEvOCDMklqV0Vah6ZpHx8DWg1/7saiFwCKxXzOG1rlOrdx+Zl4kKGzPpczjN
+         VDU8/0p00tQlh4QAHGPhg9Cn2AMTt7huLXlEniLhixfpw5UE04p5k1OpBltttfEs1AFG
+         LNC6l0fz2w4PiWQxRlTiKBMVC8KBHkslsVMmOS7JdhVuj0fqvthTcgyoAy+WCwuiAo9J
+         Z7dslJ+kXvajk4vs9AOLEqGXzC29kPiFaL/MsV7abkQbQW8Dt0JrRAKhe0IxC8hOuogt
+         lHVQ==
+X-Gm-Message-State: AOJu0Yys6VtfT/pJyRfwGr5g/TMdhOUBjP7Hhr2JstF01JKUnMzoBPdh
+        AfZraUOoIch6ZYkuMgJ0C4pA4OuMX0dq87i56YA=
+X-Google-Smtp-Source: AGHT+IHMGQtkCxIwtM5h96FL0hrzNrRQgRjKeXQz9p8ThOM8w0pJgzAjuHfmGGqem2Prws41o76yTK0aHx2MvzPiEHk=
+X-Received: by 2002:a2e:9d08:0:b0:2b9:cc8e:8729 with SMTP id
+ t8-20020a2e9d08000000b002b9cc8e8729mr14490617lji.26.1693077084128; Sat, 26
+ Aug 2023 12:11:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
-        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS
-        autolearn=no autolearn_force=no version=3.4.6
+Received: by 2002:a05:6022:607:b0:43:16ec:74c1 with HTTP; Sat, 26 Aug 2023
+ 12:11:23 -0700 (PDT)
+Reply-To: hegborkodjov@gmail.com
+From:   hegborkodjov <moritaanderson3@gmail.com>
+Date:   Sat, 26 Aug 2023 19:11:23 +0000
+Message-ID: <CACTmLXPmu-0XCb47KqmmgjnjxCruZiMcV5q0RjZczgZJS619Xw@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+X-Spam-Status: No, score=4.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FUZZY_XPILL,RCVD_IN_DNSWL_BLOCKED,
+        SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-and fix all in-tree references.
-
-Architecture-specific documentation is being moved into Documentation/arch/
-as a way of cleaning up the top-level documentation directory and making
-the docs hierarchy more closely match the source hierarchy.
-
-Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
-
----
-
-Changes in v2:
-- added relocation of new file vmemmap_dedup.rst
----
- Documentation/ABI/testing/sysfs-bus-papr-pmem             | 2 +-
- Documentation/PCI/pci-error-recovery.rst                  | 4 ++--
- Documentation/arch/index.rst                              | 2 +-
- Documentation/{ => arch}/powerpc/associativity.rst        | 0
- Documentation/{ => arch}/powerpc/booting.rst              | 0
- Documentation/{ => arch}/powerpc/bootwrapper.rst          | 0
- Documentation/{ => arch}/powerpc/cpu_families.rst         | 0
- Documentation/{ => arch}/powerpc/cpu_features.rst         | 0
- Documentation/{ => arch}/powerpc/cxl.rst                  | 0
- Documentation/{ => arch}/powerpc/cxlflash.rst             | 2 +-
- Documentation/{ => arch}/powerpc/dawr-power9.rst          | 0
- Documentation/{ => arch}/powerpc/dexcr.rst                | 0
- Documentation/{ => arch}/powerpc/dscr.rst                 | 0
- .../{ => arch}/powerpc/eeh-pci-error-recovery.rst         | 0
- Documentation/{ => arch}/powerpc/elf_hwcaps.rst           | 6 +++---
- Documentation/{ => arch}/powerpc/elfnote.rst              | 0
- Documentation/{ => arch}/powerpc/features.rst             | 0
- .../{ => arch}/powerpc/firmware-assisted-dump.rst         | 0
- Documentation/{ => arch}/powerpc/hvcs.rst                 | 0
- Documentation/{ => arch}/powerpc/imc.rst                  | 0
- Documentation/{ => arch}/powerpc/index.rst                | 0
- Documentation/{ => arch}/powerpc/isa-versions.rst         | 0
- Documentation/{ => arch}/powerpc/kasan.txt                | 0
- Documentation/{ => arch}/powerpc/kaslr-booke32.rst        | 0
- Documentation/{ => arch}/powerpc/mpc52xx.rst              | 0
- Documentation/{ => arch}/powerpc/papr_hcalls.rst          | 0
- .../{ => arch}/powerpc/pci_iov_resource_on_powernv.rst    | 0
- Documentation/{ => arch}/powerpc/pmu-ebb.rst              | 0
- Documentation/{ => arch}/powerpc/ptrace.rst               | 0
- Documentation/{ => arch}/powerpc/qe_firmware.rst          | 0
- Documentation/{ => arch}/powerpc/syscall64-abi.rst        | 0
- Documentation/{ => arch}/powerpc/transactional_memory.rst | 0
- Documentation/{ => arch}/powerpc/ultravisor.rst           | 0
- Documentation/{ => arch}/powerpc/vas-api.rst              | 0
- Documentation/{ => arch}/powerpc/vcpudispatch_stats.rst   | 0
- Documentation/{ => arch}/powerpc/vmemmap_dedup.rst        | 0
- MAINTAINERS                                               | 8 ++++----
- arch/powerpc/kernel/exceptions-64s.S                      | 6 +++---
- arch/powerpc/kernel/paca.c                                | 2 +-
- arch/powerpc/kvm/book3s_64_entry.S                        | 2 +-
- drivers/soc/fsl/qe/qe.c                                   | 2 +-
- drivers/tty/hvc/hvcs.c                                    | 2 +-
- include/soc/fsl/qe/qe.h                                   | 2 +-
- 43 files changed, 20 insertions(+), 20 deletions(-)
- rename Documentation/{ => arch}/powerpc/associativity.rst (100%)
- rename Documentation/{ => arch}/powerpc/booting.rst (100%)
- rename Documentation/{ => arch}/powerpc/bootwrapper.rst (100%)
- rename Documentation/{ => arch}/powerpc/cpu_families.rst (100%)
- rename Documentation/{ => arch}/powerpc/cpu_features.rst (100%)
- rename Documentation/{ => arch}/powerpc/cxl.rst (100%)
- rename Documentation/{ => arch}/powerpc/cxlflash.rst (99%)
- rename Documentation/{ => arch}/powerpc/dawr-power9.rst (100%)
- rename Documentation/{ => arch}/powerpc/dexcr.rst (100%)
- rename Documentation/{ => arch}/powerpc/dscr.rst (100%)
- rename Documentation/{ => arch}/powerpc/eeh-pci-error-recovery.rst (100%)
- rename Documentation/{ => arch}/powerpc/elf_hwcaps.rst (97%)
- rename Documentation/{ => arch}/powerpc/elfnote.rst (100%)
- rename Documentation/{ => arch}/powerpc/features.rst (100%)
- rename Documentation/{ => arch}/powerpc/firmware-assisted-dump.rst (100%)
- rename Documentation/{ => arch}/powerpc/hvcs.rst (100%)
- rename Documentation/{ => arch}/powerpc/imc.rst (100%)
- rename Documentation/{ => arch}/powerpc/index.rst (100%)
- rename Documentation/{ => arch}/powerpc/isa-versions.rst (100%)
- rename Documentation/{ => arch}/powerpc/kasan.txt (100%)
- rename Documentation/{ => arch}/powerpc/kaslr-booke32.rst (100%)
- rename Documentation/{ => arch}/powerpc/mpc52xx.rst (100%)
- rename Documentation/{ => arch}/powerpc/papr_hcalls.rst (100%)
- rename Documentation/{ => arch}/powerpc/pci_iov_resource_on_powernv.rst (100%)
- rename Documentation/{ => arch}/powerpc/pmu-ebb.rst (100%)
- rename Documentation/{ => arch}/powerpc/ptrace.rst (100%)
- rename Documentation/{ => arch}/powerpc/qe_firmware.rst (100%)
- rename Documentation/{ => arch}/powerpc/syscall64-abi.rst (100%)
- rename Documentation/{ => arch}/powerpc/transactional_memory.rst (100%)
- rename Documentation/{ => arch}/powerpc/ultravisor.rst (100%)
- rename Documentation/{ => arch}/powerpc/vas-api.rst (100%)
- rename Documentation/{ => arch}/powerpc/vcpudispatch_stats.rst (100%)
- rename Documentation/{ => arch}/powerpc/vmemmap_dedup.rst (100%)
-
-diff --git a/Documentation/ABI/testing/sysfs-bus-papr-pmem b/Documentation/ABI/testing/sysfs-bus-papr-pmem
-index 46cfe02058fd..34ee8c59ab25 100644
---- a/Documentation/ABI/testing/sysfs-bus-papr-pmem
-+++ b/Documentation/ABI/testing/sysfs-bus-papr-pmem
-@@ -8,7 +8,7 @@ Description:
- 		more bits set in the dimm-health-bitmap retrieved in
- 		response to H_SCM_HEALTH hcall. The details of the bit
- 		flags returned in response to this hcall is available
--		at 'Documentation/powerpc/papr_hcalls.rst' . Below are
-+		at 'Documentation/arch/powerpc/papr_hcalls.rst' . Below are
- 		the flags reported in this sysfs file:
- 
- 		* "not_armed"
-diff --git a/Documentation/PCI/pci-error-recovery.rst b/Documentation/PCI/pci-error-recovery.rst
-index 0c7552a00c8c..42e1e78353f3 100644
---- a/Documentation/PCI/pci-error-recovery.rst
-+++ b/Documentation/PCI/pci-error-recovery.rst
-@@ -364,7 +364,7 @@ Note, however, not all failures are truly "permanent". Some are
- caused by over-heating, some by a poorly seated card. Many
- PCI error events are caused by software bugs, e.g. DMAs to
- wild addresses or bogus split transactions due to programming
--errors. See the discussion in Documentation/powerpc/eeh-pci-error-recovery.rst
-+errors. See the discussion in Documentation/arch/powerpc/eeh-pci-error-recovery.rst
- for additional detail on real-life experience of the causes of
- software errors.
- 
-@@ -404,7 +404,7 @@ That is, the recovery API only requires that:
- .. note::
- 
-    Implementation details for the powerpc platform are discussed in
--   the file Documentation/powerpc/eeh-pci-error-recovery.rst
-+   the file Documentation/arch/powerpc/eeh-pci-error-recovery.rst
- 
-    As of this writing, there is a growing list of device drivers with
-    patches implementing error recovery. Not all of these patches are in
-diff --git a/Documentation/arch/index.rst b/Documentation/arch/index.rst
-index 84b80255b851..1bf7a3f1c77b 100644
---- a/Documentation/arch/index.rst
-+++ b/Documentation/arch/index.rst
-@@ -19,7 +19,7 @@ implementation.
-    nios2/index
-    openrisc/index
-    parisc/index
--   ../powerpc/index
-+   powerpc/index
-    ../riscv/index
-    s390/index
-    sh/index
-diff --git a/Documentation/powerpc/associativity.rst b/Documentation/arch/powerpc/associativity.rst
-similarity index 100%
-rename from Documentation/powerpc/associativity.rst
-rename to Documentation/arch/powerpc/associativity.rst
-diff --git a/Documentation/powerpc/booting.rst b/Documentation/arch/powerpc/booting.rst
-similarity index 100%
-rename from Documentation/powerpc/booting.rst
-rename to Documentation/arch/powerpc/booting.rst
-diff --git a/Documentation/powerpc/bootwrapper.rst b/Documentation/arch/powerpc/bootwrapper.rst
-similarity index 100%
-rename from Documentation/powerpc/bootwrapper.rst
-rename to Documentation/arch/powerpc/bootwrapper.rst
-diff --git a/Documentation/powerpc/cpu_families.rst b/Documentation/arch/powerpc/cpu_families.rst
-similarity index 100%
-rename from Documentation/powerpc/cpu_families.rst
-rename to Documentation/arch/powerpc/cpu_families.rst
-diff --git a/Documentation/powerpc/cpu_features.rst b/Documentation/arch/powerpc/cpu_features.rst
-similarity index 100%
-rename from Documentation/powerpc/cpu_features.rst
-rename to Documentation/arch/powerpc/cpu_features.rst
-diff --git a/Documentation/powerpc/cxl.rst b/Documentation/arch/powerpc/cxl.rst
-similarity index 100%
-rename from Documentation/powerpc/cxl.rst
-rename to Documentation/arch/powerpc/cxl.rst
-diff --git a/Documentation/powerpc/cxlflash.rst b/Documentation/arch/powerpc/cxlflash.rst
-similarity index 99%
-rename from Documentation/powerpc/cxlflash.rst
-rename to Documentation/arch/powerpc/cxlflash.rst
-index cea67931b3b9..e8f488acfa41 100644
---- a/Documentation/powerpc/cxlflash.rst
-+++ b/Documentation/arch/powerpc/cxlflash.rst
-@@ -32,7 +32,7 @@ Introduction
-     responsible for the initialization of the adapter, setting up the
-     special path for user space access, and performing error recovery. It
-     communicates directly the Flash Accelerator Functional Unit (AFU)
--    as described in Documentation/powerpc/cxl.rst.
-+    as described in Documentation/arch/powerpc/cxl.rst.
- 
-     The cxlflash driver supports two, mutually exclusive, modes of
-     operation at the device (LUN) level:
-diff --git a/Documentation/powerpc/dawr-power9.rst b/Documentation/arch/powerpc/dawr-power9.rst
-similarity index 100%
-rename from Documentation/powerpc/dawr-power9.rst
-rename to Documentation/arch/powerpc/dawr-power9.rst
-diff --git a/Documentation/powerpc/dexcr.rst b/Documentation/arch/powerpc/dexcr.rst
-similarity index 100%
-rename from Documentation/powerpc/dexcr.rst
-rename to Documentation/arch/powerpc/dexcr.rst
-diff --git a/Documentation/powerpc/dscr.rst b/Documentation/arch/powerpc/dscr.rst
-similarity index 100%
-rename from Documentation/powerpc/dscr.rst
-rename to Documentation/arch/powerpc/dscr.rst
-diff --git a/Documentation/powerpc/eeh-pci-error-recovery.rst b/Documentation/arch/powerpc/eeh-pci-error-recovery.rst
-similarity index 100%
-rename from Documentation/powerpc/eeh-pci-error-recovery.rst
-rename to Documentation/arch/powerpc/eeh-pci-error-recovery.rst
-diff --git a/Documentation/powerpc/elf_hwcaps.rst b/Documentation/arch/powerpc/elf_hwcaps.rst
-similarity index 97%
-rename from Documentation/powerpc/elf_hwcaps.rst
-rename to Documentation/arch/powerpc/elf_hwcaps.rst
-index 3366e5b18e67..4c896cf077c2 100644
---- a/Documentation/powerpc/elf_hwcaps.rst
-+++ b/Documentation/arch/powerpc/elf_hwcaps.rst
-@@ -202,7 +202,7 @@ PPC_FEATURE2_VEC_CRYPTO
- 
- PPC_FEATURE2_HTM_NOSC
-     System calls fail if called in a transactional state, see
--    Documentation/powerpc/syscall64-abi.rst
-+    Documentation/arch/powerpc/syscall64-abi.rst
- 
- PPC_FEATURE2_ARCH_3_00
-     The processor supports the v3.0B / v3.0C userlevel architecture. Processors
-@@ -217,11 +217,11 @@ PPC_FEATURE2_DARN
- 
- PPC_FEATURE2_SCV
-     The scv 0 instruction may be used for system calls, see
--    Documentation/powerpc/syscall64-abi.rst.
-+    Documentation/arch/powerpc/syscall64-abi.rst.
- 
- PPC_FEATURE2_HTM_NO_SUSPEND
-     A limited Transactional Memory facility that does not support suspend is
--    available, see Documentation/powerpc/transactional_memory.rst.
-+    available, see Documentation/arch/powerpc/transactional_memory.rst.
- 
- PPC_FEATURE2_ARCH_3_1
-     The processor supports the v3.1 userlevel architecture. Processors
-diff --git a/Documentation/powerpc/elfnote.rst b/Documentation/arch/powerpc/elfnote.rst
-similarity index 100%
-rename from Documentation/powerpc/elfnote.rst
-rename to Documentation/arch/powerpc/elfnote.rst
-diff --git a/Documentation/powerpc/features.rst b/Documentation/arch/powerpc/features.rst
-similarity index 100%
-rename from Documentation/powerpc/features.rst
-rename to Documentation/arch/powerpc/features.rst
-diff --git a/Documentation/powerpc/firmware-assisted-dump.rst b/Documentation/arch/powerpc/firmware-assisted-dump.rst
-similarity index 100%
-rename from Documentation/powerpc/firmware-assisted-dump.rst
-rename to Documentation/arch/powerpc/firmware-assisted-dump.rst
-diff --git a/Documentation/powerpc/hvcs.rst b/Documentation/arch/powerpc/hvcs.rst
-similarity index 100%
-rename from Documentation/powerpc/hvcs.rst
-rename to Documentation/arch/powerpc/hvcs.rst
-diff --git a/Documentation/powerpc/imc.rst b/Documentation/arch/powerpc/imc.rst
-similarity index 100%
-rename from Documentation/powerpc/imc.rst
-rename to Documentation/arch/powerpc/imc.rst
-diff --git a/Documentation/powerpc/index.rst b/Documentation/arch/powerpc/index.rst
-similarity index 100%
-rename from Documentation/powerpc/index.rst
-rename to Documentation/arch/powerpc/index.rst
-diff --git a/Documentation/powerpc/isa-versions.rst b/Documentation/arch/powerpc/isa-versions.rst
-similarity index 100%
-rename from Documentation/powerpc/isa-versions.rst
-rename to Documentation/arch/powerpc/isa-versions.rst
-diff --git a/Documentation/powerpc/kasan.txt b/Documentation/arch/powerpc/kasan.txt
-similarity index 100%
-rename from Documentation/powerpc/kasan.txt
-rename to Documentation/arch/powerpc/kasan.txt
-diff --git a/Documentation/powerpc/kaslr-booke32.rst b/Documentation/arch/powerpc/kaslr-booke32.rst
-similarity index 100%
-rename from Documentation/powerpc/kaslr-booke32.rst
-rename to Documentation/arch/powerpc/kaslr-booke32.rst
-diff --git a/Documentation/powerpc/mpc52xx.rst b/Documentation/arch/powerpc/mpc52xx.rst
-similarity index 100%
-rename from Documentation/powerpc/mpc52xx.rst
-rename to Documentation/arch/powerpc/mpc52xx.rst
-diff --git a/Documentation/powerpc/papr_hcalls.rst b/Documentation/arch/powerpc/papr_hcalls.rst
-similarity index 100%
-rename from Documentation/powerpc/papr_hcalls.rst
-rename to Documentation/arch/powerpc/papr_hcalls.rst
-diff --git a/Documentation/powerpc/pci_iov_resource_on_powernv.rst b/Documentation/arch/powerpc/pci_iov_resource_on_powernv.rst
-similarity index 100%
-rename from Documentation/powerpc/pci_iov_resource_on_powernv.rst
-rename to Documentation/arch/powerpc/pci_iov_resource_on_powernv.rst
-diff --git a/Documentation/powerpc/pmu-ebb.rst b/Documentation/arch/powerpc/pmu-ebb.rst
-similarity index 100%
-rename from Documentation/powerpc/pmu-ebb.rst
-rename to Documentation/arch/powerpc/pmu-ebb.rst
-diff --git a/Documentation/powerpc/ptrace.rst b/Documentation/arch/powerpc/ptrace.rst
-similarity index 100%
-rename from Documentation/powerpc/ptrace.rst
-rename to Documentation/arch/powerpc/ptrace.rst
-diff --git a/Documentation/powerpc/qe_firmware.rst b/Documentation/arch/powerpc/qe_firmware.rst
-similarity index 100%
-rename from Documentation/powerpc/qe_firmware.rst
-rename to Documentation/arch/powerpc/qe_firmware.rst
-diff --git a/Documentation/powerpc/syscall64-abi.rst b/Documentation/arch/powerpc/syscall64-abi.rst
-similarity index 100%
-rename from Documentation/powerpc/syscall64-abi.rst
-rename to Documentation/arch/powerpc/syscall64-abi.rst
-diff --git a/Documentation/powerpc/transactional_memory.rst b/Documentation/arch/powerpc/transactional_memory.rst
-similarity index 100%
-rename from Documentation/powerpc/transactional_memory.rst
-rename to Documentation/arch/powerpc/transactional_memory.rst
-diff --git a/Documentation/powerpc/ultravisor.rst b/Documentation/arch/powerpc/ultravisor.rst
-similarity index 100%
-rename from Documentation/powerpc/ultravisor.rst
-rename to Documentation/arch/powerpc/ultravisor.rst
-diff --git a/Documentation/powerpc/vas-api.rst b/Documentation/arch/powerpc/vas-api.rst
-similarity index 100%
-rename from Documentation/powerpc/vas-api.rst
-rename to Documentation/arch/powerpc/vas-api.rst
-diff --git a/Documentation/powerpc/vcpudispatch_stats.rst b/Documentation/arch/powerpc/vcpudispatch_stats.rst
-similarity index 100%
-rename from Documentation/powerpc/vcpudispatch_stats.rst
-rename to Documentation/arch/powerpc/vcpudispatch_stats.rst
-diff --git a/Documentation/powerpc/vmemmap_dedup.rst b/Documentation/arch/powerpc/vmemmap_dedup.rst
-similarity index 100%
-rename from Documentation/powerpc/vmemmap_dedup.rst
-rename to Documentation/arch/powerpc/vmemmap_dedup.rst
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 37b9626ee654..5c770ddd2c73 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -5597,7 +5597,7 @@ M:	Andrew Donnellan <ajd@linux.ibm.com>
- L:	linuxppc-dev@lists.ozlabs.org
- S:	Supported
- F:	Documentation/ABI/testing/sysfs-class-cxl
--F:	Documentation/powerpc/cxl.rst
-+F:	Documentation/arch/powerpc/cxl.rst
- F:	arch/powerpc/platforms/powernv/pci-cxl.c
- F:	drivers/misc/cxl/
- F:	include/misc/cxl*
-@@ -5609,7 +5609,7 @@ M:	Matthew R. Ochs <mrochs@linux.ibm.com>
- M:	Uma Krishnan <ukrishn@linux.ibm.com>
- L:	linux-scsi@vger.kernel.org
- S:	Supported
--F:	Documentation/powerpc/cxlflash.rst
-+F:	Documentation/arch/powerpc/cxlflash.rst
- F:	drivers/scsi/cxlflash/
- F:	include/uapi/scsi/cxlflash_ioctl.h
- 
-@@ -12093,7 +12093,7 @@ F:	Documentation/ABI/stable/sysfs-firmware-opal-*
- F:	Documentation/devicetree/bindings/i2c/i2c-opal.txt
- F:	Documentation/devicetree/bindings/powerpc/
- F:	Documentation/devicetree/bindings/rtc/rtc-opal.txt
--F:	Documentation/powerpc/
-+F:	Documentation/arch/powerpc/
- F:	arch/powerpc/
- F:	drivers/*/*/*pasemi*
- F:	drivers/*/*pasemi*
-@@ -16487,7 +16487,7 @@ R:	Oliver O'Halloran <oohall@gmail.com>
- L:	linuxppc-dev@lists.ozlabs.org
- S:	Supported
- F:	Documentation/PCI/pci-error-recovery.rst
--F:	Documentation/powerpc/eeh-pci-error-recovery.rst
-+F:	Documentation/arch/powerpc/eeh-pci-error-recovery.rst
- F:	arch/powerpc/include/*/eeh*.h
- F:	arch/powerpc/kernel/eeh*.c
- F:	arch/powerpc/platforms/*/eeh*.c
-diff --git a/arch/powerpc/kernel/exceptions-64s.S b/arch/powerpc/kernel/exceptions-64s.S
-index c33c8ebf8641..eaf2f167c342 100644
---- a/arch/powerpc/kernel/exceptions-64s.S
-+++ b/arch/powerpc/kernel/exceptions-64s.S
-@@ -893,7 +893,7 @@ __start_interrupts:
-  *
-  * Call convention:
-  *
-- * syscall register convention is in Documentation/powerpc/syscall64-abi.rst
-+ * syscall register convention is in Documentation/arch/powerpc/syscall64-abi.rst
-  */
- EXC_VIRT_BEGIN(system_call_vectored, 0x3000, 0x1000)
- 	/* SCV 0 */
-@@ -1952,8 +1952,8 @@ EXC_VIRT_NONE(0x4b00, 0x100)
-  * Call convention:
-  *
-  * syscall and hypercalls register conventions are documented in
-- * Documentation/powerpc/syscall64-abi.rst and
-- * Documentation/powerpc/papr_hcalls.rst respectively.
-+ * Documentation/arch/powerpc/syscall64-abi.rst and
-+ * Documentation/arch/powerpc/papr_hcalls.rst respectively.
-  *
-  * The intersection of volatile registers that don't contain possible
-  * inputs is: cr0, xer, ctr. We may use these as scratch regs upon entry
-diff --git a/arch/powerpc/kernel/paca.c b/arch/powerpc/kernel/paca.c
-index cda4e00b67c1..7502066c3c53 100644
---- a/arch/powerpc/kernel/paca.c
-+++ b/arch/powerpc/kernel/paca.c
-@@ -68,7 +68,7 @@ static void *__init alloc_shared_lppaca(unsigned long size, unsigned long limit,
- 		memblock_set_bottom_up(true);
- 
- 		/*
--		 * See Documentation/powerpc/ultravisor.rst for more details.
-+		 * See Documentation/arch/powerpc/ultravisor.rst for more details.
- 		 *
- 		 * UV/HV data sharing is in PAGE_SIZE granularity. In order to
- 		 * minimize the number of pages shared, align the allocation to
-diff --git a/arch/powerpc/kvm/book3s_64_entry.S b/arch/powerpc/kvm/book3s_64_entry.S
-index 3b361af87313..a9ab92abffe8 100644
---- a/arch/powerpc/kvm/book3s_64_entry.S
-+++ b/arch/powerpc/kvm/book3s_64_entry.S
-@@ -19,7 +19,7 @@
- 
- /*
-  * This is a hcall, so register convention is as
-- * Documentation/powerpc/papr_hcalls.rst.
-+ * Documentation/arch/powerpc/papr_hcalls.rst.
-  *
-  * This may also be a syscall from PR-KVM userspace that is to be
-  * reflected to the PR guest kernel, so registers may be set up for
-diff --git a/drivers/soc/fsl/qe/qe.c b/drivers/soc/fsl/qe/qe.c
-index 3ee0c7c1e9a4..70b6eddb867b 100644
---- a/drivers/soc/fsl/qe/qe.c
-+++ b/drivers/soc/fsl/qe/qe.c
-@@ -430,7 +430,7 @@ static void qe_upload_microcode(const void *base,
- /*
-  * Upload a microcode to the I-RAM at a specific address.
-  *
-- * See Documentation/powerpc/qe_firmware.rst for information on QE microcode
-+ * See Documentation/arch/powerpc/qe_firmware.rst for information on QE microcode
-  * uploading.
-  *
-  * Currently, only version 1 is supported, so the 'version' field must be
-diff --git a/drivers/tty/hvc/hvcs.c b/drivers/tty/hvc/hvcs.c
-index d29fdfe9d93d..98433a53bae1 100644
---- a/drivers/tty/hvc/hvcs.c
-+++ b/drivers/tty/hvc/hvcs.c
-@@ -47,7 +47,7 @@
-  * using the 2.6 Linux kernel kref construct.
-  *
-  * For direction on installation and usage of this driver please reference
-- * Documentation/powerpc/hvcs.rst.
-+ * Documentation/arch/powerpc/hvcs.rst.
-  */
- 
- #include <linux/device.h>
-diff --git a/include/soc/fsl/qe/qe.h b/include/soc/fsl/qe/qe.h
-index eb5079904cc8..af793f2a0ec4 100644
---- a/include/soc/fsl/qe/qe.h
-+++ b/include/soc/fsl/qe/qe.h
-@@ -258,7 +258,7 @@ static inline int qe_alive_during_sleep(void)
- 
- /* Structure that defines QE firmware binary files.
-  *
-- * See Documentation/powerpc/qe_firmware.rst for a description of these
-+ * See Documentation/arch/powerpc/qe_firmware.rst for a description of these
-  * fields.
-  */
- struct qe_firmware {
--- 
-2.41.0
-
+0JHQuCDQvdOp0YXTqdGA0LvTqdC706nTqSDRgdCw0L3QsNC7INCx0L7Qu9Cz0L7QtiDQsdCw0LnQ
+vdCwLCDRgtCwINC90LDQvNCw0LnQsyDRgdCw0LnRhdCw0L0g0YHRjdGC0LPRjdC70Y3RjdGAINGF
+0q/Qu9GN0Y3Qtg0K0LDQstC90LAg0LPRjdC00Y3Qs9GCINC40YLQs9GN0LYg0LHQsNC50L3QsCwg
+0LHQuCDRgtCw0L3RgtCw0Lkg0YXQvtC70LHQvtC+INCx0LDRgNGM0LYsINCx0LjQtCDQsdC40LUg
+0LHQuNC10LTRjdGNINGF0Y3RgNGF0Y3QvQ0K0YLRg9GB0LDQu9C2INGH0LDQtNCw0YXRi9CzINGF
+0LDRgNCw0YXRi9CzINGI0LDQsNGA0LTRgdCw0L0uINCR0Lgg0LHQvtC7DQrQotGD0YDQutC40LnQ
+vSDRhdCw0YLQsNCz0YLQsNC5INCa0L7QtNC20L7QstC4INCl0LXQs9Cx0L7RgCDQsdC40LQg0YXQ
+vtGR0YAgU3RhbmRhcmRCTlAgQmFuayBMaW1pdGVkDQpUdXJrZXkt0LQg0q7QudC7INCw0LbQuNC7
+0LvQsNCz0LDQsNC90Ysg0YXRjdC70YLRgdC40LnQvSDQtNCw0YDQs9Cw0LDRgCDQsNC20LjQu9C7
+0LDQtNCw0LMuINCt0L3RjSDQsdC+0Lsg0LzQuNC90LjQuQ0K0YLTqdC706nTqdGFINCR0YPRgNGF
+0LDQvdGLINGF0q/RgdGN0Lsg0LPRjdC00Y3Qs9GCINCx0Lgg0LjRgtCz0Y3QtNGN0LMNCtC+0LTQ
+vtC+INGH0LDQvNGC0LDQuSDRgtCw0LDRgNCw0YUg0LPRjdC2INCx0LDQudC90LAuINCR0Lgg0YfR
+g9GF0LDQuyDQsNC20LjQuyDRhdGN0YDQs9C40LnQvSDRj9GA0LjQu9GG0LvQsNCz0LAg0YXQuNC5
+0LYNCtCx0LDQudC90LAsINGN0L3RjSDQvdGMINGC0LDQvdCw0Lkg0YPQu9GB0YvQvSDQvdGN0YDR
+gtGN0Lkg0YXQvtC70LHQvtC+0YLQvtC5INGC0YPQuyDRgtCwINKv0q/QvdGN0Y3RgSDQsNGI0LjQ
+syDRhdKv0YDRgtGN0YUNCtCx0L7Qu9C90L4g0LPRjdC2INCx0L7QtNC+0LYg0LHQsNC50L3QsC4N
+Cg0KMjAxOCDQvtC90LQg0JjQstCw0L0g0LPRjdGFINGC0LDQvdCw0Lkg0YPQu9GB0YvQvSDQuNGA
+0LPRjdC9INGF0YPQsNC90LvQuNC50L0gMzYg0YHQsNGA0YvQvSDRhdGD0LPQsNGG0LDQsNC90LQg
+0LzQsNC90LDQuQ0K0LHQsNC90LrQuNC90LQgOCw0MDAsMDAwLjAwINGE0YPQvdGCINGB0YLQtdGA
+0LvQuNC90LPQuNC50L0g0q/QvdGNINCx0q/RhdC40Lkg0J7RgNGI0LjQvSDRgdGD0YPQs9GHINCx
+0YPRgSDQtNCw0L3RgQ0K0YXQuNC50YHRjdC9LiBUaGUNCtCt0L3RjdGF0q/SryDRhdCw0LTQs9Cw
+0LvQsNC80LbQuNC50L0g0LPRjdGA0Y3RjdC90LjQuSDRhdGD0LPQsNGG0LDQsCAyMDIxINC+0L3R
+iyAxLdGAINGB0LDRgNGL0L0gMTYt0L3RiyDTqdC006nRgA0K0LHQsNC50YHQsNC9LiDQpdCw0YDQ
+sNC80YHQsNC70YLQsNC5INC90Ywg0YLRjdGA0Y3RjdGAINCl0Y/RgtCw0LTQsNC0INGB0LDRj9GF
+0LDQvSDRgtC+0YXQuNC+0LvQtNGB0L7QvSAyMDE5LTIwMjAg0L7QvdGLDQrQmtC+0YDQvtC90LDQ
+ktC40YDRg9GBICjQmtC+0LLQuNC0MTkpINGC0LDRhdC70YvQvSDQtNGN0LPQtNGN0LvRgtC40LnQ
+vSDSr9C10Y3RgCDQvdCw0YEg0LHQsNGA0YHQsNC9INGF0q/QvNKv0q/RgdC40LnQvQ0K0YLQvtC+
+0L3QtCDQsdCw0LPRgtCw0LYsINCx0LjQt9C90LXRgSDQsNGP0LvQsNC70LDQsNGAINGP0LLQtiDQ
+sdCw0LnRhdC00LDQsCDQtNC+0YAg0YXQsNGP0LYgNjgsMDAwINGF0q/QvdC40Lkg0LDQvNC40LnQ
+sw0K0LDQstGHINC+0LTRgdC+0L0uIC4NCg0K0JzQsNC90LDQuSDQsdCw0L3QutC90Ysg0YPQtNC4
+0YDQtNC70LDQs9GD0YPQtCDRgtKv0q/QvdC40Lkg0q/RhdC70LjQudC9INGC0LDQu9Cw0LDRgCDR
+hdCw0YDQsNCw0YXQsNC9INC80Y3QtNGN0Y3Qs9Kv0Lkg0LHQsNC50L3QsCwNCtGC0Y3RgCDQvNC4
+0L3QuNC5INC90LDQudC3INCx0LDQudGB0LDQvSwg0LTQsNC90YEg0L3RjCDQvdGN0Y3Qs9C00Y3R
+hdGN0LQg0LHQuCDRgtKv0q/QvdC40Lkg0LTQsNC90YHQvdGLINCw0LbQuNC70YLQsNC9DQrQsdCw
+0LnRgdCw0L0g0YPRh9GA0LDQsNGBINCx0Lgg0LzRjdC00YHRjdC9Lg0K0L3QsNC80LDQudCzINC0
+0Y3QstGI0LjRhdGN0Y3RgSDTqdC80L3TqSDQvdGN0Y3RhS4g0JPRjdGB0Y3QvSDRhdGN0LTQuNC5
+INGHLCDQvdC+0ZHQvSDQmNCy0LDQvSDQtNCw0L3RgSDQvdGN0Y3Qu9Cz0Y3RhSDSr9C10LQNCtGP
+0LzQsNGAINGHINC00LDRgNCw0LDQs9C40LnQvSDRhdCw0LzQsNCw0YLQsNC9INGB0LDQtNCw0L0v
+INOp0LIg0LfQsNC70LPQsNC80LbQu9Cw0LPRh9C40LnQvSDRgtCw0LvQsNCw0YAg0LTRg9GA0LTQ
+sNCw0LPSr9C5DQrQsdOp0LPTqdOp0LQg0YLRjdGA0Y3RjdGAINCz0Y3RgNC70Y3RjdCz0q/QuSwg
+0LPRjdGA0LvRjdGN0LPSr9C5INCx0LDQudGB0LDQvS4NCtGF0q/Sr9GF0LTSr9Kv0LQuINOo0L3Q
+s9Op0YDRgdOp0L0g0LTQvtC70L7QviDRhdC+0L3QvtCz0YIg0LzQsNC90LDQuSDQsdCw0L3QutC9
+0Ysg0YPQtNC40YDQtNC70LDQs9CwINCz0Y3RgNGN0Y3Qs9GN0Y0NCtGB0YPQvdCz0LDRhdCw0LDR
+gCDQsdC+0LvRgdC+0L0g0YLQvtGF0LjQvtC70LTQvtC70LQg0YLSr9Kv0L3QuNC5INC806nQvdCz
+0LjQudCzINGO0YMg0YXQuNC50YUg0YLQsNC70LDQsNGAINC30LDQsNCy0LDRgNGH0LjQu9Cz0LDQ
+sA0K06nQs9Op0YXQuNC50LMg0YXSr9GB0YHRjdC9Lg0KDQrQmNC50Lwg0LfSr9C50Lsg0LHQvtC7
+0L3QviDQs9GN0LTQs9C40LnQsyDQsdC4INC80Y3QtNGN0LYg0LHQsNC50LPQsNCwINGC0YPQuyDQ
+vdOp0YXRhtOp0Lsg0LHQsNC50LTQu9GL0LMg0LfQvtGF0LjRhtGD0YPQu9Cw0YUNCtCw0YDQs9Cw
+INC30LDQvNGL0LMg0YXQsNC50LYg0LHQsNC50YHQsNC9LCDRg9GH0LjRgCDQvdGMINGF0Y3RgNGN
+0LIg0LzQuNC90LjQuSDQsdCw0L3QutC90Ysg0LfQsNGF0LjRgNC70YPRg9C0INCY0LLQsNC90YvQ
+sw0K0LzRjdC00LLRjdC7DQrQvdCw0YEg0LHQsNGA0YHQsNC9LCDTqdCyINC30LDQu9Cz0LDQvNC2
+0LvQsNCz0YfQs9Kv0LksINGC0Y3QtCDRhdGD0LLQuNC50L0g0YXRjdGA0Y3Qs9GG0Y3RjdC90LQg
+0LfQvtGA0LjRg9C70LYg0YXTqdGA06nQvdCz06nTqQ0K0LDQstCw0YUg0LHQvtC70L3Qviwg0YLQ
+uNC50LzRjdGN0YEg0LHQuCDQuNC50Lwg0LfSr9C50Lsg0LHQvtC70L7QvtGB0L7QuSDQs9GN0LYg
+0YXSr9GB0Y3RhdCz0q/QuSDQsdCw0LnQvdCwLiDQotGN0YAg0q/QtdC0DQrQsdC4INGH0LDQvNCw
+0LnQsyDRhdCw0YDQsNCw0LQg0LHQsNGP0YDRgtCw0Lkg0LHQsNC50YHQsNC9INCx06nQs9Op06nQ
+tCDQvtC00L7QviDRgtCwINGC0q/Sr9C90YLRjdC5INC40LbQuNC7INGD0LvRgdGC0LDQuSwNCtC8
+0LjQvdC40Lkg0LHQsNC90LrQvdGLINGC06nQsiDQvtGE0YTQuNGBINGC0LDQvdC0INC00LDQvdGB
+0YvQsyDTqdCz06nRhSDQsdC+0LvQvdC+LiDQr9C80LDRgCDRhyDRjdGA0YHQtNGN0Lsg0LHQsNC5
+0YXQs9Kv0LkNCtC+0YDQvtC70YbQvtGFOyDQs9Kv0LnQu9Cz0Y3RjSDQvdGMINGC0LDQvdGL0LMg
+0LDQu9C40LLQsNCwINGF0YPRg9C70Ywg0LfTqdGA0YfQu9Op06nRgSDRhdCw0LzQs9Cw0LDQu9Cw
+0YUg0YXRg9GD0LvRjCDRkdGB0L3Riw0K0LfQvtGF0LjRhtGD0YPQu9Cw0LvRgtGL0L0g0LTQsNCz
+0YPRgyDRhdC40LnQs9C00Y3RhSDQsdC+0LvQvdC+Lg0KDQrQkdCw0L3QutC90Ysg0LfQsNGF0LjR
+gNC70YPRg9C00YvQsyDQsNCy0LDRhdGL0LMg0LfTqdCy0YjTqdOp0YDRgdC906nTqdGBINCx0LjQ
+tCDQvNOp0L3Qs9Op06kg0L3RjdGF0Y3QvNC20LjQu9GB0Y3QvSDQvdGMINC00Y3RjdGALA0K0YLR
+jdC0INGF0Y3QtNC40LnQvdGNINCx0LDRj9C9LiDQkdC4INGI0YPQvdCw0LvRgtCw0Lkg0YXSr9C9
+INCx0LjRiCDQsdC+0LvQvtGF0L7QvtGAINCx0LjQtNGN0L3QtCDRgdCw0L3QsNC7INCx0L7Qu9Cz
+0L7Qtg0K0LHQsNC50L3QsA0K0KHQsNC90YXSr9Kv0LPQuNC50L0gNTAvNTAg0YXRg9Cy0LjQudCz
+INGF0L7RkdGAINGC0LDQu9C00LDQsCDRgtGN0L3RhtKv0q8g0YXRg9Cy0LDQsNGFLCDQvNC40L3Q
+uNC5INGF0YPQstGMINC90LDQtNCw0LQNCtOp06nRgNC40LnQvSDQutC+0LzQv9Cw0L3QuNC50LMg
+0LHQsNC50LPRg9GD0LvQtiwg0L7Qu9GB0L7QvSDQvtGA0LvQvtCz0YvQsyDQsdGD0Y/QvdGLINCw
+0LbQuNC70LQg0LfQsNGA0YbRg9GD0LvQsNGF0LDQtA0K0YLRg9GB0LDQu9C90LAuDQrQvNOp0YDT
+qdOp0LTTqdC7Lg0KDQrQnNC40L3QuNC5INGB0LDQvdCw0LvRi9C9INGC0LDQu9Cw0LDRgCDRgdCw
+0L3QsNC7INCx0L7QtNC70L7QviDRhdGN0LvRjdGN0YDRjdC5LCDQvdCw0LTQsNC0INGN0L3RjSDQ
+s9Kv0LnQu9Cz0Y3RjdC90LQg0YLQsNC90YsNCtGC0YPRgdC70LDQvNC2INKv0L3RjdGF0Y3RjdGA
+INGF0Y3RgNGN0LPRgtGN0Lkg0LHQsNC50L3QsCwg0LHQuCDRh9Cw0LzQsNC50LMg06nTqdGA0LjQ
+udC90YXTqdOp0YDTqdOpINCx0LjRiCDQvdCw0LTQsNC0DQrRgtGD0YHQu9Cw0YXQsNCw0YAg0YHQ
+vtC90LPQvtGB0L7QvS4NCtCl0L7QvdCz0L7RgCDQvNC40L3RjCwg0LPRjdGF0LTRjdGNINCx0Lgg
+0YLQsNC90YLQsNC5INGF0L7Qu9Cx0L7QviDQsdCw0YDQuNGF0LDQsNGB0LDQsCDTqdC80L3TqSDR
+jdC90Y0g0YXQsNGA0LjQu9GG0LDQsNC90YsNCtGC0LDQu9Cw0LDRgCDQt9Cw0LvQsdC40YDQsNGF
+INCz0Y3QtiDRhtCw0LMg0LfQsNCy0LDQsCDQs9Cw0YDQs9Cw0YHQvdCw0LAg0LHRg9GA0YXQsNC9
+0LDQsNGBINGC0LAg0LHSr9GF0Y3QvdC0INC80Y3QtNGN0Y3RgdGN0LkNCtCz0Y3QtiDRhdKv0YHR
+hyDQsdCw0LnQvdCwLg0K0K3QvdGNINGC0LDQu9Cw0LDRgCDQsNC90YXQsNCw0YDRhywg0Y3QvdGN
+INC80Y3QtNGN0Y3Qu9C70LjQudCzINCc0JDQqCDQndCj0KPQpiDQs9GN0LYg0q/Qt9C90Y0g0q/S
+ry4g0KLQsNC90Ysg0YXQsNGA0LjRg9CzDQrRhdKv0LvRjdGN0L0g0LDQstGB0L3RiyDQtNCw0YDQ
+sNCwINC80LjQvdC40Lkg0YXRg9Cy0LjQudC9INC40LzRjdC50Lsg0YXQsNGP0LPQsNCw0YAgaGVn
+Ym9ya29kam92QGdtYWlsLmNvbQ0K0LPSr9C50LvQs9GN0Y3QvdC40Lkg0YLQsNC70LDQsNGAINC0
+0Y3Qu9Cz0Y3RgNGN0L3Qs9Kv0Lkg0LzRjdC00Y3RjdC70Y3QuyDTqdCz06nRhSDQsdC+0LvQvdC+
+LiDQnNOp0L0g0YHQsNC90LPQuNC50L0NCtGF0LDQtNCz0LDQu9Cw0LzQttC40LnQvSDQs9GN0YDR
+h9C40LvQs9GN0Y3QvdC40Lkg0YXRg9GD0LvQsdCw0YAsINC806nQvSDQutC+0LzQv9Cw0L3QuNC5
+0LMg0q/Sr9GB0LPRjdC9INCx0LDQudCz0YPRg9C70YHQsNC9DQrQs9GN0YDRh9C40LvQs9GN0Y0N
+CtGB0LDQvdCzINCx0LjQuSDQsdC+0LvQs9C+0YHQvtC9LiDQotCw0L3RiyDRj9Cw0YDQsNC70YLQ
+sNC5INGF0LDRgNC40YMg0LDRgNCz0LAg0YXRjdC80LbRjdGNINCw0LLQsNGF0YvQsyDRhdKv0LvR
+jdGN0LYNCtCx0LDQudCz0LDQsCDRgtGD0Lsg0JHRg9GA0YXQsNC9INC40LLRjdGN0LMNCtCl0q/Q
+vdC00Y3RgtCz0Y3RgdGN0L0NCtCl0LDRgtCw0LPRgtCw0Lkg0JrQvtC00LbQvtCy0Lgg0KXQtdCz
+0LHQvtGADQpoZWdib3Jrb2Rqb3ZAZ21haWwuY29tDQo=
