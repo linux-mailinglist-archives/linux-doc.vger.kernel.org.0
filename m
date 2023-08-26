@@ -2,165 +2,240 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 554277898C4
-	for <lists+linux-doc@lfdr.de>; Sat, 26 Aug 2023 21:12:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 73A6A7898F9
+	for <lists+linux-doc@lfdr.de>; Sat, 26 Aug 2023 22:19:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229689AbjHZTL3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 26 Aug 2023 15:11:29 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55112 "EHLO
+        id S229647AbjHZUTE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 26 Aug 2023 16:19:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46750 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229920AbjHZTL2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 26 Aug 2023 15:11:28 -0400
-Received: from mail-lj1-x244.google.com (mail-lj1-x244.google.com [IPv6:2a00:1450:4864:20::244])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 309A1E58
-        for <linux-doc@vger.kernel.org>; Sat, 26 Aug 2023 12:11:26 -0700 (PDT)
-Received: by mail-lj1-x244.google.com with SMTP id 38308e7fff4ca-2bceb02fd2bso28857221fa.1
-        for <linux-doc@vger.kernel.org>; Sat, 26 Aug 2023 12:11:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693077084; x=1693681884;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=20PRx02HJnVAIbBegfbEzAt6FGsymy7uvpJpjNQVnno=;
-        b=qHTzJqgkulOXFwxUnaAILzOYLVg5ghBYehSwlQUZOtXJ2fKlFTYq4TRd3uOwQ8NgLY
-         +J8msKTeEqJGiKfdXb+7h7dHG2ofcSVQOg72GbLxCwqfri0KnvXj8aGsksD8XlQPNNRD
-         9U/U8LIzw7TNsAha2F1rjJIJ4ztJukTktHXeB+r6HBHvkDCOr7ixEu1Zun4GCIc7NDTt
-         ffXjKw+fRf4NXsxI7A5/J+dCuq03RUP7RFDo66WBGL7u+d5D7C9yFOjshn6zuKApm42O
-         tx3957J+TWRWDeblC9b2ELV8bc36USQYaKrLp3MCIKcLuR7APFQExy7jU1gEe/M4yG/j
-         Uu6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693077084; x=1693681884;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=20PRx02HJnVAIbBegfbEzAt6FGsymy7uvpJpjNQVnno=;
-        b=C8u9Loty2tlrvQ+tipJ8Doxomfjf0B2bDwqfxRaV7axIhyZhvND8uOsQA7aB8cJgDf
-         5yq3fxxMPEvOCDMklqV0Vah6ZpHx8DWg1/7saiFwCKxXzOG1rlOrdx+Zl4kKGzPpczjN
-         VDU8/0p00tQlh4QAHGPhg9Cn2AMTt7huLXlEniLhixfpw5UE04p5k1OpBltttfEs1AFG
-         LNC6l0fz2w4PiWQxRlTiKBMVC8KBHkslsVMmOS7JdhVuj0fqvthTcgyoAy+WCwuiAo9J
-         Z7dslJ+kXvajk4vs9AOLEqGXzC29kPiFaL/MsV7abkQbQW8Dt0JrRAKhe0IxC8hOuogt
-         lHVQ==
-X-Gm-Message-State: AOJu0Yys6VtfT/pJyRfwGr5g/TMdhOUBjP7Hhr2JstF01JKUnMzoBPdh
-        AfZraUOoIch6ZYkuMgJ0C4pA4OuMX0dq87i56YA=
-X-Google-Smtp-Source: AGHT+IHMGQtkCxIwtM5h96FL0hrzNrRQgRjKeXQz9p8ThOM8w0pJgzAjuHfmGGqem2Prws41o76yTK0aHx2MvzPiEHk=
-X-Received: by 2002:a2e:9d08:0:b0:2b9:cc8e:8729 with SMTP id
- t8-20020a2e9d08000000b002b9cc8e8729mr14490617lji.26.1693077084128; Sat, 26
- Aug 2023 12:11:24 -0700 (PDT)
+        with ESMTP id S229687AbjHZUSn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 26 Aug 2023 16:18:43 -0400
+Received: from belinda3.kreativmedia.ch (belinda3.kreativmedia.ch [80.74.158.27])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 446EC1AD
+        for <linux-doc@vger.kernel.org>; Sat, 26 Aug 2023 13:18:39 -0700 (PDT)
+Received: from localhost.localdomain (localhost [127.0.0.1]) by belinda3.kreativmedia.ch (Postfix) with ESMTPSA id 7142952C0D09;
+        Sat, 26 Aug 2023 22:18:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=renenyffenegger.ch;
+        s=default; t=1693081116;
+        bh=Ec7533GMLLWF/m6rKV8DkBLMx+GJdf+tPKLpxxGR1WE=; h=From:To:Subject;
+        b=IaJOrTKIoiKq/b2FbUx2HG1cbMAyX6VM6vlZcffMsZKWuxEok4FLkJkdLAr0N670p
+         jo8dvnGqmv06SG4W/6ipEsvlpoRuRhlmcpLya1KnzpzILtuPuFivaWcNYZZ/SMNuZw
+         zEvOjqu8RbY1vlgugp2H+UzuXmy4YF0mz6tVqx3k=
+Authentication-Results: belinda.kreativmedia.ch;
+        spf=pass (sender IP is 31.10.136.171) smtp.mailfrom=mail@renenyffenegger.ch smtp.helo=localhost.localdomain
+Received-SPF: pass (belinda.kreativmedia.ch: connection is authenticated)
+From:   mail@renenyffenegger.ch
+To:     linux-doc@vger.kernel.org
+Cc:     =?UTF-8?q?Ren=C3=A9=20Nyffenegger?= <mail@renenyffenegger.ch>
+Subject: [PATCH] Reference kernel-doc for container_of
+Date:   Sat, 26 Aug 2023 22:18:26 +0200
+Message-Id: <20230826201826.8407-1-mail@renenyffenegger.ch>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Received: by 2002:a05:6022:607:b0:43:16ec:74c1 with HTTP; Sat, 26 Aug 2023
- 12:11:23 -0700 (PDT)
-Reply-To: hegborkodjov@gmail.com
-From:   hegborkodjov <moritaanderson3@gmail.com>
-Date:   Sat, 26 Aug 2023 19:11:23 +0000
-Message-ID: <CACTmLXPmu-0XCb47KqmmgjnjxCruZiMcV5q0RjZczgZJS619Xw@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
-X-Spam-Status: No, score=4.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FUZZY_XPILL,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Level: ****
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-0JHQuCDQvdOp0YXTqdGA0LvTqdC706nTqSDRgdCw0L3QsNC7INCx0L7Qu9Cz0L7QtiDQsdCw0LnQ
-vdCwLCDRgtCwINC90LDQvNCw0LnQsyDRgdCw0LnRhdCw0L0g0YHRjdGC0LPRjdC70Y3RjdGAINGF
-0q/Qu9GN0Y3Qtg0K0LDQstC90LAg0LPRjdC00Y3Qs9GCINC40YLQs9GN0LYg0LHQsNC50L3QsCwg
-0LHQuCDRgtCw0L3RgtCw0Lkg0YXQvtC70LHQvtC+INCx0LDRgNGM0LYsINCx0LjQtCDQsdC40LUg
-0LHQuNC10LTRjdGNINGF0Y3RgNGF0Y3QvQ0K0YLRg9GB0LDQu9C2INGH0LDQtNCw0YXRi9CzINGF
-0LDRgNCw0YXRi9CzINGI0LDQsNGA0LTRgdCw0L0uINCR0Lgg0LHQvtC7DQrQotGD0YDQutC40LnQ
-vSDRhdCw0YLQsNCz0YLQsNC5INCa0L7QtNC20L7QstC4INCl0LXQs9Cx0L7RgCDQsdC40LQg0YXQ
-vtGR0YAgU3RhbmRhcmRCTlAgQmFuayBMaW1pdGVkDQpUdXJrZXkt0LQg0q7QudC7INCw0LbQuNC7
-0LvQsNCz0LDQsNC90Ysg0YXRjdC70YLRgdC40LnQvSDQtNCw0YDQs9Cw0LDRgCDQsNC20LjQu9C7
-0LDQtNCw0LMuINCt0L3RjSDQsdC+0Lsg0LzQuNC90LjQuQ0K0YLTqdC706nTqdGFINCR0YPRgNGF
-0LDQvdGLINGF0q/RgdGN0Lsg0LPRjdC00Y3Qs9GCINCx0Lgg0LjRgtCz0Y3QtNGN0LMNCtC+0LTQ
-vtC+INGH0LDQvNGC0LDQuSDRgtCw0LDRgNCw0YUg0LPRjdC2INCx0LDQudC90LAuINCR0Lgg0YfR
-g9GF0LDQuyDQsNC20LjQuyDRhdGN0YDQs9C40LnQvSDRj9GA0LjQu9GG0LvQsNCz0LAg0YXQuNC5
-0LYNCtCx0LDQudC90LAsINGN0L3RjSDQvdGMINGC0LDQvdCw0Lkg0YPQu9GB0YvQvSDQvdGN0YDR
-gtGN0Lkg0YXQvtC70LHQvtC+0YLQvtC5INGC0YPQuyDRgtCwINKv0q/QvdGN0Y3RgSDQsNGI0LjQ
-syDRhdKv0YDRgtGN0YUNCtCx0L7Qu9C90L4g0LPRjdC2INCx0L7QtNC+0LYg0LHQsNC50L3QsC4N
-Cg0KMjAxOCDQvtC90LQg0JjQstCw0L0g0LPRjdGFINGC0LDQvdCw0Lkg0YPQu9GB0YvQvSDQuNGA
-0LPRjdC9INGF0YPQsNC90LvQuNC50L0gMzYg0YHQsNGA0YvQvSDRhdGD0LPQsNGG0LDQsNC90LQg
-0LzQsNC90LDQuQ0K0LHQsNC90LrQuNC90LQgOCw0MDAsMDAwLjAwINGE0YPQvdGCINGB0YLQtdGA
-0LvQuNC90LPQuNC50L0g0q/QvdGNINCx0q/RhdC40Lkg0J7RgNGI0LjQvSDRgdGD0YPQs9GHINCx
-0YPRgSDQtNCw0L3RgQ0K0YXQuNC50YHRjdC9LiBUaGUNCtCt0L3RjdGF0q/SryDRhdCw0LTQs9Cw
-0LvQsNC80LbQuNC50L0g0LPRjdGA0Y3RjdC90LjQuSDRhdGD0LPQsNGG0LDQsCAyMDIxINC+0L3R
-iyAxLdGAINGB0LDRgNGL0L0gMTYt0L3RiyDTqdC006nRgA0K0LHQsNC50YHQsNC9LiDQpdCw0YDQ
-sNC80YHQsNC70YLQsNC5INC90Ywg0YLRjdGA0Y3RjdGAINCl0Y/RgtCw0LTQsNC0INGB0LDRj9GF
-0LDQvSDRgtC+0YXQuNC+0LvQtNGB0L7QvSAyMDE5LTIwMjAg0L7QvdGLDQrQmtC+0YDQvtC90LDQ
-ktC40YDRg9GBICjQmtC+0LLQuNC0MTkpINGC0LDRhdC70YvQvSDQtNGN0LPQtNGN0LvRgtC40LnQ
-vSDSr9C10Y3RgCDQvdCw0YEg0LHQsNGA0YHQsNC9INGF0q/QvNKv0q/RgdC40LnQvQ0K0YLQvtC+
-0L3QtCDQsdCw0LPRgtCw0LYsINCx0LjQt9C90LXRgSDQsNGP0LvQsNC70LDQsNGAINGP0LLQtiDQ
-sdCw0LnRhdC00LDQsCDQtNC+0YAg0YXQsNGP0LYgNjgsMDAwINGF0q/QvdC40Lkg0LDQvNC40LnQ
-sw0K0LDQstGHINC+0LTRgdC+0L0uIC4NCg0K0JzQsNC90LDQuSDQsdCw0L3QutC90Ysg0YPQtNC4
-0YDQtNC70LDQs9GD0YPQtCDRgtKv0q/QvdC40Lkg0q/RhdC70LjQudC9INGC0LDQu9Cw0LDRgCDR
-hdCw0YDQsNCw0YXQsNC9INC80Y3QtNGN0Y3Qs9Kv0Lkg0LHQsNC50L3QsCwNCtGC0Y3RgCDQvNC4
-0L3QuNC5INC90LDQudC3INCx0LDQudGB0LDQvSwg0LTQsNC90YEg0L3RjCDQvdGN0Y3Qs9C00Y3R
-hdGN0LQg0LHQuCDRgtKv0q/QvdC40Lkg0LTQsNC90YHQvdGLINCw0LbQuNC70YLQsNC9DQrQsdCw
-0LnRgdCw0L0g0YPRh9GA0LDQsNGBINCx0Lgg0LzRjdC00YHRjdC9Lg0K0L3QsNC80LDQudCzINC0
-0Y3QstGI0LjRhdGN0Y3RgSDTqdC80L3TqSDQvdGN0Y3RhS4g0JPRjdGB0Y3QvSDRhdGN0LTQuNC5
-INGHLCDQvdC+0ZHQvSDQmNCy0LDQvSDQtNCw0L3RgSDQvdGN0Y3Qu9Cz0Y3RhSDSr9C10LQNCtGP
-0LzQsNGAINGHINC00LDRgNCw0LDQs9C40LnQvSDRhdCw0LzQsNCw0YLQsNC9INGB0LDQtNCw0L0v
-INOp0LIg0LfQsNC70LPQsNC80LbQu9Cw0LPRh9C40LnQvSDRgtCw0LvQsNCw0YAg0LTRg9GA0LTQ
-sNCw0LPSr9C5DQrQsdOp0LPTqdOp0LQg0YLRjdGA0Y3RjdGAINCz0Y3RgNC70Y3RjdCz0q/QuSwg
-0LPRjdGA0LvRjdGN0LPSr9C5INCx0LDQudGB0LDQvS4NCtGF0q/Sr9GF0LTSr9Kv0LQuINOo0L3Q
-s9Op0YDRgdOp0L0g0LTQvtC70L7QviDRhdC+0L3QvtCz0YIg0LzQsNC90LDQuSDQsdCw0L3QutC9
-0Ysg0YPQtNC40YDQtNC70LDQs9CwINCz0Y3RgNGN0Y3Qs9GN0Y0NCtGB0YPQvdCz0LDRhdCw0LDR
-gCDQsdC+0LvRgdC+0L0g0YLQvtGF0LjQvtC70LTQvtC70LQg0YLSr9Kv0L3QuNC5INC806nQvdCz
-0LjQudCzINGO0YMg0YXQuNC50YUg0YLQsNC70LDQsNGAINC30LDQsNCy0LDRgNGH0LjQu9Cz0LDQ
-sA0K06nQs9Op0YXQuNC50LMg0YXSr9GB0YHRjdC9Lg0KDQrQmNC50Lwg0LfSr9C50Lsg0LHQvtC7
-0L3QviDQs9GN0LTQs9C40LnQsyDQsdC4INC80Y3QtNGN0LYg0LHQsNC50LPQsNCwINGC0YPQuyDQ
-vdOp0YXRhtOp0Lsg0LHQsNC50LTQu9GL0LMg0LfQvtGF0LjRhtGD0YPQu9Cw0YUNCtCw0YDQs9Cw
-INC30LDQvNGL0LMg0YXQsNC50LYg0LHQsNC50YHQsNC9LCDRg9GH0LjRgCDQvdGMINGF0Y3RgNGN
-0LIg0LzQuNC90LjQuSDQsdCw0L3QutC90Ysg0LfQsNGF0LjRgNC70YPRg9C0INCY0LLQsNC90YvQ
-sw0K0LzRjdC00LLRjdC7DQrQvdCw0YEg0LHQsNGA0YHQsNC9LCDTqdCyINC30LDQu9Cz0LDQvNC2
-0LvQsNCz0YfQs9Kv0LksINGC0Y3QtCDRhdGD0LLQuNC50L0g0YXRjdGA0Y3Qs9GG0Y3RjdC90LQg
-0LfQvtGA0LjRg9C70LYg0YXTqdGA06nQvdCz06nTqQ0K0LDQstCw0YUg0LHQvtC70L3Qviwg0YLQ
-uNC50LzRjdGN0YEg0LHQuCDQuNC50Lwg0LfSr9C50Lsg0LHQvtC70L7QvtGB0L7QuSDQs9GN0LYg
-0YXSr9GB0Y3RhdCz0q/QuSDQsdCw0LnQvdCwLiDQotGN0YAg0q/QtdC0DQrQsdC4INGH0LDQvNCw
-0LnQsyDRhdCw0YDQsNCw0LQg0LHQsNGP0YDRgtCw0Lkg0LHQsNC50YHQsNC9INCx06nQs9Op06nQ
-tCDQvtC00L7QviDRgtCwINGC0q/Sr9C90YLRjdC5INC40LbQuNC7INGD0LvRgdGC0LDQuSwNCtC8
-0LjQvdC40Lkg0LHQsNC90LrQvdGLINGC06nQsiDQvtGE0YTQuNGBINGC0LDQvdC0INC00LDQvdGB
-0YvQsyDTqdCz06nRhSDQsdC+0LvQvdC+LiDQr9C80LDRgCDRhyDRjdGA0YHQtNGN0Lsg0LHQsNC5
-0YXQs9Kv0LkNCtC+0YDQvtC70YbQvtGFOyDQs9Kv0LnQu9Cz0Y3RjSDQvdGMINGC0LDQvdGL0LMg
-0LDQu9C40LLQsNCwINGF0YPRg9C70Ywg0LfTqdGA0YfQu9Op06nRgSDRhdCw0LzQs9Cw0LDQu9Cw
-0YUg0YXRg9GD0LvRjCDRkdGB0L3Riw0K0LfQvtGF0LjRhtGD0YPQu9Cw0LvRgtGL0L0g0LTQsNCz
-0YPRgyDRhdC40LnQs9C00Y3RhSDQsdC+0LvQvdC+Lg0KDQrQkdCw0L3QutC90Ysg0LfQsNGF0LjR
-gNC70YPRg9C00YvQsyDQsNCy0LDRhdGL0LMg0LfTqdCy0YjTqdOp0YDRgdC906nTqdGBINCx0LjQ
-tCDQvNOp0L3Qs9Op06kg0L3RjdGF0Y3QvNC20LjQu9GB0Y3QvSDQvdGMINC00Y3RjdGALA0K0YLR
-jdC0INGF0Y3QtNC40LnQvdGNINCx0LDRj9C9LiDQkdC4INGI0YPQvdCw0LvRgtCw0Lkg0YXSr9C9
-INCx0LjRiCDQsdC+0LvQvtGF0L7QvtGAINCx0LjQtNGN0L3QtCDRgdCw0L3QsNC7INCx0L7Qu9Cz
-0L7Qtg0K0LHQsNC50L3QsA0K0KHQsNC90YXSr9Kv0LPQuNC50L0gNTAvNTAg0YXRg9Cy0LjQudCz
-INGF0L7RkdGAINGC0LDQu9C00LDQsCDRgtGN0L3RhtKv0q8g0YXRg9Cy0LDQsNGFLCDQvNC40L3Q
-uNC5INGF0YPQstGMINC90LDQtNCw0LQNCtOp06nRgNC40LnQvSDQutC+0LzQv9Cw0L3QuNC50LMg
-0LHQsNC50LPRg9GD0LvQtiwg0L7Qu9GB0L7QvSDQvtGA0LvQvtCz0YvQsyDQsdGD0Y/QvdGLINCw
-0LbQuNC70LQg0LfQsNGA0YbRg9GD0LvQsNGF0LDQtA0K0YLRg9GB0LDQu9C90LAuDQrQvNOp0YDT
-qdOp0LTTqdC7Lg0KDQrQnNC40L3QuNC5INGB0LDQvdCw0LvRi9C9INGC0LDQu9Cw0LDRgCDRgdCw
-0L3QsNC7INCx0L7QtNC70L7QviDRhdGN0LvRjdGN0YDRjdC5LCDQvdCw0LTQsNC0INGN0L3RjSDQ
-s9Kv0LnQu9Cz0Y3RjdC90LQg0YLQsNC90YsNCtGC0YPRgdC70LDQvNC2INKv0L3RjdGF0Y3RjdGA
-INGF0Y3RgNGN0LPRgtGN0Lkg0LHQsNC50L3QsCwg0LHQuCDRh9Cw0LzQsNC50LMg06nTqdGA0LjQ
-udC90YXTqdOp0YDTqdOpINCx0LjRiCDQvdCw0LTQsNC0DQrRgtGD0YHQu9Cw0YXQsNCw0YAg0YHQ
-vtC90LPQvtGB0L7QvS4NCtCl0L7QvdCz0L7RgCDQvNC40L3RjCwg0LPRjdGF0LTRjdGNINCx0Lgg
-0YLQsNC90YLQsNC5INGF0L7Qu9Cx0L7QviDQsdCw0YDQuNGF0LDQsNGB0LDQsCDTqdC80L3TqSDR
-jdC90Y0g0YXQsNGA0LjQu9GG0LDQsNC90YsNCtGC0LDQu9Cw0LDRgCDQt9Cw0LvQsdC40YDQsNGF
-INCz0Y3QtiDRhtCw0LMg0LfQsNCy0LDQsCDQs9Cw0YDQs9Cw0YHQvdCw0LAg0LHRg9GA0YXQsNC9
-0LDQsNGBINGC0LAg0LHSr9GF0Y3QvdC0INC80Y3QtNGN0Y3RgdGN0LkNCtCz0Y3QtiDRhdKv0YHR
-hyDQsdCw0LnQvdCwLg0K0K3QvdGNINGC0LDQu9Cw0LDRgCDQsNC90YXQsNCw0YDRhywg0Y3QvdGN
-INC80Y3QtNGN0Y3Qu9C70LjQudCzINCc0JDQqCDQndCj0KPQpiDQs9GN0LYg0q/Qt9C90Y0g0q/S
-ry4g0KLQsNC90Ysg0YXQsNGA0LjRg9CzDQrRhdKv0LvRjdGN0L0g0LDQstGB0L3RiyDQtNCw0YDQ
-sNCwINC80LjQvdC40Lkg0YXRg9Cy0LjQudC9INC40LzRjdC50Lsg0YXQsNGP0LPQsNCw0YAgaGVn
-Ym9ya29kam92QGdtYWlsLmNvbQ0K0LPSr9C50LvQs9GN0Y3QvdC40Lkg0YLQsNC70LDQsNGAINC0
-0Y3Qu9Cz0Y3RgNGN0L3Qs9Kv0Lkg0LzRjdC00Y3RjdC70Y3QuyDTqdCz06nRhSDQsdC+0LvQvdC+
-LiDQnNOp0L0g0YHQsNC90LPQuNC50L0NCtGF0LDQtNCz0LDQu9Cw0LzQttC40LnQvSDQs9GN0YDR
-h9C40LvQs9GN0Y3QvdC40Lkg0YXRg9GD0LvQsdCw0YAsINC806nQvSDQutC+0LzQv9Cw0L3QuNC5
-0LMg0q/Sr9GB0LPRjdC9INCx0LDQudCz0YPRg9C70YHQsNC9DQrQs9GN0YDRh9C40LvQs9GN0Y0N
-CtGB0LDQvdCzINCx0LjQuSDQsdC+0LvQs9C+0YHQvtC9LiDQotCw0L3RiyDRj9Cw0YDQsNC70YLQ
-sNC5INGF0LDRgNC40YMg0LDRgNCz0LAg0YXRjdC80LbRjdGNINCw0LLQsNGF0YvQsyDRhdKv0LvR
-jdGN0LYNCtCx0LDQudCz0LDQsCDRgtGD0Lsg0JHRg9GA0YXQsNC9INC40LLRjdGN0LMNCtCl0q/Q
-vdC00Y3RgtCz0Y3RgdGN0L0NCtCl0LDRgtCw0LPRgtCw0Lkg0JrQvtC00LbQvtCy0Lgg0KXQtdCz
-0LHQvtGADQpoZWdib3Jrb2Rqb3ZAZ21haWwuY29tDQo=
+From: René Nyffenegger <mail@renenyffenegger.ch>
+
+The file include/linux/container_of.h contained kernel-doc but was not
+referenced in any .rst file. In addition, the file
+Documentation/core-api/kobject.rst wrongly located the definition
+of the macro `container_of` in linux/kernel.h while in reality
+it is defined in linux/container_of.h
+
+This patch adds a new .rst file that includes the kernel-doc of
+container_of.h and rectifies the wrong reference of the header
+file.
+
+Signed-off-by: René Nyffenegger <mail@renenyffenegger.ch>
+---
+ Documentation/core-api/container_of.rst | 64 +++++++++++++++++++++++++
+ Documentation/core-api/index.rst        |  1 +
+ Documentation/core-api/kobject.rst      | 58 +++++++++++-----------
+ 3 files changed, 93 insertions(+), 30 deletions(-)
+ create mode 100644 Documentation/core-api/container_of.rst
+
+diff --git a/Documentation/core-api/container_of.rst b/Documentation/core-api/container_of.rst
+new file mode 100644
+index 000000000000..f063d3f9e536
+--- /dev/null
++++ b/Documentation/core-api/container_of.rst
+@@ -0,0 +1,64 @@
++=====================================================================================
++Given a pointer to a member of a struct, returning a pointer to the containing struct
++=====================================================================================
++
++.. _container_of:
++
++Overview
++========
++
++The two macros ``container_of`` and ``container_of_const``, defined in ``<include/linux/container_of.h>``, return a pointer to the ``struct`` (i. e. the *container*) from a pointer to a member of this ``struct``.
++
++These macros might be used when :ref:`embedding kobjects<embedding_kobjects>`, but see also :ref:`usage<container_of_usage>`.
++
++
++.. kernel-doc:: include/linux/container_of.h
++
++Usage
++=====
++
++.. _container_of_usage:
++
++The following simple code demonstrates the usage of ``container_of``
++
++.. code-block:: c
++
++ struct inner_struct
++ {
++ 	int abc;
++ 	int def;
++ }
++ 
++ struct container_struct
++ {
++ 	struct inner_struct inner;
++ 	char               *member_xyz;
++ 	int                 member_val;
++ };
++ 
++ static void f(struct inner_struct *inr)
++ {
++ 	struct container_struct *cont;
++ 
++ 	cont = container_of(inr, struct container_struct, inner);
++ 
++        /* Use cont and its members */
++ }
++ 
++ static void g(char** member)
++ {
++ 	struct container_struct *cont;
++ 
++ 	cont = container_of(member, struct container_struct, member_xyz);
++        /* Use cont and its members */
++ }
++ 
++ void somewhere()
++ {
++ 	struct container_struct cont;
++ 
++ 	/* Initialize cont */
++ 
++ 	f(& cont.inner      );
++ 	g(& cont.member_xyz );
++ }
+diff --git a/Documentation/core-api/index.rst b/Documentation/core-api/index.rst
+index 7a3a08d81f11..595af47d0d5f 100644
+--- a/Documentation/core-api/index.rst
++++ b/Documentation/core-api/index.rst
+@@ -37,6 +37,7 @@ Library functionality that is used throughout the kernel.
+    kref
+    assoc_array
+    xarray
++   container_of
+    maple_tree
+    idr
+    circular-buffers
+diff --git a/Documentation/core-api/kobject.rst b/Documentation/core-api/kobject.rst
+index 7310247310a0..058570694418 100644
+--- a/Documentation/core-api/kobject.rst
++++ b/Documentation/core-api/kobject.rst
+@@ -49,6 +49,8 @@ approach will be taken, so we'll go back to kobjects.
+ Embedding kobjects
+ ==================
+ 
++.. _embedding_kobjects:
++
+ It is rare for kernel code to create a standalone kobject, with one major
+ exception explained below.  Instead, kobjects are used to control access to
+ a larger, domain-specific object.  To this end, kobjects will be found
+@@ -66,50 +68,46 @@ their own, but are invariably found embedded in the larger objects of
+ interest.)
+ 
+ So, for example, the UIO code in ``drivers/uio/uio.c`` has a structure that
+-defines the memory region associated with a uio device::
++defines the memory region associated with a uio device:
+ 
+-    struct uio_map {
+-            struct kobject kobj;
+-            struct uio_mem *mem;
+-    };
++.. code-block:: c
+ 
+-If you have a struct uio_map structure, finding its embedded kobject is
+-just a matter of using the kobj member.  Code that works with kobjects will
+-often have the opposite problem, however: given a struct kobject pointer,
++ struct uio_map {
++ 	struct kobject kobj;
++ 	struct uio_mem *mem;
++ };
++
++If you have a ``struct uio_map`` structure, finding its embedded kobject is
++just a matter of using the ``kobj`` member.  Code that works with kobjects will
++often have the opposite problem, however: given a ``struct kobject *``,
+ what is the pointer to the containing structure?  You must avoid tricks
+ (such as assuming that the kobject is at the beginning of the structure)
+-and, instead, use the container_of() macro, found in ``<linux/kernel.h>``::
+-
+-    container_of(ptr, type, member)
++and, instead, use the container_of() macro:
+ 
+-where:
++.. code-block:: c
+ 
+-  * ``ptr`` is the pointer to the embedded kobject,
+-  * ``type`` is the type of the containing structure, and
+-  * ``member`` is the name of the structure field to which ``pointer`` points.
+-
+-The return value from container_of() is a pointer to the corresponding
+-container type. So, for example, a pointer ``kp`` to a struct kobject
+-embedded **within** a struct uio_map could be converted to a pointer to the
+-**containing** uio_map structure with::
+-
+-    struct uio_map *u_map = container_of(kp, struct uio_map, kobj);
++ struct kobject *kp =  ; /* Pointer to a kobj member of a uio_map */
++ struct uio_map *u_map = container_of(kp, struct uio_map, kobj);
+ 
+ For convenience, programmers often define a simple macro for **back-casting**
+ kobject pointers to the containing type.  Exactly this happens in the
+-earlier ``drivers/uio/uio.c``, as you can see here::
++earlier ``drivers/uio/uio.c``, as you can see here:
+ 
+-    struct uio_map {
+-            struct kobject kobj;
+-            struct uio_mem *mem;
+-    };
++.. code-block:: c
+ 
+-    #define to_map(map) container_of(map, struct uio_map, kobj)
++ struct uio_map {
++ 	struct kobject kobj;
++ 	struct uio_mem *mem;
++ };
++ 
++ #define to_map(map) container_of(map, struct uio_map, kobj)
+ 
+ where the macro argument "map" is a pointer to the struct kobject in
+-question.  That macro is subsequently invoked with::
++question.  That macro is subsequently invoked with:
++
++.. code-block:: c
+ 
+-    struct uio_map *map = to_map(kobj);
++ struct uio_map *map = to_map(kobj);
+ 
+ 
+ Initialization of kobjects
+-- 
+2.30.2
+
