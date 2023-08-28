@@ -2,84 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 81C9A78A6D4
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Aug 2023 09:54:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1837078A76C
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Aug 2023 10:17:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229797AbjH1Hxx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 28 Aug 2023 03:53:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46028 "EHLO
+        id S229785AbjH1IQn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 28 Aug 2023 04:16:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47884 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229935AbjH1Hxr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 28 Aug 2023 03:53:47 -0400
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com [IPv6:2607:f8b0:4864:20::52d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 54149115
-        for <linux-doc@vger.kernel.org>; Mon, 28 Aug 2023 00:53:45 -0700 (PDT)
-Received: by mail-pg1-x52d.google.com with SMTP id 41be03b00d2f7-56b2e689968so1283566a12.0
-        for <linux-doc@vger.kernel.org>; Mon, 28 Aug 2023 00:53:45 -0700 (PDT)
+        with ESMTP id S229629AbjH1IQW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 28 Aug 2023 04:16:22 -0400
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com [IPv6:2607:f8b0:4864:20::62f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6C259C3
+        for <linux-doc@vger.kernel.org>; Mon, 28 Aug 2023 01:16:20 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id d9443c01a7336-1bc63ef9959so22472065ad.2
+        for <linux-doc@vger.kernel.org>; Mon, 28 Aug 2023 01:16:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=9elements.com; s=google; t=1693209225; x=1693814025;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=yc5/64aDDHimpalFyKo/sDYTTFjFL1PiUBqmUUqNYNY=;
-        b=EVNyxX2D6EZ5nzDDCwGTnaKtkt4faXDCrRZB+EWpBULWw6ZofaARnr23A2UfkDFslR
-         VTHjtWH1hVnX6DCHF8Z9iAxLt1b1Tmgg0KwRSx0eTxhQlrrGKB+GRJb+qt+Mp637iu+1
-         djvqqUloB8V3bujW+Mdax+wO37dYgmDLV9XdQZtqymlzzMqCS4QgC6eYtcdeHu2gOPIW
-         42igJq3p/nyBsOyk6dUQ8NMZex3pu71WtSsJKnvwJsXe1yNt3w5luvk/LkE9tHSskA6Q
-         8aYzN4CS3gI9Wvqe8y2VYcVR/yC2qROUREGW0D7O+jxuWsNG/Ttr6n+Pykn3HQTP6FJv
-         Egvw==
+        d=chromium.org; s=google; t=1693210580; x=1693815380;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=hD5oyc91zexss8iplnmDih5E3tUKOUqVxVKR2VyNeyI=;
+        b=ftU2e2RdnDVfMD3FFMtiZay9w1igiZJvdLHjDzCZh2mDV2QjnqogxSUgA6/k6VGMhq
+         EeCSYBef2LnimoHeQ5Lqv4gF/OkvVzBkDiQP1lux4TIzjYdg/cyozutpMmCBOA5zHA8O
+         tpjXilUIrGqCYS6rPg1dfCtvezEQ4qRhoS1Pg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693209225; x=1693814025;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20221208; t=1693210580; x=1693815380;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=yc5/64aDDHimpalFyKo/sDYTTFjFL1PiUBqmUUqNYNY=;
-        b=fABwlRI1E5phqtEGqNx3XUb1pb5ywlW6ZBRHNe4UM112L0BAZkMLgLOcbgdFOVQfCN
-         O40+so+y2baWZor7NMkL9sCUEzLj6oemtxIPUmMQu/+SEzV2lO7zITpJrlTTo40hxgbb
-         tahoX1mXBzJudA6NMa2TmRQC89kiDTdMWM/b124Gf2qzDxV9k62CzL3BGxRPIugNJPcb
-         Fhc8i6sgDcfOaLBSKgsBaQ7RL72/dCq8dtL6nw3ALdB4hkH3Eaq3mmTyQ8xqdRbw8J+N
-         vchKBTX2KeViVByR/XhG9xVjT6PcU+R+VNegm3dsBDEViniwNTOxBxcYBmPzbVBp2sA/
-         YpJg==
-X-Gm-Message-State: AOJu0YyM4l378fLVrgeAHLMgtwxiYNJEv6eakfxN4wP+20m8gIw5z0O/
-        oj7p1kYBW6jn0vSJk7zqrCuqrW3mBjI1TG0KrfVnDA==
-X-Google-Smtp-Source: AGHT+IE4ZTuCbpfSd2u26y/GnloivJyZc/YSoHKEwSl0YpsN37Q/7zIWDf5qfNHHW8SlBatqk5kJBNfX4i4HRUvRd2I=
-X-Received: by 2002:a17:90a:3ec1:b0:26d:4642:1bd7 with SMTP id
- k59-20020a17090a3ec100b0026d46421bd7mr18663702pjc.34.1693209224797; Mon, 28
- Aug 2023 00:53:44 -0700 (PDT)
+        bh=hD5oyc91zexss8iplnmDih5E3tUKOUqVxVKR2VyNeyI=;
+        b=a+iSEsUTWRKKYX31SelaL8bFUMBqYHiaFg92kyZWGC5NHfosAtr8ZEL5Rb4vzYggZi
+         uHdeHD05nN/Tf1VyC7D4nRpt8bh8jq1M8nfNMBQSlO8+4B9DqfeWRrn7XZ7xfcZV14R6
+         DMmzMei226RF3Si0VJ8edd+W3XHWS44MI0ePNvtro1eGdNPJDsmGNieEvlhhdTDdqOo1
+         /5XCvEFwmmopY8cCbb8E361vWrhLzr2ZbcKhuaM1Z/H/O0A7jCC0wBbXY1+jJhbk4ktx
+         MS6UWSkiIeAnU9PRQU2wvoJzDtVI8M9tQqV/zuWlMGabYf2wF9+okXzjEGk7NhBaPKQ1
+         UNpw==
+X-Gm-Message-State: AOJu0YyPJHF+t+T5b/zT+uydtH9EB0ko9WKyIurUCNE5sJFmaYq/5iWl
+        h8QSBoLmpgnk4xc2PcFTTxZ5xw==
+X-Google-Smtp-Source: AGHT+IHBCRkOdvz3bICLpxgNzt2TpU53Ks2o85GsbfP1PoYC+pS6KkoDT91ML3hyAlpG+R91OrKFyw==
+X-Received: by 2002:a17:903:4c5:b0:1bd:ec9e:59fe with SMTP id jm5-20020a17090304c500b001bdec9e59femr23569151plb.68.1693210579906;
+        Mon, 28 Aug 2023 01:16:19 -0700 (PDT)
+Received: from datalore.c.googlers.com.com (148.175.199.104.bc.googleusercontent.com. [104.199.175.148])
+        by smtp.gmail.com with ESMTPSA id jh12-20020a170903328c00b001bf5c12e9fesm6676568plb.125.2023.08.28.01.16.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Aug 2023 01:16:19 -0700 (PDT)
+From:   Brandon Pollack <brpol@chromium.org>
+To:     marius.vlad@collabora.com, jshargo@chromium.org
+Cc:     corbet@lwn.net, dri-devel@lists.freedesktop.org,
+        hamohammed.sa@gmail.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, mairacanal@riseup.net,
+        melissa.srw@gmail.com, mripard@kernel.org,
+        rodrigosiqueiramelo@gmail.com, tzimmermann@suse.de,
+        airlied@gmail.com, daniel@ffwll.ch,
+        maarten.lankhorst@linux.intel.com, mduggan@chromium.org,
+        hirono@chromium.org, Brandon Pollack <brpol@chromium.org>
+Subject: [v5,0/7] Adds support for ConfigFS to VKMS!
+Date:   Mon, 28 Aug 2023 08:14:42 +0000
+Message-ID: <20230828081609.3572937-1-brpol@chromium.org>
+X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 MIME-Version: 1.0
-References: <20230817120029.221484-1-billy_tsai@aspeedtech.com>
- <20230817120029.221484-2-billy_tsai@aspeedtech.com> <20230823131334.GA2059582-robh@kernel.org>
- <SG2PR06MB33659FFB0CBFFA55295E6A098B1DA@SG2PR06MB3365.apcprd06.prod.outlook.com>
-In-Reply-To: <SG2PR06MB33659FFB0CBFFA55295E6A098B1DA@SG2PR06MB3365.apcprd06.prod.outlook.com>
-From:   Naresh Solanki <naresh.solanki@9elements.com>
-Date:   Mon, 28 Aug 2023 13:23:33 +0530
-Message-ID: <CABqG17g-s4h810JO-MO_TRRJhPkP=RMLDm7Jq6Sx4Gm1hRKqLg@mail.gmail.com>
-Subject: Re: [PATCH v7 1/2] dt-bindings: hwmon: Support Aspeed g6 PWM TACH Control
-To:     Billy Tsai <billy_tsai@aspeedtech.com>
-Cc:     Rob Herring <robh@kernel.org>,
-        "jdelvare@suse.com" <jdelvare@suse.com>,
-        "linux@roeck-us.net" <linux@roeck-us.net>,
-        "krzysztof.kozlowski+dt@linaro.org" 
-        <krzysztof.kozlowski+dt@linaro.org>,
-        "joel@jms.id.au" <joel@jms.id.au>,
-        "andrew@aj.id.au" <andrew@aj.id.au>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "thierry.reding@gmail.com" <thierry.reding@gmail.com>,
-        "u.kleine-koenig@pengutronix.de" <u.kleine-koenig@pengutronix.de>,
-        "p.zabel@pengutronix.de" <p.zabel@pengutronix.de>,
-        "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
-        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>,
-        "linux-aspeed@lists.ozlabs.org" <linux-aspeed@lists.ozlabs.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-pwm@vger.kernel.org" <linux-pwm@vger.kernel.org>,
-        BMC-SW <BMC-SW@aspeedtech.com>,
-        "patrick@stwcx.xyz" <patrick@stwcx.xyz>,
-        Luke Chen <luke_chen@aspeedtech.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
         SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -87,175 +70,82 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Billy,
+Since Jim is busy with other work and I'm working on some things that
+rely on this, I've taken up the task of doing the iterations.  I've
+addressed the comments as best I can (those replies are to each
+individual change) and here is the patch set to go with those.
 
+I added my own signoff to each commit, but I've left jshargo@ as the
+author of all the commits he wrote.  I'm sure there is still more to
+address and the ICT tests that were writtein parallel to this may also
+need some additions, but I'm hoping we're in a good enough state to get
+this in and iterate from there soon.
 
-On Mon, 28 Aug 2023 at 09:33, Billy Tsai <billy_tsai@aspeedtech.com> wrote:
->
-> On Thu, Aug 17, 2023 at 08:00:28PM +0800, Billy Tsai wrote:
->
-> >> Document the compatible for aspeed,ast2600-pwm-tach device, which can
->
-> >> support upto 16 PWM outputs and 16 fan tach input.
->
-> >>
->
-> >> Signed-off-by: Billy Tsai <billy_tsai@aspeedtech.com>
->
-> >> ---
->
-> >>  .../bindings/hwmon/aspeed,g6-pwm-tach.yaml    | 57 +++++++++++++++++++
->
-> >>  1 file changed, 57 insertions(+)
->
-> >>  create mode 100644 Documentation/devicetree/bindings/hwmon/aspeed,g6-pwm-tach.yaml
->
-> >>
->
-> >> diff --git a/Documentation/devicetree/bindings/hwmon/aspeed,g6-pwm-tach.yaml b/Documentation/devicetree/bindings/hwmon/aspeed,g6-pwm-tach.yaml
->
-> >> new file mode 100644
->
-> >> index 000000000000..1666304d0b0f
->
-> >> --- /dev/null
->
-> >> +++ b/Documentation/devicetree/bindings/hwmon/aspeed,g6-pwm-tach.yaml
->
-> >> @@ -0,0 +1,57 @@
->
-> >> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
->
-> >> +# Copyright (C) 2021 Aspeed, Inc.
->
-> >> +%YAML 1.2
->
-> >> +---
->
-> >> +$id: http://devicetree.org/schemas/hwmon/aspeed,g6-pwm-tach.yaml#
->
-> >> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->
-> >> +
->
-> >> +title: ASPEED G6 PWM and Fan Tach controller device driver
->
-> >> +
->
-> >> +maintainers:
->
-> >> +  - Billy Tsai <billy_tsai@aspeedtech.com>
->
-> >> +
->
-> >> +description: |
->
-> >> +  The ASPEED PWM controller can support upto 16 PWM outputs.
->
-> >> +  The ASPEED Fan Tacho controller can support upto 16 fan tach input.
->
-> >> +
->
-> >> +properties:
->
-> >> +  compatible:
->
-> >> +    enum:
->
-> >> +      - aspeed,ast2600-pwm-tach
->
-> >> +
->
-> >> +  reg:
->
-> >> +    maxItems: 1
->
-> >> +
->
-> >> +  clocks:
->
-> >> +    maxItems: 1
->
-> >> +
->
-> >> +  resets:
->
-> >> +    maxItems: 1
->
-> >> +
->
-> >> +  "#pwm-cells":
->
-> >> +    const: 3
->
-> >> +
->
-> >> +  aspeed,fan-tach-ch:
->
-> >> +    description: Specify the Fan tach input channels.
->
-> >> +    $ref: "/schemas/types.yaml#/definitions/uint8-array"
->
->
->
-> >This property is already defined in aspeed-pwm-tacho.txt as a single u8
->
-> >that goes in a fan node. You can't redefine its type and location here.
->
->
->
-> Hi Rob,
->
->
->
-> I didn't redefine the type of property. The type of the aspeed,fan-tach-ch is unit8-array
->
-> in aspeed-pwm-tacho.txt.
->
-> https://github.com/torvalds/linux/blob/master/Documentation/devicetree/bindings/hwmon/aspeed-pwm-tacho.txt#L48
->
-> https://github.com/torvalds/linux/blob/master/Documentation/devicetree/bindings/hwmon/aspeed-pwm-tacho.txt#L71
->
->
->
-> >To repeat what I've said in previous versions, work with others to
->
-> >define a common fan and fan controller binding. Otherwise, anything new
->
-> >with fan related properties is simply going to be rejected.
->
->
->
-> Okay I will try to work with Naresh for defining a common fan binding.
->
->
->
-> Thanks for your suggestion.
->
->
->
-> Hi Naresh,
->
->
->
-> As Rob mentioned, it would be advisable for my dt-bindings to reference the common fan bindings instead of introducing specific properties.
->
-> I noticed that you have already submitted a related patch to the community, which seems to be pending for around 10 months.
->
-> https://lore.kernel.org/lkml/20221116213615.1256297-2-Naresh.Solanki@9elements.com/
->
-> Do you have plans to send the next version of the patch? Alternatively, can I proceed to cherry-pick this version of the patch and continue with
->
-> the upstreaming process in my patch serial?
-Sure, go ahead.
+Since V5:
+========
+Fixed some bad merge conflicts and locking behaviours as well as
+clarified some documentation, should be good to go now :)
 
-Regards,
-Naresh
->
->
->
-> Thanks
->
-> Best Regards,
->
-> Billy Tsai
+Since V4:
+========
+Fixed up some documentation as suggested by Marius
+Fixed up some bad locking as suggested by Marius
+Small fixes here and there (most have email responses to previous chain
+emails)
+
+Since V3:
+========
+I've added hotplug support in the latest patch.  This has been reviewed some
+and the notes from that review are addressed here as well.
+
+Relevant/Utilizing work:
+=======================
+I've built a while test framework based on this as proof it functions (though
+I'm sure there may be lingering bugs!).  You can check that out on
+crrev.com if you are interested and need to get started yourself (but be
+aware of any licensing that may differ from the kernel itself!  Make
+sure you understand the license:
+
+https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform/tast-tests/LICENSE
+
+That said, you can see the changes in review on the crrev gerrit:
+
+https://chromium-review.googlesource.com/c/chromiumos/platform/tast-tests/+/4666669
+
+Outro:
+=====
+I really appreciate everyone's input and tolerance in getting these
+changes in.  Jim's first patch series was this, and other than some
+small cleanups and documentation, taking over it is also mine.
+
+Thank you everyone :)
+
+Brandon Pollack (1):
+  drm/vkms Add hotplug support via configfs to VKMS.
+
+Jim Shargo (6):
+  drm/vkms: Back VKMS with DRM memory management instead of static
+    objects
+  drm/vkms: Support multiple DRM objects (crtcs, etc.) per VKMS device
+  drm/vkms: Provide platform data when creating VKMS devices
+  drm/vkms: Add ConfigFS scaffolding to VKMS
+  drm/vkms: Support enabling ConfigFS devices
+  drm/vkms: Add a module param to enable/disable the default device
+
+ Documentation/gpu/vkms.rst            |  20 +-
+ drivers/gpu/drm/Kconfig               |   1 +
+ drivers/gpu/drm/vkms/Makefile         |   1 +
+ drivers/gpu/drm/vkms/vkms_composer.c  |  30 +-
+ drivers/gpu/drm/vkms/vkms_configfs.c  | 721 ++++++++++++++++++++++++++
+ drivers/gpu/drm/vkms/vkms_crtc.c      | 102 ++--
+ drivers/gpu/drm/vkms/vkms_drv.c       | 206 +++++---
+ drivers/gpu/drm/vkms/vkms_drv.h       | 182 +++++--
+ drivers/gpu/drm/vkms/vkms_output.c    | 405 +++++++++++++--
+ drivers/gpu/drm/vkms/vkms_plane.c     |  44 +-
+ drivers/gpu/drm/vkms/vkms_writeback.c |  31 +-
+ 11 files changed, 1508 insertions(+), 235 deletions(-)
+ create mode 100644 drivers/gpu/drm/vkms/vkms_configfs.c
+
+-- 
+2.42.0.rc1.204.g551eb34607-goog
+
