@@ -2,121 +2,210 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B3EA078C8BC
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Aug 2023 17:40:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 11D9978C9E1
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Aug 2023 18:48:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237304AbjH2PkN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Aug 2023 11:40:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58376 "EHLO
+        id S237528AbjH2Qry (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Aug 2023 12:47:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54944 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237303AbjH2Pj5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Aug 2023 11:39:57 -0400
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 69D76B7;
-        Tue, 29 Aug 2023 08:39:54 -0700 (PDT)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 623062F4;
-        Tue, 29 Aug 2023 08:40:33 -0700 (PDT)
-Received: from [10.1.34.35] (010265703453.arm.com [10.1.34.35])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4671B3F738;
-        Tue, 29 Aug 2023 08:39:47 -0700 (PDT)
-Message-ID: <f2a46201-d807-d7af-bf84-8c99b33cd916@arm.com>
-Date:   Tue, 29 Aug 2023 16:39:42 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH v11 5/6] iommu/dma: Allow a single FQ in addition to
- per-CPU FQs
-Content-Language: en-GB
-To:     Niklas Schnelle <schnelle@linux.ibm.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        Will Deacon <will@kernel.org>,
-        Wenjia Zhang <wenjia@linux.ibm.com>,
-        Jason Gunthorpe <jgg@ziepe.ca>
-Cc:     Gerd Bayer <gbayer@linux.ibm.com>,
-        Julian Ruess <julianr@linux.ibm.com>,
-        Pierre Morel <pmorel@linux.ibm.com>,
-        Alexandra Winter <wintera@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Alexander Gordeev <agordeev@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Sven Schnelle <svens@linux.ibm.com>,
-        Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
-        Hector Martin <marcan@marcan.st>,
-        Sven Peter <sven@svenpeter.dev>,
-        Alyssa Rosenzweig <alyssa@rosenzweig.io>,
-        David Woodhouse <dwmw2@infradead.org>,
-        Lu Baolu <baolu.lu@linux.intel.com>,
-        Andy Gross <agross@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@linaro.org>,
-        Yong Wu <yong.wu@mediatek.com>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        AngeloGioacchino Del Regno 
-        <angelogioacchino.delregno@collabora.com>,
-        Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
-        Orson Zhai <orsonzhai@gmail.com>,
-        Baolin Wang <baolin.wang@linux.alibaba.com>,
-        Chunyan Zhang <zhang.lyra@gmail.com>,
-        Chen-Yu Tsai <wens@csie.org>,
-        Jernej Skrabec <jernej.skrabec@gmail.com>,
-        Samuel Holland <samuel@sholland.org>,
-        Thierry Reding <thierry.reding@gmail.com>,
-        Krishna Reddy <vdumpa@nvidia.com>,
-        Jonathan Hunter <jonathanh@nvidia.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-s390@vger.kernel.org,
-        netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-        iommu@lists.linux.dev, asahi@lists.linux.dev,
-        linux-arm-kernel@lists.infradead.org,
-        linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
-        linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org,
-        linux-doc@vger.kernel.org
-References: <20230717-dma_iommu-v11-0-a7a0b83c355c@linux.ibm.com>
- <20230717-dma_iommu-v11-5-a7a0b83c355c@linux.ibm.com>
- <9a466109-01c5-96b0-bf03-304123f435ee@arm.com>
- <b46210ce00b46ce42b8487e5670cc56b4458031f.camel@linux.ibm.com>
-From:   Robin Murphy <robin.murphy@arm.com>
-In-Reply-To: <b46210ce00b46ce42b8487e5670cc56b4458031f.camel@linux.ibm.com>
+        with ESMTP id S237551AbjH2Qrf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Aug 2023 12:47:35 -0400
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (mail-sn1nam02on2051.outbound.protection.outlook.com [40.107.96.51])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 872661B1;
+        Tue, 29 Aug 2023 09:47:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=I7A1eDg+YkYz5RpGIHrjFAM63rf+egFc9CxkojvMq0uAaCuqM4/6zN2NhZXhJxfd6vpdKOYIlKsOLr6F/h0j1fI/1q1gZiw8zd6Q1XkwQxwjUwon/yaFsgaTRFz9rJe69ojU/SE9aHKpIMTvqSUl8i/N0iyToYLjaBDceBhZzt6XCfSNOxXPVZaLeMihFQA7d9O9JhZ97A9GrZB8j4/G8GugJcQCMuGzIu9x0/IjVVygjn9oB/NoMBDdR8wrEAWbJCnpCdAAuO8TZJvavXEsfmBKBamD34O1rLnYYNkyw2nbVUcKhMkFhDimUqF4DscI1Fcs1v+oID9rvjwplB29OQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0D9L96jyi9UDGf5JGHIXyXVEfPTNUQmQm29z/RSF2SM=;
+ b=Ah3f5uTX3Vaut34hD+IoylbpfXeuRORwtQF105Fm7ZaKikJnSqTFKFi/SQzNZ+0dDwTYA4Vp9BYO3R0H0xmwstSWScXCa82awSjeiwX6L0rlboDwpsZ+PmNowOFWwIeKZ9sRXJE2HYZPiWFSn5MfvezvMqLfmoMwfuQfQ8T0wNw+GVtnQx+XJknvxze21WtvOub63yAMXMQT6Cl10dvNiuqF9NG3QpiNVtMf+fpiO4bul/2VCU4YonU8FdP0df0EOLoQ40C+3+wAHLpGiAehc3uQXn2lChwSfpus0uy1FtDgRk2DU9MlMqyzZqVBqJ+AWPfmuE+m3VMNDDdqOgJ0OQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0D9L96jyi9UDGf5JGHIXyXVEfPTNUQmQm29z/RSF2SM=;
+ b=Kh5MWok8zfz8uT2NiqO1M+zjFLBog4OCBMgY3Q5NnUYPSPGUIWrkNn6vCVy5Bedrcv1ucdhVHyonteND1LqoudHrAKA34RbgczO1mYy+NKUeUBCfr42Qy0kXabuQNzc5FwRAlHvXS+UG+alVqc/nnNRw+w4XVa4q0/u4Se1s5J0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from DM6PR12MB3818.namprd12.prod.outlook.com (2603:10b6:5:1cf::24)
+ by SA0PR12MB4479.namprd12.prod.outlook.com (2603:10b6:806:95::24) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.35; Tue, 29 Aug
+ 2023 16:47:29 +0000
+Received: from DM6PR12MB3818.namprd12.prod.outlook.com
+ ([fe80::7c3:6646:9b4f:258f]) by DM6PR12MB3818.namprd12.prod.outlook.com
+ ([fe80::7c3:6646:9b4f:258f%4]) with mapi id 15.20.6699.035; Tue, 29 Aug 2023
+ 16:47:29 +0000
+Message-ID: <b04ac070-2149-4d61-ad90-75401e173b29@amd.com>
+Date:   Tue, 29 Aug 2023 22:17:06 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tee: amdtee: add support for use of cma region
+To:     Dave Hansen <dave.hansen@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        "H . Peter Anvin" <hpa@zytor.com>,
+        Jens Wiklander <jens.wiklander@linaro.org>,
+        Sumit Garg <sumit.garg@linaro.org>,
+        "Paul E . McKenney" <paulmck@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Daniel Sneddon <daniel.sneddon@linux.intel.com>,
+        Rijo Thomas <Rijo-john.Thomas@amd.com>,
+        SivaSangeetha SK <SivaSangeetha.SK@amd.com>,
+        Josh Poimboeuf <jpoimboe@kernel.org>,
+        Juergen Gross <jgross@suse.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Ross Lagerwall <ross.lagerwall@citrix.com>,
+        Yuntao Wang <ytcoode@gmail.com>,
+        Sean Christopherson <seanjc@google.com>,
+        Jarkko Nikula <jarkko.nikula@linux.intel.com>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        Tom Lendacky <thomas.lendacky@amd.com>,
+        Mario Limonciello <mario.limonciello@amd.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        op-tee@lists.trustedfirmware.org
+Cc:     Mythri PK <Mythri.Pandeshwarakrishna@amd.com>,
+        Nimesh Easow <Nimesh.Easow@amd.com>
+References: <7531423fcb3b18ff78737ae5eabc84b0e3cb2909.1692369704.git.Devaraj.Rangasamy@amd.com>
+ <b908433c-0924-fbf7-f555-532e438ff050@intel.com>
+Content-Language: en-US
+From:   Devaraj Rangasamy <Devaraj.Rangasamy@amd.com>
+Organization: AMD
+In-Reply-To: <b908433c-0924-fbf7-f555-532e438ff050@intel.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-3.1 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+X-ClientProxiedBy: PN0PR01CA0035.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:4e::10) To DM6PR12MB3818.namprd12.prod.outlook.com
+ (2603:10b6:5:1cf::24)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3818:EE_|SA0PR12MB4479:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1e4037bb-95da-4bfd-ba40-08dba8afa196
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: t+kdm4pAaMTys2kdBegkU3pWFi9k7/3lGCeFnCBPbU6uYXQFu373czdpNhAiCDwXDroQ7NvS8DATPVQnPBxPaelo77gZxRycgUfC9pL8G7uZRN9iGwT9b5Md+X28Ow0qwJOfRJEgiEqwdshVX7P8U+blWK2TuVxe9Pf3g/HTF+zxN/virgyms9jVfgw5wRoJKN1YHraR7Alm56+UQHeSGTh2IQjhaXahT0e4761a10LTYIsONe2LrsDM78sxWyrSbNtO//YRThQr5SuRXIEmAiXqoAegY4PA8G34RSt2Kdv841uSR6OLxF4rmYYz8O2E+8jC2G+MGvqgklZqyFWpMSoflhs00l2zRVJJTQfglzv4hph9oh7SZZcfjuneCjs5F2STgqvH+nbA/EPUmff51gHBOuCqiDSrXJKuSIRNnmsFM2PlT91MEeHI+it+y6PHLC0Atg+VlXFgWOgXOhuv1+LC4Z3W8l9XVXs/ND1LnLRaBC1jZBtIAqHZD3WtmBB/Ic1yprfBj0p70jbpahMezhW2FyX55hW3PmYYtjq1DOKbyYg/UjvKgcyrkRpmmPOhnSLwsmir7Bj80fUnU7msOZuP+LVGXgoElsO4x7pa/e2MV1Ho8QIzEEMHUkYYJoYGzBs1suyAlkF8Gr+VBwF7o/sqrVFERHe7rov+pjHdzVE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3818.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(136003)(366004)(39860400002)(346002)(396003)(451199024)(186009)(1800799009)(31686004)(6666004)(6512007)(6506007)(36916002)(6486002)(86362001)(36756003)(31696002)(38100700002)(921005)(2616005)(478600001)(2906002)(26005)(83380400001)(53546011)(110136005)(8936002)(54906003)(41300700001)(66556008)(66476007)(66946007)(5660300002)(8676002)(4326008)(7416002)(316002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UjJQaU5HQ01laDZXdXlQaXk3WWp1VWRZZDJiZUJIZTdPVVFzaG5TRWxiNHps?=
+ =?utf-8?B?czlpQkV1NS9ZOE9oRG5aWUQ5TTYzRlM1UTRBcGlGNUMyVnR4WWg5dW1JSnBh?=
+ =?utf-8?B?V2s1WDIrVHFsbDdYVzhxdlRMbU4vUDBCYjZDT0srM0pURERnL0RobDNYRjFi?=
+ =?utf-8?B?eUJ1SFRpTVAvNGU0MzNPNnhiQkNrbzhWalBLZlVUNWN2UThSb09jSmNOYVRo?=
+ =?utf-8?B?Z01wU05HZXlXeWVmeDJQSGNCQUN5dTg5aVNxTk56MjdCc1poLzIxNXg2eUJQ?=
+ =?utf-8?B?WHRnU1B4eTJJWDNyT2VaNVh2cW5wVGtCaEMwLzZIeDdLZS8xTUxHd2tYcjZj?=
+ =?utf-8?B?ZFVLUS9Sb1RZNnM0MXVCRkpSeVBTQVN0WFM4S2E5NFlhbXB6b0hFWVVOM05m?=
+ =?utf-8?B?OUtCT3NocG1CMHM3L3k5TzNCdjgxR3krMVZDM1FDYnBLYkRMVGZSWU90QVJl?=
+ =?utf-8?B?NURSMlhGMjEvbk5xUUZ2LytZemcxY1diY0s4aGNvbFUwRk8yODVTSFQyOWpC?=
+ =?utf-8?B?MXp5Qm9wR1pMQTArQnJWcTNZcXBENy9ZWUd4TzNXQnhzdk9Va0pHRVNLRVRp?=
+ =?utf-8?B?b1diMTNwUVVZSUU0ZDBYblZ1ZzA5SEtIeHRWRnVORWVXQUR1N3Z2dDBGdEVV?=
+ =?utf-8?B?RXgxSW5MTmcvTFo0NkplUUNLUVdPRTNRM3FBWEFQbVVEVzNxZDBka3phb1Bp?=
+ =?utf-8?B?OVpOZmdVekh6SDZ1ZUNwV2Fsa05NOExBUzJtR2dDbldickl5Q0NsYjRFRDJE?=
+ =?utf-8?B?UFZEUGI5bVo4WkhRM2huemwvaERqenpwbDUvcVB4N29GZk5mVWE4cHhIdmtJ?=
+ =?utf-8?B?bUxRaHBGY29vOXZhcFRSS1hEWUJld1dHRWZXZk1NWkZYOVl6YW9GREl3LzJT?=
+ =?utf-8?B?NitaTTJLeStyZ2tNVlF2eEMwY3p4N01zWXlsRmR1WWsrY2JORlRxc2lKWC9Z?=
+ =?utf-8?B?WHF1MjkzVjM0Y1pLVE9WSEJZSjVQVWtLQkgzaEpYdkZWQzdJZTFLaWpUd3lG?=
+ =?utf-8?B?ekNGRmkxQm1JMWNZR2NlaWhsTmQ4UDBDRERiNWJlNjMrWUtOM0txRkZwSGsx?=
+ =?utf-8?B?U0FBVlpDTm5hREFQUUNGTXg4dXo5dFMyQ1l0bGdFaXBMOG9Tbm0wOENtUnZ2?=
+ =?utf-8?B?a1BUTW5XVGtZOTJ2NUxHWkdqbndkWE5zQmV0TFJEdDJqY0dsV3crYXE2UTNw?=
+ =?utf-8?B?SE9zdUFYVEszam5uQTh3UllUcU1kQUdlY0RGYmFzOXNQcVdMNFV3YmFOUi9G?=
+ =?utf-8?B?dE5aRVdaUy9WTG5yWnFGOTBxOWkxV0dpRGdGdjU0bjErUkN5YzNDN0xwR3k3?=
+ =?utf-8?B?WUtVNGZvUGhIamFPbmFYK0JXYUtIWmtnK0g4em8vaEZ3UTNpN2RPbVM2N0xv?=
+ =?utf-8?B?UHVNM1IxQWFHWlpoZy92dGFYQ1pMR3BtT3h2VU8yR2FBY0hRS1pSTjhIemFv?=
+ =?utf-8?B?VEV6dTl5a1hmbUFnN0VXSCtlUStWVjBDU1FxNTQxZDFwQ21qbWVhOTB2Q1U0?=
+ =?utf-8?B?ZWtHcGVuMmc5WWRMeGZSYnRvdmNaL3l4alRHTG9tUHB3SU5MdWJ5anpRVnB3?=
+ =?utf-8?B?ZHBZRUNBSk1BcHgrcUEwSW90TkRYM2JQanJiTktaUXRJaG1keXVWN1dYdi81?=
+ =?utf-8?B?ZjdBZGR3YkY5a3ZhckNVdEpVR1FXR1Znd2F4UCtOTktjRzN3SFF3QUhXR01i?=
+ =?utf-8?B?bVVIQit0TEkrOWtNUFdSVXZTaXVMSEdxNUdqbDJKblAwNkRmOXVvZ1VhR3Er?=
+ =?utf-8?B?bVVDU2MrbFVXaHR2eE1sRHRiTk03Z0JqblhYNTUyRnJ3Q2NsdVUraHpUcUJS?=
+ =?utf-8?B?bEdGOVlyUFd2TWswVEp1c2x4anBSUzJFVWRmdTlDaXZ0WHo0aWVqUE1KN0x3?=
+ =?utf-8?B?T1B2cFdvVEVaeTltdTgvYUM2REZhSVBLSkVPSWxWQmZ2aTY3cmt3VmFwWWpW?=
+ =?utf-8?B?SDlXcGJETkRseWIranYvK015amxzS2VPcEY1cmpQeXpORm1zejJuT1FsbVlp?=
+ =?utf-8?B?ZnlWa2ZLVnc4UUorRGprVk5Ea05wQ3FCNTZTd3psbk9Yc1FLNkFzNU05Myt5?=
+ =?utf-8?B?ekl1L2ZTaUUrWHJCcUhVcDZhclM2bnlWdWorYmRHaGZoeUF3dmtlaGhZcnBZ?=
+ =?utf-8?Q?Oz/4KJI+R6FvptHCj6vZZh+U6?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1e4037bb-95da-4bfd-ba40-08dba8afa196
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3818.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2023 16:47:28.9222
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: y9dc3jVVbWZdwltUxQrPOP4ik3tzrTnTvvl3b5kpgw+9tI2tLWp1EY1+SI8Jwj/QZ91m+Ltwtn/tg6mgIQVGWQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4479
+X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2023-08-23 15:21, Niklas Schnelle wrote:
-[...]
->>> +struct dma_iommu_options {
->>> +#define IOMMU_DMA_OPTS_PER_CPU_QUEUE	0L
->>
->> Nit: if the intent is to add more flags then that will no longer make
->> sense, and if not then we may as well just have a bool ;)
->>
->>> +#define IOMMU_DMA_OPTS_SINGLE_QUEUE	BIT(0)
-> 
-> My thinking was that the above two options are mutually exclusive with
-> per-CPU encoded as BIT(0) unset and single queue as set. Then other
-> options could still use the other bits. It's true though that the below
-> use of IOMMU_DMA_OPTS_PER_CPU_QUEUE is a nop so maybe just drop that?
-> Or we could use an enum even if I don't forsee more than these 2 queue
-> types.
 
-My point was that the value 0 can only mean "all flags not set", so 
-while we can very much have the semantic of "single queue flag not set 
-means percpu queue", we cannot infer "0 means percpu queue" unless "all 
-flags" and "single queue flag" are the same thing. As soon as any 
-additional flag is defined, 0 then has a different meaning which may 
-well not even be a combination that's useful to put a specific name to.
+On 8/18/2023 8:56 PM, Dave Hansen wrote:
+> On 8/18/23 07:42, Devaraj Rangasamy wrote:
+>> --- a/arch/x86/kernel/setup.c
+>> +++ b/arch/x86/kernel/setup.c
+>> @@ -1223,6 +1223,8 @@ void __init setup_arch(char **cmdline_p)
+>>   	initmem_init();
+>>   	dma_contiguous_reserve(max_pfn_mapped << PAGE_SHIFT);
+>>   
+>> +	amdtee_cma_reserve();
+>> +
+>>   	if (boot_cpu_has(X86_FEATURE_GBPAGES))
+>>   		hugetlb_cma_reserve(PUD_SHIFT - PAGE_SHIFT);
+> Right now, we have *A* global CMA pool set up in
+> dma_contiguous_reserve() that everyone shares.
+>
+> Why does this *one* driver deserve to be a special snowflake and get its
+> own private CMA area and own command-line options?
+>
+> It seems to me like you should just tell users to set
+> CONFIG_CMA_SIZE_MBYTES or use cma=size on the command-line and just use
+> the global pool.  If you want to make it a special snowflake, there's a
+> much higher bar to clear, and there's zero justification for that right now.
 
-I'd like to hope it's sufficiently obvious from the implementation that 
-the opposite of a single queue is multiple queues, since contextually 
-this is already all happening in distinct paths from the case of no queue.
+Ack.
 
-Thanks,
-Robin.
+We had exclusive cma zone due to concern over contention for generic cma 
+zone, and to guarentee buffer allocation. We profiled and migrated to 
+generic cma zone.
+
+> Oh, and this:
+>
+>>   static int pool_op_alloc(struct tee_shm_pool *pool, struct tee_shm *shm,
+>>   			 size_t size, size_t align)
+>>   {
+>>   	unsigned int order = get_order(size);
+>>   	unsigned long va;
+>>   	int rc;
+>>   
+>>   	/*
+>>   	 * Ignore alignment since this is already going to be page aligned
+>>   	 * and there's no need for any larger alignment.
+>>   	 */
+>> 	va = __get_free_pages(GFP_KERNEL | __GFP_ZERO, order);
+> is goofy.  It either only needs powers-of-2 and can take "order" as an
+> argument instead of 'size', or it should be using alloc_pages_exact() to
+> avoid wasting memory.
+
+Ack.
+This was inherently introduced by __get_free_pages() requirement, and 
+constly indeed.
+alloc_pages_exact() do call __get_free_pages() internally, and doesnot 
+prevent memory fragmentation. but at least unnecessary pages are 
+returned back to free pool.
+
+We will update the section accordingly, and post updated patch. Thanks 
+for the review.
+
