@@ -2,46 +2,159 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1272778DC05
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Aug 2023 20:47:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D058478DC24
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Aug 2023 20:47:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238186AbjH3Sh1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 30 Aug 2023 14:37:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54062 "EHLO
+        id S238381AbjH3Shm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 30 Aug 2023 14:37:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58250 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244086AbjH3McP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Aug 2023 08:32:15 -0400
-Received: from TWMBX03.aspeed.com (mail.aspeedtech.com [211.20.114.72])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4381F107;
-        Wed, 30 Aug 2023 05:32:11 -0700 (PDT)
-Received: from TWMBX02.aspeed.com (192.168.0.24) by TWMBX03.aspeed.com
- (192.168.0.62) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 30 Aug
- 2023 20:32:07 +0800
-Received: from twmbx02.aspeed.com (192.168.10.10) by TWMBX02.aspeed.com
- (192.168.0.24) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
- Transport; Wed, 30 Aug 2023 20:32:07 +0800
-From:   Billy Tsai <billy_tsai@aspeedtech.com>
-To:     <jdelvare@suse.com>, <linux@roeck-us.net>, <robh+dt@kernel.org>,
-        <krzysztof.kozlowski+dt@linaro.org>, <joel@jms.id.au>,
-        <andrew@aj.id.au>, <corbet@lwn.net>, <thierry.reding@gmail.com>,
-        <u.kleine-koenig@pengutronix.de>, <p.zabel@pengutronix.de>,
-        <billy_tsai@aspeedtech.com>, <naresh.solanki@9elements.com>,
-        <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-aspeed@lists.ozlabs.org>, <linux-kernel@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <linux-pwm@vger.kernel.org>,
-        <BMC-SW@aspeedtech.com>, <patrick@stwcx.xyz>
-Subject: [PATCH v8 3/3] hwmon: (aspeed-g6-pwm-tacho): Support for ASPEED g6 PWM/Fan tach
-Date:   Wed, 30 Aug 2023 20:32:02 +0800
-Message-ID: <20230830123202.3408318-4-billy_tsai@aspeedtech.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230830123202.3408318-1-billy_tsai@aspeedtech.com>
-References: <20230830123202.3408318-1-billy_tsai@aspeedtech.com>
+        with ESMTP id S244170AbjH3Mih (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Aug 2023 08:38:37 -0400
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com (mail-am7eur03on2080.outbound.protection.outlook.com [40.107.105.80])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 16351D2;
+        Wed, 30 Aug 2023 05:38:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wV8mPRMaR1P1rFQgy90FKbO/pA1JI7UIbXfKBiXscyc=;
+ b=0HECq+n//99ifwPs3hI25BCyHpAMZZ8HmFsRml8mk4x3kt/6OnDOi0++4f4yiddYjjNsBjMCJOjEsd4G99DKZetc2Bd2gbKzDK5+zZn2ix5flWm/lmTGQdA+R4aDSPQ/iIILQXAQ84ofVyyJel8VLLMUe53rn3fOi/T1LN4B7c8=
+Received: from AM5PR0101CA0028.eurprd01.prod.exchangelabs.com
+ (2603:10a6:206:16::41) by AS4PR08MB7926.eurprd08.prod.outlook.com
+ (2603:10a6:20b:575::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.35; Wed, 30 Aug
+ 2023 12:38:04 +0000
+Received: from AM7EUR03FT025.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:206:16:cafe::59) by AM5PR0101CA0028.outlook.office365.com
+ (2603:10a6:206:16::41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.20 via Frontend
+ Transport; Wed, 30 Aug 2023 12:38:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ AM7EUR03FT025.mail.protection.outlook.com (100.127.140.199) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6745.20 via Frontend Transport; Wed, 30 Aug 2023 12:38:03 +0000
+Received: ("Tessian outbound 169aaa6bf2b7:v175"); Wed, 30 Aug 2023 12:38:03 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: f3df13224b1ec5d9
+X-CR-MTA-TID: 64aa7808
+Received: from 0e08af961bde.2
+        by 64aa7808-outbound-1.mta.getcheckrecipient.com id A930DF65-6BEA-493C-90C7-95D9A52A42EA.1;
+        Wed, 30 Aug 2023 12:37:53 +0000
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 0e08af961bde.2
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Wed, 30 Aug 2023 12:37:53 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QhSWutMyJ1kSENpbrpQZWrTUeJcqMGO4/nJxBzKoKGP0b6PqtRgz5sDosrqxeop9uSlq9j3tuOcMK6o0LqkrUvJHHYUHIRWSGGzDGdzy1Aac7no8MMAszMVgNaBmMnI9qdyQ+gHK2PmHUd+SaZCPaCIhbsIC7o7kVMPYD7RM9zjYE1zIIZmnkV5Xz8fFJhpQMlncfrpEBrYaqvDdbu9MRD9YeaQDSPQyFrrzExx7sH2fffliO5redpoLN9mHYDvHvgJerd88+4mLhtn66jOo2Bs/Bg/D4uJgfJGpREZHdJte5ZNgZ5biUDkxYpB9Q+sUwl1IN2iVZkaRCM+zKWKBzQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wV8mPRMaR1P1rFQgy90FKbO/pA1JI7UIbXfKBiXscyc=;
+ b=lQK7A0ALSYRQUMmHvrZQnrtBr+hFioYgWXxmg1snXS7uh4KqhyKprV8TFxLa4ZyS3qD79XkY/6K4oJGKEk6/OuOILUIF/eHJCtY0aD/sgmsDla5CVMCuKgLHq2+w3hEAyUE/XVCOy3sQSq7Iwz+0/H7x2T1aA92LC1SwwMQwcn9e9smMCCwJsIJaGiSPxyL/CqHyA02aDWgc52H4YrJnPsJ+8VS+tzEIHDj6c8SDe41xoZ1IqkIym6kTiO1QU0fcjXLlhTM/KQ12FUD9AgHlO8v/KnH3Swjom6ww2P9aJ0HaswUG/gakTJzvqZ/0YMiqg9vT3/ysEYDpUs72bVU5pA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wV8mPRMaR1P1rFQgy90FKbO/pA1JI7UIbXfKBiXscyc=;
+ b=0HECq+n//99ifwPs3hI25BCyHpAMZZ8HmFsRml8mk4x3kt/6OnDOi0++4f4yiddYjjNsBjMCJOjEsd4G99DKZetc2Bd2gbKzDK5+zZn2ix5flWm/lmTGQdA+R4aDSPQ/iIILQXAQ84ofVyyJel8VLLMUe53rn3fOi/T1LN4B7c8=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from DB9PR08MB7179.eurprd08.prod.outlook.com (2603:10a6:10:2cc::19)
+ by DB9PR08MB6393.eurprd08.prod.outlook.com (2603:10a6:10:25a::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.20; Wed, 30 Aug
+ 2023 12:37:50 +0000
+Received: from DB9PR08MB7179.eurprd08.prod.outlook.com
+ ([fe80::adb0:61cb:8733:6db2]) by DB9PR08MB7179.eurprd08.prod.outlook.com
+ ([fe80::adb0:61cb:8733:6db2%7]) with mapi id 15.20.6745.020; Wed, 30 Aug 2023
+ 12:37:50 +0000
+Date:   Wed, 30 Aug 2023 13:37:33 +0100
+From:   Szabolcs Nagy <Szabolcs.Nagy@arm.com>
+To:     Catalin Marinas <catalin.marinas@arm.com>,
+        Mark Brown <broonie@kernel.org>
+Cc:     Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Marc Zyngier <maz@kernel.org>,
+        Oliver Upton <oliver.upton@linux.dev>,
+        James Morse <james.morse@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>, Oleg Nesterov <oleg@redhat.com>,
+        Eric Biederman <ebiederm@xmission.com>,
+        Kees Cook <keescook@chromium.org>,
+        Shuah Khan <shuah@kernel.org>,
+        "Rick P. Edgecombe" <rick.p.edgecombe@intel.com>,
+        Deepak Gupta <debug@rivosinc.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        "H.J. Lu" <hjl.tools@gmail.com>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        kvmarm@lists.linux.dev, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-mm@kvack.org,
+        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org
+Subject: Re: [PATCH v4 03/36] arm64/gcs: Document the ABI for Guarded Control
+ Stacks
+Message-ID: <ZO84DWEiYk6dU3iR@arm.com>
+References: <ZN+qki9EaZ6f9XNi@arm.com>
+ <aaea542c-929c-4c9b-8caa-ca67e0eb9c1e@sirena.org.uk>
+ <ZOTnL1SDJWZjHPUW@arm.com>
+ <43ec219d-bf20-47b8-a5f8-32bc3b64d487@sirena.org.uk>
+ <ZOXa98SqwYPwxzNP@arm.com>
+ <227e6552-353c-40a9-86c1-280587a40e3c@sirena.org.uk>
+ <ZOY3lz+Zyhd5ZyQ9@arm.com>
+ <ZOZEmO6WGyVAcOqK@arm.com>
+ <ef7272d2-d807-428f-9915-6fc9febadb5c@sirena.org.uk>
+ <ZOd6lzj29VksAp7L@arm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <ZOd6lzj29VksAp7L@arm.com>
+X-ClientProxiedBy: LO4P123CA0550.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:319::20) To DB9PR08MB7179.eurprd08.prod.outlook.com
+ (2603:10a6:10:2cc::19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_FAIL,SPF_PASS autolearn=ham
+X-MS-TrafficTypeDiagnostic: DB9PR08MB7179:EE_|DB9PR08MB6393:EE_|AM7EUR03FT025:EE_|AS4PR08MB7926:EE_
+X-MS-Office365-Filtering-Correlation-Id: d1a6c58c-f047-4297-32bc-08dba955f44a
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: cNAz/hpoSFm1p+4pzfjNhQORnvLX83LoV7Dl6XnLmgKDXaFe7I534uViSj2bd9s10w48rqzxrYplFxgNc7FdiEc1GUnB64H+HOwxGLH/tJnOiwFpSi5H+PI1JomPuA7qc9w7QaCk715nxzM43D9AxcFICBrMqX4BTR9lRFwma2UtGIVW6Tzxaokhcv0S4WUwNexlDEzrNLCGL4FbAFv6KPXSvguOW2KaDaVUCYUxDgx/RBUlCNOVQFPynPi8L4ishHm9WtCFo+ts836y7LBNdIDkMB0ROfSdTZCGXbXtrHKPwiJC5Ak87QNHll69wBuooBIv4yhX1E77m2XcEzAPVg3+sJ4reRSPYyMjQGNbgqMhkqp51gNpsRYt9Fev3FVjZPesSL95AfLo/+iP76S4IjHWQCiQtXZTgvs0wk72TGWm0cC0fYgzA7u94Xc4KNDxSmFB95ECMHksq5CWgN0PhzMcgrk2n/tZSyFNDJSb0qmUqmqQ7kjPmLcAPQ8Sp06tJPsO0Eg8jIWYziWfJI+K0k056IZiOaNWd/vwlJ714qpIHYn2kniuJnsIOVmQ9TNb
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB9PR08MB7179.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(39860400002)(136003)(376002)(366004)(396003)(451199024)(1800799009)(186009)(6486002)(6666004)(6512007)(6506007)(83380400001)(478600001)(2906002)(26005)(110136005)(7416002)(41300700001)(66476007)(66946007)(66556008)(54906003)(316002)(8676002)(8936002)(5660300002)(4326008)(36756003)(2616005)(38100700002)(86362001)(66899024);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB6393
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM7EUR03FT025.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 8116f766-498c-49e6-ce34-08dba955eb68
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: enUTmKejbF4nIxcGH/C7zmiBA5kmWHTWhcllGnmZi+Yj+cBGiE6tOUMg6zQdx//BhN9lTbYaK8UG6iAa91hWVwqGamplGV8FNYHp9rFveprFwelkQLSaaXAYxKKJOLM614sF7I45Oi49qP0ZKVXGUg38YF/gzSi/CzLSprXnDZL+FF+xVW9I2ZiMfdbXHd6fJztlDPR8BJk1bLP8GJmZYQJEVS7Qvt4jHxy3mclT4JVWjTRn1aPgtJBYsgL5YU/2QFh5KNFIYLlFLW7ga8NLGyUNonDmx7U0GVDHkn32v7MzS46In/ZvzLr7f4kwFB+DhKuoUS6bcAQl6sEpBkdofDYRtoVKUyP3faPu/O1Uu8+fOqDqi1vhS6yTwY4VUyWUZFl2Nn8h7fT/P8YeSiValPrg40HZo98RVFyfISUmQHsc85zoctwKHtctQKf+bfWQyJlPf0AlmrbMinYkX63XWMnQDvT3Uj26eAE5pPBjD/gHP2a2vNqGbBOWZjdxIEb/j5tOcvi8Nb+TftxJTYW/d19BgxhW8nv1GBGrlnKvcpQvjsK8lQ//f1/+qxSQFuYdkfQtWtlx1ITisRADEgeEbYswgwzs8xYebVSZ1X79BoPYzQXvLHIazxmXM5w+1B38uQTWP9sWJSpfIHxsZDizGPg6/y5Kk3rAtE1HHpPcDE+D/CgJOEFYl2voHXgnnGAQH8XHn1ipQmPrduT3C9w60liU2yk+ozmGACwL0p9+oYD7Z5QPwUcnJ4aeYf0s9vPp
+X-Forefront-Antispam-Report: CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(136003)(346002)(396003)(376002)(1800799009)(82310400011)(451199024)(186009)(36840700001)(46966006)(40470700004)(6512007)(40460700003)(316002)(41300700001)(66899024)(4326008)(336012)(47076005)(26005)(86362001)(83380400001)(107886003)(2616005)(36756003)(5660300002)(8676002)(40480700001)(36860700001)(2906002)(8936002)(450100002)(6666004)(82740400003)(356005)(81166007)(6506007)(6486002)(54906003)(70206006)(110136005)(70586007)(478600001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Aug 2023 12:38:03.7468
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d1a6c58c-f047-4297-32bc-08dba955f44a
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM7EUR03FT025.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB7926
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,FORGED_SPF_HELO,RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,
+        SPF_HELO_PASS,SPF_NONE,UNPARSEABLE_RELAY autolearn=no
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -49,637 +162,39 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The driver support two functions: PWM and Tachometer. The PWM feature can
-handle up to 16 output ports, while the Tachometer can monitor to up to 16
-input ports as well. This driver implements them by exposing two kernel
-subsystems: PWM and HWMON. The PWM subsystem can be utilized alongside
-existing drivers for controlling elements such as fans (pwm-fan.c),
-beepers (pwm-beeper.c) and so on. Through the HWMON subsystem, the driver
-provides sysfs interfaces for fan.
+The 08/24/2023 16:43, Catalin Marinas wrote:
+> Is there a use-case for the unlocked configuration to allow disabling
+> the GCS implicitly via a clone syscall?
 
-Signed-off-by: Billy Tsai <billy_tsai@aspeedtech.com>
----
- Documentation/hwmon/aspeed-g6-pwm-tach.rst |  26 +
- Documentation/hwmon/index.rst              |   1 +
- drivers/hwmon/Kconfig                      |  11 +
- drivers/hwmon/Makefile                     |   1 +
- drivers/hwmon/aspeed-g6-pwm-tach.c         | 528 +++++++++++++++++++++
- 5 files changed, 567 insertions(+)
- create mode 100644 Documentation/hwmon/aspeed-g6-pwm-tach.rst
- create mode 100644 drivers/hwmon/aspeed-g6-pwm-tach.c
+how would you handle clone or clone3 without gcs specified?
+(in the cases when clone creates a new thread with new stack)
 
-diff --git a/Documentation/hwmon/aspeed-g6-pwm-tach.rst b/Documentation/hwmon/aspeed-g6-pwm-tach.rst
-new file mode 100644
-index 000000000000..17398fe397fe
---- /dev/null
-+++ b/Documentation/hwmon/aspeed-g6-pwm-tach.rst
-@@ -0,0 +1,26 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+Kernel driver aspeed-g6-pwm-tach
-+=================================
-+
-+Supported chips:
-+	ASPEED AST2600
-+
-+Authors:
-+	<billy_tsai@aspeedtech.com>
-+
-+Description:
-+------------
-+This driver implements support for ASPEED AST2600 Fan Tacho controller.
-+The controller supports up to 16 tachometer inputs.
-+
-+The driver provides the following sensor accesses in sysfs:
-+
-+=============== ======= ======================================================
-+fanX_input	ro	provide current fan rotation value in RPM as reported
-+			by the fan to the device.
-+fanX_div	rw	Fan divisor: Supported value are power of 4 (1, 4, 16
-+                        64, ... 4194304)
-+                        The larger divisor, the less rpm accuracy and the less
-+                        affected by fan signal glitch.
-+=============== ======= ======================================================
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 5c1052d8c57c..614a18477e9f 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -43,6 +43,7 @@ Hardware Monitoring Kernel Drivers
-    aquacomputer_d5next
-    asb100
-    asc7621
-+   aspeed-g6-pwm-tach
-    aspeed-pwm-tacho
-    asus_ec_sensors
-    asus_wmi_sensors
-diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-index 283e0adafbc1..1f82df1979db 100644
---- a/drivers/hwmon/Kconfig
-+++ b/drivers/hwmon/Kconfig
-@@ -411,6 +411,17 @@ config SENSORS_ASPEED
- 	  This driver can also be built as a module. If so, the module
- 	  will be called aspeed_pwm_tacho.
- 
-+config SENSORS_ASPEED_G6
-+	tristate "ASPEED g6 PWM and Fan tach driver"
-+	depends on ARCH_ASPEED || COMPILE_TEST
-+	depends on PWM
-+	help
-+	  This driver provides support for ASPEED G6 PWM and Fan Tach
-+	  controllers.
-+
-+	  This driver can also be built as a module. If so, the module
-+	  will be called aspeed_pwm_tacho.
-+
- config SENSORS_ATXP1
- 	tristate "Attansic ATXP1 VID controller"
- 	depends on I2C
-diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
-index abefc16c1e1e..1fbb66c37a7c 100644
---- a/drivers/hwmon/Makefile
-+++ b/drivers/hwmon/Makefile
-@@ -54,6 +54,7 @@ obj-$(CONFIG_SENSORS_ARM_SCPI)	+= scpi-hwmon.o
- obj-$(CONFIG_SENSORS_AS370)	+= as370-hwmon.o
- obj-$(CONFIG_SENSORS_ASC7621)	+= asc7621.o
- obj-$(CONFIG_SENSORS_ASPEED)	+= aspeed-pwm-tacho.o
-+obj-$(CONFIG_SENSORS_ASPEED_G6) += aspeed-g6-pwm-tach.o
- obj-$(CONFIG_SENSORS_ATXP1)	+= atxp1.o
- obj-$(CONFIG_SENSORS_AXI_FAN_CONTROL) += axi-fan-control.o
- obj-$(CONFIG_SENSORS_BT1_PVT)	+= bt1-pvt.o
-diff --git a/drivers/hwmon/aspeed-g6-pwm-tach.c b/drivers/hwmon/aspeed-g6-pwm-tach.c
-new file mode 100644
-index 000000000000..f7d53e8e009f
---- /dev/null
-+++ b/drivers/hwmon/aspeed-g6-pwm-tach.c
-@@ -0,0 +1,528 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (C) 2021 Aspeed Technology Inc.
-+ *
-+ * PWM/TACH controller driver for Aspeed ast2600 SoCs.
-+ * This drivers doesn't support earlier version of the IP.
-+ *
-+ * The hardware operates in time quantities of length
-+ * Q := (DIV_L + 1) << DIV_H / input-clk
-+ * The length of a PWM period is (DUTY_CYCLE_PERIOD + 1) * Q.
-+ * The maximal value for DUTY_CYCLE_PERIOD is used here to provide
-+ * a fine grained selection for the duty cycle.
-+ *
-+ * This driver uses DUTY_CYCLE_RISING_POINT = 0, so from the start of a
-+ * period the output is active until DUTY_CYCLE_FALLING_POINT * Q. Note
-+ * that if DUTY_CYCLE_RISING_POINT = DUTY_CYCLE_FALLING_POINT the output is
-+ * always active.
-+ *
-+ * Register usage:
-+ * PIN_ENABLE: When it is unset the pwm controller will emit inactive level to the external.
-+ * Use to determine whether the PWM channel is enabled or disabled
-+ * CLK_ENABLE: When it is unset the pwm controller will assert the duty counter reset and
-+ * emit inactive level to the PIN_ENABLE mux after that the driver can still change the pwm period
-+ * and duty and the value will apply when CLK_ENABLE be set again.
-+ * Use to determine whether duty_cycle bigger than 0.
-+ * PWM_ASPEED_CTRL_INVERSE: When it is toggled the output value will inverse immediately.
-+ * PWM_ASPEED_DUTY_CYCLE_FALLING_POINT/PWM_ASPEED_DUTY_CYCLE_RISING_POINT: When these two
-+ * values are equal it means the duty cycle = 100%.
-+ *
-+ * The glitch may generate at:
-+ * - Enabled changing when the duty_cycle bigger than 0% and less than 100%.
-+ * - Polarity changing when the duty_cycle bigger than 0% and less than 100%.
-+ *
-+ * Limitations:
-+ * - When changing both duty cycle and period, we cannot prevent in
-+ *   software that the output might produce a period with mixed
-+ *   settings.
-+ * - Disabling the PWM doesn't complete the current period.
-+ *
-+ * Improvements:
-+ * - When only changing one of duty cycle or period, our pwm controller will not
-+ *   generate the glitch, the configure will change at next cycle of pwm.
-+ *   This improvement can disable/enable through PWM_ASPEED_CTRL_DUTY_SYNC_DISABLE.
-+ */
-+
-+#include <linux/bitfield.h>
-+#include <linux/clk.h>
-+#include <linux/delay.h>
-+#include <linux/errno.h>
-+#include <linux/hwmon.h>
-+#include <linux/io.h>
-+#include <linux/kernel.h>
-+#include <linux/math64.h>
-+#include <linux/module.h>
-+#include <linux/of_device.h>
-+#include <linux/platform_device.h>
-+#include <linux/pwm.h>
-+#include <linux/reset.h>
-+#include <linux/sysfs.h>
-+
-+/* The channel number of Aspeed pwm controller */
-+#define PWM_ASPEED_NR_PWMS			16
-+/* PWM Control Register */
-+#define PWM_ASPEED_CTRL(ch)			((ch) * 0x10 + 0x00)
-+#define PWM_ASPEED_CTRL_LOAD_SEL_RISING_AS_WDT	BIT(19)
-+#define PWM_ASPEED_CTRL_DUTY_LOAD_AS_WDT_ENABLE	BIT(18)
-+#define PWM_ASPEED_CTRL_DUTY_SYNC_DISABLE	BIT(17)
-+#define PWM_ASPEED_CTRL_CLK_ENABLE		BIT(16)
-+#define PWM_ASPEED_CTRL_LEVEL_OUTPUT		BIT(15)
-+#define PWM_ASPEED_CTRL_INVERSE			BIT(14)
-+#define PWM_ASPEED_CTRL_OPEN_DRAIN_ENABLE	BIT(13)
-+#define PWM_ASPEED_CTRL_PIN_ENABLE		BIT(12)
-+#define PWM_ASPEED_CTRL_CLK_DIV_H		GENMASK(11, 8)
-+#define PWM_ASPEED_CTRL_CLK_DIV_L		GENMASK(7, 0)
-+
-+/* PWM Duty Cycle Register */
-+#define PWM_ASPEED_DUTY_CYCLE(ch)		((ch) * 0x10 + 0x04)
-+#define PWM_ASPEED_DUTY_CYCLE_PERIOD		GENMASK(31, 24)
-+#define PWM_ASPEED_DUTY_CYCLE_POINT_AS_WDT	GENMASK(23, 16)
-+#define PWM_ASPEED_DUTY_CYCLE_FALLING_POINT	GENMASK(15, 8)
-+#define PWM_ASPEED_DUTY_CYCLE_RISING_POINT	GENMASK(7, 0)
-+
-+/* PWM fixed value */
-+#define PWM_ASPEED_FIXED_PERIOD			FIELD_MAX(PWM_ASPEED_DUTY_CYCLE_PERIOD)
-+
-+/* The channel number of Aspeed tach controller */
-+#define TACH_ASPEED_NR_TACHS		16
-+/* TACH Control Register */
-+#define TACH_ASPEED_CTRL(ch)		(((ch) * 0x10) + 0x08)
-+#define TACH_ASPEED_IER			BIT(31)
-+#define TACH_ASPEED_INVERS_LIMIT	BIT(30)
-+#define TACH_ASPEED_LOOPBACK		BIT(29)
-+#define TACH_ASPEED_ENABLE		BIT(28)
-+#define TACH_ASPEED_DEBOUNCE_MASK	GENMASK(27, 26)
-+#define TACH_ASPEED_DEBOUNCE_BIT	26
-+#define TACH_ASPEED_IO_EDGE_MASK	GENMASK(25, 24)
-+#define TACH_ASPEED_IO_EDGE_BIT		24
-+#define TACH_ASPEED_CLK_DIV_T_MASK	GENMASK(23, 20)
-+#define TACH_ASPEED_CLK_DIV_BIT		20
-+#define TACH_ASPEED_THRESHOLD_MASK	GENMASK(19, 0)
-+/* [27:26] */
-+#define DEBOUNCE_3_CLK			0x00
-+#define DEBOUNCE_2_CLK			0x01
-+#define DEBOUNCE_1_CLK			0x02
-+#define DEBOUNCE_0_CLK			0x03
-+/* [25:24] */
-+#define F2F_EDGES			0x00
-+#define R2R_EDGES			0x01
-+#define BOTH_EDGES			0x02
-+/* [23:20] */
-+/* divisor = 4 to the nth power, n = register value */
-+#define DEFAULT_TACH_DIV		1024
-+#define DIV_TO_REG(divisor)		(ilog2(divisor) >> 1)
-+
-+/* TACH Status Register */
-+#define TACH_ASPEED_STS(ch)		(((ch) * 0x10) + 0x0C)
-+
-+/*PWM_TACH_STS */
-+#define TACH_ASPEED_ISR			BIT(31)
-+#define TACH_ASPEED_PWM_OUT		BIT(25)
-+#define TACH_ASPEED_PWM_OEN		BIT(24)
-+#define TACH_ASPEED_DEB_INPUT		BIT(23)
-+#define TACH_ASPEED_RAW_INPUT		BIT(22)
-+#define TACH_ASPEED_VALUE_UPDATE	BIT(21)
-+#define TACH_ASPEED_FULL_MEASUREMENT	BIT(20)
-+#define TACH_ASPEED_VALUE_MASK		GENMASK(19, 0)
-+/**********************************************************
-+ * Software setting
-+ *********************************************************/
-+#define DEFAULT_FAN_PULSE_PR		2
-+
-+struct aspeed_pwm_tach_data {
-+	struct device *dev;
-+	void __iomem *base;
-+	struct clk *clk;
-+	struct reset_control *reset;
-+	unsigned long clk_rate;
-+	struct pwm_chip chip;
-+	bool tach_present[TACH_ASPEED_NR_TACHS];
-+	u32 tach_divisor;
-+};
-+
-+static inline struct aspeed_pwm_tach_data *
-+aspeed_pwm_chip_to_data(struct pwm_chip *chip)
-+{
-+	return container_of(chip, struct aspeed_pwm_tach_data, chip);
-+}
-+
-+static int aspeed_pwm_get_state(struct pwm_chip *chip, struct pwm_device *pwm,
-+				struct pwm_state *state)
-+{
-+	struct aspeed_pwm_tach_data *priv = aspeed_pwm_chip_to_data(chip);
-+	u32 hwpwm = pwm->hwpwm;
-+	bool polarity, pin_en, clk_en;
-+	u32 duty_pt, val;
-+	u64 div_h, div_l, duty_cycle_period, dividend;
-+
-+	val = readl(priv->base + PWM_ASPEED_CTRL(hwpwm));
-+	polarity = FIELD_GET(PWM_ASPEED_CTRL_INVERSE, val);
-+	pin_en = FIELD_GET(PWM_ASPEED_CTRL_PIN_ENABLE, val);
-+	clk_en = FIELD_GET(PWM_ASPEED_CTRL_CLK_ENABLE, val);
-+	div_h = FIELD_GET(PWM_ASPEED_CTRL_CLK_DIV_H, val);
-+	div_l = FIELD_GET(PWM_ASPEED_CTRL_CLK_DIV_L, val);
-+	val = readl(priv->base + PWM_ASPEED_DUTY_CYCLE(hwpwm));
-+	duty_pt = FIELD_GET(PWM_ASPEED_DUTY_CYCLE_FALLING_POINT, val);
-+	duty_cycle_period = FIELD_GET(PWM_ASPEED_DUTY_CYCLE_PERIOD, val);
-+	/*
-+	 * This multiplication doesn't overflow, the upper bound is
-+	 * 1000000000 * 256 * 256 << 15 = 0x1dcd650000000000
-+	 */
-+	dividend = (u64)NSEC_PER_SEC * (div_l + 1) * (duty_cycle_period + 1)
-+		       << div_h;
-+	state->period = DIV_ROUND_UP_ULL(dividend, priv->clk_rate);
-+
-+	if (clk_en && duty_pt) {
-+		dividend = (u64)NSEC_PER_SEC * (div_l + 1) * duty_pt
-+				 << div_h;
-+		state->duty_cycle = DIV_ROUND_UP_ULL(dividend, priv->clk_rate);
-+	} else {
-+		state->duty_cycle = clk_en ? state->period : 0;
-+	}
-+	state->polarity = polarity ? PWM_POLARITY_INVERSED : PWM_POLARITY_NORMAL;
-+	state->enabled = pin_en;
-+	return 0;
-+}
-+
-+static int aspeed_pwm_apply(struct pwm_chip *chip, struct pwm_device *pwm,
-+			    const struct pwm_state *state)
-+{
-+	struct aspeed_pwm_tach_data *priv = aspeed_pwm_chip_to_data(chip);
-+	u32 hwpwm = pwm->hwpwm, duty_pt, val;
-+	u64 div_h, div_l, divisor, expect_period;
-+	bool clk_en;
-+
-+	expect_period = div64_u64(ULLONG_MAX, (u64)priv->clk_rate);
-+	expect_period = min(expect_period, state->period);
-+	dev_dbg(chip->dev, "expect period: %lldns, duty_cycle: %lldns",
-+		expect_period, state->duty_cycle);
-+	/*
-+	 * Pick the smallest value for div_h so that div_l can be the biggest
-+	 * which results in a finer resolution near the target period value.
-+	 */
-+	divisor = (u64)NSEC_PER_SEC * (PWM_ASPEED_FIXED_PERIOD + 1) *
-+		  (FIELD_MAX(PWM_ASPEED_CTRL_CLK_DIV_L) + 1);
-+	div_h = order_base_2(DIV64_U64_ROUND_UP(priv->clk_rate * expect_period, divisor));
-+	if (div_h > 0xf)
-+		div_h = 0xf;
-+
-+	divisor = ((u64)NSEC_PER_SEC * (PWM_ASPEED_FIXED_PERIOD + 1)) << div_h;
-+	div_l = div64_u64(priv->clk_rate * expect_period, divisor);
-+
-+	if (div_l == 0)
-+		return -ERANGE;
-+
-+	div_l -= 1;
-+
-+	if (div_l > 255)
-+		div_l = 255;
-+
-+	dev_dbg(chip->dev, "clk source: %ld div_h %lld, div_l : %lld\n",
-+		priv->clk_rate, div_h, div_l);
-+	/* duty_pt = duty_cycle * (PERIOD + 1) / period */
-+	duty_pt = div64_u64(state->duty_cycle * priv->clk_rate,
-+			    (u64)NSEC_PER_SEC * (div_l + 1) << div_h);
-+	dev_dbg(chip->dev, "duty_cycle = %lld, duty_pt = %d\n",
-+		state->duty_cycle, duty_pt);
-+
-+	/*
-+	 * Fixed DUTY_CYCLE_PERIOD to its max value to get a
-+	 * fine-grained resolution for duty_cycle at the expense of a
-+	 * coarser period resolution.
-+	 */
-+	val = readl(priv->base + PWM_ASPEED_DUTY_CYCLE(hwpwm));
-+	val &= ~PWM_ASPEED_DUTY_CYCLE_PERIOD;
-+	val |= FIELD_PREP(PWM_ASPEED_DUTY_CYCLE_PERIOD,
-+			  PWM_ASPEED_FIXED_PERIOD);
-+	writel(val, priv->base + PWM_ASPEED_DUTY_CYCLE(hwpwm));
-+
-+	if (duty_pt == 0) {
-+		/* emit inactive level and assert the duty counter reset */
-+		clk_en = 0;
-+	} else {
-+		clk_en = 1;
-+		if (duty_pt >= (PWM_ASPEED_FIXED_PERIOD + 1))
-+			duty_pt = 0;
-+		val = readl(priv->base + PWM_ASPEED_DUTY_CYCLE(hwpwm));
-+		val &= ~(PWM_ASPEED_DUTY_CYCLE_RISING_POINT |
-+			 PWM_ASPEED_DUTY_CYCLE_FALLING_POINT);
-+		val |= FIELD_PREP(PWM_ASPEED_DUTY_CYCLE_FALLING_POINT, duty_pt);
-+		writel(val, priv->base + PWM_ASPEED_DUTY_CYCLE(hwpwm));
-+	}
-+
-+	val = readl(priv->base + PWM_ASPEED_CTRL(hwpwm));
-+	val &= ~(PWM_ASPEED_CTRL_CLK_DIV_H | PWM_ASPEED_CTRL_CLK_DIV_L |
-+		 PWM_ASPEED_CTRL_PIN_ENABLE | PWM_ASPEED_CTRL_CLK_ENABLE |
-+		 PWM_ASPEED_CTRL_INVERSE);
-+	val |= FIELD_PREP(PWM_ASPEED_CTRL_CLK_DIV_H, div_h) |
-+	       FIELD_PREP(PWM_ASPEED_CTRL_CLK_DIV_L, div_l) |
-+	       FIELD_PREP(PWM_ASPEED_CTRL_PIN_ENABLE, state->enabled) |
-+	       FIELD_PREP(PWM_ASPEED_CTRL_CLK_ENABLE, clk_en) |
-+	       FIELD_PREP(PWM_ASPEED_CTRL_INVERSE, state->polarity);
-+	writel(val, priv->base + PWM_ASPEED_CTRL(hwpwm));
-+
-+	return 0;
-+}
-+
-+static const struct pwm_ops aspeed_pwm_ops = {
-+	.apply = aspeed_pwm_apply,
-+	.get_state = aspeed_pwm_get_state,
-+	.owner = THIS_MODULE,
-+};
-+
-+static void aspeed_tach_ch_enable(struct aspeed_pwm_tach_data *priv, u8 tach_ch,
-+				  bool enable)
-+{
-+	if (enable)
-+		writel(readl(priv->base + TACH_ASPEED_CTRL(tach_ch)) |
-+			       TACH_ASPEED_ENABLE,
-+		       priv->base + TACH_ASPEED_CTRL(tach_ch));
-+	else
-+		writel(readl(priv->base + TACH_ASPEED_CTRL(tach_ch)) &
-+			       ~TACH_ASPEED_ENABLE,
-+		       priv->base + TACH_ASPEED_CTRL(tach_ch));
-+}
-+
-+static int aspeed_tach_val_to_rpm(struct aspeed_pwm_tach_data *priv, u32 tach_val)
-+{
-+	u64 rpm;
-+	u32 tach_div;
-+
-+	tach_div = tach_val * priv->tach_divisor * DEFAULT_FAN_PULSE_PR;
-+
-+	dev_dbg(priv->dev, "clk %ld, tach_val %d , tach_div %d\n",
-+		priv->clk_rate, tach_val, tach_div);
-+
-+	rpm = (u64)priv->clk_rate * 60;
-+	do_div(rpm, tach_div);
-+
-+	return (int)rpm;
-+}
-+
-+static int aspeed_get_fan_tach_ch_rpm(struct aspeed_pwm_tach_data *priv,
-+				      u8 fan_tach_ch)
-+{
-+	u32 val;
-+
-+	val = readl(priv->base + TACH_ASPEED_STS(fan_tach_ch));
-+
-+	if (!(val & TACH_ASPEED_FULL_MEASUREMENT))
-+		return 0;
-+	val = FIELD_GET(TACH_ASPEED_VALUE_MASK, val);
-+	return aspeed_tach_val_to_rpm(priv, val);
-+}
-+
-+static int aspeed_tach_hwmon_read(struct device *dev,
-+				  enum hwmon_sensor_types type, u32 attr,
-+				  int channel, long *val)
-+{
-+	struct aspeed_pwm_tach_data *priv = dev_get_drvdata(dev);
-+	u32 reg_val;
-+
-+	switch (attr) {
-+	case hwmon_fan_input:
-+		*val = aspeed_get_fan_tach_ch_rpm(priv, channel);
-+		break;
-+	case hwmon_fan_div:
-+		reg_val = readl(priv->base + TACH_ASPEED_CTRL(channel));
-+		reg_val = FIELD_GET(TACH_ASPEED_CLK_DIV_T_MASK, reg_val);
-+		*val = BIT(reg_val << 1);
-+		break;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+	return 0;
-+}
-+
-+static int aspeed_tach_hwmon_write(struct device *dev,
-+				   enum hwmon_sensor_types type, u32 attr,
-+				   int channel, long val)
-+{
-+	struct aspeed_pwm_tach_data *priv = dev_get_drvdata(dev);
-+	u32 reg_val;
-+
-+	switch (attr) {
-+	case hwmon_fan_div:
-+		if (!is_power_of_2(val) || (ilog2(val) % 2) ||
-+		    DIV_TO_REG(val) > 0xb)
-+			return -EINVAL;
-+		priv->tach_divisor = val;
-+		reg_val = readl(priv->base + TACH_ASPEED_CTRL(channel));
-+		reg_val &= ~TACH_ASPEED_CLK_DIV_T_MASK;
-+		reg_val |= FIELD_GET(TACH_ASPEED_CLK_DIV_T_MASK,
-+				     DIV_TO_REG(priv->tach_divisor));
-+		writel(reg_val, priv->base + TACH_ASPEED_CTRL(channel));
-+		break;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+
-+	return 0;
-+}
-+
-+static umode_t aspeed_tach_dev_is_visible(const void *drvdata,
-+					  enum hwmon_sensor_types type,
-+					  u32 attr, int channel)
-+{
-+	const struct aspeed_pwm_tach_data *priv = drvdata;
-+
-+	if (!priv->tach_present[channel])
-+		return 0;
-+	switch (attr) {
-+	case hwmon_fan_input:
-+		return 0444;
-+	case hwmon_fan_div:
-+		return 0644;
-+	}
-+	return 0;
-+}
-+
-+static const struct hwmon_ops aspeed_tach_ops = {
-+	.is_visible = aspeed_tach_dev_is_visible,
-+	.read = aspeed_tach_hwmon_read,
-+	.write = aspeed_tach_hwmon_write,
-+};
-+
-+static const struct hwmon_channel_info *aspeed_tach_info[] = {
-+	HWMON_CHANNEL_INFO(fan, HWMON_F_INPUT | HWMON_F_DIV, HWMON_F_INPUT | HWMON_F_DIV,
-+			   HWMON_F_INPUT | HWMON_F_DIV, HWMON_F_INPUT | HWMON_F_DIV,
-+			   HWMON_F_INPUT | HWMON_F_DIV, HWMON_F_INPUT | HWMON_F_DIV,
-+			   HWMON_F_INPUT | HWMON_F_DIV, HWMON_F_INPUT | HWMON_F_DIV,
-+			   HWMON_F_INPUT | HWMON_F_DIV, HWMON_F_INPUT | HWMON_F_DIV,
-+			   HWMON_F_INPUT | HWMON_F_DIV, HWMON_F_INPUT | HWMON_F_DIV,
-+			   HWMON_F_INPUT | HWMON_F_DIV, HWMON_F_INPUT | HWMON_F_DIV,
-+			   HWMON_F_INPUT | HWMON_F_DIV, HWMON_F_INPUT | HWMON_F_DIV),
-+	NULL
-+};
-+
-+static const struct hwmon_chip_info aspeed_tach_chip_info = {
-+	.ops = &aspeed_tach_ops,
-+	.info = aspeed_tach_info,
-+};
-+
-+static void aspeed_present_fan_tach(struct aspeed_pwm_tach_data *priv, u32 tach_ch)
-+{
-+	u32 val;
-+
-+	priv->tach_present[tach_ch] = true;
-+	priv->tach_divisor = DEFAULT_TACH_DIV;
-+
-+	val = readl(priv->base + TACH_ASPEED_CTRL(tach_ch));
-+	val &= ~(TACH_ASPEED_INVERS_LIMIT | TACH_ASPEED_DEBOUNCE_MASK |
-+		 TACH_ASPEED_IO_EDGE_MASK | TACH_ASPEED_CLK_DIV_T_MASK |
-+		 TACH_ASPEED_THRESHOLD_MASK);
-+	val |= (DEBOUNCE_3_CLK << TACH_ASPEED_DEBOUNCE_BIT) | F2F_EDGES |
-+	       FIELD_GET(TACH_ASPEED_CLK_DIV_T_MASK,
-+			 DIV_TO_REG(priv->tach_divisor));
-+	writel(val, priv->base + TACH_ASPEED_CTRL(tach_ch));
-+
-+	aspeed_tach_ch_enable(priv, tach_ch, true);
-+}
-+
-+static int aspeed_tach_create_fan(struct device *dev, struct device_node *child,
-+				  struct aspeed_pwm_tach_data *priv)
-+{
-+	int ret;
-+	u32 tach_ch;
-+
-+	ret = of_property_read_u32(child, "tach-ch", &tach_ch);
-+	if (ret)
-+		return ret;
-+
-+	aspeed_present_fan_tach(priv, tach_ch);
-+
-+	return 0;
-+}
-+
-+static int aspeed_pwm_tach_probe(struct platform_device *pdev)
-+{
-+	struct device *dev = &pdev->dev, *hwmon;
-+	int ret;
-+	struct device_node *child;
-+	struct aspeed_pwm_tach_data *priv;
-+
-+	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
-+	if (!priv)
-+		return -ENOMEM;
-+	priv->dev = dev;
-+	priv->base = devm_platform_ioremap_resource(pdev, 0);
-+	if (IS_ERR(priv->base))
-+		return PTR_ERR(priv->base);
-+
-+	priv->clk = devm_clk_get_enabled(dev, NULL);
-+	if (IS_ERR(priv->clk))
-+		return dev_err_probe(dev, PTR_ERR(priv->clk),
-+				     "Couldn't get clock\n");
-+	priv->clk_rate = clk_get_rate(priv->clk);
-+	priv->reset = devm_reset_control_get_exclusive(dev, NULL);
-+	if (IS_ERR(priv->reset))
-+		return dev_err_probe(dev, PTR_ERR(priv->reset),
-+				     "Couldn't get reset control\n");
-+
-+	ret = reset_control_deassert(priv->reset);
-+	if (ret)
-+		return dev_err_probe(dev, ret,
-+				     "Couldn't deassert reset control\n");
-+
-+	priv->chip.dev = dev;
-+	priv->chip.ops = &aspeed_pwm_ops;
-+	priv->chip.npwm = PWM_ASPEED_NR_PWMS;
-+
-+	ret = devm_pwmchip_add(dev, &priv->chip);
-+	if (ret < 0) {
-+		reset_control_assert(priv->reset);
-+		return dev_err_probe(dev, ret, "Failed to add PWM chip\n");
-+	}
-+
-+	for_each_child_of_node(dev->of_node, child) {
-+		ret = aspeed_tach_create_fan(dev, child, priv);
-+		if (ret < 0) {
-+			of_node_put(child);
-+			dev_warn(dev, "Failed to create fan %d", ret);
-+			return 0;
-+		}
-+	}
-+
-+	hwmon = devm_hwmon_device_register_with_info(dev, "aspeed_tach", priv,
-+						     &aspeed_tach_chip_info, NULL);
-+	ret = PTR_ERR_OR_ZERO(hwmon);
-+	if (ret) {
-+		reset_control_assert(priv->reset);
-+		return dev_err_probe(dev, ret,
-+				     "Failed to register hwmon device\n");
-+	}
-+
-+	return 0;
-+}
-+
-+static int aspeed_pwm_tach_remove(struct platform_device *pdev)
-+{
-+	struct aspeed_pwm_tach_data *priv = platform_get_drvdata(pdev);
-+
-+	reset_control_assert(priv->reset);
-+
-+	return 0;
-+}
-+
-+static const struct of_device_id aspeed_pwm_tach_match[] = {
-+	{
-+		.compatible = "aspeed,ast2600-pwm-tach",
-+	},
-+	{},
-+};
-+MODULE_DEVICE_TABLE(of, aspeed_pwm_tach_match);
-+
-+static struct platform_driver aspeed_pwm_tach_driver = {
-+	.probe = aspeed_pwm_tach_probe,
-+	.remove = aspeed_pwm_tach_remove,
-+	.driver	= {
-+		.name = "aspeed-g6-pwm-tach",
-+		.of_match_table = aspeed_pwm_tach_match,
-+	},
-+};
-+
-+module_platform_driver(aspeed_pwm_tach_driver);
-+
-+MODULE_AUTHOR("Billy Tsai <billy_tsai@aspeedtech.com>");
-+MODULE_DESCRIPTION("Aspeed ast2600 PWM and Fan Tach device driver");
-+MODULE_LICENSE("GPL");
--- 
-2.25.1
+(1) fail.
+(2) allocate gcs.
+(3) disable gcs.
 
+the problem with (1) is that it requires changes to user code
+(this only affects code outside the libc doing something special
+since raw clone thread cannot call into the libc, all executing
+code have to be tightly controlled. i don't know how common this
+is, but i at least expect it in test code for system level tools
+like debuggers, strace, valgrind, qemu-system, seccomp filters
+etc. if it appears in actual use then that's a deployment issue
+for distros: note that changing clone to clone3 is non-trivial:
+it requires fallback logic and may have to deal with seccomp
+filters).
+
+problem with (2) is that the size policy and lifetime management
+is in the kernel then. (since only special cases are affected i
+guess that is ok, but i assumed we want to avoid this by moving
+to clone3 and user managed gcs).
+
+the problem with (3) is escaping the security measure, however
+it only applies to very special threads that can always decide
+to opt-in to gcs, so i don't see this as such a bad option and
+at least bw compat with existing code. (in my threat model the
+attacker cannot hijack clone syscalls as that seems stronger
+than hijacking return addresses.)
+
+so i guess the answer depends on how much headache failing
+raw clone may cause and i don't know that.
