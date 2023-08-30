@@ -2,111 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 09D7D78DACF
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Aug 2023 20:38:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 43C7E78DC1A
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Aug 2023 20:47:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233393AbjH3ShM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 30 Aug 2023 14:37:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48236 "EHLO
+        id S238492AbjH3Shv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 30 Aug 2023 14:37:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50814 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244551AbjH3NUi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Aug 2023 09:20:38 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0EA4F1A6;
-        Wed, 30 Aug 2023 06:20:36 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id 38C54615F5;
-        Wed, 30 Aug 2023 13:20:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 80511C433C9;
-        Wed, 30 Aug 2023 13:20:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1693401634;
-        bh=lU/0eFOBFVkuTE1IldAB8o4ifPlzPWcD6cixm0reo2A=;
-        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-        b=bgzOKPRbpUn291lsqU9Z1dLg3L/B12TOne9+koWorFDPSeaeOhmTvGUyhG+gI2BjL
-         xXPEehjiwSkhyeGIYoF9Q1pA4XNU6fSdeogfImQ1EIV9keK0BLa+4TNeCLaYYcbyCO
-         7FnQaKKMDtuJIUdo1NuLBx1O3NjG3fZUffKkTqjJJI0NlZASxhdts9yqpli5nt45La
-         5wIp6B4CWg94mqnotehPPrsl6Z0Xqior9mZDZZ3hCMOrhauaBD2NUk3EzJ2zqDSuqq
-         atVcsLU96cpPto61Ly3S1JiE1NdGpyqSmp6DL+3VlITZL7meH19E5plCwb6Q6LEseh
-         lPU/joGQnSL5w==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
-        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 629B6C64457;
-        Wed, 30 Aug 2023 13:20:34 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+        with ESMTP id S244585AbjH3NYr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Aug 2023 09:24:47 -0400
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com [IPv6:2607:f8b0:4864:20::635])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 518D0137
+        for <linux-doc@vger.kernel.org>; Wed, 30 Aug 2023 06:24:45 -0700 (PDT)
+Received: by mail-pl1-x635.google.com with SMTP id d9443c01a7336-1bc63ef9959so42195225ad.2
+        for <linux-doc@vger.kernel.org>; Wed, 30 Aug 2023 06:24:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1693401885; x=1694006685; darn=vger.kernel.org;
+        h=to:from:cc:content-transfer-encoding:mime-version:date:message-id
+         :subject:references:in-reply-to:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=aRT8HTnQl0A0AIoP4ZTxLcQAlQfUx0TWGO6B5/BcjqA=;
+        b=sQ75QxiDhd4yPqNaHWEhXTXBjs+ovUmg+YDMYW0DkMceNemAPfOKaKZgy/oQxP7/ZB
+         LIVVWd+1vvMpKq/hKUDTzf2dH+kXwWGrxhgP4wzbAS1f0VjCr8IENcDkFuymQxpN7BsZ
+         N7IhZshv2zcl8Dd4hQNQkSbTf3g0pKjZphA/F7HBBxmG8fqvY46TqWfF4riM29cm6hEL
+         Y6EhBVYnUx+2RomT3fM38C/P7lObMRyJh1Os77GTIB2V5A9wvSI1/twW9qwvVxrVbC9h
+         R/O/KpKiHYoPGtdT94LB+0mmOZq4+MYc8A6+fEi8j5Ktf9gkQ/QDfhk+cFNKeebzPIkH
+         kX8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1693401885; x=1694006685;
+        h=to:from:cc:content-transfer-encoding:mime-version:date:message-id
+         :subject:references:in-reply-to:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=aRT8HTnQl0A0AIoP4ZTxLcQAlQfUx0TWGO6B5/BcjqA=;
+        b=WY/4yXi/CD7898lG6UrxsprT8zxVv/Rdu5GSW2N44rkmosBNNC/IVOhY6tfUD1ClCn
+         SLxIx5K7o4xextpJojwxH9owMzjdWg959JgLIqHJp3MfEtTyWZrLeYPEQa/+O1tlc/4k
+         BBBSXQpXIOckZqFBHUHkrtrmzboZ++tYZicJS5hE33r5mIHz5c3G6D7Y8yxc7eknwgsK
+         bS7uvG73K+zmUEXOoZzAZDiGqUB/+IDwZniQapXiU788H8yOmFsDOmE/YxrLuKtT7WnH
+         BpsGUsC+qf6s4IfBePvruAXR3mBnnqs10BJSWflxHESQWRpSLrtMHY3YnRHTjsUv0wSK
+         o/4A==
+X-Gm-Message-State: AOJu0Yz5XSTbuD+kGG0svr5RPOnyO9hAzNrT9JOOUY/Z2cLZmesVKF8F
+        eydyt6v4vOnRdGolYamcDnK/pg==
+X-Google-Smtp-Source: AGHT+IHIIGqJnityI0OPSbmG85fQUYCCUbZlEhqTIhCoa+VaqpTd500dDd/u6VytqECHnak/hR1Q0Q==
+X-Received: by 2002:a17:902:c40b:b0:1c0:aa04:dc2f with SMTP id k11-20020a170902c40b00b001c0aa04dc2fmr2709086plk.11.1693401884752;
+        Wed, 30 Aug 2023 06:24:44 -0700 (PDT)
+Received: from localhost ([135.180.227.0])
+        by smtp.gmail.com with ESMTPSA id i12-20020a170902eb4c00b001a95f632340sm11151096pli.46.2023.08.30.06.24.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Aug 2023 06:24:44 -0700 (PDT)
+In-Reply-To: <20230711201831.2695097-1-evan@rivosinc.com>
+References: <20230711201831.2695097-1-evan@rivosinc.com>
+Subject: Re: [PATCH v4] RISC-V: Show accurate per-hart isa in /proc/cpuinfo
+Message-Id: <169340187980.2480.1248805004166656896.b4-ty@rivosinc.com>
+Date:   Wed, 30 Aug 2023 06:24:39 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v6 00/10] riscv: Allow userspace to directly access perf
- counters
-From:   patchwork-bot+linux-riscv@kernel.org
-Message-Id: <169340163439.19859.16491167037069434691.git-patchwork-notify@kernel.org>
-Date:   Wed, 30 Aug 2023 13:20:34 +0000
-References: <20230802080328.1213905-1-alexghiti@rivosinc.com>
-In-Reply-To: <20230802080328.1213905-1-alexghiti@rivosinc.com>
-To:     Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc:     linux-riscv@lists.infradead.org, corbet@lwn.net,
-        peterz@infradead.org, mingo@redhat.com, acme@kernel.org,
-        mark.rutland@arm.com, alexander.shishkin@linux.intel.com,
-        jolsa@kernel.org, namhyung@kernel.org, irogers@google.com,
-        paul.walmsley@sifive.com, palmer@dabbelt.com,
-        aou@eecs.berkeley.edu, atishp@atishpatra.org, anup@brainfault.org,
-        will@kernel.org, robh@kernel.org, ajones@ventanamicro.com,
-        remi@remlab.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13-dev-901c5
+Cc:     Conor Dooley <conor.dooley@microchip.com>,
+        Andrew Jones <ajones@ventanamicro.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Anup Patel <apatel@ventanamicro.com>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Sunil V L <sunilvl@ventanamicro.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org, Heiko Stuebner <heiko@sntech.de>
+From:   Palmer Dabbelt <palmer@rivosinc.com>
+To:     Evan Green <evan@rivosinc.com>
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello:
 
-This series was applied to riscv/linux.git (for-next)
-by Palmer Dabbelt <palmer@rivosinc.com>:
-
-On Wed,  2 Aug 2023 10:03:18 +0200 you wrote:
-> riscv used to allow direct access to cycle/time/instret counters,
-> bypassing the perf framework, this patchset intends to allow the user to
-> mmap any counter when accessed through perf.
+On Tue, 11 Jul 2023 13:18:30 -0700, Evan Green wrote:
+> In /proc/cpuinfo, most of the information we show for each processor is
+> specific to that hart: marchid, mvendorid, mimpid, processor, hart,
+> compatible, and the mmu size. But the ISA string gets filtered through a
+> lowest common denominator mask, so that if one CPU is missing an ISA
+> extension, no CPUs will show it.
 > 
-> **Important**: The default mode is now user access through perf only, not
-> the legacy so some applications will break. However, we introduce a sysctl
-> perf_user_access like arm64 does, which will allow to switch to the legacy
-> mode described above.
+> Now that we track the ISA extensions for each hart, let's report ISA
+> extension info accurately per-hart in /proc/cpuinfo. We cannot change
+> the "isa:" line, as usermode may be relying on that line to show only
+> the common set of extensions supported across all harts. Add a new "hart
+> isa" line instead, which reports the true set of extensions for that
+> hart. This matches what is returned in riscv_hwprobe() when querying a
+> given hart.
 > 
 > [...]
 
-Here is the summary with links:
-  - [v6,01/10] perf: Fix wrong comment about default event_idx
-    https://git.kernel.org/riscv/c/366d259ff597
-  - [v6,02/10] include: riscv: Fix wrong include guard in riscv_pmu.h
-    https://git.kernel.org/riscv/c/f117ae55b019
-  - [v6,03/10] riscv: Make legacy counter enum match the HW numbering
-    https://git.kernel.org/riscv/c/e8b785e98abb
-  - [v6,04/10] drivers: perf: Rename riscv pmu sbi driver
-    https://git.kernel.org/riscv/c/d5ac062d82d8
-  - [v6,05/10] riscv: Prepare for user-space perf event mmap support
-    https://git.kernel.org/riscv/c/83c5e13b8cbb
-  - [v6,06/10] drivers: perf: Implement perf event mmap support in the legacy backend
-    https://git.kernel.org/riscv/c/50be34282905
-  - [v6,07/10] drivers: perf: Implement perf event mmap support in the SBI backend
-    https://git.kernel.org/riscv/c/cc4c07c89aad
-  - [v6,08/10] Documentation: admin-guide: Add riscv sysctl_perf_user_access
-    https://git.kernel.org/riscv/c/57972127b20e
-  - [v6,09/10] tools: lib: perf: Implement riscv mmap support
-    https://git.kernel.org/riscv/c/60bd50116484
-  - [v6,10/10] perf: tests: Adapt mmap-basic.c for riscv
-    https://git.kernel.org/riscv/c/26ba042414a3
+Applied, thanks!
 
-You are awesome, thank you!
+[1/1] RISC-V: Show accurate per-hart isa in /proc/cpuinfo
+      https://git.kernel.org/palmer/c/3d44f547b677
+
+Best regards,
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+Palmer Dabbelt <palmer@rivosinc.com>
 
