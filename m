@@ -2,56 +2,57 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id ECD8278DC20
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Aug 2023 20:47:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4E97178DC0F
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Aug 2023 20:47:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238422AbjH3Shp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 30 Aug 2023 14:37:45 -0400
+        id S238283AbjH3Shb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 30 Aug 2023 14:37:31 -0400
 Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48252 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244555AbjH3NUj (ORCPT
+        with ESMTP id S244559AbjH3NUj (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Aug 2023 09:20:39 -0400
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9BC48CD6;
-        Wed, 30 Aug 2023 06:20:36 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 38D64CDB;
+        Wed, 30 Aug 2023 06:20:37 -0700 (PDT)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
         (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
          key-exchange X25519 server-signature RSA-PSS (2048 bits))
         (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id BC40062000;
+        by dfw.source.kernel.org (Postfix) with ESMTPS id E33EE6210A;
         Wed, 30 Aug 2023 13:20:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id B455FC433AB;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E87D7C433BB;
         Wed, 30 Aug 2023 13:20:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1693401634;
-        bh=7gwrtueLyswihMZE2JPWq840cyLUSNmg9lpfnOQrhcA=;
+        s=k20201202; t=1693401635;
+        bh=Rk0PKoJyEZ5+FRNg9NgHMqK2XLSnuE+lrVJYZ51wZv4=;
         h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-        b=e6k88Cc/TU9FsjqPbaaGCT3TAzQdnDwcDOCQJGAriL1cZQXOG4+kR1DdXkS48R6M7
-         Qxba6cHLNS3Ao3zXNddcWauycZsPvdoqu4L5M8bJ9ssjb33I78NaKVtyMgVwOyz9gY
-         a4/QeqIQ0Jq03INtemWCeDpxp7083w0LCObbld2ORbGY3WB67LDE0OmdVU6VaI5Mpz
-         n/nXRXvpdXcRG31hJitTpXeVjEqGZJetn0ueGsKq/0gPfvIQOm5DHGzIAjep9bnQGj
-         HOsRt/kTDI6PA54ysAZ1ss0laEbbCqT53KBmN2Xt72Pjo0djq7zRkp85DfC+IRtz/s
-         kdicHPHCKDg3w==
+        b=MSVZRLD2fYUKb2eMAH/iloYGZzAMw1SeGca57apnBqdpGujyoYPtNdzUbInPAYrFz
+         iGpIEXi4XMveXZN+tb3s3Gz2/9Tr5qpVAmf1TMYBWcBH0NaniNNDvel1j5a2BOc7Ey
+         lOGMygkkHRJAnB1w1forSsGfM+5KEjV8/kSL9WMlodzLdaekNwjp2YSeNqnOM4TFrT
+         TSJrs8JWa32KdcqouXL3K1f2kIzWg/HU7SjIuuGR/nHFkPwdRr/eLo34u3oqy4kS9S
+         YQ07FSm7pXI0C8or5vdvUZlYzNcblvunjYksSy8G+WW0MUe7ZpNPNihRsYT7hTtWGJ
+         IAGlghIUyML/g==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
-        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 9C9A9E49FAF;
+        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id CF870E29F3D;
         Wed, 30 Aug 2023 13:20:34 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v10 0/4] RISC-V: mm: Make SV48 the default address space
+Subject: Re: [PATCH -next v9 0/2] support allocating crashkernel above 4G
+ explicitly on riscv
 From:   patchwork-bot+linux-riscv@kernel.org
-Message-Id: <169340163463.19859.14293662814940071934.git-patchwork-notify@kernel.org>
+Message-Id: <169340163484.19859.603263749901327950.git-patchwork-notify@kernel.org>
 Date:   Wed, 30 Aug 2023 13:20:34 +0000
-References: <20230809232218.849726-1-charlie@rivosinc.com>
-In-Reply-To: <20230809232218.849726-1-charlie@rivosinc.com>
-To:     Charlie Jenkins <charlie@rivosinc.com>
+References: <20230726175000.2536220-1-chenjiahao16@huawei.com>
+In-Reply-To: <20230726175000.2536220-1-chenjiahao16@huawei.com>
+To:     chenjiahao (C) <chenjiahao16@huawei.com>
 Cc:     linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
-        conor@kernel.org, paul.walmsley@sifive.com, palmer@rivosinc.com,
-        aou@eecs.berkeley.edu, anup@brainfault.org,
-        konstantin@linuxfoundation.org, linux-doc@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
-        mick@ics.forth.gr, jrtc27@jrtc27.com, rdunlap@infradead.org,
-        alexghiti@rivosinc.com
+        kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+        paul.walmsley@sifive.com, palmer@dabbelt.com,
+        conor.dooley@microchip.com, guoren@kernel.org, heiko@sntech.de,
+        bjorn@rivosinc.com, alex@ghiti.fr, akpm@linux-foundation.org,
+        atishp@rivosinc.com, bhe@redhat.com, thunder.leizhen@huawei.com,
+        horms@kernel.org
 X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
         SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
@@ -66,26 +67,23 @@ Hello:
 This series was applied to riscv/linux.git (for-next)
 by Palmer Dabbelt <palmer@rivosinc.com>:
 
-On Wed,  9 Aug 2023 16:22:00 -0700 you wrote:
-> Make sv48 the default address space for mmap as some applications
-> currently depend on this assumption. Users can now select a
-> desired address space using a non-zero hint address to mmap. Previously,
-> requesting the default address space from mmap by passing zero as the hint
-> address would result in using the largest address space possible. Some
-> applications depend on empty bits in the virtual address space, like Go and
-> Java, so this patch provides more flexibility for application developers.
+On Wed, 26 Jul 2023 17:49:58 +0000 you wrote:
+> On riscv, the current crash kernel allocation logic is trying to
+> allocate within 32bit addressible memory region by default, if
+> failed, try to allocate without 4G restriction.
+> 
+> In need of saving DMA zone memory while allocating a relatively large
+> crash kernel region, allocating the reserved memory top down in
+> high memory, without overlapping the DMA zone, is a mature solution.
+> Hence this patchset introduces the parameter option crashkernel=X,[high,low].
 > 
 > [...]
 
 Here is the summary with links:
-  - [v10,1/4] RISC-V: mm: Restrict address space for sv39,sv48,sv57
-    https://git.kernel.org/riscv/c/add2cc6b6515
-  - [v10,2/4] RISC-V: mm: Add tests for RISC-V mm
-    https://git.kernel.org/riscv/c/4d0c04eac0c2
-  - [v10,3/4] RISC-V: mm: Update pgtable comment documentation
-    https://git.kernel.org/riscv/c/26eee2bfc477
-  - [v10,4/4] RISC-V: mm: Document mmap changes
-    https://git.kernel.org/riscv/c/7998abe69d3c
+  - [-next,v9,1/2] riscv: kdump: Implement crashkernel=X,[high,low]
+    https://git.kernel.org/riscv/c/5882e5acf18d
+  - [-next,v9,2/2] docs: kdump: Update the crashkernel description for riscv
+    https://git.kernel.org/riscv/c/33f0dd973d4e
 
 You are awesome, thank you!
 -- 
