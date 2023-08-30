@@ -2,59 +2,56 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 70ED778DC25
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Aug 2023 20:47:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6E38778DC18
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Aug 2023 20:47:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238373AbjH3Shl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 30 Aug 2023 14:37:41 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51650 "EHLO
+        id S238519AbjH3Shx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 30 Aug 2023 14:37:53 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42202 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1343946AbjH3Rdr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Aug 2023 13:33:47 -0400
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com [IPv6:2a00:1450:4864:20::12d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4F9B9193
-        for <linux-doc@vger.kernel.org>; Wed, 30 Aug 2023 10:33:43 -0700 (PDT)
-Received: by mail-lf1-x12d.google.com with SMTP id 2adb3069b0e04-500cefc3644so126910e87.3
-        for <linux-doc@vger.kernel.org>; Wed, 30 Aug 2023 10:33:43 -0700 (PDT)
+        with ESMTP id S1344001AbjH3Rzd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Aug 2023 13:55:33 -0400
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com [IPv6:2a00:1450:4864:20::42f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0B3E3193
+        for <linux-doc@vger.kernel.org>; Wed, 30 Aug 2023 10:55:29 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id ffacd0b85a97d-31aeef88a55so4880255f8f.2
+        for <linux-doc@vger.kernel.org>; Wed, 30 Aug 2023 10:55:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1693416821; x=1694021621; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rFAqUPUHLCt1ICzqJ94/cfZ/om7aUCeIQB1HCAlluIQ=;
-        b=d3eG/se/rEzfjo4z4K53ffufuviJ3j6M6a4rjL0WcL5IjIzrO8rDucyHVzVeLp5cFJ
-         SfS6SQPuL15qcRNto9r3Aiug3pym+0Pg+4x/8MEUJNpurGY/61/rBGzC2pnDMD+QsntN
-         +O0o0YNESeVZ02vE7plcU1pzRrqFYRyHZo6SseJXyF5nLXhl7vpOZEVCYgAe4nLL2IFQ
-         8pB621D9DIbRw2XPhXBS2tN7WRIKYulsSBBSROdsafk+3/TCIvJbjljy5ajlqn0KmKJr
-         BY8hopEQ4oykp4yUoE0nShaWzzS7otjxBOTMrVi1OV9f3Ky8dt3eO95xkrCGeKDV/tLD
-         EXaw==
+        d=ventanamicro.com; s=google; t=1693418127; x=1694022927; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=YmQ2MoNhzEr+YuyoVMHgEFmPqeMcMuiCUmdWY8clz8w=;
+        b=YCiq13hH41A6jbxxSrrVLWtdoED84VxLNS4aatc6VpfKrNWXKsR4jqCUBLGIfLH5Fq
+         cCOdWyL3u/BS5z/C+F3NFhLCeXtAaRKQpZqgtiv9kQgUH2KqLV4uerMfTuaoVmyYEw0C
+         ahUhQk0dcUrB4QOpYYoRpVvKhI3V1n6C4pSO//rqtcRRvf+KlJkCHYGCwuM+kPvsAY2d
+         x7pGLczufxQuUtfsnxRqAAwOCBnKf6GwExbuQq6GfIrFIyg8F7ZNo+zUh7zp2W7HXnib
+         VTn1CaG+bY2f2lDT+X4NZqTRSrczG0aQjizYoHANxHZ28K9aV/2Blf8Zt9pLgQKM45yE
+         u9Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693416821; x=1694021621;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=rFAqUPUHLCt1ICzqJ94/cfZ/om7aUCeIQB1HCAlluIQ=;
-        b=JzyDdD0KDGrVUFIggg/Ch91KwB0bmKeYeHUgWDXq0MaM1Cc2mmDobqCcQtXJgNMkv/
-         6F50lSM1nNvz7bzFSh9Xt5m7ZtkpXnNd7TgbI5REw8yfNc2OBkawyyrHRGIGKZbWO16l
-         ISBIppOjTyT+ojsUzxHKnyA2uYoBgCZazWre6UKYiKkrZhn3foI4hNqlrpssCPfbumBa
-         ODH0Gjejwx2KWXF7/ZSL2a3gcsKRWB4RozSfYe+YP4hZgFlYqziXftlDmO6Hyiq0hyyL
-         94zM/zuVLnH5jcouw5Ex5ZI5cjmFDTRjb2pwqQQxHAKPtF+r2Al0o/AMkZGPwitaJ4Qw
-         7ABQ==
-X-Gm-Message-State: AOJu0Yynz40IbF+Qh/jZvUMAPeIGBNsN+rf/+MA+/lA/2FMn+2I4s5yY
-        +BMXvapyR341JTcwQXTiUfSHMv2qJW6xOC7TriCcwg==
-X-Google-Smtp-Source: AGHT+IHlWKSdVmP8pFG6g9r/7t6cofB3knDmKEpJmBCYjlMtzueLbcTeNe00mhRVTtaLSoCabnUPc5rXtH1thlBuqjQ=
-X-Received: by 2002:a05:6512:ac3:b0:500:780b:5bdc with SMTP id
- n3-20020a0565120ac300b00500780b5bdcmr2588428lfu.49.1693416821252; Wed, 30 Aug
- 2023 10:33:41 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230711201831.2695097-1-evan@rivosinc.com> <20230829-e445d0bdff78969cc33a6263@orel>
- <CALs-HsuTySr0ZojRtBeU3F6hd82UeNWNupaQpEULVqxf2jqzww@mail.gmail.com> <20230830-86f54e19392767c02d8d3146@orel>
-In-Reply-To: <20230830-86f54e19392767c02d8d3146@orel>
-From:   Evan Green <evan@rivosinc.com>
-Date:   Wed, 30 Aug 2023 10:33:04 -0700
-Message-ID: <CALs-HsuCx_UH4oiFEq7arrAjRFtGe7So07ur-pwvafw3a0QyEw@mail.gmail.com>
-Subject: Re: [PATCH v4] RISC-V: Show accurate per-hart isa in /proc/cpuinfo
-To:     Andrew Jones <ajones@ventanamicro.com>
+        d=1e100.net; s=20221208; t=1693418127; x=1694022927;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=YmQ2MoNhzEr+YuyoVMHgEFmPqeMcMuiCUmdWY8clz8w=;
+        b=cwZag64r+PTPIh+YJkkhcmSFGv0pyKBnSQOjwZgZTXoLq7l5k3KLaA89rX3zgOR72q
+         fPVpZPUoKnXLUJxJxll2vHDS9Y+EiV7BiQXYapC/WeBOFBFLHo6wXviiR4E1Xc4saq7N
+         yUTzYwIAYxNGOId4bi71NEH8XQwqAqCNfDDoAL99c9Q8LjjutzYs7qCGRYwdqU+PMilp
+         Jz84t0w+4wZDgZzg8yJBm1H5r5zvqX91+Gr4U1N5cYkgkq2NYZLZF1sn1mL6dmuuXV6B
+         E71F3VUVqRb9nI1T8CcyOP832Xc/UcVdyYrpjwtHv3joxQ1ZEkYPb55bnUVTjmFzsO62
+         5x4g==
+X-Gm-Message-State: AOJu0YzQ+NqULr1w7PGn0zS8aEkUnGHHm2k66SFvA/Hmr61D8Rpoxwzv
+        f1bzjrqHuUQBGcqhKjufaDtlkg==
+X-Google-Smtp-Source: AGHT+IFXsFgR+tmPtm38ZlRVYhxslbRFJdsH4JOYvx35ERaaS6F+AyFw/k5jhjXcltzBM4OYBEwI6A==
+X-Received: by 2002:adf:dcce:0:b0:315:ad1a:5abc with SMTP id x14-20020adfdcce000000b00315ad1a5abcmr2044751wrm.5.1693418127398;
+        Wed, 30 Aug 2023 10:55:27 -0700 (PDT)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+        by smtp.gmail.com with ESMTPSA id x8-20020a5d60c8000000b0031c52e81490sm17301023wrt.72.2023.08.30.10.55.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Aug 2023 10:55:26 -0700 (PDT)
+Date:   Wed, 30 Aug 2023 19:55:25 +0200
+From:   Andrew Jones <ajones@ventanamicro.com>
+To:     Evan Green <evan@rivosinc.com>
 Cc:     Palmer Dabbelt <palmer@rivosinc.com>,
         Conor Dooley <conor.dooley@microchip.com>,
         Albert Ou <aou@eecs.berkeley.edu>,
@@ -67,246 +64,225 @@ Cc:     Palmer Dabbelt <palmer@rivosinc.com>,
         Sunil V L <sunilvl@ventanamicro.com>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-riscv@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+Subject: Re: [PATCH v4] RISC-V: Show accurate per-hart isa in /proc/cpuinfo
+Message-ID: <20230830-ae09c1dd0bc8b21f0dcdbc9a@orel>
+References: <20230711201831.2695097-1-evan@rivosinc.com>
+ <20230829-e445d0bdff78969cc33a6263@orel>
+ <CALs-HsuTySr0ZojRtBeU3F6hd82UeNWNupaQpEULVqxf2jqzww@mail.gmail.com>
+ <20230830-86f54e19392767c02d8d3146@orel>
+ <CALs-HsuCx_UH4oiFEq7arrAjRFtGe7So07ur-pwvafw3a0QyEw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CALs-HsuCx_UH4oiFEq7arrAjRFtGe7So07ur-pwvafw3a0QyEw@mail.gmail.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Aug 30, 2023 at 2:03=E2=80=AFAM Andrew Jones <ajones@ventanamicro.c=
-om> wrote:
->
-> On Tue, Aug 29, 2023 at 10:20:04AM -0700, Evan Green wrote:
-> > On Tue, Aug 29, 2023 at 1:48=E2=80=AFAM Andrew Jones <ajones@ventanamic=
-ro.com> wrote:
-> > >
-> > > Hi Evan,
-> > >
-> > > Here's my stab at new wording.
-> > >
-> > > On Tue, Jul 11, 2023 at 01:18:30PM -0700, Evan Green wrote:
-> > > ...
-> > > > diff --git a/Documentation/riscv/uabi.rst b/Documentation/riscv/uab=
-i.rst
-> > > > index 8960fac42c40..afdda580e5a2 100644
-> > > > --- a/Documentation/riscv/uabi.rst
-> > > > +++ b/Documentation/riscv/uabi.rst
-> > > > @@ -42,6 +42,16 @@ An example string following the order is::
+On Wed, Aug 30, 2023 at 10:33:04AM -0700, Evan Green wrote:
+> On Wed, Aug 30, 2023 at 2:03 AM Andrew Jones <ajones@ventanamicro.com> wrote:
+> >
+> > On Tue, Aug 29, 2023 at 10:20:04AM -0700, Evan Green wrote:
+> > > On Tue, Aug 29, 2023 at 1:48 AM Andrew Jones <ajones@ventanamicro.com> wrote:
 > > > >
-> > > >     rv64imadc_zifoo_zigoo_zafoo_sbar_scar_zxmbaz_xqux_xrux
+> > > > Hi Evan,
 > > > >
-> > > > +"isa" vs "hart isa" lines in /proc/cpuinfo
-> > > > +------------------------------------------
-> > > > +
-> > > > +The "isa" line in /proc/cpuinfo describes the lowest common denomi=
-nator of
-> > > > +RISC-V ISA extensions understood by the kernel and implemented on =
-all harts. The
-> > > > +"hart isa" line, in contrast, describes the set of extensions unde=
-rstood by the
-> > > > +kernel on the particular hart being described, even if those exten=
-sions may not
-> > > > +be present on all harts in the system. The "hart isa" line is cons=
-istent with
-> > > > +what's returned by __riscv_hwprobe() when querying for that specif=
-ic CPU.
-> > > > +
+> > > > Here's my stab at new wording.
+> > > >
+> > > > On Tue, Jul 11, 2023 at 01:18:30PM -0700, Evan Green wrote:
+> > > > ...
+> > > > > diff --git a/Documentation/riscv/uabi.rst b/Documentation/riscv/uabi.rst
+> > > > > index 8960fac42c40..afdda580e5a2 100644
+> > > > > --- a/Documentation/riscv/uabi.rst
+> > > > > +++ b/Documentation/riscv/uabi.rst
+> > > > > @@ -42,6 +42,16 @@ An example string following the order is::
+> > > > >
+> > > > >     rv64imadc_zifoo_zigoo_zafoo_sbar_scar_zxmbaz_xqux_xrux
+> > > > >
+> > > > > +"isa" vs "hart isa" lines in /proc/cpuinfo
+> > > > > +------------------------------------------
+> > > > > +
+> > > > > +The "isa" line in /proc/cpuinfo describes the lowest common denominator of
+> > > > > +RISC-V ISA extensions understood by the kernel and implemented on all harts. The
+> > > > > +"hart isa" line, in contrast, describes the set of extensions understood by the
+> > > > > +kernel on the particular hart being described, even if those extensions may not
+> > > > > +be present on all harts in the system. The "hart isa" line is consistent with
+> > > > > +what's returned by __riscv_hwprobe() when querying for that specific CPU.
+> > > > > +
+> > > >
+> > > > The "isa" and "hart isa" lines in /proc/cpuinfo list RISC-V ISA extensions
+> > > > which the kernel can identify (the kernel recognizes the extension's name)
+> > > > and have not been filtered out due to effectively not being present.  An
+> > > > extension is effectively not present when it is unusable, either due to
+> > > > defects (which the kernel is aware of), due to missing information which
+> > > > is necessary to complete the extension's description, or due to being
+> > > > explicitly "hidden", such as when a kernel command line parameter
+> > > > instructs the kernel to pretend the extension is not present.  Note, an
+> > > > extension's presence in a list does not imply the kernel is using the
+> > > > extension, nor does it imply that userspace or guest kernels may use the
+> > > > extension (__riscv_hwprobe() should be queried for userspace usability.
+> > > > The hypervisor should be queried, using hypervisor-specific APIs, to
+> > > > check guest kernel usability.)
+> > > >
+> > > > The "isa" line describes the lowest common denominator of extensions,
+> > > > which are the extensions implemented on all harts.  In contrast, the
+> > > > extensions listed in the "hart isa" line need not be implemented by
+> > > > any other hart than the hart corresponding to the line.
+> > > >
+> > > > ---
+> > > >
+> > > > I've specifically dropped the 'The "hart isa" line is consistent with
+> > > > what's returned by __riscv_hwprobe()...' part because I suspect hwprobe
+> > > > could at least lag what gets put in "hart isa", since the kernel may be
+> > > > taught about an extension for a different purpose first, neglecting
+> > > > hwprobe. And, there may be cases that hwprobe never enumerates an
+> > > > extension which the kernel does.
 > > >
-> > > The "isa" and "hart isa" lines in /proc/cpuinfo list RISC-V ISA exten=
-sions
-> > > which the kernel can identify (the kernel recognizes the extension's =
-name)
-> > > and have not been filtered out due to effectively not being present. =
- An
-> > > extension is effectively not present when it is unusable, either due =
-to
-> > > defects (which the kernel is aware of), due to missing information wh=
-ich
-> > > is necessary to complete the extension's description, or due to being
-> > > explicitly "hidden", such as when a kernel command line parameter
-> > > instructs the kernel to pretend the extension is not present.  Note, =
-an
-> > > extension's presence in a list does not imply the kernel is using the
-> > > extension, nor does it imply that userspace or guest kernels may use =
-the
-> > > extension (__riscv_hwprobe() should be queried for userspace usabilit=
-y.
-> > > The hypervisor should be queried, using hypervisor-specific APIs, to
-> > > check guest kernel usability.)
+> > > Thanks for this. My v5 had also dropped the hwprobe part. A few thoughts:
 > > >
-> > > The "isa" line describes the lowest common denominator of extensions,
-> > > which are the extensions implemented on all harts.  In contrast, the
-> > > extensions listed in the "hart isa" line need not be implemented by
-> > > any other hart than the hart corresponding to the line.
+> > >  * It seems like you want to make sure we call out the fact that the
+> > > kernel may trim out, for various reasons, ISA extensions that the
+> > > hardware does in fact support. This seems reasonable, but I don't
+> > > think we need to enumerate the complete list of "why" this might
+> > > happen, as that list is likely to go stale.
+> >
+> > I agree it's better to not [try to] list all the possibilities, assuming
+> > we can come up with good, general words to capture the idea.
+> >
+> > >  * The "kernel is using the extension" part is a slightly confusing
+> > > perspective in this context, as it sort of implies the kernel has its
+> > > own agenda :). I'd expect users looking at /proc/cpuinfo are mostly
+> > > trying to figure out what extensions they themselves can use, and the
+> > > kernel's behavior factors in only insofar as it's required to support
+> > > the user in using a feature. Mostly I guess this is a phrasing nit.
+> >
+> > We'll have plenty of S-mode extensions listed in these strings. Users
+> > who recognize S-mode extensions may want to know if they're listed because
+> > the kernel is applying them (and wouldn't be listed otherwise), or whether
+> > they're listed simply because they exist on the hart(s).
+> 
+> I see. You're right I was thinking only about U-mode extensions.
+> 
+> >
+> > >  * The bringing up of guest kernels also seems confusing to me in the
+> > > context of /proc/cpuinfo. I'd expect discussions on how host ISA
+> > > extensions filter into guest OSes to be in a hypervisor-specifc
+> > > document, or at least a section dedicated to virtualization.
+> >
+> > If there weren't S-mode extensions being listed, then I would agree,
+> > but, since there are, it seems odd to not explain what it means for
+> > them to be there wrt host and guest kernels.
+> 
+> I'm not a virtualization guy, but my impression was people didn't have
+> expectations that everything they saw in cpuinfo would be wholesale
+> presented to guest VMs. There's always that layer of hypervisor
+> configuration that may strip out some features. So I'm still not super
+> convinced guest VMs need a carveout/caveat here, but let me see if I
+> can fold it in.
+> 
+> >
+> > >  * I hesitated in adding prescriptive guidance on what users should
+> > > do, as I think this section will hold up better over time if it just
+> > > describes current characteristics, rather than attempting to prescribe
+> > > behavior. If we want a prescriptive documentation on "use this for
+> > > that", that should probably be its own section
+> >
+> > I guess the guidance you're referring to is the "(__riscv_hwprobe() should
+> > be queried for userspace usability.  The hypervisor should be queried,
+> > using hypervisor-specific APIs, to check guest kernel usability.)" bit.
+> > I'm fine with dropping that or moving it to another section, but I think
+> > the more we point out hwprobe, the better. If developers are reading this
+> > /proc/cpuinfo section because they want to detect extensions, then I'd
+> > prefer the section redirects them to hwprobe.
+> 
+> Fair enough. I still haven't brought myself to wedge in an ad for
+> hwprobe, but I also don't disagree with this :)
+> 
+> >
 > > >
-> > > ---
+> > > If I try to fold the gist of what you wrote into v5, I get something
+> > > like this (also with a very slight section heading change). Let me
+> > > know what you think:
 > > >
-> > > I've specifically dropped the 'The "hart isa" line is consistent with
-> > > what's returned by __riscv_hwprobe()...' part because I suspect hwpro=
-be
-> > > could at least lag what gets put in "hart isa", since the kernel may =
-be
-> > > taught about an extension for a different purpose first, neglecting
-> > > hwprobe. And, there may be cases that hwprobe never enumerates an
-> > > extension which the kernel does.
+> > > "isa" and "hart isa" lines in /proc/cpuinfo
+> > > ------------------------------------------
 > >
-> > Thanks for this. My v5 had also dropped the hwprobe part. A few thought=
-s:
+> > need one more _
 > >
-> >  * It seems like you want to make sure we call out the fact that the
-> > kernel may trim out, for various reasons, ISA extensions that the
-> > hardware does in fact support. This seems reasonable, but I don't
-> > think we need to enumerate the complete list of "why" this might
-> > happen, as that list is likely to go stale.
->
-> I agree it's better to not [try to] list all the possibilities, assuming
-> we can come up with good, general words to capture the idea.
->
-> >  * The "kernel is using the extension" part is a slightly confusing
-> > perspective in this context, as it sort of implies the kernel has its
-> > own agenda :). I'd expect users looking at /proc/cpuinfo are mostly
-> > trying to figure out what extensions they themselves can use, and the
-> > kernel's behavior factors in only insofar as it's required to support
-> > the user in using a feature. Mostly I guess this is a phrasing nit.
->
-> We'll have plenty of S-mode extensions listed in these strings. Users
-> who recognize S-mode extensions may want to know if they're listed becaus=
-e
-> the kernel is applying them (and wouldn't be listed otherwise), or whethe=
-r
-> they're listed simply because they exist on the hart(s).
-
-I see. You're right I was thinking only about U-mode extensions.
-
->
-> >  * The bringing up of guest kernels also seems confusing to me in the
-> > context of /proc/cpuinfo. I'd expect discussions on how host ISA
-> > extensions filter into guest OSes to be in a hypervisor-specifc
-> > document, or at least a section dedicated to virtualization.
->
-> If there weren't S-mode extensions being listed, then I would agree,
-> but, since there are, it seems odd to not explain what it means for
-> them to be there wrt host and guest kernels.
-
-I'm not a virtualization guy, but my impression was people didn't have
-expectations that everything they saw in cpuinfo would be wholesale
-presented to guest VMs. There's always that layer of hypervisor
-configuration that may strip out some features. So I'm still not super
-convinced guest VMs need a carveout/caveat here, but let me see if I
-can fold it in.
-
->
-> >  * I hesitated in adding prescriptive guidance on what users should
-> > do, as I think this section will hold up better over time if it just
-> > describes current characteristics, rather than attempting to prescribe
-> > behavior. If we want a prescriptive documentation on "use this for
-> > that", that should probably be its own section
->
-> I guess the guidance you're referring to is the "(__riscv_hwprobe() shoul=
-d
-> be queried for userspace usability.  The hypervisor should be queried,
-> using hypervisor-specific APIs, to check guest kernel usability.)" bit.
-> I'm fine with dropping that or moving it to another section, but I think
-> the more we point out hwprobe, the better. If developers are reading this
-> /proc/cpuinfo section because they want to detect extensions, then I'd
-> prefer the section redirects them to hwprobe.
-
-Fair enough. I still haven't brought myself to wedge in an ad for
-hwprobe, but I also don't disagree with this :)
-
->
+> > >
+> > > The "isa" line in /proc/cpuinfo describes the lowest common denominator of
+> > > RISC-V ISA extensions recognized by the kernel and implemented on all harts. The
+> > > "hart isa" line, in contrast, describes the set of extensions recognized by the
+> > > kernel on the particular hart being described, even if those extensions may not
+> > > be present on all harts in the system.
+> > >
+> > > In both lines, the presence of an extension guarantees only that the
+> > > hardware has the described capability.
+> > > Additional kernel support or policy changes may be required before an
+> > > extension's capability is fully usable by userspace programs.
 > >
-> > If I try to fold the gist of what you wrote into v5, I get something
-> > like this (also with a very slight section heading change). Let me
-> > know what you think:
+> > or guest kernels in the case of S-mode extensions.
 > >
-> > "isa" and "hart isa" lines in /proc/cpuinfo
-> > ------------------------------------------
->
-> need one more _
->
+> > >
+> > > Inversely, the absence of an extension in these lines does not
+> > > necessarily mean the hardware does not support that feature. The
+> > > running kernel may not recognize the extension, or may have
+> > > deliberately disabled access to it.
 > >
-> > The "isa" line in /proc/cpuinfo describes the lowest common denominator=
- of
-> > RISC-V ISA extensions recognized by the kernel and implemented on all h=
-arts. The
-> > "hart isa" line, in contrast, describes the set of extensions recognize=
-d by the
-> > kernel on the particular hart being described, even if those extensions=
- may not
-> > be present on all harts in the system.
+> > I'm not sure about the word "disabled". The kernel can only disable U-mode
+> > extensions and S-mode extensions for guests. S-mode extensions for the
+> > current kernel would have to be disabled by its next higher privilege
+> > level.
 > >
-> > In both lines, the presence of an extension guarantees only that the
-> > hardware has the described capability.
-> > Additional kernel support or policy changes may be required before an
-> > extension's capability is fully usable by userspace programs.
->
-> or guest kernels in the case of S-mode extensions.
->
+> > How about "...may not recognize the extension, or may have deliberately
+> > removed it from the listing."
+> 
+> Perfect.
+> 
 > >
-> > Inversely, the absence of an extension in these lines does not
-> > necessarily mean the hardware does not support that feature. The
-> > running kernel may not recognize the extension, or may have
-> > deliberately disabled access to it.
->
-> I'm not sure about the word "disabled". The kernel can only disable U-mod=
-e
-> extensions and S-mode extensions for guests. S-mode extensions for the
-> current kernel would have to be disabled by its next higher privilege
-> level.
->
-> How about "...may not recognize the extension, or may have deliberately
-> removed it from the listing."
+> > (But then readers will wonder why an extension would be deliberately
+> > removed from the listing, which brings us back to trying to come up
+> > with general words to capture the cases I listed. Or, maybe we don't
+> > have to care if they wonder why in this section/document.)
+> 
+> I know, I felt the same pull to explain why as well. But I think given
+> that our goal with this section is mostly to make the distinction of
+> "presence != active", explaining exactly why the kernel may remove it
+> is not strictly necessary. All of my attempts to tack something on end
+> up being enumerated lists, which don't come out well and muddle the
+> message.
+> 
+> Here's another shot (line endings may be wonky):
+> 
+> "isa" and "hart isa" lines in /proc/cpuinfo
+> -------------------------------------------
+> 
+> The "isa" line in /proc/cpuinfo describes the lowest common denominator of
+> RISC-V ISA extensions recognized by the kernel and implemented on all harts. The
+> "hart isa" line, in contrast, describes the set of extensions recognized by the
+> kernel on the particular hart being described, even if those extensions may not
+> be present on all harts in the system.
+> 
+> In both lines, the presence of an extension guarantees only that the
+> hardware has the described capability.
+> Additional kernel support or policy changes may be required before an
+> extension's capability is fully usable by userspace programs.
+> Similarly, for S-mode extensions, presence in one of these lines does
+> not guarantee that the kernel is taking advantage of the extension, or
+> that the feature will be visible in guest VMs managed by this kernel.
+> 
+> Inversely, the absence of an extension in these lines does not
+> necessarily mean the hardware does not support that feature. The
+> running kernel may not recognize the extension, or may have
+> deliberately removed it from the listing.
 
-Perfect.
+Looks good to me!
 
->
-> (But then readers will wonder why an extension would be deliberately
-> removed from the listing, which brings us back to trying to come up
-> with general words to capture the cases I listed. Or, maybe we don't
-> have to care if they wonder why in this section/document.)
-
-I know, I felt the same pull to explain why as well. But I think given
-that our goal with this section is mostly to make the distinction of
-"presence !=3D active", explaining exactly why the kernel may remove it
-is not strictly necessary. All of my attempts to tack something on end
-up being enumerated lists, which don't come out well and muddle the
-message.
-
-Here's another shot (line endings may be wonky):
-
-"isa" and "hart isa" lines in /proc/cpuinfo
--------------------------------------------
-
-The "isa" line in /proc/cpuinfo describes the lowest common denominator of
-RISC-V ISA extensions recognized by the kernel and implemented on all harts=
-. The
-"hart isa" line, in contrast, describes the set of extensions recognized by=
- the
-kernel on the particular hart being described, even if those extensions may=
- not
-be present on all harts in the system.
-
-In both lines, the presence of an extension guarantees only that the
-hardware has the described capability.
-Additional kernel support or policy changes may be required before an
-extension's capability is fully usable by userspace programs.
-Similarly, for S-mode extensions, presence in one of these lines does
-not guarantee that the kernel is taking advantage of the extension, or
-that the feature will be visible in guest VMs managed by this kernel.
-
-Inversely, the absence of an extension in these lines does not
-necessarily mean the hardware does not support that feature. The
-running kernel may not recognize the extension, or may have
-deliberately removed it from the listing.
-
--Evan
-
->
-> Thanks,
-> drew
+Thanks,
+drew
