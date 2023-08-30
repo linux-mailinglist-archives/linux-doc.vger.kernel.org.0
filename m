@@ -2,67 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B321D78D0BB
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Aug 2023 01:45:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 819C378D148
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Aug 2023 02:46:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241202AbjH2Xow (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Aug 2023 19:44:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45790 "EHLO
+        id S230015AbjH3AqN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Aug 2023 20:46:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45492 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241225AbjH2Xoq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Aug 2023 19:44:46 -0400
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.136])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 332181BB;
-        Tue, 29 Aug 2023 16:44:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1693352684; x=1724888684;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=+1T9Do0MpE3rexZYVFZx+fj/FcnYDzdw9uIqJHZ+mV4=;
-  b=cwzK/P/uWTFMt27jICrS8euvoysFaQaFPP9XRy1XQl7y+XQahYg+zpGL
-   vtc/3IRnLU6LQIuAowK0oRzBRzEe37sJrXNNcHv/vI2Ai/0JnQbNzJ0xi
-   oKFE/GN0KuK8JYXxFP6kMYvLabC8MmTGKoH8vMa9XqV4OYzXJzsDIempP
-   AcwWuQtDLDtE8GCPlNiuMS6DZrQtUd0A/HT+rknvIpx8EKCw1fLglSwP6
-   Gyh/oEGBkm9JXgF85FKYOwNmqeNKJAteFspYKbGwxxELfNFl/wLbyvELx
-   0LhsGJnpyD2wKo27hI7R/QisX/ascM6D2qt9JXDz428SRYPO7gWV6f7XC
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10817"; a="355015494"
-X-IronPort-AV: E=Sophos;i="6.02,211,1688454000"; 
-   d="scan'208";a="355015494"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Aug 2023 16:44:43 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10817"; a="688691042"
-X-IronPort-AV: E=Sophos;i="6.02,211,1688454000"; 
-   d="scan'208";a="688691042"
-Received: from agluck-desk3.sc.intel.com ([172.25.222.74])
-  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Aug 2023 16:44:42 -0700
-From:   Tony Luck <tony.luck@intel.com>
-To:     Fenghua Yu <fenghua.yu@intel.com>,
-        Reinette Chatre <reinette.chatre@intel.com>,
-        Peter Newman <peternewman@google.com>,
+        with ESMTP id S232240AbjH3Apm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Aug 2023 20:45:42 -0400
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com [IPv6:2607:f8b0:4864:20::1035])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4DC9ACCE
+        for <linux-doc@vger.kernel.org>; Tue, 29 Aug 2023 17:45:38 -0700 (PDT)
+Received: by mail-pj1-x1035.google.com with SMTP id 98e67ed59e1d1-26b41112708so3251888a91.3
+        for <linux-doc@vger.kernel.org>; Tue, 29 Aug 2023 17:45:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1693356338; x=1693961138; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=03m2A+TmUzgwhqrt9lI9ZZVbFhAvl2ARTiZlbzfRzC0=;
+        b=Uix+AnNQO6XxqHVpvEolVOeSvw3DGoCXo7B7OWveMONkzJ9dS5uzMnvyhxz58r6sEd
+         olztLVgw6tPViA2LYIPny7ID4YyFPvXm0aRwQdMgOUP/3zz8DxrHNV4sRyopcXl0E4Ph
+         9lyCF9eiWsDxD6P77u+P//Cqr6WNZvhUzep80=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1693356338; x=1693961138;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=03m2A+TmUzgwhqrt9lI9ZZVbFhAvl2ARTiZlbzfRzC0=;
+        b=f/I1WFb+UliA2BFDp3KQN7LBu4v3kmN3vxd2j0NXmT/ViwRVhEF0kHzKfsEE0/zqTy
+         NoY1wdRx9WaatxS9RdA+hS3GmetL2IljFuuyYMEfJBzzWXygzqroRJ3ng5RF7YXXcAMA
+         nlZ5tgCC42fwR8DnSgszCC4hGsEGwhnvMWsEQBJh4tIDalB4OLhRz4dFyuU2nUe/HLwh
+         0u3KxfoBG3uxI3vnasmdfBECvJRdd56wp6j5ElMWTIBgaQIieoXFQrKfpXPBG1aa096e
+         fN+J/0x1AhSemludqyP5KwNcvOh7YUzwTCbdSaTUKWiQvc0Hm8fTubBTdsA6FE9KZHnZ
+         fu6w==
+X-Gm-Message-State: AOJu0Yzpa54f4YJcSoV2vikb7jmKCYH8vxw2QrzFSIDIQ5xl7vGHXpDP
+        Uf0Vu/zUhu9TSlRfcIzfLTtC4Y0TniybSH04glM=
+X-Google-Smtp-Source: AGHT+IHYjpZQOYH32iyhG+dAWZLq6k37sN9+T4hVIVxiqFu/DJ8Z4UetURj4TiF4f5nBLcGIckVxDQ==
+X-Received: by 2002:a17:90a:ea87:b0:268:3ea0:7160 with SMTP id h7-20020a17090aea8700b002683ea07160mr850064pjz.0.1693356337723;
+        Tue, 29 Aug 2023 17:45:37 -0700 (PDT)
+Received: from google.com (KD124209188001.ppp-bb.dion.ne.jp. [124.209.188.1])
+        by smtp.gmail.com with ESMTPSA id t24-20020a17090aba9800b0026b4ca7f62csm162223pjr.39.2023.08.29.17.45.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 29 Aug 2023 17:45:37 -0700 (PDT)
+Date:   Wed, 30 Aug 2023 09:45:33 +0900
+From:   Sergey Senozhatsky <senozhatsky@chromium.org>
+To:     Masahiro Yamada <masahiroy@kernel.org>
+Cc:     Sergey Senozhatsky <senozhatsky@chromium.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Nicolas Schier <nicolas@fjasle.eu>,
         Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>, x86@kernel.org
-Cc:     Shaopeng Tan <tan.shaopeng@fujitsu.com>,
-        James Morse <james.morse@arm.com>,
-        Jamie Iles <quic_jiles@quicinc.com>,
-        Babu Moger <babu.moger@amd.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        patches@lists.linux.dev, Tony Luck <tony.luck@intel.com>
-Subject: [PATCH v5 8/8] selftests/resctrl: Adjust effective L3 cache size when SNC enabled
-Date:   Tue, 29 Aug 2023 16:44:26 -0700
-Message-ID: <20230829234426.64421-9-tony.luck@intel.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230829234426.64421-1-tony.luck@intel.com>
-References: <20230722190740.326190-1-tony.luck@intel.com>
- <20230829234426.64421-1-tony.luck@intel.com>
+        Tomasz Figa <tfiga@chromium.org>, linux-kbuild@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] kconfig: add warn-unknown-symbols sanity check
+Message-ID: <20230830004533.GG3913@google.com>
+References: <20230826071359.2060501-1-senozhatsky@chromium.org>
+ <CAK7LNAROnZpZiOC4eS5kTcv4Q2YDrE9KYBD-dVcfXwBPQWvbmg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAK7LNAROnZpZiOC4eS5kTcv4Q2YDrE9KYBD-dVcfXwBPQWvbmg@mail.gmail.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -70,113 +73,92 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Sub-NUMA Cluster divides CPUs sharing an L3 cache into separate NUMA
-nodes. Systems may support splitting into either two or four nodes.
+On (23/08/29 22:13), Masahiro Yamada wrote:
+> > +KCONFIG_WARN_UNKNOWN_SYMBOLS
+> > +----------------------------
+> > +This environment variable makes Kconfig warn about all unrecognized
+> > +symbols in the .config file.
+> 
+> 
+> This warns not only for the .config but also defconfig files.
+> 
+> Could you reword it?
+> 
+> For example,
+> 
+>  "symbols in the config input".
 
-When SNC mode is enabled the effective amount of L3 cache available
-for allocation is divided by the number of nodes per L3.
+Done.
 
-Detect which SNC mode is active by comparing the number of CPUs
-that share a cache with CPU0, with the number of CPUs on node0.
+> 
+> 
+> > +
+> > +KCONFIG_WERROR
+> > +--------------
+> > +If set, Kconfig will treat `KCONFIG_WARN_UNKNOWN_SYMBOLS` warnings as
+> > +errors.
+> 
+> My hope is to turn other warnings in the config file into errors.
 
-This gives some hope of tests passing. But additional test
-infrastructure changes are needed to bind tests to nodes and
-guarantee memory allocation from the local node.
+Done.
 
-Reported-by: "Shaopeng Tan (Fujitsu)" <tan.shaopeng@fujitsu.com>
-Signed-off-by: Tony Luck <tony.luck@intel.com>
----
- tools/testing/selftests/resctrl/resctrl.h   |  1 +
- tools/testing/selftests/resctrl/resctrlfs.c | 57 +++++++++++++++++++++
- 2 files changed, 58 insertions(+)
+> > +++ b/scripts/kconfig/confdata.c
+> > @@ -349,7 +349,12 @@ int conf_read_simple(const char *name, int def)
+> >         char *p, *p2;
+> >         struct symbol *sym;
+> >         int i, def_flags;
+> > +       bool found_unknown = false;
+> > +       const char *warn_unknown;
+> > +       const char *werror;
+> >
+> > +       warn_unknown = getenv("KCONFIG_WARN_UNKNOWN_SYMBOLS");
+> > +       werror = getenv("KCONFIG_WERROR");
+> >         if (name) {
+> >                 in = zconf_fopen(name);
+> >         } else {
+> > @@ -437,6 +442,13 @@ int conf_read_simple(const char *name, int def)
+> >                         if (def == S_DEF_USER) {
+> >                                 sym = sym_find(line + 2 + strlen(CONFIG_));
+> >                                 if (!sym) {
+> > +                                       if (warn_unknown) {
+> > +                                               conf_warning("unknown symbol: %s",
+> > +                                                            line + 2 + strlen(CONFIG_));
+> > +                                               found_unknown = true;
+> > +                                               continue;
+> 
+> Please drop this 'continue' because it would skip
+> conf_set_changed(true).
 
-diff --git a/tools/testing/selftests/resctrl/resctrl.h b/tools/testing/selftests/resctrl/resctrl.h
-index 87e39456dee0..a8b43210b573 100644
---- a/tools/testing/selftests/resctrl/resctrl.h
-+++ b/tools/testing/selftests/resctrl/resctrl.h
-@@ -13,6 +13,7 @@
- #include <signal.h>
- #include <dirent.h>
- #include <stdbool.h>
-+#include <ctype.h>
- #include <sys/stat.h>
- #include <sys/ioctl.h>
- #include <sys/mount.h>
-diff --git a/tools/testing/selftests/resctrl/resctrlfs.c b/tools/testing/selftests/resctrl/resctrlfs.c
-index fb00245dee92..79eecbf9f863 100644
---- a/tools/testing/selftests/resctrl/resctrlfs.c
-+++ b/tools/testing/selftests/resctrl/resctrlfs.c
-@@ -130,6 +130,61 @@ int get_resource_id(int cpu_no, int *resource_id)
- 	return 0;
- }
- 
-+/*
-+ * Count number of CPUs in a /sys bit map
-+ */
-+static int count_sys_bitmap_bits(char *name)
-+{
-+	FILE *fp = fopen(name, "r");
-+	int count = 0, c;
-+
-+	if (!fp)
-+		return 0;
-+
-+	while ((c = fgetc(fp)) != EOF) {
-+		if (!isxdigit(c))
-+			continue;
-+		switch (c) {
-+		case 'f':
-+			count++;
-+		case '7': case 'b': case 'd': case 'e':
-+			count++;
-+		case '3': case '5': case '6': case '9': case 'a': case 'c':
-+			count++;
-+		case '1': case '2': case '4': case '8':
-+			count++;
-+		}
-+	}
-+	fclose(fp);
-+
-+	return count;
-+}
-+
-+/*
-+ * Detect SNC by compating #CPUs in node0 with #CPUs sharing LLC with CPU0
-+ * Try to get this right, even if a few CPUs are offline so that the number
-+ * of CPUs in node0 is not exactly half or a quarter of the CPUs sharing the
-+ * LLC of CPU0.
-+ */
-+static int snc_ways(void)
-+{
-+	int node_cpus, cache_cpus;
-+
-+	node_cpus = count_sys_bitmap_bits("/sys/devices/system/node/node0/cpumap");
-+	cache_cpus = count_sys_bitmap_bits("/sys/devices/system/cpu/cpu0/cache/index3/shared_cpu_map");
-+
-+	if (!node_cpus || !cache_cpus) {
-+		fprintf(stderr, "Warning could not determine Sub-NUMA Cluster mode\n");
-+		return 1;
-+	}
-+
-+	if (4 * node_cpus >= cache_cpus)
-+		return 4;
-+	else if (2 * node_cpus >= cache_cpus)
-+		return 2;
-+	return 1;
-+}
-+
- /*
-  * get_cache_size - Get cache size for a specified CPU
-  * @cpu_no:	CPU number
-@@ -190,6 +245,8 @@ int get_cache_size(int cpu_no, char *cache_type, unsigned long *cache_size)
- 			break;
- 	}
- 
-+	if (cache_num == 3)
-+		*cache_size /= snc_ways();
- 	return 0;
- }
- 
--- 
-2.41.0
+My bad. Those 'continue' are left-overs from previous version.
 
+> > +                                       }
+> > +
+> >                                         conf_set_changed(true);
+> >                                         continue;
+> >                                 }
+> > @@ -471,6 +483,13 @@ int conf_read_simple(const char *name, int def)
+> >
+> >                         sym = sym_find(line + strlen(CONFIG_));
+> >                         if (!sym) {
+> > +                               if (warn_unknown && def != S_DEF_AUTO) {
+> > +                                       conf_warning("unknown symbol: %s",
+> > +                                                    line + strlen(CONFIG_));
+> > +                                       found_unknown = true;
+> > +                                       continue;
+> 
+> Same here.
+
+Same here. My bad.
+
+> > @@ -519,6 +538,10 @@ int conf_read_simple(const char *name, int def)
+> >         }
+> >         free(line);
+> >         fclose(in);
+> > +
+> > +       if (found_unknown && werror)
+> > +               exit(1);
+> 
+> 
+> I like to reuse 'conf_warnings' as you did in the previous version.
+
+Done.
