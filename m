@@ -2,247 +2,175 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 077A1791C47
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Sep 2023 20:02:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5F5FD7928F3
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Sep 2023 18:46:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231892AbjIDSCB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 4 Sep 2023 14:02:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33048 "EHLO
+        id S1350149AbjIEQYr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Sep 2023 12:24:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47226 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231578AbjIDSCB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Sep 2023 14:02:01 -0400
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 434FCDD;
-        Mon,  4 Sep 2023 11:01:57 -0700 (PDT)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits))
-        (No client certificate requested)
-        by dfw.source.kernel.org (Postfix) with ESMTPS id D5F8261862;
-        Mon,  4 Sep 2023 18:01:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84AE4C433C7;
-        Mon,  4 Sep 2023 18:01:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1693850516;
-        bh=vnkVaZq/lB8aHehszev+SeZQLIWYgpuwniR73BL97ek=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=jzncw7Puj9sAp4WMEzBR2zZxspbdp3nZUQzKsM1ZhgBADpPqQcwscQxwxA1NOMPo5
-         C7+VYQCvSl63q0ZuIeRrrOtpwYLJYb9VfndGQbXZUMsyNkvNf/1J7Jln3lqRRq9DcI
-         z4uTnwpi8X9HL0lzE1xjU0I8TXxc8uFE9bkHUllt6XQFs3b5ilHuCPrS/WaQNLc7fU
-         Qz/PI/1F/WoIsXMw9je2R+aYZ9fTWPj2eKI66AUkvJsSLfKMifmw3wj5THZ6F0sQf8
-         fWwAhAQ/59ptGAQDH8Tmi12SawU1yq7uHZ5/riok5fcdHoatlht9y82huraQce99d5
-         jMTFPuUbKzwPQ==
-Date:   Mon, 4 Sep 2023 21:01:11 +0300
-From:   Mike Rapoport <rppt@kernel.org>
-To:     "Fabio M. De Francesco" <fmdefrancesco@gmail.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, Andrew Morton <akpm@linux-foundation.org>,
-        Ira Weiny <ira.weiny@intel.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>
-Subject: Re: [PATCH v3] Documentation/page_tables: Add info about MMU/TLB and
- Page Faults
-Message-ID: <20230904180111.GG3223@kernel.org>
-References: <20230818112726.6156-1-fmdefrancesco@gmail.com>
+        with ESMTP id S1350299AbjIEFAR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Sep 2023 01:00:17 -0400
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com (mail-mw2nam04on2049.outbound.protection.outlook.com [40.107.101.49])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9F91F8E;
+        Mon,  4 Sep 2023 22:00:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QGE4hp05udQKasuNqPuyACZNXrqfqKDXj1CUP72HWGGA35cdJv05tCs1u0irs3P34O7qIm/KVrd5YYZX+XZEz/VvEsTzlcpiLqY6QAz1XJ2ooAk2owtT8C8VVE1Brpkr92OKMqou9k3AL0nCc8VFRLnBddblaEz3nsofqYD+gYrk9ioFiYXRncv0Af7qBVkWRbujCtojQ0SZNlmM6sWb1CLQvt0QpAzdXyDBPRW6nbBm3mWVQCUZG5awpugrkraxQ8zW4AbZYDjPHYgX9MZVm8yVBqjeh0+x2hcHVyVXFVxMeSylMYZDsRLAatgZQfT2FKjOnUbF/xwBMrZ91xyXPw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fBUrtZp1dUSQ0gLbEJuHgjlJfkzQejYmULTWO1xZ//c=;
+ b=DkRTEcaDIMPj/0jiSIIiIxIO6O2PH6S4yGTwWZglp+v+klLbrlsVgcWBtqVabIGfwQjF9nnf4YnWwbtt0UZtUvauVBHgQzJWfSkUrGZ8gg2GTdWNDuFsp+WIFHnzKP5w3Tb0ean5Z0I93vYLCMmYo5p0TSsgdW32UGJvxnTM3iHg8yNAGDZvlK2AL/Kvv5n6p9HZS7YmSbN1z+Z7QQdgiNS0PIRcHc+KhsiHhwua8+EXqA8UvUqgViVSt4ex40s/edwBMitIbr9fRF+b2bTA3PcQNRMnJgKjVLUuZqi4TO//yYyFPl1AGAHs/G5Ry1jRlFGYOh0sRwc1NWQoVJcMGA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fBUrtZp1dUSQ0gLbEJuHgjlJfkzQejYmULTWO1xZ//c=;
+ b=EJL9pV4d5ULVltc589zZ2LD339eNoMzI33UnHZN10DryiFBCd1cjj0YoRsUL92RIAEuUmwRlu1H9NmQDv4isQkg7YHWjlVNM4CeMN2y3i32egxFdeU+/XoOOBYmVp3qRiKn5w74ibNKVbLdonczF9BOrJST8Zd+5x0aP28tbLSA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from DS0PR12MB6583.namprd12.prod.outlook.com (2603:10b6:8:d1::12) by
+ SA0PR12MB4445.namprd12.prod.outlook.com (2603:10b6:806:95::15) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6745.33; Tue, 5 Sep 2023 05:00:11 +0000
+Received: from DS0PR12MB6583.namprd12.prod.outlook.com
+ ([fe80::5c9:9a26:e051:ddd2]) by DS0PR12MB6583.namprd12.prod.outlook.com
+ ([fe80::5c9:9a26:e051:ddd2%7]) with mapi id 15.20.6745.030; Tue, 5 Sep 2023
+ 05:00:09 +0000
+Message-ID: <1fd3d0a7-e738-40dd-a9b2-37e2adacc01c@amd.com>
+Date:   Mon, 4 Sep 2023 22:00:06 -0700
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net] docs: netdev: update the netdev infra URLs
+To:     Jakub Kicinski <kuba@kernel.org>, davem@davemloft.net
+Cc:     netdev@vger.kernel.org, edumazet@google.com, pabeni@redhat.com,
+        corbet@lwn.net, workflows@vger.kernel.org,
+        linux-doc@vger.kernel.org, intel-wired-lan@lists.osuosl.org
+References: <20230901211718.739139-1-kuba@kernel.org>
+Content-Language: en-US
+From:   "Nelson, Shannon" <shannon.nelson@amd.com>
+In-Reply-To: <20230901211718.739139-1-kuba@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BY5PR17CA0058.namprd17.prod.outlook.com
+ (2603:10b6:a03:167::35) To DS0PR12MB6583.namprd12.prod.outlook.com
+ (2603:10b6:8:d1::12)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230818112726.6156-1-fmdefrancesco@gmail.com>
-X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR12MB6583:EE_|SA0PR12MB4445:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6fbd3cc6-8b68-4103-f98b-08dbadccfa88
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 6oVo7pJwoghpDBz5dLUhimDWs9eoGCElw44F5M2lzGsmq8VKzZYUp6ytNzS2vrEMnZyI8NLwllN7NYakwoF4vpRTzInBtcRskhmfAuMEko/wu0kZTsu34zGGG867dWVopu5muFPEt8bykU/OOiwxbtsnlPAyfB8yjBzwWL/7kwL5apv4Ti6jhhA7h2iJEc8vz6ZVB1Np8aPsJMkCEXG02DHVJaUAdSC5IZfbRaP8nM/9DxmSt32ZVsJNupw/2ruVOi6jTOhrBvQrfVdYNMG/V/ak7A6MzmtOv9eoAyqcgDfMVY8NRCtH8aPs23SOVbdrNODurKP8h+1M9mhfKXWx162DJZ2Q/jynBJVeTLjfAEytxt7stUvO2P42jfb1ECiwdNCa+qu/nIVDTT1GqpD6eZ3vtnVfuLLrjH1YgNp2Y6TEURMDb6etTbLDTgMC0V1UmgQChU5gNFd7qrjvN+NSPFX5HSJH4Llz2xbvAEgoF2YP2aAizkJsMhTE4grGM8SyCu9wACmnHSE97hkot/eegZYQ8zs7fvBCg199PmSoS4zcDtDkpQ0ZTbWAARP1gzqCHwunc/8APBoEYr0DAARgSN+s/kk9nIgWTl6uj07ZMSX8FmWz5UMos0eukt0Te0I6
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6583.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(136003)(346002)(376002)(396003)(39860400002)(1800799009)(186009)(451199024)(2906002)(38100700002)(36756003)(86362001)(31696002)(6506007)(6512007)(41300700001)(53546011)(6486002)(316002)(66476007)(66556008)(66946007)(2616005)(4326008)(8676002)(8936002)(478600001)(966005)(6666004)(31686004)(83380400001)(5660300002)(26005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Qkkrd2FnUzJRS1Njc2RrbFdBd0FWalJDdUQxcEV4QU1SM0M3R0NLRGxIOVA2?=
+ =?utf-8?B?NkNYTTVJNi9BR0lOOGF2UExUWXNjY2dFNlpZUVlscnR2ZVI0NTZxeVBKS3Rt?=
+ =?utf-8?B?ZWYrdzJZYjBOZEY0N3dSY3BPVHh3VmQxT1RBMGxtRXY0MjBKME1WekJwNzRo?=
+ =?utf-8?B?WFVMS0Jyd1c0SGZWRGVZR2dNN1ZWZHc0OTFZdkNRZXRWbWpsTjdYbmd3SzZY?=
+ =?utf-8?B?Zll3TjlKeVpLSWhNQ1N6bEw5S2V2ZkRsc0dXUnZTSGU5bDcwMkVIeDRJdmNF?=
+ =?utf-8?B?RVFlaUFXWWlxL1JRZmx0czhTa2dQejhpOWNXQzNLUnFSNTJWTlo1ZSt1ZmV5?=
+ =?utf-8?B?cnBEWXhUN2wxbjlyakluQ1J0QUVuSXhITzRpYXJNclBNY3h5eDZlM2FWblEv?=
+ =?utf-8?B?czZSdlZRUWM5Ui9CN1JWWldYTGxON2N1Z1dDZ1NRdEdaVDJMNTh5RTYwSUNm?=
+ =?utf-8?B?aHV0d2c3cFp1UEF5bld6aWFXdUhvOW03OWpYSElHbWo5czVwdlFUWFVzbkR1?=
+ =?utf-8?B?RkV5UmN1QitDNUVFYjhNQnBhN3pKNUwxS3JsdnVXdFlVekFHc2ZuTnVjY3JR?=
+ =?utf-8?B?Q2pUKzQ0T3hLZy9nWTJFMXFwVGM1VFJ0cmh3akNKT3dTUjNlWkw1Sm96UFNM?=
+ =?utf-8?B?NGEyZ0w0dUZSdlJDK3M4M1RLeUZoMmxEeUdQaXNVN09RSXdmV3RabUF3Vjkw?=
+ =?utf-8?B?cXpMV3F3SVlMTWVTQUFTK21odkZlRFMySDlZZFRZQVFLa0VMd3Z3TCs5R1Jw?=
+ =?utf-8?B?T1kwUnhuOXdob3Ztcks0UmQ5ZWxDM1Z5eEpLUy9CVmptMzF2cGYzS3BFNDZw?=
+ =?utf-8?B?KytscXpQMHM0WUdqb0x4MTc1RlFUWGZ1Y0xvc24vZVNobzJuelZtNWY0SXpz?=
+ =?utf-8?B?dWh5WEllQWZLcjljRlFHbGtpcVhMenhMMHNWb3FVYWlpalBwaWVjdUI3TTd6?=
+ =?utf-8?B?M2JNWUhlMmZHSWVJS1I4K0tMUjdCa1VzZjh1UnZOTVNXUzNCVVUvTTNXcUJQ?=
+ =?utf-8?B?MUZjQVpja0xYbEwyT0l2cCtPeWE2NHB4K0x5Z2d6K0lHc1IrM3Rya3lyRFla?=
+ =?utf-8?B?UWFCZEpJNm9hZlhJTWQ1aW9ObS90ZmN6ODhhYzM1WmZ2V0tUeE9RQ01IRlkx?=
+ =?utf-8?B?Z2NCLzAyNjNtdU5uR29uQTdibmNNYXNESVZYc0RTYjFlT1RlSThYQzJlY1Mr?=
+ =?utf-8?B?NEVGWU9EVEVCMEtRekZIWWNwQ2kzYVp1V2FLaWtBMFFkVmlIdGdXT1hsM0w4?=
+ =?utf-8?B?eHhFVWROUWRDb3B6NkYrOHBabEtCQjdMYjdRV2xRbktPSmhkeHVDZUlSa25S?=
+ =?utf-8?B?VXlFckF2Z1JOa3BINHlTaWJpck11alliTC9zSnh1ZktkTU1VTFVFbFYvZDll?=
+ =?utf-8?B?LzdDdEkrMWJIeHdxMzYzRGZVL3lGRHJIdFQyUlVTSlN4MW9aK3lKWlVOWEsr?=
+ =?utf-8?B?dk9naWhQazdlNnF4U2JERWREWG9CdE0vTVpNQXBIbmdpTkoxTkxVekxTL0VX?=
+ =?utf-8?B?Z1IzL3g4bU50R0p1Ly9SZDRmdHd5SndxTW90enBpaCtVQ3RzRU95VUM0cEt0?=
+ =?utf-8?B?Q29ZeDhNWDRRVzl3MHlvNGJCZ0FFelZmM1lNQ0VLZW9ScUtTSE5FNjYwbW42?=
+ =?utf-8?B?aEZOdFF0bHZ5dUZiUE9nTFVWZVdvY2VPRmh2NDhBQkxmVUJVRGN6V3dSZW5B?=
+ =?utf-8?B?amY0eFd2WWZhejREZHE4Z0RSUnJEcHJrQWpGbmdidUtyU3h1QlRGYkloMm9V?=
+ =?utf-8?B?cHNLenpSV1lwNzVwS2lkV0pFZnFQRVJVN0FXS2gwYXkwT01RQmdTdGdyZjVH?=
+ =?utf-8?B?cjVRNnVWaVlvWG9tcnRGeUxpZEMyQmJ5T3k3MFBMUG1WQzZnZ2pOS2ZzUnhF?=
+ =?utf-8?B?SWUrbmJEYmJpbjJUN2UxL0l5eWFBaVdRQ0lLQ01pemRsYXRMVmVtY1VqTTUv?=
+ =?utf-8?B?RFFtTmtEaFk3aW9WcVdVSE1sL1BPUHZSSHl2ZFNrajAzbm91SGgycHMwSzYv?=
+ =?utf-8?B?VlBxemRaaEpJdHIxdE1sMlNNWTdLWHFEMlpCUVcycTh3QmZYM0JTNUxrbnZx?=
+ =?utf-8?B?VzJKT3ZSWk9JOFhyQk5keWxTOW1zc3dBbzZtZXl4dmlLdGtUSlpHRitEeER1?=
+ =?utf-8?Q?adrfkOVap3V0H6CQCnRJMmEPJ?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6fbd3cc6-8b68-4103-f98b-08dbadccfa88
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6583.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2023 05:00:09.3664
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: O148ZyF0hZJ1YeimIkZphuTYOMEa2w2ku+iNCGO/+CCYUA8Gqt6ERvL16+m9O3zPEQavmlvJsyqOe6rlXvF+Cw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4445
+X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Aug 18, 2023 at 01:19:34PM +0200, Fabio M. De Francesco wrote:
-> Extend page_tables.rst by adding a section about the role of MMU and TLB
-> in translating between virtual addresses and physical page frames.
-> Furthermore explain the concept behind Page Faults and how the Linux
-> kernel handles TLB misses. Finally briefly explain how and why to disable
-> the page faults handler.
+On 9/1/2023 2:17 PM, Jakub Kicinski wrote:
 > 
-> Cc: Andrew Morton <akpm@linux-foundation.org>
-> Cc: Ira Weiny <ira.weiny@intel.com>
-> Cc: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Linus Walleij <linus.walleij@linaro.org>
-> Cc: Matthew Wilcox <willy@infradead.org>
-> Cc: Mike Rapoport <rppt@kernel.org>
-> Cc: Randy Dunlap <rdunlap@infradead.org>
-> Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
-> Signed-off-by: Fabio M. De Francesco <fmdefrancesco@gmail.com>
-
-Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
-
+> Some corporate proxies block our current NIPA URLs because
+> they use a free / shady DNS domain. As suggested by Jesse
+> we got a new DNS entry from Konstantin - netdev.bots.linux.dev,
+> use it.
+> 
+> Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 > ---
+> CC: corbet@lwn.net
+> CC: workflows@vger.kernel.org
+> CC: linux-doc@vger.kernel.org
 > 
-> v2 -> v3: This version fixes the grammar mistakes found by Linus
-> and forwards his "Reviewed-by" tag (thanks!).
-> https://lore.kernel.org/all/CACRpkdbq8UCtvtRH7FZUEqvTxPQcoGbrKvf_mT5QHMAfVoYNNQ@mail.gmail.com/
+> CC: intel-wired-lan@lists.osuosl.org
 > 
-> v1 -> v2: This version takes into account the comments provided by Mike
-> (thanks!). I hope I haven't overlooked anything he suggested :-)
-> https://lore.kernel.org/all/20230807105010.GK2607694@kernel.org/
+> Please LMK if the old URLs pop up somewhere, I may have missed
+> some place. The old patchwork checks will continue to use the
+> old address but new ones should link via netdev.bots...
+> ---
+>   Documentation/process/maintainer-netdev.rst | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> Furthermore, v2 adds few more information about swapping which was not present
-> in v1.
+> diff --git a/Documentation/process/maintainer-netdev.rst b/Documentation/process/maintainer-netdev.rst
+> index db1b81cfba9b..09dcf6377c27 100644
+> --- a/Documentation/process/maintainer-netdev.rst
+> +++ b/Documentation/process/maintainer-netdev.rst
+> @@ -98,7 +98,7 @@ If you aren't subscribed to netdev and/or are simply unsure if
+>   repository link above for any new networking-related commits.  You may
+>   also check the following website for the current status:
 > 
-> before the "real" patch, this has been an RFC PATCH in its 2nd version for a week
-> or so until I received comments and suggestions from Jonathan Cameron (thanks!),
-> and then it morphed to a real patch.
+> -  https://patchwork.hopto.org/net-next.html
+> +  https://netdev.bots.linux.dev/net-next.html
 > 
-> The link to the thread with the RFC PATCH v2 and the messages between Jonathan
-> and me start at https://lore.kernel.org/all/20230723120721.7139-1-fmdefrancesco@gmail.com/#r
+>   The ``net`` tree continues to collect fixes for the vX.Y content, and is
+>   fed back to Linus at regular (~weekly) intervals.  Meaning that the
+> @@ -185,7 +185,7 @@ must match the MAINTAINERS entry) and a handful of senior reviewers.
 > 
+>   Bot records its activity here:
 > 
->  Documentation/mm/page_tables.rst | 127 +++++++++++++++++++++++++++++++
->  1 file changed, 127 insertions(+)
+> -  https://patchwork.hopto.org/pw-bot.html
+> +  https://netdev.bots.linux.dev/pw-bot.html
 > 
-> diff --git a/Documentation/mm/page_tables.rst b/Documentation/mm/page_tables.rst
-> index 7840c1891751..be47b192a596 100644
-> --- a/Documentation/mm/page_tables.rst
-> +++ b/Documentation/mm/page_tables.rst
-> @@ -152,3 +152,130 @@ Page table handling code that wishes to be architecture-neutral, such as the
->  virtual memory manager, will need to be written so that it traverses all of the
->  currently five levels. This style should also be preferred for
->  architecture-specific code, so as to be robust to future changes.
-> +
-> +
-> +MMU, TLB, and Page Faults
-> +=========================
-> +
-> +The `Memory Management Unit (MMU)` is a hardware component that handles virtual
-> +to physical address translations. It may use relatively small caches in hardware
-> +called `Translation Lookaside Buffers (TLBs)` and `Page Walk Caches` to speed up
-> +these translations.
-> +
-> +When CPU accesses a memory location, it provides a virtual address to the MMU,
-> +which checks if there is the existing translation in the TLB or in the Page
-> +Walk Caches (on architectures that support them). If no translation is found,
-> +MMU uses the page walks to determine the physical address and create the map.
-> +
-> +The dirty bit for a page is set (i.e., turned on) when the page is written to.
-> +Each page of memory has associated permission and dirty bits. The latter
-> +indicate that the page has been modified since it was loaded into memory.
-> +
-> +If nothing prevents it, eventually the physical memory can be accessed and the
-> +requested operation on the physical frame is performed.
-> +
-> +There are several reasons why the MMU can't find certain translations. It could
-> +happen because the CPU is trying to access memory that the current task is not
-> +permitted to, or because the data is not present into physical memory.
-> +
-> +When these conditions happen, the MMU triggers page faults, which are types of
-> +exceptions that signal the CPU to pause the current execution and run a special
-> +function to handle the mentioned exceptions.
-> +
-> +There are common and expected causes of page faults. These are triggered by
-> +process management optimization techniques called "Lazy Allocation" and
-> +"Copy-on-Write". Page faults may also happen when frames have been swapped out
-> +to persistent storage (swap partition or file) and evicted from their physical
-> +locations.
-> +
-> +These techniques improve memory efficiency, reduce latency, and minimize space
-> +occupation. This document won't go deeper into the details of "Lazy Allocation"
-> +and "Copy-on-Write" because these subjects are out of scope as they belong to
-> +Process Address Management.
-> +
-> +Swapping differentiates itself from the other mentioned techniques because it's
-> +undesirable since it's performed as a means to reduce memory under heavy
-> +pressure.
-> +
-> +Swapping can't work for memory mapped by kernel logical addresses. These are a
-> +subset of the kernel virtual space that directly maps a contiguous range of
-> +physical memory. Given any logical address, its physical address is determined
-> +with simple arithmetic on an offset. Accesses to logical addresses are fast
-> +because they avoid the need for complex page table lookups at the expenses of
-> +frames not being evictable and pageable out.
-> +
-> +If the kernel fails to make room for the data that must be present in the
-> +physical frames, the kernel invokes the out-of-memory (OOM) killer to make room
-> +by terminating lower priority processes until pressure reduces under a safe
-> +threshold.
-> +
-> +Additionally, page faults may be also caused by code bugs or by maliciously
-> +crafted addresses that the CPU is instructed to access. A thread of a process
-> +could use instructions to address (non-shared) memory which does not belong to
-> +its own address space, or could try to execute an instruction that want to write
-> +to a read-only location.
-> +
-> +If the above-mentioned conditions happen in user-space, the kernel sends a
-> +`Segmentation Fault` (SIGSEGV) signal to the current thread. That signal usually
-> +causes the termination of the thread and of the process it belongs to.
-> +
-> +This document is going to simplify and show an high altitude view of how the
-> +Linux kernel handles these page faults, creates tables and tables' entries,
-> +check if memory is present and, if not, requests to load data from persistent
-> +storage or from other devices, and updates the MMU and its caches.
-> +
-> +The first steps are architecture dependent. Most architectures jump to
-> +`do_page_fault()`, whereas the x86 interrupt handler is defined by the
-> +`DEFINE_IDTENTRY_RAW_ERRORCODE()` macro which calls `handle_page_fault()`.
-> +
-> +Whatever the routes, all architectures end up to the invocation of
-> +`handle_mm_fault()` which, in turn, (likely) ends up calling
-> +`__handle_mm_fault()` to carry out the actual work of allocating the page
-> +tables.
-> +
-> +The unfortunate case of not being able to call `__handle_mm_fault()` means
-> +that the virtual address is pointing to areas of physical memory which are not
-> +permitted to be accessed (at least from the current context). This
-> +condition resolves to the kernel sending the above-mentioned SIGSEGV signal
-> +to the process and leads to the consequences already explained.
-> +
-> +`__handle_mm_fault()` carries out its work by calling several functions to
-> +find the entry's offsets of the upper layers of the page tables and allocate
-> +the tables that it may need.
-> +
-> +The functions that look for the offset have names like `*_offset()`, where the
-> +"*" is for pgd, p4d, pud, pmd, pte; instead the functions to allocate the
-> +corresponding tables, layer by layer, are called `*_alloc`, using the
-> +above-mentioned convention to name them after the corresponding types of tables
-> +in the hierarchy.
-> +
-> +The page table walk may end at one of the middle or upper layers (PMD, PUD).
-> +
-> +Linux supports larger page sizes than the usual 4KB (i.e., the so called
-> +`huge pages`). When using these kinds of larger pages, higher level pages can
-> +directly map them, with no need to use lower level page entries (PTE). Huge
-> +pages contain large contiguous physical regions that usually span from 2MB to
-> +1GB. They are respectively mapped by the PMD and PUD page entries.
-> +
-> +The huge pages bring with them several benefits like reduced TLB pressure,
-> +reduced page table overhead, memory allocation efficiency, and performance
-> +improvement for certain workloads. However, these benefits come with
-> +trade-offs, like wasted memory and allocation challenges.
-> +
-> +At the very end of the walk with allocations, if it didn't return errors,
-> +`__handle_mm_fault()` finally calls `handle_pte_fault()`, which via `do_fault()`
-> +performs one of `do_read_fault()`, `do_cow_fault()`, `do_shared_fault()`.
-> +"read", "cow", "shared" give hints about the reasons and the kind of fault it's
-> +handling.
-> +
-> +The actual implementation of the workflow is very complex. Its design allows
-> +Linux to handle page faults in a way that is tailored to the specific
-> +characteristics of each architecture, while still sharing a common overall
-> +structure.
-> +
-> +To conclude this high altitude view of how Linux handles page faults, let's
-> +add that the page faults handler can be disabled and enabled respectively with
-> +`pagefault_disable()` and `pagefault_enable()`.
-> +
-> +Several code path make use of the latter two functions because they need to
-> +disable traps into the page faults handler, mostly to prevent deadlocks.
-> -- 
+>   Review timelines
+>   ~~~~~~~~~~~~~~~~
+> --
 > 2.41.0
-> 
 
--- 
-Sincerely yours,
-Mike.
+Yes, thank you, this works much better through my masters' filters, both 
+here and through the patchwork links to the test result details.
+
+Reviewed by: Shannon Nelson <shannon.nelson@amd.com>
+
