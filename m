@@ -2,114 +2,178 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D167179291C
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Sep 2023 18:50:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 842087928F9
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Sep 2023 18:47:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1350907AbjIEQZN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Sep 2023 12:25:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52912 "EHLO
+        id S1350488AbjIEQYt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Sep 2023 12:24:49 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47414 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1353817AbjIEITN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Sep 2023 04:19:13 -0400
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com [IPv6:2607:f8b0:4864:20::834])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8060BCFE
-        for <linux-doc@vger.kernel.org>; Tue,  5 Sep 2023 01:19:05 -0700 (PDT)
-Received: by mail-qt1-x834.google.com with SMTP id d75a77b69052e-414b3b65e85so13929721cf.1
-        for <linux-doc@vger.kernel.org>; Tue, 05 Sep 2023 01:19:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693901944; x=1694506744; darn=vger.kernel.org;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=CvUmRYKO5rN5JiKdYLn9/Xxm/soJiVGtQm650JnL3Yc=;
-        b=IDuf0baB1t1F8QSCLjWC8pmRvzAKQ/R4M4t5u3FLsOX2SqRgQXz/Z3MpAk8Vd5Kb6m
-         OBaz+r/ujIbUuNkrji3TkmDn2dTAwQpGpPSmDRQp7o69pvQ/Nlbne7CwWkb0CdLrrzzk
-         IN5sVqz4WX/cEw2uA94JE67yTGlOm8wzR3yOF0SXEPyJnQGBjepPHYJlqPiS3zq3DGfU
-         I2yXoCdrDFdm20VoyBK97sKFjeM/5AIhQp1In2otrpCJ9z7tTsw9ci7s0XR+LUbYUzXt
-         uod929b61k889o1RxRCphXZmWycOoUHC60HIKvs/decRlJjUBc58LQQ4Se5bQ0loDS6t
-         OnEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693901944; x=1694506744;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CvUmRYKO5rN5JiKdYLn9/Xxm/soJiVGtQm650JnL3Yc=;
-        b=K2A6tQDxJD/tSzCu1ADyL/ZVndAwnYntUTn12araeFkqkg8XyatjbGl2iIcV8NnQiD
-         j4HESu8VmgFTBi7IY/k9KGDBN2ogt5kUGRiVglf8q+qb7leeh/8mPW+Xbh7QwdEg/g82
-         n84whHly7vSaOGWIlRGniddIAU9P9i9AlzGnCLhDpqv5kDhpbN+LPETfSx/aoqs/5OqH
-         slk2GdmBRDSxW1gFoqFtj8678WVin1GBd4WU3Xcp2xzYmAYHa4OhBeW0be4+fRIi+ay3
-         RADebP4HPGQYQOjgQKCwPnl5eu+qwyTFn7167EZ73DO95HahAlHvqRPRI/ONLscYtWSu
-         BD9g==
-X-Gm-Message-State: AOJu0YwZ+A/6Gis2Y0wwte+9NAhYNv7oef7bymFxMSA5z00OmE+izQoy
-        rJeCiVqRiJQHpPR0699kxcao/FVZOn9vShAd6oE=
-X-Google-Smtp-Source: AGHT+IERAX8PQb3+O/VRt2IpdT+B8+AIRhc7TR9qfBXEywqtD/tUeMqNmseulSPs3fS452xIhVN8tbhQYqX1LXl34po=
-X-Received: by 2002:a0c:aa1b:0:b0:653:5736:c0b4 with SMTP id
- d27-20020a0caa1b000000b006535736c0b4mr10412089qvb.54.1693901943569; Tue, 05
- Sep 2023 01:19:03 -0700 (PDT)
+        with ESMTP id S1354390AbjIELRF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Sep 2023 07:17:05 -0400
+Received: from belinda3.kreativmedia.ch (belinda3.kreativmedia.ch [80.74.158.27])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 23AEA1AB
+        for <linux-doc@vger.kernel.org>; Tue,  5 Sep 2023 04:16:59 -0700 (PDT)
+Received: from localhost.localdomain (localhost [127.0.0.1]) by belinda3.kreativmedia.ch (Postfix) with ESMTPSA id 78B6152C1C91;
+        Tue,  5 Sep 2023 13:16:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=renenyffenegger.ch;
+        s=default; t=1693912616;
+        bh=QOzMwHDTPiB5SuWrQSq0/Zf3HZAIGV+JSdjrJDUhRKs=; h=From:To:Subject;
+        b=Ira2ed5tBXXutqyuLm5wBhqeclHc+FAzfiQtbbf3zKxb6OkNInasgVaskHMNq5O0S
+         /RnIyUSx0pvNgAQYWZy8vpdSpZoQ5A25FTgvrFYRgeEGTNxp7rEqKYciwuUxPf6hZS
+         I1+mK6aOZsGmr4bC3UpWTEwdPhre6uXmvad8iG+g=
+Authentication-Results: belinda.kreativmedia.ch;
+        spf=pass (sender IP is 31.10.136.170) smtp.mailfrom=mail@renenyffenegger.ch smtp.helo=localhost.localdomain
+Received-SPF: pass (belinda.kreativmedia.ch: connection is authenticated)
+From:   =?UTF-8?q?Ren=C3=A9=20Nyffenegger?= <mail@renenyffenegger.ch>
+To:     linux-doc@vger.kernel.org
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        =?UTF-8?q?Ren=C3=A9=20Nyffenegger?= <mail@renenyffenegger.ch>
+Subject: [PATCH] Documentation: Reference kernel-doc for container_of
+Date:   Tue,  5 Sep 2023 13:16:52 +0200
+Message-Id: <20230905111652.32692-1-mail@renenyffenegger.ch>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Received: by 2002:a0c:de0e:0:b0:634:8588:8dcb with HTTP; Tue, 5 Sep 2023
- 01:19:02 -0700 (PDT)
-Reply-To: wuwumoneytransfer5000@hotmail.com
-From:   "(IMF) SCAM VICTIMS" <smmab4668@gmail.com>
-Date:   Tue, 5 Sep 2023 01:19:02 -0700
-Message-ID: <CAPvhgiGb_xchv+cBfjtNXZbs3T38s2BJRqmONSNBDUeOvUkr=Q@mail.gmail.com>
-Subject: Betrugsopfer
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=4.7 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_NONE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Sehr geehrter E-Mail-Besitzer,
+The file include/linux/container_of.h contained kernel-doc but was not
+referenced in any .rst file. In addition, the file
+Documentation/core-api/kobject.rst wrongly located the definition
+of the macro `container_of` in linux/kernel.h while in reality
+it is defined in linux/container_of.h
 
+This patch
+  1) tries to implement Jonathan Corbet's feedback and suggestions
+     of v1, see
+        https://lore.kernel.org/linux-doc/87ledqm0qs.fsf@meer.lwn.net/
+  2) adds a container_of.rst file that includes the kernel-doc of
+     container_of.h
+  3) removes the reference of the wrong header file
+  4) removes some explanatory notes on the usage of
+     container_of in kobject.rst as this is now covered in
+     container_of.rst
 
+Signed-off-by: René Nyffenegger <mail@renenyffenegger.ch>
+---
+ Documentation/core-api/container_of.rst | 54 +++++++++++++++++++++++++
+ Documentation/core-api/index.rst        |  1 +
+ Documentation/core-api/kobject.rst      | 17 +++-----
+ 3 files changed, 60 insertions(+), 12 deletions(-)
+ create mode 100644 Documentation/core-api/container_of.rst
 
-Der Internationale W=C3=A4hrungsfonds (IWF) entsch=C3=A4digt alle Betrugsop=
-fer
-und Ihre E-Mail-Adresse wurde auf der Liste der Betrugsopfer gefunden.
+diff --git a/Documentation/core-api/container_of.rst b/Documentation/core-api/container_of.rst
+new file mode 100644
+index 000000000000..b7d273ccf6fa
+--- /dev/null
++++ b/Documentation/core-api/container_of.rst
+@@ -0,0 +1,54 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++===============================================================================
++Given a pointer to a member of a struct, get a pointer to the containing struct
++===============================================================================
++
++Overview
++========
++
++The two macros container_of and container_of_const, defined in
++``<include/linux/container_of.h>``, return a pointer to the ``struct``
++(i. e. the *container*) from a pointer to a member of this ``struct``. A
++contrived example is provided below.
++
++.. kernel-doc:: include/linux/container_of.h
++
++Usage
++=====
++
++The following simple code demonstrates the usage of ``container_of``
++
++.. code-block:: c
++
++ struct inner_struct {
++ 	int abc;
++ 	int def;
++ }
++ 
++ struct container_struct {
++ 	struct inner_struct inner;
++ 	char               *foo;
++ 	int                 bar;
++ };
++ 
++ static void f(struct inner_struct *inr)
++ {
++ 	struct container_struct *cont;
++ 
++ 	cont = container_of(inr, struct container_struct, inner);
++ 
++        /* Use cont and its members */
++ }
++ 
++ 
++ void somewhere()
++ {
++ 	struct container_struct cont;
++ 
++ 	cont.inner = ...
++        cont.foo   = ...
++        cont.bar   = ...
++ 
++ 	f(&cont.inner);
++ }
+diff --git a/Documentation/core-api/index.rst b/Documentation/core-api/index.rst
+index 7a3a08d81f11..595af47d0d5f 100644
+--- a/Documentation/core-api/index.rst
++++ b/Documentation/core-api/index.rst
+@@ -37,6 +37,7 @@ Library functionality that is used throughout the kernel.
+    kref
+    assoc_array
+    xarray
++   container_of
+    maple_tree
+    idr
+    circular-buffers
+diff --git a/Documentation/core-api/kobject.rst b/Documentation/core-api/kobject.rst
+index 7310247310a0..fac4c359e2ce 100644
+--- a/Documentation/core-api/kobject.rst
++++ b/Documentation/core-api/kobject.rst
+@@ -78,22 +78,15 @@ just a matter of using the kobj member.  Code that works with kobjects will
+ often have the opposite problem, however: given a struct kobject pointer,
+ what is the pointer to the containing structure?  You must avoid tricks
+ (such as assuming that the kobject is at the beginning of the structure)
+-and, instead, use the container_of() macro, found in ``<linux/kernel.h>``::
++and, instead, use the container_of() macro which returns a pointer to the
++corresponding container type.
+ 
+-    container_of(ptr, type, member)
+-
+-where:
+-
+-  * ``ptr`` is the pointer to the embedded kobject,
+-  * ``type`` is the type of the containing structure, and
+-  * ``member`` is the name of the structure field to which ``pointer`` points.
+-
+-The return value from container_of() is a pointer to the corresponding
+-container type. So, for example, a pointer ``kp`` to a struct kobject
++So, for example, a pointer ``kp`` to a struct kobject
+ embedded **within** a struct uio_map could be converted to a pointer to the
+ **containing** uio_map structure with::
+ 
+-    struct uio_map *u_map = container_of(kp, struct uio_map, kobj);
++ struct kobject *kp = ... ; /* Pointer to a kobj member of a uio_map */
++ struct uio_map *u_map = container_of(kp, struct uio_map, kobj);
+ 
+ For convenience, programmers often define a simple macro for **back-casting**
+ kobject pointers to the containing type.  Exactly this happens in the
+-- 
+2.30.2
 
-Dieses Western Union-B=C3=BCro wurde vom IWF beauftragt Ihnen Ihre
-Verg=C3=BCtung per Western Union Money Transfer zu =C3=BCberweisen.
-
-Wir haben uns jedoch entschieden Ihre eigene Zahlung =C3=BCber Geldtransfer
-der Westunion in H=C3=B6he von =E2=82=AC5,000, pro Tag vorzunehmen bis die
-Gesamtsumme von =E2=82=AC1,500.000.00, vollst=C3=A4ndig an Sie =C3=BCberwie=
-sen wurde.
-
-Wir k=C3=B6nnen die Zahlung m=C3=B6glicherweise nicht nur mit Ihrer
-E-Mail-Adresse senden daher ben=C3=B6tigen wir Ihre Informationen dar=C3=BC=
-ber
-wohin wir das Geld an Sie senden wie z. B.:
-
-
-Name des Adressaten ________________
-
-Adresse________________
-
-Land__________________
-
-Telefonnummer________________
-
-Angeh=C3=A4ngte Kopie Ihres Ausweises______________
-
-Das Alter ________________________
-
-
-Wir beginnen mit der =C3=9Cbertragung sobald wir Ihre Informationen
-erhalten haben: Kontakt E-Mail: ( wuwumoneytransfer5000@hotmail.com)
-
-
-Getreu,
-
-
-Herr Anthony Duru,
-
-Direktor von Geldtransfer der Westunion
