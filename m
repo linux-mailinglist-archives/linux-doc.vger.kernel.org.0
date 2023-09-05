@@ -2,257 +2,700 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6BF5D7928E2
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Sep 2023 18:46:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 178597928E5
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Sep 2023 18:46:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1350297AbjIEQYh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Sep 2023 12:24:37 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60306 "EHLO
+        id S237255AbjIEQYj convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Tue, 5 Sep 2023 12:24:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58462 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1354903AbjIEPnz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Sep 2023 11:43:55 -0400
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2040.outbound.protection.outlook.com [40.107.237.40])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E79A4A8;
-        Tue,  5 Sep 2023 08:43:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Xlzbbgpe1QI7XYtWR22RJrMAFKfUoXSacIj8ooMKbtFMlY842H0CYO4rygGPEti1HdU0GcN5I90IOc6y5W7wF2nl5ULiFU7MjicHwUJlRTxa5D7xd+U0Un7wm2DJb8ccmxpcTMIf6rc+BdejTIxd2BjHhkZ0A+tKGLJODhhdovuVquhs4JpFQNHELh68udpItroeyz11vuOYyx+0zDeol08/fC4HnBNjAt49TaxBD5BhgOqJ+V3kFp6cK4B+z4vHwTzCR+UukOlB8G6TxvPtT5JV246+i9fKRx+qM3hggAcfjUOgcUz7o3RUOU4qsnle0OXwr0ad3lYEcFRG3stljw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+LbMAXlUiUK6DgMvBQ848tC+ZctvqfMtxMS+KcQhB1M=;
- b=adPfY9jC91CpfcybGLKZHnOd/l+hDmy+vDMqTm8Q779ykIh9fl/WHsM+VzzOX2xaXqIxCgLR11HQiLA2KhSeEPANU5PSIm48wBLgU0+c3gt3WWieYzd2TsQe9qsmMQ+cZ5+6Kn/gNEASsIi7ivIOY766YTr7+AkAB9F+RUHcslJQYPTp2dxjlzLtd1amsip90fIubUJaBs9c/f/+aK86yH8L6Z+hkM0KdUC48BoDc6SYCSchWGLDnXeZEAJizc5VXoR/FxMb6rheTx0AnIqGoLUU0OWu0k8wiIPyYbU8vsNycg2bbsC4lsl9xdMDZe6goXmMlrVu+HE3X/4Ez8iEsw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+LbMAXlUiUK6DgMvBQ848tC+ZctvqfMtxMS+KcQhB1M=;
- b=x1XKFuxFwf7w8JDVaKVMimuF10E38uq6aL7PL5l+Ybp7GIKqA6w1earA+P6XGeLy2app6vNyPeo4N9h346uCYWKPrk1+0sZIPdV3kKxtd2e8m9cv2JGpQDIagGW+fFGJS4T7YYrnXJEciE550N0KbizXAxE82FNjPm5rKUVSBe8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from DM4PR12MB5229.namprd12.prod.outlook.com (2603:10b6:5:398::12)
- by MN2PR12MB4045.namprd12.prod.outlook.com (2603:10b6:208:1d6::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.33; Tue, 5 Sep
- 2023 15:43:45 +0000
-Received: from DM4PR12MB5229.namprd12.prod.outlook.com
- ([fe80::d267:7b8b:844f:8bcd]) by DM4PR12MB5229.namprd12.prod.outlook.com
- ([fe80::d267:7b8b:844f:8bcd%7]) with mapi id 15.20.6745.030; Tue, 5 Sep 2023
- 15:43:45 +0000
-Message-ID: <dc03c6b8-0c44-9212-ee38-6d83af0d00d5@amd.com>
-Date:   Tue, 5 Sep 2023 10:43:43 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH 11/13] KVM: SVM: Add support for IBS virtualization for
- SEV-ES guests
-Content-Language: en-US
-To:     Manali Shukla <manali.shukla@amd.com>, kvm@vger.kernel.org,
-        seanjc@google.com
-Cc:     linux-doc@vger.kernel.org, linux-perf-users@vger.kernel.org,
-        x86@kernel.org, pbonzini@redhat.com, peterz@infradead.org,
-        bp@alien8.de, santosh.shukla@amd.com, ravi.bangoria@amd.com,
-        nikunj@amd.com
-References: <20230904095347.14994-1-manali.shukla@amd.com>
- <20230904095347.14994-12-manali.shukla@amd.com>
-From:   Tom Lendacky <thomas.lendacky@amd.com>
-In-Reply-To: <20230904095347.14994-12-manali.shukla@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SA9PR11CA0014.namprd11.prod.outlook.com
- (2603:10b6:806:6e::19) To DM4PR12MB5229.namprd12.prod.outlook.com
- (2603:10b6:5:398::12)
+        with ESMTP id S1354907AbjIEPrW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Sep 2023 11:47:22 -0400
+Received: from frasgout13.his.huawei.com (unknown [14.137.139.46])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D3CCA194;
+        Tue,  5 Sep 2023 08:47:16 -0700 (PDT)
+Received: from mail02.huawei.com (unknown [172.18.147.227])
+        by frasgout13.his.huawei.com (SkyGuard) with ESMTP id 4Rg8hW3bSPz9xyN0;
+        Tue,  5 Sep 2023 23:35:07 +0800 (CST)
+Received: from [127.0.0.1] (unknown [10.204.63.22])
+        by APP1 (Coremail) with SMTP id LxC2BwC3ablUTfdkkiEwAg--.11395S2;
+        Tue, 05 Sep 2023 16:46:44 +0100 (CET)
+Message-ID: <3649004b908c9c79494020f37108bc70de3b2785.camel@huaweicloud.com>
+Subject: Re: [RFC][PATCH v2 00/13] integrity: Introduce a digest cache
+From:   Roberto Sassu <roberto.sassu@huaweicloud.com>
+To:     corbet@lwn.net, zohar@linux.ibm.com, dmitry.kasatkin@gmail.com,
+        paul@paul-moore.com, jmorris@namei.org, serge@hallyn.com
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-integrity@vger.kernel.org,
+        linux-security-module@vger.kernel.org, bpf@vger.kernel.org,
+        jarkko@kernel.org, pbrobinson@gmail.com, zbyszek@in.waw.pl,
+        hch@lst.de, mjg59@srcf.ucam.org, pmatilai@redhat.com,
+        jannh@google.com, Roberto Sassu <roberto.sassu@huawei.com>,
+        pvorel@suse.cz, jikos@kernel.org
+Date:   Tue, 05 Sep 2023 17:46:25 +0200
+In-Reply-To: <20230812104616.2190095-1-roberto.sassu@huaweicloud.com>
+References: <20230812104616.2190095-1-roberto.sassu@huaweicloud.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8BIT
+User-Agent: Evolution 3.44.4-0ubuntu2 
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR12MB5229:EE_|MN2PR12MB4045:EE_
-X-MS-Office365-Filtering-Correlation-Id: dafd1821-9eb0-46df-9ee4-08dbae26e38f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: M2gv4kg0lUwHwFONY8/cgcdoNeh5iMkrojyhmQAHNb4tkbdp/1AbB1+CqYwrxqHlMztwluYN9zCZowv71HRjO4bxa9ePaKHPS8k0hRr+LTL9jISaIjrmVgAYNy1HzhChP+bfKiZSetmsGVeXtxb+MNtofa5S5bc11BPBx9owf3fnDAX3HqTAdkzHflFWeH7Ds/r9+nVbv7kPBU8QNlplDAkOuXU5lxdwd2WH4C+Bl8sG543i2S/ooRkYqdQjyQcAf49u7WkwlaBrlWojo0B+V6cLMSUPmpyA4uewwduWStnXtuX0j0RXi8CRj4kV/00dl6nZN4ubrIL9voEoPv10n7zNqBWIJ3nER6H43HTKsHGite9SOJpP7/SfrtPC93+TBB7RGiUonMgGbK6rwn7jzpUEdPo4X0hVWFw/O3LlgRpeoZqVOs32WEGJzGs8uV+KAXN0UhLBwXWo2eejXcHC/NCWiCXWbQDHvA5BmO8jSYkWrCY39QNCOpAx3Bj+xEoscdoQPe3XPCRmuYO8IIB++YPPNI3tr5iofep896vxi9/2P89kvFPt70tOXWGapPt3k6HFvqj/f5ogZU/dz6xg0k+d9o09L2LNJHb+5i+EinjYxV5cZOjHqs/YXd2lokFetvpou+tzdO9TVXiBvRiaiQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR12MB5229.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(396003)(136003)(39860400002)(366004)(346002)(451199024)(1800799009)(186009)(66476007)(66556008)(66946007)(31696002)(86362001)(41300700001)(316002)(6512007)(2616005)(26005)(966005)(53546011)(6486002)(6506007)(31686004)(4326008)(5660300002)(8936002)(8676002)(478600001)(36756003)(38100700002)(83380400001)(2906002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U1l3cndRSDM5SkptZEVhRE5lYzdybWRDc3BZQ2JBeVc2ZlBWa1pDektEOVZZ?=
- =?utf-8?B?cTJ2NXZSTnBxS2ZseDUzWGh1dWRlbmxNYmpDMWFGeGdmQkJWb3lhU3VhdXJI?=
- =?utf-8?B?MmV0R0JoMzBSdi9tRllkekZyYllaNHRLb3M1NVRJd1JrTHRHRkhHd1dZekZI?=
- =?utf-8?B?SE02WlJNNWpNa2t1U25yRkROamlFd2w1dmNyMm93blQ1ZEg2YjZkZHF6S3Bh?=
- =?utf-8?B?OUpYVGV0UUZKdzY2Y3pyNHlvd2JDTXRWWmZYS3pZbFAzbjliOWRNZ3FLYy80?=
- =?utf-8?B?eUVGT0w0UVdMSnBkSGs2WThITlNURkNLbnp3eUJsYno0VTRGVitJdHpuSDI5?=
- =?utf-8?B?ZXVwdDUwUE9SL0NUWElvblpYelNSc1huZDU5cjB5VmdJeDBFUGxvdjNpbTFM?=
- =?utf-8?B?eEtQTjdxQUpMZDVXeTJSL1h5T0JCV3dIbEtiNHFjb20vSHdjZFArcTRCVHIz?=
- =?utf-8?B?WlorV2pwUnBMbllXNFYxbklDM1lhejN5WlFpRWtIRzBQNmNoMnV5am8yS090?=
- =?utf-8?B?bzVSOSt4UWRLOUgvWUwwZXg2MHJDNzRrZ3U0Yy9uMjhYM1RmSzdqMG11YlE5?=
- =?utf-8?B?S3pUclE3QkFSRzBJL3N0ekY5a2lvSWtOV1dhMFRzQkEyM0N2WHUvRTc4Y2Vj?=
- =?utf-8?B?OU1oU0x6YUZERFNha3ZEakZlZjNEM3lOZU9PM1FkTFZOdTJkU0Nvc1BDWmRm?=
- =?utf-8?B?QjFTNFlobXczM1VLZnljTHhPRzg2N1FEWFNEMVhmMzVxNlNPTXI0dU96dXcw?=
- =?utf-8?B?a0tqMjJ0SnhPK1ZJT0plZFV5dWJ0bDg3ZlNGbnBucnYyTjIwcWZxUVd6Q2tI?=
- =?utf-8?B?MDZZaG9DckhEWDRFNi9IK3JOclF5MVF2SHZ2UWJzMTZjRFcrcEIwU0VTWVZQ?=
- =?utf-8?B?WlpIeU5PWVErOEIwQzVSOFlmWitWMjdGcEZHL0ZQd3Q1d1hFdnUzZXJkemxT?=
- =?utf-8?B?R0g1ZkI5QlRpRnVZOW9DRnRSZlBhb0ZxNjVRRkRRdWJTSml4UTAyS25WVVNy?=
- =?utf-8?B?YWRjL3hIWWdGSGdmblpNYVBzWnRsR2N4R24rUUt6Nk55VHBiejJBbll3ZjhN?=
- =?utf-8?B?d05tdE1pckliSVZKczFGbHVmZ0xXZkdSczdRSkgxUFlLdzVPU2lxbjQ3cU15?=
- =?utf-8?B?T0ZCYWE3NWVhWWNqVVpsbytrMFFyejJzalFuUW5ML0c4Zy9kTnBVWUpBcm5G?=
- =?utf-8?B?b2pFZXNUclFQNVAxb0UwNzczWEYzaVVBTHVyU1k4YXVITXJFaHlDTGFITWZ4?=
- =?utf-8?B?SXB5elZFcEwrdUkxUmpVWW9uYWZSekxIWGxRUEVuM2hXamVhM0RiU3Rscllz?=
- =?utf-8?B?UHBaYThXRDB3SUptWFJQUC9OWHgrYXdKUGc0TEMrTnM1bkthdVVHR083OE80?=
- =?utf-8?B?OGFUY28xZzk1b3RPMCtFNVdlTjNqd2VSaVlnVVNLSEtXN3JKT09obzJFQ0lR?=
- =?utf-8?B?UGZ2bys0bFBqV3RTU21OQjk3a0tLTWt1dW1pQ0NSaVE5dG1yREpidUIvQmJC?=
- =?utf-8?B?N1pVUDJNVWlpS3pCakZVSmFOZ3A5Q0JQc2dUMDBWaG5TL3c5Z0JtalNuZ3BV?=
- =?utf-8?B?UVhOK2hReGpZeXJLQ08rbmUzdm5NcUN1ZFd6aWFIQ01odEx1NTFRbHZCRHpn?=
- =?utf-8?B?eXRVbzdKbjFFcFF1dWJ6cTZUL2xOZDJvc2loQ1pKOTl1K215aktveEFCbHEz?=
- =?utf-8?B?T05ML2FmMFUva3BJMTBKN1V3YXVhdGh3RUhBcXlSZmF2SVFoWFI2dzhQYWMz?=
- =?utf-8?B?dTFuekNXY3JwQkM3QXBBN2xoMDN2OEdVZ09HTFovOVQxSGViOUhGc2tRUjZD?=
- =?utf-8?B?T2I4MEx0Tm1lcEJsdllXRzJQbHJFMjlsbTR1Nm5paTBwVU5pUko0UDVUclNC?=
- =?utf-8?B?Y3RuVVViVHBEblFSK3YrOE95UkNDeWNxMWUreEdqVlRRcGpod3l4OEJhaDhZ?=
- =?utf-8?B?Y2VFanNXQWM3ajFhMmErOVdrT2F0TDF1SXo0cld3WEpNRzFzRzBQTTVYeCtB?=
- =?utf-8?B?T095WXJwaVp5YVloSmZrb09tSGd5QlRjVWdzUlFIRnVjUEdTTjZMQXRpOUVE?=
- =?utf-8?B?MDBsNlJFY25ab1VmNDNIaGg4ZTBQNzR2WFVpMDRVYlFkTDZDOVgzekZ5WlhJ?=
- =?utf-8?Q?RmpZ85msh13kqbL/eBAo0mM0b?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dafd1821-9eb0-46df-9ee4-08dbae26e38f
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR12MB5229.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2023 15:43:45.8040
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8i6g7khDEGuTNcZ6ZonFTwj0bebOCAxzkUYqPV82fTc+jx6FaYyHBVGbGytzZvQnJPEsl0O31DdFuaa1czzz9w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4045
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
-        NICE_REPLY_A,RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+X-CM-TRANSID: LxC2BwC3ablUTfdkkiEwAg--.11395S2
+X-Coremail-Antispam: 1UD129KBjvAXoWfuryrXw4UJF4kJr1xAFWDArb_yoW5GFWxXo
+        Zava13Cw45Kry5uF4DCFn7JF47W3ZYgwn7Ar4ktrs8WF17XFW5Ga1DCa1UGFW5Xr4rGasr
+        Aw18Jw47JF4ktrn3n29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+        AaLaJ3UjIYCTnIWjp_UUUYU7kC6x804xWl14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK
+        8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4
+        AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF
+        7I0E14v26r4j6F4UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I
+        0E14v26r4j6r4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG
+        6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFV
+        Cjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7MxAIw28IcxkI
+        7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxV
+        Cjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY
+        6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6x
+        AIw20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv
+        6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUFDGOUUUUU
+X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAgALBF1jj4+ObAABsQ
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,
+        RCVD_IN_DNSWL_BLOCKED,RDNS_DYNAMIC,SPF_HELO_NONE,SPF_NONE autolearn=no
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 9/4/23 04:53, Manali Shukla wrote:
-> Since the IBS state is swap type C, the hypervisor is responsible for
-> saving its own IBS state before VMRUN and restoring it after VMEXIT.
-> It is also responsible for disabling IBS before VMRUN and re-enabling
-> it after VMEXIT. For a SEV-ES guest with IBS virtualization enabled,
-> a VMEXIT_INVALID will happen if IBS is found to be enabled on VMRUN
-> [1].
+On Sat, 2023-08-12 at 12:46 +0200, Roberto Sassu wrote:
+> From: Roberto Sassu <roberto.sassu@huawei.com>
 > 
-> The IBS virtualization feature for SEV-ES guests is not enabled in this
-> patch. Later patches enable IBS virtualization for SEV-ES guests.
+> Introduction
+> ============
 > 
-> [1]: https://bugzilla.kernel.org/attachment.cgi?id=304653
->       AMD64 Architecture Programmer’s Manual, Vol 2, Section 15.38
->       Instruction-Based Sampling Virtualization.
+> The main goal of Integrity Measurement Architecture (IMA) is to perform a
+> measurement of the file content and use it for remote attestation, to
+> report a possibly compromised system, using the TPM as a root of trust. It
+> can also prevent a system compromise from happening by checking the
+> calculated file digest against a known-good reference value and by denying
+> the current operation if there is a mismatch.
+
+Small update, I build openSUSE Tumbleweed packages with the patches I
+sent (I added an rpm plugin). After the following steps, openSUSE
+Tumbleweed will:
+
+- Provide a predictable measurement list and PCR (11)
+- Enforce an IMA Appraisal policy for executable code (excluding tmpfs)
+- Support the above after package installation and removal
+
+
+1) Add the following repository to YaST:
+
+https://download.opensuse.org/repositories/home:/roberto.sassu:/integrity-digest-cache/standard/
+
+
+2) Install the necessary packages (in a testing VM):
+
+# zypper in gpg2-2.3.8-316.2.x86_64 kernel-kvmsmall kernel-tools-digest-lists
+
+
+3) Generate the initial set of digest lists from installed packages:
+
+# manage_digest_lists -d /etc/digest_lists -o gen -i rpmdb -f rpm
+
+
+4) Add security.digest_list xattr to every file, to point to the
+respective digest list:
+
+# manage_digest_lists -i /etc/digest_lists -o add-xattr
+
+
+5) Create /etc/ima/ima-policy with the content:
+
+dont_measure fsmagic=0x01021994
+measure func=DIGEST_LIST_CHECK template=ima-modsig pcr=11
+measure func=BPRM_CHECK digest_cache=content pcr=11
+measure func=MMAP_CHECK digest_cache=content pcr=11
+dont_appraise fsmagic=0x01021994
+appraise func=BPRM_CHECK digest_cache=content
+appraise func=MMAP_CHECK digest_cache=content
+appraise func=DIGEST_LIST_CHECK appraise_type=imasig|modsig
+
+
+6) Add the following lines to /etc/apparmor.d/abstractions/base, to
+   allow all processes to read /etc/digest_lists
+
+@{etc_ro}/digest_lists/**      r,
+
+
+7) Reboot
+
+
+That's it. Only openSUSE-distributed files are allowed to run (plus the
+ones I built). If there is any problem, please reboot with
+ima_appraise=log in the kernel command line, and delete the IMA policy.
+
+I hope to receive more reviews, and to make the necessary changes to
+have this new feature accepted in the kernel. This is a requirement for
+Linux distributions to pick the feature up.
+
+Thanks
+
+Roberto
+
+> Motivation
+> ==========
 > 
-> Signed-off-by: Manali Shukla <manali.shukla@amd.com>
-> ---
->   arch/x86/include/asm/svm.h | 14 +++++++++++++-
->   arch/x86/kvm/svm/sev.c     |  7 +++++++
->   arch/x86/kvm/svm/svm.c     | 11 +++++------
->   3 files changed, 25 insertions(+), 7 deletions(-)
+> This patch set aims to address two important shortcomings: predictability
+> of the Platform Configuration Registers (PCRs), and the provisioning of
+> reference values to compare the calculated file digest against.
 > 
-> diff --git a/arch/x86/include/asm/svm.h b/arch/x86/include/asm/svm.h
-> index 4096d2f68770..58b60842a3b7 100644
-> --- a/arch/x86/include/asm/svm.h
-> +++ b/arch/x86/include/asm/svm.h
-> @@ -469,6 +469,18 @@ struct sev_es_save_area {
->   	u8 fpreg_x87[80];
->   	u8 fpreg_xmm[256];
->   	u8 fpreg_ymm[256];
-> +	u8 lbr_stack_from_to[256];
-> +	u64 lbr_select;
-> +	u64 ibs_fetch_ctl;
-> +	u64 ibs_fetch_linear_addr;
-> +	u64 ibs_op_ctl;
-> +	u64 ibs_op_rip;
-> +	u64 ibs_op_data;
-> +	u64 ibs_op_data2;
-> +	u64 ibs_op_data3;
-> +	u64 ibs_dc_linear_addr;
-> +	u64 ibs_br_target;
-> +	u64 ibs_fetch_extd_ctl;
->   } __packed;
->   
->   struct ghcb_save_area {
-> @@ -527,7 +539,7 @@ struct ghcb {
->   
->   #define EXPECTED_VMCB_SAVE_AREA_SIZE		1992
->   #define EXPECTED_GHCB_SAVE_AREA_SIZE		1032
-> -#define EXPECTED_SEV_ES_SAVE_AREA_SIZE		1648
-> +#define EXPECTED_SEV_ES_SAVE_AREA_SIZE		1992
->   #define EXPECTED_VMCB_CONTROL_AREA_SIZE		1024
->   #define EXPECTED_GHCB_SIZE			PAGE_SIZE
->   
-> diff --git a/arch/x86/kvm/svm/sev.c b/arch/x86/kvm/svm/sev.c
-> index d3aec1f2cad2..41706335cedd 100644
-> --- a/arch/x86/kvm/svm/sev.c
-> +++ b/arch/x86/kvm/svm/sev.c
-> @@ -59,6 +59,7 @@ module_param_named(sev_es, sev_es_enabled, bool, 0444);
->   #define sev_es_enabled false
->   #endif /* CONFIG_KVM_AMD_SEV */
->   
-> +static bool sev_es_vibs_enabled;
->   static u8 sev_enc_bit;
->   static DECLARE_RWSEM(sev_deactivate_lock);
->   static DEFINE_MUTEX(sev_bitmap_lock);
-> @@ -2256,6 +2257,9 @@ void __init sev_hardware_setup(void)
->   
->   	sev_enabled = sev_supported;
->   	sev_es_enabled = sev_es_supported;
-> +
-> +	if (!sev_es_enabled || !cpu_feature_enabled(X86_FEATURE_SEV_ES_VIBS))
-> +		sev_es_vibs_enabled = false;
+> Remote attestation, according to Trusted Computing Group (TCG)
+> specifications, is done by replicating the PCR extend operation in
+> software with the digests in the event log (in this case the IMA
+> measurement list), and by comparing the obtained value with the PCR value
+> signed by the TPM with the quote operation.
+> 
+> Due to how the extend operation is performed, if measurements are done in
+> a different order, the final PCR value will be different. That means that
+> if measurements are done in parallel, there is no way to predict what the
+> final PCR value will be, making impossible to seal data to a PCR value. If
+> the PCR value was predictable, a system could for example prove its
+> integrity by unsealing and using its private key, without sending every
+> time the full list of measurements.
+> 
+> Provisioning reference values for file digests is also a difficult task.
+> The solution so far was to add file signatures to RPM packages, and
+> possibly to DEB packages, so that IMA can verify them. While this undoubtly
+> works, it also requires Linux distribution vendors to support the feature
+> by rebuilding all their packages, and eventually extending their PKI to
+> perform the additional signatures. It could also require developers extra
+> work to deal with the additional data.
+> 
+> On the other hand, since often packages carry the file digests themselves,
+> it won't be actually needed to add file signatures. If the kernel was able
+> to extract the file digests by itself, all the tasks mentioned above for
+> the Linux distribution vendors won't be needed too. All current and past
+> Linux distributions can be easily retrofitted to enable IMA appraisal with
+> the file digests from the packages.
+> 
+> Narrowing down the scope of a package parser to only extract specific
+> information makes it small enough to accurately verify that it cannot harm
+> the kernel. An additional mitigation consists in verifying the signature of
+> the package first, before attempting to extract the file digests.
+> 
+> 
+> Solution
+> ========
+> 
+> To avoid a PCR is extended in a non-deterministic way, the proposed
+> solution is to replace individual file measurements with the measurement of
+> a file (the digest list) containing a set of file digests. If the
+> calculated digest of a file being measured/appraised matches one digest in
+> the set, its measurement is skipped. If otherwise there is no match, the
+> file digest is added to the measurement list.
+> 
+> The resulting measurement list, which cannot be done on the default IMA PCR
+> to avoid ambiguity with the default-style measurement, has the following
+> meaning: none/some/all files represented with the measurement of the digest
+> lists COULD have been accessed, without knowing IF and WHEN. Any other
+> measurement (other than boot_aggregate) is of a file whose digest was not
+> included in the digest list.
+> 
+> File signatures have a coarser granularity, it is per-signing key and not
+> per-package. A measurement list containing just the measurement of the
+> signing keys and the files without/invalid signature (those with valid
+> signature would be skipped) would be even less accurate.
+> 
+> To ensure a rapid and smooth deployment of IMA appraisal, the kernel has
+> been provided with the ability to extract file digests from the RPM
+> package headers, and add them to the kernel memory on demand (only when a
+> file from a given package is accessed). This ensures that the memory
+> consumption for this new feature is directly proportional to the usage of
+> the system.
+> 
+> 
+> Scope
+> =====
+> 
+> The integrity digest cache enables IMA to extend a PCR (not the default
+> one) in a deterministic fashion, and to appraise immutable files with file
+> digests from the packages, when no other appraisal method is available. It
+> does not yet support metadata verification with Extended Verification
+> Module (EVM), for which a separate patch set will be provided.
+> 
+> 
+> Design
+> ======
+> 
+> The digest cache is a hash table of file digests, attached to the inode of
+> the digest list from which file digests are extracted. It is accessible,
+> when a given file is being measured/appraised, from the new xattr
+> security.digest_list, containing the path of the digest list itself.
+> 
+> If the calculated file digest is found in the digest cache, its measurement
+> is avoided, or read-only access is granted if appraisal is in enforcing
+> mode. Read-write access is prevented to avoid updating an unverified HMAC
+> of file metadata.
+> 
+> The digest cache can be used only if the following conditions are met:
+> 
+> - The 'digest_cache=content' keyword is added to the desired IMA policy
+>   rules;
+> - If the rule action is 'measure', a PCR different from the default one
+>   is specified;
+> - If the rule action is 'appraise', 'digest_cache=content' and
+>   'appraise_type' don't appear at the same time;
+> - The same action for which the digest cache is used was done also on the
+>   digest list;
+> - The digest cache is not (currently) used for measurement/appraisal of
+>   other digest lists.
+> 
+> For performance reasons, the digest cache is attached to every inode using
+> it, since multiple hooks can be invoked on it before the
+> measurement/appraisal result is cached. A reference count indicates how
+> many inodes use it, and only when it reaches zero, the digest cache can be
+> freed (for example when inodes are evicted from memory).
+> 
+> Two digest cache pointers have been added to the iint to distinguish for
+> which purpose they should be used: dig_owner points to the digest cache
+> created from the same inode the iint refers to, and should be used for
+> measurement/appraisal of other inodes; dig_user points to the digest
+> cache created from a different inode, and requested for
+> measurement/appraisal. One digest cache pointer would be confusing, as
+> for digest lists the digest cache was created from them, but IMA would
+> try to use that digest cache for measurement/appraisal of itself.
+> 
+> Finally, at the first digest list measurement, an iterator is executed to
+> sequentially read (not parse) all the digest lists in the same directory,
+> so that the PCR is extended in a deterministic fashion. The other
+> concurrent users of the digest cache have to wait until the iterator
+> finishes.
+> 
+> 
+> API
+> ===
+> 
+> digest_cache_alloc(), digest_cache_parse_digest_list() and
+> digest_cache_new() are internal functions used during the creation and
+> initialization of the digest cache.
+> 
+> digest_cache_get() and digest_cache_free() are called by the user of the
+> digest cache (e.g. IMA), to obtain and free a digest cache.
+> 
+> digest_cache_init_htable(), digest_cache_add() and digest_cache_lookup()
+> are called by the digest list parsers to populate and search in a digest
+> cache.
+> 
+> 
+> Digest List Formats
+> ===================
+> 
+> tlv
+> ~~~
+> 
+> The Type-Length-Value (TLV) format was chosen for its extensibility.
+> Additional fields can be added without breaking compatibility with old
+> versions of the parser.
+> 
+> The layout of a tlv digest list is the following:
+> 
+>  [header: DIGEST_LIST_FILE, num fields, total len]
+>  [field: DIGEST_LIST_ALGO, length, value]
+>  [field: DIGEST_LIST_ENTRY#1, length, value (below)]
+>   |- [header: DIGEST_LIST_FILE, num fields, total len]
+>   |- [ENTRY#1_DIGEST, length, file digest]
+>   |- [ENTRY#1_PATH, length, file path]
+>  [field: DIGEST_LIST_ENTRY#N, length, value (below)]
+>   |- [header: DIGEST_LIST_FILE, num fields, total len]
+>   |- [ENTRY#N_DIGEST, length, file digest]
+>   |- [ENTRY#N_PATH, length, file path]
+> 
+> DIGEST_LIST_ALGO is a field to specify the algorithm of the file digest.
+> DIGEST_LIST_ENTRY is a nested TLV structure with the following fields:
+> ENTRY_DIGEST contains the file digest; ENTRY_PATH contains the file path.
+> 
+> 
+> rpm
+> ~~~
+> 
+> The rpm digest list is basically a subset of the RPM package header.
+> Its format is:
+> 
+>  [RPM magic number]
+>  [RPMTAG_IMMUTABLE]
+> 
+> RPMTAG_IMMUTABLE is a section of the full RPM header containing the part
+> of the header that was signed, and whose signature is stored in the
+> RPMTAG_RSAHEADER section.
+> 
+> 
+> Appended Signature
+> ~~~~~~~~~~~~~~~~~~
+> 
+> Digest lists can have a module-style appended signature, that can be used
+> for appraisal with IMA. The signature type can be PKCS#7, as for kernel
+> modules, or the new user asymmetric key signature.
+> 
+> 
+> History
+> =======
+> 
+> The original name of this work was IMA Digest Lists, which was somehow
+> considered too invasive. The code was moved to a separate component named
+> DIGLIM (DIGest Lists Integrity Module), with the purpose of removing the
+> complexity away of IMA, and also add the possibility of using it with other
+> kernel components (e.g. Integrity Policy Enforcement, or IPE).
+> 
+> Since it was originally proposed, in 2017, this work grew up a lot thanks
+> to various comments/suggestions. It became integrally part of the openEuler
+> distribution since end of 2020.
+> 
+> There are significant differences between this and the previous versions.
+> The most important one is moving from a centralized repository of file
+> digests to a per-package repository. This significantly reduces the memory
+> pressure, since digest lists are loaded into kernel memory only when they
+> are actually needed. Also, file digests are automatically unloaded from
+> kernel memory at the same time inodes are evicted from memory during
+> reclamation.
+> 
+> 
+> Performance
+> ===========
+> 
+> The tests have been performed on a Fedora 38 virtual machine, with 8 cores
+> (AMD EPYC-Rome), 4GB of RAM, TPM passthrough. The signing key is an ECDSA
+> NIST P-384.
+> 
+> IMA measurement policy: no cache
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+>  dont_measure fsmagic=0x01021994
+>  measure func=BPRM_CHECK
+>  measure func=MMAP_CHECK
+> 
+> 
+> IMA measurement policy: cache
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+>  dont_measure fsmagic=0x01021994
+>  measure func=DIGEST_LIST_CHECK template=ima-modsig pcr=11
+>  measure func=BPRM_CHECK digest_cache=content pcr=11
+>  measure func=MMAP_CHECK digest_cache=content pcr=11
+> 
+> 
+> IMA Measurement Results
+> ~~~~~~~~~~~~~~~~~~~~~~~
+> 
+>                                +-----------+-----------+-----------+
+>                                | # measur. | boot time |   slab    |
+>  +-----------------------------+-----------+-----------+-----------+
+>  | measure (no cache)          |    389    |  12.682s  | 231453 KB |
+>  +-----------------------------+-----------+-----------+-----------+
+>  | measure (cache, no iter)    |    175    |  12.283s  | 234224 KB |
+>  +-----------------------------+-----------+-----------+-----------+
+>  | measure (cache, iter)       |    853    |  16.430s  | 238491 KB |
+>  +-----------------------------+-----------+-----------+-----------+
+> 
+> With the iterator enabled, all 852 packages are measured. Consequently, the
+> boot time is longer. One possible optimization would be to exclude the
+> packages that don't include measured files. By disabling the iterator, it
+> can be seen that the packages actually used are 174 (one measurement is for
+> boot_aggregate).
+> 
+> 
+> IMA appraisal policy: no cache
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+>  dont_appraise fsmagic=0x01021994
+>  appraise func=BPRM_CHECK appraise_type=imasig
+>  appraise func=MMAP_CHECK appraise_type=imasig
+> 
+> 
+> IMA appraisal policy: cache
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+>  dont_appraise fsmagic=0x01021994
+>  appraise func=DIGEST_LIST_CHECK appraise_type=imasig|modsig
+>  appraise func=BPRM_CHECK digest_cache=content
+>  appraise func=MMAP_CHECK digest_cache=content
+> 
+> 
+> IMA Appraisal Results
+> ~~~~~~~~~~~~~~~~~~~~~
+> 
+>                                +-----------+-----------+
+>                                | boot time |   slab    |
+>  +-----------------------------+-----------+-----------+
+>  | appraise (no cache)         |  11.995s  | 231145 KB |
+>  +-----------------------------+-----------+-----------+
+>  | appraise (cache)            |  11.879s  | 233091 KB |
+>  +-----------------------------+-----------+-----------+
+> 
+> In this test, it can be seen that the performance of the two solutions are
+> comparable, with the digest cache slightly ahead. The difference could be
+> more substantial with more file appraised.
+> 
+> 
+> How to Test
+> ===========
+> 
+> First, it is necessary to copy the new kernel headers (tlv_parser.h,
+> uasym_parser.h, tlv_digest_list.h) from usr/include/linux in the kernel
+> source directory to /usr/include/linux.
+> 
+> Then, gpg must be rebuilt with the additional patches to convert the PGP
+> keys of the Linux distribution to the new user asymmetric key format:
+> 
+>  $ gpg --conv-kernel <path of PGP key> >> certs/uasym_keys.bin
+> 
+> This embeds the converted keys in the kernel image. Then, the following
+> kernel options must be enabled:
+> 
+>  CONFIG_INTEGRITY_DIGEST_CACHE=y
+>  CONFIG_UASYM_KEYS_SIGS=y
+>  CONFIG_UASYM_PRELOAD_PUBLIC_KEYS=y
+> 
+> and the kernel must be rebuilt with the patches applied. After boot, it is
+> necessary to build and install the digest list tool in tools/digest-lists,
+> and to execute (as root):
+> 
+>  # manage_digest_lists -o gen -d /etc/digest_lists -i rpmdb -f rpm
+> 
+> The new gpg must also be installed in the system, as it will be used to
+> convert the PGP signatures of the RPM headers to the user asymmetric key
+> format.
+> 
+> It is recommended to create an additional digest list with the following
+> files, by creating a file named 'list' with the content:
+> 
+>  /usr/bin/manage_digest_lists
+>  /usr/lib64/libgen-tlv-list.so
+>  /usr/lib64/libgen-rpm-list.so
+>  /usr/lib64/libparse-rpm-list.so
+>  /usr/lib64/libparse-tlv-list.so
+> 
+> Then, to create the digest list, it is sufficient to execute:
+> 
+>  # manage_digest_lists -i list -L -d /etc/digest_lists -o gen -f tlv
+> 
+> If appraisal is enabled and in enforcing mode, it is necessary to sign the
+> new digest list, with the sign-file tool in the scripts/ directory of the
+> kernel sources:
+> 
+>  # scripts/sign-file sha256 certs/signing_key.pem certs/signing_key.pem /etc/digest_lists/tlv-list
+> 
+> The final step is to add security.digest_list to each file with:
+> 
+>  # manage_digest_lists -i /etc/digest_lists -o add-xattr
+> 
+> After that, it is possible to test the integrity digest cache with the
+> following policy written to /etc/ima/ima-policy:
+> 
+>  dont_measure fsmagic=0x01021994
+>  measure func=DIGEST_LIST_CHECK template=ima-modsig pcr=11
+>  measure func=BPRM_CHECK digest_cache=content pcr=11
+>  measure func=MMAP_CHECK digest_cache=content pcr=11
+>  dont_appraise fsmagic=0x01021994
+>  appraise func=BPRM_CHECK digest_cache=content
+>  appraise func=MMAP_CHECK digest_cache=content
+>  appraise func=DIGEST_LIST_CHECK appraise_type=imasig|modsig
+> 
+> Tmpfs is excluded for now, until memfd is properly handled.
+> 
+> Before loading the policy, it is possible to enable dynamic debug to see
+> which operations are done by the integrity digest cache:
+> 
+>  # echo "file tlv* +p" > /sys/kernel/debug/dynamic_debug/control
+>  # echo "file rpm* +p" > /sys/kernel/debug/dynamic_debug/control
+>  # echo "file digest* +p" > /sys/kernel/debug/dynamic_debug/control
+> 
+> Alternatively, the same strings can be set as value of the dyndbg= option
+> in the kernel command line.
+> 
+> A preliminary test, before booting the system with the new policy, is to
+> supply the policy to IMA in the current system with:
+> 
+>  # cat /etc/ima/ima-policy > /sys/kernel/security/ima/policy
+> 
+> If that worked, the system can be rebooted. Systemd will take care of
+> loading the IMA policy at boot. The instructions have been tested on a
+> Fedora 38 OS.
+> 
+> After boot, it is possible to check the content of the measurement list:
+> 
+>  # cat /sys/kernel/security/ima/ascii_runtime_measurements
+> 
+> If only the files shipped with Fedora 38 have been executed, the
+> measurement list will contain only the digest lists, and not the individual
+> files.
+> 
+> Another test is to ensure that IMA prevents the execution of unknown files:
+> 
+>  # cp -a /bin/cat .
+>  # ./cat
+> 
+> That will work. But not on the modified binary:
+> 
+>  # echo 1 >> cat
+>  # cat
+>  -bash: ./cat: Permission denied
+> 
+> Execution will be denied, and a new entry in the measurement list will
+> appear (it would be probably ok to not add that entry, as access to the
+> file was denied):
+> 
+>  11 50b5a68bea0776a84eef6725f17ce474756e51c0 ima-ng sha256:15e1efee080fe54f5d7404af7e913de01671e745ce55215d89f3d6521d3884f0 /root/cat
+> 
+> Finally, it is possible to test the shrinking of the digest cache, by
+> forcing the kernel to evict inodes from memory:
+> 
+>  # echo 3 > /proc/sys/vm/drop_caches
+> 
+> The kernel log should have messages like:
+> 
+>  [  313.032536] DIGEST CACHE: Remove digest sha256:102900208eef27b766380135906d431dba87edaa7ec6aa72e6ebd3dd67f3a97b from digest list /etc/digest_lists/rpm-libseccomp-2.5.3-4.fc38.x86_64
+> 
+> 
+> Patch set dependencies
+> ======================
+> 
+> This patch set depends on:
+> 
+> https://lore.kernel.org/linux-integrity/20230720153247.3755856-2-roberto.sassu@huaweicloud.com/
+> 
+> which allows to appraise RPM package headers with the PGP keys of Linux
+> distribution vendors.
+> 
+> 
+> Patch set content
+> =================
+> 
+> Patch 1 introduces a new hook to identify the loading of digest lists and
+> consequently appraise them.
+> 
+> Patches 2-4 implement the digest cache, and an iterator to prefetch the
+> digest lists to measure them in a deterministic way.
+> 
+> Patches 5-6 implement the currently supported digest list formats: tlv and
+> rpm. The tlv format relies on the TLV parser defined in the patch set
+> mentioned above.
+> 
+> Patches 7-9 enable the usage of the digest cache in IMA for measurement and
+> appraisal.
+> 
+> Patches 10-12 add a tool to manage digest lists.
+> 
+> Patch 13 adds the documentation of the integrity digest cache.
+> 
+> 
+> Changelog
+> =========
+> 
+> v1:
+> - Add documentation in Documentation/security/integrity-digest-cache.rst
+> - Pass the mask of IMA actions to digest_cache_alloc()
+> - Add a reference count to the digest cache
+> - Remove the path parameter from digest_cache_get(), and rely on the
+>   reference count to avoid the digest cache disappearing while being used
+> - Rename the dentry_to_check parameter of digest_cache_get() to dentry
+> - Rename digest_cache_get() to digest_cache_new() and add
+>   digest_cache_get() to set the digest cache in the iint of the inode for
+>   which the digest cache was requested
+> - Add dig_owner and dig_user to the iint, to distinguish from which inode
+>   the digest cache was created from, and which is using it; consequently it
+>   makes the digest cache usable to measure/appraise other digest caches
+>   (support not yet enabled)
+> - Add dig_owner_mutex and dig_user_mutex to serialize accesses to dig_owner
+>   and dig_user until they are initialized
+> - Enforce strong synchronization and make the contenders wait until
+>   dig_owner and dig_user are assigned to the iint the first time
+> - Move checking IMA actions on the digest list earlier, and fail if no
+>   action were performed (digest cache not usable)
+> - Remove digest_cache_put(), not needed anymore with the introduction of
+>   the reference count
+> - Fail immediately in digest_cache_lookup() if the digest algorithm is
+>   not set in the digest cache
+> - Use 64 bit mask for IMA actions on the digest list instead of 8 bit
+> - Return NULL in the inline version of digest_cache_get()
+> - Use list_add_tail() instead of list_add() in the iterator
+> - Copy the digest list path to a separate buffer in digest_cache_iter_dir()
+> - Use digest list parsers verified with Frama-C
+> - Explicitly disable (for now) the possibility in the IMA policy to use the
+>   digest cache to measure/appraise other digest lists
+> - Replace exit(<value>) with return <value> in manage_digest_lists.c
+> 
+> Roberto Sassu (13):
+>   ima: Introduce hook DIGEST_LIST_CHECK
+>   integrity: Introduce a digest cache
+>   integrity/digest_cache: Add functions to populate and search
+>   integrity/digest_cache: Prefetch digest lists in a directory
+>   integrity/digest_cache: Parse tlv digest lists
+>   integrity/digest_cache: Parse rpm digest lists
+>   ima: Add digest_cache policy keyword
+>   ima: Use digest cache for measurement
+>   ima: Use digest cache for appraisal
+>   tools: Add tool to manage digest lists
+>   tools/digest-lists: Add tlv digest list generator and parser
+>   tools/digest-lists: Add rpm digest list generator and parser
+>   docs: Add documentation of the integrity digest cache
+> 
+>  Documentation/ABI/testing/ima_policy          |   6 +-
+>  Documentation/security/index.rst              |   1 +
+>  .../security/integrity-digest-cache.rst       | 484 ++++++++++++++++++
+>  MAINTAINERS                                   |   2 +
+>  include/linux/kernel_read_file.h              |   1 +
+>  include/uapi/linux/tlv_digest_list.h          |  59 +++
+>  include/uapi/linux/xattr.h                    |   3 +
+>  security/integrity/Kconfig                    |  12 +
+>  security/integrity/Makefile                   |   4 +
+>  security/integrity/digest_cache.c             | 454 ++++++++++++++++
+>  security/integrity/digest_cache.h             | 110 ++++
+>  security/integrity/digest_cache_iter.c        | 160 ++++++
+>  .../integrity/digest_list_parsers/parsers.h   |  15 +
+>  security/integrity/digest_list_parsers/rpm.c  | 215 ++++++++
+>  security/integrity/digest_list_parsers/tlv.c  | 188 +++++++
+>  security/integrity/iint.c                     |  12 +
+>  security/integrity/ima/ima.h                  |  16 +-
+>  security/integrity/ima/ima_api.c              |  22 +-
+>  security/integrity/ima/ima_appraise.c         |  16 +-
+>  security/integrity/ima/ima_main.c             |  40 +-
+>  security/integrity/ima/ima_policy.c           |  59 ++-
+>  security/integrity/integrity.h                |   8 +
+>  tools/Makefile                                |  16 +-
+>  tools/digest-lists/.gitignore                 |   7 +
+>  tools/digest-lists/Makefile                   |  72 +++
+>  tools/digest-lists/common.c                   | 163 ++++++
+>  tools/digest-lists/common.h                   |  90 ++++
+>  tools/digest-lists/generators/generators.h    |  18 +
+>  tools/digest-lists/generators/rpm.c           | 257 ++++++++++
+>  tools/digest-lists/generators/tlv.c           | 168 ++++++
+>  tools/digest-lists/manage_digest_lists.c      | 349 +++++++++++++
+>  tools/digest-lists/manage_digest_lists.txt    |  82 +++
+>  tools/digest-lists/parsers/parsers.h          |  16 +
+>  tools/digest-lists/parsers/rpm.c              | 169 ++++++
+>  tools/digest-lists/parsers/tlv.c              | 195 +++++++
+>  tools/digest-lists/parsers/tlv_parser.h       |  38 ++
+>  36 files changed, 3501 insertions(+), 26 deletions(-)
+>  create mode 100644 Documentation/security/integrity-digest-cache.rst
+>  create mode 100644 include/uapi/linux/tlv_digest_list.h
+>  create mode 100644 security/integrity/digest_cache.c
+>  create mode 100644 security/integrity/digest_cache.h
+>  create mode 100644 security/integrity/digest_cache_iter.c
+>  create mode 100644 security/integrity/digest_list_parsers/parsers.h
+>  create mode 100644 security/integrity/digest_list_parsers/rpm.c
+>  create mode 100644 security/integrity/digest_list_parsers/tlv.c
+>  create mode 100644 tools/digest-lists/.gitignore
+>  create mode 100644 tools/digest-lists/Makefile
+>  create mode 100644 tools/digest-lists/common.c
+>  create mode 100644 tools/digest-lists/common.h
+>  create mode 100644 tools/digest-lists/generators/generators.h
+>  create mode 100644 tools/digest-lists/generators/rpm.c
+>  create mode 100644 tools/digest-lists/generators/tlv.c
+>  create mode 100644 tools/digest-lists/manage_digest_lists.c
+>  create mode 100644 tools/digest-lists/manage_digest_lists.txt
+>  create mode 100644 tools/digest-lists/parsers/parsers.h
+>  create mode 100644 tools/digest-lists/parsers/rpm.c
+>  create mode 100644 tools/digest-lists/parsers/tlv.c
+>  create mode 100644 tools/digest-lists/parsers/tlv_parser.h
+> 
 
-sev_es_vibs_enabled = sev_es_enabled && cpu_feature_enabled(X86_FEATURE_SEV_ES_VIBS);
-
-But won't this require VNMI support, too? So should that also be checked
-along with vibs from svm.c (since AVIC isn't supported with SEV).
-
->   #endif
->   }
->   
-> @@ -2993,6 +2997,9 @@ static void sev_es_init_vmcb(struct vcpu_svm *svm)
->   		if (guest_cpuid_has(&svm->vcpu, X86_FEATURE_RDTSCP))
->   			svm_clr_intercept(svm, INTERCEPT_RDTSCP);
->   	}
-> +
-> +	if (sev_es_vibs_enabled && svm->ibs_enabled)
-> +		svm_ibs_msr_interception(svm, false);
-
-I might be missing something here...  if svm->ibs_enabled is true, then
-this intercept change will already have been done. Shouldn't this be
-doing the reverse?  But, it looks like svm->ibs_enabled is set in the
-init_vmcb_after_set_cpuid() function, which is called after
-sev_es_init_vmcb() is called...  so it can never be true here, right?
-
-Thanks,
-Tom
-
->   }
->   
->   void sev_init_vmcb(struct vcpu_svm *svm)
-> diff --git a/arch/x86/kvm/svm/svm.c b/arch/x86/kvm/svm/svm.c
-> index 6f566ed93f4c..0cfe23bb144a 100644
-> --- a/arch/x86/kvm/svm/svm.c
-> +++ b/arch/x86/kvm/svm/svm.c
-> @@ -4194,16 +4194,15 @@ static noinstr void svm_vcpu_enter_exit(struct kvm_vcpu *vcpu, bool spec_ctrl_in
->   	guest_state_enter_irqoff();
->   
->   	amd_clear_divider();
-> +	restore_mask = svm_save_swap_type_c(vcpu);
->   
-> -	if (sev_es_guest(vcpu->kvm)) {
-> +	if (sev_es_guest(vcpu->kvm))
->   		__svm_sev_es_vcpu_run(svm, spec_ctrl_intercepted);
-> -	} else {
-> -		restore_mask = svm_save_swap_type_c(vcpu);
-> +	else
->   		__svm_vcpu_run(svm, spec_ctrl_intercepted);
->   
-> -		if (restore_mask)
-> -			svm_restore_swap_type_c(vcpu, restore_mask);
-> -	}
-> +	if (restore_mask)
-> +		svm_restore_swap_type_c(vcpu, restore_mask);
->   
->   	guest_state_exit_irqoff();
->   }
