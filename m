@@ -2,75 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 11E597987E5
-	for <lists+linux-doc@lfdr.de>; Fri,  8 Sep 2023 15:31:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 006D07988B9
+	for <lists+linux-doc@lfdr.de>; Fri,  8 Sep 2023 16:30:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229461AbjIHNbe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 8 Sep 2023 09:31:34 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53110 "EHLO
+        id S243933AbjIHOa3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 8 Sep 2023 10:30:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38060 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229498AbjIHNbe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 8 Sep 2023 09:31:34 -0400
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 63BC619BC;
-        Fri,  8 Sep 2023 06:31:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=TQKWOfY+iS0XtMOemRYfYqcvGehYFsyz+lsbAvmWQBg=; b=IE4IuO3f7ZfICVOmPxBOxmPKMP
-        BVvtm3tlC9Fkm6m023ngfZHnP4SnavAeqGqXpMV0meWCcNPgoI4uOXn0+Un9T1CTUtaLFrDIk6tp2
-        Mf7opQjS3UB2Lm/YwkrPZt320KhUdv+Xu8824dvzDn9ufum8Bj5LvTES6PUFat9PUf9LYgnptHIpP
-        QKcuAp4S/VEPeJj6RzFC7B0o6LTtqTD2VIIpuNNTKCXJFxU/vA1Qf6DShsIbOaWsKlUDlfVGJWqqp
-        3LLjicSUT2MrAMTf09bgkh+N/P20mGxQ93DER4zLqktpngI2UoMCBy0d82hR7DN/2+RtwXoS1GM94
-        0sSG2uXg==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
-        by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-        id 1qebZr-002YCs-2e;
-        Fri, 08 Sep 2023 13:31:17 +0000
-Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 3FD52300472; Fri,  8 Sep 2023 15:31:15 +0200 (CEST)
-Date:   Fri, 8 Sep 2023 15:31:14 +0200
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Manali Shukla <manali.shukla@amd.com>
-Cc:     kvm@vger.kernel.org, seanjc@google.com, linux-doc@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, x86@kernel.org,
-        pbonzini@redhat.com, bp@alien8.de, santosh.shukla@amd.com,
-        ravi.bangoria@amd.com, thomas.lendacky@amd.com, nikunj@amd.com
-Subject: Re: [PATCH 00/13] Implement support for IBS virtualization
-Message-ID: <20230908133114.GK19320@noisy.programming.kicks-ass.net>
-References: <20230904095347.14994-1-manali.shukla@amd.com>
- <20230905154744.GB28379@noisy.programming.kicks-ass.net>
- <012c9897-51d7-87d3-e0e5-3856fa9644e5@amd.com>
- <20230906195619.GD28278@noisy.programming.kicks-ass.net>
- <188f7a79-ad47-eddd-a185-174e0970ad22@amd.com>
+        with ESMTP id S243978AbjIHOa0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 8 Sep 2023 10:30:26 -0400
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.154.123])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CA8C11FE1;
+        Fri,  8 Sep 2023 07:30:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1694183420; x=1725719420;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=KHR8Qc7/5doglix8W9O2Ns4ouxyrUJKNX4AIFv8kWLY=;
+  b=ab+4PIvAr91Hp4S8u4kH/m8e94fkIp/hSiD6ekfZKuvzHh8+tKfGpFDK
+   pwxtLAf5K7qjTacizyq5QPQ/nY0191oOdsi8NXU3yYcjdrHrOZmkn8dBo
+   PNwe2MkLK0E9Ydby21zsD/Ev92Fjlw5A5LpYtuOvKdpnqwbgzdrb+Lt4E
+   HEwdhgACfGVoWcDOH66LmSywXhykT0naKQaUoBi0Y+3G8aj+KFF+ik0Zu
+   4m2U9gmtx8+095+D+s7akMUGDGfgHD1dRTHejA8oD3O6hJF1z1pJUS0Pr
+   RAcAYTLcPW9nbO4/j+X7Wz+RnS80d20U/9w+YUv8kUKz/Qm7wja5B71uj
+   w==;
+X-CSE-ConnectionGUID: asNxVD5cQQC9XPoqMIkXxg==
+X-CSE-MsgGUID: j/lDpi6ASPmAIXsdJCS8dA==
+X-ThreatScanner-Verdict: Negative
+X-IronPort-AV: E=Sophos;i="6.02,237,1688454000"; 
+   d="scan'208";a="3643518"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+  by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 08 Sep 2023 07:30:19 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Fri, 8 Sep 2023 07:29:53 -0700
+Received: from CHE-LT-I17164LX.microchip.com (10.10.85.11) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
+ 15.1.2507.21 via Frontend Transport; Fri, 8 Sep 2023 07:29:45 -0700
+From:   Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
+To:     <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
+        <pabeni@redhat.com>, <robh+dt@kernel.org>,
+        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
+        <corbet@lwn.net>, <steen.hegelund@microchip.com>,
+        <rdunlap@infradead.org>, <horms@kernel.org>,
+        <casper.casan@gmail.com>, <andrew@lunn.ch>
+CC:     <netdev@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <horatiu.vultur@microchip.com>, <Woojung.Huh@microchip.com>,
+        <Nicolas.Ferre@microchip.com>, <UNGLinuxDriver@microchip.com>,
+        <Thorsten.Kummermehr@microchip.com>,
+        Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
+Subject: [RFC PATCH net-next 0/6] Add support for OPEN Alliance 10BASE-T1x MACPHY Serial Interface
+Date:   Fri, 8 Sep 2023 19:59:13 +0530
+Message-ID: <20230908142919.14849-1-Parthiban.Veerasooran@microchip.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <188f7a79-ad47-eddd-a185-174e0970ad22@amd.com>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,
+        SPF_HELO_PASS,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Sep 07, 2023 at 09:19:51PM +0530, Manali Shukla wrote:
+This patch series contain the below updates,
+- Adds support for OPEN Alliance 10BASE-T1x MACPHY Serial Interface in the
+  net/ethernet/oa_tc6.c.
+- Adds driver support for Microchip LAN8650/1 Rev.B0 10BASE-T1S MACPHY
+  Ethernet driver in the net/ethernet/microchip/lan865x.c.
 
-> > I'm not sure I'm fluent in virt speak (in fact, I'm sure I'm not). Is
-> > the above saying that a host can never IBS profile a guest?
-> 
-> Host can profile a guest with IBS if VIBS is disabled for the guest. This is
-> the default behavior. Host can not profile guest if VIBS is enabled for guest.
-> 
-> > 
-> > Does the current IBS thing assert perf_event_attr::exclude_guest is set?
-> 
-> Unlike AMD core pmu, IBS doesn't have Host/Guest filtering capability, thus
-> perf_event_open() fails if exclude_guest is set for an IBS event.
+Parthiban Veerasooran (6):
+  net: ethernet: implement OPEN Alliance control transaction interface
+  net: ethernet: add mac-phy interrupt support with reset complete
+    handling
+  net: ethernet: implement OA TC6 configuration function
+  net: ethernet: implement data transaction interface
+  microchip: lan865x: add driver support for Microchip's LAN865X MACPHY
+  microchip: lan865x: add device-tree support for Microchip's LAN865X
+    MACPHY
 
-Then you must not allow VIBS if a host cpu-wide IBS counter exists.
+ .../bindings/net/microchip,lan865x.yaml       |  54 ++
+ Documentation/networking/oa-tc6-framework.rst | 231 +++++
+ MAINTAINERS                                   |  15 +
+ drivers/net/ethernet/microchip/Kconfig        |  10 +
+ drivers/net/ethernet/microchip/Makefile       |   3 +
+ drivers/net/ethernet/microchip/lan865x.c      | 589 +++++++++++++
+ drivers/net/ethernet/oa_tc6.c                 | 807 ++++++++++++++++++
+ include/linux/oa_tc6.h                        | 130 +++
+ 8 files changed, 1839 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/net/microchip,lan865x.yaml
+ create mode 100644 Documentation/networking/oa-tc6-framework.rst
+ create mode 100644 drivers/net/ethernet/microchip/lan865x.c
+ create mode 100644 drivers/net/ethernet/oa_tc6.c
+ create mode 100644 include/linux/oa_tc6.h
 
-Also, VIBS reads like it can be (ab)used as a filter.
+-- 
+2.34.1
+
