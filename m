@@ -2,234 +2,210 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0246679B32F
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 01:59:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1B7FD79B3A8
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 02:00:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1343761AbjIKVM1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 17:12:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51418 "EHLO
+        id S1344091AbjIKVNQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 17:13:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54702 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235772AbjIKJeV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 05:34:21 -0400
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 86C9F102;
-        Mon, 11 Sep 2023 02:34:16 -0700 (PDT)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F203C433C7;
-        Mon, 11 Sep 2023 09:34:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1694424856;
-        bh=TvpWrAcaPvo6YwEqJ4wx8ac0H6SKtwYaj6N+B+IF3DI=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=pXXdv1gBYsBGMvX+RKb2cpVYYDqX/HK/auK9M52TcGOmA/wX2wdhgfKjgRAliM06R
-         wHk+rxIK1WeGprHmyc/lgjgNxnVVA9/dmXazfrw/uH2qFuHyeMgp+ZFT6mcUhHehHk
-         yACtBXmuFRXhfV66s4XHAqp9blvCNPFzjtzBjC8N675dkny+soTXDeCBQ3OAJ11hTb
-         bSJJKzOTCxyBPiVQF8aZqbnhnmKAPKLsFs6rrdko3UK3ZvO1v9WcxqSW4Vy9JfoHeL
-         r/00QyRcdVGCeWkGJXijfxkNroh/5ciA75w3kaCat81bHc7bAaM1k5Jv3sSgy73SND
-         rryZSkWzFQHeQ==
-Date:   Mon, 11 Sep 2023 11:34:13 +0200
-From:   Maxime Ripard <mripard@kernel.org>
-To:     Daniel Stone <daniels@collabora.com>
-Cc:     Daniel Vetter <daniel@ffwll.ch>,
-        Helen Koike <helen.koike@collabora.com>, emma@anholt.net,
-        linux-doc@vger.kernel.org, vignesh.raman@collabora.com,
-        dri-devel@lists.freedesktop.org, alyssa@rosenzweig.io,
-        jbrunet@baylibre.com, robdclark@google.com, corbet@lwn.net,
-        khilman@baylibre.com, sergi.blanch.torne@collabora.com,
-        david.heidelberg@collabora.com, linux-rockchip@lists.infradead.org,
-        martin.blumenstingl@googlemail.com, robclark@freedesktop.org,
-        anholt@google.com, linux-mediatek@lists.infradead.org,
-        matthias.bgg@gmail.com, linux-amlogic@lists.infradead.org,
-        gustavo.padovan@collabora.com,
-        linux-arm-kernel@lists.infradead.org,
-        angelogioacchino.delregno@collabora.com, neil.armstrong@linaro.org,
-        guilherme.gallo@collabora.com, linux-kernel@vger.kernel.org,
-        tzimmermann@suse.de
-Subject: Re: [PATCH v11] drm: Add initial ci/ subdirectory
-Message-ID: <mnjcsiqjqdnvbbkaaz5r4n42e56qsax667r7radzyagnmmfkip@dfi64z5deqzj>
-References: <20230811171953.176431-1-helen.koike@collabora.com>
- <ZOTFfhtzzWkrQ23Y@phenom.ffwll.local>
- <zorvxwffshrsqx5cy76pe3gn52qrqav7qusz5acav2un2ydvwr@fwjd56qg2xve>
- <87bkeo23vs.fsf@intel.com>
- <4rpsqk4tgrdcxtxtfoum6o4oyglwkirmkh3jj4y5tays2ivb5p@uwqdf3snshkv>
- <25df6189-7b0a-b13d-e93d-c2a388fd45e3@collabora.com>
- <zmq7pz7rtz6h765azg5kl2qgjd264yafctx4q474t5tqai57og@cajbcub4yuwr>
- <5fdf9d29-3f8d-0ee0-027f-57ff3a5cecb8@collabora.com>
- <CAKMK7uGg6n322UugJwErqF_Dvsbqceqae6SVWV3ZWEOR7x36rQ@mail.gmail.com>
- <9a2b1ad8-4359-4f12-b4f9-c1de477bc440@collabora.com>
+        with ESMTP id S236673AbjIKLNK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 07:13:10 -0400
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6EFC7CE5
+        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 04:13:04 -0700 (PDT)
+Received: from epcas5p2.samsung.com (unknown [182.195.41.40])
+        by mailout1.samsung.com (KnoxPortal) with ESMTP id 20230911111301epoutp0111bcdecacc00daa39431b1a7de171f98~D09GEVUFB1067810678epoutp01P
+        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 11:13:01 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com 20230911111301epoutp0111bcdecacc00daa39431b1a7de171f98~D09GEVUFB1067810678epoutp01P
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+        s=mail20170921; t=1694430781;
+        bh=D7RBEh7nV1S0rVx+M93psp96QfuSer88Ud6SLkBPMCo=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=Hr1HvrOvgGOoSyxx2n6bY9NNgKcTqT3jTJuPsHMM4JFyH0gRqfU1+3e9Un4TBXf9Q
+         tx01JwLS9nzkdA3SO1fIEGr+Bv3QG9F4Syu6QH01ZKOhI9OIzaKEPcyzwY3EnisVnv
+         zfJtozvAcB1OiHYHhDMKJiCdCd+OWzJ1ABDFbSZU=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+        epcas5p1.samsung.com (KnoxPortal) with ESMTP id
+        20230911111301epcas5p1051fd04e6eaa20056ab0a6d1098f1299~D09FfFYzh0749607496epcas5p1m;
+        Mon, 11 Sep 2023 11:13:01 +0000 (GMT)
+Received: from epsmges5p3new.samsung.com (unknown [182.195.38.181]) by
+        epsnrtp3.localdomain (Postfix) with ESMTP id 4RkkbG2NSNz4x9Px; Mon, 11 Sep
+        2023 11:12:58 +0000 (GMT)
+Received: from epcas5p4.samsung.com ( [182.195.41.42]) by
+        epsmges5p3new.samsung.com (Symantec Messaging Gateway) with SMTP id
+        A5.5E.09635.A36FEF46; Mon, 11 Sep 2023 20:12:58 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+        epcas5p1.samsung.com (KnoxPortal) with ESMTPA id
+        20230911102615epcas5p15b9cfa2c6817ea714cc133bf4ef010c1~D0URCYF2b2326023260epcas5p1K;
+        Mon, 11 Sep 2023 10:26:15 +0000 (GMT)
+Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
+        epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+        20230911102615epsmtrp1ac75e977eb94c081885a477796d7e0d6~D0URBTKhF2477824778epsmtrp1S;
+        Mon, 11 Sep 2023 10:26:15 +0000 (GMT)
+X-AuditID: b6c32a4b-563fd700000025a3-77-64fef63a36bd
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+        epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+        19.BB.08649.74BEEF46; Mon, 11 Sep 2023 19:26:15 +0900 (KST)
+Received: from green245 (unknown [107.99.41.245]) by epsmtip2.samsung.com
+        (KnoxPortal) with ESMTPA id
+        20230911102612epsmtip23a32d0526f1beeef4865e18f2fd80bbf~D0UOL6Nzl0239702397epsmtip2Z;
+        Mon, 11 Sep 2023 10:26:12 +0000 (GMT)
+Date:   Mon, 11 Sep 2023 15:50:10 +0530
+From:   Nitesh Shetty <nj.shetty@samsung.com>
+To:     Hannes Reinecke <hare@suse.de>
+Cc:     Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>,
+        Alasdair Kergon <agk@redhat.com>,
+        Mike Snitzer <snitzer@kernel.org>, dm-devel@redhat.com,
+        Keith Busch <kbusch@kernel.org>,
+        Christoph Hellwig <hch@lst.de>,
+        Sagi Grimberg <sagi@grimberg.me>,
+        Chaitanya Kulkarni <kch@nvidia.com>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Christian Brauner <brauner@kernel.org>,
+        martin.petersen@oracle.com, mcgrof@kernel.org,
+        gost.dev@samsung.com, Vincent Fu <vincent.fu@samsung.com>,
+        Anuj Gupta <anuj20.g@samsung.com>, linux-block@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH v15 04/12] block: add emulation for copy
+Message-ID: <20230911102010.nr5tvrcc754vo73r@green245>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="sbcpezxsgpyrgvfn"
-Content-Disposition: inline
-In-Reply-To: <9a2b1ad8-4359-4f12-b4f9-c1de477bc440@collabora.com>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <ec35111d-ba31-497b-ab01-b198d3feb814@suse.de>
+User-Agent: NeoMutt/20171215
+X-Brightmail-Tracker: H4sIAAAAAAAAA02Te0xTdxTH/d0+wXW7Kw9/4IsUTQQCtrOUC8Jgg7lrZAmZwyjGQEdvgFDa
+        pg+dM0bkoaPKYzw2qALiOhAQ2IBVBAqsyEAc4OSlbAWEwhCkPAyMhQCjtCz+9/mdc77n/M45
+        OXQSU0lzpMeI5IRUxBeyqNZkTauLq7vP8rqAPfaAgVV1/kbCEjLWSFi5Pp2KzbQuAszQch1g
+        WuMtCvai5SGCNd7NRLDS8jYEy9QNAGyiX4Vg2iE3rOiamow1ah+Tsd7621SssHiChpW0ryPY
+        84wJgFXOzJGxjqHd2PiNbwDWs9ZOCbDHe4Z/JuO9XQq8uiyFiteor+ANL+Kp+A9pWRQ8NdFI
+        xRcmhsj4XFM/FU+rLQN4zZNL+JvqfXi1YRYJYYTF+kYTfAEhdSJEkWJBjCjKj3XiZHhguCeP
+        zXHneGNeLCcRP47wYwUFh7gfixFuNs1yOs8XKjZNIXyZjHX4Q1+pWCEnnKLFMrkfi5AIhBKu
+        xEPGj5MpRFEeIkLuw2GzP/DcDIyIjU4x6igSvcNXN26uIPEg304JrOgQ5cLK1A6aEljTmWgD
+        gOuJBprJwUQXAdQ++8TsWAbwnvo+sq3ofWCwKLQA3s7rpJgfkwBmDWeTTFFk9CD89VUTVQno
+        dCrqBp9s0E1mW5QFF67rtsQktIwC9YnDW+VsUF84O/k71cQMlAcrCo00M78PH+cZyCa2Qo/C
+        7tHSrfx26B6Y++MSyZQIooVWsCiti2z+XhD8fkFDM7MNnG6vtbAjfJV+zcIXYGn2PapZnASg
+        alAFzA5/mNyZvlWBhEbD4poaS897YU5nJWK2vwtTVw0WOwPWFWyzM7xfdYdqZgc48M9VC+Ow
+        wfCcYh5qGwJH1OcywH7VW82p3ipnZh+YMp9AUW0Oj4TuhiXrdDO6wKr6w3cApQw4EBJZXBQh
+        85QcEREX/t94pDiuGmwdheuJOjA2Ou+hAwgd6ACkk1i2DLluTcBkCPgXvyak4nCpQkjIdMBz
+        c1nfkhztIsWbVyWSh3O43mwuj8fjeh/hcVi7GDPJ+QImGsWXE7EEISGk2zqEbuUYjwwWT+b+
+        cSC3Y7zEmFshc/S4/Lr19Ud1tO8Cgn3K9Tncff6hvjlBAQbntG7bi18++iJ/5/HmkTfkwLaG
+        7hj+ed2ZlQI39vC/1jdFYR0vL2Vx9ElTeZr3eh4F9IVNpe44cDauKHCwaWopLGQloKT+jN54
+        2mu699jTq6fO/XJllz3tlvOfjcxngcLPDk2HRkTYz/Ysbpz+u+qpIF7x+R6bow8DU3dq/IaW
+        Cro0cyFeWrayghh6+Wnt1PFTA/F9exPU6/VdPzFPEmCi+S9S16hm5Oz8x+9sHAqSNve1JK72
+        Z4+P4ZJM5V3gH5wtXVVoXcZ6gpJdQpOW1Y2zB3VY2v7LeuOOxalVFlkWzee4kqQy/n9j1eHb
+        nQQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA02RWUwTURSGc2emMwNaHQrqRQjGJiYIYWk0eFXcTRzUuMQ1YtRqR7a2YFtc
+        MEFQAUUttRhUaqkiQoAoWogLCEIRKy7FpAGVCIJ2RNMA7jtFCxp9+3O+7z/n4dC46AExno5T
+        ajiVUioXk57E1UbxhJBFTpcs3Jgehiru3cHRft0Ajso7ckjkbHwPkKM+C6DaPoMAPa2/gaGb
+        hXoMlZY3YUhvaQOIb83HUG17MDqXWUSgm7XNBLJXnyGRqZinUInVhaEnOh6gS85+At1t90Mv
+        jxwCqGXAKpg7lm3pvEKw9ofJrLnsMMlWFu1ja56mkex5ba6APXagj2Tf8e0E21/XSrLaqjLA
+        Vt7fy34wB7BmRy+2QrjBM1LGyeN2cqqw2Vs8Y7tKq6iknHG7c8oq8DTwRpQNPGjITIX2aw4q
+        G3jSIqYGwOqOEmoY+MLigdv4cPaGpa6eP5IDwIK8XOAGBDMJNrypI7MBTZNMMLw/SLvHPowY
+        vsuyDPk4c0kAB3UNAjfwZiJh76sHpDsLmQh40dT3Z2kTBi+nv8aHgRdsPu0g3Bn/LRVUduPu
+        AzjjB0tcQwc8mJnQ1lU6pI9h/OGpC59wHfDK/6+d/187/1/7LMDLgC+XpFbEKLZJkiRKbleo
+        WqpQJytjQrclKsxg6OFBgddBp8kVagEYDSwA0rjYR6ixDMhEQpl0TwqnStysSpZzagvwownx
+        OKHklEEmYmKkGi6B45I41V+K0R7j07DZ4mXPLcXA6JwyNZvpXzJrYnzeW76tudtnZE/ll31d
+        ZzdvzZqZ0bIycAfenUC9aPpco92wsbDx1iyZ0tU32phLRa2ztr36HhE5bY7Nf7XBltoSd9yx
+        MGKj/E5diHLPAfOVvJEd33jKNFlf85g3hhNjlmodH+dNX5wh6rY160TRxAg9pLzTVzun26ob
+        okZ5b59XfzzXEJ6RGr0s6PkZZ0ja3rknq/iU2MHEBWGJ2hMhXvMlHWvsnRojxUuL/DJPhOuj
+        U7Fycm1/j6+C+pnydZc99Pwmg391b7JTvmq9ZvnBwosBwZ1g4dcf8QFNj6gKynoatQpMFsMz
+        s/WTfkbDUTGhjpVKgnCVWvoLo9a+hF8DAAA=
+X-CMS-MailID: 20230911102615epcas5p15b9cfa2c6817ea714cc133bf4ef010c1
+X-Msg-Generator: CA
+Content-Type: multipart/mixed;
+        boundary="----ooWIhDQPe4iZ41CGDouWrWpJ8fGFR_EcoxWGaJuqOMoSQ.xs=_4ba1b_"
+X-Sendblock-Type: REQ_APPROVE
+CMS-TYPE: 105P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20230906164321epcas5p4dad5b1c64fcf85e2c4f9fc7ddb855ea7
+References: <20230906163844.18754-1-nj.shetty@samsung.com>
+        <CGME20230906164321epcas5p4dad5b1c64fcf85e2c4f9fc7ddb855ea7@epcas5p4.samsung.com>
+        <20230906163844.18754-5-nj.shetty@samsung.com>
+        <e6fc7e65-ad31-4ca2-8b1b-4d97ba32926e@suse.de>
+        <20230911070937.GB28177@green245>
+        <ec35111d-ba31-497b-ab01-b198d3feb814@suse.de>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
+        SPF_HELO_PASS,SPF_PASS autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
---sbcpezxsgpyrgvfn
-Content-Type: text/plain; charset=us-ascii
+------ooWIhDQPe4iZ41CGDouWrWpJ8fGFR_EcoxWGaJuqOMoSQ.xs=_4ba1b_
+Content-Type: text/plain; charset="utf-8"; format="flowed"
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Hi
+On 11/09/23 09:39AM, Hannes Reinecke wrote:
+>On 9/11/23 09:09, Nitesh Shetty wrote:
+>>On Fri, Sep 08, 2023 at 08:06:38AM +0200, Hannes Reinecke wrote:
+>>>On 9/6/23 18:38, Nitesh Shetty wrote:
+>>>>For the devices which does not support copy, copy emulation is added.
+>>>>It is required for in-kernel users like fabrics, where file descriptor is
+>>>>not available and hence they can't use copy_file_range.
+>>>>Copy-emulation is implemented by reading from source into memory and
+>>>>writing to the corresponding destination.
+>>>>Also emulation can be used, if copy offload fails or partially completes.
+>>>>At present in kernel user of emulation is NVMe fabrics.
+>>>>
+>>>Leave out the last sentence; I really would like to see it enabled for SCSI,
+>>>too (we do have copy offload commands for SCSI ...).
+>>>
+>>Sure, will do that
+>>
+>>>And it raises all the questions which have bogged us down right from the
+>>>start: where is the point in calling copy offload if copy offload is not
+>>>implemented or slower than copying it by hand?
+>>>And how can the caller differentiate whether copy offload bring a benefit to
+>>>him?
+>>>
+>>>IOW: wouldn't it be better to return -EOPNOTSUPP if copy offload is not
+>>>available?
+>>
+>>Present approach treats copy as a background operation and the idea is to
+>>maximize the chances of achieving copy by falling back to emulation.
+>>Having said that, it should be possible to return -EOPNOTSUPP,
+>>in case of offload IO failure or device not supporting offload.
+>>We will update this in next version.
+>>
+>That is also what I meant with my comments to patch 09/12: I don't see 
+>it as a benefit to _always_ fall back to a generic copy-offload 
+>emulation. After all, that hardly brings any benefit.
 
-(Removing most of the context that got scrambled)
+Agreed, we will correct this by returning error to user in case copy offload
+fails, instead of falling back to block layer emulation.
 
-On Thu, Sep 07, 2023 at 01:40:02PM +0200, Daniel Stone wrote:
-> Yeah, this is what our experience with Mesa (in particular) has taught us.
->=20
-> Having 100% of the tests pass 100% of the time on 100% of the platforms i=
-s a
-> great goal that everyone should aim for. But it will also never happen.
->=20
-> Firstly, we're just not there yet today. Every single GPU-side DRM driver
-> has userspace-triggerable faults which cause occasional errors in GL/Vulk=
-an
-> tests. Every single one. We deal with these in Mesa by retrying; if we
-> didn't retry, across the breadth of hardware we test, I'd expect 99% of
-> should-succeed merges to fail because of these intermittent bugs in the D=
-RM
-> drivers.
+We do need block layer emulation for fabrics, where we call emulation
+if target doesn't support offload. In fabrics scenarios sending
+offload command from host and achieve copy using block layer
+emulation on target is better than sending read+write from host.
 
-So the plan is only to ever test rendering devices? It should have been
-made clearer then.
+>Where I do see a benefit is to tie in the generic copy-offload 
+>_infrastructure_ to existing mechanisms (like dm-kcopyd).
+>But if there is no copy-offload infrastructure available then we 
+>really should return -EOPNOTSUPP as it really is not supported.
+>
+Agreed, we will add this in next phase, once present series gets merged.
 
-> We don't have the same figure for KMS - because we don't test it - but
-> I'd be willing to bet no driver is 100% if you run tests often enough.
+>In the end, copy offload is not a command which 'always works'.
+>It's a command which _might_ deliver benefits (ie better performance) 
+>if dedicated implementations are available and certain parameters are 
+>met. If not then copy offload is not the best choice, and applications 
+>will need to be made aware of that.
 
-And I would still consider that a bug that we ought to fix, and
-certainly not something we should sweep under the rug. If half the tests
-are not running on a driver, then fine, they aren't. I'm not really
-against having failing tests, I'm against not flagging unreliable tests
-on a given hardware as failing tests.
+Agreed. We will leave the choice to user, to use either block layer offload
+or emulation.
 
-> Secondly, we will never be there. If we could pause for five years and sit
-> down making all the current usecases for all the current hardware on the
-> current kernel run perfectly, we'd probably get there. But we can't: ther=
-e's
-> new hardware, new userspace, and hundreds of new kernel trees.
 
-Not with that attitude :)
+Thank you,
+Nitesh Shetty
 
-I'm not sure it's actually an argument, really. 10 years ago, we would
-never have been at "every GPU on the market has an open-source driver"
-here. 5 years ago, we would never have been at this-series-here. That
-didn't stop anyone making progress, everyone involved in that thread
-included.
+------ooWIhDQPe4iZ41CGDouWrWpJ8fGFR_EcoxWGaJuqOMoSQ.xs=_4ba1b_
+Content-Type: text/plain; charset="utf-8"
 
-> Even without the first two, what happens when the Arm SMMU maintainers
-> (choosing a random target to pick on, sorry Robin) introduce subtle
-> breakage which makes a lot of tests fail some of the time? Do we
-> refuse to backmerge Linus into DRM until it's fixed, or do we disable
-> all testing on Arm until it's fixed? When we've done that, what
-> happens when we re-enable testing, and discover that a bunch of tests
-> get broken because we haven't been testing?
 
-I guess that's another thing that needs to be made clearer then. Do you
-want to test Mesa, or the kernel?
-
-For Mesa, I'd very much expect to rely on a stable kernel, and for the
-kernel on a stable Mesa.
-
-And if we're testing the kernel, then let's turn it the other way
-around. How are we even supposed to detect those failures in the first
-place if tests are flagged as unreliable?
-
-No matter what we do here, what you describe will always happen. Like,
-if we do flag those tests as unreliable, what exactly prevents another
-issue to come on top undetected, and what will happen when we re-enable
-testing?
-
-On top of that, you kind of hinted at that yourself, but what set of
-tests will pass is a property linked to a single commit. Having that
-list within the kernel already alters that: you'll need to merge a new
-branch, add a bunch of fixes and then change the test list state. You
-won't have the same tree you originally tested (and defined the test
-state list for).
-
-It might or might not be an issue for Linus' release, but I can
-definitely see the trouble already for stable releases where fixes will
-be backported, but the test state list certainly won't be updated.
-
-> Thirdly, hardware is capricious. 'This board doesn't make it to u-boot' i=
-s a
-> clear infrastructure error, but if you test at sufficient scale, cold sol=
-der
-> or failing caps surface way more often than you might think. And you can't
-> really pick those out by any other means than running at scale, dealing w=
-ith
-> non-binary results, and looking at the trends over time. (Again this is
-> something we do in Mesa - we graph test failures per DUT, look for outlie=
-rs,
-> and pull DUTs out of the rotation when they're clearly defective. But that
-> only works if you actually run enough tests on them in the first place to
-> discover trends - if you stop at the first failed test, it's impossible to
-> tell the difference between 'infuriatingly infrequent kernel/test bug?' a=
-nd
-> 'cracked main board maybe?'.)
->=20
-> What we do know is that we _can_ classify tests four ways in expectations.
-> Always-passing tests should always pass. Always-failing tests should alwa=
-ys
-> fail (and update the expectations if you make them pass). Flaking tests w=
-ork
-> often enough that they'll always pass if you run them a couple/few times,
-> but fail often enough that you can't rely on them. Then you just skip tes=
-ts
-> which exhibit catastrophic failure i.e. local DoS which affects the whole
-> test suite.
->=20
-> By keeping those sets of expectations, we've been able to keep Mesa pretty
-> clear of regressions, whilst having a very clear set of things that should
-> be fixed to point to. It would be great if those set of things were zero,
-> but it just isn't. Having that is far better than the two alternatives:
-> either not testing at all (obviously bad), or having the test always be r=
-ed
-> so it's always ignored (might as well just not test).
-
-Isn't that what happens with flaky tests anyway? Even more so since we
-have 0 context when updating that list.
-
-I've asked a couple of times, I'll ask again. In that other series, on
-the MT8173, kms_hdmi_inject@inject-4k is setup as flaky (which is a KMS
-test btw).
-
-I'm a maintainer for that part of the kernel, I'd like to look into it,
-because it's seriously something that shouldn't fail, ever, the hardware
-isn't involved.
-
-How can I figure out now (or worse, let's say in a year) how to
-reproduce it? What kernel version was affected? With what board? After
-how many occurences?
-
-Basically, how can I see that the bug is indeed there (or got fixed
-since), and how to start fixing it?
-
-And then repeat for any other test listed in there.
-
-I got no other reply before because I very well know the answer: nobody
-knows. And that's a serious issue to me, because that effectively means
-that the flaky test list will only ever increase (since we can't even
-check that it's fixed, and the CI infrastructure won't check that it got
-fixed either), and we won't be able to address any of the bugs listed
-there.
-
-Maxime
-
---sbcpezxsgpyrgvfn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZP7fFQAKCRDj7w1vZxhR
-xfmbAPsGFXkWn8teA+2byA7oDzD3ZNjvw+OEQL7K5iF0J77leQEA+UdATLwr99dy
-m3NfwxhPXgiA66FHzZlOxiB1N+f8WwU=
-=TOo0
------END PGP SIGNATURE-----
-
---sbcpezxsgpyrgvfn--
+------ooWIhDQPe4iZ41CGDouWrWpJ8fGFR_EcoxWGaJuqOMoSQ.xs=_4ba1b_--
