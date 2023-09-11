@@ -2,60 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3C74D79B340
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 02:00:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6E23479B100
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 01:50:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1343917AbjIKVMx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 17:12:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43694 "EHLO
+        id S1343658AbjIKVMN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 17:12:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37332 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236643AbjIKLI7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 07:08:59 -0400
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com [IPv6:2a00:1450:4864:20::22f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 67280CC3
-        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 04:08:54 -0700 (PDT)
-Received: by mail-lj1-x22f.google.com with SMTP id 38308e7fff4ca-2bf66a32f25so49424871fa.2
-        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 04:08:54 -0700 (PDT)
+        with ESMTP id S236658AbjIKLJ6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 07:09:58 -0400
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com [IPv6:2a00:1450:4864:20::235])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7EAF2CEB
+        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 04:09:51 -0700 (PDT)
+Received: by mail-lj1-x235.google.com with SMTP id 38308e7fff4ca-2b962c226ceso71483291fa.3
+        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 04:09:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1694430532; x=1695035332; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1694430590; x=1695035390; darn=vger.kernel.org;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=2r1pG42saIT1hQx+TELlhxvqJ0mmluvD/XCTWLDnio4=;
-        b=wiqYEoqFcRjvUJ+brPwmPIQsX601vW9w8Tsnu1Wq2ODfoOBinAdHwM3udjpT3NfpEK
-         zLbJBfRuKP+MLBUMAZiCe99wJxw+X2fQ+VR5yT1EBUSGY8AabfTWSoysZYMpfXQyc9Du
-         JrVYOLgEK9BfgDRt7NmU0QIVpWCeIAPrR7CgOhNasQf94iOBsDOvQNXcXZeoo8hdosBD
-         GeXkBMRu2nGTISH60Aytf/E/4KtaK8E3go5IWxtzr4bUnt5hao6xA8gkHo0WPp3c5F1H
-         Lm+XJ1OnEGwCw4FIdj0HoZtu9/RtexxM4UGAmSMmV730x5eC3PaZXJVp5MklhADw4O3o
-         r/Qw==
+        bh=ItV/PafZYbRtZG+3EH6sRu97i9Pet4QO+NBJ8/y2iuI=;
+        b=tg4h2AL9gT7/qUV0jFTrvkPJl9a/skFZyfbwb9lpcls46kdOpKy/0zULUF05nAJKrw
+         ITd7nMPZiaS5PsZzg1uTs9LpnOIGc5IQoXbM6B0QK8XpMLmTWz7Uvoa0s4ZTgz5Jq9t4
+         v0U5o8trLtrjzW4IH2vQo4mpKEbOiin4b62jWutcLNlCqZmZsOvN5+FxgDlk21bHCJDq
+         AGy8mFU5AJj5nVJ+LxeMb8183iNYaxF1hzP/jM4wDcZfI50R1cg8CQ5wa0RSetIfcJDN
+         Epx6SgrPMDqtOePCk98hrz6ZZ1pRWPxrXpWGXqxYXtz71fRYbYppSVB44eXGFYlNXoj4
+         UTNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694430532; x=1695035332;
+        d=1e100.net; s=20230601; t=1694430590; x=1695035390;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=2r1pG42saIT1hQx+TELlhxvqJ0mmluvD/XCTWLDnio4=;
-        b=sTziipNP7207xZ3mMyp1PNXedUmgSeMqKL/u0pF9PBApQNmt19vlgIMjSJmt4wMa9n
-         onqtpmVapakCN3RhV4F8sOl+LC3ZVD+/AgSc8MzHj/rLofvTj1SCDOKSSKNtHxq0iYBv
-         5c+VxYigGDzHOuCLLQ+Z5og8NXVvErgnX8cHeEaifNpSKtm9L2PLdpNHzfRQw9b9kMsW
-         WH1v37cGpBeajqJbVaSs8z3EfBzEgY0R/RVRtn/00YPV9Yg4/hJbQkIGTGFr/XHa2zQD
-         +/o19aes6845k8fx+eDUBxK6lAUCqVdrthv+kFGr3TDEOOWa3pYJmAnJRJIZk6pGKgks
-         LQWA==
-X-Gm-Message-State: AOJu0YxGUwGaBg3lbPrmW3b2VAfqu1YSFFGYdAPfXpC8qllppvFZyen/
-        5BoU6dEDqjKWrdK6Vo+G2iZXdg==
-X-Google-Smtp-Source: AGHT+IFhJr6aCH0nOA8CkPBUhMy540nMaAY+Mvm7js3Wpv0+d0W8u8lZbEJt3lbAgLcQPiDqKMNL3g==
-X-Received: by 2002:a05:651c:1994:b0:2bf:789e:b5dd with SMTP id bx20-20020a05651c199400b002bf789eb5ddmr5800990ljb.53.1694430532675;
-        Mon, 11 Sep 2023 04:08:52 -0700 (PDT)
+        bh=ItV/PafZYbRtZG+3EH6sRu97i9Pet4QO+NBJ8/y2iuI=;
+        b=AlUekgZWm6au7hMK2qqqxHtCW3Px6ewPtgUM2vOjEZUHyfvCOc0rqqr/Yu4U5TN/8X
+         /f1iVTL4l/UpmRcYtY1RQbW8velMkZWNMHQaH6ELyWaA1ffbBODRV1BS/DGfSdfscnkf
+         WYsRlmJrmsGVYy/PwKWifO2jDzukpHT1dmU9uRaoRLotnXZpqRKlUCuAIBgocvt8Dz7L
+         6WueLrTGHTnl+juRHsSXXNkRFD3fPv5RSjxSeZOfr9oDR0NN8UVMFjNjXjsA66x0BW1j
+         0lgZRW+bteWhGyNbkqH/4L03KYrWXxkuWkypJo5eHsktTYPFiTlXPGebltOdYCkcRRu/
+         /y8g==
+X-Gm-Message-State: AOJu0YxK9wTQLrXHtYeNVQFmbH9Mx+aYvGdGWf92dqMcWL3PCULtLeS+
+        xExuHHKUPppm8aL1CQFqkzVVuQ==
+X-Google-Smtp-Source: AGHT+IEA9FyfM8rXa+3k+u+doQWaGigDrU1zuRRVi1v3E2XELPt5LPr2HsZJRl0XxMdT23XFarwUrQ==
+X-Received: by 2002:a2e:8543:0:b0:2bd:180d:67b7 with SMTP id u3-20020a2e8543000000b002bd180d67b7mr6601812ljj.40.1694430589764;
+        Mon, 11 Sep 2023 04:09:49 -0700 (PDT)
 Received: from [192.168.1.20] ([178.197.214.188])
-        by smtp.gmail.com with ESMTPSA id si28-20020a170906cedc00b009786c8249d6sm5244877ejb.175.2023.09.11.04.08.49
+        by smtp.gmail.com with ESMTPSA id lw7-20020a170906bcc700b009a168ab6ee2sm5129780ejb.164.2023.09.11.04.09.46
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 11 Sep 2023 04:08:52 -0700 (PDT)
-Message-ID: <75466db4-3d19-33f6-b2de-db714186a96b@linaro.org>
-Date:   Mon, 11 Sep 2023 13:08:48 +0200
+        Mon, 11 Sep 2023 04:09:48 -0700 (PDT)
+Message-ID: <0041a391-12ba-2e1b-0954-fbc0e00be631@linaro.org>
+Date:   Mon, 11 Sep 2023 13:09:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
-Subject: Re: [PATCH v5 07/17] soc: qcom: minidump: Add pending region
- registration
+Subject: Re: [PATCH v5 11/17] qcom_minidump: Register ramoops region with
+ minidump
 Content-Language: en-US
 To:     Mukesh Ojha <quic_mojha@quicinc.com>, corbet@lwn.net,
         agross@kernel.org, andersson@kernel.org, konrad.dybcio@linaro.org,
@@ -73,15 +73,15 @@ Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-mediatek@lists.infradead.org,
         linux-samsung-soc@vger.kernel.org, kernel@quicinc.com
 References: <1694290578-17733-1-git-send-email-quic_mojha@quicinc.com>
- <1694290578-17733-8-git-send-email-quic_mojha@quicinc.com>
+ <1694290578-17733-12-git-send-email-quic_mojha@quicinc.com>
 From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-In-Reply-To: <1694290578-17733-8-git-send-email-quic_mojha@quicinc.com>
+In-Reply-To: <1694290578-17733-12-git-send-email-quic_mojha@quicinc.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
@@ -89,24 +89,48 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 On 09/09/2023 22:16, Mukesh Ojha wrote:
->  static int qcom_apss_minidump_probe(struct platform_device *pdev)
->  {
->  	struct minidump_global_toc *mdgtoc;
-> @@ -571,7 +688,10 @@ static int qcom_apss_minidump_probe(struct platform_device *pdev)
->  		return ret;
->  	}
->  
-> +	mutex_lock(&md_plist.plock);
->  	platform_set_drvdata(pdev, md);
+> Register all the pstore frontend with minidump, so that they can
+> be dumped as default Linux minidump region to be collected on
+> SoC where minidump is enabled.
+> 
 
-Why this is locked?
+...
 
-> +	qcom_apss_register_pending_regions(md);
+> +
+> +	record.type = type;
+> +	record.id = 0;
+> +	max_dump_cnt = 0;
+> +	name = pstore_type_to_name(record.type);
+> +	do {
+> +		ret = pstore_region_defined(&record, &virt, &phys, &size, &max_dump_cnt);
+> +		if (ret < 0)
+> +			break;
+> +
+> +		mdr_list = devm_kzalloc(dev, sizeof(struct md_region_list), GFP_KERNEL);
 
-Why this one is locked? It seems ordering of your operations is not
-correct if you need to lock the providers probe().
+sizeof(*)
 
-> +	mutex_unlock(&md_plist.plock);
+Please fix it everywhere in your code.
+
+> +		if (!mdr_list)
+> +			return -ENOMEM;
+> +
+> +		md_region = &mdr_list->md_region;
+> +		scnprintf(md_region->name, sizeof(md_region->name) - 1, "K%s%llu", name, record.id);
+> +		md_region->virt_addr = virt;
+> +		md_region->phys_addr = phys;
+> +		md_region->size = size;
+> +		ret = qcom_minidump_region_register(md_region);
+> +		if (ret) {
+> +			pr_err("failed to register minidump region\n");
+> +			break;
+> +		}
+> +
+> +		list_add(&mdr_list->list, &ramoops_region_list);
+> +	} while (record.id < max_dump_cnt && ++record.id);
+> +
+> +	return ret;
+> +}
 
 
 Best regards,
