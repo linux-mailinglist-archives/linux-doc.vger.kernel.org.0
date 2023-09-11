@@ -2,242 +2,626 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3F8AE79AF6B
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 01:47:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BA7BF79B0DE
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 01:50:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241548AbjIKVLA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 17:11:00 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58376 "EHLO
+        id S1343499AbjIKVLf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 17:11:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33334 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238163AbjIKNo2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 09:44:28 -0400
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EBFA1CD7
-        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 06:44:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1694439863; x=1725975863;
-  h=date:from:to:cc:subject:message-id:references:
-   in-reply-to:mime-version;
-  bh=8WP2bwf3rQmZ3hGBIkoXiXblb3vnwxn8d7ivwF9XR2M=;
-  b=Yd3pCGxo+jqbgRBoxS0MTZMrEMkSv2NLinN3W5ENoRG2tF+ucoU6HAK0
-   KatKWBmgmkWaJZz+3JpXCwWthtfQ+HM2oM+RzAtjv7cGtrL8MFfkqLgHP
-   q636cwBmTyM8IoGsV3ynb2YoeSc4YmiWsbrNTbxntS771vWZexZO6pniM
-   HhaQom107LkZkurD/lZcE86+ckCa2ozww4ur2IWZ9X/lCFuS/gE+6SmPq
-   wZ5mGkSWbaoEgWpGo6c8t0KmnzLUyiIfWIqC4t5LyJA9vPo8g80ShkApg
-   lkE/R8qOMmi1elHLeyj0AedE6T5z+yy3+kB53jd0RbsxOZN9AZlKtMxXu
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10830"; a="380782099"
-X-IronPort-AV: E=Sophos;i="6.02,244,1688454000"; 
-   d="scan'208";a="380782099"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Sep 2023 06:44:23 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10830"; a="736775309"
-X-IronPort-AV: E=Sophos;i="6.02,244,1688454000"; 
-   d="scan'208";a="736775309"
-Received: from orsmsx602.amr.corp.intel.com ([10.22.229.15])
-  by orsmga007.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 11 Sep 2023 06:44:22 -0700
-Received: from orsmsx610.amr.corp.intel.com (10.22.229.23) by
- ORSMSX602.amr.corp.intel.com (10.22.229.15) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.32; Mon, 11 Sep 2023 06:44:22 -0700
-Received: from ORSEDG602.ED.cps.intel.com (10.7.248.7) by
- orsmsx610.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.32 via Frontend Transport; Mon, 11 Sep 2023 06:44:22 -0700
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com (104.47.73.176)
- by edgegateway.intel.com (134.134.137.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.32; Mon, 11 Sep 2023 06:44:22 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RPbVic4/DsPGxsrdZthQEaU0YufgzJhVTvOL3CtX8RXeB8q6XcRTAA6cVZBZe4p/+27IiTw1DzlS9sqoRFF9hJgVdaS2gYqvJjuLvm+Yfs1crDVV8Jg4JRWEjK541JaGE0HfgWB9sM4gtLzxjTAYua3vn4iayQzTM9w3iTEBBV5gRsFy71iOwiUnWJsyujZSeglH4kqdAQNFRM/aKKWcIJ6AvdQXXckTs6mJODyuIa6+n/oqXPqS1b1xqbHQa/MSQuNq0p+XToMiP7O00nxE7uOSIB0xdgKxczWY2TivrM8vWWZmhizcwPq72IbDfiXtiUPQM2O0rr1cuKRt3b+Fyw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=556B8uDWe17APHWaEAThTV4Rr5Z4PnOgcExqKW17Cdo=;
- b=lMKFOLHTKlckrYaPRm8tFAg1XyZZ+AbvdoOjMtr7Pp4Ve1wxaPnh+z0r24/Wo7IlfPqNumKdh0YCpsLGSSTmQhxxeig0s41NphcA/mXg63mqq4Dw966tFaKNb2nsMllJ8U7PNIIUiHDmSHP54LNVpMPUwjwNkZvJDqDhUWWzULFOpVm3zDOGXfGCJ7sC7HgwWy2/YernDZDLLcgSTzIR9OZMNDVP7I6z2gcSVewXNzGMOqBSfGW9e7K05n4yFfbXckLDfSLfCi8vxMag7ALNiZCMF8p9aw9bdfyztqLQecAWem1Lc3HJ7CQz/HmHnf/80DfyJhdNVZb2GCcJeLBDHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from SN6PR11MB3006.namprd11.prod.outlook.com (2603:10b6:805:d1::24)
- by BN9PR11MB5243.namprd11.prod.outlook.com (2603:10b6:408:134::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.34; Mon, 11 Sep
- 2023 13:44:20 +0000
-Received: from SN6PR11MB3006.namprd11.prod.outlook.com
- ([fe80::b2f6:ff19:be0b:362d]) by SN6PR11MB3006.namprd11.prod.outlook.com
- ([fe80::b2f6:ff19:be0b:362d%7]) with mapi id 15.20.6768.029; Mon, 11 Sep 2023
- 13:44:19 +0000
-Date:   Mon, 11 Sep 2023 21:44:09 +0800
-From:   Philip Li <philip.li@intel.com>
-To:     Daniel Borkmann <daniel@iogearbox.net>
-CC:     Eduard Zingerman <eddyz87@gmail.com>,
-        kernel test robot <lkp@intel.com>,
-        <oe-kbuild-all@lists.linux.dev>, <linux-doc@vger.kernel.org>
-Subject: Re: [bpf:master 6/15] htmldocs: Warning: Documentation/bpf/btf.rst
- references a file that doesn't exist: Documentation/bpf/llvm_reloc
-Message-ID: <ZP8ZqUjWHSowCYlJ@rli9-mobl>
-References: <6a92003b-e47f-01bc-57d2-d2fb30292ad0@iogearbox.net>
- <a62b47218f1852d09b243b8fb1741c2baca4d336.camel@gmail.com>
- <5009129a873cf20adacd679d5073c799f79672d2.camel@gmail.com>
- <5ce81342-c565-f7fb-1c93-ec4eac8944c9@iogearbox.net>
- <86cd932cd5a6ecf44b3d4dfd2b9446bd721d9e78.camel@gmail.com>
- <ZPHXqAUX6aLXp9Dy@rli9-mobl>
- <d4c9c399724d2465945d432ce658ff2d9baa296f.camel@gmail.com>
- <ZPHaBGXnnNI5AX3y@rli9-mobl>
- <43eb35e8-c00a-22e9-b4a4-dd54b1fbd63c@iogearbox.net>
- <ZPHftmH4tvcYObbc@rli9-mobl>
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <ZPHftmH4tvcYObbc@rli9-mobl>
-X-ClientProxiedBy: SG2PR04CA0168.apcprd04.prod.outlook.com (2603:1096:4::30)
- To SN6PR11MB3006.namprd11.prod.outlook.com (2603:10b6:805:d1::24)
+        with ESMTP id S238182AbjIKNpi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 09:45:38 -0400
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com [IPv6:2607:f8b0:4864:20::430])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 21EEBCD7;
+        Mon, 11 Sep 2023 06:45:33 -0700 (PDT)
+Received: by mail-pf1-x430.google.com with SMTP id d2e1a72fcca58-68faf930054so1485031b3a.0;
+        Mon, 11 Sep 2023 06:45:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1694439932; x=1695044732; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:subject:from:references:cc:to
+         :content-language:user-agent:mime-version:date:message-id:sender
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=xKJwEN0Dy86pNFLq9byT1XW/Xw47waFHpHmeiDZLDec=;
+        b=Zh0p+gBiJwd/xnu/hxGJ+LNbw3lybcX/ofKbQ6Udp/vzpTh2BrfSKs112cfqVtovqt
+         /oEJUPsbuIuEyLTEdjftCAXRePFnvZi5aBNIkckpR5Vy0iwqp6k2B3LjUJ6+jwy/cbeg
+         FMxJwpje5G9VS4qMfbOgswI38ylXR3jGXTm5AT0JnSw2oaAzVB0PqHfo9yPjRTHzAR/S
+         G7exmovAqKeHWdfWwnkv/vfsaN/D2Sx5luXhwEqkH0T+cePl0taBW9LbDw6qMOgq3IF1
+         bsO/2w5ESNGR4wiBPKGNW/2+V3bUnWontGCeqv9xPDmBvC4IbNPk7ys8N+UvfZiQTtRI
+         Ncgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1694439932; x=1695044732;
+        h=content-transfer-encoding:in-reply-to:subject:from:references:cc:to
+         :content-language:user-agent:mime-version:date:message-id:sender
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=xKJwEN0Dy86pNFLq9byT1XW/Xw47waFHpHmeiDZLDec=;
+        b=irSeLEmrT2JO81mpamf9duJtkBMgYPhVOFVfMjlAjAnGZ7ZF9cSMYDrgF1Z8L2IsXr
+         JoucWg7vY9kqaInhfje9cXLLKBfAYhScsjIkcF1ZfPYWqCtrGWHacYoMQ/SerkDwTUzY
+         x2bjb0DrU9+MW7RQ2HBvhnXEa3P8vVURPLEV09Fuk9VEQT8Tyaat0zZXAGXeNDeX8qoJ
+         LnBsCICEzVjcGjl6XH9dQ4aGxVzj345Mk4NjlmUnrfs1lVinEphpWtRB1cjBfIus5V9k
+         canrTn+d49QezYRw9bXjbUV7LrPsd4UD19HAik5HxuiqbbLi6wAR31jZ3xJ5PtxHuM7/
+         RflQ==
+X-Gm-Message-State: AOJu0YxG7sQ6qcp2/TmeBxzW2ljYiqXDdsirbClbhqYSATdvvoCeXzNi
+        FMEoFX4RjZ0h/RhrkROG8N8=
+X-Google-Smtp-Source: AGHT+IHPUmJFFBMzEXX/iaqAP/rP4wR95WVsaLY1NQ3O8AaXhg3AUOqurvk/ju49JPlt1ptnFpU50g==
+X-Received: by 2002:a05:6a00:1496:b0:68c:69c8:e0f0 with SMTP id v22-20020a056a00149600b0068c69c8e0f0mr11646291pfu.18.1694439932348;
+        Mon, 11 Sep 2023 06:45:32 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c? ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id cl10-20020a056a0032ca00b0068fd026b496sm1155551pfb.46.2023.09.11.06.45.31
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 11 Sep 2023 06:45:31 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <27bc5a74-531d-696e-f218-a755172af9e9@roeck-us.net>
+Date:   Mon, 11 Sep 2023 06:45:30 -0700
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR11MB3006:EE_|BN9PR11MB5243:EE_
-X-MS-Office365-Filtering-Correlation-Id: 06f53722-98af-4145-c141-08dbb2cd329c
-X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: EFY86zaUr4pTSF3wrPTMr7W8ELoE/10hV7eoVpZXi6tsPXGTki72JHUILTGbb6URMvTlHsc53wONERk2i0JgLUb6eW6HgxPvXD0Q4Ry4ICqtah+1nOA9BKcVLNn+onzHbYX2LyR+8ZpdQkBbrR+1TAz3OJp/MZq78ipJjwj8H3pH+gphDYoqUZTLUaS5u54zoEOhVTwroclFeiO4TkCBajLMyeQkXlZxQqRjU8ZhBldhFi/sSDWiQjBqKttRDbo2RbUtNEf/6iTKc3yO9Sse8mT9KanWwBRiQqnv8kNNZAHDOShB8kLOYkDQrZ0+ev/m9hMZgwA/1T69jJaAAjD6G40/kkggIVM75mEeXnIwnJxaJfnTjjqTusrDBiWNB+epjFnvX9ZfVcG+iIbzp89jVoqUKG2WQuWIoBqm5Y+Jlx/dXsmbC7vY6Dhku8tLllrBECo0jsgZedjJQgmrKhMC97vcFFCGCgrxkXRugWr3fIveW0cewSgII65YxKwHGNWJXKq4c9otlVZxTfLN6JdGeIXGMow9ANkDZmdKXx9iQxEl9/EU/i8IcYbRH6hapxn8Y3qEwKJFpY43GVIE18oCsg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR11MB3006.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(7916004)(39860400002)(346002)(366004)(376002)(396003)(136003)(451199024)(1800799009)(186009)(6506007)(53546011)(6486002)(6666004)(966005)(6512007)(9686003)(478600001)(83380400001)(26005)(54906003)(33716001)(44832011)(66476007)(66556008)(66946007)(6916009)(4326008)(316002)(2906002)(41300700001)(5660300002)(8676002)(8936002)(82960400001)(86362001)(38100700002)(66899024);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?L1kFy+Sd9ncWG7i98vhG01AkmZWfcSBJOga55Cb6dD68qm++/j3JJ24Ma5FP?=
- =?us-ascii?Q?gbwhDW2rToUvGppLoVZGhlGfMAqA387dnPJDZiwoNJjZnGQzQ/WmUkfXQ18e?=
- =?us-ascii?Q?gXw7ZKxJi11nFKn1lDQqknI/YUh5XI2sbU1Oin96T+4RcpYsEUsDt8BGFhmQ?=
- =?us-ascii?Q?Wlgx2WrMkqSYXOYhdFcJwVXHlTip1y6WHjtbEC15r5Azi/l3BGyzbwLd5ddm?=
- =?us-ascii?Q?IdoTFsP2TIyOGuJ/h7MVYdONunVvrpwByyx4ptvHLTR501ZujBmzYXLR89bS?=
- =?us-ascii?Q?RGgjBOjAId7cz7jlib0LK5SyxnXyoKy2m+gu84gAHc8jMYu+v3Ia6YlDepXR?=
- =?us-ascii?Q?y13msH4lZBk6Zujw4mp2ZMkjR1d5wT35QXLgaEB/BCYRnDI2uG4jJO4aZNQ8?=
- =?us-ascii?Q?LWmO1AvrwzClo6tT/UjyjYLQWJeEFLF5WOfzqxVxhkbqMxeIdjb+xY83FRIT?=
- =?us-ascii?Q?vKuF7srKK0NOqB9OxxNI+kLXRb9s20WfZVVCRFibXmDiIZ2HLzTC73K2a8PH?=
- =?us-ascii?Q?Qhr5gv5HooDZR4Gp15/vqKMP87OAXKVlhfHqh8d1syjFlP4DyoQNWZNna80c?=
- =?us-ascii?Q?dHjZKu/Z9+C9Ia4J+oiaNTg5ZtwpQm5raxoSoO1qhMcv6OdcHgnXICfi/KRC?=
- =?us-ascii?Q?VfTOG7bHrAl0lUfwU4qpHAeftUiEhmiNkpnjKj7/BV4nCg/gpDaP6kgl2xss?=
- =?us-ascii?Q?Tshn5mDtsjCJQWl1LKyig+d6Q4OWrysncj+eIPKOl34LWAmKS7kZAJt2GXxQ?=
- =?us-ascii?Q?TZBpxaHI+jGLkPFMcZ3mkWKbSGay9TwibtwF3GIElWuxCGeNl6mhyGwrjuJL?=
- =?us-ascii?Q?b0m2GqIMOw627BoOts1tarZORh00z6ZEnuRzYO+c4W205/5Kw4cL8Wv9qPAS?=
- =?us-ascii?Q?TlEgbYPIpVCm5H1bEYRZ5cehiw5wC8ScIuySrpOyE9nX7utLcwmFEjJYouxx?=
- =?us-ascii?Q?iiBBalwE+YR5rePV0c8BALaaN4DzH5tjgUH/ypJy3JvNmVnuz9Fr3ra48uLG?=
- =?us-ascii?Q?LUebAF6qbCDmDAayyAjkYZKWENpOrzknVXzxa7dwXs2kzbdbxdmTLqf4pwZG?=
- =?us-ascii?Q?a6vLqPSrNrycn8pgOBVvSfPkwFU/dqsl+0ZzOd/P6eM07dt6xMwjp+9H1rLZ?=
- =?us-ascii?Q?Q5t+dLFrZ3hBqIsPgbGnefvak1f/JezDHFibjZkX4nXFOfcv7Y6c37NuZgvK?=
- =?us-ascii?Q?uwjrXcAlLf1UECPAv2+NJIfXyofEspJqcfWxt4TBECcm+tEjqfkkIiB42Ylk?=
- =?us-ascii?Q?hDaoFKawiRzm8AhE/ZXvC7zsx9CDgZ9cAXA97ikEBgq8h6lWxSlZveWwimsl?=
- =?us-ascii?Q?HsvFxXGw5BEmHtILRHwGIhCMjlpadUuVQyQoRJq638QrXqf9xNTgaYyCrv/s?=
- =?us-ascii?Q?hYD7lkAYmROyrtrl/pw/TGSDEbk3k0zxSYwDkcy0b2Kkp4/Az+mnGr9ecd0x?=
- =?us-ascii?Q?ywPyVuCShgfTIIMUimLZDe2TveDW6S97dN+VNJvGejxFpbw4orXVWZ7E1fs1?=
- =?us-ascii?Q?8rSK1Z5B/5P3WqZ2Hi6/NX9Cpx9GOaBfogBuWIfhYH8U/becjoaFFlZ760YC?=
- =?us-ascii?Q?5tSLHqQLmfSSQjnuaSFVTZ2G6WDjtM8LiDa2+F/T?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06f53722-98af-4145-c141-08dbb2cd329c
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR11MB3006.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2023 13:44:19.6275
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yMREJqgZCBXQ4H3xXgasSGEmm4H3WS4yzNZnCwqjMlDgXX3DMJyOYVsZ2KrEsYejjzWlHHRzdybeSDdz7C3ajA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR11MB5243
-X-OriginatorOrg: intel.com
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Content-Language: en-US
+To:     Daniel Matyas <daniel.matyas@analog.com>
+Cc:     Jean Delvare <jdelvare@suse.com>, Rob Herring <robh+dt@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+References: <20230911083735.11795-1-daniel.matyas@analog.com>
+ <20230911083735.11795-2-daniel.matyas@analog.com>
+From:   Guenter Roeck <linux@roeck-us.net>
+Subject: Re: [PATCH 2/2] hwmon: max31827: Functional enhancement of the driver
+In-Reply-To: <20230911083735.11795-2-daniel.matyas@analog.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        NICE_REPLY_A,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Sep 01, 2023 at 08:57:26PM +0800, Philip Li wrote:
-> On Fri, Sep 01, 2023 at 02:49:32PM +0200, Daniel Borkmann wrote:
-> > On 9/1/23 2:33 PM, Philip Li wrote:
-> > > On Fri, Sep 01, 2023 at 03:27:19PM +0300, Eduard Zingerman wrote:
-> > > > On Fri, 2023-09-01 at 20:23 +0800, Philip Li wrote:
-> > > > > On Fri, Sep 01, 2023 at 02:48:26PM +0300, Eduard Zingerman wrote:
-> > > > > > On Fri, 2023-09-01 at 13:22 +0200, Daniel Borkmann wrote:
-> > > > > > > On 9/1/23 1:18 PM, Eduard Zingerman wrote:
-> > > > > > > > On Fri, 2023-09-01 at 12:26 +0300, Eduard Zingerman wrote:
-> > > > > > > > > On Fri, 2023-09-01 at 08:29 +0200, Daniel Borkmann wrote:
-> > > > > > > > > > Hi Eduard,
-> > > > > > > > > > 
-> > > > > > > > > > On 9/1/23 2:05 AM, kernel test robot wrote:
-> > > > > > > > > > > tree:   https://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf.git master
-> > > > > > > > > > > head:   be8e754cbfac698d6304bb8382c8d18ac74424d3
-> > > > > > > > > > > commit: be4033d36070e44fba766a21ef2d0c24fa04c377 [6/15] docs/bpf: Add description for CO-RE relocations
-> > > > > > > > > > > reproduce: (https://download.01.org/0day-ci/archive/20230901/202309010804.G3MpXo59-lkp@intel.com/reproduce)
-> > > > > > > > > > > 
-> > > > > > > > > > > If you fix the issue in a separate patch/commit (i.e. not just a new version of
-> > > > > > > > > > > the same patch/commit), kindly add following tags
-> > > > > > > > > > > > Reported-by: kernel test robot <lkp@intel.com>
-> > > > > > > > > > > > Closes: https://lore.kernel.org/oe-kbuild-all/202309010804.G3MpXo59-lkp@intel.com/
-> > > > > > > > > > > 
-> > > > > > > > > > > All warnings (new ones prefixed by >>):
-> > > > > > > > > > > 
-> > > > > > > > > > > > > Warning: Documentation/bpf/btf.rst references a file that doesn't exist: Documentation/bpf/llvm_reloc
-> > > > > > > > > > > > > Warning: Documentation/bpf/llvm_reloc.rst references a file that doesn't exist: Documentation/bpf/btf
-> > > > > > > > > > 
-> > > > > > > > > > Could you send a follow-up fix for bpf tree?
-> > > > > > > > > 
-> > > > > > > > > Hi Daniel,
-> > > > > > > > > 
-> > > > > > > > > Will send the fix shortly. Strangely, I did check this syntax locally
-> > > > > > > > > before sending the original patch, and had no warnings reported.
-> > > > > > > > 
-> > > > > > > > I followed reproducing instructions but can't trigger this warning,
-> > > > > > > > tried several sphinx versions:
-> > > > > > > > - 1.7.9
-> > > > > > > > - 2.4.4
-> > > > > > > > - 4.3.2
-> > > > > > > > 
-> > > > > > > > I'll remove 'Documentation/bpf/llvm_reloc' and 'Documentation/bpf/btf'
-> > > > > > > > labels from the documents (and these are link labels, not actual
-> > > > > > > > links), but it looks like I don't have a way to check the results in a
-> > > > > > > > way compatible with test robot.
-> > > > > > > 
-> > > > > > > Strange, perhaps LKP folks could chime in and provide some more guidance e.g.
-> > > > > > > wrt Sphinx version.
-> > > > > 
-> > > > > sorry for late info, this one is using 2.4.4 sphinx, the full make command is
-> > > > > like
-> > > > > 
-> > > > > 	make W=1 --keep-going HOSTCC=gcc-12 CC=gcc-12 -j32 ARCH=x86_64 SPHINXOPTS=-j1 htmldocs	
-> > > > 
-> > > > Hi Philip,
-> > > > 
-> > > > Thanks for info, I'll keep 2.4.4 locally to be in sync with test robot.
-> > > 
-> > > You are welcome. For the robot side, we actually read the version from
-> > > Documentation/sphinx/requirements.txt of the test commit.
-> > > 
-> > > For this series, it is 2.4.4. And we also support other versions like
-> > > 1.4.9, 1.7.9.
-> > 
-> > Side-note: @Philip, if it's not too much effort, would it be possible to add
-> > version info into the reproduce file as a # comment in future?
+On 9/11/23 01:37, Daniel Matyas wrote:
+> Modify some bits depending on the device tree.
 > 
-> Sure, we will implement this early next week.
 
-Just FYI: the latest report with version info can be found at
+The subject and the above sentence are meaningless. Please improve.
 
-https://download.01.org/0day-ci/archive/20230910/202309102306.O46hkAzJ-lkp@intel.com/reproduce
-
-reproduce:
-        git remote add hverkuil-media-tree git://linuxtv.org/hverkuil/media_tree.git
-        git fetch --no-tags hverkuil-media-tree hdmi-dbg
-        git checkout 1eb159538ab221d1ffb1002a0cf8585906e75ca0
-        make menuconfig
-        # enable CONFIG_COMPILE_TEST, CONFIG_WARN_MISSING_DOCUMENTS, CONFIG_WARN_ABI_ERRORS
-        # install Sphinx 2.4.4
-        make htmldocs
-
+> Added custom device attributes for resolution and timeout. The wait time
+> for a conversion in one-shot mode (enable = 0) depends on the
+> resolution.
 > 
-> > 
-> > https://download.01.org/0day-ci/archive/20230901/202309010804.G3MpXo59-lkp@intel.com/reproduce
-> > 
-> > Anyway, thanks everyone!
+> Used enums and static const arrays in order to remove nested switch
+> blocks.
+> 
+
+One logical change per patch, please. Do not mix no-trivial cleanups
+with functional changes.
+
+> Signed-off-by: Daniel Matyas <daniel.matyas@analog.com>
+> ---
+>   Documentation/hwmon/max31827.rst |  65 ++++--
+>   drivers/hwmon/max31827.c         | 326 ++++++++++++++++++++++++-------
+>   2 files changed, 306 insertions(+), 85 deletions(-)
+> 
+> diff --git a/Documentation/hwmon/max31827.rst b/Documentation/hwmon/max31827.rst
+> index b0971d05b8a4..ae884e9e6085 100644
+> --- a/Documentation/hwmon/max31827.rst
+> +++ b/Documentation/hwmon/max31827.rst
+> @@ -52,13 +52,21 @@ MAX31827 has low and over temperature alarms with an effective value and a
+>   hysteresis value: -40 and -30 degrees for under temperature alarm and +100 and
+>   +90 degrees for over temperature alarm.
+>   
+> -The alarm can be configured in comparator and interrupt mode. Currently only
+> -comparator mode is implemented. In Comparator mode, the OT/UT status bits have a
+> -value of 1 when the temperature rises above the TH value or falls below TL,
+> -which is also subject to the Fault Queue selection. OT status returns to 0 when
+> -the temperature drops below the TH_HYST value or when shutdown mode is entered.
+> -Similarly, UT status returns to 0 when the temperature rises above TL_HYST value
+> -or when shutdown mode is entered.
+> +The alarm can be configured in comparator and interrupt mode from the
+> +devicetree. In Comparator mode, the OT/UT status bits have a value of 1 when the
+> +temperature rises above the TH value or falls below TL, which is also subject to
+> +the Fault Queue selection. OT status returns to 0 when the temperature drops
+> +below the TH_HYST value or when shutdown mode is entered. Similarly, UT status
+> +returns to 0 when the temperature rises above TL_HYST value or when shutdown
+> +mode is entered.
+> +
+> +In interrupt mode exceeding TH also sets OT status to 1, which remains set until
+> +a read operation is performed on the configuration/status register (max or min
+> +attribute); at this point, it returns to 0. Once OT status is set to 1 from
+> +exceeding TH and reset, it is set to 1 again only when the temperature drops
+> +below TH_HYST. The output remains asserted until it is reset by a read. It is
+> +set again if the temperature rises above TH, and so on. The same logic applies
+> +to the operation of the UT status bit.
+>   
+>   Putting the MAX31827 into shutdown mode also resets the OT/UT status bits. Note
+>   that if the mode is changed while OT/UT status bits are set, an OT/UT status
+> @@ -68,13 +76,32 @@ clear the status bits before changing the operating mode.
+>   
+>   The conversions can be manual with the one-shot functionality and automatic with
+>   a set frequency. When powered on, the chip measures temperatures with 1 conv/s.
+> +The conversion rate can be modified with update_interval attribute of the chip.
+> +Conversion/second = 1/update_interval. Thus, the available options according to
+> +the data sheet are:
+> +	- 64000 (ms) = 1 conv/64 sec
+> +	- 32000 (ms) = 1 conv/32 sec
+> +	- 16000 (ms) = 1 conv/16 sec
+> +	- 4000 (ms) = 1 conv/4 sec
+> +	- 1000 (ms) = 1 conv/sec (default)
+> +	- 250 (ms) = 4 conv/sec
+> +	- 125 (ms) = 8 conv/sec
+> +
+>   Enabling the device when it is already enabled has the side effect of setting
+>   the conversion frequency to 1 conv/s. The conversion time varies depending on
+> -the resolution. The conversion time doubles with every bit of increased
+> -resolution. For 10 bit resolution 35ms are needed, while for 12 bit resolution
+> -(default) 140ms. When chip is in shutdown mode and a read operation is
+> -requested, one-shot is triggered, the device waits for 140 (conversion time) + 1
+> -(error) ms, and only after that is the temperature value register read.
+> +the resolution.
+> +
+> +The conversion time doubles with every bit of increased resolution. The
+> +available resolutions are:
+> +	- 8 bit -> 8.75 ms conversion time
+> +	- 9 bit -> 17.5 ms conversion time
+> +	- 10 bit -> 35 ms conversion time
+> +	- 12 bit (default) -> 140 ms conversion time
+> +
+> +When chip is in shutdown mode and a read operation is requested, one-shot is
+> +triggered, the device waits for <conversion time> ms, and only after that is
+> +the temperature value register read. Note that the conversion times are rounded
+> +up to the nearest possible integer.
+>   
+>   The LSB of the temperature values is 0.0625 degrees Celsius, but the values of
+>   the temperatures are displayed in milli-degrees. This means, that some data is
+> @@ -83,8 +110,18 @@ in the writing of alarm values too. For positive numbers the user-input value
+>   will always be rounded down to the nearest possible value, for negative numbers
+>   the user-input will always be rounded up to the nearest possible value.
+>   
+> +Bus timeout resets the I2C-compatible interface when SCL is low for more than
+> +30ms (nominal).
+> +
+> +Alarm polarity determines if the active state of the alarm is low or high. The
+> +behavior for both settings is dependent on the Fault Queue setting. The ALARM
+> +pin is an open-drain output and requires a pullup resistor to operate.
+> +
+> +The Fault Queue bits select how many consecutive temperature faults must occur
+> +before overtemperature or undertemperature faults are indicated in the
+> +corresponding status bits.
+> +
+>   Notes
+>   -----
+>   
+> -Currently fault queue, alarm polarity and resolution cannot be modified.
+> -PEC is not implemented either.
+> +PEC is not implemented.
+> diff --git a/drivers/hwmon/max31827.c b/drivers/hwmon/max31827.c
+> index 66f5fcf937ff..9f48dec99b7f 100644
+> --- a/drivers/hwmon/max31827.c
+> +++ b/drivers/hwmon/max31827.c
+> @@ -12,6 +12,18 @@
+>   #include <linux/i2c.h>
+>   #include <linux/mutex.h>
+>   #include <linux/regmap.h>
+> +#include <linux/hwmon-sysfs.h>
+> +
+> +/*
+> + * gcc turns __builtin_ffsll() into a call to __ffsdi2(), which is not provided
+> + * by every architecture. __ffs64() is available on all architectures, but the
+> + * result is not defined if no bits are set.
+> + */
+> +#define max31827__bf_shf(x)			 \
+> +	({					 \
+> +		typeof(x) x_ = (x);		 \
+> +		((x_) != 0) ? __ffs64(x_) : 0x0; \
+> +	})
+>   
+>   #define MAX31827_T_REG	0x0
+>   #define MAX31827_CONFIGURATION_REG	0x2
+> @@ -22,22 +34,120 @@
+>   
+>   #define MAX31827_CONFIGURATION_1SHOT_MASK	BIT(0)
+>   #define MAX31827_CONFIGURATION_CNV_RATE_MASK	GENMASK(3, 1)
+> +#define MAX31827_CONFIGURATION_TIMEOUT_MASK	BIT(5)
+> +#define MAX31827_CONFIGURATION_RESOLUTION_MASK	GENMASK(7, 6)
+> +#define MAX31827_CONFIGURATION_ALRM_POL_MASK	BIT(8)
+> +#define MAX31827_CONFIGURATION_COMP_INT_MASK	BIT(9)
+> +#define MAX31827_CONFIGURATION_FLT_Q_MASK	GENMASK(11, 10)
+>   #define MAX31827_CONFIGURATION_U_TEMP_STAT_MASK BIT(14)
+>   #define MAX31827_CONFIGURATION_O_TEMP_STAT_MASK BIT(15)
+>   
+> -#define MAX31827_12_BIT_CNV_TIME	141
+> -
+> -#define MAX31827_CNV_1_DIV_64_HZ	0x1
+> -#define MAX31827_CNV_1_DIV_32_HZ	0x2
+> -#define MAX31827_CNV_1_DIV_16_HZ	0x3
+> -#define MAX31827_CNV_1_DIV_4_HZ		0x4
+> -#define MAX31827_CNV_1_HZ	0x5
+> -#define MAX31827_CNV_4_HZ	0x6
+> -#define MAX31827_CNV_8_HZ	0x7
+> +#define MAX31827_8_BIT_CNV_TIME		9
+> +#define MAX31827_9_BIT_CNV_TIME		18
+> +#define MAX31827_10_BIT_CNV_TIME	35
+> +#define MAX31827_12_BIT_CNV_TIME	140
+>   
+>   #define MAX31827_16_BIT_TO_M_DGR(x)	(sign_extend32(x, 15) * 1000 / 16)
+>   #define MAX31827_M_DGR_TO_16_BIT(x)	(((x) << 4) / 1000)
+>   #define MAX31827_DEVICE_ENABLE(x)	((x) ? 0xA : 0x0)
+> +#define MAX31827_FLT_Q
+> +
+> +enum max31827_cnv {
+> +	MAX31827_CNV_1_DIV_64_HZ = 1,
+> +	MAX31827_CNV_1_DIV_32_HZ,
+> +	MAX31827_CNV_1_DIV_16_HZ,
+> +	MAX31827_CNV_1_DIV_4_HZ,
+> +	MAX31827_CNV_1_HZ,
+> +	MAX31827_CNV_4_HZ,
+> +	MAX31827_CNV_8_HZ,
+> +};
+> +
+> +static const u16 max31827_conversions[] = {
+> +	[MAX31827_CNV_1_DIV_64_HZ] = 64000,
+> +	[MAX31827_CNV_1_DIV_32_HZ] = 32000,
+> +	[MAX31827_CNV_1_DIV_16_HZ] = 16000,
+> +	[MAX31827_CNV_1_DIV_4_HZ] = 4000,
+> +	[MAX31827_CNV_1_HZ] = 1000,
+> +	[MAX31827_CNV_4_HZ] = 250,
+> +	[MAX31827_CNV_8_HZ] = 125,
+> +};
+> +
+> +enum max31827_resolution {
+> +	MAX31827_RES_8_BIT = 0,
+> +	MAX31827_RES_9_BIT,
+> +	MAX31827_RES_10_BIT,
+> +	MAX31827_RES_12_BIT,
+> +};
+> +
+> +static const u16 max31827_resolutions[] = {
+> +	[MAX31827_RES_8_BIT] = 8,
+> +	[MAX31827_RES_9_BIT] = 9,
+> +	[MAX31827_RES_10_BIT] = 10,
+> +	[MAX31827_RES_12_BIT] = 12,
+> +};
+> +
+> +enum cfg_index {
+> +	cfg_timeout_idx = 0,
+> +	cfg_res_idx,
+> +	cfg_num
+> +};
+> +
+> +static const unsigned int cfg_masks[cfg_num] = {
+> +	[cfg_timeout_idx] = MAX31827_CONFIGURATION_TIMEOUT_MASK,
+> +	[cfg_res_idx] = MAX31827_CONFIGURATION_RESOLUTION_MASK,
+> +};
+> +
+> +enum max31827_cnv {
+> +	MAX31827_CNV_1_DIV_64_HZ = 1,
+> +	MAX31827_CNV_1_DIV_32_HZ,
+> +	MAX31827_CNV_1_DIV_16_HZ,
+> +	MAX31827_CNV_1_DIV_4_HZ,
+> +	MAX31827_CNV_1_HZ,
+> +	MAX31827_CNV_4_HZ,
+> +	MAX31827_CNV_8_HZ,
+> +};
+> +
+> +static const u16 max31827_conversions[] = {
+> +	[MAX31827_CNV_1_DIV_64_HZ] = 64000,
+> +	[MAX31827_CNV_1_DIV_32_HZ] = 32000,
+> +	[MAX31827_CNV_1_DIV_16_HZ] = 16000,
+> +	[MAX31827_CNV_1_DIV_4_HZ] = 4000,
+> +	[MAX31827_CNV_1_HZ] = 1000,
+> +	[MAX31827_CNV_4_HZ] = 250,
+> +	[MAX31827_CNV_8_HZ] = 125,
+> +};
+> +
+> +enum max31827_resolution {
+> +	MAX31827_RES_8_BIT = 0,
+> +	MAX31827_RES_9_BIT,
+> +	MAX31827_RES_10_BIT,
+> +	MAX31827_RES_12_BIT,
+> +};
+> +
+> +static const u16 max31827_resolutions[] = {
+> +	[MAX31827_RES_8_BIT] = 8,
+> +	[MAX31827_RES_9_BIT] = 9,
+> +	[MAX31827_RES_10_BIT] = 10,
+> +	[MAX31827_RES_12_BIT] = 12,
+> +};
+> +
+> +static const u16 max31827_conv_times[] = {
+> +	[MAX31827_RES_8_BIT] = MAX31827_8_BIT_CNV_TIME,
+> +	[MAX31827_RES_9_BIT] = MAX31827_9_BIT_CNV_TIME,
+> +	[MAX31827_RES_10_BIT] = MAX31827_10_BIT_CNV_TIME,
+> +	[MAX31827_RES_12_BIT] = MAX31827_12_BIT_CNV_TIME,
+> +};
+> +
+> +enum cfg_index {
+> +	cfg_timeout_idx = 0,
+> +	cfg_res_idx,
+> +	cfg_num
+> +};
+> +
+> +static const unsigned int cfg_masks[cfg_num] = {
+> +	[cfg_timeout_idx] = MAX31827_CONFIGURATION_TIMEOUT_MASK,
+> +	[cfg_res_idx] = MAX31827_CONFIGURATION_RESOLUTION_MASK,
+> +};
+>   
+>   struct max31827_state {
+>   	/*
+> @@ -46,6 +156,7 @@ struct max31827_state {
+>   	struct mutex lock;
+>   	struct regmap *regmap;
+>   	bool enable;
+> +	unsigned int resolution;
+>   };
+>   
+>   static const struct regmap_config max31827_regmap = {
+> @@ -166,8 +277,7 @@ static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
+>   					mutex_unlock(&st->lock);
+>   					return ret;
+>   				}
+> -
+> -				msleep(MAX31827_12_BIT_CNV_TIME);
+> +				msleep(max31827_conv_times[st->resolution]);
+>   			}
+>   			ret = regmap_read(st->regmap, MAX31827_T_REG, &uval);
+>   
+> @@ -243,32 +353,7 @@ static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
+>   
+>   			uval = FIELD_GET(MAX31827_CONFIGURATION_CNV_RATE_MASK,
+>   					 uval);
+> -			switch (uval) {
+> -			case MAX31827_CNV_1_DIV_64_HZ:
+> -				*val = 64000;
+> -				break;
+> -			case MAX31827_CNV_1_DIV_32_HZ:
+> -				*val = 32000;
+> -				break;
+> -			case MAX31827_CNV_1_DIV_16_HZ:
+> -				*val = 16000;
+> -				break;
+> -			case MAX31827_CNV_1_DIV_4_HZ:
+> -				*val = 4000;
+> -				break;
+> -			case MAX31827_CNV_1_HZ:
+> -				*val = 1000;
+> -				break;
+> -			case MAX31827_CNV_4_HZ:
+> -				*val = 250;
+> -				break;
+> -			case MAX31827_CNV_8_HZ:
+> -				*val = 125;
+> -				break;
+> -			default:
+> -				*val = 0;
+> -				break;
+> -			}
+> +			*val = max31827_conversions[uval];
+>   		}
+>   		break;
+>   
+> @@ -284,6 +369,7 @@ static int max31827_write(struct device *dev, enum hwmon_sensor_types type,
+>   			  u32 attr, int channel, long val)
+>   {
+>   	struct max31827_state *st = dev_get_drvdata(dev);
+> +	int res = 1;
+>   	int ret;
+>   
+>   	switch (type) {
+> @@ -333,39 +419,27 @@ static int max31827_write(struct device *dev, enum hwmon_sensor_types type,
+>   			if (!st->enable)
+>   				return -EOPNOTSUPP;
+>   
+> -			switch (val) {
+> -			case 125:
+> -				val = MAX31827_CNV_8_HZ;
+> -				break;
+> -			case 250:
+> -				val = MAX31827_CNV_4_HZ;
+> -				break;
+> -			case 1000:
+> -				val = MAX31827_CNV_1_HZ;
+> -				break;
+> -			case 4000:
+> -				val = MAX31827_CNV_1_DIV_4_HZ;
+> -				break;
+> -			case 16000:
+> -				val = MAX31827_CNV_1_DIV_16_HZ;
+> -				break;
+> -			case 32000:
+> -				val = MAX31827_CNV_1_DIV_32_HZ;
+> -				break;
+> -			case 64000:
+> -				val = MAX31827_CNV_1_DIV_64_HZ;
+> -				break;
+> -			default:
+> +			/*
+> +			 * Convert the desired conversion rate into register
+> +			 * bits. res is already initialized with 1.
+> +			 *
+> +			 * This was inspired by lm73 driver.
+> +			 */
+> +			while (res < ARRAY_SIZE(max31827_conversions) &&
+> +			       val < max31827_conversions[res])
+> +				res++;
+> +
+> +			if (res == ARRAY_SIZE(max31827_conversions) ||
+> +			    val != max31827_conversions[res])
+>   				return -EOPNOTSUPP;
+> -			}
+>   
+> -			val = FIELD_PREP(MAX31827_CONFIGURATION_CNV_RATE_MASK,
+> -					 val);
+> +			res = FIELD_PREP(MAX31827_CONFIGURATION_CNV_RATE_MASK,
+> +					 res);
+>   
+>   			return regmap_update_bits(st->regmap,
+>   						  MAX31827_CONFIGURATION_REG,
+>   						  MAX31827_CONFIGURATION_CNV_RATE_MASK,
+> -						  val);
+> +						  res);
+>   		}
+>   		break;
+>   
+> @@ -376,14 +450,121 @@ static int max31827_write(struct device *dev, enum hwmon_sensor_types type,
+>   	return -EOPNOTSUPP;
+>   }
+>   
+> -static int max31827_init_client(struct max31827_state *st)
+> +static ssize_t cfg_show(struct device *dev, struct device_attribute *devattr,
+> +			char *buf)
+>   {
+> +	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
+> +	struct max31827_state *st = dev_get_drvdata(dev);
+> +	const unsigned int mask = cfg_masks[attr->index];
+> +	unsigned int val, res;
+> +	int ret;
+> +
+> +	ret = regmap_read(st->regmap, MAX31827_CONFIGURATION_REG, &val);
+> +	/*
+> +	 * FIELD_GET did not work because mask is not a compile time constant.
+> +	 * There is no bitfield check now.
+> +	 */
+> +	val = (val & mask) >> max31827__bf_shf(mask);
+> +
+> +	if (attr->index == cfg_res_idx)
+> +		res = max31827_resolutions[val];
+> +	else
+> +		res = !val;
+> +
+> +	return scnprintf(buf, PAGE_SIZE, "%u\n", res);
+> +}
+> +
+> +static ssize_t cfg_store(struct device *dev, struct device_attribute *devattr,
+> +			 const char *buf, size_t count)
+> +{
+> +	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
+> +	struct max31827_state *st = dev_get_drvdata(dev);
+> +	const unsigned int mask = cfg_masks[attr->index];
+> +	unsigned int res = 0;
+> +	unsigned int val;
+> +	int ret;
+> +
+> +	ret = kstrtouint(buf, 10, &val);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (attr->index == cfg_res_idx) {
+> +		/*
+> +		 * Convert the desired conversion rate into register
+> +		 * bits. res is already initialized with 1.
+> +		 *
+> +		 * This was inspired by lm73 driver.
+> +		 */
+> +		while (res < ARRAY_SIZE(max31827_resolutions) &&
+> +		       val > max31827_resolutions[res])
+> +			res++;
+> +
+> +		if (res == ARRAY_SIZE(max31827_resolutions) ||
+> +		    val != max31827_resolutions[res])
+> +			return -EOPNOTSUPP;
+> +
+> +		st->resolution = res;
+> +	} else {
+> +		res = !val;
+> +	}
+> +
+> +	/*
+> +	 * FIELD_PREP did not work because mask is not a compile time constant.
+> +	 * There is no bitfield check now.
+> +	 */
+> +	res = (res << max31827__bf_shf(mask)) & mask;
+> +	ret = regmap_update_bits(st->regmap, MAX31827_CONFIGURATION_REG,
+> +				 cfg_masks[attr->index], res);
+> +
+> +	return (ret) ? ret : count;
+> +}
+> +
+> +static SENSOR_DEVICE_ATTR_RW(cfg_resolution, cfg, cfg_res_idx);
+> +static SENSOR_DEVICE_ATTR_RW(cfg_timeout, cfg, cfg_timeout_idx);
+> +
+> +static struct attribute *max31827_attrs[] = {
+> +	&sensor_dev_attr_cfg_resolution.dev_attr.attr,
+> +	&sensor_dev_attr_cfg_timeout.dev_attr.attr,
+
+
+Those attributes are not acceptable. First of all, the cfg_ prefix is useless.
+The timeout is system related and should be a devicetree property.
+The resolution maps into the number of conversions per second,
+and therefore the standard update_interval property can be used.
+
+Guenter
+
+> +	NULL
+> +};
+> +ATTRIBUTE_GROUPS(max31827);
+> +
+> +static int max31827_init_client(struct max31827_state *st,
+> +				struct fwnode_handle *fwnode)
+> +{
+> +	bool comp_int, alrm_pol;
+> +	u32 flt_q, lsb_idx;
+> +	unsigned int res = 0;
+> +	int ret;
+> +
+>   	st->enable = true;
+> +	res |= MAX31827_DEVICE_ENABLE(1);
+> +
+> +	st->resolution = MAX31827_RES_12_BIT;
+> +	res |= MAX31827_CONFIGURATION_RESOLUTION_MASK;
+>   
+> -	return regmap_update_bits(st->regmap, MAX31827_CONFIGURATION_REG,
+> -				  MAX31827_CONFIGURATION_1SHOT_MASK |
+> -					  MAX31827_CONFIGURATION_CNV_RATE_MASK,
+> -				  MAX31827_DEVICE_ENABLE(1));
+> +	comp_int = fwnode_property_read_bool(fwnode, "adi,comp-int");
+> +	res |= FIELD_PREP(MAX31827_CONFIGURATION_COMP_INT_MASK, comp_int);
+> +
+> +	alrm_pol = fwnode_property_read_bool(fwnode, "adi,alrm-pol");
+> +	res |= FIELD_PREP(MAX31827_CONFIGURATION_ALRM_POL_MASK, alrm_pol);
+> +
+> +	ret = fwnode_property_read_u32(fwnode, "adi,flt-q", &flt_q);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/*
+> +	 * Convert the desired fault queue into register bits.
+> +	 */
+> +	lsb_idx = max31827__bf_shf(flt_q);
+> +	if (lsb_idx > 3 || flt_q != BIT(lsb_idx)) {
+> +		pr_err("max31827: Invalid data in fault queue\n");
+> +		return -EOPNOTSUPP;
+> +	}
+> +
+> +	res |= FIELD_PREP(MAX31827_CONFIGURATION_FLT_Q_MASK, lsb_idx);
+> +
+> +	return regmap_write(st->regmap, MAX31827_CONFIGURATION_REG, res);
+>   }
+>   
+>   static const struct hwmon_channel_info *max31827_info[] = {
+> @@ -411,6 +592,7 @@ static int max31827_probe(struct i2c_client *client)
+>   	struct device *dev = &client->dev;
+>   	struct device *hwmon_dev;
+>   	struct max31827_state *st;
+> +	struct fwnode_handle *fwnode;
+>   	int err;
+>   
+>   	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_WORD_DATA))
+> @@ -427,13 +609,15 @@ static int max31827_probe(struct i2c_client *client)
+>   		return dev_err_probe(dev, PTR_ERR(st->regmap),
+>   				     "Failed to allocate regmap.\n");
+>   
+> -	err = max31827_init_client(st);
+> +	fwnode = dev_fwnode(dev);
+> +
+> +	err = max31827_init_client(st, fwnode);
+>   	if (err)
+>   		return err;
+>   
+>   	hwmon_dev = devm_hwmon_device_register_with_info(dev, client->name, st,
+>   							 &max31827_chip_info,
+> -							 NULL);
+> +							 max31827_groups);
+>   
+>   	return PTR_ERR_OR_ZERO(hwmon_dev);
+>   }
+
