@@ -2,60 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3E8FA79C0A7
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 02:20:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C8BD379B894
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 02:08:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241606AbjIKVK1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 17:10:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45592 "EHLO
+        id S244956AbjIKVK6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 17:10:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33816 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236609AbjIKLD6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 07:03:58 -0400
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com [IPv6:2a00:1450:4864:20::636])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06F45CDD
-        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 04:03:51 -0700 (PDT)
-Received: by mail-ej1-x636.google.com with SMTP id a640c23a62f3a-986d8332f50so571215366b.0
-        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 04:03:50 -0700 (PDT)
+        with ESMTP id S236626AbjIKLHN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 07:07:13 -0400
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com [IPv6:2a00:1450:4864:20::22e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AC433CE5
+        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 04:07:07 -0700 (PDT)
+Received: by mail-lj1-x22e.google.com with SMTP id 38308e7fff4ca-2bf924f39f1so10565301fa.2
+        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 04:07:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1694430229; x=1695035029; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1694430426; x=1695035226; darn=vger.kernel.org;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=+ILX0tdLmqj9AVpuvBKgqDyqNcCHFP+tGWFAoPYPQ4w=;
-        b=RozUUQafs9a/6wYc+MEj3hh8Qlu9Qi0huT+x5jj8qiem8SojZs6YSnzGsIlufp6W4f
-         O+q2jQwFJMzLDcvvPfbm1yYwt3VnOZTcT6PI5WvntCMRR7L4MbYpIETWbzixWXEP/awv
-         ZygszUnTxWHLoqIwkilI4+g2BKnSPgq8Y7ayil/xIUQ8JyHOZuJLlhEQaPqkOJF7OS9x
-         tH61SPtsO3qIvOk1UCbGa1vNoWR88obWLHl8VvE8WbVoa5MLL1sR3DD+o/7Y7HN9Sj+z
-         36oQ3cBFacIDqpvURI+laKCXFUppmRp7RWguEFYkWcy41wQQpvCBK0S/R0lDMsFv3Gt1
-         Ufmw==
+        bh=qmyHVYJDP9hmCywHRnsdxnvZ1q0Z/z3sEq/O/fzkRmM=;
+        b=hE0UzNOildrc4RtjQlC+RP8Kk8xdx6Ya+Ekn5wJ/mahURugJQ378ozWVwxwNvye0ph
+         n92OzvajmrHal2Bn5EWHx+95chi40L9o3jccAVeRv0cWfirw9o2FReWCjrqyQDPaQsL2
+         kL35iYvgHu2HQic9ztnDQNByUaZh/NcvITlULH8CTBJRhweieQxtH23b2TLKg4Y+jM7v
+         SF3seT8EA/gqrFfcrQLBm0BZuVwjMXfKewd/h0Fbh8HIh1pgftR85XVP5n6/bFl9iWiK
+         qALytUgT8moTF5mvDYaQ6tSZXqrXDBYb7NY8KVlEXa4Az+fhGxlY1QchZMBnD5QIdm0o
+         qBFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694430229; x=1695035029;
+        d=1e100.net; s=20230601; t=1694430426; x=1695035226;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=+ILX0tdLmqj9AVpuvBKgqDyqNcCHFP+tGWFAoPYPQ4w=;
-        b=hQdMGQD2Cwvu92XPdUXjVNpYIvVeEON+sODSYf1zTjEqjldkH1kf8ag4M3gaXaWaW1
-         uupZuSwKEv9NdAnDdPcov41Q5a0JIboys1liA6m0g9XHYropjWt7vBlgO9jSudVrTSlu
-         3lxz9o97fJzxa3oVz3NNJcpgrE7d0pBzVlI8RZl/YeX7CDRc70zp+OjbABeBHkjphVYt
-         uvyz2UzhtRGS4ZEznv7IWNJHt/1h7Ka7vzQWq5zuEohu9stxXNG2vgykn+CmnR+CzRda
-         OxnvWA7vyxGethFfjmTmRfFPFoT0QhdXLqZ/nQvnS2fKsB3QIla/52Mh8qyTn6Xk+uHH
-         Z/RQ==
-X-Gm-Message-State: AOJu0YxvGc6JNj3wnKoLxH1kbmJHw9vsV8f150waK40Urncs4L8F188E
-        64lOganf0FbCZmUp242KyPeRsw==
-X-Google-Smtp-Source: AGHT+IHrCuHXPW5iCbHOgDTuxr0+rEQqZq3NfeZFsduvBFV7Iz1nZShwqgZZlcUjSeB2syGYDhOFVA==
-X-Received: by 2002:a17:906:8251:b0:9a5:eedb:ee2e with SMTP id f17-20020a170906825100b009a5eedbee2emr7821770ejx.19.1694430229508;
-        Mon, 11 Sep 2023 04:03:49 -0700 (PDT)
+        bh=qmyHVYJDP9hmCywHRnsdxnvZ1q0Z/z3sEq/O/fzkRmM=;
+        b=tBwbJlDzSF1fWPuBMa14NUYF/sj3pyE+SZ4KzgQgcYn7rD+NN4+iwIHlcWNqft9+2H
+         0PThECRq4VSZdPwb4Ai0SoiW21lt5CqlNb7OoB0ZuwdtZ9dcIxbO4nofbBevHxnqdjbr
+         kkFcAGJ4evgopgg4yjW+HZy9yUYYJHHVluS03BmCoGyyI5ouBrmHSN+1CaLZZqbtAYj7
+         Jpi9b6oaTMbU4FFx9OqrwJ6RgTjptSMolBeLJnSsKIsaFaOdzjgHxH637EYKAiTnbY/x
+         6pTjx9UPALnNYQ1CpyECpi1SidBSitnJAZ/oIe8g8jyZCER9V7NDMt9knU/jplG+aOWs
+         Hhsw==
+X-Gm-Message-State: AOJu0YylAAE9OigHJleB4W7cpU0we0FN3Li9LUaM/gW9Gq6AMqIlRvrF
+        f7G+Qj0ZT72cWvFizArqNbiYHA==
+X-Google-Smtp-Source: AGHT+IFR8IFxIJ7reSkaYfAFLu1yRY1oO/AEBb0QIMYpht4GuEFk0sZxNE+qAxMWLhq3G4SDtzJ7xQ==
+X-Received: by 2002:a2e:9ed7:0:b0:2bd:124a:23d5 with SMTP id h23-20020a2e9ed7000000b002bd124a23d5mr8252127ljk.11.1694430425888;
+        Mon, 11 Sep 2023 04:07:05 -0700 (PDT)
 Received: from [192.168.1.20] ([178.197.214.188])
-        by smtp.gmail.com with ESMTPSA id ov27-20020a170906fc1b00b00992c92af6f4sm5183284ejb.144.2023.09.11.04.03.46
+        by smtp.gmail.com with ESMTPSA id qn6-20020a170907210600b0099d9b50d786sm5219726ejb.199.2023.09.11.04.07.02
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 11 Sep 2023 04:03:48 -0700 (PDT)
-Message-ID: <f3bd88f5-7dff-871c-28d6-a7dbb1104989@linaro.org>
-Date:   Mon, 11 Sep 2023 13:03:45 +0200
+        Mon, 11 Sep 2023 04:07:04 -0700 (PDT)
+Message-ID: <e35a8b4f-ba1a-514e-9c59-a74442f0cb1f@linaro.org>
+Date:   Mon, 11 Sep 2023 13:07:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
-Subject: Re: [REBASE PATCH v5 06/17] soc: qcom: Add Qualcomm APSS minidump
- kernel driver
+Subject: Re: [PATCH v5 06/17] soc: qcom: Add Qualcomm APSS minidump kernel
+ driver
 Content-Language: en-US
 To:     Mukesh Ojha <quic_mojha@quicinc.com>, corbet@lwn.net,
         agross@kernel.org, andersson@kernel.org, konrad.dybcio@linaro.org,
@@ -72,10 +72,10 @@ Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org,
         linux-mediatek@lists.infradead.org,
         linux-samsung-soc@vger.kernel.org, kernel@quicinc.com
-References: <1694429639-21484-1-git-send-email-quic_mojha@quicinc.com>
- <1694429639-21484-7-git-send-email-quic_mojha@quicinc.com>
+References: <1694290578-17733-1-git-send-email-quic_mojha@quicinc.com>
+ <1694290578-17733-7-git-send-email-quic_mojha@quicinc.com>
 From:   Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-In-Reply-To: <1694429639-21484-7-git-send-email-quic_mojha@quicinc.com>
+In-Reply-To: <1694290578-17733-7-git-send-email-quic_mojha@quicinc.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
@@ -88,20 +88,41 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 11/09/2023 12:53, Mukesh Ojha wrote:
-
-...
-
-> +module_platform_driver(qcom_minidump_driver);
+On 09/09/2023 22:16, Mukesh Ojha wrote:
+> +/**
+> + * qcom_minidump_region_register() - Register region in APSS Minidump table.
+> + * @region: minidump region.
+> + *
+> + * Return: On success, it returns 0 and negative error value on failure.
+> + */
+> +int qcom_minidump_region_register(const struct qcom_minidump_region *region)
+> +{
+> +	struct minidump *md;
+> +	int ret;
 > +
-> +MODULE_DESCRIPTION("Qualcomm APSS minidump driver");
-> +MODULE_LICENSE("GPL");
-> +MODULE_ALIAS("platform:qcom-minidump-smem");
+> +	md = qcom_smem_minidump_ready();
+> +	if (!md)
+> +		return -EPROBE_DEFER;
+> +
+> +	if (!qcom_minidump_valid_region(region))
+> +		return -EINVAL;
+> +
+> +	mutex_lock(&md->md_lock);
+> +	ret = qcom_md_region_register(md, region);
+> +	if (ret)
+> +		goto unlock;
+> +
+> +	qcom_md_update_elfheader(md, region);
+> +unlock:
+> +	mutex_unlock(&md->md_lock);
+> +	return ret;
+> +}
+> +EXPORT_SYMBOL_GPL(qcom_minidump_region_register);
 
-Nothing improved here and in other places. To avoid review being spread
-all over, I will just NAK this one.
+NAK, there is no user for this.
 
-NAK
+Drop all exports from minidump drivers. Your upstream driver *must not*
+expose stuff to your vendor drivers.
 
 Best regards,
 Krzysztof
