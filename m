@@ -2,93 +2,279 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C5A6479BFC9
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 02:19:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AF19E79C151
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 02:48:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344071AbjIKVNN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 17:13:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39770 "EHLO
+        id S231345AbjILAsY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 20:48:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60918 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S244506AbjIKUi7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 16:38:59 -0400
-Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 65688127;
-        Mon, 11 Sep 2023 13:38:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
-        ; s=x; h=Subject:Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Cc:To
-        :From:subject:date:message-id:reply-to;
-        bh=TLJ2bc/snhPLEcNROaiK2c5oF2wkJhqsS7gx9Br7BU8=; b=B6T9RrhySsq6SSgeW/VSamHn2J
-        FA+hjYw88EPbe3YEATYM2wTvQC4oSswvqDHjsb24NYeWybhPGAIMNcH4LEPLC62WNiVHl+47FLTa7
-        9BbjvaXJHnGNwWyz9JnM8eLQRQRAmaUAhz6+JBQsVkpk9fN7qcmiMNZFKwua1xR0wyZ8=;
-Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:60746 helo=pettiford.lan)
-        by mail.hugovil.com with esmtpa (Exim 4.92)
-        (envelope-from <hugo@hugovil.com>)
-        id 1qfngG-0005zL-RE; Mon, 11 Sep 2023 16:38:49 -0400
-From:   Hugo Villeneuve <hugo@hugovil.com>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Sasha Levin <sashal@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     hugo@hugovil.com, Hugo Villeneuve <hvilleneuve@dimonoff.com>,
-        stable@vger.kernel.org, workflows@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Date:   Mon, 11 Sep 2023 16:36:30 -0400
-Message-Id: <20230911203628.20068-1-hugo@hugovil.com>
-X-Mailer: git-send-email 2.30.2
+        with ESMTP id S229989AbjILAsD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 20:48:03 -0400
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com [IPv6:2607:f8b0:4864:20::d34])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9EB91E238C;
+        Mon, 11 Sep 2023 16:09:47 -0700 (PDT)
+Received: by mail-io1-xd34.google.com with SMTP id ca18e2360f4ac-792623074edso145880239f.1;
+        Mon, 11 Sep 2023 16:09:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1694473706; x=1695078506; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4QPvsUCuesDbdqzdhDuBEQMp4BSGGOAe53BRO5DTLhU=;
+        b=WAsfvyAm4nq/T0d542lY7eJYNEWKx1KrHiO7uKGUjfRQxMplaCVuQHW6Q2kC8YkqOZ
+         eVaN/pNeQzYSRumFzAIigbjqS6i77zjpFG/LzXvrtGeSb9xg56Yd6GisaXs1nGrA2dD7
+         Sga5bxd4aWJ0yHKCEB3mXw6Y7R6khtCfOizyS0YbOa91EqLxgcx4yajRbQY3LyC2ilwr
+         aNuGaGGTuklrEltmizJCHjuVbMn70EjHB1T9h0aOMMln/YJTG41arbdKmb9wpiQ7yA3K
+         c1vh4vCeH6KEuJc7OgoCt+tUJROPdm4gCt1aWjW6Zl6y+ULqSb4cdIBsQ7FXoIQa0xpl
+         a7HA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1694473706; x=1695078506;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=4QPvsUCuesDbdqzdhDuBEQMp4BSGGOAe53BRO5DTLhU=;
+        b=HHvV+Ykiv8Hqb3iHSSxiKsUoXesEWNNxKWzl/fw9wyIu3jVPdaTNr9VWpIsyIQbuoa
+         kDqU6WyOM8uBjMx6pDTSQH5SnE+K8PUfzkU9y3VJMx+TS2KDAbFMB7OIMYzDOFBExqI9
+         daQTW6HGynu9+WmyyPc+5h7VyDRthYF0tDY+NJbcOvzCaH8dSPqlQ0fliBB4KSveQ3de
+         05e26Bqk8oCcdEbXw/+4b+qauDAbk/nQHp1E/X1LERsseZ+Oz00s72O1kUDePNFEIPsP
+         EgsmwD3pEjznGX7x5p0wehgl6AKam6QdscfaCFGAEjPkyd77QfJKibeP7SpeWAz61JBO
+         5veA==
+X-Gm-Message-State: AOJu0Yz/gqIlLj8c5WL5hpNggpEFz8VOcsygQm0GR4g0zpa+7C5c2UQP
+        f4QxsSymIAy+wD0hnrE6DOE=
+X-Google-Smtp-Source: AGHT+IG7bYicJCrmUYKVqmd3OJOt+rHV8pZgZGqdIESBV9//RY1GB+4nospOwL2Y8hO5uFJ5BARkiQ==
+X-Received: by 2002:a05:6602:2e89:b0:792:8c29:7b with SMTP id m9-20020a0566022e8900b007928c29007bmr1041872iow.10.1694473705771;
+        Mon, 11 Sep 2023 16:08:25 -0700 (PDT)
+Received: from frodo.. (c-73-78-62-130.hsd1.co.comcast.net. [73.78.62.130])
+        by smtp.googlemail.com with ESMTPSA id u1-20020a02c041000000b0042b1061c6a8sm2518671jam.84.2023.09.11.16.08.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 11 Sep 2023 16:08:25 -0700 (PDT)
+From:   Jim Cromie <jim.cromie@gmail.com>
+To:     jbaron@akamai.com, gregkh@linuxfoundation.org, mcgrof@kernel.org,
+        daniel.vetter@ffwll.ch
+Cc:     linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        amd-gfx@lists.freedesktop.org, intel-gvt-dev@lists.freedesktop.org,
+        intel-gfx@lists.freedesktop.org, jani.nikula@intel.com,
+        ville.syrjala@linux.intel.com, seanpaul@chromium.org,
+        robdclark@gmail.com, linux-doc@vger.kernel.org,
+        Jim Cromie <jim.cromie@gmail.com>
+Subject: [PATCH v6 00/22] fix DRM_USE_DYNAMIC_DEBUG regression
+Date:   Mon, 11 Sep 2023 17:07:55 -0600
+Message-ID: <20230911230817.14402-1-jim.cromie@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 70.80.174.168
-X-SA-Exim-Mail-From: hugo@hugovil.com
-X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
-        lindbergh.monkeyblade.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_PASS,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
-Subject: [PATCH v2] Documentation: stable: clarify patch series prerequisites
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+This series fixes the regression in DRM_USE_DYNAMIC_DEBUG=y
 
-Add some clarifications for patches that have dependencies within the
-patch series.
+blame analysis: (all mine)
 
-Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
----
-Changes since v1: rebase on latest torvalds/master
+1. my early test scripts did a lot of 'modprobe $m $*',
+   with dyndbg=.. and debug=.. args
+   this obscured the lack of drm.debug -> drivers propagation
 
- Documentation/process/stable-kernel-rules.rst | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+2. I broke K&R rule: "define once, refer many times".
+   the classmaps DECLAREd by the drivers would run on args in 1
 
-diff --git a/Documentation/process/stable-kernel-rules.rst b/Documentation/process/stable-kernel-rules.rst
-index 41f1e07abfdf..1704f1c686d0 100644
---- a/Documentation/process/stable-kernel-rules.rst
-+++ b/Documentation/process/stable-kernel-rules.rst
-@@ -101,6 +101,19 @@ comment:
-      git cherry-pick fd21073
-      git cherry-pick <this commit>
- 
-+   Note that for a patch series, you do not have to list as prerequisites the
-+   patches present in the series itself. For example, if you have the following
-+   patch series:
-+
-+   .. code-block:: none
-+
-+     patch1
-+     patch2
-+
-+   where patch2 depends on patch1, you do not have to list patch1 as
-+   prerequisite of patch2 if you have already marked patch1 for stable
-+   inclusion.
-+
-  * For patches that may have kernel version prerequisites specify them using
-    the following format in the sign-off area:
- 
+The thinko beneath that was imitating the "static struct" in the
+definition of DEFINE_DYNAMIC_DEBUG_METADATA.  Imitating __drm_debug
+export instead broke the mental logjam.
 
-base-commit: 0bb80ecc33a8fb5a682236443c1e740d5c917d1d
+So the patchset splits DECLARE_DYNDBG_CLASSMAP duty in 2: with
+DYNDBG_CLASSMAP_DEFINE/_USE, where _DEFINE exports the classmap, so
+_USE can reference it.  The _USEs are added into a new section:
+__dyndbg_class_users.
+
+ddebug_add_module() now also scans class_users at modprobe time,
+whence it finds the kernel-param that refs the classmap, and applies
+its initialized state to the user/driver.
+
+test-dynamic-debug is extended with a _submod, allowing it to
+recapitulate the drm.ddebug -/-> drivers failure scenario.
+
+
+NOTE: patch-14 does the DECLARE -> _DEFINE/_USE, so it also changes
+DRM to follow the API change.  That makes it buildable, but crosses 2
+trees, which isn't so great.  But since the feature is marked BROKEN
+at this point, perhaps I should have split them.
+
+Finally 3 DRM patches: drops BROKEN on DRM_USE_DYNAMIC_DEBUG, fixes
+drm/Makefile, and wires a bunch more drivers to _USE DRM's
+drm_debug_classmap.
+
+You can bang at the test module with:
+#!/bin/bash
+
+ddcmd () {
+    echo $* > /proc/dynamic_debug/control
+}
+vx () {
+    echo $1 > /sys/module/dynamic_debug/parameters/verbose
+}
+ddgrep () {
+    grep $1 /proc/dynamic_debug/control
+}
+doprints () {
+    cat   /sys/module/test_dynamic_debug/parameters/do_prints
+}
+
+note () {
+    echo NOTE: $* >&2
+    $*
+}
+ddparms () {
+    note ls -l /sys/module/test_dynamic_debug/parameters/
+    note cat   /sys/module/test_dynamic_debug/parameters/*
+}
+up () {
+    modprobe drm debug=0x03 debug_trace=0x1ff
+}
+dn () {
+    rmmod drm
+}
+ddtraceon () {
+    echo 1 > /sys/kernel/tracing/tracing_on
+    echo 1 > /sys/kernel/tracing/events/dyndbg/enable
+}
+
+# replay drm.debug dependent-module scenario
+submod () {
+    echo  MP test_dynamic_debug $1 $2 dyndbg=+pm $3 $4
+
+    # extra complexity to avoid passing param=s since theyre explicit inits
+    if [[ -z $1 ]] ; then
+	modprobe test_dynamic_debug dyndbg=+pm
+    elif [[ -z $2 ]] ; then
+	modprobe test_dynamic_debug dyndbg=+pm \
+		 p_disjoint_bits=${1:-0}
+    elif [[ -z $3 ]] ; then
+	# force 3,4 off, undoing DEBUG - declutter
+	modprobe test_dynamic_debug dyndbg=+pm \
+		 p_disjoint_bits=${1:-0} p_level_num=${2:-0}
+		 # p_disjoint_names=${3:-MID,-LOW,-HI} p_level_names=${4:-L3}
+    elif [[ -z $4 ]] ; then
+	modprobe test_dynamic_debug dyndbg=+pm \
+		 p_disjoint_bits=${1:-0} p_level_num=${2:-0}
+		 # p_disjoint_names=${3:-MID}
+    else
+	modprobe test_dynamic_debug dyndbg=+pm \
+		 p_disjoint_bits=${1:-0} p_level_num=${2:-0}
+		 # p_disjoint_names=${3:-MID} p_level_names=${4:-L3}
+    fi
+    
+    # _submod should pick up kparams
+    echo  MP test_dynamic_debug_submod dyndbg=+pmf
+    modprobe test_dynamic_debug_submod dyndbg=+pmf
+}
+unmod () {
+    rmmod test_dynamic_debug_submod
+    rmmod test_dynamic_debug
+}
+
+# The test:
+submod_test () {
+    unmod
+    submod $*
+    sleep 1
+    
+    note "above submod.s D2_* prdbgs should have printed"
+    note "because they are enabled here:"
+    ddgrep _submod
+
+    echo 1 > /sys/module/test_dynamic_debug/parameters/do_prints
+
+    note submod prdbgs should print here
+    echo 1 > /sys/module/test_dynamic_debug_submod/parameters/do_prints
+}
+
+# old-code: triggered jump-label init panic, fixed by doing
+# dyndbg-init in notifier, after jump-label
+submod_force () {
+    unmod
+    submod $*
+    sleep 1
+    # force all classes off, then on
+    note trigger toggled warning by turning off the supposed enabled prdbgs in submod
+
+    echo 0     > /sys/module/test_dynamic_debug/parameters/disjoint_bits
+    echo 0x2ff > /sys/module/test_dynamic_debug/parameters/disjoint_bits
+
+    note now theyre on
+    doprints
+}
+
+setup () {
+    echo dynbg-verbose-0, clearing kmsg, and running submod_test
+    vx 0
+    dmesg -W &
+    submod_test  7 7
+    ddcmd class V +mfl
+    ddcmd class V2 +tmfsl
+    ddcmd class V3 +mfsl
+    ddcmd class V4 +mfs
+    ddcmd class V5 +mf
+    ddcmd class V6 +m
+    doprints
+}
+
+
+
+Jim Cromie (22):
+  test-dyndbg: fixup CLASSMAP usage error
+  dyndbg: make ddebug_class_param union members same size
+  dyndbg: replace classmap list with a vector
+  dyndbg: ddebug_apply_class_bitmap - add module arg, select on it
+  dyndbg: split param_set_dyndbg_classes to module/wrapper fns
+  dyndbg: drop NUM_TYPE_ARRAY
+  dyndbg: reduce verbose/debug clutter
+  dyndbg: silence debugs with no-change updates
+  dyndbg: tighten ddebug_class_name() 1st arg type
+  dyndbg: tighten fn-sig of ddebug_apply_class_bitmap
+  dyndbg-API: remove DD_CLASS_TYPE_(DISJOINT|LEVEL)_NAMES and code
+  dyndbg-API: fix CONFIG_DRM_USE_DYNAMIC_DEBUG regression
+  dyndbg: add for_each_boxed_vector
+  dyndbg: refactor ddebug_classparam_clamp_input
+  dyndbg-API: promote DYNDBG_CLASSMAP_PARAM to API
+  dyndbg-test: build it with just CONFIG_DYNAMIC_DEBUG_CORE
+  dyndbg-doc: add classmap info to howto
+  dyndbg: reserve flag bit _DPRINTK_FLAGS_PREFIX_CACHED
+  dyndbg: add _DPRINTK_FLAGS_INCL_LOOKUP
+  drm: use correct ccflags-y spelling
+  drm-drivers: DRM_CLASSMAP_USE in 2nd batch of drivers, helpers
+  drm: restore CONFIG_DRM_USE_DYNAMIC_DEBUG un-BROKEN
+
+ .../admin-guide/dynamic-debug-howto.rst       |  60 ++-
+ MAINTAINERS                                   |   2 +-
+ drivers/gpu/drm/Kconfig                       |   3 +-
+ drivers/gpu/drm/Makefile                      |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  12 +-
+ drivers/gpu/drm/display/drm_dp_helper.c       |  12 +-
+ drivers/gpu/drm/drm_crtc_helper.c             |  12 +-
+ drivers/gpu/drm/drm_gem_shmem_helper.c        |   2 +
+ drivers/gpu/drm/drm_print.c                   |  35 +-
+ drivers/gpu/drm/gud/gud_drv.c                 |   2 +
+ drivers/gpu/drm/i915/i915_params.c            |  12 +-
+ drivers/gpu/drm/mgag200/mgag200_drv.c         |   2 +
+ drivers/gpu/drm/nouveau/nouveau_drm.c         |  12 +-
+ drivers/gpu/drm/qxl/qxl_drv.c                 |   2 +
+ drivers/gpu/drm/radeon/radeon_drv.c           |   2 +
+ drivers/gpu/drm/udl/udl_main.c                |   2 +
+ drivers/gpu/drm/vkms/vkms_drv.c               |   2 +
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c           |   2 +
+ include/asm-generic/vmlinux.lds.h             |   1 +
+ include/drm/drm_print.h                       |  12 +-
+ include/linux/dynamic_debug.h                 | 122 ++++--
+ kernel/module/main.c                          |   3 +
+ lib/Kconfig.debug                             |  10 +-
+ lib/Makefile                                  |   4 +-
+ lib/dynamic_debug.c                           | 407 +++++++++++-------
+ lib/test_dynamic_debug.c                      | 137 +++---
+ lib/test_dynamic_debug_submod.c               |  17 +
+ 27 files changed, 546 insertions(+), 346 deletions(-)
+ create mode 100644 lib/test_dynamic_debug_submod.c
+
 -- 
-2.30.2
+2.41.0
 
