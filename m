@@ -2,157 +2,299 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C010879B284
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 01:58:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B73F679AD9A
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 01:40:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344099AbjIKVNS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 17:13:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45678 "EHLO
+        id S1343559AbjIKVLs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 17:11:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59244 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237312AbjIKMch (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 08:32:37 -0400
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2040.outbound.protection.outlook.com [40.107.236.40])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1A67D1B9;
-        Mon, 11 Sep 2023 05:32:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ARBd5cpM8HN4OHAb4nFFpuoCWiLLM1DUO9QlaGVBNeK00Z7OZaG99LleyXdoa9jk4J3uyWP6j1KXX5JuqkBWZrvWJkDAYu695vz4Q7IP3f3CWCXcs+8JwE3fccRoAbI5PkcKv2/mU+eWnS+6HKOuWWWd0PT5JtrMK3aT4Q+vfMaJnrxdNppup7cJWO7Y0VfhbGW18hn6uM6oEnrMau+XxV7a+3pQH3f1WTqMZEPBubczeKNe6mbYu7drI7gUjKdh3ogcnWtOjS8r/RTqAdOr2wNfZ6zNXZsHeUv/Nqfbn+q9b1uMwehIQp8RJwFUNjePuXl9qokIB/CBYh7YbcgvNQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0IqaO0oI05QFVkd12zKfaf+VAzNIBB6KQ/s1ycUrvtY=;
- b=MPuG4686ahSQo0A8h927gBCiZutUYuj3+1W1v+67UNDu6pUZ+nI4O6T6Y6xMtOKg+qc9b6JrnZ9O6mAkqA48nxRGOIfjhIygKDnFUtyYkmapC+XvsDep9a2cWMsxGqLmBuXuAMJJq7rz7sKLvlRchBwv0Zuvt0ZIycQ8tBPSaz276GNa9zLvUuoIN0tP7ywrNU1XydSsW7tyxJRZtKU74aNejMbuVJqoKZxIIGdgQKdqEHzlpySTJjP0sMiijXdqkQKriQU0CmUxcQqPOyptLBCK0VF8M1hEHFkITQ5k9aHO4X8vFTZ9kQply1HzSvQfjzmzG8mwNN1V1bPwyjxhDg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0IqaO0oI05QFVkd12zKfaf+VAzNIBB6KQ/s1ycUrvtY=;
- b=F886aNKjfQeTRvYjtGCEhdDamMd3RHnOx7Sep/oz38yloW7mSZeIBVsiyHjuQAk481KGXsL0mH0YRcTO0guCaIQ6Oegv5pLCe2egTnrPteWl8mXKyXUKidsRXx8HN/xdEdsKMxI4w8boHAitAzTizhu3Gwp6/xqXwcgoKCP3Y78=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from DS7PR12MB6214.namprd12.prod.outlook.com (2603:10b6:8:96::13) by
- PH7PR12MB9067.namprd12.prod.outlook.com (2603:10b6:510:1f5::8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6768.30; Mon, 11 Sep 2023 12:32:28 +0000
-Received: from DS7PR12MB6214.namprd12.prod.outlook.com
- ([fe80::6f26:6cea:cd82:df23]) by DS7PR12MB6214.namprd12.prod.outlook.com
- ([fe80::6f26:6cea:cd82:df23%3]) with mapi id 15.20.6768.029; Mon, 11 Sep 2023
- 12:32:28 +0000
-Message-ID: <f98687e0-1fee-8208-261f-d93152871f00@amd.com>
-Date:   Mon, 11 Sep 2023 18:02:13 +0530
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.12.0
-Subject: Re: [PATCH 00/13] Implement support for IBS virtualization
-To:     Peter Zijlstra <peterz@infradead.org>
-Cc:     kvm@vger.kernel.org, seanjc@google.com, linux-doc@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, x86@kernel.org,
-        pbonzini@redhat.com, bp@alien8.de, santosh.shukla@amd.com,
-        ravi.bangoria@amd.com, thomas.lendacky@amd.com, nikunj@amd.com
-References: <20230904095347.14994-1-manali.shukla@amd.com>
- <20230905154744.GB28379@noisy.programming.kicks-ass.net>
- <012c9897-51d7-87d3-e0e5-3856fa9644e5@amd.com>
- <20230906195619.GD28278@noisy.programming.kicks-ass.net>
- <188f7a79-ad47-eddd-a185-174e0970ad22@amd.com>
- <20230908133114.GK19320@noisy.programming.kicks-ass.net>
-From:   Manali Shukla <manali.shukla@amd.com>
-In-Reply-To: <20230908133114.GK19320@noisy.programming.kicks-ass.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PN2PR01CA0230.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:eb::15) To DS7PR12MB6214.namprd12.prod.outlook.com
- (2603:10b6:8:96::13)
+        with ESMTP id S237452AbjIKMvv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 08:51:51 -0400
+Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B5F9ACEB;
+        Mon, 11 Sep 2023 05:51:44 -0700 (PDT)
+Received: from canpemm500006.china.huawei.com (unknown [172.30.72.53])
+        by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4RkmjD48PWzMlH2;
+        Mon, 11 Sep 2023 20:48:16 +0800 (CST)
+Received: from [10.174.179.200] (10.174.179.200) by
+ canpemm500006.china.huawei.com (7.192.105.130) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.31; Mon, 11 Sep 2023 20:51:41 +0800
+Subject: Re: [RFC PATCH net-next 2/6] net: ethernet: add mac-phy interrupt
+ support with reset complete handling
+To:     Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>,
+        <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
+        <pabeni@redhat.com>, <robh+dt@kernel.org>,
+        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
+        <corbet@lwn.net>, <steen.hegelund@microchip.com>,
+        <rdunlap@infradead.org>, <horms@kernel.org>,
+        <casper.casan@gmail.com>, <andrew@lunn.ch>
+CC:     <netdev@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <horatiu.vultur@microchip.com>, <Woojung.Huh@microchip.com>,
+        <Nicolas.Ferre@microchip.com>, <UNGLinuxDriver@microchip.com>,
+        <Thorsten.Kummermehr@microchip.com>
+References: <20230908142919.14849-1-Parthiban.Veerasooran@microchip.com>
+ <20230908142919.14849-3-Parthiban.Veerasooran@microchip.com>
+From:   "Ziyang Xuan (William)" <william.xuanziyang@huawei.com>
+Message-ID: <5f434392-0e87-ecbc-9c9a-ad08a809206a@huawei.com>
+Date:   Mon, 11 Sep 2023 20:51:40 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS7PR12MB6214:EE_|PH7PR12MB9067:EE_
-X-MS-Office365-Filtering-Correlation-Id: 80262a78-36d3-4f54-ba9b-08dbb2c3290e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: GNs/fXMyq7JDra8bTEdwYovkdcC3PE5KdP/mdBzQltp5cBq9+2WFY5+9YqOmw8WBcX8CluTjuaHCmp4EjzbQg9O3LBJs1snBxV8G7Gdw68JEKeueBTumAQ/7MamSdhmpQ74RWuBxWL8oINg9hHkIBv7Rncj3c/4nYvJyfqkoaNCFALohquYDckti+TS5ka7jyiyAtLDnR/6TbCohDYMzspwJ70FIpBVmrM984rqtfdpNeC7QmS9s/GiSVj3JEREp0FQjPe3kjakgl6Jk4vMVVKDFToVVZ1MABlnfCHNe25MlF+33TLUmfslDIwXvycRvq/NF7LayhhM1uMDCdxaLI0GbH2WiG7b5xQCaUhGbmMb42QyAJfaPXD6QBKcRKZQVEsMvp4pSC52VdR1qOBvYUeZ7KVQowD/Vz8VA9bwRKTrGxilwEgdq6nj+L73CVqcqIn5O06AG4aD56GgtE8KZjnnd5C5TgatOR+V8vHsNeDLSoAkZ1ubjDa7J54ZETDowbUjo//F17oByjsh9n2fB1HbBEi5lWED+l7bHCJOzLWyWfUM9WYf3lOPeabyfEjHQA5QNMm6FlDPft3te8UUkxySXzqgkAQfmVFJTMPQXXGiPe9ZTaHXIImmKEo4DOXUL2iEUf4MXBFJqfHzNJ35v8Q==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR12MB6214.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(376002)(136003)(366004)(346002)(39860400002)(451199024)(186009)(1800799009)(31686004)(53546011)(6666004)(6486002)(6506007)(36756003)(86362001)(38100700002)(26005)(6512007)(31696002)(2616005)(41300700001)(2906002)(83380400001)(478600001)(8936002)(4326008)(5660300002)(316002)(6916009)(8676002)(66556008)(44832011)(66476007)(66946007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bU5va3RkYXhsbkZMeFE3ZDJUR0dIVXNwNk94RXU3R2JhS0ZCT3pxUWVPUDlm?=
- =?utf-8?B?NVA5T0hrdVV2SGFNT21BQ2JYdk5jbkRoSlNUU1Y3QVBJMWM3M1Y1ZlN4OEN0?=
- =?utf-8?B?ajQybU9Sdm5FM1hsSEJYY25wb21zM0djNlMwTlA3dDU1bGVjUW1iazhmWFJ4?=
- =?utf-8?B?am43cWJTaWQvWHpBNUpPdGt3dERmcnE4Q09TS2h3ZDVLNDJtQVE4SmlCUnNL?=
- =?utf-8?B?VUdUK1o3dVZLTTF0cHIyMEtJMjJHMEt4bHk2N0N5QjdWYlVnTmtDbDNEeXYv?=
- =?utf-8?B?RDRuYXJzcXNUbTIyUnlUVnVRbU9lbHZlbTlPdmNteDRIQXhKbituNjl5Yy85?=
- =?utf-8?B?WnlvZDl4OGFCdStlUWVidU53V1d3dFdMYTRxdldENzJDN1d2eGZ6OTBJTk1W?=
- =?utf-8?B?aGtVVHBvTHZiVUJ5TkpVNzdsOTI2L3oyTmxuUndralIxRjNpSjZLRUMyMGk2?=
- =?utf-8?B?cjFQS1BZU1Y5QU1HUHZoV250ZHlGbHoxTlE0V3hJZmNwc0Z5UHJHL0VVeEpz?=
- =?utf-8?B?dlZwOGlqOWgyYkJnZFNha3JuaVZIY3pvZzV3M2YwMlFtaHpidlNnRExjSlFC?=
- =?utf-8?B?RlhQc3h6MmZiV3hobjFaZ3Q2dGRvNzRrVkVRdUNMOU9tSU5JZFdJdURIT0pG?=
- =?utf-8?B?UUh1eFBtTXl4WGtsTXg0V1ZiL3VlYTBNM0FGTXFIelZtYjFyRW9IN1RCaUth?=
- =?utf-8?B?UkVTQVBiVkViTnZiaTQxNmlVZTNlQ0x1aGp3aEhleE5BLzBITFZnVy9rdElt?=
- =?utf-8?B?YkcvZ2l2aytzaGlrcmkxYVlYaFpDa3A3dG5HOEJvamY3cjZUTzZsUDNOT0RL?=
- =?utf-8?B?a3p1RkY0K2ErK000N1hwMXl6SGp0Rys2T2ZIajdZd2pTajFoRjhyQm9kVnBv?=
- =?utf-8?B?NEpXanAyWmR1djgzMUtHenJVS1VNM3N3NnFDTE0zbmsydlZxZy9KeWVVUWcr?=
- =?utf-8?B?V0RNMkRnQkFNYnVFKzhqSEludzVyS1lQaXV4eUw2Qm1BdUxoMTZPRURKVXRM?=
- =?utf-8?B?RkR4TnM4ZWpHbGhXY2pNdXphQnFvZjJkdVphd0JYOUNaeWxrK0tNcjJ6SWFi?=
- =?utf-8?B?dkJTTmZqYXVRbzByWWFxUVhrdk1BWk14Z0tTMHVrZFBKMHpCdjlMRjN4N1Iy?=
- =?utf-8?B?V1hsUlMwL1AzenF5MXNLc3ZCbkgzZE1GV2QzSW1QeGhXWmkyeU1sczdFdHJa?=
- =?utf-8?B?bTFGdExRR0RNazh0M3I2YWtRd3ZNSmZYSVcwMG1nTzJwWDkydG1oRTlrNU95?=
- =?utf-8?B?dlpnL09ISWsxcTNZam5lL2hheUhhZmtpZHRkSEhCM3c2QlJ4ZE5weWVPbGZI?=
- =?utf-8?B?bUoxWTU1QzhOTjl2Q3N1a2VhV2ZmVWw5SUVFelhvU1hJQmRINlFDdG9tNXQz?=
- =?utf-8?B?S0huc044elRUd0pEa2RPMTdpcE9FZndsdk9lMXJpa3N6ZDcrY2d1UzZERzRS?=
- =?utf-8?B?Z0ZmaW9YS1dxYmRqNUc1OTB3UTlpVFFyZ3RDbklxREZIZGJ6REhkQzNWRkZv?=
- =?utf-8?B?VEpyWmpLTVF2cVhoaUxWVXJub0kyeWJVajdiV0R5akhCNUNIZ3ZsT3RxL01J?=
- =?utf-8?B?OFN3VlY3b0hzbnBadUVDNjNja1A3M29uYnRidkJzcjJYaVJFZC9pdGtic3U2?=
- =?utf-8?B?dzRPWUV3TmJRRUo5YVdzWWF3YzRjS09PeXJDb2svRW0zNG55QkFoUG5YNjdl?=
- =?utf-8?B?Yng0dGhQYXNpRkNiY2poTnRFdEtMTTJLcTZyS3ZxZHk4OWFHNlBCVkJGa1FS?=
- =?utf-8?B?a21ZNkdBMW5kWjZQVzlPWVE0bFZJU3I5bVdQdGVQR29hciszNlp5VzF0VkZk?=
- =?utf-8?B?U2pDZW9saDZRNjJUb3NtMXBjODRGa3AzcnJhd2wvdHFnZXBZTGFYd0xzUytM?=
- =?utf-8?B?T1ltTTFpRXVnQ3dtQm0zeXVyVVZUbU0vYThMdEg1MWFzVmhPNUhFbWJLOSs4?=
- =?utf-8?B?bzFNMG1rS2s5NFJ0UUdxNUdUVkloajBQWkpHS1grVXk3bzNkcFlVWjNMTkNI?=
- =?utf-8?B?QmNhZU9wUTZ5UFFudndXQXVlbzJpZXlFVU91aEtVc3d2T3Y3c3pZb20xNWsy?=
- =?utf-8?B?bkJnTEZ0MGZHNXlTcWJIcFYwZGdRcEpHWkZsd21Pbk0zdWQ2SjkwV0NCY0to?=
- =?utf-8?Q?5bzEyGGZyHr3tUDoiG4KEeFkf?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 80262a78-36d3-4f54-ba9b-08dbb2c3290e
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR12MB6214.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2023 12:32:28.5190
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DmCZ9+eOw/YtZOfEVzgqV2Z2IaXBdENFpzXQ2ZfprYsY8mt4HR8cyHTTqonrEX6Hy366IuAC5n6Djmnigebviw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9067
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
-        NICE_REPLY_A,RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <20230908142919.14849-3-Parthiban.Veerasooran@microchip.com>
+Content-Type: text/plain; charset="gbk"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.174.179.200]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ canpemm500006.china.huawei.com (7.192.105.130)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-5.7 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 9/8/2023 7:01 PM, Peter Zijlstra wrote:
-> On Thu, Sep 07, 2023 at 09:19:51PM +0530, Manali Shukla wrote:
+> Register MAC-PHY interrupt and handle reset complete interrupt. Reset
+> complete bit is set when the MAC-PHY reset complete and ready for
+> configuration. When it is set, it will generate a non-maskable interrupt
+> to alert the SPI host. Additionally reset complete bit in the STS0
+> register has to be written by one upon reset complete to clear the
+> interrupt.
 > 
->>> I'm not sure I'm fluent in virt speak (in fact, I'm sure I'm not). Is
->>> the above saying that a host can never IBS profile a guest?
->>
->> Host can profile a guest with IBS if VIBS is disabled for the guest. This is
->> the default behavior. Host can not profile guest if VIBS is enabled for guest.
->>
->>>
->>> Does the current IBS thing assert perf_event_attr::exclude_guest is set?
->>
->> Unlike AMD core pmu, IBS doesn't have Host/Guest filtering capability, thus
->> perf_event_open() fails if exclude_guest is set for an IBS event.
+> Signed-off-by: Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
+> ---
+>  drivers/net/ethernet/oa_tc6.c | 141 ++++++++++++++++++++++++++++++++--
+>  include/linux/oa_tc6.h        |  16 +++-
+>  2 files changed, 150 insertions(+), 7 deletions(-)
 > 
-> Then you must not allow VIBS if a host cpu-wide IBS counter exists.
+> diff --git a/drivers/net/ethernet/oa_tc6.c b/drivers/net/ethernet/oa_tc6.c
+> index 613cf034430a..0019f70345b6 100644
+> --- a/drivers/net/ethernet/oa_tc6.c
+> +++ b/drivers/net/ethernet/oa_tc6.c
+> @@ -6,6 +6,7 @@
+>   */
+>  
+>  #include <linux/bitfield.h>
+> +#include <linux/interrupt.h>
+>  #include <linux/oa_tc6.h>
+>  
+>  static int oa_tc6_spi_transfer(struct spi_device *spi, u8 *ptx, u8 *prx,
+> @@ -160,10 +161,16 @@ int oa_tc6_perform_ctrl(struct oa_tc6 *tc6, u32 addr, u32 val[], u8 len,
+>  	if (ret)
+>  		goto err_ctrl;
+>  
+> -	/* Check echoed/received control reply */
+> -	ret = oa_tc6_check_control(tc6, tx_buf, rx_buf, len, wnr, ctrl_prot);
+> -	if (ret)
+> -		goto err_ctrl;
+> +	/* In case of reset write, the echoed control command doesn't have any
+> +	 * valid data. So no need to check for error.
+> +	 */
+> +	if (addr != OA_TC6_RESET) {
+> +		/* Check echoed/received control reply */
+> +		ret = oa_tc6_check_control(tc6, tx_buf, rx_buf, len, wnr,
+> +					   ctrl_prot);
+> +		if (ret)
+> +			goto err_ctrl;
+> +	}
+>  
+>  	if (!wnr) {
+>  		/* Copy read data from the rx data in case of ctrl read */
+> @@ -186,6 +193,88 @@ int oa_tc6_perform_ctrl(struct oa_tc6 *tc6, u32 addr, u32 val[], u8 len,
+>  	return ret;
+>  }
+>  
+> +static int oa_tc6_handler(void *data)
+> +{
+> +	struct oa_tc6 *tc6 = data;
+> +	u32 regval;
+> +	int ret;
+> +
+> +	while (likely(!kthread_should_stop())) {
+> +		wait_event_interruptible(tc6->tc6_wq, tc6->int_flag ||
+> +					 kthread_should_stop());
+> +		if (tc6->int_flag) {
+> +			tc6->int_flag = false;
+> +			ret = oa_tc6_perform_ctrl(tc6, OA_TC6_STS0, &regval, 1,
+> +						  false, false);
+> +			if (ret) {
+> +				dev_err(&tc6->spi->dev, "Failed to read STS0\n");
+> +				continue;
+> +			}
+> +			/* Check for reset complete interrupt status */
+> +			if (regval & RESETC) {
+> +				regval = RESETC;
+> +				/* SPI host should write RESETC bit with one to
+> +				 * clear the reset interrupt status.
+> +				 */
+> +				ret = oa_tc6_perform_ctrl(tc6, OA_TC6_STS0,
+> +							  &regval, 1, true,
+> +							  false);
+> +				if (ret) {
+> +					dev_err(&tc6->spi->dev,
+> +						"Failed to write STS0\n");
+> +					continue;
+> +				}
+> +				complete(&tc6->rst_complete);
+> +			}
+> +		}
+> +	}
+> +	return 0;
+> +}
+> +
+> +static irqreturn_t macphy_irq(int irq, void *dev_id)
+> +{
+> +	struct oa_tc6 *tc6 = dev_id;
+> +
+> +	/* Wake tc6 task to perform interrupt action */
+> +	tc6->int_flag = true;
+> +	wake_up_interruptible(&tc6->tc6_wq);
+> +
+> +	return IRQ_HANDLED;
+> +}
+> +
+> +static int oa_tc6_sw_reset(struct oa_tc6 *tc6)
+> +{
+> +	long timeleft;
+> +	u32 regval;
+> +	int ret;
+> +
+> +	/* Perform software reset with both protected and unprotected control
+> +	 * commands because the driver doesn't know the current status of the
+> +	 * MAC-PHY.
+> +	 */
+> +	regval = SW_RESET;
+> +	reinit_completion(&tc6->rst_complete);
+> +	ret = oa_tc6_perform_ctrl(tc6, OA_TC6_RESET, &regval, 1, true, false);
+> +	if (ret) {
+> +		dev_err(&tc6->spi->dev, "RESET register write failed\n");
+> +		return ret;
+> +	}
+> +
+> +	ret = oa_tc6_perform_ctrl(tc6, OA_TC6_RESET, &regval, 1, true, true);
+> +	if (ret) {
+> +		dev_err(&tc6->spi->dev, "RESET register write failed\n");
+> +		return ret;
+> +	}
+> +	timeleft = wait_for_completion_interruptible_timeout(&tc6->rst_complete,
+> +							     msecs_to_jiffies(1));
+> +	if (timeleft <= 0) {
+> +		dev_err(&tc6->spi->dev, "MAC-PHY reset failed\n");
+> +		return -ENODEV;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  int oa_tc6_write_register(struct oa_tc6 *tc6, u32 addr, u32 val[], u8 len)
+>  {
+>  	return oa_tc6_perform_ctrl(tc6, addr, val, len, true, tc6->ctrl_prot);
+> @@ -201,6 +290,7 @@ EXPORT_SYMBOL_GPL(oa_tc6_read_register);
+>  struct oa_tc6 *oa_tc6_init(struct spi_device *spi)
+>  {
+>  	struct oa_tc6 *tc6;
+> +	int ret;
+>  
+>  	if (!spi)
+>  		return NULL;
+> @@ -211,12 +301,51 @@ struct oa_tc6 *oa_tc6_init(struct spi_device *spi)
+>  
+>  	tc6->spi = spi;
+>  
+> +	/* Used for triggering the OA TC6 task */
+> +	init_waitqueue_head(&tc6->tc6_wq);
+> +
+> +	init_completion(&tc6->rst_complete);
+> +
+> +	/* This task performs the SPI transfer */
+> +	tc6->tc6_task = kthread_run(oa_tc6_handler, tc6, "OA TC6 Task");
+> +	if (IS_ERR(tc6->tc6_task))
+> +		goto err_tc6_task;
+> +
+> +	/* Set the highest priority to the tc6 task as it is time critical */
+> +	sched_set_fifo(tc6->tc6_task);
+> +
+> +	/* Register MAC-PHY interrupt service routine */
+> +	ret = devm_request_irq(&spi->dev, spi->irq, macphy_irq, 0, "macphy int",
+> +			       tc6);
+> +	if ((ret != -ENOTCONN) && ret < 0) {
+> +		dev_err(&spi->dev, "Error attaching macphy irq %d\n", ret);
+> +		goto err_macphy_irq;
+> +	}
+> +
+> +	/* Perform MAC-PHY software reset */
+> +	if (oa_tc6_sw_reset(tc6))
+> +		goto err_macphy_reset;
+> +
+>  	return tc6;
+> +
+> +err_macphy_reset:
+> +	devm_free_irq(&tc6->spi->dev, tc6->spi->irq, tc6);
+> +err_macphy_irq:
+> +	kthread_stop(tc6->tc6_task);
+> +err_tc6_task:
+> +	kfree(tc6);
+> +	return NULL;
+>  }
+>  EXPORT_SYMBOL_GPL(oa_tc6_init);
+>  
+> -void oa_tc6_deinit(struct oa_tc6 *tc6)
+> +int oa_tc6_deinit(struct oa_tc6 *tc6)
+>  {
+> -	kfree(tc6);
+> +	int ret;
+> +
+> +	devm_free_irq(&tc6->spi->dev, tc6->spi->irq, tc6);
+> +	ret = kthread_stop(tc6->tc6_task);
+
+kthread_stop() will the result of threadfn(). Here mean that if threadfn()
+return non-zero, deinit() will fail. But the KTHREAD_SHOULD_STOP already be set.
+And oa_tc6_handler() will end. Please check it is what you want.
+
+> +	if (!ret)
+> +		kfree(tc6);
+> +	return ret;
+>  }
+>  EXPORT_SYMBOL_GPL(oa_tc6_deinit);
+> diff --git a/include/linux/oa_tc6.h b/include/linux/oa_tc6.h
+> index 5e0a58ab1dcd..315f061c2dfe 100644
+> --- a/include/linux/oa_tc6.h
+> +++ b/include/linux/oa_tc6.h
+> @@ -17,15 +17,29 @@
+>  #define CTRL_HDR_LEN	GENMASK(7, 1)	/* Length */
+>  #define CTRL_HDR_P	BIT(0)		/* Parity Bit */
+>  
+> +/* Open Alliance TC6 Standard Control and Status Registers */
+> +#define OA_TC6_RESET	0x0003		/* Reset Control and Status Register */
+> +#define OA_TC6_STS0	0x0008		/* Status Register #0 */
+> +
+> +/* RESET register field */
+> +#define SW_RESET	BIT(0)		/* Software Reset */
+> +
+> +/* STATUS0 register field */
+> +#define RESETC		BIT(6)		/* Reset Complete */
+> +
+>  #define TC6_HDR_SIZE	4		/* Ctrl command header size as per OA */
+>  #define TC6_FTR_SIZE	4		/* Ctrl command footer size ss per OA */
+>  
+>  struct oa_tc6 {
+>  	struct spi_device *spi;
+>  	bool ctrl_prot;
+> +	struct task_struct *tc6_task;
+> +	wait_queue_head_t tc6_wq;
+> +	bool int_flag;
+> +	struct completion rst_complete;
+>  };
+>  
+>  struct oa_tc6 *oa_tc6_init(struct spi_device *spi);
+> -void oa_tc6_deinit(struct oa_tc6 *tc6);
+> +int oa_tc6_deinit(struct oa_tc6 *tc6);
+>  int oa_tc6_write_register(struct oa_tc6 *tc6, u32 addr, u32 value[], u8 len);
+>  int oa_tc6_read_register(struct oa_tc6 *tc6, u32 addr, u32 value[], u8 len);
 > 
-> Also, VIBS reads like it can be (ab)used as a filter.
-
-I think I get your point: If host IBS with exclude_guest=0 doesn't capture
-guest samples because of VIBS, it is an unintended behavior.
-
-But if a guest cannot use IBS because a host is using it, that is also
-unacceptable behavior.
-
-Let me think over it and come back.
-
-- Manali
