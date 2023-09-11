@@ -2,299 +2,224 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B73F679AD9A
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 01:40:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9FDA279B123
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 01:51:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1343559AbjIKVLs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 17:11:48 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59244 "EHLO
+        id S245666AbjIKVLW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 17:11:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58632 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237452AbjIKMvv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 08:51:51 -0400
-Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B5F9ACEB;
-        Mon, 11 Sep 2023 05:51:44 -0700 (PDT)
-Received: from canpemm500006.china.huawei.com (unknown [172.30.72.53])
-        by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4RkmjD48PWzMlH2;
-        Mon, 11 Sep 2023 20:48:16 +0800 (CST)
-Received: from [10.174.179.200] (10.174.179.200) by
- canpemm500006.china.huawei.com (7.192.105.130) with Microsoft SMTP Server
+        with ESMTP id S237489AbjIKMxm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 08:53:42 -0400
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.154.123])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5167ACEB;
+        Mon, 11 Sep 2023 05:53:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1694436818; x=1725972818;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=F18RZdFWM4GMQROAAbnXFN2k3b4JLezGGc1Iq3gZ/zs=;
+  b=Qof1Tn7Drz2q5pJBs19D48KXqtndp0XKgs3tlMDifP76PS338MECL1dh
+   WAHlq0xoY3413x9Ban2Nz06RWbaUnazYlREVnPkuBmtj1XKmChE9bgUO/
+   1qKK+RKn5M6v6RiuoxrUBr45xcjSm0pgbL5P3aoOzKMQW9X0Vc4LY5wIs
+   alLHvVcJ7epXnzlDZzBDE5eowV9oDvRZx9VFc4sRm/n1U0h0ZCh0wvmKN
+   AYNlxz6QqdgDcbFHFnpb7ym6k0CXbBo7aatj6c+g8BcbjrzPCiaQut6Wf
+   mUyNOChpsyMtz9EqSSWL0V/8fxR2hJ87nCpUURCYcLOA4q9/UidAVnyzp
+   A==;
+X-CSE-ConnectionGUID: rGMnXp3/ScCh2he0ZE8W7g==
+X-CSE-MsgGUID: +aT+43DkQw6jnFnRFXnEkQ==
+X-ThreatScanner-Verdict: Negative
+X-IronPort-AV: E=Sophos;i="6.02,244,1688454000"; 
+   d="asc'?scan'208";a="3979966"
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+  by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 11 Sep 2023 05:53:37 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.31; Mon, 11 Sep 2023 20:51:41 +0800
-Subject: Re: [RFC PATCH net-next 2/6] net: ethernet: add mac-phy interrupt
- support with reset complete handling
-To:     Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>,
-        <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
-        <pabeni@redhat.com>, <robh+dt@kernel.org>,
-        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
-        <corbet@lwn.net>, <steen.hegelund@microchip.com>,
-        <rdunlap@infradead.org>, <horms@kernel.org>,
-        <casper.casan@gmail.com>, <andrew@lunn.ch>
-CC:     <netdev@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <horatiu.vultur@microchip.com>, <Woojung.Huh@microchip.com>,
-        <Nicolas.Ferre@microchip.com>, <UNGLinuxDriver@microchip.com>,
-        <Thorsten.Kummermehr@microchip.com>
-References: <20230908142919.14849-1-Parthiban.Veerasooran@microchip.com>
- <20230908142919.14849-3-Parthiban.Veerasooran@microchip.com>
-From:   "Ziyang Xuan (William)" <william.xuanziyang@huawei.com>
-Message-ID: <5f434392-0e87-ecbc-9c9a-ad08a809206a@huawei.com>
-Date:   Mon, 11 Sep 2023 20:51:40 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ 15.1.2507.21; Mon, 11 Sep 2023 05:53:19 -0700
+Received: from wendy (10.10.85.11) by chn-vm-ex01.mchp-main.com (10.10.85.143)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21 via Frontend
+ Transport; Mon, 11 Sep 2023 05:53:14 -0700
+Date:   Mon, 11 Sep 2023 13:52:59 +0100
+From:   Conor Dooley <conor.dooley@microchip.com>
+To:     Guo Ren <guoren@kernel.org>
+CC:     Conor Dooley <conor@kernel.org>, <paul.walmsley@sifive.com>,
+        <anup@brainfault.org>, <peterz@infradead.org>, <mingo@redhat.com>,
+        <will@kernel.org>, <palmer@rivosinc.com>, <longman@redhat.com>,
+        <boqun.feng@gmail.com>, <tglx@linutronix.de>, <paulmck@kernel.org>,
+        <rostedt@goodmis.org>, <rdunlap@infradead.org>,
+        <catalin.marinas@arm.com>, <xiaoguang.xing@sophgo.com>,
+        <bjorn@rivosinc.com>, <alexghiti@rivosinc.com>,
+        <keescook@chromium.org>, <greentime.hu@sifive.com>,
+        <ajones@ventanamicro.com>, <jszhang@kernel.org>, <wefu@redhat.com>,
+        <wuwei2016@iscas.ac.cn>, <leobras@redhat.com>,
+        <linux-arch@vger.kernel.org>, <linux-riscv@lists.infradead.org>,
+        <linux-doc@vger.kernel.org>, <kvm@vger.kernel.org>,
+        <virtualization@lists.linux-foundation.org>,
+        <linux-csky@vger.kernel.org>, Guo Ren <guoren@linux.alibaba.com>
+Subject: Re: [PATCH V11 00/17] riscv: Add Native/Paravirt qspinlock support
+Message-ID: <20230911-nimbly-outcome-496efae7adc6@wendy>
+References: <20230910082911.3378782-1-guoren@kernel.org>
+ <20230910-esteemed-exodus-706aaae940b1@spud>
+ <CAJF2gTRQd_dNuZHNwfg3SwD0XERaYXYUdFUFQiarym40kpxFRQ@mail.gmail.com>
+ <20230910-baggage-accent-ec5331b58c8e@spud>
+ <CAJF2gTS8Vh5XdMUcgLA_GJzW6Nm3JKHxuMN9jYSNe_YCEjgCXA@mail.gmail.com>
+ <20230910-facsimile-answering-60d1452b8c10@spud>
+ <CAJF2gTSP1rxVhuwOKyWiE2vFFijJFc2aKRU2=0rTK9nDc8AbsQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20230908142919.14849-3-Parthiban.Veerasooran@microchip.com>
-Content-Type: text/plain; charset="gbk"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.179.200]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
- canpemm500006.china.huawei.com (7.192.105.130)
-X-CFilter-Loop: Reflected
-X-Spam-Status: No, score=-5.7 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="GbfQjpg1lIhwJuEz"
+Content-Disposition: inline
+In-Reply-To: <CAJF2gTSP1rxVhuwOKyWiE2vFFijJFc2aKRU2=0rTK9nDc8AbsQ@mail.gmail.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,
+        SPF_HELO_PASS,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> Register MAC-PHY interrupt and handle reset complete interrupt. Reset
-> complete bit is set when the MAC-PHY reset complete and ready for
-> configuration. When it is set, it will generate a non-maskable interrupt
-> to alert the SPI host. Additionally reset complete bit in the STS0
-> register has to be written by one upon reset complete to clear the
-> interrupt.
-> 
-> Signed-off-by: Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
-> ---
->  drivers/net/ethernet/oa_tc6.c | 141 ++++++++++++++++++++++++++++++++--
->  include/linux/oa_tc6.h        |  16 +++-
->  2 files changed, 150 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/net/ethernet/oa_tc6.c b/drivers/net/ethernet/oa_tc6.c
-> index 613cf034430a..0019f70345b6 100644
-> --- a/drivers/net/ethernet/oa_tc6.c
-> +++ b/drivers/net/ethernet/oa_tc6.c
-> @@ -6,6 +6,7 @@
->   */
->  
->  #include <linux/bitfield.h>
-> +#include <linux/interrupt.h>
->  #include <linux/oa_tc6.h>
->  
->  static int oa_tc6_spi_transfer(struct spi_device *spi, u8 *ptx, u8 *prx,
-> @@ -160,10 +161,16 @@ int oa_tc6_perform_ctrl(struct oa_tc6 *tc6, u32 addr, u32 val[], u8 len,
->  	if (ret)
->  		goto err_ctrl;
->  
-> -	/* Check echoed/received control reply */
-> -	ret = oa_tc6_check_control(tc6, tx_buf, rx_buf, len, wnr, ctrl_prot);
-> -	if (ret)
-> -		goto err_ctrl;
-> +	/* In case of reset write, the echoed control command doesn't have any
-> +	 * valid data. So no need to check for error.
-> +	 */
-> +	if (addr != OA_TC6_RESET) {
-> +		/* Check echoed/received control reply */
-> +		ret = oa_tc6_check_control(tc6, tx_buf, rx_buf, len, wnr,
-> +					   ctrl_prot);
-> +		if (ret)
-> +			goto err_ctrl;
-> +	}
->  
->  	if (!wnr) {
->  		/* Copy read data from the rx data in case of ctrl read */
-> @@ -186,6 +193,88 @@ int oa_tc6_perform_ctrl(struct oa_tc6 *tc6, u32 addr, u32 val[], u8 len,
->  	return ret;
->  }
->  
-> +static int oa_tc6_handler(void *data)
-> +{
-> +	struct oa_tc6 *tc6 = data;
-> +	u32 regval;
-> +	int ret;
-> +
-> +	while (likely(!kthread_should_stop())) {
-> +		wait_event_interruptible(tc6->tc6_wq, tc6->int_flag ||
-> +					 kthread_should_stop());
-> +		if (tc6->int_flag) {
-> +			tc6->int_flag = false;
-> +			ret = oa_tc6_perform_ctrl(tc6, OA_TC6_STS0, &regval, 1,
-> +						  false, false);
-> +			if (ret) {
-> +				dev_err(&tc6->spi->dev, "Failed to read STS0\n");
-> +				continue;
-> +			}
-> +			/* Check for reset complete interrupt status */
-> +			if (regval & RESETC) {
-> +				regval = RESETC;
-> +				/* SPI host should write RESETC bit with one to
-> +				 * clear the reset interrupt status.
-> +				 */
-> +				ret = oa_tc6_perform_ctrl(tc6, OA_TC6_STS0,
-> +							  &regval, 1, true,
-> +							  false);
-> +				if (ret) {
-> +					dev_err(&tc6->spi->dev,
-> +						"Failed to write STS0\n");
-> +					continue;
-> +				}
-> +				complete(&tc6->rst_complete);
-> +			}
-> +		}
-> +	}
-> +	return 0;
-> +}
-> +
-> +static irqreturn_t macphy_irq(int irq, void *dev_id)
-> +{
-> +	struct oa_tc6 *tc6 = dev_id;
-> +
-> +	/* Wake tc6 task to perform interrupt action */
-> +	tc6->int_flag = true;
-> +	wake_up_interruptible(&tc6->tc6_wq);
-> +
-> +	return IRQ_HANDLED;
-> +}
-> +
-> +static int oa_tc6_sw_reset(struct oa_tc6 *tc6)
-> +{
-> +	long timeleft;
-> +	u32 regval;
-> +	int ret;
-> +
-> +	/* Perform software reset with both protected and unprotected control
-> +	 * commands because the driver doesn't know the current status of the
-> +	 * MAC-PHY.
-> +	 */
-> +	regval = SW_RESET;
-> +	reinit_completion(&tc6->rst_complete);
-> +	ret = oa_tc6_perform_ctrl(tc6, OA_TC6_RESET, &regval, 1, true, false);
-> +	if (ret) {
-> +		dev_err(&tc6->spi->dev, "RESET register write failed\n");
-> +		return ret;
-> +	}
-> +
-> +	ret = oa_tc6_perform_ctrl(tc6, OA_TC6_RESET, &regval, 1, true, true);
-> +	if (ret) {
-> +		dev_err(&tc6->spi->dev, "RESET register write failed\n");
-> +		return ret;
-> +	}
-> +	timeleft = wait_for_completion_interruptible_timeout(&tc6->rst_complete,
-> +							     msecs_to_jiffies(1));
-> +	if (timeleft <= 0) {
-> +		dev_err(&tc6->spi->dev, "MAC-PHY reset failed\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->  int oa_tc6_write_register(struct oa_tc6 *tc6, u32 addr, u32 val[], u8 len)
->  {
->  	return oa_tc6_perform_ctrl(tc6, addr, val, len, true, tc6->ctrl_prot);
-> @@ -201,6 +290,7 @@ EXPORT_SYMBOL_GPL(oa_tc6_read_register);
->  struct oa_tc6 *oa_tc6_init(struct spi_device *spi)
->  {
->  	struct oa_tc6 *tc6;
-> +	int ret;
->  
->  	if (!spi)
->  		return NULL;
-> @@ -211,12 +301,51 @@ struct oa_tc6 *oa_tc6_init(struct spi_device *spi)
->  
->  	tc6->spi = spi;
->  
-> +	/* Used for triggering the OA TC6 task */
-> +	init_waitqueue_head(&tc6->tc6_wq);
-> +
-> +	init_completion(&tc6->rst_complete);
-> +
-> +	/* This task performs the SPI transfer */
-> +	tc6->tc6_task = kthread_run(oa_tc6_handler, tc6, "OA TC6 Task");
-> +	if (IS_ERR(tc6->tc6_task))
-> +		goto err_tc6_task;
-> +
-> +	/* Set the highest priority to the tc6 task as it is time critical */
-> +	sched_set_fifo(tc6->tc6_task);
-> +
-> +	/* Register MAC-PHY interrupt service routine */
-> +	ret = devm_request_irq(&spi->dev, spi->irq, macphy_irq, 0, "macphy int",
-> +			       tc6);
-> +	if ((ret != -ENOTCONN) && ret < 0) {
-> +		dev_err(&spi->dev, "Error attaching macphy irq %d\n", ret);
-> +		goto err_macphy_irq;
-> +	}
-> +
-> +	/* Perform MAC-PHY software reset */
-> +	if (oa_tc6_sw_reset(tc6))
-> +		goto err_macphy_reset;
-> +
->  	return tc6;
-> +
-> +err_macphy_reset:
-> +	devm_free_irq(&tc6->spi->dev, tc6->spi->irq, tc6);
-> +err_macphy_irq:
-> +	kthread_stop(tc6->tc6_task);
-> +err_tc6_task:
-> +	kfree(tc6);
-> +	return NULL;
->  }
->  EXPORT_SYMBOL_GPL(oa_tc6_init);
->  
-> -void oa_tc6_deinit(struct oa_tc6 *tc6)
-> +int oa_tc6_deinit(struct oa_tc6 *tc6)
->  {
-> -	kfree(tc6);
-> +	int ret;
-> +
-> +	devm_free_irq(&tc6->spi->dev, tc6->spi->irq, tc6);
-> +	ret = kthread_stop(tc6->tc6_task);
+--GbfQjpg1lIhwJuEz
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-kthread_stop() will the result of threadfn(). Here mean that if threadfn()
-return non-zero, deinit() will fail. But the KTHREAD_SHOULD_STOP already be set.
-And oa_tc6_handler() will end. Please check it is what you want.
+On Mon, Sep 11, 2023 at 11:36:27AM +0800, Guo Ren wrote:
+> On Mon, Sep 11, 2023 at 3:45=E2=80=AFAM Conor Dooley <conor@kernel.org> w=
+rote:
+> >
+> > On Sun, Sep 10, 2023 at 05:49:13PM +0800, Guo Ren wrote:
+> > > On Sun, Sep 10, 2023 at 5:32=E2=80=AFPM Conor Dooley <conor@kernel.or=
+g> wrote:
+> > > >
+> > > > On Sun, Sep 10, 2023 at 05:16:46PM +0800, Guo Ren wrote:
+> > > > > On Sun, Sep 10, 2023 at 4:58=E2=80=AFPM Conor Dooley <conor@kerne=
+l.org> wrote:
+> > > > > >
+> > > > > > On Sun, Sep 10, 2023 at 04:28:54AM -0400, guoren@kernel.org wro=
+te:
+> > > > > >
+> > > > > > > Changlog:
+> > > > > > > V11:
+> > > > > > >  - Based on Leonardo Bras's cmpxchg_small patches v5.
+> > > > > > >  - Based on Guo Ren's Optimize arch_spin_value_unlocked patch=
+ v3.
+> > > > > > >  - Remove abusing alternative framework and use jump_label in=
+stead.
+> > > > > >
+> > > > > > btw, I didn't say that using alternatives was the problem, it w=
+as
+> > > > > > abusing the errata framework to perform feature detection that =
+I had
+> > > > > > a problem with. That's not changed in v11.
+> > > > > I've removed errata feature detection. The only related patches a=
+re:
+> > > > >  - riscv: qspinlock: errata: Add ERRATA_THEAD_WRITE_ONCE fixup
+> > > > >  - riscv: qspinlock: errata: Enable qspinlock for T-HEAD processo=
+rs
+> > > > >
+> > > > > Which one is your concern? Could you reply on the exact patch thr=
+ead? Thx.
+> > > >
+> > > > riscv: qspinlock: errata: Enable qspinlock for T-HEAD processors
+> > > >
+> > > > Please go back and re-read the comments I left on v11 about using t=
+he
+> > > > errata code for feature detection.
+> > > >
+> > > > > > A stronger forward progress guarantee is not an erratum, AFAICT.
+> > > >
+> > > > > Sorry, there is no erratum of "stronger forward progress guarante=
+e" in the V11.
+> > > >
+> > > > "riscv: qspinlock: errata: Enable qspinlock for T-HEAD processors" =
+still
+> > > > uses the errata framework to detect the presence of the stronger fo=
+rward
+> > > > progress guarantee in v11.
+> > > Oh, thx for pointing it out. I could replace it with this:
+> > >
+> > > diff --git a/arch/riscv/kernel/setup.c b/arch/riscv/kernel/setup.c
+> > > index 88690751f2ee..4be92766d3e3 100644
+> > > --- a/arch/riscv/kernel/setup.c
+> > > +++ b/arch/riscv/kernel/setup.c
+> > > @@ -310,7 +310,8 @@ static void __init riscv_spinlock_init(void)
+> > >  {
+> > >  #ifdef CONFIG_RISCV_COMBO_SPINLOCKS
+> > >         if (!enable_qspinlock_key &&
+> > > -           (sbi_get_firmware_id() !=3D SBI_EXT_BASE_IMPL_ID_KVM)) {
+> > > +           (sbi_get_firmware_id() !=3D SBI_EXT_BASE_IMPL_ID_KVM) &&
+> > > +           (sbi_get_mvendorid() !=3D THEAD_VENDOR_ID)) {
+> > >                 static_branch_disable(&combo_qspinlock_key);
+> > >                 pr_info("Ticket spinlock: enabled\n");
+> > >         } else {
+> >
+> > As I said on v11, I am opposed to feature probing using mvendorid & Co,
+> > partially due to the exact sort of check here to see if the kernel is
+> > running as a KVM guest. IMO, whether a platform has this stronger
 
-> +	if (!ret)
-> +		kfree(tc6);
-> +	return ret;
->  }
->  EXPORT_SYMBOL_GPL(oa_tc6_deinit);
-> diff --git a/include/linux/oa_tc6.h b/include/linux/oa_tc6.h
-> index 5e0a58ab1dcd..315f061c2dfe 100644
-> --- a/include/linux/oa_tc6.h
-> +++ b/include/linux/oa_tc6.h
-> @@ -17,15 +17,29 @@
->  #define CTRL_HDR_LEN	GENMASK(7, 1)	/* Length */
->  #define CTRL_HDR_P	BIT(0)		/* Parity Bit */
->  
-> +/* Open Alliance TC6 Standard Control and Status Registers */
-> +#define OA_TC6_RESET	0x0003		/* Reset Control and Status Register */
-> +#define OA_TC6_STS0	0x0008		/* Status Register #0 */
-> +
-> +/* RESET register field */
-> +#define SW_RESET	BIT(0)		/* Software Reset */
-> +
-> +/* STATUS0 register field */
-> +#define RESETC		BIT(6)		/* Reset Complete */
-> +
->  #define TC6_HDR_SIZE	4		/* Ctrl command header size as per OA */
->  #define TC6_FTR_SIZE	4		/* Ctrl command footer size ss per OA */
->  
->  struct oa_tc6 {
->  	struct spi_device *spi;
->  	bool ctrl_prot;
-> +	struct task_struct *tc6_task;
-> +	wait_queue_head_t tc6_wq;
-> +	bool int_flag;
-> +	struct completion rst_complete;
->  };
->  
->  struct oa_tc6 *oa_tc6_init(struct spi_device *spi);
-> -void oa_tc6_deinit(struct oa_tc6 *tc6);
-> +int oa_tc6_deinit(struct oa_tc6 *tc6);
->  int oa_tc6_write_register(struct oa_tc6 *tc6, u32 addr, u32 value[], u8 len);
->  int oa_tc6_read_register(struct oa_tc6 *tc6, u32 addr, u32 value[], u8 len);
-> 
+> KVM can't use any fairness lock, so forcing it using a Test-Set lock
+> or paravirt qspinlock is the right way. KVM is not a vendor platform.
+
+My point is that KVM should be telling the guest what additional features
+it is capable of using, rather than the kernel making some assumptions
+based on$vendorid etc that are invalid when the kernel is running as a
+KVM guest.
+If the mvendorid etc related assumptions were dropped, the kernel would
+then default away from your qspinlock & there'd not be a need to
+special-case KVM AFAICT.
+
+> > guarantee needs to be communicated by firmware, using ACPI or DT.
+> > I made some comments on v11, referring similar discussion about the
+> > thead vector stuff. Please go take a look at that.
+> I prefer forcing T-HEAD processors using qspinlock, but if all people
+> thought it must be in the ACPI or DT, I would compromise. Then, I
+> would delete the qspinlock cmdline param patch and move it into DT.
+>=20
+> By the way, what's the kind of DT format? How about:
+
+I added the new "riscv,isa-extensions" property in part to make
+communicating vendor extensions like this easier. Please try to use
+that. "qspinlock" is software configuration though, the vendor extension
+should focus on the guarantee of strong forward progress, since that is
+the non-standard aspect of your IP.
+
+A commandline property may still be desirable, to control the locking
+method used, since the DT should be a description of the hardware, not
+for configuring software policy in your operating system.
+
+Thanks,
+Conor.
+
+>         cpus {
+>                 #address-cells =3D <1>;
+>                 #size-cells =3D <0>;
+> +              qspinlock;
+>                 cpu0: cpu@0 {
+>                         compatible =3D "sifive,bullet0", "riscv";
+>                         device_type =3D "cpu";
+>                         i-cache-block-size =3D <64>;
+>                         i-cache-sets =3D <128>;
+>=20
+> --
+> Best Regards
+>  Guo Ren
+
+--GbfQjpg1lIhwJuEz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZP8NqwAKCRB4tDGHoIJi
+0ldAAP9GGcetHG7gYZ4HG1QKhxMohQaaxgboYx7iHBroM1TWOQD/ZjZA5Wijf1OK
+1IInfX9naDCgcUU+DJfxo1FhU6ifVAA=
+=zWg1
+-----END PGP SIGNATURE-----
+
+--GbfQjpg1lIhwJuEz--
