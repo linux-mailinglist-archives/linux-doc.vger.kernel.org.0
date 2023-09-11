@@ -2,487 +2,750 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D905479B13C
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 01:51:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9FECA79B33E
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 01:59:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1343716AbjIKVMV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 17:12:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47582 "EHLO
+        id S241815AbjIKVK1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 17:10:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49224 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237597AbjIKNAE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 09:00:04 -0400
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com [IPv6:2607:f8b0:4864:20::62c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5EC42E4B
-        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 05:59:37 -0700 (PDT)
-Received: by mail-pl1-x62c.google.com with SMTP id d9443c01a7336-1c397ed8681so13149985ad.2
-        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 05:59:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1694437177; x=1695041977; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:references:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=M9K9PV8rCUk+B/IC15F5p4JTJ+5tMZARiqrSac1yaAY=;
-        b=cvKetsLBva9j2NCTgC84iEPcynqNMGv3GC1OmMtPJ3rRrTD3A7i7crbt7BiCiB9UJR
-         wvWYw4qDFjvQPJDr+l7t5Sa1EtJDrt2k5NZQ3M8fDRZT2H1cwe3I2aEkuBmvnvLROGcO
-         q3e8EZIdqx+DjNzNIeStmLklD8qNnYPNwG9oW+47GiHIK2kK39AoM9TkPhzMSEryNNLa
-         PY3tC86a20Y0FIcjqXZmibbrfwrarVyXcsUczBPp+Dpz+jwOCqLZtYLemKOdW0mognx7
-         guO3OhD3yqqyDzbJQMEqeQRdHmhr4PMJKmU0TFs7kR1o3DqVZx/I+shcJn8Ab1K22+U9
-         nC1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694437177; x=1695041977;
-        h=content-transfer-encoding:in-reply-to:from:references:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=M9K9PV8rCUk+B/IC15F5p4JTJ+5tMZARiqrSac1yaAY=;
-        b=hh/EAa1qd1f17EGVWpODdyyojHlcnRhrqWhJHiBldq9h24k+wyNtm4ZUBZ/Muumcfd
-         4Y7IRQ5mW5aV2BBLwoQ2vWoIikyNyWE2qdFpQETK2J+6wsr4yv4BkPbG4zMmc6I/GE39
-         BsJxxtZM2LGuONl9bDO3LOwKstF2B78FRi8Twn0P427n8pcKNutyBCkQxwUQzf5YoMwH
-         5wbpvlxvJhvm5B0mF/u3Q4GsQObL3u/p73isV07DbXxBBtr7sNw1EC6C45W+akSYNAIh
-         yjdG/YA+0bPjhtp0Vc9Aho7r8H4MldMjyOW55kmeiL8rsQy6dHWipjxYqto1o5kORxP7
-         CTCg==
-X-Gm-Message-State: AOJu0YyX3J1ACBcSvAnFHcFz5CvDad+4d/mFwbOEwKS2hpT5U7S4MPNX
-        PPEZxb/BRfyYwg00OuTag0EVhQ==
-X-Google-Smtp-Source: AGHT+IF0oOYT6OYBqZ+NhEZ/u0pJPEqP5WDyQnKZHqRlsJf7LY3KaXHXMZJ7AMyMKhj/KCQHODv8Xg==
-X-Received: by 2002:a17:903:2291:b0:1c0:8bf3:eb15 with SMTP id b17-20020a170903229100b001c08bf3eb15mr9519352plh.30.1694437176737;
-        Mon, 11 Sep 2023 05:59:36 -0700 (PDT)
-Received: from [10.84.144.104] ([203.208.167.146])
-        by smtp.gmail.com with ESMTPSA id o10-20020a170902778a00b001b53953f306sm6436614pll.178.2023.09.11.05.59.30
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 11 Sep 2023 05:59:36 -0700 (PDT)
-Message-ID: <d388a9e5-560a-72c2-4db5-1f39827740c9@bytedance.com>
-Date:   Mon, 11 Sep 2023 20:59:27 +0800
+        with ESMTP id S237876AbjIKNRP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 09:17:15 -0400
+Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B01D9EB;
+        Mon, 11 Sep 2023 06:17:08 -0700 (PDT)
+Received: from canpemm500006.china.huawei.com (unknown [172.30.72.56])
+        by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4RknJH54hbz1N7rY;
+        Mon, 11 Sep 2023 21:15:11 +0800 (CST)
+Received: from [10.174.179.200] (10.174.179.200) by
+ canpemm500006.china.huawei.com (7.192.105.130) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.31; Mon, 11 Sep 2023 21:17:04 +0800
+Subject: Re: [RFC PATCH net-next 5/6] microchip: lan865x: add driver support
+ for Microchip's LAN865X MACPHY
+To:     Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>,
+        <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
+        <pabeni@redhat.com>, <robh+dt@kernel.org>,
+        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
+        <corbet@lwn.net>, <steen.hegelund@microchip.com>,
+        <rdunlap@infradead.org>, <horms@kernel.org>,
+        <casper.casan@gmail.com>, <andrew@lunn.ch>
+CC:     <netdev@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <horatiu.vultur@microchip.com>, <Woojung.Huh@microchip.com>,
+        <Nicolas.Ferre@microchip.com>, <UNGLinuxDriver@microchip.com>,
+        <Thorsten.Kummermehr@microchip.com>
+References: <20230908142919.14849-1-Parthiban.Veerasooran@microchip.com>
+ <20230908142919.14849-6-Parthiban.Veerasooran@microchip.com>
+From:   "Ziyang Xuan (William)" <william.xuanziyang@huawei.com>
+Message-ID: <f9ae1701-cc9e-e2c4-3678-8881e4f33615@huawei.com>
+Date:   Mon, 11 Sep 2023 21:17:04 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.15.0
-Subject: Re: [PATCH v2 2/6] maple_tree: Introduce interfaces __mt_dup() and
- mtree_dup()
-To:     "Liam R. Howlett" <Liam.Howlett@Oracle.com>,
-        Peng Zhang <zhangpeng.00@bytedance.com>, corbet@lwn.net,
-        akpm@linux-foundation.org, willy@infradead.org, brauner@kernel.org,
-        surenb@google.com, michael.christie@oracle.com,
-        peterz@infradead.org, mathieu.desnoyers@efficios.com,
-        npiggin@gmail.com, avagin@gmail.com, linux-mm@kvack.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org
-References: <20230830125654.21257-1-zhangpeng.00@bytedance.com>
- <20230830125654.21257-3-zhangpeng.00@bytedance.com>
- <20230907201333.nyydilmlbbf2wzf7@revolver>
-From:   Peng Zhang <zhangpeng.00@bytedance.com>
-In-Reply-To: <20230907201333.nyydilmlbbf2wzf7@revolver>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <20230908142919.14849-6-Parthiban.Veerasooran@microchip.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+X-Originating-IP: [10.174.179.200]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ canpemm500006.china.huawei.com (7.192.105.130)
+X-CFilter-Loop: Reflected
+X-Spam-Status: No, score=-3.4 required=5.0 tests=BAYES_00,NICE_REPLY_A,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+> The LAN8650/1 is designed to conform to the OPEN Alliance 10BASE‑T1x
+> MAC‑PHY Serial Interface specification, Version 1.1. The IEEE Clause 4
+> MAC integration provides the low pin count standard SPI interface to any
+> microcontroller therefore providing Ethernet functionality without
+> requiring MAC integration within the microcontroller. The LAN8650/1
+> operates as an SPI client supporting SCLK clock rates up to a maximum of
+> 25 MHz. This SPI interface supports the transfer of both data (Ethernet
+> frames) and control (register access).
+> 
+> By default, the chunk data payload is 64 bytes in size. A smaller payload
+> data size of 32 bytes is also supported and may be configured in the
+> Chunk Payload Size (CPS) field of the Configuration 0 (OA_CONFIG0)
+> register. Changing the chunk payload size requires the LAN8650/1 be reset
+> and shall not be done during normal operation.
+> 
+> The Ethernet Media Access Controller (MAC) module implements a 10 Mbps
+> half duplex Ethernet MAC, compatible with the IEEE 802.3 standard.
+> 10BASE-T1S physical layer transceiver integrated into the LAN8650/1. The
+> PHY and MAC are connected via an internal Media Independent Interface
+> (MII).
+> 
+> Signed-off-by: Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
+> ---
+>  MAINTAINERS                              |   6 +
+>  drivers/net/ethernet/microchip/Kconfig   |  10 +
+>  drivers/net/ethernet/microchip/Makefile  |   3 +
+>  drivers/net/ethernet/microchip/lan865x.c | 589 +++++++++++++++++++++++
+>  4 files changed, 608 insertions(+)
+>  create mode 100644 drivers/net/ethernet/microchip/lan865x.c
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index c54454c7e7a1..666c042a15b2 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -13879,6 +13879,12 @@ L:	netdev@vger.kernel.org
+>  S:	Maintained
+>  F:	drivers/net/ethernet/microchip/lan743x_*
+>  
+> +MICROCHIP LAN8650/1 10BASE-T1S MACPHY ETHERNET DRIVER
+> +M:	Parthiban Veerasooran <parthiban.veerasooran@microchip.com>
+> +L:	netdev@vger.kernel.org
+> +S:	Maintained
+> +F:	drivers/net/ethernet/microchip/lan865x.c
+> +
+>  MICROCHIP LAN87xx/LAN937x T1 PHY DRIVER
+>  M:	Arun Ramadoss <arun.ramadoss@microchip.com>
+>  R:	UNGLinuxDriver@microchip.com
+> diff --git a/drivers/net/ethernet/microchip/Kconfig b/drivers/net/ethernet/microchip/Kconfig
+> index 329e374b9539..d99be51b99f1 100644
+> --- a/drivers/net/ethernet/microchip/Kconfig
+> +++ b/drivers/net/ethernet/microchip/Kconfig
+> @@ -59,4 +59,14 @@ source "drivers/net/ethernet/microchip/lan966x/Kconfig"
+>  source "drivers/net/ethernet/microchip/sparx5/Kconfig"
+>  source "drivers/net/ethernet/microchip/vcap/Kconfig"
+>  
+> +config LAN865X
+> +	tristate "LAN865x support"
+> +	depends on SPI
+> +	help
+> +      	  Support for the Microchip LAN8650/1 Rev.B0 Ethernet chip. It uses OPEN
+> +	  Alliance 10BASE-T1x Serial Interface specification.
+> +
+> +      	  To compile this driver as a module, choose M here. The module will be
+> +          called lan865x.
+> +
+>  endif # NET_VENDOR_MICROCHIP
+> diff --git a/drivers/net/ethernet/microchip/Makefile b/drivers/net/ethernet/microchip/Makefile
+> index bbd349264e6f..315e850b2b26 100644
+> --- a/drivers/net/ethernet/microchip/Makefile
+> +++ b/drivers/net/ethernet/microchip/Makefile
+> @@ -12,3 +12,6 @@ lan743x-objs := lan743x_main.o lan743x_ethtool.o lan743x_ptp.o
+>  obj-$(CONFIG_LAN966X_SWITCH) += lan966x/
+>  obj-$(CONFIG_SPARX5_SWITCH) += sparx5/
+>  obj-$(CONFIG_VCAP) += vcap/
+> +
+> +obj-$(CONFIG_LAN865X) += lan865x_t1s.o
+> +lan865x_t1s-objs := lan865x.o ../oa_tc6.o
+> diff --git a/drivers/net/ethernet/microchip/lan865x.c b/drivers/net/ethernet/microchip/lan865x.c
+> new file mode 100644
+> index 000000000000..3c8ebf4c258f
+> --- /dev/null
+> +++ b/drivers/net/ethernet/microchip/lan865x.c
+> @@ -0,0 +1,589 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Microchip's LAN865x 10BASE-T1S MAC-PHY driver
+> + *
+> + * Author: Parthiban Veerasooran <parthiban.veerasooran@microchip.com>
+> + */
+> +
+> +#include <linux/module.h>
+> +#include <linux/kernel.h>
+> +#include <linux/etherdevice.h>
+> +#include <linux/mdio.h>
+> +#include <linux/phy.h>
+> +#include <linux/of.h>
+> +#include <linux/oa_tc6.h>
+> +
+> +#define DRV_NAME		"lan865x"
+> +#define DRV_VERSION		"0.1"
+> +
+> +#define REG_STDR_RESET		0x00000003
+> +#define REG_MAC_ADDR_BO		0x00010022
+> +#define REG_MAC_ADDR_L		0x00010024
+> +#define REG_MAC_ADDR_H		0x00010025
+> +#define REG_MAC_NW_CTRL         0x00010000
+> +#define REG_MAC_NW_CONFIG	0x00010001
+> +#define REG_MAC_HASHL		0x00010020
+> +#define REG_MAC_HASHH		0x00010021
+> +#define REG_MAC_ADDR_BO		0x00010022
+> +#define REG_MAC_ADDR_L		0x00010024
+> +#define REG_MAC_ADDR_H		0x00010025
+> +
+> +#define CCS_Q0_TX_CFG		0x000A0081
+> +#define CCS_Q0_RX_CFG		0x000A0082
+> +
+> +/* Buffer configuration for 32-bytes chunk payload */
+> +#define CCS_Q0_TX_CFG_32	0x70000000
+> +#define CCS_Q0_RX_CFG_32	0x30000C00
+> +
+> +#define NW_RX_STATUS		BIT(2)
+> +#define NW_TX_STATUS		BIT(3)
+> +#define NW_DISABLE		0x0
+> +
+> +#define MAC_PROMISCUOUS_MODE	BIT(4)
+> +#define MAC_MULTICAST_MODE	BIT(6)
+> +#define MAC_UNICAST_MODE	BIT(7)
+> +
+> +#define TX_TIMEOUT		(4 * HZ)
+> +#define LAN865X_MSG_DEFAULT	\
+> +	(NETIF_MSG_PROBE | NETIF_MSG_IFUP | NETIF_MSG_IFDOWN | NETIF_MSG_LINK)
+> +
+> +struct lan865x_priv {
+> +	struct net_device *netdev;
+> +	struct spi_device *spi;
+> +	struct oa_tc6 *tc6;
+> +	struct mii_bus *mdiobus;
+> +	struct phy_device *phydev;
+> +	struct device *dev;
+> +	u32 msg_enable;
+> +	bool txcte;
+> +	bool rxcte;
+> +	u32 cps;
+> +	bool protected;
+> +};
+> +
+> +static void lan865x_handle_link_change(struct net_device *netdev)
+> +{
+> +	struct lan865x_priv *priv = netdev_priv(netdev);
+> +
+> +	phy_print_status(priv->phydev);
+> +}
+> +
+> +static int lan865x_mdiobus_read(struct mii_bus *bus, int phy_id, int idx)
+> +{
+> +	struct lan865x_priv *priv = bus->priv;
+> +	u32 regval;
+> +	bool ret;
+> +
+> +	ret = oa_tc6_read_register(priv->tc6, 0xFF00 | (idx & 0xFF), &regval, 1);
+> +	if (ret)
+> +		return -ENODEV;
+> +
+> +	return regval;
+> +}
+> +
+> +static int lan865x_mdiobus_write(struct mii_bus *bus, int phy_id, int idx,
+> +				 u16 regval)
+> +{
+> +	struct lan865x_priv *priv = bus->priv;
+> +	u32 value = regval;
+> +	bool ret;
+> +
+> +	ret = oa_tc6_write_register(priv->tc6, 0xFF00 | (idx & 0xFF), &value, 1);
+> +	if (ret)
+> +		return -ENODEV;
+> +
+> +	return 0;
+> +}
+> +
+> +static int lan865x_phy_init(struct lan865x_priv *priv)
+> +{
+> +	int ret;
+> +
+> +	priv->mdiobus = mdiobus_alloc();
+> +	if (!priv->mdiobus) {
+> +		netdev_err(priv->netdev, "MDIO bus alloc failed\n");
+> +		return -ENODEV;
+> +	}
+> +
+> +	priv->mdiobus->phy_mask = ~(u32)BIT(1);
+> +	priv->mdiobus->priv = priv;
+> +	priv->mdiobus->read = lan865x_mdiobus_read;
+> +	priv->mdiobus->write = lan865x_mdiobus_write;
+> +	priv->mdiobus->name = "lan865x-mdiobus";
+> +	priv->mdiobus->parent = priv->dev;
+> +
+> +	snprintf(priv->mdiobus->id, ARRAY_SIZE(priv->mdiobus->id),
+> +		 "%s", dev_name(&priv->spi->dev));
+> +
+> +	ret = mdiobus_register(priv->mdiobus);
+> +	if (ret) {
+> +		netdev_err(priv->netdev, "Could not register MDIO bus\n");
+> +		mdiobus_free(priv->mdiobus);
+> +		return ret;
+> +	}
+> +	priv->phydev = phy_find_first(priv->mdiobus);
+> +	if (!priv->phydev) {
+> +		netdev_err(priv->netdev, "No PHY found\n");
+> +		mdiobus_unregister(priv->mdiobus);
+> +		mdiobus_free(priv->mdiobus);
+> +		return -ENODEV;
+> +	}
+> +	priv->phydev->is_internal = true;
+> +	ret = phy_connect_direct(priv->netdev, priv->phydev,
+> +				 &lan865x_handle_link_change,
+> +				 PHY_INTERFACE_MODE_INTERNAL);
+> +	if (ret) {
+> +		netdev_err(priv->netdev, "Can't attach PHY to %s\n", priv->mdiobus->id);
+> +		return ret;
+Here return directly without above resources recycle. Please check if it is correct.
+If it is needed, it is recommended to use error labels to avoid duplicate code.
 
+> +	}
+> +	phy_attached_info(priv->phydev);
+> +	return ret;
+> +}
+> +
+> +static int lan865x_set_hw_macaddr(struct net_device *netdev)
+> +{
+> +	u32 regval;
+> +	bool ret;
+> +	struct lan865x_priv *priv = netdev_priv(netdev);
+> +	const u8 *mac = netdev->dev_addr;
+> +
+> +	ret = oa_tc6_read_register(priv->tc6, REG_MAC_NW_CTRL, &regval, 1);
+> +	if (ret)
+> +		goto error_mac;
+> +	if ((regval & NW_TX_STATUS) | (regval & NW_RX_STATUS)) {
+> +		if (netif_msg_drv(priv))
+> +			netdev_warn(netdev, "Hardware must be disabled for MAC setting\n");
+> +		return -EBUSY;
+> +	}
+> +	/* MAC address setting */
+> +	regval = (mac[3] << 24) | (mac[2] << 16) | (mac[1] << 8) |
+> +		mac[0];
+> +	ret = oa_tc6_write_register(priv->tc6, REG_MAC_ADDR_L, &regval, 1);
+> +	if (ret)
+> +		goto error_mac;
+> +
+> +	regval = (mac[5] << 8) | mac[4];
+> +	ret = oa_tc6_write_register(priv->tc6, REG_MAC_ADDR_H, &regval, 1);
+> +	if (ret)
+> +		goto error_mac;
+> +
+> +	regval = (mac[5] << 24) | (mac[4] << 16) |
+> +		(mac[3] << 8) | mac[2];
+> +	ret = oa_tc6_write_register(priv->tc6, REG_MAC_ADDR_BO, &regval, 1);
+> +	if (ret)
+> +		goto error_mac;
+> +
+> +	return 0;
+> +
+> +error_mac:
+> +	return -ENODEV;
 
-在 2023/9/8 04:13, Liam R. Howlett 写道:
-> * Peng Zhang <zhangpeng.00@bytedance.com> [230830 08:57]:
->> Introduce interfaces __mt_dup() and mtree_dup(), which are used to
->> duplicate a maple tree. Compared with traversing the source tree and
->> reinserting entry by entry in the new tree, it has better performance.
->> The difference between __mt_dup() and mtree_dup() is that mtree_dup()
->> handles locks internally.
-> 
-> __mt_dup() should be called mas_dup() to indicate the advanced interface
-> which requires users to handle their own locks.
-Changing to the mas_dup() interface may look like this:
-mas_dup(mas_old, mas_new)
+No resource recycle, goto and error label are not needed. What's more,
+the same label corresponds to different errors.
 
-This still encounters the problem we discussed before. You expect both
-mas_old and mas_new to point to the first element after the function
-returns, but for_each_vma(vmi, mpnt) in dup_mmap() does not support
-this, and will skip the first element.
+> +}
+> +
+> +static int
+> +lan865x_set_link_ksettings(struct net_device *netdev,
+> +			   const struct ethtool_link_ksettings *cmd)
+> +{
+> +	struct lan865x_priv *priv = netdev_priv(netdev);
+> +	int ret = 0;
+> +
+> +	if (cmd->base.autoneg != AUTONEG_DISABLE ||
+> +	    cmd->base.speed != SPEED_10 || cmd->base.duplex != DUPLEX_HALF) {
+> +		if (netif_msg_link(priv))
+> +			netdev_warn(netdev, "Unsupported link setting");
+> +		ret = -EOPNOTSUPP;
+> +	} else {
+> +		if (netif_msg_link(priv))
+> +			netdev_warn(netdev, "Hardware must be disabled to set link mode");
+> +		ret = -EBUSY;
+> +	}
+> +	return ret;
+> +}
+> +
+> +static int
+> +lan865x_get_link_ksettings(struct net_device *netdev,
+> +			   struct ethtool_link_ksettings *cmd)
+> +{
+> +	ethtool_link_ksettings_zero_link_mode(cmd, supported);
+> +	ethtool_link_ksettings_add_link_mode(cmd, supported, 10baseT_Half);
+> +	ethtool_link_ksettings_add_link_mode(cmd, supported, TP);
+> +
+> +	cmd->base.speed = SPEED_10;
+> +	cmd->base.duplex = DUPLEX_HALF;
+> +	cmd->base.port	= PORT_TP;
+> +	cmd->base.autoneg = AUTONEG_DISABLE;
+> +
+> +	return 0;
+> +}
+> +
+> +static void lan865x_set_msglevel(struct net_device *netdev, u32 val)
+> +{
+> +	struct lan865x_priv *priv = netdev_priv(netdev);
+> +
+> +	priv->msg_enable = val;
+> +}
+> +
+> +static u32 lan865x_get_msglevel(struct net_device *netdev)
+> +{
+> +	struct lan865x_priv *priv = netdev_priv(netdev);
+> +
+> +	return priv->msg_enable;
+> +}
+> +
+> +static void
+> +lan865x_get_drvinfo(struct net_device *netdev, struct ethtool_drvinfo *info)
+> +{
+> +	strscpy(info->driver, DRV_NAME, sizeof(info->driver));
+> +	strscpy(info->version, DRV_VERSION, sizeof(info->version));
+> +	strscpy(info->bus_info,
+> +		dev_name(netdev->dev.parent), sizeof(info->bus_info));
+> +}
+> +
+> +static const struct ethtool_ops lan865x_ethtool_ops = {
+> +	.get_drvinfo	= lan865x_get_drvinfo,
+> +	.get_msglevel	= lan865x_get_msglevel,
+> +	.set_msglevel	= lan865x_set_msglevel,
+> +	.get_link_ksettings = lan865x_get_link_ksettings,
+> +	.set_link_ksettings = lan865x_set_link_ksettings,
+> +};
+> +
+> +static void lan865x_tx_timeout(struct net_device *netdev, unsigned int txqueue)
+> +{
+> +	netdev->stats.tx_errors++;
+> +}
+> +
+> +static int lan865x_set_mac_address(struct net_device *netdev, void *addr)
+> +{
+> +	struct sockaddr *address = addr;
+> +
+> +	if (netif_running(netdev))
+> +		return -EBUSY;
+> +	if (!is_valid_ether_addr(address->sa_data))
+> +		return -EADDRNOTAVAIL;
+> +
+> +	eth_hw_addr_set(netdev, address->sa_data);
+> +	return lan865x_set_hw_macaddr(netdev);
+> +}
+> +
+> +static u32 lan865x_hash(u8 addr[ETH_ALEN])
+> +{
+> +	return (ether_crc(ETH_ALEN, addr) >> 26) & 0x3f;
+> +}
+> +
+> +static void lan865x_set_multicast_list(struct net_device *netdev)
+> +{
+> +	struct lan865x_priv *priv = netdev_priv(netdev);
+> +	u32 regval = 0;
+> +
+> +	if (netdev->flags & IFF_PROMISC) {
+> +		/* Enabling promiscuous mode */
+> +		regval |= MAC_PROMISCUOUS_MODE;
+> +		regval &= (~MAC_MULTICAST_MODE);
+> +		regval &= (~MAC_UNICAST_MODE);
+> +	} else if (netdev->flags & IFF_ALLMULTI) {
+> +		/* Enabling all multicast mode */
+> +		regval &= (~MAC_PROMISCUOUS_MODE);
+> +		regval |= MAC_MULTICAST_MODE;
+> +		regval &= (~MAC_UNICAST_MODE);
+> +	} else if (!netdev_mc_empty(netdev)) {
+> +		/* Enabling specific multicast addresses */
+> +		struct netdev_hw_addr *ha;
+> +		u32 hash_lo = 0;
+> +		u32 hash_hi = 0;
+> +
+> +		netdev_for_each_mc_addr(ha, netdev) {
+> +			u32 bit_num = lan865x_hash(ha->addr);
+> +			u32 mask = 1 << (bit_num & 0x1f);
+> +
+> +			if (bit_num & 0x20)
+> +				hash_hi |= mask;
+> +			else
+> +				hash_lo |= mask;
+> +		}
+> +		if (oa_tc6_write_register(priv->tc6, REG_MAC_HASHH, &hash_hi, 1)) {
+> +			if (netif_msg_timer(priv))
+> +				netdev_err(netdev, "Failed to write reg_hashh");
+> +			return;
+> +		}
+> +		if (oa_tc6_write_register(priv->tc6, REG_MAC_HASHL, &hash_lo, 1)) {
+> +			if (netif_msg_timer(priv))
+> +				netdev_err(netdev, "Failed to write reg_hashl");
+> +			return;
+> +		}
+> +		regval &= (~MAC_PROMISCUOUS_MODE);
+> +		regval &= (~MAC_MULTICAST_MODE);
+> +		regval |= MAC_UNICAST_MODE;
+> +	} else {
+> +		/* enabling local mac address only */
+> +		if (oa_tc6_write_register(priv->tc6, REG_MAC_HASHH, &regval, 1)) {
+> +			if (netif_msg_timer(priv))
+> +				netdev_err(netdev, "Failed to write reg_hashh");
+> +			return;
+> +		}
+> +		if (oa_tc6_write_register(priv->tc6, REG_MAC_HASHL, &regval, 1)) {
+> +			if (netif_msg_timer(priv))
+> +				netdev_err(netdev, "Failed to write reg_hashl");
+> +			return;
+> +		}
+> +	}
+> +	if (oa_tc6_write_register(priv->tc6, REG_MAC_NW_CONFIG, &regval, 1)) {
+> +		if (netif_msg_timer(priv))
+> +			netdev_err(netdev, "Failed to enable promiscuous mode");
+> +	}
+> +}
+> +
+> +static netdev_tx_t lan865x_send_packet(struct sk_buff *skb,
+> +				       struct net_device *netdev)
+> +{
+> +	struct lan865x_priv *priv = netdev_priv(netdev);
+> +
+> +	return oa_tc6_send_eth_pkt(priv->tc6, skb);
+> +}
+> +
+> +static int lan865x_hw_disable(struct lan865x_priv *priv)
+> +{
+> +	u32 regval = NW_DISABLE;
+> +
+> +	if (oa_tc6_write_register(priv->tc6, REG_MAC_NW_CTRL, &regval, 1))
+> +		return -ENODEV;
+> +
+> +	return 0;
+> +}
+> +
+> +static int lan865x_net_close(struct net_device *netdev)
+> +{
+> +	struct lan865x_priv *priv = netdev_priv(netdev);
+> +	int ret;
+> +
+> +	netif_stop_queue(netdev);
+> +	ret = lan865x_hw_disable(priv);
+> +	if (ret) {
+> +		if (netif_msg_ifup(priv))
+> +			netdev_err(netdev, "Failed to disable the hardware\n");
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int lan865x_hw_enable(struct lan865x_priv *priv)
+> +{
+> +	u32 regval = NW_TX_STATUS | NW_RX_STATUS;
+> +
+> +	if (oa_tc6_write_register(priv->tc6, REG_MAC_NW_CTRL, &regval, 1))
+> +		return -ENODEV;
+> +
+> +	return 0;
+> +}
+> +
+> +static int lan865x_net_open(struct net_device *netdev)
+> +{
+> +	struct lan865x_priv *priv = netdev_priv(netdev);
+> +	int ret;
+> +
+> +	if (!is_valid_ether_addr(netdev->dev_addr)) {
+> +		if (netif_msg_ifup(priv))
+> +			netdev_err(netdev, "Invalid MAC address %pm", netdev->dev_addr);
+> +		return -EADDRNOTAVAIL;
+> +	}
+> +	if (lan865x_hw_disable(priv)) {
+> +		if (netif_msg_ifup(priv))
+> +			netdev_err(netdev, "Failed to disable the hardware\n");
+> +		return -ENODEV;
+> +	}
+> +	ret = lan865x_set_hw_macaddr(netdev);
+> +	if (ret != 0)
+> +		return ret;
+> +
+> +	if (lan865x_hw_enable(priv) != 0) {
+> +		if (netif_msg_ifup(priv))
+> +			netdev_err(netdev, "Failed to enable hardware\n");
+> +		return -ENODEV;
+> +	}
+> +	netif_start_queue(netdev);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct net_device_ops lan865x_netdev_ops = {
+> +	.ndo_open		= lan865x_net_open,
+> +	.ndo_stop		= lan865x_net_close,
+> +	.ndo_start_xmit		= lan865x_send_packet,
+> +	.ndo_set_rx_mode	= lan865x_set_multicast_list,
+> +	.ndo_set_mac_address	= lan865x_set_mac_address,
+> +	.ndo_tx_timeout		= lan865x_tx_timeout,
+> +	.ndo_validate_addr	= eth_validate_addr,
+> +};
+> +
+> +static int lan865x_get_dt_data(struct lan865x_priv *priv)
+> +{
+> +	struct spi_device *spi = priv->spi;
+> +	int ret;
+> +
+> +	if (of_property_present(spi->dev.of_node, "oa-chunk-size")) {
+> +		ret = of_property_read_u32(spi->dev.of_node, "oa-chunk-size",
+> +					   &priv->cps);
+> +		if (ret < 0)
+> +			return ret;
+> +	} else {
+> +		priv->cps = 64;
+> +		dev_info(&spi->dev, "Property oa-chunk-size is not found in dt and proceeding with the size 64\n");
+> +	}
+> +
+> +	if (of_property_present(spi->dev.of_node, "oa-tx-cut-through"))
+> +		priv->txcte = true;
+> +	else
+> +		dev_info(&spi->dev, "Property oa-tx-cut-through is not found in dt and proceeding with tx store and forward mode\n");
+> +
+> +	if (of_property_present(spi->dev.of_node, "oa-rx-cut-through"))
+> +		priv->rxcte = true;
+> +	else
+> +		dev_info(&spi->dev, "Property oa-rx-cut-through is not found in dt and proceeding with rx store and forward mode\n");
+> +
+> +	if (of_property_present(spi->dev.of_node, "oa-protected"))
+> +		priv->protected = true;
+> +	else
+> +		dev_info(&spi->dev, "Property oa-protected is not found in dt and proceeding with protection enabled\n");
+> +
+> +	return 0;
+> +}
+> +
+> +static int lan865x_probe(struct spi_device *spi)
+> +{
+> +	struct net_device *netdev;
+> +	struct lan865x_priv *priv;
+> +	u32 regval;
+> +	int ret;
+> +
+> +	netdev = alloc_etherdev(sizeof(struct lan865x_priv));
+> +	if (!netdev)
+> +		return -ENOMEM;
+> +
+> +	priv = netdev_priv(netdev);
+> +	priv->netdev = netdev;
+> +	priv->spi = spi;
+> +	priv->msg_enable = 0;
+> +	spi_set_drvdata(spi, priv);
+> +	SET_NETDEV_DEV(netdev, &spi->dev);
+> +
+> +	ret = lan865x_get_dt_data(priv);
+> +	if (ret)
+> +		return ret;
 
-Unless we have an iterator similar to "do {} while()", we have to reset 
-mas_new. There is still additional overhead in making both mas_old and
-mas_new point to the first element, because mas will point to the last
-node after dfs order traversal.
+Has not free allocated netdev.
 
-In fact, I think mtree_dup() and __mt_dup() are enough. They seem to
-match mtree_destroy() and __mt_destroy() very well. Underlines indicate
-that users need to handle the lock themselves.
+> +
+> +	spi->rt = true;
+> +	spi_setup(spi);
+> +
+> +	priv->tc6 = oa_tc6_init(spi, netdev);
+> +	if (!priv->tc6) {
+> +		ret = -ENOMEM;
+> +		goto error_oa_tc6_init;
+> +	}
+> +
+> +	if (priv->cps == 32) {
+> +		regval = CCS_Q0_TX_CFG_32;
+> +		ret = oa_tc6_write_register(priv->tc6, CCS_Q0_TX_CFG, &regval, 1);
+> +		if (ret)
+> +			return ret;
+
+No resources recycle. Please check.
+
+> +
+> +		regval = CCS_Q0_RX_CFG_32;
+> +		ret = oa_tc6_write_register(priv->tc6, CCS_Q0_RX_CFG, &regval, 1);
+> +		if (ret)
+> +			return ret;
+
+No resources recycle. Please check.
+
+> +	}
+> +
+> +	if (oa_tc6_configure(priv->tc6, priv->cps, priv->protected, priv->txcte,
+> +			     priv->rxcte))
+> +		goto err_macphy_config;
+> +
+> +	ret = lan865x_phy_init(priv);
+> +	if (ret)
+> +		goto error_phy;
+> +
+> +	if (device_get_ethdev_address(&spi->dev, netdev))
+> +		eth_hw_addr_random(netdev);
+> +
+> +	ret = lan865x_set_hw_macaddr(netdev);
+> +	if (ret) {
+> +		if (netif_msg_probe(priv))
+> +			dev_err(&spi->dev, "Failed to configure MAC");
+> +		goto error_set_mac;
+> +	}
+> +
+> +	netdev->if_port = IF_PORT_10BASET;
+> +	netdev->irq = spi->irq;
+> +	netdev->netdev_ops = &lan865x_netdev_ops;
+> +	netdev->watchdog_timeo = TX_TIMEOUT;
+> +	netdev->ethtool_ops = &lan865x_ethtool_ops;
+> +	ret = register_netdev(netdev);
+> +	if (ret) {
+> +		if (netif_msg_probe(priv))
+> +			dev_err(&spi->dev, "Register netdev failed (ret = %d)",
+> +				ret);
+> +		goto error_netdev_register;
+> +	}
+> +
+> +	phy_start(priv->phydev);
+> +	return 0;
+> +
+> +error_netdev_register:
+> +error_set_mac:
+> +	phy_disconnect(priv->phydev);
+> +	mdiobus_unregister(priv->mdiobus);
+> +	mdiobus_free(priv->mdiobus);
+> +error_phy:
+> +err_macphy_config:
+> +	oa_tc6_deinit(priv->tc6);
+> +error_oa_tc6_init:
+> +	free_netdev(priv->netdev);
+> +	return ret;
+> +}
+> +
+> +static void lan865x_remove(struct spi_device *spi)
+> +{
+> +	struct lan865x_priv *priv = spi_get_drvdata(spi);
+> +
+> +	phy_stop(priv->phydev);
+> +	phy_disconnect(priv->phydev);
+> +	mdiobus_unregister(priv->mdiobus);
+> +	mdiobus_free(priv->mdiobus);
+> +	unregister_netdev(priv->netdev);
+> +	if (oa_tc6_deinit(priv->tc6))
+> +		dev_err(&spi->dev, "Failed to deinitialize oa tc6\n");
+> +	free_netdev(priv->netdev);
+> +}
+> +
+> +#ifdef CONFIG_OF
+> +static const struct of_device_id lan865x_dt_ids[] = {
+> +	{ .compatible = "microchip,lan865x" },
+> +	{ /* Sentinel */ }
+> +};
+> +MODULE_DEVICE_TABLE(of, lan865x_dt_ids);
+> +#endif
+> +
+> +#ifdef CONFIG_ACPI
+> +static const struct acpi_device_id lan865x_acpi_ids[] = {
+> +	{ .id = "LAN865X",
+> +	},
+> +	{},
+> +};
+> +MODULE_DEVICE_TABLE(acpi, lan865x_acpi_ids);
+> +#endif
+> +
+> +static struct spi_driver lan865x_driver = {
+> +	.driver = {
+> +		.name = DRV_NAME,
+> +#ifdef CONFIG_OF
+> +		.of_match_table = lan865x_dt_ids,
+> +#endif
+> +#ifdef CONFIG_ACPI
+> +		   .acpi_match_table = ACPI_PTR(lan865x_acpi_ids),
+> +#endif
+> +	 },
+> +	.probe = lan865x_probe,
+> +	.remove = lan865x_remove,
+> +};
+> +module_spi_driver(lan865x_driver);
+> +
+> +MODULE_DESCRIPTION(DRV_NAME " 10Base-T1S MACPHY Ethernet Driver");
+> +MODULE_AUTHOR("Parthiban Veerasooran <parthiban.veerasooran@microchip.com>");
+> +MODULE_LICENSE("GPL");
+> +MODULE_ALIAS("spi:" DRV_NAME);
 > 
->>
->> Signed-off-by: Peng Zhang <zhangpeng.00@bytedance.com>
->> ---
->>   include/linux/maple_tree.h |   3 +
->>   lib/maple_tree.c           | 265 +++++++++++++++++++++++++++++++++++++
->>   2 files changed, 268 insertions(+)
->>
->> diff --git a/include/linux/maple_tree.h b/include/linux/maple_tree.h
->> index e41c70ac7744..44fe8a57ecbd 100644
->> --- a/include/linux/maple_tree.h
->> +++ b/include/linux/maple_tree.h
->> @@ -327,6 +327,9 @@ int mtree_store(struct maple_tree *mt, unsigned long index,
->>   		void *entry, gfp_t gfp);
->>   void *mtree_erase(struct maple_tree *mt, unsigned long index);
->>   
->> +int mtree_dup(struct maple_tree *mt, struct maple_tree *new, gfp_t gfp);
->> +int __mt_dup(struct maple_tree *mt, struct maple_tree *new, gfp_t gfp);
->> +
->>   void mtree_destroy(struct maple_tree *mt);
->>   void __mt_destroy(struct maple_tree *mt);
->>   
->> diff --git a/lib/maple_tree.c b/lib/maple_tree.c
->> index ef234cf02e3e..8f841682269c 100644
->> --- a/lib/maple_tree.c
->> +++ b/lib/maple_tree.c
->> @@ -6370,6 +6370,271 @@ void *mtree_erase(struct maple_tree *mt, unsigned long index)
->>   }
->>   EXPORT_SYMBOL(mtree_erase);
->>   
->> +/*
->> + * mas_dup_free() - Free a half-constructed tree.
-> 
-> Maybe "Free an incomplete duplication of a tree" ?
-> 
->> + * @mas: Points to the last node of the half-constructed tree.
-> 
-> Your use of "Points to" seems to indicate someone knows you are talking
-> about a "maple state that has a node pointing to".  Can this be made
-> more clear?
-> @mas: The maple state of a incomplete tree.
-> 
-> Then add a note that @mas->node points to the last successfully
-> allocated node?
-> 
-> Or something along those lines.
-> 
->> + *
->> + * This function frees all nodes starting from @mas->node in the reverse order
->> + * of mas_dup_build(). There is no need to hold the source tree lock at this
->> + * time.
->> + */
->> +static void mas_dup_free(struct ma_state *mas)
->> +{
->> +	struct maple_node *node;
->> +	enum maple_type type;
->> +	void __rcu **slots;
->> +	unsigned char count, i;
->> +
->> +	/* Maybe the first node allocation failed. */
->> +	if (!mas->node)
->> +		return;
->> +
->> +	while (!mte_is_root(mas->node)) {
->> +		mas_ascend(mas);
->> +
->> +		if (mas->offset) {
->> +			mas->offset--;
->> +			do {
->> +				mas_descend(mas);
->> +				mas->offset = mas_data_end(mas);
->> +			} while (!mte_is_leaf(mas->node));
-> 
-> Can you blindly descend and check !mte_is_leaf()?  What happens when the
-> tree duplication fails at random internal nodes?  Maybe I missed how
-> this cannot happen?
-> 
->> +
->> +			mas_ascend(mas);
->> +		}
->> +
->> +		node = mte_to_node(mas->node);
->> +		type = mte_node_type(mas->node);
->> +		slots = (void **)ma_slots(node, type);
->> +		count = mas_data_end(mas) + 1;
->> +		for (i = 0; i < count; i++)
->> +			((unsigned long *)slots)[i] &= ~MAPLE_NODE_MASK;
->> +
->> +		mt_free_bulk(count, slots);
->> +	}
-> 
-> 
->> +
->> +	node = mte_to_node(mas->node);
->> +	mt_free_one(node);
->> +}
->> +
->> +/*
->> + * mas_copy_node() - Copy a maple node and allocate child nodes.
-> 
-> if required. "..and allocate child nodes if required."
-> 
->> + * @mas: Points to the source node.
->> + * @new_mas: Points to the new node.
->> + * @parent: The parent node of the new node.
->> + * @gfp: The GFP_FLAGS to use for allocations.
->> + *
->> + * Copy @mas->node to @new_mas->node, set @parent to be the parent of
->> + * @new_mas->node and allocate new child nodes for @new_mas->node.
->> + * If memory allocation fails, @mas is set to -ENOMEM.
->> + */
->> +static inline void mas_copy_node(struct ma_state *mas, struct ma_state *new_mas,
->> +		struct maple_node *parent, gfp_t gfp)
->> +{
->> +	struct maple_node *node = mte_to_node(mas->node);
->> +	struct maple_node *new_node = mte_to_node(new_mas->node);
->> +	enum maple_type type;
->> +	unsigned long val;
->> +	unsigned char request, count, i;
->> +	void __rcu **slots;
->> +	void __rcu **new_slots;
->> +
->> +	/* Copy the node completely. */
->> +	memcpy(new_node, node, sizeof(struct maple_node));
->> +
->> +	/* Update the parent node pointer. */
->> +	if (unlikely(ma_is_root(node)))
->> +		val = MA_ROOT_PARENT;
->> +	else
->> +		val = (unsigned long)node->parent & MAPLE_NODE_MASK;
-> 
-> If you treat the root as special and outside the loop, then you can
-> avoid the check for root for every non-root node.  For root, you just
-> need to copy and do this special parent thing before the main loop in
-> mas_dup_build().  This will avoid an extra branch for each VMA over 14,
-> so that would add up to a lot of instructions.
-> 
->> +
->> +	new_node->parent = ma_parent_ptr(val | (unsigned long)parent);
->> +
->> +	if (mte_is_leaf(mas->node))
->> +		return;
-> 
-> You are checking here and in mas_dup_build() for the leaf, splitting the
-> function into parent assignment and allocate would allow you to check
-> once. Copy could be moved to the main loop or with the parent setting,
-> depending on how you handle the root suggestion above.
-> 
->> +
->> +	/* Allocate memory for child nodes. */
->> +	type = mte_node_type(mas->node);
->> +	new_slots = ma_slots(new_node, type);
->> +	request = mas_data_end(mas) + 1;
->> +	count = mt_alloc_bulk(gfp, request, new_slots);
->> +	if (unlikely(count < request)) {
->> +		if (count)
->> +			mt_free_bulk(count, new_slots);
-> 
-> The new_slots will still contain the addresses of the freed nodes.
-> Don't you need to clear it here to avoid a double free?  Is there a
-> test case for this in your testing?  Again, I may have missed how this
-> is not possible..
-> 
->> +		mas_set_err(mas, -ENOMEM);
->> +		return;
->> +	}
->> +
->> +	/* Restore node type information in slots. */
->> +	slots = ma_slots(node, type);
->> +	for (i = 0; i < count; i++)
->> +		((unsigned long *)new_slots)[i] |=
->> +			((unsigned long)mt_slot_locked(mas->tree, slots, i) &
->> +			MAPLE_NODE_MASK);
-> 
-> Can you expand this to multiple lines to make it more clear what is
-> going on?
-> 
->> +}
->> +
->> +/*
->> + * mas_dup_build() - Build a new maple tree from a source tree
->> + * @mas: The maple state of source tree.
->> + * @new_mas: The maple state of new tree.
->> + * @gfp: The GFP_FLAGS to use for allocations.
->> + *
->> + * This function builds a new tree in DFS preorder. If the memory allocation
->> + * fails, the error code -ENOMEM will be set in @mas, and @new_mas points to the
->> + * last node. mas_dup_free() will free the half-constructed tree.
->> + *
->> + * Note that the attributes of the two trees must be exactly the same, and the
->> + * new tree must be empty, otherwise -EINVAL will be returned.
->> + */
->> +static inline void mas_dup_build(struct ma_state *mas, struct ma_state *new_mas,
->> +		gfp_t gfp)
->> +{
->> +	struct maple_node *node, *parent;
-> 
-> Could parent be struct maple_pnode?
-> 
->> +	struct maple_enode *root;
->> +	enum maple_type type;
->> +
->> +	if (unlikely(mt_attr(mas->tree) != mt_attr(new_mas->tree)) ||
->> +	    unlikely(!mtree_empty(new_mas->tree))) {
->> +		mas_set_err(mas, -EINVAL);
->> +		return;
->> +	}
->> +
->> +	mas_start(mas);
->> +	if (mas_is_ptr(mas) || mas_is_none(mas)) {
->> +		/*
->> +		 * The attributes of the two trees must be the same before this.
->> +		 * The following assignment makes them the same height.
->> +		 */
->> +		new_mas->tree->ma_flags = mas->tree->ma_flags;
->> +		rcu_assign_pointer(new_mas->tree->ma_root, mas->tree->ma_root);
->> +		return;
->> +	}
->> +
->> +	node = mt_alloc_one(gfp);
->> +	if (!node) {
->> +		new_mas->node = NULL;
-> 
-> We don't have checks around for node == NULL, MAS_NONE would be a safer
-> choice.  It is unlikely that someone would dup the tree and fail then
-> call something else, but I avoid setting node to NULL.
-> 
->> +		mas_set_err(mas, -ENOMEM);
->> +		return;
->> +	}
->> +
->> +	type = mte_node_type(mas->node);
->> +	root = mt_mk_node(node, type);
->> +	new_mas->node = root;
->> +	new_mas->min = 0;
->> +	new_mas->max = ULONG_MAX;
->> +	parent = ma_mnode_ptr(new_mas->tree);
->> +
->> +	while (1) {
->> +		mas_copy_node(mas, new_mas, parent, gfp);
->> +
->> +		if (unlikely(mas_is_err(mas)))
->> +			return;
->> +
->> +		/* Once we reach a leaf, we need to ascend, or end the loop. */
->> +		if (mte_is_leaf(mas->node)) {
->> +			if (mas->max == ULONG_MAX) {
->> +				new_mas->tree->ma_flags = mas->tree->ma_flags;
->> +				rcu_assign_pointer(new_mas->tree->ma_root,
->> +						   mte_mk_root(root));
->> +				break;
-> 
-> If you move this to the end of the function, you can replace the same
-> block above with a goto.  That will avoid breaking the line up.
-> 
->> +			}
->> +
->> +			do {
->> +				/*
->> +				 * Must not at the root node, because we've
->> +				 * already end the loop when we reach the last
->> +				 * leaf.
->> +				 */
-> 
-> I'm not sure what the comment above is trying to say.  Do you mean "This
-> won't reach the root node because the loop will break when the last leaf
-> is hit"?  I don't think that is accurate.. it will hit the root node but
-> not the end of the root node, right?  Anyways, the comment isn't clear
-> so please have a look.
-> 
->> +				mas_ascend(mas);
->> +				mas_ascend(new_mas);
->> +			} while (mas->offset == mas_data_end(mas));
->> +
->> +			mas->offset++;
->> +			new_mas->offset++;
->> +		}
->> +
->> +		mas_descend(mas);
->> +		parent = mte_to_node(new_mas->node);
->> +		mas_descend(new_mas);
->> +		mas->offset = 0;
->> +		new_mas->offset = 0;
->> +	}
->> +}
->> +
->> +/**
->> + * __mt_dup(): Duplicate a maple tree
->> + * @mt: The source maple tree
->> + * @new: The new maple tree
->> + * @gfp: The GFP_FLAGS to use for allocations
->> + *
->> + * This function duplicates a maple tree using a faster method than traversing
->> + * the source tree and inserting entries into the new tree one by one.
-> 
-> Can you make this comment more about what your code does instead of the
-> "one by one" description?
-> 
->> + * The user needs to ensure that the attributes of the source tree and the new
->> + * tree are the same, and the new tree needs to be an empty tree, otherwise
->> + * -EINVAL will be returned.
->> + * Note that the user needs to manually lock the source tree and the new tree.
->> + *
->> + * Return: 0 on success, -ENOMEM if memory could not be allocated, -EINVAL If
->> + * the attributes of the two trees are different or the new tree is not an empty
->> + * tree.
->> + */
->> +int __mt_dup(struct maple_tree *mt, struct maple_tree *new, gfp_t gfp)
->> +{
->> +	int ret = 0;
->> +	MA_STATE(mas, mt, 0, 0);
->> +	MA_STATE(new_mas, new, 0, 0);
->> +
->> +	mas_dup_build(&mas, &new_mas, gfp);
->> +
->> +	if (unlikely(mas_is_err(&mas))) {
->> +		ret = xa_err(mas.node);
->> +		if (ret == -ENOMEM)
->> +			mas_dup_free(&new_mas);
->> +	}
->> +
->> +	return ret;
->> +}
->> +EXPORT_SYMBOL(__mt_dup);
->> +
->> +/**
->> + * mtree_dup(): Duplicate a maple tree
->> + * @mt: The source maple tree
->> + * @new: The new maple tree
->> + * @gfp: The GFP_FLAGS to use for allocations
->> + *
->> + * This function duplicates a maple tree using a faster method than traversing
->> + * the source tree and inserting entries into the new tree one by one.
-> 
-> Again, it's more interesting to state it uses the DFS preorder copy.
-> 
-> It is also worth mentioning the superior allocation behaviour since that
-> is a desirable trait for many.  In fact, you should add the allocation
-> behaviour in your cover letter.
-> 
->> + * The user needs to ensure that the attributes of the source tree and the new
->> + * tree are the same, and the new tree needs to be an empty tree, otherwise
->> + * -EINVAL will be returned.
->> + *
->> + * Return: 0 on success, -ENOMEM if memory could not be allocated, -EINVAL If
->> + * the attributes of the two trees are different or the new tree is not an empty
->> + * tree.
->> + */
->> +int mtree_dup(struct maple_tree *mt, struct maple_tree *new, gfp_t gfp)
->> +{
->> +	int ret = 0;
->> +	MA_STATE(mas, mt, 0, 0);
->> +	MA_STATE(new_mas, new, 0, 0);
->> +
->> +	mas_lock(&new_mas);
->> +	mas_lock(&mas);
->> +
->> +	mas_dup_build(&mas, &new_mas, gfp);
->> +	mas_unlock(&mas);
->> +
->> +	if (unlikely(mas_is_err(&mas))) {
->> +		ret = xa_err(mas.node);
->> +		if (ret == -ENOMEM)
->> +			mas_dup_free(&new_mas);
->> +	}
->> +
->> +	mas_unlock(&new_mas);
->> +
->> +	return ret;
->> +}
->> +EXPORT_SYMBOL(mtree_dup);
->> +
->>   /**
->>    * __mt_destroy() - Walk and free all nodes of a locked maple tree.
->>    * @mt: The maple tree
->> -- 
->> 2.20.1
->>
