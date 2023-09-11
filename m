@@ -2,161 +2,247 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6A53879C090
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 02:20:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 31E1279BDB8
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 02:16:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1343963AbjIKVNB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 17:13:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35950 "EHLO
+        id S1343739AbjIKVMZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 17:12:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39436 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241413AbjIKPIB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 11:08:01 -0400
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7A809FA;
-        Mon, 11 Sep 2023 08:07:57 -0700 (PDT)
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 38BCSGRL031218;
-        Mon, 11 Sep 2023 15:07:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=qcppdkim1;
- bh=M/smHuhk+GMwiaIFqSp0QnUyhRqMkvHvq61BOMETG3o=;
- b=X2GbFT2FWpuGQ0iHfzHfjRxH2IelXDoaBDySPx5b09500+V4katOMSKlLPS0+5Z4asUv
- nL7zWUnM5hrRiMVTyPqmbwQVzfNFlfIhljJEusTZe7monlVSqOxcckFW/V43vd1fJaAB
- 3SLbocvICLOeCBGFpqzuGqMwzIQoyjZ7e4VacTx7/y7wZRBVPqwtSrzw/zPmCqJZ2fvi
- 2TCiLFpQLfQbPOgj5ibnqRCM8qKx+4fK3pMYouzyvflZnpNLeKgVxZj1v7H4cVtGi9H+
- ham2bZWDSqJTX5hipCXdJslEa8y+QoJzmUfKvpV0VONcWnoOXe0fcxYImvKRUaxRJHkZ qA== 
-Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3t1yac8uuh-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 11 Sep 2023 15:07:25 +0000
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
-        by NALASPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 38BF7NvQ031544
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 11 Sep 2023 15:07:24 GMT
-Received: from [10.216.14.127] (10.80.80.8) by nalasex01a.na.qualcomm.com
- (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.36; Mon, 11 Sep
- 2023 08:07:09 -0700
-Message-ID: <9da888dc-401a-4cbb-b616-b4654fa79e35@quicinc.com>
-Date:   Mon, 11 Sep 2023 20:37:03 +0530
+        with ESMTP id S243702AbjIKRcn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 13:32:43 -0400
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com [IPv6:2607:f8b0:4864:20::834])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 47AE9125
+        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 10:32:38 -0700 (PDT)
+Received: by mail-qt1-x834.google.com with SMTP id d75a77b69052e-414ba610766so25551cf.0
+        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 10:32:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20221208; t=1694453557; x=1695058357; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=vS06nh80KVOxCFrHKBzqbQxcQAoLQCJ5U5egzLZgpvg=;
+        b=hSh0fiY+s1CC1IB4r862zcw/5DKCCf85AF480c8QKu0+YQtUfbDhL9wtVNaGdsLrZ0
+         Dowx21XZhq7KtUJhltvrCrkMqh8ks2bdvnrnNeXY+xKSMB90Eqxl8xsqYTxYgfd/W4A2
+         JGKqLsTlaAqzAXIWlK9C2flf6D7sMqEwt4iYivr6eRoDV5DmykkPAuIE92svGUjd9l1b
+         /4wg4V8J/zytPe3CXrowh5nmtVELwtnFQIrPKzkOFF/C2ruemP2xofL4EXDxLSuaHsNG
+         1PJoGrF3t0M/3Q509sPpClbFwoIMVNJwnhCDNuX5Zu4f/1gJfq8xshpYMpcxUTn7UBKd
+         xP/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1694453557; x=1695058357;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=vS06nh80KVOxCFrHKBzqbQxcQAoLQCJ5U5egzLZgpvg=;
+        b=OWb3INc8H3CFURr0dF0P/ZenlSwQzRxYPwsRhAV5N+o2dmYhsFYfDM5FRAYt5kPqR4
+         0nIvHwC/RUCC3sHk6uUFQvGI8NSSvH0oFsNRzJ9QAnRZJNj8/M7fQVVXiyF2Qo3pSi1h
+         ZXxeZfDCpRI25/VvPOm2Fe5jrl1P4Jvlkjo/ukqlEZZHc7FeLw/6Y4Dr1b2O5Rzh0FQ5
+         21CyVU/pyIyeADj59BaJUGefy5NmzClMi8+cxiFGcppnyghI8fxapswSim/9JlM4Gio1
+         Uq6pdAnzH8BMldb6tzNLkdAveHGCCvWQOpUk5rMWuN/LrqAeJL9qoO0uL1dA79KCGLJe
+         ebSg==
+X-Gm-Message-State: AOJu0YzShhNGoqDhaFZzHpHYwEdyiQq7Sj6MngSHdNs8mGZA52Q2BoaN
+        vn+tfoYC1k2iJ+C5LS5GEaMp2yiEHiU6JnNukpBzug==
+X-Google-Smtp-Source: AGHT+IFB8vpoAIVESpU9czT1w5x6NETkoKez+IqbAgOCvDM9Mj42QoUPaJWihBoHkb7DhpDrqULeeeUau23CM5Xzwdo=
+X-Received: by 2002:a05:622a:13ce:b0:412:16f:c44f with SMTP id
+ p14-20020a05622a13ce00b00412016fc44fmr26090qtk.6.1694453557215; Mon, 11 Sep
+ 2023 10:32:37 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [REBASE PATCH v5 15/17] firmware: scm: Modify only the download
- bits in TCSR register
-Content-Language: en-US
-To:     Mukesh Ojha <quic_mojha@quicinc.com>, <corbet@lwn.net>,
-        <agross@kernel.org>, <andersson@kernel.org>,
-        <konrad.dybcio@linaro.org>, <robh+dt@kernel.org>,
-        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
-        <keescook@chromium.org>, <tony.luck@intel.com>,
-        <gpiccoli@igalia.com>, <mathieu.poirier@linaro.org>,
-        <catalin.marinas@arm.com>, <will@kernel.org>,
-        <linus.walleij@linaro.org>, <andy.shevchenko@gmail.com>,
-        <vigneshr@ti.com>, <nm@ti.com>, <matthias.bgg@gmail.com>,
-        <kgene@kernel.org>, <alim.akhtar@samsung.com>,
-        <bmasney@redhat.com>, <quic_tsoni@quicinc.com>
-CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <linux-hardening@vger.kernel.org>,
-        <linux-remoteproc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-gpio@vger.kernel.org>, <linux-mediatek@lists.infradead.org>,
-        <linux-samsung-soc@vger.kernel.org>, <kernel@quicinc.com>,
-        "Poovendhan Selvaraj" <quic_poovendh@quicinc.com>
-References: <1694429639-21484-1-git-send-email-quic_mojha@quicinc.com>
- <1694429639-21484-16-git-send-email-quic_mojha@quicinc.com>
-From:   Kathiravan Thirumoorthy <quic_kathirav@quicinc.com>
-In-Reply-To: <1694429639-21484-16-git-send-email-quic_mojha@quicinc.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: ZDO2ULWUeou-4qYw_-dQxukWf0tQGiKd
-X-Proofpoint-GUID: ZDO2ULWUeou-4qYw_-dQxukWf0tQGiKd
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-09-11_10,2023-09-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 mlxscore=0
- spamscore=0 mlxlogscore=999 priorityscore=1501 bulkscore=0 suspectscore=0
- clxscore=1015 adultscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2308100000
- definitions=main-2309110138
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+References: <1694087913-46144-1-git-send-email-renyu.zj@linux.alibaba.com>
+ <1694087913-46144-2-git-send-email-renyu.zj@linux.alibaba.com>
+ <CAP-5=fVWcQrqLeuc-k4HRNrNdb_=9CbqTSOAX=HDR7f=j8b0Hg@mail.gmail.com> <8bab7404-8e24-8606-558c-db3495429f2f@linux.alibaba.com>
+In-Reply-To: <8bab7404-8e24-8606-558c-db3495429f2f@linux.alibaba.com>
+From:   Ian Rogers <irogers@google.com>
+Date:   Mon, 11 Sep 2023 10:32:25 -0700
+Message-ID: <CAP-5=fU4jWHnbt8BirMZHa7cuLhkAAMAfD28AdRc23zx-e3EyQ@mail.gmail.com>
+Subject: Re: [PATCH v8 1/8] perf pmu: "Compat" supports matching multiple identifiers
+To:     Jing Zhang <renyu.zj@linux.alibaba.com>
+Cc:     John Garry <john.g.garry@oracle.com>,
+        Will Deacon <will@kernel.org>,
+        James Clark <james.clark@arm.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Mike Leach <mike.leach@linaro.org>,
+        Leo Yan <leo.yan@linaro.org>,
+        Namhyung Kim <namhyung@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Jiri Olsa <jolsa@kernel.org>,
+        Adrian Hunter <adrian.hunter@intel.com>,
+        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-perf-users@vger.kernel.org, linux-doc@vger.kernel.org,
+        Zhuo Song <zhuo.song@linux.alibaba.com>,
+        Shuai Xue <xueshuai@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-On 9/11/2023 4:23 PM, Mukesh Ojha wrote:
-> Crashdump collection is based on the DLOAD bit of TCSR register.
-> To retain other bits, we read the register and modify only the
-> DLOAD bit as the other bits have their own significance.
+On Sun, Sep 10, 2023 at 7:32=E2=80=AFPM Jing Zhang <renyu.zj@linux.alibaba.=
+com> wrote:
 >
-> Co-developed-by: Poovendhan Selvaraj <quic_poovendh@quicinc.com>
-> Signed-off-by: Poovendhan Selvaraj <quic_poovendh@quicinc.com>
-> Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
-> Tested-by: Kathiravan Thirumoorthy <quic_kathirav@quicinc.com> # IPQ9574 and IPQ5332
-> ---
->   drivers/firmware/qcom_scm.c | 16 ++++++++++++++--
->   1 file changed, 14 insertions(+), 2 deletions(-)
 >
-> diff --git a/drivers/firmware/qcom_scm.c b/drivers/firmware/qcom_scm.c
-> index 321133f0950d..5cacae63ee2a 100644
-> --- a/drivers/firmware/qcom_scm.c
-> +++ b/drivers/firmware/qcom_scm.c
-> @@ -5,6 +5,8 @@
->   #include <linux/platform_device.h>
->   #include <linux/init.h>
->   #include <linux/interrupt.h>
-> +#include <linux/bitfield.h>
-> +#include <linux/bits.h>
->   #include <linux/completion.h>
->   #include <linux/cpumask.h>
->   #include <linux/export.h>
-> @@ -26,6 +28,14 @@
->   static bool download_mode = IS_ENABLED(CONFIG_QCOM_SCM_DOWNLOAD_MODE_DEFAULT);
->   module_param(download_mode, bool, 0);
->   
-> +#define SCM_HAS_CORE_CLK	BIT(0)
-> +#define SCM_HAS_IFACE_CLK	BIT(1)
-> +#define SCM_HAS_BUS_CLK		BIT(2)
+>
+> =E5=9C=A8 2023/9/9 =E4=B8=8A=E5=8D=885:33, Ian Rogers =E5=86=99=E9=81=93:
+> > On Thu, Sep 7, 2023 at 4:58=E2=80=AFAM Jing Zhang <renyu.zj@linux.aliba=
+ba.com> wrote:
+> >>
+> >> The jevent "Compat" is used for uncore PMU alias or metric definitions=
+.
+> >>
+> >> The same PMU driver has different PMU identifiers due to different
+> >> hardware versions and types, but they may have some common PMU event.
+> >> Since a Compat value can only match one identifier, when adding the
+> >> same event alias to PMUs with different identifiers, each identifier
+> >> needs to be defined once, which is not streamlined enough.
+> >>
+> >> So let "Compat" supports matching multiple identifiers for uncore PMU
+> >> alias. For example, the Compat value {43401;436*} can match the PMU
+> >> identifier "43401", that is, CMN600_r0p0, and the PMU identifier with
+> >> the prefix "436", that is, all CMN650, where "*" is a wildcard.
+> >> Tokens in Unit field are delimited by ';' with no spaces.
+> >>
+> >> Signed-off-by: Jing Zhang <renyu.zj@linux.alibaba.com>
+> >> Reviewed-by: John Garry <john.g.garry@oracle.com>
+> >> ---
+> >>  tools/perf/util/pmu.c | 28 ++++++++++++++++++++++++++--
+> >>  tools/perf/util/pmu.h |  1 +
+> >>  2 files changed, 27 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/tools/perf/util/pmu.c b/tools/perf/util/pmu.c
+> >> index e215985..c3c3818 100644
+> >> --- a/tools/perf/util/pmu.c
+> >> +++ b/tools/perf/util/pmu.c
+> >> @@ -875,6 +875,30 @@ static bool pmu_uncore_alias_match(const char *pm=
+u_name, const char *name)
+> >>         return res;
+> >>  }
+> >>
+> >> +bool pmu_uncore_identifier_match(const char *id, const char *compat)
+> >> +{
+> >> +       char *tmp =3D NULL, *tok, *str;
+> >> +       bool res =3D false;
+> >> +
+> >> +       /*
+> >> +        * The strdup() call is necessary here because "compat" is a c=
+onst str*
+> >> +        * type and cannot be used as an argument to strtok_r().
+> >> +        */
+> >> +       str =3D strdup(compat);
+> >> +       if (!str)
+> >> +               return false;
+> >> +
+> >> +       tok =3D strtok_r(str, ";", &tmp);
+> >
+> > Did the comma vs semicolon difference get explained? It seems to add
+> > inconsistency to use a semicolon.
+> >
+>
+> Hi Ian,
+>
+> Yes, I explained the reason for using semicolons instead of commas in v7.
+>
+> I use a semicolon instead of a comma because I want to distinguish it fro=
+m the function
+> of the comma in "Unit" and avoid confusion between the use of commas in "=
+Unit" and "Compat".
+> Because in Unit, commas act as wildcards, and in =E2=80=9CCompat=E2=80=9D=
+, the semicolon means =E2=80=9Cor=E2=80=9D. So
+> I think semicolons are more appropriate.
+>
+> John also raised this issue earlier, and we finally agreed to use semicol=
+ons.
+> What do you think?
+
+I'm okay with it, but thanks for capturing the why of this. I'd like
+at some point to make the wildcarding of things less ad hoc. For
+example, on x86 we use regular expressions to match cpuid:
+https://git.kernel.org/pub/scm/linux/kernel/git/perf/perf-tools-next.git/tr=
+ee/tools/perf/pmu-events/arch/x86/mapfile.csv?h=3Dperf-tools-next
+but file name style matching for pmus:
+https://git.kernel.org/pub/scm/linux/kernel/git/perf/perf-tools-next.git/tr=
+ee/tools/perf/util/pmu.c?h=3Dperf-tools-next#n1974
+Given that we're okay with regular expressions then I don't see why
+everything shouldn't be a regular expression. This could, for example,
+make matching PMUs more specific than just adding a star and doing a
+file name match. For an example of why this is weird, on my laptop:
+```
+$ perf stat -e i/actual-frequency/ true
+
+Performance counter stats for 'system wide':
+
+                0      i/actual-frequency/
+
+      0.001168195 seconds time elapsed
+```
+The PMU I used here as 'i' is /sys/devices/i915 as we allow arbitrary
+numbers after a PMU name for cases of multiple uncore PMUs.
+
+My feeling longer term is that the matching distinction of Unit and
+Compat, comma and semi-colon, would be better captured with regular
+expressions as I think they show the intent in the matching more
+clearly.
+
+Thanks,
+Ian
 
 
-Is this intentional to add these macros back again?
-
-
-> +
-> +#define QCOM_DLOAD_MASK		GENMASK(5, 4)
-> +#define QCOM_DLOAD_FULLDUMP	0x1
-> +#define QCOM_DLOAD_NODUMP	0x0
-> +
->   struct qcom_scm {
->   	struct device *dev;
->   	struct clk *core_clk;
-> @@ -440,6 +450,7 @@ static int __qcom_scm_set_dload_mode(struct device *dev, bool enable)
->   
->   static void qcom_scm_set_download_mode(bool enable)
->   {
-> +	u32 val = enable ? QCOM_DLOAD_FULLDUMP : QCOM_DLOAD_NODUMP;
->   	bool avail;
->   	int ret = 0;
->   
-> @@ -449,8 +460,9 @@ static void qcom_scm_set_download_mode(bool enable)
->   	if (avail) {
->   		ret = __qcom_scm_set_dload_mode(__scm->dev, enable);
->   	} else if (__scm->dload_mode_addr) {
-> -		ret = qcom_scm_io_writel(__scm->dload_mode_addr,
-> -				enable ? QCOM_SCM_BOOT_SET_DLOAD_MODE : 0);
-> +		ret = qcom_scm_io_update_field(__scm->dload_mode_addr,
-> +					       QCOM_DLOAD_MASK,
-> +					       FIELD_PREP(QCOM_DLOAD_MASK, val));
->   	} else {
->   		dev_err(__scm->dev,
->   			"No available mechanism for setting download mode\n");
+> Thanks,
+> Jing
+>
+> > Thanks,
+> > Ian
+> >
+> >> +       for (; tok; tok =3D strtok_r(NULL, ";", &tmp)) {
+> >> +               if (!fnmatch(tok, id, FNM_CASEFOLD)) {
+> >> +                       res =3D true;
+> >> +                       break;
+> >> +               }
+> >> +       }
+> >> +       free(str);
+> >> +       return res;
+> >> +}
+> >> +
+> >>  static int pmu_add_cpu_aliases_map_callback(const struct pmu_event *p=
+e,
+> >>                                         const struct pmu_events_table =
+*table __maybe_unused,
+> >>                                         void *vdata)
+> >> @@ -915,8 +939,8 @@ static int pmu_add_sys_aliases_iter_fn(const struc=
+t pmu_event *pe,
+> >>         if (!pe->compat || !pe->pmu)
+> >>                 return 0;
+> >>
+> >> -       if (!strcmp(pmu->id, pe->compat) &&
+> >> -           pmu_uncore_alias_match(pe->pmu, pmu->name)) {
+> >> +       if (pmu_uncore_alias_match(pe->pmu, pmu->name) &&
+> >> +                       pmu_uncore_identifier_match(pmu->id, pe->compa=
+t)) {
+> >>                 perf_pmu__new_alias(pmu,
+> >>                                 pe->name,
+> >>                                 pe->desc,
+> >> diff --git a/tools/perf/util/pmu.h b/tools/perf/util/pmu.h
+> >> index bd5d804..1bf5cf1 100644
+> >> --- a/tools/perf/util/pmu.h
+> >> +++ b/tools/perf/util/pmu.h
+> >> @@ -240,6 +240,7 @@ void pmu_add_cpu_aliases_table(struct perf_pmu *pm=
+u,
+> >>  char *perf_pmu__getcpuid(struct perf_pmu *pmu);
+> >>  const struct pmu_events_table *pmu_events_table__find(void);
+> >>  const struct pmu_metrics_table *pmu_metrics_table__find(void);
+> >> +bool pmu_uncore_identifier_match(const char *id, const char *compat);
+> >>
+> >>  int perf_pmu__convert_scale(const char *scale, char **end, double *sv=
+al);
+> >>
+> >> --
+> >> 1.8.3.1
+> >>
