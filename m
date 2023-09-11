@@ -2,132 +2,282 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E211779BA93
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 02:11:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 51E5F79BD0C
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 02:15:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1343606AbjIKVMF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 17:12:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59066 "EHLO
+        id S1343930AbjIKVM6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 17:12:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45986 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236560AbjIKK5Y (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 06:57:24 -0400
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 59FA4F3;
-        Mon, 11 Sep 2023 03:57:20 -0700 (PDT)
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 38B8OB3K008351;
-        Mon, 11 Sep 2023 10:56:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=qcppdkim1;
- bh=9t/tuA65wT0eZs+b0FA+a9eyUdqc9XfGqsquufrPl3g=;
- b=FWWZNxG+O2+uA+DwGV1qVHrjVMFmeh9kWdfvWVPwC2fPwRF2oHYHPjsKGQQQpZFy7b50
- f2CJw4ttx2YHBLGnARyuV+ha1qqkyGL9ZVds5YFP9/sIjMUUPirEw1C4ZEA1bXzKkWMm
- YZ03/7TxwQ+XUBueCNXzjm8SjpUFmVxTOmaieUwlcXRa+Co2F3IqPPbsOClf9F9G4Ii2
- nzJ0Xx5Twl+epOq78ic7rKAYyVahUp2B9fif08KVMV1S6Oz71rpNjZ1Tbf4XEPhWImHF
- HVm04C+ICiSQJJi2HbWKipeFq5epohRw0Yx+z9ST0Z2e0OvPe/e3pv+KpxJKGyQttRBf wQ== 
-Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3t0edmkqaq-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 11 Sep 2023 10:56:48 +0000
-Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com [10.45.79.139])
-        by NASANPPMTA04.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 38BAuloX018357
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Mon, 11 Sep 2023 10:56:47 GMT
-Received: from hu-mojha-hyd.qualcomm.com (10.80.80.8) by
- nasanex01c.na.qualcomm.com (10.45.79.139) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.36; Mon, 11 Sep 2023 03:56:37 -0700
-From:   Mukesh Ojha <quic_mojha@quicinc.com>
-To:     <corbet@lwn.net>, <agross@kernel.org>, <andersson@kernel.org>,
-        <konrad.dybcio@linaro.org>, <robh+dt@kernel.org>,
-        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
-        <keescook@chromium.org>, <tony.luck@intel.com>,
-        <gpiccoli@igalia.com>, <mathieu.poirier@linaro.org>,
-        <catalin.marinas@arm.com>, <will@kernel.org>,
-        <linus.walleij@linaro.org>, <andy.shevchenko@gmail.com>,
-        <vigneshr@ti.com>, <nm@ti.com>, <matthias.bgg@gmail.com>,
-        <kgene@kernel.org>, <alim.akhtar@samsung.com>,
-        <bmasney@redhat.com>, <quic_tsoni@quicinc.com>
-CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <linux-hardening@vger.kernel.org>,
-        <linux-remoteproc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-gpio@vger.kernel.org>, <linux-mediatek@lists.infradead.org>,
-        <linux-samsung-soc@vger.kernel.org>, <kernel@quicinc.com>,
-        <quic_mojha@quicinc.com>
-Subject: [REBASE PATCH v5 17/17] firmware: qcom_scm: Add multiple download mode support
-Date:   Mon, 11 Sep 2023 16:23:59 +0530
-Message-ID: <1694429639-21484-18-git-send-email-quic_mojha@quicinc.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1694429639-21484-1-git-send-email-quic_mojha@quicinc.com>
-References: <1694429639-21484-1-git-send-email-quic_mojha@quicinc.com>
+        with ESMTP id S236640AbjIKLHh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 07:07:37 -0400
+X-Greylist: delayed 379 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 11 Sep 2023 04:07:31 PDT
+Received: from out-213.mta0.migadu.com (out-213.mta0.migadu.com [IPv6:2001:41d0:1004:224b::d5])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DC488CDC
+        for <linux-doc@vger.kernel.org>; Mon, 11 Sep 2023 04:07:31 -0700 (PDT)
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+        t=1694430069;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=E5yHKp0OcXp3JHJgg+0qOrM4VXGsFKESg9vuY4j64KM=;
+        b=RFgJBw48EPZafs2msT138v8SXX3p9xUpN/mvU6RgMl44mFl5tuNwYlwSB0mKtJRoeAdXUJ
+        C1g5Lk5GblE6HBE93nzpeDZldouoYN22NM8R+3AHXm+4Q85V5H++AgcpRZ8xxh5kYJFzwH
+        SMsGTEyx07SRu2mkQtSXMN2LZfpAFAE=
+From:   Yajun Deng <yajun.deng@linux.dev>
+To:     corbet@lwn.net, mingo@redhat.com, peterz@infradead.org,
+        juri.lelli@redhat.com, vincent.guittot@linaro.org,
+        dietmar.eggemann@arm.com, rostedt@goodmis.org, bsegall@google.com,
+        mgorman@suse.de, bristot@redhat.com, vschneid@redhat.com,
+        mhiramat@kernel.org
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-trace-kernel@vger.kernel.org,
+        Yajun Deng <yajun.deng@linux.dev>
+Subject: [PATCH] sched: Change the name of preempt mode from full to low_latency
+Date:   Mon, 11 Sep 2023 19:00:46 +0800
+Message-Id: <20230911110046.3877123-1-yajun.deng@linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nasanex01c.na.qualcomm.com (10.45.79.139)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: YujbjpjEHNqq676eggwCrMIBo858Mw88
-X-Proofpoint-GUID: YujbjpjEHNqq676eggwCrMIBo858Mw88
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-09-11_06,2023-09-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 adultscore=0
- priorityscore=1501 mlxlogscore=999 malwarescore=0 spamscore=0
- impostorscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0 mlxscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2308100000 definitions=main-2309110099
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Currently, scm driver only supports full dump when download
-mode is selected. Add support to enable minidump as well as
-enable it along with fulldump.
+There is a similar name fully in Kconfig.preempt, but it corresponds to
+PREEMPT_RT. In order to distinguish them, change the name of preempt mode
+from full to low_latency.
 
-Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
+Also, define a global array and variable that used to save preempt mode
+name and size.
+
+Signed-off-by: Yajun Deng <yajun.deng@linux.dev>
 ---
- drivers/firmware/qcom_scm.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ .../admin-guide/kernel-parameters.txt         |  2 +-
+ include/linux/sched.h                         |  8 ++--
+ kernel/sched/core.c                           | 43 ++++++++++---------
+ kernel/sched/debug.c                          |  5 +--
+ kernel/sched/sched.h                          |  2 +
+ kernel/trace/trace.c                          |  4 +-
+ 6 files changed, 32 insertions(+), 32 deletions(-)
 
-diff --git a/drivers/firmware/qcom_scm.c b/drivers/firmware/qcom_scm.c
-index 4ecdb0d025a4..c70ab9afd3cb 100644
---- a/drivers/firmware/qcom_scm.c
-+++ b/drivers/firmware/qcom_scm.c
-@@ -34,6 +34,8 @@ static u32 download_mode;
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 0a1731a0f0ef..9284fd7999d7 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -4581,7 +4581,7 @@
+ 			Select preemption mode if you have CONFIG_PREEMPT_DYNAMIC
+ 			none - Limited to cond_resched() calls
+ 			voluntary - Limited to cond_resched() and might_sleep() calls
+-			full - Any section that isn't explicitly preempt disabled
++			low_latency - Any section that isn't explicitly preempt disabled
+ 			       can be preempted anytime.
  
- #define QCOM_DLOAD_MASK		GENMASK(5, 4)
- #define QCOM_DLOAD_FULLDUMP	0x1
-+#define QCOM_DLOAD_MINIDUMP	0x2
-+#define QCOM_DLOAD_BOTHDUMP	(QCOM_DLOAD_FULLDUMP | QCOM_DLOAD_MINIDUMP)
- #define QCOM_DLOAD_NODUMP	0x0
+ 	print-fatal-signals=
+diff --git a/include/linux/sched.h b/include/linux/sched.h
+index 6d1341b1673f..ea607a0ce6f6 100644
+--- a/include/linux/sched.h
++++ b/include/linux/sched.h
+@@ -2181,7 +2181,7 @@ static inline void cond_resched_rcu(void)
  
- struct qcom_scm {
-@@ -86,6 +88,8 @@ static const char * const qcom_scm_convention_names[] = {
- static const char * const download_mode_name[] = {
- 	[QCOM_DLOAD_NODUMP]	= "off",
- 	[QCOM_DLOAD_FULLDUMP]	= "full",
-+	[QCOM_DLOAD_MINIDUMP]	= "mini",
-+	[QCOM_DLOAD_BOTHDUMP]	= "full,mini",
- };
+ extern bool preempt_model_none(void);
+ extern bool preempt_model_voluntary(void);
+-extern bool preempt_model_full(void);
++extern bool preempt_model_low_latency(void);
  
- static struct qcom_scm *__scm;
-@@ -1470,7 +1474,7 @@ static const struct kernel_param_ops download_mode_param_ops = {
+ #else
  
- module_param_cb(download_mode, &download_mode_param_ops, NULL, 0644);
- MODULE_PARM_DESC(download_mode,
--		"download mode: off/full are acceptable values");
-+		"download mode: off/full/mini/full,mini are acceptable values");
- 
- static int qcom_scm_probe(struct platform_device *pdev)
+@@ -2193,14 +2193,14 @@ static inline bool preempt_model_voluntary(void)
  {
+ 	return IS_ENABLED(CONFIG_PREEMPT_VOLUNTARY);
+ }
+-static inline bool preempt_model_full(void)
++static inline bool preempt_model_low_latency(void)
+ {
+ 	return IS_ENABLED(CONFIG_PREEMPT);
+ }
+ 
+ #endif
+ 
+-static inline bool preempt_model_rt(void)
++static inline bool preempt_model_fully(void)
+ {
+ 	return IS_ENABLED(CONFIG_PREEMPT_RT);
+ }
+@@ -2215,7 +2215,7 @@ static inline bool preempt_model_rt(void)
+  */
+ static inline bool preempt_model_preemptible(void)
+ {
+-	return preempt_model_full() || preempt_model_rt();
++	return preempt_model_low_latency() || preempt_model_fully();
+ }
+ 
+ /*
+diff --git a/kernel/sched/core.c b/kernel/sched/core.c
+index 2299a5cfbfb9..2abbc0baaae7 100644
+--- a/kernel/sched/core.c
++++ b/kernel/sched/core.c
+@@ -8705,7 +8705,7 @@ EXPORT_SYMBOL(__cond_resched_rwlock_write);
+  *   preempt_schedule_notrace   <- NOP
+  *   irqentry_exit_cond_resched <- NOP
+  *
+- * FULL:
++ * LOW_LATENCY:
+  *   cond_resched               <- RET0
+  *   might_resched              <- RET0
+  *   preempt_schedule           <- preempt_schedule
+@@ -8717,21 +8717,25 @@ enum {
+ 	preempt_dynamic_undefined = -1,
+ 	preempt_dynamic_none,
+ 	preempt_dynamic_voluntary,
+-	preempt_dynamic_full,
++	preempt_dynamic_low_latency,
+ };
+-
+ int preempt_dynamic_mode = preempt_dynamic_undefined;
+ 
++const char *preempt_modes[] = {
++	[preempt_dynamic_none]        = "none",
++	[preempt_dynamic_voluntary]   = "voluntary",
++	[preempt_dynamic_low_latency] = "low_latency",
++};
++int preempt_modes_size = ARRAY_SIZE(preempt_modes);
++
+ int sched_dynamic_mode(const char *str)
+ {
+-	if (!strcmp(str, "none"))
+-		return preempt_dynamic_none;
+-
+-	if (!strcmp(str, "voluntary"))
+-		return preempt_dynamic_voluntary;
++	int i;
+ 
+-	if (!strcmp(str, "full"))
+-		return preempt_dynamic_full;
++	for (i = 0; i < preempt_modes_size; i++) {
++		if (!strcmp(str, preempt_modes[i]))
++			return i;
++	}
+ 
+ 	return -EINVAL;
+ }
+@@ -8752,7 +8756,7 @@ static bool klp_override;
+ static void __sched_dynamic_update(int mode)
+ {
+ 	/*
+-	 * Avoid {NONE,VOLUNTARY} -> FULL transitions from ever ending up in
++	 * Avoid {NONE,VOLUNTARY} -> LOW_LATENCY transitions from ever ending up in
+ 	 * the ZERO state, which is invalid.
+ 	 */
+ 	if (!klp_override)
+@@ -8770,8 +8774,6 @@ static void __sched_dynamic_update(int mode)
+ 		preempt_dynamic_disable(preempt_schedule);
+ 		preempt_dynamic_disable(preempt_schedule_notrace);
+ 		preempt_dynamic_disable(irqentry_exit_cond_resched);
+-		if (mode != preempt_dynamic_mode)
+-			pr_info("Dynamic Preempt: none\n");
+ 		break;
+ 
+ 	case preempt_dynamic_voluntary:
+@@ -8781,22 +8783,21 @@ static void __sched_dynamic_update(int mode)
+ 		preempt_dynamic_disable(preempt_schedule);
+ 		preempt_dynamic_disable(preempt_schedule_notrace);
+ 		preempt_dynamic_disable(irqentry_exit_cond_resched);
+-		if (mode != preempt_dynamic_mode)
+-			pr_info("Dynamic Preempt: voluntary\n");
+ 		break;
+ 
+-	case preempt_dynamic_full:
++	case preempt_dynamic_low_latency:
+ 		if (!klp_override)
+ 			preempt_dynamic_disable(cond_resched);
+ 		preempt_dynamic_disable(might_resched);
+ 		preempt_dynamic_enable(preempt_schedule);
+ 		preempt_dynamic_enable(preempt_schedule_notrace);
+ 		preempt_dynamic_enable(irqentry_exit_cond_resched);
+-		if (mode != preempt_dynamic_mode)
+-			pr_info("Dynamic Preempt: full\n");
+ 		break;
+ 	}
+ 
++	if (mode != preempt_dynamic_mode)
++		pr_info("Dynamic Preempt: %s\n", preempt_modes[mode]);
++
+ 	preempt_dynamic_mode = mode;
+ }
+ 
+@@ -8860,8 +8861,8 @@ static void __init preempt_dynamic_init(void)
+ 		} else {
+ 			/* Default static call setting, nothing to do */
+ 			WARN_ON_ONCE(!IS_ENABLED(CONFIG_PREEMPT));
+-			preempt_dynamic_mode = preempt_dynamic_full;
+-			pr_info("Dynamic Preempt: full\n");
++			preempt_dynamic_mode = preempt_dynamic_low_latency;
++			pr_info("Dynamic Preempt: %s\n", preempt_modes[preempt_dynamic_mode]);
+ 		}
+ 	}
+ }
+@@ -8876,7 +8877,7 @@ static void __init preempt_dynamic_init(void)
+ 
+ PREEMPT_MODEL_ACCESSOR(none);
+ PREEMPT_MODEL_ACCESSOR(voluntary);
+-PREEMPT_MODEL_ACCESSOR(full);
++PREEMPT_MODEL_ACCESSOR(low_latency);
+ 
+ #else /* !CONFIG_PREEMPT_DYNAMIC */
+ 
+diff --git a/kernel/sched/debug.c b/kernel/sched/debug.c
+index 4c3d0d9f3db6..fd516dcff988 100644
+--- a/kernel/sched/debug.c
++++ b/kernel/sched/debug.c
+@@ -244,12 +244,9 @@ static ssize_t sched_dynamic_write(struct file *filp, const char __user *ubuf,
+ 
+ static int sched_dynamic_show(struct seq_file *m, void *v)
+ {
+-	static const char * preempt_modes[] = {
+-		"none", "voluntary", "full"
+-	};
+ 	int i;
+ 
+-	for (i = 0; i < ARRAY_SIZE(preempt_modes); i++) {
++	for (i = 0; i < preempt_modes_size; i++) {
+ 		if (preempt_dynamic_mode == i)
+ 			seq_puts(m, "(");
+ 		seq_puts(m, preempt_modes[i]);
+diff --git a/kernel/sched/sched.h b/kernel/sched/sched.h
+index 04846272409c..6210c40f35da 100644
+--- a/kernel/sched/sched.h
++++ b/kernel/sched/sched.h
+@@ -3276,6 +3276,8 @@ extern int try_to_wake_up(struct task_struct *tsk, unsigned int state, int wake_
+ 
+ #ifdef CONFIG_PREEMPT_DYNAMIC
+ extern int preempt_dynamic_mode;
++extern const char *preempt_modes[];
++extern int preempt_modes_size;
+ extern int sched_dynamic_mode(const char *str);
+ extern void sched_dynamic_update(int mode);
+ #endif
+diff --git a/kernel/trace/trace.c b/kernel/trace/trace.c
+index 2b4ded753367..3d731b4fea65 100644
+--- a/kernel/trace/trace.c
++++ b/kernel/trace/trace.c
+@@ -4394,8 +4394,8 @@ print_trace_header(struct seq_file *m, struct trace_iterator *iter)
+ 		   buf->cpu,
+ 		   preempt_model_none()      ? "server" :
+ 		   preempt_model_voluntary() ? "desktop" :
+-		   preempt_model_full()      ? "preempt" :
+-		   preempt_model_rt()        ? "preempt_rt" :
++		   preempt_model_low_latency() ? "preempt" :
++		   preempt_model_fully()     ? "preempt_rt" :
+ 		   "unknown",
+ 		   /* These are reserved for later use */
+ 		   0, 0, 0, 0);
 -- 
-2.7.4
+2.25.1
 
