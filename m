@@ -2,120 +2,112 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 710EF79C178
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 03:14:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2661679C1F6
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 03:49:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232493AbjILBOe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Sep 2023 21:14:34 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57840 "EHLO
+        id S234593AbjILBtR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Sep 2023 21:49:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51428 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232806AbjILBOY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 21:14:24 -0400
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D6BDE6FDD1;
-        Mon, 11 Sep 2023 18:03:36 -0700 (PDT)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-        by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 38C0KXkH031847;
-        Tue, 12 Sep 2023 00:39:38 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=date : from : to :
- cc : subject : message-id : references : mime-version : content-type :
- in-reply-to; s=qcppdkim1; bh=b+ZDvkvQfKietDBjdlhgqxs9r2mzT6RnU3pGyGd2BkA=;
- b=XSPS0PTtdcMZxd6ljmCdyxivBX0e0Llbz4hMM1uUnMpq90hn0OTRUTyBkH7/HydYrrMR
- YTF2AgTo5PKj+DF6euX8I6G7AgrmyuaW8NKAGrMMwUxc74XFT4AbY2FuxNl2vxp9VN5c
- msoAWjjKQXZlI3VkQa1SH2FEjUGweATifEvcE8WCBv8XicDrVmKdBNx5GyfBu2HYE1NW
- U6/oISTtd8NH4lq5xcavPb/oA8VDWBlvoAoDFJ34Gp6ZF8uufpX/wv1K+4UKRvX8xEz/
- nwSBYJebtY+chzhxl4AADpDlSnzat6fdpot3CKwZ8bMonFH8v69FJG0ExQwmaR7R9+6u Yg== 
-Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-        by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3t29b0gggd-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 12 Sep 2023 00:39:37 +0000
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
-        by NALASPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 38C0daBH012692
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 12 Sep 2023 00:39:36 GMT
-Received: from hu-pkondeti-hyd.qualcomm.com (10.80.80.8) by
- nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.36; Mon, 11 Sep 2023 17:39:24 -0700
-Date:   Tue, 12 Sep 2023 06:09:21 +0530
-From:   Pavan Kondeti <quic_pkondeti@quicinc.com>
-To:     Mukesh Ojha <quic_mojha@quicinc.com>
-CC:     Pavan Kondeti <quic_pkondeti@quicinc.com>, <corbet@lwn.net>,
-        <agross@kernel.org>, <andersson@kernel.org>,
-        <konrad.dybcio@linaro.org>, <robh+dt@kernel.org>,
-        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
-        <keescook@chromium.org>, <tony.luck@intel.com>,
-        <gpiccoli@igalia.com>, <mathieu.poirier@linaro.org>,
-        <catalin.marinas@arm.com>, <will@kernel.org>,
-        <linus.walleij@linaro.org>, <andy.shevchenko@gmail.com>,
-        <vigneshr@ti.com>, <nm@ti.com>, <matthias.bgg@gmail.com>,
-        <kgene@kernel.org>, <alim.akhtar@samsung.com>,
-        <bmasney@redhat.com>, <quic_tsoni@quicinc.com>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <linux-hardening@vger.kernel.org>,
-        <linux-remoteproc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-gpio@vger.kernel.org>, <linux-mediatek@lists.infradead.org>,
-        <linux-samsung-soc@vger.kernel.org>, <kernel@quicinc.com>
-Subject: Re: [PATCH v5 09/17] pstore/ram: Use dynamic ramoops reserve resource
-Message-ID: <d69a1822-0972-419a-ae8b-b6979733a18b@quicinc.com>
-References: <1694290578-17733-1-git-send-email-quic_mojha@quicinc.com>
- <1694290578-17733-10-git-send-email-quic_mojha@quicinc.com>
- <20425ace-3ef5-4eaf-8319-999bafa34a07@quicinc.com>
- <35c9d1b1-0f48-b873-d703-c880f3b91422@quicinc.com>
+        with ESMTP id S235405AbjILBs7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Sep 2023 21:48:59 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 371C8130FB8;
+        Mon, 11 Sep 2023 18:22:26 -0700 (PDT)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB896C4AF6B;
+        Tue, 12 Sep 2023 01:06:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1694480802;
+        bh=l4+CNsWaJdhkXR0vkKkAiHJ2iQogyvfkUk7FzvHK3AU=;
+        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+        b=rDRIA4d6KAD5REBFXHv8wxLdpkWXtR/ABreMbVOKR1Z842Q1IY2CrC1HXeIj0ZugJ
+         EXDPGPvX9IibEzN74L3a7ldtnF3uqIFhLY7YoHImX5G41brZSb+8Ej/ioxIieDNPE7
+         EOSb67RxTTZtlrcliGrquXC8rYsE5WpXHQev4fbvySjhS/6HhV5WZ/4mm+aJUgLxW3
+         QXsM2P+8thLUgQT6KsFyjlf/KYxk4TUJYoBN4JMhyT9/CdlMi+EYcYEe0apCG2FJGs
+         1kQYlRKXTPINHgKX2v2fYG7Fa+vLY2ZFsBH1NySCgMULXNb6V3rjSA3wobObxXvv4X
+         meLNkytj/8PFw==
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-52a5c0d949eso6377282a12.0;
+        Mon, 11 Sep 2023 18:06:42 -0700 (PDT)
+X-Gm-Message-State: AOJu0Yx0a/UHX3JXqFSrobU/M6cB+j/o3+em6OPq0WuKg0ta0BHrQFBR
+        BsYipR0Ew3KC6wklropm7zW8PBZRC2cQDQNJO4s=
+X-Google-Smtp-Source: AGHT+IH4FhF/kTxPNgAVFbni63ODW/AwqSUOKFR7sTv2qzDRT5kLd8ExzVW67eg6HZD7guqGdyMOiuukWtzDSS5Upc0=
+X-Received: by 2002:a17:907:2c67:b0:99d:e617:abeb with SMTP id
+ ib7-20020a1709072c6700b0099de617abebmr8061187ejc.23.1694480801055; Mon, 11
+ Sep 2023 18:06:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <35c9d1b1-0f48-b873-d703-c880f3b91422@quicinc.com>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: tfU2_hR73glnule_LYZ8-x9Z18vDoumI
-X-Proofpoint-ORIG-GUID: tfU2_hR73glnule_LYZ8-x9Z18vDoumI
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-09-11_19,2023-09-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 phishscore=0
- adultscore=0 impostorscore=0 priorityscore=1501 mlxscore=0 mlxlogscore=719
- lowpriorityscore=0 bulkscore=0 spamscore=0 suspectscore=0 clxscore=1015
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2308100000
- definitions=main-2309120003
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
-X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
-        lindbergh.monkeyblade.net
+References: <20230910082911.3378782-1-guoren@kernel.org> <20230910082911.3378782-8-guoren@kernel.org>
+ <11f2a7a5-5219-a46e-5d16-4bdd400f5d9b@redhat.com>
+In-Reply-To: <11f2a7a5-5219-a46e-5d16-4bdd400f5d9b@redhat.com>
+From:   Guo Ren <guoren@kernel.org>
+Date:   Tue, 12 Sep 2023 09:06:28 +0800
+X-Gmail-Original-Message-ID: <CAJF2gTTFhcwprGoBvrS7bw1pBUWSPPZxsujjpgheQ4L80wBnXg@mail.gmail.com>
+Message-ID: <CAJF2gTTFhcwprGoBvrS7bw1pBUWSPPZxsujjpgheQ4L80wBnXg@mail.gmail.com>
+Subject: Re: [PATCH V11 07/17] riscv: qspinlock: Introduce qspinlock param for
+ command line
+To:     Waiman Long <longman@redhat.com>
+Cc:     paul.walmsley@sifive.com, anup@brainfault.org,
+        peterz@infradead.org, mingo@redhat.com, will@kernel.org,
+        palmer@rivosinc.com, boqun.feng@gmail.com, tglx@linutronix.de,
+        paulmck@kernel.org, rostedt@goodmis.org, rdunlap@infradead.org,
+        catalin.marinas@arm.com, conor.dooley@microchip.com,
+        xiaoguang.xing@sophgo.com, bjorn@rivosinc.com,
+        alexghiti@rivosinc.com, keescook@chromium.org,
+        greentime.hu@sifive.com, ajones@ventanamicro.com,
+        jszhang@kernel.org, wefu@redhat.com, wuwei2016@iscas.ac.cn,
+        leobras@redhat.com, linux-arch@vger.kernel.org,
+        linux-riscv@lists.infradead.org, linux-doc@vger.kernel.org,
+        kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
+        linux-csky@vger.kernel.org, Guo Ren <guoren@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Sep 11, 2023 at 04:21:44PM +0530, Mukesh Ojha wrote:
-> 
-> 
-> On 9/11/2023 11:03 AM, Pavan Kondeti wrote:
-> > On Sun, Sep 10, 2023 at 01:46:10AM +0530, Mukesh Ojha wrote:
-> > > As dynamic ramoops command line parsing is now added, so
-> > > lets add the support in ramoops driver to get the resource
-> > > structure and add it during platform device registration.
-> > > 
-> > > Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
-> > > ---
-> > >   fs/pstore/ram.c | 10 +++++++---
-> > >   1 file changed, 7 insertions(+), 3 deletions(-)
-> > > 
-> > 
-> > Documentation/admin-guide/ramoops.rst might need an update as well.
-> 
-> I have said in the cover-letter under changes in v5, it is open for
-> comment and not yet documented it yet.
-> 
-Sure.
+On Mon, Sep 11, 2023 at 11:22=E2=80=AFPM Waiman Long <longman@redhat.com> w=
+rote:
+>
+> On 9/10/23 04:29, guoren@kernel.org wrote:
+> > From: Guo Ren <guoren@linux.alibaba.com>
+> >
+> > Allow cmdline to force the kernel to use queued_spinlock when
+> > CONFIG_RISCV_COMBO_SPINLOCKS=3Dy.
+> >
+> > Signed-off-by: Guo Ren <guoren@linux.alibaba.com>
+> > Signed-off-by: Guo Ren <guoren@kernel.org>
+> > ---
+> >   Documentation/admin-guide/kernel-parameters.txt |  2 ++
+> >   arch/riscv/kernel/setup.c                       | 16 +++++++++++++++-
+> >   2 files changed, 17 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Document=
+ation/admin-guide/kernel-parameters.txt
+> > index 7dfb540c4f6c..61cacb8dfd0e 100644
+> > --- a/Documentation/admin-guide/kernel-parameters.txt
+> > +++ b/Documentation/admin-guide/kernel-parameters.txt
+> > @@ -4693,6 +4693,8 @@
+> >                       [KNL] Number of legacy pty's. Overwrites compiled=
+-in
+> >                       default number.
+> >
+> > +     qspinlock       [RISCV] Force to use qspinlock or auto-detect spi=
+nlock.
+> > +
+> >       qspinlock.numa_spinlock_threshold_ns=3D   [NUMA, PV_OPS]
+> >                       Set the time threshold in nanoseconds for the
+> >                       number of intra-node lock hand-offs before the
+>
+> Your patch series is still based on top of numa-aware qspinlock patchset
+> which isn't upstream yet. Please rebase it without that as that will
+> cause merge conflict during upstream merge.
+Okay, thx for pointing it out.
 
-To easy on the reviewers, the under cut portion of a specific patch could be
-used to add footer notes like TODO/Testing etc. In this case, I was lazy to 
-read the loong cover letter posted in this series ;-)
+>
+> Cheers,
+> Longman
+>
 
-Thanks,
-Pavan
+
+--=20
+Best Regards
+ Guo Ren
