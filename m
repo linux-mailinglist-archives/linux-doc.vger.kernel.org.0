@@ -2,76 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7651879CDED
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 12:17:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2B76B79CE40
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Sep 2023 12:28:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234259AbjILKRb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 12 Sep 2023 06:17:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36076 "EHLO
+        id S234252AbjILK2A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 12 Sep 2023 06:28:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50126 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234260AbjILKRO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Sep 2023 06:17:14 -0400
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5E29E272E;
-        Tue, 12 Sep 2023 03:16:50 -0700 (PDT)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A395C433C8;
-        Tue, 12 Sep 2023 10:16:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1694513809;
-        bh=WSr9qSl2S1ubmYIrZpcXmHxSn6EHq34MSINK8cbXato=;
-        h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-        b=DjpOBF8QYlMldwfuCfivS8FDAipLd8nz0g0k8U617/n0FwUiYh76S4/JyMVDC+rxM
-         pD+JOX+mpH/G4vU6ZDawXaCgtiqlWlkWJWY47vX6cS/ZM43M53ZtMz/OQ5uRVUI1aS
-         83O7dFEyD+VZ60uSh+Tphkx1fxJ+G5kBP33y8CQAXAyvKyPl5IPd69JvzxjztXG62h
-         Tf/+28qObCekHDgZ88E5aNaHzBCYrLwf41vhXBO17ufRCOyUyQt4YJbzAsg15/Qn0C
-         1cNvt2p0FuNr2TYL5lgU2+F2jm/ts56CDdAWUa87JZaOucBMUXMYZchy/Ciz4+Gqrh
-         Af2FCuEdmf02g==
-Message-ID: <351927e6-2ddf-186c-78ae-1b0d639b9ea7@kernel.org>
-Date:   Tue, 12 Sep 2023 12:16:43 +0200
+        with ESMTP id S234094AbjILK1n (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Sep 2023 06:27:43 -0400
+X-Greylist: delayed 532 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 12 Sep 2023 03:27:12 PDT
+Received: from smtp70.iad3b.emailsrvr.com (smtp70.iad3b.emailsrvr.com [146.20.161.70])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0A22F10FC
+        for <linux-doc@vger.kernel.org>; Tue, 12 Sep 2023 03:27:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mev.co.uk;
+        s=20221208-6x11dpa4; t=1694513899;
+        bh=FH3C6DGeGqxyT5D0x1WZDEUoGXKaA0SlVyvXD/E86uk=;
+        h=Date:Subject:To:From:From;
+        b=Tq6xJ2+piqPbhOIJE69N/bFxHEol/tmPY3c/hCTgDQpjfzcL1PHLR0dKjZfF714V7
+         Vl/6zaEzVFXQTpS59Oc3i3RhW8WqIwPdHyjcxiin/hSqOtSelQtRrdQ5MMJLWJtYqR
+         D98zi0KdjdUX1nH+1iIJQBq7/UhFQ72R5qHGEl7g=
+X-Auth-ID: abbotti@mev.co.uk
+Received: by smtp17.relay.iad3b.emailsrvr.com (Authenticated sender: abbotti-AT-mev.co.uk) with ESMTPSA id C837BA00C7;
+        Tue, 12 Sep 2023 06:18:15 -0400 (EDT)
+Message-ID: <44acdea6-271f-4e71-a0b3-d74a92034a9a@mev.co.uk>
+Date:   Tue, 12 Sep 2023 11:18:13 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH 1/2] dt-bindings: hwmon: Describe changes to the device
- tree
-Content-Language: en-US
-To:     Daniel Matyas <daniel.matyas@analog.com>
-Cc:     Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Rob Herring <robh+dt@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org
-References: <20230911083735.11795-1-daniel.matyas@analog.com>
-From:   Krzysztof Kozlowski <krzk@kernel.org>
-In-Reply-To: <20230911083735.11795-1-daniel.matyas@analog.com>
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/7] drivers/comedi: fix Python string escapes
+To:     Benjamin Gray <bgray@linux.ibm.com>, linux-ia64@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        llvm@lists.linux.dev, linux-pm@vger.kernel.org,
+        bpf@vger.kernel.org, linux-kselftest@vger.kernel.org
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        H Hartley Sweeten <hsweeten@visionengravers.com>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Tom Rix <trix@redhat.com>, Jan Kiszka <jan.kiszka@siemens.com>,
+        Kieran Bingham <kbingham@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Jiri Olsa <jolsa@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>,
+        Ian Rogers <irogers@google.com>,
+        Adrian Hunter <adrian.hunter@intel.com>,
+        linux-perf-users@vger.kernel.org,
+        Todd E Brandt <todd.e.brandt@linux.intel.com>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Mykola Lysenko <mykolal@fb.com>, Shuah Khan <shuah@kernel.org>
+References: <20230912060801.95533-1-bgray@linux.ibm.com>
+ <20230912060801.95533-4-bgray@linux.ibm.com>
+Content-Language: en-GB
+From:   Ian Abbott <abbotti@mev.co.uk>
+Organization: MEV Ltd.
+In-Reply-To: <20230912060801.95533-4-bgray@linux.ibm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Classification-ID: 263f4c94-c5b5-4040-bf22-1f7e4ea60010-1-1
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 11/09/2023 10:37, Daniel Matyas wrote:
-> Added new attributes to the device tree:
-
-Subject: it's meaningless. You said there absolutely nothing. Instead
-saying "Describe changes to the device tree" please describe the changes
-you are making.
-
-> 	- adi,comp-int
-> 	- adi,alrm-pol
-> 	- adi,flt-q
+On 12/09/2023 07:07, Benjamin Gray wrote:
+> Python 3.6 introduced a DeprecationWarning for invalid escape sequences.
+> This is upgraded to a SyntaxWarning in Python 3.12, and will eventually
+> be a syntax error.
 > 
-> These modify the corresponding bits in the configuration register.
+> Fix these now to get ahead of it before it's an error.
 > 
-> Signed-off-by: Daniel Matyas <daniel.matyas@analog.com>
+> Signed-off-by: Benjamin Gray <bgray@linux.ibm.com>
 > ---
->  .../bindings/hwmon/adi,max31827.yaml          | 21 +++++++++++++++++++
+>   drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py b/drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py
+> index 90378fb50580..d19101fc2a94 100755
+> --- a/drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py
+> +++ b/drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py
+> @@ -44,7 +44,7 @@ def routedict_to_structinit_single(name, D, return_name=False):
+>   
+>       lines.append('\t\t[B({})] = {{'.format(D0_sig))
+>       for D1_sig, value in D1:
+> -      if not re.match('[VIU]\([^)]*\)', value):
+> +      if not re.match(r'[VIU]\([^)]*\)', value):
+>           sys.stderr.write('Invalid register format: {}\n'.format(repr(value)))
+>           sys.stderr.write(
+>             'Register values should be formatted with V(),I(),or U()\n')
 
-Please work on latest upstream, not some old vendor code. This means
-that you should checkout latest mainline tree (or linux-next or
-maintainer's tree) and make your edits there. Once you do it, you use
-get_maintainers.pl on that tree, not on that ancient vendor's stuff.
+Looks good thanks!  I ran the modified script using 'make everything' in 
+the directory (after setting up a python venv to install ctypesgen) and 
+it didn't break anything. (There were some harmless errors output by 
+ctypesgen due to failing to parse some GCC extensions, but those are 
+nothing to do with this patch and the generated C files are OK.)
 
-Best regards,
-Krzysztof
+Reviewed-by: Ian Abbott <abbotti@mev.co.uk>
+
+-- 
+-=( Ian Abbott <abbotti@mev.co.uk> || MEV Ltd. is a company  )=-
+-=( registered in England & Wales.  Regd. number: 02862268.  )=-
+-=( Regd. addr.: S11 & 12 Building 67, Europa Business Park, )=-
+-=( Bird Hall Lane, STOCKPORT, SK3 0XA, UK. || www.mev.co.uk )=-
 
