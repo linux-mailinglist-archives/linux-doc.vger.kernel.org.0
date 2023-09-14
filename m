@@ -2,218 +2,313 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CE82079FD44
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Sep 2023 09:32:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 198CC79FDAB
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Sep 2023 10:00:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234355AbjINHc4 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Thu, 14 Sep 2023 03:32:56 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60108 "EHLO
+        id S231274AbjINIAc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Sep 2023 04:00:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54394 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230120AbjINHc4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Sep 2023 03:32:56 -0400
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0E15BCFA;
-        Thu, 14 Sep 2023 00:32:52 -0700 (PDT)
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-59b50b4556eso7064237b3.1;
-        Thu, 14 Sep 2023 00:32:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694676771; x=1695281571;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2n2ubhZrp/XvWyr+KX+wmdWC0Ev8ICvzidMCC6Gicsk=;
-        b=VrJUkUpZw8NvUgnvwhp9BYfJVrXve93Jx/Ov9SacXfE4+KkkSbg/Z8jKEVad42pBKz
-         QSTp7rEFVzIDC22qzQmeoZrEwK9zuMfjNIaA5BGgK0g4M0OAOMQzgspGKPzaPy1IWWaB
-         aBTDRaeBVqrZvFtdnP6MikDeOubT75aUJGpwI1UF8MpM73gUi/KB3qvz2BuPd86Ghje6
-         cgASYv3V+aYyljAB6HoqV7SrXGaCdYVqMBQcJaVtsoIr9LCuDC1DaxQ+z+7x8fWuRlHO
-         EoABK1DiFWM3NpKQpGi7spGImITjcIFguY14bWKpx6nzntqIUCsCQev6hRgSCmCMjztp
-         Io1A==
-X-Gm-Message-State: AOJu0YxnZPwSyGguZxdW/Gm9tTMPTPOElRo3Nr1pYOTV6OYK8Zzhg0xc
-        45x+JtJPILX1BxZ7exSUXuvpGN0DKovCSw==
-X-Google-Smtp-Source: AGHT+IEFNdWyBLY7RNU2MSK3PcN77mDzil3ng2zV0dBmD2qepN+MyyO1UB8oKBx/4/8AKHn3vFiv6g==
-X-Received: by 2002:a81:8244:0:b0:577:21ff:4d47 with SMTP id s65-20020a818244000000b0057721ff4d47mr5325018ywf.7.1694676771046;
-        Thu, 14 Sep 2023 00:32:51 -0700 (PDT)
-Received: from mail-yb1-f179.google.com (mail-yb1-f179.google.com. [209.85.219.179])
-        by smtp.gmail.com with ESMTPSA id s68-20020a0dd047000000b0059bdac3fd08sm203676ywd.48.2023.09.14.00.32.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 14 Sep 2023 00:32:49 -0700 (PDT)
-Received: by mail-yb1-f179.google.com with SMTP id 3f1490d57ef6-d7eccc1b8c6so743008276.0;
-        Thu, 14 Sep 2023 00:32:49 -0700 (PDT)
-X-Received: by 2002:a25:ea05:0:b0:d7a:d923:4493 with SMTP id
- p5-20020a25ea05000000b00d7ad9234493mr5250742ybd.64.1694676769523; Thu, 14 Sep
- 2023 00:32:49 -0700 (PDT)
+        with ESMTP id S231164AbjINIAb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Sep 2023 04:00:31 -0400
+Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AA9D11BF6;
+        Thu, 14 Sep 2023 01:00:27 -0700 (PDT)
+Received: from pps.filterd (m0167089.ppops.net [127.0.0.1])
+        by mx0a-00128a01.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 38E7axtd017011;
+        Thu, 14 Sep 2023 04:00:07 -0400
+Received: from nwd2mta4.analog.com ([137.71.173.58])
+        by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 3t2y8k26k3-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Thu, 14 Sep 2023 04:00:07 -0400 (EDT)
+Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
+        by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 38E805i2031634
+        (version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Thu, 14 Sep 2023 04:00:05 -0400
+Received: from ASHBCASHYB4.ad.analog.com (10.64.17.132) by
+ ASHBMBX8.ad.analog.com (10.64.17.5) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.14; Thu, 14 Sep 2023 04:00:04 -0400
+Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by
+ ASHBCASHYB4.ad.analog.com (10.64.17.132) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.14; Thu, 14 Sep 2023 04:00:04 -0400
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server id 15.2.986.14 via Frontend
+ Transport; Thu, 14 Sep 2023 04:00:04 -0400
+Received: from daniel-Precision-5530.ad.analog.com ([10.48.65.230])
+        by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 38E7xpmV002387;
+        Thu, 14 Sep 2023 03:59:53 -0400
+From:   Daniel Matyas <daniel.matyas@analog.com>
+CC:     Daniel Matyas <daniel.matyas@analog.com>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: [PATCH v3 1/5] hwmon: max31827: Make code cleaner
+Date:   Thu, 14 Sep 2023 10:59:44 +0300
+Message-ID: <20230914075948.208046-1-daniel.matyas@analog.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230818194136.4084400-1-evan@rivosinc.com> <20230818194136.4084400-2-evan@rivosinc.com>
- <CAMuHMdVtXGjP8VFMiv-7OMFz1XvfU1cz=Fw4jL3fcp4wO1etzQ@mail.gmail.com> <CALs-Hsvu7BsK8P0+xeuLmKEqg-q=kQANbf8FkiPGPhwhnSXpmA@mail.gmail.com>
-In-Reply-To: <CALs-Hsvu7BsK8P0+xeuLmKEqg-q=kQANbf8FkiPGPhwhnSXpmA@mail.gmail.com>
-From:   Geert Uytterhoeven <geert@linux-m68k.org>
-Date:   Thu, 14 Sep 2023 09:32:37 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdV594xA1UoTeVixpXm3i5LDFO5cT=dd_iRwWLwvxQctZg@mail.gmail.com>
-Message-ID: <CAMuHMdV594xA1UoTeVixpXm3i5LDFO5cT=dd_iRwWLwvxQctZg@mail.gmail.com>
-Subject: Re: [PATCH v4 1/2] RISC-V: Probe for unaligned access speed
-To:     Evan Green <evan@rivosinc.com>
-Cc:     Palmer Dabbelt <palmer@rivosinc.com>,
-        Heiko Stuebner <heiko@sntech.de>, linux-doc@vger.kernel.org,
-        =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>,
-        Conor Dooley <conor.dooley@microchip.com>,
-        Guo Ren <guoren@kernel.org>,
-        Jisheng Zhang <jszhang@kernel.org>,
-        linux-riscv@lists.infradead.org, Jonathan Corbet <corbet@lwn.net>,
-        Sia Jee Heng <jeeheng.sia@starfivetech.com>,
-        Marc Zyngier <maz@kernel.org>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Greentime Hu <greentime.hu@sifive.com>,
-        Simon Hosie <shosie@rivosinc.com>,
-        Andrew Jones <ajones@ventanamicro.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Alexandre Ghiti <alexghiti@rivosinc.com>,
-        Ley Foon Tan <leyfoon.tan@starfivetech.com>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Anup Patel <apatel@ventanamicro.com>,
-        linux-kernel@vger.kernel.org,
-        Xianting Tian <xianting.tian@linux.alibaba.com>,
-        David Laight <David.Laight@aculab.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Andy Chiu <andy.chiu@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8BIT
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-ADIRuleOP-NewSCL: Rule Triggered
+X-Proofpoint-ORIG-GUID: yRDiSLmABIivtSvja8G3D6qCR2IKfmb7
+X-Proofpoint-GUID: yRDiSLmABIivtSvja8G3D6qCR2IKfmb7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-14_05,2023-09-13_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 phishscore=0
+ clxscore=1015 lowpriorityscore=0 bulkscore=0 adultscore=0 mlxlogscore=999
+ suspectscore=0 priorityscore=1501 impostorscore=0 mlxscore=0 spamscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2308100000
+ definitions=main-2309140069
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Evan,
+Now the wait time for one-shot is 140ms, instead of the old 141
+(removed the 1ms error).
 
-On Wed, Sep 13, 2023 at 7:46 PM Evan Green <evan@rivosinc.com> wrote:
-> On Wed, Sep 13, 2023 at 5:36 AM Geert Uytterhoeven <geert@linux-m68k.org> wrote:
-> > On Fri, Aug 18, 2023 at 9:44 PM Evan Green <evan@rivosinc.com> wrote:
-> > > Rather than deferring unaligned access speed determinations to a vendor
-> > > function, let's probe them and find out how fast they are. If we
-> > > determine that an unaligned word access is faster than N byte accesses,
-> > > mark the hardware's unaligned access as "fast". Otherwise, we mark
-> > > accesses as slow.
-> > >
-> > > The algorithm itself runs for a fixed amount of jiffies. Within each
-> > > iteration it attempts to time a single loop, and then keeps only the best
-> > > (fastest) loop it saw. This algorithm was found to have lower variance from
-> > > run to run than my first attempt, which counted the total number of
-> > > iterations that could be done in that fixed amount of jiffies. By taking
-> > > only the best iteration in the loop, assuming at least one loop wasn't
-> > > perturbed by an interrupt, we eliminate the effects of interrupts and
-> > > other "warm up" factors like branch prediction. The only downside is it
-> > > depends on having an rdtime granular and accurate enough to measure a
-> > > single copy. If we ever manage to complete a loop in 0 rdtime ticks, we
-> > > leave the unaligned setting at UNKNOWN.
-> > >
-> > > There is a slight change in user-visible behavior here. Previously, all
-> > > boards except the THead C906 reported misaligned access speed of
-> > > UNKNOWN. C906 reported FAST. With this change, since we're now measuring
-> > > misaligned access speed on each hart, all RISC-V systems will have this
-> > > key set as either FAST or SLOW.
-> > >
-> > > Currently, we don't have a way to confidently measure the difference between
-> > > SLOW and EMULATED, so we label anything not fast as SLOW. This will
-> > > mislabel some systems that are actually EMULATED as SLOW. When we get
-> > > support for delegating misaligned access traps to the kernel (as opposed
-> > > to the firmware quietly handling it), we can explicitly test in Linux to
-> > > see if unaligned accesses trap. Those systems will start to report
-> > > EMULATED, though older (today's) systems without that new SBI mechanism
-> > > will continue to report SLOW.
-> > >
-> > > I've updated the documentation for those hwprobe values to reflect
-> > > this, specifically: SLOW may or may not be emulated by software, and FAST
-> > > represents means being faster than equivalent byte accesses. The change
-> > > in documentation is accurate with respect to both the former and current
-> > > behavior.
-> > >
-> > > Signed-off-by: Evan Green <evan@rivosinc.com>
-> > > Acked-by: Conor Dooley <conor.dooley@microchip.com>
-> >
-> > Thanks for your patch, which is now commit 584ea6564bcaead2 ("RISC-V:
-> > Probe for unaligned access speed") in v6.6-rc1.
-> >
-> > On the boards I have, I get:
-> >
-> >     rzfive:
-> >         cpu0: Ratio of byte access time to unaligned word access is
-> > 1.05, unaligned accesses are fast
->
-> Hrm, I'm a little surprised to be seeing this number come out so close
-> to 1. If you reboot a few times, what kind of variance do you get on
-> this?
+Used enums and while loops to replace switch for selecting and getting
+update interval from conversion rate bits.
 
-Rock-solid at 1.05 (even with increased resolution: 1.05853 on 3 tries)
+Divided the write_alarm_val function into 2 functions. The new function
+is more generic: it can be used not only for alarm writes, but for any
+kind of writes which require the device to be in shutdown mode.
 
-> >     icicle:
-> >
-> >         cpu1: Ratio of byte access time to unaligned word access is
-> > 0.00, unaligned accesses are slow
-> >         cpu2: Ratio of byte access time to unaligned word access is
-> > 0.00, unaligned accesses are slow
-> >         cpu3: Ratio of byte access time to unaligned word access is
-> > 0.00, unaligned accesses are slow
-> >
-> >         cpu0: Ratio of byte access time to unaligned word access is
-> > 0.00, unaligned accesses are slow
+Signed-off-by: Daniel Matyas <daniel.matyas@analog.com>
+---
 
-cpu1: Ratio of byte access time to unaligned word access is 0.00344,
-unaligned accesses are slow
-cpu2: Ratio of byte access time to unaligned word access is 0.00343,
-unaligned accesses are slow
-cpu3: Ratio of byte access time to unaligned word access is 0.00343,
-unaligned accesses are slow
-cpu0: Ratio of byte access time to unaligned word access is 0.00340,
-unaligned accesses are slow
+v2 -> v3: No change.
 
-> >     k210:
-> >
-> >         cpu1: Ratio of byte access time to unaligned word access is
-> > 0.02, unaligned accesses are slow
-> >         cpu0: Ratio of byte access time to unaligned word access is
-> > 0.02, unaligned accesses are slow
+v2: Added patch.
 
-cpu1: Ratio of byte access time to unaligned word access is 0.02392,
-unaligned accesses are slow
-cpu0: Ratio of byte access time to unaligned word access is 0.02084,
-unaligned accesses are slow
+ Documentation/hwmon/max31827.rst |   4 +-
+ drivers/hwmon/max31827.c         | 127 ++++++++++++++-----------------
+ 2 files changed, 58 insertions(+), 73 deletions(-)
 
-> >     starlight:
-> >
-> >         cpu1: Ratio of byte access time to unaligned word access is
-> > 0.01, unaligned accesses are slow
-> >         cpu0: Ratio of byte access time to unaligned word access is
-> > 0.02, unaligned accesses are slow
-
-cpu1: Ratio of byte access time to unaligned word access is 0.01872,
-unaligned accesses are slow
-cpu0: Ratio of byte access time to unaligned word access is 0.01930,
-unaligned accesses are slow
-
-> >     vexriscv/orangecrab:
-> >
-> >         cpu0: Ratio of byte access time to unaligned word access is
-> > 0.00, unaligned accesses are slow
-
-cpu0: Ratio of byte access time to unaligned word access is 0.00417,
-unaligned accesses are slow
-
-> > I am a bit surprised by the near-zero values.  Are these expected?
->
-> This could be expected, if firmware is trapping the unaligned accesses
-> and coming out >100x slower than a native access. If you're interested
-> in getting a little more resolution, you could try to print a few more
-> decimal places with something like (sorry gmail mangles the whitespace
-> on this):
-
-Looks like you need to add one digit to get anything useful on half of the
-systems.
-
-Gr{oetje,eeting}s,
-
-                        Geert
-
+diff --git a/Documentation/hwmon/max31827.rst b/Documentation/hwmon/max31827.rst
+index b0971d05b8a4..9a1055a007cf 100644
+--- a/Documentation/hwmon/max31827.rst
++++ b/Documentation/hwmon/max31827.rst
+@@ -73,8 +73,8 @@ the conversion frequency to 1 conv/s. The conversion time varies depending on
+ the resolution. The conversion time doubles with every bit of increased
+ resolution. For 10 bit resolution 35ms are needed, while for 12 bit resolution
+ (default) 140ms. When chip is in shutdown mode and a read operation is
+-requested, one-shot is triggered, the device waits for 140 (conversion time) + 1
+-(error) ms, and only after that is the temperature value register read.
++requested, one-shot is triggered, the device waits for 140 (conversion time) ms,
++and only after that is the temperature value register read.
+ 
+ The LSB of the temperature values is 0.0625 degrees Celsius, but the values of
+ the temperatures are displayed in milli-degrees. This means, that some data is
+diff --git a/drivers/hwmon/max31827.c b/drivers/hwmon/max31827.c
+index 602f4e4f81ff..f05762219995 100644
+--- a/drivers/hwmon/max31827.c
++++ b/drivers/hwmon/max31827.c
+@@ -25,20 +25,32 @@
+ #define MAX31827_CONFIGURATION_U_TEMP_STAT_MASK	BIT(14)
+ #define MAX31827_CONFIGURATION_O_TEMP_STAT_MASK	BIT(15)
+ 
+-#define MAX31827_12_BIT_CNV_TIME	141
+-
+-#define MAX31827_CNV_1_DIV_64_HZ	0x1
+-#define MAX31827_CNV_1_DIV_32_HZ	0x2
+-#define MAX31827_CNV_1_DIV_16_HZ	0x3
+-#define MAX31827_CNV_1_DIV_4_HZ		0x4
+-#define MAX31827_CNV_1_HZ		0x5
+-#define MAX31827_CNV_4_HZ		0x6
+-#define MAX31827_CNV_8_HZ		0x7
++#define MAX31827_12_BIT_CNV_TIME	140
+ 
+ #define MAX31827_16_BIT_TO_M_DGR(x)	(sign_extend32(x, 15) * 1000 / 16)
+ #define MAX31827_M_DGR_TO_16_BIT(x)	(((x) << 4) / 1000)
+ #define MAX31827_DEVICE_ENABLE(x)	((x) ? 0xA : 0x0)
+ 
++enum max31827_cnv {
++	MAX31827_CNV_1_DIV_64_HZ = 1,
++	MAX31827_CNV_1_DIV_32_HZ,
++	MAX31827_CNV_1_DIV_16_HZ,
++	MAX31827_CNV_1_DIV_4_HZ,
++	MAX31827_CNV_1_HZ,
++	MAX31827_CNV_4_HZ,
++	MAX31827_CNV_8_HZ,
++};
++
++static const u16 max31827_conversions[] = {
++	[MAX31827_CNV_1_DIV_64_HZ] = 64000,
++	[MAX31827_CNV_1_DIV_32_HZ] = 32000,
++	[MAX31827_CNV_1_DIV_16_HZ] = 16000,
++	[MAX31827_CNV_1_DIV_4_HZ] = 4000,
++	[MAX31827_CNV_1_HZ] = 1000,
++	[MAX31827_CNV_4_HZ] = 250,
++	[MAX31827_CNV_8_HZ] = 125,
++};
++
+ struct max31827_state {
+ 	/*
+ 	 * Prevent simultaneous access to the i2c client.
+@@ -54,15 +66,13 @@ static const struct regmap_config max31827_regmap = {
+ 	.max_register = 0xA,
+ };
+ 
+-static int write_alarm_val(struct max31827_state *st, unsigned int reg,
+-			   long val)
++static int shutdown_write(struct max31827_state *st, unsigned int reg,
++			  unsigned int val)
+ {
+ 	unsigned int cfg;
+-	unsigned int tmp;
++	unsigned int cnv_rate;
+ 	int ret;
+ 
+-	val = MAX31827_M_DGR_TO_16_BIT(val);
+-
+ 	/*
+ 	 * Before the Temperature Threshold Alarm and Alarm Hysteresis Threshold
+ 	 * register values are changed over I2C, the part must be in shutdown
+@@ -82,9 +92,10 @@ static int write_alarm_val(struct max31827_state *st, unsigned int reg,
+ 	if (ret)
+ 		goto unlock;
+ 
+-	tmp = cfg & ~(MAX31827_CONFIGURATION_1SHOT_MASK |
++	cnv_rate = MAX31827_CONFIGURATION_CNV_RATE_MASK & cfg;
++	cfg = cfg & ~(MAX31827_CONFIGURATION_1SHOT_MASK |
+ 		      MAX31827_CONFIGURATION_CNV_RATE_MASK);
+-	ret = regmap_write(st->regmap, MAX31827_CONFIGURATION_REG, tmp);
++	ret = regmap_write(st->regmap, MAX31827_CONFIGURATION_REG, cfg);
+ 	if (ret)
+ 		goto unlock;
+ 
+@@ -92,13 +103,23 @@ static int write_alarm_val(struct max31827_state *st, unsigned int reg,
+ 	if (ret)
+ 		goto unlock;
+ 
+-	ret = regmap_write(st->regmap, MAX31827_CONFIGURATION_REG, cfg);
++	ret = regmap_update_bits(st->regmap, MAX31827_CONFIGURATION_REG,
++				 MAX31827_CONFIGURATION_CNV_RATE_MASK,
++				 cnv_rate);
+ 
+ unlock:
+ 	mutex_unlock(&st->lock);
+ 	return ret;
+ }
+ 
++static int write_alarm_val(struct max31827_state *st, unsigned int reg,
++			   long val)
++{
++	val = MAX31827_M_DGR_TO_16_BIT(val);
++
++	return shutdown_write(st, reg, val);
++}
++
+ static umode_t max31827_is_visible(const void *state,
+ 				   enum hwmon_sensor_types type, u32 attr,
+ 				   int channel)
+@@ -243,32 +264,7 @@ static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
+ 
+ 			uval = FIELD_GET(MAX31827_CONFIGURATION_CNV_RATE_MASK,
+ 					 uval);
+-			switch (uval) {
+-			case MAX31827_CNV_1_DIV_64_HZ:
+-				*val = 64000;
+-				break;
+-			case MAX31827_CNV_1_DIV_32_HZ:
+-				*val = 32000;
+-				break;
+-			case MAX31827_CNV_1_DIV_16_HZ:
+-				*val = 16000;
+-				break;
+-			case MAX31827_CNV_1_DIV_4_HZ:
+-				*val = 4000;
+-				break;
+-			case MAX31827_CNV_1_HZ:
+-				*val = 1000;
+-				break;
+-			case MAX31827_CNV_4_HZ:
+-				*val = 250;
+-				break;
+-			case MAX31827_CNV_8_HZ:
+-				*val = 125;
+-				break;
+-			default:
+-				*val = 0;
+-				break;
+-			}
++			*val = max31827_conversions[uval];
+ 		}
+ 		break;
+ 
+@@ -284,6 +280,7 @@ static int max31827_write(struct device *dev, enum hwmon_sensor_types type,
+ 			  u32 attr, int channel, long val)
+ {
+ 	struct max31827_state *st = dev_get_drvdata(dev);
++	int res = 1;
+ 	int ret;
+ 
+ 	switch (type) {
+@@ -333,39 +330,27 @@ static int max31827_write(struct device *dev, enum hwmon_sensor_types type,
+ 			if (!st->enable)
+ 				return -EINVAL;
+ 
+-			switch (val) {
+-			case 125:
+-				val = MAX31827_CNV_8_HZ;
+-				break;
+-			case 250:
+-				val = MAX31827_CNV_4_HZ;
+-				break;
+-			case 1000:
+-				val = MAX31827_CNV_1_HZ;
+-				break;
+-			case 4000:
+-				val = MAX31827_CNV_1_DIV_4_HZ;
+-				break;
+-			case 16000:
+-				val = MAX31827_CNV_1_DIV_16_HZ;
+-				break;
+-			case 32000:
+-				val = MAX31827_CNV_1_DIV_32_HZ;
+-				break;
+-			case 64000:
+-				val = MAX31827_CNV_1_DIV_64_HZ;
+-				break;
+-			default:
+-				return -EINVAL;
+-			}
++			/*
++			 * Convert the desired conversion rate into register
++			 * bits. res is already initialized with 1.
++			 *
++			 * This was inspired by lm73 driver.
++			 */
++			while (res < ARRAY_SIZE(max31827_conversions) &&
++			       val < max31827_conversions[res])
++				res++;
++
++			if (res == ARRAY_SIZE(max31827_conversions) ||
++			    val != max31827_conversions[res])
++				return -EOPNOTSUPP;
+ 
+-			val = FIELD_PREP(MAX31827_CONFIGURATION_CNV_RATE_MASK,
+-					 val);
++			res = FIELD_PREP(MAX31827_CONFIGURATION_CNV_RATE_MASK,
++					 res);
+ 
+ 			return regmap_update_bits(st->regmap,
+ 						  MAX31827_CONFIGURATION_REG,
+ 						  MAX31827_CONFIGURATION_CNV_RATE_MASK,
+-						  val);
++						  res);
+ 		}
+ 		break;
+ 
 -- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+2.34.1
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
