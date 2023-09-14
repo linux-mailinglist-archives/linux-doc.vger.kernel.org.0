@@ -2,117 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2B8677A0540
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Sep 2023 15:15:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B9F0C7A0680
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Sep 2023 15:53:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238739AbjINNQC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 Sep 2023 09:16:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53504 "EHLO
+        id S239148AbjINNxy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Sep 2023 09:53:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33594 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235397AbjINNQB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Sep 2023 09:16:01 -0400
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com [IPv6:2a00:1450:4864:20::42d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6348A1A5
-        for <linux-doc@vger.kernel.org>; Thu, 14 Sep 2023 06:15:57 -0700 (PDT)
-Received: by mail-wr1-x42d.google.com with SMTP id ffacd0b85a97d-31aec0a1a8bso654929f8f.0
-        for <linux-doc@vger.kernel.org>; Thu, 14 Sep 2023 06:15:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1694697356; x=1695302156; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:references:cc:to
-         :content-language:subject:from:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=QLvdeLJFaVHjTuDoy38D6XQS7QdszFti2O5CeB4RYlA=;
-        b=H79lOWAX5BPBFOdAn1Ls5n/4U5LrplNHBcu1rIc7moNmBpym0HelwhDGyK3yWrCkK6
-         YAnVKR5qigfI+orFzxqnSf+VxYJ/OAgSD2+fPBosbnB3Dg6ODx4xFcF8Y5OfLIazP0q+
-         +JJvOLGq1e7SwSoTNzHpPwoBD7HAV3nLiof+E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694697356; x=1695302156;
-        h=content-transfer-encoding:in-reply-to:references:cc:to
-         :content-language:subject:from:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QLvdeLJFaVHjTuDoy38D6XQS7QdszFti2O5CeB4RYlA=;
-        b=JVK8Rn8p6BmQPsquh+omKgedDWKNBlvnE4ZYsHwBVbG6JxFSvFXNSUmIPkooU5ztAc
-         2ka1UHjavMYUfedYlRsHcsfGuME4B8JctjAi8Ct/dRnAir3BA3cVyPsY3VEf/SA4N5Hj
-         sg787N9FYP3dCxZPUeNEAcazNp31i8JG5NQmeHh1rbmkuvQxPj1wp5Dq2YhAGSbC5Qnv
-         WIkIL/8g2fOj9ZuY/cvu9qvHHNwjvNDPtmXnyUBH7EAkKBX//u/CmIlYIKXuZqL8h/Hp
-         x+ousqp3ZWFXKeBm4Kw6HE9vWzcHZuvceKvn4UxHG2abA3b/rHpxiR9Ft0jnsQeSJuNy
-         JgOA==
-X-Gm-Message-State: AOJu0Yxoe3k25JKW+7P+1FmNZ3jIPxEhBW4IPsHmiybQVvGDPYKDkSoU
-        iBUHc0RoKHtSORMW33nFvd9ZvQ==
-X-Google-Smtp-Source: AGHT+IEIu7wWXsXFgmC0TpcZPq12QhcsescNI+urHKtYHceqhxoChsC2ACdOD0NH7oyI9K+8uKKgUg==
-X-Received: by 2002:a05:6000:4013:b0:319:735f:92c5 with SMTP id cp19-20020a056000401300b00319735f92c5mr1634592wrb.32.1694697355769;
-        Thu, 14 Sep 2023 06:15:55 -0700 (PDT)
-Received: from [10.80.67.28] (default-46-102-197-194.interdsl.co.uk. [46.102.197.194])
-        by smtp.gmail.com with ESMTPSA id r10-20020adfdc8a000000b0031aeca90e1fsm1775995wrj.70.2023.09.14.06.15.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 14 Sep 2023 06:15:55 -0700 (PDT)
-Message-ID: <7d907488-d626-0801-3d4b-af42d00a5537@citrix.com>
-Date:   Thu, 14 Sep 2023 14:15:54 +0100
+        with ESMTP id S239107AbjINNxy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Sep 2023 09:53:54 -0400
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5C98B1AE;
+        Thu, 14 Sep 2023 06:53:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1694699630; x=1726235630;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=NEKocQoGfcfZKQftz4/7uTx3WA4f8EK2S6Mq45SyuhI=;
+  b=MCAlWSpQxmUGpvKeDHE6KwFPz5yOyjByNV7iHxaFenZV4R0GybF3bktc
+   js8q9/eqxQXv3JmNzdXYIEaIu3PEi8RNrZQd/ZG0gULpncEIfd0XfbYbs
+   9pyEQDfrHp8lp18WFi3eIWLBDddejWR0O9+3NKm9ITVq72P+QzN/4ocbU
+   V4T7Uznyrrfb7VfB1PZZ2uYmoEWOWuwg3JtexDOmJ08ZH/94RaG6ZqzmK
+   uOSkVidtP7RRr4N5QxbhuWBC1eYlY5G6LdgzOe8KSF3Si4kjSWzUhsBmr
+   g+1oF4os88mSCQg599EDdPjbMsQWoqbmGzicNveAiX6EmEBRIfHnarVaS
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10833"; a="364000235"
+X-IronPort-AV: E=Sophos;i="6.02,146,1688454000"; 
+   d="scan'208";a="364000235"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2023 06:36:05 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10833"; a="991389372"
+X-IronPort-AV: E=Sophos;i="6.02,146,1688454000"; 
+   d="scan'208";a="991389372"
+Received: from lkp-server02.sh.intel.com (HELO 9ef86b2655e5) ([10.239.97.151])
+  by fmsmga006.fm.intel.com with ESMTP; 14 Sep 2023 06:36:02 -0700
+Received: from kbuild by 9ef86b2655e5 with local (Exim 4.96)
+        (envelope-from <lkp@intel.com>)
+        id 1qgmVO-0001dF-0q;
+        Thu, 14 Sep 2023 13:36:00 +0000
+Date:   Thu, 14 Sep 2023 21:34:39 +0800
+From:   kernel test robot <lkp@intel.com>
+To:     Daniel Matyas <daniel.matyas@analog.com>
+Cc:     oe-kbuild-all@lists.linux.dev,
+        Daniel Matyas <daniel.matyas@analog.com>,
+        Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH 4/4] hwmon: max31827: Add custom attribute for resolution
+Message-ID: <202309142140.qvHsiLc3-lkp@intel.com>
+References: <20230913152135.457892-5-daniel.matyas@analog.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-From:   andrew.cooper3@citrix.com
-Subject: Re: [PATCH v10 08/38] x86/cpufeatures: Add the cpu feature bit for
- FRED
-Content-Language: en-GB
-To:     Jan Beulich <jbeulich@suse.com>, Juergen Gross <jgross@suse.com>
-Cc:     tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        luto@kernel.org, pbonzini@redhat.com, seanjc@google.com,
-        peterz@infradead.org, ravi.v.shankar@intel.com,
-        mhiramat@kernel.org, jiangshanlai@gmail.com,
-        Xin Li <xin3.li@intel.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-edac@vger.kernel.org,
-        linux-hyperv@vger.kernel.org, kvm@vger.kernel.org,
-        xen-devel@lists.xenproject.org
-References: <20230914044805.301390-1-xin3.li@intel.com>
- <20230914044805.301390-9-xin3.li@intel.com>
- <d98a362d-d806-4458-9473-be5bea254db7@suse.com>
- <77ca8680-02e2-cdaa-a919-61058e2d5245@suse.com>
-In-Reply-To: <77ca8680-02e2-cdaa-a919-61058e2d5245@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230913152135.457892-5-daniel.matyas@analog.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 14/09/2023 7:09 am, Jan Beulich wrote:
-> On 14.09.2023 08:03, Juergen Gross wrote:
->> On 14.09.23 06:47, Xin Li wrote:
->>> From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
->>>
->>> Any FRED CPU will always have the following features as its baseline:
->>>    1) LKGS, load attributes of the GS segment but the base address into
->>>       the IA32_KERNEL_GS_BASE MSR instead of the GS segment’s descriptor
->>>       cache.
->>>    2) WRMSRNS, non-serializing WRMSR for faster MSR writes.
->>>
->>> Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
->>> Tested-by: Shan Kang <shan.kang@intel.com>
->>> Signed-off-by: Xin Li <xin3.li@intel.com>
->> In order to avoid having to add paravirt support for FRED I think
->> xen_init_capabilities() should gain:
->>
->> +    setup_clear_cpu_cap(X86_FEATURE_FRED);
-> I don't view it as very likely that Xen would expose FRED to PV guests
-> (Andrew?), at which point such a precaution may not be necessary.
+Hi Daniel,
 
-PV guests are never going to see FRED (or LKGS for that matter) because
-it advertises too much stuff which simply traps because the kernel is in
-CPL3.
+kernel test robot noticed the following build warnings:
 
-That said, the 64bit PV ABI is a whole lot closer to FRED than it is to
-IDT delivery.  (Almost as if we decided 15 years ago that giving the PV
-guest kernel a good stack and GSbase was the right thing to do...)
+[auto build test WARNING on groeck-staging/hwmon-next]
+[also build test WARNING on linus/master v6.6-rc1 next-20230914]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-In some copious free time, I think we ought to provide a
-minorly-paravirt FRED to PV guests because there are still some
-improvements available as low hanging fruit.
+url:    https://github.com/intel-lab-lkp/linux/commits/Daniel-Matyas/hwmon-max31827-Make-code-cleaner/20230913-232729
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/groeck/linux-staging.git hwmon-next
+patch link:    https://lore.kernel.org/r/20230913152135.457892-5-daniel.matyas%40analog.com
+patch subject: [PATCH 4/4] hwmon: max31827: Add custom attribute for resolution
+reproduce: (https://download.01.org/0day-ci/archive/20230914/202309142140.qvHsiLc3-lkp@intel.com/reproduce)
 
-My plan was to have a PV hypervisor leaf advertising paravirt versions
-of hardware features, so a guest could see "I don't have architectural
-FRED, but I do have paravirt-FRED which is as similar as we can
-reasonably make it".  The same goes for a whole bunch of other features.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202309142140.qvHsiLc3-lkp@intel.com/
 
-~Andrew
+All warnings (new ones prefixed by >>):
+
+>> Documentation/hwmon/max31827.rst:107: WARNING: Bullet list ends without a blank line; unexpected unindent.
+
+vim +107 Documentation/hwmon/max31827.rst
+
+    93	
+    94	The conversion time doubles with every bit of increased resolution. The
+    95	available resolutions are:
+    96		- 8 bit -> 8.75 ms conversion time
+    97		- 9 bit -> 17.5 ms conversion time
+    98		- 10 bit -> 35 ms conversion time
+    99		- 12 bit (default) -> 140 ms conversion time
+   100	
+   101	There is a temp1_resolution attribute which indicates the unit change in the
+   102	input temperature in milli-degrees C.
+   103		- 1000 mC -> 8 bit
+   104		- 500 mC -> 9 bit
+   105		- 250 mC -> 10 bit
+   106		- 62 mC -> 12 bit (default) - actually this is 62.5, but the file
+ > 107		returns 62
+   108	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
