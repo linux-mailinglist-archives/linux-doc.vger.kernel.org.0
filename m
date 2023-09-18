@@ -2,136 +2,129 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7A3137A4944
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Sep 2023 14:09:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2F2A27A4DB5
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Sep 2023 17:57:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241890AbjIRMJK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 18 Sep 2023 08:09:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46836 "EHLO
+        id S229757AbjIRP5r (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 18 Sep 2023 11:57:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35992 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S241987AbjIRMJB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Sep 2023 08:09:01 -0400
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com [IPv6:2607:f8b0:4864:20::f2f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 90064BF
-        for <linux-doc@vger.kernel.org>; Mon, 18 Sep 2023 05:08:55 -0700 (PDT)
-Received: by mail-qv1-xf2f.google.com with SMTP id 6a1803df08f44-6561c09ead6so23965266d6.1
-        for <linux-doc@vger.kernel.org>; Mon, 18 Sep 2023 05:08:55 -0700 (PDT)
+        with ESMTP id S229819AbjIRP5p (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Sep 2023 11:57:45 -0400
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com [IPv6:2607:f8b0:4864:20::731])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 22A72FF;
+        Mon, 18 Sep 2023 08:54:34 -0700 (PDT)
+Received: by mail-qk1-x731.google.com with SMTP id af79cd13be357-773a0f36b4bso275343385a.0;
+        Mon, 18 Sep 2023 08:54:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1695038934; x=1695643734; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=ziZvMGLK6JgmUUboWqZiWtfE7gVK2DDQAWWdwk2gDB8=;
-        b=p61uxtX0s6QXhc4OmvJvspTqCcs2jz3xrCH+J4noLOoD1mjKzM0525uRVmVJyeilS4
-         hITA3Njo9vEato1lC05/6upCAPiyHpNEzm6+vkejZDLfpWZ6Uq06/XKDJO3TGRZEA4x3
-         Li+i7BI+ooan++z/FQ3wS/cQEFl7WbpG2KWcv4tMOcFu2VlGfcWsC+8Ag5Ragp5O6xcn
-         X8dJ/T4Fn6/bakka1UpaJFJIn0TTf9o/MOx1bsZOPfs/9CSHOSD4wjPBOBqMRyAE2ywV
-         QJfivMQjREm23VomDYxMjvNdlh3+lTK+F8rX2XcD0/bMlTtHu2D0t6vAsuN0Lwt53HK5
-         ZBUw==
+        d=gmail.com; s=20230601; t=1695052236; x=1695657036; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=D1Fje60QNx1BvdDO0QihprgGJ7xlaD1JNybZmw5Nq/w=;
+        b=hxGqmPGpADFPAT3rEgNcAaeoN3wgTDLB1Tgd5sI1v5MMo2A7vHRrfUzAgqZIfDwLWx
+         96rfgWJEKJHIuCKgsAS/6xrjEUXaU8H2suCZBTuYY76ko9SDlVaf/u7Szt5V6PxBL1Ny
+         +EZOqnpINUHitNlwUbwlft+z7niF3FEquJxi5medjkh6NLQCzoqzIi6EYNPm9WekSLWn
+         FbFj9GTub83R+5c9Nxk+vwBW3GIB2FVTQWWYE8Gc2TfDSLcnEWYWW3fBfAE0Gj2nQMj9
+         r/Nr9GX7Y+05vIDFI6/oly5qy2grOxB2uxpBRX4/uEfMChoBUqYN2pbN6mi/q56H+pal
+         OEwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695038934; x=1695643734;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1695052236; x=1695657036;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :sender:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ziZvMGLK6JgmUUboWqZiWtfE7gVK2DDQAWWdwk2gDB8=;
-        b=iPlc8sfg0R0DGTHt6jJ3oPAUfLeChaxBdlNZkepeEYJDp+SJZMnKiyJ99ZcXABANGo
-         CX1GhdDwYCxgM4u/MtK7/cHenm3Iv3kunRPTp563x/qqhH0B5Ur8JrHGLt0rFeJpcY91
-         hW49SACPUkQ0iN2PmAMWXMDL4LTeH4CNafOZNZCf6No5kKX2SiROGcVJR+iqyp1vsIWF
-         o4jAp4aqtw0WU+2L3VoiXry7Wh0KjR1L8bxmAZqyhCKBnpH+D0ZLysAu2Yss1/3pLx18
-         ATKl+bE+Y6rZwDB5TXH9rScn18A4N9mp0suGcl58AA92ZqbCSP4IRb96hH9Pcx0ohRkG
-         cJ0w==
-X-Gm-Message-State: AOJu0Yy9gdrgIjUVL/GZ/t4ghuLEV0Wgjv6Z0pEhcG5giv1R9yvy3Fwh
-        iODjajSrlpPPSP4hBum5FiPJS2IQGd0N0sA5OliDUA==
-X-Google-Smtp-Source: AGHT+IGe6eycPkCnJorto9OJHO+hQCundE/h1zKNUGuoGj4gpWrDhAWQ0sCOlXxSU9kbzdmJ9bi8fQ6B0MF4HXGsu54=
-X-Received: by 2002:a0c:cc82:0:b0:656:5337:e7bd with SMTP id
- f2-20020a0ccc82000000b006565337e7bdmr4263366qvl.3.1695038934426; Mon, 18 Sep
- 2023 05:08:54 -0700 (PDT)
+        bh=D1Fje60QNx1BvdDO0QihprgGJ7xlaD1JNybZmw5Nq/w=;
+        b=c6NjqNmUUB3A2Cpk7zTCZKOolyzlYj9FNe786w2236MZrgCqOBP9jQlbiDZGpXaGp7
+         9nY504ys+HXxDXn5cytJ4iIgTtCU6ZHZHO8BFbMENlXvrrTbf7lf0lsz56PtBvYuIuzN
+         fCWthtRZqDL/4U8x9l7GCnB1whAu2AD/jUe7y+fQ/QPE0nmMSBtbac+4+L7QIOOZXyf5
+         6j6h/sADePvK9rV+dZxYoAhSKrCfVZS/wrlcZ4qMsH9r/RSdRcq3K4qE9L1pPKz6+gGP
+         tt2NDbvX9EPacB496B+3r+x0IiMsXVLFaq2gf75laT5Wdt1Mg/C/4JDIWc10JsyrfuuA
+         KY0w==
+X-Gm-Message-State: AOJu0YwjnYBa1XlFQ6RcupRJFrRTj3ZMUCvZ7POZFPDUuvUQHLfxB043
+        EoPS5LCvqIADBd8FInSQQbf0vH5WGOQ=
+X-Google-Smtp-Source: AGHT+IFQdbSe5j8h3gcfqs7w0EAAODxRBkZUnrWEIijpJmeUgC/SN2QMLHB4QM8ogfl6uR8Vgjbgsw==
+X-Received: by 2002:a17:902:82c3:b0:1c4:749e:e725 with SMTP id u3-20020a17090282c300b001c4749ee725mr3135869plz.0.1695046148422;
+        Mon, 18 Sep 2023 07:09:08 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c? ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id jk15-20020a170903330f00b001b9fef7f454sm5910990plb.73.2023.09.18.07.09.05
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 18 Sep 2023 07:09:06 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <34b6d4b8-b0a4-ea7a-923a-4e4ed365cb70@roeck-us.net>
+Date:   Mon, 18 Sep 2023 07:08:41 -0700
 MIME-Version: 1.0
-References: <20230915105933.495735-1-matteorizzo@google.com>
- <7a4f5128-28fd-3c5f-34c2-1c34f4448174@intel.com> <1d7573c0-ebbc-6ed2-f152-1045eb0542f9@os.amperecomputing.com>
-In-Reply-To: <1d7573c0-ebbc-6ed2-f152-1045eb0542f9@os.amperecomputing.com>
-From:   Matteo Rizzo <matteorizzo@google.com>
-Date:   Mon, 18 Sep 2023 14:08:43 +0200
-Message-ID: <CAHKB1w+rVyww0UrHhzeGfPA7FM482Z-7ApzXvekVqLHvTDAV3Q@mail.gmail.com>
-Subject: Re: [RFC PATCH 00/14] Prevent cross-cache attacks in the SLUB allocator
-To:     "Lameter, Christopher" <cl@os.amperecomputing.com>
-Cc:     Dave Hansen <dave.hansen@intel.com>, penberg@kernel.org,
-        rientjes@google.com, iamjoonsoo.kim@lge.com,
-        akpm@linux-foundation.org, vbabka@suse.cz,
-        roman.gushchin@linux.dev, 42.hyeyoo@gmail.com,
-        keescook@chromium.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-hardening@vger.kernel.org, tglx@linutronix.de,
-        mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
-        x86@kernel.org, hpa@zytor.com, corbet@lwn.net, luto@kernel.org,
-        peterz@infradead.org, jannh@google.com, evn@google.com,
-        poprdi@google.com, jordyzomer@google.com
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,
-        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v3 1/5] hwmon: max31827: Make code cleaner
+Content-Language: en-US
+To:     "Matyas, Daniel" <Daniel.Matyas@analog.com>
+Cc:     Jean Delvare <jdelvare@suse.com>, Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
+        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+References: <20230914075948.208046-1-daniel.matyas@analog.com>
+ <44e84cb8-b573-0e1a-91e5-cdee0441d0f9@roeck-us.net>
+ <PH0PR03MB6771F345901A22603B60508289FBA@PH0PR03MB6771.namprd03.prod.outlook.com>
+From:   Guenter Roeck <linux@roeck-us.net>
+In-Reply-To: <PH0PR03MB6771F345901A22603B60508289FBA@PH0PR03MB6771.namprd03.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        NICE_REPLY_A,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 15 Sept 2023 at 18:30, Lameter, Christopher
-<cl@os.amperecomputing.com> wrote:
->
-> On Fri, 15 Sep 2023, Dave Hansen wrote:
->
-> > What's the cost?
->
-> The only thing that I see is 1-2% on kernel compilations (and "more on
-> machines with lots of cores")?
+On 9/18/23 02:25, Matyas, Daniel wrote:
+> 
+> 
+>> -----Original Message-----
+>> From: Guenter Roeck <groeck7@gmail.com> On Behalf Of Guenter Roeck
+>> Sent: Saturday, September 16, 2023 2:26 AM
+>> To: Matyas, Daniel <Daniel.Matyas@analog.com>
+>> Cc: Jean Delvare <jdelvare@suse.com>; Rob Herring
+>> <robh+dt@kernel.org>; Krzysztof Kozlowski
+>> <krzysztof.kozlowski+dt@linaro.org>; Conor Dooley
+>> <conor+dt@kernel.org>; Jonathan Corbet <corbet@lwn.net>; linux-
+>> hwmon@vger.kernel.org; devicetree@vger.kernel.org; linux-
+>> kernel@vger.kernel.org; linux-doc@vger.kernel.org
+>> Subject: Re: [PATCH v3 1/5] hwmon: max31827: Make code cleaner
+>>
+>> [External]
+>>
+>> On 9/14/23 00:59, Daniel Matyas wrote:
+>>> Now the wait time for one-shot is 140ms, instead of the old 141
+>>> (removed the 1ms error).
+>>>
+>>
+>> It was explicitly documented that the wait time was 140 + 1 milli-seconds,
+>> presumably to be sure that the conversion is really complete.
+>>
+>> Why was this an error ? It was _documented_ that way.
+>>
+>> Guenter
+>>
+> 
+> Well... actually I developed the driver initially and I wrote the documentation, so I know. I decided to remove the error milli-second, because I realized, it isn't really needed. There is no reference about it in the documentation of the chip, and frankly, I didn’t actually encounter any error which would need the 1 milli-second.
+> 
+> This way, the wait time is more exact and the correspondence with the chip documentation becomes quite straightforward.
+> 
 
-I used kernel compilation time (wall clock time) as a benchmark while
-preparing the series. Lower is better.
+This is all fine, but it is yet another example of more than one logical
+change in a single patch, and it has nothing to do with the subject. It
+is not a cleanup, but a functional change.
 
-Intel Skylake, 112 cores:
+Please split _all_ logical changes into separate patches.
 
-      LABEL    | COUNT |   MIN   |   MAX   |   MEAN  |  MEDIAN | STDDEV
----------------+-------+---------+---------+---------+---------+--------
-SLAB_VIRTUAL=n | 150   | 49.700s | 51.320s | 50.449s | 50.430s | 0.29959
-SLAB_VIRTUAL=y | 150   | 50.020s | 51.660s | 50.880s | 50.880s | 0.30495
-               |       | +0.64%  | +0.66%  | +0.85%  | +0.89%  | +1.79%
+Guenter
 
-AMD Milan, 256 cores:
-
-    LABEL      | COUNT |   MIN   |   MAX   |   MEAN  |  MEDIAN | STDDEV
----------------+-------+---------+---------+---------+---------+--------
-SLAB_VIRTUAL=n | 150   | 25.480s | 26.550s | 26.065s | 26.055s | 0.23495
-SLAB_VIRTUAL=y | 150   | 25.820s | 27.080s | 26.531s | 26.540s | 0.25974
-               |       | +1.33%  | +2.00%  | +1.79%  | +1.86%  | +10.55%
-
-Are there any specific benchmarks that you would be interested in seeing or
-that are usually used for SLUB?
-
-> Problems:
->
-> - Overhead due to more TLB lookups
->
-> - Larger amounts of TLBs are used for the OS. Currently we are trying to
-> use the maximum mappable TLBs to reduce their numbers. This presumably
-> means using 4K TLBs for all slab access.
-
-Yes, we are using 4K pages for the slab mappings which is going to increase
-TLB pressure. I also tried writing a version of the patch that uses 2M
-pages which had slightly better performance, but that had its own problems.
-For example most slabs are much smaller than 2M, so we would need to create
-and map multiple slabs at once and we wouldn't be able to release the
-physical memory until all slabs in the 2M page are unused which increases
-fragmentation.
-
-> - Memory may not be physically contiguous which may be required by some
-> drivers doing DMA.
-
-In the current implementation each slab is backed by physically contiguous
-memory, but different slabs that are adjacent in virtual memory might not
-be physically contiguous. Treating objects allocated from two different
-slabs as one contiguous chunk of memory is probably wrong anyway, right?
-
---
-Matteo
