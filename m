@@ -2,97 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 864C57A445B
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Sep 2023 10:17:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 58E087A4530
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Sep 2023 10:55:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240569AbjIRIQy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 18 Sep 2023 04:16:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39208 "EHLO
+        id S233174AbjIRIyo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 18 Sep 2023 04:54:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41882 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240838AbjIRIQm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Sep 2023 04:16:42 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B8C23CC5;
-        Mon, 18 Sep 2023 01:15:04 -0700 (PDT)
-Received: from localhost (pd-18-104-112.service.infuturo.it [151.18.104.112])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id C2F1B5BF;
-        Mon, 18 Sep 2023 08:15:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net C2F1B5BF
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1695024902; bh=eO3FPiymp+iTHHU/EAH1KhhWva6tzLX0SlXrOUuecKI=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=F/X+0g1BkEtSJy4X0dGXJFRPhTqQQHD4cK4jicIp7kT8raAGKJSedVkneJZQE+hoS
-         1eEhYcpuuzcXg9dwhyfHGlGkTmr/CFr2SaLkZU3QVs3uDc6lA3WLgYhwjiIRxT+tLW
-         /BLdMyj0ZOLfohXPAPveVdWJbHfL7A/fFYN0efy+okTnf0rxFM80kEZdGMgjsgI8Wt
-         sTE/aND8cfVd2i8xaTf2xrtUFIl7bE2oFf8uGSVYtp+Or4GL2zWJKETfY22ZLtfsSf
-         dY6xyWE0FIKTCaUgMchsVp7NYQgoktvDVOJruV4AQFjpyOXWnqPvpNf7Ibo4HE+Eby
-         eCXkT+HWaSS1Q==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Bagas Sanjaya <bagasdotme@gmail.com>,
-        Charles Han <hanchunchao@inspur.com>, djwong@kernel.org,
-        dchinner@redhat.com, allison.henderson@oracle.com,
-        bhelgaas@google.com
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 1/1] Documentation: xfs: Remove duplicate 'the' in
- transaction sequence process
-In-Reply-To: <ZQgEYU71YE6Jv38D@debian.me>
-References: <20230918074054.313204-1-hanchunchao@inspur.com>
- <ZQgEYU71YE6Jv38D@debian.me>
-Date:   Mon, 18 Sep 2023 02:14:58 -0600
-Message-ID: <87ttrrc2yl.fsf@meer.lwn.net>
+        with ESMTP id S240854AbjIRIy2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Sep 2023 04:54:28 -0400
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com [IPv6:2607:f8b0:4864:20::f32])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 88300D1
+        for <linux-doc@vger.kernel.org>; Mon, 18 Sep 2023 01:54:21 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id 6a1803df08f44-65637f0d10eso10516736d6.1
+        for <linux-doc@vger.kernel.org>; Mon, 18 Sep 2023 01:54:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1695027260; x=1695632060; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=ClIL0dCrkOnBpg+a8Xrgg6ALAEbCrlXjT2IySqiHtKo=;
+        b=u8ZD/tLHkghAHL1x3Z5csY7TS0x+qzQBg7+JO2T+rrz2vxZXX4PdG/WowjG1wbpgOP
+         EusnK1jwBMoUINUZta0mngSq9MY0J//NmAKyhKIX9pVWBG+PTWWYoiLbbpSmihtS0GzF
+         BT9SfrwL5Y9KOnuNVtaa+YwNOlygraUVVApm1shy2+Z3NOiM0rcPwCDJyB6vz/gDvDlg
+         8U48mjZrPdBzKSHdIVAvmK7CrMTwww2nRKSP4D29OrMrWAq1BAN5HfZfIASoQFwR/AeR
+         490YwGdMJLfLzVg9F32eA8uIoHaqZLK8edaawRMrYXEKj5Z7xT8iUe0KqCb2pghVZ4Za
+         iWXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1695027260; x=1695632060;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ClIL0dCrkOnBpg+a8Xrgg6ALAEbCrlXjT2IySqiHtKo=;
+        b=JXKDCTk/RLI7QgaRd8evfjdp5lrqM8CWBRdysi+9Vm09pf9BPBQbevRgYTqjmDKgxa
+         SAnwPmRmwxnxLpFxb2cO8nJOJllnID6R4VAe5lNM5Yl0D0DU686yRFmUA4vy/G09Kh6U
+         GeutJHMf80QCSBA8LYfP6OHtlKquqtEMcobUQnfW/WzQnQyE6hAl0xa5LsgQ2RAmk4aT
+         nEBBuikMXKlhJRS+01jsMev6wNTwgxb+Qkhxb48335Jl3ah2QwNTAXxnIdJU9yRXnT0b
+         XWookVmfB1X89wgoF8IwVYsaNn9hsYrWhg2mAFadvUfq+bjlgcFWa3l0Ut5l0FCLc2xF
+         ncuA==
+X-Gm-Message-State: AOJu0Ywy9zVykTtvfc8YkFJ35pRkXTzlqHYQ3oI+nGN7Cs+gvM1V8v31
+        4FzXTNeXWMUqKRZPOe/BjboxsoRyZ9vIC/JZtSLWIw==
+X-Google-Smtp-Source: AGHT+IFYgHG0dZf5nqkpv4qVu0ChzNBIdAhruIWmcSZxRpa53s1lF8WlI4xTjt862E295HdVdB8Wq01IovaBffAM0m0=
+X-Received: by 2002:a0c:8f1a:0:b0:653:589b:ac47 with SMTP id
+ z26-20020a0c8f1a000000b00653589bac47mr10654295qvd.18.1695027260535; Mon, 18
+ Sep 2023 01:54:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+References: <20230915105933.495735-1-matteorizzo@google.com>
+ <20230915105933.495735-11-matteorizzo@google.com> <202309151410.E65B8300F@keescook>
+ <64e62982-6d0e-f742-be5c-15390d8e7c2b@intel.com>
+In-Reply-To: <64e62982-6d0e-f742-be5c-15390d8e7c2b@intel.com>
+From:   Matteo Rizzo <matteorizzo@google.com>
+Date:   Mon, 18 Sep 2023 10:54:07 +0200
+Message-ID: <CAHKB1wJkkkq_yt88_XcrpoM74nhOEBAZuMZLwFkoXoeQQfin9A@mail.gmail.com>
+Subject: Re: [RFC PATCH 10/14] x86: Create virtual memory region for SLUB
+To:     Dave Hansen <dave.hansen@intel.com>
+Cc:     Kees Cook <keescook@chromium.org>, cl@linux.com,
+        penberg@kernel.org, rientjes@google.com, iamjoonsoo.kim@lge.com,
+        akpm@linux-foundation.org, vbabka@suse.cz,
+        roman.gushchin@linux.dev, 42.hyeyoo@gmail.com,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-mm@kvack.org, linux-hardening@vger.kernel.org,
+        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+        corbet@lwn.net, luto@kernel.org, peterz@infradead.org,
+        jannh@google.com, evn@google.com, poprdi@google.com,
+        jordyzomer@google.com, ardb@google.com
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,
+        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Bagas Sanjaya <bagasdotme@gmail.com> writes:
-
-> On Mon, Sep 18, 2023 at 03:40:54PM +0800, Charles Han wrote:
->> Remove the repeated word "the" in comments.
+On Fri, 15 Sept 2023 at 23:50, Dave Hansen <dave.hansen@intel.com> wrote:
 >
-> Patch title looks OK but in this case, the patch description should also match.
-> Hint: there is no code comments in the doc below.
+> I have the feeling folks just grabbed the first big-ish chunk they saw
+> free in the memory map and stole that one.  Not a horrible approach,
+> mind you, but I have the feeling it didn't go through the most rigorous
+> sizing procedure. :)
 >
->> 
->> Signed-off-by: Charles Han <hanchunchao@inspur.com>
->> ---
->>  Documentation/filesystems/xfs-online-fsck-design.rst | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->> 
->> diff --git a/Documentation/filesystems/xfs-online-fsck-design.rst b/Documentation/filesystems/xfs-online-fsck-design.rst
->> index 1625d1131093..a0678101a7d0 100644
->> --- a/Documentation/filesystems/xfs-online-fsck-design.rst
->> +++ b/Documentation/filesystems/xfs-online-fsck-design.rst
->> @@ -1585,7 +1585,7 @@ The transaction sequence looks like this:
->>  2. The second transaction contains a physical update to the free space btrees
->>     of AG 3 to release the former BMBT block and a second physical update to the
->>     free space btrees of AG 7 to release the unmapped file space.
->> -   Observe that the the physical updates are resequenced in the correct order
->> +   Observe that the physical updates are resequenced in the correct order
->>     when possible.
->>     Attached to the transaction is a an extent free done (EFD) log item.
->>     The EFD contains a pointer to the EFI logged in transaction #1 so that log
+> My laptop memory is ~6% consumed by slab, 90% of which is reclaimable.
+> If a 64TB system had the same ratio, it would bump into this 512GB
+> limit.  But it _should_ just reclaim thing earlier rather than falling over.
 >
-> Regardless, wait for one or few days before rerolling this patch with
-> reviews addressed. It allows other reviewers to catch up and review. You can
-> also Cc: me if you'd like.
+> That said, we still have gobs of actual vmalloc() space.  It's ~30TiB in
+> size and I'm not aware of anyone consuming anywhere near that much.  If
+> the 512GB fills up somehow, there are other places to steal the space.
+>
+> One minor concern is that the virtual area is the same size on 4 and
+> 5-level paging systems.  It might be a good idea to pick one of the
+> holes that actually gets bigger on 5-level systems.
 
-Bagas, this is a patch removing an extra "the".  We do not need to make
-life this hard for such a simple fix.
+One of the other ideas that we had was to use the KASAN shadow memory instead of
+a dedicated area. As far as I know the KASAN region is not used by anything else
+when KASAN is disabled, and I don't think it makes sense to have both KASAN and
+SLAB_VIRTUAL enabled at the same time (see the patch which introduces the
+Kconfig option for why). The KASAN region is 16 TiB on 4-level systems and 8 PiB
+on 5-level, in both cases 1/16th the size of the address space.
 
-Charles, the patch is good enough, no need for a third version.
+Could that work?
 
-(Next time, though, do wait before resubmitting a patch.  When you do,
-put a description of what changed below the "---" line.)
-
-Thanks,
-
-jon
+--
+Matteo
