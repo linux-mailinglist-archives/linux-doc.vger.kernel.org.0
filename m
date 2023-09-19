@@ -2,160 +2,215 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 411017A60B4
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Sep 2023 13:08:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4BB957A60DB
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Sep 2023 13:13:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232036AbjISLIG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Sep 2023 07:08:06 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52730 "EHLO
+        id S232090AbjISLNE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Sep 2023 07:13:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51600 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232187AbjISLHq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Sep 2023 07:07:46 -0400
-Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com [IPv6:2607:f8b0:4864:20::535])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 45880114
-        for <linux-doc@vger.kernel.org>; Tue, 19 Sep 2023 04:07:26 -0700 (PDT)
-Received: by mail-pg1-x535.google.com with SMTP id 41be03b00d2f7-564b6276941so4593527a12.3
-        for <linux-doc@vger.kernel.org>; Tue, 19 Sep 2023 04:07:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1695121646; x=1695726446; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=hsdGjQZGnP/Hgbj+isSRCEfwtgkvdGEZgfqlQov6O6g=;
-        b=mOi0WJ/2QRv7JGjWYd1/CDX911VSXRR3wUBnJdDyWzNSICeyqxXDKCZ/vJGgf9H7zB
-         N04ePpX0pbuVoC29ADDNhEpj0AVi6HIi4/EzMLnnx2X4qA1ghub5lgKrUMjGTpUNYrR1
-         uSG6l6xUTWkwAoeC/6kMxNLsw49oPC8ADWTEuLPh6ES9MvYgxSyfMbvOtUCM+6x3fCW6
-         JS0BR+eO+bdUzVDjAtVSHp0RG32aHro3ZSDC3JDtxmVwhlZKhc+pdG63glR8ZbA7cWy9
-         LOIZK2wro13WClSAN/frxtCs7c934CcmN5VDv4zcRJeFa+09d87IJmMaCeO/EjdU0BUf
-         c0Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695121646; x=1695726446;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=hsdGjQZGnP/Hgbj+isSRCEfwtgkvdGEZgfqlQov6O6g=;
-        b=aSfCg8fyhqrc30i1j39XggQ9plUcIsrAYCQIS6YFVsfib0tgvIgdgiAi0+1xqDxzb4
-         Oqoz3Idp78I5G4QQUXBKEraff/VE34cmlG1W8Pxui3voE95Go1gOXjEi5tmcqWh5OY9w
-         Z/v81AQTHPhXfqHum2FuTgugNH4QAiNz2/aUgJH6du3mZ/+H3WtnW4IlwaxnU7uMvTG+
-         jHbYXgSeI6kc0GrLk/Tzowb4zf0fGQgvYHWZJBtwxMdkQMuUEgmPNE2rVhmfezXny/o8
-         6lAGkDnOlEh9GXMb0IiVaxY8fp3ENBVAFAXAPVq+i2dgZttgSSAErHwqYF0jrR/+rgAa
-         BVcw==
-X-Gm-Message-State: AOJu0YxB+G723Y3MRuJDCeADpRk/QLZIe6Qo2hrF2SfNaMajBd6TtGb7
-        ZYVEOyggUTqfjtZycE9eviVg/s5CEk5F4HbeGMFsSw==
-X-Google-Smtp-Source: AGHT+IEqV3rAGeUMd9XYB//AVpAjXOCe2sj8rwL3pSAMvmQKe1yXtlqOvCzhfuPwDqzf2LTW/BEap8fm1SYbtT2vCrU=
-X-Received: by 2002:a17:90a:fd98:b0:274:686d:497b with SMTP id
- cx24-20020a17090afd9800b00274686d497bmr10019600pjb.27.1695121645629; Tue, 19
- Sep 2023 04:07:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230915093649.435163-1-anshuman.khandual@arm.com> <20230915093649.435163-3-anshuman.khandual@arm.com>
-In-Reply-To: <20230915093649.435163-3-anshuman.khandual@arm.com>
-From:   Mike Leach <mike.leach@linaro.org>
-Date:   Tue, 19 Sep 2023 12:07:14 +0100
-Message-ID: <CAJ9a7Vh_vJihzSx1zsK9Qv4iEv414WH245N3j2c3bhYNkm5SJQ@mail.gmail.com>
-Subject: Re: [PATCH V5 - RESEND 2/3] coresight: etm: Make cycle count
- threshold user configurable
-To:     Anshuman Khandual <anshuman.khandual@arm.com>
-Cc:     linux-arm-kernel@lists.infradead.org, suzuki.poulose@arm.com,
+        with ESMTP id S232003AbjISLM5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Sep 2023 07:12:57 -0400
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1C193F1;
+        Tue, 19 Sep 2023 04:12:49 -0700 (PDT)
+X-UUID: 7294f6b056dd11ee8051498923ad61e6-20230919
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
+        h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From; bh=1jvjjzw4AS24CCKpJjJwLW1RVXK5JBfjv7SdIIaHTYk=;
+        b=Ll/hZYKGEYRpDHzoj0DNx6kCiGoDrpJPwoFM1hpeJWT+tHXJYWKPeK/C7MKmQxzHZXZS4Y+8I2gSeDbLRmzK1bM3XDo3c5Gu3EKWDIOy5f4dt7sr8MMYDY8ay2p6LdAucrJB6quPDG1osuYskDa8bNiSMjC5+qisyD+yPYGP+98=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.32,REQID:510aed20-c586-44aa-96b1-228c9ec68769,IP:0,U
+        RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+        N:release,TS:-25
+X-CID-META: VersionHash:5f78ec9,CLOUDID:63581e14-4929-4845-9571-38c601e9c3c9,B
+        ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
+        RL:1,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,
+        DKR:0,DKP:0,BRR:0,BRE:0
+X-CID-BVR: 0
+X-CID-BAS: 0,_,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
+X-UUID: 7294f6b056dd11ee8051498923ad61e6-20230919
+Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by mailgw02.mediatek.com
+        (envelope-from <yi-de.wu@mediatek.com>)
+        (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+        with ESMTP id 954853373; Tue, 19 Sep 2023 19:12:40 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Tue, 19 Sep 2023 19:12:39 +0800
+Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Tue, 19 Sep 2023 19:12:39 +0800
+From:   Yi-De Wu <yi-de.wu@mediatek.com>
+To:     Yingshiuan Pan <yingshiuan.pan@mediatek.com>,
+        Ze-Yu Wang <ze-yu.wang@mediatek.com>,
+        Yi-De Wu <yi-de.wu@mediatek.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
         Catalin Marinas <catalin.marinas@arm.com>,
         Will Deacon <will@kernel.org>,
-        James Clark <james.clark@arm.com>,
-        Leo Yan <leo.yan@linaro.org>, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org, coresight@lists.linaro.org,
-        linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no
-        version=3.4.6
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        AngeloGioacchino Del Regno 
+        <angelogioacchino.delregno@collabora.com>
+CC:     Arnd Bergmann <arnd@arndb.de>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-mediatek@lists.infradead.org>,
+        David Bradil <dbrazdil@google.com>,
+        Trilok Soni <quic_tsoni@quicinc.com>,
+        Jade Shih <jades.shih@mediatek.com>,
+        Ivan Tseng <ivan.tseng@mediatek.com>,
+        My Chuang <my.chuang@mediatek.com>,
+        Kevenny Hsieh <kevenny.hsieh@mediatek.com>,
+        Willix Yeh <chi-shen.yeh@mediatek.com>
+Subject: [PATCH v6 00/15] GenieZone hypervisor drivers
+Date:   Tue, 19 Sep 2023 19:11:55 +0800
+Message-ID: <20230919111210.19615-1-yi-de.wu@mediatek.com>
+X-Mailer: git-send-email 2.18.0
+MIME-Version: 1.0
+Content-Type: text/plain
+X-MTK:  N
+X-Spam-Status: No, score=-1.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,RDNS_NONE,
+        SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=no
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 15 Sept 2023 at 10:37, Anshuman Khandual
-<anshuman.khandual@arm.com> wrote:
->
-> Cycle counting is enabled, when requested and supported but with a default
-> threshold value ETM_CYC_THRESHOLD_DEFAULT i.e 0x100 getting into TRCCCCTLR,
-> representing the minimum interval between cycle count trace packets.
->
-> This makes cycle threshold user configurable, from the user space via perf
-> event attributes. Although it falls back using ETM_CYC_THRESHOLD_DEFAULT,
-> in case no explicit request. As expected it creates a sysfs file as well.
->
-> /sys/bus/event_source/devices/cs_etm/format/cc_threshold
->
-> New 'cc_threshold' uses 'event->attr.config3' as no more space is available
-> in 'event->attr.config1' or 'event->attr.config2'.
->
-> Cc: Suzuki K Poulose <suzuki.poulose@arm.com>
-> Cc: Mike Leach <mike.leach@linaro.org>
-> Cc: James Clark <james.clark@arm.com>
-> Cc: Leo Yan <leo.yan@linaro.org>
-> Cc: coresight@lists.linaro.org
-> Cc: linux-arm-kernel@lists.infradead.org
-> Cc: linux-doc@vger.kernel.org
-> Cc: linux-kernel@vger.kernel.org
-> Reviewed-by: Mike Leach <mike.leach@linaro.org>
-> Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
-> ---
->  drivers/hwtracing/coresight/coresight-etm-perf.c   | 2 ++
->  drivers/hwtracing/coresight/coresight-etm4x-core.c | 9 +++++++--
->  2 files changed, 9 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.c b/drivers/hwtracing/coresight/coresight-etm-perf.c
-> index 5ca6278baff4..09f75dffae60 100644
-> --- a/drivers/hwtracing/coresight/coresight-etm-perf.c
-> +++ b/drivers/hwtracing/coresight/coresight-etm-perf.c
-> @@ -68,6 +68,7 @@ PMU_FORMAT_ATTR(preset,               "config:0-3");
->  PMU_FORMAT_ATTR(sinkid,                "config2:0-31");
->  /* config ID - set if a system configuration is selected */
->  PMU_FORMAT_ATTR(configid,      "config2:32-63");
-> +PMU_FORMAT_ATTR(cc_threshold,  "config3:0-11");
->
->
->  /*
-> @@ -101,6 +102,7 @@ static struct attribute *etm_config_formats_attr[] = {
->         &format_attr_preset.attr,
->         &format_attr_configid.attr,
->         &format_attr_branch_broadcast.attr,
-> +       &format_attr_cc_threshold.attr,
->         NULL,
->  };
->
-> diff --git a/drivers/hwtracing/coresight/coresight-etm4x-core.c b/drivers/hwtracing/coresight/coresight-etm4x-core.c
-> index c01455bb1caf..044aed25979b 100644
-> --- a/drivers/hwtracing/coresight/coresight-etm4x-core.c
-> +++ b/drivers/hwtracing/coresight/coresight-etm4x-core.c
-> @@ -644,7 +644,7 @@ static int etm4_parse_event_config(struct coresight_device *csdev,
->         struct etmv4_config *config = &drvdata->config;
->         struct perf_event_attr *attr = &event->attr;
->         unsigned long cfg_hash;
-> -       int preset;
-> +       int preset, cc_threshold;
->
->         /* Clear configuration from previous run */
->         memset(config, 0, sizeof(struct etmv4_config));
-> @@ -667,7 +667,12 @@ static int etm4_parse_event_config(struct coresight_device *csdev,
->         if (attr->config & BIT(ETM_OPT_CYCACC)) {
->                 config->cfg |= TRCCONFIGR_CCI;
->                 /* TRM: Must program this for cycacc to work */
-> -               config->ccctlr = ETM_CYC_THRESHOLD_DEFAULT;
-> +               cc_threshold = attr->config3 & ETM_CYC_THRESHOLD_MASK;
-> +               if (!cc_threshold)
-> +                       cc_threshold = ETM_CYC_THRESHOLD_DEFAULT;
-> +               if (cc_threshold < drvdata->ccitmin)
-> +                       cc_threshold = drvdata->ccitmin;
-> +               config->ccctlr = cc_threshold;
->         }
->         if (attr->config & BIT(ETM_OPT_TS)) {
->                 /*
-> --
-> 2.25.1
->
+This series is based on linux-next, tag: next-20230919.
 
-Reviewed-by: Mike Leach  <mike.leach@linaro.org>
+GenieZone hypervisor(gzvm) is a type-1 hypervisor that supports various virtual
+machine types and provides security features such as TEE-like scenarios and
+secure boot. It can create guest VMs for security use cases and has
+virtualization capabilities for both platform and interrupt. Although the
+hypervisor can be booted independently, it requires the assistance of GenieZone
+hypervisor kernel driver(gzvm-ko) to leverage the ability of Linux kernel for
+vCPU scheduling, memory management, inter-VM communication and virtio backend
+support.
+
+Changes in v6:
+- Rebase based on kernel 6.6-rc1
+- Keep dt solution and leave the reasons in the commit message
+- Remove arch/arm64/include/uapi/asm/gzvm_arch.h due to simplicity
+- Remove resampler in drivers/virt/geniezone/gzvm_irqfd.c due to defeature for
+  now
+- Remove PPI in arch/arm64/geniezone/vgic.c
+- Refactor vm related components into 3 smaller patches, namely adding vm
+  support, setting user memory region and checking vm capability 
+- Refactor vcpu and vm component to remove unnecessary ARM prefix 
+- Add demand paging to fix crash on destroying memory page, acclerate on booting
+  and support ballooning deflate
+- Add memory pin/unpin memory mechanism to support protected VM
+- Add block-based demand paging for performance concern
+- Response to reviewers and fix coding style accordingly
+
+Changes in v5:
+https://lore.kernel.org/all/20230727080005.14474-1-yi-de.wu@mediatek.com/
+- Add dt solution back for device initialization
+- Add GZVM_EXIT_GZ reason for gzvm_vcpu_run()
+- Add patch for guest page fault handler
+- Add patch for supporitng pin/unpin memory
+- Remove unused enum members, namely GZVM_FUNC_GET_REGS and GZVM_FUNC_SET_REGS
+- Use dev_debug() for debugging when platform device is available, and use
+  pr_debug() otherwise
+- Response to reviewers and fix bugs accordingly
+
+
+Changes in v4:
+https://lore.kernel.org/lkml/20230609085214.31071-1-yi-de.wu@mediatek.com/
+- Add macro to set VM as protected without triggering pvmfw in AVF.
+- Add support to pass dtb config to hypervisor.
+- Add support for virtual timer.
+- Add UAPI to pass memory region metadata to hypervisor.
+- Define our own macros for ARM's interrupt number
+- Elaborate more on GenieZone hyperivsor in documentation
+- Fix coding style.
+- Implement our own module for coverting ipa to pa
+- Modify the way of initializing device from dt to a more discoverable way
+- Move refactoring changes into indepedent patches.
+
+Changes in v3:
+https://lore.kernel.org/all/20230512080405.12043-1-yi-de.wu@mediatek.com/
+- Refactor: separate arch/arm64/geniezone/gzvm_arch.c into vm.c/vcpu.c/vgic.c
+- Remove redundant functions
+- Fix reviewer's comments
+
+Changes in v2:
+https://lore.kernel.org/all/20230428103622.18291-1-yi-de.wu@mediatek.com/
+- Refactor: move to drivers/virt/geniezone
+- Refactor: decouple arch-dependent and arch-independent
+- Check pending signal before entering guest context
+- Fix reviewer's comments
+
+Initial Commit in v1:
+https://lore.kernel.org/all/20230413090735.4182-1-yi-de.wu@mediatek.com/
+
+Yi-De Wu (15):
+  docs: geniezone: Introduce GenieZone hypervisor
+  dt-bindings: hypervisor: Add MediaTek GenieZone hypervisor
+  virt: geniezone: Add GenieZone hypervisor driver
+  virt: geniezone: Add vm support
+  virt: geniezone: Add set_user_memory_region for vm
+  virt: geniezone: Add vm capability check
+  virt: geniezone: Add vcpu support
+  virt: geniezone: Add irqchip support for virtual interrupt injection
+  virt: geniezone: Add irqfd support
+  virt: geniezone: Add ioeventfd support
+  virt: geniezone: Add memory region support
+  virt: geniezone: Add dtb config support
+  virt: geniezone: Add demand paging support
+  virt: geniezone: Add memory pin/unpin support
+  virt: geniezone: Add block-based demand paging support
+
+ .../hypervisor/mediatek,geniezone-hyp.yaml    |  31 ++
+ Documentation/virt/geniezone/introduction.rst |  86 ++++
+ Documentation/virt/index.rst                  |   1 +
+ MAINTAINERS                                   |  11 +
+ arch/arm64/Kbuild                             |   1 +
+ arch/arm64/geniezone/Makefile                 |   9 +
+ arch/arm64/geniezone/gzvm_arch_common.h       | 114 +++++
+ arch/arm64/geniezone/vcpu.c                   |  80 +++
+ arch/arm64/geniezone/vgic.c                   |  50 ++
+ arch/arm64/geniezone/vm.c                     | 380 ++++++++++++++
+ drivers/virt/Kconfig                          |   2 +
+ drivers/virt/geniezone/Kconfig                |  16 +
+ drivers/virt/geniezone/Makefile               |  12 +
+ drivers/virt/geniezone/gzvm_common.h          |  12 +
+ drivers/virt/geniezone/gzvm_exception.c       |  67 +++
+ drivers/virt/geniezone/gzvm_ioeventfd.c       | 276 +++++++++++
+ drivers/virt/geniezone/gzvm_irqfd.c           | 382 ++++++++++++++
+ drivers/virt/geniezone/gzvm_main.c            | 147 ++++++
+ drivers/virt/geniezone/gzvm_mmu.c             | 277 +++++++++++
+ drivers/virt/geniezone/gzvm_vcpu.c            | 281 +++++++++++
+ drivers/virt/geniezone/gzvm_vm.c              | 468 ++++++++++++++++++
+ include/linux/gzvm_drv.h                      | 204 ++++++++
+ include/uapi/linux/gzvm.h                     | 395 +++++++++++++++
+ 23 files changed, 3302 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/hypervisor/mediatek,geniezone-hyp.yaml
+ create mode 100644 Documentation/virt/geniezone/introduction.rst
+ create mode 100644 arch/arm64/geniezone/Makefile
+ create mode 100644 arch/arm64/geniezone/gzvm_arch_common.h
+ create mode 100644 arch/arm64/geniezone/vcpu.c
+ create mode 100644 arch/arm64/geniezone/vgic.c
+ create mode 100644 arch/arm64/geniezone/vm.c
+ create mode 100644 drivers/virt/geniezone/Kconfig
+ create mode 100644 drivers/virt/geniezone/Makefile
+ create mode 100644 drivers/virt/geniezone/gzvm_common.h
+ create mode 100644 drivers/virt/geniezone/gzvm_exception.c
+ create mode 100644 drivers/virt/geniezone/gzvm_ioeventfd.c
+ create mode 100644 drivers/virt/geniezone/gzvm_irqfd.c
+ create mode 100644 drivers/virt/geniezone/gzvm_main.c
+ create mode 100644 drivers/virt/geniezone/gzvm_mmu.c
+ create mode 100644 drivers/virt/geniezone/gzvm_vcpu.c
+ create mode 100644 drivers/virt/geniezone/gzvm_vm.c
+ create mode 100644 include/linux/gzvm_drv.h
+ create mode 100644 include/uapi/linux/gzvm.h
+
 -- 
-Mike Leach
-Principal Engineer, ARM Ltd.
-Manchester Design Centre. UK
+2.18.0
+
