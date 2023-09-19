@@ -2,64 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 47BCA7A5D14
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Sep 2023 10:54:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CDE717A5D26
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Sep 2023 10:58:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231517AbjISIyy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Sep 2023 04:54:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34114 "EHLO
+        id S231334AbjISI6J (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Sep 2023 04:58:09 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51798 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231701AbjISIym (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Sep 2023 04:54:42 -0400
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 688D0131;
-        Tue, 19 Sep 2023 01:53:40 -0700 (PDT)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5274DC433C8;
-        Tue, 19 Sep 2023 08:53:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1695113619;
-        bh=vaM9XujXeErMiUJR9Emy3Wd84QrswDsnFHmrPWGnP3E=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=FLLd6uXlkKnqZAu62F3c58mAiaRiXosNiF5hIo21358ZlBPBD4qiGGE2f3enJQr5W
-         NtCZHbIOEzvJ+KnApf4ohCucCzLHkGRITaqzQngWn+AhqPvKIYI+teqtdpJJ408jex
-         8wpPlHGBHuDksEdxhORGUvFrzjmO8NPpyjjNt6l4=
-Date:   Tue, 19 Sep 2023 10:53:32 +0200
-From:   Greg KH <gregkh@linuxfoundation.org>
-To:     Ivan Orlov <ivan.orlov0322@gmail.com>
-Cc:     perex@perex.cz, tiwai@suse.com, corbet@lwn.net,
-        alsa-devel@alsa-project.org, linux-doc@vger.kernel.org,
+        with ESMTP id S231246AbjISI6A (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Sep 2023 04:58:00 -0400
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 1A9F512A;
+        Tue, 19 Sep 2023 01:57:50 -0700 (PDT)
+Received: from loongson.cn (unknown [113.200.148.30])
+        by gateway (Coremail) with SMTP id _____8BxuOiLYgllZ90pAA--.44594S3;
+        Tue, 19 Sep 2023 16:57:47 +0800 (CST)
+Received: from linux.localdomain (unknown [113.200.148.30])
+        by localhost.localdomain (Coremail) with SMTP id AQAAf8CxfNyKYgll12MLAA--.22712S2;
+        Tue, 19 Sep 2023 16:57:46 +0800 (CST)
+From:   Tiezhu Yang <yangtiezhu@loongson.cn>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Huacai Chen <chenhuacai@kernel.org>
+Cc:     loongarch@lists.linux.dev, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] ALSA: Add new driver for Marian M2 sound card
-Message-ID: <2023091917-zippy-alienate-3efc@gregkh>
-References: <20230918181044.7257-1-ivan.orlov0322@gmail.com>
- <20230918181044.7257-2-ivan.orlov0322@gmail.com>
- <2023091955-dried-popsicle-f3d8@gregkh>
- <56a4a085-6b1d-19c6-4160-4513c8c41e57@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <56a4a085-6b1d-19c6-4160-4513c8c41e57@gmail.com>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Subject: [PATCH v1 0/2] LoongArch: Update the links of ABI documentation
+Date:   Tue, 19 Sep 2023 16:57:44 +0800
+Message-Id: <1695113866-20120-1-git-send-email-yangtiezhu@loongson.cn>
+X-Mailer: git-send-email 2.1.0
+X-CM-TRANSID: AQAAf8CxfNyKYgll12MLAA--.22712S2
+X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
+X-Coremail-Antispam: 1Uk129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7
+        ZEXasCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29K
+        BjDU0xBIdaVrnRJUUUk2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26c
+        xKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r106r15M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vE
+        j48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxV
+        AFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x02
+        67AKxVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6x
+        ACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E
+        87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41l42xK82
+        IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC2
+        0s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMI
+        IF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF
+        0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87
+        Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUzZ2-UUUUU
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Sep 19, 2023 at 12:46:34PM +0400, Ivan Orlov wrote:
-> By the way, is there any way to detect such issues automatically? I've seen
-> that the kernel test robot detects a lot of similar stuff, perhaps there is
-> any tools/linters which can be set up locally?
+Tiezhu Yang (2):
+  docs/LoongArch: Update the links of ABI
+  docs/zh_CN/LoongArch: Update the links of ABI
 
-Not that I know of, sorry, I rely on the kernel test robot for lots of
-these things :)
+ Documentation/arch/loongarch/introduction.rst                    | 4 ++--
+ Documentation/translations/zh_CN/arch/loongarch/introduction.rst | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-But, the robot is running all open tests, so dig into the public repo of
-it to see what it is using and perhaps run those tests locally?  Lots of
-them are just different build options and running sparse.
+-- 
+2.1.0
 
-thanks,
-
-greg k-h
