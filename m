@@ -2,472 +2,182 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 098567A60D0
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Sep 2023 13:13:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D3997A60F9
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Sep 2023 13:15:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232147AbjISLNM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Sep 2023 07:13:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51734 "EHLO
+        id S232089AbjISLPH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Sep 2023 07:15:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33956 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232046AbjISLNC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Sep 2023 07:13:02 -0400
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 23353A9;
-        Tue, 19 Sep 2023 04:12:52 -0700 (PDT)
-X-UUID: 740394f256dd11ee8051498923ad61e6-20230919
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-        h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=VD1e+qXEqMFBPXW2F3jMvAoTbp/+vpAF8wQLl5umujY=;
-        b=Rue72yjuYHUirBgDaMz6HrbxrPAOm4QNJuHppO8gQlzi84jAIy1V33b7vdINLoXTj6Z2vuIKWUEhkKKcqwdA1M0lQBn528Bng807N8m4uS9MQ3+18oZ3bplDs2jQtwJkyFBtvht/+7Cw+3AVpnfnERJrVLhtcUm0DmBo7fKXXkg=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.32,REQID:bf092059-1912-42d0-81b9-8893abf473f3,IP:0,U
-        RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
-        N:release,TS:-25
-X-CID-META: VersionHash:5f78ec9,CLOUDID:382604bf-14cc-44ca-b657-2d2783296e72,B
-        ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
-        RL:0,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,
-        DKR:0,DKP:0,BRR:0,BRE:0
-X-CID-BVR: 0
-X-CID-BAS: 0,_,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 740394f256dd11ee8051498923ad61e6-20230919
-Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by mailgw02.mediatek.com
-        (envelope-from <yi-de.wu@mediatek.com>)
-        (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-        with ESMTP id 1569459223; Tue, 19 Sep 2023 19:12:42 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Tue, 19 Sep 2023 19:12:41 +0800
-Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
- mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Tue, 19 Sep 2023 19:12:41 +0800
-From:   Yi-De Wu <yi-de.wu@mediatek.com>
-To:     Yingshiuan Pan <yingshiuan.pan@mediatek.com>,
-        Ze-Yu Wang <ze-yu.wang@mediatek.com>,
-        Yi-De Wu <yi-de.wu@mediatek.com>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        AngeloGioacchino Del Regno 
-        <angelogioacchino.delregno@collabora.com>
-CC:     Arnd Bergmann <arnd@arndb.de>, <devicetree@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-mediatek@lists.infradead.org>,
-        David Bradil <dbrazdil@google.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        Jade Shih <jades.shih@mediatek.com>,
-        Ivan Tseng <ivan.tseng@mediatek.com>,
-        My Chuang <my.chuang@mediatek.com>,
-        Kevenny Hsieh <kevenny.hsieh@mediatek.com>,
-        Willix Yeh <chi-shen.yeh@mediatek.com>,
-        Liju Chen <liju-clr.chen@mediatek.com>
-Subject: [PATCH v6 15/15] virt: geniezone: Add block-based demand paging support
-Date:   Tue, 19 Sep 2023 19:12:10 +0800
-Message-ID: <20230919111210.19615-16-yi-de.wu@mediatek.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20230919111210.19615-1-yi-de.wu@mediatek.com>
-References: <20230919111210.19615-1-yi-de.wu@mediatek.com>
+        with ESMTP id S232431AbjISLOx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Sep 2023 07:14:53 -0400
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.154.123])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CD8582D7E;
+        Tue, 19 Sep 2023 04:13:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1695122036; x=1726658036;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=nvYREegptLbLU9C96sEDqoWc7+it5HIqTU+CP//ycYQ=;
+  b=DzmPqGceN/IFX37im1hNjFpCO4uOZ3S/WDkVU/Xs+MdlIw6Y0COigyEs
+   s/B5yVF9cmSEiTsrV/PBJtDgFd6fRBWqfMjsmdFEJUXmOrD5SAk9cK7re
+   XnIgi/coflj6xOcCCan+JrkJ1OyQHgNo3/3X+IWcJ8Yii40EZTlYqLOTb
+   QB35VasKaQ5ZzeHwbG05GnIZWl+2/yJ8m/IrImXJtof0ZkPHPN6aP00kV
+   L5Wcj2Rj0E2MuWMvvsD6Drjc2EcSVvubtHLwnxaeq0TxoSGhdTxkWYIrN
+   t+xtJ+nAQORPcUjwdJ0pDNGYKYE903xFOLhK9jhQtBAE3nF4nY2nz/NkP
+   w==;
+X-CSE-ConnectionGUID: fFPnucd/SCK8IEWNYATfjg==
+X-CSE-MsgGUID: flZEG7qAQNisRDmsLPDaAA==
+X-ThreatScanner-Verdict: Negative
+X-IronPort-AV: E=Sophos;i="6.02,159,1688454000"; 
+   d="scan'208";a="172412939"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+  by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 19 Sep 2023 04:13:49 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Tue, 19 Sep 2023 04:13:18 -0700
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (10.10.215.89) by
+ email.microchip.com (10.10.87.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21 via Frontend
+ Transport; Tue, 19 Sep 2023 04:13:18 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TltWFwo7esIzrf2DxnUElG84t8nm10wuazsoxw+BnSymmJNq6lxwfgIdtwmDp82MQgiRFp9/WqyIIbaSzjDZXhBziGV6tCrBgYoXQShHkIdmjV4G0k3mh8pQmSu5dvAAD7tmcq7xm4C/AAVnfVyv8ypAkwayOlhmsBOqL4FxZ47Y8pFHXUeupZLWHzQzolkmH5wzhUAAHtiAWGhWBYa/W15isnxQuqiR6pHIbOb+3Rky/Grff7dVcTIInIh5P2CLX7Dhls0/RiWOE4qGN7QNV7Z/YGRQFfd1ERyCcjssZJTX/8i5zCqYALHvZaaHesk4jdO5u9DlZUu5/uopwSK/eA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nvYREegptLbLU9C96sEDqoWc7+it5HIqTU+CP//ycYQ=;
+ b=AYdkOKJiPDLacQCIk1ww2UdfhC4Aj2/v4M2LalPisScSJs5mw26x8iLorscl3sMryWGeX69LMC7Vociv7lbrX0MaCCIRQLZaV7oZczQbyw6wh7GGcNpkatJdmreLoI3l+sbsaoQNw7IOdw7VruRwboNChNiy+/HZuo0gN6b6Eh8J4U9In8e6cAkYLbdFkCwsynJr2yHLXrc2bzdyB4bDh41K9ul59in5uzXcAdCFIUUj0wFIXqO72fizbCU7U5MNb4B+WWb+cQU3VRwwhY1YVLPv3Ofh+yVZXpouKRuSRIe6VudgjdAJLN7GKpLrxQyB5ZGxu7TT1CmBOkKe5fXU+g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=microchip.com; dmarc=pass action=none
+ header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=microchiptechnology.onmicrosoft.com;
+ s=selector2-microchiptechnology-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nvYREegptLbLU9C96sEDqoWc7+it5HIqTU+CP//ycYQ=;
+ b=Ab3wBtdcGYKR2U6kxBg4Pp7xloK1JPuFovNp8wCF67Ls+YdtAehQqk28U3iJaT1VVKUAMcIf3tGNa/kRZ8f2mXvxTRn5P6gdZtlNzmk8RVCegSe18NkxtT8PZC4945gSgW35ScWIe3xvOIXDzHLymBD5lykcUmGAyxsZBhOy9pg=
+Received: from DM6PR11MB3532.namprd11.prod.outlook.com (2603:10b6:5:70::25) by
+ PH8PR11MB6610.namprd11.prod.outlook.com (2603:10b6:510:1cd::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.31; Tue, 19 Sep
+ 2023 11:13:13 +0000
+Received: from DM6PR11MB3532.namprd11.prod.outlook.com
+ ([fe80::6352:54f7:6c42:69ef]) by DM6PR11MB3532.namprd11.prod.outlook.com
+ ([fe80::6352:54f7:6c42:69ef%6]) with mapi id 15.20.6792.026; Tue, 19 Sep 2023
+ 11:13:13 +0000
+From:   <Parthiban.Veerasooran@microchip.com>
+To:     <andrew@lunn.ch>
+CC:     <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
+        <pabeni@redhat.com>, <robh+dt@kernel.org>,
+        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
+        <corbet@lwn.net>, <Steen.Hegelund@microchip.com>,
+        <rdunlap@infradead.org>, <horms@kernel.org>,
+        <casper.casan@gmail.com>, <netdev@vger.kernel.org>,
+        <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <Horatiu.Vultur@microchip.com>,
+        <Woojung.Huh@microchip.com>, <Nicolas.Ferre@microchip.com>,
+        <UNGLinuxDriver@microchip.com>, <Thorsten.Kummermehr@microchip.com>
+Subject: Re: [RFC PATCH net-next 1/6] net: ethernet: implement OPEN Alliance
+ control transaction interface
+Thread-Topic: [RFC PATCH net-next 1/6] net: ethernet: implement OPEN Alliance
+ control transaction interface
+Thread-Index: AQHZ4mEB+nwP90vbvEyYqcmk7ntkibAYC/aAgAoD1gA=
+Date:   Tue, 19 Sep 2023 11:13:13 +0000
+Message-ID: <9615b403-52c1-f24f-382f-8eea3ddfcf04@microchip.com>
+References: <20230908142919.14849-1-Parthiban.Veerasooran@microchip.com>
+ <20230908142919.14849-2-Parthiban.Veerasooran@microchip.com>
+ <8d53ca8d-bcf6-4673-a8ff-b621d700576e@lunn.ch>
+In-Reply-To: <8d53ca8d-bcf6-4673-a8ff-b621d700576e@lunn.ch>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=microchip.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM6PR11MB3532:EE_|PH8PR11MB6610:EE_
+x-ms-office365-filtering-correlation-id: b3d1db76-f967-4051-a637-08dbb9016a55
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: /LOrD6N/HE6zFYkRVdPinKP21L3B2BAAk7P3CW+eRI49e27+hS4qvzxbt7AF2GKKbK9lvOvhtXMCsig+XPFERv9p4tMaUfqn9IiYERx94bteSI9W8lBU9SD9/K6DJ/INKqW0qwQ3xi0sJHEkACqOif0Whd/qKKb5zYP2Mk7lRJdNvtA8MQ2riMm7Gv3PL7Dr0iu8m2UWp0NdVpme9j/sQhuuK2gOLrHt93mk1+fwyOkPnPASqN42BhIqtzsG7IddQexS3dr9welFpNeybAWQBderV8Z+Doo7xQe2Ijhfe2GIsK6qroxYprRb/swQgfqWPpUs4CdN2RUBbOg7AasceiCCJqDyMqiIyCSOziR6ikbgZuAEN0Nyo/o8p4V9JAozyiNRR7kxy8IDteMlfHq8Gt5MYB9qtZBIJG+2jUMXRJPvalkqkb40aCXQLIIIgHjRFzw7RGoRP4IT5C1SlF8hmx+aMLhgwVwKnHPPpBK3/+KGNatq+/rlc1h9Chd1RRSmH03rwyBslI8qUUVT9epDYtP+QCBpgFt/h5Cjcjfiwp4amjfPTHb9xs2mHvmEN9Irxvuri1XDq/2rqYjXe/Gj+b5U4vmLgJT1RP5J9kd7tfcNuBHR7O9q4gjxtofjrlnWw6xqqM9Ou88K2OJg8FLd9p/prEBLcmGb1UhwJi095DfpkrBMCPGLUd0BO+clQwqJ
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3532.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(39860400002)(136003)(376002)(396003)(346002)(451199024)(186009)(1800799009)(53546011)(31686004)(4744005)(2906002)(7416002)(8936002)(4326008)(41300700001)(5660300002)(66446008)(54906003)(76116006)(91956017)(66556008)(36756003)(64756008)(107886003)(66946007)(8676002)(66476007)(6916009)(316002)(122000001)(478600001)(71200400001)(6486002)(26005)(38100700002)(6506007)(83380400001)(31696002)(38070700005)(2616005)(6512007)(86362001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?YXd5MUpjN3B1cXowUzdzK1AzTTlrd05IOVA4clVKZ01nUEdnL3p3MXlwTG96?=
+ =?utf-8?B?K1FyL3hDVklXbkpmNEZTa0RiT3lDUDZ1eHU5V0s2UGtYR0RoZVNUNTV0SUJ5?=
+ =?utf-8?B?ZG5IcWlUUmMxY1kzRi9XWTJ2WnBVbng5Y3dHV0RlZmlsSDhRbDJZdVpEdDBX?=
+ =?utf-8?B?TW1sTkZQNzdyVElMZjJhN0VBS1NzaTc2VUJ3d3B0cU1kWnNvdUhxVU81MC9o?=
+ =?utf-8?B?YjdXeUMxYXJlZ2hRdHo2RzFUV3gwbFM4aldpVjFmM1JQYVpPdUNmUGxIL0or?=
+ =?utf-8?B?SVo4b3hTOWRCMUhSNVo2VklxYUlKekt3OSt5NVNDOWV4MDVoMGMxTHRnenIy?=
+ =?utf-8?B?anNyNlRtL0tsY055V3gzSmsrR1E1VDRwQXZCQzJ4aTUrVjZIODIwaHVFMmlG?=
+ =?utf-8?B?THYxcExUaWdLSVIxVFZCV0ExbEo0TTg5bU1uS0N5L0JwY3pDYlY2azRmMmo1?=
+ =?utf-8?B?YU9pcFdFUlpYdVlGZmd1MlFmc0xib1k3ZFQ0azJTbGRjcEJyeC9DWmVWQXNL?=
+ =?utf-8?B?bVFpR3JwM1VlQkhrZ1VpM1JDa2NTMmM2UTFUNmRmczNsU0pXdWNoaFRoVnRD?=
+ =?utf-8?B?cUZNQjhCZy9CY1E2YytabWVvV291SlNjUkdyNDRnS1dUaytrV2RhZDh5blJD?=
+ =?utf-8?B?SCt3Y2htUEZVejF2c1RzNkcxKy9UdjFmaXlybnd6cnRUMndYeXRhaEE0Rkpm?=
+ =?utf-8?B?V2Uzd080TFkvb3paKzFGNnk1SXVVODUvNkhVTXBGSXpXWExSY1JDT3BlNGsw?=
+ =?utf-8?B?OHlTVzhTL3Q0cmxHRXpEaThrRzVCdnpvZEk5K2dKSG1hNFNQTFVFNWhXSmZH?=
+ =?utf-8?B?UlBDRVltbXRPdllkOVBINFNZT0h6N0o5OGp6c0pMTUltQzNGb1U5Uk5PZFFy?=
+ =?utf-8?B?d1dmcEJURWtabVZ4enFRQjRMWkFXQ0ZhbDNLWGpSakp5OU9YTVN1YVRnaVd6?=
+ =?utf-8?B?aUVTVE1jN080UlZVTm5GRi92ZmtLa2lFTGkxYTY3c28vWmxmVXNVTHhRZmFN?=
+ =?utf-8?B?S2VwZFE4cllucndlTnNDNVNPL3ZKMnZ3K2ZwMDd2NjR0amFLdDRXY3puN0pR?=
+ =?utf-8?B?a1dNZjZweDZRdnpsSFNmQ0o4V0d0Ty9lVWlGY2J0L3JyMFZjZHBTNXVFZWJL?=
+ =?utf-8?B?TnNiU1lTMGZtb0dHY201YTA2cEVLWU95bkJwME5sQUg3SzVETVE5aXNyTXBu?=
+ =?utf-8?B?ZjZUb2g2aUppMWVGRkxEd0FOVDVlQ2w4UlVneVNsalRoMkhQSlFXR0lhbFFr?=
+ =?utf-8?B?SDh3MkZvV0tmeXp3VWxzczA4ZUNnUHRXa1N5akp4Um1rVHJtYXdoSDViWFp3?=
+ =?utf-8?B?ZldCTVdUelIwTTkwQWdwQ3M4Zit2TFhFWk1mL2d4WGZVeW8vUWpoa0tkYzNs?=
+ =?utf-8?B?K3F6OXpwODV4Y2kwVmFIaWR3dWl2eThLNU1EdVZ5MUZsZDZPWUNwclNoWTBw?=
+ =?utf-8?B?UjltZHBONFdYV0d5ZWYyTWg5SlIycmN3K0pZWDlmZHpQUjkzMDdjUHh5UHE0?=
+ =?utf-8?B?QSttU3lxa2lVTFJiNEFBR1BCbFV2R0FUTWtrRUllQ0NWeUgrb0JhUUhsbnh1?=
+ =?utf-8?B?SHlFNi8xNnk2b2xlYm5DZkVsdzJ1d1BPTnl4Q0RkVEMvaXd1MmU3TUx3dVN0?=
+ =?utf-8?B?bUd2c0NjZDFsdnE4cDhMOTR6OWFMa2tNSWdFL2VGNGlubjJ6dzhBQ2FhaXFl?=
+ =?utf-8?B?aTdZNHowN0hObHBidWNSYzZPaUc1NlVCZHErdHRta3hSdUlBZG5qc0xQL1Vi?=
+ =?utf-8?B?Qzd5b3hUdVJhazZubFJoQ2hqb241QXltUnNtVlRPaWdlaHhlMS9xQU1McWJP?=
+ =?utf-8?B?N3lEbHFNRW1RMm9PYkwrRFJGRG1Tdm1WS0xhRGJVWlhCSVRFY2dpY0pKWGhv?=
+ =?utf-8?B?eWdlRXpEMGdVMWlkc1o2UlhtdzlGOHpVdS9xWVJtMFBXMTNVRDd6c3hFeExB?=
+ =?utf-8?B?d0FSS2wzajR0ejU1V3JIYVlybkNaMk91UkxUMU0rTzBoTzY3YWwwOEZ5eEZp?=
+ =?utf-8?B?N2dmaFJCMFZpUVBMVmFpTUN6cGRQUitrSXV5eUJKSEdzWGFQWTBBY25vemMz?=
+ =?utf-8?B?bUEzbWh5WnpNUURjbHc2RE9UWWFtcHBhVGdFNW9QQjN1b092eHE3a0RhQVFU?=
+ =?utf-8?B?eUlVLzE2Z3pFd1ZLeDlwQnBYOHdRK2g1TDE3TW5LTUhrc3JFUEZIdm14Q1Qr?=
+ =?utf-8?B?WXc9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <D67B64EA4A16E34BA54D786030351F0D@namprd11.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK:  N
-X-Spam-Status: No, score=-1.3 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,RDNS_NONE,
-        SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=no
-        autolearn_force=no version=3.4.6
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3532.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b3d1db76-f967-4051-a637-08dbb9016a55
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Sep 2023 11:13:13.2819
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 6Zm47iGeyvjiA3w6z0q9vA/y5me6oHTZhX/d751BmpxWnUe7ZYEeamj3DFJK21IYUa3FU668vZqMz9N70VLuTShD6ZjgXTIMZ1Xh00WMW3m8gN5Ji3p5dERobquc8Pu7
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR11MB6610
+X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,
+        SPF_HELO_PASS,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: "Yingshiuan Pan" <yingshiuan.pan@mediatek.com>
-
-To balance memory usage and performance, GenieZone supports larger granularity
-demand paging, called block-based demand paging. Gzvm driver uses enable_cap 
-to query the hypervisor if it supports block-based demand paging and the given
-granularity or not. Meanwhile, the gzvm driver allocates a shared buffer for 
-storing the physical pages later.
-
-If the hypervisor supports, every time the gzvm driver handles guest page
-faults, it allocates more memory in advance (default: 2MB) for demand paging.
-And fills those physical pages into the allocated shared memory, then calls
-the hypervisor to map to guest's memory.
-
-The physical pages allocated for block-based demand paging is not necessary to
-be contiguous because in many cases, 2MB block is not followed. 1st, the
-memory is allocated because of VMM's page fault (VMM loads kernel image to
-guest memory before running). In this case, the page is allocated by the host
-kernel and using PAGE_SIZE. 2nd is that guest may return memory to host via
-ballooning and that is still 4KB (or PAGE_SIZE) granularity. Therefore, we do
-not have to allocate physically contiguous 2MB pages.
-
-Signed-off-by: Yingshiuan Pan <yingshiuan.pan@mediatek.com>
-Signed-off-by: Liju Chen <liju-clr.chen@mediatek.com>
-Signed-off-by: Yi-De Wu <yi-de.wu@mediatek.com>
----
- arch/arm64/geniezone/gzvm_arch_common.h |   2 +
- arch/arm64/geniezone/vm.c               |  19 +++-
- drivers/virt/geniezone/gzvm_mmu.c       | 110 +++++++++++++++++-------
- drivers/virt/geniezone/gzvm_vm.c        |  49 +++++++++++
- include/linux/gzvm_drv.h                |  16 ++++
- include/uapi/linux/gzvm.h               |   2 +
- 6 files changed, 164 insertions(+), 34 deletions(-)
-
-diff --git a/arch/arm64/geniezone/gzvm_arch_common.h b/arch/arm64/geniezone/gzvm_arch_common.h
-index c21eb8ca8d4b..f57f799bbbc9 100644
---- a/arch/arm64/geniezone/gzvm_arch_common.h
-+++ b/arch/arm64/geniezone/gzvm_arch_common.h
-@@ -25,6 +25,7 @@ enum {
- 	GZVM_FUNC_MEMREGION_PURPOSE = 15,
- 	GZVM_FUNC_SET_DTB_CONFIG = 16,
- 	GZVM_FUNC_MAP_GUEST = 17,
-+	GZVM_FUNC_MAP_GUEST_BLOCK = 18,
- 	NR_GZVM_FUNC,
- };
- 
-@@ -50,6 +51,7 @@ enum {
- #define MT_HVC_GZVM_MEMREGION_PURPOSE	GZVM_HCALL_ID(GZVM_FUNC_MEMREGION_PURPOSE)
- #define MT_HVC_GZVM_SET_DTB_CONFIG	GZVM_HCALL_ID(GZVM_FUNC_SET_DTB_CONFIG)
- #define MT_HVC_GZVM_MAP_GUEST		GZVM_HCALL_ID(GZVM_FUNC_MAP_GUEST)
-+#define MT_HVC_GZVM_MAP_GUEST_BLOCK	GZVM_HCALL_ID(GZVM_FUNC_MAP_GUEST_BLOCK)
- 
- #define GIC_V3_NR_LRS			16
- 
-diff --git a/arch/arm64/geniezone/vm.c b/arch/arm64/geniezone/vm.c
-index d236b6cf84b3..d1948045ed72 100644
---- a/arch/arm64/geniezone/vm.c
-+++ b/arch/arm64/geniezone/vm.c
-@@ -299,10 +299,11 @@ static int gzvm_vm_ioctl_cap_pvm(struct gzvm *gzvm,
- 		fallthrough;
- 	case GZVM_CAP_PVM_SET_PROTECTED_VM:
- 		/*
--		 * To improve performance for protected VM, we have to populate VM's memory
--		 * before VM booting
-+		 * If the hypervisor doesn't support block-based demand paging, we
-+		 * populate memory in advance to improve performance for protected VM.
- 		 */
--		populate_mem_region(gzvm);
-+		if (gzvm->demand_page_gran == PAGE_SIZE)
-+			populate_mem_region(gzvm);
- 		ret = gzvm_vm_arch_enable_cap(gzvm, cap, &res);
- 		return ret;
- 	case GZVM_CAP_PVM_GET_PVMFW_SIZE:
-@@ -319,12 +320,16 @@ int gzvm_vm_ioctl_arch_enable_cap(struct gzvm *gzvm,
- 				  struct gzvm_enable_cap *cap,
- 				  void __user *argp)
- {
-+	struct arm_smccc_res res = {0};
- 	int ret;
- 
- 	switch (cap->cap) {
- 	case GZVM_CAP_PROTECTED_VM:
- 		ret = gzvm_vm_ioctl_cap_pvm(gzvm, cap, argp);
- 		return ret;
-+	case GZVM_CAP_BLOCK_BASED_DEMAND_PAGING:
-+		ret = gzvm_vm_arch_enable_cap(gzvm, cap, &res);
-+		return ret;
- 	default:
- 		break;
- 	}
-@@ -365,3 +370,11 @@ int gzvm_arch_map_guest(u16 vm_id, int memslot_id, u64 pfn, u64 gfn,
- 	return gzvm_hypcall_wrapper(MT_HVC_GZVM_MAP_GUEST, vm_id, memslot_id,
- 				    pfn, gfn, nr_pages, 0, 0, &res);
- }
-+
-+int gzvm_arch_map_guest_block(u16 vm_id, int memslot_id, u64 gfn)
-+{
-+	struct arm_smccc_res res;
-+
-+	return gzvm_hypcall_wrapper(MT_HVC_GZVM_MAP_GUEST_BLOCK, vm_id,
-+				    memslot_id, gfn, 0, 0, 0, 0, &res);
-+}
-diff --git a/drivers/virt/geniezone/gzvm_mmu.c b/drivers/virt/geniezone/gzvm_mmu.c
-index 542599f104db..02b9d89d482d 100644
---- a/drivers/virt/geniezone/gzvm_mmu.c
-+++ b/drivers/virt/geniezone/gzvm_mmu.c
-@@ -140,15 +140,30 @@ static int gzvm_insert_ppage(struct gzvm *vm, struct gzvm_pinned_page *ppage)
- 	return 0;
- }
- 
--static int pin_one_page(unsigned long hva, struct page **page)
-+static int pin_one_page(struct gzvm *vm, unsigned long hva, u64 gpa)
- {
--	struct mm_struct *mm = current->mm;
- 	unsigned int flags = FOLL_HWPOISON | FOLL_LONGTERM | FOLL_WRITE;
-+	struct gzvm_pinned_page *ppage = NULL;
-+	struct mm_struct *mm = current->mm;
-+	struct page *page = NULL;
-+
-+	ppage = kmalloc(sizeof(*ppage), GFP_KERNEL_ACCOUNT);
-+	if (!ppage)
-+		return -ENOMEM;
- 
- 	mmap_read_lock(mm);
--	pin_user_pages(hva, 1, flags, page);
-+	pin_user_pages(hva, 1, flags, &page);
- 	mmap_read_unlock(mm);
- 
-+	if (!page) {
-+		kfree(ppage);
-+		return -EFAULT;
-+	}
-+
-+	ppage->page = page;
-+	ppage->ipa = gpa;
-+	gzvm_insert_ppage(vm, ppage);
-+
- 	return 0;
- }
- 
-@@ -179,6 +194,62 @@ int gzvm_handle_relinquish(struct gzvm_vcpu *vcpu, phys_addr_t ipa)
- 	return 0;
- }
- 
-+static int handle_block_demand_page(struct gzvm *vm, int memslot_id, u64 gfn)
-+{
-+	u64 pfn, __gfn, start_gfn;
-+	u32 nr_entries;
-+	unsigned long hva;
-+	int ret, i;
-+
-+	nr_entries = GZVM_BLOCK_BASED_DEMAND_PAGE_SIZE / PAGE_SIZE;
-+	start_gfn = ALIGN_DOWN(gfn, nr_entries);
-+
-+	mutex_lock(&vm->demand_paging_lock);
-+	for (i = 0, __gfn = start_gfn; i < nr_entries; i++, __gfn++) {
-+		ret = gzvm_gfn_to_pfn_memslot(&vm->memslot[memslot_id], __gfn,
-+					      &pfn);
-+		if (unlikely(ret)) {
-+			ret = -ERR_FAULT;
-+			goto err_unlock;
-+		}
-+		vm->demand_page_buffer[i] = pfn;
-+
-+		hva = gzvm_gfn_to_hva_memslot(&vm->memslot[memslot_id], __gfn);
-+		ret = pin_one_page(vm, hva, PFN_PHYS(__gfn));
-+		if (ret)
-+			goto err_unlock;
-+	}
-+
-+	ret = gzvm_arch_map_guest_block(vm->vm_id, memslot_id, start_gfn);
-+	if (unlikely(ret)) {
-+		ret = -EFAULT;
-+		goto err_unlock;
-+	}
-+
-+err_unlock:
-+	mutex_unlock(&vm->demand_paging_lock);
-+
-+	return ret;
-+}
-+
-+static int handle_single_demand_page(struct gzvm *vm, int memslot_id, u64 gfn)
-+{
-+	unsigned long hva;
-+	int ret;
-+	u64 pfn;
-+
-+	ret = gzvm_gfn_to_pfn_memslot(&vm->memslot[memslot_id], gfn, &pfn);
-+	if (unlikely(ret))
-+		return -EFAULT;
-+
-+	ret = gzvm_arch_map_guest(vm->vm_id, memslot_id, pfn, gfn, 1);
-+	if (unlikely(ret))
-+		return -EFAULT;
-+
-+	hva = gzvm_gfn_to_hva_memslot(&vm->memslot[memslot_id], gfn);
-+	return pin_one_page(vm, hva, PFN_PHYS(gfn));
-+}
-+
- /**
-  * gzvm_handle_page_fault() - Handle guest page fault, find corresponding page
-  *                            for the faulting gpa
-@@ -190,40 +261,17 @@ int gzvm_handle_relinquish(struct gzvm_vcpu *vcpu, phys_addr_t ipa)
-  */
- int gzvm_handle_page_fault(struct gzvm_vcpu *vcpu)
- {
--	struct gzvm_pinned_page *ppage = NULL;
- 	struct gzvm *vm = vcpu->gzvm;
--	struct page *page = NULL;
--	unsigned long hva;
--	u64 pfn, gfn;
- 	int memslot_id;
--	int ret;
-+	u64 gfn;
- 
- 	gfn = PHYS_PFN(vcpu->run->exception.fault_gpa);
- 	memslot_id = gzvm_find_memslot(vm, gfn);
- 	if (unlikely(memslot_id < 0))
- 		return -EFAULT;
- 
--	ret = gzvm_gfn_to_pfn_memslot(&vm->memslot[memslot_id], gfn, &pfn);
--	if (unlikely(ret))
--		return -EFAULT;
--
--	ret = gzvm_arch_map_guest(vm->vm_id, memslot_id, pfn, gfn, 1);
--	if (unlikely(ret))
--		return -EFAULT;
--
--	hva = gzvm_gfn_to_hva_memslot(&vm->memslot[memslot_id], gfn);
--	pin_one_page(hva, &page);
--
--	if (!page)
--		return -EFAULT;
--
--	ppage = kmalloc(sizeof(*ppage), GFP_KERNEL_ACCOUNT);
--	if (!ppage)
--		return -ENOMEM;
--
--	ppage->page = page;
--	ppage->ipa = vcpu->run->exception.fault_gpa;
--	gzvm_insert_ppage(vm, ppage);
--
--	return 0;
-+	if (vm->demand_page_gran == PAGE_SIZE)
-+		return handle_single_demand_page(vm, memslot_id, gfn);
-+	else
-+		return handle_block_demand_page(vm, memslot_id, gfn);
- }
-diff --git a/drivers/virt/geniezone/gzvm_vm.c b/drivers/virt/geniezone/gzvm_vm.c
-index 747e5cf523bf..a7d43bedfad0 100644
---- a/drivers/virt/geniezone/gzvm_vm.c
-+++ b/drivers/virt/geniezone/gzvm_vm.c
-@@ -309,6 +309,8 @@ static void gzvm_destroy_ppage(struct gzvm *gzvm)
- 
- static void gzvm_destroy_vm(struct gzvm *gzvm)
- {
-+	size_t allocated_size;
-+
- 	pr_debug("VM-%u is going to be destroyed\n", gzvm->vm_id);
- 
- 	mutex_lock(&gzvm->lock);
-@@ -321,6 +323,11 @@ static void gzvm_destroy_vm(struct gzvm *gzvm)
- 	list_del(&gzvm->vm_list);
- 	mutex_unlock(&gzvm_list_lock);
- 
-+	if (gzvm->demand_page_buffer) {
-+		allocated_size = GZVM_BLOCK_BASED_DEMAND_PAGE_SIZE / PAGE_SIZE * sizeof(u64);
-+		free_pages_exact(gzvm->demand_page_buffer, allocated_size);
-+	}
-+
- 	mutex_unlock(&gzvm->lock);
- 
- 	gzvm_destroy_ppage(gzvm);
-@@ -342,6 +349,46 @@ static const struct file_operations gzvm_vm_fops = {
- 	.llseek		= noop_llseek,
- };
- 
-+/**
-+ * setup_vm_demand_paging - Query hypervisor suitable demand page size and set
-+ * @vm: gzvm instance for setting up demand page size
-+ *
-+ * Return: void
-+ */
-+static void setup_vm_demand_paging(struct gzvm *vm)
-+{
-+	u32 buf_size = GZVM_BLOCK_BASED_DEMAND_PAGE_SIZE / PAGE_SIZE * sizeof(u64);
-+	struct gzvm_enable_cap cap = {0};
-+	void *buffer;
-+	int ret;
-+
-+	mutex_init(&vm->demand_paging_lock);
-+	buffer = alloc_pages_exact(buf_size, GFP_KERNEL);
-+	if (!buffer) {
-+		/* Fall back to use default page size for demand paging */
-+		vm->demand_page_gran = PAGE_SIZE;
-+		vm->demand_page_buffer = NULL;
-+		return;
-+	}
-+
-+	cap.cap = GZVM_CAP_BLOCK_BASED_DEMAND_PAGING;
-+	cap.args[0] = GZVM_BLOCK_BASED_DEMAND_PAGE_SIZE;
-+	cap.args[1] = (__u64)virt_to_phys(buffer);
-+	/* demand_page_buffer is freed when destroy VM */
-+	vm->demand_page_buffer = buffer;
-+
-+	ret = gzvm_vm_ioctl_enable_cap(vm, &cap, NULL);
-+	if (ret == 0) {
-+		vm->demand_page_gran = GZVM_BLOCK_BASED_DEMAND_PAGE_SIZE;
-+		/* freed when destroy vm */
-+		vm->demand_page_buffer = buffer;
-+	} else {
-+		vm->demand_page_gran = PAGE_SIZE;
-+		vm->demand_page_buffer = NULL;
-+		free_pages_exact(buffer, buf_size);
-+	}
-+}
-+
- static struct gzvm *gzvm_create_vm(unsigned long vm_type)
- {
- 	int ret;
-@@ -376,6 +423,8 @@ static struct gzvm *gzvm_create_vm(unsigned long vm_type)
- 		return ERR_PTR(ret);
- 	}
- 
-+	setup_vm_demand_paging(gzvm);
-+
- 	mutex_lock(&gzvm_list_lock);
- 	list_add(&gzvm->vm_list, &gzvm_list);
- 	mutex_unlock(&gzvm_list_lock);
-diff --git a/include/linux/gzvm_drv.h b/include/linux/gzvm_drv.h
-index 77c839c02b17..a6994a1c391a 100644
---- a/include/linux/gzvm_drv.h
-+++ b/include/linux/gzvm_drv.h
-@@ -46,6 +46,8 @@
- 
- #define GZVM_VCPU_RUN_MAP_SIZE		(PAGE_SIZE * 2)
- 
-+#define GZVM_BLOCK_BASED_DEMAND_PAGE_SIZE	(2 * 1024 * 1024) /* 2MB */
-+
- /* struct mem_region_addr_range - Identical to ffa memory constituent */
- struct mem_region_addr_range {
- 	/* the base IPA of the constituent memory region, aligned to 4 kiB */
-@@ -117,6 +119,19 @@ struct gzvm {
- 
- 	/* Use rb-tree to record pin/unpin page */
- 	struct rb_root pinned_pages;
-+
-+	/*
-+	 * demand page granularity: how much memory we allocate for VM in a
-+	 * single page fault
-+	 */
-+	u32 demand_page_gran;
-+	/* the mailbox for transferring large portion pages */
-+	u64 *demand_page_buffer;
-+	/*
-+	 * lock for preventing multiple cpu using the same demand page mailbox
-+	 * at the same time
-+	 */
-+	struct mutex  demand_paging_lock;
- };
- 
- long gzvm_dev_ioctl_check_extension(struct gzvm *gzvm, unsigned long args);
-@@ -137,6 +152,7 @@ int gzvm_arch_create_vm(unsigned long vm_type);
- int gzvm_arch_destroy_vm(u16 vm_id);
- int gzvm_arch_map_guest(u16 vm_id, int memslot_id, u64 pfn, u64 gfn,
- 			u64 nr_pages);
-+int gzvm_arch_map_guest_block(u16 vm_id, int memslot_id, u64 gfn);
- int gzvm_vm_ioctl_arch_enable_cap(struct gzvm *gzvm,
- 				  struct gzvm_enable_cap *cap,
- 				  void __user *argp);
-diff --git a/include/uapi/linux/gzvm.h b/include/uapi/linux/gzvm.h
-index edac8e3ae790..a98787a18c36 100644
---- a/include/uapi/linux/gzvm.h
-+++ b/include/uapi/linux/gzvm.h
-@@ -18,6 +18,8 @@
- 
- #define GZVM_CAP_VM_GPA_SIZE	0xa5
- #define GZVM_CAP_PROTECTED_VM	0xffbadab1
-+/* query hypervisor supported block-based demand page */
-+#define GZVM_CAP_BLOCK_BASED_DEMAND_PAGING	0x9201
- 
- /* sub-commands put in args[0] for GZVM_CAP_PROTECTED_VM */
- #define GZVM_CAP_PVM_SET_PVMFW_GPA		0
--- 
-2.18.0
-
+SGkgQW5kcmV3LA0KDQpPbiAxMy8wOS8yMyA3OjQ2IGFtLCBBbmRyZXcgTHVubiB3cm90ZToNCj4g
+RVhURVJOQUwgRU1BSUw6IERvIG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVu
+bGVzcyB5b3Uga25vdyB0aGUgY29udGVudCBpcyBzYWZlDQo+IA0KPj4gK3N0cnVjdCBvYV90YzYg
+ew0KPj4gKyAgICAgc3RydWN0IHNwaV9kZXZpY2UgKnNwaTsNCj4+ICsgICAgIGJvb2wgY3RybF9w
+cm90Ow0KPj4gK307DQo+IA0KPiBTaG91bGQgdGhpcyBiZSBjb25zaWRlcmVkIGFuIG9wYXF1ZSBz
+dHJ1Y3R1cmUgd2hpY2ggdGhlIE1BQyBkcml2ZXINCj4gc2hvdWxkIG5vdCBhY2Nlc3MgdGhlIG1l
+bWJlcnM/DQo+IA0KPiBJIGRvbid0IHNlZSBhbnl0aGluZyBzZXR0aW5nIGN0cmxfcHJvdCBoZXJl
+LiBEb2VzIGl0IG5lZWQgYSBzZXR0ZXIgYW5kDQo+IGEgZ2V0dGVyPw0KQWggb2ssIGl0IGlzIHN1
+cHBvc2VkIHRvIGJlIGRvbmUgaW4gdGhlIG9hX3RjNl9pbml0KCkgZnVuY3Rpb24uIFNvbWVob3cg
+DQptaXNzZWQgaXQuIFdpbGwgY29ycmVjdCBpdCBpbiB0aGUgbmV4dCB2ZXJzaW9uLg0KDQpCZXN0
+IFJlZ2FyZHMsDQpQYXJ0aGliYW4gVg0KPiANCj4gICAgICAgICAgQW5kcmV3DQoNCg==
