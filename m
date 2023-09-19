@@ -2,111 +2,117 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 481B57A67B8
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Sep 2023 17:13:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1E0987A6854
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Sep 2023 17:49:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232542AbjISPNq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Sep 2023 11:13:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34858 "EHLO
+        id S233197AbjISPtD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Sep 2023 11:49:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59878 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232490AbjISPNq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Sep 2023 11:13:46 -0400
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6ABC394;
-        Tue, 19 Sep 2023 08:13:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-        s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-        Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-        Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-        bh=XYVo0DIlVrsGyb15YB580Gp7jA08wMao19ef99+f2co=; b=51K66dbVjhEQD1mTpJSuIag79U
-        zndzKI2iEruUJ/3n8QYNfH8NLcaB8qykpb/y9TnDc2CPLOIFbcM9gHjvIFzuejWZVJ8GNGgdaspv2
-        xepuIuKyu8Adx9j15wU8aJtu46n9h2wm1I0aXrO2v5nRVxXspBk2+2qESEJcHhctlerk=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-        (envelope-from <andrew@lunn.ch>)
-        id 1qicPn-006vKZ-CJ; Tue, 19 Sep 2023 17:13:27 +0200
-Date:   Tue, 19 Sep 2023 17:13:27 +0200
-From:   Andrew Lunn <andrew@lunn.ch>
-To:     Parthiban.Veerasooran@microchip.com
-Cc:     davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
-        pabeni@redhat.com, robh+dt@kernel.org,
-        krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
-        corbet@lwn.net, Steen.Hegelund@microchip.com,
-        rdunlap@infradead.org, horms@kernel.org, casper.casan@gmail.com,
-        netdev@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Horatiu.Vultur@microchip.com, Woojung.Huh@microchip.com,
-        Nicolas.Ferre@microchip.com, UNGLinuxDriver@microchip.com,
-        Thorsten.Kummermehr@microchip.com
-Subject: Re: [RFC PATCH net-next 1/6] net: ethernet: implement OPEN Alliance
- control transaction interface
-Message-ID: <deff3e64-a10f-4d07-9651-502442a86987@lunn.ch>
-References: <20230908142919.14849-1-Parthiban.Veerasooran@microchip.com>
- <20230908142919.14849-2-Parthiban.Veerasooran@microchip.com>
- <f23997c1-7507-41c6-8bb3-47d6a353beb8@lunn.ch>
- <14c089d7-4d34-9cd5-7f77-55c80815e003@microchip.com>
+        with ESMTP id S233184AbjISPtC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Sep 2023 11:49:02 -0400
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com [IPv6:2607:f8b0:4864:20::72c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 448CB9C
+        for <linux-doc@vger.kernel.org>; Tue, 19 Sep 2023 08:48:56 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id af79cd13be357-773ae5d2b1fso307193185a.2
+        for <linux-doc@vger.kernel.org>; Tue, 19 Sep 2023 08:48:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1695138535; x=1695743335; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=FUFBX34Vi8T0jyulMhlIaJzOiGzxRBHm/K7XuTUIix8=;
+        b=2C5Kk5jBdwO+wUlff1qDFpyRMIcxfsXG0zhn/m974GNZGjX0pAGZ6eSmSFEL0OW4bt
+         +8T3IDEao5L9LIn8uOR2xPdvTjkQgjJaPrIXIPdO1SxL/wjgm8xAs0Ooydb03PEG5sF6
+         dI43xBKUG72kujk/cfWdrPhLq3azvQM5I6g0zJFNtxJzUVD+QbsR8Zwe7lLQOKUZ7DEd
+         KKsqvH6IBzbttJHVieNhDfxhqZHTpzVmEtQ/yKALHmq659qZNdJX8ZA2AU9SfO0lta+1
+         fYwoN8+tVm+97N72m2yF+c3z67fWIF6fa+VxKaZmNbzHHdCeNuaM46rHrk0m0I5aQEvZ
+         98EQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1695138535; x=1695743335;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=FUFBX34Vi8T0jyulMhlIaJzOiGzxRBHm/K7XuTUIix8=;
+        b=tVJDsnYl5LkcdrL0Mv+ajBSnXkpzJGcN50gYi4Lx8Kz2OdQihSJCV9+KtRCND+foBG
+         lP+jazMibgz4DYgsGCnZ6McdjF6hh82m6c5oGR1SE+IPaKf9Tz0Ks1EQKqj+GutbY5L7
+         XbYti+SSb0mYC0F9lfHESJo0uysVGnK2ew4wrGp2P3Ya3RsCjK74MwPGteGqv50Ciple
+         ixwOuB/Qg13irZiAtZikqOhUL/yonFkdooEwEsA+S2m6gE0eHuZoMNmPtpzY7Q2GUkiU
+         AExgoBpbRI5FGYB3HKW9C48R/1PE/cOkgRGMyvmdbcgGlcc0zqpJxjw2p3F0d48PU+Sf
+         5nOw==
+X-Gm-Message-State: AOJu0Yy44umjVG6V4MG5R1+liIDPRj/E7nLEjmffFU7odP+XEHEUZXq0
+        uI7ZwaSkS7ot2/fxcCKeOm5qC93opDRNEcLAO/p8CQ==
+X-Google-Smtp-Source: AGHT+IE3bOOMkBS+atNtSPIXMOTa2Ld22Qs9HTCkKcTaipggWake8IjLOlnyddu6BbylehDROBRn01dZ36CiD5ewpnY=
+X-Received: by 2002:a05:6214:5d0e:b0:658:2d42:75e4 with SMTP id
+ me14-20020a0562145d0e00b006582d4275e4mr4698272qvb.47.1695138535174; Tue, 19
+ Sep 2023 08:48:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <14c089d7-4d34-9cd5-7f77-55c80815e003@microchip.com>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_PASS,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+References: <20230915105933.495735-1-matteorizzo@google.com>
+ <7a4f5128-28fd-3c5f-34c2-1c34f4448174@intel.com> <1d7573c0-ebbc-6ed2-f152-1045eb0542f9@os.amperecomputing.com>
+ <CAHKB1w+rVyww0UrHhzeGfPA7FM482Z-7ApzXvekVqLHvTDAV3Q@mail.gmail.com>
+ <ZQiLX0W2Tcr+wdJT@gmail.com> <CAHk-=wgGzB4u-WZsDpdgjwX1w5=9CLE0gorhaNFD09P1FUGeuQ@mail.gmail.com>
+In-Reply-To: <CAHk-=wgGzB4u-WZsDpdgjwX1w5=9CLE0gorhaNFD09P1FUGeuQ@mail.gmail.com>
+From:   Matteo Rizzo <matteorizzo@google.com>
+Date:   Tue, 19 Sep 2023 17:48:42 +0200
+Message-ID: <CAHKB1w+9GgY_e6J+rZ4zDaXrPZab5xteTuDEH0Z2hWe6x-pT5g@mail.gmail.com>
+Subject: Re: [RFC PATCH 00/14] Prevent cross-cache attacks in the SLUB allocator
+To:     Linus Torvalds <torvalds@linux-foundation.org>
+Cc:     Ingo Molnar <mingo@kernel.org>,
+        "Lameter, Christopher" <cl@os.amperecomputing.com>,
+        Dave Hansen <dave.hansen@intel.com>, penberg@kernel.org,
+        rientjes@google.com, iamjoonsoo.kim@lge.com,
+        akpm@linux-foundation.org, vbabka@suse.cz,
+        roman.gushchin@linux.dev, 42.hyeyoo@gmail.com,
+        keescook@chromium.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-hardening@vger.kernel.org, tglx@linutronix.de,
+        mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
+        x86@kernel.org, hpa@zytor.com, corbet@lwn.net, luto@kernel.org,
+        peterz@infradead.org, jannh@google.com, evn@google.com,
+        poprdi@google.com, jordyzomer@google.com
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,
+        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> >> +static void oa_tc6_prepare_ctrl_buf(struct oa_tc6 *tc6, u32 addr, u32 val[],
-> >> +                                 u8 len, bool wnr, u8 *buf, bool ctrl_prot)
-> >> +{
-> >> +     u32 hdr;
-> >> +
-> >> +     /* Prepare the control header with the required details */
-> >> +     hdr = FIELD_PREP(CTRL_HDR_DNC, 0) |
-> >> +           FIELD_PREP(CTRL_HDR_WNR, wnr) |
-> >> +           FIELD_PREP(CTRL_HDR_AID, 0) |
-> >> +           FIELD_PREP(CTRL_HDR_MMS, addr >> 16) |
-> >> +           FIELD_PREP(CTRL_HDR_ADDR, addr) |
-> >> +           FIELD_PREP(CTRL_HDR_LEN, len - 1);
-> >> +     hdr |= FIELD_PREP(CTRL_HDR_P, oa_tc6_get_parity(hdr));
-> >> +     *(u32 *)buf = cpu_to_be32(hdr);
-> >> +
-> >> +     if (wnr) {
-> > 
-> > What does wnr mean? Maybe give it a more meaningful name, unless it is
-> > actually something in the standard. Kerneldoc would also help.
-> Ah, it is "write not read". Shall I name it as "write_not_read" ?
+On Mon, 18 Sept 2023 at 20:05, Linus Torvalds
+<torvalds@linux-foundation.org> wrote:
+>
+> ... and equally importantly, what about DMA?
 
-You might want to describe the high level concept as well in this
-file. What i _think_ this is about is that SPI is sort of a full
-duplex bus. While you are sending data to the SPI device, the device
-could also be sending a data to the CPU? And 'write not read' here
-means ignore what we receive from the device?
+I'm not exactly sure what you mean by this, I don't think this should
+affect the performance of DMA.
 
-> Ok, as per OA spec, up to 128 consecutive registers read or write can be 
-> possible. So the maximum possible size would be 1032. As you suggested 
-> will allocate this size of memory in the startup.
+> Or what about the fixed-size slabs (aka kmalloc?) What's the point of
+> "never re-use the same address for a different slab", when the *same*
+> slab will contain different kinds of allocations anyway?
 
-Yes, 1032 bytes it not huge, so allocate it once and keep it for the
-lifetime of the device.
+There are a number of patches out there (for example the random_kmalloc
+series which recently got merged into v6.6) which attempt to segregate
+kmalloc'd objects into different caches to make exploitation harder.
+Another thing that we would like to have in the future is to segregate
+objects by type (like XNU's kalloc_type
+https://security.apple.com/blog/towards-the-next-generation-of-xnu-memory-safety/)
+which makes exploiting use-after-free by type confusion much harder or
+impossible.
 
-> >> +void oa_tc6_deinit(struct oa_tc6 *tc6)
-> >> +{
-> >> +     kfree(tc6);
-> >> +}
-> >> +EXPORT_SYMBOL_GPL(oa_tc6_deinit);
-> > 
-> > Maybe consider a devm_ API to make the MAC driver simpler.
-> Sorry I don't get your point. Could you please explain bit more?
+All of these mitigations can be bypassed very easily if the attacker can
+mount a cross-cache attack, which is what this series attempts to prevent.
+This is not only theoretical, we've seen attackers use this all the time in
+kCTF/kernelCTF submissions (for example
+https://ruia-ruia.github.io/2022/08/05/CVE-2022-29582-io-uring/).
 
-At least at this stage in the patch series, all you are doing is
-allocating memory. You add more code later, which might invalidate my
-point. But if all you are doing is allocating memory, you could use
-devm_kmalloc(). The driver core will then take care of releasing the
-memory when the driver is unloaded, or probe fails. That makes cleanup
-simpler and memory leaks less likely. There are a lot of devm_
-helpers, see if you can use them.
+> I think the whole "make it one single compile-time option" model is
+> completely and fundamentally broken.
 
-	Andrew
+Wouldn't making this toggleable at boot time or runtime make performance
+even worse?
+
+--
+Matteo
