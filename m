@@ -2,310 +2,211 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 67D9D7A8235
-	for <lists+linux-doc@lfdr.de>; Wed, 20 Sep 2023 14:58:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 02CD27A8219
+	for <lists+linux-doc@lfdr.de>; Wed, 20 Sep 2023 14:57:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235554AbjITM6m (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 20 Sep 2023 08:58:42 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55070 "EHLO
+        id S234629AbjITM5g (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 20 Sep 2023 08:57:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58042 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235290AbjITM6l (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 20 Sep 2023 08:58:41 -0400
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com [IPv6:2607:f8b0:4864:20::434])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7AF0F8F;
-        Wed, 20 Sep 2023 05:58:33 -0700 (PDT)
-Received: by mail-pf1-x434.google.com with SMTP id d2e1a72fcca58-68fcb4dc8a9so6246554b3a.2;
-        Wed, 20 Sep 2023 05:58:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695214713; x=1695819513; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sDRuM5iIQM0BZNn2tI7zshD9p2FInxL6x1zhrO2i6c8=;
-        b=QbhJgnNbn3dUsQH2Bl4u9N9AR8+AGPWMY9h5g7Sss2T6hoPCzdOKm7/MjCm9h7Sooy
-         GMA76fkazUFDxERycgTVbG6zBn9VzzI40JraN/3lpK7rYC7oHdJrFfq6XUz3sHmGNtn9
-         t27XIkwaR2i0LB8lV0HgNE06BVkFAxivGNjFI3R0hnT6ht1X9/9sc9t4BAeWi1lAmY/6
-         yntu0N/M2tXStcQdiMpJ8HJte2ULFYVcSDo3tqbFYpdn0YHxXIH6ETfE+w9MjhF3SJRk
-         GwsD/xEhKkiyioJ4QE0P0X7LMm/YCNDuiXo/N86P/hixU9KwSFwJStmq4SYF3AVQdiD8
-         tRCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695214713; x=1695819513;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=sDRuM5iIQM0BZNn2tI7zshD9p2FInxL6x1zhrO2i6c8=;
-        b=L5IuaejCvaEAZ/LnOIhH2z2lhKNShHW+KVt2/XAu+g+p7BNcqcggTw/Bn4YSIiBKIA
-         N5Y/9v1vwDV2AYRsfIxH6xzdkiEzWXkj++LqBB1jPDHj862fYDrqxO81n74fUZ/R2tHZ
-         hvjjGoHbKKYb1XtecfTsfrUADeuBj0dTzYCCGjzDkecptC7Yh33irdb0/xGUIx5i8OKW
-         pyhXZG6uPG0HI5xGGsxdtIxgPlH2QUbSBBTXx1sRN9ngCSylhpXgY4kYeosb9PNf91Vx
-         5FVfkHELZ5IpIRvXu9DfruvUJ4O5U1PAYa5xKv49u59lzRXyMCuWKxiWusF7wz7K4Sbd
-         QhJw==
-X-Gm-Message-State: AOJu0YxgRZlC02TJS5423QDWcsocSaoqVvrDpuK3ZqAZHaw38aByQSfQ
-        ssnfvDKUirwM2btx0Jj8KXY=
-X-Google-Smtp-Source: AGHT+IEYjjWVnuVbHCLHflw8h8Q1deQlLprFeWfjy1owE3D3KSrx3bUPixrY2oIpn/rHn5Pe05ux+Q==
-X-Received: by 2002:a05:6a20:9781:b0:154:bfaf:a710 with SMTP id hx1-20020a056a20978100b00154bfafa710mr2080307pzc.41.1695214712771;
-        Wed, 20 Sep 2023 05:58:32 -0700 (PDT)
-Received: from localhost.localdomain ([50.7.159.34])
-        by smtp.gmail.com with ESMTPSA id p8-20020a170902e74800b001ba066c589dsm11839614plf.137.2023.09.20.05.58.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Sep 2023 05:58:31 -0700 (PDT)
-From:   Liang Chen <liangchen.linux@gmail.com>
-To:     davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
-        pabeni@redhat.com, bpoirier@nvidia.com, corbet@lwn.net
-Cc:     netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-        gregkh@linuxfoundation.org, keescook@chromium.org, Jason@zx2c4.com,
-        djwong@kernel.org, jack@suse.cz, linyunsheng@huawei.com,
-        ulf.hansson@linaro.org, liangchen.linux@gmail.com
-Subject: [PATCH net-next v5 2/2] pktgen: Introducing 'SHARED' flag for testing with non-shared skb
-Date:   Wed, 20 Sep 2023 20:56:58 +0800
-Message-Id: <20230920125658.46978-2-liangchen.linux@gmail.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20230920125658.46978-1-liangchen.linux@gmail.com>
-References: <20230920125658.46978-1-liangchen.linux@gmail.com>
-MIME-Version: 1.0
+        with ESMTP id S233727AbjITM5g (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 20 Sep 2023 08:57:36 -0400
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com (mail-dbaeur03on2056.outbound.protection.outlook.com [40.107.104.56])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 995518F;
+        Wed, 20 Sep 2023 05:57:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YAZVgqnoySM1SFPM72YJjzQGGbWBVNLbEdbKsHX3g9Pbfa1zVS7u9FE86jxte9HYaoGV2EqpLkEhMp933VkXaSo9rpHMJXOneRW7qWVe5fgv8s8l4FgYm3tTDJZD22x/gDQaHzsOZRQ0QuPn70H/RLCm0cuFVyQ2fHME/sqfXPDRyD2M+N+wN7CHKzidS2w7K7dC1L1+++IuASsiP527PcbybM0C8nAp4sLmmp0aWcjydwRu7cn/ccY7yr09k6ZpqBwgKl8EWeLCXUd4lGu3ug4fVMJBeuC3C7lZMDobRo30AujIsHkaEFH0Pt5hltuX1diA31MQ9FU6A2xC/KloNg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rsfk6HkGCqPcF9+Kkje7EojINs0xmHo2oq3TsscSXGQ=;
+ b=NNXaukbWObrLJe3AD2f2O/fDYt1hqquUdfrviFmZBzqU0ok9TzreOp/Ci/ROXWEyC5XvAn2YulGEFIADtFMZpIK9FknK/O8Xrp+o0X14AuWyJ89FzBW6LlDB39QAvmo8esHSrlyvUyS4mE5EZWyN/zTsWe+VB0gJ7qSvnPpeVuwvmLBkaBU7BZB2zhWMKaEZzdGIyppftZnWgF1jc7J8jJup/G+HIIaL66PhS1aoZ7SgAL5ksmICPzF8KCaI4RTuGL0KZODpLagQZmu3II36J3HbwMHSL/5zwRQHk1kv3gNeCi12c04+GyadRf3fp/RsXFsRsxOeRvaPO7TOlHobZw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rsfk6HkGCqPcF9+Kkje7EojINs0xmHo2oq3TsscSXGQ=;
+ b=SjkEMDdwNKB96U61G+2zoBR+qiXYCMc3sqzJ9gtPMM6ALYO0XaN3Wcz2QasuEK42CJRsKPWS4SdADh/srSc17lUu1poBpAPo/KorxKz8LFseQGN06W6k0VFq28sDVDWKPbghZZkm7QjGfmJ1cI+rt43BRdnvMY8KOD1P6UmDJ6A7VLWVf5wrzqLfwJRZoohCrqFfL/svPELLjcxeXTVIlIxVRuZsBwb69x8GpT8KArW3BaClSCxHDZWNyGVoATcJT3DvZspzhNT3Q5xmoJBfOjIlgzhFzzbLB6E31xHkWP4EyKluKUIg1ra7w2COuKYhnlDv1vLPcmuswo6+OE781g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Received: from DBBPR04MB7788.eurprd04.prod.outlook.com (2603:10a6:10:1e4::15)
+ by DB9PR04MB10035.eurprd04.prod.outlook.com (2603:10a6:10:4ed::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.19; Wed, 20 Sep
+ 2023 12:57:25 +0000
+Received: from DBBPR04MB7788.eurprd04.prod.outlook.com
+ ([fe80::5b25:12c8:9f51:9b31]) by DBBPR04MB7788.eurprd04.prod.outlook.com
+ ([fe80::5b25:12c8:9f51:9b31%4]) with mapi id 15.20.6792.026; Wed, 20 Sep 2023
+ 12:57:25 +0000
+Message-ID: <336f77d6-1d94-d2b7-f429-855bfbc3f271@suse.com>
+Date:   Wed, 20 Sep 2023 15:57:20 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Content-Language: en-US
+To:     Xin Li <xin3.li@intel.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-edac@vger.kernel.org,
+        linux-hyperv@vger.kernel.org, kvm@vger.kernel.org,
+        xen-devel@lists.xenproject.org
+Cc:     tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+        luto@kernel.org, pbonzini@redhat.com, seanjc@google.com,
+        peterz@infradead.org, jgross@suse.com, ravi.v.shankar@intel.com,
+        mhiramat@kernel.org, andrew.cooper3@citrix.com,
+        jiangshanlai@gmail.com
+References: <20230914044805.301390-1-xin3.li@intel.com>
+ <20230914044805.301390-17-xin3.li@intel.com>
+From:   Nikolay Borisov <nik.borisov@suse.com>
+Subject: Re: [PATCH v10 16/38] x86/ptrace: Add FRED additional information to
+ the pt_regs structure
+In-Reply-To: <20230914044805.301390-17-xin3.li@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+X-ClientProxiedBy: VI1PR06CA0116.eurprd06.prod.outlook.com
+ (2603:10a6:803:8c::45) To DBBPR04MB7788.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e4::15)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7788:EE_|DB9PR04MB10035:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8111326e-af4d-4c67-ddc8-08dbb9d922e6
+X-LD-Processed: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba,ExtFwd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: MTxmR9O25KOptguzvwqgjJEdy+F4lYPo/mQ1M6ZEvUSNjfv9QrXdBz70j4HtPlvu1VepXu2UjkagOKmXtRi8BgQW1hyxmX+YPSLBxTzPrQ8sTe+zYrlwNiGEFlGGy5SDnhcx8k50hXCAOFfjr5NsNj3asfQiH94I7q0nRe39TCW0K8sH3/0AQ6Xfk3wYkQUdC/SOq+kxFSc2Qtf/MWSmIkCyZJgmZwd1rbO6FtS25q7VtUADmfK5M8cZTqzGHCP8XbPVo7uI5Xpg27ab/V1QeKxttAsqbQS21z3A1khIaFnwh3lxa1yZh263jAnC2ym1vngFgQ2JUZIrQoLTiaRcA9qaurfJsWjppQHn9GeM8xGmGQaLayqT4PkKwPqlwEIUGFvVLrsXj9TYJUKEvDMuYmvAMVz1cAqwJXFUi9QIP+SDqvdW1xdzNMzD+ffijd14L7mXfMTtQkuCy34e/WSz95xm/iXUfhuBtzC9m4soYXB2FMeb9DCUVCm2ZVlQcrV4yQdQ+0dwhPPN66HgemmnksVKudAAb3gFzxkHiEqusQO1XF1qUzWjeCRSuZ4FUW6V8Aq0PIYJzAdW0euLJH07Dnr67QoeKTAmLMTW7RAoItzx/edqUZ211X4y9dGvxCR99iMW1APg0DrGluPpq4pBYQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DBBPR04MB7788.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(136003)(376002)(346002)(396003)(39860400002)(451199024)(186009)(1800799009)(2906002)(31686004)(5660300002)(26005)(66556008)(66476007)(7416002)(41300700001)(316002)(66946007)(478600001)(4326008)(8676002)(8936002)(6666004)(6506007)(6486002)(6512007)(2616005)(36756003)(38100700002)(86362001)(31696002)(83380400001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dWJmd0xzUUZiR0M4c2RvemNUTm53ZTB4UjZya2hub1RmVi8yWlJpWXUxaTli?=
+ =?utf-8?B?c3BKVkROQXp6TDV0djJPWjN6Y29xTVEwRWdZRDhCckJGU2djSU9Cd04vWnYz?=
+ =?utf-8?B?dGR5M3ZyT3dmc0RWN1dBYnhaWXl0d3pTc3ZTYWZWSWd2TDY2aUo2dlV0UVpu?=
+ =?utf-8?B?WWNUM2FvRlQ1TzhOdzNmSVdnV2FDRTdCaGpYRWhoVDVvVGpWWVJxam52Tk1x?=
+ =?utf-8?B?SW5WOGtnMVhrQ0VxT0VmQjBSMDlEVWluN2kwQUlBQWFjVFBCWit6dktTb3JR?=
+ =?utf-8?B?RkREck9pZzNZRHYvY21GZEUvdjhDWDR5OFFuc21WNUE3TzNWWUxtR20vN3Mr?=
+ =?utf-8?B?UDQ2b0lKdW5NSmZJVGltU1p2dXRTV0FlTHBRd1lCZ1A1SnQ2MUNFTHBGdWcr?=
+ =?utf-8?B?YTZmU1dJVXp6ZmJtYllpMVhQUzdKaW1JMk9OaS9LL1FEckd6STJHMk9Dek5q?=
+ =?utf-8?B?YWowcDV5L05TeEdqOVhRcGlNV3NZdTNhcTRtV1owTEFUbXZqaE45QW9SdjZY?=
+ =?utf-8?B?WEIyY2xCYVhTVGJXWTZUcDBKeFYvTjZQVEVpU0VER0NYYnpnSDRqWDRLbm5L?=
+ =?utf-8?B?MEJodkM4OXQxSUZqVlpBL1lhVmthZjMwV2Y4M3JDM1BPQ3BUVGNCSjFLOWx6?=
+ =?utf-8?B?ZUlRcGlsSFdieC9NQVJpQkNielkwa1NVYmdwT1Vtb1dlYlNmTmtaREMyZ2lp?=
+ =?utf-8?B?WmxXeTRIeUdaZWRnNExyanpwYmxYUmdIQ09IS2xWZGVhU1RXZGRockRpSkxC?=
+ =?utf-8?B?bXFhSndkcytXb1k1UTAvd1B4WU1iZmZWOGh1cll0Q3IyWlhhZzJZZ3BWUUxF?=
+ =?utf-8?B?MlRpWEl4MUdDZlU3TXhhRW4vYnNqN2lMbVQvM3BWbzhBTENKSjVZRE4rVW5l?=
+ =?utf-8?B?dlU1WmMwNXZ3OEJ2RHZpdHljdHU5bFNoUy9TQllDaUJ5N2dCY3E5aGFUUzBN?=
+ =?utf-8?B?Ti9WNzkwYzFQN0ZUVTh5OFpGeWxmL0MrZ3FPZjhuUnpMTXJYL1lSbGo1ZkE2?=
+ =?utf-8?B?VWlLWlhobDVEZytoQTY0ckN5bDhoNDRYVlpsSkprNnFpU2dYOHZVK3F0aUhv?=
+ =?utf-8?B?MEJYODZHcmRYU3hhMVU2V1NUVkNpcitQNEN6S0NpMGJGazdSUW04QjgrQTg1?=
+ =?utf-8?B?QWJWT1RSYmZiR05sY0cwRnZnVThUQXorenJxM2k2T2Z0aFhMbUpZeE9GUXhl?=
+ =?utf-8?B?MndmQzBhR3piVk45TG1pWTErYWNSYXRxaW1UeHdpbjF0TFZjcm96VGE0S3lY?=
+ =?utf-8?B?K1BCRGp6SC9PYkhGZXNyaG56UUxFUDRyNWhPVnYwTHpwWTV6VXd0emw1TXhW?=
+ =?utf-8?B?d2ZuUE52SFZGam5tT1VQK24wSGFpMENMMitGc056NnRzdzJaNHhVbjIzZWxs?=
+ =?utf-8?B?WWUreXdOL21IT1YvN3diY0pmR0srai8wMVFEOWhOOXBYTDBxYldVZG5PRGtn?=
+ =?utf-8?B?Qm9vcFdoUERJbTA0NTcvWFZ4NmlOZVpkRlVNWitsUHQ3NjYyUlpWNjF4cG8v?=
+ =?utf-8?B?dTNiMmdJYVJzU1hrbFNCdnh5R0RZMTVnK2VtejA3MTBXb1VzRjF3T3NVR3Ja?=
+ =?utf-8?B?bWpndytkaFordHBhRy9TK2s5dVFpekVPeVdVMDlNOHk5clFYcjlFWUptdytE?=
+ =?utf-8?B?emUyT1RUZUl2VUIzUGdsNzZPTmordDljN1B2WjFSYUM2SnpKUjEranNXcUFz?=
+ =?utf-8?B?cEZ6eTJpN1MyQUxWR09KK1E5YkdLRXVtc1V5Qmh3SXJvZVpKcTYxT2ZJQnJq?=
+ =?utf-8?B?d1FXN3N1VDRpZVhEOUFRMDg4aEZKcXBETTZuZ1hUY2Nmd09mTklPM2F5SzNo?=
+ =?utf-8?B?K2tNd2Q3Z2RBNXBQZkcvbndMN0E0MU9HQXN5dWYxTDNKbjFoYS9zNnFINGpI?=
+ =?utf-8?B?ejdRREFvMThwTjZjWVV0eUhWelpkVllDQUEwcmhMRUdWVmFoZDdOUGx3UUtp?=
+ =?utf-8?B?UW1nVzFWZGo0ZGhtWTNLQVg4enNPclBrVzA3U3pKS002T1cvd3p6N2NyS2hW?=
+ =?utf-8?B?UDRLaW9LclhzNEM0QUEzUnFJVGUzczEvMlc2cFFTcnVKRXRhcVZQWm9CNUxn?=
+ =?utf-8?B?OUx6aVhwNjUzQmJGdlMyUkc2cDlrOUxJZUVKZG5tWHlTaFUrNTlHNDJ4cFpB?=
+ =?utf-8?Q?zsH57f4DgrdsglAao7XlnE08g?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8111326e-af4d-4c67-ddc8-08dbb9d922e6
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7788.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Sep 2023 12:57:24.9866
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: DXhOY7ixChTVihr5+RJ+9ZoTH3AgeseEFNtnEN/BP+vUyQg4PQ1lOOX3hn/CW0ibYWa87aEN5V8AvV/qVdp1Bw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB10035
+X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Currently, skbs generated by pktgen always have their reference count
-incremented before transmission, causing their reference count to be
-always greater than 1, leading to two issues:
-  1. Only the code paths for shared skbs can be tested.
-  2. In certain situations, skbs can only be released by pktgen.
-To enhance testing comprehensiveness, we are introducing the "SHARED"
-flag to indicate whether an SKB is shared. This flag is enabled by
-default, aligning with the current behavior. However, disabling this
-flag allows skbs with a reference count of 1 to be transmitted.
-So we can test non-shared skbs and code paths where skbs are released
-within the stack.
 
-Signed-off-by: Liang Chen <liangchen.linux@gmail.com>
-Reviewed-by: Benjamin Poirier <bpoirier@nvidia.com>
----
- Changes from v4:
-- read the shared flag once in pktgen_xmit to avoid inconsistent burst,
-  clone and shared flag values.
----
- Documentation/networking/pktgen.rst | 12 ++++++
- net/core/pktgen.c                   | 64 ++++++++++++++++++++++++-----
- 2 files changed, 66 insertions(+), 10 deletions(-)
 
-diff --git a/Documentation/networking/pktgen.rst b/Documentation/networking/pktgen.rst
-index 1225f0f63ff0..c945218946e1 100644
---- a/Documentation/networking/pktgen.rst
-+++ b/Documentation/networking/pktgen.rst
-@@ -178,6 +178,7 @@ Examples::
- 			      IPSEC # IPsec encapsulation (needs CONFIG_XFRM)
- 			      NODE_ALLOC # node specific memory allocation
- 			      NO_TIMESTAMP # disable timestamping
-+			      SHARED # enable shared SKB
-  pgset 'flag ![name]'    Clear a flag to determine behaviour.
- 			 Note that you might need to use single quote in
- 			 interactive mode, so that your shell wouldn't expand
-@@ -288,6 +289,16 @@ To avoid breaking existing testbed scripts for using AH type and tunnel mode,
- you can use "pgset spi SPI_VALUE" to specify which transformation mode
- to employ.
- 
-+Disable shared SKB
-+==================
-+By default, SKBs sent by pktgen are shared (user count > 1).
-+To test with non-shared SKBs, remove the "SHARED" flag by simply setting::
-+
-+	pg_set "flag !SHARED"
-+
-+However, if the "clone_skb" or "burst" parameters are configured, the skb
-+still needs to be held by pktgen for further access. Hence the skb must be
-+shared.
- 
- Current commands and configuration options
- ==========================================
-@@ -357,6 +368,7 @@ Current commands and configuration options
-     IPSEC
-     NODE_ALLOC
-     NO_TIMESTAMP
-+    SHARED
- 
-     spi (ipsec)
- 
-diff --git a/net/core/pktgen.c b/net/core/pktgen.c
-index 48306a101fd9..5e865af82e5b 100644
---- a/net/core/pktgen.c
-+++ b/net/core/pktgen.c
-@@ -200,6 +200,7 @@
- 	pf(VID_RND)		/* Random VLAN ID */			\
- 	pf(SVID_RND)		/* Random SVLAN ID */			\
- 	pf(NODE)		/* Node memory alloc*/			\
-+	pf(SHARED)		/* Shared SKB */			\
- 
- #define pf(flag)		flag##_SHIFT,
- enum pkt_flags {
-@@ -1198,7 +1199,8 @@ static ssize_t pktgen_if_write(struct file *file,
- 		    ((pkt_dev->xmit_mode == M_NETIF_RECEIVE) ||
- 		     !(pkt_dev->odev->priv_flags & IFF_TX_SKB_SHARING)))
- 			return -ENOTSUPP;
--		if (value > 0 && pkt_dev->n_imix_entries > 0)
-+		if (value > 0 && (pkt_dev->n_imix_entries > 0 ||
-+				  !(pkt_dev->flags & F_SHARED)))
- 			return -EINVAL;
- 
- 		i += len;
-@@ -1257,6 +1259,10 @@ static ssize_t pktgen_if_write(struct file *file,
- 		     ((pkt_dev->xmit_mode == M_START_XMIT) &&
- 		     (!(pkt_dev->odev->priv_flags & IFF_TX_SKB_SHARING)))))
- 			return -ENOTSUPP;
-+
-+		if (value > 1 && !(pkt_dev->flags & F_SHARED))
-+			return -EINVAL;
-+
- 		pkt_dev->burst = value < 1 ? 1 : value;
- 		sprintf(pg_result, "OK: burst=%u", pkt_dev->burst);
- 		return count;
-@@ -1334,10 +1340,19 @@ static ssize_t pktgen_if_write(struct file *file,
- 
- 		flag = pktgen_read_flag(f, &disable);
- 		if (flag) {
--			if (disable)
-+			if (disable) {
-+				/* If "clone_skb", or "burst" parameters are
-+				 * configured, it means that the skb still
-+				 * needs to be referenced by the pktgen, so
-+				 * the skb must be shared.
-+				 */
-+				if (flag == F_SHARED && (pkt_dev->clone_skb ||
-+							 pkt_dev->burst > 1))
-+					return -EINVAL;
- 				pkt_dev->flags &= ~flag;
--			else
-+			} else {
- 				pkt_dev->flags |= flag;
-+			}
- 
- 			sprintf(pg_result, "OK: flags=0x%x", pkt_dev->flags);
- 			return count;
-@@ -3446,12 +3461,24 @@ static void pktgen_wait_for_skb(struct pktgen_dev *pkt_dev)
- 
- static void pktgen_xmit(struct pktgen_dev *pkt_dev)
- {
--	unsigned int burst = READ_ONCE(pkt_dev->burst);
-+	bool skb_shared = !!(READ_ONCE(pkt_dev->flags) & F_SHARED);
- 	struct net_device *odev = pkt_dev->odev;
- 	struct netdev_queue *txq;
-+	unsigned int burst = 1;
- 	struct sk_buff *skb;
-+	int clone_skb = 0;
- 	int ret;
- 
-+	/* If 'skb_shared' is false, the read of possible
-+	 * new values (if any) for 'burst' and 'clone_skb' will be skipped to
-+	 * prevent some concurrent changes from slipping in. And the stabilized
-+	 * config will be read in during the next run of pktgen_xmit.
-+	 */
-+	if (skb_shared) {
-+		burst = READ_ONCE(pkt_dev->burst);
-+		clone_skb = READ_ONCE(pkt_dev->clone_skb);
-+	}
-+
- 	/* If device is offline, then don't send */
- 	if (unlikely(!netif_running(odev) || !netif_carrier_ok(odev))) {
- 		pktgen_stop_device(pkt_dev);
-@@ -3468,7 +3495,7 @@ static void pktgen_xmit(struct pktgen_dev *pkt_dev)
- 
- 	/* If no skb or clone count exhausted then get new one */
- 	if (!pkt_dev->skb || (pkt_dev->last_ok &&
--			      ++pkt_dev->clone_count >= pkt_dev->clone_skb)) {
-+			      ++pkt_dev->clone_count >= clone_skb)) {
- 		/* build a new pkt */
- 		kfree_skb(pkt_dev->skb);
- 
-@@ -3489,7 +3516,8 @@ static void pktgen_xmit(struct pktgen_dev *pkt_dev)
- 	if (pkt_dev->xmit_mode == M_NETIF_RECEIVE) {
- 		skb = pkt_dev->skb;
- 		skb->protocol = eth_type_trans(skb, skb->dev);
--		refcount_add(burst, &skb->users);
-+		if (skb_shared)
-+			refcount_add(burst, &skb->users);
- 		local_bh_disable();
- 		do {
- 			ret = netif_receive_skb(skb);
-@@ -3497,6 +3525,10 @@ static void pktgen_xmit(struct pktgen_dev *pkt_dev)
- 				pkt_dev->errors++;
- 			pkt_dev->sofar++;
- 			pkt_dev->seq_num++;
-+			if (unlikely(!skb_shared)) {
-+				pkt_dev->skb = NULL;
-+				break;
-+			}
- 			if (refcount_read(&skb->users) != burst) {
- 				/* skb was queued by rps/rfs or taps,
- 				 * so cannot reuse this skb
-@@ -3515,9 +3547,14 @@ static void pktgen_xmit(struct pktgen_dev *pkt_dev)
- 		goto out; /* Skips xmit_mode M_START_XMIT */
- 	} else if (pkt_dev->xmit_mode == M_QUEUE_XMIT) {
- 		local_bh_disable();
--		refcount_inc(&pkt_dev->skb->users);
-+		if (skb_shared)
-+			refcount_inc(&pkt_dev->skb->users);
- 
- 		ret = dev_queue_xmit(pkt_dev->skb);
-+
-+		if (!skb_shared && dev_xmit_complete(ret))
-+			pkt_dev->skb = NULL;
-+
- 		switch (ret) {
- 		case NET_XMIT_SUCCESS:
- 			pkt_dev->sofar++;
-@@ -3555,11 +3592,15 @@ static void pktgen_xmit(struct pktgen_dev *pkt_dev)
- 		pkt_dev->last_ok = 0;
- 		goto unlock;
- 	}
--	refcount_add(burst, &pkt_dev->skb->users);
-+	if (skb_shared)
-+		refcount_add(burst, &pkt_dev->skb->users);
- 
- xmit_more:
- 	ret = netdev_start_xmit(pkt_dev->skb, odev, txq, --burst > 0);
- 
-+	if (!skb_shared && dev_xmit_complete(ret))
-+		pkt_dev->skb = NULL;
-+
- 	switch (ret) {
- 	case NETDEV_TX_OK:
- 		pkt_dev->last_ok = 1;
-@@ -3581,7 +3622,8 @@ static void pktgen_xmit(struct pktgen_dev *pkt_dev)
- 		fallthrough;
- 	case NETDEV_TX_BUSY:
- 		/* Retry it next time */
--		refcount_dec(&(pkt_dev->skb->users));
-+		if (skb_shared)
-+			refcount_dec(&pkt_dev->skb->users);
- 		pkt_dev->last_ok = 0;
- 	}
- 	if (unlikely(burst))
-@@ -3594,7 +3636,8 @@ static void pktgen_xmit(struct pktgen_dev *pkt_dev)
- 
- 	/* If pkt_dev->count is zero, then run forever */
- 	if ((pkt_dev->count != 0) && (pkt_dev->sofar >= pkt_dev->count)) {
--		pktgen_wait_for_skb(pkt_dev);
-+		if (pkt_dev->skb)
-+			pktgen_wait_for_skb(pkt_dev);
- 
- 		/* Done with this */
- 		pktgen_stop_device(pkt_dev);
-@@ -3777,6 +3820,7 @@ static int pktgen_add_device(struct pktgen_thread *t, const char *ifname)
- 	pkt_dev->svlan_id = 0xffff;
- 	pkt_dev->burst = 1;
- 	pkt_dev->node = NUMA_NO_NODE;
-+	pkt_dev->flags = F_SHARED;	/* SKB shared by default */
- 
- 	err = pktgen_setup_dev(t->net, pkt_dev, ifname);
- 	if (err)
--- 
-2.31.1
+On 14.09.23 г. 7:47 ч., Xin Li wrote:
+> FRED defines additional information in the upper 48 bits of cs/ss
+> fields. Therefore add the information definitions into the pt_regs
+> structure.
+> 
+> Specially introduce a new structure fred_ss to denote the FRED flags
+> above SS selector, which avoids FRED_SSX_ macros and makes the code
+> simpler and easier to read.
+> 
+> Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
+> Tested-by: Shan Kang <shan.kang@intel.com>
+> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+> Signed-off-by: Xin Li <xin3.li@intel.com>
+> ---
+> 
+> Changes since v9:
+> * Introduce a new structure fred_ss to denote the FRED flags above SS
+>    selector, which avoids FRED_SSX_ macros and makes the code simpler
+>    and easier to read (Thomas Gleixner).
+> * Use type u64 to define FRED bit fields instead of type unsigned int
+>    (Thomas Gleixner).
+> 
+> Changes since v8:
+> * Reflect stack frame definition changes from FRED spec 3.0 to 5.0.
+> * Use __packed instead of __attribute__((__packed__)) (Borislav Petkov).
+> * Put all comments above the members, like the rest of the file does
+>    (Borislav Petkov).
+> 
+> Changes since v3:
+> * Rename csl/ssl of the pt_regs structure to csx/ssx (x for extended)
+>    (Andrew Cooper).
+> ---
+>   arch/x86/include/asm/ptrace.h | 51 +++++++++++++++++++++++++++++++----
+>   1 file changed, 46 insertions(+), 5 deletions(-)
+> 
+> diff --git a/arch/x86/include/asm/ptrace.h b/arch/x86/include/asm/ptrace.h
+> index f08ea073edd6..5786c8ca5f4c 100644
+> --- a/arch/x86/include/asm/ptrace.h
+> +++ b/arch/x86/include/asm/ptrace.h
+> @@ -56,6 +56,25 @@ struct pt_regs {
+>   
+>   #else /* __i386__ */
+>   
+> +struct fred_ss {
+> +	u64	ss	: 16,	// SS selector
 
+Is this structure conformant to the return state as described in FRED 5.0?
+
+— The stack segment of the interrupted context, 64 bits formatted as follows:
+
+• Bits 15:0 contain the SS selector. < - WE HAVE THIS
+
+• Bits 31:16 are not currently defined and will be zero until they are. < - MISSING hole?
+
+
+> +		sti	:  1,	// STI state < -
+> +		swevent	:  1,	// Set if syscall, sysenter or INT n
+> +		nmi	:  1,	// Event is NMI type
+> +			: 13,
+> +		vector	:  8,	// Event vector
+> +			:  8,
+> +		type	:  4,	// Event type
+> +			:  4,
+> +		enclave	:  1,	// Event was incident to enclave execution
+> +		lm	:  1,	// CPU was in long mode
+> +		nested	:  1,	// Nested exception during FRED delivery
+> +				// not set for #DF
+> +			:  1,
+> +		insnlen	:  4;	// The length of the instruction causing the event
+> +				// Only set for INT0, INT1, INT3, INT n, SYSCALL
+> +};				// and SYSENTER. 0 otherwise.
+> +
+
+<Snip>
+   
