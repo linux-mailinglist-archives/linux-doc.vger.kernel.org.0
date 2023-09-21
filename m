@@ -2,84 +2,122 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 41ECF7A9ECC
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Sep 2023 22:12:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C4BC77AA565
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Sep 2023 01:00:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230254AbjIUUMd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Sep 2023 16:12:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52172 "EHLO
+        id S231916AbjIUXAr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Sep 2023 19:00:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55366 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231286AbjIUUMI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Sep 2023 16:12:08 -0400
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61C55100A41;
-        Thu, 21 Sep 2023 12:17:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-        s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-        Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-        Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-        bh=9qTM0K/yk5JdWUeLoP3oQpoZOY/3tRKxEVyXZngPDNQ=; b=CNkrTxxxCnxfM62tCw6pnjsbMW
-        DA9LLSCZIGZkABwGThi4P6y7G6dE4/OnpWKo7rut/nS3TbWdMmIN22oDDsh+9CNRKoIuoLehCIPMZ
-        TwDNnmnAKppB4qVcA6ZplqS1+JhjucYUMLDMJAUsmOCa9rQsA2FDofTxnxMvb+6ppMwU=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-        (envelope-from <andrew@lunn.ch>)
-        id 1qjPAT-0077hs-Ck; Thu, 21 Sep 2023 21:16:53 +0200
-Date:   Thu, 21 Sep 2023 21:16:53 +0200
-From:   Andrew Lunn <andrew@lunn.ch>
-To:     Parthiban.Veerasooran@microchip.com
-Cc:     davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
-        pabeni@redhat.com, robh+dt@kernel.org,
-        krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
-        corbet@lwn.net, Steen.Hegelund@microchip.com,
-        rdunlap@infradead.org, horms@kernel.org, casper.casan@gmail.com,
-        netdev@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Horatiu.Vultur@microchip.com, Woojung.Huh@microchip.com,
-        Nicolas.Ferre@microchip.com, UNGLinuxDriver@microchip.com,
-        Thorsten.Kummermehr@microchip.com
-Subject: Re: [RFC PATCH net-next 1/6] net: ethernet: implement OPEN Alliance
- control transaction interface
-Message-ID: <42031ac6-7f3d-4bc9-8cfa-d7eb61ed10d5@lunn.ch>
-References: <20230908142919.14849-1-Parthiban.Veerasooran@microchip.com>
- <20230908142919.14849-2-Parthiban.Veerasooran@microchip.com>
- <74a6cd9c-fb30-46eb-a50f-861d9ff5bf37@lunn.ch>
- <6ecc8364-2bd7-a134-f334-2aff31f44498@microchip.com>
- <2021acc6-bcf6-4dba-b7ce-ca1b3ca86088@lunn.ch>
- <94e4a08b-005d-adc0-5852-85568ba5db72@microchip.com>
+        with ESMTP id S230198AbjIUXAg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Sep 2023 19:00:36 -0400
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 3217E8C63B;
+        Thu, 21 Sep 2023 10:42:37 -0700 (PDT)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 613451FB;
+        Wed, 20 Sep 2023 20:37:17 -0700 (PDT)
+Received: from a077893.arm.com (unknown [10.163.32.120])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 730A73F59C;
+        Wed, 20 Sep 2023 20:36:36 -0700 (PDT)
+From:   Anshuman Khandual <anshuman.khandual@arm.com>
+To:     linux-arm-kernel@lists.infradead.org, suzuki.poulose@arm.com
+Cc:     Anshuman Khandual <anshuman.khandual@arm.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Mike Leach <mike.leach@linaro.org>,
+        James Clark <james.clark@arm.com>,
+        Leo Yan <leo.yan@linaro.org>, Jonathan Corbet <corbet@lwn.net>,
+        linux-doc@vger.kernel.org, coresight@lists.linaro.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH V7 0/3] coresight: etm: Make cycle count threshold user configurable
+Date:   Thu, 21 Sep 2023 09:06:28 +0530
+Message-Id: <20230921033631.1298723-1-anshuman.khandual@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <94e4a08b-005d-adc0-5852-85568ba5db72@microchip.com>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_PASS,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> So drivers/net/ethernet/Kconfig file should contain the below,
-> 
-> config OA_TC6
->           tristate "OPEN Alliance TC6 10BASE-T1x MAC-PHY support"
->           depends on SPI
->           select PHYLIB 
-> 
->           help
->             This library implements OPEN Alliance TC6 10BASE-T1x MAC-PHY
->             Serial Interface protocol for supporting 10BASE-T1x MAC-PHYs.
-> 
-> The drivers/net/ethernet/Makefile file should contain the below,
-> 
-> obj-$(CONFIG_OA_TC6) += oa_tc6.o
+This series makes ETM TRCCCCTRL based 'cc_threshold' user configurable via
+the perf event attribute. But first, this implements an errata work around
+affecting ETM TRCIDR3.CCITMIN value on certain cpus, overriding the field.
 
-That looks about right, but i'm not a kconfig expert.
+This series applies on coresight/for-next/queue.
 
-I would expect drivers using this to then have a
+Cc: Catalin Marinas <catalin.marinas@arm.com> 
+Cc: Will Deacon <will@kernel.org>
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com> 
+Cc: Mike Leach <mike.leach@linaro.org>
+Cc: James Clark <james.clark@arm.com>
+Cc: Leo Yan <leo.yan@linaro.org>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+Cc: coresight@lists.linaro.org
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-kernel@vger.kernel.org
 
-	depends on OA_TC6
+Changes in V7:
 
-	Andrew
+- Changed commit message for the second patch adding cc_threshold
+
+Changes in V6:
+
+https://lore.kernel.org/all/20230920095443.1126617-1-anshuman.khandual@arm.com/
+
+- Renamed etm4_core_reads_wrong_ccitmin() as etm4_fixup_wrong_ccitmin()
+- Moved drvdata->ccitmin fixup inside etm4_fixup_wrong_ccitmin()
+
+Changes in V5:
+
+https://lore.kernel.org/all/20230821045216.641499-1-anshuman.khandual@arm.com/
+https://lore.kernel.org/all/20230915093649.435163-1-anshuman.khandual@arm.com/
+
+- Replaced 'where as' with single word 'whereas'
+- Reworked 'cc_threshold' fallback to ETM_CYC_THRESHOLD_DEFAULT
+
+Changes in V4:
+
+https://lore.kernel.org/all/20230818112051.594986-1-anshuman.khandual@arm.com/
+
+- Fixed a typo s/rangess/ranges,
+- Renamed etm4_work_around_wrong_ccitmin() as etm4_core_reads_wrong_ccitmin()
+- Moved drvdata->ccitmin value check for 256 inside etm4_core_reads_wrong_ccitmin()
+- Moved the comment inside etm4_core_reads_wrong_ccitmin()
+
+Changes in V3:
+
+https://lore.kernel.org/all/20230811034600.944386-1-anshuman.khandual@arm.com/
+
+- Added errata work around affecting TRCIDR3.CCITMIN
+- Split the document update into a separate patch
+
+Changes in V2:
+
+https://lore.kernel.org/all/20230808074533.380537-1-anshuman.khandual@arm.com/
+
+- s/treshhold/threshold
+
+Changes in V1:
+
+https://lore.kernel.org/all/20230804044720.1478900-1-anshuman.khandual@arm.com/
+
+Anshuman Khandual (3):
+  coresight: etm: Override TRCIDR3.CCITMIN on errata affected cpus
+  coresight: etm: Make cycle count threshold user configurable
+  Documentation: coresight: Add cc_threshold tunable
+
+ Documentation/arch/arm64/silicon-errata.rst   | 10 ++++
+ Documentation/trace/coresight/coresight.rst   |  4 ++
+ .../hwtracing/coresight/coresight-etm-perf.c  |  2 +
+ .../coresight/coresight-etm4x-core.c          | 46 ++++++++++++++++++-
+ 4 files changed, 60 insertions(+), 2 deletions(-)
+
+-- 
+2.25.1
+
