@@ -2,275 +2,194 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8F0A37A997A
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Sep 2023 20:15:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 82FAC7A9A5A
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Sep 2023 20:38:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230057AbjIUSPM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Sep 2023 14:15:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37560 "EHLO
+        id S230059AbjIUSig (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Sep 2023 14:38:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53444 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230063AbjIUSPA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Sep 2023 14:15:00 -0400
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com [IPv6:2a00:1450:4864:20::22e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 309EEB0F79;
-        Thu, 21 Sep 2023 11:10:10 -0700 (PDT)
-Received: by mail-lj1-x22e.google.com with SMTP id 38308e7fff4ca-2c108e106f0so21937591fa.1;
-        Thu, 21 Sep 2023 11:10:10 -0700 (PDT)
+        with ESMTP id S230113AbjIUSiJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Sep 2023 14:38:09 -0400
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.154.123])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 035E3D9D2D;
+        Thu, 21 Sep 2023 11:31:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1695321067; x=1726857067;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=4CBlWrRqN6+qOz8LP5mj33zgeI90jKrIMnedYbzTQnY=;
+  b=o85zB6/mwwD8ToFtbpG0Ny22FSJZNr3tbF8WeLnJhNrdSjXvZ0xlvAq/
+   DSwm4UE1kg7NrcavH/8lxR6NXJt02CUjOcQDcekLX1s0ED/37Ubz8Jr2p
+   Neo+K54a4DAWTAF8FKR8kbkn5EUvwnpgIqCbk7h9hvqiR4K8lwLVfUEda
+   LIfvXcLQnnjcfIYNkegC4MnRN6rx8jYmXQ4Lv43FtP8FTgvfS+3gGrqXO
+   1/gTp6L995FCQUJraA+bAfj9feK/RXQP2tavd7zHELAAPT97N69HWxR44
+   qY+ugaoxelG3HgV8RM0Y43MUGeijCbcosYxxt0oZNSFKFYLxrP/wSL9LJ
+   A==;
+X-CSE-ConnectionGUID: BQS9kesvT7aQsqy7lhVmLQ==
+X-CSE-MsgGUID: vklMglAhQLuV02jQq6ROgQ==
+X-ThreatScanner-Verdict: Negative
+X-IronPort-AV: E=Sophos;i="6.03,165,1694761200"; 
+   d="scan'208";a="172820029"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+  by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 21 Sep 2023 02:15:42 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Thu, 21 Sep 2023 02:15:31 -0700
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (10.10.215.89) by
+ email.microchip.com (10.10.87.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21 via Frontend Transport; Thu, 21 Sep 2023 02:15:31 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gYT1Qb4a1vCKgNb3vutMjabktd1tGaLBXOO7sFyZa1eeFhZBdicmao0bKHrub3AwQZCKkI1H2tOaGsKvAd55iEJM7EBlbRb6DXuphQZ2+hSCJUxL3OxGSZnTdToG7426Y/z8wU6J4apKtmqoJsiKdxRsDzW7Goa+Mc93Q/Yhb7YW1PEopqDfazv4x9U8RNK1NWu4avnjJ2MjUiE80HSSh6ax5VqjxUU3jThUdCr1jC4QqunjHh4f4HNyzAHAzhef7rfnn9KbUdGlekN6PLBJLTokaPpsu4kBQi+XGz2KArD2/+4XrY47hhU+6bTkLTMy4wgPqC/zneDBZB/u3YpI+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4CBlWrRqN6+qOz8LP5mj33zgeI90jKrIMnedYbzTQnY=;
+ b=UA7VDqz7NNbqoLG0f5QTdLcdHvy423Ky7X0Th0enTOANoffi0Ta0e4Tk7pVnHDaFX/Fc69Xxluz0TmhYSkOUxEJjb7lnUaUjQr3AeToMwLH7L0szg9REjvxnOBsRQWVHJoXT82H9b2UAQ9d4Z98SN6T1+ZEVA2nXbTBfNiTVd6uFeiTp/eahhgY79jh/NU0biZMtz2Lwln8tl1dhOPVK7xBVF8M73UFiFKYFosZjqh+M0hSHe16DG1Helf0QgzNewmyC/hKvem/BaL+WTBPAfSR1Mr6D7ezr1hlPSTv3TQALNgdJLpG84xa5K7XsIz8vn3UeAtDHpMU5ii1nxrj1YA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=microchip.com; dmarc=pass action=none
+ header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695319808; x=1695924608; darn=vger.kernel.org;
-        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=k4kPbAvXqYWCjQtm/jTtJ1li9AEbZqWafTDz226oJdI=;
-        b=HyW1ySaOYwx7yRSykO8SXgAdM+zjuMDEpBZ2iK7ou+9OtVJbyU3quv7EmukevAq/eB
-         hbNBSXFGYfqiLVdidnxUlB4QRZs+PGMJECYyTt139pAE4nhI/QxdbwGydDVsQnZcv5dn
-         Ei++gAWRD6x8MBddj8GsOhwj7Xs1yQ8lSXHC3FioQMbw3CECewchvziJseGPxvuwDHkk
-         ZWEWAzNSi8DOg9WZ2cm6uteTah+zdwDt74osOE4t0FjUSWoE6cDrA2ORacIv7XiUguIL
-         k0TUwJHyTrPlkROG+6QZ2GzeBPe+5W40udQozuldaSaWTa02RmMGSWntxWwDHHmS2Um9
-         YcxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695319808; x=1695924608;
-        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=k4kPbAvXqYWCjQtm/jTtJ1li9AEbZqWafTDz226oJdI=;
-        b=lexDUwOEjXMWKwh/OuzvtjKOJpBlUpSCddaa9P02lmnAESLS+lUMmcORl0hQwY3e67
-         K7qdB5htFvaX4K+tYNi/Ut6g91qTkeFUL4zX4bprMWr12F/wGD0lYTkfO2CwLPMssTBb
-         HMSg6y6RXjHduhRzL5FeBRY8CibrMzmvkaQJRcC9LNQVkjqKWBToRF7Mx9Jj+wapxxIT
-         ToBwv2O/g6yx6Yu4ep0QPLvjBgqstBUu6p63yF7C0P3D+ckFEWYPitrt2BvWjYXiKuq6
-         knNhWeW3riRYZVbRZXIt9Dk87FNDH8lhHBEy/pMm/4GgCboDxonGUA0VsTxpMAB7EXML
-         i4NA==
-X-Gm-Message-State: AOJu0YwAwoCnXRFjPoNlXNvDWhl7Rz+bBfMfULKGjY7qC+YbGv/BYehO
-        28Mp5Vk+QtINgQI1AqxTEJ0=
-X-Google-Smtp-Source: AGHT+IECgI0x8NqVEUwF8vAB/HRCbCPTukfPzQhaF2jXn5JCb5+dUTi6Rg3yqEOYh76bvzU4KraLtw==
-X-Received: by 2002:ac2:5224:0:b0:503:1d46:6f29 with SMTP id i4-20020ac25224000000b005031d466f29mr4160892lfl.37.1695286128519;
-        Thu, 21 Sep 2023 01:48:48 -0700 (PDT)
-Received: from eldfell ([194.136.85.206])
-        by smtp.gmail.com with ESMTPSA id h16-20020a197010000000b004fbddb14020sm205979lfc.56.2023.09.21.01.48.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Sep 2023 01:48:48 -0700 (PDT)
-Date:   Thu, 21 Sep 2023 11:48:45 +0300
-From:   Pekka Paalanen <ppaalanen@gmail.com>
-To:     Maxime Ripard <mripard@kernel.org>
-Cc:     Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>,
-        Daniel Vetter <daniel@ffwll.ch>, Emma Anholt <emma@anholt.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Sandy Huang <hjc@rock-chips.com>,
-        Heiko =?UTF-8?B?U3Q=?= =?UTF-8?B?w7xibmVy?= <heiko@sntech.de>,
-        Chen-Yu Tsai <wens@csie.org>,
-        Jernej Skrabec <jernej.skrabec@gmail.com>,
-        Samuel Holland <samuel@sholland.org>,
-        Hans Verkuil <hverkuil@xs4all.nl>,
-        dri-devel@lists.freedesktop.org,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-        linux-rockchip@lists.infradead.org, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH RFC v2 05/37] drm/connector: hdmi: Add output BPC to the
- connector state
-Message-ID: <20230921114845.7edb1d37@eldfell>
-In-Reply-To: <20230920-kms-hdmi-connector-state-v2-5-17932daddd7d@kernel.org>
-References: <20230920-kms-hdmi-connector-state-v2-0-17932daddd7d@kernel.org>
-        <20230920-kms-hdmi-connector-state-v2-5-17932daddd7d@kernel.org>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.37; x86_64-pc-linux-gnu)
+ d=microchiptechnology.onmicrosoft.com;
+ s=selector2-microchiptechnology-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4CBlWrRqN6+qOz8LP5mj33zgeI90jKrIMnedYbzTQnY=;
+ b=ff9HoBRwr7NVM2S82rgpLkxgL86Zztacmo0/W61O6xUeX31zz/XLi/yoBit+YnIjxN0zHSYWsrprH1kkK6ZXynJXkM9un2XkRb86usilRSmOl1/qPwqs7sO3KaO9A0CtoZNOs3hl6JfvtvoWJmRPffOqgVcUuqeDmgi6mzuY0O8=
+Received: from DM6PR11MB3532.namprd11.prod.outlook.com (2603:10b6:5:70::25) by
+ DS7PR11MB7782.namprd11.prod.outlook.com (2603:10b6:8:e0::8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6813.21; Thu, 21 Sep 2023 09:15:29 +0000
+Received: from DM6PR11MB3532.namprd11.prod.outlook.com
+ ([fe80::6352:54f7:6c42:69ef]) by DM6PR11MB3532.namprd11.prod.outlook.com
+ ([fe80::6352:54f7:6c42:69ef%7]) with mapi id 15.20.6813.017; Thu, 21 Sep 2023
+ 09:15:28 +0000
+From:   <Parthiban.Veerasooran@microchip.com>
+To:     <andrew@lunn.ch>
+CC:     <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
+        <pabeni@redhat.com>, <robh+dt@kernel.org>,
+        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
+        <corbet@lwn.net>, <Steen.Hegelund@microchip.com>,
+        <rdunlap@infradead.org>, <horms@kernel.org>,
+        <casper.casan@gmail.com>, <netdev@vger.kernel.org>,
+        <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <Horatiu.Vultur@microchip.com>,
+        <Woojung.Huh@microchip.com>, <Nicolas.Ferre@microchip.com>,
+        <UNGLinuxDriver@microchip.com>,
+        <Thorsten.Kummermehr@microchip.com>, <Ciprian.Regus@analog.com>,
+        <jtm@lopingdog.com>
+Subject: Re: [RFC PATCH net-next 1/6] net: ethernet: implement OPEN Alliance
+ control transaction interface
+Thread-Topic: [RFC PATCH net-next 1/6] net: ethernet: implement OPEN Alliance
+ control transaction interface
+Thread-Index: AQHZ4mEB+nwP90vbvEyYqcmk7ntkibAYCnuAgAoMZoCAADwLgIABZ4MAgAAP5YCAAUkogA==
+Date:   Thu, 21 Sep 2023 09:15:28 +0000
+Message-ID: <03cfa7c9-53a3-9107-c185-7e5953475518@microchip.com>
+References: <20230908142919.14849-1-Parthiban.Veerasooran@microchip.com>
+ <20230908142919.14849-2-Parthiban.Veerasooran@microchip.com>
+ <f23997c1-7507-41c6-8bb3-47d6a353beb8@lunn.ch>
+ <14c089d7-4d34-9cd5-7f77-55c80815e003@microchip.com>
+ <deff3e64-a10f-4d07-9651-502442a86987@lunn.ch>
+ <cf23ed3c-d1cb-61fd-a305-e2787ef70cb1@microchip.com>
+ <52685909-ec92-41b0-957f-25da8a9be9eb@lunn.ch>
+In-Reply-To: <52685909-ec92-41b0-957f-25da8a9be9eb@lunn.ch>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=microchip.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM6PR11MB3532:EE_|DS7PR11MB7782:EE_
+x-ms-office365-filtering-correlation-id: 8a0a7ace-7ad3-49ce-d870-08dbba834c70
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: uZ5ycJFSUKFx+Mf/sbb2RRE1xNfmNAJeu6NLaRKbhknUM9qJm2Gx38b05GVNbI0IE4+hvLyPi+ppklvNB8MqnCsk2i2BJk2kAZTyGB5xV1a/zffaFp13MsUM1DYi6WdEEwkWJnB4adBzy/RIYzeT9UqtzISmashH7IIYpyQ6P2qI10PzrXlnVx3HC5mzxOSXlSATztUvmG+24gdf94GgcbNe/4SIHVqgEnfIIC9ThqqTXygK2jNOpmuFrh9xEq4vxTAiZbGiQT+Fruv8vwLOpFkFBgAaApBaIDfFuLak/Yf6tTTnAmNHDiuwV+8exVEzgg2Pc/9NHs4+N2zy61mCQZuhXUf9bcLaNAFGv1uoj1rEUB/YlujE1lAocTashPCGo1jz5kf1EHxBm+3z1yMGGlCWg7vKAoEkb5YAVB1m2stXzxX2heZuvDgGjmTPYNMNVySlfclkROWgPep+dc9qhiVaYxJ75TT1I7k+5aTpozmLPDf0lkyFHPXjdXd+qBRt1VMSBYQWXM+kYGW9DLJ4emE4357ViuKWbnpp64+FOONcaDIXWwIvXR3daRRXbkNLtnXPAck1yE4fgvANkMwnF9i5j3+WF8cR21Y1Z3APJp1BZsEd+g/uN8GcSrEeDx7xiDRroC/oLLg0ivD3ddNnUSyXNm6mlUiLwLW/mJUNoO5DkzVByCfqLu3gnT2l1yI+
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3532.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(366004)(346002)(136003)(39860400002)(396003)(451199024)(186009)(1800799009)(478600001)(2616005)(38100700002)(38070700005)(26005)(71200400001)(6512007)(6506007)(6486002)(53546011)(122000001)(5660300002)(4326008)(8676002)(8936002)(41300700001)(36756003)(64756008)(76116006)(66556008)(66946007)(54906003)(66446008)(91956017)(66476007)(316002)(6916009)(86362001)(31696002)(7416002)(31686004)(4744005)(2906002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?d0hJMGcwRkdpWVdJZ1VvQmRlcVRQUWVzangyTytOTTNmWE1xR0Erd3VmTW0z?=
+ =?utf-8?B?UFgrRkw2SEJCcDVML2U0THRkVzdMSlZGcFliOU15U25YWGJ4dHdhTGJQZkVo?=
+ =?utf-8?B?YURSS3NqNUl3K29KelFhdUh5N3FIUXJyM0pGaVhSblM5SHlYWG5xYTFPR2lx?=
+ =?utf-8?B?TGlHSVNYTGhnMGZaS1dLOHJ4TnJLQXlyU3dndUZSRzlEYk5oK1AyRXJHRGNa?=
+ =?utf-8?B?ZTBMWlpyVkd4Q1NOVlFlTEZUWWNERlUzdUNVb1g3b1UzTlNpQmdnWE9sdVpE?=
+ =?utf-8?B?VTRBRGVFbnNxWFl6YTBRbnJ4d0xQb25jdlNUNmRxSTN5R21KYnkwUDBhK3FX?=
+ =?utf-8?B?cDlGRkY1ZTYxOFdKV0ZUeE0zcGFCRGZqTU04NG9hMlpSUHNKVktRTWFxWDdl?=
+ =?utf-8?B?cEQrQVJUaHFHYzRXWXdHSXZJaE5uNU5GbUVkYmg1eU5tQXRmV1BjbCtuMGRv?=
+ =?utf-8?B?VVBUTUhWYUFvYUFySVdBK2JTVHhzQzhlZS9MWjh4b2JzckVoQzRyQS9NRjBB?=
+ =?utf-8?B?NG9XQlZrS3hKWEVGM3ZTVVFNMFcvaE5GOFF2aHZSNmxWZXpxSlFGWkM4Z3N6?=
+ =?utf-8?B?MDM5M2l6VjhNNEh0NVg5NzFSVkRBd2xPNHBsMnRLc1g3MWZDYmxIQjJPSzh5?=
+ =?utf-8?B?K2NINmpoWXduTDR6T3Q5UTBudHNLZ0RrRFF1ZWV4Q0J1SmhOVVE1TnE0VTFV?=
+ =?utf-8?B?eEdTRHF3NnNRZVZiUTdGajhGdlBhZ0lPaC9Tamt6TTQ2amd5YVlxekoyT3Fm?=
+ =?utf-8?B?b25MRUUySThUZkorZ05SYlV5b0RpVmt5a2cwU0xoMUFxV2Z0bDhmSlBheXN5?=
+ =?utf-8?B?Qno0NFZzRnR3UStHdUE4ZUdVTlAvbkVlMVF0ckRlMTNrRlowRHlXbkh1MFNO?=
+ =?utf-8?B?ZkVaZmdrZnVTMysxTmpqTzMvRS8yc2FvMEdIV1FCbldNY1FFbW9icittZ1NN?=
+ =?utf-8?B?UHRCUDNWUHJhSnZtQzl0U25qeUpTTW5Fa0tWWTN4ZHdqUGRTbzNFWndDRkJy?=
+ =?utf-8?B?amt6bDZYd1Mzb1JPcERvQUpzaVhGTUJYZkkyRUFPWmZNMU8wek9XSEJweFg2?=
+ =?utf-8?B?czFCK05rc2NES1dobDlGT1NCMGJ0MVhCdVB0ZVRCQkdLUHZKOG8wQnFDVDQv?=
+ =?utf-8?B?a3lYY0hKL0NTV0E2bzVvOVNlQ2t4amlMd2Q1ME1udkprK1lGZVZYOVFzNHph?=
+ =?utf-8?B?aWJBQlpLNVBKS0p1N0d3UVYwSEJXUEREZTJJcUlqZ0RFVGN6S1IwTS9taXZC?=
+ =?utf-8?B?Z05HU2RrTURkMVluVzJQK21TUGJpV1pLb1krMmRSditBWjBGUjZKZktQSGdR?=
+ =?utf-8?B?SFk1bmE5MTVlOHRGMWQ3eW1NbE03eU9Vc2o3bVd5aWJNd3dtaUovQ0NiZjNo?=
+ =?utf-8?B?c1NNdkpZeUNOWjA3dnA4VXJvSUZEeUJmRDBFVWVXcmdESWlCaVBoQmFZNXJK?=
+ =?utf-8?B?ZFVRNjUyeUdrdmtXelJ2VEE3dnBmYk9pZFpxcmM1U0R5SElzMkpsT3ppSkZO?=
+ =?utf-8?B?UThYOHpGeTdsRDc0TURQQk4vVmkwbklpT0JKVXpDR0NTSWhidWI5dzY5TTQx?=
+ =?utf-8?B?Q3VaNWMvMHo1ajZhZlZTaXI0L08rV3BzU1RsdzZlcHJjZXplajYyemFrTDFN?=
+ =?utf-8?B?akRFYm9Tc2ZQNXhPZDBDVm00bGV2UWI1Nm00MlRmbGpUdEp6aUt1U0VRa1RJ?=
+ =?utf-8?B?aUFwZnZOMXo4dHRnclN4L0tuRUFzbW1GV0JHZXRqRGZNd0c5a28reDFjMkJ2?=
+ =?utf-8?B?M3FGYjR2YjhZaFp5cWF4d2pTVkg2NXJMQS9FcXdLSkQ4WXFyNXMwWno5Z281?=
+ =?utf-8?B?VDVGVXd4QVJ4cForZGYxaHAxZmh4enB1THhhdmZuNjROWkF2ZnpkUGtIMjJj?=
+ =?utf-8?B?eTRmSmRNRlhkdVVjMzArTGFFMFF3Ui9teXgzVEFHOWx6dmlEanVVR3luR1Jo?=
+ =?utf-8?B?ZzBXdWNPT3BjZ3d6ejhadnBtSWdhSHFCVFVqclkzTnJ5SThja2ZNcGpsbTVS?=
+ =?utf-8?B?UzFPR25Pa1hrNDJDdzNGQXd3bTJTKzVpK05YYjFTUnhtcTJIempyNlVWeml6?=
+ =?utf-8?B?STJrUUU4ZXJoamNhKzZmYlhNaFNOd1JzT2V4UDV1aXR2SHhWZFlqbnVrOHMr?=
+ =?utf-8?B?cUdoNklTTlc0dHJWUlhpOHhROGx1L0hTYVdXSlppdEVTUTExZmdyVGw5VjF3?=
+ =?utf-8?B?UWc9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <D2FE3F03D81BA242ABA356357B2352EF@namprd11.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/1wJwHY6yZH5_elgENzeqr8U";
- protocol="application/pgp-signature"; micalg=pgp-sha256
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
-        autolearn_force=no version=3.4.6
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3532.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8a0a7ace-7ad3-49ce-d870-08dbba834c70
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Sep 2023 09:15:28.8489
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: xJ5uD7ft1udRWeXQgxcwawH1eavlLzWA3vxfvWYoosoxf7+voXLXJkumY8I90PfN9l8YjfMbJGJVie9i1twYGyRMjnyMZKQHzqT5UVxdLOhPLUZAv9qoPrTGpIdw+Qs1
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR11MB7782
+X-Spam-Status: No, score=-5.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS,SPF_NONE,
+        URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---Sig_/1wJwHY6yZH5_elgENzeqr8U
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 20 Sep 2023 16:35:20 +0200
-Maxime Ripard <mripard@kernel.org> wrote:
-
-> We'll add automatic selection of the output BPC in a following patch,
-> but let's add it to the HDMI connector state already.
->=20
-> Signed-off-by: Maxime Ripard <mripard@kernel.org>
-> ---
->  drivers/gpu/drm/drm_atomic.c              |  4 +++-
->  drivers/gpu/drm/drm_atomic_state_helper.c |  6 +++++-
->  drivers/gpu/drm/drm_connector.c           | 13 ++++++++++++-
->  include/drm/drm_connector.h               | 13 ++++++++++++-
->  4 files changed, 32 insertions(+), 4 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/drm_atomic.c b/drivers/gpu/drm/drm_atomic.c
-> index b1b56dcaa76b..8dce0a2f2ac3 100644
-> --- a/drivers/gpu/drm/drm_atomic.c
-> +++ b/drivers/gpu/drm/drm_atomic.c
-> @@ -1143,9 +1143,11 @@ static void drm_atomic_connector_print_state(struc=
-t drm_printer *p,
->  	drm_printf(p, "\tcolorspace=3D%s\n", drm_get_colorspace_name(state->col=
-orspace));
-> =20
->  	if (connector->connector_type =3D=3D DRM_MODE_CONNECTOR_HDMIA ||
-> -	    connector->connector_type =3D=3D DRM_MODE_CONNECTOR_HDMIB)
-> +	    connector->connector_type =3D=3D DRM_MODE_CONNECTOR_HDMIB) {
->  		drm_printf(p, "\tbroadcast_rgb=3D%s\n",
->  			   drm_hdmi_connector_get_broadcast_rgb_name(state->hdmi.broadcast_rg=
-b));
-> +		drm_printf(p, "\toutput_bpc=3D%u\n", state->hdmi.output_bpc);
-> +	}
-> =20
->  	if (connector->connector_type =3D=3D DRM_MODE_CONNECTOR_WRITEBACK)
->  		if (state->writeback_job && state->writeback_job->fb)
-> diff --git a/drivers/gpu/drm/drm_atomic_state_helper.c b/drivers/gpu/drm/=
-drm_atomic_state_helper.c
-> index 0f7e5ba555b8..2c9b52ae1b56 100644
-> --- a/drivers/gpu/drm/drm_atomic_state_helper.c
-> +++ b/drivers/gpu/drm/drm_atomic_state_helper.c
-> @@ -569,6 +569,9 @@ EXPORT_SYMBOL(drm_atomic_helper_connector_tv_reset);
->  void __drm_atomic_helper_connector_hdmi_reset(struct drm_connector *conn=
-ector,
->  					      struct drm_connector_state *new_state)
->  {
-> +	new_state->max_bpc =3D 8;
-> +	new_state->max_requested_bpc =3D 8;
-> +	new_state->hdmi.output_bpc =3D 8;
-
-Hi,
-
-will this be forcing all drivers using these helpers to default to max bpc =
-=3D 8?
-
-I believe at least amdgpu would disagree. The defaults were changed in
-the recent years, IIRC to avoid extra modesets during boot-up when
-desktops prefer highest possible bpc for a mode.
-
-The 'max bpc' property itself is a manual workaround for faulty
-hardware that does not correctly indicate the max bpc it can handle. It
-should not default to be a limiting factor.
-
->  	new_state->hdmi.broadcast_rgb =3D DRM_HDMI_BROADCAST_RGB_AUTO;
->  }
->  EXPORT_SYMBOL(__drm_atomic_helper_connector_hdmi_reset);
-> @@ -651,7 +654,8 @@ int drm_atomic_helper_connector_hdmi_check(struct drm=
-_connector *connector,
->  	struct drm_connector_state *new_state =3D
->  		drm_atomic_get_new_connector_state(state, connector);
-> =20
-> -	if (old_state->hdmi.broadcast_rgb !=3D new_state->hdmi.broadcast_rgb) {
-> +	if (old_state->hdmi.broadcast_rgb !=3D new_state->hdmi.broadcast_rgb ||
-> +	    old_state->hdmi.output_bpc !=3D new_state->hdmi.output_bpc) {
->  		struct drm_crtc *crtc =3D new_state->crtc;
->  		struct drm_crtc_state *crtc_state;
-> =20
-> diff --git a/drivers/gpu/drm/drm_connector.c b/drivers/gpu/drm/drm_connec=
-tor.c
-> index b45471d540ac..f55f5918411c 100644
-> --- a/drivers/gpu/drm/drm_connector.c
-> +++ b/drivers/gpu/drm/drm_connector.c
-> @@ -459,6 +459,7 @@ EXPORT_SYMBOL(drmm_connector_init);
->   * @funcs: callbacks for this connector
->   * @connector_type: user visible type of the connector
->   * @ddc: optional pointer to the associated ddc adapter
-> + * @max_bpc: Maximum bits per char the HDMI connector supports
->   *
->   * Initialises a preallocated HDMI connector. Connectors can be
->   * subclassed as part of driver connector objects.
-> @@ -475,7 +476,8 @@ int drmm_connector_hdmi_init(struct drm_device *dev,
->  			     struct drm_connector *connector,
->  			     const struct drm_connector_funcs *funcs,
->  			     int connector_type,
-> -			     struct i2c_adapter *ddc)
-> +			     struct i2c_adapter *ddc,
-> +			     unsigned int max_bpc)
->  {
->  	int ret;
-> =20
-> @@ -487,6 +489,15 @@ int drmm_connector_hdmi_init(struct drm_device *dev,
->  	if (ret)
->  		return ret;
-> =20
-> +	if (max_bpc) {
-> +		if (!(max_bpc =3D=3D 8 || max_bpc =3D=3D 10 || max_bpc =3D=3D 12))
-> +			return -EINVAL;
-> +
-> +		drm_connector_attach_hdr_output_metadata_property(connector);
-> +		drm_connector_attach_max_bpc_property(connector, 8, max_bpc);
-> +		connector->max_bpc =3D max_bpc;
-> +	}
-> +
->  	return 0;
->  }
->  EXPORT_SYMBOL(drmm_connector_hdmi_init);
-> diff --git a/include/drm/drm_connector.h b/include/drm/drm_connector.h
-> index fdcf64ab91a9..d0bcb835c857 100644
-> --- a/include/drm/drm_connector.h
-> +++ b/include/drm/drm_connector.h
-> @@ -1056,6 +1056,11 @@ struct drm_connector_state {
->  		 * Broadcast RGB selection value.
->  		 */
->  		enum drm_hdmi_broadcast_rgb broadcast_rgb;
-> +
-> +		/**
-> +		 * @output_bpc: Bits per character to output.
-
-Is it not bits per channel?
-
-> +		 */
-> +		unsigned int output_bpc;
->  	} hdmi;
->  };
-> =20
-> @@ -1700,6 +1705,11 @@ struct drm_connector {
->  	 */
->  	struct drm_property_blob *path_blob_ptr;
-> =20
-> +	/**
-> +	 * @max_bpc: Maximum bits per character the connector supports.
-
-channel?
-
-> +	 */
-> +	unsigned int max_bpc;
-> +
->  	/**
->  	 * @max_bpc_property: Default connector property for the max bpc to be
->  	 * driven out of the connector.
-> @@ -1939,7 +1949,8 @@ int drmm_connector_hdmi_init(struct drm_device *dev,
->  			     struct drm_connector *connector,
->  			     const struct drm_connector_funcs *funcs,
->  			     int connector_type,
-> -			     struct i2c_adapter *ddc);
-> +			     struct i2c_adapter *ddc,
-> +			     unsigned int max_bpc);
->  void drm_connector_attach_edid_property(struct drm_connector *connector);
->  int drm_connector_register(struct drm_connector *connector);
->  void drm_connector_unregister(struct drm_connector *connector);
->=20
-
-Thanks,
-pq
-
---Sig_/1wJwHY6yZH5_elgENzeqr8U
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmUMA20ACgkQI1/ltBGq
-qqdaQRAAjfKbi0w7oddJriljZUDUoI1Xd4FCUc54o8hNaouY4GMPo8BjlHTUGHxT
-oHxATfX6EO5a4wWK3ceBWFhBpLETGmIpqn5wdcG2+84vhIVHXgPn/l1MwShFkzcD
-5WQjnEnFvGqg8eZ05Cc545omaAiLZbqGKeXw2piYUd2+cZmBDZroK3BQXgZlM6JV
-62/0mx3eR3juCdwGR9PlWHnoPdsVQA8REfaR62C33rF4ZP52tp0x/OiXa0D7tcxl
-bj7XqZ3iuK9lCArc8GGZZdSuyEK8oobA7j6SDvbY6KqNGoE4DLNkKHVp1Cm7x7X/
-xvexGK/FiQ3QLSn7KUXFK3MFk5X14Zr5P83bLFnEL78MqSdz0KCgeZFhJ9Hs6PkS
-y3FuV7YcM8PNsPwvJIElTRnMpby7LpweEPD2mohJENK22b3bfFWU5o+sGVGotCKq
-Y3BRrJnjWZrXq6mkcKhFwq2YM7+oFasQrG74Afn8SFvfu9lnRfXnveYp8tpyR/Jz
-CIH/X57kHsgZJeZaPVD86aGmEq5UFjynjuLbwznoJYVcJrwAtvbVwNzcrTO3x4ea
-P8PRUxUwROJGWuLKSRKosmmoMIjpqSBIsQ2UDaWEwv0UIbKA2jivnb9vGkbBVEGZ
-rAzfC0oo7clq9sikn0v8UMgbIkzWSYYy5ycZVl1KQ7xxXQtbHr4=
-=JFuq
------END PGP SIGNATURE-----
-
---Sig_/1wJwHY6yZH5_elgENzeqr8U--
+SGkgQW5kcmV3LA0KDQpPbiAyMC8wOS8yMyA3OjA3IHBtLCBBbmRyZXcgTHVubiB3cm90ZToNCj4g
+RVhURVJOQUwgRU1BSUw6IERvIG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVu
+bGVzcyB5b3Uga25vdyB0aGUgY29udGVudCBpcyBzYWZlDQo+IA0KPj4gQWggb2ssIEkgdGhpbmsg
+dGhlcmUgaXMgYSBtaXN1bmRlcnN0YW5kaW5nIGhlcmUuIFRoaXMgaXMgcmVsYXRlZCB0byBPUEVO
+DQo+PiBBbGxpYW5jZSBwcm90b2NvbC4gQ29udHJvbCB0cmFuc2FjdGlvbnMgY29uc2lzdCBvZiBv
+bmUgb3IgbW9yZSBjb250cm9sDQo+PiBjb21tYW5kcy4gQ29udHJvbCBjb21tYW5kcyBhcmUgdXNl
+ZCBieSB0aGUgU1BJIGhvc3QgdG8gcmVhZCBhbmQgd3JpdGUNCj4+IHJlZ2lzdGVycyB3aXRoaW4g
+dGhlIE1BQy1QSFkuIEVhY2ggY29udHJvbCBjb21tYW5kcyBhcmUgY29tcG9zZWQgb2YgYQ0KPj4g
+MzItYml0IGNvbnRyb2wgY29tbWFuZCBoZWFkZXIgZm9sbG93ZWQgYnkgcmVnaXN0ZXIgZGF0YS4g
+V05SICh3cml0ZSBub3QNCj4+IHJlYWQpIGJpdCBpbiB0aGUgY29udHJvbCBjb21tYW5kIGhlYWRl
+ciBpbmRpY2F0ZXMgaWYgZGF0YSBpcyB0byBiZQ0KPj4gd3JpdHRlbiB0byByZWdpc3RlcnMgKHdo
+ZW4gc2V0KSBvciByZWFkIGZyb20gcmVnaXN0ZXJzICh3aGVuIGNsZWFyKS4gc28NCj4+IGJhc2lj
+YWxseSBpdCBpbmRpY2F0ZXMgdGhlIHR5cGUgb2YgdGhlIGNvbnRyb2wgY29tbWFuZCBvbiB0aGUg
+cmVnaXN0ZXJzLg0KPiANCj4gT0ssIHNvIHRoaXMgY2xlYXJseSBpbmRpY2F0ZXMgdGhlIG5hbWVz
+IGFyZSBiYWQgYW5kIGRvY3VtZW50YXRpb24gaXMNCj4gbWlzc2luZyBpZiBpIGdvdCB0aGlzIGNv
+bXBsZXRlbHkgd3JvbmcuIEFkZGluZyBrZXJuZWxkb2MgdG8gdGhlc2UNCj4gZnVuY3Rpb25zIHNo
+b3VsZCBoZWxwLg0KU3VyZSwgSSB3aWxsIGRvIHRoYXQuDQo+IA0KPiAgICAgICAgICBBbmRyZXcN
+Cj4gDQo+IA0KDQo=
