@@ -2,79 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5DB5F7AA52E
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Sep 2023 00:40:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1773C7AA6F7
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Sep 2023 04:18:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229690AbjIUWkc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Sep 2023 18:40:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55246 "EHLO
+        id S229497AbjIVCSs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Sep 2023 22:18:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45470 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229649AbjIUWka (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Sep 2023 18:40:30 -0400
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EFB2199;
-        Thu, 21 Sep 2023 15:40:24 -0700 (PDT)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 746EFC433C7;
-        Thu, 21 Sep 2023 22:40:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1695336024;
-        bh=YJWf9LmGERCK01Hcj/TS3IGtBPmay9vgQw9uJoivTtA=;
-        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-        b=gdxniGFlXCI4g5BAA/DqQq4X7YCYXqTO6RWkaeGX1ed0R7T5zY95g+nnA4VS5g/gL
-         puwMa+Za40IDdwr1dNiZKv3+wzCb0/VZ793+w8CI6EPB4nxXNJrHs5CCr01iKXzUVt
-         zRl+5tcNcpuTR2T/3JRY1tr0BJbPMTKDs7tsqpujlSl28Q02ByRSMCzcrKWKlCn8BP
-         wR8DRDeHiDOHaz5c97e5q218kZoz47pqJ4w74ZtXPXyyvMB7JvxM3thDIUP+NAurlV
-         YFPCpKHbMMzAMKpq8lZ6p2kJZrExJd/kZY8yP+RIFRA3C6FYrPYbdXQY/Gc60dxCYd
-         gEv0UKpFwIeyQ==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
-        by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 5B8C1E11F40;
-        Thu, 21 Sep 2023 22:40:24 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+        with ESMTP id S230160AbjIVCSr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Sep 2023 22:18:47 -0400
+X-Greylist: delayed 1082 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 21 Sep 2023 19:18:41 PDT
+Received: from wxsgout04.xfusion.com (wxsgout04.xfusion.com [36.139.87.180])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 05109192
+        for <linux-doc@vger.kernel.org>; Thu, 21 Sep 2023 19:18:40 -0700 (PDT)
+Received: from wuxshcsitd00600.xfusion.com (unknown [10.32.133.213])
+        by wxsgout04.xfusion.com (SkyGuard) with ESMTPS id 4RsFmG5H0QzB0R6m;
+        Fri, 22 Sep 2023 09:58:22 +0800 (CST)
+Received: from localhost (10.82.147.3) by wuxshcsitd00600.xfusion.com
+ (10.32.133.213) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Fri, 22 Sep
+ 2023 10:00:21 +0800
+Date:   Fri, 22 Sep 2023 10:00:21 +0800
+From:   Wang Jinchao <wangjinchao@xfusion.com>
+To:     David Hildenbrand <david@redhat.com>,
+        Oscar Salvador <osalvador@suse.de>,
+        Jonathan Corbet <corbet@lwn.net>, <linux-mm@kvack.org>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+CC:     xulei <stone.xulei@xfusion.com>
+Subject: [PATCH] memory-hotplug.rst: fix wrong /sys/device/ path
+Message-ID: <ZQz1NUATBMOb3RT+@fedora>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH bpf-next v1] bpf,
- docs: Add loongarch64 as arch supporting BPF JIT
-From:   patchwork-bot+netdevbpf@kernel.org
-Message-Id: <169533602435.20538.12738329187307671554.git-patchwork-notify@kernel.org>
-Date:   Thu, 21 Sep 2023 22:40:24 +0000
-References: <1695111937-19697-1-git-send-email-yangtiezhu@loongson.cn>
-In-Reply-To: <1695111937-19697-1-git-send-email-yangtiezhu@loongson.cn>
-To:     Tiezhu Yang <yangtiezhu@loongson.cn>
-Cc:     corbet@lwn.net, ast@kernel.org, daniel@iogearbox.net,
-        andrii@kernel.org, linux-kernel@vger.kernel.org,
-        bpf@vger.kernel.org, netdev@vger.kernel.org,
-        linux-doc@vger.kernel.org
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+X-Originating-IP: [10.82.147.3]
+X-ClientProxiedBy: wuxshcsitd00600.xfusion.com (10.32.133.213) To
+ wuxshcsitd00600.xfusion.com (10.32.133.213)
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello:
+Actually, it should be /sys/devices/
 
-This patch was applied to bpf/bpf-next.git (master)
-by Martin KaFai Lau <martin.lau@kernel.org>:
+Signed-off-by: Wang Jinchao <wangjinchao@xfusion.com>
+---
+ Documentation/admin-guide/mm/memory-hotplug.rst | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-On Tue, 19 Sep 2023 16:25:37 +0800 you wrote:
-> As BPF JIT support for loongarch64 was added about one year ago
-> with commit 5dc615520c4d ("LoongArch: Add BPF JIT support"), it
-> is appropriate to add loongarch64 as arch supporting BPF JIT in
-> bpf and sysctl docs as well.
-> 
-> Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
-> 
-> [...]
-
-Here is the summary with links:
-  - [bpf-next,v1] bpf, docs: Add loongarch64 as arch supporting BPF JIT
-    https://git.kernel.org/bpf/bpf-next/c/ac0691c75ab7
-
-You are awesome, thank you!
+diff --git a/Documentation/admin-guide/mm/memory-hotplug.rst b/Documentation/admin-guide/mm/memory-hotplug.rst
+index cfe034cf1e87..01595965734a 100644
+--- a/Documentation/admin-guide/mm/memory-hotplug.rst
++++ b/Documentation/admin-guide/mm/memory-hotplug.rst
+@@ -250,15 +250,15 @@ Observing the State of Memory Blocks
+ The state (online/offline/going-offline) of a memory block can be observed
+ either via::
+ 
+-	% cat /sys/device/system/memory/memoryXXX/state
++	% cat /sys/devices/system/memory/memoryXXX/state
+ 
+ Or alternatively (1/0) via::
+ 
+-	% cat /sys/device/system/memory/memoryXXX/online
++	% cat /sys/devices/system/memory/memoryXXX/online
+ 
+ For an online memory block, the managing zone can be observed via::
+ 
+-	% cat /sys/device/system/memory/memoryXXX/valid_zones
++	% cat /sys/devices/system/memory/memoryXXX/valid_zones
+ 
+ Configuring Memory Hot(Un)Plug
+ ==============================
+@@ -326,7 +326,7 @@ however, a memory block might span memory holes. A memory block spanning memory
+ holes cannot be offlined.
+ 
+ For example, assume 1 GiB memory block size. A device for a memory starting at
+-0x100000000 is ``/sys/device/system/memory/memory4``::
++0x100000000 is ``/sys/devices/system/memory/memory4``::
+ 
+ 	(0x100000000 / 1Gib = 4)
+ 
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+2.40.0
 
