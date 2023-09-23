@@ -2,95 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 491147ABE49
-	for <lists+linux-doc@lfdr.de>; Sat, 23 Sep 2023 09:14:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 68E297ABE94
+	for <lists+linux-doc@lfdr.de>; Sat, 23 Sep 2023 09:51:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229888AbjIWHOI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 23 Sep 2023 03:14:08 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48232 "EHLO
+        id S230221AbjIWHvM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 23 Sep 2023 03:51:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49750 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230013AbjIWHOI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 23 Sep 2023 03:14:08 -0400
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com [IPv6:2607:f8b0:4864:20::343])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6103519C;
-        Sat, 23 Sep 2023 00:14:01 -0700 (PDT)
-Received: by mail-ot1-x343.google.com with SMTP id 46e09a7af769-6bd04558784so2106654a34.3;
-        Sat, 23 Sep 2023 00:14:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695453240; x=1696058040; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5wNl5BJ8gcnnggkuY+vRKw97Vo+2bqxg83VB63bOWl8=;
-        b=bk6ppflbWAjsklN79HxmVFxASbupL4zewXKKvuwneg8voKj5aXjJ+hdMc2oHq4S9vj
-         6Z07oiE41zsbM8wY87N6YKR+3NZYAa7p6IZDliJAUholML2psP2B/HwndKNEjwo2pyJO
-         sopNySXj6AtNGLTq5KTewWlczjyl0VGZvFC8dISt/9TzOzUrls0TnKclgIjJHatlCZXJ
-         rpyrZ2R2oCRNwFZatM2Fr3bg3ghr2lYcJGGt5i7ieuHaeHsHTozND3JMGhELg+ArxlXO
-         ugoTFRxNdkmb6oB7PoiBbHh+iZiPTh9JvPuR88NQ0tQU+PzKtASeH0bt2jOPW2CeaXPK
-         yU9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695453240; x=1696058040;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=5wNl5BJ8gcnnggkuY+vRKw97Vo+2bqxg83VB63bOWl8=;
-        b=rzn6Mn4H/7Tg8j2JyX5KbFNDvQUnH8ubZ34ei+PqBRWUFPrxHwbj5j03/piSCYbekN
-         0WACIbtIRnmAjhFpBIwge0VFw2uj+cx14CQDC5cZYDgrsanuWrOLgC2VDC6esUV57vol
-         95jH9j6H4O4vaxoLvqkzz7agGsNZhgruc5ytjiBn0yZ/akTU2crnK1O6EpojowR9GpOK
-         KVl8qRF5xzerHs16xmvRNVgzBWn9sPphouylVDculYln1ByAEIX+yLO5HBh+5GOM8rVU
-         V8mhLmEq1WVN0QwxVIS0onAQGmpkZH7OjL0Z1rvouUgra/lP02Zj44u/WsK7Giesuxgm
-         ETIg==
-X-Gm-Message-State: AOJu0YyTrd8gPuBTLYLDlVVkDQTs8nw8PVCUbZI0cQ+jhZyAi/jLTWwp
-        oVD0gCpAQforktn1HVHSizU=
-X-Google-Smtp-Source: AGHT+IHUfdoy7CjQbWdS9m+R0sBXBZv8WhO5L/m/psbBj4/P+EpfeZ4GF/16P6C2uWOtFeX24PF/ng==
-X-Received: by 2002:a05:6358:9222:b0:135:85ec:a080 with SMTP id d34-20020a056358922200b0013585eca080mr1678964rwb.32.1695453240497;
-        Sat, 23 Sep 2023 00:14:00 -0700 (PDT)
-Received: from localhost.localdomain ([140.112.90.93])
-        by smtp.gmail.com with ESMTPSA id x41-20020a056a000be900b006877ec47f82sm4315136pfu.66.2023.09.23.00.13.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 23 Sep 2023 00:14:00 -0700 (PDT)
-From:   Jianlin Li <ljianlin99@gmail.com>
-To:     corbet@lwn.net
-Cc:     tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Jianlin Li <ljianlin99@gmail.com>
-Subject: [PATCH] docs: x86: Update spec URL in x86/iommu document
-Date:   Sat, 23 Sep 2023 15:13:45 +0800
-Message-Id: <20230923071344.540894-1-ljianlin99@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        with ESMTP id S229808AbjIWHvM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 23 Sep 2023 03:51:12 -0400
+Received: from shiva.jussieu.fr (shiva.jussieu.fr [134.157.0.129])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id E4A0D11D;
+        Sat, 23 Sep 2023 00:51:05 -0700 (PDT)
+Received: from mailix1.insp.jussieu.fr (mailix1.insp.jussieu.fr [134.157.37.11])
+          by shiva.jussieu.fr (8.15.2/jtpda-5.4) with ESMTP id 38N7mEO5035034
+          ; Sat, 23 Sep 2023 09:48:14 +0200 (CEST)
+X-Ids:  164
+Received: from hordix.insp.jussieu.fr (hordix.insp.jussieu.fr [134.157.37.9])
+        by mailix1.insp.jussieu.fr (Postfix-INSP-2.10.1) with ESMTPSA id EE6E9C06B5F6;
+        Sat, 23 Sep 2023 09:48:08 +0200 (CEST)
+Received: from [105.112.214.216] ([105.112.214.216]) by
+ webmail.insp.jussieu.fr (Horde Framework) with HTTPS; Sat, 23 Sep 2023
+ 07:48:08 +0000
+Date:   Sat, 23 Sep 2023 07:48:08 +0000
+Message-ID: <20230923074808.Horde.cbloaD0KutWc0KgVIYXLh1O@webmail.insp.jussieu.fr>
+From:   Victoria Cleland <lamya.essaoui@insp.upmc.fr>
+Subject: Hallo
+Reply-to: v.cleland10@aol.com
+User-Agent: Horde Application Framework 5
+Organization: Institut des NanoSciences de Paris
+X-InspUpmcSession: essaoui
+Content-Type: text/plain; charset=utf-8; format=flowed; DelSp=Yes
 MIME-Version: 1.0
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Miltered: at jchkmail2.reseau.jussieu.fr with ID 650E983E.001 by Joe's j-chkmail (http : // j-chkmail dot ensmp dot fr)!
+X-j-chkmail-Enveloppe: 650E983E.001 from mailix1.insp.jussieu.fr/mailix1.insp.jussieu.fr/134.157.37.11/mailix1.insp.jussieu.fr/<lamya.essaoui@insp.upmc.fr>
+X-Spam-Status: Yes, score=5.7 required=5.0 tests=BAYES_50,
+        FREEMAIL_FORGED_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,MISSING_HEADERS,
+        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
+        REPLYTO_WITHOUT_TO_CC,SPF_HELO_NONE,SPF_PASS autolearn=no
+        autolearn_force=no version=3.4.6
+X-Spam-Report: *  0.0 RCVD_IN_DNSWL_BLOCKED RBL: ADMINISTRATOR NOTICE: The query to
+        *      DNSWL was blocked.  See
+        *      http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+        *      for more information.
+        *      [134.157.0.129 listed in list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5000]
+        *  0.0 RCVD_IN_MSPIKE_H3 RBL: Good reputation (+3)
+        *      [134.157.0.129 listed in wl.mailspike.net]
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [v.cleland10[at]aol.com]
+        *  1.0 MISSING_HEADERS Missing To: header
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  1.6 REPLYTO_WITHOUT_TO_CC No description available.
+        *  0.0 RCVD_IN_MSPIKE_WL Mailspike good senders
+        *  2.1 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The previous link to AMD IOMMU spec is no longer available,
-replace it with the new one.
 
-Signed-off-by: Jianlin Li <ljianlin99@gmail.com>
----
- Documentation/arch/x86/iommu.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+23. September 2023.
 
-diff --git a/Documentation/arch/x86/iommu.rst b/Documentation/arch/x86/iommu.rst
-index 42c7a6faa39a..41fbadfe2221 100644
---- a/Documentation/arch/x86/iommu.rst
-+++ b/Documentation/arch/x86/iommu.rst
-@@ -5,7 +5,7 @@ x86 IOMMU Support
- The architecture specs can be obtained from the below locations.
- 
- - Intel: http://www.intel.com/content/dam/www/public/us/en/documents/product-specifications/vt-directed-io-spec.pdf
--- AMD: https://www.amd.com/system/files/TechDocs/48882_IOMMU.pdf
-+- AMD: https://www.amd.com/content/dam/amd/en/documents/processor-tech-docs/specifications/48882_3_07_PUB.pdf
- 
- This guide gives a quick cheat sheet for some basic understanding.
- 
--- 
-2.25.1
+Hallo,
+
+Ich möchte Ihnen einen Geschäftsvorschlag mitteilen. Für weitere  
+Details antworten Sie auf Englisch.
+
+Grüße
+Frau Victoria Cleland
+_________________________
+Sekretärin: Lamya Essaoui
 
