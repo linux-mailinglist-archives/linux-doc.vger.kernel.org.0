@@ -2,188 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C8E497AC018
-	for <lists+linux-doc@lfdr.de>; Sat, 23 Sep 2023 12:17:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 08C937AC4FA
+	for <lists+linux-doc@lfdr.de>; Sat, 23 Sep 2023 21:51:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230465AbjIWKOb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 23 Sep 2023 06:14:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44842 "EHLO
+        id S229458AbjIWTvz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 23 Sep 2023 15:51:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34972 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231158AbjIWKOQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 23 Sep 2023 06:14:16 -0400
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EC2451733;
-        Sat, 23 Sep 2023 03:12:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695463929; x=1726999929;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=dp4g3U5j1+mHLqLShoixZI9RDsoukyKAu6bCdytj8jk=;
-  b=bLQY4bdOT3wjV8b2BfFCfeFJAJYzr06hcUl+W+MNXreUSv7xKotPnT3V
-   oGFvx0CUpZk5ZnwPwKmhYImXjRQ8oSrMyUEp8bYo8Z2KZf3R99aS4uNeI
-   I6zuyIPKZNH9H1rlZTbAwFuAm2PinZfoxtDtGPgjgs5EgEfV6MtOK8jXm
-   K1DYJO/AuuCSNQSvb8BX3RqwhqyKMJBnLnhaivhr6Oe11IpUnI2RcdUma
-   YNhTADBguUMwKW3uHGo8PaddYILIkQFk+woxHOAImGIfuaBCu1N6j0nOn
-   9XdM4GE1AkKSCqRUkvPKQ0wQhZy5GrUQGAltI3Bcz25g2re3VZ+ss0sNz
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="447492537"
-X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="447492537"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2023 03:11:56 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10841"; a="813388252"
-X-IronPort-AV: E=Sophos;i="6.03,171,1694761200"; 
-   d="scan'208";a="813388252"
-Received: from unknown (HELO fred..) ([172.25.112.68])
-  by fmsmga008.fm.intel.com with ESMTP; 23 Sep 2023 03:11:54 -0700
-From:   Xin Li <xin3.li@intel.com>
-To:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-edac@vger.kernel.org, linux-hyperv@vger.kernel.org,
-        kvm@vger.kernel.org, xen-devel@lists.xenproject.org
-Cc:     tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        luto@kernel.org, pbonzini@redhat.com, seanjc@google.com,
-        peterz@infradead.org, jgross@suse.com, ravi.v.shankar@intel.com,
-        mhiramat@kernel.org, andrew.cooper3@citrix.com,
-        jiangshanlai@gmail.com, nik.borisov@suse.com
-Subject: [PATCH v11 37/37] x86/fred: Invoke FRED initialization code to enable FRED
-Date:   Sat, 23 Sep 2023 02:42:12 -0700
-Message-Id: <20230923094212.26520-38-xin3.li@intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230923094212.26520-1-xin3.li@intel.com>
-References: <20230923094212.26520-1-xin3.li@intel.com>
+        with ESMTP id S229493AbjIWTvy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 23 Sep 2023 15:51:54 -0400
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A6B7DAB;
+        Sat, 23 Sep 2023 12:51:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+        MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+        Content-ID:Content-Description:In-Reply-To:References;
+        bh=V8TjP83fX1t1uCCFMjF07+NfXsno1RWfHesTfIPCgz4=; b=nOdhIhQ2vQFZ8T+nshOQ6XbE+V
+        GYpo0CgkU954FFwbBWsJfFyXHslWVTv0D7aPvHaOFh2RvPlicq3XSGm9nwmY63hSgWVKCY32CVaHC
+        5g0d2nNDqzDiv9eYDYpafiZ+N1R3XYhT3DuSpBtg50146FSRLp6+KxME61t5iLlAnwz7B3+y9T6id
+        cFZqEQnU1nLniqjeENqGmczaDeXo2umK7yVfb/30chyokpCW3UPDKu0ePx40COfCyWn9AipyWjkdV
+        NR9sM3IpFC22Wl0bJeKXM95kESENKb/N0UbCxeRDfWAe9r3+DbE8vwd0U3SW28JYGo7EOEZrnmd97
+        tZIzJxJA==;
+Received: from [2601:1c2:980:9ec0::9fed] (helo=bombadil.infradead.org)
+        by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+        id 1qk8fK-00BPAS-02;
+        Sat, 23 Sep 2023 19:51:46 +0000
+From:   Randy Dunlap <rdunlap@infradead.org>
+To:     linux-kernel@vger.kernel.org
+Cc:     Randy Dunlap <rdunlap@infradead.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Christian Brauner <brauner@kernel.org>,
+        linux-fsdevel@vger.kernel.org,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Glauber Costa <glommer@openvz.org>
+Subject: [PATCH] docs: admin-guide: sysctl: fix details of struct dentry_stat_t
+Date:   Sat, 23 Sep 2023 12:51:44 -0700
+Message-ID: <20230923195144.26043-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+Commit c8c0c239d5ab moved struct dentry_stat_t to fs/dcache.c but
+did not update its location in Documentation, so update that now.
+Also change each struct member from int to long as done in
+commit 3942c07ccf98.
 
-Let cpu_init_exception_handling() call cpu_init_fred_exceptions() to
-initialize FRED. However if FRED is unavailable or disabled, it falls
-back to set up TSS IST and initialize IDT.
-
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
-Co-developed-by: Xin Li <xin3.li@intel.com>
-Tested-by: Shan Kang <shan.kang@intel.com>
-Signed-off-by: Xin Li <xin3.li@intel.com>
+Fixes: c8c0c239d5ab ("fs: move dcache sysctls to its own file")
+Fixes: 3942c07ccf98 ("fs: bump inode and dentry counters to long")
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+Cc: Alexander Viro <viro@zeniv.linux.org.uk>
+Cc: Christian Brauner <brauner@kernel.org>
+Cc: linux-fsdevel@vger.kernel.org
+Cc: Luis Chamberlain <mcgrof@kernel.org>
+Cc: Arnd Bergmann <arnd@arndb.de>
+Cc: Glauber Costa <glommer@openvz.org>
 ---
+ Documentation/admin-guide/sysctl/fs.rst |   16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-Changes since v10:
-* No need to invalidate SYSCALL and SYSENTER MSRs (Thomas Gleixner).
-
-Changes since v8:
-* Move this patch after all required changes are in place (Thomas
-  Gleixner).
----
- arch/x86/kernel/cpu/common.c | 22 +++++++++++++++++-----
- arch/x86/kernel/irqinit.c    |  7 ++++++-
- arch/x86/kernel/traps.c      |  5 ++++-
- 3 files changed, 27 insertions(+), 7 deletions(-)
-
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index 2ee4e7b597a3..e7a5b9831252 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -61,6 +61,7 @@
- #include <asm/microcode.h>
- #include <asm/intel-family.h>
- #include <asm/cpu_device_id.h>
-+#include <asm/fred.h>
- #include <asm/uv/uv.h>
- #include <asm/ia32.h>
- #include <asm/set_memory.h>
-@@ -2112,7 +2113,15 @@ void syscall_init(void)
- 	/* The default user and kernel segments */
- 	wrmsr(MSR_STAR, 0, (__USER32_CS << 16) | __KERNEL_CS);
+diff -- a/Documentation/admin-guide/sysctl/fs.rst b/Documentation/admin-guide/sysctl/fs.rst
+--- a/Documentation/admin-guide/sysctl/fs.rst
++++ b/Documentation/admin-guide/sysctl/fs.rst
+@@ -42,16 +42,16 @@ pre-allocation or re-sizing of any kerne
+ dentry-state
+ ------------
  
--	idt_syscall_init();
-+	/*
-+	 * Except the IA32_STAR MSR, there is NO need to setup SYSCALL and
-+	 * SYSENTER MSRs for FRED, because FRED uses the ring 3 FRED
-+	 * entrypoint for SYSCALL and SYSENTER, and ERETU is the only legit
-+	 * instruction to return to ring 3 (both sysexit and sysret cause
-+	 * #UD when FRED is enabled).
-+	 */
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED))
-+		idt_syscall_init();
- }
+-This file shows the values in ``struct dentry_stat``, as defined in
+-``linux/include/linux/dcache.h``::
++This file shows the values in ``struct dentry_stat_t``, as defined in
++``fs/dcache.c``::
  
- #else	/* CONFIG_X86_64 */
-@@ -2228,8 +2237,9 @@ void cpu_init_exception_handling(void)
- 	/* paranoid_entry() gets the CPU number from the GDT */
- 	setup_getcpu(cpu);
+   struct dentry_stat_t dentry_stat {
+-        int nr_dentry;
+-        int nr_unused;
+-        int age_limit;         /* age in seconds */
+-        int want_pages;        /* pages requested by system */
+-        int nr_negative;       /* # of unused negative dentries */
+-        int dummy;             /* Reserved for future use */
++        long nr_dentry;
++        long nr_unused;
++        long age_limit;         /* age in seconds */
++        long want_pages;        /* pages requested by system */
++        long nr_negative;       /* # of unused negative dentries */
++        long dummy;             /* Reserved for future use */
+   };
  
--	/* IST vectors need TSS to be set up. */
--	tss_setup_ist(tss);
-+	/* For IDT mode, IST vectors need to be set in TSS. */
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED))
-+		tss_setup_ist(tss);
- 	tss_setup_io_bitmap(tss);
- 	set_tss_desc(cpu, &get_cpu_entry_area(cpu)->tss.x86_tss);
- 
-@@ -2238,8 +2248,10 @@ void cpu_init_exception_handling(void)
- 	/* GHCB needs to be setup to handle #VC. */
- 	setup_ghcb();
- 
--	/* Finally load the IDT */
--	load_current_idt();
-+	if (cpu_feature_enabled(X86_FEATURE_FRED))
-+		cpu_init_fred_exceptions();
-+	else
-+		load_current_idt();
- }
- 
- /*
-diff --git a/arch/x86/kernel/irqinit.c b/arch/x86/kernel/irqinit.c
-index c683666876f1..f79c5edc0b89 100644
---- a/arch/x86/kernel/irqinit.c
-+++ b/arch/x86/kernel/irqinit.c
-@@ -28,6 +28,7 @@
- #include <asm/setup.h>
- #include <asm/i8259.h>
- #include <asm/traps.h>
-+#include <asm/fred.h>
- #include <asm/prom.h>
- 
- /*
-@@ -96,7 +97,11 @@ void __init native_init_IRQ(void)
- 	/* Execute any quirks before the call gates are initialised: */
- 	x86_init.irqs.pre_vector_init();
- 
--	idt_setup_apic_and_irq_gates();
-+	if (cpu_feature_enabled(X86_FEATURE_FRED))
-+		fred_complete_exception_setup();
-+	else
-+		idt_setup_apic_and_irq_gates();
-+
- 	lapic_assign_system_vectors();
- 
- 	if (!acpi_ioapic && !of_ioapic && nr_legacy_irqs()) {
-diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
-index 848c85208a57..0ee78a30e14a 100644
---- a/arch/x86/kernel/traps.c
-+++ b/arch/x86/kernel/traps.c
-@@ -1411,7 +1411,10 @@ void __init trap_init(void)
- 
- 	/* Initialize TSS before setting up traps so ISTs work */
- 	cpu_init_exception_handling();
-+
- 	/* Setup traps as cpu_init() might #GP */
--	idt_setup_traps();
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED))
-+		idt_setup_traps();
-+
- 	cpu_init();
- }
--- 
-2.34.1
-
+ Dentries are dynamically allocated and deallocated.
