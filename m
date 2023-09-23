@@ -2,83 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 68E297ABE94
-	for <lists+linux-doc@lfdr.de>; Sat, 23 Sep 2023 09:51:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2C56D7ABEAD
+	for <lists+linux-doc@lfdr.de>; Sat, 23 Sep 2023 09:57:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230221AbjIWHvM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 23 Sep 2023 03:51:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49750 "EHLO
+        id S230193AbjIWH5b (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 23 Sep 2023 03:57:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33872 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229808AbjIWHvM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 23 Sep 2023 03:51:12 -0400
-Received: from shiva.jussieu.fr (shiva.jussieu.fr [134.157.0.129])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id E4A0D11D;
-        Sat, 23 Sep 2023 00:51:05 -0700 (PDT)
-Received: from mailix1.insp.jussieu.fr (mailix1.insp.jussieu.fr [134.157.37.11])
-          by shiva.jussieu.fr (8.15.2/jtpda-5.4) with ESMTP id 38N7mEO5035034
-          ; Sat, 23 Sep 2023 09:48:14 +0200 (CEST)
-X-Ids:  164
-Received: from hordix.insp.jussieu.fr (hordix.insp.jussieu.fr [134.157.37.9])
-        by mailix1.insp.jussieu.fr (Postfix-INSP-2.10.1) with ESMTPSA id EE6E9C06B5F6;
-        Sat, 23 Sep 2023 09:48:08 +0200 (CEST)
-Received: from [105.112.214.216] ([105.112.214.216]) by
- webmail.insp.jussieu.fr (Horde Framework) with HTTPS; Sat, 23 Sep 2023
- 07:48:08 +0000
-Date:   Sat, 23 Sep 2023 07:48:08 +0000
-Message-ID: <20230923074808.Horde.cbloaD0KutWc0KgVIYXLh1O@webmail.insp.jussieu.fr>
-From:   Victoria Cleland <lamya.essaoui@insp.upmc.fr>
-Subject: Hallo
-Reply-to: v.cleland10@aol.com
-User-Agent: Horde Application Framework 5
-Organization: Institut des NanoSciences de Paris
-X-InspUpmcSession: essaoui
-Content-Type: text/plain; charset=utf-8; format=flowed; DelSp=Yes
+        with ESMTP id S230114AbjIWH5a (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 23 Sep 2023 03:57:30 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 73575197;
+        Sat, 23 Sep 2023 00:57:24 -0700 (PDT)
+Received: from localhost (unknown [217.144.90.202])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 8CDA0383;
+        Sat, 23 Sep 2023 07:57:23 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 8CDA0383
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1695455844; bh=mfkLM1mZ6patzZykKGGUczfcmlxw34HJH6wQWGJWhEI=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=ORgfQWMBvcaonPYu9FXssg1eETcs/C+oNsQNKobql3vJImfFeyEdqnjoPAOMydwEX
+         uUN7e6ob3s9xvarSqsvfLw48K+gDBY5u5LEGPp9koqipZy6HhAuk9NC61ks9G+lLuX
+         Hh6RYjbmVX4n3Wxkh65rhWu3tZmVvQ4l8L7NCCLBEsKG1MeNaI/+cs+hswnZT0TrZV
+         ntQMB6QubijYg+v6Sh5hE1VOR/dlO291XoaKR0zLh54iuR25gi6pO+y+NLWMEL+Nit
+         hs7lHfZmEGp7mmtbR5PnDI+N3hcqSX5+nUjpv/o4kZjJn8R2RLZu3SqxCSpXXnX7Rc
+         5UH9UaFD51BWQ==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Carlos Bilbao <carlos.bilbao@amd.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        ardb@kernel.org, kraxel@redhat.com, dovmurik@linux.ibm.com,
+        elena.reshetova@intel.com, dave.hansen@linux.intel.com,
+        Dhaval.Giani@amd.com, michael.day@amd.com,
+        pavankumar.paluri@amd.com, David.Kaplan@amd.com,
+        Reshma.Lal@amd.com, Jeremy.Powell@amd.com,
+        sathyanarayanan.kuppuswamy@linux.intel.com,
+        alexander.shishkin@linux.intel.com, thomas.lendacky@amd.com,
+        tglx@linutronix.de, dgilbert@redhat.com, dinechin@redhat.com,
+        linux-coco@lists.linux.dev, berrange@redhat.com, mst@redhat.com,
+        tytso@mit.edu, jikos@kernel.org, joro@8bytes.org, leon@kernel.org,
+        richard.weinberger@gmail.com, lukas@wunner.de, jejb@linux.ibm.com,
+        cdupontd@redhat.com, jasowang@redhat.com, sameo@rivosinc.com,
+        bp@alien8.de, seanjc@google.com, security@kernel.org,
+        Larry Dewey <larry.dewey@amd.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Subject: Re: [RESEND PATCH v4] docs: security: Confidential computing intro
+ and threat model for x86 virtualization
+In-Reply-To: <98804f27-c2e7-74d6-d671-1eda927e19fe@amd.com>
+References: <20230905152656.1215119-1-carlos.bilbao@amd.com>
+ <2023090537-undesired-junction-b325@gregkh>
+ <4a25cfe8-39d7-1d0f-b89b-2d62bdb085c1@amd.com>
+ <bb5a6655-ebaa-2ddf-0c49-6f1027ccb839@amd.com>
+ <f7700d54-da02-3482-17c5-bbae36799fb5@amd.com>
+ <98804f27-c2e7-74d6-d671-1eda927e19fe@amd.com>
+Date:   Sat, 23 Sep 2023 01:57:20 -0600
+Message-ID: <87v8c15nkv.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-Miltered: at jchkmail2.reseau.jussieu.fr with ID 650E983E.001 by Joe's j-chkmail (http : // j-chkmail dot ensmp dot fr)!
-X-j-chkmail-Enveloppe: 650E983E.001 from mailix1.insp.jussieu.fr/mailix1.insp.jussieu.fr/134.157.37.11/mailix1.insp.jussieu.fr/<lamya.essaoui@insp.upmc.fr>
-X-Spam-Status: Yes, score=5.7 required=5.0 tests=BAYES_50,
-        FREEMAIL_FORGED_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,MISSING_HEADERS,
-        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
-        REPLYTO_WITHOUT_TO_CC,SPF_HELO_NONE,SPF_PASS autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Report: *  0.0 RCVD_IN_DNSWL_BLOCKED RBL: ADMINISTRATOR NOTICE: The query to
-        *      DNSWL was blocked.  See
-        *      http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
-        *      for more information.
-        *      [134.157.0.129 listed in list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.0 RCVD_IN_MSPIKE_H3 RBL: Good reputation (+3)
-        *      [134.157.0.129 listed in wl.mailspike.net]
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [v.cleland10[at]aol.com]
-        *  1.0 MISSING_HEADERS Missing To: header
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  1.6 REPLYTO_WITHOUT_TO_CC No description available.
-        *  0.0 RCVD_IN_MSPIKE_WL Mailspike good senders
-        *  2.1 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
-X-Spam-Level: *****
+Content-Type: text/plain
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
-To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Carlos Bilbao <carlos.bilbao@amd.com> writes:
 
-23. September 2023.
+> Kernel developers working on confidential computing for virtualized
+> environments in x86 operate under a set of assumptions regarding the Linux
+> kernel threat model that differs from the traditional view. Historically,
+> the Linux threat model acknowledges attackers residing in userspace, as
+> well as a limited set of external attackers that are able to interact with
+> the kernel through networking or limited HW-specific exposed interfaces
+> (e.g. USB, thunderbolt). The goal of this document is to explain additional
+> attack vectors that arise in the virtualized confidential computing space.
+>
+> Reviewed-by: Larry Dewey <larry.dewey@amd.com>
+> Reviewed-by: David Kaplan <david.kaplan@amd.com>
+> Co-developed-by: Elena Reshetova <elena.reshetova@intel.com>
+> Signed-off-by: Elena Reshetova <elena.reshetova@intel.com>
+> Signed-off-by: Carlos Bilbao <carlos.bilbao@amd.com>
 
-Hallo,
+This patch was whitespace-corrupted (something wrapped the diff lines)
+making it hard to apply; I was able to fix it up and get git to swallow
+it.  So applied, thanks.
 
-Ich möchte Ihnen einen Geschäftsvorschlag mitteilen. Für weitere  
-Details antworten Sie auf Englisch.
-
-Grüße
-Frau Victoria Cleland
-_________________________
-Sekretärin: Lamya Essaoui
-
+jon
