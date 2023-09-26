@@ -2,92 +2,196 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E9CB57AEA8A
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Sep 2023 12:38:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CA8227AED0A
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Sep 2023 14:41:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229845AbjIZKi1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Sep 2023 06:38:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53904 "EHLO
+        id S234661AbjIZMlh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Sep 2023 08:41:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51704 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231182AbjIZKiZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Sep 2023 06:38:25 -0400
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 3B3A4E5;
-        Tue, 26 Sep 2023 03:38:17 -0700 (PDT)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 429D7DA7;
-        Tue, 26 Sep 2023 03:38:55 -0700 (PDT)
-Received: from [10.1.36.17] (e133047.arm.com [10.1.36.17])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E3E663F6C4;
-        Tue, 26 Sep 2023 03:38:15 -0700 (PDT)
-Message-ID: <efe41cee-42dd-290f-9ec2-ac002e2ec34e@arm.com>
-Date:   Tue, 26 Sep 2023 11:38:14 +0100
+        with ESMTP id S234687AbjIZMlf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Sep 2023 08:41:35 -0400
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id BE9BD19F;
+        Tue, 26 Sep 2023 05:41:27 -0700 (PDT)
+Received: by linux.microsoft.com (Postfix, from userid 1127)
+        id D890820B74C0; Tue, 26 Sep 2023 05:41:26 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com D890820B74C0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+        s=default; t=1695732086;
+        bh=bSYSPlQMrXXrmi4kI3zyUqJNcJHpggDF9TmyAeOoxL4=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=nAvPkYl1/cP7FGrTud/JeIWoRkrUWRU9mHZc5KaLpAcQLe8RBTDASvzTtDZG53CPr
+         9j2qq25sW2gE8tGP8z8Q3vf4AYfH26v70CAUMhsG61MuE5jAh0UDl+jbm8pKKvTNLI
+         H33MoKjfTYaruoPfeiwfAtHzDL9N2ONQM4pwRuxI=
+Date:   Tue, 26 Sep 2023 05:41:26 -0700
+From:   Saurabh Singh Sengar <ssengar@linux.microsoft.com>
+To:     Greg KH <gregkh@linuxfoundation.org>
+Cc:     Saurabh Singh Sengar <ssengar@microsoft.com>,
+        KY Srinivasan <kys@microsoft.com>,
+        Haiyang Zhang <haiyangz@microsoft.com>,
+        "wei.liu@kernel.org" <wei.liu@kernel.org>,
+        Dexuan Cui <decui@microsoft.com>,
+        "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+Subject: Re: [EXTERNAL] Re: [PATCH v4 0/3] UIO driver for low speed Hyper-V
+ devices
+Message-ID: <20230926124126.GA12048@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
+References: <1691132996-11706-1-git-send-email-ssengar@linux.microsoft.com>
+ <2023081215-canine-fragile-0a69@gregkh>
+ <PUZP153MB06350DAEA2384B996519E07EBE1EA@PUZP153MB0635.APCP153.PROD.OUTLOOK.COM>
+ <2023082246-lumping-rebate-4142@gregkh>
+ <20230906122307.GA5737@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH] tracing: document buffer_size_kb more precisely
-Content-Language: en-US
-To:     Zheng Yejian <zhengyejian1@huawei.com>, rostedt@goodmis.org,
-        mhiramat@kernel.org, linux-kernel@vger.kernel.org,
-        linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-References: <cee6d5cd-e15b-3bb1-f867-de467d96d6b5@arm.com>
- <a1ae1bc0-0677-8284-9f18-1171e1dcb175@huawei.com>
-From:   Christian Loehle <christian.loehle@arm.com>
-In-Reply-To: <a1ae1bc0-0677-8284-9f18-1171e1dcb175@huawei.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-3.4 required=5.0 tests=BAYES_00,NICE_REPLY_A,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230906122307.GA5737@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Spam-Status: No, score=-17.5 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_BLOCKED,
+        SPF_HELO_PASS,SPF_PASS,USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 25/09/2023 12:44, Zheng Yejian wrote:
-> On 2023/9/25 18:02, Christian Loehle wrote:
->> buffer_size_kb no longer shows the requested amount, but the one that
->> is actually used internally for the ring buffer.
->>
->> commit 6d98a0f2ac3c ("tracing: Set actual size after ring buffer resize")
->> changed the sysfs behavior such that value read will always show the
->> actual size, while previously it showed the size that was requested
->> through the sysfs interface, even if it was rounded up to fulfill
->> the request.
->> So the documentation can state that more precisely now.
->>
->> Signed-off-by: Christian Loehle <christian.loehle@arm.com>
->> ---
->>   Documentation/trace/ftrace.rst | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/Documentation/trace/ftrace.rst b/Documentation/trace/ftrace.rst
->> index 23572f6697c0..2e066b3b6edc 100644
->> --- a/Documentation/trace/ftrace.rst
->> +++ b/Documentation/trace/ftrace.rst
->> @@ -191,7 +191,7 @@ of ftrace. Here is a list of some of the key files:
->>       A few extra pages may be allocated to accommodate buffer management
->>       meta-data. If the last page allocated has room for more bytes
->>       than requested, the rest of the page will be used,
->> -    making the actual allocation bigger than requested or shown.
->> +    making the actual allocation bigger than requested.
+On Wed, Sep 06, 2023 at 05:23:07AM -0700, Saurabh Singh Sengar wrote:
+> On Tue, Aug 22, 2023 at 01:48:03PM +0200, Greg KH wrote:
+> > On Mon, Aug 21, 2023 at 07:36:18AM +0000, Saurabh Singh Sengar wrote:
+> > > 
+> > > 
+> > > > -----Original Message-----
+> > > > From: Greg KH <gregkh@linuxfoundation.org>
+> > > > Sent: Saturday, August 12, 2023 4:45 PM
+> > > > To: Saurabh Sengar <ssengar@linux.microsoft.com>
+> > > > Cc: KY Srinivasan <kys@microsoft.com>; Haiyang Zhang
+> > > > <haiyangz@microsoft.com>; wei.liu@kernel.org; Dexuan Cui
+> > > > <decui@microsoft.com>; Michael Kelley (LINUX) <mikelley@microsoft.com>;
+> > > > corbet@lwn.net; linux-kernel@vger.kernel.org; linux-hyperv@vger.kernel.org;
+> > > > linux-doc@vger.kernel.org
+> > > > Subject: [EXTERNAL] Re: [PATCH v4 0/3] UIO driver for low speed Hyper-V
+> > > > devices
+> > > > 
+> > > > On Fri, Aug 04, 2023 at 12:09:53AM -0700, Saurabh Sengar wrote:
+> > > > > Hyper-V is adding multiple low speed "speciality" synthetic devices.
+> > > > > Instead of writing a new kernel-level VMBus driver for each device,
+> > > > > make the devices accessible to user space through a UIO-based
+> > > > > hv_vmbus_client driver. Each device can then be supported by a user
+> > > > > space driver. This approach optimizes the development process and
+> > > > > provides flexibility to user space applications to control the key
+> > > > > interactions with the VMBus ring buffer.
+> > > > 
+> > > > Why is it faster to write userspace drivers here?  Where are those new drivers,
+> > > > and why can't they be proper kernel drivers?  Are all hyper-v drivers going to
+> > > > move to userspace now?
+> > > 
+> > > Hi Greg,
+> > > 
+> > > You are correct; it isn't faster. However, the developers working on these userspace
+> > > drivers can concentrate entirely on the business logic of these devices. The more
+> > > intricate aspects of the kernel, such as interrupt management and host communication,
+> > > can be encapsulated within the uio driver.
+> > 
+> > Yes, kernel drivers are hard, we all know that.
+> > 
+> > But if you do it right, it doesn't have to be, saying "it's too hard for
+> > our programmers to write good code for our platform" isn't exactly a
+> > good endorcement of either your programmers, or your platform :)
+> > 
+> > > The quantity of Hyper-V devices is substantial, and their numbers are consistently
+> > > increasing. Presently, all of these drivers are in a development/planning phase and
+> > > rely significantly on the acceptance of this UIO driver as a prerequisite.
+> > 
+> > Don't make my acceptance of something that you haven't submitted before
+> > a business decision that I need to make, that's disenginous.
+> > 
+> > > Not all hyper-v drivers will move to userspace, but many a new slow Hyperv-V
+> > > devices will use this framework and will avoid introducing a new kernel driver. We
+> > > will also plan to remove some of the existing drivers like kvp/vss.
+> > 
+> > Define "slow" please.
 > 
-> Hi, the actual allocation should still be bigger than shown due to the
-> loss of accuracy when doing unit conversion from bytes to kilobytes (see
-> tracing_entries_read()).
+> In the Hyper-V environment, most devices, with the exception of network and storage,
+> typically do not require extensive data read/write exchanges with the host. Such
+> devices are considered to be 'slow' devices.
 > 
-Right, the sysfs obviously only allows for KB aligned setting, but you're right.
-If set on the cmdline non-KB multiples are possible and accuracy is lost.
-Nevermind then.
+> > 
+> > > > > The new synthetic devices are low speed devices that don't support
+> > > > > VMBus monitor bits, and so they must use vmbus_setevent() to notify
+> > > > > the host of ring buffer updates. The new driver provides this
+> > > > > functionality along with a configurable ring buffer size.
+> > > > >
+> > > > > Moreover, this series of patches incorporates an update to the fcopy
+> > > > > application, enabling it to seamlessly utilize the new interface. The
+> > > > > older fcopy driver and application will be phased out gradually.
+> > > > > Development of other similar userspace drivers is still underway.
+> > > > >
+> > > > > Moreover, this patch series adds a new implementation of the fcopy
+> > > > > application that uses the new UIO driver. The older fcopy driver and
+> > > > > application will be phased out gradually. Development of other similar
+> > > > > userspace drivers is still underway.
+> > > > 
+> > > > You are adding a new user api with the "ring buffer" size api, which is odd for
+> > > > normal UIO drivers as that's not something that UIO was designed for.
+> > > > 
+> > > > Why not just make you own generic type uiofs type kernel api if you really
+> > > > want to do all of this type of thing in userspace instead of in the kernel?
+> > > 
+> > > Could you please elaborate more on this suggestion. I couldn't understand it
+> > > completely.
+> > 
+> > Why is uio the requirement here?  Why not make your own framework to
+> > write hv drivers in userspace that fits in better with the overall goal?
+> > Call it "hvfs" or something like that, much like we have usbfs for
+> > writing usb drivers in userspace.
+> > 
+> > Bolting on HV drivers to UIO seems very odd as that is not what this
+> > framework is supposed to be providing at all.  UIO was to enable "pass
+> > through" memory-mapped drivers that only wanted an interrupt and access
+> > to raw memory locations in the hardware.
+> > 
+> > Now you are adding ring buffer managment and all other sorts of things
+> > just for your platform.  So make it a real subsystem tuned exactly for
+> > what you need and NOT try to force it into the UIO interface (which
+> > should know nothing about ring buffers...)
+> 
+> Thank you for elaborating the details. I will drop the plan to introduce a
+> new UIO driver for this effort. However, I would like to know your thoughts
+> on enhancing existing 'uio_hv_generic' driver to achieve the same.  We
+> already have 'uio_hv_generic' driver in linux kernel, which is used for
+> developing userspace drivers for 'fast Hyper-V devices'.
+> 
+> Since these newly introduced synthetic devices operate at a lower speed,
+> they do not have the capability to support monitor bits. Instead, we must
+> utilize the 'vmbus_setevent()' method to enable interrupts from the host.
+> Earlier we made an attempt to support slow devices by uio_hv_generic :
+> https://lore.kernel.org/lkml/1665685754-13971-1-git-send-email-ssengar@linux.microsoft.com/.
+> At that time, the absence of userspace code (fcopy) hindered progress
+> in this direction.
+> 
+> Acknowledging your valid concerns about introducing a new UIO driver for
+> Hyper-V, I propose exploring the potential to enhance the existing
+> 'uio_hv_generic' driver to accommodate slower devices effectively. My
+> commitment to this endeavour includes ensuring the seamless operation of
+> the existing 'fcopy' functionality with the modified 'uio_hv_generic'
+> driver. Additionally, I will undertake the task of removing the current
+> 'fcopy' kernel driver and userspace daemon as part of this effort.
+> 
+> Please let me know your thoughts. I look forward to your feedback and
+> the opportunity to discuss this proposal further. 
 
-> -- 
-> 
-> Thanks,
-> Zheng Yejian
-> 
->>       ( Note, the size may not be a multiple of the page size
->>       due to buffer management meta-data. )
->>   
-> 
+Greg,
 
+May I know if enhancing uio_hv_generic.c to support 'slow devices' is
+an accptable approach ? I'm willing to undertake this task and propose
+the necessary modifications.
+
+- Saurabh
+
+> 
+> - Saurabh
