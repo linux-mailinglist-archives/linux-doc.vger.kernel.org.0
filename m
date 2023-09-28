@@ -2,145 +2,117 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AA0757B25BE
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Sep 2023 21:14:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 348327B26BD
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Sep 2023 22:42:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232202AbjI1TOP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 28 Sep 2023 15:14:15 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58034 "EHLO
+        id S231971AbjI1UmJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 28 Sep 2023 16:42:09 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35476 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232178AbjI1TON (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 28 Sep 2023 15:14:13 -0400
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A5DD31AB;
-        Thu, 28 Sep 2023 12:14:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695928446; x=1727464446;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=mn6nYHQ+REP1+buEIYzgvASYIMVA5gLIDjoJUxkB0Ok=;
-  b=duWY74iPCS0aoa5n5Gjw2tawpKPLUFeu/NI0PYnZv6O8k4rxd0uWWOX/
-   PK7cKYgAWHc0XCTkgg/J4D0ezok4af01egNJRsDdcCUxNf/MJbWBJ3MyP
-   afgLnuek101P3i38jS9+D+a8XCFtxLIsPCczd6HFrzMkw9+7kUbfZZH0L
-   ZQQB6jq0b8CwfAR1RjeyHNKewWZfLdT4ezf1FOuKCbZUTps6k8gTLeaNi
-   s5fVOX9eJb4qN87kpYXHrL1pWYExBeSH6rnaR7KxyuOT+ieJ8DMbSLWX8
-   8X8n/hQLkF6FlRRhEWZuZ3PJjqwt4dJyGVlDtX7jm3EqE3CA3ACBYA3VY
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10847"; a="367213958"
-X-IronPort-AV: E=Sophos;i="6.03,185,1694761200"; 
-   d="scan'208";a="367213958"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Sep 2023 12:14:02 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10847"; a="779020047"
-X-IronPort-AV: E=Sophos;i="6.03,185,1694761200"; 
-   d="scan'208";a="779020047"
-Received: from agluck-desk3.sc.intel.com ([172.25.222.74])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Sep 2023 12:14:01 -0700
-From:   Tony Luck <tony.luck@intel.com>
-To:     Fenghua Yu <fenghua.yu@intel.com>,
-        Reinette Chatre <reinette.chatre@intel.com>,
-        Peter Newman <peternewman@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>, x86@kernel.org
-Cc:     Shaopeng Tan <tan.shaopeng@fujitsu.com>,
-        James Morse <james.morse@arm.com>,
-        Jamie Iles <quic_jiles@quicinc.com>,
-        Babu Moger <babu.moger@amd.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        patches@lists.linux.dev, Tony Luck <tony.luck@intel.com>
-Subject: [PATCH v6 8/8] x86/resctrl: Update documentation with Sub-NUMA cluster changes
-Date:   Thu, 28 Sep 2023 12:13:49 -0700
-Message-ID: <20230928191350.205703-9-tony.luck@intel.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230928191350.205703-1-tony.luck@intel.com>
-References: <20230829234426.64421-1-tony.luck@intel.com>
- <20230928191350.205703-1-tony.luck@intel.com>
+        with ESMTP id S230251AbjI1UmI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 28 Sep 2023 16:42:08 -0400
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:3::133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C7DDC180;
+        Thu, 28 Sep 2023 13:42:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+        Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+        Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+        bh=uohcHr7u7pMqM2o2/Gx8STvthCVsA+nnKExQdSb2SQA=; b=Jbd1Wr9A2d72D1He73iGyRdglY
+        w5qbirxdbvXC5fM+xibzmTrblxHY9GH6BEP/AaDrvPFqlJr/I7+lMN9+NZOdkKCjBurK7wnAxV264
+        0uZk1B1QndRMTADHIwU8Su/zr6Q6VtfXPYH1nj4/H8f3QFvUcsaSf6T54JXe+joFOrYPfZJDW75cO
+        lF785VE2gWN9EeaAs4LAtN7IEmYXUwqHdwa6ONXrDQYYjG2eAdXMBZ6UHyiCT8giKJAwDAFeh9axT
+        Hg2snf7rnfZPgVemOW5W8nIDsVCmcSAxIVTA9hhsv4fMCoAG3CSYE97tPPCbBsZs+zNLXMAR7wybj
+        rxT61bvg==;
+Received: from [50.53.46.231] (helo=[192.168.254.15])
+        by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+        id 1qlxpi-006eoe-19;
+        Thu, 28 Sep 2023 20:42:02 +0000
+Message-ID: <830fb2f0-7965-4156-82e4-5328df0c612c@infradead.org>
+Date:   Thu, 28 Sep 2023 13:42:01 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next v2 2/2] Documentation: dpll: wrap
+ DPLL_CMD_PIN_GET output in a code block
+Content-Language: en-US
+To:     Bagas Sanjaya <bagasdotme@gmail.com>,
+        Linux Networking <netdev@vger.kernel.org>,
+        Linux Documentation <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Cc:     Vadim Fedorenko <vadim.fedorenko@linux.dev>,
+        Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>,
+        Jiri Pirko <jiri@resnulli.us>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "David S. Miller" <davem@davemloft.net>
+References: <20230928052708.44820-1-bagasdotme@gmail.com>
+ <20230928052708.44820-3-bagasdotme@gmail.com>
+From:   Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20230928052708.44820-3-bagasdotme@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-With Sub-NUMA Cluster mode enabled the scope of monitoring resources is
-per-NODE instead of per-L3 cache. Suffixes of directories with "L3" in
-their name refer to Sub-NUMA nodes instead of L3 cache ids.
 
-Users should be aware that SNC mode also affects the amount of L3 cache
-available for allocation within each SNC node.
 
-Signed-off-by: Tony Luck <tony.luck@intel.com>
+On 9/27/23 22:27, Bagas Sanjaya wrote:
+> DPLL_CMD_PIN_GET netlink command output for mux-type pins looks ugly
+> with normal paragraph formatting. Format it as a code block instead.
+> 
+> Reviewed-by: Vadim Fedorenko <vadim.fedorenko@linux.dev>
+> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 
----
+Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Tested-by: Randy Dunlap <rdunlap@infradead.org>
 
-Changes since v5:
+Thanks.
 
-Added addtional details about challenges tracking tasks when SNC
-mode is enabled.
----
- Documentation/arch/x86/resctrl.rst | 34 +++++++++++++++++++++++++++---
- 1 file changed, 31 insertions(+), 3 deletions(-)
+> ---
+>  Documentation/driver-api/dpll.rst | 24 ++++++++++++------------
+>  1 file changed, 12 insertions(+), 12 deletions(-)
+> 
+> diff --git a/Documentation/driver-api/dpll.rst b/Documentation/driver-api/dpll.rst
+> index 01eb4de867036f..69670deb8c4e09 100644
+> --- a/Documentation/driver-api/dpll.rst
+> +++ b/Documentation/driver-api/dpll.rst
+> @@ -119,19 +119,19 @@ with.
+>  If a pin was registered with multiple parent pins, they behave like a
+>  multiple output multiplexer. In this case output of a
+>  ``DPLL_CMD_PIN_GET`` would contain multiple pin-parent nested
+> -attributes with current state related to each parent, like:
+> +attributes with current state related to each parent, like::
+>  
+> -'pin': [{{
+> -  'clock-id': 282574471561216,
+> -  'module-name': 'ice',
+> -  'capabilities': 4,
+> -  'id': 13,
+> -  'parent-pin': [
+> -  {'parent-id': 2, 'state': 'connected'},
+> -  {'parent-id': 3, 'state': 'disconnected'}
+> -  ],
+> -  'type': 'synce-eth-port'
+> -  }}]
+> +        'pin': [{{
+> +          'clock-id': 282574471561216,
+> +          'module-name': 'ice',
+> +          'capabilities': 4,
+> +          'id': 13,
+> +          'parent-pin': [
+> +          {'parent-id': 2, 'state': 'connected'},
+> +          {'parent-id': 3, 'state': 'disconnected'}
+> +          ],
+> +          'type': 'synce-eth-port'
+> +          }}]
+>  
+>  Only one child pin can provide its signal to the parent MUX-type pin at
+>  a time, the selection is done by requesting change of a child pin state
 
-diff --git a/Documentation/arch/x86/resctrl.rst b/Documentation/arch/x86/resctrl.rst
-index cb05d90111b4..d6b6a4cfd967 100644
---- a/Documentation/arch/x86/resctrl.rst
-+++ b/Documentation/arch/x86/resctrl.rst
-@@ -345,9 +345,15 @@ When control is enabled all CTRL_MON groups will also contain:
- When monitoring is enabled all MON groups will also contain:
- 
- "mon_data":
--	This contains a set of files organized by L3 domain and by
--	RDT event. E.g. on a system with two L3 domains there will
--	be subdirectories "mon_L3_00" and "mon_L3_01".	Each of these
-+	This contains a set of files organized by L3 domain or by NUMA
-+	node (depending on whether Sub-NUMA Cluster (SNC) mode is disabled
-+	or enabled respectively) and by RDT event. E.g. on a system with
-+	SNC mode disabled with two L3 domains there will be subdirectories
-+	"mon_L3_00" and "mon_L3_01". The numerical suffix refers to the
-+	L3 cache id.  With SNC enabled the directory names are the same,
-+	but the numerical suffix refers to the node id.
-+	Mappings from node ids to CPUs are available in the
-+	/sys/devices/system/node/node*/cpulist files. Each of these
- 	directories have one file per event (e.g. "llc_occupancy",
- 	"mbm_total_bytes", and "mbm_local_bytes"). In a MON group these
- 	files provide a read out of the current value of the event for
-@@ -452,6 +458,28 @@ and 0xA are not.  On a system with a 20-bit mask each bit represents 5%
- of the capacity of the cache. You could partition the cache into four
- equal parts with masks: 0x1f, 0x3e0, 0x7c00, 0xf8000.
- 
-+Notes on Sub-NUMA Cluster mode
-+==============================
-+When SNC mode is enabled the "llc_occupancy", "mbm_total_bytes", and
-+"mbm_local_bytes" will only give meaningful results for well behaved NUMA
-+applications. I.e. those that perform the majority of memory accesses
-+to memory on the local NUMA node to the CPU where the task is executing.
-+Note that Linux may load balance tasks between Sub-NUMA nodes much
-+more readily than between regular NUMA nodes since the CPUs on SNC
-+share the same L3 cache and the system may report the NUMA distance
-+between SNC nodes with a lower value than used for regular NUMA nodes.
-+Tasks that migrate between nodes will have their traffic recorded by the
-+counters in different SNC nodes so a user will need to read mon_data
-+files from each node on which the task executed to get the full
-+view of traffic for which the task was the source.
-+
-+
-+The cache allocation feature still provides the same number of
-+bits in a mask to control allocation into the L3 cache. But each
-+of those ways has its capacity reduced because the cache is divided
-+between the SNC nodes. The values reported in the resctrl
-+"size" files are adjusted accordingly.
-+
- Memory bandwidth Allocation and monitoring
- ==========================================
- 
 -- 
-2.41.0
-
+~Randy
