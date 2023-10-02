@@ -2,49 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8C7017B538A
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Oct 2023 15:01:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 678847B53D4
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Oct 2023 15:25:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237263AbjJBNAq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 2 Oct 2023 09:00:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49420 "EHLO
+        id S237249AbjJBNPl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 2 Oct 2023 09:15:41 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40198 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237226AbjJBNAp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 2 Oct 2023 09:00:45 -0400
+        with ESMTP id S236163AbjJBNPk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 2 Oct 2023 09:15:40 -0400
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9B32199;
-        Mon,  2 Oct 2023 06:00:42 -0700 (PDT)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0088AC433C8;
-        Mon,  2 Oct 2023 13:00:39 +0000 (UTC)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1CF7FB0;
+        Mon,  2 Oct 2023 06:15:37 -0700 (PDT)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5E39C433C9;
+        Mon,  2 Oct 2023 13:15:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1696251642;
-        bh=HeArIM02Qnv4lwvTAbzTJtNzOGPD/ms1sGZR8dVdPZ0=;
+        s=k20201202; t=1696252536;
+        bh=B6iYHIElwIzFfW1kEOYhbnZcXC5/SesXlHfl5FN/qhI=;
         h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=un6g0REdKqioq485uu78vWvDhqMLUyvRMuQyUp/Zcxw44DYckmgzNIhvn1qXxtRew
-         olsuG2AXkzRftazezlM7rYsZ51CYuWpPkZOhIADL72qkiPNPNESHCjCQZ4Q8PhwRBf
-         oEyTb7ufy3Yf4vpTkQ6slSLznxiVpyXoVz9NkxoRqhqM8Rzv3H77CZCNzzzwFO62Vb
-         3y3vK15aiP9AdkD0j1i5vXUgtMQ2wqXkxCyiCNSOiKhVZooeQiHbpPFq48Zugs37bH
-         61uIWW/HWNCfTHydeSRaa2+6HeGOD2fI+vJrKRhbtXsXom2elWVQouy4mG1QES/iS3
-         FZxC7Ilj75UaQ==
-Date:   Mon, 2 Oct 2023 14:00:37 +0100
+        b=U19DuZT2axXDVYL44w3U/mnQqQeDTkk5uwSov3qWYRqWBeUuZ2PIEBUcxLrCGVPza
+         OVMA+5MelERKbT59UYSqHXY7Axomv9vVYasRrUoFKbXtWxtdsObS1lT8Vv2xiXMh3c
+         GD6l68zegUpbwTxzJaQgvPkcZJZVkNeSz+jvHQSMq2UhaOqWq8qlD3361hSkBd48TS
+         uIAvMuXbqwsL4jkLaBllPkP33HTTmMBwRd5lJ2wl5vsNBJgITEiG7/s8iBZCB6pT02
+         9IrstpOVn1W6SowOyCRaRNrgZwydRfX0qZhUGIAntotqul4if5GuLaSB66YLnU/J7X
+         HQYTMc5GcTeMA==
+Date:   Mon, 2 Oct 2023 14:15:28 +0100
 From:   Conor Dooley <conor@kernel.org>
-To:     Antoniu Miclaus <antoniu.miclaus@analog.com>
-Cc:     Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Rob Herring <robh+dt@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] dt-bindings: hwmon: ltc2991: add bindings
-Message-ID: <20231002-babbling-justice-73d3601a71aa@spud>
-References: <20231002101835.39624-1-antoniu.miclaus@analog.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Costa Shulyupin <costa.shul@redhat.com>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Federico Vaga <federico.vaga@vaga.pv.it>,
+        Alex Shi <alexs@kernel.org>,
+        Yanteng Si <siyanteng@loongson.cn>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Atish Patra <atishp@rivosinc.com>,
+        Alexandre Ghiti <alexghiti@rivosinc.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        =?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@rivosinc.com>,
+        Andrew Jones <ajones@ventanamicro.com>,
+        Evan Green <evan@rivosinc.com>,
+        Conor Dooley <conor.dooley@microchip.com>,
+        Heiko Stuebner <heiko@sntech.de>,
+        Andy Chiu <andy.chiu@sifive.com>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Greentime Hu <greentime.hu@sifive.com>,
+        Anup Patel <anup@brainfault.org>,
+        Bagas Sanjaya <bagasdotme@gmail.com>,
+        Charlie Jenkins <charlie@rivosinc.com>,
+        Vincent Chen <vincent.chen@sifive.com>,
+        Wu XiangCheng <bobwxc@email.cn>,
+        Sami Tolvanen <samitolvanen@google.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org, workflows@vger.kernel.org
+Subject: Re: [PATCH] docs: move riscv under arch
+Message-ID: <20231002-panoramic-submersed-7f5bfd8d1e76@spud>
+References: <20230928103134.2779459-1-costa.shul@redhat.com>
+ <20230930-mauve-jargon-0f7760fd262d@spud>
+ <87h6nbka8x.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="4qGEe174rhPUIzeC"
+        protocol="application/pgp-signature"; boundary="i+dS31zP9Nq/Ihv5"
 Content-Disposition: inline
-In-Reply-To: <20231002101835.39624-1-antoniu.miclaus@analog.com>
+In-Reply-To: <87h6nbka8x.fsf@meer.lwn.net>
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
         RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
@@ -56,182 +79,54 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 
---4qGEe174rhPUIzeC
+--i+dS31zP9Nq/Ihv5
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hey,
-
-On Mon, Oct 02, 2023 at 01:18:14PM +0300, Antoniu Miclaus wrote:
-> Add dt-bindings for ltc2991 octal i2c voltage, current and temperature
-> monitor.
+On Sat, Sep 30, 2023 at 08:26:38AM -0600, Jonathan Corbet wrote:
+> Conor Dooley <conor@kernel.org> writes:
 >=20
-> Signed-off-by: Antoniu Miclaus <antoniu.miclaus@analog.com>
-> ---
-> changes in v2:
->  - make compatible const type
->  - remove `|` where not necessary
->  - switch to micro-ohms for the shunt resistor property
->  - add vendor prefix for temperature-enable
-
-Thanks for the updates...
-
->  .../bindings/hwmon/adi,ltc2991.yaml           | 114 ++++++++++++++++++
->  1 file changed, 114 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/hwmon/adi,ltc2991.y=
-aml
+> > On Thu, Sep 28, 2023 at 01:29:42PM +0300, Costa Shulyupin wrote:
+> >> and fix all in-tree references.
+> >>=20
+> >> Architecture-specific documentation is being moved into Documentation/=
+arch/
+> >> as a way of cleaning up the top-level documentation directory and maki=
+ng
+> >> the docs hierarchy more closely match the source hierarchy.
+> >>=20
+> >> Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
+> >
+> > This doesn't apply to riscv/for-next or next/master, with git
+> > complaining about the sha1 being lacking or useless. What does this
+> > actually apply to?
 >=20
-> diff --git a/Documentation/devicetree/bindings/hwmon/adi,ltc2991.yaml b/D=
-ocumentation/devicetree/bindings/hwmon/adi,ltc2991.yaml
-> new file mode 100644
-> index 000000000000..3811ea07a04f
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/hwmon/adi,ltc2991.yaml
-> @@ -0,0 +1,114 @@
-> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +
-> +$id: http://devicetree.org/schemas/hwmon/adi,ltc2991.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Analog Devices LTC2991 Octal I2C Voltage, Current and Temperature=
- Monitor
-> +
-> +maintainers:
-> +  - Antoniu Miclaus <antoniu.miclaus@analog.com>
-> +
-> +description: |
-> +  The LTC2991 is used to monitor system temperatures, voltages and curre=
-nts.
-> +  Through the I2C serial interface, the eight monitors can individually =
-measure
-> +  supply voltages and can be paired for differential measurements of cur=
-rent
-> +  sense resistors or temperature sensing transistors.
-> +
-> +  Datasheet:
-> +    https://www.analog.com/en/products/ltc2991.html
-> +
-> +properties:
-> +  compatible:
-> +    const: adi,ltc2991
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  '#address-cells':
-> +    const: 1
-> +
-> +  '#size-cells':
-> +    const: 0
-> +
-> +  vcc-supply: true
-> +
-> +patternProperties:
-> +  "^channel@[0-3]$":
-> +    type: object
-> +    description:
-> +      Represents the differential/temperature channels.
-> +
-> +    properties:
-> +      reg:
-> +        description:
-> +          The channel number. LTC2991 can monitor 4 currents/temperature=
-s.
-> +        items:
-> +          minimum: 0
-> +          maximum: 3
-> +
-> +      shunt-resistor-micro-ohms:
-> +        description:
-> +          The value of curent sense resistor in miliohms. Enables differ=
-ential
-> +          input pair.
-> +
-> +      adi,temperature-enable:
-> +        description:
-> +          Enables temperature readings for a input pair.
-> +        type: boolean
+> docs-next, I would guess (though I haven't had a chance to try it).
 
-=2E..but I did not see an answer to my question on v1:
-	TBH, this seems like it is used just to control software behaviour.
-	Why would you want to actually disable this in DT?
-In other words, is there something in that hardware that precludes
-measuring temperature for channels that do not contain this property?
+I'm far from the world's best git-er, but doesn't the lacking or useless
+report from git while trying to apply the patches mean that this patch
+depended on commit that is not in next/master (which I assume includes
+docs-next).
 
-Thanks,
-Conor.
+> If
+> you would like to carry this through the riscv tree (which is probably
+> the most sensible option), I suspect Costa could be talked into
+> respinning it...?
 
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - vcc-supply
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    i2c {
-> +        #address-cells =3D <1>;
-> +        #size-cells =3D <0>;
-> +
-> +        hwmon@48 {
-> +            compatible =3D "adi,ltc2991";
-> +            reg =3D <0x48>;
-> +            vcc-supply =3D <&vcc>;
-> +        };
-> +    };
-> +  - |
-> +    i2c {
-> +        #address-cells =3D <1>;
-> +        #size-cells =3D <0>;
-> +
-> +        hwmon@48 {
-> +            #address-cells =3D <1>;
-> +            #size-cells =3D <0>;
-> +
-> +            compatible =3D "adi,ltc2991";
-> +            reg =3D <0x48>;
-> +            vcc-supply =3D <&vcc>;
-> +
-> +            channel@0 {
-> +                    reg =3D <0x0>;
-> +                    shunt-resistor-micro-ohms =3D <100000>;
-> +            };
-> +
-> +            channel@1 {
-> +                    reg =3D <0x1>;
-> +                    shunt-resistor-micro-ohms =3D <100000>;
-> +            };
-> +
-> +            channel@2 {
-> +                    reg =3D <0x2>;
-> +                    temperature-enable;
-> +            };
-> +
-> +            channel@3 {
-> +                    reg =3D <0x3>;
-> +                    temperature-enable;
-> +            };
-> +        };
-> +    };
-> +...
-> --=20
-> 2.42.0
->=20
+I'm not the maintainer of the riscv tree, so not my call.
+I was just going through the things that failed in our patchwork
+automation and trying to figure out why :)
 
---4qGEe174rhPUIzeC
+--i+dS31zP9Nq/Ihv5
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZRq+9QAKCRB4tDGHoIJi
-0ueTAQDx05+Ro78ZLvC9iBZWPPBFodIfIuTafvjJsOC7s0x3+gEA7X0AM0o7Hrjo
-L0CXzkMCQDQOz309zfkOE0uTkrcVIwc=
-=EQhT
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZRrCcAAKCRB4tDGHoIJi
+0gjTAQDVMgVoBfsUh5hwUwlsYqi1M3NgobI07TRun4p/0YUQjwD+O3zHXBw+jdKb
+2nIxkjbyGVV4hPB7LuOvbrDj9IOsGgQ=
+=+wV3
 -----END PGP SIGNATURE-----
 
---4qGEe174rhPUIzeC--
+--i+dS31zP9Nq/Ihv5--
