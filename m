@@ -2,223 +2,139 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5CBEA7BA3A3
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Oct 2023 17:58:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 45F2F7B9FD1
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Oct 2023 16:30:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237975AbjJEP6I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Oct 2023 11:58:08 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58972 "EHLO
+        id S233486AbjJEOaN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Oct 2023 10:30:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37148 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234343AbjJEP45 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Oct 2023 11:56:57 -0400
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.88])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AB43D1FF6;
-        Thu,  5 Oct 2023 06:54:23 -0700 (PDT)
+        with ESMTP id S234145AbjJEO2c (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Oct 2023 10:28:32 -0400
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.115])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3D5BE1BE3;
+        Thu,  5 Oct 2023 06:50:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1696514063; x=1728050063;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=qcqlSd45Ur/LH7CJlCyTk2EepE96QaK1wHKtt948p1I=;
-  b=hHv8Wv4lsjZqAb1aWyg2cFlvkLefd+pMOOLA/3J7TUDvF2z7bZLLzBp/
-   137aCORMTHcWjz9lSV7HGhkDFoA75cwd6o3ynCZ+apuWDGJXlaAdV8Mb4
-   jK9f2PiOYmEe/V2aLN0XOudnEZ9zl92XUp5MLb54RTW6gj3NCuPJ1plsW
-   Gcqrx4nOqIvlldVTHwLI5hw6LG4TF1IbtDbNDMMgUNKabFex6hvJz39kk
-   Osov32f3A7qFwbtmwWwcpWOJg42xHle/Ri0dcOQxQ7WUjCx8G2EVQ4lsr
-   iUVcQd8GPUlWBgxNtvxe4NDfa5to7uZvlLGjzQWhTgkWpy3RRZWjfW2Px
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10853"; a="414405663"
+  t=1696513800; x=1728049800;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=kBxCGjZW2FJhQ282tkABZbg5NvDP8ru8sP0OrIfFg3Y=;
+  b=CdRn38pa5y1n0KzSfqKaFrWdcFXryBYUef4pF+cadbHpWUu8uKGEvMOD
+   hubK03SK5r7tf6zZz8o98aXm91UkQ9WHQJvufajpJjUu2GTF1eNCrDeTO
+   2w4duqWTeyeKho1o0wJHBSfMjV7sDKU4MuKWUCF0s1o4RNetM3a3Mc2TO
+   BvKelDzRrsdpWH1K1ljVR1awE5denSGxPlMa2it7jeCxeZzOanvz/3mEG
+   A6pvzlFzeUzWpchbbLivOi+MZal3lzd8gX471/WQuIGda6Pj6gBvn7SNQ
+   BGiDfT/hNfsCSjN5eeOipFa7lFYQ4tEsGYsCb0JS9HTpObGkHCyoH66jy
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10853"; a="383339485"
 X-IronPort-AV: E=Sophos;i="6.03,202,1694761200"; 
-   d="scan'208";a="414405663"
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Oct 2023 01:15:32 -0700
+   d="scan'208";a="383339485"
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Oct 2023 01:16:32 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10853"; a="822024582"
+X-IronPort-AV: E=McAfee;i="6600,9927,10853"; a="875477082"
 X-IronPort-AV: E=Sophos;i="6.03,202,1694761200"; 
-   d="scan'208";a="822024582"
+   d="scan'208";a="875477082"
 Received: from lpopiela-mobl.ger.corp.intel.com (HELO wieczorr-mobl1.intel.com) ([10.213.13.229])
-  by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Oct 2023 01:15:27 -0700
+  by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Oct 2023 01:16:27 -0700
 From:   Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
-To:     fenghua.yu@intel.com, reinette.chatre@intel.com,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, corbet@lwn.net
-Cc:     x86@kernel.org, hpa@zytor.com, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, ilpo.jarvinen@linux.intel.com
-Subject: [PATCH v4 0/4] x86/resctrl: Non-contiguous bitmasks in Intel CAT
-Date:   Thu,  5 Oct 2023 10:14:52 +0200
-Message-ID: <cover.1696493034.git.maciej.wieczor-retman@intel.com>
+To:     Fenghua Yu <fenghua.yu@intel.com>,
+        Reinette Chatre <reinette.chatre@intel.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        "H. Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>
+Cc:     Peter Newman <peternewman@google.com>,
+        =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: [PATCH v4 4/4] Documentation/x86: Document resctrl's new sparse_masks
+Date:   Thu,  5 Oct 2023 10:15:39 +0200
+Message-ID: <7bbdf55ac6f909a6701915d99d79c8f9977bd0b4.1696493034.git.maciej.wieczor-retman@intel.com>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <cover.1696493034.git.maciej.wieczor-retman@intel.com>
+References: <cover.1696493034.git.maciej.wieczor-retman@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
-        SPF_HELO_NONE,SPF_NONE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_NONE,URIBL_BLOCKED
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Until recently Intel CPUs didn't support using non-contiguous 1s
-in Cache Allocation Technology (CAT). Writing a bitmask with
-non-contiguous 1s to the resctrl schemata file would fail.
+From: Fenghua Yu <fenghua.yu@intel.com>
 
-Intel CPUs that support non-contiguous 1s can be identified through a
-CPUID leaf mentioned in the "Intel® 64 and IA-32 Architectures
-Software Developer’s Manual" document available at:
-https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html
+The documentation mentions that non-contiguous bit masks are not
+supported in Intel Cache Allocation Technology (CAT).
 
-Add kernel support for detecting if non-contiguous 1s in Cache
-Allocation Technology (CAT) are supported by the hardware. Also add a
-new resctrl FS file to output this information to the userspace.
-Keep the hardcoded value for Haswell CPUs only since they do not have
-CPUID enumeration support for Cache allocation.
+Update the documentation on how to determine if sparse bit masks are
+allowed in L2 and L3 CAT.
 
-Since the selftests/resctrl files are going through many rewrites and
-cleanups the appropriate selftest is still a work in progress. For
-basic selftesting capabilities use the bash script attached below this
-paragraph. It checks whether various bitmasks written into resctrl FS
-generate output consistent with reported feature support.
+Mention the file with feature support information is located in
+the /sys/fs/resctrl/info/{resource}/ directories and enumerate what
+are the possible outputs on file read operation.
 
-#!/bin/bash
-# must be run as root, depends on a recent cpuid tool (20230406 or later)
-# variables
-RESCTRL_INFO="/sys/fs/resctrl/info"
-L3_NON_CONT_VAL="${RESCTRL_INFO}/L3/sparse_masks"
-L2_NON_CONT_VAL="${RESCTRL_INFO}/L2/sparse_masks"
-L3_NON_CONT_CBM="${RESCTRL_INFO}/L3/cbm_mask"
-L2_NON_CONT_CBM="${RESCTRL_INFO}/L2/cbm_mask"
-L3_CPUID_CMD="cpuid -1 -l 0x10 -s 0x01"
-L2_CPUID_CMD="cpuid -1 -l 0x10 -s 0x02"
-PASSED_TESTS=0
-L3_SUPPORT=0
-L2_SUPPORT=0
-TESTS=0
-
-run_test() {
-        # L2 or L3
-        CACHE_LEVEL=$1
-        CACHE_LEVEL_SUPPORT="${CACHE_LEVEL}_SUPPORT"
-        echo "Checking ${RESCTRL_INFO}/${CACHE_LEVEL}..."
-        if [[ -d "${RESCTRL_INFO}/${CACHE_LEVEL}" ]]; then
-                eval "${CACHE_LEVEL_SUPPORT}=1"
-                echo "${CACHE_LEVEL} CAT Feature is supported"
-        else
-                echo "${CACHE_LEVEL} CAT Feature is not supported"
-        fi
-
-        if [[ ${!CACHE_LEVEL_SUPPORT} -eq 1 ]]; then
-                echo " --- Running tests for ${CACHE_LEVEL} CAT ---"
-
-                # read sysfs entries
-                # are non-contiguous cbm supported? (driver sysfs)
-                eval "NON_CONT_VAL=${CACHE_LEVEL}_NON_CONT_VAL"
-                eval "NON_CONT_FEAT=$( cat ${!NON_CONT_VAL} )"
-
-                # are non-contiguous cbm supported? (cpuid)
-                CACHE_CPUID_CMD="${CACHE_LEVEL}_CPUID_CMD"
-                NONCONT_CPUID=$(${!CACHE_CPUID_CMD} | grep non-contiguous | grep true)
-                NONCONT_CPUID_RET=$(( !$? ))
-
-                # what is the mask size?
-                eval "NON_CONT_CBM=${CACHE_LEVEL}_NON_CONT_CBM"
-                MAX_MASK=$(( 16#$( cat ${!NON_CONT_CBM} ) ))
-
-                # prepare contiguous and non-contiguous masks for tests
-                BC_STRING="l(${MAX_MASK})/l(2)"
-                MAX_MASK_BIT_COUNT=$(echo ${BC_STRING} | bc -l)
-                MAX_MASK_BIT_COUNT=$(printf "%.0f" "$MAX_MASK_BIT_COUNT")
-                BITSHIFT=$(( $MAX_MASK_BIT_COUNT/2 - ($MAX_MASK_BIT_COUNT/2 % 4) ))
-                CONT_MASK=$(( $MAX_MASK >> $BITSHIFT ))
-                NONCONT_MASK=$(( ~( $MAX_MASK & ( 15<<$BITSHIFT) ) ))
-                NONCONT_MASK=$(( $NONCONT_MASK & $MAX_MASK ))
-
-                # test if cpuid reported support matches the sysfs one
-                echo " * Testing if CPUID matches ${CACHE_LEVEL}/sparse_masks..."
-                TESTS=$((TESTS + 1))
-                if [[ $NONCONT_CPUID_RET -eq $NON_CONT_FEAT ]]; then
-                        PASSED_TESTS=$((PASSED_TESTS + 1))
-                        echo "There is a match!"
-                else
-                        echo "Error - no match!"
-                fi
-
-                # test by writing CBMs to the schemata
-                printf " * Writing 0x%x mask to the schemata...\n" ${CONT_MASK}
-                TESTS=$((TESTS + 1))
-                SCHEMATA=$(printf "${CACHE_LEVEL}:0=%x" $CONT_MASK)
-                echo "$SCHEMATA" > /sys/fs/resctrl/schemata
-                if [[ $? -eq 0 ]]; then
-                        PASSED_TESTS=$((PASSED_TESTS + 1))
-                        echo "Contiguous ${CACHE_LEVEL} write correct!"
-                else
-                        echo "Contiguous ${CACHE_LEVEL} write ERROR!"
-                fi
-
-                printf " * Writing 0x%x mask to the schemata...\n" ${NONCONT_MASK}
-                TESTS=$((TESTS + 1))
-                SCHEMATA=$(printf "${CACHE_LEVEL}:0=%x" $NONCONT_MASK)
-                echo "$SCHEMATA" > /sys/fs/resctrl/schemata
-                if [[ (($? -eq 0) && ($NON_CONT_FEAT -eq 1)) || \
-                        (($? -ne 0) && ($NON_CONT_FEAT -eq 0)) ]]; then
-                        PASSED_TESTS=$((PASSED_TESTS + 1))
-                        echo "Non-contiguous ${CACHE_LEVEL} write correct!"
-                else
-                        echo "Non-contiguous ${CACHE_LEVEL} write ERROR!"
-                fi
-        fi
-}
-
-# mount resctrl
-mount -t resctrl resctrl /sys/fs/resctrl
-
-run_test L3
-run_test L2
-
-echo "TESTS PASSED / ALL TESTS : ${PASSED_TESTS} / ${TESTS}"
-
-# unmount resctrl
-umount /sys/fs/resctrl
-
+Signed-off-by: Fenghua Yu <fenghua.yu@intel.com>
+Signed-off-by: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
+Tested-by: Peter Newman <peternewman@google.com>
+Reviewed-by: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com>
+Reviewed-by: Peter Newman <peternewman@google.com>
+Reviewed-by: Reinette Chatre <reinette.chatre@intel.com>
+---
 Changelog v4:
-- Added Ilpo's reviewed-by tags.
-- Added Reinette's reviewed-by tags.
-- Reordered tags in alignment with maintainer-tip.rst.
+- Add Ilpo's reviewed-by tag.
+- Add Reinette's reviewed-by tag.
 
 Changelog v3:
 - Add Peter's tested-by and reviewed-by tags.
-- Change patch order to make 4th one the 1st.
-- Add error checking to schema_len variable.
-- Update cover letter since now the feature has moved from the SDM.
 
 Changelog v2:
-- Change git signature from Wieczor-Retman Maciej to Maciej
-  Wieczor-Retman.
-- Change bitmap naming convention to bit mask.
-- Add patch to change arch_has_sparse_bitmaps name to match bitmask
-  naming convention.
+- Change bitmap naming convention to bit mask. (Reinette)
 
-Fenghua Yu (2):
-  x86/resctrl: Add sparse_masks file in info
-  Documentation/x86: Document resctrl's new sparse_masks
+ Documentation/arch/x86/resctrl.rst | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
 
-Maciej Wieczor-Retman (2):
-  x86/resctrl: Rename arch_has_sparse_bitmaps
-  x86/resctrl: Enable non-contiguous CBMs in Intel CAT
-
- Documentation/arch/x86/resctrl.rst        | 16 ++++++++++++----
- arch/x86/kernel/cpu/resctrl/core.c        | 11 +++++++----
- arch/x86/kernel/cpu/resctrl/ctrlmondata.c | 14 ++++++++------
- arch/x86/kernel/cpu/resctrl/internal.h    |  9 +++++++++
- arch/x86/kernel/cpu/resctrl/rdtgroup.c    | 18 ++++++++++++++++++
- include/linux/resctrl.h                   |  4 ++--
- 6 files changed, 56 insertions(+), 16 deletions(-)
-
-
-base-commit: 27bbf45eae9ca98877a2d52a92a188147cd61b07
+diff --git a/Documentation/arch/x86/resctrl.rst b/Documentation/arch/x86/resctrl.rst
+index cb05d90111b4..4c6421e2aa31 100644
+--- a/Documentation/arch/x86/resctrl.rst
++++ b/Documentation/arch/x86/resctrl.rst
+@@ -124,6 +124,13 @@ related to allocation:
+ 			"P":
+ 			      Corresponding region is pseudo-locked. No
+ 			      sharing allowed.
++"sparse_masks":
++		Indicates if non-contiguous 1s value in CBM is supported.
++
++			"0":
++			      Only contiguous 1s value in CBM is supported.
++			"1":
++			      Non-contiguous 1s value in CBM is supported.
+ 
+ Memory bandwidth(MB) subdirectory contains the following files
+ with respect to allocation:
+@@ -445,12 +452,13 @@ For cache resources we describe the portion of the cache that is available
+ for allocation using a bitmask. The maximum value of the mask is defined
+ by each cpu model (and may be different for different cache levels). It
+ is found using CPUID, but is also provided in the "info" directory of
+-the resctrl file system in "info/{resource}/cbm_mask". Intel hardware
++the resctrl file system in "info/{resource}/cbm_mask". Some Intel hardware
+ requires that these masks have all the '1' bits in a contiguous block. So
+ 0x3, 0x6 and 0xC are legal 4-bit masks with two bits set, but 0x5, 0x9
+-and 0xA are not.  On a system with a 20-bit mask each bit represents 5%
+-of the capacity of the cache. You could partition the cache into four
+-equal parts with masks: 0x1f, 0x3e0, 0x7c00, 0xf8000.
++and 0xA are not. Check /sys/fs/resctrl/info/{resource}/sparse_masks
++if non-contiguous 1s value is supported. On a system with a 20-bit mask
++each bit represents 5% of the capacity of the cache. You could partition
++the cache into four equal parts with masks: 0x1f, 0x3e0, 0x7c00, 0xf8000.
+ 
+ Memory bandwidth Allocation and monitoring
+ ==========================================
 -- 
 2.42.0
 
