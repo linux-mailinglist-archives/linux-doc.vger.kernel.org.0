@@ -2,59 +2,77 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 253D67B9E9E
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Oct 2023 16:10:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F06297BA078
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Oct 2023 16:41:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230183AbjJEOJg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Oct 2023 10:09:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37160 "EHLO
+        id S236710AbjJEOgw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Oct 2023 10:36:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36770 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230005AbjJEOH3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Oct 2023 10:07:29 -0400
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com [IPv6:2a00:1450:4864:20::62b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9E15A26A50;
-        Thu,  5 Oct 2023 05:37:16 -0700 (PDT)
-Received: by mail-ej1-x62b.google.com with SMTP id a640c23a62f3a-9b2cee55056so174066266b.3;
-        Thu, 05 Oct 2023 05:37:16 -0700 (PDT)
+        with ESMTP id S236361AbjJEOet (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Oct 2023 10:34:49 -0400
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com [IPv6:2607:f8b0:4864:20::134])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 961A25FD9
+        for <linux-doc@vger.kernel.org>; Thu,  5 Oct 2023 06:54:31 -0700 (PDT)
+Received: by mail-il1-x134.google.com with SMTP id e9e14a558f8ab-351367c1c24so83035ab.1
+        for <linux-doc@vger.kernel.org>; Thu, 05 Oct 2023 06:54:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1696514071; x=1697118871; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ew9CTKew+cNKDMIx1MC3uW3wssgAAZXIEhM/ZHhaWJ0=;
+        b=ZU/yLukFeVmcKvKlY+iMHuAbTYDvxfieDlgQsMpJ/l59yvkp7yp3qnirhhTDkKvEKN
+         tlwszgrbeFMamHOPP6NyY2EEpNYvwqB8+trVCm5BuKNLgKw7NoyG8JAfAOJj2Uz0UlJf
+         0h7yCoGtKHMHPgTTDJ6gEEHcR0teJh0m0R0qjoRYWdLgOEAgUL4yIAENpGZkp8xSkFpB
+         6bk+tb2qxjhK5iqQoyeYM819rAx9HjozH6hC9y1Ywjvqoksk6jng7YGX/gjTIvIiW+mS
+         TTOnpZvU9Sn64KSiB22apUS0HnYlFPh+9X+qemU6Cgnf/w5XzVmF2Dwi5sk7/EhzEfxi
+         gntQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696509433; x=1697114233;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1696514071; x=1697118871;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=g1QRKkBNjznWASHX/P+4TGpYOnsgJ03ZF7D0qhU3Ymk=;
-        b=THZhQKjBURgWFrHOguq0FKgavxdXtW620tLZcSdNpjWRChw9exBJYzQRfok/Ak9Wj9
-         kn7JCff//bOBiALqTsFWDEyagWD0s3GJIQvtr7uYbNznitbeTEe1wJStwX96/TTuz6QJ
-         r4gbdA3jI91SMZ9z8JHwgFToFQrfq7tAEYFDTrvFIw4bYVf8rlbJ8pjlxeV8wQffnX5X
-         3SQG0jMmhHSoyvr9+Cp2it40DJPR/kWXoFEl/uJHCl2Lf1VfECgHIKWYXON+77gbZ03k
-         YRSilmTofOfGykgwQVxKZp+3/7y2M51bXVe2k0XhI+B34sKyLFpHCSLpi49jbgRmIlTd
-         44oQ==
-X-Gm-Message-State: AOJu0Yy6fuD89YdQTndK7yXcQ8ASSqz9V7Bui/U1iBxWsn2ko50DKvdV
-        YK1TLTo/zbW/OXvKdfypPZU=
-X-Google-Smtp-Source: AGHT+IEFrhWzf73Qi+s9hSUvWpt+21JCI4T91oVdGuvxeB+YC2q1crDLgs/yjf+gkDjXUoiymGjgvQ==
-X-Received: by 2002:a17:906:3051:b0:9a5:7759:19c0 with SMTP id d17-20020a170906305100b009a5775919c0mr4687111ejd.64.1696509432977;
-        Thu, 05 Oct 2023 05:37:12 -0700 (PDT)
-Received: from localhost (fwdproxy-cln-007.fbsv.net. [2a03:2880:31ff:7::face:b00c])
-        by smtp.gmail.com with ESMTPSA id e25-20020a1709062c1900b009adc77fe164sm1156979ejh.66.2023.10.05.05.37.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Oct 2023 05:37:12 -0700 (PDT)
-From:   Breno Leitao <leitao@debian.org>
-To:     jlbec@evilplan.org, kuba@kernel.org, davem@davemloft.net,
-        pabeni@redhat.com, Eric Dumazet <edumazet@google.com>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     hch@lst.de, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-        horms@kernel.org,
-        linux-doc@vger.kernel.org (open list:DOCUMENTATION)
-Subject: [PATCH net-next v2 3/3] Documentation: netconsole: add support for cmdline targets
-Date:   Thu,  5 Oct 2023 05:36:36 -0700
-Message-Id: <20231005123637.2685334-4-leitao@debian.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231005123637.2685334-1-leitao@debian.org>
-References: <20231005123637.2685334-1-leitao@debian.org>
+        bh=ew9CTKew+cNKDMIx1MC3uW3wssgAAZXIEhM/ZHhaWJ0=;
+        b=ObMnUhWGHgBDBqKPMIPZY96i9NSM+zJo7lyexvfD/OdfKJNWO3X0DPD02b0rxvHSTN
+         L+yJ4RDfVlcHKh3PCRXM/1JblHRDU8OPhP28xURzFivjwUlndIpBLk5jDEDyZsZIuiSN
+         JBDZo8JoaCRQHSURHjEhCXF565wv8+8G0sE03jqeSZC4vA0ikdAbLGBxt25/E4rTLqkh
+         UTdsI4W+NpiCCGIpZPVjY9LK9JwWl3c0hT48UWiCqTZax4qMA4nbDEr7nwVZQ/a1Zda7
+         ozJMWmaU3uL8ugWknmkxVCIDU17Kc7C/AgvWS0zXPld+ngzkZ7Jnkn0derz8fbp/xCQ1
+         07DA==
+X-Gm-Message-State: AOJu0YyBWinI4Sq3CZFngjTnLrTqKlFweOICScUVkSF4cR4XSEE/mxcI
+        Bxn1YcqGAOUhCbCVRofZbo2O9jUCCSdU9ecY5gyedg==
+X-Google-Smtp-Source: AGHT+IEEpGtcQmmMc7Y4hT3qxAHVbBwnHipMfrrp4VL2FyrhIgPoNA5lg0uZ8fMpf6SuuSR8a5DqyNPv+lFAdbbSKeg=
+X-Received: by 2002:a05:6e02:1aa7:b0:34c:b016:ede5 with SMTP id
+ l7-20020a056e021aa700b0034cb016ede5mr104452ilv.26.1696514070717; Thu, 05 Oct
+ 2023 06:54:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
-        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=no
+References: <20230928191350.205703-1-tony.luck@intel.com> <20231003213043.13565-1-tony.luck@intel.com>
+ <20231003213043.13565-9-tony.luck@intel.com>
+In-Reply-To: <20231003213043.13565-9-tony.luck@intel.com>
+From:   Peter Newman <peternewman@google.com>
+Date:   Thu, 5 Oct 2023 15:54:19 +0200
+Message-ID: <CALPaoCh0BJSiMG5GjCsFYQDbrUO1q31VCpo403+A4EX0KkJ-TA@mail.gmail.com>
+Subject: Re: [PATCH v8 8/8] x86/resctrl: Update documentation with Sub-NUMA
+ cluster changes
+To:     Tony Luck <tony.luck@intel.com>
+Cc:     Fenghua Yu <fenghua.yu@intel.com>,
+        Reinette Chatre <reinette.chatre@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>, x86@kernel.org,
+        Shaopeng Tan <tan.shaopeng@fujitsu.com>,
+        James Morse <james.morse@arm.com>,
+        Jamie Iles <quic_jiles@quicinc.com>,
+        Babu Moger <babu.moger@amd.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        patches@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,
+        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -62,60 +80,74 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-With the previous patches, there is no more limitation at modifying the
-targets created at boot time (or module load time).
+On Tue, Oct 3, 2023 at 11:30=E2=80=AFPM Tony Luck <tony.luck@intel.com> wro=
+te:
+>
+> With Sub-NUMA Cluster mode enabled the scope of monitoring resources is
+> per-NODE instead of per-L3 cache. Suffixes of directories with "L3" in
+> their name refer to Sub-NUMA nodes instead of L3 cache ids.
+>
+> Users should be aware that SNC mode also affects the amount of L3 cache
+> available for allocation within each SNC node.
+>
+> Signed-off-by: Tony Luck <tony.luck@intel.com>
+>
+> ---
+>
+> Changes since v5:
+>
+> Added addtional details about challenges tracking tasks when SNC
+> mode is enabled.
+>
+> ---
+> diff --git a/Documentation/arch/x86/resctrl.rst b/Documentation/arch/x86/=
+resctrl.rst
+> index cb05d90111b4..222c507089a5 100644
+> --- a/Documentation/arch/x86/resctrl.rst
+> +++ b/Documentation/arch/x86/resctrl.rst
+> @@ -345,9 +345,9 @@ When control is enabled all CTRL_MON groups will also=
+ contain:
+>  When monitoring is enabled all MON groups will also contain:
+>
+>  "mon_data":
+> -       This contains a set of files organized by L3 domain and by
+> -       RDT event. E.g. on a system with two L3 domains there will
+> -       be subdirectories "mon_L3_00" and "mon_L3_01".  Each of these
+> +       This contains a set of files organized by L3 domain or by NUMA
+> +       node (depending on whether Sub-NUMA Cluster (SNC) mode is disable=
+d
+> +       or enabled respectively) and by RDT event.  Each of these
+>         directories have one file per event (e.g. "llc_occupancy",
+>         "mbm_total_bytes", and "mbm_local_bytes"). In a MON group these
+>         files provide a read out of the current value of the event for
+> @@ -452,6 +452,23 @@ and 0xA are not.  On a system with a 20-bit mask eac=
+h bit represents 5%
+>  of the capacity of the cache. You could partition the cache into four
+>  equal parts with masks: 0x1f, 0x3e0, 0x7c00, 0xf8000.
+>
+> +Notes on Sub-NUMA Cluster mode
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+> +When SNC mode is enabled Linux may load balance tasks between Sub-NUMA
+> +nodes much more readily than between regular NUMA nodes since the CPUs
+> +on Sub-NUMA nodes share the same L3 cache and the system may report
+> +the NUMA distance between Sub-NUMA nodes with a lower value than used
+> +for regular NUMA nodes.  Users who do not bind tasks to the CPUs of a
+> +specific Sub-NUMA node must read the "llc_occupancy", "mbm_total_bytes",
+> +and "mbm_local_bytes" for all Sub-NUMA nodes where the tasks may execute
+> +to get the full view of traffic for which the tasks were the source.
+> +
+> +The cache allocation feature still provides the same number of
+> +bits in a mask to control allocation into the L3 cache. But each
+> +of those ways has its capacity reduced because the cache is divided
+> +between the SNC nodes. The values reported in the resctrl
+> +"size" files are adjusted accordingly.
+> +
+>  Memory bandwidth Allocation and monitoring
+>  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>
 
-Document the way on how to create the configfs directories to be able to
-modify these netconsole targets.
+Sounds better, thanks.
 
-The design discussion about this topic could be found at:
-https://lore.kernel.org/all/ZRWRal5bW93px4km@gmail.com/
-
-Signed-off-by: Breno Leitao <leitao@debian.org>
----
- Documentation/networking/netconsole.rst | 22 +++++++++++++++++++---
- 1 file changed, 19 insertions(+), 3 deletions(-)
-
-diff --git a/Documentation/networking/netconsole.rst b/Documentation/networking/netconsole.rst
-index 7a9de0568e84..390730a74332 100644
---- a/Documentation/networking/netconsole.rst
-+++ b/Documentation/networking/netconsole.rst
-@@ -99,9 +99,6 @@ Dynamic reconfiguration:
- Dynamic reconfigurability is a useful addition to netconsole that enables
- remote logging targets to be dynamically added, removed, or have their
- parameters reconfigured at runtime from a configfs-based userspace interface.
--[ Note that the parameters of netconsole targets that were specified/created
--from the boot/module option are not exposed via this interface, and hence
--cannot be modified dynamically. ]
- 
- To include this feature, select CONFIG_NETCONSOLE_DYNAMIC when building the
- netconsole module (or kernel, if netconsole is built-in).
-@@ -155,6 +152,25 @@ You can also update the local interface dynamically. This is especially
- useful if you want to use interfaces that have newly come up (and may not
- have existed when netconsole was loaded / initialized).
- 
-+Netconsole targets defined at boot time (or module load time) with the
-+`netconsole=` param are assigned the name `cmdline<index>`.  For example, the
-+first target in the parameter is named `cmdline0`.  You can control and modify
-+these targets by creating configfs directories with the matching name.
-+
-+Let's suppose you have two netconsole targets defined at boot time::
-+
-+ netconsole=4444@10.0.0.1/eth1,9353@10.0.0.2/12:34:56:78:9a:bc;4444@10.0.0.1/eth1,9353@10.0.0.3/12:34:56:78:9a:bc
-+
-+You can modify these targets in runtime by creating the following targets::
-+
-+ mkdir cmdline0
-+ cat cmdline0/remote_ip
-+ 10.0.0.2
-+
-+ mkdir cmdline1
-+ cat cmdline1/remote_ip
-+ 10.0.0.3
-+
- Extended console:
- =================
- 
--- 
-2.34.1
-
+Reviewed-by: Peter Newman <peternewman@google.com>
