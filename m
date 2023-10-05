@@ -2,107 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 52D337BA273
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Oct 2023 17:37:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DC3A97B9FA3
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Oct 2023 16:26:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233709AbjJEPht (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Oct 2023 11:37:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36546 "EHLO
+        id S233943AbjJEO00 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Oct 2023 10:26:26 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52578 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232628AbjJEPhb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Oct 2023 11:37:31 -0400
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E2E3A35C1B;
-        Thu,  5 Oct 2023 07:53:30 -0700 (PDT)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5AC7C116B1;
-        Thu,  5 Oct 2023 08:57:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-        s=korg; t=1696496221;
-        bh=pVrbjUBz8B4tQzXARceL2fDR5Lj64WmB0u1Zx7kMTpg=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=2wdIbPWHyAHClvpS9Kyn1G7hcCW1xtL5Cgatcdr8jg9vkdMAkhnpe1F/in0hczCdw
-         PzglEJZgEFQEjOws+30EQEUstsEDQelJlPlciv8h3E+D72sFoQ1U9ps6ZwPYyEiP9E
-         aWsWESqOXiZw6BC1ZW3OID0jsS/xQuZm07CTUwkQ=
-Date:   Thu, 5 Oct 2023 10:56:58 +0200
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     Kees Cook <keescook@chromium.org>
-Cc:     Thomas Gleixner <tglx@linutronix.de>, workflows@vger.kernel.org,
-        linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
-Subject: Re: [PATCH] Documentation: embargoed-hardware-issues.rst: Clarify
- prenotifaction
-Message-ID: <2023100546-unrelated-trekker-320b@gregkh>
-References: <20231004004959.work.258-kees@kernel.org>
+        with ESMTP id S234827AbjJEOYT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Oct 2023 10:24:19 -0400
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com [IPv6:2a00:1450:4864:20::636])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D03A120E5C;
+        Thu,  5 Oct 2023 03:29:07 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id a640c23a62f3a-99c3c8adb27so144559066b.1;
+        Thu, 05 Oct 2023 03:29:07 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1696501744; x=1697106544;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Jj5jafkJ0zIFP34snoPmFPYTg/PYDWh3uWvMOXmNhu8=;
+        b=KuA5gHnjgLh2WZyL+/uJF8GoN8lGooBYfdTywPTE1XQytWbqWxIWW/yGUvXymJFr5a
+         d6Fo7FueCYHEywo7K3xl0Mrt0kduPMMDJNrq9CbbJV0p7cinULZPlt2uwRmyvG0x435l
+         J6pQWrdKtnzqsnSNpahdjjD432MEX6a5V/lv5fmcFw6AJL/BzDcKPz0KmU+C6VK6W4zm
+         hEksRKG/JRgVxd2K1ZhMsEHJtYiW4cs9Vd5tM9g5PCXFE+e8Tv0diWQzPLDB+FhNvevv
+         87qv384rIhKr7pz9GQSdpTZPMObGbmVovXgVtnOSAQEnnyRYt+62WvwfkCxJf8f92Vxk
+         xKnw==
+X-Gm-Message-State: AOJu0YwFQTb/jEyBJIjUH/8hGviATDhetUDhXkBK0Dkq+HVVxwNL/tN8
+        ykecOEv/nxVqHB8bgsItEnA=
+X-Google-Smtp-Source: AGHT+IHydoezWpZnKJkj/HxjmRp/jJVxzTNzko/BbjcgxBRaXK5KRLbXhnAIexulQV8Y7S8zD1ac/g==
+X-Received: by 2002:a17:907:7603:b0:9b2:b633:ada2 with SMTP id jx3-20020a170907760300b009b2b633ada2mr4423288ejc.36.1696501744259;
+        Thu, 05 Oct 2023 03:29:04 -0700 (PDT)
+Received: from gmail.com (fwdproxy-cln-006.fbsv.net. [2a03:2880:31ff:6::face:b00c])
+        by smtp.gmail.com with ESMTPSA id a11-20020a17090640cb00b00977eec7b7e8sm963021ejk.68.2023.10.05.03.29.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Oct 2023 03:29:03 -0700 (PDT)
+Date:   Thu, 5 Oct 2023 03:29:02 -0700
+From:   Breno Leitao <leitao@debian.org>
+To:     kuba@kernel.org, davem@davemloft.net, pabeni@redhat.com,
+        Eric Dumazet <edumazet@google.com>,
+        Jonathan Corbet <corbet@lwn.net>, hch@lst.de,
+        netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+        horms@kernel.org,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH 3/3] Documentation: netconsole: add support for cmdline
+ targets
+Message-ID: <ZR6P7isP8eEy9vdF@gmail.com>
+References: <20231002155349.2032826-1-leitao@debian.org>
+ <20231002155349.2032826-4-leitao@debian.org>
+ <ZR3GbHOyxx+J4FUn@google.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20231004004959.work.258-kees@kernel.org>
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
-        SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+In-Reply-To: <ZR3GbHOyxx+J4FUn@google.com>
+X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,
+        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=no
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 03, 2023 at 05:50:03PM -0700, Kees Cook wrote:
-> There has been a repeated misunderstanding about what the hardware embargo
-> list is for. Clarify the language in the process so that it is clear
-> that only fixes are coordinated. There is explicitly no prenotification
-> process. The list members are also expected to keep total radio silence
-> during embargoes.
+On Wed, Oct 04, 2023 at 01:09:16PM -0700, Joel Becker wrote:
+> On Mon, Oct 02, 2023 at 08:53:49AM -0700, Breno Leitao wrote:
+> > @@ -155,6 +152,24 @@ You can also update the local interface dynamically. This is especially
+> >  useful if you want to use interfaces that have newly come up (and may not
+> >  have existed when netconsole was loaded / initialized).
+> >  
+> > +You can control and modify the targets defined at boot time (or module load
+> > +time) by creating special targets names. These special targets are named
+> > +`cmdline` concatenated to an integer, example: `cmdline0`.
 > 
-> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Cc: Thomas Gleixner <tglx@linutronix.de>
-> Cc: workflows@vger.kernel.org
-> Cc: linux-doc@vger.kernel.org
-> Signed-off-by: Kees Cook <keescook@chromium.org>
-> ---
->  .../process/embargoed-hardware-issues.rst     | 19 ++++++++++++-------
->  1 file changed, 12 insertions(+), 7 deletions(-)
+> The special names are already "created", so perhaps it's a little
+> clearer to say something like:
 > 
-> diff --git a/Documentation/process/embargoed-hardware-issues.rst b/Documentation/process/embargoed-hardware-issues.rst
-> index ac7c52f130c9..31000f075707 100644
-> --- a/Documentation/process/embargoed-hardware-issues.rst
-> +++ b/Documentation/process/embargoed-hardware-issues.rst
-> @@ -25,15 +25,15 @@ Contact
->  The Linux kernel hardware security team is separate from the regular Linux
->  kernel security team.
->  
-> -The team only handles the coordination of embargoed hardware security
-> -issues.  Reports of pure software security bugs in the Linux kernel are not
-> +The team only handles developing fixes for embargoed hardware security
-> +issues. Reports of pure software security bugs in the Linux kernel are not
->  handled by this team and the reporter will be guided to contact the regular
->  Linux kernel security team (:ref:`Documentation/admin-guide/
->  <securitybugs>`) instead.
->  
->  The team can be contacted by email at <hardware-security@kernel.org>. This
-> -is a private list of security officers who will help you to coordinate an
-> -issue according to our documented process.
-> +is a private list of security officers who will help you to coordinate a
-> +fix according to our documented process.
->  
->  The list is encrypted and email to the list can be sent by either PGP or
->  S/MIME encrypted and must be signed with the reporter's PGP key or S/MIME
-> @@ -132,11 +132,11 @@ other hardware could be affected.
->  
->  The hardware security team will provide an incident-specific encrypted
->  mailing-list which will be used for initial discussion with the reporter,
-> -further disclosure and coordination.
-> +further disclosure, and coordination of fixes.
->  
->  The hardware security team will provide the disclosing party a list of
->  developers (domain experts) who should be informed initially about the
-> -issue after confirming with the developers  that they will adhere to this
-> +issue after confirming with the developers that they will adhere to this
+> ```
+> +Netconsole targets defined at boot time (or module load time) with the
+> +`netconsole=` param are assigned the name `cmdline<index>`.  For
+> +example, the first target in the parameter is named `cmdline0`.  You
+> +can control and modify these targets by creating configfs directories
+> +with the matching name.
+> ```
 
-Nit, whitespace change wasn't documented in the changelog :)
-
-Thanks for this, it matches up with the list rules now much better (that
-everyone gets when they join one of these lists), so I'll go apply it to
-my tree now.
-
-greg k-h
+That is way better. Thanks for the review.
+I will send an updated version soon.
