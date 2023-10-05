@@ -2,152 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F06297BA078
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Oct 2023 16:41:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3D3287BA313
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Oct 2023 17:51:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236710AbjJEOgw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Oct 2023 10:36:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36770 "EHLO
+        id S235173AbjJEPvu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Oct 2023 11:51:50 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38958 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236361AbjJEOet (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Oct 2023 10:34:49 -0400
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com [IPv6:2607:f8b0:4864:20::134])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 961A25FD9
-        for <linux-doc@vger.kernel.org>; Thu,  5 Oct 2023 06:54:31 -0700 (PDT)
-Received: by mail-il1-x134.google.com with SMTP id e9e14a558f8ab-351367c1c24so83035ab.1
-        for <linux-doc@vger.kernel.org>; Thu, 05 Oct 2023 06:54:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1696514071; x=1697118871; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ew9CTKew+cNKDMIx1MC3uW3wssgAAZXIEhM/ZHhaWJ0=;
-        b=ZU/yLukFeVmcKvKlY+iMHuAbTYDvxfieDlgQsMpJ/l59yvkp7yp3qnirhhTDkKvEKN
-         tlwszgrbeFMamHOPP6NyY2EEpNYvwqB8+trVCm5BuKNLgKw7NoyG8JAfAOJj2Uz0UlJf
-         0h7yCoGtKHMHPgTTDJ6gEEHcR0teJh0m0R0qjoRYWdLgOEAgUL4yIAENpGZkp8xSkFpB
-         6bk+tb2qxjhK5iqQoyeYM819rAx9HjozH6hC9y1Ywjvqoksk6jng7YGX/gjTIvIiW+mS
-         TTOnpZvU9Sn64KSiB22apUS0HnYlFPh+9X+qemU6Cgnf/w5XzVmF2Dwi5sk7/EhzEfxi
-         gntQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696514071; x=1697118871;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ew9CTKew+cNKDMIx1MC3uW3wssgAAZXIEhM/ZHhaWJ0=;
-        b=ObMnUhWGHgBDBqKPMIPZY96i9NSM+zJo7lyexvfD/OdfKJNWO3X0DPD02b0rxvHSTN
-         L+yJ4RDfVlcHKh3PCRXM/1JblHRDU8OPhP28xURzFivjwUlndIpBLk5jDEDyZsZIuiSN
-         JBDZo8JoaCRQHSURHjEhCXF565wv8+8G0sE03jqeSZC4vA0ikdAbLGBxt25/E4rTLqkh
-         UTdsI4W+NpiCCGIpZPVjY9LK9JwWl3c0hT48UWiCqTZax4qMA4nbDEr7nwVZQ/a1Zda7
-         ozJMWmaU3uL8ugWknmkxVCIDU17Kc7C/AgvWS0zXPld+ngzkZ7Jnkn0derz8fbp/xCQ1
-         07DA==
-X-Gm-Message-State: AOJu0YyBWinI4Sq3CZFngjTnLrTqKlFweOICScUVkSF4cR4XSEE/mxcI
-        Bxn1YcqGAOUhCbCVRofZbo2O9jUCCSdU9ecY5gyedg==
-X-Google-Smtp-Source: AGHT+IEEpGtcQmmMc7Y4hT3qxAHVbBwnHipMfrrp4VL2FyrhIgPoNA5lg0uZ8fMpf6SuuSR8a5DqyNPv+lFAdbbSKeg=
-X-Received: by 2002:a05:6e02:1aa7:b0:34c:b016:ede5 with SMTP id
- l7-20020a056e021aa700b0034cb016ede5mr104452ilv.26.1696514070717; Thu, 05 Oct
- 2023 06:54:30 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230928191350.205703-1-tony.luck@intel.com> <20231003213043.13565-1-tony.luck@intel.com>
- <20231003213043.13565-9-tony.luck@intel.com>
-In-Reply-To: <20231003213043.13565-9-tony.luck@intel.com>
-From:   Peter Newman <peternewman@google.com>
-Date:   Thu, 5 Oct 2023 15:54:19 +0200
-Message-ID: <CALPaoCh0BJSiMG5GjCsFYQDbrUO1q31VCpo403+A4EX0KkJ-TA@mail.gmail.com>
-Subject: Re: [PATCH v8 8/8] x86/resctrl: Update documentation with Sub-NUMA
- cluster changes
-To:     Tony Luck <tony.luck@intel.com>
-Cc:     Fenghua Yu <fenghua.yu@intel.com>,
-        Reinette Chatre <reinette.chatre@intel.com>,
+        with ESMTP id S233996AbjJEPu6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Oct 2023 11:50:58 -0400
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 590973251;
+        Thu,  5 Oct 2023 07:12:48 -0700 (PDT)
+Received: from localhost.localdomain (unknown [IPv6:2a02:8010:65b5:0:1ac0:4dff:feee:236a])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+        (No client certificate requested)
+        (Authenticated sender: alarumbe)
+        by madras.collabora.co.uk (Postfix) with ESMTPSA id 99D026607328;
+        Thu,  5 Oct 2023 15:12:46 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+        s=mail; t=1696515166;
+        bh=hYTUtJ91m8XhfmVfROlVN0LtUovJ3Zomdz4P3xGJLPc=;
+        h=From:To:Cc:Subject:Date:From;
+        b=J5csQFjxk3PaPfrvQOK42s8QmYosEYOhd8kF4OjtfhkbVydWs58zUSl3q+/6QJNoX
+         X5thRMsEI0apbSNtVEZuqNhTpmI5ZM2fnFwbXazz/oNasA6YNaXoBA4lk9Vs4NNQvg
+         PrOi/vdd+u7GNpThXDqXUMXBCpuFVpaBNDXQnPurSR0qfkdonXeIsoBXAFx3hUutnf
+         rQ1eYpyG0qlqIw/ok6Aa2zEYkYoN+CXcOfNndaYIPmD8K0vTynct1wwJ81cRVwW6mP
+         PrMnZ6xDIgh1bkkLLuTTHMXulzTv7Z+m5FDdsTisoe3Tzc41w0BH08nElwelKke90L
+         Nze9RiUARq0iw==
+From:   =?UTF-8?q?Adri=C3=A1n=20Larumbe?= <adrian.larumbe@collabora.com>
+To:     Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>,
+        Daniel Vetter <daniel@ffwll.ch>,
         Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>, x86@kernel.org,
-        Shaopeng Tan <tan.shaopeng@fujitsu.com>,
-        James Morse <james.morse@arm.com>,
-        Jamie Iles <quic_jiles@quicinc.com>,
-        Babu Moger <babu.moger@amd.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        patches@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-        ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,
-        USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
-        autolearn_force=no version=3.4.6
+        Boris Brezillon <boris.brezillon@collabora.com>,
+        Steven Price <steven.price@arm.com>,
+        =?UTF-8?q?Adri=C3=A1n=20Larumbe?= <adrian.larumbe@collabora.com>,
+        AngeloGioacchino Del Regno 
+        <angelogioacchino.delregno@collabora.com>
+Cc:     kernel test robot <lkp@intel.com>, dri-devel@lists.freedesktop.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] Documentation/gpu: fix Panfrost documentation build warnings
+Date:   Thu,  5 Oct 2023 15:12:35 +0100
+Message-ID: <20231005141239.132783-1-adrian.larumbe@collabora.com>
+X-Mailer: git-send-email 2.42.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
+        SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 3, 2023 at 11:30=E2=80=AFPM Tony Luck <tony.luck@intel.com> wro=
-te:
->
-> With Sub-NUMA Cluster mode enabled the scope of monitoring resources is
-> per-NODE instead of per-L3 cache. Suffixes of directories with "L3" in
-> their name refer to Sub-NUMA nodes instead of L3 cache ids.
->
-> Users should be aware that SNC mode also affects the amount of L3 cache
-> available for allocation within each SNC node.
->
-> Signed-off-by: Tony Luck <tony.luck@intel.com>
->
-> ---
->
-> Changes since v5:
->
-> Added addtional details about challenges tracking tasks when SNC
-> mode is enabled.
->
-> ---
-> diff --git a/Documentation/arch/x86/resctrl.rst b/Documentation/arch/x86/=
-resctrl.rst
-> index cb05d90111b4..222c507089a5 100644
-> --- a/Documentation/arch/x86/resctrl.rst
-> +++ b/Documentation/arch/x86/resctrl.rst
-> @@ -345,9 +345,9 @@ When control is enabled all CTRL_MON groups will also=
- contain:
->  When monitoring is enabled all MON groups will also contain:
->
->  "mon_data":
-> -       This contains a set of files organized by L3 domain and by
-> -       RDT event. E.g. on a system with two L3 domains there will
-> -       be subdirectories "mon_L3_00" and "mon_L3_01".  Each of these
-> +       This contains a set of files organized by L3 domain or by NUMA
-> +       node (depending on whether Sub-NUMA Cluster (SNC) mode is disable=
-d
-> +       or enabled respectively) and by RDT event.  Each of these
->         directories have one file per event (e.g. "llc_occupancy",
->         "mbm_total_bytes", and "mbm_local_bytes"). In a MON group these
->         files provide a read out of the current value of the event for
-> @@ -452,6 +452,23 @@ and 0xA are not.  On a system with a 20-bit mask eac=
-h bit represents 5%
->  of the capacity of the cache. You could partition the cache into four
->  equal parts with masks: 0x1f, 0x3e0, 0x7c00, 0xf8000.
->
-> +Notes on Sub-NUMA Cluster mode
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-> +When SNC mode is enabled Linux may load balance tasks between Sub-NUMA
-> +nodes much more readily than between regular NUMA nodes since the CPUs
-> +on Sub-NUMA nodes share the same L3 cache and the system may report
-> +the NUMA distance between Sub-NUMA nodes with a lower value than used
-> +for regular NUMA nodes.  Users who do not bind tasks to the CPUs of a
-> +specific Sub-NUMA node must read the "llc_occupancy", "mbm_total_bytes",
-> +and "mbm_local_bytes" for all Sub-NUMA nodes where the tasks may execute
-> +to get the full view of traffic for which the tasks were the source.
-> +
-> +The cache allocation feature still provides the same number of
-> +bits in a mask to control allocation into the L3 cache. But each
-> +of those ways has its capacity reduced because the cache is divided
-> +between the SNC nodes. The values reported in the resctrl
-> +"size" files are adjusted accordingly.
-> +
->  Memory bandwidth Allocation and monitoring
->  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
+Fix issues revealed by `make htmldocs` after adding Panfrost DRM
+documentation file.
 
-Sounds better, thanks.
+Signed-off-by: Adrián Larumbe <adrian.larumbe@collabora.com>
+Fixes: d124dac2089c ("drm/panfrost: Add fdinfo support GPU load metrics")
+Reported-by: kernel test robot <lkp@intel.com>
+Closes: https://lore.kernel.org/oe-kbuild-all/202310030917.Txzlpoeq-lkp@intel.com
+---
+ Documentation/gpu/drivers.rst  | 1 +
+ Documentation/gpu/panfrost.rst | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-Reviewed-by: Peter Newman <peternewman@google.com>
+diff --git a/Documentation/gpu/drivers.rst b/Documentation/gpu/drivers.rst
+index 3a52f48215a3..45a12e552091 100644
+--- a/Documentation/gpu/drivers.rst
++++ b/Documentation/gpu/drivers.rst
+@@ -18,6 +18,7 @@ GPU Driver Documentation
+    xen-front
+    afbc
+    komeda-kms
++   panfrost
+ 
+ .. only::  subproject and html
+ 
+diff --git a/Documentation/gpu/panfrost.rst b/Documentation/gpu/panfrost.rst
+index ecc48ba5ac11..a07f6821e994 100644
+--- a/Documentation/gpu/panfrost.rst
++++ b/Documentation/gpu/panfrost.rst
+@@ -5,7 +5,7 @@
+ .. _panfrost-usage-stats:
+ 
+ Panfrost DRM client usage stats implementation
+-==========================================
++==============================================
+ 
+ The drm/Panfrost driver implements the DRM client usage stats specification as
+ documented in :ref:`drm-client-usage-stats`.
+-- 
+2.42.0
+
