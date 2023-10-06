@@ -2,72 +2,81 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 778B97BB7FC
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Oct 2023 14:41:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AA61B7BB8F3
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Oct 2023 15:23:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232156AbjJFMlr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 6 Oct 2023 08:41:47 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50502 "EHLO
+        id S232262AbjJFNX3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 6 Oct 2023 09:23:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49916 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232174AbjJFMlp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 6 Oct 2023 08:41:45 -0400
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com [IPv6:2a00:1450:4864:20::62e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A325CEA
-        for <linux-doc@vger.kernel.org>; Fri,  6 Oct 2023 05:41:43 -0700 (PDT)
-Received: by mail-ej1-x62e.google.com with SMTP id a640c23a62f3a-9a9f139cd94so353481066b.2
-        for <linux-doc@vger.kernel.org>; Fri, 06 Oct 2023 05:41:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1696596102; x=1697200902; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=mW5SVktj2xUWf9LqoXpgBXu7K2ICps52XbOnVUo46IM=;
-        b=i3nyjPTWpnkWzEj/THfuRj8o7jQ0jJ8ceI69hsiWJFd768iOkaw8kuB7wlZU6mfcLW
-         5C5mnnWwdyCDvlhh2+rQw3gclpLMQZMdOz9PCE4PhkkfKGit/74f5Tf388rn1kWm1Y12
-         +m6OKTK7U+7Jg1mZCgOfMI+Z+y9JXFG3jZOuONhZ8wDjIyNJcw+dczZl/XrlUq3QSMoV
-         SMo/E2zgkzLLTMqqmwaKjk+7NSYLZnVqaPSpjn0jVHB08zuoDJLZnVGaJQ0vKaXBa3np
-         LklUdg5XDDdmUFCRRHkvu8yyMNRSPOdl0yzlGIwnSNdyLjbSzPeqZreCzetssCzlpzOq
-         RyqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696596102; x=1697200902;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mW5SVktj2xUWf9LqoXpgBXu7K2ICps52XbOnVUo46IM=;
-        b=l3I4d+MSDd8u+5SuupG+BhPDjJ5Q9UChXhD1y1waE1y6LmoZ7JiSLuLs//5qmXMajo
-         LPOknkXTPTPSSENk/eO1bzh+Si9jgovint3kiI3dldfBzkw5/BBQf38pmxXuFUzSvL7m
-         aUqdGLexYM47x0en+O7uM/ML42Wq3ANRj02CqGtjf7yPP6Nea/UTcGASkP5iuTAZ4kQV
-         THGytA1FoaELS2xVnZ7kXcGlPdoOaKkewROqLIUiky6aefHK4V1t7+0M6StHE2WRMDQd
-         4UeCIIV76Ea7350F1OpfV5MSJFfPcpN5WuMN6jHpTQX58G54620opLLGTWEmcmcHlJYk
-         6bXA==
-X-Gm-Message-State: AOJu0YzC0PJiDGyvfYIq7R3KitpbS54UIy/H/3cmFqhRJczjKVUUt6gD
-        /GsSA3/OJJkhxCcQozcU1gxkmA==
-X-Google-Smtp-Source: AGHT+IGDzND6oeHj41td9dY/OmMaIkCdkLJphE1fmDDVPuSEB4VwAnf7dRKhLynRWUzgKd6WFcyYhw==
-X-Received: by 2002:a17:907:b10:b0:9aa:e08:9fb7 with SMTP id h16-20020a1709070b1000b009aa0e089fb7mr6240513ejl.76.1696596102024;
-        Fri, 06 Oct 2023 05:41:42 -0700 (PDT)
-Received: from localhost (host-213-179-129-39.customer.m-online.net. [213.179.129.39])
-        by smtp.gmail.com with ESMTPSA id oz10-20020a170906cd0a00b009ad8acac02asm2849794ejb.172.2023.10.06.05.41.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Oct 2023 05:41:41 -0700 (PDT)
-Date:   Fri, 6 Oct 2023 14:41:39 +0200
-From:   Jiri Pirko <jiri@resnulli.us>
-To:     Simon Horman <horms@kernel.org>
-Cc:     Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>,
-        netdev@vger.kernel.org, vadim.fedorenko@linux.dev, corbet@lwn.net,
-        davem@davemloft.net, kuba@kernel.org, pabeni@redhat.com,
-        jesse.brandeburg@intel.com, anthony.l.nguyen@intel.com,
-        linux-doc@vger.kernel.org, intel-wired-lan@lists.osuosl.org
-Subject: Re: [PATCH net-next v3 4/5] ice: dpll: implement phase related
- callbacks
-Message-ID: <ZSAAg39SzlDS55Kn@nanopsycho>
-References: <20231006114101.1608796-1-arkadiusz.kubalewski@intel.com>
- <20231006114101.1608796-5-arkadiusz.kubalewski@intel.com>
- <ZR/+noRCdnsy6QJo@kernel.org>
+        with ESMTP id S231705AbjJFNX3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 6 Oct 2023 09:23:29 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 57B8E83;
+        Fri,  6 Oct 2023 06:23:28 -0700 (PDT)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B6A1C433C8;
+        Fri,  6 Oct 2023 13:23:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1696598608;
+        bh=EaTnbJI4I15tCsE5PAEOFEMV2gEpZ5O8xv29SdDb+qM=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=r7kN1bhYCxtxsrayiH2/Qvakhgo3xCg+wGyDWqoba/ZC5pHVgpQDCCyLUBMq5h54g
+         ECPy9lW5VnfDNKExrrh7fEdQi/U/bsZ892xqQHM3S72mb56W82U4MfmqpjVIrrIJyB
+         qr4LzQDOov95/YlKhpIXNX+7KimqRGoyORxBH1I2m/XYsnYxcLtqw4e1YjQNFIDBA5
+         tnW4b6DBxOSfdtiaDHBr9QAGaSCEQWZ729s1flrAd+bmsOCjhqUZ+msIzUEQjcpObI
+         fcYAdK0dvdOg+7/O/AD46RjkpZyTdrX3BsQGRWK8UKSyIfp93PxVJs9Zo8bm/vRFfv
+         hsYBCwh6ppprg==
+Date:   Fri, 6 Oct 2023 14:23:18 +0100
+From:   Mark Brown <broonie@kernel.org>
+To:     "Eric W. Biederman" <ebiederm@xmission.com>
+Cc:     Catalin Marinas <catalin.marinas@arm.com>,
+        Szabolcs Nagy <Szabolcs.Nagy@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Marc Zyngier <maz@kernel.org>,
+        Oliver Upton <oliver.upton@linux.dev>,
+        James Morse <james.morse@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>, Oleg Nesterov <oleg@redhat.com>,
+        Kees Cook <keescook@chromium.org>,
+        Shuah Khan <shuah@kernel.org>,
+        "Rick P. Edgecombe" <rick.p.edgecombe@intel.com>,
+        Deepak Gupta <debug@rivosinc.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        "H.J. Lu" <hjl.tools@gmail.com>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        kvmarm@lists.linux.dev, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-mm@kvack.org,
+        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-riscv@lists.infradead.org,
+        Florian Weimer <fweimer@redhat.com>,
+        Christian Brauner <brauner@kernel.org>
+Subject: Re: [PATCH v4 03/36] arm64/gcs: Document the ABI for Guarded Control
+ Stacks
+Message-ID: <b100a80c-4460-4258-92b8-d232f553cab6@sirena.org.uk>
+References: <43ec219d-bf20-47b8-a5f8-32bc3b64d487@sirena.org.uk>
+ <ZOXa98SqwYPwxzNP@arm.com>
+ <ZOYFazB1gYjzDRdA@arm.com>
+ <ZRWw7aa3C0LlMPTH@arm.com>
+ <38edb5c3-367e-4ab7-8cb7-aa1a5c0e330c@sirena.org.uk>
+ <ZRvUxLgMse8QYlGS@arm.com>
+ <a7d2fd66-c06b-4033-bca2-4b14afc4904f@sirena.org.uk>
+ <ZR7w/mr0xZbpIPc5@arm.com>
+ <638a7be5-6662-471d-a3ce-0de0ac768e99@sirena.org.uk>
+ <87y1ggylvq.fsf@email.froward.int.ebiederm.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="Ji8GpeD8VVTZwCCT"
 Content-Disposition: inline
-In-Reply-To: <ZR/+noRCdnsy6QJo@kernel.org>
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_NONE autolearn=ham
+In-Reply-To: <87y1ggylvq.fsf@email.froward.int.ebiederm.org>
+X-Cookie: Rome wasn't burnt in a day.
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
         autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -75,98 +84,82 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Fri, Oct 06, 2023 at 02:33:34PM CEST, horms@kernel.org wrote:
->On Fri, Oct 06, 2023 at 01:41:00PM +0200, Arkadiusz Kubalewski wrote:
->> Implement new callback ops related to measurment and adjustment of
->> signal phase for pin-dpll in ice driver.
->> 
->> Signed-off-by: Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>
->
->Hi Arkadiusz,
->
->some minor feedback from my side.
->
->If you do end up re-spinning the series, please consider
->running checkpatch.pl --codespell.
->
->> ---
->>  drivers/net/ethernet/intel/ice/ice_dpll.c | 224 +++++++++++++++++++++-
->>  drivers/net/ethernet/intel/ice/ice_dpll.h |  10 +-
->>  2 files changed, 230 insertions(+), 4 deletions(-)
->> 
->> diff --git a/drivers/net/ethernet/intel/ice/ice_dpll.c b/drivers/net/ethernet/intel/ice/ice_dpll.c
->
->...
->
->> +/**
->> + * ice_dpll_phase_offset_get - callback for get dpll phase shift value
->> + * @pin: pointer to a pin
->> + * @pin_priv: private data pointer passed on pin registration
->> + * @dpll: registered dpll pointer
->> + * @dpll_priv: private data pointer passed on dpll registration
->> + * @phase_adjust: on success holds pin phase_adjust value
->
->nit: The parameter is called phase_offset, not phase_adjust in the code below
 
-Yeah, the non-sense static function docs and how buggy they are. Nobody
-reads them anyway. Same old story for ice I guess....
+--Ji8GpeD8VVTZwCCT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+On Fri, Oct 06, 2023 at 07:29:45AM -0500, Eric W. Biederman wrote:
+> Mark Brown <broonie@kernel.org> writes:
 
->
->> + * @extack: error reporting
->> + *
->> + * Dpll subsystem callback. Handler for getting phase shift value between
->> + * dpll's input and output.
->> + *
->> + * Context: Acquires pf->dplls.lock
->> + * Return:
->> + * * 0 - success
->> + * * negative - error
->> + */
->> +static int
->> +ice_dpll_phase_offset_get(const struct dpll_pin *pin, void *pin_priv,
->> +			  const struct dpll_device *dpll, void *dpll_priv,
->> +			  s64 *phase_offset, struct netlink_ext_ack *extack)
->> +{
->> +	struct ice_dpll *d = dpll_priv;
->> +	struct ice_pf *pf = d->pf;
->> +
->> +	mutex_lock(&pf->dplls.lock);
->> +	if (d->active_input == pin)
->> +		*phase_offset = d->phase_offset * ICE_DPLL_PHASE_OFFSET_FACTOR;
->> +	else
->> +		*phase_offset = 0;
->> +	mutex_unlock(&pf->dplls.lock);
->> +
->> +	return 0;
->> +}
->> +
->>  /**
->>   * ice_dpll_rclk_state_on_pin_set - set a state on rclk pin
->>   * @pin: pointer to a pin
->
->...
->
->> @@ -1656,6 +1867,15 @@ ice_dpll_init_info_direct_pins(struct ice_pf *pf,
->>  				return ret;
->>  			pins[i].prop.capabilities |=
->>  				DPLL_PIN_CAPABILITIES_PRIORITY_CAN_CHANGE;
->> +			pins[i].prop.phase_range.min =
->> +				pf->dplls.input_phase_adj_max;
->> +			pins[i].prop.phase_range.max =
->> +				-pf->dplls.input_phase_adj_max;
->> +		} else {
->> +			pins[i].prop.phase_range.min =
->> +				pf->dplls.output_phase_adj_max,
->
->nit: It probably doesn't make any difference, but perhaps ',' should be ';'.
->
->As flagged by clang-16 with -Wcomma
->
->> +			pins[i].prop.phase_range.max =
->> +				-pf->dplls.output_phase_adj_max;
->>  		}
->>  		pins[i].prop.capabilities |=
->>  			DPLL_PIN_CAPABILITIES_STATE_CAN_CHANGE;
->
->...
+> >> It's not just the default size that I dislike (I think the x86
+> >> RLIMIT_STACK or clone3() stack_size is probably good enough) but the
+> >> kernel allocating the shadow stack and inserting it into the user
+> >> address space. The actual thread stack is managed by the user but the
+> >> shadow stack is not (and we don't do this very often). Anyway, I don't
+> >> have a better solution for direct uses of clone() or clone3(), other
+> >> than running those threads with the shadow stack disabled. Not sure
+> >> that's desirable.
+
+> > Running threads with the shadow stack disabled if they don't explicitly
+> > request it feels like it's asking for trouble - as well as the escape
+> > route from the protection it'd provide I'd expect there to be trouble
+> > for things that do stack pivots, potentially random issues if there's a
+> > mix of ways threads are started.  It's going to be a tradeoff whatever
+> > we do.
+
+> Something I haven't seen in the discussion is that one of the ways I
+> have seen a non-libc clone used is to implement a fork with flags.
+> That is a new mm is created, and effectively a new process.  Which
+> makes the characterization different.
+
+> In general creating a thread with clone and bypassing libc is
+> incompatible with pthreads, and the caller gets to keep both pieces.
+
+> As long as there is enough information code can detect that
+> shadow stacks are in use, and the code is able to create their own
+> I don't see why it shouldn't be the callers responsibility.
+
+> On the other hand I don't see the maintainer of clone Christian Brauner
+> or the libc folks especially Florian cc'd on this thread.  So I really
+> don't think you have the right folks in on this conversation.
+
+Well, copying them in now.  The discussion here is about allocation of
+shadow stacks for the arm64 implementation of the feature (the arm64
+feature is called Guarded Control Stack in the architecture).  These
+maintain a second copy of the stack with only the return targets in
+memory allocated with special protections so userspace can't write to it
+directly and use this when doing returns to ensure that the returns
+haven't been redirected.  These shadow stacks can be allocated directly
+by userspace using a new system call map_shadow_stack(), doing this via
+mmap() was extensively discussed but it was concluded that this was very
+likely to lead to security problems so we've got this new syscall that
+ensures that shadow stack memory is never accessible to userspace via
+other means.
+
+The x86 implementation that has already been merged into mainline will
+allocate a new shadow stack for newly created threads when the creating
+thread has one.  There was a suggestion to have arm64 diverge and
+require that threads be created with clone3() and manualy provide a
+shadow stack but then concerns were raised that as well as the issues
+with divergence this would be too disruptive for adoption due to
+non-libc thread creation.  It's not controversial that it'd be good to
+have clone3() by able to explicitly specify a shadow stack, just if it
+should be required.
+
+--Ji8GpeD8VVTZwCCT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmUgCkUACgkQJNaLcl1U
+h9DirQf/ftVM53t8n7Iz/c70/XaZOa6o2/1qaxs00hlLIEkmuVk5LjL0TViJlfRw
+qIRUvbR8y9MkOCjJOTAErDvidq4rFwmPiuk9mFZViDpRkDxpG13xvHCHIqZ4NPUe
+Eve09ZqsJK5dCaW8G4/FCkSIZF2yD1lGttWRhYwckUPBSHMVZevuylvin7vdrWAr
+sPCe3qp4gWYgplUtfxKadGeowpldz9LRCbARrBYB1jqSXcJbskcDd0L3KUH9ElFv
+kYT+Iyoh0j36gEZFuwWXioYTEbQcD5qsqcftvc5LW0vRiUlKo/MUND/c07YdRoBy
+DfP12K7+lLpdbS17lq6f6DfTuLAwcg==
+=J8v2
+-----END PGP SIGNATURE-----
+
+--Ji8GpeD8VVTZwCCT--
