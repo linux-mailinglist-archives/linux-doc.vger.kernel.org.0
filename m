@@ -2,92 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id F15B77BE8BF
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Oct 2023 19:54:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ACA827BE8BC
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Oct 2023 19:54:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1376891AbjJIRyS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 9 Oct 2023 13:54:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46780 "EHLO
+        id S1377071AbjJIRyH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 9 Oct 2023 13:54:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46626 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1377363AbjJIRyR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 Oct 2023 13:54:17 -0400
-Received: from mail.alien8.de (mail.alien8.de [IPv6:2a01:4f9:3051:3f93::2])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7C3E7B0;
-        Mon,  9 Oct 2023 10:54:14 -0700 (PDT)
-Received: from localhost (localhost.localdomain [127.0.0.1])
-        by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 9441240E01AE;
-        Mon,  9 Oct 2023 17:54:11 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
-        header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
-        by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id 0CiAvHbR9mVC; Mon,  9 Oct 2023 17:54:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-        t=1696874049; bh=i/j0OqkNn03WF1sTLiFxayA42GEe0D2CmVhv18YAMgI=;
+        with ESMTP id S1376891AbjJIRyG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 Oct 2023 13:54:06 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3003ECA;
+        Mon,  9 Oct 2023 10:54:05 -0700 (PDT)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64DDCC433C8;
+        Mon,  9 Oct 2023 17:54:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1696874044;
+        bh=PPCdcumr+UA++nlG83Y+uutcu7c6YH7gfSHrX1LBEaw=;
         h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=fsEnz61PR/B5T5JdHZ9FYwMe9UJ2S3Y7D8QbMKeLWsdXMLp6KX91r5/zn63sYZtbw
-         mw3WsGZgj6x2kmVAGTW5v0RromlYDdectq0JWxrc13RpQgMw0SmKVw5OpbMfW69kyp
-         99ywaB3HU83V0owlWOUVgF05UcAF1QulhDTNey/Q44DW0TSgWCHwCaNPR4mRowb/Ew
-         9JyNNMVkTm25AfQLOUY0+HAxqo4dQ9xre1+dbLi5+ojuyl3T1aiLszOT9VsDQYdUx3
-         h5h+QeyphhYcZbVQ+rY0gC+bwhiHSK6dkg/VyEwv0XjeeeSul+eH0P9G5WzSBECIWs
-         XhYQLzmMxn0D37lBVTbGJBeyh19FU5DKCz/LrvS5Rq1jPKqnrB2LVYLgolNxqau3fd
-         DMyHl4AXV7PJF6sXr8U8YWG+/TNySO2yQQpklUasVaKJyFhKyVgzHexTl6lYI/heO9
-         o1LdaFLoXYW4NEISqGOMBgK/zsRkqvJvaXZgXcREGhxAo/Vr9Vgcmll0qx5PdqHszq
-         2BaYACUJ8RlDSoC4EpaUXu7+qcLO2D4twWf/tHwHtul9gndkh/jp1po7eQSMKAmqvx
-         lYx3AhKeYYgg/K6aDFttLXU5+rOjpAJ8S8m/M4UKR0Y6nYIpP+KcnKV/ZxWkoBSifx
-         MfmLmkoN6mYqWNy93g3sA7SM=
-Received: from zn.tnic (pd953036a.dip0.t-ipconnect.de [217.83.3.106])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
-        (No client certificate requested)
-        by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 5C5C940E0187;
-        Mon,  9 Oct 2023 17:53:35 +0000 (UTC)
-Date:   Mon, 9 Oct 2023 19:53:29 +0200
-From:   Borislav Petkov <bp@alien8.de>
-To:     Reinette Chatre <reinette.chatre@intel.com>
-Cc:     Babu Moger <babu.moger@amd.com>, corbet@lwn.net,
-        tglx@linutronix.de, mingo@redhat.com, fenghua.yu@intel.com,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        paulmck@kernel.org, akpm@linux-foundation.org,
-        quic_neeraju@quicinc.com, rdunlap@infradead.org,
-        damien.lemoal@opensource.wdc.com, songmuchun@bytedance.com,
-        peterz@infradead.org, jpoimboe@kernel.org, pbonzini@redhat.com,
-        chang.seok.bae@intel.com, pawan.kumar.gupta@linux.intel.com,
-        jmattson@google.com, daniel.sneddon@linux.intel.com,
-        sandipan.das@amd.com, tony.luck@intel.com, james.morse@arm.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        bagasdotme@gmail.com, eranian@google.com,
-        christophe.leroy@csgroup.eu, jarkko@kernel.org,
-        adrian.hunter@intel.com, quic_jiles@quicinc.com,
-        peternewman@google.com
-Subject: Re: [PATCH v11 03/10] x86/resctrl: Rename rftype flags for
- consistency
-Message-ID: <20231009175329.GDZSQ+GZ45pgTiSMOX@fat_crate.local>
-References: <20231003235430.1231238-1-babu.moger@amd.com>
- <20231003235430.1231238-4-babu.moger@amd.com>
- <20231009171918.GPZSQ2Frs/qp129wsP@fat_crate.local>
- <1f571145-90ac-45be-9da1-681dc200051e@intel.com>
+        b=Fugsy4PGaY/O6EQUhUPCPNBxTT5ZhVVpD2V6xnTzGWIrQ4iQEpPAyKJppVYRXdHws
+         U/czILVQj+Dx99beegFEjvy2b0+qwK5knakS65UN89uuxQEPSwMggMffgFOGJTMqa0
+         ueQeCCWdqneoBuN2yVeBduVMDdez00ovxrVGlJ4k=
+Date:   Mon, 9 Oct 2023 19:54:01 +0200
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Krishna Kurapati PSSNV <quic_kriskura@quicinc.com>
+Cc:     Maciej =?utf-8?Q?=C5=BBenczykowski?= <maze@google.com>,
+        onathan Corbet <corbet@lwn.net>,
+        Linyu Yuan <quic_linyyuan@quicinc.com>,
+        linux-usb@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, quic_ppratap@quicinc.com,
+        quic_wcheng@quicinc.com, quic_jackp@quicinc.com
+Subject: Re: [PATCH 2/2] usb: gadget: ncm: Add support to update
+ wMaxSegmentSize via configfs
+Message-ID: <2023100910-used-unruly-f750@gregkh>
+References: <20231009142005.21338-1-quic_kriskura@quicinc.com>
+ <20231009142005.21338-2-quic_kriskura@quicinc.com>
+ <2023100931-reward-justice-ed1c@gregkh>
+ <a9efdc23-0417-48dc-aa17-ef7b1459b85a@quicinc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <1f571145-90ac-45be-9da1-681dc200051e@intel.com>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <a9efdc23-0417-48dc-aa17-ef7b1459b85a@quicinc.com>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Oct 09, 2023 at 10:48:38AM -0700, Reinette Chatre wrote:
-> My apologies here. Babu was following my guidance on this.
+On Mon, Oct 09, 2023 at 09:02:32PM +0530, Krishna Kurapati PSSNV wrote:
+> 
+> 
+> On 10/9/2023 8:38 PM, Greg Kroah-Hartman wrote:
+> > On Mon, Oct 09, 2023 at 07:50:05PM +0530, Krishna Kurapati wrote:
+> > > Currently the NCM driver restricts wMaxSegmentSize that indicates
+> > > the datagram size coming from network layer to 1514.
+> > 
+> > I don't see that restriction in the existing driver, where does that
+> > happen?
+> 
+> Hi Greg,
+> 
+>  In the ecm_desc, the following line restricts the value:
+> 
+> .wMaxSegmentSize =      cpu_to_le16(ETH_FRAME_LEN),
 
-No worries, that's the "next level review" kicking in. :-)
+Ok, so is that 1514?  I don't know as I don't know what ETH_FRAM_LEN is.
 
--- 
-Regards/Gruss,
-    Boris.
+So how about saying something to the affect of "the max segment size is
+currently limited to the ethernet frame length of the kernel which
+happens to be 1514 at this point in time."
 
-https://people.kernel.org/tglx/notes-about-netiquette
+thanks,
+
+greg k-h
