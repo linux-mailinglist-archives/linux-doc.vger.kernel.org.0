@@ -2,67 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1B2147BFE00
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Oct 2023 15:40:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7060C7BFE18
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Oct 2023 15:42:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232572AbjJJNkb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 10 Oct 2023 09:40:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37992 "EHLO
+        id S232335AbjJJNlC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 10 Oct 2023 09:41:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50852 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232439AbjJJNje (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 Oct 2023 09:39:34 -0400
+        with ESMTP id S232607AbjJJNkT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 Oct 2023 09:40:19 -0400
 Received: from mx07-00376f01.pphosted.com (mx07-00376f01.pphosted.com [185.132.180.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 63F3BD41;
-        Tue, 10 Oct 2023 06:39:15 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 74688FD;
+        Tue, 10 Oct 2023 06:39:22 -0700 (PDT)
 Received: from pps.filterd (m0168889.ppops.net [127.0.0.1])
-        by mx07-00376f01.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 39A6eZgV030133;
-        Tue, 10 Oct 2023 14:38:15 +0100
+        by mx07-00376f01.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 39ACU2Wd020208;
+        Tue, 10 Oct 2023 14:38:18 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=imgtec.com; h=
         from:to:cc:subject:date:message-id:in-reply-to:references
         :content-transfer-encoding:content-type:mime-version; s=
-        dk201812; bh=sYoo4haio8wbyitB6JJhiXyE4EYzftUZvfRse3A1S3s=; b=B3S
-        HUT0uQD2w5xoL1nMYXJF+eTbmMLYe0fYDrkpTwwdG7+hCMLtkOIClAfWY5lrrFu7
-        MAbgWh8Fvn4DHH0lSh/k0HkWHauJISp9iiGNfOWqSZuV1dBkBGNILCFIJFQCeI9P
-        7zcjYhTmXllFb7Fs8DskQ7wbuxfJYhPCTY3B6YgH2yDx6una1OMN8fh0caYl45Uz
-        mbTIQgRArRxYDUSRWNsOFRaa7vjSwsbOVH7QbkHd47koRyaUWD9WOSKKrREpTnQx
-        5doz2n4PupkoUIxDQAGrl67Z5L1oh+opN3xK9hMUWE8IPiHXl396Z/iFdNjBTsio
-        8CKmmyLw94mDIcnqAdw==
+        dk201812; bh=zzJxubEswHlFLdjXU+CxFiOGz8a8v7WlZjj4cmwcCkg=; b=Amh
+        94YNKBKURA+YPIq9ivsXDMy56ccS8ib3m+3/qbUiA1qxIc9bCDeYm042U8zAwSmd
+        Ly5VxDD8mpeFhQ6gDlD1SYlPlw+Yj88dkctEKt/gEK4gLrYzEEScDnTXVCBpswFx
+        Ucyc20ez2towt05w4ri48cwgjpj1yJsrMxloDE91uv4Zyltzs21Ai/2MaxmSOFSM
+        qRUKlShonuQv3i5HutdR8wjxvIJZwp2cfydBvwVyKbEmRgxIHjABqgkLb5UPT1ev
+        Xs01cU7iPuwye6u60APpsI34GOjGvvhzFLsQZ90Ltal4VnY4VDSm5yh9VnEZIlBa
+        +PRH2V44lFkVPZNTV/Q==
 Received: from hhmail05.hh.imgtec.org ([217.156.249.195])
-        by mx07-00376f01.pphosted.com (PPS) with ESMTPS id 3tjydrt72g-4
+        by mx07-00376f01.pphosted.com (PPS) with ESMTPS id 3tjydrt72j-2
         (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-        Tue, 10 Oct 2023 14:38:14 +0100 (BST)
+        Tue, 10 Oct 2023 14:38:17 +0100 (BST)
 Received: from HHMAIL05.hh.imgtec.org (10.100.10.120) by
  HHMAIL05.hh.imgtec.org (10.100.10.120) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.31; Tue, 10 Oct 2023 14:38:13 +0100
-Received: from GBR01-LO2-obe.outbound.protection.outlook.com (104.47.21.50) by
- email.imgtec.com (10.100.10.121) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.31 via Frontend
- Transport; Tue, 10 Oct 2023 14:38:13 +0100
+ 15.1.2507.31; Tue, 10 Oct 2023 14:38:15 +0100
+Received: from GBR01-LO4-obe.outbound.protection.outlook.com (104.47.85.105)
+ by email.imgtec.com (10.100.10.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.31 via Frontend Transport; Tue, 10 Oct 2023 14:38:15 +0100
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OWfhnyRtQ54qqujxbrXQe7rClLpBS03xVtufJUB+lYZMzQofqhTEP2ExR4mLyHG2mbxWNXBODTTivYjxTgw0rJHACRqmfW6iXMARjpK2XmWwiW2iPHd9m5pKJAWemBPqMwMIaeRpqY4s5pgLzcwOxPT4s7mDym3ILE8jn7wxI+9YR5ZIKqtHnZoaN3mHL4rmOkGbGM9MipDpE3fBQaKtDzw/uGsOxkkgYEBI1a8wF7yiNvmzSUSoVXiPNrfNiamPKc+0gj7mK7wh1xGMfLqzb/ekj0cNzOhGlNOub4Dm7beT/OQPdjBI5wk71a+t/9BU+IpHjPRpsbkFVDYDCr8Xxw==
+ b=bWR8MphWK5N4miFSeUkpndXjzCZlnArYmb/z/tcAhcZQ4nwiYuot6eR1w3OzDpO2EHBcPCKIwZ8F1jBAoJDpL78zoZahEWJgt0HCJW1uw/pmVsTJxY9eGIxgHpIRVf4oVndriFbV4yiL4dqsFX8YeBfo9yEFuN9CCoVEC7DQ6ZSJkxUle3nq7fo73mZ8MyX8ANfNsv44uBNWwYdsjRGXbFI/1DhkOQi0vIrUzMjrkrxaxx0xfjVZVu+0XxJkqojXKAk8Jo2ANXPXKci29rST1j5kDLgeGJnG9kX3U3M/GHBDyBPg3VG3t0qhI24XqhHfVlQG+cOTg47r/oBreLC5Fg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sYoo4haio8wbyitB6JJhiXyE4EYzftUZvfRse3A1S3s=;
- b=oUKRGYk8oby4xS7/mOeEhueEMPjy3NwobMQQ2QyqIga8AuiFGQwHhlyr3K//M+g4mZIOU21ji8VE9kWELNY3zuH+oh0Wc7AX27pqublM33d4DT7azcYPBiPIYhKS/TFNzzVyZj3nfowNSml5Uq6a2XAtfFOiARDRqV8wdZqZGS6N7l3c4RssmTa0YI6igQNL8O0/ngYi6LmXWjwxCVN3pLZmE0k7C3WZFMNE3NfwEZT4p78RF0RkGqmOpYOB9yURITfK709dDUpTQ7nvAaaJsmjQYadFhSWj6eVLSZaRo9Di1O7B7we95C3djaaD+my9MFJ9NmiFqWX6owqoX3OgBA==
+ bh=zzJxubEswHlFLdjXU+CxFiOGz8a8v7WlZjj4cmwcCkg=;
+ b=ar/2oksJzpxJR6C7FeglXTZilEAGuCn5AgOmtyluKd94QsD0Ye0N37J+RzZ4s+ai/GVrVT8uywgK38sRfHt+eg+ayXAHBFw/uAfMbqCqfYUxyIYvE2L2tk0nL3Ie66Ev7MjhU1uxmQ0JwguK6QuFvrXhsY+zaoJ9pXcuDY7O3Twv7e6h5+AkEzuTfnL6DD352CXyajVWIXzJ3keJyc2Yq3zNfJDn9VBOSE2v1ikFmnoGql2h+lRsXFRN4sgy6IrH+obfN2IluZFLh+WZZ7PjQNj5KyFIjuTx2A52K9yl4jZGRPMVeiOd1Foe2ZfIUYMhEt5m1EpXDpLJaknEBPVMwQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=imgtec.com; dmarc=pass action=none header.from=imgtec.com;
  dkim=pass header.d=imgtec.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=IMGTecCRM.onmicrosoft.com; s=selector2-IMGTecCRM-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sYoo4haio8wbyitB6JJhiXyE4EYzftUZvfRse3A1S3s=;
- b=JssNjQIjiHWM52gBj/3/Hoc2nP96WYODeDm5Wk1VzKfQkyL5E01mhTdTSp0QAOg9y/3OlfbxAz/WLiOzoYonk9W0mNBfn3Ln9wd09Dy/q2wxL9WzC9ylDqAuHvtRqDiY22tJkFqo6G3ZSlE7fSCJlxzstLQr+os5TzByHj7Kzk4=
+ bh=zzJxubEswHlFLdjXU+CxFiOGz8a8v7WlZjj4cmwcCkg=;
+ b=FqEpG08clHFY8+wa9vImaFXNycz9zIcrW6M0YXYYTmbpJjnCjtbHihcqukkbhSVDqmr86qrYwkPb0M46TCtdKz2fYCmdqcWlE0RIGn/2W0A7clP39W443DuQdRdgBfNWhcyzFcVeDIZXn7EmVOjRqaaW2SpdB2JIwR/SHwyPFmo=
 Received: from CWLP265MB4817.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:170::9)
- by CWLP265MB6168.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:182::13) with
+ by LO0P265MB6147.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:248::9) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.38; Tue, 10 Oct
- 2023 13:38:11 +0000
+ 2023 13:38:12 +0000
 Received: from CWLP265MB4817.GBRP265.PROD.OUTLOOK.COM
  ([fe80::1f14:8c15:179d:7afc]) by CWLP265MB4817.GBRP265.PROD.OUTLOOK.COM
  ([fe80::1f14:8c15:179d:7afc%4]) with mapi id 15.20.6863.032; Tue, 10 Oct 2023
- 13:38:11 +0000
+ 13:38:12 +0000
 From:   Sarah Walker <sarah.walker@imgtec.com>
 To:     <dri-devel@lists.freedesktop.org>
 CC:     <frank.binns@imgtec.com>, <donald.robson@imgtec.com>,
@@ -75,10 +75,10 @@ CC:     <frank.binns@imgtec.com>, <donald.robson@imgtec.com>,
         <linux-kernel@vger.kernel.org>, <robh+dt@kernel.org>,
         <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
         <devicetree@vger.kernel.org>, <corbet@lwn.net>,
-        <linux-doc@vger.kernel.org>
-Subject: [PATCH v7 08/20] drm/imagination: Add firmware and MMU related headers
-Date:   Tue, 10 Oct 2023 14:37:26 +0100
-Message-Id: <20231010133738.35274-9-sarah.walker@imgtec.com>
+        <linux-doc@vger.kernel.org>, Matt Coster <matt.coster@imgtec.com>
+Subject: [PATCH v7 10/20] drm/imagination: Add GPU ID parsing and firmware loading
+Date:   Tue, 10 Oct 2023 14:37:28 +0100
+Message-Id: <20231010133738.35274-11-sarah.walker@imgtec.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231010133738.35274-1-sarah.walker@imgtec.com>
 References: <20231010133738.35274-1-sarah.walker@imgtec.com>
@@ -89,55 +89,55 @@ X-ClientProxiedBy: LO4P123CA0183.GBRP123.PROD.OUTLOOK.COM
  (2603:10a6:400:170::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CWLP265MB4817:EE_|CWLP265MB6168:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0e32cd1e-39ca-4a76-6cc0-08dbc9962557
+X-MS-TrafficTypeDiagnostic: CWLP265MB4817:EE_|LO0P265MB6147:EE_
+X-MS-Office365-Filtering-Correlation-Id: b34a5fb8-ad17-4de2-96cd-08dbc996260c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: TgtDdyj+id+XwEYI6DdyXF8u/PAWHBZT0FbkZfasm081uLtV2TwBjSuJOMEXSV08UFQbrynARpmHW/8limPe7eKU/7qmcbALymeLWGrOcSLYmJ+av8l4sDAXVjWyuXEYVaoVq7TjWkrWqAXLibWbOGD4RGKR8sEzmrdIVh2LK/OT9Ki7KkYzM/0vwqSpHfehQAj0W76izwamvJXCAqSuvAMZgGLidm2ca5LI2rgWqS/us8atQP8Qz5l783T3xujqvW7Y7dxc2DKqf+fYmWYLxzvfk4zkxvS296Uc3N51CWERX6avkQ35X4jEL0TAMCa5vjYE7nAuX6Ir8xeygU4abCSpsYXCtVEjMomHCQviyNILgRJ+9G8mjQwxRVbZoWqMWa7pQyPPHZTOtQMhqZki8fPoiGI6KWOGFbpTshGAKC+UMQBl4Ep0kA1qODUcyh9lghT+f0FQPL0ixgpMpaiOr3SkcmbebWJ3xk3KDVBfbL66jcZpVUhXKxGfxnXiq1A9MGB9DooUVWwPuOpO8c3pOnAQ29YJl0Oee+3uqR9L1LlSfFYZSgVUIylMWHMyQvNmMR8oEShI7KiydciCd5Hf9b7QPblYJ7HXk2QynVKl5bT29ZMXgYa9wFxozcyBcxUG
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CWLP265MB4817.GBRP265.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230031)(136003)(39850400004)(366004)(396003)(376002)(346002)(230922051799003)(451199024)(186009)(64100799003)(1800799009)(52116002)(478600001)(6506007)(6666004)(6486002)(6512007)(38100700002)(38350700002)(86362001)(36756003)(30864003)(2906002)(83380400001)(2616005)(1076003)(26005)(7416002)(66946007)(8676002)(66556008)(6916009)(316002)(66476007)(5660300002)(41300700001)(8936002)(4326008)(44832011)(579004);DIR:OUT;SFP:1102;
+X-Microsoft-Antispam-Message-Info: wCVI6tAXDB4nxRLFjC/FUYJKQShK2iME3U721nsX91BaNQ7yzT0TaYscMBWLGNiKGtmk7CBYcR+fnJmpI8u0lxb9BO9AHxPho60R3nTjtSlEefjncITfdtSfAMsR770uVHz5eEmQ255dvtCa3gZ6FJV2OwT1XsL6w8Bug1tjUgBmML+l9GKi4D3Q7i74UxqQis+EAFN9GemUirUQvsgdjkv0BUqLoPid/iBvztdL3kn0ctpaXUm4sIy3WJVXI3Hs7PhUHfBBMxvEHtDOPVr+9XQuw4GqV4+wSamvwqugWl6SkyZxWc3mhVuEmqNk25E9z/E7qo/EcaeeAf4h2HiqIHg9xXEvcpCRq+pYj9pfZ0Ax/Qjdft30enPjWO7YXxDH7Jmom8JFeGJuomEofSNaK55LT93T4V7THOpjisyEtZymymMX5DordDMVfxwBfJb3lAu+ZewOHkPtqMHzvCokzuyJVVFTUHI5aBxSBzMlpIJNqoLrWdM/uiMkX0YASiFQbJYpBpPxWMQNF3o29IRh4EmV7eXk6RnVVeGwt6ohHAdvY/9aITH3Ugtr/Eg+bYrOAOZRoX0UoNSLr+F6PLKlrh46scKpN5MXr1oKwoUqkURX+FKz5T6hemuGVdrl/cWF
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CWLP265MB4817.GBRP265.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230031)(376002)(136003)(366004)(346002)(396003)(39850400004)(230922051799003)(64100799003)(451199024)(186009)(1800799009)(6512007)(478600001)(52116002)(6486002)(6666004)(6506007)(1076003)(83380400001)(26005)(2616005)(2906002)(30864003)(66556008)(316002)(66476007)(5660300002)(8936002)(44832011)(41300700001)(8676002)(4326008)(66946007)(6916009)(38100700002)(38350700002)(36756003)(86362001)(7416002)(107886003)(559001)(579004);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dGMoy/n200U0PKRhBZcfMSWZ7lktChYI+iDEstQ9Pk+UA2urL/VjlWIiWmVt?=
- =?us-ascii?Q?7G+kdxm0eBq2s7QNafGpDSNAtkVLVOFM1dZCDeAKLFJ2UI4V2QBtqp9fNqie?=
- =?us-ascii?Q?5SCf20Gld0bVcDlCSA7oBvFsnIsnDh0/3wKl4NdSmcnqmhVXIYcKiyLi74k1?=
- =?us-ascii?Q?gzu5qPqzcGV2/1YHaW9JZDgZ/T1DsnKJ5Iv/v/apPRh3yPWbMteUOm+/t4oi?=
- =?us-ascii?Q?2cfgykwWw0Yz3qZfOHI2X3F60KfUWW8Bi0DMAgUiB+bWjTqRkF/TiJUtz5iJ?=
- =?us-ascii?Q?cxYyjy3gIk+WZMveayMz4e6Ao5Js4wspjHIZUliagbbkBI+dNlKGdylMOPt1?=
- =?us-ascii?Q?AV5sL/GlK7tRz6ZzrVwZuZeIEdkU26ju5PUSa2EDfuD5/MWzre/143XnR7QR?=
- =?us-ascii?Q?LdNAlVL0I2VFXDoM0zXIsV53fg1WqJWUKuXSqNAXo5HZyC7LNGthWQiX4Fus?=
- =?us-ascii?Q?6Z/9qB5niL3M/YNBWXeqz9fWY9I77/ogzJy9QEIeRDsXjHxF0R1jMqV1XJug?=
- =?us-ascii?Q?Q830QiV6fcOTx2OHBCpBh5poYYpfGS8+ON1f2F8re8G3GCgAHjJOfC4p/rsB?=
- =?us-ascii?Q?GzRuSyDsVYWUKRfaeSG26MC0T9h1wp81XmOMEu+9dEhFfCgcURee1PGINgew?=
- =?us-ascii?Q?mToUd6m0s5PT28B/CsRqAtsRugOtFG7JbbAJRsJYHSyFwDKv1I7yzOFSQReQ?=
- =?us-ascii?Q?HJrPC8aFZuVwgsEMQj8yLQVNeB2m1+qX9Pi1+EVNW9O0eMCbFEr5jG6wuuGG?=
- =?us-ascii?Q?KEkCMxbPPLfusraobawoVFWZLSUauKQ+Yv4qhKM/MQL+IkDpjHuHyGF20c+1?=
- =?us-ascii?Q?LVGmYFr1IcAHH9z1DWOdgsd3wBeqtWcDH6or8pGEL75oO4FiRHE6TPcxhLw7?=
- =?us-ascii?Q?XRSzjBs+WC96BrNFkyinXYQYEtowY2YMzf+Zc4C43ijCjBX+rVzPVtrY1wsd?=
- =?us-ascii?Q?a4UMUwFld9ldBGRNPGjfjB8BF4wb2T3skl+zueznMPCPL1Iws62IpMGWjuk0?=
- =?us-ascii?Q?GKZFlQhZdaCSTMG/y5LQ8llOTmfD25hfvkF9UQDCueoVO6lqJMm6Bt6jRgKw?=
- =?us-ascii?Q?PDa1wOhDO3Kdu3TfY17zRvrJimsaGrEGGkuBAhuA5NBpHB/eBhh2PPq0i4dd?=
- =?us-ascii?Q?azCk3IBEwPTvbCK7MHwQu1oJZmg3t2fXBrfxU/T15nPR7cQN21q7nCk5cqVR?=
- =?us-ascii?Q?BKBJpUSM8XLyWIKUeOsa/eHYP/X7h+KtU4821xKCmfRB0bDREw9hoM3F8Lsy?=
- =?us-ascii?Q?37UiMRv9DsmmFHPwU2SHIu0WRsiL1KcWTDOGyGfxaLIl1BIGsGpxdO+K4PI5?=
- =?us-ascii?Q?RhLcqrY2oZ1bgVxhdZg7oaT3Uikq5BVraMDBp82eAuc3xy+bAPsNg4j9ozRq?=
- =?us-ascii?Q?k4RgWC9eXOkkZOOJCsj21PqVjWpMRJOn0bGM6NtKEo0G8gBFQK2PSS39CsCI?=
- =?us-ascii?Q?eN3WUiDYDUpJnQr9klwskq3awYlHI1IcaRuKelwVdL3lRs+6RK/EA+VzdzIV?=
- =?us-ascii?Q?Ts+kspiYBjjcepUk/i2zKoYc26je4sSVXNvVQ2+wBSgU6Vz5GFzcy4BahQoU?=
- =?us-ascii?Q?Vo1LYA8oZXsPIOnhE5ReCJyhZN5okmpFN4gxevNR?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0e32cd1e-39ca-4a76-6cc0-08dbc9962557
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?DlD8x+4kGx6bJJOD5Fs3ii6UnRakRNS9RpVGytHNlb6XBgARCRq3Jb1WWrdl?=
+ =?us-ascii?Q?03EvmF0RpPcFyWtZKyacbCL+IIO5lIVRUqfwxbdQ/sZxkmzSrorZn5luHiHX?=
+ =?us-ascii?Q?6S2jqa4p/2hmeqPC9FoFSunBJb3Fv/7f30DWhzcZHn2dSMFTzVWyj9mGXLgz?=
+ =?us-ascii?Q?4k4BxKgv2KnOD8ftIdNS3amTKhw5cSbTxy6lMpHL6VvYFTZN/KgMs+1fssi6?=
+ =?us-ascii?Q?HSv8TA/lzWp8NZBVq/g7k6ArkHCdlzcLbGUzpYVEvALPzENQlIoz2MkKgFy1?=
+ =?us-ascii?Q?InaHnx16mreBa8HqdvwhuDbJs1HUDY+JP5UAb8cXgaMR8MbmIs+7MlLKq4xS?=
+ =?us-ascii?Q?jcDbTZ1MEnzI8lfStCkwfxB6qAzPGPXlMWXDlu9AkbqfxvKVIvME669GRMsQ?=
+ =?us-ascii?Q?dryOdhKD69/0caaZb4GeLGR45x3HmNhT1aaN9a/tlqiNlhmvHxXPA794v9er?=
+ =?us-ascii?Q?yuivGMWHup+Pk04aI78u++knf6oPwgxe6NnRo64aMGXWx0beHM+ALR1UbPWk?=
+ =?us-ascii?Q?n9DcTdzlzROyw34CwTItvzxh4egyT78XeGWhiIaUfl5C+4+hELQ+0dJzLVeE?=
+ =?us-ascii?Q?GzAe35Nlpoc5Ezyblf2QFHDqsl0+YsR9s9dq/Bamxp2tdWB3kTfZ451QSykS?=
+ =?us-ascii?Q?NbC/RiwDqST9u+GcdhmWoaPFliOdIVgbE5KFNJNExPkoQrQAfMFgdHQHsff4?=
+ =?us-ascii?Q?c0kcG+rbyiwx9xtOxxsQBTFBNkbYC316TJz8DbSzngtif5kJ9llctgSyE7Pm?=
+ =?us-ascii?Q?mx7P6TFWew0uP2pSCyJGkVocBvkyEL5XH3lhT5YRySWxH6tRT8el6NmCe1qu?=
+ =?us-ascii?Q?2pmn7NExkdfNdmlgw/k/ZRpztgR6CaAXvQyItMWSoZQEsUM4EMI08Nkmu7Jr?=
+ =?us-ascii?Q?3Rl1y0GJtEUU3aJrh7fFWAQWFd6f7o8D1VW/YITr6GO5NQt5IyYJZk+EU1G0?=
+ =?us-ascii?Q?/jXUIGiakJQ/gAZFocm6+rFxFkk9w/Ww35+edbyXrwLZX7krXHqBvBybJTY7?=
+ =?us-ascii?Q?z5VDTxCZPEGu5+T92HJGVKiX4YS1vyGQV4ZmEKytZ4M8JUMSh1m3cfDNT+Nt?=
+ =?us-ascii?Q?G+QdiAhbAGlTDQ2EXFBQJOayAFdmwUSOEORtmaPqVExajRWAzPe2qtHspPAb?=
+ =?us-ascii?Q?yABCS/zSkwIRYaFa2RVlv+E7OARHiUFnCsu11EWICZyBB9IpwR8rv2+CXty2?=
+ =?us-ascii?Q?tvSM+uP/zI0H74S41RkEG/TQslMjkZa4pg6SWabG0wd/tHE+moDtThtxo0ns?=
+ =?us-ascii?Q?0rc63Gjy20gI8el16rnU5/m+kPzWZcuwgvTt5WGe46CYBKkT1dOPZsodlQHH?=
+ =?us-ascii?Q?H8GzG1h1C+GbfJxRc8n01AtP+B489Ye/BugrDwXpM8pFPa0FW3w6tWaAwbIa?=
+ =?us-ascii?Q?dDBqywSk9bc6b/LCPsPYd51swJng+2i8YAtEfYwxAGTrClUHToehd5+T0bOJ?=
+ =?us-ascii?Q?ApZL3QVIY33l3TU9+PGmQCg9GY/fLqPaOwMm0kTkQLP4K1e1zrwpTC5s84Nh?=
+ =?us-ascii?Q?UhfFuvSVIF4D4tw5dfZCU6Z1TPnFSHpnOXHBdlrZmA1z/3+yyzyoYaDkyny1?=
+ =?us-ascii?Q?LX9mgyoGTQVkKc+6xorBoK/aYEWuX7wnWoueff3k?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: b34a5fb8-ad17-4de2-96cd-08dbc996260c
 X-MS-Exchange-CrossTenant-AuthSource: CWLP265MB4817.GBRP265.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2023 13:38:11.3662
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2023 13:38:12.5887
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 0d5fd8bb-e8c2-4e0a-8dd5-2c264f7140fe
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UbPn+T8SiH6zegOANSCd9lxiiwM2B4sYK5T74itnhQ4Nlx2Mm5LDAk9e1Y5+oznb/OECO3wdZc72RyMWmjI90A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CWLP265MB6168
+X-MS-Exchange-CrossTenant-UserPrincipalName: jjeM8TyciWrsfPBbmNfbX2b/FNsgR+VL1V7feHnaQHofREPf9B0SCxUuYzS8XOukGcUi20aSw9wqppbGjHh2Jw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LO0P265MB6147
 X-OriginatorOrg: imgtec.com
 X-EXCLAIMER-MD-CONFIG: 15a78312-3e47-46eb-9010-2e54d84a9631
-X-Proofpoint-GUID: UMDGG-8fLJvFf32cwApsgGai4-fDTIDw
-X-Proofpoint-ORIG-GUID: UMDGG-8fLJvFf32cwApsgGai4-fDTIDw
+X-Proofpoint-GUID: -4hi_Afruxu6dRZG0BGr4DZmdWsc1mLw
+X-Proofpoint-ORIG-GUID: -4hi_Afruxu6dRZG0BGr4DZmdWsc1mLw
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
         SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
@@ -148,1052 +148,2162 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Read the GPU ID register at probe time and select the correct
+features/quirks/enhancements. Use the GPU ID to form the firmware
+file name and load the firmware.
+
+The features/quirks/enhancements arrays are currently hardcoded in
+the driver for the supported GPUs. We are looking at moving this
+information to the firmware image.
+
 Changes since v5:
-- Split up header commit due to size
+- Add BRN 71242 to device info
 
+Changes since v4:
+- Retrieve device information from firmware header
+- Pull forward firmware header parsing from FW infrastructure patch
+- Use devm_add_action_or_reset to release firmware
+
+Changes since v3:
+- Use drm_dev_{enter,exit}
+
+Co-developed-by: Frank Binns <frank.binns@imgtec.com>
+Signed-off-by: Frank Binns <frank.binns@imgtec.com>
+Co-developed-by: Matt Coster <matt.coster@imgtec.com>
+Signed-off-by: Matt Coster <matt.coster@imgtec.com>
+Co-developed-by: Donald Robson <donald.robson@imgtec.com>
+Signed-off-by: Donald Robson <donald.robson@imgtec.com>
 Signed-off-by: Sarah Walker <sarah.walker@imgtec.com>
-Acked-by: Maxime Ripard <mripard@kernel.org>
 ---
- .../drm/imagination/pvr_rogue_heap_config.h   | 113 ++++++
- drivers/gpu/drm/imagination/pvr_rogue_meta.h  | 356 ++++++++++++++++++
- drivers/gpu/drm/imagination/pvr_rogue_mips.h  | 335 ++++++++++++++++
- .../drm/imagination/pvr_rogue_mips_check.h    |  58 +++
- .../gpu/drm/imagination/pvr_rogue_mmu_defs.h  | 136 +++++++
- 5 files changed, 998 insertions(+)
- create mode 100644 drivers/gpu/drm/imagination/pvr_rogue_heap_config.h
- create mode 100644 drivers/gpu/drm/imagination/pvr_rogue_meta.h
- create mode 100644 drivers/gpu/drm/imagination/pvr_rogue_mips.h
- create mode 100644 drivers/gpu/drm/imagination/pvr_rogue_mips_check.h
- create mode 100644 drivers/gpu/drm/imagination/pvr_rogue_mmu_defs.h
+ drivers/gpu/drm/imagination/Makefile          |   2 +
+ drivers/gpu/drm/imagination/pvr_device.c      | 323 ++++++++++-
+ drivers/gpu/drm/imagination/pvr_device.h      | 220 ++++++++
+ drivers/gpu/drm/imagination/pvr_device_info.c | 254 +++++++++
+ drivers/gpu/drm/imagination/pvr_device_info.h | 186 +++++++
+ drivers/gpu/drm/imagination/pvr_drv.c         | 521 +++++++++++++++++-
+ drivers/gpu/drm/imagination/pvr_drv.h         | 107 ++++
+ drivers/gpu/drm/imagination/pvr_fw.c          | 145 +++++
+ drivers/gpu/drm/imagination/pvr_fw.h          |  34 ++
+ drivers/gpu/drm/imagination/pvr_fw_info.h     | 135 +++++
+ 10 files changed, 1925 insertions(+), 2 deletions(-)
+ create mode 100644 drivers/gpu/drm/imagination/pvr_device_info.c
+ create mode 100644 drivers/gpu/drm/imagination/pvr_device_info.h
+ create mode 100644 drivers/gpu/drm/imagination/pvr_fw.c
+ create mode 100644 drivers/gpu/drm/imagination/pvr_fw.h
+ create mode 100644 drivers/gpu/drm/imagination/pvr_fw_info.h
 
-diff --git a/drivers/gpu/drm/imagination/pvr_rogue_heap_config.h b/drivers/gpu/drm/imagination/pvr_rogue_heap_config.h
+diff --git a/drivers/gpu/drm/imagination/Makefile b/drivers/gpu/drm/imagination/Makefile
+index b4aa190c9d4a..9e144ff2742b 100644
+--- a/drivers/gpu/drm/imagination/Makefile
++++ b/drivers/gpu/drm/imagination/Makefile
+@@ -5,6 +5,8 @@ subdir-ccflags-y := -I$(srctree)/$(src)
+ 
+ powervr-y := \
+ 	pvr_device.o \
++	pvr_device_info.o \
+ 	pvr_drv.o \
++	pvr_fw.o
+ 
+ obj-$(CONFIG_DRM_POWERVR) += powervr.o
+diff --git a/drivers/gpu/drm/imagination/pvr_device.c b/drivers/gpu/drm/imagination/pvr_device.c
+index cef3511c0c42..b1fae182c4f6 100644
+--- a/drivers/gpu/drm/imagination/pvr_device.c
++++ b/drivers/gpu/drm/imagination/pvr_device.c
+@@ -2,19 +2,31 @@
+ /* Copyright (c) 2023 Imagination Technologies Ltd. */
+ 
+ #include "pvr_device.h"
++#include "pvr_device_info.h"
++
++#include "pvr_fw.h"
++#include "pvr_rogue_cr_defs.h"
+ 
+ #include <drm/drm_print.h>
+ 
++#include <linux/bitfield.h>
+ #include <linux/clk.h>
+ #include <linux/compiler_attributes.h>
+ #include <linux/compiler_types.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/err.h>
++#include <linux/firmware.h>
+ #include <linux/gfp.h>
++#include <linux/interrupt.h>
+ #include <linux/platform_device.h>
++#include <linux/pm_runtime.h>
+ #include <linux/slab.h>
+ #include <linux/stddef.h>
+ #include <linux/types.h>
++#include <linux/workqueue.h>
++
++/* Major number for the supported version of the firmware. */
++#define PVR_FW_VERSION_MAJOR 1
+ 
+ /**
+  * pvr_device_reg_init() - Initialize kernel access to a PowerVR device's
+@@ -100,6 +112,209 @@ static int pvr_device_clk_init(struct pvr_device *pvr_dev)
+ 	return 0;
+ }
+ 
++/**
++ * pvr_build_firmware_filename() - Construct a PowerVR firmware filename
++ * @pvr_dev: Target PowerVR device.
++ * @base: First part of the filename.
++ * @major: Major version number.
++ *
++ * A PowerVR firmware filename consists of three parts separated by underscores
++ * (``'_'``) along with a '.fw' file suffix. The first part is the exact value
++ * of @base, the second part is the hardware version string derived from @pvr_fw
++ * and the final part is the firmware version number constructed from @major with
++ * a 'v' prefix, e.g. powervr/rogue_4.40.2.51_v1.fw.
++ *
++ * The returned string will have been slab allocated and must be freed with
++ * kfree().
++ *
++ * Return:
++ *  * The constructed filename on success, or
++ *  * Any error returned by kasprintf().
++ */
++static char *
++pvr_build_firmware_filename(struct pvr_device *pvr_dev, const char *base,
++			    u8 major)
++{
++	struct pvr_gpu_id *gpu_id = &pvr_dev->gpu_id;
++
++	return kasprintf(GFP_KERNEL, "%s_%d.%d.%d.%d_v%d.fw", base, gpu_id->b,
++			 gpu_id->v, gpu_id->n, gpu_id->c, major);
++}
++
++static void
++pvr_release_firmware(void *data)
++{
++	struct pvr_device *pvr_dev = data;
++
++	release_firmware(pvr_dev->fw_dev.firmware);
++}
++
++/**
++ * pvr_request_firmware() - Load firmware for a PowerVR device
++ * @pvr_dev: Target PowerVR device.
++ *
++ * See pvr_build_firmware_filename() for details on firmware file naming.
++ *
++ * Return:
++ *  * 0 on success,
++ *  * Any error returned by pvr_build_firmware_filename(), or
++ *  * Any error returned by request_firmware().
++ */
++static int
++pvr_request_firmware(struct pvr_device *pvr_dev)
++{
++	struct drm_device *drm_dev = &pvr_dev->base;
++	char *filename;
++	const struct firmware *fw;
++	int err;
++
++	filename = pvr_build_firmware_filename(pvr_dev, "powervr/rogue",
++					       PVR_FW_VERSION_MAJOR);
++	if (IS_ERR(filename))
++		return PTR_ERR(filename);
++
++	/*
++	 * This function takes a copy of &filename, meaning we can free our
++	 * instance before returning.
++	 */
++	err = request_firmware(&fw, filename, pvr_dev->base.dev);
++	if (err) {
++		drm_err(drm_dev, "failed to load firmware %s (err=%d)\n",
++			filename, err);
++		goto err_free_filename;
++	}
++
++	drm_info(drm_dev, "loaded firmware %s\n", filename);
++	kfree(filename);
++
++	pvr_dev->fw_dev.firmware = fw;
++
++	return devm_add_action_or_reset(drm_dev->dev, pvr_release_firmware, pvr_dev);
++
++err_free_filename:
++	kfree(filename);
++
++	return err;
++}
++
++/**
++ * pvr_load_gpu_id() - Load a PowerVR device's GPU ID (BVNC) from control registers.
++ *
++ * Sets struct pvr_dev.gpu_id.
++ *
++ * @pvr_dev: Target PowerVR device.
++ */
++static void
++pvr_load_gpu_id(struct pvr_device *pvr_dev)
++{
++	struct pvr_gpu_id *gpu_id = &pvr_dev->gpu_id;
++	u64 bvnc;
++
++	/*
++	 * Try reading the BVNC using the newer (cleaner) method first. If the
++	 * B value is zero, fall back to the older method.
++	 */
++	bvnc = pvr_cr_read64(pvr_dev, ROGUE_CR_CORE_ID__PBVNC);
++
++	gpu_id->b = PVR_CR_FIELD_GET(bvnc, CORE_ID__PBVNC__BRANCH_ID);
++	if (gpu_id->b != 0) {
++		gpu_id->v = PVR_CR_FIELD_GET(bvnc, CORE_ID__PBVNC__VERSION_ID);
++		gpu_id->n = PVR_CR_FIELD_GET(bvnc, CORE_ID__PBVNC__NUMBER_OF_SCALABLE_UNITS);
++		gpu_id->c = PVR_CR_FIELD_GET(bvnc, CORE_ID__PBVNC__CONFIG_ID);
++	} else {
++		u32 core_rev = pvr_cr_read32(pvr_dev, ROGUE_CR_CORE_REVISION);
++		u32 core_id = pvr_cr_read32(pvr_dev, ROGUE_CR_CORE_ID);
++		u16 core_id_config = PVR_CR_FIELD_GET(core_id, CORE_ID_CONFIG);
++
++		gpu_id->b = PVR_CR_FIELD_GET(core_rev, CORE_REVISION_MAJOR);
++		gpu_id->v = PVR_CR_FIELD_GET(core_rev, CORE_REVISION_MINOR);
++		gpu_id->n = FIELD_GET(0xFF00, core_id_config);
++		gpu_id->c = FIELD_GET(0x00FF, core_id_config);
++	}
++}
++
++/**
++ * pvr_set_dma_info() - Set PowerVR device DMA information
++ * @pvr_dev: Target PowerVR device.
++ *
++ * Sets the DMA mask and max segment size for the PowerVR device.
++ *
++ * Return:
++ *  * 0 on success,
++ *  * Any error returned by PVR_FEATURE_VALUE(), or
++ *  * Any error returned by dma_set_mask().
++ */
++
++static int
++pvr_set_dma_info(struct pvr_device *pvr_dev)
++{
++	struct drm_device *drm_dev = from_pvr_device(pvr_dev);
++	u16 phys_bus_width;
++	int err;
++
++	err = PVR_FEATURE_VALUE(pvr_dev, phys_bus_width, &phys_bus_width);
++	if (err) {
++		drm_err(drm_dev, "Failed to get device physical bus width\n");
++		return err;
++	}
++
++	err = dma_set_mask(drm_dev->dev, DMA_BIT_MASK(phys_bus_width));
++	if (err) {
++		drm_err(drm_dev, "Failed to set DMA mask (err=%d)\n", err);
++		return err;
++	}
++
++	dma_set_max_seg_size(drm_dev->dev, UINT_MAX);
++
++	return 0;
++}
++
++/**
++ * pvr_device_gpu_init() - GPU-specific initialization for a PowerVR device
++ * @pvr_dev: Target PowerVR device.
++ *
++ * The following steps are taken to ensure the device is ready:
++ *
++ *  1. Read the hardware version information from control registers,
++ *  2. Initialise the hardware feature information,
++ *  3. Setup the device DMA information,
++ *  4. Setup the device-scoped memory context, and
++ *  5. Load firmware into the device.
++ *
++ * Return:
++ *  * 0 on success,
++ *  * -%ENODEV if the GPU is not supported,
++ *  * Any error returned by pvr_set_dma_info(),
++ *  * Any error returned by pvr_memory_context_init(), or
++ *  * Any error returned by pvr_request_firmware().
++ */
++static int
++pvr_device_gpu_init(struct pvr_device *pvr_dev)
++{
++	int err;
++
++	pvr_load_gpu_id(pvr_dev);
++
++	err = pvr_request_firmware(pvr_dev);
++	if (err)
++		return err;
++
++	err = pvr_fw_validate_init_device_info(pvr_dev);
++	if (err)
++		return err;
++
++	if (PVR_HAS_FEATURE(pvr_dev, meta))
++		pvr_dev->fw_dev.processor_type = PVR_FW_PROCESSOR_TYPE_META;
++	else if (PVR_HAS_FEATURE(pvr_dev, mips))
++		pvr_dev->fw_dev.processor_type = PVR_FW_PROCESSOR_TYPE_MIPS;
++	else if (PVR_HAS_FEATURE(pvr_dev, riscv_fw_processor))
++		pvr_dev->fw_dev.processor_type = PVR_FW_PROCESSOR_TYPE_RISCV;
++	else
++		return -EINVAL;
++
++	return pvr_set_dma_info(pvr_dev);
++}
++
+ /**
+  * pvr_device_init() - Initialize a PowerVR device
+  * @pvr_dev: Target PowerVR device.
+@@ -130,7 +345,12 @@ pvr_device_init(struct pvr_device *pvr_dev)
+ 		return err;
+ 
+ 	/* Map the control registers into memory. */
+-	return pvr_device_reg_init(pvr_dev);
++	err = pvr_device_reg_init(pvr_dev);
++	if (err)
++		return err;
++
++	/* Perform GPU-specific initialization steps. */
++	return pvr_device_gpu_init(pvr_dev);
+ }
+ 
+ /**
+@@ -145,3 +365,104 @@ pvr_device_fini(struct pvr_device *pvr_dev)
+ 	 * the initialization stages in pvr_device_init().
+ 	 */
+ }
++
++bool
++pvr_device_has_uapi_quirk(struct pvr_device *pvr_dev, u32 quirk)
++{
++	switch (quirk) {
++	case 47217:
++		return PVR_HAS_QUIRK(pvr_dev, 47217);
++	case 48545:
++		return PVR_HAS_QUIRK(pvr_dev, 48545);
++	case 49927:
++		return PVR_HAS_QUIRK(pvr_dev, 49927);
++	case 51764:
++		return PVR_HAS_QUIRK(pvr_dev, 51764);
++	case 62269:
++		return PVR_HAS_QUIRK(pvr_dev, 62269);
++	default:
++		return false;
++	};
++}
++
++bool
++pvr_device_has_uapi_enhancement(struct pvr_device *pvr_dev, u32 enhancement)
++{
++	switch (enhancement) {
++	case 35421:
++		return PVR_HAS_ENHANCEMENT(pvr_dev, 35421);
++	case 42064:
++		return PVR_HAS_ENHANCEMENT(pvr_dev, 42064);
++	default:
++		return false;
++	};
++}
++
++/**
++ * pvr_device_has_feature() - Look up device feature based on feature definition
++ * @pvr_dev: Device pointer.
++ * @feature: Feature to look up. Should be one of %PVR_FEATURE_*.
++ *
++ * Returns:
++ *  * %true if feature is present on device, or
++ *  * %false if feature is not present on device.
++ */
++bool
++pvr_device_has_feature(struct pvr_device *pvr_dev, u32 feature)
++{
++	switch (feature) {
++	case PVR_FEATURE_CLUSTER_GROUPING:
++		return PVR_HAS_FEATURE(pvr_dev, cluster_grouping);
++
++	case PVR_FEATURE_COMPUTE_MORTON_CAPABLE:
++		return PVR_HAS_FEATURE(pvr_dev, compute_morton_capable);
++
++	case PVR_FEATURE_FB_CDC_V4:
++		return PVR_HAS_FEATURE(pvr_dev, fb_cdc_v4);
++
++	case PVR_FEATURE_GPU_MULTICORE_SUPPORT:
++		return PVR_HAS_FEATURE(pvr_dev, gpu_multicore_support);
++
++	case PVR_FEATURE_ISP_ZLS_D24_S8_PACKING_OGL_MODE:
++		return PVR_HAS_FEATURE(pvr_dev, isp_zls_d24_s8_packing_ogl_mode);
++
++	case PVR_FEATURE_S7_TOP_INFRASTRUCTURE:
++		return PVR_HAS_FEATURE(pvr_dev, s7_top_infrastructure);
++
++	case PVR_FEATURE_TESSELLATION:
++		return PVR_HAS_FEATURE(pvr_dev, tessellation);
++
++	case PVR_FEATURE_TPU_DM_GLOBAL_REGISTERS:
++		return PVR_HAS_FEATURE(pvr_dev, tpu_dm_global_registers);
++
++	case PVR_FEATURE_VDM_DRAWINDIRECT:
++		return PVR_HAS_FEATURE(pvr_dev, vdm_drawindirect);
++
++	case PVR_FEATURE_VDM_OBJECT_LEVEL_LLS:
++		return PVR_HAS_FEATURE(pvr_dev, vdm_object_level_lls);
++
++	case PVR_FEATURE_ZLS_SUBTILE:
++		return PVR_HAS_FEATURE(pvr_dev, zls_subtile);
++
++	/* Derived features. */
++	case PVR_FEATURE_CDM_USER_MODE_QUEUE: {
++		u8 cdm_control_stream_format = 0;
++
++		PVR_FEATURE_VALUE(pvr_dev, cdm_control_stream_format, &cdm_control_stream_format);
++		return (cdm_control_stream_format >= 2 && cdm_control_stream_format <= 4);
++	}
++
++	case PVR_FEATURE_REQUIRES_FB_CDC_ZLS_SETUP:
++		if (PVR_HAS_FEATURE(pvr_dev, fbcdc_algorithm)) {
++			u8 fbcdc_algorithm = 0;
++
++			PVR_FEATURE_VALUE(pvr_dev, fbcdc_algorithm, &fbcdc_algorithm);
++			return (fbcdc_algorithm < 3 || PVR_HAS_FEATURE(pvr_dev, fb_cdc_v4));
++		}
++		return false;
++
++	default:
++		WARN(true, "Looking up undefined feature %u\n", feature);
++		return false;
++	}
++}
+diff --git a/drivers/gpu/drm/imagination/pvr_device.h b/drivers/gpu/drm/imagination/pvr_device.h
+index d61b3615b49f..833fd686c8eb 100644
+--- a/drivers/gpu/drm/imagination/pvr_device.h
++++ b/drivers/gpu/drm/imagination/pvr_device.h
+@@ -4,6 +4,9 @@
+ #ifndef PVR_DEVICE_H
+ #define PVR_DEVICE_H
+ 
++#include "pvr_device_info.h"
++#include "pvr_fw.h"
++
+ #include <drm/drm_device.h>
+ #include <drm/drm_file.h>
+ #include <drm/drm_mm.h>
+@@ -28,6 +31,26 @@ struct clk;
+ /* Forward declaration from <linux/firmware.h>. */
+ struct firmware;
+ 
++/**
++ * struct pvr_gpu_id - Hardware GPU ID information for a PowerVR device
++ * @b: Branch ID.
++ * @v: Version ID.
++ * @n: Number of scalable units.
++ * @c: Config ID.
++ */
++struct pvr_gpu_id {
++	u16 b, v, n, c;
++};
++
++/**
++ * struct pvr_fw_version - Firmware version information
++ * @major: Major version number.
++ * @minor: Minor version number.
++ */
++struct pvr_fw_version {
++	u16 major, minor;
++};
++
+ /**
+  * struct pvr_device - powervr-specific wrapper for &struct drm_device
+  */
+@@ -40,6 +63,35 @@ struct pvr_device {
+ 	 */
+ 	struct drm_device base;
+ 
++	/** @gpu_id: GPU ID detected at runtime. */
++	struct pvr_gpu_id gpu_id;
++
++	/**
++	 * @features: Hardware feature information.
++	 *
++	 * Do not access this member directly, instead use PVR_HAS_FEATURE()
++	 * or PVR_FEATURE_VALUE() macros.
++	 */
++	struct pvr_device_features features;
++
++	/**
++	 * @quirks: Hardware quirk information.
++	 *
++	 * Do not access this member directly, instead use PVR_HAS_QUIRK().
++	 */
++	struct pvr_device_quirks quirks;
++
++	/**
++	 * @enhancements: Hardware enhancement information.
++	 *
++	 * Do not access this member directly, instead use
++	 * PVR_HAS_ENHANCEMENT().
++	 */
++	struct pvr_device_enhancements enhancements;
++
++	/** @fw_version: Firmware version detected at runtime. */
++	struct pvr_fw_version fw_version;
++
+ 	/**
+ 	 * @regs: Device control registers.
+ 	 *
+@@ -70,6 +122,9 @@ struct pvr_device {
+ 	 * Interface (MEMIF). If present, this needs to be enabled/disabled together with @core_clk.
+ 	 */
+ 	struct clk *mem_clk;
++
++	/** @fw_dev: Firmware related data. */
++	struct pvr_fw_device fw_dev;
+ };
+ 
+ /**
+@@ -92,6 +147,76 @@ struct pvr_file {
+ 	struct pvr_device *pvr_dev;
+ };
+ 
++/**
++ * PVR_HAS_FEATURE() - Tests whether a PowerVR device has a given feature
++ * @pvr_dev: [IN] Target PowerVR device.
++ * @feature: [IN] Hardware feature name.
++ *
++ * Feature names are derived from those found in &struct pvr_device_features by
++ * dropping the 'has_' prefix, which is applied by this macro.
++ *
++ * Return:
++ *  * true if the named feature is present in the hardware
++ *  * false if the named feature is not present in the hardware
++ */
++#define PVR_HAS_FEATURE(pvr_dev, feature) ((pvr_dev)->features.has_##feature)
++
++/**
++ * PVR_FEATURE_VALUE() - Gets a PowerVR device feature value
++ * @pvr_dev: [IN] Target PowerVR device.
++ * @feature: [IN] Feature name.
++ * @value_out: [OUT] Feature value.
++ *
++ * This macro will get a feature value for those features that have values.
++ * If the feature is not present, nothing will be stored to @value_out.
++ *
++ * Feature names are derived from those found in &struct pvr_device_features by
++ * dropping the 'has_' prefix.
++ *
++ * Return:
++ *  * 0 on success, or
++ *  * -%EINVAL if the named feature is not present in the hardware
++ */
++#define PVR_FEATURE_VALUE(pvr_dev, feature, value_out)             \
++	({                                                         \
++		struct pvr_device *_pvr_dev = pvr_dev;             \
++		int _ret = -EINVAL;                                \
++		if (_pvr_dev->features.has_##feature) {            \
++			*(value_out) = _pvr_dev->features.feature; \
++			_ret = 0;                                  \
++		}                                                  \
++		_ret;                                              \
++	})
++
++/**
++ * PVR_HAS_QUIRK() - Tests whether a physical device has a given quirk
++ * @pvr_dev: [IN] Target PowerVR device.
++ * @quirk: [IN] Hardware quirk name.
++ *
++ * Quirk numbers are derived from those found in #pvr_device_quirks by
++ * dropping the 'has_brn' prefix, which is applied by this macro.
++ *
++ * Returns
++ *  * true if the quirk is present in the hardware, or
++ *  * false if the quirk is not present in the hardware.
++ */
++#define PVR_HAS_QUIRK(pvr_dev, quirk) ((pvr_dev)->quirks.has_brn##quirk)
++
++/**
++ * PVR_HAS_ENHANCEMENT() - Tests whether a physical device has a given
++ *                         enhancement
++ * @pvr_dev: [IN] Target PowerVR device.
++ * @enhancement: [IN] Hardware enhancement name.
++ *
++ * Enhancement numbers are derived from those found in #pvr_device_enhancements
++ * by dropping the 'has_ern' prefix, which is applied by this macro.
++ *
++ * Returns
++ *  * true if the enhancement is present in the hardware, or
++ *  * false if the enhancement is not present in the hardware.
++ */
++#define PVR_HAS_ENHANCEMENT(pvr_dev, enhancement) ((pvr_dev)->enhancements.has_ern##enhancement)
++
+ #define from_pvr_device(pvr_dev) (&(pvr_dev)->base)
+ 
+ #define to_pvr_device(drm_dev) container_of_const(drm_dev, struct pvr_device, base)
+@@ -100,9 +225,77 @@ struct pvr_file {
+ 
+ #define to_pvr_file(file) ((file)->driver_priv)
+ 
++/**
++ * PVR_PACKED_BVNC() - Packs B, V, N and C values into a 64-bit unsigned integer
++ * @b: Branch ID.
++ * @v: Version ID.
++ * @n: Number of scalable units.
++ * @c: Config ID.
++ *
++ * The packed layout is as follows:
++ *
++ *    +--------+--------+--------+-------+
++ *    | 63..48 | 47..32 | 31..16 | 15..0 |
++ *    +========+========+========+=======+
++ *    | B      | V      | N      | C     |
++ *    +--------+--------+--------+-------+
++ *
++ * pvr_gpu_id_to_packed_bvnc() should be used instead of this macro when a
++ * &struct pvr_gpu_id is available in order to ensure proper type checking.
++ *
++ * Return: Packed BVNC.
++ */
++/* clang-format off */
++#define PVR_PACKED_BVNC(b, v, n, c) \
++	((((u64)(b) & GENMASK_ULL(15, 0)) << 48) | \
++	 (((u64)(v) & GENMASK_ULL(15, 0)) << 32) | \
++	 (((u64)(n) & GENMASK_ULL(15, 0)) << 16) | \
++	 (((u64)(c) & GENMASK_ULL(15, 0)) <<  0))
++/* clang-format on */
++
++/**
++ * pvr_gpu_id_to_packed_bvnc() - Packs B, V, N and C values into a 64-bit
++ * unsigned integer
++ * @gpu_id: GPU ID.
++ *
++ * The packed layout is as follows:
++ *
++ *    +--------+--------+--------+-------+
++ *    | 63..48 | 47..32 | 31..16 | 15..0 |
++ *    +========+========+========+=======+
++ *    | B      | V      | N      | C     |
++ *    +--------+--------+--------+-------+
++ *
++ * This should be used in preference to PVR_PACKED_BVNC() when a &struct
++ * pvr_gpu_id is available in order to ensure proper type checking.
++ *
++ * Return: Packed BVNC.
++ */
++static __always_inline u64
++pvr_gpu_id_to_packed_bvnc(struct pvr_gpu_id *gpu_id)
++{
++	return PVR_PACKED_BVNC(gpu_id->b, gpu_id->v, gpu_id->n, gpu_id->c);
++}
++
++static __always_inline void
++packed_bvnc_to_pvr_gpu_id(u64 bvnc, struct pvr_gpu_id *gpu_id)
++{
++	gpu_id->b = (bvnc & GENMASK_ULL(63, 48)) >> 48;
++	gpu_id->v = (bvnc & GENMASK_ULL(47, 32)) >> 32;
++	gpu_id->n = (bvnc & GENMASK_ULL(31, 16)) >> 16;
++	gpu_id->c = bvnc & GENMASK_ULL(15, 0);
++}
++
+ int pvr_device_init(struct pvr_device *pvr_dev);
+ void pvr_device_fini(struct pvr_device *pvr_dev);
+ 
++bool
++pvr_device_has_uapi_quirk(struct pvr_device *pvr_dev, u32 quirk);
++bool
++pvr_device_has_uapi_enhancement(struct pvr_device *pvr_dev, u32 enhancement);
++bool
++pvr_device_has_feature(struct pvr_device *pvr_dev, u32 feature);
++
+ /**
+  * PVR_CR_FIELD_GET() - Extract a single field from a PowerVR control register
+  * @val: Value of the target register.
+@@ -208,6 +401,29 @@ pvr_cr_poll_reg64(struct pvr_device *pvr_dev, u32 reg_addr, u64 reg_value,
+ 		(value & reg_mask) == reg_value, 0, timeout_usec);
+ }
+ 
++/**
++ * pvr_round_up_to_cacheline_size() - Round up a provided size to be cacheline
++ *                                    aligned
++ * @pvr_dev: Target PowerVR device.
++ * @size: Initial size, in bytes.
++ *
++ * Returns:
++ *  * Size aligned to cacheline size.
++ */
++static __always_inline size_t
++pvr_round_up_to_cacheline_size(struct pvr_device *pvr_dev, size_t size)
++{
++	u16 slc_cacheline_size_bits = 0;
++	u16 slc_cacheline_size_bytes;
++
++	WARN_ON(!PVR_HAS_FEATURE(pvr_dev, slc_cache_line_size_bits));
++	PVR_FEATURE_VALUE(pvr_dev, slc_cache_line_size_bits,
++			  &slc_cacheline_size_bits);
++	slc_cacheline_size_bytes = slc_cacheline_size_bits / 8;
++
++	return round_up(size, slc_cacheline_size_bytes);
++}
++
+ /**
+  * DOC: IOCTL validation helpers
+  *
+@@ -302,4 +518,8 @@ pvr_ioctl_union_padding_check(void *instance, size_t union_offset,
+ 					      __union_size, __member_size);  \
+ 	})
+ 
++#define PVR_FW_PROCESSOR_TYPE_META  0
++#define PVR_FW_PROCESSOR_TYPE_MIPS  1
++#define PVR_FW_PROCESSOR_TYPE_RISCV 2
++
+ #endif /* PVR_DEVICE_H */
+diff --git a/drivers/gpu/drm/imagination/pvr_device_info.c b/drivers/gpu/drm/imagination/pvr_device_info.c
 new file mode 100644
-index 000000000000..632221b88281
+index 000000000000..66ab64de7128
 --- /dev/null
-+++ b/drivers/gpu/drm/imagination/pvr_rogue_heap_config.h
-@@ -0,0 +1,113 @@
++++ b/drivers/gpu/drm/imagination/pvr_device_info.c
+@@ -0,0 +1,254 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/* Copyright (c) 2023 Imagination Technologies Ltd. */
++
++#include "pvr_device.h"
++#include "pvr_device_info.h"
++#include "pvr_rogue_fwif_dev_info.h"
++
++#include <drm/drm_print.h>
++
++#include <linux/bits.h>
++#include <linux/minmax.h>
++#include <linux/stddef.h>
++#include <linux/types.h>
++
++#define QUIRK_MAPPING(quirk) \
++	[PVR_FW_HAS_BRN_##quirk] = offsetof(struct pvr_device, quirks.has_brn##quirk)
++
++static const uintptr_t quirks_mapping[] = {
++	QUIRK_MAPPING(44079),
++	QUIRK_MAPPING(47217),
++	QUIRK_MAPPING(48492),
++	QUIRK_MAPPING(48545),
++	QUIRK_MAPPING(49927),
++	QUIRK_MAPPING(50767),
++	QUIRK_MAPPING(51764),
++	QUIRK_MAPPING(62269),
++	QUIRK_MAPPING(63142),
++	QUIRK_MAPPING(63553),
++	QUIRK_MAPPING(66011),
++	QUIRK_MAPPING(71242),
++};
++
++#undef QUIRK_MAPPING
++
++#define ENHANCEMENT_MAPPING(enhancement)                             \
++	[PVR_FW_HAS_ERN_##enhancement] = offsetof(struct pvr_device, \
++						  enhancements.has_ern##enhancement)
++
++static const uintptr_t enhancements_mapping[] = {
++	ENHANCEMENT_MAPPING(35421),
++	ENHANCEMENT_MAPPING(38020),
++	ENHANCEMENT_MAPPING(38748),
++	ENHANCEMENT_MAPPING(42064),
++	ENHANCEMENT_MAPPING(42290),
++	ENHANCEMENT_MAPPING(42606),
++	ENHANCEMENT_MAPPING(47025),
++	ENHANCEMENT_MAPPING(57596),
++};
++
++#undef ENHANCEMENT_MAPPING
++
++static void pvr_device_info_set_common(struct pvr_device *pvr_dev, const u64 *bitmask,
++				       u32 bitmask_size, const uintptr_t *mapping, u32 mapping_max)
++{
++	const u32 mapping_max_size = (mapping_max + 63) >> 6;
++	const u32 nr_bits = min(bitmask_size * 64, mapping_max);
++
++	/* Warn if any unsupported values in the bitmask. */
++	if (bitmask_size > mapping_max_size) {
++		if (mapping == quirks_mapping)
++			drm_warn(from_pvr_device(pvr_dev), "Unsupported quirks in firmware image");
++		else
++			drm_warn(from_pvr_device(pvr_dev),
++				 "Unsupported enhancements in firmware image");
++	} else if (bitmask_size == mapping_max_size && (mapping_max & 63)) {
++		u64 invalid_mask = ~0ull << (mapping_max & 63);
++
++		if (bitmask[bitmask_size - 1] & invalid_mask) {
++			if (mapping == quirks_mapping)
++				drm_warn(from_pvr_device(pvr_dev),
++					 "Unsupported quirks in firmware image");
++			else
++				drm_warn(from_pvr_device(pvr_dev),
++					 "Unsupported enhancements in firmware image");
++		}
++	}
++
++	for (u32 i = 0; i < nr_bits; i++) {
++		if (bitmask[i >> 6] & BIT_ULL(i & 63))
++			*(bool *)((u8 *)pvr_dev + mapping[i]) = true;
++	}
++}
++
++/**
++ * pvr_device_info_set_quirks() - Set device quirks from device information in firmware
++ * @pvr_dev: Device pointer.
++ * @quirks: Pointer to quirks mask in device information.
++ * @quirks_size: Size of quirks mask, in u64s.
++ */
++void pvr_device_info_set_quirks(struct pvr_device *pvr_dev, const u64 *quirks, u32 quirks_size)
++{
++	BUILD_BUG_ON(ARRAY_SIZE(quirks_mapping) != PVR_FW_HAS_BRN_MAX);
++
++	pvr_device_info_set_common(pvr_dev, quirks, quirks_size, quirks_mapping,
++				   ARRAY_SIZE(quirks_mapping));
++}
++
++/**
++ * pvr_device_info_set_enhancements() - Set device enhancements from device information in firmware
++ * @pvr_dev: Device pointer.
++ * @quirks: Pointer to enhancements mask in device information.
++ * @quirks_size: Size of enhancements mask, in u64s.
++ */
++void pvr_device_info_set_enhancements(struct pvr_device *pvr_dev, const u64 *enhancements,
++				      u32 enhancements_size)
++{
++	BUILD_BUG_ON(ARRAY_SIZE(enhancements_mapping) != PVR_FW_HAS_ERN_MAX);
++
++	pvr_device_info_set_common(pvr_dev, enhancements, enhancements_size,
++				   enhancements_mapping, ARRAY_SIZE(enhancements_mapping));
++}
++
++#define FEATURE_MAPPING(fw_feature, feature)                                        \
++	[PVR_FW_HAS_FEATURE_##fw_feature] = {                                       \
++		.flag_offset = offsetof(struct pvr_device, features.has_##feature), \
++		.value_offset = 0                                                   \
++	}
++
++#define FEATURE_MAPPING_VALUE(fw_feature, feature)                                  \
++	[PVR_FW_HAS_FEATURE_##fw_feature] = {                                       \
++		.flag_offset = offsetof(struct pvr_device, features.has_##feature), \
++		.value_offset = offsetof(struct pvr_device, features.feature)       \
++	}
++
++static const struct {
++	uintptr_t flag_offset;
++	uintptr_t value_offset;
++} features_mapping[] = {
++	FEATURE_MAPPING(AXI_ACELITE, axi_acelite),
++	FEATURE_MAPPING_VALUE(CDM_CONTROL_STREAM_FORMAT, cdm_control_stream_format),
++	FEATURE_MAPPING(CLUSTER_GROUPING, cluster_grouping),
++	FEATURE_MAPPING_VALUE(COMMON_STORE_SIZE_IN_DWORDS, common_store_size_in_dwords),
++	FEATURE_MAPPING(COMPUTE, compute),
++	FEATURE_MAPPING(COMPUTE_MORTON_CAPABLE, compute_morton_capable),
++	FEATURE_MAPPING(COMPUTE_OVERLAP, compute_overlap),
++	FEATURE_MAPPING(COREID_PER_OS, coreid_per_os),
++	FEATURE_MAPPING(DYNAMIC_DUST_POWER, dynamic_dust_power),
++	FEATURE_MAPPING_VALUE(ECC_RAMS, ecc_rams),
++	FEATURE_MAPPING_VALUE(FBCDC, fbcdc),
++	FEATURE_MAPPING_VALUE(FBCDC_ALGORITHM, fbcdc_algorithm),
++	FEATURE_MAPPING_VALUE(FBCDC_ARCHITECTURE, fbcdc_architecture),
++	FEATURE_MAPPING_VALUE(FBC_MAX_DEFAULT_DESCRIPTORS, fbc_max_default_descriptors),
++	FEATURE_MAPPING_VALUE(FBC_MAX_LARGE_DESCRIPTORS, fbc_max_large_descriptors),
++	FEATURE_MAPPING(FB_CDC_V4, fb_cdc_v4),
++	FEATURE_MAPPING(GPU_MULTICORE_SUPPORT, gpu_multicore_support),
++	FEATURE_MAPPING(GPU_VIRTUALISATION, gpu_virtualisation),
++	FEATURE_MAPPING(GS_RTA_SUPPORT, gs_rta_support),
++	FEATURE_MAPPING(IRQ_PER_OS, irq_per_os),
++	FEATURE_MAPPING_VALUE(ISP_MAX_TILES_IN_FLIGHT, isp_max_tiles_in_flight),
++	FEATURE_MAPPING_VALUE(ISP_SAMPLES_PER_PIXEL, isp_samples_per_pixel),
++	FEATURE_MAPPING(ISP_ZLS_D24_S8_PACKING_OGL_MODE, isp_zls_d24_s8_packing_ogl_mode),
++	FEATURE_MAPPING_VALUE(LAYOUT_MARS, layout_mars),
++	FEATURE_MAPPING_VALUE(MAX_PARTITIONS, max_partitions),
++	FEATURE_MAPPING_VALUE(META, meta),
++	FEATURE_MAPPING_VALUE(META_COREMEM_SIZE, meta_coremem_size),
++	FEATURE_MAPPING(MIPS, mips),
++	FEATURE_MAPPING_VALUE(NUM_CLUSTERS, num_clusters),
++	FEATURE_MAPPING_VALUE(NUM_ISP_IPP_PIPES, num_isp_ipp_pipes),
++	FEATURE_MAPPING_VALUE(NUM_OSIDS, num_osids),
++	FEATURE_MAPPING_VALUE(NUM_RASTER_PIPES, num_raster_pipes),
++	FEATURE_MAPPING(PBE2_IN_XE, pbe2_in_xe),
++	FEATURE_MAPPING(PBVNC_COREID_REG, pbvnc_coreid_reg),
++	FEATURE_MAPPING(PERFBUS, perfbus),
++	FEATURE_MAPPING(PERF_COUNTER_BATCH, perf_counter_batch),
++	FEATURE_MAPPING_VALUE(PHYS_BUS_WIDTH, phys_bus_width),
++	FEATURE_MAPPING(RISCV_FW_PROCESSOR, riscv_fw_processor),
++	FEATURE_MAPPING(ROGUEXE, roguexe),
++	FEATURE_MAPPING(S7_TOP_INFRASTRUCTURE, s7_top_infrastructure),
++	FEATURE_MAPPING(SIMPLE_INTERNAL_PARAMETER_FORMAT, simple_internal_parameter_format),
++	FEATURE_MAPPING(SIMPLE_INTERNAL_PARAMETER_FORMAT_V2, simple_internal_parameter_format_v2),
++	FEATURE_MAPPING_VALUE(SIMPLE_PARAMETER_FORMAT_VERSION, simple_parameter_format_version),
++	FEATURE_MAPPING_VALUE(SLC_BANKS, slc_banks),
++	FEATURE_MAPPING_VALUE(SLC_CACHE_LINE_SIZE_BITS, slc_cache_line_size_bits),
++	FEATURE_MAPPING(SLC_SIZE_CONFIGURABLE, slc_size_configurable),
++	FEATURE_MAPPING_VALUE(SLC_SIZE_IN_KILOBYTES, slc_size_in_kilobytes),
++	FEATURE_MAPPING(SOC_TIMER, soc_timer),
++	FEATURE_MAPPING(SYS_BUS_SECURE_RESET, sys_bus_secure_reset),
++	FEATURE_MAPPING(TESSELLATION, tessellation),
++	FEATURE_MAPPING(TILE_REGION_PROTECTION, tile_region_protection),
++	FEATURE_MAPPING_VALUE(TILE_SIZE_X, tile_size_x),
++	FEATURE_MAPPING_VALUE(TILE_SIZE_Y, tile_size_y),
++	FEATURE_MAPPING(TLA, tla),
++	FEATURE_MAPPING(TPU_CEM_DATAMASTER_GLOBAL_REGISTERS, tpu_cem_datamaster_global_registers),
++	FEATURE_MAPPING(TPU_DM_GLOBAL_REGISTERS, tpu_dm_global_registers),
++	FEATURE_MAPPING(TPU_FILTERING_MODE_CONTROL, tpu_filtering_mode_control),
++	FEATURE_MAPPING_VALUE(USC_MIN_OUTPUT_REGISTERS_PER_PIX, usc_min_output_registers_per_pix),
++	FEATURE_MAPPING(VDM_DRAWINDIRECT, vdm_drawindirect),
++	FEATURE_MAPPING(VDM_OBJECT_LEVEL_LLS, vdm_object_level_lls),
++	FEATURE_MAPPING_VALUE(VIRTUAL_ADDRESS_SPACE_BITS, virtual_address_space_bits),
++	FEATURE_MAPPING(WATCHDOG_TIMER, watchdog_timer),
++	FEATURE_MAPPING(WORKGROUP_PROTECTION, workgroup_protection),
++	FEATURE_MAPPING_VALUE(XE_ARCHITECTURE, xe_architecture),
++	FEATURE_MAPPING(XE_MEMORY_HIERARCHY, xe_memory_hierarchy),
++	FEATURE_MAPPING(XE_TPU2, xe_tpu2),
++	FEATURE_MAPPING_VALUE(XPU_MAX_REGBANKS_ADDR_WIDTH, xpu_max_regbanks_addr_width),
++	FEATURE_MAPPING_VALUE(XPU_MAX_SLAVES, xpu_max_slaves),
++	FEATURE_MAPPING_VALUE(XPU_REGISTER_BROADCAST, xpu_register_broadcast),
++	FEATURE_MAPPING(XT_TOP_INFRASTRUCTURE, xt_top_infrastructure),
++	FEATURE_MAPPING(ZLS_SUBTILE, zls_subtile),
++};
++
++#undef FEATURE_MAPPING_VALUE
++#undef FEATURE_MAPPING
++
++/**
++ * pvr_device_info_set_features() - Set device features from device information in firmware
++ * @pvr_dev: Device pointer.
++ * @features: Pointer to features mask in device information.
++ * @features_size: Size of features mask, in u64s.
++ * @feature_param_size: Size of feature parameters, in u64s.
++ *
++ * Returns:
++ *  * 0 on success, or
++ *  * -%EINVAL on malformed stream.
++ */
++int pvr_device_info_set_features(struct pvr_device *pvr_dev, const u64 *features, u32 features_size,
++				 u32 feature_param_size)
++{
++	const u32 mapping_max = ARRAY_SIZE(features_mapping);
++	const u32 mapping_max_size = (mapping_max + 63) >> 6;
++	const u32 nr_bits = min(features_size * 64, mapping_max);
++	const u64 *feature_params = features + features_size;
++	u32 param_idx = 0;
++
++	BUILD_BUG_ON(ARRAY_SIZE(features_mapping) != PVR_FW_HAS_FEATURE_MAX);
++
++	/* Verify no unsupported values in the bitmask. */
++	if (features_size > mapping_max_size) {
++		drm_warn(from_pvr_device(pvr_dev), "Unsupported features in firmware image");
++	} else if (features_size == mapping_max_size && (mapping_max & 63)) {
++		u64 invalid_mask = ~0ull << (mapping_max & 63);
++
++		if (features[features_size - 1] & invalid_mask)
++			drm_warn(from_pvr_device(pvr_dev),
++				 "Unsupported features in firmware image");
++	}
++
++	for (u32 i = 0; i < nr_bits; i++) {
++		if (features[i >> 6] & BIT_ULL(i & 63)) {
++			*(bool *)((u8 *)pvr_dev + features_mapping[i].flag_offset) = true;
++
++			if (features_mapping[i].value_offset) {
++				if (param_idx >= feature_param_size)
++					return -EINVAL;
++
++				*(u64 *)((u8 *)pvr_dev + features_mapping[i].value_offset) =
++					feature_params[param_idx];
++				param_idx++;
++			}
++		}
++	}
++
++	return 0;
++}
+diff --git a/drivers/gpu/drm/imagination/pvr_device_info.h b/drivers/gpu/drm/imagination/pvr_device_info.h
+new file mode 100644
+index 000000000000..f06ca2793885
+--- /dev/null
++++ b/drivers/gpu/drm/imagination/pvr_device_info.h
+@@ -0,0 +1,186 @@
 +/* SPDX-License-Identifier: GPL-2.0 OR MIT */
 +/* Copyright (c) 2023 Imagination Technologies Ltd. */
 +
-+#ifndef PVR_ROGUE_HEAP_CONFIG_H
-+#define PVR_ROGUE_HEAP_CONFIG_H
++#ifndef PVR_DEVICE_INFO_H
++#define PVR_DEVICE_INFO_H
 +
++#include <linux/types.h>
++
++struct pvr_device;
++
++/*
++ * struct pvr_device_features - Hardware feature information
++ */
++struct pvr_device_features {
++	bool has_axi_acelite;
++	bool has_cdm_control_stream_format;
++	bool has_cluster_grouping;
++	bool has_common_store_size_in_dwords;
++	bool has_compute;
++	bool has_compute_morton_capable;
++	bool has_compute_overlap;
++	bool has_coreid_per_os;
++	bool has_dynamic_dust_power;
++	bool has_ecc_rams;
++	bool has_fb_cdc_v4;
++	bool has_fbc_max_default_descriptors;
++	bool has_fbc_max_large_descriptors;
++	bool has_fbcdc;
++	bool has_fbcdc_algorithm;
++	bool has_fbcdc_architecture;
++	bool has_gpu_multicore_support;
++	bool has_gpu_virtualisation;
++	bool has_gs_rta_support;
++	bool has_irq_per_os;
++	bool has_isp_max_tiles_in_flight;
++	bool has_isp_samples_per_pixel;
++	bool has_isp_zls_d24_s8_packing_ogl_mode;
++	bool has_layout_mars;
++	bool has_max_partitions;
++	bool has_meta;
++	bool has_meta_coremem_size;
++	bool has_mips;
++	bool has_num_clusters;
++	bool has_num_isp_ipp_pipes;
++	bool has_num_osids;
++	bool has_num_raster_pipes;
++	bool has_pbe2_in_xe;
++	bool has_pbvnc_coreid_reg;
++	bool has_perfbus;
++	bool has_perf_counter_batch;
++	bool has_phys_bus_width;
++	bool has_riscv_fw_processor;
++	bool has_roguexe;
++	bool has_s7_top_infrastructure;
++	bool has_simple_internal_parameter_format;
++	bool has_simple_internal_parameter_format_v2;
++	bool has_simple_parameter_format_version;
++	bool has_slc_banks;
++	bool has_slc_cache_line_size_bits;
++	bool has_slc_size_configurable;
++	bool has_slc_size_in_kilobytes;
++	bool has_soc_timer;
++	bool has_sys_bus_secure_reset;
++	bool has_tessellation;
++	bool has_tile_region_protection;
++	bool has_tile_size_x;
++	bool has_tile_size_y;
++	bool has_tla;
++	bool has_tpu_cem_datamaster_global_registers;
++	bool has_tpu_dm_global_registers;
++	bool has_tpu_filtering_mode_control;
++	bool has_usc_min_output_registers_per_pix;
++	bool has_vdm_drawindirect;
++	bool has_vdm_object_level_lls;
++	bool has_virtual_address_space_bits;
++	bool has_watchdog_timer;
++	bool has_workgroup_protection;
++	bool has_xe_architecture;
++	bool has_xe_memory_hierarchy;
++	bool has_xe_tpu2;
++	bool has_xpu_max_regbanks_addr_width;
++	bool has_xpu_max_slaves;
++	bool has_xpu_register_broadcast;
++	bool has_xt_top_infrastructure;
++	bool has_zls_subtile;
++
++	u64 cdm_control_stream_format;
++	u64 common_store_size_in_dwords;
++	u64 ecc_rams;
++	u64 fbc_max_default_descriptors;
++	u64 fbc_max_large_descriptors;
++	u64 fbcdc;
++	u64 fbcdc_algorithm;
++	u64 fbcdc_architecture;
++	u64 isp_max_tiles_in_flight;
++	u64 isp_samples_per_pixel;
++	u64 layout_mars;
++	u64 max_partitions;
++	u64 meta;
++	u64 meta_coremem_size;
++	u64 num_clusters;
++	u64 num_isp_ipp_pipes;
++	u64 num_osids;
++	u64 num_raster_pipes;
++	u64 phys_bus_width;
++	u64 simple_parameter_format_version;
++	u64 slc_banks;
++	u64 slc_cache_line_size_bits;
++	u64 slc_size_in_kilobytes;
++	u64 tile_size_x;
++	u64 tile_size_y;
++	u64 usc_min_output_registers_per_pix;
++	u64 virtual_address_space_bits;
++	u64 xe_architecture;
++	u64 xpu_max_regbanks_addr_width;
++	u64 xpu_max_slaves;
++	u64 xpu_register_broadcast;
++};
++
++/*
++ * struct pvr_device_quirks - Hardware quirk information
++ */
++struct pvr_device_quirks {
++	bool has_brn44079;
++	bool has_brn47217;
++	bool has_brn48492;
++	bool has_brn48545;
++	bool has_brn49927;
++	bool has_brn50767;
++	bool has_brn51764;
++	bool has_brn62269;
++	bool has_brn63142;
++	bool has_brn63553;
++	bool has_brn66011;
++	bool has_brn71242;
++};
++
++/*
++ * struct pvr_device_enhancements - Hardware enhancement information
++ */
++struct pvr_device_enhancements {
++	bool has_ern35421;
++	bool has_ern38020;
++	bool has_ern38748;
++	bool has_ern42064;
++	bool has_ern42290;
++	bool has_ern42606;
++	bool has_ern47025;
++	bool has_ern57596;
++};
++
++void pvr_device_info_set_quirks(struct pvr_device *pvr_dev, const u64 *bitmask,
++				u32 bitmask_len);
++void pvr_device_info_set_enhancements(struct pvr_device *pvr_dev, const u64 *bitmask,
++				      u32 bitmask_len);
++int pvr_device_info_set_features(struct pvr_device *pvr_dev, const u64 *features, u32 features_size,
++				 u32 feature_param_size);
++
++/*
++ * Meta cores
++ *
++ * These are the values for the 'meta' feature when the feature is present
++ * (as per &struct pvr_device_features)/
++ */
++#define PVR_META_MTP218 (1)
++#define PVR_META_MTP219 (2)
++#define PVR_META_LTP218 (3)
++#define PVR_META_LTP217 (4)
++
++enum {
++	PVR_FEATURE_CDM_USER_MODE_QUEUE,
++	PVR_FEATURE_CLUSTER_GROUPING,
++	PVR_FEATURE_COMPUTE_MORTON_CAPABLE,
++	PVR_FEATURE_FB_CDC_V4,
++	PVR_FEATURE_GPU_MULTICORE_SUPPORT,
++	PVR_FEATURE_ISP_ZLS_D24_S8_PACKING_OGL_MODE,
++	PVR_FEATURE_REQUIRES_FB_CDC_ZLS_SETUP,
++	PVR_FEATURE_S7_TOP_INFRASTRUCTURE,
++	PVR_FEATURE_TESSELLATION,
++	PVR_FEATURE_TPU_DM_GLOBAL_REGISTERS,
++	PVR_FEATURE_VDM_DRAWINDIRECT,
++	PVR_FEATURE_VDM_OBJECT_LEVEL_LLS,
++	PVR_FEATURE_ZLS_SUBTILE,
++};
++
++#endif /* PVR_DEVICE_INFO_H */
+diff --git a/drivers/gpu/drm/imagination/pvr_drv.c b/drivers/gpu/drm/imagination/pvr_drv.c
+index e007d6946bdc..ecdef9720eea 100644
+--- a/drivers/gpu/drm/imagination/pvr_drv.c
++++ b/drivers/gpu/drm/imagination/pvr_drv.c
+@@ -3,6 +3,9 @@
+ 
+ #include "pvr_device.h"
+ #include "pvr_drv.h"
++#include "pvr_rogue_defs.h"
++#include "pvr_rogue_fwif_client.h"
++#include "pvr_rogue_fwif_shared.h"
+ 
+ #include <uapi/drm/pvr_drm.h>
+ 
+@@ -87,6 +90,382 @@ pvr_ioctl_get_bo_mmap_offset(struct drm_device *drm_dev, void *raw_args,
+ 	return -ENOTTY;
+ }
+ 
++static __always_inline u64
++pvr_fw_version_packed(u32 major, u32 minor)
++{
++	return ((u64)major << 32) | minor;
++}
++
++static u32
++rogue_get_common_store_partition_space_size(struct pvr_device *pvr_dev)
++{
++	u32 max_partitions = 0;
++	u32 tile_size_x = 0;
++	u32 tile_size_y = 0;
++
++	PVR_FEATURE_VALUE(pvr_dev, tile_size_x, &tile_size_x);
++	PVR_FEATURE_VALUE(pvr_dev, tile_size_y, &tile_size_y);
++	PVR_FEATURE_VALUE(pvr_dev, max_partitions, &max_partitions);
++
++	if (tile_size_x == 16 && tile_size_y == 16) {
++		u32 usc_min_output_registers_per_pix = 0;
++
++		PVR_FEATURE_VALUE(pvr_dev, usc_min_output_registers_per_pix,
++				  &usc_min_output_registers_per_pix);
++
++		return tile_size_x * tile_size_y * max_partitions *
++		       usc_min_output_registers_per_pix;
++	}
++
++	return max_partitions * 1024;
++}
++
++static u32
++rogue_get_common_store_alloc_region_size(struct pvr_device *pvr_dev)
++{
++	u32 common_store_size_in_dwords = 512 * 4 * 4;
++	u32 alloc_region_size;
++
++	PVR_FEATURE_VALUE(pvr_dev, common_store_size_in_dwords, &common_store_size_in_dwords);
++
++	alloc_region_size = common_store_size_in_dwords - (256U * 4U) -
++			    rogue_get_common_store_partition_space_size(pvr_dev);
++
++	if (PVR_HAS_QUIRK(pvr_dev, 44079)) {
++		u32 common_store_split_point = (768U * 4U * 4U);
++
++		return min(common_store_split_point - (256U * 4U), alloc_region_size);
++	}
++
++	return alloc_region_size;
++}
++
++static inline u32
++rogue_get_num_phantoms(struct pvr_device *pvr_dev)
++{
++	u32 num_clusters = 1;
++
++	PVR_FEATURE_VALUE(pvr_dev, num_clusters, &num_clusters);
++
++	return ROGUE_REQ_NUM_PHANTOMS(num_clusters);
++}
++
++static inline u32
++rogue_get_max_coeffs(struct pvr_device *pvr_dev)
++{
++	u32 max_coeff_additional_portion = ROGUE_MAX_VERTEX_SHARED_REGISTERS;
++	u32 pending_allocation_shared_regs = 2U * 1024U;
++	u32 pending_allocation_coeff_regs = 0U;
++	u32 num_phantoms = rogue_get_num_phantoms(pvr_dev);
++	u32 tiles_in_flight = 0;
++	u32 max_coeff_pixel_portion;
++
++	PVR_FEATURE_VALUE(pvr_dev, isp_max_tiles_in_flight, &tiles_in_flight);
++	max_coeff_pixel_portion = DIV_ROUND_UP(tiles_in_flight, num_phantoms);
++	max_coeff_pixel_portion *= ROGUE_MAX_PIXEL_SHARED_REGISTERS;
++
++	/*
++	 * Compute tasks on cores with BRN48492 and without compute overlap may lock
++	 * up without two additional lines of coeffs.
++	 */
++	if (PVR_HAS_QUIRK(pvr_dev, 48492) && !PVR_HAS_FEATURE(pvr_dev, compute_overlap))
++		pending_allocation_coeff_regs = 2U * 1024U;
++
++	if (PVR_HAS_ENHANCEMENT(pvr_dev, 38748))
++		pending_allocation_shared_regs = 0;
++
++	if (PVR_HAS_ENHANCEMENT(pvr_dev, 38020))
++		max_coeff_additional_portion += ROGUE_MAX_COMPUTE_SHARED_REGISTERS;
++
++	return rogue_get_common_store_alloc_region_size(pvr_dev) + pending_allocation_coeff_regs -
++		(max_coeff_pixel_portion + max_coeff_additional_portion +
++		 pending_allocation_shared_regs);
++}
++
++static inline u32
++rogue_get_cdm_max_local_mem_size_regs(struct pvr_device *pvr_dev)
++{
++	u32 available_coeffs_in_dwords = rogue_get_max_coeffs(pvr_dev);
++
++	if (PVR_HAS_QUIRK(pvr_dev, 48492) && PVR_HAS_FEATURE(pvr_dev, roguexe) &&
++	    !PVR_HAS_FEATURE(pvr_dev, compute_overlap)) {
++		/* Driver must not use the 2 reserved lines. */
++		available_coeffs_in_dwords -= ROGUE_CSRM_LINE_SIZE_IN_DWORDS * 2;
++	}
++
++	/*
++	 * The maximum amount of local memory available to a kernel is the minimum
++	 * of the total number of coefficient registers available and the max common
++	 * store allocation size which can be made by the CDM.
++	 *
++	 * If any coeff lines are reserved for tessellation or pixel then we need to
++	 * subtract those too.
++	 */
++	return min(available_coeffs_in_dwords, (u32)ROGUE_MAX_PER_KERNEL_LOCAL_MEM_SIZE_REGS);
++}
++
++/**
++ * pvr_dev_query_gpu_info_get()
++ * @pvr_dev: Device pointer.
++ * @args: [IN] Device query arguments containing a pointer to a userspace
++ *        struct drm_pvr_dev_query_gpu_info.
++ *
++ * If the query object pointer is NULL, the size field is updated with the
++ * expected size of the query object.
++ *
++ * Returns:
++ *  * 0 on success, or if size is requested using a NULL pointer, or
++ *  * -%E2BIG if the indicated length of the allocation is less than is
++ *    required to contain the copied data, or
++ *  * -%EFAULT if local memory could not be copied to userspace.
++ */
++static int
++pvr_dev_query_gpu_info_get(struct pvr_device *pvr_dev,
++			   struct drm_pvr_ioctl_dev_query_args *args)
++{
++	struct drm_pvr_dev_query_gpu_info gpu_info = {0};
++	int err;
++
++	if (!args->pointer) {
++		args->size = sizeof(struct drm_pvr_dev_query_gpu_info);
++		return 0;
++	}
++
++	gpu_info.gpu_id =
++		pvr_gpu_id_to_packed_bvnc(&pvr_dev->gpu_id);
++	gpu_info.num_phantoms = rogue_get_num_phantoms(pvr_dev);
++
++	err = PVR_UOBJ_SET(args->pointer, args->size, gpu_info);
++	if (err < 0)
++		return err;
++
++	if (args->size > sizeof(gpu_info))
++		args->size = sizeof(gpu_info);
++	return 0;
++}
++
++/**
++ * pvr_dev_query_runtime_info_get()
++ * @pvr_dev: Device pointer.
++ * @args: [IN] Device query arguments containing a pointer to a userspace
++ *        struct drm_pvr_dev_query_runtime_info.
++ *
++ * If the query object pointer is NULL, the size field is updated with the
++ * expected size of the query object.
++ *
++ * Returns:
++ *  * 0 on success, or if size is requested using a NULL pointer, or
++ *  * -%E2BIG if the indicated length of the allocation is less than is
++ *    required to contain the copied data, or
++ *  * -%EFAULT if local memory could not be copied to userspace.
++ */
++static int
++pvr_dev_query_runtime_info_get(struct pvr_device *pvr_dev,
++			       struct drm_pvr_ioctl_dev_query_args *args)
++{
++	struct drm_pvr_dev_query_runtime_info runtime_info = {0};
++	int err;
++
++	if (!args->pointer) {
++		args->size = sizeof(struct drm_pvr_dev_query_runtime_info);
++		return 0;
++	}
++
++	runtime_info.free_list_min_pages = 0; /* FIXME */
++	runtime_info.free_list_max_pages =
++		ROGUE_PM_MAX_FREELIST_SIZE / ROGUE_PM_PAGE_SIZE;
++	runtime_info.common_store_alloc_region_size =
++		rogue_get_common_store_alloc_region_size(pvr_dev);
++	runtime_info.common_store_partition_space_size =
++		rogue_get_common_store_partition_space_size(pvr_dev);
++	runtime_info.max_coeffs = rogue_get_max_coeffs(pvr_dev);
++	runtime_info.cdm_max_local_mem_size_regs =
++		rogue_get_cdm_max_local_mem_size_regs(pvr_dev);
++
++	err = PVR_UOBJ_SET(args->pointer, args->size, runtime_info);
++	if (err < 0)
++		return err;
++
++	if (args->size > sizeof(runtime_info))
++		args->size = sizeof(runtime_info);
++	return 0;
++}
++
++/**
++ * pvr_dev_query_quirks_get() - Unpack array of quirks at the address given
++ * in a struct drm_pvr_dev_query_quirks, or gets the amount of space required
++ * for it.
++ * @pvr_dev: Device pointer.
++ * @args: [IN] Device query arguments containing a pointer to a userspace
++ *        struct drm_pvr_dev_query_query_quirks.
++ *
++ * If the query object pointer is NULL, the size field is updated with the
++ * expected size of the query object.
++ * If the userspace pointer in the query object is NULL, or the count is
++ * short, no data is copied.
++ * The count field will be updated to that copied, or if either pointer is
++ * NULL, that which would have been copied.
++ * The size field in the query object will be updated to the size copied.
++ *
++ * Returns:
++ *  * 0 on success, or if size/count is requested using a NULL pointer, or
++ *  * -%EINVAL if args contained non-zero reserved fields, or
++ *  * -%E2BIG if the indicated length of the allocation is less than is
++ *    required to contain the copied data, or
++ *  * -%EFAULT if local memory could not be copied to userspace.
++ */
++static int
++pvr_dev_query_quirks_get(struct pvr_device *pvr_dev,
++			 struct drm_pvr_ioctl_dev_query_args *args)
++{
++	/*
++	 * @FIXME - hardcoding of numbers here is intended as an
++	 * intermediate step so the UAPI can be fixed, but requires a
++	 * a refactor in the future to store them in a more appropriate
++	 * location
++	 */
++	static const u32 umd_quirks_musthave[] = {
++		47217,
++		49927,
++		62269,
++	};
++	static const u32 umd_quirks[] = {
++		48545,
++		51764,
++	};
++	struct drm_pvr_dev_query_quirks query;
++	u32 out[ARRAY_SIZE(umd_quirks_musthave) + ARRAY_SIZE(umd_quirks)];
++	size_t out_musthave_count = 0;
++	size_t out_count = 0;
++	int err;
++
++	if (!args->pointer) {
++		args->size = sizeof(struct drm_pvr_dev_query_quirks);
++		return 0;
++	}
++
++	err = PVR_UOBJ_GET(query, args->size, args->pointer);
++
++	if (err < 0)
++		return err;
++	if (query._padding_c)
++		return -EINVAL;
++
++	for (int i = 0; i < ARRAY_SIZE(umd_quirks_musthave); i++) {
++		if (pvr_device_has_uapi_quirk(pvr_dev, umd_quirks_musthave[i])) {
++			out[out_count++] = umd_quirks_musthave[i];
++			out_musthave_count++;
++		}
++	}
++
++	for (int i = 0; i < ARRAY_SIZE(umd_quirks); i++) {
++		if (pvr_device_has_uapi_quirk(pvr_dev, umd_quirks[i]))
++			out[out_count++] = umd_quirks[i];
++	}
++
++	if (!query.quirks)
++		goto copy_out;
++	if (query.count < out_count)
++		return -E2BIG;
++
++	if (copy_to_user(u64_to_user_ptr(query.quirks), out,
++			 out_count * sizeof(u32))) {
++		return -EFAULT;
++	}
++
++	query.musthave_count = out_musthave_count;
++
++copy_out:
++	query.count = out_count;
++	err = PVR_UOBJ_SET(args->pointer, args->size, query);
++	if (err < 0)
++		return err;
++
++	args->size = sizeof(query);
++	return 0;
++}
++
++/**
++ * pvr_dev_query_enhancements_get() - Unpack array of enhancements at the
++ * address given in a struct drm_pvr_dev_query_enhancements, or gets the amount
++ * of space required for it.
++ * @pvr_dev: Device pointer.
++ * @args: [IN] Device query arguments containing a pointer to a userspace
++ *        struct drm_pvr_dev_query_enhancements.
++ *
++ * If the query object pointer is NULL, the size field is updated with the
++ * expected size of the query object.
++ * If the userspace pointer in the query object is NULL, or the count is
++ * short, no data is copied.
++ * The count field will be updated to that copied, or if either pointer is
++ * NULL, that which would have been copied.
++ * The size field in the query object will be updated to the size copied.
++ *
++ * Returns:
++ *  * 0 on success, or if size/count is requested using a NULL pointer, or
++ *  * -%EINVAL if args contained non-zero reserved fields, or
++ *  * -%E2BIG if the indicated length of the allocation is less than is
++ *    required to contain the copied data, or
++ *  * -%EFAULT if local memory could not be copied to userspace.
++ */
++static int
++pvr_dev_query_enhancements_get(struct pvr_device *pvr_dev,
++			       struct drm_pvr_ioctl_dev_query_args *args)
++{
++	/*
++	 * @FIXME - hardcoding of numbers here is intended as an
++	 * intermediate step so the UAPI can be fixed, but requires a
++	 * a refactor in the future to store them in a more appropriate
++	 * location
++	 */
++	const u32 umd_enhancements[] = {
++		35421,
++		42064,
++	};
++	struct drm_pvr_dev_query_enhancements query;
++	u32 out[ARRAY_SIZE(umd_enhancements)];
++	size_t out_idx = 0;
++	int err;
++
++	if (!args->pointer) {
++		args->size = sizeof(struct drm_pvr_dev_query_enhancements);
++		return 0;
++	}
++
++	err = PVR_UOBJ_GET(query, args->size, args->pointer);
++
++	if (err < 0)
++		return err;
++	if (query._padding_a)
++		return -EINVAL;
++	if (query._padding_c)
++		return -EINVAL;
++
++	for (int i = 0; i < ARRAY_SIZE(umd_enhancements); i++) {
++		if (pvr_device_has_uapi_enhancement(pvr_dev, umd_enhancements[i]))
++			out[out_idx++] = umd_enhancements[i];
++	}
++
++	if (!query.enhancements)
++		goto copy_out;
++	if (query.count < out_idx)
++		return -E2BIG;
++
++	if (copy_to_user(u64_to_user_ptr(query.enhancements), out,
++			 out_idx * sizeof(u32))) {
++		return -EFAULT;
++	}
++
++copy_out:
++	query.count = out_idx;
++	err = PVR_UOBJ_SET(args->pointer, args->size, query);
++	if (err < 0)
++		return err;
++
++	args->size = sizeof(query);
++	return 0;
++}
++
+ /**
+  * pvr_ioctl_dev_query() - IOCTL to copy information about a device
+  * @drm_dev: [IN] DRM device.
+@@ -111,7 +490,41 @@ static int
+ pvr_ioctl_dev_query(struct drm_device *drm_dev, void *raw_args,
+ 		    struct drm_file *file)
+ {
+-	return -ENOTTY;
++	struct pvr_device *pvr_dev = to_pvr_device(drm_dev);
++	struct drm_pvr_ioctl_dev_query_args *args = raw_args;
++	int idx;
++	int ret = -EINVAL;
++
++	if (!drm_dev_enter(drm_dev, &idx))
++		return -EIO;
++
++	switch ((enum drm_pvr_dev_query)args->type) {
++	case DRM_PVR_DEV_QUERY_GPU_INFO_GET:
++		ret = pvr_dev_query_gpu_info_get(pvr_dev, args);
++		break;
++
++	case DRM_PVR_DEV_QUERY_RUNTIME_INFO_GET:
++		ret = pvr_dev_query_runtime_info_get(pvr_dev, args);
++		break;
++
++	case DRM_PVR_DEV_QUERY_QUIRKS_GET:
++		ret = pvr_dev_query_quirks_get(pvr_dev, args);
++		break;
++
++	case DRM_PVR_DEV_QUERY_ENHANCEMENTS_GET:
++		ret = pvr_dev_query_enhancements_get(pvr_dev, args);
++		break;
++
++	case DRM_PVR_DEV_QUERY_HEAP_INFO_GET:
++		return -EINVAL;
++
++	case DRM_PVR_DEV_QUERY_STATIC_DATA_AREAS_GET:
++		return -EINVAL;
++	}
++
++	drm_dev_exit(idx);
++
++	return ret;
+ }
+ 
+ /**
+@@ -349,6 +762,112 @@ pvr_ioctl_submit_jobs(struct drm_device *drm_dev, void *raw_args,
+ 	return -ENOTTY;
+ }
+ 
++int
++pvr_get_uobj(u64 usr_ptr, u32 usr_stride, u32 min_stride, u32 obj_size, void *out)
++{
++	if (usr_stride < min_stride)
++		return -EINVAL;
++
++	return copy_struct_from_user(out, obj_size, u64_to_user_ptr(usr_ptr), usr_stride);
++}
++
++int
++pvr_set_uobj(u64 usr_ptr, u32 usr_stride, u32 min_stride, u32 obj_size, const void *in)
++{
++	if (usr_stride < min_stride)
++		return -EINVAL;
++
++	if (copy_to_user(u64_to_user_ptr(usr_ptr), in, min_t(u32, usr_stride, obj_size)))
++		return -EFAULT;
++
++	if (usr_stride > obj_size &&
++	    clear_user(u64_to_user_ptr(usr_ptr + obj_size), usr_stride - obj_size)) {
++		return -EFAULT;
++	}
++
++	return 0;
++}
++
++int
++pvr_get_uobj_array(const struct drm_pvr_obj_array *in, u32 min_stride, u32 obj_size, void **out)
++{
++	int ret = 0;
++	void *out_alloc;
++
++	if (in->stride < min_stride)
++		return -EINVAL;
++
++	if (!in->count)
++		return 0;
++
++	out_alloc = kvmalloc_array(in->count, obj_size, GFP_KERNEL);
++	if (!out_alloc)
++		return -ENOMEM;
++
++	if (obj_size == in->stride) {
++		if (copy_from_user(out_alloc, u64_to_user_ptr(in->array),
++				   (unsigned long)obj_size * in->count))
++			ret = -EFAULT;
++	} else {
++		void __user *in_ptr = u64_to_user_ptr(in->array);
++		void *out_ptr = out_alloc;
++
++		for (u32 i = 0; i < in->count; i++) {
++			ret = copy_struct_from_user(out_ptr, obj_size, in_ptr, in->stride);
++			if (ret)
++				break;
++
++			out_ptr += obj_size;
++			in_ptr += in->stride;
++		}
++	}
++
++	if (ret) {
++		kvfree(out_alloc);
++		return ret;
++	}
++
++	*out = out_alloc;
++	return 0;
++}
++
++int
++pvr_set_uobj_array(const struct drm_pvr_obj_array *out, u32 min_stride, u32 obj_size,
++		   const void *in)
++{
++	if (out->stride < min_stride)
++		return -EINVAL;
++
++	if (!out->count)
++		return 0;
++
++	if (obj_size == out->stride) {
++		if (copy_to_user(u64_to_user_ptr(out->array), in,
++				 (unsigned long)obj_size * out->count))
++			return -EFAULT;
++	} else {
++		u32 cpy_elem_size = min_t(u32, out->stride, obj_size);
++		void __user *out_ptr = u64_to_user_ptr(out->array);
++		const void *in_ptr = in;
++
++		for (u32 i = 0; i < out->count; i++) {
++			if (copy_to_user(out_ptr, in_ptr, cpy_elem_size))
++				return -EFAULT;
++
++			out_ptr += obj_size;
++			in_ptr += out->stride;
++		}
++
++		if (out->stride > obj_size &&
++		    clear_user(u64_to_user_ptr(out->array + obj_size),
++			       out->stride - obj_size)) {
++			return -EFAULT;
++		}
++	}
++
++	return 0;
++}
++
+ #define DRM_PVR_IOCTL(_name, _func, _flags) \
+ 	DRM_IOCTL_DEF_DRV(PVR_##_name, pvr_ioctl_##_func, _flags)
+ 
+diff --git a/drivers/gpu/drm/imagination/pvr_drv.h b/drivers/gpu/drm/imagination/pvr_drv.h
+index ecd8f6011ae9..04cd550d8b48 100644
+--- a/drivers/gpu/drm/imagination/pvr_drv.h
++++ b/drivers/gpu/drm/imagination/pvr_drv.h
+@@ -19,4 +19,111 @@
+ #define PVR_DRIVER_MINOR 0
+ #define PVR_DRIVER_PATCHLEVEL 0
+ 
++int pvr_get_uobj(u64 usr_ptr, u32 usr_size, u32 min_size, u32 obj_size, void *out);
++int pvr_set_uobj(u64 usr_ptr, u32 usr_size, u32 min_size, u32 obj_size, const void *in);
++int pvr_get_uobj_array(const struct drm_pvr_obj_array *in, u32 min_stride, u32 obj_size,
++		       void **out);
++int pvr_set_uobj_array(const struct drm_pvr_obj_array *out, u32 min_stride, u32 obj_size,
++		       const void *in);
++
++#define PVR_UOBJ_MIN_SIZE_INTERNAL(_typename, _last_mandatory_field) \
++	(offsetof(_typename, _last_mandatory_field) + \
++	 sizeof(((_typename *)NULL)->_last_mandatory_field))
++
++/* NOLINTBEGIN(bugprone-macro-parentheses) */
++#define PVR_UOBJ_DECL(_typename, _last_mandatory_field) \
++	, _typename : PVR_UOBJ_MIN_SIZE_INTERNAL(_typename, _last_mandatory_field)
++/* NOLINTEND(bugprone-macro-parentheses) */
++
++/**
++ * DOC: PVR user objects.
++ *
++ * Macros used to aid copying structured and array data to and from
++ * userspace. Objects can differ in size, provided the minimum size
++ * allowed is specified (using the last mandatory field in the struct).
++ * All types used with PVR_UOBJ_GET/SET macros must be listed here under
++ * PVR_UOBJ_MIN_SIZE, with the last mandatory struct field specified.
++ */
++
++/**
++ * PVR_UOBJ_MIN_SIZE() - Fetch the minimum copy size of a compatible type object.
++ * @_obj_name: The name of the object. Cannot be a typename - this is deduced.
++ *
++ * This cannot fail. Using the macro with an incompatible type will result in a
++ * compiler error.
++ *
++ * To add compatibility for a type, list it within the macro in an orderly
++ * fashion. The second argument is the name of the last mandatory field of the
++ * struct type, which is used to calculate the size. See also PVR_UOBJ_DECL().
++ *
++ * Return: The minimum copy size.
++ */
++#define PVR_UOBJ_MIN_SIZE(_obj_name) _Generic(_obj_name \
++	PVR_UOBJ_DECL(struct drm_pvr_job, hwrt) \
++	PVR_UOBJ_DECL(struct drm_pvr_sync_op, value) \
++	PVR_UOBJ_DECL(struct drm_pvr_dev_query_gpu_info, num_phantoms) \
++	PVR_UOBJ_DECL(struct drm_pvr_dev_query_runtime_info, cdm_max_local_mem_size_regs) \
++	PVR_UOBJ_DECL(struct drm_pvr_dev_query_quirks, _padding_c) \
++	PVR_UOBJ_DECL(struct drm_pvr_dev_query_enhancements, _padding_c) \
++	PVR_UOBJ_DECL(struct drm_pvr_heap, page_size_log2) \
++	PVR_UOBJ_DECL(struct drm_pvr_dev_query_heap_info, heaps) \
++	PVR_UOBJ_DECL(struct drm_pvr_static_data_area, offset) \
++	PVR_UOBJ_DECL(struct drm_pvr_dev_query_static_data_areas, static_data_areas) \
++	)
++
++/**
++ * PVR_UOBJ_GET() - Copies from _src_usr_ptr to &_dest_obj.
++ * @_dest_obj: The destination container object in kernel space.
++ * @_usr_size: The size of the source container in user space.
++ * @_src_usr_ptr: __u64 raw pointer to the source container in user space.
++ *
++ * Return: Error code. See pvr_get_uobj().
++ */
++#define PVR_UOBJ_GET(_dest_obj, _usr_size, _src_usr_ptr) \
++	pvr_get_uobj(_src_usr_ptr, _usr_size, \
++		     PVR_UOBJ_MIN_SIZE(_dest_obj), \
++		     sizeof(_dest_obj), &(_dest_obj))
++
++/**
++ * PVR_UOBJ_SET() - Copies from &_src_obj to _dest_usr_ptr.
++ * @_dest_usr_ptr: __u64 raw pointer to the destination container in user space.
++ * @_usr_size: The size of the destination container in user space.
++ * @_src_obj: The source container object in kernel space.
++ *
++ * Return: Error code. See pvr_set_uobj().
++ */
++#define PVR_UOBJ_SET(_dest_usr_ptr, _usr_size, _src_obj) \
++	pvr_set_uobj(_dest_usr_ptr, _usr_size, \
++		     PVR_UOBJ_MIN_SIZE(_src_obj), \
++		     sizeof(_src_obj), &(_src_obj))
++
++/**
++ * PVR_UOBJ_GET_ARRAY() - Copies from @_src_drm_pvr_obj_array.array to
++ * alloced memory and returns a pointer in _dest_array.
++ * @_dest_array: The destination C array object in kernel space.
++ * @_src_drm_pvr_obj_array: The &struct drm_pvr_obj_array containing a __u64 raw
++ * pointer to the source C array in user space and the size of each array
++ * element in user space (the 'stride').
++ *
++ * Return: Error code. See pvr_get_uobj_array().
++ */
++#define PVR_UOBJ_GET_ARRAY(_dest_array, _src_drm_pvr_obj_array) \
++	pvr_get_uobj_array(_src_drm_pvr_obj_array, \
++			   PVR_UOBJ_MIN_SIZE((_dest_array)[0]), \
++			   sizeof((_dest_array)[0]), (void **)&(_dest_array))
++
++/**
++ * PVR_UOBJ_SET_ARRAY() - Copies from _src_array to @_dest_drm_pvr_obj_array.array.
++ * @_dest_drm_pvr_obj_array: The &struct drm_pvr_obj_array containing a __u64 raw
++ * pointer to the destination C array in user space and the size of each array
++ * element in user space (the 'stride').
++ * @_src_array: The source C array object in kernel space.
++ *
++ * Return: Error code. See pvr_set_uobj_array().
++ */
++#define PVR_UOBJ_SET_ARRAY(_dest_drm_pvr_obj_array, _src_array) \
++	pvr_set_uobj_array(_dest_drm_pvr_obj_array, \
++			   PVR_UOBJ_MIN_SIZE((_src_array)[0]), \
++			   sizeof((_src_array)[0]), _src_array)
++
+ #endif /* PVR_DRV_H */
+diff --git a/drivers/gpu/drm/imagination/pvr_fw.c b/drivers/gpu/drm/imagination/pvr_fw.c
+new file mode 100644
+index 000000000000..c48de4a3af46
+--- /dev/null
++++ b/drivers/gpu/drm/imagination/pvr_fw.c
+@@ -0,0 +1,145 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/* Copyright (c) 2023 Imagination Technologies Ltd. */
++
++#include "pvr_device.h"
++#include "pvr_device_info.h"
++#include "pvr_fw.h"
++
++#include <drm/drm_drv.h>
++#include <linux/firmware.h>
 +#include <linux/sizes.h>
 +
-+/*
-+ * ROGUE Device Virtual Address Space Definitions
++#define FW_MAX_SUPPORTED_MAJOR_VERSION 1
++
++/**
++ * pvr_fw_validate() - Parse firmware header and check compatibility
++ * @pvr_dev: Device pointer.
 + *
-+ * This file defines the ROGUE virtual address heaps that are used in
-+ * application memory contexts. It also shows where the Firmware memory heap
-+ * fits into this, but the firmware heap is only ever created in the
-+ * kernel driver and never exposed to userspace.
-+ *
-+ * ROGUE_PDSCODEDATA_HEAP_BASE and ROGUE_USCCODE_HEAP_BASE will be programmed,
-+ * on a global basis, into ROGUE_CR_PDS_EXEC_BASE and ROGUE_CR_USC_CODE_BASE_*
-+ * respectively. Therefore if client drivers use multiple configs they must
-+ * still be consistent with their definitions for these heaps.
-+ *
-+ * Base addresses have to be a multiple of 4MiB.
-+ * Heaps must not start at 0x0000000000, as this is reserved for internal
-+ * use within the driver.
-+ * Range comments, those starting in column 0 below are a section heading of
-+ * sorts and are above the heaps in that range. Often this is the reserved
-+ * size of the heap within the range.
++ * Returns:
++ *  * 0 on success, or
++ *  * -EINVAL if firmware is incompatible.
 + */
++static int
++pvr_fw_validate(struct pvr_device *pvr_dev)
++{
++	struct drm_device *drm_dev = from_pvr_device(pvr_dev);
++	const struct firmware *firmware = pvr_dev->fw_dev.firmware;
++	const struct pvr_fw_layout_entry *layout_entries;
++	const struct pvr_fw_info_header *header;
++	const u8 *fw = firmware->data;
++	u32 fw_offset = firmware->size - SZ_4K;
++	u32 layout_table_size;
++	u32 entry;
 +
-+/* 0x00_0000_0000 ************************************************************/
++	if (firmware->size < SZ_4K || (firmware->size % FW_BLOCK_SIZE))
++		return -EINVAL;
 +
-+/* 0x00_0000_0000 - 0x00_0040_0000 */
-+/* 0 MiB to 4 MiB, size of 4 MiB : RESERVED */
++	header = (const struct pvr_fw_info_header *)&fw[fw_offset];
 +
-+/* 0x00_0040_0000 - 0x7F_FFC0_0000 **/
-+/* 4 MiB to 512 GiB, size of 512 GiB less 4 MiB : RESERVED **/
++	if (header->info_version != PVR_FW_INFO_VERSION) {
++		drm_err(drm_dev, "Unsupported fw info version %u\n",
++			header->info_version);
++		return -EINVAL;
++	}
 +
-+/* 0x80_0000_0000 ************************************************************/
++	if (header->header_len != sizeof(struct pvr_fw_info_header) ||
++	    header->layout_entry_size != sizeof(struct pvr_fw_layout_entry) ||
++	    header->layout_entry_num > PVR_FW_INFO_MAX_NUM_ENTRIES) {
++		drm_err(drm_dev, "FW info format mismatch\n");
++		return -EINVAL;
++	}
 +
-+/* 0x80_0000_0000 - 0x9F_FFFF_FFFF **/
-+/* 512 GiB to 640 GiB, size of 128 GiB : GENERAL_HEAP **/
-+#define ROGUE_GENERAL_HEAP_BASE 0x8000000000ull
-+#define ROGUE_GENERAL_HEAP_SIZE SZ_128G
++	if (!(header->flags & PVR_FW_FLAGS_OPEN_SOURCE) ||
++	    header->fw_version_major > FW_MAX_SUPPORTED_MAJOR_VERSION ||
++	    header->fw_version_major == 0) {
++		drm_err(drm_dev, "Unsupported FW version %u.%u (build: %u%s)\n",
++			header->fw_version_major, header->fw_version_minor,
++			header->fw_version_build,
++			(header->flags & PVR_FW_FLAGS_OPEN_SOURCE) ? " OS" : "");
++		return -EINVAL;
++	}
 +
-+/* 0xA0_0000_0000 - 0xAF_FFFF_FFFF */
-+/* 640 GiB to 704 GiB, size of 64 GiB : FREE */
++	if (pvr_gpu_id_to_packed_bvnc(&pvr_dev->gpu_id) != header->bvnc) {
++		struct pvr_gpu_id fw_gpu_id;
 +
-+/* B0_0000_0000 - 0xB7_FFFF_FFFF */
-+/* 704 GiB to 736 GiB, size of 32 GiB : FREE */
++		packed_bvnc_to_pvr_gpu_id(header->bvnc, &fw_gpu_id);
++		drm_err(drm_dev, "FW built for incorrect GPU ID %i.%i.%i.%i (expected %i.%i.%i.%i)\n",
++			fw_gpu_id.b, fw_gpu_id.v, fw_gpu_id.n, fw_gpu_id.c,
++			pvr_dev->gpu_id.b, pvr_dev->gpu_id.v, pvr_dev->gpu_id.n, pvr_dev->gpu_id.c);
++		return -EINVAL;
++	}
 +
-+/* 0xB8_0000_0000 - 0xBF_FFFF_FFFF */
-+/* 736 GiB to 768 GiB, size of 32 GiB : RESERVED */
++	fw_offset += header->header_len;
++	layout_table_size =
++		header->layout_entry_size * header->layout_entry_num;
++	if ((fw_offset + layout_table_size) > firmware->size)
++		return -EINVAL;
 +
-+/* 0xC0_0000_0000 ************************************************************/
++	layout_entries = (const struct pvr_fw_layout_entry *)&fw[fw_offset];
++	for (entry = 0; entry < header->layout_entry_num; entry++) {
++		u32 start_addr = layout_entries[entry].base_addr;
++		u32 end_addr = start_addr + layout_entries[entry].alloc_size;
 +
-+/* 0xC0_0000_0000 - 0xD9_FFFF_FFFF */
-+/* 768 GiB to 872 GiB, size of 104 GiB : FREE */
++		if (start_addr >= end_addr)
++			return -EINVAL;
++	}
 +
-+/* 0xDA_0000_0000 - 0xDA_FFFF_FFFF */
-+/* 872 GiB to 876 GiB, size of 4 GiB : PDSCODEDATA_HEAP */
-+#define ROGUE_PDSCODEDATA_HEAP_BASE 0xDA00000000ull
-+#define ROGUE_PDSCODEDATA_HEAP_SIZE SZ_4G
++	fw_offset = (firmware->size - SZ_4K) - header->device_info_size;
 +
-+/* 0xDB_0000_0000 - 0xDB_FFFF_FFFF */
-+/* 876 GiB to 880 GiB, size of 256 MiB (reserved 4GiB) : BRN **/
-+/*
-+ * The BRN63142 quirk workaround requires Region Header memory to be at the top
-+ * of a 16GiB aligned range. This is so when masked with 0x03FFFFFFFF the
-+ * address will avoid aliasing PB addresses. Start at 879.75GiB. Size of 256MiB.
++	drm_info(drm_dev, "FW version v%u.%u (build %u OS)\n", header->fw_version_major,
++		 header->fw_version_minor, header->fw_version_build);
++
++	pvr_dev->fw_version.major = header->fw_version_major;
++	pvr_dev->fw_version.minor = header->fw_version_minor;
++
++	pvr_dev->fw_dev.header = header;
++	pvr_dev->fw_dev.layout_entries = layout_entries;
++
++	return 0;
++}
++
++static int
++pvr_fw_get_device_info(struct pvr_device *pvr_dev)
++{
++	const struct firmware *firmware = pvr_dev->fw_dev.firmware;
++	struct pvr_fw_device_info_header *header;
++	const u8 *fw = firmware->data;
++	const u64 *dev_info;
++	u32 fw_offset;
++
++	fw_offset = (firmware->size - SZ_4K) - pvr_dev->fw_dev.header->device_info_size;
++
++	header = (struct pvr_fw_device_info_header *)&fw[fw_offset];
++	dev_info = (u64 *)(header + 1);
++
++	pvr_device_info_set_quirks(pvr_dev, dev_info, header->brn_mask_size);
++	dev_info += header->brn_mask_size;
++
++	pvr_device_info_set_enhancements(pvr_dev, dev_info, header->ern_mask_size);
++	dev_info += header->ern_mask_size;
++
++	return pvr_device_info_set_features(pvr_dev, dev_info, header->feature_mask_size,
++					    header->feature_param_size);
++}
++
++/**
++ * pvr_fw_validate_init_device_info() - Validate firmware and initialise device information
++ * @pvr_dev: Target PowerVR device.
++ *
++ * This function must be called before querying device information.
++ *
++ * Returns:
++ *  * 0 on success, or
++ *  * -%EINVAL if firmware validation fails.
 + */
-+#define ROGUE_RGNHDR_HEAP_BASE 0xDBF0000000ull
-+#define ROGUE_RGNHDR_HEAP_SIZE SZ_256M
++int
++pvr_fw_validate_init_device_info(struct pvr_device *pvr_dev)
++{
++	int err;
 +
-+/* 0xDC_0000_0000 - 0xDF_FFFF_FFFF */
-+/* 880 GiB to 896 GiB, size of 16 GiB : FREE */
++	err = pvr_fw_validate(pvr_dev);
++	if (err)
++		return err;
 +
-+/* 0xE0_0000_0000 - 0xE0_FFFF_FFFF */
-+/* 896 GiB to 900 GiB, size of 4 GiB : USCCODE_HEAP */
-+#define ROGUE_USCCODE_HEAP_BASE 0xE000000000ull
-+#define ROGUE_USCCODE_HEAP_SIZE SZ_4G
-+
-+/* 0xE1_0000_0000 - 0xE1_BFFF_FFFF */
-+/* 900 GiB to 903 GiB, size of 3 GiB : RESERVED */
-+
-+/* 0xE1_C000_000 - 0xE1_FFFF_FFFF */
-+/* 903 GiB to 904 GiB, reserved 1 GiB, : FIRMWARE_HEAP */
-+#define ROGUE_FW_HEAP_BASE 0xE1C0000000ull
-+
-+/* 0xE2_0000_0000 - 0xE3_FFFF_FFFF */
-+/* 904 GiB to 912 GiB, size of 8 GiB : FREE */
-+
-+/* 0xE4_0000_0000 - 0xE7_FFFF_FFFF */
-+/* 912 GiB to 968 GiB, size of 16 GiB : TRANSFER_FRAG */
-+#define ROGUE_TRANSFER_FRAG_HEAP_BASE 0xE400000000ull
-+#define ROGUE_TRANSFER_FRAG_HEAP_SIZE SZ_16G
-+
-+/* 0xE8_0000_0000 - 0xF1_FFFF_FFFF */
-+/* 928 GiB to 968 GiB, size of 40 GiB : RESERVED */
-+
-+/* 0xF2_0000_0000 - 0xF2_001F_FFFF **/
-+/* 968 GiB to 969 GiB, size of 2 MiB : VISTEST_HEAP */
-+#define ROGUE_VISTEST_HEAP_BASE 0xF200000000ull
-+#define ROGUE_VISTEST_HEAP_SIZE SZ_2M
-+
-+/* 0xF2_4000_0000 - 0xF2_FFFF_FFFF */
-+/* 969 GiB to 972 GiB, size of 3 GiB : FREE */
-+
-+/* 0xF3_0000_0000 - 0xFF_FFFF_FFFF */
-+/* 972 GiB to 1024 GiB, size of 52 GiB : FREE */
-+
-+/* 0xFF_FFFF_FFFF ************************************************************/
-+
-+#endif /* PVR_ROGUE_HEAP_CONFIG_H */
-diff --git a/drivers/gpu/drm/imagination/pvr_rogue_meta.h b/drivers/gpu/drm/imagination/pvr_rogue_meta.h
++	return pvr_fw_get_device_info(pvr_dev);
++}
+diff --git a/drivers/gpu/drm/imagination/pvr_fw.h b/drivers/gpu/drm/imagination/pvr_fw.h
 new file mode 100644
-index 000000000000..736e94618832
+index 000000000000..dca7fe5b3dd0
 --- /dev/null
-+++ b/drivers/gpu/drm/imagination/pvr_rogue_meta.h
-@@ -0,0 +1,356 @@
++++ b/drivers/gpu/drm/imagination/pvr_fw.h
+@@ -0,0 +1,34 @@
 +/* SPDX-License-Identifier: GPL-2.0 OR MIT */
 +/* Copyright (c) 2023 Imagination Technologies Ltd. */
 +
-+#ifndef PVR_ROGUE_META_H
-+#define PVR_ROGUE_META_H
++#ifndef PVR_FW_H
++#define PVR_FW_H
 +
-+/***** The META HW register definitions in the file are updated manually *****/
++#include "pvr_fw_info.h"
++
++#include <linux/types.h>
++
++/* Forward declarations from "pvr_device.h". */
++struct pvr_device;
++struct pvr_file;
++
++struct pvr_fw_device {
++	/** @firmware: Handle to the firmware loaded into the device. */
++	const struct firmware *firmware;
++
++	/** @header: Pointer to firmware header. */
++	const struct pvr_fw_info_header *header;
++
++	/** @layout_entries: Pointer to firmware layout. */
++	const struct pvr_fw_layout_entry *layout_entries;
++
++	/**
++	 * @processor_type: FW processor type for this device. Must be one of
++	 *                  %PVR_FW_PROCESSOR_TYPE_*.
++	 */
++	u16 processor_type;
++};
++
++int pvr_fw_validate_init_device_info(struct pvr_device *pvr_dev);
++
++#endif /* PVR_FW_H */
+diff --git a/drivers/gpu/drm/imagination/pvr_fw_info.h b/drivers/gpu/drm/imagination/pvr_fw_info.h
+new file mode 100644
+index 000000000000..40bf66f1c4b6
+--- /dev/null
++++ b/drivers/gpu/drm/imagination/pvr_fw_info.h
+@@ -0,0 +1,135 @@
++/* SPDX-License-Identifier: GPL-2.0 OR MIT */
++/* Copyright (c) 2023 Imagination Technologies Ltd. */
++
++#ifndef PVR_FW_INFO_H
++#define PVR_FW_INFO_H
 +
 +#include <linux/bits.h>
++#include <linux/sizes.h>
 +#include <linux/types.h>
 +
 +/*
-+ ******************************************************************************
-+ * META registers and MACROS
-+ *****************************************************************************
++ * Firmware binary block unit in bytes.
++ * Raw data stored in FW binary will be aligned to this size.
 + */
-+#define META_CR_CTRLREG_BASE(t) (0x04800000U + (0x1000U * (t)))
++#define FW_BLOCK_SIZE SZ_4K
 +
-+#define META_CR_TXPRIVEXT (0x048000E8)
-+#define META_CR_TXPRIVEXT_MINIM_EN BIT(7)
++/* Maximum number of entries in firmware layout table. */
++#define PVR_FW_INFO_MAX_NUM_ENTRIES 8
 +
-+#define META_CR_SYSC_JTAG_THREAD (0x04830030)
-+#define META_CR_SYSC_JTAG_THREAD_PRIV_EN (0x00000004)
-+
-+#define META_CR_PERF_COUNT0 (0x0480FFE0)
-+#define META_CR_PERF_COUNT1 (0x0480FFE8)
-+#define META_CR_PERF_COUNT_CTRL_SHIFT (28)
-+#define META_CR_PERF_COUNT_CTRL_MASK (0xF0000000)
-+#define META_CR_PERF_COUNT_CTRL_DCACHEHITS (8 << META_CR_PERF_COUNT_CTRL_SHIFT)
-+#define META_CR_PERF_COUNT_CTRL_ICACHEHITS (9 << META_CR_PERF_COUNT_CTRL_SHIFT)
-+#define META_CR_PERF_COUNT_CTRL_ICACHEMISS \
-+	(0xA << META_CR_PERF_COUNT_CTRL_SHIFT)
-+#define META_CR_PERF_COUNT_CTRL_ICORE (0xD << META_CR_PERF_COUNT_CTRL_SHIFT)
-+#define META_CR_PERF_COUNT_THR_SHIFT (24)
-+#define META_CR_PERF_COUNT_THR_MASK (0x0F000000)
-+#define META_CR_PERF_COUNT_THR_0 (0x1 << META_CR_PERF_COUNT_THR_SHIFT)
-+#define META_CR_PERF_COUNT_THR_1 (0x2 << META_CR_PERF_COUNT_THR_1)
-+
-+#define META_CR_TxVECINT_BHALT (0x04820500)
-+#define META_CR_PERF_ICORE0 (0x0480FFD0)
-+#define META_CR_PERF_ICORE1 (0x0480FFD8)
-+#define META_CR_PERF_ICORE_DCACHEMISS (0x8)
-+
-+#define META_CR_PERF_COUNT(ctrl, thr)                                        \
-+	((META_CR_PERF_COUNT_CTRL_##ctrl << META_CR_PERF_COUNT_CTRL_SHIFT) | \
-+	 ((thr) << META_CR_PERF_COUNT_THR_SHIFT))
-+
-+#define META_CR_TXUXXRXDT_OFFSET (META_CR_CTRLREG_BASE(0U) + 0x0000FFF0U)
-+#define META_CR_TXUXXRXRQ_OFFSET (META_CR_CTRLREG_BASE(0U) + 0x0000FFF8U)
-+
-+/* Poll for done. */
-+#define META_CR_TXUXXRXRQ_DREADY_BIT (0x80000000U)
-+/* Set for read. */
-+#define META_CR_TXUXXRXRQ_RDnWR_BIT (0x00010000U)
-+#define META_CR_TXUXXRXRQ_TX_S (12)
-+#define META_CR_TXUXXRXRQ_RX_S (4)
-+#define META_CR_TXUXXRXRQ_UXX_S (0)
-+
-+/* Internal ctrl regs. */
-+#define META_CR_TXUIN_ID (0x0)
-+/* Data unit regs. */
-+#define META_CR_TXUD0_ID (0x1)
-+/* Data unit regs. */
-+#define META_CR_TXUD1_ID (0x2)
-+/* Address unit regs. */
-+#define META_CR_TXUA0_ID (0x3)
-+/* Address unit regs. */
-+#define META_CR_TXUA1_ID (0x4)
-+/* PC registers. */
-+#define META_CR_TXUPC_ID (0x5)
-+
-+/* Macros to calculate register access values. */
-+#define META_CR_CORE_REG(thr, reg_num, unit)          \
-+	(((u32)(thr) << META_CR_TXUXXRXRQ_TX_S) |     \
-+	 ((u32)(reg_num) << META_CR_TXUXXRXRQ_RX_S) | \
-+	 ((u32)(unit) << META_CR_TXUXXRXRQ_UXX_S))
-+
-+#define META_CR_THR0_PC META_CR_CORE_REG(0, 0, META_CR_TXUPC_ID)
-+#define META_CR_THR0_PCX META_CR_CORE_REG(0, 1, META_CR_TXUPC_ID)
-+#define META_CR_THR0_SP META_CR_CORE_REG(0, 0, META_CR_TXUA0_ID)
-+
-+#define META_CR_THR1_PC META_CR_CORE_REG(1, 0, META_CR_TXUPC_ID)
-+#define META_CR_THR1_PCX META_CR_CORE_REG(1, 1, META_CR_TXUPC_ID)
-+#define META_CR_THR1_SP META_CR_CORE_REG(1, 0, META_CR_TXUA0_ID)
-+
-+#define SP_ACCESS(thread) META_CR_CORE_REG(thread, 0, META_CR_TXUA0_ID)
-+#define PC_ACCESS(thread) META_CR_CORE_REG(thread, 0, META_CR_TXUPC_ID)
-+
-+#define META_CR_COREREG_ENABLE (0x0000000U)
-+#define META_CR_COREREG_STATUS (0x0000010U)
-+#define META_CR_COREREG_DEFR (0x00000A0U)
-+#define META_CR_COREREG_PRIVEXT (0x00000E8U)
-+
-+#define META_CR_T0ENABLE_OFFSET \
-+	(META_CR_CTRLREG_BASE(0U) + META_CR_COREREG_ENABLE)
-+#define META_CR_T0STATUS_OFFSET \
-+	(META_CR_CTRLREG_BASE(0U) + META_CR_COREREG_STATUS)
-+#define META_CR_T0DEFR_OFFSET (META_CR_CTRLREG_BASE(0U) + META_CR_COREREG_DEFR)
-+#define META_CR_T0PRIVEXT_OFFSET \
-+	(META_CR_CTRLREG_BASE(0U) + META_CR_COREREG_PRIVEXT)
-+
-+#define META_CR_T1ENABLE_OFFSET \
-+	(META_CR_CTRLREG_BASE(1U) + META_CR_COREREG_ENABLE)
-+#define META_CR_T1STATUS_OFFSET \
-+	(META_CR_CTRLREG_BASE(1U) + META_CR_COREREG_STATUS)
-+#define META_CR_T1DEFR_OFFSET (META_CR_CTRLREG_BASE(1U) + META_CR_COREREG_DEFR)
-+#define META_CR_T1PRIVEXT_OFFSET \
-+	(META_CR_CTRLREG_BASE(1U) + META_CR_COREREG_PRIVEXT)
-+
-+#define META_CR_TXENABLE_ENABLE_BIT (0x00000001U) /* Set if running */
-+#define META_CR_TXSTATUS_PRIV (0x00020000U)
-+#define META_CR_TXPRIVEXT_MINIM (0x00000080U)
-+
-+#define META_MEM_GLOBAL_RANGE_BIT (0x80000000U)
-+
-+#define META_CR_TXCLKCTRL (0x048000B0)
-+#define META_CR_TXCLKCTRL_ALL_ON (0x55111111)
-+#define META_CR_TXCLKCTRL_ALL_AUTO (0xAA222222)
-+
-+#define META_CR_MMCU_LOCAL_EBCTRL (0x04830600)
-+#define META_CR_MMCU_LOCAL_EBCTRL_ICWIN (0x3 << 14)
-+#define META_CR_MMCU_LOCAL_EBCTRL_DCWIN (0x3 << 6)
-+#define META_CR_SYSC_DCPART(n) (0x04830200 + (n) * 0x8)
-+#define META_CR_SYSC_DCPARTX_CACHED_WRITE_ENABLE (0x1 << 31)
-+#define META_CR_SYSC_ICPART(n) (0x04830220 + (n) * 0x8)
-+#define META_CR_SYSC_XCPARTX_LOCAL_ADDR_OFFSET_TOP_HALF (0x8 << 16)
-+#define META_CR_SYSC_XCPARTX_LOCAL_ADDR_FULL_CACHE (0xF)
-+#define META_CR_SYSC_XCPARTX_LOCAL_ADDR_HALF_CACHE (0x7)
-+#define META_CR_MMCU_DCACHE_CTRL (0x04830018)
-+#define META_CR_MMCU_ICACHE_CTRL (0x04830020)
-+#define META_CR_MMCU_XCACHE_CTRL_CACHE_HITS_EN (0x1)
-+
-+/*
-+ ******************************************************************************
-+ * META LDR Format
-+ ******************************************************************************
-+ */
-+/* Block header structure. */
-+struct rogue_meta_ldr_block_hdr {
-+	u32 dev_id;
-+	u32 sl_code;
-+	u32 sl_data;
-+	u16 pc_ctrl;
-+	u16 crc;
++enum pvr_fw_section_id {
++	META_CODE = 0,
++	META_PRIVATE_DATA,
++	META_COREMEM_CODE,
++	META_COREMEM_DATA,
++	MIPS_CODE,
++	MIPS_EXCEPTIONS_CODE,
++	MIPS_BOOT_CODE,
++	MIPS_PRIVATE_DATA,
++	MIPS_BOOT_DATA,
++	MIPS_STACK,
++	RISCV_UNCACHED_CODE,
++	RISCV_CACHED_CODE,
++	RISCV_PRIVATE_DATA,
++	RISCV_COREMEM_CODE,
++	RISCV_COREMEM_DATA,
 +};
 +
-+/* High level data stream block structure. */
-+struct rogue_meta_ldr_l1_data_blk {
-+	u16 cmd;
-+	u16 length;
-+	u32 next;
-+	u32 cmd_data[4];
++enum pvr_fw_section_type {
++	NONE = 0,
++	FW_CODE,
++	FW_DATA,
++	FW_COREMEM_CODE,
++	FW_COREMEM_DATA,
 +};
 +
-+/* High level data stream block structure. */
-+struct rogue_meta_ldr_l2_data_blk {
-+	u16 tag;
-+	u16 length;
-+	u32 block_data[4];
++/*
++ * FW binary format with FW info attached:
++ *
++ *          Contents        Offset
++ *     +-----------------+
++ *     |                 |    0
++ *     |                 |
++ *     | Original binary |
++ *     |      file       |
++ *     |   (.ldr/.elf)   |
++ *     |                 |
++ *     |                 |
++ *     +-----------------+
++ *     |   Device info   |  FILE_SIZE - 4K - device_info_size
++ *     +-----------------+
++ *     | FW info header  |  FILE_SIZE - 4K
++ *     +-----------------+
++ *     |                 |
++ *     | FW layout table |
++ *     |                 |
++ *     +-----------------+
++ *                          FILE_SIZE
++ */
++
++#define PVR_FW_INFO_VERSION 3
++
++#define PVR_FW_FLAGS_OPEN_SOURCE BIT(0)
++
++/** struct pvr_fw_info_header - Firmware header */
++struct pvr_fw_info_header {
++	/** @info_version: FW info header version. */
++	u32 info_version;
++	/** @header_len: Header length. */
++	u32 header_len;
++	/** @layout_entry_num: Number of entries in the layout table. */
++	u32 layout_entry_num;
++	/** @layout_entry_size: Size of an entry in the layout table. */
++	u32 layout_entry_size;
++	/** @bvnc: GPU ID supported by firmware. */
++	aligned_u64 bvnc;
++	/** @fw_page_size: Page size of processor on which firmware executes. */
++	u32 fw_page_size;
++	/** @flags: Compatibility flags. */
++	u32 flags;
++	/** @fw_version_major: Firmware major version number. */
++	u16 fw_version_major;
++	/** @fw_version_minor: Firmware minor version number. */
++	u16 fw_version_minor;
++	/** @fw_version_build: Firmware build number. */
++	u32 fw_version_build;
++	/** @device_info_size: Size of device info structure. */
++	u32 device_info_size;
++	/** @padding: Padding. */
++	u32 padding;
 +};
 +
-+/* Config command structure. */
-+struct rogue_meta_ldr_cfg_blk {
-+	u32 type;
-+	u32 block_data[4];
++/**
++ * struct pvr_fw_layout_entry - Entry in firmware layout table, describing a
++ *                              section of the firmware image
++ */
++struct pvr_fw_layout_entry {
++	/** @id: Section ID. */
++	enum pvr_fw_section_id id;
++	/** @type: Section type. */
++	enum pvr_fw_section_type type;
++	/** @base_addr: Base address of section in FW address space. */
++	u32 base_addr;
++	/** @max_size: Maximum size of section, in bytes. */
++	u32 max_size;
++	/** @alloc_size: Allocation size of section, in bytes. */
++	u32 alloc_size;
++	/** @alloc_offset: Allocation offset of section. */
++	u32 alloc_offset;
 +};
 +
-+/* Block type definitions */
-+#define ROGUE_META_LDR_COMMENT_TYPE_MASK (0x0010U)
-+#define ROGUE_META_LDR_BLK_IS_COMMENT(x) (((x) & ROGUE_META_LDR_COMMENT_TYPE_MASK) != 0U)
-+
-+/*
-+ * Command definitions
-+ *  Value   Name            Description
-+ *  0       LoadMem         Load memory with binary data.
-+ *  1       LoadCore        Load a set of core registers.
-+ *  2       LoadMMReg       Load a set of memory mapped registers.
-+ *  3       StartThreads    Set each thread PC and SP, then enable threads.
-+ *  4       ZeroMem         Zeros a memory region.
-+ *  5       Config          Perform a configuration command.
++/**
++ * struct pvr_fw_device_info_header - Device information header.
 + */
-+#define ROGUE_META_LDR_CMD_MASK (0x000FU)
-+
-+#define ROGUE_META_LDR_CMD_LOADMEM (0x0000U)
-+#define ROGUE_META_LDR_CMD_LOADCORE (0x0001U)
-+#define ROGUE_META_LDR_CMD_LOADMMREG (0x0002U)
-+#define ROGUE_META_LDR_CMD_START_THREADS (0x0003U)
-+#define ROGUE_META_LDR_CMD_ZEROMEM (0x0004U)
-+#define ROGUE_META_LDR_CMD_CONFIG (0x0005U)
-+
-+/*
-+ * Config Command definitions
-+ *  Value   Name        Description
-+ *  0       Pause       Pause for x times 100 instructions
-+ *  1       Read        Read a value from register - No value return needed.
-+ *                      Utilises effects of issuing reads to certain registers
-+ *  2       Write       Write to mem location
-+ *  3       MemSet      Set mem to value
-+ *  4       MemCheck    check mem for specific value.
-+ */
-+#define ROGUE_META_LDR_CFG_PAUSE (0x0000)
-+#define ROGUE_META_LDR_CFG_READ (0x0001)
-+#define ROGUE_META_LDR_CFG_WRITE (0x0002)
-+#define ROGUE_META_LDR_CFG_MEMSET (0x0003)
-+#define ROGUE_META_LDR_CFG_MEMCHECK (0x0004)
-+
-+/*
-+ ******************************************************************************
-+ * ROGUE FW segmented MMU definitions
-+ ******************************************************************************
-+ */
-+/* All threads can access the segment. */
-+#define ROGUE_FW_SEGMMU_ALLTHRS (0xf << 8U)
-+/* Writable. */
-+#define ROGUE_FW_SEGMMU_WRITEABLE (0x1U << 1U)
-+/* All threads can access and writable. */
-+#define ROGUE_FW_SEGMMU_ALLTHRS_WRITEABLE \
-+	(ROGUE_FW_SEGMMU_ALLTHRS | ROGUE_FW_SEGMMU_WRITEABLE)
-+
-+/* Direct map region 10 used for mapping GPU memory - max 8MB. */
-+#define ROGUE_FW_SEGMMU_DMAP_GPU_ID (10U)
-+#define ROGUE_FW_SEGMMU_DMAP_GPU_ADDR_START (0x07000000U)
-+#define ROGUE_FW_SEGMMU_DMAP_GPU_MAX_SIZE (0x00800000U)
-+
-+/* Segment IDs. */
-+#define ROGUE_FW_SEGMMU_DATA_ID (1U)
-+#define ROGUE_FW_SEGMMU_BOOTLDR_ID (2U)
-+#define ROGUE_FW_SEGMMU_TEXT_ID (ROGUE_FW_SEGMMU_BOOTLDR_ID)
-+
-+/*
-+ * SLC caching strategy in S7 and volcanic is emitted through the segment MMU.
-+ * All the segments configured through the macro ROGUE_FW_SEGMMU_OUTADDR_TOP are
-+ * CACHED in the SLC.
-+ * The interface has been kept the same to simplify the code changes.
-+ * The bifdm argument is ignored (no longer relevant) in S7 and volcanic.
-+ */
-+#define ROGUE_FW_SEGMMU_OUTADDR_TOP_VIVT_SLC(pers, slc_policy, mmu_ctx)  \
-+	((((u64)((pers) & 0x3)) << 52) | (((u64)((mmu_ctx) & 0xFF)) << 44) | \
-+	 (((u64)((slc_policy) & 0x1)) << 40))
-+#define ROGUE_FW_SEGMMU_OUTADDR_TOP_VIVT_SLC_CACHED(mmu_ctx) \
-+	ROGUE_FW_SEGMMU_OUTADDR_TOP_VIVT_SLC(0x3, 0x0, mmu_ctx)
-+#define ROGUE_FW_SEGMMU_OUTADDR_TOP_VIVT_SLC_UNCACHED(mmu_ctx) \
-+	ROGUE_FW_SEGMMU_OUTADDR_TOP_VIVT_SLC(0x0, 0x1, mmu_ctx)
-+
-+/*
-+ * To configure the Page Catalog and BIF-DM fed into the BIF for Garten
-+ * accesses through this segment.
-+ */
-+#define ROGUE_FW_SEGMMU_OUTADDR_TOP_SLC(pc, bifdm) \
-+	(((u64)((u64)(pc) & 0xFU) << 44U) | ((u64)((u64)(bifdm) & 0xFU) << 40U))
-+
-+#define ROGUE_FW_SEGMMU_META_BIFDM_ID (0x7U)
-+
-+/* META segments have 4kB minimum size. */
-+#define ROGUE_FW_SEGMMU_ALIGN (0x1000U)
-+
-+/* Segmented MMU registers (n = segment id). */
-+#define META_CR_MMCU_SEGMENT_N_BASE(n) (0x04850000U + ((n) * 0x10U))
-+#define META_CR_MMCU_SEGMENT_N_LIMIT(n) (0x04850004U + ((n) * 0x10U))
-+#define META_CR_MMCU_SEGMENT_N_OUTA0(n) (0x04850008U + ((n) * 0x10U))
-+#define META_CR_MMCU_SEGMENT_N_OUTA1(n) (0x0485000CU + ((n) * 0x10U))
-+
-+/*
-+ * The following defines must be recalculated if the Meta MMU segments used
-+ * to access Host-FW data are changed
-+ * Current combinations are:
-+ * - SLC uncached, META cached,   FW base address 0x70000000
-+ * - SLC uncached, META uncached, FW base address 0xF0000000
-+ * - SLC cached,   META cached,   FW base address 0x10000000
-+ * - SLC cached,   META uncached, FW base address 0x90000000
-+ */
-+#define ROGUE_FW_SEGMMU_DATA_BASE_ADDRESS (0x10000000U)
-+#define ROGUE_FW_SEGMMU_DATA_META_CACHED (0x0U)
-+#define ROGUE_FW_SEGMMU_DATA_META_UNCACHED (META_MEM_GLOBAL_RANGE_BIT)
-+#define ROGUE_FW_SEGMMU_DATA_META_CACHE_MASK (META_MEM_GLOBAL_RANGE_BIT)
-+/*
-+ * For non-VIVT SLCs the cacheability of the FW data in the SLC is selected in
-+ * the PTEs for the FW data, not in the Meta Segment MMU, which means these
-+ * defines have no real effect in those cases.
-+ */
-+#define ROGUE_FW_SEGMMU_DATA_VIVT_SLC_CACHED (0x0U)
-+#define ROGUE_FW_SEGMMU_DATA_VIVT_SLC_UNCACHED (0x60000000U)
-+#define ROGUE_FW_SEGMMU_DATA_VIVT_SLC_CACHE_MASK (0x60000000U)
-+
-+/*
-+ ******************************************************************************
-+ * ROGUE FW Bootloader defaults
-+ ******************************************************************************
-+ */
-+#define ROGUE_FW_BOOTLDR_META_ADDR (0x40000000U)
-+#define ROGUE_FW_BOOTLDR_DEVV_ADDR_0 (0xC0000000U)
-+#define ROGUE_FW_BOOTLDR_DEVV_ADDR_1 (0x000000E1)
-+#define ROGUE_FW_BOOTLDR_DEVV_ADDR                     \
-+	((((u64)ROGUE_FW_BOOTLDR_DEVV_ADDR_1) << 32) | \
-+	 ROGUE_FW_BOOTLDR_DEVV_ADDR_0)
-+#define ROGUE_FW_BOOTLDR_LIMIT (0x1FFFF000)
-+#define ROGUE_FW_MAX_BOOTLDR_OFFSET (0x1000)
-+
-+/* Bootloader configuration offset is in dwords (512 bytes) */
-+#define ROGUE_FW_BOOTLDR_CONF_OFFSET (0x80)
-+
-+/*
-+ ******************************************************************************
-+ * ROGUE META Stack
-+ ******************************************************************************
-+ */
-+#define ROGUE_META_STACK_SIZE (0x1000U)
-+
-+/*
-+ ******************************************************************************
-+ * ROGUE META Core memory
-+ ******************************************************************************
-+ */
-+/* Code and data both map to the same physical memory. */
-+#define ROGUE_META_COREMEM_CODE_ADDR (0x80000000U)
-+#define ROGUE_META_COREMEM_DATA_ADDR (0x82000000U)
-+#define ROGUE_META_COREMEM_OFFSET_MASK (0x01ffffffU)
-+
-+#define ROGUE_META_IS_COREMEM_CODE(a, b)                                \
-+	({                                                              \
-+		u32 _a = (a), _b = (b);                                 \
-+		((_a) >= ROGUE_META_COREMEM_CODE_ADDR) &&               \
-+			((_a) < (ROGUE_META_COREMEM_CODE_ADDR + (_b))); \
-+	})
-+#define ROGUE_META_IS_COREMEM_DATA(a, b)                                \
-+	({                                                              \
-+		u32 _a = (a), _b = (b);                                 \
-+		((_a) >= ROGUE_META_COREMEM_DATA_ADDR) &&               \
-+			((_a) < (ROGUE_META_COREMEM_DATA_ADDR + (_b))); \
-+	})
-+/*
-+ ******************************************************************************
-+ * 2nd thread
-+ ******************************************************************************
-+ */
-+#define ROGUE_FW_THR1_PC (0x18930000)
-+#define ROGUE_FW_THR1_SP (0x78890000)
-+
-+/*
-+ ******************************************************************************
-+ * META compatibility
-+ ******************************************************************************
-+ */
-+
-+#define META_CR_CORE_ID (0x04831000)
-+#define META_CR_CORE_ID_VER_SHIFT (16U)
-+#define META_CR_CORE_ID_VER_CLRMSK (0XFF00FFFFU)
-+
-+#define ROGUE_CR_META_MTP218_CORE_ID_VALUE 0x19
-+#define ROGUE_CR_META_MTP219_CORE_ID_VALUE 0x1E
-+#define ROGUE_CR_META_LTP218_CORE_ID_VALUE 0x1C
-+#define ROGUE_CR_META_LTP217_CORE_ID_VALUE 0x1F
-+
-+#define ROGUE_FW_PROCESSOR_META "META"
-+
-+#endif /* PVR_ROGUE_META_H */
-diff --git a/drivers/gpu/drm/imagination/pvr_rogue_mips.h b/drivers/gpu/drm/imagination/pvr_rogue_mips.h
-new file mode 100644
-index 000000000000..fe5167bf7fba
---- /dev/null
-+++ b/drivers/gpu/drm/imagination/pvr_rogue_mips.h
-@@ -0,0 +1,335 @@
-+/* SPDX-License-Identifier: GPL-2.0 OR MIT */
-+/* Copyright (c) 2023 Imagination Technologies Ltd. */
-+
-+#ifndef PVR_ROGUE_MIPS_H
-+#define PVR_ROGUE_MIPS_H
-+
-+#include <linux/bits.h>
-+#include <linux/types.h>
-+
-+/* Utility defines for memory management. */
-+#define ROGUE_MIPSFW_LOG2_PAGE_SIZE_4K (12)
-+#define ROGUE_MIPSFW_PAGE_SIZE_4K (0x1 << ROGUE_MIPSFW_LOG2_PAGE_SIZE_4K)
-+#define ROGUE_MIPSFW_PAGE_MASK_4K (ROGUE_MIPSFW_PAGE_SIZE_4K - 1)
-+#define ROGUE_MIPSFW_LOG2_PAGE_SIZE_64K (16)
-+#define ROGUE_MIPSFW_PAGE_SIZE_64K (0x1 << ROGUE_MIPSFW_LOG2_PAGE_SIZE_64K)
-+#define ROGUE_MIPSFW_PAGE_MASK_64K (ROGUE_MIPSFW_PAGE_SIZE_64K - 1)
-+#define ROGUE_MIPSFW_LOG2_PAGE_SIZE_256K (18)
-+#define ROGUE_MIPSFW_PAGE_SIZE_256K (0x1 << ROGUE_MIPSFW_LOG2_PAGE_SIZE_256K)
-+#define ROGUE_MIPSFW_PAGE_MASK_256K (ROGUE_MIPSFW_PAGE_SIZE_256K - 1)
-+#define ROGUE_MIPSFW_LOG2_PAGE_SIZE_1MB (20)
-+#define ROGUE_MIPSFW_PAGE_SIZE_1MB (0x1 << ROGUE_MIPSFW_LOG2_PAGE_SIZE_1MB)
-+#define ROGUE_MIPSFW_PAGE_MASK_1MB (ROGUE_MIPSFW_PAGE_SIZE_1MB - 1)
-+#define ROGUE_MIPSFW_LOG2_PAGE_SIZE_4MB (22)
-+#define ROGUE_MIPSFW_PAGE_SIZE_4MB (0x1 << ROGUE_MIPSFW_LOG2_PAGE_SIZE_4MB)
-+#define ROGUE_MIPSFW_PAGE_MASK_4MB (ROGUE_MIPSFW_PAGE_SIZE_4MB - 1)
-+#define ROGUE_MIPSFW_LOG2_PTE_ENTRY_SIZE (2)
-+/* log2 page table sizes dependent on FW heap size and page size (for each OS). */
-+#define ROGUE_MIPSFW_LOG2_PAGETABLE_SIZE_4K(pvr_dev) ((pvr_dev)->fw_dev.fw_heap_info.log2_size - \
-+						      ROGUE_MIPSFW_LOG2_PAGE_SIZE_4K +    \
-+						      ROGUE_MIPSFW_LOG2_PTE_ENTRY_SIZE)
-+#define ROGUE_MIPSFW_LOG2_PAGETABLE_SIZE_64K(pvr_dev) ((pvr_dev)->fw_dev.fw_heap_info.log2_size - \
-+						       ROGUE_MIPSFW_LOG2_PAGE_SIZE_64K +   \
-+						       ROGUE_MIPSFW_LOG2_PTE_ENTRY_SIZE)
-+/* Maximum number of page table pages (both Host and MIPS pages). */
-+#define ROGUE_MIPSFW_MAX_NUM_PAGETABLE_PAGES (4)
-+/* Total number of TLB entries. */
-+#define ROGUE_MIPSFW_NUMBER_OF_TLB_ENTRIES (16)
-+/* "Uncached" caching policy. */
-+#define ROGUE_MIPSFW_UNCACHED_CACHE_POLICY (2)
-+/* "Write-back write-allocate" caching policy. */
-+#define ROGUE_MIPSFW_WRITEBACK_CACHE_POLICY (3)
-+/* "Write-through no write-allocate" caching policy. */
-+#define ROGUE_MIPSFW_WRITETHROUGH_CACHE_POLICY (1)
-+/* Cached policy used by MIPS in case of physical bus on 32 bit. */
-+#define ROGUE_MIPSFW_CACHED_POLICY (ROGUE_MIPSFW_WRITEBACK_CACHE_POLICY)
-+/* Cached policy used by MIPS in case of physical bus on more than 32 bit. */
-+#define ROGUE_MIPSFW_CACHED_POLICY_ABOVE_32BIT (ROGUE_MIPSFW_WRITETHROUGH_CACHE_POLICY)
-+/* Total number of Remap entries. */
-+#define ROGUE_MIPSFW_NUMBER_OF_REMAP_ENTRIES (2 * ROGUE_MIPSFW_NUMBER_OF_TLB_ENTRIES)
-+
-+/* MIPS EntryLo/PTE format. */
-+
-+#define ROGUE_MIPSFW_ENTRYLO_READ_INHIBIT_SHIFT (31U)
-+#define ROGUE_MIPSFW_ENTRYLO_READ_INHIBIT_CLRMSK (0X7FFFFFFF)
-+#define ROGUE_MIPSFW_ENTRYLO_READ_INHIBIT_EN (0X80000000)
-+
-+#define ROGUE_MIPSFW_ENTRYLO_EXEC_INHIBIT_SHIFT (30U)
-+#define ROGUE_MIPSFW_ENTRYLO_EXEC_INHIBIT_CLRMSK (0XBFFFFFFF)
-+#define ROGUE_MIPSFW_ENTRYLO_EXEC_INHIBIT_EN (0X40000000)
-+
-+/* Page Frame Number */
-+#define ROGUE_MIPSFW_ENTRYLO_PFN_SHIFT (6)
-+#define ROGUE_MIPSFW_ENTRYLO_PFN_ALIGNSHIFT (12)
-+/* Mask used for the MIPS Page Table in case of physical bus on 32 bit. */
-+#define ROGUE_MIPSFW_ENTRYLO_PFN_MASK (0x03FFFFC0)
-+#define ROGUE_MIPSFW_ENTRYLO_PFN_SIZE (20)
-+/* Mask used for the MIPS Page Table in case of physical bus on more than 32 bit. */
-+#define ROGUE_MIPSFW_ENTRYLO_PFN_MASK_ABOVE_32BIT (0x3FFFFFC0)
-+#define ROGUE_MIPSFW_ENTRYLO_PFN_SIZE_ABOVE_32BIT (24)
-+#define ROGUE_MIPSFW_ADDR_TO_ENTRYLO_PFN_RSHIFT (ROGUE_MIPSFW_ENTRYLO_PFN_ALIGNSHIFT - \
-+						 ROGUE_MIPSFW_ENTRYLO_PFN_SHIFT)
-+
-+#define ROGUE_MIPSFW_ENTRYLO_CACHE_POLICY_SHIFT (3U)
-+#define ROGUE_MIPSFW_ENTRYLO_CACHE_POLICY_CLRMSK (0XFFFFFFC7)
-+
-+#define ROGUE_MIPSFW_ENTRYLO_DIRTY_SHIFT (2U)
-+#define ROGUE_MIPSFW_ENTRYLO_DIRTY_CLRMSK (0XFFFFFFFB)
-+#define ROGUE_MIPSFW_ENTRYLO_DIRTY_EN (0X00000004)
-+
-+#define ROGUE_MIPSFW_ENTRYLO_VALID_SHIFT (1U)
-+#define ROGUE_MIPSFW_ENTRYLO_VALID_CLRMSK (0XFFFFFFFD)
-+#define ROGUE_MIPSFW_ENTRYLO_VALID_EN (0X00000002)
-+
-+#define ROGUE_MIPSFW_ENTRYLO_GLOBAL_SHIFT (0U)
-+#define ROGUE_MIPSFW_ENTRYLO_GLOBAL_CLRMSK (0XFFFFFFFE)
-+#define ROGUE_MIPSFW_ENTRYLO_GLOBAL_EN (0X00000001)
-+
-+#define ROGUE_MIPSFW_ENTRYLO_DVG (ROGUE_MIPSFW_ENTRYLO_DIRTY_EN | \
-+				  ROGUE_MIPSFW_ENTRYLO_VALID_EN | \
-+				  ROGUE_MIPSFW_ENTRYLO_GLOBAL_EN)
-+#define ROGUE_MIPSFW_ENTRYLO_UNCACHED (ROGUE_MIPSFW_UNCACHED_CACHE_POLICY << \
-+				       ROGUE_MIPSFW_ENTRYLO_CACHE_POLICY_SHIFT)
-+#define ROGUE_MIPSFW_ENTRYLO_DVG_UNCACHED (ROGUE_MIPSFW_ENTRYLO_DVG | \
-+					   ROGUE_MIPSFW_ENTRYLO_UNCACHED)
-+
-+/* Remap Range Config Addr Out. */
-+/* These defines refer to the upper half of the Remap Range Config register. */
-+#define ROGUE_MIPSFW_REMAP_RANGE_ADDR_OUT_MASK (0x0FFFFFF0)
-+#define ROGUE_MIPSFW_REMAP_RANGE_ADDR_OUT_SHIFT (4) /* wrt upper half of the register. */
-+#define ROGUE_MIPSFW_REMAP_RANGE_ADDR_OUT_ALIGNSHIFT (12)
-+#define ROGUE_MIPSFW_ADDR_TO_RR_ADDR_OUT_RSHIFT (ROGUE_MIPSFW_REMAP_RANGE_ADDR_OUT_ALIGNSHIFT - \
-+						 ROGUE_MIPSFW_REMAP_RANGE_ADDR_OUT_SHIFT)
-+
-+/*
-+ * Pages to trampoline problematic physical addresses:
-+ *   - ROGUE_MIPSFW_BOOT_REMAP_PHYS_ADDR_IN : 0x1FC0_0000
-+ *   - ROGUE_MIPSFW_DATA_REMAP_PHYS_ADDR_IN : 0x1FC0_1000
-+ *   - ROGUE_MIPSFW_CODE_REMAP_PHYS_ADDR_IN : 0x1FC0_2000
-+ *   - (benign trampoline)               : 0x1FC0_3000
-+ * that would otherwise be erroneously remapped by the MIPS wrapper.
-+ * (see "Firmware virtual layout and remap configuration" section below)
-+ */
-+
-+#define ROGUE_MIPSFW_TRAMPOLINE_LOG2_NUMPAGES (2)
-+#define ROGUE_MIPSFW_TRAMPOLINE_NUMPAGES BIT(ROGUE_MIPSFW_TRAMPOLINE_LOG2_NUMPAGES)
-+#define ROGUE_MIPSFW_TRAMPOLINE_SIZE (ROGUE_MIPSFW_TRAMPOLINE_NUMPAGES << \
-+				      ROGUE_MIPSFW_LOG2_PAGE_SIZE_4K)
-+#define ROGUE_MIPSFW_TRAMPOLINE_LOG2_SEGMENT_SIZE (ROGUE_MIPSFW_TRAMPOLINE_LOG2_NUMPAGES + \
-+						   ROGUE_MIPSFW_LOG2_PAGE_SIZE_4K)
-+
-+#define ROGUE_MIPSFW_TRAMPOLINE_TARGET_PHYS_ADDR (ROGUE_MIPSFW_BOOT_REMAP_PHYS_ADDR_IN)
-+#define ROGUE_MIPSFW_TRAMPOLINE_OFFSET(a) ((a) - ROGUE_MIPSFW_BOOT_REMAP_PHYS_ADDR_IN)
-+
-+#define ROGUE_MIPSFW_SENSITIVE_ADDR(a) (ROGUE_MIPSFW_BOOT_REMAP_PHYS_ADDR_IN == \
-+					(~((1 << ROGUE_MIPSFW_TRAMPOLINE_LOG2_SEGMENT_SIZE) - 1) \
-+					 & (a)))
-+
-+/* Firmware virtual layout and remap configuration. */
-+/*
-+ * For each remap region we define:
-+ * - the virtual base used by the Firmware to access code/data through that region
-+ * - the microAptivAP physical address correspondent to the virtual base address,
-+ *   used as input address and remapped to the actual physical address
-+ * - log2 of size of the region remapped by the MIPS wrapper, i.e. number of bits from
-+ *   the bottom of the base input address that survive onto the output address
-+ *   (this defines both the alignment and the maximum size of the remapped region)
-+ * - one or more code/data segments within the remapped region.
-+ */
-+
-+/* Boot remap setup. */
-+#define ROGUE_MIPSFW_BOOT_REMAP_VIRTUAL_BASE (0xBFC00000)
-+#define ROGUE_MIPSFW_BOOT_REMAP_PHYS_ADDR_IN (0x1FC00000)
-+#define ROGUE_MIPSFW_BOOT_REMAP_LOG2_SEGMENT_SIZE (12)
-+#define ROGUE_MIPSFW_BOOT_NMI_CODE_VIRTUAL_BASE (ROGUE_MIPSFW_BOOT_REMAP_VIRTUAL_BASE)
-+
-+/* Data remap setup. */
-+#define ROGUE_MIPSFW_DATA_REMAP_VIRTUAL_BASE (0xBFC01000)
-+#define ROGUE_MIPSFW_DATA_CACHED_REMAP_VIRTUAL_BASE (0x9FC01000)
-+#define ROGUE_MIPSFW_DATA_REMAP_PHYS_ADDR_IN (0x1FC01000)
-+#define ROGUE_MIPSFW_DATA_REMAP_LOG2_SEGMENT_SIZE (12)
-+#define ROGUE_MIPSFW_BOOT_NMI_DATA_VIRTUAL_BASE (ROGUE_MIPSFW_DATA_REMAP_VIRTUAL_BASE)
-+
-+/* Code remap setup. */
-+#define ROGUE_MIPSFW_CODE_REMAP_VIRTUAL_BASE (0x9FC02000)
-+#define ROGUE_MIPSFW_CODE_REMAP_PHYS_ADDR_IN (0x1FC02000)
-+#define ROGUE_MIPSFW_CODE_REMAP_LOG2_SEGMENT_SIZE (12)
-+#define ROGUE_MIPSFW_EXCEPTIONS_VIRTUAL_BASE (ROGUE_MIPSFW_CODE_REMAP_VIRTUAL_BASE)
-+
-+/* Permanent mappings setup. */
-+#define ROGUE_MIPSFW_PT_VIRTUAL_BASE (0xCF000000)
-+#define ROGUE_MIPSFW_REGISTERS_VIRTUAL_BASE (0xCF800000)
-+#define ROGUE_MIPSFW_STACK_VIRTUAL_BASE (0xCF600000)
-+
-+/* Bootloader configuration data. */
-+/*
-+ * Bootloader configuration offset (where ROGUE_MIPSFW_BOOT_DATA lives)
-+ * within the bootloader/NMI data page.
-+ */
-+#define ROGUE_MIPSFW_BOOTLDR_CONF_OFFSET (0x0)
-+
-+/* NMI shared data. */
-+/* Base address of the shared data within the bootloader/NMI data page. */
-+#define ROGUE_MIPSFW_NMI_SHARED_DATA_BASE (0x100)
-+/* Size used by Debug dump data. */
-+#define ROGUE_MIPSFW_NMI_SHARED_SIZE (0x2B0)
-+/* Offsets in the NMI shared area in 32-bit words. */
-+#define ROGUE_MIPSFW_NMI_SYNC_FLAG_OFFSET (0x0)
-+#define ROGUE_MIPSFW_NMI_STATE_OFFSET (0x1)
-+#define ROGUE_MIPSFW_NMI_ERROR_STATE_SET (0x1)
-+
-+/* MIPS boot stage. */
-+#define ROGUE_MIPSFW_BOOT_STAGE_OFFSET (0x400)
-+
-+/*
-+ * MIPS private data in the bootloader data page.
-+ * Memory below this offset is used by the FW only, no interface data allowed.
-+ */
-+#define ROGUE_MIPSFW_PRIVATE_DATA_OFFSET (0x800)
-+
-+struct rogue_mipsfw_boot_data {
-+	u64 stack_phys_addr;
-+	u64 reg_base;
-+	u64 pt_phys_addr[ROGUE_MIPSFW_MAX_NUM_PAGETABLE_PAGES];
-+	u32 pt_log2_page_size;
-+	u32 pt_num_pages;
-+	u32 reserved1;
-+	u32 reserved2;
++struct pvr_fw_device_info_header {
++	/* BRN Mask size (in u64s). */
++	u64 brn_mask_size;
++	/* ERN Mask size (in u64s). */
++	u64 ern_mask_size;
++	/* Feature Mask size (in u64s). */
++	u64 feature_mask_size;
++	/* Feature Parameter size (in u64s). */
++	u64 feature_param_size;
 +};
 +
-+#define ROGUE_MIPSFW_GET_OFFSET_IN_DWORDS(offset) ((offset) / sizeof(u32))
-+#define ROGUE_MIPSFW_GET_OFFSET_IN_QWORDS(offset) ((offset) / sizeof(u64))
-+
-+/* Used for compatibility checks. */
-+#define ROGUE_MIPSFW_ARCHTYPE_VER_CLRMSK (0xFFFFE3FFU)
-+#define ROGUE_MIPSFW_ARCHTYPE_VER_SHIFT (10U)
-+#define ROGUE_MIPSFW_CORE_ID_VALUE (0x001U)
-+#define ROGUE_FW_PROCESSOR_MIPS "MIPS"
-+
-+/* microAptivAP cache line size. */
-+#define ROGUE_MIPSFW_MICROAPTIVEAP_CACHELINE_SIZE (16U)
-+
-+/*
-+ * The SOCIF transactions are identified with the top 16 bits of the physical address emitted by
-+ * the MIPS.
-+ */
-+#define ROGUE_MIPSFW_WRAPPER_CONFIG_REGBANK_ADDR_ALIGN (16U)
-+
-+/* Values to put in the MIPS selectors for performance counters. */
-+/* Icache accesses in COUNTER0. */
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_ICACHE_ACCESSES_C0 (9U)
-+/* Icache misses in COUNTER1. */
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_ICACHE_MISSES_C1 (9U)
-+
-+/* Dcache accesses in COUNTER0. */
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_DCACHE_ACCESSES_C0 (10U)
-+/* Dcache misses in COUNTER1. */
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_DCACHE_MISSES_C1 (11U)
-+
-+/* ITLB instruction accesses in COUNTER0. */
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_ITLB_INSTR_ACCESSES_C0 (5U)
-+/* JTLB instruction accesses misses in COUNTER1. */
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_JTLB_INSTR_MISSES_C1 (7U)
-+
-+  /* Instructions completed in COUNTER0. */
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_INSTR_COMPLETED_C0 (1U)
-+/* JTLB data misses in COUNTER1. */
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_JTLB_DATA_MISSES_C1 (8U)
-+
-+/* Shift for the Event field in the MIPS perf ctrl registers. */
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_EVENT_SHIFT (5U)
-+
-+/* Additional flags for performance counters. See MIPS manual for further reference. */
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_COUNT_USER_MODE (8U)
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_COUNT_KERNEL_MODE (2U)
-+#define ROGUE_MIPSFW_PERF_COUNT_CTRL_COUNT_EXL (1U)
-+
-+#define ROGUE_MIPSFW_C0_NBHWIRQ	8
-+
-+/* Macros to decode C0_Cause register. */
-+#define ROGUE_MIPSFW_C0_CAUSE_EXCCODE(cause) (((cause) & 0x7c) >> 2)
-+#define ROGUE_MIPSFW_C0_CAUSE_EXCCODE_FWERROR 9
-+/* Use only when Coprocessor Unusable exception. */
-+#define ROGUE_MIPSFW_C0_CAUSE_UNUSABLE_UNIT(cause) (((cause) >> 28) & 0x3)
-+#define ROGUE_MIPSFW_C0_CAUSE_PENDING_HWIRQ(cause) (((cause) & 0x3fc00) >> 10)
-+#define ROGUE_MIPSFW_C0_CAUSE_FDCIPENDING BIT(21)
-+#define ROGUE_MIPSFW_C0_CAUSE_IV BIT(23)
-+#define ROGUE_MIPSFW_C0_CAUSE_IC BIT(25)
-+#define ROGUE_MIPSFW_C0_CAUSE_PCIPENDING BIT(26)
-+#define ROGUE_MIPSFW_C0_CAUSE_TIPENDING BIT(30)
-+#define ROGUE_MIPSFW_C0_CAUSE_BRANCH_DELAY BIT(31)
-+
-+/* Macros to decode C0_Debug register. */
-+#define ROGUE_MIPSFW_C0_DEBUG_EXCCODE(debug) (((debug) >> 10) & 0x1f)
-+#define ROGUE_MIPSFW_C0_DEBUG_DSS BIT(0)
-+#define ROGUE_MIPSFW_C0_DEBUG_DBP BIT(1)
-+#define ROGUE_MIPSFW_C0_DEBUG_DDBL BIT(2)
-+#define ROGUE_MIPSFW_C0_DEBUG_DDBS BIT(3)
-+#define ROGUE_MIPSFW_C0_DEBUG_DIB BIT(4)
-+#define ROGUE_MIPSFW_C0_DEBUG_DINT BIT(5)
-+#define ROGUE_MIPSFW_C0_DEBUG_DIBIMPR BIT(6)
-+#define ROGUE_MIPSFW_C0_DEBUG_DDBLIMPR BIT(18)
-+#define ROGUE_MIPSFW_C0_DEBUG_DDBSIMPR BIT(19)
-+#define ROGUE_MIPSFW_C0_DEBUG_IEXI BIT(20)
-+#define ROGUE_MIPSFW_C0_DEBUG_DBUSEP BIT(21)
-+#define ROGUE_MIPSFW_C0_DEBUG_CACHEEP BIT(22)
-+#define ROGUE_MIPSFW_C0_DEBUG_MCHECKP BIT(23)
-+#define ROGUE_MIPSFW_C0_DEBUG_IBUSEP BIT(24)
-+#define ROGUE_MIPSFW_C0_DEBUG_DM BIT(30)
-+#define ROGUE_MIPSFW_C0_DEBUG_DBD BIT(31)
-+
-+/* Macros to decode TLB entries. */
-+#define ROGUE_MIPSFW_TLB_GET_MASK(page_mask) (((page_mask) >> 13) & 0XFFFFU)
-+/* Page size in KB. */
-+#define ROGUE_MIPSFW_TLB_GET_PAGE_SIZE(page_mask) ((((page_mask) | 0x1FFF) + 1) >> 11)
-+/* Page size in KB. */
-+#define ROGUE_MIPSFW_TLB_GET_PAGE_MASK(page_size) ((((page_size) << 11) - 1) & ~0x7FF)
-+#define ROGUE_MIPSFW_TLB_GET_VPN2(entry_hi) ((entry_hi) >> 13)
-+#define ROGUE_MIPSFW_TLB_GET_COHERENCY(entry_lo) (((entry_lo) >> 3) & 0x7U)
-+#define ROGUE_MIPSFW_TLB_GET_PFN(entry_lo) (((entry_lo) >> 6) & 0XFFFFFU)
-+/* GET_PA uses a non-standard PFN mask for 36 bit addresses. */
-+#define ROGUE_MIPSFW_TLB_GET_PA(entry_lo) (((u64)(entry_lo) & \
-+					    ROGUE_MIPSFW_ENTRYLO_PFN_MASK_ABOVE_32BIT) << 6)
-+#define ROGUE_MIPSFW_TLB_GET_INHIBIT(entry_lo) (((entry_lo) >> 30) & 0x3U)
-+#define ROGUE_MIPSFW_TLB_GET_DGV(entry_lo) ((entry_lo) & 0x7U)
-+#define ROGUE_MIPSFW_TLB_GLOBAL BIT(0)
-+#define ROGUE_MIPSFW_TLB_VALID BIT(1)
-+#define ROGUE_MIPSFW_TLB_DIRTY BIT(2)
-+#define ROGUE_MIPSFW_TLB_XI BIT(30)
-+#define ROGUE_MIPSFW_TLB_RI BIT(31)
-+
-+#define ROGUE_MIPSFW_REMAP_GET_REGION_SIZE(region_size_encoding) (1 << (((region_size_encoding) \
-+									+ 1) << 1))
-+
-+struct rogue_mips_tlb_entry {
-+	u32 tlb_page_mask;
-+	u32 tlb_hi;
-+	u32 tlb_lo0;
-+	u32 tlb_lo1;
-+};
-+
-+struct rogue_mips_remap_entry {
-+	u32 remap_addr_in;  /* Always 4k aligned. */
-+	u32 remap_addr_out; /* Always 4k aligned. */
-+	u32 remap_region_size;
-+};
-+
-+struct rogue_mips_state {
-+	u32 error_state; /* This must come first in the structure. */
-+	u32 error_epc;
-+	u32 status_register;
-+	u32 cause_register;
-+	u32 bad_register;
-+	u32 epc;
-+	u32 sp;
-+	u32 debug;
-+	u32 depc;
-+	u32 bad_instr;
-+	u32 unmapped_address;
-+	struct rogue_mips_tlb_entry tlb[ROGUE_MIPSFW_NUMBER_OF_TLB_ENTRIES];
-+	struct rogue_mips_remap_entry remap[ROGUE_MIPSFW_NUMBER_OF_REMAP_ENTRIES];
-+};
-+
-+#include "pvr_rogue_mips_check.h"
-+
-+#endif /* PVR_ROGUE_MIPS_H */
-diff --git a/drivers/gpu/drm/imagination/pvr_rogue_mips_check.h b/drivers/gpu/drm/imagination/pvr_rogue_mips_check.h
-new file mode 100644
-index 000000000000..efad38039cae
---- /dev/null
-+++ b/drivers/gpu/drm/imagination/pvr_rogue_mips_check.h
-@@ -0,0 +1,58 @@
-+/* SPDX-License-Identifier: GPL-2.0 OR MIT */
-+/* Copyright (c) 2023 Imagination Technologies Ltd. */
-+
-+#ifndef PVR_ROGUE_MIPS_CHECK_H
-+#define PVR_ROGUE_MIPS_CHECK_H
-+
-+#include <linux/build_bug.h>
-+
-+static_assert(offsetof(struct rogue_mips_tlb_entry, tlb_page_mask) == 0,
-+	      "offsetof(struct rogue_mips_tlb_entry, tlb_page_mask) incorrect");
-+static_assert(offsetof(struct rogue_mips_tlb_entry, tlb_hi) == 4,
-+	      "offsetof(struct rogue_mips_tlb_entry, tlb_hi) incorrect");
-+static_assert(offsetof(struct rogue_mips_tlb_entry, tlb_lo0) == 8,
-+	      "offsetof(struct rogue_mips_tlb_entry, tlb_lo0) incorrect");
-+static_assert(offsetof(struct rogue_mips_tlb_entry, tlb_lo1) == 12,
-+	      "offsetof(struct rogue_mips_tlb_entry, tlb_lo1) incorrect");
-+static_assert(sizeof(struct rogue_mips_tlb_entry) == 16,
-+	      "struct rogue_mips_tlb_entry is incorrect size");
-+
-+static_assert(offsetof(struct rogue_mips_remap_entry, remap_addr_in) == 0,
-+	      "offsetof(struct rogue_mips_remap_entry, remap_addr_in) incorrect");
-+static_assert(offsetof(struct rogue_mips_remap_entry, remap_addr_out) == 4,
-+	      "offsetof(struct rogue_mips_remap_entry, remap_addr_out) incorrect");
-+static_assert(offsetof(struct rogue_mips_remap_entry, remap_region_size) == 8,
-+	      "offsetof(struct rogue_mips_remap_entry, remap_region_size) incorrect");
-+static_assert(sizeof(struct rogue_mips_remap_entry) == 12,
-+	      "struct rogue_mips_remap_entry is incorrect size");
-+
-+static_assert(offsetof(struct rogue_mips_state, error_state) == 0,
-+	      "offsetof(struct rogue_mips_state, error_state) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, error_epc) == 4,
-+	      "offsetof(struct rogue_mips_state, error_epc) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, status_register) == 8,
-+	      "offsetof(struct rogue_mips_state, status_register) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, cause_register) == 12,
-+	      "offsetof(struct rogue_mips_state, cause_register) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, bad_register) == 16,
-+	      "offsetof(struct rogue_mips_state, bad_register) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, epc) == 20,
-+	      "offsetof(struct rogue_mips_state, epc) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, sp) == 24,
-+	      "offsetof(struct rogue_mips_state, sp) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, debug) == 28,
-+	      "offsetof(struct rogue_mips_state, debug) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, depc) == 32,
-+	      "offsetof(struct rogue_mips_state, depc) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, bad_instr) == 36,
-+	      "offsetof(struct rogue_mips_state, bad_instr) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, unmapped_address) == 40,
-+	      "offsetof(struct rogue_mips_state, unmapped_address) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, tlb) == 44,
-+	      "offsetof(struct rogue_mips_state, tlb) incorrect");
-+static_assert(offsetof(struct rogue_mips_state, remap) == 300,
-+	      "offsetof(struct rogue_mips_state, remap) incorrect");
-+static_assert(sizeof(struct rogue_mips_state) == 684,
-+	      "struct rogue_mips_state is incorrect size");
-+
-+#endif /* PVR_ROGUE_MIPS_CHECK_H */
-diff --git a/drivers/gpu/drm/imagination/pvr_rogue_mmu_defs.h b/drivers/gpu/drm/imagination/pvr_rogue_mmu_defs.h
-new file mode 100644
-index 000000000000..cd28cded2741
---- /dev/null
-+++ b/drivers/gpu/drm/imagination/pvr_rogue_mmu_defs.h
-@@ -0,0 +1,136 @@
-+/* SPDX-License-Identifier: GPL-2.0 OR MIT */
-+/* Copyright (c) 2023 Imagination Technologies Ltd. */
-+
-+/*  *** Autogenerated C -- do not edit ***  */
-+
-+#ifndef PVR_ROGUE_MMU_DEFS_H
-+#define PVR_ROGUE_MMU_DEFS_H
-+
-+#define ROGUE_MMU_DEFS_REVISION 0
-+
-+#define ROGUE_BIF_DM_ENCODING_VERTEX (0x00000000U)
-+#define ROGUE_BIF_DM_ENCODING_PIXEL (0x00000001U)
-+#define ROGUE_BIF_DM_ENCODING_COMPUTE (0x00000002U)
-+#define ROGUE_BIF_DM_ENCODING_TLA (0x00000003U)
-+#define ROGUE_BIF_DM_ENCODING_PB_VCE (0x00000004U)
-+#define ROGUE_BIF_DM_ENCODING_PB_TE (0x00000005U)
-+#define ROGUE_BIF_DM_ENCODING_META (0x00000007U)
-+#define ROGUE_BIF_DM_ENCODING_HOST (0x00000008U)
-+#define ROGUE_BIF_DM_ENCODING_PM_ALIST (0x00000009U)
-+
-+#define ROGUE_MMUCTRL_VADDR_PC_INDEX_SHIFT (30U)
-+#define ROGUE_MMUCTRL_VADDR_PC_INDEX_CLRMSK (0xFFFFFF003FFFFFFFULL)
-+#define ROGUE_MMUCTRL_VADDR_PD_INDEX_SHIFT (21U)
-+#define ROGUE_MMUCTRL_VADDR_PD_INDEX_CLRMSK (0xFFFFFFFFC01FFFFFULL)
-+#define ROGUE_MMUCTRL_VADDR_PT_INDEX_SHIFT (12U)
-+#define ROGUE_MMUCTRL_VADDR_PT_INDEX_CLRMSK (0xFFFFFFFFFFE00FFFULL)
-+
-+#define ROGUE_MMUCTRL_ENTRIES_PC_VALUE (0x00000400U)
-+#define ROGUE_MMUCTRL_ENTRIES_PD_VALUE (0x00000200U)
-+#define ROGUE_MMUCTRL_ENTRIES_PT_VALUE (0x00000200U)
-+
-+#define ROGUE_MMUCTRL_ENTRY_SIZE_PC_VALUE (0x00000020U)
-+#define ROGUE_MMUCTRL_ENTRY_SIZE_PD_VALUE (0x00000040U)
-+#define ROGUE_MMUCTRL_ENTRY_SIZE_PT_VALUE (0x00000040U)
-+
-+#define ROGUE_MMUCTRL_PAGE_SIZE_MASK (0x00000007U)
-+#define ROGUE_MMUCTRL_PAGE_SIZE_4KB (0x00000000U)
-+#define ROGUE_MMUCTRL_PAGE_SIZE_16KB (0x00000001U)
-+#define ROGUE_MMUCTRL_PAGE_SIZE_64KB (0x00000002U)
-+#define ROGUE_MMUCTRL_PAGE_SIZE_256KB (0x00000003U)
-+#define ROGUE_MMUCTRL_PAGE_SIZE_1MB (0x00000004U)
-+#define ROGUE_MMUCTRL_PAGE_SIZE_2MB (0x00000005U)
-+
-+#define ROGUE_MMUCTRL_PAGE_4KB_RANGE_SHIFT (12U)
-+#define ROGUE_MMUCTRL_PAGE_4KB_RANGE_CLRMSK (0xFFFFFF0000000FFFULL)
-+
-+#define ROGUE_MMUCTRL_PAGE_16KB_RANGE_SHIFT (14U)
-+#define ROGUE_MMUCTRL_PAGE_16KB_RANGE_CLRMSK (0xFFFFFF0000003FFFULL)
-+
-+#define ROGUE_MMUCTRL_PAGE_64KB_RANGE_SHIFT (16U)
-+#define ROGUE_MMUCTRL_PAGE_64KB_RANGE_CLRMSK (0xFFFFFF000000FFFFULL)
-+
-+#define ROGUE_MMUCTRL_PAGE_256KB_RANGE_SHIFT (18U)
-+#define ROGUE_MMUCTRL_PAGE_256KB_RANGE_CLRMSK (0xFFFFFF000003FFFFULL)
-+
-+#define ROGUE_MMUCTRL_PAGE_1MB_RANGE_SHIFT (20U)
-+#define ROGUE_MMUCTRL_PAGE_1MB_RANGE_CLRMSK (0xFFFFFF00000FFFFFULL)
-+
-+#define ROGUE_MMUCTRL_PAGE_2MB_RANGE_SHIFT (21U)
-+#define ROGUE_MMUCTRL_PAGE_2MB_RANGE_CLRMSK (0xFFFFFF00001FFFFFULL)
-+
-+#define ROGUE_MMUCTRL_PT_BASE_4KB_RANGE_SHIFT (12U)
-+#define ROGUE_MMUCTRL_PT_BASE_4KB_RANGE_CLRMSK (0xFFFFFF0000000FFFULL)
-+
-+#define ROGUE_MMUCTRL_PT_BASE_16KB_RANGE_SHIFT (10U)
-+#define ROGUE_MMUCTRL_PT_BASE_16KB_RANGE_CLRMSK (0xFFFFFF00000003FFULL)
-+
-+#define ROGUE_MMUCTRL_PT_BASE_64KB_RANGE_SHIFT (8U)
-+#define ROGUE_MMUCTRL_PT_BASE_64KB_RANGE_CLRMSK (0xFFFFFF00000000FFULL)
-+
-+#define ROGUE_MMUCTRL_PT_BASE_256KB_RANGE_SHIFT (6U)
-+#define ROGUE_MMUCTRL_PT_BASE_256KB_RANGE_CLRMSK (0xFFFFFF000000003FULL)
-+
-+#define ROGUE_MMUCTRL_PT_BASE_1MB_RANGE_SHIFT (5U)
-+#define ROGUE_MMUCTRL_PT_BASE_1MB_RANGE_CLRMSK (0xFFFFFF000000001FULL)
-+
-+#define ROGUE_MMUCTRL_PT_BASE_2MB_RANGE_SHIFT (5U)
-+#define ROGUE_MMUCTRL_PT_BASE_2MB_RANGE_CLRMSK (0xFFFFFF000000001FULL)
-+
-+#define ROGUE_MMUCTRL_PT_DATA_PM_META_PROTECT_SHIFT (62U)
-+#define ROGUE_MMUCTRL_PT_DATA_PM_META_PROTECT_CLRMSK (0xBFFFFFFFFFFFFFFFULL)
-+#define ROGUE_MMUCTRL_PT_DATA_PM_META_PROTECT_EN (0x4000000000000000ULL)
-+#define ROGUE_MMUCTRL_PT_DATA_VP_PAGE_HI_SHIFT (40U)
-+#define ROGUE_MMUCTRL_PT_DATA_VP_PAGE_HI_CLRMSK (0xC00000FFFFFFFFFFULL)
-+#define ROGUE_MMUCTRL_PT_DATA_PAGE_SHIFT (12U)
-+#define ROGUE_MMUCTRL_PT_DATA_PAGE_CLRMSK (0xFFFFFF0000000FFFULL)
-+#define ROGUE_MMUCTRL_PT_DATA_VP_PAGE_LO_SHIFT (6U)
-+#define ROGUE_MMUCTRL_PT_DATA_VP_PAGE_LO_CLRMSK (0xFFFFFFFFFFFFF03FULL)
-+#define ROGUE_MMUCTRL_PT_DATA_ENTRY_PENDING_SHIFT (5U)
-+#define ROGUE_MMUCTRL_PT_DATA_ENTRY_PENDING_CLRMSK (0xFFFFFFFFFFFFFFDFULL)
-+#define ROGUE_MMUCTRL_PT_DATA_ENTRY_PENDING_EN (0x0000000000000020ULL)
-+#define ROGUE_MMUCTRL_PT_DATA_PM_SRC_SHIFT (4U)
-+#define ROGUE_MMUCTRL_PT_DATA_PM_SRC_CLRMSK (0xFFFFFFFFFFFFFFEFULL)
-+#define ROGUE_MMUCTRL_PT_DATA_PM_SRC_EN (0x0000000000000010ULL)
-+#define ROGUE_MMUCTRL_PT_DATA_SLC_BYPASS_CTRL_SHIFT (3U)
-+#define ROGUE_MMUCTRL_PT_DATA_SLC_BYPASS_CTRL_CLRMSK (0xFFFFFFFFFFFFFFF7ULL)
-+#define ROGUE_MMUCTRL_PT_DATA_SLC_BYPASS_CTRL_EN (0x0000000000000008ULL)
-+#define ROGUE_MMUCTRL_PT_DATA_CC_SHIFT (2U)
-+#define ROGUE_MMUCTRL_PT_DATA_CC_CLRMSK (0xFFFFFFFFFFFFFFFBULL)
-+#define ROGUE_MMUCTRL_PT_DATA_CC_EN (0x0000000000000004ULL)
-+#define ROGUE_MMUCTRL_PT_DATA_READ_ONLY_SHIFT (1U)
-+#define ROGUE_MMUCTRL_PT_DATA_READ_ONLY_CLRMSK (0xFFFFFFFFFFFFFFFDULL)
-+#define ROGUE_MMUCTRL_PT_DATA_READ_ONLY_EN (0x0000000000000002ULL)
-+#define ROGUE_MMUCTRL_PT_DATA_VALID_SHIFT (0U)
-+#define ROGUE_MMUCTRL_PT_DATA_VALID_CLRMSK (0xFFFFFFFFFFFFFFFEULL)
-+#define ROGUE_MMUCTRL_PT_DATA_VALID_EN (0x0000000000000001ULL)
-+
-+#define ROGUE_MMUCTRL_PD_DATA_ENTRY_PENDING_SHIFT (40U)
-+#define ROGUE_MMUCTRL_PD_DATA_ENTRY_PENDING_CLRMSK (0xFFFFFEFFFFFFFFFFULL)
-+#define ROGUE_MMUCTRL_PD_DATA_ENTRY_PENDING_EN (0x0000010000000000ULL)
-+#define ROGUE_MMUCTRL_PD_DATA_PT_BASE_SHIFT (5U)
-+#define ROGUE_MMUCTRL_PD_DATA_PT_BASE_CLRMSK (0xFFFFFF000000001FULL)
-+#define ROGUE_MMUCTRL_PD_DATA_PAGE_SIZE_SHIFT (1U)
-+#define ROGUE_MMUCTRL_PD_DATA_PAGE_SIZE_CLRMSK (0xFFFFFFFFFFFFFFF1ULL)
-+#define ROGUE_MMUCTRL_PD_DATA_PAGE_SIZE_4KB (0x0000000000000000ULL)
-+#define ROGUE_MMUCTRL_PD_DATA_PAGE_SIZE_16KB (0x0000000000000002ULL)
-+#define ROGUE_MMUCTRL_PD_DATA_PAGE_SIZE_64KB (0x0000000000000004ULL)
-+#define ROGUE_MMUCTRL_PD_DATA_PAGE_SIZE_256KB (0x0000000000000006ULL)
-+#define ROGUE_MMUCTRL_PD_DATA_PAGE_SIZE_1MB (0x0000000000000008ULL)
-+#define ROGUE_MMUCTRL_PD_DATA_PAGE_SIZE_2MB (0x000000000000000aULL)
-+#define ROGUE_MMUCTRL_PD_DATA_VALID_SHIFT (0U)
-+#define ROGUE_MMUCTRL_PD_DATA_VALID_CLRMSK (0xFFFFFFFFFFFFFFFEULL)
-+#define ROGUE_MMUCTRL_PD_DATA_VALID_EN (0x0000000000000001ULL)
-+
-+#define ROGUE_MMUCTRL_PC_DATA_PD_BASE_SHIFT (4U)
-+#define ROGUE_MMUCTRL_PC_DATA_PD_BASE_CLRMSK (0x0000000FU)
-+#define ROGUE_MMUCTRL_PC_DATA_PD_BASE_ALIGNSHIFT (12U)
-+#define ROGUE_MMUCTRL_PC_DATA_PD_BASE_ALIGNSIZE (4096U)
-+#define ROGUE_MMUCTRL_PC_DATA_ENTRY_PENDING_SHIFT (1U)
-+#define ROGUE_MMUCTRL_PC_DATA_ENTRY_PENDING_CLRMSK (0xFFFFFFFDU)
-+#define ROGUE_MMUCTRL_PC_DATA_ENTRY_PENDING_EN (0x00000002U)
-+#define ROGUE_MMUCTRL_PC_DATA_VALID_SHIFT (0U)
-+#define ROGUE_MMUCTRL_PC_DATA_VALID_CLRMSK (0xFFFFFFFEU)
-+#define ROGUE_MMUCTRL_PC_DATA_VALID_EN (0x00000001U)
-+
-+#endif /* PVR_ROGUE_MMU_DEFS_H */
++#endif /* PVR_FW_INFO_H */
 -- 
 2.42.0
 
