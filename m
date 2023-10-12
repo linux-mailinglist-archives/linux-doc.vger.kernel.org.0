@@ -1,62 +1,62 @@
-Return-Path: <linux-doc+bounces-154-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-156-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6B0E7C73FD
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Oct 2023 19:21:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CA377C740C
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Oct 2023 19:21:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E9BD31C20A61
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Oct 2023 17:21:24 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A7C6D1C21056
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Oct 2023 17:21:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 04E4A34199;
-	Thu, 12 Oct 2023 17:21:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 45A7F347C4;
+	Thu, 12 Oct 2023 17:21:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dmL0//kN"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MmZrjaiK"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16DE83219A
-	for <linux-doc@vger.kernel.org>; Thu, 12 Oct 2023 17:21:20 +0000 (UTC)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com [IPv6:2607:f8b0:4864:20::d36])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4F0DBC6;
-	Thu, 12 Oct 2023 10:21:18 -0700 (PDT)
-Received: by mail-io1-xd36.google.com with SMTP id ca18e2360f4ac-79faf4210b2so44395839f.2;
-        Thu, 12 Oct 2023 10:21:18 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AE5834199
+	for <linux-doc@vger.kernel.org>; Thu, 12 Oct 2023 17:21:47 +0000 (UTC)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com [IPv6:2607:f8b0:4864:20::d2f])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DC172C6;
+	Thu, 12 Oct 2023 10:21:45 -0700 (PDT)
+Received: by mail-io1-xd2f.google.com with SMTP id ca18e2360f4ac-7a2bfd584f0so51414839f.0;
+        Thu, 12 Oct 2023 10:21:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697131277; x=1697736077; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1697131305; x=1697736105; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=dJs8k/8KlrmQtpA0CkiLpHx7YBAuj0tXGKp3HNTHAHg=;
-        b=dmL0//kN8kgcTF9G6pFGJ7PTNSlqdxdRSVpjgOm3jryhjQeo+XB9mAfUFFZsEi2LAj
-         iUpmk9x8OU/X/SL4u2iEa5hcEPNIVd0C5xTypV/Ce6SLQJbH5d9thdcAZNnpimZPhhte
-         V5ca0csZgROeA3wu96Y96SOpwUrddHqLgM11jfTM7mKguafEpFXnjsncMLTkWDX0Taw5
-         KkUT9CpotnPPyaCpxc+v++tNKP1TX9+VqCE6zqqhi6Wrz1ZIIY06kfTGYY6dzKJ39Jez
-         +WFTaPXJBJM/lvvfwwiqr237NwOp9bcuN7szG5TUWAXvB7X1fGICsWVznWV4ncaBQIJS
-         K87Q==
+        b=MmZrjaiKYyX0/aF583F9eu+hIAjm4VfrviEO0YIPMC62sDwhQToMf+zt8PTn2FJwLi
+         LS2nkKozixlxK08UzylROmzGPmzzac9htjq/GDU3jIf6TannGKB21c+i1C5lrzNKEQr8
+         jOzNjOGnHC7UH5TNdkddWbSN6d2+A+oyT798+qRbMP4XgJukrsR0BgElBP0z/qMhpun9
+         vDJ+gVh7sj80DMqRb4HJ6vLWpGR+o5u9PSyr3j6d1lk+ZENnawIQ6vL9m4HZnKA5y1Bp
+         u6+wMUhuXfYH084KUUPXMNI+h314RkQ1Z0RnLaiupF6v9UAb0qKdbU/UCogY1czjiCnP
+         tP9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697131277; x=1697736077;
+        d=1e100.net; s=20230601; t=1697131305; x=1697736105;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=dJs8k/8KlrmQtpA0CkiLpHx7YBAuj0tXGKp3HNTHAHg=;
-        b=M/i2k0qmBgTVoJdadqcTXdAWqAT90cQJ56XHYA1XAx42wROnfTgb8iLwCcNjcWsZ2O
-         Bl+voWbV7ZZbB6aD+rPl/Apx8bW+UUbxxaFKQ1JH/6X+fxD/TNUMKaNwCq113YFodgfw
-         aBFEPBJdg5y9ATN0bVkF6nsAU489regZr0A7niTFMxwq2aVojc1nZORwBNVnTJnXzKyP
-         RuXeNXW7wMSXww8BnkoSpfm/5sRu7LNkMpeT4viYDhUEq4jdUkRivNi5ebeprzXeuB8l
-         i8tHZ0JswH5/zL2BPobnbpH3liQnfvlN4CgDFsAR7A40fFOq3WGElcP+lxqgVP3jZtif
-         kkVw==
-X-Gm-Message-State: AOJu0YzBjYiF3LWjih1VAtjiyY5vkqR6884QPAXffqxT5W0fTZqgE47g
-	5FTNsxMqYr8L7vSanxXzZ+jpfMcUDFpldw==
-X-Google-Smtp-Source: AGHT+IHV/ava8TUw4o/Box0EbUYCUqjT8Ot3xjTM70VD0AOzL+MB23CnCIvAgGF++9/cOhKjF2u+Mg==
-X-Received: by 2002:a5e:c24d:0:b0:79f:e9ac:f60a with SMTP id w13-20020a5ec24d000000b0079fe9acf60amr26747610iop.20.1697131277257;
-        Thu, 12 Oct 2023 10:21:17 -0700 (PDT)
+        b=IN+zRtTmohvfS7Fr2HnsZLkGGHJSYJ+xrXRJGhkwGVzN+ACM8Pv7rwImYda129qGCw
+         nfecFdJYaXGhsvH5vE7gY7MjHQPIzWFJuE6PFDY2z8jYg/WMTvzLieTkgFtAdeZpB5KA
+         1UZbXGRS0o3pXZXa9TfXc1eiRJ9WYzdC/1G5ZZ9vrcojhzgceB5D30u6hz59LE5d5StH
+         nIhHP82a8tNYTSEBOqw0t/U6ysSjxqLWEZ/Rf+INQRRrfJIP9FipGpNsWVGKbOhkAxGU
+         SOqJ5DHFR3YGaFxly/J6gSEvrOg88txUHSd8DyrKyTpRVoy/dmVOZ2aFgPtP0GWVVOBA
+         7nPw==
+X-Gm-Message-State: AOJu0Yzt4rry/EY087Ip0wfoi6OXmKqwGxWu9Mc/Y/wEyS83sz3JZfFf
+	R7huPJMpNdN33jZejSGE4AlJP42W51KJkA==
+X-Google-Smtp-Source: AGHT+IFSbmKh2tgHdx5hRKItGC6Ju6zKHgF0pi/HbnUffxRaaDdOTY5F94hWaW5GBheN4k6+tUCr1g==
+X-Received: by 2002:a5d:9ac4:0:b0:79f:d195:5384 with SMTP id x4-20020a5d9ac4000000b0079fd1955384mr27162668ion.17.1697131304923;
+        Thu, 12 Oct 2023 10:21:44 -0700 (PDT)
 Received: from frodo.. (c-73-78-62-130.hsd1.co.comcast.net. [73.78.62.130])
-        by smtp.googlemail.com with ESMTPSA id fx23-20020a0566381e1700b0042b47e8869bsm4180518jab.49.2023.10.12.10.21.16
+        by smtp.googlemail.com with ESMTPSA id r25-20020a028819000000b0043cef0711c1sm3992211jai.158.2023.10.12.10.21.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Oct 2023 10:21:16 -0700 (PDT)
+        Thu, 12 Oct 2023 10:21:44 -0700 (PDT)
 From: Jim Cromie <jim.cromie@gmail.com>
 To: linux-kernel@vger.kernel.org,
 	jbaron@akamai.com,
@@ -76,8 +76,8 @@ Cc: daniel.vetter@ffwll.ch,
 	linux-doc@vger.kernel.org,
 	Jim Cromie <jim.cromie@gmail.com>
 Subject: [PATCH v7 00/25] fix DRM_USE_DYNAMIC_DEBUG=y regression
-Date: Thu, 12 Oct 2023 11:20:39 -0600
-Message-ID: <20231012172104.3286499-1-jim.cromie@gmail.com>
+Date: Thu, 12 Oct 2023 11:21:11 -0600
+Message-ID: <20231012172137.3286566-1-jim.cromie@gmail.com>
 X-Mailer: git-send-email 2.41.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
