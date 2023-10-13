@@ -1,482 +1,195 @@
-Return-Path: <linux-doc+bounces-218-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-220-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C19C37C8CD4
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Oct 2023 20:12:06 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E06FA7C8D2D
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Oct 2023 20:39:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 78285282680
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Oct 2023 18:12:05 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 106301C20B05
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Oct 2023 18:39:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A533922F1F;
-	Fri, 13 Oct 2023 18:12:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 970A11C298;
+	Fri, 13 Oct 2023 18:39:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="HjJ2p3p5"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="bV7bkn3z"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0735322F16
-	for <linux-doc@vger.kernel.org>; Fri, 13 Oct 2023 18:12:00 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 70302D8
-	for <linux-doc@vger.kernel.org>; Fri, 13 Oct 2023 11:11:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1697220715;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=006b2BOLjbBbZ4FbAl+3x7+rZlipZKC0l5bf6ZYnHfE=;
-	b=HjJ2p3p5B4Wqi9QoYsUlzf6Msx/8mGy6zlQWgWMUwjob0rKVPOeI3MAZwZMm5lXENMNR0E
-	ThysUQtTJzIfoD1Ib7gW2mfi8PocYErlyy8M7J9RLrZ5ZQWa4hVd/FPReBjcP/KcJRqG82
-	jQQ0neOOsdOqhzU3KJaAEK4kvDqmg3s=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-306-hZICA_IWNiGAnrq0VT935g-1; Fri, 13 Oct 2023 14:11:51 -0400
-X-MC-Unique: hZICA_IWNiGAnrq0VT935g-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com [10.11.54.4])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CC14E1C0651A;
-	Fri, 13 Oct 2023 18:11:50 +0000 (UTC)
-Received: from llong.com (unknown [10.22.17.138])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 18F2220296DB;
-	Fri, 13 Oct 2023 18:11:50 +0000 (UTC)
-From: Waiman Long <longman@redhat.com>
-To: Tejun Heo <tj@kernel.org>,
-	Zefan Li <lizefan.x@bytedance.com>,
-	Johannes Weiner <hannes@cmpxchg.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Lai Jiangshan <jiangshanlai@gmail.com>,
-	Shuah Khan <shuah@kernel.org>
-Cc: cgroups@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
-	Waiman Long <longman@redhat.com>
-Subject: [PATCH-cgroup 4/4] cgroup/cpuset: Take isolated CPUs out of workqueue unbound cpumask
-Date: Fri, 13 Oct 2023 14:11:22 -0400
-Message-Id: <20231013181122.3518610-5-longman@redhat.com>
-In-Reply-To: <20231013181122.3518610-1-longman@redhat.com>
-References: <20231013181122.3518610-1-longman@redhat.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A95981C69F
+	for <linux-doc@vger.kernel.org>; Fri, 13 Oct 2023 18:39:31 +0000 (UTC)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com [IPv6:2a00:1450:4864:20::535])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BEA52CF
+	for <linux-doc@vger.kernel.org>; Fri, 13 Oct 2023 11:39:29 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id 4fb4d7f45d1cf-51e24210395so1930a12.0
+        for <linux-doc@vger.kernel.org>; Fri, 13 Oct 2023 11:39:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1697222368; x=1697827168; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=q2ohtkcvpEvo61Q68fjCDCwlB06zwFzfj4hgniJlyos=;
+        b=bV7bkn3zxjUWqct4XFwbZ7Vpq8RtE+2stYHDshrwtA72XFDma4rBdOLGPyOkhVLPJj
+         yeCzyiEUJhN4Z9s3AbVGHIBDMyWnIrOyE7bpUjFOWJxUfzWQkX0a4LC5QuOLFkBbqJNW
+         wHxUmoJJ5PsYEOFpVo1m3KdyFj5EvQMvQuTL5H88s6OLmQhYfjsRBRcTPko+SaIWhxS5
+         Is2Ehzw9rBrP1iFEMTntuaCisp1Yx4JrBfpdORilXDkbF1bQLp8qR3kXTuBw0Hnnxz1u
+         +HJ95vbbIyidkpk7B0p8G1kCfixTG2r2k5/9vF4De/V7NC9B4D9JztAlswnAxnpxZ3HR
+         4I3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1697222368; x=1697827168;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=q2ohtkcvpEvo61Q68fjCDCwlB06zwFzfj4hgniJlyos=;
+        b=IxZ2W7F9yIi7f0HYa1/++VkXEZTh6s0E0r9QTtu2TNwtn64yK20ovqFwgMo36XSt28
+         GMUTQthSne1FXXwIx5KzrPse1Ij5ZcFI0ppeOEviaztbaJehEmgNNPsBgUli4Fxb0Fr0
+         xsggdYKMLtPHSq0qXBy+KS9qShA/FDA+hL4FRYNqlEabnlweN4H349uBvIU91l8O8nA5
+         LCBP7kMfrWADULotENAM/9zpCSOemRG+Oq2lm4L8tj/2pjeVd7ZAVY8wnnJ3N7LE7KSe
+         Tgd9ZlipkU94zZqCfHupAgLwjzUl8ppuOtswGGDvjcnz1j/BaqrCcEy1+kmlYV/OktF+
+         pdJg==
+X-Gm-Message-State: AOJu0YzHJo4mIsqF2UfwQRR4X3rfRqNWbqpxy4tvDcW5TksPsrNWWTCU
+	kCLIDr9cjFr9YeE/SkJfnQEEsCHuc84lQlzlkouoNw==
+X-Google-Smtp-Source: AGHT+IF8YANCcWlx2w/0/msjf4y2v4h4Xy4FWI214TULbuhHXEvDPb4bvCZrXVGcnGwKxWVnJu7fKnYNPvtC97SKfJw=
+X-Received: by 2002:a50:a696:0:b0:52f:5697:8dec with SMTP id
+ e22-20020a50a696000000b0052f56978decmr4174edc.4.1697222368058; Fri, 13 Oct
+ 2023 11:39:28 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+References: <20231009142005.21338-1-quic_kriskura@quicinc.com>
+ <20231009142005.21338-2-quic_kriskura@quicinc.com> <CANP3RGfEk2DqZ3biyN78ycQYbDxCEG+H1me2vnEYuwXkNdXnTA@mail.gmail.com>
+ <CANP3RGcCpNOuVpdV9n0AFxZo-wsfwi8OfYgBk1WHNHaEd-4V-Q@mail.gmail.com>
+ <CANP3RGdY4LsOA6U5kuccApHCzL0_jBnY=pLOYrUuYtMZFTvnbw@mail.gmail.com>
+ <d19d9d08-c119-4991-b460-49925f601d15@quicinc.com> <fad5a7fb-cce1-46bc-a0af-72405c76d107@quicinc.com>
+ <CANP3RGcqWBYd9FqAX47rE9pFgBTB8=0CGdwkScm-OH1epHcVWQ@mail.gmail.com> <8ff92053-52ff-4950-95c8-0e986f6a028a@quicinc.com>
+In-Reply-To: <8ff92053-52ff-4950-95c8-0e986f6a028a@quicinc.com>
+From: =?UTF-8?Q?Maciej_=C5=BBenczykowski?= <maze@google.com>
+Date: Fri, 13 Oct 2023 11:39:10 -0700
+Message-ID: <CANP3RGd4G4dkMOyg6wSX29NYP2mp=LhMhmZpoG=rgoCz=bh1=w@mail.gmail.com>
+Subject: Re: [PATCH 2/2] usb: gadget: ncm: Add support to update
+ wMaxSegmentSize via configfs
+To: Krishna Kurapati PSSNV <quic_kriskura@quicinc.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, onathan Corbet <corbet@lwn.net>, 
+	Linyu Yuan <quic_linyyuan@quicinc.com>, linux-usb@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	quic_ppratap@quicinc.com, quic_wcheng@quicinc.com, quic_jackp@quicinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-17.6 required=5.0 tests=BAYES_00,DKIMWL_WL_MED,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
-	SPF_HELO_NONE,SPF_NONE autolearn=unavailable autolearn_force=no
-	version=3.4.6
+	ENV_AND_HDR_SPF_MATCH,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,
+	USER_IN_DEF_DKIM_WL,USER_IN_DEF_SPF_WL autolearn=unavailable
+	autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
 	lindbergh.monkeyblade.net
 
-To make CPUs in isolated cpuset partition closer in isolation to
-the boot time isolated CPUs specified in the "isolcpus" boot command
-line option, we need to take those CPUs out of the workqueue unbound
-cpumask so that work functions from the unbound workqueues won't run
-on those CPUs.  Otherwise, they will interfere the user tasks running
-on those isolated CPUs.
+On Thu, Oct 12, 2023 at 8:40=E2=80=AFAM Krishna Kurapati PSSNV
+<quic_kriskura@quicinc.com> wrote:
+>
+>
+>
+> On 10/12/2023 6:02 PM, Maciej =C5=BBenczykowski wrote:
+> > On Thu, Oct 12, 2023 at 1:48=E2=80=AFAM Krishna Kurapati PSSNV
+> >
+> > Could you paste the full patch?
+> > This is hard to review without looking at much more context then email
+> > is providing
+> > (or, even better, send me a link to a CL in gerrit somewhere - for
+> > example aosp ACK mainline tree)
+>
+> Sure. Will provide a gerrit on ACK for review before posting v2.
+>
+> The intent of posting the diff was two fold:
+>
+> 1. The question Greg asked regarding why the max segment size was
+> limited to 15014 was valid. When I thought about it, I actually wanted
+> to limit the max MTU to 15000, so the max segment size automatically
+> needs to be limited to 15014.
 
-With the introduction of the workqueue_unbound_exclude_cpumask() helper
-function in a previous commit, those isolated CPUs can now be taken
-out from the workqueue unbound cpumask.
+Note that this is a *very* abstract value.
+I get you want L3 MTU of 10 * 1500, but this value is not actually meaningf=
+ul.
 
-This patch also updates cgroup-v2.rst to mention that isolated
-CPUs will be excluded from unbound workqueue cpumask as well as
-updating test_cpuset_prs.sh to verify the correctness of the new
-*cpuset.cpus.isolated file, if available via cgroup_debug option.
+IPv4/IPv6 fragmentation and IPv4/IPv6 TCP segmentation
+do not result in a trivial multiplication of the standard 1500 byte
+ethernet L3 MTU.
+Indeed aggregating 2 1500 L3 mtu frames results in *different* sized
+frames depending on which type of aggregation you do.
+(and for tcp it even depends on the number and size of tcp options,
+though it is often assumed that those take up 12 bytes, since that's the
+normal for Linux-to-Linux tcp connections)
 
-Signed-off-by: Waiman Long <longman@redhat.com>
----
- Documentation/admin-guide/cgroup-v2.rst       | 10 +--
- kernel/cgroup/cpuset.c                        | 67 ++++++++++++++++---
- .../selftests/cgroup/test_cpuset_prs.sh       | 67 ++++++++++++++++---
- 3 files changed, 120 insertions(+), 24 deletions(-)
+For example if you aggregate N standard Linux ipv6/tcp L3 1500 mtu frames,
+this means you have
+N frames: ethernet (14) + ipv6 (40) + tcp (20) + tcp options (12) +
+payload (1500-12-20-40=3D1500-72=3D1428)
+post aggregation:
+1 frame: ethernet (14) + ipv6 (40) + tcp (20) + tcp options (12) +
+payload (N*1428)
 
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index e40b8560e002..d91ec638403b 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -2311,11 +2311,11 @@ Cpuset Interface Files
- 	partition or scheduling domain.  The set of exclusive CPUs is
- 	determined by the value of its "cpuset.cpus.exclusive.effective".
- 
--	When set to "isolated", the CPUs in that partition will
--	be in an isolated state without any load balancing from the
--	scheduler.  Tasks placed in such a partition with multiple
--	CPUs should be carefully distributed and bound to each of the
--	individual CPUs for optimal performance.
-+	When set to "isolated", the CPUs in that partition will be in
-+	an isolated state without any load balancing from the scheduler
-+	and excluded from the unbound workqueues.  Tasks placed in such
-+	a partition with multiple CPUs should be carefully distributed
-+	and bound to each of the individual CPUs for optimal performance.
- 
- 	A partition root ("root" or "isolated") can be in one of the
- 	two possible states - valid or invalid.  An invalid partition
-diff --git a/kernel/cgroup/cpuset.c b/kernel/cgroup/cpuset.c
-index 19c8779798fd..da251764611f 100644
---- a/kernel/cgroup/cpuset.c
-+++ b/kernel/cgroup/cpuset.c
-@@ -43,6 +43,7 @@
- #include <linux/sched/isolation.h>
- #include <linux/cgroup.h>
- #include <linux/wait.h>
-+#include <linux/workqueue.h>
- 
- DEFINE_STATIC_KEY_FALSE(cpusets_pre_enable_key);
- DEFINE_STATIC_KEY_FALSE(cpusets_enabled_key);
-@@ -1444,25 +1445,31 @@ static void partition_xcpus_newstate(int old_prs, int new_prs, struct cpumask *x
-  * @new_prs: new partition_root_state
-  * @parent: parent cpuset
-  * @xcpus: exclusive CPUs to be added
-+ * Return: true if isolated_cpus modified, false otherwise
-  *
-  * Remote partition if parent == NULL
-  */
--static void partition_xcpus_add(int new_prs, struct cpuset *parent,
-+static bool partition_xcpus_add(int new_prs, struct cpuset *parent,
- 				struct cpumask *xcpus)
- {
-+	bool isolcpus_updated;
-+
- 	WARN_ON_ONCE(new_prs < 0);
- 	lockdep_assert_held(&callback_lock);
- 	if (!parent)
- 		parent = &top_cpuset;
- 
-+
- 	if (parent == &top_cpuset)
- 		cpumask_or(subpartitions_cpus, subpartitions_cpus, xcpus);
- 
--	if (new_prs != parent->partition_root_state)
-+	isolcpus_updated = (new_prs != parent->partition_root_state);
-+	if (isolcpus_updated)
- 		partition_xcpus_newstate(parent->partition_root_state, new_prs,
- 					 xcpus);
- 
- 	cpumask_andnot(parent->effective_cpus, parent->effective_cpus, xcpus);
-+	return isolcpus_updated;
- }
- 
- /*
-@@ -1470,12 +1477,15 @@ static void partition_xcpus_add(int new_prs, struct cpuset *parent,
-  * @old_prs: old partition_root_state
-  * @parent: parent cpuset
-  * @xcpus: exclusive CPUs to be removed
-+ * Return: true if isolated_cpus modified, false otherwise
-  *
-  * Remote partition if parent == NULL
-  */
--static void partition_xcpus_del(int old_prs, struct cpuset *parent,
-+static bool partition_xcpus_del(int old_prs, struct cpuset *parent,
- 				struct cpumask *xcpus)
- {
-+	bool isolcpus_updated;
-+
- 	WARN_ON_ONCE(old_prs < 0);
- 	lockdep_assert_held(&callback_lock);
- 	if (!parent)
-@@ -1484,12 +1494,34 @@ static void partition_xcpus_del(int old_prs, struct cpuset *parent,
- 	if (parent == &top_cpuset)
- 		cpumask_andnot(subpartitions_cpus, subpartitions_cpus, xcpus);
- 
--	if (old_prs != parent->partition_root_state)
-+	isolcpus_updated = (old_prs != parent->partition_root_state);
-+	if (isolcpus_updated)
- 		partition_xcpus_newstate(old_prs, parent->partition_root_state,
- 					 xcpus);
- 
- 	cpumask_and(xcpus, xcpus, cpu_active_mask);
- 	cpumask_or(parent->effective_cpus, parent->effective_cpus, xcpus);
-+	return isolcpus_updated;
-+}
-+
-+static void update_unbound_workqueue_cpumask(bool isolcpus_updated)
-+{
-+	int ret;
-+
-+	if (!isolcpus_updated)
-+		return;
-+
-+	ret = workqueue_unbound_exclude_cpumask(isolated_cpus);
-+
-+	/*
-+	 * An error of -EBUSY will be returned if there is a hotplug operation
-+	 * in progress. Skip the update and hopefully the unbound workqueue
-+	 * cpumask will be correctly set next time.
-+	 */
-+	if (ret == -EBUSY)
-+		return;
-+
-+	WARN_ON_ONCE(ret < 0);
- }
- 
- /*
-@@ -1540,6 +1572,8 @@ static inline bool is_local_partition(struct cpuset *cs)
- static int remote_partition_enable(struct cpuset *cs, int new_prs,
- 				   struct tmpmasks *tmp)
- {
-+	bool isolcpus_updated;
-+
- 	/*
- 	 * The user must have sysadmin privilege.
- 	 */
-@@ -1561,7 +1595,7 @@ static int remote_partition_enable(struct cpuset *cs, int new_prs,
- 		return 0;
- 
- 	spin_lock_irq(&callback_lock);
--	partition_xcpus_add(new_prs, NULL, tmp->new_cpus);
-+	isolcpus_updated = partition_xcpus_add(new_prs, NULL, tmp->new_cpus);
- 	list_add(&cs->remote_sibling, &remote_children);
- 	if (cs->use_parent_ecpus) {
- 		struct cpuset *parent = parent_cs(cs);
-@@ -1570,13 +1604,13 @@ static int remote_partition_enable(struct cpuset *cs, int new_prs,
- 		parent->child_ecpus_count--;
- 	}
- 	spin_unlock_irq(&callback_lock);
-+	update_unbound_workqueue_cpumask(isolcpus_updated);
- 
- 	/*
- 	 * Proprogate changes in top_cpuset's effective_cpus down the hierarchy.
- 	 */
- 	update_tasks_cpumask(&top_cpuset, tmp->new_cpus);
- 	update_sibling_cpumasks(&top_cpuset, NULL, tmp);
--
- 	return 1;
- }
- 
-@@ -1591,18 +1625,22 @@ static int remote_partition_enable(struct cpuset *cs, int new_prs,
-  */
- static void remote_partition_disable(struct cpuset *cs, struct tmpmasks *tmp)
- {
-+	bool isolcpus_updated;
-+
- 	compute_effective_exclusive_cpumask(cs, tmp->new_cpus);
- 	WARN_ON_ONCE(!is_remote_partition(cs));
- 	WARN_ON_ONCE(!cpumask_subset(tmp->new_cpus, subpartitions_cpus));
- 
- 	spin_lock_irq(&callback_lock);
- 	list_del_init(&cs->remote_sibling);
--	partition_xcpus_del(cs->partition_root_state, NULL, tmp->new_cpus);
-+	isolcpus_updated = partition_xcpus_del(cs->partition_root_state,
-+					       NULL, tmp->new_cpus);
- 	cs->partition_root_state = -cs->partition_root_state;
- 	if (!cs->prs_err)
- 		cs->prs_err = PERR_INVCPUS;
- 	reset_partition_data(cs);
- 	spin_unlock_irq(&callback_lock);
-+	update_unbound_workqueue_cpumask(isolcpus_updated);
- 
- 	/*
- 	 * Proprogate changes in top_cpuset's effective_cpus down the hierarchy.
-@@ -1625,6 +1663,7 @@ static void remote_cpus_update(struct cpuset *cs, struct cpumask *newmask,
- {
- 	bool adding, deleting;
- 	int prs = cs->partition_root_state;
-+	int isolcpus_updated = 0;
- 
- 	if (WARN_ON_ONCE(!is_remote_partition(cs)))
- 		return;
-@@ -1649,10 +1688,11 @@ static void remote_cpus_update(struct cpuset *cs, struct cpumask *newmask,
- 
- 	spin_lock_irq(&callback_lock);
- 	if (adding)
--		partition_xcpus_add(prs, NULL, tmp->addmask);
-+		isolcpus_updated += partition_xcpus_add(prs, NULL, tmp->addmask);
- 	if (deleting)
--		partition_xcpus_del(prs, NULL, tmp->delmask);
-+		isolcpus_updated += partition_xcpus_del(prs, NULL, tmp->delmask);
- 	spin_unlock_irq(&callback_lock);
-+	update_unbound_workqueue_cpumask(isolcpus_updated);
- 
- 	/*
- 	 * Proprogate changes in top_cpuset's effective_cpus down the hierarchy.
-@@ -1774,6 +1814,7 @@ static int update_parent_effective_cpumask(struct cpuset *cs, int cmd,
- 	int part_error = PERR_NONE;	/* Partition error? */
- 	int subparts_delta = 0;
- 	struct cpumask *xcpus;		/* cs effective_xcpus */
-+	int isolcpus_updated = 0;
- 	bool nocpu;
- 
- 	lockdep_assert_held(&cpuset_mutex);
-@@ -2010,15 +2051,18 @@ static int update_parent_effective_cpumask(struct cpuset *cs, int cmd,
- 	 * and vice versa.
- 	 */
- 	if (adding)
--		partition_xcpus_del(old_prs, parent, tmp->addmask);
-+		isolcpus_updated += partition_xcpus_del(old_prs, parent,
-+							tmp->addmask);
- 	if (deleting)
--		partition_xcpus_add(new_prs, parent, tmp->delmask);
-+		isolcpus_updated += partition_xcpus_add(new_prs, parent,
-+							tmp->delmask);
- 
- 	if (is_partition_valid(parent)) {
- 		parent->nr_subparts += subparts_delta;
- 		WARN_ON_ONCE(parent->nr_subparts < 0);
- 	}
- 	spin_unlock_irq(&callback_lock);
-+	update_unbound_workqueue_cpumask(isolcpus_updated);
- 
- 	if ((old_prs != new_prs) && (cmd == partcmd_update))
- 		update_partition_exclusive(cs, new_prs);
-@@ -3082,6 +3126,7 @@ static int update_prstate(struct cpuset *cs, int new_prs)
- 	else if (new_xcpus_state)
- 		partition_xcpus_newstate(old_prs, new_prs, cs->effective_xcpus);
- 	spin_unlock_irq(&callback_lock);
-+	update_unbound_workqueue_cpumask(new_xcpus_state);
- 
- 	/* Force update if switching back to member */
- 	update_cpumasks_hier(cs, &tmpmask, !new_prs ? HIER_CHECKALL : 0);
-diff --git a/tools/testing/selftests/cgroup/test_cpuset_prs.sh b/tools/testing/selftests/cgroup/test_cpuset_prs.sh
-index 2b825019f806..f117f704e675 100755
---- a/tools/testing/selftests/cgroup/test_cpuset_prs.sh
-+++ b/tools/testing/selftests/cgroup/test_cpuset_prs.sh
-@@ -232,11 +232,11 @@ TEST_MATRIX=(
- 	" C0-3:S+ C1-3:S+ C2-3   C4-5   X2-3  X2-3:P1   P2     P1    0 A1:0-1,A2:,A3:2-3,B1:4-5 \
- 								       A1:P0,A2:P1,A3:P2,B1:P1 2-3"
- 	" C0-3:S+ C1-3:S+ C2-3    C4    X2-3  X2-3:P1   P2     P1    0 A1:0-1,A2:,A3:2-3,B1:4 \
--								       A1:P0,A2:P1,A3:P2,B1:P1 2-4"
-+								       A1:P0,A2:P1,A3:P2,B1:P1 2-4,2-3"
- 	" C0-3:S+ C1-3:S+  C3     C4    X2-3  X2-3:P1   P2     P1    0 A1:0-1,A2:2,A3:3,B1:4 \
--								       A1:P0,A2:P1,A3:P2,B1:P1 2-4"
-+								       A1:P0,A2:P1,A3:P2,B1:P1 2-4,3"
- 	" C0-4:S+ C1-4:S+ C2-4     .    X2-4  X2-4:P2  X4:P1    .    0 A1:0-1,A2:2-3,A3:4 \
--								       A1:P0,A2:P2,A3:P1 2-4"
-+								       A1:P0,A2:P2,A3:P1 2-4,2-3"
- 	" C0-4:X2-4:S+ C1-4:X2-4:S+:P2 C2-4:X4:P1 \
- 				   .      .      X5      .      .    0 A1:0-4,A2:1-4,A3:2-4 \
- 								       A1:P0,A2:P-2,A3:P-1"
-@@ -248,7 +248,7 @@ TEST_MATRIX=(
- 	" C0-3:S+ C1-3:S+ C2-3     .    X2-3   X2-3 X2-3:P2:O2=0 .   0 A1:0-1,A2:1,A3:3 A1:P0,A3:P2 2-3"
- 	" C0-3:S+ C1-3:S+ C2-3     .    X2-3   X2-3 X2-3:P2:O2=0 O2=1 0 A1:0-1,A2:1,A3:2-3 A1:P0,A3:P2 2-3"
- 	" C0-3:S+ C1-3:S+  C3      .    X2-3   X2-3    P2:O3=0   .   0 A1:0-2,A2:1-2,A3: A1:P0,A3:P2 3"
--	" C0-3:S+ C1-3:S+  C3      .    X2-3   X2-3   T:P2:O3=0  .   0 A1:0-2,A2:1-2,A3:1-2 A1:P0,A3:P-2 3"
-+	" C0-3:S+ C1-3:S+  C3      .    X2-3   X2-3   T:P2:O3=0  .   0 A1:0-2,A2:1-2,A3:1-2 A1:P0,A3:P-2 3,"
- 
- 	# An invalidated remote partition cannot self-recover from hotplug
- 	" C0-3:S+ C1-3:S+  C2      .    X2-3   X2-3   T:P2:O2=0 O2=1 0 A1:0-3,A2:1-3,A3:2 A1:P0,A3:P-2"
-@@ -508,12 +508,14 @@ dump_states()
- 		XECPUS=$DIR/cpuset.cpus.exclusive.effective
- 		PRS=$DIR/cpuset.cpus.partition
- 		PCPUS=$DIR/.__DEBUG__.cpuset.cpus.subpartitions
-+		ISCPUS=$DIR/.__DEBUG__.cpuset.cpus.isolated
- 		[[ -e $CPUS   ]] && echo "$CPUS: $(cat $CPUS)"
- 		[[ -e $XCPUS  ]] && echo "$XCPUS: $(cat $XCPUS)"
- 		[[ -e $ECPUS  ]] && echo "$ECPUS: $(cat $ECPUS)"
- 		[[ -e $XECPUS ]] && echo "$XECPUS: $(cat $XECPUS)"
- 		[[ -e $PRS    ]] && echo "$PRS: $(cat $PRS)"
- 		[[ -e $PCPUS  ]] && echo "$PCPUS: $(cat $PCPUS)"
-+		[[ -e $ISCPUS ]] && echo "$ISCPUS: $(cat $ISCPUS)"
- 	done
- }
- 
-@@ -591,11 +593,17 @@ check_cgroup_states()
- 
- #
- # Get isolated (including offline) CPUs by looking at
--# /sys/kernel/debug/sched/domains and compare that with the expected value.
-+# /sys/kernel/debug/sched/domains and *cpuset.cpus.isolated control file,
-+# if available, and compare that with the expected value.
- #
--# Note that a sched domain of just 1 CPU will be considered isolated.
-+# Note that isolated CPUs from the sched/domains context include offline
-+# CPUs as well as CPUs in non-isolated 1-CPU partition. Those CPUs may
-+# not be included in the *cpuset.cpus.isolated control file which contains
-+# only CPUs in isolated partitions.
- #
--# $1 - expected isolated cpu list
-+# $1 - expected isolated cpu list(s) <isolcpus1>{,<isolcpus2>}
-+# <isolcpus1> - expected sched/domains value
-+# <isolcpus2> - *cpuset.cpus.isolated value = <isolcpus1> if not defined
- #
- check_isolcpus()
- {
-@@ -603,8 +611,33 @@ check_isolcpus()
- 	ISOLCPUS=
- 	LASTISOLCPU=
- 	SCHED_DOMAINS=/sys/kernel/debug/sched/domains
-+	ISCPUS=${CGROUP2}/.__DEBUG__.cpuset.cpus.isolated
-+	if [[ $EXPECT_VAL = . ]]
-+	then
-+		EXPECT_VAL=
-+		EXPECT_VAL2=
-+	elif [[ $(expr $EXPECT_VAL : ".*,.*") > 0 ]]
-+	then
-+		set -- $(echo $EXPECT_VAL | sed -e "s/,/ /g")
-+		EXPECT_VAL=$1
-+		EXPECT_VAL2=$2
-+	else
-+		EXPECT_VAL2=$EXPECT_VAL
-+	fi
-+
-+	#
-+	# Check the debug isolated cpumask, if present
-+	#
-+	[[ -f $ISCPUS ]] && {
-+		ISOLCPUS=$(cat $ISCPUS)
-+		[[ "$EXPECT_VAL2" != "$ISOLCPUS" ]] && return 1
-+		ISOLCPUS=
-+	}
-+
-+	#
-+	# Use the sched domain in debugfs to check isolated CPUs, if available
-+	#
- 	[[ -d $SCHED_DOMAINS ]] || return 0
--	[[ $EXPECT_VAL = . ]] && EXPECT_VAL=
- 
- 	for ((CPU=0; CPU < $NR_CPUS; CPU++))
- 	do
-@@ -648,6 +681,22 @@ test_fail()
- 	exit 1
- }
- 
-+#
-+# Check to see if there are unexpected isolated CPUs left
-+#
-+null_isolcpus_check()
-+{
-+	[[ $VERBOSE -gt 0 ]] || return 0
-+	pause 0.01
-+	check_isolcpus "."
-+	if [[ $? -ne 0 ]]
-+	then
-+		echo "Unexpected isolated CPUs: $ISOLCPUS"
-+		dump_states
-+		exit 1
-+	fi
-+}
-+
- #
- # Run cpuset state transition test
- #  $1 - test matrix name
-@@ -733,6 +782,7 @@ run_state_test()
- 			echo "Effective cpus changed to $NEWLIST after test $I!"
- 			exit 1
- 		}
-+		null_isolcpus_check
- 		[[ $VERBOSE -gt 0 ]] && echo "Test $I done."
- 		((I++))
- 	done
-@@ -802,6 +852,7 @@ test_isolated()
- 	console_msg "Cleaning up"
- 	echo $$ > $CGROUP2/cgroup.procs
- 	[[ -d A1 ]] && rmdir A1
-+	null_isolcpus_check
- }
- 
- #
--- 
-2.39.3
+so N * 1500 =3D=3D N * (72 + 1428) --> 1 * (72 + N * 1428)
 
+That value of 72 is instead 52 for 'standard Linux ipv4/tcp),
+it's 40/60 if there's no tcp options (which I think happens when
+talking to windows)
+it's different still with ipv4 fragmentation... and again different
+with ipv6 fragmentation...
+etc.
+
+ie. 15000 L3 mtu is exactly as meaningless as 14000 L3 mtu.
+Either way you don't get full frames.
+
+As such I'd recommend going with whatever is the largest mtu that can
+be meaningfully made to fit in 16K with all the NCM header overhead.
+That's likely closer to 15500-16000 (though I have *not* checked).
+
+> But my commit text didn't mention this
+> properly which was a mistake on my behalf. But when I looked at the
+> code, limiting the max segment size 15014 would force the practical
+> max_mtu to not cross 15000 although theoretical max_mtu was set to:
+> (GETHER_MAX_MTU_SIZE - 15412) during registration of net device.
+>
+> So my assumption of limiting it to 15000 was wrong. It must be limited
+> to 15412 as mentioned in u_ether.c  This inturn means we must limit
+> max_segment_size to:
+> GETHER_MAX_ETH_FRAME_LEN (GETHER_MAX_MTU_SIZE + ETH_HLEN)
+> as mentioned in u_ether.c.
+>
+> I wanted to confirm that setting MAX_DATAGRAM_SIZE to
+> GETHER_MAX_ETH_FRAME_LEN was correct.
+>
+> 2. I am not actually able to test with MTU beyond 15000. When my host
+> device is a linux machine, the cdc_ncm.c limits max_segment_size to:
+> CDC_NCM_MAX_DATAGRAM_SIZE               8192    /* bytes */
+
+In practice you get 50% of the benefits of infinitely large mtu by
+going from 1500 to ~2980.
+you get 75% of the benefits by going to ~6K
+you get 87.5% of the benefits by going to ~12K
+the benefits of going even higher are smaller and smaller...
+
+If the host side is limited to 8192, maybe we should match that here too?
+
+But the host side limitation of 8192 doesn't seem particularly sane either.=
+..
+Maybe we should relax that instead?
+
+(especially since for things like tcp zero copy you want an mtu which
+is slighly more then N * 4096,
+ie. around 4.5KB, 8.5KB, 12.5KB or something like that)
+
+> When connected to windows machine, I am able to set the mtu to a max
+> value of 15000. So not sure how to test the patch if I set the
+> max_segment_size to GETHER_MAX_ETH_FRAME_LEN.
+>
+> By pasting the diff, I wanted to confirm both the above queries.
+>
+> And you are right, while assigning value to ecm.wMaxSegmentSize, we must
+> use cpu_to_le16(...). Will ensure to make this change in v2. It worked
+> without that too, not sure how.
 
