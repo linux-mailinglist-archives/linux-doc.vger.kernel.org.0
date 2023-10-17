@@ -1,221 +1,281 @@
-Return-Path: <linux-doc+bounces-365-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-367-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BE6D7CB744
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Oct 2023 02:09:01 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 614067CB753
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Oct 2023 02:23:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E9454B210DA
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Oct 2023 00:08:58 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8101F1C209ED
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Oct 2023 00:23:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B22D9138D;
-	Tue, 17 Oct 2023 00:08:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE924630;
+	Tue, 17 Oct 2023 00:23:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ay/JtRtV"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="20RJj74w"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0906910EB;
-	Tue, 17 Oct 2023 00:08:49 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F15BC92;
-	Mon, 16 Oct 2023 17:08:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1697501329; x=1729037329;
-  h=message-id:date:subject:to:cc:references:from:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=gVoLnZdq+F4xySBN1mqT1R1MRH5DxuenpDJJANFB6kA=;
-  b=ay/JtRtVqnpgfkh9IuW2iaqnSvDNpjuCM8wMYheplPTDC9sdH11E0JCN
-   n3CJep5xm5iQTjuYDl3aoVvkSnMOdL1ns2XcDPTjd5oKKMe78YpmqKH5j
-   HAB5z34u/jdH0rWOIRngytacduGedZQu9/KL+A7ENawHihAEpsawfUalD
-   8YXmmyKfhUAw9iBS34kFUeHFQG/4G/eiltwbPUJAPUIzKod8DBp4obq30
-   Wkoy3Nd9tZh6gedR9pFi5tyyx+ZNUZHavtuvPXPoodF6lvwA/ogSO1pqb
-   9z8Ml6l1eb55MfkilQPCktRdXr2r89BwM88ym9lAs9AC6MrZ3PBG/oowD
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10865"; a="370740487"
-X-IronPort-AV: E=Sophos;i="6.03,230,1694761200"; 
-   d="scan'208";a="370740487"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2023 17:08:45 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10865"; a="899702545"
-X-IronPort-AV: E=Sophos;i="6.03,230,1694761200"; 
-   d="scan'208";a="899702545"
-Received: from fmsmsx603.amr.corp.intel.com ([10.18.126.83])
-  by fmsmga001.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 16 Oct 2023 17:06:45 -0700
-Received: from fmsmsx603.amr.corp.intel.com (10.18.126.83) by
- fmsmsx603.amr.corp.intel.com (10.18.126.83) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.32; Mon, 16 Oct 2023 17:08:45 -0700
-Received: from fmsedg601.ED.cps.intel.com (10.1.192.135) by
- fmsmsx603.amr.corp.intel.com (10.18.126.83) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.32 via Frontend Transport; Mon, 16 Oct 2023 17:08:45 -0700
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (104.47.55.100)
- by edgegateway.intel.com (192.55.55.70) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.32; Mon, 16 Oct 2023 17:08:45 -0700
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DC4C19C
+	for <linux-doc@vger.kernel.org>; Tue, 17 Oct 2023 00:23:23 +0000 (UTC)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com (mail-mw2nam04on2060.outbound.protection.outlook.com [40.107.101.60])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1C4BE93;
+	Mon, 16 Oct 2023 17:23:22 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XnsV0QMStEhOXwSCgHbznhgpA2Wth4A4buP2/KO2IuOK2zQm9wKlzRGDvuEyeZ10CXKEaqOZFqd7T/0sJpYzPP4ur0H7CFKdI/HhJMrCMTTUX7g/YnG+jPBPyuDgjMleYFdYQ7iZgNLJYboE5jUeAv/XieHpNrLENcISXrS6j/LTnPl6asdlbfk9kgiMr5ADV5SXdp9Y3e+pIrV+yM19WTwCdsfNT4a9Be9GGitEbxCnWsbSQ6aDSwHyjlyaHSnpg6an7oR2ITSgOXHCoJBcNlTdfaG+CJ0OS6bBOC499ksc8fgDcA9MNNw3fdV5kNfuNl5SBmC2dNSb7rYUoYJVHQ==
+ b=Wv9TQtPQpymPJ83/fgQHGSDlV+X3nMSgLzqs2jpKV8BKPzfok7YIxLgzFKg5FA4X6NctXoxX0e5oHFa4EFOpyTVNZXWZMlQqYUBB6BLE3cx33yYGfAjgRJmC8z2VKF81a/2ME3AaSSckQEocQzGo0oKlZi3Z5V7lA5k/n77NtAD2SLeyqV7yjz/80oUq8UG9ahbw0S+zO1hJcJxDvYRTIo9FMPoyo8gabVOdgQDKlFCocXVf/WbTnj/ot/PJ4E+tAc1sU13TYTFuiMMUFddEziTD1+pFd0r7RyMoiOXl9ulI1gFgT0toXsX/vnH3UQsqIPM61aX5c3/YwJsZRonA3g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=u7IsG8wV2pr+DiPl/crhmft70scA9tcirhXd0oCGn9Q=;
- b=OTX27tg/4oWsHKTMxUrjScTyIyqezhYSER97VuJEJT0xWxRLdwpbEvljJitEx/SlT6aqa8LyGGMbbEZvrGFUqx5meTPqojLfhMXyUHAhcJrVIA83dOx0vkbyr5xLiktxYmrMxfLaYHd03FPD30bNUjIZRir/2QQjVbMce8zDdEOLkeRabys9ym1XQ1TQbP3bXY0UsMxQVaEWXvmFl3H9o075tIArvvzZPQiETwDVMzCNZ0KYox5hc9r3+L1SO4SNDCpXQdPtwVgJoNqpQsOVySZPCm2Up+B91rWooaZpD2K42zzmRxq+Mmz1VdlZljEfy/V643xJPzBNQFf5pGkUKw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from SN7PR11MB7420.namprd11.prod.outlook.com (2603:10b6:806:328::20)
- by MW4PR11MB7032.namprd11.prod.outlook.com (2603:10b6:303:227::5) with
+ bh=fqOweiFK9S3qnV6eT9f8+sRdccwE56bvEB0dqSk/sS8=;
+ b=mb5EtqUlUE+9AribpMLKt9R37Yei3+GNkZtwoQfMWK4efqOhyzhACPCsIQu+r+EYYDGHcY/ILLHPbR7tzQqs/m54YkM4rMat3jSMl2m41HnK1uE449A1DbXWky3jCj12YMeufwZYxBLz+icgmWfb3U1c1pE82vXDwXF6tybzoWWQXLy5Jwncb3PRjvH8EwkFiwS0IHlxTYqGcko3zICKPFyeunOI6E2Rnt9Mbg+sYiRJvPYvxuZBWPMxMX/VV7BkcbWfgZWS+yi7pWROldik/jIQvc63S7bnryviOImxj40ZjOJ2d5uc4l93EkvaKfgZddSpaVm+CX5I6PiqOgSuQA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lwn.net smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fqOweiFK9S3qnV6eT9f8+sRdccwE56bvEB0dqSk/sS8=;
+ b=20RJj74wsBZe4qLSef9RcOGS6rdI0dKdyZ+40jh95fQbnrRFg7iAXJwtY5PsHVA0bI+IDKIrZmZaUv+up5nMYpwce2gYzfhMGW5f9LeYqaxIQkXY7OVPugrvDTlg/z+/92Gt5vLWNu5tbMjbQxJu/DbpvNVTMQgEq4fhpQkdS08=
+Received: from BY3PR05CA0032.namprd05.prod.outlook.com (2603:10b6:a03:39b::7)
+ by DM6PR12MB4043.namprd12.prod.outlook.com (2603:10b6:5:216::14) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.35; Tue, 17 Oct
- 2023 00:08:42 +0000
-Received: from SN7PR11MB7420.namprd11.prod.outlook.com
- ([fe80::2329:7c5f:350:9f8]) by SN7PR11MB7420.namprd11.prod.outlook.com
- ([fe80::2329:7c5f:350:9f8%7]) with mapi id 15.20.6886.034; Tue, 17 Oct 2023
- 00:08:40 +0000
-Message-ID: <afb4a06f-cfba-47ba-adb3-09bea7cb5f00@intel.com>
-Date: Mon, 16 Oct 2023 18:08:32 -0600
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v4 1/6] net: ethtool: allow symmetric-xor RSS
- hash for any flow type
-Content-Language: en-US
-To: Jakub Kicinski <kuba@kernel.org>, Alexander Duyck
-	<alexander.duyck@gmail.com>
-CC: <netdev@vger.kernel.org>, <intel-wired-lan@lists.osuosl.org>,
-	<corbet@lwn.net>, <jesse.brandeburg@intel.com>, <anthony.l.nguyen@intel.com>,
-	<davem@davemloft.net>, <edumazet@google.com>, <pabeni@redhat.com>,
-	<vladimir.oltean@nxp.com>, <andrew@lunn.ch>, <horms@kernel.org>,
-	<mkubecek@suse.cz>, <willemdebruijn.kernel@gmail.com>,
-	<linux-doc@vger.kernel.org>, Wojciech Drewek <wojciech.drewek@intel.com>
-References: <20231016154937.41224-1-ahmed.zaki@intel.com>
- <20231016154937.41224-2-ahmed.zaki@intel.com>
- <8d1b1494cfd733530be887806385cde70e077ed1.camel@gmail.com>
- <26812a57-bdd8-4a39-8dd2-b0ebcfd1073e@intel.com>
- <CAKgT0Ud7JjUiE32jJbMbBGVexrndSCepG54PcGYWHJ+OC9pOtQ@mail.gmail.com>
- <14feb89d-7b4a-40c5-8983-5ef331953224@intel.com>
- <CAKgT0UfcT5cEDRBzCxU9UrQzbBEgFt89vJZjz8Tow=yAfEYERw@mail.gmail.com>
- <20231016163059.23799429@kernel.org>
-From: Ahmed Zaki <ahmed.zaki@intel.com>
-In-Reply-To: <20231016163059.23799429@kernel.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: DBBPR09CA0007.eurprd09.prod.outlook.com
- (2603:10a6:10:c0::19) To SN7PR11MB7420.namprd11.prod.outlook.com
- (2603:10b6:806:328::20)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.37; Tue, 17 Oct
+ 2023 00:23:17 +0000
+Received: from MWH0EPF000989EB.namprd02.prod.outlook.com
+ (2603:10b6:a03:39b:cafe::13) by BY3PR05CA0032.outlook.office365.com
+ (2603:10b6:a03:39b::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.16 via Frontend
+ Transport; Tue, 17 Oct 2023 00:23:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ MWH0EPF000989EB.mail.protection.outlook.com (10.167.241.138) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6907.20 via Frontend Transport; Tue, 17 Oct 2023 00:23:16 +0000
+Received: from bmoger-ubuntu.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 16 Oct
+ 2023 19:23:14 -0500
+From: Babu Moger <babu.moger@amd.com>
+To: <corbet@lwn.net>, <reinette.chatre@intel.com>, <tglx@linutronix.de>,
+	<mingo@redhat.com>, <bp@alien8.de>
+CC: <fenghua.yu@intel.com>, <dave.hansen@linux.intel.com>, <x86@kernel.org>,
+	<hpa@zytor.com>, <paulmck@kernel.org>, <akpm@linux-foundation.org>,
+	<quic_neeraju@quicinc.com>, <rdunlap@infradead.org>,
+	<damien.lemoal@opensource.wdc.com>, <songmuchun@bytedance.com>,
+	<peterz@infradead.org>, <jpoimboe@kernel.org>, <pbonzini@redhat.com>,
+	<babu.moger@amd.com>, <chang.seok.bae@intel.com>,
+	<pawan.kumar.gupta@linux.intel.com>, <jmattson@google.com>,
+	<daniel.sneddon@linux.intel.com>, <sandipan.das@amd.com>,
+	<tony.luck@intel.com>, <james.morse@arm.com>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <bagasdotme@gmail.com>, <eranian@google.com>,
+	<christophe.leroy@csgroup.eu>, <jarkko@kernel.org>,
+	<adrian.hunter@intel.com>, <quic_jiles@quicinc.com>, <peternewman@google.com>
+Subject: [PATCH v14 0/9] x86/resctrl: Miscellaneous resctrl features
+Date: Mon, 16 Oct 2023 19:22:59 -0500
+Message-ID: <20231017002308.134480-1-babu.moger@amd.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR11MB7420:EE_|MW4PR11MB7032:EE_
-X-MS-Office365-Filtering-Correlation-Id: 221a14f5-1c68-4ac4-af87-08dbcea53794
+X-MS-TrafficTypeDiagnostic: MWH0EPF000989EB:EE_|DM6PR12MB4043:EE_
+X-MS-Office365-Filtering-Correlation-Id: e52a0370-5ac7-4e22-726a-08dbcea7422c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 7QMZhSdcctvisD3PgK8qrIpZPAJXUtXGGJ3RUmtwmtHW6k4Py3W1IrX6G3ll9q0vs8v6KGjdEbyZ8USptu8iVsoAy02UFFOLn/ahT0Fnn4mXZbO1AYaIc2JuL4qe9QL5d8E1RsLSjHEFm7Mk7N6jkVG6eOAXtPPMu6deNmPbS+MWRNpwwpk+eFii/ioy1ZO3xYZGD7jEFzs1s8C/CaKXGtA+Slqm6nVegncueFNDlsgFz0f14SxYE0Mh0/F+cuN8UhKfJbGLIC2DhuUs4evncHMKpBR66kuDEPntZUBRBCAxEMJy2ZE5Ek3p8b55LgO/lTEc8BkSFtytU3my6vza8jBy+yUbfaCmj3FMZSs7ZmLHmgxjKb9afzHi5FjXjSF4Vixio/C7kSqf0czMShaVkgO6v4XFqcMilIG76e4uMyUIn8uMEZF9DQvBELYT0DQWQzzxAWEBsvv16jQqPK1/HUIzcEzc3l1xM4PT1tQuxrKbvQX/mSu8a37w0Ru/wkAeUNLpGUqZfjjXM1tpZ/yjogMyI83t2ztjoNh/PrFmhpByLl8CIXVjxRu5Ea7lFkMFG2L/i9AZy1Hoh8FTd3Vl0p6OmQZD1VpnuqzlIB06lRcdthVxaNfevhFUvHgLHmjsuzovf/WLPidfsiyn4SxdMw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN7PR11MB7420.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(39860400002)(366004)(136003)(396003)(376002)(346002)(230922051799003)(1800799009)(451199024)(186009)(64100799003)(6506007)(53546011)(44832011)(5660300002)(6666004)(2906002)(4001150100001)(26005)(36756003)(2616005)(107886003)(83380400001)(82960400001)(38100700002)(86362001)(6512007)(31696002)(7416002)(478600001)(6486002)(966005)(41300700001)(316002)(66556008)(110136005)(66946007)(66476007)(31686004)(4326008)(8676002)(8936002)(45980500001)(43740500002);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bnpUNkZ6RVplWUthdG9HVlk5NUpmWWN3VFYzcHMxbHRUL3VsMnBFZFlWZi9S?=
- =?utf-8?B?V2h2TDRqSHhLVlI3elk3T1N0YUF1ZGtRRFRiKzF1eHRobSs3blViSTgzZ3Aw?=
- =?utf-8?B?ejFDQXFLVnZPMUY1WFVRaXplWnJKS3FYWUd6Qy9rQTJsaXFVWFBEQkhhRWQ0?=
- =?utf-8?B?TmJ2a0FyRnlpdTdMaE9oTzZjQ0htMUNNQ01VZG1IVDZFU0hPNmc2N0xIMjBx?=
- =?utf-8?B?U2ZjTzBQdDIwTnVZU1BxelNsVzdPaUcxZ0lEdW5wZTNURHFHU3IwdXl6M1VB?=
- =?utf-8?B?RTlGb1hpSzlnZTNFbHJ2ZDd0bjVEVkVEUFFBZG5zOFE1MXYvNmpwcVRFN2lr?=
- =?utf-8?B?YU1vNzhvM1NCaWJSWTZqQkhiZGNuUnBuenRnR3IyamhVZGJOOEc4VUNXQWlx?=
- =?utf-8?B?VnhiUzEyT25PY3FlVVBrWGlPQlRBOTFKckN6c1pRbFJjc25qQjVKNEF3Mnhu?=
- =?utf-8?B?ZGxkVk5hQ2RSdExWZ280VENjNVcxNEhUenB3NC9kMTNTVzVjcC9qaVFWZ0JG?=
- =?utf-8?B?T0l6dVlRcHRKdW1yaFZIcllRdEpMQTBsbnNwY1lZUzVFYWZudWh4Yms3bjRF?=
- =?utf-8?B?VGQvc01yVFo0bUZ1SHBnblVEd29CSUdyWGRLRWZETEZrUE1iY2h6YlNkYTZ0?=
- =?utf-8?B?SEZZKzJVTUwzQSt1bUZSa2V2WWY0YjNlcFNCT0w0Ky9OSmJmRGNnR0l4dktv?=
- =?utf-8?B?c2pNTXQxc1FRS01LRS9kWTNES01wQnM0VGE1eXRRRnBCZm96enJLbHp5UW56?=
- =?utf-8?B?TnlhK0kyYjM5N3VIQnhUblFoOWpVVmJPVmdqK1YwelB3S3psODhMNE9Fa2or?=
- =?utf-8?B?QU9WM2VvV0tWc1dpMVB0cGxweEw3aTRHOU5ZSEkyMXg2NWl5cTFwMlFkUnZs?=
- =?utf-8?B?RE5DZXJCSW4zYlBLTzhCS3FGd2ZrcVFPbzNxTzZVR2F2UEUvZXFyMzZyK0l4?=
- =?utf-8?B?Y1g2TG1wcnUzaG1kc1JFSWRLaG5uYXY1MHNYcEtRT1JJOWVwSmdSY0FCUVN6?=
- =?utf-8?B?WFBmdXhUMnh4Z2VhNzFNMGtUYi9jWmc1RFBvMFhlMWVScnNHNHl3a3VCVjRr?=
- =?utf-8?B?ajZmeXExbFBDK2QwSGpaSXQyaXViQXd4ZC9HdUtwa3RST291dXh1T0lqUUFL?=
- =?utf-8?B?T3I3L2FiNmhIUVNseEk4VDdzT085ZDVwUzRCM2FBWTBOVCtFZkJKTVo5RDZD?=
- =?utf-8?B?NmRKWTM1dEZOQ0tyRENrbTNYYnp1ZGhOUThHcWFoZUVzSDBpNE5xK2d2ZHdy?=
- =?utf-8?B?dTlScnhvU2pNR3JUVlhSbVpnTWRvaWE3R24wTENhQi96a2NaZ0N5Vm1GV29n?=
- =?utf-8?B?a2ZrY2NPYko3bG5VVHVTRVZ4aVYxT2Z0a0lNTjJqR0hyK3FxQytoUDY3NjNj?=
- =?utf-8?B?Q1Z1TWg5M2Y5Ylg5WnJ6dlRwaWhlVXZYWHQ1NDY5eTlTWkZ3RzdYbk5BK0dk?=
- =?utf-8?B?RVo2WGFtYkU1UmtwaE9SN3VIQ2dsa1Nwcmk0SFlhVlRkTGxCNjFsaFU1alRl?=
- =?utf-8?B?YkJoZENCd013MElqQ0YvTk9lbVhjL2d0Zm9CRUJpL083NTR2MUkzU2NtZkNl?=
- =?utf-8?B?MjE1ZUJsd2RpNmlqM2JLZklOR29UWnUyNjFPdkJ2dmswRkI4SEswR1FndU5C?=
- =?utf-8?B?L2dpMG9aVU9UL2JzZUZHWmltOTNuVHJ1N1d1MHZzRmVVaS9xMWFqZ0kxZVVK?=
- =?utf-8?B?YnF3N3FyL2JjOUFiL0hxZTFvZ3ZSNUM0RnV2WXgxUVlpcDZHS2pZbUNiNnE3?=
- =?utf-8?B?QlpGT1VnQXdnQmdER1d2bUYya1NIMFRicDJPNE5XTldhWG12cFpuMHduZkFy?=
- =?utf-8?B?YzRrcEZQQnBtVXFBaWJEaGR6MkRMeDRXQWNSYnQ1aDEzRDdBOXBFbGRjaVRm?=
- =?utf-8?B?QnR6QVVrMlBTMEVhaTFKZy93aHJkZGQwU1pFWnpvWklOK1pxMDN3UTZheHRs?=
- =?utf-8?B?R2pkK2tmZ2VSZnVZc3BDY2JQMzNYckJrWm9tZ1A3NTVHeVEvSy81S3pCQjY0?=
- =?utf-8?B?OGN5clgwWThlb0ZsSXVZdFQvaVNqUW9WeThrSE5QYVRVcTNzYTc5N2hGRWdX?=
- =?utf-8?B?YitPWU9nNUl6K3F6ZjJrdk91TkxDZVNJMlQvaTBHWjUvMG1iSURIcjlLcE50?=
- =?utf-8?Q?hyYfKnMgF66VI2c7kPAWVpOTL?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 221a14f5-1c68-4ac4-af87-08dbcea53794
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR11MB7420.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2023 00:08:40.2786
+X-Microsoft-Antispam-Message-Info:
+	Veab+P5hHFMdcJZtJP7epg4JDs8TDFpuBP3zsp7GN6zFDeFm/Ex6Gt1qie+wFopU8KG7XfET/fjlm7oWgeiWzhN7JoV2A/+H0iraeolASddObOq9dT9tRcEnAORhNak7dLGfE34JY2xlCQEJXy2vMi28+m45YMck7BHnqjq201vU9ZAr2Z1NfGqWoj30FQzFb4hbnplaRxTr7o1i5pMrxzBc8Pv5+4jai99VVtsQqHz7hW6d1uY3mGDrew3mqGLqUdyQ/NezJbtkZ1SvJBlB/aI/5lrCjV6XCfDIqFevvzjBjSRdYuCd/hCU9R0tIq+9qd0cqkpVb0PLC3IGWqzRGr95iwMark2XBog2qeVy0dg82E6TRxqd11XMpfgDFv78dviDmuHhmBRA5TLv/GDBHZnGxfe8vS6Usew9lJxlbGy51St+xyanuOKnSJNf9lTankQK/d8xTGTNM9WaZDLJ+m5LrAQJiyk5JxK5ADahfbqbD9K/7BAoa+HBvxAlSiqpUohAhxHukbGQ2fKHDXKHy3pkDL9LUvyFAYB62YATe6Ucpj/urmxw1UuWr1S8oQvIA0C2MHyKqfiuiLJJzGrBUPU5PwcZJkb2Ormh3NVwzI2gmZSFx1nbZ3YYxMHZF8J5WUza9AKSuJAmoi3RO31lJSSu1ADdN3IJa+aRAk0fcBuFmXFq1Xq68n6IJWYX9wsNqVE3A3D6CO0SYRvajKsWrk+diRB/Vk5HdJI1ouDOjuYwvUB5YTY0QMVm4QaD8J34KXr+c+MYe3txlxgdyg3V1/+rTv4lYjApYZXwFPwMw8U=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(136003)(346002)(396003)(376002)(230922051799003)(186009)(1800799009)(82310400011)(451199024)(64100799003)(40470700004)(46966006)(36840700001)(40460700003)(336012)(426003)(36860700001)(1076003)(2616005)(16526019)(316002)(47076005)(83380400001)(7416002)(7406005)(8676002)(110136005)(4326008)(54906003)(70586007)(8936002)(70206006)(81166007)(41300700001)(966005)(44832011)(6666004)(5660300002)(478600001)(2906002)(7696005)(82740400003)(356005)(40480700001)(86362001)(36756003)(26005)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2023 00:23:16.6564
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 96PuETs7axDfj2i5VZF/HKU2O6IbpE49fKYbC0MhGDQVHbrbvDvw8SDx7xU8AYEfMGs98MQlx2YpDKXFNPrCug==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB7032
-X-OriginatorOrg: intel.com
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,
-	SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+X-MS-Exchange-CrossTenant-Network-Message-Id: e52a0370-5ac7-4e22-726a-08dbcea7422c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000989EB.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4043
+X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_SPF_HELO,
+	RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_NONE
+	autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
 	lindbergh.monkeyblade.net
 
+These series adds support few minor features.
+1. Support assigning multiple tasks to control/mon groups in one command.
+2. Add debug mount option for resctrl interface.
+3. Add RMID and CLOSID in resctrl interface when mounted with debug option.
+4. Moves the default control group creation during the mount instead of during init.
+5. Added support for the files for MON groups only
+6. While doing these above changes, found that rftype flags needed some cleanup.
+   They were named inconsistently. Re-arranged them much more cleanly now.
+---
+v14:
+   Boris asked me to remove the doc changes for now. So, removed the RFTYPE
+   flag documentation from resctrl.rst file. (Boris)
+   So, patch 4 from v13 is removed. Now series has 9 patches.
+   Patch 7,10 are updated accordingly to remove doc changes.
+   No other code changes.
 
+v13:
+   Pardon me for sending two versions in a week. Hoping to get this series
+   in v6.7 kernel.
+   Rebased on top of Maciej patches. Resolved the conflict.
+   https://lore.kernel.org/lkml/0eb67a16-971f-4e5c-9c9c-9ae7902866b7@intel.com/
+   Resolved the documentation syntax issues. Needed few format changes.
+   This version is mostly for doc and commit message changes.
+   
+v12:
+   Most of the changes are related commit messages and code comments.
+   Moved the comments in arch/x86/kernel/cpu/resctrl/internal.h
+   to Documentation/arch/x86/resctrl.rst. (Boris)
+   Removed the text "Later patch' from commit message and moved the
+   text to the patch related to that changes. (Boris)
+   Added change log to each patch. (Fenghua)
+   
+v11:
+   Patches 1-2: No changes. Added Reviewed-by and fixed tag order. Fixed
+                the tag order for all the patches.
+   Patch 3: Corrected the commit messages about RFTYPE_MON_BASE.
+   Patch 4: Removed only from the text "Files only for CTRL group" in internal.h.
+   Patches 5-8: No changes.
+   Patch 9: Commit message change (Reinette). This patch needs Reviewed-by from
+            Reinette. Rest all have it already.
+   Patch 10: Removed only from the text "Files for MON group" in internal.h.(Peter)
 
-On 2023-10-16 17:30, Jakub Kicinski wrote:
-> On Mon, 16 Oct 2023 15:55:21 -0700 Alexander Duyck wrote:
->> It would make more sense to just add it as a variant hash function of
->> toeplitz. If you did it right you could probably make the formatting
->> pretty, something like:
->> RSS hash function:
->>      toeplitz: on
->>          symmetric xor: on
->>      xor: off
->>      crc32: off
->>
->> It doesn't make sense to place it in the input flags and will just
->> cause quick congestion as things get added there. This is an algorithm
->> change so it makes more sense to place it there.
-> 
-> Algo is also a bit confusing, it's more like key pre-processing?
-> There's nothing toeplitz about xoring input fields. Works as well
-> for CRC32.. or XOR.
-> 
-> We can use one of the reserved fields of struct ethtool_rxfh to carry
-> this extension. I think I asked for this at some point, but there's
-> only so much repeated feedback one can send in a day :(
+v10:
+   Patches 1-2: no code changes. Added "Reviewed-by" from Fenghua.
+   Patch 3: Added the new flag RFTYPE_MON_BASE [comment for Reinette].
+            Removed the Reviewed as the patch has changed.
+   patch 4: No code change.  Added "Reviewed-by" from Fenghua.
+   Patch 5: Removed empty lines in rdt_disable_ctx().
+   Patch 6: No changes. Added "Reviewed-by".
+   Patch 7: No changes.
+   Patch 8: No changes.
+   Patch 9: New patch. Added support for the files for MON groups only.
+   Patch 10: Modified. This patch only adds changes for "mon_hw_id" interface.
+v9:
+   Changes since v8:
+   Split the RMID display in a separate patch. RMID is a special case here as it
+   should be printed only if monitoring is enabled.
+   Made rdtgroup_setup_root and rdtgroup_destroy_root as static functions.
+   Added code to print pid_str in case of task parse error.
+  
+v8:
+   Changes since v7:
+   Earlier moved both default group initialization and file creation on mount.
+   Now kept the group initialization as is and only moved the file creation on mount.
+   Re-organized the RFTYPE flags comments little more to avoid confusion. Thanks
+   to Reinette for feedback.
+   Re-factored the rdt_enable_ctx and added rdt_disable_ctx to unwind the errors.
+   And same call also used in rdt_kill_sb which simplifies the code.
+   Few other minor text changes.
+   
+v7:
+   Changes since v6:
+   While moving the default group file creation on mount, I also moved the
+   initialization of default group data structures. Reinette suggested to move
+   only the filesystem creation and keep the group initialization as is. Addressed it now.
+   Added a new function rdt_disable_ctx to unwind the context related features.
+   Few other minor text changes.
 
-Sorry you felt that. I took you comment [1]:
+v6:
+   Changes since v5:
+   Moved the default group creation during mount instead of kernel init.
+   The rdt_root creation moved to rdt_get_tree as suggested by Reinette.
+   https://lore.kernel.org/lkml/8f68ace7-e05b-ad6d-fa74-5ff8e179aec9@intel.com/
+   Needed to modify rdtgroup_setup_root to take care of this.
+   Re-arraged the patches to move the default group creation earlier.
+   Others are mostly text changes and few minor changes.
+   Patches are based on tip/master commit 1a2945f27157825a561be7840023e3664111ab2f
 
-"Using hashing algo for configuring fields feels like a dirty hack".
+v5:
+   Changes since v4:
+   Moved the default group creation during mount instead of kernel init.
+   Tried to address most of the comments on commit log. Added more context and details.
+   Addressed feedback about the patch4. Removed the code changes and only kept the comments.
+   I am ok to drop patch4. But I will wait for the comment on that.
+   There were lots of comments. Hope I did not miss anything. Even if I missed, it is
+   not intentional. 
 
-To mean that the we should not use the hfunc API ("ethtool_rxfh"). This 
-is why in the new series I chose to configure the RSS fields. This also 
-provides the user with more control and better granularity on which 
-flow-types to be symmetric, and which protocols (L3 and/or L4) to use. I 
-have no idea how to do any of these via hfunc/ethtool_rxfh API so it 
-seemed a better approach.
+v4: Changes since v3
+    Addressed comments from Reinette and others.
+    Removed newline requirement when adding tasks.
+    Dropped one of the changes on flags. Kept the flag names mostly same.
+    Changed the names of closid and rmid to ctrl_hw_id and mon_hw_id respectively.
+    James had some concerns about adding these files. Addressed it by making these
+    files x86 specific.
+    Tried to address Reinette's comment on patch 7. But due to current code design
+    I could not do it exact way. But changed it little bit to make it easy debug
+    file additions in the future.  
 
-I see you marked the series as "Changes Requested". I will send a new 
-version tomorrow and move the sanity checks inside ice_ethtool.
+v3: Changes since v2
+    Still waiting for more comments. While waiting, addressed few comments from Fenghua.
+    Added few more texts in the documentation about multiple tasks assignment feature.
+    Added pid in last_cmd_status when applicable.
+    Introduced static resctrl_debug to save the debug option.
+    Few minor text changes.
+  
+v2: Changes since v1
+  a. Removed the changes to add the task's threads automatically. It required
+     book keeping to handle the failures and gets complicated. Removed that change
+     for now.
+  b. Added -o debug option to mount in debug mode(comment from Fenghua)
+  c. Added debug files rmid and closid. Stephane wanted to rename them more
+     generic to accommodate ARM. It kind of loses meaning if is renamed differently.
+     Kept it same for now. Will change if he feels strong about it. 
 
+v13:https://lore.kernel.org/lkml/20231013202602.2492645-1-babu.moger@amd.com/
+v12:https://lore.kernel.org/lkml/20231010233335.998475-11-babu.moger@amd.com/
+v11:https://lore.kernel.org/lkml/6102a5e9-ffec-5499-c27a-3c0a3443f792@amd.com/
+v10:https://lore.kernel.org/lkml/20230915224227.1336967-1-babu.moger@amd.com/
+v9: https://lore.kernel.org/lkml/20230907235128.19120-1-babu.moger@amd.com/
+v8: https://lore.kernel.org/lkml/20230821233048.434531-1-babu.moger@amd.com/
+v7: https://lore.kernel.org/lkml/169178429591.1147205.4030367096506551808.stgit@bmoger-ubuntu/
+v6: https://lore.kernel.org/lkml/168980872063.1619861.420806535295905172.stgit@bmoger-ubuntu/
+v5: https://lore.kernel.org/lkml/168564586603.527584.10518315376465080920.stgit@bmoger-ubuntu/
+v4: https://lore.kernel.org/lkml/168177435378.1758847.8317743523931859131.stgit@bmoger-ubuntu/
+v3: https://lore.kernel.org/lkml/167778850105.1053859.14596357862185564029.stgit@bmoger-ubuntu/
+v2: https://lore.kernel.org/lkml/167537433143.647488.9641864719195184123.stgit@bmoger-ubuntu/
+v1: https://lore.kernel.org/lkml/167278351577.34228.12803395505584557101.stgit@bmoger-ubuntu/
 
-[1]: https://lore.kernel.org/netdev/20230824174336.6fb801d5@kernel.org/
+Babu Moger (9):
+  x86/resctrl: Add multiple tasks to the resctrl group at once
+  x86/resctrl: Simplify rftype flag definitions
+  x86/resctrl: Rename rftype flags for consistency
+  x86/resctrl: Unwind the errors inside rdt_enable_ctx()
+  x86/resctrl: Move default group file creation to mount
+  x86/resctrl: Introduce "-o debug" mount option
+  x86/resctrl: Display CLOSID for resource group
+  x86/resctrl: Add support for the files for MON groups only
+  x86/resctrl: Display RMID of resource group
+
+ Documentation/arch/x86/resctrl.rst     |  22 ++-
+ arch/x86/kernel/cpu/resctrl/internal.h |  22 +--
+ arch/x86/kernel/cpu/resctrl/rdtgroup.c | 255 ++++++++++++++++++-------
+ 3 files changed, 216 insertions(+), 83 deletions(-)
+
+-- 
+2.34.1
+
 
