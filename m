@@ -1,336 +1,183 @@
-Return-Path: <linux-doc+bounces-487-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-492-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 566027CDA26
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Oct 2023 13:18:12 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 434DF7CDD52
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Oct 2023 15:32:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B741AB21072
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Oct 2023 11:18:09 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C5EEBB20EC0
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Oct 2023 13:32:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3E1CC1A703;
-	Wed, 18 Oct 2023 11:18:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dkim=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F387358A9;
+	Wed, 18 Oct 2023 13:32:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="ar6xkA8W"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1086B1A5B6
-	for <linux-doc@vger.kernel.org>; Wed, 18 Oct 2023 11:18:02 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9F89A114
-	for <linux-doc@vger.kernel.org>; Wed, 18 Oct 2023 04:17:59 -0700 (PDT)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ukl@pengutronix.de>)
-	id 1qt4Yh-0006hK-J9; Wed, 18 Oct 2023 13:17:51 +0200
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <ukl@pengutronix.de>)
-	id 1qt4Yd-002Xdi-Hj; Wed, 18 Oct 2023 13:17:47 +0200
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
-	(envelope-from <ukl@pengutronix.de>)
-	id 1qt4Yd-000uF5-88; Wed, 18 Oct 2023 13:17:47 +0200
-Date: Wed, 18 Oct 2023 13:17:47 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-To: Saravana Kannan <saravanak@google.com>
-Cc: linux-pwm@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	linux-doc@vger.kernel.org, Wolfram Sang <wsa@kernel.org>,
-	Mark Brown <broonie@kernel.org>,
-	Thierry Reding <thierry.reding@gmail.com>,
-	James Clark <james.clark@arm.com>, kernel@pengutronix.de,
-	Yang Yingliang <yangyingliang@huawei.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Android Kernel Team <kernel-team@android.com>,
-	Matti Vaittinen <mazziesaccount@gmail.com>
-Subject: Re: [PATCH 01/18] pwm: Provide devm_pwmchip_alloc() function
-Message-ID: <20231018111747.alk3lkw7v7gl632k@pengutronix.de>
-References: <20230718181849.3947851-1-u.kleine-koenig@pengutronix.de>
- <20230718181849.3947851-2-u.kleine-koenig@pengutronix.de>
- <ZLeX4UbFaY592HIa@orome>
- <20230725211004.peqxxb4y3j62gmnp@pengutronix.de>
- <20231010080508.7ssnroaefyaeeedd@pengutronix.de>
- <CAGETcx8CNGLnHdWrDpdm4Sx5cFcFFBT2bZKJzNZttAEknFK4Cw@mail.gmail.com>
- <20231014161721.f4iqyroddkcyoefo@pengutronix.de>
- <CAGETcx-T33-TWmfXxT1dqTt7gWi8E1Z+EXhjpFfdFtpa7h+pQQ@mail.gmail.com>
- <CAGETcx9Ps5gaMZZk7o6NvrdVte8P=jQeedJw-Ae1NZroo9z-NA@mail.gmail.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 919E218636
+	for <linux-doc@vger.kernel.org>; Wed, 18 Oct 2023 13:32:01 +0000 (UTC)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 66644FA
+	for <linux-doc@vger.kernel.org>; Wed, 18 Oct 2023 06:31:58 -0700 (PDT)
+Received: from epcas5p3.samsung.com (unknown [182.195.41.41])
+	by mailout1.samsung.com (KnoxPortal) with ESMTP id 20231018133152epoutp01a1d84d5a9036205f99f6da0207cc6111~PNt5O3mHX1826818268epoutp01E
+	for <linux-doc@vger.kernel.org>; Wed, 18 Oct 2023 13:31:52 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com 20231018133152epoutp01a1d84d5a9036205f99f6da0207cc6111~PNt5O3mHX1826818268epoutp01E
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1697635913;
+	bh=u3aqnbBtv3vyIec2Mlnu7VZjNoMVUqew8xlxNtYVuT0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=ar6xkA8WBl8DA0SXsHcUVW75HU2NC5zijFCz8StrEtpWkgAFvxJxoiUkdTrbqG2y9
+	 kgPzjsOUDvtGuJ9jGcdZBnry/lrAS/Wvvukv0pFZtjxUUtp/o5adSXHk78H6c7+rhD
+	 ESb9LwyAHWcb+xFbPHmL/0g2YvO2tm7JqVe+KF1E=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+	epcas5p3.samsung.com (KnoxPortal) with ESMTP id
+	20231018133151epcas5p32eee98f338fcffca106dc084b9405c3d~PNt3_9ePq1794217942epcas5p34;
+	Wed, 18 Oct 2023 13:31:51 +0000 (GMT)
+Received: from epsmges5p2new.samsung.com (unknown [182.195.38.179]) by
+	epsnrtp2.localdomain (Postfix) with ESMTP id 4S9WwP5y9Yz4x9Pt; Wed, 18 Oct
+	2023 13:31:49 +0000 (GMT)
+Received: from epcas5p2.samsung.com ( [182.195.41.40]) by
+	epsmges5p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+	1F.31.10009.54EDF256; Wed, 18 Oct 2023 22:31:49 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+	epcas5p2.samsung.com (KnoxPortal) with ESMTPA id
+	20231018101516epcas5p2ac132e21cc9f83edd819c7680a51487d~PLCPQwGhZ3226032260epcas5p2g;
+	Wed, 18 Oct 2023 10:15:16 +0000 (GMT)
+Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
+	epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+	20231018101516epsmtrp23a828f342d83585a91c501a654146b0c~PLCPPbHfq1426614266epsmtrp2K;
+	Wed, 18 Oct 2023 10:15:16 +0000 (GMT)
+X-AuditID: b6c32a4a-ff1ff70000002719-05-652fde45eb1a
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+	epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+	BA.0F.07368.430BF256; Wed, 18 Oct 2023 19:15:16 +0900 (KST)
+Received: from green245 (unknown [107.99.41.245]) by epsmtip2.samsung.com
+	(KnoxPortal) with ESMTPA id
+	20231018101513epsmtip27d59481a87c3dbfc474968108748ac3d~PLCMGR7Ek0062200622epsmtip2h;
+	Wed, 18 Oct 2023 10:15:13 +0000 (GMT)
+Date: Wed, 18 Oct 2023 15:38:48 +0530
+From: Nitesh Jagadeesh Shetty <nj.shetty@samsung.com>
+To: Jinyoung Choi <j-young.choi@samsung.com>
+Cc: Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>, Alasdair
+	Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>,
+	"dm-devel@redhat.com" <dm-devel@redhat.com>, Keith Busch
+	<kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg
+	<sagi@grimberg.me>, Chaitanya Kulkarni <kch@nvidia.com>, Alexander Viro
+	<viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>,
+	"martin.petersen@oracle.com" <martin.petersen@oracle.com>,
+	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+	"nitheshshetty@gmail.com" <nitheshshetty@gmail.com>, "anuj1072538@gmail.com"
+	<anuj1072538@gmail.com>, SSDR Gost Dev <gost.dev@samsung.com>,
+	"mcgrof@kernel.org" <mcgrof@kernel.org>, Vincent Kang Fu
+	<vincent.fu@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>,
+	"linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+	"linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>
+Subject: Re: [PATCH v16 04/12] block: add emulation for copy
+Message-ID: <20231018100848.i26yrkuufv4koluq@green245>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="nzkxuqp2govldfrd"
-Content-Disposition: inline
-In-Reply-To: <CAGETcx9Ps5gaMZZk7o6NvrdVte8P=jQeedJw-Ae1NZroo9z-NA@mail.gmail.com>
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,
-	RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
-	autolearn_force=no version=3.4.6
+In-Reply-To: <20230926100718.wcptispc2zhfi5eh@green245>
+User-Agent: NeoMutt/20171215
+X-Brightmail-Tracker: H4sIAAAAAAAAA02Te0xTVxzHd+4tt4VRdgGZpzAeueAiyqMFWg7KY4mPXMeysZCwqTNY22vL
+	gLZry9zIkhUYQ94gzmARhYzxqFNGB6SIMASURxA3HTCIGMyAhIE8ZMgYAVdaWPzvc77n+z2/
+	c37nHA7uZGS7chIUWkatECdRhB2ruct3r/+RJ4EM32TyR/X993C0tLLOQulFGzi6Pl5IoNmu
+	5wBNdmQB1DZfZoNGO1owVHf9LobyC5sIdKFzGKCpIT2G2sb2o8pvq1jodlsfCz26dYVA16qn
+	2Ch3xESgmp5NDP1RNAWQaTINoJuzCyzUO+aG/sw9D9CDjR6bd3h0i36cTT940sCiH91PoY2G
+	bIL+ueprunVUR9DfF5TY0PkZ8wS9NDXGohfahwi6oNEA6GWjB22cfIbFcE8khssZsZRRezEK
+	iVKaoJBFUNGx8YfihSK+wF8QhkIpL4U4mYmgDr8X4380IcncBMrrc3FSilmKEWs0VGBkuFqZ
+	omW85EqNNoJiVNIkVYgqQCNO1qQoZAEKRntAwOcHCc3G04nymew1G9Ui+4vKqV8IHRgjcoAt
+	B5IhcH0gDc8BdhwnshXAjrtz24PnADavNrGtgxcA6pavgJ1Iw1Uje4udyDYASy6praZpAB8/
+	zGVtTbDIPTDrTprFRJBC2NqQYdY5nF2kH8w0eG/5cbKCA9tHblgWfY2MgsZ+oyXrTIbDpsLb
+	liyXFMHpBhNmZUfYd3nS4rElQ6Eu657F40K+BUt/WLFsG5KDtrD8t9+3d3oYZv9azbKyM/yr
+	p5FtZVe4PN+23YBzsO5iLWENfwOgfkS/HY6Cmf2F+BbjpBwO5OfZWHV3+F3/TcyqO8D89UnM
+	qnOh6eoOe8Mf6yu2C/Dg8GoasXV6SNIw46dT1m5VYXBwdQIvAl76Vw6nf6WclQ/A7MX0bfaE
+	GU1luN68FE66wZpNjhV9Yf2twApAGACPUWmSZYxGqApSMOf+fwkSZbIRWD7PvndN4OnEYkAn
+	wDigE0AOTu3iymL9GCeuVPxlKqNWxqtTkhhNJxCaL7EYd3WRKM2/T6GNF4SE8UNEIlFIWLBI
+	QO3mzmaWS51ImVjLJDKMilHv5DCOrasOa5laWXZ03njzUvJMsZQ9pLdrMcjlwXc8JLnKgdoC
+	j4y87lOp0qc580T3J3m5zgmrXdrQ3tOlyx6f7i+vj+tJVhilIxcPufMuO7e+Ye8+vKeDVBac
+	jIus8zn20W52qOiMr3PD4zVHF/5cJKUrXlup1B308+5rWOLVlt1IHeXOZDsMFklGHTy6B8U8
+	kUHf+LLINWoDr3N7djYxwFRCt77wO/lQnRIkG//KVjA8vkId7/KprssH8e1H++sXrh0fyDkh
+	4afdn4j+p5PnuRcznfn4yPvNH7z0HD//YWl61dtxQvvPfHphsOfrngejaoKoWIe/fc+6Rks0
+	m/Wr9tOc2WP/zjlSLI1cLNiHqzXi/wBk9K1gxQQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA02SaUwTURSFeTPT6YBpHBb1YY0kNSrBUm1EfcQFTIyOxsSlJiSYKEUmBaVY
+	W+uWoIUGQRRpcMPWgAuC4MooylasFUFcaBBRQVCRVmOUpYhxgRalaOTfyTnnfvf+uBTup+NN
+	phKSdrLqJHmiiPQhbt8XBYWG3ZjNzhngJOj6ozocOb8NEijV4MLR5Y5sEn2+3w+Q3ZIOkLnH
+	xEOtlgoMFV9+gKGs7DIS5VhfAORoMWLI3DYLnTtYQKBqcwOBmivPkCi/0MFHh1+Wk6io3o2h
+	VwYHQOX2FICufe4l0MM2Ieo6nAGQzVXPiwxkKowdfMb2ppRgmp9qGa7kEMncLDjAVLXqSObC
+	0WM8JkvfQzJORxvB9Na0kMzRWyWA+cpNZTh7N7ZWEO2zKI5NTNjFqmcvifGJf91tw1QpvD3N
+	JzsJHcggMoE3BekwWJrH8TOBD+VHVwFY+PMDPhoEwkJX7V/tD4vdH/+W7ABWvr3rmSbo6TD9
+	Xgp/RJP0PFhVqv/jU1QALYZpJdNG+jh9iYLnzv/w9L3oCMg94jzan14Ey7KrPbMCej78UFqO
+	jS4owGBebgcxGvjChtN2j8b/lPJuduIjC3BaCIvc1KgdBPVlJs+h3vQCqEuv8zAn0FNg7sVv
+	uAH4G8eQjGNIxv8k4xjSWUCUgEBWpVEqlFukKmkSu1uikSs12iSFZMt2JQc8TxISXA7e5Lsl
+	VoBRwAoghYsCBAqZmPUTxMn37mPV2zertYmsxgqEFCGaJJDmmuL8aIV8J7uNZVWs+l+KUd6T
+	dZjY1/qra77a0m69ccX86WTkJi+Wy22ZOT0rojnra0JOjT5s8P3BdwEXVqTNdIq3hhv6uops
+	nZprQj3fvcB/boSsQDrQtzQ+eNgy6FUhe5+z7yU8lVl8orGxrzWgTUIlLwz7NW8Ha+7tcjqi
+	7cXcc/Ga46Zl+wVBK4VlMWlHaNOXd0OqvcdDmybW28PbU61NP7+4ur93nskZct1qGi87oOzZ
+	+EkoWq4YsCVrr9oal0JZYUjs4tMbtHwUFd4PY1Jj8uNEsZQlwxBtebI+9vGwb+hqX+3bYGXR
+	2XVRGZNqhwXjNsaLnXcsYHVy/pAh9Fj/s9r2SzXKqOeaVTOGU095R4oITbxcGoKrNfLfzLD+
+	a5MDAAA=
+X-CMS-MailID: 20231018101516epcas5p2ac132e21cc9f83edd819c7680a51487d
+X-Msg-Generator: CA
+Content-Type: multipart/mixed;
+	boundary="----.DGRwfvtDKQaTon4q7jBZTz_rY-uYfv-SaOoriR32EfX1D_r=_12cae_"
+X-Sendblock-Type: REQ_APPROVE
+CMS-TYPE: 105P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20230920081458epcas5p3a3e12d8b5661b5d6f4420316630b02e1
+References: <20230920080756.11919-5-nj.shetty@samsung.com>
+	<20230920080756.11919-1-nj.shetty@samsung.com>
+	<CGME20230920081458epcas5p3a3e12d8b5661b5d6f4420316630b02e1@epcms2p6>
+	<20230922130815epcms2p631fc5fc5ebe634cc948fef1992f83a38@epcms2p6>
+	<20230926100718.wcptispc2zhfi5eh@green245>
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
 	lindbergh.monkeyblade.net
 
-
---nzkxuqp2govldfrd
-Content-Type: text/plain; charset=utf-8
+------.DGRwfvtDKQaTon4q7jBZTz_rY-uYfv-SaOoriR32EfX1D_r=_12cae_
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: 8bit
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 17, 2023 at 06:42:40PM -0700, Saravana Kannan wrote:
-> On Tue, Oct 17, 2023 at 4:35=E2=80=AFPM Saravana Kannan <saravanak@google=
-=2Ecom> wrote:
-> >
-> > On Sat, Oct 14, 2023 at 9:17=E2=80=AFAM Uwe Kleine-K=C3=B6nig
-> > <u.kleine-koenig@pengutronix.de> wrote:
-> > >
-> > > On Fri, Oct 13, 2023 at 02:42:20PM -0700, Saravana Kannan wrote:
-> > > > On Tue, Oct 10, 2023 at 1:05=E2=80=AFAM Uwe Kleine-K=C3=B6nig
-> > > > <u.kleine-koenig@pengutronix.de> wrote:
-> > > > >
-> > > > > Hello Saravana,
-> > > > >
-> > > > > you were pointed out to me as the expert for device links. I foun=
-d a
-> > > > > problem with these.
-> > > > >
-> > > > > On Tue, Jul 25, 2023 at 11:10:04PM +0200, Uwe Kleine-K=C3=B6nig w=
-rote:
-> > > > > > Today I managed to trigger the problem I intend to address with=
- this
-> > > > > > series. My machine to test this on is an stm32mp157. To be able=
- to
-> > > > > > trigger the problem reliably I applied the following patches on=
- top of
-> > > > > > v6.5-rc1:
-> > > > > >
-> > > > > >  - pwm: stm32: Don't modify HW state in .remove() callback
-> > > > > >    This is a cleanup that I already sent out.
-> > > > > >    https://lore.kernel.org/r/20230713155142.2454010-2-u.kleine-=
-koenig@pengutronix.de
-> > > > > >    The purpose for reproducing the problem is to not trigger fu=
-rther
-> > > > > >    calls to the apply callback.
-> > > > > >
-> > > > > >  - The following patch:
-> > > > > >
-> > > > > > diff --git a/drivers/pwm/pwm-stm32.c b/drivers/pwm/pwm-stm32.c
-> > > > > > index 687967d3265f..c7fc02b0fa3c 100644
-> > > > > > --- a/drivers/pwm/pwm-stm32.c
-> > > > > > +++ b/drivers/pwm/pwm-stm32.c
-> > > > > > @@ -451,6 +451,10 @@ static int stm32_pwm_apply(struct pwm_chip=
- *chip, struct pwm_device *pwm,
-> > > > > >       struct stm32_pwm *priv =3D to_stm32_pwm_dev(chip);
-> > > > > >       int ret;
-> > > > > >
-> > > > > > +     dev_info(chip->dev, "%s:%d\n", __func__, __LINE__);
-> > > > > > +     msleep(5000);
-> > > > > > +     dev_info(chip->dev, "%s:%d\n", __func__, __LINE__);
-> > > > > > +
-> > > > > >       enabled =3D pwm->state.enabled;
-> > > > > >
-> > > > > >       if (enabled && !state->enabled) {
-> > > > > > @@ -650,7 +654,11 @@ static void stm32_pwm_remove(struct platfo=
-rm_device *pdev)
-> > > > > >  {
-> > > > > >       struct stm32_pwm *priv =3D platform_get_drvdata(pdev);
-> > > > > >
-> > > > > > +     dev_info(&pdev->dev, "%s:%d\n", __func__, __LINE__);
-> > > > > >       pwmchip_remove(&priv->chip);
-> > > > > > +     dev_info(&pdev->dev, "%s:%d\n", __func__, __LINE__);
-> > > > > > +
-> > > > > > +     priv->regmap =3D NULL;
-> > > > > >  }
-> > > > > >
-> > > > > >  static int __maybe_unused stm32_pwm_suspend(struct device *dev)
-> > > > > >
-> > > > > > The first hunk is only there to widen the race window. The seco=
-nd is to
-> > > > > > give some diagnostics and make stm32_pwm_apply() crash if it co=
-ntinues
-> > > > > > to run after the msleep. (Without it it didn't crash reproducib=
-ly, don't
-> > > > > > understand why. *shrug*)
-> > > > > >
-> > > > > > The device tree contains a pwm-fan device making use of one of =
-the PWMs.
-> > > > > >
-> > > > > > Now I do the following:
-> > > > > >
-> > > > > >       echo fan > /sys/bus/platform/drivers/pwm-fan/unbind & sle=
-ep 1; echo 40007000.timer:pwm > /sys/bus/platform/drivers/stm32-pwm/unbind
-> > > > > >
-> > > > > > Unbinding the fan device has two effects:
-> > > > > >
-> > > > > >  - The device link between fan and pwm looses its property to u=
-nbind fan
-> > > > > >    when pwm gets unbound.
-> > > > > >    (Its .status changes from DL_STATE_ACTIVE to DL_STATE_AVAILA=
-BLE)
-> > > > > >  - It calls pwm_fan_cleanup() which triggers a call to
-> > > > > >    pwm_apply_state().
-> > > > > >
-> > > > > > So when the pwm device gets unbound the first thread is sleepin=
-g in
-> > > > > > stm32_pwm_apply(). The driver calls pwmchip_remove() and sets
-> > > > > > priv->regmap to NULL. Then a few seconds later the first thread=
- wakes up
-> > > > > > in stm32_pwm_apply() with the chip freed and priv->regmap =3D N=
-ULL. Bang!
-> > > > > >
-> > > > > > This looks as follows:
-> > > > > >
-> > > > > > root@crown:~# echo fan > /sys/bus/platform/drivers/pwm-fan/unbi=
-nd & sleep 1; echo 40007000.timer:pwm > /sys/bus/platform/drivers/stm32-pwm=
-/unbind
-> > > > > > [  187.182113] stm32-pwm 40007000.timer:pwm: stm32_pwm_apply:454
-> > > > > > [  188.164769] stm32-pwm 40007000.timer:pwm: stm32_pwm_remove:6=
-57
-> > > > > > [  188.184555] stm32-pwm 40007000.timer:pwm: stm32_pwm_remove:6=
-59
-> > > > > > root@crown:~# [  192.236423] platform 40007000.timer:pwm: stm32=
-_pwm_apply:456
-> > > > > > [  192.240727] 8<--- cut here ---
-> > > > > > [  192.243759] Unable to handle kernel NULL pointer dereference=
- at virtual address 0000001c when read
-> > > > > > ...
-> > > > > >
-> > > > > > Even without the crash you can see that stm32_pwm_apply() is st=
-ill
-> > > > > > running after pwmchip_remove() completed.
-> > > > > >
-> > > > > > I'm unsure if the device link could be improved here to ensure =
-that the
-> > > > > > fan is completely unbound even if it started unbinding already =
-before
-> > > > > > the pwm device gets unbound. (And if it could, would this fit t=
-he device
-> > > > > > links purpose and so be a sensible improvement?)
-> > > > >
-> > > > > While I think that there is something to be done in the pwm core =
-that
-> > > > > this doesn't explode (i.e. do proper lifetime tracking such that a
-> > > > > pwm_chip doesn't disappear while still being used---and I'm worki=
-ng on
-> > > > > that) I expected that the device links between pwm consumer and p=
-rovider
-> > > > > would prevent the above described oops, too. But somehow the fan =
-already
-> > > > > going away (but still using the PWM) when the PWM is unbound, res=
-ults in
-> > > > > the PWM disappearing before the fan is completely gone.
-> > > > >
-> > > > > Is this expected, or a problem that can (and should?) be fixed?
-> > > >
-> > > > I didn't read your full series, but I read this email. With what's =
-in
-> > > > this email, the problem seems to be in the driver or the pwm
-> > > > framework. The pwm driver/framework can't tell the driver core that
-> > > > you successfully unbound (returning from .remove()) before you have
-> > > > finish all your ongoing transactions with the device. If your
-> > > > "apply()" is still running, you need to make sure it's complete bef=
-ore
-> > > > .remove() does any resource releasing/clean up.
-> > > >
-> > > > Also, how is the consumer driver's .remove() succeeding if it has an
-> > > > ongoing pwm call()?
-> > >
-> > > The thing that works fine and as expected is:
-> > >
-> > >  - trigger unbind of PWM device via sysfs
-> > >
-> > > Because there is a device link PWM provider -> pwm consumer (fan), the
-> > > fan is removed and once its gone (and not earlier), the PWM gets unbo=
-und.
-> > >
-> > > The failing sequence is:
-> > >
-> > >  - trigger unbind of fan device in userspace thread A via sysfs. The
-> > >    fan's remove callback blocks for 5s in pwm_apply_state() and so
-> > >    .remove() doesn't complete yet.
-> > >
-> > >  - a second later: trigger unbind of PWM device via sysfs in thread B.
-> > >    As before I'd expect that the device link results in waiting for t=
-he
-> > >    fan to be removed completely, but the PWM is removed immediately.
-> > >
-> > >  - pwm_apply_state's sleep completes (in thread B) and operates on fr=
-eed
-> > >    resources =3D> bang!
-> > >
-> > > > This all sounds like insufficient locking and
-> > > > critical region protection in both the consumer and supplier.
-> > >
-> > > My (and I think also Thierry's) expectation was, that the device link
-> > > provides the needed synchronisation. But it doesn't as it doesn't blo=
-ck
-> > > the PWM provider going away until the fan is completely gone.
-> > >
-> > > > Device links can't do anything here because you are giving it wrong
-> > > > info -- that the unbind was successful before it actually is.
-> > >
-> > > The fan's unbind is ongoing, but not complete yet and I'd expect that
-> > > the device link blocks unbinding the PWM until the fan is completely
-> > > gone. So I think there is no wrong information.
-> > >
-> > > > Device links will and can make sure that the consumer is unbound
-> > > > successfully before the unbind is called on the supplier. And it lo=
-oks
-> > > > like that's still true here.
-> > >
-> > > I hope you understood the situation better now and see the problem we
-> > > have.
-> > >
-> > > The problem is fixable in the pwm framework (and I'm working on that),
-> > > but I think there is also something to improve around devicelink
-> > > handling.
-> >
-> > Thanks for a better explanation of the issue. I agree, this seems like
-> > something device links should be able to take care of.
-> >
-> > I'll take a look into this.
->=20
-> Took me a while to debug this because I couldn't find the .remove()
-> function and I was very confused about what's going on.
-> I'm guessing you started hitting this issue only after moving to the
-> devm_ variant of the pwm APIs.
+On 26/09/23 03:37PM, Nitesh Jagadeesh Shetty wrote:
+>>>+                write_bio->bi_iter.bi_size = chunk;
+>>>+                ret = submit_bio_wait(write_bio);
+>>>+                kfree(write_bio);
+>>
+>>blk_mq_map_bio_put(write_bio) ?
+>>or bio_uninit(write_bio); kfree(write_bio)?
+>>
+>>hmm...
+>>It continuously allocates and releases memory for bio,
+>>Why don't you just allocate and reuse bio outside the loop?
+>>
+>
+>Agree, we will update this in next version.
+>
+Reusing the bio won't work in cases where the bio gets split.
+So we decided to keep the previous design.
 
-Ah I see. That problem wouldn't happen if the fan called a pwm API
-function in its remove callback but that happens in a devm cleanup call
-(registered by devm_add_action_or_reset(dev, pwm_fan_cleanup, ctx) in
-pwm_fan_probe()). I first thought you talked about
-8c89fd866ad221af037ef0ec3d60b83d0b859c65.
+Thank you,
+Nitesh Shetty
 
-Best regards
-Uwe
+------.DGRwfvtDKQaTon4q7jBZTz_rY-uYfv-SaOoriR32EfX1D_r=_12cae_
+Content-Type: text/plain; charset="utf-8"
 
---=20
-Pengutronix e.K.                           | Uwe Kleine-K=C3=B6nig         =
-   |
-Industrial Linux Solutions                 | https://www.pengutronix.de/ |
 
---nzkxuqp2govldfrd
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmUvvtoACgkQj4D7WH0S
-/k5JxAf9ER9JBLig9A/iRLyUkXtAad+R4J3mwinZ4dfXq1/DKO2x/tnWOJgVTXHB
-EcXKWuAOS2QLcq2AcnbEMAZCnz+s9sWGnN8cUVrOFE/7FS/BXZdmHUDOnczkmvde
-pisAd0FWANNjKiZhrzq+XELvpdY/qvv6K7s8fk1vDxxThtYScj9WG7j3mb0MOHKR
-MH8ZyX8kDHXnmBsKPnDCQP5SCH2iK0rC4AuhdNJReOtkIRUc1IxQ132c+l00/574
-Gh6kBNAtOyoVtFdBRjXLCbsk6bg1ZK8Rk4biScIT0qbNTO9RMA9+SVjpahFKv4WH
-zjbD0WgaVC491MHmwjUP/eI06dT3Eg==
-=6CX4
------END PGP SIGNATURE-----
-
---nzkxuqp2govldfrd--
+------.DGRwfvtDKQaTon4q7jBZTz_rY-uYfv-SaOoriR32EfX1D_r=_12cae_--
 
