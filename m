@@ -1,252 +1,150 @@
-Return-Path: <linux-doc+bounces-536-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-538-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id A56327CE3FC
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Oct 2023 19:07:39 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CAC17CE45B
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Oct 2023 19:25:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5BBF82814E2
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Oct 2023 17:07:38 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 85657B20EEA
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Oct 2023 17:25:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CD0103D396;
-	Wed, 18 Oct 2023 17:07:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C55103D98F;
+	Wed, 18 Oct 2023 17:24:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ghZcoyil"
+	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="ssIAHBd6"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01D133C086;
-	Wed, 18 Oct 2023 17:07:32 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C95151BCC;
-	Wed, 18 Oct 2023 10:07:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1697648848; x=1729184848;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=bnAgZhMpQI9Wls8t1VQ9+UojvEPXbDgQi1tviIYGidE=;
-  b=ghZcoyilmJhrc9CpZaF85X9jqGRUfSiiVUnJNqXD8CCaLSAE4iEGhrNO
-   Vm0OtTXLcZkuxVVyYDWrsq3hAmhCc7CduBbw6awU3rew2gl1r6Q0xGCOr
-   aQyGmbVww5kn8iUjq+7PS55TM3lf9qTE/tDu5Uao84aOQigom63uJFybt
-   rr8ghfu2R7jiLSTDalMqiiutBqzyuLph7Ty1SsuC+Lwvr7UF2BRzVZr/K
-   LBXJgK6NQIpLFlPdFfyLVBPNo0gQRT7IiYWdlDqdwpVeq0Q4r+oC8rd8c
-   nqFqgsC7uAX1dDZw/WaUnCgOi41wyGCs2DgM+6cHQJ9AjBu8MMMBiwEc2
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10867"; a="388925089"
-X-IronPort-AV: E=Sophos;i="6.03,235,1694761200"; 
-   d="scan'208";a="388925089"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Oct 2023 10:07:28 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10867"; a="822494268"
-X-IronPort-AV: E=Sophos;i="6.03,235,1694761200"; 
-   d="scan'208";a="822494268"
-Received: from nirmoyda-mobl.ger.corp.intel.com (HELO azaki-desk1.intel.com) ([10.249.38.47])
-  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Oct 2023 10:07:22 -0700
-From: Ahmed Zaki <ahmed.zaki@intel.com>
-To: netdev@vger.kernel.org
-Cc: intel-wired-lan@lists.osuosl.org,
-	corbet@lwn.net,
-	jesse.brandeburg@intel.com,
-	anthony.l.nguyen@intel.com,
-	davem@davemloft.net,
-	edumazet@google.com,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	vladimir.oltean@nxp.com,
-	andrew@lunn.ch,
-	horms@kernel.org,
-	mkubecek@suse.cz,
-	willemdebruijn.kernel@gmail.com,
-	linux-doc@vger.kernel.org,
-	Ahmed Zaki <ahmed.zaki@intel.com>,
-	Madhu Chittim <madhu.chittim@intel.com>
-Subject: [PATCH net-next v5 6/6] iavf: enable symmetric RSS Toeplitz hash
-Date: Wed, 18 Oct 2023 11:06:35 -0600
-Message-Id: <20231018170635.65409-7-ahmed.zaki@intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231018170635.65409-1-ahmed.zaki@intel.com>
-References: <20231018170635.65409-1-ahmed.zaki@intel.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE256199CE
+	for <linux-doc@vger.kernel.org>; Wed, 18 Oct 2023 17:24:55 +0000 (UTC)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com [IPv6:2a00:1450:4864:20::22d])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8A94E4490
+	for <linux-doc@vger.kernel.org>; Wed, 18 Oct 2023 10:24:53 -0700 (PDT)
+Received: by mail-lj1-x22d.google.com with SMTP id 38308e7fff4ca-2c514cbbe7eso62600661fa.1
+        for <linux-doc@vger.kernel.org>; Wed, 18 Oct 2023 10:24:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1697649892; x=1698254692; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JGr+wt8mibKQk7V/xmPHf9oID5HtJ6aKoUQCNWyJYkI=;
+        b=ssIAHBd6c/4fTV2H6cqWVl4JvFRuctqTiihxcorkMy6+Gnq2FKGTWRMMgB6SLzTj09
+         umOucqfIiNFYTVL8DJyWye2AGcDKPNzN7isZPIflFdmSIWyrtTXravm6OkVgGH7myDwE
+         hAzQcYycD2CojE8wwGxmQfmcnztTME+OzHf9m1XEd6hASlvCG1Ryme9J1g8WW5faCNMl
+         HtddF0/Vdk1l2V/YsXJXkQnbVBPYnE76/jKGrrDwFsk0kT/URJipZpMbw3afvoZkQ1JV
+         tWXI05ziWsTen0ftM3GB5QQH84U8FXQCmkTpX4u1SWjT2nC51jR2rLMX8R7ShQS6ykE4
+         FHeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1697649892; x=1698254692;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=JGr+wt8mibKQk7V/xmPHf9oID5HtJ6aKoUQCNWyJYkI=;
+        b=XSJ7KGPd8aqM6s4X7OB3ERKELKtfzOqCjFw3AztzUNrfgQhcB0v6d/8orNpKIwdC33
+         dnppoM7CePIbG5G2Gcvk5yAl46BOVeVvN3EnTeHBh3AVf7lrZIqt6a0aVd3TDZs+gooU
+         5E7lQnyeXEgA7kk+3IhkwCuj5xthnXTp7r/nV4SaB3Isr9nepDL4rKzZg2/DWOY1eNmy
+         hSJ60ZjsQHMDcI+iHuUHx9c+w7eWGWC7gNjUdHnzQ9AM59cmUbgkaE0wQbvBRm/ZWQiO
+         HyJ0HtTRPSHFbU62boezZuBxkBLNJ0SLDo/gj4/LqsifO/vdEExZgmaLPhgge/V7U7HW
+         fUxg==
+X-Gm-Message-State: AOJu0Yxq/zapOHIsRUeC4YROfsZQqOQ56GfxtyHfTyQFUu3qD99MY7GL
+	6BrOoDZ6RodZwJCGT7sEY1Ab13aJ0a5LlUfD7ghPpA==
+X-Google-Smtp-Source: AGHT+IHn5JoyDBx4hQ6moyifBlTpJE2HspdWaEwiTdR7052+Lklyunc7KFWvmABqPETQ6/Rlz2A1G6dGqOcAJlNQXXc=
+X-Received: by 2002:a2e:9b13:0:b0:2c5:3492:5d96 with SMTP id
+ u19-20020a2e9b13000000b002c534925d96mr4576190lji.12.1697649891740; Wed, 18
+ Oct 2023 10:24:51 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
-	SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
+References: <20231017131456.2053396-1-cleger@rivosinc.com> <20231017131456.2053396-2-cleger@rivosinc.com>
+In-Reply-To: <20231017131456.2053396-2-cleger@rivosinc.com>
+From: Evan Green <evan@rivosinc.com>
+Date: Wed, 18 Oct 2023 10:24:15 -0700
+Message-ID: <CALs-HssL=wNwj9nRuZwpZhy1CB9p9-X=OqgwBw9zvgA7hA4fEg@mail.gmail.com>
+Subject: Re: [PATCH v2 01/19] riscv: hwprobe: factorize hwprobe ISA extension reporting
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+Cc: linux-riscv@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	Palmer Dabbelt <palmer@rivosinc.com>, Paul Walmsley <paul.walmsley@sifive.com>, 
+	Rob Herring <robh+dt@kernel.org>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Albert Ou <aou@eecs.berkeley.edu>, 
+	Jonathan Corbet <corbet@lwn.net>, Andrew Jones <ajones@ventanamicro.com>, 
+	Conor Dooley <conor@kernel.org>, Samuel Ortiz <sameo@rivosinc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
 	lindbergh.monkeyblade.net
 
-Allow the VFs to support symmetric RSS for any flow type. The symmetric
-RSS will not be supported on PFs not advertising the ADV RSS Offload
-flag (ADV_RSS_SUPPORT()), for example the E700 series (i40e).
+On Tue, Oct 17, 2023 at 6:15=E2=80=AFAM Cl=C3=A9ment L=C3=A9ger <cleger@riv=
+osinc.com> wrote:
+>
+> Factorize ISA extension reporting by using a macro rather than
+> copy/pasting extension names. This will allow adding new extensions more
+> easily.
+>
+> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
+> ---
+>  arch/riscv/kernel/sys_riscv.c | 32 ++++++++++++++++++--------------
+>  1 file changed, 18 insertions(+), 14 deletions(-)
+>
+> diff --git a/arch/riscv/kernel/sys_riscv.c b/arch/riscv/kernel/sys_riscv.=
+c
+> index 473159b5f303..e207874e686e 100644
+> --- a/arch/riscv/kernel/sys_riscv.c
+> +++ b/arch/riscv/kernel/sys_riscv.c
+> @@ -145,20 +145,24 @@ static void hwprobe_isa_ext0(struct riscv_hwprobe *=
+pair,
+>         for_each_cpu(cpu, cpus) {
+>                 struct riscv_isainfo *isainfo =3D &hart_isa[cpu];
+>
+> -               if (riscv_isa_extension_available(isainfo->isa, ZBA))
+> -                       pair->value |=3D RISCV_HWPROBE_EXT_ZBA;
+> -               else
+> -                       missing |=3D RISCV_HWPROBE_EXT_ZBA;
+> -
+> -               if (riscv_isa_extension_available(isainfo->isa, ZBB))
+> -                       pair->value |=3D RISCV_HWPROBE_EXT_ZBB;
+> -               else
+> -                       missing |=3D RISCV_HWPROBE_EXT_ZBB;
+> -
+> -               if (riscv_isa_extension_available(isainfo->isa, ZBS))
+> -                       pair->value |=3D RISCV_HWPROBE_EXT_ZBS;
+> -               else
+> -                       missing |=3D RISCV_HWPROBE_EXT_ZBS;
+> +#define CHECK_ISA_EXT(__ext)                                            =
+       \
+> +               do {                                                     =
+       \
+> +                       if (riscv_isa_extension_available(isainfo->isa, _=
+_ext)) \
+> +                               pair->value |=3D RISCV_HWPROBE_EXT_##__ex=
+t;       \
+> +                       else                                             =
+       \
+> +                               missing |=3D RISCV_HWPROBE_EXT_##__ext;  =
+         \
+> +               } while (false)
+> +
+> +               /*
+> +                * Only use CHECK_ISA_EXT() for extensions which can be e=
+xposed
+> +                * to userspace, regardless of the kernel's configuration=
+, as no
+> +                * other checks, besides presence in the hart_isa bitmap,=
+ are
+> +                * made.
 
-Reviewed-by: Madhu Chittim <madhu.chittim@intel.com>
-Signed-off-by: Ahmed Zaki <ahmed.zaki@intel.com>
----
- .../net/ethernet/intel/iavf/iavf_adv_rss.c    |  8 +++--
- .../net/ethernet/intel/iavf/iavf_adv_rss.h    |  3 +-
- .../net/ethernet/intel/iavf/iavf_ethtool.c    | 33 ++++++++++++++++---
- 3 files changed, 37 insertions(+), 7 deletions(-)
+This comment alludes to a dangerous trap, but I'm having trouble
+understanding what it is. Perhaps some rewording to more explicitly
+state the danger would be appropriate. Other than that:
 
-diff --git a/drivers/net/ethernet/intel/iavf/iavf_adv_rss.c b/drivers/net/ethernet/intel/iavf/iavf_adv_rss.c
-index 6edbf134b73f..a9e1da35e248 100644
---- a/drivers/net/ethernet/intel/iavf/iavf_adv_rss.c
-+++ b/drivers/net/ethernet/intel/iavf/iavf_adv_rss.c
-@@ -95,17 +95,21 @@ iavf_fill_adv_rss_sctp_hdr(struct virtchnl_proto_hdr *hdr, u64 hash_flds)
-  * @rss_cfg: the virtchnl message to be filled with RSS configuration setting
-  * @packet_hdrs: the RSS configuration protocol header types
-  * @hash_flds: the RSS configuration protocol hash fields
-+ * @symm: if true, symmetric hash is required
-  *
-  * Returns 0 if the RSS configuration virtchnl message is filled successfully
-  */
- int
- iavf_fill_adv_rss_cfg_msg(struct virtchnl_rss_cfg *rss_cfg,
--			  u32 packet_hdrs, u64 hash_flds)
-+			  u32 packet_hdrs, u64 hash_flds, bool symm)
- {
- 	struct virtchnl_proto_hdrs *proto_hdrs = &rss_cfg->proto_hdrs;
- 	struct virtchnl_proto_hdr *hdr;
- 
--	rss_cfg->rss_algorithm = VIRTCHNL_RSS_ALG_TOEPLITZ_ASYMMETRIC;
-+	if (symm)
-+		rss_cfg->rss_algorithm = VIRTCHNL_RSS_ALG_TOEPLITZ_SYMMETRIC;
-+	else
-+		rss_cfg->rss_algorithm = VIRTCHNL_RSS_ALG_TOEPLITZ_ASYMMETRIC;
- 
- 	proto_hdrs->tunnel_level = 0;	/* always outer layer */
- 
-diff --git a/drivers/net/ethernet/intel/iavf/iavf_adv_rss.h b/drivers/net/ethernet/intel/iavf/iavf_adv_rss.h
-index 4d3be11af7aa..e31eb2afebea 100644
---- a/drivers/net/ethernet/intel/iavf/iavf_adv_rss.h
-+++ b/drivers/net/ethernet/intel/iavf/iavf_adv_rss.h
-@@ -80,13 +80,14 @@ struct iavf_adv_rss {
- 
- 	u32 packet_hdrs;
- 	u64 hash_flds;
-+	bool symm;
- 
- 	struct virtchnl_rss_cfg cfg_msg;
- };
- 
- int
- iavf_fill_adv_rss_cfg_msg(struct virtchnl_rss_cfg *rss_cfg,
--			  u32 packet_hdrs, u64 hash_flds);
-+			  u32 packet_hdrs, u64 hash_flds, bool symm);
- struct iavf_adv_rss *
- iavf_find_adv_rss_cfg_by_hdrs(struct iavf_adapter *adapter, u32 packet_hdrs);
- void
-diff --git a/drivers/net/ethernet/intel/iavf/iavf_ethtool.c b/drivers/net/ethernet/intel/iavf/iavf_ethtool.c
-index 90397293525f..62a3cf88189e 100644
---- a/drivers/net/ethernet/intel/iavf/iavf_ethtool.c
-+++ b/drivers/net/ethernet/intel/iavf/iavf_ethtool.c
-@@ -1550,6 +1550,17 @@ static u64 iavf_adv_rss_parse_hash_flds(struct ethtool_rxnfc *cmd)
- {
- 	u64 hfld = IAVF_ADV_RSS_HASH_INVALID;
- 
-+	/* Sanity check: if a symmetric hash is requested, then:
-+	 * 1 - no other fields besides IP src/dst and/or L4 src/dst
-+	 * 2 - If src is set, dst must also be set
-+	 */
-+	if ((cmd->data & RXH_SYMMETRIC_XOR) &&
-+	    ((cmd->data & ~(RXH_SYMMETRIC_XOR | RXH_IP_SRC | RXH_IP_DST |
-+	      RXH_L4_B_0_1 | RXH_L4_B_2_3)) ||
-+	     (!!(cmd->data & RXH_IP_SRC) ^ !!(cmd->data & RXH_IP_DST)) ||
-+	     (!!(cmd->data & RXH_L4_B_0_1) ^ !!(cmd->data & RXH_L4_B_2_3))))
-+		return hfld;
-+
- 	if (cmd->data & RXH_IP_SRC || cmd->data & RXH_IP_DST) {
- 		switch (cmd->flow_type) {
- 		case TCP_V4_FLOW:
-@@ -1618,6 +1629,7 @@ iavf_set_adv_rss_hash_opt(struct iavf_adapter *adapter,
- 	struct iavf_adv_rss *rss_old, *rss_new;
- 	bool rss_new_add = false;
- 	int count = 50, err = 0;
-+	bool symm = false;
- 	u64 hash_flds;
- 	u32 hdrs;
- 
-@@ -1632,11 +1644,15 @@ iavf_set_adv_rss_hash_opt(struct iavf_adapter *adapter,
- 	if (hash_flds == IAVF_ADV_RSS_HASH_INVALID)
- 		return -EINVAL;
- 
-+	if (cmd->data & RXH_SYMMETRIC_XOR)
-+		symm = true;
-+
- 	rss_new = kzalloc(sizeof(*rss_new), GFP_KERNEL);
- 	if (!rss_new)
- 		return -ENOMEM;
- 
--	if (iavf_fill_adv_rss_cfg_msg(&rss_new->cfg_msg, hdrs, hash_flds)) {
-+	if (iavf_fill_adv_rss_cfg_msg(&rss_new->cfg_msg, hdrs, hash_flds,
-+				      symm)) {
- 		kfree(rss_new);
- 		return -EINVAL;
- 	}
-@@ -1655,9 +1671,11 @@ iavf_set_adv_rss_hash_opt(struct iavf_adapter *adapter,
- 	if (rss_old) {
- 		if (rss_old->state != IAVF_ADV_RSS_ACTIVE) {
- 			err = -EBUSY;
--		} else if (rss_old->hash_flds != hash_flds) {
-+		} else if (rss_old->hash_flds != hash_flds ||
-+			   rss_old->symm != symm) {
- 			rss_old->state = IAVF_ADV_RSS_ADD_REQUEST;
- 			rss_old->hash_flds = hash_flds;
-+			rss_old->symm = symm;
- 			memcpy(&rss_old->cfg_msg, &rss_new->cfg_msg,
- 			       sizeof(rss_new->cfg_msg));
- 			adapter->aq_required |= IAVF_FLAG_AQ_ADD_ADV_RSS_CFG;
-@@ -1669,6 +1687,7 @@ iavf_set_adv_rss_hash_opt(struct iavf_adapter *adapter,
- 		rss_new->state = IAVF_ADV_RSS_ADD_REQUEST;
- 		rss_new->packet_hdrs = hdrs;
- 		rss_new->hash_flds = hash_flds;
-+		rss_new->symm = symm;
- 		list_add_tail(&rss_new->list, &adapter->adv_rss_list_head);
- 		adapter->aq_required |= IAVF_FLAG_AQ_ADD_ADV_RSS_CFG;
- 	}
-@@ -1698,6 +1717,7 @@ iavf_get_adv_rss_hash_opt(struct iavf_adapter *adapter,
- {
- 	struct iavf_adv_rss *rss;
- 	u64 hash_flds;
-+	bool symm;
- 	u32 hdrs;
- 
- 	if (!ADV_RSS_SUPPORT(adapter))
-@@ -1711,10 +1731,12 @@ iavf_get_adv_rss_hash_opt(struct iavf_adapter *adapter,
- 
- 	spin_lock_bh(&adapter->adv_rss_lock);
- 	rss = iavf_find_adv_rss_cfg_by_hdrs(adapter, hdrs);
--	if (rss)
-+	if (rss) {
- 		hash_flds = rss->hash_flds;
--	else
-+		symm = rss->symm;
-+	} else {
- 		hash_flds = IAVF_ADV_RSS_HASH_INVALID;
-+	}
- 	spin_unlock_bh(&adapter->adv_rss_lock);
- 
- 	if (hash_flds == IAVF_ADV_RSS_HASH_INVALID)
-@@ -1738,6 +1760,9 @@ iavf_get_adv_rss_hash_opt(struct iavf_adapter *adapter,
- 			 IAVF_ADV_RSS_HASH_FLD_SCTP_DST_PORT))
- 		cmd->data |= (u64)RXH_L4_B_2_3;
- 
-+	if (symm)
-+		cmd->data |= (u64)RXH_SYMMETRIC_XOR;
-+
- 	return 0;
- }
- 
--- 
-2.34.1
-
+Reviewed-by: Evan Green <evan@rivosinc.com>
 
