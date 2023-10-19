@@ -1,111 +1,185 @@
-Return-Path: <linux-doc+bounces-616-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-612-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96A807CF5F1
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 12:55:02 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5354A7CF50E
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 12:22:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 52524281F2D
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 10:55:01 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C1B5D281F2A
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 10:22:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F054D17721;
-	Thu, 19 Oct 2023 10:54:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D773E182B3;
+	Thu, 19 Oct 2023 10:22:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=inbox.ru header.i=@inbox.ru header.b="HCQW8Coc";
-	dkim=pass (2048-bit key) header.d=inbox.ru header.i=@inbox.ru header.b="cQcj9EEE"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ViHqvtAL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FE451863A;
-	Thu, 19 Oct 2023 10:54:55 +0000 (UTC)
-X-Greylist: delayed 2503 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 19 Oct 2023 03:54:51 PDT
-Received: from fallback16.i.mail.ru (fallback16.i.mail.ru [79.137.243.71])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3B3AFFA;
-	Thu, 19 Oct 2023 03:54:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=inbox.ru; s=mail4;
-	h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc; bh=FZ2wLAmbsoxzhZt475ZmnVNLNU8vs3pxdLVPs7AlSqE=;
-	t=1697712891;x=1697802891; 
-	b=HCQW8CocSQqbiWjvXs+VDgEMVApB7qmxQ3066fM/EvrvXP6GFP5mhqZpZ585Gb7N8FPUlyRqqvNC0YHKfjFFZ/3kcR5ND2lEJd8H1rDoBw9TNryNK6C3wRyCAN4X+cWyJzDCArgYJozefpeP8O+HaTVs8uqMZNvF6nFw6eOhg77mYPf3bNBb6RJBYFZrrrFJiSC5acm+r7er4spqj9wMc/rYg/s80ynGmbH4KXyHwAR/6S+ffBM0ExlmVypI7IBtdL7C6NfaARHxy4vsTzQliYJdH+nLmY4k8IlBi7WqWtOe97ox91ig7XLAlmLaUAe7EqHpCyg2cqyD+2QqMM4nUA==;
-Received: from [10.161.100.15] (port=33406 helo=smtpng3.i.mail.ru)
-	by fallback16.i.mail.ru with esmtp (envelope-from <fido_max@inbox.ru>)
-	id 1qtQ1Y-006NBm-Pd; Thu, 19 Oct 2023 13:13:04 +0300
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=inbox.ru; s=mail4;
-	h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc; bh=FZ2wLAmbsoxzhZt475ZmnVNLNU8vs3pxdLVPs7AlSqE=;
-	t=1697710384;x=1697800384; 
-	b=cQcj9EEEduh0BMXw9xGQgQJlt01H9+9dDQVcnnThP37qITi9JY+c6SbStKz8fkFp12PwthjfMsCdQjtTZMnelH31BV7cDWBiacvmUV4JvjFIb0yCFzFOpg9uWYNYWVEyjQny7pxx8UXkHO8tJGY9dKJxB4DjPTIi2l1M+RL7JECXlAJD6gMwP3EIlt35MBjsd1Y/mL1dPY9x7S4A9atYxTm5PyVQc0+tHfQQA80VbV6l3v1hSRduioN7ch4eHNwr7lIbLoT6ssnBjEdMVg0hbHtWuEgg+fAGzSsxyj1y9SEU/c09bwJuSDJKFp9xa92HKNdt/AfN/tnEgI6jA61F6g==;
-Received: by smtpng3.m.smailru.net with esmtpa (envelope-from <fido_max@inbox.ru>)
-	id 1qtQ1J-0004wp-2q; Thu, 19 Oct 2023 13:12:50 +0300
-Message-ID: <cafc11b1-93d1-468d-88c7-b8b6f8b27547@inbox.ru>
-Date: Thu, 19 Oct 2023 13:12:45 +0300
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A937017985;
+	Thu, 19 Oct 2023 10:22:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 57D37C433C8;
+	Thu, 19 Oct 2023 10:22:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1697710951;
+	bh=PKYzCBBNs1O32oIawGxF3uIbDChRrVw3IJL0BEhOvoE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ViHqvtALFFnpctn8RsIfJYCIj7DwvYkiiPvlN/uF+gglBElEflYqwEqQ3X7tAExDP
+	 QKLfxK4bPnzDT+0CSgjrlzzfdvDACHwVd11/qVqK1NiuLziWaFeHRyVLe/5/GPgb5Y
+	 8fupB0UMPif5QUQQ8ay7buIf26O0y3qg/8R94FOpufo9ONGnz292TuRcEdYDedjNIJ
+	 FJaFHwvMYb0aDWD5sVfqMZ55nXtcPdnCEgiSerN8h9RNNAahmACit6zfpS3Yaj0zE4
+	 6UDZ3f90tPRKeDKoVmTj4Rit7xOezNsysbxkEw+fiMRL+ujI5kiz8EpKHv4I5YFT2K
+	 ivDxq4QT0oK4g==
+Date: Thu, 19 Oct 2023 11:22:26 +0100
+From: Conor Dooley <conor@kernel.org>
+To: =?iso-8859-1?Q?Cl=E9ment_L=E9ger?= <cleger@rivosinc.com>
+Cc: Evan Green <evan@rivosinc.com>, linux-riscv@lists.infradead.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, Palmer Dabbelt <palmer@rivosinc.com>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Albert Ou <aou@eecs.berkeley.edu>, Jonathan Corbet <corbet@lwn.net>,
+	Andrew Jones <ajones@ventanamicro.com>,
+	Samuel Ortiz <sameo@rivosinc.com>
+Subject: Re: [PATCH v2 01/19] riscv: hwprobe: factorize hwprobe ISA extension
+ reporting
+Message-ID: <20231019-flatten-showbiz-127b2e917a7a@spud>
+References: <20231017131456.2053396-1-cleger@rivosinc.com>
+ <20231017131456.2053396-2-cleger@rivosinc.com>
+ <CALs-HssL=wNwj9nRuZwpZhy1CB9p9-X=OqgwBw9zvgA7hA4fEg@mail.gmail.com>
+ <20231018-scrap-bankable-a0f321d97a46@spud>
+ <20231018-flagpole-footpad-07a6228485f3@spud>
+ <844f6f35-3125-4014-852c-9ad7aee19ddc@rivosinc.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 00/20] Imagination Technologies PowerVR DRM driver
-Content-Language: en-US
-To: Sarah Walker <sarah.walker@imgtec.com>, dri-devel@lists.freedesktop.org
-Cc: frank.binns@imgtec.com, donald.robson@imgtec.com,
- boris.brezillon@collabora.com, faith.ekstrand@collabora.com,
- airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, tzimmermann@suse.de, afd@ti.com, hns@goldelico.com,
- matthew.brost@intel.com, christian.koenig@amd.com, luben.tuikov@amd.com,
- dakr@redhat.com, linux-kernel@vger.kernel.org, robh+dt@kernel.org,
- krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
- devicetree@vger.kernel.org, corbet@lwn.net, linux-doc@vger.kernel.org
-References: <20231010133738.35274-1-sarah.walker@imgtec.com>
-From: Maxim Kochetkov <fido_max@inbox.ru>
-In-Reply-To: <20231010133738.35274-1-sarah.walker@imgtec.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailru-Src: smtp
-X-7564579A: B8F34718100C35BD
-X-77F55803: 4F1203BC0FB41BD978AFEFB3096932CF067259BE5129BC25732DC641AEA930A1182A05F538085040C2605E2AA15CDF10C8211401740B4A1042FA361644404DB74B3DF5AEA29833D3
-X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE7F9D3BE5B596754B8C2099A533E45F2D0395957E7521B51C2CFCAF695D4D8E9FCEA1F7E6F0F101C6778DA827A17800CE77BF46084C0059042EA1F7E6F0F101C6723150C8DA25C47586E58E00D9D99D84E1BDDB23E98D2D38BE5CCB53A13BC8DBA2A091836E1F265D70D9CA0D510A8EFC420879F7C8C5043D14489FFFB0AA5F4BF176DF2183F8FC7C0DCF4F0DC832992758941B15DA834481FA18204E546F3947CC2B5EEE3591E0D35F6B57BC7E64490618DEB871D839B7333395957E7521B51C2DFABB839C843B9C08941B15DA834481F8AA50765F790063793270F7220657A0A389733CBF5DBD5E9B5C8C57E37DE458B9E9CE733340B9D5F3BBE47FD9DD3FB595F5C1EE8F4F765FC47272755C61AA17BE2021AF6380DFAD18AA50765F790063735872C767BF85DA227C277FBC8AE2E8B08F9A42B2210255C75ECD9A6C639B01B4E70A05D1297E1BBCB5012B2E24CD356
-X-87b9d050: 1
-X-C1DE0DAB: 0D63561A33F958A565C7086EBC9D473415F279ACDF478F5F36B452A93AEDFACFF87CCE6106E1FC07E67D4AC08A07B9B062B3BD3CC35DA588CB5012B2E24CD356
-X-C8649E89: 1C3962B70DF3F0ADE00A9FD3E00BEEDF77DD89D51EBB7742D3581295AF09D3DF87807E0823442EA2ED31085941D9CD0AF7F820E7B07EA4CFE4DF0D63EE383A79F6A7B273E03F895FE821FCB66D0705176AA8BBBFD371D3C1F33D08354E2B7C925BB39EF8E370AEADE6846D863085C6BD9C8927945BE056F997B0E0F2C360C7964C41F94D744909CEE921556F0E976A29E6EC0772259F8F8F8815B87D7EC76CB9
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr5ycPtXkTV4k65bRjmOUUP8cvGozZ33TWg5HZplvhhXbhDGzqmQDTd6OAevLeAnq3Ra9uf7zvY2zzsIhlcp/Y7m53TZgf2aB4JOg4gkr2biojI+3ahDCNcVZh0S32k8UNjA==
-X-Mailru-Sender: 689FA8AB762F73930F533AC2B33E986BEF3E50AE3CB2F22C9B48DA2DDD9459B498CC072019C18A892CA7F8C7C9492E1F2F5E575105D0B01ADBE2EF17B331888EEAB4BC95F72C04283CDA0F3B3F5B9367
-X-Mras: Ok
-X-7564579A: B8F34718100C35BD
-X-77F55803: 6242723A09DB00B4DEDBBC46D76EB2520ED4F58DABF9B69510FDFA31A9459BA5049FFFDB7839CE9E7E8A997835E85111036EDD732F8361FA021E1609F3BBD6F772F92D7DB10D2B09
-X-7FA49CB5: 0D63561A33F958A59E62A8CF8988D5AAB01B3FA4BD27B0D0E9EE173060FDDE11CACD7DF95DA8FC8BD5E8D9A59859A8B6C9FB9FFC76A8E93C
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr5xhPKz0ZEsZ5k6NOOPWz5QAiZSCXKGQRq3/7KxbCLSB2ESzQkaOXqCBFZPLWFrEGlV1shfWe2EVcxl5toh0c/aCGOghz/frdRhzMe95NxDFdVi+mls5yutoGB9YG2MJkzg==
-X-Mailru-MI: C000000000000800
-X-Mras: Ok
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="0kZSCNOwIdjxb8Tb"
+Content-Disposition: inline
+In-Reply-To: <844f6f35-3125-4014-852c-9ad7aee19ddc@rivosinc.com>
 
 
+--0kZSCNOwIdjxb8Tb
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 10.10.2023 16:37, Sarah Walker wrote:
-> This patch series adds the initial DRM driver for Imagination Technologies PowerVR
-> GPUs, starting with those based on our Rogue architecture. It's worth pointing
-> out that this is a new driver, written from the ground up, rather than a
-> refactored version of our existing downstream driver (pvrsrvkm).
-> 
-> This new DRM driver supports:
-> - GEM shmem allocations
-> - dma-buf / PRIME
-> - Per-context userspace managed virtual address space
-> - DRM sync objects (binary and timeline)
-> - Power management suspend / resume
-> - GPU job submission (geometry, fragment, compute, transfer)
-> - META firmware processor
-> - MIPS firmware processor
-> - GPU hang detection and recovery
-> 
-> Currently our main focus is on the AXE-1-16M GPU. Testing so far has been done
-> using a TI SK-AM62 board (AXE-1-16M GPU). Firmware for the AXE-1-16M can be
-> found here:
-> https://gitlab.freedesktop.org/frankbinns/linux-firmware/-/tree/powervr
+On Thu, Oct 19, 2023 at 09:26:31AM +0200, Cl=C3=A9ment L=C3=A9ger wrote:
+>=20
+>=20
+> On 18/10/2023 19:36, Conor Dooley wrote:
+> > On Wed, Oct 18, 2023 at 06:33:34PM +0100, Conor Dooley wrote:
+> >> On Wed, Oct 18, 2023 at 10:24:15AM -0700, Evan Green wrote:
+> >>> On Tue, Oct 17, 2023 at 6:15=E2=80=AFAM Cl=C3=A9ment L=C3=A9ger <cleg=
+er@rivosinc.com> wrote:
+> >>>>
+> >>>> Factorize ISA extension reporting by using a macro rather than
+> >>>> copy/pasting extension names. This will allow adding new extensions =
+more
+> >>>> easily.
+> >>>>
+> >>>> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
+> >>>> ---
+> >>>>  arch/riscv/kernel/sys_riscv.c | 32 ++++++++++++++++++--------------
+> >>>>  1 file changed, 18 insertions(+), 14 deletions(-)
+> >>>>
+> >>>> diff --git a/arch/riscv/kernel/sys_riscv.c b/arch/riscv/kernel/sys_r=
+iscv.c
+> >>>> index 473159b5f303..e207874e686e 100644
+> >>>> --- a/arch/riscv/kernel/sys_riscv.c
+> >>>> +++ b/arch/riscv/kernel/sys_riscv.c
+> >>>> @@ -145,20 +145,24 @@ static void hwprobe_isa_ext0(struct riscv_hwpr=
+obe *pair,
+> >>>>         for_each_cpu(cpu, cpus) {
+> >>>>                 struct riscv_isainfo *isainfo =3D &hart_isa[cpu];
+> >>>>
+> >>>> -               if (riscv_isa_extension_available(isainfo->isa, ZBA))
+> >>>> -                       pair->value |=3D RISCV_HWPROBE_EXT_ZBA;
+> >>>> -               else
+> >>>> -                       missing |=3D RISCV_HWPROBE_EXT_ZBA;
+> >>>> -
+> >>>> -               if (riscv_isa_extension_available(isainfo->isa, ZBB))
+> >>>> -                       pair->value |=3D RISCV_HWPROBE_EXT_ZBB;
+> >>>> -               else
+> >>>> -                       missing |=3D RISCV_HWPROBE_EXT_ZBB;
+> >>>> -
+> >>>> -               if (riscv_isa_extension_available(isainfo->isa, ZBS))
+> >>>> -                       pair->value |=3D RISCV_HWPROBE_EXT_ZBS;
+> >>>> -               else
+> >>>> -                       missing |=3D RISCV_HWPROBE_EXT_ZBS;
+> >>>> +#define CHECK_ISA_EXT(__ext)                                       =
+            \
+> >>>> +               do {                                                =
+            \
+> >>>> +                       if (riscv_isa_extension_available(isainfo->i=
+sa, __ext)) \
+> >>>> +                               pair->value |=3D RISCV_HWPROBE_EXT_#=
+#__ext;       \
+> >>>> +                       else                                        =
+            \
+> >>>> +                               missing |=3D RISCV_HWPROBE_EXT_##__e=
+xt;           \
+> >>>> +               } while (false)
+> >>>> +
+> >>>> +               /*
+> >>>> +                * Only use CHECK_ISA_EXT() for extensions which can=
+ be exposed
+> >>>> +                * to userspace, regardless of the kernel's configur=
+ation, as no
+> >>>> +                * other checks, besides presence in the hart_isa bi=
+tmap, are
+> >>>> +                * made.
+> >>>
+> >>> This comment alludes to a dangerous trap, but I'm having trouble
+> >>> understanding what it is.
+> >>
+> >> You cannot, for example, use this for communicating the presence of F =
+or
+> >> D, since they require a config option to be set before their use is
+> >> safe.
+> >=20
+> > Funnily enough, this comment is immediately contradicted by the vector
+> > subset extensions, where these CHECK_ISA_EXT() macros are used wrapped
+> > in has_vector(). The code looks valid to me, since has_vector() contains
+> > the Kconfig check, but does fly in the face of this comment.
 
-And what about another PowerVR (rogue-based) GPU? There are a lot of 
-different models of rogue GPU in existed SoCs. New driver uses v3 
-firmware, but vendors uses v1/v2 firmwares. Who will provide 
-firmware/source code v3 for all the others models?
+> Yes, the KConfig checks are already done by the headers, adding #ifdef
+> would be redundant even if more coherent with the comment
+
+I don't really understand what the first part of this means, or why using
+avoidable ifdeffery here would be desirable.
+
+> BTW, wouldn't
+> it make more sense to get rid out of the unsupported extensions directly
+> at ISA string parsing ? ie, if kernel is compiled without V support,
+> then do not set the bits corresponding to these in the riscv_isa_ext[]
+> array ? But the initial intent was probably to be able to report the
+> full string through cpuinfo.
+
+Yeah, hysterical raisins I guess, it's always been that way. I don't
+think anyone originally thought about such configurations and that is
+how the cpuinfo stuff behaves. I strongly dislike the
+riscv_isa_extension_available() interface, but one of Drew's patches
+does at least improve things a bit. Kinda waiting for some of the
+patches in flight to settle down before deciding if I want to refactor
+stuff to be less of a potential for shooting oneself in the foot.
+
+--0kZSCNOwIdjxb8Tb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZTEDYQAKCRB4tDGHoIJi
+0hxoAP0Q/QwVBDGTktqXbnElnvW6qMUNCJQnZu8Yc7rQ7OMNJAEAkJ4ESLvJaOki
+BU3KxXVZ+61ZCescByygZiFqNKepPgM=
+=2KUA
+-----END PGP SIGNATURE-----
+
+--0kZSCNOwIdjxb8Tb--
 
