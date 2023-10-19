@@ -1,181 +1,134 @@
-Return-Path: <linux-doc+bounces-604-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-611-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95D507CF451
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 11:47:05 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 237C27CF490
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 12:01:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id D4C17B211F2
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 09:47:02 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DAB03281F28
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 10:01:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8EAF817723;
-	Thu, 19 Oct 2023 09:47:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9460917754;
+	Thu, 19 Oct 2023 10:01:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="HxG9jh2Y"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="D1HDPY72"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97F9D1772F
-	for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 09:46:58 +0000 (UTC)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com [IPv6:2a00:1450:4864:20::334])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5F3DA130
-	for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 02:46:54 -0700 (PDT)
-Received: by mail-wm1-x334.google.com with SMTP id 5b1f17b1804b1-408434ce195so2027715e9.0
-        for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 02:46:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1697708813; x=1698313613; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=8gSJI0J4GVtq5z4H+Knjyf89xMlTd2iwihqRslO1XxI=;
-        b=HxG9jh2YSbKcrYpvYPgdTAzTrkF7JRmMMryd7TPOvEH7gNU6VZ2fwEcZSguRMNKXNL
-         Mc4TsHhgYllcUdLUH7fKsPK52cBe/wfg0PCeFdPgcaNGnUdAKtYwa6DaHdtX5JZ4DBXA
-         E14nLlG8K/nthYjtGYJY6xxFaJpKnfDqVB8W70hfj1L1RgtDjQhZzBEojX4lHyXqBaCv
-         gPNFTl1mk6S7drqYZ/G7uyNn6aw/MofWF5ZEzUkk/y6imTje4++0qZETnFhxEg/GR5zG
-         2lbk4fn0NnN2j0y6qnGJtyaj9tPeWBS6NYKYS5v2GsY/hEwtlwVUNdxhWXAd7YafbLy8
-         8DAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697708813; x=1698313613;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=8gSJI0J4GVtq5z4H+Knjyf89xMlTd2iwihqRslO1XxI=;
-        b=a+EJla9CyBoW/KjK2gKKEr9Hl2M9DGsJ0iZz9gyc8QwDSZTik6s7Zjt+6/rxa4Xl0w
-         YBdJmGONpXlMPu6i/HZMZcQb9hcPC2AwQM2uiQz6Ai400Ai8OX1pXHO/2SxlqLnjSUfI
-         YEoIxTSF2iae1LTbCl/+ZDLDtBtw3MXryj5dMMpJTn8DGmtl8eAZNax7Wo9jfJsfc0z7
-         5BqrSydFcDrzV8bXQv7BNuDkO7Yh8jQ8slvdGzK0naaeX9Q/CGsLXV8RcvtD9pGnjdZK
-         gOZM/1qTquSbXHcMX0HFga4xEoiRoVzwXoxaT0xekeSiTsDyO16pS8PuCZ7L2ZaMLW5W
-         U46w==
-X-Gm-Message-State: AOJu0YyGK6wipFu7zkB/SX54hlXRKuf9Ir6LltRQewgzjpg4TGmt2xES
-	QBGBTFJd3gExyPeYHy9S5LqLJQ==
-X-Google-Smtp-Source: AGHT+IEp9cwDS7FugsmOGBik6CpcSD683Pjyk9iGSH5JgL5wJaPC9ldFPHVkXXRlgk5VZqa1+0FRyg==
-X-Received: by 2002:a5d:5956:0:b0:32d:d8ea:47ac with SMTP id e22-20020a5d5956000000b0032dd8ea47acmr1140369wri.0.1697708812764;
-        Thu, 19 Oct 2023 02:46:52 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:999:a3a0:6933:1fe3:b858:3dde? ([2a01:e0a:999:a3a0:6933:1fe3:b858:3dde])
-        by smtp.gmail.com with ESMTPSA id z3-20020adfe543000000b0031f82743e25sm4053835wrm.67.2023.10.19.02.46.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 19 Oct 2023 02:46:51 -0700 (PDT)
-Message-ID: <0b2cbc89-7892-4c43-898c-03757eaaf3b7@rivosinc.com>
-Date: Thu, 19 Oct 2023 11:46:51 +0200
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD0DA14F90
+	for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 10:01:26 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 24BFBB8;
+	Thu, 19 Oct 2023 03:01:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1697709685; x=1729245685;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=4tVLPdmGhD/Ev5x1gsJNSKEuLw82S1fRviVzD2Ftcyw=;
+  b=D1HDPY72iNb7NauR/lyBdW/6a6MPCJT/XQSpDL7WuBFhAdX2/hk9QU4J
+   76h95Jaz1KSWjQ0T5EMCa2u7hbGKIPT0SDyGtRSCNqmOGcW4Nz2JCVwnl
+   QWoHOJlS0+zW2BHffKpFZY+BfmafLCpq91GBqTFJA3vyGeuL/LPhAUSjK
+   nO7tR9bd/9ucVjVqkz/A/1wSSrUimh6DXrvGooWyeUEY6fxgvAI9zqxKQ
+   0CZ7Gd5wsEtoDJDHxSQi5TGAV6Yqmw64AamnZvu8UWQsvJmt0A29Oh3Mz
+   aQbPobowsAeVPWvznV/QLAXAXVhb1JhIFR8bGkoml1Qe7+HG4bxqZY7Hz
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10867"; a="371278642"
+X-IronPort-AV: E=Sophos;i="6.03,236,1694761200"; 
+   d="scan'208";a="371278642"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Oct 2023 03:01:24 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10867"; a="733512273"
+X-IronPort-AV: E=Sophos;i="6.03,236,1694761200"; 
+   d="scan'208";a="733512273"
+Received: from yujie-x299.sh.intel.com ([10.239.159.77])
+  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Oct 2023 03:01:22 -0700
+From: Yujie Liu <yujie.liu@intel.com>
+To: linux-doc@vger.kernel.org
+Cc: Yujie Liu <yujie.liu@intel.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-kernel@vger.kernel.org,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH] scripts/kernel-doc: match -Werror flag strictly
+Date: Thu, 19 Oct 2023 17:56:37 +0800
+Message-Id: <20231019095637.2471840-1-yujie.liu@intel.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/19] riscv: hwprobe: factorize hwprobe ISA extension
- reporting
-Content-Language: en-US
-To: Evan Green <evan@rivosinc.com>, Conor Dooley <conor@kernel.org>
-Cc: linux-riscv@lists.infradead.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- Palmer Dabbelt <palmer@rivosinc.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Rob Herring <robh+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Albert Ou <aou@eecs.berkeley.edu>, Jonathan Corbet <corbet@lwn.net>,
- Andrew Jones <ajones@ventanamicro.com>, Samuel Ortiz <sameo@rivosinc.com>
-References: <20231017131456.2053396-1-cleger@rivosinc.com>
- <20231017131456.2053396-2-cleger@rivosinc.com>
- <CALs-HssL=wNwj9nRuZwpZhy1CB9p9-X=OqgwBw9zvgA7hA4fEg@mail.gmail.com>
- <20231018-scrap-bankable-a0f321d97a46@spud>
- <20231018-flagpole-footpad-07a6228485f3@spud>
- <CALs-HsteDO0PvAKKQje7wU0f4z8w2V3f7WiHh5+LvQeVaSua1w@mail.gmail.com>
-From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-In-Reply-To: <CALs-HsteDO0PvAKKQje7wU0f4z8w2V3f7WiHh5+LvQeVaSua1w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+In our CI testing, we use some commands as below to only turn a specific
+type of warnings into errors, but we notice that kernel-doc warnings
+are also turned into errors unexpectedly.
 
+$ make KCFLAGS="-Werror=return-type" W=1 kernel/fork.o
 
-On 18/10/2023 19:45, Evan Green wrote:
-> On Wed, Oct 18, 2023 at 10:37 AM Conor Dooley <conor@kernel.org> wrote:
->>
->> On Wed, Oct 18, 2023 at 06:33:34PM +0100, Conor Dooley wrote:
->>> On Wed, Oct 18, 2023 at 10:24:15AM -0700, Evan Green wrote:
->>>> On Tue, Oct 17, 2023 at 6:15 AM Clément Léger <cleger@rivosinc.com> wrote:
->>>>>
->>>>> Factorize ISA extension reporting by using a macro rather than
->>>>> copy/pasting extension names. This will allow adding new extensions more
->>>>> easily.
->>>>>
->>>>> Signed-off-by: Clément Léger <cleger@rivosinc.com>
->>>>> ---
->>>>>  arch/riscv/kernel/sys_riscv.c | 32 ++++++++++++++++++--------------
->>>>>  1 file changed, 18 insertions(+), 14 deletions(-)
->>>>>
->>>>> diff --git a/arch/riscv/kernel/sys_riscv.c b/arch/riscv/kernel/sys_riscv.c
->>>>> index 473159b5f303..e207874e686e 100644
->>>>> --- a/arch/riscv/kernel/sys_riscv.c
->>>>> +++ b/arch/riscv/kernel/sys_riscv.c
->>>>> @@ -145,20 +145,24 @@ static void hwprobe_isa_ext0(struct riscv_hwprobe *pair,
->>>>>         for_each_cpu(cpu, cpus) {
->>>>>                 struct riscv_isainfo *isainfo = &hart_isa[cpu];
->>>>>
->>>>> -               if (riscv_isa_extension_available(isainfo->isa, ZBA))
->>>>> -                       pair->value |= RISCV_HWPROBE_EXT_ZBA;
->>>>> -               else
->>>>> -                       missing |= RISCV_HWPROBE_EXT_ZBA;
->>>>> -
->>>>> -               if (riscv_isa_extension_available(isainfo->isa, ZBB))
->>>>> -                       pair->value |= RISCV_HWPROBE_EXT_ZBB;
->>>>> -               else
->>>>> -                       missing |= RISCV_HWPROBE_EXT_ZBB;
->>>>> -
->>>>> -               if (riscv_isa_extension_available(isainfo->isa, ZBS))
->>>>> -                       pair->value |= RISCV_HWPROBE_EXT_ZBS;
->>>>> -               else
->>>>> -                       missing |= RISCV_HWPROBE_EXT_ZBS;
->>>>> +#define CHECK_ISA_EXT(__ext)                                                   \
->>>>> +               do {                                                            \
->>>>> +                       if (riscv_isa_extension_available(isainfo->isa, __ext)) \
->>>>> +                               pair->value |= RISCV_HWPROBE_EXT_##__ext;       \
->>>>> +                       else                                                    \
->>>>> +                               missing |= RISCV_HWPROBE_EXT_##__ext;           \
->>>>> +               } while (false)
->>>>> +
->>>>> +               /*
->>>>> +                * Only use CHECK_ISA_EXT() for extensions which can be exposed
->>>>> +                * to userspace, regardless of the kernel's configuration, as no
->>>>> +                * other checks, besides presence in the hart_isa bitmap, are
->>>>> +                * made.
->>>>
->>>> This comment alludes to a dangerous trap, but I'm having trouble
->>>> understanding what it is.
->>>
->>> You cannot, for example, use this for communicating the presence of F or
->>> D, since they require a config option to be set before their use is
->>> safe.
->>
->> Funnily enough, this comment is immediately contradicted by the vector
->> subset extensions, where these CHECK_ISA_EXT() macros are used wrapped
->> in has_vector(). The code looks valid to me, since has_vector() contains
->> the Kconfig check, but does fly in the face of this comment.
-> 
-> 
-> Ohh, got it. The word "can" is doing a lot of heavy lifting in that
-> comment. So maybe something like: "This macro performs little in the
-> way of extension-specific kernel readiness checks. It's assumed other
-> gating factors like required Kconfig settings have already been
-> confirmed to support exposing the given extension to usermode". ...
-> But, you know, make it sparkle.
+kernel/fork.c:1406: warning: Function parameter or member 'mm' not described in 'set_mm_exe_file'
+kernel/fork.c:1406: warning: Function parameter or member 'new_exe_file' not described in 'set_mm_exe_file'
+kernel/fork.c:1441: warning: Function parameter or member 'mm' not described in 'replace_mm_exe_file'
+kernel/fork.c:1441: warning: Function parameter or member 'new_exe_file' not described in 'replace_mm_exe_file'
+kernel/fork.c:1491: warning: Function parameter or member 'mm' not described in 'get_mm_exe_file'
+kernel/fork.c:1510: warning: Function parameter or member 'task' not described in 'get_task_exe_file'
+kernel/fork.c:1534: warning: Function parameter or member 'task' not described in 'get_task_mm'
+kernel/fork.c:2109: warning: bad line:
+kernel/fork.c:2130: warning: Function parameter or member 'ret' not described in '__pidfd_prepare'
+kernel/fork.c:2130: warning: Excess function parameter 'pidfd' description in '__pidfd_prepare'
+kernel/fork.c:2179: warning: Function parameter or member 'ret' not described in 'pidfd_prepare'
+kernel/fork.c:2179: warning: Excess function parameter 'pidfd' description in 'pidfd_prepare'
+kernel/fork.c:3195: warning: expecting prototype for clone3(). Prototype was for sys_clone3() instead
+13 warnings as Errors
+make[3]: *** [scripts/Makefile.build:243: kernel/fork.o] Error 13
+make[3]: *** Deleting file 'kernel/fork.o'
+make[2]: *** [scripts/Makefile.build:480: kernel] Error 2
+make[1]: *** [/root/linux/Makefile:1913: .] Error 2
+make: *** [Makefile:234: __sub-make] Error 2
 
-Hi Even,
+From the git history, commit 2c12c8103d8f ("scripts/kernel-doc:
+optionally treat warnings as errors") introduces a new command-line
+option to make kernel-doc warnings into errors. It can also read the
+KCFLAGS environment variable to decide whether to turn this option on,
+but the regex used for matching may not be accurate enough. It can match
+both "-Werror" and "-Werror=<diagnostic-type>", so the option is turned
+on by mistake in the latter case.
 
-Indeed the comment was a bit misleading, is this more clear ?
+Fix this by strictly matching the flag "-Werror": there must be a space
+or start of string in the front, and a space or end of string at the
+end. This can handle all the following cases correctly:
 
-/*
- * Only use CHECK_ISA_EXT() for extensions which are usable by
- * userspace with respect to the kernel current configuration.
- * For instance, ISA extensions that uses float operations
- * should not be exposed when CONFIG_FPU is not set.
- */
+KCFLAGS="-Werror" make W=1 [MATCH]
+KCFLAGS="-Werror=return-type" make W=1 [NO MATCH]
+KCFLAGS="-Wcomment -Werror -Wundef" make W=1 [MATCH]
+KCFLAGS="-Wcomment -Werror=return-type -Wundef" make W=1 [NO MATCH]
 
-Clément
+Fixes: 2c12c8103d8f ("scripts/kernel-doc: optionally treat warnings as errors")
+Signed-off-by: Yujie Liu <yujie.liu@intel.com>
+---
+ scripts/kernel-doc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> 
-> -Evan
+diff --git a/scripts/kernel-doc b/scripts/kernel-doc
+index 6e199a745ccb..d660e1f4b483 100755
+--- a/scripts/kernel-doc
++++ b/scripts/kernel-doc
+@@ -185,7 +185,7 @@ if (defined($ENV{'KBUILD_VERBOSE'}) && $ENV{'KBUILD_VERBOSE'} =~ '1') {
+ if (defined($ENV{'KCFLAGS'})) {
+ 	my $kcflags = "$ENV{'KCFLAGS'}";
+ 
+-	if ($kcflags =~ /Werror/) {
++	if ($kcflags =~ /(?<=^|\s)-Werror(?=$|\s)/) {
+ 		$Werror = 1;
+ 	}
+ }
+-- 
+2.34.1
+
 
