@@ -1,201 +1,110 @@
-Return-Path: <linux-doc+bounces-668-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-670-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D6DA7CFFC3
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 18:39:57 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 909397D0030
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 19:07:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 5CDA1B2116D
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 16:39:54 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9A88DB212B8
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 17:06:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 912D432C6B;
-	Thu, 19 Oct 2023 16:39:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6E70432C62;
+	Thu, 19 Oct 2023 17:06:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="N6on/NJd"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="AyztDa4x"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74A3232C75
-	for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 16:39:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D15EFC433C8;
-	Thu, 19 Oct 2023 16:39:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1697733591;
-	bh=ZexdEiNNC+LPRHxIe+2g3JjtbdL/fbrUvs+KMs1hAvQ=;
-	h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
-	b=N6on/NJddQzika1XMcjbHj7toTNRJyuR5KMRzPvp7mA8LgX+IY8GvugaHVCy8Hzel
-	 rNFneoedbIvB2CQR7cczq3CPe3P83aryz7sCMA9uqJh3XCNYeXNVbkUGBykaLyiLOb
-	 r2A2UooAjRrfk/UetsSuxAJqx4xzh6yeaepQR8pGGmVyjM7np6xSrfncQ+REhCfVM1
-	 oHTHI4vBzhnYuNzjDm//El38reWyxjJ2N/HfEhLUp1e/evBBN1KX+SKt+2i+tvqCNt
-	 GBva0BVUyySgpUl6P35iC0kLE8DzcFih3R/xXqMEX1lVY0eloheMEX6uuY5GjrunOb
-	 Ux+QZo26gYhkQ==
-Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
-	id 6DA82CE041E; Thu, 19 Oct 2023 09:39:51 -0700 (PDT)
-Date: Thu, 19 Oct 2023 09:39:51 -0700
-From: "Paul E. McKenney" <paulmck@kernel.org>
-To: Jonas Oberhauser <jonas.oberhauser@huaweicloud.com>
-Cc: linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
-	linux-doc@vger.kernel.org, Alan Stern <stern@rowland.harvard.edu>,
-	Andrea Parri <parri.andrea@gmail.com>,
-	Will Deacon <will@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Boqun Feng <boqun.feng@gmail.com>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	David Howells <dhowells@redhat.com>,
-	Jade Alglave <j.alglave@ucl.ac.uk>,
-	Luc Maranget <luc.maranget@inria.fr>,
-	Akira Yokosawa <akiyks@gmail.com>,
-	Daniel Lustig <dlustig@nvidia.com>,
-	Joel Fernandes <joel@joelfernandes.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH memory-model] docs: memory-barriers: Add note on compiler
- transformation and address deps
-Message-ID: <f363d6e0-5682-43e7-9a3f-6b896c3cd920@paulmck-laptop>
-Reply-To: paulmck@kernel.org
-References: <ceaeba0a-fc30-4635-802a-668c859a58b2@paulmck-laptop>
- <4110a58a-8db5-57c4-2f5a-e09ee054baaa@huaweicloud.com>
- <1c731fdc-9383-21f2-b2d0-2c879b382687@huaweicloud.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21E392FE2B;
+	Thu, 19 Oct 2023 17:06:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09122C433C8;
+	Thu, 19 Oct 2023 17:06:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1697735213;
+	bh=OfIb+lpv0671Es84Qid81/qEM6OnY8JU1k800ZktAjE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=AyztDa4xFEDQBWGj65Eny50dOxSsQ8HfVh9mGYnsfdPITjjp5TSzmd2A61j18o0dZ
+	 0OH2NgDcKYRk70r2SWg3NAm/rOgOveahn6ZTkwcDUpjG8VVkJ9U/0uEOWnHptksytO
+	 ycG+Wl7shbxsg1ajy0vPnAk1ILawdVgiN87xg3w8=
+Date: Thu, 19 Oct 2023 19:06:49 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Frank Li <Frank.li@nxp.com>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+	miquel.raynal@bootlin.com, conor.culhane@silvaco.com,
+	alexandre.belloni@bootlin.com, robh+dt@kernel.org,
+	krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
+	corbet@lwn.net, joe@perches.com, linux-i3c@lists.infradead.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, imx@lists.linux.dev,
+	jirislaby@kernel.org, linux-serial@vger.kernel.org
+Subject: Re: [PATCH 1/5] i3c: add slave mode support
+Message-ID: <2023101959-smile-oxidizing-7010@gregkh>
+References: <20231018215809.3477437-1-Frank.Li@nxp.com>
+ <20231018215809.3477437-2-Frank.Li@nxp.com>
+ <dd06c2d3-e273-4356-835b-42619543dfab@linaro.org>
+ <ZTFE8hrRgPBrb7e3@lizhi-Precision-Tower-5810>
+ <2023101935-papaya-legible-5849@gregkh>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <1c731fdc-9383-21f2-b2d0-2c879b382687@huaweicloud.com>
+In-Reply-To: <2023101935-papaya-legible-5849@gregkh>
 
-On Wed, Oct 18, 2023 at 12:11:58PM +0200, Jonas Oberhauser wrote:
-> Hi Paul,
-> 
-> on a second thought. Why can't the compiler always do, e.g.,
-> 
->     int *p = READ_ONCE(shared_ptr);
-> 
->     assert (*p == 0);
-> 
-> ~>
-> 
->     int *p = READ_ONCE(shared_ptr);
-> 
->     int val = x; // x is some object that definitely won't segfault, but may
-> very well be owned by another thread right now
->     if (p != &x) val = *p;
-
-The compiler is forbidden from inventing pointer comparisons.
-
->     assert (val == 0);
-> 
-> and in case p == &x, the address dependency is elided
-
-But yes, this is one reason why Documentation/RCU/rcu_dereference.rst
-warns about pointer comparisons.
-
-> Best wishes,
-> 
-> jonas
-> 
-> Am 10/6/2023 um 6:39 PM schrieb Jonas Oberhauser:
-> > Hi Paul,
-> > 
-> > The "more up-to-date information" makes it sound like (some of) the
-> > information in this section is out-of-date/no longer valid.
-
-The old smp_read_barrier_depends() that these section cover really
-does no longer exist.
-
-> > But after reading the sections, it seems the information is valid, but
-> > discusses mostly the history of address dependency barriers.
-> > 
-> > Given that the sepcond part  specifically already starts with a
-> > disclaimer that this information is purely relevant to people interested
-> > in history or working on alpha, I think it would make more sense to
-> > modify things slightly differently.
-> > 
-> > Firstly I'd remove the "historical" part in the first section, and add
-> > two short paragraphs explaining that
-> > 
-> > - every marked access implies a address dependency barrier
-
-This is covered in rcu_dereference.rst.  Or is something missing there?
-Please note that the atomic_read() primitives operate on integers
-rather than pointers, so are off the table.  Yes, in theory, some of
-the value-returning atomic read-modify-write operations could head a
-dependency chain, but these things are sufficiently heavyweight that
-most situations would be better served by an _acquire() suffix than by
-a relaxed version of such an atomic operation.
-
-> > - address dependencies considered by the model are *semantic*
-> > dependencies, meaning that a *syntactic* dependency is not sufficient to
-> > imply ordering; see the rcu file for some examples where compilers can
-> > elide syntactic dependencies
-
-There is a bunch of text in rcu_dereference.rst to this effect.  Or
-is there some aspect that is missing from that document?
-
-The longer-term direction, perhaps a few years from now, is for the
-first section to simply reference rcu_dereference.rst and for the second
-section to be removed completely.
-
-> > Secondly, I'd not add the disclaimer to the second section; there's
-> > already a link to rcu_dereference in that section ( https://github.com/torvalds/linux/blob/master/Documentation/memory-barriers.txt#L634
-> > ), and already a small text explaining that the section is historical.
-
-The problem is that people insist on diving into the middle of documents,
-so sometimes repetition is a necessary form of self defense.  ;-)
-
-But I very much appreciate your review and feedback, and I also apologize
-for my slowness.
-
-							Thanx, Paul
-
-> > Best wishes,
-> > 
-> > jonas
-> > 
-> > 
-> > Am 10/5/2023 um 6:53 PM schrieb Paul E. McKenney:
-> > > The compiler has the ability to cause misordering by destroying
-> > > address-dependency barriers if comparison operations are used. Add a
-> > > note about this to memory-barriers.txt in the beginning of both the
-> > > historical address-dependency sections and point to rcu-dereference.rst
-> > > for more information.
+On Thu, Oct 19, 2023 at 05:46:42PM +0200, Greg KH wrote:
+> On Thu, Oct 19, 2023 at 11:02:10AM -0400, Frank Li wrote:
+> > On Thu, Oct 19, 2023 at 09:00:05AM +0200, Krzysztof Kozlowski wrote:
+> > > On 18/10/2023 23:58, Frank Li wrote:
+> > > > Introduce a new slave core layer in order to support slave functions in
+> > > > linux kernel. This comprises the controller library and function library.
+> > > > Controller library implements functions specific to an slave controller
+> > > > and function library implements functions specific to an slave function.
+> > > > 
+> > > > Introduce a new configfs entry to configure the slave function configuring
+> > > > and bind the slave function with slave controller.
+> > > > 
+> > > > Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> > > > ---
+> > > >  drivers/i3c/Kconfig       |  26 ++
+> > > >  drivers/i3c/Makefile      |   2 +
+> > > >  drivers/i3c/i3c-cfs.c     | 389 +++++++++++++++++++++++++++++
+> > > >  drivers/i3c/slave.c       | 453 ++++++++++++++++++++++++++++++++++
+> > > >  include/linux/i3c/slave.h | 503 ++++++++++++++++++++++++++++++++++++++
+> > > >  5 files changed, 1373 insertions(+)
+> > > >  create mode 100644 drivers/i3c/i3c-cfs.c
+> > > >  create mode 100644 drivers/i3c/slave.c
+> > > >  create mode 100644 include/linux/i3c/slave.h
+> > > > 
+> > > > diff --git a/drivers/i3c/Kconfig b/drivers/i3c/Kconfig
+> > > > index 30a441506f61c..d5f5ca7cd6a56 100644
+> > > > --- a/drivers/i3c/Kconfig
+> > > > +++ b/drivers/i3c/Kconfig
+> > > > @@ -22,3 +22,29 @@ menuconfig I3C
+> > > >  if I3C
+> > > >  source "drivers/i3c/master/Kconfig"
+> > > >  endif # I3C
+> > > > +
+> > > > +config I3C_SLAVE
 > > > 
-> > > Signed-off-by: Joel Fernandes (Google) <joel@joelfernandes.org>
-> > > Signed-off-by: Paul E. McKenney <paulmck@kernel.org>
-> > > 
-> > > diff --git a/Documentation/memory-barriers.txt
-> > > b/Documentation/memory-barriers.txt
-> > > index 06e14efd8662..d414e145f912 100644
-> > > --- a/Documentation/memory-barriers.txt
-> > > +++ b/Documentation/memory-barriers.txt
-> > > @@ -396,6 +396,10 @@ Memory barriers come in four basic varieties:
-> > >        (2) Address-dependency barriers (historical).
-> > > +     [!] This section is marked as HISTORICAL: For more up-to-date
-> > > +     information, including how compiler transformations related to
-> > > pointer
-> > > +     comparisons can sometimes cause problems, see
-> > > +     Documentation/RCU/rcu_dereference.rst.
-> > >          An address-dependency barrier is a weaker form of read
-> > > barrier.  In the
-> > >        case where two loads are performed such that the second
-> > > depends on the
-> > > @@ -556,6 +560,9 @@ There are certain things that the Linux kernel
-> > > memory barriers do not guarantee:
-> > >     ADDRESS-DEPENDENCY BARRIERS (HISTORICAL)
-> > >   ----------------------------------------
-> > > +[!] This section is marked as HISTORICAL: For more up-to-date
-> > > information,
-> > > +including how compiler transformations related to pointer
-> > > comparisons can
-> > > +sometimes cause problems, see Documentation/RCU/rcu_dereference.rst.
-> > >     As of v4.15 of the Linux kernel, an smp_mb() was added to
-> > > READ_ONCE() for
-> > >   DEC Alpha, which means that about the only people who need to pay
-> > > attention
+> > > It doesn't look like you follow Kernel naming convention (see coding style).
+> > 
+> > I checked I3C spec. It use words 'target'.
+> > Is it okay using I3C_TARGET?
 > 
+> Why wouldn't it be?
+
+Sorry, that was snotty of me, long day of driving, my apologies.  Yes,
+please use "target" and the other terminology to reflect this, and not
+the ones you used in your driver as it is against the current kernel
+coding style rules.
+
+thanks,
+
+greg k-h
 
