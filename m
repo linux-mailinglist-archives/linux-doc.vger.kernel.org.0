@@ -1,182 +1,111 @@
-Return-Path: <linux-doc+bounces-619-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-632-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B07E97CF80B
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 14:04:29 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D98A7CF855
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 14:07:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 61F5028218D
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 12:04:28 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4DC681C20F9D
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 12:07:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F6B21EB40;
-	Thu, 19 Oct 2023 12:04:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="gTYYynkp"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67C8C1EB40;
+	Thu, 19 Oct 2023 12:07:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dkim=none
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67EB51DFF8
-	for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 12:04:23 +0000 (UTC)
-Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2AA861FCA
-	for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 05:03:56 -0700 (PDT)
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20231019120353euoutp012e9b7e7dd31ea953c8f40b8647a43b7c~PgKXBQWg80435004350euoutp01c
-	for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 12:03:53 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20231019120353euoutp012e9b7e7dd31ea953c8f40b8647a43b7c~PgKXBQWg80435004350euoutp01c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1697717033;
-	bh=Pl2pglJ8vteCsuKaY+7utYmmg4JPu8Nl70f+8wtaZdQ=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:From;
-	b=gTYYynkpn9mYsvXRB4aKjQB7P+RJwpcZWIuqgOGon12qu+lhkblxA7FwI6GQi8/YY
-	 iSkXk3n0IMwMd/uqAmOUNiw9ey9/ljzmJwudFNi3n2oqOST4wLiCeJe6oTPN0HuXeO
-	 q0XbeyUOzUCLzsm0gHMreSmFt/bNZFETHlbAraDA=
-Received: from eusmges2new.samsung.com (unknown [203.254.199.244]) by
-	eucas1p2.samsung.com (KnoxPortal) with ESMTP id
-	20231019120353eucas1p2669f0cd91acbdf3258bb0db640d6fb92~PgKWqwaEx0934509345eucas1p23;
-	Thu, 19 Oct 2023 12:03:53 +0000 (GMT)
-Received: from eucas1p2.samsung.com ( [182.198.249.207]) by
-	eusmges2new.samsung.com (EUCPMTA) with SMTP id 96.81.11320.92B11356; Thu, 19
-	Oct 2023 13:03:53 +0100 (BST)
-Received: from eusmtrp1.samsung.com (unknown [182.198.249.138]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20231019120353eucas1p1b523f24f9e6b7b2266d7e3fcb7562b43~PgKWL-HNI0542005420eucas1p1m;
-	Thu, 19 Oct 2023 12:03:53 +0000 (GMT)
-Received: from eusmgms1.samsung.com (unknown [182.198.249.179]) by
-	eusmtrp1.samsung.com (KnoxPortal) with ESMTP id
-	20231019120352eusmtrp1cbd462659d7b33ce018c20526cb28c3f~PgKWFWQe63276532765eusmtrp1q;
-	Thu, 19 Oct 2023 12:03:52 +0000 (GMT)
-X-AuditID: cbfec7f4-993ff70000022c38-99-65311b293796
-Received: from eusmtip2.samsung.com ( [203.254.199.222]) by
-	eusmgms1.samsung.com (EUCPMTA) with SMTP id 4E.E0.10549.82B11356; Thu, 19
-	Oct 2023 13:03:52 +0100 (BST)
-Received: from CAMSVWEXC02.scsc.local (unknown [106.1.227.72]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20231019120352eusmtip2a76008e7ee2d0830c48a6ffb97cac334~PgKV2iJxw0457004570eusmtip2w;
-	Thu, 19 Oct 2023 12:03:52 +0000 (GMT)
-Received: from CAMSVWEXC02.scsc.local (2002:6a01:e348::6a01:e348) by
-	CAMSVWEXC02.scsc.local (2002:6a01:e348::6a01:e348) with Microsoft SMTP
-	Server (TLS) id 15.0.1497.2; Thu, 19 Oct 2023 13:03:52 +0100
-Received: from CAMSVWEXC02.scsc.local ([::1]) by CAMSVWEXC02.scsc.local
-	([fe80::3c08:6c51:fa0a:6384%13]) with mapi id 15.00.1497.012; Thu, 19 Oct
-	2023 13:03:52 +0100
-From: Andreas Hindborg <a.hindborg@samsung.com>
-To: Miguel Ojeda <ojeda@kernel.org>
-CC: Masahiro Yamada <masahiroy@kernel.org>, Jonathan Corbet
-	<corbet@lwn.net>, Carlos Bilbao <carlos.bilbao@amd.com>, Wedson Almeida
-	Filho <wedsonaf@gmail.com>, Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng
-	<boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
-	=?iso-8859-1?Q?Bj=F6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, Benno Lossin
-	<benno.lossin@proton.me>, Alice Ryhl <aliceryhl@google.com>,
-	"linux-kbuild@vger.kernel.org" <linux-kbuild@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"rust-for-linux@vger.kernel.org" <rust-for-linux@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"patches@lists.linux.dev" <patches@lists.linux.dev>, Nathan Chancellor
-	<nathan@kernel.org>, Nick Desaulniers <ndesaulniers@google.com>, "Nicolas
- Schier" <nicolas@fjasle.eu>, Martin Rodriguez Reboredo <yakoyoku@gmail.com>,
-	Akira Yokosawa <akiyks@gmail.com>
-Subject: Re: [PATCH 2/2] kbuild: remove old Rust docs output path
-Thread-Topic: [PATCH 2/2] kbuild: remove old Rust docs output path
-Thread-Index: AQHaAdysR6IIS0NbkUKo+EtvDXfUhLBQ9AmA
-Date: Thu, 19 Oct 2023 12:03:51 +0000
-Message-ID: <87sf66iztq.fsf@samsung.com>
-In-Reply-To: <20231018160145.1017340-2-ojeda@kernel.org>
-Accept-Language: en-US, en-GB
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [106.210.248.240]
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1D841DFFC;
+	Thu, 19 Oct 2023 12:07:36 +0000 (UTC)
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E16FF10E5;
+	Thu, 19 Oct 2023 05:07:12 -0700 (PDT)
+Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-6cd0a8bc6dcso826900a34.2;
+        Thu, 19 Oct 2023 05:07:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1697717232; x=1698322032;
+        h=date:subject:message-id:references:in-reply-to:cc:to:from
+         :mime-version:content-transfer-encoding:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=wFRRjT0zTXmC6p8qcDVTA0QbXQCr167IFLosJYeNDXo=;
+        b=prf/oksbjLM3iv73MFwm65sL63gCESPsv7lKDDbW7uD9MMJafKWzsmsM2vAKd0j6QH
+         pbQ2l3Q87KOM+50e/+wFE6f3wHHCn5DMLxAVKIkQbndDYmWaEsocvV9a05gJSUBjYqcg
+         Q7PcWT+eSZhXf/6YrNwLafZbQSXThmSZh66bCIlC5KoBfOQpuTCPl4G9npKZ7p3ct+a1
+         kXTIhmTypVfKLGKSlZgoW11aN+X2dmRnqykUeENIshwSVN2EwoucykadFqrtQAFOVJX2
+         fLfykCaOfERK94mmBL+4yzBpM1w03LU2ke4Bjt4waQSaedz7I7N90hCaY222djpaImNN
+         UVlw==
+X-Gm-Message-State: AOJu0YyHp7u0MF8nZ6JDkOasaE/D+9dThr85J3g+AESzhPEVHnOMZGi+
+	0n/kpgBlp4CWDhge/J9VZw==
+X-Google-Smtp-Source: AGHT+IEfITQC2V/bgA2b+RHY/6I/+aBRIkh/P1bJ3rw0OSLx58gTCW38pQSGxGPP+yMClqzepIgtvw==
+X-Received: by 2002:a05:6830:2010:b0:6cd:bc23:4b55 with SMTP id e16-20020a056830201000b006cdbc234b55mr2070985otp.13.1697717231931;
+        Thu, 19 Oct 2023 05:07:11 -0700 (PDT)
+Received: from herring.priv (66-90-144-107.dyn.grandenetworks.net. [66.90.144.107])
+        by smtp.gmail.com with ESMTPSA id m3-20020a4abc83000000b0057377b1c1c8sm994141oop.24.2023.10.19.05.07.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 19 Oct 2023 05:07:11 -0700 (PDT)
+Received: (nullmailer pid 549233 invoked by uid 1000);
+	Thu, 19 Oct 2023 12:07:10 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA02SbUxTZxTHfW5vb29Lai61k2dFIYGQoGzlrZtPFsbUSbxmWaJbdNm+uDpu
-	kK1QbAV1MZMC0vAiY2NMbNlsUSwlMFwtE8qLDJOCAzKhrrCaOiBtU2HxBdStaOlsL0v49jvn
-	/M/5n+fkITkiDSEh8wuPM6pCuSKBEOC/2AO/v74tNp1JC9q2oH775yiov85Do9NlOHrkLOOi
-	mds3OKjDqsFQQ50OQ54hLUCT44sAGSsv4+iFrQdDDlszgeZmZ7hIa/YS6FF9CEO+gVEuMl80
-	AeQYnQKoy3eTg65e6QToToWWu/MV+uxUkKBtw9cI+nLVCkb36tw82mAppi3tVQTtv3YB0Jfq
-	Grj0P9p+gq6ttGD0siVuf9QngqxcRpFfwqhSsz8VHK0q/ZNbpOOfHLQaQSno5VUDPgkpGfT/
-	XcOtBgJSRLUBOLvUgbHBEwADMyZOWCWilgFsevZeNSAjHW0PMlmNCcBv6kI4G7zU/PXtBMEG
-	4wB2V5jW5poBdIw5IqMIKhU6O5wRFlOJsHRoIdLBoYw8+MPEHAgXNlG74G/LQR4r2g0nu6e5
-	YW8xlQFv1UeF0ziVBNt8nUSYhVQydK0+x8LMpxC8+sAVaQXUVjhvXokwh4qBLs9FjH10NGzR
-	93NY3gxXbXMEy6/BiWkPYDkNdrcO4iwnwr7lZpydI4Uzjd8RLKfAK8ZFDrtDNLx1wbOm/0MA
-	55eS2XPtgeWuM2x6E1wYsa7dfQsca6jF60GKbt12unUOunUOunUOBoC3gximWF2Qx6gzCpkT
-	UrW8QF1cmCf9TFlgAS9/6djqyJMeYFp4LB0GGAmGASQ5CWJhEp3GiIS58lNfMirlYVWxglEP
-	g1gST4gRJuXGMyIqT36c+YJhihjV/1WM5EtKsa2XpmqeKjwuc46at3JP1hQ4Fnpr53xRSby+
-	Y+K2uevw18mDS973CfuAf7V3495zA1kbmivifM1+03PaMew8gPWLsxPTgzllkta6SuU+b6bY
-	674eLQzpZUmGPe80Lu24++73eo2pNeUs7+033U994/6bksBiRpSsR5M/9CJE7Wg8T6YeqY2m
-	WyYT263P5oDnxwPMR6eMRq01PrvCe/qO/6dfq6La++4pNp5sGXn1oLA8074r66t/a+pveMZP
-	l3947IQwAN2zmdtk5MO+3DhFr1t65FyyafeG+/s3H7KPGrY/hvcl84f2LvzcWUJ/LGpSnlF2
-	xX7gPM/vvGvI0bzx8GACrj4qT9/OUanl/wGmOjkIFAQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA02Sa0xTZxjH855zenqQNTlgCe/AyyzDMdHSlsLeOmFs++DBDwZjsmwgKZ2c
-	AAot66FOd8mqGyCwkU7nEqqUdnKxnQwoolw6ZJUIBRcuOsqYkl06xmABSTFmTNhajkv49nsu
-	/+eWh8LDjWQUVaAtYfVaTaGE3EQMrw1M74mLlrOyzkU5ct0+hlYv3hCiQe8ZAj2cOCNAk6M3
-	cXT12mkMna82Y8jXVw7Q2J15gGxl9QR60t2Jobvdl0j0y8+TAlRu/51ED03/Ymjm20EBstc1
-	AXR3cByglplbOGptbAbo3iflgrQIpnR8lWS63e0kU1+xgjFd5gdCxuo0ME5HBcnMttcA5nL1
-	eQHzuNxFMp+WOTHG79yWEZop3afXGUrY5/J1XEmKJEuOFFK5CkkVSpVUnvhS9l5FkiQhdV8u
-	W1hwgtUnpOZI8yuMPwqKzSEne6/ZgBF0CSsBRUFaCa8sJFaCTVQ43QCgyeQjKkFIwL8Fti3/
-	IOB5M3wyUUnySUsA3v/YI+SNOwDOjVhx3rADeMvTti4n6QQ4cXUCD7KYjoHGvrl1OU7bhNA8
-	3CIMBjbTr8Ih/6qQT3oNjnV4BcGZxLQCekyhQTdBx8IrM81kkEV0HJxa+wfjm3UB2OO8iQUD
-	ITSCrQtT63UAvRX+al9ZZ5yOhFO+OozfgYb1rhGc5wj4529rT3fbDb/3+gDPMtjR0Pt0/xjY
-	479E8HWkcPLCFyTP8bDRNo/zA4VBT42PMIFo84Z25g0S8waJeYPECggHELMGriiviJNLOU0R
-	Z9DmSY/qipwg8IrXb//d3gksc0tSN8Ao4AaQwiViUSwjY8NFuZpT77F6nVpvKGQ5N0gKHOlz
-	PCriqC7wy9oStTxZliRXJqtkSarkREmkKL34rCacztOUsMdZtpjV/6/DqJAoI/bMMTGHD1xU
-	niP+EN0vVWeIL/iz3ti/03G9EL719a7Tpob3QabhganU63XUDh20Hm/K2O05tTPXkjaiztac
-	uLe/7lGMhODMzPRoc1ZdlS9tmaM+3IotgvltVnXtgcX5dOZd+ZJRYDly2ZHyna6AOjD0utoy
-	Glf2QWjCCzYytlZzcMtaVWPZ3sX+N3ush3pnv+nHi+N3nK0+HHnyyz6Dq2qHVbKSs6fjUFO0
-	c3lh+2eWmrTpoggiMTznp/GwzrS/slJB8lcuo03r8ttfrHiU0b90rq0zZRjkvvI8puBuHPlo
-	MKz18Xa1aeAd7WwfE5Men61sdLtfVvWPpWQ+e/htY0tg+HyNfBeu5zT/AUxh2agTBAAA
-X-CMS-MailID: 20231019120353eucas1p1b523f24f9e6b7b2266d7e3fcb7562b43
-X-Msg-Generator: CA
-X-RootMTR: 20231018160211eucas1p20859b897fc44428db3ead0809c6d299c
-X-EPHeader: CA
-CMS-TYPE: 201P
-X-CMS-RootMailID: 20231018160211eucas1p20859b897fc44428db3ead0809c6d299c
-References: <20231018160145.1017340-1-ojeda@kernel.org>
-	<CGME20231018160211eucas1p20859b897fc44428db3ead0809c6d299c@eucas1p2.samsung.com>
-	<20231018160145.1017340-2-ojeda@kernel.org>
+From: Rob Herring <robh@kernel.org>
+To: Frank Li <Frank.Li@nxp.com>
+Cc: gregkh@linuxfoundation.org, linux-doc@vger.kernel.org, conor.culhane@silvaco.com, conor+dt@kernel.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, alexandre.belloni@bootlin.com, imx@lists.linux.dev, linux-i3c@lists.infradead.org, jirislaby@kernel.org, krzysztof.kozlowski+dt@linaro.org, miquel.raynal@bootlin.com, linux-serial@vger.kernel.org, robh+dt@kernel.org, corbet@lwn.net, joe@perches.com
+In-Reply-To: <20231018215809.3477437-3-Frank.Li@nxp.com>
+References: <20231018215809.3477437-1-Frank.Li@nxp.com>
+ <20231018215809.3477437-3-Frank.Li@nxp.com>
+Message-Id: <169771723040.549216.11346182362736118901.robh@kernel.org>
+Subject: Re: [PATCH 2/5] dt-bindings: i3c: svc: add compatible string i3c:
+ silvaco,i3c-slave
+Date: Thu, 19 Oct 2023 07:07:10 -0500
 
 
-Miguel Ojeda <ojeda@kernel.org> writes:
+On Wed, 18 Oct 2023 17:58:06 -0400, Frank Li wrote:
+> Add compatible string 'silvaco,i3c-slave' for slave mode.
+> 
+> Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> ---
+>  .../devicetree/bindings/i3c/silvaco,i3c-master.yaml       | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+> 
 
-> The Rust code documentation output path moved from `rust/doc` to
-> `Documentation/output/rust/rustdoc`. The `make cleandocs` target
-> takes care of cleaning it now since it is integrated with the rest
-> of the documentation.
->
-> Thus remove the old reference.
->
-> Fixes: 48fadf440075 ("docs: Move rustdoc output, cross-reference it")
-> Signed-off-by: Miguel Ojeda <ojeda@kernel.org>
->
+My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
+on your patch (DT_CHECKER_FLAGS is new in v5.13):
 
-Reviewed-by: Andreas Hindborg <a.hindborg@samsung.com>
+yamllint warnings/errors:
 
- ---
->  Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/Makefile b/Makefile
-> index 373649c7374e..040018111f32 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1474,7 +1474,7 @@ endif # CONFIG_MODULES
->  # Directories & files removed with 'make clean'
->  CLEAN_FILES +=3D vmlinux.symvers modules-only.symvers \
->  	       modules.builtin modules.builtin.modinfo modules.nsdeps \
-> -	       compile_commands.json .thinlto-cache rust/test rust/doc \
-> +	       compile_commands.json .thinlto-cache rust/test \
->  	       rust-project.json .vmlinux.objs .vmlinux.export.c
-> =20
->  # Directories & files removed with 'make mrproper'
+dtschema/dtc warnings/errors:
+/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/i3c/silvaco,i3c-master.yaml: properties:compatible:const: {'enum': ['silvaco,i3c-master-v1', 'silvaco,i3c-slave-v1']} is not of type 'integer', 'string'
+	from schema $id: http://devicetree.org/meta-schemas/keywords.yaml#
+/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/i3c/silvaco,i3c-master.yaml: properties:compatible:const: {'enum': ['silvaco,i3c-master-v1', 'silvaco,i3c-slave-v1']} is not of type 'string'
+	from schema $id: http://devicetree.org/meta-schemas/string-array.yaml#
+/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/i3c/silvaco,i3c-master.example.dtb: i3c-master@a0000000: compatible: {'enum': ['silvaco,i3c-master-v1', 'silvaco,i3c-slave-v1']} was expected
+	from schema $id: http://devicetree.org/schemas/i3c/silvaco,i3c-master.yaml#
+/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/i3c/silvaco,i3c-master.example.dtb: i3c-master@a0000000: Unevaluated properties are not allowed ('compatible' was unexpected)
+	from schema $id: http://devicetree.org/schemas/i3c/silvaco,i3c-master.yaml#
+
+doc reference errors (make refcheckdocs):
+
+See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20231018215809.3477437-3-Frank.Li@nxp.com
+
+The base for the series is generally the latest rc1. A different dependency
+should be noted in *this* patch.
+
+If you already ran 'make dt_binding_check' and didn't see the above
+error(s), then make sure 'yamllint' is installed and dt-schema is up to
+date:
+
+pip3 install dtschema --upgrade
+
+Please check and re-submit after running the above command yourself. Note
+that DT_SCHEMA_FILES can be set to your schema file to speed up checking
+your schema. However, it must be unset to test all examples with your schema.
+
 
