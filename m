@@ -1,246 +1,168 @@
-Return-Path: <linux-doc+bounces-667-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-669-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C7017CFF90
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 18:29:02 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id EF1007CFFC9
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 18:40:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 34B97B20E38
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 16:28:59 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 8E483282242
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Oct 2023 16:40:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 88C5432C67;
-	Thu, 19 Oct 2023 16:28:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DF98315A1;
+	Thu, 19 Oct 2023 16:40:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="AQyjuLqI"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="LhvilC3Q"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8FCC321B5
-	for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 16:28:53 +0000 (UTC)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com [IPv6:2a00:1450:4864:20::632])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1C82611B
-	for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 09:28:51 -0700 (PDT)
-Received: by mail-ej1-x632.google.com with SMTP id a640c23a62f3a-9c2a0725825so789729766b.2
-        for <linux-doc@vger.kernel.org>; Thu, 19 Oct 2023 09:28:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1697732929; x=1698337729; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ujM1wfP0X1TfyN6UNvLQZYpXjOqlX96jhGMomCpg6WI=;
-        b=AQyjuLqISg0ol/mOPtn6SNlLQA+qjuWdrfLrsRK8KDMNU27oQCYaQbuEx/E03Z7r3l
-         ixzsh7gathuMmEdmjAqwGN7kDSIYAx3vynocFxmpsmXOaQISiz13D8LxiP0TrpUy4c/s
-         2uBZwKIQKf4kAN+XKW8/ekaMnHimQLFExuGMyN5r9OzFpsu5i3U4TlYsxWV05eQc2KqW
-         3PD2ooI0VHxGegUb+WErzby4DMX9jrr5E4CPu30C2OkK5cCTCcmaSTOYOoGA8qbXwS1i
-         VaoYgLRj7zzBAs27Wo3yEKUI1Y4YvAkZFES/ipnmmVEH4uOKemE9t11M0RXDcLsadpmN
-         29fA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697732929; x=1698337729;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ujM1wfP0X1TfyN6UNvLQZYpXjOqlX96jhGMomCpg6WI=;
-        b=ZBjSmf8ucU5Dy8/f9LXA2pcWOgUAC0vYC/DzTRdItv2i18SnSM8qg2rXh3wSuAUPvm
-         7b1aOMu002qwGV8jeVvUo5J3QM3UzVhoCaZ0+QxWarrMbjELtpvrMkOa7VdlTYdzqPwi
-         BiUcwtwjRs3TTVXZYtsAHPsoz46MM8FMlStIC1c6GlZLdc1aNq3oLShgrw7kLtXayrKX
-         6DSRnFdZo0y9SzauLLWOTExGHdLruwND63hgCsTCcMPZAB4e+XWONmizd+ehtnUHjaK2
-         SpSORGpWPfrFRGaSBLSXopUGhT03KfoGj3qjA/wFmdnKZB5QGblNbx6GGc9zU/mz5YxM
-         3Few==
-X-Gm-Message-State: AOJu0YwluWf1xIYD+cS1MoyoB1zUO1Z3303tax0pXVJ/GVJQnPbmOuZU
-	do2pvPw5jvhgGqTLQjLZbYeOvFV1+TwGCtHmOwxZEA==
-X-Google-Smtp-Source: AGHT+IH1mhZ593C522jUwS7zeIu38LLXk4SWolAFCunW7qpDA82KIVoklWuarRvwv+WrfLGsNtAXOyLsixAfdhaKuns=
-X-Received: by 2002:a17:906:7308:b0:9c7:5a01:ffe6 with SMTP id
- di8-20020a170906730800b009c75a01ffe6mr2197542ejc.13.1697732929159; Thu, 19
- Oct 2023 09:28:49 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10B1A32C62;
+	Thu, 19 Oct 2023 16:40:34 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C6C84124;
+	Thu, 19 Oct 2023 09:40:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1697733633; x=1729269633;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=B68lb5bc3nlqxKW2HoQvNAzdwFIr+BMgv0ZP+rlvfxo=;
+  b=LhvilC3Qg9AxwrA9+1Yqeoirpjyhe/Fmc27Ug9GaQZ41neAjF517lXPf
+   opcViqgh/0TXAyb+qJc/+cgnZPEHphDBPkGlEyrMNnWSJdP5QZ9tmqGmu
+   M8c4IVDGmqGdWnDx2D+I8rkwyyDXw1XfP8r+DFI0kt75BxSfiX8CuXPek
+   l9ibuUaYm8nFJjwtg6o2fml6dWszX4jz38LsjqI+sSuRv+RvftfeMX5pX
+   8tFeaiqoc/B835QueXDypu/2VMD0gis0A73JfG1fpO1zFMPlJ0z16Uewg
+   2BqwtB2OsmO9oBEw4PKxyJne2Pm750TKfqj1F/OgCkiNYDokUXkPE7PAi
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10868"; a="7864227"
+X-IronPort-AV: E=Sophos;i="6.03,237,1694761200"; 
+   d="scan'208";a="7864227"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Oct 2023 09:36:24 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10868"; a="706900365"
+X-IronPort-AV: E=Sophos;i="6.03,237,1694761200"; 
+   d="scan'208";a="706900365"
+Received: from lkp-server01.sh.intel.com (HELO 8917679a5d3e) ([10.239.97.150])
+  by orsmga003.jf.intel.com with ESMTP; 19 Oct 2023 09:36:16 -0700
+Received: from kbuild by 8917679a5d3e with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1qtW0L-0002GE-2M;
+	Thu, 19 Oct 2023 16:36:13 +0000
+Date: Fri, 20 Oct 2023 00:35:56 +0800
+From: kernel test robot <lkp@intel.com>
+To: Nitesh Shetty <nj.shetty@samsung.com>, Jens Axboe <axboe@kernel.dk>,
+	Jonathan Corbet <corbet@lwn.net>, Alasdair Kergon <agk@redhat.com>,
+	Mike Snitzer <snitzer@kernel.org>, dm-devel@lists.linux.dev,
+	Keith Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>,
+	Sagi Grimberg <sagi@grimberg.me>,
+	Chaitanya Kulkarni <kch@nvidia.com>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>
+Cc: oe-kbuild-all@lists.linux.dev, martin.petersen@oracle.com,
+	linux-scsi@vger.kernel.org, nitheshshetty@gmail.com,
+	anuj1072538@gmail.com, gost.dev@samsung.com, mcgrof@kernel.org,
+	Nitesh Shetty <nj.shetty@samsung.com>,
+	Hannes Reinecke <hare@suse.de>,
+	Damien Le Moal <damien.lemoal@opensource.wdc.com>,
+	Anuj Gupta <anuj20.g@samsung.com>,
+	Vincent Fu <vincent.fu@samsung.com>, linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH v17 12/12] null_blk: add support for copy offload
+Message-ID: <202310200001.UU0bBx9w-lkp@intel.com>
+References: <20231019110147.31672-13-nj.shetty@samsung.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20231017232152.2605440-1-nphamcs@gmail.com> <20231017232152.2605440-3-nphamcs@gmail.com>
- <CAJD7tka2aVKBJj6cYutcVzOGzj_6gop6-ytSmWWML=sEe9qHbA@mail.gmail.com>
- <CAKEwX=N3CnKE+gu-EP98Wr3goQV0Z8fXn_nBPW_H_rupjkBwhA@mail.gmail.com>
- <CAJD7tkbBBTatK7LUHw__0K_8hykoepygfYLJuZx01CD8V+CZvg@mail.gmail.com> <CA+CLi1i9GHxMvMj16WPr7h_SNUhYo1rr9U8VtJDtOxiVhVznbg@mail.gmail.com>
-In-Reply-To: <CA+CLi1i9GHxMvMj16WPr7h_SNUhYo1rr9U8VtJDtOxiVhVznbg@mail.gmail.com>
-From: Yosry Ahmed <yosryahmed@google.com>
-Date: Thu, 19 Oct 2023 09:28:09 -0700
-Message-ID: <CAJD7tkZqpU6cVD6VGKooOJ2yf4Oodd5QUuHWLh8PYMLtZA-9Lw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/5] zswap: make shrinking memcg-aware
-To: Domenico Cerasuolo <cerasuolodomenico@gmail.com>
-Cc: Nhat Pham <nphamcs@gmail.com>, akpm@linux-foundation.org, hannes@cmpxchg.org, 
-	sjenning@redhat.com, ddstreet@ieee.org, vitaly.wool@konsulko.com, 
-	mhocko@kernel.org, roman.gushchin@linux.dev, shakeelb@google.com, 
-	muchun.song@linux.dev, linux-mm@kvack.org, kernel-team@meta.com, 
-	linux-kernel@vger.kernel.org, cgroups@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, shuah@kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231019110147.31672-13-nj.shetty@samsung.com>
 
-On Thu, Oct 19, 2023 at 5:47=E2=80=AFAM Domenico Cerasuolo
-<cerasuolodomenico@gmail.com> wrote:
->
-> On Thu, Oct 19, 2023 at 3:12=E2=80=AFAM Yosry Ahmed <yosryahmed@google.co=
-m> wrote:
-> >
-> > On Wed, Oct 18, 2023 at 4:47=E2=80=AFPM Nhat Pham <nphamcs@gmail.com> w=
-rote:
-> > >
-> > > On Wed, Oct 18, 2023 at 4:20=E2=80=AFPM Yosry Ahmed <yosryahmed@googl=
-e.com> wrote:
-> > > >
-> > > > On Tue, Oct 17, 2023 at 4:21=E2=80=AFPM Nhat Pham <nphamcs@gmail.co=
-m> wrote:
-> > > > >
-> > > > > From: Domenico Cerasuolo <cerasuolodomenico@gmail.com>
-> > > > >
-> > > > > Currently, we only have a single global LRU for zswap. This makes=
- it
-> > > > > impossible to perform worload-specific shrinking - an memcg canno=
-t
-> > > > > determine which pages in the pool it owns, and often ends up writ=
-ing
-> > > > > pages from other memcgs. This issue has been previously observed =
-in
-> > > > > practice and mitigated by simply disabling memcg-initiated shrink=
-ing:
-> > > > >
-> > > > > https://lore.kernel.org/all/20230530232435.3097106-1-nphamcs@gmai=
-l.com/T/#u
-> > > > >
-> > > > > This patch fully resolves the issue by replacing the global zswap=
- LRU
-> > > > > with memcg- and NUMA-specific LRUs, and modify the reclaim logic:
-> > > > >
-> > > > > a) When a store attempt hits an memcg limit, it now triggers a
-> > > > >    synchronous reclaim attempt that, if successful, allows the ne=
-w
-> > > > >    hotter page to be accepted by zswap.
-> > > > > b) If the store attempt instead hits the global zswap limit, it w=
-ill
-> > > > >    trigger an asynchronous reclaim attempt, in which an memcg is
-> > > > >    selected for reclaim in a round-robin-like fashion.
-> > > >
-> > > > Could you explain the rationale behind the difference in behavior h=
-ere
-> > > > between the global limit and the memcg limit?
-> > >
-> > > The global limit hit reclaim behavior was previously asynchronous too=
-.
-> > > We just added the round-robin part because now the zswap LRU is
-> > > cgroup-aware :)
-> > >
-> > > For the cgroup limit hit, however, we cannot make it asynchronous,
-> > > as it is a bit hairy to add a per-cgroup shrink_work. So, we just
-> > > perform the reclaim synchronously.
-> > >
-> > > The question is whether it makes sense to make the global limit
-> > > reclaim synchronous too. That is a task of its own IMO.
-> >
-> > Let's add such context to the commit log, and perhaps an XXX comment
-> > in the code asking whether we should consider doing the reclaim
-> > synchronously for the global limit too.
->
-> Makes sense, I wonder if the original reason for switching from a synchro=
-nous
-> to asynchronous reclaim will still be valid with the shrinker in place.
->
+Hi Nitesh,
 
-Seems like it was done as part of the hysteresis that stops accepting
-pages into zswap once full until it reaches a certain threshold,
-commit 45190f01dd40 ("mm/zswap.c: add allocation hysteresis if pool
-limit is hit"). I guess the point is that zswap will stop accepting
-pages when the limit is hit anyway, so no need to synchronously shrink
-it since we can't store soon anyway. More useful context for the
-commit log.
+kernel test robot noticed the following build warnings:
 
-> >
-> > >
-> > > (FWIW, this somewhat mirrors the direct reclaimer v.s kswapd
-> > > story to me, but don't quote me too hard on this).
-> > >
-> > [..]
-> > >
-> > > >
-> > > > >         /* Hold a reference to prevent a free during writeback */
-> > > > >         zswap_entry_get(entry);
-> > > > >         spin_unlock(&tree->lock);
-> > > > >
-> > > > > -       ret =3D zswap_writeback_entry(entry, tree);
-> > > > > +       writeback_result =3D zswap_writeback_entry(entry, tree);
-> > > > >
-> > > > >         spin_lock(&tree->lock);
-> > > > > -       if (ret) {
-> > > > > -               /* Writeback failed, put entry back on LRU */
-> > > > > -               spin_lock(&pool->lru_lock);
-> > > > > -               list_move(&entry->lru, &pool->lru);
-> > > > > -               spin_unlock(&pool->lru_lock);
-> > > > > +       if (writeback_result) {
-> > > > > +               zswap_reject_reclaim_fail++;
-> > > > > +               memcg =3D get_mem_cgroup_from_entry(entry);
-> > > > > +               spin_lock(lock);
-> > > > > +               /* we cannot use zswap_lru_add here, because it i=
-ncrements node's lru count */
-> > > > > +               list_lru_putback(&entry->pool->list_lru, item, en=
-try_to_nid(entry), memcg);
-> > > > > +               spin_unlock(lock);
-> > > > > +               mem_cgroup_put(memcg);
-> > > > > +               ret =3D LRU_RETRY;
-> > > > >                 goto put_unlock;
-> > > > >         }
-> > > > > +       zswap_written_back_pages++;
-> > > >
-> > > > Why is this moved here from zswap_writeback_entry()? Also why is
-> > > > zswap_reject_reclaim_fail incremented here instead of inside
-> > > > zswap_writeback_entry()?
-> > >
-> > > Domenico should know this better than me, but my understanding
-> > > is that moving it here protects concurrent modifications of
-> > > zswap_written_back_pages with the tree lock.
-> > >
-> > > Is writeback single-threaded in the past? This counter is non-atomic,
-> > > and doesn't seem to be protected by any locks...
-> > >
-> > > There definitely can be concurrent stores now though - with
-> > > a synchronous reclaim from cgroup-limit hit and another
-> > > from the old shrink worker.
-> > >
-> > > (and with the new zswap shrinker, concurrent reclaim is
-> > > the expectation!)
-> >
-> > The comment above the stats definition stats that they are left
-> > unprotected purposefully. If we want to fix that let's do it
-> > separately. If this patch makes it significantly worse such that it
-> > would cause a regression, let's at least do it in a separate patch.
-> > The diff here is too large already.
-> >
-> > >
-> > > zswap_reject_reclaim_fail was previously incremented in
-> > > shrink_worker I think. We need it to be incremented
-> > > for the shrinker as well, so might as well move it here.
-> >
-> > Wouldn't moving it inside zswap_writeback_entry() near incrementing
-> > zswap_written_back_pages make it easier to follow?
->
-> As Nhat said, zswap_reject_reclaim_fail++ had to be moved, I naturally mo=
-ved it
-> here because it's where we act upon the result of the writeback. I then n=
-oticed
-> that zswap_written_back_pages++ was elsewhere and decided to move that as=
- well
-> so that they're in the same place and at least they're under the tree loc=
-k.
->
-> It's not meant to fix the unprotected counters, it's just a mitigation si=
-nce we
-> are forced to move at least one of them.
+[auto build test WARNING on 213f891525c222e8ed145ce1ce7ae1f47921cb9c]
 
-I see. Just for my own understanding, it would be correct to update
-them in zswap_writeback_entry(), but we choose to do it here as we
-happen to hold the lock so we get the free synchronization? I think it
-could be beneficial as we may see increased concurrent writeback with
-this series. Probably something to call out in the commit log as well.
+url:    https://github.com/intel-lab-lkp/linux/commits/Nitesh-Shetty/block-Introduce-queue-limits-and-sysfs-for-copy-offload-support/20231019-200658
+base:   213f891525c222e8ed145ce1ce7ae1f47921cb9c
+patch link:    https://lore.kernel.org/r/20231019110147.31672-13-nj.shetty%40samsung.com
+patch subject: [PATCH v17 12/12] null_blk: add support for copy offload
+config: parisc-allyesconfig (https://download.01.org/0day-ci/archive/20231020/202310200001.UU0bBx9w-lkp@intel.com/config)
+compiler: hppa-linux-gcc (GCC) 13.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231020/202310200001.UU0bBx9w-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202310200001.UU0bBx9w-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+   In file included from include/trace/define_trace.h:102,
+                    from drivers/block/null_blk/trace.h:104,
+                    from drivers/block/null_blk/main.c:15:
+   drivers/block/null_blk/./trace.h: In function 'trace_raw_output_nullb_copy_op':
+>> drivers/block/null_blk/./trace.h:91:27: warning: format '%lu' expects argument of type 'long unsigned int', but argument 7 has type 'size_t' {aka 'unsigned int'} [-Wformat=]
+      91 |                 TP_printk("%s req=%-15s: dst=%llu, src=%llu, len=%lu",
+         |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   include/trace/trace_events.h:203:34: note: in definition of macro 'DECLARE_EVENT_CLASS'
+     203 |         trace_event_printf(iter, print);                                \
+         |                                  ^~~~~
+   include/trace/trace_events.h:45:30: note: in expansion of macro 'PARAMS'
+      45 |                              PARAMS(print));                   \
+         |                              ^~~~~~
+   drivers/block/null_blk/./trace.h:73:1: note: in expansion of macro 'TRACE_EVENT'
+      73 | TRACE_EVENT(nullb_copy_op,
+         | ^~~~~~~~~~~
+   drivers/block/null_blk/./trace.h:91:17: note: in expansion of macro 'TP_printk'
+      91 |                 TP_printk("%s req=%-15s: dst=%llu, src=%llu, len=%lu",
+         |                 ^~~~~~~~~
+   In file included from include/trace/trace_events.h:237:
+   drivers/block/null_blk/./trace.h:91:68: note: format string is defined here
+      91 |                 TP_printk("%s req=%-15s: dst=%llu, src=%llu, len=%lu",
+         |                                                                  ~~^
+         |                                                                    |
+         |                                                                    long unsigned int
+         |                                                                  %u
+
+
+vim +91 drivers/block/null_blk/./trace.h
+
+    72	
+    73	TRACE_EVENT(nullb_copy_op,
+    74			TP_PROTO(struct request *req,
+    75				 sector_t dst, sector_t src, size_t len),
+    76			TP_ARGS(req, dst, src, len),
+    77			TP_STRUCT__entry(
+    78					 __array(char, disk, DISK_NAME_LEN)
+    79					 __field(enum req_op, op)
+    80					 __field(sector_t, dst)
+    81					 __field(sector_t, src)
+    82					 __field(size_t, len)
+    83			),
+    84			TP_fast_assign(
+    85				       __entry->op = req_op(req);
+    86				       __assign_disk_name(__entry->disk, req->q->disk);
+    87				       __entry->dst = dst;
+    88				       __entry->src = src;
+    89				       __entry->len = len;
+    90			),
+  > 91			TP_printk("%s req=%-15s: dst=%llu, src=%llu, len=%lu",
+    92				  __print_disk_name(__entry->disk),
+    93				  blk_op_str(__entry->op),
+    94				  __entry->dst, __entry->src, __entry->len)
+    95	);
+    96	#endif /* _TRACE_NULLB_H */
+    97	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
