@@ -1,74 +1,44 @@
-Return-Path: <linux-doc+bounces-1028-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-1031-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 784AC7D575C
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Oct 2023 18:06:00 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 34C487D57E2
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Oct 2023 18:20:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EFD78B20FB9
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Oct 2023 16:05:57 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5D9391C20C70
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Oct 2023 16:20:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5DBEA39922;
-	Tue, 24 Oct 2023 16:05:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b="Jem4Xr0M"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A55F266C4;
+	Tue, 24 Oct 2023 16:20:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dkim=none
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6790338F92;
-	Tue, 24 Oct 2023 16:05:52 +0000 (UTC)
-Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk [IPv6:2001:4d48:ad52:32c8:5054:ff:fe00:142])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6206783;
-	Tue, 24 Oct 2023 09:05:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
-	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=AeUCwFyYTQcTT6ch132eQcfBZRX+bCc7/V0DsvmSMbU=; b=Jem4Xr0MuEmgPQKcRUsvQA06Ae
-	4KTpY1w0KQDNMUuGCJvn4vEzXXO4EA9Cd+lWQhIPj++cDEEI9o7Lel5Ig3IRsiTLPY+ogt2PpQoPO
-	hejHQO1VropWoTxGLx7LgX888GdonKtLsn7/Z50NFa1ibB0WJxo8XMavW7seuTf40VtN3nwXqjDMc
-	5oIb/knNNgEy1zOuwtJGEgv183tRDP1PvW7Ol0WRNS4w9Wp5Ei4e9zVHvCZkGvRSJd3r7Z6jC4Lhg
-	5UFDuW04m+3yzFObpswJkyCZNtGWqJmfJ6bkd7OhCo8Gq0xxKWcfux49gmXW6jZlXQujxpl3T8sN+
-	J9i46lOA==;
-Received: from shell.armlinux.org.uk ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:55354)
-	by pandora.armlinux.org.uk with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <linux@armlinux.org.uk>)
-	id 1qvJuY-0004cs-1H;
-	Tue, 24 Oct 2023 17:05:42 +0100
-Received: from linux by shell.armlinux.org.uk with local (Exim 4.94.2)
-	(envelope-from <linux@shell.armlinux.org.uk>)
-	id 1qvJuW-00062N-QM; Tue, 24 Oct 2023 17:05:40 +0100
-Date: Tue, 24 Oct 2023 17:05:40 +0100
-From: "Russell King (Oracle)" <linux@armlinux.org.uk>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A29138BC9
+	for <linux-doc@vger.kernel.org>; Tue, 24 Oct 2023 16:20:42 +0000 (UTC)
+Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTP id D7A9D10C2;
+	Tue, 24 Oct 2023 09:20:40 -0700 (PDT)
+Received: (from willy@localhost)
+	by mail.home.local (8.17.1/8.17.1/Submit) id 39OGK3Ti004223;
+	Tue, 24 Oct 2023 18:20:03 +0200
+Date: Tue, 24 Oct 2023 18:20:03 +0200
+From: Willy Tarreau <w@1wt.eu>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: linux-pm@vger.kernel.org, loongarch@lists.linux.dev,
-	linux-acpi@vger.kernel.org, linux-arch@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-riscv@lists.infradead.org, kvmarm@lists.linux.dev,
-	x86@kernel.org, linux-csky@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-ia64@vger.kernel.org,
-	linux-parisc@vger.kernel.org, Salil Mehta <salil.mehta@huawei.com>,
-	Jean-Philippe Brucker <jean-philippe@linaro.org>,
-	jianyong.wu@arm.com, justin.he@arm.com,
-	James Morse <james.morse@arm.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Yury Norov <yury.norov@gmail.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Peter Zijlstra <peterz@infradead.org>
-Subject: Re: [PATCH 38/39] cpumask: Add enabled cpumask for present CPUs that
- can be brought online
-Message-ID: <ZTfrVMuCNrwxxj62@shell.armlinux.org.uk>
-References: <ZTffkAdOqL2pI2la@shell.armlinux.org.uk>
- <E1qvJBk-00AqSW-R8@rmk-PC.armlinux.org.uk>
- <2023102411-ascent-plot-04fd@gregkh>
+Cc: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Jiri Kosina <jkosina@suse.cz>,
+        security@kernel.org, workflows@vger.kernel.org,
+        Kees Cook <keescook@chromium.org>, Solar Designer <solar@openwall.com>,
+        Vegard Nossum <vegard.nossum@oracle.com>
+Subject: Re: [PATCH] Documentation: security-bugs.rst: linux-distros relaxed
+ their rules
+Message-ID: <ZTfus7qKp2R5azJG@1wt.eu>
+References: <20231015130959.26242-1-w@1wt.eu>
+ <87zg0ajcha.fsf@meer.lwn.net>
+ <2023102402-unheated-basis-55e5@gregkh>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -77,63 +47,42 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <2023102411-ascent-plot-04fd@gregkh>
-Sender: Russell King (Oracle) <linux@armlinux.org.uk>
+In-Reply-To: <2023102402-unheated-basis-55e5@gregkh>
 
-On Tue, Oct 24, 2023 at 06:02:30PM +0200, Greg Kroah-Hartman wrote:
-> On Tue, Oct 24, 2023 at 04:19:24PM +0100, Russell King wrote:
-> > From: James Morse <james.morse@arm.com>
+On Tue, Oct 24, 2023 at 11:24:27AM +0200, Greg Kroah-Hartman wrote:
+> On Sun, Oct 22, 2023 at 08:31:45PM -0600, Jonathan Corbet wrote:
+> > Willy Tarreau <w@1wt.eu> writes:
 > > 
-> > The 'offline' file in sysfs shows all offline CPUs, including those
-> > that aren't present. User-space is expected to remove not-present CPUs
-> > from this list to learn which CPUs could be brought online.
+> > > The linux-distros list relaxed their rules to try to adapt better to
+> > > how the Linux kernel works. Let's update the Coordination part to
+> > > explain why and when to contact them or not to and how to avoid trouble
+> > > in the future.
+> > >
+> > > Link: https://www.openwall.com/lists/oss-security/2023/09/08/4
+> > > Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> > > Cc: Kees Cook <keescook@chromium.org>
+> > > Cc: Solar Designer <solar@openwall.com>
+> > > Cc: Vegard Nossum <vegard.nossum@oracle.com>
+> > > Acked-by: Jiri Kosina <jkosina@suse.cz>
+> > > Signed-off-by: Willy Tarreau <w@1wt.eu>
+> > > ---
+> > >
+> > > This is the final version for merging. Changes since RFC:
+> > >   - s/BEFORE/UNTIL from Vegard
+> > >   - improved wording from Alexander
+> > >   - acked-by from Jiri
 > > 
-> > CPUs can be present but not-enabled. These CPUs can't be brought online
-> > until the firmware policy changes, which comes with an ACPI notification
-> > that will register the CPUs.
-> > 
-> > With only the offline and present files, user-space is unable to
-> > determine which CPUs it can try to bring online. Add a new CPU mask
-> > that shows this based on all the registered CPUs.
-> > 
-> > Signed-off-by: James Morse <james.morse@arm.com>
-> > ---
-> >  drivers/base/cpu.c      | 10 ++++++++++
-> >  include/linux/cpumask.h | 25 +++++++++++++++++++++++++
-> >  kernel/cpu.c            |  3 +++
-> >  3 files changed, 38 insertions(+)
-> > 
-> > diff --git a/drivers/base/cpu.c b/drivers/base/cpu.c
-> > index 2b9cb2667654..f8bf1d4c7d71 100644
-> > --- a/drivers/base/cpu.c
-> > +++ b/drivers/base/cpu.c
-> > @@ -95,6 +95,7 @@ void unregister_cpu(struct cpu *cpu)
-> >  {
-> >  	int logical_cpu = cpu->dev.id;
-> >  
-> > +	set_cpu_enabled(logical_cpu, false);
-> >  	unregister_cpu_under_node(logical_cpu, cpu_to_node(logical_cpu));
-> >  
-> >  	device_unregister(&cpu->dev);
-> > @@ -273,6 +274,13 @@ static ssize_t print_cpus_offline(struct device *dev,
-> >  }
-> >  static DEVICE_ATTR(offline, 0444, print_cpus_offline, NULL);
-> >  
-> > +static ssize_t print_cpus_enabled(struct device *dev,
-> > +				  struct device_attribute *attr, char *buf)
-> > +{
-> > +	return sysfs_emit(buf, "%*pbl\n", cpumask_pr_args(cpu_enabled_mask));
-> > +}
-> > +static DEVICE_ATTR(enabled, 0444, print_cpus_enabled, NULL);
+> > Greg, you've taken changes to this file in the past; do you want to grab
+> > this one or should I pick it up?
 > 
-> This needs to be documented somewhere in Documentation/ABI/ did I miss
-> that patch?
+> I was hoping there would be other reviewers of it, but I guess not.
 
-Thanks for pointing that out, no you missed the patch as nothing
-touches Documentation/ABI/ in this patch series. I'll add some blurb
-for it for the next iteration.
+I'm pretty sure non-technical stuff like this actually bores everyone,
+starting from us; when I proposed you to work on it, I was already
+convinced that nobody would have stolen me that task!
 
--- 
-RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
-FTTP is here! 80Mbps down 10Mbps up. Decent connectivity at last!
+> I'll take it through my tree now, thanks!
+
+Thank you!
+Willy
 
