@@ -1,146 +1,134 @@
-Return-Path: <linux-doc+bounces-981-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-983-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F2897D531A
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Oct 2023 15:50:41 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 533957D53D0
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Oct 2023 16:22:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 46B021C20C9A
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Oct 2023 13:50:40 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A1642B20F36
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Oct 2023 14:21:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5FD283A29A;
-	Tue, 24 Oct 2023 13:48:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2512E2C85C;
+	Tue, 24 Oct 2023 14:21:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="SzE1AUc4"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ls48EsEM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F8CF39942
-	for <linux-doc@vger.kernel.org>; Tue, 24 Oct 2023 13:48:17 +0000 (UTC)
-Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com [IPv6:2607:f8b0:4864:20::b4a])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 62A892128
-	for <linux-doc@vger.kernel.org>; Tue, 24 Oct 2023 06:48:09 -0700 (PDT)
-Received: by mail-yb1-xb4a.google.com with SMTP id 3f1490d57ef6-d815354ea7fso4178219276.1
-        for <linux-doc@vger.kernel.org>; Tue, 24 Oct 2023 06:48:09 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7D60FBFB;
+	Tue, 24 Oct 2023 14:21:54 +0000 (UTC)
+Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com [IPv6:2607:f8b0:4864:20::e32])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5EE7EB6;
+	Tue, 24 Oct 2023 07:21:53 -0700 (PDT)
+Received: by mail-vs1-xe32.google.com with SMTP id ada2fe7eead31-457cb7f53afso1739134137.3;
+        Tue, 24 Oct 2023 07:21:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1698155288; x=1698760088; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=5iA9XL/oyX6Tyl0rnn5vdBOVip3jqaNokzkLete42fs=;
-        b=SzE1AUc4BKZmpNvrK36+SD3sWBCP8XLcqDoSN7SaMr2sU/BG1aGfkwvE/f4JQXF1Ni
-         hMF1o0lNDayxObo0C0wjdTZL8vll7r8pHHyLG7ycDypgWlfcaIqRWfAtBLLsA0BrpBju
-         FzAAj+z5fJfNRaY9+A3lV6zqMBZMFytgHluIRpWvQ3sZxRKVk0/VlTAtIhv1vlgDxCFT
-         1X0QR2xi2xN0sadEGLcjq9JrBII48akc5UqV38dawVcqLr033J2tJARubY1zouO5IWW8
-         ObNjzyLUon3FC8l21rKOSCG4nSNGOECtt/Pzik0zSbCvIpn6JtaWo302ot6QhuiBaU7v
-         3hsg==
+        d=gmail.com; s=20230601; t=1698157312; x=1698762112; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AM3VQlVHWtuvahhyiClhILx1R0OrNBnU/X/2IXCfrYs=;
+        b=ls48EsEMy1c8FePn//GL3tYrj78Hh/ijd8X9Sif/9p40zdbgQOcgY0bz8cpSsPBC70
+         Iuc9X2aq40lO2NkEOHY5mJT5fG3SeunaobL4tGSKPIULLEijaCHmFUbsa7O9lPezpOjy
+         5gHChkwi28xHccuwUypDHz2h0Rpsf+1Ahxh8sJqbAk/tHkW1HMeCO24xOsdpr+7Gj8sw
+         d9/rgH9g0t1/RQENjH9KnB8S+3I/OKv/fzdqsVthfAhRyIipr62QepVaeGQ9NBhZfe6c
+         BOuiEtkJkk1eXHGX8/9YPpMSvBa9hQ7n8Sw7vVaHOnJKVTvhKTjkOK6E2aFWx1BH5cMO
+         Knhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698155288; x=1698760088;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=5iA9XL/oyX6Tyl0rnn5vdBOVip3jqaNokzkLete42fs=;
-        b=nqjTs67HKwo24jfDrzQh01nd+auXsarXu51olVc7aYnG/K0np29SyA5MEkXn5tRuXj
-         MlYnl1zeXo9q0lYb9gLKAmKsTJUPo5wef+h29ansL1hfgSQVbaqlzzD+HwXCbC2G7mnM
-         BMIRJrXrSExrHDDHwZpbpEpTd2nnlwI46Ft7PLDzXyzw1InQDUpHUxqt4VVcMuLbvfx1
-         BkU33AkZLlLAU8QtYOIeH0wEeepa0cHjwEe4NhjcTVEjlqvxZhNWCab4EPEgk6NR6dNe
-         2wPJE2Ga1XfUO17ZkomeGoflCf+my2l4I/Y9GrwVwv+KkPEsH6UdPPkAa6L+IlvteXVI
-         dkQg==
-X-Gm-Message-State: AOJu0YwQyQzQYOK8fusTQa+GbBF9FYGXx+V6iMCipJ7Dna4DgZ9lsDdH
-	72VT2EucF2HZKn2vAHQdU8eIRrX3Ixs=
-X-Google-Smtp-Source: AGHT+IG2dGz7nkvTfdEUK5vnzGjBRQVPkaal0DQpTev0jCoT6FkWge7pFcsduGaJ7nCMKZx++nF8KYSK16A=
-X-Received: from surenb-desktop.mtv.corp.google.com ([2620:15c:211:201:45ba:3318:d7a5:336a])
- (user=surenb job=sendgmr) by 2002:a25:ade8:0:b0:d89:dd12:163d with SMTP id
- d40-20020a25ade8000000b00d89dd12163dmr222107ybe.1.1698155288323; Tue, 24 Oct
- 2023 06:48:08 -0700 (PDT)
-Date: Tue, 24 Oct 2023 06:46:36 -0700
-In-Reply-To: <20231024134637.3120277-1-surenb@google.com>
+        d=1e100.net; s=20230601; t=1698157312; x=1698762112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=AM3VQlVHWtuvahhyiClhILx1R0OrNBnU/X/2IXCfrYs=;
+        b=TYcP+FXWFsv//dXg4xU0LK0JcZQN3TLqTsaLSwDC2Y8K2+9UhQSytZso+AYb84WOes
+         FCMz09xD16pWnezBcJQTW/lvJ3txyV7mtlOrsZYINYQ5Ecw4qQg4OhT6F9FgFT8FSYPU
+         MuiI68TIAx2hNgkCihXUmAy+BgYYLhcz/frPToXnS01PkW9JXKIJaUjjzBlcx3qaeHJn
+         zc3B2MG2Zbs+LUIYQC/8cD1GmgHu0P7+Nl7Q019EBX9rpFHG/iO4ZG46tMVEjFGLJsWC
+         xdAYKY0HKxFA/69KpEd5tlO34Ns+k5mAijgkxFLQCqh/FzTdHToXzGQBeKe+rYk5DmsG
+         h7XA==
+X-Gm-Message-State: AOJu0YzJ8Wxnrd7JOrgehFxVg2g9K2ShEiU6WEDfOVoS44rm8Lz1vpR/
+	qYd3bxd6QsmsMHFS6DFG+pXf4u85pWxjRRjHME4=
+X-Google-Smtp-Source: AGHT+IFYEeyvkUjneMKD8oSOQEaL2dS8evoHtXBbEz0EBN99vN9ZQDb4/ksFw4kT8cjWaFCUFkxB0bjW60CpMzl9M2g=
+X-Received: by 2002:a05:6102:23d1:b0:452:5d45:6345 with SMTP id
+ x17-20020a05610223d100b004525d456345mr12294330vsr.34.1698157312490; Tue, 24
+ Oct 2023 07:21:52 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20231024134637.3120277-1-surenb@google.com>
-X-Mailer: git-send-email 2.42.0.758.gaed0368e0e-goog
-Message-ID: <20231024134637.3120277-40-surenb@google.com>
-Subject: [PATCH v2 39/39] MAINTAINERS: Add entries for code tagging and memory
- allocation profiling
-From: Suren Baghdasaryan <surenb@google.com>
-To: akpm@linux-foundation.org
-Cc: kent.overstreet@linux.dev, mhocko@suse.com, vbabka@suse.cz, 
-	hannes@cmpxchg.org, roman.gushchin@linux.dev, mgorman@suse.de, 
-	dave@stgolabs.net, willy@infradead.org, liam.howlett@oracle.com, 
-	corbet@lwn.net, void@manifault.com, peterz@infradead.org, 
-	juri.lelli@redhat.com, ldufour@linux.ibm.com, catalin.marinas@arm.com, 
-	will@kernel.org, arnd@arndb.de, tglx@linutronix.de, mingo@redhat.com, 
-	dave.hansen@linux.intel.com, x86@kernel.org, peterx@redhat.com, 
-	david@redhat.com, axboe@kernel.dk, mcgrof@kernel.org, masahiroy@kernel.org, 
-	nathan@kernel.org, dennis@kernel.org, tj@kernel.org, muchun.song@linux.dev, 
-	rppt@kernel.org, paulmck@kernel.org, pasha.tatashin@soleen.com, 
-	yosryahmed@google.com, yuzhao@google.com, dhowells@redhat.com, 
-	hughd@google.com, andreyknvl@gmail.com, keescook@chromium.org, 
-	ndesaulniers@google.com, vvvvvv@google.com, gregkh@linuxfoundation.org, 
-	ebiggers@google.com, ytcoode@gmail.com, vincent.guittot@linaro.org, 
-	dietmar.eggemann@arm.com, rostedt@goodmis.org, bsegall@google.com, 
-	bristot@redhat.com, vschneid@redhat.com, cl@linux.com, penberg@kernel.org, 
-	iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com, glider@google.com, 
-	elver@google.com, dvyukov@google.com, shakeelb@google.com, 
-	songmuchun@bytedance.com, jbaron@akamai.com, rientjes@google.com, 
-	minchan@google.com, kaleshsingh@google.com, surenb@google.com, 
-	kernel-team@android.com, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, iommu@lists.linux.dev, 
-	linux-arch@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-modules@vger.kernel.org, kasan-dev@googlegroups.com, 
-	cgroups@vger.kernel.org
+MIME-Version: 1.0
+References: <20231019-feature_ptp_netnext-v6-0-71affc27b0e5@bootlin.com>
+ <20231019-feature_ptp_netnext-v6-7-71affc27b0e5@bootlin.com>
+ <CAF=yD-+O6QxuYJzijMes7J_DHHd7yYCz8sBLFERM1U6pYN0Gkg@mail.gmail.com> <20231024154037.2f61fe5b@kmaincent-XPS-13-7390>
+In-Reply-To: <20231024154037.2f61fe5b@kmaincent-XPS-13-7390>
+From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+Date: Tue, 24 Oct 2023 10:21:15 -0400
+Message-ID: <CAF=yD-LCNGcCMqpAbV1HfyVdjH7Gj-_tTwsS=08Y5CC6bqBd=w@mail.gmail.com>
+Subject: Re: [PATCH net-next v6 07/16] net_tstamp: Add TIMESTAMPING SOFTWARE
+ and HARDWARE mask
+To: =?UTF-8?Q?K=C3=B6ry_Maincent?= <kory.maincent@bootlin.com>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn <andrew@lunn.ch>, 
+	Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Richard Cochran <richardcochran@gmail.com>, Radu Pirea <radu-nicolae.pirea@oss.nxp.com>, 
+	Jay Vosburgh <j.vosburgh@gmail.com>, Andy Gospodarek <andy@greyhouse.net>, 
+	Nicolas Ferre <nicolas.ferre@microchip.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
+	Jonathan Corbet <corbet@lwn.net>, Horatiu Vultur <horatiu.vultur@microchip.com>, 
+	UNGLinuxDriver@microchip.com, Simon Horman <horms@kernel.org>, 
+	Vladimir Oltean <vladimir.oltean@nxp.com>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, Maxime Chevallier <maxime.chevallier@bootlin.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Kent Overstreet <kent.overstreet@linux.dev>
+On Tue, Oct 24, 2023 at 9:40=E2=80=AFAM K=C3=B6ry Maincent <kory.maincent@b=
+ootlin.com> wrote:
+>
+> On Thu, 19 Oct 2023 10:48:04 -0400
+> Willem de Bruijn <willemdebruijn.kernel@gmail.com> wrote:
+>
+> > On Thu, Oct 19, 2023 at 10:29=E2=80=AFAM Kory Maincent
+> > <kory.maincent@bootlin.com> wrote:
+> > >
+> > > Timestamping software or hardware flags are often used as a group,
+> > > therefore adding these masks will easier future use.
+> >
+> > This assumes that device support for timestamping is often symmetric:
+> > a device supports both rx and tx, or neither.
+> >
+> > All devices support software receive timestamping, as that timestamp
+> > is taken in the core network stack. But to support transmit timestamps
+> > drivers have to call sbk_tstamp_tx in their ndo_start_xmit.
+>
+> Yes, and in that software only case they often call ethtool_op_get_ts_inf=
+o to
+> fill the timestamp info.
+>
+> There is several drivers that support hardware and software timestamp, th=
+ese
+> mask could be useful for these. In case of asymmetric support we can stil=
+l use
+> the SOF_TIMESTAMPING_RX/TX_SOFTWARE flags.
+>
+> I forgot to specify, in the commit message but this patch is mainly to ea=
+se
+> the next patch of this series to deal with software/hardware time stampin=
+g.
+> Maybe you prefer to have this squash into next patch as had suggested Flo=
+rian
+> in last version.
 
-The new code & libraries added are being maintained - mark them as such.
+Thanks. I did not see such use in net/ or in my experience of using
+setsockopt SO_TIMESTAMPING.
 
-Signed-off-by: Kent Overstreet <kent.overstreet@linux.dev>
-Signed-off-by: Suren Baghdasaryan <surenb@google.com>
----
- MAINTAINERS | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+But I had not considered net device get_ts_info. It would be useful there.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 2894f0777537..22e51de42131 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -5118,6 +5118,13 @@ S:	Supported
- F:	Documentation/process/code-of-conduct-interpretation.rst
- F:	Documentation/process/code-of-conduct.rst
- 
-+CODE TAGGING
-+M:	Suren Baghdasaryan <surenb@google.com>
-+M:	Kent Overstreet <kent.overstreet@linux.dev>
-+S:	Maintained
-+F:	include/linux/codetag.h
-+F:	lib/codetag.c
-+
- COMEDI DRIVERS
- M:	Ian Abbott <abbotti@mev.co.uk>
- M:	H Hartley Sweeten <hsweeten@visionengravers.com>
-@@ -13708,6 +13715,15 @@ F:	mm/memblock.c
- F:	mm/mm_init.c
- F:	tools/testing/memblock/
- 
-+MEMORY ALLOCATION PROFILING
-+M:	Suren Baghdasaryan <surenb@google.com>
-+M:	Kent Overstreet <kent.overstreet@linux.dev>
-+S:	Maintained
-+F:	include/linux/alloc_tag.h
-+F:	include/linux/codetag_ctx.h
-+F:	lib/alloc_tag.c
-+F:	lib/pgalloc_tag.c
-+
- MEMORY CONTROLLER DRIVERS
- M:	Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
- L:	linux-kernel@vger.kernel.org
--- 
-2.42.0.758.gaed0368e0e-goog
-
+Slight preference from me to keep this a separate patch, as it applies
+not only to the use case in your follow-on patch.
 
