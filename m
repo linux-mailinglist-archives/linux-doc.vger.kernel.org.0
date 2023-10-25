@@ -1,110 +1,141 @@
-Return-Path: <linux-doc+bounces-1091-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-1093-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6C3B7D669E
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Oct 2023 11:20:17 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA9267D6792
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Oct 2023 11:53:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 4E49FB20F57
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Oct 2023 09:20:15 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 728FF281038
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Oct 2023 09:53:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8824210E2;
-	Wed, 25 Oct 2023 09:20:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7CE4C23756;
+	Wed, 25 Oct 2023 09:53:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b="IcaldLvk"
+	dkim=pass (2048-bit key) header.d=mess.org header.i=@mess.org header.b="Dp64/GGq"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C56210A1D
-	for <linux-doc@vger.kernel.org>; Wed, 25 Oct 2023 09:20:06 +0000 (UTC)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com [IPv6:2607:f8b0:4864:20::52a])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9CABE130
-	for <linux-doc@vger.kernel.org>; Wed, 25 Oct 2023 02:20:03 -0700 (PDT)
-Received: by mail-pg1-x52a.google.com with SMTP id 41be03b00d2f7-578b407045bso4115850a12.0
-        for <linux-doc@vger.kernel.org>; Wed, 25 Oct 2023 02:20:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1698225603; x=1698830403; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=k9LKvzwQ+kJJuy6F8sbzPBJK3ry5j/OSwVPg23+fo4o=;
-        b=IcaldLvkVDGaOtNo/OYfg/78rpVL13J0ZcBeqYR3u1G79aRK+Uz5lmZnkHlh8HTu5F
-         VYHVsdfFgBgz4hId659tyYcoH3O+OcFY/ED3l6DVWi1WcrabgUeHxD5Az8CfPpTtL+zG
-         ZM3DoH5Rqq5ZteqVIXDav6hKsXmukSywzs08TRulWaTbHcR2ooLewjkzU6lb3qUrTw7R
-         7m9WfdvYZjuzSUBez4oSk1t9wnTKwp90SehOccwcYdI/Vjy9S23CJH7QXIT9JPz9Ccni
-         hOOmjfna4RJjHZSKkYYCHwrHGm8kBzYeHpHJD+rJyDJsOOw5aFS7sdipn7Mde9ptP6UV
-         d1gg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698225603; x=1698830403;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=k9LKvzwQ+kJJuy6F8sbzPBJK3ry5j/OSwVPg23+fo4o=;
-        b=BcZ/7hQW0e48YNx6Z5WRZksiE2L1VQp+JmjxxNxpNO3RUc9LFtXgkd7uI+e8M7uSi/
-         w/hFCLwbovsX55VhCPrtjvVjQVOJdr7fIkGPuXQthH/C5D9y6D8LzdWYE3iEc+WydXiV
-         i2BA11owJuaDbRFdXAsrRo3/WqFuMHdNpJ13b8BS516uB6kq0kvXomRtukhzZr5Fwixz
-         GG9RdKu7gJ11/dUaFnEDx5qLpxvUcVD7+5TNOx7pfFmkzeOitbGNfCfIJhvkJzZcvlMw
-         H98BpPANM0mtLt1lTAC9TYTjQTclFWUcC645qGWU4+E3xG0Gs2Al6ZwBsT1Ao3T1HEt6
-         5/6w==
-X-Gm-Message-State: AOJu0Yz2GZ5gF4sUpNtS4q6WjQ27lggc2wkQ36Q9NBN31DPo8MeOEEbd
-	CIv6I7rOqh1OZ2DChxPj7hDQTQ==
-X-Google-Smtp-Source: AGHT+IHfihGh9DaKro3ttnwboXUO0qkrr6LAJueCDPbd8CHiqmm6Eh/dzGrB6zYpq63P8X2rWNeq6A==
-X-Received: by 2002:a17:90a:d24d:b0:274:c284:c83c with SMTP id o13-20020a17090ad24d00b00274c284c83cmr13222743pjw.48.1698225603087;
-        Wed, 25 Oct 2023 02:20:03 -0700 (PDT)
-Received: from [10.71.178.184] ([203.208.189.7])
-        by smtp.gmail.com with ESMTPSA id d12-20020a17090a498c00b00278ff752eacsm8133414pjh.50.2023.10.25.02.19.56
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Oct 2023 02:20:02 -0700 (PDT)
-Message-ID: <bf7d4005-d32c-42d9-a748-a7c421130be6@bytedance.com>
-Date: Wed, 25 Oct 2023 17:19:54 +0800
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 500D114ABC
+	for <linux-doc@vger.kernel.org>; Wed, 25 Oct 2023 09:53:34 +0000 (UTC)
+Received: from gofer.mess.org (gofer.mess.org [88.97.38.141])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B85B311F;
+	Wed, 25 Oct 2023 02:53:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mess.org; s=2020;
+	t=1698227607; bh=H1wJkMmM3RLGtqBxcD2SkPsFMAkzEk6Lnx1q4pd00ZY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Dp64/GGqXplxAhkDT3gedu+Sab+eb/+Hyj0bIZlSKcMYYtDGIKUDEQN6fzQa/xlWi
+	 o9URUD2793P3Pd8XVPtqKqWTRAWhOiLBqiz+Xj3KOS85yfdWFhDot+7gzeuGebU2Zt
+	 /vOhlmP3zxX9lj7KLBn6IJmZx0z20dln14S9n2x6Yzk09UxcjqI8woHLHXZemEA+ms
+	 G8jMY417JT8CLRviQBvZbEnnBRm31/RRtknULdvrSajNWMWruQnWO0D1WntEXQ4bp8
+	 kXnb1OiHoBPIJf1LDgFRQcbonrgHZyPUe6PZDp5u9XAfU2Yp3uI/3Mm8Uw7e0+5TWN
+	 CKIORt/Tz/lNg==
+Received: by gofer.mess.org (Postfix, from userid 1000)
+	id DD4071000FC; Wed, 25 Oct 2023 10:53:27 +0100 (BST)
+Date: Wed, 25 Oct 2023 10:53:27 +0100
+From: Sean Young <sean@mess.org>
+To: Daniel Thompson <daniel.thompson@linaro.org>
+Cc: Hans de Goede <hdegoede@redhat.com>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@pengutronix.de>,
+	linux-media@vger.kernel.org, linux-pwm@vger.kernel.org,
+	Ivaylo Dimitrov <ivo.g.dimitrov.75@gmail.com>,
+	Thierry Reding <thierry.reding@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+	David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+	Javier Martinez Canillas <javierm@redhat.com>,
+	Jean Delvare <jdelvare@suse.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Support Opensource <support.opensource@diasemi.com>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Pavel Machek <pavel@ucw.cz>, Lee Jones <lee@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Mark Gross <markgross@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>, Jingoo Han <jingoohan1@gmail.com>,
+	Helge Deller <deller@gmx.de>, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org, linux-hwmon@vger.kernel.org,
+	linux-input@vger.kernel.org, linux-leds@vger.kernel.org,
+	platform-driver-x86@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-fbdev@vger.kernel.org
+Subject: Re: [PATCH v3 1/3] pwm: make it possible to apply pwm changes in
+ atomic context
+Message-ID: <ZTjll7oTNVWqygbD@gofer.mess.org>
+References: <cover.1697534024.git.sean@mess.org>
+ <a7fcd19938d5422abc59c968ff7b3d5c275577ed.1697534024.git.sean@mess.org>
+ <90728c06-4c6c-b3d2-4723-c24711be2fa5@redhat.com>
+ <20231019105118.64gdzzixwqrztjir@pengutronix.de>
+ <01a505ac-320f-3819-a58d-2b82c1bf2a86@redhat.com>
+ <ZTT9fvEF+lqfzGJ/@gofer.mess.org>
+ <20231023133417.GE49511@aspen.lan>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 03/10] maple_tree: Introduce interfaces __mt_dup() and
- mtree_dup()
-To: Matthew Wilcox <willy@infradead.org>
-Cc: Liam.Howlett@oracle.com, corbet@lwn.net, akpm@linux-foundation.org,
- brauner@kernel.org, surenb@google.com, michael.christie@oracle.com,
- mjguzik@gmail.com, mathieu.desnoyers@efficios.com, npiggin@gmail.com,
- peterz@infradead.org, oliver.sang@intel.com, mst@redhat.com,
- maple-tree@lists.infradead.org, linux-mm@kvack.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Peng Zhang <zhangpeng.00@bytedance.com>
-References: <20231024083258.65750-1-zhangpeng.00@bytedance.com>
- <20231024083258.65750-4-zhangpeng.00@bytedance.com>
- <ZTfw1nw15wijNnCB@casper.infradead.org>
-From: Peng Zhang <zhangpeng.00@bytedance.com>
-In-Reply-To: <ZTfw1nw15wijNnCB@casper.infradead.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20231023133417.GE49511@aspen.lan>
 
+On Mon, Oct 23, 2023 at 02:34:17PM +0100, Daniel Thompson wrote:
+> On Sun, Oct 22, 2023 at 11:46:22AM +0100, Sean Young wrote:
+> > On Sat, Oct 21, 2023 at 11:08:22AM +0200, Hans de Goede wrote:
+> > > On 10/19/23 12:51, Uwe Kleine-K�nig wrote:
+> > > > On Wed, Oct 18, 2023 at 03:57:48PM +0200, Hans de Goede wrote:
+> > > >> On 10/17/23 11:17, Sean Young wrote:
+> > > > I think it's very subjective if you consider this
+> > > > churn or not.
+> > >
+> > > I consider it churn because I don't think adding a postfix
+> > > for what is the default/expected behavior is a good idea
+> > > (with GPIOs not sleeping is the expected behavior).
+> > >
+> > > I agree that this is very subjective and very much goes
+> > > into the territory of bikeshedding. So please consider
+> > > the above my 2 cents on this and lets leave it at that.
+> >
+> > You have a valid point. Let's focus on having descriptive function names.
+> 
+> For a couple of days I've been trying to resist the bikeshedding (esp.
+> given the changes to backlight are tiny) so I'll try to keep it as
+> brief as I can:
+> 
+> 1. I dislike the do_it() and do_it_cansleep() pairing. It is
+>    difficult to detect when a client driver calls do_it() by mistake.
+>    In fact a latent bug of this nature can only be detected by runtime
+>    testing with the small number of PWMs that do not support
+>    configuration from an atomic context.
+> 
+>    In contrast do_it() and do_it_atomic()[*] means that although
+>    incorrectly calling do_it() from an atomic context can be pretty
+>    catastrophic it is also trivially detected (with any PWM driver)
+>    simply by running with CONFIG_DEBUG_ATOMIC_SLEEP.
+> 
+>    No objections (beyond churn) to fully spelt out pairings such as
+>    do_it_cansleep() and do_it_atomic()[*]!
 
+I must say I do like the look of this. Uwe, how do you feel about:
+pwm_apply_cansleep() and pwm_apply_atomic()? I know we've talked about
+pwm_apply_atomic in the past, however I think this this the best 
+option I've seen so far.
 
-在 2023/10/25 00:29, Matthew Wilcox 写道:
-> On Tue, Oct 24, 2023 at 04:32:51PM +0800, Peng Zhang wrote:
->> +++ b/lib/maple_tree.c
->> @@ -4,6 +4,10 @@
->>    * Copyright (c) 2018-2022 Oracle Corporation
->>    * Authors: Liam R. Howlett <Liam.Howlett@oracle.com>
->>    *	    Matthew Wilcox <willy@infradead.org>
->> + *
->> + * Implementation of algorithm for duplicating Maple Tree
-> 
-> I thought you agreed that line made no sense, and you were just going to
-> drop it?  just add your copyright, right under ours.
-I'm sorry, I misunderstood your meaning last time. I will make
-corrections in the next version. Are you saying that only the
-following two lines are needed? This still needs to be confirmed
-with Liam.
-> 
->> + * Copyright (c) 2023 ByteDance
->> + * Author: Peng Zhang <zhangpeng.00@bytedance.com>
-> 
+> 2. If there is an API rename can we make sure the patch contains no
+>    other changes (e.g. don't introduce any new API in the same patch).
+>    Seperating renames makes the patches easier to review!
+>    It makes each one smaller and easier to review!
+
+Yes, this should have been separated out. Will fix for next version.
+
+Thanks,
+
+Sean
 
