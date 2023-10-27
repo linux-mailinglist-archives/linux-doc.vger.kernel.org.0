@@ -1,104 +1,158 @@
-Return-Path: <linux-doc+bounces-1312-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-1314-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E09517D9C86
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Oct 2023 17:05:55 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E6A007D9CA2
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Oct 2023 17:10:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1D0771C2092B
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Oct 2023 15:05:55 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 67A97B20D39
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Oct 2023 15:09:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0270237167;
-	Fri, 27 Oct 2023 15:05:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EBBE5199A1;
+	Fri, 27 Oct 2023 15:09:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="eU7BPMbS"
+	dkim=pass (1024-bit key) header.d=cisco.com header.i=@cisco.com header.b="OI/xy8fy"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AAB120B23
-	for <linux-doc@vger.kernel.org>; Fri, 27 Oct 2023 15:05:39 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.93])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B5880C4;
-	Fri, 27 Oct 2023 08:05:38 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3484418C0D
+	for <linux-doc@vger.kernel.org>; Fri, 27 Oct 2023 15:09:39 +0000 (UTC)
+X-Greylist: delayed 63 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 27 Oct 2023 08:09:37 PDT
+Received: from aer-iport-5.cisco.com (aer-iport-5.cisco.com [173.38.203.67])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 088E0C4;
+	Fri, 27 Oct 2023 08:09:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1698419138; x=1729955138;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=Ih1/FvjaAtODxSz8/KkvT2j4WuoO2ecH6jCbepamajw=;
-  b=eU7BPMbSC+ntD7w1Zxp7sFMYHIDNEHNwMdS0V9ov7OOYZ7cSFDCN3sBN
-   XmwBj9F6op5Wpj8vcZbcsmWI/G5hUiA2TGW4RgVAOx92fCY6TAUSTOTx6
-   c6Npto4wmSrCQGYoPStporM0fQAIpJD1AFlJM0neXwp93NjPKL36ENXf5
-   2TLWswpWLZUys0759BYKb2PEC4hPhYaDD6k0C6yjIarQvKHSLuF667qG6
-   kL8qjgmDfiAAywbGpGJQ2onRpzmZ2iWElTouoN4p3R3eG1zyBed5Q6gPz
-   gNlcrgZnxX5oV6gR9bIi+oKd1oNGCPyAnfJ8BdYuGw+igjxZFFz9bPOiL
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10876"; a="384994166"
-X-IronPort-AV: E=Sophos;i="6.03,256,1694761200"; 
-   d="scan'208";a="384994166"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2023 08:05:38 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.03,256,1694761200"; 
-   d="scan'208";a="850985"
-Received: from dmnassar-mobl.amr.corp.intel.com (HELO desk) ([10.212.203.39])
-  by fmviesa002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2023 08:05:25 -0700
-Date: Fri, 27 Oct 2023 08:05:35 -0700
-From: Pawan Gupta <pawan.kumar.gupta@linux.intel.com>
-To: Borislav Petkov <bp@alien8.de>
-Cc: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Andy Lutomirski <luto@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Sean Christopherson <seanjc@google.com>,
-	Paolo Bonzini <pbonzini@redhat.com>, tony.luck@intel.com,
-	ak@linux.intel.com, tim.c.chen@linux.intel.com,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Nikolay Borisov <nik.borisov@suse.com>,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	kvm@vger.kernel.org,
-	Alyssa Milburn <alyssa.milburn@linux.intel.com>,
-	Daniel Sneddon <daniel.sneddon@linux.intel.com>,
-	antonio.gomez.iglesias@linux.intel.com,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Alyssa Milburn <alyssa.milburn@intel.com>,
-	Dave Hansen <dave.hansen@intel.com>
-Subject: Re: [PATCH v4 0/6] Delay VERW
-Message-ID: <20231027150535.s4nlkppsvzeahm7t@desk>
-References: <20231027-delay-verw-v4-0-9a3622d4bcf7@linux.intel.com>
- <20231027144848.GGZTvN0AtGIQ9kBtkA@fat_crate.local>
+  d=cisco.com; i=@cisco.com; l=4467; q=dns/txt; s=iport;
+  t=1698419377; x=1699628977;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Z30PGUp2OXocE8topJov5NYF/tsEceZZC+SDL8xdOnU=;
+  b=OI/xy8fyMOjNhb8VPmSXX9JAKPm01kfV1nO1JQSDFqQssv2T8rWQhMk8
+   m1yByGuyhK62X8WfiyscnN2sY4f5MQYpA7cmiDi5OY0J5LfqoVYo42x4J
+   wQdecWw7QgRlj3GoGB1X/iRwuwe49zXF/mGs9EmdRrawCmm9PaNOnTSC1
+   c=;
+X-CSE-ConnectionGUID: Mb9aEPJAQOWVefeqwFY5Vg==
+X-CSE-MsgGUID: lDbVgR8gTvuMaTrKYVRPQw==
+X-IronPort-AV: E=Sophos;i="6.03,256,1694736000"; 
+   d="scan'208";a="6852703"
+Received: from aer-iport-nat.cisco.com (HELO aer-core-11.cisco.com) ([173.38.203.22])
+  by aer-iport-5.cisco.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2023 15:08:31 +0000
+Received: from localhost ([10.61.193.113])
+	(authenticated bits=0)
+	by aer-core-11.cisco.com (8.15.2/8.15.2) with ESMTPSA id 39RF8Uxw125999
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Fri, 27 Oct 2023 15:08:31 GMT
+From: Ariel Miculas <amiculas@cisco.com>
+To: linux-doc@vger.kernel.org
+Cc: serge@hallyn.com, Ariel Miculas <amiculas@cisco.com>,
+        Phillip Lougher <phillip@squashfs.org.uk>,
+        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org
+Subject: [PATCH] docs: filesystems: document the squashfs specific mount options
+Date: Fri, 27 Oct 2023 18:08:14 +0300
+Message-ID: <20231027150814.217689-1-amiculas@cisco.com>
+X-Mailer: git-send-email 2.42.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231027144848.GGZTvN0AtGIQ9kBtkA@fat_crate.local>
+Content-Transfer-Encoding: 8bit
+X-Authenticated-User: amiculas@cisco.com
+X-Outbound-SMTP-Client: 10.61.193.113, [10.61.193.113]
+X-Outbound-Node: aer-core-11.cisco.com
 
-On Fri, Oct 27, 2023 at 04:48:48PM +0200, Borislav Petkov wrote:
-> On Fri, Oct 27, 2023 at 07:38:34AM -0700, Pawan Gupta wrote:
-> > v4:
-> 
-> Why are you spamming people with your patchset? You've sent it 4 times
-> in a week:
-> 
-> Oct 20               Pawan Gupta ( :  75|) [PATCH 0/6] Delay VERW
-> Oct 24               Pawan Gupta ( :7.3K|) [PATCH v2 0/6] Delay VERW
-> Oct 25               Pawan Gupta ( :7.5K|) [PATCH v3 0/6] Delay VERW
-> Oct 27               Pawan Gupta ( :8.8K|) [PATCH v4 0/6] Delay VERW
-> 
-> Is this something urgent or can you take your time like everyone else?
+When SQUASHFS_CHOICE_DECOMP_BY_MOUNT is set, the "threads" mount option
+can be used to specify the decompression mode: single-threaded,
+multi-threaded or percpu. It can also be used to specify the number of
+threads used for decompression.
+This option is only mentioned in fs/squashfs/Kconfig, which makes it
+difficult to find.
 
-I am going on a long vacation next week, I won't be working for the rest
-of the year. So I wanted to get this in a good shape quickly. This
-patchset addresses some security issues (although theoretical). So there
-is some sense of urgency. Sorry for spamming, I'll take you off the To:
-list.
+Another mount option available is "errors", which can be configured to
+panic the kernel when squashfs errors are encountered.
+
+Add both these options to the squashfs documentation, making them more
+noticeable.
+
+Signed-off-by: Ariel Miculas <amiculas@cisco.com>
+---
+ Documentation/filesystems/squashfs.rst | 58 ++++++++++++++++++++++++++
+ 1 file changed, 58 insertions(+)
+
+diff --git a/Documentation/filesystems/squashfs.rst b/Documentation/filesystems/squashfs.rst
+index df42106bae71..f71ac870603b 100644
+--- a/Documentation/filesystems/squashfs.rst
++++ b/Documentation/filesystems/squashfs.rst
+@@ -64,6 +64,64 @@ obtained from this site also.
+ The squashfs-tools development tree is now located on kernel.org
+ 	git://git.kernel.org/pub/scm/fs/squashfs/squashfs-tools.git
+ 
++2.1 Mount options
++-----------------
++===================    =========================================================
++errors=%s              Specify whether squashfs errors trigger a kernel panic
++                       or not
++
++		       ==========  =============================================
++                         continue  errors don't trigger a panic (default)
++                            panic  trigger a panic when errors are encountered,
++                                   similar to several other filesystems (e.g.
++                                   btrfs, ext4, f2fs, GFS2, jfs, ntfs, ubifs)
++
++                                   This allows a kernel dump to be saved,
++                                   useful for analyzing and debugging the
++                                   corruption.
++                       ==========  =============================================
++threads=%s             Select the decompression mode or the number of threads
++
++                       If SQUASHFS_CHOICE_DECOMP_BY_MOUNT is set:
++
++		       ==========  =============================================
++                           single  use single-threaded decompression (default)
++
++                                   Only one block (data or metadata) can be
++                                   decompressed at any one time. This limits
++                                   CPU and memory usage to a minimum, but it
++                                   also gives poor performance on parallel I/O
++                                   workloads when using multiple CPU machines
++                                   due to waiting on decompressor availability.
++                            multi  use up to two parallel decompressors per core
++
++                                   If you have a parallel I/O workload and your
++                                   system has enough memory, using this option
++                                   may improve overall I/O performance. It
++                                   dynamically allocates decompressors on a
++                                   demand basis.
++                           percpu  use a maximum of one decompressor per core
++
++                                   It uses percpu variables to ensure
++                                   decompression is load-balanced across the
++                                   cores.
++                        1|2|3|...  configure the number of threads used for
++                                   decompression
++
++                                   The upper limit is num_online_cpus() * 2.
++                       ==========  =============================================
++
++                       If SQUASHFS_CHOICE_DECOMP_BY_MOUNT is **not** set:
++
++		       ==========  =============================================
++                          2|3|...  configure the number of threads used for
++                                   decompression
++
++                                   The upper limit is num_online_cpus() * 2.
++                       ==========  =============================================
++
++===================    =========================================================
++
+ 3. Squashfs Filesystem Design
+ -----------------------------
+ 
+-- 
+2.42.0
+
 
