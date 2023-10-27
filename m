@@ -1,73 +1,67 @@
-Return-Path: <linux-doc+bounces-1285-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-1283-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id D11247D9115
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Oct 2023 10:19:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A9457D9110
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Oct 2023 10:19:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 8C4D3281DEA
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Oct 2023 08:19:36 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 34587281DC1
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Oct 2023 08:19:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1EAB614013;
-	Fri, 27 Oct 2023 08:19:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0969813FFE;
+	Fri, 27 Oct 2023 08:19:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="jzYtVlJs"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="i1/TC3St"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA5F713FF5
-	for <linux-doc@vger.kernel.org>; Fri, 27 Oct 2023 08:19:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C9A414013
+	for <linux-doc@vger.kernel.org>; Fri, 27 Oct 2023 08:19:23 +0000 (UTC)
 Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06922D42;
-	Fri, 27 Oct 2023 01:19:22 -0700 (PDT)
-Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 39R5iCp5020795;
-	Fri, 27 Oct 2023 08:19:01 GMT
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07271D5E;
+	Fri, 27 Oct 2023 01:19:18 -0700 (PDT)
+Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 39R5i5w6003086;
+	Fri, 27 Oct 2023 08:19:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
- content-type : content-transfer-encoding; s=corp-2023-03-30;
- bh=1pikA91vUTNV05//EH2EMfg5yCx5g71Zj4B5oU1dgV0=;
- b=jzYtVlJsH7AHD5Czyrz5o1kH1Kti08yoBSUPloSJCxOD5oSdafKtwEHMGrEetRVo6H5U
- 3R2WtZ19Ar4xncHO4/X3NMx8HLiiC9lwX7/FyntzrxcTkbkJWyHg32buQjea61C25lnt
- +pcvUDPAguIFz9Km1GTrxGFrEHIjBoamzZDskUvV+EmcGUnjJyvp8JjRT/hhY8ZCVZYT
- 7j4r6SejUjOFwJ3HzLOZ36EvdXt6quUFdwMPgFkWSc6QjQ4h7lbHNy8fyl43cUwOA8XP
- us9HTuZWiiEZJ2Fno7vorfjna9i9zpSew4cv4zx/iZmgNoLx6CibK7AT3Mvxqeer+lH0 PA== 
+ content-transfer-encoding; s=corp-2023-03-30;
+ bh=phDJ9fYkNDZ1+LpOWiE4bE9znlIs1VUuwW3/CIkXJvU=;
+ b=i1/TC3SthuFqudfz2WOcUUFklFcfOYAV3631LtS5OSRJ2rV+AuC/b/n8S4yT8hhblK1+
+ r4GtCn4M8LXE7Vq9U8W5CFuvbcoXdG9aqaO5ge3F5v2kkRqFGNkl8oj8oB97ho1arWk8
+ Oe5GhEACObCql/85AvATImIGY4CbZTn/SJrg+fwkGJagPoB4tyq+cDh6WcSkQGRA5IG0
+ pKZgore+ZqGoX6Rr9Rso3gglbkCJfohhGxQpDx0CKSszC5iz5q1wcL/Qj7YYhq+H0hEn
+ IIADLJuZVZmF7a3+IwzclK2MAuFznCkoUri5G4cXQm0St4yQhWOrbLaoKeZ1xkSJFJNg Kg== 
 Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3tyx4tgx0j-1
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3tyxmv8v0j-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 27 Oct 2023 08:19:01 +0000
+	Fri, 27 Oct 2023 08:19:15 +0000
 Received: from pps.filterd (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
-	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 39R8FtVl009374;
-	Fri, 27 Oct 2023 08:19:00 GMT
+	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 39R62lO6009264;
+	Fri, 27 Oct 2023 08:19:03 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
-	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 3tywqjebch-1
+	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 3tywqjebdd-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 27 Oct 2023 08:19:00 +0000
+	Fri, 27 Oct 2023 08:19:03 +0000
 Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39R8Ig9V028975;
-	Fri, 27 Oct 2023 08:19:00 GMT
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39R8Ig9X028975;
+	Fri, 27 Oct 2023 08:19:03 GMT
 Received: from t460-2.nl.oracle.com (dhcp-10-175-63-126.vpn.oracle.com [10.175.63.126])
-	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id 3tywqjeb1g-7;
-	Fri, 27 Oct 2023 08:19:00 +0000
+	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id 3tywqjeb1g-8;
+	Fri, 27 Oct 2023 08:19:02 +0000
 From: Vegard Nossum <vegard.nossum@oracle.com>
 To: linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
         Mauro Carvalho Chehab <mchehab@kernel.org>
 Cc: Jani Nikula <jani.nikula@intel.com>, linux-kernel@vger.kernel.org,
         Vegard Nossum <vegard.nossum@oracle.com>,
-        Richard Cochran <richardcochran@gmail.com>,
-        SeongJae Park <sj@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
-        Armin Wolf <W_Armin@gmx.de>,
-        Iwona Winiarska <iwona.winiarska@intel.com>,
-        =?UTF-8?q?Ricardo=20Ca=C3=B1uelo?= <ricardo.canuelo@collabora.com>,
-        Tomas Winkler <tomas.winkler@intel.com>, linux-media@vger.kernel.org,
-        Yanteng Si <siyanteng@loongson.cn>, Alex Shi <alexs@kernel.org>,
-        Wu XiangCheng <bobwxc@email.cn>
-Subject: [PATCH RFC 06/11] docs: driver-api: properly format ToC headings
-Date: Fri, 27 Oct 2023 10:18:25 +0200
-Message-Id: <20231027081830.195056-7-vegard.nossum@oracle.com>
+        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+        linux-input@vger.kernel.org
+Subject: [PATCH RFC 07/11] input: docs: properly format ToC headings
+Date: Fri, 27 Oct 2023 10:18:26 +0200
+Message-Id: <20231027081830.195056-8-vegard.nossum@oracle.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231027081830.195056-1-vegard.nossum@oracle.com>
 References: <20231027081830.195056-1-vegard.nossum@oracle.com>
@@ -77,7 +71,6 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
@@ -86,8 +79,8 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 mlxl
  spamscore=0 suspectscore=0 adultscore=0 bulkscore=0 malwarescore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2310240000
  definitions=main-2310270071
-X-Proofpoint-GUID: wz7HOd5et-SDzZciojXibt6vUTGSeytM
-X-Proofpoint-ORIG-GUID: wz7HOd5et-SDzZciojXibt6vUTGSeytM
+X-Proofpoint-GUID: aoJ9XceRi8i7_aMEaDo6B2ImGRMp_3ab
+X-Proofpoint-ORIG-GUID: aoJ9XceRi8i7_aMEaDo6B2ImGRMp_3ab
 
 "class:: toc-title" was a workaround for older Sphinx versions that are
 no longer supported.
@@ -95,132 +88,66 @@ no longer supported.
 The canonical way to add a heading to the ToC is to use :caption:.
 Do that.
 
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Richard Cochran <richardcochran@gmail.com>
-Cc: SeongJae Park <sj@kernel.org>
-Cc: Hans de Goede <hdegoede@redhat.com>
-Cc: Armin Wolf <W_Armin@gmx.de>
-Cc: Iwona Winiarska <iwona.winiarska@intel.com>
-Cc: "Ricardo Cañuelo" <ricardo.canuelo@collabora.com>
-Cc: Tomas Winkler <tomas.winkler@intel.com>
-Cc: linux-media@vger.kernel.org
-Cc: Yanteng Si <siyanteng@loongson.cn>
-Cc: Alex Shi <alexs@kernel.org>
-Cc: Wu XiangCheng <bobwxc@email.cn>
+Cc: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: linux-input@vger.kernel.org
 Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
 ---
- Documentation/driver-api/index.rst                         | 5 +----
- Documentation/driver-api/media/index.rst                   | 7 +------
- Documentation/driver-api/mei/index.rst                     | 7 +------
- Documentation/driver-api/pci/index.rst                     | 5 +----
- Documentation/translations/zh_CN/driver-api/gpio/index.rst | 3 +--
- Documentation/translations/zh_CN/driver-api/index.rst      | 5 +----
- 6 files changed, 6 insertions(+), 26 deletions(-)
+ Documentation/input/input_kapi.rst   | 5 +----
+ Documentation/input/input_uapi.rst   | 5 +----
+ Documentation/input/joydev/index.rst | 5 +----
+ 3 files changed, 3 insertions(+), 12 deletions(-)
 
-diff --git a/Documentation/driver-api/index.rst b/Documentation/driver-api/index.rst
-index 1e16a40da3ba..4540f79a34a9 100644
---- a/Documentation/driver-api/index.rst
-+++ b/Documentation/driver-api/index.rst
-@@ -9,11 +9,8 @@ of device drivers.  This document is an only somewhat organized collection
- of some of those interfaces — it will hopefully get better over time!  The
- available subsections can be seen below.
+diff --git a/Documentation/input/input_kapi.rst b/Documentation/input/input_kapi.rst
+index 41f1b7e6b78e..9937522daa9b 100644
+--- a/Documentation/input/input_kapi.rst
++++ b/Documentation/input/input_kapi.rst
+@@ -4,11 +4,8 @@
+ Linux Input Subsystem kernel API
+ ################################
  
 -.. class:: toc-title
--
--	   Table of contents
--
- .. toctree::
-+   :caption: Table of contents
-    :maxdepth: 2
- 
-    driver-model/index
-diff --git a/Documentation/driver-api/media/index.rst b/Documentation/driver-api/media/index.rst
-index 08e206567408..d5593182a3f9 100644
---- a/Documentation/driver-api/media/index.rst
-+++ b/Documentation/driver-api/media/index.rst
-@@ -20,13 +20,8 @@ Documentation/userspace-api/media/index.rst
-   - for the userspace APIs used on media devices.
- 
- 
--.. only:: html
--
--   .. class:: toc-title
--
--        Table of Contents
--
- .. toctree::
-+    :caption: Table of Contents
-     :maxdepth: 5
-     :numbered:
- 
-diff --git a/Documentation/driver-api/mei/index.rst b/Documentation/driver-api/mei/index.rst
-index 3a22b522ee78..eae6f18f18cf 100644
---- a/Documentation/driver-api/mei/index.rst
-+++ b/Documentation/driver-api/mei/index.rst
-@@ -9,13 +9,8 @@ Intel(R) Management Engine Interface (Intel(R) MEI)
- **Copyright** |copy| 2019 Intel Corporation
- 
- 
--.. only:: html
--
--   .. class:: toc-title
 -
 -        Table of Contents
 -
  .. toctree::
 +   :caption: Table of Contents
-    :maxdepth: 3
+    :maxdepth: 2
+    :numbered:
  
-    mei
-diff --git a/Documentation/driver-api/pci/index.rst b/Documentation/driver-api/pci/index.rst
-index c6cf1fef61ce..a38e475cdbe3 100644
---- a/Documentation/driver-api/pci/index.rst
-+++ b/Documentation/driver-api/pci/index.rst
+diff --git a/Documentation/input/input_uapi.rst b/Documentation/input/input_uapi.rst
+index 4a0391609327..8275b4223a84 100644
+--- a/Documentation/input/input_uapi.rst
++++ b/Documentation/input/input_uapi.rst
 @@ -4,11 +4,8 @@
- The Linux PCI driver implementer's API guide
- ============================================
+ Linux Input Subsystem userspace API
+ ###################################
  
 -.. class:: toc-title
 -
--	   Table of contents
+-        Table of Contents
 -
  .. toctree::
-+   :caption: Table of contents
++   :caption: Table of Contents
     :maxdepth: 2
+    :numbered:
  
-    pci
-diff --git a/Documentation/translations/zh_CN/driver-api/gpio/index.rst b/Documentation/translations/zh_CN/driver-api/gpio/index.rst
-index 9ab64e94aced..9a6a14162a6c 100644
---- a/Documentation/translations/zh_CN/driver-api/gpio/index.rst
-+++ b/Documentation/translations/zh_CN/driver-api/gpio/index.rst
-@@ -14,9 +14,8 @@
- 通用型输入/输出（GPIO）
- =======================
+diff --git a/Documentation/input/joydev/index.rst b/Documentation/input/joydev/index.rst
+index ebcff43056e2..d03d6f6cbfab 100644
+--- a/Documentation/input/joydev/index.rst
++++ b/Documentation/input/joydev/index.rst
+@@ -6,11 +6,8 @@ Linux Joystick support
  
--目录:
--
- .. toctree::
-+   :caption: 目录
-    :maxdepth: 2
- 
-    legacy
-diff --git a/Documentation/translations/zh_CN/driver-api/index.rst b/Documentation/translations/zh_CN/driver-api/index.rst
-index ba354e1f4e6d..92ff1b7fc3d3 100644
---- a/Documentation/translations/zh_CN/driver-api/index.rst
-+++ b/Documentation/translations/zh_CN/driver-api/index.rst
-@@ -17,11 +17,8 @@ Linux驱动实现者的API指南
- 内核提供了各种各样的接口来支持设备驱动的开发。这份文档只是对其中一些接口进行了
- 一定程度的整理——希望随着时间的推移，它能变得更好！可用的小节可以在下面看到。
+ :Copyright: |copy| 1996-2000 Vojtech Pavlik <vojtech@ucw.cz> - Sponsored by SuSE
  
 -.. class:: toc-title
 -
--	   目录列表：
+-	Table of Contents
 -
  .. toctree::
-+   :caption: 目录列表
-    :maxdepth: 2
++	:caption: Table of Contents
+ 	:maxdepth: 3
  
-    gpio/index
+ 	joystick
 -- 
 2.34.1
 
