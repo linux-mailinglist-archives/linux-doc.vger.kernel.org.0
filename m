@@ -1,343 +1,89 @@
-Return-Path: <linux-doc+bounces-1535-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-1512-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F84F7DD885
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Oct 2023 23:41:12 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id DBFFF7DD6CF
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Oct 2023 20:57:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id F422CB20E74
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Oct 2023 22:41:09 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0FCB91C20BFA
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Oct 2023 19:57:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8E8422331;
-	Tue, 31 Oct 2023 22:41:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dkim=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7B864208C1;
+	Tue, 31 Oct 2023 19:57:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MmW7E9yG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23BD512E76
-	for <linux-doc@vger.kernel.org>; Tue, 31 Oct 2023 22:41:05 +0000 (UTC)
-Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E6329110;
-	Tue, 31 Oct 2023 15:41:02 -0700 (PDT)
-Received: from pps.filterd (m0167088.ppops.net [127.0.0.1])
-	by mx0a-00128a01.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 39VM9GJP004517;
-	Tue, 31 Oct 2023 18:40:47 -0400
-Received: from nwd2mta3.analog.com ([137.71.173.56])
-	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 3u38jds73p-934
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 31 Oct 2023 18:40:47 -0400 (EDT)
-Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
-	by nwd2mta3.analog.com (8.14.7/8.14.7) with ESMTP id 39VIMP1L034724
-	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 31 Oct 2023 14:22:25 -0400
-Received: from ASHBMBX9.ad.analog.com (10.64.17.10) by ASHBMBX8.ad.analog.com
- (10.64.17.5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.14; Tue, 31 Oct
- 2023 14:22:24 -0400
-Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx9.ad.analog.com
- (10.64.17.10) with Microsoft SMTP Server id 15.2.986.14 via Frontend
- Transport; Tue, 31 Oct 2023 14:22:24 -0400
-Received: from daniel-Precision-5530.ad.analog.com ([10.48.65.198])
-	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 39VIM1d6022309;
-	Tue, 31 Oct 2023 14:22:16 -0400
-From: Daniel Matyas <daniel.matyas@analog.com>
-To: 
-CC: Daniel Matyas <daniel.matyas@analog.com>,
-        Jean Delvare
-	<jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet
-	<corbet@lwn.net>, <linux-hwmon@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-Subject: [PATCH v6 5/5] hwmon: max31827: Add custom attribute for resolution
-Date: Tue, 31 Oct 2023 20:21:57 +0200
-Message-ID: <20231031182158.124608-5-daniel.matyas@analog.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231031182158.124608-1-daniel.matyas@analog.com>
-References: <20231031182158.124608-1-daniel.matyas@analog.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59F07D292;
+	Tue, 31 Oct 2023 19:57:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71EADC433C7;
+	Tue, 31 Oct 2023 19:57:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1698782258;
+	bh=nEcINVTOJMdm+dcaCe/lMlijXRQXljtnkQahZ1Mfaps=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=MmW7E9yGNpYfOKZsCi8lIfjhqfbZDDIjw/EK6doXaAJ/xFW/+8eSNlCgs8tyc9ooO
+	 G+X1gds5DuFC2fNpn82KC4Z+jNJQ14ZvTHqkndBSTvDhAdYCrZiU2ccppgs7No0DNq
+	 tXylHS3FP1hvdrI1o91XBFTeCwIMZ6Cy899aEJ3drZhUigFb2l1tmU86SIKFFGrFiS
+	 Qm6eDVO2/JUS05Fuvj7qB1Sxl3aNDgKXRvsadw+B2qKTTNfTgZ/QlUuJUZ4wQ6N4Q4
+	 VzFY0/5KxHVIC11so5QnqlDhuTZiK//6b0tpJWnie7A8r2mrONqW8MoYV8u4iDNdNZ
+	 MNvlkXymcPN+g==
+Date: Tue, 31 Oct 2023 12:57:37 -0700
+From: Jakub Kicinski <kuba@kernel.org>
+To: Gal Pressman <gal@nvidia.com>
+Cc: Ahmed Zaki <ahmed.zaki@intel.com>, Alexander H Duyck
+ <alexander.duyck@gmail.com>, mkubecek@suse.cz, andrew@lunn.ch,
+ willemdebruijn.kernel@gmail.com, Wojciech Drewek
+ <wojciech.drewek@intel.com>, corbet@lwn.net, netdev@vger.kernel.org,
+ linux-doc@vger.kernel.org, jesse.brandeburg@intel.com, edumazet@google.com,
+ anthony.l.nguyen@intel.com, horms@kernel.org, vladimir.oltean@nxp.com,
+ Jacob Keller <jacob.e.keller@intel.com>, intel-wired-lan@lists.osuosl.org,
+ pabeni@redhat.com, davem@davemloft.net
+Subject: Re: [Intel-wired-lan] [PATCH net-next v4 1/6] net: ethtool: allow
+ symmetric-xor RSS hash for any flow type
+Message-ID: <20231031125737.0d9a648e@kernel.org>
+In-Reply-To: <ff81c4e7-0787-4357-bb92-9da334a4ddaf@nvidia.com>
+References: <20231016154937.41224-1-ahmed.zaki@intel.com>
+	<20231017173448.3f1c35aa@kernel.org>
+	<CAKgT0Udz+YdkmtO2Gbhr7CccHtBbTpKich4er3qQXY-b2inUoA@mail.gmail.com>
+	<20231018165020.55cc4a79@kernel.org>
+	<45c6ab9f-50f6-4e9e-a035-060a4491bded@intel.com>
+	<20231020153316.1c152c80@kernel.org>
+	<c2c0dbe8-eee5-4e87-a115-7424ba06d21b@intel.com>
+	<20231020164917.69d5cd44@kernel.org>
+	<f6ab0dc1-b5d5-4fff-9ee2-69d21388d4ca@intel.com>
+	<89e63967-46c4-49fe-87bc-331c7c2f6aab@nvidia.com>
+	<e644840d-7f3d-4e3c-9e0f-6d958ec865e0@intel.com>
+	<e471519b-b253-4121-9eec-f7f05948c258@nvidia.com>
+	<a2a1164f-1492-43d1-9667-5917d0ececcb@intel.com>
+	<d097e7d3-5e16-44ba-aa92-dfb7fbedc600@nvidia.com>
+	<aa1dd347-a16c-44f8-95ad-5d50bcba8f34@intel.com>
+	<70132b6f-542f-4fe6-971f-ab9ea80acbe4@nvidia.com>
+	<e7679b57-af11-42b1-91c7-b18cbcc70119@intel.com>
+	<20231031082023.3fd4761b@kernel.org>
+	<ff81c4e7-0787-4357-bb92-9da334a4ddaf@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ADIRuleOP-NewSCL: Rule Triggered
-X-Proofpoint-GUID: 2Jo_6VfOCUs_KY3Pc8O37ztpyfqC4ovE
-X-Proofpoint-ORIG-GUID: 2Jo_6VfOCUs_KY3Pc8O37ztpyfqC4ovE
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-10-31_09,2023-10-31_03,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=999
- lowpriorityscore=0 suspectscore=0 impostorscore=0 bulkscore=0 spamscore=0
- phishscore=0 malwarescore=0 clxscore=1015 mlxscore=0 priorityscore=1501
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2310240000
- definitions=main-2310310186
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Added custom channel-specific (temp1) attribute for resolution. The wait
-time for a conversion in one-shot mode (enable = 0) depends on the
-resolution.
+On Tue, 31 Oct 2023 18:13:20 +0200 Gal Pressman wrote:
+> Sure, IIUC, ice's implementation does a:
+> (SRC_IP ^ DST_IP, SRC_IP ^ DST_IP, SRC_PORT ^ DST_PORT, SRC_PORT ^ DST_PORT)
+> 
+> Our implementation isn't exactly xor, it is:
+> (SRC_IP | DST_IP, SRC_IP ^ DST_IP, SRC_PORT | DST_PORT, SRC_PORT ^ DST_PORT)
+> 
+> The way I see it, the xor implementation should be clearly documented,
+> so no one uses the same flag with a different implementation by mistake.
 
-When resolution is 12-bit, the conversion time is 140ms, but the minimum
-update_interval is 125ms. Handled this problem by waiting an additional
-15ms (125ms + 15ms = 140ms).
-
-Added 'mask' parameter to the shutdown_write() function. Now it can
-either write or update bits, depending on the value of mask. This is
-needed, because for alarms a write is necessary, but for resolution only
-the resolution bits should be updated.
-
-Signed-off-by: Daniel Matyas <daniel.matyas@analog.com>
----
-
-v5 -> v6: Resolution selects value closest to input value.
-
-v3 -> v5: No change.
-
-v2 -> v3: Fixed indentation problems in .rst.
-
-v1 -> v2: Changed subject. Separated patch. Removed timeout sysfs
-attribute and kept only resolution. Added temp1_ prefix to resolution.
-Changed value of resolution from bits to milli-degrees Celsius. Added
-appropriate documentation.
-
- Documentation/hwmon/max31827.rst |  29 ++++++--
- drivers/hwmon/max31827.c         | 122 ++++++++++++++++++++++++++++---
- 2 files changed, 134 insertions(+), 17 deletions(-)
-
-diff --git a/Documentation/hwmon/max31827.rst b/Documentation/hwmon/max31827.rst
-index a8bbfb85dd02..44ab9dc064cb 100644
---- a/Documentation/hwmon/max31827.rst
-+++ b/Documentation/hwmon/max31827.rst
-@@ -90,11 +90,28 @@ the data sheet are:
- 
- Enabling the device when it is already enabled has the side effect of setting
- the conversion frequency to 1 conv/s. The conversion time varies depending on
--the resolution. The conversion time doubles with every bit of increased
--resolution. For 10 bit resolution 35ms are needed, while for 12 bit resolution
--(default) 140ms. When chip is in shutdown mode and a read operation is
--requested, one-shot is triggered, the device waits for 140 (conversion time) ms,
--and only after that is the temperature value register read.
-+the resolution.
-+
-+The conversion time doubles with every bit of increased resolution. The
-+available resolutions are:
-+
-+- 8 bit -> 8.75 ms conversion time
-+- 9 bit -> 17.5 ms conversion time
-+- 10 bit -> 35 ms conversion time
-+- 12 bit (default) -> 140 ms conversion time
-+
-+There is a temp1_resolution attribute which indicates the unit change in the
-+input temperature in milli-degrees C.
-+
-+- 1000 mC -> 8 bit
-+- 500 mC -> 9 bit
-+- 250 mC -> 10 bit
-+- 62 mC -> 12 bit (default) - actually this is 62.5, but the fil returns 62
-+
-+When chip is in shutdown mode and a read operation is requested, one-shot is
-+triggered, the device waits for <conversion time> ms, and only after that is
-+the temperature value register read. Note that the conversion times are rounded
-+up to the nearest possible integer.
- 
- The LSB of the temperature values is 0.0625 degrees Celsius, but the values of
- the temperatures are displayed in milli-degrees. This means, that some data is
-@@ -117,4 +134,4 @@ corresponding status bits.
- Notes
- -----
- 
--PEC and resolution are not implemented.
-+PEC is not implemented.
-diff --git a/drivers/hwmon/max31827.c b/drivers/hwmon/max31827.c
-index 13ebe691475a..ea10b4a0fcab 100644
---- a/drivers/hwmon/max31827.c
-+++ b/drivers/hwmon/max31827.c
-@@ -36,6 +36,9 @@
- #define MAX31827_FLT_Q_1	0x0
- #define MAX31827_FLT_Q_4	0x2
- 
-+#define MAX31827_8_BIT_CNV_TIME		9
-+#define MAX31827_9_BIT_CNV_TIME		18
-+#define MAX31827_10_BIT_CNV_TIME	35
- #define MAX31827_12_BIT_CNV_TIME	140
- 
- #define MAX31827_16_BIT_TO_M_DGR(x)	(sign_extend32(x, 15) * 1000 / 16)
-@@ -64,6 +67,27 @@ static const u16 max31827_conversions[] = {
- 	[MAX31827_CNV_8_HZ] = 125,
- };
- 
-+enum max31827_resolution {
-+	MAX31827_RES_8_BIT = 0,
-+	MAX31827_RES_9_BIT,
-+	MAX31827_RES_10_BIT,
-+	MAX31827_RES_12_BIT,
-+};
-+
-+static const u16 max31827_resolutions[] = {
-+	[MAX31827_RES_8_BIT] = 1000,
-+	[MAX31827_RES_9_BIT] = 500,
-+	[MAX31827_RES_10_BIT] = 250,
-+	[MAX31827_RES_12_BIT] = 62,
-+};
-+
-+static const u16 max31827_conv_times[] = {
-+	[MAX31827_RES_8_BIT] = MAX31827_8_BIT_CNV_TIME,
-+	[MAX31827_RES_9_BIT] = MAX31827_9_BIT_CNV_TIME,
-+	[MAX31827_RES_10_BIT] = MAX31827_10_BIT_CNV_TIME,
-+	[MAX31827_RES_12_BIT] = MAX31827_12_BIT_CNV_TIME,
-+};
-+
- struct max31827_state {
- 	/*
- 	 * Prevent simultaneous access to the i2c client.
-@@ -71,6 +95,8 @@ struct max31827_state {
- 	struct mutex lock;
- 	struct regmap *regmap;
- 	bool enable;
-+	unsigned int resolution;
-+	unsigned int update_interval;
- };
- 
- static const struct regmap_config max31827_regmap = {
-@@ -87,9 +113,9 @@ static int shutdown_write(struct max31827_state *st, unsigned int reg,
- 	int ret;
- 
- 	/*
--	 * Before the Temperature Threshold Alarm and Alarm Hysteresis Threshold
--	 * register values are changed over I2C, the part must be in shutdown
--	 * mode.
-+	 * Before the Temperature Threshold Alarm, Alarm Hysteresis Threshold
-+	 * and Resolution bits from Configuration register are changed over I2C,
-+	 * the part must be in shutdown mode.
- 	 *
- 	 * Mutex is used to ensure, that some other process doesn't change the
- 	 * configuration register.
-@@ -207,9 +233,18 @@ static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
- 					mutex_unlock(&st->lock);
- 					return ret;
- 				}
--
--				msleep(MAX31827_12_BIT_CNV_TIME);
-+				msleep(max31827_conv_times[st->resolution]);
- 			}
-+
-+			/*
-+			 * For 12-bit resolution the conversion time is 140 ms,
-+			 * thus an additional 15 ms is needed to complete the
-+			 * conversion: 125 ms + 15 ms = 140 ms
-+			 */
-+			if (max31827_resolutions[st->resolution] == 12 &&
-+			    st->update_interval == 125)
-+				usleep_range(15000, 20000);
-+
- 			ret = regmap_read(st->regmap, MAX31827_T_REG, &uval);
- 
- 			mutex_unlock(&st->lock);
-@@ -366,10 +401,14 @@ static int max31827_write(struct device *dev, enum hwmon_sensor_types type,
- 			res = FIELD_PREP(MAX31827_CONFIGURATION_CNV_RATE_MASK,
- 					 res);
- 
--			return regmap_update_bits(st->regmap,
--						  MAX31827_CONFIGURATION_REG,
--						  MAX31827_CONFIGURATION_CNV_RATE_MASK,
--						  res);
-+			ret = regmap_update_bits(st->regmap,
-+						 MAX31827_CONFIGURATION_REG,
-+						 MAX31827_CONFIGURATION_CNV_RATE_MASK,
-+						 res);
-+			if (ret)
-+				return ret;
-+
-+			st->update_interval = val;
- 		}
- 		break;
- 
-@@ -377,9 +416,70 @@ static int max31827_write(struct device *dev, enum hwmon_sensor_types type,
- 		return -EOPNOTSUPP;
- 	}
- 
--	return -EOPNOTSUPP;
-+	return 0;
-+}
-+
-+static ssize_t temp1_resolution_show(struct device *dev,
-+				     struct device_attribute *devattr,
-+				     char *buf)
-+{
-+	struct max31827_state *st = dev_get_drvdata(dev);
-+	unsigned int val;
-+	int ret;
-+
-+	ret = regmap_read(st->regmap, MAX31827_CONFIGURATION_REG, &val);
-+	if (ret)
-+		return ret;
-+
-+	val = FIELD_GET(MAX31827_CONFIGURATION_RESOLUTION_MASK, val);
-+
-+	return scnprintf(buf, PAGE_SIZE, "%u\n", max31827_resolutions[val]);
-+}
-+
-+static ssize_t temp1_resolution_store(struct device *dev,
-+				      struct device_attribute *devattr,
-+				      const char *buf, size_t count)
-+{
-+	struct max31827_state *st = dev_get_drvdata(dev);
-+	unsigned int idx = 0;
-+	unsigned int val;
-+	int ret;
-+
-+	ret = kstrtouint(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * Convert the desired resolution into register
-+	 * bits. idx is already initialized with 0.
-+	 *
-+	 * This was inspired by lm73 driver.
-+	 */
-+	while (idx < ARRAY_SIZE(max31827_resolutions) &&
-+	       val < max31827_resolutions[idx])
-+		idx++;
-+
-+	if (idx == ARRAY_SIZE(max31827_resolutions))
-+		idx = ARRAY_SIZE(max31827_resolutions) - 1;
-+
-+	st->resolution = idx;
-+
-+	ret = shutdown_write(st, MAX31827_CONFIGURATION_REG,
-+			     MAX31827_CONFIGURATION_RESOLUTION_MASK,
-+			     FIELD_PREP(MAX31827_CONFIGURATION_RESOLUTION_MASK,
-+					idx));
-+
-+	return ret ? ret : count;
- }
- 
-+static DEVICE_ATTR_RW(temp1_resolution);
-+
-+static struct attribute *max31827_attrs[] = {
-+	&dev_attr_temp1_resolution.attr,
-+	NULL
-+};
-+ATTRIBUTE_GROUPS(max31827);
-+
- static const struct i2c_device_id max31827_i2c_ids[] = {
- 	{ "max31827", max31827 },
- 	{ "max31828", max31828 },
-@@ -524,7 +624,7 @@ static int max31827_probe(struct i2c_client *client)
- 
- 	hwmon_dev = devm_hwmon_device_register_with_info(dev, client->name, st,
- 							 &max31827_chip_info,
--							 NULL);
-+							 max31827_groups);
- 
- 	return PTR_ERR_OR_ZERO(hwmon_dev);
- }
--- 
-2.34.1
-
+Got it, thanks!
 
