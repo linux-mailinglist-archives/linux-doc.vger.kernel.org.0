@@ -1,172 +1,214 @@
-Return-Path: <linux-doc+bounces-1842-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-1844-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B0CE7E48F6
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Nov 2023 20:09:38 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id E397D7E4A66
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Nov 2023 22:15:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 11A7328136A
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Nov 2023 19:09:37 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2037F1C209DE
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Nov 2023 21:15:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF344358B7;
-	Tue,  7 Nov 2023 19:09:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 297C22A1A4;
+	Tue,  7 Nov 2023 21:15:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="WHyKxEDn"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Vvc68D6O"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 456173158C
-	for <linux-doc@vger.kernel.org>; Tue,  7 Nov 2023 19:09:33 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4D29410A
-	for <linux-doc@vger.kernel.org>; Tue,  7 Nov 2023 11:09:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1699384172;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=3J40+zQ/6dP9tvNGgIODUTJ9R+5seR+mVk01q9f45Uc=;
-	b=WHyKxEDnr8lHHG5NAKtnaCEzXlnCbgndyFBc3A1tytfKykuys8IIbmacXutMY0gLUlkY/X
-	MzHk/N3aInfQYrs29no5X0Dbd18C7R9RxIECJsE7G5zEuoMd2fwZQ+ajDOQy6sMUCDxBpB
-	y0xkYxZIL/W/2QC61O+UEJuCivOPaYw=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-548-_fBNRVnJN6SJkcSyQLINHg-1; Tue, 07 Nov 2023 14:09:31 -0500
-X-MC-Unique: _fBNRVnJN6SJkcSyQLINHg-1
-Received: by mail-wm1-f69.google.com with SMTP id 5b1f17b1804b1-4083fec2c30so40293935e9.1
-        for <linux-doc@vger.kernel.org>; Tue, 07 Nov 2023 11:09:30 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699384169; x=1699988969;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3J40+zQ/6dP9tvNGgIODUTJ9R+5seR+mVk01q9f45Uc=;
-        b=uSinMFEr9ivwfi+/VYJmONlfKw8kAmd2dPJ5TdbW8VugXEx5v1avF7LLxKdePIpdLf
-         Ftec+gxPyWtVAu6ka1HDikX49yoNpehDekEsg3l0Rv2vQlYrPcbQuseiVLXhQZ0+r+1E
-         dBteulGbcXAbclRMdM7nKTnl3CZ+sW/WL7S0KM87xPI0/5JeYWXFODyYdltSvbs1mA71
-         IkOL/GdIc1AAdLOLGgMaGzJ/2S6UCk98JcQba2XQFO4UkGmm3bHFT1ZxLh9WoqEpvuXN
-         9uPxNuggUckFT3dSN09H3V9NnJUV1GlZ2MWfILWPEetvfyHx2ay4cRjOznD7D5CbsxF9
-         FK6A==
-X-Gm-Message-State: AOJu0Yxk89Peog8Ewbnsjn51972HcoQfZbyLkHH4h9kiaFIbLtfw65RW
-	pOoijnuqGo4uOeSpHdO0k6I5DWbZqwsHv+/HvVsnHci5Jk+PL85i8PHvkUJCPjDwM5YXN+QKGaT
-	+MtHp8TkofQdpUoLa6qyC
-X-Received: by 2002:a05:600c:4448:b0:409:79cb:1df6 with SMTP id v8-20020a05600c444800b0040979cb1df6mr3032967wmn.14.1699384169559;
-        Tue, 07 Nov 2023 11:09:29 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE9xvdcop2cag0mJbvlGopE/xTO4Pcr5jJIkWEGHZ4CMIoXRHQH7Dm3WT+HPFFscnl+vjA+sg==
-X-Received: by 2002:a05:600c:4448:b0:409:79cb:1df6 with SMTP id v8-20020a05600c444800b0040979cb1df6mr3032941wmn.14.1699384169220;
-        Tue, 07 Nov 2023 11:09:29 -0800 (PST)
-Received: from localhost (205.pool92-176-231.dynamic.orange.es. [92.176.231.205])
-        by smtp.gmail.com with ESMTPSA id f20-20020a05600c43d400b003fbe4cecc3bsm16089746wmn.16.2023.11.07.11.09.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Nov 2023 11:09:28 -0800 (PST)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: linux-kernel@vger.kernel.org
-Cc: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Brian Masney <bmasney@redhat.com>,
-	Javier Martinez Canillas <javierm@redhat.com>,
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDFBB2A1BB
+	for <linux-doc@vger.kernel.org>; Tue,  7 Nov 2023 21:15:52 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 220F392;
+	Tue,  7 Nov 2023 13:15:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1699391752; x=1730927752;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=tvrqr3gCoi7R07ZKXs6dBXJsySNmo1jfexcJRbjtD20=;
+  b=Vvc68D6OiQmLNL1Ad0ZAf8HZFuiPgYywtEhwK6AQ47aHRZTC4pNCWv56
+   RdmgJRlf46qrg+YiMQodmV23Ps5d/tXc+U2eGgljfPd5VC8EIcs8022yp
+   FmMsXoM2VOSYABnLnKo//jzRVEXUU91S8L6rWEBAelCUfUYEHJC8TA032
+   PSNnQFrIW41vakE/SYXOjTPgJJAHhy5fgM+Cu4BvWI4g46VoqIKnW/Qcr
+   qAekZCSnW8jsrGKIIbk2OPotcLqggVhRWVZglyhi9ekzZD04EKuK7vanc
+   zoJLDM5Qfp+6Ag2S/ash40lhrNUTbhwjuIqAmBrTtAS7VIUKwEyDsg0DE
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10887"; a="2558705"
+X-IronPort-AV: E=Sophos;i="6.03,284,1694761200"; 
+   d="scan'208";a="2558705"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Nov 2023 13:15:39 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10887"; a="739278248"
+X-IronPort-AV: E=Sophos;i="6.03,284,1694761200"; 
+   d="scan'208";a="739278248"
+Received: from agluck-desk3.sc.intel.com (HELO agluck-desk3) ([172.25.222.74])
+  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Nov 2023 13:15:38 -0800
+Date: Tue, 7 Nov 2023 13:15:36 -0800
+From: Tony Luck <tony.luck@intel.com>
+To: Reinette Chatre <reinette.chatre@intel.com>
+Cc: Fenghua Yu <fenghua.yu@intel.com>,
+	Peter Newman <peternewman@google.com>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	"Paul E. McKenney" <paulmck@kernel.org>,
-	"Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
-	"Steven Rostedt (Google)" <rostedt@goodmis.org>,
-	Tejun Heo <tj@kernel.org>,
-	linux-doc@vger.kernel.org
-Subject: [PATCH v2] regulator: core: Add option to prevent disabling unused regulators
-Date: Tue,  7 Nov 2023 20:09:18 +0100
-Message-ID: <20231107190926.1185326-1-javierm@redhat.com>
-X-Mailer: git-send-email 2.41.0
+	Shuah Khan <skhan@linuxfoundation.org>, x86@kernel.org,
+	Shaopeng Tan <tan.shaopeng@fujitsu.com>,
+	James Morse <james.morse@arm.com>,
+	Jamie Iles <quic_jiles@quicinc.com>,
+	Babu Moger <babu.moger@amd.com>,
+	Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, patches@lists.linux.dev
+Subject: Re: [PATCH v3] x86/resctrl: mba_MBps: Fall back to total b/w if
+ local b/w unavailable
+Message-ID: <ZUqo+MsEQi2Xc/pO@agluck-desk3>
+References: <20231025235046.12940-1-tony.luck@intel.com>
+ <20231026200214.16017-1-tony.luck@intel.com>
+ <0cee68e9-e188-46e9-83a8-02259a9c081f@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0cee68e9-e188-46e9-83a8-02259a9c081f@intel.com>
 
-This may be useful for debugging and develompent purposes, when there are
-drivers that depend on regulators to be enabled but do not request them.
+On Fri, Nov 03, 2023 at 02:43:15PM -0700, Reinette Chatre wrote:
+> Hi Tony,
+> 
+> On 10/26/2023 1:02 PM, Tony Luck wrote:
+> > On Intel the various resource director technology (RDT) features are all
+> > orthogonal and independently enumerated. Thus it is possible to have
+> > a system that  provides "total" memory bandwidth measurements without
+> > providing "local" bandwidth measurements.
+> 
+> This motivation is written in support of Intel systems but from what I
+> can tell the changes impact Intel as well as AMD.
 
-It is inspired from the clk_ignore_unused and pd_ignore_unused parameters,
-that are used to keep firmware-enabled clocks and power domains on even if
-these are not used by drivers.
+If AMD were to build a system that did this, same fixes would be needed.
 
-The parameter is not expected to be used in normal cases and should not be
-needed on a platform with proper driver support.
+> > 
+> > If local bandwidth measurement is not available, do not give up on
+> > providing the "mba_MBps" feedback option completely, make the code fall
+> > back to using total bandwidth.
+> 
+> It is interesting to me that the "fall back" is essentially a drop-in
+> replacement without any adjustments to the data/algorithm.
 
-Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
-Reviewed-by: Brian Masney <bmasney@redhat.com>
-Acked-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
----
+The algorithm is, by necessity, very simple. Essentially "if measured
+bandwidth is above desired target, apply one step extra throttling.
+Reverse when bandwidth is below desired level." I'm not sure what tweaks
+are possible.
 
-Changes in v2:
-- Grammar changes suggested by Randy Dunlap.
-- Add collected tags from v1.
+> Can these measurements be considered equivalent? Could a user now perhaps
+> want to experiment by disabling local bandwidth measurement to explore if
+> system behaves differently when using total memory bandwidth? What
+> would have a user choose one over the other (apart from when user
+> is forced by system ability)?
 
- Documentation/admin-guide/kernel-parameters.txt |  7 +++++++
- drivers/regulator/core.c                        | 17 +++++++++++++++++
- 2 files changed, 24 insertions(+)
+This may be interesting. I dug around in the e-mail archives to see if
+there was any discussion on why "local" was picked as the feedback
+measurement rather that "total". But I couldn't find anything.
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 0a1731a0f0ef..d7c83c8ae80d 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -5461,6 +5461,13 @@
- 			print every Nth verbose statement, where N is the value
- 			specified.
- 
-+	regulator_ignore_unused
-+			[REGULATOR]
-+			Prevents regulator framework from disabling regulators
-+			that are unused, due no driver claiming them. This may
-+			be useful for debug and development, but should not be
-+			needed on a platform with proper driver support.
-+
- 	relax_domain_level=
- 			[KNL, SMP] Set scheduler's default relax_domain_level.
- 			See Documentation/admin-guide/cgroup-v1/cpusets.rst.
-diff --git a/drivers/regulator/core.c b/drivers/regulator/core.c
-index 3137e40fcd3e..79777495cc3a 100644
---- a/drivers/regulator/core.c
-+++ b/drivers/regulator/core.c
-@@ -6234,6 +6234,14 @@ static int regulator_late_cleanup(struct device *dev, void *data)
- 	return 0;
- }
- 
-+static bool regulator_ignore_unused;
-+static int __init regulator_ignore_unused_setup(char *__unused)
-+{
-+	regulator_ignore_unused = true;
-+	return 1;
-+}
-+__setup("regulator_ignore_unused", regulator_ignore_unused_setup);
-+
- static void regulator_init_complete_work_function(struct work_struct *work)
- {
- 	/*
-@@ -6246,6 +6254,15 @@ static void regulator_init_complete_work_function(struct work_struct *work)
- 	class_for_each_device(&regulator_class, NULL, NULL,
- 			      regulator_register_resolve_supply);
- 
-+	/*
-+	 * For debugging purposes, it may be useful to prevent unused
-+	 * regulators from being disabled.
-+	 */
-+	if (regulator_ignore_unused) {
-+		pr_warn("regulator: Not disabling unused regulators\n");
-+		return;
-+	}
-+
- 	/* If we have a full configuration then disable any regulators
- 	 * we have permission to change the status for and which are
- 	 * not in use or always_on.  This is effectively the default
--- 
-2.41.0
+Thinking about it now, "total" feels like a better choice. Why would
+you not care about off-package memory bandwidth? In pathological cases
+all the memory traffic might be going off package, but the existing
+mba_MBps algorithm would *reduce* the amount of throttling, eventually
+to zero.
 
+Maybe additional an mount option "mba_MBps_total" so the user can pick
+total instead of local?
+
+> > 
+> > Signed-off-by: Tony Luck <tony.luck@intel.com>
+> > ---
+> > Change since v2:
+> > 
+> > Babu doesn't like the global variable. So here's a version without it.
+> > 
+> > Note that my preference is still the v2 version. But as I tell newbies
+> > to Linux "Your job isn't to get YOUR patch upstream. You job is to get
+> > the problem fixed.".  So taking my own advice I don't really mind
+> > whether v2 or v3 is applied.
+> > 
+> >  arch/x86/kernel/cpu/resctrl/monitor.c  | 43 ++++++++++++++++++--------
+> >  arch/x86/kernel/cpu/resctrl/rdtgroup.c |  2 +-
+> >  2 files changed, 31 insertions(+), 14 deletions(-)
+> > 
+> > diff --git a/arch/x86/kernel/cpu/resctrl/monitor.c b/arch/x86/kernel/cpu/resctrl/monitor.c
+> > index f136ac046851..29e86310677d 100644
+> > --- a/arch/x86/kernel/cpu/resctrl/monitor.c
+> > +++ b/arch/x86/kernel/cpu/resctrl/monitor.c
+> > @@ -418,6 +418,20 @@ static int __mon_event_count(u32 rmid, struct rmid_read *rr)
+> >  	return 0;
+> >  }
+> >  
+> > +/*
+> > + * For legacy compatibility use the local memory bandwidth to drive
+> > + * the mba_MBps feedback control loop. But on platforms that do not
+> > + * provide the local event fall back to use the total bandwidth event
+> > + * instead.
+> > + */
+> > +static enum resctrl_event_id pick_mba_mbps_event(void)
+> > +{
+> > +	if (is_mbm_local_enabled())
+> > +		return QOS_L3_MBM_LOCAL_EVENT_ID;
+> > +
+> > +	return QOS_L3_MBM_TOTAL_EVENT_ID;
+> > +}
+> 
+> Can there be a WARN here to catch the unlikely event that
+> !is_mbm_total_enabled()?
+> This may mean the caller (in update_mba_bw()) needs to move
+> to code protected by is_mbm_enabled().
+
+All this code is under the protection of the check at mount time
+done by supports_mba_mbps()
+
+static bool supports_mba_mbps(void)
+{
+        struct rdt_resource *r = &rdt_resources_all[RDT_RESOURCE_MBA].r_resctrl;
+
+        return (is_mbm_enabled() &&
+                r->alloc_capable && is_mba_linear());
+}
+
+Adding even more run-time checks seems overkill.
+
+> One option to consider is to have a single "get_mba_mbps_state()"
+> call (similar to V1) that determines the eventid as above and
+> then calls get_mbm_state() to return a pointer to mbm_state in one
+> call. Starting to seem like nitpicking but I'd thought I'd mention it
+> since it seemed a way to have V1 solution with request to use
+> get_mbm_state() addressed.
+
+It doesn't sound any better than the V3 approach.
+
+> > +
+> >  /*
+> >   * mbm_bw_count() - Update bw count from values previously read by
+> >   *		    __mon_event_count().
+> > @@ -431,9 +445,11 @@ static int __mon_event_count(u32 rmid, struct rmid_read *rr)
+> >   */
+> >  static void mbm_bw_count(u32 rmid, struct rmid_read *rr)
+> >  {
+> > -	struct mbm_state *m = &rr->d->mbm_local[rmid];
+> > +	enum resctrl_event_id mba_mbps_evt_id = pick_mba_mbps_event();
+> >  	u64 cur_bw, bytes, cur_bytes;
+> > +	struct mbm_state *m;
+> >  
+> > +	m = get_mbm_state(rr->d, rmid, mba_mbps_evt_id);
+> >  	cur_bytes = rr->val;
+> >  	bytes = cur_bytes - m->prev_bw_bytes;
+> >  	m->prev_bw_bytes = cur_bytes;
+> 
+> It should not be necessary to pick the event id again. It is available
+> within the struct rmid_read parameter. 
+
+So it is. I can drop the extra pick_mba_mbps_event() call here.
+
+-Tony
 
