@@ -1,115 +1,156 @@
-Return-Path: <linux-doc+bounces-1806-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-1808-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E34EB7E3999
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Nov 2023 11:31:22 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CF337E3A07
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Nov 2023 11:40:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9D940281022
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Nov 2023 10:31:21 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8F3DBB20CCC
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Nov 2023 10:40:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 30A2829435;
-	Tue,  7 Nov 2023 10:31:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b="iBWuSBO8"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2817628E29;
+	Tue,  7 Nov 2023 10:40:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dkim=none
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2AAD28E29;
-	Tue,  7 Nov 2023 10:31:19 +0000 (UTC)
-Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk [IPv6:2001:4d48:ad52:32c8:5054:ff:fe00:142])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 862C4D57;
-	Tue,  7 Nov 2023 02:31:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=armlinux.org.uk; s=pandora-2019; h=Date:Sender:Message-Id:Content-Type:
-	Content-Transfer-Encoding:MIME-Version:Subject:Cc:To:From:References:
-	In-Reply-To:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=s/nJSc12wTo3rC59/Tj7C6Qxk/YhPkpMlGmhBF4UOwQ=; b=iBWuSBO8byS44iey2YnZSgJM8U
-	MFt1NMp2w5pAfZ6wCLyhFFlLsovAEisNzEANGVeTWzW/SvgUOWs8hzrl8E6fK+iTUQlweEEngqE3f
-	clKt8RH9RkEOEHOUca70RLavt4Q4aMF3hqPZwPOI9vFg9kh++U7+bjIdhqcec+iRE9IOnhXewhCqH
-	6LPO3PA4SHNnRIpc2kCc3AAFwOldWLYZ8485pEq5BSo1Ktymanumc1ZnMMGf0asTqW9d5XypAMciV
-	XC9/SCnbDNdQN4NpBcW4WiP5nljAPkKxazCZz/vCJxqPKHMlq3Z6Rfls/ZgiL/ixuTbrlcSmxHnl7
-	BTSz1Lxg==;
-Received: from e0022681537dd.dyn.armlinux.org.uk ([fd8f:7570:feb6:1:222:68ff:fe15:37dd]:51274 helo=rmk-PC.armlinux.org.uk)
-	by pandora.armlinux.org.uk with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <rmk@armlinux.org.uk>)
-	id 1r0JMT-0000Kg-2d;
-	Tue, 07 Nov 2023 10:31:09 +0000
-Received: from rmk by rmk-PC.armlinux.org.uk with local (Exim 4.94.2)
-	(envelope-from <rmk@rmk-PC.armlinux.org.uk>)
-	id 1r0JMV-00CTyh-It; Tue, 07 Nov 2023 10:31:11 +0000
-In-Reply-To: <ZUoRY33AAHMc5ThW@shell.armlinux.org.uk>
-References: <ZUoRY33AAHMc5ThW@shell.armlinux.org.uk>
-From: "Russell King (Oracle)" <rmk+kernel@armlinux.org.uk>
-To: linux-pm@vger.kernel.org,
-	 loongarch@lists.linux.dev,
-	 linux-acpi@vger.kernel.org,
-	 linux-arch@vger.kernel.org,
-	 linux-kernel@vger.kernel.org,
-	 linux-arm-kernel@lists.infradead.org,
-	 linux-riscv@lists.infradead.org,
-	 kvmarm@lists.linux.dev,
-	 x86@kernel.org,
-	 linux-csky@vger.kernel.org,
-	 linux-doc@vger.kernel.org,
-	 linux-ia64@vger.kernel.org,
-	 linux-parisc@vger.kernel.org
-Cc: Salil Mehta <salil.mehta@huawei.com>,
-	 Jean-Philippe Brucker <jean-philippe@linaro.org>,
-	 jianyong.wu@arm.com,
-	 justin.he@arm.com,
-	 James Morse <james.morse@arm.com>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>
-Subject: [PATCH RFC 22/22] riscv: convert to use arch_cpu_is_hotpluggable()
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1029914275;
+	Tue,  7 Nov 2023 10:40:03 +0000 (UTC)
+Received: from TWMBX03.aspeed.com (mail.aspeedtech.com [211.20.114.72])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 294A1B6;
+	Tue,  7 Nov 2023 02:40:01 -0800 (PST)
+Received: from TWMBX02.aspeed.com (192.168.0.24) by TWMBX03.aspeed.com
+ (192.168.0.62) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 7 Nov
+ 2023 18:39:56 +0800
+Received: from twmbx02.aspeed.com (192.168.10.10) by TWMBX02.aspeed.com
+ (192.168.0.24) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
+ Transport; Tue, 7 Nov 2023 18:39:56 +0800
+From: Billy Tsai <billy_tsai@aspeedtech.com>
+To: <jdelvare@suse.com>, <linux@roeck-us.net>, <robh+dt@kernel.org>,
+	<krzysztof.kozlowski+dt@linaro.org>, <joel@jms.id.au>, <andrew@aj.id.au>,
+	<corbet@lwn.net>, <thierry.reding@gmail.com>,
+	<u.kleine-koenig@pengutronix.de>, <p.zabel@pengutronix.de>,
+	<billy_tsai@aspeedtech.com>, <naresh.solanki@9elements.com>,
+	<linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
+	<linux-arm-kernel@lists.infradead.org>, <linux-aspeed@lists.ozlabs.org>,
+	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-pwm@vger.kernel.org>, <BMC-SW@aspeedtech.com>, <patrick@stwcx.xyz>
+Subject: [PATCH v10 0/3] Support pwm/tach driver for aspeed ast26xx
+Date: Tue, 7 Nov 2023 18:39:52 +0800
+Message-ID: <20231107103955.1166655-1-billy_tsai@aspeedtech.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <E1r0JMV-00CTyh-It@rmk-PC.armlinux.org.uk>
-Sender: Russell King <rmk@armlinux.org.uk>
-Date: Tue, 07 Nov 2023 10:31:11 +0000
+Content-Type: text/plain
 
-Convert riscv to use the arch_cpu_is_hotpluggable() helper rather than
-arch_register_cpu().
+Unlike the old design that the register setting of the TACH should based
+on the configure of the PWM. In ast26xx, the dependency between pwm and
+tach controller is eliminated and becomes a separate hardware block. One
+is used to provide pwm output and another is used to monitor the frequency
+of the input. This driver implements them by exposing two kernel
+subsystems: PWM and HWMON. The PWM subsystem can be utilized alongside
+existing drivers for controlling elements such as fans (pwm-fan.c),
+beepers (pwm-beeper.c) and so on. Through the HWMON subsystem, the driver
+provides sysfs interfaces for fan.
 
-Signed-off-by: Russell King (Oracle) <rmk+kernel@armlinux.org.uk>
----
- arch/riscv/kernel/setup.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+Changes since v9:
+Change the type of fan-driving-mode to string
+Fix some typos and formatting issues.
 
-diff --git a/arch/riscv/kernel/setup.c b/arch/riscv/kernel/setup.c
-index f8875ae1b0aa..168f0db63d53 100644
---- a/arch/riscv/kernel/setup.c
-+++ b/arch/riscv/kernel/setup.c
-@@ -294,12 +294,9 @@ void __init setup_arch(char **cmdline_p)
- 	riscv_set_dma_cache_alignment();
- }
- 
--int arch_register_cpu(int cpu)
-+bool arch_cpu_is_hotpluggable(int cpu)
- {
--	struct cpu *c = &per_cpu(cpu_devices, cpu);
--
--	c->hotpluggable = cpu_has_hotplug(cpu);
--	return register_cpu(c, cpu);
-+	return cpu_has_hotplug(cpu);
- }
- 
- void free_initmem(void)
+Changes since v8:
+Fix the fail of fan div register setting. (FIELD_GET -> FIELD_PREP)
+Change the type of tach-ch from uint32_t to uint8-array
+Add additional properties and apply constraints to certain properties.
+
+Changes since v7:
+Cherry-pick the fan-common.yaml and add the following properties:
+- min-rpm
+- div
+- mode
+- tach-ch
+Fix the warning which is reported by the kernel test robot.
+
+Changes since v6:
+Consolidate the PWM and TACH functionalities into a unified driver.
+
+Changes since v5:
+- pwm/tach:
+  - Remove the utilization of common resources from the parent node.
+  - Change the concept to 16 PWM/TACH controllers, each with one channel,
+  instead of 1 PWM/TACH controller with 16 channels.
+- dt-binding:
+  - Eliminate the usage of simple-mfd.
+
+Changes since v4:
+- pwm:
+  - Fix the return type of get_status function.
+- tach:
+  - read clk source once and re-use it
+  - Remove the constants variables
+  - Allocate tach_channel as array
+  - Use dev->parent
+- dt-binding:
+  - Fix the order of the patches
+  - Add example and description for tach child node
+  - Remove pwm extension property
+
+Changes since v3:
+- pwm:
+  - Remove unnecessary include header
+  - Fix warning Prefer "GPL" over "GPL v2"
+- tach:
+  - Remove the paremeter min_rpm and max_rpm and return the tach value 
+  directly without any polling or delay.
+  - Fix warning Prefer "GPL" over "GPL v2"
+- dt-binding:
+  - Replace underscore in node names with dashes
+  - Split per subsystem
+
+Changes since v2:
+- pwm:
+  - Use devm_* api to simplify the error cleanup
+  - Fix the multi-line alignment problem
+- tach:
+  - Add tach-aspeed-ast2600 to index.rst
+  - Fix the multi-line alignment problem
+  - Remove the tach enable/disable when read the rpm
+  - Fix some coding format issue
+
+Changes since v1:
+- tach:
+  - Add the document tach-aspeed-ast2600.rst
+  - Use devm_* api to simplify the error cleanup.
+  - Change hwmon register api to devm_hwmon_device_register_with_info
+
+Billy Tsai (2):
+  dt-bindings: hwmon: Support Aspeed g6 PWM TACH Control
+  hwmon: (aspeed-g6-pwm-tacho): Support for ASPEED g6 PWM/Fan tach
+
+Naresh Solanki (1):
+  dt-bindings: hwmon: fan: Add fan binding to schema
+
+ .../bindings/hwmon/aspeed,g6-pwm-tach.yaml    |  69 +++
+ .../devicetree/bindings/hwmon/fan-common.yaml |  78 +++
+ Documentation/hwmon/aspeed-g6-pwm-tach.rst    |  26 +
+ Documentation/hwmon/index.rst                 |   1 +
+ drivers/hwmon/Kconfig                         |  11 +
+ drivers/hwmon/Makefile                        |   1 +
+ drivers/hwmon/aspeed-g6-pwm-tach.c            | 539 ++++++++++++++++++
+ 7 files changed, 725 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/hwmon/aspeed,g6-pwm-tach.yaml
+ create mode 100644 Documentation/devicetree/bindings/hwmon/fan-common.yaml
+ create mode 100644 Documentation/hwmon/aspeed-g6-pwm-tach.rst
+ create mode 100644 drivers/hwmon/aspeed-g6-pwm-tach.c
+
 -- 
-2.30.2
+2.25.1
 
 
