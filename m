@@ -1,166 +1,203 @@
-Return-Path: <linux-doc+bounces-1964-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-1968-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CCD87E5D19
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Nov 2023 19:21:48 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF7117E5D9F
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Nov 2023 20:00:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0E02BB20BC4
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Nov 2023 18:21:45 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 874271C20A42
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Nov 2023 19:00:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C00D358A2;
-	Wed,  8 Nov 2023 18:21:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dkim=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A3EEC36AF6;
+	Wed,  8 Nov 2023 19:00:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="iacNhMBM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0F1332C67;
-	Wed,  8 Nov 2023 18:21:38 +0000 (UTC)
-Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6404ED4F;
-	Wed,  8 Nov 2023 10:21:38 -0800 (PST)
-Received: by mail-ot1-f41.google.com with SMTP id 46e09a7af769-6ce2cf67be2so4300335a34.2;
-        Wed, 08 Nov 2023 10:21:38 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699467697; x=1700072497;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=z8YDEMLMN/UPwuHPhRNHU6MkX7vnIvjMYf9zFqGmA3g=;
-        b=X2SdbRg0il2O4Perq5BRn9QXzs/ucXLuNAhMbAib+hqb9+OpmK2YQyNjFSTtjen5FO
-         eFEWuHBlgkU5lvQrBW2QsIlh5T9ePLvHD8p4xgj/Lh3ufLEPkIHyb2aoa62MU3PaR4aY
-         Jt/2uzh10mDZDO/zDP90G0eMf5WyYQQrxnVZBt8pUVGPu/3FNDsYINY9bMakuQQozT0w
-         a7wJK/vZ5VaoMaFhpxb+LCxILZvijnWTV/T69MMxiEvEzwoItr3Betl/5TmzMjuA9pO/
-         ku3mNxYAM9I9IfykAzUO/mdF7bSLgHt6PqPud9QCh9r+8OaZ+mpbqG5PLb6nzx5pE3bl
-         FGWw==
-X-Gm-Message-State: AOJu0Yybz8/58MZqyK6SB6p3vwL0vRxD/Teiluh0ilG7G7oSzXew0v6b
-	uaLciGZ5dQourXiZaJ8pfw==
-X-Google-Smtp-Source: AGHT+IH936tksBL7gMvhFH0Cu8Ga+1XdgbOvw2iCgQmNwYAwBNf4BgvoX3nEqEXZcFtRnb72jnyg2w==
-X-Received: by 2002:a9d:4801:0:b0:6d3:194f:f132 with SMTP id c1-20020a9d4801000000b006d3194ff132mr2370150otf.30.1699467697587;
-        Wed, 08 Nov 2023 10:21:37 -0800 (PST)
-Received: from herring.priv (66-90-144-107.dyn.grandenetworks.net. [66.90.144.107])
-        by smtp.gmail.com with ESMTPSA id dw1-20020a05683033a100b006ce46212341sm1966690otb.54.2023.11.08.10.21.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Nov 2023 10:21:37 -0800 (PST)
-Received: (nullmailer pid 2703586 invoked by uid 1000);
-	Wed, 08 Nov 2023 18:21:35 -0000
-Date: Wed, 8 Nov 2023 12:21:35 -0600
-From: Rob Herring <robh@kernel.org>
-To: Billy Tsai <billy_tsai@aspeedtech.com>
-Cc: jdelvare@suse.com, linux@roeck-us.net, krzysztof.kozlowski+dt@linaro.org, joel@jms.id.au, andrew@aj.id.au, corbet@lwn.net, thierry.reding@gmail.com, u.kleine-koenig@pengutronix.de, p.zabel@pengutronix.de, naresh.solanki@9elements.com, linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-aspeed@lists.ozlabs.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, linux-pwm@vger.kernel.org, BMC-SW@aspeedtech.com, patrick@stwcx.xyz
-Subject: Re: [PATCH RESEND v10 2/3] dt-bindings: hwmon: Support Aspeed g6 PWM
- TACH Control
-Message-ID: <20231108182135.GA2698015-robh@kernel.org>
-References: <20231107105025.1480561-1-billy_tsai@aspeedtech.com>
- <20231107105025.1480561-3-billy_tsai@aspeedtech.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0BA432C88;
+	Wed,  8 Nov 2023 19:00:18 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 158B1210A;
+	Wed,  8 Nov 2023 11:00:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1699470019; x=1731006019;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=CGCl93jPHfMwJ3CMMd312/g/vAJzCAfUxs25Pz0yXYY=;
+  b=iacNhMBM1AZFukoBREiqp8uoFR3SlcyNYVtxRDS4CJKa9jYYHalJqSE5
+   GmXzQvf0RH2KxBctzzJ1DCxbPx95gTfQkeJQjTjpUBVdFk3VHjDGhlrGU
+   FmJojx3CK1iYj1WjX9MfZADGZa+bFpNpownBc4jgaqb5DWkq/7DTaAbDe
+   CZpDm8gH+imhAb5jfd8VXTRXSbSRV2BEpnqilE7+bsC2A1CszHzZTYJgU
+   CoWtpIPzow+nY0pTpg/+yba+dCKEmgmjCKZQKJ1web45dTCZjr/lJiHLL
+   7llCaK/5ugeEyeG/NtFjCwxC07i1SIdVanYBx7MsbeE100/Z8LiccDHil
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10888"; a="8486198"
+X-IronPort-AV: E=Sophos;i="6.03,287,1694761200"; 
+   d="scan'208";a="8486198"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Nov 2023 11:00:17 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.03,287,1694761200"; 
+   d="scan'208";a="10892400"
+Received: from unknown (HELO fred..) ([172.25.112.68])
+  by orviesa001.jf.intel.com with ESMTP; 08 Nov 2023 11:00:14 -0800
+From: Xin Li <xin3.li@intel.com>
+To: kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-hyperv@vger.kernel.org,
+	linux-kselftest@vger.kernel.org
+Cc: seanjc@google.com,
+	pbonzini@redhat.com,
+	corbet@lwn.net,
+	kys@microsoft.com,
+	haiyangz@microsoft.com,
+	wei.liu@kernel.org,
+	decui@microsoft.com,
+	tglx@linutronix.de,
+	mingo@redhat.com,
+	bp@alien8.de,
+	dave.hansen@linux.intel.com,
+	x86@kernel.org,
+	hpa@zytor.com,
+	vkuznets@redhat.com,
+	peterz@infradead.org,
+	ravi.v.shankar@intel.com
+Subject: [PATCH v1 00/23] Enable FRED with KVM VMX
+Date: Wed,  8 Nov 2023 10:29:40 -0800
+Message-ID: <20231108183003.5981-1-xin3.li@intel.com>
+X-Mailer: git-send-email 2.42.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231107105025.1480561-3-billy_tsai@aspeedtech.com>
+Content-Transfer-Encoding: 8bit
 
-On Tue, Nov 07, 2023 at 06:50:24PM +0800, Billy Tsai wrote:
-> Document the compatible for aspeed,ast2600-pwm-tach device, which can
-> support up to 16 PWM outputs and 16 fan tach input.
-> 
-> Signed-off-by: Billy Tsai <billy_tsai@aspeedtech.com>
-> ---
->  .../bindings/hwmon/aspeed,g6-pwm-tach.yaml    | 69 +++++++++++++++++++
->  1 file changed, 69 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/hwmon/aspeed,g6-pwm-tach.yaml
-> 
-> diff --git a/Documentation/devicetree/bindings/hwmon/aspeed,g6-pwm-tach.yaml b/Documentation/devicetree/bindings/hwmon/aspeed,g6-pwm-tach.yaml
-> new file mode 100644
-> index 000000000000..c615fb10705c
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/hwmon/aspeed,g6-pwm-tach.yaml
-> @@ -0,0 +1,69 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +# Copyright (C) 2023 Aspeed, Inc.
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/hwmon/aspeed,g6-pwm-tach.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: ASPEED G6 PWM and Fan Tach controller
-> +
-> +maintainers:
-> +  - Billy Tsai <billy_tsai@aspeedtech.com>
-> +
-> +description: |
-> +  The ASPEED PWM controller can support up to 16 PWM outputs.
-> +  The ASPEED Fan Tacho controller can support up to 16 fan tach input.
-> +  They are independent hardware blocks, which are different from the
-> +  previous version of the ASPEED chip.
-> +
-> +properties:
-> +  compatible:
-> +    enum:
-> +      - aspeed,ast2600-pwm-tach
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  clocks:
-> +    maxItems: 1
-> +
-> +  resets:
-> +    maxItems: 1
-> +
-> +  "#pwm-cells":
-> +    const: 3
-> +
-> +patternProperties:
-> +  "^fan-[0-9]+$":
-> +    $ref: fan-common.yaml#
-> +    unevaluatedProperties: false
-> +    required:
-> +      - tach-ch
-> +
-> +required:
-> +  - reg
-> +  - clocks
-> +  - resets
-> +  - "#pwm-cells"
-> +  - compatible
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/clock/aspeed-clock.h>
-> +    pwm_tach: pwm-tach-controller@1e610000 {
-> +      compatible = "aspeed,ast2600-pwm-tach";
-> +      reg = <0x1e610000 0x100>;
-> +      clocks = <&syscon ASPEED_CLK_AHB>;
-> +      resets = <&syscon ASPEED_RESET_PWM>;
-> +      #pwm-cells = <3>;
-> +
-> +      fan-0 {
+This patch set enables the Intel flexible return and event delivery
+(FRED) architecture with KVM VMX to allow guests to utilize FRED.
 
-I assume there's a PWM connection here? How do you know which PWM? You 
-said the tach channel is independent, so it is not that.
+The FRED architecture defines simple new transitions that change
+privilege level (ring transitions). The FRED architecture was
+designed with the following goals:
 
-It should not be 0 from 'fan-0' because that's just a meaningless index. 
+1) Improve overall performance and response time by replacing event
+   delivery through the interrupt descriptor table (IDT event
+   delivery) and event return by the IRET instruction with lower
+   latency transitions.
 
-You either need 'pwms' here or you can use 'reg' and the reg value is 
-the PWM channel.
+2) Improve software robustness by ensuring that event delivery
+   establishes the full supervisor context and that event return
+   establishes the full user context.
 
-> +        tach-ch = /bits/ 8 <0x0>;
-> +      };
-> +
-> +      fan-1 {
-> +        tach-ch = /bits/ 8 <0x1 0x2>;
-> +      };
-> +    };
-> -- 
-> 2.25.1
-> 
+The new transitions defined by the FRED architecture are FRED event
+delivery and, for returning from events, two FRED return instructions.
+FRED event delivery can effect a transition from ring 3 to ring 0, but
+it is used also to deliver events incident to ring 0. One FRED
+instruction (ERETU) effects a return from ring 0 to ring 3, while the
+other (ERETS) returns while remaining in ring 0. Collectively, FRED
+event delivery and the FRED return instructions are FRED transitions.
+
+Intel VMX architecture is extended to run FRED guests, and the changes
+are majorly:
+
+1) New VMCS fields for FRED context management, which includes two new
+event data VMCS fields, eight new guest FRED context VMCS fields and
+eight new host FRED context VMCS fields.
+
+2) VMX nested-Exception support for proper virtualization of stack
+levels introduced with FRED architecture.
+
+Search for the latest FRED spec in most search engines with this search pattern:
+
+  site:intel.com FRED (flexible return and event delivery) specification
+
+We want to send out the FRED VMX patch set for review while the FRED
+native patch set v12 is being reviewed @
+https://lkml.kernel.org/kvm/20231003062458.23552-1-xin3.li@intel.com/.
+For easier review, I have set up a base tree with the latest FRED native
+patch set on top of tip tree in the 'fred_v12' branch of repo
+    https://github.com/xinli-intel/linux-fred-public.git.
+
+Patch 1-2 are cleanups to VMX basic and misc MSRs, which were sent
+out earlier as a preparation for FRED changes:
+https://lore.kernel.org/kvm/20231030233940.438233-1-xin@zytor.com/.
+
+Patch 3-14 add FRED support to VMX.
+Patch 15-18 add FRED support to nested VMX.
+Patch 19 exposes FRED to KVM guests to complete the enabling.
+Patch 20-23 adds FRED selftests.
+
+
+Shan Kang (1):
+  KVM: selftests: Add fred exception tests
+
+Xin Li (22):
+  KVM: VMX: Cleanup VMX basic information defines and usages
+  KVM: VMX: Cleanup VMX misc information defines and usages
+  KVM: VMX: Add support for the secondary VM exit controls
+  KVM: x86: Mark CR4.FRED as not reserved
+  KVM: VMX: Initialize FRED VM entry/exit controls in vmcs_config
+  KVM: VMX: Defer enabling FRED MSRs save/load until after set CPUID
+  KVM: VMX: Disable intercepting FRED MSRs
+  KVM: VMX: Initialize VMCS FRED fields
+  KVM: VMX: Switch FRED RSP0 between host and guest
+  KVM: VMX: Add support for FRED context save/restore
+  KVM: x86: Add kvm_is_fred_enabled()
+  KVM: VMX: Handle FRED event data
+  KVM: VMX: Handle VMX nested exception for FRED
+  KVM: VMX: Dump FRED context in dump_vmcs()
+  KVM: nVMX: Add support for the secondary VM exit controls
+  KVM: nVMX: Add FRED VMCS fields
+  KVM: nVMX: Add support for VMX FRED controls
+  KVM: nVMX: Add VMCS FRED states checking
+  KVM: x86: Allow FRED/LKGS/WRMSRNS to be exposed to guests
+  KVM: selftests: Add FRED VMCS fields to evmcs
+  KVM: selftests: Run debug_regs test with FRED enabled
+  KVM: selftests: Add a new VM guest mode to run user level code
+
+ Documentation/virt/kvm/x86/nested-vmx.rst     |  19 +
+ arch/x86/include/asm/hyperv-tlfs.h            |  19 +
+ arch/x86/include/asm/kvm_host.h               |   9 +-
+ arch/x86/include/asm/msr-index.h              |  15 +-
+ arch/x86/include/asm/vmx.h                    |  57 ++-
+ arch/x86/kvm/cpuid.c                          |   4 +-
+ arch/x86/kvm/kvm_cache_regs.h                 |  10 +
+ arch/x86/kvm/svm/svm.c                        |   4 +-
+ arch/x86/kvm/vmx/capabilities.h               |  20 +-
+ arch/x86/kvm/vmx/hyperv.c                     |  61 ++-
+ arch/x86/kvm/vmx/nested.c                     | 315 ++++++++++++--
+ arch/x86/kvm/vmx/nested.h                     |   2 +-
+ arch/x86/kvm/vmx/vmcs.h                       |   1 +
+ arch/x86/kvm/vmx/vmcs12.c                     |  19 +
+ arch/x86/kvm/vmx/vmcs12.h                     |  38 ++
+ arch/x86/kvm/vmx/vmcs_shadow_fields.h         |   6 +-
+ arch/x86/kvm/vmx/vmx.c                        | 404 ++++++++++++++++--
+ arch/x86/kvm/vmx/vmx.h                        |  14 +-
+ arch/x86/kvm/x86.c                            |  55 ++-
+ arch/x86/kvm/x86.h                            |   5 +-
+ tools/testing/selftests/kvm/Makefile          |   1 +
+ .../selftests/kvm/include/kvm_util_base.h     |   1 +
+ .../selftests/kvm/include/x86_64/evmcs.h      | 146 +++++++
+ .../selftests/kvm/include/x86_64/processor.h  |  33 ++
+ .../selftests/kvm/include/x86_64/vmx.h        |  20 +
+ tools/testing/selftests/kvm/lib/kvm_util.c    |   5 +-
+ .../selftests/kvm/lib/x86_64/processor.c      |  15 +-
+ tools/testing/selftests/kvm/lib/x86_64/vmx.c  |   4 +-
+ .../testing/selftests/kvm/x86_64/debug_regs.c |  50 ++-
+ .../testing/selftests/kvm/x86_64/fred_test.c  | 262 ++++++++++++
+ 30 files changed, 1464 insertions(+), 150 deletions(-)
+ create mode 100644 tools/testing/selftests/kvm/x86_64/fred_test.c
+
+
+base-commit: d49b86c24e836941c85c4906e9519fca9426a6e0
+-- 
+2.42.0
+
 
