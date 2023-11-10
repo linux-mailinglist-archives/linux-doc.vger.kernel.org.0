@@ -1,220 +1,203 @@
-Return-Path: <linux-doc+bounces-2119-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-2117-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4C417E79A8
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Nov 2023 08:11:33 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id ACFF97E7922
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Nov 2023 07:20:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 88040B20D54
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Nov 2023 07:11:30 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 66B32280FCB
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Nov 2023 06:20:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6AA6715B9;
-	Fri, 10 Nov 2023 07:11:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EBE45538F;
+	Fri, 10 Nov 2023 06:20:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="hq0RJ0Xh"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="fxmA4oPM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 108F7187B;
-	Fri, 10 Nov 2023 07:11:23 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 850FB8260;
-	Thu,  9 Nov 2023 23:11:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1699600283; x=1731136283;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version:content-transfer-encoding;
-  bh=CFrsyyYaC5+GirTFxIWyuSUnIgbvfSGgrSzOo8xJlhI=;
-  b=hq0RJ0Xh+cJQpi/CQZ9YvU70MztW/cMhyXPN+2VQ1LFWHE0rOsCmSEPw
-   5TfB+S1fueihwLTHWG+T1yZml2odEuoqnuj0bLdmQIlVVJliSm39i9HyB
-   sLSJZOVybHpCcf/9RkHVkZhU5w+dX13dG0Yiu/sJiObXMwsnXM6bjiX1A
-   sA8EpjMY687UvwWEtcPRLUQpD05DmgbH7wFtbIwYpGg1b6weWdgVGoRx/
-   cUk+QwE+lDeGxA4561/EHjoVKoKpj0O+NYq28bzc20LtPCvKprJpPx7V2
-   EJ4BzKzhZ9kPFQhpCLxTpOr2BvYiVD622L5xZaHmY/cK/zt5GuJJDvLKu
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10889"; a="3164315"
-X-IronPort-AV: E=Sophos;i="6.03,291,1694761200"; 
-   d="scan'208";a="3164315"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Nov 2023 20:02:07 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10889"; a="1095079230"
-X-IronPort-AV: E=Sophos;i="6.03,291,1694761200"; 
-   d="scan'208";a="1095079230"
-Received: from yhuang6-desk2.sh.intel.com (HELO yhuang6-desk2.ccr.corp.intel.com) ([10.238.208.55])
-  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Nov 2023 20:02:01 -0800
-From: "Huang, Ying" <ying.huang@intel.com>
-To: Huan Yang <link@vivo.com>
-Cc: Michal Hocko <mhocko@suse.com>,  Tejun Heo <tj@kernel.org>,  Zefan Li
- <lizefan.x@bytedance.com>,  Johannes Weiner <hannes@cmpxchg.org>,
-  "Jonathan Corbet" <corbet@lwn.net>,  Roman Gushchin
- <roman.gushchin@linux.dev>,  "Shakeel Butt" <shakeelb@google.com>,  Muchun
- Song <muchun.song@linux.dev>,  "Andrew Morton"
- <akpm@linux-foundation.org>,  David Hildenbrand <david@redhat.com>,
-  Matthew Wilcox <willy@infradead.org>,  Kefeng Wang
- <wangkefeng.wang@huawei.com>,  Peter Xu <peterx@redhat.com>,  "Vishal
- Moola (Oracle)" <vishal.moola@gmail.com>,  Yosry Ahmed
- <yosryahmed@google.com>,  "Liu Shixin" <liushixin2@huawei.com>,  Hugh
- Dickins <hughd@google.com>,  <cgroups@vger.kernel.org>,
-  <linux-doc@vger.kernel.org>,  <linux-kernel@vger.kernel.org>,
-  <linux-mm@kvack.org>,  <opensource.kernel@vivo.com>
-Subject: Re: [RFC 0/4] Introduce unbalance proactive reclaim
-In-Reply-To: <ab108b82-87a9-4927-9d29-f60713281e8a@vivo.com> (Huan Yang's
-	message of "Fri, 10 Nov 2023 10:44:45 +0800")
-References: <20231108065818.19932-1-link@vivo.com>
-	<ZUuV9xOZ5k7Ia_V2@tiehlicka>
-	<ccc4094a-54de-4ce4-b8f6-76ee46d8d02d@vivo.com>
-	<87msvniplj.fsf@yhuang6-desk2.ccr.corp.intel.com>
-	<1e699ff2-0841-490b-a8e7-bb87170d5604@vivo.com>
-	<ZUytB5lSwxeKkBW8@tiehlicka>
-	<6b539e16-c835-49ff-9fae-a65960567657@vivo.com>
-	<ZUy2-vrqDq7URzb6@tiehlicka>
-	<e8c0c069-a685-482d-afad-d1069c6a95ba@vivo.com>
-	<87a5rmiewp.fsf@yhuang6-desk2.ccr.corp.intel.com>
-	<ab108b82-87a9-4927-9d29-f60713281e8a@vivo.com>
-Date: Fri, 10 Nov 2023 12:00:00 +0800
-Message-ID: <878r76gsvz.fsf@yhuang6-desk2.ccr.corp.intel.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97639525C;
+	Fri, 10 Nov 2023 06:20:06 +0000 (UTC)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2059.outbound.protection.outlook.com [40.107.92.59])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DF7626595;
+	Thu,  9 Nov 2023 22:20:04 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=oYdRE+TvYp9sS/jmG8WyPrt7nnwPKV0NLPZ/bIwVcCzHO7/dx3HlQX6m0jYUGB3c0r5S7u8mXJ9sSc2Wlw6fwDfOYgrZAtCzD7NmJZtBlj6ZY5UAFo5H5IfF9t5xUGGxTaKd9I5FjTgusJcOxZV+XPKYCQMIBsl/f/5a8ap7xxsf5nNn9+v7JrvGVCs+YDqGegsVGwMPsDmSNTQPoOmMxdxEYBvdAWwxyMqpNzWg2+55K5w4EVcSezXKaP9JX9d36zNGEqItC3l4bdkN3vpr8FptqPW9RVz7wf1XNzcUxMC8qTo1Jb6GN+ugMb286p/a6xqB5S6igaa0+yjGeNxJkg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=W2IjFB2Py0Qm69uOKPb9IPDrnGI6L9Ns2AaebZ3f+NM=;
+ b=dEtik4TqvHLT5w+cfxt6WDG2tmzs0Gmf3O1SHx7s3W8hNog+K8n6XAGBSFCyvytteOywzSwVoSoqiHPWdkvMdU9FAa+LWcy8Kom2a66AwU4yBjF2rBirDn6BDsIbTvUYvjtkbnAtgrX/unlRSJnLVDgcTh34vaasScj7ANxrq+ds/RyzvhG8l0Fy6wwu0dOvbqgVTFr5G2rLjlUGKlOKEs7Ay9SgZwTeICfbYF0n0uzhv6xlQHRiodC7cJC+Bl46P11Kch1MJF7trXvLegX4eBCiHWijLxyXPRkLNYC+LiNr8YzICKJcypeOlCG1JSbnH968VKyOj4PBVahMgb7/6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=W2IjFB2Py0Qm69uOKPb9IPDrnGI6L9Ns2AaebZ3f+NM=;
+ b=fxmA4oPMx5TU6y0ZPxYmPqRYm5Ik5KSygCpz8SBWEb4vc7fwdO/VO/lULbz5JSDKExUG2jO9I3K45QY9iQMnEr3A4eu9DIcuS0vtum4QUW41kXL8S/nOqXcgu3Rr07VtRLd4j4oERm6EUDuxs+PgxUXbWbk0n5/hSCCg3v+Ixu0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from DM4PR12MB6351.namprd12.prod.outlook.com (2603:10b6:8:a2::6) by
+ MW3PR12MB4363.namprd12.prod.outlook.com (2603:10b6:303:56::14) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6977.19; Fri, 10 Nov 2023 05:31:23 +0000
+Received: from DM4PR12MB6351.namprd12.prod.outlook.com
+ ([fe80::5287:5f3:34f:4402]) by DM4PR12MB6351.namprd12.prod.outlook.com
+ ([fe80::5287:5f3:34f:4402%7]) with mapi id 15.20.6954.028; Fri, 10 Nov 2023
+ 05:31:23 +0000
+Message-ID: <665cb7da-3d7e-4323-9a07-d4f59102c5f1@amd.com>
+Date: Fri, 10 Nov 2023 13:31:09 +0800
+User-Agent: Mozilla Thunderbird
+Cc: majun@amd.com
+Subject: Re: [Patch v13 0/9] Enable Wifi RFI interference mitigation feature
+ support
+Content-Language: en-US
+To: Ma Jun <Jun.Ma2@amd.com>, amd-gfx@lists.freedesktop.org, lenb@kernel.org,
+ johannes@sipsolutions.net, davem@davemloft.net, edumazet@google.com,
+ kuba@kernel.org, pabeni@redhat.com, alexander.deucher@amd.com,
+ Lijo.Lazar@amd.com, mario.limonciello@amd.com, netdev@vger.kernel.org,
+ linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, platform-driver-x86@vger.kernel.org
+References: <20231030071832.2217118-1-Jun.Ma2@amd.com>
+From: "Ma, Jun" <majun@amd.com>
+In-Reply-To: <20231030071832.2217118-1-Jun.Ma2@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SG3P274CA0005.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:be::17)
+ To DM4PR12MB6351.namprd12.prod.outlook.com (2603:10b6:8:a2::6)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR12MB6351:EE_|MW3PR12MB4363:EE_
+X-MS-Office365-Filtering-Correlation-Id: b655a1cd-bf58-4fc3-f6fb-08dbe1ae4678
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	OVXqpOTGUjkR0w63DG9B+sgISTHyrwfsPwFqMlPP99QhJvP51w2oXXuox5QJSJAnANz8oxzglkpV3Iy4Fyv44hATu8J0+5n5IkjpdtQV2j8AiH6nmA8zHQLiphCSnTnZbLyB1S6UHFTyhzE4L8eiOOvccHQJ6gfr+9MhByf/bCmzO4Nz2boce7au4TTz2AKZqznZbx81ZyCoOgZ1orUI0PRzDYxn24kTTShsGf10e+AERtMgk1zPEQS3RTYzGQsDF13ga9si9NmNst8GUrJ+Z3ugu1Ri8y0xi3JUG3iu3JNh/17deXrkxkXzff48SPVrRinBad75qKhj+uQb1R3eSWq3o9RM3h5KPUpVXEBT+juU2LW+lidcirrGf+MCvonOCX0+sjjN9fECuwGZkyGa0WPeLfqFaE6Ojie0BLdXLiaLn0FkhbVbI2gLdLv5m3tsav58TzMDZWFOeuGPWSUZZxGeT4/bNwF8D/1OxjfqBgwDauFscQm/TwVyuLAJKalH+kiuewu5ssk0ZfhO1ELGP/fzNQr3GIhRQyf6/8EpLT3N2KOHhoVlIONXlDh1DqYUNEjOKWQeOoZ643x2dSvLUbcOW9eY98DpraBLnXf99V9JZ99FJLyEAd4UU/0MuYR/SVfMk95vJre87u99wcht0RYbeaC8n1sSbFK7A4TTAhk=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR12MB6351.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(396003)(346002)(366004)(376002)(39860400002)(230922051799003)(64100799003)(1800799009)(451199024)(186009)(26005)(2616005)(6512007)(83380400001)(31686004)(6666004)(36756003)(53546011)(478600001)(6506007)(6486002)(316002)(2906002)(66946007)(66556008)(66476007)(41300700001)(5660300002)(31696002)(7416002)(38100700002)(4326008)(8676002)(8936002)(921008)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?dUhzMFlGOXkrSGhsZlJJUk4ybVB2NDNkemdQR29HT2NGVFI2U2k2Y2J3N25R?=
+ =?utf-8?B?ZFgwTE5RRnYzdjNBbXZNeWh3TVFtRDhvRFkzYmc3N241d0U5S250TU1jUFNj?=
+ =?utf-8?B?bDRlNUIzcUZtcHFndWNXQVFUd2l4Nkk4cFdNS1BiUWNkRngxakZZZGVDQjd2?=
+ =?utf-8?B?cnJSVnpwV2swZkRYeXV1L21lZEptZWF3dWVvcldQNjVXNHFmeTRoMXJGQ0o5?=
+ =?utf-8?B?ZU8xSXcrK1dXRXZZU3c3UkpjaEFPbEFZTkVJYzlmNTlRMlliSFFHUHA5TzZq?=
+ =?utf-8?B?Sm1PeCtiNWtVWWZqWHJ2MDhWUEgxK2htMm50WG9ieFdnZGNBMzZLVXhYc3dk?=
+ =?utf-8?B?ZzBJd25nZjMwenhLaGJycUI3SWxjM2VUcHBNVkhMc1BrWFJtam42QUNvdnNv?=
+ =?utf-8?B?Y0dScDl1N21Bb2N6MFc3aTZFZVJZbkN6Y0o1WjhwaWhnVVZtU28veVdrdlFo?=
+ =?utf-8?B?RE1sTENYL2drcElQZ0dMUUpRVUNtMGR4bFlXdzRDbzBTR2IzbW9LVitMV1dF?=
+ =?utf-8?B?ZkhkeHIvNndUTEhINkhqSXYzUzdCTzFnZWRHcVkxdFVndVdTKzk3SjVlaldT?=
+ =?utf-8?B?VUFjQ2kxTENuWTkxOGt0bXNYaXArbTlJSUY0bHc2dDc2Uk9BM1UxWjBKSVA0?=
+ =?utf-8?B?NDVuU0wxMFRpbjBTWElVbWlrejQ1OFJOU1VuZ0p4eFVIY2J4Ny96SCtUQSt6?=
+ =?utf-8?B?dDlia1ROUVhtMnpvNmJpSHphRnRZejV4OVJpazdxKzlvekkwcjFmY01waGNI?=
+ =?utf-8?B?ZStKTENOZVMyZ1BIcXprbk40czk4NWFSeUxvSHlkMmRjZWVQUXZ2VUl1aDFQ?=
+ =?utf-8?B?aGtmUnJKRWM4Ly9aUWNSUlVFMjN2RzJvSTdIcEhsR3ZqWGE1a0JQVWhTL01U?=
+ =?utf-8?B?VkRSTkhHcnNPbzZoT2MyK1VLTEtqYVQ5Uy9PQzJvMXFuSmlkZUVES3JGYjZB?=
+ =?utf-8?B?dmsxME5iRytDUWhGU3gvVFkwUENXUkFUdXJRQURLb1ZhZEVOd3k0eG9HUGQx?=
+ =?utf-8?B?MFI4ek13OGVLZlFMbEpUbjJzMGRuQzFiR1lub0ttNE1rc3RsRmFucXZLNjZn?=
+ =?utf-8?B?VUdaZVNENU9vbklQMDlFTDZDUUtJdVczZ2xoVkJvYkp0RmUrUWJVRHI1ZURC?=
+ =?utf-8?B?UzcxNU9jeDFRakp2WTNlUVVlMXRkbFo0NUw0bTU4V0N5cnJML0s0OXI3bTZk?=
+ =?utf-8?B?Q2xMZzNncjFHK05iQVNzaXEvYXN6VFllcndad3I2OWVVZ2szbm1BbEpvMzdz?=
+ =?utf-8?B?V25yOE51OU9ZVXBCMlM5S2xQb1BGeVRYcGRqUGdHcE5iZk5YL293eVJ3N0xm?=
+ =?utf-8?B?Qlh4TnBYSTJUSDd2ZWt6cjZVeHY0bE1qVVpXME5sY05oV2krKzFuQlV0b2Ft?=
+ =?utf-8?B?TFV3MTlDWUN6WmNtTEpqWTVUNlV1SFJVQ2hjbm9IYVY5WHBkSFZzcjZpYlc0?=
+ =?utf-8?B?V3lkQmF2ZExUUlJaQUFYb3NJMFNraHhlRDgxcnZTd3lnOFczTk5hdjVibU9o?=
+ =?utf-8?B?Q0pqU3pGZTVVVXZHOFcxTXowc0EreWhXaFNLTHNPazc5VHJNdlRHaVdIWUVE?=
+ =?utf-8?B?dlFNYWZTSEFxcU9jcjlBb2N0ay9SSzRUdC9NNmNNY0k5NUFXZnlJbDVZc1lv?=
+ =?utf-8?B?dHJmOUZaZEYzZGVVcHdWL1RqK2k4Nis3N2IyQUxKMUVNVUo5NExRSEs5ZkZ3?=
+ =?utf-8?B?MHhUeVZMYjl5YkhpZzJDZGxETHEzTDZhOExTWlFrcFZ2WEIxOFFtaGJJUlFF?=
+ =?utf-8?B?bGxuU2dNcHVxeDlGU0xSTk1VWEg3TVJoWTVtN2R6dEs4VEtFMWs4TkQ5QVVF?=
+ =?utf-8?B?VGlONFM0MEUzU0FCNlpxOUJ0Nm5rSEUrdWlmUUVGZzJLNUVud3lZUnJaeVFy?=
+ =?utf-8?B?aVRLSUxvMGVabm83Y29TTFJyZkpVY2tmcDZqU09TMUpBdWR2eFdCb01iL00r?=
+ =?utf-8?B?bWd5WlErYVJ0cWF1dXdxT2hSK2lVOWlYa1EwL3RQUVVUVVJoYnJNTGFORlo0?=
+ =?utf-8?B?YkpnMStrcEM1VHc4cHpJek1wMEoyT0FrbkpCeW5GdXJ0SjZOUFFIMnBHM0hC?=
+ =?utf-8?B?V0xlN25FSUZ5L2E4WUN3bUI2VlM0eXk0OHNsR3B3d2xXeklNMjIxYTNqWmNq?=
+ =?utf-8?Q?IOgPjCa6jnEBgKgT7JHoJgihd?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b655a1cd-bf58-4fc3-f6fb-08dbe1ae4678
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR12MB6351.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2023 05:31:22.8323
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: veYcbKh+rMsqz6ff5c7FGE6YSKLmyhVKxCOQxpY5xFAuK8khJtkhSt3vL2k58pgv
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR12MB4363
 
-Huan Yang <link@vivo.com> writes:
+ping...
+Any other comments?
 
-> =E5=9C=A8 2023/11/10 9:19, Huang, Ying =E5=86=99=E9=81=93:
->> [Some people who received this message don't often get email from ying.h=
-uang@intel.com. Learn why this is important at https://aka.ms/LearnAboutSen=
-derIdentification ]
->>
->> Huan Yang <link@vivo.com> writes:
->>
->>> =E5=9C=A8 2023/11/9 18:39, Michal Hocko =E5=86=99=E9=81=93:
->>>> [Some people who received this message don't often get email from mhoc=
-ko@suse.com. Learn why this is important at https://aka.ms/LearnAboutSender=
-Identification ]
->>>>
->>>> On Thu 09-11-23 18:29:03, Huan Yang wrote:
->>>>> HI Michal Hocko,
->>>>>
->>>>> Thanks for your suggestion.
->>>>>
->>>>> =E5=9C=A8 2023/11/9 17:57, Michal Hocko =E5=86=99=E9=81=93:
->>>>>> [Some people who received this message don't often get email from mh=
-ocko@suse.com. Learn why this is important at https://aka.ms/LearnAboutSend=
-erIdentification ]
->>>>>>
->>>>>> On Thu 09-11-23 11:38:56, Huan Yang wrote:
->>>>>> [...]
->>>>>>>> If so, is it better only to reclaim private anonymous pages explic=
-itly?
->>>>>>> Yes, in practice, we only proactively compress anonymous pages and =
-do not
->>>>>>> want to touch file pages.
->>>>>> If that is the case and this is mostly application centric (which you
->>>>>> seem to be suggesting) then why don't you use madvise(MADV_PAGEOUT)
->>>>>> instead.
->>>>> Madvise  may not be applicable in this scenario.(IMO)
->>>>>
->>>>> This feature is aimed at a core goal, which is to compress the anonym=
-ous
->>>>> pages
->>>>> of frozen applications.
->>>>>
->>>>> How to detect that an application is frozen and determine which pages=
- can be
->>>>> safely reclaimed is the responsibility of the policy part.
->>>>>
->>>>> Setting madvise for an application is an active behavior, while the a=
-bove
->>>>> policy
->>>>> is a passive approach.(If I misunderstood, please let me know if ther=
-e is a
->>>>> better
->>>>> way to set madvise.)
->>>> You are proposing an extension to the pro-active reclaim interface so
->>>> this is an active behavior pretty much by definition. So I am really n=
-ot
->>>> following you here. Your agent can simply scan the address space of the
->>>> application it is going to "freeze" and call pidfd_madvise(MADV_PAGEOU=
-T)
->>>> on the private memory is that is really what you want/need.
->>> There is a key point here. We want to use the grouping policy of memcg
->>> to perform
->>> proactive reclamation with certain tendencies. Your suggestion is to
->>> reclaim memory
->>> by scanning the task process space. However, in the mobile field,
->>> memory is usually
->>> viewed at the granularity of an APP.
->>>
->>> Therefore, after an APP is frozen, we hope to reclaim memory uniformly
->>> according
->>> to the pre-grouped APP processes.
->>>
->>> Of course, as you suggested, madvise can also achieve this, but
->>> implementing it in
->>> the agent may be more complex.(In terms of achieving the same goal,
->>> using memcg
->>> to group all the processes of an APP and perform proactive reclamation
->>> is simpler
->>> than using madvise and scanning multiple processes of an application
->>> using an agent?)
->> I still think that it's not too complex to use process_madvise() to do
->> this.  For each process of the application, the agent can read
->> /proc/PID/maps to get all anonymous address ranges, then call
->> process_madvise(MADV_PAGEOUT) to reclaim pages.  This can even filter
->> out shared anonymous pages.  Does this work for you?
->
-> Thanks for this suggestion. This way can avoid touch shared anonymous, it=
-'s
-> pretty well. But, I have some doubts about this, CPU resources are
-> usually limited in
-> embedded devices, and power consumption must also be taken into
-> consideration.
->
-> If this approach is adopted, the agent needs to periodically scan
-> frozen applications
-> and set pageout for the address space. Is the frequency of this active
-> operation more
-> complex and unsuitable for embedded devices compared to reclamation based=
- on
-> memcg grouping features?
+Regards,
+Ma Jun
 
-In memcg based solution, when will you start the proactive reclaiming?
-You can just replace the reclaiming part of the solution from memcg
-proactive reclaiming to process_madvise(MADV_PAGEOUT).  Because you can
-get PIDs in a memcg.  Is it possible?
-
-> In addition, without LRU, it is difficult to control the reclamation
-> of only partially cold
-> anonymous page data of frozen applications. For example, if I only
-> want to proactively
-> reclaim 100MB of anonymous pages and issue the proactive reclamation
-> interface,
-> we can use the LRU feature to only reclaim 100MB of cold anonymous pages.
-> However, this cannot be achieved through madvise.(If I have
-> misunderstood something,
-> please correct me.)
-
-IIUC, it should be OK to reclaim all private anonymous pages of an
-application in your specific use case?  If you really want to restrict
-the number of pages reclaimed, it's possible too.  You can restrict the
-size of address range to call process_madvise(MADV_PAGEOUT), and check
-the RSS of the application.  The accuracy of the number reclaimed isn't
-good.  But I think that it should OK in practice?
-
-BTW: how do you know the number of pages to be reclaimed proactively in
-memcg proactive reclaiming based solution?
-
---
-Best Regards,
-Huang, Ying
+On 10/30/2023 3:18 PM, Ma Jun wrote:
+> Due to electrical and mechanical constraints in certain platform designs there
+> may be likely interference of relatively high-powered harmonics of the (G-)DDR
+> memory clocks with local radio module frequency bands used by Wifi 6/6e/7. To
+> mitigate possible RFI interference we introuduced WBRF(Wifi Band RFI mitigation Feature).
+> Producers can advertise the frequencies in use and consumers can use this information
+> to avoid using these frequencies for sensitive features.
+> 
+> The whole patch set is based on Linux 6.6.0-rc6. With some brief introductions
+> as below:
+> Patch1:      Document about WBRF
+> Patch2:      Core functionality setup for WBRF feature support
+> Patch3 - 4:  Bring WBRF support to wifi subsystem.
+> Patch5 - 9:  Bring WBRF support to AMD graphics driver.
+> 
+> Evan Quan (6):
+>   cfg80211: expose nl80211_chan_width_to_mhz for wide sharing
+>   wifi: mac80211: Add support for WBRF features
+>   drm/amd/pm: update driver_if and ppsmc headers for coming wbrf feature
+>   drm/amd/pm: setup the framework to support Wifi RFI mitigation feature
+>   drm/amd/pm: add flood detection for wbrf events
+>   drm/amd/pm: enable Wifi RFI mitigation feature support for SMU13.0.7
+> 
+> Ma Jun (3):
+>   Documentation/driver-api: Add document about WBRF mechanism
+>   platform/x86/amd: Add support for AMD ACPI based Wifi band RFI
+>     mitigation feature
+>   drm/amd/pm: enable Wifi RFI mitigation feature support for SMU13.0.0
+> 
+>  Documentation/driver-api/wbrf.rst             |  76 ++++
+>  drivers/gpu/drm/amd/amdgpu/amdgpu.h           |   2 +
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  17 +
+>  drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c     | 208 +++++++++
+>  drivers/gpu/drm/amd/pm/swsmu/inc/amdgpu_smu.h |  42 ++
+>  .../inc/pmfw_if/smu13_driver_if_v13_0_0.h     |   3 +-
+>  .../inc/pmfw_if/smu13_driver_if_v13_0_7.h     |   3 +-
+>  .../pm/swsmu/inc/pmfw_if/smu_v13_0_0_ppsmc.h  |   5 +-
+>  .../pm/swsmu/inc/pmfw_if/smu_v13_0_7_ppsmc.h  |   3 +-
+>  drivers/gpu/drm/amd/pm/swsmu/inc/smu_types.h  |   3 +-
+>  drivers/gpu/drm/amd/pm/swsmu/inc/smu_v13_0.h  |   4 +
+>  .../gpu/drm/amd/pm/swsmu/smu13/smu_v13_0.c    |  48 ++
+>  .../drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c  |  22 +
+>  .../drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c  |  13 +
+>  drivers/gpu/drm/amd/pm/swsmu/smu_internal.h   |   3 +
+>  drivers/platform/x86/amd/Kconfig              |  15 +
+>  drivers/platform/x86/amd/Makefile             |   1 +
+>  drivers/platform/x86/amd/wbrf.c               | 413 ++++++++++++++++++
+>  include/linux/acpi_amd_wbrf.h                 |  94 ++++
+>  include/net/cfg80211.h                        |   9 +
+>  net/mac80211/Makefile                         |   2 +
+>  net/mac80211/chan.c                           |   9 +
+>  net/mac80211/ieee80211_i.h                    |   7 +
+>  net/mac80211/main.c                           |   2 +
+>  net/mac80211/wbrf.c                           |  95 ++++
+>  net/wireless/chan.c                           |   3 +-
+>  26 files changed, 1094 insertions(+), 8 deletions(-)
+>  create mode 100644 Documentation/driver-api/wbrf.rst
+>  create mode 100644 drivers/platform/x86/amd/wbrf.c
+>  create mode 100644 include/linux/acpi_amd_wbrf.h
+>  create mode 100644 net/mac80211/wbrf.c
+> 
 
