@@ -1,33 +1,33 @@
-Return-Path: <linux-doc+bounces-2237-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-2240-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 257407E9B29
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Nov 2023 12:26:40 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E4DD7E9B2F
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Nov 2023 12:27:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 550371C208DE
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Nov 2023 11:26:39 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 349E4B20A91
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Nov 2023 11:27:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 27B291CF8B;
-	Mon, 13 Nov 2023 11:26:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 60C6A1CA9F;
+	Mon, 13 Nov 2023 11:27:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; dkim=none
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C10E1C695;
-	Mon, 13 Nov 2023 11:26:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBB0C1CA90;
+	Mon, 13 Nov 2023 11:27:23 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTP id 149404781;
-	Mon, 13 Nov 2023 03:26:05 -0800 (PST)
+	by lindbergh.monkeyblade.net (Postfix) with ESMTP id 0A3BE49CB;
+	Mon, 13 Nov 2023 03:26:06 -0800 (PST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6983DDA7;
-	Mon, 13 Nov 2023 03:26:38 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AC2711007;
+	Mon, 13 Nov 2023 03:26:41 -0800 (PST)
 Received: from e127643.arm.com (unknown [10.57.71.191])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 5B59F3F6C4;
-	Mon, 13 Nov 2023 03:25:50 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D16533F6C4;
+	Mon, 13 Nov 2023 03:25:53 -0800 (PST)
 From: James Clark <james.clark@arm.com>
 To: linux-arm-kernel@lists.infradead.org,
 	linux-perf-users@vger.kernel.org,
@@ -39,10 +39,12 @@ Cc: James Clark <james.clark@arm.com>,
 	Jonathan Corbet <corbet@lwn.net>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v5 0/3] arm64: perf: Add support for event counting threshold
-Date: Mon, 13 Nov 2023 11:25:03 +0000
-Message-Id: <20231113112507.917107-1-james.clark@arm.com>
+Subject: [PATCH v5 1/3] arm64: perf: Include threshold control fields in PMEVTYPER mask
+Date: Mon, 13 Nov 2023 11:25:04 +0000
+Message-Id: <20231113112507.917107-2-james.clark@arm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231113112507.917107-1-james.clark@arm.com>
+References: <20231113112507.917107-1-james.clark@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -51,82 +53,56 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Changes since v4:
+FEAT_PMUv3_TH (Armv8.8) adds two new fields to PMEVTYPER, so include
+them in the mask. These aren't writable on 32 bit kernels as they are in
+the high part of the register, so only include them for arm64.
 
-  * Rebase onto v6.7-rc1, it no longer depends on kvmarm/next
-  * Remove change that moved ARMV8_PMU_EVTYPE_MASK to the asm files.
-    This actually depended on those files being included in a certain
-    order with arm_pmuv3.h to avoid circular includes. Now the
-    definition is done programmatically in arm_pmuv3.c instead.
+It would be difficult to do this statically in the asm header files for
+each platform without resulting in circular includes or #ifdefs inline
+in the code. For that reason the ARMV8_PMU_EVTYPE_MASK definition has
+been removed and the mask is constructed programmatically.
 
-Changes since v3:
+Signed-off-by: James Clark <james.clark@arm.com>
+---
+ drivers/perf/arm_pmuv3.c       | 9 ++++++++-
+ include/linux/perf/arm_pmuv3.h | 3 ++-
+ 2 files changed, 10 insertions(+), 2 deletions(-)
 
-  * Drop #include changes to KVM source files because since
-    commit bc512d6a9b92 ("KVM: arm64: Make PMEVTYPER<n>_EL0.NSH RES0 if
-    EL2 isn't advertised"), KVM doesn't use ARMV8_PMU_EVTYPE_MASK
-    anymore
-
-Changes since v2:
-
-  * Split threshold_control attribute into two, threshold_compare and
-    threshold_count so that it's easier to use
-  * Add some notes to the first commit message and the cover letter
-    about the behavior in KVM
-  * Update the docs commit with regards to the split attribute
+diff --git a/drivers/perf/arm_pmuv3.c b/drivers/perf/arm_pmuv3.c
+index 6ca7be05229c..1d40d794f5e4 100644
+--- a/drivers/perf/arm_pmuv3.c
++++ b/drivers/perf/arm_pmuv3.c
+@@ -555,8 +555,15 @@ static void armv8pmu_write_counter(struct perf_event *event, u64 value)
+ static inline void armv8pmu_write_evtype(int idx, u32 val)
+ {
+ 	u32 counter = ARMV8_IDX_TO_COUNTER(idx);
++	unsigned long mask = ARMV8_PMU_EVTYPE_EVENT |
++			     ARMV8_PMU_INCLUDE_EL2 |
++			     ARMV8_PMU_EXCLUDE_EL0 |
++			     ARMV8_PMU_EXCLUDE_EL1;
  
-Changes since v1:
-
-  * Fix build on aarch32 by disabling FEAT_PMUv3_TH and splitting event
-    type mask between the platforms
-  * Change armv8pmu_write_evtype() to take unsigned long instead of u64
-    so it isn't unnecessarily wide on aarch32
-  * Add UL suffix to aarch64 event type mask definition
-
-----
-
-FEAT_PMUv3_TH (Armv8.8) is a new feature that allows conditional
-counting of PMU events depending on how much the event increments on
-a single cycle. Two new config fields for perf_event_open have been
-added, and a PMU cap file for reading the max_threshold. See the second
-commit message and the docs in the last commit for more details.
-
-The feature is not currently supported on KVM guests, and PMMIR is set
-to read as zero, so it's not advertised as available. But it can be
-added at a later time. Writes to PMEVTYPER.TC and TH from guests are
-already RES0.
-
-The change has been validated on the Arm FVP model:
-
-  # Zero values, works as expected (as before).
-  $ perf stat -e dtlb_walk/threshold=0,threshold_compare=0/ -- true
-
-    5962      dtlb_walk/threshold=0,threshold_compare=0/
-
-  # Threshold >= 255 causes count to be 0 because dtlb_walk doesn't
-  # increase by more than 1 per cycle.
-  $ perf stat -e dtlb_walk/threshold=255,threshold_compare=2/ -- true
-
-    0      dtlb_walk/threshold=255,threshold_compare=2/
-  
-  # Keeping comparison as >= but lowering the threshold to 1 makes the
-  # count return.
-  $ perf stat -e dtlb_walk/threshold=1,threshold_compare=2/ -- true
-
-    6329      dtlb_walk/threshold=1,threshold_compare=2/
-
-James Clark (3):
-  arm64: perf: Include threshold control fields in PMEVTYPER mask
-  arm64: perf: Add support for event counting threshold
-  Documentation: arm64: Document the PMU event counting threshold
-    feature
-
- Documentation/arch/arm64/perf.rst | 56 ++++++++++++++++++++
- drivers/perf/arm_pmuv3.c          | 88 ++++++++++++++++++++++++++++++-
- include/linux/perf/arm_pmuv3.h    |  4 +-
- 3 files changed, 145 insertions(+), 3 deletions(-)
-
-
-base-commit: b85ea95d086471afb4ad062012a4d73cd328fa86
+-	val &= ARMV8_PMU_EVTYPE_MASK;
++	if (IS_ENABLED(CONFIG_ARM64))
++		mask |= ARMV8_PMU_EVTYPE_TC | ARMV8_PMU_EVTYPE_TH;
++
++	val &= mask;
+ 	write_pmevtypern(counter, val);
+ }
+ 
+diff --git a/include/linux/perf/arm_pmuv3.h b/include/linux/perf/arm_pmuv3.h
+index 9c226adf938a..ddd1fec86739 100644
+--- a/include/linux/perf/arm_pmuv3.h
++++ b/include/linux/perf/arm_pmuv3.h
+@@ -228,7 +228,8 @@
+ /*
+  * PMXEVTYPER: Event selection reg
+  */
+-#define ARMV8_PMU_EVTYPE_MASK	0xc800ffff	/* Mask for writable bits */
++#define ARMV8_PMU_EVTYPE_TH	GENMASK(43, 32)
++#define ARMV8_PMU_EVTYPE_TC	GENMASK(63, 61)
+ #define ARMV8_PMU_EVTYPE_EVENT	0xffff		/* Mask for EVENT bits */
+ 
+ /*
 -- 
 2.34.1
 
