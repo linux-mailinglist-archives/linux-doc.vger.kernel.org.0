@@ -1,173 +1,108 @@
-Return-Path: <linux-doc+bounces-2247-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-2249-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 468CF7EA14C
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Nov 2023 17:31:56 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA4227EA1CA
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Nov 2023 18:19:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id F107C1F21C7F
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Nov 2023 16:31:55 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CBCF21C2084E
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Nov 2023 17:19:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5979C1F922;
-	Mon, 13 Nov 2023 16:31:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dkim=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9019D224CA;
+	Mon, 13 Nov 2023 17:19:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=deltatee.com header.i=@deltatee.com header.b="et1rTy4y"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EE9C224C1;
-	Mon, 13 Nov 2023 16:31:51 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3158DD54;
-	Mon, 13 Nov 2023 08:31:50 -0800 (PST)
-X-IronPort-AV: E=McAfee;i="6600,9927,10893"; a="12016956"
-X-IronPort-AV: E=Sophos;i="6.03,299,1694761200"; 
-   d="scan'208";a="12016956"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2023 08:31:49 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10893"; a="830276548"
-X-IronPort-AV: E=Sophos;i="6.03,299,1694761200"; 
-   d="scan'208";a="830276548"
-Received: from smile.fi.intel.com ([10.237.72.54])
-  by fmsmga008.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2023 08:31:45 -0800
-Received: from andy by smile.fi.intel.com with local (Exim 4.97-RC3)
-	(envelope-from <andy@kernel.org>)
-	id 1r2Zqg-0000000DbZi-0jb4;
-	Mon, 13 Nov 2023 18:31:42 +0200
-Date: Mon, 13 Nov 2023 18:31:41 +0200
-From: Andy Shevchenko <andy@kernel.org>
-To: Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
-Cc: Nuno Sa <nuno.sa@analog.com>, linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
-	Bartosz Golaszewski <brgl@bgdev.pl>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Linus Walleij <linus.walleij@linaro.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Rob Herring <robh+dt@kernel.org>, Jean Delvare <jdelvare@suse.com>,
-	Conor Dooley <conor+dt@kernel.org>
-Subject: Re: [PATCH 2/2] hwmon: ltc4282: add support for the LTC4282 chip
-Message-ID: <ZVJPbV2469kjqbHu@smile.fi.intel.com>
-References: <20231110151905.1659873-1-nuno.sa@analog.com>
- <20231110151905.1659873-3-nuno.sa@analog.com>
- <ZU5fYY81L_qSmQWq@smile.fi.intel.com>
- <581aec9c6313e3885aae8b1e12dfcc9f392716db.camel@gmail.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 103E121A11
+	for <linux-doc@vger.kernel.org>; Mon, 13 Nov 2023 17:19:52 +0000 (UTC)
+X-Greylist: delayed 2131 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 13 Nov 2023 09:19:52 PST
+Received: from ale.deltatee.com (ale.deltatee.com [204.191.154.188])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 05E33D7E
+	for <linux-doc@vger.kernel.org>; Mon, 13 Nov 2023 09:19:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=deltatee.com; s=20200525; h=Subject:In-Reply-To:From:References:Cc:To:
+	MIME-Version:Date:Message-ID:content-disposition;
+	bh=t+X3h0tLlX3yo1+ZHCajOFGkEO92RwMUdz8JyR30B9s=; b=et1rTy4y1DAjVf4BnstsIdBcrt
+	YTaMuGUIREkG1xGWJ3UfzEB7w4wXKVCRmtWy6Dkg71QDQPKuKQcb+8K9km+tH162XM/9N1ZzigkMX
+	qcNoDc/qW4GU1JIAoG7FmDKmZM7sfEBxLrwqoDSKQGL0j+1ayrC4c1mqbXpjfCoGOHIoboaiD+8Hs
+	knUlPYI9C8webgyoNq760t8ttKvUMOBd210mO8H5Zdl8jXIgapUrpwi+N+oYKNVxl/50hWYzturZ5
+	8/UmVU2ewDnryoDuB7HbYwxyQQJGTx3l4s+U2jlt47pm2XvtTFdyssqoT59vuDPoDBDFPTYV6bdUW
+	pCWKJdEw==;
+Received: from guinness.priv.deltatee.com ([172.16.1.162])
+	by ale.deltatee.com with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.94.2)
+	(envelope-from <logang@deltatee.com>)
+	id 1r2a2n-004lUD-6U; Mon, 13 Nov 2023 09:44:14 -0700
+Message-ID: <8899b3e9-50bd-4356-9c94-d2d8a5256b0b@deltatee.com>
+Date: Mon, 13 Nov 2023 09:44:04 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <581aec9c6313e3885aae8b1e12dfcc9f392716db.camel@gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+User-Agent: Mozilla Thunderbird
+Content-Language: en-CA
+To: Tadeusz Struk <tstruk@gmail.com>, Bjorn Helgaas <bhelgaas@google.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Tadeusz Struk <tstruk@gigaio.com>,
+ linux-pci@vger.kernel.org, linux-doc@vger.kernel.org, stable@kernel.org
+References: <20231111092239.308767-1-tstruk@gmail.com>
+From: Logan Gunthorpe <logang@deltatee.com>
+In-Reply-To: <20231111092239.308767-1-tstruk@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 172.16.1.162
+X-SA-Exim-Rcpt-To: tstruk@gmail.com, bhelgaas@google.com, corbet@lwn.net, tstruk@gigaio.com, linux-pci@vger.kernel.org, linux-doc@vger.kernel.org, stable@kernel.org
+X-SA-Exim-Mail-From: logang@deltatee.com
+X-Spam-Level: 
+Subject: Re: [PATCH] Documentation: PCI/P2PDMA: Remove reference to
+ pci_p2pdma_map_sg()
+X-SA-Exim-Version: 4.2.1 (built Sat, 13 Feb 2021 17:57:42 +0000)
+X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
 
-On Mon, Nov 13, 2023 at 11:13:44AM +0100, Nuno Sá wrote:
-> On Fri, 2023-11-10 at 18:50 +0200, Andy Shevchenko wrote:
-> > On Fri, Nov 10, 2023 at 04:18:46PM +0100, Nuno Sa wrote:
 
-...
-
-> > > +/*
-> > > + * relaxed version of FIELD_PREP() to be used when mask is not a compile
-> > > time constant
-> > > + * u32_encode_bits() can't also be used as the compiler needs to be able to
-> > > evaluate
-> > > + * mask at compile time.
-> > > + */
-> > > +#define LTC4282_FIELD_PREP(m, v)	(((v) << (ffs(m) - 1)) & (m))
-> > 
-> > Can we name it accordingly as done in other places, and TBH it's a time to
-> > move
-> > it to the header. (At least I know about two more implementations of this).
+On 2023-11-11 02:22, Tadeusz Struk wrote:
+> From: Tadeusz Struk <tstruk@gigaio.com>
 > 
-> Not sure what you mean? Is there some other drivers doing it already? I'll,
-> anyways, wait on more feedback for the GPIO stuff because we might end up not
-> needing it...
-
-$ git grep -n 'define field_prep'
-
-...
-
-> > > +	/* GPIO_2,3 and the ALERT pin require setting the bit to 1 to pull
-> > > down the line */
-> > > +	if (!gpio->active_high)
-> > 
-> > Hmm... Why do you need a separate flag for this? Shouldn't be described or
-> > autodetected somehow?
+> Update Documentation/driver-api/pci/p2pdma.rst doc to
+> remove references to the obsolete pci_p2pdma_map_sg() function.
 > 
-> Well, if a consumer as an active high gpio, it expects to call
-> gpiod_set_value(..., 1) and the line to assert, right? To have that, we need to
-> write 0 on the device register for some of the pins.
-
-It doesn't matter, the GPIO (not _raw) APIs are using logical levels, 1 — activate,
-0 — deactivate.
-
-> And the same story is true for active low. gpiod_set_value(..., 0) will have the
-> gpiolib to automatically invert the value and we get 1 in the callback.
-
-Yes, but why do you have that flag in the structure?
-
-> > > +		val = !val;
-
-...
-
-> > > +	*val = DIV_ROUND_CLOSEST_ULL(be16_to_cpu(in) * (u64)fs, U16_MAX);
-> > 
-> > I'm wondering if you can do some trick to "divide" actually to 2^16 so, it
-> > will
-> > not use division op at all?
-> 
-> Hmm, not sure if it will be obvious but you mean something like:
-> 
-> *val = (be16_to_cpu(in) * (u64)fs) >> 16;
-> 
-> Is this what you mean? If so, we`ll loose the "CLOSEST" handling... Not so sure
-> if we need to be "that" performant in such a code path. But Guenter can also
-> share his opinion...
-
-	*val = DIV_ROUND_CLOSEST_ULL(be16_to_cpu(in) * (u64)fs + (BIT(16) - 1), BIT(16));
-
-will give the same result without division, no?
-What you need is to make sure that the multiplication won't get closer to
-U64_MAX, which seems not the case here (max 48-bit number).
-
-Ditto for all other similar cases which I already pointed out.
-
-...
-
-> > > +	u64 temp =  DECA * 40ULL * st->vfs_out * 1 << 16, temp_2;
-
-> > 
-> > "* BIT(16)" / "* BIT_ULL(16)" ?
-> 
-> Well, I can just place the number as in the formula. Not too keen on the BIT()
-> macros as this is not really a mask.
-
-I'm not sure I got this. The << 16 neither a plain number and BIT() is equally
-good. With power of two it's most likely that this is due to internal
-implementation of the firmware or hardware, so again BIT() can be still good
-enough to show that.
-
-...
-
-> > > +	msleep(3200);
-> > 
-> > Not a single letter to comment such a huge delay :-(
-> 
-> Well, it's after doing a reset so it should be pretty obvious is the number
-> given in the DS. But I'll put a comment on it.
-
-Please do.
-
--- 
-With Best Regards,
-Andy Shevchenko
+> Fixes: 0d06132fc84b ("PCI/P2PDMA: Remove pci_p2pdma_[un]map_sg()")
+> Cc: stable <stable@kernel.org>
+> Signed-off-by: Tadeusz Struk <tstruk@gigaio.com>
+> ---
+>  Documentation/driver-api/pci/p2pdma.rst | 7 +++----
+>  1 file changed, 3 insertions(+), 4 deletions(-)
 
 
+> diff --git a/Documentation/driver-api/pci/p2pdma.rst b/Documentation/driver-api/pci/p2pdma.rst
+> index 44deb52beeb4..9e54ee711b5c 100644
+> --- a/Documentation/driver-api/pci/p2pdma.rst
+> +++ b/Documentation/driver-api/pci/p2pdma.rst
+> @@ -83,10 +83,9 @@ this to include other types of resources like doorbells.
+>  Client Drivers
+>  --------------
+>  
+> -A client driver typically only has to conditionally change its DMA map
+> -routine to use the mapping function :c:func:`pci_p2pdma_map_sg()` instead
+> -of the usual :c:func:`dma_map_sg()` function. Memory mapped in this
+> -way does not need to be unmapped.
+> +A client driver only has to use the mapping api :c:func:`dma_map_sg()`
+> +and :c:func:`dma_unmap_sg()` functions, as usual, and the implementation
+> +will do the right thing for the P2P capable memory.
+>  
+>  The client may also, optionally, make use of
+>  :c:func:`is_pci_p2pdma_page()` to determine when to use the P2P mapping
+
+Might make sense to rework this next paragraph as well seeing it
+references the P2P mapping functions that no longer exist.
+
+Thanks for cleaning up the documentation I forgot about!
+
+Logan
 
