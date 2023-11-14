@@ -1,124 +1,132 @@
-Return-Path: <linux-doc+bounces-2297-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-2295-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DDF27EAD3B
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Nov 2023 10:45:18 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E6CA7EAD2F
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Nov 2023 10:43:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 91D6E1F224C9
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Nov 2023 09:45:17 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CC47F28100F
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Nov 2023 09:43:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 184E015495;
-	Tue, 14 Nov 2023 09:45:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dkim=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 63473168C3;
+	Tue, 14 Nov 2023 09:43:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="NNhnrtvL"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A499156DD
-	for <linux-doc@vger.kernel.org>; Tue, 14 Nov 2023 09:45:09 +0000 (UTC)
-X-Greylist: delayed 572 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 14 Nov 2023 01:45:08 PST
-Received: from harvie.cz (harvie.cz [77.87.242.242])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTP id 3897B18E
-	for <linux-doc@vger.kernel.org>; Tue, 14 Nov 2023 01:45:08 -0800 (PST)
-Received: from anemophobia.amit.cz (unknown [31.30.84.130])
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E893C134BE;
+	Tue, 14 Nov 2023 09:43:18 +0000 (UTC)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CFB61194;
+	Tue, 14 Nov 2023 01:43:17 -0800 (PST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
 	(No client certificate requested)
-	by harvie.cz (Postfix) with ESMTPSA id 5124E180251;
-	Tue, 14 Nov 2023 10:35:34 +0100 (CET)
-From: Tomas Mudrunka <tomas.mudrunka@gmail.com>
-To: gregkh@linuxfoundation.org
-Cc: jirislaby@kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-serial@vger.kernel.org,
-	tomas.mudrunka@gmail.com,
-	corbet@lwn.net,
-	linux-doc@vger.kernel.org
-Subject: [PATCH v2] /proc/sysrq-trigger: accept multiple keys at once
-Date: Tue, 14 Nov 2023 10:35:25 +0100
-Message-ID: <20231114093525.71871-1-tomas.mudrunka@gmail.com>
-X-Mailer: git-send-email 2.42.1
-In-Reply-To: <2023111330-headstone-pyromania-c57e@gregkh>
-References: <2023111330-headstone-pyromania-c57e@gregkh>
+	by smtp-out1.suse.de (Postfix) with ESMTPS id E139721898;
+	Tue, 14 Nov 2023 09:43:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1699954994; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=mgQsT0odT754L8z+3U8Ly6+wQgAtpd/CnwwQT/eWbGI=;
+	b=NNhnrtvLg8PfB8mUbc7N/HdOLXsPh/5OQiu6/44DHFXkC0f2rDOShtPI6i8AmkRnyQkfkf
+	f/FD25+V3Qbkqh+Rngko70mZD/q5bcV7E8Z+PLl24rZAadbP5r4k3qo3OaXj7tnRDRRtQU
+	OSy2FoNjadPlXc0Mxlo3tWXRjXaEQfg=
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A731313416;
+	Tue, 14 Nov 2023 09:43:14 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+	by imap2.suse-dmz.suse.de with ESMTPSA
+	id mqVVJzJBU2UgGAAAMHmgww
+	(envelope-from <mhocko@suse.com>); Tue, 14 Nov 2023 09:43:14 +0000
+Date: Tue, 14 Nov 2023 10:43:13 +0100
+From: Michal Hocko <mhocko@suse.com>
+To: Gregory Price <gregory.price@memverge.com>
+Cc: "tj@kernel.org" <tj@kernel.org>, John Groves <john@jagalactic.com>,
+	Gregory Price <gourry.memverge@gmail.com>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"linux-cxl@vger.kernel.org" <linux-cxl@vger.kernel.org>,
+	"linux-mm@kvack.org" <linux-mm@kvack.org>,
+	"cgroups@vger.kernel.org" <cgroups@vger.kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"ying.huang@intel.com" <ying.huang@intel.com>,
+	"akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+	"lizefan.x@bytedance.com" <lizefan.x@bytedance.com>,
+	"hannes@cmpxchg.org" <hannes@cmpxchg.org>,
+	"corbet@lwn.net" <corbet@lwn.net>,
+	"roman.gushchin@linux.dev" <roman.gushchin@linux.dev>,
+	"shakeelb@google.com" <shakeelb@google.com>,
+	"muchun.song@linux.dev" <muchun.song@linux.dev>,
+	"jgroves@micron.com" <jgroves@micron.com>
+Subject: Re: [RFC PATCH v4 0/3] memcg weighted interleave mempolicy control
+Message-ID: <ZVNBMW8iJIGDyp0y@tiehlicka>
+References: <20231109002517.106829-1-gregory.price@memverge.com>
+ <klhcqksrg7uvdrf6hoi5tegifycjltz2kx2d62hapmw3ulr7oa@woibsnrpgox4>
+ <0100018bb64636ef-9daaf0c0-813c-4209-94e4-96ba6854f554-000000@email.amazonses.com>
+ <ZU6pR46kiuzPricM@slm.duckdns.org>
+ <ZU6uxSrj75EiXise@memverge.com>
+ <ZU7vjsSkGbRLza-K@slm.duckdns.org>
+ <ZU74L9oxWOoTTfpM@memverge.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ZU74L9oxWOoTTfpM@memverge.com>
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Spam-Level: 
+X-Spam-Score: -3.86
+X-Spamd-Result: default: False [-3.86 / 50.00];
+	 ARC_NA(0.00)[];
+	 TO_DN_EQ_ADDR_SOME(0.00)[];
+	 RCVD_TLS_ALL(0.00)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 TAGGED_RCPT(0.00)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 CLAM_VIRUS_FAIL(0.00)[failed to scan and retransmits exceed];
+	 BAYES_HAM(-1.76)[93.55%];
+	 NEURAL_HAM_LONG(-3.00)[-1.000];
+	 DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	 NEURAL_HAM_SHORT(-1.00)[-1.000];
+	 RCPT_COUNT_TWELVE(0.00)[18];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 MID_RHS_NOT_FQDN(0.50)[];
+	 FREEMAIL_CC(0.00)[kernel.org,jagalactic.com,gmail.com,vger.kernel.org,kvack.org,intel.com,linux-foundation.org,bytedance.com,cmpxchg.org,lwn.net,linux.dev,google.com,micron.com];
+	 RCVD_COUNT_TWO(0.00)[2];
+	 SUSPICIOUS_RECIPS(1.50)[]
 
-Just for convenience.
-This way we can do:
-`echo _reisub > /proc/sysrq-trigger`
-Instead of:
-`for i in r e i s u b; do echo "$i" > /proc/sysrq-trigger; done;`
+On Fri 10-11-23 22:42:39, Gregory Price wrote:
+[...]
+> If I can ask, do you think it would be out of line to propose a major
+> refactor to mempolicy to enable external task's the ability to change a
+> running task's mempolicy *as well as* a cgroup-wide mempolicy component?
 
-This can be very useful when trying to execute sysrq combo remotely
-or from userspace. When sending keys in multiple separate writes,
-userspace can be killed before whole combo is completed.
-Therefore putting all keys in single write is more robust approach.
+No, I actually think this is a reasonable idea. pidfd_setmempolicy is a
+generally useful extension. The mempolicy code is heavily current task
+based and there might be some challenges but I believe this will a)
+improve the code base and b) allow more usecases.
 
-Signed-off-by: Tomas Mudrunka <tomas.mudrunka@gmail.com>
----
- Documentation/admin-guide/sysrq.rst |  4 ++++
- drivers/tty/sysrq.c                 | 17 ++++++++++++++---
- 2 files changed, 18 insertions(+), 3 deletions(-)
-
-diff --git a/Documentation/admin-guide/sysrq.rst b/Documentation/admin-guide/sysrq.rst
-index 51906e473..9d46a33e5 100644
---- a/Documentation/admin-guide/sysrq.rst
-+++ b/Documentation/admin-guide/sysrq.rst
-@@ -79,6 +79,10 @@ On all
- 
- 		echo t > /proc/sysrq-trigger
- 
-+	Alternatively write key combo prepended by underscore. e.g.::
-+
-+		echo _reisub > /proc/sysrq-trigger
-+
- The :kbd:`<command key>` is case sensitive.
- 
- What are the 'command' keys?
-diff --git a/drivers/tty/sysrq.c b/drivers/tty/sysrq.c
-index 6b4a28bcf..3455e6dd3 100644
---- a/drivers/tty/sysrq.c
-+++ b/drivers/tty/sysrq.c
-@@ -1150,16 +1150,27 @@ EXPORT_SYMBOL(unregister_sysrq_key);
- #ifdef CONFIG_PROC_FS
- /*
-  * writing 'C' to /proc/sysrq-trigger is like sysrq-C
-+ * If first character in write is underscore, all characters are interpreted.
-  */
- static ssize_t write_sysrq_trigger(struct file *file, const char __user *buf,
- 				   size_t count, loff_t *ppos)
- {
--	if (count) {
-+	char bulk = false;
-+	size_t i;
-+
-+	for (i = 0; i < count; i++) {
- 		char c;
- 
--		if (get_user(c, buf))
-+		if (get_user(c, buf+i))
- 			return -EFAULT;
--		__handle_sysrq(c, false);
-+
-+		if (c == '_')
-+			bulk = true;
-+		else
-+			__handle_sysrq(c, false);
-+
-+		if (!bulk)
-+			break;
- 	}
- 
- 	return count;
+That being said, I still believe that a cgroup based interface is a much
+better choice over a global one. Cpusets seem to be a good fit as the
+controller does control memory placement wrt NUMA interfaces.
 -- 
-2.42.1
-
+Michal Hocko
+SUSE Labs
 
