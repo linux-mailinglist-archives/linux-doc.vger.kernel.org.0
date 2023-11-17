@@ -1,28 +1,28 @@
-Return-Path: <linux-doc+bounces-2547-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-2549-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id F08077EF216
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Nov 2023 12:48:03 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id F40CD7EF215
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Nov 2023 12:48:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 787A8B209F7
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Nov 2023 11:48:01 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3A9FE1C2091F
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Nov 2023 11:48:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19E1C49F83;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51DA63033D;
 	Fri, 17 Nov 2023 11:47:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; dkim=none
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTP id F3CE5D5
-	for <linux-doc@vger.kernel.org>; Fri, 17 Nov 2023 03:47:54 -0800 (PST)
+	by lindbergh.monkeyblade.net (Postfix) with ESMTP id 46010EA
+	for <linux-doc@vger.kernel.org>; Fri, 17 Nov 2023 03:47:55 -0800 (PST)
 Received: from loongson.cn (unknown [112.20.112.120])
-	by gateway (Coremail) with SMTP id _____8CxruvpUldlS8s6AA--.47629S3;
-	Fri, 17 Nov 2023 19:47:53 +0800 (CST)
+	by gateway (Coremail) with SMTP id _____8AxV_HqUldlUcs6AA--.51168S3;
+	Fri, 17 Nov 2023 19:47:54 +0800 (CST)
 Received: from localhost.localdomain (unknown [112.20.112.120])
-	by localhost.localdomain (Coremail) with SMTP id AQAAf8BxL93mUldl705FAA--.23797S3;
-	Fri, 17 Nov 2023 19:47:52 +0800 (CST)
+	by localhost.localdomain (Coremail) with SMTP id AQAAf8BxL93mUldl705FAA--.23797S4;
+	Fri, 17 Nov 2023 19:47:53 +0800 (CST)
 From: Yanteng Si <siyanteng@loongson.cn>
 To: chenhuacai@kernel.org
 Cc: Yanteng Si <siyanteng@loongson.cn>,
@@ -32,9 +32,9 @@ Cc: Yanteng Si <siyanteng@loongson.cn>,
 	wu.xiangcheng@linux.dev,
 	linux-doc@vger.kernel.org,
 	loongarch@lists.linux.dev
-Subject: [PATCH 1/2] Docs/LoongArch: Update arch LoongArch introduction.rst
-Date: Fri, 17 Nov 2023 19:47:47 +0800
-Message-Id: <921854520b3a24fded927ab9e0cee18d11fa4e43.1700221148.git.siyanteng@loongson.cn>
+Subject: [PATCH 2/2] Docs/zh_CN/LoongArch: Update arch LoongArch introduction.rst
+Date: Fri, 17 Nov 2023 19:47:48 +0800
+Message-Id: <397abcfae09ed39d08a19a4d46fb65012a61f08f.1700221148.git.siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.31.4
 In-Reply-To: <cover.1700221148.git.siyanteng@loongson.cn>
 References: <cover.1700221148.git.siyanteng@loongson.cn>
@@ -44,12 +44,13 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:AQAAf8BxL93mUldl705FAA--.23797S3
+X-CM-TRANSID:AQAAf8BxL93mUldl705FAA--.23797S4
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Coremail-Antispam: 1Uk129KBj93XoW7Ary3Gr4rCFyrKrWDXF1rZrc_yoW8Jw4rpw
-	10vr92gr45twn8W34kKa45WF40vFZ3GF4xCFsFkw18GFnrZ3Wvyayrtrn8XF1UA348AFWI
-	q3s5Gw4FyF15AagCm3ZEXasCq-sJn29KB7ZKAUJUUUU7529EdanIXcx71UUUUU7KY7ZEXa
+X-Coremail-Antispam: 1Uk129KBj93XoW7Ary3Gr4rCFyrKrWDGFWkZrc_yoW8Xr18pr
+	yI9r92gF47tw15u34kKasrWF4vqFWxGw4xJa1qkw1qgFnrA3WvyrWrtrs0qFW5u34fJFWI
+	q3yrKw40qF15ZagCm3ZEXasCq-sJn29KB7ZKAUJUUUU7529EdanIXcx71UUUUU7KY7ZEXa
 	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
 	0xBIdaVrnRJUUUBIb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
 	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
@@ -70,24 +71,24 @@ documentation are out of date, let's update it.
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
 ---
- Documentation/arch/loongarch/introduction.rst | 4 ++--
+ .../translations/zh_CN/arch/loongarch/introduction.rst        | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/arch/loongarch/introduction.rst b/Documentation/arch/loongarch/introduction.rst
-index 8c568cfc2107..5e6db78abeaf 100644
---- a/Documentation/arch/loongarch/introduction.rst
-+++ b/Documentation/arch/loongarch/introduction.rst
-@@ -375,9 +375,9 @@ Developer web site of Loongson and LoongArch (Software and Documentation):
+diff --git a/Documentation/translations/zh_CN/arch/loongarch/introduction.rst b/Documentation/translations/zh_CN/arch/loongarch/introduction.rst
+index 59d6bf33050c..bf463c5a4c51 100644
+--- a/Documentation/translations/zh_CN/arch/loongarch/introduction.rst
++++ b/Documentation/translations/zh_CN/arch/loongarch/introduction.rst
+@@ -338,9 +338,9 @@ Loongson与LoongArch的开发者网站（软件与文档资源）：
  
- Documentation of LoongArch ISA:
+ LoongArch指令集架构的文档：
  
--  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.02-CN.pdf (in Chinese)
-+  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.10-CN.pdf (in Chinese)
+-  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.02-CN.pdf （中文版）
++  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.10-CN.pdf （中文版）
  
--  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.02-EN.pdf (in English)
-+  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.10-EN.pdf (in English)
+-  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.02-EN.pdf （英文版）
++  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.10-EN.pdf （英文版）
  
- Documentation of LoongArch ELF psABI:
+ LoongArch的ELF psABI文档：
  
 -- 
 2.31.4
