@@ -1,28 +1,28 @@
-Return-Path: <linux-doc+bounces-2548-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-2547-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8296D7EF214
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Nov 2023 12:48:02 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id F08077EF216
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Nov 2023 12:48:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B3AAA1C2074D
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 787A8B209F7
 	for <lists+linux-doc@lfdr.de>; Fri, 17 Nov 2023 11:48:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4173130330;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19E1C49F83;
 	Fri, 17 Nov 2023 11:47:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; dkim=none
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTP id A342998
-	for <linux-doc@vger.kernel.org>; Fri, 17 Nov 2023 03:47:53 -0800 (PST)
+	by lindbergh.monkeyblade.net (Postfix) with ESMTP id F3CE5D5
+	for <linux-doc@vger.kernel.org>; Fri, 17 Nov 2023 03:47:54 -0800 (PST)
 Received: from loongson.cn (unknown [112.20.112.120])
-	by gateway (Coremail) with SMTP id _____8Dxg_DnUldlRMs6AA--.50744S3;
-	Fri, 17 Nov 2023 19:47:51 +0800 (CST)
+	by gateway (Coremail) with SMTP id _____8CxruvpUldlS8s6AA--.47629S3;
+	Fri, 17 Nov 2023 19:47:53 +0800 (CST)
 Received: from localhost.localdomain (unknown [112.20.112.120])
-	by localhost.localdomain (Coremail) with SMTP id AQAAf8BxL93mUldl705FAA--.23797S2;
-	Fri, 17 Nov 2023 19:47:51 +0800 (CST)
+	by localhost.localdomain (Coremail) with SMTP id AQAAf8BxL93mUldl705FAA--.23797S3;
+	Fri, 17 Nov 2023 19:47:52 +0800 (CST)
 From: Yanteng Si <siyanteng@loongson.cn>
 To: chenhuacai@kernel.org
 Cc: Yanteng Si <siyanteng@loongson.cn>,
@@ -32,10 +32,12 @@ Cc: Yanteng Si <siyanteng@loongson.cn>,
 	wu.xiangcheng@linux.dev,
 	linux-doc@vger.kernel.org,
 	loongarch@lists.linux.dev
-Subject: [PATCH 0/2] Docs/LoongArch: Update links in the introduction.rst
-Date: Fri, 17 Nov 2023 19:47:46 +0800
-Message-Id: <cover.1700221148.git.siyanteng@loongson.cn>
+Subject: [PATCH 1/2] Docs/LoongArch: Update arch LoongArch introduction.rst
+Date: Fri, 17 Nov 2023 19:47:47 +0800
+Message-Id: <921854520b3a24fded927ab9e0cee18d11fa4e43.1700221148.git.siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.31.4
+In-Reply-To: <cover.1700221148.git.siyanteng@loongson.cn>
+References: <cover.1700221148.git.siyanteng@loongson.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -43,36 +45,50 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:AQAAf8BxL93mUldl705FAA--.23797S2
+X-CM-TRANSID:AQAAf8BxL93mUldl705FAA--.23797S3
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Coremail-Antispam: 1Uk129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7
-	ZEXasCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29K
-	BjDU0xBIdaVrnRJUUU9qb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26c
-	xKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vE
-	j48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxV
-	AFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x02
-	67AKxVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6x
-	ACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E
-	87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41l42xK82
-	IYc2Ij64vIr41l4c8EcI0En4kS14v26r1Y6r17MxC20s026xCaFVCjc4AY6r1j6r4UMxCI
-	bckI1I0E14v26r1Y6r17MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_Jr
-	I_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v2
-	6r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj4
-	0_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8
-	JbIYCTnIWIevJa73UjIFyTuYvjxU7_MaUUUUU
+X-Coremail-Antispam: 1Uk129KBj93XoW7Ary3Gr4rCFyrKrWDXF1rZrc_yoW8Jw4rpw
+	10vr92gr45twn8W34kKa45WF40vFZ3GF4xCFsFkw18GFnrZ3Wvyayrtrn8XF1UA348AFWI
+	q3s5Gw4FyF15AagCm3ZEXasCq-sJn29KB7ZKAUJUUUU7529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUBIb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
+	xVW8Jr0_Cr1UM2kKe7AKxVWUXVWUAwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07
+	AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWU
+	tVWrXwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7V
+	AKI48JMxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY
+	6r1j6r4UMxCIbckI1I0E14v26r1Y6r17MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7
+	xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xII
+	jxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw2
+	0EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x02
+	67AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU0epB3UUUUU==
 
 LoongArch-Vol1 has been updated to v1.10, the links in the
-documentation are out of date. That means, everyone can't
-download it, let's update it.
+documentation are out of date, let's update it.
 
-Yanteng Si (2):
-  Docs/LoongArch: Update arch LoongArch introduction.rst
-  Docs/zh_CN/LoongArch: Update arch LoongArch introduction.rst
+Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+---
+ Documentation/arch/loongarch/introduction.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- Documentation/arch/loongarch/introduction.rst                 | 4 ++--
- .../translations/zh_CN/arch/loongarch/introduction.rst        | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
-
+diff --git a/Documentation/arch/loongarch/introduction.rst b/Documentation/arch/loongarch/introduction.rst
+index 8c568cfc2107..5e6db78abeaf 100644
+--- a/Documentation/arch/loongarch/introduction.rst
++++ b/Documentation/arch/loongarch/introduction.rst
+@@ -375,9 +375,9 @@ Developer web site of Loongson and LoongArch (Software and Documentation):
+ 
+ Documentation of LoongArch ISA:
+ 
+-  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.02-CN.pdf (in Chinese)
++  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.10-CN.pdf (in Chinese)
+ 
+-  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.02-EN.pdf (in English)
++  https://github.com/loongson/LoongArch-Documentation/releases/latest/download/LoongArch-Vol1-v1.10-EN.pdf (in English)
+ 
+ Documentation of LoongArch ELF psABI:
+ 
 -- 
 2.31.4
 
