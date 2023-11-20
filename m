@@ -1,336 +1,106 @@
-Return-Path: <linux-doc+bounces-2651-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-2646-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8823F7F0EE0
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Nov 2023 10:20:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0448F7F0ED6
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Nov 2023 10:18:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8B6331C21517
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Nov 2023 09:20:33 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 02CF51C21521
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Nov 2023 09:18:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D51671118F;
-	Mon, 20 Nov 2023 09:20:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA45110A21;
+	Mon, 20 Nov 2023 09:18:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=me.com header.i=@me.com header.b="rYi1u8wZ"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="pIM4bFxw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from pv50p00im-ztdg10011201.me.com (pv50p00im-ztdg10011201.me.com [17.58.6.39])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AF96BC1
-	for <linux-doc@vger.kernel.org>; Mon, 20 Nov 2023 01:20:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=me.com; s=1a1hai;
-	t=1700471581; bh=AWaj1ki3rwcuwpTBAPDzYvQWi1J126ZZaCIJ2Nblgd8=;
-	h=From:To:Subject:Date:Message-Id:MIME-Version;
-	b=rYi1u8wZOp0OrfiANALqBBzTEN2M0f6lGNJBSLz6HLwevM0aEhdQWh9aoZkirKdFM
-	 NergaZPv15dFBOa6yN26VLwf60oecQ2t1knY4//RG/5gLDDgpr5uOiFdyPBu1dFuK2
-	 uy0BPrTW6OQTPP2WBeurw/gtydeSpsyHK3GGRcaP/eV3OT+42TEaJ8U6TACpXKliX9
-	 39d4pmfOhcG/iHZdyYJWpzdinJSiDGZvUqdrVJdeVscEPGZn85OitiKchCZ9vAVSBT
-	 Nx7zkD344/z0XjshDlf1XVTEi6cOESbvkOasJobMN7rZ1ND1c+fshy8KEdgyoI9x45
-	 W2ZV4djkODAqg==
-Received: from xiongwei.. (pv50p00im-dlb-asmtp-mailmevip.me.com [17.56.9.10])
-	by pv50p00im-ztdg10011201.me.com (Postfix) with ESMTPSA id BE336680246;
-	Mon, 20 Nov 2023 09:12:56 +0000 (UTC)
-From: sxwjean@me.com
-To: cl@linux.com,
-	penberg@kernel.org,
-	rientjes@google.com,
-	iamjoonsoo.kim@lge.com,
-	vbabka@suse.cz,
-	roman.gushchin@linux.dev,
-	42.hyeyoo@gmail.com
-Cc: corbet@lwn.net,
-	linux-mm@kvack.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 4/4] mm/slab: move slab merge from slab_common.c to slub.c
-Date: Mon, 20 Nov 2023 17:12:14 +0800
-Message-Id: <20231120091214.150502-5-sxwjean@me.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231120091214.150502-1-sxwjean@me.com>
-References: <20231120091214.150502-1-sxwjean@me.com>
+Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [IPv6:2001:4b98:dc4:8::222])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D4525BA;
+	Mon, 20 Nov 2023 01:18:03 -0800 (PST)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id B089940004;
+	Mon, 20 Nov 2023 09:17:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1700471880;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=POKstibQf2T728kxGgPI1aeq/54Lhb4ulb9k4+ErqNA=;
+	b=pIM4bFxwpNEJG2Z1NyAfaEWkMcj10QWyDQyFJWzibWpR+EkemNzXD3Y1CpsK6z2dVe2HW/
+	yvyM3sjRsFfZp310uKs2XAMnxeHHhrnqDnI6YPqrXPflerIKL191CD2Oumb8R4VYrlCjxv
+	dkQ3wNabpXlA73TWCqeZSmn4EAAg+M+WAdOjB0eRXMevilOuryM2jbFLsZ/fGqU2g9R4EP
+	Iy0pbdjjSs9ISOd15nivSuCoIQqFKor7nse6M2ljzhM+a+6mNGytOEXQ81CAjq0igNWsOW
+	VzWJDyHOzpvqHlvFn+fkQnI7shRKiNMIy5Jei0NLq9fUcPl/GaTE5P2aB5sRug==
+Date: Mon, 20 Nov 2023 10:17:57 +0100
+From: =?UTF-8?B?S8O2cnk=?= Maincent <kory.maincent@bootlin.com>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>, Broadcom internal
+ kernel review list <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn
+ <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, Russell King
+ <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Richard
+ Cochran <richardcochran@gmail.com>, Radu Pirea
+ <radu-nicolae.pirea@oss.nxp.com>, Jay Vosburgh <j.vosburgh@gmail.com>, Andy
+ Gospodarek <andy@greyhouse.net>, Nicolas Ferre
+ <nicolas.ferre@microchip.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Jonathan Corbet
+ <corbet@lwn.net>, Horatiu Vultur <horatiu.vultur@microchip.com>,
+ UNGLinuxDriver@microchip.com, Simon Horman <horms@kernel.org>, Vladimir
+ Oltean <vladimir.oltean@nxp.com>, Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Maxime Chevallier
+ <maxime.chevallier@bootlin.com>
+Subject: Re: [PATCH net-next v7 08/16] net: ethtool: Add a command to expose
+ current time stamping layer
+Message-ID: <20231120101757.7ecf40b2@kmaincent-XPS-13-7390>
+In-Reply-To: <20231118182424.2d569940@kernel.org>
+References: <20231114-feature_ptp_netnext-v7-0-472e77951e40@bootlin.com>
+	<20231114-feature_ptp_netnext-v7-8-472e77951e40@bootlin.com>
+	<20231118182424.2d569940@kernel.org>
+Organization: bootlin
+X-Mailer: Claws Mail 3.17.5 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: wmdiAmmV3HG-u_79uyar0KcaBugWOyer
-X-Proofpoint-ORIG-GUID: wmdiAmmV3HG-u_79uyar0KcaBugWOyer
-X-Proofpoint-Virus-Version: =?UTF-8?Q?vendor=3Dfsecure_engine=3D1.1.170-22c6f66c430a71ce266a39bfe25bc?=
- =?UTF-8?Q?2903e8d5c8f:6.0.517,18.0.883,17.0.605.474.0000000_definitions?=
- =?UTF-8?Q?=3D2022-06-21=5F08:2022-06-21=5F01,2022-06-21=5F08,2020-01-23?=
- =?UTF-8?Q?=5F02_signatures=3D0?=
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 suspectscore=0
- bulkscore=0 clxscore=1015 adultscore=0 phishscore=0 mlxscore=0
- malwarescore=0 spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2308100000 definitions=main-2311200061
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: kory.maincent@bootlin.com
 
-From: Xiongwei Song <xiongwei.song@windriver.com>
+On Sat, 18 Nov 2023 18:24:24 -0800
+Jakub Kicinski <kuba@kernel.org> wrote:
 
-Since slab allocator has been removed. There is no users about slab
-merge except slub. This commit is almost to revert
-commit 423c929cbbec ("mm/slab_common: commonize slab merge logic").
+> On Tue, 14 Nov 2023 12:28:36 +0100 Kory Maincent wrote:
+> > +		ops->get_ts_info(dev, &ts_info);
+> > +		if (ts_info.so_timestamping &
+> > +		    SOF_TIMESTAMPING_HARDWARE_MASK)
+> > +			data->ts_layer =3D MAC_TIMESTAMPING;
+> > +
+> > +		if (ts_info.so_timestamping &
+> > +		    SOF_TIMESTAMPING_SOFTWARE_MASK)
+> > +			data->ts_layer =3D SOFTWARE_TIMESTAMPING; =20
+>=20
+> How does this work? so_timestamping is capabilities, not what's
+> enabled now. So if driver supports SW stamping we always return
+> SOFTWARE?
 
-Also change all prefix of slab merge related functions, variables and
-definitions from "slab/SLAB" to"slub/SLUB".
+Yes, the software timestamping comes from the MAC capabilities.
+I decided to separate software and MAC timestamping. If we select PHY
+timestamping we can't use software timestamping and for an user, selecting =
+the
+MAC as timestamping seems not logical to use software timestamping.
 
-Signed-off-by: Xiongwei Song <xiongwei.song@windriver.com>
----
- mm/slab.h        |   3 --
- mm/slab_common.c |  98 ----------------------------------------------
- mm/slub.c        | 100 ++++++++++++++++++++++++++++++++++++++++++++++-
- 3 files changed, 99 insertions(+), 102 deletions(-)
+Indeed there is a mistake here I should have used "else if" condition.
+Mmh in fact, maybe not, because it would breaks the access to software
+timestamping until patch 13.
+I will remove the SOFTWARE/MAC timestamping distinction from this patch.
 
-diff --git a/mm/slab.h b/mm/slab.h
-index 8d20f8c6269d..cd52e705ce28 100644
---- a/mm/slab.h
-+++ b/mm/slab.h
-@@ -429,9 +429,6 @@ extern void create_boot_cache(struct kmem_cache *, const char *name,
- 
- unsigned int calculate_alignment(slab_flags_t flags,
- 		unsigned int align, unsigned int size);
--int slab_unmergeable(struct kmem_cache *s);
--struct kmem_cache *find_mergeable(unsigned size, unsigned align,
--		slab_flags_t flags, const char *name, void (*ctor)(void *));
- struct kmem_cache *
- __kmem_cache_alias(const char *name, unsigned int size, unsigned int align,
- 		   slab_flags_t flags, void (*ctor)(void *));
-diff --git a/mm/slab_common.c b/mm/slab_common.c
-index 62eb77fdedf2..6960ae5c35ee 100644
---- a/mm/slab_common.c
-+++ b/mm/slab_common.c
-@@ -45,36 +45,6 @@ static void slab_caches_to_rcu_destroy_workfn(struct work_struct *work);
- static DECLARE_WORK(slab_caches_to_rcu_destroy_work,
- 		    slab_caches_to_rcu_destroy_workfn);
- 
--/*
-- * Set of flags that will prevent slab merging
-- */
--#define SLAB_NEVER_MERGE (SLAB_RED_ZONE | SLAB_POISON | SLAB_STORE_USER | \
--		SLAB_TRACE | SLAB_TYPESAFE_BY_RCU | SLAB_NOLEAKTRACE | \
--		SLAB_FAILSLAB | SLAB_NO_MERGE | kasan_never_merge())
--
--#define SLAB_MERGE_SAME (SLAB_RECLAIM_ACCOUNT | SLAB_CACHE_DMA | \
--			 SLAB_CACHE_DMA32 | SLAB_ACCOUNT)
--
--/*
-- * Merge control. If this is set then no merging of slab caches will occur.
-- */
--static bool slub_nomerge = !IS_ENABLED(CONFIG_SLAB_MERGE_DEFAULT);
--
--static int __init setup_slab_nomerge(char *str)
--{
--	slub_nomerge = true;
--	return 1;
--}
--
--static int __init setup_slab_merge(char *str)
--{
--	slub_nomerge = false;
--	return 1;
--}
--
--__setup_param("slub_nomerge", slub_nomerge, setup_slab_nomerge, 0);
--__setup_param("slub_merge", slub_merge, setup_slab_merge, 0);
--
- /*
-  * Determine the size of a slab object
-  */
-@@ -130,74 +100,6 @@ unsigned int calculate_alignment(slab_flags_t flags,
- 	return ALIGN(align, sizeof(void *));
- }
- 
--/*
-- * Find a mergeable slab cache
-- */
--int slab_unmergeable(struct kmem_cache *s)
--{
--	if (slub_nomerge || (s->flags & SLAB_NEVER_MERGE))
--		return 1;
--
--	if (s->ctor)
--		return 1;
--
--#ifdef CONFIG_HARDENED_USERCOPY
--	if (s->usersize)
--		return 1;
--#endif
--
--	/*
--	 * We may have set a slab to be unmergeable during bootstrap.
--	 */
--	if (s->refcount < 0)
--		return 1;
--
--	return 0;
--}
--
--struct kmem_cache *find_mergeable(unsigned int size, unsigned int align,
--		slab_flags_t flags, const char *name, void (*ctor)(void *))
--{
--	struct kmem_cache *s;
--
--	if (slub_nomerge)
--		return NULL;
--
--	if (ctor)
--		return NULL;
--
--	size = ALIGN(size, sizeof(void *));
--	align = calculate_alignment(flags, align, size);
--	size = ALIGN(size, align);
--	flags = kmem_cache_flags(size, flags, name);
--
--	if (flags & SLAB_NEVER_MERGE)
--		return NULL;
--
--	list_for_each_entry_reverse(s, &slab_caches, list) {
--		if (slab_unmergeable(s))
--			continue;
--
--		if (size > s->size)
--			continue;
--
--		if ((flags & SLAB_MERGE_SAME) != (s->flags & SLAB_MERGE_SAME))
--			continue;
--		/*
--		 * Check if alignment is compatible.
--		 * Courtesy of Adrian Drzewiecki
--		 */
--		if ((s->size & ~(align - 1)) != s->size)
--			continue;
--
--		if (s->size - size >= sizeof(void *))
--			continue;
--
--		return s;
--	}
--	return NULL;
--}
--
- static struct kmem_cache *create_cache(const char *name,
- 		unsigned int object_size, unsigned int align,
- 		slab_flags_t flags, unsigned int useroffset,
-diff --git a/mm/slub.c b/mm/slub.c
-index ae1e6e635253..435d9ed140e4 100644
---- a/mm/slub.c
-+++ b/mm/slub.c
-@@ -709,6 +709,104 @@ static inline bool slab_update_freelist(struct kmem_cache *s, struct slab *slab,
- 	return false;
- }
- 
-+/*
-+ * Set of flags that will prevent slab merging
-+ */
-+#define SLUB_NEVER_MERGE (SLAB_RED_ZONE | SLAB_POISON | SLAB_STORE_USER | \
-+		SLAB_TRACE | SLAB_TYPESAFE_BY_RCU | SLAB_NOLEAKTRACE | \
-+		SLAB_FAILSLAB | SLAB_NO_MERGE | kasan_never_merge())
-+
-+#define SLUB_MERGE_SAME (SLAB_RECLAIM_ACCOUNT | SLAB_CACHE_DMA | \
-+			 SLAB_CACHE_DMA32 | SLAB_ACCOUNT)
-+
-+/*
-+ * Merge control. If this is set then no merging of slab caches will occur.
-+ */
-+static bool slub_nomerge = !IS_ENABLED(CONFIG_SLAB_MERGE_DEFAULT);
-+
-+static int __init setup_slub_nomerge(char *str)
-+{
-+	slub_nomerge = true;
-+	return 1;
-+}
-+
-+static int __init setup_slub_merge(char *str)
-+{
-+	slub_nomerge = false;
-+	return 1;
-+}
-+
-+__setup_param("slub_nomerge", slub_nomerge, setup_slab_nomerge, 0);
-+__setup_param("slub_merge", slub_merge, setup_slab_merge, 0);
-+
-+/*
-+ * Find a mergeable slab cache
-+ */
-+static inline int slub_unmergeable(struct kmem_cache *s)
-+{
-+	if (slub_nomerge || (s->flags & SLUB_NEVER_MERGE))
-+		return 1;
-+
-+	if (s->ctor)
-+		return 1;
-+
-+#ifdef CONFIG_HARDENED_USERCOPY
-+	if (s->usersize)
-+		return 1;
-+#endif
-+
-+	/*
-+	 * We may have set a slab to be unmergeable during bootstrap.
-+	 */
-+	if (s->refcount < 0)
-+		return 1;
-+
-+	return 0;
-+}
-+
-+static struct kmem_cache *find_mergeable(unsigned int size, unsigned int align,
-+		slab_flags_t flags, const char *name, void (*ctor)(void *))
-+{
-+	struct kmem_cache *s;
-+
-+	if (slub_nomerge)
-+		return NULL;
-+
-+	if (ctor)
-+		return NULL;
-+
-+	size = ALIGN(size, sizeof(void *));
-+	align = calculate_alignment(flags, align, size);
-+	size = ALIGN(size, align);
-+	flags = kmem_cache_flags(size, flags, name);
-+
-+	if (flags & SLUB_NEVER_MERGE)
-+		return NULL;
-+
-+	list_for_each_entry_reverse(s, &slab_caches, list) {
-+		if (slub_unmergeable(s))
-+			continue;
-+
-+		if (size > s->size)
-+			continue;
-+
-+		if ((flags & SLUB_MERGE_SAME) != (s->flags & SLUB_MERGE_SAME))
-+			continue;
-+		/*
-+		 * Check if alignment is compatible.
-+		 * Courtesy of Adrian Drzewiecki
-+		 */
-+		if ((s->size & ~(align - 1)) != s->size)
-+			continue;
-+
-+		if (s->size - size >= sizeof(void *))
-+			continue;
-+
-+		return s;
-+	}
-+	return NULL;
-+}
-+
- #ifdef CONFIG_SLUB_DEBUG
- static unsigned long object_map[BITS_TO_LONGS(MAX_OBJS_PER_PAGE)];
- static DEFINE_SPINLOCK(object_map_lock);
-@@ -6679,7 +6777,7 @@ static int sysfs_slab_add(struct kmem_cache *s)
- 	int err;
- 	const char *name;
- 	struct kset *kset = cache_kset(s);
--	int unmergeable = slab_unmergeable(s);
-+	int unmergeable = slub_unmergeable(s);
- 
- 	if (!unmergeable && disable_higher_order_debug &&
- 			(slub_debug & DEBUG_METADATA_FLAGS))
--- 
-2.34.1
-
+Regards,
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
 
