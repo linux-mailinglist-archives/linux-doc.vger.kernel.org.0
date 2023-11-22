@@ -1,137 +1,162 @@
-Return-Path: <linux-doc+bounces-2830-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-2832-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B2527F3C54
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 04:24:09 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 32D6B7F3C94
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 04:46:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 00321B21991
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 03:24:07 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E205A2820C1
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 03:46:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 923905252;
-	Wed, 22 Nov 2023 03:24:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 032558BF3;
+	Wed, 22 Nov 2023 03:46:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=wiwynn.com header.i=@wiwynn.com header.b="E2JSAiBl"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MJ/kWN8F"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from APC01-SG2-obe.outbound.protection.outlook.com (mail-sgaapc01on2059.outbound.protection.outlook.com [40.107.215.59])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 40E2ED40;
-	Tue, 21 Nov 2023 19:23:58 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CRQKHRRAvk0wkEpRF/ovFEvYLa11KgznKfQpVwDVHVu3cknrnedu3q7YoLzkNw420WR8HbbqkQWPBI9Sy8YN8aO4s+WDQm+qIHQ8SrNV1imz9e9Y9a8vnJMydE/i9XAcmNkoBT9P2l9+U9JstqnDMfpqn4ggc69T66/nMYMK2IaLjwQq5+9b7Fsuljiei8LtWNSt6Gb0f0x6KQ7N97oigzXdW4Eq9ulO3PIO88WzEbFeYc90QnCdd7EqLiO7LIEPjGqf9NxzojObm9Su+M0j9P41UNtNI0Lp4xkALsOu7FyRQ4O6Aow54dESs+JuHbY3QD6N+vFkxGdEL1+qDY9wcQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ne8DHLwPA/jsT43c17x9qaPVf2vrRJXucJfidDLh7SY=;
- b=G9V9RYj9KSgsT7VUC7uMuowpLYgzoOZsFsbuXloYnFRIUbQbRgOFWBbNlbkFRt9t1DL/pkhQNn4gOyI9We2FaCzZPB2bAceQCBJHuzyDhpqnXWyaUiCR/izdlaclYbKJVq4m8/dKjz3dO3+Wxfa3quC16o6eeOf/+tBk33GPrRKg+h/YaFYX3yjrOQOWpvrltWjO1nNvAXTJwUi7opIQDGUB0oQvZS/jjL106XeGxaOOmW3/xXbpu3Qy+VfGATvdvcAWJk2I1EozcPz1dAtXvawsm4YhaVbsdNylxmQZtEhhj/KB2D5k6ToWybLCAN4WIiZoXXYLYu3J/qEYj7kHFQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 211.20.1.79) smtp.rcpttodomain=stwcx.xyz smtp.mailfrom=wiwynn.com; dmarc=fail
- (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=wiwynn.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wiwynn.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ne8DHLwPA/jsT43c17x9qaPVf2vrRJXucJfidDLh7SY=;
- b=E2JSAiBlBvFVwy6lixUvmU1Qyqa5oJQJr/F+0XqONUyX13Geb0xq7LD+V1UurcxbhbZaPEQR6hIUwHF8hhiUXwNbM6YBpcwxoUiuXvKvz5TjAXydTSfS8Sx3Sj5RyqIyPAWyluh6G0VPLiZWvPThQ9Fh4CWXTozY30FXdEdb3M97xDSSz3sJWiGDVJncR37RrpiXrUA6kUrgo10sv17O+e2oYifCxDxnjVQ/nSpmVcNTxmxsEPmt7kPnJ5PGG0bZoOoGOiJtdjdO0uMZRqrhBDDV57ORRTM7XpvC+nUc61RaX+EAZdhRd2CqK35r71GIn4NLdJCrxV625juV4Zv1cA==
-Received: from KL1PR02CA0034.apcprd02.prod.outlook.com (2603:1096:820:d::21)
- by KL1PR0401MB4467.apcprd04.prod.outlook.com (2603:1096:820:37::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.18; Wed, 22 Nov
- 2023 03:23:54 +0000
-Received: from HK3PEPF00000220.apcprd03.prod.outlook.com
- (2603:1096:820:d:cafe::2b) by KL1PR02CA0034.outlook.office365.com
- (2603:1096:820:d::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.18 via Frontend
- Transport; Wed, 22 Nov 2023 03:23:54 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 211.20.1.79)
- smtp.mailfrom=wiwynn.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=wiwynn.com;
-Received-SPF: Fail (protection.outlook.com: domain of wiwynn.com does not
- designate 211.20.1.79 as permitted sender) receiver=protection.outlook.com;
- client-ip=211.20.1.79; helo=localhost.localdomain;
-Received: from localhost.localdomain (211.20.1.79) by
- HK3PEPF00000220.mail.protection.outlook.com (10.167.8.42) with Microsoft SMTP
- Server id 15.20.7025.12 via Frontend Transport; Wed, 22 Nov 2023 03:23:53
- +0000
-From: Delphine CC Chiu <Delphine_CC_Chiu@wiwynn.com>
-To: patrick@stwcx.xyz,
-	Jean Delvare <jdelvare@suse.com>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Rob Herring <robh+dt@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Conor Dooley <conor+dt@kernel.org>
-Cc: Delphine CC Chiu <Delphine_CC_Chiu@wiwynn.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-hwmon@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: [PATCH v1 2/2] dt-bindings: hwmon: pmbus: Add adm1281 support
-Date: Wed, 22 Nov 2023 11:23:42 +0800
-Message-Id: <20231122032343.2794903-3-Delphine_CC_Chiu@wiwynn.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231122032343.2794903-1-Delphine_CC_Chiu@wiwynn.com>
-References: <20231122032343.2794903-1-Delphine_CC_Chiu@wiwynn.com>
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBAD88BED
+	for <linux-doc@vger.kernel.org>; Wed, 22 Nov 2023 03:46:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AFC98C433C9
+	for <linux-doc@vger.kernel.org>; Wed, 22 Nov 2023 03:46:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1700624777;
+	bh=+ZdQxYStF7qlczejYvvnc/fNWLDpo7+8IzuOh8Ic98s=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=MJ/kWN8FiAdyH/TlhkMFfVxKmsQt5ZJSZsz1SQe6GM85jolnlWz3KkrpdXUgc3Iem
+	 6a/zk8D4dCdoLCa/UMpSZq6sEE16gnPqH1rYBxeVg7rhg9QNqEECfM2jlPPMcTIQCE
+	 F9yipKBXj01XiCaWxern0w/6NweCUtBALYQMxKIg5RGtSPPaUNkRJvpGZ4f24WLVVo
+	 m5oMm5CaE2hAAaax9bGY5s1cXCBiXrqkblchs828d2q6t23PYoVWfo8zjY0qltdhl8
+	 oqfOh0LVjP2HsqKQZGmOSLALAUWoNzW8+rE8moyUqHiyX3cirBmEjRgO7GHPbncjZh
+	 we57VjwsUNSeA==
+Received: by mail-qt1-f181.google.com with SMTP id d75a77b69052e-4237346c6efso6877991cf.0
+        for <linux-doc@vger.kernel.org>; Tue, 21 Nov 2023 19:46:17 -0800 (PST)
+X-Gm-Message-State: AOJu0Yzz4gx3omP/ao+DhETvF6Ll0DYcEZxGOQ/yDDXjtM1PvlhXnGpG
+	NB3lE5yf61u2RBpx+TopHzO8Ea8NE+QsALZo/chZBg==
+X-Google-Smtp-Source: AGHT+IEcaHMwYV6MNu58EXGgqZl9LbbEuqb72Ci6XYjP9DfltYsYdqnYxHSvsyXaKBN7jDh17NKmVll4E2bTTyVX8Dw=
+X-Received: by 2002:a05:6a20:938b:b0:187:afb0:c2f5 with SMTP id
+ x11-20020a056a20938b00b00187afb0c2f5mr1303175pzh.3.1700624756029; Tue, 21 Nov
+ 2023 19:45:56 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: HK3PEPF00000220:EE_|KL1PR0401MB4467:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 664ccb20-8220-47b8-7e82-08dbeb0a74a9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	lz3y+qGpCgW9Tk7nsH/+6fSF7BmaK3PA4GVPU0xA6MUc2rplL76PmYjQ3WcFe9ue+fGaJl7+N3GKQi1zU39m2OgY5jXRul2VuFywMPB3dCU2Twz9H8Os7g5ALYFlWq26HVamXYEB8OipR6KxwsiQi3lyzBpIkheAyJt26Rr02FZ7fOgNE9F+lcFsy99ApGATp2MeeCBaohElR26pFvNi5Cko9rGvtVYyluV0pUdDnjwthSEcFs71Uh+3ESnW9cp5NkvM4cG71AxignoDjAAUxTvb9OXQqILYmhAJpVQu3GWm/cEvVS1AgYcdu+RoKrDl7oVRg180mhm6kp5zPcEccTnSKWzUeK+NxtAZ7w4v9dbMMhl2OXMC45aH9GZiLmjbYJscBm1Ljqhi4xGvfAOZq7NeKgacs4pX7by2N3aq2i00eyqJtZfOfIF7vwVjXXJOOnPi8Buw5upNzSPWfqngFcrk/8+u8JpzHn24KyrE9Mc8Dq8M5+D7+fCjMYDHYybb2YZk+IYcrcT7VMjl8lT8Z5/lsTWI51ZbtJo5LBmkKD5qCx/ts6levpPpUU46OiIGgdU6y+tc1PQEij8BDookVcuuY21pIugaQ6jE8HRcw+lhSWauEDtqIBTQ7BORBr9stiz1PxbrRgWumwDwkyTeiWnhCjaxAe6CQxdXKoDz2jGu+RRi6G/mV0fWqIQJbyoZGc2tsQkcxxs+W/qI8OUndA==
-X-Forefront-Antispam-Report:
-	CIP:211.20.1.79;CTRY:TW;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:localhost.localdomain;PTR:211-20-1-79.hinet-ip.hinet.net;CAT:NONE;SFS:(13230031)(6069001)(4636009)(346002)(136003)(39860400002)(376002)(396003)(230922051799003)(451199024)(186009)(64100799003)(82310400011)(1800799012)(36840700001)(46966006)(47076005)(7416002)(4744005)(2906002)(36860700001)(5660300002)(9316004)(36756003)(86362001)(41300700001)(356005)(81166007)(82740400003)(70206006)(70586007)(54906003)(316002)(40480700001)(110136005)(36736006)(336012)(1076003)(26005)(6666004)(956004)(2616005)(478600001)(6486002)(6512007)(6506007)(4326008)(8676002)(8936002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: wiwynn.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Nov 2023 03:23:53.8928
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 664ccb20-8220-47b8-7e82-08dbeb0a74a9
-X-MS-Exchange-CrossTenant-Id: da6e0628-fc83-4caf-9dd2-73061cbab167
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=da6e0628-fc83-4caf-9dd2-73061cbab167;Ip=[211.20.1.79];Helo=[localhost.localdomain]
-X-MS-Exchange-CrossTenant-AuthSource:
-	HK3PEPF00000220.apcprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR0401MB4467
+References: <20231115172344.4155593-1-nphamcs@gmail.com> <CAF8kJuN-4UE0skVHvjUzpGefavkLULMonjgkXUZSBVJrcGFXCA@mail.gmail.com>
+ <CAJD7tkZ1U+YuvoBAnrXFxQDiQV2hXdbMG-gbzu64R8GLAtNAPA@mail.gmail.com>
+ <CAF8kJuPTNwQM413UdeQTkMQ8HkJFyF4OWVrxJSf7uWbege0CXQ@mail.gmail.com>
+ <CAKEwX=O5M-vZE5YhYQ5_CbCmXovS1XECO4ROXKWo06K880M1Mg@mail.gmail.com>
+ <CAF8kJuOD6zq2VPcVdoZGvkzYX8iXn1akuYhNDJx-LUdS+Sx3GA@mail.gmail.com>
+ <CAKEwX=NdFjemcmf27PVpgHpVHWQEo19KfApepWJBRYeyVCWvCw@mail.gmail.com>
+ <CAF8kJuOCyd5r0LQ3m8fQp0GtxxNUKSmwURJH6V9aApefvX8xCA@mail.gmail.com>
+ <ZVrHXJLxvs4_CUxc@google.com> <CAKEwX=MR6a-u87p=Oqm+zvwB_1zhrsM_n2=xW1kJz0_AoVwkPA@mail.gmail.com>
+ <CAF8kJuNFQn_e29YEPy-G29FR2RnrPzZNWR07VuadOTNask_Rig@mail.gmail.com> <CAKEwX=NpKqjApRKk2Qp9Hp63xSjRwD-DEu9yX4BvbMd86x2b1g@mail.gmail.com>
+In-Reply-To: <CAKEwX=NpKqjApRKk2Qp9Hp63xSjRwD-DEu9yX4BvbMd86x2b1g@mail.gmail.com>
+From: Chris Li <chrisl@kernel.org>
+Date: Tue, 21 Nov 2023 19:45:44 -0800
+X-Gmail-Original-Message-ID: <CAF8kJuNbgsMK-JiBvj=O6UbueNNeo5WJnJdwrH7JAuavNHH6Lg@mail.gmail.com>
+Message-ID: <CAF8kJuNbgsMK-JiBvj=O6UbueNNeo5WJnJdwrH7JAuavNHH6Lg@mail.gmail.com>
+Subject: Re: [PATCH v5] zswap: memcontrol: implement zswap writeback disabling
+To: Nhat Pham <nphamcs@gmail.com>
+Cc: Yosry Ahmed <yosryahmed@google.com>, Andrew Morton <akpm@linux-foundation.org>, tj@kernel.org, 
+	lizefan.x@bytedance.com, Johannes Weiner <hannes@cmpxchg.org>, 
+	Domenico Cerasuolo <cerasuolodomenico@gmail.com>, Seth Jennings <sjenning@redhat.com>, 
+	Dan Streetman <ddstreet@ieee.org>, Vitaly Wool <vitaly.wool@konsulko.com>, 
+	Michal Hocko <mhocko@kernel.org>, Roman Gushchin <roman.gushchin@linux.dev>, 
+	Shakeel Butt <shakeelb@google.com>, Muchun Song <muchun.song@linux.dev>, 
+	Hugh Dickins <hughd@google.com>, corbet@lwn.net, 
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, senozhatsky@chromium.org, rppt@kernel.org, 
+	linux-mm <linux-mm@kvack.org>, kernel-team@meta.com, 
+	LKML <linux-kernel@vger.kernel.org>, linux-doc@vger.kernel.org, david@ixit.cz, 
+	Minchan Kim <minchan@google.com>, Kairui Song <kasong@tencent.com>, 
+	Zhongkun He <hezhongkun.hzk@bytedance.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add device type support for adm1281
+On Tue, Nov 21, 2023 at 5:19=E2=80=AFPM Nhat Pham <nphamcs@gmail.com> wrote=
+:
+>
+> On Tue, Nov 21, 2023 at 11:09=E2=80=AFAM Chris Li <chrisl@kernel.org> wro=
+te:
+> >
+> > On Tue, Nov 21, 2023 at 10:13=E2=80=AFAM Nhat Pham <nphamcs@gmail.com> =
+wrote:
+> > >
+> > > Hi Chris!
+> > >
+> > > Thanks for the patch. Would you mind if I spend some time staring
+> > > at the suggestion again and testing it some more?
+> >
+> > Of course, by all means. That is just the minimal version to be
+> > functional compatible with your zswap.writeback.
+> >
+> > I might consider a follow up patch to add "no_zswap" and "none" to
+> > convert the SSD only swapfile, which can't be expressed by
+> > zswap.writeback.
+> > That should cover all 4 combinations of zswap and swap files without
+> > creating a custom swap tiers list.
+> >
+> > "all": zswap + swapfile
+> > "zswap": zswap only
+> > "no_zswap": swapfile only.
+> > "none": no swap.
+> >
+> > All keyword names are open to suggestions.
+>
+> SGTM! There might be some functionality duplication between
+> memory.swap.tiers =3D no_zswap and memory.zswap.max =3D 0, but
+> otherwise this seems reasonable to me.
 
-Signed-off-by: Delphine CC Chiu <Delphine_CC_Chiu@wiwynn.com>
----
- Documentation/devicetree/bindings/hwmon/adi,adm1275.yaml | 2 ++
- 1 file changed, 2 insertions(+)
+Yes, there is some function duplication. However, there is some small
+difference that no_zswap will not enter zswap code at all. Vs
+memory.zswap.max will take a short trip into zswap code to find out
+Oops, not zswap for you.
 
-diff --git a/Documentation/devicetree/bindings/hwmon/adi,adm1275.yaml b/Documentation/devicetree/bindings/hwmon/adi,adm1275.yaml
-index ab87f51c5aef..77a358f9104b 100644
---- a/Documentation/devicetree/bindings/hwmon/adi,adm1275.yaml
-+++ b/Documentation/devicetree/bindings/hwmon/adi,adm1275.yaml
-@@ -27,6 +27,7 @@ properties:
-       - adi,adm1275
-       - adi,adm1276
-       - adi,adm1278
-+      - adi,adm1281
-       - adi,adm1293
-       - adi,adm1294
- 
-@@ -94,6 +95,7 @@ allOf:
-           contains:
-             enum:
-               - adi,adm1278
-+              - adi,adm1281
-               - adi,adm1293
-               - adi,adm1294
-     then:
--- 
-2.25.1
+>
+> no_zswap sounds a bit awkward, but I can't come up with a better
+> name.
 
+Again, I am open to better suggestions.
+I have also considered "!zswap", "!" has special meaning in bash, so
+it will require quoting in bash.
+How about "-zswap"? This does not require special quoting in bash.
+
+>
+> >
+> > >
+> > > If everything is good, I'll squash this patch with the original versi=
+on,
+> > > (keeping you as a co-developer of the final patch of course), and
+> > > update the documentation before re-sending everything as v6.
+> >
+> > Great!
+> >
+> > >
+> > > Anyway, have a nice Thanksgiving break everyone! Thanks for
+> > > taking the time to review my patch and discuss the API with me!
+> >
+> > My pleasure to discuss the swap with you. We should do the online
+> > "swap meet" and invite other developers who are interested in the swap
+> > area as well.
+>
+> I look forward to this meeting! I'd love to discuss more about (z)swap
+> development (and more generally, multi-tier memory management).
+
+Let me arrange one then. I am thinking maybe every second week of the
+month. That can avoid thanksgiving, christmas and new year.
+
+Let me throw in some more ideas: writing compressed zswap data to SSD
+without swap cache.
+
+> Generic page promoter/demoter that takes into account workload
+> (cgroup), access recency (LRU + generations)/frequency, and tier
+> characteristics (latency, bandwidth, etc.) will be awesome to explore!
+
+Sounds great. Looking forward to it.
+
+Chris
 
