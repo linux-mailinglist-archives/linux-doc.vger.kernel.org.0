@@ -1,124 +1,110 @@
-Return-Path: <linux-doc+bounces-2928-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-2930-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA3A87F4D36
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 17:50:04 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id C777C7F4D76
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 17:55:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EC6661C20A64
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 16:50:03 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 03C791C20A92
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 16:55:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 363824E1D4;
-	Wed, 22 Nov 2023 16:50:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 28B624CE19;
+	Wed, 22 Nov 2023 16:55:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fPSeQNCQ"
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="T30IeF+h"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13FC64BABC;
-	Wed, 22 Nov 2023 16:50:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A345C433C7;
-	Wed, 22 Nov 2023 16:50:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1700671802;
-	bh=ZFMcFjU59M2XNKlhy1XsxNfFuYDu0NpI3SyILQsRT0Y=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=fPSeQNCQqy1/x5905Xjdl5nq7QlL/tId3x7pQFXoAGW37wFFRtiWTGUUKJ/YJUR4e
-	 /9Nxv3QiRn8YLbTS71k2DfvyQ873pq9HsTshUHDbAfumGHRH/hgfGs37zMYSknImv9
-	 2xRa9GS6P1vBKasQ+XP/mf0W5RFjTGB6kwo6DeL1O3Fp+5kESIh3JsdUS0G7XAUsjb
-	 ZF4IxuO7V4cc8x+FJfcCYQkcPXegfEeqzgJX/x+Q9hBd7sxwgthverEd2ugTpnjJ/3
-	 h2rS0RRV8qd1ovaKTwKS7AR9+USkfjbswYTljgoSpMPAywz1G34liMSX23P6pfv+2w
-	 935H/le0J7+hg==
-Date: Wed, 22 Nov 2023 08:50:00 -0800
-From: Jakub Kicinski <kuba@kernel.org>
-To: Vladimir Oltean <vladimir.oltean@nxp.com>
-Cc: =?UTF-8?B?S8O2cnk=?= Maincent <kory.maincent@bootlin.com>, Florian
- Fainelli <florian.fainelli@broadcom.com>, Broadcom internal kernel review
- list <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn <andrew@lunn.ch>,
- Heiner Kallweit <hkallweit1@gmail.com>, Russell King
- <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Richard
- Cochran <richardcochran@gmail.com>, Radu Pirea
- <radu-nicolae.pirea@oss.nxp.com>, Jay Vosburgh <j.vosburgh@gmail.com>, Andy
- Gospodarek <andy@greyhouse.net>, Nicolas Ferre
- <nicolas.ferre@microchip.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Jonathan Corbet
- <corbet@lwn.net>, Horatiu Vultur <horatiu.vultur@microchip.com>,
- UNGLinuxDriver@microchip.com, Simon Horman <horms@kernel.org>, Thomas
- Petazzoni <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Maxime Chevallier
- <maxime.chevallier@bootlin.com>
-Subject: Re: [PATCH net-next v7 15/16] net: ethtool: ts: Let the active time
- stamping layer be selectable
-Message-ID: <20231122085000.79f2d14c@kernel.org>
-In-Reply-To: <20231122140850.li2mvf6tpo3f2fhh@skbuf>
-References: <20231120142316.d2emoaqeej2pg4s3@skbuf>
-	<20231120093723.4d88fb2a@kernel.org>
-	<20231120190023.ymog4yb2hcydhmua@skbuf>
-	<20231120115839.74ee5492@kernel.org>
-	<20231120211759.j5uvijsrgt2jqtwx@skbuf>
-	<20231120133737.70dde657@kernel.org>
-	<20231120220549.cvsz2ni3wj7mcukh@skbuf>
-	<20231121183114.727fb6d7@kmaincent-XPS-13-7390>
-	<20231121094354.635ee8cd@kernel.org>
-	<20231122144453.5eb0382f@kmaincent-XPS-13-7390>
-	<20231122140850.li2mvf6tpo3f2fhh@skbuf>
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4A0A9E7;
+	Wed, 22 Nov 2023 08:55:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=llPqWm50yG2G6d8aUjmsaKhLgZNwnadcU3ZGNPGP+lo=; b=T30IeF+h3xKqGorWcA2viEmJQI
+	cicKm1yi2ucxaziRj0Ucg4xy9HDqA2Keas9XgNJYNDZfYzbsBLGE04r2BSLEIY38Xsr3EbWMbAzZi
+	Y4OyAwvkCrakYn9aASb8tH1ZnqO54/zroCc4004ZgMLtj029Y24Tw/rTlsQfZEuHUils=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1r5qV3-000tR4-Uf; Wed, 22 Nov 2023 17:54:53 +0100
+Date: Wed, 22 Nov 2023 17:54:53 +0100
+From: Andrew Lunn <andrew@lunn.ch>
+To: =?iso-8859-1?Q?K=F6ry?= Maincent <kory.maincent@bootlin.com>
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Russ Weight <russ.weight@linux.dev>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH net-next 9/9] net: pse-pd: Add PD692x0 PSE controller
+ driver
+Message-ID: <04f59e77-134b-45b2-8759-84b8e22c30d5@lunn.ch>
+References: <20231116-feature_poe-v1-0-be48044bf249@bootlin.com>
+ <20231116-feature_poe-v1-9-be48044bf249@bootlin.com>
+ <2ff8bea5-5972-4d1a-a692-34ad27b05446@lunn.ch>
+ <20231122171112.59370d21@kmaincent-XPS-13-7390>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231122171112.59370d21@kmaincent-XPS-13-7390>
 
-On Wed, 22 Nov 2023 16:08:50 +0200 Vladimir Oltean wrote:
-> My understanding of Jakub's email was that he wants to see the functionality
-> offered by SIOCGHWTSTAMP and SIOCSHWTSTAMP converted to netlink. I don't
-> think that ethtool is the correct netlink family for that, given that
-> these aren't ethtool ioctls to begin with. Maybe the new netdev netlink
-> family. The conversion in its basic form would offer exactly the same
-> functionality.
-
-Well, ethtool has been the catch all for a lot of random things
-for the longest time. The question is whether we want to extend
-ETHTOOL_GET_TS_INFO or add a third API somewhere else. And if we
-do - do we also duplicate the functionality of ETHTOOL_GET_TS_INFO
-(i.e. getting capabilities)?
-
-My vote is that keeping it in ethtool is less bad than 3rd API.
-
-> The _listing_ of hwtstamp providers is what could be done through ethtool
-> netlink, similar but not identical to the way in which you are proposing
-> today (you are presenting blanket "layers" which correspond to netdev and
-> phylib, rather than individual providers).
+> > > +static int pd692x0_sendrecv_msg(struct pd692x0_priv *priv,
+> > > +				struct pd692x0_msg *msg,
+> > > +				struct pd692x0_msg_content *buf)
+> > > +{
+> > > +	struct device *dev = &priv->client->dev;
+> > > +	int ret;
+> > > +
+> > > +	ret = pd692x0_send_msg(priv, msg);
+> > > +	if (ret)
+> > > +		return ret;
+> > > +
+> > > +	ret = pd692x0_recv_msg(priv, msg, buf);  
+> > 
+> > So this function takes at least 10 seconds?
 > 
-> The concept of an "active phc_index" would not explicitly exist in the
-> UAPI. Thus I'm not sure what's with this TSINFO_SET being floated around.
-> The only thing would exist is a configurable rx_filter and tx_type per
-> hwtstamp provider (aka "{phc_index, qualifier}"). User space will have
-> to learn to select the hwtstamp provider it wants to configure through
-> netlink, and use for its class of traffic.
+> No, on normal communication it takes a bit more than 30ms.
 
-"Active provider" is the one that has TX_ON, rx != FILTER_NONE, right?
+So i think the first step is to refactor this code to make it clear
+what the normal path is, and what the exception path is, and the
+timing of each.
 
-> This is why I mentioned by ndo_hwtstamp_set() conversion, because
-> suddenly it is a prerequisite for any further progress to be done.
-> You can't convert SIOCSHWTSTAMP to netlink if there are some driver
-> implementations which still use ndo_eth_ioctl(). They need to be
-> UAPI-agnostic.
+> > > +	msg.content.sub[2] = id;
+> > > +	ret = pd692x0_sendrecv_msg(priv, &msg, &buf);  
+> > 
+> > So this is also 10 seconds? 
+> > 
+> > Given its name, it looks like this is called via ethtool? Is the
+> > ethtool core holding RTNL? It is generally considered bad to hold RTNL for
+> > that long.
+> 
+> Yes it is holding RTNL lock. Should I consider another behavior in case of
+> communication loss to not holding RTNL lock so long?
 
-Right, definitely.
+How often does it happen? On the scale of its a theoretical
+possibility, through to it happens every N calls? Also, does it happen
+on cold boot and reboot?
 
-> I'm not sure what's with Richard's mention of the "_2" variants of the
-> ioctls. Probably a low-effort suggestion which was a bit out of context.
-> His main point, that you cannot extend struct hwtstamp_config as that
-> has a fixed binary format, is perfectly valid though. This is why
-> netlink is preferable, because if done correctly (meaning not with
-> NLA_BINARY attributes), then it is much more extensible because all
-> attributes are TLVs. Use NLA_BINARY, and you will run into the exact
-> extensibility issues that the ioctl interface has.
+If its never supposed to happen, i would keep holding RTNL, and add a
+pr_warn() that the PSE has crashed and burned, waiting for it to
+reboot. If this is likely to happen on the first communication with
+the device, we might want to do a dummy transfer during probe to get
+is synchronized before we start using it with the RTNL held.
+
+   Andrew
 
