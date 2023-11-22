@@ -1,433 +1,927 @@
-Return-Path: <linux-doc+bounces-2848-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-2842-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C09C7F40BE
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 10:00:31 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id DCC367F3F38
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 08:50:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B4E55281018
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 09:00:29 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 8BEA7281D90
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Nov 2023 07:50:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 427BF1CF86;
-	Wed, 22 Nov 2023 09:00:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 13BEBBE74;
+	Wed, 22 Nov 2023 07:50:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="gQExvp+6"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="OnqEl9V7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11on2050.outbound.protection.outlook.com [40.107.220.50])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 27A929E;
-	Wed, 22 Nov 2023 01:00:21 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Wn/9vzG6JAi9RPOzdfWQqVcpa2+vbT0Xqvkj3yS2A/UvCk3g+k4/B0b0UlQOGzDRl6PpPra1JP81f00V5EBhzx9FObfv0/lDaTAYLm3RCVMwJis107zgMAKGVFrdWFUBZsgHWsMRV9GdOllFTYkDX0NswZM/+A3pszWJPrz6gJYS9ai9UbZsziNZyI/b2F4Hop/rCVzFtRa3BjVZJ6G2BzwKbNhWeVxuZSgVBrUy9QHhZl42BA7kyhy1ge7JHuXEJDEaozSXjVgGoJ/hjInTp2v5sJOfhkmTOOlJgPi7MjO0PaVgqvxaIA/w8Rj/5DPiLcsvvBlVbug8yAi+LbbWZQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oM+KfM7X+cqn771BE52v+QvJ9nBQ1bu9YT+NL4CvWck=;
- b=Hw1RkBUFiknDWmOIrBfyNZUCGcMGNuVlOlJ2NE/7B5LH3iH69FTvnEAd9RAFmoW+2rTRFmVoUFtKlZPUnSr+7z3Gvp9TglXNaqCI7WkTgnv4XbqMDcKLDgUVueDGHlZsIgsvL48Maepimi6St7aHMMUrYeVFbKrri1EVrNZys18dBZn3qfZREGkx2J3VEmr64J8LB+ljy2gqB0JjiKUuBdbgYJ4+prRT+0yiJyLttfH5y46A0iSF8R3JlX2eQ1mpFWa9VJNnDxZVA6meDesHunlm0fMPGOeE5lLqHQ8JF3IO/z5aGwntHh0f10S37tv9hcY9KMrGXET/lPAymUiEdA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lwn.net smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oM+KfM7X+cqn771BE52v+QvJ9nBQ1bu9YT+NL4CvWck=;
- b=gQExvp+6WdgI7Cc7WkgLWbjWCG/ALqLrdlJjRAw46uOKaWRpXar3VMsIA4VnBMUrynXPFCub6VT/qxQTYNvthb3VJ92jGbR7bh6H/yTygPGIMvrQk4w2wdWMNOMe5A619aksDRnQSOXdMgNKdyEZgaJPdWPpb7k+wAVoNCSNx9w=
-Received: from BL0PR01CA0029.prod.exchangelabs.com (2603:10b6:208:71::42) by
- BL3PR12MB6594.namprd12.prod.outlook.com (2603:10b6:208:38d::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.19; Wed, 22 Nov
- 2023 09:00:17 +0000
-Received: from BL02EPF0001A0F9.namprd03.prod.outlook.com
- (2603:10b6:208:71:cafe::54) by BL0PR01CA0029.outlook.office365.com
- (2603:10b6:208:71::42) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7002.27 via Frontend
- Transport; Wed, 22 Nov 2023 09:00:16 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL02EPF0001A0F9.mail.protection.outlook.com (10.167.242.100) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7025.12 via Frontend Transport; Wed, 22 Nov 2023 09:00:16 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 22 Nov
- 2023 03:00:04 -0600
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB05.amd.com
- (10.181.40.146) with ShadowRedundancy id 15.1.2507.6; Wed, 22 Nov 2023
- 08:59:54 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 21 Nov
- 2023 18:33:54 -0600
-From: Avadhut Naik <avadhut.naik@amd.com>
-To: <corbet@lwn.net>
-CC: <linux-doc@vger.kernel.org>, <carlos.bilbao@amd.com>,
-	<linux-kernel@vger.kernel.org>, <avadnaik@amd.com>
-Subject: [PATCH] docs/sp_SP: Add translation of process/management-style
-Date: Tue, 21 Nov 2023 18:33:43 -0600
-Message-ID: <20231122003343.931394-1-avadhut.naik@amd.com>
-X-Mailer: git-send-email 2.34.1
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 907149D;
+	Tue, 21 Nov 2023 23:50:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1700639406; x=1732175406;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=rBx+3EQJktAtwltTBvR0V/Dj5D5XT2BCz3Ycu2s2duQ=;
+  b=OnqEl9V73oltetY0sLSATqELG323zzQZ9G0MWUZRVpAOpBlicr+dCcKA
+   xu7+fTB1II8gaS3K8ikjJXNNV3bHUyqFW8mP+Cq8HKwPZ5WFC9DRR5IGo
+   IovWVv6BaS9Gmov2hroyD7jYw945ISq+Hnt60HyooiWLrSwNhAde91RN7
+   OVdiKrkOpm2yzN7aFnQ70pBRkeo3AqAUsRI9YlwTy8vlXkVxwbZQQwUbC
+   b13D1zbOKQ+z0SjZDojQxyBemIVQKL9mMOp2ec/4JYiNZ4pIMvkTsaZWX
+   SsPKbmp+RiI4qFXOaFmgF9DneTP2jL/UV+nuDUE2dpauCF6t9/t/5Hajs
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10901"; a="395923822"
+X-IronPort-AV: E=Sophos;i="6.04,218,1695711600"; 
+   d="scan'208";a="395923822"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Nov 2023 23:50:05 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10901"; a="796005775"
+X-IronPort-AV: E=Sophos;i="6.04,218,1695711600"; 
+   d="scan'208";a="796005775"
+Received: from cooperst-gp72.amr.corp.intel.com (HELO [10.249.254.145]) ([10.249.254.145])
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Nov 2023 23:50:01 -0800
+Message-ID: <574ec6bd-22ff-ec66-0bfe-35b51b7142f6@linux.intel.com>
+Date: Wed, 22 Nov 2023 08:49:58 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v5] Documentation/gpu: VM_BIND locking document
+To: Boris Brezillon <boris.brezillon@collabora.com>
+Cc: intel-xe@lists.freedesktop.org, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Matthew Brost <matthew.brost@intel.com>, Danilo Krummrich <dakr@redhat.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Oak Zeng <oak.zeng@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Francois Dugast <francois.dugast@intel.com>,
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20231121104046.3201-1-thomas.hellstrom@linux.intel.com>
+ <20231121145619.7e7cb541@collabora.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>
+In-Reply-To: <20231121145619.7e7cb541@collabora.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A0F9:EE_|BL3PR12MB6594:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5925342c-a34a-4db8-d31e-08dbeb397278
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	3vgp3bEsI9eSlXzLms2u7XiX/R0xHe1VBGXwoP/qabu0rlmk4s6ZKsvVXgViHSKjZ7rEMhzLOCdY7hrTMbjezOyc8QlWJ7WLAxNP1k+oOgSbk+DB2fvxj+NDzfL5RuiRjhhsDYrqj/b1hCGarAFy1gdyrgAUIwN/CS09uv1T7OAJDJXmfmlHPksqkQk2AKMAxvdRvOpDrJEIjl09KvjT3p/ZG6q4fG2ghFldja9K0TB5vXL/0B+zXUDnrmsGG6bbovLn17HbFkGDXBcVKn/CFGQgygggRYets5Uhrbga3+SjqEj/rkd511JXe+HTlxD8hEFJj6n/hPE2qqHujU/5sSwKV9oZVBzNd/eBcN4UA+TBm/WCKt+kYRWorNbaps/XumGr8QO31OU3fFvALu0xG3/IuDNe7bhUQCdj4GeuOJPplRXR7HQBafmUa+7BjacQw4V42t1F0WrfYoU5b9JbCBF0nxCcwDZlUpQlUX5JyCMlxE+G0HiTW82s57MEL/ErGC2s1O8JlCkXvIm5GZIl2ItsS4IW8HYPOkGNnvvZU6/2OPXAbKBO3/yWahtaS3NNPL8GbrFPX6evQoKyz7NgGqnVrtIY64d6us6FreIIul//jKvqFcM8w+nUmNjtL+Dirx47eh9S88vGOzwQeKktqDhTpXXD2Gn3Y0wyZHnfH35LNhwm+EdegusiFYZy5DzAH/LKX8LTv6IjV5g+qnz7sUT4B6Jo1djfAjJIYHGqRX5AkZ5fBgNO6cJ1g5eMtjVkqTmcIiG6afUHmG7uwU6jxAwvqPUpriPen6cfaf6i9tapOWV/dp3pscf6NJgyATvd+zpmhR6aX27S3socc+YN6Q==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:es;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(376002)(39860400002)(346002)(136003)(230922051799003)(230473577357003)(230373577357003)(82310400011)(1800799012)(451199024)(186009)(64100799003)(40470700004)(46966006)(36840700001)(478600001)(40460700003)(2616005)(1076003)(426003)(336012)(26005)(83380400001)(66574015)(81166007)(356005)(86362001)(82740400003)(36860700001)(47076005)(36756003)(6666004)(7696005)(2906002)(4326008)(5660300002)(30864003)(40480700001)(41300700001)(316002)(70206006)(70586007)(54906003)(6916009)(44832011)(8676002)(8936002)(21314003)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Nov 2023 09:00:16.8772
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5925342c-a34a-4db8-d31e-08dbeb397278
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF0001A0F9.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB6594
 
-Translate Documentation/process/management-style.rst into Spanish.
 
-Signed-off-by: Avadhut Naik <avadhut.naik@amd.com>
-Reviewed-by: Carlos Bilbao <carlos.bilbao@amd.com>
----
- .../translations/sp_SP/process/index.rst      |   1 +
- .../sp_SP/process/management-style.rst        | 299 ++++++++++++++++++
- 2 files changed, 300 insertions(+)
- create mode 100644 Documentation/translations/sp_SP/process/management-style.rst
+On 11/21/23 14:56, Boris Brezillon wrote:
+> On Tue, 21 Nov 2023 11:40:46 +0100
+> Thomas Hellström <thomas.hellstrom@linux.intel.com> wrote:
+>
+>> Add the first version of the VM_BIND locking document which is
+>> intended to be part of the xe driver upstreaming agreement.
+>>
+>> The document describes and discuss the locking used during exec-
+>> functions, evicton and for userptr gpu-vmas. Intention is to be using the
+>> same nomenclature as the drm-vm-bind-async.rst.
+>>
+>> v2:
+>> - s/gvm/gpu_vm/g (Rodrigo Vivi)
+>> - Clarify the userptr seqlock with a pointer to mm/mmu_notifier.c
+>>    (Rodrigo Vivi)
+>> - Adjust commit message accordingly.
+>> - Add SPDX license header.
+>>
+>> v3:
+>> - Large update to align with the drm_gpuvm manager locking
+>> - Add "Efficient userptr gpu_vma exec function iteration" section
+>> - Add "Locking at bind- and unbind time" section.
+>>
+>> v4:
+>> - Fix tabs vs space errors by untabifying (Rodrigo Vivi)
+>> - Minor style fixes and typos (Rodrigo Vivi)
+>> - Clarify situations where stale GPU mappings are occurring and how
+>>    access through these mappings are blocked. (Rodrigo Vivi)
+>> - Insert into the toctree in implementation_guidelines.rst
+>>
+>> v5:
+>> - Add a section about recoverable page-faults.
+>> - Use local references to other documentation where possible
+>>    (Bagas Sanjaya)
+>> - General documentation fixes and typos (Danilo Krummrich and
+>>    Boris Brezillon)
+>> - Improve the documentation around locks that need to be grabbed from the
+>>    dm-fence critical section (Boris Brezillon)
+>> - Add more references to the DRM GPUVM helpers (Danilo Krummrich and
+>>    Boriz Brezillon)
+>> - Update the rfc/xe.rst document.
+>>
+>> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+>> Signed-off-by: Thomas Hellström <thomas.hellstrom@linux.intel.com>
+> Still have a few comments (see below), and in general, I find some
+> sentences very long, which has the tendency of confusing me (always
+> trying to figure out what was the main point, what the pronouns are
+> referring to, etc). Anyway, I think it's better to have something
+> imperfect than nothing at all, so here is my
+>
+> Reviewed-by: Boris Brezillon <boris.brezillon@collabora>
+>
+> Feel free to add it even if you decide to ignore my comments.
 
-diff --git a/Documentation/translations/sp_SP/process/index.rst b/Documentation/translations/sp_SP/process/index.rst
-index a082e162168a..2c6eda05ba7a 100644
---- a/Documentation/translations/sp_SP/process/index.rst
-+++ b/Documentation/translations/sp_SP/process/index.rst
-@@ -25,3 +25,4 @@
-    security-bugs
-    embargoed-hardware-issues
-    handling-regressions
-+   management-style
-diff --git a/Documentation/translations/sp_SP/process/management-style.rst b/Documentation/translations/sp_SP/process/management-style.rst
-new file mode 100644
-index 000000000000..4db33fbf8941
---- /dev/null
-+++ b/Documentation/translations/sp_SP/process/management-style.rst
-@@ -0,0 +1,299 @@
-+.. include:: ../disclaimer-sp.rst
-+
-+:Original: Documentation/process/management-style.rst
-+:Translator: Avadhut Naik <avadhut.naik@amd.com>
-+
-+.. _sp_managementstyle:
-+
-+
-+Estilo de gestión del kernel de Linux
-+=====================================
-+
-+Este es un documento breve que describe el estilo de gestión preferido (o
-+inventado, dependiendo de a quién le preguntes) para el kernel de Linux.
-+Está destinado a reflejar el documento
-+:ref:`translations/sp_SP/process/coding-style.rst <sp_codingstyle>` hasta
-+cierto punto y está escrito principalmente para evitar responder a [#f1]_
-+las mismas preguntas (o similares) una y otra vez.
-+
-+El estilo de gestión es muy personal y mucho más difícil de cuantificar
-+que reglas simples de estilo de codificación, por lo que este documento
-+puede o no tener relación con la realidad. Comenzó como una broma, pero
-+eso no significa que no pueda ser realmente cierto. Tendrás que decidir
-+por ti mismo.
-+
-+Por cierto, cuando se hable de “gerente de kernel”, se refiere a las
-+personas lideres técnicas, no de las personas que hacen la gestión
-+tradicional dentro de las empresas. Si firmas pedidos de compra o tienes
-+alguna idea sobre el presupuesto de tu grupo, es casi seguro que no eres
-+un gerente de kernel. Estas sugerencias pueden o no aplicarse a usted.
-+
-+En primer lugar, sugeriría comprar “Seven Habits of Highly Effective
-+People” y NO leerlo. Quemarlo, es un gran gesto simbólico.
-+
-+.. [#f1] Este documento lo hace no tanto respondiendo a la pregunta, sino
-+  haciendo dolorosamente obvio para el interrogador que no tenemos ni idea
-+  de cuál es la respuesta.
-+
-+De todos modos, aquí va:
-+
-+.. _decisiones:
-+
-+1) Decisiones
-+-------------
-+
-+Todos piensan que los gerentes toman decisiones, y que la toma de
-+decisiones en importante. Cuanto más grande y dolorosa sea la decisión,
-+más grande debe ser el gerente para tomarla. Eso es muy profundo y obvio,
-+pero en realidad no es cierto.
-+
-+El nombre del partido es **evitar** tener que tomar una decisión. En
-+particular, si alguien te dice “elige (a) o (b), realmente necesitamos
-+que decidas sobre esto”, estas en problemas como gerente. Es mejor que
-+las personas a las que diriges conozcan los detalles mejor que tú, así
-+que, si acuden a ti para tomar una decisión técnica, estas jodido.
-+Claramente no eres competente para tomar una decisión por ellos.
-+
-+(Corolario: Si las personas a las que diriges no conocen los detalles
-+mejor que tú, también estas jodido, aunque por una razón totalmente
-+diferente. Es decir, que estas en el trabajo equivocado y que **ellos**
-+deberían gestionando tu brillantez en su lugar).
-+
-+Así que el nombre del partido es **evitar** las decisiones, al menos las
-+grandes y dolorosas. Tomar decisiones pequeñas y sin consecuencias está
-+bien, y te hace parecer que sabes lo que estás haciendo, así que lo que
-+un gerente de kernel necesita hacer es convertir las decisiones grandes
-+y dolorosas en cosas pequeñas a los que a nadie realmente le importa.
-+
-+Ayuda darse cuenta de que la diferencia clave entre una decisión grande
-+y una pequeña es si puede arreglar su decisión después. Cualquier
-+decisión se puede hacer pequeña simplemente asegurándose siempre de que
-+si te equivocaste (u **estarás** equivocado), siempre puede deshacer el
-+daño más tarde retrocediendo. De repente, llegas a ser doblemente
-+gerencial por tomar **dos** decisiones intrascendentes - la equivocada
-+**y** la correcta.
-+
-+Y las personas incluso verán eso como un verdadero liderazgo (*tos*
-+mierda *tos*).
-+
-+Por lo tanto, la llave para evitar las grandes decisiones se convierte en
-+simplemente evitar hacer cosas que no se pueden deshacer. No te dejes
-+llevar a una esquina del que no puedas escapar. Una rata acorralada puede
-+ser peligrosa – un gerente acorralado es directamente lamentable.
-+
-+Resulta que, dado que nadie sería tan estúpido como para dejar que un
-+gerente de kernel tenga una gran responsabilidad **de todos modos**,
-+generalmente es bastante fácil retroceder. Dado que no vas a poder
-+malgastar grandes cantidades de dinero que tal vez no puedas pagar, lo
-+único que puedes revertir es una decisión técnica, y ahí retroceder es
-+muy fácil: simplemente diles a todos que fuiste un bobo incompetente,
-+pide disculpas y deshaz todo el trabajo inútil que hiciste trabajar a la
-+gente durante el año pasado. De repente, la decisión que tomaste hace un
-+año no era una gran decisión después de todo, ya que se podía deshacer
-+fácilmente.
-+
-+Resulta que algunas personas tienen problemas con este enfoque, por dos
-+razones:
-+
-+ - admitir que eras un idiota es más difícil de lo que parece. A todos
-+   nos gusta mantener las apariencias, y salir en público a decir que te
-+   equivocaste a veces es muy duro.
-+ - que alguien te diga que lo que trabajaste durante el último año no
-+   valió la pena después de todo también puede ser duro para los pobres
-+   ingenieros humildes, y aunque el **trabajo** real fue bastante fácil
-+   de deshacer simplemente eliminándolo, es posible que hayas perdido
-+   irrevocablemente la confianza de ese ingeniero. Y recuerda:
-+   “irrevocablemente” fue lo que tratamos de evitar en primer lugar, y
-+   tu decisión terminó siendo muy grande después de todo.
-+
-+Afortunadamente, estas dos razones pueden mitigarse eficazmente
-+simplemente admitiendo inicialmente que no tienes ni idea, y diciéndole
-+a la gente que tu decisión es puramente preliminar, y podría ser la cosa
-+equivocada. Siempre te debes reservar el derecho de cambiar de opinión, y
-+hacer que la gente sea muy **consciente** de eso. Y es mucho más fácil
-+admitir que eres estúpido cuando **aun** no has hecho la cosa realmente
-+estúpida.
-+
-+Entonces, cuando realmente resulta ser estúpido, la gente simplemente
-+pone los ojos y dice “Ups, otra vez no”.
-+
-+Esta admisión preventiva de incompetencia también podría hacer que las
-+personas que realmente hacen el trabajo piensen dos veces sobre si vale la
-+pena hacerlo o no. Después de todo, si **ellos** no están seguros de si es
-+una buena idea, seguro que no deberías alentarlos prometiéndoles que lo
-+que trabajan será incluido. Haz que al menos lo piensen dos veces antes de
-+embarcarse en un gran esfuerzo.
-+
-+Recuerda: Es mejor que sepan más sobre los detalles que tú, y
-+generalmente ya piensan que tienen la respuesta a todo. Lo mejor que puede
-+hacer como gerente no es inculcar confianza, sino más bien una dosis
-+saludable de pensamiento crítico sobre lo que hacen.
-+
-+Por cierto, otra forma de evitar una decisión es quejarse lastimeramente
-+de “no podemos hacer ambas cosas?” y parecer lamentable. Créeme, funciona.
-+Si no está claro cuál enfoque es mejor, lo descubrirán. La respuesta puede
-+terminar siendo que ambos equipos se sientan tan frustrados por la
-+situación que simplemente se den por vencidos.
-+
-+Eso puede sonar como un fracaso, pero generalmente es una señal de que
-+había algo mal con ambos proyectos, y la razón por la que las personas
-+involucradas no pudieron decidir fue que ambos estaban equivocados.
-+Terminas oliendo a rosas y evitaste otra decisión que podrías haber
-+metido la pata.
-+
-+2) Gente
-+--------
-+
-+La mayoría de las personas son idiotas, y ser gerente significa que
-+tendrás que lidiar con eso, y quizás lo más importante, que **ellos**
-+tienen que lidiar **contigo**.
-+
-+Resulta que, si bien es fácil deshacer los errores técnicos, no es tan
-+fácil deshacer los trastornos de personalidad. Solo tienes que vivir
-+con los suyos - y el tuyo.
-+
-+Sin embargo, para prepararse como gerente del kernel, es mejor recordar
-+no quemar ningún puente, bombardear a ningún aldeano inocente o alienar
-+a demasiados desarrolladores del kernel. Resulta que alienar a las
-+personas es bastante fácil, y desalienarlas es difícil. Por lo tanto,
-+“alienar” cae inmediatamente debajo del título “no reversible”, y se
-+convierte en un no-no según :ref:`decisiones`.
-+
-+Aquí solo hay algunas reglas simples:
-+
-+ (1) No llames a la gente pen*ejos (al menos no en público)
-+ (2) Aprende a disculparte cuando olvidaste la regla (1)
-+
-+El problema con #1 es que es muy fácil de hacer, ya que puedes decir
-+“eres un pen*ejo” de millones de manera diferentes [#f2]_, a veces sin
-+siquiera darte cuenta, y casi siempre con una convicción ardiente de que
-+tienes razón.
-+
-+Y cuanto más convencido estés de que tienes razón (y seamos sinceros,
-+puedes llamar a casi **cualquiera** un pen*ejo, y a menudo **tendrás**
-+razón), más difícil termina siendo disculparse después.
-+
-+Para resolver este problema, realmente solo tienes dos opciones:
-+
-+ - Se muy buenos en las disculpas.
-+ - Difunde el “amor” de manera tan uniforme que nadie termina sintiendo
-+   que es atacado injustamente. Hazlo lo suficientemente ingenioso, e
-+   incluso podría divertirse.
-+
-+La opción de ser infaliblemente educado realmente no existe. Nadie
-+confiará en alguien que está ocultando tan claramente su verdadero
-+carácter.
-+
-+.. [#f2] Paul Simon cantó “Cincuenta maneras de dejar a tu amante” porque,
-+  francamente, “Un millón de maneras de decirle a un desarrollador que es
-+  un pen*ejo” no escanea tan bien. Pero estoy seguro de que lo pensó.
-+
-+3) Gente II – el Buen Tipo
-+--------------------------
-+
-+Aunque resulta que la mayoría de las personas son idiotas, el corolario
-+de eso es, tristemente, que tú también seas uno, y aunque todos podemos
-+disfrutar del conocimiento seguro de que somos mejores que la persona
-+promedio (somos realistas, nadie cree que nunca que son promedio o debajo
-+del promedio), también debemos admitir que no somos el cuchillo más
-+afilado alrededor, y habrá otras personas que son menos idiotas que tú.
-+
-+Algunas personas reaccionan mal a las personas inteligentes. Otras se
-+aprovechan de ellos.
-+
-+Asegúrate de que tú, como mantenedor del kernel, estás en el segundo
-+grupo. Aguanta con ellos, porque son las personas que te facilitarán el
-+trabajo. En particular, podrán tomar tus decisiones por ti, que es de lo
-+que se trata el juego.
-+
-+Así que cuando encuentras a alguien más inteligente que tú, simplemente
-+sigue adelante. Sus responsabilidades de gestión se convierten en gran
-+medida en las de decir “Suena como una buena idea, - hazlo sin
-+restricciones”, o “Eso suena bien, pero ¿qué pasa con xxx?". La segunda
-+versión en particular es una excelente manera de aprender algo nuevo
-+sobre “xxx” o parecer **extra** gerencial al señalar algo que la persona
-+más inteligente no había pensado. En cualquier caso, sales ganando.
-+
-+Una cosa para tener en cuenta es darse cuenta de que la grandeza en un
-+área no necesariamente se traduce en otras áreas. Así que puedes impulsar
-+a la gente en direcciones específicas, pero seamos realistas, pueden ser
-+buenos en lo que hacen, y ser malos en todo lo demás. La buena noticia es
-+que las personas tienden a gravitar naturalmente hacia lo que son buenos,
-+por lo que no es como si estuvieras haciendo algo irreversible cuando los
-+impulsas en alguna dirección, simplemente no presiones demasiado.
-+
-+4) Colocar la culpa
-+-------------------
-+
-+Las cosas saldrán mal, y la gente quiere culpar a alguien. Etiqueta, tú
-+lo eres.
-+
-+En realidad, no es tan difícil aceptar la culpa, especialmente si la gente
-+se da cuenta de que no fue **toda** tu culpa. Lo que nos lleva a la mejor
-+manera de asumir la culpa: hacerlo por otra persona. Te sentirás bien por
-+asumir la caída, ellos se sentirán bien por no ser culpados, y la persona
-+que perdió toda su colección de pornografía de 36 GB debido a tu
-+incompetencia admitirá a regañadientes que al menos intentaste escapar
-+de ella.
-+
-+Luego haz que el desarrollador que realmente metió la pata (si puedes
-+encontrarlo) sepa **en privado** que metió la pata. No solo para que
-+pueda evitarlo en futuro, sino para que sepan que te deben uno. Y, quizás
-+aún más importante, también es probable que sea la persona que puede
-+solucionarlo. Porque, seamos sinceros, seguro que no eres tú.
-+
-+Asumir la culpa también es la razón por la que llegas a ser un gerente
-+en primer lugar. Es parte de lo que hace que la gente confíe en ti y te
-+permita la gloria potencial porque eres tú quien puede decir “metí la
-+pata”. Y si has seguido las reglas anteriores, ya serás bastante bueno
-+para decir eso.
-+
-+5) Cosas que evitar
-+-------------------
-+
-+Hay una cosa que la gente odia incluso más que ser llamado “pen*ejo”,
-+y que es ser llamado “pen*ejo” en una voz mojigata. Por lo primero,
-+puedes disculparte, por lo segundo, realmente, no tendrás la oportunidad.
-+Es probable que ya no estén escuchando, incluso si de lo contrario haces
-+un buen trabajo.
-+
-+Todos pensamos que somos mejores que los demás, lo que significa que
-+cuando alguien más se da aires, **realmente** nos molesta. Puedes ser
-+moral e intelectualmente superior a todos los que te rodean, pero no
-+trates de hacerlo demasiado obvio a menos que tengas **la intención**
-+real de irritar a alguien [#f3]_.
-+
-+Del mismo modo, no seas demasiado educado o sutil acerca de las cosas. La
-+cortesía fácilmente termina yendo demasiado lejos y ocultado el problema,
-+y como dicen “En internet, nadie puede oírte ser sutil”. Usa un gran
-+objeto contundente para enfatizar el punto, porque realmente no puedes
-+depender de que las personas entiendan tu punto de otra manera.
-+
-+Un poco de humor puede ayudar a suavizar tanto la franqueza como la
-+moralización. Exagerar hasta el punto de ser ridículo puede reforzar un
-+punto sin hacer que sea doloroso para el destinatario, quien simplemente
-+piensa que estas siendo tonto. Por lo tanto, puede ayudarnos a superar el
-+bloqueo mental personal que todos tenemos sobre la crítica.
-+
-+.. [#f3] La pista: Los grupos de noticias de Internet que no están
-+  directamente relacionados con tu trabajo son excelentes maneras de
-+  desahogar tus frustraciones con otras personas. Escribe mensajes
-+  insultantes con una mueca de desprecio solo para entrar en un humor de
-+  vez en cuando, y te sentirás limpio. Eso sí, no te cagues demasiado
-+  cerca de casa.
-+
-+6) ¿Por qué a mí?
-+-----------------
-+
-+Dado que tu principal responsabilidad parece ser asumir la culpa de los
-+errores de otras personas y hacer dolorosamente obvio para todos los
-+demás que eres incompetente, la pregunta obvia es: ¿por qué hacerlo en
-+primer lugar?
-+
-+Pase lo que pase, **tendrás** una sensación inmensa de logro personal por
-+estar “a cargo”. No importa el hecho de que realmente estés liderando al
-+tratar de mantenerte al día con todos los demás y correr detrás de ellos
-+lo más rápido que puedes. Todo el mundo seguirá pensando que eres la
-+persona a cargo.
-+
-+Es un gran trabajo si puedes descifrarlo.
--- 
-2.34.1
+Thanks for reviewing, Boris!
 
+I'll make a final version incorporating much of the comments and 
+suggestions, much appreciated.
+
+I still think, though, that in principle the referral between gpuvm and 
+this document should be the other way around, or it should all sit in 
+gpuvm. In any case this is an initial version and as more comments and 
+suggestions land, we can certainly update.
+
+Thanks,
+
+Thomas
+
+
+>
+>> ---
+>>   Documentation/core-api/pin_user_pages.rst     |   2 +
+>>   Documentation/gpu/drm-mm.rst                  |   4 +
+>>   Documentation/gpu/drm-vm-bind-locking.rst     | 579 ++++++++++++++++++
+>>   .../gpu/implementation_guidelines.rst         |   1 +
+>>   Documentation/gpu/rfc/xe.rst                  |   5 +
+>>   5 files changed, 591 insertions(+)
+>>   create mode 100644 Documentation/gpu/drm-vm-bind-locking.rst
+>>
+>> diff --git a/Documentation/core-api/pin_user_pages.rst b/Documentation/core-api/pin_user_pages.rst
+>> index d3c1f6d8c0e0..6b5f7e6e7155 100644
+>> --- a/Documentation/core-api/pin_user_pages.rst
+>> +++ b/Documentation/core-api/pin_user_pages.rst
+>> @@ -153,6 +153,8 @@ NOTE: Some pages, such as DAX pages, cannot be pinned with longterm pins. That's
+>>   because DAX pages do not have a separate page cache, and so "pinning" implies
+>>   locking down file system blocks, which is not (yet) supported in that way.
+>>   
+>> +.. _mmu-notifier-registration-case:
+>> +
+>>   CASE 3: MMU notifier registration, with or without page faulting hardware
+>>   -------------------------------------------------------------------------
+>>   Device drivers can pin pages via get_user_pages*(), and register for mmu
+>> diff --git a/Documentation/gpu/drm-mm.rst b/Documentation/gpu/drm-mm.rst
+>> index acc5901ac840..d55751cad67c 100644
+>> --- a/Documentation/gpu/drm-mm.rst
+>> +++ b/Documentation/gpu/drm-mm.rst
+>> @@ -466,6 +466,8 @@ DRM MM Range Allocator Function References
+>>   .. kernel-doc:: drivers/gpu/drm/drm_mm.c
+>>      :export:
+>>   
+>> +.. _drm_gpuvm:
+>> +
+>>   DRM GPUVM
+>>   =========
+>>   
+>> @@ -481,6 +483,8 @@ Split and Merge
+>>   .. kernel-doc:: drivers/gpu/drm/drm_gpuvm.c
+>>      :doc: Split and Merge
+>>   
+>> +.. _drm_gpuvm_locking:
+>> +
+>>   Locking
+>>   -------
+>>   
+>> diff --git a/Documentation/gpu/drm-vm-bind-locking.rst b/Documentation/gpu/drm-vm-bind-locking.rst
+>> new file mode 100644
+>> index 000000000000..a7d08eccd50e
+>> --- /dev/null
+>> +++ b/Documentation/gpu/drm-vm-bind-locking.rst
+>> @@ -0,0 +1,579 @@
+>> +.. SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+>> +
+>> +===============
+>> +VM_BIND locking
+>> +===============
+>> +
+>> +This document attempts to describe what's needed to get VM_BIND locking right,
+>> +including the userptr mmu_notifier locking and it also discusses some
+> Could we split this long sentence like this?
+>
+>     including the userptr mmu_notifier locking. It also discusses ...
+>
+>> +optimizations to get rid of the looping through of all userptr mappings and
+>> +external / shared object mappings that is needed in the simplest
+>> +implementation. In addition there is a section describing the VM_BIND locking
+>> +required for implementing recoverable pagefaults.
+>> +
+>> +The DRM GPUVM set of helpers
+>> +============================
+>> +
+>> +There is a set of helpers for drivers implementing VM_BIND, and this
+> Nit: I'm not sure drm_gpuvm qualifies as a set of helpers, it's more an
+> abstraction layer for GPU VM manipulation that's meant to automate some
+> of the logic drivers will have to implement if they want to expose a
+> VM_BIND-like uAPI. To me, helpers sound like something you're free to
+> use (or not) with little to no overhead, and very little changes to the
+> original code. Inheriting from drm_gpuvm (and all its sub-objects)
+> sounds a bit more invasive than replacing some internal function by
+> helper function calls. That's just my 2 cents, not asking you to
+> rephrase that.
+>
+>> +set of helpers implements much, but not all of the locking described
+>> +in this document. In particular it is currently lacking a userptr
+>> +implementation. Please refer to the :ref:`DRM GPUVM documentation
+>> +<drm_gpuvm>`. This document does not intend to describe the DRM GPUVM
+>> +implementation in detail, but in some places uses it as an
+>> +implementation example. It is highly recommended for any driver
+>> +implementing VM_BIND to use the DRM GPUVM helpers and to extend it if
+>> +common functionality is missing.
+>> +
+>> +Nomenclature
+>> +============
+>> +
+>> +* ``Context``: GPU execution context.
+>> +* ``gpu_vm``: Abstraction of a virtual GPU address space with
+>> +  meta-data. Typically one per client (DRM file-private), or one per
+>> +  context.
+> I know you don't want to refer to drm_gpuvm, but I would add:
+>
+>    The driver gpu_vm object would typically embed a drm_gpuvm, and
+>    extend it with driver-specific fields, if needed.
+>
+>> +* ``gpu_vma``: Abstraction of a GPU address range within a gpu_vm with
+>> +  associated meta-data. The backing storage of a gpu_vma can either be
+>> +  a GEM object or anonymous pages mapped also into the CPU
+>> +  address space for the process.
+> Ditto, with drm_gpuva.
+>
+>> +* ``gpu_vm_bo``: Abstracts the association of a GEM object and
+>> +  a VM. The GEM object maintains a list of gpu_vm_bos, and a gpu_vm_bo
+>> +  maintains a list of gpu_vmas.
+> And here as well, with drm_gpu_vm_bo.
+>
+>> +* ``userptr gpu_vma or just userptr``: A gpu_vma, whose backing store
+>> +  is anonymous pages as described above.
+>> +* ``revalidating``: Revalidating a gpu_vma means making the latest version
+>> +  of the backing store resident and making sure the gpu_vma's
+>> +  page-table entries point to that backing store.
+>> +* ``dma_fence``: A struct dma_fence that is similar to a struct completion
+>> +  and which tracks GPU activity. When the GPU activity is finished,
+>> +  the dma_fence signals. Please refer to the ``DMA Fences`` section of
+>> +  the :doc:`dma-buf doc </driver-api/dma-buf>`.
+>> +* ``dma_resv``: A struct dma_resv (a.k.a reservation object) that is used
+>> +  to track GPU activity in the form of multiple dma_fences on a
+>> +  gpu_vm or a GEM object. The dma_resv contains an array / list
+>> +  of dma_fences and a lock that needs to be held when adding
+>> +  additional dma_fences to the dma_resv. The lock is of a type that
+>> +  allows deadlock-safe locking of multiple dma_resvs in arbitrary
+>> +  order. Please refer to the ``Reservation Objects`` section of the
+>> +  :doc:`dma-buf doc </driver-api/dma-buf>`.
+>> +* ``exec function``: An exec function is a function that revalidates all
+>> +  affected gpu_vmas, submits a GPU command batch and registers the
+>> +  dma_fence representing the GPU command's activity with all affected
+>> +  dma_resvs. For completeness, although not covered by this document,
+>> +  it's worth mentioning that an exec function may also be the
+>> +  revalidation worker that is used by some drivers in compute /
+>> +  long-running mode.
+>> +* ``local object``: A GEM object which is only mapped within a
+>> +  single VM. Local GEM objects share the gpu_vm's dma_resv.
+>> +* ``external object``: a.k.a shared object: A GEM object which may be shared
+>> +  by multiple gpu_vms and whose backing storage may be shared with
+>> +  other drivers.
+>> +
+>> +Locks and locking order
+>> +=======================
+>> +
+>> +One of the benefits of VM_BIND is that local GEM objects share the gpu_vm's
+>> +dma_resv object and hence the dma_resv lock. So even with a huge
+>> +number of local GEM objects, only one lock is needed to make the exec
+>> +sequence atomic.
+>> +
+>> +The following locks and locking orders are used:
+>> +
+>> +* The ``gpu_vm->lock`` (optionally an rwsem).
+> I think it'd be worth expanding on why an rwsem is a good match for
+> this lock (allowing several readers to walk the VM tree concurrently?).
+>
+>> Protects the gpu_vm's
+>> +  data structure keeping track of gpu_vmas. It can also protect the
+>> +  gpu_vm's list of userptr gpu_vmas. With a CPU mm analogy this would
+>> +  correspond to the mmap_lock.
+>> +* The ``userptr_seqlock``. This lock is taken in read mode for each
+>> +  userptr gpu_vma on the gpu_vm's userptr list, and in write mode during mmu
+>> +  notifier invalidation. This is not a real seqlock but described in
+>> +  ``mm/mmu_notifier.c`` as a "Collision-retry read-side/write-side
+>> +  'lock' a lot like a seqcount, however this allows multiple
+>> +  write-sides to hold it at once...". The read side critical section
+>> +  is enclosed by ``mmu_interval_read_begin() /
+>> +  mmu_interval_read_retry()`` with ``mmu_interval_read_begin()``
+>> +  sleeping if the write side is held.
+>> +  The write side is held by the core mm while calling mmu interval
+>> +  invalidation notifiers.
+>> +* The ``gpu_vm->resv`` lock. Protects the gpu_vm's list of gpu_vmas needing
+>> +  rebinding, as well as the residency state of all the gpu_vm's local
+>> +  GEM objects.
+>> +  Furthermore it typically protects the gpu_vm's list of evicted and
+>> +  external GEM objects.
+>> +* The ``gpu_vm->userptr_notifier_lock``. This is an rwsem that is
+>> +  taken in read mode during exec and write mode during a mmu notifier
+>> +  invalidation. The userptr notifier lock is per gpu_vm.
+>> +* The ``gem_object->gpuva_lock`` This lock protects the GEM object's
+>> +  list of gpu_vm_bos. This is usually the same lock as the GEM
+>> +  object's dma_resv, but some drivers protects this list differently,
+>> +  see below.
+>> +* The ``gpu_vm list spinlocks``. With some implementations they are needed
+>> +  to be able to update the gpu_vm evicted- and external object
+>> +  list. For those implementations, the spinlocks are grabbed when the
+>> +  lists are manipulated. However to avoid locking order violations
+>> +  with the dma_resv locks, a special scheme is needed when iterating
+>> +  over the lists.
+> Yeah, still think we'd want to refer to the corresponding locks/objects
+> in drm_gpuvm, so we don't end up with new drivers coming up with their
+> own locks when one already exists. Not going to block the merging of
+> this patch because of that though.
+>
+> Just to be clear, I'm talking about
+>     
+>     gem_object->gpuva_lock => drm_gem_object::resv if
+>                               drm_gem_gpuva_set_lock() is not called by
+>                               the driver
+>
+>     gpu_vm->resv => drm_gpuvm::r_obj::resv
+>
+>     gpu_vm list spinlocks => drm_gpuvm::{extobj,evict}::lock
+>
+>> +
+>> +.. _gpu_vma lifetime:
+>> +
+>> +Protection and lifetime of gpu_vm_bos and gpu_vmas
+>> +==================================================
+>> +
+>> +The GEM object's list of gpu_vm_bos, and the gpu_vm_bo's list of gpu_vmas
+>> +is protected by the ``gem_object->gpuva_lock``, which is typically the
+>> +same as the GEM object's dma_resv, but if the driver
+>> +needs to access these lists from within a dma_fence signalling
+>> +critical section, a driver can choose to instead protect it with a
+>> +separate lock, which can be locked from within the dma_fence signalling
+>> +critical section. Such drivers then need to pay additional attention
+>> +to what locks need to be taken from within the loop when iterating
+>> +over the gpu_vm_bo and gpu_vma lists to avoid locking-order inversion.
+>> +
+>> +The DRM GPUVM set of helpers provide lockdep asserts that this lock is
+>> +held in relevant situations and also provides a means of making itself
+>> +aware of which lock is actually used: :c:func:`drm_gem_gpuva_set_lock`.
+>> +
+>> +Each gpu_vm_bo holds a reference counted pointer to the underlying GEM
+>> +object, and each gpu_vma holds a reference counted pointer to the
+>> +gpu_vm_bo. When iterating over the GEM object's list of gpu_vm_bos and
+>> +over the gpu_vm_bo's list of gpu_vmas, the ``gem_object->gpuva_lock`` must
+>> +not be dropped, because if it is dropped, gpu_vmas attached to a
+>    must not be dropped, otherwise gpu_vmas attached to a ...
+>
+>> +gpu_vm_bo may disappear without notice because they are not
+>                                            since those are not
+>    reference-counted.
+>
+>> +reference-counted. A driver may implement its own scheme to allow this
+>> +at the expense of additional complexity, and that is out of scope
+>                                              but this is outside the
+>                                              scope of this document.
+>
+>> +for this document.
+>> +
+>> +In the DRM GPUVM implementation, each gpu_vm_bo and each gpu_vma
+>> +holds a reference count on the gpu_vm itself. Due to this, and to avoid circular
+>> +reference counting, cleanup of the gpu_vm's gpu_vmas must not be done from the
+>> +gpu_vm's destructor. Drivers typically implements a gpu_vm close
+>> +function for this cleanup.
+> Could we maybe detail what is supposed to happen in the VM close path?
+> I'm basically doing an unmap on the full VA range of the VM, but this
+> has extra implications, like the fact we might end up with GPU faults
+> if some GPU contexts were still using the VM when VM_CLOSE
+> (well, VM_DESTROY in my naming convention) is called. I mean, that's
+> fine if the GPU can gracefully recover from that (we're in that case),
+> but I think it's worth mentioning this constraint.
+>
+> I realize this document is just about the locking, but all these tiny
+> pieces of information dispatched all over the place make me think
+> we're lacking something describing the big picture of GPU VM management
+> (or maybe we do have that already, in which case we should probably
+> point to it at the beginning of the doc).
+>
+>> +
+>> +Revalidation and eviction of local objects
+>> +==========================================
+>> +
+>> +(Note that in all the code examples given below we use simplified
+>> +pseudo-code. In particular, the dma_resv deadlock avoidance algorithm
+>> +as well as reserving memory for dma_resv fences is left out).
+> I would drop the parenthesis, but it looks good otherwise.
+>
+>> +
+>> +Revalidation
+>> +____________
+>> +With VM_BIND, all local objects need to be resident when the gpu is
+>> +executing using the gpu_vm, and the objects need to have valid
+>> +gpu_vmas set up pointing to them. Typically each gpu command buffer
+>> +submission is therefore preceded with a re-validation section:
+>> +
+>> +.. code-block:: C
+>> +
+>> +   dma_resv_lock(gpu_vm->resv);
+>> +
+>> +   // Validation section starts here.
+>> +   for_each_gpu_vm_bo_on_evict_list(&gpu_vm->evict_list, &gpu_vm_bo) {
+>> +           validate_gem_bo(&gpu_vm_bo->gem_bo);
+>> +
+>> +           // The following list iteration needs the Gem object's
+>> +           // dma_resv to be held (it protects the gpu_vm_bo's list of
+>> +           // gpu_vmas, but since local gem objects share the gpu_vm's
+>> +           // dma_resv, it is already held at this point.
+>> +           for_each_gpu_vma_of_gpu_vm_bo(&gpu_vm_bo, &gpu_vma)
+>> +                  move_gpu_vma_to_rebind_list(&gpu_vma, &gpu_vm->rebind_list);
+>> +   }
+>> +
+>> +   for_each_gpu_vma_on_rebind_list(&gpu vm->rebind_list, &gpu_vma) {
+>> +           rebind_gpu_vma(&gpu_vma);
+>> +           remove_gpu_vma_from_rebind_list(&gpu_vma);
+>> +   }
+>> +   // Validation section ends here, and job submission starts.
+>> +
+>> +   add_dependencies(&gpu_job, &gpu_vm->resv);
+>> +   job_dma_fence = gpu_submit(&gpu_job));
+>> +
+>> +   add_dma_fence(job_dma_fence, &gpu_vm->resv);
+>> +   dma_resv_unlock(gpu_vm->resv);
+>> +
+>> +The reason for having a separate gpu_vm rebind list is that there
+>> +might be userptr gpu_vmas that are not mapping a buffer object that
+>> +also need rebinding.
+>> +
+>> +Eviction
+>> +________
+>> +
+>> +Eviction of one of these local objects will then look similar to the
+>> +following:
+>> +
+>> +.. code-block:: C
+>> +
+>> +   obj = get_object_from_lru();
+>> +
+>> +   dma_resv_lock(obj->resv);
+>> +   for_each_gpu_vm_bo_of_obj(obj, &gpu_vm_bo);
+>> +           add_gpu_vm_bo_to_evict_list(&gpu_vm_bo, &gpu_vm->evict_list);
+>> +
+>> +   add_dependencies(&eviction_job, &obj->resv);
+>> +   job_dma_fence = gpu_submit(&eviction_job);
+>> +   add_dma_fence(&obj->resv, job_dma_fence);
+>> +
+>> +   dma_resv_unlock(&obj->resv);
+>> +   put_object(obj);
+>> +
+>> +Note that since the object is local to the gpu_vm, it will share the gpu_vm's
+>> +dma_resv lock so that ``obj->resv == gpu_vm->resv``.
+>                   ^ such that ... ?
+>
+>> +The gpu_vm_bos marked for eviction are put on the gpu_vm's evict list,
+>> +which is protected by ``gpu_vm->resv``, that is always locked while
+>> +evicting, due to the above equality.
+>    The gpu_vm_bos marked for eviction are put on the gpu_vm's evict list,
+>    which is protected by ``gpu_vm->resv``, which in turn guarantees
+>    that all local objects have their resv locked during the iteration,
+>    thanks to the above equality.
+>
+>> +
+>> +For VM_BIND gpu_vms, gpu_vmas don't need to be unbound before eviction,
+> Not sure what 'VM_BIND gpu_vms' means.
+>
+>> +Since the driver must ensure that the eviction blit or copy will wait
+>     ^since
+>
+>> +for GPU idle or depend on all previous GPU activity.
+> In general, I'm not sure what you were trying to convey with the above
+> sentence. I got that the MMU page table teardown can be eluded if the
+> VM is idle, and deferred until the GPU uses it again, but the phrasing
+> is a bit weird.
+>
+>> Furthermore, any
+>> +subsequent attempt by the GPU to access freed memory through the
+>> +gpu_vma will be preceded by a new exec function, with a revalidation
+>> +section which will make sure all gpu_vmas are rebound. The eviction
+>> +code holding the object's dma_resv while revalidating will ensure a
+>> +new exec function may not race with the eviction.
+>> +
+>> +If a driver, however, is implemented in such a way that, on each exec function,
+>> +only a subset of vmas are selected for rebind, then all vmas that are
+>> +*not* selected for rebind must be unbound at the time before the exec
+>> +function workload is submitted.
+> Okay, I think it's worth making it super clear that this is the
+> LAZY_UNBIND_ON_EVICTION + PARTIAL_VMA_REBIND on revalidation that's
+> problematic.
+>
+>> +
+>> +Locking with external buffer objects
+>> +====================================
+>> +
+>> +Since external buffer objects may be shared by multiple gpu_vm's they
+>> +can't share their reservation object with a single gpu_vm, but will rather
+>> +have a reservation object of their own. The external objects bound to a
+>> +gpu_vm using one or many gpu_vmas are therefore put on a
+>> +per-gpu_vm list which is protected by the gpu_vm's dma_resv lock or
+>> +one of the :ref:`gpu_vm list spinlocks <Spinlock iteration>`. Once
+>> +the gpu_vm's reservation object is locked, it is safe to traverse the
+>> +external object list and lock the dma_resvs of all external
+>> +objects. However if instead a list spinlock is used, a more elaborate
+>> +iteration scheme needs to be used.
+>> +
+>> +At eviction time we now need to put the gpu_vm_bos of *all* the gpu_vms a
+>                                                                             ^an
+>
+>> +external object is bound to on their gpu_vm's evict list, but we can no longer
+>> +be certain that we hold the gpu_vm's dma_resvs of all the gpu_vms the
+>> +object is bound to, since at eviction time we only hold the object's
+>                         since, at eviction time, we ...
+>
+>> +private dma_resv. If we have a ww_acquire context at hand at eviction
+>> +time we could grab the those dma_resvs but that could cause
+>                        s/the those/those/
+>
+>> +expensive ww_mutex rollbacks. A simple option is to just mark the
+>> +gpu_vm_bos of the evicted gem object with an ``evicted`` bool that
+>> +is inspected before the next time the corresponding gpu_vm evicted list needs
+>> +to be traversed, when traversing the list of external objects and
+>> +locking them.
+> That's confusing. Can't we just say it's checked next time the external
+> object list is walked (which happens on the next EXEC), and such evicted
+> objects are moved to the evicted list at that point, because we hold
+> all the necessary locks to do the insertion?
+>
+>> At the time where the evicted list is traversed, the
+>> +gpu_vm's dma_resv and the object's dma_resv is held, and the gpu_vm_bo
+>> +marked evicted, can then be added to the gpu_vm's list of evicted
+>> +gpu_vm_bos.
+> That's basically what you say here. I feel like the whole paragraph
+> could be simplified.
+>
+>> The ``evicted`` bool is protected by the object's
+>> +dma_resv. Note, that if the gpu_vm's evict list is instead protected
+>               Note that if ...
+>
+>> +by a gpu_vm list spinlock, we can grab that lock at eviction time and
+>> +hence don't need the trick using the ``evicted`` bool.
+> Do we really need this note? It seems the alternative approach is fully
+> described in the next section, so maybe just say that instead of
+> teasing how this would work here.
+>
+>> +
+>> +The exec function becomes
+>> +
+>> +.. code-block:: C
+>> +
+>> +   dma_resv_lock(gpu_vm->resv);
+>> +
+>> +   // External object list is protected by the gpu_vm->resv lock.
+>> +   for_each_gpu_vm_bo_on_extobj_list(gpu_vm, &gpu_vm_bo) {
+>> +           dma_resv_lock(gpu_vm_bo.gem_obj->resv);
+>> +           if (gpu_vm_bo_marked_evicted(&gpu_vm_bo))
+>> +                   add_gpu_vm_bo_to_evict_list(&gpu_vm_bo, &gpu_vm->evict_list);
+>> +   }
+>> +
+>> +   for_each_gpu_vm_bo_on_evict_list(&gpu_vm->evict_list, &gpu_vm_bo) {
+>> +           validate_gem_bo(&gpu_vm_bo->gem_bo);
+>> +
+>> +           for_each_gpu_vma_of_gpu_vm_bo(&gpu_vm_bo, &gpu_vma)
+>> +                  move_gpu_vma_to_rebind_list(&gpu_vma, &gpu_vm->rebind_list);
+>> +   }
+>> +
+>> +   for_each_gpu_vma_on_rebind_list(&gpu vm->rebind_list, &gpu_vma) {
+>> +           rebind_gpu_vma(&gpu_vma);
+>> +           remove_gpu_vma_from_rebind_list(&gpu_vma);
+>> +   }
+>> +
+>> +   add_dependencies(&gpu_job, &gpu_vm->resv);
+>> +   job_dma_fence = gpu_submit(&gpu_job));
+>> +
+>> +   add_dma_fence(job_dma_fence, &gpu_vm->resv);
+>> +   for_each_external_obj(gpu_vm, &obj)
+>> +          add_dma_fence(job_dma_fence, &obj->resv);
+>> +   dma_resv_unlock_all_resv_locks();
+>> +
+>> +And the corresponding shared-object aware eviction would look like:
+>> +
+>> +.. code-block:: C
+>> +
+>> +   obj = get_object_from_lru();
+>> +
+>> +   dma_resv_lock(obj->resv);
+>> +   for_each_gpu_vm_bo_of_obj(obj, &gpu_vm_bo)
+>> +           if (object_is_vm_local(obj))
+>> +                add_gpu_vm_bo_to_evict_list(&gpu_vm_bo, &gpu_vm->evict_list);
+>> +           else
+>> +                mark_gpu_vm_bo_evicted(&gpu_vm_bo);
+>> +
+>> +   add_dependencies(&eviction_job, &obj->resv);
+>> +   job_dma_fence = gpu_submit(&eviction_job);
+>> +   add_dma_fence(&obj->resv, job_dma_fence);
+>> +
+>> +   dma_resv_unlock(&obj->resv);
+>> +   put_object(obj);
+>> +
+>> +.. _Spinlock iteration:
+>> +
+>> +Accessing the gpu_vm's lists without the dma_resv lock held
+>> +===========================================================
+>> +
+>> +Although some drivers will hold the gpu_vm's dma_resv lock when
+>> +accessing the gpu_vm's evict list and external objects lists, there
+>> +are drivers that need to access these lists without the dma_resv lock held,
+>> +for example due to asynchronous state updates from within the
+>> +dma_fence signalling critical path. In such case a spinlock can be
+>> +used to protect manipulation of the lists. However, since higher level
+>> +sleeping locks need to be taken for each list item while iterating
+>> +over the lists, the items already iterated over need to be
+>> +temporarily moved to a private list and the spinlock released
+>> +while processing each item:
+> I think it would good to clarify the fact item deletion can happen
+> concurrently, even if the item has been moved to our local list.
+>
+>> +
+>> +.. code block:: C
+>> +
+>> +    struct list_head still_in_list;
+>> +
+>> +    INIT_LIST_HEAD(&still_in_list);
+>> +
+>> +    spin_lock(&gpu_vm->list_lock);
+>> +    do {
+>> +            struct list_head *entry = list_first_entry_or_null(&gpu_vm->list, head);
+>> +
+>> +            if (!entry)
+>> +                    break;
+>> +
+>> +            list_move_tail(&entry->head, &still_in_list);
+>> +            list_entry_get_unless_zero(entry);
+>> +            spin_unlock(&gpu_vm->list_lock);
+>> +
+>> +            process(entry);
+>> +
+>> +            spin_lock(&gpu_vm->list_lock);
+>> +            list_entry_put(entry);
+>> +    } while (true);
+>> +
+>> +    list_splice_tail(&still_in_list, &gpu_vm->list);
+>> +    spin_unlock(&gpu_vm->list_lock);
+>> +
+>> +Due to the additional locking and atomic operations,
+> Hm, I don't see any atomic operation in the pseudo-code.
+>
+>> drivers that *can*
+>> +avoid accessing the gpu_vm's list outside of the dma_resv lock
+>> +might want to avoid also this iteration scheme. Particularly if the
+>> +driver anticipates a large number of list items. For lists where the
+>> +anticipated number of list items is small, where list iteration doesn't
+>> +happen very often or if there is a significant additional cost
+>> +associated with each iteration, the atomic operation overhead
+>> +associated with this type of iteration is, most likely, negligible. Note that
+>> +if this scheme is used, it is necessary to make sure this list
+>> +iteration is protected by an outer level lock or semaphore, since list
+>> +items are temporarily pulled off the list while iterating.
+>> +
+>> +Please refer to the :ref:`DRM GPUVM locking section
+>> +<drm_gpuvm_locking>` and its internal
+>> +:c:func:`get_next_vm_bo_from_list` function.
+>> +
+>> +
+>> +userptr gpu_vmas
+>> +================
+>> +
+>> +A userptr gpu_vma is a gpu_vma that, instead of mapping a buffer object to a
+>> +GPU virtual address range, directly maps a CPU mm range of anonymous-
+>> +or file page-cache pages.
+>> +A very simple approach would be to just pin the pages using
+>> +pin_user_pages() at bind time and unpin them at unbind time, but this
+>> +creates a Denial-Of-Service vector since a single user-space process
+>> +would be able to pin down all of system memory, which is not
+>> +desirable. (For special use-cases and with proper accounting pinning might
+>> +still be a desirable feature, though).
+>    For special use-cases, and assuming proper accounting, pinning might
+>    still be a desirable feature though.
+>
+>> What we need to do in the
+>> +general case is to obtain a reference to the desired pages, make sure
+>> +we are notified using a MMU notifier just before the CPU mm unmaps the
+>> +pages, dirty them if they are not mapped read-only to the GPU, and
+>> +then drop the reference.
+>> +When we are notified by the MMU notifier that CPU mm is about to drop the
+>> +pages, we need to stop GPU access to the pages by waiting for VM idle
+>> +in the MMU notifier and make sure that before the next time the GPU
+>> +tries to access whatever is now present in the CPU mm range, we unmap
+>> +the old pages from the GPU page tables and repeat the process of
+>> +obtaining new page references. (See the :ref:`notifier example
+>> +<Invalidation example>` below). Note that when the core mm decides to
+>> +laundry pages, we get such an unmap MMU notification and can mark the
+>> +pages dirty again before the next GPU access. We also get similar MMU
+>> +notifications for NUMA accounting which the GPU driver doesn't really
+>> +need to care about, but so far it has proven difficult to exclude
+>> +certain notifications.
+>> +
+>> +Using a MMU notifier for device DMA (and other methods) is described in
+>> +:ref:`the pin_user_pages() documentation <mmu-notifier-registration-case>`.
+>> +
+>> +Now the method of obtaining struct page references using
+>     Now, the method ...
+>
+>> +get_user_pages() unfortunately can't be used under a dma_resv lock
+>> +since that would violate the locking order of the dma_resv lock vs the
+>> +mmap_lock that is grabbed when resolving a CPU pagefault. This means
+>> +the gpu_vm's list of userptr gpu_vmas needs to be protected by an
+>> +outer lock, which in our example below is the ``gpu_vm->lock``.
+>> +
+>> +The MMU interval seqlock for a userptr gpu_vma is used in the following
+>> +way:
+>> +
+>> +.. code-block:: C
+>> +
+>> +   // Exclusive locking mode here is strictly needed only if there are
+>> +   // invalidated userptr vmas present, to avoid multiple userptr
+>> +   // revalidations.
+>> +   down_write(&gpu_vm->lock);
+>> +   retry:
+>> +
+>> +   // Note: mmu_interval_read_begin() blocks until there is no
+>> +   // invalidation notifier running anymore.
+>> +   seq = mmu_interval_read_begin(&gpu_vma->userptr_interval);
+>> +   if (seq != gpu_vma->saved_seq) {
+>> +           obtain_new_page_pointers(&gpu_vma);
+>> +           dma_resv_lock(&gpu_vm->resv);
+>> +           add_gpu_vma_to_revalidate_list(&gpu_vma, &gpu_vm);
+>> +           dma_resv_unlock(&gpu_vm->resv);
+>> +           gpu_vma->saved_seq = seq;
+>> +   }
+>> +
+>> +   // The usual revalidation goes here.
+>> +
+>> +   // Final userptr sequence validation may not happen before the
+>> +   // submission dma_fence is added to the gpu_vm's resv, from the POW
+>> +   // of the MMU invalidation notifier. Hence the
+>> +   // userptr_notifier_lock that will make them appear atomic.
+>> +
+>> +   add_dependencies(&gpu_job, &gpu_vm->resv);
+>> +   down_read(&gpu_vm->userptr_notifier_lock);
+>> +   if (mmu_interval_read_retry(&gpu_vma->userptr_interval, gpu_vma->saved_seq)) {
+>> +          up_read(&gpu_vm->userptr_notifier_lock);
+>> +          goto retry;
+>> +   }
+>> +
+>> +   job_dma_fence = gpu_submit(&gpu_job));
+>> +
+>> +   add_dma_fence(job_dma_fence, &gpu_vm->resv);
+>> +
+>> +   for_each_external_obj(gpu_vm, &obj)
+>> +          add_dma_fence(job_dma_fence, &obj->resv);
+>> +
+>> +   dma_resv_unlock_all_resv_locks();
+>> +   up_read(&gpu_vm->userptr_notifier_lock);
+>> +   up_write(&gpu_vm->lock);
+>> +
+>> +The code between ``mmu_interval_read_begin()`` and the
+>> +``mmu_interval_read_retry()`` marks the read side critical section of
+>> +what we call the ``userptr_seqlock``. In reality the gpu_vm's userptr
+>> +gpu_vma list is looped through, and the check is done for *all* of its
+>> +userptr gpu_vmas, although we only show a single one here.
+>> +
+>> +The userptr gpu_vma MMU invalidation notifier might be called from
+>> +reclaim context and, again to avoid locking order violations, we can't
+>                    and, again, to avoid ...
+>
+>> +take any dma_resv lock nor the gpu_vm->lock from within it.
+>> +
+>> +.. _Invalidation example:
+>> +.. code-block:: C
+>> +
+>> +  bool gpu_vma_userptr_invalidate(userptr_interval, cur_seq)
+>> +  {
+>> +          // Make sure the exec function either sees the new sequence
+>> +          // and backs off or we wait for the dma-fence:
+>> +
+>> +          down_write(&gpu_vm->userptr_notifier_lock);
+>> +          mmu_interval_set_seq(userptr_interval, cur_seq);
+>> +          up_write(&gpu_vm->userptr_notifier_lock);
+>> +
+>> +          // At this point, the exec function can't succeed in
+>> +          // submitting a new job, because cur_seq is an invalid
+>> +          // sequence number and will always cause a retry. When all
+>> +          // invalidation callbacks, the mmu notifier core will flip
+>> +          // the sequence number to a valid one. However we need to
+>> +          // stop gpu access to the old pages here.
+>> +
+>> +          dma_resv_wait_timeout(&gpu_vm->resv, DMA_RESV_USAGE_BOOKKEEP,
+>> +                                false, MAX_SCHEDULE_TIMEOUT);
+>> +          return true;
+>> +  }
+>> +
+>> +When this invalidation notifier returns, the GPU can no longer be
+>> +accessing the old pages of the userptr gpu_vma and needs to redo the
+>> +page-binding before a new GPU submission can succeed.
+>> +
+>> +Efficient userptr gpu_vma exec_function iteration
+>> +_________________________________________________
+>> +
+>> +If the gpu_vm's list of userptr gpu_vmas becomes large, it's
+>> +inefficient to iterate through the complete lists of userptrs on each
+>> +exec function to check whether each userptr gpu_vma's saved
+>> +sequence number is stale. A solution to this is to put all
+>> +*invalidated* userptr gpu_vmas on a separate gpu_vm list and
+>> +only those gpu_vmas on the list are actually checked on each exec
+>    and only check the gpu_vmas present in this list on each exec...
+>
+>> +function. This list will then lend itself very-well to the spinlock
+>> +locking scheme that is
+>> +:ref:`described in the spinlock iteration section <Spinlock iteration>`, since
+>> +in the mmu notifier, where we add the invalidated gpu_vmas to the
+>> +list, it's not possible to take any outer locks like the
+>> +``gpu_vm->lock`` or the ``gpu_vm->resv`` lock. Note that the
+>> +``gpu_vm->lock`` still needs to be taken while iterating to ensure the list is
+>> +complete, as also mentioned in that section.
+>> +
+>> +If using an invalidated userptr list like this, the retry check in the
+>> +exec function trivially becomes a check for invalidated list empty.
+>> +
+>> +Locking at bind and unbind time
+>> +===============================
+>> +
+>> +At bind time, assuming a GEM object backed gpu_vma, each
+>> +gpu_vma needs to be associated with a gpu_vm_bo and that
+>> +gpu_vm_bo in turn needs to be added to the GEM object's
+>> +gpu_vm_bo list, and possibly to the gpu_vm's external object
+>> +list. This is referred to as *linking* the gpu_vma, and typically
+>> +requires that the ``gpu_vm->lock`` and the ``gem_object->gpuva_lock``
+>> +are held. When unlinking a gpu_vma the same locks should be held,
+>> +and that ensures that when iterating over ``gpu_vmas`, either under
+>> +the ``gpu_vm->resv`` or the GEM object's dma_resv, that the gpu_vmas
+>> +stay alive as long as the lock under which we iterate is not released. For
+>> +userptr gpu_vmas it's similarly required that during vma destroy, the
+>> +outer ``gpu_vm->lock`` is held, since otherwise when iterating over
+>> +the invalidated userptr list as described in the previous section,
+>> +there is nothing keeping those userptr gpu_vmas alive.
+>> +
+>> +Locking for recoverable page-fault page-table updates
+>> +=====================================================
+>> +
+>> +There are two important things we need to ensure with locking for
+>> +recoverable page-faults:
+>> +
+>> +* At the time we return pages back to the system / allocator for
+>> +  reuse, there should be no remaining GPU mappings and any GPU TLB
+>> +  must have been flushed.
+>> +* The unmapping and mapping of a gpu_vma must not race.
+>> +
+>> +Since the unmapping (or zapping) of GPU ptes is typically taking place
+>> +where it is hard or even impossible to take any outer level locks we
+>> +must either introduce a new lock that is held at both mapping and
+>> +unmapping time, or look at the locks we do hold at unmapping time and
+>> +make sure that they are held also at mapping time. For userptr
+>> +gpu_vmas, the ``userptr_seqlock`` is held in write mode in the mmu
+>> +invalidation notifier where zapping happens. Hence, if the
+>> +``userptr_seqlock`` as well as the ``gpu_vm->userptr_notifier_lock``
+>> +is held in read mode during mapping, it will not race with the
+>> +zapping. For GEM object backed gpu_vmas, zapping will take place under
+>> +the GEM object's dma_resv and ensuring that the dma_resv is held also
+>> +when populating the page-tables for any gpu_vma pointing to the GEM
+>> +object, will similarly ensure we are race-free.
+>> +
+>> +If any part of the mapping is performed asynchronously
+>> +under a dma-fence with these locks released, the zapping will need to
+>> +wait for that dma-fence to signal under the relevant lock before
+>> +starting to modify the page-table.
+>> +
+>> +Since modifying the
+>> +page-table structure in a way that frees up page-table memory
+>> +might also require outer level locks, the zapping of GPU ptes
+>> +typically focuses only on zeroing page-table or page-directory entries
+>> +and flushing TLB, whereas freeing of page-table memory is deferred to
+>> +unbind or rebind time.
+>> diff --git a/Documentation/gpu/implementation_guidelines.rst b/Documentation/gpu/implementation_guidelines.rst
+>> index 138e637dcc6b..dbccfa72f1c9 100644
+>> --- a/Documentation/gpu/implementation_guidelines.rst
+>> +++ b/Documentation/gpu/implementation_guidelines.rst
+>> @@ -7,3 +7,4 @@ Misc DRM driver uAPI- and feature implementation guidelines
+>>   .. toctree::
+>>   
+>>      drm-vm-bind-async
+>> +   drm-vm-bind-locking
+>> diff --git a/Documentation/gpu/rfc/xe.rst b/Documentation/gpu/rfc/xe.rst
+>> index c29113a0ac30..ceb21219d52e 100644
+>> --- a/Documentation/gpu/rfc/xe.rst
+>> +++ b/Documentation/gpu/rfc/xe.rst
+>> @@ -123,10 +123,15 @@ Documentation should include:
+>>   
+>>    * O(1) complexity under VM_BIND.
+>>   
+>> +The document is now included in the drm documentation :doc:`here </gpu/drm-vm-bind-async>`.
+>> +
+>>   Some parts of userptr like mmu_notifiers should become GPUVA or DRM helpers when
+>>   the second driver supporting VM_BIND+userptr appears. Details to be defined when
+>>   the time comes.
+>>   
+>> +The DRM GPUVM helpers do not yet include the userptr parts, but discussions
+>> +about implementing them are ongoing.
+>> +
+>>   Long running compute: minimal data structure/scaffolding
+>>   --------------------------------------------------------
+>>   The generic scheduler code needs to include the handling of endless compute
 
