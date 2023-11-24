@@ -1,416 +1,160 @@
-Return-Path: <linux-doc+bounces-2997-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3002-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 316D57F6CA5
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 08:12:25 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id D527A7F6CDA
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 08:22:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 54D8F1C208BC
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 07:12:24 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 904E6281A03
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 07:22:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F69E63C4;
-	Fri, 24 Nov 2023 07:12:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 467B58C13;
+	Fri, 24 Nov 2023 07:22:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="fr5mlL22"
+	dkim=pass (2048-bit key) header.d=vrull.eu header.i=@vrull.eu header.b="lcVns6H2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com [IPv6:2607:f8b0:4864:20::630])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 54369D6F;
-	Thu, 23 Nov 2023 23:12:13 -0800 (PST)
-Received: by mail-pl1-x630.google.com with SMTP id d9443c01a7336-1cf98ffc257so7833835ad.3;
-        Thu, 23 Nov 2023 23:12:13 -0800 (PST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com [IPv6:2a00:1450:4864:20::132])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06E5810DD
+	for <linux-doc@vger.kernel.org>; Thu, 23 Nov 2023 23:22:26 -0800 (PST)
+Received: by mail-lf1-x132.google.com with SMTP id 2adb3069b0e04-50aa8c0af41so2734694e87.1
+        for <linux-doc@vger.kernel.org>; Thu, 23 Nov 2023 23:22:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700809933; x=1701414733; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=gSs2TLIiQnVXysh13y2McMK8OCeKJ03dTwOH/qdr7qs=;
-        b=fr5mlL22BSgfPGSE14O8WWfIiiOoPEvIpCxmsGctonU03voBmiVs9glz2gCcfkYp+X
-         TL7gC1no4ZxOBr5wMjVH2AfTyJSJooyshMF2Q4xvKY4hy9InUNDwa8I6vfRpUppHU4T3
-         0IBIdOHzJ2pIJWHsOPS5NlYg6nTP7ExZXCvfdiK2DsyDRPP+6131+MivPGI7WSuv5F59
-         NEhi1oZ6+2gov2HVMrnDDjbkE22hnXmOqBLz+4zZAcmD+uxJgGu6IU2/uq54ZEVbomfy
-         Y93nJt28orpLctCVGnKTtq+fmxwCADG9MuK5OxG1KCERQPoqMbeeTba0hsYfqIEdbg/k
-         6e1A==
+        d=vrull.eu; s=google; t=1700810545; x=1701415345; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=A+QJwQ2ibzfm4ZH4G7RxTWHsFFrHVq+i8PDqnY0Hrac=;
+        b=lcVns6H2pfJSYqMv5D93CbOOs4B6CgPrNkEk8ZrKWnoYUSDz9+vDaIJovSPYEUy6az
+         k/pRaPPFrXQHjcKzMKOz85YmkiALrblpw0xMgXACObsv9J+hbYEY9XKCuhrLOLvwHnVq
+         MGLVNFbk2XYTmR3PdC2fzn1BIdZyP6Ggg7/Wpyz8C9VvK4JjLnaAPK/V/HodrWwhrpbe
+         Gr3/3wdh+FXnsQjeWrGYzpnQIL30YeldnXyKeaPeMTFGKgDhTX1IX94/ldFpBWVSYuoP
+         wsHYs4x7+rnVAt3YLlhqxeWPqh69ZKNytUEiIep7mWpuGSpGmwmfqqOEEUZSTthaIWPG
+         cMOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700809933; x=1701414733;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=gSs2TLIiQnVXysh13y2McMK8OCeKJ03dTwOH/qdr7qs=;
-        b=A/qjjuOiTVA87p0RCsuWFERgXDCRekLSUdgcAJTMwZ0yBuuoTTStip/lFEQq6PPs+r
-         j86VOsT8p+nllTuqkWNGRznHtEcajLs+M1j5S2x7dIzfoS6Taw+ZdtVDFfATCndCbqvo
-         y+NsU2WCqiLiHo8IFYCEqQjqB31e0Lw69/fixUN7HDWpwaU6yGEpycuNugM57yH2uc1V
-         76IKLMasGGmbSYSchJapFQBdO2dl84Gy+Tfr/VIUOxqo7DsNVvVhErB/M+769pvnrUSS
-         5vssYTQS6Q83csfOngktVE46sYAVmqZDqfkkqxLT9vHJA7PsZLPi+8LNxnNPm8TECa34
-         kf/g==
-X-Gm-Message-State: AOJu0Yxsr+R7fEohRJREbLm0w8q185lvNIUvNtg1A/ACHtSjaEH7+Eth
-	/3+e+5HYo+/LsgX1uMdU+TA=
-X-Google-Smtp-Source: AGHT+IHdYLJK3SurdNxYDAK1HN7CBs2YafccJeaFtb4KIRTyMAzuiKgsL0P1vRTQB2PkGaFg7wgtHw==
-X-Received: by 2002:a17:903:2352:b0:1cf:6ce6:5f22 with SMTP id c18-20020a170903235200b001cf6ce65f22mr2217152plh.60.1700809932665;
-        Thu, 23 Nov 2023 23:12:12 -0800 (PST)
-Received: from archie.me ([103.131.18.64])
-        by smtp.gmail.com with ESMTPSA id h21-20020a170902eed500b001bc21222e34sm2463733plb.285.2023.11.23.23.12.10
+        d=1e100.net; s=20230601; t=1700810545; x=1701415345;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=A+QJwQ2ibzfm4ZH4G7RxTWHsFFrHVq+i8PDqnY0Hrac=;
+        b=qDFKsIDdmmPW64IleyHI8DacI1sPBrXJccLNCGpOaQowqqGpw89CMG1TVB2hFc1L63
+         sJ4DNRHuJbVYY++wZU8paiVOHsqKv/ATg3UmmVqeKvs1HNUsgvD480QtXkIvdSAWoSIc
+         DNteEOCC85bZirUyXzzmL1Z1N06eTV1re/W8/QsDmPq9szz5KvjvREPjpD9CpG2i0f3M
+         +oYwxB4Z9Bdg+91SHWuTuLO1BiwrbGCThYOmadyR4HmTePb6zPh00ut2jCmCbVjrv+uu
+         ee+Gs6fzXzctnGfNk6RSH6eeKCqMrkiptWVchyVrDMHPv5OGQndU17JjEWooaSXQflSR
+         BtCQ==
+X-Gm-Message-State: AOJu0YwWwb2EqLBAZ/4cEZZLGPowKHmFFFGaJUk6rm8RjzBDC8DSgrn0
+	g870y8NbvWEo0hXOAjGTATHlh157KC3Bj3+AMDF+TNlU
+X-Google-Smtp-Source: AGHT+IG4KyTl5CwzMZ1gy4FucyPBBLxaEgYRfo01XZveBgxlerDUkvXhDFprA+AP7dQahAlFaE4+/g==
+X-Received: by 2002:a17:906:2259:b0:9ee:a767:12e7 with SMTP id 25-20020a170906225900b009eea76712e7mr1762679ejr.6.1700810524590;
+        Thu, 23 Nov 2023 23:22:04 -0800 (PST)
+Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at. [62.178.148.172])
+        by smtp.gmail.com with ESMTPSA id q18-20020a1709060e5200b00992f2befcbcsm1709930eji.180.2023.11.23.23.22.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Nov 2023 23:12:11 -0800 (PST)
-Received: by archie.me (Postfix, from userid 1000)
-	id E99681021057D; Fri, 24 Nov 2023 14:12:08 +0700 (WIB)
-Date: Fri, 24 Nov 2023 14:12:08 +0700
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Tudor Ambarus <tudor.ambarus@linaro.org>, pratyush@kernel.org,
-	michael@walle.cc
-Cc: Linux MTD <linux-mtd@lists.infradead.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>, corbet@lwn.net,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH 1/2] docs: mtd: spi-nor: add sections about flash
- additions and testing
-Message-ID: <ZWBMyPIPwq9L-5pG@archie.me>
-References: <20231123160721.64561-1-tudor.ambarus@linaro.org>
- <20231123160721.64561-2-tudor.ambarus@linaro.org>
+        Thu, 23 Nov 2023 23:22:04 -0800 (PST)
+From: Christoph Muellner <christoph.muellner@vrull.eu>
+To: linux-riscv@lists.infradead.org,
+	linux-kselftest@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Shuah Khan <shuah@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Anup Patel <apatel@ventanamicro.com>,
+	Philipp Tomsich <philipp.tomsich@vrull.eu>,
+	Andrew Jones <ajones@ventanamicro.com>,
+	Guo Ren <guoren@kernel.org>,
+	Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+	Conor Dooley <conor.dooley@microchip.com>,
+	=?UTF-8?q?Bj=C3=B6rn=20T=C3=B6pel?= <bjorn@rivosinc.com>,
+	Alan Stern <stern@rowland.harvard.edu>,
+	Andrea Parri <parri.andrea@gmail.com>,
+	Will Deacon <will@kernel.org>,
+	Daniel Lustig <dlustig@nvidia.com>,
+	Peter Zijlstra <peterz@infradead.org>
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
+Subject: [RFC PATCH 0/5] RISC-V: Add dynamic TSO support
+Date: Fri, 24 Nov 2023 08:21:37 +0100
+Message-ID: <20231124072142.2786653-1-christoph.muellner@vrull.eu>
+X-Mailer: git-send-email 2.41.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="4ywD7BkN9lcIBxOS"
-Content-Disposition: inline
-In-Reply-To: <20231123160721.64561-2-tudor.ambarus@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+From: Christoph Müllner <christoph.muellner@vrull.eu>
 
---4ywD7BkN9lcIBxOS
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The upcoming RISC-V Ssdtso specification introduces a bit in the senvcfg
+CSR to switch the memory consistency model at run-time from RVWMO to TSO
+(and back). The active consistency model can therefore be switched on a
+per-hart base and managed by the kernel on a per-process/thread base.
 
-On Thu, Nov 23, 2023 at 06:07:20PM +0200, Tudor Ambarus wrote:
-> +Minimum testing requirements
-> +-----------------------------
-> +
-> +Do all the tests from below and paste them in the commit's comments
-> +section, after the ``---`` marker.
-> +
-> +1/ Specify the controller that you used to test the flash and specify
-> +the frequency at which the flash was operated::
-> +
-> +    E.g. This flash is populated on the X board and was tested at Y
-> +    frequency using the Z (put compatible) SPI controller.
-> +
-> +2/ Dump the sysfs entries and print the md5/sha1/sha256 SFDP checksum::
-> +
-> +    root@1:~#  cat /sys/bus/spi/devices/spi1.0/spi-nor/partname
-> +    sst26vf064b
-> +    root@1:~#  cat /sys/bus/spi/devices/spi1.0/spi-nor/jedec_id
-> +    bf2643
-> +    root@1:~#  cat /sys/bus/spi/devices/spi1.0/spi-nor/manufacturer
-> +    sst
-> +    root@1:~# hexdump -C  /sys/bus/spi/devices/spi1.0/spi-nor/sfdp
-> +    00000000  53 46 44 50 06 01 02 ff  00 06 01 10 30 00 00 ff  |SFDP...=
-=2E....0...|
-> +    00000010  81 00 01 06 00 01 00 ff  bf 00 01 18 00 02 00 01  |.......=
-=2E........|
-> +    00000020  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.......=
-=2E........|
-> +    00000030  fd 20 f1 ff ff ff ff 03  44 eb 08 6b 08 3b 80 bb  |. .....=
-=2ED..k.;..|
-> +    00000040  fe ff ff ff ff ff 00 ff  ff ff 44 0b 0c 20 0d d8  |.......=
-=2E..D.. ..|
-> +    00000050  0f d8 10 d8 20 91 48 24  80 6f 1d 81 ed 0f 77 38  |.... .H=
-$.o....w8|
-> +    00000060  30 b0 30 b0 f7 ff ff ff  29 c2 5c ff f0 30 c0 80  |0.0....=
-=2E).\..0..|
-> +    00000070  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.......=
-=2E........|
-> +    *
-> +    00000100  ff 00 04 ff f3 7f 00 00  f5 7f 00 00 f9 ff 7d 00  |.......=
-=2E......}.|
-> +    00000110  f5 7f 00 00 f3 7f 00 00  ff ff ff ff ff ff ff ff  |.......=
-=2E........|
-> +    00000120  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.......=
-=2E........|
-> +    *
-> +    00000200  bf 26 43 ff b9 5f fd ff  30 f2 60 f3 32 ff 0a 12  |.&C.._.=
-=2E0.`.2...|
-> +    00000210  23 46 ff 0f 19 32 0f 19  19 ff ff ff ff ff ff ff  |#F...2.=
-=2E........|
-> +    00000220  00 66 99 38 ff 05 01 35  06 04 02 32 b0 30 72 42  |.f.8...=
-5...2.0rB|
-> +    00000230  8d e8 98 88 a5 85 c0 9f  af 5a ff ff 06 ec 06 0c  |.......=
-=2E.Z......|
-> +    00000240  00 03 08 0b ff ff ff ff  ff 07 ff ff 02 02 ff 06  |.......=
-=2E........|
-> +    00000250  03 00 fd fd 04 07 00 fc  03 00 fe fe 02 02 07 0e  |.......=
-=2E........|
-> +    00000260
-> +    root@1:~# sha256sum /sys/bus/spi/devices/spi1.0/spi-nor/sfdp
-> +    428f34d0461876f189ac97f93e68a05fa6428c6650b3b7baf736a921e5898ed1  /s=
-ys/bus/spi/devices/spi1.0/spi-nor/sfdp
-> +
-> +3/ Dump debugfs data::
-> +
-> +    root@1:~# cat /sys/kernel/debug/spi-nor/spi1.0/capabilities
-> +    Supported read modes by the flash
-> +     1S-1S-1S
-> +      opcode		0x03
-> +      mode cycles	0
-> +      dummy cycles	0
-> +     1S-1S-1S (fast read)
-> +      opcode		0x0b
-> +      mode cycles	0
-> +      dummy cycles	8
-> +     1S-1S-2S
-> +      opcode		0x3b
-> +      mode cycles	0
-> +      dummy cycles	8
-> +     1S-2S-2S
-> +      opcode		0xbb
-> +      mode cycles	4
-> +      dummy cycles	0
-> +     1S-1S-4S
-> +      opcode		0x6b
-> +      mode cycles	0
-> +      dummy cycles	8
-> +     1S-4S-4S
-> +      opcode		0xeb
-> +      mode cycles	2
-> +      dummy cycles	4
-> +     4S-4S-4S
-> +      opcode		0x0b
-> +      mode cycles	2
-> +      dummy cycles	4
-> +   =20
-> +    Supported page program modes by the flash
-> +     1S-1S-1S
-> +      opcode	0x02
-> +   =20
-> +    root@1:~# cat /sys/kernel/debug/spi-nor/spi1.0/params
-> +    name		sst26vf064b
-> +    id			bf 26 43 bf 26 43
-> +    size		8.00 MiB
-> +    write size		1
-> +    page size		256
-> +    address nbytes	3
-> +    flags		HAS_LOCK | HAS_16BIT_SR | SOFT_RESET | SWP_IS_VOLATILE
-> +   =20
-> +    opcodes
-> +     read		0xeb
-> +      dummy cycles	6
-> +     erase		0x20
-> +     program		0x02
-> +     8D extension	none
-> +   =20
-> +    protocols
-> +     read		1S-4S-4S
-> +     write		1S-1S-1S
-> +     register		1S-1S-1S
-> +   =20
-> +    erase commands
-> +     20 (4.00 KiB) [0]
-> +     d8 (8.00 KiB) [1]
-> +     d8 (32.0 KiB) [2]
-> +     d8 (64.0 KiB) [3]
-> +     c7 (8.00 MiB)
-> +   =20
-> +    sector map
-> +     region (in hex)   | erase mask | flags
-> +     ------------------+------------+----------
-> +     00000000-00007fff |     [01  ] |
-> +     00008000-0000ffff |     [0 2 ] |
-> +     00010000-007effff |     [0  3] |
-> +     007f0000-007f7fff |     [0 2 ] |
-> +     007f8000-007fffff |     [01  ] |
-> +
-> +4/ Use `mtd-utils <https://git.infradead.org/mtd-utils.git>`__
-> +and verify that erase, read and page program operations work fine.
-> +
-> +a/ Generate a 2 MB file::
-> +
-> +    root@1:~# dd if=3D/dev/urandom of=3D./spi_test bs=3D1M count=3D2
-> +    2+0 records in
-> +    2+0 records out
-> +    2097152 bytes (2.1 MB, 2.0 MiB) copied, 0.848566 s, 2.5 MB/s
-> +
-> +b/ Verify erase::
-> +
-> +    root@1:~# mtd_debug write /dev/mtd1 0 2097152 spi_test
-> +    Copied 2097152 bytes from spi_test to address 0x00000000 in flash
-> +
-> +    root@1:~# mtd_debug erase /dev/mtd1 0 2097152
-> +    Erased 2097152 bytes from address 0x00000000 in flash
-> +
-> +    root@1:~# mtd_debug read /dev/mtd1 0 2097152 spi_read
-> +    Copied 2097152 bytes from address 0x00000000 in flash to spi_read
-> +
-> +    root@1:~# hexdump -C spi_read
-> +    00000000  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.......=
-=2E........|
-> +    *
-> +    00200000
-> +
-> +c/ Write, read back and compare::
-> +
-> +    root@1:~# mtd_debug write /dev/mtd1 0 2097152 spi_test
-> +    Copied 2097152 bytes from spi_test to address 0x00000000 in flash
-> +
-> +    root@1:~# mtd_debug read /dev/mtd1 0 2097152 spi_read
-> +    Copied 2097152 bytes from address 0x00000000 in flash to spi_read
-> +
-> +    root@1:~# sha1sum spi_*
-> +    51eeddc316a4121cf96e76e526d94d638283ec22  spi_read
-> +    51eeddc316a4121cf96e76e526d94d638283ec22  spi_test
-> +
-> +d/ Dump mtd_info data::
-> +
-> +    root@1:~# mtd_debug info /dev/mtd1
-> +    mtd.type =3D MTD_NORFLASH
-> +    mtd.flags =3D MTD_CAP_NORFLASH
-> +    mtd.size =3D 8388608 (8M)
-> +    mtd.erasesize =3D 4096 (4K)
-> +    mtd.writesize =3D 1
-> +    mtd.oobsize =3D 0
-> +    regions =3D 0
+This patch implements basic Ssdtso support and adds a prctl API on top
+so that user-space processes can switch to a stronger memory consistency
+model (than the kernel was written for) at run-time.
 
-The numbered lists don't properly rendered, so I have to fix it up:
+I am not sure if other architectures support switching the memory
+consistency model at run-time, but designing the prctl API in an
+arch-independent way allows reusing it in the future.
 
----- >8 ----
-diff --git a/Documentation/driver-api/mtd/spi-nor.rst b/Documentation/drive=
-r-api/mtd/spi-nor.rst
-index 7a8737fe181de5..d482658628b3c0 100644
---- a/Documentation/driver-api/mtd/spi-nor.rst
-+++ b/Documentation/driver-api/mtd/spi-nor.rst
-@@ -30,13 +30,13 @@ Minimum testing requirements
- Do all the tests from below and paste them in the commit's comments
- section, after the ``---`` marker.
-=20
--1/ Specify the controller that you used to test the flash and specify
--the frequency at which the flash was operated::
-+1) Specify the controller that you used to test the flash and specify
-+   the frequency at which the flash was operated, e.g.::
-=20
--    E.g. This flash is populated on the X board and was tested at Y
-+    This flash is populated on the X board and was tested at Y
-     frequency using the Z (put compatible) SPI controller.
-=20
--2/ Dump the sysfs entries and print the md5/sha1/sha256 SFDP checksum::
-+2) Dump the sysfs entries and print the md5/sha1/sha256 SFDP checksum::
-=20
-     root@1:~#  cat /sys/bus/spi/devices/spi1.0/spi-nor/partname
-     sst26vf064b
-@@ -68,7 +68,7 @@ the frequency at which the flash was operated::
-     root@1:~# sha256sum /sys/bus/spi/devices/spi1.0/spi-nor/sfdp
-     428f34d0461876f189ac97f93e68a05fa6428c6650b3b7baf736a921e5898ed1  /sys=
-/bus/spi/devices/spi1.0/spi-nor/sfdp
-=20
--3/ Dump debugfs data::
-+3) Dump debugfs data::
-=20
-     root@1:~# cat /sys/kernel/debug/spi-nor/spi1.0/capabilities
-     Supported read modes by the flash
-@@ -142,51 +142,51 @@ the frequency at which the flash was operated::
-      007f0000-007f7fff |     [0 2 ] |
-      007f8000-007fffff |     [01  ] |
-=20
--4/ Use `mtd-utils <https://git.infradead.org/mtd-utils.git>`__
--and verify that erase, read and page program operations work fine.
-+4) Use `mtd-utils <https://git.infradead.org/mtd-utils.git>`__
-+and verify that erase, read and page program operations work fine:
-=20
--a/ Generate a 2 MB file::
-+   a) Generate a 2 MB file::
-=20
--    root@1:~# dd if=3D/dev/urandom of=3D./spi_test bs=3D1M count=3D2
--    2+0 records in
--    2+0 records out
--    2097152 bytes (2.1 MB, 2.0 MiB) copied, 0.848566 s, 2.5 MB/s
-+       root@1:~# dd if=3D/dev/urandom of=3D./spi_test bs=3D1M count=3D2
-+       2+0 records in
-+       2+0 records out
-+       2097152 bytes (2.1 MB, 2.0 MiB) copied, 0.848566 s, 2.5 MB/s
-=20
--b/ Verify erase::
-+   b) Verify erase::
-=20
--    root@1:~# mtd_debug write /dev/mtd1 0 2097152 spi_test
--    Copied 2097152 bytes from spi_test to address 0x00000000 in flash
-+       root@1:~# mtd_debug write /dev/mtd1 0 2097152 spi_test
-+       Copied 2097152 bytes from spi_test to address 0x00000000 in flash
-=20
--    root@1:~# mtd_debug erase /dev/mtd1 0 2097152
--    Erased 2097152 bytes from address 0x00000000 in flash
-+       root@1:~# mtd_debug erase /dev/mtd1 0 2097152
-+       Erased 2097152 bytes from address 0x00000000 in flash
-=20
--    root@1:~# mtd_debug read /dev/mtd1 0 2097152 spi_read
--    Copied 2097152 bytes from address 0x00000000 in flash to spi_read
-+       root@1:~# mtd_debug read /dev/mtd1 0 2097152 spi_read
-+       Copied 2097152 bytes from address 0x00000000 in flash to spi_read
-=20
--    root@1:~# hexdump -C spi_read
--    00000000  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |.........=
-=2E......|
--    *
--    00200000
-+       root@1:~# hexdump -C spi_read
-+       00000000  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |......=
-=2E.........|
-+       *
-+       00200000
-=20
--c/ Write, read back and compare::
-+   c) Write, read back and compare::
-=20
--    root@1:~# mtd_debug write /dev/mtd1 0 2097152 spi_test
--    Copied 2097152 bytes from spi_test to address 0x00000000 in flash
-+       root@1:~# mtd_debug write /dev/mtd1 0 2097152 spi_test
-+       Copied 2097152 bytes from spi_test to address 0x00000000 in flash
-=20
--    root@1:~# mtd_debug read /dev/mtd1 0 2097152 spi_read
--    Copied 2097152 bytes from address 0x00000000 in flash to spi_read
-+       root@1:~# mtd_debug read /dev/mtd1 0 2097152 spi_read
-+       Copied 2097152 bytes from address 0x00000000 in flash to spi_read
-=20
--    root@1:~# sha1sum spi_*
--    51eeddc316a4121cf96e76e526d94d638283ec22  spi_read
--    51eeddc316a4121cf96e76e526d94d638283ec22  spi_test
-+       root@1:~# sha1sum spi_*
-+       51eeddc316a4121cf96e76e526d94d638283ec22  spi_read
-+       51eeddc316a4121cf96e76e526d94d638283ec22  spi_test
-=20
--d/ Dump mtd_info data::
-+   d) Dump mtd_info data::
-=20
--    root@1:~# mtd_debug info /dev/mtd1
--    mtd.type =3D MTD_NORFLASH
--    mtd.flags =3D MTD_CAP_NORFLASH
--    mtd.size =3D 8388608 (8M)
--    mtd.erasesize =3D 4096 (4K)
--    mtd.writesize =3D 1
--    mtd.oobsize =3D 0
--    regions =3D 0
-+       root@1:~# mtd_debug info /dev/mtd1
-+       mtd.type =3D MTD_NORFLASH
-+       mtd.flags =3D MTD_CAP_NORFLASH
-+       mtd.size =3D 8388608 (8M)
-+       mtd.erasesize =3D 4096 (4K)
-+       mtd.writesize =3D 1
-+       mtd.oobsize =3D 0
-+       regions =3D 0
+The patchset also comes with a short documentation of the prctl API.
 
-Thanks.
+This series is based on the second draft of the Ssdtso specification
+which was published recently on an RVI list:
+  https://lists.riscv.org/g/tech-arch-review/message/183
+Note, that the Ssdtso specification is in development state
+(i.e., not frozen or even ratified) which is also the reason
+why I marked the series as RFC.
 
---=20
-An old man doll... just what I always wanted! - Clara
+One aspect that is not covered in this patchset is virtualization.
+It is planned to add virtualization support in a later version.
+Hints/suggestions on how to implement this part are very much
+appreciated.
 
---4ywD7BkN9lcIBxOS
-Content-Type: application/pgp-signature; name="signature.asc"
+Christoph Müllner (5):
+  RISC-V: Add basic Ssdtso support
+  RISC-V: Expose Ssdtso via hwprobe API
+  uapi: prctl: Add new prctl call to set/get the memory consistency
+    model
+  RISC-V: Implement prctl call to set/get the memory consistency model
+  RISC-V: selftests: Add DTSO tests
 
------BEGIN PGP SIGNATURE-----
+ Documentation/arch/riscv/hwprobe.rst          |  3 +
+ .../mm/dynamic-memory-consistency-model.rst   | 76 ++++++++++++++++++
+ arch/riscv/Kconfig                            | 10 +++
+ arch/riscv/include/asm/csr.h                  |  1 +
+ arch/riscv/include/asm/dtso.h                 | 74 ++++++++++++++++++
+ arch/riscv/include/asm/hwcap.h                |  1 +
+ arch/riscv/include/asm/processor.h            |  8 ++
+ arch/riscv/include/asm/switch_to.h            |  3 +
+ arch/riscv/include/uapi/asm/hwprobe.h         |  1 +
+ arch/riscv/kernel/Makefile                    |  1 +
+ arch/riscv/kernel/cpufeature.c                |  1 +
+ arch/riscv/kernel/dtso.c                      | 33 ++++++++
+ arch/riscv/kernel/process.c                   |  4 +
+ arch/riscv/kernel/sys_riscv.c                 |  1 +
+ include/uapi/linux/prctl.h                    |  5 ++
+ kernel/sys.c                                  | 12 +++
+ tools/testing/selftests/riscv/Makefile        |  2 +-
+ tools/testing/selftests/riscv/dtso/.gitignore |  1 +
+ tools/testing/selftests/riscv/dtso/Makefile   | 11 +++
+ tools/testing/selftests/riscv/dtso/dtso.c     | 77 +++++++++++++++++++
+ 20 files changed, 324 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/mm/dynamic-memory-consistency-model.rst
+ create mode 100644 arch/riscv/include/asm/dtso.h
+ create mode 100644 arch/riscv/kernel/dtso.c
+ create mode 100644 tools/testing/selftests/riscv/dtso/.gitignore
+ create mode 100644 tools/testing/selftests/riscv/dtso/Makefile
+ create mode 100644 tools/testing/selftests/riscv/dtso/dtso.c
 
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCZWBMxAAKCRD2uYlJVVFO
-o2weAQD4knx9+5Yu3XTUNp7EP2+ydqS/Z0H52A5Ip/HPpCAELQEAh2pp7LI+92pC
-eMRIwkx5L9y0m+OagyPzTEApkzdVPQ0=
-=yn1L
------END PGP SIGNATURE-----
+-- 
+2.41.0
 
---4ywD7BkN9lcIBxOS--
 
