@@ -1,101 +1,135 @@
-Return-Path: <linux-doc+bounces-3007-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3009-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C13F87F710E
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 11:15:58 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 30E247F717E
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 11:31:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 4984FB20DB3
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 10:15:56 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 616FB1C20ECF
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 10:31:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F92C1863A;
-	Fri, 24 Nov 2023 10:15:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="rCFKbF3m"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 965801EB50;
+	Fri, 24 Nov 2023 10:31:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dkim=none
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3EE811719;
-	Fri, 24 Nov 2023 02:15:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
-	Sender:Reply-To:Content-ID:Content-Description;
-	bh=X/ymfIJYGS3rgfsyyKZPvatWK1hMRdU56iYMTo6mr84=; b=rCFKbF3mDACBFhTXzRNdFrFO4O
-	eoXOKmJ9nZiGJbfFMIBv6nwz3CsjBdIoMhWkUoG1xIESyQX9y7utknNb2crx4yYaVl0TokaNQnX59
-	UQEefO9tha/lsxyx4F65ZPyZ5QCqVo0rlZL/kdkYuCLGIjIenfBE0G4ANfmh4TiCyiHjQw5pCSoOw
-	9nE6YLG7xrJLF6VvKnJbRf5H0lcpRBYkeFjXyVCwHcJ8GALVBfL/W2eebEDWHFXmQx9wxeHAVLh5J
-	AP7Md+iD5Lbnbp5HhKqJfhCerVvC52VYb0wyb/cpFm3UZZNXbX+76free6tqI6J6N/OKWjkdwAGLS
-	Lh31sbQw==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
-	by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-	id 1r6TDU-00DqKC-0M;
-	Fri, 24 Nov 2023 10:15:20 +0000
-Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
-	id 83119300338; Fri, 24 Nov 2023 11:15:19 +0100 (CET)
-Date: Fri, 24 Nov 2023 11:15:19 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Christoph Muellner <christoph.muellner@vrull.eu>
-Cc: linux-riscv@lists.infradead.org, linux-kselftest@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Anup Patel <apatel@ventanamicro.com>,
-	Philipp Tomsich <philipp.tomsich@vrull.eu>,
-	Andrew Jones <ajones@ventanamicro.com>, Guo Ren <guoren@kernel.org>,
-	Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
-	Conor Dooley <conor.dooley@microchip.com>,
-	=?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@rivosinc.com>,
-	Alan Stern <stern@rowland.harvard.edu>,
-	Andrea Parri <parri.andrea@gmail.com>,
-	Will Deacon <will@kernel.org>, Daniel Lustig <dlustig@nvidia.com>
-Subject: Re: [RFC PATCH 0/5] RISC-V: Add dynamic TSO support
-Message-ID: <20231124101519.GP3818@noisy.programming.kicks-ass.net>
-References: <20231124072142.2786653-1-christoph.muellner@vrull.eu>
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTP id 5CD33110;
+	Fri, 24 Nov 2023 02:31:45 -0800 (PST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8BED913D5;
+	Fri, 24 Nov 2023 02:32:31 -0800 (PST)
+Received: from e127643.arm.com (unknown [10.57.5.4])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 47B063F7A6;
+	Fri, 24 Nov 2023 02:31:43 -0800 (PST)
+From: James Clark <james.clark@arm.com>
+To: linux-arm-kernel@lists.infradead.org,
+	linux-perf-users@vger.kernel.org,
+	suzuki.poulose@arm.com,
+	will@kernel.org,
+	mark.rutland@arm.com,
+	anshuman.khandual@arm.com,
+	namhyung@gmail.com
+Cc: James Clark <james.clark@arm.com>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v6 0/3] arm64: perf: Add support for event counting threshold
+Date: Fri, 24 Nov 2023 10:28:54 +0000
+Message-Id: <20231124102857.1106453-1-james.clark@arm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231124072142.2786653-1-christoph.muellner@vrull.eu>
 
-On Fri, Nov 24, 2023 at 08:21:37AM +0100, Christoph Muellner wrote:
-> From: Christoph Müllner <christoph.muellner@vrull.eu>
-> 
-> The upcoming RISC-V Ssdtso specification introduces a bit in the senvcfg
-> CSR to switch the memory consistency model at run-time from RVWMO to TSO
-> (and back). The active consistency model can therefore be switched on a
-> per-hart base and managed by the kernel on a per-process/thread base.
+Changes since v5:
+  * Restructure the docs and add some more explanations
+  * PMMIR.WIDTH -> PMMIR.THWIDTH in one comment
+  * Don't write EVTYPER.TC if TH is 0. Doesn't have any functional
+    effect but it might be a bit easier to understand the code.
+  * Expand the format field #define names
 
-You guys, computers are hartless, nobody told ya?
+Changes since v4:
 
-> This patch implements basic Ssdtso support and adds a prctl API on top
-> so that user-space processes can switch to a stronger memory consistency
-> model (than the kernel was written for) at run-time.
-> 
-> I am not sure if other architectures support switching the memory
-> consistency model at run-time, but designing the prctl API in an
-> arch-independent way allows reusing it in the future.
+  * Rebase onto v6.7-rc1, it no longer depends on kvmarm/next
+  * Remove change that moved ARMV8_PMU_EVTYPE_MASK to the asm files.
+    This actually depended on those files being included in a certain
+    order with arm_pmuv3.h to avoid circular includes. Now the
+    definition is done programmatically in arm_pmuv3.c instead.
 
-IIRC some Sparc chips could do this, but I don't think anybody ever
-exposed this to userspace (or used it much).
+Changes since v3:
 
-IA64 had planned to do this, except they messed it up and did it the
-wrong way around (strong first and then relax it later), which lead to
-the discovery that all existing software broke (d'uh).
+  * Drop #include changes to KVM source files because since
+    commit bc512d6a9b92 ("KVM: arm64: Make PMEVTYPER<n>_EL0.NSH RES0 if
+    EL2 isn't advertised"), KVM doesn't use ARMV8_PMU_EVTYPE_MASK
+    anymore
 
-I think ARM64 approached this problem by adding the
-load-acquire/store-release instructions and for TSO based code,
-translate into those (eg. x86 -> arm64 transpilers).
+Changes since v2:
 
-IIRC Risc-V actually has such instructions as well, so *why* are you
-doing this?!?!
+  * Split threshold_control attribute into two, threshold_compare and
+    threshold_count so that it's easier to use
+  * Add some notes to the first commit message and the cover letter
+    about the behavior in KVM
+  * Update the docs commit with regards to the split attribute
+ 
+Changes since v1:
+
+  * Fix build on aarch32 by disabling FEAT_PMUv3_TH and splitting event
+    type mask between the platforms
+  * Change armv8pmu_write_evtype() to take unsigned long instead of u64
+    so it isn't unnecessarily wide on aarch32
+  * Add UL suffix to aarch64 event type mask definition
+
+----
+
+FEAT_PMUv3_TH (Armv8.8) is a new feature that allows conditional
+counting of PMU events depending on how much the event increments on
+a single cycle. Two new config fields for perf_event_open have been
+added, and a PMU cap file for reading the max_threshold. See the second
+commit message and the docs in the last commit for more details.
+
+The feature is not currently supported on KVM guests, and PMMIR is set
+to read as zero, so it's not advertised as available. But it can be
+added at a later time. Writes to PMEVTYPER.TC and TH from guests are
+already RES0.
+
+The change has been validated on the Arm FVP model:
+
+  # Zero values, works as expected (as before).
+  $ perf stat -e dtlb_walk/threshold=0,threshold_compare=0/ -- true
+
+    5962      dtlb_walk/threshold=0,threshold_compare=0/
+
+  # Threshold >= 255 causes count to be 0 because dtlb_walk doesn't
+  # increase by more than 1 per cycle.
+  $ perf stat -e dtlb_walk/threshold=255,threshold_compare=2/ -- true
+
+    0      dtlb_walk/threshold=255,threshold_compare=2/
+  
+  # Keeping comparison as >= but lowering the threshold to 1 makes the
+  # count return.
+  $ perf stat -e dtlb_walk/threshold=1,threshold_compare=2/ -- true
+
+    6329      dtlb_walk/threshold=1,threshold_compare=2/
+
+James Clark (3):
+  arm64: perf: Include threshold control fields in PMEVTYPER mask
+  arm64: perf: Add support for event counting threshold
+  Documentation: arm64: Document the PMU event counting threshold
+    feature
+
+ Documentation/arch/arm64/perf.rst | 72 ++++++++++++++++++++++++
+ drivers/perf/arm_pmuv3.c          | 93 ++++++++++++++++++++++++++++++-
+ include/linux/perf/arm_pmuv3.h    |  4 +-
+ 3 files changed, 166 insertions(+), 3 deletions(-)
+
+-- 
+2.34.1
+
 
