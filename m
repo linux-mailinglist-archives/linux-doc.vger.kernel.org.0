@@ -1,144 +1,134 @@
-Return-Path: <linux-doc+bounces-3010-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3012-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC9B57F7182
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 11:31:59 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 24D3D7F71C8
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 11:41:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0A4061C20EA9
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 10:31:59 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A8D34B2125B
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 10:41:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A96331A591;
-	Fri, 24 Nov 2023 10:31:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dkim=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E3BC34427;
+	Fri, 24 Nov 2023 10:41:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="iwYrsNlf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTP id 9A858110;
-	Fri, 24 Nov 2023 02:31:52 -0800 (PST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CDA071474;
-	Fri, 24 Nov 2023 02:32:38 -0800 (PST)
-Received: from e127643.arm.com (unknown [10.57.5.4])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 8A1D83F7A6;
-	Fri, 24 Nov 2023 02:31:50 -0800 (PST)
-From: James Clark <james.clark@arm.com>
-To: linux-arm-kernel@lists.infradead.org,
-	linux-perf-users@vger.kernel.org,
-	suzuki.poulose@arm.com,
-	will@kernel.org,
-	mark.rutland@arm.com,
-	anshuman.khandual@arm.com,
-	namhyung@gmail.com
-Cc: James Clark <james.clark@arm.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v6 3/3] Documentation: arm64: Document the PMU event counting threshold feature
-Date: Fri, 24 Nov 2023 10:28:57 +0000
-Message-Id: <20231124102857.1106453-4-james.clark@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231124102857.1106453-1-james.clark@arm.com>
-References: <20231124102857.1106453-1-james.clark@arm.com>
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DF8931B2;
+	Fri, 24 Nov 2023 02:41:30 -0800 (PST)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3AO6ijpT003533;
+	Fri, 24 Nov 2023 10:41:17 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=qcppdkim1;
+ bh=I0mFE74+HCAZHSs5OcFV/WmM4ST9H8Z6coVPOaLZ/zg=;
+ b=iwYrsNlf0qflB8nGDpXnQ+T6s4IWkBlHahjYNhQDZjspPcImpVgSM+ssSXBT9M/xHWj1
+ yO3v7EomkXjNRRs738D5h7sH/q3OwudBtHm8gkXSPS1slNKYq+ViUvHUX7LpT+3PBG+O
+ Bm2U7duwJKcFujpFjEaWHApPNsRWy7XxzcXvDNmTbbNoVGnUJ+o8XCjgrLv5HlEHsO6g
+ P0lIVIV2PceGOqujayiH+KnCuwoD4QaBwaOVzHc6IbbkUD3wGI7PPpqas1ZruSvD46pa
+ c0yQbMpGArI6tIdb7myvcWOiAePQ9gMa4hRNLxcbcFEM+keiRIHETNjjHysUyyyQzt98 4w== 
+Received: from nalasppmta05.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3ujptr0q17-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 24 Nov 2023 10:41:16 +0000
+Received: from nalasex01c.na.qualcomm.com (nalasex01c.na.qualcomm.com [10.47.97.35])
+	by NALASPPMTA05.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 3AOAfGXG028633
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 24 Nov 2023 10:41:16 GMT
+Received: from [10.253.33.181] (10.80.80.8) by nalasex01c.na.qualcomm.com
+ (10.47.97.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.40; Fri, 24 Nov
+ 2023 02:41:12 -0800
+Message-ID: <b5e6c55c-af6b-4a29-95bd-389a9323920b@quicinc.com>
+Date: Fri, 24 Nov 2023 18:41:10 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 3/6] net: phy: at803x: add QCA8084 ethernet phy support
+Content-Language: en-US
+To: "Russell King (Oracle)" <linux@armlinux.org.uk>
+CC: Andrew Lunn <andrew@lunn.ch>, <davem@davemloft.net>, <edumazet@google.com>,
+        <kuba@kernel.org>, <pabeni@redhat.com>, <robh+dt@kernel.org>,
+        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
+        <hkallweit1@gmail.com>, <corbet@lwn.net>, <netdev@vger.kernel.org>,
+        <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>
+References: <1eb60a08-f095-421a-bec6-96f39db31c09@lunn.ch>
+ <ZVkRkhMHWcAR37fW@shell.armlinux.org.uk>
+ <eee39816-b0b8-475c-aa4a-8500ba488a29@lunn.ch>
+ <fef2ab86-ccd7-4693-8a7e-2dac2c80fd53@quicinc.com>
+ <1d4d7761-6b42-48ec-af40-747cb4b84ca5@lunn.ch>
+ <316fb626-4dc3-4540-9cc4-e45840e36f77@quicinc.com>
+ <ZVyZ+8Q2eNfAKjO/@shell.armlinux.org.uk>
+ <d2ac542c-aae3-49ae-ae2b-9defc4ca98eb@quicinc.com>
+ <ZV8+/4eNzLpLzSDG@shell.armlinux.org.uk>
+ <1bd2f3a9-3dd1-4c95-b4e5-c9bf2274f271@quicinc.com>
+ <ZWByn7HpAmPTP3GJ@shell.armlinux.org.uk>
+From: Jie Luo <quic_luoj@quicinc.com>
+In-Reply-To: <ZWByn7HpAmPTP3GJ@shell.armlinux.org.uk>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01c.na.qualcomm.com (10.47.97.35)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: XdTt8mComxSESH2LtOToWtzuUVmA7tdM
+X-Proofpoint-GUID: XdTt8mComxSESH2LtOToWtzuUVmA7tdM
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-23_15,2023-11-22_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 impostorscore=0
+ bulkscore=0 mlxscore=0 suspectscore=0 malwarescore=0 clxscore=1015
+ priorityscore=1501 spamscore=0 mlxlogscore=999 lowpriorityscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2311060000 definitions=main-2311240084
 
-Add documentation for the new Perf event open parameters and
-the threshold_max capability file.
 
-Signed-off-by: James Clark <james.clark@arm.com>
----
- Documentation/arch/arm64/perf.rst | 72 +++++++++++++++++++++++++++++++
- 1 file changed, 72 insertions(+)
 
-diff --git a/Documentation/arch/arm64/perf.rst b/Documentation/arch/arm64/perf.rst
-index 1f87b57c2332..41eee68951ff 100644
---- a/Documentation/arch/arm64/perf.rst
-+++ b/Documentation/arch/arm64/perf.rst
-@@ -164,3 +164,75 @@ and should be used to mask the upper bits as needed.
-    https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/arch/arm64/tests/user-events.c
- .. _tools/lib/perf/tests/test-evsel.c:
-    https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/lib/perf/tests/test-evsel.c
-+
-+Event Counting Threshold
-+==========================================
-+
-+Overview
-+--------
-+
-+FEAT_PMUv3_TH (Armv8.8) permits a PMU counter to increment only on
-+events whose count meets a specified threshold condition. For example if
-+threshold_compare is set to 2 ('Greater than or equal'), and the
-+threshold is set to 2, then the PMU counter will now only increment by
-+when an event would have previously incremented the PMU counter by 2 or
-+more on a single processor cycle.
-+
-+To increment by 1 after passing the threshold condition instead of the
-+number of events on that cycle, add the 'threshold_count' option to the
-+commandline.
-+
-+How-to
-+------
-+
-+These are the parameters for controlling the feature:
-+
-+.. list-table::
-+   :header-rows: 1
-+
-+   * - Parameter
-+     - Description
-+   * - threshold
-+     - Value to threshold the event by. A value of 0 means that
-+       thresholding is disabled and the other parameters have no effect.
-+   * - threshold_compare
-+     - | Comparison function to use, with the following values supported:
-+       |
-+       | 0: Not-equal
-+       | 1: Equals
-+       | 2: Greater-than-or-equal
-+       | 3: Less-than
-+   * - threshold_count
-+     - If this is set, count by 1 after passing the threshold condition
-+       instead of the value of the event on this cycle.
-+
-+The threshold, threshold_compare and threshold_count values can be
-+provided per event, for example:
-+
-+.. code-block:: sh
-+
-+  perf stat -e stall_slot/threshold=2,threshold_compare=2/ \
-+            -e dtlb_walk/threshold=10,threshold_compare=3,threshold_count/
-+
-+In this example the stall_slot event will count by 2 or more on every
-+cycle where 2 or more stalls happen. And dtlb_walk will count by 1 on
-+every cycle where the number of dtlb walks were less than 10.
-+
-+The maximum supported threshold value can be read from the caps of each
-+PMU, for example:
-+
-+.. code-block:: sh
-+
-+  cat /sys/bus/event_source/devices/armv8_pmuv3/caps/threshold_max
-+
-+  0x000000ff
-+
-+If a value higher than this is given, then it will be silently clamped
-+to the maximum. The highest possible maximum is 4095, as the config
-+field for threshold is limited to 12 bits, and the Perf tool will refuse
-+to parse higher values.
-+
-+If the PMU doesn't support FEAT_PMUv3_TH, then threshold_max will read
-+0, and both threshold and threshold_compare will be silently ignored.
-+threshold_max will also read as 0 on aarch32 guests, even if the host
-+is running on hardware with the feature.
--- 
-2.34.1
-
+On 11/24/2023 5:53 PM, Russell King (Oracle) wrote:
+> On Fri, Nov 24, 2023 at 05:47:04PM +0800, Jie Luo wrote:
+>>
+>>
+>> On 11/23/2023 8:01 PM, Russell King (Oracle) wrote:
+>>> On Thu, Nov 23, 2023 at 06:57:59PM +0800, Jie Luo wrote:
+>>>> On 11/21/2023 7:52 PM, Russell King (Oracle) wrote:
+>>>>> Ultimately, you will need a way to use inband signalling with Cisco
+>>>>> SGMII for 10M/100M/1G speeds, and then switch to 2500base-X when
+>>>>> operating at 2.5G speeds, and that is done via the PHY driver
+>>>>> updating phydev->interface.
+>>>>>
+>>>>> What we do need is some way for the PHY to also tell the PCS/MAC
+>>>>> whether inband should be used. This is something I keep bringing up
+>>>>> and now that we have PCS drivers revised to use the value from
+>>>>> phylink_pcs_neg_mode() _and_ a consistent implementation amongst them
+>>>>> we can now think about signalling to PCS drivers whether inband mode
+>>>>> needs to be turned off when switching between modes.
+>>>>
+>>>> Yes, we can switch the interface mode according to the current link
+>>>> speed in the pcs driver.
+>>>> but the issue is that the phy-mode i specified for the PHYLINK,
+>>>> if phy-mode is sgmii, the support capability is limited to maximum
+>>>> capability 1G during the PHYLINK setup and i can't configure it to 2.5G
+>>>> dynamically, if the phy-mode is 2500base-x, then PHY capability will
+>>>> be modified to only support 2.5G, other speeds can't be linked up.
+>>>
+>>> So you need my patches that add "possible_interfaces" to phylib so you
+>>> can tell phylink that you will be switching between SGMII and
+>>> 2500base-X. Please see the RFC posting of those patches I sent
+>>> yesterday and try them out - you will need to modify your phylib
+>>> driver to fill in phydev->possible_interfaces.
+>>
+>> Your patches work on my board, thanks Russell.
+> 
+> Please can you reply to the covering email for that series giving your
+> tested-by? Thanks.
+> 
+Ok.
 
