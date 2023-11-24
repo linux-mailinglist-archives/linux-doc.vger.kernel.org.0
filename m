@@ -1,208 +1,145 @@
-Return-Path: <linux-doc+bounces-3107-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3109-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34C187F8613
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 23:22:46 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 742F07F86D6
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Nov 2023 00:40:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E4D0928399B
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 22:22:44 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 2B86F1F20F8F
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Nov 2023 23:40:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A3D393D3B4;
-	Fri, 24 Nov 2023 22:22:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2B8CA3DB85;
+	Fri, 24 Nov 2023 23:40:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="mxK/2Edj"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="UJk7n/+f"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C75AF1FF6;
-	Fri, 24 Nov 2023 14:22:13 -0800 (PST)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3AOMJOVA032368;
-	Fri, 24 Nov 2023 22:21:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=qcppdkim1;
- bh=b5eTBZeeW3B0oIKYsibzqp9oXL4xrHRnjIPMFNhgnF0=;
- b=mxK/2EdjjVnrmjFpyttUkIAzFH6685VIp//oIOpM3MTuQV/vi4ldmtkBhd19UMXOOF8Q
- 6g5ORooFeJCNSKZa0PbA2h7XWG8pT2JRMWfLWP9Qr4nssAIOrSyliKcoIgO2NzUNpuu1
- 86cK5qj+YepaN+nyGspdarozNzE+Tn8Bh0lIsyBy0qMu/+VU5xROmBdXn9bKnbzRuvRR
- BHwr8hc2LJPAB9BoaSVWLnUvAGsY7Ei1rssFeW0v7SK8cbO5TN0EA3nkcyYdR06mBQ0d
- MHI736zOdlAfumZxsLpeyzL3SgWhmw1KpTrumHvtGlqt4IlDIjnRYQes05j3MIqzqJ9w dg== 
-Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3uj6emusg9-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 24 Nov 2023 22:21:55 +0000
-Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com [10.45.79.139])
-	by NASANPPMTA04.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 3AOMLsMQ016882
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 24 Nov 2023 22:21:54 GMT
-Received: from hu-mojha-hyd.qualcomm.com (10.80.80.8) by
- nasanex01c.na.qualcomm.com (10.45.79.139) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Fri, 24 Nov 2023 14:21:45 -0800
-From: Mukesh Ojha <quic_mojha@quicinc.com>
-To: <corbet@lwn.net>, <agross@kernel.org>, <andersson@kernel.org>,
-        <konrad.dybcio@linaro.org>, <robh+dt@kernel.org>,
-        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
-        <keescook@chromium.org>, <tony.luck@intel.com>, <gpiccoli@igalia.com>,
-        <mathieu.poirier@linaro.org>, <vigneshr@ti.com>, <nm@ti.com>,
-        <matthias.bgg@gmail.com>, <kgene@kernel.org>,
-        <alim.akhtar@samsung.com>, <bmasney@redhat.com>
-CC: <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <linux-hardening@vger.kernel.org>,
-        <linux-remoteproc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-mediatek@lists.infradead.org>,
-        <linux-samsung-soc@vger.kernel.org>, <kernel@quicinc.com>,
-        Mukesh Ojha <quic_mojha@quicinc.com>
-Subject: [Patch v6 12/12] soc: qcom: register ramoops region with APSS minidump
-Date: Sat, 25 Nov 2023 03:49:55 +0530
-Message-ID: <1700864395-1479-13-git-send-email-quic_mojha@quicinc.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1700864395-1479-1-git-send-email-quic_mojha@quicinc.com>
-References: <1700864395-1479-1-git-send-email-quic_mojha@quicinc.com>
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BA68D1990;
+	Fri, 24 Nov 2023 15:40:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1700869203; x=1732405203;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=BBPN3UdJMvFNoexMmj/RYUS6v8k8qPrmPLFVGwaOepI=;
+  b=UJk7n/+f5b+UTAUf2I/XlwEN2dUoBSinbIEBrxCI2e/cxO3wPuvk2Erx
+   arhXGtMQ0s9sXKbuFEGtp/bmX9khVPuuado/PC6/WqoEmS3w5IOTBzOG1
+   B9Psm0XgNeilbLhhOuBVgJ4Wsc6UFzonLp6GDMgx/Nf1+7U72WBXLLrww
+   FQnOSKG+vYQS1gLxcBC6hCipkzLaNrZU5LR5HyUE9p5UzznHKf+iESkxZ
+   ZReLv4X60bIn3vJ5zuzjrzDFHi+0w8Gzzh9kDMrIQx6R2LLOH5MelmLkN
+   /UPKijKvkgcY/9KEhimaQ1AExec3Y2Y9UBJyjQYrkLza4howUxI4by6hw
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10904"; a="396383137"
+X-IronPort-AV: E=Sophos;i="6.04,224,1695711600"; 
+   d="scan'208";a="396383137"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Nov 2023 15:40:03 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10904"; a="1015007948"
+X-IronPort-AV: E=Sophos;i="6.04,224,1695711600"; 
+   d="scan'208";a="1015007948"
+Received: from lkp-server01.sh.intel.com (HELO d584ee6ebdcc) ([10.239.97.150])
+  by fmsmga006.fm.intel.com with ESMTP; 24 Nov 2023 15:39:59 -0800
+Received: from kbuild by d584ee6ebdcc with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1r6fm9-0003OE-10;
+	Fri, 24 Nov 2023 23:39:57 +0000
+Date: Sat, 25 Nov 2023 07:39:07 +0800
+From: kernel test robot <lkp@intel.com>
+To: Nuno Sa via B4 Relay <devnull+nuno.sa.analog.com@kernel.org>,
+	linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Cc: oe-kbuild-all@lists.linux.dev, Jean Delvare <jdelvare@suse.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Bartosz Golaszewski <brgl@bgdev.pl>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Andy Shevchenko <andy@kernel.org>
+Subject: Re: [PATCH v2 2/2] hwmon: ltc4282: add support for the LTC4282 chip
+Message-ID: <202311250548.lUn3bm1A-lkp@intel.com>
+References: <20231124-ltc4282-support-v2-2-952bf926f83c@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nasanex01c.na.qualcomm.com (10.45.79.139)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: XhP7UB1QriAxNqtp8DRhI6TdM9sUSISM
-X-Proofpoint-GUID: XhP7UB1QriAxNqtp8DRhI6TdM9sUSISM
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-24_09,2023-11-22_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 clxscore=1015
- spamscore=0 bulkscore=0 priorityscore=1501 impostorscore=0 suspectscore=0
- phishscore=0 lowpriorityscore=0 mlxscore=0 mlxlogscore=999 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2311060000
- definitions=main-2311240174
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231124-ltc4282-support-v2-2-952bf926f83c@analog.com>
 
-Register ramoops region with APSS minidump so that
-these region gets captured on system crash.
+Hi Nuno,
 
-Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
----
- drivers/soc/qcom/qcom_minidump.c | 62 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 62 insertions(+)
+kernel test robot noticed the following build warnings:
 
-diff --git a/drivers/soc/qcom/qcom_minidump.c b/drivers/soc/qcom/qcom_minidump.c
-index c0f76a51d0e8..9a39b68903fb 100644
---- a/drivers/soc/qcom/qcom_minidump.c
-+++ b/drivers/soc/qcom/qcom_minidump.c
-@@ -18,8 +18,10 @@
- #include <linux/mutex.h>
- #include <linux/platform_device.h>
- #include <linux/printk.h>
-+#include <linux/pstore_ram.h>
- #include <linux/soc/qcom/smem.h>
- #include <linux/string.h>
-+#include <linux/workqueue.h>
- #include <soc/qcom/qcom_minidump.h>
- 
- #include "qcom_minidump_internal.h"
-@@ -56,12 +58,20 @@ struct minidump_elfhdr {
-  * @dev: Minidump backend device
-  * @apss_data: APSS driver data
-  * @md_lock: Lock to protect access to APSS minidump table
-+ * @work: Minidump work for any required execution in process context.
-  */
- struct minidump {
- 	struct minidump_elfhdr	 elf;
- 	struct device		 *dev;
- 	struct minidump_ss_data	 *apss_data;
- 	struct mutex		 md_lock;
-+	struct work_struct	 work;
-+};
-+
-+static LIST_HEAD(apss_md_rlist);
-+struct md_region_list {
-+	struct qcom_minidump_region md_region;
-+	struct list_head list;
- };
- 
- /*
-@@ -530,6 +540,52 @@ static int qcom_apss_md_table_init(struct minidump *md,
- 	return 0;
- }
- 
-+static int ramoops_region_md_register(const char *name, int id, void *vaddr,
-+				      phys_addr_t paddr, size_t size)
-+{
-+	struct qcom_minidump_region *md_region;
-+	struct md_region_list *mdr_list;
-+	int ret;
-+
-+	mdr_list = kzalloc(sizeof(*mdr_list), GFP_KERNEL);
-+	if (!mdr_list)
-+		return -ENOMEM;
-+
-+	md_region = &mdr_list->md_region;
-+	scnprintf(md_region->name, sizeof(md_region->name), "K%s%d", name, id);
-+	md_region->virt_addr = vaddr;
-+	md_region->phys_addr = paddr;
-+	md_region->size = size;
-+	ret = qcom_minidump_region_register(md_region);
-+	if (ret < 0) {
-+		pr_err("failed to register region in minidump: err: %d\n", ret);
-+		return ret;
-+	}
-+
-+	list_add(&mdr_list->list, &apss_md_rlist);
-+
-+	return 0;
-+}
-+
-+static void ramoops_register_md_callback(struct work_struct *work)
-+{
-+	register_ramoops_ready_notifier(ramoops_region_md_register);
-+}
-+
-+static void qcom_ramoops_minidump_unregister(void)
-+{
-+	struct md_region_list *mdr_list;
-+	struct md_region_list *tmp;
-+
-+	list_for_each_entry_safe(mdr_list, tmp, &apss_md_rlist, list) {
-+		struct qcom_minidump_region *region;
-+
-+		region = &mdr_list->md_region;
-+		qcom_minidump_region_unregister(region);
-+		list_del(&mdr_list->list);
-+	}
-+}
-+
- static void qcom_apss_md_table_exit(struct minidump_ss_data *mdss_data)
- {
- 	memset(mdss_data->md_ss_toc, cpu_to_le32(0), sizeof(*mdss_data->md_ss_toc));
-@@ -575,6 +631,9 @@ static int qcom_apss_minidump_probe(struct platform_device *pdev)
- 
- 	platform_set_drvdata(pdev, md);
- 
-+	INIT_WORK(&md->work, ramoops_register_md_callback);
-+	schedule_work(&md->work);
-+
- 	return ret;
- }
- 
-@@ -582,6 +641,9 @@ static void qcom_apss_minidump_remove(struct platform_device *pdev)
- {
- 	struct minidump *md = platform_get_drvdata(pdev);
- 
-+	flush_work(&md->work);
-+	qcom_ramoops_minidump_unregister();
-+	unregister_ramoops_ready_notifier(ramoops_region_md_register);
- 	qcom_apss_md_table_exit(md->apss_data);
- }
- 
+[auto build test WARNING on groeck-staging/hwmon-next]
+[also build test WARNING on linus/master v6.7-rc2 next-20231124]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Nuno-Sa-via-B4-Relay/hwmon-ltc4282-add-support-for-the-LTC4282-chip/20231124-231842
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/groeck/linux-staging.git hwmon-next
+patch link:    https://lore.kernel.org/r/20231124-ltc4282-support-v2-2-952bf926f83c%40analog.com
+patch subject: [PATCH v2 2/2] hwmon: ltc4282: add support for the LTC4282 chip
+config: x86_64-randconfig-161-20231125 (https://download.01.org/0day-ci/archive/20231125/202311250548.lUn3bm1A-lkp@intel.com/config)
+compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231125/202311250548.lUn3bm1A-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202311250548.lUn3bm1A-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/hwmon/ltc4282.c:347:6: warning: no previous prototype for 'ltc4282_round_rate' [-Wmissing-prototypes]
+     347 | long ltc4282_round_rate(struct clk_hw *hw, unsigned long rate,
+         |      ^~~~~~~~~~~~~~~~~~
+>> drivers/hwmon/ltc4282.c:356:15: warning: no previous prototype for 'ltc4282_recalc_rate' [-Wmissing-prototypes]
+     356 | unsigned long ltc4282_recalc_rate(struct clk_hw *hw, unsigned long parent)
+         |               ^~~~~~~~~~~~~~~~~~~
+
+
+vim +/ltc4282_round_rate +347 drivers/hwmon/ltc4282.c
+
+   346	
+ > 347	long ltc4282_round_rate(struct clk_hw *hw, unsigned long rate,
+   348				unsigned long *parent_rate)
+   349	{
+   350		int idx = find_closest(rate, ltc4282_out_rates,
+   351				       ARRAY_SIZE(ltc4282_out_rates));
+   352	
+   353		return ltc4282_out_rates[idx];
+   354	}
+   355	
+ > 356	unsigned long ltc4282_recalc_rate(struct clk_hw *hw, unsigned long parent)
+   357	{
+   358		struct ltc4282_state *st = container_of(hw, struct ltc4282_state,
+   359							clk_hw);
+   360		u32 clkdiv;
+   361		int ret;
+   362	
+   363		ret = regmap_read(st->map, LTC4282_CLK_DIV, &clkdiv);
+   364		if (ret)
+   365			return 0;
+   366	
+   367		clkdiv = FIELD_GET(LTC4282_CLKOUT_MASK, clkdiv);
+   368		if (!clkdiv)
+   369			return 0;
+   370		if (clkdiv == LTC4282_CLKOUT_INT)
+   371			return LTC4282_CLKOUT_SYSTEM;
+   372	
+   373		return LTC4282_CLKOUT_CNV;
+   374	}
+   375	
+
 -- 
-2.7.4
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
