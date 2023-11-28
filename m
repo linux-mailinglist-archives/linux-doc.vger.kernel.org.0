@@ -1,146 +1,132 @@
-Return-Path: <linux-doc+bounces-3342-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3344-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB6127FBC9F
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Nov 2023 15:21:18 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D7BD7FBCB6
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Nov 2023 15:29:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 55D8E281B19
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Nov 2023 14:21:17 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 580C2282EA8
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Nov 2023 14:29:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06FF35ABB6;
-	Tue, 28 Nov 2023 14:21:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="lQQbbVM5"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 529975ABBE;
+	Tue, 28 Nov 2023 14:29:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dkim=none
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AF877C1;
-	Tue, 28 Nov 2023 06:21:09 -0800 (PST)
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id A5C4F40E0031;
-	Tue, 28 Nov 2023 14:21:07 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
-	header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
-	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id FkzHQZ5LqZ19; Tue, 28 Nov 2023 14:21:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-	t=1701181262; bh=djgexPykShCCOWmlqzQx+qXNGN05nNP+MDkkppHP5vk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=lQQbbVM53H/aJ4N6bEkQJVcO39J/ja2tSgX0+UKo4glNWsK1sRo6EyH/7vu4JrU/M
-	 2WiDTGS7ddwGD8InQN2D0MqmxbYK0++1EKCoCMHc63DH3Xb1BdZ8rO0EEB8NuSCkH1
-	 kFefNmZnA9w7gtNhal55lIUuA7THvTekO9Bh/arDViTpE2ExivXbojg5OL2/wivvxE
-	 HQGiuD9BtypuL9wt2iwuQbOek0NXg7HsqqJ0C9RKFC+rt/qJ9Ldzwnq5HSB9N7DKLO
-	 0IaquxV3lWw7dNgZw8eoFtkGOvWLEx8QZy+aqVgzZcZmlLVVNIZDyAR4XE6w4r99c1
-	 xc9X548TgjfaIRKSkOmU58I6eW6bLkIYxaYmejprmT9j8Zrbfm7CrkAAUBe6EWYKrA
-	 UyP+EK72F/bHMsT8K60Yw+BwaVg87EYxPa/3UKmYnPpSB2pj773f1x7r9ggrw0caJv
-	 p1NxT1a3P6w5z9eY+d4/KE4gTcIghWfKWQzvSGoJWr0+Tec+BqUeT7sj1Vh8pp7AVE
-	 QxvJk71VZEco5RkCVOvz2xGs1wlQTvpO7h9WS1b5GkwPhAy6p8xNg2CY1N7Z/9g16T
-	 pv0V88ZHfrbneNVmtodespieQ0pmK+l2xefiE33pDiLzJmS8KoQVs3Hyu8ajDDdLls
-	 8y3W0AiTuTZvZx0aS6tCfkXI=
-Received: from zn.tnic (pd95304da.dip0.t-ipconnect.de [217.83.4.218])
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5EB9718D;
+	Tue, 28 Nov 2023 06:28:58 -0800 (PST)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 7DF9040E01A5;
-	Tue, 28 Nov 2023 14:20:55 +0000 (UTC)
-Date: Tue, 28 Nov 2023 15:20:49 +0100
-From: Borislav Petkov <bp@alien8.de>
-To: Tony Luck <tony.luck@intel.com>, Yazen Ghannam <yazen.ghannam@amd.com>
-Cc: Muralidhara M K <muralimk@amd.com>, linux-edac@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Muralidhara M K <muralidhara.mk@amd.com>, linux-doc@vger.kernel.org
-Subject: [PATCH] Documentation: Begin a RAS section
-Message-ID: <20231128142049.GTZWX3QQTSaQk/+u53@fat_crate.local>
-References: <20231102114225.2006878-1-muralimk@amd.com>
- <20231102114225.2006878-2-muralimk@amd.com>
+	by smtp-out1.suse.de (Postfix) with ESMTPS id D179521995;
+	Tue, 28 Nov 2023 14:28:56 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 9F5D313763;
+	Tue, 28 Nov 2023 14:28:56 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id OByqIij5ZWW3PQAAD6G6ig
+	(envelope-from <mhocko@suse.com>); Tue, 28 Nov 2023 14:28:56 +0000
+Date: Tue, 28 Nov 2023 15:28:55 +0100
+From: Michal Hocko <mhocko@suse.com>
+To: Gregory Price <gregory.price@memverge.com>
+Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org,
+	linux-arch@vger.kernel.org, linux-kernel@vger.kernel.org,
+	akpm@linux-foundation.org, arnd@arndb.de, tglx@linutronix.de,
+	luto@kernel.org, mingo@redhat.com, bp@alien8.de,
+	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+	tj@kernel.org, ying.huang@intel.com,
+	Gregory Price <gregory.price@memverge.com>
+Subject: Re: [RFC PATCH 02/11] mm/mempolicy: swap cond reference counting
+ logic in do_get_mempolicy
+Message-ID: <ZWX5J5frMXCnO1HW@tiehlicka>
+References: <20231122211200.31620-1-gregory.price@memverge.com>
+ <20231122211200.31620-3-gregory.price@memverge.com>
+ <ZWX0Dq6_-0NAFgSl@tiehlicka>
+ <ZWX0ytAwmOdooHdZ@memverge.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20231102114225.2006878-2-muralimk@amd.com>
+In-Reply-To: <ZWX0ytAwmOdooHdZ@memverge.com>
+X-Spamd-Bar: +++++++++++++++
+X-Spam-Score: 15.00
+X-Rspamd-Server: rspamd1
+Authentication-Results: smtp-out1.suse.de;
+	dkim=none;
+	spf=fail (smtp-out1.suse.de: domain of mhocko@suse.com does not designate 2a07:de40:b281:104:10:150:64:97 as permitted sender) smtp.mailfrom=mhocko@suse.com;
+	dmarc=fail reason="No valid SPF, No valid DKIM" header.from=suse.com (policy=quarantine)
+X-Rspamd-Queue-Id: D179521995
+X-Spamd-Result: default: False [15.00 / 50.00];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 R_SPF_FAIL(1.00)[-all];
+	 ARC_NA(0.00)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 NEURAL_HAM_LONG(-0.82)[-0.820];
+	 MIME_GOOD(-0.10)[text/plain];
+	 MID_RHS_NOT_FQDN(0.50)[];
+	 DMARC_POLICY_QUARANTINE(1.50)[suse.com : No valid SPF, No valid DKIM,quarantine];
+	 SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	 RCVD_COUNT_THREE(0.00)[3];
+	 MX_GOOD(-0.01)[];
+	 NEURAL_HAM_SHORT(-0.18)[-0.923];
+	 RCPT_COUNT_TWELVE(0.00)[19];
+	 FUZZY_BLOCKED(0.00)[rspamd.com];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 R_DKIM_NA(2.20)[];
+	 MIME_TRACE(0.00)[0:+];
+	 RCVD_TLS_ALL(0.00)[];
+	 BAYES_HAM(-0.00)[41.14%]
+X-Spam: Yes
 
-On Thu, Nov 02, 2023 at 11:42:22AM +0000, Muralidhara M K wrote:
-> From: Muralidhara M K <muralidhara.mk@amd.com>
+[restoring the CC list, I supect you didn't want this to be a private
+discussion]
+
+On Tue 28-11-23 09:10:18, Gregory Price wrote:
+> On Tue, Nov 28, 2023 at 03:07:10PM +0100, Michal Hocko wrote:
+> > On Wed 22-11-23 16:11:51, Gregory Price wrote:
+> > [...]
+> > > @@ -982,11 +991,11 @@ static long do_get_mempolicy(int *policy, nodemask_t *nmask,
+> > >  	}
+> > >  
+> > >   out:
+> > > -	mpol_cond_put(pol);
+> > > +	mpol_put(pol);
+> > >  	if (vma)
+> > >  		mmap_read_unlock(mm);
+> > >  	if (pol_refcount)
+> > > -		mpol_put(pol_refcount);
+> > > +		mpol_cond_put(pol_refcount);
+> > 
+> > Maybe I am just misreading the patch but pol_refcount should be always
+> > NULL with this patch
+> > 
 > 
-> AMD systems with Scalable MCA, each machine check error of a SMCA bank
-> type has an associated bit position in the bank's control (CTL) register.
+> earlier:
+> 
+> +               pol = pol_refcount = __get_vma_policy(vma, addr, &ilx);
+> 
+> i can split this into two lines if preferred.
+> 
+> If addr is not set, then yes pol_refcount is always null.
 
-Ontop of this. It is long overdue:
-
----
-From: "Borislav Petkov (AMD)" <bp@alien8.de>
-Date: Tue, 28 Nov 2023 14:37:56 +0100
-
-Add some initial RAS documentation. The expectation is for this to
-collect all the user-visible features for interacting with the RAS
-features of the kernel.
-
-Signed-off-by: Borislav Petkov (AMD) <bp@alien8.de>
----
- Documentation/RAS/ras.rst | 26 ++++++++++++++++++++++++++
- Documentation/index.rst   |  1 +
- 2 files changed, 27 insertions(+)
- create mode 100644 Documentation/RAS/ras.rst
-
-diff --git a/Documentation/RAS/ras.rst b/Documentation/RAS/ras.rst
-new file mode 100644
-index 000000000000..2556b397cd27
---- /dev/null
-+++ b/Documentation/RAS/ras.rst
-@@ -0,0 +1,26 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Reliability, Availability and Serviceability features
-+=====================================================
-+
-+This documents different aspects of the RAS functionality present in the
-+kernel.
-+
-+Error decoding
-+---------------
-+
-+* x86
-+
-+Error decoding on AMD systems should be done using the rasdaemon tool:
-+https://github.com/mchehab/rasdaemon/
-+
-+While the daemon is running, it would automatically log and decode
-+errors. If not, one can still decode such errors by supplying the
-+hardware information from the error::
-+
-+        $ rasdaemon -p --status <STATUS> --ipid <IPID> --smca
-+
-+Also, the user can pass particular family and model to decode the error
-+string::
-+
-+        $ rasdaemon -p --status <STATUS> --ipid <IPID> --smca --family <CPU Family> --model <CPU Model> --bank <BANK_NUM>
-diff --git a/Documentation/index.rst b/Documentation/index.rst
-index 9dfdc826618c..36e61783437c 100644
---- a/Documentation/index.rst
-+++ b/Documentation/index.rst
-@@ -113,6 +113,7 @@ to ReStructured Text format, or are simply too old.
-    :maxdepth: 1
- 
-    staging/index
-+   RAS/ras
- 
- 
- Translations
--- 
-2.42.0.rc0.25.ga82fb66fed25
-
+My bad, missed that. Making that two lines would be easier to read but
+nothing I would insist on of course.
 
 -- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
+Michal Hocko
+SUSE Labs
 
