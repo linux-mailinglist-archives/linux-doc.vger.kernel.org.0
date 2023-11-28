@@ -1,111 +1,92 @@
-Return-Path: <linux-doc+bounces-3343-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3340-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B6667FBCA4
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Nov 2023 15:21:45 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4109C7FBC6C
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Nov 2023 15:13:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EFF35B218F2
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Nov 2023 14:21:42 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 71EA31C20B52
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Nov 2023 14:13:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E6C235888;
-	Tue, 28 Nov 2023 14:21:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE5EC5AB8E;
+	Tue, 28 Nov 2023 14:13:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="lKKIARly"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="k1ccndGc"
 X-Original-To: linux-doc@vger.kernel.org
-X-Greylist: delayed 583 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 28 Nov 2023 06:21:31 PST
-Received: from out-179.mta0.migadu.com (out-179.mta0.migadu.com [91.218.175.179])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 409ADD4C
-	for <linux-doc@vger.kernel.org>; Tue, 28 Nov 2023 06:21:31 -0800 (PST)
-Message-ID: <6d0f8057-70f9-46f9-828a-df03c753b42b@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1701180706;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Hxr6Qi8uAR1GAsmRwi31SrOVsQk0+PK+MAopQh8m5vk=;
-	b=lKKIARlyv1H6YGZl6IGyLBEni04sQJfG863/4ZgCGXNR9S/hHpHmfvXyouaj//rnKHuvYk
-	43za6NCU8WEn9fiHOOidCkKIH83XwBPPuHZ4e1Grw5BHUwFC6vH+V7cw0wmx5/w3WiJdFA
-	LOF/zVvAJBOiCI+vxywRaIkiRGMDZMs=
-Date: Tue, 28 Nov 2023 22:11:24 +0800
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7BBAD199A;
+	Tue, 28 Nov 2023 06:13:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=dDWm9CUcqa7qH41B7Whj98vA6MVRIJzvGrAmMTqWiVM=; b=k1ccndGcLX6gUrYTrCsxIBOFGl
+	MkeYFx0GPSGokeSazUCoUuLws3DX7En3ARF0MB7KShSYyfXYvZDxNFJmI4gEury/xhXb+jdoh0mAI
+	Aak9JTHFBKhCHIXnnENMLukO7iYICrx0lKZfV/lbtK1DkNhHM9QM+/xR3iKdGdm9qFqwRwWywrtfk
+	wnA9oT/9M75jgLWJH62gKjBSTg4H3XtnO8ehVjKrU8BJNNPccLobTDH5os1FU4rw88AhHtmO1vUqr
+	ONBqILc6/puYX3jZJQ9rE29ZKFUtXW+/kZ2AWwaks/K/vbaxupdyeq2khx6QiGTDSUrw5qmGlbW2r
+	QRHicwBw==;
+Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
+	id 1r7ypZ-00CQUv-0M; Tue, 28 Nov 2023 14:12:53 +0000
+Date: Tue, 28 Nov 2023 14:12:52 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Randy Dunlap <rdunlap@infradead.org>
+Cc: attreyee-muk <tintinm2017@gmail.com>, jpoimboe@kernel.org,
+	jikos@kernel.org, mbenes@suse.cz, pmladek@suse.com,
+	joe.lawrence@redhat.com, corbet@lwn.net,
+	live-patching@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Took care of some grammatical mistakes
+Message-ID: <ZWX1ZB5p5Vhz7WD2@casper.infradead.org>
+References: <20231127155758.33070-1-tintinm2017@gmail.com>
+ <202dbdf5-1adf-4ffa-a50d-0424967286ba@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [v4,43/45] drm/sun4i: hdmi: Switch to container_of_const
-Content-Language: en-US
-To: Maxime Ripard <mripard@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, Emma Anholt <emma@anholt.net>,
- Jonathan Corbet <corbet@lwn.net>, Sandy Huang <hjc@rock-chips.com>,
- =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko@sntech.de>,
- Chen-Yu Tsai <wens@csie.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Hans Verkuil <hverkuil@xs4all.nl>,
- linux-rockchip@lists.infradead.org, linux-sunxi@lists.linux.dev,
- linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
-References: <20231128-kms-hdmi-connector-state-v4-43-c7602158306e@kernel.org>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Sui Jingfeng <sui.jingfeng@linux.dev>
-In-Reply-To: <20231128-kms-hdmi-connector-state-v4-43-c7602158306e@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <202dbdf5-1adf-4ffa-a50d-0424967286ba@infradead.org>
 
-Hi,
+On Mon, Nov 27, 2023 at 11:41:31AM -0800, Randy Dunlap wrote:
+> Hi,
+> 
+> On 11/27/23 07:57, attreyee-muk wrote:
+> > Respected Maintainers, 
+> > 
+> > I have made some grammatical changes in the livepatch.rst file where I
+> > felt that the sentence would have sounded more correct and would have become easy for
+> > beginners to understand by reading. 
+> > Requesting review of my proposed changes from the mainatiners. 
+> > 
+> > Thank You
+> > Attreyee Mukherjee
+> > 
+> > Signed-off-by: attreyee-muk <tintinm2017@gmail.com>
+> > ---
+> >  Documentation/livepatch/livepatch.rst | 8 ++++----
+> >  1 file changed, 4 insertions(+), 4 deletions(-)
+> > 
+> > diff --git a/Documentation/livepatch/livepatch.rst b/Documentation/livepatch/livepatch.rst
+> > index 68e3651e8af9..a2d2317b7d6b 100644
+> > --- a/Documentation/livepatch/livepatch.rst
+> > +++ b/Documentation/livepatch/livepatch.rst
+> > @@ -35,11 +35,11 @@ and livepatching:
+> >  
+> >  All three approaches need to modify the existing code at runtime. Therefore
+> > -they need to be aware of each other and not step over each other's toes.
+> > +they need to be aware of each other and not step over each others' toes.
+> 
+> I've never seen that written like that, so I disagree here. FWIW.
 
+"Step over" is new to me too.  I see "step on" much more often.
+As far as placement of the apostrophe,
+https://ludwig.guru/s/step+on+each+others+toes
+suggests either omitting the apostrophe or placing it after the s,
+as attreyee-muk has done is most common.
 
-On 2023/11/28 18:24, Maxime Ripard wrote:
-> container_of_const() allows to preserve the pointer constness and is
-> thus more flexible than inline functions.
->
-> Let's switch all our instances of container_of() to container_of_const().
->
-> Signed-off-by: Maxime Ripard <mripard@kernel.org>
-
-
-LGTM,
-
-Reviewed-by: Sui Jingfeng <sui.jingfeng@linux.dev>
-
-
-> ---
->   drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c | 16 ++++------------
->   1 file changed, 4 insertions(+), 12 deletions(-)
->
-> diff --git a/drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c b/drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c
-> index bae69d696765..c276d984da6b 100644
-> --- a/drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c
-> +++ b/drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c
-> @@ -30,19 +30,11 @@
->   #include "sun4i_drv.h"
->   #include "sun4i_hdmi.h"
->   
-> -static inline struct sun4i_hdmi *
-> -drm_encoder_to_sun4i_hdmi(struct drm_encoder *encoder)
-> -{
-> -	return container_of(encoder, struct sun4i_hdmi,
-> -			    encoder);
-> -}
-> +#define drm_encoder_to_sun4i_hdmi(e)		\
-> +	container_of_const(e, struct sun4i_hdmi, encoder)
->   
-> -static inline struct sun4i_hdmi *
-> -drm_connector_to_sun4i_hdmi(struct drm_connector *connector)
-> -{
-> -	return container_of(connector, struct sun4i_hdmi,
-> -			    connector);
-> -}
-> +#define drm_connector_to_sun4i_hdmi(c)		\
-> +	container_of_const(c, struct sun4i_hdmi, connector)
->   
->   static int sun4i_hdmi_setup_avi_infoframes(struct sun4i_hdmi *hdmi,
->   					   struct drm_display_mode *mode)
 
