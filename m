@@ -1,175 +1,131 @@
-Return-Path: <linux-doc+bounces-3483-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3485-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 359527FD3B7
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Nov 2023 11:13:11 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9991A7FD3BE
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Nov 2023 11:13:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 36D7E1C210D4
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Nov 2023 10:13:10 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 56C7A28213F
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Nov 2023 10:13:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 110721B296;
-	Wed, 29 Nov 2023 10:12:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BCB4B19BAC;
+	Wed, 29 Nov 2023 10:13:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hey1Amx2"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GKlf5lT5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com [IPv6:2a00:1450:4864:20::42b])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 18B7D10DD;
-	Wed, 29 Nov 2023 02:12:42 -0800 (PST)
-Received: by mail-wr1-x42b.google.com with SMTP id ffacd0b85a97d-332fd81fc8dso2488216f8f.3;
-        Wed, 29 Nov 2023 02:12:42 -0800 (PST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com [IPv6:2a00:1450:4864:20::12b])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6A6961BCF;
+	Wed, 29 Nov 2023 02:13:19 -0800 (PST)
+Received: by mail-lf1-x12b.google.com with SMTP id 2adb3069b0e04-50bc8a9503fso74775e87.3;
+        Wed, 29 Nov 2023 02:13:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701252760; x=1701857560; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=NkBsTL9nrVjctijvE+YbYrzImc81e4ljZYTKXc6wv0k=;
-        b=hey1Amx2+s22hk9Ib0dK1mvL64Wj7QLVrFN/bcmNLa7D9QY2ZluZchdQbJXMnCXAiX
-         1Jr4hYKM+KVVC7IItE+N11SGhEGbkyCQsNO6u6K42mTxcE4nsBvdVcCAaFyYjFKHVsFQ
-         qV9bLp34PlyZO9O81S6kq8pvAK7atULyt8k7BsMonTXfA5hanIxciAZugIWrEF9oCYx7
-         g9doocwwcXu2BBxKRefNkBo5n8xuivM4rMhcFb/OvRqqmtDzwSY6o93CRNVjC3+zzB/d
-         dgv8iAvOnsB+sTL14rVezqLoxPIXw28Nq1QGhXICgoQT6NTt8/YDNP73x+o5AJV7PnIk
-         2aKw==
+        d=gmail.com; s=20230601; t=1701252797; x=1701857597; darn=vger.kernel.org;
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=gCZTkTf5gNqH/rsoLk7etD6DwWJwR710k5LJwshNSuI=;
+        b=GKlf5lT5LfTn+FOIKdk4+B/fsnJPS5/dZaR06MKOv57OcUU11MD9L/FVkI2tSsJpOW
+         17Z34nxsL7V7w49178dmUlbgWCtUIxQCGTGXGFZNSM8tmet1Xm3nvJYTJ4pB3I8ncCXx
+         JFljOhwkeriSwVBgPGEVCLGyC1i4o54dArHOPssOmTq3Y1+cV7nbMQWwSGuLmk7EvZ6h
+         4w0EVo5MZfE/zt3qU1C+rkGy8ogu4pxx6ye/1W6X9yK+aHHxyBx+MT9iYboTuTk0hw5T
+         WzGoz5hvq5ofm1F/d1WNBbb5FCZ9+tYMiBUDEYEDI8voEHzd0pEeGszidbRcc2/OUhQW
+         yzkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701252760; x=1701857560;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=NkBsTL9nrVjctijvE+YbYrzImc81e4ljZYTKXc6wv0k=;
-        b=j449IG0Hkzsd5jkCjZfXrdlqvU2dgpIITrPcJMJhXXZLd4bX8VxlMvYXoEt5qWJWG1
-         V/Cw0nj03RFl9q4SDsFzcuF8gq5AEO2/IukxMRyusWt5bh331pMNc7v1yNRz7aNavIkx
-         Z/WgWOFA/91SGaMJ3RlRM+mMpV3pQ54BCrAAZYhiZqO+zYGeyg5FcsoQ6lcBqNynUX+j
-         jt1BYupeNB5lAW0oynSFppwOBuxcLDDUk1Rgq8TZWRZG8nVpPe6I3LGOmjhjSpHMHc8d
-         JPSaaTlF7svm4UTDCpMS91SOTFWcJQD8WVWX6hdH4NNXQNPrMNYbwEf8rgg5a4pCZQsT
-         uyVg==
-X-Gm-Message-State: AOJu0YzjrSbnlEO360id986aOSAsZxatICvaamjVCb72jN+kpW856OLy
-	UvpyQKIltmOXX5PQdTEqWXKXCo0VYpfzjw==
-X-Google-Smtp-Source: AGHT+IED4UjOCVMDV75Pc1W80n94fzjHbzOklqDy8vqSwaspmOB9xfAfwvHqMlAhmFGyB5NUNVXoGQ==
-X-Received: by 2002:adf:ee49:0:b0:333:a27:2326 with SMTP id w9-20020adfee49000000b003330a272326mr3736606wro.25.1701252759876;
-        Wed, 29 Nov 2023 02:12:39 -0800 (PST)
-Received: from imac.fritz.box ([2a02:8010:60a0:0:648d:8c5c:f210:5d75])
-        by smtp.gmail.com with ESMTPSA id k24-20020a5d5258000000b00332d04514b9sm17296877wrc.95.2023.11.29.02.12.38
+        d=1e100.net; s=20230601; t=1701252797; x=1701857597;
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=gCZTkTf5gNqH/rsoLk7etD6DwWJwR710k5LJwshNSuI=;
+        b=p9dtK1arQeX5CrM7b1F+lJ6jg30D+7RIfUaxkyHKSB/KMUZINPwCpbB4SGq16UiOZZ
+         wJoTrjdPFyV2c4jMZ+Mgtht009NSDV70R4Trv+HdjdGdHA+ylpt82hggsuPOpGToHzsa
+         rnS7AFQUb5WljNSRXih7Tp0lyTWC8bdTs7+U8NuNU8RMyt5xyE06H/LQpwhBSFMxfYFv
+         Ptnqqmw0jUHx1Xp48XR5PpQYb0GoH5jzJqqUgiom0mQY4OjZXkESYfW8AF27mHX+qV7m
+         lH/NWi5HidUjCyvhThE3PenXOkSGH6gUG6f20rwTW+7blDwk3/OgDZa2NPq62SwSNUHF
+         3Ghw==
+X-Gm-Message-State: AOJu0YxjUosEhzCYnYuRberXMNI0QsimDNpOeSnGBmtzRAKC/sqdRwOD
+	AuA+QFN2nHG/v6T5pQ08yFg=
+X-Google-Smtp-Source: AGHT+IEqoByK4nUUfepBkFUQYGj/+qIG7mkFMGeDo/wE/qhqodU6sLdPk1cmUua5FNVdwpoUj02mkQ==
+X-Received: by 2002:a19:f60e:0:b0:507:cfbc:bf8d with SMTP id x14-20020a19f60e000000b00507cfbcbf8dmr11730596lfe.16.1701252797196;
+        Wed, 29 Nov 2023 02:13:17 -0800 (PST)
+Received: from eldfell ([194.136.85.206])
+        by smtp.gmail.com with ESMTPSA id q9-20020a0565123a8900b0050abbda2c52sm2140292lfu.157.2023.11.29.02.13.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Nov 2023 02:12:39 -0800 (PST)
-From: Donald Hunter <donald.hunter@gmail.com>
-To: netdev@vger.kernel.org,
-	Jakub Kicinski <kuba@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org
-Cc: donald.hunter@redhat.com,
-	Donald Hunter <donald.hunter@gmail.com>
-Subject: [RFC PATCH net-next v1 6/6] tools/net/ynl: Add optional fixed-header to dynamic nests
-Date: Wed, 29 Nov 2023 10:11:59 +0000
-Message-ID: <20231129101159.99197-7-donald.hunter@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231129101159.99197-1-donald.hunter@gmail.com>
-References: <20231129101159.99197-1-donald.hunter@gmail.com>
+        Wed, 29 Nov 2023 02:13:16 -0800 (PST)
+Date: Wed, 29 Nov 2023 12:12:59 +0200
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Ville =?UTF-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
+Cc: Maxime Ripard <mripard@kernel.org>, Jani Nikula
+ <jani.nikula@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Emma Anholt <emma@anholt.net>, Jonathan Corbet <corbet@lwn.net>,
+ linux-kernel@vger.kernel.org, Samuel Holland <samuel@sholland.org>, Sandy
+ Huang <hjc@rock-chips.com>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ linux-doc@vger.kernel.org, Hans Verkuil <hverkuil@xs4all.nl>,
+ linux-rockchip@lists.infradead.org, Chen-Yu Tsai <wens@csie.org>,
+ dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org,
+ linux-sunxi@lists.linux.dev, linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH v4 05/45] drm/connector: Check drm_connector_init
+ pointers arguments
+Message-ID: <20231129121259.47746996@eldfell>
+In-Reply-To: <ZWXv1Oi_sH0BRWao@intel.com>
+References: <20231128-kms-hdmi-connector-state-v4-0-c7602158306e@kernel.org>
+	<20231128-kms-hdmi-connector-state-v4-5-c7602158306e@kernel.org>
+	<87h6l66nth.fsf@intel.com>
+	<v3hplco5fdedv6bnc6mwx2zhhw4xxdiekha26ykhc5cmy7ol77@2irk3w4hmabw>
+	<ZWXv1Oi_sH0BRWao@intel.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; boundary="Sig_/qS7Sjt2IF0HAAZwDWVWm5Tz";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
 
-Add support for an optional fixed-header to dynamic nested attribute
-spaces. Several of the tc qdiscs have a binary struct for their
-'options' instead of nested attributes. But the 'netem' qdisc has a
-struct followed by nlattrs in its 'options'.
+--Sig_/qS7Sjt2IF0HAAZwDWVWm5Tz
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-If a nest can have an optional fixed-header followed by zero or more
-nlattrs then all cases can be supported.
+On Tue, 28 Nov 2023 15:49:08 +0200
+Ville Syrj=C3=A4l=C3=A4 <ville.syrjala@linux.intel.com> wrote:
 
-Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
----
- Documentation/netlink/netlink-raw.yaml |  2 ++
- tools/net/ynl/lib/ynl.py               | 24 +++++++++++++++---------
- 2 files changed, 17 insertions(+), 9 deletions(-)
+> Should we perhaps start to use the (arguably hideous)
+>  - void f(struct foo *bar)
+>  + void f(struct foo bar[static 1])
+> syntax to tell the compiler we don't accept NULL pointers?
+>=20
+> Hmm. Apparently that has the same problem as using any
+> other kind of array syntax in the prototype. That is,
+> the compiler demands to know the definition of 'struct foo'
+> even though we're passing in effectively a pointer. Sigh.
 
-diff --git a/Documentation/netlink/netlink-raw.yaml b/Documentation/netlink/netlink-raw.yaml
-index 62061e180f8f..b5295057dcea 100644
---- a/Documentation/netlink/netlink-raw.yaml
-+++ b/Documentation/netlink/netlink-raw.yaml
-@@ -292,6 +292,8 @@ properties:
-                           description:
-                             Name of the sub-space used inside the attribute.
-                           type: string
-+                        fixed-header:
-+                          type: string
-                         struct:
-                           description:
-                             Name of the struct type used for the attribute.
-diff --git a/tools/net/ynl/lib/ynl.py b/tools/net/ynl/lib/ynl.py
-index 5ce01ce37573..86d591cb0047 100644
---- a/tools/net/ynl/lib/ynl.py
-+++ b/tools/net/ynl/lib/ynl.py
-@@ -170,10 +170,9 @@ class NlAttr:
- 
- 
- class NlAttrs:
--    def __init__(self, msg):
-+    def __init__(self, msg, offset=0):
-         self.attrs = []
- 
--        offset = 0
-         while offset < len(msg):
-             attr = NlAttr(msg, offset)
-             offset += attr.full_len
-@@ -371,8 +370,8 @@ class NetlinkProtocol:
-         fixed_header_size = 0
-         if ynl:
-             op = ynl.rsp_by_value[msg.cmd()]
--            fixed_header_size = ynl._fixed_header_size(op)
--        msg.raw_attrs = NlAttrs(msg.raw[fixed_header_size:])
-+            fixed_header_size = ynl._fixed_header_size(op.fixed_header)
-+        msg.raw_attrs = NlAttrs(msg.raw, fixed_header_size)
-         return msg
- 
-     def get_mcast_id(self, mcast_name, mcast_groups):
-@@ -571,8 +570,15 @@ class YnlFamily(SpecFamily):
-             decoded = self._decode_binary(attr, dyn_spec)
-         elif dyn_spec['type'] == 'nest':
-             attr_space = dyn_spec['nested-attributes']
-+            fixed_header_name = dyn_spec.yaml.get('fixed-header')
-             if attr_space in self.attr_sets:
--                decoded = self._decode(NlAttrs(attr.raw), attr_space)
-+                decoded = {}
-+                offset = 0
-+                if fixed_header_name:
-+                    decoded.update(self._decode_fixed_header(attr, fixed_header_name));
-+                    offset = self._fixed_header_size(fixed_header_name)
-+                subdict = self._decode(NlAttrs(attr.raw, offset), attr_space)
-+                decoded.update(subdict)
-             else:
-                 raise Exception(f"Unknown attribute-set '{attr_space}'")
-         else:
-@@ -658,16 +664,16 @@ class YnlFamily(SpecFamily):
-             return
- 
-         msg = self.nlproto.decode(self, NlMsg(request, 0, op.attr_set))
--        offset = 20 + self._fixed_header_size(op)
-+        offset = 20 + self._fixed_header_size(op.fixed_header)
-         path = self._decode_extack_path(msg.raw_attrs, op.attr_set, offset,
-                                         extack['bad-attr-offs'])
-         if path:
-             del extack['bad-attr-offs']
-             extack['bad-attr'] = path
- 
--    def _fixed_header_size(self, op):
--        if op.fixed_header:
--            fixed_header_members = self.consts[op.fixed_header].members
-+    def _fixed_header_size(self, name):
-+        if name:
-+            fixed_header_members = self.consts[name].members
-             size = 0
-             for m in fixed_header_members:
-                 format = NlAttr.get_format(m.type, m.byte_order)
--- 
-2.42.0
 
+__attribute__((nonnull)) ?
+
+
+Thanks,
+pq
+
+--Sig_/qS7Sjt2IF0HAAZwDWVWm5Tz
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmVnDqsACgkQI1/ltBGq
+qqde7A/+LfG5e8v6ABH2JqANkfijej4EDU9sSC3ZWBaUspi3UJEY1U0ZrDHgQd27
+lLSoxs0tguK5Dtehhk/Mn4S1XmyDtRrKNB/2L/rNqilREqQa5ciQG9OFjpqnepS2
+3kONuuooZchgnujkUjmgCg+L1X05peA166I3R9MkD4N3eqBH++XmohBaeUJDpUnN
+n1OATmnWyX2df7p/qBpOhVaNT+zu8HCgsIZq//PDNTxQxmHP5CPqbxbxuBjcwFHt
+bX1coZ602jx16CsrwaVYgVsHehXW0ru901OSPJ4flgpx/EyAjA4hHuVg+lJIZKqs
+wQRR4p/QdyBRULqGl/+4VML92ccuHFCedEtbLyH+RXSTlM547Q9nwtUPw1lB7tYQ
+Zx0BchNXyqKGnYvQUx5rTpJlTjwwq/IqkGkXnzpc3tIuj7hNTXEE1+3voPqNlnlU
+J16Lt49s2r4J2ufAykGzgqC19HM5baSykl006GFCpzLrH6iETMejOymRxAFlnE8m
+NdVHVD2YMPW9c21sJ+UjfbGrvF3H6E6MYZLDQLRnL44aHuYkCK6uSBfpgF1ugEqP
+Tzqd5wGEhEeH6OmzYEiwWHBkNJdiGnA4yo1dzpLdgdGaEKHRfdcGePGcNlLdtNcI
+AQZwl9NR+mk0zozfoa9HsXTUv+Su0TXpgD/prZ7PyqzSeM/SmkE=
+=Sfat
+-----END PGP SIGNATURE-----
+
+--Sig_/qS7Sjt2IF0HAAZwDWVWm5Tz--
 
