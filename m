@@ -1,113 +1,228 @@
-Return-Path: <linux-doc+bounces-3648-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3650-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 273617FFBF5
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 21:08:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49ABD7FFC1A
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 21:15:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D6C08281996
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 20:07:59 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F3B27281A69
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 20:15:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DA78153E12;
-	Thu, 30 Nov 2023 20:07:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 471DB56459;
+	Thu, 30 Nov 2023 20:15:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CLAfUB5Q"
+	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="mUaVC/ga"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com [IPv6:2607:f8b0:4864:20::d34])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0E91810F8;
-	Thu, 30 Nov 2023 12:07:53 -0800 (PST)
-Received: by mail-io1-xd34.google.com with SMTP id ca18e2360f4ac-7b34ec3e44fso38157139f.3;
-        Thu, 30 Nov 2023 12:07:53 -0800 (PST)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com [IPv6:2607:f8b0:4864:20::834])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DBFA51700
+	for <linux-doc@vger.kernel.org>; Thu, 30 Nov 2023 12:15:08 -0800 (PST)
+Received: by mail-qt1-x834.google.com with SMTP id d75a77b69052e-41cd97d7272so8035481cf.0
+        for <linux-doc@vger.kernel.org>; Thu, 30 Nov 2023 12:15:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701374872; x=1701979672; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=f8JkjsLram/ejernmiCZTwmtwfg8aQ1F8JO+U2W+Xm0=;
-        b=CLAfUB5QSdKWH/Oc/3KQivo4dQmljeCGVFvMlqlgbggvJBCNH2mfvaJFy2hgzf7s0X
-         TXqKPkftGLUjoVbHrpgce85Db8MtQJI4bpB8uE5AYbAGV8DDoeOvJcpDW4n3/A6w1rZ3
-         P+fAb/sn6LjeKFy/u8QXQ5kP55dscZEsaPtRL75Y9LmLFWkH/N2haIK/tZrRGUvddYOL
-         aqgHiRl1b+WFUoGY27aHBSIbJJOQkqzK9nTCZxPWg+EHYiWd/dGb6pvM1uxZ0M0FiDBz
-         ENoEJ8JF+Jo2o6bFhQt+a1ZJX69QeqMiucX7agh/U/z2XiM17F5wBPbCCdsaxPXs/Dtq
-         a7jA==
+        d=soleen.com; s=google; t=1701375308; x=1701980108; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=X5AMqGJYt6SEyyaxLyp7JmYGeHIyK2cLcP93CB0xsAo=;
+        b=mUaVC/gamRdj9qV4/WCNqD5F1p2LBWIHcnN/DlliTxfnZ7YW0GUoveVSmO8w+MTU7S
+         0C1ZJOKMnSR3+gA4xgdR75ON06IKP68Gzgus3OAsHnOo0S3S4MeSz0AsF7AdXjB3yeEk
+         ZgFrq86t/qxtYS147lcHR/tZW6VvlKlzlPD9W9E2FB52gHkY2u9mBkmEjyEqusWPx2HR
+         Rn5MzeBipy5/L02dPpgHNETqL8b44Qc+c5v2zrfm3asxHEIhyiT/lLPQjlL1XtQkPjaj
+         dHo4fWCxOUdEdStaoQuhb4qXZ4HldNQfLG/tLes/8aSjw6TeTpWW/NOUTejBlhbwZlKQ
+         VfkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701374872; x=1701979672;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=f8JkjsLram/ejernmiCZTwmtwfg8aQ1F8JO+U2W+Xm0=;
-        b=XGro2ZgtM86hlwFnzXks140OPk1IOgGaOcl9XVd9xwqJneoerOH9NmPOc4BgS/785u
-         HIYg/sMOtLh3EYBYC3kaeBe6etEFVQ4k3T4tWm1ayCUzFPp5AuRPNXuV6MMbvx4e60mP
-         QBCYYIhmBSqGxXHKwF9SIQOaKH4fRTt6hShAJUjS8OuIBV88sCRiBIJMe976MMbKY4gH
-         IXMX5uXpqNVKrEt4J2XxHxVJcx0ipuCeERuLDWxJpN4VwC5Aacmd9+PnoN8DmQl28fDE
-         3Wt6/3uZozHY1q8cCMfJySb/Aqvlnw8KBvBDFZ69vbtoU4Ux3dzhBG4s/F6qQ0mrb/x6
-         XFLg==
-X-Gm-Message-State: AOJu0YxdA0iJBcWHWXeOmKisv+MVT2LxkxT62wE0RxiwNo+1JYM8VIea
-	+h/R3UxLkbwf4fBFRCKcwnNFtbvYj1iuNlxOn+z0/CAbiRc=
-X-Google-Smtp-Source: AGHT+IHXvm1W++vVVPTk19ktbPl5ee74KU9mfyX1arK6KzKt6r5RD2ae1t2pmohDXRTROGj0LXeigfu6GOv6j0VuqSk=
-X-Received: by 2002:a6b:7506:0:b0:7b3:f55c:49a7 with SMTP id
- l6-20020a6b7506000000b007b3f55c49a7mr5185613ioh.3.1701374872357; Thu, 30 Nov
- 2023 12:07:52 -0800 (PST)
+        d=1e100.net; s=20230601; t=1701375308; x=1701980108;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=X5AMqGJYt6SEyyaxLyp7JmYGeHIyK2cLcP93CB0xsAo=;
+        b=RaxBR/iJhIYL+PlG+1/RTLgq5waxQZKp0eW14IfzSbbNZpth0yaYl3E5kkq+aaS+jU
+         5QOvAQn1fkkq6ZUKVJc6StakamcK2epEUMOapNnRQVs+1stjSmJ/IJRYr3JGLzbCRsi9
+         6/xu8quBfb5tvBcakWhUFFaaJCOXCOktkymuI63uRHh6OSYASnYYMo4rDQIZJ1x/jVcu
+         XXpEfW5FRd/K8qjeljpvAaFXFcqLpWviqiSx3GpYIV+/3DgmSVugb4J5A3gnS9Vy5nAy
+         3e7WPUqjvM6Q53oUPnEArYUV6tkb/j+dQxxNriwjTeScFhqO33gQzTfYRdJ8x19bvHp1
+         e6qA==
+X-Gm-Message-State: AOJu0YySh4dvW/jh284eBFjGdanxMMqcG/WJUqr4edyi+A54+lAY5tPL
+	d0RnBhZFugHnFW25FYx8GYif1Q==
+X-Google-Smtp-Source: AGHT+IEJXctu9WcvSzFXt39rV8QEM3y7T1pFE0WiGQYLYtGfkA61KyCWh7Z0c00L3koHxXYwUBpejQ==
+X-Received: by 2002:ad4:41c8:0:b0:67a:45e5:4aed with SMTP id a8-20020ad441c8000000b0067a45e54aedmr13542036qvq.21.1701375307954;
+        Thu, 30 Nov 2023 12:15:07 -0800 (PST)
+Received: from soleen.c.googlers.com.com (55.87.194.35.bc.googleusercontent.com. [35.194.87.55])
+        by smtp.gmail.com with ESMTPSA id e1-20020a0cb441000000b0067a35608186sm795252qvf.28.2023.11.30.12.15.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 30 Nov 2023 12:15:07 -0800 (PST)
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+To: akpm@linux-foundation.org,
+	alim.akhtar@samsung.com,
+	alyssa@rosenzweig.io,
+	asahi@lists.linux.dev,
+	baolu.lu@linux.intel.com,
+	bhelgaas@google.com,
+	cgroups@vger.kernel.org,
+	corbet@lwn.net,
+	david@redhat.com,
+	dwmw2@infradead.org,
+	hannes@cmpxchg.org,
+	heiko@sntech.de,
+	iommu@lists.linux.dev,
+	jernej.skrabec@gmail.com,
+	jonathanh@nvidia.com,
+	joro@8bytes.org,
+	krzysztof.kozlowski@linaro.org,
+	linux-doc@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-rockchip@lists.infradead.org,
+	linux-samsung-soc@vger.kernel.org,
+	linux-sunxi@lists.linux.dev,
+	linux-tegra@vger.kernel.org,
+	lizefan.x@bytedance.com,
+	marcan@marcan.st,
+	mhiramat@kernel.org,
+	m.szyprowski@samsung.com,
+	pasha.tatashin@soleen.com,
+	paulmck@kernel.org,
+	rdunlap@infradead.org,
+	robin.murphy@arm.com,
+	samuel@sholland.org,
+	suravee.suthikulpanit@amd.com,
+	sven@svenpeter.dev,
+	thierry.reding@gmail.com,
+	tj@kernel.org,
+	tomas.mudrunka@gmail.com,
+	vdumpa@nvidia.com,
+	wens@csie.org,
+	will@kernel.org,
+	yu-cheng.yu@intel.com
+Subject: [PATCH v2 00/10] IOMMU memory observability
+Date: Thu, 30 Nov 2023 20:14:54 +0000
+Message-ID: <20231130201504.2322355-1-pasha.tatashin@soleen.com>
+X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20231130194023.4102148-1-nphamcs@gmail.com> <20231130194023.4102148-2-nphamcs@gmail.com>
- <ZWjpNr3ZzvU4TDC8@casper.infradead.org>
-In-Reply-To: <ZWjpNr3ZzvU4TDC8@casper.infradead.org>
-From: Nhat Pham <nphamcs@gmail.com>
-Date: Thu, 30 Nov 2023 12:07:41 -0800
-Message-ID: <CAKEwX=MV-F50i_=sZ0unfbgjrdxSTio00c4xTM19113BAN3-wA@mail.gmail.com>
-Subject: Re: [PATCH v8 1/6] list_lru: allows explicit memcg and NUMA node selection
-To: Matthew Wilcox <willy@infradead.org>
-Cc: akpm@linux-foundation.org, hannes@cmpxchg.org, cerasuolodomenico@gmail.com, 
-	yosryahmed@google.com, sjenning@redhat.com, ddstreet@ieee.org, 
-	vitaly.wool@konsulko.com, mhocko@kernel.org, roman.gushchin@linux.dev, 
-	shakeelb@google.com, muchun.song@linux.dev, chrisl@kernel.org, 
-	linux-mm@kvack.org, kernel-team@meta.com, linux-kernel@vger.kernel.org, 
-	cgroups@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, shuah@kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Thu, Nov 30, 2023 at 11:57=E2=80=AFAM Matthew Wilcox <willy@infradead.or=
-g> wrote:
->
-> On Thu, Nov 30, 2023 at 11:40:18AM -0800, Nhat Pham wrote:
-> > This patch changes list_lru interface so that the caller must explicitl=
-y
-> > specify numa node and memcg when adding and removing objects. The old
-> > list_lru_add() and list_lru_del() are renamed to list_lru_add_obj() and
-> > list_lru_del_obj(), respectively.
->
-> Wouldn't it be better to add list_lru_add_memcg() and
-> list_lru_del_memcg() and have:
->
-> +bool list_lru_del(struct list_lru *lru, struct list_head *item)
-> +{
-> +       int nid =3D page_to_nid(virt_to_page(item));
-> +       struct mem_cgroup *memcg =3D list_lru_memcg_aware(lru) ?
-> +               mem_cgroup_from_slab_obj(item) : NULL;
-> +
-> +       return list_lru_del_memcg(lru, item, nid, memcg);
-> +}
->
-> Seems like _most_ callers will want the original versions and only
-> a few will want the explicit memcg/nid versions.  No?
->
+From: Pasha Tatashin <tatashin@google.com>
 
-I actually did something along that line in earlier iterations of this
-patch series (albeit with poorer naming - __list_lru_add() instead of
-list_lru_add_memcg()). The consensus after some back and forth was
-that the original list_lru_add() was not a very good design (the
-better one was this new version that allows for explicit numa/memcg
-selection). So I agreed to fix it everywhere as a prep patch.
+----------------------------------------------------------------------
+Changelog
+----------------------------------------------------------------------
+v2:
+- Added Reviewed-by Janne Grunau
+- Sync with 6.7.0-rc3, 3b47bc037bd44f142ac09848e8d3ecccc726be99
+- Separated form the series patches:
+vhost-vdpa: account iommu allocations
+https://lore.kernel.org/all/20231130200447.2319543-1-pasha.tatashin@soleen.com
+vfio: account iommu allocations
+https://lore.kernel.org/all/20231130200900.2320829-1-pasha.tatashin@soleen.com
+as suggested by Jason Gunthorpe
+- Fixed SPARC build issue detected by kernel test robot
+- Drop the following patches as they do account iommu page tables:
+iommu/dma: use page allocation function provided by iommu-pages.h
+iommu/fsl: use page allocation function provided by iommu-pages.h
+iommu/iommufd: use page allocation function provided by iommu-pages.h
+as suggested by Robin Murphy. These patches are not related to IOMMU
+page tables. We might need to do a separate work to support DMA
+observability.
+- Remove support iommu/io-pgtable-arm-v7s as the 2nd level pages are
+under a page size, thanks Robin Murphy for pointing this out.
 
-I don't have strong opinions here to be completely honest, but I do
-think this new API makes more sense (at the cost of quite a bit of
-elbow grease to fix every callsites and extra reviewing).
+----------------------------------------------------------------------
+Description
+----------------------------------------------------------------------
+IOMMU subsystem may contain state that is in gigabytes. Majority of that
+state is iommu page tables. Yet, there is currently, no way to observe
+how much memory is actually used by the iommu subsystem.
+
+This patch series solves this problem by adding both observability to
+all pages that are allocated by IOMMU, and also accountability, so
+admins can limit the amount if via cgroups.
+
+The system-wide observability is using /proc/meminfo:
+SecPageTables:    438176 kB
+
+Contains IOMMU and KVM memory.
+
+Per-node observability:
+/sys/devices/system/node/nodeN/meminfo
+Node N SecPageTables:    422204 kB
+
+Contains IOMMU and KVM memory memory in the given NUMA node.
+
+Per-node IOMMU only observability:
+/sys/devices/system/node/nodeN/vmstat
+nr_iommu_pages 105555
+
+Contains number of pages IOMMU allocated in the given node.
+
+Accountability: using sec_pagetables cgroup-v2 memory.stat entry.
+
+With the change, iova_stress[1] stops as limit is reached:
+
+# ./iova_stress
+iova space:     0T      free memory:   497G
+iova space:     1T      free memory:   495G
+iova space:     2T      free memory:   493G
+iova space:     3T      free memory:   491G
+
+stops as limit is reached.
+
+This series encorporates suggestions that came from the discussion
+at LPC [2].
+----------------------------------------------------------------------
+[1] https://github.com/soleen/iova_stress
+[2] https://lpc.events/event/17/contributions/1466
+----------------------------------------------------------------------
+Previous versions
+v1: https://lore.kernel.org/all/20231128204938.1453583-1-pasha.tatashin@soleen.com
+----------------------------------------------------------------------
+
+Pasha Tatashin (10):
+  iommu/vt-d: add wrapper functions for page allocations
+  iommu/amd: use page allocation function provided by iommu-pages.h
+  iommu/io-pgtable-arm: use page allocation function provided by
+    iommu-pages.h
+  iommu/io-pgtable-dart: use page allocation function provided by
+    iommu-pages.h
+  iommu/exynos: use page allocation function provided by iommu-pages.h
+  iommu/rockchip: use page allocation function provided by iommu-pages.h
+  iommu/sun50i: use page allocation function provided by iommu-pages.h
+  iommu/tegra-smmu: use page allocation function provided by
+    iommu-pages.h
+  iommu: observability of the IOMMU allocations
+  iommu: account IOMMU allocated memory
+
+ Documentation/admin-guide/cgroup-v2.rst |   2 +-
+ Documentation/filesystems/proc.rst      |   4 +-
+ drivers/iommu/amd/amd_iommu.h           |   8 -
+ drivers/iommu/amd/init.c                |  91 +++++-----
+ drivers/iommu/amd/io_pgtable.c          |  13 +-
+ drivers/iommu/amd/io_pgtable_v2.c       |  20 +-
+ drivers/iommu/amd/iommu.c               |  13 +-
+ drivers/iommu/exynos-iommu.c            |  14 +-
+ drivers/iommu/intel/dmar.c              |  10 +-
+ drivers/iommu/intel/iommu.c             |  47 ++---
+ drivers/iommu/intel/iommu.h             |   2 -
+ drivers/iommu/intel/irq_remapping.c     |  10 +-
+ drivers/iommu/intel/pasid.c             |  12 +-
+ drivers/iommu/intel/svm.c               |   7 +-
+ drivers/iommu/io-pgtable-arm.c          |   7 +-
+ drivers/iommu/io-pgtable-dart.c         |  37 ++--
+ drivers/iommu/iommu-pages.h             | 231 ++++++++++++++++++++++++
+ drivers/iommu/rockchip-iommu.c          |  14 +-
+ drivers/iommu/sun50i-iommu.c            |   7 +-
+ drivers/iommu/tegra-smmu.c              |  18 +-
+ include/linux/mmzone.h                  |   5 +-
+ mm/vmstat.c                             |   3 +
+ 22 files changed, 390 insertions(+), 185 deletions(-)
+ create mode 100644 drivers/iommu/iommu-pages.h
+
+-- 
+2.43.0.rc2.451.g8631bc7472-goog
+
 
