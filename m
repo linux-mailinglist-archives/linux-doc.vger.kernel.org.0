@@ -1,139 +1,123 @@
-Return-Path: <linux-doc+bounces-3568-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3571-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 919A17FE4E4
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 01:34:39 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5957D7FE51E
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 01:48:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C37BD1C20B2E
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 00:34:38 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8AB21B20D27
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 00:48:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7BD779CF;
-	Thu, 30 Nov 2023 00:34:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E309A622;
+	Thu, 30 Nov 2023 00:48:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="TsawVPid"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Q3gDyxeg"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.115])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4937A10E3;
-	Wed, 29 Nov 2023 16:34:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701304474; x=1732840474;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=6s4aliN2TmDzt5CeaX+F72a2OR8tCz3kRRQsDMwH6Bo=;
-  b=TsawVPidHAASCFy/97WO9se52Y9abW5/FgpDWTIU1X8JFZaGED38PdTP
-   pcR2yY7ufi+JC5gjyJ2AILsN0NUjgTvkQWYm8hUR+JeZVX8SgLloV15bu
-   yRgAq2h2xBDMaUWtfu4t6cCsqv7ca4zt8nItOKQYD1dYPWhDM/o5m0+PO
-   4qSy5YvLobvqH1AOqEVX4jEj4iZ4Gy5g2iIsGNWuhTqIIsf2kgSun8j7l
-   Z1jl6G4tloI0mZ/Dd0dBu2UX3Yc+4wY4PGqzR+93RXjy0MaQhOddDbf3T
-   tkeADCIKs4DNFnmPTrr/UiED7L6YwQvY+VZPYEUgmtu6QWAFrTUjQrY51
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10909"; a="392990697"
-X-IronPort-AV: E=Sophos;i="6.04,237,1695711600"; 
-   d="scan'208";a="392990697"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Nov 2023 16:34:29 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10909"; a="762499593"
-X-IronPort-AV: E=Sophos;i="6.04,237,1695711600"; 
-   d="scan'208";a="762499593"
-Received: from agluck-desk3.sc.intel.com ([172.25.222.74])
-  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Nov 2023 16:34:28 -0800
-From: Tony Luck <tony.luck@intel.com>
-To: Fenghua Yu <fenghua.yu@intel.com>,
-	Reinette Chatre <reinette.chatre@intel.com>,
-	Peter Newman <peternewman@google.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	x86@kernel.org
-Cc: Shaopeng Tan <tan.shaopeng@fujitsu.com>,
-	James Morse <james.morse@arm.com>,
-	Jamie Iles <quic_jiles@quicinc.com>,
-	Babu Moger <babu.moger@amd.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	patches@lists.linux.dev,
-	Tony Luck <tony.luck@intel.com>,
-	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: [PATCH v12 8/8] x86/resctrl: Update documentation with Sub-NUMA cluster changes
-Date: Wed, 29 Nov 2023 16:34:18 -0800
-Message-ID: <20231130003418.89964-9-tony.luck@intel.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231130003418.89964-1-tony.luck@intel.com>
-References: <20231109230915.73600-1-tony.luck@intel.com>
- <20231130003418.89964-1-tony.luck@intel.com>
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com [IPv6:2001:4860:4864:20::2c])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 33AF1C9;
+	Wed, 29 Nov 2023 16:47:59 -0800 (PST)
+Received: by mail-oa1-x2c.google.com with SMTP id 586e51a60fabf-1f9e0e44fecso169052fac.3;
+        Wed, 29 Nov 2023 16:47:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1701305278; x=1701910078; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=px7lu5nOqajxdLEanLNBtXA+0BLm4pP2tpUPChWnjUo=;
+        b=Q3gDyxegKcTCM22dYyiIS3FhVJKlB3JlX5pEtwKlifYACjCod8X2Nzp7Shbm1wUjqZ
+         3VQUTWS3p44xgvuKDB+Q5PQ0btMjf62LpnI0+xEi7TMx8oDXolmqF3GzRrPzwhaEQ/EZ
+         ELGYT7s/ptGFZMyqO6LiXbECKOe2pp+xrTC4q+17k+tz43kt5payZXz1H76bbzNHtsro
+         nCLOrtuAIm3SmWHmBqbBmO/vwAlhPcBLLKWhbiWZWRNGGURUNwfiGP59gnejquWjjFcV
+         7aXEJ0C8UMJNTkBtV0NqhlSdZBi3z8WIoh73nJOJzPCdGbG8nePM3naVI+zMK301IyhW
+         4veg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701305278; x=1701910078;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=px7lu5nOqajxdLEanLNBtXA+0BLm4pP2tpUPChWnjUo=;
+        b=tJfANXCNtGck1rwWNvT7R4p8sYSNBnu2q0vATepHof9pn1lxNkeK+U7UFL7TuzIDAe
+         +PV+XtmL8I/y4RDqP0fM9ws1t+1O/wyVK5E8egpFFt7H0CdVqFFv3on0Yov5dKa49V0Q
+         umcDORQYk/FMlo2XHDK1AZ8MoNKzka2R/ihAxeqm0Tpdk3wKKvTLcT8mHknBD9o+ecxW
+         WAMF8Cf6+u5AxhI80t9nuBJNrtYSz5yIjCFjkx8UmCMdzW+JYHKCBNpA5GS58ae7/5wC
+         V6tW/iTAkSKM+DSm0y3pYSoWP6lArul5rM8meYPHU2URrWd9K4/5UPTjuaDFH6rbr7Yi
+         A/2A==
+X-Gm-Message-State: AOJu0YwHfCb7qQwHQzcg3pjb3/aDcQcDVUi11MXoPluctd4NXFchffut
+	JqpMCnx+pRWgDMumLt5c9qz9GpCot8y3CywG0Po=
+X-Google-Smtp-Source: AGHT+IHNybKJyRL115STmke+mJBBLpb72k/nusUuGsqlLJZZnSa/+eziMVVFWzCKHCT3Qez7vepBVUhLO2cGnfNCpUg=
+X-Received: by 2002:a05:6870:eca2:b0:1f9:5081:f287 with SMTP id
+ eo34-20020a056870eca200b001f95081f287mr26311523oab.27.1701305278396; Wed, 29
+ Nov 2023 16:47:58 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231127193703.1980089-1-nphamcs@gmail.com> <20231127193703.1980089-3-nphamcs@gmail.com>
+ <ZWW1IG0Mv3r0m4mp@tiehlicka> <CAKEwX=OGtkqWys9VM9EBScoCdAjSdfPjEkvoY7_u9udDZBFFpw@mail.gmail.com>
+ <ZWcB_r8ywytCFR8B@tiehlicka>
+In-Reply-To: <ZWcB_r8ywytCFR8B@tiehlicka>
+From: Nhat Pham <nphamcs@gmail.com>
+Date: Wed, 29 Nov 2023 16:47:47 -0800
+Message-ID: <CAKEwX=PgubfJeCVYUzCCqgGzn=KsjOcUbFJ+Y-Jd5pfk7Wrv-A@mail.gmail.com>
+Subject: Re: [PATCH v6 2/6] memcontrol: allows mem_cgroup_iter() to check for onlineness
+To: Michal Hocko <mhocko@suse.com>
+Cc: akpm@linux-foundation.org, hannes@cmpxchg.org, cerasuolodomenico@gmail.com, 
+	yosryahmed@google.com, sjenning@redhat.com, ddstreet@ieee.org, 
+	vitaly.wool@konsulko.com, roman.gushchin@linux.dev, shakeelb@google.com, 
+	muchun.song@linux.dev, chrisl@kernel.org, linux-mm@kvack.org, 
+	kernel-team@meta.com, linux-kernel@vger.kernel.org, cgroups@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, shuah@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-With Sub-NUMA Cluster mode enabled the scope of monitoring resources is
-per-NODE instead of per-L3 cache. Suffixes of directories with "L3" in
-their name refer to Sub-NUMA nodes instead of L3 cache ids.
+On Wed, Nov 29, 2023 at 1:18=E2=80=AFAM Michal Hocko <mhocko@suse.com> wrot=
+e:
+>
+> On Tue 28-11-23 08:53:56, Nhat Pham wrote:
+> > On Tue, Nov 28, 2023 at 1:38=E2=80=AFAM Michal Hocko <mhocko@suse.com> =
+wrote:
+> > >
+> > > On Mon 27-11-23 11:36:59, Nhat Pham wrote:
+> > > > The new zswap writeback scheme requires an online-only memcg hierar=
+chy
+> > > > traversal. Add a new parameter to mem_cgroup_iter() to check for
+> > > > onlineness before returning.
+> > >
+> > > Why is this needed?
+> >
+> > For context, in patch 3 of this series, Domenico and I are adding
+> > cgroup-aware LRU to zswap, so that we can perform workload-specific
+> > zswap writeback. When the reclaim happens due to the global zswap
+> > limit being hit, a cgroup is selected by the mem_cgroup_iter(), and
+> > the last one selected is saved in the zswap pool (so that the
+> > iteration can follow from there next time the limit is hit).
+> >
+> > However, one problem with this scheme is we will be pinning the
+> > reference to that saved memcg until the next global reclaim attempt,
+> > which could prevent it from being killed for quite some time after it
+> > has been offlined. Johannes, Yosry, and I discussed a couple of
+> > approaches for a while, and decided to add a callback that would
+> > release the reference held by the zswap pool when the memcg is
+> > offlined, and the zswap pool will obtain the reference to the next
+> > online memcg in the traversal (or at least one that has not had the
+> > zswap-memcg-release-callback run on it yet).
+>
+> This should be a part of the changelog along with an explanation why
+> this cannot be handled on the caller level? You have a pin on the memcg,
+> you can check it is online and scratch it if not, right? Why do we need
+> to make a rather convoluted iterator interface more complex when most
+> users simply do not require that?
 
-Users should be aware that SNC mode also affects the amount of L3 cache
-available for allocation within each SNC node.
+Ah that's a good point. Hmm then I'll just do an extra online check in
+the zswap reclaim callsite - cleaner and less invasive.
 
-Signed-off-by: Tony Luck <tony.luck@intel.com>
-Reviewed-by: Peter Newman <peternewman@google.com>
-Reviewed-by: Reinette Chatre <reinette.chatre@intel.com>
-Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
----
- Documentation/arch/x86/resctrl.rst | 25 +++++++++++++++++++++----
- 1 file changed, 21 insertions(+), 4 deletions(-)
-
-diff --git a/Documentation/arch/x86/resctrl.rst b/Documentation/arch/x86/resctrl.rst
-index a6279df64a9d..49ff789db1d8 100644
---- a/Documentation/arch/x86/resctrl.rst
-+++ b/Documentation/arch/x86/resctrl.rst
-@@ -366,10 +366,10 @@ When control is enabled all CTRL_MON groups will also contain:
- When monitoring is enabled all MON groups will also contain:
- 
- "mon_data":
--	This contains a set of files organized by L3 domain and by
--	RDT event. E.g. on a system with two L3 domains there will
--	be subdirectories "mon_L3_00" and "mon_L3_01".	Each of these
--	directories have one file per event (e.g. "llc_occupancy",
-+	This contains a set of files organized by L3 domain or by NUMA
-+	node (depending on whether Sub-NUMA Cluster (SNC) mode is disabled
-+	or enabled respectively) and by RDT event.  Each of these
-+	directories has one file per event (e.g. "llc_occupancy",
- 	"mbm_total_bytes", and "mbm_local_bytes"). In a MON group these
- 	files provide a read out of the current value of the event for
- 	all tasks in the group. In CTRL_MON groups these files provide
-@@ -478,6 +478,23 @@ if non-contiguous 1s value is supported. On a system with a 20-bit mask
- each bit represents 5% of the capacity of the cache. You could partition
- the cache into four equal parts with masks: 0x1f, 0x3e0, 0x7c00, 0xf8000.
- 
-+Notes on Sub-NUMA Cluster mode
-+==============================
-+When SNC mode is enabled Linux may load balance tasks between Sub-NUMA
-+nodes much more readily than between regular NUMA nodes since the CPUs
-+on Sub-NUMA nodes share the same L3 cache and the system may report
-+the NUMA distance between Sub-NUMA nodes with a lower value than used
-+for regular NUMA nodes.  Users who do not bind tasks to the CPUs of a
-+specific Sub-NUMA node must read the "llc_occupancy", "mbm_total_bytes",
-+and "mbm_local_bytes" for all Sub-NUMA nodes where the tasks may execute
-+to get the full view of traffic for which the tasks were the source.
-+
-+The cache allocation feature still provides the same number of
-+bits in a mask to control allocation into the L3 cache, but each
-+of those ways has its capacity reduced because the cache is divided
-+between the SNC nodes. The values reported in the resctrl
-+"size" files are adjusted accordingly.
-+
- Memory bandwidth Allocation and monitoring
- ==========================================
- 
--- 
-2.41.0
-
+Thanks for the suggestion!
+>
+> --
+> Michal Hocko
+> SUSE Labs
 
