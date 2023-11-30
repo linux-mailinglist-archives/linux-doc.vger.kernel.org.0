@@ -1,58 +1,57 @@
-Return-Path: <linux-doc+bounces-3635-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3630-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F8297FF869
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 18:37:20 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 363B27FF7D3
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 18:14:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3A3A81C20BD5
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 17:37:19 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 66F881C20D37
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 17:14:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F329E5810D;
-	Thu, 30 Nov 2023 17:37:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 96ADB55C27;
+	Thu, 30 Nov 2023 17:14:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Q4i3Zyhn"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NLqSFtWt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com [IPv6:2a00:1450:4864:20::336])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 49F9110DF;
-	Thu, 30 Nov 2023 09:37:09 -0800 (PST)
-Received: by mail-wm1-x336.google.com with SMTP id 5b1f17b1804b1-40b4744d603so10659885e9.2;
-        Thu, 30 Nov 2023 09:37:09 -0800 (PST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com [IPv6:2a00:1450:4864:20::32d])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AED5010E2;
+	Thu, 30 Nov 2023 09:14:03 -0800 (PST)
+Received: by mail-wm1-x32d.google.com with SMTP id 5b1f17b1804b1-40b538d5c4eso8209955e9.1;
+        Thu, 30 Nov 2023 09:14:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701365827; x=1701970627; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QsQQPUJFA0N9J6n5x1AuH73vk59hYe/eciqUbvnbPDs=;
-        b=Q4i3ZyhnYqAnC5xetz3AnhBtP5ixdmvlalqHXLpns7RsP64t0Zwz3eVmjE+ecO/iA8
-         iDy09NxDI6o/G7pS/8nxxDZBczc3xDhyg0//uoNGhuj3Azbsz8n6EvzRw8zen4fA70Kf
-         +P7X1pY5oc3CtlI48PjXHjwfVH2RoPd/L/SjgZZDpw1qCFRRLB8gC5ozfBWfXh+ItDBG
-         FePX+NlhOjipST6hVM91ogICU+tWul++Ci/PCNZgyphirLTtXdkUBk/0756rFmbgSNmR
-         lJuSRQRVF9/rOCQvsTiIUoTTHGzI3CmUhIj5+PFxvvLnqb19LJFbfT126oeqj1tIjt3p
-         Uu+w==
+        d=gmail.com; s=20230601; t=1701364441; x=1701969241; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=iWl/4qXizi6Ul7FtDLArDPeN2uRl1gF4/EhF2ynBmFQ=;
+        b=NLqSFtWtnAiDe7tix8o1I/mAJyDqprjn9pZxSzdzC2h/zWpUdTr1Xjyccch+2ZDRzf
+         RS9U10LsYq1/9zHwvjcoMMfVtY5xtR8/isIId9AZLdDAVrJI37xFRS+Q3WGl2cio9dDr
+         S1oGclkMSPqlNfgBrOtsixpCBdrRtf/RKMsUNOlBGVAv4CDeIyjyrF56I4j+gIf5qwXK
+         HSWG6XmqGQra2ieox0hqYXGI1xzm9m7NzZbd4HiMve4lTcdQo0xURNXX9bOledT4iQWj
+         uta1gwLJpS4n5zxlge+2p1LTVzwhME8d0quZ25Q5sxidTCgg9mc8iDS8C6sZtRq8jtks
+         Fwxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701365827; x=1701970627;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=QsQQPUJFA0N9J6n5x1AuH73vk59hYe/eciqUbvnbPDs=;
-        b=QgenBGk/Vmhd0JBb/HYF/By1gJlgGEowssoVFILY5WeRQCX3bZBJPn6pQ1RYVtOaTG
-         x2fQ56zlMTH0w2PRlv74j2l9oCXjMiVbt5U7ZGtWXgBb7yfl/tOnFaGR952+PL3fdhnE
-         bTAjTZw5ptuW6w4LiNxk7DCt+IFWIDUTCAK9A3G2ecOqqJ7iRGnfgCBaWudOeZtvRv5s
-         KAlsNJHrEF6g4O9jOGOzeBEo0EShnaeJeDQw6UuMQqpTxDSDVqwnH/duPpHE9PVRlojP
-         153cS8SP4//mf4PKgT5n2hyMYNjCjyXxF7kvBVjHU4HV4wOjshrIOZnAHM6wAMoQ7U6H
-         jFGg==
-X-Gm-Message-State: AOJu0YzcE/W4voCDdP1oOXuI+xra4iBtqKTNyokGyCW44GSpJqZ1GBfo
-	VLxB1bao5gYiWs6yRcb2liX/iuYXIsj9kw==
-X-Google-Smtp-Source: AGHT+IE5faEIkI09n5rI5etseYzweeI9aTeCq2ocgEFRooRPIxnCBE6QCV+ZBcFNokX5vGG4+Gr4xA==
-X-Received: by 2002:a05:600c:4e8e:b0:40b:3d92:de29 with SMTP id f14-20020a05600c4e8e00b0040b3d92de29mr5929wmq.14.1701364246505;
-        Thu, 30 Nov 2023 09:10:46 -0800 (PST)
+        d=1e100.net; s=20230601; t=1701364441; x=1701969241;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iWl/4qXizi6Ul7FtDLArDPeN2uRl1gF4/EhF2ynBmFQ=;
+        b=d2gHHjUfM2iY/lDrptBKnOKIm5I7rDPUASaGp1c36vgXoZqiSSz9glmrhz4fySiw0Q
+         bTaM0bWZ16eZaSC+Mku6GZ8L06778ercsa5DJhg5S3Cp7HsKD5OIZDhFVqvcYWbW90eE
+         LZhSWPnhoonzuzgqTOFdL65TSe9C+131/SIs3JM0DXyrHt04S0JwTjr3p/LxbBICX8Nd
+         OZyRBw73obOCWU93Zh3qIJE/66LOu4htAmTKvHhgOVkUgfGqYbfUaD6DGXZymm7K9tUT
+         wtNLFqdiU2p/vLHlKaDHnW/1+Tm5bvZliEkZSirIXHOhhkblIuSMiRXGzOmivQE9tiVQ
+         SN1w==
+X-Gm-Message-State: AOJu0YxLCA+OxjM3L+9nPx2DfVfS9QJUdmRhujn8z8TaLBhYUiaRceAc
+	EYcPF+lRESLdve7IFiQAmt++oiaww30IVA==
+X-Google-Smtp-Source: AGHT+IFcjULPc6i1EL7NlmgVnLtLDnVD4YxzkCXSb+WBV7McMvSCaxucbUxj/Gr9orpl0B0v10g52w==
+X-Received: by 2002:a5d:5648:0:b0:333:160c:549f with SMTP id j8-20020a5d5648000000b00333160c549fmr16385wrw.60.1701364441137;
+        Thu, 30 Nov 2023 09:14:01 -0800 (PST)
 Received: from imac.fritz.box ([2a02:8010:60a0:0:4842:bce4:1c44:6271])
-        by smtp.gmail.com with ESMTPSA id f14-20020adfe90e000000b00327b5ca093dsm2014531wrm.117.2023.11.30.09.10.45
+        by smtp.gmail.com with ESMTPSA id d10-20020a5d538a000000b003332ef77db4sm260519wrv.44.2023.11.30.09.13.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Nov 2023 09:10:45 -0800 (PST)
+        Thu, 30 Nov 2023 09:13:59 -0800 (PST)
 From: Donald Hunter <donald.hunter@gmail.com>
 To: netdev@vger.kernel.org,
 	Jakub Kicinski <kuba@kernel.org>,
@@ -64,12 +63,10 @@ To: netdev@vger.kernel.org,
 	Jacob Keller <jacob.e.keller@intel.com>
 Cc: donald.hunter@redhat.com,
 	Donald Hunter <donald.hunter@gmail.com>
-Subject: [PATCH net-next v1 2/6] doc/netlink: Add sub-message support to netlink-raw
-Date: Thu, 30 Nov 2023 17:10:15 +0000
-Message-ID: <20231130171019.12775-3-donald.hunter@gmail.com>
+Subject: [PATCH net-next v1 4/6] tools/net/ynl: Add binary and pad support to structs for tc
+Date: Thu, 30 Nov 2023 17:13:47 +0000
+Message-ID: <20231130171349.13021-1-donald.hunter@gmail.com>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231130171019.12775-1-donald.hunter@gmail.com>
-References: <20231130171019.12775-1-donald.hunter@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -78,144 +75,89 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a 'sub-message' attribute type with a selector that supports
-polymorphic attribute formats for raw netlink families like tc.
-
-A sub-message attribute uses the value of another attribute as a
-selector key to choose the right sub-message format. For example if the
-following attribute has already been decoded:
-
-  { "kind": "gre" }
-
-and we encounter the following attribute spec:
-
-  -
-    name: data
-    type: sub-message
-    sub-message: linkinfo-data-msg
-    selector: kind
-
-Then we look for a sub-message definition called 'linkinfo-data-msg' and
-use the value of the 'kind' attribute i.e. 'gre' as the key to choose
-the correct format for the sub-message:
-
-  sub-messages:
-    name: linkinfo-data-msg
-    formats:
-      -
-        value: bridge
-        attribute-set: linkinfo-bridge-attrs
-      -
-        value: gre
-        attribute-set: linkinfo-gre-attrs
-      -
-        value: geneve
-        attribute-set: linkinfo-geneve-attrs
-
-This would decode the attribute value as a sub-message with the
-attribute-set called 'linkinfo-gre-attrs' as the attribute space.
-
-A sub-message can have an optional 'fixed-header' followed by zero or
-more attributes from an attribute-set. For example the following
-'tc-options-msg' sub-message defines message formats that use a mixture
-of fixed-header, attribute-set or both together:
-
-  sub-messages:
-    -
-      name: tc-options-msg
-      formats:
-        -
-          value: bfifo
-          fixed-header: tc-fifo-qopt
-        -
-          value: cake
-          attribute-set: tc-cake-attrs
-        -
-          value: netem
-          fixed-header: tc-netem-qopt
-          attribute-set: tc-netem-attrs
+The tc netlink-raw family needs binary and pad types for several
+qopt C structs. Add support for them to ynl.
 
 Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
 ---
- Documentation/netlink/netlink-raw.yaml | 51 +++++++++++++++++++++++++-
- 1 file changed, 50 insertions(+), 1 deletion(-)
+ Documentation/netlink/netlink-raw.yaml |  2 +-
+ tools/net/ynl/lib/ynl.py               | 36 +++++++++++++++++++-------
+ 2 files changed, 27 insertions(+), 11 deletions(-)
 
 diff --git a/Documentation/netlink/netlink-raw.yaml b/Documentation/netlink/netlink-raw.yaml
-index ad5395040765..26203282422f 100644
+index 26203282422f..dc3d4eeb67bb 100644
 --- a/Documentation/netlink/netlink-raw.yaml
 +++ b/Documentation/netlink/netlink-raw.yaml
-@@ -202,7 +202,8 @@ properties:
+@@ -127,7 +127,7 @@ properties:
+                 type: string
+               type:
                  description: The netlink attribute type
-                 enum: [ unused, pad, flag, binary, bitfield32,
-                         u8, u16, u32, u64, s8, s16, s32, s64,
--                        string, nest, array-nest, nest-type-value ]
-+                        string, nest, array-nest, nest-type-value,
-+                        sub-message ]
-               doc:
-                 description: Documentation of the attribute.
-                 type: string
-@@ -261,6 +262,17 @@ properties:
-                 description: Name of the struct type used for the attribute.
-                 type: string
-               # End genetlink-legacy
-+              # Start netlink-raw
-+              sub-message:
-+                description:
-+                  Name of the sub-message definition to use for the attribute.
-+                type: string
-+              selector:
-+                description:
-+                  Name of the attribute to use for dynamic selection of sub-message
-+                  format specifier.
-+                type: string
-+              # End netlink-raw
+-                enum: [ u8, u16, u32, u64, s8, s16, s32, s64, string, binary ]
++                enum: [ u8, u16, u32, u64, s8, s16, s32, s64, string, binary, pad ]
+               len:
+                 $ref: '#/$defs/len-or-define'
+               byte-order:
+diff --git a/tools/net/ynl/lib/ynl.py b/tools/net/ynl/lib/ynl.py
+index 886ecef5319e..4f1c1e51845e 100644
+--- a/tools/net/ynl/lib/ynl.py
++++ b/tools/net/ynl/lib/ynl.py
+@@ -670,8 +670,11 @@ class YnlFamily(SpecFamily):
+             fixed_header_members = self.consts[name].members
+             size = 0
+             for m in fixed_header_members:
+-                format = NlAttr.get_format(m.type, m.byte_order)
+-                size += format.size
++                if m.type in ['pad', 'binary']:
++                    size += m.len
++                else:
++                    format = NlAttr.get_format(m.type, m.byte_order)
++                    size += format.size
+             return size
+         else:
+             return 0
+@@ -681,12 +684,20 @@ class YnlFamily(SpecFamily):
+         fixed_header_attrs = dict()
+         offset = 0
+         for m in fixed_header_members:
+-            format = NlAttr.get_format(m.type, m.byte_order)
+-            [ value ] = format.unpack_from(msg.raw, offset)
+-            offset += format.size
+-            if m.enum:
+-                value = self._decode_enum(value, m)
+-            fixed_header_attrs[m.name] = value
++            value = None
++            if m.type == 'pad':
++                offset += m.len
++            elif m.type == 'binary':
++                value = msg.raw[offset:offset+m.len]
++                offset += m.len
++            else:
++                format = NlAttr.get_format(m.type, m.byte_order)
++                [ value ] = format.unpack_from(msg.raw, offset)
++                offset += format.size
++            if value is not None:
++                if m.enum:
++                    value = self._decode_enum(value, m)
++                fixed_header_attrs[m.name] = value
+         return fixed_header_attrs
  
-       # Make sure name-prefix does not appear in subsets (subsets inherit naming)
-       dependencies:
-@@ -283,6 +295,43 @@ properties:
-             items:
-               required: [ type ]
- 
-+  # Start netlink-raw
-+  sub-messages:
-+    description: Definition of sub message attributes
-+    type: array
-+    items:
-+      type: object
-+      additionalProperties: False
-+      required: [ name, formats ]
-+      properties:
-+        name:
-+          description: Name of the sub-message definition
-+          type: string
-+        formats:
-+          description: Dynamically selected format specifiers
-+          type: array
-+          items:
-+            type: object
-+            additionalProperties: False
-+            required: [ value ]
-+            properties:
-+              value:
-+                description:
-+                  Value to match for dynamic selection of sub-message format
-+                  specifier.
-+                type: string
-+              fixed-header:
-+                description:
-+                  Name of the struct definition to use as the fixed header
-+                  for the sub message.
-+                type: string
-+              attribute-set:
-+                description:
-+                  Name of the attribute space from which to resolve attributes
-+                  in the sub message.
-+                type: string
-+  # End netlink-raw
-+
-   operations:
-     description: Operations supported by the protocol.
-     type: object
+     def handle_ntf(self, decoded):
+@@ -753,8 +764,13 @@ class YnlFamily(SpecFamily):
+             fixed_header_members = self.consts[op.fixed_header].members
+             for m in fixed_header_members:
+                 value = vals.pop(m.name) if m.name in vals else 0
+-                format = NlAttr.get_format(m.type, m.byte_order)
+-                msg += format.pack(value)
++                if m.type == 'pad':
++                    msg += bytearray(m.len)
++                elif m.type == 'binary':
++                    msg += bytes.fromhex(value)
++                else:
++                    format = NlAttr.get_format(m.type, m.byte_order)
++                    msg += format.pack(value)
+         for name, value in vals.items():
+             msg += self._add_attr(op.attr_set.name, name, value)
+         msg = _genl_msg_finalize(msg)
 -- 
 2.42.0
 
