@@ -1,142 +1,209 @@
-Return-Path: <linux-doc+bounces-3657-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3659-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id D63DF7FFC3E
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 21:16:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36DD47FFC49
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 21:16:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9197E281869
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 20:16:05 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E67FD281AAA
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Nov 2023 20:16:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB91B60EE1;
-	Thu, 30 Nov 2023 20:15:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4A7E05DF2A;
+	Thu, 30 Nov 2023 20:15:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="cxLbME04"
+	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="Jl12uQ8+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com [IPv6:2607:f8b0:4864:20::336])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 360B01738
-	for <linux-doc@vger.kernel.org>; Thu, 30 Nov 2023 12:15:14 -0800 (PST)
-Received: by mail-ot1-x336.google.com with SMTP id 46e09a7af769-6d857f6f1c0so843492a34.0
-        for <linux-doc@vger.kernel.org>; Thu, 30 Nov 2023 12:15:14 -0800 (PST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com [IPv6:2607:f8b0:4864:20::f2e])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 65D4A1996
+	for <linux-doc@vger.kernel.org>; Thu, 30 Nov 2023 12:15:16 -0800 (PST)
+Received: by mail-qv1-xf2e.google.com with SMTP id 6a1803df08f44-677fba00a49so11454336d6.1
+        for <linux-doc@vger.kernel.org>; Thu, 30 Nov 2023 12:15:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1701375313; x=1701980113; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FO/kRurvZ75+kMpCvS7WQKXERPiftR1fMbdInuY1QHQ=;
-        b=cxLbME04Ux0SJcg8QQ6Ms7tJf6ZTe+qG86/+aGZmGWGVML6P53ICEulmY4q+ZSgLb9
-         TqKDtsmCaxVBJmPPCj1+Qvqif2Pkx8FEgQcKsVjRjkrc/Gv6mdfC2DIzsckPnVJEct7h
-         J9ju3Cg6wpdpzkRqMTGkzHQlUoB8r5HdkvAcHUC6ZWHH39uYx4BI6ewtPHC7pKNzgzz3
-         UuFpQgZ5utu9tK98IlQ/VONqL37T9Y4S2RyPyNkaE0m3sQVcIxiOY78oixzr+6cgZTUv
-         TiOV7F00FE669vfXiaI8Mo6fES5VZxaED02vhawYVe9ui6xm85+R3+KEAEPJLZKKN9E7
-         Tziw==
+        d=soleen.com; s=google; t=1701375315; x=1701980115; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=CTqyv+/QBqQRpLXIT6J0+RNMQRf6NZoT619SVstW8Ks=;
+        b=Jl12uQ8+8PlkCMR8zLtQCD4lT9s+In1qyYwLdLfsfEMCacSASnWrGt0p3KW/JE2r5M
+         R7o3ybf/QPqguwivZy74zrUoIlJn6fF3UvYT3zsTjnEku2XOvoEs+/bOEQb1f4tCPO73
+         rU7l4OKXgHr+IcYivqGdJ0WpSsQOkbmBtBKCvaGCb7ikFCZA0oemmtlg6LmPLgCZxZ/H
+         BqZfnLdbEylNSX8JThw1VSAJ0Vv9LU1B4q5I/UIByr+L8I/zISt5UsbFxUx0DfnfiluT
+         3W/iUP+76z8yhrzqt6HFHexjsTn81eVv/ZiB0hEa5syzPJ0KooHmMCsQsTDmnc6X42eP
+         9GpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701375313; x=1701980113;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1701375315; x=1701980115;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=FO/kRurvZ75+kMpCvS7WQKXERPiftR1fMbdInuY1QHQ=;
-        b=bkLj5W6DImKMDqEadp6rT4h5FnyDrh2mmpqRc7TcEa9/oOlqEh9VhgxFW1EmrmNXhq
-         xjynpIgIWxg1lf1k/0oVKS3+mBiAP3Sy84+bToRJHrLRXplTF6bBvLx4wu6MrR0FjlHa
-         nOPPrNVU576XGIzOWCHnUOu6xlLif0r0r8Knx4xGjHAWzHIUteswDcEIE+GnSuwDiGvC
-         qQJkRTAAfHMAkSQ4LrZQ2vgPjI9U3/MMOjXV9fz4jjarVkSq/jFAtqmY6BI1+7eZaV42
-         0zdQm0TcXTkD7OAeHxNZJHVzj03eP9tTeDNCVlziEtJJ6LJsoa+6KVM87gkeWkXeNz3v
-         Hu3A==
-X-Gm-Message-State: AOJu0YyjENjwVJda6QJPwWAv6mCLuluQfzPtjkDqXjZ7uGxKn8Ai4d2L
-	luAZH3x9cIEPa35e46vditz1Qv9QEMct5Gg1sEtWVw==
-X-Google-Smtp-Source: AGHT+IGE78vgIP7nCnvTYi+v3uOEtJVvVccysnd2brNW5+bTr9Fyg2vYbHbRPXbhzUr8ZgFH5825fib629i8juGGv5I=
-X-Received: by 2002:a9d:75c1:0:b0:6ce:26e6:19fa with SMTP id
- c1-20020a9d75c1000000b006ce26e619famr722446otl.23.1701375313530; Thu, 30 Nov
- 2023 12:15:13 -0800 (PST)
+        bh=CTqyv+/QBqQRpLXIT6J0+RNMQRf6NZoT619SVstW8Ks=;
+        b=g+6RbXjG/Ft3o7XX81YDnAB3d8NFRkhlAOvyvXytRrZ6163tTgkFsdLBb7WY7YAdhk
+         DuYBSnkhrRp/jjJi2d6+skZJ1VO1Ag4GxJxnNVKYaSPy2Tonrq8Z3GFT9ejhEqxF5QyU
+         xWlP/Fc0FEzo//8mgZb48fsPl63RgNIbGAh+G3nwEIho1bQhdY7xQGlYVn3J7bA2hNKe
+         9uReUeW4PaXKgQXpPNRwyndka+4X6eHM9U3vnVMPaSyXIaiWGOTzYarb5btY5A8IqCpJ
+         Oc/H4hJj4dXI3uiQZZIqGYeM0xQmAAPiANU+cdlRWthjwRv2QdirDO1ereusAG+IVtWv
+         8sEQ==
+X-Gm-Message-State: AOJu0YyaI5iz05aejnlF4jzulNu2jTVQAkbrAvLdzX8kFYVtdHxhKfXD
+	UA3azcHwJsJ1s94wRPO5qp8mUg==
+X-Google-Smtp-Source: AGHT+IE4JYPLoA/tNY4x2pKdpnHf/W/XblnfOPtcPXpbeLos1tHq3JCEAsQT3LPHq1ybHp62KX3VJw==
+X-Received: by 2002:a05:6214:4115:b0:67a:3a51:8773 with SMTP id kc21-20020a056214411500b0067a3a518773mr24916856qvb.5.1701375315320;
+        Thu, 30 Nov 2023 12:15:15 -0800 (PST)
+Received: from soleen.c.googlers.com.com (55.87.194.35.bc.googleusercontent.com. [35.194.87.55])
+        by smtp.gmail.com with ESMTPSA id e1-20020a0cb441000000b0067a35608186sm795252qvf.28.2023.11.30.12.15.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 30 Nov 2023 12:15:15 -0800 (PST)
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+To: akpm@linux-foundation.org,
+	alim.akhtar@samsung.com,
+	alyssa@rosenzweig.io,
+	asahi@lists.linux.dev,
+	baolu.lu@linux.intel.com,
+	bhelgaas@google.com,
+	cgroups@vger.kernel.org,
+	corbet@lwn.net,
+	david@redhat.com,
+	dwmw2@infradead.org,
+	hannes@cmpxchg.org,
+	heiko@sntech.de,
+	iommu@lists.linux.dev,
+	jernej.skrabec@gmail.com,
+	jonathanh@nvidia.com,
+	joro@8bytes.org,
+	krzysztof.kozlowski@linaro.org,
+	linux-doc@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-rockchip@lists.infradead.org,
+	linux-samsung-soc@vger.kernel.org,
+	linux-sunxi@lists.linux.dev,
+	linux-tegra@vger.kernel.org,
+	lizefan.x@bytedance.com,
+	marcan@marcan.st,
+	mhiramat@kernel.org,
+	m.szyprowski@samsung.com,
+	pasha.tatashin@soleen.com,
+	paulmck@kernel.org,
+	rdunlap@infradead.org,
+	robin.murphy@arm.com,
+	samuel@sholland.org,
+	suravee.suthikulpanit@amd.com,
+	sven@svenpeter.dev,
+	thierry.reding@gmail.com,
+	tj@kernel.org,
+	tomas.mudrunka@gmail.com,
+	vdumpa@nvidia.com,
+	wens@csie.org,
+	will@kernel.org,
+	yu-cheng.yu@intel.com
+Subject: [PATCH v2 08/10] iommu/tegra-smmu: use page allocation function provided by iommu-pages.h
+Date: Thu, 30 Nov 2023 20:15:02 +0000
+Message-ID: <20231130201504.2322355-9-pasha.tatashin@soleen.com>
+X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
+In-Reply-To: <20231130201504.2322355-1-pasha.tatashin@soleen.com>
+References: <20231130201504.2322355-1-pasha.tatashin@soleen.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20231124-ltc4282-support-v2-0-952bf926f83c@analog.com>
- <20231124-ltc4282-support-v2-2-952bf926f83c@analog.com> <CACRpkdaksfS4WLNQ6ohauAPq3z2LPG2uF37_jWtm0brQHaDtNw@mail.gmail.com>
- <6384831c05b8ceeaf4a16cf9229770252989b762.camel@gmail.com>
- <CACRpkdZr6TdQCLy73Yx2RdMgQifd67remdxENBKYx3UvEMm87A@mail.gmail.com>
- <971eb35068639ec404669ea5320c8183ea71a7d0.camel@gmail.com>
- <ZWiP3i80KnVk9qyx@smile.fi.intel.com> <a4bd59df0c5bc1be5d0d6f11b968fd61a59ee2e0.camel@gmail.com>
-In-Reply-To: <a4bd59df0c5bc1be5d0d6f11b968fd61a59ee2e0.camel@gmail.com>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Thu, 30 Nov 2023 21:15:01 +0100
-Message-ID: <CACRpkdYz+qi42Pz8CgeWybksC0edaVux6rcEhwzjDWnWe9Jr1g@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] hwmon: ltc4282: add support for the LTC4282 chip
-To: =?UTF-8?B?TnVubyBTw6E=?= <noname.nuno@gmail.com>
-Cc: Andy Shevchenko <andy@kernel.org>, nuno.sa@analog.com, linux-hwmon@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org, 
-	Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh+dt@kernel.org>, 
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Bartosz Golaszewski <brgl@bgdev.pl>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Thu, Nov 30, 2023 at 4:20=E2=80=AFPM Nuno S=C3=A1 <noname.nuno@gmail.com=
-> wrote:
+Convert iommu/tegra-smmu.c to use the new page allocation functions
+provided in iommu-pages.h.
 
-> Well, I did spent some time on the gpio thing so I would like to have it =
-in but yeah,
-> no hard feelings if it does not go in.
+Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
+---
+ drivers/iommu/tegra-smmu.c | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
 
-I think it's a good idea to include it, especially if you can, in the
-commit message,
-illustrate how you test it with the libgpiod toolset. If you can test it al=
-l the
-way such that you have real hardware connected to real electronics where
-you can observe the values on these pins or read them: even better.
+diff --git a/drivers/iommu/tegra-smmu.c b/drivers/iommu/tegra-smmu.c
+index 310871728ab4..5e0730dc1b0e 100644
+--- a/drivers/iommu/tegra-smmu.c
++++ b/drivers/iommu/tegra-smmu.c
+@@ -19,6 +19,8 @@
+ #include <soc/tegra/ahb.h>
+ #include <soc/tegra/mc.h>
+ 
++#include "iommu-pages.h"
++
+ struct tegra_smmu_group {
+ 	struct list_head list;
+ 	struct tegra_smmu *smmu;
+@@ -282,7 +284,7 @@ static struct iommu_domain *tegra_smmu_domain_alloc_paging(struct device *dev)
+ 
+ 	as->attr = SMMU_PD_READABLE | SMMU_PD_WRITABLE | SMMU_PD_NONSECURE;
+ 
+-	as->pd = alloc_page(GFP_KERNEL | __GFP_DMA | __GFP_ZERO);
++	as->pd = __iommu_alloc_page(GFP_KERNEL | __GFP_DMA);
+ 	if (!as->pd) {
+ 		kfree(as);
+ 		return NULL;
+@@ -290,7 +292,7 @@ static struct iommu_domain *tegra_smmu_domain_alloc_paging(struct device *dev)
+ 
+ 	as->count = kcalloc(SMMU_NUM_PDE, sizeof(u32), GFP_KERNEL);
+ 	if (!as->count) {
+-		__free_page(as->pd);
++		__iommu_free_page(as->pd);
+ 		kfree(as);
+ 		return NULL;
+ 	}
+@@ -298,7 +300,7 @@ static struct iommu_domain *tegra_smmu_domain_alloc_paging(struct device *dev)
+ 	as->pts = kcalloc(SMMU_NUM_PDE, sizeof(*as->pts), GFP_KERNEL);
+ 	if (!as->pts) {
+ 		kfree(as->count);
+-		__free_page(as->pd);
++		__iommu_free_page(as->pd);
+ 		kfree(as);
+ 		return NULL;
+ 	}
+@@ -599,14 +601,14 @@ static u32 *as_get_pte(struct tegra_smmu_as *as, dma_addr_t iova,
+ 		dma = dma_map_page(smmu->dev, page, 0, SMMU_SIZE_PT,
+ 				   DMA_TO_DEVICE);
+ 		if (dma_mapping_error(smmu->dev, dma)) {
+-			__free_page(page);
++			__iommu_free_page(page);
+ 			return NULL;
+ 		}
+ 
+ 		if (!smmu_dma_addr_valid(smmu, dma)) {
+ 			dma_unmap_page(smmu->dev, dma, SMMU_SIZE_PT,
+ 				       DMA_TO_DEVICE);
+-			__free_page(page);
++			__iommu_free_page(page);
+ 			return NULL;
+ 		}
+ 
+@@ -649,7 +651,7 @@ static void tegra_smmu_pte_put_use(struct tegra_smmu_as *as, unsigned long iova)
+ 		tegra_smmu_set_pde(as, iova, 0);
+ 
+ 		dma_unmap_page(smmu->dev, pte_dma, SMMU_SIZE_PT, DMA_TO_DEVICE);
+-		__free_page(page);
++		__iommu_free_page(page);
+ 		as->pts[pde] = NULL;
+ 	}
+ }
+@@ -688,7 +690,7 @@ static struct page *as_get_pde_page(struct tegra_smmu_as *as,
+ 	if (gfpflags_allow_blocking(gfp))
+ 		spin_unlock_irqrestore(&as->lock, *flags);
+ 
+-	page = alloc_page(gfp | __GFP_DMA | __GFP_ZERO);
++	page = __iommu_alloc_page(gfp | __GFP_DMA);
+ 
+ 	if (gfpflags_allow_blocking(gfp))
+ 		spin_lock_irqsave(&as->lock, *flags);
+@@ -700,7 +702,7 @@ static struct page *as_get_pde_page(struct tegra_smmu_as *as,
+ 	 */
+ 	if (as->pts[pde]) {
+ 		if (page)
+-			__free_page(page);
++			__iommu_free_page(page);
+ 
+ 		page = as->pts[pde];
+ 	}
+-- 
+2.43.0.rc2.451.g8631bc7472-goog
 
-GPIOs tend to get used, and then we are prepared.
-
-> So, I actually talk with some hw guys and the pull_low is not really like=
- a pull_low
-> resistor.
-
-We usually call it pull down, so the PIN_CONFIG_BIAS_PULL_DOWN
-config property.
-
-This is vital to e.g. create a bit-banged I2C link, which is something I
-suspect could be useful on this hardware.
-
->These pins are effectively an open drain. Which means, setting them as
-> input means setting them in high-z (turning off the mosffet) - and I do h=
-ave a bug in
-> my code regarding this -
-
-The gpiolib framework assumes we can do open drain emulation by
-setting lines as input. It is used as fallback unless the hardware has
-an explicit open drain setting.
-
-> Or if you want them as outputs you can set the level low
-> (and it will always be low - just turn on the mosffet) or you can also se=
-t high-z
-> which means it will be either low or high depending on your external circ=
-uitry. The
-> point is, you can still have your pin acting as a normal gpo if you accom=
-modate your
-> circuitry for it (can also use these pins for things like buses).
-
-Yeah that is just standard open drain behaviour, by the book.
-Also documented in
-https://docs.kernel.org/driver-api/gpio/driver.html
-under the heading "GPIO lines with open drain/source support".
-
-> Also got me thinking if a gpi vs gpo devicetree property would make sense=
-. But I
-> would likely leave it more generic/relaxed for now (even though I think y=
-ou would
-> need to be creative and actually use more HW to have the possibility of u=
-sing these
-> pins as GPIs and GPOs at the same time).
-
-We don't define that in the device tree currently, we just make the driver
-not support output on input-only pins and vice versa, by returning error
-codes on the .set_direction() callbacks.
-
-Yours,
-Linus Walleij
 
