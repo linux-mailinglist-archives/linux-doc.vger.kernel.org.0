@@ -1,342 +1,161 @@
-Return-Path: <linux-doc+bounces-3777-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3779-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCC53800EEE
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 17:04:10 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02151800EF1
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 17:04:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EE10E1C209C1
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 16:04:09 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BA28C281C09
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 16:04:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7C4924BA84;
-	Fri,  1 Dec 2023 16:04:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3FF4F4BA89;
+	Fri,  1 Dec 2023 16:04:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="h/zESl6A"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Uu8342zh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B9B9010DB;
-	Fri,  1 Dec 2023 08:04:01 -0800 (PST)
-Received: from eldfell (cola.collaboradmins.com [195.201.22.229])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: pq)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id 8B2F766073A9;
-	Fri,  1 Dec 2023 16:03:58 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1701446639;
-	bh=Bhi/oJzqpRU3XRA7MITWzV75GEkCiVPyd3d/unY+UEw=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=h/zESl6AOEyvT5fTkmmgLDZFkwnxmkiNlB+6F4C5Tm9lvQGKtz6PTU195wBFELpAf
-	 d+IBar3yQ6pOBCvwYFz7Jov3kkX0yU3jfbCiXtBL65OBKXz66HCHhzV3nLyrHnwk/e
-	 bjdsHYpaiHrGd/VGqVDZxj5N9h2hX0qyBLvMjEg8vQirfCek0icNnFQmy17eRwUBdL
-	 H95haaLVHU4c6O5PfozWwnYz4iPThEUFX/MK9YLwSdXiaVPQ58PbHxv+W0WFbGkvNd
-	 VbPO9ivmzo7nAtJC8P7MOir3p3pFfxXDpvhXvyd8Ogh4N+6R+kfgzU8ipCZ+vGuoWw
-	 YXvM6E78cNI9A==
-Date: Fri, 1 Dec 2023 18:03:48 +0200
-From: Pekka Paalanen <pekka.paalanen@collabora.com>
-To: Maxime Ripard <mripard@kernel.org>
-Cc: =?UTF-8?B?QW5kcsOp?= Almeida <andrealmeid@igalia.com>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- kernel-dev@igalia.com, alexander.deucher@amd.com, christian.koenig@amd.com,
- Simon Ser <contact@emersion.fr>, Rob Clark <robdclark@gmail.com>,
- daniel@ffwll.ch, Daniel Stone <daniel@fooishbar.org>, 'Marek
- =?UTF-8?B?T2zFocOhayc=?= <maraeo@gmail.com>, Dave Airlie
- <airlied@gmail.com>, Michel =?UTF-8?B?RMOkbnplcg==?=
- <michel.daenzer@mailbox.org>, Randy Dunlap <rdunlap@infradead.org>,
- Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org, Thomas
- Zimmermann <tzimmermann@suse.de>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>
-Subject: Re: [PATCH] drm/doc: Define KMS atomic state set
-Message-ID: <20231201180348.4a42025b.pekka.paalanen@collabora.com>
-In-Reply-To: <bgd5xuszaujdjg7lt24dpofvhx2v6gyxfjxnqfo7nmaecmn6om@fejhsggdlffo>
-References: <20231130200740.53454-1-andrealmeid@igalia.com>
-	<x6cqert2tadgc46w3u2rfgcfaw6evxdeerl2mxvh2peycr4i7q@qf6oqymcti4j>
-	<20231201110616.30ad1468.pekka.paalanen@collabora.com>
-	<bry3w6w32uy2jlmbkcmbtthw6w6nwux7dwlcju5iuxac2wphku@md6njxjtsbvm>
-	<20231201120648.2ba706e1.pekka.paalanen@collabora.com>
-	<bgd5xuszaujdjg7lt24dpofvhx2v6gyxfjxnqfo7nmaecmn6om@fejhsggdlffo>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com [IPv6:2607:f8b0:4864:20::42a])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 68F511B2;
+	Fri,  1 Dec 2023 08:04:18 -0800 (PST)
+Received: by mail-pf1-x42a.google.com with SMTP id d2e1a72fcca58-6cdfee14c24so731528b3a.2;
+        Fri, 01 Dec 2023 08:04:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1701446658; x=1702051458; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=HuWRgEfB2gJpZPQw/Cwowh24P+d6lxkRX8lCOmWSQMc=;
+        b=Uu8342zhG45HPWTYK1LWBpd2/qycr4aZMUIJjrRnf60N8ea5xorVmVRkmYaDxH7HtO
+         XAQi/asOt+pGOC+ACyGQcEetVW4Qqo6M39ZRgsZRSkbd7yfwe70cznM+jILXpejgWJoH
+         XOo/IbuqICFED7VjQRphJBC7RLYEWivrEUBNXKRQjIE4pSt7hKvugQKBCS9+AZewvD8+
+         5QY8OfXce7aCjfINThIhF9pbbjt2A2Omk+S2nrzeVZxYbCDrIRhkh5fT6YJsNlVPC0qy
+         LWHDNApgLzHzzeU1WBkmdZAWrmcLSBgSPzsXW/SIhqn1kl7D2KAmePSPbXBDfGCpYK7v
+         1FQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701446658; x=1702051458;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :sender:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=HuWRgEfB2gJpZPQw/Cwowh24P+d6lxkRX8lCOmWSQMc=;
+        b=sCIULadgTkINNIogCKIatoLPNGDq9llW2zX89Y/y1HKfi3K9juzbYfSH0aEWmTKh+G
+         12/2T26cZd7XI/c8I68DwtpYa+IVKvtz2TEXf7jIPgE6p0TC7xMqHtu1MsjjmiyjPBYd
+         D84aYeaUHfA3Db5Z1h7gL2/3PNBGm/npzorDBOBi6Bwro+7vj7A1EruHb4R3zYDRiWCU
+         NSb0kRtLu6tKl1NExVRn7PcrRyTgKFuhbSQLWffZ7ptPpGepXWbWy8euufSsyUd2aR3N
+         yRoi8ejJpZFX1EMK4gxR7yrcrRA/9NlNPuWSMdzQEqGgTvnH92MNVrfhuTANU3eZMMtn
+         ++Mw==
+X-Gm-Message-State: AOJu0Yw+ZpaB72c585mwprq19AIJfd7Cq/MeAS0Sz4MUCWiY6BVJQGLn
+	9Jd+gA5hvllNtEyMbhkzcqU=
+X-Google-Smtp-Source: AGHT+IECN4GkAeqTSyXRHp+NuMWQXhCaG8WPLtDZTVmielY2laSvJNDXvUVL7zmyn7df95YbGeBqPw==
+X-Received: by 2002:a05:6a21:1a9:b0:18c:6c2:5369 with SMTP id le41-20020a056a2101a900b0018c06c25369mr27653597pzb.30.1701446655432;
+        Fri, 01 Dec 2023 08:04:15 -0800 (PST)
+Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c? ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id t14-20020aa7938e000000b006be047268d5sm3274022pfe.174.2023.12.01.08.04.12
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 01 Dec 2023 08:04:13 -0800 (PST)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <7dc3f137-6073-4262-afb5-439d024bbbd2@roeck-us.net>
+Date: Fri, 1 Dec 2023 08:04:12 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/9y=H4uMe86wLJn1vn__+2zA";
- protocol="application/pgp-signature"; micalg=pgp-sha256
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] hwmon: ltc4282: add support for the LTC4282 chip
+Content-Language: en-US
+To: Andy Shevchenko <andy@kernel.org>, =?UTF-8?Q?Nuno_S=C3=A1?=
+ <noname.nuno@gmail.com>
+Cc: Linus Walleij <linus.walleij@linaro.org>, nuno.sa@analog.com,
+ linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-doc@vger.kernel.org, Jean Delvare <jdelvare@suse.com>,
+ Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Bartosz Golaszewski <brgl@bgdev.pl>
+References: <CACRpkdaksfS4WLNQ6ohauAPq3z2LPG2uF37_jWtm0brQHaDtNw@mail.gmail.com>
+ <6384831c05b8ceeaf4a16cf9229770252989b762.camel@gmail.com>
+ <CACRpkdZr6TdQCLy73Yx2RdMgQifd67remdxENBKYx3UvEMm87A@mail.gmail.com>
+ <971eb35068639ec404669ea5320c8183ea71a7d0.camel@gmail.com>
+ <ZWiP3i80KnVk9qyx@smile.fi.intel.com>
+ <a4bd59df0c5bc1be5d0d6f11b968fd61a59ee2e0.camel@gmail.com>
+ <CACRpkdYz+qi42Pz8CgeWybksC0edaVux6rcEhwzjDWnWe9Jr1g@mail.gmail.com>
+ <61a8f54835c10db7a9c650ee2e3706b47382c634.camel@gmail.com>
+ <CACRpkda55HzPqus5KR-t=xEBkkdND5kYZj1sHdxK+j6QwDUPRg@mail.gmail.com>
+ <b761d2497462664d541779857398b2aa893cbee5.camel@gmail.com>
+ <ZWoABzufPkdXnrMT@smile.fi.intel.com>
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ mDW4+i+XlNFUPUYMrIKi9joBhu18ssf5i5Q=
+In-Reply-To: <ZWoABzufPkdXnrMT@smile.fi.intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
---Sig_/9y=H4uMe86wLJn1vn__+2zA
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On 12/1/23 07:47, Andy Shevchenko wrote:
+> On Fri, Dec 01, 2023 at 04:24:35PM +0100, Nuno Sá wrote:
+>> On Fri, 2023-12-01 at 14:40 +0100, Linus Walleij wrote:
+> 
+> ...
+> 
+>> Yes, that is the only thing we have. Meaning that there is no hw setting to set the
+>> pins to open drain. Open drain is what they are. That is why I'm not seeing the point
+>> in having PIN_CONFIG_DRIVE_OPEN_DRAIN implemented.
+> 
+> At least you have to implement error for PUSH_PULL mode and other modes,
+> so from the (core) software point of view the user should be able to ask for
+> anything and get an answer from the certain driver that "hey, i do support OD",
+> or "hey, push-pull can't be supported with this hw".
+> 
 
-On Fri, 1 Dec 2023 14:20:55 +0100
-Maxime Ripard <mripard@kernel.org> wrote:
+It seems to me that this is heading towards a mfd driver. I don't feel comfortable
+with all that gpio specific code in the hwmon subsystem.
 
-> On Fri, Dec 01, 2023 at 12:06:48PM +0200, Pekka Paalanen wrote:
-> > On Fri, 1 Dec 2023 10:25:09 +0100
-> > Maxime Ripard <mripard@kernel.org> wrote:
-> >  =20
-> > > On Fri, Dec 01, 2023 at 11:06:16AM +0200, Pekka Paalanen wrote: =20
-> > > > On Fri, 1 Dec 2023 09:29:05 +0100
-> > > > Maxime Ripard <mripard@kernel.org> wrote:
-> > > >    =20
-> > > > > Hi,
-> > > > >=20
-> > > > > On Thu, Nov 30, 2023 at 05:07:40PM -0300, Andr=C3=A9 Almeida wrot=
-e:   =20
-> > > > > > From: Pekka Paalanen <pekka.paalanen@collabora.com>
-> > > > > >=20
-> > > > > > Specify how the atomic state is maintained between userspace and
-> > > > > > kernel, plus the special case for async flips.
-> > > > > >=20
-> > > > > > Signed-off-by: Pekka Paalanen <pekka.paalanen@collabora.com>
-> > > > > > Signed-off-by: Andr=C3=A9 Almeida <andrealmeid@igalia.com>
-> > > > > > ---
-> > > > > >=20
-> > > > > > This is a standalone patch from the following serie, the other =
-patches are
-> > > > > > already merged:
-> > > > > > https://lore.kernel.org/lkml/20231122161941.320564-1-andrealmei=
-d@igalia.com/
-> > > > > >=20
-> > > > > >  Documentation/gpu/drm-uapi.rst | 47 ++++++++++++++++++++++++++=
-++++++++
-> > > > > >  1 file changed, 47 insertions(+)
-> > > > > >=20
-> > > > > > diff --git a/Documentation/gpu/drm-uapi.rst b/Documentation/gpu=
-/drm-uapi.rst
-> > > > > > index 370d820be248..d0693f902a5c 100644
-> > > > > > --- a/Documentation/gpu/drm-uapi.rst
-> > > > > > +++ b/Documentation/gpu/drm-uapi.rst
-> > > > > > @@ -570,3 +570,50 @@ dma-buf interoperability
-> > > > > > =20
-> > > > > >  Please see Documentation/userspace-api/dma-buf-alloc-exchange.=
-rst for
-> > > > > >  information on how dma-buf is integrated and exposed within DR=
-M.
-> > > > > > +
-> > > > > > +KMS atomic state
-> > > > > > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > > > > +
-> > > > > > +An atomic commit can change multiple KMS properties in an atom=
-ic fashion,
-> > > > > > +without ever applying intermediate or partial state changes.  =
-Either the whole
-> > > > > > +commit succeeds or fails, and it will never be applied partial=
-ly. This is the
-> > > > > > +fundamental improvement of the atomic API over the older non-a=
-tomic API which is
-> > > > > > +referred to as the "legacy API".  Applying intermediate state =
-could unexpectedly
-> > > > > > +fail, cause visible glitches, or delay reaching the final stat=
-e.
-> > > > > > +
-> > > > > > +An atomic commit can be flagged with DRM_MODE_ATOMIC_TEST_ONLY=
-, which means the
-> > > > > > +complete state change is validated but not applied.  Userspace=
- should use this
-> > > > > > +flag to validate any state change before asking to apply it. I=
-f validation fails
-> > > > > > +for any reason, userspace should attempt to fall back to anoth=
-er, perhaps
-> > > > > > +simpler, final state.  This allows userspace to probe for vari=
-ous configurations
-> > > > > > +without causing visible glitches on screen and without the nee=
-d to undo a
-> > > > > > +probing change.
-> > > > > > +
-> > > > > > +The changes recorded in an atomic commit apply on top the curr=
-ent KMS state in
-> > > > > > +the kernel. Hence, the complete new KMS state is the complete =
-old KMS state with
-> > > > > > +the committed property settings done on top. The kernel will t=
-ry to avoid     =20
-> > > > >=20
-> > > > > That part is pretty confusing to me.
-> > > > >=20
-> > > > > What are you calling the current and old KMS state?   =20
-> > > >=20
-> > > > Current =3D old, if you read that "current" is the KMS state before
-> > > > considering the atomic commit at hand.
-> > > >    =20
-> > > > > What's confusing to me is that, yes, what you're saying is true f=
-or a
-> > > > > given object: if it was part of the commit, the new state is the =
-old
-> > > > > state + whatever the new state changed.
-> > > > >=20
-> > > > > However, if that object wasn't part of the commit at all, then it=
-'s
-> > > > > completely out of the old or new global KMS state.   =20
-> > > >=20
-> > > > This is not talking about kernel data structures at all. This is
-> > > > talking about how KMS looks from the userspace point of view.   =20
-> > >=20
-> > > I mean, that's also true from the userspace point of view. You can ve=
-ry
-> > > well commit only a single property on a single object, and only that
-> > > object will be part of the "global KMS state". =20
-> >=20
-> > What is "global KMS state"? =20
->=20
-> struct drm_atomic_state, ie. the object holding the entire new commit con=
-tent.
->=20
-> > As a userspace developer, the global KMS state is the complete, total,
-> > hardware and driver instance state. It's not any kind of data
-> > structure, but it is all the condition and all the programming of the
-> > whole device (hardware + driver instance) at any specific time instant.=
- =20
->=20
-> That was my understanding, and assumption, too.
->=20
-> I think part of the issue is that drm_atomic_state is documented as "the
-> global state object for atomic updates" which kind of implies that it
-> holds *everything*, except that an atomic update can be partial.
+Maybe I should request that all hwmon chips with gpio support must be implemented
+as mfd drivers. I'll have to think about that.
 
-I haven't read such doc, and I never intended to refer to struct
-drm_atomic_state. It very much sounds like it's not what I mean. I
-avoid reading kernel internals docs, they are uninteresting to
-userspace developers.
+Guenter
 
-Is it really "global" too? Or is it device-wide? Or is it just the bits
-that userspace bothered to mention in an atomic commit?
-
-> So maybe we need to rewrite some other parts of the documentation too
-> then?
-
-I guess.
-
-> Or s/drm_atomic_state/drm_atomic_update/ so we don't have two slightly
-> different definitions of what a state is?
->=20
-> Because, yeah, at the moment we have our object state that is the
-> actual, entire, state of the device but the global atomic state is a
-> collection of object state but isn't the entire state of the device in
-> most cases.
->=20
-> If we get rid of the latter, then there's no ambiguity anymore and your
-> sentence makes total sense.
-
-I have no idea of kernel internals. Userspace should not care about
-kernel internals as that would mean the kernel internals become UABI.
-Some internals leak into UABI anyway as observable behaviour, but it
-could be worse.
-
-The complete device state is a vague, abstract concept. I do not expect
-it to be an actual C struct. It is hardware-specific, too.
-
-> > It is not related to any atomic commit or UAPI call, it is how the
-> > hardware is currently programmed.
-> >=20
-> > How can we make that clear?
-> >=20
-> > Should "KMS state" be replaced with "complete device state" or
-> > something similar? =20
->=20
-> I know I've been bitten by that ambiguity, and the part of the doc I've
-> replied too mentions the "KMS state in the kernel" and an atomic commit,
-> so it's easy to make the parallel with drm_atomic_state here.
->=20
-> I guess we can make it clearer that it's from the userspace then?
-
-It's not from userspace. It is a concept from the userspace
-perspective. I'm not sure how to make that more clear.
-
-=46rom userspace perspective it looks like the kernel maintains all of a
-device's state. What would you call this "all of a device's state as
-maintained by the kernel"?
-
-
-Thanks,
-pq
-
-> > > > All objects are always part of the device KMS state as referred to
-> > > > in this doc, whether they were mentioned in the atomic commit state=
- set
-> > > > or not. That's the whole point: all state that was not explicitly
-> > > > modified remains as it was, and is actively used state by the driver
-> > > > and hardware. The practical end result state is the same as if all
-> > > > objects were (redundantly) mentioned.
-> > > >=20
-> > > > For example, if you change properties of CRTC 31, it has no effect =
-on
-> > > > the behaviour of CRTC 54. If CRTC 54 was active, it remains active.=
- If
-> > > > CRTC 54 had certain property values, it continues to have those
-> > > > property values.   =20
-> > >=20
-> > > I'm not quite sure I followed your previous paragraph, sorry, but we
-> > > agree here and it's kind of my point really: CRTC-54 would not be part
-> > > of the new KMS state, so claiming that it is complete is confusing.
-> > >=20
-> > > It's not complete to me precisely because it doesn't contain the state
-> > > of all objects. =20
-> >=20
-> > Did my explanation of what "KMS state" means from userspace perspective
-> > above help?
-> >  =20
-> > > > This is opposed to something else; the UAPI could have
-> > > > been designed to e.g. reset all unmentioned objects to defaults/off=
- by
-> > > > the atomic commit. Obviously that's not how it works today, so we n=
-eed
-> > > > to mention how things do work.   =20
-> > >=20
-> > > Sure, I'm not claiming we should change anything but the wording of t=
-hat
-> > > doc.
-> > >  =20
-> > > > >=20
-> > > > > So yeah, individual object KMS state are indeed complete, but
-> > > > > drm_atomic_state definitely isn't. And it's the whole point of fu=
-nctions
-> > > > > like drm_atomic_get_crtc_state() vs drm_atomic_get_old/new_crtc_s=
-tate:
-> > > > > the old/new variants only return a state if it was part of
-> > > > > drm_atomic_state to begin with. drm_atomic_get_crtc_state() bring=
-s the
-> > > > > crtc state into drm_atomic_state if it wasn't part of it.   =20
-> > > >=20
-> > > > At no point the text is referring to drm_atomic_state or any other
-> > > > kernel data structure.   =20
-> > >=20
-> > > Then it's even more confusing, because the sentence I was quoting was
-> > > "The changes recorded in an atomic commit apply on top the current KMS
-> > > state *in the kernel*", which is ambiguous then. =20
-> >=20
-> > It's perhaps a misguided attempt to say that the kernel maintains the
-> > complete device state, and that the complete device state is modified
-> > in the kernel. If it helps, the "in the kernel" can be dropped. =20
->=20
-> Yeah, that would probably help too
->=20
-> Maxime
-
-
---Sig_/9y=H4uMe86wLJn1vn__+2zA
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmVqA+QACgkQI1/ltBGq
-qqc//Q//Sz+1z1KkANCi5LLoNSLELa8vm0D2/6k5G+FcOGT6WHpKKsSqYYOhynoR
-IhJkPtzU3qdz5X3yBfvZ+aMteDA/81q0QZoMMReKQeRPto/M2I7DWxhSYtUBxYRt
-7NofmGdr1vkOGTuQ7wJObMYzX+zzJNmp5KFdMNVcWW09z6+TlsJeOzfb7+w1/bMb
-d5ctl1SDdMBfOez/bk5vpzplul+5aaiAlRqJppzNMrJpj4i7A2Pp/gxJK8npBiYh
-H/pkSJwG0E5S//XoxkMx3b7v+7CVLzvTilKuqf9RTHqK/c5hGQKPlarMu2sCKmP/
-sri1zE9z0TqONCT1GGp4bOXKo2k5/bxTPRTLjc7DOcctcAPOhly520nuO+HnlBC2
-qYXuG5OECLOby2FFa4zGTZbktpJr7VnHqer4fyaiB4KmzkqwXD8uyIcZmt8TZjkv
-zpn83IUy1xIgehOQvwd0soNAvFLTqKzQpXOGv16gZs+RmXpjIEcpRSUd3Nn/37Hi
-aDR4/9MtxP0axxlrD85QhKIGybXkTHUWPedoRtP5c+EkpdSJhcYs0Vw6z9jGGUCD
-MG6xXoqm/ONbyCdwU8oFWbwDLByLJsB2xsibJDAUkas69MzVVDE2g1xnmi4TMRhM
-rktya+o5f2mpTzgf88AszGFBIOYx29p8AH2kUauY1fSIJl3aNAY=
-=ipke
------END PGP SIGNATURE-----
-
---Sig_/9y=H4uMe86wLJn1vn__+2zA--
 
