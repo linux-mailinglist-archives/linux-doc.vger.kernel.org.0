@@ -1,51 +1,65 @@
-Return-Path: <linux-doc+bounces-3824-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3826-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 998D78013E1
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 21:05:03 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B680F8014C4
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 21:45:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 54DA4281CA9
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 20:05:02 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 3E0D8B20D41
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 20:45:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7753655C39;
-	Fri,  1 Dec 2023 20:05:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 99DB74EB36;
+	Fri,  1 Dec 2023 20:45:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linux.org.uk header.i=@linux.org.uk header.b="fAKASPLf"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="EYC718hv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from zeniv.linux.org.uk (zeniv.linux.org.uk [IPv6:2a03:a000:7:0:5054:ff:fe1c:15ff])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A5D34FA;
-	Fri,  1 Dec 2023 12:04:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
-	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=1D5xr00pbiSNnKNOHUpq8cAEaHYrXB6SCLvSNPHwawM=; b=fAKASPLf9dHbjlb2R7a8gezz4n
-	gW9YY2U3ykkdBE2DBpU3rZ0svwUxRIlYHO8gY2YjDareO54fwHnSzd38e0YBJLW713aS3MfrYEBJR
-	UolNfS5Xrx0U5GpOunewG19gHI6yQArE94NAY1NnKgIB1YPSCMwJQrZZjfBknGWwODKpazRdHMtaU
-	M3GCt51XbEx40VkOkedV7jkQQLhNnqATRcJBu3tzXevZTe9p9asoHmYhUIlif3NVTFCeHwd+S+tn/
-	m0UwBtwxzgTvLU22oW7TKmow0f4IacANB1xOegJlGZ1esEg4CqGHoQoMGXjGYcZitY22E+zao7oUC
-	GnxGBEyg==;
-Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat Linux))
-	id 1r99kk-0060OH-2H;
-	Fri, 01 Dec 2023 20:04:47 +0000
-Date: Fri, 1 Dec 2023 20:04:46 +0000
-From: Al Viro <viro@zeniv.linux.org.uk>
-To: Oliver Sang <oliver.sang@intel.com>
-Cc: oe-lkp@lists.linux.dev, lkp@intel.com, linux-fsdevel@vger.kernel.org,
-	Christian Brauner <brauner@kernel.org>, linux-doc@vger.kernel.org,
-	ying.huang@intel.com, feng.tang@intel.com, fengwei.yin@intel.com,
-	Linus Torvalds <torvalds@linux-foundation.org>
-Subject: Re: [viro-vfs:work.dcache2] [__dentry_kill()]  1b738f196e:
- stress-ng.sysinfo.ops_per_sec -27.2% regression
-Message-ID: <20231201200446.GA1431056@ZenIV>
-References: <202311300906.1f989fa8-oliver.sang@intel.com>
- <20231130075535.GN38156@ZenIV>
- <ZWlBNSblpWghkJyW@xsang-OptiPlex-9020>
- <20231201040951.GO38156@ZenIV>
- <20231201065602.GP38156@ZenIV>
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C4268FF;
+	Fri,  1 Dec 2023 12:45:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1701463529; x=1732999529;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=yG0Y48woFZNswGTmBBWmxBZc/W1//0MjI/GiuILqv6k=;
+  b=EYC718hv1rugfCcnKoczcZu27jVK0XsMYg8VZDwBK33p9qRlYwsGp3F5
+   0OobgrRzOmI4hAHR8hwPrZN95VS3sAb8r31dE1m6cg6HwNxnLPg+ac0X6
+   DB+bwOANfLg7Jo19qbOwddR5w8Vzjo5wdPJD6gwtrVW+hiFpDncUWfMB2
+   zkfH8v4uz+YpvxUSyhlo1IfEj35mn2hsotcjpbiETgkOTq6nQjQBNyge1
+   tngAXCrW03R/Gy4GrQF7vvm3O1Bm2/6WYSgTH3iUlYbd9e6DYyNE2iGm9
+   cHp1U82KxrZWOXt08RhsQfO3zqTptX7qCFXZ6Nac504DHdcNbTLUl6sLG
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10911"; a="431731"
+X-IronPort-AV: E=Sophos;i="6.04,242,1695711600"; 
+   d="scan'208";a="431731"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Dec 2023 12:45:28 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10911"; a="1101411470"
+X-IronPort-AV: E=Sophos;i="6.04,242,1695711600"; 
+   d="scan'208";a="1101411470"
+Received: from agluck-desk3.sc.intel.com (HELO agluck-desk3) ([172.25.222.74])
+  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Dec 2023 12:45:27 -0800
+Date: Fri, 1 Dec 2023 12:45:26 -0800
+From: Tony Luck <tony.luck@intel.com>
+To: Reinette Chatre <reinette.chatre@intel.com>
+Cc: Fenghua Yu <fenghua.yu@intel.com>,
+	Peter Newman <peternewman@google.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>, x86@kernel.org,
+	Shaopeng Tan <tan.shaopeng@fujitsu.com>,
+	James Morse <james.morse@arm.com>,
+	Jamie Iles <quic_jiles@quicinc.com>,
+	Babu Moger <babu.moger@amd.com>,
+	Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, patches@lists.linux.dev
+Subject: Re: [PATCH v4] x86/resctrl: Add mount option to pick total MBM event
+Message-ID: <ZWpF5m4mIeZdK8kv@agluck-desk3>
+References: <20231026200214.16017-1-tony.luck@intel.com>
+ <20231128231439.81691-1-tony.luck@intel.com>
+ <95a21b05-1838-4098-854f-f60f82f26f5f@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -54,39 +68,155 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20231201065602.GP38156@ZenIV>
-Sender: Al Viro <viro@ftp.linux.org.uk>
+In-Reply-To: <95a21b05-1838-4098-854f-f60f82f26f5f@intel.com>
 
-On Fri, Dec 01, 2023 at 06:56:03AM +0000, Al Viro wrote:
-> On Fri, Dec 01, 2023 at 04:09:51AM +0000, Al Viro wrote:
-> > On Fri, Dec 01, 2023 at 10:13:09AM +0800, Oliver Sang wrote:
-> > 
-> > > > Very interesting...  Out of curiosity, what effect would the following
-> > > > have on top of 1b738f196e?
-> > > 
-> > > I applied the patch upon 1b738f196e (as below fec356fd0c), but seems less
-> > > useful.
-> > 
-> > I would be rather surprised if it fixed anything; it's just that 1b738f196e
-> > changes two things - locking rules for __dentry_kill() and, in some cases,
-> > the order of dentry eviction in shrink_dentry_list().  That delta on top of
-> > it restores the original order in shrink_dentry_list(), leaving pretty much
-> > the changes in lock_for_kill()/dput()/__dentry_kill().
-> > 
-> > Interesting...  Looks like there are serious changes in context switch
-> > frequencies, but I don't see where could that have come from...
+On Wed, Nov 29, 2023 at 03:48:37PM -0800, Reinette Chatre wrote:
+> Hi Tony,
 > 
-> In principle it could be an effect of enforcing the ordering between __dentry_kill()
-> of child and parent, but if that's what is going on... we would've seen
-> more iterations of loop in shrink_dcache_parent() and/or d_walk() calls in
-> it having more work to do.  But... had that been what's going on, wouldn't we
-> see some of those functions in the changed part of profile?  
+> On 11/28/2023 3:14 PM, Tony Luck wrote:
+> > Add a "total" mount option to be used in conjunction with "mba_MBps"
+> > to request use of the total memory bandwidth event as the feedback
+> > input to the control loop.
 > 
-> I'll try to split that thing into a series of steps, so we could at least narrow
-> the effect down, but that'll have to wait until tomorrow ;-/
+> "total" is very generic. It is also not clear to me why users
+> would need to use two mount options. What if the new mount option
+> is "mba_MBps_total" instead, without user needing to also provide
+> "mba_MBps"? 
 
-OK, a carved-up series (on top of 1b738f196e^) is in #carved-up-__dentry_kill
-That's 9 commits, leading to something close to 1b738f196e+patch you've tested
-yesterday; could you profile them on your reproducers?  That might give some
-useful information about the nature of the regression...
+I wasn't attached to "total". I tried to change the type of the existing
+"mba_MBps" option to fsparam_string_emtpy() in the hope that existing users
+would be able to keep using "mba_MBps", and users who want to use total
+bandwidth could use "mba_MBps=total". But that type requires the "="
+in the string provided by the user for the "empty" case.
+
+So now I'm experimenting with adding a new option:
+
+	fsparam_string("mba_MBps_event", Opt_mba_mbps_event)
+
+so a user would specify "mba_MBps_event=total" instead of "mba_MBps".
+My code also allow for "mba_MBps_event=local" if a user want to ensure
+they use the local bandwidth event (failing the mount if it is not
+available).
+
+Existing code using the legacy "mba_MBps" option will get local by
+default, failing over to total if needed.
+
+> > 
+> > Also fall back to using the total event if the local event is not
+> > supported by the CPU.
+> > 
+> > Update the once-per-second polling code to use the event (local
+> > or total memory bandwidth).
+> 
+> Please take care to describe why this change is needed, not just
+> what it does. This is required by x86. For confirmation:
+> https://lore.kernel.org/lkml/20231009172517.GRZSQ3fT05LGgpcW35@fat_crate.local/
+
+Yes. I had some justification in earlier versions, but lost it along the
+way. I will include in next version.
+
+> > 
+> > Signed-off-by: Tony Luck <tony.luck@intel.com>
+> > ---
+> > 
+> > Changes since v3:
+> > 
+> > Reinette suggested that users might like the option to use the total
+> > memory bandwidth event. I tried out some code to make the event runtime
+> > selectable via a r/w file in the resctrl/info directories. But that
+> > got complicated because of the amount of state that needs to be updated
+> > when switching events. Since there isn't a firm use case for user
+> > selectable event, this latest version falls back to the far simpler
+> > case of using a mount option.
+> 
+> (I did not realize that that discussion was over.)
+
+I'd like to avoid too much feature creep in this series. I'd like to
+finish solving the original problem (systems without local bandwidth
+monitoring should have a way to use total bandwidth) before tackling
+additional issues in a separate patch series. Taking on a simple way
+for users to request total bandwidth isn't much extra code. Making
+it possible to switch events at runtime isn't. Fixing the corner cases
+where the feedback loop may get stuck is also a separate issue.
+
+> > 
+> >  Documentation/arch/x86/resctrl.rst     |  3 +++
+> >  arch/x86/kernel/cpu/resctrl/internal.h |  3 +++
+> >  arch/x86/kernel/cpu/resctrl/monitor.c  | 20 +++++++++-----------
+> >  arch/x86/kernel/cpu/resctrl/rdtgroup.c | 15 ++++++++++++++-
+> >  4 files changed, 29 insertions(+), 12 deletions(-)
+> > 
+> > diff --git a/Documentation/arch/x86/resctrl.rst b/Documentation/arch/x86/resctrl.rst
+> > index a6279df64a9d..29c3e7137eb8 100644
+> > --- a/Documentation/arch/x86/resctrl.rst
+> > +++ b/Documentation/arch/x86/resctrl.rst
+> > @@ -46,6 +46,9 @@ mount options are:
+> >  "mba_MBps":
+> >  	Enable the MBA Software Controller(mba_sc) to specify MBA
+> >  	bandwidth in MBps
+> > +"total":
+> > +	Use total instead of local memory bandwidth to drive the
+> > +	MBA Software Controller
+> >  "debug":
+> >  	Make debug files accessible. Available debug files are annotated with
+> >  	"Available only with debug option".
+> > diff --git a/arch/x86/kernel/cpu/resctrl/internal.h b/arch/x86/kernel/cpu/resctrl/internal.h
+> > index a4f1aa15f0a2..f98fc9adc2da 100644
+> > --- a/arch/x86/kernel/cpu/resctrl/internal.h
+> > +++ b/arch/x86/kernel/cpu/resctrl/internal.h
+> > @@ -59,6 +59,7 @@ struct rdt_fs_context {
+> >  	bool				enable_cdpl2;
+> >  	bool				enable_cdpl3;
+> >  	bool				enable_mba_mbps;
+> > +	bool				use_mbm_total;
+> >  	bool				enable_debug;
+> >  };
+> 
+> Why did you choose new member to not follow existing custom of having
+> an enable_ prefix?
+
+That does look awful. Next version will do this:
+
+-       bool                            enable_mba_mbps;
++       bool                            enable_mba_mbps_local;
++       bool                            enable_mba_mbps_total;
+
+> 
+> >  
+> > @@ -428,6 +429,8 @@ extern struct rdt_hw_resource rdt_resources_all[];
+> >  extern struct rdtgroup rdtgroup_default;
+> >  DECLARE_STATIC_KEY_FALSE(rdt_alloc_enable_key);
+> >  
+> > +extern enum resctrl_event_id mba_mbps_evt_id;
+> > +
+> 
+> This global seems unnecessary. struct resctrl_membw.mba_sc indicates if
+> the software controller is enabled. Creating this global fragments
+> related information.
+
+Global is now gone.
+
+> One option could be to change the type of struct resctrl_membw.mba_sc to
+> enum resctrl_event_id. I assume that 0 would never be a valid event ID and
+> can thus be used to know if the software controller is disabled. If this
+> is done then enum resctrl_event_id's documentation should be updated
+> with this assumption/usage.
+
+But I'm not fond of this overloading the meaning of resctrl_membw.mba_sc
+by making that assumption that "0" will never be a valid event.
+
+I've left the mba_sc field as a boolean that indicates enabled and added
+a new field for the event:
+
+@@ -138,6 +139,7 @@ struct resctrl_membw {
+        bool                            arch_needs_linear;
+        enum membw_throttle_mode        throttle_mode;
+        bool                            mba_sc;
++       enum resctrl_event_id           mba_mbps_event;
+        u32                             *mb_map;
+ };
+
+New version will be posted soon.
+
+-Tony
 
