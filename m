@@ -1,143 +1,94 @@
-Return-Path: <linux-doc+bounces-3776-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3778-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id C442D800EE2
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 16:58:54 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 94E9D800EEF
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 17:04:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 63DB9B20FDC
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 15:58:52 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0F57EB2110B
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Dec 2023 16:04:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DA5F34B5D8;
-	Fri,  1 Dec 2023 15:58:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BD7B54BA89;
+	Fri,  1 Dec 2023 16:04:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="xlU0MnRR"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="V8aYhMYG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com [IPv6:2a00:1450:4864:20::529])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 846AE10DF
-	for <linux-doc@vger.kernel.org>; Fri,  1 Dec 2023 07:58:43 -0800 (PST)
-Received: by mail-ed1-x529.google.com with SMTP id 4fb4d7f45d1cf-54744e66d27so12814a12.0
-        for <linux-doc@vger.kernel.org>; Fri, 01 Dec 2023 07:58:43 -0800 (PST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com [IPv6:2a00:1450:4864:20::530])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2C69210E4
+	for <linux-doc@vger.kernel.org>; Fri,  1 Dec 2023 08:04:05 -0800 (PST)
+Received: by mail-ed1-x530.google.com with SMTP id 4fb4d7f45d1cf-54c52baaa59so9432a12.0
+        for <linux-doc@vger.kernel.org>; Fri, 01 Dec 2023 08:04:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1701446322; x=1702051122; darn=vger.kernel.org;
+        d=google.com; s=20230601; t=1701446643; x=1702051443; darn=vger.kernel.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=5r69d7flVI5ckkQOOgWcECH4o4ZC5eGRq35Be8p9mMM=;
-        b=xlU0MnRRG5PmaJL1C914UZo1HGfMiW5MQQqmvWrn/S2crvb/6XpLnWZ5mM+zevQmiw
-         RR3NNOX6shMLnSRyx+cI6bGMuXXisiA2vMxxxFjc9DGB6m/qnWhTGMltznU4eK8uiszw
-         074JI/GQ1+xWE4ZZE94k2DG8GfAmruPEkoSTLdvZDvL5LL3QRYYBkleDRt7N5v5RovuV
-         /Ts25bMugBqj+KmhvL5sh6ZH5pdzTEcINOsoKLfHBHZuhCYiaOTzokMjlEP8Rf6bR6N1
-         HAuCjnd96S3eBPonfJLQc5mJjlttBKn2ivkN8pgQsnN2sdBU25JrarU7Aw4kSlzXiqr8
-         Tv2g==
+        bh=VIw3vEF2EG/mTMxw2khY1FH0qqPJ+aeReW5VuqhMwP0=;
+        b=V8aYhMYGPG7qXDSgQZV048cN3bvc4ya+jEedS0ehzqcpE8A7T25Ve09tW1ILDL0yQg
+         cxAJKjbiIcAmghFPbzabY6ZJqAg9bj8M7I53mgMMmG8ATpRLdj+pgPKe+La2Oqneah5t
+         UljG21HuOsew014XfiEEsiXdbDxELwqlPj7QCAuVBKEHtpIqrxxPFE7vdzhC81nRVDzM
+         bPD0I6zMqgKwPprPzP2iNZOxu0ClP63y8NFWDy28H/Y2ZHcu8/rp3cz2bc5Qbq7UFHQQ
+         f7pryyhSQqi5wk9/BJ8PSKU7Jjc74qIg6pA4aKF+G5ndlZ01EQqCXVL5djZyNHC05Utz
+         cS3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701446322; x=1702051122;
+        d=1e100.net; s=20230601; t=1701446643; x=1702051443;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=5r69d7flVI5ckkQOOgWcECH4o4ZC5eGRq35Be8p9mMM=;
-        b=Q/0ap4JwexD734wxqsFXgG2VmLAS3sy+9zdQxhRZQ5+CUcdjMgzqIuMC6jj/Q36WyJ
-         3q5bQa7yVQWqKjZleo1UlLIqMLahLjBW3rjej70S5Cp6EF/lil+zjhi6uUosYwxqoytj
-         76N9sE5w0OusDZ/WL8F3nX5h9wCvER6JsLryttbBU8KL2lZkXuYixd8YKm6kzvPR2uS0
-         XNHOfZrnS6Z8ai3Z1e8M+b/rQHNzdmwWMT4VNJEHvT3g2zkKtV1Wl27CSPT8tUg9nmQ3
-         lXu7in/lUQBUVG813ivHer0FA/Z1hZnBtJTzl22019qOG+nObdaAkLBJglmLh3SsLuZY
-         ba7Q==
-X-Gm-Message-State: AOJu0Yyt2uwmm9eeaIove6ustu5V1dyNVTvHDT+Y4IxmvwX8NJ8xexUX
-	X2dvItlY7gHp526IVIhvREs7IXnpvrs+iNVMrDR8Cg==
-X-Google-Smtp-Source: AGHT+IErdOk/QPmVt7v/u4AAj1bjWAZ/H5XkqJx3BSLyfjpo5aJ3cR04l78MS2Tzt65zXVO16nU9HGOny3ocRwcuaeM=
-X-Received: by 2002:a50:9514:0:b0:544:e2b8:ba6a with SMTP id
- u20-20020a509514000000b00544e2b8ba6amr104854eda.3.1701446321806; Fri, 01 Dec
- 2023 07:58:41 -0800 (PST)
+        bh=VIw3vEF2EG/mTMxw2khY1FH0qqPJ+aeReW5VuqhMwP0=;
+        b=JNEkKQQQ3qGouJ8jo+iwAqfbIR1xo+J2AE8L4cH03+uoV4xrPvQFwf+k9tdfBlMwQ0
+         AygsqLbaVS5Tc5cJZn0CgmeUbimRSicmFWHYehjYeQl18tIMIDM+2SobSbLMLLwQeW5D
+         12g7l++8K/s4dXQ8gisRzTliPbBectvxg5Ac37HHZtYOD8ML8P0MLst55PL5b77Ehl3I
+         XGPEdW9daYdP6okmFvA2oCda2mGwmsYLxwiLTsYv6QoYHk/rAyYeRFGODN9L0PMCQjNV
+         BGkjwFM0i/cZ7QTJlR4w54+Zk3ke3BmM3iFrmaWD8dWFm2SEjvTPhY6+2se+15rI8XA6
+         eJqQ==
+X-Gm-Message-State: AOJu0Yx1Cbnzn6cMTv3RMJs1DSQoWnoRX2Artc6qcnXOSeEr39k3tcKE
+	bUbWl+nUUTQ5gXj1CLvcXKz0HDuhF5tQrSx9SVdcMg==
+X-Google-Smtp-Source: AGHT+IFbKGM7joZp4qw2RzfIG1a+QAT2tCZJbbGRakYxypzXhqZtf5JyGalyvKMXGjmVbhgvNVqlwR+qh/bbdS/yzjc=
+X-Received: by 2002:a50:d49c:0:b0:543:fb17:1a8 with SMTP id
+ s28-20020a50d49c000000b00543fb1701a8mr83893edi.3.1701446643476; Fri, 01 Dec
+ 2023 08:04:03 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20231130204817.2031407-1-jannh@google.com> <20231201091007.GG3818@noisy.programming.kicks-ass.net>
-In-Reply-To: <20231201091007.GG3818@noisy.programming.kicks-ass.net>
+References: <20231130204817.2031407-1-jannh@google.com> <06c05c8b-9a3b-4c04-b898-0f82e98da70f@redhat.com>
+ <CAG48ez1a=VuEWwPTjcXFAwCyt9bRH-WzAfw0uP-qVu83kdxkZw@mail.gmail.com> <a9e19ad0-9a27-4885-a6ac-bebd3e997b02@redhat.com>
+In-Reply-To: <a9e19ad0-9a27-4885-a6ac-bebd3e997b02@redhat.com>
 From: Jann Horn <jannh@google.com>
-Date: Fri, 1 Dec 2023 16:58:04 +0100
-Message-ID: <CAG48ez3oqU+P7NJ3Lj1qVKuqgDDdNqsaXdQVR5KaRx5J+BJGJg@mail.gmail.com>
+Date: Fri, 1 Dec 2023 17:03:25 +0100
+Message-ID: <CAG48ez29cS9KKC_0g_eCxiUsSpg1CjJzt83sBViY0izzf4K5yQ@mail.gmail.com>
 Subject: Re: [PATCH] locking: Document that mutex_unlock() is non-atomic
-To: Peter Zijlstra <peterz@infradead.org>
-Cc: Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>, Waiman Long <longman@redhat.com>, 
-	Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+To: Waiman Long <longman@redhat.com>
+Cc: Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, 
+	Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 1, 2023 at 10:10=E2=80=AFAM Peter Zijlstra <peterz@infradead.or=
-g> wrote:
-> On Thu, Nov 30, 2023 at 09:48:17PM +0100, Jann Horn wrote:
-> > I have seen several cases of attempts to use mutex_unlock() to release =
-an
-> > object such that the object can then be freed by another task.
-> > My understanding is that this is not safe because mutex_unlock(), in th=
-e
-> > MUTEX_FLAG_WAITERS && !MUTEX_FLAG_HANDOFF case, accesses the mutex
-> > structure after having marked it as unlocked; so mutex_unlock() require=
-s
-> > its caller to ensure that the mutex stays alive until mutex_unlock()
-> > returns.
-> >
-> > If MUTEX_FLAG_WAITERS is set and there are real waiters, those waiters
-> > have to keep the mutex alive, I think; but we could have a spurious
-> > MUTEX_FLAG_WAITERS left if an interruptible/killable waiter bailed
-> > between the points where __mutex_unlock_slowpath() did the cmpxchg
-> > reading the flags and where it acquired the wait_lock.
-> >
-> > (With spinlocks, that kind of code pattern is allowed and, from what I
-> > remember, used in several places in the kernel.)
-> >
-> > If my understanding of this is correct, we should probably document thi=
-s -
-> > I think such a semantic difference between mutexes and spinlocks is fai=
-rly
-> > unintuitive.
+On Fri, Dec 1, 2023 at 4:52=E2=80=AFPM Waiman Long <longman@redhat.com> wro=
+te:
+> On 12/1/23 10:01, Jann Horn wrote:
+>> I think this pattern anyway only works when you're only trying to wait
+>> for the current holder of the lock, not tasks that are queued up on
+>> the lock as waiters - so a task initially holds a stable reference to
+>> some object, then acquires the object's lock, then drops the original
+>> reference, and then later drops the lock.
+>> You can see an example of such mutex usage (which is explicitly legal
+>> with userspace POSIX mutexes, but is forbidden with kernel mutexes) at
+>> the bottom of the POSIX manpage for pthread_mutex_destroy() at
+>> <https://pubs.opengroup.org/onlinepubs/007904875/functions/pthread_mutex=
+_destroy.html>,
+>> in the section "Destroying Mutexes".
 >
-> IIRC this is true of all sleeping locks, and I think completion was the
-> explcicit exception here, but it's been a while.
+> The POSIX mutex is reference-counted.
 
-In addition to completions, I think this also applies to up()? But I
-don't know if that's intentionally supported or just an implementation
-detail.
+I don't understand what you mean by that.
 
-Is there some central place where this should be documented instead of
-Documentation/locking/mutex-design.rst as a more general kernel
-locking design thing? Maybe Documentation/locking/locktypes.rst?
-
-I think it should also be documented on top of the relevant locking
-function(s) though, since I don't think everyone who uses locking
-functions necessarily reads the separate documentation files first.
-Mutexes kind of stand out as the most common locking type, but I guess
-to be consistent, we'd have to put the same comment on functions like
-up_read() and up_write()? And maybe drop the "Mutexes are different
-from spinlocks in this aspect" part?
-
-(Sidenote: Someone pointed out to me that an additional source of
-confusion could be that userspace POSIX mutexes support this usage
-pattern.)
-
-> > index 78540cd7f54b..087716bfa7b2 100644
-> > --- a/Documentation/locking/mutex-design.rst
-> > +++ b/Documentation/locking/mutex-design.rst
-> > @@ -101,6 +101,12 @@ features that make lock debugging easier and faste=
-r:
-> >      - Detects multi-task circular deadlocks and prints out all affecte=
-d
-> >        locks and tasks (and only those tasks).
-> >
-> > +Releasing a mutex is not an atomic operation: Once a mutex release ope=
-ration
->
-> Well, it very much is an atomic store-release. That is, I object to your
-> confusing use of atomic here :-)
-
-I'd say it involves an atomic store-release, but the whole operation
-is not atomic. :P
-
-But yeah, I see how this is confusing wording, and I'm not
-particularly attached to my specific choice of words.
+Anyway, I guess this thread of discussion is moot - I'm not suggesting
+that kernel mutexes should support this behavior.
 
