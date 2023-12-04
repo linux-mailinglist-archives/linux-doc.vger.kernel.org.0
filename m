@@ -1,81 +1,139 @@
-Return-Path: <linux-doc+bounces-3930-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3934-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC9138036F0
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 15:36:12 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id EECBA80373C
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 15:44:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 09ECD1C20B7A
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 14:36:12 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2981D1C20C1C
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 14:44:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4FCFD22F07;
-	Mon,  4 Dec 2023 14:36:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE9A828E27;
+	Mon,  4 Dec 2023 14:44:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="JdCDOZG/"
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="aTxlUtH0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6670DFE;
-	Mon,  4 Dec 2023 06:36:05 -0800 (PST)
-Received: from localhost (mdns.lwn.net [45.79.72.68])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id EB68B2C5;
-	Mon,  4 Dec 2023 14:36:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net EB68B2C5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1701700565; bh=f0Yupj2ffJkFfSQu1LkFmAj29K/A4z7XLIh5uvmaoSU=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=JdCDOZG/EPrMlKDDKR6CSHU28p9XJy2B85GDso7BOW2Zs93Yin54yfma27//zNsvi
-	 z3P1hN41DdKYieJjFI+HZkkJHWMz4y8xt5orjfZWlCOKmKBEW+B+gTZ6ph71FZgQgK
-	 YZuJJQIs4d7vju/s4BcT58hLysn6r8jzCPjr0cfvS6q8nXUxETn4V97Lpr2kGBc9t9
-	 pXsIWtmLl3E/r2U6AkO8Vq8T4ItV9/gMTLMq9CA3eCkstJlEJgMCxrqhfX6/SooArw
-	 q1hVt4B7Tp40/y1xbgHef0LyVtRobrmLnXHavzDA4ns30Ij2V+JDLHGVvBFvNICuGV
-	 Fbl2NZoloXxtA==
-From: Jonathan Corbet <corbet@lwn.net>
-To: Dimitri John Ledkov <dimitri.ledkov@canonical.com>,
- linux-doc@vger.kernel.org
-Cc: linux-perf-users@vger.kernel.org, kvm@vger.kernel.org
-Subject: Re: Converting manpages from asciidoc to rst2man ?
-In-Reply-To: <CADWks+Z=kLTohq_3pk_PdXs54B6tLn25u6avn_Q1FyXN2-sVDQ@mail.gmail.com>
-References: <CADWks+Z=kLTohq_3pk_PdXs54B6tLn25u6avn_Q1FyXN2-sVDQ@mail.gmail.com>
-Date: Mon, 04 Dec 2023 07:36:04 -0700
-Message-ID: <87fs0iujaj.fsf@meer.lwn.net>
+Received: from mail.xenproject.org (mail.xenproject.org [104.130.215.37])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1BA8EFD;
+	Mon,  4 Dec 2023 06:44:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
+	Subject:To:From; bh=EhQi3onL9GpEqJYUYdTVsT5Q2f0NwXP08T0ndFJ/c7M=; b=aTxlUtH06
+	VlLvCE9ceDi8kZAqPwZofP2Wp9wkcSYAWChi0ExMNgvIzt+1sbkygWUSu/qkm5fD6fdnFAwM0tiy6
+	Nr9uCHWMmqY3npFk8DCYOgKus5MJ22786Ii2KZJghUQN9Jea+POrOkaDZiYFt0gn/n9Xw28R3fI49
+	28d9t3Xs=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1rAAAs-0003d8-1y; Mon, 04 Dec 2023 14:43:54 +0000
+Received: from 54-240-197-231.amazon.com ([54.240.197.231] helo=REM-PW02S00X.ant.amazon.com)
+	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1rAAAr-00088g-Ng; Mon, 04 Dec 2023 14:43:53 +0000
+From: Paul Durrant <paul@xen.org>
+To: Paolo Bonzini <pbonzini@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Sean Christopherson <seanjc@google.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Paul Durrant <paul@xen.org>,
+	Shuah Khan <shuah@kernel.org>,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH v10 00/19] KVM: xen: update shared_info and vcpu_info handling
+Date: Mon,  4 Dec 2023 14:43:15 +0000
+Message-Id: <20231204144334.910-1-paul@xen.org>
+X-Mailer: git-send-email 2.39.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-Dimitri John Ledkov <dimitri.ledkov@canonical.com> writes:
+From: Paul Durrant <pdurrant@amazon.com>
 
-> Hi all,
->
-> I was going through build-depends on linux kernel in Ubuntu and I
-> noticed that whilst most documentation and man-pages are written in
-> Rst format, there are a few that require asciidoc.
->
-> $ git grep -l asciidoc -- '*Makefile*'
-> tools/kvm/kvm_stat/Makefile
-> tools/lib/perf/Documentation/Makefile
-> tools/perf/Documentation/Makefile
-> tools/perf/Makefile.perf
+There are four new patches in the series over what was in version 9 [1]:
 
-Interesting...I was unaware of those...
+* KVM: xen: separate initialization of shared_info cache and content
+* KVM: xen: (re-)initialize shared_info if guest (32/64-bit) mode is set
 
-> Are both Rst and asciidoc preferred in the kernel Documentation? Or
-> should we upgrade kvm_stat & perf manpages from asciidoc to rst2man?
+These deal with a missing re-initialization of shared_info if either the
+guest or VMM changes the 'long_mode' flag. This was discovred in testing
+when the guest wallclock reverted to the Unix epoch because the pvclock
+information in the shared_info page was not in the correct place, and so
+the guest read zeroes instead.
 
-In general we don't have a lot of man pages in the kernel, so it's not
-something we've put a lot of thought into.  Ideally, I suppose, it would
-be nice to get all of those man pages integrated into the RST docs
-build, but it's not something that is likely to inspire any great sense
-of urgency.
+* KVM: xen: don't block on pfncache locks in kvm_xen_set_evtchn_fast()
+* KVM: pfncache: check the need for invalidation under read lock first
 
-Thanks,
+The first of these fixes a bug discovered when compiling the kernel with
+CONFIG_PROVE_RAW_LOCK_NESTING: kvm_xen_set_evtchn_fast() can be called from
+the callback of a HRTIMER_MODE_ABS_HARD timer and hence be executed in
+IRQ context. It should therefore not block on any lock. Thus two
+occurrences of a read_lock() are converted to a read_trylock() which
+kick the code down a slow-path if they fail.
+The second patch removes a 'false' contention on the pfncache lock that
+could result in taking that slow-path: the MMU notifier callback need only
+take a pfncache read lock; it only need take a write lock if a match is
+found.
 
-jon
+Apart from these new patches...
+
+* KVM: xen: split up kvm_xen_set_evtchn_fast()
+
+... has been re-worked to (hopefully) improve readability and also validate
+the 'correct' vcpu_info structure depending on whether the guest is in long
+mode or not.
+
+[1] https://lore.kernel.org/kvm/20231122121822.1042-1-paul@xen.org/
+
+Paul Durrant (19):
+  KVM: pfncache: Add a map helper function
+  KVM: pfncache: remove unnecessary exports
+  KVM: xen: mark guest pages dirty with the pfncache lock held
+  KVM: pfncache: add a mark-dirty helper
+  KVM: pfncache: remove KVM_GUEST_USES_PFN usage
+  KVM: pfncache: stop open-coding offset_in_page()
+  KVM: pfncache: include page offset in uhva and use it consistently
+  KVM: pfncache: allow a cache to be activated with a fixed (userspace)
+    HVA
+  KVM: xen: separate initialization of shared_info cache and content
+  KVM: xen: (re-)initialize shared_info if guest (32/64-bit) mode is set
+  KVM: xen: allow shared_info to be mapped by fixed HVA
+  KVM: xen: allow vcpu_info to be mapped by fixed HVA
+  KVM: selftests / xen: map shared_info using HVA rather than GFN
+  KVM: selftests / xen: re-map vcpu_info using HVA rather than GPA
+  KVM: xen: advertize the KVM_XEN_HVM_CONFIG_SHARED_INFO_HVA capability
+  KVM: xen: split up kvm_xen_set_evtchn_fast()
+  KVM: xen: don't block on pfncache locks in kvm_xen_set_evtchn_fast()
+  KVM: pfncache: check the need for invalidation under read lock first
+  KVM: xen: allow vcpu_info content to be 'safely' copied
+
+ Documentation/virt/kvm/api.rst                |  53 ++-
+ arch/x86/kvm/x86.c                            |   7 +-
+ arch/x86/kvm/xen.c                            | 358 +++++++++++-------
+ include/linux/kvm_host.h                      |  40 +-
+ include/linux/kvm_types.h                     |   8 -
+ include/uapi/linux/kvm.h                      |   9 +-
+ .../selftests/kvm/x86_64/xen_shinfo_test.c    |  59 ++-
+ virt/kvm/pfncache.c                           | 185 ++++-----
+ 8 files changed, 461 insertions(+), 258 deletions(-)
+
+
+base-commit: 1ab097653e4dd8d23272d028a61352c23486fd4a
+-- 
+2.39.2
+
 
