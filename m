@@ -1,214 +1,340 @@
-Return-Path: <linux-doc+bounces-3989-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3991-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C3C8803E08
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 20:05:09 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C7F6803EAE
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 20:47:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id AEB761C209CF
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 19:05:08 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 069B8281185
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 19:47:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 581C82F87C;
-	Mon,  4 Dec 2023 19:05:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 99E4E33077;
+	Mon,  4 Dec 2023 19:47:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="st4T101A"
+	dkim=pass (1024-bit key) header.d=relay.vimeo.com header.i=@relay.vimeo.com header.b="nv/ue+Zw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2081.outbound.protection.outlook.com [40.107.94.81])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 94F14D5;
-	Mon,  4 Dec 2023 11:05:01 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iOyZqEcDmZxz9oKFNCBdGC6taGD9PXUNoGVd7FcIko1TXmeRlzmaH31sBqqoV64Mfp/fu3+5IAX+BHYmNCRyRhulL3hvFCJhvF7rmk+HDcuZmgI1zSiJfryZ0yBk4Iaz127AGs1H5zoFA9pmpzfNE9wcDBc6lTwWuxrGU3reG0GGrSLyd5dHyR1vIEAA63y1MmomDUzjlyrNXoaqp4Qc9zWXhL1Kd4DnsHY3fyQxAW7aNqh+p/fmFEPD9TKbZ7sBRUfYQYQ3P8ydRRr04Nd89ewOkQXRPTaENCuHDTd3G/fmTP2pxMP6jzYQwTVVqvMP2Jz9mt2Ag8AgrxsKpS1EDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Dv/3rIs8OvZyahVuikpuOsd3Lj0wHjFqTGM/Cf2H+ww=;
- b=Z51POP8wffqgoq+OP3MSfcLbCLRmShdA2syx/fkR6/X+dfNB3pExuG2Z2MhMWAvMRdIXPn3gQN9lPghKTTwnxpc9VlcaMQ5mk1rTbFGAQ58gp7O5FuWwRMWNtDRU84G9uuzczJvzRlX3nG2cPMzOUIsERaUHdZvjpBDqT4vOE+W3rnZxstrCR9b2kLqGKgh+TZ0+ZpM1Ckaydzb3xhaXXSxPk8Utl2zO/gxoDsoWhqu1f7sr1NzL4glgoYcphrPsMkkmXdH5HmvBM6dBJZ4MSda8no6amfhVKt2HP7/PYrPnkEhN3clIxDDW93pIpQKjz4wfisp4A0t5342y8GxVkA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dv/3rIs8OvZyahVuikpuOsd3Lj0wHjFqTGM/Cf2H+ww=;
- b=st4T101AgndIO8zva0dMTbQVNSWn3P4KifmQw0WY0FfXO3G6+TgQclp0zw0XQ7WdWEUacWDK2eHuDNN66F9HyPxsL6MITODKi2SjNb7PYLJ3AX8aVnJiSdk6StlG1ti7Sxhy0mNx5lT+8zghxhkw+PKYkIiiEJ9P/qTEx+yl1cs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from MW3PR12MB4553.namprd12.prod.outlook.com (2603:10b6:303:2c::19)
- by DM4PR12MB5865.namprd12.prod.outlook.com (2603:10b6:8:64::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.33; Mon, 4 Dec
- 2023 19:04:58 +0000
-Received: from MW3PR12MB4553.namprd12.prod.outlook.com
- ([fe80::1549:8c93:8585:ca1b]) by MW3PR12MB4553.namprd12.prod.outlook.com
- ([fe80::1549:8c93:8585:ca1b%5]) with mapi id 15.20.7046.033; Mon, 4 Dec 2023
- 19:04:58 +0000
-Message-ID: <660935b2-93bf-4ca0-836a-7aba46009c5c@amd.com>
-Date: Mon, 4 Dec 2023 13:04:55 -0600
-User-Agent: Mozilla Thunderbird
-Reply-To: babu.moger@amd.com
-Subject: Re: [PATCH v5] x86/resctrl: Add event choices for mba_MBps
-Content-Language: en-US
-To: Tony Luck <tony.luck@intel.com>
-Cc: Fenghua Yu <fenghua.yu@intel.com>,
- Reinette Chatre <reinette.chatre@intel.com>,
- Peter Newman <peternewman@google.com>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, x86@kernel.org,
- Shaopeng Tan <tan.shaopeng@fujitsu.com>, James Morse <james.morse@arm.com>,
- Jamie Iles <quic_jiles@quicinc.com>, Randy Dunlap <rdunlap@infradead.org>,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- patches@lists.linux.dev
-References: <20231128231439.81691-1-tony.luck@intel.com>
- <20231201214737.104444-1-tony.luck@intel.com>
- <fd8a44a1-9001-4e3e-a1a9-63e7f737e6e1@amd.com>
- <ZW4XjqxfYBFZId6H@agluck-desk3>
-From: "Moger, Babu" <babu.moger@amd.com>
-In-Reply-To: <ZW4XjqxfYBFZId6H@agluck-desk3>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: DM6PR06CA0046.namprd06.prod.outlook.com
- (2603:10b6:5:54::23) To MW3PR12MB4553.namprd12.prod.outlook.com
- (2603:10b6:303:2c::19)
+X-Greylist: delayed 300 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 04 Dec 2023 11:47:02 PST
+Received: from m47-110.mailgun.net (m47-110.mailgun.net [69.72.47.110])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C7AFED2
+	for <linux-doc@vger.kernel.org>; Mon,  4 Dec 2023 11:47:02 -0800 (PST)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=relay.vimeo.com;
+ q=dns/txt; s=mailo; t=1701719222; x=1701726422; h=Content-Transfer-Encoding:
+ MIME-Version: Message-Id: Date: Subject: Subject: Cc: To: To: From: From:
+ Sender: Sender; bh=HmhFXlBPh7ZkC6JgQKrUP2LiSRCDQOnp19qvKKGJsfA=;
+ b=nv/ue+Zw4OlbK2C+nT//hoL7vCp4EakTXQA9qLGBLlePslQc0KdhDiZfsJXclFBxWT8OH7N1Z6ZNEglsg/iJJqHGLYroOXy+qerhr0aTuprVdxN0AFPfDbmt+WMSybKkiAJrYK8JMnKA3dNCDq2V8VqyGuhirzcvGznFVLnRc34=
+X-Mailgun-Sending-Ip: 69.72.47.110
+X-Mailgun-Sid: WyJhZDBhNyIsImxpbnV4LWRvY0B2Z2VyLmtlcm5lbC5vcmciLCI5ZDJhMWMiXQ==
+Received: from smtp.vimeo.com (215.71.185.35.bc.googleusercontent.com [35.185.71.215])
+ by fd7bfb80eee6 with SMTP id 656e2b88156c2f103906edee (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 04 Dec 2023 19:42:00 GMT
+Sender: davidf=vimeo.com@relay.vimeo.com
+Received: from nutau (gke-sre-us-east1-main-c45160e0-u25i.c.vimeo-core.internal [10.56.27.31])
+	by smtp.vimeo.com (Postfix) with ESMTP id 55BD44DD;
+	Mon,  4 Dec 2023 19:42:00 +0000 (UTC)
+Received: by nutau (Postfix, from userid 1001)
+	id 2E15AB422EE; Mon,  4 Dec 2023 14:42:00 -0500 (EST)
+From: David Finkel <davidf@vimeo.com>
+To: Muchun Song <muchun.song@linux.dev>
+Cc: core-services@vimeo.com,
+	Jonathan Corbet <corbet@lwn.net>,
+	Michal Hocko <mhocko@kernel.org>,
+	Roman Gushchin <roman.gushchin@linux.dev>,
+	Shakeel Butt <shakeelb@google.com>,
+	Shuah Khan <shuah@kernel.org>,
+	cgroups@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-kselftest@vger.kernel.org,
+	David Finkel <davidf@vimeo.com>
+Subject: [PATCH] mm, memcg: cg2 memory{.swap,}.peak write handlers
+Date: Mon,  4 Dec 2023 14:41:56 -0500
+Message-Id: <20231204194156.2411672-1-davidf@vimeo.com>
+X-Mailer: git-send-email 2.39.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MW3PR12MB4553:EE_|DM4PR12MB5865:EE_
-X-MS-Office365-Filtering-Correlation-Id: f55f4c9f-22a8-412f-bb12-08dbf4fbe8ae
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	KKK/DeSspwTYFX+3pWuGOFoGLr21yOt+4pgT8vAJ00fyyWzNCP3qYv4SlNebXW1GBzNkNOuUffd8J6gLHVivqfk2x171V1mPWnyC30QEO7fQAS9LE5tArRexLY1eDDCh49ZVtBIiDbLBPHho4IQS4RFrle9GbKR80b++hfBjwPIFYSEmoN/9JU3Kqr1Du4RScRBAbq+f6ohf599kKf7D96tSDp30Ai3ZFPhj4IHlciHJ7YXGK9CAmzFlzmJ+L0OFjtw7yiu0tAnIiouMzTwaaGBZqAIa6RkOQVBFcjl5950Qdo7ELeUAkWCnNJUrDtXOzO04Z8bjB3U6FMQHL+Tu7Nw6rFeK3+FfDZZC55LQpaQ03sHahOKaFbQQPVW/dmtTgaQsXJweG3fnDkqiUcYWZWexkssV02tuogedQS8otocSVL1EejIo8/LdKSl5cHovq9oAA4ajdj6oFQRRR7bm05yU0tv3RGRePZv7UHU/SXmYkAyDQ91+Qs71+oGq0G5NNhTEiYLVV48kUy3prbrz9JDqbCrGe/Oi9nCWD94oyS2f/boVKqjg2f/d5I7Z3ydIAFCOcTxXKOHL4SCnbFwzJqDhCYllJCOmUDmd6uR9P/xx9DOSbaWZqGtOVYEi3xKizdIENVSlY7ekOo53es83kA==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR12MB4553.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(376002)(346002)(39860400002)(396003)(136003)(230922051799003)(1800799012)(64100799003)(451199024)(186009)(26005)(966005)(478600001)(83380400001)(6486002)(6666004)(6512007)(6506007)(53546011)(2616005)(36756003)(316002)(66946007)(6916009)(66476007)(54906003)(66556008)(31686004)(38100700002)(5660300002)(4326008)(86362001)(7416002)(8936002)(8676002)(3450700001)(2906002)(31696002)(41300700001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?L241QktIdkl2Vm5KTVE4d09RU2xRaWVITGM3TlRoeWllTGtCaHlGSmRISW55?=
- =?utf-8?B?ZjdtYmk5RTdTRWdlbFVmcUNkRjY4ZHc5Ym4xK2RFeUtoeGplb3JKMEhRWThn?=
- =?utf-8?B?cWVEMXNWYlZTMGtFejU5YzMwTnBMWFJEMnRmbUxZdkRxM29OQXlaUFNvL1cz?=
- =?utf-8?B?NDh0ZUhQYlAwN3FDUUQyNC9xNVlEZUhKakZSQzRKY1VPeVpET0s4N3lieEtK?=
- =?utf-8?B?UWtUTkVnTk5JaEVCYXIxNWNleFlSdXpRVTNHOEUrQ3lGa3ZDZVBRbEx6YlpL?=
- =?utf-8?B?NnluSnNTWmhrZFZqcy9GbmVEZUhsOGthZTZHK1NGNnM0ZEhJN2xkSHNraXdq?=
- =?utf-8?B?SU5zZ3hjU0I1YTRCalRrUGorYXpzV3VodmllenljcEZMNks4SUtBOXp5dnVp?=
- =?utf-8?B?UHJQalkrS3VPRU1kYTBkOWxCTGNQaEFEelNDV1UySHczRkpwVVkwZ0NzcjY1?=
- =?utf-8?B?ZUlka1VoU1JDbm1oSm9rQUU1SlRzTmQyS2FNenExQ2FuVUlVcmVPZ3BJRzc5?=
- =?utf-8?B?K2JxV01OSEJ6MGhVR1F6dkJON3pMRHRnbk4yd1VSdGpvZTNzOFNZYVN1OVM2?=
- =?utf-8?B?TlpPZ0huT210cldNUVdMakZaNUV0QktVS2lvMnFQek55eVNVQi9ROTBnamhX?=
- =?utf-8?B?RURta1ZBOFlwWGpIU2FJZ2lhNWpLS3lPRzRVcTN0b3ZNSGovM1JMSEdFYnhL?=
- =?utf-8?B?R3NVWXZhYmwzRjgwRXVBN05Uc2RIS3NFalIrYkJpTXdWc0JHVGJlRXhXNXBT?=
- =?utf-8?B?a0xuaVZrbzV0QnNyYzJ5cEIzQnJvSW5uWlVlZ1pjKzV0UVdMV25nQVNxc2xD?=
- =?utf-8?B?RlBMOXdJWFozajlNd1VhUVMwSlU1bWswVVVkc3NrVG1MRXhvd0dZdmFBRXZr?=
- =?utf-8?B?MTcwNkFGVElaWFZJOXQxSjdvSlF1WHRBTW1ORXgzTThiVlAyYVJ5NnpaUEQr?=
- =?utf-8?B?aWpwNFI1cUlsMHZhZS9keDFET21GVXUvY2t0MWQyTWJMUVdvNkFReUZDcnBp?=
- =?utf-8?B?Zi91Qm1ucXU2MU9OelV4R2ptRktMQVhZcEp1WjVEcU8vKzNQMmwvaDlzWjZY?=
- =?utf-8?B?WkxXZmJ2SGlReVVUdFRnb1pYV3JGWjRvUk9rei9mZ3lkQWdzTklERFAzM2Y1?=
- =?utf-8?B?LzdrUGxzVnYwelM2UXZpenhCL3Bwa3BhS2N0S2RsWWhaWTdKc2ExemQ1Wks4?=
- =?utf-8?B?Q0FsdEtod3dNY1hLR2FjVUhmTHNVMURrNmhoRVZjLzZ3MlFpUjFwdkNwcmpC?=
- =?utf-8?B?RG1iUjdONGNvM3BwWUJGSUtKeFRaRWtyQ0NsT0pJRG0yT1llT2xKcnVtcW10?=
- =?utf-8?B?ck9Wa21lWHhSN0Q5UWN3blhmeHpUK2IvcVJBeUtkZXpYaVpzamp3L1J6czVl?=
- =?utf-8?B?dU84Mm91aG1pMzNtbW5JVG5ucXRYSFJlRlUxYUxQOC9SOVNPdzBETy83eFJz?=
- =?utf-8?B?N2FiWFRzU2JDRGdKUDZYbDV4RU5OZHNjMnBPb29HZEZqVk1KRDcwUFVEQ2Zw?=
- =?utf-8?B?REdTV2tNRi92T0pnSXc2cmczOWZPaXNuR0ZrRVFUTFVWTlBpdStQQSs5ck1h?=
- =?utf-8?B?OHYxeGZ5ZGZxRVpmeXF5L0NkQ2ZWb1NkUkN0NEpuTm9WM3NwSFMrN1IrM0RZ?=
- =?utf-8?B?Rmc1SkdLMHZRZzJXZER4Zm5VdUdNNWhHQVRYMEVyQnd4MjdWUDNFYkh2Ukgy?=
- =?utf-8?B?c3g4QzcrREc2QU15Y1BqS3BUZTBlcHJRTW1mRjlvcm1la3pHRTQvVG9GV0VZ?=
- =?utf-8?B?NXRSa0xPSjcwTUN5S083aW1SbStKTDNIcDI5MDdaSzZJRTIzUnp0TmpzeCtM?=
- =?utf-8?B?ZXhESjJRSVNlRlBMOEY1dEZKdDVvVW1UY2JXaFRGV3B1Nm1kbWVwOUpYa2R6?=
- =?utf-8?B?QWJwbW5paDN0K285WEd5dGFReStiZkl3eXRjWlh3Sk5uWmRQeVg0THRQMTFm?=
- =?utf-8?B?QXZ5VXpsQ3YzZXRLakdxenBpVTU5NWorSjg3U2oydlZmSTBMcFVCdGhLR01y?=
- =?utf-8?B?eXhwZFFGOWVBMUhJNFJodEo5RkR2Q25Wc2djVEh3MkhlMU92ck5tbG9PV2pR?=
- =?utf-8?B?RjdYUWFCSG9hK0pCNytYSlFaWVRib1hmejU3cVB0Vlo2SWQyeFFOdGFaM1Jt?=
- =?utf-8?Q?wR/A=3D?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f55f4c9f-22a8-412f-bb12-08dbf4fbe8ae
-X-MS-Exchange-CrossTenant-AuthSource: MW3PR12MB4553.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2023 19:04:58.2402
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pJlA2oE4zjkNj7hKH21s/z59lFkLOyWTqwiKuVxl9gHB1L1saCEXx56KdUdIMqj7
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5865
+Content-Transfer-Encoding: 8bit
 
-Hi Tony,
+Other mechanisms for querying the peak memory usage of either a process
+or v1 memory cgroup allow for resetting the high watermark. Restore
+parity with those mechanisms.
 
-On 12/4/23 12:16, Tony Luck wrote:
-> On Mon, Dec 04, 2023 at 10:24:58AM -0600, Moger, Babu wrote:
->> Hi Tony,
->>
->> You are intending to achieve two things at once here.
->> 1. Adding new mount option
->> 2. Changing behaviour for the current option.
->> I think you need to split this patch into two. Few comments below.
-> 
-> Hi Babu,
-> 
-> Thanks for looking at this patch.
-> 
-> You are right. I will split the patch into two as you suggest.
-> 
->> On 12/1/23 15:47, Tony Luck wrote:
->>> The MBA Software Controller(mba_sc) is a feedback loop that uses
->>> measurements of local memory bandwidth to adjust MBA throttling levels to
->>> keep workloads in a resctrl group within a target bandwidth set in the
->>> schemata file.
->>>
->>> But on Intel systems the memory bandwidth monitoring events are
->>> independently enumerated. It is possible for a system to support
->>> total memory bandwidth monitoring, but not support local bandwidth
->>> monitoring. On such a system a user could not enable mba_sc mode.
->>> Users will see this highly unhelpful error message from mount:
->>>
->>>  # mount -t resctrl -o mba_MBps resctrl /sys/fs/resctrl
->>>  mount: /sys/fs/resctrl: wrong fs type, bad option, bad superblock on
->>>  resctrl, missing codepage or helper program, or other error.
->>>  dmesg(1) may have more information after failed mount system call.
->>>
->>> dmesg(1) does not provide any additional information.
->>>
->>> Add a new mount option "mba_MBps_event=[local|total]" that allows
->>> a user to specify which monitoring event to use. Also modify the
->>> existing "mba_MBps" option to switch to total bandwidth monitoring
->>> if local monitoring is not available.
->>
->> I am not sure why you need both these options. I feel you just need one of
->> these options.
-> 
-> I should have included "changes since v4" in with this message, and
-> pasted in some parts of this earlier messge from the discussion about
-> v4:
-> 
-> https://lore.kernel.org/all/ZWpF5m4mIeZdK8kv@agluck-desk3/
-> 
-> Having the option take "local" would give a way for a user to
-> avoid the failover to using "total" if they really didn't want
-> that to happen.
+For example:
+ - Any write to memory.max_usage_in_bytes in a cgroup v1 mount resets
+   the high watermark.
+ - writing "5" to the clear_refs pseudo-file in a processes's proc
+   directory resets the peak RSS.
 
-Yes. I saw the thread. Even then I feel having two similar options can
-cause confusion. I feel it is enough just to solve the original problem.
-Giving more options to a corner cases is a overkill in my opinion.
+This change copies the cgroup v1 behavior so any write to the
+memory.peak and memory.swap.peak pseudo-files reset the high watermark
+to the current usage.
 
-Thanks
-Babu
+This behavior is particularly useful for work scheduling systems that
+need to track memory usage of worker processes/cgroups per-work-item.
+Since memory can't be squeezed like CPU can (the OOM-killer has
+opinions), these systems need to track the peak memory usage to compute
+system/container fullness when binpacking workitems.
 
+Signed-off-by: David Finkel <davidf@vimeo.com>
+---
+ Documentation/admin-guide/cgroup-v2.rst       | 20 +++---
+ mm/memcontrol.c                               | 23 ++++++
+ .../selftests/cgroup/test_memcontrol.c        | 72 ++++++++++++++++---
+ 3 files changed, 99 insertions(+), 16 deletions(-)
 
-> 
-> Not in that message, because I didn't think of it until later, it
-> opens the door for different events in the future.
-> 
-> But I'm also open to other suggestions on naming and function of
-> mount options here.
-> 
-> Thanks
-> 
-> -Tony
-
+diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+index 3f85254f3cef..95af0628dc44 100644
+--- a/Documentation/admin-guide/cgroup-v2.rst
++++ b/Documentation/admin-guide/cgroup-v2.rst
+@@ -1305,11 +1305,13 @@ PAGE_SIZE multiple when read back.
+ 	reclaim induced by memory.reclaim.
+ 
+   memory.peak
+-	A read-only single value file which exists on non-root
+-	cgroups.
++	A read-write single value file which exists on non-root cgroups.
++
++	The max memory usage recorded for the cgroup and its descendants since
++	either the creation of the cgroup or the most recent reset.
+ 
+-	The max memory usage recorded for the cgroup and its
+-	descendants since the creation of the cgroup.
++	Any non-empty write to this file resets it to the current memory usage.
++	All content written is completely ignored.
+ 
+   memory.oom.group
+ 	A read-write single value file which exists on non-root
+@@ -1626,11 +1628,13 @@ PAGE_SIZE multiple when read back.
+ 	Healthy workloads are not expected to reach this limit.
+ 
+   memory.swap.peak
+-	A read-only single value file which exists on non-root
+-	cgroups.
++	A read-write single value file which exists on non-root cgroups.
++
++	The max swap usage recorded for the cgroup and its descendants since
++	the creation of the cgroup or the most recent reset.
+ 
+-	The max swap usage recorded for the cgroup and its
+-	descendants since the creation of the cgroup.
++	Any non-empty write to this file resets it to the current swap usage.
++	All content written is completely ignored.
+ 
+   memory.swap.max
+ 	A read-write single value file which exists on non-root
+diff --git a/mm/memcontrol.c b/mm/memcontrol.c
+index 1c1061df9cd1..b04af158922d 100644
+--- a/mm/memcontrol.c
++++ b/mm/memcontrol.c
+@@ -25,6 +25,7 @@
+  * Copyright (C) 2020 Alibaba, Inc, Alex Shi
+  */
+ 
++#include <linux/cgroup-defs.h>
+ #include <linux/page_counter.h>
+ #include <linux/memcontrol.h>
+ #include <linux/cgroup.h>
+@@ -6635,6 +6636,16 @@ static u64 memory_peak_read(struct cgroup_subsys_state *css,
+ 	return (u64)memcg->memory.watermark * PAGE_SIZE;
+ }
+ 
++static ssize_t memory_peak_write(struct kernfs_open_file *of,
++				 char *buf, size_t nbytes, loff_t off)
++{
++	struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
++
++	page_counter_reset_watermark(&memcg->memory);
++
++	return nbytes;
++}
++
+ static int memory_min_show(struct seq_file *m, void *v)
+ {
+ 	return seq_puts_memcg_tunable(m,
+@@ -6947,6 +6958,7 @@ static struct cftype memory_files[] = {
+ 		.name = "peak",
+ 		.flags = CFTYPE_NOT_ON_ROOT,
+ 		.read_u64 = memory_peak_read,
++		.write = memory_peak_write,
+ 	},
+ 	{
+ 		.name = "min",
+@@ -7917,6 +7929,16 @@ static u64 swap_peak_read(struct cgroup_subsys_state *css,
+ 	return (u64)memcg->swap.watermark * PAGE_SIZE;
+ }
+ 
++static ssize_t swap_peak_write(struct kernfs_open_file *of,
++				 char *buf, size_t nbytes, loff_t off)
++{
++	struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
++
++	page_counter_reset_watermark(&memcg->swap);
++
++	return nbytes;
++}
++
+ static int swap_high_show(struct seq_file *m, void *v)
+ {
+ 	return seq_puts_memcg_tunable(m,
+@@ -7999,6 +8021,7 @@ static struct cftype swap_files[] = {
+ 		.name = "swap.peak",
+ 		.flags = CFTYPE_NOT_ON_ROOT,
+ 		.read_u64 = swap_peak_read,
++		.write = swap_peak_write,
+ 	},
+ 	{
+ 		.name = "swap.events",
+diff --git a/tools/testing/selftests/cgroup/test_memcontrol.c b/tools/testing/selftests/cgroup/test_memcontrol.c
+index c7c9572003a8..0326c317f1f2 100644
+--- a/tools/testing/selftests/cgroup/test_memcontrol.c
++++ b/tools/testing/selftests/cgroup/test_memcontrol.c
+@@ -161,12 +161,12 @@ static int alloc_pagecache_50M_check(const char *cgroup, void *arg)
+ /*
+  * This test create a memory cgroup, allocates
+  * some anonymous memory and some pagecache
+- * and check memory.current and some memory.stat values.
++ * and checks memory.current, memory.peak, and some memory.stat values.
+  */
+-static int test_memcg_current(const char *root)
++static int test_memcg_current_peak(const char *root)
+ {
+ 	int ret = KSFT_FAIL;
+-	long current;
++	long current, peak, peak_reset;
+ 	char *memcg;
+ 
+ 	memcg = cg_name(root, "memcg_test");
+@@ -180,12 +180,32 @@ static int test_memcg_current(const char *root)
+ 	if (current != 0)
+ 		goto cleanup;
+ 
++	peak = cg_read_long(memcg, "memory.peak");
++	if (peak != 0)
++		goto cleanup;
++
+ 	if (cg_run(memcg, alloc_anon_50M_check, NULL))
+ 		goto cleanup;
+ 
++	peak = cg_read_long(memcg, "memory.peak");
++	if (peak < MB(50))
++		goto cleanup;
++
++	peak_reset = cg_write(memcg, "memory.peak", "\n");
++	if (peak_reset != 0)
++		goto cleanup;
++
++	peak = cg_read_long(memcg, "memory.peak");
++	if (peak > MB(30))
++		goto cleanup;
++
+ 	if (cg_run(memcg, alloc_pagecache_50M_check, NULL))
+ 		goto cleanup;
+ 
++	peak = cg_read_long(memcg, "memory.peak");
++	if (peak < MB(50))
++		goto cleanup;
++
+ 	ret = KSFT_PASS;
+ 
+ cleanup:
+@@ -815,13 +835,14 @@ static int alloc_anon_50M_check_swap(const char *cgroup, void *arg)
+ 
+ /*
+  * This test checks that memory.swap.max limits the amount of
+- * anonymous memory which can be swapped out.
++ * anonymous memory which can be swapped out. Additionally, it verifies that
++ * memory.swap.peak reflects the high watermark and can be reset.
+  */
+-static int test_memcg_swap_max(const char *root)
++static int test_memcg_swap_max_peak(const char *root)
+ {
+ 	int ret = KSFT_FAIL;
+ 	char *memcg;
+-	long max;
++	long max, peak;
+ 
+ 	if (!is_swap_enabled())
+ 		return KSFT_SKIP;
+@@ -838,6 +859,12 @@ static int test_memcg_swap_max(const char *root)
+ 		goto cleanup;
+ 	}
+ 
++	if (cg_read_long(memcg, "memory.swap.peak"))
++		goto cleanup;
++
++	if (cg_read_long(memcg, "memory.peak"))
++		goto cleanup;
++
+ 	if (cg_read_strcmp(memcg, "memory.max", "max\n"))
+ 		goto cleanup;
+ 
+@@ -860,6 +887,27 @@ static int test_memcg_swap_max(const char *root)
+ 	if (cg_read_key_long(memcg, "memory.events", "oom_kill ") != 1)
+ 		goto cleanup;
+ 
++	peak = cg_read_long(memcg, "memory.peak");
++	if (peak < MB(29))
++		goto cleanup;
++
++	peak = cg_read_long(memcg, "memory.swap.peak");
++	if (peak < MB(29))
++		goto cleanup;
++
++	if (cg_write(memcg, "memory.swap.peak", "\n"))
++		goto cleanup;
++
++	if (cg_read_long(memcg, "memory.swap.peak") > MB(10))
++		goto cleanup;
++
++
++	if (cg_write(memcg, "memory.peak", "\n"))
++		goto cleanup;
++
++	if (cg_read_long(memcg, "memory.peak"))
++		goto cleanup;
++
+ 	if (cg_run(memcg, alloc_anon_50M_check_swap, (void *)MB(30)))
+ 		goto cleanup;
+ 
+@@ -867,6 +915,14 @@ static int test_memcg_swap_max(const char *root)
+ 	if (max <= 0)
+ 		goto cleanup;
+ 
++	peak = cg_read_long(memcg, "memory.peak");
++	if (peak < MB(29))
++		goto cleanup;
++
++	peak = cg_read_long(memcg, "memory.swap.peak");
++	if (peak < MB(19))
++		goto cleanup;
++
+ 	ret = KSFT_PASS;
+ 
+ cleanup:
+@@ -1293,7 +1349,7 @@ struct memcg_test {
+ 	const char *name;
+ } tests[] = {
+ 	T(test_memcg_subtree_control),
+-	T(test_memcg_current),
++	T(test_memcg_current_peak),
+ 	T(test_memcg_min),
+ 	T(test_memcg_low),
+ 	T(test_memcg_high),
+@@ -1301,7 +1357,7 @@ struct memcg_test {
+ 	T(test_memcg_max),
+ 	T(test_memcg_reclaim),
+ 	T(test_memcg_oom_events),
+-	T(test_memcg_swap_max),
++	T(test_memcg_swap_max_peak),
+ 	T(test_memcg_sock),
+ 	T(test_memcg_oom_group_leaf_events),
+ 	T(test_memcg_oom_group_parent_events),
 -- 
-Thanks
-Babu Moger
+2.39.2
+
 
