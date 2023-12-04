@@ -1,210 +1,187 @@
-Return-Path: <linux-doc+bounces-3905-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-3907-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89954802CAD
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 09:06:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64459802D0D
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 09:21:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 420D0280A23
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 08:06:56 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1BFE3280E7E
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Dec 2023 08:21:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1AD24CA59;
-	Mon,  4 Dec 2023 08:06:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A95AEDF72;
+	Mon,  4 Dec 2023 08:21:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="BsapIfs5"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="cMF4sUax"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com [IPv6:2a00:1450:4864:20::429])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B6761100
-	for <linux-doc@vger.kernel.org>; Mon,  4 Dec 2023 00:06:49 -0800 (PST)
-Received: by mail-wr1-x429.google.com with SMTP id ffacd0b85a97d-3332ad5b3e3so2796837f8f.2
-        for <linux-doc@vger.kernel.org>; Mon, 04 Dec 2023 00:06:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1701677208; x=1702282008; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=5SQPC1k8FTDPz9MCtBbupDwJS3N6SevnSxOhLsecLNY=;
-        b=BsapIfs5yl5EWZUJmQ9nmL7e3CzXX4jLR3uJz/OPnvaCwhK9WUuoz9d/Xq4MjZQOT8
-         0/Fvm+530VT2n2hIbAlSiSXgfZzWSfJod5XOLx3YB4XkQtXaHHF6pN7GbrIzRv+ZhHYs
-         3gO8TaVj7tbHqYCqevnjfRH9OSWLJIR1vZv8oHB3hWSuTYh2BuEp6exHVOKEg271jKqp
-         23fUHTEMVg8Tho+R4EC6yccgMkQdl58cD2u3Eic/V415PjrPUfnos4zHs6NOXAez8g7+
-         ZghUROG31XQ3oFkYsc4vxlsKieX+dkDGP1YVHRDJttE3EmGIaQDxhwHdMg5yCQG4VGDm
-         HqaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701677208; x=1702282008;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=5SQPC1k8FTDPz9MCtBbupDwJS3N6SevnSxOhLsecLNY=;
-        b=jplmAmGPkOIxb49FKm5A5Lq6NvD/RdzWZgCJXn9EtznOgzq4fhyLLsGgGJfw5+fa7s
-         B4geBYoskh7aHZ62QqnOo6yn987poxiOdJUiDaiPA4GgIfojUPSBAc63K9C8JN/F6EH/
-         g1EAuXfgt4M5Kb9DbLH/f1ZgfudpnX0+UKLZ0594tnSKV4oXt5Lt1UQbEnbSbanS0I+b
-         jB1JtWYX1z0nPY476HmtXYTrp/n1k1r8ihckQA/cegrPVlO2oeRoC4cq45t9RWDfi/GB
-         TAE6E2AGSLbUNxK5LOiX1s1dRUtpjLTtIBnIpkP5YDmLTyfrEiGfdM06WcAj2imQiQNA
-         sjPA==
-X-Gm-Message-State: AOJu0YwYqAUj9adATP9jD/zl+PA2azlu5B6vZf/joiXTBAUBxSIbePzf
-	buqA4p+h/X1u0anCoTIFYwlXKw==
-X-Google-Smtp-Source: AGHT+IGWv0u+9neIHj1nwxekIP34hUjVFaM+7f9uyY71muGCMC9Jb66oXkE4DaWCyEEsCph6ulV5jA==
-X-Received: by 2002:adf:e40c:0:b0:333:3cae:84cc with SMTP id g12-20020adfe40c000000b003333cae84ccmr1477581wrm.138.1701677208201;
-        Mon, 04 Dec 2023 00:06:48 -0800 (PST)
-Received: from [192.168.1.20] ([178.197.223.109])
-        by smtp.gmail.com with ESMTPSA id l3-20020a5d5603000000b00333371c7382sm6402030wrv.72.2023.12.04.00.06.46
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 04 Dec 2023 00:06:47 -0800 (PST)
-Message-ID: <eff4defd-dfd5-448b-9056-d2f711f14018@linaro.org>
-Date: Mon, 4 Dec 2023 09:06:45 +0100
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 84C42D8;
+	Mon,  4 Dec 2023 00:21:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1701678068; x=1733214068;
+  h=from:to:cc:subject:in-reply-to:references:date:
+   message-id:mime-version:content-transfer-encoding;
+  bh=SctStx0/2r6BjPSkyNIBJr82NmxzrJUg7/EEBCUvaYM=;
+  b=cMF4sUax1Cw27Kw1kE/AQuZ12AbCLPNFK4rEZ8Pp4pa+pvPRiVpwwN4A
+   fRrfnr84T9YNan01J2gKiD45PyZHijeEffLKELxTtMIguglUvd0Lz/q6g
+   JQRi/LrRhwffHAC6YDYlK29JRwPfB38AXfcmYoozF2nQb73x/T6YwlcNC
+   aaAfJXUp3zp0zc1ECR8KL8naZkJ9N3q2ragK0RPvMAIk/1ZLVzOkYuouM
+   rGNjgNQ6ls3Puk6D77DRJj8CKFrm029QpyWnBnBnAgO2eqqTrgGV6QJvq
+   T3CClQaK1hLAGYor1tUyn71ss7mCCZZY4v9YMGrWoWa79j70UWygPbnQv
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10913"; a="752026"
+X-IronPort-AV: E=Sophos;i="6.04,249,1695711600"; 
+   d="scan'208";a="752026"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Dec 2023 00:21:08 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10913"; a="720242377"
+X-IronPort-AV: E=Sophos;i="6.04,249,1695711600"; 
+   d="scan'208";a="720242377"
+Received: from yhuang6-desk2.sh.intel.com (HELO yhuang6-desk2.ccr.corp.intel.com) ([10.238.208.55])
+  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Dec 2023 00:21:02 -0800
+From: "Huang, Ying" <ying.huang@intel.com>
+To: Gregory Price <gregory.price@memverge.com>
+Cc: Michal Hocko <mhocko@suse.com>,  "tj@kernel.org" <tj@kernel.org>,  "John
+ Groves" <john@jagalactic.com>,  Gregory Price <gourry.memverge@gmail.com>,
+  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+  "linux-cxl@vger.kernel.org" <linux-cxl@vger.kernel.org>,
+  "linux-mm@kvack.org" <linux-mm@kvack.org>,  "cgroups@vger.kernel.org"
+ <cgroups@vger.kernel.org>,  "linux-doc@vger.kernel.org"
+ <linux-doc@vger.kernel.org>,  "akpm@linux-foundation.org"
+ <akpm@linux-foundation.org>,  "lizefan.x@bytedance.com"
+ <lizefan.x@bytedance.com>,  "hannes@cmpxchg.org" <hannes@cmpxchg.org>,
+  "corbet@lwn.net" <corbet@lwn.net>,  "roman.gushchin@linux.dev"
+ <roman.gushchin@linux.dev>,  "shakeelb@google.com" <shakeelb@google.com>,
+  "muchun.song@linux.dev" <muchun.song@linux.dev>,  "jgroves@micron.com"
+ <jgroves@micron.com>
+Subject: Re: [RFC PATCH v4 0/3] memcg weighted interleave mempolicy control
+In-Reply-To: <ZW1IdPI11nhKcdZl@memverge.com> (Gregory Price's message of "Sun,
+	3 Dec 2023 22:33:08 -0500")
+References: <0100018bb64636ef-9daaf0c0-813c-4209-94e4-96ba6854f554-000000@email.amazonses.com>
+	<ZU6pR46kiuzPricM@slm.duckdns.org> <ZU6uxSrj75EiXise@memverge.com>
+	<ZU7vjsSkGbRLza-K@slm.duckdns.org> <ZU74L9oxWOoTTfpM@memverge.com>
+	<ZVNBMW8iJIGDyp0y@tiehlicka> <ZVOXWx8XNJJNC23A@memverge.com>
+	<ZVOn2T_Qg_NTKlB2@tiehlicka> <ZVOzMEtDYB4l8qFy@memverge.com>
+	<87o7fveeze.fsf@yhuang6-desk2.ccr.corp.intel.com>
+	<ZW1IdPI11nhKcdZl@memverge.com>
+Date: Mon, 04 Dec 2023 16:19:02 +0800
+Message-ID: <87sf4i2xe1.fsf@yhuang6-desk2.ccr.corp.intel.com>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] hwmon: Driver for Nuvoton NCT736X
-Content-Language: en-US
-To: baneric926@gmail.com, jdelvare@suse.com, linux@roeck-us.net,
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
- corbet@lwn.net
-Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- openbmc@lists.ozlabs.org, kwliu@nuvoton.com, kcfeng0@nuvoton.com,
- DELPHINE_CHIU@wiwynn.com, Bonnie_Lo@wiwynn.com
-References: <20231204055650.788388-1-kcfeng0@nuvoton.com>
- <20231204055650.788388-3-kcfeng0@nuvoton.com>
-From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
- xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
- cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
- JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
- gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
- J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
- NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
- BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
- vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
- Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
- TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzTRLcnp5c3p0b2Yg
- S296bG93c2tpIDxrcnp5c3p0b2Yua296bG93c2tpQGxpbmFyby5vcmc+wsGUBBMBCgA+FiEE
- m9B+DgxR+NWWd7dUG5NDfTtBYpsFAmI+BxMCGwMFCRRfreEFCwkIBwIGFQoJCAsCBBYCAwEC
- HgECF4AACgkQG5NDfTtBYptgbhAAjAGunRoOTduBeC7V6GGOQMYIT5n3OuDSzG1oZyM4kyvO
- XeodvvYv49/ng473E8ZFhXfrre+c1olbr1A8pnz9vKVQs9JGVa6wwr/6ddH7/yvcaCQnHRPK
- mnXyP2BViBlyDWQ71UC3N12YCoHE2cVmfrn4JeyK/gHCvcW3hUW4i5rMd5M5WZAeiJj3rvYh
- v8WMKDJOtZFXxwaYGbvFJNDdvdTHc2x2fGaWwmXMJn2xs1ZyFAeHQvrp49mS6PBQZzcx0XL5
- cU9ZjhzOZDn6Apv45/C/lUJvPc3lo/pr5cmlOvPq1AsP6/xRXsEFX/SdvdxJ8w9KtGaxdJuf
- rpzLQ8Ht+H0lY2On1duYhmro8WglOypHy+TusYrDEry2qDNlc/bApQKtd9uqyDZ+rx8bGxyY
- qBP6bvsQx5YACI4p8R0J43tSqWwJTP/R5oPRQW2O1Ye1DEcdeyzZfifrQz58aoZrVQq+innR
- aDwu8qDB5UgmMQ7cjDSeAQABdghq7pqrA4P8lkA7qTG+aw8Z21OoAyZdUNm8NWJoQy8m4nUP
- gmeeQPRc0vjp5JkYPgTqwf08cluqO6vQuYL2YmwVBIbO7cE7LNGkPDA3RYMu+zPY9UUi/ln5
- dcKuEStFZ5eqVyqVoZ9eu3RTCGIXAHe1NcfcMT9HT0DPp3+ieTxFx6RjY3kYTGLOwU0EVUNc
- NAEQAM2StBhJERQvgPcbCzjokShn0cRA4q2SvCOvOXD+0KapXMRFE+/PZeDyfv4dEKuCqeh0
- hihSHlaxTzg3TcqUu54w2xYskG8Fq5tg3gm4kh1Gvh1LijIXX99ABA8eHxOGmLPRIBkXHqJY
- oHtCvPc6sYKNM9xbp6I4yF56xVLmHGJ61KaWKf5KKWYgA9kfHufbja7qR0c6H79LIsiYqf92
- H1HNq1WlQpu/fh4/XAAaV1axHFt/dY/2kU05tLMj8GjeQDz1fHas7augL4argt4e+jum3Nwt
- yupodQBxncKAUbzwKcDrPqUFmfRbJ7ARw8491xQHZDsP82JRj4cOJX32sBg8nO2N5OsFJOcd
- 5IE9v6qfllkZDAh1Rb1h6DFYq9dcdPAHl4zOj9EHq99/CpyccOh7SrtWDNFFknCmLpowhct9
- 5ZnlavBrDbOV0W47gO33WkXMFI4il4y1+Bv89979rVYn8aBohEgET41SpyQz7fMkcaZU+ok/
- +HYjC/qfDxT7tjKXqBQEscVODaFicsUkjheOD4BfWEcVUqa+XdUEciwG/SgNyxBZepj41oVq
- FPSVE+Ni2tNrW/e16b8mgXNngHSnbsr6pAIXZH3qFW+4TKPMGZ2rZ6zITrMip+12jgw4mGjy
- 5y06JZvA02rZT2k9aa7i9dUUFggaanI09jNGbRA/ABEBAAHCwXwEGAEKACYCGwwWIQSb0H4O
- DFH41ZZ3t1Qbk0N9O0FimwUCYDzvagUJFF+UtgAKCRAbk0N9O0Fim9JzD/0auoGtUu4mgnna
- oEEpQEOjgT7l9TVuO3Qa/SeH+E0m55y5Fjpp6ZToc481za3xAcxK/BtIX5Wn1mQ6+szfrJQ6
- 59y2io437BeuWIRjQniSxHz1kgtFECiV30yHRgOoQlzUea7FgsnuWdstgfWi6LxstswEzxLZ
- Sj1EqpXYZE4uLjh6dW292sO+j4LEqPYr53hyV4I2LPmptPE9Rb9yCTAbSUlzgjiyyjuXhcwM
- qf3lzsm02y7Ooq+ERVKiJzlvLd9tSe4jRx6Z6LMXhB21fa5DGs/tHAcUF35hSJrvMJzPT/+u
- /oVmYDFZkbLlqs2XpWaVCo2jv8+iHxZZ9FL7F6AHFzqEFdqGnJQqmEApiRqH6b4jRBOgJ+cY
- qc+rJggwMQcJL9F+oDm3wX47nr6jIsEB5ZftdybIzpMZ5V9v45lUwmdnMrSzZVgC4jRGXzsU
- EViBQt2CopXtHtYfPAO5nAkIvKSNp3jmGxZw4aTc5xoAZBLo0OV+Ezo71pg3AYvq0a3/oGRG
- KQ06ztUMRrj8eVtpImjsWCd0bDWRaaR4vqhCHvAG9iWXZu4qh3ipie2Y0oSJygcZT7H3UZxq
- fyYKiqEmRuqsvv6dcbblD8ZLkz1EVZL6djImH5zc5x8qpVxlA0A0i23v5QvN00m6G9NFF0Le
- D2GYIS41Kv4Isx2dEFh+/Q==
-In-Reply-To: <20231204055650.788388-3-kcfeng0@nuvoton.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 04/12/2023 06:56, baneric926@gmail.com wrote:
-> From: Ban Feng <kcfeng0@nuvoton.com>
-> 
-> NCT736X is an I2C based hardware monitoring chip from Nuvoton.
-> 
-> Signed-off-by: Ban Feng <kcfeng0@nuvoton.com>
-> ---
+Gregory Price <gregory.price@memverge.com> writes:
 
+> On Wed, Nov 15, 2023 at 01:56:53PM +0800, Huang, Ying wrote:
+>> Gregory Price <gregory.price@memverge.com> writes:
+>>=20
+>> Because we usually have multiple nodes in one mem-tier, I still think
+>> mem-tier-based interface is simpler than node-based.  But, it seems more
+>> complex to introduce mem-tier into mempolicy.  Especially if we have
+>> per-task weights.  So, I am fine to go with node-based interface.
+>>=20
+>> > * cgroups: "this doesn't involve dynamic resource accounting /
+>> >             enforcement at all" and "these aren't resource
+>> > 	    allocations, it's unclear what the hierarchical
+>> > 	    relationship mean".
+>> >
+>> > * node: too global, explore smaller scope first then expand.
+>>=20
+>> Why is it too global?  I understand that it doesn't cover all possible
+>> use cases (although I don't know whether these use cases are practical
+>> or not).  But it can provide a reasonable default per-node weight based
+>> on available node performance information (such as, HMAT, CDAT, etc.).
+>> And, quite some workloads can just use it.  I think this is an useful
+>> feature.
+>>
+>
+> Have been sharing notes with more folks.  Michal thinks a global set of
+> weights is unintuitive and not useful, and would prefer to see the
+> per-task weights first.
+>
+> Though this may have been in response to adding it as an attribute of
+> nodes directly.=20
+>
+> Another proposal here suggested adding a new sysfs setting
+> https://github.com/skhynix/linux/commit/61d2fcc7a880185df186fa2544edcd2f8=
+785952a
+>
+>   $ tree /sys/kernel/mm/interleave_weight/
+>   /sys/kernel/mm/interleave_weight/
+>   =E2=94=9C=E2=94=80=E2=94=80 enabled [1]
+>   =E2=94=9C=E2=94=80=E2=94=80 possible [2]
+>   =E2=94=94=E2=94=80=E2=94=80 node
+>       =E2=94=9C=E2=94=80=E2=94=80 node0
+>       =E2=94=82   =E2=94=94=E2=94=80=E2=94=80 interleave_weight [3]
+>       =E2=94=94=E2=94=80=E2=94=80 node1
+>           =E2=94=94=E2=94=80=E2=94=80 interleave_weight [3]
+>
+> (this could be changed to /sys/kernel/mm/mempolicy/...)
+>
+> I think the internal representation of this can be simplified greatly,
+> over what the patch provides now, but maybe this solves the "it doesn't
+> belong in these other components" issue.
+>
+> Answer: Simply leave it as a static global kobject in mempolicy, which
+> also deals with many of the issues regarding race conditions.
 
-> +
-> +static const struct i2c_device_id nct736x_id[] = {
-> +	{"nct7362", nct7362},
-> +	{"nct7363", nct7363},
-> +	{}
-> +};
-> +MODULE_DEVICE_TABLE(i2c, nct736x_id);
-> +
+Although personally I prefer to add interleave weight as an attribute of
+nodes.  I understand that some people think it's not appropriate to
+place anything node-specific there.  So, some place under /sys/kernel/mm
+sounds reasonable too.
 
-All ID tables are next to each other. Move it down. Why does it not
-match of_device_id?
+> If a user provides weights, use those.  If they do not, use globals.
 
-...
+Yes.  That is the target use case.
 
-> +
-> +static int nct736x_probe(struct i2c_client *client)
-> +{
-> +	struct device *dev = &client->dev;
-> +	struct nct736x_data *data;
-> +	struct device *hwmon_dev;
-> +	u32 pwm_mask, fanin_mask, val, wdt_cfg;
-> +	int ret;
-> +
-> +	data = devm_kzalloc(dev, sizeof(struct nct736x_data), GFP_KERNEL);
+> On a cpuset rebind event (container migration, mems_allowed changes),
+> manually set weights would have to remain, so in a bad case, the
+> weights would be very out of line with the real distribution of memory.
+>
+> Example: if your nodemask is (0,1,2) and a migration changes it to
+> (3,4,5), then unfortunately your weights will likely revert to [1,1,1]
+>
+> If set with global weights, they could automatically adjust.  It
+> would not be perfect, but it would be better than the potential worst
+> case above.  If that same migration occurs, the next allocation would
+> simply use whatever the target node weights are in the global config.
+>
+> So if globally you have weights [3,2,1,1,2,3], and you move from
+> nodemask (0,1,2) to (3,4,5), your weights change from [3,2,1] to
+> [1,2,3].
 
-sizeof(*)
+That is nice.  And I prefer to emphasize the simple use case.  Users
+don't need to specify interleave weight always.  Just use
+MPOL_WEIGHTED_INTERLEAVE policy, and system will provide reasonable
+default weight.
 
-> +	if (!data)
-> +		return -ENOMEM;
-> +
-> +	i2c_set_clientdata(client, data);
-> +	mutex_init(&data->update_lock);
-> +
-> +	data->client = client;
-> +
-> +	if (of_property_read_u32(dev->of_node, "nuvoton,pwm-mask", &pwm_mask))
-> +		pwm_mask = 0;
-> +	if (of_property_read_u32(dev->of_node,
-> +				 "nuvoton,fanin-mask", &fanin_mask))
-> +		fanin_mask = 0;
-> +	if (of_property_read_u32(dev->of_node, "nuvoton,wdt-timeout", &val))
-> +		wdt_cfg = 0xff;
-> +	else
-> +		wdt_cfg = WDT_CFG(val) | EN_WDT;
-> +
-> +	/* Initialize the chip */
-> +	ret = nct736x_init_chip(client, pwm_mask, fanin_mask, wdt_cfg);
-> +	if (ret)
-> +		return ret;
-> +
-> +	data->fan_mask = (u16)fanin_mask;
-> +	data->pwm_mask = (u16)pwm_mask;
-> +
-> +	data = nct736x_update_device(dev);
-> +
-> +	data->groups[0] = &nct736x_group_fan;
-> +	data->groups[1] = &nct736x_group_pwm;
-> +	data->groups[2] = NULL;
-> +
-> +	hwmon_dev = devm_hwmon_device_register_with_groups(dev,
-> +							   client->name,
-> +							   data, data->groups);
-> +	return PTR_ERR_OR_ZERO(hwmon_dev);
-> +}
-> +
-> +static const struct of_device_id nct736x_of_match[] = {
-> +	{ .compatible = "nuvoton,nct7362" },
-> +	{ .compatible = "nuvoton,nct7363" },
+> If the structure is built as a matrix of (cpu_node,mem_nodes),
+> the you can also optimize based on the node the task is running on.
 
-This means your devices are compatible. Express compatibility in your
-bindings (specific compatible followed by fallback). But then your
-i2c_device_id is not matching this one here... confusing and clearly wrong.
+The matrix stuff makes the situation complex.  If people do need
+something like that, they can just use set_memorypolicy2() with user
+specified weights.  I still believe that "make simple stuff simple, and
+complex stuff possible".
 
-Best regards,
-Krzysztof
+> That feels very intuitive, deals with many race condition issues, and
+> the global setting can actually be implemented without the need for
+> set_mempolicy2 at all - which is certainly a bonus.
+>
+> Would love more thoughts here.  Will have a new RFC with set_mempolicy2,
+> mbind2, and MPOL_WEIGHTED_INTERLEAVE soon that demonstrate the above.
 
+Thanks for doing all these!
+
+--
+Best Regards,
+Huang, Ying
 
