@@ -1,132 +1,102 @@
-Return-Path: <linux-doc+bounces-4040-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4042-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86387804C89
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 09:36:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72A61804CBB
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 09:39:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3123C1F213BF
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 08:36:13 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8ADDF1F214B8
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 08:39:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 883603D982;
-	Tue,  5 Dec 2023 08:36:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 224A312E6B;
+	Tue,  5 Dec 2023 08:39:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="LkSk1UGt"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DnuSQie5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C90FDC0;
-	Tue,  5 Dec 2023 00:36:02 -0800 (PST)
-Received: from eldfell (cola.collaboradmins.com [195.201.22.229])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: pq)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id 07E4A6602030;
-	Tue,  5 Dec 2023 08:35:59 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1701765361;
-	bh=8TdCP7pQFoNlcwVYdlSyrN/w2A0Op/hrTEVYOXA+Iw4=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=LkSk1UGtPGjufAME3Mo5tAbgHVeBIOwBZ5PZu3G7wj7t4DZlvsTBvBIzMenraa1FC
-	 1Q8AIWZKMlhxDog7y3tv/QQylclu+6ZUb00FRevwFD5NHUWtAze/53aPhyBvfsezR0
-	 SXPw5YjWlwn4nXbkDgzCMD2iAn/IT+pXs0DHqQqBAF2HMuvg0+V+kbvoeQe1IsUzO7
-	 6pOqCw3N55TaWjnmDye7n5y73tL/qdosgLJzwP7Rn2oDdNBGsLpMbZVFrhze1+cCqo
-	 NR+qf7CJXaPZa73hj+mZkD0aIZdDHjeb5OA2CMMOmuogPGcTq1QEvXu+GGQON8d8HN
-	 BgwotuxI2wBKw==
-Date: Tue, 5 Dec 2023 10:35:40 +0200
-From: Pekka Paalanen <pekka.paalanen@collabora.com>
-To: Maxime Ripard <mripard@kernel.org>
-Cc: =?UTF-8?B?QW5kcsOp?= Almeida <andrealmeid@igalia.com>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- kernel-dev@igalia.com, alexander.deucher@amd.com, christian.koenig@amd.com,
- Simon Ser <contact@emersion.fr>, Rob Clark <robdclark@gmail.com>,
- daniel@ffwll.ch, Daniel Stone <daniel@fooishbar.org>, 'Marek
- =?UTF-8?B?T2zFocOhayc=?= <maraeo@gmail.com>, Dave Airlie
- <airlied@gmail.com>, Michel =?UTF-8?B?RMOkbnplcg==?=
- <michel.daenzer@mailbox.org>, Randy Dunlap <rdunlap@infradead.org>,
- Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org, Thomas
- Zimmermann <tzimmermann@suse.de>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>
-Subject: Re: [PATCH] drm/doc: Define KMS atomic state set
-Message-ID: <20231205103540.6b2583c8.pekka.paalanen@collabora.com>
-In-Reply-To: <dybgeyjqoh2rjjrvbb5nrnallx63tano2drmxgsgde6n5w6wza@23cfserg7mui>
-References: <20231130200740.53454-1-andrealmeid@igalia.com>
-	<x6cqert2tadgc46w3u2rfgcfaw6evxdeerl2mxvh2peycr4i7q@qf6oqymcti4j>
-	<20231201110616.30ad1468.pekka.paalanen@collabora.com>
-	<bry3w6w32uy2jlmbkcmbtthw6w6nwux7dwlcju5iuxac2wphku@md6njxjtsbvm>
-	<20231201120648.2ba706e1.pekka.paalanen@collabora.com>
-	<bgd5xuszaujdjg7lt24dpofvhx2v6gyxfjxnqfo7nmaecmn6om@fejhsggdlffo>
-	<20231201180348.4a42025b.pekka.paalanen@collabora.com>
-	<dybgeyjqoh2rjjrvbb5nrnallx63tano2drmxgsgde6n5w6wza@23cfserg7mui>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com [IPv6:2a00:1450:4864:20::12e])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 15EEBFA;
+	Tue,  5 Dec 2023 00:39:24 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id 2adb3069b0e04-50be4f03b06so3085644e87.0;
+        Tue, 05 Dec 2023 00:39:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1701765562; x=1702370362; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Ciq8GU7iUi7LUUJHQ/Yglkc7R5BvBXgn5EFW6zsVjow=;
+        b=DnuSQie5JcTnWPAfRBzmKWhltOs11rdUAIVFPZsujbN/WzvjesduNffixxgQY70Aci
+         6JZHlapKrYTkWuOGeE9TGIc02xTOairl31UYQ49NecCvEYaNadKXiUXA23G5qw70GC+E
+         oLYHPGPwx845eGH0B/GGKcoqGHNcg5cwF8KVA8SKnYs+6sn4H9gumJme5wbSYKN34Mga
+         l/K+U/Rqqreb89/qRqiea/JWQR4H4iZv7KJ0lt9CRoAsdWxZQAxj9OvDk5icbK88FnPh
+         fBUiiLaK23UOFgQRhfHneHLJekFD5TnPguupIuRWP2/BrIdwxU8ZtXipBMDI1JQweb3U
+         RlUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701765562; x=1702370362;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ciq8GU7iUi7LUUJHQ/Yglkc7R5BvBXgn5EFW6zsVjow=;
+        b=mBRdrSNWz6k1r2DTRmH28hHylTb30T48pRYBG5tR85Qqr9YzAOQKvoOzmni/4qs4y0
+         X1rJE5OBblRWFVv32RwgCWkUjUYbNOvN7g7wHcfGOaFpqcEt/8M1PggDpI+jtppBlnsY
+         o5Mllg/zWUFkjupflv/V1eOvV1dEgOlUVQAjGFE9lbr2M22eOGxUzeaEw7vlkhH54dtd
+         SAAsq051n9Z7rcaAziUKWUndCBY+wqxbI1o+OosnvWYr1DMsLFmY7MnMSMDI0wqrpPjC
+         JXxVsL3Fg7QFJXidTWYaBF/Itip81Lzew/ChF2/4h00k1EBWyd4klBkdZkpj4P/HcA84
+         QRng==
+X-Gm-Message-State: AOJu0YwHtcRbHREl3y/ElyAe5DleJDeuK+HqY7fs5NABMhZTCt4/dGaT
+	HPJqM2xS7M3KbWawKP51xFo=
+X-Google-Smtp-Source: AGHT+IEZw3Z3caEX16AO5z2q/9E+FKbTyaJHEQIiD2K1bGuD3XvtPbOJRGPBJ3jhXsTZvLLep2Yw5Q==
+X-Received: by 2002:a05:6512:1056:b0:50b:fc06:7a2b with SMTP id c22-20020a056512105600b0050bfc067a2bmr970356lfb.110.1701765562074;
+        Tue, 05 Dec 2023 00:39:22 -0800 (PST)
+Received: from ?IPV6:2001:14ba:16f8:1500::2? (dc78bmyyyyyyyyyyyyyby-3.rev.dnainternet.fi. [2001:14ba:16f8:1500::2])
+        by smtp.gmail.com with ESMTPSA id p15-20020a05651238cf00b0050bf40dcb8bsm634947lft.114.2023.12.05.00.39.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 05 Dec 2023 00:39:21 -0800 (PST)
+Message-ID: <644e095d-4c01-4e8d-8036-3c04ada405f2@gmail.com>
+Date: Tue, 5 Dec 2023 10:39:20 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/jC+ar+rxILck14dQcx1m77s";
- protocol="application/pgp-signature"; micalg=pgp-sha256
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] fortify: test: Use kunit_device
+Content-Language: en-US, en-GB
+To: davidgow@google.com, Rae Moar <rmoar@google.com>,
+ Brendan Higgins <brendan.higgins@linux.dev>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Stephen Boyd <sboyd@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>,
+ Jonathan Corbet <corbet@lwn.net>, Kees Cook <keescook@chromium.org>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ Maxime Ripard <mripard@kernel.org>
+Cc: linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-hardening@vger.kernel.org, linux-sound@vger.kernel.org
+References: <20231205-kunit_bus-v1-0-635036d3bc13@google.com>
+ <20231205-kunit_bus-v1-2-635036d3bc13@google.com>
+From: Matti Vaittinen <mazziesaccount@gmail.com>
+In-Reply-To: <20231205-kunit_bus-v1-2-635036d3bc13@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---Sig_/jC+ar+rxILck14dQcx1m77s
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+On 12/5/23 09:31, davidgow@google.com wrote:
+> Using struct root_device to create fake devices for tests is something
+> of a hack. The new struct kunit_device is meant for this purpose, so use
+> it instead.
+> 
+> Signed-off-by: David Gow <davidgow@google.com>
 
-On Mon, 4 Dec 2023 10:21:03 +0100
-Maxime Ripard <mripard@kernel.org> wrote:
-
-> Hi
->=20
-> On Fri, Dec 01, 2023 at 06:03:48PM +0200, Pekka Paalanen wrote:
-> > On Fri, 1 Dec 2023 14:20:55 +0100
-> > Maxime Ripard <mripard@kernel.org> wrote:
-> >  =20
-> > > On Fri, Dec 01, 2023 at 12:06:48PM +0200, Pekka Paalanen wrote: =20
-
-...
-
-> > Is it really "global" too? Or is it device-wide? Or is it just the bits
-> > that userspace bothered to mention in an atomic commit? =20
->=20
-> As far as I'm concerned, global =3D=3D "device-wide", so I'm not entirely
-> sure what is the distinction you want to raise here, so I might be off.
->=20
-> But to answer the latter part of your question, drm_atomic_state
-> contains the changes of all the objects affected by the commit userspace
-> mentioned to bother. Which is is why I found the "global" to be
-> confusing, because it's not a device-wide-global state, it's a
-> commit-global state.
-
-I think the word "global" should be simply avoided. Nothing here is
-truly global (machine wide? kernel instance wide? worldwide like
-UUID?), and its meaning varies by speaker and context.
+Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
 
 
-Thanks,
-pq
+-- 
+Matti Vaittinen
+Linux kernel developer at ROHM Semiconductors
+Oulu Finland
 
---Sig_/jC+ar+rxILck14dQcx1m77s
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
+~~ When things go utterly wrong vim users can always type :help! ~~
 
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmVu4NwACgkQI1/ltBGq
-qqc3sw//bb9K65vkjrrJcpssVskZDbYksuveo42G5DC4huqcxDAyiz7rEEFWeIzv
-5hlZBDaHpODNsw4ncPtdfOp6eVF1uDC5dpAvItCDwu6OVQqOz3hRnKeYcJ5Fby8H
-erDqmAKl8lzaA4A8kcPMCFHJ2PbkJV3MuJhK9BeL3noqe1m6KzQ9tD36+/XR2kCy
-6ZxexJlEOxqxfTJY64fDS/tez4uyQ7Gy4p2QG1yCW3etSx29UCzkC6K78G1RdpRe
-RDHqefOoIBX6oo3mKWPEvnZ2olYubqocL6vdEAkcLukcsYSdLBfNl3SjxztPByNA
-K/2LekKvs4l/xKiwRQxFD6HxpN6NF8Btq1Au2bs2q3ZZ9L6Sz2vhkGJwWQAuFOML
-EQqk7WoiLz6LSGylnNF7uqxAi8rk5B0QrqSm3zleMMFOhL6emQXs4tT+86CgcMDF
-DDQ3nSZ/PiuCB0zf9SAFY+RkaUGmJoarMoQPud+by4qpXIdILtOctXH57TmJgHmQ
-LhrTD6Ox3nK0hshvqDYaJeQR973pXcEnsbqXWZipNiCp+OGcK7Bo95nhhLdPjDWE
-wFOQWQkTIJzqwoHBcKuN2TYa+65sOnGpDeTwYkUG2VTzZz1iF4XzEcRlkCpjSHCD
-kLyxM6LK5JPjbijJjXyuznLtxpbXtV5KUiYPBca7zLlEEF1jtQ0=
-=suh4
------END PGP SIGNATURE-----
-
---Sig_/jC+ar+rxILck14dQcx1m77s--
 
