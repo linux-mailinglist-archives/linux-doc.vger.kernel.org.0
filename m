@@ -1,130 +1,162 @@
-Return-Path: <linux-doc+bounces-4132-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4155-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E1C6805A48
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 17:49:29 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D34F805AF2
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 18:14:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 6B28AB2104F
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 16:49:26 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 443EE281C76
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 17:14:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B83A74174B;
-	Tue,  5 Dec 2023 16:49:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6E22D692B6;
+	Tue,  5 Dec 2023 17:13:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="jyXSuGMB"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="INvWLb69"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 25C0C9B;
-	Tue,  5 Dec 2023 08:49:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701794960; x=1733330960;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=VGmq7ltuiVSmplVgRVSBqM+cSBVBc8NnDt8//aCSaS4=;
-  b=jyXSuGMBQPzm17tJeCljbhbwnQK9FNGVkXdQ/D4vpgOSuUHK8vyl7WKR
-   hrM+3gWgNYG6cRSl0oiL1wNNKRA4cEePrYrw6eXXTA8mvAGjdUXtxlKoo
-   0WRXv9nCWOzU7ZKeQaZFP89G8SAXEcVfXLzPYdpszZNf+6VzTO+bwCAES
-   apfdp1PW1YHpIzN+K7vQjocZMFhf01Y8xaniw+5oDGTZFJ1ZPCK+DFGuE
-   OdOQvoHPV67NmeMcj9ggpNxoahZh2Ji+M1HTZRMFEm0wMxvim94VMTJKb
-   dpCDebM46mEIp9zVlWXcfQ8XAFCE0DSJ4WJzOWF/Y08iR4bawfTWHPJHy
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10915"; a="378947440"
-X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="378947440"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Dec 2023 08:49:18 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10915"; a="747301114"
-X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="747301114"
-Received: from lkp-server02.sh.intel.com (HELO b07ab15da5fe) ([10.239.97.151])
-  by orsmga006.jf.intel.com with ESMTP; 05 Dec 2023 08:49:02 -0800
-Received: from kbuild by b07ab15da5fe with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1rAYbU-0009O2-0S;
-	Tue, 05 Dec 2023 16:49:00 +0000
-Date: Wed, 6 Dec 2023 00:48:30 +0800
-From: kernel test robot <lkp@intel.com>
-To: Babu Moger <babu.moger@amd.com>, corbet@lwn.net, fenghua.yu@intel.com,
-	reinette.chatre@intel.com, tglx@linutronix.de, mingo@redhat.com,
-	bp@alien8.de, dave.hansen@linux.intel.com
-Cc: oe-kbuild-all@lists.linux.dev, x86@kernel.org, hpa@zytor.com,
-	paulmck@kernel.org, rdunlap@infradead.org, tj@kernel.org,
-	seanjc@google.com, kim.phillips@amd.com, babu.moger@amd.com,
-	jmattson@google.com, ilpo.jarvinen@linux.intel.com,
-	jithu.joseph@intel.com, kan.liang@linux.intel.com, nikunj@amd.com,
-	daniel.sneddon@linux.intel.com, pbonzini@redhat.com,
-	rick.p.edgecombe@intel.com, rppt@kernel.org,
-	maciej.wieczor-retman@intel.com, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, eranian@google.com,
-	peternewman@google.com
-Subject: Re: [PATCH 07/15] x86/resctrl: Add support to enable/disable ABMC
- feature
-Message-ID: <202312060033.DCTZ5iG9-lkp@intel.com>
-References: <20231201005720.235639-8-babu.moger@amd.com>
+Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com [IPv6:2607:f8b0:4864:20::934])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9B5741B2
+	for <linux-doc@vger.kernel.org>; Tue,  5 Dec 2023 09:13:53 -0800 (PST)
+Received: by mail-ua1-x934.google.com with SMTP id a1e0cc1a2514c-7c45bee5fdaso1262293241.1
+        for <linux-doc@vger.kernel.org>; Tue, 05 Dec 2023 09:13:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1701796432; x=1702401232; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Jhl4VBonzlc3pWBsupBzGj3hbqoDxmUEBnI+4/Xqy5c=;
+        b=INvWLb69Nuq8+ZQA8vMqzrJ9w5J2kDoCjYvzeV4qYNUskJOa55C/hC0eZLdebuxs2K
+         1EeYJVf0yzVjGvKtPKaB9z/BJud3na5s0gNmiLDWwNz7YHXU3ZVL2LHGXooY+M98nSUA
+         /TS4yt/YPBvNdHjFxDjZsWmLib14zmzwegjIZaZaEulggP9KhnPnQAHhW1pFWQ1bl8b9
+         k0jGi7E+XJatInlffVPWRX2796OLME6t1wGemRtJFe5gURqFJ5Br5SPwFMj4hBWtG0Na
+         3y716aBWmqch5ispGWqjMBd1V1jrdEGbVT1mr5b/c5kVSqh4sGk7mt+X53fcu1aVhbOe
+         vWbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701796432; x=1702401232;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Jhl4VBonzlc3pWBsupBzGj3hbqoDxmUEBnI+4/Xqy5c=;
+        b=A8Bg3RTSNsQRN+AxEdPicZFv9e8Pa2R5JZkKlUkcKetZBrzvJsjkXoDpvb9l5Q1E48
+         efxZyBP6TxNyvy5zd38ZmUIe9KNxY44O1hDWQUNby0lfHSsjMmLohnWxSdCieIThjAIo
+         DVyuJ1LpNw5SDIAsPf6sWGkbEeYN4pZ4tc6ROtzGR4G7Xl+u+Ujrdg2W6CLlms+EEZ/O
+         9lGYx0gWfWXUZgk4bVq6vSLwngIGyXA4SjfboZnoDXcmrBP/OTyzdpOcOBr2LnHI09Or
+         ZrbmfY7xQQOIqnKG4D5Up3vib8KvtMH5nn57yTy7jNpJKQswxU/kSw9RaVad2kW/Wz6u
+         aitw==
+X-Gm-Message-State: AOJu0YxZ0mHPQnw/Nsu9Ah4T1zPbjzZa9pwwcXwGtNoONoZQXgwDMnSR
+	ifoH2ToslfddGMAf2oaY/XgPAhzBAdJB+X9kvVRNQA==
+X-Google-Smtp-Source: AGHT+IGZ2g2oFmmMcDVzmGa+ZZi/Dz9EWTryACUv6KZTkY8C1ML9of935relBOPEXVeT256piz2KyEWvu0yNMvy9fmw=
+X-Received: by 2002:a1f:fc83:0:b0:4b2:7fa3:a965 with SMTP id
+ a125-20020a1ffc83000000b004b27fa3a965mr4904643vki.11.1701796432618; Tue, 05
+ Dec 2023 09:13:52 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231201005720.235639-8-babu.moger@amd.com>
+References: <20231203165129.1740512-1-yoong.siang.song@intel.com>
+ <20231203165129.1740512-3-yoong.siang.song@intel.com> <43b01013-e78b-417e-b169-91909c7309b1@kernel.org>
+ <656de830e8d70_2e983e294ca@willemb.c.googlers.com.notmuch>
+ <PH0PR11MB583000826591093B98BA841DD885A@PH0PR11MB5830.namprd11.prod.outlook.com>
+ <5a0faf8cc9ec3ab0d5082c66b909c582c8f1eae6.camel@siemens.com>
+In-Reply-To: <5a0faf8cc9ec3ab0d5082c66b909c582c8f1eae6.camel@siemens.com>
+From: Stanislav Fomichev <sdf@google.com>
+Date: Tue, 5 Dec 2023 09:13:39 -0800
+Message-ID: <CAKH8qBuXL8bOYtfKKPS8y=KJqouDptyciCjr0wNKVHtNj6BmqA@mail.gmail.com>
+Subject: Re: [xdp-hints] Re: [PATCH bpf-next v3 2/3] net: stmmac: add Launch
+ Time support to XDP ZC
+To: Florian Bezdeka <florian.bezdeka@siemens.com>
+Cc: "Song, Yoong Siang" <yoong.siang.song@intel.com>, 
+	Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Jesper Dangaard Brouer <hawk@kernel.org>, 
+	"David S . Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Bjorn Topel <bjorn@kernel.org>, "Karlsson, Magnus" <magnus.karlsson@intel.com>, 
+	"Fijalkowski, Maciej" <maciej.fijalkowski@intel.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, 
+	Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, 
+	John Fastabend <john.fastabend@gmail.com>, Lorenzo Bianconi <lorenzo@kernel.org>, 
+	Tariq Toukan <tariqt@nvidia.com>, Willem de Bruijn <willemb@google.com>, 
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Andrii Nakryiko <andrii@kernel.org>, 
+	Mykola Lysenko <mykolal@fb.com>, Martin KaFai Lau <martin.lau@linux.dev>, Song Liu <song@kernel.org>, 
+	Yonghong Song <yonghong.song@linux.dev>, KP Singh <kpsingh@kernel.org>, 
+	Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>, Shuah Khan <shuah@kernel.org>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Jose Abreu <joabreu@synopsys.com>, 
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>, 
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, "bpf@vger.kernel.org" <bpf@vger.kernel.org>, 
+	"xdp-hints@xdp-project.net" <xdp-hints@xdp-project.net>, 
+	"linux-stm32@st-md-mailman.stormreply.com" <linux-stm32@st-md-mailman.stormreply.com>, 
+	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, 
+	"linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Babu,
+On Tue, Dec 5, 2023 at 7:34=E2=80=AFAM Florian Bezdeka
+<florian.bezdeka@siemens.com> wrote:
+>
+> On Tue, 2023-12-05 at 15:25 +0000, Song, Yoong Siang wrote:
+> > On Monday, December 4, 2023 10:55 PM, Willem de Bruijn wrote:
+> > > Jesper Dangaard Brouer wrote:
+> > > >
+> > > >
+> > > > On 12/3/23 17:51, Song Yoong Siang wrote:
+> > > > > This patch enables Launch Time (Time-Based Scheduling) support to=
+ XDP zero
+> > > > > copy via XDP Tx metadata framework.
+> > > > >
+> > > > > Signed-off-by: Song Yoong Siang<yoong.siang.song@intel.com>
+> > > > > ---
+> > > > >   drivers/net/ethernet/stmicro/stmmac/stmmac.h      |  2 ++
+> > > >
+> > > > As requested before, I think we need to see another driver implemen=
+ting
+> > > > this.
+> > > >
+> > > > I propose driver igc and chip i225.
+> >
+> > Sure. I will include igc patches in next version.
+> >
+> > > >
+> > > > The interesting thing for me is to see how the LaunchTime max 1 sec=
+ond
+> > > > into the future[1] is handled code wise. One suggestion is to add a
+> > > > section to Documentation/networking/xsk-tx-metadata.rst per driver =
+that
+> > > > mentions/documents these different hardware limitations.  It is nat=
+ural
+> > > > that different types of hardware have limitations.  This is a close=
+-to
+> > > > hardware-level abstraction/API, and IMHO as long as we document the
+> > > > limitations we can expose this API without too many limitations for=
+ more
+> > > > capable hardware.
+> >
+> > Sure. I will try to add hardware limitations in documentation.
+> >
+> > >
+> > > I would assume that the kfunc will fail when a value is passed that
+> > > cannot be programmed.
+> > >
+> >
+> > In current design, the xsk_tx_metadata_request() dint got return value.
+> > So user won't know if their request is fail.
+> > It is complex to inform user which request is failing.
+> > Therefore, IMHO, it is good that we let driver handle the error silentl=
+y.
+> >
+>
+> If the programmed value is invalid, the packet will be "dropped" / will
+> never make it to the wire, right?
+>
+> That is clearly a situation that the user should be informed about. For
+> RT systems this normally means that something is really wrong regarding
+> timing / cycle overflow. Such systems have to react on that situation.
 
-kernel test robot noticed the following build warnings:
-
-[auto build test WARNING on next-20231130]
-[cannot apply to tip/x86/core linus/master v6.7-rc3 v6.7-rc2 v6.7-rc1 v6.7-rc4]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Babu-Moger/x86-resctrl-Remove-hard-coded-memory-bandwidth-limit/20231201-090621
-base:   next-20231130
-patch link:    https://lore.kernel.org/r/20231201005720.235639-8-babu.moger%40amd.com
-patch subject: [PATCH 07/15] x86/resctrl: Add support to enable/disable ABMC feature
-config: i386-randconfig-013-20231202 (https://download.01.org/0day-ci/archive/20231206/202312060033.DCTZ5iG9-lkp@intel.com/config)
-compiler: gcc-9 (Debian 9.3.0-22) 9.3.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231206/202312060033.DCTZ5iG9-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202312060033.DCTZ5iG9-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> arch/x86/kernel/cpu/resctrl/rdtgroup.c:2419:5: warning: no previous prototype for 'resctrl_arch_set_abmc_enabled' [-Wmissing-prototypes]
-    2419 | int resctrl_arch_set_abmc_enabled(enum resctrl_res_level l, bool enable)
-         |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-vim +/resctrl_arch_set_abmc_enabled +2419 arch/x86/kernel/cpu/resctrl/rdtgroup.c
-
-  2418	
-> 2419	int resctrl_arch_set_abmc_enabled(enum resctrl_res_level l, bool enable)
-  2420	{
-  2421		struct rdt_hw_resource *hw_res = &rdt_resources_all[l];
-  2422	
-  2423		if (!hw_res->r_resctrl.abmc_capable)
-  2424			return -EINVAL;
-  2425	
-  2426		if (enable)
-  2427			return resctrl_abmc_enable(l);
-  2428	
-  2429		resctrl_abmc_disable(l);
-  2430	
-  2431		return 0;
-  2432	}
-  2433	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+In general, af_xdp is a bit lacking in this 'notify the user that they
+somehow messed up' area :-(
+For example, pushing a tx descriptor with a wrong addr/len in zc mode
+will not give any visible signal back (besides driver potentially
+spilling something into dmesg as it was in the mlx case).
+We can probably start with having some counters for these events?
 
