@@ -1,62 +1,44 @@
-Return-Path: <linux-doc+bounces-4113-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4115-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC1A0805860
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 16:17:19 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id CD7F3805871
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 16:23:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A4171B20F9C
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 15:17:17 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 86400281C93
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 15:23:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B7CBB68E92;
-	Tue,  5 Dec 2023 15:17:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 555F968E9D;
+	Tue,  5 Dec 2023 15:22:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ix49uvV8"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Nt37GRXp"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96D2D68E8B;
-	Tue,  5 Dec 2023 15:17:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BDD2C433CB;
-	Tue,  5 Dec 2023 15:17:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1502368E91;
+	Tue,  5 Dec 2023 15:22:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 9DB45C433C8;
+	Tue,  5 Dec 2023 15:22:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1701789432;
-	bh=WxBLNu98B1cLwePPURJz8e+EQWq5ivagn8IAmvjaT3Y=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ix49uvV8oLKxiIEprFaWOAde/iQBJKopyRhqC8e3Oeq7vo9/0533Ykgobh4dvgXw1
-	 Yh4TW0z3zHD9+AbWCSNbtFKev35vnrVBDZ+yNRSrHmbm3ET2f4HAbEFq5YBVdqz0B+
-	 7Xc01gdnidPQlbbEiI58lTcwhIuhvODKLnGmXEjBlicoQS87Urhw2EZSDBduSyW80z
-	 OOaZ/UyD7hb/9swK83N4omotpvJ8iNMAintAQ73somh10nxvAd0DtUOYxdb/Xi4+Ap
-	 SvYXSOlx/Jc2q9GmaXiKoIhvQE7hGWgl6lHBU/ldgZv12feL26iK8koECfAGqQxdA4
-	 3MDGGcGfz+30g==
-From: Will Deacon <will@kernel.org>
-To: s.hauer@pengutronix.de,
-	mark.rutland@arm.com,
-	corbet@lwn.net,
-	Xu Yang <xu.yang_2@nxp.com>,
-	robh+dt@kernel.org,
-	krzysztof.kozlowski+dt@linaro.org,
-	kernel@pengutronix.de,
-	shawnguo@kernel.org,
-	frank.li@nxp.com
-Cc: catalin.marinas@arm.com,
-	kernel-team@android.com,
-	Will Deacon <will@kernel.org>,
-	linux-doc@vger.kernel.org,
-	festevam@gmail.com,
-	linux-imx@nxp.com,
-	linux-arm-kernel@lists.infradead.org,
-	devicetree@vger.kernel.org,
-	conor+dt@kernel.org
-Subject: Re: [PATCH v3 1/5] perf: fsl_imx8_ddr: Add AXI ID PORT CHANNEL filter support
-Date: Tue,  5 Dec 2023 15:16:38 +0000
-Message-Id: <170178552961.2948567.1593321424507215483.b4-ty@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20231120093317.2652866-1-xu.yang_2@nxp.com>
-References: <20231120093317.2652866-1-xu.yang_2@nxp.com>
+	s=k20201202; t=1701789777;
+	bh=zmMe6JBH09XXMGADR7GVSPNl3I74k767y2uX7Ridnpw=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=Nt37GRXp8T6Vou5oJUp+AZfyMY/yS99kJTn5PsE/YFgmZNkdb35wrAlyto3w9kTWj
+	 dtADUn6/VKALGf9mQZm8UUhqyfuL+BrMzIXu8Q6RbkxzpGHqoxjT3I//z5HfmkNDOY
+	 mQJUQVH2LZpHcxNvT6NZ6ms2usgtIXVSD9GfmD74ZJ6GptFt7peyhwy4Ix96bXMg0k
+	 16XPH4AQI+JSfJWX3o2KbuvNC8n7TV0V/vcoCyqdL7E+sF9qD7n5PBxo8YcWvkTspJ
+	 lkTQtD65xFJ7TptCrjojUJ+HXqSjfEgAfeFqLHe3Bc09LzIVhYrFmiFM5MN9mFn7Rn
+	 UkI4+dt5Hxp0Q==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D86DC4167B;
+	Tue,  5 Dec 2023 15:22:57 +0000 (UTC)
+From: Nuno Sa via B4 Relay <devnull+nuno.sa.analog.com@kernel.org>
+Subject: [PATCH v3 0/2] Add support for LTC4282
+Date: Tue, 05 Dec 2023 16:22:54 +0100
+Message-Id: <20231205-ltc4282-support-v3-0-e0877b281bc2@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -65,35 +47,90 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAE5Ab2UC/03MQQ6DIBBA0auYWXcMA6LoqvdouiB0VBIFA9o0M
+ d69pKsu3+L/EzInzxmG6oTEb599DAXqVoGbbZgY/asYpJCKSDa47K6RRmI+ti2mHY2jttOsSAs
+ DpdoSj/7zOz6exWOKK+5zYvv3IUGaeqFranVvOoUKwxFine3dBrvEqXZxhev6ArTQuAKfAAAA
+To: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-doc@vger.kernel.org
+Cc: Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>, 
+ Rob Herring <robh+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1701789775; l=2306;
+ i=nuno.sa@analog.com; s=20231116; h=from:subject:message-id;
+ bh=zmMe6JBH09XXMGADR7GVSPNl3I74k767y2uX7Ridnpw=;
+ b=y+rnkM3pXhxCNJfuqsOWQ7W778iLQ8AibszEbiqJrlzeuh9DYCA2OvLdY63+O4C1a8SrnRN2o
+ XOUeKCuhWZoDLTqOagsansAxcS3ciSBeCS5V1KB0hwZ2z5kxWM4I0dn
+X-Developer-Key: i=nuno.sa@analog.com; a=ed25519;
+ pk=3NQwYA013OUYZsmDFBf8rmyyr5iQlxV/9H4/Df83o1E=
+X-Endpoint-Received:
+ by B4 Relay for nuno.sa@analog.com/20231116 with auth_id=100
+X-Original-From: Nuno Sa <nuno.sa@analog.com>
+Reply-To: <nuno.sa@analog.com>
 
-On Mon, 20 Nov 2023 17:33:13 +0800, Xu Yang wrote:
-> This is the extension of AXI ID filter.
-> 
-> Filter is defined with 2 configuration registers per counter 1-3 (counter
-> 0 is not used for filtering and lacks these registers).
-> * Counter N MASK COMP register - AXI_ID and AXI_MASKING.
-> * Counter N MUX CNTL register - AXI CHANNEL and AXI PORT.
->   -- 0: address channel
->   -- 1: data channel
-> 
-> [...]
+v1:
+ * https://lore.kernel.org/linux-hwmon/20231110151905.1659873-1-nuno.sa@analog.com/
 
-Applied first four patches to will (for-next/perf), thanks!
+v2:
+ * https://lore.kernel.org/linux-hwmon/20231124-ltc4282-support-v2-0-952bf926f83c@analog.com 
 
-[1/5] perf: fsl_imx8_ddr: Add AXI ID PORT CHANNEL filter support
-      https://git.kernel.org/will/c/afd83967e7bb
-[2/5] docs/perf: Add explanation for DDR_CAP_AXI_ID_PORT_CHANNEL_FILTER quirk
-      https://git.kernel.org/will/c/9745295358f4
-[3/5] dt-bindings: perf: fsl-imx-ddr: Add i.MX8DXL compatible
-      https://git.kernel.org/will/c/2fe44e7dcb86
-[4/5] perf: fsl_imx8_ddr: Add driver support for i.MX8DXL DDR Perf
-      https://git.kernel.org/will/c/46fe448ec3b7
+Changes in V3:
+- Bindings:
+   * Remove 'default' from string types;
+   * Update gpios descriptions and removed leftovers from when they were
+     integer types.
+   * Dropped gpio function. With that, adi,gpio3-mode and adi,gpio-alert were
+     dropped.
+- Driver:
+   * Make all clock ops static;
+   * Dropped macro to create debugfs attributes;
+   * Dropped GPIO support;
+   * Removed regulator consumer header (leftover from v1).
 
-Cheers,
--- 
-Will
+There are still some possible interfaces which are dubious from an hwmon
+point view. Namely:
 
-https://fixes.arm64.dev
-https://next.arm64.dev
-https://will.arm64.dev
+* fet_short_fault
+* fet_bad_fault
+* power1_good
+
+power1_good and fet_short can be "monitored" with gpio1 and 2
+respectively so maybe we could remove the. OTHO, some users might want
+the pins free for GPIO usage. fet_bad_fault is a status bit (we also have it in
+fault_logs) that might be meaningful to monitor (I think).
+
+Also to note, I'm still seeing the following sparse issue:
+
+"CHECK   drivers/hwmon/ltc4282.c
+drivers/hwmon/ltc4282.c:805:34: warning: dubious: x & !y
+drivers/hwmon/ltc4282.c:895:34: warning: dubious: x & !y" 
+
+However, this does not look to be directly related with the driver. It's
+on FIED_PREP() taking values like !val or !!val.
+
+I'm also removing the GPIO maintainers/reviewers from Cc since there's no
+gpiochip support anymore. If not adequate, I'll Cc them again...
+
+---
+Nuno Sa (2):
+      dt-bindings: hwmon: Add LTC4282 bindings
+      hwmon: ltc4282: add support for the LTC4282 chip
+
+ .../devicetree/bindings/hwmon/adi,ltc4282.yaml     |  142 ++
+ Documentation/hwmon/index.rst                      |    1 +
+ Documentation/hwmon/ltc4282.rst                    |  108 ++
+ MAINTAINERS                                        |    8 +
+ drivers/hwmon/Kconfig                              |   11 +
+ drivers/hwmon/Makefile                             |    1 +
+ drivers/hwmon/ltc4282.c                            | 1705 ++++++++++++++++++++
+ 7 files changed, 1976 insertions(+)
+---
+base-commit: 44482310b7f8ac4cd8fa7be4cee8c1b260ea5ee9
+change-id: 20231124-ltc4282-support-8c1675e31508
+--
+
+Thanks!
+- Nuno Sá
+
 
