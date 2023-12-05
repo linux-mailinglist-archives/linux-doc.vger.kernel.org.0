@@ -1,205 +1,209 @@
-Return-Path: <linux-doc+bounces-4087-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4051-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D4548052AF
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 12:25:05 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B8A0805188
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 12:05:37 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 15F5D283EEC
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 11:25:04 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id AB733B20A55
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Dec 2023 11:05:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 46FF369790;
-	Tue,  5 Dec 2023 11:21:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C3CE53818;
+	Tue,  5 Dec 2023 11:05:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="BvEB5F1O"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="aymnqoW6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 10968D6C;
-	Tue,  5 Dec 2023 03:21:38 -0800 (PST)
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.31])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 599629A;
+	Tue,  5 Dec 2023 03:05:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701775299; x=1733311299;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=GKdJrpjNAAfGimUxYAq3wTN/xrTwaQ33LU4i4+qObUE=;
-  b=BvEB5F1O9zz/PB3qkbHuh3wEJHsdc2UpviBLDpT323YSPOXR1EYDna2T
-   jZsH02cy7fhUmhCL9mj0Q0q340w0HSUIBW/MXeqWhxg7E1dAUxNAcGA04
-   IR8uZPWh1QeKEi1sNE73whKwZ5crYmCEu7aVvvjrQNGQCHGoRcQwtJZXC
-   SLcVgOMtXq5LYkqSphDXPwvNbiDDLrkXkF++Jlml5OPmO1Jc2lw6Hj/XK
-   y5iIkmmUs7B+JSUnbuCcBwEg2J7jpdECIbKYRsEpA2lp4o0Ufm9tPzJMs
-   DDoxUl0aDJVm+RuEldgtpXiNsfL0gOnEEbQNA45EPi7yG5Q/zQDb58WNX
+  t=1701774325; x=1733310325;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=vxtWDeGzVM4kvy0di8LLvjYNsy4xYn3TtHE94cFFtoI=;
+  b=aymnqoW63Xl1IB8S6sWu2XvyFcuuiQkiTynli4f3CHEN44n3KucPPanE
+   5jeP1b9WpoaE2ryBCvVNJ/i9ZwAuZq78kMOD+xjwKDnkDclzwoTDInUNb
+   VFm5RLxb+2rPPAhcK+guFNxNPu7VYlkXOHGc54t0tJhuf3Z/+j3RxE/Ta
+   jt47MteQjelfWeHVlselsEHD8KnN9LhoVggcQm3dXOmePUkoMNeS1nC/r
+   cevLmMBLRvB87Y3qM2m7qy4VvRekB/X2I4zsjmphKXR6UW0LLHfyf9odR
+   t2078ay7oWoG7qInjFPCUwWoy1/XaCp7GlLDwBuu5iKS4MAS7J7JLKl10
    Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="942743"
-X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="942743"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Dec 2023 03:21:28 -0800
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="458199426"
+X-IronPort-AV: E=Sophos;i="6.04,251,1695711600"; 
+   d="scan'208";a="458199426"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Dec 2023 03:05:24 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="1018193022"
-X-IronPort-AV: E=Sophos;i="6.04,252,1695711600"; 
-   d="scan'208";a="1018193022"
-Received: from unknown (HELO fred..) ([172.25.112.68])
-  by fmsmga006.fm.intel.com with ESMTP; 05 Dec 2023 03:21:26 -0800
-From: Xin Li <xin3.li@intel.com>
-To: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-edac@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	kvm@vger.kernel.org,
-	xen-devel@lists.xenproject.org
-Cc: tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	dave.hansen@linux.intel.com,
-	x86@kernel.org,
-	hpa@zytor.com,
-	luto@kernel.org,
-	pbonzini@redhat.com,
-	seanjc@google.com,
-	peterz@infradead.org,
-	jgross@suse.com,
-	ravi.v.shankar@intel.com,
-	mhiramat@kernel.org,
-	andrew.cooper3@citrix.com,
-	jiangshanlai@gmail.com,
-	nik.borisov@suse.com,
-	shan.kang@intel.com
-Subject: [PATCH v13 35/35] x86/fred: Invoke FRED initialization code to enable FRED
-Date: Tue,  5 Dec 2023 02:50:24 -0800
-Message-ID: <20231205105030.8698-36-xin3.li@intel.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20231205105030.8698-1-xin3.li@intel.com>
-References: <20231205105030.8698-1-xin3.li@intel.com>
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="861708559"
+X-IronPort-AV: E=Sophos;i="6.04,251,1695711600"; 
+   d="scan'208";a="861708559"
+Received: from lkp-server02.sh.intel.com (HELO b07ab15da5fe) ([10.239.97.151])
+  by FMSMGA003.fm.intel.com with ESMTP; 05 Dec 2023 03:05:20 -0800
+Received: from kbuild by b07ab15da5fe with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1rATEp-0008pW-0o;
+	Tue, 05 Dec 2023 11:05:16 +0000
+Date: Tue, 5 Dec 2023 19:04:30 +0800
+From: kernel test robot <lkp@intel.com>
+To: baneric926@gmail.com, jdelvare@suse.com, linux@roeck-us.net,
+	robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+	conor+dt@kernel.org, corbet@lwn.net
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+	linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	openbmc@lists.ozlabs.org, kwliu@nuvoton.com, kcfeng0@nuvoton.com,
+	DELPHINE_CHIU@wiwynn.com, Bonnie_Lo@wiwynn.com
+Subject: Re: [PATCH v1 2/2] hwmon: Driver for Nuvoton NCT736X
+Message-ID: <202312051854.qBIoJW1N-lkp@intel.com>
+References: <20231204055650.788388-3-kcfeng0@nuvoton.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231204055650.788388-3-kcfeng0@nuvoton.com>
 
-From: "H. Peter Anvin (Intel)" <hpa@zytor.com>
+Hi,
 
-Let cpu_init_exception_handling() call cpu_init_fred_exceptions() to
-initialize FRED. However if FRED is unavailable or disabled, it falls
-back to set up TSS IST and initialize IDT.
+kernel test robot noticed the following build warnings:
 
-Signed-off-by: H. Peter Anvin (Intel) <hpa@zytor.com>
-Tested-by: Shan Kang <shan.kang@intel.com>
-Co-developed-by: Xin Li <xin3.li@intel.com>
-Signed-off-by: Xin Li <xin3.li@intel.com>
----
+[auto build test WARNING on linus/master]
+[also build test WARNING on v6.7-rc4 next-20231205]
+[cannot apply to groeck-staging/hwmon-next]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Changes since v10:
-* No need to invalidate SYSCALL and SYSENTER MSRs (Thomas Gleixner).
+url:    https://github.com/intel-lab-lkp/linux/commits/baneric926-gmail-com/dt-bindings-hwmon-Add-nct736x-bindings/20231204-135942
+base:   linus/master
+patch link:    https://lore.kernel.org/r/20231204055650.788388-3-kcfeng0%40nuvoton.com
+patch subject: [PATCH v1 2/2] hwmon: Driver for Nuvoton NCT736X
+config: i386-allmodconfig (https://download.01.org/0day-ci/archive/20231205/202312051854.qBIoJW1N-lkp@intel.com/config)
+compiler: clang version 16.0.4 (https://github.com/llvm/llvm-project.git ae42196bc493ffe877a7e3dff8be32035dea4d07)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231205/202312051854.qBIoJW1N-lkp@intel.com/reproduce)
 
-Changes since v8:
-* Move this patch after all required changes are in place (Thomas
-  Gleixner).
----
- arch/x86/kernel/cpu/common.c | 22 +++++++++++++++++-----
- arch/x86/kernel/irqinit.c    |  7 ++++++-
- arch/x86/kernel/traps.c      |  5 ++++-
- 3 files changed, 27 insertions(+), 7 deletions(-)
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202312051854.qBIoJW1N-lkp@intel.com/
 
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index 9a075792e275..91d2f6018c48 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -61,6 +61,7 @@
- #include <asm/microcode.h>
- #include <asm/intel-family.h>
- #include <asm/cpu_device_id.h>
-+#include <asm/fred.h>
- #include <asm/uv/uv.h>
- #include <asm/ia32.h>
- #include <asm/set_memory.h>
-@@ -2117,7 +2118,15 @@ void syscall_init(void)
- 	/* The default user and kernel segments */
- 	wrmsr(MSR_STAR, 0, (__USER32_CS << 16) | __KERNEL_CS);
- 
--	idt_syscall_init();
-+	/*
-+	 * Except the IA32_STAR MSR, there is NO need to setup SYSCALL and
-+	 * SYSENTER MSRs for FRED, because FRED uses the ring 3 FRED
-+	 * entrypoint for SYSCALL and SYSENTER, and ERETU is the only legit
-+	 * instruction to return to ring 3 (both sysexit and sysret cause
-+	 * #UD when FRED is enabled).
-+	 */
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED))
-+		idt_syscall_init();
- }
- 
- #else	/* CONFIG_X86_64 */
-@@ -2223,8 +2232,9 @@ void cpu_init_exception_handling(void)
- 	/* paranoid_entry() gets the CPU number from the GDT */
- 	setup_getcpu(cpu);
- 
--	/* IST vectors need TSS to be set up. */
--	tss_setup_ist(tss);
-+	/* For IDT mode, IST vectors need to be set in TSS. */
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED))
-+		tss_setup_ist(tss);
- 	tss_setup_io_bitmap(tss);
- 	set_tss_desc(cpu, &get_cpu_entry_area(cpu)->tss.x86_tss);
- 
-@@ -2233,8 +2243,10 @@ void cpu_init_exception_handling(void)
- 	/* GHCB needs to be setup to handle #VC. */
- 	setup_ghcb();
- 
--	/* Finally load the IDT */
--	load_current_idt();
-+	if (cpu_feature_enabled(X86_FEATURE_FRED))
-+		cpu_init_fred_exceptions();
-+	else
-+		load_current_idt();
- }
- 
- /*
-diff --git a/arch/x86/kernel/irqinit.c b/arch/x86/kernel/irqinit.c
-index c683666876f1..f79c5edc0b89 100644
---- a/arch/x86/kernel/irqinit.c
-+++ b/arch/x86/kernel/irqinit.c
-@@ -28,6 +28,7 @@
- #include <asm/setup.h>
- #include <asm/i8259.h>
- #include <asm/traps.h>
-+#include <asm/fred.h>
- #include <asm/prom.h>
- 
- /*
-@@ -96,7 +97,11 @@ void __init native_init_IRQ(void)
- 	/* Execute any quirks before the call gates are initialised: */
- 	x86_init.irqs.pre_vector_init();
- 
--	idt_setup_apic_and_irq_gates();
-+	if (cpu_feature_enabled(X86_FEATURE_FRED))
-+		fred_complete_exception_setup();
-+	else
-+		idt_setup_apic_and_irq_gates();
-+
- 	lapic_assign_system_vectors();
- 
- 	if (!acpi_ioapic && !of_ioapic && nr_legacy_irqs()) {
-diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
-index 848c85208a57..0ee78a30e14a 100644
---- a/arch/x86/kernel/traps.c
-+++ b/arch/x86/kernel/traps.c
-@@ -1411,7 +1411,10 @@ void __init trap_init(void)
- 
- 	/* Initialize TSS before setting up traps so ISTs work */
- 	cpu_init_exception_handling();
-+
- 	/* Setup traps as cpu_init() might #GP */
--	idt_setup_traps();
-+	if (!cpu_feature_enabled(X86_FEATURE_FRED))
-+		idt_setup_traps();
-+
- 	cpu_init();
- }
+All warnings (new ones prefixed by >>):
+
+>> drivers/hwmon/nct736x.c:352:5: warning: variable 'gpio14_17' is uninitialized when used here [-Wuninitialized]
+                                   gpio14_17 |= FANIN_SEL(i);
+                                   ^~~~~~~~~
+   drivers/hwmon/nct736x.c:339:46: note: initialize the variable 'gpio14_17' to silence this warning
+           u8 i, gpio0_3, gpio4_7, gpio10_13, gpio14_17;
+                                                       ^
+                                                        = '\0'
+>> drivers/hwmon/nct736x.c:347:5: warning: variable 'gpio10_13' is uninitialized when used here [-Wuninitialized]
+                                   gpio10_13 |= FANIN_SEL(i);
+                                   ^~~~~~~~~
+   drivers/hwmon/nct736x.c:339:35: note: initialize the variable 'gpio10_13' to silence this warning
+           u8 i, gpio0_3, gpio4_7, gpio10_13, gpio14_17;
+                                            ^
+                                             = '\0'
+>> drivers/hwmon/nct736x.c:350:5: warning: variable 'gpio4_7' is uninitialized when used here [-Wuninitialized]
+                                   gpio4_7 |= PWM_SEL(i);
+                                   ^~~~~~~
+   drivers/hwmon/nct736x.c:339:24: note: initialize the variable 'gpio4_7' to silence this warning
+           u8 i, gpio0_3, gpio4_7, gpio10_13, gpio14_17;
+                                 ^
+                                  = '\0'
+>> drivers/hwmon/nct736x.c:345:5: warning: variable 'gpio0_3' is uninitialized when used here [-Wuninitialized]
+                                   gpio0_3 |= PWM_SEL(i);
+                                   ^~~~~~~
+   drivers/hwmon/nct736x.c:339:15: note: initialize the variable 'gpio0_3' to silence this warning
+           u8 i, gpio0_3, gpio4_7, gpio10_13, gpio14_17;
+                        ^
+                         = '\0'
+   4 warnings generated.
+
+
+vim +/gpio14_17 +352 drivers/hwmon/nct736x.c
+
+   334	
+   335	static int nct736x_init_chip(struct i2c_client *client,
+   336				     u32 pwm_mask, u32 fanin_mask, u32 wdt_cfg)
+   337	{
+   338		const struct i2c_device_id *id = i2c_match_id(nct736x_id, client);
+   339		u8 i, gpio0_3, gpio4_7, gpio10_13, gpio14_17;
+   340		int ret;
+   341	
+   342		for (i = 0; i < NCT736X_PWM_COUNT; i++) {
+   343			if (i < 4) {
+   344				if (pwm_mask & BIT_CHECK(i))
+ > 345					gpio0_3 |= PWM_SEL(i);
+   346				if (fanin_mask & BIT_CHECK(i))
+ > 347					gpio10_13 |= FANIN_SEL(i);
+   348			} else if (i < 8) {
+   349				if (pwm_mask & BIT_CHECK(i))
+ > 350					gpio4_7 |= PWM_SEL(i);
+   351				if (fanin_mask & BIT_CHECK(i))
+ > 352					gpio14_17 |= FANIN_SEL(i);
+   353			} else if (i < 12) {
+   354				if (pwm_mask & BIT_CHECK(i))
+   355					gpio10_13 |= PWM_SEL(i);
+   356				if (fanin_mask & BIT_CHECK(i))
+   357					gpio0_3 |= FANIN_SEL(i);
+   358			} else {
+   359				if (pwm_mask & BIT_CHECK(i))
+   360					gpio14_17 |= PWM_SEL(i);
+   361				if (fanin_mask & BIT_CHECK(i))
+   362					gpio4_7 |= FANIN_SEL(i);
+   363			}
+   364		}
+   365	
+   366		/* Pin Function Configuration */
+   367		ret = nct736x_write_reg(client, NCT736X_REG_GPIO_0_3, gpio0_3);
+   368		if (ret < 0)
+   369			return ret;
+   370		ret = nct736x_write_reg(client, NCT736X_REG_GPIO_4_7, gpio4_7);
+   371		if (ret < 0)
+   372			return ret;
+   373		ret = nct736x_write_reg(client, NCT736X_REG_GPIO_10_13, gpio10_13);
+   374		if (ret < 0)
+   375			return ret;
+   376		ret = nct736x_write_reg(client, NCT736X_REG_GPIO_14_17, gpio14_17);
+   377		if (ret < 0)
+   378			return ret;
+   379	
+   380		/* PWM and FANIN Monitoring Enable */
+   381		ret = nct736x_write_reg(client, NCT736X_REG_PWMEN_0_7,
+   382					pwm_mask & 0xff);
+   383		if (ret < 0)
+   384			return ret;
+   385		ret = nct736x_write_reg(client,
+   386					NCT736X_REG_PWMEN_8_15, (pwm_mask >> 8) & 0xff);
+   387		if (ret < 0)
+   388			return ret;
+   389		ret = nct736x_write_reg(client, NCT736X_REG_FANINEN_0_7,
+   390					fanin_mask & 0xff);
+   391		if (ret < 0)
+   392			return ret;
+   393		ret = nct736x_write_reg(client, NCT736X_REG_FANINEN_8_15,
+   394					(fanin_mask >> 8) & 0xff);
+   395		if (ret < 0)
+   396			return ret;
+   397	
+   398		/* Watchdog Timer Configuration */
+   399		if (wdt_cfg != 0xff && id->driver_data == nct7363) {
+   400			ret = nct736x_write_reg(client, NCT7363_REG_WDT, wdt_cfg);
+   401			if (ret < 0)
+   402				return ret;
+   403		}
+   404	
+   405		return 0;
+   406	}
+   407	
+
 -- 
-2.43.0
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
