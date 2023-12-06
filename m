@@ -1,383 +1,268 @@
-Return-Path: <linux-doc+bounces-4258-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4245-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24942806B96
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Dec 2023 11:13:46 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9256E806B47
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Dec 2023 11:07:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CD519281E2D
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Dec 2023 10:13:44 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3AE041F2133C
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Dec 2023 10:07:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F0BA2D052;
-	Wed,  6 Dec 2023 10:13:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3E2E228DA4;
+	Wed,  6 Dec 2023 10:07:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="RONvNQbf"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SEKwbpRS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E0474198C
-	for <linux-doc@vger.kernel.org>; Wed,  6 Dec 2023 02:13:15 -0800 (PST)
-Received: from epcas5p2.samsung.com (unknown [182.195.41.40])
-	by mailout1.samsung.com (KnoxPortal) with ESMTP id 20231206101313epoutp01c3550e2293f5af5752146723a2c0b5a7~eNnbrqbzh0575005750epoutp01E
-	for <linux-doc@vger.kernel.org>; Wed,  6 Dec 2023 10:13:13 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com 20231206101313epoutp01c3550e2293f5af5752146723a2c0b5a7~eNnbrqbzh0575005750epoutp01E
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1701857593;
-	bh=xTrfyi/yJidoNrl3TPzzopI+GnPn+ZUhLrlBrAJpZmk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=RONvNQbfKPP7JVvjs7/Cza28A52wzlIx90cwYe3YvAdVCJEITxSXUxRQRkVuU4Hrs
-	 EXjltQKrrtIHLDJNzBZc0Si7sXIvm09t8hUWceIR4z3qQVGCJjLsRAkPxiyMnS4Ifn
-	 sKZNZuXoukFqHOHKNCzHaWtMMOTo3WvokxoY+HMs=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
-	epcas5p2.samsung.com (KnoxPortal) with ESMTP id
-	20231206101312epcas5p27ba89066024e85afe3dcbfa68f2ad196~eNna9UUf43251632516epcas5p20;
-	Wed,  6 Dec 2023 10:13:12 +0000 (GMT)
-Received: from epsmgec5p1-new.samsung.com (unknown [182.195.38.175]) by
-	epsnrtp2.localdomain (Postfix) with ESMTP id 4SlYBb3qKRz4x9Pw; Wed,  6 Dec
-	2023 10:13:11 +0000 (GMT)
-Received: from epcas5p3.samsung.com ( [182.195.41.41]) by
-	epsmgec5p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
-	74.A8.19369.73940756; Wed,  6 Dec 2023 19:13:11 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
-	epcas5p4.samsung.com (KnoxPortal) with ESMTPA id
-	20231206101310epcas5p43f06695868958526fed828762e728e7b~eNnZC_V9U2295022950epcas5p46;
-	Wed,  6 Dec 2023 10:13:10 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
-	epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
-	20231206101310epsmtrp24b03b0bf079829d4f931fce53db76085~eNnZBqF9B1007210072epsmtrp21;
-	Wed,  6 Dec 2023 10:13:10 +0000 (GMT)
-X-AuditID: b6c32a50-c99ff70000004ba9-4a-657049372387
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
-	epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
-	6A.85.18939.63940756; Wed,  6 Dec 2023 19:13:10 +0900 (KST)
-Received: from localhost.localdomain (unknown [107.99.41.245]) by
-	epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20231206101305epsmtip2045c6dd8db41916fbde2ae92d7cd27d5~eNnUSGSf50087600876epsmtip2e;
-	Wed,  6 Dec 2023 10:13:05 +0000 (GMT)
-From: Kanchan Joshi <joshi.k@samsung.com>
-To: Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>, Alasdair
-	Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>, Mikulas Patocka
-	<mpatocka@redhat.com>, dm-devel@lists.linux.dev, Keith Busch
-	<kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg
-	<sagi@grimberg.me>, Chaitanya Kulkarni <kch@nvidia.com>, Alexander Viro
-	<viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>
-Cc: martin.petersen@oracle.com, linux-scsi@vger.kernel.org,
-	nitheshshetty@gmail.com, anuj1072538@gmail.com, gost.dev@samsung.com,
-	mcgrof@kernel.org, Nitesh Shetty <nj.shetty@samsung.com>, Hannes Reinecke
-	<hare@suse.de>, Damien Le Moal <damien.lemoal@opensource.wdc.com>, Anuj
-	Gupta <anuj20.g@samsung.com>, Vincent Fu <vincent.fu@samsung.com>,
-	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-nvme@lists.infradead.org,
-	linux-fsdevel@vger.kernel.org
-Subject: [PATCH v18 12/12] null_blk: add support for copy offload
-Date: Wed,  6 Dec 2023 15:32:44 +0530
-Message-Id: <20231206100253.13100-13-joshi.k@samsung.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231206100253.13100-1-joshi.k@samsung.com>
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com [IPv6:2607:f8b0:4864:20::c34])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 56C83FA;
+	Wed,  6 Dec 2023 02:07:09 -0800 (PST)
+Received: by mail-oo1-xc34.google.com with SMTP id 006d021491bc7-58d9a0ead0cso919624eaf.0;
+        Wed, 06 Dec 2023 02:07:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1701857228; x=1702462028; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=W/vlq7pt9AeGEnRub01NvFpgsDNby2jk6O8E2xtdj9s=;
+        b=SEKwbpRSt7+tHgwJpeZOsx36bBSW/nxilQiycK8FTEA1n7rr8NL6g/njLzuQHinLlJ
+         iQ5onXqgo5uU5FhNue3HfUU4mzR+e7v/Qh5ssmbGi/iqtZu5ti2lvjcFjybFX9QVRnB9
+         l2IIIgfSJg0ZMToW5b+jDFgtB+ikGim+Chqv+5i4T+uHgixrimQLYPSsl+mUUmxF1qzW
+         m5X9e5ik/kWsx4xZtXpNLVSsxP50YR7AEsIHjaUJpZqEf527iuXWwZha0gDachs9fpUi
+         nqAbvTjCOIgHtJwXUyizPtzUrXr4i9J5sNXreE0f1H+ZWvEGbKBAFEe84lKitqN2b93E
+         k5zg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701857228; x=1702462028;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=W/vlq7pt9AeGEnRub01NvFpgsDNby2jk6O8E2xtdj9s=;
+        b=XnWg1AD2n4VGpWXkOCogzZBUkJcNtiZ/8wzZznCX0gUwAaPkTy7iIwO4SmaNMVrytK
+         3n4DdVFurAa3gNIVJGVAB69gx0ULZ6Ju+u//kBh1nzycrVEqRQghjNNKDnVrgaTeySHy
+         EIBxz9BocnS8nylpgL/0ceVi5LnJwzEH7B09+F0FlmGRJc/8VyZ5q3BpfmTg8i3X5CYx
+         uG2EzBBYWQrusnyNnH0EXvSu1ksSNiwHKvkuxhM6IBTyt61ypk1JUFxoGZhxtKns7Z+k
+         0DM2XE/fng0xfWsUK1l/wy/zwPKuAzazIsunCrIy/9T5ifGvPR0YwuOp/lVgh9BBCCs9
+         xZCQ==
+X-Gm-Message-State: AOJu0YyOuVPy3fpD5wneCqY+UHgnZGnfDMOyonyojbRJhBobavbRVpXl
+	W7K6U9LcCY92gsMngXrE20UrWbh/Xf48UO4T20o=
+X-Google-Smtp-Source: AGHT+IFM6+SkktBbli78RNGNd8KWWCUqf7S2N+h7frD1ZfTKF9ggdkQwqOjS+jWDA8naLrSe5Bcn1Lp1etLJdeyYiUI=
+X-Received: by 2002:a05:6830:39de:b0:6d9:b049:7e9b with SMTP id
+ bt30-20020a05683039de00b006d9b0497e9bmr1160555otb.3.1701857228489; Wed, 06
+ Dec 2023 02:07:08 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA02Te0xbdRTH97v3trTL2K5lZL+wZbBGEoEUWuXxAwq6bBlXRqSJURPRQC03
-	hVDa2seGmmUdWB7teIxOM2CjvNwDEOQpRVgmxCE4Vjbs1pKAOlo0MkFgAycPbS2b++9zTr4n
-	33zPyWHhnFqfAFa2XEOr5GIZl7mT6B0OCeHFvK6k+Vd1ELWP3cTR0uN1AuVXbOKoZbqcieaH
-	lwFy3igCaH3ciqO6hksEctywYGigoRJD11q+w1Dl0D2AXLZqDA1OhaH6wiYCDQyOEmiy/yIT
-	mS+7fJDxfh8TXRnZwpC9wgXQuWIbhvqcZwDqXTfjqG1+kUDfT+1Hs8ZigKybI4zXDlCW6mkf
-	yjrTQVCT41qqs7mESXU1naZ+66oC1DcOHZNqLDMxqNKCBSZl0f/EoJZcUwS1eN3GpMq6mwHV
-	9cMn1ErnQarT+QcmIt/NEWbR4kxaFUTLJYrMbLk0gXv8zfQj6VHRfAFPEItiuEFycS6dwD2a
-	IuIdy5a5N8QNOiGWad0tkVit5kYkClUKrYYOylKoNQlcWpkpU0Yqw9XiXLVWLg2X05o4AZ//
-	cpRbmJGTVblhYCh1SXl9owoduBdnAGwWJCPhF2sjTAPYyeKQAwAWuK5j3mIZQN2VVeaz4tP2
-	HuzpyNn8y7iHOaQFwGIz6RWtAPijfY5hACwWkwyBEyatR7OXbMWhpUPg0eDkXzhsHPH4sVl+
-	5GHomGoCHibIYPjAXsrwsC8ZCwcetTK9ZoGw6u6aj4fZ7r7p1wbcq3kBjlY5CQ/jbk1BTw3u
-	MYDkMBtOzzkY3uGjcO7rEuBlP/j7SLePlwPgysLgtoEE3q26vZ1MA2cHvt3mV6F+rBz3hMHd
-	Ydr7I7xeu2HpuhPztCHpC4sLOV71IThT6dp23Qd/udC0zRRsKRwnvPs5C+DMmJlRAQKrn4tQ
-	/VyE6v/d6gDeDAJopTpXSkuilAKenD757LASRW4n+O9RQkV9oOWrzfAhgLHAEIAsnLvXV2ZV
-	0BzfTPFHH9MqRbpKK6PVQyDKveRzeIC/ROH+NLkmXRAZy4+Mjo6OjH0lWsDd5zuvv5TJIaVi
-	DZ1D00pa9XQOY7EDdJhRa5d9UGtvTbJFSZMNh4vUX9ruhE4K+/qPv3jnVINT/49vPB4u+RCr
-	HytvPBXSSpaJ8Pbyh0OzQRt80UL8g5vx72vyKvP0Vtd+aczJ3vsm09buNHNYkZ82P0N45G+j
-	xS+wUGgvnre9ETbNS1UR4wfNu2rXUopqatK3DMNntOLzvHrhbWE9uWcpyXWiZtV84MKxxccR
-	s8Fs04Sxvz0Ye+JI1qMWxi3jjl1pC4aS+rbEsoDOlw619cSTDVlPEvf8PGidTDE4Coyp7yRn
-	2FZXrxUkmicu/il9+FZ4U+6y/60i7XshaY/eFkn9ZdTnNhiXlLrx2TRMqxtpO301t7tjB5dQ
-	Z4kFobhKLf4Xr0p7nLEEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrLIsWRmVeSWpSXmKPExsWy7bCSvK6ZZ0Gqwbb1KhbrTx1jtvj49TeL
-	RdOEv8wWq+/2s1m8PvyJ0eLJgXZGi99nzzNbLFg0l8Xi5oGdTBZ7Fk1isli5+iiTxaRD1xgt
-	nl6dxWSx95a2xcK2JSwWe/aeZLG4vGsOm8X8ZU/ZLbqv72CzWH78H5PFjQlPGS0mdlxlstjx
-	pJHRYtvv+cwW616/Z7E4cUva4nF3B6PF+b/HWR1kPHbOusvucf7eRhaPy2dLPTat6mTz2Lyk
-	3uPF5pmMHrtvNrB5LO6bzOrR2/yOzWNn631Wj49Pb7F4vN93lc2jb8sqRo/Np6s9Pm+S89j0
-	5C1TgEAUl01Kak5mWWqRvl0CV8akP12sBQ3uFTtO5jcwXrPqYuTkkBAwkehpWsYMYgsJbGeU
-	mPFXHiIuLtF87Qc7hC0ssfLfcyCbC6jmI6PE3487WLoYOTjYBDQlLkwuBYmLCOxglvi5tpkJ
-	xGEW6GCRuLBtL1i3sICjxM1bSxhBbBYBVYlHN3pZQWxeAUuJPV/WsEFskJeYeek7WD0nUHzy
-	80VQF1lI7GuczgJRLyhxcuYTMJsZqL5562zmCYwCs5CkZiFJLWBkWsUomlpQnJuem1xgqFec
-	mFtcmpeul5yfu4kRnAK0gnYwLlv/V+8QIxMH4yFGCQ5mJRHenPP5qUK8KYmVValF+fFFpTmp
-	xYcYpTlYlMR5lXM6U4QE0hNLUrNTUwtSi2CyTBycUg1M3iXFdZdzDiSpbVI1MvnQbW25/k4/
-	k5I99w2unWuuPjvNkWF2933znmezbBM69h9tXLix7gDH+W9zZeJMdp17fbdOdFZL3pUPBv9C
-	XknlvPgaIzN9DZvj1YS3y5J9cqI3PlthfKTY7+PRGWuvBrzJOtQQaH9cmkdYZH7+Jpddk9rN
-	5jwTfuloJR8cwB9zacMayQ1ClqXhP0xu8Cp7LZh3syr5cdPm3BdG7XN+pb+z38nDcJfhu1CE
-	Y/TboJut/gvylXSWi89Me8KzvuZsSsjKKaG3O1r6FMTzZ6YVb6sJXfiryfviGfOzLqqPMz59
-	Mp1829o4OOP08y61fvYjoT+3PVjQeC6Z8ROXrPPUOdd3KrEUZyQaajEXFScCAPx2ZblwAwAA
-X-CMS-MailID: 20231206101310epcas5p43f06695868958526fed828762e728e7b
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 105P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231206101310epcas5p43f06695868958526fed828762e728e7b
-References: <20231206100253.13100-1-joshi.k@samsung.com>
-	<CGME20231206101310epcas5p43f06695868958526fed828762e728e7b@epcas5p4.samsung.com>
+References: <20231203165129.1740512-1-yoong.siang.song@intel.com>
+ <20231203165129.1740512-3-yoong.siang.song@intel.com> <43b01013-e78b-417e-b169-91909c7309b1@kernel.org>
+ <656de830e8d70_2e983e294ca@willemb.c.googlers.com.notmuch>
+ <PH0PR11MB583000826591093B98BA841DD885A@PH0PR11MB5830.namprd11.prod.outlook.com>
+ <5a0faf8cc9ec3ab0d5082c66b909c582c8f1eae6.camel@siemens.com>
+ <CAKH8qBuXL8bOYtfKKPS8y=KJqouDptyciCjr0wNKVHtNj6BmqA@mail.gmail.com>
+ <656f66023f7bd_3dd6422942a@willemb.c.googlers.com.notmuch> <ZW98UW033wCy9vI-@google.com>
+In-Reply-To: <ZW98UW033wCy9vI-@google.com>
+From: Magnus Karlsson <magnus.karlsson@gmail.com>
+Date: Wed, 6 Dec 2023 11:06:57 +0100
+Message-ID: <CAJ8uoz3_XqavGt1DyFoQAuKS8Faa1Lc85b2t+whc-f6GN1Pvzw@mail.gmail.com>
+Subject: Re: [xdp-hints] Re: [PATCH bpf-next v3 2/3] net: stmmac: add Launch
+ Time support to XDP ZC
+To: Stanislav Fomichev <sdf@google.com>
+Cc: Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
+	Florian Bezdeka <florian.bezdeka@siemens.com>, yoong.siang.song@intel.com, 
+	Jesper Dangaard Brouer <hawk@kernel.org>, davem@davemloft.net, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Bjorn Topel <bjorn@kernel.org>, magnus.karlsson@intel.com, maciej.fijalkowski@intel.com, 
+	Jonathan Lemon <jonathan.lemon@gmail.com>, Alexei Starovoitov <ast@kernel.org>, 
+	Daniel Borkmann <daniel@iogearbox.net>, John Fastabend <john.fastabend@gmail.com>, 
+	Lorenzo Bianconi <lorenzo@kernel.org>, Tariq Toukan <tariqt@nvidia.com>, 
+	Willem de Bruijn <willemb@google.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+	Andrii Nakryiko <andrii@kernel.org>, Mykola Lysenko <mykolal@fb.com>, 
+	Martin KaFai Lau <martin.lau@linux.dev>, Song Liu <song@kernel.org>, 
+	Yonghong Song <yonghong.song@linux.dev>, KP Singh <kpsingh@kernel.org>, 
+	Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>, Shuah Khan <shuah@kernel.org>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Jose Abreu <joabreu@synopsys.com>, 
+	"netdev@vger.kernel.org" <netdev@vger.kernel.org>, 
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, "bpf@vger.kernel.org" <bpf@vger.kernel.org>, 
+	"xdp-hints@xdp-project.net" <xdp-hints@xdp-project.net>, 
+	"linux-stm32@st-md-mailman.stormreply.com" <linux-stm32@st-md-mailman.stormreply.com>, 
+	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, 
+	"linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Nitesh Shetty <nj.shetty@samsung.com>
+On Tue, 5 Dec 2023 at 20:39, Stanislav Fomichev <sdf@google.com> wrote:
+>
+> On 12/05, Willem de Bruijn wrote:
+> > Stanislav Fomichev wrote:
+> > > On Tue, Dec 5, 2023 at 7:34=E2=80=AFAM Florian Bezdeka
+> > > <florian.bezdeka@siemens.com> wrote:
+> > > >
+> > > > On Tue, 2023-12-05 at 15:25 +0000, Song, Yoong Siang wrote:
+> > > > > On Monday, December 4, 2023 10:55 PM, Willem de Bruijn wrote:
+> > > > > > Jesper Dangaard Brouer wrote:
+> > > > > > >
+> > > > > > >
+> > > > > > > On 12/3/23 17:51, Song Yoong Siang wrote:
+> > > > > > > > This patch enables Launch Time (Time-Based Scheduling) supp=
+ort to XDP zero
+> > > > > > > > copy via XDP Tx metadata framework.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Song Yoong Siang<yoong.siang.song@intel.com>
+> > > > > > > > ---
+> > > > > > > >   drivers/net/ethernet/stmicro/stmmac/stmmac.h      |  2 ++
+> > > > > > >
+> > > > > > > As requested before, I think we need to see another driver im=
+plementing
+> > > > > > > this.
+> > > > > > >
+> > > > > > > I propose driver igc and chip i225.
+> > > > >
+> > > > > Sure. I will include igc patches in next version.
+> > > > >
+> > > > > > >
+> > > > > > > The interesting thing for me is to see how the LaunchTime max=
+ 1 second
+> > > > > > > into the future[1] is handled code wise. One suggestion is to=
+ add a
+> > > > > > > section to Documentation/networking/xsk-tx-metadata.rst per d=
+river that
+> > > > > > > mentions/documents these different hardware limitations.  It =
+is natural
+> > > > > > > that different types of hardware have limitations.  This is a=
+ close-to
+> > > > > > > hardware-level abstraction/API, and IMHO as long as we docume=
+nt the
+> > > > > > > limitations we can expose this API without too many limitatio=
+ns for more
+> > > > > > > capable hardware.
+> > > > >
+> > > > > Sure. I will try to add hardware limitations in documentation.
+> > > > >
+> > > > > >
+> > > > > > I would assume that the kfunc will fail when a value is passed =
+that
+> > > > > > cannot be programmed.
+> > > > > >
+> > > > >
+> > > > > In current design, the xsk_tx_metadata_request() dint got return =
+value.
+> > > > > So user won't know if their request is fail.
+> > > > > It is complex to inform user which request is failing.
+> > > > > Therefore, IMHO, it is good that we let driver handle the error s=
+ilently.
+> > > > >
+> > > >
+> > > > If the programmed value is invalid, the packet will be "dropped" / =
+will
+> > > > never make it to the wire, right?
+> >
+> > Programmable behavior is to either drop or cap to some boundary
+> > value, such as the farthest programmable time in the future: the
+> > horizon. In fq:
+> >
+> >                 /* Check if packet timestamp is too far in the future. =
+*/
+> >                 if (fq_packet_beyond_horizon(skb, q, now)) {
+> >                         if (q->horizon_drop) {
+> >                                         q->stat_horizon_drops++;
+> >                                         return qdisc_drop(skb, sch, to_=
+free);
+> >                         }
+> >                         q->stat_horizon_caps++;
+> >                         skb->tstamp =3D now + q->horizon;
+> >                 }
+> >                 fq_skb_cb(skb)->time_to_send =3D skb->tstamp;
+> >
+> > Drop is the more obviously correct mode.
+> >
+> > Programming with a clock source that the driver does not support will
+> > then be a persistent failure.
+> >
+> > Preferably, this driver capability can be queried beforehand (rather
+> > than only through reading error counters afterwards).
+> >
+> > Perhaps it should not be a driver task to convert from possibly
+> > multiple clock sources to the device native clock. Right now, we do
+> > use per-device timecounters for this, implemented in the driver.
+> >
+> > As for which clocks are relevant. For PTP, I suppose the device PHC,
+> > converted to nsec. For pacing offload, TCP uses CLOCK_MONOTONIC.
+>
+> Do we need to expose some generic netdev netlink apis to query/adjust
+> nic clock sources (or maybe there is something existing already)?
+> Then the userspace can be responsible for syncing/converting the
+> timestamps to the internal nic clocks. +1 to trying to avoid doing
+> this in the drivers.
+>
+> > > > That is clearly a situation that the user should be informed about.=
+ For
+> > > > RT systems this normally means that something is really wrong regar=
+ding
+> > > > timing / cycle overflow. Such systems have to react on that situati=
+on.
+> > >
+> > > In general, af_xdp is a bit lacking in this 'notify the user that the=
+y
+> > > somehow messed up' area :-(
+> > > For example, pushing a tx descriptor with a wrong addr/len in zc mode
+> > > will not give any visible signal back (besides driver potentially
+> > > spilling something into dmesg as it was in the mlx case).
+> > > We can probably start with having some counters for these events?
+> >
+> > This is because the AF_XDP completion queue descriptor format is only
+> > a u64 address?
+>
+> Yeah. XDP_COPY mode has the descriptor validation which is exported via
+> recvmsg errno, but zerocopy path seems to be too deep in the stack
+> to report something back. And there is no place, as you mention,
+> in the completion ring to report the status.
+>
+> > Could error conditions be reported on tx completion in the metadata,
+> > using xsk_tx_metadata_complete?
+>
+> That would be one way to do it, yes. But then the error reporting depends
+> on the metadata opt-in. Having a separate ring to export the errors,
+> or having a v2 tx-completions layout with extra 'status' field would also
+> work.
 
-Implementation is based on existing read and write infrastructure.
-copy_max_bytes: A new configfs and module parameter is introduced, which
-can be used to set hardware/driver supported maximum copy limit.
-Only request based queue mode will support for copy offload.
-Added tracefs support to copy IO tracing.
+There are error counters for the non-metadata and offloading cases
+above that can be retrieved with the XDP_STATISTICS getsockopt(). From
+if_xdp.h:
 
-Reviewed-by: Hannes Reinecke <hare@suse.de>
-Suggested-by: Damien Le Moal <damien.lemoal@opensource.wdc.com>
-Signed-off-by: Anuj Gupta <anuj20.g@samsung.com>
-Signed-off-by: Nitesh Shetty <nj.shetty@samsung.com>
-Signed-off-by: Vincent Fu <vincent.fu@samsung.com>
----
- Documentation/block/null_blk.rst  |  5 ++
- drivers/block/null_blk/main.c     | 97 ++++++++++++++++++++++++++++++-
- drivers/block/null_blk/null_blk.h |  1 +
- drivers/block/null_blk/trace.h    | 23 ++++++++
- 4 files changed, 123 insertions(+), 3 deletions(-)
+struct xdp_statistics {
+        __u64 rx_dropped; /* Dropped for other reasons */
+        __u64 rx_invalid_descs; /* Dropped due to invalid descriptor */
+        __u64 tx_invalid_descs; /* Dropped due to invalid descriptor */
+        __u64 rx_ring_full; /* Dropped due to rx ring being full */
+        __u64 rx_fill_ring_empty_descs; /* Failed to retrieve item
+from fill ring */
+        __u64 tx_ring_empty_descs; /* Failed to retrieve item from tx ring =
+*/
+};
 
-diff --git a/Documentation/block/null_blk.rst b/Documentation/block/null_blk.rst
-index 4dd78f24d10a..6153e02fcf13 100644
---- a/Documentation/block/null_blk.rst
-+++ b/Documentation/block/null_blk.rst
-@@ -149,3 +149,8 @@ zone_size=[MB]: Default: 256
- zone_nr_conv=[nr_conv]: Default: 0
-   The number of conventional zones to create when block device is zoned.  If
-   zone_nr_conv >= nr_zones, it will be reduced to nr_zones - 1.
-+
-+copy_max_bytes=[size in bytes]: Default: COPY_MAX_BYTES
-+  A module and configfs parameter which can be used to set hardware/driver
-+  supported maximum copy offload limit.
-+  COPY_MAX_BYTES(=128MB at present) is defined in fs.h
-diff --git a/drivers/block/null_blk/main.c b/drivers/block/null_blk/main.c
-index 1b40c674f62b..5b1b401a68fb 100644
---- a/drivers/block/null_blk/main.c
-+++ b/drivers/block/null_blk/main.c
-@@ -160,6 +160,10 @@ static int g_max_sectors;
- module_param_named(max_sectors, g_max_sectors, int, 0444);
- MODULE_PARM_DESC(max_sectors, "Maximum size of a command (in 512B sectors)");
- 
-+static unsigned long g_copy_max_bytes = BLK_COPY_MAX_BYTES;
-+module_param_named(copy_max_bytes, g_copy_max_bytes, ulong, 0444);
-+MODULE_PARM_DESC(copy_max_bytes, "Maximum size of a copy command (in bytes)");
-+
- static unsigned int nr_devices = 1;
- module_param(nr_devices, uint, 0444);
- MODULE_PARM_DESC(nr_devices, "Number of devices to register");
-@@ -412,6 +416,7 @@ NULLB_DEVICE_ATTR(home_node, uint, NULL);
- NULLB_DEVICE_ATTR(queue_mode, uint, NULL);
- NULLB_DEVICE_ATTR(blocksize, uint, NULL);
- NULLB_DEVICE_ATTR(max_sectors, uint, NULL);
-+NULLB_DEVICE_ATTR(copy_max_bytes, uint, NULL);
- NULLB_DEVICE_ATTR(irqmode, uint, NULL);
- NULLB_DEVICE_ATTR(hw_queue_depth, uint, NULL);
- NULLB_DEVICE_ATTR(index, uint, NULL);
-@@ -553,6 +558,7 @@ static struct configfs_attribute *nullb_device_attrs[] = {
- 	&nullb_device_attr_queue_mode,
- 	&nullb_device_attr_blocksize,
- 	&nullb_device_attr_max_sectors,
-+	&nullb_device_attr_copy_max_bytes,
- 	&nullb_device_attr_irqmode,
- 	&nullb_device_attr_hw_queue_depth,
- 	&nullb_device_attr_index,
-@@ -659,7 +665,8 @@ static ssize_t memb_group_features_show(struct config_item *item, char *page)
- 			"poll_queues,power,queue_mode,shared_tag_bitmap,size,"
- 			"submit_queues,use_per_node_hctx,virt_boundary,zoned,"
- 			"zone_capacity,zone_max_active,zone_max_open,"
--			"zone_nr_conv,zone_offline,zone_readonly,zone_size\n");
-+			"zone_nr_conv,zone_offline,zone_readonly,zone_size,"
-+			"copy_max_bytes\n");
- }
- 
- CONFIGFS_ATTR_RO(memb_group_, features);
-@@ -725,6 +732,7 @@ static struct nullb_device *null_alloc_dev(void)
- 	dev->queue_mode = g_queue_mode;
- 	dev->blocksize = g_bs;
- 	dev->max_sectors = g_max_sectors;
-+	dev->copy_max_bytes = g_copy_max_bytes;
- 	dev->irqmode = g_irqmode;
- 	dev->hw_queue_depth = g_hw_queue_depth;
- 	dev->blocking = g_blocking;
-@@ -1274,6 +1282,81 @@ static int null_transfer(struct nullb *nullb, struct page *page,
- 	return err;
- }
- 
-+static inline int nullb_setup_copy(struct nullb *nullb, struct request *req,
-+				   bool is_fua)
-+{
-+	sector_t sector_in = 0, sector_out = 0;
-+	loff_t offset_in, offset_out;
-+	void *in, *out;
-+	ssize_t chunk, rem = 0;
-+	struct bio *bio;
-+	struct nullb_page *t_page_in, *t_page_out;
-+	u16 seg = 1;
-+	int status = -EIO;
-+
-+	if (blk_rq_nr_phys_segments(req) != BLK_COPY_MAX_SEGMENTS)
-+		return status;
-+
-+	/*
-+	 * First bio contains information about source and last bio contains
-+	 * information about destination.
-+	 */
-+	__rq_for_each_bio(bio, req) {
-+		if (seg == blk_rq_nr_phys_segments(req)) {
-+			sector_out = bio->bi_iter.bi_sector;
-+			if (rem != bio->bi_iter.bi_size)
-+				return status;
-+		} else {
-+			sector_in = bio->bi_iter.bi_sector;
-+			rem = bio->bi_iter.bi_size;
-+		}
-+		seg++;
-+	}
-+
-+	trace_nullb_copy_op(req, sector_out << SECTOR_SHIFT,
-+			    sector_in << SECTOR_SHIFT, rem);
-+
-+	spin_lock_irq(&nullb->lock);
-+	while (rem > 0) {
-+		chunk = min_t(size_t, nullb->dev->blocksize, rem);
-+		offset_in = (sector_in & SECTOR_MASK) << SECTOR_SHIFT;
-+		offset_out = (sector_out & SECTOR_MASK) << SECTOR_SHIFT;
-+
-+		if (null_cache_active(nullb) && !is_fua)
-+			null_make_cache_space(nullb, PAGE_SIZE);
-+
-+		t_page_in = null_lookup_page(nullb, sector_in, false,
-+					     !null_cache_active(nullb));
-+		if (!t_page_in)
-+			goto err;
-+		t_page_out = null_insert_page(nullb, sector_out,
-+					      !null_cache_active(nullb) ||
-+					      is_fua);
-+		if (!t_page_out)
-+			goto err;
-+
-+		in = kmap_local_page(t_page_in->page);
-+		out = kmap_local_page(t_page_out->page);
-+
-+		memcpy(out + offset_out, in + offset_in, chunk);
-+		kunmap_local(out);
-+		kunmap_local(in);
-+		__set_bit(sector_out & SECTOR_MASK, t_page_out->bitmap);
-+
-+		if (is_fua)
-+			null_free_sector(nullb, sector_out, true);
-+
-+		rem -= chunk;
-+		sector_in += chunk >> SECTOR_SHIFT;
-+		sector_out += chunk >> SECTOR_SHIFT;
-+	}
-+
-+	status = 0;
-+err:
-+	spin_unlock_irq(&nullb->lock);
-+	return status;
-+}
-+
- static int null_handle_rq(struct nullb_cmd *cmd)
- {
- 	struct request *rq = cmd->rq;
-@@ -1283,13 +1366,16 @@ static int null_handle_rq(struct nullb_cmd *cmd)
- 	sector_t sector = blk_rq_pos(rq);
- 	struct req_iterator iter;
- 	struct bio_vec bvec;
-+	bool fua = rq->cmd_flags & REQ_FUA;
-+
-+	if (op_is_copy(req_op(rq)))
-+		return nullb_setup_copy(nullb, rq, fua);
- 
- 	spin_lock_irq(&nullb->lock);
- 	rq_for_each_segment(bvec, rq, iter) {
- 		len = bvec.bv_len;
- 		err = null_transfer(nullb, bvec.bv_page, len, bvec.bv_offset,
--				     op_is_write(req_op(rq)), sector,
--				     rq->cmd_flags & REQ_FUA);
-+				    op_is_write(req_op(rq)), sector, fua);
- 		if (err) {
- 			spin_unlock_irq(&nullb->lock);
- 			return err;
-@@ -2074,6 +2160,9 @@ static int null_validate_conf(struct nullb_device *dev)
- 		return -EINVAL;
- 	}
- 
-+	if (dev->queue_mode == NULL_Q_BIO)
-+		dev->copy_max_bytes = 0;
-+
- 	return 0;
- }
- 
-@@ -2193,6 +2282,8 @@ static int null_add_dev(struct nullb_device *dev)
- 		dev->max_sectors = queue_max_hw_sectors(nullb->q);
- 	dev->max_sectors = min(dev->max_sectors, BLK_DEF_MAX_SECTORS);
- 	blk_queue_max_hw_sectors(nullb->q, dev->max_sectors);
-+	blk_queue_max_copy_hw_sectors(nullb->q,
-+				      dev->copy_max_bytes >> SECTOR_SHIFT);
- 
- 	if (dev->virt_boundary)
- 		blk_queue_virt_boundary(nullb->q, PAGE_SIZE - 1);
-diff --git a/drivers/block/null_blk/null_blk.h b/drivers/block/null_blk/null_blk.h
-index 929f659dd255..e82e53a2e2df 100644
---- a/drivers/block/null_blk/null_blk.h
-+++ b/drivers/block/null_blk/null_blk.h
-@@ -107,6 +107,7 @@ struct nullb_device {
- 	unsigned int queue_mode; /* block interface */
- 	unsigned int blocksize; /* block size */
- 	unsigned int max_sectors; /* Max sectors per command */
-+	unsigned long copy_max_bytes; /* Max copy offload length in bytes */
- 	unsigned int irqmode; /* IRQ completion handler */
- 	unsigned int hw_queue_depth; /* queue depth */
- 	unsigned int index; /* index of the disk, only valid with a disk */
-diff --git a/drivers/block/null_blk/trace.h b/drivers/block/null_blk/trace.h
-index 91446c34eac2..2f2c1d1c2b48 100644
---- a/drivers/block/null_blk/trace.h
-+++ b/drivers/block/null_blk/trace.h
-@@ -70,6 +70,29 @@ TRACE_EVENT(nullb_report_zones,
- );
- #endif /* CONFIG_BLK_DEV_ZONED */
- 
-+TRACE_EVENT(nullb_copy_op,
-+		TP_PROTO(struct request *req,
-+			 sector_t dst, sector_t src, size_t len),
-+		TP_ARGS(req, dst, src, len),
-+		TP_STRUCT__entry(
-+				 __array(char, disk, DISK_NAME_LEN)
-+				 __field(enum req_op, op)
-+				 __field(sector_t, dst)
-+				 __field(sector_t, src)
-+				 __field(size_t, len)
-+		),
-+		TP_fast_assign(
-+			       __entry->op = req_op(req);
-+			       __assign_disk_name(__entry->disk, req->q->disk);
-+			       __entry->dst = dst;
-+			       __entry->src = src;
-+			       __entry->len = len;
-+		),
-+		TP_printk("%s req=%-15s: dst=%llu, src=%llu, len=%lu",
-+			  __print_disk_name(__entry->disk),
-+			  blk_op_str(__entry->op),
-+			  __entry->dst, __entry->src, __entry->len)
-+);
- #endif /* _TRACE_NULLB_H */
- 
- #undef TRACE_INCLUDE_PATH
--- 
-2.35.1.500.gb896f729e2
+Albeit, these are aggregate statistics and do not say anything about
+which packet that caused it. Works well for things that are
+programming bugs that should not occur (such as rx_invalid_descs and
+tx_invalid_descs) and requires the programmer to debug and fix his or
+her program, but it does not work for requests that might fail even
+though the program is correct and need to be handled on a packet by
+packet basis. So something needs to be added for that as you both say.
 
+Would prefer if we could avoid a v2 completion descriptor format or
+another ring that needs to be checked all the time, so if we could
+live with providing the error status in the metadata field of the
+packet at completion time, that would be good. Though having the error
+status in the completion ring would be faster as that cache line is
+hot, while the metadata section of the packet is likely not at
+completion time. So that speaks for a v2 completion ring format. Just
+thinking out loud here.
+
+> But this seems like something that should be handled separately? Because
+> we'd have to teach all existing zc drivers to report those errors back
+> instead of dropping these descriptors..
+>
 
