@@ -1,76 +1,65 @@
-Return-Path: <linux-doc+bounces-4217-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4219-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3239806621
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Dec 2023 05:24:48 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 137C480663B
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Dec 2023 05:34:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5D0DF282265
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Dec 2023 04:24:47 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A94F9B2133E
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Dec 2023 04:34:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BBED5FC0A;
-	Wed,  6 Dec 2023 04:24:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 730CBFC1C;
+	Wed,  6 Dec 2023 04:34:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="FWNbUgRQ"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="RAk8XbSW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D94F6D45;
-	Tue,  5 Dec 2023 20:24:40 -0800 (PST)
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 05BE81BF;
+	Tue,  5 Dec 2023 20:34:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701836681; x=1733372681;
+  t=1701837281; x=1733373281;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=YsZ2Q4U8UY65YpbcLnRP1WWpz/335NVd/R5/RmX/Y3c=;
-  b=FWNbUgRQV1vgu/BOYWaCl5CObPemBgUhideRaOYvW1W2VMaVuu48J9RK
-   HF46g3XIviUebVanBY01zI5Rnp0B7JJCRysRI0AqVJmwRPtXt7xu093Gr
-   20SQre029e+vn/V6QvpuyTOftncEN5/iSHxtGR6yh98cVuAObdlSeJAMS
-   uCDIWE8Jw3Vv9UNIsJ8ZaMxwnVmo5uvlI+6bAVntk71ygxiaEGRdqsewZ
-   P81lkeIv6VkfR4Txe4g+Agqqm4hxtdUtZWAp9iHwuGUagZJaUxzDMfFxo
-   kmn2MDj7X8fiYtOfseVNH+CNX5Sstine2caPn9YDgxrYt0+2f5bOYw7cs
+  bh=sq4PJPq6VrkCmDvgjz4GTxFgQOfpDStAzoJv/e5p5AQ=;
+  b=RAk8XbSWbFO2prS0S9EByQNG3FZ8EMi6HhlSS5Y0AF/Ec4XM2h7Rwf3f
+   tmt8PMi1zFB0BqF1O26CPyq9QlWAvsHtQpUVYoflvhQLgwxrwpZwKC0Ge
+   b0jn/UHMy3XWV9UI+tD5oAq7BahdIEV4lPaJ8j2NWGSAKBYHdbx/bMwpq
+   srmBTd8Ti3g+DTLwRIKPtOijXi0bQK3uiaze/K+ZHwbnT45A+bobU0iU0
+   GfXSC0OF42py7T/nZw4mYen8S1awFyedNiF0kXVvX5XbxZF41v0ReUzT3
+   Rion1s8gPEXewObUWQxow8tQC66tHSlFepi5IOVbvcKaLDO6L1tIg+Mty
    A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10915"; a="1097561"
+X-IronPort-AV: E=McAfee;i="6600,9927,10915"; a="379023583"
 X-IronPort-AV: E=Sophos;i="6.04,254,1695711600"; 
-   d="scan'208";a="1097561"
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
-  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Dec 2023 20:24:40 -0800
+   d="scan'208";a="379023583"
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Dec 2023 20:34:40 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10915"; a="774864744"
+X-IronPort-AV: E=McAfee;i="6600,9927,10915"; a="944514523"
 X-IronPort-AV: E=Sophos;i="6.04,254,1695711600"; 
-   d="scan'208";a="774864744"
+   d="scan'208";a="944514523"
 Received: from lkp-server02.sh.intel.com (HELO b07ab15da5fe) ([10.239.97.151])
-  by fmsmga007.fm.intel.com with ESMTP; 05 Dec 2023 20:24:35 -0800
+  by orsmga005.jf.intel.com with ESMTP; 05 Dec 2023 20:34:35 -0800
 Received: from kbuild by b07ab15da5fe with local (Exim 4.96)
 	(envelope-from <lkp@intel.com>)
-	id 1rAjSb-000AFc-0h;
-	Wed, 06 Dec 2023 04:24:33 +0000
-Date: Wed, 6 Dec 2023 12:23:38 +0800
+	id 1rAjcH-000AGM-22;
+	Wed, 06 Dec 2023 04:34:33 +0000
+Date: Wed, 6 Dec 2023 12:34:02 +0800
 From: kernel test robot <lkp@intel.com>
-To: Kory Maincent <kory.maincent@bootlin.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Russ Weight <russ.weight@linux.dev>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Rob Herring <robh+dt@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Oleksij Rempel <o.rempel@pengutronix.de>
-Cc: oe-kbuild-all@lists.linux.dev, netdev@vger.kernel.org,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	Dent Project <dentproject@linuxfoundation.org>,
-	Kory Maincent <kory.maincent@bootlin.com>
-Subject: Re: [PATCH net-next v2 2/8] ethtool: Expand Ethernet Power Equipment
- with c33 (PoE) alongside PoDL
-Message-ID: <202312061223.iHikO4O3-lkp@intel.com>
-References: <20231201-feature_poe-v2-2-56d8cac607fa@bootlin.com>
+To: Ma Jun <Jun.Ma2@amd.com>, amd-gfx@lists.freedesktop.org,
+	lenb@kernel.org, hdegoede@redhat.com, johannes@sipsolutions.net,
+	davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+	pabeni@redhat.com, alexander.deucher@amd.com, Lijo.Lazar@amd.com,
+	mario.limonciello@amd.com, netdev@vger.kernel.org,
+	linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, platform-driver-x86@vger.kernel.org
+Cc: oe-kbuild-all@lists.linux.dev, majun@amd.com,
+	Evan Quan <quanliangl@hotmail.com>, Ma Jun <Jun.Ma2@amd.com>
+Subject: Re: [PATCH v14 4/9] wifi: mac80211: Add support for WBRF features
+Message-ID: <202312061213.9yUe2RGP-lkp@intel.com>
+References: <20231129091348.3972539-5-Jun.Ma2@amd.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -79,43 +68,60 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20231201-feature_poe-v2-2-56d8cac607fa@bootlin.com>
+In-Reply-To: <20231129091348.3972539-5-Jun.Ma2@amd.com>
 
-Hi Kory,
+Hi Ma,
 
-kernel test robot noticed the following build warnings:
+kernel test robot noticed the following build errors:
 
-[auto build test WARNING on net-next/main]
+[auto build test ERROR on v6.7-rc1]
+[also build test ERROR on next-20231205]
+[cannot apply to drm-misc/drm-misc-next wireless-next/main wireless/main linus/master v6.7-rc3 v6.7-rc2]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Kory-Maincent/ethtool-Expand-Ethernet-Power-Equipment-with-c33-PoE-alongside-PoDL/20231202-021033
-base:   net-next/main
-patch link:    https://lore.kernel.org/r/20231201-feature_poe-v2-2-56d8cac607fa%40bootlin.com
-patch subject: [PATCH net-next v2 2/8] ethtool: Expand Ethernet Power Equipment with c33 (PoE) alongside PoDL
-reproduce: (https://download.01.org/0day-ci/archive/20231206/202312061223.iHikO4O3-lkp@intel.com/reproduce)
+url:    https://github.com/intel-lab-lkp/linux/commits/Ma-Jun/Documentation-driver-api-Add-document-about-WBRF-mechanism/20231129-181516
+base:   v6.7-rc1
+patch link:    https://lore.kernel.org/r/20231129091348.3972539-5-Jun.Ma2%40amd.com
+patch subject: [PATCH v14 4/9] wifi: mac80211: Add support for WBRF features
+config: arm-randconfig-004-20231201 (https://download.01.org/0day-ci/archive/20231206/202312061213.9yUe2RGP-lkp@intel.com/config)
+compiler: arm-linux-gnueabi-gcc (GCC) 13.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231206/202312061213.9yUe2RGP-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202312061223.iHikO4O3-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202312061213.9yUe2RGP-lkp@intel.com/
 
-All warnings (new ones prefixed by >>):
+All errors (new ones prefixed by >>):
 
->> Documentation/networking/pse-pd/introduction.rst:56: WARNING: Title underline too short.
+   net/mac80211/wbrf.c: In function 'ieee80211_add_wbrf':
+>> net/mac80211/wbrf.c:79:9: error: implicit declaration of function 'acpi_amd_wbrf_add_remove'; did you mean 'acpi_amd_wbrf_add_exclusion'? [-Werror=implicit-function-declaration]
+      79 |         acpi_amd_wbrf_add_remove(dev, WBRF_RECORD_ADD, &ranges_in);
+         |         ^~~~~~~~~~~~~~~~~~~~~~~~
+         |         acpi_amd_wbrf_add_exclusion
+   cc1: some warnings being treated as errors
 
-vim +56 Documentation/networking/pse-pd/introduction.rst
 
-    46	
-    47	- For general PSE (PoE) code, use "c33_pse" key words. For example:
-    48	  ``enum ethtool_c33_pse_admin_state c33_admin_control;``.
-    49	  This aligns with Clause 33, encompassing various PoE forms.
-    50	
-    51	- For PoDL PSE - specific code, use "podl_pse". For example:
-    52	  ``enum ethtool_podl_pse_admin_state podl_admin_control;`` to differentiate
-    53	  PoDL PSE settings according to Clause 104.
-    54	
-    55	Summary of Clause 33: Data Terminal Equipment (DTE) Power via Media Dependent Interface (MDI)
-  > 56	-------------------------------------------------------------------------------------------
-    57	
+vim +79 net/mac80211/wbrf.c
+
+    66	
+    67	void ieee80211_add_wbrf(struct ieee80211_local *local, struct cfg80211_chan_def *chandef)
+    68	{
+    69		struct wbrf_ranges_in_out ranges_in = {0};
+    70		struct device *dev;
+    71	
+    72		if (!local->wbrf_supported)
+    73			return;
+    74	
+    75		dev = local->hw.wiphy->dev.parent;
+    76	
+    77		get_ranges_from_chandef(chandef, &ranges_in);
+    78	
+  > 79		acpi_amd_wbrf_add_remove(dev, WBRF_RECORD_ADD, &ranges_in);
+    80	}
+    81	
 
 -- 
 0-DAY CI Kernel Test Service
