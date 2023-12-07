@@ -1,166 +1,121 @@
-Return-Path: <linux-doc+bounces-4344-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4346-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 517F4808045
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 06:41:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68825808151
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 08:03:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 61C8DB20C3C
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 05:41:22 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id F190BB2111E
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 07:03:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4AE5F11187;
-	Thu,  7 Dec 2023 05:41:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8FCD514280;
+	Thu,  7 Dec 2023 07:03:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="yvFYhZ3h"
+	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="QQuwvC9U"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com [IPv6:2a00:1450:4864:20::329])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 09ECE1A8
-	for <linux-doc@vger.kernel.org>; Wed,  6 Dec 2023 21:41:14 -0800 (PST)
-Received: by mail-wm1-x329.google.com with SMTP id 5b1f17b1804b1-40c08af319cso6628295e9.2
-        for <linux-doc@vger.kernel.org>; Wed, 06 Dec 2023 21:41:13 -0800 (PST)
+Received: from smtp-fw-9105.amazon.com (smtp-fw-9105.amazon.com [207.171.188.204])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B6A36FA;
+	Wed,  6 Dec 2023 23:03:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1701927672; x=1702532472; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
-         :to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=q7rmf1L5KTUW/E5oPwtLwfXb9Vg7b5uQANioC1qAwJQ=;
-        b=yvFYhZ3h3kduYkHFrNRswyP67vA1J2b5kNkgT066XKxKEAAC2rZmn3XiJSTqF4CnS7
-         JTxLrgxyCQKzOxl/3WER1ksaXSvrOFmvVdImXwUC8oR2aLv86L4NmzYhsVbKEsj92HBN
-         QAMOzZR6cRDxt/3bhJra3YEGSKWr/iMKKySetRcB6CXlYlt24W4hb5wMUhNP+KOh/8r8
-         aFEAZLjEdBwHyq6VY4n6zm2sCX0wVeorHBA5DcQgao3qxN4gOUi8vEsYFPDice6Qzx5l
-         +Dicz5DFwd03ofchTnkbD5WEaoRw2GKNxH4596E9hTxHnVR2II6pQZSGwpkG0o0GiyED
-         Gyaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701927672; x=1702532472;
-        h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
-         :to:from:date:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=q7rmf1L5KTUW/E5oPwtLwfXb9Vg7b5uQANioC1qAwJQ=;
-        b=tyVGjXU34MbcHMkuQ2YxvCzs1Y+UeW+Wc+tA80pKw9XaGA4Jlx6izicYT1L2Wwi5f4
-         34lerKKd0oPUhOSoSOyf6myH0iFQqxCeCzE4YGxB55r5O0gSuBJqRjAmb1+Jh8Fz7pvN
-         oVWbAcJ0A+0p21om7ULvKlowCMxK5pcN2iIzF0j/ObEzTHiaX/LF7o40lv40KvHmeJ5D
-         RbaCFmgd8IYAm98ArW1X+2cLJjbA/fclqHOKZtqbNahc0tsqhhfflYIooLip2ggPTCzH
-         fTGMdPaB5H00JOhfq/LGt4kLITE81fSJrK6EboguWTwO4J6YOJpoG3VB4LwFeBwVJSH8
-         ELlw==
-X-Gm-Message-State: AOJu0YzB52GD66D4tosKDaJcKPnqLJF7Y4qPZI4IeDVMzZ8AG7Xv4J5S
-	hC/pnPmoP5oj5qXqQj6o2s3zSA==
-X-Google-Smtp-Source: AGHT+IFcYPRJ0wHa3HawHgZzyaOQdVMjkxX4/+Q/hkkoscjHk6GLpxarpmJZAW4lnnUanfaDDUCLLg==
-X-Received: by 2002:a7b:cb95:0:b0:40b:5e59:ea01 with SMTP id m21-20020a7bcb95000000b0040b5e59ea01mr1260067wmi.160.1701927672414;
-        Wed, 06 Dec 2023 21:41:12 -0800 (PST)
-Received: from localhost ([102.36.222.112])
-        by smtp.gmail.com with ESMTPSA id je16-20020a05600c1f9000b00405442edc69sm702928wmb.14.2023.12.06.21.41.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Dec 2023 21:41:12 -0800 (PST)
-Date: Thu, 7 Dec 2023 08:41:09 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: oe-kbuild@lists.linux.dev, baneric926@gmail.com, jdelvare@suse.com,
-	linux@roeck-us.net, robh+dt@kernel.org,
-	krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
-	corbet@lwn.net
-Cc: lkp@intel.com, oe-kbuild-all@lists.linux.dev,
-	linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	openbmc@lists.ozlabs.org, kwliu@nuvoton.com, kcfeng0@nuvoton.com,
-	DELPHINE_CHIU@wiwynn.com, Bonnie_Lo@wiwynn.com
-Subject: Re: [PATCH v1 2/2] hwmon: Driver for Nuvoton NCT736X
-Message-ID: <a62c8f0f-db3d-41da-b2a8-a064f0feba32@suswa.mountain>
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1701932585; x=1733468585;
+  h=from:to:cc:date:message-id:references:in-reply-to:
+   content-transfer-encoding:mime-version:subject;
+  bh=SXaE0jxYY1JnqLGQ+FtXfTHRRnIazmjY0HeKThSqzHQ=;
+  b=QQuwvC9Urkjgro+rl8R0bKIUAGES2jD/ZxQ1lODNiVgziUwFbpDDfJCO
+   ZKY4Cas/WaU2lOqEQf/vPT307qopdkxHHH3rR6LSb0A2tzoN5vsexwgap
+   wRCk2ptwxLmprOO0o0CeDylvvrCkyutI2DGHTGdrSb50z3Ry1ASzb8Ys/
+   M=;
+X-IronPort-AV: E=Sophos;i="6.04,256,1695686400"; 
+   d="scan'208";a="689490897"
+Subject: RE: [PATCH net-next v8 1/8] net: ethtool: pass a pointer to parameters to
+ get/set_rxfh ethtool ops
+Thread-Topic: [PATCH net-next v8 1/8] net: ethtool: pass a pointer to parameters to
+ get/set_rxfh ethtool ops
+Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO email-inbound-relay-iad-1d-m6i4x-25ac6bd5.us-east-1.amazon.com) ([10.25.36.210])
+  by smtp-border-fw-9105.sea19.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Dec 2023 07:02:58 +0000
+Received: from smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev (iad7-ws-svc-p70-lb3-vlan2.iad.amazon.com [10.32.235.34])
+	by email-inbound-relay-iad-1d-m6i4x-25ac6bd5.us-east-1.amazon.com (Postfix) with ESMTPS id 29D8B49403;
+	Thu,  7 Dec 2023 07:02:51 +0000 (UTC)
+Received: from EX19MTAEUC001.ant.amazon.com [10.0.43.254:20385]
+ by smtpin.naws.eu-west-1.prod.farcaster.email.amazon.dev [10.0.44.90:2525] with esmtp (Farcaster)
+ id 2082292f-9c21-48cb-bbf7-6b1cfbdc6572; Thu, 7 Dec 2023 07:02:51 +0000 (UTC)
+X-Farcaster-Flow-ID: 2082292f-9c21-48cb-bbf7-6b1cfbdc6572
+Received: from EX19D022EUA002.ant.amazon.com (10.252.50.201) by
+ EX19MTAEUC001.ant.amazon.com (10.252.51.193) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Thu, 7 Dec 2023 07:02:49 +0000
+Received: from EX19D022EUA002.ant.amazon.com (10.252.50.201) by
+ EX19D022EUA002.ant.amazon.com (10.252.50.201) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Thu, 7 Dec 2023 07:02:48 +0000
+Received: from EX19D022EUA002.ant.amazon.com ([fe80::7f87:7d63:def0:157d]) by
+ EX19D022EUA002.ant.amazon.com ([fe80::7f87:7d63:def0:157d%3]) with mapi id
+ 15.02.1118.040; Thu, 7 Dec 2023 07:02:48 +0000
+From: "Kiyanovski, Arthur" <akiyano@amazon.com>
+To: Ahmed Zaki <ahmed.zaki@intel.com>, "netdev@vger.kernel.org"
+	<netdev@vger.kernel.org>
+CC: "intel-wired-lan@lists.osuosl.org" <intel-wired-lan@lists.osuosl.org>,
+	"corbet@lwn.net" <corbet@lwn.net>, "jesse.brandeburg@intel.com"
+	<jesse.brandeburg@intel.com>, "anthony.l.nguyen@intel.com"
+	<anthony.l.nguyen@intel.com>, "davem@davemloft.net" <davem@davemloft.net>,
+	"edumazet@google.com" <edumazet@google.com>, "kuba@kernel.org"
+	<kuba@kernel.org>, "pabeni@redhat.com" <pabeni@redhat.com>,
+	"vladimir.oltean@nxp.com" <vladimir.oltean@nxp.com>, "andrew@lunn.ch"
+	<andrew@lunn.ch>, "horms@kernel.org" <horms@kernel.org>, "mkubecek@suse.cz"
+	<mkubecek@suse.cz>, "willemdebruijn.kernel@gmail.com"
+	<willemdebruijn.kernel@gmail.com>, "gal@nvidia.com" <gal@nvidia.com>,
+	"alexander.duyck@gmail.com" <alexander.duyck@gmail.com>,
+	"ecree.xilinx@gmail.com" <ecree.xilinx@gmail.com>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, Jacob Keller
+	<jacob.e.keller@intel.com>
+Thread-Index: AQHaKJ02y/VPHsTkPk+svVtpsphWUrCdYuGQ
+Date: Thu, 7 Dec 2023 07:02:28 +0000
+Deferred-Delivery: Thu, 7 Dec 2023 07:02:04 +0000
+Message-ID: <82af13c02b5b4a3b9372ee5b38221b4b@amazon.com>
+References: <20231206233642.447794-1-ahmed.zaki@intel.com>
+ <20231206233642.447794-2-ahmed.zaki@intel.com>
+In-Reply-To: <20231206233642.447794-2-ahmed.zaki@intel.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231204055650.788388-3-kcfeng0@nuvoton.com>
+Precedence: Bulk
 
-Hi,
 
-kernel test robot noticed the following build warnings:
+> The get/set_rxfh ethtool ops currently takes the rxfh (RSS) parameters
+> as direct function arguments. This will force us to change the API (and
+> all drivers' functions) every time some new parameters are added.
+>=20
+> This is part 1/2 of the fix, as suggested in [1]:
+>=20
+> - First simplify the code by always providing a pointer to all params
+>    (indir, key and func); the fact that some of them may be NULL seems
+>    like a weird historic thing or a premature optimization.
+>    It will simplify the drivers if all pointers are always present.
+>=20
+>  - Then make the functions take a dev pointer, and a pointer to a
+>    single struct wrapping all arguments. The set_* should also take
+>    an extack.
+>=20
+> Link: https://lore.kernel.org/netdev/20231121152906.2dd5f487@kernel.org/
+> [1]
+> Suggested-by: Jakub Kicinski <kuba@kernel.org>
+> Suggested-by: Jacob Keller <jacob.e.keller@intel.com>
+> Signed-off-by: Ahmed Zaki <ahmed.zaki@intel.com>
+> ---
 
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/baneric926-gmail-com/dt-bindings-hwmon-Add-nct736x-bindings/20231204-135942
-base:   linus/master
-patch link:    https://lore.kernel.org/r/20231204055650.788388-3-kcfeng0%40nuvoton.com
-patch subject: [PATCH v1 2/2] hwmon: Driver for Nuvoton NCT736X
-config: m68k-randconfig-r071-20231207 (https://download.01.org/0day-ci/archive/20231207/202312071152.Kfcw1KlD-lkp@intel.com/config)
-compiler: m68k-linux-gcc (GCC) 13.2.0
-reproduce: (https://download.01.org/0day-ci/archive/20231207/202312071152.Kfcw1KlD-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Reported-by: Dan Carpenter <dan.carpenter@linaro.org>
-| Closes: https://lore.kernel.org/r/202312071152.Kfcw1KlD-lkp@intel.com/
-
-smatch warnings:
-drivers/hwmon/nct736x.c:367 nct736x_init_chip() error: uninitialized symbol 'gpio0_3'.
-drivers/hwmon/nct736x.c:370 nct736x_init_chip() error: uninitialized symbol 'gpio4_7'.
-drivers/hwmon/nct736x.c:373 nct736x_init_chip() error: uninitialized symbol 'gpio10_13'.
-drivers/hwmon/nct736x.c:376 nct736x_init_chip() error: uninitialized symbol 'gpio14_17'.
-
-vim +/gpio0_3 +367 drivers/hwmon/nct736x.c
-
-16e62bcf3c9b93 Ban Feng 2023-12-04  335  static int nct736x_init_chip(struct i2c_client *client,
-16e62bcf3c9b93 Ban Feng 2023-12-04  336  			     u32 pwm_mask, u32 fanin_mask, u32 wdt_cfg)
-16e62bcf3c9b93 Ban Feng 2023-12-04  337  {
-16e62bcf3c9b93 Ban Feng 2023-12-04  338  	const struct i2c_device_id *id = i2c_match_id(nct736x_id, client);
-16e62bcf3c9b93 Ban Feng 2023-12-04  339  	u8 i, gpio0_3, gpio4_7, gpio10_13, gpio14_17;
-16e62bcf3c9b93 Ban Feng 2023-12-04  340  	int ret;
-16e62bcf3c9b93 Ban Feng 2023-12-04  341  
-16e62bcf3c9b93 Ban Feng 2023-12-04  342  	for (i = 0; i < NCT736X_PWM_COUNT; i++) {
-16e62bcf3c9b93 Ban Feng 2023-12-04  343  		if (i < 4) {
-16e62bcf3c9b93 Ban Feng 2023-12-04  344  			if (pwm_mask & BIT_CHECK(i))
-16e62bcf3c9b93 Ban Feng 2023-12-04  345  				gpio0_3 |= PWM_SEL(i);
-
-This doesn't work.  gpio0_3 needs to be initialized to zero before we
-can turn on individual bits.
-
-16e62bcf3c9b93 Ban Feng 2023-12-04  346  			if (fanin_mask & BIT_CHECK(i))
-16e62bcf3c9b93 Ban Feng 2023-12-04  347  				gpio10_13 |= FANIN_SEL(i);
-
-Etc...
-
-16e62bcf3c9b93 Ban Feng 2023-12-04  348  		} else if (i < 8) {
-16e62bcf3c9b93 Ban Feng 2023-12-04  349  			if (pwm_mask & BIT_CHECK(i))
-16e62bcf3c9b93 Ban Feng 2023-12-04  350  				gpio4_7 |= PWM_SEL(i);
-16e62bcf3c9b93 Ban Feng 2023-12-04  351  			if (fanin_mask & BIT_CHECK(i))
-16e62bcf3c9b93 Ban Feng 2023-12-04  352  				gpio14_17 |= FANIN_SEL(i);
-16e62bcf3c9b93 Ban Feng 2023-12-04  353  		} else if (i < 12) {
-16e62bcf3c9b93 Ban Feng 2023-12-04  354  			if (pwm_mask & BIT_CHECK(i))
-16e62bcf3c9b93 Ban Feng 2023-12-04  355  				gpio10_13 |= PWM_SEL(i);
-16e62bcf3c9b93 Ban Feng 2023-12-04  356  			if (fanin_mask & BIT_CHECK(i))
-16e62bcf3c9b93 Ban Feng 2023-12-04  357  				gpio0_3 |= FANIN_SEL(i);
-16e62bcf3c9b93 Ban Feng 2023-12-04  358  		} else {
-16e62bcf3c9b93 Ban Feng 2023-12-04  359  			if (pwm_mask & BIT_CHECK(i))
-16e62bcf3c9b93 Ban Feng 2023-12-04  360  				gpio14_17 |= PWM_SEL(i);
-16e62bcf3c9b93 Ban Feng 2023-12-04  361  			if (fanin_mask & BIT_CHECK(i))
-16e62bcf3c9b93 Ban Feng 2023-12-04  362  				gpio4_7 |= FANIN_SEL(i);
-16e62bcf3c9b93 Ban Feng 2023-12-04  363  		}
-16e62bcf3c9b93 Ban Feng 2023-12-04  364  	}
-16e62bcf3c9b93 Ban Feng 2023-12-04  365  
-16e62bcf3c9b93 Ban Feng 2023-12-04  366  	/* Pin Function Configuration */
-16e62bcf3c9b93 Ban Feng 2023-12-04 @367  	ret = nct736x_write_reg(client, NCT736X_REG_GPIO_0_3, gpio0_3);
-                                                                                                      ^^^^^^^
-
-16e62bcf3c9b93 Ban Feng 2023-12-04  368  	if (ret < 0)
-16e62bcf3c9b93 Ban Feng 2023-12-04  369  		return ret;
-16e62bcf3c9b93 Ban Feng 2023-12-04 @370  	ret = nct736x_write_reg(client, NCT736X_REG_GPIO_4_7, gpio4_7);
-16e62bcf3c9b93 Ban Feng 2023-12-04  371  	if (ret < 0)
-16e62bcf3c9b93 Ban Feng 2023-12-04  372  		return ret;
-16e62bcf3c9b93 Ban Feng 2023-12-04 @373  	ret = nct736x_write_reg(client, NCT736X_REG_GPIO_10_13, gpio10_13);
-16e62bcf3c9b93 Ban Feng 2023-12-04  374  	if (ret < 0)
-16e62bcf3c9b93 Ban Feng 2023-12-04  375  		return ret;
-16e62bcf3c9b93 Ban Feng 2023-12-04 @376  	ret = nct736x_write_reg(client, NCT736X_REG_GPIO_14_17, gpio14_17);
-16e62bcf3c9b93 Ban Feng 2023-12-04  377  	if (ret < 0)
-16e62bcf3c9b93 Ban Feng 2023-12-04  378  		return ret;
-16e62bcf3c9b93 Ban Feng 2023-12-04  379  
-16e62bcf3c9b93 Ban Feng 2023-12-04  380  	/* PWM and FANIN Monitoring Enable */
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
-
+Thanks for submitting this.
+For the ENA driver:
+Acked-by: Arthur Kiyanovski <akiyano@amazon.com>
 
