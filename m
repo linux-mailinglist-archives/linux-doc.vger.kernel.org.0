@@ -1,127 +1,216 @@
-Return-Path: <linux-doc+bounces-4365-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4367-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 433E38088A4
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 14:00:14 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id EBC788089D5
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 15:07:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0203A28331E
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 13:00:12 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 50CD7282A16
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 14:07:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EEE1C3EA65;
-	Thu,  7 Dec 2023 13:00:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86C9641769;
+	Thu,  7 Dec 2023 14:07:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=salutedevices.com header.i=@salutedevices.com header.b="cL+zTqWq"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="djX50Moa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 32E1010CA;
-	Thu,  7 Dec 2023 05:00:02 -0800 (PST)
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
-	by mx1.sberdevices.ru (Postfix) with ESMTP id DD165120005;
-	Thu,  7 Dec 2023 15:59:59 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru DD165120005
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
-	s=mail; t=1701953999;
-	bh=gkQwxsJaDBoQZllnRj+h3QzAObadH3z2wRpjqRg+rsw=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
-	b=cL+zTqWqHtkMUxz363jjuG2pQbsTUMQSz0QL6Tq+0QsRqvR3yPv+73OdNmI4gz08K
-	 rEPv8TG6SsGIKaDtjQZmEhXj9owiSTQKnP0d85jejkgYtI06Ivo9RIgheXSr3I0Sjg
-	 hhoHq6XG90eal+FxxwQRAg+GSC8O8+Ad6cHGd7Qq0Hs0JrnExymOYdOvfzIDHhVbSy
-	 RpU/09wAxuX4Al6u2CxIJpMz2r40X6M3XFpA8cV5y13LuVXDJX6IQ8gmCrnFaJXqmx
-	 IswUjxByq7zJyuGCdcQXDK87uHH+acEEA4qGAeR8yn4JbJOlabssXLHdW9ovdotZ5q
-	 3iUZ+QA53uY9g==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru [172.16.192.107])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mx1.sberdevices.ru (Postfix) with ESMTPS;
-	Thu,  7 Dec 2023 15:59:59 +0300 (MSK)
-Received: from CAB-WSD-0004828.sigma.sbrf.ru (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Thu, 7 Dec 2023 15:59:59 +0300
-From: Martin Kurbanov <mmkurbanov@salutedevices.com>
-To: Pavel Machek <pavel@ucw.cz>, Lee Jones <lee@kernel.org>, Rob Herring
-	<robh+dt@kernel.org>, Krzysztof Kozlowski
-	<krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, Andy Shevchenko <andy.shevchenko@gmail.com>
-CC: <linux-kernel@vger.kernel.org>, <linux-leds@vger.kernel.org>,
-	<devicetree@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<kernel@salutedevices.com>, Martin Kurbanov <mmkurbanov@salutedevices.com>
-Subject: [PATCH v1 2/2] dt-bindings: leds: aw200xx: add 'interrupts' property
-Date: Thu, 7 Dec 2023 15:59:38 +0300
-Message-ID: <20231207125938.175119-3-mmkurbanov@salutedevices.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20231207125938.175119-1-mmkurbanov@salutedevices.com>
-References: <20231207125938.175119-1-mmkurbanov@salutedevices.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58F3C3D0AC;
+	Thu,  7 Dec 2023 14:07:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23BB1C433C9;
+	Thu,  7 Dec 2023 14:07:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1701958022;
+	bh=cZE6recoVJBKdwJhpx4lYW5auQfi5FwfjuprvRYlh1o=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=djX50MoaBv+/704ycHe+m7Gz/dhYtStLSzczs5PozYrzQ4DeGKjJ/B1igcoz76jH4
+	 D5AOKiNgYf8i3qN/SmV7Pp+adUHBxasOvSpxoS8wMzSxogR8XdhWdXFSCUepqCOdj6
+	 A3R7AyGfZtLukgkvApcZvyLqcG6iBEnn72jcU+GWoWpDZ5ZWu9OfVRofM8SJ0FHqTl
+	 b3tGOHgzebbfuRPoMEfOOhi4GtlXp6SuPEKQTFWyj9LePaBPbPU0bXL6ELRI4c9+Sf
+	 GvA01iPnQmx1MK6ps+CDNKHGMWWcSwgz9AxHK0ZWAc5VFzfmtVZGn+Z6kKlpI8N9xq
+	 YOB0lDorFZjJA==
+Received: from ip-185-104-136-29.ptr.icomera.net ([185.104.136.29] helo=wait-a-minute.misterjones.org)
+	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.95)
+	(envelope-from <maz@kernel.org>)
+	id 1rBF1n-002ENN-Lw;
+	Thu, 07 Dec 2023 14:06:59 +0000
+Date: Thu, 07 Dec 2023 14:06:34 +0000
+Message-ID: <87bkb285ud.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Mark Brown <broonie@kernel.org>
+Cc: Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>,
+	Oliver Upton <oliver.upton@linux.dev>,
+	James Morse <james.morse@arm.com>,
+	Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <shuah@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	kvmarm@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH v3 15/21] KVM: arm64: Support FEAT_FPMR for guests
+In-Reply-To: <08ae06c7-1654-4dfd-a789-b8e13c87d705@sirena.org.uk>
+References: <20231205-arm64-2023-dpisa-v3-0-dbcbcd867a7f@kernel.org>
+	<20231205-arm64-2023-dpisa-v3-15-dbcbcd867a7f@kernel.org>
+	<87cyvi8kz1.wl-maz@kernel.org>
+	<08ae06c7-1654-4dfd-a789-b8e13c87d705@sirena.org.uk>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/28.2
+ (x86_64-pc-linux-gnu) MULE/6.0 (HANACHIRUSATO)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 181937 [Dec 07 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: mmkurbanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 5 0.3.5 98d108ddd984cca1d7e65e595eac546a62b0144b, {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;salutedevices.com:7.1.1;p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;127.0.0.199:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960, bases: 2023/12/07 02:56:00 #22627289
-X-KSMG-AntiVirus-Status: Clean, skipped
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-SA-Exim-Connect-IP: 185.104.136.29
+X-SA-Exim-Rcpt-To: broonie@kernel.org, catalin.marinas@arm.com, will@kernel.org, oliver.upton@linux.dev, james.morse@arm.com, suzuki.poulose@arm.com, corbet@lwn.net, shuah@kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, kvmarm@lists.linux.dev, linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
 
-Added support for interrupt to the LED controller driver, which
-indicates the finished of the auto-breath pattern.
+On Thu, 07 Dec 2023 12:30:45 +0000,
+Mark Brown <broonie@kernel.org> wrote:
+> 
+> On Thu, Dec 07, 2023 at 08:39:46AM +0000, Marc Zyngier wrote:
+> > Mark Brown <broonie@kernel.org> wrote:
+> 
+> > >  #define HCRX_GUEST_FLAGS \
+> > > -	(HCRX_EL2_SMPME | HCRX_EL2_TCR2En | \
+> > > +	(HCRX_EL2_SMPME | HCRX_EL2_TCR2En | HCRX_EL2_EnFPM | \
+> 
+> > We really should start making all of these things conditional. See
+> > below.
+> 
+> Is there an overarching theory behind how these things are intended to
+> work?  I agree with you that I'd have expected more conditionality here,
+> I was trying to fit in with the existing pattern.  It's kind of hard to
+> follow what the intention is, I think to some extent due to things
+> having evolved over time.
 
-Signed-off-by: Martin Kurbanov <mmkurbanov@salutedevices.com>
----
- Documentation/devicetree/bindings/leds/awinic,aw200xx.yaml | 6 ++++++
- 1 file changed, 6 insertions(+)
+The intention is that *everything* becomes conditional, based on both
+the host CPU support and the feature set advertised to the guest.
+Which means that we don't stuff that isn't advertised to the guest,
+and instead make these things UNDEF. Just like on any real CPU
+implementation.
 
-diff --git a/Documentation/devicetree/bindings/leds/awinic,aw200xx.yaml b/Documentation/devicetree/bindings/leds/awinic,aw200xx.yaml
-index 54d6d1f08e24..7ab35b7a3fe6 100644
---- a/Documentation/devicetree/bindings/leds/awinic,aw200xx.yaml
-+++ b/Documentation/devicetree/bindings/leds/awinic,aw200xx.yaml
-@@ -44,6 +44,9 @@ properties:
-   enable-gpios:
-     maxItems: 1
- 
-+  interrupts:
-+    maxItems: 1
-+
- patternProperties:
-   "^led@[0-9a-f]+$":
-     type: object
-@@ -137,6 +140,7 @@ additionalProperties: false
- examples:
-   - |
-     #include <dt-bindings/gpio/gpio.h>
-+    #include <dt-bindings/interrupt-controller/irq.h>
-     #include <dt-bindings/leds/common.h>
- 
-     i2c {
-@@ -149,6 +153,8 @@ examples:
-             #address-cells = <1>;
-             #size-cells = <0>;
-             enable-gpios = <&gpio 3 GPIO_ACTIVE_HIGH>;
-+            interrupt-parent = <&gpio_intc>;
-+            interrupts = <13 IRQ_TYPE_LEVEL_LOW>;
- 
-             led@0 {
-                 reg = <0x0>;
+>
+> > > @@ -517,7 +519,6 @@ struct kvm_vcpu_arch {
+> > >  	enum fp_type fp_type;
+> > >  	unsigned int sve_max_vl;
+> > >  	u64 svcr;
+> > > -	u64 fpmr;
+> 
+> > Why do this change here? Why isn't done like that the first place?
+> 
+> It didn't seem right to add the register to struct vcpu_sysreg before it
+> was handled by KVM.  As referenced in the cover letter normally this
+> wouldn't come up because KVM doesn't rely on the host kernel for
+> managing register state so we add KVM support then enable the host
+> kernel but for FPSIMD we're reusing fpsimd_save() so we need the host
+> kernel support to be in place when we enable KVM.
+
+That doesn't explain why you can't be upfront with it and populate the
+FPMR entry. In either case, you are wasting a u64.
+
+> 
+> > >  	CGT_MDCR_TDE,
+> > > @@ -279,6 +281,12 @@ static const struct trap_bits coarse_trap_bits[] = {
+> > >  		.mask		= HCR_TTLBOS,
+> > >  		.behaviour	= BEHAVE_FORWARD_ANY,
+> > >  	},
+> > > +	[CGT_HCRX_EnFPM] = {
+> > > +		.index		= HCRX_EL2,
+> > > +		.value		= HCRX_EL2_EnFPM,
+> > > +		.mask		= HCRX_EL2_EnFPM,
+> > > +		.behaviour	= BEHAVE_FORWARD_ANY,
+> 
+> > This looks wrong. HCRX_EL2.EnFPM is an enable bit.
+> 
+> Right, it's the wrong way round.
+> 
+> > > +static void *fpsimd_share_end(struct user_fpsimd_state *fpsimd)
+> > > +{
+> > > +	void *share_end = fpsimd + 1;
+> > > +
+> > > +	if (cpus_have_final_cap(ARM64_HAS_FPMR))
+> > > +		share_end += sizeof(u64);
+> > > +
+> > > +	return share_end;
+> > > +}
+> 
+> > This is horrible. Why can't you just have a new structure wrapping
+> > both user_fpsimd_state and fpmr? This is going to break in subtle
+> > ways, just like the SVE/SME stuff.
+> 
+> I agree that it's not great, the main issue was that fpsimd_state is
+> both already embedded in uw for hardened usercopy and very widely
+> referenced by exactly which struct it's in so I was taking a guess as to
+> what would get the least objections.  The obvious thing would be to add
+> FPMR to uw and share the whole thing with the hypervisor, if people
+> don't mind adding another field to uw I could do that?
+
+Either that, or you create a KVM-specific structure that contains
+these fields. If that results in KVM changes, so be it. But I won't
+take this sort of pointer arithmetic that assumes some pre-defined
+layout.
+
+> 
+> > >  	vcpu->arch.host_fpsimd_state = kern_hyp_va(fpsimd);
+> > > +	if (cpus_have_final_cap(ARM64_HAS_FPMR)) {
+> > > +		WARN_ON_ONCE(&current->thread.fpmr + 1 != fpsimd_share_end(fpsimd));
+> 
+> > How can this happen?
+> 
+> It shouldn't, but it'd be bad if it did so I put a check in to make sure
+> we haven't messed up.
+
+See my earlier point: you shouldn't have to check if you used a data
+structure.
+
+> 
+> > > +		vcpu->arch.host_fpmr = kern_hyp_va(&current->thread.fpmr);
+> > > +	}
+> 
+> > We really need to stop piling the save/restore of stuff that isn't
+> > advertised to the guest.
+> 
+> I'm not clear what you're referencing here?  The feature is advertised
+> to the guest via the ID registers and in the past you've pushed back on
+> making things where the state is just a single register like this
+> optional.  Do you mean that we should be making this conditional on the
+> guest ID registers?  If that is the case is there a plan for how that's
+> supposed to work, set flags when kvm_vcpu_run_pid_change() happens for
+> example?
+
+See the beginning of this email. It is high time that we stop enabling
+everything by default, because this totally breaks VM migration. We
+already have a huge backlog of these things, and I don't want to add
+more of it.
+
+Which means that at the very least, enabling *any* feature also comes
+with sanitising the state one way or another when this feature is
+disabled by userspace.
+
+How this is being done is still a work in progress: my current plan is
+based on a set of trap bits that are computed on a per-VM basis, and
+some side state that indicates whether the trap handling is for
+emulation or feature disabling purpose. This will probably reuse the
+NV infrastructure which has an exhaustive list of the sysregs that can
+be trapped from EL0/EL1.
+
+At the very least, userspace shouldn't be able to observe the state
+that a guest isn't supposed to generate, and we should be mindful of
+not creating covert channels.
+
+	M.
+
 -- 
-2.40.0
-
+Without deviation from the norm, progress is not possible.
 
