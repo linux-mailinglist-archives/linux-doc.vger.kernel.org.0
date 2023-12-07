@@ -1,124 +1,120 @@
-Return-Path: <linux-doc+bounces-4452-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4455-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8491A809530
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 23:18:12 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 78B69809541
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 23:27:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 326251F21088
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 22:18:12 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 340B8281E3E
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Dec 2023 22:27:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76033840F2;
-	Thu,  7 Dec 2023 22:18:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEF6456395;
+	Thu,  7 Dec 2023 22:27:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=stgolabs.net header.i=@stgolabs.net header.b="IUGByDH/"
+	dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b="pC5qFLaO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bird.elm.relay.mailchannels.net (bird.elm.relay.mailchannels.net [23.83.212.17])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C383410DE;
-	Thu,  7 Dec 2023 14:18:03 -0800 (PST)
-X-Sender-Id: dreamhost|x-authsender|dave@stgolabs.net
-Received: from relay.mailchannels.net (localhost [127.0.0.1])
-	by relay.mailchannels.net (Postfix) with ESMTP id E8A5B94297A;
-	Thu,  7 Dec 2023 22:18:02 +0000 (UTC)
-Received: from pdx1-sub0-mail-a206.dreamhost.com (unknown [127.0.0.6])
-	(Authenticated sender: dreamhost)
-	by relay.mailchannels.net (Postfix) with ESMTPA id 545C3942985;
-	Thu,  7 Dec 2023 22:18:02 +0000 (UTC)
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1701987482; a=rsa-sha256;
-	cv=none;
-	b=XIxqLONpak5Z/quUPT8ob6a4cz23yAmBWMqP3j/jxcjPTkdsx7iEXhnCZjc9ckUA3zMwkK
-	a3M0sTejb63Hhky/bBI5E8sYyAmWO1E99B+dBDyi2dc6Vln3AdIwHfrVmpu0ay0vDMJkp/
-	qvPgAQQ8kLLh7ruM8R3fzHwnmqWIt6yeIVpb4kWaOL0VPAoImOvTOw5f1rzJh8/42VHvq7
-	hfdE/mLAV3Bw07P5qH+g3H59kOuB8Mij1jCTpdspjGs9mbubGVe6T/BeoBAWnoMQYxMV+p
-	mNDv4aZ+u2P0Omm6DKFIyWYLfMjqhZrpLSEDRva8RUE0kBHSnduJbMejIdhMUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailchannels.net;
-	s=arc-2022; t=1701987482;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references:dkim-signature;
-	bh=POl4DWLqR/bRNOMgsVfEX6y6MMnMuc7boUj6x6VE23s=;
-	b=+CEzdId799XG/75zFnjfEJ4aR1pcDMd03OvuGJfC+gzmuGzrW42soUSV6QCCNxrbPAT+do
-	3Sy1FXT3yDwQ3sCIofv4cOkqThnEUJ7LfeXulwubhBw3lS5EXn4gCeorw/BzfAo+jN/J5q
-	VpU/ArsZ3XMLoIzkU4U4DgD3Sm4PIFd0D7Uv2c8MaNRxo4XT4S9aXPxEKCOdixCdFMdtU0
-	0kUSzxRxtVCekC9q5RyKbbYPXE0RLFALs7dNRVF/lDnGr1LWDWXjT7Fb4cjs9kpg8soCvE
-	ITzokZPU1dXp9DUVXogleanKcxklx5fdLlfp20x+ZlMACSsKMR1PGQJL/NZQnw==
-ARC-Authentication-Results: i=1;
-	rspamd-696ff67dc8-wtjhs;
-	auth=pass smtp.auth=dreamhost smtp.mailfrom=dave@stgolabs.net
-X-Sender-Id: dreamhost|x-authsender|dave@stgolabs.net
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: dreamhost|x-authsender|dave@stgolabs.net
-X-MailChannels-Auth-Id: dreamhost
-X-Stretch-Bottle: 76b24ca367833107_1701987482714_1654256506
-X-MC-Loop-Signature: 1701987482714:2977466096
-X-MC-Ingress-Time: 1701987482713
-Received: from pdx1-sub0-mail-a206.dreamhost.com (pop.dreamhost.com
- [64.90.62.162])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
-	by 100.118.156.74 (trex/6.9.2);
-	Thu, 07 Dec 2023 22:18:02 +0000
-Received: from offworld (ip72-199-50-187.sd.sd.cox.net [72.199.50.187])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: dave@stgolabs.net)
-	by pdx1-sub0-mail-a206.dreamhost.com (Postfix) with ESMTPSA id 4SmTDS4NqFzCb;
-	Thu,  7 Dec 2023 14:18:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stgolabs.net;
-	s=dreamhost; t=1701987482;
-	bh=POl4DWLqR/bRNOMgsVfEX6y6MMnMuc7boUj6x6VE23s=;
-	h=Date:From:To:Subject:Content-Type;
-	b=IUGByDH/0M+ZoVjZfyKlfAaspk+reGSssPqMb8UPZMvCwxqVZ7Rr6yZAlLm1M3bX5
-	 S/wqZzZ7iLdjzkLr0SGXMLBwZLuWRvvKrVx7zeetwJYaFYfhyRWm3SUgCH/w2ynJdE
-	 GwkNm+LGgWSFUVVRLegOoxkZFhcL41XwxZULXBrlxJnlGX02Q+pxiT6KMFyfMzcB90
-	 rSg0djbLhvTuAUrGESvOH98kuZl225JKhcPUrLb8W7GdUNHPhml8fGGg+VINp+tO3L
-	 5Cd2J/Y2i2QHkRP9s9dPdxJcLi7TlfwH24Ee3gVfALWQLuqz0AX3doA7lcmx5CkhtT
-	 MDfEUl00T5q8g==
-Date: Thu, 7 Dec 2023 14:17:57 -0800
-From: Davidlohr Bueso <dave@stgolabs.net>
-To: Gregory Price <gourry.memverge@gmail.com>, linux-mm@kvack.org, 
-	jgroves@micron.com, ravis.opensrc@micron.com, sthanneeru@micron.com, 
-	emirakhur@micron.com, Hasan.Maruf@amd.com, linux-doc@vger.kernel.org, 
-	linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org, linux-arch@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, akpm@linux-foundation.org, arnd@arndb.de, tglx@linutronix.de, 
-	luto@kernel.org, mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com, 
-	x86@kernel.org, hpa@zytor.com, mhocko@kernel.org, tj@kernel.org, 
-	ying.huang@intel.com, gregory.price@memverge.com, corbet@lwn.net, rakie.kim@sk.com, 
-	hyeongtak.ji@sk.com, honggyu.kim@sk.com, vtavarespetr@micron.com, 
-	peterz@infradead.org
-Subject: Re: [RFC PATCH 01/11] mm/mempolicy: implement the sysfs-based
- weighted_interleave interface
-Message-ID: <iwvu5bzpxie35u66ice7y2r2n562xmao5gvzkc7rfhfh5phx2i@idvfsdnq4ynf>
-Mail-Followup-To: Gregory Price <gourry.memverge@gmail.com>, 
-	linux-mm@kvack.org, jgroves@micron.com, ravis.opensrc@micron.com, 
-	sthanneeru@micron.com, emirakhur@micron.com, Hasan.Maruf@amd.com, 
-	linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org, 
-	linux-arch@vger.kernel.org, linux-kernel@vger.kernel.org, akpm@linux-foundation.org, 
-	arnd@arndb.de, tglx@linutronix.de, luto@kernel.org, mingo@redhat.com, 
-	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, 
-	mhocko@kernel.org, tj@kernel.org, ying.huang@intel.com, gregory.price@memverge.com, 
-	corbet@lwn.net, rakie.kim@sk.com, hyeongtak.ji@sk.com, honggyu.kim@sk.com, 
-	vtavarespetr@micron.com, peterz@infradead.org
-References: <20231207002759.51418-1-gregory.price@memverge.com>
- <20231207002759.51418-2-gregory.price@memverge.com>
- <uxqkbmqbvcvx6wc3g2h6vhkutv5flrq6rslwdfs7pa6kknupwh@a245pbtfqfgj>
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F3030170F;
+	Thu,  7 Dec 2023 14:27:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+	t=1701987996; x=1702592796; i=w_armin@gmx.de;
+	bh=MgzcGVPKoqfJELwV3CzTRBVexp97HcHn6k8nAs0yc08=;
+	h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+	b=pC5qFLaOiFTDVxkVktFEMNHu+evSRL9sPTF3IEPpoyTtssn2e/mUf/YVmiuAQW05
+	 2+WtvdT1CUnYm8Hs3Kv9zh+qGHJDfZ0LnNXTFrOVTGuXJQ3z86wjPLrIbFO0bALMa
+	 2UiHBY0g0+nRnxqZ9EstRuXddP79WlUEq0eX9V0kTzT4GPpz8Ca4IOJiwy0r4YVhx
+	 Gi7vgPydqztRWI1f6EvFUUqK3PdR/rWDBxGy5zX8z9FVGijXMHxPNhgblJx6fHASg
+	 AUBtO0GRafpQtU0RYmwDoWhBAN+xuUVP+A2Iv/MrFcOekjJQkrYgZOaIZ/r2C4Ay6
+	 fKEWKejoaNKwLRjomA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from mx-amd-b650.users.agdsn.de ([141.30.226.129]) by mail.gmx.net
+ (mrgmx104 [212.227.17.168]) with ESMTPSA (Nemesis) id
+ 1MmDEm-1rbw9U2DMe-00iB3d; Thu, 07 Dec 2023 23:26:36 +0100
+From: Armin Wolf <W_Armin@gmx.de>
+To: hdegoede@redhat.com,
+	ilpo.jarvinen@linux.intel.com,
+	corbet@lwn.net
+Cc: Dell.Client.Kernel@dell.com,
+	linux-doc@vger.kernel.org,
+	platform-driver-x86@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/5] platform/x86: wmi: Cleanup obsolete features
+Date: Thu,  7 Dec 2023 23:26:18 +0100
+Message-Id: <20231207222623.232074-1-W_Armin@gmx.de>
+X-Mailer: git-send-email 2.39.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <uxqkbmqbvcvx6wc3g2h6vhkutv5flrq6rslwdfs7pa6kknupwh@a245pbtfqfgj>
-User-Agent: NeoMutt/20231006
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:+V6s3WudzRkc/3U5Azxmw82Gi8PIOKICgFml6vaMiONzNt8X8D8
+ RdOQHPqXh6/Hpe7zxdER4A8Pa9R3U6NuTYzY8E1c1jeS+EULdbuOHnBLZ1rXBfPPBCRui2d
+ WRW13bHWUnXgiKnrn4Xo8/NBZfs0P77LeidQZNV4DYz3o1xK1hDDLBKtPTsXfILhSI9cXRB
+ 5e9YyjXV/HEr1K6QTnfNA==
+UI-OutboundReport: notjunk:1;M01:P0:Dhn/0EMwgHQ=;bxz3HihOqtq6cwc3l0KTYBCsPSW
+ wf72mfYMm7eX55hx+eeTQJGxrhz1ktttzeesaMkMgV0Fc7T30HOXyDr8gD7tbbYRdpNpIAOI9
+ ZgfbTkxdeQ2awZWbNxUPy1SDJWs6NPARPJr32iYLVRCeqIbBVDoAXl/Ob2XI3zuKywkTRIrMZ
+ YLkt+A6zaSRuT/4ovnGGF2b0aPMJRPN3yCJpMOjjKOfS3/BQYlhJ+eKmfdZnfSVaBAXwODct7
+ FkMV2oK2Agc4A0VyAaua6NxL+kvXAwqiFYIFtmvfKpWWvbK7Gb7uGMSzfUmVyjdUyxiGRGie5
+ GXxnYFXViir9LdXZcITCRZxNO0py8VeSxjKiCGBiFBiLUZhDlvb0sHo0hTwEMLEtSW8Co36ja
+ n9o53ZSeo8g0QW0X6sWzEIhKlp6tSJloKfe0rK4ZSscUczneUW3UvXhMlOYwYjFkTircH2FoJ
+ W0QUIeRdNFeEQ1qjNrakaTrlafdJVbwR8+J5lXgg1q9wkOvpM+YVdvnWOdoH4zFJUX7ycFPgA
+ apQx9uHk2oi0rRmJsynYYxk5NTQhHObLfUvvLVbwNtzbAe32R0U4v4dEzFyhx8/3MBmzGRGtZ
+ NIlJCTY6VgkzTb8BtoKPltgVk8Tpqzlm7KQ4ejViik3UKOqA1zkUZmw6h+VPmZtiR58/MmCED
+ mw6QWohWpbSenwDpPLPnKp+BCQxEKNddZZQRELDj0W9afSZiLSuk33XfKZIbTL3Blrj6jlhFc
+ fcKjCg1fFO986Y38KL0mD3cH2OyBYrVsFr+MaY6kvA/2r/+FDWCgOznQqtiDh6xlPQ+J0KweS
+ HZM6UBSLda5ghrGgtaMJG6hrt2a42HlhMaHc73PXRGSxR6xTcOAqcTc45nb1O+T9/hMlvXa5m
+ GOsWU0T6aMwWchxlp3dOsTxmk0N+de8VJKw6zdjjk5aO3nFAyMqGPOySPjPTAn0GbX4dnTZ3W
+ qVPJWbHzNN9AGpGcSochRoZ6H9k=
 
-On Thu, 07 Dec 2023, Davidlohr Bueso wrote:
+This patch series removes three features deemed obsolete:
+- the debug_dump_wdg module param:
+  - suffers from garbled output due to pr_cont()
+  - functionality is better provided by "fwts wmi"
+- the debug_event module param:
+  - pr_cont() usage
+  - uses the deprecated GUID-based API
+  - largely replaced by the ACPI netlink interface
+- ioctl interface
+  - used only by a single driver, no adoption otherwise
+  - numerous design issues
 
->fyi Rakie's tag needs to be last, per the From.
+Since the ioctl interface is actually used by userspace programs,
+the only user (the dell-smbios-wmi driver) was modified to implement
+the necessary pieces itself so that no regressions are expected.
 
-sorry no, quite the opposite, never mind this :)
+The last patch in contrast adds a short WMI driver development guide
+to the WMI subsystem documentation, so that driver developers stop
+submitting WMI drivers using the deprecated GUID-based interface.
+
+The series depends on
+commit cbf54f37600e ("platform/x86: wmi: Skip blocks with zero instances")=
+,
+which is currently in the "fixes" tree.
+
+All patches where tested on a Dell Inspiron 3505 and work without
+issues.
+
+Armin Wolf (5):
+  platform/x86: wmi: Remove debug_dump_wdg module param
+  platform/x86: wmi: Remove debug_wmi module param
+  platform/x86: dell-smbios-wmi: Stop using WMI chardev
+  platform/x86: wmi: Remove chardev interface
+  platform/x86: wmi: Add driver development guide
+
+ .../wmi/driver-development-guide.rst          | 126 ++++++++
+ Documentation/wmi/index.rst                   |   1 +
+ drivers/platform/x86/dell/dell-smbios-wmi.c   | 163 +++++++---
+ drivers/platform/x86/wmi.c                    | 285 +-----------------
+ include/linux/wmi.h                           |   8 -
+ 5 files changed, 256 insertions(+), 327 deletions(-)
+ create mode 100644 Documentation/wmi/driver-development-guide.rst
+
+=2D-
+2.39.2
+
 
