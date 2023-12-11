@@ -1,68 +1,69 @@
-Return-Path: <linux-doc+bounces-4701-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4703-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E40780CE62
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Dec 2023 15:31:38 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F24180CE8D
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Dec 2023 15:42:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D858E1F210FE
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Dec 2023 14:31:36 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4A891281A72
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Dec 2023 14:41:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED93526AC2;
-	Mon, 11 Dec 2023 14:31:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B96B4495C0;
+	Mon, 11 Dec 2023 14:41:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kAyduG16"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QJnbZq6U"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com [IPv6:2607:f8b0:4864:20::631])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 37071B8;
-	Mon, 11 Dec 2023 06:31:29 -0800 (PST)
-Received: by mail-pl1-x631.google.com with SMTP id d9443c01a7336-1d0538d9bbcso41937345ad.3;
-        Mon, 11 Dec 2023 06:31:29 -0800 (PST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com [IPv6:2607:f8b0:4864:20::634])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B0634B4;
+	Mon, 11 Dec 2023 06:41:53 -0800 (PST)
+Received: by mail-pl1-x634.google.com with SMTP id d9443c01a7336-1d045097b4cso25751485ad.0;
+        Mon, 11 Dec 2023 06:41:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702305089; x=1702909889; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1702305713; x=1702910513; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=b19xQFHlq0u950n+bog20AYxBcPy/la29CiM3A31JeQ=;
-        b=kAyduG16tFHMTi8rXPrVolPfYGbxdsBU9Gm9Lf95zFVCTC0QwslhvJ6HXqB66u+3iR
-         NSzrOwHPXtec8vFh6sOYPlJGocnmKPjOxFMLeWm6910P/Wn5t+Qp4E0qDAgzdmpnUDVu
-         kKY8cw20PaQmyfVRlw35ssgTCkyvuneg++phveO1FlPqWrLnte3kfZzxoy2pP0LOI7Wx
-         HmrQ8Y1CLUhwgcd8nUttkFxMBGug+VhAIOpn2d8n/3teh/o75CY5eYzbQ/BWTi4HHWww
-         1BDKS46oGAz7cvIi8JYAt6UxrFAuQheTQKXYDxvlr0puuvFW5+rL0XSJ0ON9KVM1F3F6
-         D7fg==
+        bh=T9DaHiruHnu1Ugo/eNiPXfm/bzESsaARD0DZgVgoZ3k=;
+        b=QJnbZq6UtI1YhCei0Gaa3tAlKU9QPJ7df82DZwpxWCjBB1tXt2SfLi53HrFYyx26Vk
+         CEOBHe+0f3wzh5fawIKaZxplL9jlYR4P2pmrpSGDUZYnByGdRtea24048ppbij1s6kGr
+         VsoyAeyZ8+ZBtnXgelbRra6tWcnzTWmmW2/jYeW8RWYKe1fQPo0W9S7yofm1GUghTwyV
+         5imTFeACMObj4rEQSme7qM8EIxD5L6xm2OOWnOtEdfHy6NFc/Z3AbA2IKCMoz3mlhcvo
+         UPg0+kX+JZQiEn4XpgEQsozJ0bZB4fVfVL1BfJ8Y+uezIST3kGHwxGF0M4pDbAhh6srl
+         M3ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702305089; x=1702909889;
+        d=1e100.net; s=20230601; t=1702305713; x=1702910513;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=b19xQFHlq0u950n+bog20AYxBcPy/la29CiM3A31JeQ=;
-        b=rfPouWdIg/2l8OBid2bBppbEq2xzEhUphpNu1J1KomD6Oj1tA5nXqn//dSRp6BIOQY
-         SJCOx+KFw+XzXnZZXLKCSiia+Gm084oA3WR+QMQXmu3C5BiOqGFlu4lTSBe4iTkhK8CN
-         NC+uDEQ4vQ8A6dJFITeEdSyS5kTcxYFFLpoaYALseZbJITzUo+aMde8DR9AYKL9kdAlx
-         UZtOXJHVvvMh454Y9qpUI4aouJlfhIsgEn8gTFoN0JsxK6DZNscjizGswcNkA1TglQNK
-         qmPNbuEKnhLVPc+yYsf+gE41nKAD4sEA7WInNA8PAfWUOugEaA0LSol0ndxcm6cLM0R2
-         N8ig==
-X-Gm-Message-State: AOJu0YzEFvqYOwKH1c/6A80Mt/H2egaAmQVxtMnm/tODKDuX+rSS8ffy
-	tfuhsj7O77JH8ZiOs8y/2mc=
-X-Google-Smtp-Source: AGHT+IHNlVNjJKEoVfO3P9Qel67SfN6xGGJzHvc9sSj7Z04E+MkMNQcff2T5wRsNUOWvRkPBChGJGA==
-X-Received: by 2002:a17:90b:108:b0:286:cc10:f2c6 with SMTP id p8-20020a17090b010800b00286cc10f2c6mr3331656pjz.20.1702305088512;
-        Mon, 11 Dec 2023 06:31:28 -0800 (PST)
+        bh=T9DaHiruHnu1Ugo/eNiPXfm/bzESsaARD0DZgVgoZ3k=;
+        b=JH4331o2PH4zDaiUyZORLgs4S89hVh8ruku7ukfFYMR3VeGRz4PBXB9bNNHc9IuhtQ
+         qInhkfubn3ZOGyEv3CmUZSqpRetjnYYhB/49Md7ZjWO+X95hlDpJ2OUTUxbRCcYQVUdA
+         QilX+tc8SkBjtdCIMSEnEuGPFXF7egKmyCnyVdVJKa/pErV7ZrQO2gRlZZd0VDrn/mtZ
+         e5NEgzN2lxgnlBll3WlT345mATkY9GCrUNIgvGNe/Jt1WpPTXLK7x77wT5yk33EUSy3W
+         0Z7MdB/0N8oWuzlwADAeS22/5X1Fp87yYD0Ik9M1kG0iMX5g/4/X635W7OSsOVihuUfh
+         4npg==
+X-Gm-Message-State: AOJu0YwDfGI/KYO6wtP8aIFl5fmZdLmxE33YbOoqx4FvjaZ0PDAwb6Tp
+	XQ1YCwtHnYNQcKZSRmduF8ioxRS/8ms=
+X-Google-Smtp-Source: AGHT+IFU0Ir8swqWWIKeGisQaCsjK175j5nJ5tGS1mkYhcXbQDjsHUfacT1J59An51dqA5EUbKzOug==
+X-Received: by 2002:a17:902:c183:b0:1d0:6ffd:cea7 with SMTP id d3-20020a170902c18300b001d06ffdcea7mr2061723pld.96.1702305713133;
+        Mon, 11 Dec 2023 06:41:53 -0800 (PST)
 Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
-        by smtp.gmail.com with ESMTPSA id mh17-20020a17090b4ad100b002865028e17csm8433001pjb.9.2023.12.11.06.31.27
+        by smtp.gmail.com with ESMTPSA id p20-20020a170902ead400b001d0b5a97cabsm6718612pld.124.2023.12.11.06.41.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 Dec 2023 06:31:28 -0800 (PST)
+        Mon, 11 Dec 2023 06:41:52 -0800 (PST)
 Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Mon, 11 Dec 2023 06:31:27 -0800
+Date: Mon, 11 Dec 2023 06:41:51 -0800
 From: Guenter Roeck <linux@roeck-us.net>
-To: Stefan Gloor <code@stefan-gloor.ch>
-Cc: jdelvare@suse.com, corbet@lwn.net, linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] hwmon: sht3x: read out sensor serial number
-Message-ID: <69065f64-1448-4513-bdda-a25a913e914d@roeck-us.net>
-References: <20231204165004.8491-1-code@stefan-gloor.ch>
- <20231204165004.8491-3-code@stefan-gloor.ch>
+To: Aleksa Savic <savicaleksa83@gmail.com>
+Cc: linux-hwmon@vger.kernel.org, Jean Delvare <jdelvare@suse.com>,
+	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] hwmon: Add driver for Gigabyte AORUS Waterforce AIO
+ coolers
+Message-ID: <10044dce-8416-405f-a525-f547d48411f2@roeck-us.net>
+References: <20231207122402.107032-1-savicaleksa83@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -71,159 +72,31 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20231204165004.8491-3-code@stefan-gloor.ch>
+In-Reply-To: <20231207122402.107032-1-savicaleksa83@gmail.com>
 
-On Mon, Dec 04, 2023 at 05:50:04PM +0100, Stefan Gloor wrote:
-> The temperature/humidity sensors of the STS3x/SHT3x family are
-> calibrated and factory-programmed with a unique serial number.
-> For some sensors, this serial number can be used to obtain a calibration
-> certificate via an API provided by the manufacturer (Sensirion).
-> Expose the serial number via debugfs.
+On Thu, Dec 07, 2023 at 01:23:59PM +0100, Aleksa Savic wrote:
+> This driver exposes hardware sensors of the Gigabyte AORUS Waterforce
+> all-in-one CPU liquid coolers, which communicate through a proprietary
+> USB HID protocol. Report offsets were initially discovered in [1] and
+> confirmed by me on a Waterforce X240 by observing the sent reports from
+> the official software.
 > 
-> Tested with: 2x STS31, 1x STS32, 1x SHT31
+> Available sensors are pump and fan speed in RPM, as well as coolant
+> temperature. Also available through debugfs is the firmware version.
 > 
-> Signed-off-by: Stefan Gloor <code@stefan-gloor.ch>
-> ---
->  Documentation/hwmon/sht3x.rst | 11 +++++++
->  drivers/hwmon/sht3x.c         | 55 +++++++++++++++++++++++++++++++++++
->  2 files changed, 66 insertions(+)
+> Attaching a fan is optional and allows it to be controlled from the
+> device. If it's not connected, the fan-related sensors will report
+> zeroes.
 > 
-> diff --git a/Documentation/hwmon/sht3x.rst b/Documentation/hwmon/sht3x.rst
-> index 957c854f5d08..9585fa7c5a5d 100644
-> --- a/Documentation/hwmon/sht3x.rst
-> +++ b/Documentation/hwmon/sht3x.rst
-> @@ -65,6 +65,10 @@ When the temperature and humidity readings move back between the hysteresis
->  values, the alert bit is set to 0 and the alert pin on the sensor is set to
->  low.
->  
-> +The serial number exposed to debugfs allows for unique identification of the
-> +sensors. For sts32, sts33 and sht33, the manufacturer provides calibration
-> +certificates through an API.
-> +
->  sysfs-Interface
->  ---------------
->  
-> @@ -99,3 +103,10 @@ repeatability:      write or read repeatability, higher repeatability means
->                          - 1: medium repeatability
->                          - 2: high repeatability
->  =================== ============================================================
-> +
-> +debugfs-Interface
-> +-----------------
-> +
-> +=================== ============================================================
-> +serial_number:      unique serial number of the sensor in decimal
-> +=================== ============================================================
-> diff --git a/drivers/hwmon/sht3x.c b/drivers/hwmon/sht3x.c
-> index 79657910b79e..537365c6213b 100644
-> --- a/drivers/hwmon/sht3x.c
-> +++ b/drivers/hwmon/sht3x.c
-> @@ -10,6 +10,7 @@
->  
->  #include <asm/page.h>
->  #include <linux/crc8.h>
-> +#include <linux/debugfs.h>
->  #include <linux/delay.h>
->  #include <linux/err.h>
->  #include <linux/hwmon.h>
-> @@ -41,6 +42,7 @@ static const unsigned char sht3x_cmd_heater_off[]              = { 0x30, 0x66 };
->  /* other commands */
->  static const unsigned char sht3x_cmd_read_status_reg[]         = { 0xf3, 0x2d };
->  static const unsigned char sht3x_cmd_clear_status_reg[]        = { 0x30, 0x41 };
-> +static const unsigned char sht3x_cmd_read_serial_number[]      = { 0x37, 0x80 };
->  
->  /* delays for single-shot mode i2c commands, both in us */
->  #define SHT3X_SINGLE_WAIT_TIME_HPM  15000
-> @@ -163,12 +165,14 @@ struct sht3x_data {
->  	enum sht3x_chips chip_id;
->  	struct mutex i2c_lock; /* lock for sending i2c commands */
->  	struct mutex data_lock; /* lock for updating driver data */
-> +	struct dentry *debugfs;
->  
->  	u8 mode;
->  	const unsigned char *command;
->  	u32 wait_time;			/* in us*/
->  	unsigned long last_update;	/* last update in periodic mode*/
->  	enum sht3x_repeatability repeatability;
-> +	u32 serial_number;
->  
->  	/*
->  	 * cached values for temperature and humidity and limits
-> @@ -831,6 +835,50 @@ static int sht3x_write(struct device *dev, enum hwmon_sensor_types type,
->  	}
->  }
->  
-> +#ifdef CONFIG_DEBUG_FS
-> +
-> +static void sht3x_debugfs_init(struct sht3x_data *data)
-> +{
-> +	char name[32];
-> +	struct dentry *sensor_dir;
-> +
-> +	data->debugfs = debugfs_lookup("sht3x", NULL);
-> +	if (IS_ERR_OR_NULL(data->debugfs))
-> +		data->debugfs = debugfs_create_dir("sht3x", NULL);
-> +
-> +	snprintf(name, sizeof(name), "i2c%u-%02x",
-> +		 data->client->adapter->nr, data->client->addr);
-> +	sensor_dir = debugfs_create_dir(name, data->debugfs);
-> +	debugfs_create_u32("serial_number", 0444,
-> +			   sensor_dir, &data->serial_number);
-> +}
-> +
-> +#else
-> +
-> +static void sht3x_debugfs_init(struct sht3x_data *data)
-> +{
-> +}
-> +
-> +#endif
+> The addressable RGB LEDs and LCD screen are not supported in this
+> driver and should be controlled through userspace tools.
+> 
+> [1]: https://github.com/liquidctl/liquidctl/issues/167
+> 
+> Signed-off-by: Aleksa Savic <savicaleksa83@gmail.com>
 
-debugfs doesn't need if/else or error handling.
+Applied.
 
-
-> +
-> +static int sht3x_serial_number_read(struct sht3x_data *data)
-> +{
-> +	int ret;
-> +	char buffer[SHT3X_RESPONSE_LENGTH];
-> +	struct i2c_client *client = data->client;
-> +
-> +	ret = sht3x_read_from_command(client, data,
-> +				      sht3x_cmd_read_serial_number,
-> +				      buffer,
-> +				      SHT3X_RESPONSE_LENGTH, 0);
-> +	if (ret)
-> +		return ret;
-> +
-> +	data->serial_number = (buffer[0] << 24) | (buffer[1] << 16) |
-> +			      (buffer[3] << 8) | buffer[4];
-> +	return ret;
-> +}
-> +
->  static const struct hwmon_ops sht3x_ops = {
->  	.is_visible = sht3x_is_visible,
->  	.read = sht3x_read,
-> @@ -899,6 +947,13 @@ static int sht3x_probe(struct i2c_client *client)
->  	if (ret)
->  		return ret;
->  
-> +	ret = sht3x_serial_number_read(data);
-> +	if (ret) {
-> +		dev_dbg(dev, "unable to read serial number\n");
-> +		data->serial_number = 0;
-> +	}
-> +	sht3x_debugfs_init(data);
-
-The debugfs entry should not be created in the first place if the
-serial number can not be read. On top of that, the debugfs entries
-are never removed, meaning the system will crash if the driver or device
-is unloaded and the no longer referenced debugfs file is accessed.
-
+Thanks,
 Guenter
-
-> +
->  	hwmon_dev = devm_hwmon_device_register_with_info(dev,
->  							 client->name,
->  							 data,
 
