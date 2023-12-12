@@ -1,119 +1,126 @@
-Return-Path: <linux-doc+bounces-4793-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4786-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id BACE880EAB0
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Dec 2023 12:43:24 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EEDE80EA93
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Dec 2023 12:40:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 75AED2820B8
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Dec 2023 11:43:23 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 45D5F1F21D6B
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Dec 2023 11:40:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 18AF15DF3B;
-	Tue, 12 Dec 2023 11:43:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5FB605D8F1;
+	Tue, 12 Dec 2023 11:40:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="g4CWJjCd"
+	dkim=pass (2048-bit key) header.d=raspberrypi.com header.i=@raspberrypi.com header.b="ADzG07U8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com [IPv6:2a00:1450:4864:20::334])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5F60710A;
-	Tue, 12 Dec 2023 03:42:59 -0800 (PST)
-Received: by mail-wm1-x334.google.com with SMTP id 5b1f17b1804b1-40c19f5f822so31127535e9.1;
-        Tue, 12 Dec 2023 03:42:59 -0800 (PST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com [IPv6:2607:f8b0:4864:20::b2a])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C409BC3
+	for <linux-doc@vger.kernel.org>; Tue, 12 Dec 2023 03:40:42 -0800 (PST)
+Received: by mail-yb1-xb2a.google.com with SMTP id 3f1490d57ef6-db7d198e791so4126025276.3
+        for <linux-doc@vger.kernel.org>; Tue, 12 Dec 2023 03:40:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702381378; x=1702986178; darn=vger.kernel.org;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1w6ExvjDA6MnJY8U+jRIIUUp1YLCQf5dTNoi7ve07KA=;
-        b=g4CWJjCdC/QYaWa1T9BCEn3+RJj7eq15Cpul0krae7QmUUk4aTt+S5ZSduFIcT5pOx
-         GL6nzMlZ9aAz869aJDwuNQGv/z0R/wwpjEI4WyUYRGHawiAfbB0ofrrwu7Z3VSCPxuOA
-         9qbDdUcLTZu8w1t7d9H0BH63jWoibfEYAhbj5yqTD4BNkROOuRbkDX0HONvLMeKmfArD
-         kdhhn162GQXpA1jw19GU5c+FsdAeveKb6BeiRQOjJkFGCX5RGgJG03sZzZRlszrnd+fc
-         wWnozcozgF0/mhs0lWzKENg8oAl/XXu2rJ9bSPx0cjjTrSwq1Er+D9gsxT3JgjWelw6r
-         ParQ==
+        d=raspberrypi.com; s=google; t=1702381242; x=1702986042; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=0iUPBvo8eOmT//4vl8DQjGC5UmJmCx85Al5r4t/jUw0=;
+        b=ADzG07U8MZzVm7biIm5aHAbXumTWnvHUl+oNS/+GIup3vnxEqT+ndCr41WZRAKQHHL
+         ScGjPd0F//kXvvuN09xkgQ46CSKKxCcSTkyjNjjc/gbjFXel0YTWYvRL0AXJyZNH+EWj
+         VJOLlU93T6a1pBTV3BngOZ/0jhoEfJLsqvMzRUC6+W+44Qi7X3Zb9WbuQji45MkMJfOu
+         EoVS6oWEpNtc/MfXa/OfBQ0HnS7gO2BEP+098XWhJWkCpI3eKhTbzA7Fxdkitj7osKJi
+         //BNLT1cZ4oly25Zk+wjbZ7raBvIiOwCgW6MQIyTvdo+mg2qgLbp4xYAd5PPoTs3yMq9
+         dfYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702381378; x=1702986178;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1w6ExvjDA6MnJY8U+jRIIUUp1YLCQf5dTNoi7ve07KA=;
-        b=DB5ize0bGu+bK9IRv+x2xkMvA0RAbbCNQ5w7kBJNBta70tJ2vZvYi3Ob2Cg0dxg/xO
-         s/aW7hj+hC+rh3hgqpbK2S1gNbgo79LuVPeX8IkSjgeGOnD0ZRktmZrq4hHBR+0Jwhpn
-         hAAejkIJUY8NyYUrlk+LOm470d9wBsLF8sfmyMZcfPD/6nRQK+9vUSdtnj1Dta0w5Jk1
-         x+RK+J3peS1Vxs/UaTxXwjXSl+1gXlfkZUjbZO7LHsPnMNJHEH++m6aNyufqLi0IJDOx
-         60dbHcm9teNtOtxSXUueKQstVmOWN22aGYBIhWQBfgHx37jjepN7zBXrjUe5mwtF7Fdn
-         iOIA==
-X-Gm-Message-State: AOJu0Yx5Np/heQvn2htL4+IE8l28OH6Pk3Z9HB60Or40gjOf3N3BZ/2T
-	IovNINbciRBygFFXv0l44B8=
-X-Google-Smtp-Source: AGHT+IH+LrqVSNMWmNIXgt/wkgZA74OEbbbxCoPzKyU1CbHG+AZPiTn3XEw8hq/wJQshl02uHSR55Q==
-X-Received: by 2002:a05:600c:54c4:b0:40c:3984:4983 with SMTP id iw4-20020a05600c54c400b0040c39844983mr3052768wmb.76.1702381377720;
-        Tue, 12 Dec 2023 03:42:57 -0800 (PST)
-Received: from imac ([2a02:8010:60a0:0:4c3e:5ea1:9128:f0b4])
-        by smtp.gmail.com with ESMTPSA id p14-20020a05600c358e00b0040c37c4c229sm13708499wmq.14.2023.12.12.03.42.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Dec 2023 03:42:57 -0800 (PST)
-From: Donald Hunter <donald.hunter@gmail.com>
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: netdev@vger.kernel.org,  "David S. Miller" <davem@davemloft.net>,  Eric
- Dumazet <edumazet@google.com>,  Paolo Abeni <pabeni@redhat.com>,  Jonathan
- Corbet <corbet@lwn.net>,  linux-doc@vger.kernel.org,  Jacob Keller
- <jacob.e.keller@intel.com>,  donald.hunter@redhat.com
-Subject: Re: [PATCH net-next v2 00/11] tools/net/ynl: Add 'sub-message'
- support to ynl
-In-Reply-To: <20231211153209.2d526d99@kernel.org> (Jakub Kicinski's message of
-	"Mon, 11 Dec 2023 15:32:09 -0800")
-Date: Tue, 12 Dec 2023 11:38:07 +0000
-Message-ID: <m2v8937isg.fsf@gmail.com>
-References: <20231211164039.83034-1-donald.hunter@gmail.com>
-	<20231211153209.2d526d99@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+        d=1e100.net; s=20230601; t=1702381242; x=1702986042;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0iUPBvo8eOmT//4vl8DQjGC5UmJmCx85Al5r4t/jUw0=;
+        b=lkrorjHoqJdTkmG+bavPX+t+NFrDsNtJqiwEoPW7WZv5e760OevBhE58yqJz/H4CKd
+         hzvFsHppmRmVazuYPSh2G4oKuuxtC5R6khq5fZosEwNjBDQDY7aCoXvXQRQlYs7QARUd
+         rmPTfZgoXdXzHyrLmipC9p6P0frxdgyVSAEvXo5ZfonjzjlSO8XsBozngLNhoDWgecy0
+         8JMyU7RyBmu6edcH70G+JzwTNlytNy8lgFpBWxkViHTEGPBAkGMdGzVYtIACIxXQ4zS/
+         qfgOlobISZQOLYC81zWx1BrmT0zflNsVdIP5fCtWL0zuUXTUsdGHpBNd6ocTCf6/rN59
+         3bgg==
+X-Gm-Message-State: AOJu0Yw8L0V2wIUM+5TpfYmjKvyVJzEJGVnERfiF6qkGBo01NLahV75V
+	/Ykp/iYTH8i2n7ETNCCgebni1YtcdPI6jr6hIWgEbQ==
+X-Google-Smtp-Source: AGHT+IGkFxJXB+75F7npYS3Sl7fcGotb27eRrk6u5Q+tryG0nLGLjgw4n/C3z2I9FmEbcpAIdKRvpPS2VqJqFmY8cyo=
+X-Received: by 2002:a25:ce8a:0:b0:db5:47ee:47c4 with SMTP id
+ x132-20020a25ce8a000000b00db547ee47c4mr2442389ybe.53.1702381242014; Tue, 12
+ Dec 2023 03:40:42 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20231207-kms-hdmi-connector-state-v5-0-6538e19d634d@kernel.org> <20231207-kms-hdmi-connector-state-v5-18-6538e19d634d@kernel.org>
+In-Reply-To: <20231207-kms-hdmi-connector-state-v5-18-6538e19d634d@kernel.org>
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Tue, 12 Dec 2023 11:40:26 +0000
+Message-ID: <CAPY8ntBe9RfSjdnd5Smx23La5gQaR9WqY8ehXQyp=4D_11N55Q@mail.gmail.com>
+Subject: Re: [PATCH v5 18/44] drm/vc4: hdmi: Create destroy state implementation
+To: Maxime Ripard <mripard@kernel.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, 
+	Emma Anholt <emma@anholt.net>, Jonathan Corbet <corbet@lwn.net>, Sandy Huang <hjc@rock-chips.com>, 
+	=?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
+	Chen-Yu Tsai <wens@csie.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+	Samuel Holland <samuel@sholland.org>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	Hans Verkuil <hverkuil@xs4all.nl>, linux-rockchip@lists.infradead.org, 
+	linux-sunxi@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+	linux-media@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-Jakub Kicinski <kuba@kernel.org> writes:
-
-> On Mon, 11 Dec 2023 16:40:28 +0000 Donald Hunter wrote:
->> This patchset adds a 'sub-message' attribute type to the netlink-raw
->> schema and implements it in ynl. This provides support for kind-specific
->> options attributes as used in rt_link and tc raw netlink families.
->> 
->> A description of the new 'sub-message' attribute type and the
->> corresponding sub-message definitions is provided in patch 5.
->> 
->> The patchset includes updates to the rt_link spec and a new tc spec that
->> make use of the new 'sub-message' attribute type.
->> 
->> As mentioned in patch 7, encode support is not yet implemented in ynl
->> and support for sub-message selectors at a different nest level from the
->> key attribute is not yet supported. I plan to work on these in folloup
->> patches.
+On Thu, 7 Dec 2023 at 15:50, Maxime Ripard <mripard@kernel.org> wrote:
 >
-> Seems to break C codegen:
+> Even though we were rolling our own custom state for the vc4 HDMI
+> controller driver, we were still using the generic helper to destroy
+> that state.
+>
+> It was mostly working since the underlying state is the first member of
+> our state so the pointers are probably equal in all relevant cases, but
+> it's still fragile so let's fix this properly.
+>
+> Signed-off-by: Maxime Ripard <mripard@kernel.org>
 
-Ick. Sorry about that. How do you test/validate the C codegen?
+Reviewed-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 
-> Traceback (most recent call last):
->   File "net-next/tools/net/ynl/ynl-gen-c.py", line 2802, in <module>
->     main()
->   File "net-next/tools/net/ynl/ynl-gen-c.py", line 2531, in main
->     parsed = Family(args.spec, exclude_ops)
->              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->   File "net-next/tools/net/ynl/ynl-gen-c.py", line 889, in __init__
->     super().__init__(file_name, exclude_ops=exclude_ops)
->   File "net-next/tools/net/ynl/lib/nlspec.py", line 481, in __init__
->     raise last_exception
->   File "net-next/tools/net/ynl/lib/nlspec.py", line 472, in __init__
->     elem.resolve()
->   File "net-next/tools/net/ynl/ynl-gen-c.py", line 907, in resolve
->     self.resolve_up(super())
->   File "net-next/tools/net/ynl/lib/nlspec.py", line 53, in resolve_up
->     up.resolve()
->   File "net-next/tools/net/ynl/lib/nlspec.py", line 583, in resolve
->     for elem in self.yaml['sub-messages']:
->                 ~~~~~~~~~^^^^^^^^^^^^^^^^
+> ---
+>  drivers/gpu/drm/vc4/vc4_hdmi.c | 12 +++++++++++-
+>  1 file changed, 11 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+> index 25c9c71256d3..f05e2c95a60d 100644
+> --- a/drivers/gpu/drm/vc4/vc4_hdmi.c
+> +++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+> @@ -672,11 +672,21 @@ vc4_hdmi_connector_duplicate_state(struct drm_connector *connector)
+>         return &new_state->base;
+>  }
+>
+> +static void vc4_hdmi_connector_destroy_state(struct drm_connector *connector,
+> +                                            struct drm_connector_state *state)
+> +{
+> +       struct vc4_hdmi_connector_state *vc4_state =
+> +               conn_state_to_vc4_hdmi_conn_state(state);
+> +
+> +       __drm_atomic_helper_connector_destroy_state(state);
+> +       kfree(vc4_state);
+> +}
+> +
+>  static const struct drm_connector_funcs vc4_hdmi_connector_funcs = {
+>         .fill_modes = drm_helper_probe_single_connector_modes,
+>         .reset = vc4_hdmi_connector_reset,
+>         .atomic_duplicate_state = vc4_hdmi_connector_duplicate_state,
+> -       .atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
+> +       .atomic_destroy_state = vc4_hdmi_connector_destroy_state,
+>         .atomic_get_property = vc4_hdmi_connector_get_property,
+>         .atomic_set_property = vc4_hdmi_connector_set_property,
+>  };
+>
+> --
+> 2.43.0
+>
 
