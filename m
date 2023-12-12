@@ -1,199 +1,302 @@
-Return-Path: <linux-doc+bounces-4801-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4803-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42FC980EE9E
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Dec 2023 15:25:09 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A25F80EEC4
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Dec 2023 15:29:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F02B1281AC8
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Dec 2023 14:25:07 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7D71F1C20BA8
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Dec 2023 14:29:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 64DDB73184;
-	Tue, 12 Dec 2023 14:25:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 63A457319E;
+	Tue, 12 Dec 2023 14:29:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="V20MR84v"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="akY5MonY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com [IPv6:2a00:1450:4864:20::32a])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7A3328F;
-	Tue, 12 Dec 2023 06:25:00 -0800 (PST)
-Received: by mail-wm1-x32a.google.com with SMTP id 5b1f17b1804b1-40c32df9174so49272665e9.3;
-        Tue, 12 Dec 2023 06:25:00 -0800 (PST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com [IPv6:2a00:1450:4864:20::62e])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4DCD9AC
+	for <linux-doc@vger.kernel.org>; Tue, 12 Dec 2023 06:29:12 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id a640c23a62f3a-a22ed5f0440so75518766b.1
+        for <linux-doc@vger.kernel.org>; Tue, 12 Dec 2023 06:29:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702391099; x=1702995899; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=wT+VDqG3XoXgaVhq1uWAJL5Mh+pcqg7vqqy6t8enn7o=;
-        b=V20MR84vVemiR/FcRW1Ta1fCSJSBef7Z3RrQw/uwmkjQRONcCIkEEaAWtNMGNuzM4v
-         pKriVuS2E0X0bFFMSujux8MNF/5MQibvU/zgC3/cevE7wHxoJi46+V/4ZpXuvDiFNnXK
-         ikXo17SQA+Ea9pCVuT9+e470Qw/0gHls62OV7C1k9XmHKKAlU2x6OrGVZXOePSnHWWBu
-         Hr6IyeJM+tJPUmyMxFLeXvnDTvZl5G5aWAsL82gjEmVrgfawQnjxtnERs+Wj49R4kq0X
-         +JcaIrsePWd91vfh/quHY0lKhodGdyvxcKCG6qx+62vatJV2x2fP72bfoj+eWQcOjkYZ
-         Y8gA==
+        d=google.com; s=20230601; t=1702391351; x=1702996151; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HvAfEdNnHNunYaoKLrlK4WhMdfvO73bGHd2FtWgeUYg=;
+        b=akY5MonYgndnmv7rJhhLD8XVdx+ToH7Utth/KzwXWr/lhhAv8XY4vNQCoDAwl2+/vN
+         Y9uKJHVhOtXW+KC4c3eusfbWSXQkPvJ9g4FWD1WyN+JFa+jn92zlGhaT8P071noV160G
+         dt2gw0FoMEpPMx1+i2DnUUGiMogGyCQI7Y5gQXh9bbf35JWRdBhcwHsf12sUTqABNhjl
+         mM4c4JNglhY0yQ82Ll5shFkhgg8y4b7HNZWjwVI6E11vYjlap7G3qkWr5541nCVq5B3q
+         m9OPeYpbAk2v3B8AUIBZ0TnkpO82I20r445Eob0OTwA1gLfXwD9gZGXd3RUKnP+yE89+
+         Qnzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702391099; x=1702995899;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=wT+VDqG3XoXgaVhq1uWAJL5Mh+pcqg7vqqy6t8enn7o=;
-        b=oWXc5Xy7R7YIjYyGM7L1c9mc++s0cR8bwN2DY5YQrgnGm0mVKhoKUp8iXRA+BiRUnN
-         3AiSQSW9EzwXUkE5xrw+3Ypxa5x1RkQxXIUjXuosgSo6xgzvkatl6tTbe+MXoDZqpE/T
-         YJ41z+/IpfWdw1kTMsFoXjMmOsKQXl5aGoeL/l/1p82ZyDwYza8+CJX2qpaiWtxBjIXo
-         /ixivpxdGU9ScZlOxDlidxyjM+0G6hvsKQFLok6fo6ouLzI3qY/6X4ZKnv2U1dVWhzo3
-         ol2WlHHwalaRzqdFDnd5RhMXqIrM1Et8r6xGgagupwcGoGswUl1s6vTLcrOkDu6RMK9R
-         cUcA==
-X-Gm-Message-State: AOJu0YzFXGR/2hfXej3Md77ILfhMph/pmEYrVzQHyqlrqAN5ahU1Q6Ga
-	8FzKXtHg4su5VP2Air0z7tE=
-X-Google-Smtp-Source: AGHT+IGH51NOBoO6nuzdx+4kZ9NNmSPNiBfBdJrzPHJq7wSmapSwkjPSMN4nDURa6XRgJ8ySn9n0Sw==
-X-Received: by 2002:a7b:cbcb:0:b0:40c:34f9:6c14 with SMTP id n11-20020a7bcbcb000000b0040c34f96c14mr2372738wmi.161.1702391098474;
-        Tue, 12 Dec 2023 06:24:58 -0800 (PST)
-Received: from ?IPv6:2003:f6:ef1b:2000:944c:cbc7:1e1c:2c47? (p200300f6ef1b2000944ccbc71e1c2c47.dip0.t-ipconnect.de. [2003:f6:ef1b:2000:944c:cbc7:1e1c:2c47])
-        by smtp.gmail.com with ESMTPSA id v6-20020a05600c444600b0040c4886f254sm6920056wmn.13.2023.12.12.06.24.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Dec 2023 06:24:58 -0800 (PST)
-Message-ID: <d190620900ceda6c2846f3828ee389da917a66e0.camel@gmail.com>
-Subject: Re: [PATCH v3 2/2] hwmon: ltc4282: add support for the LTC4282 chip
-From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
-To: Guenter Roeck <linux@roeck-us.net>, nuno.sa@analog.com
-Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-doc@vger.kernel.org, Jean Delvare <jdelvare@suse.com>, Rob Herring
- <robh+dt@kernel.org>, Krzysztof Kozlowski
- <krzysztof.kozlowski+dt@linaro.org>,  Conor Dooley <conor+dt@kernel.org>,
- Jonathan Corbet <corbet@lwn.net>
-Date: Tue, 12 Dec 2023 15:28:02 +0100
-In-Reply-To: <a0eb6cb4-b8af-4a6f-8888-fa18f8f1d188@roeck-us.net>
-References: <20231205-ltc4282-support-v3-0-e0877b281bc2@analog.com>
-	 <20231205-ltc4282-support-v3-2-e0877b281bc2@analog.com>
-	 <a0eb6cb4-b8af-4a6f-8888-fa18f8f1d188@roeck-us.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.2 
+        d=1e100.net; s=20230601; t=1702391351; x=1702996151;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HvAfEdNnHNunYaoKLrlK4WhMdfvO73bGHd2FtWgeUYg=;
+        b=PHFLBJnp1uKz2PCo7bVHwI8y7SJztWWdYPbTGR061ZHg2LI/xMSOQgH5AkC0eXYEBg
+         hNenF+69L9k1uA+6/ev+D6JG7puuw8z7qiRtw26Aw10wUsxkwuVJ8MCt8zVGQ5uo7N2D
+         Ypz1BT+w80DIIghedaZ7Tc8wVSTItnYVcDRyQHb/KVUMO9WDE/3QOLXOCsvMKmwMjEvf
+         71Ug4v7rUIuGGvAY/BdWE1scEXD/ur1BeZKsfR7lZm1jw+y+0SMM7F/tXBObXOE03oZd
+         yXe4VDxaselggohkzGy/BNzv9Jzwzms9YspJpw2T8I50/MpAloJMYXS1ZZ/J0hdqNr+I
+         rrKQ==
+X-Gm-Message-State: AOJu0Ywx0smsobTK54Gsu5Cnf0wvB+SkMnYZLRq8pUAIaAu2E2QF1abc
+	zJV0nC910MEDXr8NN8o1C2Xf2XipQSLvhXlCgTPKeA==
+X-Google-Smtp-Source: AGHT+IHSSUddnH7vqmzYJHu7RfzxRhATVPO/EOnWlyPQFn5qUGh1DJZKHNEoTOcGQjr2tdWtG+uz+GEsaHrcS6BiK4g=
+X-Received: by 2002:a17:907:7e94:b0:a18:c553:21cb with SMTP id
+ qb20-20020a1709077e9400b00a18c55321cbmr3011891ejc.19.1702391350542; Tue, 12
+ Dec 2023 06:29:10 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+References: <20231208005250.2910004-1-almasrymina@google.com>
+ <20231208005250.2910004-10-almasrymina@google.com> <32211cbf-3a4e-8a86-6214-4304ddb18a98@huawei.com>
+ <CAHS8izOQcuLPwvDff96fuNB7r6EU9OWt3ShueQp=u7wat3L5LA@mail.gmail.com>
+ <92e30bd9-6df4-b72f-7bcd-f4fe5670eba2@huawei.com> <CAHS8izPEFsqw50qgM+sPot6XVvOExpd+DrwrmPSR3zsWGLysRw@mail.gmail.com>
+ <CAHS8izN6Cbjy0FCYhJyNsP396XfgJ_nTFXWuHb5QWNct=PifAg@mail.gmail.com>
+ <59e07233-24cb-7fb2-1aee-e1cf7eb72fa9@huawei.com> <CAHS8izMdpo0D7GYzMkOtg1ueCODAVNxtwSP_qPseSYXNMhPGCw@mail.gmail.com>
+ <2cdf173c-95e4-2141-56f7-0761705cd737@huawei.com>
+In-Reply-To: <2cdf173c-95e4-2141-56f7-0761705cd737@huawei.com>
+From: Mina Almasry <almasrymina@google.com>
+Date: Tue, 12 Dec 2023 06:28:58 -0800
+Message-ID: <CAHS8izOTdqqbS6ajAo+c646UwXkK-aB8ET9uJRS6Auszfi0nfA@mail.gmail.com>
+Subject: Re: [net-next v1 09/16] page_pool: device memory support
+To: Yunsheng Lin <linyunsheng@huawei.com>
+Cc: Shailend Chand <shailend@google.com>, netdev@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	bpf@vger.kernel.org, linux-media@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, "David S. Miller" <davem@davemloft.net>, 
+	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Jeroen de Borst <jeroendb@google.com>, 
+	Praveen Kaligineedi <pkaligineedi@google.com>, Jesper Dangaard Brouer <hawk@kernel.org>, 
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>, Arnd Bergmann <arnd@arndb.de>, 
+	David Ahern <dsahern@kernel.org>, Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
+	Shuah Khan <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, 
+	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+	Harshitha Ramamurthy <hramamurthy@google.com>, Shakeel Butt <shakeelb@google.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2023-12-11 at 07:36 -0800, Guenter Roeck wrote:
-> On Tue, Dec 05, 2023 at 04:22:56PM +0100, Nuno Sa via B4 Relay wrote:
-> > From: Nuno Sa <nuno.sa@analog.com>
-> >=20
-> > The LTC4282 hot swap controller allows a board to be safely inserted an=
-d
-> > removed from a live backplane. Using one or more external N-channel pas=
-s
-> > transistors, board supply voltage and inrush current are ramped up at a=
+On Tue, Dec 12, 2023 at 3:17=E2=80=AFAM Yunsheng Lin <linyunsheng@huawei.co=
+m> wrote:
+>
+> On 2023/12/12 2:14, Mina Almasry wrote:
+> > On Mon, Dec 11, 2023 at 3:51=E2=80=AFAM Yunsheng Lin <linyunsheng@huawe=
+i.com> wrote:
+> >>
+> >> On 2023/12/11 12:04, Mina Almasry wrote:
+> >>> On Sun, Dec 10, 2023 at 6:26=E2=80=AFPM Mina Almasry <almasrymina@goo=
+gle.com> wrote:
+> >>>>
+> >>>> On Sun, Dec 10, 2023 at 6:04=E2=80=AFPM Yunsheng Lin <linyunsheng@hu=
+awei.com> wrote:
+> >>>>>
+> >>>>> On 2023/12/9 0:05, Mina Almasry wrote:
+> >>>>>> On Fri, Dec 8, 2023 at 1:30=E2=80=AFAM Yunsheng Lin <linyunsheng@h=
+uawei.com> wrote:
+> >>>>>>>
+> >>>>>>>
+> >>>>>>> As mentioned before, it seems we need to have the above checking =
+every
+> >>>>>>> time we need to do some per-page handling in page_pool core, is t=
+here
+> >>>>>>> a plan in your mind how to remove those kind of checking in the f=
+uture?
+> >>>>>>>
+> >>>>>>
+> >>>>>> I see 2 ways to remove the checking, both infeasible:
+> >>>>>>
+> >>>>>> 1. Allocate a wrapper struct that pulls out all the fields the pag=
+e pool needs:
+> >>>>>>
+> >>>>>> struct netmem {
+> >>>>>>         /* common fields */
+> >>>>>>         refcount_t refcount;
+> >>>>>>         bool is_pfmemalloc;
+> >>>>>>         int nid;
+> >>>>>>         ...
+> >>>>>>         union {
+> >>>>>>                 struct dmabuf_genpool_chunk_owner *owner;
+> >>>>>>                 struct page * page;
+> >>>>>>         };
+> >>>>>> };
+> >>>>>>
+> >>>>>> The page pool can then not care if the underlying memory is iov or
+> >>>>>> page. However this introduces significant memory bloat as this str=
+uct
+> >>>>>> needs to be allocated for each page or ppiov, which I imagine is n=
+ot
+> >>>>>> acceptable for the upside of removing a few static_branch'd if
+> >>>>>> statements with no performance cost.
+> >>>>>>
+> >>>>>> 2. Create a unified struct for page and dmabuf memory, which the m=
+m
+> >>>>>> folks have repeatedly nacked, and I imagine will repeatedly nack i=
 n
-> > adjustable rate. An I2C interface and onboard ADC allows for monitoring
-> > of board current, voltage, power, energy and fault status.
-> >=20
-> > Signed-off-by: Nuno Sa <nuno.sa@analog.com>
-> > ---
-> > +
->=20
-> > +power1_good		Power considered good
->=20
-> I really don't like this attribute. Like the ones below it is non-standar=
+> >>>>>> the future.
+> >>>>>>
+> >>>>>> So I imagine the special handling of ppiov in some form is critica=
+l
+> >>>>>> and the checking may not be removable.
+> >>>>>
+> >>>>> If the above is true, perhaps devmem is not really supposed to be i=
+ntergated
+> >>>>> into page_pool.
+> >>>>>
+> >>>>> Adding a checking for every per-page handling in page_pool core is =
+just too
+> >>>>> hacky to be really considerred a longterm solution.
+> >>>>>
+> >>>>
+> >>>> The only other option is to implement another page_pool for ppiov an=
 d
-> and invisible for standard applications. On top of that, I think it isn't
-> really related to "power" but to the output voltage. What does it actuall=
-y
-> report that isn't included in the FET faults ?
->=20
-
-This is detected with the FB pin and a voltage divider (from the output
-voltage). Basically depending on the level of that pin, the chip indicate p=
-ower
-good or power bad. I was also very reluctant with this attribute (I mention=
- it
-in the v1 cover). This might not even indicate any misbehave. We also suppo=
-rt
-reporting this using the gpio1 pin (if we set it that way). So, I guess I c=
-an
-just drop this one and add support for it if we ever have a real usecase wh=
-ere I
-can actually justify having it :).
-
-We already have the power_bad fault log in debugfs so I'm not sure if addin=
-g
-this one there adds much value.
-
->=20
-> > +fet_short_fault		FET short alarm
-> > +fet_bad_fault		FET bad alarm
->=20
-> Those attributes have little value since they are not standard attributes
-> and won't be seen by standard applications. On top of that, it is not cle=
-ar
-> (not documented) what the attribute actually reports. I assume it is
-> associated with the output voltage, i.e., in0, but that is just an
-> assumption.
->=20
-
-fet_short - This is one is detected if the ADC measures a current sense vol=
-tage
-> 0.25mv while the fet gate is off.
-
-fet_bad - Is set by monitoring the voltage at the gate and the drain to sou=
-rce
-voltage.
-
-These ones might indicate real issues with the HW so I thought they could b=
+> >>>> have the driver create page_pool or ppiov_pool depending on the stat=
 e
-important...
-=20
-> What do you think about introducing a standard inX_fault attribute ?
-> It would not be as specific as short/bad, but I think it would be more
-> useful and we could add it to the ABI.
->=20
-
-It would be better than nothing. And we do have fault logs for both these
-failures so userspace could also use that to know exactly what was the issu=
-e. If
-that's ok with you, I would then report this in inX_fault? Did you had in m=
-ind
-putting this in in0 (vsource) or adding a new channel?
-
-In my first draft I had another voltage channel (label: VFET) to report the
-fet_bad condition. I was using the inX_crit or inX_lcrit but it felt bad so=
+> >>>> of the netdev_rx_queue (or some helper in the net stack to do that f=
+or
+> >>>> the driver). This introduces some code duplication. The ppiov_pool &
+> >>>> page_pool would look similar in implementation.
+> >>
+> >> I think there is a design pattern already to deal with this kind of pr=
+oblem,
+> >> refactoring common code used by both page_pool and ppiov into a librar=
+y to
+> >> aovid code duplication if most of them have similar implementation.
+> >>
+> >
+> > Code can be refactored if it's identical, not if it is similar. I
+>
+> Similarity indicates an opportunity to the refactor out the common
+> code, like the page_frag case below:
+> https://patchwork.kernel.org/project/netdevbpf/cover/20231205113444.63015=
+-1-linyunsheng@huawei.com/
+>
+> But untill we do a proof of concept implemention, it is hard to tell if
+> it is feasiable or not.
+>
+> > suspect the page_pools will be only similar, and if you're not willing
+> > to take devmem handling into the page pool then refactoring page_pool
+> > code into helpers that do devmem handling may also not be an option.
+> >
+> >>>>
+> >>>> But this was all discussed in detail in RFC v2 and the last response=
  I
-removed it...
+> >>>> heard from Jesper was in favor if this approach, if I understand
+> >>>> correctly:
+> >>>>
+> >>>> https://lore.kernel.org/netdev/7aedc5d5-0daf-63be-21bc-3b724cc1cab9@=
+redhat.com/
+> >>>>
+> >>>> Would love to have the maintainer weigh in here.
+> >>>>
+> >>>
+> >>> I should note we may be able to remove some of the checking, but mayb=
+e not all.
+> >>>
+> >>> - Checks that disable page fragging for ppiov can be removed once
+> >>> ppiov has frag support (in this series or follow up).
+> >>>
+> >>> - If we use page->pp_frag_count (or page->pp_ref_count) for
+> >>> refcounting ppiov, we can remove the if checking in the refcounting.
+> >>>
+> >
+> > I'm not sure this is actually possible in the short term. The
+> > page_pool uses both page->_refcount and page->pp_frag_count for
+> > refcounting, and I will not be able to remove the special handling
+> > around page->_refcount as i'm not allowed to call page_ref_*() APIs on
+> > a non-struct page.
+>
+> the page_ref_*() API may be avoided using the below patch:
+> https://patchwork.kernel.org/project/netdevbpf/patch/20231113130041.58124=
+-7-linyunsheng@huawei.com/
+>
 
-> > +fault_logs_reset	Clears all the Logged Faults
+Even after the patch above, you're still calling page_ref_count() in
+the page_pool to check for recycling, so after that patch you're still
+using page->_refcount.
 
-> What exactly does that do that is user visible ?
+> But I am not sure how to do that for tx part if devmem for tx is not
+> intergating into page_pool, that is why I suggest having a tx implementat=
+ion
+> for the next version, so that we can have a whole picture of devmem.
+>
 
-Well, this one is because in some configurations the chip won't enable the
-output load until you reset/clear the fault log keeping it from enabling th=
-e
-output.=C2=A0This is the comment I have in the code:
+I strongly prefer to keep the TX implementation in a separate series.
+This series is complicated to implement and review as it is, and is
+hitting the 15 patch limit anyway.
 
-"Fault log failures. These faults might be important in systems where auto-=
-retry
-is not enabled since they will cause the part to latch off until they are
-cleared. Typically that happens when the system admin is close enough so he=
- can
-check what happened and manually clear the faults. Moreover, manually clear=
-ing
-the faults might only matter when ON_FAULT_MASK in the CONTROL register is =
-set
-(which is the default) as in that case, a turn off signal from the ON pin w=
-on't
-clear them."
+> >
+> >>> - We may be able to store the dma_addr of the ppiov in page->dma_addr=
+,
+> >>> but I'm unsure if that actually works, because the dma_buf dmaddr is
+> >>> dma_addr_t (u32 or u64), but page->dma_addr is unsigned long (4 bytes
+> >>> I think). But if it works for pages I may be able to make it work for
+> >>> ppiov as well.
+> >>>
+> >>> - Checks that obtain the page->pp can work with ppiov if we align the
+> >>> offset of page->pp and ppiov->pp.
+> >>>
+> >>> - Checks around page->pp_magic can be removed if we also have offset
+> >>> aligned ppiov->pp_magic.
+> >>>
+> >>> Sadly I don't see us removing the checking for these other cases:
+> >>>
+> >>> - page_is_pfmemalloc(): I'm not allowed to pass a non-struct page int=
+o
+> >>> that helper.
+> >>
+> >> We can do similar trick like above as bit 1 of page->pp_magic is used =
+to
+> >> indicate that if it is a pfmemalloc page.
+> >>
+> >
+> > Likely yes.
+> >
+> >>>
+> >>> - page_to_nid(): I'm not allowed to pass a non-struct page into that =
+helper.
+> >>
+> >> Yes, this one need special case.
+> >>
+> >>>
+> >>> - page_pool_free_va(): ppiov have no va.
+> >>
+> >> Doesn't the skb_frags_readable() checking will protect the page_pool_f=
+ree_va()
+> >> from being called on devmem?
+> >>
+> >
+> > This function seems to be only called from veth which doesn't support
+> > devmem. I can remove the handling there.
+> >
+> >>>
+> >>> - page_pool_sync_for_dev/page_pool_dma_map: ppiov backed by dma-buf
+> >>> fundamentally can't get mapped again.
+> >>
+> >> Can we just fail the page_pool creation with PP_FLAG_DMA_MAP and
+> >> DMA_ATTR_SKIP_CPU_SYNC flags for devmem provider?
+> >>
+> >
+> > Jakub says PP_FLAG_DMA_MAP must be enabled for devmem, such that the
+> > page_pool handles the dma mapping of the devmem and the driver doesn't
+> > use it on its own.
+>
+> I am not sure what benefit does it bring by enabling the DMA_MAP for devm=
+em,
+> as devmem seems to call dma_buf_map_attachment() in netdev_bind_dmabuf(),=
+ it
+> does not really need enabling PP_FLAG_DMA_MAP to get the dma addr for the
+> devmem chunk.
 
-In v1 I was allowing to clear fauls log individually and you recommended to=
- have
-an attribute to clear them all at once as that would simplify things.=C2=A0
-
-I just kept it in here because this might be important for the chip to work=
- as
-expected again so having it in debugfs might be weird.
-
-Thanks!
-- Nuno S=C3=A1
-
-
+--=20
+Thanks,
+Mina
 
