@@ -1,134 +1,259 @@
-Return-Path: <linux-doc+bounces-4868-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-4870-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id C78B880FBA3
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Dec 2023 00:58:29 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id B3FB980FBC2
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Dec 2023 01:05:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id F04951C20CDF
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Dec 2023 23:58:28 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 430731F21AF6
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Dec 2023 00:05:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3214365A9B;
-	Tue, 12 Dec 2023 23:58:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C6568191;
+	Wed, 13 Dec 2023 00:05:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uXN29BNc"
+	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="JRKZgNVJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 147AB6472A
-	for <linux-doc@vger.kernel.org>; Tue, 12 Dec 2023 23:58:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89C4BC433CC
-	for <linux-doc@vger.kernel.org>; Tue, 12 Dec 2023 23:58:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1702425504;
-	bh=hPz99cd9ncMhdqhEOW52ymvh41nJ6piVW+kmsgXYUQw=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=uXN29BNc1wW3MHydt/a5ostC/bbsjV9exXkmVGhzvYs3RaWt1pypq/i80IgN7pNWp
-	 TtFL/mP+MUvAuLX++eFkZTYJF9o9dUT9N2eEH5UNwFAkHGvdIa18qmE3+uTS6Rw93i
-	 Vz7IbGdITYVBWtB2enE7Pb6OM8no+764vOz+N8z5fTHipSqjRVxeyx5bIYrNIfnhBo
-	 Gd9B6gXfyR32S0854xczVTAxjZO1j131Zi0ov2X/TO4r0AfDvWiKVPa9FH1a+BbFlw
-	 NV0bqdODbe5IPdiFeOhpAyoi1L4Df17OmL/51GfOaw6nOiOvcBFphD/6PqOcY/daLD
-	 +sezSRrJ/uDWw==
-Received: by mail-qk1-f173.google.com with SMTP id af79cd13be357-77f3c4914e5so336206885a.3
-        for <linux-doc@vger.kernel.org>; Tue, 12 Dec 2023 15:58:24 -0800 (PST)
-X-Gm-Message-State: AOJu0Yxg+BLqN/8y6BzoxIQekTOj8ywlXHrC87wrjGgHA/2Hi1/u+O+o
-	KiYAmesDFNiNZ0J0K6bX6FL4wfsersw06aUg6wdUiQ==
-X-Google-Smtp-Source: AGHT+IGOTnckQME+eVCsPSoeGOyMFBoqjkzOWlCwSBsc7t+BIufubWB0ct9OeR4xELFwTaEK+N63aLRDaYUgcs98klw=
-X-Received: by 2002:a05:6358:7296:b0:170:17ea:f4e4 with SMTP id
- w22-20020a056358729600b0017017eaf4e4mr8579237rwf.49.1702425483026; Tue, 12
- Dec 2023 15:58:03 -0800 (PST)
+Received: from smtp-fw-80006.amazon.com (smtp-fw-80006.amazon.com [99.78.197.217])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A6E1AB7;
+	Tue, 12 Dec 2023 16:05:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1702425911; x=1733961911;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=fB4jNKUlRe6N2loXV8PJj2wVQgaVapDNdKtj8FKjX38=;
+  b=JRKZgNVJUNYUti32279vCmCNyO2uZKI/zvxQWBcVxZo5csvR8D+dpDBB
+   BF1/Y2OdHlk5rUQrCb4DuGHDqQPtu29EHMVseAZGMZAdWMbn4CVNCilO1
+   NXPqDVBqkdgGIIFGK3GgEWxJ0EFE6KRUgBMrxzblM6sgD4Ga9WI7saqqz
+   E=;
+X-IronPort-AV: E=Sophos;i="6.04,271,1695686400"; 
+   d="scan'208";a="258636760"
+Received: from pdx4-co-svc-p1-lb2-vlan3.amazon.com (HELO email-inbound-relay-iad-1e-m6i4x-3e1fab07.us-east-1.amazon.com) ([10.25.36.214])
+  by smtp-border-fw-80006.pdx80.corp.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Dec 2023 00:05:07 +0000
+Received: from smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev (iad7-ws-svc-p70-lb3-vlan3.iad.amazon.com [10.32.235.38])
+	by email-inbound-relay-iad-1e-m6i4x-3e1fab07.us-east-1.amazon.com (Postfix) with ESMTPS id 2F16D80559;
+	Wed, 13 Dec 2023 00:04:58 +0000 (UTC)
+Received: from EX19MTAUWA002.ant.amazon.com [10.0.38.20:24714]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.33.64:2525] with esmtp (Farcaster)
+ id a315ff1a-1500-42c3-9aab-085b45d8541a; Wed, 13 Dec 2023 00:04:58 +0000 (UTC)
+X-Farcaster-Flow-ID: a315ff1a-1500-42c3-9aab-085b45d8541a
+Received: from EX19D020UWC004.ant.amazon.com (10.13.138.149) by
+ EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Wed, 13 Dec 2023 00:04:58 +0000
+Received: from dev-dsk-graf-1a-5ce218e4.eu-west-1.amazon.com (10.253.83.51) by
+ EX19D020UWC004.ant.amazon.com (10.13.138.149) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Wed, 13 Dec 2023 00:04:54 +0000
+From: Alexander Graf <graf@amazon.com>
+To: <linux-kernel@vger.kernel.org>
+CC: <linux-trace-kernel@vger.kernel.org>, <linux-mm@kvack.org>,
+	<devicetree@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+	<kexec@lists.infradead.org>, <linux-doc@vger.kernel.org>, <x86@kernel.org>,
+	Eric Biederman <ebiederm@xmission.com>, "H. Peter Anvin" <hpa@zytor.com>,
+	Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
+	"Rob Herring" <robh+dt@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+	"Andrew Morton" <akpm@linux-foundation.org>, Mark Rutland
+	<mark.rutland@arm.com>, "Tom Lendacky" <thomas.lendacky@amd.com>, Ashish
+ Kalra <ashish.kalra@amd.com>, James Gowans <jgowans@amazon.com>, Stanislav
+ Kinsburskii <skinsburskii@linux.microsoft.com>, <arnd@arndb.de>,
+	<pbonzini@redhat.com>, <madvenka@linux.microsoft.com>, Anthony Yznaga
+	<anthony.yznaga@oracle.com>, Usama Arif <usama.arif@bytedance.com>, David
+ Woodhouse <dwmw@amazon.co.uk>, Benjamin Herrenschmidt
+	<benh@kernel.crashing.org>
+Subject: [PATCH 00/15] kexec: Allow preservation of ftrace buffers
+Date: Wed, 13 Dec 2023 00:04:37 +0000
+Message-ID: <20231213000452.88295-1-graf@amazon.com>
+X-Mailer: git-send-email 2.40.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20231207192406.3809579-1-nphamcs@gmail.com> <CAF8kJuPEKWbr_1a-OzqrYKSPmuty==KhC2vbTPAmm9xcJHo4cg@mail.gmail.com>
- <CAKEwX=Oj0Rur8i9Oo7y2Py7svx-g11sEj3GKQfMVL62x=4hvdA@mail.gmail.com>
- <CAF8kJuNpnqTM5x1QmQ7h-FaRWVnHBdNGvGvB3txohSOmZhYA-Q@mail.gmail.com>
- <20231209034229.GA1001962@cmpxchg.org> <ZXeTb_ACou7TEVsa@google.com>
-In-Reply-To: <ZXeTb_ACou7TEVsa@google.com>
-From: Chris Li <chrisl@kernel.org>
-Date: Tue, 12 Dec 2023 15:57:51 -0800
-X-Gmail-Original-Message-ID: <CAF8kJuNzFcBRW=2CbgG=seA=CNgyzD8DNXNY02uy0HUsLbg9JQ@mail.gmail.com>
-Message-ID: <CAF8kJuNzFcBRW=2CbgG=seA=CNgyzD8DNXNY02uy0HUsLbg9JQ@mail.gmail.com>
-Subject: Re: [PATCH v6] zswap: memcontrol: implement zswap writeback disabling
-To: Minchan Kim <minchan@kernel.org>
-Cc: Johannes Weiner <hannes@cmpxchg.org>, Nhat Pham <nphamcs@gmail.com>, akpm@linux-foundation.org, 
-	tj@kernel.org, lizefan.x@bytedance.com, cerasuolodomenico@gmail.com, 
-	yosryahmed@google.com, sjenning@redhat.com, ddstreet@ieee.org, 
-	vitaly.wool@konsulko.com, mhocko@kernel.org, roman.gushchin@linux.dev, 
-	shakeelb@google.com, muchun.song@linux.dev, hughd@google.com, corbet@lwn.net, 
-	konrad.wilk@oracle.com, senozhatsky@chromium.org, rppt@kernel.org, 
-	linux-mm@kvack.org, kernel-team@meta.com, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, david@ixit.cz, Kairui Song <kasong@tencent.com>, 
-	Zhongkun He <hezhongkun.hzk@bytedance.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: EX19D031UWC001.ant.amazon.com (10.13.139.241) To
+ EX19D020UWC004.ant.amazon.com (10.13.138.149)
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Hi Minchan,
+Kexec today considers itself purely a boot loader: When we enter the new
+kernel, any state the previous kernel left behind is irrelevant and the
+new kernel reinitializes the system.
 
-On Mon, Dec 11, 2023 at 2:55=E2=80=AFPM Minchan Kim <minchan@kernel.org> wr=
-ote:
+However, there are use cases where this mode of operation is not what we
+actually want. In virtualization hosts for example, we want to use kexec
+to update the host kernel while virtual machine memory stays untouched.
+When we add device assignment to the mix, we also need to ensure that
+IOMMU and VFIO states are untouched. If we add PCIe peer to peer DMA, we
+need to do the same for the PCI subsystem. If we want to kexec while an
+SEV-SNP enabled virtual machine is running, we need to preserve the VM
+context pages and physical memory. See James' and my Linux Plumbers
+Conference 2023 presentation for details:
 
-> > > 3) Android has some fancy swap ideas led by those patches.
-> > > https://lore.kernel.org/linux-mm/20230710221659.2473460-1-minchan@ker=
-nel.org/
-> > > It got shot down due to removal of frontswap. But the usage case and
-> > > product requirement is there.
-> > > +Minchan
-> >
-> > This looks like an optimization for zram to bypass the block layer and
-> > hook directly into the swap code. Correct me if I'm wrong, but this
-> > doesn't appear to have anything to do with per-cgroup backend control.
->
-> Hi Johannes,
->
-> I haven't been following the thread closely, but I noticed the discussion
-> about potential use cases for zram with memcg.
->
-> One interesting idea I have is to implement a swap controller per cgroup.
-> This would allow us to tailor the zram swap behavior to the specific need=
-s of
-> different groups.
->
-> For example, Group A, which is sensitive to swap latency, could use zram =
-swap
-> with a fast compression setting, even if it sacrifices some compression r=
-atio.
-> This would prioritize quick access to swapped data, even if it takes up m=
-ore space.
->
-> On the other hand, Group B, which can tolerate higher swap latency, could=
- benefit
-> from a slower compression setting that achieves a higher compression rati=
-o.
-> This would maximize memory efficiency at the cost of slightly slower data=
- access.
+  https://lpc.events/event/17/contributions/1485/
 
-That is a very solid usage case. Thanks for sharing this swap backend
-usage story. It goes beyond my original memory.swap.teires idea as
-well.
+To start us on the journey to support all the use cases above, this
+patch implements basic infrastructure to allow hand over of kernel state
+across kexec (Kexec HandOver, aka KHO). As example target, we use ftrace:
+With this patch set applied, you can read ftrace records from the
+pre-kexec environment in your post-kexec one. This creates a very powerful
+debugging and performance analysis tool for kexec. It's also slightly
+easier to reason about than full blown VFIO state preservation.
 
-We can have some zram specific knobs to control what compression
-setting is using. Moving data between different compression settings
-would be an interesting topic. It might fit the swap.tiers usage model
-as well. I am just thinking it out loud. Maybe define different
-compression settings as different tiers and then allow the cgroup to
-enroll into one of the tiers list.
+== Alternatives ==
 
->
-> This approach could provide a more nuanced and flexible way to manage swa=
-p usage
-> within different cgroups.
->
+There are alternative approaches to (parts of) the problems above:
 
-That is again very wonderful insight.
+  * Memory Pools [1] - preallocated persistent memory region + allocator
+  * PRMEM [2] - resizable persistent memory regions with fixed metadata
+                pointer on the kernel command line + allocator
+  * Pkernfs [3] - preallocated file system for in-kernel data with fixed
+                  address location on the kernel command line
+  * PKRAM [4] - handover of user space pages using a fixed metadata page
+                specified via command line
 
-Thanks
+All of the approaches above fundamentally have the same problem: They
+require the administrator to explicitly carve out a physical memory
+location because they have no mechanism outside of the kernel command
+line to pass data (including memory reservations) between kexec'ing
+kernels.
 
-Chris
+KHO provides that base foundation. We will determine later whether we
+still need any of the approaches above for fast bulk memory handover of for
+example IOMMU page tables. But IMHO they would all be users of KHO, with
+KHO providing the foundational primitive to pass metadata and bulk memory
+reservations as well as provide easy versioning for data.
+
+== Documentation ==
+
+If people are happy with the approach in this patch set, I will write up
+conclusive documentation including schemas for the metadata as part of its
+next iteration. For now, here's a rudimentary overview:
+
+We introduce a metadata file that the kernels pass between each other. How
+they pass it is architecture specific. The file's format is a Flattened
+Device Tree (fdt) which has a generator and parser already included in
+Linux. When the root user enables KHO through /sys/kernel/kho/active, the
+kernel invokes callbacks to every driver that supports KHO to serialize
+its state. When the actual kexec happens, the fdt is part of the image
+set that we boot into. In addition, we keep a "scratch region" available
+for kexec: A physically contiguous memory region that is guaranteed to
+not have any memory that KHO would preserve.  The new kernel bootstraps
+itself using the scratch region and sets all handed over memory as in use.
+When drivers initialize that support KHO, they introspect the fdt and
+recover their state from it. This includes memory reservations, where the
+driver can either discard or claim reservations.
+
+== Limitations ==
+
+I currently only implemented file based kexec. The kernel interfaces
+in the patch set are already in place to support user space kexec as well,
+but I have not implemented it yet.
+
+== How to Use ==
+
+To use the code, please boot the kernel with the "kho_scratch=" command
+line parameter set: "kho_scratch=512M". KHO requires a scratch region.
+
+Make sure to fill ftrace with contents that you want to observe after
+kexec.  Then, before you invoke file based "kexec -l", activate KHO:
+
+  # echo 1 > /sys/kernel/kho/active
+  # kexec -l Image --initrd=initrd -s
+  # kexec -e
+
+The new kernel will boot up and contain the previous kernel's trace
+buffers in /sys/kernel/debug/tracing/trace.
+
+
+
+Alex
+
+[1] https://lore.kernel.org/all/169645773092.11424.7258549771090599226.stgit@skinsburskii./
+[2] https://lore.kernel.org/all/20231016233215.13090-1-madvenka@linux.microsoft.com/
+[3] https://lpc.events/event/17/contributions/1485/attachments/1296/2650/jgowans-preserving-across-kexec.pdf
+[4] https://lore.kernel.org/kexec/1682554137-13938-1-git-send-email-anthony.yznaga@oracle.com/
+
+
+Alexander Graf (15):
+  mm,memblock: Add support for scratch memory
+  memblock: Declare scratch memory as CMA
+  kexec: Add Kexec HandOver (KHO) generation helpers
+  kexec: Add KHO parsing support
+  kexec: Add KHO support to kexec file loads
+  arm64: Add KHO support
+  x86: Add KHO support
+  tracing: Introduce names for ring buffers
+  tracing: Introduce names for events
+  tracing: Introduce kho serialization
+  tracing: Add kho serialization of trace buffers
+  tracing: Recover trace buffers from kexec handover
+  tracing: Add kho serialization of trace events
+  tracing: Recover trace events from kexec handover
+  tracing: Add config option for kexec handover
+
+ Documentation/ABI/testing/sysfs-firmware-kho  |   9 +
+ Documentation/ABI/testing/sysfs-kernel-kho    |  53 ++
+ .../admin-guide/kernel-parameters.txt         |  10 +
+ MAINTAINERS                                   |   2 +
+ arch/arm64/Kconfig                            |  12 +
+ arch/arm64/kernel/setup.c                     |   2 +
+ arch/arm64/mm/init.c                          |   8 +
+ arch/x86/Kconfig                              |  12 +
+ arch/x86/boot/compressed/kaslr.c              |  55 ++
+ arch/x86/include/uapi/asm/bootparam.h         |  15 +-
+ arch/x86/kernel/e820.c                        |   9 +
+ arch/x86/kernel/kexec-bzimage64.c             |  39 ++
+ arch/x86/kernel/setup.c                       |  46 ++
+ arch/x86/mm/init_32.c                         |   7 +
+ arch/x86/mm/init_64.c                         |   7 +
+ drivers/of/fdt.c                              |  41 ++
+ drivers/of/kexec.c                            |  36 ++
+ include/linux/kexec.h                         |  56 ++
+ include/linux/memblock.h                      |  19 +
+ include/linux/ring_buffer.h                   |   9 +-
+ include/linux/trace_events.h                  |   1 +
+ include/trace/trace_events.h                  |   2 +
+ include/uapi/linux/kexec.h                    |   6 +
+ kernel/Makefile                               |   2 +
+ kernel/kexec_file.c                           |  41 ++
+ kernel/kexec_kho_in.c                         | 298 ++++++++++
+ kernel/kexec_kho_out.c                        | 526 ++++++++++++++++++
+ kernel/trace/Kconfig                          |  13 +
+ kernel/trace/blktrace.c                       |   1 +
+ kernel/trace/ring_buffer.c                    | 267 ++++++++-
+ kernel/trace/trace.c                          |  76 ++-
+ kernel/trace/trace_branch.c                   |   1 +
+ kernel/trace/trace_events.c                   |   3 +
+ kernel/trace/trace_functions_graph.c          |   4 +-
+ kernel/trace/trace_output.c                   | 106 +++-
+ kernel/trace/trace_output.h                   |   1 +
+ kernel/trace/trace_probe.c                    |   3 +
+ kernel/trace/trace_syscalls.c                 |  29 +
+ mm/Kconfig                                    |   4 +
+ mm/memblock.c                                 |  83 ++-
+ 40 files changed, 1901 insertions(+), 13 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-firmware-kho
+ create mode 100644 Documentation/ABI/testing/sysfs-kernel-kho
+ create mode 100644 kernel/kexec_kho_in.c
+ create mode 100644 kernel/kexec_kho_out.c
+
+-- 
+2.40.1
+
+
+
+
+Amazon Development Center Germany GmbH
+Krausenstr. 38
+10117 Berlin
+Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
+Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
+Sitz: Berlin
+Ust-ID: DE 289 237 879
+
+
+
 
