@@ -1,180 +1,144 @@
-Return-Path: <linux-doc+bounces-5145-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5147-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEC45813B32
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 21:03:38 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id DC713813B45
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 21:08:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 81A792813D0
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 20:03:37 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5B9111F224CE
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 20:08:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E7826A02A;
-	Thu, 14 Dec 2023 20:03:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9C516A34A;
+	Thu, 14 Dec 2023 20:08:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="DcctqYnl"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="k85baBYP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.93])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA6056A011
-	for <linux-doc@vger.kernel.org>; Thu, 14 Dec 2023 20:03:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-33621d443a7so4821364f8f.3
-        for <linux-doc@vger.kernel.org>; Thu, 14 Dec 2023 12:03:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1702584207; x=1703189007; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3t3FbK18GrHFwKE4zIkpGcLL7FiHaNow8xNq3R4/QdI=;
-        b=DcctqYnloBXyzr6/icFJ5nrbeI/fwc45lTK7zT/zDqs/kq2mNANjqfq2WI1CPbOIkl
-         3zpygJURz7qkPfte+tjx80A6gdM+O1FTYI2VvL7SuLYcjzd7H6DpQfdwmDLV9+nXMrPb
-         7dTw0mVB00N20UiuwNWRNzFDHCuBoP+J6TIeAJfZc3sS1MAXMzL9Z0GoRoatm7TLOu8j
-         8ZZNvlX+vs9HJuG2Y82vknoMM3anREwfsFsat4CTGetqMhnBOOAiPMlJfT5NqSfpdkqn
-         3Qd8clBnVZm39r28lU0UGMK8yIuIf8HPnzkmKCt9BujWkP4WutaWkmQdw0Vrw4Oq2nII
-         J76Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702584207; x=1703189007;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3t3FbK18GrHFwKE4zIkpGcLL7FiHaNow8xNq3R4/QdI=;
-        b=Y3EOUahWwEv128AJXQBmzC5QySrVRD5cdZyqg7aX2wu7cvolgjb+dX4sDV8mjUnwPs
-         I/RTywWqQw3ixLHoI0mjObRHD5EarHsVUMIo/Jue9EZKXSZKmF+vO0bREc7lDbZpOrHQ
-         br6SVFex/O526GWbIt2nxDLS/7Qc6JcJ7JdSZaHVK2pHt4dlnsUHzZEwJbgEKxJW0KLw
-         yBCTYpT3gzaFyQYZI3kTOpJHkjqv36+MA2mA/8e/P6oJNG5UZoAmZqNVMBbMdW+Zwwbr
-         beM/2dyFoQLY35AZ+sBM4chMl9VKQlJdrDS1Y0t2/f4cB2ae3eChmi/wzy2o+bECO+YV
-         g/wQ==
-X-Gm-Message-State: AOJu0YyP83YUYmNSiXP2W+Vtb2SBdEchiOBkdYCuSYhMrclOGpT15d0X
-	LYCJerbVhCdgd5vdS29PfvNuRo1m6k8QdR2GCMND6w==
-X-Google-Smtp-Source: AGHT+IFJxGuMnKvxp55N7GC1tz5/h738b4XoM+FeA8fRtBht8xQJ/kBDFL2qAi3ZYkZt7idruFgudyPvdRKWDedOoVg=
-X-Received: by 2002:a05:600c:2313:b0:40c:3e43:4183 with SMTP id
- 19-20020a05600c231300b0040c3e434183mr4682976wmo.5.1702584207011; Thu, 14 Dec
- 2023 12:03:27 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8978B6A32A;
+	Thu, 14 Dec 2023 20:08:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1702584500; x=1734120500;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=nQZaAPlzIhWS5ZONexlJhNtWCCnMIrfTLdkPryy2dwY=;
+  b=k85baBYPGxpVuhmnbc8/5NdROhfAh1sWpBqb0FtgN3N+KS3fdkKqb991
+   68kJibc1IlRfzvNi3m5giDxsuQf05NgUypTMEirMc762sniQHM2MQgrCi
+   wnYlUPMRUWThPg8vPpXbV44zShYDy5z4R6QoFURNdiwkNnEqk0pYtmT4o
+   UGEYjjH9XwNgBSVL/DsiuEG83xbIF1vZTYjmbHd9MYJUtkrxrhAcEoIX+
+   1oekGYMNIpZuhOpReeMwx8PrB67V1PGa1Vwkhim+O5jCPVKEmdPTHRBWG
+   HAq6JS4x5fiJFo5LapP8k0jDaQbpyzbJqFbJ+eXjzdyz+ACsq3uTXF4eP
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10924"; a="392356795"
+X-IronPort-AV: E=Sophos;i="6.04,276,1695711600"; 
+   d="scan'208";a="392356795"
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Dec 2023 12:08:18 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10924"; a="778009672"
+X-IronPort-AV: E=Sophos;i="6.04,276,1695711600"; 
+   d="scan'208";a="778009672"
+Received: from lkp-server02.sh.intel.com (HELO b07ab15da5fe) ([10.239.97.151])
+  by fmsmga007.fm.intel.com with ESMTP; 14 Dec 2023 12:08:11 -0800
+Received: from kbuild by b07ab15da5fe with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1rDs09-000MZC-2A;
+	Thu, 14 Dec 2023 20:08:09 +0000
+Date: Fri, 15 Dec 2023 04:07:44 +0800
+From: kernel test robot <lkp@intel.com>
+To: Gregory Price <gourry.memverge@gmail.com>, linux-mm@kvack.org
+Cc: oe-kbuild-all@lists.linux.dev, linux-doc@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-api@vger.kernel.org, x86@kernel.org,
+	akpm@linux-foundation.org, arnd@arndb.de, tglx@linutronix.de,
+	luto@kernel.org, mingo@redhat.com, bp@alien8.de,
+	dave.hansen@linux.intel.com, hpa@zytor.com, mhocko@kernel.org,
+	tj@kernel.org, ying.huang@intel.com, gregory.price@memverge.com,
+	corbet@lwn.net, rakie.kim@sk.com, hyeongtak.ji@sk.com,
+	honggyu.kim@sk.com, vtavarespetr@micron.com, peterz@infradead.org,
+	jgroves@micron.com, ravis.opensrc@micron.com, sthanneeru@micron.com,
+	emirakhur@micron.com, Hasan.Maruf@amd.com, seungjun.ha@samsung.com
+Subject: Re: [PATCH v3 08/11] mm/mempolicy: add set_mempolicy2 syscall
+Message-ID: <202312150311.RPwbE1sK-lkp@intel.com>
+References: <20231213224118.1949-9-gregory.price@memverge.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20231208005250.2910004-1-almasrymina@google.com>
- <20231208005250.2910004-9-almasrymina@google.com> <b07a4eca-0c3d-4620-9f97-b1d2c76642c2@gmail.com>
- <CAHS8izNVFx6oHoo7y86P8Di9VCVe8A_n_9UZFkg5Wnt=A=YcNQ@mail.gmail.com>
- <b1aea7bc-9627-499a-9bee-d2cc07856978@gmail.com> <CAHS8izPry13h49v+PqrmWSREZKZjYpPesxUTyPQy7AGyFwzo4g@mail.gmail.com>
- <661c1bae-d7d3-457e-b545-5f67b9ef4197@gmail.com>
-In-Reply-To: <661c1bae-d7d3-457e-b545-5f67b9ef4197@gmail.com>
-From: Mina Almasry <almasrymina@google.com>
-Date: Thu, 14 Dec 2023 12:03:15 -0800
-Message-ID: <CAHS8izOY9xm=LBEN8sYwEa3aFB4GWDvJVacom3o4mHZPdHzTUg@mail.gmail.com>
-Subject: Re: [net-next v1 08/16] memory-provider: dmabuf devmem memory provider
-To: Pavel Begunkov <asml.silence@gmail.com>
-Cc: Shailend Chand <shailend@google.com>, netdev@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	bpf@vger.kernel.org, linux-media@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Jeroen de Borst <jeroendb@google.com>, 
-	Praveen Kaligineedi <pkaligineedi@google.com>, Jesper Dangaard Brouer <hawk@kernel.org>, 
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>, Arnd Bergmann <arnd@arndb.de>, 
-	David Ahern <dsahern@kernel.org>, Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
-	Shuah Khan <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, 
-	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
-	Yunsheng Lin <linyunsheng@huawei.com>, Harshitha Ramamurthy <hramamurthy@google.com>, 
-	Shakeel Butt <shakeelb@google.com>, Willem de Bruijn <willemb@google.com>, 
-	Kaiyuan Zhang <kaiyuanz@google.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231213224118.1949-9-gregory.price@memverge.com>
 
-On Mon, Dec 11, 2023 at 12:37=E2=80=AFPM Pavel Begunkov <asml.silence@gmail=
-.com> wrote:
-...
-> >> If you remove the branch, let it fall into ->release and rely
-> >> on refcounting there, then the callback could also fix up
-> >> release_cnt or ask pp to do it, like in the patch I linked above
-> >>
-> >
-> > Sadly I don't think this is possible due to the reasons I mention in
-> > the commit message of that patch. Prematurely releasing ppiov and not
-> > having them be candidates for recycling shows me a 4-5x degradation in
-> > performance.
->
-> I don't think I follow. The concept is to only recycle a buffer (i.e.
-> make it available for allocation) when its refs drop to zero, which is
-> IMHO the only way it can work, and IIUC what this patchset is doing.
->
-> That's also I suggest to do, but through a slightly different path.
-> Let's say at some moment there are 2 refs (e.g. 1 for an skb and
-> 1 for userspace/xarray).
->
-> Say it first puts the skb:
->
-> napi_pp_put_page()
->    -> page_pool_return_page()
->      -> mp_ops->release_page()
->         -> need_to_free =3D put_buf()
->            // not last ref, need_to_free=3D=3Dfalse,
->            // don't recycle, don't increase release_cnt
->
-> Then you put the last ref:
->
-> page_pool_iov_put_many()
->    -> page_pool_return_page()
->      -> mp_ops->release_page()
->         -> need_to_free =3D put_buf()
->            // last ref, need_to_free=3D=3Dtrue,
->            // recycle and release_cnt++
->
-> And that last put can even be recycled right into the
-> pp / ptr_ring, in which case it doesn't need to touch
-> release_cnt. Does it make sense? I don't see where
-> 4-5x degradation would come from
->
->
+Hi Gregory,
 
-Sorry for the late reply, I have been working on this locally.
+kernel test robot noticed the following build errors:
 
-What you're saying makes sense, and I'm no longer sure why I was
-seeing a perf degradation without '[net-next v1 10/16] page_pool:
-don't release iov on elevanted refcount'. However, even though what
-you're saying is technically correct, AFAIU it's actually semantically
-wrong. When a page is released by the page_pool, we should call
-page_pool_clear_pp_info() and completely disconnect the page from the
-pool. If we call release_page() on a page and then the page pool sees
-it again in page_pool_return_page(), I think that is considered a bug.
-In fact I think what you're proposing is as a result of a bug because
-we don't call a page_pool_clear_pp_info() equivalent on releasing
-ppiov.
+[auto build test ERROR on akpm-mm/mm-everything]
+[also build test ERROR on deller-parisc/for-next powerpc/next powerpc/fixes s390/features jcmvbkbc-xtensa/xtensa-for-next arnd-asm-generic/master linus/master v6.7-rc5]
+[cannot apply to geert-m68k/for-next geert-m68k/for-linus tip/x86/asm next-20231214]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-However, I'm reasonably confident I figured out the right thing to do
-here. The page_pool uses page->pp_frag_count for its refcounting.
-pp_frag_count is a misnomer, it's being renamed to pp_ref_count in
-Liang's series[1]). In this series I used a get_page/put_page
-equivalent for refcounting. Once I transitioned to using
-pp_[frag|ref]_count for refcounting inside the page_pool, the issue
-went away, and I no longer need the patch 'page_pool: don't release
-iov on elevanted refcount'.
+url:    https://github.com/intel-lab-lkp/linux/commits/Gregory-Price/mm-mempolicy-implement-the-sysfs-based-weighted_interleave-interface/20231214-064236
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-everything
+patch link:    https://lore.kernel.org/r/20231213224118.1949-9-gregory.price%40memverge.com
+patch subject: [PATCH v3 08/11] mm/mempolicy: add set_mempolicy2 syscall
+config: um-randconfig-002-20231214 (https://download.01.org/0day-ci/archive/20231215/202312150311.RPwbE1sK-lkp@intel.com/config)
+compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231215/202312150311.RPwbE1sK-lkp@intel.com/reproduce)
 
-There is an additional upside, since pages and ppiovs are both being
-refcounted using pp_[frag|ref]_count, we get some unified handling for
-ppiov and we reduce the checks around ppiov. This should be fixed
-properly in the next series.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202312150311.RPwbE1sK-lkp@intel.com/
 
-I still need to do some work (~1 week) before I upload the next
-version as there is a new requirement from MM that we transition to a
-new type and not re-use page*, but I uploaded my changes github with
-the refcounting issues resolved in case they're useful to you. Sorry
-for the churn:
+All errors (new ones prefixed by >>):
 
-https://github.com/mina/linux/commits/tcpdevmem-v1.5/
+   /usr/bin/ld: arch/um/drivers/pcap.o: in function `dbus_write':
+   pcap-dbus.o:(.text+0x2432f): undefined reference to `dbus_message_demarshal'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24345): undefined reference to `dbus_connection_send'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x2434e): undefined reference to `dbus_connection_flush'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24356): undefined reference to `dbus_message_unref'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x243a4): undefined reference to `dbus_error_free'
+   /usr/bin/ld: arch/um/drivers/pcap.o: in function `dbus_read':
+   pcap-dbus.o:(.text+0x243f0): undefined reference to `dbus_connection_pop_message'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24412): undefined reference to `dbus_connection_pop_message'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24428): undefined reference to `dbus_connection_read_write'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24492): undefined reference to `dbus_message_is_signal'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x244ae): undefined reference to `dbus_message_marshal'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24516): undefined reference to `dbus_free'
+   /usr/bin/ld: arch/um/drivers/pcap.o: in function `dbus_cleanup':
+   pcap-dbus.o:(.text+0x2457c): undefined reference to `dbus_connection_unref'
+   /usr/bin/ld: arch/um/drivers/pcap.o: in function `dbus_activate':
+   pcap-dbus.o:(.text+0x24626): undefined reference to `dbus_connection_open'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x2463e): undefined reference to `dbus_bus_register'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x2472c): undefined reference to `dbus_bus_add_match'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24734): undefined reference to `dbus_error_is_set'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x2477b): undefined reference to `dbus_bus_get'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x247ac): undefined reference to `dbus_error_free'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x247bd): undefined reference to `dbus_bus_add_match'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x247c5): undefined reference to `dbus_error_is_set'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x247fe): undefined reference to `dbus_error_free'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x2480a): undefined reference to `dbus_connection_unref'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24836): undefined reference to `dbus_bus_get'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24872): undefined reference to `dbus_error_free'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24885): undefined reference to `dbus_connection_set_max_received_size'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x24896): undefined reference to `dbus_connection_unref'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x2490c): undefined reference to `dbus_error_free'
+   /usr/bin/ld: pcap-dbus.o:(.text+0x2494a): undefined reference to `dbus_error_free'
+>> /usr/bin/ld: arch/x86/um/sys_call_table_64.o:(.rodata+0xe48): undefined reference to `sys_set_mempolicy2'
+   collect2: error: ld returned 1 exit status
 
-[1] https://patchwork.kernel.org/project/netdevbpf/list/?series=3D809049&st=
-ate=3D*
-
---=20
-Thanks,
-Mina
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
