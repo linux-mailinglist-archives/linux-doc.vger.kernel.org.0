@@ -1,201 +1,531 @@
-Return-Path: <linux-doc+bounces-5094-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5096-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F6918132E7
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 15:20:55 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8141881334D
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 15:37:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B9847281115
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 14:20:53 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id CEDC1B21961
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 14:37:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0686259E43;
-	Thu, 14 Dec 2023 14:20:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="mUxCldX1"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E13D25AB9E;
+	Thu, 14 Dec 2023 14:37:34 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 74ABBCF;
-	Thu, 14 Dec 2023 06:20:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:To:From:Subject:Message-ID:Sender:Reply-To:Cc:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=tfGsUvVpVImK0Oo30MgkCuIizORYDMLsmANa9k7lbnc=; b=mUxCldX154uCJ/8N1i0Pxkc+uW
-	Pa8TPMMxzEkp/+kgwmIKVJWR/l1puEROcthvi3xaSu1qH86wKjndYLo3gQjsIgAid2u8al4SKRaOa
-	k3BeBbWb/1tEFLEn86YEfA6Fufnl+rrQ5nlgeNXPwrG1FKO2YiQ/pKXGrxZ+t4XTIdrKqTnYAzwkO
-	vAJYKT2PjBvoxd5ua0uzfWL5zCx48UqcE+ztoAR2vKWR1yxycocu2KuiiQIK8tRl7wd9CoQfG2AvM
-	6heHvOZztET/05cmHsfGXi9PkrOgeQxEkq0Pv3fDrYGOuaRZ0JnpiBBU9dzVt81/0tLuFKptL7tOT
-	/X6Ddkow==;
-Received: from [2001:8b0:10b:5:d232:2f0e:461d:68c2] (helo=u3832b3a9db3152.ant.amazon.com)
-	by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
-	id 1rDmZf-007g33-B0; Thu, 14 Dec 2023 14:20:28 +0000
-Message-ID: <ad800a830dab3cdefc28e30aa0b59fa5b4ba0211.camel@infradead.org>
-Subject: Re: [PATCH v10 16/19] KVM: xen: split up kvm_xen_set_evtchn_fast()
-From: David Woodhouse <dwmw2@infradead.org>
-To: Paul Durrant <paul@xen.org>, Paolo Bonzini <pbonzini@redhat.com>, 
- Jonathan Corbet <corbet@lwn.net>, Sean Christopherson <seanjc@google.com>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, Shuah Khan
- <shuah@kernel.org>, kvm@vger.kernel.org,  linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org,  linux-kselftest@vger.kernel.org
-Date: Thu, 14 Dec 2023 14:20:27 +0000
-In-Reply-To: <e22e354305d853d72039c7e12b166410de3f63c9.camel@infradead.org>
-References: <20231204144334.910-1-paul@xen.org>
-	 <20231204144334.910-17-paul@xen.org>
-	 <e22e354305d853d72039c7e12b166410de3f63c9.camel@infradead.org>
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-ptaopca3gfElEaN+o9jr"
-User-Agent: Evolution 3.44.4-0ubuntu2 
+Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E5850A7;
+	Thu, 14 Dec 2023 06:37:30 -0800 (PST)
+Received: from pps.filterd (m0167088.ppops.net [127.0.0.1])
+	by mx0a-00128a01.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3BEBOb7q026794;
+	Thu, 14 Dec 2023 09:37:08 -0500
+Received: from nwd2mta4.analog.com ([137.71.173.58])
+	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 3uy905p8y6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 14 Dec 2023 09:37:07 -0500 (EST)
+Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
+	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 3BEEb6VF003512
+	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 14 Dec 2023 09:37:06 -0500
+Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by ASHBMBX8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.14; Thu, 14 Dec
+ 2023 09:37:05 -0500
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server id 15.2.986.14 via Frontend
+ Transport; Thu, 14 Dec 2023 09:37:05 -0500
+Received: from daniel-Precision-5530.ad.analog.com ([10.48.65.152])
+	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 3BEEaqwd017595;
+	Thu, 14 Dec 2023 09:36:54 -0500
+From: Daniel Matyas <daniel.matyas@analog.com>
+To: 
+CC: Daniel Matyas <daniel.matyas@analog.com>,
+        Jean Delvare
+	<jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>,
+        Rob Herring
+	<robh+dt@kernel.org>,
+        Krzysztof Kozlowski
+	<krzysztof.kozlowski+dt@linaro.org>,
+        Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: [PATCH 1/3] hwmon: max31827: Add PEC support
+Date: Thu, 14 Dec 2023 16:36:45 +0200
+Message-ID: <20231214143648.175336-1-daniel.matyas@analog.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ADIRuleOP-NewSCL: Rule Triggered
+X-Proofpoint-GUID: 8ss27Uad35oU5kGN88cY07AfjKw7MuDo
+X-Proofpoint-ORIG-GUID: 8ss27Uad35oU5kGN88cY07AfjKw7MuDo
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-12-02_01,2023-11-30_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ spamscore=0 malwarescore=0 bulkscore=0 suspectscore=0 clxscore=1011
+ mlxlogscore=999 impostorscore=0 phishscore=0 adultscore=0 mlxscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311290000 definitions=main-2312140102
 
+Removed regmap and used my functions to read, write and update bits. In
+these functions i2c_smbus_ helper functions are used. These check if
+there were any PEC errors during read. In the write function, if PEC is
+enabled, I check for PEC Error bit, to see if there were any errors.
 
---=-ptaopca3gfElEaN+o9jr
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Daniel Matyas <daniel.matyas@analog.com>
+---
+ Documentation/hwmon/max31827.rst |  14 +-
+ drivers/hwmon/max31827.c         | 219 +++++++++++++++++++++++--------
+ 2 files changed, 171 insertions(+), 62 deletions(-)
 
-On Thu, 2023-12-14 at 14:00 +0000, David Woodhouse wrote:
->=20
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (IS_ENABLED(CONFIG_64BIT)=
- && kvm->arch.xen.long_mode) {
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0struct vcpu_info *vcpu_info =3D gpc->khva;
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0u32 port_word_bit =3D port / 32;
->=20
-> Shouldn't that one be /64, and the compat one be /32?
+diff --git a/Documentation/hwmon/max31827.rst b/Documentation/hwmon/max31827.rst
+index 44ab9dc064cb..ecbc1ddba6a7 100644
+--- a/Documentation/hwmon/max31827.rst
++++ b/Documentation/hwmon/max31827.rst
+@@ -131,7 +131,13 @@ The Fault Queue bits select how many consecutive temperature faults must occur
+ before overtemperature or undertemperature faults are indicated in the
+ corresponding status bits.
+ 
+-Notes
+------
+-
+-PEC is not implemented.
++PEC (packet error checking) can be enabled from the "pec" device attribute.
++If PEC is enabled, a PEC byte is appended to the end of each message transfer.
++This is a CRC-8 byte that is calculated on all of the message bytes (including
++the address/read/write byte). The last device to transmit a data byte also
++transmits the PEC byte. The master transmits the PEC byte after a write
++transaction, and the MAX31827 transmits the PEC byte after a read transaction.
++
++The read PEC error is handled inside the i2c_smbus_read_word_swapped() function.
++To check if the write had any PEC error a read is performed on the configuration
++register, to check the PEC Error bit.
+\ No newline at end of file
+diff --git a/drivers/hwmon/max31827.c b/drivers/hwmon/max31827.c
+index 71ad3934dfb6..db93492193bd 100644
+--- a/drivers/hwmon/max31827.c
++++ b/drivers/hwmon/max31827.c
+@@ -11,8 +11,8 @@
+ #include <linux/hwmon.h>
+ #include <linux/i2c.h>
+ #include <linux/mutex.h>
+-#include <linux/regmap.h>
+ #include <linux/regulator/consumer.h>
++#include <linux/hwmon-sysfs.h>
+ #include <linux/of_device.h>
+ 
+ #define MAX31827_T_REG			0x0
+@@ -24,11 +24,13 @@
+ 
+ #define MAX31827_CONFIGURATION_1SHOT_MASK	BIT(0)
+ #define MAX31827_CONFIGURATION_CNV_RATE_MASK	GENMASK(3, 1)
++#define MAX31827_CONFIGURATION_PEC_EN_MASK	BIT(4)
+ #define MAX31827_CONFIGURATION_TIMEOUT_MASK	BIT(5)
+ #define MAX31827_CONFIGURATION_RESOLUTION_MASK	GENMASK(7, 6)
+ #define MAX31827_CONFIGURATION_ALRM_POL_MASK	BIT(8)
+ #define MAX31827_CONFIGURATION_COMP_INT_MASK	BIT(9)
+ #define MAX31827_CONFIGURATION_FLT_Q_MASK	GENMASK(11, 10)
++#define MAX31827_CONFIGURATION_PEC_ERR_MASK	BIT(13)
+ #define MAX31827_CONFIGURATION_U_TEMP_STAT_MASK	BIT(14)
+ #define MAX31827_CONFIGURATION_O_TEMP_STAT_MASK	BIT(15)
+ 
+@@ -94,23 +96,67 @@ struct max31827_state {
+ 	 * Prevent simultaneous access to the i2c client.
+ 	 */
+ 	struct mutex lock;
+-	struct regmap *regmap;
+ 	bool enable;
+ 	unsigned int resolution;
+ 	unsigned int update_interval;
++	struct i2c_client *client;
+ };
+ 
+-static const struct regmap_config max31827_regmap = {
+-	.reg_bits = 8,
+-	.val_bits = 16,
+-	.max_register = 0xA,
+-};
++static int max31827_reg_read(struct i2c_client *client, u8 reg, u16 *val)
++{
++	u16 tmp = i2c_smbus_read_word_swapped(client, reg);
++
++	if (tmp < 0)
++		return tmp;
++
++	*val = tmp;
++	return 0;
++}
++
++static int max31827_reg_write(struct i2c_client *client, u8 reg, u16 val)
++{
++	u16 cfg;
++	int ret;
++
++	ret = i2c_smbus_write_word_swapped(client, reg, val);
++	if (ret)
++		return ret;
++
++	// If PEC is not enabled, return with success
++	if (!(client->flags & I2C_CLIENT_PEC))
++		return 0;
++
++	ret = max31827_reg_read(client, MAX31827_CONFIGURATION_REG, &cfg);
++	if (ret)
++		return ret;
++
++	if (cfg & MAX31827_CONFIGURATION_PEC_ERR_MASK)
++		return -EBADMSG;
++
++	return 0;
++}
++
++static int max31827_update_bits(struct i2c_client *client, u8 reg,
++				u16 mask, u16 val)
++{
++	u16 tmp;
++	int ret;
++
++	ret = max31827_reg_read(client, reg, &tmp);
++	if (ret)
++		return ret;
++
++	tmp = (tmp & ~mask) | (val & mask);
++	ret = max31827_reg_write(client, reg, tmp);
++
++	return ret;
++}
+ 
+ static int shutdown_write(struct max31827_state *st, unsigned int reg,
+ 			  unsigned int mask, unsigned int val)
+ {
+-	unsigned int cfg;
+-	unsigned int cnv_rate;
++	u16 cfg;
++	u16 cnv_rate;
+ 	int ret;
+ 
+ 	/*
+@@ -125,34 +171,34 @@ static int shutdown_write(struct max31827_state *st, unsigned int reg,
+ 
+ 	if (!st->enable) {
+ 		if (!mask)
+-			ret = regmap_write(st->regmap, reg, val);
++			ret = max31827_reg_write(st->client, reg, val);
+ 		else
+-			ret = regmap_update_bits(st->regmap, reg, mask, val);
++			ret = max31827_update_bits(st->client, reg, mask, val);
+ 		goto unlock;
+ 	}
+ 
+-	ret = regmap_read(st->regmap, MAX31827_CONFIGURATION_REG, &cfg);
++	ret = max31827_reg_read(st->client, MAX31827_CONFIGURATION_REG, &cfg);
+ 	if (ret)
+ 		goto unlock;
+ 
+ 	cnv_rate = MAX31827_CONFIGURATION_CNV_RATE_MASK & cfg;
+ 	cfg = cfg & ~(MAX31827_CONFIGURATION_1SHOT_MASK |
+ 		      MAX31827_CONFIGURATION_CNV_RATE_MASK);
+-	ret = regmap_write(st->regmap, MAX31827_CONFIGURATION_REG, cfg);
++	ret = max31827_reg_write(st->client, MAX31827_CONFIGURATION_REG, cfg);
+ 	if (ret)
+ 		goto unlock;
+ 
+ 	if (!mask)
+-		ret = regmap_write(st->regmap, reg, val);
++		ret = max31827_reg_write(st->client, reg, val);
+ 	else
+-		ret = regmap_update_bits(st->regmap, reg, mask, val);
++		ret = max31827_update_bits(st->client, reg, mask, val);
+ 
+ 	if (ret)
+ 		goto unlock;
+ 
+-	ret = regmap_update_bits(st->regmap, MAX31827_CONFIGURATION_REG,
+-				 MAX31827_CONFIGURATION_CNV_RATE_MASK,
+-				 cnv_rate);
++	ret = max31827_update_bits(st->client, MAX31827_CONFIGURATION_REG,
++				   MAX31827_CONFIGURATION_CNV_RATE_MASK,
++				   cnv_rate);
+ 
+ unlock:
+ 	mutex_unlock(&st->lock);
+@@ -198,15 +244,16 @@ static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
+ 			 u32 attr, int channel, long *val)
+ {
+ 	struct max31827_state *st = dev_get_drvdata(dev);
+-	unsigned int uval;
++	u16 uval;
+ 	int ret = 0;
+ 
+ 	switch (type) {
+ 	case hwmon_temp:
+ 		switch (attr) {
+ 		case hwmon_temp_enable:
+-			ret = regmap_read(st->regmap,
+-					  MAX31827_CONFIGURATION_REG, &uval);
++			ret = max31827_reg_read(st->client,
++						MAX31827_CONFIGURATION_REG,
++						&uval);
+ 			if (ret)
+ 				break;
+ 
+@@ -226,10 +273,10 @@ static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
+ 				 * be changed during the conversion process.
+ 				 */
+ 
+-				ret = regmap_update_bits(st->regmap,
+-							 MAX31827_CONFIGURATION_REG,
+-							 MAX31827_CONFIGURATION_1SHOT_MASK,
+-							 1);
++				ret = max31827_update_bits(st->client,
++							   MAX31827_CONFIGURATION_REG,
++							   MAX31827_CONFIGURATION_1SHOT_MASK,
++							   1);
+ 				if (ret) {
+ 					mutex_unlock(&st->lock);
+ 					return ret;
+@@ -246,7 +293,8 @@ static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
+ 			    st->update_interval == 125)
+ 				usleep_range(15000, 20000);
+ 
+-			ret = regmap_read(st->regmap, MAX31827_T_REG, &uval);
++			ret = max31827_reg_read(st->client, MAX31827_T_REG,
++						&uval);
+ 
+ 			mutex_unlock(&st->lock);
+ 
+@@ -257,23 +305,26 @@ static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
+ 
+ 			break;
+ 		case hwmon_temp_max:
+-			ret = regmap_read(st->regmap, MAX31827_TH_REG, &uval);
++			ret = max31827_reg_read(st->client, MAX31827_TH_REG,
++						&uval);
+ 			if (ret)
+ 				break;
+ 
+ 			*val = MAX31827_16_BIT_TO_M_DGR(uval);
+ 			break;
+ 		case hwmon_temp_max_hyst:
+-			ret = regmap_read(st->regmap, MAX31827_TH_HYST_REG,
+-					  &uval);
++			ret = max31827_reg_read(st->client,
++						MAX31827_TH_HYST_REG,
++						&uval);
+ 			if (ret)
+ 				break;
+ 
+ 			*val = MAX31827_16_BIT_TO_M_DGR(uval);
+ 			break;
+ 		case hwmon_temp_max_alarm:
+-			ret = regmap_read(st->regmap,
+-					  MAX31827_CONFIGURATION_REG, &uval);
++			ret = max31827_reg_read(st->client,
++						MAX31827_CONFIGURATION_REG,
++						&uval);
+ 			if (ret)
+ 				break;
+ 
+@@ -281,23 +332,25 @@ static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
+ 					 uval);
+ 			break;
+ 		case hwmon_temp_min:
+-			ret = regmap_read(st->regmap, MAX31827_TL_REG, &uval);
++			ret = max31827_reg_read(st->client, MAX31827_TL_REG,
++						&uval);
+ 			if (ret)
+ 				break;
+ 
+ 			*val = MAX31827_16_BIT_TO_M_DGR(uval);
+ 			break;
+ 		case hwmon_temp_min_hyst:
+-			ret = regmap_read(st->regmap, MAX31827_TL_HYST_REG,
+-					  &uval);
++			ret = max31827_reg_read(st->client, MAX31827_TL_HYST_REG,
++						&uval);
+ 			if (ret)
+ 				break;
+ 
+ 			*val = MAX31827_16_BIT_TO_M_DGR(uval);
+ 			break;
+ 		case hwmon_temp_min_alarm:
+-			ret = regmap_read(st->regmap,
+-					  MAX31827_CONFIGURATION_REG, &uval);
++			ret = max31827_reg_read(st->client,
++						MAX31827_CONFIGURATION_REG,
++						&uval);
+ 			if (ret)
+ 				break;
+ 
+@@ -313,8 +366,9 @@ static int max31827_read(struct device *dev, enum hwmon_sensor_types type,
+ 
+ 	case hwmon_chip:
+ 		if (attr == hwmon_chip_update_interval) {
+-			ret = regmap_read(st->regmap,
+-					  MAX31827_CONFIGURATION_REG, &uval);
++			ret = max31827_reg_read(st->client,
++						MAX31827_CONFIGURATION_REG,
++						&uval);
+ 			if (ret)
+ 				break;
+ 
+@@ -355,11 +409,11 @@ static int max31827_write(struct device *dev, enum hwmon_sensor_types type,
+ 
+ 			st->enable = val;
+ 
+-			ret = regmap_update_bits(st->regmap,
+-						 MAX31827_CONFIGURATION_REG,
+-						 MAX31827_CONFIGURATION_1SHOT_MASK |
+-						 MAX31827_CONFIGURATION_CNV_RATE_MASK,
+-						 MAX31827_DEVICE_ENABLE(val));
++			ret = max31827_update_bits(st->client,
++						   MAX31827_CONFIGURATION_REG,
++						   MAX31827_CONFIGURATION_1SHOT_MASK |
++						   MAX31827_CONFIGURATION_CNV_RATE_MASK,
++						   MAX31827_DEVICE_ENABLE(val));
+ 
+ 			mutex_unlock(&st->lock);
+ 
+@@ -402,10 +456,10 @@ static int max31827_write(struct device *dev, enum hwmon_sensor_types type,
+ 			res = FIELD_PREP(MAX31827_CONFIGURATION_CNV_RATE_MASK,
+ 					 res);
+ 
+-			ret = regmap_update_bits(st->regmap,
+-						 MAX31827_CONFIGURATION_REG,
+-						 MAX31827_CONFIGURATION_CNV_RATE_MASK,
+-						 res);
++			ret = max31827_update_bits(st->client,
++						   MAX31827_CONFIGURATION_REG,
++						   MAX31827_CONFIGURATION_CNV_RATE_MASK,
++						   res);
+ 			if (ret)
+ 				return ret;
+ 
+@@ -425,10 +479,10 @@ static ssize_t temp1_resolution_show(struct device *dev,
+ 				     char *buf)
+ {
+ 	struct max31827_state *st = dev_get_drvdata(dev);
+-	unsigned int val;
++	u16 val;
+ 	int ret;
+ 
+-	ret = regmap_read(st->regmap, MAX31827_CONFIGURATION_REG, &val);
++	ret = max31827_reg_read(st->client, MAX31827_CONFIGURATION_REG, &val);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -473,10 +527,63 @@ static ssize_t temp1_resolution_store(struct device *dev,
+ 	return ret ? ret : count;
+ }
+ 
++static ssize_t pec_show(struct device *dev, struct device_attribute *devattr,
++			char *buf)
++{
++	struct max31827_state *st = dev_get_drvdata(dev);
++	struct i2c_client *client = st->client;
++
++	return scnprintf(buf, PAGE_SIZE, "%d\n", !!(client->flags & I2C_CLIENT_PEC));
++}
++
++static ssize_t pec_store(struct device *dev, struct device_attribute *devattr,
++			 const char *buf, size_t count)
++{
++	struct max31827_state *st = dev_get_drvdata(dev);
++	struct i2c_client *client = st->client;
++	unsigned int val;
++	u16 val2;
++	int err;
++
++	err = kstrtouint(buf, 10, &val);
++	if (err < 0)
++		return err;
++
++	val2 = FIELD_PREP(MAX31827_CONFIGURATION_PEC_EN_MASK, val);
++
++	if (err)
++		return err;
++
++	switch (val) {
++	case 0:
++		client->flags &= ~I2C_CLIENT_PEC;
++		err = max31827_update_bits(client, MAX31827_CONFIGURATION_REG,
++					   MAX31827_CONFIGURATION_PEC_EN_MASK,
++					   val2);
++		if (err)
++			return err;
++		break;
++	case 1:
++		err = max31827_update_bits(client, MAX31827_CONFIGURATION_REG,
++					   MAX31827_CONFIGURATION_PEC_EN_MASK,
++					   val2);
++		if (err)
++			return err;
++		client->flags |= I2C_CLIENT_PEC;
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	return count;
++}
++
+ static DEVICE_ATTR_RW(temp1_resolution);
++static DEVICE_ATTR_RW(pec);
+ 
+ static struct attribute *max31827_attrs[] = {
+ 	&dev_attr_temp1_resolution.attr,
++	&dev_attr_pec.attr,
+ 	NULL
+ };
+ ATTRIBUTE_GROUPS(max31827);
+@@ -489,9 +596,9 @@ static const struct i2c_device_id max31827_i2c_ids[] = {
+ };
+ MODULE_DEVICE_TABLE(i2c, max31827_i2c_ids);
+ 
+-static int max31827_init_client(struct max31827_state *st,
+-				struct device *dev)
++static int max31827_init_client(struct max31827_state *st)
+ {
++	struct device *dev = &st->client->dev;
+ 	struct fwnode_handle *fwnode;
+ 	unsigned int res = 0;
+ 	u32 data, lsb_idx;
+@@ -575,7 +682,7 @@ static int max31827_init_client(struct max31827_state *st,
+ 		}
+ 	}
+ 
+-	return regmap_write(st->regmap, MAX31827_CONFIGURATION_REG, res);
++	return max31827_reg_write(st->client, MAX31827_CONFIGURATION_REG, res);
+ }
+ 
+ static const struct hwmon_channel_info *max31827_info[] = {
+@@ -613,17 +720,13 @@ static int max31827_probe(struct i2c_client *client)
+ 		return -ENOMEM;
+ 
+ 	mutex_init(&st->lock);
+-
+-	st->regmap = devm_regmap_init_i2c(client, &max31827_regmap);
+-	if (IS_ERR(st->regmap))
+-		return dev_err_probe(dev, PTR_ERR(st->regmap),
+-				     "Failed to allocate regmap.\n");
++	st->client = client;
+ 
+ 	err = devm_regulator_get_enable(dev, "vref");
+ 	if (err)
+ 		return dev_err_probe(dev, err, "failed to enable regulator\n");
+ 
+-	err = max31827_init_client(st, dev);
++	err = max31827_init_client(st);
+ 	if (err)
+ 		return err;
+ 
+-- 
+2.34.1
 
-I think the reason the test failed to spot this for you is because...
-
-#define EVTCHN_TEST1 15
-#define EVTCHN_TEST2 66
-#define EVTCHN_TIMER 13
-
-... it doesn't actually use any port numbers where the bit# differs for
-32-bit vs. 64-bit.
-
-If you change EVTCHN_TIMER to something like 50, I bet it'll fail (as
-it should).
-
---=-ptaopca3gfElEaN+o9jr
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCEkQw
-ggYQMIID+KADAgECAhBNlCwQ1DvglAnFgS06KwZPMA0GCSqGSIb3DQEBDAUAMIGIMQswCQYDVQQG
-EwJVUzETMBEGA1UECBMKTmV3IEplcnNleTEUMBIGA1UEBxMLSmVyc2V5IENpdHkxHjAcBgNVBAoT
-FVRoZSBVU0VSVFJVU1QgTmV0d29yazEuMCwGA1UEAxMlVVNFUlRydXN0IFJTQSBDZXJ0aWZpY2F0
-aW9uIEF1dGhvcml0eTAeFw0xODExMDIwMDAwMDBaFw0zMDEyMzEyMzU5NTlaMIGWMQswCQYDVQQG
-EwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYD
-VQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50
-aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
-AQEAyjztlApB/975Rrno1jvm2pK/KxBOqhq8gr2+JhwpKirSzZxQgT9tlC7zl6hn1fXjSo5MqXUf
-ItMltrMaXqcESJuK8dtK56NCSrq4iDKaKq9NxOXFmqXX2zN8HHGjQ2b2Xv0v1L5Nk1MQPKA19xeW
-QcpGEGFUUd0kN+oHox+L9aV1rjfNiCj3bJk6kJaOPabPi2503nn/ITX5e8WfPnGw4VuZ79Khj1YB
-rf24k5Ee1sLTHsLtpiK9OjG4iQRBdq6Z/TlVx/hGAez5h36bBJMxqdHLpdwIUkTqT8se3ed0PewD
-ch/8kHPo5fZl5u1B0ecpq/sDN/5sCG52Ds+QU5O5EwIDAQABo4IBZDCCAWAwHwYDVR0jBBgwFoAU
-U3m/WqorSs9UgOHYm8Cd8rIDZsswHQYDVR0OBBYEFAnA8vwL2pTbX/4r36iZQs/J4K0AMA4GA1Ud
-DwEB/wQEAwIBhjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEF
-BQcDBDARBgNVHSAECjAIMAYGBFUdIAAwUAYDVR0fBEkwRzBFoEOgQYY/aHR0cDovL2NybC51c2Vy
-dHJ1c3QuY29tL1VTRVJUcnVzdFJTQUNlcnRpZmljYXRpb25BdXRob3JpdHkuY3JsMHYGCCsGAQUF
-BwEBBGowaDA/BggrBgEFBQcwAoYzaHR0cDovL2NydC51c2VydHJ1c3QuY29tL1VTRVJUcnVzdFJT
-QUFkZFRydXN0Q0EuY3J0MCUGCCsGAQUFBzABhhlodHRwOi8vb2NzcC51c2VydHJ1c3QuY29tMA0G
-CSqGSIb3DQEBDAUAA4ICAQBBRHUAqznCFfXejpVtMnFojADdF9d6HBA4kMjjsb0XMZHztuOCtKF+
-xswhh2GqkW5JQrM8zVlU+A2VP72Ky2nlRA1GwmIPgou74TZ/XTarHG8zdMSgaDrkVYzz1g3nIVO9
-IHk96VwsacIvBF8JfqIs+8aWH2PfSUrNxP6Ys7U0sZYx4rXD6+cqFq/ZW5BUfClN/rhk2ddQXyn7
-kkmka2RQb9d90nmNHdgKrwfQ49mQ2hWQNDkJJIXwKjYA6VUR/fZUFeCUisdDe/0ABLTI+jheXUV1
-eoYV7lNwNBKpeHdNuO6Aacb533JlfeUHxvBz9OfYWUiXu09sMAviM11Q0DuMZ5760CdO2VnpsXP4
-KxaYIhvqPqUMWqRdWyn7crItNkZeroXaecG03i3mM7dkiPaCkgocBg0EBYsbZDZ8bsG3a08LwEsL
-1Ygz3SBsyECa0waq4hOf/Z85F2w2ZpXfP+w8q4ifwO90SGZZV+HR/Jh6rEaVPDRF/CEGVqR1hiuQ
-OZ1YL5ezMTX0ZSLwrymUE0pwi/KDaiYB15uswgeIAcA6JzPFf9pLkAFFWs1QNyN++niFhsM47qod
-x/PL+5jR87myx5uYdBEQkkDc+lKB1Wct6ucXqm2EmsaQ0M95QjTmy+rDWjkDYdw3Ms6mSWE3Bn7i
-5ZgtwCLXgAIe5W8mybM2JzCCBhQwggT8oAMCAQICEQDGvhmWZ0DEAx0oURL6O6l+MA0GCSqGSIb3
-DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYD
-VQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28g
-UlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTIyMDEwNzAw
-MDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJARYTZHdtdzJAaW5mcmFkZWFkLm9y
-ZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3GpC2bomUqk+91wLYBzDMcCj5C9m6
-oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZHh7htyAkWYVoFsFPrwHounto8xTsy
-SSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT9YgcBqKCo65pTFmOnR/VVbjJk4K2
-xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNjP+qDrh0db7PAjO1D4d5ftfrsf+kd
-RR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy2U+eITZ5LLE5s45mX2oPFknWqxBo
-bQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3BgBEmfsYWlBXO8rVXfvPgLs32VdV
-NZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/7auNVRmPB3v5SWEsH8xi4Bez2V9U
-KxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmdlFYhAflWKQ03Ufiu8t3iBE3VJbc2
-5oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9aelIl6vtbhMA+l0nfrsORMa4kobqQ5
-C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMBAAGjggHMMIIByDAfBgNVHSMEGDAW
-gBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeDMcimo0oz8o1R1Nver3ZVpSkwDgYD
-VR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
-MEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYBBQUHAgEWF2h0dHBzOi8vc2VjdGln
-by5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9jcmwuc2VjdGlnby5jb20vU2VjdGln
-b1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcmwwgYoGCCsGAQUFBwEB
-BH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdvLmNvbS9TZWN0aWdvUlNBQ2xpZW50
-QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAjBggrBgEFBQcwAYYXaHR0cDovL29j
-c3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5mcmFkZWFkLm9yZzANBgkqhkiG9w0B
-AQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQvQ/fzPXmtR9t54rpmI2TfyvcKgOXp
-qa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvIlSPrzIB4Z2wyIGQpaPLlYflrrVFK
-v9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9ChWFfgSXvrWDZspnU3Gjw/rMHrGnql
-Htlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0whpBtXdyDjzBtQTaZJ7zTT/vlehc/
-tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9IzCCBhQwggT8oAMCAQICEQDGvhmW
-Z0DEAx0oURL6O6l+MA0GCSqGSIb3DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3Jl
-YXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0
-ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJl
-IEVtYWlsIENBMB4XDTIyMDEwNzAwMDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJ
-ARYTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3
-GpC2bomUqk+91wLYBzDMcCj5C9m6oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZH
-h7htyAkWYVoFsFPrwHounto8xTsySSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT
-9YgcBqKCo65pTFmOnR/VVbjJk4K2xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNj
-P+qDrh0db7PAjO1D4d5ftfrsf+kdRR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy
-2U+eITZ5LLE5s45mX2oPFknWqxBobQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3
-BgBEmfsYWlBXO8rVXfvPgLs32VdVNZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/
-7auNVRmPB3v5SWEsH8xi4Bez2V9UKxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmd
-lFYhAflWKQ03Ufiu8t3iBE3VJbc25oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9ae
-lIl6vtbhMA+l0nfrsORMa4kobqQ5C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMB
-AAGjggHMMIIByDAfBgNVHSMEGDAWgBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeD
-Mcimo0oz8o1R1Nver3ZVpSkwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYw
-FAYIKwYBBQUHAwQGCCsGAQUFBwMCMEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYB
-BQUHAgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9j
-cmwuc2VjdGlnby5jb20vU2VjdGlnb1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1h
-aWxDQS5jcmwwgYoGCCsGAQUFBwEBBH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdv
-LmNvbS9TZWN0aWdvUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAj
-BggrBgEFBQcwAYYXaHR0cDovL29jc3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5m
-cmFkZWFkLm9yZzANBgkqhkiG9w0BAQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQv
-Q/fzPXmtR9t54rpmI2TfyvcKgOXpqa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvI
-lSPrzIB4Z2wyIGQpaPLlYflrrVFKv9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9Ch
-WFfgSXvrWDZspnU3Gjw/rMHrGnqlHtlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0w
-hpBtXdyDjzBtQTaZJ7zTT/vlehc/tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9
-IzGCBMcwggTDAgEBMIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVz
-dGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMT
-NVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA
-xr4ZlmdAxAMdKFES+jupfjANBglghkgBZQMEAgEFAKCCAeswGAYJKoZIhvcNAQkDMQsGCSqGSIb3
-DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMxMjE0MTQyMDI3WjAvBgkqhkiG9w0BCQQxIgQgfKQOFwgZ
-6kSTbZE+N0RuuPUOtgXd3UptzEyP59iyZpYwgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
-BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEYMBYG
-A1UEChMPU2VjdGlnbyBMaW1pdGVkMT4wPAYDVQQDEzVTZWN0aWdvIFJTQSBDbGllbnQgQXV0aGVu
-dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIRAMa+GZZnQMQDHShREvo7qX4wgb8GCyqGSIb3
-DQEJEAILMYGvoIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVy
-MRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNl
-Y3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEAxr4Z
-lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgBUhbYmw1Dr1bOUvDFgOeoXjzC50pn1k06n
-5Oo4CL5jrft1j4pRki90YMw4R+BAcilUCySPYvJq6D2ZhVATXKZsZbv7qROWSG8THAUQikucnJzY
-qdsdqWmuVToxW3Wd+9PYCTeOydeC/5AfhAl8bmxMhcEzOA1FO+jvk8wB+pkOL29BS/OkMlc6rcPk
-AGcgN32KxuoPR73qHTaB5Vo5geVCqf2anwsSgzVJD8WAJ1TqC0+k4rBzjhqk+bJuV5FDCaRKWz9N
-LFXcTSwrxYsA/mXOPbVu0knc/c/ykPU0xlPSYGhtu4YV22HBCjlCQT/58DbDBoXuLk9u+hPlL3Bh
-arC/JDX+THIb1uQ0ym674fY9ipGq0dIAaBxhxxplZ/5vPXC2YnGmLAsXZqKzPe0enWTk3QoVCS/e
-FP3CIJFluJIpBKLF3XJob1DGRhoWPe2dnmpx7oAXK18Fl4XZp7mzlJwSYrIFrN/2gkZQ2p5R8jAp
-x2uV0UJq4hNfQyGkc3qh7JYEpAhFwckdTtU6Lj3x71vJ3e+P8vZvreEKjxcNnpMzcIMrj4kl4e/p
-UHwjbCunIatAN0zNEWh41NdosFjbOsetl5sWs4ms061aproWNuOrC/k318kCjc9GmMcrwZGOI2ut
-Nf+qYh/3VzuMacx63e6TMeDWONZOS5p3EkVwRCdD+AAAAAAAAA==
-
-
---=-ptaopca3gfElEaN+o9jr--
 
