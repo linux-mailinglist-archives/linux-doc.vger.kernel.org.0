@@ -1,199 +1,160 @@
-Return-Path: <linux-doc+bounces-5058-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5060-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D523C812AC4
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 09:52:16 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 827E4812BF6
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 10:48:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B7E341C21526
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 08:52:15 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1CC04282904
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 09:48:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D247D24218;
-	Thu, 14 Dec 2023 08:52:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B86F033CD4;
+	Thu, 14 Dec 2023 09:48:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="d5FzzKO8"
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="GhDRMXiO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com [IPv6:2a00:1450:4864:20::536])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CEA6E95
-	for <linux-doc@vger.kernel.org>; Thu, 14 Dec 2023 00:52:09 -0800 (PST)
-Received: by mail-ed1-x536.google.com with SMTP id 4fb4d7f45d1cf-54744e66d27so9687a12.0
-        for <linux-doc@vger.kernel.org>; Thu, 14 Dec 2023 00:52:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1702543928; x=1703148728; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=aG+wTH3yOLLZ3eZRtW3lPIiRHsLhkS1VEsetc0cw7Go=;
-        b=d5FzzKO84I2bpTnbGVw3+uA7Cjr9vKegHgdd9tzBGAjcRvdJLnjIrlUZNoMwb44eCS
-         S+ksLyP6jKIrKr4vw2Xg+UNy+WrKuABCfV3gvxj6XfX6cqiCd2IpkUUSuCjGEWXnL0ZN
-         yW+peeKudXSdvEpXqQv0iglo5cEgvgdSXiAHxJhe/lk48mk2G1K3XX7wG0U7kdTUCj2W
-         4+E+4Y7MhOKOTHjRSYCabVWMnu/rWZBdk+D/eo/W0lGs3g1fPySi8yU5vmJ7AjjRuHtO
-         LEVPow4+EcPcPbS8NiMroPywKjA6SfGUz4vVGnCobo0J9LURHbgEjBo/srBKLe5snQEi
-         1g8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702543928; x=1703148728;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=aG+wTH3yOLLZ3eZRtW3lPIiRHsLhkS1VEsetc0cw7Go=;
-        b=j3ngT2eyVVuP7eahe7B3ergdtuCF03LlrqmJkULUPQn8nhVmlAGooCBHiFZ6S4B3gc
-         sHT1r/onkUsVBBHwrDbMrEjXnj4mcOecog0r3qVQd74oa6Rhc8FMRrccDDgH+HEBDPA7
-         kunZjqX5Tu9uY4ebO7z8NHLVhzN0LIg0NzVMwgUhKapcX4HsXKuQHvg6hCvcOySCQgPY
-         IfB6oilf4j8hcHDzsmaXcL8bfYwnavAnd4TS5tBTfokzD4M+yboloDk4MxkXkRk/XmXZ
-         WgG1Y8R1DNoz4oWt25tngS0z2bXUbH5PYwAClPD2MW1cQNmSPaYseop3bGmR//b3zNfY
-         rjEA==
-X-Gm-Message-State: AOJu0Yw2ZHsFMkpIxFDHvL25pxJhi8JsUT1hSU5QARoehUJ9zkqkS1TQ
-	XvNWq4+eaA9ODr389TfMy4+t2rQbwLKXaOJNa2o9vQ==
-X-Google-Smtp-Source: AGHT+IGr7SURlrVqQjCd6Nbh6tM7k/YJj+gzxCpSmMn1ZluV7ILkdLH+8yeuqAiwZK1QSvDikUGGHogQ3hlOPDeMG/U=
-X-Received: by 2002:a50:d7ca:0:b0:54a:ee8b:7a8c with SMTP id
- m10-20020a50d7ca000000b0054aee8b7a8cmr598463edj.0.1702543928070; Thu, 14 Dec
- 2023 00:52:08 -0800 (PST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 830D6E0;
+	Thu, 14 Dec 2023 01:48:48 -0800 (PST)
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3BE4Qpbg001177;
+	Thu, 14 Dec 2023 09:48:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=qcppdkim1; bh=5gAIgXH
+	XeRin2mY+3nShzO93vkScwEPkafSycd779B0=; b=GhDRMXiOI2oQt1NUXTi/fVK
+	zYR8P+l3guWUMrjWhvf05gfaNQMqucmb167oXUWLx2W+3LlAjPWftDnS7c1SDjAa
+	fLRl9/fH3dmLfI8bNlmQWSvKN+zE680aj2soYCOBbyRnx6iBtfjedXYx3UradpeZ
+	D50PtrRq2DMlNjHf134ZZaC3tzyVOV/U3jH/QYsjmvkDdoUdSOTmvqbSinyMKrJh
+	7TNEM7JjcUeMnP4kKLdtStdP8k8D9HMkbI9zz3HZeRXrzsOBNcLF2ej+GKKXxsJD
+	qkhrbolMlHSmYGik3KO/TPqPqhDzY27mfxRLvgsL4SJ3q0rt6EslndSdATHHzmw=
+	=
+Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3uynja94p0-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 14 Dec 2023 09:48:28 +0000 (GMT)
+Received: from nalasex01c.na.qualcomm.com (nalasex01c.na.qualcomm.com [10.47.97.35])
+	by NALASPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 3BE9mRlT000717
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 14 Dec 2023 09:48:27 GMT
+Received: from akronite-sh-dev02.qualcomm.com (10.80.80.8) by
+ nalasex01c.na.qualcomm.com (10.47.97.35) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Thu, 14 Dec 2023 01:48:22 -0800
+From: Luo Jie <quic_luoj@quicinc.com>
+To: <andrew@lunn.ch>, <davem@davemloft.net>, <edumazet@google.com>,
+        <kuba@kernel.org>, <pabeni@redhat.com>, <robh+dt@kernel.org>,
+        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
+        <hkallweit1@gmail.com>, <linux@armlinux.org.uk>, <corbet@lwn.net>,
+        <p.zabel@pengutronix.de>, <f.fainelli@gmail.com>
+CC: <netdev@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: [PATCH v7 00/14] add qca8084 ethernet phy driver
+Date: Thu, 14 Dec 2023 17:47:59 +0800
+Message-ID: <20231214094813.24690-1-quic_luoj@quicinc.com>
+X-Mailer: git-send-email 2.42.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20231208-kunit_bus-v2-0-e95905d9b325@google.com> <7rgeotye4grxdtbxip53fykjm4a3sudochsfzdvkmyqltvj7zv@qekkt42x2j25>
-In-Reply-To: <7rgeotye4grxdtbxip53fykjm4a3sudochsfzdvkmyqltvj7zv@qekkt42x2j25>
-From: David Gow <davidgow@google.com>
-Date: Thu, 14 Dec 2023 16:51:54 +0800
-Message-ID: <CABVgOSmnf8XbS92f4=-ZX8Of6JUwCy7U2wz2-3udvByDKxXABg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/4] kunit: Add helpers for creating test-managed devices
-To: Maxime Ripard <mripard@kernel.org>
-Cc: Rae Moar <rmoar@google.com>, Brendan Higgins <brendan.higgins@linux.dev>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Matti Vaittinen <mazziesaccount@gmail.com>, 
-	Stephen Boyd <sboyd@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Kees Cook <keescook@chromium.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, linux-kselftest@vger.kernel.org, 
-	kunit-dev@googlegroups.com, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, 
-	linux-sound@vger.kernel.org
-Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
-	boundary="000000000000137edd060c7466ed"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01c.na.qualcomm.com (10.47.97.35)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-GUID: XHYkJ8TAGLrIFIgXHOeOiDABrmoi6RgO
+X-Proofpoint-ORIG-GUID: XHYkJ8TAGLrIFIgXHOeOiDABrmoi6RgO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-12-09_01,2023-12-07_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 adultscore=0
+ impostorscore=0 spamscore=0 priorityscore=1501 mlxlogscore=905 mlxscore=0
+ clxscore=1011 lowpriorityscore=0 bulkscore=0 suspectscore=0 phishscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2311290000
+ definitions=main-2312140065
 
---000000000000137edd060c7466ed
-Content-Type: text/plain; charset="UTF-8"
+QCA8084 is four-port PHY with maximum link capability 2.5G,
+which supports the interface mode qusgmii and sgmii mode,
+there are two PCSs available to connected with ethernet port.
 
-On Wed, 13 Dec 2023 at 23:04, Maxime Ripard <mripard@kernel.org> wrote:
->
-> Hi David,
->
-> On Fri, Dec 08, 2023 at 06:09:28PM +0800, davidgow@google.com wrote:
-> > KUnit tests often need to provide a struct device, and thus far have
-> > mostly been using root_device_register() or platform devices to create
-> > a 'fake device' for use with, e.g., code which uses device-managed
-> > resources. This has several disadvantages, including not being designed
-> > for test use, scattering files in sysfs, and requiring manual teardown
-> > on test exit, which may not always be possible in case of failure.
-> >
-> > Instead, introduce a set of helper functions which allow devices
-> > (internally a struct kunit_device) to be created and managed by KUnit --
-> > i.e., they will be automatically unregistered on test exit. These
-> > helpers can either use a user-provided struct device_driver, or have one
-> > automatically created and managed by KUnit. In both cases, the device
-> > lives on a new kunit_bus.
-> >
-> > This is a follow-up to a previous proposal here:
-> > https://lore.kernel.org/linux-kselftest/20230325043104.3761770-1-davidgow@google.com/
-> >
-> > (The kunit_defer() function in the first patch there has since been
-> > merged as the 'deferred actions' feature.)
-> >
-> > My intention is to take this whole series in via the kselftest/kunit
-> > branch, but I'm equally okay with splitting up the later patches which
-> > use this to go via the various subsystem trees in case there are merge
-> > conflicts.
->
-> Could you take (and apply eventually) that patch as part of your series?
-> https://lore.kernel.org/linux-kselftest/20231205090405.153140-1-mripard@kernel.org/
->
+QCA8084 can work in switch mode or PHY mode.
+For switch mode, both PCS0 and PCS1 work on sgmii mode.
+For PHY mode, PCS1 works on qusgmii mode.
+The fourth PHY connected with PCS0 works on sgmii mode.
 
-Thanks -- I've included it in v3 (which fixes a few other issues), and
-will take it along with the rest of the series:
-https://lore.kernel.org/linux-kselftest/20231214-kunit_bus-v3-0-7e9a287d3048@google.com/T/
+Besides this PHY driver patches, the PCS driver is also needed
+to bring up the qca8084 device, which mainly configurs PCS
+and clocks.
 
-Cheers,
--- David
+The qca8084 PHY driver depends on the following clock controller
+patchset, the initial clocks and resets are provided by the clock
+controller driver below.
+https://lore.kernel.org/lkml/20231104034858.9159-2-quic_luoj@quicinc.com/T/
 
---000000000000137edd060c7466ed
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+Changes in v3:
+	* pick the two patches to introduce the interface mode
+	  10g-qxgmii from Vladimir Oltean(olteanv@gmail.com).
+	* add the function phydev_id_is_qca808x to identify the
+	  PHY qca8081 and qca8084.
+	* update the interface mode name PHY_INTERFACE_MODE_QUSGMII
+	  to PHY_INTERFACE_MODE_10G_QXGMII.
 
-MIIPnwYJKoZIhvcNAQcCoIIPkDCCD4wCAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwGg
-ggz5MIIEtjCCA56gAwIBAgIQeAMYYHb81ngUVR0WyMTzqzANBgkqhkiG9w0BAQsFADBMMSAwHgYD
-VQQLExdHbG9iYWxTaWduIFJvb3QgQ0EgLSBSMzETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UE
-AxMKR2xvYmFsU2lnbjAeFw0yMDA3MjgwMDAwMDBaFw0yOTAzMTgwMDAwMDBaMFQxCzAJBgNVBAYT
-AkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSowKAYDVQQDEyFHbG9iYWxTaWduIEF0bGFz
-IFIzIFNNSU1FIENBIDIwMjAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCvLe9xPU9W
-dpiHLAvX7kFnaFZPuJLey7LYaMO8P/xSngB9IN73mVc7YiLov12Fekdtn5kL8PjmDBEvTYmWsuQS
-6VBo3vdlqqXZ0M9eMkjcKqijrmDRleudEoPDzTumwQ18VB/3I+vbN039HIaRQ5x+NHGiPHVfk6Rx
-c6KAbYceyeqqfuJEcq23vhTdium/Bf5hHqYUhuJwnBQ+dAUcFndUKMJrth6lHeoifkbw2bv81zxJ
-I9cvIy516+oUekqiSFGfzAqByv41OrgLV4fLGCDH3yRh1tj7EtV3l2TngqtrDLUs5R+sWIItPa/4
-AJXB1Q3nGNl2tNjVpcSn0uJ7aFPbAgMBAAGjggGKMIIBhjAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0l
-BBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMEMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0OBBYEFHzM
-CmjXouseLHIb0c1dlW+N+/JjMB8GA1UdIwQYMBaAFI/wS3+oLkUkrk1Q+mOai97i3Ru8MHsGCCsG
-AQUFBwEBBG8wbTAuBggrBgEFBQcwAYYiaHR0cDovL29jc3AyLmdsb2JhbHNpZ24uY29tL3Jvb3Ry
-MzA7BggrBgEFBQcwAoYvaHR0cDovL3NlY3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvcm9vdC1y
-My5jcnQwNgYDVR0fBC8wLTAroCmgJ4YlaHR0cDovL2NybC5nbG9iYWxzaWduLmNvbS9yb290LXIz
-LmNybDBMBgNVHSAERTBDMEEGCSsGAQQBoDIBKDA0MDIGCCsGAQUFBwIBFiZodHRwczovL3d3dy5n
-bG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzANBgkqhkiG9w0BAQsFAAOCAQEANyYcO+9JZYyqQt41
-TMwvFWAw3vLoLOQIfIn48/yea/ekOcParTb0mbhsvVSZ6sGn+txYAZb33wIb1f4wK4xQ7+RUYBfI
-TuTPL7olF9hDpojC2F6Eu8nuEf1XD9qNI8zFd4kfjg4rb+AME0L81WaCL/WhP2kDCnRU4jm6TryB
-CHhZqtxkIvXGPGHjwJJazJBnX5NayIce4fGuUEJ7HkuCthVZ3Rws0UyHSAXesT/0tXATND4mNr1X
-El6adiSQy619ybVERnRi5aDe1PTwE+qNiotEEaeujz1a/+yYaaTY+k+qJcVxi7tbyQ0hi0UB3myM
-A/z2HmGEwO8hx7hDjKmKbDCCA18wggJHoAMCAQICCwQAAAAAASFYUwiiMA0GCSqGSIb3DQEBCwUA
-MEwxIDAeBgNVBAsTF0dsb2JhbFNpZ24gUm9vdCBDQSAtIFIzMRMwEQYDVQQKEwpHbG9iYWxTaWdu
-MRMwEQYDVQQDEwpHbG9iYWxTaWduMB4XDTA5MDMxODEwMDAwMFoXDTI5MDMxODEwMDAwMFowTDEg
-MB4GA1UECxMXR2xvYmFsU2lnbiBSb290IENBIC0gUjMxEzARBgNVBAoTCkdsb2JhbFNpZ24xEzAR
-BgNVBAMTCkdsb2JhbFNpZ24wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDMJXaQeQZ4
-Ihb1wIO2hMoonv0FdhHFrYhy/EYCQ8eyip0EXyTLLkvhYIJG4VKrDIFHcGzdZNHr9SyjD4I9DCuu
-l9e2FIYQebs7E4B3jAjhSdJqYi8fXvqWaN+JJ5U4nwbXPsnLJlkNc96wyOkmDoMVxu9bi9IEYMpJ
-pij2aTv2y8gokeWdimFXN6x0FNx04Druci8unPvQu7/1PQDhBjPogiuuU6Y6FnOM3UEOIDrAtKeh
-6bJPkC4yYOlXy7kEkmho5TgmYHWyn3f/kRTvriBJ/K1AFUjRAjFhGV64l++td7dkmnq/X8ET75ti
-+w1s4FRpFqkD2m7pg5NxdsZphYIXAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8E
-BTADAQH/MB0GA1UdDgQWBBSP8Et/qC5FJK5NUPpjmove4t0bvDANBgkqhkiG9w0BAQsFAAOCAQEA
-S0DbwFCq/sgM7/eWVEVJu5YACUGssxOGhigHM8pr5nS5ugAtrqQK0/Xx8Q+Kv3NnSoPHRHt44K9u
-bG8DKY4zOUXDjuS5V2yq/BKW7FPGLeQkbLmUY/vcU2hnVj6DuM81IcPJaP7O2sJTqsyQiunwXUaM
-ld16WCgaLx3ezQA3QY/tRG3XUyiXfvNnBB4V14qWtNPeTCekTBtzc3b0F5nCH3oO4y0IrQocLP88
-q1UOD5F+NuvDV0m+4S4tfGCLw0FREyOdzvcya5QBqJnnLDMfOjsl0oZAzjsshnjJYS8Uuu7bVW/f
-hO4FCU29KNhyztNiUGUe65KXgzHZs7XKR1g/XzCCBNgwggPAoAMCAQICEAHOBX7j6YmdTMbtcPLp
-3a4wDQYJKoZIhvcNAQELBQAwVDELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
-c2ExKjAoBgNVBAMTIUdsb2JhbFNpZ24gQXRsYXMgUjMgU01JTUUgQ0EgMjAyMDAeFw0yMzA4MTUw
-MjQyNDNaFw0yNDAyMTEwMjQyNDNaMCQxIjAgBgkqhkiG9w0BCQEWE2RhdmlkZ293QGdvb2dsZS5j
-b20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCnYKS3ueVXUlVatkXVQgk8pbgZH4/s
-KBKSGW9Z8e4hylAI35vqFf5f5D4U5KhUYUyG0+AYhurwEiUyZUhGcLqRNmSroohx9nbZjXDXjkVV
-LXBAr7xaCU3DDQcA1SaxmALxBC7u4zlcVHfUKope2JNJ2xn5kU0Z/kr01tZuJD5/jn+2hp68jdym
-tbFd3zzOJmtG6hb4ULJNXSi1qkjtZp6SyDLEsliQGRuI5AIha7GQPeSNsFmIpi+V5UxhrznuAv0y
-Uxd27MtO+/mgSMpLmUb4vuSjy2zuftatzVYvFG00pfHldrnJ1od+kW8lAl6gyahVgMp+j3GAlO2M
-oGCkihK9AgMBAAGjggHUMIIB0DAeBgNVHREEFzAVgRNkYXZpZGdvd0Bnb29nbGUuY29tMA4GA1Ud
-DwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIwHQYDVR0OBBYEFJO3Y8Jq
-ddIn9n5Jt6Z1o79zxraLMEwGA1UdIARFMEMwQQYJKwYBBAGgMgEoMDQwMgYIKwYBBQUHAgEWJmh0
-dHBzOi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMAwGA1UdEwEB/wQCMAAwgZoGCCsG
-AQUFBwEBBIGNMIGKMD4GCCsGAQUFBzABhjJodHRwOi8vb2NzcC5nbG9iYWxzaWduLmNvbS9jYS9n
-c2F0bGFzcjNzbWltZWNhMjAyMDBIBggrBgEFBQcwAoY8aHR0cDovL3NlY3VyZS5nbG9iYWxzaWdu
-LmNvbS9jYWNlcnQvZ3NhdGxhc3Izc21pbWVjYTIwMjAuY3J0MB8GA1UdIwQYMBaAFHzMCmjXouse
-LHIb0c1dlW+N+/JjMEYGA1UdHwQ/MD0wO6A5oDeGNWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20v
-Y2EvZ3NhdGxhc3Izc21pbWVjYTIwMjAuY3JsMA0GCSqGSIb3DQEBCwUAA4IBAQBtHFwIgQZjer5K
-H+4Q+wns10k7qN+4wN2Uf+JsyOYjukaMEgdLErfA1wwtQ9uHkoYQZcWBuVVkQFa5hI+sqI2m1Weq
-riMCFSiU38s1tADdMX12IMfJRN60Nznhrw+nPyDRZqRhUTW24TwnHorkDnFPW8PHo7fAw4FrpI0n
-impZAng7ccvvK09K3ZuhwTIxJMsPXCZYsrXWORTw5sczRAP6XvKbPBJnsJoSTe5dFBPBHOQJOGhU
-qWfEfWnWMJPF3LxSGLpLFQXO3RwQqmxv08avwXfVPouh1xuB3FX7rpDabT8YDhu9JgIZkLEKko7L
-yQt6zWwng7k8YF/jGbiAta6VMYICajCCAmYCAQEwaDBUMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQ
-R2xvYmFsU2lnbiBudi1zYTEqMCgGA1UEAxMhR2xvYmFsU2lnbiBBdGxhcyBSMyBTTUlNRSBDQSAy
-MDIwAhABzgV+4+mJnUzG7XDy6d2uMA0GCWCGSAFlAwQCAQUAoIHUMC8GCSqGSIb3DQEJBDEiBCDm
-F4Ic9SffzyaDMQPCLkKQW+taWwYpJm+BECAkfDyJnzAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcB
-MBwGCSqGSIb3DQEJBTEPFw0yMzEyMTQwODUyMDhaMGkGCSqGSIb3DQEJDzFcMFowCwYJYIZIAWUD
-BAEqMAsGCWCGSAFlAwQBFjALBglghkgBZQMEAQIwCgYIKoZIhvcNAwcwCwYJKoZIhvcNAQEKMAsG
-CSqGSIb3DQEBBzALBglghkgBZQMEAgEwDQYJKoZIhvcNAQEBBQAEggEARS3tFy1kAs0G8X3o4TWH
-oEKuwTgMnhZ5fz7z9rQ6YlIk+yhp9dnsyqKFp/VpdGCO5av2Yv834BDTZtRjp3hZFvnI8x6ay5rx
-LcSpX/6ebX/U/QLMsyj9+Mx0Vwcu6++9ycv3W2ffL+oRa2kGEIi3bHvi2aLU9ObTJc/pBW6luEVV
-1uXNtvMAmpBarA6NQvo38j5dPt5ypLXSJtoIXnVdNqGXqAnqJq1xYxJBTzooY5mQB04E9NKm4dVT
-OMz4ot55/KLmY14DLuJBF+8FlqKa48uA4p3nLyOJFC9C0A5G7ejA4TwCOPDc6Hj9KZEqbqPCag+q
-ohe82MUWiZzz47sOyA==
---000000000000137edd060c7466ed--
+Changes in v4:
+	* remove the following patch:
+	  <net: phylink: move phylink_pcs_neg_mode() to phylink.c>.
+	* split out 10g_qxgmii change of ethernet-controller.yaml.
+
+Changes in v5:
+	* update the author of the patch below.
+	  <introduce core support for phy-mode = "10g-qxgmii">.
+
+Changes in v6:
+	* drop the "inline" keyword.
+	* apply the patches with "--max-line-length=80".
+
+Changes in v7:
+	* add possible interfaces of phydev
+	* customize phy address
+	* add initialized clock & reset config
+	* add the work mode config
+	* update qca,ar803x.yaml for the new added properties
+
+Luo Jie (12):
+  net: phy: at803x: add QCA8084 ethernet phy support
+  net: phy: at803x: add the function phydev_id_is_qca808x
+  net: phy: at803x: Add qca8084_config_init function
+  net: phy: at803x: add qca8084_link_change_notify
+  net: phy: at803x: add the possible_interfaces
+  net: phy: at803x: add qca8084 switch registe access
+  net: phy: at803x: set MDIO address of qca8084 PHY
+  net: phy: at803x: parse qca8084 clocks and resets
+  net: phy: at803x: add qca808x initial config sequence
+  net: phy: at803x: configure qca8084 common clocks
+  net: phy: at803x: configure qca8084 work mode
+  dt-bindings: net: ar803x: add qca8084 PHY propetry
+
+Vladimir Oltean (2):
+  net: phy: introduce core support for phy-mode = "10g-qxgmii"
+  dt-bindings: net: ethernet-controller: add 10g-qxgmii mode
+
+ .../bindings/net/ethernet-controller.yaml     |   1 +
+ .../devicetree/bindings/net/qca,ar803x.yaml   | 158 ++++-
+ Documentation/networking/phy.rst              |   6 +
+ drivers/net/phy/at803x.c                      | 586 +++++++++++++++++-
+ drivers/net/phy/phy-core.c                    |   1 +
+ drivers/net/phy/phylink.c                     |  11 +-
+ include/linux/phy.h                           |   4 +
+ include/linux/phylink.h                       |   2 +
+ 8 files changed, 758 insertions(+), 11 deletions(-)
+
+
+base-commit: 48e8992e33abf054bcc0bb2e77b2d43bb899212e
+-- 
+2.42.0
+
 
