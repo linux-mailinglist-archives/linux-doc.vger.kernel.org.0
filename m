@@ -1,38 +1,38 @@
-Return-Path: <linux-doc+bounces-5090-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5092-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E4B881329F
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 15:11:45 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4218B8132AC
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 15:12:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id ACD37B20B85
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 14:11:42 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id E1EF41F21BD3
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Dec 2023 14:12:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 357B959B4F;
-	Thu, 14 Dec 2023 14:11:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4B47659B7A;
+	Thu, 14 Dec 2023 14:12:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dbNVZtIB"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Hvw/Rmva"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15CFD5788F;
-	Thu, 14 Dec 2023 14:11:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39EC3C433C7;
-	Thu, 14 Dec 2023 14:11:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29C983A8FB;
+	Thu, 14 Dec 2023 14:12:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94130C433C7;
+	Thu, 14 Dec 2023 14:12:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1702563097;
-	bh=GyMtscGKySvG9oLYQyEiY2lUC4Sczcyl7+D4n6Kuh68=;
+	s=k20201202; t=1702563140;
+	bh=kURWfUajABccOzK2w+kJIDkLS9dQkFuhmyqOgcPhtJQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=dbNVZtIBC0vNUoSOfQzYky2npa/M9t2bWxKOFls89F2AM7500dj21eY2ZedF1g74S
-	 BDAt/l8O6XXt6sjY4AlBSHNIdVHoERPlQ1cVV9hc+IzaAvXtYTGDDUSVx4L9M0vdOy
-	 F/qQVrs1sfxmL/PBeDNkppUoTCqCA+opvwYgL7nGb1ESaobz84zwvN0Zt+9cuoxXEf
-	 uJXWpYKEHvXIko+v1hf9SBkyuSQbMOvxc5czneQikTmztS0OD14gCFh2KDLUaDny89
-	 z3J07WYjFCGfeVI1l9s4ceP0vJU0vK7f1CUv+nJITUDIV+Gtu1U5QE61imQEo7fqkC
-	 bJd+Q2IJwGIIA==
-Date: Thu, 14 Dec 2023 14:11:32 +0000
+	b=Hvw/RmvahaG+vJo5uCzSEKnmWfsd+/U85LYZrRyvzhp6UKXlQ1yeeAuNFUnNwVRX4
+	 faMVtWMdLfoiMbxF2UrVXJY9j5g7EGRj7vjWzPlvOd2/qJfcweIVDO/Zav9+pTLVT5
+	 KD9paXFbuWHEl+qO3p45SWuYLD4ikogILu6GXApdBVB3b7LGz3QfULj3y0C6minr8W
+	 TEqF32ejdsEb5MVuzWSx5I/PQQWzAxr3yu4zHXFIhLcpf/SiRDrb0ZZDGOXDtxCVWO
+	 7tHe8IfSwKq/MQZZJt9moqTupXXNYjs5Iy82kL20rZlpRIwJ1lfr3BYJduNqMklMU+
+	 u0vlaMrAMT8rg==
+Date: Thu, 14 Dec 2023 14:12:15 +0000
 From: Conor Dooley <conor@kernel.org>
 To: =?iso-8859-1?Q?Cl=E9ment_L=E9ger?= <cleger@rivosinc.com>
 Cc: linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
@@ -43,10 +43,11 @@ Cc: linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
 	Albert Ou <aou@eecs.berkeley.edu>, Rob Herring <robh+dt@kernel.org>,
 	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
 	Robbin Ehn <rehn@rivosinc.com>
-Subject: Re: [PATCH 3/9] dt-bindings: riscv: add Zam ISA extension description
-Message-ID: <20231214-headed-credible-f94ffb712e91@spud>
+Subject: Re: [PATCH 6/9] dt-bindings: riscv: add Zacas ISA extension
+ description
+Message-ID: <20231214-plywood-little-4fc5f6866938@spud>
 References: <20231213113308.133176-1-cleger@rivosinc.com>
- <20231213113308.133176-4-cleger@rivosinc.com>
+ <20231213113308.133176-7-cleger@rivosinc.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -54,57 +55,36 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="IZDap9bRO8g0/XW1"
+	protocol="application/pgp-signature"; boundary="WsH5yL1is2A3wdVm"
 Content-Disposition: inline
-In-Reply-To: <20231213113308.133176-4-cleger@rivosinc.com>
+In-Reply-To: <20231213113308.133176-7-cleger@rivosinc.com>
 
 
---IZDap9bRO8g0/XW1
+--WsH5yL1is2A3wdVm
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 13, 2023 at 12:32:59PM +0100, Cl=E9ment L=E9ger wrote:
-> Add description for the Zam ISA extension.
+On Wed, Dec 13, 2023 at 12:33:02PM +0100, Cl=E9ment L=E9ger wrote:
+> Add description for the Zacas ISA extension which was ratified recently.
 >=20
 > Signed-off-by: Cl=E9ment L=E9ger <cleger@rivosinc.com>
-> ---
->  Documentation/devicetree/bindings/riscv/extensions.yaml | 5 +++++
->  1 file changed, 5 insertions(+)
->=20
-> diff --git a/Documentation/devicetree/bindings/riscv/extensions.yaml b/Do=
-cumentation/devicetree/bindings/riscv/extensions.yaml
-> index 3574a0b70be4..912cc6a42eb4 100644
-> --- a/Documentation/devicetree/bindings/riscv/extensions.yaml
-> +++ b/Documentation/devicetree/bindings/riscv/extensions.yaml
-> @@ -171,6 +171,11 @@ properties:
->              memory types as ratified in the 20191213 version of the priv=
-ileged
->              ISA specification.
-> =20
-> +        - const: zam
-> +          description: |
-> +            The standard Zam extension for misaligned atomics is support=
-ed as
-> +            ratified in version 20191213 of the riscv-isa-manual.
 
-Is "20191213" an actual tag in that repo? Looking at that version of the
-spec (because it is a spec version, but I don't think it is a valid
-reference to that repo) Zam is listed as Draft. In fact, in the most
-recent thing I could find, Zam was still listed as draft.
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
 
-Are you sure this is ratified?
+Cheers,
+Conor.
 
---IZDap9bRO8g0/XW1
+--WsH5yL1is2A3wdVm
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZXsNFAAKCRB4tDGHoIJi
-0n4WAP0UHU+PgvrzVtz+qD0YcBNQ5QVXPk4viQc73jWiaOWDpQEAoUmgwnWN5N5k
-kXnIAgVh6XBqwvDr3kxU571dBisUywc=
-=q1/2
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZXsNPwAKCRB4tDGHoIJi
+0l8pAQDb06YZM3zu81dwFpDCL6dk+ww9ScWul2gsUo2Cm8U2NgEAjczxPKOsp6/v
+ARmSuUG56RnA+IZRScFD0UD7oxDG8g0=
+=SBUH
 -----END PGP SIGNATURE-----
 
---IZDap9bRO8g0/XW1--
+--WsH5yL1is2A3wdVm--
 
