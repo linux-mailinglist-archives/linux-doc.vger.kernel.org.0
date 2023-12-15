@@ -1,160 +1,103 @@
-Return-Path: <linux-doc+bounces-5256-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5258-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C59B814B0E
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Dec 2023 16:00:12 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id CD684814B5B
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Dec 2023 16:12:30 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6EEC61C238AA
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Dec 2023 15:00:11 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 8997C28AB52
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Dec 2023 15:12:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 117A63589E;
-	Fri, 15 Dec 2023 15:00:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00F0B3FE44;
+	Fri, 15 Dec 2023 15:09:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ThF3UUWw"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ePVwHCVA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0B6235884;
-	Fri, 15 Dec 2023 15:00:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8CD3C433C8;
-	Fri, 15 Dec 2023 14:59:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1702652405;
-	bh=422PM3fDIpd8XBwXAF/Vr2Tijy2/V6yIm6WwhsorExQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=ThF3UUWwGr5c0gG18awOx5DrQRxAPwOOshZh7SWrhMEjGtlJQKezv414UMUQWtogg
-	 HnsI2tu59s1B5g7ry0ZQTMiQwmrK95OYjW9JiQ6MubAahf8tnoIGHG4ZF1g5MM51Ho
-	 Fuyd5f95QOR67Xo2K1+5IQcrm/42yldE3jy4DNl4ppdU048EmnGGuL8meF1yRhb1Vb
-	 LrNl4xg5kA7VxTmTD6d5xMpK4G8SinhZgdQ+byz8MwpizJS6XNp+ezD/RlY5hnqPb5
-	 M/qJhGhNwfiuAs4wEKcr3OTh/1Lt7WuUVP/7vAsp3W1EZLiIXddMPg4h2ayPqcPZD9
-	 deK0um1LZe7kA==
-Date: Fri, 15 Dec 2023 14:59:51 +0000
-From: Mark Brown <broonie@kernel.org>
-To: Thiago Jung Bauermann <thiago.bauermann@linaro.org>
-Cc: Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Marc Zyngier <maz@kernel.org>,
-	Oliver Upton <oliver.upton@linux.dev>,
-	James Morse <james.morse@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Arnd Bergmann <arnd@arndb.de>, Oleg Nesterov <oleg@redhat.com>,
-	Eric Biederman <ebiederm@xmission.com>,
-	Kees Cook <keescook@chromium.org>, Shuah Khan <shuah@kernel.org>,
-	"Rick P. Edgecombe" <rick.p.edgecombe@intel.com>,
-	Deepak Gupta <debug@rivosinc.com>, Ard Biesheuvel <ardb@kernel.org>,
-	Szabolcs Nagy <Szabolcs.Nagy@arm.com>,
-	"H.J. Lu" <hjl.tools@gmail.com>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Florian Weimer <fweimer@redhat.com>,
-	Christian Brauner <brauner@kernel.org>,
-	linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-	kvmarm@lists.linux.dev, linux-fsdevel@vger.kernel.org,
-	linux-arch@vger.kernel.org, linux-mm@kvack.org,
-	linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-riscv@lists.infradead.org
-Subject: Re: [PATCH v7 34/39] kselftest/arm64: Add a GCS test program built
- with the system libc
-Message-ID: <485b6454-135c-4dd4-b38e-8fb8a02779cd@sirena.org.uk>
-References: <20231122-arm64-gcs-v7-0-201c483bd775@kernel.org>
- <20231122-arm64-gcs-v7-34-201c483bd775@kernel.org>
- <875y1089i4.fsf@linaro.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 489223C48F;
+	Fri, 15 Dec 2023 15:09:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1702652969; x=1734188969;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=ah5mzgotn1mPGg5+aEZRvveESjmnNIS1QhgQDAZlBqY=;
+  b=ePVwHCVAywfcZTOQXZdE7ctsjLicO3OXwnleNM8OnqunfghDjylmwycY
+   4aHt6FY/DS+fUKAMZaBe6uaEhU07G/a7fdoVbusT8PK0BDOstFkLggHK3
+   AxoW9nKps6Z1Nf11Vyf3Y0d9NeTG0gJ4tM9aO8FDJWq9Z0ESIOSLdviub
+   6wptZ8G7c17xxlG9xXMYiiENHvhq4ZUj5YzYJtynbosstx2xLRZM79JqM
+   UpVBq6TbRwclQlr2oT2p3haZYdcW4BAkkLp7ycIsVarEJygpq70Mnj0VN
+   ACPlkt9XJKtwPljFBk3gVSL9vuCOpHXKtMC3VC5914iDYiHc0fWG7EIqg
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10924"; a="8645043"
+X-IronPort-AV: E=Sophos;i="6.04,279,1695711600"; 
+   d="scan'208";a="8645043"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Dec 2023 07:09:27 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10924"; a="840691616"
+X-IronPort-AV: E=Sophos;i="6.04,279,1695711600"; 
+   d="scan'208";a="840691616"
+Received: from black.fi.intel.com ([10.237.72.28])
+  by fmsmga008.fm.intel.com with ESMTP; 15 Dec 2023 07:09:23 -0800
+Received: by black.fi.intel.com (Postfix, from userid 1003)
+	id 0CD6A3A3; Fri, 15 Dec 2023 17:03:42 +0200 (EET)
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Subject: [PATCH v1 1/1] kernel-doc: Aling quick help and the code
+Date: Fri, 15 Dec 2023 17:03:41 +0200
+Message-ID: <20231215150341.1996720-1-andriy.shevchenko@linux.intel.com>
+X-Mailer: git-send-email 2.43.0.rc1.1.gbec44491f096
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="M02qk/d68kwsaj1P"
-Content-Disposition: inline
-In-Reply-To: <875y1089i4.fsf@linaro.org>
-X-Cookie: PARDON me, am I speaking ENGLISH?
+Content-Transfer-Encoding: 8bit
 
+The update to the quick help mentions -Wshort-description, but
+code never supported for that. Align that with the code by allowing
+both: -Wshort-description and -Wshort-desc.
 
---M02qk/d68kwsaj1P
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 56b0f453db74 ("kernel-doc: don't let V=1 change outcome")
+Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+---
+ scripts/kernel-doc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On Thu, Dec 14, 2023 at 11:50:11PM -0300, Thiago Jung Bauermann wrote:
-> Mark Brown <broonie@kernel.org> writes:
+diff --git a/scripts/kernel-doc b/scripts/kernel-doc
+index 0a890fe4d22b..7d7ed3e43946 100755
+--- a/scripts/kernel-doc
++++ b/scripts/kernel-doc
+@@ -23,7 +23,7 @@ kernel-doc - Print formatted kernel documentation to stdout
+ 
+ =head1 SYNOPSIS
+ 
+- kernel-doc [-h] [-v] [-Werror] [-Wall] [-Wreturn] [-Wshort-description] [-Wcontents-before-sections]
++ kernel-doc [-h] [-v] [-Werror] [-Wall] [-Wreturn] [-Wshort-desc[ription]] [-Wcontents-before-sections]
+    [ -man |
+      -rst [-sphinx-version VERSION] [-enable-lineno] |
+      -none
+@@ -328,7 +328,7 @@ while ($ARGV[0] =~ m/^--?(.*)/) {
+ 	$Werror = 1;
+     } elsif ($cmd eq "Wreturn") {
+ 	$Wreturn = 1;
+-    } elsif ($cmd eq "Wshort-desc") {
++    } elsif ($cmd eq "Wshort-desc" or $cmd eq "Wshort-description") {
+ 	$Wshort_desc = 1;
+     } elsif ($cmd eq "Wcontents-before-sections") {
+ 	$Wcontents_before_sections = 1;
+-- 
+2.43.0.rc1.1.gbec44491f096
 
-> > +	ret =3D process_vm_writev(child, &local_iov, 1, &remote_iov, 1, 0);
-> > +	if (ret =3D=3D -1)
-> > +		ksft_print_msg("process_vm_readv() failed: %s (%d)\n",
-> > +			       strerror(errno), errno);
-
-> The comment and the error message say "process_vm_readv()", but the
-> function actually called is process_vm_writev(). Is this intended?
-
-No, that's a rebasing issue.
-
-> If I swap process_vm_readv() and process_vm_writev(), then the read
-> succeeds but the write fails:
->=20
-> #  RUN           global.ptrace_read_write ...
-> # Child: 1996
-> # Child GCSPR 0xffffa7fcffd8, flags 1, locked 0
-> # process_vm_writev() failed: Bad address (14)
-> # libc-gcs.c:291:ptrace_read_write:Expected ret (-1) =3D=3D sizeof(rval) =
-(8)
-> # libc-gcs.c:293:ptrace_read_write:Expected val (281473500358268) =3D=3D =
-ptrace(PTRACE_PEEKDATA, child, (void *)gcspr, NULL) (0)
-> # ptrace_read_write: Test failed at step #1
-> #          FAIL  global.ptrace_read_write
-> not ok 4 global.ptrace_read_write
-
-Yeah, I did notice something had happened with the writes but didn't
-investigate yet.
-
-> Also, it's strange that the tests defined after map_gcs.stack_overflow
-> don't run when I execute this test program. I'm doing:
-
-> $ ./run_kselftest.sh -t arm64:libc-gcs
-
-> I.e., these tests aren't being run in my FVP:
-
-> > +FIXTURE_VARIANT_ADD(map_invalid_gcs, too_small)
-> > +FIXTURE_VARIANT_ADD(map_invalid_gcs, unligned_1)
-> > +FIXTURE_VARIANT_ADD(map_invalid_gcs, unligned_2)
-> > +FIXTURE_VARIANT_ADD(map_invalid_gcs, unligned_3)
-> > +FIXTURE_VARIANT_ADD(map_invalid_gcs, unligned_4)
-> > +FIXTURE_VARIANT_ADD(map_invalid_gcs, unligned_5)
-> > +FIXTURE_VARIANT_ADD(map_invalid_gcs, unligned_6)
-> > +FIXTURE_VARIANT_ADD(map_invalid_gcs, unligned_7)
-> > +TEST_F(map_invalid_gcs, do_map)
-> > +FIXTURE_VARIANT_ADD(invalid_mprotect, exec)
-> > +FIXTURE_VARIANT_ADD(invalid_mprotect, bti)
-> > +FIXTURE_VARIANT_ADD(invalid_mprotect, exec_bti)
-> > +TEST_F(invalid_mprotect, do_map)
-> > +TEST_F(invalid_mprotect, do_map_read)
-
-I'm seeing all of those appearing.  I'm not sure what to say there -
-that's all kselftest framework stuff, I'd expect the framework to say
-something about what it's doing if it decides to skip and I can't think
-why it would decide to skip.
-
---M02qk/d68kwsaj1P
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmV8aecACgkQJNaLcl1U
-h9Cx7Qf+NstvmUJDmhKZCiSXybEblR3UfKc2ERXjiJRyMZJYWGE59Aqau43rUxYz
-4oELXv45Jxb9fBX19Ap6W19TxDrGHMHoCW6fuIiqeTu9L1798R0lJi1TuUxnoX2t
-t/s1MqP87pbwKNs60ne9ezvagfQhFFBAYyUepAxrvfPkeUakOwLgsHRwx2bEVsXv
-6SsJJ9hRz7N2FvlP487cWfC5VQkyYjefXQHi/1OrZw1hSkS9a5Hb/Y1vBzacFUbS
-YDYZszJexTXkcRjAngFzHsCBCakK3xpFB1uRPMhrAOj51UDJHHwE4+nX7DUWZaxT
-delEJTYjMd7cGaEpGyDdMnkhQVyM4g==
-=fKsW
------END PGP SIGNATURE-----
-
---M02qk/d68kwsaj1P--
 
