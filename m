@@ -1,73 +1,62 @@
-Return-Path: <linux-doc+bounces-5385-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5387-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 718D8815942
-	for <lists+linux-doc@lfdr.de>; Sat, 16 Dec 2023 14:26:30 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D302B815996
+	for <lists+linux-doc@lfdr.de>; Sat, 16 Dec 2023 14:51:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 14B92B22EC0
-	for <lists+linux-doc@lfdr.de>; Sat, 16 Dec 2023 13:26:28 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 118CA1C2171F
+	for <lists+linux-doc@lfdr.de>; Sat, 16 Dec 2023 13:51:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 27C9625119;
-	Sat, 16 Dec 2023 13:26:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5BD9D2D033;
+	Sat, 16 Dec 2023 13:51:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="U6JKP7NJ"
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b="IoXaWU4d"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk [78.32.30.218])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDA491798A;
-	Sat, 16 Dec 2023 13:26:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3BGCwnrd012660;
-	Sat, 16 Dec 2023 13:26:05 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	message-id:date:mime-version:subject:to:cc:references:from
-	:in-reply-to:content-type:content-transfer-encoding; s=
-	qcppdkim1; bh=bKynHJWGr7ONAz8unpVeqEBnAd5NDlRFfmjDUgTUwJE=; b=U6
-	JKP7NJjx8ckYuJxc1SrA+hbk6U2iZ3NCHXMi2ARdsQFgj6TLCRZVj5DMrocXcsw1
-	xgkYViIVGsn+I5m9jGH72JiEaIN8GUnR7ToaKyawbmX+HDRobi40p0MOgD7Pmnau
-	XilYBD4GAiMXQTlH53xSCmaLGBGFMhUoFTh8eQgx+IVveInz0EteX4rSzlwV3/m7
-	jiI2XUhZDAYXZOQftZnakbeOknHyrHvj6e7ktlRPCGgcDN5aQV57GgyZeS6hy3rV
-	PTl8olttwLayqngNVSEwdcV09KtH3NRd1ASVUtmVtt734hT2ZasTH/aEliEmWPLl
-	FE9lxuDbNjiIEqah1hVA==
-Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3v14vj8mcb-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 16 Dec 2023 13:26:05 +0000 (GMT)
-Received: from nalasex01c.na.qualcomm.com (nalasex01c.na.qualcomm.com [10.47.97.35])
-	by NALASPPMTA04.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 3BGDQ4kG030722
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 16 Dec 2023 13:26:04 GMT
-Received: from [10.253.9.247] (10.80.80.8) by nalasex01c.na.qualcomm.com
- (10.47.97.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.40; Sat, 16 Dec
- 2023 05:26:00 -0800
-Message-ID: <b014eaea-5b3d-4463-bcf6-f6b4fff16e45@quicinc.com>
-Date: Sat, 16 Dec 2023 21:25:57 +0800
-Precedence: bulk
-X-Mailing-List: linux-doc@vger.kernel.org
-List-Id: <linux-doc.vger.kernel.org>
-List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
-List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E8152C6A9;
+	Sat, 16 Dec 2023 13:51:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=armlinux.org.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=armlinux.org.uk
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
+	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=dSsrLnhvQMh6fed+BTCDMZIum7s58eYFEwcQNJr4BqE=; b=IoXaWU4dUaeDmsuhAoOpjm0sd1
+	HKoOolEwFK2gD1iF5p99cML3WccY5XjkOnhu4UMZKmToZqqCH+hiLjvMN9jBKK+dYfDMAm1zXNA4W
+	6Mk+75xgCTm+tulWvITlE4xFal1mtk7fzv9ibLC7TU9P9Fb4ljxK7g0J+mEijHuAOhf7iQkpgWbAQ
+	1kZhD08zTk9W7asMgGI+tx9/oDwtlCzpx8sbvqJ6vsak5wKTn6ji4hH12MjxiN/edLqTJnk3J+/ar
+	pVv7Tl243xLUkI7wK8ZVuvXfjwU9bQd8EfYiXFinqZNN1QluCuZw9iN+m2GvZ+XgvSdPHfDsK70R4
+	h3akB9TQ==;
+Received: from shell.armlinux.org.uk ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:55866)
+	by pandora.armlinux.org.uk with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <linux@armlinux.org.uk>)
+	id 1rEV4X-0003ms-22;
+	Sat, 16 Dec 2023 13:51:17 +0000
+Received: from linux by shell.armlinux.org.uk with local (Exim 4.94.2)
+	(envelope-from <linux@shell.armlinux.org.uk>)
+	id 1rEV4V-0004i2-WF; Sat, 16 Dec 2023 13:51:16 +0000
+Date: Sat, 16 Dec 2023 13:51:15 +0000
+From: "Russell King (Oracle)" <linux@armlinux.org.uk>
+To: Andrew Lunn <andrew@lunn.ch>
+Cc: Jie Luo <quic_luoj@quicinc.com>, davem@davemloft.net,
+	edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
+	robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+	conor+dt@kernel.org, hkallweit1@gmail.com, corbet@lwn.net,
+	p.zabel@pengutronix.de, f.fainelli@gmail.com,
+	netdev@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	Christian Marangi <ansuelsmth@gmail.com>
 Subject: Re: [PATCH v8 14/14] dt-bindings: net: ar803x: add qca8084 PHY
  properties
-Content-Language: en-US
-To: Andrew Lunn <andrew@lunn.ch>
-CC: <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
-        <pabeni@redhat.com>, <robh+dt@kernel.org>,
-        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
-        <hkallweit1@gmail.com>, <linux@armlinux.org.uk>, <corbet@lwn.net>,
-        <p.zabel@pengutronix.de>, <f.fainelli@gmail.com>,
-        <netdev@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        Christian Marangi <ansuelsmth@gmail.com>
+Message-ID: <ZX2rU5OFcZFyBmGl@shell.armlinux.org.uk>
 References: <20231215074005.26976-1-quic_luoj@quicinc.com>
  <20231215074005.26976-15-quic_luoj@quicinc.com>
  <60b9081c-76fa-4122-b7ae-5c3dcf7229f9@lunn.ch>
@@ -75,39 +64,51 @@ References: <20231215074005.26976-1-quic_luoj@quicinc.com>
  <f5c5cbce-c36e-498a-97e2-35f06d927d74@lunn.ch>
  <a9798333-3105-422f-8033-76c0b1d4f439@quicinc.com>
  <7c05b08a-bb6d-4fa1-8cee-c1051badc9d9@lunn.ch>
-From: Jie Luo <quic_luoj@quicinc.com>
+Precedence: bulk
+X-Mailing-List: linux-doc@vger.kernel.org
+List-Id: <linux-doc.vger.kernel.org>
+List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
+List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 In-Reply-To: <7c05b08a-bb6d-4fa1-8cee-c1051badc9d9@lunn.ch>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nalasex01c.na.qualcomm.com (10.47.97.35)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: Ft3wACUMi1EDWWRqOH5MtATbJQGxTlqu
-X-Proofpoint-GUID: Ft3wACUMi1EDWWRqOH5MtATbJQGxTlqu
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-12-09_01,2023-12-07_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 impostorscore=0
- bulkscore=0 adultscore=0 phishscore=0 malwarescore=0 mlxscore=0
- suspectscore=0 mlxlogscore=648 lowpriorityscore=0 clxscore=1015
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2311290000 definitions=main-2312160104
+Sender: Russell King (Oracle) <linux@armlinux.org.uk>
 
-
-
-On 12/16/2023 6:21 PM, Andrew Lunn wrote:
->> The following is the chip package, the chip can work on the switch mode
->> like the existed upstream code qca8k, where PHY1-PHY4 is connected with
->> MAC1-MAC4 directly;
+On Sat, Dec 16, 2023 at 11:21:53AM +0100, Andrew Lunn wrote:
+> > The following is the chip package, the chip can work on the switch mode
+> > like the existed upstream code qca8k, where PHY1-PHY4 is connected with
+> > MAC1-MAC4 directly;
 > 
 > Ah, that is new information, and has a big effect on the design.
-> 
-> Can the qca8K driver be extended to drive this hardware in switch
-> mode?
-> 
-> 	Andrew
 
-Yes, Andrew, the qca8k driver can be extended to drive this hardware in
-the switch mode, we will push it to the upstream in the near future.
+This QCA8084 that's being proposed in these patches is not a PHY in
+itself, but is a SoC. I came across this:
+
+ https://www.rt-rk.com/android-tv-solution-tv-in-smartphone-pantsstb-based-on-qualcomm-soc-design/
+
+It's sounding like what we have here is some PHY IP that is integrated
+into a larger SoC, and the larger SoC needs to be configured so the
+PHY IP can work correctly.
+
+Given that this package of four PHYs seems to be rather unique, I think
+we need Jie Luo to provide sufficient information so we can understand:
+
+1) this package of four PHYs itself
+2) how this package is integrated into the SoC
+
+Specifically, what resets and clocks are controlled from within the
+package's register space, which are external to the package
+register space (and thus are provided by other IPs in the SoC).
+
+As I've said previously, the lack of DT example doesn't help to further
+our understanding. The lack of details of what the package encompases
+also doesn't help us understand the hardware.
+
+Unless we can gain that understanding, I feel that Jie Luo's patches
+are effectively unreviewable and can't be accepted into mainline.
+
+-- 
+RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
+FTTP is here! 80Mbps down 10Mbps up. Decent connectivity at last!
 
