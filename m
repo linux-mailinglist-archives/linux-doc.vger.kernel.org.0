@@ -1,154 +1,131 @@
-Return-Path: <linux-doc+bounces-5472-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5477-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D364817765
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Dec 2023 17:27:18 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FBE7817780
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Dec 2023 17:29:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B011D1C246AA
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Dec 2023 16:27:17 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 29E4CB237CE
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Dec 2023 16:29:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 845FC498BF;
-	Mon, 18 Dec 2023 16:26:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7E84749891;
+	Mon, 18 Dec 2023 16:29:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZLd3hkGn"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pgPaNxRa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-vs1-f42.google.com (mail-vs1-f42.google.com [209.85.217.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CAF3D498BC;
-	Mon, 18 Dec 2023 16:26:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-vs1-f42.google.com with SMTP id ada2fe7eead31-4669ac6df36so251421137.2;
-        Mon, 18 Dec 2023 08:26:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702916812; x=1703521612; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=E3bMqGvFd2ovYEJupaD2iiMJymj8eT2qHOLEt3EV5ao=;
-        b=ZLd3hkGnagBFyTsc48vJwy4caSlADCkMddjZDoBczoGq9TK1pS03D74kUbpW1J5pED
-         oNnDfAWelwmb0vdh1O+UsdkYXalC4yEOQ9XFQtMOcFAmOmnc8mMI7jSHHKaoS6AkLgCc
-         HBv+gzrxC/fP/nu6YoI91n7vwWf5A/Tyua6Zmf7jPtXpVs4bIWvwwJ8k/nW7Krjgdx9H
-         NU4qAIUL7e1D/XwZqnUt65QjJUOP1cV+RiC6QOhZ+pnvbxBH+m3VRa3OfPgkR3EfzRZR
-         olaTq5sfXO0waR29UBzS1VddVxU7ofw5aNO/gLYynp9MPTIQHo+SSUYjg9TP4cnBocxw
-         23Zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702916812; x=1703521612;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
-         :to:content-language:subject:user-agent:mime-version:date:message-id
-         :sender:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=E3bMqGvFd2ovYEJupaD2iiMJymj8eT2qHOLEt3EV5ao=;
-        b=dJNqj43VKn9DqCtR14smLBKRgoRHrYm+SAvcTd6tQenpOk81ImpDv5XnNZoVxhRRyl
-         cgy0kQtZchP2uJqegHE1UajXGmFFSSwvPqIc24Io7TM7I0cNa6nZWgCrAoRI954jYudX
-         NVszewqhbI0gb6sw1B6PNew2AWK4fOSBejVyPqv7Ww5cXVo7pFFNcC90BjP8+WHMnxzs
-         XIFAhoE6Ze9dBuQF8nbny9yne/ecHh1Udyd/bN1DczbkDV6aNdAjXmxNzAUIUpII7itL
-         GzQyrK5b8J+m7Qmgy/osLpS1KpecQKtG6vJxiwWZn0vvXRoleMJtGO9GA+VFgYD0CRjb
-         w4TQ==
-X-Gm-Message-State: AOJu0YzgTKDWpGn9gNrMwdK7w5KKm6Lh6EWtNXfmum5gzVgHCFZue2dG
-	5xfEtTRD4klFzhu+9X0VSow=
-X-Google-Smtp-Source: AGHT+IGjSB5M0cOljLHaztxwaNbNAoUs6AJuGoEggJJ4Q9aGq0EApZCsoJfeIXHDdyIAeEVr0JGBIw==
-X-Received: by 2002:a05:6102:32c9:b0:465:dcc0:6538 with SMTP id o9-20020a05610232c900b00465dcc06538mr12358249vss.38.1702916812580;
-        Mon, 18 Dec 2023 08:26:52 -0800 (PST)
-Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c? ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
-        by smtp.gmail.com with ESMTPSA id hw11-20020a67e70b000000b004668bf7d113sm271112vsb.34.2023.12.18.08.26.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 18 Dec 2023 08:26:52 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <5baa93fe-bd08-4f11-9c5c-42060e89930c@roeck-us.net>
-Date: Mon, 18 Dec 2023 08:26:50 -0800
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B9253D57F;
+	Mon, 18 Dec 2023 16:29:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E77EC433C7;
+	Mon, 18 Dec 2023 16:28:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1702916941;
+	bh=cuIJ/8s2AYcAKCRZwOwQRNGRaRi9/bICEVQ2fASqZdk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=pgPaNxRa19QteSUajSmhwIBygIXOwyglTsgblC6uEftO+XTQg6+O3kXAj9XX2OmcC
+	 rQOpqnvB5+xOO/ow7seOv1CdwV13FbembY2BokFhPnwSM4b0DvGeATzzmDK+AEOLHw
+	 6DaCbWimil/lLwi/MxyvK5Y12TLnf9HBPcW++ZT9x3tzMvn7KL4GnLx7Lcu5QvqSQp
+	 eltb1y4JDmA5690dgcONdt9hmYC6CU/Xhok/FJZ/y98obP8l0G4B7kd38/bxCcL5CD
+	 m0hJV4fUjPoN82jbVmU9YShGfagm/C07b9jmlsrqKjpLRJaGDiIiVu6scxMm9bEVQ6
+	 YQAI2eQ+xkSew==
+Date: Mon, 18 Dec 2023 17:28:53 +0100
+From: Lorenzo Pieralisi <lpieralisi@kernel.org>
+To: "Rafael J. Wysocki" <rafael@kernel.org>
+Cc: "Russell King (Oracle)" <linux@armlinux.org.uk>,
+	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+	linux-pm@vger.kernel.org, loongarch@lists.linux.dev,
+	linux-acpi@vger.kernel.org, linux-arch@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-riscv@lists.infradead.org, kvmarm@lists.linux.dev,
+	x86@kernel.org, acpica-devel@lists.linuxfoundation.org,
+	linux-csky@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-ia64@vger.kernel.org, linux-parisc@vger.kernel.org,
+	Salil Mehta <salil.mehta@huawei.com>,
+	Jean-Philippe Brucker <jean-philippe@linaro.org>,
+	jianyong.wu@arm.com, justin.he@arm.com,
+	James Morse <james.morse@arm.com>
+Subject: Re: [PATCH RFC v3 13/21] ACPICA: Add new MADT GICC flags fields
+Message-ID: <ZYBzRWs7v1PsF6qV@lpieralisi>
+References: <ZXmn46ptis59F0CO@shell.armlinux.org.uk>
+ <E1rDOgs-00Dvko-6t@rmk-PC.armlinux.org.uk>
+ <20231215162322.00007391@Huawei.com>
+ <ZXyEiHLFBsoUkfNI@shell.armlinux.org.uk>
+ <ZYAPhlwPUT/7dN4n@lpieralisi>
+ <CAJZ5v0hyUqJspPbGTgTMSVHVBe=wHR6swPx-O3UcsH5dXDFpTA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] hwmon: max31827: Add PEC support
-Content-Language: en-US
-To: "Matyas, Daniel" <Daniel.Matyas@analog.com>
-Cc: Jean Delvare <jdelvare@suse.com>, Rob Herring <robh+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
- "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-References: <20231214143648.175336-1-daniel.matyas@analog.com>
- <2e0bf1cf-824d-40c6-9450-7ed4740f2f46@roeck-us.net>
- <PH0PR03MB6771B89E4D3291BA0B1B5ABF8990A@PH0PR03MB6771.namprd03.prod.outlook.com>
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- mDW4+i+XlNFUPUYMrIKi9joBhu18ssf5i5Q=
-In-Reply-To: <PH0PR03MB6771B89E4D3291BA0B1B5ABF8990A@PH0PR03MB6771.namprd03.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAJZ5v0hyUqJspPbGTgTMSVHVBe=wHR6swPx-O3UcsH5dXDFpTA@mail.gmail.com>
 
-On 12/18/23 06:55, Matyas, Daniel wrote:
-[ ... ]
->> On top of that, it is not clear why regmap can't be used in the first place.
->> It seems that the major change is that one needs to read the configuration
->> register after a write to see if there was a PEC error. It is not immediately
->> obvious why that additional read (if indeed necessary) would require
->> regmap support to be dropped.
->>
+On Mon, Dec 18, 2023 at 02:14:30PM +0100, Rafael J. Wysocki wrote:
+> On Mon, Dec 18, 2023 at 10:23 AM Lorenzo Pieralisi
+> <lpieralisi@kernel.org> wrote:
+> >
+> > On Fri, Dec 15, 2023 at 04:53:28PM +0000, Russell King (Oracle) wrote:
+> > > On Fri, Dec 15, 2023 at 04:23:22PM +0000, Jonathan Cameron wrote:
+> > > > On Wed, 13 Dec 2023 12:50:18 +0000
+> > > > Russell King (Oracle) <rmk+kernel@armlinux.org.uk> wrote:
+> > > >
+> > > > > From: James Morse <james.morse@arm.com>
+> > > > >
+> > > > > Add the new flag field to the MADT's GICC structure.
+> > > > >
+> > > > > 'Online Capable' indicates a disabled CPU can be enabled later. See
+> > > > > ACPI specification 6.5 Tabel 5.37: GICC CPU Interface Flags.
+> > > > >
+> > > > > Signed-off-by: James Morse <james.morse@arm.com>
+> > > > > Tested-by: Miguel Luis <miguel.luis@oracle.com>
+> > > > > Tested-by: Vishnu Pajjuri <vishnu@os.amperecomputing.com>
+> > > > > Tested-by: Jianyong Wu <jianyong.wu@arm.com>
+> > > > > Signed-off-by: Russell King (Oracle) <rmk+kernel@armlinux.org.uk>
+> > > >
+> > > > I see there is an acpica pull request including this bit but with a different name
+> > > > For reference.
+> > > > https://github.com/acpica/acpica/pull/914/commits/453a5f67567786522021d5f6913f561f8b3cabf6
+> > > >
+> > > > +CC Lorenzo who submitted that.
+> > >
+> > > > > +#define ACPI_MADT_GICC_CPU_CAPABLE      (1<<3)   /* 03: CPU is online capable */
+> > > >
+> > > > ACPI_MADT_GICC_ONLINE_CAPABLE
+> > >
+> > > It's somewhat disappointing, but no big deal. It's easy enough to change
+> > > "irqchip/gic-v3: Add support for ACPI's disabled but 'online capable' CPUs"
+> > > to use Lorenzo's name when that patch hits - and it becomes one less
+> > > patch in this patch set when Lorenzo's change eventually hits mainline.
+> > >
+> > > Does anyone know how long it may take for Lorenzo's change to get into
+> > > mainline? Would it be by the 6.8 merge window or the following one?
+> >
+> > I wish I knew. I submitted ACPICA changes for the online capable bit
+> > since I had to add additional flags on top (ie DMA coherent) and it
+> > would not make sense to submit the latter without the former.
+> >
+> > I'd be great if the ACPICA headers can make it into Linux for the upcoming
+> > merge window, not sure what I can do to fasttrack the process though
+> > (I shall ping the maintainers).
 > 
-> I tried out writing and and reading with regmap, but it is not working properly. Even if I modify the client flag, I still receive only 2 bytes of data (a word). I should be receiving 2+1 bytes = data + CRC-8.
-> 
-> With i2c_smbus reads and writes, when I set the flag, I receive the 2+1 bytes, as expected.
-> 
+> If your upstream pull request has been merged, I can pick up Linux
+> patches carrying Link: tags pointing to the upstream ACPICA commits in
+> that pull request.
 
-The SMBus code in drivers/i2c/i2c-core-smbus.c is supposed to check
-if the received PEC is correct for SMBus transfers. Are you saying
-that this doesn't work, or that regmap doesn't use SMBus functions
-to communicate with the chip ?
+Thank you, I don't think it has been merged yet (and it requires
+review because I am not that familiar with the ACPICA code base).
+
+Hopefully it should be an extended kernel cycle so it might be
+possible to get these headers in v6.8, if you deem that reasonable
+of course once the PR is merged.
 
 Thanks,
-Guenter
-
+Lorenzo
 
