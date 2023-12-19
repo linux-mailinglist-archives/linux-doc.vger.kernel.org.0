@@ -1,88 +1,84 @@
-Return-Path: <linux-doc+bounces-5556-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5572-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id E31BD818C67
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 17:39:19 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 863F3818CCF
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 17:48:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 82335B22A87
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 16:39:17 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3A8521F25C0D
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 16:48:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D00991D556;
-	Tue, 19 Dec 2023 16:39:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D91E020333;
+	Tue, 19 Dec 2023 16:47:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZIv5vl6I"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="YUvsQkVW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A30751D552;
-	Tue, 19 Dec 2023 16:39:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 17667C433C7;
-	Tue, 19 Dec 2023 16:39:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1703003952;
-	bh=wb/5N6aX2kjkjlR4kVdnXgTy0oMj0gu75axHsjnB4PE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=ZIv5vl6IreD9nGU/VDUpb+sY4WBiwLYSC8jIVQHXFnYn3dozFnK6aae9ze6jzP+IB
-	 f0yy4lMoX4yZyB/ygkzL9l9L7lKzxYhdxM83nCE9eSxgppSkna4ZijtGt4UvQ09Beo
-	 m0pjHxErJYM5EHjYxbuXqqcCCajkpQg11JEcAKVCbUDhxGIsGq0sLKffjj9jIU2sHS
-	 eUzZQsegL9aqQ1mXLlg7uIe8mcgnxLFFsUZzU02JgAOCdDmKwrVawp8NTPBsaMGReG
-	 KjQG9T2OJfxr9s0v5oNWh0JQe+QkIoyM3X9zTOpxpqQAs3XFm7I4icrWsJwJaK4kQ1
-	 e5qr+q2LanG9w==
-Date: Tue, 19 Dec 2023 16:39:07 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Nuno Sa <nuno.sa@analog.com>
-Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-doc@vger.kernel.org, Jean Delvare <jdelvare@suse.com>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Rob Herring <robh+dt@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH v4 1/3] dt-bindings: hwmon: Add LTC4282 bindings
-Message-ID: <20231219-cusp-bottom-f96757a74ad4@spud>
-References: <20231218-b4-ltc4282-support-v4-0-4fc51f7d04f0@analog.com>
- <20231218-b4-ltc4282-support-v4-1-4fc51f7d04f0@analog.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59A9720311;
+	Tue, 19 Dec 2023 16:47:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=desiato.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
+	:MIME-Version:Message-ID:References:In-Reply-To:Subject:To:From:Date:Sender:
+	Reply-To:Cc:Content-ID:Content-Description;
+	bh=EOCD7Shlg2KFEVb25pFCb4aRILZyHRKFnKAAS7R3DdM=; b=YUvsQkVW2VCdKuroGCXVzxdaZl
+	21cJwKUkRqR63J8X6RhppnFmHFYn/C+Ft6YRoCxEcn+6ppHrR3CZNwX1ckQ6d5waZWUQt8lUHekdl
+	k4EHJm9LeGidlILKwvWHic/XLw9Rt6+6LbqTg8B4bh3R/XzdVBDtuDi8fAqm+DcTZv/OdcNwe3yOR
+	u8J+z1elCamCtlwvEeeNWuZmqf//VckZq5qTwj3oEFxI4eRBWamhceUWzcuHCoabS+sEShd9hi1gl
+	m9b4+q/EzV8aocjU7AbZl2aBbeKHX4Xs1ZeK0SFn5EPpFbWU0EPrAq3Z+mLEfmdmYnvA6J61TeG/F
+	5KG8Obfg==;
+Received: from [2001:8b0:10b:5:20dd:b45a:6fd4:1db5] (helo=[IPv6:::1])
+	by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+	id 1rFdEv-00DXFG-1F;
+	Tue, 19 Dec 2023 16:46:41 +0000
+Date: Tue, 19 Dec 2023 16:46:40 +0000
+From: David Woodhouse <dwmw2@infradead.org>
+To: Paul Durrant <paul@xen.org>, Paolo Bonzini <pbonzini@redhat.com>,
+ Jonathan Corbet <corbet@lwn.net>, Sean Christopherson <seanjc@google.com>,
+ Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+ Shuah Khan <shuah@kernel.org>, kvm@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH v11 16/19] KVM: xen: split up kvm_xen_set_evtchn_fast()
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20231219161109.1318-17-paul@xen.org>
+References: <20231219161109.1318-1-paul@xen.org> <20231219161109.1318-17-paul@xen.org>
+Message-ID: <5B3EDE03-67F4-4BA2-89AA-F882DB6DE702@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="Yy/w6T2nb8yOn8tB"
-Content-Disposition: inline
-In-Reply-To: <20231218-b4-ltc4282-support-v4-1-4fc51f7d04f0@analog.com>
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
+On 19 December 2023 16:11:06 GMT, Paul Durrant <paul@xen=2Eorg> wrote:
+>From: Paul Durrant <pdurrant@amazon=2Ecom>
+>
+>The implementation of kvm_xen_set_evtchn_fast() is a rather lengthy piece
+>of code that performs two operations: updating of the shared_info
+>evtchn_pending mask, and updating of the vcpu_info evtchn_pending_sel
+>mask=2E Introduce a separate function to perform each of those operations=
+ and
+>re-work kvm_xen_set_evtchn_fast() to use them=2E
+>
+>No functional change intended=2E
+>
+>Signed-off-by: Paul Durrant <pdurrant@amazon=2Ecom
 
---Yy/w6T2nb8yOn8tB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Reviewed-by: <dwmw@amazon=2Eco=2Euk>
 
-On Mon, Dec 18, 2023 at 05:29:42PM +0100, Nuno Sa wrote:
-> Add bindings for the LTC4282 High Current Hot Swap Controller with I2C
-> Compatible Monitoring.
+Would still like to see the xen_shinfo_test use an evtchn port# which trig=
+gers the bug in the precious version=2E
 
-I'm not sure what to look for to confirm that the gpio2/gpio3 muxing was
-fixed in this version, but the default stuff was fixed, so on that basis
-Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
-
-Cheers,
-Conor.
-
---Yy/w6T2nb8yOn8tB
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZYHHKwAKCRB4tDGHoIJi
-0nVlAQDNeZWK5iII4yxy5MQ1drX9id82jc3ID1sbffV6YvgNJAD+P6cRIDrzsCyK
-lkd0RHUeC/b6KHCce35s3CtwOi64BQI=
-=hlD/
------END PGP SIGNATURE-----
-
---Yy/w6T2nb8yOn8tB--
 
