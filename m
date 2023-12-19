@@ -1,173 +1,132 @@
-Return-Path: <linux-doc+bounces-5547-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5561-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C5DA818B09
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 16:18:37 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C184818C80
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 17:42:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 20E241F222AF
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 15:18:37 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id BF6361F25AB3
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 16:41:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0EA731C69D;
-	Tue, 19 Dec 2023 15:18:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDA0020B2F;
+	Tue, 19 Dec 2023 16:40:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VJku28t7"
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="hsZMXagx"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail.xenproject.org (mail.xenproject.org [104.130.215.37])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D83511C68E;
-	Tue, 19 Dec 2023 15:18:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C1A6C433C7;
-	Tue, 19 Dec 2023 15:18:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1702999111;
-	bh=Cg5b/5tI5hGW7/qm/Gvqq5j7ejZo4mNgei7t5YpHVwY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=VJku28t75geTgwb87nJfm516qgeb03gxGqykx+Ug53UD5+ZnGpYLpNofyeLcoTdxs
-	 qNT8X5bjaNvrQQRlkb5gGCDkSfeQHtHKINalhLVEMlI7a/WW9UMlQpuAfZ4zoUlY7M
-	 YtB+0wtg4Yozgxokvxy15xmsTcskzZqBpqgW1HqE75D6PRzyRfEHb+cdW0Uuow+z2e
-	 kQUy/27RqwLq6paKhlxh+RU6E+nJaSFK7rZwyneQKqb/AlL8Koky++JKGnlnFwe214
-	 EbJ/cK07hErgkRAf/jW4mxcicLw1NZmZQ3YRhlPvg/R8EDbnWPVzUk+MY7tnyWiGI2
-	 60c5+uH/T51Dw==
-Date: Tue, 19 Dec 2023 15:18:24 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Abdel Alkuor <alkuor@gmail.com>
-Cc: Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>,
-	Rob Herring <robh+dt@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] dt-bindings: hwmon: (lm75) Add AMS AS6200
- temperature sensor
-Message-ID: <20231219-mascot-semester-7d2c492b99bc@spud>
-References: <89fb5eec30df734ee8fc58427cf5d94929076514.1702874115.git.alkuor@gmail.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DEF932C7E;
+	Tue, 19 Dec 2023 16:40:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=xen.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
+	Subject:To:From; bh=57goH/6cxWcfb2OLWV035vnGe0L7dKUP3rllvb9LgIs=; b=hsZMXagxd
+	cneDEkY2R/4JhDHQzttdGTXVeDlha3N1T0dvRckqsk7l8a5nyGGcgpO9J0HCWXnFxbRkaFsDAsAfq
+	3kQCy//4muUSBMnUXYg7O6X45vJezwtjk3Tv3sTKBbBDmOIzqBMPh0AP0DMAv/mSUWKPNx4dD77u7
+	8aSccXfU=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1rFcjo-0005Le-46; Tue, 19 Dec 2023 16:14:32 +0000
+Received: from 54-240-197-226.amazon.com ([54.240.197.226] helo=REM-PW02S00X.ant.amazon.com)
+	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1rFcjn-0005h9-NZ; Tue, 19 Dec 2023 16:14:31 +0000
+From: Paul Durrant <paul@xen.org>
+To: Paolo Bonzini <pbonzini@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Sean Christopherson <seanjc@google.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Paul Durrant <paul@xen.org>,
+	Shuah Khan <shuah@kernel.org>,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH v11 00/19] KVM: xen: update shared_info and vcpu_info handling
+Date: Tue, 19 Dec 2023 16:10:50 +0000
+Message-Id: <20231219161109.1318-1-paul@xen.org>
+X-Mailer: git-send-email 2.39.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="rMcjOlarOJdLELTJ"
-Content-Disposition: inline
-In-Reply-To: <89fb5eec30df734ee8fc58427cf5d94929076514.1702874115.git.alkuor@gmail.com>
+Content-Transfer-Encoding: 8bit
+
+From: Paul Durrant <pdurrant@amazon.com>
+
+This series has some small fixes from what was in version 10 [1]:
+
+* KVM: pfncache: allow a cache to be activated with a fixed (userspace) HVA
+
+This required a small fix to kvm_gpc_check() for an error that was
+introduced in version 8.
+
+* KVM: xen: separate initialization of shared_info cache and content
+
+This accidentally regressed a fix in commit 5d6d6a7d7e66a ("KVM: x86:
+Refine calculation of guest wall clock to use a single TSC read").
+
+* KVM: xen: re-initialize shared_info if guest (32/64-bit) mode is set
+
+This mistakenly removed the initialization of shared_info from the code
+setting the KVM_XEN_ATTR_TYPE_SHARED_INFO attribute, which broke the self-
+tests.
+
+* KVM: xen: split up kvm_xen_set_evtchn_fast()
+
+This had a /32 and a /64 swapped in set_vcpu_info_evtchn_pending().
+
+[1] https://lore.kernel.org/kvm/20231204144334.910-1-paul@xen.org/
+
+Paul Durrant (19):
+  KVM: pfncache: Add a map helper function
+  KVM: pfncache: remove unnecessary exports
+  KVM: xen: mark guest pages dirty with the pfncache lock held
+  KVM: pfncache: add a mark-dirty helper
+  KVM: pfncache: remove KVM_GUEST_USES_PFN usage
+  KVM: pfncache: stop open-coding offset_in_page()
+  KVM: pfncache: include page offset in uhva and use it consistently
+  KVM: pfncache: allow a cache to be activated with a fixed (userspace)
+    HVA
+  KVM: xen: separate initialization of shared_info cache and content
+  KVM: xen: re-initialize shared_info if guest (32/64-bit) mode is set
+  KVM: xen: allow shared_info to be mapped by fixed HVA
+  KVM: xen: allow vcpu_info to be mapped by fixed HVA
+  KVM: selftests / xen: map shared_info using HVA rather than GFN
+  KVM: selftests / xen: re-map vcpu_info using HVA rather than GPA
+  KVM: xen: advertize the KVM_XEN_HVM_CONFIG_SHARED_INFO_HVA capability
+  KVM: xen: split up kvm_xen_set_evtchn_fast()
+  KVM: xen: don't block on pfncache locks in kvm_xen_set_evtchn_fast()
+  KVM: pfncache: check the need for invalidation under read lock first
+  KVM: xen: allow vcpu_info content to be 'safely' copied
+
+ Documentation/virt/kvm/api.rst                |  53 ++-
+ arch/x86/kvm/x86.c                            |   7 +-
+ arch/x86/kvm/xen.c                            | 360 +++++++++++-------
+ include/linux/kvm_host.h                      |  40 +-
+ include/linux/kvm_types.h                     |   8 -
+ include/uapi/linux/kvm.h                      |   9 +-
+ .../selftests/kvm/x86_64/xen_shinfo_test.c    |  59 ++-
+ virt/kvm/pfncache.c                           | 188 ++++-----
+ 8 files changed, 466 insertions(+), 258 deletions(-)
 
 
---rMcjOlarOJdLELTJ
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+base-commit: f2a3fb7234e52f72ff4a38364dbf639cf4c7d6c6
+-- 
+2.39.2
 
-On Sun, Dec 17, 2023 at 11:52:27PM -0500, Abdel Alkuor wrote:
-> as6200 is a temperature sensor with a range between -40=B0C to
-> 125=B0C degrees and an accuracy of =B10.4=B0C degree between 0
-> and 65=B0C and =B11=B0C for the other ranges.
->=20
-> Signed-off-by: Abdel Alkuor <alkuor@gmail.com>
-> ---
-> Changes in v2:
->   - Incorporate as6200 into lm75 bindings
->=20
->  .../devicetree/bindings/hwmon/lm75.yaml        | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
->=20
-> diff --git a/Documentation/devicetree/bindings/hwmon/lm75.yaml b/Document=
-ation/devicetree/bindings/hwmon/lm75.yaml
-> index 0b69897f0c63..63b85a83ac18 100644
-> --- a/Documentation/devicetree/bindings/hwmon/lm75.yaml
-> +++ b/Documentation/devicetree/bindings/hwmon/lm75.yaml
-> @@ -14,6 +14,7 @@ properties:
->    compatible:
->      enum:
->        - adi,adt75
-> +      - ams,as6200
->        - atmel,at30ts74
->        - dallas,ds1775
->        - dallas,ds75
-> @@ -48,6 +49,9 @@ properties:
->    vs-supply:
->      description: phandle to the regulator that provides the +VS supply
-> =20
-> +  interrupts:
-> +    maxItems: 1
-
-Do the other devices here have interrupts? If not, you just allowed
-interrupts for them. You, at the very least, need to add something like:
-
-diff --git a/Documentation/devicetree/bindings/hwmon/lm75.yaml b/Documentat=
-ion/devicetree/bindings/hwmon/lm75.yaml
-index 63b85a83ac18..d7ce96606400 100644
---- a/Documentation/devicetree/bindings/hwmon/lm75.yaml
-+++ b/Documentation/devicetree/bindings/hwmon/lm75.yaml
-@@ -56,6 +56,17 @@ required:
-   - compatible
-   - reg
-=20
-+allOf:
-+  - if:
-+      not:
-+        properties:
-+          compatible:
-+            contains:
-+              const: ams,as6200
-+    then:
-+      properties:
-+        interrupts: false
-+
- additionalProperties: false
-=20
- examples:
-
-I had a brief look at the driver though, but I could not immediately
-tell if the interrupt was required on the ams,as6200 or if the driver
-continued on without that functionality. It seemed like an additional
-feature that the interrupt was required for, but if not you should make
-the interrupt required for the as6200.
-
-> +
->  required:
->    - compatible
->    - reg
-> @@ -66,3 +70,17 @@ examples:
->          vs-supply =3D <&vs>;
->        };
->      };
-> +  - |
-> +    #include <dt-bindings/interrupt-controller/irq.h>
-> +    i2c {
-> +        #address-cells =3D <1>;
-> +        #size-cells =3D <0>;
-> +
-> +        temperature-sensor@48 {
-> +            compatible =3D "ams,as6200";
-> +            reg =3D <0x48>;
-> +            vs-supply =3D <&vs>;
-> +            interrupt-parent =3D <&gpio1>;
-> +            interrupts =3D <17 IRQ_TYPE_EDGE_BOTH>;
-> +        };
-> +    };
-
-Can you make the indent here match that in the other example in this
-file please?
-
-Thanks,
-Conor.
-
---rMcjOlarOJdLELTJ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZYG0QAAKCRB4tDGHoIJi
-0oE9AP9ycm0+Rys8Qk2t0D9tOjOGpCdtzTvUj/tJa/BAOWIKTgEAwFfN1T6mCAR8
-GYZEQa3F2bPm+e607/CqKVAZitrREAw=
-=JdZv
------END PGP SIGNATURE-----
-
---rMcjOlarOJdLELTJ--
 
