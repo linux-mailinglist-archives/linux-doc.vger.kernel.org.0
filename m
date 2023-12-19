@@ -1,127 +1,155 @@
-Return-Path: <linux-doc+bounces-5562-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5553-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C2DE818C84
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 17:42:19 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B36CA818C2D
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 17:27:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DD471288B25
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 16:42:17 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C6C101C23B80
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Dec 2023 16:27:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6FCE136AE6;
-	Tue, 19 Dec 2023 16:41:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 061FA1D54A;
+	Tue, 19 Dec 2023 16:27:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="PHo4QIvo"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NrWOh4Ca"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.xenproject.org (mail.xenproject.org [104.130.215.37])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A6CE35896;
-	Tue, 19 Dec 2023 16:41:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=xen.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:To:From;
-	bh=AmbsIYupXhNEc+M3GAmFapvv+1Q9WOxTLba1bFXRLxM=; b=PHo4QIvo76d/X2kPOjUoZ5S0U0
-	vCjgR8KBqfgSBjMRuvjhQWkAGLcJbAfPHuhUu/WAFmVHrvXewvzknGM2a5uLuMrlbfLq5s9Nw/6Qb
-	orT5HrYtc5BIlsxtq7TYgXWVhvF2AQebyZasGjsUiBEFmkMnGz7w88ShhPHlbxIEZXJo=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1rFd9x-00064v-VF; Tue, 19 Dec 2023 16:41:33 +0000
-Received: from 54-240-197-226.amazon.com ([54.240.197.226] helo=REM-PW02S00X.ant.amazon.com)
-	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1rFckU-0005h9-1N; Tue, 19 Dec 2023 16:15:14 +0000
-From: Paul Durrant <paul@xen.org>
-To: Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Sean Christopherson <seanjc@google.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	David Woodhouse <dwmw2@infradead.org>,
-	Paul Durrant <paul@xen.org>,
-	Shuah Khan <shuah@kernel.org>,
-	kvm@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org
-Subject: [PATCH v11 19/19] KVM: xen: allow vcpu_info content to be 'safely' copied
-Date: Tue, 19 Dec 2023 16:11:09 +0000
-Message-Id: <20231219161109.1318-20-paul@xen.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231219161109.1318-1-paul@xen.org>
-References: <20231219161109.1318-1-paul@xen.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 905DB2030E;
+	Tue, 19 Dec 2023 16:27:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qv1-f50.google.com with SMTP id 6a1803df08f44-67f2a5d8a05so26625216d6.3;
+        Tue, 19 Dec 2023 08:27:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1703003260; x=1703608060; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZbuWW25Nxvjwkt+QpWELnr3IDh+YCdBkxC4WBshnkiM=;
+        b=NrWOh4Caii5oCp+WXTgXExyygngb8xgZP7A/zHF741hiJc6lCYeuaARp2W+yFrSnkI
+         6jFQFM0l3ucMBhZU6zNkDIF1JdWe8zDodtBDjWb+VdI6dC/MXBjxIr7bOejYPi0nS7/8
+         YWlbbv8k/3hO53B0vJyXkd6LcIPnFUrupUwfJlgz1AOjlpsKPXLzWHQU4pEWTGfE22sC
+         Zof1ERMlfERZHc0JAqBfY8KzoZZ5ci7tHGhDGihC4zDge2EnRLcGTMbeqMITAoR5mhJE
+         EPPDg6DLtLqjANeIDmCEVYULBl8UAH4Q97XeJlqp39C6kqZAjApo4oW5//s7zyhMjFHw
+         0rKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1703003260; x=1703608060;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZbuWW25Nxvjwkt+QpWELnr3IDh+YCdBkxC4WBshnkiM=;
+        b=Svfr7cZcnHJfz+DVH6TfMtP9XNzKFBBwpS43l5jyQ/6vBZVkq89pPndi9SRsoeHRte
+         u1LAYWrggq0uMcKIp5+Mpmqsz2fpOdCko04PzgWyfEORMNbm/jYP2QmW2fW7uev9n18V
+         oSgpv42SB1XUwFfVfyDfmi+gqM/Y7h9dO1P/XolpdX6P1ZsQwEFCptmXEN10NF71/isH
+         VxlRGQbtfHeOfgHKp7/NSgvA/kDxVAbABlNIphoNK4fFxMdJCsM5Gv8Nb/8yCXADDLw8
+         kXHVGtnb1eevLCv0dOiyS/vTg/sEAdnz+XiJoqO+XqvQu3gcyXtClvpgj6yiF1kvMdSg
+         ibIQ==
+X-Gm-Message-State: AOJu0YxdwqiZq3LipDWHv38SWsWcATco+7HyiC9Ah4aItRcE91xpLTnD
+	5e0Pxci5QF3HoID1XqvFCfQ=
+X-Google-Smtp-Source: AGHT+IGBYeDWnicGahL2bG0zvCTL1gPBw11B55VHGDfWpmfaAtL2dZzBZoPYzXQGM0RSw2GV/LIevA==
+X-Received: by 2002:a05:6214:224e:b0:67f:39b0:39a8 with SMTP id c14-20020a056214224e00b0067f39b039a8mr6485289qvc.95.1703003260400;
+        Tue, 19 Dec 2023 08:27:40 -0800 (PST)
+Received: from abdel ([174.95.13.129])
+        by smtp.gmail.com with ESMTPSA id da14-20020a05621408ce00b0067a276fd8d5sm3528624qvb.54.2023.12.19.08.27.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 19 Dec 2023 08:27:39 -0800 (PST)
+Date: Tue, 19 Dec 2023 11:27:29 -0500
+From: Abdel Alkuor <alkuor@gmail.com>
+To: Conor Dooley <conor@kernel.org>
+Cc: Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] dt-bindings: hwmon: (lm75) Add AMS AS6200
+ temperature sensor
+Message-ID: <ZYHEcfB7b+k2g9Ge@abdel>
+References: <89fb5eec30df734ee8fc58427cf5d94929076514.1702874115.git.alkuor@gmail.com>
+ <20231219-mascot-semester-7d2c492b99bc@spud>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231219-mascot-semester-7d2c492b99bc@spud>
 
-From: Paul Durrant <pdurrant@amazon.com>
+On Tue, Dec 19, 2023 at 03:18:24PM +0000, Conor Dooley wrote:
+> On Sun, Dec 17, 2023 at 11:52:27PM -0500, Abdel Alkuor wrote:
+> 
+> Do the other devices here have interrupts? If not, you just allowed
+> interrupts for them. You, at the very least, need to add something like:
+> diff --git a/Documentation/devicetree/bindings/hwmon/lm75.yaml b/Documentation/devicetree/bindings/hwmon/lm75.yaml
+> index 63b85a83ac18..d7ce96606400 100644
+> --- a/Documentation/devicetree/bindings/hwmon/lm75.yaml
+> +++ b/Documentation/devicetree/bindings/hwmon/lm75.yaml
+> @@ -56,6 +56,17 @@ required:
+>    - compatible
+>    - reg
+>  
+> +allOf:
+> +  - if:
+> +      not:
+> +        properties:
+> +          compatible:
+> +            contains:
+> +              const: ams,as6200
+> +    then:
+> +      properties:
+> +        interrupts: false
+> +
+>  additionalProperties: false
+>  
+No, not all of them support the interrupt. Just tmp101, tmp102, tmp112, and as6200.
+For now, I'll add the check for ams,as6200.
+>  examples:
+> 
+> I had a brief look at the driver though, but I could not immediately
+> tell if the interrupt was required on the ams,as6200 or if the driver
+> continued on without that functionality. It seemed like an additional
+> feature that the interrupt was required for, but if not you should make
+> the interrupt required for the as6200.
+> 
+It is an additional feature. The interrupt basically notifies the user space when the
+alarm state changes through temp1_alarm sysfs using poll on the file for example. That
+being said, we should still be able to read the alarm state for as6200 without the
+interrupt present.
+> > +
+> >  required:
+> >    - compatible
+> >    - reg
+> > @@ -66,3 +70,17 @@ examples:
+> >          vs-supply = <&vs>;
+> >        };
+> >      };
+> > +  - |
+> > +    #include <dt-bindings/interrupt-controller/irq.h>
+> > +    i2c {
+> > +        #address-cells = <1>;
+> > +        #size-cells = <0>;
+> > +
+> > +        temperature-sensor@48 {
+> > +            compatible = "ams,as6200";
+> > +            reg = <0x48>;
+> > +            vs-supply = <&vs>;
+> > +            interrupt-parent = <&gpio1>;
+> > +            interrupts = <17 IRQ_TYPE_EDGE_BOTH>;
+> > +        };
+> > +    };
+> 
+> Can you make the indent here match that in the other example in this
+> file please?
+Sure. 
 
-If the guest sets an explicit vcpu_info GPA then, for any of the first 32
-vCPUs, the content of the default vcpu_info in the shared_info page must be
-copied into the new location. Because this copy may race with event
-delivery (which updates the 'evtchn_pending_sel' field in vcpu_info) there
-needs to be a way to defer that until the copy is complete.
-Happily there is already a shadow of 'evtchn_pending_sel' in kvm_vcpu_xen
-that is used in atomic context if the vcpu_info PFN cache has been
-invalidated so that the update of vcpu_info can be deferred until the
-cache can be refreshed (on vCPU thread's the way back into guest context).
+Thanks,
+Abdel
 
-Also use this shadow if the vcpu_info cache has been *deactivated*, so that
-the VMM can safely copy the vcpu_info content and then re-activate the
-cache with the new GPA. To do this, stop considering an inactive vcpu_info
-cache as a hard error in kvm_xen_set_evtchn_fast().
-
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
----
-Cc: David Woodhouse <dwmw2@infradead.org>
-Cc: Sean Christopherson <seanjc@google.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: Dave Hansen <dave.hansen@linux.intel.com>
-Cc: "H. Peter Anvin" <hpa@zytor.com>
-Cc: x86@kernel.org
-
-v8:
- - Update commit comment.
-
-v6:
- - New in this version.
----
- arch/x86/kvm/xen.c | 3 ---
- 1 file changed, 3 deletions(-)
-
-diff --git a/arch/x86/kvm/xen.c b/arch/x86/kvm/xen.c
-index 845ff23c8399..99eeb9b68a02 100644
---- a/arch/x86/kvm/xen.c
-+++ b/arch/x86/kvm/xen.c
-@@ -1799,9 +1799,6 @@ int kvm_xen_set_evtchn_fast(struct kvm_xen_evtchn *xe, struct kvm *kvm)
- 		WRITE_ONCE(xe->vcpu_idx, vcpu->vcpu_idx);
- 	}
- 
--	if (!vcpu->arch.xen.vcpu_info_cache.active)
--		return -EINVAL;
--
- 	if (xe->port >= max_evtchn_port(kvm))
- 		return -EINVAL;
- 
--- 
-2.39.2
 
 
