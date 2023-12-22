@@ -1,86 +1,93 @@
-Return-Path: <linux-doc+bounces-5810-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5812-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD97B81CE71
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Dec 2023 19:27:36 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CC0781CEAD
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Dec 2023 20:11:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 806461F22EFA
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Dec 2023 18:27:36 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BE3FB2867A6
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Dec 2023 19:11:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9A8292C198;
-	Fri, 22 Dec 2023 18:27:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4BC242E62D;
+	Fri, 22 Dec 2023 19:11:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="FiQHGzMz"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="PkdJdEU9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DCD12C195
-	for <linux-doc@vger.kernel.org>; Fri, 22 Dec 2023 18:27:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1703269650; x=1734805650;
-  h=date:from:to:cc:subject:message-id:mime-version;
-  bh=pt9b0Hgh0C7Pk9dPUYOu38GqDSdHInoSNZujqodFUsA=;
-  b=FiQHGzMzhP3vnxaMX9cgsIoyp/sYD1N0KeM3WygQ8zSigL4FLumX7raC
-   iGgJuCdOl2OP7GQoeKkPZDaWJdPzx2e1oXwHYAGO61NWlYAAj2g/eAybe
-   3RtVIJd86YqQzCcRVDoEi0k3GvhhwFX8YB7x8XcWVCvY/TbnhSmwtfmMl
-   DUOTL390hTzrVILJc34/BiV1jOJYl2HOSbYHIPxAFXt6aOEPladYWQ8J/
-   Vq15tx5SCHmzDlvihgJzxAQNFfgW382v4ZkwcqZKKy8gijRrSmHr/T1vB
-   3LLXExvtc0ZpA4jRV8V3UcAdqFxFCMVAGe9DWFm77go8fc4AUNufNjgz5
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10932"; a="398925280"
-X-IronPort-AV: E=Sophos;i="6.04,297,1695711600"; 
-   d="scan'208";a="398925280"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Dec 2023 10:27:29 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10932"; a="867697922"
-X-IronPort-AV: E=Sophos;i="6.04,297,1695711600"; 
-   d="scan'208";a="867697922"
-Received: from lkp-server02.sh.intel.com (HELO b07ab15da5fe) ([10.239.97.151])
-  by FMSMGA003.fm.intel.com with ESMTP; 22 Dec 2023 10:27:28 -0800
-Received: from kbuild by b07ab15da5fe with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1rGkF4-0009kR-2G;
-	Fri, 22 Dec 2023 18:27:26 +0000
-Date: Sat, 23 Dec 2023 02:25:47 +0800
-From: kernel test robot <lkp@intel.com>
-To: David Howells <dhowells@redhat.com>
-Cc: oe-kbuild-all@lists.linux.dev, linux-doc@vger.kernel.org
-Subject: [dhowells-fs:crypto-krb5 3/21] htmldocs:
- Documentation/crypto/krb5.rst: WARNING: document isn't included in any
- toctree
-Message-ID: <202312230235.JDvyYSLu-lkp@intel.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F25032C848;
+	Fri, 22 Dec 2023 19:11:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=6BLfvoqCIH2qZja4YAiB6MdUAbrnjNHwY87Yc5jCNXQ=; b=PkdJdEU9XGP8kLUPfU1eO1oV6a
+	Jnh/ZpYZCYYstJo4v7tgNER/8V5cMlszx7wXtTltbGMMbTXEvKp+iX4aRYZdcmQ072Y8TMXwqPkZ1
+	LN0/2IY06f2DhFt2XbiCcrxPrvr7XS7ZVsOoA3tq6+PAsDFiwrwSb/ZQvtzYMA5e1mmhmfHJcNNBN
+	YCt18RIPFc8UJ4DmHKhTv6ndNLXttTrnd3hl4oN3wj1SGIT+aayfRq8uMi96Jvw4NSYD/4+81wfAY
+	cAIBDLSVXqX/4c++2aeBtpTd3e5JB875AOuAckmvMPNen0JjuFACaC4XwCu0bbXb1t3CXy/xfgg4D
+	m+BCl7wQ==;
+Received: from [50.53.46.231] (helo=[192.168.254.15])
+	by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+	id 1rGkvd-006gN7-2X;
+	Fri, 22 Dec 2023 19:11:25 +0000
+Message-ID: <833d766b-8d95-4348-aac6-09075bda69db@infradead.org>
+Date: Fri, 22 Dec 2023 11:11:24 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] Documentation: move driver-api/dcdbas to
+ userspace-api/
+Content-Language: en-US
+To: Vegard Nossum <vegard.nossum@oracle.com>, Jonathan Corbet
+ <corbet@lwn.net>, Jaroslav Kysela <perex@perex.cz>,
+ Stuart Hayes <stuart.w.hayes@gmail.com>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ platform-driver-x86@vger.kernel.org
+References: <20231221124816.2978000-1-vegard.nossum@oracle.com>
+ <20231221124816.2978000-3-vegard.nossum@oracle.com>
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20231221124816.2978000-3-vegard.nossum@oracle.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/linux-fs.git crypto-krb5
-head:   ebd44e15422341724b06a3a13590ea80244ebbd6
-commit: 2d17e825b2f65fd09877bdc1e2fa6236726bf57a [3/21] crypto/krb5: Add API Documentation
-reproduce: (https://download.01.org/0day-ci/archive/20231223/202312230235.JDvyYSLu-lkp@intel.com/reproduce)
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202312230235.JDvyYSLu-lkp@intel.com/
 
-All warnings (new ones prefixed by >>):
+On 12/21/23 04:48, Vegard Nossum wrote:
+> This file documents a sysfs interface that is intended for systems
+> management software. It does NOT document any kind of kernel driver
+> API. It is also not meant to be used directly by system administrators
+> or users.
+> 
+> Cc: Stuart Hayes <stuart.w.hayes@gmail.com>
+> Cc: platform-driver-x86@vger.kernel.org
+> Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
 
->> Documentation/crypto/krb5.rst: WARNING: document isn't included in any toctree
+Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+Thanks.
+
+> ---
+>  Documentation/driver-api/index.rst                     | 1 -
+>  Documentation/{driver-api => userspace-api}/dcdbas.rst | 0
+>  Documentation/userspace-api/index.rst                  | 1 +
+>  MAINTAINERS                                            | 2 +-
+>  drivers/platform/x86/dell/Kconfig                      | 2 +-
+>  drivers/platform/x86/dell/dcdbas.c                     | 2 +-
+>  6 files changed, 4 insertions(+), 4 deletions(-)
+>  rename Documentation/{driver-api => userspace-api}/dcdbas.rst (100%)
+> 
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+#Randy
+https://people.kernel.org/tglx/notes-about-netiquette
+https://subspace.kernel.org/etiquette.html
 
