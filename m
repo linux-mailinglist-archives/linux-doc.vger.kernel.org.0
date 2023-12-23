@@ -1,91 +1,121 @@
-Return-Path: <linux-doc+bounces-5846-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-5848-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A73E81D287
-	for <lists+linux-doc@lfdr.de>; Sat, 23 Dec 2023 06:36:28 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D69E581D327
+	for <lists+linux-doc@lfdr.de>; Sat, 23 Dec 2023 09:35:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id CEE2D1F22CD4
-	for <lists+linux-doc@lfdr.de>; Sat, 23 Dec 2023 05:36:27 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 91B57284595
+	for <lists+linux-doc@lfdr.de>; Sat, 23 Dec 2023 08:35:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3679D4A3E;
-	Sat, 23 Dec 2023 05:36:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C812DC8F4;
+	Sat, 23 Dec 2023 08:35:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Jks/bfwF"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="fd0P1YEt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96F004A34;
-	Sat, 23 Dec 2023 05:36:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=UNrI5d+OwOlR9bsEA+kLfKKLgi1B2PVQGG+8MWXSfz8=; b=Jks/bfwFvpRCPEETX4cvjl3DBG
-	WM7g0tH+gittme5QDF7URqwshe9rjnSTGGpkQBFM+8xFCQHTwzWBLVo+XO/Pf5a1oodFVEE0BHqE5
-	bjdjfscqs1SL0+Cq9yW2jN2wnkv08bdBleGPxQrwI2dxDfNdK8hsk6uJCdW/hnJ52ymU3tN0pQ92z
-	DhbZlgoic+nhre1dbDqkErhVuvlV0YB6AHY/EiwM+erncW2cSxVrpSoGbgURvMHOeIWgW7HnT/hhG
-	XQETPqt1wZg1GCeEWa3LOuuPH/Xg9eXr3egNsheJrZDwIlGTqsB9Womnt1eC7ck+0Sv9inHDR+7gM
-	b0v0YxmA==;
-Received: from [50.53.46.231] (helo=[192.168.254.15])
-	by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-	id 1rGugP-007QLP-1E;
-	Sat, 23 Dec 2023 05:36:21 +0000
-Message-ID: <9be5f009-9fcb-4299-9d2f-13b1263d83e1@infradead.org>
-Date: Fri, 22 Dec 2023 21:36:20 -0800
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F552946D;
+	Sat, 23 Dec 2023 08:35:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3BN1v9Hw021930;
+	Sat, 23 Dec 2023 08:35:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding;
+ s=corp-2023-11-20; bh=wYElaZP0jYvrtQvw/F9wl/AViI12hWXfvWUUyi6xrQQ=;
+ b=fd0P1YEtuIqoufODQozUfoT64nwDjrwmBRkQrz6ZPidqonEMWzuGVibSKZHawWmh/DCO
+ 5FWLSn501MV+s5jCfDZ87tIFNRkezXZpAlHxUfCTDXSJt/qggUf7TdWW1WeHXbzAEeQr
+ 8pSbunrnVUxTwqT/X0/8nH1wgzDnkX6kTW6bBzhizp9t2DrBSFsLYdGu6yYWoyVKZGIu
+ j3i/FpOhU7nCDIv+Wu07rZgaqRo0B/7H58h66WFYfsQbb+H8JwokVGelAvdfRrdlLlKr
+ SZ1lcT2F1ZWymRcBdNsQYco6UMb97lrzD9WWaMgJ5JZ96O6yqoF+lV4RkOe85a91kOp2 sg== 
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3v5pb40c43-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Sat, 23 Dec 2023 08:35:15 +0000
+Received: from pps.filterd (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 3BN60WMA001881;
+	Sat, 23 Dec 2023 08:35:14 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 3v5p03mfek-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Sat, 23 Dec 2023 08:35:14 +0000
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 3BN8ZDbB003235;
+	Sat, 23 Dec 2023 08:35:13 GMT
+Received: from localhost.localdomain (dhcp-10-175-32-220.vpn.oracle.com [10.175.32.220])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id 3v5p03mfa0-1;
+	Sat, 23 Dec 2023 08:35:13 +0000
+From: Vegard Nossum <vegard.nossum@oracle.com>
+To: Herbert Xu <herbert@gondor.apana.org.au>
+Cc: "David S. Miller" <davem@davemloft.net>, linux-crypto@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Vegard Nossum <vegard.nossum@oracle.com>,
+        Randy Dunlap <rdunlap@infradead.org>, Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH 1/2] crypto: shash - remove excess kerneldoc members
+Date: Sat, 23 Dec 2023 09:34:58 +0100
+Message-Id: <20231223083459.3025561-1-vegard.nossum@oracle.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: fs/bcachefs/io_write.c:1570: warning: Function parameter or
- struct member 'bch2_write' not described in 'CLOSURE_CALLBACK'
-Content-Language: en-US
-To: kernel test robot <lkp@intel.com>, Kent Overstreet <kmo@daterainc.com>
-Cc: oe-kbuild-all@lists.linux.dev, linux-kernel@vger.kernel.org,
- Linux Doc Mailing List <linux-doc@vger.kernel.org>
-References: <202312182040.naGasU5s-lkp@intel.com>
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <202312182040.naGasU5s-lkp@intel.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-12-22_15,2023-12-22_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 malwarescore=0 spamscore=0
+ suspectscore=0 adultscore=0 mlxscore=0 bulkscore=0 mlxlogscore=999
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2311290000
+ definitions=main-2312230065
+X-Proofpoint-ORIG-GUID: IRiAeJPyUxWjBP9iwMOCIFNSXoS2H3o9
+X-Proofpoint-GUID: IRiAeJPyUxWjBP9iwMOCIFNSXoS2H3o9
 
+Commit 42808e5dc602 ("crypto: hash - Count error stats differently")
+moved some fields from 'struct shash_alg' into HASH_ALG_COMMON but
+didn't remove the corresponding kerneldoc members, which results in
+these warnings when running 'make htmldocs':
 
+  ./include/crypto/hash.h:248: warning: Excess struct member 'digestsize' description in 'shash_alg'
+  ./include/crypto/hash.h:248: warning: Excess struct member 'statesize' description in 'shash_alg'
+  ./include/crypto/hash.h:248: warning: Excess struct member 'stat' description in 'shash_alg'
+  ./include/crypto/hash.h:248: warning: Excess struct member 'base' description in 'shash_alg'
 
-On 12/18/23 04:58, kernel test robot wrote:
-> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git master
-> head:   ceb6a6f023fd3e8b07761ed900352ef574010bcb
-> commit: d4e3b928ab487a8aecd1f6a140b40ac365116cfb closures: CLOSURE_CALLBACK() to fix type punning
-> date:   3 weeks ago
-> config: x86_64-buildonly-randconfig-001-20231218 (https://download.01.org/0day-ci/archive/20231218/202312182040.naGasU5s-lkp@intel.com/config)
-> compiler: gcc-11 (Debian 11.3.0-12) 11.3.0
-> reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231218/202312182040.naGasU5s-lkp@intel.com/reproduce)
-> 
-> If you fix the issue in a separate patch/commit (i.e. not just a new version of
-> the same patch/commit), kindly add following tags
-> | Reported-by: kernel test robot <lkp@intel.com>
-> | Closes: https://lore.kernel.org/oe-kbuild-all/202312182040.naGasU5s-lkp@intel.com/
-> 
-> All warnings (new ones prefixed by >>):
-> 
->>> fs/bcachefs/io_write.c:1570: warning: Function parameter or struct member 'bch2_write' not described in 'CLOSURE_CALLBACK'
->    fs/bcachefs/io_write.c:1570: warning: expecting prototype for bch2_write(). Prototype was for CLOSURE_CALLBACK() instead
-> 
-> 
+HASH_ALG_COMMON already has the documentation for all these fields.
 
-This needs to be fixed in scripts/kernel-doc AFAIK.
+Fixes: 42808e5dc602 ("crypto: hash - Count error stats differently")
+Cc: Randy Dunlap <rdunlap@infradead.org>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
+---
+ include/crypto/hash.h | 4 ----
+ 1 file changed, 4 deletions(-)
 
-Cc:ing linux-doc mailing list.
-
+diff --git a/include/crypto/hash.h b/include/crypto/hash.h
+index c7bdbece27cc..5d61f576cfc8 100644
+--- a/include/crypto/hash.h
++++ b/include/crypto/hash.h
+@@ -212,13 +212,9 @@ struct shash_desc {
+  *	      This is a counterpart to @init_tfm, used to remove
+  *	      various changes set in @init_tfm.
+  * @clone_tfm: Copy transform into new object, may allocate memory.
+- * @digestsize: see struct ahash_alg
+- * @statesize: see struct ahash_alg
+  * @descsize: Size of the operational state for the message digest. This state
+  * 	      size is the memory size that needs to be allocated for
+  *	      shash_desc.__ctx
+- * @stat: Statistics for hash algorithm.
+- * @base: internally used
+  * @halg: see struct hash_alg_common
+  * @HASH_ALG_COMMON: see struct hash_alg_common
+  */
 -- 
-#Randy
-https://people.kernel.org/tglx/notes-about-netiquette
-https://subspace.kernel.org/etiquette.html
+2.34.1
+
 
