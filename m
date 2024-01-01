@@ -1,224 +1,148 @@
-Return-Path: <linux-doc+bounces-6016-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6053-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D29F78212E4
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jan 2024 04:12:28 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BC0182225A
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 20:58:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 09915B218E1
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jan 2024 03:12:26 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E02BAB22B79
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 19:58:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 24816817;
-	Mon,  1 Jan 2024 03:12:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A56115EB9;
+	Tue,  2 Jan 2024 19:58:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a42qvMKy"
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="sf+h60Ai"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BC02803;
-	Mon,  1 Jan 2024 03:12:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-2044d093b3fso5536279fac.3;
-        Sun, 31 Dec 2023 19:12:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704078738; x=1704683538; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=u7GvQd+qHdmtATzJklO2uLLq2EMXX40HqpmDmkw+3xc=;
-        b=a42qvMKyW+XoKvvIpgdgdZPtfQt26VuYTi9XQjfghrnwfdxP2iSqu04mw6woyQXi/Q
-         0pr4uVDjDgbM6qOnS+5/HiVCbL8+9CuuvUk5JMx0vYum9hfBO/ZsIIzo9tduNyiOHt4n
-         L3TfRGeSSwA+993w6ApDcuTj71YHSdm/mSiaAUNPtCUmXpeOM3KWkogqBR+guKc2pRYp
-         3OVkoAUwSAKgw48xc9A2F+JDfRX5vsKKUXfEVoBeV8DsD7ATiLn4LBj2OLuK2ar2Wlnr
-         dJephnPRtQFOVK6VvkL9Gb9bzw17CURuq4PDTtdNHZn12fbWK0EcQLmAVISdm5bscDXs
-         3fqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704078738; x=1704683538;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=u7GvQd+qHdmtATzJklO2uLLq2EMXX40HqpmDmkw+3xc=;
-        b=nw/kNM6DUDCBjWPE9vBf6TeEulEuY4kg0tBb8+KcYwiLxcdzwdPGh8e6G2LVJAzPQk
-         qd6ISr4qx9leADfmpLNohFfxdNGCMg/8H7//hTEbKeEAd2a1UHw+6MUMMC67ONsC6UyP
-         3pNZGyjrmjPqA89rJiGF3wKD/vH6cxG+R3CPkayVvkURDswqT4kWi7zHsuuGpIo0OH3+
-         lJUGmJ8ZOmDLsoqVhXpTC4cToeAiUGumNXwJBkShqXwoRdNXfZYzWhyFhk2k+j0HhwSi
-         3CGyGfN9dQh9nBeSsGnwSwdtYzjlUAf2MtgZvtr/rQF52Uo/jBdeb+SBvN2UTu0YxkDq
-         hPrw==
-X-Gm-Message-State: AOJu0YwO7E0rWJ4rMILdFvrx/cw76hwAgHlZiTShwWOeU53n8/M8Zzoa
-	/Ku2Ay8kbDnwH9GfpXvQlks=
-X-Google-Smtp-Source: AGHT+IHQ+OiL9S5Ow8z8Ds9CB3HJTSLmax8kYcY2mrz/LWBaOfNiMH1YtKidYuTf8kt4QMLxMbVIjA==
-X-Received: by 2002:a05:6871:60e:b0:203:b5ec:ef08 with SMTP id w14-20020a056871060e00b00203b5ecef08mr18560864oan.107.1704078738325;
-        Sun, 31 Dec 2023 19:12:18 -0800 (PST)
-Received: from [10.0.2.15] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id cb5-20020a056a02070500b005ce170c797bsm10975835pgb.87.2023.12.31.19.12.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 31 Dec 2023 19:12:17 -0800 (PST)
-Message-ID: <4b2d4c62-135d-4d25-8a3a-2fabd996c980@gmail.com>
-Date: Mon, 1 Jan 2024 12:12:16 +0900
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2541F168D6;
+	Tue,  2 Jan 2024 19:58:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
+Received: from skinsburskii. (c-73-239-240-195.hsd1.wa.comcast.net [73.239.240.195])
+	by linux.microsoft.com (Postfix) with ESMTPSA id 2C6DD20B3CC1;
+	Tue,  2 Jan 2024 11:58:13 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 2C6DD20B3CC1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1704225493;
+	bh=2UaDwV/oGm+Epqzq+iuoXLl1XYKs/iiOjHPSgAf4WNI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=sf+h60AikfAoNDWIfOQf+gp/7n62YjqR91jk021dI0v+1a8M9a0OEjS7fQlNbGHtT
+	 ipeSl4ZqBYQjVEH3GZlLaVHYTWm8e6nUV0SEqCtKnbq135a3/00oHsQNKX3wd4Z7BD
+	 ICaDdMQVBMMzyyO3sadV/R66AVE4C1KSJe3ErDtk=
+Date: Sun, 31 Dec 2023 19:33:01 -0800
+From: Stanislav Kinsburskii <skinsburskii@linux.microsoft.com>
+To: Alexander Graf <graf@amazon.com>
+Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+	linux-mm@kvack.org, devicetree@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, kexec@lists.infradead.org,
+	linux-doc@vger.kernel.org, x86@kernel.org,
+	Eric Biederman <ebiederm@xmission.com>,
+	"H. Peter Anvin" <hpa@zytor.com>, Andy Lutomirski <luto@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Rob Herring <robh+dt@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Tom Lendacky <thomas.lendacky@amd.com>,
+	Ashish Kalra <ashish.kalra@amd.com>,
+	James Gowans <jgowans@amazon.com>, arnd@arndb.de,
+	pbonzini@redhat.com, madvenka@linux.microsoft.com,
+	Anthony Yznaga <anthony.yznaga@oracle.com>,
+	Usama Arif <usama.arif@bytedance.com>,
+	David Woodhouse <dwmw@amazon.co.uk>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>
+Subject: Re: [PATCH v2 04/17] kexec: Add KHO parsing support
+Message-ID: <20240101033301.GA765@skinsburskii.>
+References: <20231222193607.15474-1-graf@amazon.com>
+ <20231222193607.15474-5-graf@amazon.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] docs: Raise the minimum Sphinx requirement to 2.4.4
-To: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
- Akira Yokosawa <akiyks@gmail.com>
-References: <874jgs47fq.fsf@meer.lwn.net>
- <50830030-dca7-4c43-bcc8-449c7cfa9fbb@gmail.com>
- <87sf43qxzt.fsf@meer.lwn.net>
-Content-Language: en-US
-From: Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <87sf43qxzt.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231222193607.15474-5-graf@amazon.com>
 
-Hi,
+On Fri, Dec 22, 2023 at 07:35:54PM +0000, Alexander Graf wrote:
+> +/**
+> + * kho_reserve_previous_mem - Adds all memory reservations into memblocks
+> + * and moves us out of the scratch only phase. Must be called after page tables
+> + * are initialized and memblock_allow_resize().
+> + */
+> +void __init kho_reserve_previous_mem(void)
+> +{
+> +	void *mem_virt = __va(mem_phys);
+> +	int off, err;
+> +
+> +	if (!handover_phys || !mem_phys)
+> +		return;
+> +
+> +	/*
+> +	 * We reached here because we are running inside a working linear map
+> +	 * that allows us to resize memblocks dynamically. Use the chance and
+> +	 * populate the global fdt pointer
+> +	 */
+> +	fdt = __va(handover_phys);
+> +
+> +	off = fdt_path_offset(fdt, "/");
+> +	if (off < 0) {
+> +		fdt = NULL;
+> +		return;
+> +	}
+> +
+> +	err = fdt_node_check_compatible(fdt, off, "kho-v1");
+> +	if (err) {
+> +		pr_warn("KHO has invalid compatible, disabling.");
 
-On Fri, 15 Dec 2023 08:36:06 -0700, Jonathan Corbet wrote:
-> Akira Yokosawa <akiyks@gmail.com> writes:
-> 
->> With this patch applied, I get a confusing looking warning from
->> "make htmldocs" on a machine where the Sphinx version is 2.4.5:
->>
->> --------
->> Warning: It is recommended at least Sphinx version 3.4.3.
->> To upgrade Sphinx, use:
->>
->> 	/home/akira/sphinx-2.4.5/bin/python3 -m venv sphinx_2.4.4
->> 	. sphinx_2.4.4/bin/activate
->> 	pip install -r ./Documentation/sphinx/requirements.txt
->>
->>     If you want to exit the virtualenv, you can use:
->> 	deactivate
->> --------
->>
->> Looks like we need to update requirements.txt as well so that it
->> installs Sphinx 3.4.3.  Appended below is a fixup patch to that
->> effect.
-> 
-> So I can apply this, certainly, but it makes me feel like perhaps we
-> need to reconsider our approach a bit.  It's kind of weird that we have
-> a minimum supported version, then a semi-random "recommended" version
-> that is still pretty old.
-> 
-> Is there a reason to suggest to people that they should run something
-> other than current sphinx, especially if they are updating it anyway?
-> So our "recommended version" is really "recommended *minimum* version"?
+It looks like KHO preserved regions won't be reserved in this case.
+Should KHO DT state be destroyed here to prevent KHO memory regions
+reuse upon rollback?
 
-I picked 3.4.3 just because it is the version of distro Sphinx on
-debian 11 and RHEL 9.  It works just fine and "make htmldocs" should
-not complain it as not-recommended.
+> +
+> +void __init kho_populate(phys_addr_t handover_dt_phys, phys_addr_t scratch_phys,
+> +			 u64 scratch_len, phys_addr_t mem_cache_phys,
+> +			 u64 mem_cache_len)
+> +{
+> +	void *handover_dt;
+> +
+> +	/* Determine the real size of the DT */
+> +	handover_dt = early_memremap(handover_dt_phys, sizeof(struct fdt_header));
+> +	if (!handover_dt) {
+> +		pr_warn("setup: failed to memremap kexec FDT (0x%llx)\n", handover_dt_phys);
+> +		return;
+> +	}
+> +
+> +	if (fdt_check_header(handover_dt)) {
+> +		pr_warn("setup: kexec handover FDT is invalid (0x%llx)\n", handover_dt_phys);
+> +		early_memunmap(handover_dt, PAGE_SIZE);
+> +		return;
+> +	}
+> +
+> +	handover_len = fdt_totalsize(handover_dt);
+> +	handover_phys = handover_dt_phys;
+> +
+> +	/* Reserve the DT so we can still access it in late boot */
+> +	memblock_reserve(handover_phys, handover_len);
+> +
+> +	/* Reserve the mem cache so we can still access it later */
+> +	memblock_reserve(mem_cache_phys, mem_cache_len);
+> +
+> +	/*
+> +	 * We pass a safe contiguous block of memory to use for early boot purporses from
+> +	 * the previous kernel so that we can resize the memblock array as needed.
+> +	 */
+> +	memblock_add(scratch_phys, scratch_len);
+> +
+> +	if (WARN_ON(memblock_mark_scratch(scratch_phys, scratch_len))) {
+> +		pr_err("Kexec failed to mark the scratch region. Disabling KHO.");
+> +		handover_len = 0;
+> +		handover_phys = 0;
 
-In sphinx-pre-install, "recommended version", aka $rec_version, works
-as a criteria to emit upgrade suggestion.
-
-That said, I think it should be OK if "pip install -r requirements.txt"
-installs a newer version.
-
->
-> 
->> ----8<----
->> From: Akira Yokosawa <akiyks@gmail.com>
->> Subject: [PATCH] docs: sphinx/requirement.txt: Reflect recommended Sphinx version
->>
->> sphinx_pre_install parses the version of Sphinx in requirements.txt
->> and emits messages based on it.
->> Update requirements.txt so that it installs Sphinx 3.4.3, as well as
->> the examples in documentation.
->>
->> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
->> ---
->>  Documentation/doc-guide/sphinx.rst    | 14 +++++++-------
->>  Documentation/sphinx/requirements.txt |  4 +++-
->>  2 files changed, 10 insertions(+), 8 deletions(-)
->>
->> diff --git a/Documentation/doc-guide/sphinx.rst b/Documentation/doc-guide/sphinx.rst
->> index 3d125fb4139d..5227a2611026 100644
->> --- a/Documentation/doc-guide/sphinx.rst
->> +++ b/Documentation/doc-guide/sphinx.rst
->> @@ -48,13 +48,13 @@ or ``virtualenv``, depending on how your distribution packaged Python 3.
->>        on the Sphinx version, it should be installed separately,
->>        with ``pip install sphinx_rtd_theme``.
->>  
->> -In summary, if you want to install Sphinx version 2.4.4, you should do::
->> +In summary, if you want to install Sphinx version 3.4.3, you should do::
->>  
->> -       $ virtualenv sphinx_2.4.4
->> -       $ . sphinx_2.4.4/bin/activate
->> -       (sphinx_2.4.4) $ pip install -r Documentation/sphinx/requirements.txt
->> +       $ virtualenv sphinx_3.4.3
->> +       $ . sphinx_3.4.3/bin/activate
->> +       (sphinx_3.4.3) $ pip install -r Documentation/sphinx/requirements.txt
-> 
-> Here we could take version numbers out entirely; otherwise we'll always
-> be updating this.
-
-I thing this should be a verbatim copy of message from sphinx_pre_install
-presented later in sphinx.rst.
-
-> 
->> -After running ``. sphinx_2.4.4/bin/activate``, the prompt will change,
->> +After running ``. sphinx_3.4.3/bin/activate``, the prompt will change,
->>  in order to indicate that you're using the new environment. If you
->>  open a new shell, you need to rerun this command to enter again at
->>  the virtual environment before building the documentation.
->> @@ -118,8 +118,8 @@ command line options for your distro::
->>  	You should run:
->>  
->>  		sudo dnf install -y texlive-luatex85
->> -		/usr/bin/virtualenv sphinx_2.4.4
->> -		. sphinx_2.4.4/bin/activate
->> +		/usr/bin/virtualenv sphinx_3.4.3
->> +		. sphinx_3.4.3/bin/activate
->>  		pip install -r Documentation/sphinx/requirements.txt
->>  
->>  	Can't build as 1 mandatory dependency is missing at ./scripts/sphinx-pre-install line 468.
->> diff --git a/Documentation/sphinx/requirements.txt b/Documentation/sphinx/requirements.txt
->> index 335b53df35e2..89329e67e788 100644
->> --- a/Documentation/sphinx/requirements.txt
->> +++ b/Documentation/sphinx/requirements.txt
->> @@ -1,3 +1,5 @@
->>  # jinja2>=3.1 is not compatible with Sphinx<4.0
->>  jinja2<3.1
->> -Sphinx==2.4.4
->> +# docutils>=0.18 is not compatible with 3.0 <= Sphinx < 4.0
->> +docutils<0.18
->> +Sphinx==3.4.3
-> 
-> I'd forgotten about the docutils fun.  I wonder of our recommended
-> minimum should actually be 4.0, then here we could put simply:
-> 
->   Sphinx>4.0
-
-I tried it and "make htmldocs" complains:
-
-    Can't get default sphinx version from ./Documentation/sphinx/requirements.txt at ./scripts/sphinx-pre-install line 305.
-    make[2]: *** [Documentation/Makefile:101: htmldocs] Error 255
-    make[1]: *** [/home/akira/git/linux/Makefile:1695: htmldocs] Error 2
-    make: *** [Makefile:234: __sub-make] Error 2
-
-I did try to remedy this, but realized that I was too frustrated in
-deciphering the script to come up with a reasonable update.
-
-I'm giving up on this.
-
-Sorry about that.
-
-Regards,
-Akira
-
-> 
-> ?
-> 
-> Thanks,
-> 
-> jon
+Same question here: doesn't all the KHO state gets invalid in case of any
+restoration error?
 
 
