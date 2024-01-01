@@ -1,175 +1,224 @@
-Return-Path: <linux-doc+bounces-6050-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6016-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 623A38221FB
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 20:29:24 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D29F78212E4
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jan 2024 04:12:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 00BD41F234A7
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 19:29:24 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 09915B218E1
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jan 2024 03:12:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7CF5415AF5;
-	Tue,  2 Jan 2024 19:29:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 24816817;
+	Mon,  1 Jan 2024 03:12:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="AGKUIlWB"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a42qvMKy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1683B16401;
-	Tue,  2 Jan 2024 19:29:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
-Received: from skinsburskii. (c-73-239-240-195.hsd1.wa.comcast.net [73.239.240.195])
-	by linux.microsoft.com (Postfix) with ESMTPSA id 13EF120B3CC1;
-	Tue,  2 Jan 2024 11:29:17 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 13EF120B3CC1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1704223757;
-	bh=NWTVgm1Yghg6D+rhM1rcN+66tvwgyzPsGZv9i/VSt6U=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=AGKUIlWB2Mm3FV6uXLBIaYKw+ZOwF2oq+eG0GukNiGT0FaLu/cVNCJon1WWLrmbVf
-	 J0hpNTn0r5lQ7JZB7M+RoCQjykomiAtupbkO2imOrk6t0a4a8otvll3IN45v8vvg9M
-	 ESzfuKVdNYd5yhrMIDgJwHYz4CZGB1jbtbq0mHws=
-Date: Sun, 31 Dec 2023 19:01:41 -0800
-From: Stanislav Kinsburskii <skinsburskii@linux.microsoft.com>
-To: Alexander Graf <graf@amazon.com>, ""@skinsburskii
-Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
-	linux-mm@kvack.org, devicetree@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, kexec@lists.infradead.org,
-	linux-doc@vger.kernel.org, x86@kernel.org,
-	Eric Biederman <ebiederm@xmission.com>,
-	"H. Peter Anvin" <hpa@zytor.com>, Andy Lutomirski <luto@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Rob Herring <robh+dt@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Tom Lendacky <thomas.lendacky@amd.com>,
-	Ashish Kalra <ashish.kalra@amd.com>,
-	James Gowans <jgowans@amazon.com>, arnd@arndb.de,
-	pbonzini@redhat.com, madvenka@linux.microsoft.com,
-	Anthony Yznaga <anthony.yznaga@oracle.com>,
-	Usama Arif <usama.arif@bytedance.com>,
-	David Woodhouse <dwmw@amazon.co.uk>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>
-Subject: Re: [PATCH v2 02/17] memblock: Declare scratch memory as CMA
-Message-ID: <20240101030141.GA723@skinsburskii.>
-References: <20231222193607.15474-1-graf@amazon.com>
- <20231222193607.15474-3-graf@amazon.com>
+Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BC02803;
+	Mon,  1 Jan 2024 03:12:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-2044d093b3fso5536279fac.3;
+        Sun, 31 Dec 2023 19:12:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1704078738; x=1704683538; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=u7GvQd+qHdmtATzJklO2uLLq2EMXX40HqpmDmkw+3xc=;
+        b=a42qvMKyW+XoKvvIpgdgdZPtfQt26VuYTi9XQjfghrnwfdxP2iSqu04mw6woyQXi/Q
+         0pr4uVDjDgbM6qOnS+5/HiVCbL8+9CuuvUk5JMx0vYum9hfBO/ZsIIzo9tduNyiOHt4n
+         L3TfRGeSSwA+993w6ApDcuTj71YHSdm/mSiaAUNPtCUmXpeOM3KWkogqBR+guKc2pRYp
+         3OVkoAUwSAKgw48xc9A2F+JDfRX5vsKKUXfEVoBeV8DsD7ATiLn4LBj2OLuK2ar2Wlnr
+         dJephnPRtQFOVK6VvkL9Gb9bzw17CURuq4PDTtdNHZn12fbWK0EcQLmAVISdm5bscDXs
+         3fqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1704078738; x=1704683538;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=u7GvQd+qHdmtATzJklO2uLLq2EMXX40HqpmDmkw+3xc=;
+        b=nw/kNM6DUDCBjWPE9vBf6TeEulEuY4kg0tBb8+KcYwiLxcdzwdPGh8e6G2LVJAzPQk
+         qd6ISr4qx9leADfmpLNohFfxdNGCMg/8H7//hTEbKeEAd2a1UHw+6MUMMC67ONsC6UyP
+         3pNZGyjrmjPqA89rJiGF3wKD/vH6cxG+R3CPkayVvkURDswqT4kWi7zHsuuGpIo0OH3+
+         lJUGmJ8ZOmDLsoqVhXpTC4cToeAiUGumNXwJBkShqXwoRdNXfZYzWhyFhk2k+j0HhwSi
+         3CGyGfN9dQh9nBeSsGnwSwdtYzjlUAf2MtgZvtr/rQF52Uo/jBdeb+SBvN2UTu0YxkDq
+         hPrw==
+X-Gm-Message-State: AOJu0YwO7E0rWJ4rMILdFvrx/cw76hwAgHlZiTShwWOeU53n8/M8Zzoa
+	/Ku2Ay8kbDnwH9GfpXvQlks=
+X-Google-Smtp-Source: AGHT+IHQ+OiL9S5Ow8z8Ds9CB3HJTSLmax8kYcY2mrz/LWBaOfNiMH1YtKidYuTf8kt4QMLxMbVIjA==
+X-Received: by 2002:a05:6871:60e:b0:203:b5ec:ef08 with SMTP id w14-20020a056871060e00b00203b5ecef08mr18560864oan.107.1704078738325;
+        Sun, 31 Dec 2023 19:12:18 -0800 (PST)
+Received: from [10.0.2.15] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
+        by smtp.gmail.com with ESMTPSA id cb5-20020a056a02070500b005ce170c797bsm10975835pgb.87.2023.12.31.19.12.16
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 31 Dec 2023 19:12:17 -0800 (PST)
+Message-ID: <4b2d4c62-135d-4d25-8a3a-2fabd996c980@gmail.com>
+Date: Mon, 1 Jan 2024 12:12:16 +0900
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231222193607.15474-3-graf@amazon.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] docs: Raise the minimum Sphinx requirement to 2.4.4
+To: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Akira Yokosawa <akiyks@gmail.com>
+References: <874jgs47fq.fsf@meer.lwn.net>
+ <50830030-dca7-4c43-bcc8-449c7cfa9fbb@gmail.com>
+ <87sf43qxzt.fsf@meer.lwn.net>
+Content-Language: en-US
+From: Akira Yokosawa <akiyks@gmail.com>
+In-Reply-To: <87sf43qxzt.fsf@meer.lwn.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Dec 22, 2023 at 07:35:52PM +0000, Alexander Graf wrote:
-> When we finish populating our memory, we don't want to lose the scratch
-> region as memory we can use for useful data. Do do that, we mark it as
-> CMA memory. That means that any allocation within it only happens with
-> movable memory which we can then happily discard for the next kexec.
-> 
-> That way we don't lose the scratch region's memory anymore for
-> allocations after boot.
-> 
-> Signed-off-by: Alexander Graf <graf@amazon.com>
-> 
-> ---
-> 
-> v1 -> v2:
-> 
->   - test bot warning fix
-> ---
->  mm/memblock.c | 30 ++++++++++++++++++++++++++----
->  1 file changed, 26 insertions(+), 4 deletions(-)
-> 
-> diff --git a/mm/memblock.c b/mm/memblock.c
-> index e89e6c8f9d75..3700c2c1a96d 100644
-> --- a/mm/memblock.c
-> +++ b/mm/memblock.c
-> @@ -16,6 +16,7 @@
->  #include <linux/kmemleak.h>
->  #include <linux/seq_file.h>
->  #include <linux/memblock.h>
-> +#include <linux/page-isolation.h>
->  
->  #include <asm/sections.h>
->  #include <linux/io.h>
-> @@ -1100,10 +1101,6 @@ static bool should_skip_region(struct memblock_type *type,
->  	if ((flags & MEMBLOCK_SCRATCH) && !memblock_is_scratch(m))
->  		return true;
->  
-> -	/* Leave scratch memory alone after scratch-only phase */
-> -	if (!(flags & MEMBLOCK_SCRATCH) && memblock_is_scratch(m))
-> -		return true;
-> -
->  	return false;
->  }
->  
-> @@ -2153,6 +2150,20 @@ static void __init __free_pages_memory(unsigned long start, unsigned long end)
->  	}
->  }
->  
-> +#ifdef CONFIG_MEMBLOCK_SCRATCH
-> +static void reserve_scratch_mem(phys_addr_t start, phys_addr_t end)
+Hi,
 
-nit: the function name doesn't look reasonable as it has nothing
-limiting it to neither reservation nor scratch mem.
-Perhaps something like "set_mem_cma_type" would be a better fit.
+On Fri, 15 Dec 2023 08:36:06 -0700, Jonathan Corbet wrote:
+> Akira Yokosawa <akiyks@gmail.com> writes:
+> 
+>> With this patch applied, I get a confusing looking warning from
+>> "make htmldocs" on a machine where the Sphinx version is 2.4.5:
+>>
+>> --------
+>> Warning: It is recommended at least Sphinx version 3.4.3.
+>> To upgrade Sphinx, use:
+>>
+>> 	/home/akira/sphinx-2.4.5/bin/python3 -m venv sphinx_2.4.4
+>> 	. sphinx_2.4.4/bin/activate
+>> 	pip install -r ./Documentation/sphinx/requirements.txt
+>>
+>>     If you want to exit the virtualenv, you can use:
+>> 	deactivate
+>> --------
+>>
+>> Looks like we need to update requirements.txt as well so that it
+>> installs Sphinx 3.4.3.  Appended below is a fixup patch to that
+>> effect.
+> 
+> So I can apply this, certainly, but it makes me feel like perhaps we
+> need to reconsider our approach a bit.  It's kind of weird that we have
+> a minimum supported version, then a semi-random "recommended" version
+> that is still pretty old.
+> 
+> Is there a reason to suggest to people that they should run something
+> other than current sphinx, especially if they are updating it anyway?
+> So our "recommended version" is really "recommended *minimum* version"?
 
-> +{
-> +	ulong start_pfn = pageblock_start_pfn(PFN_DOWN(start));
-> +	ulong end_pfn = pageblock_align(PFN_UP(end));
-> +	ulong pfn;
-> +
-> +	for (pfn = start_pfn; pfn < end_pfn; pfn += pageblock_nr_pages) {
-> +		/* Mark as CMA to prevent kernel allocations in it */
+I picked 3.4.3 just because it is the version of distro Sphinx on
+debian 11 and RHEL 9.  It works just fine and "make htmldocs" should
+not complain it as not-recommended.
 
-nit: the comment above looks irrelevant/redundant.
+In sphinx-pre-install, "recommended version", aka $rec_version, works
+as a criteria to emit upgrade suggestion.
 
-> +		set_pageblock_migratetype(pfn_to_page(pfn), MIGRATE_CMA);
-> +	}
-> +}
-> +#endif
-> +
->  static unsigned long __init __free_memory_core(phys_addr_t start,
->  				 phys_addr_t end)
->  {
-> @@ -2214,6 +2225,17 @@ static unsigned long __init free_low_memory_core_early(void)
->  
->  	memmap_init_reserved_pages();
->  
-> +#ifdef CONFIG_MEMBLOCK_SCRATCH
-> +	/*
-> +	 * Mark scratch mem as CMA before we return it. That way we ensure that
-> +	 * no kernel allocations happen on it. That means we can reuse it as
-> +	 * scratch memory again later.
-> +	 */
-> +	__for_each_mem_range(i, &memblock.memory, NULL, NUMA_NO_NODE,
-> +			     MEMBLOCK_SCRATCH, &start, &end, NULL)
-> +		reserve_scratch_mem(start, end);
-> +#endif
-> +
->  	/*
->  	 * We need to use NUMA_NO_NODE instead of NODE_DATA(0)->node_id
->  	 *  because in some case like Node0 doesn't have RAM installed
-> -- 
-> 2.40.1
+That said, I think it should be OK if "pip install -r requirements.txt"
+installs a newer version.
+
+>
 > 
+>> ----8<----
+>> From: Akira Yokosawa <akiyks@gmail.com>
+>> Subject: [PATCH] docs: sphinx/requirement.txt: Reflect recommended Sphinx version
+>>
+>> sphinx_pre_install parses the version of Sphinx in requirements.txt
+>> and emits messages based on it.
+>> Update requirements.txt so that it installs Sphinx 3.4.3, as well as
+>> the examples in documentation.
+>>
+>> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
+>> ---
+>>  Documentation/doc-guide/sphinx.rst    | 14 +++++++-------
+>>  Documentation/sphinx/requirements.txt |  4 +++-
+>>  2 files changed, 10 insertions(+), 8 deletions(-)
+>>
+>> diff --git a/Documentation/doc-guide/sphinx.rst b/Documentation/doc-guide/sphinx.rst
+>> index 3d125fb4139d..5227a2611026 100644
+>> --- a/Documentation/doc-guide/sphinx.rst
+>> +++ b/Documentation/doc-guide/sphinx.rst
+>> @@ -48,13 +48,13 @@ or ``virtualenv``, depending on how your distribution packaged Python 3.
+>>        on the Sphinx version, it should be installed separately,
+>>        with ``pip install sphinx_rtd_theme``.
+>>  
+>> -In summary, if you want to install Sphinx version 2.4.4, you should do::
+>> +In summary, if you want to install Sphinx version 3.4.3, you should do::
+>>  
+>> -       $ virtualenv sphinx_2.4.4
+>> -       $ . sphinx_2.4.4/bin/activate
+>> -       (sphinx_2.4.4) $ pip install -r Documentation/sphinx/requirements.txt
+>> +       $ virtualenv sphinx_3.4.3
+>> +       $ . sphinx_3.4.3/bin/activate
+>> +       (sphinx_3.4.3) $ pip install -r Documentation/sphinx/requirements.txt
 > 
+> Here we could take version numbers out entirely; otherwise we'll always
+> be updating this.
+
+I thing this should be a verbatim copy of message from sphinx_pre_install
+presented later in sphinx.rst.
+
 > 
+>> -After running ``. sphinx_2.4.4/bin/activate``, the prompt will change,
+>> +After running ``. sphinx_3.4.3/bin/activate``, the prompt will change,
+>>  in order to indicate that you're using the new environment. If you
+>>  open a new shell, you need to rerun this command to enter again at
+>>  the virtual environment before building the documentation.
+>> @@ -118,8 +118,8 @@ command line options for your distro::
+>>  	You should run:
+>>  
+>>  		sudo dnf install -y texlive-luatex85
+>> -		/usr/bin/virtualenv sphinx_2.4.4
+>> -		. sphinx_2.4.4/bin/activate
+>> +		/usr/bin/virtualenv sphinx_3.4.3
+>> +		. sphinx_3.4.3/bin/activate
+>>  		pip install -r Documentation/sphinx/requirements.txt
+>>  
+>>  	Can't build as 1 mandatory dependency is missing at ./scripts/sphinx-pre-install line 468.
+>> diff --git a/Documentation/sphinx/requirements.txt b/Documentation/sphinx/requirements.txt
+>> index 335b53df35e2..89329e67e788 100644
+>> --- a/Documentation/sphinx/requirements.txt
+>> +++ b/Documentation/sphinx/requirements.txt
+>> @@ -1,3 +1,5 @@
+>>  # jinja2>=3.1 is not compatible with Sphinx<4.0
+>>  jinja2<3.1
+>> -Sphinx==2.4.4
+>> +# docutils>=0.18 is not compatible with 3.0 <= Sphinx < 4.0
+>> +docutils<0.18
+>> +Sphinx==3.4.3
 > 
-> Amazon Development Center Germany GmbH
-> Krausenstr. 38
-> 10117 Berlin
-> Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
-> Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
-> Sitz: Berlin
-> Ust-ID: DE 289 237 879
+> I'd forgotten about the docutils fun.  I wonder of our recommended
+> minimum should actually be 4.0, then here we could put simply:
 > 
+>   Sphinx>4.0
+
+I tried it and "make htmldocs" complains:
+
+    Can't get default sphinx version from ./Documentation/sphinx/requirements.txt at ./scripts/sphinx-pre-install line 305.
+    make[2]: *** [Documentation/Makefile:101: htmldocs] Error 255
+    make[1]: *** [/home/akira/git/linux/Makefile:1695: htmldocs] Error 2
+    make: *** [Makefile:234: __sub-make] Error 2
+
+I did try to remedy this, but realized that I was too frustrated in
+deciphering the script to come up with a reasonable update.
+
+I'm giving up on this.
+
+Sorry about that.
+
+Regards,
+Akira
+
 > 
+> ?
+> 
+> Thanks,
+> 
+> jon
+
 
