@@ -1,232 +1,175 @@
-Return-Path: <linux-doc+bounces-6015-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6050-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE7458211A4
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jan 2024 01:00:58 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 623A38221FB
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 20:29:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 3D152B21ACA
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jan 2024 00:00:56 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 00BD41F234A7
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 19:29:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CFA7AC8E7;
-	Mon,  1 Jan 2024 00:00:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7CF5415AF5;
+	Tue,  2 Jan 2024 19:29:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="mQX35mr/"
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="AGKUIlWB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D721DC8CB
-	for <linux-doc@vger.kernel.org>; Mon,  1 Jan 2024 00:00:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oracle.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3BVNvuIh007295;
-	Mon, 1 Jan 2024 00:00:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding; s=corp-2023-11-20;
- bh=m+uGDUzwoy19lTleQGJW262YTT5p5oJhsSZFU63+2sA=;
- b=mQX35mr/hJmdY+m8sTn49OOyfZy4H1GrBWrPTgOLZwFT1MTl6sX/YAgUjQGBAA7gLUhd
- +hUd3EsC7QStfzLzVUPXdGZe9uFSCNLYGL9FHvV0zaZOwiv6Oy+m/Qt8x/PAlcdujm/d
- K9igN6fQwzL12FUqE3OhS2gsNaaDJUbPcK0A73oEaXkZ9+rAo1MKn83uWTaa1lfgEXnc
- T2Tqz4WvBL030S4yhdAGbQMjOjzlx8T3vEsbcgCUKEDOdcwwM0p5G8kPEvwDpUzGKCCZ
- TGS3fi3B3nmYrSzt3UKGbQ8aOnhze8+NcBa+i64ebpfGpYX+JkWzQDr1of5aN0nZ6tuk Hw== 
-Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3vaatu1b9f-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Mon, 01 Jan 2024 00:00:11 +0000
-Received: from pps.filterd (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
-	by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 3BVKFL70001883;
-	Mon, 1 Jan 2024 00:00:10 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 3va9n4xcqv-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Mon, 01 Jan 2024 00:00:10 +0000
-Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 401007oX021824;
-	Mon, 1 Jan 2024 00:00:10 GMT
-Received: from localhost.localdomain (dhcp-10-175-57-83.vpn.oracle.com [10.175.57.83])
-	by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id 3va9n4xchr-2;
-	Mon, 01 Jan 2024 00:00:10 +0000
-From: Vegard Nossum <vegard.nossum@oracle.com>
-To: Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org, Vegard Nossum <vegard.nossum@oracle.com>,
-        Jani Nikula <jani.nikula@intel.com>
-Subject: [RFC PATCH 2/2] docs: kernel_abi.py: fix command injection
-Date: Mon,  1 Jan 2024 00:59:59 +0100
-Message-Id: <20231231235959.3342928-2-vegard.nossum@oracle.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231231235959.3342928-1-vegard.nossum@oracle.com>
-References: <20231231235959.3342928-1-vegard.nossum@oracle.com>
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1683B16401;
+	Tue,  2 Jan 2024 19:29:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
+Received: from skinsburskii. (c-73-239-240-195.hsd1.wa.comcast.net [73.239.240.195])
+	by linux.microsoft.com (Postfix) with ESMTPSA id 13EF120B3CC1;
+	Tue,  2 Jan 2024 11:29:17 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 13EF120B3CC1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1704223757;
+	bh=NWTVgm1Yghg6D+rhM1rcN+66tvwgyzPsGZv9i/VSt6U=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=AGKUIlWB2Mm3FV6uXLBIaYKw+ZOwF2oq+eG0GukNiGT0FaLu/cVNCJon1WWLrmbVf
+	 J0hpNTn0r5lQ7JZB7M+RoCQjykomiAtupbkO2imOrk6t0a4a8otvll3IN45v8vvg9M
+	 ESzfuKVdNYd5yhrMIDgJwHYz4CZGB1jbtbq0mHws=
+Date: Sun, 31 Dec 2023 19:01:41 -0800
+From: Stanislav Kinsburskii <skinsburskii@linux.microsoft.com>
+To: Alexander Graf <graf@amazon.com>, ""@skinsburskii
+Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+	linux-mm@kvack.org, devicetree@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, kexec@lists.infradead.org,
+	linux-doc@vger.kernel.org, x86@kernel.org,
+	Eric Biederman <ebiederm@xmission.com>,
+	"H. Peter Anvin" <hpa@zytor.com>, Andy Lutomirski <luto@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Rob Herring <robh+dt@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Tom Lendacky <thomas.lendacky@amd.com>,
+	Ashish Kalra <ashish.kalra@amd.com>,
+	James Gowans <jgowans@amazon.com>, arnd@arndb.de,
+	pbonzini@redhat.com, madvenka@linux.microsoft.com,
+	Anthony Yznaga <anthony.yznaga@oracle.com>,
+	Usama Arif <usama.arif@bytedance.com>,
+	David Woodhouse <dwmw@amazon.co.uk>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>
+Subject: Re: [PATCH v2 02/17] memblock: Declare scratch memory as CMA
+Message-ID: <20240101030141.GA723@skinsburskii.>
+References: <20231222193607.15474-1-graf@amazon.com>
+ <20231222193607.15474-3-graf@amazon.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-12-31_14,2023-12-29_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 mlxscore=0 bulkscore=0
- phishscore=0 suspectscore=0 spamscore=0 adultscore=0 mlxlogscore=915
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2311290000
- definitions=main-2312310198
-X-Proofpoint-GUID: cYXUiBmEUnhzdCQinFWf2zc6p7KmF9Dt
-X-Proofpoint-ORIG-GUID: cYXUiBmEUnhzdCQinFWf2zc6p7KmF9Dt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231222193607.15474-3-graf@amazon.com>
 
-The kernel-abi directive passes its argument straight to the shell.
-This is unfortunate and unnecessary.
+On Fri, Dec 22, 2023 at 07:35:52PM +0000, Alexander Graf wrote:
+> When we finish populating our memory, we don't want to lose the scratch
+> region as memory we can use for useful data. Do do that, we mark it as
+> CMA memory. That means that any allocation within it only happens with
+> movable memory which we can then happily discard for the next kexec.
+> 
+> That way we don't lose the scratch region's memory anymore for
+> allocations after boot.
+> 
+> Signed-off-by: Alexander Graf <graf@amazon.com>
+> 
+> ---
+> 
+> v1 -> v2:
+> 
+>   - test bot warning fix
+> ---
+>  mm/memblock.c | 30 ++++++++++++++++++++++++++----
+>  1 file changed, 26 insertions(+), 4 deletions(-)
+> 
+> diff --git a/mm/memblock.c b/mm/memblock.c
+> index e89e6c8f9d75..3700c2c1a96d 100644
+> --- a/mm/memblock.c
+> +++ b/mm/memblock.c
+> @@ -16,6 +16,7 @@
+>  #include <linux/kmemleak.h>
+>  #include <linux/seq_file.h>
+>  #include <linux/memblock.h>
+> +#include <linux/page-isolation.h>
+>  
+>  #include <asm/sections.h>
+>  #include <linux/io.h>
+> @@ -1100,10 +1101,6 @@ static bool should_skip_region(struct memblock_type *type,
+>  	if ((flags & MEMBLOCK_SCRATCH) && !memblock_is_scratch(m))
+>  		return true;
+>  
+> -	/* Leave scratch memory alone after scratch-only phase */
+> -	if (!(flags & MEMBLOCK_SCRATCH) && memblock_is_scratch(m))
+> -		return true;
+> -
+>  	return false;
+>  }
+>  
+> @@ -2153,6 +2150,20 @@ static void __init __free_pages_memory(unsigned long start, unsigned long end)
+>  	}
+>  }
+>  
+> +#ifdef CONFIG_MEMBLOCK_SCRATCH
+> +static void reserve_scratch_mem(phys_addr_t start, phys_addr_t end)
 
-Let's always use paths relative to $srctree/Documentation/ and use
-subprocess.check_call() instead of subprocess.Popen(shell=True).
+nit: the function name doesn't look reasonable as it has nothing
+limiting it to neither reservation nor scratch mem.
+Perhaps something like "set_mem_cma_type" would be a better fit.
 
-This also makes the code shorter.
+> +{
+> +	ulong start_pfn = pageblock_start_pfn(PFN_DOWN(start));
+> +	ulong end_pfn = pageblock_align(PFN_UP(end));
+> +	ulong pfn;
+> +
+> +	for (pfn = start_pfn; pfn < end_pfn; pfn += pageblock_nr_pages) {
+> +		/* Mark as CMA to prevent kernel allocations in it */
 
-Link: https://fosstodon.org/@jani/111676532203641247
-Reported-by: Jani Nikula <jani.nikula@intel.com>
-Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
----
- Documentation/admin-guide/abi-obsolete.rst |  2 +-
- Documentation/admin-guide/abi-removed.rst  |  2 +-
- Documentation/admin-guide/abi-stable.rst   |  2 +-
- Documentation/admin-guide/abi-testing.rst  |  2 +-
- Documentation/sphinx/kernel_abi.py         | 56 ++++------------------
- 5 files changed, 14 insertions(+), 50 deletions(-)
+nit: the comment above looks irrelevant/redundant.
 
-diff --git a/Documentation/admin-guide/abi-obsolete.rst b/Documentation/admin-guide/abi-obsolete.rst
-index d095867899c5..594e697aa1b2 100644
---- a/Documentation/admin-guide/abi-obsolete.rst
-+++ b/Documentation/admin-guide/abi-obsolete.rst
-@@ -7,5 +7,5 @@ marked to be removed at some later point in time.
- The description of the interface will document the reason why it is
- obsolete and when it can be expected to be removed.
- 
--.. kernel-abi:: $srctree/Documentation/ABI/obsolete
-+.. kernel-abi:: ABI/obsolete
-    :rst:
-diff --git a/Documentation/admin-guide/abi-removed.rst b/Documentation/admin-guide/abi-removed.rst
-index f7e9e43023c1..f9e000c81828 100644
---- a/Documentation/admin-guide/abi-removed.rst
-+++ b/Documentation/admin-guide/abi-removed.rst
-@@ -1,5 +1,5 @@
- ABI removed symbols
- ===================
- 
--.. kernel-abi:: $srctree/Documentation/ABI/removed
-+.. kernel-abi:: ABI/removed
-    :rst:
-diff --git a/Documentation/admin-guide/abi-stable.rst b/Documentation/admin-guide/abi-stable.rst
-index 70490736e0d3..fc3361d847b1 100644
---- a/Documentation/admin-guide/abi-stable.rst
-+++ b/Documentation/admin-guide/abi-stable.rst
-@@ -10,5 +10,5 @@ for at least 2 years.
- Most interfaces (like syscalls) are expected to never change and always
- be available.
- 
--.. kernel-abi:: $srctree/Documentation/ABI/stable
-+.. kernel-abi:: ABI/stable
-    :rst:
-diff --git a/Documentation/admin-guide/abi-testing.rst b/Documentation/admin-guide/abi-testing.rst
-index b205b16a72d0..19767926b344 100644
---- a/Documentation/admin-guide/abi-testing.rst
-+++ b/Documentation/admin-guide/abi-testing.rst
-@@ -16,5 +16,5 @@ Programs that use these interfaces are strongly encouraged to add their
- name to the description of these interfaces, so that the kernel
- developers can easily notify them if any changes occur.
- 
--.. kernel-abi:: $srctree/Documentation/ABI/testing
-+.. kernel-abi:: ABI/testing
-    :rst:
-diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
-index 49797c55479c..5911bd0d7965 100644
---- a/Documentation/sphinx/kernel_abi.py
-+++ b/Documentation/sphinx/kernel_abi.py
-@@ -39,8 +39,6 @@ import sys
- import re
- import kernellog
- 
--from os import path
--
- from docutils import nodes, statemachine
- from docutils.statemachine import ViewList
- from docutils.parsers.rst import directives, Directive
-@@ -73,60 +71,26 @@ class KernelCmd(Directive):
-     }
- 
-     def run(self):
--
-         doc = self.state.document
-         if not doc.settings.file_insertion_enabled:
-             raise self.warning("docutils: file insertion disabled")
- 
--        env = doc.settings.env
--        cwd = path.dirname(doc.current_source)
--        cmd = "get_abi.pl rest --enable-lineno --dir "
--        cmd += self.arguments[0]
--
--        if 'rst' in self.options:
--            cmd += " --rst-source"
-+        srctree = os.path.abspath(os.environ["srctree"])
- 
--        srctree = path.abspath(os.environ["srctree"])
-+        args = [
-+            os.path.join(srctree, 'scripts/get_abi.pl'),
-+            'rest',
-+            '--enable-lineno',
-+            '--dir', os.path.join(srctree, 'Documentation', self.arguments[0]),
-+        ]
- 
--        fname = cmd
--
--        # extend PATH with $(srctree)/scripts
--        path_env = os.pathsep.join([
--            srctree + os.sep + "scripts",
--            os.environ["PATH"]
--        ])
--        shell_env = os.environ.copy()
--        shell_env["PATH"]    = path_env
--        shell_env["srctree"] = srctree
-+        if 'rst' in self.options:
-+            args.append('--rst-source')
- 
--        lines = self.runCmd(cmd, shell=True, cwd=cwd, env=shell_env)
-+        lines = subprocess.check_output(args, cwd=os.path.dirname(doc.current_source)).decode('utf-8')
-         nodeList = self.nestedParse(lines, self.arguments[0])
-         return nodeList
- 
--    def runCmd(self, cmd, **kwargs):
--        u"""Run command ``cmd`` and return its stdout as unicode."""
--
--        try:
--            proc = subprocess.Popen(
--                cmd
--                , stdout = subprocess.PIPE
--                , stderr = subprocess.PIPE
--                , **kwargs
--            )
--            out, err = proc.communicate()
--
--            out, err = codecs.decode(out, 'utf-8'), codecs.decode(err, 'utf-8')
--
--            if proc.returncode != 0:
--                raise self.severe(
--                    u"command '%s' failed with return code %d"
--                    % (cmd, proc.returncode)
--                )
--        except OSError as exc:
--            raise self.severe(u"problems with '%s' directive: %s."
--                              % (self.name, ErrorString(exc)))
--        return out
--
-     def nestedParse(self, lines, fname):
-         env = self.state.document.settings.env
-         content = ViewList()
--- 
-2.34.1
-
+> +		set_pageblock_migratetype(pfn_to_page(pfn), MIGRATE_CMA);
+> +	}
+> +}
+> +#endif
+> +
+>  static unsigned long __init __free_memory_core(phys_addr_t start,
+>  				 phys_addr_t end)
+>  {
+> @@ -2214,6 +2225,17 @@ static unsigned long __init free_low_memory_core_early(void)
+>  
+>  	memmap_init_reserved_pages();
+>  
+> +#ifdef CONFIG_MEMBLOCK_SCRATCH
+> +	/*
+> +	 * Mark scratch mem as CMA before we return it. That way we ensure that
+> +	 * no kernel allocations happen on it. That means we can reuse it as
+> +	 * scratch memory again later.
+> +	 */
+> +	__for_each_mem_range(i, &memblock.memory, NULL, NUMA_NO_NODE,
+> +			     MEMBLOCK_SCRATCH, &start, &end, NULL)
+> +		reserve_scratch_mem(start, end);
+> +#endif
+> +
+>  	/*
+>  	 * We need to use NUMA_NO_NODE instead of NODE_DATA(0)->node_id
+>  	 *  because in some case like Node0 doesn't have RAM installed
+> -- 
+> 2.40.1
+> 
+> 
+> 
+> 
+> Amazon Development Center Germany GmbH
+> Krausenstr. 38
+> 10117 Berlin
+> Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
+> Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
+> Sitz: Berlin
+> Ust-ID: DE 289 237 879
+> 
+> 
 
