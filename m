@@ -1,37 +1,37 @@
-Return-Path: <linux-doc+bounces-6053-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6055-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BC0182225A
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 20:58:55 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id E47BB822276
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 21:18:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E02BAB22B79
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 19:58:52 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9BA2C28474A
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 20:18:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A56115EB9;
-	Tue,  2 Jan 2024 19:58:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AFF481640A;
+	Tue,  2 Jan 2024 20:18:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="sf+h60Ai"
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="jBZq+QIm"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2541F168D6;
-	Tue,  2 Jan 2024 19:58:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6EF7416408;
+	Tue,  2 Jan 2024 20:18:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
 Received: from skinsburskii. (c-73-239-240-195.hsd1.wa.comcast.net [73.239.240.195])
-	by linux.microsoft.com (Postfix) with ESMTPSA id 2C6DD20B3CC1;
-	Tue,  2 Jan 2024 11:58:13 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 2C6DD20B3CC1
+	by linux.microsoft.com (Postfix) with ESMTPSA id 8634120B3CC1;
+	Tue,  2 Jan 2024 12:18:47 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 8634120B3CC1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1704225493;
-	bh=2UaDwV/oGm+Epqzq+iuoXLl1XYKs/iiOjHPSgAf4WNI=;
+	s=default; t=1704226728;
+	bh=JFUj3C7F4v1llVh0SHjV/UZr4Y8Q5mWVzW88656cZ4c=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=sf+h60AikfAoNDWIfOQf+gp/7n62YjqR91jk021dI0v+1a8M9a0OEjS7fQlNbGHtT
-	 ipeSl4ZqBYQjVEH3GZlLaVHYTWm8e6nUV0SEqCtKnbq135a3/00oHsQNKX3wd4Z7BD
-	 ICaDdMQVBMMzyyO3sadV/R66AVE4C1KSJe3ErDtk=
-Date: Sun, 31 Dec 2023 19:33:01 -0800
+	b=jBZq+QImwExtqzfSMUaFBx5SqLCBQZlhbdMiNYB9OQZDuVtBKnZllTeupWgAKu58t
+	 4yOsU39+h82ZiQ2rxDh7b264mytw7f1GFBNGYW+/MioPPM90R/n2xElpJXMoDcvHCU
+	 nesWzuBT96S1hmpCoXyzFXlJiuFt3xFbHxdqt+iM=
+Date: Sun, 31 Dec 2023 19:55:18 -0800
 From: Stanislav Kinsburskii <skinsburskii@linux.microsoft.com>
 To: Alexander Graf <graf@amazon.com>
 Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
@@ -53,10 +53,10 @@ Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
 	Usama Arif <usama.arif@bytedance.com>,
 	David Woodhouse <dwmw@amazon.co.uk>,
 	Benjamin Herrenschmidt <benh@kernel.crashing.org>
-Subject: Re: [PATCH v2 04/17] kexec: Add KHO parsing support
-Message-ID: <20240101033301.GA765@skinsburskii.>
+Subject: Re: [PATCH v2 07/17] kexec: Add documentation for KHO
+Message-ID: <20240101035518.GA804@skinsburskii.>
 References: <20231222193607.15474-1-graf@amazon.com>
- <20231222193607.15474-5-graf@amazon.com>
+ <20231222193607.15474-8-graf@amazon.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -65,84 +65,71 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20231222193607.15474-5-graf@amazon.com>
+In-Reply-To: <20231222193607.15474-8-graf@amazon.com>
 
-On Fri, Dec 22, 2023 at 07:35:54PM +0000, Alexander Graf wrote:
-> +/**
-> + * kho_reserve_previous_mem - Adds all memory reservations into memblocks
-> + * and moves us out of the scratch only phase. Must be called after page tables
-> + * are initialized and memblock_allow_resize().
-> + */
-> +void __init kho_reserve_previous_mem(void)
-> +{
-> +	void *mem_virt = __va(mem_phys);
-> +	int off, err;
+On Fri, Dec 22, 2023 at 07:35:57PM +0000, Alexander Graf wrote:
+> diff --git a/Documentation/kho/concepts.rst b/Documentation/kho/concepts.rst
+> new file mode 100644
+> index 000000000000..8e4fe8c57865
+> --- /dev/null
+> +++ b/Documentation/kho/concepts.rst
+> @@ -0,0 +1,88 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
 > +
-> +	if (!handover_phys || !mem_phys)
-> +		return;
+> +=======================
+> +Kexec Handover Concepts
+> +=======================
 > +
-> +	/*
-> +	 * We reached here because we are running inside a working linear map
-> +	 * that allows us to resize memblocks dynamically. Use the chance and
-> +	 * populate the global fdt pointer
-> +	 */
-> +	fdt = __va(handover_phys);
+> +Kexec HandOver (KHO) is a mechanism that allows Linux to preserve state -
+> +arbitrary properties as well as memory locations - across kexec.
 > +
-> +	off = fdt_path_offset(fdt, "/");
-> +	if (off < 0) {
-> +		fdt = NULL;
-> +		return;
-> +	}
+> +It introduces multiple concepts:
 > +
-> +	err = fdt_node_check_compatible(fdt, off, "kho-v1");
-> +	if (err) {
-> +		pr_warn("KHO has invalid compatible, disabling.");
+> +KHO Device Tree
+> +---------------
+> +
+> +Every KHO kexec carries a KHO specific flattened device tree blob that
+> +describes the state of the system. Device drivers can register to KHO to
+> +serialize their state before kexec. After KHO, device drivers can read
+> +the device tree and extract previous state.
+> +
+> +KHO only uses the fdt container format and libfdt library, but does not
+> +adhere to the same property semantics that normal device trees do: Properties
+> +are passed in native endianness and standardized properties like ``regs`` and
+> +``ranges`` do not exist, hence there are no ``#...-cells`` properties.
+> +
+> +KHO introduces a new concept to its device tree: ``mem`` properties. A
+> +``mem`` property can inside any subnode in the device tree. When present,
 
-It looks like KHO preserved regions won't be reserved in this case.
-Should KHO DT state be destroyed here to prevent KHO memory regions
-reuse upon rollback?
+Should it be "property can be" ?
 
-> +
-> +void __init kho_populate(phys_addr_t handover_dt_phys, phys_addr_t scratch_phys,
-> +			 u64 scratch_len, phys_addr_t mem_cache_phys,
-> +			 u64 mem_cache_len)
-> +{
-> +	void *handover_dt;
-> +
-> +	/* Determine the real size of the DT */
-> +	handover_dt = early_memremap(handover_dt_phys, sizeof(struct fdt_header));
-> +	if (!handover_dt) {
-> +		pr_warn("setup: failed to memremap kexec FDT (0x%llx)\n", handover_dt_phys);
-> +		return;
-> +	}
-> +
-> +	if (fdt_check_header(handover_dt)) {
-> +		pr_warn("setup: kexec handover FDT is invalid (0x%llx)\n", handover_dt_phys);
-> +		early_memunmap(handover_dt, PAGE_SIZE);
-> +		return;
-> +	}
-> +
-> +	handover_len = fdt_totalsize(handover_dt);
-> +	handover_phys = handover_dt_phys;
-> +
-> +	/* Reserve the DT so we can still access it in late boot */
-> +	memblock_reserve(handover_phys, handover_len);
-> +
-> +	/* Reserve the mem cache so we can still access it later */
-> +	memblock_reserve(mem_cache_phys, mem_cache_len);
-> +
-> +	/*
-> +	 * We pass a safe contiguous block of memory to use for early boot purporses from
-> +	 * the previous kernel so that we can resize the memblock array as needed.
-> +	 */
-> +	memblock_add(scratch_phys, scratch_len);
-> +
-> +	if (WARN_ON(memblock_mark_scratch(scratch_phys, scratch_len))) {
-> +		pr_err("Kexec failed to mark the scratch region. Disabling KHO.");
-> +		handover_len = 0;
-> +		handover_phys = 0;
+...
 
-Same question here: doesn't all the KHO state gets invalid in case of any
-restoration error?
+> diff --git a/Documentation/kho/usage.rst b/Documentation/kho/usage.rst
+> new file mode 100644
+> index 000000000000..5efa2a58f9c3
+> --- /dev/null
+> +++ b/Documentation/kho/usage.rst
+> @@ -0,0 +1,57 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +====================
+> +Kexec Handover Usage
+> +====================
+> +
+> +Kexec HandOver (KHO) is a mechanism that allows Linux to preserve state -
+> +arbitrary properties as well as memory locations - across kexec.
+> +
+> +This document expects that you are familiar with the base KHO
+> +:ref:`Documentation/kho/concepts.rst <concepts>`. If you have not read
+> +them yet, please do so now.
+> +
+> +Prerequisites
+> +-------------
+> +
+> +KHO is available when the ``CONFIG_KEXEC_KHO`` config option is set to y
+> +at compile team. Every KHO producer has its own config option that you
 
+Should it be "at compile time."?
+ 
 
