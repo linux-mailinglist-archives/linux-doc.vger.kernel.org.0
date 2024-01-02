@@ -1,80 +1,82 @@
-Return-Path: <linux-doc+bounces-6054-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6056-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0FAA82225E
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 21:01:13 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 537AE822290
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 21:30:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 423F21F23463
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 20:01:13 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EEE26284799
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jan 2024 20:30:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8DFF216402;
-	Tue,  2 Jan 2024 20:01:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CBD4733D7;
+	Tue,  2 Jan 2024 20:30:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="1GRMpiSX"
+	dkim=pass (1024-bit key) header.d=memverge.com header.i=@memverge.com header.b="mTHMD9/d"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2041.outbound.protection.outlook.com [40.107.93.41])
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2062.outbound.protection.outlook.com [40.107.237.62])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D77F16400;
-	Tue,  2 Jan 2024 20:01:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEB4B16408;
+	Tue,  2 Jan 2024 20:30:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=memverge.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=memverge.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Uxx3rn1NwOstL1+64m7wLOfGe5prhN2bjxKswaWCPslXc7a0e3atZhKHsYVihBJfcWdx4qa0nCENIaY5jjhB2MdjPdia6DhWw5ER5vcVZ04UHLG7clHHyt0lxa74Srp0TjGy7sMFI/qhrf/39q03PEKekHnAMFgizQ5uTJEl1agA1nlQGtSY6/as8+yZQ4VW0YlJtS4k1/IyLypsqEXJIJBoXs8AG2uB3ku2UYlh8D5idOTTT0QZqjo2Yufwk60AhfnHR3cix4zgg2whILZ3DWOeVl3gdQAZX5e42s/GUUpRdWDbGwRkprWa+zwCmP5utXZajGcXnIP4i+S03bataA==
+ b=Bzm+qAZPIPbJFyrM/bFLheJhatu11JLeWvKZ7hRJ4VTxI8C/eIQ3Nei3fjFDMJ1EWoxvcV71vy7JYuSxSpbfx4WHuQISopVg6V18t6Kp7XFYQQS/fS0MH4hdfNLixxETnzKqqZv0uEvBWaZN8E7G8rYLd9H2WcObMWmAL8b4MoZmzR0QrSbiDJOIR3KBtUQ6Dv1PvN+BUcMytNph9LQGL3mjvJoirVrdhCxjF34yIUGCavIUgjlc5Xf/o+v/9RZVkNnd1a1iShDIYuxDRJhTjJe4ptdwmu6BHM5I283ICq66hPveFiQD82tod86xpCRBMVfPNr2c5gWkPM6bpS1VJA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EnI/JPjUibh8SwGpBtrG+8mCnycq7ZVQR2idCUagzuM=;
- b=jU4SswQGUY+MIp3deBVLUBJRiSki0jsaXukqpAddUs/9a/kJZpgtx/+BM7QRnYY9mASwtfKn7tz/ykjNB2u6RE41PbxKag4EplAgjsTLScDXMNkmJvz/6q5IIDTmo1jor/OGMmRBDuTMq0Sprmxq6oILClGgwmC0oOaXhoGTYFeLe7/4sB6V1KLsOpclBFHnCJj81X8lOH07hbhAGB8wM3ICFHHMFl2iIE+Fb0DRpNEMecbQTM7S+VavKjsZRMsbnEEvRPhK+R943uBdvdVg/1kqQXxx1tKD8swLmoXGdfieKZS51wiwqTgvfehTa1TzyoNYyXiKVpOh82Nebi7+Ug==
+ bh=hKekLbY9ar3qm9zcUFARVS5GPrln+ELFs3VCR0OZix0=;
+ b=XBbIUKZ2jBYVdcHpi31WNSN5NR2lNWfeZqzJsaiSa2yUQwn6WuiNlqK3Qd0FqTCE5NpLAtoliixntZde2gAoazI4NU7iMEIn578lBnWIdIzr53FzUgijuasRFYKg5zVDGi8JmIWzw3C0bMfg0Wf7ox238vgIPgxN3Ay5O8JcqhPiyZiYwERWcmFU5TXHwpoALtgazQWkZ0EuDVU6vMMWo2c0MO51RjFzq8l74uNLVtPxP5ou+M74IoHf8HWunSCSnZ9zYXsZWsOD22ummYlSdB28semPk5cBqkomYYOwIjmeBKDpL5A5XP+Sq1NRt4I2n6YbjQOgF5fBUYr15Cq9tw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ smtp.mailfrom=memverge.com; dmarc=pass action=none header.from=memverge.com;
+ dkim=pass header.d=memverge.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=memverge.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EnI/JPjUibh8SwGpBtrG+8mCnycq7ZVQR2idCUagzuM=;
- b=1GRMpiSXPmdvmLbeGzHJBqxoe5m7x6/W50kc2wlakIk2L9JLkqXK6lXyz0zrnA0CK5QZzH5SmBYZ99W3vSZzhtlGuZLFbVk7lH/KPDPGKXzAKwvPQc9xR3wvVAu8beLvrDkdHauoIzw1O11Kv8toSAv8//UQaEiBiEPbsQhxS9E=
+ bh=hKekLbY9ar3qm9zcUFARVS5GPrln+ELFs3VCR0OZix0=;
+ b=mTHMD9/dWvBUFLDtwZF3oSs8Wo9MiOzD774r2yq2KZfWcvgtD1a2/5YODIz4XoNiHMGNGigcLrHbOTZKVCjpSk8ypbz7gVvthO90EgDLNKKP6joTaEnZtY50nntykDjRE1l34p7NDF2UuSPynij3bA/FVOAkN+nhzOplCcxPmGo=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from MW3PR12MB4553.namprd12.prod.outlook.com (2603:10b6:303:2c::19)
- by CO6PR12MB5460.namprd12.prod.outlook.com (2603:10b6:5:357::11) with
+ header.d=none;dmarc=none action=none header.from=memverge.com;
+Received: from SJ0PR17MB5512.namprd17.prod.outlook.com (2603:10b6:a03:394::19)
+ by MW4PR17MB5097.namprd17.prod.outlook.com (2603:10b6:303:11c::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.25; Tue, 2 Jan
- 2024 20:01:00 +0000
-Received: from MW3PR12MB4553.namprd12.prod.outlook.com
- ([fe80::1549:8c93:8585:ca1b]) by MW3PR12MB4553.namprd12.prod.outlook.com
- ([fe80::1549:8c93:8585:ca1b%5]) with mapi id 15.20.7135.026; Tue, 2 Jan 2024
- 20:00:59 +0000
-Message-ID: <978719d8-8492-47f8-afdf-09e7c997b0b3@amd.com>
-Date: Tue, 2 Jan 2024 14:00:56 -0600
-User-Agent: Mozilla Thunderbird
-Reply-To: babu.moger@amd.com
-Subject: Re: [PATCH v2 2/2] x86/resctrl: Remove hard-coded memory bandwidth
- event configuration
-Content-Language: en-US
-To: Reinette Chatre <reinette.chatre@intel.com>, corbet@lwn.net,
- fenghua.yu@intel.com, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
- dave.hansen@linux.intel.com
-Cc: x86@kernel.org, hpa@zytor.com, paulmck@kernel.org, rdunlap@infradead.org,
- tj@kernel.org, peterz@infradead.org, seanjc@google.com,
- kim.phillips@amd.com, jmattson@google.com, ilpo.jarvinen@linux.intel.com,
- jithu.joseph@intel.com, kan.liang@linux.intel.com, nikunj@amd.com,
- daniel.sneddon@linux.intel.com, pbonzini@redhat.com,
- rick.p.edgecombe@intel.com, rppt@kernel.org,
- maciej.wieczor-retman@intel.com, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, eranian@google.com, peternewman@google.com,
- dhagiani@amd.com
-References: <20231201005720.235639-1-babu.moger@amd.com>
- <170240414535.760665.1609957728181418569.stgit@bmoger-ubuntu>
- <d9f3d23d-aba7-4229-bddb-5d6801b22f27@intel.com>
-From: "Moger, Babu" <babu.moger@amd.com>
-In-Reply-To: <d9f3d23d-aba7-4229-bddb-5d6801b22f27@intel.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: DS7PR05CA0086.namprd05.prod.outlook.com (2603:10b6:8:56::7)
- To MW3PR12MB4553.namprd12.prod.outlook.com (2603:10b6:303:2c::19)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.13; Tue, 2 Jan
+ 2024 20:30:45 +0000
+Received: from SJ0PR17MB5512.namprd17.prod.outlook.com
+ ([fe80::7a04:dc86:2799:2f15]) by SJ0PR17MB5512.namprd17.prod.outlook.com
+ ([fe80::7a04:dc86:2799:2f15%4]) with mapi id 15.20.7135.023; Tue, 2 Jan 2024
+ 20:30:45 +0000
+Date: Tue, 2 Jan 2024 15:30:36 -0500
+From: Gregory Price <gregory.price@memverge.com>
+To: "Huang, Ying" <ying.huang@intel.com>
+Cc: Gregory Price <gourry.memverge@gmail.com>, linux-mm@kvack.org,
+	linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-api@vger.kernel.org,
+	x86@kernel.org, akpm@linux-foundation.org, arnd@arndb.de,
+	tglx@linutronix.de, luto@kernel.org, mingo@redhat.com, bp@alien8.de,
+	dave.hansen@linux.intel.com, hpa@zytor.com, mhocko@kernel.org,
+	tj@kernel.org, corbet@lwn.net, rakie.kim@sk.com,
+	hyeongtak.ji@sk.com, honggyu.kim@sk.com, vtavarespetr@micron.com,
+	peterz@infradead.org, jgroves@micron.com, ravis.opensrc@micron.com,
+	sthanneeru@micron.com, emirakhur@micron.com, Hasan.Maruf@amd.com,
+	seungjun.ha@samsung.com,
+	Srinivasulu Thanneeru <sthanneeru.opensrc@micron.com>
+Subject: Re: [PATCH v5 02/11] mm/mempolicy: introduce
+ MPOL_WEIGHTED_INTERLEAVE for weighted interleaving
+Message-ID: <ZZRybDPSoLme8Ldh@memverge.com>
+References: <20231223181101.1954-1-gregory.price@memverge.com>
+ <20231223181101.1954-3-gregory.price@memverge.com>
+ <8734vof3kq.fsf@yhuang6-desk2.ccr.corp.intel.com>
+ <ZYp6ZRLZQVtTHest@memverge.com>
+ <878r58dt31.fsf@yhuang6-desk2.ccr.corp.intel.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <878r58dt31.fsf@yhuang6-desk2.ccr.corp.intel.com>
+X-ClientProxiedBy: SJ0PR03CA0187.namprd03.prod.outlook.com
+ (2603:10b6:a03:2ef::12) To SJ0PR17MB5512.namprd17.prod.outlook.com
+ (2603:10b6:a03:394::19)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -82,255 +84,169 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MW3PR12MB4553:EE_|CO6PR12MB5460:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8029bbda-f912-4c87-6e38-08dc0bcd8a5b
+X-MS-TrafficTypeDiagnostic: SJ0PR17MB5512:EE_|MW4PR17MB5097:EE_
+X-MS-Office365-Filtering-Correlation-Id: bff1201f-a7d1-4eff-c3b6-08dc0bd1b248
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	VsNpidebJSoS6jKF4SZtFFntkx6jYWyjfb2IcjH1f7TAnrARmJfgW1gaRoqikQVj3hR0DqDrAYwg8QCW/XYYTLZedvAg2C6Hj4MhVeEWmD00lnLmuUYi9qtuJsEdbDK6mKOPh6Cc8LjbB/f3hCHv4Uc4e+GNjSUviN9SLc/NpAU1Ijbkers4g9Eo98WENucjmHgzwisUurafS/e5FCHpBGoA7TVjwqNtXwyuE9gAXXdycW/C1S+n7eo1t0R5XGj8RB7N6xvi18DkAoCevJZoR1imQ7uMWHAHsQx6MQfDZF57eZHgeUhF86S53MpSvzjtxxth+4udkqZAKybvzf05OMc54wfI4nxB4bbVZKEUMmsi5pP+KhfWxY7p3KK75VA7fNoH3W6LCVxjWSSCLmH0gyEtK1mn5/yoRqYXSPiiXr7taciJWd0o/f2pxe3PJ1jCUDbO8z0KyKPdGeoonm2YvGACFNVyAgpzAhQbxVS6fYqeKfVd9PMCctWAbJafwzeRlhSUG1QZ9MzFDtugAwzeUUKQFXl1fj9YsCpbZGKcr4Xy/Xjli0eH4H9MA7CdLhvlnuoGLgRtYyyzUJ+VXJaP04AQ0/vYupNPkydJQr9vyx2IHQoVjHGbjOcgGdsUFdW65E6EkCsDlzKGOprPi2Tt+w==
+	KW94kQAaxztRfqaezpfhTN8+r0/fFRUlK5MWDFki0SQ7qKR/VFVcI/wDPCzJmnYrlYrwae2Kr8lWonPfPrIDDVp4CZd2D6yt4gCHfPRGLbdb1VOF3OEuq91awv15SsScF6NLtdz4LELDZE3eHVazF/btHKpIlcQ0GJekuAm+oGBDNyzYhFWeADklv3E5/JQAwNH6lXp7Hf1VlV+iB7SQrJuayOFH4ygEY7jrTxrWeqNxWuAlyhd2+B+WqlrApKbHel8nNm8Xy1UtxoB7MwEpSxIv+0Cd59WtAYJb9diIAUSHKPn4Uo1t4pnT0QprOxG1RXspsrXPtsPIJ7szrCEmRSzvvm0tihtb1ZtP7BAyzigjhzvglGcb2FNn/Jg24YKbJFl0pU2IwC48EqAAfYt7NUbksWqeJ0dIdgA4iOGjMs222h138eT6KyqqOUmwQ/r65sz4w8lDbFQvJdG+syWKH5ASlU/yuapjEzWIFVDFuq68rRmt4vrPQfM4oGWIB+AxF/GYQ91B5w2yru91O8GBzryrlxJ986NGqE+6+N16A4IDQy5uDVWRxgGmFwLA+5ci2dswXHYxmb0AQpffSAGKgdOA1lFvd+35B7lchcc3mVlIeuwYlHHeMeiHo50LggKv
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR12MB4553.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(376002)(346002)(366004)(136003)(39860400002)(230922051799003)(451199024)(1800799012)(186009)(64100799003)(6506007)(26005)(2616005)(83380400001)(6512007)(6666004)(53546011)(5660300002)(7416002)(4326008)(41300700001)(3450700001)(478600001)(2906002)(66946007)(966005)(6486002)(316002)(8676002)(8936002)(66476007)(66556008)(86362001)(31696002)(38100700002)(36756003)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR17MB5512.namprd17.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(136003)(39840400004)(376002)(346002)(396003)(230922051799003)(451199024)(1800799012)(64100799003)(186009)(38100700002)(36756003)(86362001)(2616005)(26005)(6506007)(6512007)(6666004)(54906003)(4326008)(8676002)(6486002)(478600001)(8936002)(316002)(83380400001)(66899024)(66476007)(66946007)(66556008)(6916009)(44832011)(41300700001)(5660300002)(7406005)(7416002)(2906002)(16393002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?Z3pxakpsZy84ZWtqWjhJd2dhTmpYdWRDWTR3aFZHNXhnNlQxRzM1Zmc0RFZt?=
- =?utf-8?B?RHJNN1dNWXJRZmM1OHV4YmI0NTdQK042bXRrb21ad2libVY0Z3E2bStkMk9y?=
- =?utf-8?B?dXNhUEJTZFp4NXVwSHJ0WG0wblhsZFBVczh4OHFsQmtXVnczamJ5cjR5V056?=
- =?utf-8?B?UEd0MlN1azBxdDRVcWQ0TkRLVGxqRHEzYUlCRGkzSXdJcGd0RWtBY0tLSHVn?=
- =?utf-8?B?K2Q1MlFWc0lDL1c5OEUzRWJrWVQ1K0NtMjFKSVlwY1RPQnBCeEJUV3NJMWtz?=
- =?utf-8?B?eGhjQzAycmtPMEdacU96SnBLRGZabE9ZK3dBT1lkNHNmUjMvU0dlNTg1aGY3?=
- =?utf-8?B?dUZPUENNUm1uWGxma2FDbjc3NmFxN2tlZ0MzdUdvUFVnL0Jzd0syUkNkRWpU?=
- =?utf-8?B?ZVJMNWViVmlxQkkzQWZvSTc1QlpYUkJxdm9hUzJPbTdEeG9kSW5TY1RTVTI5?=
- =?utf-8?B?ZTVaUkxOYjNjMVdBd3JYOExvWklaRDBXVVFEa0MxcFhFR1p1S0VzSXZEWEFm?=
- =?utf-8?B?NUJlR0tsOEIwUDBRM2FlTkhsQmFXaTRON2prdk9kMkxMKy9EY0FDOENWVWo4?=
- =?utf-8?B?L2R2NFNZRGNrZ25uSnRMbXdoN3pQUmtJWlVOOGFhekx1aStZTnozemZRNlJk?=
- =?utf-8?B?S0NjNTRxTGlweERQTHFkTlNySHMrN1pNVm1SdUt1K3RWaXFWT0hsT2FoQlR1?=
- =?utf-8?B?YUx0VFpLRWZHSDA5OHd1blc4eEZtTUpBT0FsV0RLMXBKUWhtRUpmc1k1Y3BF?=
- =?utf-8?B?YU5XdG5mdi9hQmhFYXdUeHEwMllzUGl4aEVmZzlvcS9PbVJPdjB2LzNhb0lW?=
- =?utf-8?B?dE5kTU8zY3R0eUdVZGhETkhxSXRnNXY1NzR3UmJxekIvaFQvMllSaW0wMEhq?=
- =?utf-8?B?UWcxeXQvQmFCaFQxNzF5QU03eFJDQU4xQTFlL2g5NzdMTzBpSXprcUNWNXdZ?=
- =?utf-8?B?SVZjbjE4MmliT09DZXJkNlNCcENqc2NwaHIyY1VBZEl0eDZTVnRlYU15eTZ5?=
- =?utf-8?B?UUd1UHNrRHp5dkQ3UU9HQ3ZBYTUrS29IUUJiMWg4VlFMV2JZWWpLa3crUTRE?=
- =?utf-8?B?YjMzUnVVZzBSUVZOUm5mL2pvb3RVZm1aQ3M0NGlXT0hGQ21hMkpCY2RPbXBo?=
- =?utf-8?B?eEE5UUZiSW1QWmk3Z1EwcVBqUWZiSlROZjVaVkkxWUVjOUpBSU5Wdm12eXB5?=
- =?utf-8?B?RGp5UzlRR0VRQ0tTajFBSEhmT2FmeUVwRlRZT2QraGYveWpNQ3h6c0FjZjUv?=
- =?utf-8?B?Qm1DQ3pzcEpwR2I3OWZnY0lpdnoyZ09sTXlWZ01oWERCcTdtekpTbk01L2pq?=
- =?utf-8?B?cStjalNMT3U5VnBmVjBrWHF6TW8zRDhCRGgxTTFMM1FuMXVUMmJsRFpqSDlY?=
- =?utf-8?B?NWh5WStoUkJISzFZOC93OHhnRGhOdGZuSmI0OEFQZEpNNGMvSUh3UFdmMHVw?=
- =?utf-8?B?VGhRVDdTSVV3Ti9aSUYyM0ZKTVRoU2xYOG9lZUJLSGovemFGY0dPRkxCdXND?=
- =?utf-8?B?TCtrNzdmbmFwL1FSYmRmMXhCdlBGRVY0NHdFTk1TYjV0MEJJR0xQWFhmaVF1?=
- =?utf-8?B?cThPeEdvcFB2c256VGxqRitqOEJkeUoxV1FVWlVQaVVtUUxyWmxzbUc3TllS?=
- =?utf-8?B?UzJ2MnBSSGV0NmZ3YlBuWkhRbDNWT3RtZUpWYnRkTi9QaTNiNWcwQW1PajNM?=
- =?utf-8?B?aDZUUUxCeStwcWJpOEo0T1hGYVk5UXpWcEZwRFV1MlBudDh3Y0N4WjVYcllh?=
- =?utf-8?B?QTVnT3JrYXptMlVueTZqWE5zeVdKZkF2L05XTkFQMVNxN1Z0a2VhQkZ1NGJ5?=
- =?utf-8?B?aHN5OW1iZVYwckVGWWwvVnFyaTNIalZNM1N0dHYyM0IvcVhBQVc3WnNzK2w0?=
- =?utf-8?B?U0NYaWNhcEJPVzVSN21rWE1VMXY5OFF5encwZmhkTUhPTEpwM3BTRkE1cVVQ?=
- =?utf-8?B?aWptaTlFa0F4RkdQbXh6NjdpSzZxdmh0ODhmVTM4WGRIN2VQOHY0RVZoaVU2?=
- =?utf-8?B?bHVLMzd4VjdyZlgzYko0NmNpc1NnTVVmNFZqWGY0RjBGSGpONXBuRXhRYklI?=
- =?utf-8?B?SHlZU0FGc2dOMFF5c1E3L2dxcmd5MnJyb2U3Z3A4N2tFdlIxcjZ3bzJqMDI0?=
- =?utf-8?Q?mpCI=3D?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8029bbda-f912-4c87-6e38-08dc0bcd8a5b
-X-MS-Exchange-CrossTenant-AuthSource: MW3PR12MB4553.namprd12.prod.outlook.com
+	=?us-ascii?Q?G72LK6C5nAFz/2vRSXkuPlDEy3Ou93xXpYl11aAPVAhUOuEx4LV2eWpfe+Mu?=
+ =?us-ascii?Q?pmMgW7/PCgbGxAhPeWuUbhI7DDGfzh/OQfNgnwj3M+WbUsGAQmgj0BP7ILIM?=
+ =?us-ascii?Q?kzd+OtiEb6WACYRCYlOm/jDml5kgVaIU9VKlx9DaCQqWMHeSsm5+O16TkLSR?=
+ =?us-ascii?Q?QaY9yZyEWJWT22n+aQnpwZZ9yUdTBHpo3SZg8yrlg+MuldTL1HFdAU+eGmNT?=
+ =?us-ascii?Q?cut2wTze39qkJIwThnSb6MPeFuxlYmAhUgLPel7OfLGwpidzgDTqMXKPOklH?=
+ =?us-ascii?Q?p5cT2hHK0c18v+NXzRUx4EtpfAtcq4RtUgKJmi0pF+nz5TfYJ6CUYTpL8VFz?=
+ =?us-ascii?Q?AqFr9fjNSCiVxBo+Hc65M/lvaQ98PGG4Z0psEUsLyDy7q+vIonx+/eFLwder?=
+ =?us-ascii?Q?p00ZRQ5oMjbHx3Y7/7H7E5xAVpsS4u85AOiZqec+nqFNm/LLXfDgrW1mBC/s?=
+ =?us-ascii?Q?k/b/nstbY87ALzkboNnIHo6i643kwWccQvWd8qZkzWNVaJpXxnUNinSq0vBP?=
+ =?us-ascii?Q?Xfwx4juzOlKXFXZk6RB1+OYnbq17Cw4lpbiNdbKbOTo9xVWEYV5bKabS4DYc?=
+ =?us-ascii?Q?65xAdYSjOtTTDRni6kZ0LVVSAevXZPbUK4KWPeEUGO72DFlDZ/pgm8yjcqB6?=
+ =?us-ascii?Q?YS4/qnqHyVn5aQ0Oz2oaGbX2M27mO6F9ODX+iWldHADLraz6ssX+/4I7qXtK?=
+ =?us-ascii?Q?BqcKYT2x6v951ukMgzosZ+wQk8FMvMzl8tiUmvWnZLBTnpYmv3BaltdjDiG7?=
+ =?us-ascii?Q?cT6K0736djmhN/1YXjSdf2oREA2XR45RNFSt7AVI49C7ZYLF4zux7c9n62uF?=
+ =?us-ascii?Q?5AtFu9fT4boBo85P+60i9mr6XeaECfEfPFKzc14/Jqy5gOqsd6QOU7q57MXe?=
+ =?us-ascii?Q?Y7j4q3chks8rMQErWaV1yLDVoA2J0MWN3RyDletY3jyUDfrWuJA/6XBI1yKl?=
+ =?us-ascii?Q?7VYS7X9+N7X4VdxvNAEp2gBqwDw2rF7gAALZK05iVCabNF/sN4/2JuS5eZ2d?=
+ =?us-ascii?Q?7GSzTGUChrlkqCXCMd1h5FbUvfS9nCn1Gjwx32WsXu3Ro7+MBFiU7Qx/3nbl?=
+ =?us-ascii?Q?ZwHx6+bBT864s7UaEr1xchlq4+/YVEEXNz0f8ODqkggW0k9TKO3LYdcVMI0G?=
+ =?us-ascii?Q?sUmq2Pb9jna8TEehkpUuqGsP4wpHptFy+hTFo7NzvHfas0lMTuJOtOganuzi?=
+ =?us-ascii?Q?oF6m6/EkcjSGOITli7t/NLsX7NAq0xPw09nKq1ampnI//cGrImVJJ5FrRlxt?=
+ =?us-ascii?Q?66y/nif9BQLJhzwm8yU143W7WlgceG8ZeQCX7AmqhBzszh+GMxn7qUPpGB0p?=
+ =?us-ascii?Q?Lgchh/ouvfNhGCHT2ioSIAZem9ju7/62M0mn7Eyk428mRupfJmlMVi6HJbrv?=
+ =?us-ascii?Q?uYDOo34U9UA/8WMnhTsZiP3kTRJs9xULRCpMlQ6ku0n7cToU2oRkUjDTyzUm?=
+ =?us-ascii?Q?guXTCZphrtDgRL5lfCwBXgd7u6xg6EOIRsGeB9h30juS5kqlO1O2eI5s0VZb?=
+ =?us-ascii?Q?X/sXV7zxGEJoNCJFGRv/gcbfo1KFnbTvUfO+eRx6/MPea7aoretHpr5FKopk?=
+ =?us-ascii?Q?/JhJcvkqAM3phK0cdjZo+AIsQzS9n770M2wn2dXCk8hFiYFE+E3UzjQAbT1G?=
+ =?us-ascii?Q?Ew=3D=3D?=
+X-OriginatorOrg: memverge.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bff1201f-a7d1-4eff-c3b6-08dc0bd1b248
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR17MB5512.namprd17.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jan 2024 20:00:59.9140
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jan 2024 20:30:44.9287
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-Id: 5c90cb59-37e7-4c81-9c07-00473d5fb682
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ac40uE/swvDowo9qoBYJimOirIJcmoPqRenzQ4/RB1B5marHCyDWeuty19ysT9gJ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR12MB5460
+X-MS-Exchange-CrossTenant-UserPrincipalName: odvArhBh75ZY2duUMbLImJYIfXZtR1hkH6WI/j4rQi6mCwmDufbluL0V9zyEssDasb3MUKmXJBxl0TSNbTQGIMZ/0EVdtWRsYn7T1I+nRjs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR17MB5097
 
-Hi Reinette,
-
-Sorry for late response. I was out of office for couple of weeks.
-
-On 12/14/23 19:24, Reinette Chatre wrote:
-> Hi Babu,
+On Tue, Jan 02, 2024 at 04:42:42PM +0800, Huang, Ying wrote:
+> Gregory Price <gregory.price@memverge.com> writes:
 > 
-> On 12/12/2023 10:02 AM, Babu Moger wrote:
->> If the BMEC (Bandwidth Monitoring Event Configuration) feature is
->> supported, the bandwidth events can be configured. The maximum supported
->> bandwidth bitmask can be determined by following CPUID command.
->>
->> CPUID_Fn80000020_ECX_x03 [Platform QoS Monitoring Bandwidth Event
->> Configuration] Read-only. Reset: 0000_007Fh.
->> Bits	Description
->> 31:7	Reserved
->>  6:0	Identifies the bandwidth sources that can be tracked.
->>
->> The bandwidth sources can change with the processor generations.
->> Currently, this information is hard-coded. Remove the hard-coded value
->> and detect using CPUID command. Also print the valid bitmask when the
->> user tries to configure invalid value.
->>
->> The CPUID details are documentation in the PPR listed below [1].
->> [1] Processor Programming Reference (PPR) Vol 1.1 for AMD Family 19h Model
->> 11h B1 - 55901 Rev 0.25.
->>
->> Fixes: dc2a3e857981 ("x86/resctrl: Add interface to read mbm_total_bytes_config")
->> Link: https://bugzilla.kernel.org/show_bug.cgi?id=206537
->> Signed-off-by: Babu Moger <babu.moger@amd.com>
->>
->> ---
->> v2: Earlier Sent as a part of ABMC feature.
->>     https://lore.kernel.org/lkml/20231201005720.235639-1-babu.moger@amd.com/
->>     But this is not related to ABMC. Sending it separate now.
->>     Removed the global resctrl_max_evt_bitmask. Added event_mask as part of
->>     the resource.
->> ---
->>  arch/x86/kernel/cpu/resctrl/internal.h |    5 ++---
->>  arch/x86/kernel/cpu/resctrl/monitor.c  |    6 ++++++
->>  arch/x86/kernel/cpu/resctrl/rdtgroup.c |   18 ++++++++++--------
->>  3 files changed, 18 insertions(+), 11 deletions(-)
->>
->> diff --git a/arch/x86/kernel/cpu/resctrl/internal.h b/arch/x86/kernel/cpu/resctrl/internal.h
->> index d2979748fae4..3e2f505614d8 100644
->> --- a/arch/x86/kernel/cpu/resctrl/internal.h
->> +++ b/arch/x86/kernel/cpu/resctrl/internal.h
->> @@ -50,9 +50,6 @@
->>  /* Dirty Victims to All Types of Memory */
->>  #define DIRTY_VICTIMS_TO_ALL_MEM	BIT(6)
->>  
->> -/* Max event bits supported */
->> -#define MAX_EVT_CONFIG_BITS		GENMASK(6, 0)
->> -
->>  struct rdt_fs_context {
->>  	struct kernfs_fs_context	kfc;
->>  	bool				enable_cdpl2;
->> @@ -394,6 +391,7 @@ struct rdt_parse_data {
->>   * @msr_update:		Function pointer to update QOS MSRs
->>   * @mon_scale:		cqm counter * mon_scale = occupancy in bytes
->>   * @mbm_width:		Monitor width, to detect and correct for overflow.
->> + * @event_mask:		Max supported event bitmask.
+> > On Wed, Dec 27, 2023 at 04:32:37PM +0800, Huang, Ying wrote:
+> >> Gregory Price <gourry.memverge@gmail.com> writes:
+> >> 
+> >> > +static unsigned int weighted_interleave_nid(struct mempolicy *pol, pgoff_t ilx)
+> >> > +{
+> >> > +	nodemask_t nodemask = pol->nodes;
+> >> > +	unsigned int target, weight_total = 0;
+> >> > +	int nid;
+> >> > +	unsigned char weights[MAX_NUMNODES];
+> >> 
+> >> MAX_NUMNODSE could be as large as 1024.  1KB stack space may be too
+> >> large?
+> >> 
+> >
+> > I've been struggling with a good solution to this.  We need a local copy
+> > of weights to prevent weights from changing out from under us during
+> > allocation (which may take quite some time), but it seemed unwise to
+> > to allocate 1KB heap in this particular path.
+> >
+> > Is my concern unfounded?  If so, I can go ahead and add the allocation
+> > code.
 > 
-> This is a very generic name and description for this feature. Note that in
-> resctrl monitoring an "event" is already clear (see members of enum resctrl_event_id)
-> so a generic type of "event_mask" can easily cause confusion with existing
-> concept of events. How about "mbm_cfg_mask"? Please also make the description
+> Please take a look at NODEMASK_ALLOC().
+>
 
-That should be fine.
+This is not my question. NODEMASK_ALLOC calls kmalloc/kfree. 
 
-> more detailed - it could include that this is unique to BMEC. 
+Some of the allocations on the stack can be replaced with a scratch
+allocation, that's no big deal.
 
-Sure.
+I'm specifically concerned about:
+	weighted_interleave_nid
+	alloc_pages_bulk_array_weighted_interleave
 
+I'm unsure whether kmalloc/kfree is safe (and non-offensive) in those
+contexts. If kmalloc/kfree is safe fine, this problem is trivial.
+
+If not, there is no good solution to this without pre-allocating a
+scratch area per-task.
+
+> >> I don't think barrier() is needed to wait for memory operations for
+> >> stack.  It's usually used for cross-processor memory order.
+> >>
+> >
+> > This is present in the old interleave code.  To the best of my
+> > understanding, the concern is for mempolicy->nodemask rebinding that can
+> > occur when cgroups.cpusets.mems_allowed changes.
+> >
+> > so we can't iterate over (mempolicy->nodemask), we have to take a local
+> > copy.
+> >
+> > My *best* understanding of the barrier here is to prevent the compiler
+> > from reordering operations such that it attempts to optimize out the
+> > local copy (or do lazy-fetch).
+> >
+> > It is present in the original interleave code, so I pulled it forward to
+> > this, but I have not tested whether this is a bit paranoid or not.
+> >
+> > from `interleave_nid`:
+> >
+> >  /*
+> >   * The barrier will stabilize the nodemask in a register or on
+> >   * the stack so that it will stop changing under the code.
+> >   *
+> >   * Between first_node() and next_node(), pol->nodes could be changed
+> >   * by other threads. So we put pol->nodes in a local stack.
+> >   */
+> >  barrier();
 > 
->>   * @cdp_enabled:	CDP state of this resource
->>   *
->>   * Members of this structure are either private to the architecture
->> @@ -408,6 +406,7 @@ struct rdt_hw_resource {
->>  				 struct rdt_resource *r);
->>  	unsigned int		mon_scale;
->>  	unsigned int		mbm_width;
->> +	unsigned int		event_mask;
->>  	bool			cdp_enabled;
->>  };
->>  
->> diff --git a/arch/x86/kernel/cpu/resctrl/monitor.c b/arch/x86/kernel/cpu/resctrl/monitor.c
->> index f136ac046851..30bf919edfda 100644
->> --- a/arch/x86/kernel/cpu/resctrl/monitor.c
->> +++ b/arch/x86/kernel/cpu/resctrl/monitor.c
->> @@ -813,6 +813,12 @@ int __init rdt_get_mon_l3_config(struct rdt_resource *r)
->>  		return ret;
->>  
->>  	if (rdt_cpu_has(X86_FEATURE_BMEC)) {
->> +		u32 eax, ebx, ecx, edx;
->> +
->> +		/* Detect list of bandwidth sources that can be tracked */
->> +		cpuid_count(0x80000020, 3, &eax, &ebx, &ecx, &edx);
->> +		hw_res->event_mask = ecx;
->> +
+> Got it.  This is kind of READ_ONCE() for nodemask.  To avoid to add
+> comments all over the place.  Can we implement a wrapper for it?  For
+> example, memcpy_once().  __read_once_size() in
+> tools/include/linux/compiler.h can be used as reference.
 > 
-> This has the same issue as I mentioned in V1. Note that this treats
-> reserved bits as valid values. I think this is a risky thing to do. For example
-> when this code is run on future hardware the currently reserved bits may have
-> values with different meaning than what this code uses it for.
-
-Sure. Will use the mask MAX_EVT_CONFIG_BITS.
-              hw_res->mbm_cfg_mask = ecx &  MAX_EVT_CONFIG_BITS;
-
+> Because node_weights[] may be changed simultaneously too.  We may need
+> to consider similar issue for it too.  But RCU seems more appropriate
+> for node_weights[].
 > 
->>  		if (rdt_cpu_has(X86_FEATURE_CQM_MBM_TOTAL)) {
->>  			mbm_total_event.configurable = true;
->>  			mbm_config_rftype_init("mbm_total_bytes_config");
->> diff --git a/arch/x86/kernel/cpu/resctrl/rdtgroup.c b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
->> index 69a1de92384a..8a1e9fdab974 100644
->> --- a/arch/x86/kernel/cpu/resctrl/rdtgroup.c
->> +++ b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
->> @@ -1537,17 +1537,14 @@ static void mon_event_config_read(void *info)
->>  {
->>  	struct mon_config_info *mon_info = info;
->>  	unsigned int index;
->> -	u64 msrval;
->> +	u32 h;
->>  
->>  	index = mon_event_config_index_get(mon_info->evtid);
->>  	if (index == INVALID_CONFIG_INDEX) {
->>  		pr_warn_once("Invalid event id %d\n", mon_info->evtid);
->>  		return;
->>  	}
->> -	rdmsrl(MSR_IA32_EVT_CFG_BASE + index, msrval);
->> -
->> -	/* Report only the valid event configuration bits */
->> -	mon_info->mon_config = msrval & MAX_EVT_CONFIG_BITS;
->> +	rdmsr(MSR_IA32_EVT_CFG_BASE + index, mon_info->mon_config, h);
-> 
-> I do not think this code needed to be changed. We do not want to treat
-> reserved bits as valid values. 
 
-The logic is still the same. We don't have access to rdt_hw_resource in
-this function. So, I just moved the masking to mbm_config_show while printing.
+Weights are collected individually onto the stack because we have to sum
+them up before we actually apply the weights.
 
-Thanks
-Babu
+A stale weight is not offensive.  RCU is not needed and doesn't help.
 
-> 
->>  }
->>  
->>  static void mondata_config_read(struct rdt_domain *d, struct mon_config_info *mon_info)
->> @@ -1557,6 +1554,7 @@ static void mondata_config_read(struct rdt_domain *d, struct mon_config_info *mo
->>  
->>  static int mbm_config_show(struct seq_file *s, struct rdt_resource *r, u32 evtid)
->>  {
->> +	struct rdt_hw_resource *hw_res = resctrl_to_arch_res(r);
->>  	struct mon_config_info mon_info = {0};
->>  	struct rdt_domain *dom;
->>  	bool sep = false;
->> @@ -1571,7 +1569,9 @@ static int mbm_config_show(struct seq_file *s, struct rdt_resource *r, u32 evtid
->>  		mon_info.evtid = evtid;
->>  		mondata_config_read(dom, &mon_info);
->>  
->> -		seq_printf(s, "%d=0x%02x", dom->id, mon_info.mon_config);
->> +		/* Report only the valid event configuration bits */
->> +		seq_printf(s, "%d=0x%02x", dom->id,
->> +			   mon_info.mon_config & hw_res->event_mask);
->>  		sep = true;
->>  	}
->>  	seq_puts(s, "\n");
->> @@ -1617,12 +1617,14 @@ static void mon_event_config_write(void *info)
->>  static int mbm_config_write_domain(struct rdt_resource *r,
->>  				   struct rdt_domain *d, u32 evtid, u32 val)
->>  {
->> +	struct rdt_hw_resource *hw_res = resctrl_to_arch_res(r);
->>  	struct mon_config_info mon_info = {0};
->>  	int ret = 0;
->>  
->>  	/* mon_config cannot be more than the supported set of events */
->> -	if (val > MAX_EVT_CONFIG_BITS) {
->> -		rdt_last_cmd_puts("Invalid event configuration\n");
->> +	if ((val & hw_res->event_mask) != val) {
->> +		rdt_last_cmd_printf("Invalid input: The maximum valid bitmask is 0x%02x\n",
->> +				    hw_res->event_mask);
->>  		return -EINVAL;
->>  	}
->>  
->>
->>
-> 
-> Reinette
+The reason the barrier is needed is not weights, it's the nodemask.
 
--- 
-Thanks
-Babu Moger
+So you basically just want to replace barrier() with this and drop the
+copy/pasted comments:
+
+static void read_once_policy_nodemask(struct mempolicy *pol, nodemask_t *mask)
+{
+        /*
+         * The barrier will stabilize the nodemask in a register or on
+         * the stack so that it will stop changing under the code.
+         *
+         * Between first_node() and next_node(), pol->nodes could be changed
+         * by other threads. So we put pol->nodes in a local stack.
+         */
+        barrier();
+        __builtin_memcpy(mask, &pol->nodes, sizeof(nodemask_t));
+        barrier();
+}
+
+- nodemask_t nodemask = pol->nodemask
+- barrier()
++ nodemask_t nodemask;
++ read_once_policy_nodemask(pol, &nodemask)
+
+Is that right?
+
+~Gregory
 
