@@ -1,118 +1,165 @@
-Return-Path: <linux-doc+bounces-6304-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6306-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDCD482686F
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jan 2024 08:10:17 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B248A8268C1
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jan 2024 08:44:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 889441F21C3A
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jan 2024 07:10:17 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 528C0B2157E
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jan 2024 07:44:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 79B518487;
-	Mon,  8 Jan 2024 07:10:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="L6xXP0lk"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F7478F47;
+	Mon,  8 Jan 2024 07:44:05 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from TWMBX02.aspeed.com (mail.aspeedtech.com [211.20.114.72])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA2FF8825;
-	Mon,  8 Jan 2024 07:10:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1704697810; x=1736233810;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version;
-  bh=q3BRi1LuTFgEqMrhuwxfEP3vKCswFiyIHpRV1gihFhM=;
-  b=L6xXP0lk3qlMzh2n87B5S0umzzUebvtP4mFRjweSiJ5zB/BjlXwDzeBD
-   AWkbMoisywCcpnZ8AEmI2rHsvMyO3pX3RfEvCZd1NbIYLESVd+eVZ4pP9
-   yQYlZivorQ7iPdmmJWc2s9D3mHk+hOlFdw/j+IfNYXP7fFiywsiy2ofFg
-   5kzoZPR9mi+l4b6Ft5Y5MJP3XJjqqLw0GIWYpwjYwFz6hdpABj3J7x5Dy
-   sfzeZjLioP2msP85n/aFo5Anzn7herBrtTjekP8DAqKpDrgLeytro2xpb
-   0OFxBPh731jxK+Pa8Re08rIwsMLpd+7V2xb62E1eEzo5gRE2Gqfm9lm/K
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10946"; a="4570333"
-X-IronPort-AV: E=Sophos;i="6.04,340,1695711600"; 
-   d="scan'208";a="4570333"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-  by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jan 2024 23:10:09 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10946"; a="1028315259"
-X-IronPort-AV: E=Sophos;i="6.04,340,1695711600"; 
-   d="scan'208";a="1028315259"
-Received: from yhuang6-desk2.sh.intel.com (HELO yhuang6-desk2.ccr.corp.intel.com) ([10.238.208.55])
-  by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jan 2024 23:10:03 -0800
-From: "Huang, Ying" <ying.huang@intel.com>
-To: Gregory Price <gregory.price@memverge.com>
-Cc: Gregory Price <gourry.memverge@gmail.com>,  <linux-mm@kvack.org>,
-  <linux-doc@vger.kernel.org>,  <linux-fsdevel@vger.kernel.org>,
-  <linux-kernel@vger.kernel.org>,  <linux-api@vger.kernel.org>,
-  <x86@kernel.org>,  <akpm@linux-foundation.org>,  <arnd@arndb.de>,
-  <tglx@linutronix.de>,  <luto@kernel.org>,  <mingo@redhat.com>,
-  <bp@alien8.de>,  <dave.hansen@linux.intel.com>,  <hpa@zytor.com>,
-  <mhocko@kernel.org>,  <tj@kernel.org>,  <corbet@lwn.net>,
-  <rakie.kim@sk.com>,  <hyeongtak.ji@sk.com>,  <honggyu.kim@sk.com>,
-  <vtavarespetr@micron.com>,  <peterz@infradead.org>,
-  <jgroves@micron.com>,  <ravis.opensrc@micron.com>,
-  <sthanneeru@micron.com>,  <emirakhur@micron.com>,  <Hasan.Maruf@amd.com>,
-  <seungjun.ha@samsung.com>,  Srinivasulu Thanneeru
- <sthanneeru.opensrc@micron.com>
-Subject: Re: [PATCH v5 02/11] mm/mempolicy: introduce
- MPOL_WEIGHTED_INTERLEAVE for weighted interleaving
-In-Reply-To: <ZZeu6DwVt6o0fl14@memverge.com> (Gregory Price's message of "Fri,
-	5 Jan 2024 02:25:28 -0500")
-References: <20231223181101.1954-3-gregory.price@memverge.com>
-	<8734vof3kq.fsf@yhuang6-desk2.ccr.corp.intel.com>
-	<ZYp6ZRLZQVtTHest@memverge.com>
-	<878r58dt31.fsf@yhuang6-desk2.ccr.corp.intel.com>
-	<ZZRybDPSoLme8Ldh@memverge.com>
-	<87mstnc6jz.fsf@yhuang6-desk2.ccr.corp.intel.com>
-	<ZZXbN4+2nVbE/lRe@memverge.com>
-	<875y09d5d8.fsf@yhuang6-desk2.ccr.corp.intel.com>
-	<ZZcAF4zIpsVN3dLd@memverge.com>
-	<87cyugb7cz.fsf@yhuang6-desk2.ccr.corp.intel.com>
-	<ZZeu6DwVt6o0fl14@memverge.com>
-Date: Mon, 08 Jan 2024 15:08:05 +0800
-Message-ID: <87mstg9uay.fsf@yhuang6-desk2.ccr.corp.intel.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6FD7B654;
+	Mon,  8 Jan 2024 07:43:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aspeedtech.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=aspeedtech.com
+Received: from TWMBX02.aspeed.com (192.168.0.24) by TWMBX02.aspeed.com
+ (192.168.0.24) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 8 Jan
+ 2024 15:43:50 +0800
+Received: from twmbx02.aspeed.com (192.168.10.10) by TWMBX02.aspeed.com
+ (192.168.0.24) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
+ Transport; Mon, 8 Jan 2024 15:43:50 +0800
+From: Billy Tsai <billy_tsai@aspeedtech.com>
+To: <jdelvare@suse.com>, <linux@roeck-us.net>, <robh+dt@kernel.org>,
+	<krzysztof.kozlowski+dt@linaro.org>, <joel@jms.id.au>, <andrew@aj.id.au>,
+	<corbet@lwn.net>, <thierry.reding@gmail.com>,
+	<u.kleine-koenig@pengutronix.de>, <p.zabel@pengutronix.de>,
+	<billy_tsai@aspeedtech.com>, <naresh.solanki@9elements.com>,
+	<linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
+	<linux-arm-kernel@lists.infradead.org>, <linux-aspeed@lists.ozlabs.org>,
+	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-pwm@vger.kernel.org>, <BMC-SW@aspeedtech.com>, <patrick@stwcx.xyz>
+Subject: [PATCH v12 0/3] Support pwm/tach driver for aspeed ast26xx
+Date: Mon, 8 Jan 2024 15:43:45 +0800
+Message-ID: <20240108074348.735014-1-billy_tsai@aspeedtech.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=ascii
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: Fail (TWMBX02.aspeed.com: domain of billy_tsai@aspeedtech.com
+ does not designate 192.168.10.10 as permitted sender)
+ receiver=TWMBX02.aspeed.com; client-ip=192.168.10.10;
+ helo=twmbx02.aspeed.com;
 
-Gregory Price <gregory.price@memverge.com> writes:
+Unlike the old design that the register setting of the TACH should based
+on the configure of the PWM. In ast26xx, the dependency between pwm and
+tach controller is eliminated and becomes a separate hardware block. One
+is used to provide pwm output and another is used to monitor the frequency
+of the input. This driver implements them by exposing two kernel
+subsystems: PWM and HWMON. The PWM subsystem can be utilized alongside
+existing drivers for controlling elements such as fans (pwm-fan.c),
+beepers (pwm-beeper.c) and so on. Through the HWMON subsystem, the driver
+provides sysfs interfaces for fan.
 
-> On Fri, Jan 05, 2024 at 02:51:40PM +0800, Huang, Ying wrote:
->> >
->> > So we're talking ~1MB for 1024 threads with mempolicies to avoid error
->> > conditions mid-page-allocation and to reduce the cost associated with
->> > applying weighted interleave.
->> 
->> Think about this again.  Why do we need weights array on stack?  I think
->> this is used to keep weights consistent.  If so, we don't need weights
->> array on stack.  Just use RCU to access global weights array.
->> 
->
-> From the bulk allocation code:
->
-> __alloc_pages_bulk(gfp, node, NULL, node_pages, NULL, page_array);
->
-> This function can block. You cannot block during an RCU read context.
+Changes since v11:
+Fix the compiler error of the driver.
+The owner member has to be moved to struct pwm_chip.
 
-Yes.  You are right.  For __alloc_pages_bulk(), it should be OK to
-allocate the weights array.  For weighted_interleave_nid(), we can use
-RCU to avoid memory allocation in relative fast code path.
+Changes since v10:
+Add the enum for the 'fan-driving-mode' properties in the fan-common.yaml.
 
-BTW, we can use nr_node_ids instead of MAX_NUMNODES if applicable.
+Changes since v9:
+Change the type of fan-driving-mode to string
+Fix some typos and formatting issues.
 
---
-Best Regards,
-Huang, Ying
+Changes since v8:
+Fix the fail of fan div register setting. (FIELD_GET -> FIELD_PREP)
+Change the type of tach-ch from uint32_t to uint8-array
+Add additional properties and apply constraints to certain properties.
+
+Changes since v7:
+Cherry-pick the fan-common.yaml and add the following properties:
+- min-rpm
+- div
+- mode
+- tach-ch
+Fix the warning which is reported by the kernel test robot.
+
+Changes since v6:
+Consolidate the PWM and TACH functionalities into a unified driver.
+
+Changes since v5:
+- pwm/tach:
+  - Remove the utilization of common resources from the parent node.
+  - Change the concept to 16 PWM/TACH controllers, each with one channel,
+  instead of 1 PWM/TACH controller with 16 channels.
+- dt-binding:
+  - Eliminate the usage of simple-mfd.
+
+Changes since v4:
+- pwm:
+  - Fix the return type of get_status function.
+- tach:
+  - read clk source once and re-use it
+  - Remove the constants variables
+  - Allocate tach_channel as array
+  - Use dev->parent
+- dt-binding:
+  - Fix the order of the patches
+  - Add example and description for tach child node
+  - Remove pwm extension property
+
+Changes since v3:
+- pwm:
+  - Remove unnecessary include header
+  - Fix warning Prefer "GPL" over "GPL v2"
+- tach:
+  - Remove the paremeter min_rpm and max_rpm and return the tach value 
+  directly without any polling or delay.
+  - Fix warning Prefer "GPL" over "GPL v2"
+- dt-binding:
+  - Replace underscore in node names with dashes
+  - Split per subsystem
+
+Changes since v2:
+- pwm:
+  - Use devm_* api to simplify the error cleanup
+  - Fix the multi-line alignment problem
+- tach:
+  - Add tach-aspeed-ast2600 to index.rst
+  - Fix the multi-line alignment problem
+  - Remove the tach enable/disable when read the rpm
+  - Fix some coding format issue
+
+Changes since v1:
+- tach:
+  - Add the document tach-aspeed-ast2600.rst
+  - Use devm_* api to simplify the error cleanup.
+  - Change hwmon register api to devm_hwmon_device_register_with_info
+
+Billy Tsai (2):
+  dt-bindings: hwmon: Support Aspeed g6 PWM TACH Control
+  hwmon: (aspeed-g6-pwm-tacho): Support for ASPEED g6 PWM/Fan tach
+
+Naresh Solanki (1):
+  dt-bindings: hwmon: fan: Add fan binding to schema
+
+ .../bindings/hwmon/aspeed,g6-pwm-tach.yaml    |  69 +++
+ .../devicetree/bindings/hwmon/fan-common.yaml |  79 +++
+ Documentation/hwmon/aspeed-g6-pwm-tach.rst    |  26 +
+ Documentation/hwmon/index.rst                 |   1 +
+ drivers/hwmon/Kconfig                         |  11 +
+ drivers/hwmon/Makefile                        |   1 +
+ drivers/hwmon/aspeed-g6-pwm-tach.c            | 538 ++++++++++++++++++
+ 7 files changed, 725 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/hwmon/aspeed,g6-pwm-tach.yaml
+ create mode 100644 Documentation/devicetree/bindings/hwmon/fan-common.yaml
+ create mode 100644 Documentation/hwmon/aspeed-g6-pwm-tach.rst
+ create mode 100644 drivers/hwmon/aspeed-g6-pwm-tach.c
+
+-- 
+2.25.1
+
 
