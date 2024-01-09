@@ -1,143 +1,160 @@
-Return-Path: <linux-doc+bounces-6440-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6448-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F8AB828957
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jan 2024 16:50:51 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 378A482897F
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jan 2024 16:56:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A489AB226FB
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jan 2024 15:50:48 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 430F01C244C3
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jan 2024 15:56:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A101C39FEB;
-	Tue,  9 Jan 2024 15:49:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C56C139FF4;
+	Tue,  9 Jan 2024 15:56:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b="nN/okoV4"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="yNeN0MjP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk [78.32.30.218])
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (mail-dm6nam11on2084.outbound.protection.outlook.com [40.107.223.84])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D84A3A8E1;
-	Tue,  9 Jan 2024 15:49:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=armlinux.org.uk
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=armlinux.org.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:
-	Content-Transfer-Encoding:Content-Type:MIME-Version:References:Message-ID:
-	Subject:Cc:To:From:Date:Reply-To:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=tZu+pKrUWqvj1u7XXOZ361qKXLT14yOTmWAUg/xb9K8=; b=nN/okoV4vFIiLWpy1C8jbd7tdw
-	Qv36Z2Gb+2ode/mlOC9FGuq844QXK7cH1QtvswvkKjPFNn3crE3ejxFH+peDwTmHOW4G/GWbH6Jpn
-	0qzKOvO75N3PC9BVsubbFulOPfcPT9peor+qGDaJvLE1hDNNoKtb0pRiolyX60ZvDTRC5WW3imUyZ
-	1xyVORTa/XshnAfR1BtvDgMDdHcKzUMxaBI9H8XnwA0OUVxFBs03HPJwS8ZWzD+a9pTAz9kjYXkvu
-	D81k2SVTALrUMdf78FrSRpsd/686oC+ZFg2iPb8F+4cDR8NoTEmsESKvjPSBSJuSGwKrJgRpTa/j3
-	34Jq5IPg==;
-Received: from shell.armlinux.org.uk ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:53760)
-	by pandora.armlinux.org.uk with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <linux@armlinux.org.uk>)
-	id 1rNELt-0004Hq-18;
-	Tue, 09 Jan 2024 15:49:17 +0000
-Received: from linux by shell.armlinux.org.uk with local (Exim 4.94.2)
-	(envelope-from <linux@shell.armlinux.org.uk>)
-	id 1rNELr-0004Of-RO; Tue, 09 Jan 2024 15:49:15 +0000
-Date: Tue, 9 Jan 2024 15:49:15 +0000
-From: "Russell King (Oracle)" <linux@armlinux.org.uk>
-To: "Rafael J. Wysocki" <rafael@kernel.org>
-Cc: linux-pm@vger.kernel.org, loongarch@lists.linux.dev,
-	linux-acpi@vger.kernel.org, linux-arch@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-riscv@lists.infradead.org, kvmarm@lists.linux.dev,
-	x86@kernel.org, acpica-devel@lists.linuxfoundation.org,
-	linux-csky@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-ia64@vger.kernel.org, linux-parisc@vger.kernel.org,
-	Salil Mehta <salil.mehta@huawei.com>,
-	Jean-Philippe Brucker <jean-philippe@linaro.org>,
-	jianyong.wu@arm.com, justin.he@arm.com,
-	James Morse <james.morse@arm.com>
-Subject: Re: [PATCH RFC v3 02/21] ACPI: processor: Add support for processors
- described as container packages
-Message-ID: <ZZ1q+7GXqnMMwKNR@shell.armlinux.org.uk>
-References: <ZXmn46ptis59F0CO@shell.armlinux.org.uk>
- <E1rDOfx-00Dvje-MS@rmk-PC.armlinux.org.uk>
- <CAJZ5v0iB0bS6nmjQ++pV1zp5YSGuigbffK5VD3wsX+8bY9MA5w@mail.gmail.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF9D938DC1;
+	Tue,  9 Jan 2024 15:56:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=E/WOMWZsT54zcqNLDefDku+tk38ByP2zKWnOd0q4yRIX8mLet/pYXMw78X2J8sY4XU/CyEYTNJGWiIX+QGspWHYjW/cDMz/520YY+0xMMBvilYkIM2AdGM2Yz0PJeEysNi2Ml09GjJo4e5JbuW3Y/Rf8g0ctz5uYuYvEoiXa5CBMyhEikvI2yz4q8sF3B0EV0JpYnwZsZHKhSSQuu6zMDuyVAfRVMHWa8EtyURSK75CZ7nFtmlVRTTc9meYiJTeOTJ6oXbxrJv6RUwXHIhm2bXrVSLNfUAxce2vZbt9VUNbD5sAgQ83FVkR3khs0OqQpUrujbS6uWfPY0lbLfa3cKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3bEOW2eYVCs06Ew/v0DfxoWVsZHrbZ7fY1D5fCUe0g0=;
+ b=iSlZMh7MTy03Awdc8Vuvj0AzbvCw5hbNGyHwuO0GdlA12IWqQpKgctYvHMgsb+5zccK5pyekQHHhhsq9xmk2vqxPozTXHEvxZvyFirQ/lpfPvL3XaNq/4NHAxXaXnJrqJ1suSA4tD9HqeS4zdxLcdIEAQI54MTugu8laS6lQdOOVTHzUNBPh/v9onzXKmJxP3huUYZAzyBVS26aFR8n9Kuwi78qo42IRjs83k4FDyc7PGcqpIkjX3ndX7Y3O61OgN/Hxc0OiXQfaFi2TyNoh53I4lQBsoVfg0Py9Nnx0E6GFYcASGXAkysPSj+DCyeeFaIjjfWP8lz5v+8AC/cFdEg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lwn.net smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3bEOW2eYVCs06Ew/v0DfxoWVsZHrbZ7fY1D5fCUe0g0=;
+ b=yNeN0MjPmOGiRTw2htDOLrDSLio9wWcJEB5ha19zX1XfFwFOh67qjWjKWZC/Ci52a1A1q89uXRi/htgHeS+nKEEsqmrKJUnmko9w3UngBPG5qfKJv4loqVeILumGldXcTLUHnqYMhrb/DEhMjWo4r3LQ8B5KfmWcwsf273i2HD4=
+Received: from SJ0PR05CA0088.namprd05.prod.outlook.com (2603:10b6:a03:332::33)
+ by SJ1PR12MB6169.namprd12.prod.outlook.com (2603:10b6:a03:45c::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.23; Tue, 9 Jan
+ 2024 15:56:45 +0000
+Received: from CO1PEPF000044F8.namprd21.prod.outlook.com
+ (2603:10b6:a03:332:cafe::92) by SJ0PR05CA0088.outlook.office365.com
+ (2603:10b6:a03:332::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.14 via Frontend
+ Transport; Tue, 9 Jan 2024 15:56:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000044F8.mail.protection.outlook.com (10.167.241.198) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7202.4 via Frontend Transport; Tue, 9 Jan 2024 15:56:44 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 9 Jan
+ 2024 09:56:44 -0600
+Received: from iron-maiden.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
+ Transport; Tue, 9 Jan 2024 09:56:43 -0600
+From: Carlos Bilbao <carlos.bilbao@amd.com>
+To: <corbet@lwn.net>, <rdunlap@infradead.org>, <vegard.nossum@oracle.com>
+CC: <bilbao@vt.edu>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, Carlos Bilbao <carlos.bilbao@amd.com>
+Subject: [PATCH v2 0/2] docs: Include simplified link titles in main index
+Date: Tue, 9 Jan 2024 09:56:41 -0600
+Message-ID: <20240109155643.3489369-1-carlos.bilbao@amd.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAJZ5v0iB0bS6nmjQ++pV1zp5YSGuigbffK5VD3wsX+8bY9MA5w@mail.gmail.com>
-Sender: Russell King (Oracle) <linux@armlinux.org.uk>
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044F8:EE_|SJ1PR12MB6169:EE_
+X-MS-Office365-Filtering-Correlation-Id: bf5ad3dc-33b1-40c9-8ce2-08dc112b9468
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	Lk7he11pglC/pDUUolYmZjhIYI0aSZO7JjWk6dClGmXbitvXU5tCWsVIlwtKTymleCz0G3qBIE59UxKYc1UO4fogWV+typ+IHvNxJIkaduIUchzhMbbAKMz4cbQtykOnGfpcfi2GnbbvheRZL+cXCQ8O38PVAbdV7kWn/o74oX8EjAPq5BdVjmpf3MBUImsMiOn+BagG0ypWx5B68YSWket4+UzXLExe4nOIrCfoIOieqwoAkuTtxSE57z9SgOz90ypJExH24AMwzvyG8LzrLnZKUVnun+3t4oIqCDwqSROLAXPXQzk/cxOi5WXPr9sv73jnbErXwOuhirY8ExDMHeORjT7GVOvz3zlLLu46Uu4nlDzc2+5WfqG3uAOXk7k42gnNToL3wApZznVpWZBqHT7gdFnuarnrJg80Orq+0+4wItHFY6mbso39hVBdPUTRgoPOfl3VoBg2Ti8iEhpBgYrCf6n8AtrhcBg9WpzroXLvE8719DLzfJalpkDK3KiNtzMVXmjlHluyVmpEmRuMkEwiqfDG8ZocirD95aPIhyUkQxXZcNv/1ry7Jryt0yM4lbnaAe1jpdyup/WDtQ3+tRvh9N2Q2Mb9qLlPLinZ5GDhmAV7b6qKpOMlsHDRmSVXHHX32Qf7ZYrd0SbmLY36ezhXtMBHSRFQA8W9GH0IvBts7dr8GGpZrj+7KL7dvOIzgarYmfq89Rvi4KcUOjBFZc6B8jEi9dYJdfMzDKKvT+Y=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(376002)(136003)(39860400002)(396003)(346002)(230922051799003)(64100799003)(82310400011)(186009)(451199024)(1800799012)(40470700004)(36840700001)(46966006)(426003)(336012)(83380400001)(110136005)(356005)(36860700001)(82740400003)(2906002)(47076005)(86362001)(41300700001)(36756003)(54906003)(81166007)(7696005)(316002)(70586007)(2616005)(966005)(478600001)(8936002)(5660300002)(70206006)(4326008)(26005)(1076003)(44832011)(8676002)(40460700003)(40480700001)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jan 2024 15:56:44.9507
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bf5ad3dc-33b1-40c9-8ce2-08dc112b9468
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1PEPF000044F8.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6169
 
-On Mon, Dec 18, 2023 at 09:17:34PM +0100, Rafael J. Wysocki wrote:
-> On Wed, Dec 13, 2023 at 1:49 PM Russell King <rmk+kernel@armlinux.org.uk> wrote:
-> >
-> > From: James Morse <james.morse@arm.com>
-> >
-> > ACPI has two ways of describing processors in the DSDT. From ACPI v6.5,
-> > 5.2.12:
-> >
-> > "Starting with ACPI Specification 6.3, the use of the Processor() object
-> > was deprecated. Only legacy systems should continue with this usage. On
-> > the Itanium architecture only, a _UID is provided for the Processor()
-> > that is a string object. This usage of _UID is also deprecated since it
-> > can preclude an OSPM from being able to match a processor to a
-> > non-enumerable device, such as those defined in the MADT. From ACPI
-> > Specification 6.3 onward, all processor objects for all architectures
-> > except Itanium must now use Device() objects with an _HID of ACPI0007,
-> > and use only integer _UID values."
-> >
-> > Also see https://uefi.org/specs/ACPI/6.5/08_Processor_Configuration_and_Control.html#declaring-processors
-> >
-> > Duplicate descriptions are not allowed, the ACPI processor driver already
-> > parses the UID from both devices and containers. acpi_processor_get_info()
-> > returns an error if the UID exists twice in the DSDT.
-> 
-> I'm not really sure how the above is related to the actual patch.
-> 
-> > The missing probe for CPUs described as packages
-> 
-> It is unclear what exactly is meant by "CPUs described as packages".
-> 
-> From the patch, it looks like those would be Processor() objects
-> defined under a processor container device.
-> 
-> > creates a problem for
-> > moving the cpu_register() calls into the acpi_processor driver, as CPUs
-> > described like this don't get registered, leading to errors from other
-> > subsystems when they try to add new sysfs entries to the CPU node.
-> > (e.g. topology_sysfs_init()'s use of topology_add_dev() via cpuhp)
-> >
-> > To fix this, parse the processor container and call acpi_processor_add()
-> > for each processor that is discovered like this.
-> 
-> Discovered like what?
-> 
-> > The processor container
-> > handler is added with acpi_scan_add_handler(), so no detach call will
-> > arrive.
-> 
-> The above requires clarification too.
+The general consensus is that the documentation's website main entry point
+and its sidebar leave room for improvement. Something we can easily fix is
+that there's too much duplicated text.
 
-The above comments... yea. As I didn't write the commit description, but
-James did, and James has basically vanished, I don't think these can be
-answered, short of rewriting the entire commit message, with me spending
-a lot of time with the ACPI specification trying to get the terminology
-right - because at lot of the above on the face of it seems to be things
-to do with wrong terminology being used.
+To that point, consider the titles "The Linux kernel user's and
+administrator's guide" and "The Linux kernel user-space API guide." We get
+it, it's the Linux kernel. It's assumed that everything listed pertains to
+the Linux kernel, given the overarching title, "The Linux Kernel
+documentation." Constant repetition of "Linux" and "kernel" (45 times
+each), "documentation" (21 times), and "guide" (18 times) are excessive and
+affect UX.
 
-I wasn't expecting this level of issues with this patch set, and I now
-feel completely out of my depth with this series. I'm wondering whether
-I should even continue with it, since I don't have the ACPI knowledge
-to address a lot of these comments.
+I propose simplifying without altering actual document titles, the text
+linking to these documents on the main page ("link titles"). For example,
+"The Linux kernel user's and administrator's guide" could become "User's
+and Administrator's Guide," and "A guide to the Kernel Development Process"
+could be "Development Process". This is what my patch does.
 
--- 
-RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
-FTTP is here! 80Mbps down 10Mbps up. Decent connectivity at last!
+Also, I send a patch fixing the formatting of the title of
+admin-guide/index.rst (The Linux kernel user's and administrator's guide);
+a detail I noticed because the link title would not work otherwise.
+
+Thanks,
+Carlos
+
+Carlos Bilbao (2):
+    docs: Correct formatting of title in admin-guide/index.rst
+    docs: Include simplified link titles in main index
+
+---
+
+v1 Link: https://lore.kernel.org/lkml/58e78693-82d1-451d-a546-51fb64ef6eb5@vt.edu/T/
+
+Changes since v1:
+
+- Apply feedback:
+  Driver implementation API -> Driver APIs
+  Testing -> Testing guide
+  Hacking -> Hacking guides
+  User-space tools -> Userspace tools
+  User-space API -> Userspace APIs
+  CPU Architectures -> CPU architectures
+
+- Include patch fixing the title of The Linux kernel user's and
+  administrator's guide.
+
+- Minor changes: Change "main page's index" for "main index" in commit
+  subject. Also use my work email to sign the commits.
+
+---
+Documentation/admin-guide/index.rst |  1 +
+Documentation/index.rst             | 52 ++++++++++++++---------------
+2 files changed, 27 insertions(+), 26 deletions(-)
+
 
