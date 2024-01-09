@@ -1,149 +1,106 @@
-Return-Path: <linux-doc+bounces-6503-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6508-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 437D1828E00
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jan 2024 20:45:46 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8D89828E22
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jan 2024 20:49:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 632981C23B70
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jan 2024 19:45:45 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B6A24B25556
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jan 2024 19:48:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 287E23D556;
-	Tue,  9 Jan 2024 19:38:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CAD6B3D3BF;
+	Tue,  9 Jan 2024 19:44:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="meB4l/v4"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="igPLvkdL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00507481C7;
-	Tue,  9 Jan 2024 19:38:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 409IPgvb009679;
-	Tue, 9 Jan 2024 19:38:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	from:date:subject:mime-version:content-type
-	:content-transfer-encoding:message-id:references:in-reply-to:to
-	:cc; s=qcppdkim1; bh=9IXiRln2Duun1O80Yl8EsvifJ9A2nUavg62PHcy0yVQ
-	=; b=meB4l/v4NDsiJs4wRPv7TjhWtf35qjgjlmEZdoe6KtorlH+6+aiyx81qcU+
-	2PSK4XQz5UnVSN7jdEk3INrccSurEXaoUxv6HwXV4Wah+dTHkNcoBGW9Vt1tUYTn
-	D2ystJCaVc519dsmgvFk6EuCPq7DBthg36dkc45Bl06AFbeeR9wVfuQNr3KbslTq
-	bbOqGJJ92LXThkRfDH4ZqQ/f1fPny87Fohj//lhFl6ybLPMoUFkX4+F7nnGa8yq/
-	agQE6NwlTYsZ8lCvPa6yFPR//EvHF5c7jYZR+kKK+EBBCLDnXnWXyd8EgCxS1Bbc
-	5zZpkb70VQJq9PwSBRJrKT+xo6Q==
-Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3vh85t0pp9-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 09 Jan 2024 19:38:12 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com [10.46.141.250])
-	by NASANPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 409JcBhQ003587
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 9 Jan 2024 19:38:11 GMT
-Received: from hu-eberman-lv.qualcomm.com (10.49.16.6) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 9 Jan 2024 11:38:10 -0800
-From: Elliot Berman <quic_eberman@quicinc.com>
-Date: Tue, 9 Jan 2024 11:38:12 -0800
-Subject: [PATCH v16 34/34] MAINTAINERS: Add Gunyah hypervisor drivers
- section
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0308F3D3B8;
+	Tue,  9 Jan 2024 19:44:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+Received: from localhost (unknown [IPv6:2601:280:5e00:7e19::646])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 100BC2C1;
+	Tue,  9 Jan 2024 19:44:42 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 100BC2C1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1704829482; bh=JrRTImpwqjMu8ndI1e7JDtYO7JM1fCfWbOsYmKSUr2Q=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=igPLvkdLcePpcMOIvmD1gySNx4M602WaoBmjkldd6//tO8kxCMoxijY1bWcWyvDxM
+	 IOmJtSUAP4H/EFKRjHQL4vs0Zzt/DdcCMSYzXlf2WFuB+0PjbnmBezVwYv9AR8VL8l
+	 W8aMlidrhhEB6mdL1LjiOabAt2AdvIIZw7iRb9DYD1qHxSuGB6u82paTFOuYf1kgxB
+	 seopChC9p9uM/cgHMc8Ae8FRUw5i5mgzZSVTaMpMtR93e3mzWwchAguHJaZm+MZRRR
+	 GdOM7eo7X7JNW7zepo1PghAGkb61vxABwrVwadkCXEqJHcKYuwHUQdlDL8l9eKJbRv
+	 AekBMVieaJSwQ==
+From: Jonathan Corbet <corbet@lwn.net>
+To: Borislav Petkov <bp@alien8.de>
+Cc: Tony Luck <tony.luck@intel.com>, Yazen Ghannam <yazen.ghannam@amd.com>,
+ Muralidhara M K <muralimk@amd.com>, linux-edac@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Muralidhara M K <muralidhara.mk@amd.com>,
+ linux-doc@vger.kernel.org
+Subject: Re: [PATCH] Documentation: Begin a RAS section
+In-Reply-To: <20240109183646.GAZZ2SPiMZv83J3f0a@fat_crate.local>
+References: <20231102114225.2006878-1-muralimk@amd.com>
+ <20231102114225.2006878-2-muralimk@amd.com>
+ <20231128142049.GTZWX3QQTSaQk/+u53@fat_crate.local>
+ <87a5pes8jy.fsf@meer.lwn.net>
+ <20240109183646.GAZZ2SPiMZv83J3f0a@fat_crate.local>
+Date: Tue, 09 Jan 2024 12:44:41 -0700
+Message-ID: <87wmsiqok6.fsf@meer.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20240109-gunyah-v16-34-634904bf4ce9@quicinc.com>
-References: <20240109-gunyah-v16-0-634904bf4ce9@quicinc.com>
-In-Reply-To: <20240109-gunyah-v16-0-634904bf4ce9@quicinc.com>
-To: Alex Elder <elder@linaro.org>,
-        Srinivas Kandagatla
-	<srinivas.kandagatla@linaro.org>,
-        Murali Nalajal <quic_mnalajal@quicinc.com>,
-        Trilok Soni <quic_tsoni@quicinc.com>,
-        Srivatsa Vaddagiri
-	<quic_svaddagi@quicinc.com>,
-        Carl van Schaik <quic_cvanscha@quicinc.com>,
-        Philip Derrin <quic_pderrin@quicinc.com>,
-        Prakruthi Deepak Heragu
-	<quic_pheragu@quicinc.com>,
-        Jonathan Corbet <corbet@lwn.net>, Rob Herring
-	<robh+dt@kernel.org>,
-        Krzysztof Kozlowski
-	<krzysztof.kozlowski+dt@linaro.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@linaro.org>,
-        Bjorn Andersson
-	<andersson@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-        "Fuad
- Tabba" <tabba@google.com>,
-        Sean Christopherson <seanjc@google.com>,
-        "Andrew
- Morton" <akpm@linux-foundation.org>
-CC: <linux-arm-msm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>, <linux-mm@kvack.org>,
-        Elliot Berman
-	<quic_eberman@quicinc.com>
-X-Mailer: b4 0.13-dev
-X-ClientProxiedBy: nalasex01c.na.qualcomm.com (10.47.97.35) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: kzM0F7NTMKnUvtJCJV2bCf88yMAs95Pq
-X-Proofpoint-GUID: kzM0F7NTMKnUvtJCJV2bCf88yMAs95Pq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-12-09_01,2023-12-07_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 bulkscore=0
- malwarescore=0 suspectscore=0 mlxlogscore=744 clxscore=1015
- priorityscore=1501 adultscore=0 impostorscore=0 phishscore=0 spamscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2311290000 definitions=main-2401090158
+Content-Type: text/plain
 
-Add myself and Prakruthi as maintainers of Gunyah hypervisor drivers.
+Borislav Petkov <bp@alien8.de> writes:
 
-Reviewed-by: Alex Elder <elder@linaro.org>
-Signed-off-by: Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>
-Signed-off-by: Elliot Berman <quic_eberman@quicinc.com>
----
- MAINTAINERS | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+> On Tue, Jan 09, 2024 at 10:47:29AM -0700, Jonathan Corbet wrote:
+>> I wish I'd been copied on this ... 
+>
+> linux-doc was CCed:
+>
+> https://lore.kernel.org/all/20231128142049.GTZWX3QQTSaQk%2F+u53@fat_crate.local/
+>
+> Or did you prefer you directly?
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index fa67e2624723..64f70ef1ef91 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -9306,6 +9306,18 @@ L:	linux-efi@vger.kernel.org
- S:	Maintained
- F:	block/partitions/efi.*
- 
-+GUNYAH HYPERVISOR DRIVER
-+M:	Elliot Berman <quic_eberman@quicinc.com>
-+M:	Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>
-+L:	linux-arm-msm@vger.kernel.org
-+S:	Supported
-+F:	Documentation/devicetree/bindings/firmware/gunyah-hypervisor.yaml
-+F:	Documentation/virt/gunyah/
-+F:	arch/arm64/gunyah/
-+F:	drivers/virt/gunyah/
-+F:	include/linux/gunyah*.h
-+K:	gunyah
-+
- HABANALABS PCI DRIVER
- M:	Oded Gabbay <ogabbay@kernel.org>
- L:	dri-devel@lists.freedesktop.org
+Lots of stuff goes to linux-doc, I can miss things.
 
--- 
-2.34.1
+Of course, I miss things in my own email too...you know the drill...
 
+> I've been working to get a handle on
+>> the top-level Documentation/ directories for a while, and would rather
+>> not see a new one added for this.  Offhand, based on this first
+>> document, it looks like material that belongs under
+>> Documentation/admin-guide; can we move it there, please?
+>
+> Not really an admin guide thing - yes, based on the current content but
+> actually, the aim for this is to document all things RAS, so it is more
+> likely a subsystem thing. And all the subsystems are directories under
+> Documentation/.
+>
+> So where do you want me to put it?
+
+The hope with all of this documentation thrashing has been to organize
+our docs with the *reader* in mind.  "All things RAS" is convenient for
+RAS developers, but not for (say) a sysadmin trying to figure out how to
+make use of it.  So I would really rather see RAS documentation placed
+under admin-guide or userspace-api as appropriate.
+
+Yes, there is a lot of existing documentation that still doesn't live up
+to this idea, but we can try to follow it for new stuff while the rest
+is (slowly) fixed up.
+
+Make sense?
+
+Thanks,
+
+jon
 
