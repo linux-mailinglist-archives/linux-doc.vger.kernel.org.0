@@ -1,1124 +1,444 @@
-Return-Path: <linux-doc+bounces-6537-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6559-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D1F4829944
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jan 2024 12:40:57 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C211829A38
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jan 2024 13:11:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4962D1C2552C
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jan 2024 11:40:56 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 34B9C1C21BB7
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jan 2024 12:10:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95F3C47786;
-	Wed, 10 Jan 2024 11:40:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 32A16482D6;
+	Wed, 10 Jan 2024 12:10:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gadgetoid.com header.i=@gadgetoid.com header.b="OyB0qRfE"
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b="BPlam8zE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk [78.32.30.218])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A0BE47A78
-	for <linux-doc@vger.kernel.org>; Wed, 10 Jan 2024 11:40:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gadgetoid.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gadgetoid.com
-Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-6de6aa18e7bso28457a34.3
-        for <linux-doc@vger.kernel.org>; Wed, 10 Jan 2024 03:40:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gadgetoid.com; s=google; t=1704886848; x=1705491648; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=pIldsqrJky1RwWSYzG/96yLVnfZJAovLeq8al9NrcFM=;
-        b=OyB0qRfEU3DMspft8L9xfYX3mv1yBcX2mnAcli59cZj4yZCdeTN8hmqwCl+eyBBp7M
-         K7Cesj3QQ04IGbNZFKyWmOyr7FMD6pokUGvbDSUZE582/qqwDMsYFl3myBffh+Dd0yJc
-         j4+/PeoC2S2kpRKfjsiNbUvqOobUUszxMZep+XZiCGmMHC8QI+Bl3FiapXNoE/sW7nQB
-         RMBtb+Z2cyVC0m+tUB8pOAOVBikKq6m8CW9/h6mv+WzdDHgj+j3MZ7FvlG1ZiGyiN4Cj
-         DVZJF6MdDlCAOwCfmTYVF+HmxZMlYlofQejU2/0rUqW88T4hv32f5/E0UvydfiKIMPx/
-         Jtvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704886848; x=1705491648;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=pIldsqrJky1RwWSYzG/96yLVnfZJAovLeq8al9NrcFM=;
-        b=dcZ1f/nVx8rvTvOuuXOcuQGOMM2xWiuxGxebhc2gri0sILm0ISp0ZKO697YcjeAhUN
-         9Vmswv+rq5JEjPFOZC49uZ+SIj4RSXzV8vJsXqfm/W6JIFdcrui9Brx5VXPEP/xoKr+Y
-         jmtHiUmVVN8jD5mxOZHP44HopuXfD4lUjhxEFWFzqauUac4tYtzcGTKoIGGTM1GMtXfF
-         J7wH/enRjCiC/nADBwJtVlkcR77yixi1EklGHZ8hAYH4lGFxRdcDCQbxhAkRre8KSxzU
-         b8fNCglYpUmGF5gwlcRLBFFiybEXdM+X3vjrjWC5p1yaLPFkEcANHIJrzlVGyXQXrrJc
-         DNRg==
-X-Gm-Message-State: AOJu0YyZQrD04q5Sdok4GvWlmUAf3sD0jWwqHt55n4lYw0dC+PQUs3DD
-	MaFcP8sAei41l+SHVqc1ICZkrrlfge9KG9DZWDpzsp5PcX38dw==
-X-Google-Smtp-Source: AGHT+IGYY0PhKDGjytNviE/yI9LVvWxnEszERpug3Bjd47AtCfrxtjYX2QYmrZOPvZlZz3E42FvNMwB9sYC5BbQ3s/w=
-X-Received: by 2002:a05:6870:9728:b0:1fb:75c:3fe4 with SMTP id
- n40-20020a056870972800b001fb075c3fe4mr576005oaq.68.1704886847624; Wed, 10 Jan
- 2024 03:40:47 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E473481CE;
+	Wed, 10 Jan 2024 12:10:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=armlinux.org.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=armlinux.org.uk
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
+	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=g6FjsW6gcbXoo05ZiR/fBosPgD4QkGHgrQaNDBsI150=; b=BPlam8zEPkslhcOpMUX+3qp+Qd
+	GEVWvYIJ9xXV2E37LMPwaRL/BJglsLq9bWd7iHFzmiI8tCj+ukcAeTgLlIkT+SZo/HP8cz41cPOWA
+	kWQ2KPnnQSZiHXKsKGZAPrzgJmM81m0KuOaTgvGqx3o+sVZvYAA0WkeXDXVKk15X8qDIhjIuDAdZl
+	kgSYYcK+pd7UACB2sIZmpc5MRxhjFwi9YKI9JolKoB9Ec6qvhjXVEmOoNWcjMnpQOm+VWjJtTiM08
+	/xnzxrhSTxHGmQWLvWx/bnCnEg+j6o2OU35h3elunp0+eKiNAKPeVIvTBY92MXcCWBQwufYQDiwe1
+	qZqSvexg==;
+Received: from shell.armlinux.org.uk ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:56506)
+	by pandora.armlinux.org.uk with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <linux@armlinux.org.uk>)
+	id 1rNXP2-0005Lc-2a;
+	Wed, 10 Jan 2024 12:09:48 +0000
+Received: from linux by shell.armlinux.org.uk with local (Exim 4.94.2)
+	(envelope-from <linux@shell.armlinux.org.uk>)
+	id 1rNXOy-0005IK-BV; Wed, 10 Jan 2024 12:09:44 +0000
+Date: Wed, 10 Jan 2024 12:09:44 +0000
+From: "Russell King (Oracle)" <linux@armlinux.org.uk>
+To: Luo Jie <quic_luoj@quicinc.com>
+Cc: agross@kernel.org, andersson@kernel.org, konrad.dybcio@linaro.org,
+	davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+	pabeni@redhat.com, robh+dt@kernel.org,
+	krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
+	corbet@lwn.net, catalin.marinas@arm.com, will@kernel.org,
+	p.zabel@pengutronix.de, shannon.nelson@amd.com,
+	anthony.l.nguyen@intel.com, jasowang@redhat.com,
+	brett.creeley@amd.com, rrameshbabu@nvidia.com,
+	joshua.a.hay@intel.com, arnd@arndb.de, geert+renesas@glider.be,
+	neil.armstrong@linaro.org, dmitry.baryshkov@linaro.org,
+	nfraprado@collabora.com, m.szyprowski@samsung.com, u-kumar1@ti.com,
+	jacob.e.keller@intel.com, andrew@lunn.ch, netdev@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, ryazanov.s.a@gmail.com,
+	ansuelsmth@gmail.com, quic_kkumarcs@quicinc.com,
+	quic_suruchia@quicinc.com, quic_soni@quicinc.com,
+	quic_pavir@quicinc.com, quic_souravp@quicinc.com,
+	quic_linchen@quicinc.com, quic_leiwei@quicinc.com
+Subject: Re: [PATCH net-next 17/20] net: ethernet: qualcomm: Add PPE UNIPHY
+ support for phylink
+Message-ID: <ZZ6JCIQSimPy0TVY@shell.armlinux.org.uk>
+References: <20240110114033.32575-1-quic_luoj@quicinc.com>
+ <20240110114033.32575-18-quic_luoj@quicinc.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240109135952.77458-1-warthog618@gmail.com> <20240109135952.77458-2-warthog618@gmail.com>
-In-Reply-To: <20240109135952.77458-2-warthog618@gmail.com>
-From: Phil Howard <phil@gadgetoid.com>
-Date: Wed, 10 Jan 2024 11:40:34 +0000
-Message-ID: <CA+kSVo_347gS+w_7ZXFDi9qDtT1aw15qoWRJZAVSkfbHShz7kQ@mail.gmail.com>
-Subject: Re: [PATCH 1/7] Documentation: gpio: add chardev userspace API documentation
-To: Kent Gibson <warthog618@gmail.com>
-Cc: linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	linux-doc@vger.kernel.org, brgl@bgdev.pl, linus.walleij@linaro.org, 
-	andy@kernel.org, corbet@lwn.net
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240110114033.32575-18-quic_luoj@quicinc.com>
+Sender: Russell King (Oracle) <linux@armlinux.org.uk>
 
-First up, thank you for this. I'm busy getting up to speed with libgpiod
-having been spoiled by bit-bashing memory mapped GPIO and there
-are many gotchas that the below helps clarify.
-
-FWIW I've added a few "from the perspective of an advanced noob"
-comments.
-
-On Tue, 9 Jan 2024 at 14:00, Kent Gibson <warthog618@gmail.com> wrote:
->
-> Add documentation for the GPIO character device userspace API.
->
-> Added to the userspace-api book, but also provide a link from the
-> admin-guide book, as historically the GPIO documentation has been
-> there.
->
-> Signed-off-by: Kent Gibson <warthog618@gmail.com>
-> ---
->  Documentation/admin-guide/gpio/index.rst      |   1 +
->  Documentation/userspace-api/gpio/chardev.rst  | 114 ++++++++++++++++++
->  .../userspace-api/gpio/error-codes.rst        |  78 ++++++++++++
->  .../gpio/gpio-get-chipinfo-ioctl.rst          |  41 +++++++
->  .../gpio/gpio-get-lineinfo-unwatch-ioctl.rst  |  47 ++++++++
->  .../gpio/gpio-v2-get-line-ioctl.rst           |  99 +++++++++++++++
->  .../gpio/gpio-v2-get-lineinfo-ioctl.rst       |  50 ++++++++
->  .../gpio/gpio-v2-get-lineinfo-watch-ioctl.rst |  67 ++++++++++
->  .../gpio/gpio-v2-line-event-read.rst          |  83 +++++++++++++
->  .../gpio/gpio-v2-line-get-values-ioctl.rst    |  51 ++++++++
->  .../gpio/gpio-v2-line-set-config-ioctl.rst    |  57 +++++++++
->  .../gpio/gpio-v2-line-set-values-ioctl.rst    |  47 ++++++++
->  .../gpio/gpio-v2-lineinfo-changed-read.rst    |  81 +++++++++++++
->  Documentation/userspace-api/gpio/index.rst    |  17 +++
->  Documentation/userspace-api/index.rst         |   1 +
->  15 files changed, 834 insertions(+)
->  create mode 100644 Documentation/userspace-api/gpio/chardev.rst
->  create mode 100644 Documentation/userspace-api/gpio/error-codes.rst
->  create mode 100644 Documentation/userspace-api/gpio/gpio-get-chipinfo-ioctl.rst
->  create mode 100644 Documentation/userspace-api/gpio/gpio-get-lineinfo-unwatch-ioctl.rst
->  create mode 100644 Documentation/userspace-api/gpio/gpio-v2-get-line-ioctl.rst
->  create mode 100644 Documentation/userspace-api/gpio/gpio-v2-get-lineinfo-ioctl.rst
->  create mode 100644 Documentation/userspace-api/gpio/gpio-v2-get-lineinfo-watch-ioctl.rst
->  create mode 100644 Documentation/userspace-api/gpio/gpio-v2-line-event-read.rst
->  create mode 100644 Documentation/userspace-api/gpio/gpio-v2-line-get-values-ioctl.rst
->  create mode 100644 Documentation/userspace-api/gpio/gpio-v2-line-set-config-ioctl.rst
->  create mode 100644 Documentation/userspace-api/gpio/gpio-v2-line-set-values-ioctl.rst
->  create mode 100644 Documentation/userspace-api/gpio/gpio-v2-lineinfo-changed-read.rst
->  create mode 100644 Documentation/userspace-api/gpio/index.rst
->
-> diff --git a/Documentation/admin-guide/gpio/index.rst b/Documentation/admin-guide/gpio/index.rst
-> index f6861ca16ffe..b40f0a2a6822 100644
-> --- a/Documentation/admin-guide/gpio/index.rst
-> +++ b/Documentation/admin-guide/gpio/index.rst
-> @@ -7,6 +7,7 @@ gpio
->  .. toctree::
->      :maxdepth: 1
->
-> +    Character Device Userspace API <../../userspace-api/gpio/chardev>
->      gpio-aggregator
->      sysfs
->      gpio-mockup
-> diff --git a/Documentation/userspace-api/gpio/chardev.rst b/Documentation/userspace-api/gpio/chardev.rst
-> new file mode 100644
-> index 000000000000..af5f1753e565
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/chardev.rst
-> @@ -0,0 +1,114 @@
-> +.. SPDX-License-Identifier: GPL-2.0
+On Wed, Jan 10, 2024 at 07:40:29PM +0800, Luo Jie wrote:
+> +static int clk_uniphy_set_rate(struct clk_hw *hw, unsigned long rate,
+> +			       unsigned long parent_rate)
+> +{
+> +	struct clk_uniphy *uniphy = to_clk_uniphy(hw);
 > +
-> +===================================
-> +GPIO Character Device Userspace API
-> +===================================
+> +	if (rate != UNIPHY_CLK_RATE_125M && rate != UNIPHY_CLK_RATE_312P5M)
+> +		return -1;
+
+Sigh. I get very annoyed off by stuff like this. It's lazy programming,
+and makes me wonder why I should be bothered to spend time reviewing if
+the programmer can't be bothered to pay attention to details. It makes
+me wonder what else is done lazily in the patch.
+
+-1 is -EPERM "Operation not permitted". This is highly likely not an
+appropriate error code for this code.
+
+> +int ppe_uniphy_autoneg_complete_check(struct ppe_uniphy *uniphy, int port)
+> +{
+> +	u32 reg, val;
+> +	int channel, ret;
 > +
-> +This is latest version (v2) of the character device API, as defined in
-> +``include/uapi/linux/gpio.h.``
+> +	if (uniphy->interface == PHY_INTERFACE_MODE_USXGMII ||
+> +	    uniphy->interface == PHY_INTERFACE_MODE_QUSGMII) {
+> +		/* Only uniphy0 may have multi channels */
+> +		channel = (uniphy->index == 0) ? (port - 1) : 0;
+> +		reg = (channel == 0) ? VR_MII_AN_INTR_STS_ADDR :
+> +		       VR_MII_AN_INTR_STS_CHANNEL_ADDR(channel);
 > +
-> +.. note::
-> +   Do NOT abuse userspace APIs to control hardware that has proper kernel
-> +   drivers. There may already be a driver for your use case, and an existing
-> +   kernel driver is sure to provide a superior solution to bitbashing
-> +   from userspace.
+> +		/* Wait auto negotiation complete */
+> +		ret = read_poll_timeout(ppe_uniphy_read, val,
+> +					(val & CL37_ANCMPLT_INTR),
+> +					1000, 100000, true,
+> +					uniphy, reg);
+> +		if (ret) {
+> +			dev_err(uniphy->ppe_dev->dev,
+> +				"uniphy %d auto negotiation timeout\n", uniphy->index);
+> +			return ret;
+> +		}
 > +
-> +   Read Documentation/driver-api/gpio/drivers-on-gpio.rst to avoid reinventing
-> +   kernel wheels in userspace.
+> +		/* Clear auto negotiation complete interrupt */
+> +		ppe_uniphy_mask(uniphy, reg, CL37_ANCMPLT_INTR, 0);
+> +	}
+> +
+> +	return 0;
+> +}
 
-I realise this is in part an emotional response, but very much
-"citation needed" on
-this one. While I believe Kernel drivers for things are a good idea, I
-don't believe
-userspace libraries are necessarily bad or wrong. They might be the first
-experience a future kernel dev has with hardware. Either way there are multiple
-ecosystems of userspace drivers both existing and thriving right now, and there
-are good reasons to reinvent kernel wheels in userspace.
-
-At least some of these reasons relate to the (incorrectly assumed)
-insurmountable
-nature of kernel development vs just throwing together some Python. Including
-this loaded language just serves to reinforce that.
-
-You catch more flies with honey than with vinegar, so I'd probably soften to:
-
-Before abusing userspace APIs to bitbash drivers for your hardware you should
-read Documentation/driver-api/gpio/drivers-on-gpio.rst to see if your device has
-an existing kernel driver. If not, please consider contributing one.
+Why is this necessary? Why is it callable outside this file? Shouldn't
+this be done in the .pcs_get_state method? If negotiation hasn't
+completed (and negotiation is being used) then .pcs_get_state should not
+report that the link is up.
 
 > +
-> +   Similarly, for multi-function lines there may be other subsystems, such as
-> +   Documentation/spi/index.rst, Documentation/i2c/index.rst,
-> +   Documentation/driver-api/pwm.rst, Documentation/w1/index.rst etc, that
-> +   provide suitable drivers and APIs for your hardware.
+> +int ppe_uniphy_speed_set(struct ppe_uniphy *uniphy, int port, int speed)
+> +{
+> +	u32 reg, val;
+> +	int channel;
+> +
+> +	if (uniphy->interface == PHY_INTERFACE_MODE_USXGMII ||
+> +	    uniphy->interface == PHY_INTERFACE_MODE_QUSGMII) {
+> +		/* Only uniphy0 may have multiple channels */
+> +		channel = (uniphy->index == 0) ? (port - 1) : 0;
+> +
+> +		reg = (channel == 0) ? SR_MII_CTRL_ADDR :
+> +		       SR_MII_CTRL_CHANNEL_ADDR(channel);
+> +
+> +		switch (speed) {
+> +		case SPEED_100:
+> +			val = USXGMII_SPEED_100;
+> +			break;
+> +		case SPEED_1000:
+> +			val = USXGMII_SPEED_1000;
+> +			break;
+> +		case SPEED_2500:
+> +			val = USXGMII_SPEED_2500;
+> +			break;
+> +		case SPEED_5000:
+> +			val = USXGMII_SPEED_5000;
+> +			break;
+> +		case SPEED_10000:
+> +			val = USXGMII_SPEED_10000;
+> +			break;
+> +		case SPEED_10:
+> +			val = USXGMII_SPEED_10;
+> +			break;
+> +		default:
+> +			val = 0;
+> +			break;
+> +		}
+> +
+> +		ppe_uniphy_mask(uniphy, reg, USXGMII_SPEED_MASK, val);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +int ppe_uniphy_duplex_set(struct ppe_uniphy *uniphy, int port, int duplex)
+> +{
+> +	u32 reg;
+> +	int channel;
+> +
+> +	if (uniphy->interface == PHY_INTERFACE_MODE_USXGMII &&
+> +	    uniphy->interface == PHY_INTERFACE_MODE_QUSGMII) {
+> +		/* Only uniphy0 may have multiple channels */
+> +		channel = (uniphy->index == 0) ? (port - 1) : 0;
+> +
+> +		reg = (channel == 0) ? SR_MII_CTRL_ADDR :
+> +		       SR_MII_CTRL_CHANNEL_ADDR(channel);
+> +
+> +		ppe_uniphy_mask(uniphy, reg, USXGMII_DUPLEX_FULL,
+> +				(duplex == DUPLEX_FULL) ? USXGMII_DUPLEX_FULL : 0);
+> +	}
+> +
+> +	return 0;
+> +}
 
-This is good, people trying to do PWM via userspace bitbashing on arbitrary pins
-(sometimes we really do just want to dim a bunch of LEDs without the cost of an
-extra driver IC) is kind of silly in hindsight. If we steer people
-toward the right
-subsystems, perhaps those can be improved for the benefit of all.
+What calls the above two functions? Surely this should be called from
+the .pcs_link_up method? I would also imagine that you call each of
+these consecutively. So why not modify the register in one go rather
+than piecemeal like this. I'm not a fan of one-function-to-control-one-
+parameter-in-a-register style when it results in more register accesses
+than are really necessary.
 
+> +static void ppe_pcs_get_state(struct phylink_pcs *pcs,
+> +			      struct phylink_link_state *state)
+> +{
+> +	struct ppe_uniphy *uniphy = pcs_to_ppe_uniphy(pcs);
+> +	u32 val;
 > +
-> +Basic examples using the character device API can be found in ``tools/gpio/*``.
-> +
-> +The API is based around two major objects, the :ref:`gpio-v2-chip` and the
-> +:ref:`gpio-v2-line-request`.
-> +
-> +.. _gpio-v2-chip:
-> +
-> +Chip
-> +====
-> +
-> +The Chip represents a single GPIO chip and is exposed to userspace using device
-> +files of the form ``/dev/gpiochipX``.
+> +	switch (state->interface) {
+> +	case PHY_INTERFACE_MODE_10GBASER:
+> +		val = ppe_uniphy_read(uniphy, SR_XS_PCS_KR_STS1_ADDR);
+> +		state->link = (val & SR_XS_PCS_KR_STS1_PLU) ? 1 : 0;
 
-Is it worth clarifying that - afaik - the numbering of these device
-files is or can
-be arbitrary? Or, in the opposite case, that the order is guaranteed
-by the vendor's
-device tree configuration?
+Unnecessary tenary operation.
 
-> +
-> +Each chip supports a number of GPIO lines,
-> +:c:type:`chip.lines<gpiochip_info>`. Lines on the chip are identified by an
-> +``offset`` in the range from 0 to ``chip.lines - 1``, i.e. `[0,chip.lines)`.
+		state->link = !!(val & SR_XS_PCS_KR_STS1_PLU);
 
-I don't recognise this syntax "`[0,chip.lines)`", typo, or me being clueless?
+> +		state->duplex = DUPLEX_FULL;
+> +		state->speed = SPEED_10000;
+> +		state->pause |= (MLO_PAUSE_RX | MLO_PAUSE_TX);
 
-> +
-> +Lines are requested from the chip using gpio-v2-get-line-ioctl.rst
-> +and the resulting line request is used to access the GPIO chip's lines or
-> +monitor the lines for edge events.
-> +
-> +Within this documentation, the file descriptor returned by calling `open()`
-> +on the GPIO device file is referred to as ``chip_fd``.
-> +
-> +Operations
-> +----------
-> +
-> +The following operations may be performed on the chip:
-> +
-> +.. toctree::
-> +   :titlesonly:
-> +
-> +   Get Line <gpio-v2-get-line-ioctl>
-> +   Get Chip Info <gpio-get-chipinfo-ioctl>
-> +   Get Line Info <gpio-v2-get-lineinfo-ioctl>
-> +   Watch Line Info <gpio-v2-get-lineinfo-watch-ioctl>
-> +   Unwatch Line Info <gpio-get-lineinfo-unwatch-ioctl>
-> +   Read Line Info Changed Events <gpio-v2-lineinfo-changed-read>
-> +
-> +.. _gpio-v2-line-request:
-> +
-> +Line Request
-> +============
-> +
-> +Line requests are created by gpio-v2-get-line-ioctl.rst and provide
-> +access to a set of requested lines.  The line request is exposed to userspace
-> +via the anonymous file descriptor returned in
-> +:c:type:`request.fd<gpio_v2_line_request>` by gpio-v2-get-line-ioctl.rst.
-> +
-> +Within this documentation, the line request file descriptor is referred to
-> +as ``req_fd``.
-> +
-> +Operations
-> +----------
-> +
-> +The following operations may be performed on the line request:
-> +
-> +.. toctree::
-> +   :titlesonly:
-> +
-> +   Get Line Values <gpio-v2-line-get-values-ioctl>
-> +   Set Line Values <gpio-v2-line-set-values-ioctl>
-> +   Read Line Edge Events <gpio-v2-line-event-read>
-> +   Reconfigure Lines <gpio-v2-line-set-config-ioctl>
-> +
-> +Types
-> +=====
-> +
-> +This section contains the structs and enums that are referenced by the API v2,
-> +as defined in ``include/uapi/linux/gpio.h``.
-> +
-> +.. kernel-doc:: include/uapi/linux/gpio.h
-> +   :identifiers:
-> +    gpio_v2_line_attr_id
-> +    gpio_v2_line_attribute
-> +    gpio_v2_line_changed_type
-> +    gpio_v2_line_config
-> +    gpio_v2_line_config_attribute
-> +    gpio_v2_line_event
-> +    gpio_v2_line_event_id
-> +    gpio_v2_line_flag
-> +    gpio_v2_line_info
-> +    gpio_v2_line_info_changed
-> +    gpio_v2_line_request
-> +    gpio_v2_line_values
-> +    gpiochip_info
-> +
-> +.. toctree::
-> +   :hidden:
-> +
-> +   error-codes
-> diff --git a/Documentation/userspace-api/gpio/error-codes.rst b/Documentation/userspace-api/gpio/error-codes.rst
-> new file mode 100644
-> index 000000000000..edf01f2cf9d2
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/error-codes.rst
-> @@ -0,0 +1,78 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _gpio_errors:
-> +
-> +*******************
-> +GPIO Error Codes
-> +*******************
-> +
-> +.. _gpio-errors:
-> +
-> +.. tabularcolumns:: |p{2.5cm}|p{15.0cm}|
-> +
-> +.. flat-table:: Common GPIO error codes
-> +    :header-rows:  0
-> +    :stub-columns: 0
-> +    :widths: 1 16
-> +
-> +    -  -  ``EAGAIN`` (aka ``EWOULDBLOCK``)
-> +
-> +       -  The device was opened in non-blocking mode and a read can't
-> +          be performed as there is no data available.
-> +
-> +    -  -  ``EBADF``
-> +
-> +       -  The file descriptor is not valid.
-> +
-> +    -  -  ``EBUSY``
-> +
-> +       -  The ioctl can't be handled because the device is busy. Typically
-> +          returned when an ioctl attempts something that would require the
-> +          usage of a resource that was already allocated. The ioctl must not
-> +          be retried without performing another action to fix the problem
-> +          first.
+Excessive parens.
 
-eg: When a line is already claimed by another process?
+> +		break;
+> +	case PHY_INTERFACE_MODE_2500BASEX:
+> +		val = ppe_uniphy_read(uniphy, UNIPHY_CHANNEL0_INPUT_OUTPUT_6_ADDR);
+> +		state->link = (val & NEWADDEDFROMHERE_CH0_LINK_MAC) ? 1 : 0;
 
-> +
-> +    -  -  ``EFAULT``
-> +
-> +       -  There was a failure while copying data from/to userspace, probably
-> +         caused by an invalid pointer reference.
-> +
-> +    -  -  ``EINVAL``
-> +
-> +       -  One or more of the ioctl parameters are invalid or out of the
-> +          allowed range. This is a widely used error code.
-> +
-> +    -  -  ``ENODEV``
-> +
-> +       -  Device not found or was removed.
-> +
-> +    -  -  ``ENOMEM``
-> +
-> +       -  There's not enough memory to handle the desired operation.
-> +
-> +    -  -  ``EPERM``
-> +
-> +       -  Permission denied. Typically returned in response to an attempt
-> +          to perform an action incompatible with the current line
-> +          configuration.
-> +
-> +    -  -  ``EIO``
-> +
-> +       -  I/O error. Typically returned when there are problems communicating
-> +          with a hardware device or requesting features that hardware does not
-> +          support. This could indicate broken or flaky hardware.
-> +          It's a 'Something is wrong, I give up!' type of error.
-> +
-> +    -  - ``ENXIO``
-> +
-> +       -  No device corresponding to this device special file exists.
-> +
-> +.. note::
-> +
-> +  #. This list is not exhaustive; ioctls may return other error codes.
-> +     Since errors may have side effects such as a driver reset,
-> +     applications should abort on unexpected errors, or otherwise
-> +     assume that the device is in a bad state.
-> +
-> +  #. Request-specific error codes are listed in the individual
-> +     requests descriptions.
-> diff --git a/Documentation/userspace-api/gpio/gpio-get-chipinfo-ioctl.rst b/Documentation/userspace-api/gpio/gpio-get-chipinfo-ioctl.rst
-> new file mode 100644
-> index 000000000000..05f07fdefe2f
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/gpio-get-chipinfo-ioctl.rst
-> @@ -0,0 +1,41 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _GPIO_GET_CHIPINFO_IOCTL:
-> +
-> +***********************
-> +GPIO_GET_CHIPINFO_IOCTL
-> +***********************
-> +
-> +Name
-> +====
-> +
-> +GPIO_GET_CHIPINFO_IOCTL - Get the publicly available information for a chip.
-> +
-> +Synopsis
-> +========
-> +
-> +.. c:macro:: GPIO_GET_CHIPINFO_IOCTL
-> +
-> +``int ioctl(int chip_fd, GPIO_GET_CHIPINFO_IOCTL, struct gpiochip_info *info)``
-> +
-> +Arguments
-> +=========
-> +
-> +``chip_fd``
-> +    The file descriptor of the GPIO character device returned by `open()`.
-> +
-> +``info``
-> +    The :c:type:`chip_info<gpiochip_info>` to be populated.
-> +
-> +Description
-> +===========
-> +
-> +Gets the publicly available information for a particular GPIO chip.
-> +
-> +Return Value
-> +============
-> +
-> +On success 0 and ``info`` is populated with the chip info.
-> +
-> +On error -1 and the ``errno`` variable is set appropriately.
-> +Common error codes are described in error-codes.rst.
-> diff --git a/Documentation/userspace-api/gpio/gpio-get-lineinfo-unwatch-ioctl.rst b/Documentation/userspace-api/gpio/gpio-get-lineinfo-unwatch-ioctl.rst
-> new file mode 100644
-> index 000000000000..ba6f9d00a40b
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/gpio-get-lineinfo-unwatch-ioctl.rst
-> @@ -0,0 +1,47 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _GPIO_GET_LINEINFO_UNWATCH_IOCTL:
-> +
-> +*******************************
-> +GPIO_GET_LINEINFO_UNWATCH_IOCTL
-> +*******************************
-> +
-> +Name
-> +====
-> +
-> +GPIO_GET_LINEINFO_UNWATCH_IOCTL - Disable watching a line for changes to its
-> +requested state and configuration information.
-> +
-> +Synopsis
-> +========
-> +
-> +.. c:macro:: GPIO_GET_LINEINFO_UNWATCH_IOCTL
-> +
-> +``int ioctl(int chip_fd, GPIO_GET_LINEINFO_UNWATCH_IOCTL, u32 *offset)``
-> +
-> +Arguments
-> +=========
-> +
-> +``chip_fd``
-> +    The file descriptor of the GPIO character device returned by `open()`.
-> +
-> +``offset``
-> +    The offset of the line to no longer watch.
-> +
-> +Description
-> +===========
-> +
-> +Remove the line from the list of lines being watched on this ``chip_fd``.
-> +
-> +This is the opposite of gpio-v2-get-lineinfo-watch-ioctl.rst (v2) and
-> +gpio-get-lineinfo-watch-ioctl.rst (v1).
-> +
-> +Unwatching a line that is not watched is an error (**EBUSY**).
-> +
-> +Return Value
-> +============
-> +
-> +On success 0.
-> +
-> +On error -1 and the ``errno`` variable is set appropriately.
-> +Common error codes are described in error-codes.rst.
-> diff --git a/Documentation/userspace-api/gpio/gpio-v2-get-line-ioctl.rst b/Documentation/userspace-api/gpio/gpio-v2-get-line-ioctl.rst
-> new file mode 100644
-> index 000000000000..4259c08779c1
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/gpio-v2-get-line-ioctl.rst
-> @@ -0,0 +1,99 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _GPIO_V2_GET_LINE_IOCTL:
-> +
-> +**********************
-> +GPIO_V2_GET_LINE_IOCTL
-> +**********************
-> +
-> +Name
-> +====
-> +
-> +GPIO_V2_GET_LINE_IOCTL - Request a line or lines from the kernel.
-> +
-> +Synopsis
-> +========
-> +
-> +.. c:macro:: GPIO_V2_GET_LINE_IOCTL
-> +
-> +``int ioctl(int chip_fd, GPIO_V2_GET_LINE_IOCTL, struct gpio_v2_line_request *request)``
-> +
-> +Arguments
-> +=========
-> +
-> +``chip_fd``
-> +    The file descriptor of the GPIO character device returned by `open()`.
-> +
-> +``request``
-> +    The :c:type:`line_request<gpio_v2_line_request>` specifying the lines
-> +    to request and their configuration.
-> +
-> +Description
-> +===========
-> +
-> +On success, the requesting process is granted exclusive access to the line
-> +value, write access to the line configuration, and may receive events when
-> +edges are detected on the line, all of which are described in more detail in
-> +:ref:`gpio-v2-line-request`.
-> +
-> +A number of lines may be requested in the one line request, and request
-> +operations are performed on the requested lines by the kernel as atomically
-> +as possible. e.g. gpio-v2-line-get-values-ioctl.rst will read all the
-> +requested lines at once.
-> +
-> +The state of a line, including the value of output lines, is guaranteed to
-> +remain as requested until the returned file descriptor is closed. Once the
-> +file descriptor is closed, the state of the line becomes uncontrolled from
-> +the userspace perspective, and may revert to its default state.
+Ditto.
 
-At the behest of the line driver? (an example of a line driver that
-has good reason
-for reverting might be useful here, to indicate that in the general
-case the user
-cannot assume the state of unclaimed lines)
+> +		state->duplex = DUPLEX_FULL;
+> +		state->speed = SPEED_2500;
+> +		state->pause |= (MLO_PAUSE_RX | MLO_PAUSE_TX);
+
+Ditto.
+
+> +		break;
+> +	case PHY_INTERFACE_MODE_1000BASEX:
+> +	case PHY_INTERFACE_MODE_SGMII:
+> +		val = ppe_uniphy_read(uniphy, UNIPHY_CHANNEL0_INPUT_OUTPUT_6_ADDR);
+> +		state->link = (val & NEWADDEDFROMHERE_CH0_LINK_MAC) ? 1 : 0;
+> +		state->duplex = (val & NEWADDEDFROMHERE_CH0_DUPLEX_MODE_MAC) ?
+> +			DUPLEX_FULL : DUPLEX_HALF;
+> +		if (FIELD_GET(NEWADDEDFROMHERE_CH0_SPEED_MODE_MAC, val) == UNIPHY_SPEED_10M)
+> +			state->speed = SPEED_10;
+> +		else if (FIELD_GET(NEWADDEDFROMHERE_CH0_SPEED_MODE_MAC, val) == UNIPHY_SPEED_100M)
+> +			state->speed = SPEED_100;
+> +		else if (FIELD_GET(NEWADDEDFROMHERE_CH0_SPEED_MODE_MAC, val) == UNIPHY_SPEED_1000M)
+> +			state->speed = SPEED_1000;
+
+Looks like a switch(FIELD_GET(NEWADDEDFROMHERE_CH0_SPEED_MODE_MAC, val)
+would be better here. Also "NEWADDEDFROMHERE" ?
+
+> +		state->pause |= (MLO_PAUSE_RX | MLO_PAUSE_TX);
+
+Ditto.
+
+As you make no differentiation between 1000base-X and SGMII, I question
+whether your hardware supports 1000base-X. I seem to recall in previous
+discussions that it doesn't. So, that means it doesn't support the
+inband negotiation word format for 1000base-X. Thus, 1000base-X should
+not be included in any of these switch statements, and 1000base-X won't
+be usable.
+
+> +/* [register] UNIPHY_MODE_CTRL */
+> +#define UNIPHY_MODE_CTRL_ADDR				0x46c
+> +#define NEWADDEDFROMHERE_CH0_AUTONEG_MODE		BIT(0)
+> +#define NEWADDEDFROMHERE_CH1_CH0_SGMII			BIT(1)
+> +#define NEWADDEDFROMHERE_CH4_CH1_0_SGMII		BIT(2)
+> +#define NEWADDEDFROMHERE_SGMII_EVEN_LOW			BIT(3)
+> +#define NEWADDEDFROMHERE_CH0_MODE_CTRL_25M		GENMASK(6, 4)
+> +#define NEWADDEDFROMHERE_CH0_QSGMII_SGMII		BIT(8)
+> +#define NEWADDEDFROMHERE_CH0_PSGMII_QSGMII		BIT(9)
+> +#define NEWADDEDFROMHERE_SG_MODE			BIT(10)
+> +#define NEWADDEDFROMHERE_SGPLUS_MODE			BIT(11)
+> +#define NEWADDEDFROMHERE_XPCS_MODE			BIT(12)
+> +#define NEWADDEDFROMHERE_USXG_EN			BIT(13)
+> +#define NEWADDEDFROMHERE_SW_V17_V18			BIT(15)
+
+Again, why "NEWADDEDFROMHERE" ?
+
+> +/* [register] VR_XS_PCS_EEE_MCTRL0 */
+> +#define VR_XS_PCS_EEE_MCTRL0_ADDR			0x38006
+> +#define LTX_EN						BIT(0)
+> +#define LRX_EN						BIT(1)
+> +#define SIGN_BIT					BIT(6)
+
+"SIGN_BIT" is likely too generic a name.
+
+> +#define MULT_FACT_100NS					GENMASK(11, 8)
+> +
+> +/* [register] VR_XS_PCS_KR_CTRL */
+> +#define VR_XS_PCS_KR_CTRL_ADDR	0x38007
+> +#define USXG_MODE					GENMASK(12, 10)
+> +#define QUXGMII_MODE					(FIELD_PREP(USXG_MODE, 0x5))
+> +
+> +/* [register] VR_XS_PCS_EEE_TXTIMER */
+> +#define VR_XS_PCS_EEE_TXTIMER_ADDR			0x38008
+> +#define TSL_RES						GENMASK(5, 0)
+> +#define T1U_RES						GENMASK(7, 6)
+> +#define TWL_RES						GENMASK(12, 8)
+> +#define UNIPHY_XPCS_TSL_TIMER				(FIELD_PREP(TSL_RES, 0xa))
+> +#define UNIPHY_XPCS_T1U_TIMER				(FIELD_PREP(TSL_RES, 0x3))
+> +#define UNIPHY_XPCS_TWL_TIMER				(FIELD_PREP(TSL_RES, 0x16))
+> +
+> +/* [register] VR_XS_PCS_EEE_RXTIMER  */
+> +#define VR_XS_PCS_EEE_RXTIMER_ADDR			0x38009
+> +#define RES_100U					GENMASK(7, 0)
+> +#define TWR_RES						GENMASK(13, 8)
+> +#define UNIPHY_XPCS_100US_TIMER				(FIELD_PREP(RES_100U, 0xc8))
+> +#define UNIPHY_XPCS_TWR_TIMER				(FIELD_PREP(RES_100U, 0x1c))
+> +
+> +/* [register] VR_XS_PCS_DIG_STS */
+> +#define VR_XS_PCS_DIG_STS_ADDR				0x3800a
+> +#define AM_COUNT					GENMASK(14, 0)
+> +#define QUXGMII_AM_COUNT				(FIELD_PREP(AM_COUNT, 0x6018))
+> +
+> +/* [register] VR_XS_PCS_EEE_MCTRL1 */
+> +#define VR_XS_PCS_EEE_MCTRL1_ADDR			0x3800b
+> +#define TRN_LPI						BIT(0)
+> +#define TRN_RXLPI					BIT(8)
+> +
+> +/* [register] VR_MII_1_DIG_CTRL1 */
+> +#define VR_MII_DIG_CTRL1_CHANNEL1_ADDR			0x1a8000
+> +#define VR_MII_DIG_CTRL1_CHANNEL2_ADDR			0x1b8000
+> +#define VR_MII_DIG_CTRL1_CHANNEL3_ADDR			0x1c8000
+> +#define VR_MII_DIG_CTRL1_CHANNEL_ADDR(x)		(0x1a8000 + 0x10000 * ((x) - 1))
+> +#define CHANNEL_USRA_RST				BIT(5)
+> +
+> +/* [register] VR_MII_AN_CTRL */
+> +#define VR_MII_AN_CTRL_ADDR				0x1f8001
+> +#define VR_MII_AN_CTRL_CHANNEL1_ADDR			0x1a8001
+> +#define VR_MII_AN_CTRL_CHANNEL2_ADDR			0x1b8001
+> +#define VR_MII_AN_CTRL_CHANNEL3_ADDR			0x1c8001
+> +#define VR_MII_AN_CTRL_CHANNEL_ADDR(x)			(0x1a8001 + 0x10000 * ((x) - 1))
+> +#define MII_AN_INTR_EN					BIT(0)
+> +#define MII_CTRL					BIT(8)
+
+Too generic a name.
 
 > +
-> +Closing the ``chip_fd`` has no effect on existing line requests.
-> +
-> +.. _gpio-v2-get-line-config-rules:
-> +
-> +Configuration Rules
-> +-------------------
-> +
-> +For any given requested line, the following configuration rules apply:
-> +
-> +The direction flags, ``GPIO_V2_LINE_FLAG_INPUT`` and
-> +``GPIO_V2_LINE_FLAG_OUTPUT``, cannot be combined. If neither are set then
-> +the only other flag that may be set is ``GPIO_V2_LINE_FLAG_ACTIVE_LOW``
-> +and the line is requested "as-is" to allow reading of the line value
-> +without altering the electrical configuration.
-> +
-> +The drive flags, ``GPIO_V2_LINE_FLAG_OPEN_xxx``, require the
-> +``GPIO_V2_LINE_FLAG_OUTPUT`` to be set.
-> +Only one drive flag may be set.
-> +If none are set then the line is assumed push-pull.
-> +
-> +Only one bias flag, ``GPIO_V2_LINE_FLAG_BIAS_xxx``, may be set, and it
-> +requires a direction flag to also be set.
-> +If no bias flags are set then the bias configuration is not changed.
-> +
-> +The edge flags, ``GPIO_V2_LINE_FLAG_EDGE_xxx``, require
-> +``GPIO_V2_LINE_FLAG_INPUT`` to be set and may be combined to detect both rising
-> +and falling edges.
-> +
-> +Only one event clock flag, ``GPIO_V2_LINE_FLAG_EVENT_CLOCK_xxx``, may be set.
-> +If none are set then the event clock defaults to ``CLOCK_MONOTONIC``.
-> +The ``GPIO_V2_LINE_FLAG_EVENT_CLOCK_HTE`` flag requires supporting hardware
-> +and a kernel with ``CONFIG_HTE`` set.  Requesting HTE from a device that
-> +doesn't support it is an error (**EOPNOTSUP**).
-> +
-> +The :c:type:`debounce_period_us<gpio_v2_line_attribute>` attribute may only
-> +be applied to lines with ``GPIO_V2_LINE_FLAG_INPUT`` set. When set, debounce
-> +applies to both the values returned by gpio-v2-line-get-values-ioctl.rst and
-> +the edges returned by gpio-v2-line-event-read.rst.  If not
-> +supported directly by hardware, the debouncing is performed in software by the
-> +kernel.
-> +
-> +Requesting an invalid configuration is an error (**EINVAL**).
-> +
-> +Return Value
-> +============
-> +
-> +On success 0 and the :c:type:`request.fd<gpio_v2_line_request>` contains the
-> +file descriptor for the request.
-> +
-> +On error -1 and the ``errno`` variable is set appropriately.
-> +Common error codes are described in error-codes.rst.
-> diff --git a/Documentation/userspace-api/gpio/gpio-v2-get-lineinfo-ioctl.rst b/Documentation/userspace-api/gpio/gpio-v2-get-lineinfo-ioctl.rst
-> new file mode 100644
-> index 000000000000..bc4d8df887d4
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/gpio-v2-get-lineinfo-ioctl.rst
-> @@ -0,0 +1,50 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _GPIO_V2_GET_LINEINFO_IOCTL:
-> +
-> +**************************
-> +GPIO_V2_GET_LINEINFO_IOCTL
-> +**************************
-> +
-> +Name
-> +====
-> +
-> +GPIO_V2_GET_LINEINFO_IOCTL - Get the publicly available information for a line.
-> +
-> +Synopsis
-> +========
-> +
-> +.. c:macro:: GPIO_V2_GET_LINEINFO_IOCTL
-> +
-> +``int ioctl(int chip_fd, GPIO_V2_GET_LINEINFO_IOCTL, struct gpio_v2_line_info *info)``
-> +
-> +Arguments
-> +=========
-> +
-> +``chip_fd``
-> +    The file descriptor of the GPIO character device returned by `open()`.
-> +
-> +``info``
-> +    The :c:type:`line_info<gpio_v2_line_info>` to be populated, with the
-> +    ``offset`` field set to indicate the line to be collected.
-> +
-> +Description
-> +===========
-> +
-> +Get the publicly available information for a line.
-> +
-> +This information is available independent of whether the line is in use.
-> +
-> +.. note::
-> +    The line info does not include the line value.
-> +
-> +    The line must be requested using gpio-v2-get-line-ioctl.rst to access its
-> +    value.
-> +
-> +Return Value
-> +============
-> +
-> +On success 0 and ``info`` is populated with the chip info.
-> +
-> +On error -1 and the ``errno`` variable is set appropriately.
-> +Common error codes are described in error-codes.rst.
-> diff --git a/Documentation/userspace-api/gpio/gpio-v2-get-lineinfo-watch-ioctl.rst b/Documentation/userspace-api/gpio/gpio-v2-get-lineinfo-watch-ioctl.rst
-> new file mode 100644
-> index 000000000000..938ff85a9322
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/gpio-v2-get-lineinfo-watch-ioctl.rst
-> @@ -0,0 +1,67 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _GPIO_V2_GET_LINEINFO_WATCH_IOCTL:
-> +
-> +********************************
-> +GPIO_V2_GET_LINEINFO_WATCH_IOCTL
-> +********************************
-> +
-> +Name
-> +====
-> +
-> +GPIO_V2_GET_LINEINFO_WATCH_IOCTL - Enable watching a line for changes to its
-> +request state and configuration information.
-> +
-> +Synopsis
-> +========
-> +
-> +.. c:macro:: GPIO_V2_GET_LINEINFO_WATCH_IOCTL
-> +
-> +``int ioctl(int chip_fd, GPIO_V2_GET_LINEINFO_WATCH_IOCTL, struct gpio_v2_line_info *info)``
-> +
-> +Arguments
-> +=========
-> +
-> +``chip_fd``
-> +    The file descriptor of the GPIO character device returned by `open()`.
-> +
-> +``info``
-> +    The :c:type:`line_info<gpio_v2_line_info>` struct to be populated, with
-> +    the ``offset`` set to indicate the line to watch
-> +
-> +Description
-> +===========
-> +
-> +Enable watching a line for changes to its request state and configuration
-> +information. Changes to line info include a line being requested, released
-> +or reconfigured.
-> +
-> +.. note::
-> +    Watching line info is not generally required, and would typically only be
-> +    used by a system monitoring component.
-> +
-> +    The line info does NOT include the line value.
-> +    The line must be requested using gpio-v2-get-line-ioctl.rst to access
-> +    its value, and the line request can monitor a line for events using
-> +    gpio-v2-line-event-read.rst.
-> +
-> +By default all lines are unwatched when the GPIO chip is opened.
-> +
-> +Multiple lines may be watched simultaneously by adding a watch for each.
-> +
-> +Once a watch is set, any changes to line info will generate events which can be
-> +read from the ``chip_fd`` as described in
-> +gpio-v2-lineinfo-changed-read.rst.
-> +
-> +Adding a watch to a line that is already watched is an error (**EBUSY**).
-> +
-> +Watches are specific to the ``chip_fd`` and are independent of watches
-> +on the same GPIO chip opened with a separate call to `open()`.
-> +
-> +Return Value
-> +============
-> +
-> +On success 0 and ``info`` is populated with the current line info.
-> +
-> +On error -1 and the ``errno`` variable is set appropriately.
-> +Common error codes are described in error-codes.rst.
-> diff --git a/Documentation/userspace-api/gpio/gpio-v2-line-event-read.rst b/Documentation/userspace-api/gpio/gpio-v2-line-event-read.rst
-> new file mode 100644
-> index 000000000000..6513c23fb7ca
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/gpio-v2-line-event-read.rst
-> @@ -0,0 +1,83 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _GPIO_V2_LINE_EVENT_READ:
-> +
-> +***********************
-> +GPIO_V2_LINE_EVENT_READ
-> +***********************
-> +
-> +Name
-> +====
-> +
-> +GPIO_V2_LINE_EVENT_READ - Read edge detection events for lines from a request.
-> +
-> +Synopsis
-> +========
-> +
-> +``int read(int req_fd, void *buf, size_t count)``
-> +
-> +Arguments
-> +=========
-> +
-> +``req_fd``
-> +    The file descriptor of the GPIO character device, as returned in the
-> +    :c:type:`request.fd<gpio_v2_line_request>` by gpio-v2-get-line-ioctl.rst.
-> +
-> +``buf``
-> +    The buffer to contain the :c:type:`events<gpio_v2_line_event>`.
-> +
-> +``count``
-> +    The number of bytes available in ``buf``, which must be at
-> +    least the size of a :c:type:`gpio_v2_line_event`.
-> +
-> +Description
-> +===========
-> +
-> +Read edge detection events for lines from a request.
-> +
-> +Edge detection must be enabled for the input line using either
-> +``GPIO_V2_LINE_FLAG_EDGE_RISING`` or ``GPIO_V2_LINE_FLAG_EDGE_FALLING``, or
-> +both. Edge events are then generated whenever edge interrupts are detected on
-> +the input line.
-> +
-> +The kernel captures and timestamps edge events as close as possible to their
-> +occurrence and stores them in a buffer from where they can be read by
-> +userspace at its convenience using `read()`.
-> +
-> +Events read from the buffer are always in the same order that they were
-> +detected by the kernel, including when multiple lines are being monitored by
-> +the one request.
-> +
-> +The size of the kernel event buffer is fixed at the time of line request
-> +creation, and can be influenced by the
-> +:c:type:`request.event_buffer_size<gpio_v2_line_request>`.
-> +The default size is 16 times the number of lines requested.
+> +/* [register] VR_MII_AN_INTR_STS */
+> +#define VR_MII_AN_INTR_STS_ADDR				0x1f8002
+> +#define VR_MII_AN_INTR_STS_CHANNEL1_ADDR		0x1a8002
+> +#define VR_MII_AN_INTR_STS_CHANNEL2_ADDR		0x1b8002
+> +#define VR_MII_AN_INTR_STS_CHANNEL3_ADDR		0x1c8002
+> +#define VR_MII_AN_INTR_STS_CHANNEL_ADDR(x)		(0x1a8002 + 0x10000 * ((x) - 1))
+> +#define CL37_ANCMPLT_INTR				BIT(0)
+> +
+> +/* [register] VR_XAUI_MODE_CTRL */
+> +#define VR_XAUI_MODE_CTRL_ADDR				0x1f8004
+> +#define VR_XAUI_MODE_CTRL_CHANNEL1_ADDR			0x1a8004
+> +#define VR_XAUI_MODE_CTRL_CHANNEL2_ADDR			0x1b8004
+> +#define VR_XAUI_MODE_CTRL_CHANNEL3_ADDR			0x1c8004
+> +#define VR_XAUI_MODE_CTRL_CHANNEL_ADDR(x)		(0x1a8004 + 0x10000 * ((x) - 1))
+> +#define IPG_CHECK					BIT(0)
+> +
+> +/* [register] SR_MII_CTRL */
+> +#define SR_MII_CTRL_ADDR				0x1f0000
+> +#define SR_MII_CTRL_CHANNEL1_ADDR			0x1a0000
+> +#define SR_MII_CTRL_CHANNEL2_ADDR			0x1b0000
+> +#define SR_MII_CTRL_CHANNEL3_ADDR			0x1c0000
+> +#define SR_MII_CTRL_CHANNEL_ADDR(x)			(0x1a0000 + 0x10000 * ((x) - 1))
 
-This might explain why I could never quite get high-speed pulse counting to feel
-right. Thank you!
+
+> +#define AN_ENABLE					BIT(12)
+
+Looks like MDIO_AN_CTRL1_ENABLE
+
+> +#define USXGMII_DUPLEX_FULL				BIT(8)
+> +#define USXGMII_SPEED_MASK				(BIT(13) | BIT(6) | BIT(5))
+> +#define USXGMII_SPEED_10000				(BIT(13) | BIT(6))
+> +#define USXGMII_SPEED_5000				(BIT(13) | BIT(5))
+> +#define USXGMII_SPEED_2500				BIT(5)
+> +#define USXGMII_SPEED_1000				BIT(6)
+> +#define USXGMII_SPEED_100				BIT(13)
+> +#define USXGMII_SPEED_10				0
+
+Looks rather like the standard IEEE 802.3 definitions except for the
+2.5G and 5G speeds. Probably worth a comment stating that they're
+slightly different.
 
 > +
-> +The buffer may overflow if bursts of events occur quicker than they are read
-> +by userspace. If an overflow occurs then the oldest buffered event is
-> +discarded. Overflow can be detected from userspace by monitoring the event
-> +sequence numbers.
+> +/* PPE UNIPHY data type */
+> +struct ppe_uniphy {
+> +	void __iomem *base;
+> +	struct ppe_device *ppe_dev;
+> +	unsigned int index;
+> +	phy_interface_t interface;
+> +	struct phylink_pcs pcs;
+> +};
 > +
-> +To minimize the number of calls required to copy events from the kernel to
-> +userspace, `read()` supports copying multiple events. The number of events
-> +copied is the lower of the number available in the kernel buffer and the
-> +number that will fit in the userspace buffer (``buf``).
-> +
-> +Changing the edge detection flags using gpio-v2-line-set-config-ioctl.rst
-> +does not remove or modify the events already contained in the kernel event
-> +buffer.
-> +
-> +The `read()` will block if no event is available and the ``req_fd`` has not
-> +been set **O_NONBLOCK**.
-> +
-> +The presence of an event can be tested for by checking that the ``req_fd`` is
-> +readable using `poll()` or an equivalent.
-> +
-> +Return Value
-> +============
-> +
-> +On success the number of bytes read, which will be a multiple of the size of a
-> +:c:type:`gpio_v2_line_event` event.
-> +
-> +On error -1 and the ``errno`` variable is set appropriately.
-> +Common error codes are described in error-codes.rst.
-> diff --git a/Documentation/userspace-api/gpio/gpio-v2-line-get-values-ioctl.rst b/Documentation/userspace-api/gpio/gpio-v2-line-get-values-ioctl.rst
-> new file mode 100644
-> index 000000000000..e4e74a1926d8
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/gpio-v2-line-get-values-ioctl.rst
-> @@ -0,0 +1,51 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _GPIO_V2_LINE_GET_VALUES_IOCTL:
-> +
-> +*****************************
-> +GPIO_V2_LINE_GET_VALUES_IOCTL
-> +*****************************
-> +
-> +Name
-> +====
-> +
-> +GPIO_V2_LINE_GET_VALUES_IOCTL - Get the values of requested lines.
-> +
-> +Synopsis
-> +========
-> +
-> +.. c:macro:: GPIO_V2_LINE_GET_VALUES_IOCTL
-> +
-> +``int ioctl(int req_fd, GPIO_V2_LINE_GET_VALUES_IOCTL, struct gpio_v2_line_values *values)``
-> +
-> +Arguments
-> +=========
-> +
-> +``req_fd``
-> +    The file descriptor of the GPIO character device, as returned in the
-> +    :c:type:`request.fd<gpio_v2_line_request>` by gpio-v2-get-line-ioctl.rst.
-> +
-> +``values``
-> +    The :c:type:`line_values<gpio_v2_line_values>` to get with the ``mask`` set
-> +    to indicate the subset of requested lines to get.
-> +
-> +Description
-> +===========
-> +
-> +Get the values of requested lines.
-> +
-> +The values of both input and output lines may be read.
-> +
-> +For output lines, the value returned is driver and configuration dependent and
-> +may be either the output buffer (the last requested value set) or the input
-> +buffer (the actual level of the line), and depending on the hardware and
-> +configuration these may differ.
-> +
-> +Return Value
-> +============
-> +
-> +On success 0 and the corresponding :c:type:`values.bits<gpio_v2_line_values>`
-> +contain the value read.
-> +
-> +On error -1 and the ``errno`` variable is set appropriately.
-> +Common error codes are described in error-codes.rst.
-> diff --git a/Documentation/userspace-api/gpio/gpio-v2-line-set-config-ioctl.rst b/Documentation/userspace-api/gpio/gpio-v2-line-set-config-ioctl.rst
-> new file mode 100644
-> index 000000000000..126c2626ba6b
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/gpio-v2-line-set-config-ioctl.rst
-> @@ -0,0 +1,57 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _GPIO_V2_LINE_SET_CONFIG_IOCTL:
-> +
-> +*****************************
-> +GPIO_V2_LINE_SET_CONFIG_IOCTL
-> +*****************************
-> +
-> +Name
-> +====
-> +
-> +GPIO_V2_LINE_SET_CONFIG_IOCTL - Update the configuration of previously requested lines.
-> +
-> +Synopsis
-> +========
-> +
-> +.. c:macro:: GPIO_V2_LINE_SET_CONFIG_IOCTL
-> +
-> +``int ioctl(int req_fd, GPIO_V2_LINE_SET_CONFIG_IOCTL, struct gpio_v2_line_config *config)``
-> +
-> +Arguments
-> +=========
-> +
-> +``req_fd``
-> +    The file descriptor of the GPIO character device, as returned in the
-> +    :c:type:`request.fd<gpio_v2_line_request>` by gpio-v2-get-line-ioctl.rst.
-> +
-> +``config``
-> +    The new :c:type:`configuration<gpio_v2_line_config>` to apply to the
-> +    requested lines.
-> +
-> +Description
-> +===========
-> +
-> +Update the configuration of previously requested lines, without releasing the
-> +line or introducing potential glitches.
+> +#define pcs_to_ppe_uniphy(_pcs)				container_of(_pcs, struct ppe_uniphy, pcs)
 
-Is this guaranteed by all line drivers?
+As this should only be used in the .c file, I suggest making this a
+static function in the .c file. There should be no requirement to use
+it outside of the .c file.
 
 > +
-> +The new configuration must specify the configuration of all requested lines.
+> +struct ppe_uniphy *ppe_uniphy_setup(struct platform_device *pdev);
 > +
-> +The same :ref:`gpio-v2-get-line-config-rules` that apply when requesting the lines
-> +also apply when updating the line configuration.
+> +int ppe_uniphy_speed_set(struct ppe_uniphy *uniphy,
+> +			 int port, int speed);
 > +
-> +The motivating use case for this command is changing direction of
-> +bi-directional lines between input and output, but it may also be used to
-> +dynamically control edge detection, or more generally move lines seamlessly
-> +from one configuration state to another.
+> +int ppe_uniphy_duplex_set(struct ppe_uniphy *uniphy,
+> +			  int port, int duplex);
 > +
-> +To only change the value of output lines, use
-> +gpio-v2-line-set-values-ioctl.rst.
+> +int ppe_uniphy_adapter_reset(struct ppe_uniphy *uniphy,
+> +			     int port);
 > +
-> +Return Value
-> +============
+> +int ppe_uniphy_autoneg_complete_check(struct ppe_uniphy *uniphy,
+> +				      int port);
 > +
-> +On success 0.
+> +int ppe_uniphy_port_gcc_clock_en_set(struct ppe_uniphy *uniphy,
+> +				     int port, bool enable);
 > +
-> +On error -1 and the ``errno`` variable is set appropriately.
-> +Common error codes are described in error-codes.rst.
-> diff --git a/Documentation/userspace-api/gpio/gpio-v2-line-set-values-ioctl.rst b/Documentation/userspace-api/gpio/gpio-v2-line-set-values-ioctl.rst
-> new file mode 100644
-> index 000000000000..6d2d1886950b
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/gpio-v2-line-set-values-ioctl.rst
-> @@ -0,0 +1,47 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _GPIO_V2_LINE_SET_VALUES_IOCTL:
-> +
-> +*****************************
-> +GPIO_V2_LINE_SET_VALUES_IOCTL
-> +*****************************
-> +
-> +Name
-> +====
-> +
-> +GPIO_V2_LINE_SET_VALUES_IOCTL - Set the values of requested output lines.
-> +
-> +Synopsis
-> +========
-> +
-> +.. c:macro:: GPIO_V2_LINE_SET_VALUES_IOCTL
-> +
-> +``int ioctl(int req_fd, GPIO_V2_LINE_SET_VALUES_IOCTL, struct gpio_v2_line_values *values)``
-> +
-> +Arguments
-> +=========
-> +
-> +``req_fd``
-> +    The file descriptor of the GPIO character device, as returned in the
-> +    :c:type:`request.fd<gpio_v2_line_request>` by gpio-v2-get-line-ioctl.rst.
-> +
-> +``values``
-> +    The :c:type:`line_values<gpio_v2_line_values>` to set with the ``mask`` set
-> +    to indicate the subset of requested lines to set and ``bits`` set to
-> +    indicate the new value.
-> +
-> +Description
-> +===========
-> +
-> +Set the values of requested output lines.
-> +
-> +Only the values of output lines may be set.
-> +Attempting to set the value of an input line is an error (**EPERM**).
+> +#endif /* _PPE_UNIPHY_H_ */
+> diff --git a/include/linux/soc/qcom/ppe.h b/include/linux/soc/qcom/ppe.h
+> index 268109c823ad..d3cb18df33fa 100644
+> --- a/include/linux/soc/qcom/ppe.h
+> +++ b/include/linux/soc/qcom/ppe.h
+> @@ -20,6 +20,7 @@ struct ppe_device {
+>  	struct dentry *debugfs_root;
+>  	bool is_ppe_probed;
+>  	void *ppe_priv;
+> +	void *uniphy;
 
-User beware if they come from some cursed ecosystem where writing a value
-to an input line sets or enables/disables the bias,
+Not struct ppe_uniphy *uniphy? You can declare the struct before use
+via:
 
-eg: https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/
+struct ppe_uniphy;
 
-> +
-> +Return Value
-> +============
-> +
-> +On success 0.
-> +
-> +On error -1 and the ``errno`` variable is set appropriately.
-> +Common error codes are described in error-codes.rst.
-> diff --git a/Documentation/userspace-api/gpio/gpio-v2-lineinfo-changed-read.rst b/Documentation/userspace-api/gpio/gpio-v2-lineinfo-changed-read.rst
-> new file mode 100644
-> index 000000000000..24ad325e7253
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/gpio-v2-lineinfo-changed-read.rst
-> @@ -0,0 +1,81 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. _GPIO_V2_LINEINFO_CHANGED_READ:
-> +
-> +*****************************
-> +GPIO_V2_LINEINFO_CHANGED_READ
-> +*****************************
-> +
-> +Name
-> +====
-> +
-> +GPIO_V2_LINEINFO_CHANGED_READ - Read line info changed events for watched
-> +lines from the chip.
-> +
-> +Synopsis
-> +========
-> +
-> +``int read(int chip_fd, void *buf, size_t count)``
-> +
-> +Arguments
-> +=========
-> +
-> +``chip_fd``
-> +    The file descriptor of the GPIO character device returned by `open()`.
-> +
-> +``buf``
-> +    The buffer to contain the :c:type:`events<gpio_v2_line_info_changed>`.
-> +
-> +``count``
-> +    The number of bytes available in ``buf``, which must be at least the size
-> +    of a :c:type:`gpio_v2_line_info_changed` event.
-> +
-> +Description
-> +===========
-> +
-> +Read line info changed events for watched lines from the chip.
-> +
-> +.. note::
-> +    Monitoring line info changes is not generally required, and would typically
-> +    only be performed by a system monitoring component.
-> +
-> +    These events relate to changes in a line's request state or configuration,
-> +    not its value. Use gpio-v2-line-event-read.rst to receive events when a
-> +    line changes value.
-> +
-> +A line must be watched using gpio-v2-get-lineinfo-watch-ioctl.rst to generate
-> +info changed events.  Subsequently, a request, release, or reconfiguration
-> +of the line will generate an info changed event.
-> +
-> +The kernel timestamps events when they occur and stores them in a buffer
-> +from where they can be read by userspace at its convenience using `read()`.
-> +
-> +The size of the kernel event buffer is fixed at 32 events per ``chip_fd``.
-> +
-> +The buffer may overflow if bursts of events occur quicker than they are read
-> +by userspace. If an overflow occurs then the most recent event is discarded.
-> +Overflow cannot be detected from userspace.
-> +
-> +Events read from the buffer are always in the same order that they were
-> +detected by the kernel, including when multiple lines are being monitored by
-> +the one ``chip_fd``.
-> +
-> +To minimize the number of calls required to copy events from the kernel to
-> +userspace, `read()` supports copying multiple events. The number of events
-> +copied is the lower of the number available in the kernel buffer and the
-> +number that will fit in the userspace buffer (``buf``).
-> +
-> +A `read()` will block if no event is available and the ``chip_fd`` has not
-> +been set **O_NONBLOCK**.
-> +
-> +The presence of an event can be tested for by checking that the ``chip_fd`` is
-> +readable using `poll()` or an equivalent.
-> +
-> +Return Value
-> +============
-> +
-> +On success the number of bytes read, which will be a multiple of the size
-> +of a :c:type:`gpio_v2_line_info_changed` event.
-> +
-> +On error -1 and the ``errno`` variable is set appropriately.
-> +Common error codes are described in error-codes.rst.
-> diff --git a/Documentation/userspace-api/gpio/index.rst b/Documentation/userspace-api/gpio/index.rst
-> new file mode 100644
-> index 000000000000..072b9fa18aea
-> --- /dev/null
-> +++ b/Documentation/userspace-api/gpio/index.rst
-> @@ -0,0 +1,17 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +====
-> +GPIO
-> +====
-> +
-> +.. toctree::
-> +    :maxdepth: 1
-> +
-> +    Character Device Userspace API <chardev>
-> +
-> +.. only::  subproject and html
-> +
-> +   Indices
-> +   =======
-> +
-> +   * :ref:`genindex`
-> diff --git a/Documentation/userspace-api/index.rst b/Documentation/userspace-api/index.rst
-> index 031df47a7c19..8e174a605f69 100644
-> --- a/Documentation/userspace-api/index.rst
-> +++ b/Documentation/userspace-api/index.rst
-> @@ -25,6 +25,7 @@ place where this information is gathered.
->     dma-buf-alloc-exchange
->     ebpf/index
->     ELF
-> +   gpio/index
->     ioctl/index
->     iommu
->     iommufd
-> --
-> 2.39.2
->
->
+so you don't need to include ppe_uniphy.h in this header.
 
+Thanks.
 
 -- 
-Philip Howard
+RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
+FTTP is here! 80Mbps down 10Mbps up. Decent connectivity at last!
 
