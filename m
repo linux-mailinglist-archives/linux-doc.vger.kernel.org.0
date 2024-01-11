@@ -1,142 +1,145 @@
-Return-Path: <linux-doc+bounces-6642-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6644-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD15982A66D
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jan 2024 04:22:45 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 760F982A951
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jan 2024 09:46:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C6CE0B21BAB
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jan 2024 03:22:42 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9C6631C23772
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jan 2024 08:46:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D501E15C5;
-	Thu, 11 Jan 2024 03:22:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5D0C9F9DF;
+	Thu, 11 Jan 2024 08:46:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="MWF2Dpq7"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bQpE2h0o"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C74415A1;
-	Thu, 11 Jan 2024 03:22:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=k1Ho/05+osX5yBSt3dsuOnnijSKuAo5CebqXC420Q7U=; b=MWF2Dpq7Y6wltSXPDDINajcI5z
-	GhKGOIHtn/iLM+LJ31ocb50G/zGRv9WgoBOdPN1TOs8JykLCj8Gl9i6djrIYjtQqas8MjVYXPV0Aq
-	GV3HqHmZZEknI5KXH+mzG2SSyiJ8KsqyI7C03URgKjcGhZ9XT7UpQkKhJKP00wIP9cqBM4sbORtNc
-	xpXLLhh7oo2SJfj8gMZuYuCq47n0a8Hbj7Dcsg1AkLcRT4fFe9YZYapYiTpSWeIhmSs226DK/EE4K
-	DThCQgo5w0AKIpDk9oU4dL36zaeM2RIC3A+ZmqRgriedyiHl+T7jCwTkruDtW9jHj1Oif59TTPvUp
-	9u/kWvSQ==;
-Received: from [50.53.46.231] (helo=[192.168.254.15])
-	by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-	id 1rNleL-00FbcJ-1o;
-	Thu, 11 Jan 2024 03:22:33 +0000
-Message-ID: <55680bae-966a-4a31-85f9-9ca516b80145@infradead.org>
-Date: Wed, 10 Jan 2024 19:22:33 -0800
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9FF211C8C;
+	Thu, 11 Jan 2024 08:45:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-40e61ff3e37so422645e9.1;
+        Thu, 11 Jan 2024 00:45:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1704962757; x=1705567557; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=XnXGwZ90m0aaWtoshE1c+60rdXXd9xE4R+DPUoXirhg=;
+        b=bQpE2h0oOho6RSJJGBJPdo04CCZe45nqNgK8oN+UczucLqK8AJ07HFKt2+IKipXx8R
+         vDX0rzjXzRQXq2bHwacUt2Y7aYCbdKeB5cgTTpYF0K8GwgByAwoCVpYwfDVtxeK0Wbsv
+         rvM92oUnh+A8g6QBUHW8HCgHO0sYGWBBO774qlkBZWY0qdhSspZC5AwndM0cSOymRYff
+         vPUh1sR8iDaeAksE5gpQYbN/3SMpUo5NG/Fs2OjHFRW73F84/9Vgw0Z9+U5WNl8+LDla
+         9wB28AFQ/IJRqgUtND2xihtP4Ozjkbt1Exp3fdsdOznpndmRYCLkgsZCV+aVHf/TLVPn
+         dmSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1704962757; x=1705567557;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=XnXGwZ90m0aaWtoshE1c+60rdXXd9xE4R+DPUoXirhg=;
+        b=h3qTHl2UCyp3U9edeRUPcdSKPB4jFAytMO8F1RDKU3ySqJh5bPR5hnQsjyZo1c9I4D
+         UGplPy76d5+58iCP8L691AC1INO/CwX7zP5wE7GEKhOdm+SQqkzdyVRg1W5QZdRCl6tE
+         JDxxKKu5EeGa4IAkCz+SlNFhT5koRVD7nOBSDCb9raGkKiX7GSw68C//u6P2ZH3LKMvb
+         9Qxqxo80euySgGEGobjneTFOH0OZise/CnPjca3VOaSLYCUTbaHTaVQDw9GStwO9f9cc
+         FJgn4n1qzibANb/CivgOXwW2RF1kbXVFaufzQKiao50re5Rd/OBgs9fbK68WHupoP7fu
+         NGJA==
+X-Gm-Message-State: AOJu0YxJxl3OYedl2qC/AGkyrUgmRCkk7ZbKN2+5rzsaPBh2IdYe0M7A
+	Py/jChAT+FjpmEpMSNSFhjY=
+X-Google-Smtp-Source: AGHT+IHWay0LKAaf6f5AsLsJfQGOlRBcT0TnnnSJL09Q2WvM12Zsgwn+NZHu8+7z/vzkPhYyU0+OlQ==
+X-Received: by 2002:a7b:c414:0:b0:40e:5be9:2ac3 with SMTP id k20-20020a7bc414000000b0040e5be92ac3mr207183wmi.137.1704962756651;
+        Thu, 11 Jan 2024 00:45:56 -0800 (PST)
+Received: from ?IPv6:2003:f6:ef1b:2000:944c:cbc7:1e1c:2c47? (p200300f6ef1b2000944ccbc71e1c2c47.dip0.t-ipconnect.de. [2003:f6:ef1b:2000:944c:cbc7:1e1c:2c47])
+        by smtp.gmail.com with ESMTPSA id l22-20020a05600c4f1600b0040d6b91efd9sm4930135wmq.44.2024.01.11.00.45.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 11 Jan 2024 00:45:56 -0800 (PST)
+Message-ID: <0c0b1954825dc174cab48060e96ddadadc18aefd.camel@gmail.com>
+Subject: Re: [PATCH 01/13] spi: add core support for controllers with
+ offload capabilities
+From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
+To: David Lechner <dlechner@baylibre.com>, Mark Brown <broonie@kernel.org>, 
+ Jonathan Cameron <jic23@kernel.org>, Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley
+ <conor+dt@kernel.org>,  Michael Hennerich <michael.hennerich@analog.com>,
+ Nuno =?ISO-8859-1?Q?S=E1?= <nuno.sa@analog.com>, Frank Rowand
+ <frowand.list@gmail.com>
+Cc: Thierry Reding <thierry.reding@gmail.com>, Uwe
+ =?ISO-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@pengutronix.de>, Jonathan
+ Corbet <corbet@lwn.net>,  linux-spi@vger.kernel.org,
+ linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-pwm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+Date: Thu, 11 Jan 2024 09:49:08 +0100
+In-Reply-To: <20240109-axi-spi-engine-series-3-v1-1-e42c6a986580@baylibre.com>
+References: 
+	<20240109-axi-spi-engine-series-3-v1-0-e42c6a986580@baylibre.com>
+	 <20240109-axi-spi-engine-series-3-v1-1-e42c6a986580@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.3 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/8] buffer: Add kernel-doc for try_to_free_buffers()
-Content-Language: en-US
-To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
- Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20240109143357.2375046-1-willy@infradead.org>
- <20240109143357.2375046-4-willy@infradead.org>
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20240109143357.2375046-4-willy@infradead.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi David,
 
-On 1/9/24 06:33, Matthew Wilcox (Oracle) wrote:
-> The documentation for this function has become separated from it over
-> time; move it to the right place and turn it into kernel-doc.  Mild
-> editing of the content to make it more about what the function does, and
-> less about how it does it.
-> 
-> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-> ---
->  fs/buffer.c | 44 ++++++++++++++++++++++++--------------------
->  1 file changed, 24 insertions(+), 20 deletions(-)
-> 
-> diff --git a/fs/buffer.c b/fs/buffer.c
-> index 071f01b28c90..25861241657f 100644
-> --- a/fs/buffer.c
-> +++ b/fs/buffer.c
-> @@ -2864,26 +2864,6 @@ int sync_dirty_buffer(struct buffer_head *bh)
->  }
->  EXPORT_SYMBOL(sync_dirty_buffer);
->  
-> -/*
-> - * try_to_free_buffers() checks if all the buffers on this particular folio
-> - * are unused, and releases them if so.
-> - *
-> - * Exclusion against try_to_free_buffers may be obtained by either
-> - * locking the folio or by holding its mapping's i_private_lock.
-> - *
-> - * If the folio is dirty but all the buffers are clean then we need to
-> - * be sure to mark the folio clean as well.  This is because the folio
-> - * may be against a block device, and a later reattachment of buffers
-> - * to a dirty folio will set *all* buffers dirty.  Which would corrupt
-> - * filesystem data on the same device.
-> - *
-> - * The same applies to regular filesystem folios: if all the buffers are
-> - * clean then we set the folio clean and proceed.  To do that, we require
-> - * total exclusion from block_dirty_folio().  That is obtained with
-> - * i_private_lock.
-> - *
-> - * try_to_free_buffers() is non-blocking.
-> - */
->  static inline int buffer_busy(struct buffer_head *bh)
->  {
->  	return atomic_read(&bh->b_count) |
-> @@ -2917,6 +2897,30 @@ drop_buffers(struct folio *folio, struct buffer_head **buffers_to_free)
->  	return false;
->  }
->  
-> +/**
-> + * try_to_free_buffers: Release buffers attached to this folio.
 
-preferably s/_buffers: /_buffers - /
+On Wed, 2024-01-10 at 13:49 -0600, David Lechner wrote:
+> This adds a feature for specialized SPI controllers that can record
+> a series of SPI transfers, including tx data, cs assertions, delays,
+> etc. and then play them back using a hardware trigger without CPU
+> intervention.
+>=20
+> The intended use case for this is with the AXI SPI Engine to capture
+> data from ADCs at high rates (MSPS) with a stable sample period.
+>=20
+> Most of the implementation is controller-specific and will be handled by
+> drivers that implement the offload_ops callbacks. The API follows a
+> prepare/enable pattern that should be familiar to users of the clk
+> subsystem.
+>=20
+> Consumers of this API will make calls similar to this:
+>=20
+> =C2=A0=C2=A0=C2=A0 /* in probe() */
+> =C2=A0=C2=A0=C2=A0 offload =3D spi_offload_get(spi, 0);
+> =C2=A0=C2=A0=C2=A0 ...
+>=20
+On top of what Mark already stated, and as we already discussed offline, I
+personally don't like this provider - consumer interface for the offload. T=
+he
+first thing is that this is taking into account the possibility of having
+multiple offload cores. While the FGPA core was designed with that in mind,=
+ we
+don't really have any design using multiple offloads in one spi engine (alw=
+ays
+one). Hence this is all pretty much untested.
 
-> + * @folio: The folio.
-> + *
-> + * If any buffers are in use (dirty, under writeback, elevated refcount),
-> + * no buffers will be freed.
-> + *
-> + * If the folio is dirty but all the buffers are clean then we need to
-> + * be sure to mark the folio clean as well.  This is because the folio
-> + * may be against a block device, and a later reattachment of buffers
-> + * to a dirty folio will set *all* buffers dirty.  Which would corrupt
-> + * filesystem data on the same device.
-> + *
-> + * The same applies to regular filesystem folios: if all the buffers are
-> + * clean then we set the folio clean and proceed.  To do that, we require
-> + * total exclusion from block_dirty_folio().  That is obtained with
-> + * i_private_lock.
-> + *
-> + * Exclusion against try_to_free_buffers may be obtained by either
-> + * locking the folio or by holding its mapping's i_private_lock.
-> + *
-> + * Context: Process context.  @folio must be locked.  Will not sleep.
-> + * Return: true if all buffers attached to this folio were freed.
-> + */
->  bool try_to_free_buffers(struct folio *folio)
->  {
->  	struct address_space * const mapping = folio->mapping;
+If we want to already have this support, my feeling is that we should have =
+a
+simple integer dt property for the peripheral devices (similar to cs). When=
+ a
+device is being created/added, the spi core would parse this property and g=
+et
+it's offload index. The point is that this would all be transparent for spi
+devices drivers that would only have to call the SPI API's and the core wou=
+ld
+make sure the right index is passed to the controller.
 
--- 
-#Randy
+But honestly, IMO, I would just keep things simple for now and assume one c=
+ore
+per engine.
+
+I would probably also prefer to see all the new interfaces part of the
+spi_controller struct directly...
+
+- Nuno S=C3=A1
+
+
 
