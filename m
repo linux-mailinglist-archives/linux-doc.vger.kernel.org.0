@@ -1,107 +1,132 @@
-Return-Path: <linux-doc+bounces-6903-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6905-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65D5982FC9B
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jan 2024 23:24:34 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 279B582FCA5
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jan 2024 23:25:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 04C7A1F2BADA
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Jan 2024 22:24:34 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 44A1F1C27C34
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Jan 2024 22:25:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B174200C4;
-	Tue, 16 Jan 2024 21:18:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C7382E85F;
+	Tue, 16 Jan 2024 21:27:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="I+IRHN1S"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fgw21-7.mail.saunalahti.fi (fgw21-7.mail.saunalahti.fi [62.142.5.82])
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F054E2E416
-	for <linux-doc@vger.kernel.org>; Tue, 16 Jan 2024 21:18:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.142.5.82
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AD502EAEA;
+	Tue, 16 Jan 2024 21:27:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.55.52.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1705439916; cv=none; b=SeS8ufiXNChZblkR0eXXpCq8pjBKPwVlDYQrgB2fxvEjm49dIFijywkdji0g3eYvnRe5pGHAgbFuFXPIBB62Bf6pI88vNz/4UvmCMAuKruaLhrws1vdI5Ye2XFhQUqlu2y7cN2TjMqSZMMGqCocDHcjHBW6OyidrxJlRSYVEzqI=
+	t=1705440457; cv=none; b=aF55CiQqrSPfIfGlWiX9pjHu8dbRRom7QhDfva+pbBCOxFml4+B0Baoj3YVF2LTPuFaPYDbZPkNv5VVGSVoFjTRh1VNWCL4643TcvR09mZcuI7XTWkPFHCHvgD1dUg8cgm6nxzNJ1E4NgRYdLdOadMqe5Q69FKuxxNrDpLnQr1Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1705439916; c=relaxed/simple;
-	bh=lvkTMMRuhJu5viOvzqXhbppQZAvUMGytV+uhbZeFHo0=;
-	h=Received:From:Date:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To; b=YFzcLNLjVn1VbNr+84Z2J8YiKVUz8YtdfpDbyVBPmdNP9kSIu0qODd44y49rgnYNoAyknSjuIZwyGkNqlUbzgbfEIpx784t+v/gUJPQLRPiXDWJG38B6J6VzFOTXmWaZjQ/+PL1Zbv0fZtJC172NofqumcaRV9+w/ktyuluyio8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com; spf=fail smtp.mailfrom=gmail.com; arc=none smtp.client-ip=62.142.5.82
-Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=gmail.com
-Received: from localhost (88-113-24-108.elisa-laajakaista.fi [88.113.24.108])
-	by fgw21.mail.saunalahti.fi (Halon) with ESMTP
-	id a42b3ea7-b4b4-11ee-abf4-005056bdd08f;
-	Tue, 16 Jan 2024 23:17:24 +0200 (EET)
-From: andy.shevchenko@gmail.com
-Date: Tue, 16 Jan 2024 23:17:23 +0200
-To: Philipp Stanner <pstanner@redhat.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Hans de Goede <hdegoede@redhat.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Sam Ravnborg <sam@ravnborg.org>, dakr@redhat.com,
+	s=arc-20240116; t=1705440457; c=relaxed/simple;
+	bh=SLPMdKVtmRbSltsx06ZScUJ6qCa6a3f0g1WFofzyiDI=;
+	h=DKIM-Signature:X-IronPort-AV:X-IronPort-AV:Received:X-ExtLoop1:
+	 X-IronPort-AV:X-IronPort-AV:Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To; b=gIMD6lJ7oPWKqcasBjvVoCiB7BgvaTMi+CX/SR7mfu/NM8T2sNbOsD6pe8RYdHdO/9c3yHz+GY/T3QuDg6yAD/pXo5q60tkqCh575rJJJzcc+OqV0wzq6ZqNFDxdHto8+bQK/4iQl6TNQ3YqmygKw1er5jbZuZsewF2jQdReErk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=I+IRHN1S; arc=none smtp.client-ip=192.55.52.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1705440455; x=1736976455;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=SLPMdKVtmRbSltsx06ZScUJ6qCa6a3f0g1WFofzyiDI=;
+  b=I+IRHN1SbNHNeeZYg+ZA9avzmBMse9xsTHHOtRDja20uQnff9WzRmON1
+   NTWWrkScnHMLi++LF3SIaIwPGJlSKk0qyeGKnCBdQSQVjG1cj41q9mraC
+   ESW0su8Nu42vvLc5pztFq9VGImtGenqEL1DBMzKdIb7U8yA3ASkRg2fZR
+   xRfga8IsTRbUTAySVy0zw2abd9Ht3kbsEIV1MyPBOEGfDliM4j4lRBcAd
+   FyAOFBhknlxaCkorVjibnkiB5tTIlLFeLhZ80U67IIk6pkgL3hch4IvSp
+   CO1VC7+cYtlPH7pCAoIS0Zsx5LzUM+zHCNLxlTa1HzmSP07xDGn4UhsWY
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10955"; a="486149264"
+X-IronPort-AV: E=Sophos;i="6.05,200,1701158400"; 
+   d="scan'208";a="486149264"
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2024 13:27:35 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10955"; a="787585732"
+X-IronPort-AV: E=Sophos;i="6.05,200,1701158400"; 
+   d="scan'208";a="787585732"
+Received: from lkp-server01.sh.intel.com (HELO 961aaaa5b03c) ([10.239.97.150])
+  by fmsmga007.fm.intel.com with ESMTP; 16 Jan 2024 13:27:31 -0800
+Received: from kbuild by 961aaaa5b03c with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1rPqy1-0001G8-07;
+	Tue, 16 Jan 2024 21:27:29 +0000
+Date: Wed, 17 Jan 2024 05:26:59 +0800
+From: kernel test robot <lkp@intel.com>
+To: Subramanya Swamy <subramanya.swamy.linux@gmail.com>, corbet@lwn.net,
+	axboe@kernel.dk, asml.silence@gmail.com, ribalda@chromium.org,
+	rostedt@goodmis.org, bhe@redhat.com, akpm@linux-foundation.org,
+	matteorizzo@google.com, ardb@kernel.org, alexghiti@rivosinc.com,
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linux-pci@vger.kernel.org
-Subject: Re: [PATCH 00/10] Make PCI's devres API more consistent
-Message-ID: <ZabyY3csP0y-p7lb@surfacebook.localdomain>
-References: <20240115144655.32046-2-pstanner@redhat.com>
+	io-uring@vger.kernel.org
+Cc: oe-kbuild-all@lists.linux.dev
+Subject: Re: [PATCH] iouring:added boundary value check for io_uring_group
+ systl
+Message-ID: <202401170507.IOhrswHN-lkp@intel.com>
+References: <20240115124925.1735-1-subramanya.swamy.linux@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240115144655.32046-2-pstanner@redhat.com>
+In-Reply-To: <20240115124925.1735-1-subramanya.swamy.linux@gmail.com>
 
-Mon, Jan 15, 2024 at 03:46:11PM +0100, Philipp Stanner kirjoitti:
-> ¡Hola!
+Hi Subramanya,
 
-i? Vim user? :-)
+kernel test robot noticed the following build warnings:
 
-> PCI's devres API suffers several weaknesses:
-> 
-> 1. There are functions prefixed with pcim_. Those are always managed
->    counterparts to never-managed functions prefixed with pci_ – or so one
->    would like to think. There are some apparently unmanaged functions
->    (all region-request / release functions, and pci_intx()) which
->    suddenly become managed once the user has initialized the device with
->    pcim_enable_device() instead of pci_enable_device(). This "sometimes
->    yes, sometimes no" nature of those functions is confusing and
->    therefore bug-provoking. In fact, it has already caused a bug in DRM.
->    The last patch in this series fixes that bug.
-> 2. iomappings: Instead of giving each mapping its own callback, the
->    existing API uses a statically allocated struct tracking one mapping
->    per bar. This is not extensible. Especially, you can't create
->    _ranged_ managed mappings that way, which many drivers want.
-> 3. Managed request functions only exist as "plural versions" with a
->    bit-mask as a parameter. That's quite over-engineered considering
->    that each user only ever mapps one, maybe two bars.
-> 
-> This series:
-> - add a set of new "singular" devres functions that use devres the way
->   its intended, with one callback per resource.
-> - deprecates the existing iomap-table mechanism.
-> - deprecates the hybrid nature of pci_ functions.
-> - preserves backwards compatibility so that drivers using the existing
->   API won't notice any changes.
-> - adds documentation, especially some warning users about the
->   complicated nature of PCI's devres.
+[auto build test WARNING on akpm-mm/mm-everything]
+[also build test WARNING on linus/master v6.7 next-20240112]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Instead of adding pcim_intx(), please provide proper one for
-pci_alloc_irq_vectors(). Ideally it would be nice to deprecate
-old IRQ management functions in PCI core and delete them in the
-future.
+url:    https://github.com/intel-lab-lkp/linux/commits/Subramanya-Swamy/iouring-added-boundary-value-check-for-io_uring_group-systl/20240115-205112
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-everything
+patch link:    https://lore.kernel.org/r/20240115124925.1735-1-subramanya.swamy.linux%40gmail.com
+patch subject: [PATCH] iouring:added boundary value check for io_uring_group systl
+config: sparc-randconfig-r122-20240116 (https://download.01.org/0day-ci/archive/20240117/202401170507.IOhrswHN-lkp@intel.com/config)
+compiler: sparc-linux-gcc (GCC) 13.2.0
+reproduce: (https://download.01.org/0day-ci/archive/20240117/202401170507.IOhrswHN-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202401170507.IOhrswHN-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> io_uring/io_uring.c:158:21: warning: 'max_gid' defined but not used [-Wunused-variable]
+     158 | static unsigned int max_gid  = 4294967294;  /*4294967294 is the max guid*/
+         |                     ^~~~~~~
+>> io_uring/io_uring.c:157:21: warning: 'min_gid' defined but not used [-Wunused-variable]
+     157 | static unsigned int min_gid;
+         |                     ^~~~~~~
+
+
+vim +/max_gid +158 io_uring/io_uring.c
+
+   154	
+   155	static int __read_mostly sysctl_io_uring_disabled;
+   156	static unsigned int __read_mostly sysctl_io_uring_group;
+ > 157	static unsigned int min_gid;
+ > 158	static unsigned int max_gid  = 4294967294;  /*4294967294 is the max guid*/
+   159	
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
