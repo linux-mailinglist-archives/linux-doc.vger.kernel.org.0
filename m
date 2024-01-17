@@ -1,179 +1,207 @@
-Return-Path: <linux-doc+bounces-6952-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6954-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C69D38303F6
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 11:55:29 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id F259283046C
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 12:21:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 717ED287E34
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 10:55:28 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1540F1C20C59
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 11:21:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CC8C11C2BB;
-	Wed, 17 Jan 2024 10:55:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D83301DA4C;
+	Wed, 17 Jan 2024 11:21:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=codewreck.org header.i=@codewreck.org header.b="Y80toRAW";
-	dkim=pass (2048-bit key) header.d=codewreck.org header.i=@codewreck.org header.b="t+n8lC+5"
+	dkim=pass (1024-bit key) header.d=Sony.onmicrosoft.com header.i=@Sony.onmicrosoft.com header.b="W742/1UG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from nautica.notk.org (nautica.notk.org [91.121.71.147])
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com (mail-bn8nam04on2121.outbound.protection.outlook.com [40.107.100.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D735714AA5;
-	Wed, 17 Jan 2024 10:55:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.121.71.147
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1705488922; cv=none; b=NW/09ZXO1kdIMweXFCmWwtk+8i3WS8A6bQwGD3CF+B3Br9R5EAORJFw4Lr2blRYcYAr9CWN4oL+g2N9urTyQb8HqLwv7vwz39fQ87yhuemx5N/TCBeNbGYA3qLfNpvDpQCEMgm2Yv/8SKc2tBqrIPhgir8ZaKQ4cft8QbDM5HXQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1705488922; c=relaxed/simple;
-	bh=X7ri6/DC7dQ0k7GmkIF8uzW4YU+DeXLsZrOtnLLUppM=;
-	h=Received:DKIM-Signature:X-Spam-Checker-Version:X-Spam-Level:
-	 X-Spam-Status:Received:DKIM-Signature:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:Content-Transfer-Encoding:In-Reply-To; b=ehmvPuxaPYzQV4ZxmFiOILtNlKiS1vv8HsDm4smKV7DrH+wNMCS9jzJa0z2qGr4pRWR6FsgGADmxoBVN5CP4IVxZAYV67WLnaHvMfdnwOM4NpWCJv9yXwJ26tf91bsEzUqbABjZNUVDCb5a5wVJKpAKfqEYxypI7y7TV1PcROBg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codewreck.org; spf=pass smtp.mailfrom=codewreck.org; dkim=pass (2048-bit key) header.d=codewreck.org header.i=@codewreck.org header.b=Y80toRAW; dkim=pass (2048-bit key) header.d=codewreck.org header.i=@codewreck.org header.b=t+n8lC+5; arc=none smtp.client-ip=91.121.71.147
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codewreck.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=codewreck.org
-Received: by nautica.notk.org (Postfix, from userid 108)
-	id D3D05C020; Wed, 17 Jan 2024 11:55:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org; s=2;
-	t=1705488917; bh=QPQ1kHwkpR/bSo/5dfdZfVGrQA0NVwMsugmiUUBqUUA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Y80toRAWRVoIuFVFMKt8O9CH9+xIjHlZIcq0xVi94TZUHBF9cwWdav3kqOXFW9J/U
-	 k8RaIOlzOZc0z/7MJ4MqxnKiO9m0DEQ7TdvvpvcZH44Q1CsJXDOpOfHJaeZrBltCtZ
-	 /ltzVpUFNJpTg75NCLpAVWwTW9IPwiGyXnU+aKDtUbgdmZjb+/mmyg0D3ERy9O3KUL
-	 KeGqo3jtpMDeDZX1JClvR9uGV9vM7BlvpqpEyeeYIXd/mu1sGy8SKUxUKZAo6dhByx
-	 MiTx+tLd2cptwL8pHDLbjQ/gWRnW8h4veeWdpUFffxclpnhYHpYnih2T0l69Ys0XJf
-	 H3NYWSe98cZCw==
-X-Spam-Level: 
-Received: from gaia.codewreck.org (localhost [127.0.0.1])
-	by nautica.notk.org (Postfix) with ESMTPS id 1EC8DC009;
-	Wed, 17 Jan 2024 11:55:12 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org; s=2;
-	t=1705488916; bh=QPQ1kHwkpR/bSo/5dfdZfVGrQA0NVwMsugmiUUBqUUA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=t+n8lC+5sdDFiHuENr4ruAOhrP5KsC2TfPzE81RyUjeCaSeWq1Dg/N1SuVOBLU2wZ
-	 I01/y48CGIUHlPrJqda07B7OR1HfSzbXAy7LnjE3JBYZx0RJdUQtGBx3QNeGyecCee
-	 d8XqzNq5hdZmQHtk0uAnxxBuVXEUiQcK5k9n0dLNk5rDtC9QSK4F78HD0C4r58yLMq
-	 NlHGvCDqQ9UNxn8MdSvQcxv0gn/OxysVNbNSTao35v8v+r12I3GbnpxD4lyu4p9gr4
-	 1YPEFUO6ItprrRyMSqSKD23o+ZU/dQfP8uTFpNqWozhLSRZeynqlqq8oSkp1cbkm5y
-	 JuP4s6mfnz8zw==
-Received: from localhost (gaia.codewreck.org [local])
-	by gaia.codewreck.org (OpenSMTPD) with ESMTPA id 9ed4a2fc;
-	Wed, 17 Jan 2024 10:55:08 +0000 (UTC)
-Date: Wed, 17 Jan 2024 19:54:53 +0900
-From: Dominique Martinet <asmadeus@codewreck.org>
-To: Jan =?utf-8?B?TMO8YmJl?= <jlu@pengutronix.de>
-Cc: Michael Grzeschik <m.grzeschik@pengutronix.de>,
-	Latchesar Ionkov <lucho@ionkov.net>, linux-usb@vger.kernel.org,
-	Jonathan Corbet <corbet@lwn.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	v9fs@lists.linux.dev,
-	Christian Schoenebeck <linux_oss@crudebyte.com>,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	kernel@pengutronix.de, Eric Van Hensbergen <ericvh@kernel.org>
-Subject: Re: [PATCH 0/3] usb: gadget: 9pfs transport
-Message-ID: <Zaex_fkKcui7QZd7@codewreck.org>
-References: <20240116-ml-topic-u9p-v1-0-ad8c306f9a4e@pengutronix.de>
- <ZaZsUQUhSlMPLJg0@codewreck.org>
- <0aba51a8be0fb165b44ec956bec7a9698a9518a2.camel@pengutronix.de>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EFE11D697;
+	Wed, 17 Jan 2024 11:21:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.100.121
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1705490489; cv=fail; b=UDq/7wkJYAdCQabe1rnsf5tGBMTc4zJQyrYXh+zeaCm/YC9bTYXUL+ql79+3lLrWHLB/wun2gQAFyhCMv58h/GpF5dIxryKBR7xHnMOB/d1X4OiIxCpfKrccMMY7p7FnhYRoKEeDvHro15eG2/UaYax2gfnHIdBF0+Vw8F/CVlA=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1705490489; c=relaxed/simple;
+	bh=BCh2q5Tk2/R59h3MSewVzFJoLeEuMsWynLM8dyMpfA8=;
+	h=ARC-Message-Signature:ARC-Authentication-Results:DKIM-Signature:
+	 Received:Received:X-MS-Exchange-Authentication-Results:
+	 Received-SPF:Received:Received:Received:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding:X-EOPAttributedMessage:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:Content-Type:
+	 X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+	 X-MS-Exchange-CrossTenant-AuthSource:
+	 X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped; b=jxws8FON25ydWeT8+YStNdeUqxXVIAkAw635cxRzsAvZpSuKV3Z+1tnuq2PSVrdQb1qp1yVwF0HQCfGDJaaGQa86247C2+iVfEoMXKhW0QAvyG5nMmFwLuutyJtr/fPobhMAdOhJ9/A08Nsdipflu8zXQdRZrEfUrRmZ51D/xpE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=sony.com; spf=pass smtp.mailfrom=Sony.onmicrosoft.com; dkim=pass (1024-bit key) header.d=Sony.onmicrosoft.com header.i=@Sony.onmicrosoft.com header.b=W742/1UG; arc=fail smtp.client-ip=40.107.100.121
+Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=sony.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=Sony.onmicrosoft.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=X53tbEx631u30xHyXgdcMcUg1s80YZwVEwNg/0yHIkitumL6RqGnZSUZ7Yr26h/WcmpUnV0rQsUx/hnolbTrpzOWbG1ECzWdMXvVGjKrDll0AqkBgMzaROS5cUDeZzJPSFhT3KsPnpGCQHgRt5C0p501GSoaZ2iNLVlaCDFCbl/ON69SLjOrCMoqInx5Dl2pLj13GxXpRKuoUkaZDEWwJK9RKv/yU/V7/Gv4eBt65eN8q39ulnSyfj3ibztC8IakywgSEgMCoGfR6SrG9MNKXf8qchmST2+SYplqN43gY8por/VwPXDi5zRo6EpNz7PWFP27mKa8su8aI3DxckA3sQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HLRaZ2XnB9Rpbe5Pr/xd1PmmB0yRDEZ04eKbHFb+Ibo=;
+ b=KiDoYUbQTlaGsj0bNxchPVHqfdvgAcjX56aH1Hxk2rLXJdR7TjEwTT9w29WeFuLdVSmH6adG9taMy3DQQEgzw+06q1OgiY6LtV5Z/VHUsI5gwDZNxY4iDYmCS6yXzKIEUoR6t0+914E1/rlbRfQPCOiT0YEghMqPLW6Cqt7m5z1rDbdJqwCrr5VXQiqCIugSujYgfZ3fnc+qdtaKs2q1VideaAWPQl8AYiTWAo597ekHBJE1KgbsLPcq2zG3gwAEBT72I4wTMF+bjPwBIWMlk8dGBB9lUQJy6tcl0DFBptU7G31gvRpbK7+ESkcCvTab90TPsneBdMyEF5Mq2D8yxA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 121.100.38.196) smtp.rcpttodomain=vger.kernel.org
+ smtp.mailfrom=mail.sony.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=sony.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Sony.onmicrosoft.com;
+ s=selector2-Sony-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HLRaZ2XnB9Rpbe5Pr/xd1PmmB0yRDEZ04eKbHFb+Ibo=;
+ b=W742/1UGxuSsmI88dqxEgWVa+AAHgjwyMVtXYVLI+xnn8doOBzz8BI3Zx8A3utglx1rsImabz1n7szM2P15dbcgA6m/CTqI++SOv62KZxWiNzj0MbvUWWgRLB7tVER4c1bDR6Ln0U7T4G/acVw6EXt5VsEgV+uGcHh2OM8WF0/Y=
+Received: from CY5PR22CA0061.namprd22.prod.outlook.com (2603:10b6:930:80::6)
+ by SA1PR13MB4878.namprd13.prod.outlook.com (2603:10b6:806:1a2::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.23; Wed, 17 Jan
+ 2024 11:21:23 +0000
+Received: from CY4PEPF0000E9D6.namprd05.prod.outlook.com
+ (2603:10b6:930:80:cafe::b9) by CY5PR22CA0061.outlook.office365.com
+ (2603:10b6:930:80::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.23 via Frontend
+ Transport; Wed, 17 Jan 2024 11:21:23 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 121.100.38.196)
+ smtp.mailfrom=mail.sony.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=sony.com;
+Received-SPF: Fail (protection.outlook.com: domain of mail.sony.com does not
+ designate 121.100.38.196 as permitted sender)
+ receiver=protection.outlook.com; client-ip=121.100.38.196;
+ helo=gepdcl07.sg.gdce.sony.com.sg;
+Received: from gepdcl07.sg.gdce.sony.com.sg (121.100.38.196) by
+ CY4PEPF0000E9D6.mail.protection.outlook.com (10.167.241.80) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7181.14 via Frontend Transport; Wed, 17 Jan 2024 11:21:23 +0000
+Received: from gepdcl02.s.gdce.sony.com.sg (SGGDCSE1NS07.sony.com.sg [146.215.123.196])
+	by gepdcl07.sg.gdce.sony.com.sg (8.14.7/8.14.4) with ESMTP id 40HBL5YJ004733
+	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Wed, 17 Jan 2024 19:21:05 +0800
+Received: from mail.sony.com ([43.88.80.246])
+	by gepdcl02.s.gdce.sony.com.sg (8.14.7/8.14.4) with ESMTP id 40HBFsxD021765;
+	Wed, 17 Jan 2024 19:15:54 +0800
+Received: by mail.sony.com (Postfix, from userid 1000)
+	id C59B920C0300; Wed, 17 Jan 2024 16:44:13 +0530 (IST)
+From: Sreenath Vijayan <sreenath.vijayan@sony.com>
+To: john.ogness@linutronix.de, corbet@lwn.net, gregkh@linuxfoundation.org,
+        jirislaby@kernel.org, rdunlap@infradead.org, pmladek@suse.com
+Cc: rostedt@goodmis.org, senozhatsky@chromium.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org,
+        taichi.shimoyashiki@sony.com, daniel.palmer@sony.com,
+        anandakumar.balasubramaniam@sony.com, sreenath.vijayan@sony.com
+Subject: [PATCH v3 2/2] tty/sysrq: Dump printk ring buffer messages via sysrq
+Date: Wed, 17 Jan 2024 16:43:52 +0530
+Message-ID: <57daf43c5270f7532b269b9f0e90d126ca012354.1705331453.git.sreenath.vijayan@sony.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1705331453.git.sreenath.vijayan@sony.com>
+References: <cover.1705331453.git.sreenath.vijayan@sony.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <0aba51a8be0fb165b44ec956bec7a9698a9518a2.camel@pengutronix.de>
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D6:EE_|SA1PR13MB4878:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 43f05b76-3282-4d73-3a1d-08dc174e703e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	/Q4fOTTI5kIXPzkJhxQMN/W+/70PFScFTjillhpY5FshjnSONS/w7Xp3BI+vOHAuh0+oXvC3yaucl07M8UywIqUsWWvssOODQ0tONzzBlovcfK7BDM2wjbohMNJ8TBwxgdeJtes/z75qMaJS6HoE3wNkMTUp/x0btUmGb++nv5FKCQwnv6DRUoOyP9vBBkJM0AlyrqrGMbK2l69zLEHexk1ldTPA9B4kDDB2erSXqL75c01hh90rHU214kBT0AJXOTSRbLCiwBaF6VPv43UzlV2TPtSs8qng9mb4beJlHsdtw2GG9dpUmSvXH3VwYWo/aX8DVT9pqeBiVrHNC+LY5y025E7DGVIHGOdogin9i0Gkuyo5Fcl0ZokFsg8ST1WvmQRUgZt8wkf6bGQ66CA6Crysgj1OiT4O5u9XA+9CPQBoxdSaMkd2ADQJElawmPNhEq9oytte7jM5xUa9/eO5swo+Lo4Vr0FZ+LF/ew/tJlBnJr8pDkBrond1r7TVeye1eHrIH0q9K/xFwRIyrwWECtzDy2yUNIjaRE8Wa5CfK3e4sD+OrZN+LjHdY++LaI8n3Bedz+SXWXhdm6mV1aIxVmafI7n44gERZOMhggnkT+KeBLvzzU7P0VVvzL8a+dVsBOuJOGP4FoYkfKLMOsunsek4/kHBPmSROLC7hkVjinp7nNCmHCfcVIUrDOoWb6Dv+BBLCpRwzvuf9oB9qwiR1mtzc4T9tohiu2Iw6mRs6fYTqChOFqAglDrq3UB8ZNqU
+X-Forefront-Antispam-Report:
+	CIP:121.100.38.196;CTRY:SG;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:gepdcl07.sg.gdce.sony.com.sg;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(346002)(136003)(376002)(396003)(39860400002)(230922051799003)(451199024)(1800799012)(64100799003)(82310400011)(40470700004)(46966006)(336012)(426003)(6266002)(26005)(83380400001)(107886003)(6666004)(2616005)(47076005)(35950700001)(5660300002)(44832011)(4326008)(8676002)(15650500001)(41300700001)(2906002)(8936002)(498600001)(316002)(450100002)(42186006)(70206006)(70586007)(36756003)(83170400001)(82740400003)(81166007)(356005)(82960400001)(40480700001)(40460700003);DIR:OUT;SFP:1102;
+X-OriginatorOrg: sony.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jan 2024 11:21:23.0594
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 43f05b76-3282-4d73-3a1d-08dc174e703e
+X-MS-Exchange-CrossTenant-Id: 66c65d8a-9158-4521-a2d8-664963db48e4
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=66c65d8a-9158-4521-a2d8-664963db48e4;Ip=[121.100.38.196];Helo=[gepdcl07.sg.gdce.sony.com.sg]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000E9D6.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR13MB4878
 
-Jan Lübbe wrote on Tue, Jan 16, 2024 at 04:51:41PM +0100:
-> > So I didn't have time to look at everything through, just want to make
-> > sure, this series allows sharing data from an usb gadget (e.g. some
-> > device with storage) over 9p as an alternative to things like MTP ?
-> 
-> It's the other way around. :) The USB host exports a filesystem, while the
-> gadget on the USB device side makes it mountable. Our main use-case is to use it
-> as an alternative to NFS root booting during the development of embedded Linux
-> devices. NFS root works in many cases, but has some downsides, which make it
-> cumbersome to use in more and more cases.
+When terminal is unresponsive, one cannot use dmesg to view printk
+ring buffer messages. Also, syslog services may be disabled,
+to check the messages after a reboot, especially on embedded systems.
+In this scenario, dump the printk ring buffer messages via sysrq
+by pressing sysrq+D.
 
-Oh!
-Okay, this makes a lot more sense. And that'll need a bit more
-explanations in the commits & Documentation/ as you've concluded :)
+Signed-off-by: Sreenath Vijayan <sreenath.vijayan@sony.com>
+Signed-off-by: Shimoyashiki Taichi <taichi.shimoyashiki@sony.com>
+---
+ Documentation/admin-guide/sysrq.rst |  2 ++
+ drivers/tty/sysrq.c                 | 20 +++++++++++++++++++-
+ 2 files changed, 21 insertions(+), 1 deletion(-)
 
-
-> NFS root needs correctly configured Ethernet interfaces on both the development
-> host and the target device. On the target, this can interfere with the network
-> configuration that is used for the normal device operation (DHCP client, ...).
-> For the host, configuring a NFS (and perhaps DHCP) server can be an obstacle.
-> 
-> For target devices which don't have a real Ethernet interface, NFS root would
-> also work with the USB Ethernet gadget, but this increases the complexity
-> further.
-> 
-> As many embedded boards have a USB device port anyway, which is used during
-> development for uploading the boot-loader and to flash filesystem images (i.e.
-> via the fastboot protocol), we want to just reuse that single data cable to
-> allow access to the root filesystem as well. 
-> 
-> Compared to flashing images, using a network filesystem like NFS and 9P reduces
-> the time between compiling on the host and running the binary on the target, as
-> no flash and reboot cycle is needed. That can get rid of many minutes of waiting
-> over a day. :)
-
-My other hat is on embedded development (dayjob at Atmark Techno[1], the
-only english page linked is about 4 years out of date but I guess it's
-better than no page at all), so I can understand where you're coming
-from -- thanks for the background.
-
-[1] https://www.atmark-techno.com/english
-
-That means I'll actually want to test this, but kind of always busy so
-it might take a few weeks...
-Or better, do you happen to know if qemu can create a USB controller
-that supports OTG so it'll be easy to test for folks with no such
-hardware?
-We've got enough 9p protocols that aren't actually tested on a regular
-basis, it'd be great if we could have something that can run anywhere. 
-
-
-> diod (9pfs server) and the forwarder are on the development host, where the root
-> filesystem is actually stored. The gadget is initialized during boot (or later)
-> on the embedded board. Then the forwarder will find it on the USB bus and start
-> forwarding requests.
-> 
-> It may seem a bit unusual that in this case the requests come from the device
-> and are handled by the host. The reason is that USB device ports are normally
-> not available on PCs, so a connection in the other direction would not work.
-
-Right, most host PCs won't have OTG available...
-I was also perplexed by the linux foundation (0x1d6b):0x0109 id, that
-might be clearer once it's properly documented -- I'll let someone from
-the usb side chime on this as I have no idea what's appropriate.
-
-
-> In the future, the functionality of the forwarder could be integrated into the
-> 9pfs server. Alternatively, an improved forwarder could also react to udev
-> events of gadgets showing up and forward them to different 9PFS server over the
-> network (when you have multiple target devices connected to one USB host).
-
-Plenty of potential work ahead :)
-Frankly at this stage I don't think it's much simpler than e.g. CDC
-ethernet gadget and mounting nfs over tcp, but with further improvements
-it can definitely get simpler.
-
-
-> Perhaps, the inverse setup (9PFS server on the USB gadget side, mounted on a PC)
-> also would be useful in the future and could share some of this code. Then,
-> you'd have an alternative to MTP.
-
-(Yeah, I'm not actively looking for that -- was just asking because MTP
-has been kind of dead lately and I'm not aware of any potential
-alternative, but I didn't go looking for them either -- let's leave that
-to later)
-
+diff --git a/Documentation/admin-guide/sysrq.rst b/Documentation/admin-guide/sysrq.rst
+index 51906e47327b..246a7b61a0eb 100644
+--- a/Documentation/admin-guide/sysrq.rst
++++ b/Documentation/admin-guide/sysrq.rst
+@@ -152,6 +152,8 @@ Command	    Function
+             will be printed to your console. (``0``, for example would make
+             it so that only emergency messages like PANICs or OOPSes would
+             make it to your console.)
++
++``D``	    Dump the printk ring buffer
+ =========== ===================================================================
+ 
+ Okay, so what can I use them for?
+diff --git a/drivers/tty/sysrq.c b/drivers/tty/sysrq.c
+index 6b4a28bcf2f5..1976412706a4 100644
+--- a/drivers/tty/sysrq.c
++++ b/drivers/tty/sysrq.c
+@@ -450,6 +450,24 @@ static const struct sysrq_key_op sysrq_unrt_op = {
+ 	.enable_mask	= SYSRQ_ENABLE_RTNICE,
+ };
+ 
++static void dmesg_dump_callback(struct work_struct *work)
++{
++	dump_printk_buffer();
++}
++
++static DECLARE_WORK(sysrq_dmesg_work, dmesg_dump_callback);
++
++static void sysrq_handle_dmesg_dump(u8 key)
++{
++	queue_work(system_unbound_wq, &sysrq_dmesg_work);
++}
++static struct sysrq_key_op sysrq_dmesg_dump_op = {
++	.handler        = sysrq_handle_dmesg_dump,
++	.help_msg       = "dump-dmesg(D)",
++	.action_msg     = "Dump dmesg",
++	.enable_mask    = SYSRQ_ENABLE_DUMP,
++};
++
+ /* Key Operations table and lock */
+ static DEFINE_SPINLOCK(sysrq_key_table_lock);
+ 
+@@ -505,7 +523,7 @@ static const struct sysrq_key_op *sysrq_key_table[62] = {
+ 	NULL,				/* A */
+ 	NULL,				/* B */
+ 	NULL,				/* C */
+-	NULL,				/* D */
++	&sysrq_dmesg_dump_op,		/* D */
+ 	NULL,				/* E */
+ 	NULL,				/* F */
+ 	NULL,				/* G */
 -- 
-Dominique Martinet | Asmadeus
+2.43.0
+
 
