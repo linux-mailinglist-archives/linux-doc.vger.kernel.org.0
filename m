@@ -1,120 +1,156 @@
-Return-Path: <linux-doc+bounces-6993-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6998-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A7C6830B0F
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 17:29:50 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FA86830B3B
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 17:37:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D2C7A1F298F8
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 16:29:49 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C732B1C20DC9
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 16:37:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E7D1A224D2;
-	Wed, 17 Jan 2024 16:29:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 031B223756;
+	Wed, 17 Jan 2024 16:36:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="SX5+csvS"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="dYd+rijC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48F8C224C3;
-	Wed, 17 Jan 2024 16:29:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCB84225AD
+	for <linux-doc@vger.kernel.org>; Wed, 17 Jan 2024 16:36:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1705508985; cv=none; b=qXIAKBpJQDD/BUMuzS6NWYyLbj10qRXII5Ff6JCQGvBseSDi7mI7PBZ41Pp7MznX5XDvYJjIrzvu5LXJzos6fyxCBNc+GFPYzPkMrBxGnAo5C5SdfLTrE5WHitrlEsGC9kpDHCecf9YOw69WXIt1fEpTU3boVvBDbZG/Lt1uk7c=
+	t=1705509381; cv=none; b=g7tWV0A7WOlANcip8Egr+i9c6OMrVIeJet5fCtrGtSSTbaxFFbaGI8HW325SnfgyLLXJTCoWgOj1JD3psSejhuX2RDEsKIBq80FOKin7ByT7GxYOUgUCGXJ8hP/HzB2KG2iCcgSqJz4ZFP7lUXXqG8IN0Dpd8VVwzDu2QGXdevg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1705508985; c=relaxed/simple;
-	bh=CwjVhhZSI8VSqpRmWRYZGMThYo4rjalyLo4FdpGWXA8=;
-	h=Received:DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:Date:
-	 Message-ID:MIME-Version:Content-Type; b=DH/SGjMXeEo0ddEHXtgxuSiPAoSZsUxYZ5zxan1qcp6IOU8MzEA7RualSTP+kqNlbdrnBuv2zxAF0q6oXZ5o5psCWVk3e7dU7swBkzxdhCnIjnJiZLF0OhLU6U7RjB6dCiR2ppCTp7VVj/Gke4DZj+trxRoS9iZRSvp7rFCUZo4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=SX5+csvS; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-Received: from localhost (unknown [IPv6:2601:280:5e00:7e19::646])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	s=arc-20240116; t=1705509381; c=relaxed/simple;
+	bh=zEdw6+4t3gWkhLRYybEMf2j+xLGxSJtwIdZKm2vmD5o=;
+	h=DKIM-Signature:Received:X-MC-Unique:Received:Received:From:To:Cc:
+	 Subject:Date:Message-Id:MIME-Version:Content-Transfer-Encoding:
+	 X-Scanned-By; b=ogWnQ9xfffFM7wkDv8Lls374dcIj2nqK1P8phNjPRuSdtv6QufIWIczPDG1+9Ouy7Nb0nmIvloh+WnNYNbUqJ4W64Ylt7OXf9JlfOGfQxTFKI+cJE6RdgDhj1L91w2/bQvlaSKfX295emjWtwOHNVqFsac379gZ/qudZ/LYbido=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=dYd+rijC; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1705509377;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=rjFWU3VSZDE3kD8BQKWbnkhbf707TtYyOuJ5RUq9a7I=;
+	b=dYd+rijCtLuhpHxqD2GM/s1eEji4x9ju/WUGUDIR4I1OySoLrqetavToRevo7Owzwv1cAr
+	RcjzbUHVeroLbVjjkGYI1J6loG161bAaOgHRoA2NMGReP+bEoUa10/DMNgyOOLgFZYbxJC
+	sFAMyVsW3aMZjDuGTy7F/V/d8Xvc/jY=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-594-zLf2wzouOPWbYK-3U-_Ipw-1; Wed, 17 Jan 2024 11:36:06 -0500
+X-MC-Unique: zLf2wzouOPWbYK-3U-_Ipw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com [10.11.54.3])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 530A17A2D;
-	Wed, 17 Jan 2024 16:29:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 530A17A2D
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1705508981; bh=jHJ+CDea2C3oBwgn2MbGNZABf4yKJU6Tg4CmC3TFv8o=;
-	h=From:To:Cc:Subject:Date:From;
-	b=SX5+csvSyiSldIygVEGgfe5ue4euCuDMgYlyrUpQSQF5BOR9fFHZt/FnAM37NQJO/
-	 qpWzcWl/MFBaMcnYGHbhRxQdWPdYlsa9WNOANelxnxX9CjVqXy+bHlKCNVVvb45qeN
-	 LMSOFP/w7hiqp/GGEmLLLnU4q2EYY+HfnXvImcfqQsrDq4XItQvjFK4BNLjCXMas0z
-	 UKccP9zYP9skDbyq0dh1k50aDnh9WOEC7ZqVCJrYrrs4dZOabhsdcBu5h9NbKBsjeq
-	 v6sGBSmxmtP0MHVp7+5ydMjUTveg4QeEWx5xnYcUCoN0U4O1XYI7o/aaQjHaCHWRCs
-	 jNgtPJa1d9F5Q==
-From: Jonathan Corbet <corbet@lwn.net>
-To: Linus Torvalds <torvalds@linuxfoundation.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [GIT PULL] Documentation fixes for 6.8
-Date: Wed, 17 Jan 2024 09:29:40 -0700
-Message-ID: <87h6jb6hzf.fsf@meer.lwn.net>
+	by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A874982A6CF;
+	Wed, 17 Jan 2024 16:36:04 +0000 (UTC)
+Received: from llong.com (unknown [10.22.16.147])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 4A0101121312;
+	Wed, 17 Jan 2024 16:36:02 +0000 (UTC)
+From: Waiman Long <longman@redhat.com>
+To: Tejun Heo <tj@kernel.org>,
+	Zefan Li <lizefan.x@bytedance.com>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Frederic Weisbecker <frederic@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	"Paul E. McKenney" <paulmck@kernel.org>,
+	Neeraj Upadhyay <quic_neeraju@quicinc.com>,
+	Joel Fernandes <joel@joelfernandes.org>,
+	Josh Triplett <josh@joshtriplett.org>,
+	Boqun Feng <boqun.feng@gmail.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Lai Jiangshan <jiangshanlai@gmail.com>,
+	Zqiang <qiang.zhang1211@gmail.com>,
+	Davidlohr Bueso <dave@stgolabs.net>,
+	Shuah Khan <shuah@kernel.org>
+Cc: cgroups@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	rcu@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	Mrunal Patel <mpatel@redhat.com>,
+	Ryan Phillips <rphillips@redhat.com>,
+	Brent Rowsell <browsell@redhat.com>,
+	Peter Hunt <pehunt@redhat.com>,
+	Cestmir Kalina <ckalina@redhat.com>,
+	Nicolas Saenz Julienne <nsaenz@kernel.org>,
+	Alex Gladkov <agladkov@redhat.com>,
+	Marcelo Tosatti <mtosatti@redhat.com>,
+	Phil Auld <pauld@redhat.com>,
+	Paul Gortmaker <paul.gortmaker@windriver.com>,
+	Daniel Bristot de Oliveira <bristot@kernel.org>,
+	Juri Lelli <juri.lelli@redhat.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Costa Shulyupin <cshulyup@redhat.com>,
+	Waiman Long <longman@redhat.com>
+Subject: [RFC PATCH 0/8] cgroup/cpuset: Support RCU_NOCB on isolated partitions
+Date: Wed, 17 Jan 2024 11:35:03 -0500
+Message-Id: <20240117163511.88173-1-longman@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
 
-The following changes since commit 2d179e8ac02e33c82c1a314961254353eb5028b3:
+This patch series is based on the RFC patch from Frederic [1]. Instead
+of offering RCU_NOCB as a separate option, it is now lumped into a
+root-only cpuset.cpus.isolation_full flag that will enable all the
+additional CPU isolation capabilities available for isolated partitions
+if set. RCU_NOCB is just the first one to this party. Additional dynamic
+CPU isolation capabilities will be added in the future.
 
-  MAINTAINERS: use tabs for indent of CONFIDENTIAL COMPUTING THREAT MODEL (2024-01-08 11:39:00 -0700)
+The first 2 patches are adopted from Federic with minor twists to fix
+merge conflicts and compilation issue. The rests are for implementing
+the new cpuset.cpus.isolation_full interface which is essentially a flag
+to globally enable or disable full CPU isolation on isolated partitions.
+On read, it also shows the CPU isolation capabilities that are currently
+enabled. RCU_NOCB requires that the rcu_nocbs option be present in
+the kernel boot command line. Without that, the rcu_nocb functionality
+cannot be enabled even if the isolation_full flag is set. So we allow
+users to check the isolation_full file to verify that if the desired
+CPU isolation capability is enabled or not.
 
-are available in the Git repository at:
+Only sanity checking has been done so far. More testing, especially on
+the RCU side, will be needed.
 
-  git://git.lwn.net/linux.git tags/docs-6.8-2
+[1] https://lore.kernel.org/lkml/20220525221055.1152307-1-frederic@kernel.org/
 
-for you to fetch changes up to ead8467f96d6dc35bbf8c63ee9d244a357ede84a:
+Frederic Weisbecker (2):
+  rcu/nocb: Pass a cpumask instead of a single CPU to offload/deoffload
+  rcu/nocb: Prepare to change nocb cpumask from CPU-hotplug protected
+    cpuset caller
 
-  docs, kprobes: Add loongarch as supported architecture (2024-01-11 09:36:37 -0700)
+Waiman Long (6):
+  rcu/no_cb: Add rcu_nocb_enabled() to expose the rcu_nocb state
+  cgroup/cpuset: Better tracking of addition/deletion of isolated CPUs
+  cgroup/cpuset: Add cpuset.cpus.isolation_full
+  cgroup/cpuset: Enable dynamic rcu_nocb mode on isolated CPUs
+  cgroup/cpuset: Document the new cpuset.cpus.isolation_full control
+    file
+  cgroup/cpuset: Update test_cpuset_prs.sh to handle
+    cpuset.cpus.isolation_full
 
-----------------------------------------------------------------
-A handful of late-arriving documentation fixes.
+ Documentation/admin-guide/cgroup-v2.rst       |  24 ++
+ include/linux/rcupdate.h                      |  15 +-
+ kernel/cgroup/cpuset.c                        | 237 ++++++++++++++----
+ kernel/rcu/rcutorture.c                       |   6 +-
+ kernel/rcu/tree_nocb.h                        | 118 ++++++---
+ .../selftests/cgroup/test_cpuset_prs.sh       |  23 +-
+ 6 files changed, 337 insertions(+), 86 deletions(-)
 
-----------------------------------------------------------------
-Baruch Siach (1):
-      docs: admin-guide: hw_random: update rng-tools website
+-- 
+2.39.3
 
-Tiezhu Yang (2):
-      docs, kprobes: Update email address of Masami Hiramatsu
-      docs, kprobes: Add loongarch as supported architecture
-
-Vegard Nossum (2):
-      Documentation: constrain alabaster package to older versions
-      docs: kernel_feat.py: fix potential command injection
-
-attreyee-muk (1):
-      Documentation/core-api: fix spelling mistake in workqueue
-
- Documentation/admin-guide/features.rst             |  2 +-
- Documentation/admin-guide/hw_random.rst            |  5 +-
- Documentation/arch/arc/features.rst                |  2 +-
- Documentation/arch/arm/features.rst                |  2 +-
- Documentation/arch/arm64/features.rst              |  2 +-
- Documentation/arch/loongarch/features.rst          |  2 +-
- Documentation/arch/m68k/features.rst               |  2 +-
- Documentation/arch/mips/features.rst               |  2 +-
- Documentation/arch/nios2/features.rst              |  2 +-
- Documentation/arch/openrisc/features.rst           |  2 +-
- Documentation/arch/parisc/features.rst             |  2 +-
- Documentation/arch/powerpc/features.rst            |  2 +-
- Documentation/arch/riscv/features.rst              |  2 +-
- Documentation/arch/s390/features.rst               |  2 +-
- Documentation/arch/sh/features.rst                 |  2 +-
- Documentation/arch/sparc/features.rst              |  2 +-
- Documentation/arch/x86/features.rst                |  2 +-
- Documentation/arch/xtensa/features.rst             |  2 +-
- Documentation/core-api/workqueue.rst               |  2 +-
- Documentation/sphinx/kernel_feat.py                | 55 +++++-----------------
- Documentation/sphinx/requirements.txt              |  2 +
- Documentation/trace/kprobes.rst                    |  3 +-
- .../translations/zh_CN/arch/loongarch/features.rst |  2 +-
- .../translations/zh_CN/arch/mips/features.rst      |  2 +-
- .../translations/zh_TW/arch/loongarch/features.rst |  2 +-
- .../translations/zh_TW/arch/mips/features.rst      |  2 +-
- 26 files changed, 39 insertions(+), 70 deletions(-)
 
