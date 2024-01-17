@@ -1,158 +1,278 @@
-Return-Path: <linux-doc+bounces-6944-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6925-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B1A38301BD
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 09:58:46 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 66EE9830193
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 09:55:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id BB68B1F26728
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 08:58:45 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id E72211F25AD9
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 08:55:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9F51E12B92;
-	Wed, 17 Jan 2024 08:56:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7297F13FED;
+	Wed, 17 Jan 2024 08:54:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b="DSjlAS8M"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="A4SNebiV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 214AB12B6C
-	for <linux-doc@vger.kernel.org>; Wed, 17 Jan 2024 08:56:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AADD913AEE
+	for <linux-doc@vger.kernel.org>; Wed, 17 Jan 2024 08:54:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1705481803; cv=none; b=fDX3cJEwVswlvHddF8TZcPAuiq8oKA+d9lyUIFeEQrMVNd/DthcgYMq0mRfbUeiissXdZl0cfVhmqeEfBitrmFIv21gMbAlbKAjt0B53z3tyWRScpbU1qiXwtGUN3FgcGu7RjrDqAFV0AlE8gyeO4ktJEv8DBC7NV80zILu35oI=
+	t=1705481695; cv=none; b=qV3VRB9ipKASeeYYAorvnSQY7ml/tjJMChntec7+l2T54bb4Ixer/kn7zAuYGWyWhEw7mmnYqGT7l9q2ZlZ3rRywiE0ktTtikCu+lt9jvXIaobmiaB3xkX5eP4zZjnKGHAEMZkkwYkHmm+GcY0jVufWkLsAXRy6kIay5jCSvWo8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1705481803; c=relaxed/simple;
-	bh=Jii6fX0ic5w5qMoYBFxltxmF2hjifAZam+8PWSINLnA=;
-	h=Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Google-Smtp-Source:X-Received:Received:From:
-	 To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding; b=ZQPywtK3p1Hy5kHf8vOH2xxCGRcOOKKrKamQ4JfHaD14faC8jcbmnl3OKTszwienfZcFCY3mV4nWe8Yo2ZGC1b4PrVOtMZs08dLZ96ZYAIEpmT5XL+PFS1MWWFOzcPTJJaH5m0kKpD5L13lhAY3YCldIGNCjOvnbmiMQPpshfio=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com; spf=pass smtp.mailfrom=bytedance.com; dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b=DSjlAS8M; arc=none smtp.client-ip=209.85.160.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bytedance.com
-Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-204235d0913so7012949fac.1
-        for <linux-doc@vger.kernel.org>; Wed, 17 Jan 2024 00:56:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1705481801; x=1706086601; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=go4Vs1Ubv/hS773yJGURKRCxyCNGdiSDMhcIn69n/QY=;
-        b=DSjlAS8MwVWxe4T47TEAiHgSEMCa34tfyz9wZJbMK0n8CdFBudUGYv4zvarobf8Cfs
-         bn5nPe/8iGB6YLnwH+RDmeHeSNGldBoBmpMVk6bdZlpbcoTfeAwJrcNTZdNAB0V8cAmm
-         DeJGSVvfNI2V+cS2BBiHm9f+UPfOWhx9DFqyO23QtCseCSRSgK8Mi/QWHEvo2bRFXynV
-         HWrPzJQmXajW9ZTsjzGoQ/UcRUV38CABOCZW/s+95kBUwXP5X/RwFC1o28HHPK8Ns+dO
-         r4taz1J909jIpRxUqbDu2u2H31QQ+V5F1Wf/Uf23o2zRI2BNCPdYQqWh0KmUgqqexrdq
-         tB5A==
+	s=arc-20240116; t=1705481695; c=relaxed/simple;
+	bh=YbhqHgZ8qrRwRRdHssnLB+nFCjalZT7Y0BQbw4Hg2cQ=;
+	h=DKIM-Signature:Received:X-MC-Unique:Received:
+	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Received:
+	 X-Google-Smtp-Source:X-Received:Received:Message-ID:Subject:From:
+	 To:Cc:Date:In-Reply-To:References:Content-Type:
+	 Content-Transfer-Encoding:User-Agent:MIME-Version; b=cafKP2gDTdjQz9nyzwOr+KUgedBvIoLP1sdel3gphwbTtMH2q23iwV+6vnyCNinYvaL3KuEnhu2tFvRrzDFIl4oYVLXM66Z13/JvGPZgNg4MqrgQhRWWgl2yBLKiRUp2omaH8fwG+MjYyJm2udl635U6CtvFOW7LQJU86MVCvoo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=A4SNebiV; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1705481692;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=D00hU3PzeJuPDTbACxnMMgiUCTQ91p211OWtV23tV44=;
+	b=A4SNebiV+WI0csUla7zNRisE0lhY/CmPVFhVO5p3fiwP4pXQuD/GyevMlOUjVKmoxqHp88
+	3vMV/u8xVLz0HpmgS6f/IcyuwaJnShzDtxK8MOdxbWuXsIfgMiwdK/gRW6FbVEtk0VMDhi
+	AT+nxBcsBUoJ4CEoJjvWQUOKtgSE0BY=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-638-dm1xePh-M1uLiB2DLkUpbQ-1; Wed, 17 Jan 2024 03:54:51 -0500
+X-MC-Unique: dm1xePh-M1uLiB2DLkUpbQ-1
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-7830635331bso203159285a.1
+        for <linux-doc@vger.kernel.org>; Wed, 17 Jan 2024 00:54:51 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705481801; x=1706086601;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=go4Vs1Ubv/hS773yJGURKRCxyCNGdiSDMhcIn69n/QY=;
-        b=prDDsjf+zexQN9r43AcrGp30itDwHE4P4BOdHx41Z7DutZYDqS6bZzHp0FtohwC0ik
-         PNSpsJ0Fs2x1ioYZrab/rXHdHZv5NXTq0lxm2Bo7BnIOMX7+HO1G+XxSj1Dv9yw/aMmz
-         IRFX10VgdNUaorK0Uab+5fHXN7YyxKyy41wcsOcYNDqNqaNaawdfoCHRkKBj1jvJd5F8
-         NjH0hdmNkjhgjmNXDMfDBRXOp0UcSRSwzfVoclDqkOo8wJtoUPapLutOrfDEtvOwSzBp
-         4Zz5SlbbZLH5FCg8wnTL9Y25OljaODcMOjQJv7Q5sqT5tD1AtVdHlT6UKqd9RJxLBM3b
-         bR/w==
-X-Gm-Message-State: AOJu0YzqJ3v3juUcnB+aM5WClrVtwyEAdPq/DsuPdwLTLCHMRya03Rsf
-	ZfFjBIzcZ76JVngL2ze+7m+YNyuAda/BeA==
-X-Google-Smtp-Source: AGHT+IHzXZQ651QR48qYQK3goo/FqUmsGCcl/Y8eJIkwGTQHzdjd21HNfMjv4K6S2Qd3nE7F4eJFOQ==
-X-Received: by 2002:a05:6870:e0cb:b0:206:878:61d8 with SMTP id a11-20020a056870e0cb00b00206087861d8mr11503527oab.19.1705481800126;
-        Wed, 17 Jan 2024 00:56:40 -0800 (PST)
-Received: from C02G87K0MD6R.bytedance.net ([203.208.167.154])
-        by smtp.gmail.com with ESMTPSA id cb19-20020a056a02071300b005cdbebd61d8sm10006224pgb.9.2024.01.17.00.56.36
+        d=1e100.net; s=20230601; t=1705481691; x=1706086491;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=D00hU3PzeJuPDTbACxnMMgiUCTQ91p211OWtV23tV44=;
+        b=Ids4Cn035e+TMnfj+Ex0zi5Nmi70zzzQSV5N+qjDBeWRxOVYGdLM5D9ASHXs3wGKyg
+         U/sE8Mv1YNd7iLr/EAuhq8Lfi/A077tIN2PWsyYJRtWhjGc5Y9tToeHjfahSiaXBD9b9
+         aoRM+l37oH+HUvKEpDoC1z31o9BljPXXAmt5H3Lg+iTKK3vVMpqHPm9BnmiFWBCNOubr
+         lLx7dBGnjgO8nqSEhKoBNdPpWofYNxAniw/t7DXgubuaHuryUglmU33YCE4vcC8BKh4+
+         RDRo7JUYtmby7OwqBl1M2aYuGa2UBRmWfi6QouLc8iKn9Lz5uX+CaUd4K7pPcsZNh9iq
+         9ZIA==
+X-Gm-Message-State: AOJu0YxTka1slo/OeqwwTETWeLp//MDGy0J08prykU6Y/kHqZgW8T4EW
+	Qid9Acb+aK62Ldngx2IUqp7UqpvFCOuZV5uq8SnRbcMm5Wu3Evz+NPRzLxB/htfHZW57dxuZ5x+
+	IutY3Rf/nkYQQE6qooQu8nixT2Fl3
+X-Received: by 2002:a05:620a:8019:b0:783:68ab:9ade with SMTP id ee25-20020a05620a801900b0078368ab9ademr1389359qkb.7.1705481690792;
+        Wed, 17 Jan 2024 00:54:50 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH/PfPCNwITnjUQYv8Uu8hwD3Ulky89OHnA+85OkcfyY06xXLEGkkaNflyvHvodm12ON4wvqw==
+X-Received: by 2002:a05:620a:8019:b0:783:68ab:9ade with SMTP id ee25-20020a05620a801900b0078368ab9ademr1389343qkb.7.1705481690454;
+        Wed, 17 Jan 2024 00:54:50 -0800 (PST)
+Received: from pstanner-thinkpadt14sgen1.remote.csb (nat-pool-muc-t.redhat.com. [149.14.88.26])
+        by smtp.gmail.com with ESMTPSA id vr28-20020a05620a55bc00b0078199077d0asm4355821qkn.125.2024.01.17.00.54.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Jan 2024 00:56:39 -0800 (PST)
-From: Hao Jia <jiahao.os@bytedance.com>
-To: mark.rutland@arm.com,
-	rmk+kernel@armlinux.org.uk,
-	catalin.marinas@arm.com,
-	corbet@lwn.net,
-	will@kernel.org,
-	willy@infradead.org
-Cc: linux-arm-kernel@lists.infradead.org,
-	linux-doc@vger.kernel.org,
-	Hao Jia <jiahao.os@bytedance.com>
-Subject: [PATCH v3 19/19] arm64: text replication: keep modules inside module region when REPLICATE_KTEXT is enabled
-Date: Wed, 17 Jan 2024 16:53:57 +0800
-Message-Id: <20240117085357.31693-20-jiahao.os@bytedance.com>
-X-Mailer: git-send-email 2.39.2 (Apple Git-143)
-In-Reply-To: <20240117085357.31693-1-jiahao.os@bytedance.com>
-References: <20240117085357.31693-1-jiahao.os@bytedance.com>
+        Wed, 17 Jan 2024 00:54:50 -0800 (PST)
+Message-ID: <1983517bf5d0c98894a7d40fbec353ad75160cb4.camel@redhat.com>
+Subject: Re: [PATCH 01/10] pci: add new set of devres functions
+From: Philipp Stanner <pstanner@redhat.com>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Hans de Goede <hdegoede@redhat.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie
+ <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, Bjorn Helgaas
+ <bhelgaas@google.com>, Sam Ravnborg <sam@ravnborg.org>, dakr@redhat.com,
+ linux-pci@vger.kernel.org,  linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org,  linux-doc@vger.kernel.org
+Date: Wed, 17 Jan 2024 09:54:47 +0100
+In-Reply-To: <20240116184436.GA101781@bhelgaas>
+References: <20240116184436.GA101781@bhelgaas>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-Kernel text replication requires maintaining a separate per-node page table
-for kernel text. To accomplish this without affecting other kernel memory maps,
-it is best to place the kernel in a location that does not share L0 page
-table entries with any other mappings.
+On Tue, 2024-01-16 at 12:44 -0600, Bjorn Helgaas wrote:
+> On Mon, Jan 15, 2024 at 03:46:12PM +0100, Philipp Stanner wrote:
+> > PCI's devres API is not extensible to ranged mappings and has
+> > bug-provoking features. Improve that by providing better
+> > alternatives.
+>=20
+> I guess "ranged mappings" means a mapping that doesn't cover an
+> entire
+> BAR?=C2=A0 Maybe there's a way to clarify?
 
-So, limit the module_alloc() address range so that they do not overlap.
+That's what it's supposed to mean, yes.
+We could give it the longer title "mappings smaller than the whole BAR"
+or something, I guess.
 
-Signed-off-by: Hao Jia <jiahao.os@bytedance.com>
----
- arch/arm64/kernel/module.c | 20 ++++++++++++++++++--
- 1 file changed, 18 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/kernel/module.c b/arch/arm64/kernel/module.c
-index dd851297596e..53e1c5e50907 100644
---- a/arch/arm64/kernel/module.c
-+++ b/arch/arm64/kernel/module.c
-@@ -112,6 +112,7 @@ subsys_initcall(module_init_limits);
- 
- void *module_alloc(unsigned long size)
- {
-+	u64 module_direct_end, module_plt_end;
- 	void *p = NULL;
- 
- 	/*
-@@ -119,18 +120,33 @@ void *module_alloc(unsigned long size)
- 	 * kernel such that no PLTs are necessary.
- 	 */
- 	if (module_direct_base) {
-+#ifdef CONFIG_REPLICATE_KTEXT
-+		/*
-+		 * Kernel text replication requires an L0 page table entry to
-+		 * be exclusive to kernel text, so no other mappings should be
-+		 * shared with it.
-+		 */
-+		module_direct_end = MODULES_END;
-+#else
-+		module_direct_end = module_direct_base + SZ_128M;
-+#endif
- 		p = __vmalloc_node_range(size, MODULE_ALIGN,
- 					 module_direct_base,
--					 module_direct_base + SZ_128M,
-+					 module_direct_end,
- 					 GFP_KERNEL | __GFP_NOWARN,
- 					 PAGE_KERNEL, 0, NUMA_NO_NODE,
- 					 __builtin_return_address(0));
- 	}
- 
- 	if (!p && module_plt_base) {
-+#ifdef CONFIG_REPLICATE_KTEXT
-+		module_plt_end = MODULES_END;
-+#else
-+		module_plt_end = module_plt_base + SZ_2G;
-+#endif
- 		p = __vmalloc_node_range(size, MODULE_ALIGN,
- 					 module_plt_base,
--					 module_plt_base + SZ_2G,
-+					 module_plt_end,
- 					 GFP_KERNEL | __GFP_NOWARN,
- 					 PAGE_KERNEL, 0, NUMA_NO_NODE,
- 					 __builtin_return_address(0));
--- 
-2.20.1
+>=20
+> > When the original devres API for PCI was implemented, priority was
+> > given
+> > to the creation of a set of "pural functions" such as
+> > pcim_request_regions(). These functions have bit masks as
+> > parameters to
+> > specify which BARs shall get mapped. Most users, however, only use
+> > those
+> > to mapp 1-3 BARs.
+> > A complete set of "singular functions" does not exist.
+>=20
+> s/mapp/map/
+>=20
+> Rewrap to fill 75 columns or add blank lines between paragraphs.=C2=A0
+> Also
+> below.
+>=20
+> > As functions mapping / requesting multiple BARs at once have
+> > (almost) no
+> > mechanism in C to return the resources to the caller of the plural
+> > function, the devres API utilizes the iomap-table administrated by
+> > the
+> > function pcim_iomap_table().
+> >=20
+> > The entire PCI devres implementation was strongly tied to that
+> > table
+> > which only allows for mapping whole, complete BARs, as the BAR's
+> > index
+> > is used as table index. Consequently, it's not possible to, e.g.,
+> > have a
+> > pcim_iomap_range() function with that mechanism.
+> >=20
+> > An additional problem is that pci-devres has been ipmlemented in a
+> > sort
+> > of "hybrid-mode": Some unmanaged functions have managed
+> > counterparts
+> > (e.g.: pci_iomap() <-> pcim_iomap()), making their managed nature
+> > obvious to the programmer. However, the region-request functions in
+> > pci.c, prefixed with pci_, behave either managed or unmanaged,
+> > depending
+> > on whether pci_enable_device() or pcim_enable_device() has been
+> > called
+> > in advance.
+>=20
+> s/ipmlemented/implemented/
+>=20
+> > This hybrid API is confusing and should be more cleanly separated
+> > by
+> > providing always-managed functions prefixed with pcim_.
+> >=20
+> > Thus, the existing devres API is not desirable because:
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0a) The vast majority of=
+ the users of the plural functions
+> > only
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ever sets =
+a single bit in the bit mask, consequently
+> > making
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 them singu=
+lar functions anyways.
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0b) There is no mechanis=
+m to request / iomap only part of a
+> > BAR.
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0c) The iomap-table mech=
+anism is over-engineered,
+> > complicated and
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 can by def=
+inition not perform bounds checks, thus,
+> > provoking
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 memory fau=
+lts: pcim_iomap_table(pdev)[42]
+>=20
+> Not sure what "pcim_iomap_table(pdev)[42]" means.
+
+That function currently is implemented with this prototype:
+void __iomem * const *pcim_iomap_table(struct pci_dev *pdev);
+
+And apparently, it's intended to index directly over the function. And
+that's how at least part of the users use it indeed.
+
+Here in drivers/crypto/inside-secure/safexcel.c, L.1919 for example:
+
+	priv->base =3D pcim_iomap_table(pdev)[0];
+
+I've never seen something that wonderful in C ever before, so it's not
+surprising that you weren't sure what I mean....
+
+pcim_iomap_table() can not and does not perform any bounds check. If
+you do
+
+void __iomem *mappy_map_mapface =3D pcim_iomap_table(pdev)[42];
+
+then it will just return random garbage, or it faults. No -EINVAL or
+anything. You won't even get NULL.
+
+That's why this function must die.
+
+
+>=20
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0d) region-request funct=
+ions being sometimes managed and
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sometimes =
+not is bug-provoking.
+>=20
+> Indent with spaces (not tabs) so it still looks good when "git log"
+> adds spaces to indent.
+>=20
+> > + * Legacy struct storing addresses to whole mapped bars.
+>=20
+> s/bar/BAR/ (several places).
+>=20
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* A region spaning an entir=
+e bar. */
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0PCIM_ADDR_DEVRES_TYPE_REGION=
+,
+> > +
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* A region spaning an entir=
+e bar, and a mapping for that
+> > whole bar. */
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0PCIM_ADDR_DEVRES_TYPE_REGION=
+_MAPPING,
+> > +
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/*
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * A mapping within a bar, e=
+ither spaning the whole bar or
+> > just a range.
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Without a requested regio=
+n.
+>=20
+> s/spaning/spanning/ (several places).
+>=20
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (start =3D=3D 0 || len =
+=3D=3D 0) /* that's an unused BAR. */
+>=20
+> s/that/That/
+>=20
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/*
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Ranged mappings don't get=
+ added to the legacy-table,
+> > since the table
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * only ever keeps track of =
+whole BARs.
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
+> > +
+>=20
+> Spurious blank line.
+
+
+I'll take care of the grammar and spelling stuff in v2.
+
+Thanks,
+P.
+
+>=20
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0devres_add(&pdev->dev, res);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return mapping;
+> > +}
+> > +EXPORT_SYMBOL(pcim_iomap_range);
+>=20
+> Bjorn
+>=20
 
 
