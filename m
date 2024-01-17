@@ -1,316 +1,87 @@
-Return-Path: <linux-doc+bounces-6986-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-6988-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C9908308BE
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 15:53:34 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 857D68309A0
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 16:22:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 71E921C20F58
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 14:53:33 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 39AD71F230A9
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jan 2024 15:22:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6C9C922EFB;
-	Wed, 17 Jan 2024 14:50:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 30E05219F3;
+	Wed, 17 Jan 2024 15:22:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="jkl3iEhx"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="pQBu0e8R"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-fw-80009.amazon.com (smtp-fw-80009.amazon.com [99.78.197.220])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBA442232C;
-	Wed, 17 Jan 2024 14:50:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=99.78.197.220
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54D6D219F1
+	for <linux-doc@vger.kernel.org>; Wed, 17 Jan 2024 15:22:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1705503010; cv=none; b=jFdl5+M4UOQbB3Ke1UKv/VLhW8hucAcP6zkErbhrFZjW6asPUs4Y/bfzp5VcXk6EjOv/gCx5yHQMVCd67UQaDNu0JSI0GJ8R+YmALLHReb7EGhXxrCHLH1WX/JfmLBaTOjTMulWAoCMPxvyGbpGgWR0V+gK2HS3VqsIaVbBcLHo=
+	t=1705504950; cv=none; b=cMIkFMFuZ4gGG4ianXOZIw3yiK9VKJT6Mhr2mzipMOCwvvYiyKX2nwWQImDlQH6TXsYQPJS+Y2fZHBlwtToqQZXucVQMUUEA8D63rOA+xDKkiAyK18CBtfsO7AUmKysRbv5QvrmcgLwwsdbE+aiaW1dPu2Lzvvebr/hMnAUqqT4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1705503010; c=relaxed/simple;
-	bh=M4xsVfV/+F5mriFinfpf39EQh3DfNKpLBBjzXyGsAmE=;
-	h=DKIM-Signature:X-IronPort-AV:Received:Received:Received:
-	 X-Farcaster-Flow-ID:Received:Received:From:To:CC:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 X-Originating-IP:X-ClientProxiedBy:Content-Type:
-	 Content-Transfer-Encoding; b=V4beWm6oODMo1Fu7ViIY8cN6IGdw8FrEuwTCnIu4wvZAK9N2H7Usl4ji79+d3qSgjLHUvpx0XE8AmcNLYpgKYh5OIe4ddZVAMeQ9mfvI+zyFN0BSkL6w2fFrte6RvuqieSBuhi/YpRvGtdMCgkb/9auFr1LA+gIp5fEleCfAh6g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com; spf=pass smtp.mailfrom=amazon.de; dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b=jkl3iEhx; arc=none smtp.client-ip=99.78.197.220
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1705503008; x=1737039008;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=tPlYmxW2bD4g5p/4BZUhVQG9FE6x6xhR8RJRJRx13Io=;
-  b=jkl3iEhxFN0r8FVHPk+eTNYHtb7St1LRYKDU5CIMW5vvgeIJ3hUKqvc3
-   iFGAX1F5bNZiHNpeHFFNpqfzln+edLxuQUeloqqehxwEOsFd7AtrnmwuY
-   LJVLBqoDmAUI+WnguZjWKFxMUitYysZm4zo5BlTovRnkZexvLdFs9kV5m
-   I=;
-X-IronPort-AV: E=Sophos;i="6.05,200,1701129600"; 
-   d="scan'208";a="58930648"
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO email-inbound-relay-pdx-2a-m6i4x-21d8d9f4.us-west-2.amazon.com) ([10.25.36.210])
-  by smtp-border-fw-80009.pdx80.corp.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jan 2024 14:50:08 +0000
-Received: from smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev (pdx2-ws-svc-p26-lb5-vlan2.pdx.amazon.com [10.39.38.66])
-	by email-inbound-relay-pdx-2a-m6i4x-21d8d9f4.us-west-2.amazon.com (Postfix) with ESMTPS id 1DF7988A4B;
-	Wed, 17 Jan 2024 14:50:07 +0000 (UTC)
-Received: from EX19MTAUWC001.ant.amazon.com [10.0.21.151:3171]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.0.206:2525] with esmtp (Farcaster)
- id b53c9c00-2d51-410c-8d2a-13bacadca1c2; Wed, 17 Jan 2024 14:50:06 +0000 (UTC)
-X-Farcaster-Flow-ID: b53c9c00-2d51-410c-8d2a-13bacadca1c2
-Received: from EX19D020UWC004.ant.amazon.com (10.13.138.149) by
- EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Wed, 17 Jan 2024 14:50:06 +0000
-Received: from dev-dsk-graf-1a-5ce218e4.eu-west-1.amazon.com (10.253.83.51) by
- EX19D020UWC004.ant.amazon.com (10.13.138.149) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Wed, 17 Jan 2024 14:50:02 +0000
-From: Alexander Graf <graf@amazon.com>
-To: <linux-kernel@vger.kernel.org>
-CC: <linux-trace-kernel@vger.kernel.org>, <linux-mm@kvack.org>,
-	<devicetree@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<kexec@lists.infradead.org>, <linux-doc@vger.kernel.org>, <x86@kernel.org>,
-	Eric Biederman <ebiederm@xmission.com>, "H . Peter Anvin" <hpa@zytor.com>,
-	Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
-	Steven Rostedt <rostedt@goodmis.org>, Andrew Morton
-	<akpm@linux-foundation.org>, Mark Rutland <mark.rutland@arm.com>, "Tom
- Lendacky" <thomas.lendacky@amd.com>, Ashish Kalra <ashish.kalra@amd.com>,
-	James Gowans <jgowans@amazon.com>, Stanislav Kinsburskii
-	<skinsburskii@linux.microsoft.com>, <arnd@arndb.de>, <pbonzini@redhat.com>,
-	<madvenka@linux.microsoft.com>, Anthony Yznaga <anthony.yznaga@oracle.com>,
-	Usama Arif <usama.arif@bytedance.com>, David Woodhouse <dwmw@amazon.co.uk>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>, Rob Herring
-	<robh+dt@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>
-Subject: [PATCH v3 17/17] Documentation: KHO: Add ftrace bindings
-Date: Wed, 17 Jan 2024 14:47:04 +0000
-Message-ID: <20240117144704.602-18-graf@amazon.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240117144704.602-1-graf@amazon.com>
-References: <20240117144704.602-1-graf@amazon.com>
+	s=arc-20240116; t=1705504950; c=relaxed/simple;
+	bh=IiMaPOqpUzn1pJI+Dgu8m7VuIzEgUtD8Pt2lbXXzmlI=;
+	h=Received:DKIM-Filter:DKIM-Signature:From:To:Subject:In-Reply-To:
+	 References:Date:Message-ID:MIME-Version:Content-Type; b=KVJxlkKoZFlzzcR8nJiJpdubryQZkp7JnO0iSR3JbgTj//JXGW2JadN7wQmUvCsAlA0/l30iKZV7wjRDe4UK7GqRUHMDml3vDy6kHIOYw4eWusKUwXx9yxVEG5GSEmYM0lXLCWlDJzObYzUJzqczWL9wE/l5Rin8a/GmnyvURWA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=pQBu0e8R; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+Received: from localhost (unknown [IPv6:2601:280:5e00:7e19::646])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 36F0079C0;
+	Wed, 17 Jan 2024 15:22:27 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 36F0079C0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1705504947; bh=yjKec3Ad63HOwUz/a2RJqXwD/ORuXY+Ut49R6doCb5U=;
+	h=From:To:Subject:In-Reply-To:References:Date:From;
+	b=pQBu0e8RyAxtfQOtUUVp3+QsdnJ9Gs6YPYGnxNifFhB3AugxgHEgOg2oeYkPEViYM
+	 6nSDZYh3FhP0z9bfoRD+wFJFexSk8dbrfGum/pliNtHx76hftbgonAhong0P7y5/F7
+	 cl6Lv09ZpXtvfKWHYylktjm5AojMRKY/J7GNs0z86ZtVVhz9ocPsb1fnwyDDL4nyee
+	 9dlslvAOvHTGVGsCnDQVzs/GTtWVkTLC+cyWeHDVHSlAGoCsqQVw5f/CNQ8sNXxRcV
+	 C/FOflYipAmshnhTTr3vjP52GDa/t/kU1dc+K/gWAhR43pNaMr9BWQIu3exsSWxl8O
+	 IqF8onTM5OHpw==
+From: Jonathan Corbet <corbet@lwn.net>
+To: Anna-Maria Behnsen <anna-maria@linutronix.de>, linux-doc@vger.kernel.org
+Subject: Re: Help required - kernel-doc, code block and backslash
+In-Reply-To: <871qagb41s.fsf@somnus>
+References: <87y1cqbg01.fsf@somnus> <87ttnee69t.fsf@meer.lwn.net>
+ <878r4pxlnw.fsf@somnus> <87jzo9b09p.fsf@meer.lwn.net>
+ <871qagb41s.fsf@somnus>
+Date: Wed, 17 Jan 2024 08:22:26 -0700
+Message-ID: <87v87s56j1.fsf@meer.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-ClientProxiedBy: EX19D041UWB004.ant.amazon.com (10.13.139.143) To
- EX19D020UWC004.ant.amazon.com (10.13.138.149)
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 
-We introduced KHO into Linux: A framework that allows Linux to pass
-metadata and memory across kexec from Linux to Linux. KHO reuses fdt
-as file format and shares a lot of the same properties of firmware-to-
-Linux boot formats: It needs a stable, documented ABI that allows for
-forward and backward compatibility as well as versioning.
+Anna-Maria Behnsen <anna-maria@linutronix.de> writes:
 
-As first user of KHO, we introduced ftrace which can now preserve
-trace contents across kexec, so you can use the post-kexec kernel to
-read traces from the pre-kexec kernel.
+> Maybe I'm on the wrong track (definitely possible as I am a
+> scripting/tooling amateur), but I thought identifiers option takes a
+> list of functions or types and not filenames?
 
-This patch adds ftrace schemas similar to "device" device tree ones to
-a new kho bindings directory. This allows us to force contributors to
-document the data that moves across KHO kexecs and catch breaking change
-during review.
+No, you're right.  I was talking about the type of matching desired.
 
-Signed-off-by: Alexander Graf <graf@amazon.com>
+> In case the filename-glob matching is this what I would call wildcard
+> matching, then I would propose to enable this for the existing
+> option. In case regexes are required as well, maybe another option like
+> '[no-]identifiers-regex' could be introduced.
 
----
+Given that we've gotten by with no matching support until now, I don't
+think that we need to add two types :)  Basic globbing it is, though I
+can't promise to get it done right away.  That will have to be done on
+the Perl side, and I get really slow in that world...
 
-v2 -> v3:
+Thanks,
 
-  - Fix make dt_binding_check
-  - Add descriptions for each object
-  - s/trace_flags/trace-flags/
-  - s/global_trace/global-trace/
-  - Make all additionalProperties false
-  - Change subject to reflect subsysten (dt-bindings)
-  - Fix indentation
-  - Remove superfluous examples
-  - Convert to 64bit syntax
-  - Move to kho directory
----
- .../kho/bindings/ftrace/ftrace-array.yaml     | 38 ++++++++++++
- .../kho/bindings/ftrace/ftrace-cpu.yaml       | 43 +++++++++++++
- Documentation/kho/bindings/ftrace/ftrace.yaml | 62 +++++++++++++++++++
- 3 files changed, 143 insertions(+)
- create mode 100644 Documentation/kho/bindings/ftrace/ftrace-array.yaml
- create mode 100644 Documentation/kho/bindings/ftrace/ftrace-cpu.yaml
- create mode 100644 Documentation/kho/bindings/ftrace/ftrace.yaml
-
-diff --git a/Documentation/kho/bindings/ftrace/ftrace-array.yaml b/Documentation/kho/bindings/ftrace/ftrace-array.yaml
-new file mode 100644
-index 000000000000..aa0007595b95
---- /dev/null
-+++ b/Documentation/kho/bindings/ftrace/ftrace-array.yaml
-@@ -0,0 +1,38 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/kho/ftrace/ftrace-array.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Ftrace trace array
-+
-+maintainers:
-+  - Alexander Graf <graf@amazon.com>
-+
-+description: |
-+  Ftrace can create and expose multiple different trace instances, see
-+  https://docs.kernel.org/trace/ftrace.html#instances. Each instance is
-+  backed by a single trace array which contains all information about where
-+  the corresponding trace buffers are located and how they are configured.
-+
-+properties:
-+  compatible:
-+    enum:
-+      - ftrace,array-v1
-+
-+  trace-flags:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    description: |
-+      Bitmap of all the trace flags that were enabled in the trace array at the
-+      point of serialization.
-+
-+patternProperties:
-+  cpu[0-9a-f]*:
-+    $ref: ftrace-cpu.yaml#
-+    description: Trace buffer location for each CPU
-+
-+required:
-+  - compatible
-+  - trace-flags
-+
-+additionalProperties: false
-diff --git a/Documentation/kho/bindings/ftrace/ftrace-cpu.yaml b/Documentation/kho/bindings/ftrace/ftrace-cpu.yaml
-new file mode 100644
-index 000000000000..95dec1c94fc3
---- /dev/null
-+++ b/Documentation/kho/bindings/ftrace/ftrace-cpu.yaml
-@@ -0,0 +1,43 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/kho/ftrace/ftrace-cpu.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Ftrace per-CPU ring buffer contents
-+
-+maintainers:
-+  - Alexander Graf <graf@amazon.com>
-+
-+description: |
-+  An ftrace trace array contains a ring buffers for each CPU. This
-+  object describes the buffers of such a single CPU. It describes which
-+  CPU it was used in and which memory was backing the ring buffer.
-+
-+properties:
-+  compatible:
-+    enum:
-+      - ftrace,cpu-v1
-+
-+  cpu:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    description: |
-+      CPU number of the CPU that this ring buffer belonged to when it was
-+      serialized.
-+
-+  mem:
-+    $ref: /schemas/types.yaml#/definitions/uint32-array
-+    description: |
-+      Array of { u64 phys_addr, u64 len } elements that describe a list of ring
-+      buffer pages. Each page consists of two elements. The first element
-+      describes the location of the struct buffer_page that contains metadata
-+      for a given ring buffer page, such as the ring's head indicator. The
-+      second element points to the ring buffer data page which contains the raw
-+      trace data.
-+
-+required:
-+  - compatible
-+  - cpu
-+  - mem
-+
-+additionalProperties: false
-diff --git a/Documentation/kho/bindings/ftrace/ftrace.yaml b/Documentation/kho/bindings/ftrace/ftrace.yaml
-new file mode 100644
-index 000000000000..4a7308be8dbf
---- /dev/null
-+++ b/Documentation/kho/bindings/ftrace/ftrace.yaml
-@@ -0,0 +1,62 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/kho/ftrace/ftrace.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Ftrace core data
-+
-+maintainers:
-+  - Alexander Graf <graf@amazon.com>
-+
-+description: |
-+  Ftrace can serialize its current trace buffers across kexec through KHO.
-+  For each instance, it preserves the backing ring buffers. It also
-+  preserves event ID associations. The post-KHO kernel can then consume
-+  these bits to reassemble trace data (not configuration!) for each trace
-+  instance and that way expose pre-KHO traces in post-KHO ftrace files.
-+
-+properties:
-+  compatible:
-+    enum:
-+      - ftrace-v1
-+
-+  events:
-+    $ref: /schemas/types.yaml#/definitions/uint32-array
-+    description:
-+      Array of { u32 crc, u32 type } elements. Each element contains a unique
-+      identifier for an event, followed by the identifier that this event had
-+      in the previous kernel's trace buffers.
-+
-+# Every subnode has to be a trace array
-+patternProperties:
-+  ^(?!compatible|events)$:
-+    $ref: ftrace-array.yaml#
-+    description: Trace array description for each trace instance
-+
-+required:
-+  - compatible
-+  - events
-+
-+additionalProperties: true
-+
-+examples:
-+  - |
-+    ftrace {
-+      compatible = "ftrace-v1";
-+      events = < 1 1 2 2 3 3 >;
-+
-+      global-trace {
-+        compatible = "ftrace,array-v1";
-+        trace-flags = < 0x3354601 >;
-+
-+        cpu0 {
-+          compatible = "ftrace,cpu-v1";
-+          cpu = < 0x00 >;
-+          mem = /bits/ 64 < 0x101000000 0x38
-+	                    0x101000100 0x1000
-+	                    0x101000038 0x38
-+	                    0x101002000 0x1000 >;
-+        };
-+      };
-+    };
--- 
-2.40.1
-
-
-
-
-Amazon Development Center Germany GmbH
-Krausenstr. 38
-10117 Berlin
-Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
-Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
-Sitz: Berlin
-Ust-ID: DE 289 237 879
-
-
-
+jon
 
