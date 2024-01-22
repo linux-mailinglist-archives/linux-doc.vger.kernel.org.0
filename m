@@ -1,61 +1,61 @@
-Return-Path: <linux-doc+bounces-7226-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-7228-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7D1B83753C
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 22:28:26 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AF5583753E
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 22:28:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5F7B21F27BC1
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 21:28:26 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id EEDA91F27717
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 21:28:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6360B47F64;
-	Mon, 22 Jan 2024 21:28:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 70F1E47F64;
+	Mon, 22 Jan 2024 21:28:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="tGgvJqTY"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="GKe9xsLq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2046.outbound.protection.outlook.com [40.107.92.46])
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2082.outbound.protection.outlook.com [40.107.92.82])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB89347F66
-	for <linux-doc@vger.kernel.org>; Mon, 22 Jan 2024 21:28:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.92.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DF5147F57
+	for <linux-doc@vger.kernel.org>; Mon, 22 Jan 2024 21:28:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.92.82
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1705958904; cv=fail; b=ZXUfJfQ81rcx0x2toj8hy19NzWB6PPrVgHi4RjaJhupg2bASO7/eR4VxtEeHaHlzyK6IepoSXMpzTDev/uVQCoXIqHiDZO+VKAgREYd0j52iX4wDyHHqDLdsBl+r4JHsFZDWF4wC4MNWgIyxlaFuO0G13J1gnR5AaH+ttdkb5MA=
+	t=1705958909; cv=fail; b=Q/JlojvmUgOmYUEiNnfycUU+R9O50tEH7rHVzDUR8/ECFB0qWoYVCL6cYEX1tK4MRLWJd5T5NzGynatTMLLwfZWkO8JZL7zuWLaOud44X/XAtm/s13cDgO1x+Mh3SVUCtz9LPD+FHwuuqwNTUMV0IsL6y1GVqAAC9P5k7KwWmjE=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1705958904; c=relaxed/simple;
-	bh=1gW2mvj198hT3Q9MHBrBAWUZKERTHe7DaHNg395ZZMY=;
+	s=arc-20240116; t=1705958909; c=relaxed/simple;
+	bh=N0bzZsxUoIpNU7pw7QzbOuUsuSVfs6vs9ZNPlhW3bCU=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=A9vchNA+BdGc7m2S26CdIO9aYkZyaxtVyd3bNOtRZO+spbzZxzw/GG4uqqH2Z5ktV1/tLskGknTO66BimVT42RXrvfqn7AfWezsqWXId4LESUMRGkmAK+MLCiqB+VW2PVqiq9SeGLXWy5dIUbgydOlJC3l86GaykJ8976dLbRjs=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=tGgvJqTY; arc=fail smtp.client-ip=40.107.92.46
+	 MIME-Version:Content-Type; b=hvOhaGU2Yzxvs6LLXqVFrgN/1c0axoWIBMrfuWigKEVc0V2widtdudlexKYXpUsst5UFIbeJl2NdtQzTkBfvRbC6Qw3mUzEqCuLe6vjQyOwk+JyqvVDRLwfkSan6V2OHhv2pwZhLpmss5ssaOxRmN6z/9drM2zkppprQMUhnM48=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=GKe9xsLq; arc=fail smtp.client-ip=40.107.92.82
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BHjn3rKaPweE18C3M5FPczB9/iM96QJn+plDx5XCTq/3/AsCkfJxhh2mp7d40MOaK3gE9dcDN7sINJ8V+LDH2bOuI2ikApazNX31a4toay/sW4AGvZb872+zjKQ0vtG/c769DfMb23KNjLI5ilVBM1rAyxDbKuwJ9Wrp0gCbZwJwXwqTfa5HtRxr6iX7KnIdMq9YPl2rqa3oN1LnlxQ7QrtQBju0Oc2smzY57HQdexOFWPdRUHJq1KxYtPCdZBYuBpshDkUdfQ32puRM8zg6LgzKK1lKZQHGnTaX2h83M2vprLHlNC2JspaZQzlB8dC2beUO7pMxYCumCbzeYq8VKg==
+ b=GIU9GI0AwycVBm3Q3n07h2USQ9Zf0yxAlYhg/QiFDbYNxu5amdo/7/gzDgaWasSBXDnrcCJKuoCJPtyfkg3DJV7cQDnaSyhB7bFI7NXYhavYDZXg1yA1mRI+Xjc+fRus9FvT5vhqHmtetgoKDiNiy9UfCVkSl/fiaQXvmQv95oVvE1Yl9qnHD36d3LavMtq4QT7Fbo+iMkvEpbbx8rF9EC04TBbZ1HMrvmTG0N/NEhy54+y+f8GvJLQ1AjKlZgsdGZp4p8gLpxE5B1DGWPhYkENLUekdc3hwXw9WvG4dmZn5g8ITQSWmoNs/bADBXiOEU8mScyLGoK1rkVrw1TwEag==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=u8gZI8I4es66tNDT0z8rnhHmiK9/l0bwuZho1GSdVEM=;
- b=iSS6plBtGCHBxdrHscRxVSpeUOMY2u3INroO4duO7jw/Yq9uBf+HMCF8hMUfKV60UmNHM0TWgQ7thToNfHF3WNII8Adt5DJ3K1ZzgIe22M2ipXIvzW3CP4I7ZbIx7JDwtW15vMqbrPaV0iKh/eMxqKa7oeErbW8Q0NSu0V7+cE4rzLD1LQDmf8FFOtClDD8aPxvbhPv1aEtHGZuyYoZmV9rladLbAqRJS3A+3wFAHiSFp9z6N/DuE8Nb46ZIb4I35rioLxcm66UouNds3TjAxuy2e0nGhFPQvmxCWV6VsQrlFWisFLeeqQXW73K0t7eQqRmnFimngCqvb8yLTXNmCA==
+ bh=gvELLlRxv1xcEO0fBIlYa107Cgn5LCfFe49lhz+IfFQ=;
+ b=JRROhKGB9lBudlz5nZ6snbjioyyB2IJt4HlLOCTrnx4Q/ce7PmnNBDJFkrv74Qiqoc4s6K+cr9vGYIrYs87qnPN73NfMAAaooc7xCstyh2RSS9uvcR4jQOq4auahQSmmLTwqqhXRU7fUEg1DxUtcg0LzVPOY6TnopZOR+AF51mI1GUsbLHrJfnAFBtTq9mC925+QiC1ZSarinwyDbpGpKXU+iKZTztm21p8ZnbQ4BUpwMrmJiLMiiPvT/prb8CVV6xFS0qaR0WQVd/bwnUDxpoAEgU8VSECr27BBT6VnyTSC8HlSVssmIz+1LT5gQhfI9hChBFkocc+k3i1XTkMzpw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=linux.intel.com smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=u8gZI8I4es66tNDT0z8rnhHmiK9/l0bwuZho1GSdVEM=;
- b=tGgvJqTY17dA+a1u59gTuoOJEv8TCBwvM+fIkRU6YfMmssWoZIlZ/7p38y4tSfvzG6v+a63MjNBbt3jokeYmbFpvp4A0Bz0bAkLWXQxh5lyb44g00N3FWeKm7qk9TRLDYR781hNFJDRTaM0i5EOC82jcQ+bNkMC7mWNunPLRvJE=
-Received: from BYAPR01CA0028.prod.exchangelabs.com (2603:10b6:a02:80::41) by
- IA0PR12MB8893.namprd12.prod.outlook.com (2603:10b6:208:484::19) with
+ bh=gvELLlRxv1xcEO0fBIlYa107Cgn5LCfFe49lhz+IfFQ=;
+ b=GKe9xsLqijkB1g8EBTA1aPmPPgyurwnwqOs72YasOAXUJ0HGzK9clrhjvNIV3Qko2Iq2SSr1hUT1MK3ZGEpYPZs+mhxRuksH2Pp1C2yIhp2Xavroyq7Nhz6uA6jC5XdwRiqaBbodG0bRzdUX330rTPmoV8vTjZPjF3K2WaS+/Y0=
+Received: from BYAPR06CA0069.namprd06.prod.outlook.com (2603:10b6:a03:14b::46)
+ by BL1PR12MB5176.namprd12.prod.outlook.com (2603:10b6:208:311::19) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.32; Mon, 22 Jan
- 2024 21:28:17 +0000
-Received: from SJ5PEPF000001CD.namprd05.prod.outlook.com
- (2603:10b6:a02:80:cafe::f) by BYAPR01CA0028.outlook.office365.com
- (2603:10b6:a02:80::41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.34; Mon, 22 Jan
+ 2024 21:28:20 +0000
+Received: from SJ5PEPF000001C9.namprd05.prod.outlook.com
+ (2603:10b6:a03:14b:cafe::11) by BYAPR06CA0069.outlook.office365.com
+ (2603:10b6:a03:14b::46) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.32 via Frontend
- Transport; Mon, 22 Jan 2024 21:28:17 +0000
+ Transport; Mon, 22 Jan 2024 21:28:19 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -63,13 +63,13 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF000001CD.mail.protection.outlook.com (10.167.242.42) with Microsoft
+ SJ5PEPF000001C9.mail.protection.outlook.com (10.167.242.37) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7202.16 via Frontend Transport; Mon, 22 Jan 2024 21:28:17 +0000
+ 15.20.7202.16 via Frontend Transport; Mon, 22 Jan 2024 21:28:19 +0000
 Received: from smtp.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 22 Jan
- 2024 15:28:15 -0600
+ 2024 15:28:16 -0600
 From: Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>
 To: Alex Deucher <alexander.deucher@amd.com>,
 	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, "Mario
@@ -79,9 +79,9 @@ To: Alex Deucher <alexander.deucher@amd.com>,
  Nikula" <jani.nikula@linux.intel.com>
 CC: <linux-doc@vger.kernel.org>, <amd-gfx@lists.freedesktop.org>, "Rodrigo
  Siqueira" <Rodrigo.Siqueira@amd.com>, Harry Wentland <Harry.Wentland@amd.com>
-Subject: [PATCH v2 6/8] Documentation/gpu: Add entry for the DIO component
-Date: Mon, 22 Jan 2024 14:24:59 -0700
-Message-ID: <20240122212719.647008-7-Rodrigo.Siqueira@amd.com>
+Subject: [PATCH v2 7/8] Documentation/gpu: Add an explanation about the DC weekly patches
+Date: Mon, 22 Jan 2024 14:25:00 -0700
+Message-ID: <20240122212719.647008-8-Rodrigo.Siqueira@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240122212719.647008-1-Rodrigo.Siqueira@amd.com>
 References: <20240122212719.647008-1-Rodrigo.Siqueira@amd.com>
@@ -97,26 +97,34 @@ X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CD:EE_|IA0PR12MB8893:EE_
-X-MS-Office365-Filtering-Correlation-Id: 543b3c3b-1253-4c1e-a3cd-08dc1b910c84
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001C9:EE_|BL1PR12MB5176:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1d10d5e2-7092-4719-4e48-08dc1b910db0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	7elejCQNRlPXWiKu2CBvrkPyp8U/FkW5TY/pULUe5uhfh6YZ+PuJVtwWOmQbsfNL/0sAA1Y6rPduydXqiO+55BkOjHbILx/lSVkPM5T2Ukt0uQarE6fM1tLe56A4zqV/OO/9gdoIoLnUHzIJzkpU6LX50pTw4NGD82/yc7yx1IFmQrXSf/V60nHJrUKU4E5g+cfHqrnhxlIbzYhtneqG9jEzXDAielk7jay2ONqMMn71hFl2FqstS5oTIhOmMN/SpiphnbethlZZFjRSN1PGBdBVcWeGBYI8XT0KRdAiKTHp9DUXqIoyK1IJebcYmv2vCNbl4ogcyvTxKYlz7Wy+NhRwDzgybRojXtaEd3e45Q7IP/8CAjU8xxZko+vYob4koW5uW8VetSiP3xtz5h/6dzeMwUt66I9hyFBoHPSjrj7Hn74Ol4DlBcE4GmQfdpPyGj5OgnUZmSAMIxABTl+QBGQxcWf5JTi0lMzor5qTYEFXe7rY/ik3b+7WVYzsxFTCQ8XcLCqKuIfO2OaMQxW5eqSB3j9xX4K60uxj57Pp6XN/88glf0O4Bwk8BhvbG+6eAmkMzjEVJDIxAfn+BuxeNnbb0XbpRfbAeOn8RKW5YeVf93q9daQJOlRwBCmmpXek8nsAc8vSzOzkm3V9mL7pG3xLcThU+WpeOcOsJvxAV2xUFbGtmDn9IJlO9jDdqaN9TTzxnmtoFpLJRsMCsiAsQkmAlJ0mt0nSxjjSrfqcl3zNPE9Hu77F9KXgs8MpfeKZADYjfbcFnKMs9+0rsM8uMA==
+	LdS68xb3hurzYhurNBWqiz3z5jYdDnNMaRN3WEzoH1bqJc7oKljRTQyUJtgGIZ9+fwVen09NhxeQ2rkTNnICwFhnhvF1OaKChRho7WkbXtTy6zLEb1kpci87Nw/mOJWYD3IqqMGrlb7cxrDpkv/M+nGn1Zyhg1QYLuCOUwr0zZk9vEm+QZ5qgdC6M6SbL5SS9Suow3z7PQvWDjPJJ3DemCrUJ7QQzRN3TYcZrFrCf+Y7Lbqs4S94oJ56ozp6hs0vQnGWXmWVljayveCku5zY+pMzBBcA9OZJGqP1TicXCimGaKq7uR3TVg8iYZfCgPLNsFjGxScLv5R6pkafBMRey6kqS2SvHBmyf3GnewsWY8VZ/Aml/VE8IfI5bNfAnY0TbJXKBC3VeVhpx4BhqGH2TOnyPSTG1YU9v265LOWfCulQOubnCkcidkteE00dLJBy1w1/i11wGpGbriToUuC5x2S/zNyF8M/6lQX0S6GnyiVlPe8QJCZHYgPqrl/IbxH+R4XNnNXPvU3D1rrlU0+Xd5nGUi4Jv6fvxrLBR8d2yXM/h1fKp64q2EQZ/YG7CC74uSeiyCYj5rawOnAeUqeBd8lTv1tUN0bgro0nqzdO7WY9tqDVhT5byIzMG5wLjI3ilk//FRwXApuWpWmp8R/0zZHFUj7o7CsozyaLLhKdj/ohgfaDRBcFOhVZv/rTW0fszlXug/B+0t8/yMS5QCCfEN3UqFjpC3YMoW2GwCVjGAW3KreQ0+8LKlvaZbFXUN+f
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(136003)(396003)(39860400002)(346002)(376002)(230922051799003)(186009)(82310400011)(1800799012)(64100799003)(451199024)(36840700001)(46966006)(40470700004)(336012)(426003)(36860700001)(40460700003)(26005)(16526019)(40480700001)(1076003)(47076005)(2616005)(478600001)(83380400001)(6666004)(82740400003)(5660300002)(2906002)(81166007)(316002)(86362001)(8936002)(36756003)(41300700001)(4326008)(54906003)(70586007)(110136005)(70206006)(356005)(8676002)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(346002)(39860400002)(376002)(136003)(396003)(230922051799003)(64100799003)(451199024)(82310400011)(1800799012)(186009)(46966006)(36840700001)(40470700004)(86362001)(316002)(54906003)(70206006)(70586007)(8936002)(8676002)(4326008)(478600001)(110136005)(2906002)(41300700001)(36756003)(5660300002)(83380400001)(40460700003)(40480700001)(47076005)(16526019)(26005)(66574015)(2616005)(1076003)(426003)(336012)(81166007)(36860700001)(356005)(82740400003)(6666004)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2024 21:28:17.2744
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2024 21:28:19.2540
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 543b3c3b-1253-4c1e-a3cd-08dc1b910c84
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1d10d5e2-7092-4719-4e48-08dc1b910db0
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF000001CD.namprd05.prod.outlook.com
+	SJ5PEPF000001C9.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8893
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5176
+
+This commit introduces some explanation about the display team
+validation.
+
+Changes since V1:
+- Remove unprecise information about the DC process for now, can be
+  added later on.
+- Jani: Fix bullets
 
 Cc: Mario Limonciello <mario.limonciello@amd.com>
 Cc: Alex Deucher <alexander.deucher@amd.com>
@@ -126,51 +134,110 @@ Cc: Christian König <christian.koenig@amd.com>
 Cc: Aurabindo Pillai <aurabindo.pillai@amd.com>
 Signed-off-by: Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>
 ---
- Documentation/gpu/amdgpu/display/dcn-blocks.rst      | 12 ++++++++++++
- .../gpu/drm/amd/display/dc/link/hwss/link_hwss_dio.h | 10 ++++++++++
- 2 files changed, 22 insertions(+)
+ Documentation/gpu/amdgpu/display/index.rst | 76 ++++++++++++++++++++--
+ 1 file changed, 69 insertions(+), 7 deletions(-)
 
-diff --git a/Documentation/gpu/amdgpu/display/dcn-blocks.rst b/Documentation/gpu/amdgpu/display/dcn-blocks.rst
-index 5ba3c04c1db0..a3fbd3ea028b 100644
---- a/Documentation/gpu/amdgpu/display/dcn-blocks.rst
-+++ b/Documentation/gpu/amdgpu/display/dcn-blocks.rst
-@@ -64,3 +64,15 @@ OPP
+diff --git a/Documentation/gpu/amdgpu/display/index.rst b/Documentation/gpu/amdgpu/display/index.rst
+index b09d1434754d..aa89e8f9ab89 100644
+--- a/Documentation/gpu/amdgpu/display/index.rst
++++ b/Documentation/gpu/amdgpu/display/index.rst
+@@ -7,18 +7,80 @@ drm/amd/display - Display Core (DC)
+ AMD display engine is partially shared with other operating systems; for this
+ reason, our Display Core Driver is divided into two pieces:
  
- .. kernel-doc:: drivers/gpu/drm/amd/display/dc/inc/hw/opp.h
-    :internal:
+-1. **Display Core (DC)** contains the OS-agnostic components. Things like
++#. **Display Core (DC)** contains the OS-agnostic components. Things like
+    hardware programming and resource management are handled here.
+-2. **Display Manager (DM)** contains the OS-dependent components. Hooks to the
+-   amdgpu base driver and DRM are implemented here.
++#. **Display Manager (DM)** contains the OS-dependent components. Hooks to the
++   amdgpu base driver and DRM are implemented here. For example, you can check
++   display/amdgpu_dm/ folder.
 +
-+DIO
-+---
++------------------
++DC Code validation
++------------------
 +
-+.. kernel-doc:: drivers/gpu/drm/amd/display/dc/link/hwss/link_hwss_dio.h
-+   :doc: overview
++Maintaining the same code base across multiple OSes requires a lot of
++synchronization effort between repositories and exhaustive validation. In the
++DC case, we maintain a tree to centralize code from different parts. The shared
++repository has integration tests with our Internal Linux CI farm, and we run a
++comprehensive set of IGT tests in various AMD GPUs/APUs (mostly recent dGPUs
++and APUs). Our CI also checks ARM64/32, PPC64/32, and x86_64/32 compilation
++with DCN enabled and disabled.
 +
-+.. kernel-doc:: drivers/gpu/drm/amd/display/dc/link/hwss/link_hwss_dio.h
-+   :export:
++When we upstream a new feature or some patches, we pack them in a patchset with
++the prefix **DC Patches for <DATE>**, which is created based on the latest
++`amd-staging-drm-next <https://gitlab.freedesktop.org/agd5f/linux>`_. All of
++those patches are under a DC version tested as follows:
 +
-+.. kernel-doc:: drivers/gpu/drm/amd/display/dc/link/hwss/link_hwss_dio.h
-+   :internal:
-diff --git a/drivers/gpu/drm/amd/display/dc/link/hwss/link_hwss_dio.h b/drivers/gpu/drm/amd/display/dc/link/hwss/link_hwss_dio.h
-index f4633d3cf9b9..a1f72fe378ee 100644
---- a/drivers/gpu/drm/amd/display/dc/link/hwss/link_hwss_dio.h
-+++ b/drivers/gpu/drm/amd/display/dc/link/hwss/link_hwss_dio.h
-@@ -22,6 +22,16 @@
-  * Authors: AMD
-  *
-  */
++* Ensure that every patch compiles and the entire series pass our set of IGT
++  test in different hardware.
++* Prepare a branch with those patches for our validation team. If there is an
++  error, a developer will debug as fast as possible; usually, a simple bisect
++  in the series is enough to point to a bad change, and two possible actions
++  emerge: fix the issue or drop the patch. If it is not an easy fix, the bad
++  patch is dropped.
++* Finally, developers wait a few days for community feedback before we merge
++  the series.
 +
-+/**
-+ * DOC: overview
-+ *
-+ * Display Input Output (DIO), is the display input and output unit in DCN. It
-+ * includes output encoders to support different display output, like
-+ * DisplayPort, HDMI, DVI interface, and others. It also includes the control
-+ * and status channels for these interfaces.
-+ */
++It is good to stress that the test phase is something that we take extremely
++seriously, and we never merge anything that fails our validation. Follows an
++overview of our test set:
 +
- #ifndef __LINK_HWSS_DIO_H__
- #define __LINK_HWSS_DIO_H__
++#. Manual test
++    * Multiple Hotplugs with DP and HDMI.
++    * Stress test with multiple display configuration changes via the user interface.
++    * Validate VRR behaviour.
++    * Check PSR.
++    * Validate MPO when playing video.
++    * Test more than two displays connected at the same time.
++    * Check suspend/resume.
++    * Validate FPO.
++    * Check MST.
++#. Automated test
++    * IGT tests in a farm with GPUs and APUs that support DCN and DCE.
++    * Compilation validation with the latest GCC and Clang from LTS distro.
++    * Cross-compilation for PowerPC 64/32, ARM 64/32, and x86 32.
++
++In terms of test setup for CI and manual tests, we usually use:
++
++#. The latest Ubuntu LTS.
++#. In terms of userspace, we only use fully updated open-source components
++   provided by the distribution official package manager.
++#. Regarding IGT, we use the latest code from the upstream.
++#. Most of the manual tests are conducted in the GNome but we also use KDE.
++
++Notice that someone from our test team will always reply to the cover letter
++with the test report.
++
++--------------
++DC Information
++--------------
  
+ The display pipe is responsible for "scanning out" a rendered frame from the
+ GPU memory (also called VRAM, FrameBuffer, etc.) to a display. In other words,
+ it would:
+ 
+-1. Read frame information from memory;
+-2. Perform required transformation;
+-3. Send pixel data to sink devices.
++#. Read frame information from memory;
++#. Perform required transformation;
++#. Send pixel data to sink devices.
+ 
+ If you want to learn more about our driver details, take a look at the below
+ table of content:
+@@ -26,8 +88,8 @@ table of content:
+ .. toctree::
+ 
+    display-manager.rst
+-   dc-debug.rst
+    dcn-overview.rst
+    dcn-blocks.rst
+    mpo-overview.rst
++   dc-debug.rst
+    dc-glossary.rst
 -- 
 2.43.0
 
