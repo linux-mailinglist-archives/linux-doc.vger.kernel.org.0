@@ -1,102 +1,162 @@
-Return-Path: <linux-doc+bounces-7218-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-7220-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD27D837424
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 21:43:09 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 53F4B837533
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 22:28:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7ED3928C1D4
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 20:43:08 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id C89FB1F2720E
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 21:28:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 18854482C7;
-	Mon, 22 Jan 2024 20:42:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 836BF3EA71;
+	Mon, 22 Jan 2024 21:28:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WJMJhdkE"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="RdE3IoFP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (mail-mw2nam12on2069.outbound.protection.outlook.com [40.107.244.69])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E720D482C0;
-	Mon, 22 Jan 2024 20:42:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1705956146; cv=none; b=Gkh+ierMhkto0OBxUHwtkX3ZQNC6LzTPk8lJHaZmToto2EV5o8qWgQzjMXCSy3c8jVoMxk3umJNuDcfUjh7nUwwHmz82SB0I/lJ125Sn8sli3I+FukvgPDbWMbgaXRCNpMnqtb/ptTAJrTdVdnwC+y7K6jEj+Uj4lIiT98IP7dE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1705956146; c=relaxed/simple;
-	bh=9wwET/SR7knk4oSeCNFeV/MEM9M1Z+V//fKVMmchNVA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=GCkvGzz4IRZWvb7cK1xwT9g3OwAKjbSu5338ROhRDNtSN1PrxWG86pTAi5eUA1vnUSVocKHjGK6hQ8ChGZaajmII3sKdiFumNTh/9Pf9UHHCvLa8ZDLbwHPNqGAvhvVi7Wu8DPjbhSgN38WKaTiZeGtI3TWDbadRaFQE5O5y6xg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WJMJhdkE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09458C43390;
-	Mon, 22 Jan 2024 20:42:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1705956145;
-	bh=9wwET/SR7knk4oSeCNFeV/MEM9M1Z+V//fKVMmchNVA=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=WJMJhdkEMVCsME+TmfhWjSnniEDJHwowqo5SHRtMJ6QQ79jW80iSuhn8ruChmQRNe
-	 uajnlUjNW8Zsh2qgHCl5obP2siMRrvEOVeD1u9IRtexCD/GZ4b254yFGMry4OPFZ42
-	 cc71nCZfe8phSoFEjR+O+n6Q0vDTnkdZAzFYoohK+8Y8OiUEltZDQrPvkXV04HoVvv
-	 1AOwKoagGq191arGl0quSnDW3wD8ZPcZ2zDsek7cqO1tjU7JvsLEWBVvzgdgvME2/P
-	 syOA4PcoE/irBksey7CvpMyB9TEoVFiA1oRtI6NjXrkV0BbHv9WlUJhtYbQJkrPGlj
-	 eLAaaBdIYX64A==
-From: Mark Brown <broonie@kernel.org>
-Date: Mon, 22 Jan 2024 20:41:54 +0000
-Subject: [PATCH 4/4] arm64/sme: Remove spurious 'is' in SME documentation
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC0583DB92
+	for <linux-doc@vger.kernel.org>; Mon, 22 Jan 2024 21:28:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.244.69
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1705958893; cv=fail; b=WjaoOFrtRPUobCbTxvPzLf2x5vGVr4mZd8MH9/nyjPUV3Wqvhoxz5eY9JIhVxj2sGs1MtxEulyI/iiDpXPggoyhqSzWiMArisewWqYg8rTOel86AM4yoUOSKcAOo8h2CVKkqPkYU3mBADjaXHx4oTZ5pprGRuUPoAupUIXZhf5k=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1705958893; c=relaxed/simple;
+	bh=niiLv+uMx0UC/bS6CTY/bngnJyIdEvDjtrBUHfmRTeQ=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=p6onoShr2CONjYvFQGj5KZshMWqesIw0gAX/jx2nMlJJvCnL4KL0EowgkNDvRb/o/b7XGxl71IIdDqB6mwoCGbxTvy8uIGryu4vu7FBgE2ypzAPzux8JQfAQK+dlJm8UiN6WyPolEir0QfG8QJuohXiw8BqHHRE3jJW5Sv/EOVU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=RdE3IoFP; arc=fail smtp.client-ip=40.107.244.69
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Dv2PHTttRgKcDNaRR0lrCV/PaTPkOjnfLf//Mm7XyhkYOyRJIVgBx2cvPXhun4sETDdBD7oFPjf64HBjuGk+zGBRBqB4ufKTz/6O69qVGrkLnJOT03dnAo5Tvv8ZeKXniy2QxklkehZEAUVq7/toWFNCM+L4KwMT/DuKZWUl54Mc+lfuVEsrbDUeFm7txOU77HjlQgzR5RMxUAORP1NuBWfUdAbrO6I8BFA26iWdbYXWsHUjZ8gpnChi/uWc36Whhw9aseKd8LnP3mDVjEnEDP+ygcx2hV5WxX3MBKD2SsJlMLL0c58cdqvE15lC4mWeoZ6LI3Lo64bHGO3iP1A2KA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SsUfgtcTqL7EZclsjmPwe9G6CZ18vKHFPSaR7LINxAU=;
+ b=MXimnB0MmM6BpvZI1Xi73mMv/y3SnsdInk0P/nCiXvvJidNLFwtR2JDip/38M2tx2K1g/6STmmpptWpCUseWXdg3dm+EdjBcQmpKAElhxYf1lg6sXi0W8X5DhsmOSjCZpmDs2DQCXrO0dO2OmVfXsMpfv1tt1TzJ65FDmebhh7Tybm3cSg2hcDfozGs05b9Kwr3ZmeP621v55LwUrINLrhhhWyzHKIZr4qr7QmAbdoCZfi7Q1MJKbA0R5/v7Pc1/MZISA8/dM4Il+MaP4f69WAlapzSID6NVqfcR87uGSM+U9oQ7y/FywZVJrPEj/ozq7C2MAPuml3tHBLxrwMVxFA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=linux.intel.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SsUfgtcTqL7EZclsjmPwe9G6CZ18vKHFPSaR7LINxAU=;
+ b=RdE3IoFPx+1WnTrJHEZMo4CDvXglXim+PQQEdFFoHEasRm2kVbwsowUeCWf+0kpwlEnrsZkP720lRBsdg7JzW0wX7QNTMvX3pRkPSvP4BWG20K/YKhee/tv0ACROtUxDeAdBq7qIYqC4XOj73YNExh9yI217tYUXU3yfa/aSrn4=
+Received: from BL1PR13CA0191.namprd13.prod.outlook.com (2603:10b6:208:2be::16)
+ by DM6PR12MB4531.namprd12.prod.outlook.com (2603:10b6:5:2a4::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.23; Mon, 22 Jan
+ 2024 21:28:09 +0000
+Received: from BL6PEPF0001AB4D.namprd04.prod.outlook.com
+ (2603:10b6:208:2be:cafe::f3) by BL1PR13CA0191.outlook.office365.com
+ (2603:10b6:208:2be::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.16 via Frontend
+ Transport; Mon, 22 Jan 2024 21:28:09 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL6PEPF0001AB4D.mail.protection.outlook.com (10.167.242.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7202.16 via Frontend Transport; Mon, 22 Jan 2024 21:28:08 +0000
+Received: from smtp.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 22 Jan
+ 2024 15:28:06 -0600
+From: Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>
+To: Alex Deucher <alexander.deucher@amd.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, "Mario
+ Limonciello" <mario.limonciello@amd.com>, Harry Wentland
+	<harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, Hamza Mahfooz
+	<hamza.mahfooz@amd.com>, Aurabindo Pillai <aurabindo.pillai@amd.com>, "Jani
+ Nikula" <jani.nikula@linux.intel.com>
+CC: <linux-doc@vger.kernel.org>, <amd-gfx@lists.freedesktop.org>, "Rodrigo
+ Siqueira" <Rodrigo.Siqueira@amd.com>
+Subject: [PATCH v2 0/8] Expand and improve AMDGPU documentation
+Date: Mon, 22 Jan 2024 14:24:53 -0700
+Message-ID: <20240122212719.647008-1-Rodrigo.Siqueira@amd.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240122-arm64-sve-sme-doc-v1-4-3d492e45265b@kernel.org>
-References: <20240122-arm64-sve-sme-doc-v1-0-3d492e45265b@kernel.org>
-In-Reply-To: <20240122-arm64-sve-sme-doc-v1-0-3d492e45265b@kernel.org>
-To: Catalin Marinas <catalin.marinas@arm.com>, 
- Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-Cc: Dave Martin <dave.martin@arm.com>, linux-arm-kernel@lists.infradead.org, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Mark Brown <broonie@kernel.org>, 
- Edmund Grimley-Evans <edmund.grimley-evans@arm.com>
-X-Mailer: b4 0.13-dev-5c066
-X-Developer-Signature: v=1; a=openpgp-sha256; l=904; i=broonie@kernel.org;
- h=from:subject:message-id; bh=9wwET/SR7knk4oSeCNFeV/MEM9M1Z+V//fKVMmchNVA=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBlrtMjztdy04L3pPKFQ1UwQtFqAqS9I99xBUZdbr7I
- CdmgEmKJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCZa7TIwAKCRAk1otyXVSH0EOqB/
- 4kOHuIWx69XoT/RvheUGIeg8J6oxM+WtZVJEVFPIDAlWVc83YY8eyKp9n+WWz4MhO5XYUUQ+1/kVIL
- nu5oS58CpKIFsYZCz4KlWQzu/AOWr6Mtbb5szjzWKxz1JDZQugZzC4EjiExRx4FOiMb34XkH/DGt2q
- s/GEdytazihB5d9tSxFE0/1XlGZE0hU4vjbJzkegGoX5+sCRo3M7OyUZTsgIfjk2GafMUY8uECNAet
- u5zr8YjOhg4d2TO68AHXFdqE+48uvKVJQO0O+9SqH1guCb9gwuE5QIAAre4fOas6m4x4oTyWTq83U/
- WQIIiyJOgp1a4HIpKh7NqPRZNS5J4y
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4D:EE_|DM6PR12MB4531:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7103f116-8506-4425-47ef-08dc1b910770
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	zgVNQ3pyVyPPP1/SpOuKUITLzaJC9WVndUuF9lwTkH/8gdf3N0xSh2baagcE2spcaCrBgemCkDqoi44x5NbVY446Bgtyn5r0qT2INRi/BzcVOn7IuKqGUwJQ/3Ixo6E39W5jE8mI4rUN4n0FA0bDpxUca/hhid6NTOqAKbKs5LeQAd/bY86uOMAFrofiNmVz4sMy+Bzu3AT20C1zMdKsXWTWqIoJPg/P/cFC3u9h3h4Lc5giuMScZi7Vuw4lwK4v4l1wIBu4IuTxrnq1AkpzG+aWvxhMnKZIn33xTmgr2c2FMZob7t/ibU7gkQ6sRY6wD0ov8vxAuVprHnGB4k/T8JqpAO29HJ/cYazRMmkt6JrIccpeXCGME5mW7nMHExEzD2p6GTBh3RSlkjctXFaCJ+jrvsNF5HfDbqgg8PjFKoHNbN/kjtftRT2dKoyfUAu1DDELWZXddoKvuVvB1F8zRzZ2qoZ6KWZCsUwtAr++Y4T2Ydck0Yr6hpA+4BVES7vABQ1vLR2PLRsg7mFssKfhrMLBI3tHe21xWX6fNt4pLCdCFmysACaYEmnXwvIq5y+7SyicRdfwpxzSDJkwEaeVm51vI0kSpK9Ko89QLNfq/h4CPF3tEwYaJRJ5NR9lny1txnemVe22aR7Sn8Gb8ko1KbUE/3/vhxPByWOlj5Btca1arpUZMxYe2WtMo168JcvRRGLY1CeddRKWmzF5nDmzDy53Imb2PW5JZiZf69jPtdwe9xmw6QpJWCZ+5OONL/vMCsshFdNU5wc+836oJGpSxQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(136003)(376002)(346002)(39860400002)(396003)(230922051799003)(1800799012)(82310400011)(451199024)(64100799003)(186009)(46966006)(40470700004)(36840700001)(5660300002)(8936002)(36756003)(8676002)(4326008)(2906002)(16526019)(316002)(1076003)(426003)(26005)(54906003)(356005)(81166007)(70586007)(86362001)(336012)(110136005)(70206006)(2616005)(40480700001)(40460700003)(6666004)(478600001)(41300700001)(47076005)(36860700001)(83380400001)(82740400003)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2024 21:28:08.8305
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7103f116-8506-4425-47ef-08dc1b910770
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BL6PEPF0001AB4D.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4531
 
-Just a typographical error.
+This patchset improves how the AMDGPU display documentation is
+organized, expands the kernel-doc to extract information from the
+source, and adds more context about DC workflow. Finally, at the end of
+this series, we also introduce a contribution section for those
+interested in contributing to the display code.
 
-Reported-by: Edmund Grimley-Evans <edmund.grimley-evans@arm.com>
-Signed-off-by: Mark Brown <broonie@kernel.org>
----
- Documentation/arch/arm64/sme.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes since V1:
+- Remove unprecise information about the DC process.
+- Expand the contribution list.
+- Rebase.
 
-diff --git a/Documentation/arch/arm64/sme.rst b/Documentation/arch/arm64/sme.rst
-index ba0a5e5b2523..bc9855e599c8 100644
---- a/Documentation/arch/arm64/sme.rst
-+++ b/Documentation/arch/arm64/sme.rst
-@@ -75,7 +75,7 @@ model features for SME is included in Appendix A.
- 2.  Vector lengths
- ------------------
- 
--SME defines a second vector length similar to the SVE vector length which is
-+SME defines a second vector length similar to the SVE vector length which
- controls the size of the streaming mode SVE vectors and the ZA matrix array.
- The ZA matrix is square with each side having as many bytes as a streaming
- mode SVE vector.
+Thanks
+Siqueira
+
+Rodrigo Siqueira (8):
+  Documentation/gpu: Add basic page for HUBP
+  Documentation/gpu: Add simple doc page for DCHUBBUB
+  Documentation/gpu: Add kernel doc entry for DPP
+  Documentation/gpu: Add kernel doc entry for MPC
+  Documentation/gpu: Add entry for OPP in the kernel doc
+  Documentation/gpu: Add entry for the DIO component
+  Documentation/gpu: Add an explanation about the DC weekly patches
+  Documentation/gpu: Introduce a simple contribution list for display
+    code
+
+ .../gpu/amdgpu/display/dcn-blocks.rst         |  78 ++++++
+ .../amdgpu/display/display-contributing.rst   | 168 ++++++++++++
+ .../gpu/amdgpu/display/display-manager.rst    |   3 -
+ Documentation/gpu/amdgpu/display/index.rst    |  78 +++++-
+ drivers/gpu/drm/amd/display/TODO              | 110 --------
+ .../gpu/drm/amd/display/dc/inc/hw/dchubbub.h  |   6 +
+ drivers/gpu/drm/amd/display/dc/inc/hw/dpp.h   |  26 ++
+ drivers/gpu/drm/amd/display/dc/inc/hw/hubp.h  |  13 +-
+ drivers/gpu/drm/amd/display/dc/inc/hw/mpc.h   | 250 ++++++++++++------
+ drivers/gpu/drm/amd/display/dc/inc/hw/opp.h   |  16 ++
+ .../amd/display/dc/link/hwss/link_hwss_dio.h  |  10 +
+ 11 files changed, 560 insertions(+), 198 deletions(-)
+ create mode 100644 Documentation/gpu/amdgpu/display/dcn-blocks.rst
+ create mode 100644 Documentation/gpu/amdgpu/display/display-contributing.rst
+ delete mode 100644 drivers/gpu/drm/amd/display/TODO
 
 -- 
-2.30.2
+2.43.0
 
 
