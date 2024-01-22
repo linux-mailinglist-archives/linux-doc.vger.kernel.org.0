@@ -1,46 +1,46 @@
-Return-Path: <linux-doc+bounces-7168-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-7170-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68D4D83665A
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 16:01:41 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id A80BC8368A6
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 16:43:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9BF9E1C22743
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 15:01:40 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A0925B2C1F6
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jan 2024 15:34:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 77CD04643A;
-	Mon, 22 Jan 2024 14:56:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 56302605B1;
+	Mon, 22 Jan 2024 15:04:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bK9svh/l"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nOGW06pd"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 491914642A;
-	Mon, 22 Jan 2024 14:56:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28BFA605AA;
+	Mon, 22 Jan 2024 15:04:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1705935377; cv=none; b=tmXnbEGTiIN57h7mmbczKujEHpmFU9Wzbbo1snoZg9xKoaMNEqTYtgKpbhL2ZoU8nPMTLG0QIvbeptbhfOfWutWAqoxGbOZuiXpyj4Rv2lET/bjkBx0T8jBAjOLONB5dbvo7E5Q/dWJ1GOlzQM9RrdWc2saro2lTF7nRGKWgdHk=
+	t=1705935880; cv=none; b=AjYx2aeOQfl24pMEyGCtODZmCEE9KvQI5n/osZ+vRabCMnDHGVVmqLvHr5WMsDdhQ7FkL/1Hx34rL07WP2o9FniqpNHxb1gmUjfSxsY2+Ln6VTOcFZpsRCh7R/eT4imiZ7JMqH6Vh90eaQ0nm+A7M2nr5GFdnlDP2el3MfyHunQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1705935377; c=relaxed/simple;
+	s=arc-20240116; t=1705935880; c=relaxed/simple;
 	bh=5G2vFEVxxjljbx2Tfhpnz8wRhi/UN3fGZcr43JDnvzk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=dmbAtnu3hmNkstUXYo5+kMa3sndiPHmlS7MAvlZRngZLi7K8Is4obHaS+VWVvEMMSLgnxVfM1P2IkDtTtCHltpDQL4HNKolADzGwTMh3QaaATRfitrGB1dqdvxVUmmgamUWXSSA92RDczj0ZNgwG8CjYmuQI7A1J+YfGx4G8iMI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bK9svh/l; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80939C433B2;
-	Mon, 22 Jan 2024 14:56:15 +0000 (UTC)
+	 MIME-Version; b=MdEYDr4xXYH30ccXYvh64G3McIqh9sXCSP1yxbYsIDfoWo1QvzJzePQUZyeG14E1bB1Y4ndFyhYSNA8BDlnSXYzF0XH0y8136RGQkpESMmums+AQGw3TEICNV+BZ5gosl4EgmPMUwtM7CBZmUBIovZp5NOItvhFJ470vvCKWmeI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nOGW06pd; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 645FFC43399;
+	Mon, 22 Jan 2024 15:04:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1705935376;
+	s=k20201202; t=1705935879;
 	bh=5G2vFEVxxjljbx2Tfhpnz8wRhi/UN3fGZcr43JDnvzk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=bK9svh/lwjJ3VkMd27CfVk7KwSMiG58+FojQWyIolM62OcCgfrYXfOIi84sp0oOOk
-	 SO1VIx1xOUvFIS2IzWO2owtrSXb+bdLrh9JetOX3yK0Q2s6FA3uDmewqPrKTPy4HOJ
-	 s8JWOZMr/+adHsX3cg/y6wZYfNOdf0CGp66kXPRc7MxMwE8sKI0ExgXhvDBPTBkcMQ
-	 lsaS/e2Ac5E/sVggP01rQ+f+DDLWayx481DdFmKTOPlLiZq1xnZ4h7lT9Y3BQbRxMG
-	 cRYUCwbAbxrRyDysEGxjwJS8VkviVtGRwRrna04t2Ej5VW33XAtLK6CNjGQ6q53Xdu
-	 hD6tEigb/B5mw==
+	b=nOGW06pdrzZBZm3Gk+2It+kb41RpSxwGU3muNh1BpnD6iG4BfAZrsrAO7PoNzeM2f
+	 IjyI01xY7enbO9tVtrr7//G2F+fb9GA1cXZojsjKthpf4NZtZ+GSlnlOF+Uf26wjqt
+	 xzOxHgkEHFDVkSy8b5rvnt/3VB7+y/RxwNbnI1Si0REgjEb9RDQG7wac0uRwPjTQgr
+	 OWRgZXo2WRsXN071cQBDsXkWW3SXw/pQOr1tSfqPhpUUxryhOUbpfxpoXKMEzVgbiw
+	 mBDrAepDCkC4Waank4PiOFc5BBl9v1eh6LuQBiZZugutkGAfu8IDb65v2Clg17lCKN
+	 2eEMCO2xSpGMg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -53,12 +53,12 @@ Cc: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>,
 	corbet@lwn.net,
 	linux-sound@vger.kernel.org,
 	linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.7 03/88] ASoC: doc: Fix undefined SND_SOC_DAPM_NOPM argument
-Date: Mon, 22 Jan 2024 09:50:36 -0500
-Message-ID: <20240122145608.990137-3-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.6 03/73] ASoC: doc: Fix undefined SND_SOC_DAPM_NOPM argument
+Date: Mon, 22 Jan 2024 10:01:17 -0500
+Message-ID: <20240122150432.992458-3-sashal@kernel.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240122145608.990137-1-sashal@kernel.org>
-References: <20240122145608.990137-1-sashal@kernel.org>
+In-Reply-To: <20240122150432.992458-1-sashal@kernel.org>
+References: <20240122150432.992458-1-sashal@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -67,7 +67,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.7.1
+X-stable-base: Linux 6.6.13
 Content-Transfer-Encoding: 8bit
 
 From: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
