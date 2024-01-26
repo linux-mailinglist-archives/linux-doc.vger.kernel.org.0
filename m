@@ -1,133 +1,83 @@
-Return-Path: <linux-doc+bounces-7616-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-7618-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AE5F83E1F1
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jan 2024 19:51:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C47183E299
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jan 2024 20:33:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id F1012B212DC
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jan 2024 18:51:01 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 24AE4B23F01
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jan 2024 19:32:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 49EA7208BE;
-	Fri, 26 Jan 2024 18:50:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ql0q4xCS"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA2462261D;
+	Fri, 26 Jan 2024 19:32:15 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from air.basealt.ru (air.basealt.ru [194.107.17.39])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21BA11DFF9;
-	Fri, 26 Jan 2024 18:50:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 638D22375D;
+	Fri, 26 Jan 2024 19:32:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.107.17.39
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1706295057; cv=none; b=Oa/ppsVVlTgeR5CVn/yHyUpA3M68qjQPjtkxy0CFqepxNsdgrZFBD8o68tSAJ/qKUO7B8ElMZa6enmCboJ+LOfwQ4NwedzubxhqKYKdz4bEU1f140V9Fm7gH5L12WZPEJrpyy6QV/rXD8PPG49RM1TG3wvVc8Z6PLtqW6GFQ6Ng=
+	t=1706297535; cv=none; b=CPb76cG332f6I+CgC4tb9rIX2CA5EdJtZs37b7y8pUFTYbSIsbEF1t7XtTX/+8hGVGJxswOx6Syg4217xZjU3HCVi1cHKaKyyu5BSI5FYTOw6f1PzabRdYIh5kSQQpMbdP9JhoP6tkuVaYU+9OGUirnPGX8fTv0mJllYi/YXX1Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1706295057; c=relaxed/simple;
-	bh=1fIdBK9itM3esz+45anwZiUUi0Nm9BupJFdH2OcnKHU=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=UtkPXcfwhEKR3HntOebqcEtjPjfNY3fBzCgQeNCjaMJB1gQq8Up97aGz62aZW/xrlPwGIPOVYJGPOY2mI154Q+h3RlXqDTXydp0GKv3HZB82RJa3cQ18xYt0ynhrjMG/TXP0R5KecQc/yY79zU9an/q3ur+rsgiS5HlHczxhDaU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ql0q4xCS; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F693C433C7;
-	Fri, 26 Jan 2024 18:50:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1706295056;
-	bh=1fIdBK9itM3esz+45anwZiUUi0Nm9BupJFdH2OcnKHU=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=ql0q4xCSd1ECPT731kwD6UN7mZUKOpqjZ7zO3iAjguXCltnjpZWbQBOA0J79QTExM
-	 r9QBbNNd8mmv1dv+g05gn7DdsbpQgHhP+ceUtPxzSV2f6vR3cjOtx2iJz/kBOjHs6+
-	 cD41f/oFoaaZKlwZnT3gDAUy+ErAzIFthD4wIa1i9ptLivBbhaovq6HB8KP7JvLffS
-	 9AHnsjStXi3qIoiVG4OWvx3K8fLcpWsqldBqyfYzrF8GkY5PqCQQLa/Air4W8nNEo1
-	 IbEEJMw7JmmcHwLt4cv833YDcRy3a3WxHNPl/g5NXBRAP570pgWRYnbXPui+1kxOfS
-	 d70P3pJKCLrWw==
-Date: Fri, 26 Jan 2024 10:50:55 -0800
-From: Jakub Kicinski <kuba@kernel.org>
-To: Donald Hunter <donald.hunter@gmail.com>
-Cc: netdev@vger.kernel.org, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Jonathan
- Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org, Jacob Keller
- <jacob.e.keller@intel.com>, Breno Leitao <leitao@debian.org>, Jiri Pirko
- <jiri@resnulli.us>, Alessandro Marcolini <alessandromarcolini99@gmail.com>,
- donald.hunter@redhat.com
-Subject: Re: [PATCH net-next v1 02/12] tools/net/ynl: Support sub-messages
- in nested attribute spaces
-Message-ID: <20240126105055.2200dc36@kernel.org>
-In-Reply-To: <m2ttn0w9fa.fsf@gmail.com>
-References: <20240123160538.172-1-donald.hunter@gmail.com>
-	<20240123160538.172-3-donald.hunter@gmail.com>
-	<20240123161804.3573953d@kernel.org>
-	<m2ede7xeas.fsf@gmail.com>
-	<20240124073228.0e939e5c@kernel.org>
-	<m2ttn0w9fa.fsf@gmail.com>
+	s=arc-20240116; t=1706297535; c=relaxed/simple;
+	bh=/hxB9mWKi9mgLDpS2dW9KVNxf5L9+nCnH/rGPcZKBWE=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=PhN2NowXya16d6cPaW3+xQxQI2hkjmtZY5rLaGieBOdQRXHWdg5TXHxzNx8zhKTD43mmWVcuPdR90JxA49L2gfyH95TPNk/EBLvhrYWWhNVs4BSyw2wKtCmiiimnGvy7jSw1q2gBoMxsNMoV3QIjoUy9cEvFC+pUErI8Gm35AJM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=altlinux.org; spf=pass smtp.mailfrom=altlinux.org; arc=none smtp.client-ip=194.107.17.39
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=altlinux.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=altlinux.org
+Received: by air.basealt.ru (Postfix, from userid 490)
+	id 17B3C2F2023C; Fri, 26 Jan 2024 19:32:09 +0000 (UTC)
+X-Spam-Level: 
+Received: from altlinux.ipa.basealt.ru (unknown [178.76.204.78])
+	by air.basealt.ru (Postfix) with ESMTPSA id 59C002F20236;
+	Fri, 26 Jan 2024 19:32:04 +0000 (UTC)
+From: kovalev@altlinux.org
+To: stable@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-cifs@vger.kernel.org,
+	samba-technical@lists.samba.org
+Cc: keescook@chromium.org,
+	sfrench@samba.org,
+	corbet@lwn.net,
+	natechancellor@gmail.com,
+	ndesaulniers@google.com,
+	kovalev@altlinux.org
+Subject: [PATCH 0/2] smb: client: fix "df: Resource temporarily unavailable" on 5.10 stable kernel
+Date: Fri, 26 Jan 2024 22:31:41 +0300
+Message-Id: <20240126193143.245122-1-kovalev@altlinux.org>
+X-Mailer: git-send-email 2.33.8
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On Fri, 26 Jan 2024 12:44:57 +0000 Donald Hunter wrote:
-> I was quite pleased with how simple the patch turned out to be when I
-> used ChainMap, but it does have this weakness.
+After mounting a remote cifs resource, it becomes unavailable:
+df: /mnt/sambashare: Resource temporarily unavailable
 
-It is very neat, no question about it :(
+It was tested on the following Linux kernels:
+Linux altlinux 5.10.208-std-def-alt1
+Linux fedora 5.10.208-200.el8.x86_64
 
-> In practice, the only place this could be a problem is with
-> tc-act-attrs which has the same attribute name 'kind' in the nest and
-> in tc-attrs at the top level. If you send a create message with ynl,
-> you could omit the 'kind' attr in the 'act' nest and ynl would
-> incorrectly resolve to the top level 'kind'. The kernel would reject
-> the action with a missing 'kind' but the rest of payload would be
-> encoded wrongly and/or could break ynl.
+The error appeared starting from kernel 5.10.206 after adding
+the commit [1] "smb: client: fix OOB in SMB2_query_info_init()",
+in which the buffer length increases by 1 as a result of changes:
+...
+-      iov[0].iov_len = total_len - 1 + input_len;
++      iov[0].iov_len = len;
+...
 
-We can detect the problem post-fact and throw an exception. I primarily
-care about removing the ambiguity.
+[1] https://patchwork.kernel.org/project/cifs-client/patch/20231213152557.6634-2-pc@manguebit.com/
 
-Is it possible to check at which "level" of the chainmap the key was
-found? If so we can also construct a 'chainmap of attr sets' and make
-sure that the key level == attr set level. I.e. that we got a hit at
-the first level which declares a key of that name.
+Error fixed by backported commits in next two patches  adapted for the 5.10 kernel:
 
-More crude option - we could construct a list of dicts (the levels
-within the chainmap) and keys they can't contain. Once we got a hit 
-for a sub-message key at level A, all dicts currently on top of A
-are not allowed to add that key. Once we're done with the message we
-scan thru the list and make sure the keys haven't appeared?
+[PATCH 1/2] stddef: Introduce DECLARE_FLEX_ARRAY() helper
+[PATCH 2/2] smb3: Replace smb2pdu 1-element arrays with flex-arrays
 
-Another random thought, should we mark the keys which can "descend"
-somehow? IDK, put a ~ in front?
-
-	selector: ~kind
-
-or some other char?
-
-> My initial thought is that this might be better handled as input
-> validation, e.g. adding 'required: true' to the spec for 'act/kind'.
-> After using ynl for a while, I think it would help to specify required
-> attributes for messages, nests and sub-messsages. It's very hard to
-> discover the required attributes for families that don't provide
-> extack responses for errors.
-
-Hah, required attrs. I have been sitting on patches for the kernel for
-over a year - https://github.com/kuba-moo/linux/tree/req-args
-Not sure if they actually work but for the kernel I was curious if it's
-possible to do the validation in constant time (in relation to the
-policy size, i.e. without scanning the entire policy at the end to
-confirm that all required attrs are present). And that's what I came up
-with.
-
-I haven't posted it because I was a tiny bit worried that required args
-will cause bugs (people forgetting to null check attrs) and may cause
-uAPI breakage down the line (we should clearly state that "required"
-status is just advisory, and can go away in future kernel release).
-But that was more of a on-the-fence situation. If you find them useful
-feel free to move forward!
-
-I do think that's a separate story, tho. For sub-message selector
-- isn't the key _implicitly_ required, in the first attr set where 
-it is defined? Conversely if the sub-message isn't present the key
-isn't required any more either?
 
