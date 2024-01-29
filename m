@@ -1,174 +1,192 @@
-Return-Path: <linux-doc+bounces-7714-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-7712-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FB278403D3
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 12:29:56 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id A67638403A0
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 12:16:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 93857B20D55
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 11:29:53 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CB1DF1C21801
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 11:16:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6E6DC5BAC0;
-	Mon, 29 Jan 2024 11:29:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1FEEA5C90E;
+	Mon, 29 Jan 2024 11:16:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gVSQ0PYd"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="LtJ/qmzN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A93145B5D5;
-	Mon, 29 Jan 2024 11:29:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B5705C8E8
+	for <linux-doc@vger.kernel.org>; Mon, 29 Jan 2024 11:15:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1706527788; cv=none; b=OQJwNWlxC3KzkewijQh3MRxLJOnbrzljmJV6+gYpfbfbQZM70ayEtP/y/t6/Mj4dU0OIfYKfluqfvoMW0TievKlTERjE2Pb5u5rBgx6pEptCYqSgsuWfG6qjhrpOyUkbVhMATNnBoWT7B4SvaqmGmpXh74/UIrlfjtsTrcOeORM=
+	t=1706526961; cv=none; b=VmrZdS5/tD+Q2IMmebvQZwXwEux5fhL4YMe/Uy0Anp+bEag7uI1ZMKG/zdXyLgi1nRJ4VoIOGZyYxYCdYYlnmfoMn/usmjpynEhMsvwYqZxRM8/CW93pWyozonSpVpuC8gHtWaaIW8lbihbQTwN3+cvV0guSKC8igXxpDjGOKMc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1706527788; c=relaxed/simple;
-	bh=AP42ouJKWQqOU4d3qKqBkeJ+2fkyya31t08UrB3VEs8=;
-	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
-	 MIME-Version:Content-Type; b=sZ1yUEP4wgkip8pRXp4BORrh3SDJAWkBbxN79ShXmSNH/tNBJMtg4OTnc6U4XvzxJCGKiDqDgfj5sz5yxPhdOIR3nh06eFpRMDJLIIGrc0rKVQahVbbZHbww20++zbW5NrbSJ5O7uU+TcD031DrEw7siPHkafngyB+KZlsgh6aY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gVSQ0PYd; arc=none smtp.client-ip=209.85.128.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-40ef6454277so7462065e9.2;
-        Mon, 29 Jan 2024 03:29:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706527785; x=1707132585; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:user-agent:references
-         :message-id:date:in-reply-to:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=AP42ouJKWQqOU4d3qKqBkeJ+2fkyya31t08UrB3VEs8=;
-        b=gVSQ0PYdy3XzBEfVxCenmUS+cwq3KX4jvtB9NH6dc4pqpWdLSXBNnWKLk5eRbAg8tl
-         ET/Q+K8BEsPYgeHd/LI85stR3EYE+HLjQ5ai+8UlEGYQMtnnJ6BwjgSfevaO9yWPC+4Z
-         Fw4RiXLY7xSgmquYBbYRnCx1alB4QBwbcVUnKfbw5lBaV+qRVRPqv2stKRu9odsV3hVR
-         ipZgLS/yyaM3C5q915cia5Jxt4ik4kVgcrhdwTy18ckVmkgG+CFCbWsBKfMgDPT+5LO1
-         xebl3V0oVhG5OafoSlehXaWxOkuae6THL07bknuQMNnYDUjwgdtrdJKOfKgVuvZW4hfM
-         3mRA==
+	s=arc-20240116; t=1706526961; c=relaxed/simple;
+	bh=RpKJBPyAuJx70Gw2vedDa9+hb0ZDyAGj7AdkuSzaxD0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=VS9JaDpmPWtCy2PQ3fgHu48GSj1i7TdpKPARg/ky043kAbKrSFpsDClctkrd+bU2E2wtLvCgGcG7Xi671Ul0vRhugTVgdJIiV6ohYXSly7Sy+s1IXTEviaAc4+JM3Jjm0Ko/J+YiNYMN31A0hEHqXJSNV93kYwoYky4KWGy5JWQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=LtJ/qmzN; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1706526957;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=PdmBCDGtM8wSDqYKx2ZDXDpktAyoxR2CO0TvUORZDug=;
+	b=LtJ/qmzNA3bIhBYjHwuOakIEXZ89j3mhz/D9XZLjGQ+JKqSD9JcoIkigGUO3TRYC6/UFOB
+	tt5VdKx+9VJ6b6UggkQJ5oMWeSvJP2+AqovtIAhRe85raDtfsYeWYniEpEubMOlu4c3jBF
+	CBOy5bIA2AH8cWjI3EvdAUPLNAINIPk=
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-671-gWToU5SsNcu9GjvFbq2MdA-1; Mon, 29 Jan 2024 06:15:56 -0500
+X-MC-Unique: gWToU5SsNcu9GjvFbq2MdA-1
+Received: by mail-ej1-f70.google.com with SMTP id a640c23a62f3a-a2bc65005feso199707566b.0
+        for <linux-doc@vger.kernel.org>; Mon, 29 Jan 2024 03:15:56 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706527785; x=1707132585;
-        h=content-transfer-encoding:mime-version:user-agent:references
-         :message-id:date:in-reply-to:subject:cc:to:from:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=AP42ouJKWQqOU4d3qKqBkeJ+2fkyya31t08UrB3VEs8=;
-        b=nVSCMZ5Zw9RFLCbbk1Wds0h1qWCZnww9S3WbOrrPR2NRXfnfG2nU+WsazLN70CGMht
-         4iAcACAuJ7ux6LJhz2devPEiZDiKyU0/r15ctI/K5psny9Xb/8hUSKt4KAK1oA0qcPRl
-         9R786kvCe37wC9J1mzMe5T1a9Cyz+l90+n4M8fL9RG+hCiqvop9TK8F0hhp7i4ZcIVlT
-         Uqpf455J++oW62wCX9igr3qLtrWFdzPVA+/q0rvK1vzrJ72/CmfC9E6H03F/HRW2Og+9
-         mpbhMLCov7Eg86dejSHx5O3s34b0d347h0trPCQk0YujINH6CYuQkLVAhbYCDjy4bKWE
-         Uzeg==
-X-Gm-Message-State: AOJu0YyV5EP0VYsfH4kj0yNKXWHB9ptSO+ToEhiR2qVXeuep3mpJMuGa
-	ajT9H5vtyvDh+2WPY42n7sImuAEArG8wlacQ3TdIfdlhGmAaAnET
-X-Google-Smtp-Source: AGHT+IEakUV8KKyakttgRCGQdrlI4VjW/CE96elnVQ8kGcaWG8wVZc4p/UEIsNBuK49S9QCNhfJsUg==
-X-Received: by 2002:a05:600c:4282:b0:40e:bf77:8152 with SMTP id v2-20020a05600c428200b0040ebf778152mr4473382wmc.5.1706527784615;
-        Mon, 29 Jan 2024 03:29:44 -0800 (PST)
-Received: from imac ([2a02:8010:60a0:0:cc46:8505:d45b:c5be])
-        by smtp.gmail.com with ESMTPSA id u16-20020a05600c19d000b0040e4733aecbsm9760798wmq.15.2024.01.29.03.29.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Jan 2024 03:29:44 -0800 (PST)
-From: Donald Hunter <donald.hunter@gmail.com>
-To: Alessandro Marcolini <alessandromarcolini99@gmail.com>
-Cc: Jakub Kicinski <kuba@kernel.org>,  netdev@vger.kernel.org,  "David S.
- Miller" <davem@davemloft.net>,  Eric Dumazet <edumazet@google.com>,  Paolo
- Abeni <pabeni@redhat.com>,  Jonathan Corbet <corbet@lwn.net>,
-  linux-doc@vger.kernel.org,  Jacob Keller <jacob.e.keller@intel.com>,
-  Breno Leitao <leitao@debian.org>,  Jiri Pirko <jiri@resnulli.us>,
-  donald.hunter@redhat.com
-Subject: Re: [PATCH net-next v1 02/12] tools/net/ynl: Support sub-messages
- in nested attribute spaces
-In-Reply-To: <fcf9630e-26fd-4474-a791-68c548a425b6@gmail.com> (Alessandro
-	Marcolini's message of "Sat, 27 Jan 2024 19:52:20 +0100")
-Date: Sun, 28 Jan 2024 19:36:29 +0000
-Message-ID: <m2bk95w8qq.fsf@gmail.com>
-References: <20240123160538.172-1-donald.hunter@gmail.com>
-	<20240123160538.172-3-donald.hunter@gmail.com>
-	<20240123161804.3573953d@kernel.org> <m2ede7xeas.fsf@gmail.com>
-	<20240124073228.0e939e5c@kernel.org> <m2ttn0w9fa.fsf@gmail.com>
-	<20240126105055.2200dc36@kernel.org> <m2jznuwv7g.fsf@gmail.com>
-	<fcf9630e-26fd-4474-a791-68c548a425b6@gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+        d=1e100.net; s=20230601; t=1706526955; x=1707131755;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=PdmBCDGtM8wSDqYKx2ZDXDpktAyoxR2CO0TvUORZDug=;
+        b=OxYIEWwpSCkSilScdII5hkUu5gh6eTRTg2IzJ0EsUgjmyDmGM7ewEvcz3Pt8NJ37Qj
+         p1UxNe7L2B2jAtuLeIRB6adzP813GRgsEvuGGTL/3rMGAZiqZ891nCDiGTley+1w/063
+         RzNiJSaBfsDNDJHcluQaYo44rm6Y3ij22sAsDxiWuFscdxMNgX44MTyGM1kIIBJPpO9k
+         GB4aPV2VWObcxQciRA2NtkrF6k219bvUdwwtLqCVhR8whUJsgsjG//ZEP90j8yNapG3a
+         LxQnlBKlqr7g97qQujmkV/d0bbpuN82DnL601YVmdouPBsfLBqf9XSDfBD/nwvMSRN/5
+         T9Xg==
+X-Gm-Message-State: AOJu0YzEToIICI7lcfusI0hVWH+9MinJBT9VswJYRtxm4FgODdG4htsz
+	w/2PeUyZbImTKEUO3Tf6UKOpYLjZQ0BuF+X9VYr40HcH1GtK6JI04zPAB4+ojtEeFJSNYM7FZVh
+	THps+tN0gfu+yrwUOWTM/FBlDcVipFHXQRnNiPBCuh2pmA7Ics9/lHQq8AA==
+X-Received: by 2002:a17:906:a013:b0:a2b:a7e:3496 with SMTP id p19-20020a170906a01300b00a2b0a7e3496mr3812591ejy.28.1706526955476;
+        Mon, 29 Jan 2024 03:15:55 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGpAHqhErhQZXiA+dg1bA0riWjrWB83FQhDQeuo1UG0xYvOnaHB3CqQACeeik/4F+TYM4aupQ==
+X-Received: by 2002:a17:906:a013:b0:a2b:a7e:3496 with SMTP id p19-20020a170906a01300b00a2b0a7e3496mr3812571ejy.28.1706526955125;
+        Mon, 29 Jan 2024 03:15:55 -0800 (PST)
+Received: from ?IPV6:2001:1c00:c32:7800:5bfa:a036:83f0:f9ec? (2001-1c00-0c32-7800-5bfa-a036-83f0-f9ec.cable.dynamic.v6.ziggo.nl. [2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
+        by smtp.gmail.com with ESMTPSA id qx25-20020a170906fcd900b00a311a360433sm3893770ejb.143.2024.01.29.03.15.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 29 Jan 2024 03:15:54 -0800 (PST)
+Message-ID: <e21c0853-d10a-44b5-917a-3f3c08102b87@redhat.com>
+Date: Mon, 29 Jan 2024 12:15:53 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 10/10] drm/vboxvideo: fix mapping leaks
+Content-Language: en-US, nl
+To: Philipp Stanner <pstanner@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Bjorn Helgaas <bhelgaas@google.com>, Sam Ravnborg <sam@ravnborg.org>,
+ dakr@redhat.com
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-pci@vger.kernel.org,
+ stable@kernel.vger.org
+References: <20240123094317.15958-1-pstanner@redhat.com>
+ <20240123094317.15958-11-pstanner@redhat.com>
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <20240123094317.15958-11-pstanner@redhat.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Alessandro Marcolini <alessandromarcolini99@gmail.com> writes:
+Hi Philipp,
 
-> On 1/27/24 18:18, Donald Hunter wrote:
->> Okay, so I think the behaviour we need is to either search current scope
->> or search the outermost scope. My suggestion would be to replace the
->> ChainMap approach with just choosing between current and outermost
->> scope. The unusual case is needing to search the outermost scope so
->> using a prefix e.g. '/' for that would work.
->>
->> We can have 'selector: kind' continue to refer to current scope and then
->> have 'selector: /kind' refer to the outermost scope.
->>
->> If we run into a case that requires something other than current or
->> outermost then we could add e.g. '../kind' so that the scope to search
->> is always explicitly identified.
->
-> Wouldn't add different chars in front of the selctor value be confusing?
->
-> IMHO the solution of using a ChainMap with levels could be an easier solu=
-tion. We could just
-> modify the __getitem__() method to output both the value and the level, a=
-nd the get() method to
-> add the chance to specify a level (in our case the level found in the spe=
-c) and error out if the
-> specified level doesn't match with the found one. Something like this:
+On 1/23/24 10:43, Philipp Stanner wrote:
+> When the PCI devres API was introduced to this driver, it was wrongly
+> assumed that initializing the device with pcim_enable_device() instead
+> of pci_enable_device() will make all PCI functions managed.
+> 
+> This is wrong and was caused by the quite confusing devres API for PCI
+> in which some, but not all, functions become managed that way.
+> 
+> The function pci_iomap_range() is never managed.
+> 
+> Replace pci_iomap_range() with the actually managed function
+> pcim_iomap_range().
+> 
+> Additionally, add a call to pcim_request_region() to ensure exclusive
+> access to BAR 0.
 
-If we take the approach of resolving the level from the spec then I
-wouldn't use ChainMap. Per the Python docs [1]: "A ChainMap class is
-provided for quickly linking a number of mappings so they can be treated
-as a single unit."
+I'm a bit worried about this last change. There might be
+issues where the pcim_request_region() fails due to
+e.g. a conflict with the simplefb / simpledrm code.
 
-I think we could instead pass a list of mappings from current to
-outermost and then just reference the correct level that was resolved
-from the spec.
+There is a drm_aperture_remove_conflicting_pci_framebuffers()
+call done before hw_init() gets called, but still this
+has been known to cause issues in the past.
 
-> from collections import ChainMap
->
-> class LevelChainMap(ChainMap):
-> =C2=A0=C2=A0=C2=A0 def __getitem__(self, key):
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 for mapping in self.maps:
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 try:
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 return mapping[key], self.maps[::-1].index(mapping)
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 except=
- KeyError:
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 pass
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return self.__missing__(key)
->
-> =C2=A0=C2=A0=C2=A0 def get(self, key, default=3DNone, level=3DNone):
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 val, lvl =3D self[key] if key =
-in self else (default, None)
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if level:
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if lvl=
- !=3D level:
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 raise Exception("Level mismatch")
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return val, lvl
->
-> # example usage
-> c =3D LevelChainMap({'a':1}, {'inner':{'a':1}}, {'outer': {'inner':{'a':1=
-}}})
-> print(c.get('a', level=3D2))
-> print(c.get('a', level=3D1)) #raise err
->
-> This will leave the spec as it is and will require small changes.
->
-> What do you think?
+Can you split out the adding of the pcim_request_region()
+into a separate patch and *not* mark that separate patch
+for stable ?
 
-The more I think about it, the more I agree that using path-like syntax
-in the selector is overkill. It makes sense to resolve the selector
-level from the spec and then directly access the mappings from the
-correct scope level.
+Regards,
 
-[1] https://docs.python.org/3/library/collections.html#collections.ChainMap
+Hans
+
+
+
+
+
+> 
+> CC: <stable@kernel.vger.org> # v5.10+
+> Fixes: 8558de401b5f ("drm/vboxvideo: use managed pci functions")
+> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+> ---
+>  drivers/gpu/drm/vboxvideo/vbox_main.c | 24 +++++++++++++-----------
+>  1 file changed, 13 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/vboxvideo/vbox_main.c b/drivers/gpu/drm/vboxvideo/vbox_main.c
+> index 42c2d8a99509..7f686a0190e6 100644
+> --- a/drivers/gpu/drm/vboxvideo/vbox_main.c
+> +++ b/drivers/gpu/drm/vboxvideo/vbox_main.c
+> @@ -42,12 +42,11 @@ static int vbox_accel_init(struct vbox_private *vbox)
+>  	/* Take a command buffer for each screen from the end of usable VRAM. */
+>  	vbox->available_vram_size -= vbox->num_crtcs * VBVA_MIN_BUFFER_SIZE;
+>  
+> -	vbox->vbva_buffers = pci_iomap_range(pdev, 0,
+> -					     vbox->available_vram_size,
+> -					     vbox->num_crtcs *
+> -					     VBVA_MIN_BUFFER_SIZE);
+> -	if (!vbox->vbva_buffers)
+> -		return -ENOMEM;
+> +	vbox->vbva_buffers = pcim_iomap_range(
+> +			pdev, 0, vbox->available_vram_size,
+> +			vbox->num_crtcs * VBVA_MIN_BUFFER_SIZE);
+> +	if (IS_ERR(vbox->vbva_buffers))
+> +		return PTR_ERR(vbox->vbva_buffers);
+>  
+>  	for (i = 0; i < vbox->num_crtcs; ++i) {
+>  		vbva_setup_buffer_context(&vbox->vbva_info[i],
+> @@ -115,12 +114,15 @@ int vbox_hw_init(struct vbox_private *vbox)
+>  
+>  	DRM_INFO("VRAM %08x\n", vbox->full_vram_size);
+>  
+> +	ret = pcim_request_region(pdev, 0, "vboxvideo");
+> +	if (ret)
+> +		return ret;
+> +
+>  	/* Map guest-heap at end of vram */
+> -	vbox->guest_heap =
+> -	    pci_iomap_range(pdev, 0, GUEST_HEAP_OFFSET(vbox),
+> -			    GUEST_HEAP_SIZE);
+> -	if (!vbox->guest_heap)
+> -		return -ENOMEM;
+> +	vbox->guest_heap = pcim_iomap_range(pdev, 0,
+> +			GUEST_HEAP_OFFSET(vbox), GUEST_HEAP_SIZE);
+> +	if (IS_ERR(vbox->guest_heap))
+> +		return PTR_ERR(vbox->guest_heap);
+>  
+>  	/* Create guest-heap mem-pool use 2^4 = 16 byte chunks */
+>  	vbox->guest_pool = devm_gen_pool_create(vbox->ddev.dev, 4, -1,
+
 
