@@ -1,277 +1,233 @@
-Return-Path: <linux-doc+bounces-7704-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-7711-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F78E84006A
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 09:38:45 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id B6F5684025D
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 11:07:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D35421F21125
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 08:38:44 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id DC08B1C22285
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 10:07:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F3805604C4;
-	Mon, 29 Jan 2024 08:33:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mediatek.com header.i=@mediatek.com header.b="hJRq9Zt9"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE5CF55C3C;
+	Mon, 29 Jan 2024 10:07:05 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn (mail-bjschn02on2078.outbound.protection.partner.outlook.cn [139.219.17.78])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 890AA57865;
-	Mon, 29 Jan 2024 08:33:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=60.244.123.138
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1706517203; cv=none; b=NnoTunLOcxje/3fkPnJ6m+0benDL8k4aqOWdkTeWdCNP59U3E7iT+64xRop7+1GUKB0vKN6Mywkke6VR9v82DNTn/TrXBjfMhsR1fYkvGKnt+QWS7YOmZXyQG2vxBE98juhl0z86VGvT9wVK/NV+h9/tWs+ahWtUHtH0anKRs4E=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1706517203; c=relaxed/simple;
-	bh=0OLRga1LcfHeQkjMoJOa+JV0bOzhYh3zwLeCH8fUSsE=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=YjCS5LUgwA6AzxiigSIv4AXAS4dgEjbEeozYbDqE/fDyQ/OaQqcEh3Fyj8akwHKoMsDiTxUiBk+WpBtaxuyfVVhhL+t+eyRdEyat3PomEeOPo/o3MwPK2m6dC25hsMZhu/LTEof6wVSvCTXpyHAlrrtyAQE2jAqfMFwtfACtUsQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com; spf=pass smtp.mailfrom=mediatek.com; dkim=pass (1024-bit key) header.d=mediatek.com header.i=@mediatek.com header.b=hJRq9Zt9; arc=none smtp.client-ip=60.244.123.138
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mediatek.com
-X-UUID: 09257914be8111ee9e680517dc993faa-20240129
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=4aFHlKO68gkpQ2H5DEC8ScmJLpJQbxtvVULWLax4NcE=;
-	b=hJRq9Zt9DKIWEjhwVt+oFt2PxzqrlLUWbhc9nweeP5+x5B58DFO6284fAC6G65DPjIFhJBlaYVkL3cQ7X8gKiCPOotAQfxddbCwL6vVeN9N8VdUJqq85nzhrkQwZZohOtizvcUpovEUJiiw02slJYjUki/evcggLWZ3lxmndU3s=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.36,REQID:0fa141f8-c87f-4633-a718-92c1152ef138,IP:0,U
-	RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
-	N:release,TS:-25
-X-CID-META: VersionHash:6e16cf4,CLOUDID:c2185e83-8d4f-477b-89d2-1e3bdbef96d1,B
-	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
-	RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
-	SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 09257914be8111ee9e680517dc993faa-20240129
-Received: from mtkmbs13n2.mediatek.inc [(172.21.101.108)] by mailgw01.mediatek.com
-	(envelope-from <yi-de.wu@mediatek.com>)
-	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-	with ESMTP id 1672033661; Mon, 29 Jan 2024 16:33:10 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- mtkmbs10n1.mediatek.inc (172.21.101.34) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Mon, 29 Jan 2024 16:33:09 +0800
-Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
- mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Mon, 29 Jan 2024 16:33:09 +0800
-From: Yi-De Wu <yi-de.wu@mediatek.com>
-To: Yingshiuan Pan <yingshiuan.pan@mediatek.com>, Ze-Yu Wang
-	<ze-yu.wang@mediatek.com>, Yi-De Wu <yi-de.wu@mediatek.com>, Rob Herring
-	<robh+dt@kernel.org>, Krzysztof Kozlowski
-	<krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Richard Cochran <richardcochran@gmail.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
-	<angelogioacchino.delregno@collabora.com>
-CC: <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<linux-doc@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<netdev@vger.kernel.org>, <linux-mediatek@lists.infradead.org>, David Bradil
-	<dbrazdil@google.com>, Trilok Soni <quic_tsoni@quicinc.com>, My Chuang
-	<my.chuang@mediatek.com>, Shawn Hsiao <shawn.hsiao@mediatek.com>, PeiLun Suei
-	<peilun.suei@mediatek.com>, Liju Chen <liju-clr.chen@mediatek.com>, "Willix
- Yeh" <chi-shen.yeh@mediatek.com>, Kevenny Hsieh <kevenny.hsieh@mediatek.com>
-Subject: [PATCH v9 21/21] virt: geniezone: Enable PTP for synchronizing time between host and guest VMs
-Date: Mon, 29 Jan 2024 16:33:02 +0800
-Message-ID: <20240129083302.26044-22-yi-de.wu@mediatek.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20240129083302.26044-1-yi-de.wu@mediatek.com>
-References: <20240129083302.26044-1-yi-de.wu@mediatek.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D01655E52;
+	Mon, 29 Jan 2024 10:07:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=139.219.17.78
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1706522825; cv=fail; b=RNWt+OP1ptiAslPVRFzeruipIMp+EgrTrb884JBg8rG9zx+5ZMuSG4jwq6j5n8BHITKHzhBP7sS4IjzfJPWmirLGwgACpH8Xv9HlXFrYSxqL+DzpCwjkIlhepHy5YfOnC/syK5nkAjrQ0G7+h4Qx67s5/HXwxRvu1BJ11wws3yQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1706522825; c=relaxed/simple;
+	bh=qHZ4k68QwDxbeugZFjfXcaJZ8QbjqmvVRqfUOf02drs=;
+	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=OwA9XP6oDI3MaqtUP3qYw9Tt0YOCDAqQtgOB3OmdxOraCnT7//5ScJ51vbRNa417wrO7Zpy+ttjr1hHeueh0Y6BBZUcjMVIxh007eEqAiH85UvpxSnCN8L7pqJCBwVqOhJ5FiB+6RMaWnCgFjzkW/HQXYJ0smUX5nBHGSAp9xnk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=starfivetech.com; spf=pass smtp.mailfrom=starfivetech.com; arc=fail smtp.client-ip=139.219.17.78
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=starfivetech.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Y/04ABzUJp4RyGEBf7R/Iehxqt1tDSEV8gaCcEgre9kXQm+8ne94Z4lLibBW/WJjV0vEGzas37DCzEZlldjNRuIIBHH2plv1dChkODwuVd4SelDOtglejJrL1JLq7nfdIZ/YPE4gSECe9BF4dGwpyQF8VnaG/U7pe1/Q5sbkyHtM5XwYuFhN6ssWcJK+2gYXmZVFsM54GmS9qcwlQaFfxghWEIT9Zfp75keoBmCBUMsxC9RjqJSOxBpijB16XX6WFVFN2sE0nIRAWTZNSkbIEZOEcvrXROkbI1dxsiX6Jj80z5pnSTrSXk3kksb7fA/fT2t05AlXL6rovPg2BDagjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7gsq/fTh85hPUpqQokgxn7fOGa6u54SKDSjz6iKGcGI=;
+ b=l9Zp6xJlLF/owYq2gRAiKnpU7i+FivEY41vD9kDrfPLwIIopsId8vrQySPhZ8tkKGe8ra9/D00ch65gDtX4OluTDoZVyfUElBBEwIeefUaTdUZr6g5I4r/Rd8u7TqYzax/gDiY4iy7f4K7+zjSslPHSWMY56LkojavWeYXEJDVdizs2xy8yPqG+hEyBopa97K1tInUsHaUe2jGK1Fk0CAbh0Ki74N6DN5C5rsdGACoiZF7p93ownk4S6TgkXRL7Jmf+2gU2LXTAyXh/AL8J1ppIG46qMyvSTs6DLUmN0tLpxISBs0IwcEDqxrFpy9yiybpc1mEDDeARa6SUs1J/g5A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+Received: from ZQ0PR01MB1160.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:19::6) by ZQ0PR01MB1016.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:c::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.28; Mon, 29 Jan
+ 2024 09:52:20 +0000
+Received: from ZQ0PR01MB1160.CHNPR01.prod.partner.outlook.cn
+ ([fe80::1dbb:b090:7d89:4e22]) by
+ ZQ0PR01MB1160.CHNPR01.prod.partner.outlook.cn ([fe80::1dbb:b090:7d89:4e22%4])
+ with mapi id 15.20.7228.028; Mon, 29 Jan 2024 09:52:20 +0000
+From: Ji Sheng Teoh <jisheng.teoh@starfivetech.com>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Will Deacon <will@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Ilkka Koskinen <ilkka@os.amperecomputing.com>,
+	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+	Dave Jiang <dave.jiang@intel.com>
+Cc: Ji Sheng Teoh <jisheng.teoh@starfivetech.com>,
+	Ley Foon Tan <leyfoon.tan@starfivetech.com>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	devicetree@vger.kernel.org
+Subject: [PATCH v6 0/4] StarFive's StarLink PMU Support
+Date: Mon, 29 Jan 2024 17:51:37 +0800
+Message-ID: <20240129095141.3262366-1-jisheng.teoh@starfivetech.com>
+X-Mailer: git-send-email 2.43.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SH0PR01CA0003.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c311:5::15) To ZQ0PR01MB1160.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:19::6)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-TM-AS-Product-Ver: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-AS-Result: No-10--10.205400-8.000000
-X-TMASE-MatchedRID: y128Pza/oi5PB4rXagQZ+5LPLrFS265P4Ob1SHQRSIgNqAa+u3rIYNwB
-	sjzU/tkx4ZQqYHZtqxhYo3G+rvxrNao77AcuQhw7A9lly13c/gHt/okBLaEo+BjO8pfx4H7gcam
-	vz988laISXSK8uF+jaPAL7Jj8ilE4LZbtj42l31G4jAucHcCqnZYcYQ11P5U/xKLCLOyCW5B25K
-	XQ4QIGJr1A4/e8Np0k4I4a/QXu4NCR8u6DOJbzp8nUT+eskUQP7h2RrsKOiu0+gR+s21UkWIEpJ
-	RcbelqdADXE8V3mpEVDNcDXkV4d67bfdDP+zORmdXz3l78F3YmkWoMjFfK3Xpsoi2XrUn/Jn6Kd
-	MrRsL14qtq5d3cxkNZd/mwLf2BVU/u97Tz1Q+0kDBDLbZrqaEgJOsKQTld6amsvvnoS3ZploBmT
-	SwRxjXg==
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--10.205400-8.000000
-X-TMASE-Version: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-SNTS-SMTP: A9B58409E70E1E727DD1BE319D4B6D809EFF4DB11FC966FF0DF0FAA8F2E88A3C2000:8
-X-MTK: N
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ZQ0PR01MB1160:EE_|ZQ0PR01MB1016:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1d970747-1289-4ba1-5177-08dc20affc14
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	EohCljLX9xXSZmHwbi916HV1UYwCv/Q/hu7zQXPOqPm4jqdXvdormCavnF1leWxWoUxEaMJmrwyfx/RxIuVjNXhs8AjaOk4VitVYy0xqqoP1ziaFfUVSd9om148b413wwe+4KjfmSoemrTcvvONhCnlLqxPTfG9HtgkATVo8GsrUkBAZ0Z2KsSXqSEPMkW6J8aRLKxHOZbcEypgmZ364LJjeEavQ0PS+hyEU1wBUQNDMSiG+/jMifS9Uq1opRd2Nn9qM+aK97lvoaR3KyZCHEdkN5R5tZjmhqsRnoSSTMiLJ+klyyOJ3Iu7Kw+7e2FkUYX6VYYEsrRAia7P7/h303dM+hqzFzlSTOukdLAHcfA5FRak+jszCtozQBnGE3GPn5qj4CKkJsk52IqmONoVeOdcnlKIexC2Hu46ws2yoDv0y3iG65k3P6vcFhaoUo/zL1yEb0C74pYM0cCHVYhYpERnMN0RvCZWMUmN+lcsRT9vFD0nKEGOcYq1lUcnZ3LP7rbE02NxP3/7xGOXZvakYciT3QZG75k8XROHVo3TrtOJta3EyZUaFY3zIwYG3edaoxKAzUhuVFkPoBK+yq/jiZLLFAxxd/0PyCsN9VfKX3qT9H20VMIKY+25L7DmYdegZ
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:ZQ0PR01MB1160.CHNPR01.prod.partner.outlook.cn;PTR:;CAT:NONE;SFS:(13230031)(39830400003)(136003)(366004)(346002)(396003)(230173577357003)(230922051799003)(230273577357003)(186009)(64100799003)(451199024)(1800799012)(36756003)(41320700001)(8676002)(8936002)(4326008)(2906002)(7416002)(5660300002)(66556008)(110136005)(86362001)(66946007)(66476007)(54906003)(38350700005)(40160700002)(40180700001)(38100700002)(52116002)(508600001)(6666004)(83380400001)(2616005)(1076003)(26005)(41300700001)(921011);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?WsmeOPTWdTbAmU+EWEp3SbLEpJwfLT4ZY8qj++nSWBoFvKB4Fhixt+7MkXaO?=
+ =?us-ascii?Q?thCy0LXWPLVQ6nJxTfcpKBfKbJ04m707+mUq8C8by7lIikBfPVcCUkpRv/iP?=
+ =?us-ascii?Q?CQV8pxvahU6DWvBesXwDEh1zifrmrO49wxQs8sypSnco5ZiWLS9wm0itsd3P?=
+ =?us-ascii?Q?K16DICN0Q3wyjBD+AjgFA3rA2nY1xkQ91EUAEf3OUTRo27nS5N9T67ngYoCp?=
+ =?us-ascii?Q?3m0YRPY0VL6UUTnMM4iRA00ueIYhY4pASC1Nt2pgYiHlAUGMwI0Kt6YE/D7V?=
+ =?us-ascii?Q?FG3boPgeZyfaUXhtfoaINP+dsSO+mFrj99BDrXK7ivp47/5zCIdkcb6u4s8Y?=
+ =?us-ascii?Q?/wek9Hx5UcDu+GeB/ASMRGC3ZLQH+oVPUyystDZ18khh54bfeySQCnlzDTDD?=
+ =?us-ascii?Q?b1uxyWQLOiW63JslG89jAJ6Yq4e+mrr2/4cFwhs98AshrlAQoAV3JEnXVbnw?=
+ =?us-ascii?Q?JuoBoNJeFZplMYWMpbF6OS4ShIXoz4p1fMEDiArUBztdAyb0FUM5m0Ni1sFu?=
+ =?us-ascii?Q?6Ou0TBvWEJEEkMWvO4JZFiRW1Qx2kySd2YCOgMpccIRWNoc7jrMUtL9UL6dc?=
+ =?us-ascii?Q?W08kJ2Pdia6zx9VRqvHoSmgFt6rZh8428JbD60E13GySEOi+M8NStto3sMuE?=
+ =?us-ascii?Q?4QZJzhtzinhyfMfMMfthTswZuBHP7vqsl/sAsMOcZbdu6Jgte++GuDXnf+pi?=
+ =?us-ascii?Q?GtXGPUc6kfRd2Vl2k5KLkZMKAwSKITNwTLUJyuDEMpwMMAa7B+XnYTY8DQvj?=
+ =?us-ascii?Q?qNQntM8zu99tnW3gB9I3gejqiX54D2iRxJgFfEkVDJJzFK/Hw8YhgCNYBGR4?=
+ =?us-ascii?Q?IiLLe/8TCp03xr/VdkBEOD4Ud6MTYn4jC1fS1ZHY/zwKiDs3xh8SHFdMWjPP?=
+ =?us-ascii?Q?JimiDt8u2cKXaqsFVETPxIFX0lgEiBL81Jp2/vB4nzTho78Pj1eQ84xKzpTj?=
+ =?us-ascii?Q?qzsF4LuMR4BRN0rRGww5vxdlWXopFmZ3a+xf8l/xsctOe0S7/Kqcjsh+FPAm?=
+ =?us-ascii?Q?EDJ04PQJHrfnzxODnUB2twUssySgY6x6xTvi5e06qqGX3sPl+p7m+65pmQ1D?=
+ =?us-ascii?Q?UBR1ZSaNHv5CQLCpo+yNJ+a+S1jh1kT8PYhmydAaUvwpEP1ctxInObt+vYUN?=
+ =?us-ascii?Q?xABsu6Zli6NtuYuaMTRzIXhoPwPRSe+7m27ZRydOeJPWhha4xqnb/an2PWek?=
+ =?us-ascii?Q?chPL3tBzbeFpOg94ZRSPCJPo8JqmJUSO2Bkkv6LxPhrza5ieycnZ/mVU3W27?=
+ =?us-ascii?Q?0qM7fbWsL2MvXK3pbbCtGvUtzJkoUUa93p7uLCBbd5fvIilbxY14Jk0ejDXC?=
+ =?us-ascii?Q?iFkVpp+12nxrVK1Vo38LxLx8xffoq1oXEQRNiX6dJfebjCbjP23Nlidgl0sq?=
+ =?us-ascii?Q?fEFNkMZ1XMropID1O65qWApoINS35Sc5b5l9Nz7D8Y2r9LZ5w/+aL2ykFMxl?=
+ =?us-ascii?Q?0x2lIUTD5TFex9zs9JaHNHkTnqjtYKQiHQ1OaWsk459ssvnHmG8xmk6akzxc?=
+ =?us-ascii?Q?+13cMta0+NIQyvFydzVtIH6AZv+i05mI+yWBeuQjPHmTGjG+ZbEbMUXWCmcn?=
+ =?us-ascii?Q?lacSnNCG248RYGg2V4BYLt7vkl05Wl+uN27Ba4cwjADuD2Hq5Pp98GZbYPwS?=
+ =?us-ascii?Q?tA=3D=3D?=
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1d970747-1289-4ba1-5177-08dc20affc14
+X-MS-Exchange-CrossTenant-AuthSource: ZQ0PR01MB1160.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2024 09:52:20.2243
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6cMj7uMuCKGsG8jZAIE5QbSF0mOoo0BB2pIO9mu/ot92TzInkLCgLqT4vm2HEEaaHfR1nExl/tg6r90lzQRd0LTeFy4IQCYAv2KzsWK6SrU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ0PR01MB1016
 
-From: "Kevenny Hsieh" <kevenny.hsieh@mediatek.com>
+Changes since v5:
+- Add entry to MAINTAINERS and mark the driver as "Maintained".
 
-Enabled Precision Time Protocol (PTP) for improved host-guest VM time
-synchronization, optimizing operations needing precise clock sync in
-virtual environment.
+Changes since v4:
+- Add Reviewed-by tag from Conor to dt-bindings.
+- Add Documentation/admin-guide/perf/starfive_starlink_pmu.rst.
+- Rework starfive_starlink_pmu.c based on Jonathan's comment.
+  - Use <linux/mod_devicetable.h> in place of <linux/of_device.h>.
+  - Prefix CYCLES to STARLINK_CYCLES.
+  - Fixup error handling, remove unnecessary comma after NULL and comments.
 
-Signed-off-by: Kevenny Hsieh <kevenny.hsieh@mediatek.com>
-Signed-off-by: Liju Chen <liju-clr.chen@mediatek.com>
-Signed-off-by: Yi-De Wu <yi-de.wu@mediatek.com>
----
- arch/arm64/geniezone/Makefile           |  2 +-
- arch/arm64/geniezone/gzvm_arch_common.h |  3 +
- arch/arm64/geniezone/hvc.c              | 73 +++++++++++++++++++++++++
- drivers/virt/geniezone/gzvm_exception.c |  3 +-
- include/linux/gzvm_drv.h                |  1 +
- include/uapi/linux/gzvm.h               |  1 +
- 6 files changed, 80 insertions(+), 3 deletions(-)
- create mode 100644 arch/arm64/geniezone/hvc.c
+Changes since v3:
+- Change dt-bindings filename along with the compatible field to
+   "starfive,jh8100-starlink-pmu" with SOC specific naming
+   convention.
+- Drop unused label defined in examples section in dt-bindings.
+- Update compatible field in starfive_starlink_pmu.c to the
+  aforementioned.
 
-diff --git a/arch/arm64/geniezone/Makefile b/arch/arm64/geniezone/Makefile
-index 0e4f1087f9de..553a64a926dc 100644
---- a/arch/arm64/geniezone/Makefile
-+++ b/arch/arm64/geniezone/Makefile
-@@ -4,6 +4,6 @@
- #
- include $(srctree)/drivers/virt/geniezone/Makefile
- 
--gzvm-y += vm.o vcpu.o vgic.o
-+gzvm-y += vm.o vcpu.o vgic.o hvc.o
- 
- obj-$(CONFIG_MTK_GZVM) += gzvm.o
-diff --git a/arch/arm64/geniezone/gzvm_arch_common.h b/arch/arm64/geniezone/gzvm_arch_common.h
-index fbaf2da792a4..e697223f0fd6 100644
---- a/arch/arm64/geniezone/gzvm_arch_common.h
-+++ b/arch/arm64/geniezone/gzvm_arch_common.h
-@@ -93,6 +93,8 @@ static inline u16 get_vcpuid_from_tuple(unsigned int tuple)
-  * @__pad: add an explicit '__u32 __pad;' in the middle to make it clear
-  *         what the actual layout is.
-  * @lr: The array of LRs(list registers).
-+ * @vtimer_offset: The offset maintained by hypervisor that is host cycle count
-+ *                 when guest VM startup.
-  *
-  * - Keep the same layout of hypervisor data struct.
-  * - Sync list registers back for acking virtual device interrupt status.
-@@ -101,6 +103,7 @@ struct gzvm_vcpu_hwstate {
- 	__le32 nr_lrs;
- 	__le32 __pad;
- 	__le64 lr[GIC_V3_NR_LRS];
-+	__le64 vtimer_offset;
- };
- 
- static inline unsigned int
-diff --git a/arch/arm64/geniezone/hvc.c b/arch/arm64/geniezone/hvc.c
-new file mode 100644
-index 000000000000..603db0fad3d8
---- /dev/null
-+++ b/arch/arm64/geniezone/hvc.c
-@@ -0,0 +1,73 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2023 MediaTek Inc.
-+ */
-+#include <linux/clocksource.h>
-+#include <linux/kernel.h>
-+#include <linux/timekeeping.h>
-+#include <linux/gzvm_drv.h>
-+#include "gzvm_arch_common.h"
-+
-+#define GZVM_PTP_VIRT_COUNTER 0
-+#define GZVM_PTP_PHYS_COUNTER 1
-+/**
-+ * gzvm_handle_ptp_time() - Sync time between host and guest VM
-+ * @vcpu: Pointer to struct gzvm_vcpu_run in userspace
-+ * @counter: Counter type from guest VM
-+ * Return: Always return 0 because there are no cases of failure
-+ *
-+ * The following register values will be passed to the guest VM
-+ * for time synchronization:
-+ * regs->x0 (upper 32 bits) wall clock time
-+ * regs->x1 (lower 32 bits) wall clock time
-+ * regs->x2 (upper 32 bits) cycles
-+ * regs->x3 (lower 32 bits) cycles
-+ */
-+static int gzvm_handle_ptp_time(struct gzvm_vcpu *vcpu, int counter)
-+{
-+	struct system_time_snapshot snapshot;
-+	u64 cycles = 0;
-+
-+	ktime_get_snapshot(&snapshot);
-+
-+	switch (counter) {
-+	case GZVM_PTP_VIRT_COUNTER:
-+		cycles = snapshot.cycles -
-+			 le64_to_cpu(vcpu->hwstate->vtimer_offset);
-+		break;
-+	case GZVM_PTP_PHYS_COUNTER:
-+		cycles = snapshot.cycles;
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	vcpu->run->hypercall.args[0] = upper_32_bits(snapshot.real);
-+	vcpu->run->hypercall.args[1] = lower_32_bits(snapshot.real);
-+	vcpu->run->hypercall.args[2] = upper_32_bits(cycles);
-+	vcpu->run->hypercall.args[3] = lower_32_bits(cycles);
-+
-+	return 0;
-+}
-+
-+/**
-+ * gzvm_arch_handle_guest_hvc() - Handle architecture-related guest hvc
-+ * @vcpu: Pointer to struct gzvm_vcpu_run in userspace
-+ * Return:
-+ * * true - This hvc has been processed, no need to back to VMM.
-+ * * false - This hvc has not been processed, require userspace.
-+ */
-+bool gzvm_arch_handle_guest_hvc(struct gzvm_vcpu *vcpu)
-+{
-+	int ret, counter;
-+
-+	switch (vcpu->run->hypercall.args[0]) {
-+	case GZVM_HVC_PTP:
-+		counter = vcpu->run->hypercall.args[1];
-+		ret = gzvm_handle_ptp_time(vcpu, counter);
-+		return (ret == 0) ? true : false;
-+	default:
-+		break;
-+	}
-+	return false;
-+}
-diff --git a/drivers/virt/geniezone/gzvm_exception.c b/drivers/virt/geniezone/gzvm_exception.c
-index af26d1c82791..e6209b3b3a3e 100644
---- a/drivers/virt/geniezone/gzvm_exception.c
-+++ b/drivers/virt/geniezone/gzvm_exception.c
-@@ -56,7 +56,6 @@ bool gzvm_handle_guest_hvc(struct gzvm_vcpu *vcpu)
- 		ret = gzvm_handle_relinquish(vcpu, ipa);
- 		return (ret == 0) ? true : false;
- 	default:
--		break;
-+		return gzvm_arch_handle_guest_hvc(vcpu);
- 	}
--	return false;
- }
-diff --git a/include/linux/gzvm_drv.h b/include/linux/gzvm_drv.h
-index d532d2d31d43..ca8adf403d48 100644
---- a/include/linux/gzvm_drv.h
-+++ b/include/linux/gzvm_drv.h
-@@ -195,6 +195,7 @@ int gzvm_handle_page_fault(struct gzvm_vcpu *vcpu);
- bool gzvm_handle_guest_exception(struct gzvm_vcpu *vcpu);
- int gzvm_handle_relinquish(struct gzvm_vcpu *vcpu, phys_addr_t ipa);
- bool gzvm_handle_guest_hvc(struct gzvm_vcpu *vcpu);
-+bool gzvm_arch_handle_guest_hvc(struct gzvm_vcpu *vcpu);
- 
- int gzvm_arch_create_device(u16 vm_id, struct gzvm_create_device *gzvm_dev);
- int gzvm_arch_inject_irq(struct gzvm *gzvm, unsigned int vcpu_idx,
-diff --git a/include/uapi/linux/gzvm.h b/include/uapi/linux/gzvm.h
-index 205fcf7cdfa7..681917357ed0 100644
---- a/include/uapi/linux/gzvm.h
-+++ b/include/uapi/linux/gzvm.h
-@@ -191,6 +191,7 @@ enum {
- 
- /* hypercall definitions of GZVM_EXIT_HYPERCALL */
- enum {
-+	GZVM_HVC_PTP = 0x86000001,
- 	GZVM_HVC_MEM_RELINQUISH = 0xc6000009,
- };
- 
+Changes since v2:
+- Change compatible field from generic "starfive,starlink-pmu"
+   to "starfive,starlink-500-pmu" with specific IP versioning
+   in bindings and driver.
+- Fix warning '-Wmissing-prototypes' reported by kernel test robot,
+   by appending static to starlink_pmu_set_event_period() in
+   starfive_starlink_pmu.c.
+
+Changes since v1:
+- Change 'depends on SOC_STARFIVE' to 'depends on ARCH_STARFIVE'
+   in Kconfig
+
+----
+
+This patch series adds support for StarFive's Starlink Performance
+Monitor Unit(PMU).
+StarFive's StarLink PMU integrates one or more CPU cores with
+a shared L3 memory system. The PMU supports overflow interrupt,
+up to 16 programmable 64bit event counters, and an independent
+64bit cycle counter.
+StarLink PMU is accessed via MMIO.
+
+Example Perf stat output:
+[root@user]# perf stat -a -e /starfive_starlink_pmu/cycles/ \
+        -e /starfive_starlink_pmu/read_miss/ \
+        -e /starfive_starlink_pmu/read_hit/ \
+        -e /starfive_starlink_pmu/release_request/  \
+        -e /starfive_starlink_pmu/write_hit/ \
+        -e /starfive_starlink_pmu/write_miss/ \
+        -e /starfive_starlink_pmu/write_request/ \
+        -e /starfive_starlink_pmu/writeback/ \
+        -e /starfive_starlink_pmu/read_request/ \
+        -- openssl speed rsa2048
+Doing 2048 bits private rsa's for 10s: 5 2048 bits private RSA's in
+2.84s
+Doing 2048 bits public rsa's for 10s: 169 2048 bits public RSA's in
+2.42s
+version: 3.0.11
+built on: Tue Sep 19 13:02:31 2023 UTC
+options: bn(64,64)
+CPUINFO: N/A
+                  sign    verify    sign/s verify/s
+rsa 2048 bits 0.568000s 0.014320s      1.8     69.8
+/////////
+ Performance counter stats for 'system wide':
+
+         649991998      starfive_starlink_pmu/cycles/
+           1009690      starfive_starlink_pmu/read_miss/
+           1079750      starfive_starlink_pmu/read_hit/
+           2089405      starfive_starlink_pmu/release_request/
+               129      starfive_starlink_pmu/write_hit/
+                70      starfive_starlink_pmu/write_miss/
+               194      starfive_starlink_pmu/write_request/
+            150080      starfive_starlink_pmu/writeback/
+           2089423      starfive_starlink_pmu/read_request/
+
+      27.062755678 seconds time elapsed
+
+Ji Sheng Teoh (4):
+  perf: starfive: Add StarLink PMU support
+  dt-bindings: perf: starfive: Add JH8100 StarLink PMU
+  docs: perf: Add description for StarFive's StarLink PMU
+  MAINTAINERS: Add entry for StarFive StarLink PMU
+
+ Documentation/admin-guide/perf/index.rst      |   1 +
+ .../perf/starfive_starlink_pmu.rst            |  46 ++
+ .../perf/starfive,jh8100-starlink-pmu.yaml    |  46 ++
+ MAINTAINERS                                   |   7 +
+ drivers/perf/Kconfig                          |   9 +
+ drivers/perf/Makefile                         |   1 +
+ drivers/perf/starfive_starlink_pmu.c          | 643 ++++++++++++++++++
+ 7 files changed, 753 insertions(+)
+ create mode 100644 Documentation/admin-guide/perf/starfive_starlink_pmu.rst
+ create mode 100644 Documentation/devicetree/bindings/perf/starfive,jh8100-starlink-pmu.yaml
+ create mode 100644 drivers/perf/starfive_starlink_pmu.c
+
 -- 
-2.18.0
+2.43.0
 
 
