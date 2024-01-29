@@ -1,355 +1,261 @@
-Return-Path: <linux-doc+bounces-7706-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-7684-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F36D840071
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 09:39:45 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B6FF584001E
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 09:33:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id DB6CD1F211D7
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 08:39:44 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id AC8AEB20DE2
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jan 2024 08:33:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76A3560B89;
-	Mon, 29 Jan 2024 08:33:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F7F45478B;
+	Mon, 29 Jan 2024 08:33:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ht43Nctn"
+	dkim=pass (1024-bit key) header.d=mediatek.com header.i=@mediatek.com header.b="q+uO6Chd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C3D75FEED;
-	Mon, 29 Jan 2024 08:33:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95C695467C;
+	Mon, 29 Jan 2024 08:33:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=60.244.123.138
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1706517205; cv=none; b=UNRPObDLKEf7Yrt6S6b9c3CKXem9y5GX06iUR3LPiUCa2HIXTmtf43HpZJ7CXO1XT+YthmqiisnDYu8tPMbLBaLvSFHdB29y4lngifGvwM+OucYzRTuBvLxz3Q1ukPDkcAPb1bsO/LdIU/yZRsf7rWK8KXkXGJyJs+5zcbd4MQM=
+	t=1706517194; cv=none; b=RGNzxTRqoCH4eAfIo6YAg+HsSnHMdTSHWht2IpMcdao6H3uEsY0eMZ1vDbXRdoJbaALg80cmRPm39hG9jmAqAt41dEkqk7MNMUXv/UbaUZKReo0wx4CncdDUF5kA8tAr5hZthaMmu6XPRWQh3uRVL0F+CuZufhxNcqQGqn0SsHw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1706517205; c=relaxed/simple;
-	bh=gPpx/D0AFFX1KG5syJb7H8q92DHqMNH5spjAbdTRFKM=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=QJZrAwc7N7iXgrRvMOtZGWLEZ/p8UartO1DG2i6RAszV8MI9cOd+Cvt5yUEc/y5zHJqX7at2gljjG93TRlIiYBsfokJ1rMfELgpcfFG2iWg7BOhq2/pALGaJNUD6PglzDIkfItcBkx1Y63P94uOxYBWqI5PxKMVg3bKwQP0RZH8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Ht43Nctn; arc=none smtp.client-ip=209.85.214.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-1d7232dcb3eso9728495ad.2;
-        Mon, 29 Jan 2024 00:33:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706517202; x=1707122002; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=w8rvCs0CTengdVMrYR436oClLvAgG0ieZs9mk2u2MpA=;
-        b=Ht43NctnnNQ1xdphfGQ4jhjWoIjuz5DYoQxTfX+BinDX4v1nzzQSOv+gWaWW0JWcIX
-         ToBb9gt3RviaD/Y3h3xM7vOvVQhZl8W//5sjax45rNXX4R4bkwuaIbhymvvc45HehGuT
-         lTddrnEdwr3QdgNGqnPyQG55CXEUDwN1PU8N2kNCgbSh2USuhACV4y2jFu0Lfs5wl8lf
-         TSWweQ0fEe9ofH95GDrZOEwP21raItZdLHw89UqKq1SdT2pyGES/bkD6ul7nAQgsgqOd
-         IRAERr0ThQAuqi15yfjOvP+UWtpQur/Sz/otSn8rewP6SMuVwcnX+yJgDLJ85EzAcwD+
-         QKnA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706517202; x=1707122002;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=w8rvCs0CTengdVMrYR436oClLvAgG0ieZs9mk2u2MpA=;
-        b=wNaub1diJjE26Nbi/7G1r2PYbPSVe4cw8GhhDIgpIgzqaW+vvlCSUCcR4+A54UxzZQ
-         EWmTwfJ6IBSeTnav+bB+J60qmQYG54ye/KznbdUUFcYVniTaNPOQTk3pXm50LAiUWJ/P
-         QOBkV6Q4jdfGUboaiCaGSmUuHASA1q7cY7/FdBAaLbJryFMIlU65CmHNePxoWifAEgk0
-         px/CvaVMnnhClPtDOQWbUrXjs2A4zx2BA290gAt/eXPDPcw9K/ScuOO2Px5V+ptlfslK
-         zarDBy0V9yNVN+pjrlnxQVffyziZT+KCaI0D15qjxKSMtzD+JtdsG2+rLgbQwSXLAKyF
-         G4Yg==
-X-Gm-Message-State: AOJu0YzlAIlhEwUNqBd9Me18YIRPGVmnNi8lPfTY9iT7CwsgpR8D+WgK
-	UorR+BRxw//CBVjyJFda0VRxV11xU0R0GnhHAX/BrEgBykycDOeN
-X-Google-Smtp-Source: AGHT+IHRbMIKxO3A3x41zkurSgi/UviAUp4JFNFrOSe6P/sbdsT8o4QgZGTE3UZ9cHGnhjfJipJ7Sw==
-X-Received: by 2002:a17:902:db12:b0:1d7:44f8:4aab with SMTP id m18-20020a170902db1200b001d744f84aabmr2123516plx.25.1706517202231;
-        Mon, 29 Jan 2024 00:33:22 -0800 (PST)
-Received: from charles-System-Product-Name.dhcpserver.bu9bmc.local (1-34-21-66.hinet-ip.hinet.net. [1.34.21.66])
-        by smtp.gmail.com with ESMTPSA id v19-20020a170902d09300b001d8d0487edbsm2001878plv.223.2024.01.29.00.33.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Jan 2024 00:33:21 -0800 (PST)
-From: Charles Hsu <ythsu0511@gmail.com>
-To: robh+dt@kernel.org,
-	krzysztof.kozlowski+dt@linaro.org,
-	conor+dt@kernel.org,
-	jdelvare@suse.com,
-	linux@roeck-us.net,
-	corbet@lwn.net,
-	Delphine_CC_Chiu@Wiwynn.com,
-	naresh.solanki@9elements.com,
-	peteryin.openbmc@gmail.com,
-	patrick.rudolph@9elements.com,
-	alexander.stein@ew.tq-group.com,
-	lakshmiy@us.ibm.com,
-	bhelgaas@google.com,
-	michal.simek@amd.com,
-	lukas@wunner.de,
-	festevam@denx.de
-Cc: devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-i2c@vger.kernel.org,
-	ytshu0511@gmail.com,
-	Charles Hsu <ythsu0511@gmail.com>
-Subject: [PATCH v2] hwmon: Add driver for MPS MPQ8785 Synchronous Step-Down Converter
-Date: Mon, 29 Jan 2024 16:31:15 +0800
-Message-Id: <20240129083115.2107466-1-ythsu0511@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1706517194; c=relaxed/simple;
+	bh=+0SKvVKgXHrkL1mceNd+9UP0JOnQYE2L8R1xqCmAh5A=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Fn5Wl+0Cz7GmiZVdb9IhtTfwjEnraHpv43MajmUoQQWKbScm3Igt9HPv9yJyJyS078VpySgXjhadigD6eBhDgaMtKAoacu7LW5nneLMtbi5KTDoApzPgK7o/WHLyPAA73nkKJpg5bk4x5jpBDg8DImy7mGY8za7NsTO3RN9v5tA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com; spf=pass smtp.mailfrom=mediatek.com; dkim=pass (1024-bit key) header.d=mediatek.com header.i=@mediatek.com header.b=q+uO6Chd; arc=none smtp.client-ip=60.244.123.138
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mediatek.com
+X-UUID: 06bbe37abe8111ee9e680517dc993faa-20240129
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
+	h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From; bh=Rnb2WCy9EMT6IEMBrEmGBdkJCYJjdl/KP7SLYCfe+X0=;
+	b=q+uO6ChdFIHt4mcwUKq1RGk7omnGayAaYV5/Ew5sWSLCfG3oPlK5TG1KJipxOFDLfD3jRyOKMc0401DMp9nDgsxghEyJUrMBxriHZtVeBpCm36F+ZtDpTH7PPvneMUiuC/DWZ8LmRd6ukfgGMC45/C7qCdhBPIoHzd8JijowfFk=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.36,REQID:fb3040b7-1875-40b6-89c5-99b8c24cb78d,IP:0,U
+	RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+	N:release,TS:-25
+X-CID-META: VersionHash:6e16cf4,CLOUDID:79185e83-8d4f-477b-89d2-1e3bdbef96d1,B
+	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
+	RL:1,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
+	SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
+X-CID-BVR: 0
+X-CID-BAS: 0,_,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
+X-UUID: 06bbe37abe8111ee9e680517dc993faa-20240129
+Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by mailgw01.mediatek.com
+	(envelope-from <yi-de.wu@mediatek.com>)
+	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+	with ESMTP id 523109377; Mon, 29 Jan 2024 16:33:06 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Mon, 29 Jan 2024 16:33:05 +0800
+Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Mon, 29 Jan 2024 16:33:05 +0800
+From: Yi-De Wu <yi-de.wu@mediatek.com>
+To: Yingshiuan Pan <yingshiuan.pan@mediatek.com>, Ze-Yu Wang
+	<ze-yu.wang@mediatek.com>, Yi-De Wu <yi-de.wu@mediatek.com>, Rob Herring
+	<robh+dt@kernel.org>, Krzysztof Kozlowski
+	<krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, Richard Cochran <richardcochran@gmail.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
+	<angelogioacchino.delregno@collabora.com>
+CC: <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+	<netdev@vger.kernel.org>, <linux-mediatek@lists.infradead.org>, David Bradil
+	<dbrazdil@google.com>, Trilok Soni <quic_tsoni@quicinc.com>, My Chuang
+	<my.chuang@mediatek.com>, Shawn Hsiao <shawn.hsiao@mediatek.com>, PeiLun Suei
+	<peilun.suei@mediatek.com>, Liju Chen <liju-clr.chen@mediatek.com>, Willix
+ Yeh <chi-shen.yeh@mediatek.com>, Kevenny Hsieh <kevenny.hsieh@mediatek.com>
+Subject: [PATCH v9 00/21] GenieZone hypervisor drivers
+Date: Mon, 29 Jan 2024 16:32:41 +0800
+Message-ID: <20240129083302.26044-1-yi-de.wu@mediatek.com>
+X-Mailer: git-send-email 2.18.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-MTK: N
 
-Add support for mpq8785 device from Monolithic Power Systems, Inc.
-(MPS) vendor. This is synchronous step-down controller.
+This series is based on linux-next, tag: next-20240125.
 
-Signed-off-by: Charles Hsu <ythsu0511@gmail.com>
+GenieZone hypervisor(gzvm) is a type-1 hypervisor that supports various virtual
+machine types and provides security features such as TEE-like scenarios and
+secure boot. It can create guest VMs for security use cases and has
+virtualization capabilities for both platform and interrupt. Although the
+hypervisor can be booted independently, it requires the assistance of GenieZone
+hypervisor kernel driver(gzvm-ko) to leverage the ability of Linux kernel for
+vCPU scheduling, memory management, inter-VM communication and virtio backend
+support.
 
----
-Change in v1:
-    Initial patchset.
-Change in v2:
-    1.Add pmbus support status registers.
-    2.Add mpq8785 in trivial-devices.yaml.
-    3.Remove format[PSC_VOLTAGE_OUT]
-    4.Fix MODULE_DESCRIPTION
----
- .../devicetree/bindings/trivial-devices.yaml  |  2 +
- Documentation/hwmon/index.rst                 |  1 +
- Documentation/hwmon/mpq8785.rst               | 94 +++++++++++++++++++
- drivers/hwmon/pmbus/Kconfig                   |  9 ++
- drivers/hwmon/pmbus/Makefile                  |  1 +
- drivers/hwmon/pmbus/mpq8785.c                 | 62 ++++++++++++
- 6 files changed, 169 insertions(+)
- create mode 100644 Documentation/hwmon/mpq8785.rst
- create mode 100644 drivers/hwmon/pmbus/mpq8785.c
+Changes in v9:
+- Add gzvm_vm_allocate_guest_page function for demand paging support and
+  protected VM memory performance optimization
+- Fix coding style from viewer suggestion and checking tools.
 
-diff --git a/Documentation/devicetree/bindings/trivial-devices.yaml b/Documentation/devicetree/bindings/trivial-devices.yaml
-index 79dcd92c4a43..088b23ed2ae6 100644
---- a/Documentation/devicetree/bindings/trivial-devices.yaml
-+++ b/Documentation/devicetree/bindings/trivial-devices.yaml
-@@ -129,6 +129,8 @@ properties:
-           - mps,mp2975
-             # Monolithic Power Systems Inc. multi-phase hot-swap controller mp5990
-           - mps,mp5990
-+            # Monolithic Power Systems Inc. synchronous step-down converter mpq8785
-+          - mps,mpq8785
-             # Honeywell Humidicon HIH-6130 humidity/temperature sensor
-           - honeywell,hi6130
-             # IBM Common Form Factor Power Supply Versions (all versions)
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index c7ed1f73ac06..085ad6ca9b05 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -163,6 +163,7 @@ Hardware Monitoring Kernel Drivers
-    mp2975
-    mp5023
-    mp5990
-+   mpq8785
-    nct6683
-    nct6775
-    nct7802
-diff --git a/Documentation/hwmon/mpq8785.rst b/Documentation/hwmon/mpq8785.rst
-new file mode 100644
-index 000000000000..bf8176b87086
---- /dev/null
-+++ b/Documentation/hwmon/mpq8785.rst
-@@ -0,0 +1,94 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+
-+Kernel driver mpq8785
-+=======================
-+
-+Supported chips:
-+
-+  * MPS MPQ8785
-+
-+    Prefix: 'mpq8785'
-+
-+Author: Charles Hsu <ythsu0511@gmail.com>
-+
-+Description
-+-----------
-+
-+The MPQ8785 is a fully integrated, PMBus-compatible, high-frequency, synchronous
-+buck converter. The MPQ8785 offers a very compact solution that achieves up to
-+40A output current per phase, with excellent load and line regulation over a
-+wide input supply range. The MPQ8785 operates at high efficiency over a wide
-+output current load range.
-+
-+The PMBus interface provides converter configurations and key parameters
-+monitoring.
-+
-+The MPQ8785 adopts MPS's proprietary multi-phase digital constant-on-time (MCOT)
-+control, which provides fast transient response and eases loop stabilization.
-+The MCOT scheme also allows multiple MPQ8785 devices to be connected in parallel
-+with excellent current sharing and phase interleaving for high-current
-+applications.
-+
-+Fully integrated protection features include over-current protection (OCP),
-+over-voltage protection (OVP), under-voltage protection (UVP), and
-+over-temperature protection (OTP).
-+
-+The MPQ8785 requires a minimal number of readily available, standard external
-+components, and is available in a TLGA (5mmx6mm) package.
-+
-+Device compliant with:
-+
-+- PMBus rev 1.3 interface.
-+
-+The driver exports the following attributes via the 'sysfs' files
-+for input voltage:
-+
-+**in1_input**
-+
-+**in1_label**
-+
-+**in1_max**
-+
-+**in1_max_alarm**
-+
-+**in1_min**
-+
-+**in1_min_alarm**
-+
-+**in1_crit**
-+
-+**in1_crit_alarm**
-+
-+The driver provides the following attributes for output voltage:
-+
-+**in2_input**
-+
-+**in2_label**
-+
-+**in2_alarm**
-+
-+The driver provides the following attributes for output current:
-+
-+**curr1_input**
-+
-+**curr1_label**
-+
-+**curr1_max**
-+
-+**curr1_max_alarm**
-+
-+**curr1_crit**
-+
-+**curr1_crit_alarm**
-+
-+The driver provides the following attributes for temperature:
-+
-+**temp1_input**
-+
-+**temp1_max**
-+
-+**temp1_max_alarm**
-+
-+**temp1_crit**
-+
-+**temp1_crit_alarm**
-diff --git a/drivers/hwmon/pmbus/Kconfig b/drivers/hwmon/pmbus/Kconfig
-index 294808f5240a..557ae0c414b0 100644
---- a/drivers/hwmon/pmbus/Kconfig
-+++ b/drivers/hwmon/pmbus/Kconfig
-@@ -377,6 +377,15 @@ config SENSORS_MPQ7932
- 	  This driver can also be built as a module. If so, the module will
- 	  be called mpq7932.
- 
-+config SENSORS_MPQ8785
-+	tristate "MPS MPQ8785"
-+	help
-+	  If you say yes here you get hardware monitoring functionality support
-+	  for power management IC MPS MPQ8785.
-+
-+	  This driver can also be built as a module. If so, the module will
-+	  be called mpq8785.
-+
- config SENSORS_PIM4328
- 	tristate "Flex PIM4328 and compatibles"
- 	help
-diff --git a/drivers/hwmon/pmbus/Makefile b/drivers/hwmon/pmbus/Makefile
-index cf8a76744545..f14ecf03ad77 100644
---- a/drivers/hwmon/pmbus/Makefile
-+++ b/drivers/hwmon/pmbus/Makefile
-@@ -39,6 +39,7 @@ obj-$(CONFIG_SENSORS_MP2975)	+= mp2975.o
- obj-$(CONFIG_SENSORS_MP5023)	+= mp5023.o
- obj-$(CONFIG_SENSORS_MP5990)	+= mp5990.o
- obj-$(CONFIG_SENSORS_MPQ7932)	+= mpq7932.o
-+obj-$(CONFIG_SENSORS_MPQ8785)	+= mpq8785.o
- obj-$(CONFIG_SENSORS_PLI1209BC)	+= pli1209bc.o
- obj-$(CONFIG_SENSORS_PM6764TR)	+= pm6764tr.o
- obj-$(CONFIG_SENSORS_PXE1610)	+= pxe1610.o
-diff --git a/drivers/hwmon/pmbus/mpq8785.c b/drivers/hwmon/pmbus/mpq8785.c
-new file mode 100644
-index 000000000000..52c73e5f6a3e
---- /dev/null
-+++ b/drivers/hwmon/pmbus/mpq8785.c
-@@ -0,0 +1,62 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Driver for MPS MPQ8785 Step-Down Converter
-+ */
-+
-+#include <linux/i2c.h>
-+#include <linux/module.h>
-+#include <linux/of_device.h>
-+#include "pmbus.h"
-+
-+static struct pmbus_driver_info mpq8785_info = {
-+	.pages = 1,
-+	.format[PSC_VOLTAGE_IN] = direct,
-+	.format[PSC_CURRENT_OUT] = direct,
-+	.format[PSC_TEMPERATURE] = direct,
-+	.m[PSC_VOLTAGE_IN] = 4,
-+	.b[PSC_VOLTAGE_IN] = 0,
-+	.R[PSC_VOLTAGE_IN] = 1,
-+	.m[PSC_CURRENT_OUT] = 16,
-+	.b[PSC_CURRENT_OUT] = 0,
-+	.R[PSC_CURRENT_OUT] = 0,
-+	.m[PSC_TEMPERATURE] = 1,
-+	.b[PSC_TEMPERATURE] = 0,
-+	.R[PSC_TEMPERATURE] = 0,
-+	.func[0] =
-+		PMBUS_HAVE_VIN | PMBUS_HAVE_STATUS_INPUT |
-+		PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT |
-+		PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT |
-+		PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP,
-+};
-+
-+static int mpq8785_probe(struct i2c_client *client)
-+{
-+	return pmbus_do_probe(client, &mpq8785_info);
-+};
-+
-+static const struct i2c_device_id mpq8785_id[] = {
-+	{ "mpq8785", 0 },
-+	{ },
-+};
-+MODULE_DEVICE_TABLE(i2c, mpq8785_id);
-+
-+static const struct of_device_id __maybe_unused mpq8785_of_match[] = {
-+	{ .compatible = "mps,mpq8785" },
-+	{}
-+};
-+MODULE_DEVICE_TABLE(of, mpq8785_of_match);
-+
-+static struct i2c_driver mpq8785_driver = {
-+	.driver = {
-+		   .name = "mpq8785",
-+		   .of_match_table = of_match_ptr(mpq8785_of_match),
-+	},
-+	.probe_new = mpq8785_probe,
-+	.id_table = mpq8785_id,
-+};
-+
-+module_i2c_driver(mpq8785_driver);
-+
-+MODULE_AUTHOR("Charles Hsu <ythsu0511@gmail.com>");
-+MODULE_DESCRIPTION("PMBus driver for MPS MPQ8785");
-+MODULE_LICENSE("GPL");
+Changes in v8:
+https://lore.kernel.org/all/20231228105147.13752-1-yi-de.wu@mediatek.com/
+- Add reasons for using dt solution in dt-bindings.
+- Add locks for memory pin/unpin and relinquish operations.
+- Add VM memory stats in debugfs.
+- Add tracing support for hypercall and vcpu exit reasons.
+- Enable PTP for timing synchronization between host and guests.
+- Optimize memory performance for protected VMs.
+- Refactor wording and titles in documentation.
+
+Changes in v7:
+https://lore.kernel.org/all/20231116152756.4250-1-yi-de.wu@mediatek.com/
+- Rebase these patches to the Linux 6.7-rc1 release.
+- Refactor patches 1 to 15 to improve coding style while ensuring they do not
+  violate the majority of the changes made in v6
+- Provide individual VM memory statistics within debugfs in patch 16.
+- Add tracing support for hyper call and vcpu exit_reason.
+
+Changes in v6:
+https://lore.kernel.org/all/20230919111210.19615-1-yi-de.wu@mediatek.com/
+- Rebase based on kernel 6.6-rc1
+- Keep dt solution and leave the reasons in the commit message
+- Remove arch/arm64/include/uapi/asm/gzvm_arch.h due to simplicity
+- Remove resampler in drivers/virt/geniezone/gzvm_irqfd.c due to defeature for
+  now
+- Remove PPI in arch/arm64/geniezone/vgic.c
+- Refactor vm related components into 3 smaller patches, namely adding vm
+  support, setting user memory region and checking vm capability 
+- Refactor vcpu and vm component to remove unnecessary ARM prefix 
+- Add demand paging to fix crash on destroying memory page, acclerate on booting
+  and support ballooning deflate
+- Add memory pin/unpin memory mechanism to support protected VM
+- Add block-based demand paging for performance concern
+- Response to reviewers and fix coding style accordingly
+
+Changes in v5:
+https://lore.kernel.org/all/20230727080005.14474-1-yi-de.wu@mediatek.com/
+- Add dt solution back for device initialization
+- Add GZVM_EXIT_GZ reason for gzvm_vcpu_run()
+- Add patch for guest page fault handler
+- Add patch for supporitng pin/unpin memory
+- Remove unused enum members, namely GZVM_FUNC_GET_REGS and GZVM_FUNC_SET_REGS
+- Use dev_debug() for debugging when platform device is available, and use
+  pr_debug() otherwise
+- Response to reviewers and fix bugs accordingly
+
+
+Changes in v4:
+https://lore.kernel.org/all/20230609085214.31071-1-yi-de.wu@mediatek.com/
+- Add macro to set VM as protected without triggering pvmfw in AVF.
+- Add support to pass dtb config to hypervisor.
+- Add support for virtual timer.
+- Add UAPI to pass memory region metadata to hypervisor.
+- Define our own macros for ARM's interrupt number
+- Elaborate more on GenieZone hyperivsor in documentation
+- Fix coding style.
+- Implement our own module for coverting ipa to pa
+- Modify the way of initializing device from dt to a more discoverable way
+- Move refactoring changes into indepedent patches.
+
+Changes in v3:
+https://lore.kernel.org/all/20230512080405.12043-1-yi-de.wu@mediatek.com/
+- Refactor: separate arch/arm64/geniezone/gzvm_arch.c into vm.c/vcpu.c/vgic.c
+- Remove redundant functions
+- Fix reviewer's comments
+
+Changes in v2:
+https://lore.kernel.org/all/20230428103622.18291-1-yi-de.wu@mediatek.com/
+- Refactor: move to drivers/virt/geniezone
+- Refactor: decouple arch-dependent and arch-independent
+- Check pending signal before entering guest context
+- Fix reviewer's comments
+
+Initial Commit in v1:
+https://lore.kernel.org/all/20230413090735.4182-1-yi-de.wu@mediatek.com/
+
+
+
+Yi-De Wu (21):
+  virt: geniezone: enable gzvm-ko in defconfig
+  docs: geniezone: Introduce GenieZone hypervisor
+  dt-bindings: hypervisor: Add MediaTek GenieZone hypervisor
+  virt: geniezone: Add GenieZone hypervisor driver
+  virt: geniezone: Add vm support
+  virt: geniezone: Add set_user_memory_region for vm
+  virt: geniezone: Add vm capability check
+  virt: geniezone: Optimize performance of protected VM memory
+  virt: geniezone: Add vcpu support
+  virt: geniezone: Add irqchip support for virtual interrupt injection
+  virt: geniezone: Add irqfd support
+  virt: geniezone: Add ioeventfd support
+  virt: geniezone: Add memory region support
+  virt: geniezone: Add dtb config support
+  virt: geniezone: Add demand paging support
+  virt: geniezone: Add block-based demand paging support
+  virt: geniezone: Add memory pin/unpin support
+  virt: geniezone: Add memory relinquish support
+  virt: geniezone: Provide individual VM memory statistics within
+    debugfs
+  virt: geniezone: Add tracing support for hyp call and vcpu exit_reason
+  virt: geniezone: Enable PTP for synchronizing time between host and
+    guest VMs
+
+ .../hypervisor/mediatek,geniezone-hyp.yaml    |  31 +
+ Documentation/virt/geniezone/introduction.rst |  87 +++
+ Documentation/virt/index.rst                  |   1 +
+ MAINTAINERS                                   |  11 +
+ arch/arm64/Kbuild                             |   1 +
+ arch/arm64/configs/defconfig                  |   2 +
+ arch/arm64/geniezone/Makefile                 |   9 +
+ arch/arm64/geniezone/gzvm_arch_common.h       | 122 ++++
+ arch/arm64/geniezone/hvc.c                    |  73 +++
+ arch/arm64/geniezone/vcpu.c                   |  80 +++
+ arch/arm64/geniezone/vgic.c                   |  50 ++
+ arch/arm64/geniezone/vm.c                     | 432 +++++++++++++
+ drivers/virt/Kconfig                          |   2 +
+ drivers/virt/geniezone/Kconfig                |  16 +
+ drivers/virt/geniezone/Makefile               |  12 +
+ drivers/virt/geniezone/gzvm_common.h          |  12 +
+ drivers/virt/geniezone/gzvm_exception.c       |  61 ++
+ drivers/virt/geniezone/gzvm_ioeventfd.c       | 276 ++++++++
+ drivers/virt/geniezone/gzvm_irqfd.c           | 382 +++++++++++
+ drivers/virt/geniezone/gzvm_main.c            | 153 +++++
+ drivers/virt/geniezone/gzvm_mmu.c             | 308 +++++++++
+ drivers/virt/geniezone/gzvm_vcpu.c            | 284 ++++++++
+ drivers/virt/geniezone/gzvm_vm.c              | 608 ++++++++++++++++++
+ include/linux/gzvm_drv.h                      | 224 +++++++
+ include/trace/events/geniezone.h              |  54 ++
+ include/uapi/linux/gzvm.h                     | 396 ++++++++++++
+ 26 files changed, 3687 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/hypervisor/mediatek,geniezone-hyp.yaml
+ create mode 100644 Documentation/virt/geniezone/introduction.rst
+ create mode 100644 arch/arm64/geniezone/Makefile
+ create mode 100644 arch/arm64/geniezone/gzvm_arch_common.h
+ create mode 100644 arch/arm64/geniezone/hvc.c
+ create mode 100644 arch/arm64/geniezone/vcpu.c
+ create mode 100644 arch/arm64/geniezone/vgic.c
+ create mode 100644 arch/arm64/geniezone/vm.c
+ create mode 100644 drivers/virt/geniezone/Kconfig
+ create mode 100644 drivers/virt/geniezone/Makefile
+ create mode 100644 drivers/virt/geniezone/gzvm_common.h
+ create mode 100644 drivers/virt/geniezone/gzvm_exception.c
+ create mode 100644 drivers/virt/geniezone/gzvm_ioeventfd.c
+ create mode 100644 drivers/virt/geniezone/gzvm_irqfd.c
+ create mode 100644 drivers/virt/geniezone/gzvm_main.c
+ create mode 100644 drivers/virt/geniezone/gzvm_mmu.c
+ create mode 100644 drivers/virt/geniezone/gzvm_vcpu.c
+ create mode 100644 drivers/virt/geniezone/gzvm_vm.c
+ create mode 100644 include/linux/gzvm_drv.h
+ create mode 100644 include/trace/events/geniezone.h
+ create mode 100644 include/uapi/linux/gzvm.h
+
 -- 
-2.34.1
+2.18.0
 
 
