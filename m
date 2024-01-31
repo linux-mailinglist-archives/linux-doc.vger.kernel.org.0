@@ -1,228 +1,188 @@
-Return-Path: <linux-doc+bounces-8039-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8041-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43493843E3D
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 12:25:01 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9812A843ECE
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 12:51:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B2CDBB32610
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 11:17:47 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id ECD311F2EDAA
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 11:51:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2317B78664;
-	Wed, 31 Jan 2024 11:17:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 685B6762E1;
+	Wed, 31 Jan 2024 11:51:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="M7qu8hcn"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mxout012.mail.hostpoint.ch (mxout012.mail.hostpoint.ch [217.26.49.172])
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2041.outbound.protection.outlook.com [40.107.236.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCFCE6D1BA;
-	Wed, 31 Jan 2024 11:17:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.26.49.172
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1706699833; cv=none; b=B1MbYpZCHksZU814yeTR3V0aAaP5FB039+GE80efmjMUfqVoRoR589V/feNCWU4/cQJz2AaPkpVebERPgY1pFZiIeBxL7EygqrRj3wXH5Ygt2iEC2rsTmcD70MVnDY/tJVZi7SXryZVNq1FMD3qzvi4jRodEE68qgXqe6qr/8k8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1706699833; c=relaxed/simple;
-	bh=bi0Uckinvs++A9lPfNrJcVzgqzcSVsKWlDd2cPXeYj8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=VlGuxSUirZEdjDM4vvQpfSg70TXgc1TT/a0WanqVromdLYsamfozGP/8VfRQMtsN/kI718gt4iqxgQchbk2spzx3TMH+xRT6oXWaiRZbmqi/0mQX9/V6c19n6r1d8MRS0kIM12SxuSFeDNmwFogr/U/4BhYHmGiSqZ81vAhdGOI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=stefan-gloor.ch; spf=pass smtp.mailfrom=stefan-gloor.ch; arc=none smtp.client-ip=217.26.49.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=stefan-gloor.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=stefan-gloor.ch
-Received: from [10.0.2.44] (helo=asmtp014.mail.hostpoint.ch)
-	by mxout012.mail.hostpoint.ch with esmtps  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.97.1 (FreeBSD))
-	(envelope-from <code@stefan-gloor.ch>)
-	id 1rV8ZB-0000000055k-20LK;
-	Wed, 31 Jan 2024 12:15:41 +0100
-Received: from 157.20.79.83.dynamic.wline.res.cust.swisscom.ch ([83.79.20.157] helo=thinkpad.localdomain)
-	by asmtp014.mail.hostpoint.ch with esmtpa (Exim 4.97.1 (FreeBSD))
-	(envelope-from <code@stefan-gloor.ch>)
-	id 1rV8ZB-000000009un-0gBT;
-	Wed, 31 Jan 2024 12:15:41 +0100
-X-Authenticated-Sender-Id: code@stefan-gloor.ch
-From: Stefan Gloor <code@stefan-gloor.ch>
-To: jdelvare@suse.com,
-	linux@roeck-us.net,
-	corbet@lwn.net,
-	linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Stefan Gloor <code@stefan-gloor.ch>
-Subject: [PATCH v4 1/1] hwmon: (sht3x) read out sensor serial number
-Date: Wed, 31 Jan 2024 12:15:12 +0100
-Message-ID: <20240131111512.25321-2-code@stefan-gloor.ch>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240131111512.25321-1-code@stefan-gloor.ch>
-References: <20240131111512.25321-1-code@stefan-gloor.ch>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6361069D2E;
+	Wed, 31 Jan 2024 11:51:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.236.41
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1706701892; cv=fail; b=uK6gIHwyqZBTvIjlQKO4WbMwq2vBStb3QGkUjZ/4H1cXLU/h69kxmfd4SknvHE5uDsfKBwhCE1mKG3zo1yrgvxHdCORY8dRU+Hf2ZT5pVniYYsAAJ/mCIBuI21noZ2VRSyZBzjUaKB7NJUH3lZhk2eJsGxwh71q0ftkSNP0kjGY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1706701892; c=relaxed/simple;
+	bh=hAmicKl3kkXi37TFt2mePtIZ37RlcC9TKkcttcOnlug=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=sU/HTk2IFmPpsIq/Ui5Yroq34Pz5s5hQrcSshlMueHYnM01YZSp/wTNUEct3jJ/NNTT+Dhs9JboaR5YEVYEhpsQjtbKlc6qTvssaKntbbkfaaKYUvJLjbSukqv2+L6vIKtL0fE3LxFv4IiuvfYatjk2DMc06hDcSsPdBTue1HlQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=M7qu8hcn; arc=fail smtp.client-ip=40.107.236.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=cTid27bEMHkhbb2QXDH7QkR+P6IDliIZK2UHhjwhaywQiugt4JcpfKwuI5r0wmJHlkXtKoKrP0wjfs/8tgqnXyK+9pVbUbMKlVGjU2fPA0Fwoiho4UaRMYbl0/TCUoi3/PtQyVkVTUAtWQNFb2ZTU3TANsBlN07aiDyuFaTOXSIQ0f43EGycS43BSDarTL3cnScUhR738F0OTJGyD7qXLg3dtwE30q3z64nw71ayJYdBdeSkXj1MMInMir21QfZF3BSGGgYYFukJH5kMBHkxW+RDij4JLepbdKiEadHAqdWVEv92BM8qmfwWWHpA6Yjx+rLN/i+KD8puhUZWksDOKg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hAmicKl3kkXi37TFt2mePtIZ37RlcC9TKkcttcOnlug=;
+ b=YmfxaFR8YXdBplr0pdrzeZeneI4lTkAuZ+jsnSMwb4cy3hy/ndX8Tdmb5VtnlEsyfoZ9kW2IWOdCRcOHQhVLJte4JOCcTgcETo81xaTWZFIBMvFGfLYU04ILOHyR+kVGQt1w5bbZzpzO2HnRXFTftdi1ugBlFouXQggQJqvaFc0VHAy0xMXKT1qyfrIqRpzrN8ovd18kFKYwflkcfJt3kx2VzSn7PeOpMjlDBszIAIUWQHjFP1Hl7Q9V7L40Yj/6JOMMqAnpo4GkelKDbgn3SxpvWVtRtA68lJw+0MQ3Xqbm486oeSXRQhOtR9jK1xkQUCvoCpeynL96s42J+jQegA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hAmicKl3kkXi37TFt2mePtIZ37RlcC9TKkcttcOnlug=;
+ b=M7qu8hcnY6z8lzKFTzh914cRNb/s/foGtsYjcTKkjUSeBHuW0RWnjpNAJuRIiAoCvDC/cu2gFu6wy43MfxX7VkStGXVQGOAiTt3mPOWfzR2Go2GE/0CaA0nAhpuq6LU43uFdHfJfMQblQ3kx0X0iLxA/I3JBrLf8CTISzqLw1Zn0M88+za6VZEQDKkDGYwnMyxQStI9jbT8nbuIdnmg7e8kR1QQ6Ccyn70ocMFhT6+Akqsk5FSXKcx5Eb/WrMKnv/21/9n+ZZsRs8+pIkOi2hui9Qm1WtJKVf0QbwjPhuO0LQ5bn+/GM9d5Bh4naTvC0yWLdY7DCH/euVCrROEPt2w==
+Received: from DM6PR12MB4516.namprd12.prod.outlook.com (2603:10b6:5:2ac::20)
+ by MW4PR12MB7333.namprd12.prod.outlook.com (2603:10b6:303:21b::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.22; Wed, 31 Jan
+ 2024 11:51:27 +0000
+Received: from DM6PR12MB4516.namprd12.prod.outlook.com
+ ([fe80::fa7e:d2b7:5f80:2dd4]) by DM6PR12MB4516.namprd12.prod.outlook.com
+ ([fe80::fa7e:d2b7:5f80:2dd4%5]) with mapi id 15.20.7228.029; Wed, 31 Jan 2024
+ 11:51:27 +0000
+From: Danielle Ratson <danieller@nvidia.com>
+To: Andrew Lunn <andrew@lunn.ch>
+CC: "netdev@vger.kernel.org" <netdev@vger.kernel.org>, "davem@davemloft.net"
+	<davem@davemloft.net>, "edumazet@google.com" <edumazet@google.com>,
+	"kuba@kernel.org" <kuba@kernel.org>, "pabeni@redhat.com" <pabeni@redhat.com>,
+	"corbet@lwn.net" <corbet@lwn.net>, "linux@armlinux.org.uk"
+	<linux@armlinux.org.uk>, "sdf@google.com" <sdf@google.com>,
+	"kory.maincent@bootlin.com" <kory.maincent@bootlin.com>,
+	"maxime.chevallier@bootlin.com" <maxime.chevallier@bootlin.com>,
+	"vladimir.oltean@nxp.com" <vladimir.oltean@nxp.com>,
+	"przemyslaw.kitszel@intel.com" <przemyslaw.kitszel@intel.com>,
+	"ahmed.zaki@intel.com" <ahmed.zaki@intel.com>, "richardcochran@gmail.com"
+	<richardcochran@gmail.com>, "shayagr@amazon.com" <shayagr@amazon.com>,
+	"paul.greenwalt@intel.com" <paul.greenwalt@intel.com>, "jiri@resnulli.us"
+	<jiri@resnulli.us>, "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, mlxsw
+	<mlxsw@nvidia.com>, Petr Machata <petrm@nvidia.com>, Ido Schimmel
+	<idosch@nvidia.com>
+Subject: RE: [RFC PATCH net-next 1/9] ethtool: Add ethtool operation to write
+ to a transceiver module EEPROM
+Thread-Topic: [RFC PATCH net-next 1/9] ethtool: Add ethtool operation to write
+ to a transceiver module EEPROM
+Thread-Index: AQHaTQ9wgRzMSsypjUOlyEfOvVgnwbDq/18AgAjcG2A=
+Date: Wed, 31 Jan 2024 11:51:27 +0000
+Message-ID:
+ <DM6PR12MB451624E10A2614AFBFB70E73D87C2@DM6PR12MB4516.namprd12.prod.outlook.com>
+References: <20240122084530.32451-1-danieller@nvidia.com>
+ <20240122084530.32451-2-danieller@nvidia.com>
+ <9eecccb0-a875-4dbc-b88c-5b2aad838305@lunn.ch>
+In-Reply-To: <9eecccb0-a875-4dbc-b88c-5b2aad838305@lunn.ch>
+Accept-Language: he-IL, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM6PR12MB4516:EE_|MW4PR12MB7333:EE_
+x-ms-office365-filtering-correlation-id: bc64a1bd-14ef-4c7f-069f-08dc2252f4fd
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ 8IHoE7FPtSaG+IB3+o2jFIH5ODdNeeGVWsMbBO0LzUaNGIloHFiS5okwCvo03gucBUAnK/JmjeP53AVcKsgrRk9rndCkEitUxmc53rmXvOn5HuSSl+zDGJYjZVKdDoLOr6G9RctfIuiW4iYY6APPn9Y+LAjk4eX9ho1dfCrRu990Tc83TgdNhTYH24I8I9PaIW8goB2ANYYLRPnfdlq1XIdJamqJOSIa3WWqnxhKpDTsxLpcfGIb0D8BEWw85iqHGmdH2Kla2EVCNc6Q5rpVZHUz4eCd7++1JGRCD8GFPzP+H+3vSP/L+Cy1aLBtnZyuENjNm5iwkXvAtDiSrFxi/yB3u4K/p76EYuSpN2qK9IchLq0LBOKXlBTvNzcE8FuVaw3AdGAdBQLj+j68P9209uxwxqqQlrWAtfVuLcY6uCnfIwad5i7IuMIHduG7IaFXOw6S/BFy0i6FeM5UlLWXwsgN9t650drVfzVSv2D6plaZfpTc5gf1iYK9m5P7fEEkB4OBSzekk1JklLgHXWYl1o4Ak4T2vC68WumubdOmw7anuik674UBOrH6WxX4k4o/bUY6tajzEzaONY5GxYLsHSriWSKHFdOwb3YfbaNJE2zh7oVpqiCRbL6HlPM3lbPP
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB4516.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(39860400002)(366004)(136003)(376002)(396003)(230922051799003)(64100799003)(1800799012)(186009)(451199024)(122000001)(33656002)(41300700001)(86362001)(38100700002)(71200400001)(6506007)(7696005)(8676002)(7416002)(8936002)(6916009)(64756008)(54906003)(316002)(66446008)(66556008)(76116006)(66946007)(66476007)(478600001)(4326008)(5660300002)(26005)(83380400001)(2906002)(52536014)(9686003)(107886003)(38070700009)(55016003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?TUk0dHNsQ3kyUGJWYndQM3hCSGh0clJaSjVmSUtTZXFkYk0wVWROTzZqbldh?=
+ =?utf-8?B?TitYNmRxNWdPeHBLRzlySGM5cGEraENMUGNBMmFHM1lROTllK1ltQjdyZlBZ?=
+ =?utf-8?B?TkdkNmFvZVpaNWV3VHp5a2pPc3gyUnBqKzIyMUZUL0poVURkZHA3Z1BqMUxD?=
+ =?utf-8?B?RVQxUDFtT0N2RmgxL1oxT0l6QlBUQ0tJSkJpM0NvYUF3dTZrV2RETGo4MUNS?=
+ =?utf-8?B?VXV5WjZIZ3c4bnluTHRzeURSc3NWenRYVkxkeUY2ZVBmVzNlVVFMVk1lYWlK?=
+ =?utf-8?B?MDBickNwWFNZMGQ5UlluMnVyODVxVGdZMFNnUDRVbTJOSDd6SFpZSDBFYmdD?=
+ =?utf-8?B?azVXbExjbU01TFc0UEJHNUdNVDlZSTNtK3F1WW5ZdXR0K2VKMDlpUG9nK29L?=
+ =?utf-8?B?ZGJMeEZId3hEWDY5OUttRkxmZ3NQUXVWNTdxZHE2T3FkZHgvbmdpV0M1Rmta?=
+ =?utf-8?B?ZVg2dXVldVdiR0VFcXBMRnZrMUduc1gzeXRBZDM3UWlCTlpXMGJXQ0QrTnlV?=
+ =?utf-8?B?QXExUytoSEVBNFRTa3pJUnQ0Z3k5S3VPV1MvZHMvbVI3S1F6UEVxVmlxeTZ6?=
+ =?utf-8?B?Q0U1VXF0YkxMOFNuU1NrMVBMbjg5c0ZneEFJOGY4emMzWFhoQXU4RmFnc1lw?=
+ =?utf-8?B?MWxGVktBRS9iODVXcDI5amJveVY5Z1VFU25UN1daUXZXbmptVHUvdEViLzJo?=
+ =?utf-8?B?aHdOYVQ1YlNtSHhSSGwvN1MvaTZGNlM2cGlvMGNPRG10R0xYaTlRTXdvN01Q?=
+ =?utf-8?B?MGRINEFkbHhWY2NUYUd4SkhpMjMyRzRrc3ZFWm9LSkRybjhBZG1JeStac1NQ?=
+ =?utf-8?B?azE5N0lFTDkrOWdBeTVEeEpkaDVBQU4wMTEvelZrbTVrTUR0WjRudnhzSDlN?=
+ =?utf-8?B?Q2lBNGVIdjBnZlBxUUxPQ3M1RFVBcWZkR09TUmtRRDZlVGNYM2ZucWMxaEZG?=
+ =?utf-8?B?L01wUmgvL05RUWFzN3BwaDZRL0lIaXNkem9EUURzSEwwb1FUTDBYenlCVVBr?=
+ =?utf-8?B?a1pzRFRoM1Y3Vkg3bnVPdURPK2hBck5kODBmR2xrNkFOMXkwRzkwVjkxWVdM?=
+ =?utf-8?B?V0JONjBJYWY1MWp0MlBJY3UwV0NWZGxiaUt4Sit0T3JpQnUxR0dnZjlnelRB?=
+ =?utf-8?B?TEpwT01MWWdNQ3lXRm9Qc3l1MXNRclptZTJZTHdvZzAyTlVmNVd4a0ZvdkJE?=
+ =?utf-8?B?NVVDVDlXREw2WUZqT3prcDVRS3lzcDNLVUJXQ0dKZW1zckw1RXIvZERSMnBM?=
+ =?utf-8?B?UFAxUnZwM0ZpM2s4U2N2Y1NES0YrcEk3STZKckEwc0l2Y2x2YmR3SnZDbFNz?=
+ =?utf-8?B?elpqeXE3MzVKcnJUU3h5MUpuK05EempXblZ3ZGlpNzBLT3NaOEQ4Y1Z0ZDZl?=
+ =?utf-8?B?TytvZDZzZUQwQ21CNXVsOHFZSWNxQXM5ZUFSdng3M0F5NjJzYk1hWjlVSGZE?=
+ =?utf-8?B?M04zbFlUUFdFYmNZRFZ4VmlBQWYwYWl3UitMUkZkWi9RM29UMWFEZFRHYnM4?=
+ =?utf-8?B?R08rRmpDYXBVb3hLNUxMQ3JKWm9NdlhINzVhOWQ5b2Fmdm80dThlMUh6QnZN?=
+ =?utf-8?B?NUxDcnBXSWZhNjFuYnlIS3JsemZpNVluRWxGM3YxMHl1NDFaaHliRHB3V241?=
+ =?utf-8?B?MjEvenlpY1pzQ2J4MUlxT0h6L2JsSTd5Q3NWdXNSblFhNWx0bkc0UTdLbXFM?=
+ =?utf-8?B?MXRKMSt2cW9uM1greW01bEhkVGFtekdUZnJCc2FXaEJXcmhNNm5VSzZRSVZu?=
+ =?utf-8?B?aDloUmt5Uk5aSFp3ZkhYQlFvWE9wR1AwSGFETEh4UytCZ0hnQU5QZWdVMEVo?=
+ =?utf-8?B?UUh2WlRhZ3V2cnBySk1WM3ZLY29lSlhWWDZadnM3T2hrRCt5dDdBdlBIbWNV?=
+ =?utf-8?B?VHo4dUk5cVU2MjlRYUkvbmRjMjNYamlrRlhWdkJzQ3UvVGhiMUhETlZDR0R0?=
+ =?utf-8?B?cGpxc0tjSUhoU0drUko3K1Z3cTFRTERyYkpCZWlVMFcycW9iQ0lOd3ZBTWFv?=
+ =?utf-8?B?RVY4QmFEcVhmUHRLUmUzbHpiRGsyOXVyazdVSzRCTk8wVEtBNTFydVRCRTdx?=
+ =?utf-8?B?YzI2a1l1RDBTMUxNWElvTmFXaVV2MXZKYjZ6bXBvbTl5OExaTitwVitvbjdz?=
+ =?utf-8?Q?4TDnOPe/0zeuc+iDhqdmHgccG?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Vs-State: 0
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB4516.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bc64a1bd-14ef-4c7f-069f-08dc2252f4fd
+X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Jan 2024 11:51:27.2614
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: H5ec3qyinhRgCm79oPy8xgo8S4LuthZd+9i0MUn5dpEqFEqp9Xq4z7KLqkNpnvAYDENWSRnaNVG6H0jiXmKjzA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7333
 
-The temperature/humidity sensors of the STS3x/SHT3x family are
-calibrated and factory-programmed with a unique serial number.
-For some sensors, this serial number can be used to obtain a calibration
-certificate via an API provided by the manufacturer (Sensirion).
-Expose the serial number via debugfs.
-
-Tested with: 2x STS31, 1x STS32, 1x SHT31
-
-Signed-off-by: Stefan Gloor <code@stefan-gloor.ch>
----
- Documentation/hwmon/sht3x.rst | 11 ++++++
- drivers/hwmon/sht3x.c         | 66 ++++++++++++++++++++++++++++++++++-
- 2 files changed, 76 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/hwmon/sht3x.rst b/Documentation/hwmon/sht3x.rst
-index 957c854f5d08..9585fa7c5a5d 100644
---- a/Documentation/hwmon/sht3x.rst
-+++ b/Documentation/hwmon/sht3x.rst
-@@ -65,6 +65,10 @@ When the temperature and humidity readings move back between the hysteresis
- values, the alert bit is set to 0 and the alert pin on the sensor is set to
- low.
- 
-+The serial number exposed to debugfs allows for unique identification of the
-+sensors. For sts32, sts33 and sht33, the manufacturer provides calibration
-+certificates through an API.
-+
- sysfs-Interface
- ---------------
- 
-@@ -99,3 +103,10 @@ repeatability:      write or read repeatability, higher repeatability means
-                         - 1: medium repeatability
-                         - 2: high repeatability
- =================== ============================================================
-+
-+debugfs-Interface
-+-----------------
-+
-+=================== ============================================================
-+serial_number:      unique serial number of the sensor in decimal
-+=================== ============================================================
-diff --git a/drivers/hwmon/sht3x.c b/drivers/hwmon/sht3x.c
-index 79657910b79e..c0d02fbcdb76 100644
---- a/drivers/hwmon/sht3x.c
-+++ b/drivers/hwmon/sht3x.c
-@@ -10,6 +10,7 @@
- 
- #include <asm/page.h>
- #include <linux/crc8.h>
-+#include <linux/debugfs.h>
- #include <linux/delay.h>
- #include <linux/err.h>
- #include <linux/hwmon.h>
-@@ -41,6 +42,9 @@ static const unsigned char sht3x_cmd_heater_off[]              = { 0x30, 0x66 };
- /* other commands */
- static const unsigned char sht3x_cmd_read_status_reg[]         = { 0xf3, 0x2d };
- static const unsigned char sht3x_cmd_clear_status_reg[]        = { 0x30, 0x41 };
-+static const unsigned char sht3x_cmd_read_serial_number[]      = { 0x37, 0x80 };
-+
-+static struct dentry *debugfs;
- 
- /* delays for single-shot mode i2c commands, both in us */
- #define SHT3X_SINGLE_WAIT_TIME_HPM  15000
-@@ -163,12 +167,14 @@ struct sht3x_data {
- 	enum sht3x_chips chip_id;
- 	struct mutex i2c_lock; /* lock for sending i2c commands */
- 	struct mutex data_lock; /* lock for updating driver data */
-+	struct dentry *sensor_dir;
- 
- 	u8 mode;
- 	const unsigned char *command;
- 	u32 wait_time;			/* in us*/
- 	unsigned long last_update;	/* last update in periodic mode*/
- 	enum sht3x_repeatability repeatability;
-+	u32 serial_number;
- 
- 	/*
- 	 * cached values for temperature and humidity and limits
-@@ -831,6 +837,40 @@ static int sht3x_write(struct device *dev, enum hwmon_sensor_types type,
- 	}
- }
- 
-+static void sht3x_debugfs_init(struct sht3x_data *data)
-+{
-+	char name[32];
-+
-+	snprintf(name, sizeof(name), "i2c%u-%02x",
-+		 data->client->adapter->nr, data->client->addr);
-+	data->sensor_dir = debugfs_create_dir(name, debugfs);
-+	debugfs_create_u32("serial_number", 0444,
-+			   data->sensor_dir, &data->serial_number);
-+}
-+
-+static void sht3x_debugfs_remove(void *sensor_dir)
-+{
-+	debugfs_remove_recursive(sensor_dir);
-+}
-+
-+static int sht3x_serial_number_read(struct sht3x_data *data)
-+{
-+	int ret;
-+	char buffer[SHT3X_RESPONSE_LENGTH];
-+	struct i2c_client *client = data->client;
-+
-+	ret = sht3x_read_from_command(client, data,
-+				      sht3x_cmd_read_serial_number,
-+				      buffer,
-+				      SHT3X_RESPONSE_LENGTH, 0);
-+	if (ret)
-+		return ret;
-+
-+	data->serial_number = (buffer[0] << 24) | (buffer[1] << 16) |
-+			      (buffer[3] << 8) | buffer[4];
-+	return ret;
-+}
-+
- static const struct hwmon_ops sht3x_ops = {
- 	.is_visible = sht3x_is_visible,
- 	.read = sht3x_read,
-@@ -899,6 +939,18 @@ static int sht3x_probe(struct i2c_client *client)
- 	if (ret)
- 		return ret;
- 
-+	ret = sht3x_serial_number_read(data);
-+	if (ret) {
-+		dev_dbg(dev, "unable to read serial number\n");
-+	} else {
-+		sht3x_debugfs_init(data);
-+		ret = devm_add_action_or_reset(dev,
-+					       sht3x_debugfs_remove,
-+					       data->sensor_dir);
-+		if (ret)
-+			return ret;
-+	}
-+
- 	hwmon_dev = devm_hwmon_device_register_with_info(dev,
- 							 client->name,
- 							 data,
-@@ -917,7 +969,19 @@ static struct i2c_driver sht3x_i2c_driver = {
- 	.id_table    = sht3x_ids,
- };
- 
--module_i2c_driver(sht3x_i2c_driver);
-+static int __init sht3x_init(void)
-+{
-+	debugfs = debugfs_create_dir("sht3x", NULL);
-+	return i2c_add_driver(&sht3x_i2c_driver);
-+}
-+module_init(sht3x_init);
-+
-+static void __exit sht3x_cleanup(void)
-+{
-+	debugfs_remove_recursive(debugfs);
-+	i2c_del_driver(&sht3x_i2c_driver);
-+}
-+module_exit(sht3x_cleanup);
- 
- MODULE_AUTHOR("David Frey <david.frey@sensirion.com>");
- MODULE_AUTHOR("Pascal Sachs <pascal.sachs@sensirion.com>");
--- 
-2.41.0
-
+PiA+IEZyb206IElkbyBTY2hpbW1lbCA8aWRvc2NoQG52aWRpYS5jb20+DQo+ID4NCj4gPiBFdGh0
+b29sIGNhbiBhbHJlYWR5IHJldHJpZXZlIGluZm9ybWF0aW9uIGZyb20gYSB0cmFuc2NlaXZlciBt
+b2R1bGUNCj4gPiBFRVBST00gYnkgaW52b2tpbmcgdGhlIGV0aHRvb2xfb3BzOjpnZXRfbW9kdWxl
+X2VlcHJvbV9ieV9wYWdlDQo+IG9wZXJhdGlvbi4NCj4gPiBBZGQgYSBjb3JyZXNwb25kaW5nIG9w
+ZXJhdGlvbiB0aGF0IGFsbG93cyBldGh0b29sIHRvIHdyaXRlIHRvIGENCj4gPiB0cmFuc2NlaXZl
+ciBtb2R1bGUgRUVQUk9NLg0KPiA+DQo+ID4gVGhlIHB1cnBvc2Ugb2YgdGhpcyBvcGVyYXRpb24g
+aXMgbm90IHRvIGVuYWJsZSBhcmJpdHJhcnkgcmVhZCAvIHdyaXRlDQo+ID4gYWNjZXNzLCBidXQg
+dG8gYWxsb3cgdGhlIGtlcm5lbCB0byB3cml0ZSB0byBzcGVjaWZpYyBhZGRyZXNzZXMgYXMgcGFy
+dA0KPiA+IG9mIHRyYW5zY2VpdmVyIG1vZHVsZSBmaXJtd2FyZSBmbGFzaGluZy4gSW4gdGhlIGZ1
+dHVyZSwgbW9yZQ0KPiA+IGZ1bmN0aW9uYWxpdHkgY2FuIGJlIGltcGxlbWVudGVkIG9uIHRvcCBv
+ZiB0aGVzZSByZWFkIC8gd3JpdGUNCj4gPiBvcGVyYXRpb25zLg0KPiANCj4gTXkgbWVtb3J5IGlz
+IGRpbSwgYnV0IGkgdGhvdWdodCB3ZSBkZWNpZGVkIHRoYXQgc2luY2UgdGhlIGFsZ29yaXRobSB0
+bw0KPiBwcm9ncmFtIHRoZXNlIG1vZHVsZXMgaXMgZGVmaW5lZCBpbiB0aGUgc3RhbmRhcmQsIGFs
+bCB3ZSBuZWVkIHRvIGRvIGlzIHBhc3MNCj4gdGhlIGZpcm13YXJlIGJsb2IsIGFuZCBoYXZlIGFu
+IGluIGtlcm5lbCBpbXBsZW1lbnRhdGlvbiBvZiB0aGUgYWxnb3JpdGhtLg0KPiBUaGVyZSBpcyBu
+byBuZWVkIHRvIGhhdmUgYW4gYXJiaXRyYXJ5IHdyaXRlIGJsb2IgdG8gbW9kdWxlLCB3aGljaCBt
+aWdodCwgb3INCj4gbWlnaHQgbm90IGJlIGFidXNlZCBpbiB0aGUgZnV0dXJlLg0KPiANCj4gQWxz
+bywgaXMgdGhlIG1vZHVsZSBmdW5jdGlvbmFsIHdoaWxlIGl0cyBmaXJtd2FyZSBpcyBiZWluZyB1
+cGdyYWRlZD8NCj4gRG8gd2UgbmVlZCB0byBlbmZvcmNlIHRoZSBsaW5rIGlzIGRvd24/DQo+IA0K
+PiAgICBBbmRyZXcNCg0KVGhpcyBpcyBwYXJ0IG9mIHRoZSByZWFzb25zIHdoeSB3ZSBrZXB0IGEg
+ZmxhZyBmb3IgbW9kdWxlX2Z3X2ZsYXNoX2luX3Byb2dyZXNzLiANCkkgdGhpbmsgaXQgc2hvdWxk
+IGJlIGRvd24gc2luY2UgdGhlIG1vZHVsZSBpcyBkb2luZyBzb21lIHNvcnQgb2YgcmVzZXQgZHVy
+aW5nIHRoZSBmbGFzaGluZyBwcm9jZXNzIChhZnRlciB0aGUgUnVuIEZpcm13YXJlIEltYWdlKS4N
+ClNvIGluIG9yZGVyIHRvIGF2b2lkIHBhY2tldCBsb3NzLCB0aGlzIHNob3VsZCBiZSBjb25zaWRl
+cmVkLg0KDQpJbGwgY29uc2lkZXIgdGhlIHJlbGV2YW50IHNjZW5hcmlvcyBmb3IgdmV0b2luZyBp
+biB0aGUgYWN0dWFsIHZlcnNpb24uDQoNClRoYW5rcy4NCg==
 
