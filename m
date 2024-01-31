@@ -1,304 +1,313 @@
-Return-Path: <linux-doc+bounces-8001-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8003-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id A757E84381B
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 08:43:43 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E0F084389E
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 09:18:32 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CC4CF1C2235B
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 07:43:42 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 7006BB243CF
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 08:18:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 77A3A54277;
-	Wed, 31 Jan 2024 07:43:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D1D9D5733B;
+	Wed, 31 Jan 2024 08:18:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=memverge.com header.i=@memverge.com header.b="N7Owz6Yu"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QAdIJ/i+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2040.outbound.protection.outlook.com [40.107.236.40])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8562A5810C;
-	Wed, 31 Jan 2024 07:43:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.236.40
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1706687017; cv=fail; b=FGkLUyX4infSKMtwBFPNG8VG9q0Ru8iCzPTwaU60M/5int16Dycl5CVjChPq9YiF/ArpKvywAXxlcAhJBEQ0eJ/GLTLaxzr2uH0uKD4iE7dyZkw4khpczsUlu0sf/bd9Tz4oXh+NvsliR8j9/G80vmUUHdKpnpvQoQJtuohZ+BY=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1706687017; c=relaxed/simple;
-	bh=dkSD3RxH5v0LL00xz1qdA4trSL+3OIJAshNX3ZBGXCM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=QPxiMYlNAQBfOdCnqh4SQCY7HYWKOsjs5JiJQ59HAaHXEj18ESGsIjlOA+zaXdOnZv5B+fJU6Whyn9u1bCdupWyqxpycfeq8jVggitqbPqP0rhgTQQLCHUAVaGc29Dlv3Y07Q5bA8s8+54XIiRGELtjV1GJo1bUAkhEa3SVlylw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=memverge.com; spf=pass smtp.mailfrom=memverge.com; dkim=pass (1024-bit key) header.d=memverge.com header.i=@memverge.com header.b=N7Owz6Yu; arc=fail smtp.client-ip=40.107.236.40
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=memverge.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=memverge.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=B6cZUS4R8LHJm+Ue1U5kdzfXicjQ86drm3AOJhoWFs8mFWIisC56RAzQglydRLDLyxhU3HAZ/Ass6FlezSj/zF1Q/vxWcFFnx7xVxojwcVg8HL3kp2WPdImv37ZDM2We7JrSvptKQfugw3UciLo94SFz5RH5/xYVXpOHC6CfJPdXnAGcKrzYu7SqydTSKNtsfi8Wjzl8Ox11EUvQ7+8W+qnIoW0avL/JOvfKb4e5REx26nEiZarrbRozh8jIHcQTd7aItfLUT42rMjUznZRBVTpgQ2GWK8aA2P3yVN6MJAF7XWuL46S/yo5TMGP5F4JUGuJ8AFaRslicl0oddoFPkg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mq1KnTeKU9wJk/xMTzH/bqeM/vJDiFlbZhoFqSsaKRA=;
- b=ii/Mgv8xXeSOSmU5fCKsUtTnHfapenidfH1s1UABYLjGcrJnqiKpA4aXSy/KWpDYzLvYV5fnxNvPLOL1hTsHeMgVZa9ryd/KSZOaNYPEEAiZ5aDIIPpt57I4jzEgb6L6Bcb9CtVd9zuAedCzMrcDavSBQu9X85XosvDyOWEqhvy3z9rnK2AVAFhq7vnAVNnCqTWpKx8MQ/pJ7RARKff+8xc3GrwCyiJ360Rd2yyCMWgzILsEiHZrdmxWRrj7pVIvYG6rETYK9cpCOXlNdF2ZvEKhoYhthvJbydOLakgXdQHg4devzuVY4MtdR9k2LB8K0qL3M95yQbjr8srGDlI2ew==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=memverge.com; dmarc=pass action=none header.from=memverge.com;
- dkim=pass header.d=memverge.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=memverge.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mq1KnTeKU9wJk/xMTzH/bqeM/vJDiFlbZhoFqSsaKRA=;
- b=N7Owz6YuhRZjD/kL8Wa55+22QU/sQwNWq2ePQzg/NZ2iXyCP/m8BJS8sbw+kS9d5TrBGb9XCRXpvRTTr4lo2aNLrLy4p+8mUvdddj75tUIbUBYQ+5CGNNxVCwWqbcqq/xBCsPc2ozzYplG5/4CPNxBFkMhUGzVlNGX8WBpYnxJ4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=memverge.com;
-Received: from SJ0PR17MB5512.namprd17.prod.outlook.com (2603:10b6:a03:394::19)
- by IA1PR17MB6997.namprd17.prod.outlook.com (2603:10b6:208:44e::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.24; Wed, 31 Jan
- 2024 07:43:31 +0000
-Received: from SJ0PR17MB5512.namprd17.prod.outlook.com
- ([fe80::7a04:dc86:2799:2f15]) by SJ0PR17MB5512.namprd17.prod.outlook.com
- ([fe80::7a04:dc86:2799:2f15%5]) with mapi id 15.20.7228.029; Wed, 31 Jan 2024
- 07:43:31 +0000
-Date: Wed, 31 Jan 2024 02:43:16 -0500
-From: Gregory Price <gregory.price@memverge.com>
-To: "Huang, Ying" <ying.huang@intel.com>
-Cc: Gregory Price <gourry.memverge@gmail.com>, linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org,
-	corbet@lwn.net, akpm@linux-foundation.org, honggyu.kim@sk.com,
-	rakie.kim@sk.com, hyeongtak.ji@sk.com, mhocko@kernel.org,
-	vtavarespetr@micron.com, jgroves@micron.com,
-	ravis.opensrc@micron.com, sthanneeru@micron.com,
-	emirakhur@micron.com, Hasan.Maruf@amd.com, seungjun.ha@samsung.com,
-	hannes@cmpxchg.org, dan.j.williams@intel.com,
-	Srinivasulu Thanneeru <sthanneeru.opensrc@micron.com>
-Subject: Re: [PATCH v4 3/3] mm/mempolicy: introduce MPOL_WEIGHTED_INTERLEAVE
- for weighted interleaving
-Message-ID: <Zbn6FG3346jhrQga@memverge.com>
-References: <20240130182046.74278-1-gregory.price@memverge.com>
- <20240130182046.74278-4-gregory.price@memverge.com>
- <877cjqgfzz.fsf@yhuang6-desk2.ccr.corp.intel.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <877cjqgfzz.fsf@yhuang6-desk2.ccr.corp.intel.com>
-X-ClientProxiedBy: SJ0PR03CA0134.namprd03.prod.outlook.com
- (2603:10b6:a03:33c::19) To SJ0PR17MB5512.namprd17.prod.outlook.com
- (2603:10b6:a03:394::19)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A716957318;
+	Wed, 31 Jan 2024 08:18:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1706689103; cv=none; b=MMpMSUeeqPoYPMnPRLI8llMy+spWDKocLHfBzJWdFQ1y3fwL+WdnaJJ9YgUEZfI0/imrbBxnjlx+kV+WBHHTyEw4Dq+AxizKG5K7vDZtHCTJFnEMaAAVchUdTJj1V3qDjHzYTC49dvZaqBc4CrBF41mNqKgsW2WlBUvSH+P7ISE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1706689103; c=relaxed/simple;
+	bh=uVuCtAAr/8kTNdmmZBQPRy6Y0jWrvVDn0rG6YH7p4VU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=SvsutQ/TDuNFoKOrYUnMJcMRxdefJnEUQs1pKSADwe1Dd+xk9AHLOAb4demwT3AAwec5OPxr9F9liY+oiIqqmVdTLfu+L4szvrr+SJCY/DOb3IW8+DLQfwxXIMah4+KodoN60+Wx2w30iKlGsgP+Q19b0U/yDLuKLNGqLR1o+mM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QAdIJ/i+; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A034BC433C7;
+	Wed, 31 Jan 2024 08:18:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1706689103;
+	bh=uVuCtAAr/8kTNdmmZBQPRy6Y0jWrvVDn0rG6YH7p4VU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=QAdIJ/i+5sP3lPohRphDzZU5Ek32FUCfbjWw+IU+SqwC23Yw1a4Q8cMIeUVIWL0dG
+	 1A6e7MJzMb4OzeCay5vgD0QqzXGZZdsP0czcyN+6EH0I/sOnpdxWYEGI2OGhTR7E8f
+	 a4YSgXQ3nT46s0HqO37puWNOwtSaGGs+Pqss3NBTmhDdFVPYOLeG5nPoWTwyN9VOrF
+	 8EQbdiumMZislx9pWo6CJEJqBFBc15CMCxM60brdEsM0zRDnqraNjK3D989qfM+kKK
+	 GEmt0l2qyFSVnhKuejfq9iKx/nddoUAFPuqoEjdZoHgoCuFaablECkFofWzJyYDBil
+	 T6lPsOpD4cTBQ==
+Message-ID: <88a036a2-2848-41d3-a0fb-48ee14604850@kernel.org>
+Date: Wed, 31 Jan 2024 09:18:10 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ0PR17MB5512:EE_|IA1PR17MB6997:EE_
-X-MS-Office365-Filtering-Correlation-Id: f7c86463-78e9-40dc-be00-08dc22305251
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	udtQ39RA9WEM2Z/cXlh2JJ0fnD7AvVUqCS2/xbZc7wPK0ccZBzfYyfZlloukAwLvIrWZ5Oi5XDCC7Qn1C0OEswYee3dp16WIGRQEOF8arXu8cildQ5w8FgxCpXxe6ddFc57a2unFRVxCx1qJOA/iRvoxzQ+oZ35h/4le+sFC3Y+hjRDi/R2hhmV5pzm0B1wH/GQTuLM0EBbPzTanT7+O+iRR/gZPrCll2aeuqeya8DIUel1z/RlFdBoJHquIIo/JW9Ibg7S8Zu/n+AHWmEhfD2jHmXjSsVDkEZfnmSUBq5hiMOCSmEcyXx3+ZqWmYEmGech5AfiDAS09kIRxgluV8LpIqOZ8kDtBXhIAwm78AtCDoLFIzvLB3MZHFEy4PgHF+Jrx1YaRHqLI8f7NMb5DcaUHErXysqrm7SrJvu8b6wIBPTfBU+dhRP00xF3vvqIPVklaXqzsAQFYBm4wEVWv+2hH0VlxIPEOsUbfu4Qroh0W5sYbaaP7I6vG9Z3Ik5bwlk2Kim38/OOFc8NmsXmO7IJziw+9qV7AXck6Xnkoze5IHOTLPAm25b8UOUBczT1+kZTg7dH0fPCCMUXVok0TtbIVk+amxTL/HzV+bu19fmMmbLrEsq8Ue+NFnmVTBohF
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR17MB5512.namprd17.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(396003)(346002)(39850400004)(136003)(366004)(230922051799003)(451199024)(1800799012)(186009)(64100799003)(41300700001)(83380400001)(26005)(6512007)(2616005)(38100700002)(8936002)(8676002)(4326008)(5660300002)(7416002)(2906002)(478600001)(6486002)(6506007)(6666004)(44832011)(54906003)(66476007)(66556008)(66946007)(6916009)(316002)(86362001)(36756003)(16393002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?tXXdquaLa2BcLmiqXrRKq5WEZ0I9Cy4BMfSnlt5u+QhM+ZuJj66jMj1ZVBZm?=
- =?us-ascii?Q?V9EnKzIQw3hlBt81+H/uzBjiDjp0fVXMHNx9NTR30o00QXbeyUDmLZKpCLnv?=
- =?us-ascii?Q?eNsTz9Vqhnz/dB8K0RDU9xe2wbMr4g4xz6uwjB3+VdVcJotOyPMbP9Kx7sq6?=
- =?us-ascii?Q?gNbUsl9SiU+uhwdPkBzifDtsnE0LwloiZANoQfC/BrIqUohayT0hzwMI2R9w?=
- =?us-ascii?Q?0YR76q70bfSeg41OnmKeG3BOHTfOOkASAPYw+1580E7GnpHiz8NCxKKmttAy?=
- =?us-ascii?Q?NfFVS0bCQPMZJuQqXbLyLUgnDoVx6vGUnJcEQ86f+/cw0QZLiQfG+4QAOFL1?=
- =?us-ascii?Q?UrNpgEZDcsts787wzIVDtfD7H8DsegZK+AGpDirhy2Yh+hEIAJwpaEJHaVki?=
- =?us-ascii?Q?8hkJMqodo1BtonwnNpNAlmOXobZaGVCiVAcUu6HzWO74DbXlIb76XLfOsKLJ?=
- =?us-ascii?Q?i1JScKCQYIHer6oiHPUkYyE8rQgf/U/ItYUM36El2aEdrAned+pS8fU+DhW8?=
- =?us-ascii?Q?kuOpEpndoeKQQCMgDa6NoO4EC52a82fSrHgeV0F5jbZI95ZJyR6lHXXTznNg?=
- =?us-ascii?Q?Z41xwHbUNgGUXaYmz7/QUPDkkyF/NOOAtXl++juZukhlpV0QQqUYErh1Sjco?=
- =?us-ascii?Q?hjFuO/HlZG107yOOPJYSIV95R+MaEkoCq02t3W5pGCq6dPh5ux+wL4ss4hF/?=
- =?us-ascii?Q?fn7+TXF9SxkiO+5sXU9HK1PvNdj5FOhpH3OWXZIXGgXKluXlwkpJNWDiVOiV?=
- =?us-ascii?Q?Ll9cis2Dth5UhSOLyW8B4iF815X+Egtx3TLCv1D0Eie8zV5lrvB4P8r7FCwr?=
- =?us-ascii?Q?iyz9RV163gFwjjcvdqg54WWbR27t5K7j42U9wM8aFwjSqHs2VkHMnqvLk4QV?=
- =?us-ascii?Q?WZ4Og6Z6PNVwa94YjOt/AzWV3PlD+3vazKbLZr8rENvSpBXbk1oeFllxuJap?=
- =?us-ascii?Q?YYT7QB6E3/ewQZbwnOsugFka8U35t105IhXd9oabrIWxslR6MqznFkDL+7Pf?=
- =?us-ascii?Q?6jhkWStE5FiDDz/hZfDRmVzeQ+goOgafpTuc+jMIIWaHJxqIiqglbCE6mdPz?=
- =?us-ascii?Q?Z7MVfhiav6DCQFtt3fjXBoelSSGFV5eM7WAfpoldF80rn0eIJ5sgL+2gKtH9?=
- =?us-ascii?Q?p8RmXjoCC7yRWBrccKN3FJngExgsi/MsMvC+Dqpt7HcWhW5g18g4uC7PR5pk?=
- =?us-ascii?Q?r+1NpBOw4gxqulqpb83eWeGVdXv5ibwWf77gn29QgxsyC6Ssso8eERVVpf7u?=
- =?us-ascii?Q?UO6pfDIev73RyHKQEe69/kYLMdNRa1k9nbqyR+2HeY55HRX+mkbGNEq4mPFw?=
- =?us-ascii?Q?RWfmAkgG+7Hzozq1VYN6MaavJSQJ8mhn/gvGOQ5cssUKMFlQi8idvYEdM58T?=
- =?us-ascii?Q?9gpkhcv0QunOdMUUaJVSilO/NWGcmSrr45D/ktXVYL9SU2tjsoXJOhrWE8Kt?=
- =?us-ascii?Q?EG1hrxd+1gSu5zR08usI8JYVbOeop340/Tz7NDTJPB9s1Qzmt40C6M1U/o1/?=
- =?us-ascii?Q?+HetoH+SoBSQuICIqhS7X0KCxmnzMUHIuiee1NBKFcGv2tnNU0QuxKAGhicr?=
- =?us-ascii?Q?GejUwGxYSL9pCRWH+o/oBB49qEHPpRtBloKJXgVC7Z0ebJ85Jrpqp/7VEEcs?=
- =?us-ascii?Q?Uw=3D=3D?=
-X-OriginatorOrg: memverge.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f7c86463-78e9-40dc-be00-08dc22305251
-X-MS-Exchange-CrossTenant-AuthSource: SJ0PR17MB5512.namprd17.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jan 2024 07:43:31.6931
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5c90cb59-37e7-4c81-9c07-00473d5fb682
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: D3ug6fIYZ8FirlPIXVNVZpRuZc/9q/NVSRhPjR9IKWvvwUgmaQAmstJO//Bdh0ROhL6El6FcuH+3NS8mGN3+Ry/IVhUC6Jo5ZSW9tnVpoCs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR17MB6997
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 30 2/7] Add binding for Aspeed SOC
+To: "Corona, Ernesto" <ernesto.corona@intel.com>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-arm-kernel@lists.infradead.org"
+ <linux-arm-kernel@lists.infradead.org>,
+ "linux-aspeed@lists.ozlabs.org" <linux-aspeed@lists.ozlabs.org>
+Cc: "'oleksandrs@mellanox.com'" <oleksandrs@mellanox.com>,
+ "'jiri@nvidia.com'" <jiri@nvidia.com>,
+ "Castro, Omar Eduardo" <omar.eduardo.castro@intel.com>,
+ "'omar.eduardo.castro@linux.intel.com'"
+ <omar.eduardo.castro@linux.intel.com>, "'robh@kernel.org'"
+ <robh@kernel.org>, "'corbet@lwn.net'" <corbet@lwn.net>,
+ "'mchehab+samsung@kernel.org'" <mchehab+samsung@kernel.org>,
+ "'alexandre.belloni@bootlin.com'" <alexandre.belloni@bootlin.com>,
+ "'tytso@mit.edu'" <tytso@mit.edu>, "'arnd@arndb.de'" <arnd@arndb.de>,
+ "'ebiggers@google.com'" <ebiggers@google.com>,
+ "'mark.rutland@arm.com'" <mark.rutland@arm.com>,
+ "'joel@jms.id.au'" <joel@jms.id.au>, "'andrew@aj.id.au'" <andrew@aj.id.au>,
+ "Filary, Steven A" <steven.a.filary@intel.com>,
+ "'vadimp@mellanox.com'" <vadimp@mellanox.com>,
+ "'amithash@fb.com'" <amithash@fb.com>, "'patrickw3@fb.com'"
+ <patrickw3@fb.com>, "Chen, Luke" <luke_chen@aspeedtech.com>,
+ "'billy_tsai@aspeedtech.com'" <billy_tsai@aspeedtech.com>,
+ "'rgrs@protonmail.com'" <rgrs@protonmail.com>
+References: <LV8PR11MB8463D0017B82135324127DB98B7D2@LV8PR11MB8463.namprd11.prod.outlook.com>
+Content-Language: en-US
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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 fv0=
+In-Reply-To: <LV8PR11MB8463D0017B82135324127DB98B7D2@LV8PR11MB8463.namprd11.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-
-On Wed, Jan 31, 2024 at 02:43:12PM +0800, Huang, Ying wrote:
-> Gregory Price <gourry.memverge@gmail.com> writes:
-> >  
-> > +static unsigned int weighted_interleave_nodes(struct mempolicy *policy)
-> > +{
-> > +	unsigned int node = current->il_prev;
-> > +
-> > +	if (!current->il_weight || !node_isset(node, policy->nodes)) {
-> > +		node = next_node_in(node, policy->nodes);
-> > +		/* can only happen if nodemask is being rebound */
-> > +		if (node == MAX_NUMNODES)
-> > +			return node;
+On 31/01/2024 00:30, Corona, Ernesto wrote:
+> Aspeed AST2400, AST2500 and AST2600 JTAG controller driver.
 > 
-> I feel a little unsafe to read policy->nodes at same time of writing in
-> rebound.  Is it better to use a seqlock to guarantee its consistency?
-> It's unnecessary to be a part of this series though.
+> Signed-off-by: Oleksandr Shamray <oleksandrs@mellanox.com>
+> Signed-off-by: Jiri Pirko <jiri@nvidia.com>
+> Signed-off-by: Ernesto Corona <ernesto.corona@intel.com>
+> Signed-off-by: Omar Castro <omar.eduardo.castro@linux.intel.com>
+> Acked-by: Rob Herring <robh@kernel.org>
+
+1. There are so many wrong things with this submission that you should
+drop the tag.
+
+Please provide lore link where you received this tag. Quick look at lore
+suggests you faked it.
+
+2. Please use subject prefixes matching the subsystem. You can get them
+for example with `git log --oneline -- DIRECTORY_OR_FILE` on the
+directory your patch is touching.
+
+3. Please use scripts/get_maintainers.pl to get a list of necessary
+people and lists to CC. It might happen, that command when run on an
+older kernel, gives you outdated entries. Therefore please be sure you
+base your patches on recent Linux kernel.
+
+Tools like b4 or scripts_getmaintainer.pl provide you proper list of
+people, so fix your workflow. Tools might also fail if you work on some
+ancient tree (don't, use mainline), work on fork of kernel (don't, use
+mainline) or you ignore some maintainers (really don't). Just use b4 and
+everything should be fine, although remember about `b4 prep
+--auto-to-cc` if you added new patches to the patchset.
+
+You missed at least devicetree list (maybe more), so this won't be
+tested by automated tooling. Performing review on untested code might be
+a waste of time, thus I will skip this patch entirely till you follow
+the process allowing the patch to be tested.
+
+Please kindly resend and include all necessary To/Cc entries.
+
+
+
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> Cc: Alexandre Belloni <alexandre.belloni@bootlin.com>
+> Cc: "Theodore Ts'o" <tytso@mit.edu>
+> Cc: Arnd Bergmann <arnd@arndb.de>
+> Cc: Eric Biggers <ebiggers@google.com>
+> Cc: Mark Rutland <mark.rutland@arm.com>
+> Cc: Joel Stanley <joel@jms.id.au>
+> Cc: Andrew Jeffery <andrew@aj.id.au>
+> Cc: Steven Filary <steven.a.filary@intel.com>
+> Cc: Vadim Pasternak <vadimp@mellanox.com>
+> Cc: Amithash Prasad <amithash@fb.com>
+> Cc: Patrick Williams <patrickw3@fb.com>
+> Cc: Luke Chen <luke_chen@aspeedtech.com>
+> Cc: Billy Tsai <billy_tsai@aspeedtech.com>
+> Cc: Rgrs <rgrs@protonmail.com>
+> ---
+> v29->v30
+> Comments pointed by Steven Filary <steven.a.filary@intel.com>
+> - Add Suport for 26xx series
 > 
-
-I think this is handled already? It is definitely an explicit race
-condition that is documented elsewhere:
-
-/*
- * mpol_rebind_policy - Migrate a policy to a different set of nodes
- *
- * Per-vma policies are protected by mmap_lock. Allocations using per-task
- * policies are protected by task->mems_allowed_seq to prevent a premature
- * OOM/allocation failure due to parallel nodemask modification.
- */
-
-example from slub:
-
-do {
-	cpuset_mems_cookie = read_mems_allowed_begin();
-	zonelist = node_zonelist(mempolicy_slab_node(), pc->flags);
-	...
-} while (read_mems_allowed_retry(cpuset_mems_cookie));
-
-quick perusal through other allocators, show similar checks.
-
-page_alloc.c  -  check_retry_cpusetset()
-filemap.c     -  filemap_alloc_folio()
-
-If we ever want mempolicy to be swappable from outside the current task
-context, this will have to change most likely - but that's another
-feature for another day.
-
-> > +	while (target) {
-> > +		/* detect system default usage */
-> > +		weight = table ? table[nid] : 1;
-> > +		weight = weight ? weight : 1;
+> v28->v29
+> Comments pointed by Ernesto Corona <ernesto.corona@intel.com>
+> - Change documentation to the new dt-bindings yaml format.
 > 
-> I found duplicated pattern as above in this patch.  Can we define a
-> function like below to remove the duplication?
+> v27->v28
+> v26->v27
+> v25->v26
+> v24->v25
+> v23->v24
+> v22->v23
+> v21->v22
+> v20->v21
+> v19->v20
+> v18->v19
 > 
-> u8 __get_il_weight(u8 *table, int nid)
-> {
->         u8 weight;
+> v17->v18
+> v16->v17
+> v15->v16
+> Comments pointed by Joel Stanley <joel.stan@gmail.com>
+> - change clocks = <&clk_apb> to proper clocks = <&syscon ASPEED_CLK_APB>
+> - add reset descriptions in bindings file
 > 
->         weight = table ? table[nid] : 1;
->         return weight ? : 1;
-> }
+> v14->v15
+> v13->v14
+> v12->v13
+> v11->v12
+> v10->v11
+> v9->v10
+> v8->v9
+> v7->v8
+> Comments pointed by pointed by Joel Stanley <joel.stan@gmail.com>
+> - Change compatible string to ast2400 and ast2000
 > 
-
-When we implement the system-default array, this will change to:
-
-weight = sysfs_table ? sysfs_table[nid] : default_table[nid];
-
-This cleanup will get picked up in that patch set since this code is
-going to change anyway.
-
-> > +			if (delta == weight) {
-> > +				/* boundary: resume from next node/weight */
-> > +				resume_node = next_node_in(node, nodes);
-> > +				resume_weight = weights[resume_node];
-> > +			} else {
-> > +				/* remainder: resume this node w/ remainder */
-> > +				resume_node = node;
-> > +				resume_weight = weight - delta;
-> > +			}
+> V6->v7
+> Comments pointed by Tobias Klauser <tklauser@distanz.ch>
+>  - Fix spell "Doccumentation" -> "Documentation"
 > 
-> If we are comfortable to leave resume_weight == 0, then the above
-> branch can be simplified to.
+> v5->v6
+> Comments pointed by Tobias Klauser <tklauser@distanz.ch>
+> - Small nit: s/documentation/Documentation/
 > 
->         resume_node = node;
->         resume_weight = weight - delta;
+> v4->v5
 > 
-> But, this is a style issue again.  I will leave it to you to decide.
-
-Good point, and in fact there's a similar branch in the first half of
-the function that can be simplified.  Will follow up with a style patch.
-
- mm/mempolicy.c | 21 ++++-----------------
- 1 file changed, 4 insertions(+), 17 deletions(-)
-
-My favorite style of patch :D
-
-
-Andrew if you happen to be monitoring, this is the patch (not tested
-yet, but it's pretty obvious, otherwise i'll submit individually
-tomorrow).
-
-
-diff --git a/mm/mempolicy.c b/mm/mempolicy.c
-index 2c1aef8eab70..b0ca9bcdd64c 100644
---- a/mm/mempolicy.c
-+++ b/mm/mempolicy.c
-@@ -2405,15 +2405,9 @@ static unsigned long alloc_pages_bulk_array_weighted_interleave(gfp_t gfp,
-                page_array += nr_allocated;
-                total_allocated += nr_allocated;
-                /* if that's all the pages, no need to interleave */
--               if (rem_pages < weight) {
--                       /* stay on current node, adjust il_weight */
-+               if (rem_pages <= weight) {
-                        me->il_weight -= rem_pages;
-                        return total_allocated;
--               } else if (rem_pages == weight) {
--                       /* move to next node / weight */
--                       me->il_prev = next_node_in(node, nodes);
--                       me->il_weight = get_il_weight(me->il_prev);
--                       return total_allocated;
-                }
-                /* Otherwise we adjust remaining pages, continue from there */
-                rem_pages -= weight;
-@@ -2460,17 +2454,10 @@ static unsigned long alloc_pages_bulk_array_weighted_interleave(gfp_t gfp,
-                        node_pages += weight;
-                        delta -= weight;
-                } else if (delta) {
-+                       /* when delta is deleted, resume from that node */
-                        node_pages += delta;
--                       /* delta may deplete on a boundary or w/ a remainder */
--                       if (delta == weight) {
--                               /* boundary: resume from next node/weight */
--                               resume_node = next_node_in(node, nodes);
--                               resume_weight = weights[resume_node];
--                       } else {
--                               /* remainder: resume this node w/ remainder */
--                               resume_node = node;
--                               resume_weight = weight - delta;
--                       }
-+                       resume_node = node;
-+                       resume_weight = weight - delta;
-                        delta = 0;
-                }
-                /* node_pages can be 0 if an allocation fails and rounds == 0 */
-
-
+> V3->v4
+> Comments pointed by Rob Herring <robh@kernel.org>
+> - delete unnecessary "status" and "reg-shift" descriptions in
+>   bindings file
 > 
-> So, except the issue you pointed out already.  All series looks good to
-> me!  Thanks!  Feel free to add
+> v2->v3
+> Comments pointed by Rob Herring <robh@kernel.org>
+> - split Aspeed jtag driver and binding to separate patches
+> - delete unnecessary "status" and "reg-shift" descriptions in
+>   bindings file
+> ---
+>  .../devicetree/bindings/jtag/aspeed-jtag.yaml | 85 +++++++++++++++++++
+>  1 file changed, 85 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/jtag/aspeed-jtag.yaml
 > 
-> Reviewed-by: "Huang, Ying" <ying.huang@intel.com>
-> 
-> to the whole series.
-> 
+> diff --git a/Documentation/devicetree/bindings/jtag/aspeed-jtag.yaml b/Documentation/devicetree/bindings/jtag/aspeed-jtag.yaml
+> new file mode 100644
+> index 000000000000..1a412e83b81b
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/jtag/aspeed-jtag.yaml
 
-Thank you so much for your patience with me! I appreciate all the help.
+Use filename matching compatibles, so aspeed,jtag.yaml
 
-I am looking forward to this feature very much!
+> @@ -0,0 +1,85 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/jtag/aspeed-jtag.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Aspeed JTAG driver for ast2400, ast2500 and ast2600 SoC
+> +
+> +description:
+> +  Driver adds support of Aspeed 24/25/2600 series SOC JTAG controller.
+> +  Driver implements the following jtag ops
+> +    freq_get
+> +    freq_set
+> +    status_get
+> +    status_set
+> +    xfer
+> +    mode_set
+> +    bitbang
+> +    enable
+> +    disable
+> +
+> +  It has been tested on Mellanox system with BMC equipped with
+> +  Aspeed 2520 SoC for programming CPLD devices.
+> +
+> +  It has also been tested on Intel system using Aspeed 25xx SoC
+> +  for JTAG communication.
+> +
+> +  Tested on Intel system using Aspeed 26xx SoC for JTAG communication.
+> +
+> +maintainers:
+> +  - Oleksandr Shamray <oleksandrs@mellanox.com>
+> +  - Jiri Pirko <jiri@nvidia.com>
+> +  - Ernesto Corona<ernesto.corona@intel.com>
+> +
+> +properties:
+> +  compatible:
+> +    oneOf:
 
-~Gregory
+Drop
+
+> +      - items:
+
+Drop
+
+> +          - enum:
+> +              - aspeed,ast2400-jtag
+> +              - aspeed,ast2500-jtag
+> +              - aspeed,ast2600-jtag
+> +
+> +
+
+Just one blank line. Since this was not tested, I will skip review of
+the rest.
+
+Best regards,
+Krzysztof
+
 
