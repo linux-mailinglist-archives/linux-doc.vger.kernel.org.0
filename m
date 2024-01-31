@@ -1,193 +1,98 @@
-Return-Path: <linux-doc+bounces-8056-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8062-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19E0884422B
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 15:49:47 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id DDE08844328
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 16:34:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4C53A1C221B6
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 14:49:46 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 78A011F2B2C9
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Jan 2024 15:34:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0117A84A2B;
-	Wed, 31 Jan 2024 14:49:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F1CB012A14E;
+	Wed, 31 Jan 2024 15:34:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QW+u4gkx"
+	dkim=pass (2048-bit key) header.d=efficios.com header.i=@efficios.com header.b="lPSfX5mK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtpout.efficios.com (smtpout.efficios.com [167.114.26.122])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE81084A25;
-	Wed, 31 Jan 2024 14:49:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BCA712A14F;
+	Wed, 31 Jan 2024 15:34:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=167.114.26.122
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1706712581; cv=none; b=IPjKnuUAKAyQvdmnJVsio/rmvjepDTKYEMXqBQtjYIld+X6cDOSjQgRRTcY+zMa65GEWX6c8C3xJyVzxRazKKpMkL/YHXoZD6m1nY0bqFb5Wk28rdljc6bZSUUoau4EmXsxIiKVPzhkAEE03ZAwtvTzobIV3LKJQItpqnHPxnWE=
+	t=1706715242; cv=none; b=JyoiK1LwONhuq6z82LcfDW+GQqoc3JouVhK4m8okrV+cDdKZw2b3x2DMxmtL7kKiQUuRUp1DmlXZ2O4JojWTHf4rVN4S3rRYsaBcmiDJhVm3hLMBwcKzGgXSmfdkiOv9BG2VTi23T0nwo5UiueWEqiz+Lm1dQHGp5yyf27LKLyc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1706712581; c=relaxed/simple;
-	bh=2yHAEIfWo9jtDG3p0AkHhbA/aM0nxnP2vXRtqVa7teY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=of1j+/5tEnySYCkBCNiEzjgVL3GOVNdhNCz8HOvDTpQDWSBkaMzdds5kkNG/wVDFNUgWmeGuDM2/aBkUnQFGOd+3vnnpkXze3VL7Lr9TWJnEFixNZY7S+khQZ0Ncv6TQjjonpNonJvf0Yl+81CCX7dueCYmQ9I24p488AbCNDzo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QW+u4gkx; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDC5CC433C7;
-	Wed, 31 Jan 2024 14:49:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1706712581;
-	bh=2yHAEIfWo9jtDG3p0AkHhbA/aM0nxnP2vXRtqVa7teY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=QW+u4gkxi4Y+A1kx9nhpvAQ1EP8rM+k3jqjMGovujJJB59p7806HWkXfBEj0gLi/3
-	 dpE9ybCf48GATqlB1ESTepI2Vpc3Gz5mcuduAC0xO4CA3jImqCFl1onHVBM3vgNgve
-	 P7WRiiNDNwbi/bBxQFbHMPjLCcSFpaECoKh3R4IzGBz8kKHS0VLNM+83cFVzXFslcS
-	 ElzySdf458R0htk5byWFQGchyYXTxhGF1QstYas278sioSKd3GxQvzlRYyXl412lt1
-	 JdArA3NOIlG6ngKW+zO3XK46/bMum/FZUw4ptS5PISyPW2hhEUfe+LEN6JUngCsW63
-	 Vc+Yrx6EsRs4Q==
-Date: Wed, 31 Jan 2024 08:49:39 -0600
-From: Rob Herring <robh@kernel.org>
-To: Alexander Graf <graf@amazon.com>
-Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
-	linux-mm@kvack.org, devicetree@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, kexec@lists.infradead.org,
-	linux-doc@vger.kernel.org, x86@kernel.org,
-	Eric Biederman <ebiederm@xmission.com>,
-	"H . Peter Anvin" <hpa@zytor.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Tom Lendacky <thomas.lendacky@amd.com>,
-	Ashish Kalra <ashish.kalra@amd.com>,
-	James Gowans <jgowans@amazon.com>,
-	Stanislav Kinsburskii <skinsburskii@linux.microsoft.com>,
-	arnd@arndb.de, pbonzini@redhat.com, madvenka@linux.microsoft.com,
-	Anthony Yznaga <anthony.yznaga@oracle.com>,
-	Usama Arif <usama.arif@bytedance.com>,
-	David Woodhouse <dwmw@amazon.co.uk>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>
-Subject: Re: [PATCH v3 08/17] arm64: Add KHO support
-Message-ID: <20240131144939.GA1241147-robh@kernel.org>
-References: <20240117144704.602-1-graf@amazon.com>
- <20240117144704.602-9-graf@amazon.com>
+	s=arc-20240116; t=1706715242; c=relaxed/simple;
+	bh=JvE4wxUL3PufVxrqn37IX2VRkyiWvVzHahoJOEeAAN0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=U3KtuWkV5Xlv27ziF/rWLnEqVOASDzj2tka9Hv3FbdXhGqHohvbvJWFvgkKo3fUyB7Q46rFX2CoL5hmlTbS22fAE7/QLKpm+59cHhRIwf8127bVY/gmwrxBzqYvDplUguxHJ9eS2N86J6aZhI2Rft50FBEz1aHiwJfsdEkMs/RI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=efficios.com; spf=pass smtp.mailfrom=efficios.com; dkim=pass (2048-bit key) header.d=efficios.com header.i=@efficios.com header.b=lPSfX5mK; arc=none smtp.client-ip=167.114.26.122
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=efficios.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=efficios.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=efficios.com;
+	s=smtpout1; t=1706715240;
+	bh=JvE4wxUL3PufVxrqn37IX2VRkyiWvVzHahoJOEeAAN0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=lPSfX5mKN8KAdjUyhp4wQqLXqMyQtU4oXSSaIK93ceIbBz3nqA+xyShSZ63eNMUEY
+	 4ltH4cpctRQ2bKBh2jPUz7YzlckoykLXBXL1iKZGhjEsqitBuZDmZyJzJykroyGZYI
+	 UBRzcNKyl0x3ztSsfJ0bzfrYwiCZy2rcArsz5GTC+j1RVGNmPtBcLry/HUkANuRMO7
+	 COWdL0YdaUce34kcdlXBa1wur1kg1WwGiV7ZRfpL1fu8Ts2gaEHLM78D8xZmtK+QV5
+	 D2TwH4bbt7gA4rZTlIw2qNkrfTkpwniCn8FOD4uTIYdA+HjQ3EqofTYkLu5XDgPZiF
+	 wGhhl/Jzf6dQg==
+Received: from [172.16.0.134] (192-222-143-198.qc.cable.ebox.net [192.222.143.198])
+	by smtpout.efficios.com (Postfix) with ESMTPSA id 4TQ5fv5JhHzVrW;
+	Wed, 31 Jan 2024 10:33:59 -0500 (EST)
+Message-ID: <8325617c-51a4-4747-8082-befe9ff1c0f3@efficios.com>
+Date: Wed, 31 Jan 2024 10:33:59 -0500
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240117144704.602-9-graf@amazon.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 4/4] membarrier: riscv: Provide core serializing
+ command
+Content-Language: en-US
+To: Andrea Parri <parri.andrea@gmail.com>, paul.walmsley@sifive.com,
+ palmer@dabbelt.com, aou@eecs.berkeley.edu, paulmck@kernel.org, corbet@lwn.net
+Cc: mmaas@google.com, hboehm@google.com, striker@us.ibm.com,
+ charlie@rivosinc.com, rehn@rivosinc.com, rdunlap@infradead.org,
+ sorear@fastmail.com, linux-riscv@lists.infradead.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20240131144936.29190-1-parri.andrea@gmail.com>
+ <20240131144936.29190-5-parri.andrea@gmail.com>
+From: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+In-Reply-To: <20240131144936.29190-5-parri.andrea@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 17, 2024 at 02:46:55PM +0000, Alexander Graf wrote:
-> We now have all bits in place to support KHO kexecs. This patch adds
-> awareness of KHO in the kexec file as well as boot path for arm64 and
-> adds the respective kconfig option to the architecture so that it can
-> use KHO successfully.
+On 2024-01-31 09:49, Andrea Parri wrote:
+> RISC-V uses xRET instructions on return from interrupt and to go back
+> to user-space; the xRET instruction is not core serializing.
 > 
-> Signed-off-by: Alexander Graf <graf@amazon.com>
+> Use FENCE.I for providing core serialization as follows:
 > 
-> ---
+>   - by calling sync_core_before_usermode() on return from interrupt (cf.
+>     ipi_sync_core()),
 > 
-> v1 -> v2:
+>   - via switch_mm() and sync_core_before_usermode() (respectively, for
+>     uthread->uthread and kthread->uthread transitions) before returning
+>     to user-space.
 > 
->   - test bot warning fix
->   - Change kconfig option to ARCH_SUPPORTS_KEXEC_KHO
->   - s/kho_reserve_mem/kho_reserve_previous_mem/g
->   - s/kho_reserve/kho_reserve_scratch/g
->   - Remove / reduce ifdefs for kho fdt code
-> ---
->  arch/arm64/Kconfig        |  3 +++
->  arch/arm64/kernel/setup.c |  2 ++
->  arch/arm64/mm/init.c      |  8 ++++++
->  drivers/of/fdt.c          | 39 ++++++++++++++++++++++++++++
->  drivers/of/kexec.c        | 54 +++++++++++++++++++++++++++++++++++++++
->  5 files changed, 106 insertions(+)
+> On RISC-V, the serialization in switch_mm() is activated by resetting
+> the icache_stale_mask of the mm at prepare_sync_core_cmd().
 > 
-> diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-> index 8f6cf1221b6a..44d8923d9db4 100644
-> --- a/arch/arm64/Kconfig
-> +++ b/arch/arm64/Kconfig
-> @@ -1496,6 +1496,9 @@ config ARCH_SUPPORTS_KEXEC_IMAGE_VERIFY_SIG
->  config ARCH_DEFAULT_KEXEC_IMAGE_VERIFY_SIG
->  	def_bool y
->  
-> +config ARCH_SUPPORTS_KEXEC_KHO
-> +	def_bool y
-> +
->  config ARCH_SUPPORTS_CRASH_DUMP
->  	def_bool y
->  
-> diff --git a/arch/arm64/kernel/setup.c b/arch/arm64/kernel/setup.c
-> index 417a8a86b2db..9aa05b84d202 100644
-> --- a/arch/arm64/kernel/setup.c
-> +++ b/arch/arm64/kernel/setup.c
-> @@ -346,6 +346,8 @@ void __init __no_sanitize_address setup_arch(char **cmdline_p)
->  
->  	paging_init();
->  
-> +	kho_reserve_previous_mem();
-> +
->  	acpi_table_upgrade();
->  
->  	/* Parse the ACPI tables for possible boot-time configuration */
-> diff --git a/arch/arm64/mm/init.c b/arch/arm64/mm/init.c
-> index 74c1db8ce271..1a8fc91509af 100644
-> --- a/arch/arm64/mm/init.c
-> +++ b/arch/arm64/mm/init.c
-> @@ -358,6 +358,8 @@ void __init bootmem_init(void)
->  	 */
->  	arch_reserve_crashkernel();
->  
-> +	kho_reserve_scratch();
-> +
->  	memblock_dump_all();
->  }
->  
-> @@ -386,6 +388,12 @@ void __init mem_init(void)
->  	/* this will put all unused low memory onto the freelists */
->  	memblock_free_all();
->  
-> +	/*
-> +	 * Now that all KHO pages are marked as reserved, let's flip them back
-> +	 * to normal pages with accurate refcount.
-> +	 */
-> +	kho_populate_refcount();
-> +
->  	/*
->  	 * Check boundaries twice: Some fundamental inconsistencies can be
->  	 * detected at build time already.
-> diff --git a/drivers/of/fdt.c b/drivers/of/fdt.c
-> index bf502ba8da95..f9b9a36fb722 100644
-> --- a/drivers/of/fdt.c
-> +++ b/drivers/of/fdt.c
-> @@ -1006,6 +1006,42 @@ void __init early_init_dt_check_for_usable_mem_range(void)
->  		memblock_add(rgn[i].base, rgn[i].size);
->  }
->  
-> +/**
-> + * early_init_dt_check_kho - Decode info required for kexec handover from DT
-> + */
-> +static void __init early_init_dt_check_kho(void)
-> +{
-> +	unsigned long node = chosen_node_offset;
-> +	u64 kho_start, scratch_start, scratch_size, mem_start, mem_size;
-> +	const __be32 *p;
-> +	int l;
-> +
-> +	if (!IS_ENABLED(CONFIG_KEXEC_KHO) || (long)node < 0)
-> +		return;
-> +
-> +	p = of_get_flat_dt_prop(node, "linux,kho-dt", &l);
+> Suggested-by: Palmer Dabbelt <palmer@dabbelt.com>
+> Signed-off-by: Andrea Parri <parri.andrea@gmail.com>
 
-These need to be documented. chosen node schema lives in dtschema.
+Reviewed-by: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
 
-> +	if (l != (dt_root_addr_cells + dt_root_size_cells) * sizeof(__be32))
-> +		return;
+-- 
+Mathieu Desnoyers
+EfficiOS Inc.
+https://www.efficios.com
 
-I would just make all these fixed 64-bit values rather than based on 
-address and size cells. That's what we've done on more recent chosen 
-properties describing regions.
-
-Rob
 
