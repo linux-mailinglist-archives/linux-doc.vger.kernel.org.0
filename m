@@ -1,359 +1,257 @@
-Return-Path: <linux-doc+bounces-8164-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8168-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C57BB8464CB
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Feb 2024 01:05:38 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id BFC068465C8
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Feb 2024 03:28:16 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E9B0F1C22309
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Feb 2024 00:05:37 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E52B81C2391D
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Feb 2024 02:28:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E0DE137B;
-	Fri,  2 Feb 2024 00:05:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D3DF5AD46;
+	Fri,  2 Feb 2024 02:28:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="BJzDeN4w"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F9B2EDB
-	for <linux-doc@vger.kernel.org>; Fri,  2 Feb 2024 00:05:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E22BABA48
+	for <linux-doc@vger.kernel.org>; Fri,  2 Feb 2024 02:28:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1706832334; cv=none; b=Pksaxha6kOzC7p6wOU5dJ1PdmP66wmz340FpX0SE9pUveFYfuuj2I7+LMB2NFLKRXpsIh9FOsk9/bvwm/QT1xTntGO21W+IOu5WZhe1+8kUP7RocEJ1ZpBPgFLZnma7o7cgbhEYIQ81Bx0uyn7zb6Xn6lgjrw2wZZOCiaLwBTEw=
+	t=1706840891; cv=none; b=FZj42Dw1hWcPB/qXaCTHUsnx5NrUYBP3k4ZeR/JL+rLckesPQt05gjwAOlryqV1eij+bASbTY5u/NdEOySGJ+4bkWjiy9hZ0LrfuUS06gqJhBr0FL3vHbumtdGaVeHfCpZYjwwRnCHzE0e3G938kLuh7t615bO1+NbRG8VGQKp0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1706832334; c=relaxed/simple;
-	bh=xahuZ34zPisir7l+Lld5N6MtW7jBLctWjC+/rW1z0ug=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=lpCcHH7tYzj1onBAPi/mq41u2JPp4lAhi7qdH8ee6dg5iweYpdkgQv51sKOBedq386O65Q4KBWAJGPle8TlqJzYTA6ljj8Hf6KQT/Bu0MZNwhmKKC+TLpiC5Ky1QtCfDJSvQV31k3klOz37P78Yo52N7zpZcgpNTqruRtoq0DRY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <m.grzeschik@pengutronix.de>)
-	id 1rVh3Z-0000d2-Re; Fri, 02 Feb 2024 01:05:21 +0100
-Received: from [2a0a:edc0:0:1101:1d::ac] (helo=dude04.red.stw.pengutronix.de)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <m.grzeschik@pengutronix.de>)
-	id 1rVh3W-003xQ8-39; Fri, 02 Feb 2024 01:05:18 +0100
-Received: from localhost ([::1] helo=dude04.red.stw.pengutronix.de)
-	by dude04.red.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <m.grzeschik@pengutronix.de>)
-	id 1rVh3V-00AFlM-1l;
-	Fri, 02 Feb 2024 01:05:18 +0100
-From: Michael Grzeschik <m.grzeschik@pengutronix.de>
-Date: Fri, 02 Feb 2024 01:05:13 +0100
-Subject: [PATCH v2 4/4] tools: usb: p9_fwd: add usb gadget packet forwarder
- script
+	s=arc-20240116; t=1706840891; c=relaxed/simple;
+	bh=rpDe5b+V/4D+ojZKAKLnU3kGC0FGFddkWQWVw2UB06A=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=raYCFXg+e9PR5w05rm7fsNAQW+DJleIihkqqqoCWstOwsY52eiOPVSq3M0Jx6qOifTTUGMwmp7gD2qD5GbYBMW8aez4JHZIrVYBXEch3Rs6GZWJBmqkpt0mkMy39qIyxzTJIwqxZfc3DvdjxXgUjvxNcVNK5FrPDgqE6ZhJcFpY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=BJzDeN4w; arc=none smtp.client-ip=209.85.210.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
+Received: by mail-ot1-f42.google.com with SMTP id 46e09a7af769-6e118da997cso839907a34.3
+        for <linux-doc@vger.kernel.org>; Thu, 01 Feb 2024 18:28:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1706840889; x=1707445689; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=nH6kvi7IzHM1HjT9d3ebo606kaCmtup5eOU1YOyCeeQ=;
+        b=BJzDeN4wHlZUpyJsHUvQuvMd93OWPeQhvpwM8dvkW2/Pu0WCqhedjZOoIwWkZesuL0
+         fmrbQEnLB2GY1EX9lfdRpQM/ZfrMDyzumGFjHheU3Hf8PnawGCM5/9gkgYGJLmrWIqlp
+         7KrTXNDMOmssAkXyDr7PPA9zMcndgrLjfxqLLxAx1lyaUnZzvjeoKsGc0dP9VykxiKl8
+         5Kf8fWr99v92MCWVRIeoyhM/hIWZSiHe8Uw81CVGhb2ZR2IGAnaMIddd/ziYPbBWu0ms
+         4iAhd3ZnredVIXW3FwJr4QDtx8gXCfBMKiPiKCeFK02ITbKlwhdIDoKic3nKSjDMEay6
+         RkMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1706840889; x=1707445689;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=nH6kvi7IzHM1HjT9d3ebo606kaCmtup5eOU1YOyCeeQ=;
+        b=UJCyYuzO2qj3Uma7DrdPBJF4QaZKUqkCiDEmWjZLlF4DZUkmDQAXUHPiPObXnpJtyd
+         eEwhZ/U02hGLIj9b6K+gglZ4UZhf/FwRvLDKgj0Sb1GyYT8RAxVdgLvYMQ5iv/gorg88
+         dNm0yAQ6/ATMom51j+Ddj1DpK+RAUtuvOlSzDVOxMmZUy3SlFkN1Euly4b/uKEi/qg6R
+         iUYmuxOUdEnjV+ECqx4h7WZuigh/JNJV/kz7DxFtNBIdGZNK+oCKIyOg9ZsCDoBBpD/z
+         KteRfiSz+O+AoWd8j6kdp0Y4Xd+nSGs6lYScAASzJjE+Pkzahfbd2xf2tIaZmvgCieP8
+         dD2g==
+X-Gm-Message-State: AOJu0Yz2cFOSnP+MMSdvTyKSUUy8gdhByHijVtSUsOY9Q9FPtv/oea79
+	GZI8hYkT839CZVn6aToEN1QNIMJesoU08PY3SaV2/vzLqj7HAMpjH5V6opsBmcE=
+X-Google-Smtp-Source: AGHT+IFp062ooy/IHYTf+Z1OQbUuwLGyLVscZ2fxBHLPNsW3kl1YytnGZuKwPGTv6LdCdXItOvcJDA==
+X-Received: by 2002:a05:6358:6f9e:b0:175:f9b8:89bf with SMTP id s30-20020a0563586f9e00b00175f9b889bfmr754264rwn.22.1706840888844;
+        Thu, 01 Feb 2024 18:28:08 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCXzW8HfzfBFndPbvvprCc2R3w70/c3RF57w2kO5sNhkjXiUc1+iJh25RmbGSpHdo5iPTXeHAnAB7skw2x1KEoPntxLdqUFcfINGL9DWhTDZaEPfW02nxrhVVq93LOqGqNgq0r2qw1V7QZ4yQQb9qzK9vG4gCQm+HEhoLTBwLMa67+YJOLZ31OGsXEicpDP0DEqDcubfynAm/g8XPvNWtIf9b3BlmflK4EEeYcg2uN/vMC9b1V1V3JenxQ0f8Fdb7boDEqhfd/fOEWa8BjnidQ1VNbmJzh8ygiJqy/NzNF8GnnxzaQLPE/xjCNrGBSeDM8QyHJD2o/RIpcqCU7zdkZSx+UdVKZjT1sw6QR6wH8bkgpWrrk+HXWDd54eS+Qerhkl4EURj
+Received: from ghost ([12.44.203.122])
+        by smtp.gmail.com with ESMTPSA id f8-20020a63de08000000b005d8aef12380sm524464pgg.73.2024.02.01.18.28.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Feb 2024 18:28:08 -0800 (PST)
+Date: Thu, 1 Feb 2024 18:28:06 -0800
+From: Charlie Jenkins <charlie@rivosinc.com>
+To: Yangyu Chen <cyy@cyyself.name>
+Cc: Alexandre Ghiti <alexghiti@rivosinc.com>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>, Shuah Khan <shuah@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, linux-mm@kvack.org,
+	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v3 1/3] riscv: mm: Use hint address in mmap if available
+Message-ID: <ZbxTNjQPFKBatMq+@ghost>
+References: <20240130-use_mmap_hint_address-v3-0-8a655cfa8bcb@rivosinc.com>
+ <20240130-use_mmap_hint_address-v3-1-8a655cfa8bcb@rivosinc.com>
+ <tencent_83E0AB36A9A3032E5A4C4AC864A311DF9406@qq.com>
+ <tencent_068B3B7AE01AC67885E4369AF14109CE6A0A@qq.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240116-ml-topic-u9p-v2-4-b46cbf592962@pengutronix.de>
-References: <20240116-ml-topic-u9p-v2-0-b46cbf592962@pengutronix.de>
-In-Reply-To: <20240116-ml-topic-u9p-v2-0-b46cbf592962@pengutronix.de>
-To: Eric Van Hensbergen <ericvh@kernel.org>, 
- Latchesar Ionkov <lucho@ionkov.net>, 
- Dominique Martinet <asmadeus@codewreck.org>, 
- Christian Schoenebeck <linux_oss@crudebyte.com>, 
- Jonathan Corbet <corbet@lwn.net>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: v9fs@lists.linux.dev, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org, 
- kernel@pengutronix.de, Michael Grzeschik <m.grzeschik@pengutronix.de>
-X-Mailer: b4 0.12.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9207;
- i=m.grzeschik@pengutronix.de; h=from:subject:message-id;
- bh=xahuZ34zPisir7l+Lld5N6MtW7jBLctWjC+/rW1z0ug=;
- b=owEBbQKS/ZANAwAKAb9pWET5cfSrAcsmYgBlvDG9NEOGflYQjx9gIoLCgj6t4KvulBz75sp5U
- HelQskD9GSJAjMEAAEKAB0WIQQV2+2Fpbqd6fvv0Gi/aVhE+XH0qwUCZbwxvQAKCRC/aVhE+XH0
- qy0wEACpT2RlxnfBP48RD0POGPqIR/dU95jTJHJV3KACFhKtD4bmMcvmUPMncAWBzSzl7iKxcZw
- FRXhe8R75nFiLFo7QHdh0O3mZE2pj72wLjy1W3ERHaNzmpBTbWJ4YO1W2P3RZrIkhIiDhC6q7o+
- gBx7V+BXQdXRX5xMLzTgY9nhG4vThlJY99mkw4lX3NFSussQhCM/palTLzF/oh4afPddH0DIYnq
- KZaOB2fTFeP4JMbNeVk6gtIhsCxBO4QVFBIEONRXZnLZ0MjUahdtZGx+mExOY9g2u0TYrf2ktwO
- vL0yvWRubOVpVABrMLe7sCzlcoJJHNJQQlMK9uir7LDyRP7mfvG3uv514kWH2tuCMxaWjHAi+I9
- 8vf4cGyTENBsWQ1yHIgRJWIq3klC3bDJ+ZrTGE3hkCYxE2CD2mvzEOEidPKs2ixiFQ77Kim4mJ1
- rIMKgk+2FmImAIzH9L8opJ7V/GQhgtf10GZC9Ltl2wXmAf5GNV4xVVvDjTqcbuI6jd2b9a2qXVY
- hsd1deGIgTtVj7VKV09YXc9pg72U/k3QWGX79HttJNwKtwOpFkhYa9oy2yVdKufYzZPirNWHMD7
- nnvZJAST5dwjVTcMS3QDfNXRxRuN+wZkfFJ93X/XTiQ+AN2EfjbgtrwutPTx2UYQ4VBqzLW/0me
- b7+/1SSA1OasFBg==
-X-Developer-Key: i=m.grzeschik@pengutronix.de; a=openpgp;
- fpr=957BC452CE953D7EA60CF4FC0BE9E3157A1E2C64
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: m.grzeschik@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <tencent_068B3B7AE01AC67885E4369AF14109CE6A0A@qq.com>
 
-This patch is adding an small python tool to forward 9pfs requests
-from the USB gadget to an existing 9pfs TCP server. Since currently all
-9pfs servers lack support for the usb transport this tool is an useful
-helper to get started.
+On Wed, Jan 31, 2024 at 11:59:43PM +0800, Yangyu Chen wrote:
+> On Wed, 2024-01-31 at 22:41 +0800, Yangyu Chen wrote:
+> > On Tue, 2024-01-30 at 17:07 -0800, Charlie Jenkins wrote:
+> > > On riscv it is guaranteed that the address returned by mmap is less
+> > > than
+> > > the hint address. Allow mmap to return an address all the way up to
+> > > addr, if provided, rather than just up to the lower address space.
+> > > 
+> > > This provides a performance benefit as well, allowing mmap to exit
+> > > after
+> > > checking that the address is in range rather than searching for a
+> > > valid
+> > > address.
+> > > 
+> > > It is possible to provide an address that uses at most the same
+> > > number
+> > > of bits, however it is significantly more computationally expensive
+> > > to
+> > > provide that number rather than setting the max to be the hint
+> > > address.
+> > > There is the instruction clz/clzw in Zbb that returns the highest
+> > > set
+> > > bit
+> > > which could be used to performantly implement this, but it would
+> > > still
+> > > be slower than the current implementation. At worst case, half of
+> > > the
+> > > address would not be able to be allocated when a hint address is
+> > > provided.
+> > > 
+> > > Signed-off-by: Charlie Jenkins <charlie@rivosinc.com>
+> > > ---
+> > >  arch/riscv/include/asm/processor.h | 27 +++++++++++---------------
+> > > -
+> > >  1 file changed, 11 insertions(+), 16 deletions(-)
+> > > 
+> > > diff --git a/arch/riscv/include/asm/processor.h
+> > > b/arch/riscv/include/asm/processor.h
+> > > index f19f861cda54..8ece7a8f0e18 100644
+> > > --- a/arch/riscv/include/asm/processor.h
+> > > +++ b/arch/riscv/include/asm/processor.h
+> > > @@ -14,22 +14,16 @@
+> > >  
+> > >  #include <asm/ptrace.h>
+> > >  
+> > > -#ifdef CONFIG_64BIT
+> > > -#define DEFAULT_MAP_WINDOW	(UL(1) << (MMAP_VA_BITS - 1))
+> > > -#define STACK_TOP_MAX		TASK_SIZE_64
+> > > -
+> > >  #define arch_get_mmap_end(addr, len, flags)			\
+> > >  ({								\
+> > >  	unsigned long
+> > > mmap_end;					\
+> > >  	typeof(addr) _addr = (addr);				\
+> > > -	if ((_addr) == 0 || (IS_ENABLED(CONFIG_COMPAT) &&
+> > > is_compat_task())) \
+> > > +	if ((_addr) == 0 ||					\
+> > > +	    (IS_ENABLED(CONFIG_COMPAT) && is_compat_task()) ||	\
+> > > +	    ((_addr + len) > BIT(VA_BITS -
+> > > 1)))			\
+> > >  		mmap_end = STACK_TOP_MAX;			\
+> > > -	else if ((_addr) >= VA_USER_SV57)			\
+> > > -		mmap_end = STACK_TOP_MAX;			\
+> > > -	else if ((((_addr) >= VA_USER_SV48)) && (VA_BITS >=
+> > > VA_BITS_SV48)) \
+> > > -		mmap_end = VA_USER_SV48;			\
+> > >  	else							\
+> > > -		mmap_end = VA_USER_SV39;			\
+> > > +		mmap_end = (_addr + len);			\
+> > >  	mmap_end;						\
+> > >  })
+> > >  
+> > > @@ -39,17 +33,18 @@
+> > >  	typeof(addr) _addr = (addr);				\
+> > >  	typeof(base) _base = (base);				\
+> > >  	unsigned long rnd_gap = DEFAULT_MAP_WINDOW - (_base);	\
+> > > -	if ((_addr) == 0 || (IS_ENABLED(CONFIG_COMPAT) &&
+> > > is_compat_task())) \
+> > > +	if ((_addr) == 0 ||					\
+> > > +	    (IS_ENABLED(CONFIG_COMPAT) && is_compat_task()) ||	\
+> > > +	    ((_addr + len) > BIT(VA_BITS -
+> > > 1)))			\
+> > >  		mmap_base = (_base);				\
+> > > -	else if (((_addr) >= VA_USER_SV57) && (VA_BITS >=
+> > > VA_BITS_SV57)) \
+> > > -		mmap_base = VA_USER_SV57 - rnd_gap;		\
+> > > -	else if ((((_addr) >= VA_USER_SV48)) && (VA_BITS >=
+> > > VA_BITS_SV48)) \
+> > > -		mmap_base = VA_USER_SV48 - rnd_gap;		\
+> > >  	else							\
+> > > -		mmap_base = VA_USER_SV39 - rnd_gap;		\
+> > > +		mmap_base = (_addr + len) - rnd_gap;		\
+> > >  	mmap_base;						\
+> > >  })
+> > >  
+> > > +#ifdef CONFIG_64BIT
+> > > +#define DEFAULT_MAP_WINDOW	(UL(1) << (MMAP_VA_BITS - 1))
+> > > +#define STACK_TOP_MAX		TASK_SIZE_64
+> > >  #else
+> > >  #define DEFAULT_MAP_WINDOW	TASK_SIZE
+> > >  #define STACK_TOP_MAX		TASK_SIZE
+> > > 
+> > 
+> > I have carefully tested your patch on qemu with sv57. A bug that
+> > needs
+> > to be solved is that mmap with the same hint address without
+> > MAP_FIXED
+> > set will fail the second time.
+> > 
+> > Userspace code to reproduce the bug:
+> > 
+> > #include <sys/mman.h>
+> > #include <stdio.h>
+> > #include <stdint.h>
+> > 
+> > void test(char *addr) {
+> >     char *res = mmap(addr, 4096, PROT_READ | PROT_WRITE,
+> > MAP_ANONYMOUS
+> > > MAP_PRIVATE, -1, 0);
+> >     printf("hint %p got %p.\n", addr, res);
+> > }
+> > 
+> > int main (void) {
+> >     test(1<<30);
+> >     test(1<<30);
+> >     test(1<<30);
+> >     return 0;
+> > }
+> > 
+> > output:
+> > 
+> > hint 0x40000000 got 0x40000000.
+> > hint 0x40000000 got 0xffffffffffffffff.
+> > hint 0x40000000 got 0xffffffffffffffff.
+> > 
+> > output on x86:
+> > 
+> > hint 0x40000000 got 0x40000000.
+> > hint 0x40000000 got 0x7f9171363000.
+> > hint 0x40000000 got 0x7f9171362000.
+> > 
+> > It may need to implement a special arch_get_unmapped_area and
+> > arch_get_unmapped_area_topdown function.
+> > 
+> 
+> This is because hint address < rnd_gap. I have tried to let mmap_base =
+> min((_addr + len), (base) + TASK_SIZE - DEFAULT_MAP_WINDOW). However it
+> does not work for bottom-up while ulimit -s is unlimited. You said this
+> behavior is expected from patch v2 review. However it brings a new
+> regression even on sv39 systems.
+> 
+> I still don't know the reason why use addr+len as the upper-bound. I
+> think solution like x86/arm64/powerpc provide two address space switch
+> based on whether hint address above the default map window is enough.
+> 
 
-Refer the Documentation section "USBG Example" in
-Documentation/filesystems/9p.rst on how to use it.
+Yep this is expected. It is up to the maintainers to decide.
 
-Signed-off-by: Michael Grzeschik <m.grzeschik@pengutronix.de>
-
----
-v1 -> v2:
-  - added usbg 9pfs detailed instructions to 9p.rst doc
----
- Documentation/filesystems/9p.rst |  32 +++++++
- tools/usb/p9_fwd.py              | 194 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 226 insertions(+)
-
-diff --git a/Documentation/filesystems/9p.rst b/Documentation/filesystems/9p.rst
-index 64439068a8fc5..264265c72ba67 100644
---- a/Documentation/filesystems/9p.rst
-+++ b/Documentation/filesystems/9p.rst
-@@ -67,6 +67,38 @@ To mount a 9p FS on a USB Host accessible via the gadget as root filesystem::
- where mount_tag is the tag associated by the usb gadget transport. The
- pattern is usb9pfs0, usb9pfs1, ...
- 
-+USBG Example
-+============
-+
-+The USB host exports a filesystem, while the gadget on the USB device
-+side makes it mountable.
-+
-+Diod (9pfs server) and the forwarder are on the development host, where
-+the root filesystem is actually stored. The gadget is initialized during
-+boot (or later) on the embedded board. Then the forwarder will find it
-+on the USB bus and start forwarding requests.
-+
-+In this case the 9p requests come from the device and are handled by the
-+host. The reason is that USB device ports are normally not available on
-+PCs, so a connection in the other direction would not work.
-+
-+When using the usbg transport, for now there is no native usb host
-+service capable to handle the requests from the gadget driver. For
-+this we have to use the extra python tool p9_fwd.py from tools/usb.
-+
-+Just start the 9pfs capable network server like diod/nfs-ganesha e.g.:
-+
-+	$ diod -f -n -d 0 -S -l 0.0.0.0:9999 -e $PWD
-+
-+Then start the python transport:
-+
-+	$ python $kernel_dir/tools/usb/p9_fwd.py -p 9999
-+
-+After that the gadget driver can be used as described above.
-+
-+One use-case is to use it as an alternative to NFS root booting during
-+the development of embedded Linux devices.
-+
- Options
- =======
- 
-diff --git a/tools/usb/p9_fwd.py b/tools/usb/p9_fwd.py
-new file mode 100755
-index 0000000000000..95208df11abef
---- /dev/null
-+++ b/tools/usb/p9_fwd.py
-@@ -0,0 +1,194 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0
-+
-+import argparse
-+import errno
-+import logging
-+import socket
-+import struct
-+import sys
-+import time
-+
-+import usb.core
-+import usb.util
-+
-+
-+class Forwarder:
-+    HEXDUMP_FILTER = (
-+        "".join(chr(x).isprintable() and chr(x) or "." for x in range(128)) + "." * 128
-+    )
-+
-+    @staticmethod
-+    def _log_hexdump(data):
-+        if not logging.root.isEnabledFor(logging.TRACE):
-+            return
-+        L = 16
-+        for c in range(0, len(data), L):
-+            chars = data[c : c + L]
-+            dump = " ".join(f"{x:02x}" for x in chars)
-+            printable = "".join(HEXDUMP_FILTER[x] for x in chars)
-+            line = f"{c:08x}  {dump:{L*3}s} |{printable:{L}s}|"
-+            logging.root.log(logging.TRACE, "%s", line)
-+
-+    def __init__(self, server):
-+        self.stats = {
-+            "c2s packets": 0,
-+            "c2s bytes": 0,
-+            "s2c packets": 0,
-+            "s2c bytes": 0,
-+        }
-+        self.stats_logged = time.monotonic()
-+
-+        dev = usb.core.find(idVendor=0x1D6B, idProduct=0x0109)
-+        if dev is None:
-+            raise ValueError("Device not found")
-+
-+        logging.info(f"found device: {dev.bus}/{dev.address}")
-+
-+        # dev.set_configuration() is not necessary since g_multi has only one
-+        usb9pfs = None
-+        # g_multi adds 9pfs as last interface
-+        cfg = dev.get_active_configuration()
-+        for intf in cfg:
-+            # we have to detach the usb-storage driver from multi gadget since
-+            # stall option could be set, which will lead to spontaneous port
-+            # resets and our transfers will run dead
-+            if intf.bInterfaceClass == 0x08:
-+                if dev.is_kernel_driver_active(intf.bInterfaceNumber):
-+                    dev.detach_kernel_driver(intf.bInterfaceNumber)
-+
-+            if (
-+                intf.bInterfaceClass == 0xFF
-+                and intf.bInterfaceSubClass == 0xFF
-+                and intf.bInterfaceProtocol == 0x09
-+            ):
-+                usb9pfs = intf
-+        if usb9pfs is None:
-+            raise ValueError("Interface not found")
-+
-+        logging.info(f"claiming interface:\n{usb9pfs}")
-+        usb.util.claim_interface(dev, usb9pfs.bInterfaceNumber)
-+        ep_out = usb.util.find_descriptor(
-+            usb9pfs,
-+            custom_match=lambda e: usb.util.endpoint_direction(e.bEndpointAddress)
-+            == usb.util.ENDPOINT_OUT,
-+        )
-+        assert ep_out is not None
-+        ep_in = usb.util.find_descriptor(
-+            usb9pfs,
-+            custom_match=lambda e: usb.util.endpoint_direction(e.bEndpointAddress)
-+            == usb.util.ENDPOINT_IN,
-+        )
-+        assert ep_in is not None
-+        logging.info(f"interface claimed")
-+
-+        self.ep_out = ep_out
-+        self.ep_in = ep_in
-+        self.dev = dev
-+
-+        # create and connect socket
-+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-+        self.s.connect(server)
-+
-+        logging.info(f"connected to server")
-+
-+    def c2s(self):
-+        """forward a request from the USB client to the TCP server"""
-+        data = None
-+        while data is None:
-+            try:
-+                logging.log(logging.TRACE, "c2s: reading")
-+                data = self.ep_in.read(self.ep_in.wMaxPacketSize)
-+            except usb.core.USBTimeoutError:
-+                logging.log(logging.TRACE, "c2s: reading timed out")
-+                continue
-+            except usb.core.USBError as e:
-+                if e.errno == errno.EIO:
-+                    logging.debug("c2s: reading failed with %s, retrying", repr(e))
-+                    time.sleep(0.5)
-+                    continue
-+                else:
-+                    logging.error("c2s: reading failed with %s, aborting", repr(e))
-+                    raise
-+        size = struct.unpack("<I", data[:4])[0]
-+        while len(data) < size:
-+            data += self.ep_in.read(size - len(data))
-+        logging.log(logging.TRACE, "c2s: writing")
-+        self._log_hexdump(data)
-+        self.s.send(data)
-+        logging.debug("c2s: forwarded %i bytes", size)
-+        self.stats["c2s packets"] += 1
-+        self.stats["c2s bytes"] += size
-+
-+    def s2c(self):
-+        """forward a response from the TCP server to the USB client"""
-+        logging.log(logging.TRACE, "s2c: reading")
-+        data = self.s.recv(4)
-+        size = struct.unpack("<I", data[:4])[0]
-+        while len(data) < size:
-+            data += self.s.recv(size - len(data))
-+        logging.log(logging.TRACE, "s2c: writing")
-+        self._log_hexdump(data)
-+        while data:
-+            written = self.ep_out.write(data)
-+            assert written > 0
-+            data = data[written:]
-+        if size % self.ep_out.wMaxPacketSize == 0:
-+            logging.log(logging.TRACE, "sending zero length packet")
-+            self.ep_out.write(b"")
-+        logging.debug("s2c: forwarded %i bytes", size)
-+        self.stats["s2c packets"] += 1
-+        self.stats["s2c bytes"] += size
-+
-+    def log_stats(self):
-+        logging.info("statistics:")
-+        for k, v in self.stats.items():
-+            logging.info(f"  {k+':':14s} {v}")
-+
-+    def log_stats_interval(self, interval=5):
-+        if (time.monotonic() - self.stats_logged) < interval:
-+            return
-+
-+        self.log_stats()
-+        self.stats_logged = time.monotonic()
-+
-+
-+def main():
-+    parser = argparse.ArgumentParser(
-+        description="Forward 9PFS requests from USB to TCP",
-+    )
-+
-+    parser.add_argument(
-+        "-s", "--server", type=str, default="127.0.0.1", help="server hostname"
-+    )
-+    parser.add_argument("-p", "--port", type=int, default=564, help="server port")
-+    parser.add_argument("-v", "--verbose", action="count", default=0)
-+
-+    args = parser.parse_args()
-+
-+    logging.TRACE = logging.DEBUG - 5
-+    logging.addLevelName(logging.TRACE, "TRACE")
-+
-+    if args.verbose >= 2:
-+        level = logging.TRACE
-+    elif args.verbose:
-+        level = logging.DEBUG
-+    else:
-+        level = logging.INFO
-+    logging.basicConfig(
-+        level=level, format="%(asctime)-15s %(levelname)-8s %(message)s"
-+    )
-+
-+    f = Forwarder(server=(args.server, args.port))
-+
-+    try:
-+        while True:
-+            f.c2s()
-+            f.s2c()
-+            f.log_stats_interval()
-+    finally:
-+        f.log_stats()
-+
-+
-+if __name__ == "__main__":
-+    main()
-
--- 
-2.39.2
+- Charlie
 
 
