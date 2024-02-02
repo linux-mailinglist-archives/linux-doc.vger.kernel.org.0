@@ -1,188 +1,185 @@
-Return-Path: <linux-doc+bounces-8174-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8176-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6ACFC846AA8
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Feb 2024 09:25:34 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 927EA846DA0
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Feb 2024 11:17:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A24B1B2172B
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Feb 2024 08:25:31 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C6577B26F75
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Feb 2024 10:17:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC3E918AEE;
-	Fri,  2 Feb 2024 08:22:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 73C307CF26;
+	Fri,  2 Feb 2024 10:16:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="iExGsu6b"
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="J4NAQtov"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEDFA18E12
-	for <linux-doc@vger.kernel.org>; Fri,  2 Feb 2024 08:22:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8579C7A72E
+	for <linux-doc@vger.kernel.org>; Fri,  2 Feb 2024 10:16:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1706862171; cv=none; b=kapnSv5tNx9FUWRER1pZJiS10Z3ngqu/ZjoJzcQjxcX6OaPoCuTjl31KY+GVmTl4xOFrZWgCAdWOD8eHPc5T1PjzK8Ry9oOmW/qwVJsdgWvR+Ui1Bv6h9IDHY6eVjNkxS8qOg9BQ5/hwhXlm/kxyyOYmXj/zzN4ipjP12tSdNnk=
+	t=1706869008; cv=none; b=VF4V4i/dagjSxvYaV3+ALRkQm86QLq5FJ5X7MdAlHtnEeFgCl22hvnwrjzewHxlTVgiVFvMYAz2K+pHVvLuxESnSYl/iFUJS08hCBfzPHj5x2vr04Z1YF6rODl3PQQCJgz1iV4OoU6w2sWKYRqFQXPean/AHdKHGGLewYQG6t1k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1706862171; c=relaxed/simple;
-	bh=7tIHhc9IDe5ns2/JSRcv7LK0v4LwL4LEesVFyzRNJAI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=QY2NlU3AvxXesRyx+7xdMq5rantxNLk5lw9PwoGdT6vAPDcCUryPsIKd225zi7VAUk4j1UX4FFv8c+cUtCY+W+RUvA5QZ5pqvS+crjo4AIQeHnhpsk6aDB3sZpoNTzxl0deXBDjy2GA7g81RP9kJxUpb5WAnlNHHdGjatqtVVVI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=iExGsu6b; arc=none smtp.client-ip=209.85.161.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
-Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-59a1e21b0ebso464739eaf.1
-        for <linux-doc@vger.kernel.org>; Fri, 02 Feb 2024 00:22:48 -0800 (PST)
+	s=arc-20240116; t=1706869008; c=relaxed/simple;
+	bh=2l9nEKso4+AOWcpX8WNY7A6dHeDCfYN/6uhOB8hks2s=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=R6ffDp9fOCIY9/WmFjfcYVjnxcx5hjrYaKLLnp87h9x9gr+ozaQXOr7Hd4yvZuVxoZDg0R38Bfq6MxV+oVEXLv09VhsDI98NPcDO/d+OtVb2M5/goJDOKY7VhAQ67XoFCmYfwIOzh8FnEO8O2tXmPS92QeHRh3hHsLXorYMXUAI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=J4NAQtov; arc=none smtp.client-ip=209.85.215.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-5ce07cf1e5dso1585580a12.2
+        for <linux-doc@vger.kernel.org>; Fri, 02 Feb 2024 02:16:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1706862167; x=1707466967; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=of+2VS6dyzD16ALuDPAa9WDdPy6fg9Ys9tT8Ytug3g4=;
-        b=iExGsu6bEAfKW4SU2H0VKVIe65R4fgMT8DxEYemRwlqsjPfKkungYzyaqD17vAl1QN
-         FqCBsgoa4EixvZTKWuyzKnQrFdOLFrq+TVe0ssSyHDirwZ4GpjcATn6GFd0ZKdzIluU+
-         uEpDmSMAmhokVk4OUnNgNEUBJVkz9qFDXlwnMEWrpYmht1sbPMGs7YZeo9N/667UjZID
-         Oo7dGWFmT+5P+kYWT6DJDZlScPUttMGMZOrZ2Mo4Qb109miU8B+Q6TERD4SW4KpG63eb
-         j5tkMQ0/BZKs8pcC74a5CHUDIb/msvzZL+JmPDyZ2kvpMwHSkt4wxysue+PuU/rgq/62
-         XbrQ==
+        d=chromium.org; s=google; t=1706869003; x=1707473803; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6EHXdAThkGXTR3eJPl49+AVsRbrPUkQd45PvGXZEUlI=;
+        b=J4NAQtovGcYBwjbdEE0R3Lha8so/lU+5NjSS9EDWldBsEfpOTHmiM+hxBLzvaLkTmE
+         u774oxYhU/IibYp4Mz+tgPNqHug3EO02ZMK3vFdNxJhKZ9YHA/VOB4U2RE5pbDLVUBcU
+         b6lgmEH8MxznE7FJH95y2ia3bLf6rfdCBsEnw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706862167; x=1707466967;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=of+2VS6dyzD16ALuDPAa9WDdPy6fg9Ys9tT8Ytug3g4=;
-        b=Spy33jVKqBgt07a/qxCGjFjFjdEzxQJ+8vuHB+FTZEll2LTa0YONgQGJ0Dblg0y97t
-         rOfpzjjAm5mL6z/eAg3vtJTjmsNgBfo/EaBOtN8G3HPjKbshbmfJKomQD8gAeCUZUPLv
-         t7ouHozurHt/ZwVPrpN6QUCs8QpwwJOKzSyNWX/y3W2PxB8wU6xuouBhV+gdS/8t4eeV
-         ED6DfG9kzEoEtGBgeWgsreuEeRuHjhc/Q5PL1z7VXpOXO+NjqR6nM1axzD0MVqCKDVM+
-         a7t3zi7CiEWcWsAeUvRLN2ahzSE0S4yMW0OcpCpsRlPiu1Ka4s4nz1fSO/ookxYrjZRq
-         sqCA==
-X-Gm-Message-State: AOJu0Yw6YMUB8o0axSal7Qh3bMW8BIVeXoFP4wz0letP+EEKpxHzcS/f
-	K6uRTPz/P0KcXqDWZPKN1c7/1BIDNOeG2JhO3vq5v3zZof22W/Ejek/UYoIJvFs=
-X-Google-Smtp-Source: AGHT+IEqFgJjxsho51lgtlCQHbrRjML9//5X83vR4EP4Q6fKUc3ZeWRRAaFSJm8yIThVMvRZf7pMXw==
-X-Received: by 2002:a05:6808:144e:b0:3bf:bbd7:c770 with SMTP id x14-20020a056808144e00b003bfbbd7c770mr1842892oiv.0.1706862167503;
-        Fri, 02 Feb 2024 00:22:47 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCW3DGFuK/LBFiPor3fjHm3Swk3yg/Ka5eaAjYPzEU+qprxT87NNjvtfixg9RxSNf9ML3AtgHiQlRFhUhc1jxHt2VpPEl4Fc+V/ILNHjw3IDJlHW4qxg6DK4VzqrYRAN4Ec2m4UnlPYE4zcCOCaLUloy5HfRHSibwCcwqkciUoU6snY57i0C7wdR3E/5wFLD3x1Dcb+1BXTbifx7Tqu8IrB04TXsXdSBTYGnjFRshKEVF2FEvj8Z0Xsi0kePgrdeplDwmC3UJq9s8kflXCsw50+rLpH8HgwJnwfPFygJ/N+Kww==
-Received: from ?IPV6:2a01:e0a:999:a3a0:6d51:959f:bb28:92? ([2a01:e0a:999:a3a0:6d51:959f:bb28:92])
-        by smtp.gmail.com with ESMTPSA id a21-20020ac844b5000000b0042bfbdb46f9sm603925qto.91.2024.02.02.00.22.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 02 Feb 2024 00:22:46 -0800 (PST)
-Message-ID: <701d3350-93d3-4235-aaf7-04c6492420a7@rivosinc.com>
-Date: Fri, 2 Feb 2024 09:22:44 +0100
+        d=1e100.net; s=20230601; t=1706869003; x=1707473803;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=6EHXdAThkGXTR3eJPl49+AVsRbrPUkQd45PvGXZEUlI=;
+        b=NLD+LanCg6UO8S1WfIATbpV83RBUhrlEd8y/JzHioV6DzrMcYJeR3NUEt2G/LFNYRt
+         lOpLkX053/wnE3l22PN7fod4kQZyQ2oYhnuAlhWlbV9CyNmrA8wRLpWPWvMK2yL/xGAP
+         dcv2p+OMhiAQypqSc2pr3nWxhcCyayv+03FaNTx+7oB7fQ4g5vG2WwqVEG1qpvj8/515
+         7keCp7BmanNisDAuwbIO92mfZYVRKMEtVkwdrr74sQaECFN50ds/vlKxyavoUBFNO2wC
+         qafPgfeeCx8xu1+sS2FXnnm2v/HB5umxa+Vypd2bctUxC7Pj8vfNks4GWtrrzJB3fL4Z
+         ZKhA==
+X-Gm-Message-State: AOJu0YxNH1tIGWvsOtJ3qGh9xR2wp74tj9u95xGLkQNPLJFm+GYhYMDN
+	bLoMwHBszJttiOtcaX1fZJOxzWEvIhKynpjjk/xGVdl/d0Sxk7adui/U3uhdIQ==
+X-Google-Smtp-Source: AGHT+IHMKOiQ6mHZakC/jI0iiftn9S+TFj6r9sQjHhGGiqUcwILCJdVCYMDM6jzLDgaScuq8as349w==
+X-Received: by 2002:a05:6a20:94cd:b0:199:c9a2:fb0 with SMTP id ht13-20020a056a2094cd00b00199c9a20fb0mr8667691pzb.16.1706869003557;
+        Fri, 02 Feb 2024 02:16:43 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCWM0evwmk61ML9mKlP7sQqZt4NIu2CDf4tNN7ZfZBwVop6WGktFTrN8OQ6otbkJV/lVl6pxcL/V59G96BahEDFx4D7uY4o04C+92sAr/f+65Vbvjtnyg2OPcPHZOyvi6dhxH+kafSvPLJ0gPpvBuxExxguupg7UHSjrbBnSuY7diqz3XRNyLJLE+k3NrKhDBQVfDkjSCPv5+IPi2tsC4kTfC8bHtbQ9Ds1QNM+OfHrrAG95YPgJkHok9YDBlFI2yp2omYAuCblWCU4E8xsjCg4uDuDPIrLsHiSO/YSQ877+xeTLG4We7BgzltdppTfhDtq5LoXEOHmAuGsaNV44gP/1OkY/j2EKxPna1dwhxyWss5i11x9OKRpqTatFqLO9bRvuZjNP5JYKnM70Ypx/DONZf56mG3Z/X3xbiG9mWGOrrlhF8VkWCvK/2DlLipi7xDyBvtYleNfk9SMbxw2SILv94Pjffr/mFJybLlIBEQVzRFgY1Lzh5lWQA7tomI9J5O+hbVp6srbBPr/obebIVCKkQqaan6RFPi81BbO8TUbrbFI8LUK+uytdppF3tBQ/UWgWGYhbMHdL3uarjfDfTC+h/5sXe7a55tsWq4g=
+Received: from www.outflux.net ([198.0.35.241])
+        by smtp.gmail.com with ESMTPSA id u26-20020aa7839a000000b006dde0724247sm1273062pfm.149.2024.02.02.02.16.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 02 Feb 2024 02:16:42 -0800 (PST)
+From: Kees Cook <keescook@chromium.org>
+To: linux-hardening@vger.kernel.org
+Cc: Kees Cook <keescook@chromium.org>,
+	Fangrui Song <maskray@google.com>,
+	Justin Stitt <justinstitt@google.com>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Nicolas Schier <nicolas@fjasle.eu>,
+	Bill Wendling <morbo@google.com>,
+	Marco Elver <elver@google.com>,
+	Andrey Konovalov <andreyknvl@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	x86@kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-kbuild@vger.kernel.org,
+	llvm@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	netdev@vger.kernel.org,
+	linux-crypto@vger.kernel.org,
+	kasan-dev@googlegroups.com,
+	linux-acpi@vger.kernel.org
+Subject: [PATCH v2 0/6] ubsan: Introduce wrap-around sanitizers
+Date: Fri,  2 Feb 2024 02:16:33 -0800
+Message-Id: <20240202101311.it.893-kees@kernel.org>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] riscv: hwprobe: export VA_BITS
-To: Charlie Jenkins <charlie@rivosinc.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Paul Walmsley
- <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Albert Ou <aou@eecs.berkeley.edu>, linux-doc@vger.kernel.org,
- linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
- Robin Ehn <rehn@rivosinc.com>
-References: <20240201140319.360088-1-cleger@rivosinc.com>
- <ZbxUUsKdKIPI8Fb/@ghost>
-Content-Language: en-US
-From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-In-Reply-To: <ZbxUUsKdKIPI8Fb/@ghost>
-Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2894; i=keescook@chromium.org;
+ h=from:subject:message-id; bh=2l9nEKso4+AOWcpX8WNY7A6dHeDCfYN/6uhOB8hks2s=;
+ b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlvMEGR2w/jDkKre5GPT1/M/XftJt/c1PyB4wL/
+ haxlFPUi1KJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZbzBBgAKCRCJcvTf3G3A
+ JtsCD/9zn8FXQvcFAIIQgYZmbnBXO2DwIbRtXhGNbq2Nup24+qU2V23CPL1rxaHKDC/EiJJEnKb
+ e5BpVrssi1sNVM0eT1gSuZh3+Fe9MuSkT1qu5cuE+fhykPOt7JYBmAot97DhLNGpbC4Wh6wS2Gm
+ zt9zRh7VdGjswl0SiQQT3Ko7H0hMo+8Du/2ufEy3yiken9zj1VMMJ1KoVnxpVhaMUra5smuX5fZ
+ xfIadzk4bYAjWidY713+WT72pgRr7qsh7cHstL2GUq2+nI0GL0j6nmtuhPKMexyPaOp6rTzXwvb
+ Z7GBANHBt9W7RFT2e5jxCw2iSyb/9aZQDjTzC7dGQNytXEvHnP+Phzhj7xCmXOuITiwx70ObSXS
+ ME7gGoLJ13vK/Z1MOOR4KUNhbNwuaGi5yPooFb0xcsg4KnCSY2MOorFK9WWpu/OjmWo+DxUMEvR
+ 1J/KCnkcS1uyoVLsNj2Sh3VJJfz2UhtJtuwtqbFW43Uy4aaj00q7AmQ+NDje2eWQ70R0R+2XSMI
+ ndQHgrn7bxz13hk+ym9Je7oT6lJtEH74ncnlLRyN2B+2wk61/16LUCxqpP2Qjq0ZUSeYdi1IICL
+ eEpdx3A5WLH/w5PScFuSOwRUsIvtR3tCIgLvj1N4YRLGfj9EYX2DFA1VIUBOXReGwVa9kHKDz29
+ jIcc1AN WIb7pOrg==
+X-Developer-Key: i=keescook@chromium.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
 
+Hi,
 
+v2:
+ - improve CC list
+ - add reviewed-by tags
+ - reword some commit logs
+v1: https://lore.kernel.org/all/20240129175033.work.813-kees@kernel.org/
 
-On 02/02/2024 03:32, Charlie Jenkins wrote:
-> On Thu, Feb 01, 2024 at 03:02:45PM +0100, Clément Léger wrote:
->> Some userspace applications (OpenJDK for instance) uses the free bits
->> in pointers to insert additional information for their own logic.
->> Currently they rely on parsing /proc/cpuinfo to obtain the current value
->> of virtual address used bits [1]. Exporting VA_BITS through hwprobe will
->> allow for a more stable interface to be used.
-> 
-> mmap already supports this without a need for applications to know the
-> underlying hardware. If a hint address is passed into mmap, it will never
-> return an address that uses more bits than the hint address. I designed
-> it that way so that something like this wasn't necessary.
+Lay the ground work for gaining instrumentation for signed[1],
+unsigned[2], and pointer[3] wrap-around by making all 3 sanitizers
+available for testing. Additionally gets x86_64 bootable under the
+unsigned sanitizer for the first time.
 
-Ok even though probing this kind of thing is probably not what mmap is
-meant to do. IMHO, probing this through the regular hwprobe interface is
-probably more coherent but maybe Robin (which needs this information)
-can rely on that.
+The compilers will need work before this can be generally useful, as the
+signed and pointer sanitizers are effectively a no-op with the kernel's
+required use of -fno-strict-overflow. The unsigned sanitizer will also
+need adjustment to deal with the many common code patterns that exist
+for unsigned wrap-around (e.g. "while (var--)", "-1UL", etc).
 
-Clément
+-Kees
 
-> 
-> - Charlie
-> 
->>
->> Link: https://github.com/openjdk/jdk/blob/master/src/hotspot/os_cpu/linux_riscv/vm_version_linux_riscv.cpp#L171 [1]
->> Signed-off-by: Clément Léger <cleger@rivosinc.com>
->>
->> ---
->>  Documentation/arch/riscv/hwprobe.rst  | 3 +++
->>  arch/riscv/include/asm/hwprobe.h      | 2 +-
->>  arch/riscv/include/uapi/asm/hwprobe.h | 1 +
->>  arch/riscv/kernel/sys_hwprobe.c       | 3 +++
->>  4 files changed, 8 insertions(+), 1 deletion(-)
->>
->> diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/riscv/hwprobe.rst
->> index b2bcc9eed9aa..6f198c6ed4f0 100644
->> --- a/Documentation/arch/riscv/hwprobe.rst
->> +++ b/Documentation/arch/riscv/hwprobe.rst
->> @@ -210,3 +210,6 @@ The following keys are defined:
->>  
->>  * :c:macro:`RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE`: An unsigned int which
->>    represents the size of the Zicboz block in bytes.
->> +
->> +* :c:macro:`RISCV_HWPROBE_KEY_VA_BITS`: An unsigned long which
->> +  represent the number of bits used to store virtual addresses.
->> diff --git a/arch/riscv/include/asm/hwprobe.h b/arch/riscv/include/asm/hwprobe.h
->> index 630507dff5ea..150a9877b0af 100644
->> --- a/arch/riscv/include/asm/hwprobe.h
->> +++ b/arch/riscv/include/asm/hwprobe.h
->> @@ -8,7 +8,7 @@
->>  
->>  #include <uapi/asm/hwprobe.h>
->>  
->> -#define RISCV_HWPROBE_MAX_KEY 6
->> +#define RISCV_HWPROBE_MAX_KEY 7
->>  
->>  static inline bool riscv_hwprobe_key_is_valid(__s64 key)
->>  {
->> diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/uapi/asm/hwprobe.h
->> index 9f2a8e3ff204..2a5006cddb7b 100644
->> --- a/arch/riscv/include/uapi/asm/hwprobe.h
->> +++ b/arch/riscv/include/uapi/asm/hwprobe.h
->> @@ -67,6 +67,7 @@ struct riscv_hwprobe {
->>  #define		RISCV_HWPROBE_MISALIGNED_UNSUPPORTED	(4 << 0)
->>  #define		RISCV_HWPROBE_MISALIGNED_MASK		(7 << 0)
->>  #define RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE	6
->> +#define RISCV_HWPROBE_KEY_VA_BITS		7
->>  /* Increase RISCV_HWPROBE_MAX_KEY when adding items. */
->>  
->>  /* Flags */
->> diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwprobe.c
->> index a7c56b41efd2..328435836e36 100644
->> --- a/arch/riscv/kernel/sys_hwprobe.c
->> +++ b/arch/riscv/kernel/sys_hwprobe.c
->> @@ -202,6 +202,9 @@ static void hwprobe_one_pair(struct riscv_hwprobe *pair,
->>  		if (hwprobe_ext0_has(cpus, RISCV_HWPROBE_EXT_ZICBOZ))
->>  			pair->value = riscv_cboz_block_size;
->>  		break;
->> +	case RISCV_HWPROBE_KEY_VA_BITS:
->> +		pair->value = VA_BITS;
->> +		break;
->>  
->>  	/*
->>  	 * For forward compatibility, unknown keys don't fail the whole
->> -- 
->> 2.43.0
->>
->>
->> _______________________________________________
->> linux-riscv mailing list
->> linux-riscv@lists.infradead.org
->> http://lists.infradead.org/mailman/listinfo/linux-riscv
+Link: https://github.com/KSPP/linux/issues/26 [1]
+Link: https://github.com/KSPP/linux/issues/27 [2]
+Link: https://github.com/KSPP/linux/issues/344 [3]
+
+Kees Cook (6):
+  ubsan: Use Clang's -fsanitize-trap=undefined option
+  ubsan: Reintroduce signed and unsigned overflow sanitizers
+  ubsan: Introduce CONFIG_UBSAN_POINTER_WRAP
+  ubsan: Remove CONFIG_UBSAN_SANITIZE_ALL
+  ubsan: Split wrapping sanitizer Makefile rules
+  ubsan: Get x86_64 booting with unsigned wrap-around sanitizer
+
+ Documentation/dev-tools/ubsan.rst | 28 +++-------
+ arch/arm/Kconfig                  |  2 +-
+ arch/arm64/Kconfig                |  2 +-
+ arch/mips/Kconfig                 |  2 +-
+ arch/parisc/Kconfig               |  2 +-
+ arch/powerpc/Kconfig              |  2 +-
+ arch/riscv/Kconfig                |  2 +-
+ arch/s390/Kconfig                 |  2 +-
+ arch/x86/Kconfig                  |  2 +-
+ arch/x86/kernel/Makefile          |  1 +
+ arch/x86/kernel/apic/Makefile     |  1 +
+ arch/x86/mm/Makefile              |  1 +
+ arch/x86/mm/pat/Makefile          |  1 +
+ crypto/Makefile                   |  1 +
+ drivers/acpi/Makefile             |  1 +
+ include/linux/compiler_types.h    | 19 ++++++-
+ kernel/Makefile                   |  1 +
+ kernel/locking/Makefile           |  1 +
+ kernel/rcu/Makefile               |  1 +
+ kernel/sched/Makefile             |  1 +
+ lib/Kconfig.ubsan                 | 41 +++++++++-----
+ lib/Makefile                      |  1 +
+ lib/crypto/Makefile               |  1 +
+ lib/crypto/mpi/Makefile           |  1 +
+ lib/test_ubsan.c                  | 82 ++++++++++++++++++++++++++++
+ lib/ubsan.c                       | 89 +++++++++++++++++++++++++++++++
+ lib/ubsan.h                       |  5 ++
+ lib/zlib_deflate/Makefile         |  1 +
+ lib/zstd/Makefile                 |  2 +
+ mm/Makefile                       |  1 +
+ net/core/Makefile                 |  1 +
+ net/ipv4/Makefile                 |  1 +
+ scripts/Makefile.lib              | 11 +++-
+ scripts/Makefile.ubsan            | 11 +++-
+ 34 files changed, 278 insertions(+), 43 deletions(-)
+
+-- 
+2.34.1
+
 
