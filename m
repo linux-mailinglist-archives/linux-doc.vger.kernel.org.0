@@ -1,218 +1,215 @@
-Return-Path: <linux-doc+bounces-8351-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8353-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A12B84894C
-	for <lists+linux-doc@lfdr.de>; Sat,  3 Feb 2024 23:26:44 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2487B84895D
+	for <lists+linux-doc@lfdr.de>; Sat,  3 Feb 2024 23:43:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 50C7A284A03
-	for <lists+linux-doc@lfdr.de>; Sat,  3 Feb 2024 22:26:43 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 847B2B23E1C
+	for <lists+linux-doc@lfdr.de>; Sat,  3 Feb 2024 22:43:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CC7AB17756;
-	Sat,  3 Feb 2024 22:25:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b="J/uH5NKt"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E255111CA0;
+	Sat,  3 Feb 2024 22:43:07 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com [209.85.219.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from sonata.ens-lyon.org (sonata.ens-lyon.org [140.77.166.138])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADDE117C95
-	for <linux-doc@vger.kernel.org>; Sat,  3 Feb 2024 22:25:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7597212E68;
+	Sat,  3 Feb 2024 22:43:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=140.77.166.138
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1706999120; cv=none; b=RdCRyKjCivXzJyIRqLm+w56VzzqcNWZDuYsXA9ct0SZwchgsvGonzCyNNKdAb77enbXDvqN3JDLFMEt4bBu9r2Yp02HwtCnyVq/tL6xZr/4ALZ0tjhqf+qpefnx7ccagnmE+ZibTn3Ml9Uh+aSw1C5f/30gw9TQfeV+T9dmVJkM=
+	t=1707000187; cv=none; b=ka+ZHxx2iG3zLs0+AlF6NR0qUeLwrhuPLgf00scoUeGJ6jbgk8sYuNomUvZbmITtTWy+BEWKpS0tazXc2OxTadQqn54lbhX+oBU+yheb3XlxPsZXshr9WruF0c6iec7HYTPOPboEJWEmYuSbNtGavuy2mkEy71NpHwyQCAaA1UM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1706999120; c=relaxed/simple;
-	bh=SfIYK1su40Btbzwh9h/WPttvVQMpLhlqw0vBaWGjdhM=;
-	h=Date:Message-ID:MIME-Version:Content-Type:Content-Disposition:
-	 From:To:Cc:Subject:References:In-Reply-To; b=OQt6uBJmYfrqv+2uVYZ9Ajk4XRpH+3L/HEh9AvG3sCWF6m8vcqPnw7RotkSMd96J+Gv8p4IBZjSyohPVXhbwgxy81r/U7sXXfwTk0qfwlelUUbhkNK7UOyBcVWoJmxRV2XZAQAp6HldujUfXt1HTQ6XkcacdhqBf/C+UU9yjXro=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com; spf=pass smtp.mailfrom=paul-moore.com; dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b=J/uH5NKt; arc=none smtp.client-ip=209.85.219.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=paul-moore.com
-Received: by mail-qv1-f47.google.com with SMTP id 6a1803df08f44-68c444f9272so16538036d6.3
-        for <linux-doc@vger.kernel.org>; Sat, 03 Feb 2024 14:25:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=paul-moore.com; s=google; t=1706999115; x=1707603915; darn=vger.kernel.org;
-        h=in-reply-to:references:subject:cc:to:from:content-transfer-encoding
-         :content-disposition:mime-version:message-id:date:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=eYMBgL8MVRc+c8Obik/r6XMkhyTvtmEMtGv6GQz3E8M=;
-        b=J/uH5NKt6e8BtJe+WzEKhJtKx0JwSMzdUT2qgVJMYAe9ULoNn8HtagAZDriTrETaSk
-         yFhO5z+rdza1UElV6MzsQaM/dVXNBddjPclQHpmeTQYwOv+e/uVF2qV1A7AG/Ns/ncGk
-         YvXNKTvF2Ox08/AmTd4RGR28Qhf7eU6ICQanjTiG+EzzE6eraAgBGMyEDPw5vgWB6z0K
-         IaNqyTFieWPm5GbE6SOj5Eby/eCtfcLNX0XJNL7QLO1uq7VLvAUIj0kj6r+1D5MO07kH
-         yoalB0h+4y3D4E6FwS5w5hw+23nx/uC6LqtJefUiaU2tfD4U8DRhWnSHc6eG7rDQmrsW
-         +1eA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706999115; x=1707603915;
-        h=in-reply-to:references:subject:cc:to:from:content-transfer-encoding
-         :content-disposition:mime-version:message-id:date:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=eYMBgL8MVRc+c8Obik/r6XMkhyTvtmEMtGv6GQz3E8M=;
-        b=VJomEfvgWL+dX5apfAzcJrOReFbvkDzoALs8hKHn2rGlyDfYiHJ1C/SGHuu5b/cw6J
-         CqPkwou0tLrW2GkhEFSwSJxz7nkPW2MgwWrf29JWqyJqVngiZm/n2bxJCghBv/QNoRPx
-         etdxBfT53F/3cAat9Giwyqtx/9yyL5vOorsnhGG0Lsa0Kj6FNOSBwHHVupJBDyyqKYfe
-         jkg7gFasuA4cRvHseXmzumP6n0n8HwATJ9rCwE9Ml52KTR2BZzt4b6lSq9inrjWHZlCX
-         JTGcPnicE/q5DIXTeqCSDSyI3dhmdSSklnAe8MzWVSq65Aog5CO2G8enJ7G8GIA0XnZe
-         u7Vg==
-X-Gm-Message-State: AOJu0YybkkI1ti51yNYPa1rG/655bV7UFmzpDGCBV7J227SxpB+5cDRp
-	OhZaNqmn7BOzYJMDrixbP+gAYg4XfXaXAa4MazAfMY0xnnYy3jFDl+cGAtt2Ig==
-X-Google-Smtp-Source: AGHT+IFonCheK9ok4vSWJlZhijrFa0a0OwwetL207sTElMhHj+g0ohLs2URRe9XQtpkgkwCWh7FbGQ==
-X-Received: by 2002:ad4:4ea1:0:b0:68c:92cb:31d1 with SMTP id ed1-20020ad44ea1000000b0068c92cb31d1mr3563850qvb.22.1706999115350;
-        Sat, 03 Feb 2024 14:25:15 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCVeTtSs7m2zq+X4vVccPH0Lh0uJFawcGHKNxhIksdLH3uIcDXBjnU7CFZiYLkws0aqU9yqs6KO/2dF1WPwe2mbE/wIR2jKgeYsdvQi4Cgh5cFbpr2u0pHh1j58dsGoxmrtS2VKy1TQhsd6MdZr+m0otcAq69IGsJncSYNzGlDj9ZarrbPqTmvGQzB5ttBfL9Ek9JteSJYEzdhm9NHXzIve6Lbu9X3oHaaxVEVMG9utY7OFCe1bBV2NcNtCrM53YTVBPkfW1guTVLmXV+O/Ih1o8LXBK8GWk4ltLYvN2K5aEgItmvB6FAEBYmn8CkIdY1pipwUSx6J3E5DB+NjVK++DJMplUINL2OdXHKM4sK0yZLj/OatW/uGk4ubWqf01+KC2pRcUlLF8uuaILJ2AUB8Cq+ar1NAExM2V2ydZ+XVPaBc1CDcWSv2y0JvX1mZLpReRfzWMx9tgBB+E3ScOyb439LZGVLJSksqIrns9bU1VYIb8MWW8TxRRYgQ0XHoq1bBqW9B+UrEXYzDwM2QV5R+9HQDTxYl8GbPSOj59Ps6o5YUnEpd3OqqVFIh03bXVpcDgihZ3LJSXzj830Oj5popwCoaGM24jW07UMSEaIWKdR4wJLx1gTnt2T
-Received: from localhost ([70.22.175.108])
-        by smtp.gmail.com with ESMTPSA id pc5-20020a056214488500b0068c968c3b33sm637500qvb.20.2024.02.03.14.25.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Feb 2024 14:25:14 -0800 (PST)
-Date: Sat, 03 Feb 2024 17:25:14 -0500
-Message-ID: <f57cb0772ff39a00ec578e178e1b8c38@paul-moore.com>
+	s=arc-20240116; t=1707000187; c=relaxed/simple;
+	bh=hVfYZuMJypX8SO8Q0Mz5apUsGqZEhj917+dlLvHNxhM=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=utKkSMz5L1WI/+6G0WPu76tNmyYdbS2qgRE0blbCvurNoAQCxOWowQEG2EA/zmiPQ+qiKHY8TVAbHL0zqs1j/zccv2CL5PrTcsFmG5e8iL0ATNrwlCs4aasS1vUHefcBvUXsldWf2/8bNsxAu7IOjgrPJFiSgZi7YMjxXfmCQu4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ens-lyon.org; spf=pass smtp.mailfrom=bounce.ens-lyon.org; arc=none smtp.client-ip=140.77.166.138
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ens-lyon.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bounce.ens-lyon.org
+Received: from localhost (localhost [127.0.0.1])
+	by sonata.ens-lyon.org (Postfix) with ESMTP id D02BAA02B7;
+	Sat,  3 Feb 2024 23:35:14 +0100 (CET)
+Received: from sonata.ens-lyon.org ([127.0.0.1])
+	by localhost (sonata.ens-lyon.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ibr8YHfAeCVX; Sat,  3 Feb 2024 23:35:14 +0100 (CET)
+Received: from begin (aamiens-653-1-111-57.w83-192.abo.wanadoo.fr [83.192.234.57])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by sonata.ens-lyon.org (Postfix) with ESMTPSA id 399BEA022A;
+	Sat,  3 Feb 2024 23:35:14 +0100 (CET)
+Received: from samy by begin with local (Exim 4.97)
+	(envelope-from <samuel.thibault@ens-lyon.org>)
+	id 1rWObR-00000002MC2-3T4p;
+	Sat, 03 Feb 2024 23:35:13 +0100
+Date: Sat, 3 Feb 2024 23:35:13 +0100
+From: Samuel Thibault <samuel.thibault@ens-lyon.org>
+To: James Chapman <jchapman@katalix.com>, tparkin@katalix.com,
+	edumazet@google.com, gnault@redhat.com
+Cc: davem@davemloft.net, kuba@kernel.org, pabeni@redhat.com, corbet@lwn.net,
+	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCHv3] PPPoL2TP: Add more code snippets
+Message-ID: <20240203223513.f2nfgaamgffz6dno@begin>
+Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	James Chapman <jchapman@katalix.com>, tparkin@katalix.com,
+	edumazet@google.com, gnault@redhat.com, davem@davemloft.net,
+	kuba@kernel.org, pabeni@redhat.com, corbet@lwn.net,
+	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0 
-Content-Type: text/plain; charset=utf-8 
-Content-Disposition: inline 
-Content-Transfer-Encoding: 8bit
-From: Paul Moore <paul@paul-moore.com>
-To: Fan Wu <wufan@linux.microsoft.com>, corbet@lwn.net, zohar@linux.ibm.com, jmorris@namei.org, serge@hallyn.com, tytso@mit.edu, ebiggers@kernel.org, axboe@kernel.dk, agk@redhat.com, snitzer@kernel.org, eparis@redhat.com
-Cc: linux-doc@vger.kernel.org, linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org, dm-devel@lists.linux.dev, audit@vger.kernel.org, linux-kernel@vger.kernel.org, Fan Wu <wufan@linux.microsoft.com>, Deven Bowers <deven.desai@linux.microsoft.com>
-Subject: Re: [PATCH RFC v12 17/20] ipe: enable support for fs-verity as a trust  provider
-References: <1706654228-17180-18-git-send-email-wufan@linux.microsoft.com>
-In-Reply-To: <1706654228-17180-18-git-send-email-wufan@linux.microsoft.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: NeoMutt/20170609 (1.8.3)
 
-On Jan 30, 2024 Fan Wu <wufan@linux.microsoft.com> wrote:
-> 
-> Enable IPE policy authors to indicate trust for a singular fsverity
-> file, identified by the digest information, through "fsverity_digest"
-> and all files using fsverity's builtin signatures via
-> "fsverity_signature".
-> 
-> This enables file-level integrity claims to be expressed in IPE,
-> allowing individual files to be authorized, giving some flexibility
-> for policy authors. Such file-level claims are important to be expressed
-> for enforcing the integrity of packages, as well as address some of the
-> scalability issues in a sole dm-verity based solution (# of loop back
-> devices, etc).
-> 
-> This solution cannot be done in userspace as the minimum threat that
-> IPE should mitigate is an attacker downloads malicious payload with
-> all required dependencies. These dependencies can lack the userspace
-> check, bypassing the protection entirely. A similar attack succeeds if
-> the userspace component is replaced with a version that does not
-> perform the check. As a result, this can only be done in the common
-> entry point - the kernel.
-> 
-> Signed-off-by: Deven Bowers <deven.desai@linux.microsoft.com>
-> Signed-off-by: Fan Wu <wufan@linux.microsoft.com>
-> ---
-> v1-v6:
->   + Not present
-> 
-> v7:
->   Introduced
-> 
-> v8:
->   * Undo squash of 08/12, 10/12 - separating drivers/md/ from security/
->   * Use common-audit function for fsverity_signature.
->   + Change fsverity implementation to use fsverity_get_digest
->   + prevent unnecessary copy of fs-verity signature data, instead
->     just check for presence of signature data.
->   + Remove free_inode_security hook, as the digest is now acquired
->     at runtime instead of via LSM blob.
-> 
-> v9:
->   + Adapt to the new parser
-> 
-> v10:
->   + Update the fsverity get digest call
-> 
-> v11:
->   + No changes
-> 
-> v12:
->   + Fix audit format
->   + Simplify property evaluation
-> ---
->  security/ipe/Kconfig         |  13 +++++
->  security/ipe/audit.c         |  25 ++++++++
->  security/ipe/eval.c          | 108 ++++++++++++++++++++++++++++++++++-
->  security/ipe/eval.h          |  10 ++++
->  security/ipe/hooks.c         |  30 ++++++++++
->  security/ipe/hooks.h         |   7 +++
->  security/ipe/ipe.c           |  13 +++++
->  security/ipe/ipe.h           |   3 +
->  security/ipe/policy.h        |   3 +
->  security/ipe/policy_parser.c |   8 +++
->  10 files changed, 219 insertions(+), 1 deletion(-)
-> 
-> diff --git a/security/ipe/Kconfig b/security/ipe/Kconfig
-> index 7afb1ce0cb99..9dd5c4769d79 100644
-> --- a/security/ipe/Kconfig
-> +++ b/security/ipe/Kconfig
-> @@ -30,6 +30,19 @@ config IPE_PROP_DM_VERITY
->  	  that was mounted with a signed root-hash or the volume's
->  	  root hash matches the supplied value in the policy.
->  
-> +	  If unsure, answer Y.
-> +
-> +config IPE_PROP_FS_VERITY
-> +	bool "Enable property for fs-verity files"
-> +	depends on FS_VERITY && FS_VERITY_BUILTIN_SIGNATURES
-> +	help
-> +	  This option enables the usage of properties "fsverity_signature"
-> +	  and "fsverity_digest". These properties evaluates to TRUE when
-> +	  a file is fsverity enabled and with a signed digest or its
-> +	  diegst matches the supplied value in the policy.
-> +
-> +	  if unsure, answer Y.
-> +
->  endmenu
->  
->  endif
-> diff --git a/security/ipe/audit.c b/security/ipe/audit.c
-> index a4ad8e888df0..7e3372be3214 100644
-> --- a/security/ipe/audit.c
-> +++ b/security/ipe/audit.c
-> @@ -60,6 +60,11 @@ static const char *const audit_prop_names[__IPE_PROP_MAX] = {
->  	"dmverity_signature=FALSE",
->  	"dmverity_signature=TRUE",
->  #endif /* CONFIG_IPE_PROP_DM_VERITY */
-> +#ifdef CONFIG_IPE_PROP_FS_VERITY
-> +	"fsverity_digest=",
-> +	"fsverity_signature=FALSE",
-> +	"fsverity_signature=TRUE",
-> +#endif /* CONFIG_IPE_PROP_FS_VERITY */
->  };
->  
->  #ifdef CONFIG_IPE_PROP_DM_VERITY
-> @@ -79,6 +84,23 @@ static void audit_dmv_roothash(struct audit_buffer *ab, const void *rh)
->  }
->  #endif /* CONFIG_IPE_PROP_DM_VERITY */
->  
-> +#ifdef CONFIG_IPE_PROP_FS_VERITY
-> +/**
-> + * audit_fsv_digest - audit a digest of a fsverity file.
-> + * @ab: Supplies a pointer to the audit_buffer to append to.
-> + * @d: Supplies a pointer to the digest structure.
-> + */
-> +static void audit_fsv_digest(struct audit_buffer *ab, const void *d)
-> +{
-> +	audit_log_format(ab, "%s", audit_prop_names[IPE_PROP_FSV_DIGEST]);
-> +	ipe_digest_audit(ab, d);
-> +}
-> +#else
-> +static void audit_fsv_digest(struct audit_buffer *ab, const void *d)
-> +{
-> +}
-> +#endif /* CONFIG_IPE_PROP_FS_VERITY */
+The existing documentation was not telling that one has to create a PPP
+channel and a PPP interface to get PPPoL2TP data offloading working.
 
-The related dm-verify comments also apply here.
+Also, tunnel switching was not mentioned, so that people were thinking
+it was not supported, while it actually is.
 
---
-paul-moore.com
+Signed-off-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
+
+---
+Difference from v1:
+- follow kernel coding style
+- check for failures
+- also mention netlink and ip for configuring the link
+- fix bridging channels
+
+Difference from v2:
+- fix text alignment
+
+ Documentation/networking/l2tp.rst |   99 ++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 95 insertions(+), 4 deletions(-)
+
+--- a/Documentation/networking/l2tp.rst
++++ b/Documentation/networking/l2tp.rst
+@@ -387,11 +387,16 @@ Sample userspace code:
+   - Create session PPPoX data socket::
+ 
+         struct sockaddr_pppol2tp sax;
+-        int fd;
++        int session_fd;
++        int ret;
+ 
+         /* Note, the tunnel socket must be bound already, else it
+          * will not be ready
+          */
++        session_fd = socket(AF_PPPOX, SOCK_DGRAM, PX_PROTO_OL2TP);
++        if (session_fd < 0)
++                return -errno;
++
+         sax.sa_family = AF_PPPOX;
+         sax.sa_protocol = PX_PROTO_OL2TP;
+         sax.pppol2tp.fd = tunnel_fd;
+@@ -406,11 +411,97 @@ Sample userspace code:
+         /* session_fd is the fd of the session's PPPoL2TP socket.
+          * tunnel_fd is the fd of the tunnel UDP / L2TPIP socket.
+          */
+-        fd = connect(session_fd, (struct sockaddr *)&sax, sizeof(sax));
+-        if (fd < 0 ) {
++        ret = connect(session_fd, (struct sockaddr *)&sax, sizeof(sax));
++        if (ret < 0 ) {
++                close(session_fd);
++                return -errno;
++        }
++
++        return session_fd;
++
++L2TP control packets will still be available for read on `tunnel_fd`.
++
++  - Create PPP channel::
++
++        int chindx;
++        int ppp_chan_fd;
++
++        ret = ioctl(session_fd, PPPIOCGCHAN, &chindx);
++        if (ret < 0)
++                return -errno;
++
++        ppp_chan_fd = open("/dev/ppp", O_RDWR);
++        if (ppp_chan_fd < 0)
++                return -errno;
++
++        ret = ioctl(ppp_chan_fd, PPPIOCATTCHAN, &chindx);
++        if (ret < 0) {
++                close(ppp_chan_fd);
++                return -errno;
++        }
++
++        return ppp_chan_fd;
++
++LCP PPP frames will be available for read on `ppp_chan_fd`.
++
++  - Create PPP interface::
++
++        int ppp_if_fd;
++        int ifunit = -1;
++
++        ppp_if_fd = open("/dev/ppp", O_RDWR);
++        if (ppp_chan_fd < 0)
++                return -errno;
++
++        ret = ioctl(ppp_if_fd, PPPIOCNEWUNIT, &ifunit);
++        if (ret < 0) {
++                close(ppp_if_fd);
++                return -errno;
++        }
++
++        ret = ioctl(ppp_chan_fd, PPPIOCCONNECT, ifunit);
++        if (ret < 0) {
++                close(ppp_if_fd);
++                return -errno;
++        }
++
++        return ppp_chan_fd;
++
++IPCP/IPv6CP PPP frames will be available for read on `ppp_if_fd`.
++
++The ppp<ifunit> interface can then be configured as usual with netlink's
++RTM_NEWLINK, RTM_NEWADDR, RTM_NEWROUTE, or ioctl's SIOCSIFMTU, SIOCSIFADDR,
++SIOCSIFDSTADDR, SIOCSIFNETMASK, SIOCSIFFLAGS, or with the `ip` command.
++
++  - L2TP session bridging (also called L2TP tunnel switching or L2TP multihop)
++    is supported by bridging the ppp channels of the two L2TP sessions to be
++    bridged::
++
++        int chindx1;
++        int chindx2;
++        int ppp_chan_fd;
++
++        ret = ioctl(session_fd1, PPPIOCGCHAN, &chindx1);
++        if (ret < 0)
++                return -errno;
++
++        ret = ioctl(session_fd2, PPPIOCGCHAN, &chind2x);
++        if (ret < 0)
++                return -errno;
++
++        ppp_chan_fd = open("/dev/ppp", O_RDWR);
++        ret = ioctl(ppp_chan_fd, PPPIOCATTCHAN, &chindx1);
++        if (ret < 0) {
++                close(ppp_chan_fd);
+                 return -errno;
+         }
+-        return 0;
++
++        ret = ioctl(ppp_chan_fd, PPPIOCBRIDGECHAN, &chindx2);
++        close(ppp_chan_fd);
++        if (ret < 0)
++                return -errno;
++
++See more details for the PPP side in ppp_generic.rst.
+ 
+ Old L2TPv2-only API
+ -------------------
 
