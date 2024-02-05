@@ -1,75 +1,73 @@
-Return-Path: <linux-doc+bounces-8436-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8433-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FA5C84A161
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Feb 2024 18:52:08 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 70D8984A15F
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Feb 2024 18:52:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id A854C1F23481
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Feb 2024 17:52:07 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2E7982833C2
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Feb 2024 17:52:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF9C844C9C;
-	Mon,  5 Feb 2024 17:52:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A27C34595A;
+	Mon,  5 Feb 2024 17:52:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="auUJnNCS"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="T9irTiFM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 083C845946;
-	Mon,  5 Feb 2024 17:52:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.177.32
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF26F45946
+	for <linux-doc@vger.kernel.org>; Mon,  5 Feb 2024 17:52:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.165.32
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707155524; cv=none; b=eptfVD+fHgwarzxX2EvXXAQTZynJYEWFjesEd6JwftQ5ugPMxLst3Dl8pjDzSZ2kYP4Xoiw62RsYnHqkjnx4WtExl94Qsd1afZsnYy9SlppDkjEMV/CGJJYoZQkRaY568+1g3W7ifMb12uAPaP5plWNn3rukfcYU1qKVHbCIe7o=
+	t=1707155522; cv=none; b=GvyG+lbDo1t5CNUstv+IfW6udQEXDqUARU1nJ1935a9rTxJOBWBJC3I6a9UomjWNbhOddg8qVOjVzXi2KlXLRUDvfMxIcUcCgPYsm5s+j7RdwpmTDlcdeqRAbYbQNriztSzzX51Wnpi8/UIl1NRthxEq72WbX5jij1IrE6gluM8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707155524; c=relaxed/simple;
-	bh=o6YQGQ9mCnD5CeZ5d8XhryUh6p2Fp1WJUm864lAKkRc=;
+	s=arc-20240116; t=1707155522; c=relaxed/simple;
+	bh=rHMHFrrOWy8lMHqf7CFX106tCIIRDwW4LBpC1BWXQ3c=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=SrpRC6Vi7T4M3U5dqvXY0GHL30jadkRJVW1fJKfHT7cR9EK+ADqB3deTgBmMBnDIVCbDYiDnY0rIlY2Cb6cJvLSfV85D/e++gsh3jpWG6xxiLF8b62x26e+oybWkyAJlHyM4+gF1TfNWKTq6RgQpJzFYEFg6ezx7X0ZZLYhv5HI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=auUJnNCS; arc=none smtp.client-ip=205.220.177.32
+	 MIME-Version; b=h4Quc+vjoxPS4sJ7tW++Bnn7IiQiDJJDB9SYN7sPDJGJp6MRRuCZ6S7ncbEUujg4gZ8BGgkpiOBDfZTsmju8XS+hTiAAw6J2Ge2xecFRRC6tnyf08+ch7vbsGBkgRJa4rUGSjDc/xWgzX9FVINWoqPqws/vfLZFtpgEG8xDYpH8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=T9irTiFM; arc=none smtp.client-ip=205.220.165.32
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oracle.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 415DVpO4023683;
-	Mon, 5 Feb 2024 17:51:50 GMT
+Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 415DWLdx011018;
+	Mon, 5 Feb 2024 17:51:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=corp-2023-11-20;
- bh=QdS/NJuUSIfZ9VGtmcmbg7RieoHNF4qrJpxg8LxaPgw=;
- b=auUJnNCSMdgFnOBaRHuTZ89L/Pfi1RgzD8J4o+bnaZNEK8NN2xDUGz3VcTg4EGCPGS7q
- E5534BqobG2MLAebt/q8kzZtwlErO/N9zyTJDpmeSMnz75G1XRXmea+Up+HPoIOqJjdL
- L6MEir1g8yF5OckOph+WmmwnoHy+XQHfTaSYZWOb3bIi6tSamyuVsKboL3sM70T8QLt2
- g8r0EEZ+vFZMMkS9BIsPtdFzM6HeV1uBR4kJ1s/LkMUAJk1zv5UW9wJZaqe569VwUAkD
- tYByCtotbUyYReUNmCuLb84NiV5hUAAwzxy752LzX0uqldMCsaxv94vQ15nXxlOUX8aS 5A== 
+ bh=DD1ChG/KE+VaxrL0MLkBx8XGW7foPAs1bP/r41cj+3E=;
+ b=T9irTiFMfdTKsqi7q0CYCP+MdLVbinA/zsynQAFxJjQtj04wuj79R++OMdJYhYEmizUx
+ Xmu5R7SX2v3iIKh89pzhL7WL7H6SDeYA8fzSsMkkm2drmNQ0rNyLOJqBSxTFQtsKloG9
+ AiTuqzQsujX/vioJ+oT2vGrDdlDkYOfYnuHvhXJda2/SWd1NNe6VGBjhhD0zpKBP0tFG
+ Fa9oG6tNqu4MRye6FSbqzLFNFkrHC0K4EN4hA6wZvXmPvQddSDuuC60rAtBqyvO8araf
+ nGBuNYP7tkW55Jlh7coENg7IpL7xGUJ8cCrQ+6al7qBA8Ec6aGvkKz/vVLzZA5DBnWjU OQ== 
 Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3w1d3ucmt1-1
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3w1dcbchtv-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Mon, 05 Feb 2024 17:51:49 +0000
+	Mon, 05 Feb 2024 17:51:52 +0000
 Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 415HidXY038392;
-	Mon, 5 Feb 2024 17:51:49 GMT
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 415HO5Im038383;
+	Mon, 5 Feb 2024 17:51:50 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 3w1bx5u21q-1
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 3w1bx5u239-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Mon, 05 Feb 2024 17:51:49 +0000
+	Mon, 05 Feb 2024 17:51:50 +0000
 Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 415Hpkio033449;
-	Mon, 5 Feb 2024 17:51:48 GMT
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 415Hpkiq033449;
+	Mon, 5 Feb 2024 17:51:50 GMT
 Received: from localhost.localdomain (dhcp-10-175-62-2.vpn.oracle.com [10.175.62.2])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 3w1bx5u1vh-2;
-	Mon, 05 Feb 2024 17:51:48 +0000
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 3w1bx5u1vh-3;
+	Mon, 05 Feb 2024 17:51:50 +0000
 From: Vegard Nossum <vegard.nossum@oracle.com>
 To: Jonathan Corbet <corbet@lwn.net>
 Cc: Mauro Carvalho Chehab <mchehab@kernel.org>,
         Jani Nikula <jani.nikula@intel.com>, linux-doc@vger.kernel.org,
-        Vegard Nossum <vegard.nossum@oracle.com>,
-        Justin Forbes <jforbes@fedoraproject.org>,
-        Salvatore Bonaccorso <carnil@debian.org>, stable@vger.kernel.org
-Subject: [PATCH 1/8] docs: kernel_feat.py: fix build error for missing files
-Date: Mon,  5 Feb 2024 18:51:26 +0100
-Message-Id: <20240205175133.774271-2-vegard.nossum@oracle.com>
+        Vegard Nossum <vegard.nossum@oracle.com>
+Subject: [PATCH 2/8] docs: kernel_{abi,feat}.py: use doc.current_source
+Date: Mon,  5 Feb 2024 18:51:27 +0100
+Message-Id: <20240205175133.774271-3-vegard.nossum@oracle.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240205175133.774271-1-vegard.nossum@oracle.com>
 References: <20240205175133.774271-1-vegard.nossum@oracle.com>
@@ -84,49 +82,47 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-02-05_12,2024-01-31_01,2023-05-22_02
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 spamscore=0
- mlxlogscore=999 bulkscore=0 mlxscore=0 phishscore=0 adultscore=0
+ mlxlogscore=768 bulkscore=0 mlxscore=0 phishscore=0 adultscore=0
  suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2311290000 definitions=main-2402050134
-X-Proofpoint-ORIG-GUID: RGSHpv-Zp6TliSXiKI658_Tj6_M0MhYz
-X-Proofpoint-GUID: RGSHpv-Zp6TliSXiKI658_Tj6_M0MhYz
+X-Proofpoint-GUID: Ft6bUep0XOw7j2A0Zaiu5Sbjr1ywBpI-
+X-Proofpoint-ORIG-GUID: Ft6bUep0XOw7j2A0Zaiu5Sbjr1ywBpI-
 
-If the directory passed to the '.. kernel-feat::' directive does not
-exist or the get_feat.pl script does not find any files to extract
-features from, Sphinx will report the following error:
+It probably doesn't matter a whole lot what we actually pass here,
+but the .rst being processed seems most appropriate to me.
 
-    Sphinx parallel build error:
-    UnboundLocalError: local variable 'fname' referenced before assignment
-    make[2]: *** [Documentation/Makefile:102: htmldocs] Error 2
+This presumably gets used by Shpinx to record/report where each line
+of .rst source originates.
 
-This is due to how I changed the script in c48a7c44a1d0 ("docs:
-kernel_feat.py: fix potential command injection"). Before that, the
-filename passed along to self.nestedParse() in this case was weirdly
-just the whole get_feat.pl invocation.
-
-We can fix it by doing what kernel_abi.py does -- just pass
-self.arguments[0] as 'fname'.
-
-Fixes: c48a7c44a1d0 ("docs: kernel_feat.py: fix potential command injection")
-Cc: Justin Forbes <jforbes@fedoraproject.org>
-Cc: Salvatore Bonaccorso <carnil@debian.org>
-Cc: Jani Nikula <jani.nikula@intel.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: stable@vger.kernel.org
 Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
 ---
+ Documentation/sphinx/kernel_abi.py  | 2 +-
  Documentation/sphinx/kernel_feat.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
+index 5911bd0d7965..288f26097569 100644
+--- a/Documentation/sphinx/kernel_abi.py
++++ b/Documentation/sphinx/kernel_abi.py
+@@ -88,7 +88,7 @@ class KernelCmd(Directive):
+             args.append('--rst-source')
+ 
+         lines = subprocess.check_output(args, cwd=os.path.dirname(doc.current_source)).decode('utf-8')
+-        nodeList = self.nestedParse(lines, self.arguments[0])
++        nodeList = self.nestedParse(lines, doc.current_source)
+         return nodeList
+ 
+     def nestedParse(self, lines, fname):
 diff --git a/Documentation/sphinx/kernel_feat.py b/Documentation/sphinx/kernel_feat.py
-index b9df61eb4501..03ace5f01b5c 100644
+index 03ace5f01b5c..3493621d1a4e 100644
 --- a/Documentation/sphinx/kernel_feat.py
 +++ b/Documentation/sphinx/kernel_feat.py
 @@ -109,7 +109,7 @@ class KernelFeat(Directive):
              else:
                  out_lines += line + "\n"
  
--        nodeList = self.nestedParse(out_lines, fname)
-+        nodeList = self.nestedParse(out_lines, self.arguments[0])
+-        nodeList = self.nestedParse(out_lines, self.arguments[0])
++        nodeList = self.nestedParse(out_lines, doc.current_source)
          return nodeList
  
      def nestedParse(self, lines, fname):
