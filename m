@@ -1,73 +1,73 @@
-Return-Path: <linux-doc+bounces-8432-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8434-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id E288D84A15D
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Feb 2024 18:52:03 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id C370084A162
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Feb 2024 18:52:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9E4D4284B82
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Feb 2024 17:52:02 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 23491B2133D
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Feb 2024 17:52:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2711C45953;
-	Mon,  5 Feb 2024 17:52:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 948C94594B;
+	Mon,  5 Feb 2024 17:52:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="g++sNd+l"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="BQBmhL9F"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 623804503C
-	for <linux-doc@vger.kernel.org>; Mon,  5 Feb 2024 17:52:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA85B45950
+	for <linux-doc@vger.kernel.org>; Mon,  5 Feb 2024 17:52:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.177.32
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707155522; cv=none; b=CP4FcG9MGXSMu5o/1JwW4VOo5NdqoRBRrslIH9NSeGKNzenQRCF4h0XAwHbb9Cl0qPRyvp93hI3Ao1PJgp5OjBP6eZ0dXjfZnecGnD2MMT4ihZ8UVn7ARgzoIbyCsNTPyKJIruMFeqZNk9ak5UsWZBfbl2c4KaQB8fpvDQ214VU=
+	t=1707155523; cv=none; b=VgaYKPMNjdc3DsOCR/RM1HOmdxrTj0mJu6EeHpL0Z4lZ0Rn4sxm1tjMd43/Kilm0rAJUMylJcweKL4a1TzUmVoj9gvwDtae6DqjQ/JmF8zKTqlLEF3HMnlzV6phWICzV7oJnydUQb3P+qG7Nk998vOegrIWiL+n+lbEJWqWK3fI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707155522; c=relaxed/simple;
-	bh=yODsSmPatH1E/LYPOTC3TxHlIHHM0ZyS+/oDf7s2pqU=;
+	s=arc-20240116; t=1707155523; c=relaxed/simple;
+	bh=E0r42cc2iZuFurxwzXm6D37EinqENUqwWH2lzYiEJTA=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=erm4xC7tCkyfB7m8Do1YvclWJi7eVU+0aIidkqh7OiKjvMrRtoXbXe64Skte6xiGf58+PvdvkKiLDoZytixOTTcWD9CUM4B2RNBlgVU9mGD4Wlc2ALEjywU7mGZRCuac9koNm4MO6CWd2JuRababQYHIGIQE1ssi794EsGWJ7IM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=g++sNd+l; arc=none smtp.client-ip=205.220.177.32
+	 MIME-Version; b=hhtUXaX/uXLGs201j3/vsSeFLvwyJ1gn6kjsvm/rmKBsPuv20IKzg3slWXH6tN0k+VJ9fUShDMcs6LnxynYDvqLwLDMJkaV35H7R56Qw7Qmpcwj5OPHvDnw1dpS5Tq2y4Z9JwH8dtPMBq00aDEOdmkB76Q+Fhaz5FmuWImKl/SI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=BQBmhL9F; arc=none smtp.client-ip=205.220.177.32
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oracle.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0333520.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 415DW96F024519;
-	Mon, 5 Feb 2024 17:51:54 GMT
+Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 415DVpcG023688;
+	Mon, 5 Feb 2024 17:51:56 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=corp-2023-11-20;
- bh=dbcOpgEVWwvFX1QlhNegAOEWAN5EglTHyBtXWlLtutU=;
- b=g++sNd+lhH+F+THZoE7ccs/T0P5DcpidmZezFIm8qngXXoRChYCR9ovKNCpvkFC6qC7j
- tbokCWzUaJzb9Y5BsIomCoGVzMDfMrhuh98iswO6A2i7CnCFOsspxlgYcqH7lrdTjvcE
- RLyfPI4x/y1LLhahHgVu2mjGcBNIYMTey/9Kj6Jrl2F45xjqoUGBN5saE/MJyB+SF777
- loSqKlr3Z2XmC/FzS1yUhseuZ+7f9ZDTjIP9MrIcycktKFvKFUAA80gQaHdlYUpeOrl5
- CM2C0FRSYP9a9RWGkAofGVqZDLuTeA0i7rQ5PBGOrwvmYVqK2WSlm/OliissvTYzb+8p hw== 
+ bh=LEFIjNzhdFMard7t2m4AmWySO1XfOBV8UAjPNhsaujs=;
+ b=BQBmhL9F4l/H2Sqrd1zKp/hvhMq9HREqp+tLLfxITOddyMNhsyEuFzqQCJXnaNF5lkET
+ NxSDESAuJEpAA+AzC8aG1lldgWldDK5dUjimVZBpHBKdFomw7G/pLW7tg4LoqDCyYQdg
+ wDPbYTAGEXkNIf2cy7s4EAc9ED9J3XlnK9TNk1ZUTUX74hEMNT2NDWwdLL5xFEA9PSnE
+ M7SvV8/GpAGOi+nFN20sys6psi3AiTP91ajYnhscnvzK4qVGir6tgCLqMCP8fOkTiNHs
+ 4BI/aGy/E/a/ezdkoY4z+TcJ68iB1m9+wVyDaLHA4+1tZ3HnWeg0scLXjA2bIqcbVJ6Z Qg== 
 Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3w1dhdcpuc-1
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3w1d3ucmt8-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Mon, 05 Feb 2024 17:51:54 +0000
+	Mon, 05 Feb 2024 17:51:56 +0000
 Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 415HK9DX038382;
-	Mon, 5 Feb 2024 17:51:54 GMT
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 415GwUZO038386;
+	Mon, 5 Feb 2024 17:51:55 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 3w1bx5u264-1
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 3w1bx5u27g-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Mon, 05 Feb 2024 17:51:54 +0000
+	Mon, 05 Feb 2024 17:51:55 +0000
 Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 415Hpkiu033449;
-	Mon, 5 Feb 2024 17:51:53 GMT
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 415Hpkiw033449;
+	Mon, 5 Feb 2024 17:51:55 GMT
 Received: from localhost.localdomain (dhcp-10-175-62-2.vpn.oracle.com [10.175.62.2])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 3w1bx5u1vh-5;
-	Mon, 05 Feb 2024 17:51:53 +0000
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 3w1bx5u1vh-6;
+	Mon, 05 Feb 2024 17:51:54 +0000
 From: Vegard Nossum <vegard.nossum@oracle.com>
 To: Jonathan Corbet <corbet@lwn.net>
 Cc: Mauro Carvalho Chehab <mchehab@kernel.org>,
         Jani Nikula <jani.nikula@intel.com>, linux-doc@vger.kernel.org,
         Vegard Nossum <vegard.nossum@oracle.com>
-Subject: [PATCH 4/8] doc: kernel_feat.py: convert to sphinx.util.logging
-Date: Mon,  5 Feb 2024 18:51:29 +0100
-Message-Id: <20240205175133.774271-5-vegard.nossum@oracle.com>
+Subject: [PATCH 5/8] doc: kerneldoc.py: convert to sphinx.util.logging
+Date: Mon,  5 Feb 2024 18:51:30 +0100
+Message-Id: <20240205175133.774271-6-vegard.nossum@oracle.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240205175133.774271-1-vegard.nossum@oracle.com>
 References: <20240205175133.774271-1-vegard.nossum@oracle.com>
@@ -85,48 +85,67 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 sp
  mlxlogscore=999 bulkscore=0 mlxscore=0 phishscore=0 adultscore=0
  suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2311290000 definitions=main-2402050134
-X-Proofpoint-GUID: jqoYaYEaQ6fMqY173cvqZ1PjpNNmXmB4
-X-Proofpoint-ORIG-GUID: jqoYaYEaQ6fMqY173cvqZ1PjpNNmXmB4
+X-Proofpoint-ORIG-GUID: geBsCPovOc9GeV1UbzDqyTJqsm4vQE8r
+X-Proofpoint-GUID: geBsCPovOc9GeV1UbzDqyTJqsm4vQE8r
 
 As of commit 3e893e16af55 ("docs: Raise the minimum Sphinx requirement
 to 2.4.4"), we can use Sphinx's built-in logging facilities.
 
 Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
 ---
- Documentation/sphinx/kernel_feat.py | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ Documentation/sphinx/kerneldoc.py | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/Documentation/sphinx/kernel_feat.py b/Documentation/sphinx/kernel_feat.py
-index 3493621d1a4e..f1c9e4a54964 100644
---- a/Documentation/sphinx/kernel_feat.py
-+++ b/Documentation/sphinx/kernel_feat.py
-@@ -41,10 +41,13 @@ from docutils import nodes, statemachine
+diff --git a/Documentation/sphinx/kerneldoc.py b/Documentation/sphinx/kerneldoc.py
+index 7acf09963daa..c74a3e417cea 100644
+--- a/Documentation/sphinx/kerneldoc.py
++++ b/Documentation/sphinx/kerneldoc.py
+@@ -38,11 +38,13 @@ from docutils import nodes, statemachine
  from docutils.statemachine import ViewList
  from docutils.parsers.rst import directives, Directive
- from docutils.utils.error_reporting import ErrorString
+ import sphinx
 +from sphinx.util import logging
  from sphinx.util.docutils import switch_source_input
+-import kernellog
  
  __version__  = '1.0'
  
 +logger = logging.getLogger(__name__)
 +
- def setup(app):
+ class KernelDocDirective(Directive):
+     """Extract kernel-doc comments from the specified file"""
+     required_argument = 1
+@@ -109,8 +111,7 @@ class KernelDocDirective(Directive):
+         cmd += [filename]
  
-     app.add_directive("kernel-feat", KernelFeat)
-@@ -67,12 +70,6 @@ class KernelFeat(Directive):
-         "debug"     : directives.flag
-     }
+         try:
+-            kernellog.verbose(env.app,
+-                              'calling kernel-doc \'%s\'' % (" ".join(cmd)))
++            logger.verbose('calling kernel-doc \'%s\'', " ".join(cmd))
  
--    def warn(self, message, **replace):
--        replace["fname"]   = self.state.document.current_source
--        replace["line_no"] = replace.get("line_no", self.lineno)
--        message = ("%(fname)s:%(line_no)s: [kernel-feat WARN] : " + message) % replace
--        self.state.document.settings.env.app.warn(message, prefix="")
--
-     def run(self):
-         doc = self.state.document
-         if not doc.settings.file_insertion_enabled:
+             p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+             out, err = p.communicate()
+@@ -120,8 +121,7 @@ class KernelDocDirective(Directive):
+             if p.returncode != 0:
+                 sys.stderr.write(err)
+ 
+-                kernellog.warn(env.app,
+-                               'kernel-doc \'%s\' failed with return code %d' % (" ".join(cmd), p.returncode))
++                logger.warning('kernel-doc \'%s\' failed with return code %d', " ".join(cmd), p.returncode)
+                 return [nodes.error(None, nodes.paragraph(text = "kernel-doc missing"))]
+             elif env.config.kerneldoc_verbosity > 0:
+                 sys.stderr.write(err)
+@@ -148,8 +148,8 @@ class KernelDocDirective(Directive):
+             return node.children
+ 
+         except Exception as e:  # pylint: disable=W0703
+-            kernellog.warn(env.app, 'kernel-doc \'%s\' processing failed with: %s' %
+-                           (" ".join(cmd), str(e)))
++            logger.warning('kernel-doc \'%s\' processing failed with: %s',
++                           " ".join(cmd), str(e))
+             return [nodes.error(None, nodes.paragraph(text = "kernel-doc missing"))]
+ 
+     def do_parse(self, result, node):
 -- 
 2.34.1
 
