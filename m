@@ -1,169 +1,179 @@
-Return-Path: <linux-doc+bounces-8631-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8633-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBD1284D194
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Feb 2024 19:47:38 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id DAF3F84D1C9
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Feb 2024 19:54:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EEEA91C21B62
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Feb 2024 18:47:37 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 50EB71F2556C
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Feb 2024 18:54:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E5B1131E29;
-	Wed,  7 Feb 2024 18:43:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BF3E81272CB;
+	Wed,  7 Feb 2024 18:50:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=fastly.com header.i=@fastly.com header.b="w5XqJT7s"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77C7112D761
-	for <linux-doc@vger.kernel.org>; Wed,  7 Feb 2024 18:43:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B3E1127B70
+	for <linux-doc@vger.kernel.org>; Wed,  7 Feb 2024 18:50:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707331413; cv=none; b=tX0g+jcayr5wmRziPrX/7VNyTx01D+IgMELKO17D7BnK4EHQSoO97GcgccvGweiR7856JfbmfOIZjC65vvgWmWzigm/2F0cDIMKUBxFyJ/My42/FjbiaOmUvcUyv0ZoIXMvwPWqOKsx1sp+USyDQBGFuD1dWqilUybZsamn0pjo=
+	t=1707331821; cv=none; b=cx3CRDbjnG5wHokwZdxY28ReKuVwIJ1mN137RfLElfkXYDo/m8dLfweFpbSRiTZJVQrv+21vA711V71T9yZAMCQGwsk+bzSigL05Grp5R5/sx86t1lpKqj0qP1ggVB9smsa7qY+MpMALNxWX/cnOGkQJwriGgv0poeGz2oRYiKk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707331413; c=relaxed/simple;
-	bh=uB3EFp1QO1hexwLLVQgbTObbWoAfnWMVl1AIy0DdRhs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=abgPoObhGzpqyAl2DcIJwqSaL2A5LGk18PwupvQMJh0Ru1uMQRcQ8KGX9Hz5EhLUQvi7t4MYEnnuU4Fs6roPbBDmj6H3oocvu/r+5Ml37wJ/dM41OVLkPz7WWvxNN1Pobr8TTRdbJhTsECK4KoIEq00Zwcj2RjQ/c8yR3x3z/YA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ukl@pengutronix.de>)
-	id 1rXmtE-00089Y-UF; Wed, 07 Feb 2024 19:43:20 +0100
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <ukl@pengutronix.de>)
-	id 1rXmtE-0054Ym-3e; Wed, 07 Feb 2024 19:43:20 +0100
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.96)
-	(envelope-from <ukl@pengutronix.de>)
-	id 1rXmtE-00HRtt-05;
-	Wed, 07 Feb 2024 19:43:20 +0100
-From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-To: Mark Brown <broonie@kernel.org>
-Cc: kernel@pengutronix.de,
-	Jonathan Corbet <corbet@lwn.net>,
-	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	James Clark <james.clark@arm.com>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-spi@vger.kernel.org
-Subject: [PATCH v3 31/32] spi: Drop compat layer from renaming "master" to "controller"
-Date: Wed,  7 Feb 2024 19:40:45 +0100
-Message-ID:  <ad1d949325b61a4682e8d6ecf9d05da751e6a99f.1707324794.git.u.kleine-koenig@pengutronix.de>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1707324793.git.u.kleine-koenig@pengutronix.de>
-References: <cover.1707324793.git.u.kleine-koenig@pengutronix.de>
+	s=arc-20240116; t=1707331821; c=relaxed/simple;
+	bh=FHpj/xXyQLYjyor2xeXAMKuWhBGCAUI46q76hCBjf4E=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=eKAstU6SkkZYeFuBMzrCHxyV8uDsWOCZVd2fMWAb5j9DU+fS5suP+nLyWrTGTlP4VZ4bUdnXuW50Tydk4/Bo+lgzXltrQc1DJul4qV6d8PS+cXj1O3JGzSfBjNp50IoUVhKVWzeQM1iHp42ggpWwoF0DTUizO8GJxgfzkLtHbZ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fastly.com; spf=pass smtp.mailfrom=fastly.com; dkim=pass (1024-bit key) header.d=fastly.com header.i=@fastly.com header.b=w5XqJT7s; arc=none smtp.client-ip=209.85.215.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fastly.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fastly.com
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-5d8b519e438so814309a12.1
+        for <linux-doc@vger.kernel.org>; Wed, 07 Feb 2024 10:50:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fastly.com; s=google; t=1707331819; x=1707936619; darn=vger.kernel.org;
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=qQf4+IgLEkSw22mx7uyDkWbJAHHHB9UuyZ0jbaQX1VQ=;
+        b=w5XqJT7suxBW6Q6QnZ/SQgRGMZ3g1jqfYNtQR9l75F2Ii1ziWHIJTYedhArdnPnNjY
+         eASfq0rVeodWARrPeDxYGtg7lAtJ+KPZa4qLPe5pXGQ61wXM1tsC/y0+eyQHSyEXXkca
+         oR32mLE9wTkv+87POJr4snks3FV/CNEPjHBr0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1707331819; x=1707936619;
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=qQf4+IgLEkSw22mx7uyDkWbJAHHHB9UuyZ0jbaQX1VQ=;
+        b=ayd27A3oh+52grm5IC17PzuCT6wmxvVwB678nSXSNifxvf5qlp8b6bTabWvG7ToEjJ
+         PSgUojOEHwleI/VOjJsjqYBZ68TKqPKy0SFZHxcSYdTniyogbHax7273WT9tgjSRm9wB
+         jTrl8dG2CoamVf4PreAnGMZ3acUHhv+nwJkYhKRsxfa4mTnzyK8UuPkCiaRNVS8U+1cu
+         ol8eijWF7AEW5dgCDr6h7ZJy6O7v4MltfCGj/t8HnhhJxACHfaW3S9X07ryeKJtyvHdw
+         JJV6twFy3BR7e5Q/I0pQi9bP6/hdVkbpE+h97JHr4WO1b3p9MAeCjt9ke6Yc/HyOt3Mu
+         KuIA==
+X-Forwarded-Encrypted: i=1; AJvYcCUkEawWsd8VnsnupmSODDKq+aBp+VPsrmCum3k4hLBoqxU6zDMjpgL9L3n0MeVfKMR7cjfbJiNtM9WAfVvz2dRcSBYed4Vmyv9Z
+X-Gm-Message-State: AOJu0YywF2VUa57ITkbt4IgU+kkNffT8DNEUQ79gHX0W/9CtFf4/o/09
+	+IboBbWEYgNhsUFolnWKTrmPCSkr/I8E0ZXLU+mZUs4a3c1q5FgvthvA78JwWvs=
+X-Google-Smtp-Source: AGHT+IGQvVbGz3QeVBRU8HV3lCSe/k/gC1Nc5AYsNKsNaVbI7gyDoJvv5HG9mp3ZWoAk6Hf1n3N7rw==
+X-Received: by 2002:a05:6a20:9591:b0:19e:9a7b:230f with SMTP id iu17-20020a056a20959100b0019e9a7b230fmr6248711pzb.9.1707331819370;
+        Wed, 07 Feb 2024 10:50:19 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCXP5D3VQWJvH341gnT+Kd3ij2X9pcq/8IUse138FBGQNGJccLxkgLD2TM0AwzoBb01V4wXRQ8fbHgtULuINUB8Y/cxELr2RSGSBAfKAZfN99uFvTQqVcbq5W+r3G9y0oxGFzQHz3WmqevKYI0h74KkSnxYmWDJInDxxkZeg01gg3CWEMX7GL5+xicM7k+NiIWMjIDPki4i6jgA2IVfimCAUhjQA9hBk2OnHOdnwsDfATSSaJNQnShizjcz4DihQpkWrNx1mJQ/wJtOUQTuhsO1CYiKH3aWhIFSY4NjQgS3JsZOJRrF7oc77+3HWOj5IwxH8WIndAFjJltCJCvcGVmhUxc0GRHJhsNL69SXnkdTcGBzKaKMJ553KmuMPlExje1oaOGFgeoQFVNWBeGi1+FLloGZOCiVE4kauNft3oQkvt6UtwdLaAZ5+r9O9sXsMenW7fGapT7YsARoOOper3smD/bP9+/jSDJhi6MNM7Eu3/JpdoDEI4PYJoNG/T1PKGqKhZfLjs9gLHFlwp+m2CA308c+PRY27XP84589ZCbCOXkkOxPpkiluPBOgwaQYXuZHzKoUQWlef+RdIdxwsqaMihyTrqo7PhAE2fNUJIsyVKN9F32xz7CuIr8k2X0Qy3khgNWXxSLTRfmgSTge8+X9ciH/6kwccaXB5Q01DSY6TMZwYi7qqeoj9ix0tJkO9mndOpMnhJUK0aihqQtMlJF775VydIHgryimfw3GCDCMyK1Wct1PEURkvYuqkjiLjLeinlWbbAtcyY/TEo/iHKkDWxe9ZGKxbcdxHiZHq4YojB3hIrOfZ0JVD1qrEgsx88SgnFKCYV2vu6zOehvnElqSRwCtWNZahQk8eOeRrF+z67tHlUaqeFmfp8nP5fchWpXMhNVHls813y7ChVBbKYPjLlUdOpmoZTLSpwcL3sd/oi5xiEs+z2sgY724v47/Qp6uHGM
+ X/7KGpggItlob7VfLZi8g=
+Received: from fastly.com (c-24-6-151-244.hsd1.ca.comcast.net. [24.6.151.244])
+        by smtp.gmail.com with ESMTPSA id cb11-20020a056a02070b00b005d7b18bb7e2sm1766169pgb.45.2024.02.07.10.50.16
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 07 Feb 2024 10:50:19 -0800 (PST)
+Date: Wed, 7 Feb 2024 10:50:15 -0800
+From: Joe Damato <jdamato@fastly.com>
+To: kuba@kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+	chuck.lever@oracle.com, jlayton@kernel.org,
+	linux-api@vger.kernel.org, brauner@kernel.org, edumazet@google.com,
+	davem@davemloft.net, alexander.duyck@gmail.com,
+	sridhar.samudrala@intel.com, kuba@kernel.org,
+	willemdebruijn.kernel@gmail.com, weiwan@google.com,
+	David.Laight@ACULAB.COM, arnd@arndb.de, sdf@google.com,
+	amritha.nambiar@intel.com, Jonathan Corbet <corbet@lwn.net>,
+	Alexander Viro <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>,
+	Nathan Lynch <nathanl@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Namjae Jeon <linkinjeon@kernel.org>,
+	Steve French <stfrench@microsoft.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Julien Panis <jpanis@baylibre.com>,
+	Andrew Waterman <waterman@eecs.berkeley.edu>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+	"open list:FILESYSTEMS (VFS and infrastructure)" <linux-fsdevel@vger.kernel.org>
+Subject: Re: [PATCH net-next v6 4/4] eventpoll: Add epoll ioctl for
+ epoll_params
+Message-ID: <20240207185014.GA1221@fastly.com>
+References: <20240205210453.11301-1-jdamato@fastly.com>
+ <20240205210453.11301-5-jdamato@fastly.com>
+ <ec9791cf-d0a2-4d75-a7d6-00bcab92e823@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3777; i=u.kleine-koenig@pengutronix.de; h=from:subject:message-id; bh=uB3EFp1QO1hexwLLVQgbTObbWoAfnWMVl1AIy0DdRhs=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBlw87m7jcEk6MBx1cg+GuyUSMqcytNRFv3xCFiM 6JtdE0QP2qJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCZcPO5gAKCRCPgPtYfRL+ TpzWCACjfAyRML6L8ZOoMmat3fJR2FLO4Aw3vRds41Bmzf0wXRoRCuJhA7rAaSG9rTc8tijCWr5 v9asd7VwhesST11FK/hrFHqlriBG8zT8nYNYJRES2yc3qrVE4+n/t0FJJ1CGTY/TPodjABqLOqH m6XS0WWv9+0WfUNypQk14db+sT8KpDuom7TuwLa4ylkkFfhUkSbzmXXN+vlbaKwTKoDz5Nw5UZG JzXvWjlau2v20A8Zp219c7Jet0Wqb3kjbWPODyIQ3t+35PIfW+YbGhpBe51c5NjMo0R5fbxjhin Ka94760BEZONczT3M69IXKcCp73KaoEm5skKp6ejTi9XbLj7
-X-Developer-Key: i=u.kleine-koenig@pengutronix.de; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ec9791cf-d0a2-4d75-a7d6-00bcab92e823@kernel.org>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 
-Now that all in-tree users followed the rename, the compat stuff can go
-away.  This completes the renaming started with commit 8caab75fd2c2
-("spi: Generalize SPI "master" to "controller"")
+On Wed, Feb 07, 2024 at 09:37:14AM +0100, Jiri Slaby wrote:
+> On 05. 02. 24, 22:04, Joe Damato wrote:
+> >Add an ioctl for getting and setting epoll_params. User programs can use
+> >this ioctl to get and set the busy poll usec time, packet budget, and
+> >prefer busy poll params for a specific epoll context.
+> >
+> >Parameters are limited:
+> >   - busy_poll_usecs is limited to <= u32_max
+> >   - busy_poll_budget is limited to <= NAPI_POLL_WEIGHT by unprivileged
+> >     users (!capable(CAP_NET_ADMIN))
+> >   - prefer_busy_poll must be 0 or 1
+> >   - __pad must be 0
+> >
+> >Signed-off-by: Joe Damato <jdamato@fastly.com>
+> ...
+> >--- a/fs/eventpoll.c
+> >+++ b/fs/eventpoll.c
+> ...
+> >@@ -497,6 +498,50 @@ static inline void ep_set_busy_poll_napi_id(struct epitem *epi)
+> >  	ep->napi_id = napi_id;
+> >  }
+> >+static long ep_eventpoll_bp_ioctl(struct file *file, unsigned int cmd,
+> >+				  unsigned long arg)
+> >+{
+> >+	struct eventpoll *ep;
+> >+	struct epoll_params epoll_params;
+> >+	void __user *uarg = (void __user *) arg;
+> >+
+> >+	ep = file->private_data;
+> 
+> This might have been on the ep declaration line.
+> 
+> >+	switch (cmd) {
+> >+	case EPIOCSPARAMS:
+> >+		if (copy_from_user(&epoll_params, uarg, sizeof(epoll_params)))
+> >+			return -EFAULT;
+> >+
+> >+		if (memchr_inv(epoll_params.__pad, 0, sizeof(epoll_params.__pad)))
+> >+			return -EINVAL;
+> >+
+> >+		if (epoll_params.busy_poll_usecs > U32_MAX)
+> >+			return -EINVAL;
+> >+
+> >+		if (epoll_params.prefer_busy_poll > 1)
+> >+			return -EINVAL;
+> >+
+> >+		if (epoll_params.busy_poll_budget > NAPI_POLL_WEIGHT &&
+> >+		    !capable(CAP_NET_ADMIN))
+> >+			return -EPERM;
+> >+
+> >+		ep->busy_poll_usecs = epoll_params.busy_poll_usecs;
+> >+		ep->busy_poll_budget = epoll_params.busy_poll_budget;
+> >+		ep->prefer_busy_poll = !!epoll_params.prefer_busy_poll;
+> 
+> This !! is unnecessary. Nonzero values shall be "converted" to true.
+> 
+> But FWIW, the above is nothing which should be blocking, so:
+"> 
+> Reviewed-by: Jiri Slaby <jirislaby@kernel.org>
 
-Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
----
- .../driver-api/driver-model/devres.rst        |  2 +-
- drivers/spi/spi.c                             |  2 +-
- include/linux/spi/spi.h                       | 20 +------------------
- 3 files changed, 3 insertions(+), 21 deletions(-)
+netdev maintainers: Jiri marked this with Reviewed-by, but was this review
+what caused "Changes Requested" to be the status set for this patch set in
+patchwork?
 
-diff --git a/Documentation/driver-api/driver-model/devres.rst b/Documentation/driver-api/driver-model/devres.rst
-index c5f99d834ec5..49c6fd82cd5d 100644
---- a/Documentation/driver-api/driver-model/devres.rst
-+++ b/Documentation/driver-api/driver-model/devres.rst
-@@ -462,7 +462,7 @@ SLAVE DMA ENGINE
- SPI
-   devm_spi_alloc_master()
-   devm_spi_alloc_slave()
--  devm_spi_register_master()
-+  devm_spi_register_controller()
- 
- WATCHDOG
-   devm_watchdog_register_device()
-diff --git a/drivers/spi/spi.c b/drivers/spi/spi.c
-index 53c25a351dab..c08fe2cb256c 100644
---- a/drivers/spi/spi.c
-+++ b/drivers/spi/spi.c
-@@ -584,7 +584,7 @@ struct spi_device *spi_alloc_device(struct spi_controller *ctlr)
- 		return NULL;
- 	}
- 
--	spi->master = spi->controller = ctlr;
-+	spi->controller = ctlr;
- 	spi->dev.parent = &ctlr->dev;
- 	spi->dev.bus = &spi_bus_type;
- 	spi->dev.release = spidev_release;
-diff --git a/include/linux/spi/spi.h b/include/linux/spi/spi.h
-index 9e3866809a0e..7500db33f70c 100644
---- a/include/linux/spi/spi.h
-+++ b/include/linux/spi/spi.h
-@@ -131,7 +131,6 @@ extern void spi_transfer_cs_change_delay_exec(struct spi_message *msg,
-  * struct spi_device - Controller side proxy for an SPI slave device
-  * @dev: Driver model representation of the device.
-  * @controller: SPI controller used with the device.
-- * @master: Copy of controller, for backwards compatibility.
-  * @max_speed_hz: Maximum clock rate to be used with this chip
-  *	(on this board); may be changed by the device's driver.
-  *	The spi_transfer.speed_hz can override this for each transfer.
-@@ -185,7 +184,6 @@ extern void spi_transfer_cs_change_delay_exec(struct spi_message *msg,
- struct spi_device {
- 	struct device		dev;
- 	struct spi_controller	*controller;
--	struct spi_controller	*master;	/* Compatibility layer */
- 	u32			max_speed_hz;
- 	u8			chip_select[SPI_CS_CNT_MAX];
- 	u8			bits_per_word;
-@@ -1298,7 +1296,7 @@ spi_max_transfer_size(struct spi_device *spi)
-  */
- static inline bool spi_is_bpw_supported(struct spi_device *spi, u32 bpw)
- {
--	u32 bpw_mask = spi->master->bits_per_word_mask;
-+	u32 bpw_mask = spi->controller->bits_per_word_mask;
- 
- 	if (bpw == 8 || (bpw <= 32 && bpw_mask & SPI_BPW_MASK(bpw)))
- 		return true;
-@@ -1670,20 +1668,4 @@ spi_transfer_is_last(struct spi_controller *ctlr, struct spi_transfer *xfer)
- 	return list_is_last(&xfer->transfer_list, &ctlr->cur_msg->transfers);
- }
- 
--/* Compatibility layer */
--#define spi_master			spi_controller
--
--#define spi_master_get_devdata(_ctlr)	spi_controller_get_devdata(_ctlr)
--#define spi_master_set_devdata(_ctlr, _data)	\
--	spi_controller_set_devdata(_ctlr, _data)
--#define spi_master_get(_ctlr)		spi_controller_get(_ctlr)
--#define spi_master_put(_ctlr)		spi_controller_put(_ctlr)
--#define spi_master_suspend(_ctlr)	spi_controller_suspend(_ctlr)
--#define spi_master_resume(_ctlr)	spi_controller_resume(_ctlr)
--
--#define spi_register_master(_ctlr)	spi_register_controller(_ctlr)
--#define devm_spi_register_master(_dev, _ctlr) \
--	devm_spi_register_controller(_dev, _ctlr)
--#define spi_unregister_master(_ctlr)	spi_unregister_controller(_ctlr)
--
- #endif /* __LINUX_SPI_H */
--- 
-2.43.0
+If needed, I'll send a v7 with the changes Jiri suggested and add the
+"Reviewed-by" since the changes are cosmetic, but I wanted to make sure
+this was the reason.
 
+Thanks.
 
