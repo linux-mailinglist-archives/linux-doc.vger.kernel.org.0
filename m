@@ -1,196 +1,240 @@
-Return-Path: <linux-doc+bounces-8592-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8605-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 987E484CF6A
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Feb 2024 18:10:30 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 801FC84D044
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Feb 2024 18:59:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3FAE828A570
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Feb 2024 17:10:29 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A2CB71C25F83
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Feb 2024 17:59:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C59B8286D;
-	Wed,  7 Feb 2024 17:10:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC79B82D8C;
+	Wed,  7 Feb 2024 17:59:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b="kwxj5o5r"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Lsl2TtvI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 582DE7A70E
-	for <linux-doc@vger.kernel.org>; Wed,  7 Feb 2024 17:10:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 971A282C76;
+	Wed,  7 Feb 2024 17:58:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707325817; cv=none; b=d+kZ+/LA0mnNJXbhXgehXEPvJrWvrEEuHFOzuejScjOA89LeyT46Xtj2QDU+4vPHfQRrK6Gt3ITfJntjsK9WrtS3oTQ2OQrquhVHChmSbSjp/j3hjpqfYOaFGFb5HQVh6WghyQDAz6MgwR2EOYRLMk9cPQ6ZCX9BieZczKb+bYg=
+	t=1707328740; cv=none; b=G3uauVguXAcLmm4IvDaIw3iQmoGpbFaPngtSjWIwToJxRcYOB18kUFbw5YUgUDdLAHmN2m+JZg7elEmy69qBBE8GDSJfVpNlKZLZh/u+9uKjrlezJKzH5Xf66nruVLbWtPRNdjE/+UhzdBGhiKOIDjm3snDer2uRvTejm5pl0Sw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707325817; c=relaxed/simple;
-	bh=vEUPI+uVUhfTV/tojMqehfC5wsKr2e5S0TdhVxbgmpk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=su42prOBmL2lFctr6XD3qwulH+2EWnLCGYc2AsLd2/LH1Z7Pn+ll9rqJb+XS5cIHpjCDgsd1nvALnFMk5iYs4xFulDpuCX5ueXq4VX/XRAe+J21o8HB3RHiD3Kj2rBSK9TNQUFz69Cvkio/x39fFFLk3lSvKpNbq0hOhgCs1AOk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ffwll.ch; spf=none smtp.mailfrom=ffwll.ch; dkim=pass (1024-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b=kwxj5o5r; arc=none smtp.client-ip=209.85.128.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ffwll.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=ffwll.ch
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-40fc4363a0aso2627845e9.1
-        for <linux-doc@vger.kernel.org>; Wed, 07 Feb 2024 09:10:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google; t=1707325812; x=1707930612; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references
-         :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=UPG+Y5UifSfAr1b/3ugQkQKZbhHpDNonzO9dzweV4Ww=;
-        b=kwxj5o5r3k2qZWAp2ske0jdNDUjyE8l1jCeq/X2uoaiFLy52Flmd77vayPCatztiRr
-         lW6ZIIwoo4itIYGQGTHWp16g+iNNCH9ya1EHAFCAsjZ5dUw5rikKlEr1DC/A4EYizTK5
-         k4Oa70jPZomY0Bvmm+R8kbI41EwubCbBIguCY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707325812; x=1707930612;
-        h=in-reply-to:content-disposition:mime-version:references
-         :mail-followup-to:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=UPG+Y5UifSfAr1b/3ugQkQKZbhHpDNonzO9dzweV4Ww=;
-        b=HAgE6Z6atgWLQPgvjp9f5fPuoJ796zRzsKfRRSgVAemkaq+u3TCmbejIuxwXQxzxGi
-         gznjlLDrxBZSU5hX/hvGDSZAJW6Q+UGK990zWFKwV1HETjq3YPtRlATFK2XQ8aljTCSl
-         eScI/DGf3VTEtHHtPNgWMxD9/nsN5mAmHrHgaLmdVFFNsodMmuTELvSB/8FcskrhHG/e
-         6QBOMxLNTsI9HKVKso4egV8cxyQ5hk4FpE/vZYcjzv9KiC++YhkSaomPQ0LLpvz1OsEg
-         iU1a7CbGpaltplFXi05GJYDjH3qJvHsjfpl7rtxP1MHuI/1gUAKlqGjf5XFwfPEKyHp8
-         7qVQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWJOuz6E5AqUqzJZUDt02uvO3yayI9/3FfVbScUx8m1s0r5qD5tKvIfFWY1XsMbcAASmqVRtNDsx8vLdzJdCbvbiFq+FK9DWgm2
-X-Gm-Message-State: AOJu0Ywbuqg+Xv17Ut5hTZCRzyj3L+A89NjRunq3vJPMvaxMkUaxsN04
-	pvWFCCb1FmFLrP8UETy3eUkw6XVNyp6JgUWBD3XfWKgPb8BoycTgWkhAyH2h8Xo=
-X-Google-Smtp-Source: AGHT+IEsPRfVy9ib6+oPTaqzljo0dzFnfy37G2xZ7RAqfN0oGHicnE8YOdNtlahZH3k+EfqI3cynvg==
-X-Received: by 2002:a05:600c:3d8e:b0:40f:e930:9ebe with SMTP id bi14-20020a05600c3d8e00b0040fe9309ebemr3771440wmb.0.1707325812247;
-        Wed, 07 Feb 2024 09:10:12 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCU4d78PdJmWpGaxeVM/qVZphJus4y+keSsoOAhdIG4L9XbZi80S4LVlZjttUegahtRfb+WxnirB+rL7E+6dEhFQZdLaQyPdkA85Et84sn/Z8V/ODYhjfY3gJmYMEOdASWS2hdFyUPFRrIZVkyqcw0v85EO8qpTdvza67qAvwxb8v8BF/UDU0yEtj/Fn+NGrXSYKuDi9d7XLMrSSk76P9fgRxH0AWyOIvrR05xWc7FcVAoPrRXBLzq7YxpULr524RIadgKGCNrDuyW8mlrDJUD7xOJeXQD13mpqPdZWEXcQnHr3PlmyY9P7zejXJmXoH7gngc7HcscVY61Kip0O2FNSNaM+3P97i/aa9+TLPtTTFX+vV65/23X6hTg7Onsn7Q9bNaviLS1LE6W6mgxV274yHq6U/3XLMgAU6cMqSzvM0MAghTIXF0LHNbKtFP8+14g1vjHl3lVfjH9rlI5hH9zzOblXyvY+ixmIMPg==
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id m4-20020a05600c4f4400b0041007731a52sm2697105wmq.11.2024.02.07.09.10.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Feb 2024 09:10:11 -0800 (PST)
-Date: Wed, 7 Feb 2024 18:10:09 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Paul Cercueil <paul@crapouillou.net>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	linux-usb@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
-Subject: Re: [Linaro-mm-sig] [PATCH v5 2/6] dma-buf: udmabuf: Implement
- .{begin,end}_access
-Message-ID: <ZcO5ccqwTIhSKDfS@phenom.ffwll.local>
-Mail-Followup-To: Paul Cercueil <paul@crapouillou.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	linux-usb@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
-References: <20240119141402.44262-1-paul@crapouillou.net>
- <20240119141402.44262-3-paul@crapouillou.net>
+	s=arc-20240116; t=1707328740; c=relaxed/simple;
+	bh=lmwp+X4m566IhpL3BVzRtbCOejiCrKvu6IvAyXfd1sY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=tMsjXvWh/uy3eXaQuYhgLOERZ+ONvyk45JFlQyOSLRVLQtv0Z2eB84suJ6JiTBA/P8Zz++uDTzmUK3rXE9R/5pjSBPhhab4WaylP7b9f5um7XNEYY9ihxKGBhRrFelAE7U4qQ6gdOySfRuOoCgLbqOaeCqBuPgZdh9QZmmB7MII=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Lsl2TtvI; arc=none smtp.client-ip=198.175.65.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1707328735; x=1738864735;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=lmwp+X4m566IhpL3BVzRtbCOejiCrKvu6IvAyXfd1sY=;
+  b=Lsl2TtvIsfi/Ubfox07I+ss9cNM1nby8zP1138pj7XdlwOhPCLJcgQ3r
+   3z/PsU62FAQlqKIyMPxPAfUu8fp3SeLkgymt6WbnPU/MTs4W2tak8fkr+
+   B9eW1WpRqTb2KenE2yR/ISUEqoTbwXU5PiYgRyPyFxjN9RYv77caZdRRu
+   NyvU1ZJ1hwLD8gXcNXoWTX+Bol8LIBfzyOXRtmXI8lbM78BVrSc/VbLR8
+   ztxH8oyd3CHyrO0Wm/hVF7N62KrmFzdC7Ec/rWPraC8bthmeu63GWFwik
+   sLbqotoW2V3y1UUyjRHmwGi+NbyOWxJ9TVSiZd3XJsHfc4NMpkkNFOeqH
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10977"; a="11622474"
+X-IronPort-AV: E=Sophos;i="6.05,251,1701158400"; 
+   d="scan'208";a="11622474"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Feb 2024 09:58:54 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.05,251,1701158400"; 
+   d="scan'208";a="6020686"
+Received: from unknown (HELO fred..) ([172.25.112.68])
+  by fmviesa004.fm.intel.com with ESMTP; 07 Feb 2024 09:58:53 -0800
+From: Xin Li <xin3.li@intel.com>
+To: linux-kernel@vger.kernel.org,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org
+Cc: seanjc@google.com,
+	pbonzini@redhat.com,
+	corbet@lwn.net,
+	tglx@linutronix.de,
+	mingo@redhat.com,
+	bp@alien8.de,
+	dave.hansen@linux.intel.com,
+	x86@kernel.org,
+	hpa@zytor.com,
+	shuah@kernel.org,
+	vkuznets@redhat.com,
+	peterz@infradead.org,
+	ravi.v.shankar@intel.com,
+	xin@zytor.com
+Subject: [PATCH v2 00/25] Enable FRED with KVM VMX
+Date: Wed,  7 Feb 2024 09:26:20 -0800
+Message-ID: <20240207172646.3981-1-xin3.li@intel.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240119141402.44262-3-paul@crapouillou.net>
-X-Operating-System: Linux phenom 6.6.11-amd64 
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jan 19, 2024 at 03:13:58PM +0100, Paul Cercueil wrote:
-> Implement .begin_access() and .end_access() callbacks.
-> 
-> For now these functions will simply sync/flush the CPU cache when
-> needed.
-> 
-> Signed-off-by: Paul Cercueil <paul@crapouillou.net>
-> 
-> ---
-> v5: New patch
-> ---
->  drivers/dma-buf/udmabuf.c | 27 +++++++++++++++++++++++++++
->  1 file changed, 27 insertions(+)
-> 
-> diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-> index c40645999648..a87d89b58816 100644
-> --- a/drivers/dma-buf/udmabuf.c
-> +++ b/drivers/dma-buf/udmabuf.c
-> @@ -179,6 +179,31 @@ static int end_cpu_udmabuf(struct dma_buf *buf,
->  	return 0;
->  }
->  
-> +static int begin_udmabuf(struct dma_buf_attachment *attach,
-> +			 struct sg_table *sgt,
-> +			 enum dma_data_direction dir)
-> +{
-> +	struct dma_buf *buf = attach->dmabuf;
-> +	struct udmabuf *ubuf = buf->priv;
-> +	struct device *dev = ubuf->device->this_device;
-> +
-> +	dma_sync_sg_for_device(dev, sgt->sgl, sg_nents(sgt->sgl), dir);
+This patch set enables the Intel flexible return and event delivery
+(FRED) architecture with KVM VMX to allow guests to utilize FRED.
 
-So one thing I've just wondered is whether we've made sure that this is
-only doing cache coherency maintenance, and not swiotlb bounce buffer
-copying. The latter would really not be suitable for dma-buf anymore I
-think.
+The FRED architecture defines simple new transitions that change
+privilege level (ring transitions). The FRED architecture was
+designed with the following goals:
 
-Not sure how to best check for that since it's all in the depths of the
-dma-api code, but I guess the best way to really make sure is to disable
-CONFIG_SWIOTLB. Otherwise I guess the way to absolutely make sure is to
-trace swiotlb_sync_single_for_device/cpu.
+1) Improve overall performance and response time by replacing event
+   delivery through the interrupt descriptor table (IDT event
+   delivery) and event return by the IRET instruction with lower
+   latency transitions.
 
-It would be kinda neat if dma-buf.c code could make sure you never ever
-get an swiotlb entry from a dma_buf_map_attachment call, but I don't think
-we can enforce that. There's sg_dma_is_swiotlb, but that won't catch all
-implementations, only the generic dma-iommu.c one.
+2) Improve software robustness by ensuring that event delivery
+   establishes the full supervisor context and that event return
+   establishes the full user context.
 
-Cheers, Sima
+The new transitions defined by the FRED architecture are FRED event
+delivery and, for returning from events, two FRED return instructions.
+FRED event delivery can effect a transition from ring 3 to ring 0, but
+it is used also to deliver events incident to ring 0. One FRED
+instruction (ERETU) effects a return from ring 0 to ring 3, while the
+other (ERETS) returns while remaining in ring 0. Collectively, FRED
+event delivery and the FRED return instructions are FRED transitions.
 
-> +	return 0;
-> +}
-> +
-> +static int end_udmabuf(struct dma_buf_attachment *attach,
-> +		       struct sg_table *sgt,
-> +		       enum dma_data_direction dir)
-> +{
-> +	struct dma_buf *buf = attach->dmabuf;
-> +	struct udmabuf *ubuf = buf->priv;
-> +	struct device *dev = ubuf->device->this_device;
-> +
-> +	if (dir != DMA_TO_DEVICE)
-> +		dma_sync_sg_for_cpu(dev, sgt->sgl, sg_nents(sgt->sgl), dir);
-> +	return 0;
-> +}
-> +
->  static const struct dma_buf_ops udmabuf_ops = {
->  	.cache_sgt_mapping = true,
->  	.map_dma_buf	   = map_udmabuf,
-> @@ -189,6 +214,8 @@ static const struct dma_buf_ops udmabuf_ops = {
->  	.vunmap		   = vunmap_udmabuf,
->  	.begin_cpu_access  = begin_cpu_udmabuf,
->  	.end_cpu_access    = end_cpu_udmabuf,
-> +	.begin_access      = begin_udmabuf,
-> +	.end_access        = end_udmabuf,
->  };
->  
->  #define SEALS_WANTED (F_SEAL_SHRINK)
-> -- 
-> 2.43.0
-> 
-> _______________________________________________
-> Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-> To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+Intel VMX architecture is extended to run FRED guests, and the major
+changes are:
 
+1) New VMCS fields for FRED context management, which includes two new
+event data VMCS fields, eight new guest FRED context VMCS fields and
+eight new host FRED context VMCS fields.
+
+2) VMX nested-exception support for proper virtualization of stack
+levels introduced with FRED architecture.
+
+Search for the latest FRED spec in most search engines with this search
+pattern:
+
+  site:intel.com FRED (flexible return and event delivery) specification
+
+As the native FRED patches are committed in the tip tree "x86/fred"
+branch:
+https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/log/?h=x86/fred,
+and we have received a good amount of review comments for v1, it's time
+to send out v2 based on this branch for further help from the community.
+
+Patch 1-2 are cleanups to VMX basic and misc MSRs, which were sent
+out earlier as a preparation for FRED changes:
+https://lore.kernel.org/kvm/20240206182032.1596-1-xin3.li@intel.com/T/#u
+
+Patch 3-15 add FRED support to VMX.
+Patch 16-21 add FRED support to nested VMX.
+Patch 22 exposes FRED and its baseline features to KVM guests.
+Patch 23-25 add FRED selftests.
+
+There is also a counterpart qemu patch set for FRED at:
+https://lore.kernel.org/qemu-devel/20231109072012.8078-1-xin3.li@intel.com/T/,
+which works with this patch set to allow KVM to run FRED guests.
+
+
+Changes since v1:
+* Always load the secondary VM exit controls (Sean Christopherson).
+* Remove FRED VM entry/exit controls consistency checks in
+  setup_vmcs_config() (Sean Christopherson).
+* Clear FRED VM entry/exit controls if FRED is not enumerated (Chao Gao).
+* Use guest_can_use() to trace FRED enumeration in a vcpu (Chao Gao).
+* Enable FRED MSRs intercept if FRED is no longer enumerated in CPUID
+  (Chao Gao).
+* Move guest FRED states init into __vmx_vcpu_reset() (Chao Gao).
+* Don't use guest_cpuid_has() in vmx_prepare_switch_to_{host,guest}(),
+  which are called from IRQ-disabled context (Chao Gao).
+* Reset msr_guest_fred_rsp0 in __vmx_vcpu_reset() (Chao Gao).
+* Fail host requested FRED MSRs access if KVM cannot virtualize FRED
+  (Chao Gao).
+* Handle the case FRED MSRs are valid but KVM cannot virtualize FRED
+  (Chao Gao).
+* Add sanity checks when writing to FRED MSRs.
+* Explain why it is ok to only check CR4.FRED in kvm_is_fred_enabled()
+  (Chao Gao).
+* Document event data should be equal to CR2/DR6/IA32_XFD_ERR instead
+  of using WARN_ON() (Chao Gao).
+* Zero event data if a #NM was not caused by extended feature disable
+  (Chao Gao).
+* Set the nested flag when there is an original interrupt (Chao Gao).
+* Dump guest FRED states only if guest has FRED enabled (Nikolay Borisov).
+* Add a prerequisite to SHADOW_FIELD_R[OW] macros
+* Remove hyperv TLFS related changes (Jeremi Piotrowski).
+* Use kvm_cpu_cap_has() instead of cpu_feature_enabled() to decouple
+  KVM's capability to virtualize a feature and host's enabling of a
+  feature (Chao Gao).
+
+
+Xin Li (25):
+  KVM: VMX: Cleanup VMX basic information defines and usages
+  KVM: VMX: Cleanup VMX misc information defines and usages
+  KVM: VMX: Add support for the secondary VM exit controls
+  KVM: x86: Mark CR4.FRED as not reserved
+  KVM: VMX: Initialize FRED VM entry/exit controls in vmcs_config
+  KVM: VMX: Defer enabling FRED MSRs save/load until after set CPUID
+  KVM: VMX: Set intercept for FRED MSRs
+  KVM: VMX: Initialize VMCS FRED fields
+  KVM: VMX: Switch FRED RSP0 between host and guest
+  KVM: VMX: Add support for FRED context save/restore
+  KVM: x86: Add kvm_is_fred_enabled()
+  KVM: VMX: Handle FRED event data
+  KVM: VMX: Handle VMX nested exception for FRED
+  KVM: VMX: Disable FRED if FRED consistency checks fail
+  KVM: VMX: Dump FRED context in dump_vmcs()
+  KVM: VMX: Invoke vmx_set_cpu_caps() before nested setup
+  KVM: nVMX: Add support for the secondary VM exit controls
+  KVM: nVMX: Add a prerequisite to SHADOW_FIELD_R[OW] macros
+  KVM: nVMX: Add FRED VMCS fields
+  KVM: nVMX: Add support for VMX FRED controls
+  KVM: nVMX: Add VMCS FRED states checking
+  KVM: x86: Allow FRED/LKGS/WRMSRNS to be exposed to guests
+  KVM: selftests: Run debug_regs test with FRED enabled
+  KVM: selftests: Add a new VM guest mode to run user level code
+  KVM: selftests: Add fred exception tests
+
+ Documentation/virt/kvm/x86/nested-vmx.rst     |  19 +
+ arch/x86/include/asm/kvm_host.h               |   8 +-
+ arch/x86/include/asm/msr-index.h              |  15 +-
+ arch/x86/include/asm/vmx.h                    |  59 ++-
+ arch/x86/kvm/cpuid.c                          |   4 +-
+ arch/x86/kvm/governed_features.h              |   1 +
+ arch/x86/kvm/kvm_cache_regs.h                 |  17 +
+ arch/x86/kvm/svm/svm.c                        |   4 +-
+ arch/x86/kvm/vmx/capabilities.h               |  30 +-
+ arch/x86/kvm/vmx/nested.c                     | 329 ++++++++++++---
+ arch/x86/kvm/vmx/nested.h                     |   2 +-
+ arch/x86/kvm/vmx/vmcs.h                       |   1 +
+ arch/x86/kvm/vmx/vmcs12.c                     |  19 +
+ arch/x86/kvm/vmx/vmcs12.h                     |  38 ++
+ arch/x86/kvm/vmx/vmcs_shadow_fields.h         |  80 ++--
+ arch/x86/kvm/vmx/vmx.c                        | 385 +++++++++++++++---
+ arch/x86/kvm/vmx/vmx.h                        |  15 +-
+ arch/x86/kvm/x86.c                            | 103 ++++-
+ arch/x86/kvm/x86.h                            |   5 +-
+ tools/testing/selftests/kvm/Makefile          |   1 +
+ .../selftests/kvm/include/kvm_util_base.h     |   1 +
+ .../selftests/kvm/include/x86_64/processor.h  |  36 ++
+ tools/testing/selftests/kvm/lib/kvm_util.c    |   5 +-
+ .../selftests/kvm/lib/x86_64/processor.c      |  15 +-
+ tools/testing/selftests/kvm/lib/x86_64/vmx.c  |   4 +-
+ .../testing/selftests/kvm/x86_64/debug_regs.c |  50 ++-
+ .../testing/selftests/kvm/x86_64/fred_test.c  | 297 ++++++++++++++
+ 27 files changed, 1320 insertions(+), 223 deletions(-)
+ create mode 100644 tools/testing/selftests/kvm/x86_64/fred_test.c
+
+
+base-commit: e13841907b8fda0ae0ce1ec03684665f578416a8
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.43.0
+
 
