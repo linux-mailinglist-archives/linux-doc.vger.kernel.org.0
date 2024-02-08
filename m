@@ -1,159 +1,121 @@
-Return-Path: <linux-doc+bounces-8702-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8704-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A25284E3C2
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Feb 2024 16:14:25 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CFEE84E404
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Feb 2024 16:25:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2E69F1C24624
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Feb 2024 15:14:24 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id A0CE11F28059
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Feb 2024 15:25:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7FA5F7B3CE;
-	Thu,  8 Feb 2024 15:14:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8C507B3FF;
+	Thu,  8 Feb 2024 15:24:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="lR5Xv308";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="lX2vlCRv"
+	dkim=pass (2048-bit key) header.d=toblux-com.20230601.gappssmtp.com header.i=@toblux-com.20230601.gappssmtp.com header.b="meGLZBXG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1E5B78B75;
-	Thu,  8 Feb 2024 15:14:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 953E379921
+	for <linux-doc@vger.kernel.org>; Thu,  8 Feb 2024 15:24:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707405259; cv=none; b=gbV4+jyj0Eq7Tmj89Lop5tNfSP+eu6DPctevEHnOT17QLGUmfYqEHt13BH1tsmoS800Er3rrQx7+8wrD3anH0U0oWxM/pmcIOpJash46351zR9ozPVVNfSjrYEAIPQjTol66H+zpqxa2slN1op30cPhfM4Gwu3dwj5VIjN4K7Ko=
+	t=1707405896; cv=none; b=cLM+JwizDQ5PEW0REdrlv43iyzOTyVC2QEn8N2FRui7MbFaeewbYshBW3Tzcke8+cR5vkN9Estb0SOVX09fec1uc78oIb5wa7ig3e2UoZm+eO0D1Rmckk54zAV1oniOy+5K+FSKNe4QamsJuJZufoXsCGE+iNeRRiS5f6rTcxuw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707405259; c=relaxed/simple;
-	bh=k67Ku4nB+j9z1OnPAabF+SA7vYNtpc6cZOpoi92P1D4=;
-	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:MIME-Version:
-	 Content-Type; b=Rlpb0GuBvDPbhx/pIjP6RUDh9JK8A6nj1TKvbJS9FNgaDYyTDba2PrVHPGXOaC0BbueReMls88RH4YuafjkLfLyhUB/+dHidr/LlcJldZPcQVmwJPXQIwB1vNHNSzQHYyjIz2KXyu3lXV+I2oVYyOFXuRgPgqJUHrfottKYWtok=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=lR5Xv308; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=lX2vlCRv; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1707405255;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to; bh=Y/mJ4V5ODp1OjO5K7WAULxON8je6JT7lSJcesdF0zwA=;
-	b=lR5Xv308pjT/LKI8IM8xB/XSaI0Dnb5HSiiNZEcP1GG/X0J2TGhY5RsRXxvUquFtK5Kaba
-	2qgKUqQBYDes23bT/Oti60rd/dLpmC1C6XEqg+UvsrvCqKxYP8nb1k+B33QKNOcpSSXcSH
-	IQPxQ3pK41vKwjXsCNbCA3PAbnYM1W7QICBM1MV5LoQ2zE3IzztFmaabhkdZfFzLdOHs+5
-	7M6dJ1Ndv1+8RVk6GLIpY425f7WzV+O406O+gK3Z05xJ8j5gQbnT1hfCZo8YXAzE9tRiep
-	Wnooz6ezxZ+T2sO6f5ps2Yzx44+QTLTYOd45CVawJ6cJNBJV9wuWjjGU6jQ4yg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1707405255;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to; bh=Y/mJ4V5ODp1OjO5K7WAULxON8je6JT7lSJcesdF0zwA=;
-	b=lX2vlCRvmWLLnz1TXzYs9CGXtjOII9OYpB8OU/Wn0AEnymAqvTvw87UIVMVFJVX3rNXkG2
-	DyClVZlotGwKEmBw==
-To: lakshmi.sowjanya.d@intel.com, jstultz@google.com, giometti@enneenne.com,
- corbet@lwn.net, linux-kernel@vger.kernel.org
-Cc: x86@kernel.org, netdev@vger.kernel.org, linux-doc@vger.kernel.org,
- intel-wired-lan@lists.osuosl.org, andriy.shevchenko@linux.intel.com,
- eddie.dong@intel.com, christopher.s.hall@intel.com,
- jesse.brandeburg@intel.com, davem@davemloft.net,
- alexandre.torgue@foss.st.com, joabreu@synopsys.com,
- mcoquelin.stm32@gmail.com, perex@perex.cz, linux-sound@vger.kernel.org,
- anthony.l.nguyen@intel.com, peter.hilber@opensynergy.com,
- pandith.n@intel.com, mallikarjunappa.sangannavar@intel.com,
- subramanian.mohan@intel.com, thejesh.reddy.t.r@intel.com,
- lakshmi.sowjanya.d@intel.com
-Subject: Re: [PATCH v4 02/11] timekeeping: Add function to convert realtime
- to base clock
-In-Reply-To: <20240207060854.6524-3-lakshmi.sowjanya.d@intel.com>
-Date: Thu, 08 Feb 2024 16:14:15 +0100
-Message-ID: <8734u3m1iw.ffs@tglx>
+	s=arc-20240116; t=1707405896; c=relaxed/simple;
+	bh=kAOIuWlwovzhjk3AgDdaNyJxXE1rLS9fIf9ZEx9VMjY=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=kJ+ELZR9VchwmFipm8p6uVQXOtg+YGbe5tGKWZWC3bQ4Z4NO/nKkIZB3olwJqmoeTxqKCm3y1imGKhNncgDfycwFd27+ZT5K0izIjTUcaokti0tjfihIR+dS6D70RfMwnHDgDOT2XW7hx7uo5wRnbC/Z+wfwsoaZ9s+ruQGc8sk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=toblux.com; spf=none smtp.mailfrom=toblux.com; dkim=pass (2048-bit key) header.d=toblux-com.20230601.gappssmtp.com header.i=@toblux-com.20230601.gappssmtp.com header.b=meGLZBXG; arc=none smtp.client-ip=209.85.218.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=toblux.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=toblux.com
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a3122b70439so262427066b.3
+        for <linux-doc@vger.kernel.org>; Thu, 08 Feb 2024 07:24:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=toblux-com.20230601.gappssmtp.com; s=20230601; t=1707405893; x=1708010693; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZlC2lhzngOyeafJ48Z4cKb3VJi3sH6uOejDd3gD5xnI=;
+        b=meGLZBXG/DbQqOnS2e89RiIuf/EE8lDBwa2ZdGBoOQOqBQrD5LI2kB747PCY/RaWKI
+         /rAJqd7hSTdabi+2LovHVyPfF3GDYc5hGgMhdfscFdq3Miz7j/VbQHxYeEeyNWKxf2Em
+         3WrqWdMrZvPqCDl9XcCO/kawwP108Ft53AYSfGfD18jVSY28sAGrtdPsjVGgZErxcUmc
+         czuauihsw4PRm3Fc7zuLRokJXpFeDbvsp1FJT9THMDKIDz6mkdLAAktHL6xnsJqItNcF
+         XI10jhVQdKSq4xrHGg7lN7aP1/1FsmhXNxqBbcC/4rnRdkj7U9PIx7eeT0l1WvOdLTnV
+         yZ8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1707405893; x=1708010693;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ZlC2lhzngOyeafJ48Z4cKb3VJi3sH6uOejDd3gD5xnI=;
+        b=eAl9wpwyFASMFw74FKeWgQo9QWbyLg1/gRsIr3WxKX5nqfuWM/npyf1QH39spdFEoS
+         2d4IWQn4iVc88Ekyqd2MplTMIhwFizQMTqI5lABFEDWvj6bZX/e5ArZHLBYIVmD9x41d
+         MMP7Cyw+/eCXwcmFbVbXxIM4BYMSvhq2BU1vMN5aePqFgzihqS2bHw5CrVjydru4y/QH
+         7ESv+I8VWmh2RiZgN/E4HFl+RWwnbhEqYebrG7ORZ/MzfT2Xjf01gGO+PGKFh7fYtHId
+         o+zVcecDFwZQbBAePTanacIKVQc8LiJ2WD1Nu8U9OZ1AkRN6Gl+VppD7q5hG/EJUezRr
+         GQOg==
+X-Gm-Message-State: AOJu0Yyo/Gyp017rMLsu6McQP51jpgswMbMjGNN+5tGnTnDT9vAmKp9L
+	Wj9XP8Qz98QSuIfrn3Yb7gouUH6pFVAfgXbpnKgh9ppTR8EibljU68Rx2j3vGq8=
+X-Google-Smtp-Source: AGHT+IG9IjcQZfVwTrZS0u/E1ebQvET8jEiFldZ8xlY1mor7GtxKiiyGjhmZKyn7ZlW9NL8ZuY4JSQ==
+X-Received: by 2002:a17:907:7856:b0:a38:3ec3:9379 with SMTP id lb22-20020a170907785600b00a383ec39379mr5294511ejc.44.1707405892723;
+        Thu, 08 Feb 2024 07:24:52 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCXQ8IEO6JZFgmRiIonq1XkvroWEyaaxaFIO/nHSPzEN/V53OUkgjD9/IgkmuZOSa1S3NZCky5sIX2VEll/4k4vWQHeZuAM6/JweicEBanitnNSbsqO+ChWSVFcM9uo0LgSjdRjXss50TKrG4/9QVlidITHf3mapmm2yQvbDZ2HW2LLSf5dC3rdPSh/aS5uYPd81vTCPnPDkGNDi1QjwcjU8
+Received: from debian.fritz.box (aftr-82-135-80-180.dynamic.mnet-online.de. [82.135.80.180])
+        by smtp.gmail.com with ESMTPSA id a24-20020a1709066d5800b00a3bb2156f7asm147155ejt.185.2024.02.08.07.24.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 08 Feb 2024 07:24:52 -0800 (PST)
+From: Thorsten Blum <thorsten.blum@toblux.com>
+To: Dwaipayan Ray <dwaipayanray1@gmail.com>,
+	Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+	Joe Perches <joe@perches.com>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Thorsten Blum <thorsten.blum@toblux.com>
+Subject: [PATCH] docs: dev-tools: checkpatch.rst: Fix grammar
+Date: Thu,  8 Feb 2024 16:20:40 +0100
+Message-Id: <20240208152039.65293-1-thorsten.blum@toblux.com>
+X-Mailer: git-send-email 2.39.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-On Wed, Feb 07 2024 at 11:38, lakshmi sowjanya d. wrote:
-> From: Lakshmi Sowjanya D <lakshmi.sowjanya.d@intel.com>
->
-> Introduce an interface, ktime_real_to_base_clock() to convert realtime
-> to base clock.
->
-> Convert the base clock to the system clock using convert_base_to_cs() in
-> get_device_system_crosststamp().
->
-> Add the helper function timekeeping_clocksource_has_base(), to check
-> whether the current clocksource has the same base clock.
+- s/exists/exist/
+- s/maybe/may be/
 
-Neither ktime_real_to_base_clock() nor
-timekeeping_clocksource_has_base() are used anywhere.
+Signed-off-by: Thorsten Blum <thorsten.blum@toblux.com>
+---
+ Documentation/dev-tools/checkpatch.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-What's the point of having them in the first place?
+diff --git a/Documentation/dev-tools/checkpatch.rst b/Documentation/dev-tools/checkpatch.rst
+index c3389c6f3838..127968995847 100644
+--- a/Documentation/dev-tools/checkpatch.rst
++++ b/Documentation/dev-tools/checkpatch.rst
+@@ -168,7 +168,7 @@ Available options:
+ 
+  - --fix
+ 
+-   This is an EXPERIMENTAL feature.  If correctable errors exists, a file
++   This is an EXPERIMENTAL feature.  If correctable errors exist, a file
+    <inputfile>.EXPERIMENTAL-checkpatch-fixes is created which has the
+    automatically fixable errors corrected.
+ 
+@@ -181,7 +181,7 @@ Available options:
+ 
+  - --ignore-perl-version
+ 
+-   Override checking of perl version.  Runtime errors maybe encountered after
++   Override checking of perl version.  Runtime errors may be encountered after
+    enabling this flag if the perl version does not meet the minimum specified.
+ 
+  - --codespell
+-- 
+2.39.2
 
-Your changelog explains the WHAT but not the WHY....
-
-> +static bool convert_clock(u64 *val, u32 numerator, u32 denominator)
-> +{
-> +	u64 rem, res;
-> +
-> +	if (numerator == 0 || denominator == 0)
-> +		return false;
-
-What's wrong with the usual (!numerator || !denominator) notation?
-
-> +
-> +	res = div64_u64_rem(*val, denominator, &rem) * numerator;
-> +	*val = res + div_u64(rem * numerator, denominator);
-> +	return true;
-> +}
-> +
-> +static bool convert_base_to_cs(struct system_counterval_t *scv)
-> +{
-> +	struct clocksource *cs = tk_core.timekeeper.tkr_mono.clock;
-> +	struct clocksource_base *base = cs->base;
-> +
-> +	/* The timestamp was taken from the time keeper clock source */
-> +	if (cs->id == scv->cs_id)
-> +		return true;
-> +
-> +	/* Check whether cs_id matches the base clock */
-> +	if (!base || base->id != scv->cs_id)
-> +		return false;
-> +
-> +	/* Avoid conversion to a less precise clock */
-> +	if (scv->nsecs && cs->freq_khz != 0 && base->freq_khz < cs->freq_khz) {
-> +		if (!convert_clock(&scv->cycles, cs->freq_khz, USEC_PER_SEC))
-> +			return false;
-> +	} else {
-> +		if (scv->nsecs) {
-> +			if (!convert_clock(&scv->cycles, base->freq_khz, USEC_PER_SEC))
-> +				return false;
-> +		}
-> +		if (!convert_clock(&scv->cycles, base->numerator, base->denominator))
-> +			return false;
-> +	}
-
-The above logic makes my brain hurt.
-
-It's a reaonable requirement that cs->freq must be != 0 when sc->base !=
-NULL and then converting from nanoseconds can always use cs->freq no
-matter what the value of the base frequency is. Even for the case where
-the base frequency is larger than cs->freq because the double conversion
-does not give you more precision, right?
-
-> +	scv->cycles += base->offset;
-
-So the whole thing can be reduced to:
-
-   nom = scv->nsecs ? cs->freq_khz : base->numerator;
-   den = scv->nsecs ? USEC_PER_SEC : base->denominator;
-
-   convert(&scv->cycles, nom, den);
-   scv->cycles += base->offset;
-
-Thanks,
-
-        tglx
 
