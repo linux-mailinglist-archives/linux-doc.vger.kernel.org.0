@@ -1,129 +1,168 @@
-Return-Path: <linux-doc+bounces-8676-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-8680-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C6CB84DF76
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Feb 2024 12:11:47 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 17B0684E178
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Feb 2024 14:10:30 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 9C0441F28B09
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Feb 2024 11:11:46 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3D5291C2656F
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Feb 2024 13:10:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 54CCA2E3F2;
-	Thu,  8 Feb 2024 11:11:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F23876C65;
+	Thu,  8 Feb 2024 13:10:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aN7om1pw"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="aFIVupUA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C3EA6E2B8;
-	Thu,  8 Feb 2024 11:11:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A233574E16;
+	Thu,  8 Feb 2024 13:10:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707390675; cv=none; b=QZykDY8ZIHnQ2b+IMAdNwxo/m5JlhUA2lw1jOGOWx/nEMLTLen2/54Ltq2HLccIBRsbQvtjGTFzod1Lydt7ouNMfZ7KoPitqoxCnYjyJHjbaLViYlmUWyaAafCBl7XxF9XAfTD3TL1NaS3aRePlTleTK27g9WnXmvb9snLiSYFo=
+	t=1707397806; cv=none; b=a/8vWOkxboawhohvJcFWM3Q5R3jeN+jg9PG/ess151KovvwWKyznpCGS39NkcvDuAhK0GzgqXR0ZRsQkwMDIA8Bn+Jws48hN1JMzB7ckdmZLycCqmRdOVmjRIelxV19Fnh+p7iV1/Tup4ByNhMt8xsKj/TAErKwO9HwtR89THRA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707390675; c=relaxed/simple;
-	bh=7TN8p2o2cm1xDIfUQsYOBcvgE0rursFvpxIIGEQ5Aks=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=FCk0M82gLPiJDDKFh8spQYSy89oteNsb6j6I/ahuDyYiSkB/bpP6VBndsdoMbolTaWBxi2SfdlXfRMR0FI4dWcBdKbRHmCbla1WypQltAJN1xCkJtwd9tI1dnuVrSgBOWORuMixJsIXSgHEooac3/SjOsSOaEJNMqZppoG+vLtA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aN7om1pw; arc=none smtp.client-ip=209.85.208.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-5600c43caddso1784194a12.2;
-        Thu, 08 Feb 2024 03:11:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707390672; x=1707995472; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=dkltV/LKNYv+rODcoWYZtA6BeNijF5We+gSy0yOyWBU=;
-        b=aN7om1pwk+cOqgLLLW8ttpyi3G8nIfyUQbTKoBgpI42Y9UilelUgOXF9z6HQnqBn5T
-         lNNr0NTvf2YyAtP995klUhnTM6NMELHRjNB3hyvHhqOmuyumLi5NGRtATOmEgboJJLb0
-         rjPfUvxHXbk+HQBra5vrYfwBX3QoqJvg8ZrQlQKLa/aH5Kd5ueuFKbSRSM30iVEgI40A
-         ej4x/MfV0p8m+oSmgjztcR4uZRm9DeG5MapFD6wVr8bS6idkh7piebj8zcQobvmarZUn
-         vbz19TIx/Cuk5y7Qy3CPdAYGY2s/SyunYR5pthavn5Luzl99ooiWxC29MnMbOKc9M6RP
-         jbGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707390672; x=1707995472;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dkltV/LKNYv+rODcoWYZtA6BeNijF5We+gSy0yOyWBU=;
-        b=xHYohe9Ig5ohrTlAKqnusN2IjeJHwG41wAPqBUA8MQ8aMqtTCPZw/6p/Ka46tAUjer
-         bunVXOGbBi2+x+pbtOJkYbLhloqewJ1mIb9Q9lyav1QMhWvGaC6VeceFLO2tpKLjsHDq
-         Jts9w2er0sP4pxG2VeD/q7u8/oRGvn2iaGCdl9lbc2Ccm/Dw3bQjTTEKa0qfMfpU2n12
-         l/yT2sM2JqQ3fa7BkP54RGbQS4ZjwcD6LFAxFKC52OgqImvLrm745eqG2+20QY6cA92A
-         NhZ700SAI74uYd3TEms3cI0WeI+jAhC8Bp7WLHfnRv0fOSYHNZ9IIxrZkL3E8b8u5V0e
-         lNhg==
-X-Forwarded-Encrypted: i=1; AJvYcCXkcxON69Z+Wv/I7EZzORwjGnwK+RjBOOz86DAopPlpcbhvI0f4xyyZvQKjILpLtWCLnvGSwwNY5cktADWMGskh4+2EanPmtHLGgpGDFltbmTIef+6Fe5ceGdUQ9uVi3mdrP73pdaHvuBn/Ajm4bn36qHHIA/EvV2zwG1LXD7sDI9E8kE33SlSG
-X-Gm-Message-State: AOJu0YyvDzD/5AxYl9iHHs6oJRH5isWy3yASXo5Nn/FBbWUrp/Qmg3qx
-	ckvSe4O//eFqtxwCDV18TPGZ5Qlc4s5lnTc8PV2Sajb0PRRn1NZN
-X-Google-Smtp-Source: AGHT+IExNxDbHcLYVVbVySRZGWORe981ejf9nZ3Tj95iByf6mv66AIx7CnDeMVaPXJhy3hlNtRREeQ==
-X-Received: by 2002:a17:907:3c25:b0:a38:551d:ff1d with SMTP id gh37-20020a1709073c2500b00a38551dff1dmr3401759ejc.73.1707390671390;
-        Thu, 08 Feb 2024 03:11:11 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCXIhbezgSq5pUviM5QD+tULi2vsu2weRt7MQTg2TgJ07ngjjOJj2myeyRzken1n6fgRGqMxQuVSeWNVHbvNA4qZZkJP5O/4hMsxgB3XpN2KCcAWtD9lcTad4awznh3Xqt4ONHoYS0rDhhPaxkfjDiiDtEjZtJVj2CtihTCLpzRmfVIwJYZPl7WpZhDlfR4tsHMLVdSNVcnWuFOCxTgg7hsLE65KG1isAtpZkVVBw8unjAL3e0K2ZBE6MU/ACqLVDp9MJ10rD+ULDsaXUi0r88hfdVl4+MPZCZMXUtgMDpG3zYs0JbxO8oRf0FWuPoswdq6Xipmo3r/7f3fty7VT9jFncxgKRCGYlVTNWqsLzFZlqzk1m7G5xn7DvAfMZmhu1FmODnVJilkxhvhZq3mUJowBW2sLJXHWDXoe+P8J7ETFz6l+4D1sZOk+3Gyi8950ePUVEV3muF5wNZ0nVvgPIZJTq6pNIS5Reyzk56V/fUsBNWxlXHrpiNf45bCeS2F6QIw0wEAmqYE2TFq8d/7yvclqvlqSXL76FGWOHf2jpRCxk6d4meLQyMLl6aLrjST2FHAm9eJHC/TsIAU4pih45hZhIXSxV2I0NvzIJeZXJucnMk3nC1Kgbc1DlZDiZXo1LVZJyBvYLsotP8OqKxUWPUT+9hlgDYhZXV0G507luAa45djJWzzzRpzos8L9XpBjyIoEI/8twbxUL0XnKTyvp2mOEpDO0N32RHTH302/hDy8QTwvDaeSBCdfW2JM5+AHWONdNoT9spayByfZYKzpxUGVeqlqHZQZMImktsG2ZR8Tir1C5H1Y/Ef26R4Hpg==
-Received: from andrea ([31.189.46.254])
-        by smtp.gmail.com with ESMTPSA id oz14-20020a170906cd0e00b00a38620c3b3dsm1777453ejb.198.2024.02.08.03.11.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Feb 2024 03:11:10 -0800 (PST)
-Date: Thu, 8 Feb 2024 12:10:52 +0100
-From: Andrea Parri <parri.andrea@gmail.com>
-To: Jonas Oberhauser <jonas.oberhauser@huaweicloud.com>
-Cc: Peter Zijlstra <peterz@infradead.org>,
-	Christoph Muellner <christoph.muellner@vrull.eu>,
-	linux-riscv@lists.infradead.org, linux-kselftest@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Anup Patel <apatel@ventanamicro.com>,
-	Philipp Tomsich <philipp.tomsich@vrull.eu>,
-	Andrew Jones <ajones@ventanamicro.com>, Guo Ren <guoren@kernel.org>,
-	Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
-	Conor Dooley <conor.dooley@microchip.com>,
-	=?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@rivosinc.com>,
-	Alan Stern <stern@rowland.harvard.edu>,
-	Will Deacon <will@kernel.org>, Daniel Lustig <dlustig@nvidia.com>,
-	Brendan Sweeney <turtwig@utexas.edu>,
-	Hans Boehm <hboehm@google.com>, Andrew Waterman <andrew@sifive.com>
-Subject: Re: [RFC PATCH 0/5] RISC-V: Add dynamic TSO support
-Message-ID: <ZcS2vDZjQzDARefn@andrea>
-References: <20231124072142.2786653-1-christoph.muellner@vrull.eu>
- <20231124101519.GP3818@noisy.programming.kicks-ass.net>
- <59da3e41-abb3-405a-8f98-c74bdf26935b@huaweicloud.com>
+	s=arc-20240116; t=1707397806; c=relaxed/simple;
+	bh=6ljt3iLa1k5EaaTfYjzMvfAkx/XmTBtdjgtg/PsRZvI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=ItAQU2AKt4kHtyKrxXHERGhjyb2xQt90wha0rGVM1f5cILvcCj6yrj5Z6AZxWxHfHCi6+iRv8njJUEUFvFaxS5NMcyCWIPrhH6aYojmkL6+Ud+48saRKLxF89vae2Dm2bIRpKQtKxpkVAdBKUj0GlYPodR4Ylo3KI5VZgemTNio=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=aFIVupUA; arc=none smtp.client-ip=217.70.183.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 3440E1BF20A;
+	Thu,  8 Feb 2024 13:09:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1707397792;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=awG7COaY5LB3i7Ks32m7L3WnMQtbwasRGppvFBPBHLs=;
+	b=aFIVupUA1IGNffKpX6lp8PcRaIZoDYSAzq6E0M+65DP/wdPoeUMLWNXeuSKqeRhIHrd2pk
+	UJl8ThqeXCGkIFLF5/3mgk8QrGmhW6Yc0pc46NDJY0tSQf+Hgkpc5S2z7jOJXmkCPWQREv
+	3okNTUuWecf4AZnpJVKo2fK+7pL/jgpHvOo6dofQ2S1OfY4cuP9ZgnVTcY+vnEjd9zbiiS
+	6aHdgbKX1ekjGjpFJfLoX9pUG0ghHP1JN0XXa+OADazFnXsbc9q8QxQlZ4q/XkokeyToFD
+	bDUCaVrjX3Mba+Rqgm5TKvkA1k28gMpjBvMVfgnQvRXixgSTjLKA55QSmzZhuQ==
+From: Kory Maincent <kory.maincent@bootlin.com>
+Subject: [PATCH net-next v3 00/17] net: Add support for Power over Ethernet
+ (PoE)
+Date: Thu, 08 Feb 2024 14:08:37 +0100
+Message-Id: <20240208-feature_poe-v3-0-531d2674469e@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <59da3e41-abb3-405a-8f98-c74bdf26935b@huaweicloud.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAFbSxGUC/1WNyw7CIBQFf8WwFnN52Icr/8MYQ+nFkig0gKSm6
+ b9L2JguJyczZyURg8VILoeVBMw2Wu8KiOOB6Em5J1I7FiYcuGDAJTWo0ifgY/ZImehlD9gKCYI
+ UYw5o7FJrN+IwUYdLIveyTDYmH771JrO61yJjza6YGQU6oOxAysFw2V8H79PLupP271rK/G9zY
+ HubF/vcjJ1WuoHWqL29bdsP7EiHvvAAAAA=
+To: "David S. Miller" <davem@davemloft.net>, 
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
+ Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Luis Chamberlain <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ "Rafael J. Wysocki" <rafael@kernel.org>, Rob Herring <robh+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Oleksij Rempel <o.rempel@pengutronix.de>, Mark Brown <broonie@kernel.org>, 
+ Frank Rowand <frowand.list@gmail.com>, Andrew Lunn <andrew@lunn.ch>, 
+ Heiner Kallweit <hkallweit1@gmail.com>, 
+ Russell King <linux@armlinux.org.uk>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ devicetree@vger.kernel.org, Dent Project <dentproject@linuxfoundation.org>, 
+ Kory Maincent <kory.maincent@bootlin.com>
+X-Mailer: b4 0.12.4
+X-GND-Sasl: kory.maincent@bootlin.com
 
-On Fri, Nov 24, 2023 at 12:04:09PM +0100, Jonas Oberhauser wrote:
-> Unfortunately, at least last time I checked RISC-V still hadn't gotten such
-> instructions.
-> What they have is the *semantics* of the instructions, but no actual opcodes
-> to encode them.
-> I argued for them in the RISC-V memory group, but it was considered to be
-> outside the scope of that group.
+This patch series aims at adding support for PoE (Power over Ethernet),
+based on the already existing support for PoDL (Power over Data Line)
+implementation. In addition, it adds support for two specific PoE
+controller, the Microchip PD692x0 and the TI TPS23881.
 
-(Sorry for the late, late reply; just recalled this thread...)
+In detail:
+- Patch 1 to 13 prepare net to support PoE devices.
+- Patch 14 and 15 add PD692x0 PoE PSE controller driver and its binding.
+- Patch 16 and 17 add TI TPS23881 PSE controller driver and its binding.
 
-That's right.  AFAICT, the discussion about the native load-acquire
-and store-release instructions was revived somewhere last year within
-the RVI community, culminating in the so called Zalasr-proposal [1];
-Brendan, Hans and Andrew (+ Cc) might be able to provide more up-to-
-date information about the status/plans for that proposal.
+Changes in v2:
+- Extract "firmware_loader: Expand Firmware upload error codes patches" to
+  send it alone and get it merge in an immutable branch.
+- Add "c33" prefix for PoE variables and enums.
+- Enhance few comments.
+- Add PSE Documentation.
+- Make several changes in pd692x0 driver, mainly for readibility.
+- Link to v1: https://lore.kernel.org/r/20231116-feature_poe-v1-0-be48044bf249@bootlin.com
 
-(Remark that RISC-V did introduce LR/SCs and AMOs instructions with
-acquire/release semantics separately, cf. the so called A-extension.)
+Changes in v3:
+- Add patches to add Oleksij and myself to PSE MAINTAINERS.
+- Add patches to add pse devlink.
+- Add TI TPS23881 PSE controller driver with its binding.
+- Replace pse_get_types helper by pse_has_podl and pse_has_c33
+- Changed the PSE core bindings.
+- Add a setup_pi_matrix callback.
+- Register regulator for each PSE PI (Power Interface).
+- Changed the PD692x0 bindings.
+- Updated PD692x0 drivers to new bindings and PSE PI description.
+- Updated PD692x0 drivers according to the reviews and made fixes.
+- Link to v2: https://lore.kernel.org/r/20231201-feature_poe-v2-0-56d8cac607fa@bootlin.com
 
-  Andrea
+Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+---
+Kory Maincent (17):
+      MAINTAINERS: net: Add Oleksij to pse-pd maintainers
+      of: property: Add fw_devlink support for pse parent
+      net: pse-pd: Rectify and adapt the naming of admin_cotrol member of struct pse_control_config
+      ethtool: Expand Ethernet Power Equipment with c33 (PoE) alongside PoDL
+      net: pse-pd: Introduce PSE types enumeration
+      net: ethtool: pse-pd: Expand pse commands with the PSE PoE interface
+      netlink: specs: Modify pse attribute prefix
+      netlink: specs: Expand the pse netlink command with PoE interface
+      MAINTAINERS: Add myself to pse networking maintainer
+      dt-bindings: net: pse-pd: Add another way of describing several PSE PIs
+      net: pse-pd: Add support for PSE PIs
+      net: pse-pd: Add support for setup_pi_matrix callback
+      net: pse-pd: Use regulator framework within PSE framework
+      dt-bindings: net: pse-pd: Add bindings for PD692x0 PSE controller
+      net: pse-pd: Add PD692x0 PSE controller driver
+      dt-bindings: net: pse-pd: Add bindings for TPS23881 PSE controller
+      net: pse-pd: Add TI TPS23881 PSE controller driver
 
-[1] https://github.com/mehnadnerd/riscv-zalasr
+ .../bindings/net/pse-pd/microchip,pd692x0.yaml     |  157 +++
+ .../bindings/net/pse-pd/pse-controller.yaml        |  101 +-
+ .../bindings/net/pse-pd/ti,tps2388x.yaml           |  112 ++
+ Documentation/netlink/specs/ethtool.yaml           |   33 +-
+ Documentation/networking/ethtool-netlink.rst       |   20 +
+ Documentation/networking/index.rst                 |    1 +
+ Documentation/networking/pse-pd/index.rst          |    9 +
+ Documentation/networking/pse-pd/introduction.rst   |   73 ++
+ MAINTAINERS                                        |    8 +
+ drivers/net/mdio/fwnode_mdio.c                     |   29 +-
+ drivers/net/pse-pd/Kconfig                         |   20 +
+ drivers/net/pse-pd/Makefile                        |    2 +
+ drivers/net/pse-pd/pd692x0.c                       | 1223 ++++++++++++++++++++
+ drivers/net/pse-pd/pse_core.c                      |  491 +++++++-
+ drivers/net/pse-pd/pse_regulator.c                 |   49 +-
+ drivers/net/pse-pd/tps23881.c                      |  818 +++++++++++++
+ drivers/of/property.c                              |    2 +
+ include/linux/pse-pd/pse.h                         |   89 +-
+ include/uapi/linux/ethtool.h                       |   43 +
+ include/uapi/linux/ethtool_netlink.h               |    3 +
+ include/uapi/linux/pse.h                           |   23 +
+ net/ethtool/pse-pd.c                               |   60 +-
+ 22 files changed, 3246 insertions(+), 120 deletions(-)
+---
+base-commit: 05f5c48cfac2335df9bb76fb6d49703670ce8b00
+change-id: 20231024-feature_poe-139490e73403
+
+Best regards,
+-- 
+Köry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
+
 
