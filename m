@@ -1,154 +1,117 @@
-Return-Path: <linux-doc+bounces-9094-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9096-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2E8C85229E
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 00:37:14 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC2248522B9
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 00:44:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 59B3A28456C
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Feb 2024 23:37:13 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6224528484C
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Feb 2024 23:44:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 023D6524A7;
-	Mon, 12 Feb 2024 23:36:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F10905025A;
+	Mon, 12 Feb 2024 23:44:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="SyhaQSKV"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="rUiMa8Qs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out-173.mta0.migadu.com (out-173.mta0.migadu.com [91.218.175.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D84251C34
-	for <linux-doc@vger.kernel.org>; Mon, 12 Feb 2024 23:36:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCFA44F8A9
+	for <linux-doc@vger.kernel.org>; Mon, 12 Feb 2024 23:44:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707780998; cv=none; b=QCqyZK2PrY3uWQhNqHRq6NDOQftH96U8h9Sb2LhFNN+yFBWh1qTP6pzYtu5r+h2iZui8q7UcQmdItuCEDq5sX+2pHbeA42qeX0guP5dQgtfB34U6dRm6pLQu+Cu6oTlChdVEvEGWoF0JNtlpNCYMvb1OPHiPix/unY2UVkbt/1Q=
+	t=1707781477; cv=none; b=GJDBU1MIbHg0KQHjFLKx6qHxpXDj+zU2MhA/7l252UxsS/K3U+w7l0MkeLEbfYmg3Xnyv9OpoH3Kn5fZehw8bm7GWZ0eROuonjsKJNrDQkGFCWMLYwo6vlEdGpOktX4HYK1zCNV48Xe354G7UxAQgvgOrzfNCg6s3i1pHrjq3io=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707780998; c=relaxed/simple;
-	bh=teNltxEe5ATnvQPKeLgPp6b3k0t1rOkLmnDUUB6OJdA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=ekSE7LNiTs/Y9P41nvP9mJR6NhyWIaQ9f2xCmIDItJCy6Z1G6mnKdASUH+VHZ0TeNLgidjHTKrMhCGGXUmJvjdlk0iqw0Nx0JfcCFjqm0z0K4ewn9hq2ulNSARV4mb2xNMkTon16R5fVA6OEOwAdm51IHXRXBXW8JihgB7pw4wg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=SyhaQSKV; arc=none smtp.client-ip=209.85.214.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-1d7881b1843so34242895ad.3
-        for <linux-doc@vger.kernel.org>; Mon, 12 Feb 2024 15:36:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1707780997; x=1708385797; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XqFsnYbayaROauH/yeBk3F9rNPdoEfeRLt6dO0Xr65g=;
-        b=SyhaQSKVsRjACfZFlFSKSy7SL9N+85ZxAdTY2DWkOLN2yVDSjGxHNwL3ESYve0eSx8
-         OfHGpwAeBXkxGWGjr5N+0Bex3C2AnLqA//dr21188NrMiYV3Jze5GfBTXMZQdsN+ktdC
-         PRq+m/lC1MvzdWs06PnqUukKaeplpL6QEAsngN7BLIz9HqMfR0EcxV8dmTgMe+j3zspd
-         KrLer2StPaGW3jVhQJhsLtyfvSK2f2snkZWP5dHAEizaOcfjWQaJXISB1+zOBYwOdcCl
-         5dqB6Aa1p/NmM7cJoIiQyb84Wqch1PM/jPy3796pEAoVMmOXzgkYD3YCYFrxnz2C8apl
-         E6rw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707780997; x=1708385797;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=XqFsnYbayaROauH/yeBk3F9rNPdoEfeRLt6dO0Xr65g=;
-        b=P/H3nU5XkcczZozy8+9SuJ/kdquu1CxHduwi7HM4gXVszv0tB6szh0Vafq/47Yf/fU
-         Z3PcMSgLEaMlnWloBveDdgoO53R7Mplvsl90g6XRNUJuWIRJtbo4STBJNs0BNiol1aMu
-         54CRBbulizJs4Ayx1gDtnHwIxvmEmEEG6aJwHnTr8LyA/02O27Gy9uCqc/7iO6RrEqVY
-         xg9IzOgEaopu73sq4cvbhm7E7rCLghP3oZ9xwpuNbEqhz1Mbx97D5b2m2XpGp5mo8vRg
-         kHTTWiZL2niMxsf7K7xFaQinVBMc2jo9HzxK5bt6sAebKvMD115WZLNDj2E8Vj5D8xOE
-         x+xg==
-X-Forwarded-Encrypted: i=1; AJvYcCWdehBm9d5e202QJUbW0AHw9R5rLYhG6XZl8Nxh73fm5WHtNBVLzeXYJct7fXNRlL3WxmhdLdrxIlJLT+5crJ5kFtkqd6BJpP1j
-X-Gm-Message-State: AOJu0YzBcXxvOPTz/15edvuMuBdA4WRNMuplyInS9mgaq8whbjQdZfUd
-	WAvtONy8bQYYLcTryrOqwvkLj122SslmFfDHrA6xG7Bm35HsTI+5am32sieFZ1M=
-X-Google-Smtp-Source: AGHT+IEtzelG1aBj8MhHUkWpgbenml+rvNSXi4YOjQkaIXkajpKLpyf9eRWHPskzRMV/SZLXbDR4ug==
-X-Received: by 2002:a17:902:ecc1:b0:1d7:b1f:be9e with SMTP id a1-20020a170902ecc100b001d70b1fbe9emr9547643plh.66.1707780996763;
-        Mon, 12 Feb 2024 15:36:36 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCXmhahLkBycaRs+zzoTPL0pP1/Wbhljlk09mGvZl2U3BYlRz5afgzfA4K6oqUcu0CEflM4zj5+TqIePAEv1u9fURwIXrlf9AzC8VlXIv3fVP2DyI2ElWKkAeanWCs3jfOGB55CzBhMOKNK7t91AFuCyfpr4hG54nAJds3f4sSV/prcfAWmcrnbBMVlm49hPtTlMiLw3bu4G8rxu4OuobxGyLSqhOg50X9uwZDi/69PwQrtG4GAJTMhS1bmhY8NjeEdYt7zKMUFhPBN5NmfRWbF3Ci7F2uELrXj92QbZKRN/KTacsTyfNLYjc/k9bL7lSTdk+FXPauBA/9p9ZxViYmvh+WCSf4bb33CHZnad4402Ud3kDU2e9RlKDluUzWsPPLzK4MwXbl4=
-Received: from charlie.ba.rivosinc.com ([64.71.180.162])
-        by smtp.gmail.com with ESMTPSA id b5-20020a170902650500b001da153682c5sm888693plk.261.2024.02.12.15.36.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Feb 2024 15:36:36 -0800 (PST)
-From: Charlie Jenkins <charlie@rivosinc.com>
-Date: Mon, 12 Feb 2024 15:36:29 -0800
-Subject: [PATCH v11 4/4] cpumask: Add assign cpu
+	s=arc-20240116; t=1707781477; c=relaxed/simple;
+	bh=cw39m76UFq9tS5p8ZskWMb2lcc6vwhiwppLpIPjMO3Q=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=IOALIvola611L6bMrCDge9ycmueiFKQm1nsn5kekmzY04C8OcGZa7R7ZWmkZjUBmJoH1SNisAz5Uy6T3wc1qIfasqZqctd8WQTQrBITKndIKKBsSA2nMwKwlAuMk1gtVzRPSfPvgFGtqqBSI+VWGC+ReGlts7EoPyIE9VHlTqo0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=rUiMa8Qs; arc=none smtp.client-ip=91.218.175.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Date: Mon, 12 Feb 2024 15:44:19 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1707781472;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ZavUZpfe4iXVeRQFF+1YAOemYZZVmPWyKDi8FAoNTa0=;
+	b=rUiMa8QsnFQtpiR5C1+Uh/5PkvOSlnbxRtk2SQk/Z8VQaTr2nGOj+Kf6LQkivTtOFVviOx
+	GtgnjamJJ3OTOqokx2EVRawtG0F5T88rRMMmwZRO8BLNIPMXRuYGO00y68upFxf8CSktjH
+	smPhG3fjddzVZacfdEptan3ZSePE3uY=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Oliver Upton <oliver.upton@linux.dev>
+To: Easwar Hariharan <eahariha@linux.microsoft.com>
+Cc: Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Marc Zyngier <maz@kernel.org>,
+	Andre Przywara <andre.przywara@arm.com>,
+	Rob Herring <robh@kernel.org>, Zenghui Yu <yuzenghui@huawei.com>,
+	Mark Rutland <mark.rutland@arm.com>,
+	"moderated list:ARM64 PORT (AARCH64 ARCHITECTURE)" <linux-arm-kernel@lists.infradead.org>,
+	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>,
+	Anshuman Khandual <anshuman.khandual@arm.com>,
+	stable@vger.kernel.org
+Subject: Re: [PATCH] arm64: Subscribe Microsoft Azure Cobalt 100 to ARM
+ Neoverse N2 errata
+Message-ID: <ZcqtUxhqUbYoRH-G@linux.dev>
+References: <20240212232909.2276378-1-eahariha@linux.microsoft.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240212-fencei-v11-4-e1327f25fe10@rivosinc.com>
-References: <20240212-fencei-v11-0-e1327f25fe10@rivosinc.com>
-In-Reply-To: <20240212-fencei-v11-0-e1327f25fe10@rivosinc.com>
-To: Paul Walmsley <paul.walmsley@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
- Jonathan Corbet <corbet@lwn.net>, Conor Dooley <conor.dooley@microchip.com>, 
- =?utf-8?q?Cl=C3=A9ment_L=C3=A9ger?= <cleger@rivosinc.com>, 
- Atish Patra <atishp@atishpatra.org>, Randy Dunlap <rdunlap@infradead.org>, 
- Alexandre Ghiti <alex@ghiti.fr>
-Cc: linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org, 
- linux-doc@vger.kernel.org, Charlie Jenkins <charlie@rivosinc.com>
-X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1707780989; l=1797;
- i=charlie@rivosinc.com; s=20231120; h=from:subject:message-id;
- bh=teNltxEe5ATnvQPKeLgPp6b3k0t1rOkLmnDUUB6OJdA=;
- b=EiKlcL1ulk4DvUiCSUgvbFtR389U08UGs9J+Mx1NjicMNyA7ytjbg4bgirWaWZZtdE5HGgwHU
- EVUxZnpx4C/A+JHiRo45OTnP3oYSGtoMtT2ZFchA7WKDMysLkz7sWPx
-X-Developer-Key: i=charlie@rivosinc.com; a=ed25519;
- pk=t4RSWpMV1q5lf/NWIeR9z58bcje60/dbtxxmoSfBEcs=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240212232909.2276378-1-eahariha@linux.microsoft.com>
+X-Migadu-Flow: FLOW_OUT
 
-Standardize an assign_cpu function for cpumasks.
+Hi Easwar,
 
-Signed-off-by: Charlie Jenkins <charlie@rivosinc.com>
----
- arch/riscv/mm/cacheflush.c |  2 +-
- include/linux/cpumask.h    | 16 ++++++++++++++++
- 2 files changed, 17 insertions(+), 1 deletion(-)
+On Mon, Feb 12, 2024 at 11:29:06PM +0000, Easwar Hariharan wrote:
+> Add the MIDR value of Microsoft Azure Cobalt 100, which is a Microsoft
+> implemented CPU based on r0p0 of the ARM Neoverse N2 CPU, and therefore
+> suffers from all the same errata.
 
-diff --git a/arch/riscv/mm/cacheflush.c b/arch/riscv/mm/cacheflush.c
-index 6513a0ab8655..d10c2cba8aff 100644
---- a/arch/riscv/mm/cacheflush.c
-+++ b/arch/riscv/mm/cacheflush.c
-@@ -234,7 +234,7 @@ int riscv_set_icache_flush_ctx(unsigned long ctx, unsigned long scope)
- 			stale_cpu = cpumask_test_cpu(smp_processor_id(), mask);
- 
- 			cpumask_setall(mask);
--			assign_bit(cpumask_check(smp_processor_id()), cpumask_bits(mask), stale_cpu);
-+			cpumask_assign_cpu(smp_processor_id(), mask, stale_cpu);
- 			break;
- 		case PR_RISCV_SCOPE_PER_THREAD:
- 			current->thread.force_icache_flush = false;
-diff --git a/include/linux/cpumask.h b/include/linux/cpumask.h
-index cfb545841a2c..1b85e09c4ba5 100644
---- a/include/linux/cpumask.h
-+++ b/include/linux/cpumask.h
-@@ -492,6 +492,22 @@ static __always_inline void __cpumask_clear_cpu(int cpu, struct cpumask *dstp)
- 	__clear_bit(cpumask_check(cpu), cpumask_bits(dstp));
- }
- 
-+/**
-+ * cpumask_assign_cpu - assign a cpu in a cpumask
-+ * @cpu: cpu number (< nr_cpu_ids)
-+ * @dstp: the cpumask pointer
-+ * @bool: the value to assign
-+ */
-+static __always_inline void cpumask_assign_cpu(int cpu, struct cpumask *dstp, bool value)
-+{
-+	assign_bit(cpumask_check(cpu), cpumask_bits(dstp), value);
-+}
-+
-+static __always_inline void __cpumask_assign_cpu(int cpu, struct cpumask *dstp, bool value)
-+{
-+	__assign_bit(cpumask_check(cpu), cpumask_bits(dstp), value);
-+}
-+
- /**
-  * cpumask_test_cpu - test for a cpu in a cpumask
-  * @cpu: cpu number (< nr_cpu_ids)
+Can you comment at all on where one might find this MIDR? That is, does
+your hypervisor report the native MIDR of the implementation or does it
+repaint it as an Arm Neoverse N2 (0x410FD490)?
+
+> diff --git a/arch/arm64/include/asm/cputype.h b/arch/arm64/include/asm/cputype.h
+> index 7c7493cb571f..a632a7514e55 100644
+> --- a/arch/arm64/include/asm/cputype.h
+> +++ b/arch/arm64/include/asm/cputype.h
+> @@ -61,6 +61,7 @@
+>  #define ARM_CPU_IMP_HISI		0x48
+>  #define ARM_CPU_IMP_APPLE		0x61
+>  #define ARM_CPU_IMP_AMPERE		0xC0
+> +#define ARM_CPU_IMP_MICROSOFT		0x6D
+>  
+>  #define ARM_CPU_PART_AEM_V8		0xD0F
+>  #define ARM_CPU_PART_FOUNDATION		0xD00
+> @@ -135,6 +136,8 @@
+>  
+>  #define AMPERE_CPU_PART_AMPERE1		0xAC3
+>  
+> +#define MSFT_CPU_PART_AZURE_COBALT_100	0xD49 /* Based on r0p0 of ARM Neoverse N2 */
+> +
+>  #define MIDR_CORTEX_A53 MIDR_CPU_MODEL(ARM_CPU_IMP_ARM, ARM_CPU_PART_CORTEX_A53)
+>  #define MIDR_CORTEX_A57 MIDR_CPU_MODEL(ARM_CPU_IMP_ARM, ARM_CPU_PART_CORTEX_A57)
+>  #define MIDR_CORTEX_A72 MIDR_CPU_MODEL(ARM_CPU_IMP_ARM, ARM_CPU_PART_CORTEX_A72)
+> @@ -193,6 +196,7 @@
+>  #define MIDR_APPLE_M2_BLIZZARD_MAX MIDR_CPU_MODEL(ARM_CPU_IMP_APPLE, APPLE_CPU_PART_M2_BLIZZARD_MAX)
+>  #define MIDR_APPLE_M2_AVALANCHE_MAX MIDR_CPU_MODEL(ARM_CPU_IMP_APPLE, APPLE_CPU_PART_M2_AVALANCHE_MAX)
+>  #define MIDR_AMPERE1 MIDR_CPU_MODEL(ARM_CPU_IMP_AMPERE, AMPERE_CPU_PART_AMPERE1)
+> +#define MIDR_MICROSOFT_AZURE_COBALT_100 MIDR_CPU_MODEL(ARM_CPU_IMP_MICROSOFT, MSFT_CPU_PART_AZURE_COBALT_100)
+
+nitpick: consistently use the abbreviated 'MSFT' for all the definitions
+you're adding.
 
 -- 
-2.43.0
-
+Thanks,
+Oliver
 
