@@ -1,250 +1,153 @@
-Return-Path: <linux-doc+bounces-9011-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9013-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56332851B91
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Feb 2024 18:33:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33A31851BEC
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Feb 2024 18:47:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0C6D2287F7B
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Feb 2024 17:33:50 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DF44C2832B8
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Feb 2024 17:47:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DDB723FB0C;
-	Mon, 12 Feb 2024 17:33:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5C6D23F9D3;
+	Mon, 12 Feb 2024 17:46:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="GEnv0Joe"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="UHgbx6Bb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net [217.70.183.193])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 752BD3F8DE;
-	Mon, 12 Feb 2024 17:33:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.193
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FFAA3F9D7
+	for <linux-doc@vger.kernel.org>; Mon, 12 Feb 2024 17:46:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707759197; cv=none; b=CRCjSXQmT2dt3jmXdGlpl/THZp3Rp+QfduG/8D4i4HqjXhtLTJ5AeJw4eXCy5RT7roncMjrEbBSh2Bk4dKHzxbrPz6b8AfpX5yL2qTAI0u/TjYHdTFXmDW7AbH/mBZTPfZUuPq7+xuYh0TxG3KL2jdyaCzu1qg358zs/hyhDj6s=
+	t=1707760002; cv=none; b=DwH7voReyBgjcdoLH5WUxEMmOIMQGILix8xy2vP6dDtgUWnJnK14Ov5IOrG6QE4yPZusg/qZKYB8R1kbDHuJ086p3E/ZXFKWRCnAeyZogl/GNKCZjT7orOSQgeNGxhpYCIDUFVfeSKcujQj9Otzui3jYXu8FXFoER9oRawvIq3U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707759197; c=relaxed/simple;
-	bh=i3tBLXpDgL97ApAAc/myRBKDc6BXBci9AQkztMAQQSg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=iXouoHfpwbwqGkSIC7cy9t0KOJBK8Hk3dTaNusbwBoHYCsq8aX+BsjNGqD9phDUdBVNYj+0JcfRb8IKAhMjRgmb3NYznoPvBOiJcOJz2VYH0hwAe6mGhDPGkzW7eaFq1adlhpoQyjkfjU7A7jpcJkQPpdmCoD4nwCxjOG3HBtxI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=GEnv0Joe; arc=none smtp.client-ip=217.70.183.193
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 0051A24000C;
-	Mon, 12 Feb 2024 17:33:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1707759193;
+	s=arc-20240116; t=1707760002; c=relaxed/simple;
+	bh=CVNLoBTpg3SuaSY3T7L6dyU4fC9xnaUQyseVWU7yx70=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=UCo56D1ShFUk68iUKlfwaYzOLD8yV14eqM45dwzCXADbJoeobJ59QGqi2IXvpB3SQJrctU0+9ukHUVwgoZbQ+n5ROsRLHzAIPnBgBnLJ+7cLpKk1qjtO23T3X36zaDQPNAcI7BTbN9i6tcIJdI2Raz7HH1flHE4bT95kksolaOQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=UHgbx6Bb; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1707759999;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=OqMyrFgvZSVFVEQbpSUBQUwWGZOOdWjRIaxjKm9ptpQ=;
-	b=GEnv0JoelA7Iu+UQnmNreAfbqeUVGbH+VJFW0Wx2kgYwoVTBYxA0U7pQj3bMCI+KEqZDtJ
-	LEO5s6MRucjZqsXsB4P5J9da01tihMx3i8B3bb3f4431i4EPKv3GDVqlHyEcgeGxIQSikC
-	Yxk4xi+uhdBt2TrAdqESawJ1JoO6giLawy/hFG7hxaihEg3Nn70U9s9u3puwupSRw0mlAb
-	l4cypgQHHnNOtRQKCEb+k6Cp/sN0djKByZ1Vo8++hUbha+INNv9GE1Z/OX1evbO499z6K/
-	So2MMF+B8L9i/s0qXVGdKY+8kLtqvIkb3DnkiTUMcPNB0TZadQCSOKe5yjMhog==
-From: Maxime Chevallier <maxime.chevallier@bootlin.com>
-To: Andrew Lunn <andrew@lunn.ch>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	davem@davemloft.net,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Horatiu Vultur <horatiu.vultur@microchip.com>,
-	Richard Cochran <richardcochran@gmail.com>
-Cc: Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	UNGLinuxDriver@microchip.com,
-	netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	thomas.petazzoni@bootlin.com,
-	=?UTF-8?q?K=C3=B6ry=20Maincent?= <kory.maincent@bootlin.com>
-Subject: [PATCH net-next 3/3] net: phy: micrel: Add QUSGMII support and PCH extension
-Date: Mon, 12 Feb 2024 18:33:06 +0100
-Message-ID: <20240212173307.1124120-4-maxime.chevallier@bootlin.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240212173307.1124120-1-maxime.chevallier@bootlin.com>
-References: <20240212173307.1124120-1-maxime.chevallier@bootlin.com>
+	bh=CVNLoBTpg3SuaSY3T7L6dyU4fC9xnaUQyseVWU7yx70=;
+	b=UHgbx6BbnjbNYs+ohegzBhqpL6X+8W6y35iIfSpL92Y48XlaFO9oToLFsR/VYarVW9Xxo6
+	DGg41vERhWLQikOYt2fHPrHqEbVZD1eH+Mgf80fNcZtd4Ybx2DsYb0kRI4uxg75U97Hw/O
+	CcEEhEI1iMnokiAVYMxKbVmEkFMikVI=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-465-SeqjdsYPMeWz7mc1GzDPdA-1; Mon, 12 Feb 2024 12:46:38 -0500
+X-MC-Unique: SeqjdsYPMeWz7mc1GzDPdA-1
+Received: by mail-lj1-f200.google.com with SMTP id 38308e7fff4ca-2d0aafebedbso29588161fa.1
+        for <linux-doc@vger.kernel.org>; Mon, 12 Feb 2024 09:46:37 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1707759996; x=1708364796;
+        h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=CVNLoBTpg3SuaSY3T7L6dyU4fC9xnaUQyseVWU7yx70=;
+        b=qnqyfl8WCgDtDv02smw4wohNojPcE05bFXNZh4BbwwGuyEmFSq/QAQLJEu4RRgzz4M
+         olMnOedfrS7FnJTUiP5afM9hasqk9XLsLIxC3mgQ/MSHeStD+X/Gx6OnTEV4sADttsON
+         pz/qaTOCSxtjGld7hbCoFSlCVboWUTiL/krewqhZaFzGHjO+x0xBFTsYNaXP+zEmZV1t
+         wETYtNtDGDVjAV9EQdTktG/gKORJ0HE96kN6C6UkYlhZQpFM3A3S+Ri3p0SW+5Tk9CAb
+         gAdok4Qu65CPBiTxnXsV3xJg30vKW6PIn/fjznOzeV/UE89mIhW+Bt+kboR2GFnOEMPr
+         zwzg==
+X-Gm-Message-State: AOJu0YxepZ0Fa5bJsS+bwVn40uKS+68QQXL3qIWo6i9CHyWooZn0BAwy
+	MKM8XizpYq6wjGmq80yTxFjykrWVPLGOX4yrSqgEZ6mtKuovOO14MbZajKBd3G+1F+eRC5Owenv
+	fH791199K+4PyMSaCYFMBIE4c40OXG0hD/eOprqjzK4I4RVz/3iSPSVBcTKXHCfMNwQ==
+X-Received: by 2002:a2e:96d7:0:b0:2d0:9f3f:7454 with SMTP id d23-20020a2e96d7000000b002d09f3f7454mr4537352ljj.23.1707759996103;
+        Mon, 12 Feb 2024 09:46:36 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEDLaOFvqDM4HNn1dbpMZ9TA7ctF0dgjgp2YSVWd/JfhR1n+VdcVyLbB+7+AP3nkXqAaDCXgQ==
+X-Received: by 2002:a2e:96d7:0:b0:2d0:9f3f:7454 with SMTP id d23-20020a2e96d7000000b002d09f3f7454mr4537328ljj.23.1707759995656;
+        Mon, 12 Feb 2024 09:46:35 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCXTyxnX7RzEvixrd6bUAlXbwyVs3W0zBmUf9jJ39surd7MmbJS2lkLYS5l0/+iB2U+XYD4n3sYblzbkOXb6S+oYnDg3wUkn6ciQ/6eX/w2chonC7hWY1TigDO15pkD9rstm2hi6AWK+fJu6IS9NiUi73JpwUEHHs9G2o5rU7P4xGS5Pb6enIHJEKx9rTArFhitByK9sOZHFpBe50yt1tGYcw5JtDsLNzadXE9jKs5ea5qllU79y9M5RNOvms6yWqxp6+fya2BsRzEMouWNFLCq15EOIKIl/ACTcCEXn4BHLnKCkTtM+RNPN9xFcpjyKuN5TFWsXAJVm2VSkyE8gsXJb27j0GtVOydZvbUvgcxyUMctXLeEj1ForVbvJ5FFQZUSngYvjsMGTuoAhz4YG/99py0ffM1Lhm5jRmSvI1Qtp2bvps1iacY+2huSS8dmRtxGX5FLZ4xHJ1jnYLdKQF1FcCFSq8sN1UL30PmURAv3S6tkHNplmWgPGypF6xdivX5XFa8cbmeGXs3e2//wdfKBIxIjAGbtXsRHJRaOKRr+hTrFtQ/Sl1QnSu3eV9JRBMnts2My0ZZCqOmMfl26hyhJB9bzGNhzoPi6AkI2XlCjAwcA/0/vpfHCwn5wuDso=
+Received: from alrua-x1.borgediget.toke.dk ([2a0c:4d80:42:443::2])
+        by smtp.gmail.com with ESMTPSA id fd9-20020a056402388900b005607f899175sm2968463edb.70.2024.02.12.09.46.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Feb 2024 09:46:35 -0800 (PST)
+Received: by alrua-x1.borgediget.toke.dk (Postfix, from userid 1000)
+	id 0396C10F55AE; Mon, 12 Feb 2024 18:46:34 +0100 (CET)
+From: Toke =?utf-8?Q?H=C3=B8iland-J=C3=B8rgensen?= <toke@redhat.com>
+To: Benjamin Tissoires <benjamin.tissoires@redhat.com>
+Cc: Benjamin Tissoires <bentiss@kernel.org>, Alexei Starovoitov
+ <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, John Fastabend
+ <john.fastabend@gmail.com>, Andrii Nakryiko <andrii@kernel.org>, Martin
+ KaFai Lau <martin.lau@linux.dev>, Eduard Zingerman <eddyz87@gmail.com>,
+ Song Liu <song@kernel.org>, Yonghong Song <yonghong.song@linux.dev>, KP
+ Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@google.com>, Hao Luo
+ <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>, Jiri Kosina
+ <jikos@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
+ <shuah@kernel.org>, bpf@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-input@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH RFC bpf-next 0/9] allow HID-BPF to do device IOs
+In-Reply-To: <CAO-hwJLvEGNRXc8G2PR+AQ6kJg+k5YqSt3F7LCSc0zWnmFfe5g@mail.gmail.com>
+References: <20240209-hid-bpf-sleepable-v1-0-4cc895b5adbd@kernel.org>
+ <87bk8pve2z.fsf@toke.dk>
+ <CAO-hwJ+UeaBydN9deA8KBbgBiC_UCt6oXX-wGnNuSr8fhUrkXw@mail.gmail.com>
+ <875xyxva9u.fsf@toke.dk>
+ <CAO-hwJLvEGNRXc8G2PR+AQ6kJg+k5YqSt3F7LCSc0zWnmFfe5g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Date: Mon, 12 Feb 2024 18:46:34 +0100
+Message-ID: <87r0hhfudh.fsf@toke.dk>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-GND-Sasl: maxime.chevallier@bootlin.com
+Content-Type: text/plain
 
-This commit adds support for the PCH extension in the Lan8814 PHY,
-allowing the PHY to report RX timestamps to the MAC in the ethernet
-preamble.
+Benjamin Tissoires <benjamin.tissoires@redhat.com> writes:
 
-When using the PCH extension, the PHY will only report the nanoseconds
-part of the timestamp in-band, and the seconds part out-of-band.
-The main goal in the end is to lower the pressure on the MDIO bus, which
-may get pushed to its limit on 48 ports switches doing PTP at a high
-rate.
+[...]
+>> IIUC, the bpf_timer callback is just a function (subprog) from the
+>> verifier PoV, so it is verified as whatever program type is creating the
+>> timer. So in other words, as long as you setup the timer from inside a
+>> tracing prog type, you should have access to all the same kfuncs, I
+>> think?
+>
+> Yep, you are correct. But as mentioned above, I am now in trouble with
+> the sleepable state:
+> - I need to call timer_start() from a non sleepable tracing function
+> (I'm in hard IRQ when dealing with a physical device)
+> - but then, ideally, the callback function needs to be tagged as a
+> sleepable one, so I can export my kfuncs which are doing kzalloc and
+> device IO as such.
+>
+> However, I can not really teach the BPF verifier to do so:
+> - it seems to check for the callback first when it is loaded, and
+> there is no SEC() equivalent for static functions
+> - libbpf doesn't have access to the callback as a prog as it has to be
+> a static function, and thus isn't exported as a full-blown prog.
+> - the verifier only checks for the callback when dealing with
+> BPF_FUNC_timer_set_callback, which doesn't have a "flag" argument
+> (though the validation of the callback has already been done while
+> checking it first, so we are already too late to change the sleppable
+> state of the callback)
+>
+> Right now, the only OK-ish version I have is declaring the kfunc as
+> non-sleepable, but checking that we are in a different context than
+> the IRQ of the initial event. This way, I am not crashing if this
+> function is called from the initial IRQ, but will still crash if used
+> outside of the hid context.
+>
+> This is not satisfactory, but I feel like it's going to be hard to
+> teach the verifier that the callback function is sleepable in that
+> case (maybe we could suffix the callback name, like we do for
+> arguments, but this is not very clean either).
 
-Signed-off-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
----
- drivers/net/phy/micrel.c | 84 ++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 80 insertions(+), 4 deletions(-)
+The callback is only set once when the timer is first setup; I *think*
+it works to do the setup (bpf_timer_init() and bpf_timer_set_callback())
+in the context you need (from a sleepable prog), but do the arming
+(bpf_timer_start()) from a different program that is not itself sleepable?
 
-diff --git a/drivers/net/phy/micrel.c b/drivers/net/phy/micrel.c
-index 9b6973581989..d8084174c5a7 100644
---- a/drivers/net/phy/micrel.c
-+++ b/drivers/net/phy/micrel.c
-@@ -149,6 +149,10 @@
- #define LTC_HARD_RESET				0x023F
- #define LTC_HARD_RESET_				BIT(0)
- 
-+#define TSU_GENERAL_CONFIG			0x2C0
-+#define TSU_GENERAL_CONFIG_TSU_ENABLE_		BIT(0)
-+#define TSU_GENERAL_CONFIG_TSU_ENABLE_PCH_	BIT(1)
-+
- #define TSU_HARD_RESET				0x02C1
- #define TSU_HARD_RESET_				BIT(0)
- 
-@@ -174,6 +178,7 @@
- 
- #define PTP_OPERATING_MODE			0x0241
- #define PTP_OPERATING_MODE_STANDALONE_		BIT(0)
-+#define PTP_OPERATING_MODE_PCH_			BIT(1)
- 
- #define PTP_TX_MOD				0x028F
- #define PTP_TX_MOD_TX_PTP_SYNC_TS_INSERT_	BIT(12)
-@@ -2360,6 +2365,16 @@ static void lan8814_ptp_rx_ts_get(struct phy_device *phydev,
- 	*seq_id = lanphy_read_page_reg(phydev, 5, PTP_RX_MSG_HEADER2);
- }
- 
-+static void lan8814_ptp_rx_ts_get_partial(struct phy_device *phydev,
-+					  u32 *seconds, u16 *seq_id)
-+{
-+	*seconds = lanphy_read_page_reg(phydev, 5, PTP_RX_INGRESS_SEC_HI);
-+	*seconds = (*seconds << 16) |
-+		   lanphy_read_page_reg(phydev, 5, PTP_RX_INGRESS_SEC_LO);
-+
-+	*seq_id = lanphy_read_page_reg(phydev, 5, PTP_RX_MSG_HEADER2);
-+}
-+
- static void lan8814_ptp_tx_ts_get(struct phy_device *phydev,
- 				  u32 *seconds, u32 *nano_seconds, u16 *seq_id)
- {
-@@ -2504,6 +2519,12 @@ static int lan8814_hwtstamp(struct mii_timestamper *mii_ts,
- 	lan8814_flush_fifo(ptp_priv->phydev, false);
- 	lan8814_flush_fifo(ptp_priv->phydev, true);
- 
-+	if (phydev->interface == PHY_INTERFACE_MODE_QUSGMII &&
-+	    ptp_priv->hwts_tx_type == HWTSTAMP_TX_ON)
-+		phy_inband_ext_set_available(phydev, PHY_INBAND_EXT_PCH_TIMESTAMP);
-+	else
-+		phy_inband_ext_set_unavailable(phydev, PHY_INBAND_EXT_PCH_TIMESTAMP);
-+
- 	return 0;
- }
- 
-@@ -2917,8 +2938,20 @@ static bool lan8814_match_skb(struct kszphy_ptp_priv *ptp_priv,
- 
- 	if (ret) {
- 		shhwtstamps = skb_hwtstamps(skb);
--		memset(shhwtstamps, 0, sizeof(*shhwtstamps));
--		shhwtstamps->hwtstamp = ktime_set(rx_ts->seconds, rx_ts->nsec);
-+
-+		if (phy_inband_ext_enabled(ptp_priv->phydev, PHY_INBAND_EXT_PCH_TIMESTAMP)) {
-+			/* When using the PCH extension, we get the seconds part
-+			 * from MDIO accesses, but the seconds part gets
-+			 * set by the MAC driver according to the PCH data in the
-+			 * preamble
-+			 */
-+			struct timespec64 ts = ktime_to_timespec64(shhwtstamps->hwtstamp);
-+
-+			shhwtstamps->hwtstamp = ktime_set(rx_ts->seconds, ts.tv_nsec);
-+		} else {
-+			memset(shhwtstamps, 0, sizeof(*shhwtstamps));
-+			shhwtstamps->hwtstamp = ktime_set(rx_ts->seconds, rx_ts->nsec);
-+		}
- 		netif_rx(skb);
- 	}
- 
-@@ -2953,8 +2986,18 @@ static void lan8814_get_rx_ts(struct kszphy_ptp_priv *ptp_priv)
- 		if (!rx_ts)
- 			return;
- 
--		lan8814_ptp_rx_ts_get(phydev, &rx_ts->seconds, &rx_ts->nsec,
--				      &rx_ts->seq_id);
-+		/* When using PCH mode, the nanoseconds part of the timestamp is
-+		 * transmitted inband through the ethernet preamble. We only need
-+		 * to retrieve the seconds part along with the seq_id, the MAC
-+		 * driver will fill-in the nanoseconds part itself
-+		 */
-+		if (phy_inband_ext_enabled(ptp_priv->phydev, PHY_INBAND_EXT_PCH_TIMESTAMP))
-+			lan8814_ptp_rx_ts_get_partial(phydev, &rx_ts->seconds,
-+						      &rx_ts->seq_id);
-+		else
-+			lan8814_ptp_rx_ts_get(phydev, &rx_ts->seconds,
-+					      &rx_ts->nsec, &rx_ts->seq_id);
-+
- 		lan8814_match_rx_ts(ptp_priv, rx_ts);
- 
- 		/* If other timestamps are available in the FIFO,
-@@ -3240,6 +3283,37 @@ static void lan8814_setup_led(struct phy_device *phydev, int val)
- 	lanphy_write_page_reg(phydev, 5, LAN8814_LED_CTRL_1, temp);
- }
- 
-+static int lan8814_set_inband_ext(struct phy_device *phydev,
-+				  enum phy_inband_ext ext, bool enable)
-+{
-+	u32 tsu_cfg;
-+
-+	if (ext != PHY_INBAND_EXT_PCH_TIMESTAMP)
-+		return -EOPNOTSUPP;
-+
-+	tsu_cfg = ~TSU_GENERAL_CONFIG_TSU_ENABLE_;
-+
-+	lanphy_write_page_reg(phydev, 5, TSU_GENERAL_CONFIG, tsu_cfg);
-+
-+	if (enable) {
-+		lanphy_write_page_reg(phydev, 4, PTP_OPERATING_MODE,
-+				      PTP_OPERATING_MODE_PCH_);
-+
-+		tsu_cfg |= TSU_GENERAL_CONFIG_TSU_ENABLE_PCH_;
-+	} else {
-+		lanphy_write_page_reg(phydev, 4, PTP_OPERATING_MODE,
-+				      PTP_OPERATING_MODE_STANDALONE_);
-+
-+		tsu_cfg &= ~TSU_GENERAL_CONFIG_TSU_ENABLE_PCH_;
-+	}
-+
-+	tsu_cfg |= TSU_GENERAL_CONFIG_TSU_ENABLE_;
-+
-+	lanphy_write_page_reg(phydev, 5, TSU_GENERAL_CONFIG, tsu_cfg);
-+
-+	return 0;
-+}
-+
- static int lan8814_config_init(struct phy_device *phydev)
- {
- 	struct kszphy_priv *lan8814 = phydev->priv;
-@@ -4805,6 +4879,7 @@ static struct phy_driver ksphy_driver[] = {
- 	.phy_id_mask	= MICREL_PHY_ID_MASK,
- 	.name		= "Microchip INDY Gigabit Quad PHY",
- 	.flags          = PHY_POLL_CABLE_TEST,
-+	.inband_ext	= PHY_INBAND_EXT_PCH_TIMESTAMP,
- 	.config_init	= lan8814_config_init,
- 	.driver_data	= &lan8814_type,
- 	.probe		= lan8814_probe,
-@@ -4819,6 +4894,7 @@ static struct phy_driver ksphy_driver[] = {
- 	.handle_interrupt = lan8814_handle_interrupt,
- 	.cable_test_start	= lan8814_cable_test_start,
- 	.cable_test_get_status	= ksz886x_cable_test_get_status,
-+	.set_inband_ext = lan8814_set_inband_ext,
- }, {
- 	.phy_id		= PHY_ID_LAN8804,
- 	.phy_id_mask	= MICREL_PHY_ID_MASK,
--- 
-2.43.0
+-Toke
 
 
