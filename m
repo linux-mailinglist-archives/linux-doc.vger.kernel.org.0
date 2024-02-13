@@ -1,737 +1,800 @@
-Return-Path: <linux-doc+bounces-9156-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9158-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E66E852669
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 02:28:55 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C9C98526A4
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 02:38:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A8DD4B21DB7
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 01:28:52 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id A6D0F1F22163
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 01:38:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDCD12232A;
-	Tue, 13 Feb 2024 00:55:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C6BBD57885;
+	Tue, 13 Feb 2024 01:01:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="D7vPyh+f"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="y9lvPBcS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D2325B1F5;
-	Tue, 13 Feb 2024 00:55:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 531EA64CE9
+	for <linux-doc@vger.kernel.org>; Tue, 13 Feb 2024 01:01:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707785712; cv=none; b=rkaFcQ1gVf8AUZOO/8/Ox+5sbHSYPmSzqj54WHf6hBoAvlu5WvUWDWekFBvaKCtWnf1YYHIVIqFtsuAOk+6DoSOPL6g7cfWokWK4HAifRjHLQZU26SRAY0XZnpcuxZyxZ/wW+p/jR/7OvehRN+r1lLtMbQNFUSuQd1dS7WGIx0w=
+	t=1707786099; cv=none; b=rc66mtf73oIr9RfIyCWdF9wxER1aDsJpsuEdUlXLTaS9INxz7Xu5NP714ZTjhGPH0arsV/k3XHiE11sgNyv1zcnZNwT3zKec8jdcYKE/GERSuwC/3VgAQTonD/6tGLwM3XMjY0S6iV1SiCHz7aQt0mwhg+AMWJN5dZfipQy3vOQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707785712; c=relaxed/simple;
-	bh=tpV2LIvDWyMeK3jFmTnMWqmNOSZ53kTz7F2yP15ipF4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=RUV/11qep2iWeGzCq/wmUaMGuZKzTC6mY4okgZeZR79qhkohNDvUeB30M7gLz2deGnJwUVeFgBIZI1FGAUz3DEmV1yebJo0EYyevjGlYSi2RKsEzrnu8l1g+Y/nCFR/tetsGNf6bhpNJbN3AHrSeuUZj/HUIC939GvrC0X+C1wo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=D7vPyh+f; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 41D0RdKD002655;
-	Tue, 13 Feb 2024 00:54:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-type; s=qcppdkim1; bh=jIhNcJAao4L3t+lM7xoz
-	Ms6yOtfapDmOsn0CNMaxawM=; b=D7vPyh+f4ftobEYbZy5w4K1h4EhaMLSnLIMy
-	yggP8/Eingb5fooTcchCSA999TmslKJhWME4a2rW3DF0VpDsg9+SwBQuvo6TdLSO
-	GYWVpxEszLKuX2Vv5KZzMYCILi2YLfBE0t5WANFCYqIGzFAyYeaQB9VK9OYh5ay8
-	eQdYKoLc5NSrcA0BJRgel8fN2tRjOo0f0vbBF0r02J+TEh+gsnT9IeD/Vp9lec+S
-	BiS1LgcjiGnIknhuisL1DaikL/pFFM09wNGUJqOX13ce1EUI1QSC+NM+NoDkEXz9
-	fHKxNLVInoLB8peyL5Ruvmaz7jvm6uB6aWMNUBykAhcOSU5Fmg==
-Received: from nalasppmta03.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3w7ww5r1ak-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 13 Feb 2024 00:54:47 +0000 (GMT)
-Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
-	by NALASPPMTA03.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 41D0skp7031610
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 13 Feb 2024 00:54:46 GMT
-Received: from hu-wcheng-lv.qualcomm.com (10.49.16.6) by
- nalasex01b.na.qualcomm.com (10.47.209.197) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Mon, 12 Feb 2024 16:54:46 -0800
-From: Wesley Cheng <quic_wcheng@quicinc.com>
-To: <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
-        <perex@perex.cz>, <conor+dt@kernel.org>, <corbet@lwn.net>,
-        <lgirdwood@gmail.com>, <andersson@kernel.org>,
-        <krzysztof.kozlowski+dt@linaro.org>, <gregkh@linuxfoundation.org>,
-        <Thinh.Nguyen@synopsys.com>, <broonie@kernel.org>,
-        <bgoswami@quicinc.com>, <tiwai@suse.com>, <robh+dt@kernel.org>,
-        <konrad.dybcio@linaro.org>
-CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-sound@vger.kernel.org>, <linux-usb@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <alsa-devel@alsa-project.org>, Wesley Cheng <quic_wcheng@quicinc.com>
-Subject: [PATCH v15 50/50] ASoC: doc: Add documentation for SOC USB
-Date: Mon, 12 Feb 2024 16:54:22 -0800
-Message-ID: <20240213005422.3121-51-quic_wcheng@quicinc.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240213005422.3121-1-quic_wcheng@quicinc.com>
-References: <20240213005422.3121-1-quic_wcheng@quicinc.com>
+	s=arc-20240116; t=1707786099; c=relaxed/simple;
+	bh=Az9aDkYZYOmRsEKZXkrZIha6YC3xYov2QAP786Y9Te8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=VVE70xAXMzof4b3193GSs784oE9KVL3DUBtqomPyeZMKYlNkxsCcM6Zer3FmntfqoMQIcKZcDRyDrePMI4FKM9rZt9ydBzhJaoYIwiEBNSlFfUhhbyXhYd3EXPAz6iKAojyByuYz42YNnnp794hcfAX3+tcR7qAh1LoMSmSbcLw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=y9lvPBcS; arc=none smtp.client-ip=209.85.219.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-db4364ecd6aso3318905276.2
+        for <linux-doc@vger.kernel.org>; Mon, 12 Feb 2024 17:01:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1707786094; x=1708390894; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xmWnPsWYGgtp1IM7yrKjlI/adtDYC7jWpTo2p40Dxqs=;
+        b=y9lvPBcSSjM64WsCz9ms0Z3PEvFDMEgElJMt9lkE3DgqmgNp0ExIA9RmrzeI3sCdSX
+         K8lCViEdMase1WmCMNNlb4WG5BnUY2O1crqS4xFjpotUUqB/+o/35mvY2HhZat8JRW1e
+         paURy8ZkOtgQZSV9Ql2bxvJhWggRKJ495He0Hro2NAIt1HptqidJy8zENL0zkRKxcCsy
+         plFuvT6iGKDuWBz5fczY7lFgAhMBnpVtjcAwFooKJQvUCkmYYitcPYVvPVLTQ7uHfsEl
+         hqoovA96rXYHFkA1q4QK2+ObA190xYs/c/bnYa2bSroiIVCMjpif987BkgMz5E/K8SSS
+         rDtA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1707786094; x=1708390894;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=xmWnPsWYGgtp1IM7yrKjlI/adtDYC7jWpTo2p40Dxqs=;
+        b=URDMawUoeX3rcddHXBngyyDxQbMmXgPrsZXK/qBCVoPS60YoLZ0x8o3gUe48WobT23
+         TMbkIipaGudMfebx0ETWa1s1gg8I3yDD+2d442Bb00ukudCnrhPezCVjSzzVWKK4XFO7
+         HBoc3p2Jta6YQ8kX9M4Lpq9k5RJW9d1yPOR8WWs5Z1ux+S6cLjjFHqGBOgckuP3R2M1Q
+         YvGrj/DVukxXedk/FsLaQ2JjiX8wVoHgNvZvfwW3IRecDZfQmdqNSwf/+msI+NLqX6Y3
+         oYDLB2ubWZkT+6lQR2rBjDI92A57XofrvGKOG9XABTslk4uvPg/3rUPaK0AI2vLgxUal
+         CENw==
+X-Forwarded-Encrypted: i=1; AJvYcCVdhF9/q28pg0LMMhwTRuSyEYjZvsE+U+Y7zfE6hExaSkFE7Q4u+4ZGC20PILLHMQRf4YxLK4FATnPtdzpEQy31Z5je4QuVHVgG
+X-Gm-Message-State: AOJu0YzEkfO+nRWElKNdMbbYiY0QzXzIC5TZw6jbo159nLEDWPasJVCM
+	XGAG6aa2M3RO+5Opl+TaM0K/qwLPWary4eLxvrdKzK6xN7P5jIPrCYXRlGVXTb/xqyLSiJN5OVH
+	gWaRWKMkYHX3EEkYul6GRyvdZp08K+ImBPN8J
+X-Google-Smtp-Source: AGHT+IHWKuB6VYllOg1tFA5INVz1gf9jYCyEf/2VOcn3e0IEul/5XekcxcNFyumnZwr1adIYBsC8pm0IGHp5wmMf2ZQ=
+X-Received: by 2002:a25:94f:0:b0:dc7:48f8:ce2e with SMTP id
+ u15-20020a25094f000000b00dc748f8ce2emr5138708ybm.37.1707786093566; Mon, 12
+ Feb 2024 17:01:33 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-ClientProxiedBy: nalasex01b.na.qualcomm.com (10.47.209.197) To
- nalasex01b.na.qualcomm.com (10.47.209.197)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: JdW0WHYvG4qTRipkhCNdwC5RWgj5gVEG
-X-Proofpoint-ORIG-GUID: JdW0WHYvG4qTRipkhCNdwC5RWgj5gVEG
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-02-12_20,2024-02-12_03,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- impostorscore=0 mlxscore=0 phishscore=0 mlxlogscore=999 bulkscore=0
- spamscore=0 adultscore=0 clxscore=1015 lowpriorityscore=0 malwarescore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2401310000 definitions=main-2402130005
+References: <20240212213922.783301-1-surenb@google.com> <20240212213922.783301-14-surenb@google.com>
+ <202402121433.5CC66F34B@keescook>
+In-Reply-To: <202402121433.5CC66F34B@keescook>
+From: Suren Baghdasaryan <surenb@google.com>
+Date: Mon, 12 Feb 2024 17:01:19 -0800
+Message-ID: <CAJuCfpGU+UhtcWxk7M3diSiz-b7H64_7NMBaKS5dxVdbYWvQqA@mail.gmail.com>
+Subject: Re: [PATCH v3 13/35] lib: add allocation tagging support for memory
+ allocation profiling
+To: Kees Cook <keescook@chromium.org>
+Cc: akpm@linux-foundation.org, kent.overstreet@linux.dev, mhocko@suse.com, 
+	vbabka@suse.cz, hannes@cmpxchg.org, roman.gushchin@linux.dev, mgorman@suse.de, 
+	dave@stgolabs.net, willy@infradead.org, liam.howlett@oracle.com, 
+	corbet@lwn.net, void@manifault.com, peterz@infradead.org, 
+	juri.lelli@redhat.com, catalin.marinas@arm.com, will@kernel.org, 
+	arnd@arndb.de, tglx@linutronix.de, mingo@redhat.com, 
+	dave.hansen@linux.intel.com, x86@kernel.org, peterx@redhat.com, 
+	david@redhat.com, axboe@kernel.dk, mcgrof@kernel.org, masahiroy@kernel.org, 
+	nathan@kernel.org, dennis@kernel.org, tj@kernel.org, muchun.song@linux.dev, 
+	rppt@kernel.org, paulmck@kernel.org, pasha.tatashin@soleen.com, 
+	yosryahmed@google.com, yuzhao@google.com, dhowells@redhat.com, 
+	hughd@google.com, andreyknvl@gmail.com, ndesaulniers@google.com, 
+	vvvvvv@google.com, gregkh@linuxfoundation.org, ebiggers@google.com, 
+	ytcoode@gmail.com, vincent.guittot@linaro.org, dietmar.eggemann@arm.com, 
+	rostedt@goodmis.org, bsegall@google.com, bristot@redhat.com, 
+	vschneid@redhat.com, cl@linux.com, penberg@kernel.org, iamjoonsoo.kim@lge.com, 
+	42.hyeyoo@gmail.com, glider@google.com, elver@google.com, dvyukov@google.com, 
+	shakeelb@google.com, songmuchun@bytedance.com, jbaron@akamai.com, 
+	rientjes@google.com, minchan@google.com, kaleshsingh@google.com, 
+	kernel-team@android.com, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, iommu@lists.linux.dev, 
+	linux-arch@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
+	linux-modules@vger.kernel.org, kasan-dev@googlegroups.com, 
+	cgroups@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-With the introduction of the soc-usb driver, add documentation highlighting
-details on how to utilize the new driver and how it interacts with
-different components in USB SND and ASoC.  It provides examples on how to
-implement the drivers that will need to be introduced in order to enable
-USB audio offloading.
+On Mon, Feb 12, 2024 at 2:40=E2=80=AFPM Kees Cook <keescook@chromium.org> w=
+rote:
+>
+> On Mon, Feb 12, 2024 at 01:38:59PM -0800, Suren Baghdasaryan wrote:
+> > Introduce CONFIG_MEM_ALLOC_PROFILING which provides definitions to easi=
+ly
+> > instrument memory allocators. It registers an "alloc_tags" codetag type
+> > with /proc/allocinfo interface to output allocation tag information whe=
+n
+>
+> Please don't add anything new to the top-level /proc directory. This
+> should likely live in /sys.
 
-Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
----
- Documentation/sound/soc/index.rst |   1 +
- Documentation/sound/soc/usb.rst   | 611 ++++++++++++++++++++++++++++++
- 2 files changed, 612 insertions(+)
- create mode 100644 Documentation/sound/soc/usb.rst
+Ack. I'll find a more appropriate place for it then.
+It just seemed like such generic information which would belong next
+to meminfo/zoneinfo and such...
 
-diff --git a/Documentation/sound/soc/index.rst b/Documentation/sound/soc/index.rst
-index e57df2dab2fd..8bed8f8f48da 100644
---- a/Documentation/sound/soc/index.rst
-+++ b/Documentation/sound/soc/index.rst
-@@ -18,3 +18,4 @@ The documentation is spilt into the following sections:-
-    jack
-    dpcm
-    codec-to-codec
-+   usb
-diff --git a/Documentation/sound/soc/usb.rst b/Documentation/sound/soc/usb.rst
-new file mode 100644
-index 000000000000..3f7c3ef6a0c0
---- /dev/null
-+++ b/Documentation/sound/soc/usb.rst
-@@ -0,0 +1,611 @@
-+================
-+ASoC USB support
-+================
-+
-+Overview
-+========
-+In order to leverage the existing USB sound device support in ALSA, the
-+introduction of the ASoC USB APIs, allow for the entities to communicate
-+with one another.
-+
-+One potential use case would be to support USB audio offloading, which is
-+an implementation that allows for an external DSP on the SoC to handle the
-+transfer of audio data over the USB bus.  This would let the main
-+processor to stay in lower power modes for longer durations.  The following
-+is an example design of how the ASoC and ALSA pieces can be connected
-+together to achieve this:
-+
-+::
-+
-+               USB                   |            ASoC
-+                                     |  _________________________
-+                                     | |   ASoC Platform card    |
-+                                     | |_________________________|
-+                                     |         |           |
-+                                     |      ___V____   ____V____
-+                                     |     |ASoC BE | |ASoC FE  |
-+                                     |     |DAI LNK | |DAI LNK  |
-+                                     |     |________| |_________|
-+                                     |         ^  ^        ^
-+                                     |         |  |________|
-+                                     |      ___V____    |
-+                                     |     |SOC-USB |   |
-+     ________       ________               |        |   |
-+    |USB SND |<--->|USBSND  |<------------>|________|   |
-+    |(card.c)|     |offld   |<----------                |
-+    |________|     |________|___     | |                |
-+        ^               ^       |    | |    ____________V_________
-+        |               |       |    | |   |IPC                   |
-+     __ V_______________V_____  |    | |   |______________________|
-+    |USB SND (endpoint.c)     | |    | |              ^
-+    |_________________________| |    | |              |
-+                ^               |    | |   ___________V___________
-+                |               |    | |->|audio DSP              |
-+     ___________V_____________  |    |    |_______________________|
-+    |XHCI HCD                 |<-    |
-+    |_________________________|      |
-+
-+
-+SOC USB driver
-+==============
-+Structures
-+----------
-+``struct snd_soc_usb``
-+
-+  - ``list``: list head for SND SOC struct list
-+  - ``dev``: USB backend device reference
-+  - ``component``: reference to ASoC component
-+  - ``active_list``: active sessions
-+  - ``num_supported_streams``: number of supported concurrent sessions
-+  - ``connection_status_cb``: callback to notify connection events
-+  - ``put_offload_dev``: callback to select USB sound card/PCM device
-+  - ``get_offload_dev``: callback to fetch selected USB sound card/PCM device
-+  - ``priv_data``: driver data
-+
-+The snd_soc_usb structure can be referenced using the ASoC platform card
-+device, or a USB device (udev->dev).  This is created by the ASoC BE DAI
-+link, and the USB sound entity will be able to pass information to the
-+ASoC BE DAI link using this structure.
-+
-+``struct snd_soc_usb_device``
-+
-+  - ``card_idx``: sound card index associated with USB device
-+  - ``chip_idx``: USB sound chip array index
-+  - ``num_playback``: number of playback streams
-+  - ``num_capture``: number of capture streams
-+
-+The struct snd_soc_usb_device is created by the USB sound offload driver.
-+This will carry basic parameters/limitations that will be used to
-+determine the possible offloading paths for this USB audio device.
-+
-+``struct snd_soc_usb_session``
-+
-+  - ``active_card_idx``: active offloaded sound card
-+  - ``active_pcm_idx``: active offloaded PCM device
-+  - ``state``: USB BE DAI link PCM state
-+
-+The struct snd_soc_usb_session tracks the current offloading state for a
-+particular card and PCM combination.  This structure is carried/saved as
-+part of the active_list within struct snd_soc_usb.
-+
-+The number of entities in the active list corresponds to the number of
-+snd_soc_usb_session structures that are allocated.  This is controlled
-+by the num_supported_streams that is reported as part of the SOC USB
-+structure creation.
-+
-+Functions
-+---------
-+.. code-block:: rst
-+
-+	const char *snd_soc_usb_get_components_tag(bool playback);
-+..
-+
-+  - ``playback``: direction of audio stream
-+
-+**snd_soc_usb_get_components_tag()** returns the tag used for describing if USB
-+offloading is supported for appending to the ASoC platform card's components
-+string.
-+
-+Returns a tag based on the direction of the audio stream.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_find_format(int card_idx, struct snd_pcm_hw_params *params,
-+			int direction)
-+..
-+
-+  - ``card_idx``: the index into the USB sound chip array.
-+  - ``params``: Requested PCM parameters from the USB DPCM BE DAI link
-+  - ``direction``: capture or playback
-+
-+**snd_soc_usb_find_format()** ensures that the requested audio profile being
-+requested by the external DSP is supported by the USB device.
-+
-+Returns 0 on success, and -EOPNOTSUPP on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_connect(struct device *usbdev, struct snd_soc_usb_device *sdev)
-+..
-+
-+  - ``usbdev``: the usb device that was discovered
-+  - ``sdev``: capabilities of the device
-+
-+**snd_soc_usb_connect()** notifies the ASoC USB DCPM BE DAI link of a USB
-+audio device detection.  This can be utilized in the BE DAI
-+driver to keep track of available USB audio devices.  This is intended
-+to be called by the USB offload driver residing in USB SND.
-+
-+Returns 0 on success, negative error code on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_disconnect(struct device *usbdev, struct snd_soc_usb_device *sdev)
-+..
-+
-+  - ``usbdev``: the usb device that was removed
-+  - ``sdev``: capabilities to free
-+
-+**snd_soc_usb_disconnect()** notifies the ASoC USB DCPM BE DAI link of a USB
-+audio device removal.  This is intended to be called by the USB offload
-+driver that resides in USB SND.
-+
-+.. code-block:: rst
-+
-+	void *snd_soc_usb_find_priv_data(struct device *usbdev)
-+..
-+
-+  - ``usbdev``: the usb device to reference to find private data
-+
-+**snd_soc_usb_find_priv_data()** fetches the private data saved to the SOC USB
-+device.
-+
-+Returns pointer to priv_data on success, NULL on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_device_offload_available(struct device *dev)
-+..
-+
-+  - ``dev``: the device to find in SOC USB
-+
-+**snd_soc_usb_device_offload_available()** fetch the sound card number associated
-+to the USB BE DAI link.
-+
-+Returns a valid sound card index on success, negative on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_prepare_session(struct snd_soc_usb *usb, int card_idx, int pcm_idx);
-+..
-+
-+  - ``usb``: SOC USB device
-+  - ``card_idx``: USB sound card index
-+  - ``pcm_idx``: USB PCM device index
-+
-+**snd_soc_usb_prepare_session()** populates active_list with a 'struct
-+snd_soc_usb_session.'  This will move the session into the SND_SOC_USB_PREPARED
-+state.  State updates will always start here.
-+
-+Returns index to active_list on success, -EBUSY on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_shutdown_session(struct snd_soc_usb *usb, int session_id);
-+..
-+
-+  - ``usb``: SOC USB device
-+  - ``session_id``: session id returned by **snd_soc_usb_prepare_session()**
-+
-+**snd_soc_usb_shutdown_session()** frees up a slot in active_list, which signals
-+that there is no longer an active offloading device.  This allows for another
-+session to be started.
-+
-+Returns 0 on success, -EINVAL if session index is invalid.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_set_session_state(struct snd_soc_usb *usb, int session_id,
-+						enum snd_soc_usb_dai_state state);
-+..
-+
-+  - ``usb``: SOC USB device
-+  - ``session_id``: session id returned by **snd_soc_usb_prepare_session()**
-+  - ``state``: state to move into
-+
-+**snd_soc_usb_set_session_state()** moves an offloading session to the desired
-+state.
-+
-+.. code-block:: rst
-+
-+int snd_soc_usb_setup_offload_jack(struct snd_soc_component *component,
-+					struct snd_soc_jack *jack)
-+..
-+
-+  - ``component``: ASoC component to add the jack
-+  - ``jack``: ASoC sound jack to add
-+
-+**snd_soc_usb_setup_offload_jack()** is a helper to add a sound jack control to
-+the platform sound card.  This will allow for consistent naming to be used on
-+designs that support USB audio offloading.
-+
-+Returns 0 on success, negative otherwise.
-+
-+.. code-block:: rst
-+
-+	struct snd_soc_usb *snd_soc_usb_allocate_port(struct snd_soc_component *component,
-+			int num_supported_streams, void *data);
-+..
-+
-+  - ``component``: DPCM BE DAI link component
-+  - ``num_supported_streams``: number of active streams supported by external DSP
-+  - ``data``: private data
-+
-+**snd_soc_usb_allocate_port()** allocates a SOC USB device and populates standard
-+parameters that is used for further operations.
-+
-+Returns a pointer to struct soc_usb on success, negative on error.
-+
-+.. code-block:: rst
-+
-+	void snd_soc_usb_free_port(struct snd_soc_usb *usb);
-+..
-+
-+  - ``usb``: SOC USB device to free
-+
-+**snd_soc_usb_free_port()** frees a SOC USB device.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_add_port(struct snd_soc_usb *usb);
-+..
-+
-+  - ``usb``: SOC USB device to add
-+
-+**snd_soc_usb_add_port()** add an allocated SOC USB device to the SOC USB framework.
-+Once added, this device can be referenced by further operations.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_remove_port(struct snd_soc_usb *usb);
-+..
-+
-+  - ``usb``: SOC USB device to remove
-+
-+**snd_soc_usb_remove_port()** removes a SOC USB device from the SOC USB framework.
-+After removing a device, any SOC USB operations would not be able to reference the
-+device removed.
-+
-+How to Register to SOC USB
-+--------------------------
-+The ASoC DPCM USB BE DAI link is the entity responsible for allocating and
-+registering the SOC USB device on the component bind.  Likewise, it will
-+also be responsible for freeing the allocated resources.  An example can
-+be shown below:
-+
-+.. code-block:: rst
-+
-+	static int q6usb_component_probe(struct snd_soc_component *component)
-+	{
-+		...
-+		data->usb = snd_soc_usb_allocate_port(component, 1, &data->priv);
-+		if (!data->usb)
-+			return -ENOMEM;
-+
-+		usb->connection_status_cb = q6usb_alsa_connection_cb;
-+
-+		ret = snd_soc_usb_add_port(usb);
-+		if (ret < 0) {
-+			dev_err(component->dev, "failed to add usb port\n");
-+			goto free_usb;
-+		}
-+		...
-+	}
-+
-+	static void q6usb_component_remove(struct snd_soc_component *component)
-+	{
-+		...
-+		snd_soc_usb_remove_port(data->usb);
-+		snd_soc_usb_free_port(data->usb);
-+	}
-+
-+	static const struct snd_soc_component_driver q6usb_dai_component = {
-+		.probe = q6usb_component_probe,
-+		.remove = q6usb_component_remove,
-+		.name = "q6usb-dai-component",
-+		...
-+	};
-+..
-+
-+BE DAI links can pass along vendor specific information as part of the
-+call to allocate the SOC USB device.  This will allow any BE DAI link
-+parameters or settings to be accessed by the USB offload driver that
-+resides in USB SND.
-+
-+USB Audio Device Connection Flow
-+--------------------------------
-+USB devices can be hotplugged into the USB root hub at any point in time.
-+The BE DAI link should be aware of the current state of the physical USB
-+port, i.e. if there are any USB devices with audio interface(s) connected.
-+The following callback can be used to notify the BE DAI link of any change:
-+
-+	**connection_status_cb()**
-+
-+This is called whenever there is a USB SND interface bind or remove event,
-+using snd_soc_usb_connect() or snd_soc_usb_disconnect():
-+
-+.. code-block:: rst
-+
-+	static void qc_usb_audio_offload_probe(struct snd_usb_audio *chip)
-+	{
-+		...
-+		snd_soc_usb_connect(usb_get_usb_backend(udev), sdev);
-+		...
-+	}
-+
-+	static void qc_usb_audio_offload_disconnect(struct snd_usb_audio *chip)
-+	{
-+		...
-+		snd_soc_usb_disconnect(usb_get_usb_backend(chip->dev), dev->sdev);
-+		...
-+	}
-+..
-+
-+In order to account for conditions where driver or device existence is
-+not guaranteed, USB SND exposes snd_usb_rediscover_devices() to resend the
-+connect events for any identified USB audio interfaces.  Consider the
-+the following situtation:
-+
-+	**usb_audio_probe()**
-+	  | --> USB audio streams allocated and saved to usb_chip[]
-+	  | --> Propagate connect event to USB offload driver in USB SND
-+	  | --> **snd_soc_usb_connect()** exits as USB BE DAI link is not ready
-+
-+	BE DAI link component probe
-+	  | --> DAI link is probed and SOC USB port is allocated
-+	  | --> The USB audio device connect event is missed
-+
-+To ensure connection events are not missed, **snd_usb_rediscover_devices()**
-+is executed when the SOC USB device is registered.  Now, when the BE DAI
-+link component probe occurs, the following highlights the sequence:
-+
-+	BE DAI link component probe
-+	  | --> DAI link is probed and SOC USB port is allocated
-+	  | --> SOC USB device added, and **snd_usb_rediscover_devices()** runs
-+
-+	**snd_usb_rediscover_devices()**
-+	  | --> Traverses through usb_chip[] and for non-NULL entries issue
-+	  |     **connection_status_cb()**
-+
-+In the case where the USB offload driver is unbounded, while USB SND is
-+ready, the **snd_usb_rediscover_devices()** is called during module init.
-+This allows for the offloading path to also be enabled with the following
-+flow:
-+
-+	**usb_audio_probe()**
-+	  | --> USB audio streams allocated and saved to usb_chip[]
-+	  | --> Propagate connect event to USB offload driver in USB SND
-+	  | --> USB offload driver **NOT** ready!
-+
-+	BE DAI link component probe
-+	  | --> DAI link is probed and SOC USB port is allocated
-+	  | --> No USB connect event due to missing USB offload driver
-+
-+	USB offload driver probe
-+	  | --> **qc_usb_audio_offload_init()**
-+	  | --> Calls **snd_usb_rediscover_devices()** to notify of devices
-+
-+Advertising USB Audio Offload Capability
-+----------------------------------------
-+As the USB audio offloading can potentially reside within the platform ASoC based
-+sound card, depending on if there is a USB DPCM backend DAI link existing in the
-+platform card definition, then users can utilize the sound card's components string,
-+in order to signal that USB offloading is supported by this sound card.
-+
-+The sound core exposes:
-+
-+	**snd_ctl_card_info()**
-+
-+This allows for userspace applications, i.e. amixer, to fetch the components string
-+that was created as part of the ASoC platform sound card creation routine.  The
-+possible tags that can be seen are:
-+
-+	- **usbplybkoffld: 1**
-+	- **usbcapoffld: 1**
-+
-+**usbplybkoffld** translates to usb offload playback supported, and **usbcapoffld**
-+translates to USB offload capture supported.  Applications can then query the sound
-+card for further offload status parameters.
-+
-+SOC USB and USB Sound Kcontrols
-+===============================
-+Details
-+-------
-+SOC USB and USB sound expose a set of SND kcontrols for applications to select
-+and fetch the current offloading status for the ASoC platform sound card. Kcontrols
-+are split between two layers:
-+
-+	- USB sound - Notifies the sound card number for the ASoC platform sound
-+	  card that it is registered to for supporting audio offload.
-+
-+	- SOC USB - Maintains the current status of the offload path, and device
-+	  (USB sound card and PCM device) information.  This would be the main
-+	  card that applications can read to determine offloading capabilities.
-+
-+Implementation
-+--------------
-+
-+**Example:**
-+
-+  **Sound Cards**:
-+
-+	::
-+
-+	  0 [SM8250MTPWCD938]: sm8250 - SM8250-MTP-WCD9380-WSA8810-VA-D
-+                     SM8250-MTP-WCD9380-WSA8810-VA-DMIC
-+	  1 [C320M          ]: USB-Audio - Plantronics C320-M
-+                     Plantronics Plantronics C320-M at usb-xhci-hcd.1.auto-1, full speed
-+
-+
-+  **Platform Sound Card** - card#0:
-+
-+	::
-+
-+	  USB Offload Playback Route Status      -1, -1 (range -1->32)
-+	  USB Offload Playback Route Select       1, 0 (range -1->32)
-+
-+
-+  **USB Sound Card** - card#1:
-+
-+	::
-+
-+	  USB Offload Playback Capable Card         0 (range -1->32)
-+
-+
-+The platform sound card(card#0) kcontrols are created as part of adding the SOC
-+USB device using **snd_soc_usb_add_port()**.  The following kcontrols are defined
-+as:
-+
-+  - ``USB Offload Playback Route Status`` **(R)**: USB sound card and PCM device
-+    index pair that defines which USB SND resources are currently offloaded.  If
-+    -1, -1 is seen, it signifies that offload is not active.
-+  - ``USB Offload Playback Route Select`` **(R/W)**: USB sound card and PCM device
-+    index pair which selects the USB device to initiate offloading on.  If no value
-+    is written to the kcontrol, then the last USB device discovered will be chosen.
-+
-+The USB sound card(card#1) kcontrols are created as USB audio devices are plugged
-+into the physical USB port and enumerated.  The kcontrols are defined as:
-+
-+  - ``USB Offload Playback Capable Card`` **(R)**: Provides the sound card
-+    number/index that supports USB offloading.  Further/follow up queries about
-+    the current offload state can be handled by reading the offload status
-+    kcontrol exposed by the platform card.
-+
-+USB Offload Playback Route Select Kcontrol
-+-----------------------------------
-+In order to allow for vendor specific implementations on audio offloading device
-+selection, the SOC USB layer exposes the following:
-+
-+.. code-block:: rst
-+
-+	int (*put_offload_dev)(struct snd_kcontrol *kcontrol,
-+			      struct snd_ctl_elem_value *ucontrol);
-+	int (*get_offload_dev)(struct snd_kcontrol *kcontrol,
-+			      struct snd_ctl_elem_value *ucontrol);
-+..
-+
-+These are specific for the **USB Offload Playback Route Select** kcontrol.
-+
-+When users issue get/put calls to the kcontrol, the registered SOC USB callbacks
-+will execute the registered function calls to the DPCM BE DAI link.
-+
-+**Callback Registration:**
-+
-+.. code-block:: rst
-+
-+	static int q6usb_component_probe(struct snd_soc_component *component)
-+	{
-+	...
-+	usb = snd_soc_usb_allocate_port(component, 1, &data->priv);
-+	if (IS_ERR(usb))
-+		return -ENOMEM;
-+
-+	usb->connection_status_cb = q6usb_alsa_connection_cb;
-+	usb->put_offload_dev = q6usb_put_offload_dev;
-+	usb->get_offload_dev = q6usb_get_offload_dev;
-+
-+	ret = snd_soc_usb_add_port(usb);
-+..
-+
-+**PUT Callback:**
-+
-+Can be used to track current device selection, and to issue any external DSP
-+commands that might be required for enabling audio offloading.
-+
-+.. code-block:: rst
-+
-+	static int q6usb_put_offload_dev(struct snd_kcontrol *kcontrol,
-+			      struct snd_ctl_elem_value *ucontrol)
-+	{
-+	...
-+	if ((cardidx >= 0 && test_bit(cardidx, &data->available_card_slot))) {
-+		data->sel_card_idx = cardidx;
-+		changed = 1;
-+	}
-+
-+	if ((pcmidx >= 0 && pcmidx < data->status[cardidx].sdev->num_playback)) {
-+		data->sel_pcm_idx = pcmidx;
-+		changed = 1;
-+	}
-+..
-+
-+The above is an example of keeping track of what the userspace entity is
-+selecting as the playback device.  This can be later used to pass the information
-+along to the external DSP.
-+
-+
-+USB Offload Playback Route Status
-+-------------------
-+SOC USB exposes APIs for keeping track of the offloading state, and expects this
-+to be maintained by the BE DAI link that created/added the SOC USB device.
-+
-+**SOC USB State Flow Example**
-+
-+::
-+
-+     PCM Core              |      BE USB DAI Link      |     SOC USB
-+                           |                           |
-+  snd_pcm_hw_params --------> dai_link->ops->hw_params --> snd_soc_usb_prepare_session
-+                           |                           |   |--> state = SND_SOC_USB_PREPARED
-+  ...                      |                           |   |--> slot[0] now active
-+                           |                           |
-+                           |                           |
-+  snd_pcm_do_prepare--------> dai_link->ops->prepare ---> snd_soc_usb_set_session_state
-+                           |                           |   |--> state = SND_SOC_USB_RUNNING
-+  ...                      |                           |
-+                           |                           |
-+  snd_pcm_release_substream-> dai_link->ops->shutdown---> snd_soc_usb_shutdown_session
-+                           |                           |   |--> state = SND_SOC_USB_IDLE
-+                           |                           |   |--> slot[0] now idle
-+
-+
-+When executing the kcontrol get callback, it will loop across the active_list array
-+and report to the application for active USB sound card and USB PCM device indexes.
-+
-+USB Offload Playback Capable Card
-+-------------------------------
-+USB sound also creates a kcontrol for applications to help determine which platform
-+sound card USB offloading is linked to.  This will allow applications to further
-+query the platform sound card for specific information about the current USB offload
-+status.
-+
-+This is added as a separate mixer driver:
-+  - mixer_usb_offload.c
-+  - kcontrol: snd_usb_offload_available_ctl
-+
-+**snd_usb_offload_available_get()** fetches the associated sound card by utilizing
-+the **snd_soc_usb_device_offload_available()** API.
-+
-+Mixer Examples
-+--------------
-+
-+	::
-+
-+	  tinymix -D 0 set 'USB Offload Playback Route Select' 2 0
-+
-+
-+	::
-+
-+	  tinymix -D 0 get 'USB Offload Playback Route Select'
-+	  --> 2, 0 (range 0->32)
-+
-+	::
-+
-+	  tinymix -D 0 get 'USB Offload Playback Route Status'
-+	  --> 2, 0 (range -1->32)   [OFFLD active]
-+	  --> -1, -1 (range -1->32) [OFFLD idle]
-+
-+	::
-+
-+	  tinymix -D 0 get 'USB Offload Playback Capable Card'
-+	  --> 0 (range 0->32)
+>
+> > the feature is enabled.
+> > CONFIG_MEM_ALLOC_PROFILING_DEBUG is provided for debugging the memory
+> > allocation profiling instrumentation.
+> > Memory allocation profiling can be enabled or disabled at runtime using
+> > /proc/sys/vm/mem_profiling sysctl when CONFIG_MEM_ALLOC_PROFILING_DEBUG=
+=3Dn.
+> > CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT enables memory allocation
+> > profiling by default.
+> >
+> > Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+> > Co-developed-by: Kent Overstreet <kent.overstreet@linux.dev>
+> > Signed-off-by: Kent Overstreet <kent.overstreet@linux.dev>
+> > ---
+> >  Documentation/admin-guide/sysctl/vm.rst |  16 +++
+> >  Documentation/filesystems/proc.rst      |  28 +++++
+> >  include/asm-generic/codetag.lds.h       |  14 +++
+> >  include/asm-generic/vmlinux.lds.h       |   3 +
+> >  include/linux/alloc_tag.h               | 133 ++++++++++++++++++++
+> >  include/linux/sched.h                   |  24 ++++
+> >  lib/Kconfig.debug                       |  25 ++++
+> >  lib/Makefile                            |   2 +
+> >  lib/alloc_tag.c                         | 158 ++++++++++++++++++++++++
+> >  scripts/module.lds.S                    |   7 ++
+> >  10 files changed, 410 insertions(+)
+> >  create mode 100644 include/asm-generic/codetag.lds.h
+> >  create mode 100644 include/linux/alloc_tag.h
+> >  create mode 100644 lib/alloc_tag.c
+> >
+> > diff --git a/Documentation/admin-guide/sysctl/vm.rst b/Documentation/ad=
+min-guide/sysctl/vm.rst
+> > index c59889de122b..a214719492ea 100644
+> > --- a/Documentation/admin-guide/sysctl/vm.rst
+> > +++ b/Documentation/admin-guide/sysctl/vm.rst
+> > @@ -43,6 +43,7 @@ Currently, these files are in /proc/sys/vm:
+> >  - legacy_va_layout
+> >  - lowmem_reserve_ratio
+> >  - max_map_count
+> > +- mem_profiling         (only if CONFIG_MEM_ALLOC_PROFILING=3Dy)
+> >  - memory_failure_early_kill
+> >  - memory_failure_recovery
+> >  - min_free_kbytes
+> > @@ -425,6 +426,21 @@ e.g., up to one or two maps per allocation.
+> >  The default value is 65530.
+> >
+> >
+> > +mem_profiling
+> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > +
+> > +Enable memory profiling (when CONFIG_MEM_ALLOC_PROFILING=3Dy)
+> > +
+> > +1: Enable memory profiling.
+> > +
+> > +0: Disabld memory profiling.
+> > +
+> > +Enabling memory profiling introduces a small performance overhead for =
+all
+> > +memory allocations.
+> > +
+> > +The default value depends on CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_DEF=
+AULT.
+> > +
+> > +
+> >  memory_failure_early_kill:
+> >  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> >
+> > diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesys=
+tems/proc.rst
+> > index 104c6d047d9b..40d6d18308e4 100644
+> > --- a/Documentation/filesystems/proc.rst
+> > +++ b/Documentation/filesystems/proc.rst
+> > @@ -688,6 +688,7 @@ files are there, and which are missing.
+> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> >   File         Content
+> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> > + allocinfo    Memory allocations profiling information
+> >   apm          Advanced power management info
+> >   bootconfig   Kernel command line obtained from boot config,
+> >             and, if there were kernel parameters from the
+> > @@ -953,6 +954,33 @@ also be allocatable although a lot of filesystem m=
+etadata may have to be
+> >  reclaimed to achieve this.
+> >
+> >
+> > +allocinfo
+> > +~~~~~~~
+> > +
+> > +Provides information about memory allocations at all locations in the =
+code
+> > +base. Each allocation in the code is identified by its source file, li=
+ne
+> > +number, module and the function calling the allocation. The number of =
+bytes
+> > +allocated at each location is reported.
+> > +
+> > +Example output.
+> > +
+> > +::
+> > +
+> > +    > cat /proc/allocinfo
+> > +
+> > +      153MiB     mm/slub.c:1826 module:slub func:alloc_slab_page
+> > +     6.08MiB     mm/slab_common.c:950 module:slab_common func:_kmalloc=
+_order
+> > +     5.09MiB     mm/memcontrol.c:2814 module:memcontrol func:alloc_sla=
+b_obj_exts
+> > +     4.54MiB     mm/page_alloc.c:5777 module:page_alloc func:alloc_pag=
+es_exact
+> > +     1.32MiB     include/asm-generic/pgalloc.h:63 module:pgtable func:=
+__pte_alloc_one
+> > +     1.16MiB     fs/xfs/xfs_log_priv.h:700 module:xfs func:xlog_kvmall=
+oc
+> > +     1.00MiB     mm/swap_cgroup.c:48 module:swap_cgroup func:swap_cgro=
+up_prepare
+> > +      734KiB     fs/xfs/kmem.c:20 module:xfs func:kmem_alloc
+> > +      640KiB     kernel/rcu/tree.c:3184 module:tree func:fill_page_cac=
+he_func
+> > +      640KiB     drivers/char/virtio_console.c:452 module:virtio_conso=
+le func:alloc_buf
+> > +      ...
+> > +
+> > +
+> >  meminfo
+> >  ~~~~~~~
+> >
+> > diff --git a/include/asm-generic/codetag.lds.h b/include/asm-generic/co=
+detag.lds.h
+> > new file mode 100644
+> > index 000000000000..64f536b80380
+> > --- /dev/null
+> > +++ b/include/asm-generic/codetag.lds.h
+> > @@ -0,0 +1,14 @@
+> > +/* SPDX-License-Identifier: GPL-2.0-only */
+> > +#ifndef __ASM_GENERIC_CODETAG_LDS_H
+> > +#define __ASM_GENERIC_CODETAG_LDS_H
+> > +
+> > +#define SECTION_WITH_BOUNDARIES(_name)       \
+> > +     . =3D ALIGN(8);                   \
+> > +     __start_##_name =3D .;            \
+> > +     KEEP(*(_name))                  \
+> > +     __stop_##_name =3D .;
+> > +
+> > +#define CODETAG_SECTIONS()           \
+> > +     SECTION_WITH_BOUNDARIES(alloc_tags)
+> > +
+> > +#endif /* __ASM_GENERIC_CODETAG_LDS_H */
+> > diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vm=
+linux.lds.h
+> > index 5dd3a61d673d..c9997dc50c50 100644
+> > --- a/include/asm-generic/vmlinux.lds.h
+> > +++ b/include/asm-generic/vmlinux.lds.h
+> > @@ -50,6 +50,8 @@
+> >   *               [__nosave_begin, __nosave_end] for the nosave data
+> >   */
+> >
+> > +#include <asm-generic/codetag.lds.h>
+> > +
+> >  #ifndef LOAD_OFFSET
+> >  #define LOAD_OFFSET 0
+> >  #endif
+> > @@ -366,6 +368,7 @@
+> >       . =3D ALIGN(8);                                                  =
+ \
+> >       BOUNDED_SECTION_BY(__dyndbg_classes, ___dyndbg_classes)         \
+> >       BOUNDED_SECTION_BY(__dyndbg, ___dyndbg)                         \
+> > +     CODETAG_SECTIONS()                                              \
+> >       LIKELY_PROFILE()                                                \
+> >       BRANCH_PROFILE()                                                \
+> >       TRACE_PRINTKS()                                                 \
+> > diff --git a/include/linux/alloc_tag.h b/include/linux/alloc_tag.h
+> > new file mode 100644
+> > index 000000000000..cf55a149fa84
+> > --- /dev/null
+> > +++ b/include/linux/alloc_tag.h
+> > @@ -0,0 +1,133 @@
+> > +/* SPDX-License-Identifier: GPL-2.0 */
+> > +/*
+> > + * allocation tagging
+> > + */
+> > +#ifndef _LINUX_ALLOC_TAG_H
+> > +#define _LINUX_ALLOC_TAG_H
+> > +
+> > +#include <linux/bug.h>
+> > +#include <linux/codetag.h>
+> > +#include <linux/container_of.h>
+> > +#include <linux/preempt.h>
+> > +#include <asm/percpu.h>
+> > +#include <linux/cpumask.h>
+> > +#include <linux/static_key.h>
+> > +
+> > +struct alloc_tag_counters {
+> > +     u64 bytes;
+> > +     u64 calls;
+> > +};
+> > +
+> > +/*
+> > + * An instance of this structure is created in a special ELF section a=
+t every
+> > + * allocation callsite. At runtime, the special section is treated as
+> > + * an array of these. Embedded codetag utilizes codetag framework.
+> > + */
+> > +struct alloc_tag {
+> > +     struct codetag                  ct;
+> > +     struct alloc_tag_counters __percpu      *counters;
+> > +} __aligned(8);
+> > +
+> > +#ifdef CONFIG_MEM_ALLOC_PROFILING
+> > +
+> > +static inline struct alloc_tag *ct_to_alloc_tag(struct codetag *ct)
+> > +{
+> > +     return container_of(ct, struct alloc_tag, ct);
+> > +}
+> > +
+> > +#ifdef ARCH_NEEDS_WEAK_PER_CPU
+> > +/*
+> > + * When percpu variables are required to be defined as weak, static pe=
+rcpu
+> > + * variables can't be used inside a function (see comments for DECLARE=
+_PER_CPU_SECTION).
+> > + */
+> > +#error "Memory allocation profiling is incompatible with ARCH_NEEDS_WE=
+AK_PER_CPU"
+>
+> Is this enforced via Kconfig as well? (Looks like only alpha and s390?)
+
+Unfortunately ARCH_NEEDS_WEAK_PER_CPU is not a Kconfig option but
+CONFIG_DEBUG_FORCE_WEAK_PER_CPU is, so that one is handled via Kconfig
+(see "depends on !DEBUG_FORCE_WEAK_PER_CPU" in this patch). We have to
+avoid both cases because of this:
+https://elixir.bootlin.com/linux/latest/source/include/linux/percpu-defs.h#=
+L75,
+so I'm trying to provide an informative error here.
+
+>
+> > +#endif
+> > +
+> > +#define DEFINE_ALLOC_TAG(_alloc_tag, _old)                            =
+       \
+> > +     static DEFINE_PER_CPU(struct alloc_tag_counters, _alloc_tag_cntr)=
+;      \
+> > +     static struct alloc_tag _alloc_tag __used __aligned(8)           =
+       \
+> > +     __section("alloc_tags") =3D {                                    =
+         \
+> > +             .ct =3D CODE_TAG_INIT,                                   =
+         \
+> > +             .counters =3D &_alloc_tag_cntr };                        =
+         \
+> > +     struct alloc_tag * __maybe_unused _old =3D alloc_tag_save(&_alloc=
+_tag)
+> > +
+> > +DECLARE_STATIC_KEY_MAYBE(CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT=
+,
+> > +                     mem_alloc_profiling_key);
+> > +
+> > +static inline bool mem_alloc_profiling_enabled(void)
+> > +{
+> > +     return static_branch_maybe(CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_=
+DEFAULT,
+> > +                                &mem_alloc_profiling_key);
+> > +}
+> > +
+> > +static inline struct alloc_tag_counters alloc_tag_read(struct alloc_ta=
+g *tag)
+> > +{
+> > +     struct alloc_tag_counters v =3D { 0, 0 };
+> > +     struct alloc_tag_counters *counter;
+> > +     int cpu;
+> > +
+> > +     for_each_possible_cpu(cpu) {
+> > +             counter =3D per_cpu_ptr(tag->counters, cpu);
+> > +             v.bytes +=3D counter->bytes;
+> > +             v.calls +=3D counter->calls;
+> > +     }
+> > +
+> > +     return v;
+> > +}
+> > +
+> > +static inline void __alloc_tag_sub(union codetag_ref *ref, size_t byte=
+s)
+> > +{
+> > +     struct alloc_tag *tag;
+> > +
+> > +#ifdef CONFIG_MEM_ALLOC_PROFILING_DEBUG
+> > +     WARN_ONCE(ref && !ref->ct, "alloc_tag was not set\n");
+> > +#endif
+> > +     if (!ref || !ref->ct)
+> > +             return;
+> > +
+> > +     tag =3D ct_to_alloc_tag(ref->ct);
+> > +
+> > +     this_cpu_sub(tag->counters->bytes, bytes);
+> > +     this_cpu_dec(tag->counters->calls);
+> > +
+> > +     ref->ct =3D NULL;
+> > +}
+> > +
+> > +static inline void alloc_tag_sub(union codetag_ref *ref, size_t bytes)
+> > +{
+> > +     __alloc_tag_sub(ref, bytes);
+> > +}
+> > +
+> > +static inline void alloc_tag_sub_noalloc(union codetag_ref *ref, size_=
+t bytes)
+> > +{
+> > +     __alloc_tag_sub(ref, bytes);
+> > +}
+> > +
+> > +static inline void alloc_tag_add(union codetag_ref *ref, struct alloc_=
+tag *tag, size_t bytes)
+> > +{
+> > +#ifdef CONFIG_MEM_ALLOC_PROFILING_DEBUG
+> > +     WARN_ONCE(ref && ref->ct,
+> > +               "alloc_tag was not cleared (got tag for %s:%u)\n",\
+> > +               ref->ct->filename, ref->ct->lineno);
+> > +
+> > +     WARN_ONCE(!tag, "current->alloc_tag not set");
+> > +#endif
+> > +     if (!ref || !tag)
+> > +             return;
+> > +
+> > +     ref->ct =3D &tag->ct;
+> > +     this_cpu_add(tag->counters->bytes, bytes);
+> > +     this_cpu_inc(tag->counters->calls);
+> > +}
+> > +
+> > +#else
+> > +
+> > +#define DEFINE_ALLOC_TAG(_alloc_tag, _old)
+> > +static inline void alloc_tag_sub(union codetag_ref *ref, size_t bytes)=
+ {}
+> > +static inline void alloc_tag_sub_noalloc(union codetag_ref *ref, size_=
+t bytes) {}
+> > +static inline void alloc_tag_add(union codetag_ref *ref, struct alloc_=
+tag *tag,
+> > +                              size_t bytes) {}
+> > +
+> > +#endif
+> > +
+> > +#endif /* _LINUX_ALLOC_TAG_H */
+> > diff --git a/include/linux/sched.h b/include/linux/sched.h
+> > index ffe8f618ab86..da68a10517c8 100644
+> > --- a/include/linux/sched.h
+> > +++ b/include/linux/sched.h
+> > @@ -770,6 +770,10 @@ struct task_struct {
+> >       unsigned int                    flags;
+> >       unsigned int                    ptrace;
+> >
+> > +#ifdef CONFIG_MEM_ALLOC_PROFILING
+> > +     struct alloc_tag                *alloc_tag;
+> > +#endif
+>
+> Normally scheduling is very sensitive to having anything early in
+> task_struct. I would suggest moving this the CONFIG_SCHED_CORE ifdef
+> area.
+
+Thanks for the warning! We will look into that.
+
+>
+> > +
+> >  #ifdef CONFIG_SMP
+> >       int                             on_cpu;
+> >       struct __call_single_node       wake_entry;
+> > @@ -810,6 +814,7 @@ struct task_struct {
+> >       struct task_group               *sched_task_group;
+> >  #endif
+> >
+> > +
+> >  #ifdef CONFIG_UCLAMP_TASK
+> >       /*
+> >        * Clamp values requested for a scheduling entity.
+> > @@ -2183,4 +2188,23 @@ static inline int sched_core_idle_cpu(int cpu) {=
+ return idle_cpu(cpu); }
+> >
+> >  extern void sched_set_stop_task(int cpu, struct task_struct *stop);
+> >
+> > +#ifdef CONFIG_MEM_ALLOC_PROFILING
+> > +static inline struct alloc_tag *alloc_tag_save(struct alloc_tag *tag)
+> > +{
+> > +     swap(current->alloc_tag, tag);
+> > +     return tag;
+> > +}
+> > +
+> > +static inline void alloc_tag_restore(struct alloc_tag *tag, struct all=
+oc_tag *old)
+> > +{
+> > +#ifdef CONFIG_MEM_ALLOC_PROFILING_DEBUG
+> > +     WARN(current->alloc_tag !=3D tag, "current->alloc_tag was changed=
+:\n");
+> > +#endif
+> > +     current->alloc_tag =3D old;
+> > +}
+> > +#else
+> > +static inline struct alloc_tag *alloc_tag_save(struct alloc_tag *tag) =
+{ return NULL; }
+> > +#define alloc_tag_restore(_tag, _old)
+> > +#endif
+> > +
+> >  #endif
+> > diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
+> > index 0be2d00c3696..78d258ca508f 100644
+> > --- a/lib/Kconfig.debug
+> > +++ b/lib/Kconfig.debug
+> > @@ -972,6 +972,31 @@ config CODE_TAGGING
+> >       bool
+> >       select KALLSYMS
+> >
+> > +config MEM_ALLOC_PROFILING
+> > +     bool "Enable memory allocation profiling"
+> > +     default n
+> > +     depends on PROC_FS
+> > +     depends on !DEBUG_FORCE_WEAK_PER_CPU
+> > +     select CODE_TAGGING
+> > +     help
+> > +       Track allocation source code and record total allocation size
+> > +       initiated at that code location. The mechanism can be used to t=
+rack
+> > +       memory leaks with a low performance and memory impact.
+> > +
+> > +config MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT
+> > +     bool "Enable memory allocation profiling by default"
+> > +     default y
+> > +     depends on MEM_ALLOC_PROFILING
+> > +
+> > +config MEM_ALLOC_PROFILING_DEBUG
+> > +     bool "Memory allocation profiler debugging"
+> > +     default n
+> > +     depends on MEM_ALLOC_PROFILING
+> > +     select MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT
+> > +     help
+> > +       Adds warnings with helpful error messages for memory allocation
+> > +       profiling.
+> > +
+> >  source "lib/Kconfig.kasan"
+> >  source "lib/Kconfig.kfence"
+> >  source "lib/Kconfig.kmsan"
+> > diff --git a/lib/Makefile b/lib/Makefile
+> > index 6b48b22fdfac..859112f09bf5 100644
+> > --- a/lib/Makefile
+> > +++ b/lib/Makefile
+> > @@ -236,6 +236,8 @@ obj-$(CONFIG_OF_RECONFIG_NOTIFIER_ERROR_INJECT) +=
+=3D \
+> >  obj-$(CONFIG_FUNCTION_ERROR_INJECTION) +=3D error-inject.o
+> >
+> >  obj-$(CONFIG_CODE_TAGGING) +=3D codetag.o
+> > +obj-$(CONFIG_MEM_ALLOC_PROFILING) +=3D alloc_tag.o
+> > +
+> >  lib-$(CONFIG_GENERIC_BUG) +=3D bug.o
+> >
+> >  obj-$(CONFIG_HAVE_ARCH_TRACEHOOK) +=3D syscall.o
+> > diff --git a/lib/alloc_tag.c b/lib/alloc_tag.c
+> > new file mode 100644
+> > index 000000000000..4fc031f9cefd
+> > --- /dev/null
+> > +++ b/lib/alloc_tag.c
+> > @@ -0,0 +1,158 @@
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> > +#include <linux/alloc_tag.h>
+> > +#include <linux/fs.h>
+> > +#include <linux/gfp.h>
+> > +#include <linux/module.h>
+> > +#include <linux/proc_fs.h>
+> > +#include <linux/seq_buf.h>
+> > +#include <linux/seq_file.h>
+> > +
+> > +static struct codetag_type *alloc_tag_cttype;
+> > +
+> > +DEFINE_STATIC_KEY_MAYBE(CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT,
+> > +                     mem_alloc_profiling_key);
+> > +
+> > +static void *allocinfo_start(struct seq_file *m, loff_t *pos)
+> > +{
+> > +     struct codetag_iterator *iter;
+> > +     struct codetag *ct;
+> > +     loff_t node =3D *pos;
+> > +
+> > +     iter =3D kzalloc(sizeof(*iter), GFP_KERNEL);
+> > +     m->private =3D iter;
+> > +     if (!iter)
+> > +             return NULL;
+> > +
+> > +     codetag_lock_module_list(alloc_tag_cttype, true);
+> > +     *iter =3D codetag_get_ct_iter(alloc_tag_cttype);
+> > +     while ((ct =3D codetag_next_ct(iter)) !=3D NULL && node)
+> > +             node--;
+> > +
+> > +     return ct ? iter : NULL;
+> > +}
+> > +
+> > +static void *allocinfo_next(struct seq_file *m, void *arg, loff_t *pos=
+)
+> > +{
+> > +     struct codetag_iterator *iter =3D (struct codetag_iterator *)arg;
+> > +     struct codetag *ct =3D codetag_next_ct(iter);
+> > +
+> > +     (*pos)++;
+> > +     if (!ct)
+> > +             return NULL;
+> > +
+> > +     return iter;
+> > +}
+> > +
+> > +static void allocinfo_stop(struct seq_file *m, void *arg)
+> > +{
+> > +     struct codetag_iterator *iter =3D (struct codetag_iterator *)m->p=
+rivate;
+> > +
+> > +     if (iter) {
+> > +             codetag_lock_module_list(alloc_tag_cttype, false);
+> > +             kfree(iter);
+> > +     }
+> > +}
+> > +
+> > +static void alloc_tag_to_text(struct seq_buf *out, struct codetag *ct)
+> > +{
+> > +     struct alloc_tag *tag =3D ct_to_alloc_tag(ct);
+> > +     struct alloc_tag_counters counter =3D alloc_tag_read(tag);
+> > +     s64 bytes =3D counter.bytes;
+> > +     char val[10], *p =3D val;
+> > +
+> > +     if (bytes < 0) {
+> > +             *p++ =3D '-';
+> > +             bytes =3D -bytes;
+> > +     }
+> > +
+> > +     string_get_size(bytes, 1,
+> > +                     STRING_SIZE_BASE2|STRING_SIZE_NOSPACE,
+> > +                     p, val + ARRAY_SIZE(val) - p);
+> > +
+> > +     seq_buf_printf(out, "%8s %8llu ", val, counter.calls);
+> > +     codetag_to_text(out, ct);
+> > +     seq_buf_putc(out, ' ');
+> > +     seq_buf_putc(out, '\n');
+> > +}
+>
+> /me does happy seq_buf dance!
+>
+> > +
+> > +static int allocinfo_show(struct seq_file *m, void *arg)
+> > +{
+> > +     struct codetag_iterator *iter =3D (struct codetag_iterator *)arg;
+> > +     char *bufp;
+> > +     size_t n =3D seq_get_buf(m, &bufp);
+> > +     struct seq_buf buf;
+> > +
+> > +     seq_buf_init(&buf, bufp, n);
+> > +     alloc_tag_to_text(&buf, iter->ct);
+> > +     seq_commit(m, seq_buf_used(&buf));
+> > +     return 0;
+> > +}
+> > +
+> > +static const struct seq_operations allocinfo_seq_op =3D {
+> > +     .start  =3D allocinfo_start,
+> > +     .next   =3D allocinfo_next,
+> > +     .stop   =3D allocinfo_stop,
+> > +     .show   =3D allocinfo_show,
+> > +};
+> > +
+> > +static void __init procfs_init(void)
+> > +{
+> > +     proc_create_seq("allocinfo", 0444, NULL, &allocinfo_seq_op);
+> > +}
+>
+> As mentioned, this really should be in /sys somewhere.
+
+Ack.
+
+>
+> > +
+> > +static bool alloc_tag_module_unload(struct codetag_type *cttype,
+> > +                                 struct codetag_module *cmod)
+> > +{
+> > +     struct codetag_iterator iter =3D codetag_get_ct_iter(cttype);
+> > +     struct alloc_tag_counters counter;
+> > +     bool module_unused =3D true;
+> > +     struct alloc_tag *tag;
+> > +     struct codetag *ct;
+> > +
+> > +     for (ct =3D codetag_next_ct(&iter); ct; ct =3D codetag_next_ct(&i=
+ter)) {
+> > +             if (iter.cmod !=3D cmod)
+> > +                     continue;
+> > +
+> > +             tag =3D ct_to_alloc_tag(ct);
+> > +             counter =3D alloc_tag_read(tag);
+> > +
+> > +             if (WARN(counter.bytes, "%s:%u module %s func:%s has %llu=
+ allocated at module unload",
+> > +                       ct->filename, ct->lineno, ct->modname, ct->func=
+tion, counter.bytes))
+> > +                     module_unused =3D false;
+> > +     }
+> > +
+> > +     return module_unused;
+> > +}
+> > +
+> > +static struct ctl_table memory_allocation_profiling_sysctls[] =3D {
+> > +     {
+> > +             .procname       =3D "mem_profiling",
+> > +             .data           =3D &mem_alloc_profiling_key,
+> > +#ifdef CONFIG_MEM_ALLOC_PROFILING_DEBUG
+> > +             .mode           =3D 0444,
+> > +#else
+> > +             .mode           =3D 0644,
+> > +#endif
+> > +             .proc_handler   =3D proc_do_static_key,
+> > +     },
+> > +     { }
+> > +};
+> > +
+> > +static int __init alloc_tag_init(void)
+> > +{
+> > +     const struct codetag_type_desc desc =3D {
+> > +             .section        =3D "alloc_tags",
+> > +             .tag_size       =3D sizeof(struct alloc_tag),
+> > +             .module_unload  =3D alloc_tag_module_unload,
+> > +     };
+> > +
+> > +     alloc_tag_cttype =3D codetag_register_type(&desc);
+> > +     if (IS_ERR_OR_NULL(alloc_tag_cttype))
+> > +             return PTR_ERR(alloc_tag_cttype);
+> > +
+> > +     register_sysctl_init("vm", memory_allocation_profiling_sysctls);
+> > +     procfs_init();
+> > +
+> > +     return 0;
+> > +}
+> > +module_init(alloc_tag_init);
+> > diff --git a/scripts/module.lds.S b/scripts/module.lds.S
+> > index bf5bcf2836d8..45c67a0994f3 100644
+> > --- a/scripts/module.lds.S
+> > +++ b/scripts/module.lds.S
+> > @@ -9,6 +9,8 @@
+> >  #define DISCARD_EH_FRAME     *(.eh_frame)
+> >  #endif
+> >
+> > +#include <asm-generic/codetag.lds.h>
+> > +
+> >  SECTIONS {
+> >       /DISCARD/ : {
+> >               *(.discard)
+> > @@ -47,12 +49,17 @@ SECTIONS {
+> >       .data : {
+> >               *(.data .data.[0-9a-zA-Z_]*)
+> >               *(.data..L*)
+> > +             CODETAG_SECTIONS()
+> >       }
+> >
+> >       .rodata : {
+> >               *(.rodata .rodata.[0-9a-zA-Z_]*)
+> >               *(.rodata..L*)
+> >       }
+> > +#else
+> > +     .data : {
+> > +             CODETAG_SECTIONS()
+> > +     }
+> >  #endif
+> >  }
+>
+> Otherwise, looks good.
+
+Thanks!
+
+>
+> --
+> Kees Cook
 
