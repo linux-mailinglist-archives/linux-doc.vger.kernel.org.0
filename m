@@ -1,77 +1,93 @@
-Return-Path: <linux-doc+bounces-9216-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9217-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51821853A93
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 20:10:16 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B1DF853AC4
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 20:20:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 837881C2649E
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 19:10:15 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CC12F28C434
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 19:20:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F27131D69C;
-	Tue, 13 Feb 2024 19:09:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C63F1F618;
+	Tue, 13 Feb 2024 19:20:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="2VqIl8D4"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="UXy3zfYe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4CD51CD25;
-	Tue, 13 Feb 2024 19:09:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F2F51CD33;
+	Tue, 13 Feb 2024 19:20:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707851398; cv=none; b=M7F02uJF75L29bdtRB0A+jlZHEDljvJlaZBDEPBiyxuWCU7FeuP/+sxX/w1qhUuqtwun0pKBUL/JI3KP6soa+uHNkt9jzPa8H6yP6h7s+uhm9s0hHpXUgP1/SYdCmd+pDq2m5FF8GmB6n5Uh9bJNwtBfNgSMItKaPaU5vQcgMn0=
+	t=1707852034; cv=none; b=Nh/gAfFyB/jKNq854+OfDdviDsJOwyjlViKeq+VVWlm7UUf/itmpTTRVir532CFOusnvB1MoVdp3cx7ugIoXODlnFQH5DsU2CKwt3hkiaF3TZBEm2ISnMxEeh1npXeL+JVC3GtWQdNpsHStTKQNbJOCmMkGiQsJuHvclVEJbxfI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707851398; c=relaxed/simple;
-	bh=/QjGlW87PajSKynFEQYQzKjo6YWXcgGBvBtgW5K6AgA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OA9Fzhw1xX4vwwqByE/1INqjpTdVjJ00RhVnrd6aXnMFKszXRHv+W6yg6v/QgGWCePVpBidy4UARHDASZl0m+KxTsyk/QX3itkYi5x7V0eqX20o7lLK7Fy9kDmhwDR/p4g9/q3eGtd7r59GkJ/jxk9gkguT1T5Sn15jnQGMk17U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=2VqIl8D4; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9962EC433C7;
-	Tue, 13 Feb 2024 19:09:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1707851398;
-	bh=/QjGlW87PajSKynFEQYQzKjo6YWXcgGBvBtgW5K6AgA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=2VqIl8D4fgdC+cszjglP4zrkTyu8enPE512iZV1ghMmx9wCGCorn/UWdc2VBLyLy4
-	 QoSRFUNqB4HelpylFipPf+LfrdpsyrR6ODlXwbUS62ftt7hgiNasuT7/a7YfcwGcIr
-	 nYurcwH3QN8IrJg01ofocrdH5X8L21QEKNWl77wM=
-Date: Tue, 13 Feb 2024 20:09:54 +0100
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: corbet@lwn.net
+	s=arc-20240116; t=1707852034; c=relaxed/simple;
+	bh=bCBD7mPLAylg/6M3bBUD0Tc0oDZ4U8rgdh620O4x+0U=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=mT96NrmPmiZf0hWJU+wkP5xaopFVlqipmYb+cvZ/qw/p6K6tH7GA11lp/PpIDzC6C3McjP9kfzokVpnthj0h9r5J0zZiu+Hpb3+O7lZMmzMgFwRkZdk4gc4Sme0Zj/9Q0KaAHTtZuNGC8BgWBO+rduF1YNJ6jX5uJAnRLF+B/Qw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=UXy3zfYe; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net A34CF45ACA
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1707852031; bh=TJPwRgqvklzt+2lG0mVqS0xnQODHATZ076Sy/XkZG1U=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=UXy3zfYetLJkznjxjfelUZOqJPk1DuPI/IDFFGrdQaJLAi3kg+vRGeEIiRYoaWUgs
+	 pJFVHSRGsyuGEBlwjlq7am0t9sMQHJ5KgKY3dhe0XUVX1KIBRS1SO1JOeCyO7KyT/M
+	 a3n5wcV2xZ7ybc4qmnH0wJ4YEIN7ctLl65IyymWF+KrKkcjI09eJXK0HcYujKw3nrs
+	 5UEtvxzfs9f6/3BzHWg7VSZWTQmwUsKN6Uax3jGNi/ciw047cF+NRJPEpu09jAge11
+	 Vpu0b6BQ0+4WHlqxzdjKCKQeSSfWyzgnZvOfCIHu6Gl9jUU4oNaWYMA8LjjF3DeWTb
+	 R028Ober9z4Hg==
+Received: from localhost (unknown [IPv6:2601:280:5e00:625:67c:16ff:fe81:5f9b])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id A34CF45ACA;
+	Tue, 13 Feb 2024 19:20:31 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc: workflows@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, security@kernel.org,
-	Sasha Levin <sashal@kernel.org>, Lee Jones <lee@kernel.org>
+ linux-kernel@vger.kernel.org, security@kernel.org, Sasha Levin
+ <sashal@kernel.org>, Lee Jones <lee@kernel.org>
 Subject: Re: [PATCH] Documentation: Document the Linux Kernel CVE process
-Message-ID: <2024021322-pumice-corny-eabc@gregkh>
+In-Reply-To: <2024021322-pumice-corny-eabc@gregkh>
 References: <2024021314-unwelcome-shrill-690e@gregkh>
+ <2024021322-pumice-corny-eabc@gregkh>
+Date: Tue, 13 Feb 2024 12:20:30 -0700
+Message-ID: <87sf1w41dt.fsf@meer.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2024021314-unwelcome-shrill-690e@gregkh>
+Content-Type: text/plain
 
-On Tue, Feb 13, 2024 at 07:48:12PM +0100, Greg Kroah-Hartman wrote:
-> The Linux kernel project now has the ability to assign CVEs to fixed
-> issues, so document the process and how individual developers can get a
-> CVE if one is not automatically assigned for their fixes.
-> 
-> Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Signed-off-by: Sasha Levin <sashal@kernel.org>
-> Signed-off-by: Lee Jones <lee@kernel.org>
-> ---
+Greg Kroah-Hartman <gregkh@linuxfoundation.org> writes:
 
-Jon, if you don't have any objections, I can just take this in my tree
-for the next -rc pull request I have for Linus with other driver-core
-type stuff.
+> On Tue, Feb 13, 2024 at 07:48:12PM +0100, Greg Kroah-Hartman wrote:
+>> The Linux kernel project now has the ability to assign CVEs to fixed
+>> issues, so document the process and how individual developers can get a
+>> CVE if one is not automatically assigned for their fixes.
+>> 
+>> Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+>> Signed-off-by: Sasha Levin <sashal@kernel.org>
+>> Signed-off-by: Lee Jones <lee@kernel.org>
+>> ---
+>
+> Jon, if you don't have any objections, I can just take this in my tree
+> for the next -rc pull request I have for Linus with other driver-core
+> type stuff.
 
-thanks,
+Up to you - I probably have another 6.8 pull to do as well.  Happy
+either way, if you want to push it:
 
-greg k-h
+Acked-by: Jonathan Corbet <corbet@lwn.net>
+
+Thanks,
+
+jon
 
