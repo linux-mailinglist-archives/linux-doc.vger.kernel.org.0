@@ -1,171 +1,175 @@
-Return-Path: <linux-doc+bounces-9191-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9197-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54AAB853107
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 13:58:48 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1970A853297
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 15:05:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 872AC1C264E9
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 12:58:47 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C9A81281461
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Feb 2024 14:05:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 94F6C43AD1;
-	Tue, 13 Feb 2024 12:58:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=katalix.com header.i=@katalix.com header.b="PC2o7VK+"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06A8956B65;
+	Tue, 13 Feb 2024 14:05:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.katalix.com (mail.katalix.com [3.9.82.81])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C6E633C490;
-	Tue, 13 Feb 2024 12:58:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=3.9.82.81
+Received: from andre.telenet-ops.be (andre.telenet-ops.be [195.130.132.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C99F56764
+	for <linux-doc@vger.kernel.org>; Tue, 13 Feb 2024 14:05:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.130.132.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707829123; cv=none; b=DGop41xxoSyjLUpQ08XiigcijyOXf3AuccJJfPNONse6QeMCWlJq5euedc4mmemEdhcxfni0tMrViUYAf2ifh/sTporE9mifavgBgata4d0H6uZudoLf9DdrKVw482LszkL+C5fFq3dSMHnIj5INTM98fd5D4VEnnOheEdF03eQ=
+	t=1707833150; cv=none; b=P7hlOSSSWW0oCSqoVtInJwgp/BdVIFH13+OHPJhLBb7F3PtupOCpVBauxh60OEk/snG/2LVTHBVFw01yZgjNZdOn2iLmJdNcWRBcfhEJeZexCQw/PSJ4vsgyPjzbRTSRxA33sCjd2O9XweAWfXqv+6gAL7dm9GELLwwp1NIyKDc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707829123; c=relaxed/simple;
-	bh=8aKCQmHWe7W7w4cdBjfprF7BEjuAl+nGvi4s02wY+14=;
-	h=Date:From:To:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=mK321rivEIN3QWHnppUqXcfFBcT6S6OeKmncIj3A5t/rfS5WIXe5kp30G6lfw8QDCBfjhS54a3acfyLjGjuO6kI8WmgNtpjbRr1JQzilAen2F4lo8yYPlJWnOpd3tpjY7rou/dhk2ql1LhXIPqBHqf2177qY6AxOZkZvq/BfvUk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=katalix.com; spf=pass smtp.mailfrom=katalix.com; dkim=pass (2048-bit key) header.d=katalix.com header.i=@katalix.com header.b=PC2o7VK+; arc=none smtp.client-ip=3.9.82.81
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=katalix.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=katalix.com
-Received: from localhost (unknown [IPv6:2a02:8012:909b:0:eaae:9bde:cb7b:6924])
-	(Authenticated sender: tom)
-	by mail.katalix.com (Postfix) with ESMTPSA id B20027D5C1;
-	Tue, 13 Feb 2024 12:58:40 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=katalix.com; s=mail;
-	t=1707829120; bh=8aKCQmHWe7W7w4cdBjfprF7BEjuAl+nGvi4s02wY+14=;
-	h=Date:From:To:Subject:Message-ID:References:MIME-Version:
-	 Content-Disposition:In-Reply-To:From;
-	z=Date:=20Tue,=2013=20Feb=202024=2012:58:40=20+0000|From:=20Tom=20P
-	 arkin=20<tparkin@katalix.com>|To:=20Samuel=20Thibault=20<samuel.th
-	 ibault@ens-lyon.org>,=0D=0A=09James=20Chapman=20<jchapman@katalix.
-	 com>,=20edumazet@google.com,=0D=0A=09gnault@redhat.com,=20davem@da
-	 vemloft.net,=20kuba@kernel.org,=0D=0A=09pabeni@redhat.com,=20corbe
-	 t@lwn.net,=20netdev@vger.kernel.org,=0D=0A=09linux-doc@vger.kernel
-	 .org,=20linux-kernel@vger.kernel.org|Subject:=20Re:=20[PATCHv4]=20
-	 PPPoL2TP:=20Add=20more=20code=20snippets|Message-ID:=20<ZctngNzLYe
-	 /+Iman@katalix.com>|References:=20<20240212222344.xtv233r5sixme32h
-	 @begin>=0D=0A=20<ZctJnCeUCANJvxGj@katalix.com>=0D=0A=20<2024021311
-	 5304.3oyqkvkb3oqkauwd@begin>|MIME-Version:=201.0|Content-Dispositi
-	 on:=20inline|In-Reply-To:=20<20240213115304.3oyqkvkb3oqkauwd@begin
-	 >;
-	b=PC2o7VK+pdQcwYecedvvUXAqJZqbT1Wyw9PKS4f0OmBIKD3C7N9R35HH7t49gQ3TU
-	 NLMHjXHfYjIIm1YCRVW/wsW8flkgJ0hVUMF4bUTyCGQ9I9DSR4Wtw1zHEOXGCoqhuQ
-	 vzBQAr9FtNFrLQkSHydEFMam5O2Q9xvRWUbazeGk6GpV6c2SNG0+w9WmDpZPJlBtNG
-	 vXa0l5930XvXIC04ii8Nir67n2h5sE6FrR86GusTELOD1ofTCsYz365csyKsKwTz8e
-	 pK2x9mTlxCtcdH9i3zsfCG0DR6tGeU7jPyn9Sh9gyhgo/ft3lyOrVrsi0gDdW+xyfz
-	 Dzf2FbwYktyeA==
-Date: Tue, 13 Feb 2024 12:58:40 +0000
-From: Tom Parkin <tparkin@katalix.com>
-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	James Chapman <jchapman@katalix.com>, edumazet@google.com,
-	gnault@redhat.com, davem@davemloft.net, kuba@kernel.org,
-	pabeni@redhat.com, corbet@lwn.net, netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCHv4] PPPoL2TP: Add more code snippets
-Message-ID: <ZctngNzLYe/+Iman@katalix.com>
-References: <20240212222344.xtv233r5sixme32h@begin>
- <ZctJnCeUCANJvxGj@katalix.com>
- <20240213115304.3oyqkvkb3oqkauwd@begin>
+	s=arc-20240116; t=1707833150; c=relaxed/simple;
+	bh=ZffPAM8vbEKI9/iymjjwBQJuBEoGb2F5+MVh2HRI0PQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=lC8PMn+M9/ylTBFoe7VZcWMW4O0zXn0nR1m/KTxG6Dqkba4rLUALl3/+HBZGaytHCRyjP+c1A710FjoynnRuJwV8ONQjJbreVDe/quYy64BYc68wnB+67zZ1cKSUhh7uDbR9np59xmFjWBfFceoOM8w11D0+6xTDwpmudlyimQo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=glider.be; spf=none smtp.mailfrom=linux-m68k.org; arc=none smtp.client-ip=195.130.132.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=glider.be
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux-m68k.org
+Received: from ramsan.of.borg ([IPv6:2a02:1810:ac12:ed40:47b8:b872:d87c:512])
+	by andre.telenet-ops.be with bizsmtp
+	id me5d2B0091wMtyi01e5dSF; Tue, 13 Feb 2024 15:05:39 +0100
+Received: from rox.of.borg ([192.168.97.57])
+	by ramsan.of.borg with esmtp (Exim 4.95)
+	(envelope-from <geert@linux-m68k.org>)
+	id 1rZtPe-000Z13-Fy;
+	Tue, 13 Feb 2024 15:05:37 +0100
+Received: from geert by rox.of.borg with local (Exim 4.95)
+	(envelope-from <geert@linux-m68k.org>)
+	id 1rZpxf-00G3dP-K7;
+	Tue, 13 Feb 2024 11:24:23 +0100
+From: Geert Uytterhoeven <geert+renesas@glider.be>
+To: Andrew Davis <afd@ti.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Alex Shi <alexs@kernel.org>,
+	Yanteng Si <siyanteng@loongson.cn>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: linux-doc@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Geert Uytterhoeven <geert+renesas@glider.be>
+Subject: [PATCH] docs: dt: Update overlay file extension
+Date: Tue, 13 Feb 2024 11:24:18 +0100
+Message-Id: <5ac79104822cdce7a4caab87f14ce02477f85820.1707819511.git.geert+renesas@glider.be>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="G2qaJ+yw4/XCnyb6"
-Content-Disposition: inline
-In-Reply-To: <20240213115304.3oyqkvkb3oqkauwd@begin>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+Building DTB overlays from .dts files is no longer supported.
+Update the documentation to reflect this.
 
---G2qaJ+yw4/XCnyb6
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 81d362732bac05f6 ("kbuild: Disallow DTB overlays to built from .dts named source files")
+Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+---
+ Documentation/devicetree/overlay-notes.rst           | 12 ++++++------
+ .../translations/zh_CN/devicetree/overlay-notes.rst  | 12 ++++++------
+ 2 files changed, 12 insertions(+), 12 deletions(-)
 
-On  Tue, Feb 13, 2024 at 12:53:04 +0100, Samuel Thibault wrote:
-> Tom Parkin, le mar. 13 f=E9vr. 2024 10:51:08 +0000, a ecrit:
-> > > +        ret =3D ioctl(session_fd1, PPPIOCGCHAN, &chindx1);
-> > > +        if (ret < 0)
-> > > +                return -errno;
-> > > +
-> > > +        ret =3D ioctl(session_fd2, PPPIOCGCHAN, &chindx2);
-> > > +        if (ret < 0)
-> > > +                return -errno;
-> > > +
-> > > +        ppp_chan_fd =3D open("/dev/ppp", O_RDWR);
-> > > +        if (ppp_chan_fd < 0) {
-> > > +                return -errno;
-> > > +        }
-> > > +
-> > > +        ret =3D ioctl(ppp_chan_fd, PPPIOCATTCHAN, &chindx1);
-> > > +        if (ret < 0) {
-> > > +                close(ppp_chan_fd);
-> > > +                return -errno;
-> > > +        }
-> >=20
-> > I think we should drop the PPPIOCATTCHAN ioctl call here.
-> >=20
-> > The input file descriptors are called out as being PPPoX sockets
-> > created as described earlier, in which case they should both
-> > already be attached to a channel.
-> >=20
-> > It would make more sense IMO to call out the two ppp_chan_fd file
-> > descriptors as being input parameters alongside the PPPoX session file
-> > descriptors.
-> >=20
-> > > +
-> > > +        ret =3D ioctl(ppp_chan_fd, PPPIOCBRIDGECHAN, &chindx2);
-> > > +        close(ppp_chan_fd);
-> > > +        if (ret < 0)
-> > > +                return -errno;
-> > > +
-> > > +It can be noted that in this case no PPP interface is needed, and th=
-e PPP
-> > > +channel does not need to be kept open.  Only the session PPPoX data =
-sockets need
-> > > +to be kept open.
-> >=20
-> > Is it true to say that the PPP channel file descriptors can be closed
-> > by userspace?
->=20
-> In our code we do it
-> https://code.ffdn.org/sthibaul/l2tpns/-/blob/kernel/l2tpns.c?ref_type=3Dh=
-eads#L1295
-> and it works all fine indeed (and avoids that fd per session).
->=20
-> That's actually one of the reason why I made the snipped only take the
-> pppox sockets, and make it create the ppp chan fd only temporarily. AIUI
-> the pppox socket already has a ppp chan (returned by PPPIOCGCHAN), and
-> the ppp chan fd is there only for performing the bridging ioctl.
+diff --git a/Documentation/devicetree/overlay-notes.rst b/Documentation/devicetree/overlay-notes.rst
+index e139f22b363e9f36..35e79242af9a928d 100644
+--- a/Documentation/devicetree/overlay-notes.rst
++++ b/Documentation/devicetree/overlay-notes.rst
+@@ -38,10 +38,10 @@ Lets take an example where we have a foo board with the following base tree::
+ 	};
+     ---- foo.dts ---------------------------------------------------------------
+ 
+-The overlay bar.dts,
++The overlay bar.dtso,
+ ::
+ 
+-    ---- bar.dts - overlay target location by label ----------------------------
++    ---- bar.dtso - overlay target location by label ---------------------------
+ 	/dts-v1/;
+ 	/plugin/;
+ 	&ocp {
+@@ -51,7 +51,7 @@ The overlay bar.dts,
+ 			... /* various properties and child nodes */
+ 		};
+ 	};
+-    ---- bar.dts ---------------------------------------------------------------
++    ---- bar.dtso --------------------------------------------------------------
+ 
+ when loaded (and resolved as described in [1]) should result in foo+bar.dts::
+ 
+@@ -88,9 +88,9 @@ in the base DT. In this case, the target path can be provided. The target
+ location by label syntax is preferred because the overlay can be applied to
+ any base DT containing the label, no matter where the label occurs in the DT.
+ 
+-The above bar.dts example modified to use target path syntax is::
++The above bar.dtso example modified to use target path syntax is::
+ 
+-    ---- bar.dts - overlay target location by explicit path --------------------
++    ---- bar.dtso - overlay target location by explicit path -------------------
+ 	/dts-v1/;
+ 	/plugin/;
+ 	&{/ocp} {
+@@ -100,7 +100,7 @@ The above bar.dts example modified to use target path syntax is::
+ 			... /* various properties and child nodes */
+ 		}
+ 	};
+-    ---- bar.dts ---------------------------------------------------------------
++    ---- bar.dtso --------------------------------------------------------------
+ 
+ 
+ Overlay in-kernel API
+diff --git a/Documentation/translations/zh_CN/devicetree/overlay-notes.rst b/Documentation/translations/zh_CN/devicetree/overlay-notes.rst
+index 43e3c0bc5a9f8235..ba5edd05dc1e7fd2 100644
+--- a/Documentation/translations/zh_CN/devicetree/overlay-notes.rst
++++ b/Documentation/translations/zh_CN/devicetree/overlay-notes.rst
+@@ -43,10 +43,10 @@ Documentation/devicetree/dynamic-resolution-notes.rst[1]的配套文档。
+ 	};
+     ---- foo.dts ---------------------------------------------------------------
+ 
+-覆盖bar.dts,
++覆盖bar.dtso,
+ ::
+ 
+-    ---- bar.dts - 按标签覆盖目标位置 ----------------------------
++    ---- bar.dtso - 按标签覆盖目标位置 ---------------------------
+ 	/dts-v1/;
+ 	/插件/;
+ 	&ocp {
+@@ -56,7 +56,7 @@ Documentation/devicetree/dynamic-resolution-notes.rst[1]的配套文档。
+ 			... /* 各种属性和子节点 */
+ 		};
+ 	};
+-    ---- bar.dts ---------------------------------------------------------------
++    ---- bar.dtso --------------------------------------------------------------
+ 
+ 当加载（并按照[1]中描述的方式解决）时，应该产生foo+bar.dts::
+ 
+@@ -90,9 +90,9 @@ Documentation/devicetree/dynamic-resolution-notes.rst[1]的配套文档。
+ DT中的适当位置。在这种情况下，可以提供目标路径。通过标签的目标位置的语法是比
+ 较好的，因为不管标签在DT中出现在哪里，覆盖都可以被应用到任何包含标签的基础DT上。
+ 
+-上面的bar.dts例子被修改为使用目标路径语法，即为::
++上面的bar.dtso例子被修改为使用目标路径语法，即为::
+ 
+-    ---- bar.dts - 通过明确的路径覆盖目标位置 --------------------
++    ---- bar.dtso - 通过明确的路径覆盖目标位置 -------------------
+ 	/dts-v1/;
+ 	/插件/;
+ 	&{/ocp} {
+@@ -102,7 +102,7 @@ DT中的适当位置。在这种情况下，可以提供目标路径。通过标
+ 			... /* 各种外围设备和子节点 */
+ 		}
+ 	};
+-    ---- bar.dts ---------------------------------------------------------------
++    ---- bar.dtso --------------------------------------------------------------
+ 
+ 
+ 内核中关于覆盖的API
+-- 
+2.34.1
 
-Thanks for the code reference -- that makes it clearer.  And I'm glad
-someone (else) is using PPPIOCBRIDGECHAN :-)
-
-It's a while since I was looking in ppp_generic.c and you're right
-about the ppp channel fd.
---=20
-Tom Parkin
-Katalix Systems Ltd
-https://katalix.com
-Catalysts for your Embedded Linux software development
-
---G2qaJ+yw4/XCnyb6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEsUkgyDzMwrj81nq0lIwGZQq6i9AFAmXLZ30ACgkQlIwGZQq6
-i9DYkAf9GOhgqPlIofeqsI0xOlcmwUwi/8tE99f4HV85ghT242yIB66IYVCyGijG
-L5llsSOJ+d3cjw1/FrDAOFWuPira89FijTidj5ZgXApkGpHZo6Uomq/jYjNLXMh/
-cWqbMo53t2EMrwUgl804vkGAXQ5H9mIkuDGMegjO/Ld3pTDWstwwQWcZZBmUb33f
-116FyZcPNDzXmLvSDi7EBQBoXdZOXcXEaJl9XZZXgGjWrBzcKvs2Ed/emRKUUGRI
-ItlC1udf1eJ4RijloRzOUykwwigd/DdNEqb2xocrhQPnhFLBc2/Qj1iHYJYsMj24
-+U6BGaqqzeVjSqLucUAjj0zKFsOeOg==
-=+am9
------END PGP SIGNATURE-----
-
---G2qaJ+yw4/XCnyb6--
 
