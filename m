@@ -1,34 +1,34 @@
-Return-Path: <linux-doc+bounces-9374-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9385-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17E8B854FC5
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 18:19:39 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 29401855015
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 18:25:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E4592B2A834
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 17:19:22 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id BC1581F228FB
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 17:25:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7492D83A00;
-	Wed, 14 Feb 2024 17:19:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A4E183A09;
+	Wed, 14 Feb 2024 17:21:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="35fvl8bj"
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="dRgj2LnB"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AA4A7F7E0;
-	Wed, 14 Feb 2024 17:19:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87FA67FBC1;
+	Wed, 14 Feb 2024 17:21:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707931143; cv=none; b=DcP4o+yc7Zrys9WChikFsjtbe8XguIjwYCSaEeooHp35FmI0nzYn5EkfLm8QCo5dNx+e/HwUJHDUkQr/cX0nNRvNRg4WOm9egGA7eBAGZuvfnY6/A/hiC82egsDoJt+UR/BGLq1sf09orz29epYcMt/6GN5HMYKSpwlWsgHP3w4=
+	t=1707931303; cv=none; b=olB4bKhZJVtqvVuDqsphbKe1HjfFUGHH2qmpT9pjHLPnQCqEM9cZcEM1/cm7YC9LHoyXUDc+z2sPjYJZ4Yb28UWNTccDIByPb4TGu9IxhoO4i5TfySFAabuB+zgTwkt0OUa6TV0z2BrT0/AWHzBf/TQsY9/PeZgJfNxsDeDfVnY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707931143; c=relaxed/simple;
-	bh=FzmanoFfNktS2f2G7iWqRptc+GWThwORnp08ceRIa4k=;
+	s=arc-20240116; t=1707931303; c=relaxed/simple;
+	bh=RN7IJzmBHp/oF53sQKnXsqqY6WolQpSY3d3IbVeAPTU=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dIP7xbNGG65ZScvawCoTBYbs5Xu6JiyLEnkxV7yop6ZNQUwAAQOEfztQ3LBETep2sNAKJtMJogiDUWINLMjbi9kbmsKh0hdSB6Obg3iDXuaNF8ZAoTDO2fTHyqu6/ebKnEOnv8LnTK8Ujjvat1vSBdded1uTdrKyOtgJIPcKjrk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=35fvl8bj; arc=none smtp.client-ip=156.67.10.101
+	 Content-Type:Content-Disposition:In-Reply-To; b=jVo6nZoFBCe5abd88nj+Ruk6QDobAYVsSjnel8tDaaXdxY7euPT/x+aSYfv1VEevJ27bSZA/k0sEN8iGwwvIKoe6rxt8J7i3QyK5/TwdDTD6efwSsWaFIqex7QeFxkAWhmbB63wEeWUzETHjMfBhj/OzD3IvX7jEHbdTba8umP4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=dRgj2LnB; arc=none smtp.client-ip=156.67.10.101
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
@@ -36,13 +36,13 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
 	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
 	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=rqjuTCEFxSun0myagncIypgOBLIS1dt11iBFupB/8I0=; b=35fvl8bjUNypOVFnnp7BYsLaCU
-	htuVcTLOpxRx5y6RRlA9/WqKclOgTV47qY8c6NfL7YGMbIBx+MIRCEjT2nY2lJTVLPBbVaWW8KXYt
-	ch1niwMWsbH4e9GxFF89AOQhp44UDWWLlkYFlT9CDZL6kQgrJSk/0dEEpH6Qpipl3X+g=;
+	bh=qAJ9jSGTnf0lF8ajDMvOnhF9y048KJNQYMloKOvn0Rw=; b=dRgj2LnB/Jss5dFdOQrTwLVYnO
+	8suXFCUsQ1bbjq7X7R2PJzDHdv5CtdjkRboEGKt4LUIakeNFBIAddM/ukhP8u+q3d8pR/a6phDfFN
+	UqG8KGuZ80tIarZ62PZIErditHeK9T3erRTHfvZ8cGlUcaBlYTflJU06+nyBKsHJzgJQ=;
 Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
 	(envelope-from <andrew@lunn.ch>)
-	id 1raIuR-007oA8-FZ; Wed, 14 Feb 2024 18:18:59 +0100
-Date: Wed, 14 Feb 2024 18:18:59 +0100
+	id 1raIwv-007oB3-6H; Wed, 14 Feb 2024 18:21:33 +0100
+Date: Wed, 14 Feb 2024 18:21:33 +0100
 From: Andrew Lunn <andrew@lunn.ch>
 To: Kory Maincent <kory.maincent@bootlin.com>
 Cc: "David S. Miller" <davem@davemloft.net>,
@@ -65,11 +65,11 @@ Cc: "David S. Miller" <davem@davemloft.net>,
 	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
 	linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
 	Dent Project <dentproject@linuxfoundation.org>
-Subject: Re: [PATCH net-next v3 05/17] net: pse-pd: Introduce PSE types
- enumeration
-Message-ID: <d2f974e4-6b31-49c0-88ac-7741a980739c@lunn.ch>
+Subject: Re: [PATCH net-next v3 06/17] net: ethtool: pse-pd: Expand pse
+ commands with the PSE PoE interface
+Message-ID: <55d90957-9a44-4c19-930e-5461963738ac@lunn.ch>
 References: <20240208-feature_poe-v3-0-531d2674469e@bootlin.com>
- <20240208-feature_poe-v3-5-531d2674469e@bootlin.com>
+ <20240208-feature_poe-v3-6-531d2674469e@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -78,15 +78,15 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240208-feature_poe-v3-5-531d2674469e@bootlin.com>
+In-Reply-To: <20240208-feature_poe-v3-6-531d2674469e@bootlin.com>
 
-On Thu, Feb 08, 2024 at 02:08:42PM +0100, Kory Maincent wrote:
-> Introduce an enumeration to define PSE types (C33 or PoDL),
-> utilizing a bitfield for potential future support of both types.
-> Include 'pse_get_types' helper for external access to PSE type info.
+On Thu, Feb 08, 2024 at 02:08:43PM +0100, Kory Maincent wrote:
+> Add PSE PoE interface support in the ethtool pse command.
 > 
 > Sponsored-by: Dent Project <dentproject@linuxfoundation.org>
 > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+
+I'm not particularly knowledgeable with netlink, but...
 
 Reviewed-by: Andrew Lunn <andrew@lunn.ch>
 
