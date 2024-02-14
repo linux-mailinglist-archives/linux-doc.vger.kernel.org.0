@@ -1,193 +1,199 @@
-Return-Path: <linux-doc+bounces-9439-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9428-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1ABF58555EE
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 23:34:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2BAE8555B2
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 23:23:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 2FD35B283C4
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 22:34:13 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id BFD0AB271D0
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 22:22:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 57CEF145FE7;
-	Wed, 14 Feb 2024 22:32:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00BEA1420A4;
+	Wed, 14 Feb 2024 22:22:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="GafnFw2e"
+	dkim=pass (2048-bit key) header.d=fromorbit-com.20230601.gappssmtp.com header.i=@fromorbit-com.20230601.gappssmtp.com header.b="GOIgzvdr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 968C2145B2A;
-	Wed, 14 Feb 2024 22:32:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.165.32
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A23A91419A1
+	for <linux-doc@vger.kernel.org>; Wed, 14 Feb 2024 22:22:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707949941; cv=none; b=NNgoyfFsg/fOh3vGGqmS8HJqzGlLzKqcHGt5uVge0/SMazvdIkzFk0d3L7QFlom5AGsRMIRHtkqRz8W477BbiXClQOO6w33qUohRlj4qtgoUB7t5V5lRLd6JRsKO7JK2rjTu6+5Jo3blzWsXqz/zKDMXxLlPc6T5ktdeG8MBS/A=
+	t=1707949361; cv=none; b=i+4utVanymTWyV8BdFLGtLw+aMQiM2dQW2jG+ijMvFe7eGBspPNILj0Z3N0zaZ369Y9Wvfebhejufaf1ZPXQzk4fY7KC6Xu93zSoNEIqBtHWfa2R4PWGw+jIs4lz71UXfFwSOk9ef9luBLaECji5st2IhSVpXuJ9GeKq3XScIHs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707949941; c=relaxed/simple;
-	bh=flFnoxSjJPiZN+KWO/A4dvYo7tj50mI8G+STmxqDfgs=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=J2NzAC6GGJclP6ZPh3c7VOYT8SOvBm6+6XJF1Tcj7n6PbqsaKoQurk2M1l0dH2waJqLBE5JOi5ei0Cgh94qHFPjBAgmlD1KOzxX9tUzR1tbXYklan4X4KRFidI8OuarSgsXWezEWMVYG5JyP5ZYXrBBvvqWg0tu7rmRuL6NB9Dk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=GafnFw2e; arc=none smtp.client-ip=205.220.165.32
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oracle.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 41ELiRJJ022678;
-	Wed, 14 Feb 2024 22:31:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding; s=corp-2023-11-20;
- bh=LywYV7sKOLgcRW6dEU5AQlOwu5jlNOpmyybhEKQBFTU=;
- b=GafnFw2eABZO4lj7v9fXjWJdBUyJKZDU7FdbeU9CvB6420yuZxeKEZh+v2I8qeNffQAE
- NgZs4j7tgGgequMTvhI0U1lg9YAbg14dayb7B0s5DkqhEV253dHbc9HOYf1ORUbYmn5a
- lFIH0mCHjMhOK+y3VVwvm83Vk+XPjp7nJB1MXSmN3LhC6bLypuvkHqEwmqyUweJPD6rj
- T1k5VRMKbwFFGGrsf4Z9oT7I/KZON3AORKBOOEMX0QjT4vMFFVYlTxH4/EmDSdkge5iG
- Pm7PHPtHPmvAdukUxQO3ecQZG8Zu2X2t7k6AQbstXFQyn0q1zJ/YJBo7JFp3gcMdJgw+ bw== 
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3w92ppghkc-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 14 Feb 2024 22:31:49 +0000
-Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 41EM0KMa000657;
-	Wed, 14 Feb 2024 22:31:48 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 3w5yk9n7hq-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Wed, 14 Feb 2024 22:31:48 +0000
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 41EMVTVO004281;
-	Wed, 14 Feb 2024 22:31:47 GMT
-Received: from bur-virt-x6-2-100.us.oracle.com (bur-virt-x6-2-100.us.oracle.com [10.153.92.40])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 3w5yk9n72r-16
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Wed, 14 Feb 2024 22:31:47 +0000
-From: Ross Philipson <ross.philipson@oracle.com>
-To: linux-kernel@vger.kernel.org, x86@kernel.org,
-        linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-crypto@vger.kernel.org, kexec@lists.infradead.org,
-        linux-efi@vger.kernel.org
-Cc: ross.philipson@oracle.com, dpsmith@apertussolutions.com,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
-        dave.hansen@linux.intel.com, ardb@kernel.org, mjg59@srcf.ucam.org,
-        James.Bottomley@hansenpartnership.com, peterhuewe@gmx.de,
-        jarkko@kernel.org, jgg@ziepe.ca, luto@amacapital.net,
-        nivedita@alum.mit.edu, herbert@gondor.apana.org.au,
-        davem@davemloft.net, kanth.ghatraju@oracle.com,
-        trenchboot-devel@googlegroups.com
-Subject: [PATCH v8 15/15] x86: EFI stub DRTM launch support for Secure Launch
-Date: Wed, 14 Feb 2024 14:18:47 -0800
-Message-Id: <20240214221847.2066632-16-ross.philipson@oracle.com>
-X-Mailer: git-send-email 2.39.3
-In-Reply-To: <20240214221847.2066632-1-ross.philipson@oracle.com>
-References: <20240214221847.2066632-1-ross.philipson@oracle.com>
+	s=arc-20240116; t=1707949361; c=relaxed/simple;
+	bh=Tjfak4zeHO2RhUSUhpoioPVs+jARNcl60hmLZOIqIDM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=J5IvBiG6Es2CkJtOJcFs2pPLVkbODcnMRSisEHoSsYf3JQZLuOfLJa3IY5U8vtxbyC4mDCA3veRTo7Xfnc/jgtWLa177umjYajqWuX4JJBhAg+MQFnJwEEW9J1iM0vUAf9jOK0VF4xaW8DPYApsa0ltH+U26UpFAwsTHuDa+PQQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fromorbit.com; spf=pass smtp.mailfrom=fromorbit.com; dkim=pass (2048-bit key) header.d=fromorbit-com.20230601.gappssmtp.com header.i=@fromorbit-com.20230601.gappssmtp.com header.b=GOIgzvdr; arc=none smtp.client-ip=209.85.215.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fromorbit.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fromorbit.com
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-5d81b08d6f2so277025a12.0
+        for <linux-doc@vger.kernel.org>; Wed, 14 Feb 2024 14:22:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fromorbit-com.20230601.gappssmtp.com; s=20230601; t=1707949358; x=1708554158; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=ln+OOvGmpFuiRMz6w7NK4oosvSzfGSRKkgDvCaci/QI=;
+        b=GOIgzvdrEpOzSeg47eMOE4siXoNP0ukhNR/non+Iru16Vy7bkf5L0ggyiocz+o/4au
+         7jy0wBUP+y7dVw6PSpDo5rNJ6yp4fyKsett31PWa3Y2nMd/RE5wY5D5IDaH2Vcald3Yw
+         E0sQi/slYrB+9jZj63fyzKIwNELLirugt8tDINfLxMWOH+wgiVkx5LdttrxR3oxsCVGl
+         gCuwMdZFgPhH8uAQTOLadpcWbSkkXD1/Agl83sE4/ZMbRh3Z2I1k/qI1plZBQEj6foaR
+         Fu3srphsm+2Jj3mrFaW8SrKtgb5Ne4s5sBFe5G8flEIBtCYNvCpC/AFouv9q9OEf94Pu
+         24MA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1707949358; x=1708554158;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ln+OOvGmpFuiRMz6w7NK4oosvSzfGSRKkgDvCaci/QI=;
+        b=WIHQz6HzfEQYUb5dEHkgvIUW/Xji1YBxfYjEv7LAt1nLwrf1NPEOlXIQm8sXEYgRQY
+         hIdRCfRUtxaeTCzMmY8L+VaIcIcQCalxT9+pilg4EFRFvWc/j+abGmk4DjnLB8tf66kt
+         NUV83NnAtg6YKDRNKKBWilY5SZFrAU29u7lg49sOaWCcDUoEzoR9GU0ORrVIVt4teuOu
+         oaQXSR52bF/R7yKa2m3dDYCyxy5GmBQTMosgtrR6qsjCU58ShY2u68DKf3Z/Q2ReOTLM
+         Dfz0M2tF1bkjopEum58bq8tDZrolNEtf3Zhmk0ZbCM3hUMfkSKow0KPsTQMaZhCN3uvp
+         RwPA==
+X-Forwarded-Encrypted: i=1; AJvYcCVdeUddcPN/sHviIhyMx9OwT8ApV53zIBOyXtxaeCPKvWTmdLmz8trv4EYlPAZ7/3+Y2V9QJSQ06wZcWFFU8JtY/aKWFXfZwAyq
+X-Gm-Message-State: AOJu0YwT2ASGqjJY/ScF16TO0XkGGu+dEpz0fY0on9UZIEmwMYBzrBQb
+	+FMHbUVYZLo9tlkfWkWODn9DhKXARhHzdm6A6YwET6jz8/WgZ3ODRF6oc78BPi0=
+X-Google-Smtp-Source: AGHT+IHTGeIRIsITdPStGM5mFftKvPz626lejWEKKG4hpUncJNP4ImSALCuOSyfVaorY4mjRZpEnMA==
+X-Received: by 2002:a05:6a20:d703:b0:19e:9b19:96c0 with SMTP id iz3-20020a056a20d70300b0019e9b1996c0mr191489pzb.7.1707949357817;
+        Wed, 14 Feb 2024 14:22:37 -0800 (PST)
+X-Forwarded-Encrypted: i=1; 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
+Received: from dread.disaster.area (pa49-181-38-249.pa.nsw.optusnet.com.au. [49.181.38.249])
+        by smtp.gmail.com with ESMTPSA id t29-20020a62d15d000000b006e0a55790easm9168222pfl.216.2024.02.14.14.22.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Feb 2024 14:22:36 -0800 (PST)
+Received: from dave by dread.disaster.area with local (Exim 4.96)
+	(envelope-from <david@fromorbit.com>)
+	id 1raNeD-006ZVB-2T;
+	Thu, 15 Feb 2024 09:22:33 +1100
+Date: Thu, 15 Feb 2024 09:22:33 +1100
+From: Dave Chinner <david@fromorbit.com>
+To: Suren Baghdasaryan <surenb@google.com>
+Cc: akpm@linux-foundation.org, kent.overstreet@linux.dev, mhocko@suse.com,
+	vbabka@suse.cz, hannes@cmpxchg.org, roman.gushchin@linux.dev,
+	mgorman@suse.de, dave@stgolabs.net, willy@infradead.org,
+	liam.howlett@oracle.com, corbet@lwn.net, void@manifault.com,
+	peterz@infradead.org, juri.lelli@redhat.com,
+	catalin.marinas@arm.com, will@kernel.org, arnd@arndb.de,
+	tglx@linutronix.de, mingo@redhat.com, dave.hansen@linux.intel.com,
+	x86@kernel.org, peterx@redhat.com, david@redhat.com,
+	axboe@kernel.dk, mcgrof@kernel.org, masahiroy@kernel.org,
+	nathan@kernel.org, dennis@kernel.org, tj@kernel.org,
+	muchun.song@linux.dev, rppt@kernel.org, paulmck@kernel.org,
+	pasha.tatashin@soleen.com, yosryahmed@google.com, yuzhao@google.com,
+	dhowells@redhat.com, hughd@google.com, andreyknvl@gmail.com,
+	keescook@chromium.org, ndesaulniers@google.com, vvvvvv@google.com,
+	gregkh@linuxfoundation.org, ebiggers@google.com, ytcoode@gmail.com,
+	vincent.guittot@linaro.org, dietmar.eggemann@arm.com,
+	rostedt@goodmis.org, bsegall@google.com, bristot@redhat.com,
+	vschneid@redhat.com, cl@linux.com, penberg@kernel.org,
+	iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com, glider@google.com,
+	elver@google.com, dvyukov@google.com, shakeelb@google.com,
+	songmuchun@bytedance.com, jbaron@akamai.com, rientjes@google.com,
+	minchan@google.com, kaleshsingh@google.com, kernel-team@android.com,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	iommu@lists.linux.dev, linux-arch@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+	linux-modules@vger.kernel.org, kasan-dev@googlegroups.com,
+	cgroups@vger.kernel.org
+Subject: Re: [PATCH v3 25/35] xfs: Memory allocation profiling fixups
+Message-ID: <Zc09KRo7nMlSGpG6@dread.disaster.area>
+References: <20240212213922.783301-1-surenb@google.com>
+ <20240212213922.783301-26-surenb@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-02-14_14,2024-02-14_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 phishscore=0 mlxscore=0
- bulkscore=0 spamscore=0 malwarescore=0 adultscore=0 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2311290000
- definitions=main-2402140170
-X-Proofpoint-ORIG-GUID: jd8QLRG0hZFTbiXK0o9sbVAzU9z96nCn
-X-Proofpoint-GUID: jd8QLRG0hZFTbiXK0o9sbVAzU9z96nCn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240212213922.783301-26-surenb@google.com>
 
-This support allows the DRTM launch to be initiated after an EFI stub
-launch of the Linux kernel is done. This is accomplished by providing
-a handler to jump to when a Secure Launch is in progress. This has to be
-called after the EFI stub does Exit Boot Services.
+On Mon, Feb 12, 2024 at 01:39:11PM -0800, Suren Baghdasaryan wrote:
+> From: Kent Overstreet <kent.overstreet@linux.dev>
+> 
+> This adds an alloc_hooks() wrapper around kmem_alloc(), so that we can
+> have allocations accounted to the proper callsite.
+> 
+> Signed-off-by: Kent Overstreet <kent.overstreet@linux.dev>
+> Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+> ---
+>  fs/xfs/kmem.c |  4 ++--
+>  fs/xfs/kmem.h | 10 ++++------
+>  2 files changed, 6 insertions(+), 8 deletions(-)
+> 
+> diff --git a/fs/xfs/kmem.c b/fs/xfs/kmem.c
+> index c557a030acfe..9aa57a4e2478 100644
+> --- a/fs/xfs/kmem.c
+> +++ b/fs/xfs/kmem.c
+> @@ -8,7 +8,7 @@
+>  #include "xfs_trace.h"
+>  
+>  void *
+> -kmem_alloc(size_t size, xfs_km_flags_t flags)
+> +kmem_alloc_noprof(size_t size, xfs_km_flags_t flags)
+>  {
+>  	int	retries = 0;
+>  	gfp_t	lflags = kmem_flags_convert(flags);
+> @@ -17,7 +17,7 @@ kmem_alloc(size_t size, xfs_km_flags_t flags)
+>  	trace_kmem_alloc(size, flags, _RET_IP_);
+>  
+>  	do {
+> -		ptr = kmalloc(size, lflags);
+> +		ptr = kmalloc_noprof(size, lflags);
+>  		if (ptr || (flags & KM_MAYFAIL))
+>  			return ptr;
+>  		if (!(++retries % 100))
+> diff --git a/fs/xfs/kmem.h b/fs/xfs/kmem.h
+> index b987dc2c6851..c4cf1dc2a7af 100644
+> --- a/fs/xfs/kmem.h
+> +++ b/fs/xfs/kmem.h
+> @@ -6,6 +6,7 @@
+>  #ifndef __XFS_SUPPORT_KMEM_H__
+>  #define __XFS_SUPPORT_KMEM_H__
+>  
+> +#include <linux/alloc_tag.h>
+>  #include <linux/slab.h>
+>  #include <linux/sched.h>
+>  #include <linux/mm.h>
+> @@ -56,18 +57,15 @@ kmem_flags_convert(xfs_km_flags_t flags)
+>  	return lflags;
+>  }
+>  
+> -extern void *kmem_alloc(size_t, xfs_km_flags_t);
+>  static inline void  kmem_free(const void *ptr)
+>  {
+>  	kvfree(ptr);
+>  }
+>  
+> +extern void *kmem_alloc_noprof(size_t, xfs_km_flags_t);
+> +#define kmem_alloc(...)			alloc_hooks(kmem_alloc_noprof(__VA_ARGS__))
+>  
+> -static inline void *
+> -kmem_zalloc(size_t size, xfs_km_flags_t flags)
+> -{
+> -	return kmem_alloc(size, flags | KM_ZERO);
+> -}
+> +#define kmem_zalloc(_size, _flags)	kmem_alloc((_size), (_flags) | KM_ZERO)
+>  
+>  /*
+>   * Zone interfaces
+> -- 
+> 2.43.0.687.g38aa6559b0-goog
 
-Signed-off-by: Ross Philipson <ross.philipson@oracle.com>
----
- drivers/firmware/efi/libstub/x86-stub.c | 55 +++++++++++++++++++++++++
- 1 file changed, 55 insertions(+)
+These changes can be dropped - the fs/xfs/kmem.[ch] stuff is now
+gone in linux-xfs/for-next.
 
-diff --git a/drivers/firmware/efi/libstub/x86-stub.c b/drivers/firmware/efi/libstub/x86-stub.c
-index 0d510c9a06a4..4df2cf539194 100644
---- a/drivers/firmware/efi/libstub/x86-stub.c
-+++ b/drivers/firmware/efi/libstub/x86-stub.c
-@@ -9,6 +9,7 @@
- #include <linux/efi.h>
- #include <linux/pci.h>
- #include <linux/stddef.h>
-+#include <linux/slr_table.h>
- 
- #include <asm/efi.h>
- #include <asm/e820/types.h>
-@@ -810,6 +811,57 @@ static efi_status_t efi_decompress_kernel(unsigned long *kernel_entry)
- 	return EFI_SUCCESS;
- }
- 
-+static void efi_secure_launch(struct boot_params *boot_params)
-+{
-+	struct slr_entry_uefi_config *uefi_config;
-+	struct slr_uefi_cfg_entry *uefi_entry;
-+	struct slr_entry_dl_info *dlinfo;
-+	efi_guid_t guid = SLR_TABLE_GUID;
-+	struct slr_table *slrt;
-+	u64 memmap_hi;
-+	void *table;
-+	u8 buf[64] = {0};
-+
-+	table = get_efi_config_table(guid);
-+
-+	/*
-+	 * The presence of this table indicated a Secure Launch
-+	 * is being requested.
-+	 */
-+	if (!table)
-+		return;
-+
-+	slrt = (struct slr_table *)table;
-+
-+	if (slrt->magic != SLR_TABLE_MAGIC)
-+		return;
-+
-+	/* Add config information to measure the UEFI memory map */
-+	uefi_config = (struct slr_entry_uefi_config *)buf;
-+	uefi_config->hdr.tag = SLR_ENTRY_UEFI_CONFIG;
-+	uefi_config->hdr.size = sizeof(*uefi_config) + sizeof(*uefi_entry);
-+	uefi_config->revision = SLR_UEFI_CONFIG_REVISION;
-+	uefi_config->nr_entries = 1;
-+	uefi_entry = (struct slr_uefi_cfg_entry *)(buf + sizeof(*uefi_config));
-+	uefi_entry->pcr = 18;
-+	uefi_entry->cfg = boot_params->efi_info.efi_memmap;
-+	memmap_hi = boot_params->efi_info.efi_memmap_hi;
-+	uefi_entry->cfg |= memmap_hi << 32;
-+	uefi_entry->size = boot_params->efi_info.efi_memmap_size;
-+	memcpy(&uefi_entry->evt_info[0], "Measured UEFI memory map",
-+		strlen("Measured UEFI memory map"));
-+
-+	if (slr_add_entry(slrt, (struct slr_entry_hdr *)uefi_config))
-+		return;
-+
-+	/* Jump through DL stub to initiate Secure Launch */
-+	dlinfo = (struct slr_entry_dl_info *)
-+		slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_DL_INFO);
-+
-+	asm volatile ("jmp *%%rax"
-+		      : : "a" (dlinfo->dl_handler), "D" (&dlinfo->bl_context));
-+}
-+
- static void __noreturn enter_kernel(unsigned long kernel_addr,
- 				    struct boot_params *boot_params)
- {
-@@ -934,6 +986,9 @@ void __noreturn efi_stub_entry(efi_handle_t handle,
- 		goto fail;
- 	}
- 
-+	/* If a Secure Launch is in progress, this never returns */
-+	efi_secure_launch(boot_params);
-+
- 	/*
- 	 * Call the SEV init code while still running with the firmware's
- 	 * GDT/IDT, so #VC exceptions will be handled by EFI.
+-Dave.
 -- 
-2.39.3
-
+Dave Chinner
+david@fromorbit.com
 
