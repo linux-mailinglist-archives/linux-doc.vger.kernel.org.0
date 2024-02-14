@@ -1,153 +1,128 @@
-Return-Path: <linux-doc+bounces-9343-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9341-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7B71854C1C
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 16:02:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFA79854C05
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 16:00:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B7C281C282F6
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 15:02:24 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2E5AC1C24508
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 15:00:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E09675B5DB;
-	Wed, 14 Feb 2024 15:01:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C92B5B5DB;
+	Wed, 14 Feb 2024 15:00:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=tesarici.cz header.i=@tesarici.cz header.b="rfkPfXKF"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="jfoJ/wmk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bee.tesarici.cz (bee.tesarici.cz [77.93.223.253])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69A1A5A4CE;
-	Wed, 14 Feb 2024 15:01:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=77.93.223.253
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45D635B1F3;
+	Wed, 14 Feb 2024 15:00:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707922916; cv=none; b=hJEuATabd04O8Ohj5WIS5zCKxnZFD5CdFjywPI2COKWkxCH06mT5rKXcWOjbF6xiHwL3Msx5Z3fi5Z8Thva/hz0oiP/9WZ0XWOMneqkUgxKqAARX/PR2ZHhuoPqWMcaWNM2WVuPXyYoI+w0YPveiPgQ1uzPtjOz+22D05hjQeDI=
+	t=1707922842; cv=none; b=swLvXy+KY4ZMDzf7Qher6/BH2nQcWQ3ZYy0GXu4JFetNPzdr9WOVuf3Gn1m5AqpVa5fljAgzbMqmT+6j10OiTZ1JgKiOaneT19VhchStogNVbRixTLrH952cWQSEx3y+N2aJd1P1PDwot/zivv36475pyHz5W1rDJK3eAlx0bzs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707922916; c=relaxed/simple;
-	bh=MA5CG8ZPxr9j61ieXNWQg0zI2IXSl8QLuVz7JxDklWs=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=SJ7AxJ2QJzkTwmd69k8ppknZDtNodST+mnY2t8DTxvyFc3SUFs8f/BXhw6i8iJDMrZzZF5BQ2gx7wlWYasGVdb+9JE/FkgtG4cKBE6wWsdug6yGFPXkGOp6A71QVsHeB93bKQFBvjEkl88pNftsk7Jppg4wlmkcLzbDxD2nM3qo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=tesarici.cz; spf=pass smtp.mailfrom=tesarici.cz; dkim=pass (2048-bit key) header.d=tesarici.cz header.i=@tesarici.cz header.b=rfkPfXKF; arc=none smtp.client-ip=77.93.223.253
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=tesarici.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tesarici.cz
-Received: from meshulam.tesarici.cz (dynamic-2a00-1028-83b8-1e7a-4427-cc85-6706-c595.ipv6.o2.cz [IPv6:2a00:1028:83b8:1e7a:4427:cc85:6706:c595])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by bee.tesarici.cz (Postfix) with ESMTPSA id F23371A2C5A;
-	Wed, 14 Feb 2024 15:55:39 +0100 (CET)
-Authentication-Results: mail.tesarici.cz; dmarc=fail (p=quarantine dis=none) header.from=tesarici.cz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tesarici.cz; s=mail;
-	t=1707922540; bh=V/LB2qopI6o0g1XHu1b29Ik8gPX5TgEGhvR0Q5GGVzU=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=rfkPfXKF4zD9tEikgRhMIL7jn5TadE/e60ZNGiLbEq6GXy6UUJCTRyfq/6Vgxk41O
-	 su435zOm7YiVhp33zlKa/OEP5Z3MA3F0XUteo3Hm1dMTkLXk6YX1azAY6/bYuABrTB
-	 f7BHrFJaIO3hx0Sj17P02LiETWNlm1zJQ04wytp4f4KRlFub1oz5F3jGkvAH8U8qWI
-	 GO8E9jHus4SYO/2liMinJBl5a8UF9t4jOzdIvEgS/YXy+D+DIoinDmNrGd9trXO4zT
-	 Ey0Cc5O8eSlGLGsVnZ9jsaC6i2UCOVNdRh/VrihmIfWCJ/JwPZ/YtL2dC604WIF0Vg
-	 exKxYgVxi93aA==
-Date: Wed, 14 Feb 2024 15:55:24 +0100
-From: Petr =?UTF-8?B?VGVzYcWZw61r?= <petr@tesarici.cz>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>, Petr Tesarik
- <petrtesarik@huaweicloud.com>, Jonathan Corbet <corbet@lwn.net>, David
- Kaplan <david.kaplan@amd.com>, Larry Dewey <larry.dewey@amd.com>, Elena
- Reshetova <elena.reshetova@intel.com>, Carlos Bilbao
- <carlos.bilbao@amd.com>, "Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
- Randy Dunlap <rdunlap@infradead.org>, Petr Mladek <pmladek@suse.com>, "Paul
- E. McKenney" <paulmck@kernel.org>, Eric DeVolder
- <eric.devolder@oracle.com>, Marc =?UTF-8?B?QXVyw6hsZQ==?= La France
- <tsi@tuyoix.net>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Nhat Pham
- <nphamcs@gmail.com>, "Christian Brauner (Microsoft)" <brauner@kernel.org>,
- Douglas Anderson <dianders@chromium.org>, Luis Chamberlain
- <mcgrof@kernel.org>, Guenter Roeck <groeck@chromium.org>, Mike Christie
- <michael.christie@oracle.com>, Kent Overstreet <kent.overstreet@linux.dev>,
- Maninder Singh <maninder1.s@samsung.com>, "open list:DOCUMENTATION"
- <linux-doc@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>,
- Roberto Sassu <roberto.sassu@huaweicloud.com>, Petr Tesarik
- <petr.tesarik1@huawei-partners.com>
-Subject: Re: [PATCH v1 5/5] sbm: SandBox Mode documentation
-Message-ID: <20240214155524.719ffb15@meshulam.tesarici.cz>
-In-Reply-To: <2024021425-audition-expand-2901@gregkh>
-References: <20240214113035.2117-1-petrtesarik@huaweicloud.com>
-	<20240214113035.2117-6-petrtesarik@huaweicloud.com>
-	<20240214053053.982b48d993ae99dad1d59020@linux-foundation.org>
-	<2024021425-audition-expand-2901@gregkh>
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.39; x86_64-suse-linux-gnu)
+	s=arc-20240116; t=1707922842; c=relaxed/simple;
+	bh=J/8B9sj/gh69TjG907GBC0ybnivmqovG5E80SUw+iQs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=i+pgrpdw985tqxBW6M7jTcmkEiF0umnUXBXe9DyGWplXNnq5IISSWpkUtz9euNA7A0tSXMFXa0M6+lyd36+XfPx+UUVnQB5tul+lZuLSLAobwzDWBaSGA71XqXe/jNMPyE5MIHjNqkWnyRe6BXA9JDpAx9CGU14YAVCgTIMgwJw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=jfoJ/wmk; arc=none smtp.client-ip=90.155.50.34
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=N9oS2vBFsBe7fjNywvimN9eVDsY+Q1p8TnsuDCbqyL8=; b=jfoJ/wmkTGQGza6aS6As/LoHT2
+	7f9nxqD9DDcP98YSEsCWUa2KUHKv3yOMXShjBerqUVejBrYgV37I0QICjylxkLAH01QVhY7zARA99
+	4cl5s8aYSnpH9z5inXWSTSNKWmmn9IJe3FSG3ZYYFRXX3lh0u0p+v8DKBDUFgcmrOVRSGaYZRCpVG
+	dswefOzAR6MusqozarzFQUAhf9oOgDNXGT+36hpSGg/Z2EcMWzrPYznsnnyW204WH1S7lTL0sGgVN
+	r5hkA+WxnCp1BeMai4eWKbYBadnRcJrtDVtupo9eMxQVeW09i9IRSU1xAJnexHy0C9unE+tOPNqUd
+	EaHb7PIg==;
+Received: from willy by casper.infradead.org with local (Exim 4.97.1 #2 (Red Hat Linux))
+	id 1raGjw-0000000Gs4u-1uPd;
+	Wed, 14 Feb 2024 15:00:00 +0000
+Date: Wed, 14 Feb 2024 15:00:00 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Kent Overstreet <kent.overstreet@linux.dev>
+Cc: Suren Baghdasaryan <surenb@google.com>,
+	David Hildenbrand <david@redhat.com>,
+	Michal Hocko <mhocko@suse.com>, akpm@linux-foundation.org,
+	vbabka@suse.cz, hannes@cmpxchg.org, roman.gushchin@linux.dev,
+	mgorman@suse.de, dave@stgolabs.net, liam.howlett@oracle.com,
+	corbet@lwn.net, void@manifault.com, peterz@infradead.org,
+	juri.lelli@redhat.com, catalin.marinas@arm.com, will@kernel.org,
+	arnd@arndb.de, tglx@linutronix.de, mingo@redhat.com,
+	dave.hansen@linux.intel.com, x86@kernel.org, peterx@redhat.com,
+	axboe@kernel.dk, mcgrof@kernel.org, masahiroy@kernel.org,
+	nathan@kernel.org, dennis@kernel.org, tj@kernel.org,
+	muchun.song@linux.dev, rppt@kernel.org, paulmck@kernel.org,
+	pasha.tatashin@soleen.com, yosryahmed@google.com, yuzhao@google.com,
+	dhowells@redhat.com, hughd@google.com, andreyknvl@gmail.com,
+	keescook@chromium.org, ndesaulniers@google.com, vvvvvv@google.com,
+	gregkh@linuxfoundation.org, ebiggers@google.com, ytcoode@gmail.com,
+	vincent.guittot@linaro.org, dietmar.eggemann@arm.com,
+	rostedt@goodmis.org, bsegall@google.com, bristot@redhat.com,
+	vschneid@redhat.com, cl@linux.com, penberg@kernel.org,
+	iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com, glider@google.com,
+	elver@google.com, dvyukov@google.com, shakeelb@google.com,
+	songmuchun@bytedance.com, jbaron@akamai.com, rientjes@google.com,
+	minchan@google.com, kaleshsingh@google.com, kernel-team@android.com,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	iommu@lists.linux.dev, linux-arch@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+	linux-modules@vger.kernel.org, kasan-dev@googlegroups.com,
+	cgroups@vger.kernel.org
+Subject: Re: [PATCH v3 00/35] Memory allocation profiling
+Message-ID: <ZczVcOXtmA2C3XX8@casper.infradead.org>
+References: <Zctfa2DvmlTYSfe8@tiehlicka>
+ <CAJuCfpEsWfZnpL1vUB2C=cxRi_WxhxyvgGhUg7WdAxLEqy6oSw@mail.gmail.com>
+ <9e14adec-2842-458d-8a58-af6a2d18d823@redhat.com>
+ <2hphuyx2dnqsj3hnzyifp5yqn2hpgfjuhfu635dzgofr5mst27@4a5dixtcuxyi>
+ <6a0f5d8b-9c67-43f6-b25e-2240171265be@redhat.com>
+ <CAJuCfpEtOhzL65eMDk2W5SchcquN9hMCcbfD50a-FgtPgxh4Fw@mail.gmail.com>
+ <adbb77ee-1662-4d24-bcbf-d74c29bc5083@redhat.com>
+ <r6cmbcmalryodbnlkmuj2fjnausbcysmolikjguqvdwkngeztq@45lbvxjavwb3>
+ <CAJuCfpF4g1jeEwHVHjQWwi5kqS-3UqjMt7GnG0Kdz5VJGyhK3Q@mail.gmail.com>
+ <ea5vqiv5rt5cdbrlrdep5flej2pysqbfvxau4cjjbho64652um@7rz23kesqdup>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ea5vqiv5rt5cdbrlrdep5flej2pysqbfvxau4cjjbho64652um@7rz23kesqdup>
 
-On Wed, 14 Feb 2024 15:01:25 +0100
-Greg Kroah-Hartman <gregkh@linuxfoundation.org> wrote:
-
-> On Wed, Feb 14, 2024 at 05:30:53AM -0800, Andrew Morton wrote:
-> > On Wed, 14 Feb 2024 12:30:35 +0100 Petr Tesarik <petrtesarik@huaweicloud.com> wrote:
-> >   
-> > > +Although data structures are not serialized and deserialized between kernel
-> > > +mode and sandbox mode, all directly and indirectly referenced data structures
-> > > +must be explicitly mapped into the sandbox, which requires some manual effort.  
-> > 
-> > Maybe I'm missing something here, but...
-> > 
-> > The requirement that the sandboxed function only ever touch two linear
-> > blocks of memory (yes?) seems a tremendous limitation.  I mean, how can
-> > the sandboxed function call kmalloc()?  How can it call any useful
-> > kernel functions?  They'll all touch memory which lies outside the
-> > sandbox areas?
-> > 
-> > Perhaps a simple but real-world example would help clarify.  
+On Tue, Feb 13, 2024 at 06:08:45PM -0500, Kent Overstreet wrote:
+> This is what instrumenting an allocation function looks like:
 > 
-> I agree, this looks like an "interesting" framework, but we don't add
-> code to the kernel without a real, in-kernel user for it.
+> #define krealloc_array(...)                     alloc_hooks(krealloc_array_noprof(__VA_ARGS__))
 > 
-> Without such a thing, we can't even consider it for inclusion as we
-> don't know how it will actually work and how any subsystem would use it.
+> IOW, we have to:
+>  - rename krealloc_array to krealloc_array_noprof
+>  - replace krealloc_array with a one wrapper macro call
 > 
-> Petr, do you have an user for this today?
+> Is this really all we're getting worked up over?
+> 
+> The renaming we need regardless, because the thing that makes this
+> approach efficient enough to run in production is that we account at
+> _one_ point in the callstack, we don't save entire backtraces.
 
-Hi Greg & Andrew,
+I'm probably going to regret getting involved in this thread, but since
+Suren already decided to put me on the cc ...
 
-your observations is correct. In this form, the framework is quite
-limited, and exactly this objections was expected. You have even
-spotted one of the first enhancements I tested on top of this framework
-(dynamic memory allocation).
+There might be a way to do it without renaming.  We have a bit of the
+linker script called SCHED_TEXT which lets us implement
+in_sched_functions().  ie we could have the equivalent of
 
-The intended use case is code that processes untrusted data that is not
-properly sanitized, but where performance is not critical. Some
-examples include decompressing initramfs, loading a kernel module. Or
-decoding a boot logo; I think I've noticed a vulnerability in another
-project recently... ;-)
+include/linux/sched/debug.h:#define __sched             __section(".sched.text")
 
-Of course, even decompression needs dynamic memory. My plan is to
-extend the mechanism. Right now I'm mapping all of kernel text into the
-sandbox. Later, I'd like to decompose the text section too. The pages
-which contain sandboxed code should be mapped, but rest of the kernel
-should not. If the sandbox tries to call kmalloc(), vmalloc(), or
-schedule(), the attempt will generate a page fault. Sandbox page faults
-are already intercepted, so handle_sbm_call() can decide if the call
-should be allowed or not. If the sandbox policy says ALLOW, the page
-fault handler will perform the API call on behalf of the sandboxed code
-and return results, possibly with some post-call action, e.g. map some
-more pages to the address space.
+perhaps #define __memalloc __section(".memalloc.text")
+which would do all the necessary magic to know where the backtrace
+should stop.
 
-The fact that all communication with the rest of the kernel happens
-through CPU exceptions is the reason this mechanism is unsuitable for
-performance-critical applications.
-
-OK, so why didn't I send the whole thing?
-
-Decomposition of the kernel requires many more changes, e.g. in linker
-scripts. Some of them depend on this patch series. Before I go and
-clean up my code into something that can be submitted, I want to get
-feedback from guys like you, to know if the whole idea would be even
-considered, aka "Fail Fast".
-
-Petr T
 
