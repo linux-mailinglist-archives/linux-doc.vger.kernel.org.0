@@ -1,179 +1,211 @@
-Return-Path: <linux-doc+bounces-9269-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9272-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15A268542BB
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 07:20:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE4B68542E4
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 07:36:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 65886B2276D
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 06:20:36 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E4964B26DA1
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Feb 2024 06:36:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0404110A35;
-	Wed, 14 Feb 2024 06:20:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72D6D111B5;
+	Wed, 14 Feb 2024 06:36:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cmpxchg-org.20230601.gappssmtp.com header.i=@cmpxchg-org.20230601.gappssmtp.com header.b="frEKCXWj"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eV7XWZGg"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCD7D10A25
-	for <linux-doc@vger.kernel.org>; Wed, 14 Feb 2024 06:20:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.179
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37D6310A36;
+	Wed, 14 Feb 2024 06:36:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1707891629; cv=none; b=bIgheBPjbe/vH9BktNvdkjDpDLFYkIC1QJpeRHK81KoJE/uoO6dGxMrHKYw3+327X3CKpjVcnqKe02aAlwVlqy6j43114SY01cjRZzPNvpR+7+dTUBcHPDBNxOphQaeIWb/40h++xlQ4RAscxXkaN0m+CsKBhA5uRqxfoH2DzKY=
+	t=1707892584; cv=none; b=WUULtdto2OwOC90rTzjjcflFdP7nQAVZq0iGPCnt+vDfRQXTnU+7JFR8OlpntXevD62aaronM25Dno/KqfJbHBfNPAPHUm3foDHHdgIz7dhsNGWhkBIyCzV5Mnl/3jWLzZepUA2fk+Ma8fXLq9qV4Zl1C5eTXqN2sEvHX1FgdRU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1707891629; c=relaxed/simple;
-	bh=mPZvfWNgR9UvijIIJJg1XLOXvrF3xKs/y4S11I2T7Mc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=PPrk01opNk85xyZ0cHEqMFxkOnpWevPdMJfdvO/pLJzO8JEOnHTXKTTk7jlTivsAGLnTR0ZZ8mFpHRfHOiVfmCNJi6WKzAnyRR8zgEnODTLTAK9AuUaEoMplugWqNDwZ6boaSOAkmMFv+flKq5Zc+0HF4UyK+wkySHWAzczP9Bc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cmpxchg.org; spf=pass smtp.mailfrom=cmpxchg.org; dkim=pass (2048-bit key) header.d=cmpxchg-org.20230601.gappssmtp.com header.i=@cmpxchg-org.20230601.gappssmtp.com header.b=frEKCXWj; arc=none smtp.client-ip=209.85.160.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cmpxchg.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cmpxchg.org
-Received: by mail-qt1-f179.google.com with SMTP id d75a77b69052e-42ce63b1d30so18612631cf.3
-        for <linux-doc@vger.kernel.org>; Tue, 13 Feb 2024 22:20:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cmpxchg-org.20230601.gappssmtp.com; s=20230601; t=1707891626; x=1708496426; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=mPZvfWNgR9UvijIIJJg1XLOXvrF3xKs/y4S11I2T7Mc=;
-        b=frEKCXWjz3d2XuOUYzdId9W6Mvn73jhIIjZV2UtP6WyaWc+D189xwP5w9kl+nSGfMv
-         92wT3Ax40rNcFpOR+78CXna5fylDXfI6Hpiij0UumIVVKLviUy2TBLD/fQ4JiX8hcSKk
-         lDb1xW+VEfETTFCtbvp6CurH0ifNSGWGK9795xsbLYIgyGs6dgO9WOfTiI+Y04tJwTwz
-         U2B8EUisd2LXc0KXZhBK0T+8L+7pSUgqhfIrW+lqZMIXTuHrXKY6BZ+bKZmBwZFp1CkH
-         S+9RnGWorvD7Btw1UXhsTSfLoPpByNUBhDeBmUW9EuyIbEp1u9AceE9ovXck9gVbMmaP
-         b6Zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707891626; x=1708496426;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mPZvfWNgR9UvijIIJJg1XLOXvrF3xKs/y4S11I2T7Mc=;
-        b=cMWvLpQADlmqCjDoC72nCWzESWxjFBXzC59nz3RlU2tVUUTJ2EGYkPj2o5VtV8hfj4
-         bMlkqUuZh03ltgUFZvNUhFdDl+1rbvgnjYhM4aCR75gn9mEvLQzLMUf7EnOie49/wsa+
-         bzSLJieddhE+sgBkLxi2SQkFqvbfO4cNLc6UWL5rIhj5xo66MQhfsScq4eTGmPB+uq5j
-         GnAXhC8YB72JIuReugkWmicyGC+/fOaZ6zqZzUbPtrXqJv8D4q6sHJNS+9fGxNKK49pV
-         DfKQdDkiU7tA2zxZ6U+C0AsEj29j7kZ+RZPZu6AXmFkiguHwojOsUMRQv6Q5AFkyggk5
-         U7Mg==
-X-Forwarded-Encrypted: i=1; AJvYcCUKSZDe9mlU6tvoLjVN9QJj3f0PKsDRwbQM8ijmNzIGkE98SsWdqBs4GE/muGDzHGk6l3Q53rE4CHyveUnkF82DJQqJIyQu3z8S
-X-Gm-Message-State: AOJu0Yyletz3UXwXTpYN4mn5JGHrrcXh5QwK9RvmwWfAzzN+0LXmF0Ro
-	cE/b8eGYrzgQSlhJDIMFGHPOib6xGxxWLLyfWjSvN9w3q2F7FEMzCD1SUNgM7ak=
-X-Google-Smtp-Source: AGHT+IFnioDUv96AzhWE99fGuZ2JnAOUfdgv/2QX4e5KUyJeUPqxV+8qOH1R7pvVEl8yrhK7A4y3Cw==
-X-Received: by 2002:a05:622a:1045:b0:42c:70a8:1b3f with SMTP id f5-20020a05622a104500b0042c70a81b3fmr1875328qte.7.1707891626471;
-        Tue, 13 Feb 2024 22:20:26 -0800 (PST)
-X-Forwarded-Encrypted: i=1; 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
-Received: from localhost ([2620:10d:c091:400::5:6326])
-        by smtp.gmail.com with ESMTPSA id l13-20020ac8078d000000b0042c613a5cf3sm1755053qth.33.2024.02.13.22.20.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Feb 2024 22:20:25 -0800 (PST)
-Date: Wed, 14 Feb 2024 01:20:20 -0500
-From: Johannes Weiner <hannes@cmpxchg.org>
-To: Suren Baghdasaryan <surenb@google.com>
-Cc: akpm@linux-foundation.org, kent.overstreet@linux.dev, mhocko@suse.com,
-	vbabka@suse.cz, roman.gushchin@linux.dev, mgorman@suse.de,
-	dave@stgolabs.net, willy@infradead.org, liam.howlett@oracle.com,
-	corbet@lwn.net, void@manifault.com, peterz@infradead.org,
-	juri.lelli@redhat.com, catalin.marinas@arm.com, will@kernel.org,
-	arnd@arndb.de, tglx@linutronix.de, mingo@redhat.com,
-	dave.hansen@linux.intel.com, x86@kernel.org, peterx@redhat.com,
-	david@redhat.com, axboe@kernel.dk, mcgrof@kernel.org,
-	masahiroy@kernel.org, nathan@kernel.org, dennis@kernel.org,
-	tj@kernel.org, muchun.song@linux.dev, rppt@kernel.org,
-	paulmck@kernel.org, pasha.tatashin@soleen.com,
-	yosryahmed@google.com, yuzhao@google.com, dhowells@redhat.com,
-	hughd@google.com, andreyknvl@gmail.com, keescook@chromium.org,
-	ndesaulniers@google.com, vvvvvv@google.com,
-	gregkh@linuxfoundation.org, ebiggers@google.com, ytcoode@gmail.com,
-	vincent.guittot@linaro.org, dietmar.eggemann@arm.com,
-	rostedt@goodmis.org, bsegall@google.com, bristot@redhat.com,
-	vschneid@redhat.com, cl@linux.com, penberg@kernel.org,
-	iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com, glider@google.com,
-	elver@google.com, dvyukov@google.com, shakeelb@google.com,
-	songmuchun@bytedance.com, jbaron@akamai.com, rientjes@google.com,
-	minchan@google.com, kaleshsingh@google.com, kernel-team@android.com,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	iommu@lists.linux.dev, linux-arch@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
-	linux-modules@vger.kernel.org, kasan-dev@googlegroups.com,
-	cgroups@vger.kernel.org
-Subject: Re: [PATCH v3 00/35] Memory allocation profiling
-Message-ID: <20240214062020.GA989328@cmpxchg.org>
-References: <20240212213922.783301-1-surenb@google.com>
+	s=arc-20240116; t=1707892584; c=relaxed/simple;
+	bh=WpkvpKeOfNBGl3s6SIPd42Jru7SBxmJQ0eeopGKSBh0=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=su+PzvbOm9M+m2TwYB6K95K7+zcYnHDiWj7oS/HAEv2Bwmll/R0KiHGYumHMoSVnWewPxQSJQX65GYsOS3CVx+M3fpsnY9gfwNcvSQ9WDLLWTRfwCkyEYJVskfVcNykN1+U5uh6XkhFYS339TDrwPVcYkxo42CLDvnUh5jQ6AxM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eV7XWZGg; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id AF834C433F1;
+	Wed, 14 Feb 2024 06:36:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1707892583;
+	bh=WpkvpKeOfNBGl3s6SIPd42Jru7SBxmJQ0eeopGKSBh0=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=eV7XWZGgcsCBWCzbwnWFvwhtnkFdx9lheIXn+t6XALWjWJ/cuAq8dcWZcnBsvWx7r
+	 +9sO0OoBQL3KVHuEM6pckQjRbkrdKjj6ofZ3t7FNO2bqZn1aZR+XMsl19E0HALUvuN
+	 ZNECPLVkUvzxAFRKl68feMOv94jvnRf+tveOLBEhgOBKGTOBzxTPt9QXntvBMTALaU
+	 A5LHbv9HFPrl/8cNhn2VwlXvNT7ObWCjVk81qHPfw1rykH9RUcX3kIWqOcsGfYN+5u
+	 fHey70CLrw0ZZwiRngcaKTMxOBcjtwbxKTjypmxjZAfhVrl0ZM5T/VM/Wty7UL8QMi
+	 qHEgAMykJ/P/w==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93E91C4829A;
+	Wed, 14 Feb 2024 06:36:23 +0000 (UTC)
+From: Christoph Winklhofer via B4 Relay
+ <devnull+cj.winklhofer.gmail.com@kernel.org>
+Subject: [PATCH v7 0/3] w1: add UART w1 bus driver
+Date: Wed, 14 Feb 2024 07:36:12 +0100
+Message-Id: <20240214-w1-uart-v7-0-6e21fa24e066@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240212213922.783301-1-surenb@google.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAF1fzGUC/13OTW6DMBCG4atEXtdo/G+66j2qLIwZB7cBV4aQV
+ hF3r4mUQrPwYiQ/n94bGTFHHMnr4UYyznGMaSiHeTkQ37nhhDS25SYcuAQGkl4Zvbg8UUSrrXJ
+ MOQWk/P7KGOL3fen9WO6QU0+nLqN7eMF4eQASbCUlKE0Z9R/VNQ6f5y4FzG+n3sVz5VO/DnZxn
+ FL+uZfNYp19RKi/iFlQoKXDQC0ajkbvJtaIWe6d3pwszgRkwlhnG4HPTu0c3zlVHGstb0LrucP
+ 62enNcag3p4sTaJTwTNas/te5LMsvFCMkVIcBAAA=
+To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, 
+ Rob Herring <robh+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+ Christoph Winklhofer <cj.winklhofer@gmail.com>, 
+ Rob Herring <robh@kernel.org>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Jiri Slaby <jirislaby@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-serial@vger.kernel.org, linux-doc@vger.kernel.org
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1707892581; l=5348;
+ i=cj.winklhofer@gmail.com; s=20240104; h=from:subject:message-id;
+ bh=WpkvpKeOfNBGl3s6SIPd42Jru7SBxmJQ0eeopGKSBh0=;
+ b=/uU0jMlHsz8KXluEL7g+eEFniKD6PeJMvlDOYz0JZZVc1Om2voISol0iky4T3FOmNFvn6HalV
+ VQFyi3MZIGDANmui+wyhL1sWAAH685itWvlVFU3U2fMWRLS6hN9Unh8
+X-Developer-Key: i=cj.winklhofer@gmail.com; a=ed25519;
+ pk=lgjGjOt7hFKJT9UXhgUyrdthxvZ7DJ5F1U/7d9qdAsk=
+X-Endpoint-Received:
+ by B4 Relay for cj.winklhofer@gmail.com/20240104 with auth_id=111
+X-Original-From: Christoph Winklhofer <cj.winklhofer@gmail.com>
+Reply-To: <cj.winklhofer@gmail.com>
 
-I'll do a more throrough code review, but before the discussion gets
-too sidetracked, I wanted to add my POV on the overall merit of the
-direction that is being proposed here.
+Hello!
 
-I have backported and used this code for debugging production issues
-before. Logging into a random host with an unfamiliar workload and
-being able to get a reliable, comprehensive list of kernel memory
-consumers is one of the coolest things I have seen in a long
-time. This is a huge improvement to sysadmin quality of life.
+This patch contains a driver for a 1-Wire bus over UART. The driver
+utilizes the UART interface via the Serial Device Bus to create the
+1-Wire timing patterns.
 
-It's also a huge improvement for MM developers. We're the first points
-of contact for memory regressions that can be caused by pretty much
-any driver or subsystem in the kernel.
+Changes in v7:
+- rename mutex to rx_mutex and comment its usage
+- fix comments and use kerneldoc for internal structs
+- Link to v6: https://lore.kernel.org/r/20240209-w1-uart-v6-0-3e753c149196@gmail.com
+Thanks Krzysztof for the review.
 
-I encourage anybody who is undecided on whether this is worth doing to
-build a kernel with these patches applied and run it on their own
-machine. I think you'll be surprised what you'll find - and how myopic
-and uninformative /proc/meminfo feels in comparison to this. Did you
-know there is a lot more to modern filesystems than the VFS objects we
-are currently tracking? :)
+Changes in v6:
+- change order of patches for dt-binding
+- remove unnecessary lock in remove
+- delay for 1-Wire cycle without mutex lock 
+- fix comment style and add some more comments
+- Link to v5: https://lore.kernel.org/r/20240126-w1-uart-v5-0-1d82bfdc2ae9@gmail.com
+Thanks Krzysztof and Rob for the review.
 
-Then imagine what this looks like on a production host running a
-complex mix of filesystems, enterprise networking, bpf programs, gpus
-and accelerators etc.
+Changes in v5:
+- dt-binding: allow child object for onewire and use prefix -bps for
+  baud rate configuration.
+- use type u8 for a byte, instead of unsigned char
+- use constants (NSEC_PER_SEC, BITS_PER_BYTE)
+- make delay computation from packet time more coherent
+- Link to v4: https://lore.kernel.org/r/20240106-w1-uart-v4-0-7fe1378a8b3e@gmail.com
+Thanks Jiri, Krzysztof and Rob for the review.
 
-Backporting the code to a slightly older production kernel wasn't too
-difficult. The instrumentation layering is explicit, clean, and fairly
-centralized, so resolving minor conflicts around the _noprof renames
-and the wrappers was pretty straight-forward.
+Changes in v4:
+- rework baud-rate configuration: also check max bit-time, support higher
+  baud-rates by adding a delay to complete 1-Wire cycle.
+- dt-binding w1-uart: specify baud-rates for 1-Wire operations
+- Link to v3: https://lore.kernel.org/r/20240105-w1-uart-v3-0-8687093b2e76@gmail.com
 
-When we talk about maintenance cost, a fair shake would be to weigh it
-against the cost and reliability of our current method: evaluating
-consumers in the kernel on a case-by-case basis and annotating the
-alloc/free sites by hand; then quibbling with the MM community about
-whether that consumer is indeed significant enough to warrant an entry
-in /proc/meminfo, and what the catchiest name for the stat would be.
+Changes in v3:
+- improve baud-rate configuration: use specific limits for 1-Wire
+  reset, touch-0 and touch-1 operation, compute in nanoseconds.
+- remove unused header atomic.h
+- use function instead of macro to compute bit-time from baud-rate
+- switch to b4 util to publish patch: missing recipients
+- Link to v2: https://lore.kernel.org/lkml/20231223100408.44056-1-cj.winklhofer@gmail.com
 
-I think we can agree that this is vastly less scalable and more
-burdensome than central annotations around a handful of mostly static
-allocator entry points. Especially considering the rate of change in
-the kernel as a whole, and that not everybody will think of the
-comprehensive MM picture when writing a random driver. And I think
-that's generous - we don't even have the network stack in meminfo.
+Changes in v2:
+- add documentation for dt-binding
+- allow onewire as serial child node
+- support different baud-rates: The driver requests a baud-rate (9600
+  for reset and 115200 for write/read) and tries to adapt the
+  transmitted byte according to the actual baud-rate returned from
+  serdev.
+- fix locking problem for serdev-receive and w1-master reset/touch: The
+  received byte is now protected with a mutex - instead of the atomic,
+  which was used before due to the concurrent store and load.
+- explicit error in serdev-receive: Receiving more than one byte results
+  in an error, since the w1-uart driver is the only writer, it writes a
+  single-byte and should receive a single byte.
+- fix variable names, errno-returns, wrong define CONFIG_OF
+- fix log flooding
+- fix driver remove (error-path for rxtx-function)
+- Link to v1: https://lore.kernel.org/all/20231217122004.42795-1-cj.winklhofer@gmail.com
+Krzysztof, thank your very much for your feedback!
 
-So I think what we do now isn't working. In the Meta fleet, at any
-given time the p50 for unaccounted kernel memory is several gigabytes
-per host. The p99 is between 15% and 30% of total memory. That's a
-looot of opaque resource usage we have to accept on faith.
+It was tested on a "Raspberry Pi 3 Model B+" with a DS18B20 and on a
+"Variscite DART-6UL" with a DS18S20 temperature sensor.
 
-For hunting down regressions, all it takes is one untracked consumer
-in the kernel to really throw a wrench into things. It's difficult to
-find in the noise with tracing, and if it's not growing after an
-initial allocation spike, you're pretty much out of luck finding it at
-all. Raise your hand if you've written a drgn script to walk pfns and
-try to guess consumers from the state of struct page :)
+Content:
+- Patch 1: device tree binding 1-Wire
+- Patch 2: allow onewire as serial child node
+- Patch 3: driver and documentation
 
-I agree we should discuss how the annotations are implemented on a
-technical basis, but my take is that we need something like this.
+The patch was created against the w1 subsytem tree (branch w1-next):
+  Link: https://git.kernel.org/pub/scm/linux/kernel/git/krzk/linux-w1.git/
 
-In a codebase of our size, I don't think the allocator should be
-handing out memory without some basic implied tracking of where it's
-going. It's a liability for production environments, and it can hide
-bad memory management decisions in drivers and other subsystems for a
-very long time.
+The checkpatch.pl script reported the following error - which I am not
+sure how to fix:
+  WARNING: added, moved or deleted file(s), does MAINTAINERS need
+  updating?
+
+The technical details for 1-Wire over UART are in the document:
+  Link: https://www.analog.com/en/technical-articles/using-a-uart-to-implement-a-1wire-bus-master.html
+
+  In short, the UART peripheral must support full-duplex and operate in
+open-drain mode. The timing patterns are generated by a specific
+combination of baud-rate and transmitted byte, which corresponds to a
+1-Wire read bit, write bit or reset pulse.
+
+For instance the timing pattern for a 1-Wire reset and presence detect
+uses the baud-rate 9600, i.e. 104.2 us per bit. The transmitted byte
+0xf0 over UART (least significant bit first, start-bit low) sets the
+reset low time for 1-Wire to 521 us. A present 1-Wire device changes the
+received byte by pulling the line low, which is used by the driver to
+evaluate the result of the 1-Wire operation.
+
+Similar for a 1-Wire read bit or write bit, which uses the baud-rate
+115200, i.e. 8.7 us per bit. The transmitted byte 0x00 is used for a
+Write-0 operation and the byte 0xff for Read-0, Read-1 and Write-1.
+
+Hope the driver is helpful.
+
+Thanks,
+Christoph
+
+---
+Christoph Winklhofer (3):
+      dt-bindings: serial: allow onewire as child node
+      dt-bindings: w1: UART 1-Wire bus
+      w1: add UART w1 bus driver
+
+ .../devicetree/bindings/serial/serial.yaml         |   2 +-
+ Documentation/devicetree/bindings/w1/w1-uart.yaml  |  60 +++
+ Documentation/w1/masters/index.rst                 |   1 +
+ Documentation/w1/masters/w1-uart.rst               |  54 +++
+ drivers/w1/masters/Kconfig                         |  10 +
+ drivers/w1/masters/Makefile                        |   1 +
+ drivers/w1/masters/w1-uart.c                       | 415 +++++++++++++++++++++
+ 7 files changed, 542 insertions(+), 1 deletion(-)
+---
+base-commit: 6613476e225e090cc9aad49be7fa504e290dd33d
+change-id: 20240104-w1-uart-ee8685a15a50
+
+Best regards,
+-- 
+Christoph Winklhofer <cj.winklhofer@gmail.com>
+
 
