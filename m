@@ -1,241 +1,134 @@
-Return-Path: <linux-doc+bounces-9564-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9588-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 524F38566EF
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Feb 2024 16:09:34 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id ED092856879
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Feb 2024 16:50:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7781A1C21AA6
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Feb 2024 15:09:33 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 9957A1F21595
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Feb 2024 15:50:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 69572132C3A;
-	Thu, 15 Feb 2024 15:09:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 125B313342F;
+	Thu, 15 Feb 2024 15:48:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ApIWkTco"
+	dkim=pass (2048-bit key) header.d=okanakyuz.com header.i=@okanakyuz.com header.b="ZI5tZ5+F"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+Received: from seahorse.cherry.relay.mailchannels.net (seahorse.cherry.relay.mailchannels.net [23.83.223.161])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C84713248B;
-	Thu, 15 Feb 2024 15:09:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.15
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708009756; cv=none; b=VswTsEt9Ke2d8V8x6gohS1AEUfhAlcs+tkndAFYLR9DA1isvAGXDaOghMLf/zmta9TJbAWkbdb2E0wYIN0JRNvtAteGP0Wnh3Kf0CeKr26t2xavO1K/V5yXQpQxvq0KdPV4sEGqDieeh7On4rSIfbafHJCw7h6L5tQf4TT/+qAQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708009756; c=relaxed/simple;
-	bh=1dewdp2A0Zo42dyThGoQOQMbyk8kJSMF3Ua2SIJeM54=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Qpp0s7L2t5fS1fD+wN/i+oosLMLGiQ6PFwf47A/GtC8zxsxvsq7N+PF6Ys6DMWV2+HtpHYi+n5vhqbKuRrC7cYezf8MjgkMFZatSLppehitQ/XVFLPhfpyB9yb+PTtmrKES0Q1Acrzo1NxA51AC1+oVdbAvpu02zzvlXRDjGTNA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ApIWkTco; arc=none smtp.client-ip=198.175.65.15
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1708009755; x=1739545755;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=1dewdp2A0Zo42dyThGoQOQMbyk8kJSMF3Ua2SIJeM54=;
-  b=ApIWkTcopMBYHHLcqaY4WvaivqTmGD4bX9BEWo70RJsYJ183w8vqA+TY
-   GUO8q+O1J4K2pNnGRkkIVY7K38oKM3fXYntwBSDrpv8RzITPPYuKoTJEa
-   TITDKVthtk2iDVJLlVfMBgWifkTl8Ha8ykCiztaBBuzCc6BRFk6puOcPo
-   PPbz8E4WpImeuqldPTUtYdhDQ7FzPUQ3ohKc/FuyDGUl+16oY1HKnK5oi
-   5fXS8mWIL3ddVT8xSik0Yytd4qSOBdhAwf2RLST9UlDH4nbiaPnSDVHL1
-   A8HlcaCAVX4o7sVD7sWPTZyAwDDTWatdNJJW/qjN5efBI5ZLW8tApb/eE
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10984"; a="5930139"
-X-IronPort-AV: E=Sophos;i="6.06,161,1705392000"; 
-   d="scan'208";a="5930139"
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Feb 2024 07:09:14 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10984"; a="826423681"
-X-IronPort-AV: E=Sophos;i="6.06,161,1705392000"; 
-   d="scan'208";a="826423681"
-Received: from stinkpipe.fi.intel.com (HELO stinkbox) ([10.237.72.74])
-  by orsmga001.jf.intel.com with SMTP; 15 Feb 2024 07:09:06 -0800
-Received: by stinkbox (sSMTP sendmail emulation); Thu, 15 Feb 2024 17:09:05 +0200
-Date: Thu, 15 Feb 2024 17:09:05 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Maxime Ripard <mripard@kernel.org>
-Cc: Sebastian Wick <sebastian.wick@redhat.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
-	Emma Anholt <emma@anholt.net>, Jonathan Corbet <corbet@lwn.net>,
-	Sandy Huang <hjc@rock-chips.com>,
-	Heiko =?iso-8859-1?Q?St=FCbner?= <heiko@sntech.de>,
-	Chen-Yu Tsai <wens@csie.org>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Samuel Holland <samuel@sholland.org>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	Hans Verkuil <hverkuil@xs4all.nl>,
-	linux-rockchip@lists.infradead.org, linux-sunxi@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
-Subject: Re: Re: Re: Re: Re: Re: Re: [PATCH v5 08/44] drm/connector: hdmi:
- Add Broadcast RGB property
-Message-ID: <Zc4pEfVRItn0ZCXE@intel.com>
-References: <Zb0M_2093UwPXK8y@intel.com>
- <hez2m57ogqx3yyqk45tzdkvxvhrbdepgm244i4m2aty2xhf5b5@acqgvmxhmmvr>
- <Zb0aYAapkxQ2kopt@intel.com>
- <zml6j27skvjmbrfyz7agy5waxajv4p4asbemeexelm3wuv4o7j@xkd2wvnxhbuc>
- <20240209203435.GB996172@toolbox>
- <ahfl6f72lpgpsbnrbgvbsh4db4npr2hh36kua2c6krh544hv5r@dndw4hz2mu2g>
- <Zco-DQaXqae7B1jt@intel.com>
- <yx2t7xltxxgsngdsxamsfq6y7dze3wzegxcqwmsb5yrxen73x6@u3vilqhpci4w>
- <ZcsqoPCJDjA5PJUF@intel.com>
- <dti6zcuzszhut5m4g2bxiwfogwctfhktv2mwuqlij7wtvh3bny@ry4mxpiqidmt>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8278213343B
+	for <linux-doc@vger.kernel.org>; Thu, 15 Feb 2024 15:48:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=23.83.223.161
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1708012130; cv=pass; b=VmT/EkRT0G6ftiZKq36/YtcGW7xOTb+PDyY9ZbC+uNs91ChoCn/JBwvkqytDDCW7BoKIiT7fxwQ19VNxfd97XGnqVgL3Xg2IvoHMDOkSA/y1Oi+9TcR8uVyTR987G/vkmvjgqXgqxDTSxYiLb2GxokzSHw+iCe+GxepnRsDLt2E=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1708012130; c=relaxed/simple;
+	bh=+4O3D4o5CsfHbruLVlheO0dIe4wiYNfrvNQ9FVYTaoU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=sE5JDn2Jxbk/GETV8r69FrNAyV3QX3xG7iBUAf/qX6ej3sYUaIaC1bVdwfl/5IcUud7cX9dsh7GLAq4on+S8j+bgPMGmCMzRXPQMW4bh4xnOaHW0wugtrtkhpcrjz/TgSWowLLJiF2TEOUwyC3/smfQrCqyvp0Rt638c/agoJXw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=okanakyuz.com; spf=none smtp.mailfrom=okanakyuz.com; dkim=pass (2048-bit key) header.d=okanakyuz.com header.i=@okanakyuz.com header.b=ZI5tZ5+F; arc=pass smtp.client-ip=23.83.223.161
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=okanakyuz.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=okanakyuz.com
+X-Sender-Id: hostingeremail|x-authuser|okanakyuz@okanakyuz.com
+Received: from relay.mailchannels.net (localhost [127.0.0.1])
+	by relay.mailchannels.net (Postfix) with ESMTP id 1118F81F24
+	for <linux-doc@vger.kernel.org>; Thu, 15 Feb 2024 15:29:25 +0000 (UTC)
+Received: from uk-fast-smtpout2.hostinger.io (unknown [127.0.0.6])
+	(Authenticated sender: hostingeremail)
+	by relay.mailchannels.net (Postfix) with ESMTPA id 4C36681F05
+	for <linux-doc@vger.kernel.org>; Thu, 15 Feb 2024 15:29:24 +0000 (UTC)
+ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1708010964; a=rsa-sha256;
+	cv=none;
+	b=9fkIjxjmpKPPAok9AKQKZF0/FzJIwVx6bCmnIg/6+Szo2+JJxIBsT4eGcVQ54+anf12key
+	GRGfzVWGBq0iUiZ9ZXt43i6MDiiVlHUdl2UDkLAtHy7KTpYgfQmIASG6thKx1ye0LsE94S
+	2k4h883GX7v9YrjuSf7lI49u/Bxg2GRBMqF3iO1FDbn/WIoO9i93iHILGj3K0m3mWTDW7N
+	Pz5LxmM058CxP2iJVqB5/ZcOM2lK4hmsEmo8hbEU2k9RazyFQD5Uax+mGafIxY3VNZye8V
+	oOWAm3E3r9G8HX1Lx/OJGMur93boEQlLcFdQejzacLPV0wTqKW2inekKyY3IBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mailchannels.net;
+	s=arc-2022; t=1708010964;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:dkim-signature;
+	bh=cbX2TFeKmQIH09gm5LYQHKCMm5YzJk5x0VxemUSMmNU=;
+	b=5TEn/ssRXw3vSYsobv3Xapycx62Z75055/c2oY3L5AsXp19n/bW34Mj96WGpDxujOOgKlq
+	7yQM76znlFDq6PsFCnbnAC+wDDOTTn8vO7D8YMlVuSL2dW8zloBu463dZwwPhM7FZ9klt9
+	f2TopggpMxXaW6vtEt38HKfmq8fjeVJWHF9aIfE2c9l8Xior7jn3hea1aXP5fxVLVOcbcx
+	/h3260rzbb/Uk/d0MmOqiBRj4wQHh/e/h2Q0081baf/FgyRTlnekv6f0tactgR0SMaQ8hG
+	DViL0HMJxN1CeKzFRPxLJ0c4aQs7bliCrPyzpPp7yE/zMwDdDyWyI/UiAWrkhg==
+ARC-Authentication-Results: i=1;
+	rspamd-6bdc45795d-dx4t8;
+	auth=pass smtp.auth=hostingeremail smtp.mailfrom=okanakyuz@okanakyuz.com
+X-Sender-Id: hostingeremail|x-authuser|okanakyuz@okanakyuz.com
+X-MC-Relay: Neutral
+X-MailChannels-SenderId: hostingeremail|x-authuser|okanakyuz@okanakyuz.com
+X-MailChannels-Auth-Id: hostingeremail
+X-Ruddy-Harbor: 6984111523b62a61_1708010964829_699144811
+X-MC-Loop-Signature: 1708010964829:1298361503
+X-MC-Ingress-Time: 1708010964829
+Received: from uk-fast-smtpout2.hostinger.io (uk-fast-smtpout2.hostinger.io
+ [31.220.23.36])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
+	by 100.119.153.71 (trex/6.9.2);
+	Thu, 15 Feb 2024 15:29:24 +0000
+From: Okan Akyuz <okanakyuz@okanakyuz.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=okanakyuz.com;
+	s=hostingermail-a; t=1708010962;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=cbX2TFeKmQIH09gm5LYQHKCMm5YzJk5x0VxemUSMmNU=;
+	b=ZI5tZ5+FAniwcDdqXIV+E1OcmYk+pNteOtrqb7CrD/3jH70hAvQGOk8HWEBGoUpx+AzDSW
+	t5rxiA0Uewd6B0lxilNIN0DDIS842Ea1RwyEEhz1Jlokf8I5MxTiQ+PeWEw1sEcspCK44H
+	IPGoLVI8KZYprahKaPoyUEpQPARxX2zFoxANOBFf0d/5OmsEOEmetQ3NqOstl/HdU4Q/HR
+	t2s3caEKs9o6Rwkohu8/KSX5mmY5E9tV7Uf8zmMm2KP32yIaLR/6pQCU1eVrUoRtZIkxI+
+	qv05TCcKiVsA3Ja/I4PS50fugC5z+91mKMol9pFl7778HbT1btIGxwWD6GSRgQ==
+To: jdelvare@suse.com,
+	linux@roeck-us.net,
+	corbet@lwn.net
+Cc: linux-hwmon@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	skhan@linuxfoundation.org,
+	okanakyuz@okanakyuz.com
+Subject: [PATCH] The datasheet URL has been changed.
+Date: Thu, 15 Feb 2024 18:19:57 +0300
+Message-ID: <20240215151957.20855-1-okanakyuz@okanakyuz.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <dti6zcuzszhut5m4g2bxiwfogwctfhktv2mwuqlij7wtvh3bny@ry4mxpiqidmt>
-X-Patchwork-Hint: comment
+X-CM-Envelope: MS4xfELWMjXxd9QwZl2hd/DXq0dhbDsJyXzaJU1n2KAVlPPQQWWAaX4bocHs95nVwUzgkes8cSg6c3/XcyXMdZ9Ssxin/55zpWCdg+I7z41lRicNDzc99Uq3 3W0vvCsyii0gCRm7ZSp+xmVg9RNmg7CIh5E9JS0MZodQ4iW9EVXPUeZoEImWpArh64clFdpdvy0ueMiZlFLy5jj4MDCCSXSmUuGRUijxUv+rm/+3yd2a0ZJ8 Ha1SDJxk/KVBEiLAArZU+zzIUrOPk1SbXA3v2dOat5VEx0V8GFv52hlbwY6BLVddBzzMqBEaVUHI3AfzOvin/of//dE/I5wp5/RGeku8Uj74ewwjmVOrdAiP Dy+AvZBDHNrgZRRt34622uWpjltK3K1aUC3hOUEAOvi+Qg1byN+Y2v/2OiJfYkz65xnnQiQkC2rgDLK1KtZtDB9ADHrnJA==
+X-CM-Analysis: v=2.4 cv=Rp/DLjmK c=1 sm=1 tr=0 ts=65ce2dd2 a=geHYaF3j5ifCImHjKwHHfg==:117 a=geHYaF3j5ifCImHjKwHHfg==:17 a=-tA9vPf7AAAA:8 a=UXzzSC1OAAAA:8 a=gAnH3GRIAAAA:8 a=2_2egfEcOiK7PuE5XgAA:9 a=vtdtr2SZiqPAgdHKmkdM:22 a=NXyddzfXndtU_1loVILY:22 a=oVHKYsEdi7-vN-J5QA_j:22
+X-AuthUser: okanakyuz@okanakyuz.com
 
-On Thu, Feb 15, 2024 at 11:53:17AM +0100, Maxime Ripard wrote:
-> On Tue, Feb 13, 2024 at 10:38:56AM +0200, Ville Syrjälä wrote:
-> > On Mon, Feb 12, 2024 at 05:53:48PM +0100, Maxime Ripard wrote:
-> > > On Mon, Feb 12, 2024 at 05:49:33PM +0200, Ville Syrjälä wrote:
-> > > > On Mon, Feb 12, 2024 at 11:01:07AM +0100, Maxime Ripard wrote:
-> > > > > On Fri, Feb 09, 2024 at 09:34:35PM +0100, Sebastian Wick wrote:
-> > > > > > On Mon, Feb 05, 2024 at 10:39:38AM +0100, Maxime Ripard wrote:
-> > > > > > > On Fri, Feb 02, 2024 at 06:37:52PM +0200, Ville Syrjälä wrote:
-> > > > > > > > On Fri, Feb 02, 2024 at 04:59:30PM +0100, Maxime Ripard wrote:
-> > > > > > > > > On Fri, Feb 02, 2024 at 05:40:47PM +0200, Ville Syrjälä wrote:
-> > > > > > > > > > On Fri, Feb 02, 2024 at 02:01:39PM +0100, Maxime Ripard wrote:
-> > > > > > > > > > > Hi,
-> > > > > > > > > > > 
-> > > > > > > > > > > On Mon, Jan 15, 2024 at 03:37:20PM +0100, Sebastian Wick wrote:
-> > > > > > > > > > > > > >  /**
-> > > > > > > > > > > > > >   * DOC: HDMI connector properties
-> > > > > > > > > > > > > >   *
-> > > > > > > > > > > > > > + * Broadcast RGB
-> > > > > > > > > > > > > > + *      Indicates the RGB Quantization Range (Full vs Limited) used.
-> > > > > > > > > > > > > > + *      Infoframes will be generated according to that value.
-> > > > > > > > > > > > > > + *
-> > > > > > > > > > > > > > + *      The value of this property can be one of the following:
-> > > > > > > > > > > > > > + *
-> > > > > > > > > > > > > > + *      Automatic:
-> > > > > > > > > > > > > > + *              RGB Range is selected automatically based on the mode
-> > > > > > > > > > > > > > + *              according to the HDMI specifications.
-> > > > > > > > > > > > > > + *
-> > > > > > > > > > > > > > + *      Full:
-> > > > > > > > > > > > > > + *              Full RGB Range is forced.
-> > > > > > > > > > > > > > + *
-> > > > > > > > > > > > > > + *      Limited 16:235:
-> > > > > > > > > > > > > > + *              Limited RGB Range is forced. Unlike the name suggests,
-> > > > > > > > > > > > > > + *              this works for any number of bits-per-component.
-> > > > > > > > > > > > > > + *
-> > > > > > > > > > > > > > + *      Drivers can set up this property by calling
-> > > > > > > > > > > > > > + *      drm_connector_attach_broadcast_rgb_property().
-> > > > > > > > > > > > > > + *
-> > > > > > > > > > > > > 
-> > > > > > > > > > > > > This is a good time to document this in more detail. There might be two
-> > > > > > > > > > > > > different things being affected:
-> > > > > > > > > > > > > 
-> > > > > > > > > > > > > 1. The signalling (InfoFrame/SDP/...)
-> > > > > > > > > > > > > 2. The color pipeline processing
-> > > > > > > > > > > > > 
-> > > > > > > > > > > > > All values of Broadcast RGB always affect the color pipeline processing
-> > > > > > > > > > > > > such that a full-range input to the CRTC is converted to either full- or
-> > > > > > > > > > > > > limited-range, depending on what the monitor is supposed to accept.
-> > > > > > > > > > > > > 
-> > > > > > > > > > > > > When automatic is selected, does that mean that there is no signalling,
-> > > > > > > > > > > > > or that the signalling matches what the monitor is supposed to accept
-> > > > > > > > > > > > > according to the spec? Also, is this really HDMI specific?
-> > > > > > > > > > > > > 
-> > > > > > > > > > > > > When full or limited is selected and the monitor doesn't support the
-> > > > > > > > > > > > > signalling, what happens?
-> > > > > > > > > > > > 
-> > > > > > > > > > > > Forgot to mention: user-space still has no control over RGB vs YCbCr on
-> > > > > > > > > > > > the cable, so is this only affecting RGB? If not, how does it affect
-> > > > > > > > > > > > YCbCr?
-> > > > > > > > > > > 
-> > > > > > > > > > > So I dug a bit into both the i915 and vc4 drivers, and it looks like if
-> > > > > > > > > > > we're using a YCbCr format, i915 will always use a limited range while
-> > > > > > > > > > > vc4 will follow the value of the property.
-> > > > > > > > > > 
-> > > > > > > > > > The property is literally called "Broadcast *RGB*".
-> > > > > > > > > > That should explain why it's only affecting RGB.
-> > > > > > > > > 
-> > > > > > > > > Right. And the limited range option is called "Limited 16:235" despite
-> > > > > > > > > being usable on bpc > 8 bits. Naming errors occurs, and history happens
-> > > > > > > > > to make names inconsistent too, that's fine and not an argument in
-> > > > > > > > > itself.
-> > > > > > > > > 
-> > > > > > > > > > Full range YCbCr is a much rarer beast so we've never bothered
-> > > > > > > > > > to enable it.
-> > > > > > > > > 
-> > > > > > > > > vc4 supports it.
-> > > > > > > > 
-> > > > > > > > Someone implemented it incorrectly then.
-> > > > > > > 
-> > > > > > > Incorrectly according to what documentation / specification? I'm sorry,
-> > > > > > > but I find it super ironic that i915 gets to do its own thing, not
-> > > > > > > document any of it, and when people try to clean things up they get told
-> > > > > > > that we got it all wrong.
-> > > > > > 
-> > > > > > FWIW, this was an i915 property and if another driver uses the same
-> > > > > > property name it must have the same behavior. Yes, it isn't standardized
-> > > > > > and yes, it's not documented (hence this effort here) but it's still on
-> > > > > > vc4 to make the property compatible.
-> > > > > 
-> > > > > How is it not compatible? It's a superset of what i915 provides, but
-> > > > > it's strictly compatible with it.
-> > > > 
-> > > > No it is not.
-> > > 
-> > > The property is compatible with i915 interpretation of it, whether you
-> > > like it or not. And that's what Sebastian was referring to.
-> > > 
-> > > > Eg. what happens if you set the thing to full range for RGB (which you
-> > > > must on many broken monitors), and then the kernel automagically
-> > > > switches to YCbCr (for whatever reason) but the monitor doesn't
-> > > > support full range YCbCr? Answer: you get crap output.
-> > > 
-> > > And that part is just moving goalposts.
-> > 
-> > No. Allowing users to get correct colors with broken displays
-> > is the sole reason why this property even exists.
-> 
-> HDMI 1.4, Section 6.6 - Video Quantization Ranges:
-> 
->   If the sink’s EDID declares a selectable YCC Quantization Range
->   (QY=1), then it shall expect limited range pixel values if it receives
->   AVI YQ=0 and it shall expect full range pixel values if it receives
->   AVI YQ=1. For other values of YQ, the sink shall expect pixel values
->   with the default range for the transmitted video format.
-> 
-> So, the only concern you have is if the EDID has QY set to 1 but the
-> monitor doesn't actually support it? If so, could we qualify the monitor
-> as a "broken display" and thus would require that property to apply to
-> YUV too?
+The URL for the datasheet was not functional. It has been replaced
+with the active one from the manufacturer's website.
 
-Sinks that declare a selectable quantization range are not the
-problem, or at least I don't recall ever seeing one that lied about
-that. The problem is the sinks that don't have selectable quantization
-range, and which implement the default rules incorrectly. The only way
-to get correct colors on those is for the user to override the
-quantization range manually.
+Signed-off-by: Okan Akyuz <okanakyuz@okanakyuz.com>
+---
+ Documentation/hwmon/max6620.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Typically TVs get it mostly right (though I have at least one that
-also expects limited range for 640x480 which is not correct), and 
-many (perhaps even most?) computer displays get it wrong (as in
-they always assume RGB to be full range).
-
-We could in theory quirk those, but the quirk list would be enormous,
-and fragile to maintain because the user can also shoot themselves in
-the foot here by frobbing with the "black level"/etc. settings on the
-display itself. So we'd surely end up with lots of false positives
-on the quirk list.
-
+diff --git a/Documentation/hwmon/max6620.rst b/Documentation/hwmon/max6620.rst
+index 84c1c44d3de4..d70173bf0242 100644
+--- a/Documentation/hwmon/max6620.rst
++++ b/Documentation/hwmon/max6620.rst
+@@ -11,7 +11,7 @@ Supported chips:
+ 
+     Addresses scanned: none
+ 
+-    Datasheet: http://pdfserv.maxim-ic.com/en/ds/MAX6620.pdf
++    Datasheet: https://www.analog.com/media/en/technical-documentation/data-sheets/max6620.pdf
+ 
+ Authors:
+     - L\. Grunenberg <contact@lgrunenberg.de>
 -- 
-Ville Syrjälä
-Intel
+2.43.0
+
 
