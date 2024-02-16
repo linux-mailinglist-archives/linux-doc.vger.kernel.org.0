@@ -1,136 +1,189 @@
-Return-Path: <linux-doc+bounces-9792-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9807-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDE1C8581C2
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Feb 2024 16:52:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89056858201
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Feb 2024 16:59:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 76D001F22C5B
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Feb 2024 15:52:57 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 008A71F22FBE
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Feb 2024 15:59:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 974C412FF83;
-	Fri, 16 Feb 2024 15:52:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A164B130E5A;
+	Fri, 16 Feb 2024 15:57:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="hvc00JVY"
+	dkim=pass (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="INUCV6mq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f201.google.com (mail-pg1-f201.google.com [209.85.215.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp-fw-33001.amazon.com (smtp-fw-33001.amazon.com [207.171.190.10])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E422C12FF6A
-	for <linux-doc@vger.kernel.org>; Fri, 16 Feb 2024 15:52:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8868C12C809;
+	Fri, 16 Feb 2024 15:57:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=207.171.190.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708098756; cv=none; b=D904dbOlQ4XrByiSTmc5NX3ndjlXw7ZTnb+FphVhIsapuRyq3X/jLMSWrQI5lru4PCqSpU3Obw3fcEQ0EpzQtaQVNMlaF7wQoeBp31yq6X2/1Wj4TupZtyjS0tCJayudLg7HNDUOQ6kkq6gyEvDvaC/j6QpJeySg2KnTFDZtyjg=
+	t=1708099056; cv=none; b=Fr85swdryohF9xe/7biVaAARlqkeoUkSTv5Yz5GjkEVhKOxO7V0nCZMRGBGzFFiGazUpe3Lkael8ESTuAjVWaNdLRnYYUEvn9GdTjzTTjBeFE6vRCRV/TqX7fFMVnBfC506q2sQqAb9vRyhAyrKR0Ld+mvLcvzNOHMmf4wraV8A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708098756; c=relaxed/simple;
-	bh=Twfvqn5z2TPQUG3mCx7eOkQhXIYHDRrgU1d+jAxcuDQ=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=azy7hoovX/HQxf3F0KgXwhab4Ziue2Z4cURLs9VZ+l3Nj6fJIU7fOBzOlrnHA7k0HpvFvv5kwTEIuY5zkY4xLHGIuhrzZxUSg9sAYtf3Yud/N1AxogHYLcsLiREjh1faDRwWkgw583WO3RbKOAu+PUCnUQ9gKsDqW3BAZek91c4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=hvc00JVY; arc=none smtp.client-ip=209.85.215.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com
-Received: by mail-pg1-f201.google.com with SMTP id 41be03b00d2f7-5dcbb769a71so1552762a12.3
-        for <linux-doc@vger.kernel.org>; Fri, 16 Feb 2024 07:52:34 -0800 (PST)
+	s=arc-20240116; t=1708099056; c=relaxed/simple;
+	bh=92zPtdd0rAFo21Fvita8bJaJeG+DPj1KURFAzjkg2QY=;
+	h=From:To:CC:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=Vt545GRyr3U7Ma/FVO5Kj9FTL4LUnjzQe5l3PsDe1tqFLzYmfuMuWw3XkOLrup3sXUPpNSykZoDPBZsuKgL3G5LJDJ9E7UxuLe4SZDBrGIGSEo1QaUDXKjzMLgmIjZ3t+TDtS0FZUjVeY6EtVCVPSskcsTWAsnZH/TY/L0Qomrg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.de; spf=pass smtp.mailfrom=amazon.de; dkim=pass (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b=INUCV6mq; arc=none smtp.client-ip=207.171.190.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1708098754; x=1708703554; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=vdWqN4twnny7sh0kB73t0EmMejLUnVRIUmMC6P4B0Co=;
-        b=hvc00JVY9QTiNJqrNSc9ww1n6V66a9ToFhqNn+QVc2hFHv9CJ6kl7fuFuU91Wpo9V5
-         AOCQ23wjPxaSVZ9fbzmTAfUlNhiX6nzvr6qmqmlarf1sT2G9/M8ahxG0T4/HOX1pwKyt
-         Ax1X4TNQfp8gFyCudeWba74kxXywGXaUm2sZN3k7Hu7zf+wOVlrIYKPj/ewPyq3Mrzoa
-         58i6se1eDpBM+th90UaVbSHE68Fci2xO4ngxX5kOopyDQkfNbH1yXd91RfyN3apqurfX
-         daI5BHm9rXCiweNWm7SUN4yth5rOCv4esCUEdSJahGAgEn+ejMzNp19HOI/jVYYEH7Ed
-         08pQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708098754; x=1708703554;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=vdWqN4twnny7sh0kB73t0EmMejLUnVRIUmMC6P4B0Co=;
-        b=htaUk1I2DPXIgzvx7NNrsF9JLHBZH4xCtIbm6i8jlM8dEuwJznpMg7KElHEwEft/Ka
-         tg192b7hsfuBf899hpEKDXIpXgqina2Yq0BYm2X5u2KcAHkTBNB5xhd0J5YH+gR8x58I
-         xRD4HjVGITsr+EKnXR6tbThKScAddG2oKyc8n6G8IXaWtJsIM1OUjJff1KFti+9pgFQu
-         J1QwZeqD5ioXONA5qZVihftB6rbiQqdznejdg8tAocZkp3minhb7tjWxIEOq2/HrxFyR
-         ymsEsG5X4Zb/pJq//CjTsrQuMEPAmKgp+Jj1kEf3VZGzmTY0nrlzOwXae30A/w0e91S2
-         y3Jw==
-X-Forwarded-Encrypted: i=1; AJvYcCUqEyjA8dE24g4QN4mGaTG0HKe1XELDN/JyV6LxxANKIU3Yi5YTU6xavvt/11+urGzp+HlZ5WpVRP29y0BTa5X/W5mCdiiNL9JG
-X-Gm-Message-State: AOJu0Yw9IlejuUK2jJ/XE3/wCkGfUBhSZwGx1Kz/HgnVSUhALxpCV40x
-	LpDWJYp5oyRak+/lY1ms0UpeOG5M5QosPpH4UpECVm2IESH3a6lpCm3f9FOwFEqFiGAKnAJ5AtP
-	A+Q==
-X-Google-Smtp-Source: AGHT+IHdTJArPS4Wa/fITdXprcQUHngTC0JP272as27E3u1351Uiji0GihlmCXFNyvIDmjcngg5SUcACTOg=
-X-Received: from zagreus.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:5c37])
- (user=seanjc job=sendgmr) by 2002:a05:6a02:a09:b0:5dc:23a4:3a with SMTP id
- cm9-20020a056a020a0900b005dc23a4003amr13383pgb.7.1708098754138; Fri, 16 Feb
- 2024 07:52:34 -0800 (PST)
-Date: Fri, 16 Feb 2024 07:52:32 -0800
-In-Reply-To: <df6ad8b9-4e53-4357-ab17-e9af62342849@xen.org>
+  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
+  t=1708099055; x=1739635055;
+  h=from:to:cc:subject:in-reply-to:references:date:
+   message-id:mime-version;
+  bh=ySlk5EP+5EPRFvPn7fKspQz+Y/lmLyPoeT8Lylq3p9Y=;
+  b=INUCV6mqjR9bApW5bPO0D8ZD37F1XaWRtO+wK3N12g+gRywP9XEtWK7q
+   ndTGY0ChLjMKu8+L1K953A1sZd20aXSOhg1LMfmMqY+yW1LdE/Wox4nkc
+   X5kIvTHlyqVnclXMUhgTxt3+hLdbhTBmhYh6uejjdrWjQlLrKrWTap/YR
+   E=;
+X-IronPort-AV: E=Sophos;i="6.06,165,1705363200"; 
+   d="scan'208";a="327444091"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.43.8.6])
+  by smtp-border-fw-33001.sea14.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Feb 2024 15:57:26 +0000
+Received: from EX19MTAUEC002.ant.amazon.com [10.0.0.204:20286]
+ by smtpin.naws.us-east-1.prod.farcaster.email.amazon.dev [10.0.58.150:2525] with esmtp (Farcaster)
+ id 5a50e3a4-7605-4a6b-bd7b-2201142338a7; Fri, 16 Feb 2024 15:57:25 +0000 (UTC)
+X-Farcaster-Flow-ID: 5a50e3a4-7605-4a6b-bd7b-2201142338a7
+Received: from EX19D008UEA002.ant.amazon.com (10.252.134.125) by
+ EX19MTAUEC002.ant.amazon.com (10.252.135.253) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Fri, 16 Feb 2024 15:57:10 +0000
+Received: from EX19MTAUEA001.ant.amazon.com (10.252.134.203) by
+ EX19D008UEA002.ant.amazon.com (10.252.134.125) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Fri, 16 Feb 2024 15:57:09 +0000
+Received: from dev-dsk-ptyadav-1c-37607b33.eu-west-1.amazon.com (10.15.11.255)
+ by mail-relay.amazon.com (10.252.134.102) with Microsoft SMTP Server id
+ 15.2.1118.40 via Frontend Transport; Fri, 16 Feb 2024 15:57:09 +0000
+Received: by dev-dsk-ptyadav-1c-37607b33.eu-west-1.amazon.com (Postfix, from userid 23027615)
+	id 4FB1420D21; Fri, 16 Feb 2024 16:57:09 +0100 (CET)
+From: Pratyush Yadav <ptyadav@amazon.de>
+To: Alexander Graf <graf@amazon.com>
+CC: <linux-kernel@vger.kernel.org>, <linux-trace-kernel@vger.kernel.org>,
+	<linux-mm@kvack.org>, <devicetree@vger.kernel.org>,
+	<linux-arm-kernel@lists.infradead.org>, <kexec@lists.infradead.org>,
+	<linux-doc@vger.kernel.org>, <x86@kernel.org>, Eric Biederman
+	<ebiederm@xmission.com>, "H . Peter Anvin" <hpa@zytor.com>, Andy Lutomirski
+	<luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Steven Rostedt
+	<rostedt@goodmis.org>, Andrew Morton <akpm@linux-foundation.org>, "Mark
+ Rutland" <mark.rutland@arm.com>, Tom Lendacky <thomas.lendacky@amd.com>,
+	Ashish Kalra <ashish.kalra@amd.com>, James Gowans <jgowans@amazon.com>,
+	Stanislav Kinsburskii <skinsburskii@linux.microsoft.com>, <arnd@arndb.de>,
+	<pbonzini@redhat.com>, <madvenka@linux.microsoft.com>, Anthony Yznaga
+	<anthony.yznaga@oracle.com>, Usama Arif <usama.arif@bytedance.com>, "David
+ Woodhouse" <dwmw@amazon.co.uk>, Benjamin Herrenschmidt
+	<benh@kernel.crashing.org>, Rob Herring <robh+dt@kernel.org>, "Krzysztof
+ Kozlowski" <krzk@kernel.org>
+Subject: Re: [PATCH v3 04/17] kexec: Add KHO parsing support
+In-Reply-To: <20240117144704.602-5-graf@amazon.com> (Alexander Graf's message
+	of "Wed, 17 Jan 2024 14:46:51 +0000")
+References: <20240117144704.602-1-graf@amazon.com>
+	<20240117144704.602-5-graf@amazon.com>
+Date: Fri, 16 Feb 2024 16:57:09 +0100
+Message-ID: <mafs0eddc8kru.fsf@amazon.de>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20240215152916.1158-1-paul@xen.org> <20240215152916.1158-22-paul@xen.org>
- <23e7ec31a67a73fe94b2b04dbca26ea5ca1ea238.camel@infradead.org> <df6ad8b9-4e53-4357-ab17-e9af62342849@xen.org>
-Message-ID: <Zc-EwMoijOo7w49N@google.com>
-Subject: Re: [PATCH v13 21/21] KVM: pfncache: rework __kvm_gpc_refresh() to
- fix locking issues
-From: Sean Christopherson <seanjc@google.com>
-To: paul@xen.org
-Cc: David Woodhouse <dwmw2@infradead.org>, Paolo Bonzini <pbonzini@redhat.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Christian Borntraeger <borntraeger@linux.ibm.com>, 
-	Janosch Frank <frankja@linux.ibm.com>, Claudio Imbrenda <imbrenda@linux.ibm.com>, 
-	David Hildenbrand <david@redhat.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, 
-	Alexander Gordeev <agordeev@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, 
-	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Shuah Khan <shuah@kernel.org>, kvm@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-s390@vger.kernel.org, linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Type: text/plain
 
-On Fri, Feb 16, 2024, Paul Durrant wrote:
-> On 16/02/2024 13:04, David Woodhouse wrote:
-> > On Thu, 2024-02-15 at 15:29 +0000, Paul Durrant wrote:
-> > > From: David Woodhouse <dwmw@amazon.co.uk>
-> > > 
-> > > This function can race with kvm_gpc_deactivate(), which does not take
-> > > the ->refresh_lock. This means kvm_gpc_deactivate() can wipe the ->pfn
-> > > and ->khva fields, and unmap the latter, while hva_to_pfn_retry() has
-> > > temporarily dropped its write lock on gpc->lock.
-> > 
-> > Let's drop this from your series for now, as it's contentious.
-> > 
-> > Sean didn't like calling it a 'fix', which I had conceded and reworked
-> > the commit message. It was on the list somewhere, and also in
-> > https://git.infradead.org/users/dwmw2/linux.git/commitdiff/f19755000a7
-> > 
-> > I *also* think we should do this simpler one:
-> > https://git.infradead.org/users/dwmw2/linux.git/commitdiff/cc69506d19a
-> > ... which almost makes the first one unnecessary, but I think we should
-> > do it *anyway* because the rwlock abuse it fixes is kind of awful.
-> > 
-> > And while we still can't actually *identify* the race condition that
-> > led to a dereference of a NULL gpc->khva while holding the read lock
-> > and gpc->valid and gpc->active both being true... I'll eat my hat if
-> > cleaning up and simplifying the locking (and making it self-contained)
-> > *doesn't* fix it.
+Hi,
 
-Heh, I'm not taking that bet.
+On Wed, Jan 17 2024, Alexander Graf wrote:
 
-> > But either way, it isn't really part of your series. The only reason it
-> > was tacked on the end was because it would have merge conflicts with
-> > your series, which had been outstanding for months already.
-> > 
-> > So drop this one, and I'll work this bit out with Sean afterwards.
+> When we have a KHO kexec, we get a device tree, mem cache and scratch
+> region to populate the state of the system. Provide helper functions
+> that allow architecture code to easily handle memory reservations based
+> on them and give device drivers visibility into the KHO DT and memory
+> reservations so they can recover their own state.
+>
+> Signed-off-by: Alexander Graf <graf@amazon.com>
+>
+> ---
+>
+[...]
+> +/**
+> + * kho_return_mem - Notify the kernel that initially reserved memory is no
+> + * longer needed. When the last consumer of a page returns their mem, kho
+> + * returns the page to the buddy allocator as free page.
+> + */
+> +void kho_return_mem(const struct kho_mem *mem)
+> +{
+> +	uint64_t start_pfn, end_pfn, pfn;
+> +
+> +	start_pfn = PFN_DOWN(mem->addr);
+> +	end_pfn = PFN_UP(mem->addr + mem->len);
+> +
+> +	for (pfn = start_pfn; pfn < end_pfn; pfn++)
+> +		kho_return_pfn(pfn);
+> +}
+> +EXPORT_SYMBOL_GPL(kho_return_mem);
+> +
+> +static void kho_claim_pfn(ulong pfn)
+> +{
+> +	struct page *page = pfn_to_page(pfn);
+> +
+> +	WARN_ON(!page);
+> +	if (WARN_ON(page_count(page) != 1))
+> +		pr_err("Claimed non kho pfn %lx", pfn);
 
-FWIW, I'm not opposed to overhauling the gpc locking, I agree it's a mess.  I just
-want to proceed slower than I would for a fix, it's a lot to digest.
+You do sanity checks but then never actually change anything on the
+page. kho_claim_mem()'s documentation says: "This function removes the
+reserved state for all pages that the mem spans". So this function
+should at the very least call ClearPageReserved().
 
-> Ok. Sean, I assume that since this is the last patch in the series it's
-> superfluous for me to post a v14 just for this?
+Also, checking the page count is a very rough heuristic. There can be
+other non-KHO pages with page count == 1. Do you think it would make
+more sense to use one of the private pageflags bits to mark a page
+KHO-owned? If not, shouldn't you at least also check if the page is
+reserved?
 
-Correct, definitely no need for a new version.
+> +}
+> +
+> +/**
+> + * kho_claim_mem - Notify the kernel that a handed over memory range is now in
+> + * use by a kernel subsystem and considered an allocated page. This function
+> + * removes the reserved state for all pages that the mem spans.
+> + */
+> +void *kho_claim_mem(const struct kho_mem *mem)
+> +{
+> +	u64 start_pfn, end_pfn, pfn;
+> +	void *va = __va(mem->addr);
+> +
+> +	start_pfn = PFN_DOWN(mem->addr);
+> +	end_pfn = PFN_UP(mem->addr + mem->len);
+> +
+> +	for (pfn = start_pfn; pfn < end_pfn; pfn++)
+> +		kho_claim_pfn(pfn);
+> +
+> +	return va;
+> +}
+> +EXPORT_SYMBOL_GPL(kho_claim_mem);
+> +
+[...]
+
+--
+Regards,
+Pratyush Yadav
+
+
+
+Amazon Development Center Germany GmbH
+Krausenstr. 38
+10117 Berlin
+Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
+Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
+Sitz: Berlin
+Ust-ID: DE 289 237 879
+
+
+
 
