@@ -1,198 +1,217 @@
-Return-Path: <linux-doc+bounces-9844-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9846-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CD8785866D
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Feb 2024 20:54:56 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id D361B858698
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Feb 2024 21:18:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C0B0E1C21535
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Feb 2024 19:54:55 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 384E5B21904
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Feb 2024 20:18:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BF96E12EBEA;
-	Fri, 16 Feb 2024 19:54:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F96F1384B1;
+	Fri, 16 Feb 2024 20:18:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="FzaNeIUu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout11.his.huawei.com (frasgout11.his.huawei.com [14.137.139.23])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD46712A158;
-	Fri, 16 Feb 2024 19:54:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.23
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2CCB1384A6
+	for <linux-doc@vger.kernel.org>; Fri, 16 Feb 2024 20:18:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708113292; cv=none; b=EiZWTRnuUiOre6QhFC66QV0LSbYrbZnsTvoaWNh/TT6PuLB6Pp/H+cxW9EKx0p+uzJ4JDOw7ASODHihPZZQffk2L/hrHxggbTpUU3RiSFSppZ2EOtgVKWnIpQLujy+xW4h3XYvt2r4mAOQoDluJcuCdi2Gk/0fT953C+SgejbgY=
+	t=1708114724; cv=none; b=TWzSStOfkCI6PFIMucvWkX3C/lrQKIxth0wN2pN50Hg093f84Z/1ar7Y558GmrU9g482ABErxGo29ykM7WvsyfcR4Y0EZsnyS5+lXjMqqddgbyL6ezPuQbWcrxwROHOWnFFwNA6ebI/SOdqGbaKsj072je6bOE85aEyRq8A0CZM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708113292; c=relaxed/simple;
-	bh=B4jAjw1DiDA/xtjvyDVRYyJzCcc0H7WBMUUgQrnUfT4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NqUucYg6fmKZImx+hfg49cvR9PKfJHCpNnCqoJdKL7nbSDpig1GGMmfmcga/Nt8TbZ0+8fzepzNl43trPyt38VNhe1/Z5pUOEYGGdH8TufNoa8ehxfNWPhY0DYLx89UHau8VVaoP7pM/T05Jmozb8I8p+iZypFfqE55C7BajOaM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.23
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.18.186.29])
-	by frasgout11.his.huawei.com (SkyGuard) with ESMTP id 4Tc2Ll2C7Jz9y4gk;
-	Sat, 17 Feb 2024 03:39:27 +0800 (CST)
-Received: from mail02.huawei.com (unknown [7.182.16.47])
-	by mail.maildlp.com (Postfix) with ESMTP id 845EE140153;
-	Sat, 17 Feb 2024 03:54:46 +0800 (CST)
-Received: from [10.81.208.49] (unknown [10.81.208.49])
-	by APP1 (Coremail) with SMTP id LxC2BwD37xhzvc9lL4ujAg--.27938S2;
-	Fri, 16 Feb 2024 20:54:45 +0100 (CET)
-Message-ID: <5b0ce7ef-3f4e-4c1b-a0b7-bf48e8169c4e@huaweicloud.com>
-Date: Fri, 16 Feb 2024 20:54:25 +0100
+	s=arc-20240116; t=1708114724; c=relaxed/simple;
+	bh=NXpkbYiaH9JB2933j4B3xFyzMZvqRc2X98KlpqhTWVo=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=WKLxIb28X4u1bCMBueOH044lGvPhc3krjzYgbq+6f7AVeB93nKBb1Gm075PKRfQqH2Tb0Sayluthd67KZvlMxuaHMkVg9HCz5d/Fnii4Hx1puOu5QYFsv68mj6l0eE2U4Wm60UcNYXz3+lH4Ej8QBHnKcJo2jW6dmj3tE9ms81U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=FzaNeIUu; arc=none smtp.client-ip=209.85.214.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1d89f0ab02bso19275ad.1
+        for <linux-doc@vger.kernel.org>; Fri, 16 Feb 2024 12:18:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1708114722; x=1708719522; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=aGidkPaApOit0v+6g6i4h6oGRDmLx70GjL/Y9I2txxY=;
+        b=FzaNeIUufj78XfxZCXtbEhoOD2W9SNWbPimmQ+xRbiyAn1Hr5dgIbGVU7TOkCeqMrI
+         xCOiuj7KxzCOCvlEpPoYUb3b820hs58qoTdHMePqhCNPwg720kRkfjH+6OFqZOx3tQHL
+         QtcMqBi9SSwibBmlhFNyAla58stwXe4fXvDH9kgQxXkEoo/hE4ozcb1kGPd1Wg9/Vx5M
+         0Bbi3nkGy172mzKPuhifZs35JJpE5K5jdC4YaNpVRiwevZdT7Utl17Bugn4PAHi7sYm2
+         3G739yXeY7Hacw8gUGeKYSiw7OXQdao4eWcPphjdm3E1X1cibtLfWo8VZPYPrksG9cZ/
+         vqVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1708114722; x=1708719522;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=aGidkPaApOit0v+6g6i4h6oGRDmLx70GjL/Y9I2txxY=;
+        b=NQ7Am9rW8oehpf6NHO6CM2DPqq5KcPmz+RD9ahAs3jm+NqR+hMmGacQw+s8AWkWxl3
+         yuI9J7r/99zm82DlFxDfh2rKfXBON3Byjbg3lnRpSWKxTETJUNI11rYocMOK0Yi36DRo
+         NmH9ter6+gYu9va2gnLzbcTVI7UD6fgVKVWZ9Y7ArQYi3H4E7Mx44v0NXSFIPGUyuKJp
+         PADSSMXhbXle1iyvbCj5ZpkXl5pMUvfpI23Itgdw910ktnzzLg+v5tAQpFx+rlVxHc+0
+         AS3t8JMuZgsNoA4SqKN1p2CLvgyaIpR0KrmAlIO5P88ZKunPZvHdxiadQlxRe5np82h7
+         jpew==
+X-Forwarded-Encrypted: i=1; AJvYcCVh0+5dOaZ6Y7e5AnirDqaQKtNo5X0nH90snUCv/JELvYZ4IwLHRxUKlWRFc8Flj4/mYKGNbfVUivz95gZP/xJA8ZYPPXsMLR24
+X-Gm-Message-State: AOJu0YzroBm+Jj6MLBvnB25g0tIFaUEBRjJLHcSf6nMh/yMenU1ECmiG
+	o5TxtD2mSYfJfb9uNCOpp6yiiucmJgugkIlJP20hImUuPfDXcWgiFmIHw0rLxEKVpuKj2lgmfiQ
+	fbvEB+RVrZgGMcDn1oBI1UtkDWrCBDIXYQdpy
+X-Google-Smtp-Source: AGHT+IFAqKDFfQdydDYmxWaUSuiI8UQ1LH1oYoNNIqsDe8byRsas70TXreiKKFloHuY/81e2w4QpRkuE5XqrFRNg24Y=
+X-Received: by 2002:a17:902:d543:b0:1db:7284:a766 with SMTP id
+ z3-20020a170902d54300b001db7284a766mr20199plf.0.1708114721468; Fri, 16 Feb
+ 2024 12:18:41 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 6/8] KEYS: PGP data parser
-Content-Language: en-US
-To: Matthew Wilcox <willy@infradead.org>
-Cc: Petr Tesarik <petrtesarik@huaweicloud.com>,
- Dave Hansen <dave.hansen@intel.com>, =?UTF-8?B?UGV0ciBUZXNhxZnDrWs=?=
- <petr@tesarici.cz>, Jonathan Corbet <corbet@lwn.net>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
- "H. Peter Anvin" <hpa@zytor.com>, Andy Lutomirski <luto@kernel.org>,
- Oleg Nesterov <oleg@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
- Xin Li <xin3.li@intel.com>, Arnd Bergmann <arnd@arndb.de>,
- Andrew Morton <akpm@linux-foundation.org>,
- Rick Edgecombe <rick.p.edgecombe@intel.com>,
- Kees Cook <keescook@chromium.org>,
- "Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
- Pengfei Xu <pengfei.xu@intel.com>, Josh Poimboeuf <jpoimboe@kernel.org>,
- Ze Gao <zegao2021@gmail.com>,
- "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
- Kai Huang <kai.huang@intel.com>, David Woodhouse <dwmw@amazon.co.uk>,
- Brian Gerst <brgerst@gmail.com>, Jason Gunthorpe <jgg@ziepe.ca>,
- Joerg Roedel <jroedel@suse.de>, "Mike Rapoport (IBM)" <rppt@kernel.org>,
- Tina Zhang <tina.zhang@intel.com>, Jacob Pan
- <jacob.jun.pan@linux.intel.com>,
- "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
- open list <linux-kernel@vger.kernel.org>, David Howells
- <dhowells@redhat.com>, Petr Tesarik <petr.tesarik1@huawei-partners.com>
-References: <fb4a40c7-af9a-406a-95ab-406595f3ffe5@intel.com>
- <20240216152435.1575-1-petrtesarik@huaweicloud.com>
- <20240216152435.1575-7-petrtesarik@huaweicloud.com>
- <Zc-Q5pVHjngq9lpX@casper.infradead.org>
- <5916fa3ac3d0ce2ade71e7ed1c9eb6923e374c1f.camel@huaweicloud.com>
- <Zc-s-42WoZhW_2c8@casper.infradead.org>
-From: Roberto Sassu <roberto.sassu@huaweicloud.com>
-In-Reply-To: <Zc-s-42WoZhW_2c8@casper.infradead.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID:LxC2BwD37xhzvc9lL4ujAg--.27938S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxGr4DJw1kJry3try7CF1UGFg_yoWrGF1kpF
-	WfKas0kF4ktr4fCr1qyw4xWryFvrs3tFy5Gr9YyryrAFn0gr12krySka1YgF9rKr4kGa1j
-	qr4YvF9xCa4DAaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUv014x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
-	6F4UM28EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVWxJr
-	0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
-	2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
-	W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka
-	0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67
-	AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4UJwCI
-	c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267
-	AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AKxVWU
-	JVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7VUb
-	J73DUUUUU==
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAQAPBF1jj5pusAABs+
+References: <20231201005720.235639-1-babu.moger@amd.com> <cover.1705688538.git.babu.moger@amd.com>
+ <7c26af23-fa1e-4e01-8088-8fbd9be3d6f3@intel.com> <431d6ac4-53cb-2f73-3cda-22616df2f96a@amd.com>
+ <4bb63a78-0d0d-47bc-ad65-558af8bc5519@intel.com> <51c60991-eb10-40e8-b3ab-676b92b0c662@amd.com>
+In-Reply-To: <51c60991-eb10-40e8-b3ab-676b92b0c662@amd.com>
+From: Peter Newman <peternewman@google.com>
+Date: Fri, 16 Feb 2024 12:18:30 -0800
+Message-ID: <CALPaoChhKJiMAueFtgCTc7ffO++S5DJCySmxqf9ZDmhR9RQapw@mail.gmail.com>
+Subject: Re: [PATCH v2 00/17] x86/resctrl : Support AMD Assignable Bandwidth
+ Monitoring Counters (ABMC)
+To: babu.moger@amd.com
+Cc: Reinette Chatre <reinette.chatre@intel.com>, corbet@lwn.net, fenghua.yu@intel.com, 
+	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, 
+	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, 
+	paulmck@kernel.org, rdunlap@infradead.org, tj@kernel.org, 
+	peterz@infradead.org, yanjiewtw@gmail.com, kim.phillips@amd.com, 
+	lukas.bulwahn@gmail.com, seanjc@google.com, jmattson@google.com, 
+	leitao@debian.org, jpoimboe@kernel.org, rick.p.edgecombe@intel.com, 
+	kirill.shutemov@linux.intel.com, jithu.joseph@intel.com, kai.huang@intel.com, 
+	kan.liang@linux.intel.com, daniel.sneddon@linux.intel.com, 
+	pbonzini@redhat.com, sandipan.das@amd.com, ilpo.jarvinen@linux.intel.com, 
+	maciej.wieczor-retman@intel.com, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, eranian@google.com, 
+	"james.morse@arm.com" <james.morse@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 2/16/2024 7:44 PM, Matthew Wilcox wrote:
-> On Fri, Feb 16, 2024 at 05:53:01PM +0100, Roberto Sassu wrote:
->> On Fri, 2024-02-16 at 16:44 +0000, Matthew Wilcox wrote:
->>> On Fri, Feb 16, 2024 at 04:24:33PM +0100, Petr Tesarik wrote:
->>>> From: David Howells <dhowells@redhat.com>
->>>>
->>>> Implement a PGP data parser for the crypto key type to use when
->>>> instantiating a key.
->>>>
->>>> This parser attempts to parse the instantiation data as a PGP packet
->>>> sequence (RFC 4880) and if it parses okay, attempts to extract a public-key
->>>> algorithm key or subkey from it.
->>>
->>> I don't understand why we want to do this in-kernel instead of in
->>> userspace and then pass in the actual key.
->>
->> Sigh, this is a long discussion.
-> 
-> Well, yes.  When you don't lay out why this is of value, it turns into a
-> long discussion.  This isn't fun for me either.
-> 
->> PGP keys would be used as a system-wide trust anchor to verify RPM
->> package headers, which already contain file digests that can be used as
->> reference values for kernel-enforced integrity appraisal.
-> 
-> The one example we have of usage comes in patch 7 of this series and is:
-> 
-> gpg --dearmor < <PGP key> | keyctl padd asymmetric "" @u
-> 
-> And you're already using two userspace programs there.  Why not a third?
+Hi Babu,
 
-I think this is very easy to answer. Why not extracting the public key 
-from an x509 certificate in user space, sending it to the kernel, and 
-using it for kernel module verification?
+On Thu, Feb 8, 2024 at 9:29=E2=80=AFAM Moger, Babu <babu.moger@amd.com> wro=
+te:
+> On 2/5/24 16:38, Reinette Chatre wrote:
+> > This could be improved beyond a binary "enable"/"disable" interface to =
+user space.
+> > For example, the hardware can discover which "mbm counter assign" relat=
+ed feature
+> > (I'm counting the "soft RMID" here as one of the "mbm counter assign" r=
+elated
+> > features) is supported on the platform and it can be presented to the u=
+ser like:
+> >
+> > # cat /sys/fs/resctrl/info/L3_MON/mbm_assign
+> > [feature_1] feature_2 feature_3
+>
+> How about this?
+> # cat /sys/fs/resctrl/info/L3_MON/mbm_assign
+>  ABMC:Capable
+>  SOFT-RMID:Capable
+>
+> To enable ABMC
+> # echo ABMC:enable > /sys/fs/resctrl/info/L3_MON/mbm_assign
+>
+> When ABMC is enabled:
+> # cat /sys/fs/resctrl/info/L3_MON/mbm_assign
+>  ABMC:Enable
+>  SOFT-RMID:Capable
 
-> gpg --dearmor < <PGP key> | ./scripts/parse-pgp-packets | keyctl padd asymmetric "" @u
-> 
->> With the assumptions that:
->>
->> - In a locked-down system the kernel has more privileges than root
->> - The kernel cannot offload this task to an user space process due to
->>    insufficient isolation
->>
->> the only available option is to do it in the kernel (that is what I got
->> as suggestion).
-> 
-> This sounds like there's some other way of getting the key into the
-> kernel which doesn't rely on userspace.  Or are you assuming that nobody
-> bothered to trojan 'cat'?
+There would be no need to use soft RMIDs on a system that supports
+ABMC, so I can't think of a reason why the underlying implementation
+would matter to our users. The user should only have to request the
+interface where monitors must be assigned manually. The mount would
+succeed if the system has a way to support the interface.
 
-Apologies for not providing the full information at once. I'm worried 
-that would be too long, and pieces can be lost in the way. If it is not 
-a problem, I'm going to clarify on request.
 
-Ok, so, I'm not going to use cat to upload the PGP keys. These will be 
-embedded in the kernel image, when the Linux distribution vendors build 
-their kernel.
+> > You have made it clear on several occasions that you do not intend to s=
+upport
+> > domain level assignment. That may be ok but the interface you create sh=
+ould
+> > not prevent future support of domain level assignment.
+> >
+> > If my point is not clear, could you please share how this interface is =
+able to
+> > support domain level assignment in the future?
+> >
+> > I am starting to think that we need a file similar to the schemata file
+> > for group and domain level monitor configurations.
+>
+> Something like this?
+>
+> By default
+> #cat /sys/fs/resctrl/monitor_state
+> default:0=3Dtotal=3Dassign,local=3Dassign;1=3Dtotal=3Dassign,local=3Dassi=
+gn
+>
+> With ABMC,
+> #cat /sys/fs/resctrl/monitor_state
+> ABMC:0=3Dtotal=3Dunassign,local=3Dunassign;1=3Dtotal=3Dunassign,local=3Du=
+nassign
 
-This works for both secure boot and trusted boot, since the kernel image 
-can be measured/verified by the boot loader.
+The benefit from all the string parsing in this interface is only
+halving the number of monitor_state sysfs writes we'd need compared to
+creating a separate file for mbm_local and mbm_total. Given that our
+use case is to assign the 32 assignable counters to read the bandwidth
+of ~256 monitoring groups, this isn't a substantial gain to help us. I
+think you should just focus on providing the necessary control
+granularity without trying to consolidate writes in this interface. I
+will propose an additional interface below to optimize our use case.
 
-Another source for keys is the MOK database, since users might want the 
-ability to verify their own software, which does not come from the Linux 
-distribution.
+Whether mbm_total and mbm_local are combined in the group directories
+or not, I don't see why you wouldn't just repeat the same file
+interface in the domain directories for a user needing finer-grained
+controls.
 
-I briefly anticipated the full picture, but I will tell it more explicitly.
 
-The kernel, with the embedded PGP keys, will be able to verify the 
-signature of the RPM package headers.
+> >> Peter, James,
+> >>
+> >> Please comment on what you want achieve in "assignment" based on the f=
+eatures you are working on.
 
-A component that I recently developed, the digest_cache LSM, has the 
-ability to extract file digests from RPM headers and provide a simple 
-interface for IMA, IPE, BPF LSM and any other component to query the 
-calculated digest of files being accessed, and allow/deny access to them 
-depending on whether the query is successful or not.
+I prototyped and tested the following additional interface for the
+large-scale, batch use case that we're primarily concerned about:
 
-I already anticipate the question, if you have the problem parsing PGP 
-keys, why don't you have the problem parsing RPM package headers?
+info/L3_MON/mbm_{local,total}_bytes_assigned
 
-I started finding a solution before this became available, and the only 
-alternative I found was to formally verify my code. So, I took Frama-C, 
-wrote the assertions, and verified that not only the code is 
-functionally correct for correct sequences of bytes, but that there is 
-no illegal memory access for any arbitrary sequence (unfortunately, I 
-can prove for a small buffer size).
+Writing a whitespace-delimited list of mongroup directory paths does
+the following:
+1. unassign all monitors for the given counter
+2. assigns a monitor to each mongroup referenced in the write
+3. batches per-domain register updates resulting from the assignments
+into a single IPI for each domain
 
-So, I'm probably going to do the same for the PGP parser, if this does 
-not fly. But, we were very optimistic that this could be a valid 
-alternative!
+This interface allows us to do less sysfs writes and IPIs on systems
+with more assignable monitoring resources, rather than doing more.
 
-Roberto
+The reference to a mongroup when reading/writing the above node is the
+resctrl-root-relative path to the monitoring group. There is probably
+a more concise way to refer to the groups, but my prototype used
+kernfs_walk_and_get() to locate each rdtgroup struct.
 
+I would also like to add that in the software-ABMC prototype I made,
+because it's based on assignment of a small number of RMIDs,
+assignment results in all counters being assigned at once. On
+implementations where per-counter assignments aren't possible,
+assignment through such a resource would be allowed to assign more
+resources than explicitly requested.
+
+This would allow an implementation only capable of global assignment
+to assign resources to all groups when a non-empty string is written
+to the proposed file nodes, and all resources to be unassigned when an
+empty string is written. Reading back from the file nodes would tell
+the user how much was actually assigned.
+
+Thanks!
+-Peter
 
