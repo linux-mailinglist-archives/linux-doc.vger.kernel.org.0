@@ -1,269 +1,152 @@
-Return-Path: <linux-doc+bounces-9963-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9965-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 583BB8592EB
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Feb 2024 22:15:26 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EE758592F7
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Feb 2024 22:29:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B33AFB20BBA
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Feb 2024 21:15:23 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E713D2821C0
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Feb 2024 21:29:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2025A7F7E6;
-	Sat, 17 Feb 2024 21:14:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 942257CF29;
+	Sat, 17 Feb 2024 21:29:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="Y57L9bC8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sonata.ens-lyon.org (sonata.ens-lyon.org [140.77.166.138])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F20DB7E0F1;
-	Sat, 17 Feb 2024 21:14:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=140.77.166.138
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB6FC7C083
+	for <linux-doc@vger.kernel.org>; Sat, 17 Feb 2024 21:29:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708204477; cv=none; b=XxY1I4+JDkLl72FZw4SS4pT6k9IjOTGL2spRE+9iOl2BigcyQR9AvKbLpimFlcYNYTun6GLbnHn2aqL3X6MVTXt4t1hPvRi+WhVPg7xQ9/DxyRYuSJR83jXn/S5L89UB0c7y9t8ta2CSE6aVaGEI4/BQbA8N2OIGew94T1sYEVE=
+	t=1708205379; cv=none; b=axXTCvXvBwrMFzPlaAd35c4q951MD0KKO954A669aFpczrsdsDK2uMgKMfx3lQc/0DbpOA3ksLp9Tpy+gRzluk8btx91xU5ZGRXgHFG2IRLnNU/uWfV69f+7J0s8tVAICq1LG5yujl9gjV/Ew5cTG7asb32WUdbVv9i5zJYcz68=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708204477; c=relaxed/simple;
-	bh=NtbqxagigOz/KVQq47nlYu3vg2cIX6Adg23k6043HVI=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition; b=DOvWjqr/BuMM7O7DH1ggzwSCCj2F1bOZEKjDp00nO3oaKRaKw/KYBnAhEIoegd1XnpTgGmP5mnVHCCCB8qxPDN8C2zoImTmJwWgvfQoo5vAg8JW7r/2KLmAJVULqxjlFaS4LNZ6cDz6fP0B6UZabFneM0NLm2V6cB/DDcCcLS/g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ens-lyon.org; spf=pass smtp.mailfrom=bounce.ens-lyon.org; arc=none smtp.client-ip=140.77.166.138
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ens-lyon.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bounce.ens-lyon.org
-Received: from localhost (localhost [127.0.0.1])
-	by sonata.ens-lyon.org (Postfix) with ESMTP id 78F0CA029D;
-	Sat, 17 Feb 2024 22:14:26 +0100 (CET)
-Received: from sonata.ens-lyon.org ([127.0.0.1])
-	by localhost (sonata.ens-lyon.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4xRw_zWL_EC4; Sat, 17 Feb 2024 22:14:26 +0100 (CET)
-Received: from begin (dhcp-3.aquilenet.fr [185.233.100.123])
+	s=arc-20240116; t=1708205379; c=relaxed/simple;
+	bh=I3Oflpcd+SP1rRHPx3ZAx8FONkH0lXQbgkoO9jFLdj0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=SpMxAWP8hRXnWrFtBsKLdsz13gfLJVbgtEjSz1Gi8L62mp/gjny5QgM0VzfXfrGwXL9k8LngVryL6o/z/5Jl5I9Ta1qulI6XGIwD7p8g6B2ah9IH3q/c5r26tQgX3fgS/Zhsc2dEXtq5ojhiNXAnk2m6uUJ7uHVZ/XwGo3Nqnjk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=Y57L9bC8; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 8707C47AAD
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1708205365; bh=8c3v0Jxyd4UCcIR1kgpPTaYZ0SlTHkNJBSr5/vWlsuE=;
+	h=From:To:Cc:Subject:Date:From;
+	b=Y57L9bC8cxbMSTCVBQiJY3OdEflmYe6htqRCsPWbaROLcSbwDXiGh/C8b8fyNnsbp
+	 UsYBwPY9NXesr6qrwwgY/7TRAbTVdfQMFHY7IDaqShUHUjCV5LWYJaV0B8Ndt26gt3
+	 PdoLnZSSbngJ10kC2MBKUoLTeXROOPA8oqzU7klwYMOl1oEl8jQHZ+ivV1IA0ORblc
+	 ISAMJUbKnIwLYKoQmQ5t5nixWLl82TCu2VqSEXsm5A03IfRFnMBFn1orZRwqsw87SU
+	 Q6VjnsKs+UUAfjN6mnDf1EYC6KZxajQRanmOIDGhRXdDu35SV0WIrEPYJDDeXMUkg7
+	 vI9smHmwClF3Q==
+Received: from localhost (unknown [IPv6:2601:280:5e00:625::646])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by sonata.ens-lyon.org (Postfix) with ESMTPSA id CE18BA025D;
-	Sat, 17 Feb 2024 22:14:25 +0100 (CET)
-Received: from samy by begin with local (Exim 4.97)
-	(envelope-from <samuel.thibault@ens-lyon.org>)
-	id 1rbS0v-00000000m4h-22Ur;
-	Sat, 17 Feb 2024 22:14:25 +0100
-Date: Sat, 17 Feb 2024 22:14:25 +0100
-From: Samuel Thibault <samuel.thibault@ens-lyon.org>
-To: James Chapman <jchapman@katalix.com>, tparkin@katalix.com,
-	edumazet@google.com, gnault@redhat.com
-Cc: davem@davemloft.net, kuba@kernel.org, pabeni@redhat.com, corbet@lwn.net,
-	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCHv6] PPPoL2TP: Add more code snippets
-Message-ID: <20240217211425.qj576u3jmaa6yidf@begin>
-Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	James Chapman <jchapman@katalix.com>, tparkin@katalix.com,
-	edumazet@google.com, gnault@redhat.com, davem@davemloft.net,
-	kuba@kernel.org, pabeni@redhat.com, corbet@lwn.net,
-	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
+	by ms.lwn.net (Postfix) with ESMTPSA id 8707C47AAD;
+	Sat, 17 Feb 2024 21:29:25 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: linux-doc@vger.kernel.org
+Cc: Akira Yokosawa <akiyks@gmail.com>, Vegard Nossum
+ <vegard.nossum@oracle.com>, Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: PDF misery
+Date: Sat, 17 Feb 2024 14:29:24 -0700
+Message-ID: <8734tqsrt7.fsf@meer.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: NeoMutt/20170609 (1.8.3)
+Content-Type: text/plain
 
-The existing documentation was not telling that one has to create a PPP
-channel and a PPP interface to get PPPoL2TP data offloading working.
+So, FYI, I have Vegard's PDF-generation fix applied here, but I've not
+pushed it yet (even though I think it's fine) because I wanted to be
+sure that all was well with PDF generation.  Bear with me as I ramble
+for a bit...
 
-Also, tunnel switching was not mentioned, so that people were thinking
-it was not supported, while it actually is.
+I'll confess to not paying as much attention to PDF output as I should.
+Partly that's from a perception that not many people care about it
+(though a few really do), and partly because PDF generation has always
+been a bit of a house of cards that turns into a real pain whenever
+anybody looks at it hard.
 
-Signed-off-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
-Acked-by: Tom Parkin <tparkin@katalix.com>
+Somebody looked at it hard.
 
----
-Difference from v1:
-- follow kernel coding style
-- check for failures
-- also mention netlink and ip for configuring the link
-- fix bridging channels
+My fairly standard Fedora 39 system can't do a pdfdocs build at all.
+There are a couple of untoward things that get in the way.
 
-Difference from v2:
-- fix text alignment
+One is the dreaded Latex "too deeply nested" message that causes
+everything to explode while generating filesystems.pdf.  The problem,
+specifically, is .../filesystems/xfs/xfs-online-fsck-design.rst, which
+blows the limits in two ways.  This patch "fixes" it - this clearly
+isn't something to apply, it's just a demonstration of the problem:
 
-Difference from v3:
-- fix some variables references
-- explicit inputs of the code snippets
-- explicit that bridging is supported for l2tp with PPP pseudowire type.
-- explicit that after bridging only the pppox sockets need to be kept
-- explicit that bridging can also be done with other types of ppp
-  channels
-
-Difference from v4:
-- Fix coding style
-- Fix parameter of PPPIOCCONNECT ioctl.
-- Describe the ppp frame bridging.
-
-Difference from v5:
-- Fix coding style
-
----
- Documentation/networking/l2tp.rst |  135 ++++++++++++++++++++++++++++++++++++--
- 1 file changed, 129 insertions(+), 6 deletions(-)
-
---- a/Documentation/networking/l2tp.rst
-+++ b/Documentation/networking/l2tp.rst
-@@ -386,12 +386,19 @@ Sample userspace code:
+-----
+diff --git a/Documentation/filesystems/xfs/xfs-online-fsck-design.rst b/Documentation/filesystems/xfs/xfs-online-fsck-design.rst
+index 352516feef6f..1762a9415ec1 100644
+--- a/Documentation/filesystems/xfs/xfs-online-fsck-design.rst
++++ b/Documentation/filesystems/xfs/xfs-online-fsck-design.rst
+@@ -739,15 +739,6 @@ For a given fstests filesystem configuration:
+         7. Subtract a small quantity
+         8. Randomize the contents
  
-   - Create session PPPoX data socket::
+-        * ...test the reactions of:
+-
+-          1. The kernel verifiers to stop obviously bad metadata
+-          2. Offline checking (``xfs_repair -n``)
+-          3. Offline repair (``xfs_repair``)
+-          4. Online checking (``xfs_scrub -n``)
+-          5. Online repair (``xfs_scrub``)
+-          6. Both repair tools (``xfs_scrub`` and then ``xfs_repair`` if online repair doesn't succeed)
+-
+ This is quite the combinatoric explosion!
  
-+        /* Input: the L2TP tunnel UDP socket `tunnel_fd`, which needs to be
-+         * bound already (both sockname and peername), otherwise it will not be
-+         * ready.
-+         */
-+
-         struct sockaddr_pppol2tp sax;
--        int fd;
-+        int session_fd;
-+        int ret;
-+
-+        session_fd = socket(AF_PPPOX, SOCK_DGRAM, PX_PROTO_OL2TP);
-+        if (session_fd < 0)
-+                return -errno;
+ Fortunately, having this much test coverage makes it easy for XFS developers to
+@@ -2093,7 +2084,6 @@ of the records, so naturally the xfarray must also support sorting the record
+ set prior to bulk loading.
  
--        /* Note, the tunnel socket must be bound already, else it
--         * will not be ready
--         */
-         sax.sa_family = AF_PPPOX;
-         sax.sa_protocol = PX_PROTO_OL2TP;
-         sax.pppol2tp.fd = tunnel_fd;
-@@ -406,12 +413,128 @@ Sample userspace code:
-         /* session_fd is the fd of the session's PPPoL2TP socket.
-          * tunnel_fd is the fd of the tunnel UDP / L2TPIP socket.
-          */
--        fd = connect(session_fd, (struct sockaddr *)&sax, sizeof(sax));
--        if (fd < 0 ) {
-+        ret = connect(session_fd, (struct sockaddr *)&sax, sizeof(sax));
-+        if (ret < 0 ) {
-+                close(session_fd);
-+                return -errno;
-+        }
-+
-+        return session_fd;
-+
-+L2TP control packets will still be available for read on `tunnel_fd`.
-+
-+  - Create PPP channel::
-+
-+        /* Input: the session PPPoX data socket `session_fd` which was created
-+         * as described above.
-+         */
-+
-+        int ppp_chan_fd;
-+        int chindx;
-+        int ret;
-+
-+        ret = ioctl(session_fd, PPPIOCGCHAN, &chindx);
-+        if (ret < 0)
-+                return -errno;
-+
-+        ppp_chan_fd = open("/dev/ppp", O_RDWR);
-+        if (ppp_chan_fd < 0)
-+                return -errno;
-+
-+        ret = ioctl(ppp_chan_fd, PPPIOCATTCHAN, &chindx);
-+        if (ret < 0) {
-+                close(ppp_chan_fd);
-                 return -errno;
-         }
-+
-+        return ppp_chan_fd;
-+
-+LCP PPP frames will be available for read on `ppp_chan_fd`.
-+
-+  - Create PPP interface::
-+
-+        /* Input: the PPP channel `ppp_chan_fd` which was created as described
-+         * above.
-+         */
-+
-+        int ifunit = -1;
-+        int ppp_if_fd;
-+        int ret;
-+
-+        ppp_if_fd = open("/dev/ppp", O_RDWR);
-+        if (ppp_if_fd < 0)
-+                return -errno;
-+
-+        ret = ioctl(ppp_if_fd, PPPIOCNEWUNIT, &ifunit);
-+        if (ret < 0) {
-+                close(ppp_if_fd);
-+                return -errno;
-+        }
-+
-+        ret = ioctl(ppp_chan_fd, PPPIOCCONNECT, &ifunit);
-+        if (ret < 0) {
-+                close(ppp_if_fd);
-+                return -errno;
-+        }
-+
-+        return ppp_if_fd;
-+
-+IPCP/IPv6CP PPP frames will be available for read on `ppp_if_fd`.
-+
-+The ppp<ifunit> interface can then be configured as usual with netlink's
-+RTM_NEWLINK, RTM_NEWADDR, RTM_NEWROUTE, or ioctl's SIOCSIFMTU, SIOCSIFADDR,
-+SIOCSIFDSTADDR, SIOCSIFNETMASK, SIOCSIFFLAGS, or with the `ip` command.
-+
-+  - Bridging L2TP sessions which have PPP pseudowire types (this is also called
-+    L2TP tunnel switching or L2TP multihop) is supported by bridging the PPP
-+    channels of the two L2TP sessions to be bridged::
-+
-+        /* Input: the session PPPoX data sockets `session_fd1` and `session_fd2`
-+         * which were created as described further above.
-+         */
-+
-+        int ppp_chan_fd;
-+        int chindx1;
-+        int chindx2;
-+        int ret;
-+
-+        ret = ioctl(session_fd1, PPPIOCGCHAN, &chindx1);
-+        if (ret < 0)
-+                return -errno;
-+
-+        ret = ioctl(session_fd2, PPPIOCGCHAN, &chindx2);
-+        if (ret < 0)
-+                return -errno;
-+
-+        ppp_chan_fd = open("/dev/ppp", O_RDWR);
-+        if (ppp_chan_fd < 0)
-+                return -errno;
-+
-+        ret = ioctl(ppp_chan_fd, PPPIOCATTCHAN, &chindx1);
-+        if (ret < 0) {
-+                close(ppp_chan_fd);
-+                return -errno;
-+        }
-+
-+        ret = ioctl(ppp_chan_fd, PPPIOCBRIDGECHAN, &chindx2);
-+        close(ppp_chan_fd);
-+        if (ret < 0)
-+                return -errno;
-+
-         return 0;
+ Case Study: Sorting xfarrays
+-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
-+It can be noted that when bridging PPP channels, the PPP session is not locally
-+terminated, and no local PPP interface is created.  PPP frames arriving on one
-+channel are directly passed to the other channel, and vice versa.
-+
-+The PPP channel does not need to be kept open.  Only the session PPPoX data
-+sockets need to be kept open.
-+
-+More generally, it is also possible in the same way to e.g. bridge a PPPoL2TP
-+PPP channel with other types of PPP channels, such as PPPoE.
-+
-+See more details for the PPP side in ppp_generic.rst.
-+
- Old L2TPv2-only API
- -------------------
- 
+ The sorting algorithm used in the xfarray is actually a combination of adaptive
+ quicksort and a heapsort subalgorithm in the spirit of
+
+-----
+The first change removes the deepest level of nesting in an impressive
+set of enumerated lists; the second removes the nth-level subsection
+heading markup for "Sorting xfarrays".  Having either of those present
+will cause Latex to blow a fuse.
+
+I'm surprised that nobody else is reporting this problem.  I honestly
+don't see a fix other than changing the organization of the document to
+avoid both deeply nested itemized lists and section structure, which is
+less than entirely desirable.  I think there are good reasons for
+avoiding structures that deep, but limitations in the tooling aren't one
+of them.
+
+Incidentally, on F38, I also run into a similar Latex error in
+.../userspace-api/media/v4l/pixfmt-rgb.html, which has a set of tables
+from hell.  On F39, that somehow works.  Weird.
+
+The *other* problem is that PDF generation of the Chinese, Korean, or
+Japanese translations fails with:
+
+  xdvipdfmx:fatal: Invalid TTC index number
+
+This, I am thinking, is likely some sort of F39 bug.  xdvipdfmx is
+finding the CJK fonts just fine, but then something clearly goes wrong.
+I'll try to find the time to narrow that down and perhaps put in a
+proper bug report.
+
+Meanwhile, I wish I knew what to do to make the PDF build a bit more
+robust.  I wish that rst2pdf or rinohtype would progress to the point
+where they could be used, and Latex could be taken out of the picture,
+but no such luck.
+
+Oh well...sorry for rambling at you...I wish I had a good plan for
+making this whole thing better.
+
+jon
 
