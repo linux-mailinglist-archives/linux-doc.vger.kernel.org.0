@@ -1,197 +1,181 @@
-Return-Path: <linux-doc+bounces-9941-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9943-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E672858D8E
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Feb 2024 07:47:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96BFB858DAC
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Feb 2024 08:32:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 74BF11C210FF
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Feb 2024 06:47:52 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id BBE6E1C20FF4
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Feb 2024 07:32:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B544E1CD2A;
-	Sat, 17 Feb 2024 06:47:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DDCF11CD03;
+	Sat, 17 Feb 2024 07:32:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="REo/RTBu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCA7B1CD1E
-	for <linux-doc@vger.kernel.org>; Sat, 17 Feb 2024 06:47:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8320E1D553;
+	Sat, 17 Feb 2024 07:32:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708152460; cv=none; b=DiVeFSFg69OZNljPemhseMn3BIWwDLUhqslMe+MsSmed281k6fDdakXcC5LcM/HsF8imabSfUgUH28HQGWlHO7KzlyM1txXzLXev3e51p4tIwnrG3YFAaM8qqWBROhKTJEbUDawfx7a4EQpqbyU/+pIKbwSHJ8S3tyLa4eQJWxk=
+	t=1708155151; cv=none; b=g6TfllgdtKm2+Ri6/xuYx8cL2duM3/uxQVCSsxIMVwzmJkRgQh23nwoGNNosgD1o235iEhRnV/qaWPqmS0bC0/VPmpm4qPh8NSCBRFKFaPejjTLLNxabJaQNlrNlIGxmrB8U5NrlHlReryZ4LMrzJAWq2qyKKuGuwSvXP4IZlvg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708152460; c=relaxed/simple;
-	bh=vct0oM2xD8QMdRPrjg/MRpA2z2oOXKzf3lvCs+WHSlo=;
+	s=arc-20240116; t=1708155151; c=relaxed/simple;
+	bh=ccjuSqOZPclsskdcJMYR2Q3/YUCIG6fCIeDpqvIsxfk=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hAw51f+g1U/C22Q+KL+aCgoiIQ3UhjXkASZi7Vf0uE7LEW+1IubzL1yIIdbozgR0Nc+UDwlz88TXg1VrGWKQ/SKURyntqVLMGJe65Y/sok01pJd8MyoXPAg1xESve426HM9Awlv1c1p9mljniuYLlk5Ot8InKV6jOr2NjK+eROI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ore@pengutronix.de>)
-	id 1rbETO-0000dn-DO; Sat, 17 Feb 2024 07:46:54 +0100
-Received: from [2a0a:edc0:2:b01:1d::c5] (helo=pty.whiteo.stw.pengutronix.de)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <ore@pengutronix.de>)
-	id 1rbETJ-001DUW-My; Sat, 17 Feb 2024 07:46:49 +0100
-Received: from ore by pty.whiteo.stw.pengutronix.de with local (Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1rbETJ-00CtWH-1w;
-	Sat, 17 Feb 2024 07:46:49 +0100
-Date: Sat, 17 Feb 2024 07:46:49 +0100
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: Rob Herring <robh@kernel.org>,
-	Kory Maincent <kory.maincent@bootlin.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Russ Weight <russ.weight@linux.dev>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Conor Dooley <conor+dt@kernel.org>, Mark Brown <broonie@kernel.org>,
-	Frank Rowand <frowand.list@gmail.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
-	Dent Project <dentproject@linuxfoundation.org>
-Subject: Re: [PATCH net-next v3 14/17] dt-bindings: net: pse-pd: Add bindings
- for PD692x0 PSE controller
-Message-ID: <ZdBWWXSgFIDSgn7P@pengutronix.de>
-References: <20240208-feature_poe-v3-0-531d2674469e@bootlin.com>
- <20240208-feature_poe-v3-14-531d2674469e@bootlin.com>
- <20240209145727.GA3702230-robh@kernel.org>
- <ZciUQqjM4Z8Tc6Db@pengutronix.de>
- <618be4b1-c52c-4b8f-8818-1e4150867cad@lunn.ch>
- <Zc3IrO_MXIdLXnEL@pengutronix.de>
- <65099b67-b7dc-4d78-ba42-d550aae2c31e@lunn.ch>
- <Zc8TAojumif1irE-@pengutronix.de>
+	 Content-Type:Content-Disposition:In-Reply-To; b=Dp6HhaM4hSFh/ngBt70MLqMO0UB7oCoVPAOn8PWtNbCUuw/eTJshvvOg6p+ftDFbuX0zNDYivXS1FOsy6yNlcinU3NEFAQzy5VAC5qFnCiB87Rz1tVDGB55FsCOwrcOTZ97ZkQ12M3V2HHzDw1sWUCwq/V9A4gGg4kAgZL1X3NY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=REo/RTBu; arc=none smtp.client-ip=198.175.65.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1708155150; x=1739691150;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=ccjuSqOZPclsskdcJMYR2Q3/YUCIG6fCIeDpqvIsxfk=;
+  b=REo/RTBuEGbVtXwGOb7X+qBJRmwHfW5pQaELEGkcAzXcyprypdGk3a12
+   m8/PbyBtrW7Tv10B9HA4OUWmOASZ/BRQ89Pr1wqSW7b/ElYHuYj0VXMeG
+   CQj+TfqsHF9bAgvKzvLeUji99p1z/3kOtlo2VYSaZ7PgvaUJXDe/x0OLA
+   vz6h8yxeMWRQs323kLYdim2DEIZj8F85AnN6Yw2VLbbPIiM04aFPXw8XZ
+   Z5JLGcOPQKJE6zNnE7Ux4dR3MHLDGHJSonHtM70rDJ2WaU2NbYXM1k6Vm
+   nUdQGmK14ysc4QbtAJiBU+ZlTgAHf2xPeZpsME+6PYtBdQD2HmHaROR1w
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10986"; a="2433567"
+X-IronPort-AV: E=Sophos;i="6.06,165,1705392000"; 
+   d="scan'208";a="2433567"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Feb 2024 23:32:29 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.06,165,1705392000"; 
+   d="scan'208";a="8656739"
+Received: from lkp-server02.sh.intel.com (HELO 3c78fa4d504c) ([10.239.97.151])
+  by fmviesa004.fm.intel.com with ESMTP; 16 Feb 2024 23:32:23 -0800
+Received: from kbuild by 3c78fa4d504c with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1rbFBN-0001vY-01;
+	Sat, 17 Feb 2024 07:32:21 +0000
+Date: Sat, 17 Feb 2024 15:31:26 +0800
+From: kernel test robot <lkp@intel.com>
+To: Ross Philipson <ross.philipson@oracle.com>,
+	linux-kernel@vger.kernel.org, x86@kernel.org,
+	linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-crypto@vger.kernel.org, kexec@lists.infradead.org,
+	linux-efi@vger.kernel.org
+Cc: oe-kbuild-all@lists.linux.dev, ross.philipson@oracle.com,
+	dpsmith@apertussolutions.com, tglx@linutronix.de, mingo@redhat.com,
+	bp@alien8.de, hpa@zytor.com, dave.hansen@linux.intel.com,
+	ardb@kernel.org, mjg59@srcf.ucam.org,
+	James.Bottomley@hansenpartnership.com, peterhuewe@gmx.de,
+	jarkko@kernel.org, jgg@ziepe.ca, luto@amacapital.net,
+	nivedita@alum.mit.edu, herbert@gondor.apana.org.au,
+	davem@davemloft.net, kanth.ghatraju@oracle.com,
+	trenchboot-devel@googlegroups.com
+Subject: Re: [PATCH v8 15/15] x86: EFI stub DRTM launch support for Secure
+ Launch
+Message-ID: <202402171503.kLhNHtkM-lkp@intel.com>
+References: <20240214221847.2066632-16-ross.philipson@oracle.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <Zc8TAojumif1irE-@pengutronix.de>
-X-Sent-From: Pengutronix Hildesheim
-X-URL: http://www.pengutronix.de/
-X-Accept-Language: de,en
-X-Accept-Content-Type: text/plain
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ore@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+In-Reply-To: <20240214221847.2066632-16-ross.philipson@oracle.com>
 
-Hi Kory,
+Hi Ross,
 
-Can you please integrated this new insights to the PSE PI documentation.
-Instead of 1000BaseT only, please use 1000/2.5G/5G/10GBASE-T as
-documented in the spec.
+kernel test robot noticed the following build errors:
 
-On Fri, Feb 16, 2024 at 08:47:14AM +0100, Oleksij Rempel wrote:
-> On Thu, Feb 15, 2024 at 06:51:55PM +0100, Andrew Lunn wrote:
-> > > Hm.. good question. I didn't found the answer in the spec. By combining all
-> > > puzzle parts I assume, different Alternative configurations are designed
-> > > to handle conflict between "PSE Physical Layer classification" and PHY
-> > > autoneg.
-> > > 
-> > > Here is how multi-pulse Physical Layer classification is done:
-> > > https://img.electronicdesign.com/files/base/ebm/electronicdesign/image/2020/07/Figure_5.5f2094553a61c.png
-> > > 
-> > > this is the source:
-> > > https://www.electronicdesign.com/technologies/power/whitepaper/21137799/silicon-labs-90-w-power-over-ethernet-explained
-> > > 
-> > > To avoid classification conflict with autoneg. Assuming, PHY on PD side
-> > > will be not powered until classification is completed. The only source
-> > > of pulses is the PHY on PSE side (if it is not under control of software
-> > > on PSE side or Midspan PSE is used), so aneg pulses should be send on
-> > > negative PoE pair? This all is just speculation, I would need to ask
-> > > some expert or do testing.
-> > > 
-> > > If this assumption is correct, PHY framework will need to know exact
-> > > layout of MDI-X setting and/or silent PHY until PSE classification is done.
-> > 
-> > Ideally, we don't want to define a DT binding, and then find it is
-> > wrong for 1000BaseT and above and we need to change it.
-> >
-> > So, either somebody needs to understand 1000BaseT and can say the
-> > proposed binding works, or we explicitly document the binding is
-> > limited to 10BaseT and 100BaseT.
-> 
-> I asked the internet and found the answer: Some PSE/PD implementations
-> are not compatible with 1000BaseT.
-> 
-> See Figure 33–4—10BASE-T/100BASE-TX Endpoint PSE location overview.
-> Alternative B show a variant where power is injected directly to pairs
-> without using magnetics as it is done for Alternative A (phantom
-> delivery - over magnetics).
-> 
-> I assume, the reasoning for this kind of design is simple - price.
-> Otherwise magnetics will have special requirements:
-> https://www.coilcraft.com/de-de/edu/series/magnetics-for-power-over-ethernet/
-> 
-> So, we have following variants of 2 pairs PoE:
-> +---------+---------------+-------------------+---------------------+--------------------+
-> | Variant | Alternative   | Polarity          | Power Feeding Type  | Compatibility with |
-> |         | (a/b)         | (Direct/Reverse)  | (Direct/Phantom)    | 1000BaseT          |
-> +=========+===============+===================+=====================+====================+
-> | 1       | a             | Direct            | Phantom             | Yes                |
-> +---------+---------------+-------------------+---------------------+--------------------+
-> | 2       | a             | Reverse           | Phantom             | Yes                |
-> +---------+---------------+-------------------+---------------------+--------------------+
-> | 3       | b             | Direct            | Phantom             | Yes                |
-> +---------+---------------+-------------------+---------------------+--------------------+
-> | 4       | b             | Reverse           | Phantom             | Yes                |
-> +---------+---------------+-------------------+---------------------+--------------------+
-> | 5       | b             | Direct            | Direct              | No                 |
-> +---------+---------------+-------------------+---------------------+--------------------+
-> | 6       | b             | Reverse           | Direct              | No                 |
-> +---------+---------------+-------------------+---------------------+--------------------+
-> 
-> An advanced PSE may implement range of different variants direct in the PSE
-> controller or with additional ICs in the PSE PI. The same is about PD.
-> 
-> Let's take as example PD-IM-7608M eval board:
-> https://www.microchip.com/en-us/development-tool/PD-IM-7608M
-> 
-> According to the schematics:
-> https://ww1.microchip.com/downloads/en/DeviceDoc/PD-IM-7608M.zip
-> It supports only Variant 5 - Alternative B, with only one polarity,
-> and direct feeding without magnetics.
-> 
-> The simple PD may support only one variant:
-> https://community.fs.com/article/troubleshooting-poe-errors.html
-> " the power modes of PSE and PD are other factors that may cause PoE
-> faults. There are three PoE modes: Alternative A, alternative B, and
-> 4-pair delivery. If a PD only supports PoE mode B power delivery, while
-> a PoE switch is based on Alternative A, as a result, the PD and PoE
-> switch can not work together."
-> 
-> For this case, it will be good if systems knows supported modes, so user
-> can get this information  directly. For example with ethtool
-> 
-> -- 
-> Pengutronix e.K.                           |                             |
-> Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-> 31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-> Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+[auto build test ERROR on char-misc/char-misc-testing]
+[also build test ERROR on char-misc/char-misc-next char-misc/char-misc-linus herbert-cryptodev-2.6/master herbert-crypto-2.6/master linus/master v6.8-rc4 next-20240216]
+[cannot apply to tip/x86/core]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Ross-Philipson/x86-boot-Place-kernel_info-at-a-fixed-offset/20240215-064712
+base:   char-misc/char-misc-testing
+patch link:    https://lore.kernel.org/r/20240214221847.2066632-16-ross.philipson%40oracle.com
+patch subject: [PATCH v8 15/15] x86: EFI stub DRTM launch support for Secure Launch
+config: i386-randconfig-052-20240215 (https://download.01.org/0day-ci/archive/20240217/202402171503.kLhNHtkM-lkp@intel.com/config)
+compiler: clang version 17.0.6 (https://github.com/llvm/llvm-project 6009708b4367171ccdbf4b5905cb6a803753fe18)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240217/202402171503.kLhNHtkM-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202402171503.kLhNHtkM-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> drivers/firmware/efi/libstub/x86-stub.c:862:18: error: invalid input size for constraint 'a'
+     862 |                       : : "a" (dlinfo->dl_handler), "D" (&dlinfo->bl_context));
+         |                                ^
+   1 error generated.
+
+
+vim +/a +862 drivers/firmware/efi/libstub/x86-stub.c
+
+   813	
+   814	static void efi_secure_launch(struct boot_params *boot_params)
+   815	{
+   816		struct slr_entry_uefi_config *uefi_config;
+   817		struct slr_uefi_cfg_entry *uefi_entry;
+   818		struct slr_entry_dl_info *dlinfo;
+   819		efi_guid_t guid = SLR_TABLE_GUID;
+   820		struct slr_table *slrt;
+   821		u64 memmap_hi;
+   822		void *table;
+   823		u8 buf[64] = {0};
+   824	
+   825		table = get_efi_config_table(guid);
+   826	
+   827		/*
+   828		 * The presence of this table indicated a Secure Launch
+   829		 * is being requested.
+   830		 */
+   831		if (!table)
+   832			return;
+   833	
+   834		slrt = (struct slr_table *)table;
+   835	
+   836		if (slrt->magic != SLR_TABLE_MAGIC)
+   837			return;
+   838	
+   839		/* Add config information to measure the UEFI memory map */
+   840		uefi_config = (struct slr_entry_uefi_config *)buf;
+   841		uefi_config->hdr.tag = SLR_ENTRY_UEFI_CONFIG;
+   842		uefi_config->hdr.size = sizeof(*uefi_config) + sizeof(*uefi_entry);
+   843		uefi_config->revision = SLR_UEFI_CONFIG_REVISION;
+   844		uefi_config->nr_entries = 1;
+   845		uefi_entry = (struct slr_uefi_cfg_entry *)(buf + sizeof(*uefi_config));
+   846		uefi_entry->pcr = 18;
+   847		uefi_entry->cfg = boot_params->efi_info.efi_memmap;
+   848		memmap_hi = boot_params->efi_info.efi_memmap_hi;
+   849		uefi_entry->cfg |= memmap_hi << 32;
+   850		uefi_entry->size = boot_params->efi_info.efi_memmap_size;
+   851		memcpy(&uefi_entry->evt_info[0], "Measured UEFI memory map",
+   852			strlen("Measured UEFI memory map"));
+   853	
+   854		if (slr_add_entry(slrt, (struct slr_entry_hdr *)uefi_config))
+   855			return;
+   856	
+   857		/* Jump through DL stub to initiate Secure Launch */
+   858		dlinfo = (struct slr_entry_dl_info *)
+   859			slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_DL_INFO);
+   860	
+   861		asm volatile ("jmp *%%rax"
+ > 862			      : : "a" (dlinfo->dl_handler), "D" (&dlinfo->bl_context));
+   863	}
+   864	
 
 -- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
