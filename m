@@ -1,160 +1,188 @@
-Return-Path: <linux-doc+bounces-9971-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-9973-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCA8585961E
-	for <lists+linux-doc@lfdr.de>; Sun, 18 Feb 2024 10:58:54 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id DEA0B859626
+	for <lists+linux-doc@lfdr.de>; Sun, 18 Feb 2024 11:09:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id DADF11C2111D
-	for <lists+linux-doc@lfdr.de>; Sun, 18 Feb 2024 09:58:53 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 41A69B20A03
+	for <lists+linux-doc@lfdr.de>; Sun, 18 Feb 2024 10:09:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 46C041B285;
-	Sun, 18 Feb 2024 09:58:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B961D1B944;
+	Sun, 18 Feb 2024 10:09:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CQdKbWEU"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="HWJ1naDu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBCAE848A
-	for <linux-doc@vger.kernel.org>; Sun, 18 Feb 2024 09:58:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBDCA1B268;
+	Sun, 18 Feb 2024 10:09:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708250331; cv=none; b=FAGUta4Qr0A1sLhUQl2AnDowm2VkRRRPYds3jNlwpJhGKD6tYRLX7kWmfSgsRYDByjnPfngf+e7560Auu4tJqJ+c+XQauwO3JEnVL3wg20FqJyHymPE15PBdQb01k9dL63gplhzLo/hNggdhz4kqDFdbjZsGDgKpnaCvZ3/1lqE=
+	t=1708250966; cv=none; b=reKuXV9FNFjkAoXvelB48gqM04ecCQ3RHqLelSdGA49Xba7XdabknxOJym1yV5y/0Iw73dUsB/MBCRTLRhC8TUzBE5rmpZR9rJfeT8+RsFuZ9f28Yo+4OjXJUEIpdUtnQ1aHEdcdH8//MgEUOWHXIyhBHlXN3sCnW3pFZVLaVIA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708250331; c=relaxed/simple;
-	bh=GFd6q6TDJsPCFLX5bsGnMskeqJgQWdH9kwUXTWlpiE0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=gi5WXb+LwJxyuqi2bioSTvd51kPyFzNhRjDXHClD+3N/lxPsHZjKHBUoRShyWvhefUJ3qf0LVGSqgROawvcFEDeS/XoMp/Yr9tRv4rhfIFEfyuQn2CxmOdvIX4oWBA/istApTKjXgBdR/dGZYfGfSnzYmoKly6nblkgjOWAZwcY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CQdKbWEU; arc=none smtp.client-ip=209.85.216.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-2997a92e23bso94302a91.3
-        for <linux-doc@vger.kernel.org>; Sun, 18 Feb 2024 01:58:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708250329; x=1708855129; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=0wdJmgvKu5l1mjfhd7RljLwlhgJ8s2u0rgS2x2cicVM=;
-        b=CQdKbWEUleMxEzIznQWEd9ehWxwexlTJ+AOl0C14ZY9Jb+1ZtvHyOsxuy/k0F++4em
-         Ph0Y3PhtxcNm6hwNCntfaxPPqIAQ33dDDcQZj0RfwBsOAvYQOKqwznMchogjLrQQ+w27
-         jNt2ATjn/ipKnRUNxTuOKfUdiQDJ1bmS7VWqsPr2pzjErhemZZfaoAZT0mxOeNIeiGfm
-         EY9YXDHu9ONySrpNTaYx/MpxIyoLt1tO54SY3FMQ1/wWpkPIqVYBWtMcaMc8/KYbun9I
-         gDZS0zoqew8AubX+8fcVBRHT8jkOPp1AaR4NglzgH9C5Gi1m4DUzAhwrqznyl2bQNH6h
-         KcHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708250329; x=1708855129;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=0wdJmgvKu5l1mjfhd7RljLwlhgJ8s2u0rgS2x2cicVM=;
-        b=AbQIPS+b3ZFB8/MbXtHWmZ+SALrVyAIZTb12iSVLk2LZ9qcWsCvHFKtOJ85C8Dy5xW
-         CuAKT7A4RySr7Pp9sO7tI6c958xFQvZk3ZrLCBcxcxScUO3pDXVaV341zOkNi4vm5hEu
-         Mq/VjtO1qps9d92PXy9VxWQgWWnexkrV2hArxslCobaoHCNVFskCH2oOKTDiR4AMFYE6
-         s/53C+dLASgaBKAm0s4dUq6abKCimLUgtxv1TpA+ZYVPHU22uwqadInRiebwDcQH1sZT
-         w7PN3fwZ3/9jz8o38lfvzmxkD9cZN4oR4c4NsiCUjn9M3JD7TWl45kbdnVkzKLvxLGZU
-         TTLA==
-X-Forwarded-Encrypted: i=1; AJvYcCVO/z0Psg2mMznqgAEXryBMCClVLLpEM5ZWDdhJil9F3dIUTTxOMXKCrrZZZD7WMWWnJYUEUfHRV+6Wflp6bRWBzuW09Oi2jWgP
-X-Gm-Message-State: AOJu0YwQbd2B6sIIaM4Hr/52zRdOQSCPNCX+UJHikGl5PWtZylcx6xAg
-	aVvKnJBPO4lRdRhVl7N2s3vA8ABrEQrWg7Uc4+iL6rC+9uzEZNCv
-X-Google-Smtp-Source: AGHT+IF0LjBypN6LNarHAi4nFdQ4nbRimYdJzDwLHIJAYaYlLn53tJGzoXPkQmgBDgm37FB3X7GW1g==
-X-Received: by 2002:a17:903:120c:b0:1d9:c367:2032 with SMTP id l12-20020a170903120c00b001d9c3672032mr10837166plh.10.1708250328962;
-        Sun, 18 Feb 2024 01:58:48 -0800 (PST)
-Received: from [10.0.2.15] (KD106167171201.ppp-bb.dion.ne.jp. [106.167.171.201])
-        by smtp.gmail.com with ESMTPSA id f9-20020a17090274c900b001d9eefef30csm2481666plt.6.2024.02.18.01.58.47
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 18 Feb 2024 01:58:48 -0800 (PST)
-Message-ID: <64908dd3-17c9-47e3-a076-d78105fb823b@gmail.com>
-Date: Sun, 18 Feb 2024 18:58:47 +0900
+	s=arc-20240116; t=1708250966; c=relaxed/simple;
+	bh=gpO1hWemLGbG90Ib1MxMCi6X7rW07hi3Fb31+1OFqKk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=snjnLiVjs2yj3+veQWVWNm1YTAcVhfHw19c/BjvS0Ev/u7fVrdtHGkVDmOm7OloIFoOif8/3nYRzCZBr8te1PhBgz96hqoNtUMKGnmNLeGl/virs9qV3kTwNV6WWG2xylqSUtITaZTaG5q8CW8lUcRHRopLbh+5tH7voSrqS6aw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=HWJ1naDu; arc=none smtp.client-ip=192.198.163.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1708250965; x=1739786965;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=gpO1hWemLGbG90Ib1MxMCi6X7rW07hi3Fb31+1OFqKk=;
+  b=HWJ1naDuGuhUzu7fsVbKrf7FYZGB3k2pAXABYC+xf705t66nyrImLZzk
+   PeTuIwwFJAS6r9YGWYSQ0dHlyvi/SXNSdrL0vVezq1rg1Kmq7+SKSCW0t
+   FOBlJzwNNg+dOzl6w1+Wc5XXiNRLnnwtlkMl8jmsL65PTWuGpQ8V3HTM9
+   r7MDC4e2ubylHf/vbT+NXLe7BaCc49BBg4mGhC0zmdgUFC0VKBVNJ9J2Q
+   ind6RVfA8lWYz6pmU+UoYeURpDQcGVAN0tVa1TnKvHsz/3VDIo7KgoBoV
+   hqtlXLMl6ysrJcQkR+OXLc07Q4ZmVjAPbCpGBX6alRG0O/tqJ9xK8Lnfp
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10987"; a="2206283"
+X-IronPort-AV: E=Sophos;i="6.06,168,1705392000"; 
+   d="scan'208";a="2206283"
+Received: from orviesa003.jf.intel.com ([10.64.159.143])
+  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Feb 2024 02:09:24 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.06,168,1705392000"; 
+   d="scan'208";a="8904755"
+Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.165])
+  by orviesa003.jf.intel.com with ESMTP; 18 Feb 2024 02:09:20 -0800
+Date: Sun, 18 Feb 2024 18:05:29 +0800
+From: Xu Yilun <yilun.xu@linux.intel.com>
+To: Marco Pagani <marpagan@redhat.com>
+Cc: Moritz Fischer <mdf@kernel.org>, Wu Hao <hao.wu@intel.com>,
+	Xu Yilun <yilun.xu@intel.com>, Tom Rix <trix@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Alan Tull <atull@opensource.altera.com>,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-fpga@vger.kernel.org
+Subject: Re: [RFC PATCH v5 1/1] fpga: add an owner and use it to take the
+ low-level module's refcount
+Message-ID: <ZdHWaeU+/On6LmHX@yilunxu-OptiPlex-7050>
+References: <20240111160242.149265-1-marpagan@redhat.com>
+ <20240111160242.149265-2-marpagan@redhat.com>
+ <Zbh7iO9wlm9ekzB7@yilunxu-OptiPlex-7050>
+ <0720eb91-72f9-4781-8558-8a1b0a3691c2@redhat.com>
+ <Zb8dd9af0Ru/fzGi@yilunxu-OptiPlex-7050>
+ <4aaa131a-4b64-4b86-9548-68aef63c87b3@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: PDF misery
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: Vegard Nossum <vegard.nossum@oracle.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, linux-doc@vger.kernel.org,
- Akira Yokosawa <akiyks@gmail.com>
-References: <8734tqsrt7.fsf@meer.lwn.net>
-Content-Language: en-US
-From: Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <8734tqsrt7.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <4aaa131a-4b64-4b86-9548-68aef63c87b3@redhat.com>
 
-Hi Jon,
-
-A few comments on PDF of CJK docs. 
-
-On Sat, 17 Feb 2024 14:29:24 -0700, Jonathan Corbet wrote:
-> [...]
+On Mon, Feb 05, 2024 at 06:47:34PM +0100, Marco Pagani wrote:
 > 
-> The *other* problem is that PDF generation of the Chinese, Korean, or
-> Japanese translations fails with:
 > 
->   xdvipdfmx:fatal: Invalid TTC index number
+> On 2024-02-04 06:15, Xu Yilun wrote:
+> > On Fri, Feb 02, 2024 at 06:44:01PM +0100, Marco Pagani wrote:
+> >>
+> >>
+> >> On 2024-01-30 05:31, Xu Yilun wrote:
+> >>>> +#define fpga_mgr_register_full(parent, info) \
+> >>>> +	__fpga_mgr_register_full(parent, info, THIS_MODULE)
+> >>>>  struct fpga_manager *
+> >>>> -fpga_mgr_register_full(struct device *parent, const struct fpga_manager_info *info);
+> >>>> +__fpga_mgr_register_full(struct device *parent, const struct fpga_manager_info *info,
+> >>>> +			 struct module *owner);
+> >>>>  
+> >>>> +#define fpga_mgr_register(parent, name, mops, priv) \
+> >>>> +	__fpga_mgr_register(parent, name, mops, priv, THIS_MODULE)
+> >>>>  struct fpga_manager *
+> >>>> -fpga_mgr_register(struct device *parent, const char *name,
+> >>>> -		  const struct fpga_manager_ops *mops, void *priv);
+> >>>> +__fpga_mgr_register(struct device *parent, const char *name,
+> >>>> +		    const struct fpga_manager_ops *mops, void *priv, struct module *owner);
+> >>>> +
+> >>>>  void fpga_mgr_unregister(struct fpga_manager *mgr);
+> >>>>  
+> >>>> +#define devm_fpga_mgr_register_full(parent, info) \
+> >>>> +	__devm_fpga_mgr_register_full(parent, info, THIS_MODULE)
+> >>>>  struct fpga_manager *
+> >>>> -devm_fpga_mgr_register_full(struct device *parent, const struct fpga_manager_info *info);
+> >>>> +__devm_fpga_mgr_register_full(struct device *parent, const struct fpga_manager_info *info,
+> >>>> +			      struct module *owner);
+> >>>
+> >>> Add a line here. I can do it myself if you agree.
+> >>
+> >> Sure, that is fine by me. I also spotted a typo in the commit log body
+> >> (in taken -> is taken). Do you want me to send a v6, or do you prefer
+> >> to fix that in place?
+> > 
+> > No need, I can fix it.
+> > 
+> >>
+> >>>
+> >>> There is still a RFC prefix for this patch. Are you ready to get it merged?
+> >>> If yes, Acked-by: Xu Yilun <yilun.xu@intel.com>
+> >>
+> >> I'm ready for the patch to be merged. However, I recently sent an RFC
+> >> to propose a safer implementation of try_module_get() that would
+> >> simplify the code and may also benefit other subsystems. What do you
+> >> think?
+> >>
+> >> https://lore.kernel.org/linux-modules/20240130193614.49772-1-marpagan@redhat.com/
+> > 
+> > I suggest take your fix to linux-fpga/for-next now. If your try_module_get()
+> > proposal is applied before the end of this cycle, we could re-evaluate
+> > this patch.
 > 
-> This, I am thinking, is likely some sort of F39 bug.  xdvipdfmx is
-> finding the CJK fonts just fine, but then something clearly goes wrong.
-> I'll try to find the time to narrow that down and perhaps put in a
-> proper bug report.
+> That's fine by me.
 
-I think this is because xdvipdfmx accesses NotoSansCJK-VF.ttc, which is
-a variable font.  xdvipdfmx/xetex can't work with such fonts (yet).
-See note at the bottom for more info on variable fonts support.
+Sorry, I still found issues about this solution.
 
-It sounds like you have google-noto-sans-cjk-vf-fonts installed on your
-system besides google-noto-sans-cjk-fonts.
+void fpga_mgr_unregister(struct fpga_manager *mgr)
+{
+        dev_info(&mgr->dev, "%s %s\n", __func__, mgr->name);
 
-What does
+        /*
+         * If the low level driver provides a method for putting fpga into
+         * a desired state upon unregister, do it.
+         */
+        fpga_mgr_fpga_remove(mgr);
 
-    fc-list | grep NotoSansCJK-VF.ttc
+        mutex_lock(&mgr->mops_mutex);
 
-say?
+        mgr->mops = NULL;
 
-I'm wondering why xdvipdfmx behaves that way despite the fontconfig
-setting with:
+        mutex_unlock(&mgr->mops_mutex);
 
-        fc-match "Noto Sans CJK SC"
+        device_unregister(&mgr->dev);
+}
 
-    returning:
+Note that fpga_mgr_unregister() doesn't have to be called in module_exit().
+So if we do fpga_mgr_get() then fpga_mgr_unregister(), We finally had a
+fpga_manager dev without mops, this is not what the user want and cause
+problem when using this fpga_manager dev for other FPGA APIs.
 
-        NotoSansCJK-Regular.ttc: "Noto Sans CJK SC" "Regular"
+I have this concern when I was reviewing the same improvement for fpga
+bridge. The change for fpga bridge seems workable, the mutex keeps hold
+until fpga_bridge_put(). But I somewhat don't prefer the unregistration
+been unnecessarily blocked for long term.
 
-This might be a bug in xdvipdfmx worth reporting.  Or there might
-be glitches in the fontconfig setting.
+I think your try_module_get_safe() patch may finally solve the invalid
+module owner issue. Some options now, we ignore the invalid module owner
+issue (it exists before this change) and merge the rest of the
+improvements, or we wait for your patch accepted then re-evaluate. I
+prefer the former.
 
+Thanks,
+Yilun
 
-Uninstalling google-noto-sans-cjk-vf-fonts (and
-google-noto-serif-cjk-vf-fonts in case you have it) should resolve
-the issue for you, that is if you can safely uninstall it/them.
-
-
-* Note on variable fonts support:
-
-In the announcement of LaTeX fontspec package v2.9a release [1], there is
-an entry:
-
-    - Support variable fonts under LuaLaTeX.
-
-It is not explicitly mentioned there, but in the opening paragraph
-of Part III "Selecting font features" Chapter 7 "Variable fonts" of
-fontspec's package documentation, there is a sentence which reads:
-
-    Currently OpenType variable fonts are only supported in LuaTEX, while
-    Multiple Master fonts only work with XETEX.
-
-As the xeCJK package requires xelatex, variable fonts are not in
-our options, I guess.
-
-[1]: https://ctan.org/ctan-ann/id/mailman.6477.1707925238.3764.ctan-ann@ctan.org
-
-HTH, Akira
-
+> 
+> Thanks,
+> Marco
+> 
 
