@@ -1,64 +1,63 @@
-Return-Path: <linux-doc+bounces-10028-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-10030-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDB9985ADD3
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Feb 2024 22:37:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64FFA85ADE8
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Feb 2024 22:42:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id A2BA21F26970
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Feb 2024 21:37:09 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1B11C1F22551
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Feb 2024 21:42:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0D3CB54BD3;
-	Mon, 19 Feb 2024 21:36:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95CF255792;
+	Mon, 19 Feb 2024 21:42:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="XmyZzi7k"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="PmJf+wkk"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A3D454BE8;
-	Mon, 19 Feb 2024 21:36:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2C6C54BE8;
+	Mon, 19 Feb 2024 21:42:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708378618; cv=none; b=eGq6YUCihmBR+Cwrog4GG4kjwGbB2EgKyL/mN1tziOdb3PiaoclsDMkBE96oUCFYxrKNuQ+1VD4xNOdw99jJleRkx4u0KrbGtH3sRIj7txIueSF4iwEs1P09V58r3kwPGTgxU6Ezn9dI0xNnRTa4439N3ShNuXluryYop7zUGdc=
+	t=1708378935; cv=none; b=lDb4zjy1OwjSCWnrnc22c3nzDVt3kH1Xx579DEccmqDn8lEqnSxXiHyqDMC7UK0vId1OrnEYowx+oMpPfLuKs060es5SWJDjabF+RgO/p9wKvsyHYvTaXNQRcVrHzwE24DMbCxR/0SOfsxR/LVyDE8t0U2Z9YB2JHUDbhH9cgOo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708378618; c=relaxed/simple;
-	bh=ahsEsL7xHvY6JXEf8G+tqpCCQDD6851+Q0sh4rCn0ys=;
+	s=arc-20240116; t=1708378935; c=relaxed/simple;
+	bh=lZvw3uCCRm+4mAqZE93DyID97E/alafM9ZroJwvfrrg=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=eOXt26eLt6P9aD+btUetmd06PF4YDGEp3Bf8S1u42iD7fb75VQe7ZQbi0gy4J9PQtvPZ45gtWoob5q4lgS9deKop+CJQc608HN9Ra639xi9vSD4wxAv3fGR8m/bI8moDlKpX5EZ/Z5VWWOib8KL3rKVH8ev/Ic51BDJ4S5FsFMI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=XmyZzi7k; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=UhV2AOYeoY7E1VhSfpeo21BhrCnAD8zuTvmBk8Huz+1xFMJr24IJuZseUcyBJa8xeEdYn8r7lMuH2mOt7Sc6+COj3xPKjYaEHvhDqcf2TdaHkoFj+fAnXkP5cilBw9xFtU5U+x/dSyJlWr1AzeQw/XLg1ONKuWN8wU0D/1PK5Qk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=PmJf+wkk; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 815005A270
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net AE3A647A99
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1708378616; bh=tnu9wEn1IsHkV2rTmIJegZNLUksL15hxtWNasU0E/Iw=;
+	t=1708378921; bh=pe+dnDgry5hhr0l68V/DK290T6uYlt4qiIGGDU/CaQg=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=XmyZzi7kg2wIqtIdQhpf4g6cHpb1jXsEqxtxPG4zcbM1Ff4PsE4ryDahnMh+eG+73
-	 Kd9x1K0UXFFzXQg4c2WVDwqNAebLvmQ10VNnGP43rlfOlevRg1a83wcB6YhoOXJ7+4
-	 R6zKTMdETIJiP3RdlfmA6HSmtLv3TMAvx2FOW99o6jGL+/JiPX2Imtmg0Vu4SQhmnd
-	 QCL/GOiu/epy6DDJFzw/5Pw6HkrHHgERCDt5foocv31jWz8HzJI7CcMHcwdfRK3+CO
-	 QV13L0uzK2q9vRJBCjKVoM78v4mlBf0ls9pT3fsFQrXZNyWLiE0rwLq9xdCvMOJqlI
-	 +itUmEOb5QQ9Q==
+	b=PmJf+wkkxea+iBlvndaZKx554XJCwZ+rmtPYvZl6dOtnAn50xCDshkVXpoZL49v00
+	 tPQQe/LZXK+mq2a5avLpfh6oQUIPJcFHJF3GN3dKi/+1NNS5/4cbzHPDOTZsP5wrgF
+	 F6Fx7fV90U+sVxYibyHDmykZPmDFBeWIa2LYV9ObsGNCzPZEr5zLVg3EOHncH5lGRp
+	 8BwqdFcA4dHNXryPqDhfXgcpRIF9WSTjCYIWrY669i82u81d2gWmynayf2bdtCpH79
+	 tBfJYezICUplVAhkjdp9TyMxjKI+QrL2YM4r2PKYZ7TRmwQeIbLT/bfyNbgvKqz5rW
+	 7MoGEtziDjZvw==
 Received: from localhost (unknown [IPv6:2601:280:5e00:625::646])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 815005A270;
-	Mon, 19 Feb 2024 21:36:56 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id AE3A647A99;
+	Mon, 19 Feb 2024 21:42:01 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Lukas Bulwahn <lukas.bulwahn@gmail.com>, "Ran.Park" <ranpark@foxmail.com>
-Cc: ricardo@marliere.net, akinobu.mita@gmail.com, linux-doc@vger.kernel.org,
- linux-kernel-mentees@lists.linuxfoundation.org,
- linux-kernel@vger.kernel.org, skhan@linuxfoundation.org
-Subject: Re: [PATCH] Fixed case issue with 'fault-injection' in documentation
-In-Reply-To: <CAKXUXMy8WZwAqrARe-6nNhtvjSiosDD3X5aPZPfn7GXtkG8B8w@mail.gmail.com>
-References: <piosq44nxwlfeutperrk6d23bx564qlbfirc5xlbouyrunf24r@u6qsgqp47fz6>
- <tencent_B08771190400813E0CC41E36A3F540AACA07@qq.com>
- <CAKXUXMy8WZwAqrARe-6nNhtvjSiosDD3X5aPZPfn7GXtkG8B8w@mail.gmail.com>
-Date: Mon, 19 Feb 2024 14:36:55 -0700
-Message-ID: <87zfvwm8zs.fsf@meer.lwn.net>
+To: Juntong Deng <juntong.deng@outlook.com>, ryabinin.a.a@gmail.com,
+ glider@google.com, andreyknvl@gmail.com, dvyukov@google.com,
+ vincenzo.frascino@arm.com
+Cc: kasan-dev@googlegroups.com, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] kasan: Add documentation for CONFIG_KASAN_EXTRA_INFO
+In-Reply-To: <AM6PR03MB5848C52B871DA67455F0B2F2994D2@AM6PR03MB5848.eurprd03.prod.outlook.com>
+References: <AM6PR03MB5848C52B871DA67455F0B2F2994D2@AM6PR03MB5848.eurprd03.prod.outlook.com>
+Date: Mon, 19 Feb 2024 14:42:01 -0700
+Message-ID: <87v86km8ra.fsf@meer.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -67,28 +66,19 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Lukas Bulwahn <lukas.bulwahn@gmail.com> writes:
+Juntong Deng <juntong.deng@outlook.com> writes:
 
-> Ricardo suggests that:
+> This patch adds CONFIG_KASAN_EXTRA_INFO introduction information to
+> KASAN documentation.
 >
-> - you run 'make htmldocs' before applying the patch and check for the
-> existing warnings.
+> Signed-off-by: Juntong Deng <juntong.deng@outlook.com>
+> ---
+> V1 -> V2: Fix run-on sentence.
 >
-> - you run 'make cleandocs' and 'make htmldocs' after applying the
-> patch and check for the existing warnings.
->
-> Did any warning disappear or appear due to your patch? Were you
-> motivated by a specific warning you observed during the build and you
-> addressing that?
->
-> So, for starters: did you already try 'make htmldocs' with your patch
-> applied? What did you observe?
+>  Documentation/dev-tools/kasan.rst | 21 +++++++++++++++++++++
+>  1 file changed, 21 insertions(+)
 
-This all seems like a bit much for what is essentially a typo fix.  I
-would be amazed if it changed the build in any way other than making the
-case more consistent; there's no need to do all that stuff.
-
-I've applied it, thanks.
+Applied, thanks.
 
 jon
 
