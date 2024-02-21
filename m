@@ -1,143 +1,122 @@
-Return-Path: <linux-doc+bounces-10195-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-10197-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B962585D930
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Feb 2024 14:15:57 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id BCD8485DA02
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Feb 2024 14:26:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EAB291C22D38
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Feb 2024 13:15:56 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 57CAB1F23CAB
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Feb 2024 13:26:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A76F378B49;
-	Wed, 21 Feb 2024 13:15:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9392B7E77E;
+	Wed, 21 Feb 2024 13:24:38 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from www262.sakura.ne.jp (www262.sakura.ne.jp [202.181.97.72])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF9A677F05
-	for <linux-doc@vger.kernel.org>; Wed, 21 Feb 2024 13:15:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 010F377A03;
+	Wed, 21 Feb 2024 13:24:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.181.97.72
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708521327; cv=none; b=gSsh/js31pZ8dQewZW/eeNHcTyishj/pafnr1UrpjOorcJoQBNed2w0CDCb2JSSgsGzc7Oz+So7gc5WuvL+gydymQM+E7q/orra7RiWAWW+Wxcjk5ZapFCZx6oh2G0NOdwrlsqOHRd7Qk0KrJEaBe8EUc04So/qm2L9of/jg4MA=
+	t=1708521878; cv=none; b=HJMf4ud2APrl9phXI67yP6dXxszslsG2KYI8FTzKw7pWQqTJBqNsSOAGJl9yCsDRkvYoKag0CYMs5lxjad7zyFLgbPJWWEhpeMEsdT4D22/DEvy+OO3CCRJdI8vcSrM04VT1c9HT8HfDC1DUhvvAEGI0rdTSOsLz89qI8GXjiXs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708521327; c=relaxed/simple;
-	bh=nPne4q7JlWz3mcWsYUNx4f2M8e4DzRnR7m7tEam7xpg=;
-	h=Message-ID:Subject:From:To:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=ZanTBqVrNTcbKayb+KJrvA+Eqt25F/B5zwHLtH0KuPSSJfJwzNCsH8cOQOJ9ErbB8gL1ZgTausDxpk4JCalvmNcOn8KKgQ6d6toiqy7UHez1q7BRfwMEP8Ivxtd2xsE1ZLKpWJpwrwvFnr18r/wY1EGbMw0+Pm0+L2cPcuKX+n4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <p.zabel@pengutronix.de>)
-	id 1rcmR4-0001CI-QA; Wed, 21 Feb 2024 14:14:54 +0100
-Received: from [2a0a:edc0:0:900:1d::4e] (helo=lupine)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <p.zabel@pengutronix.de>)
-	id 1rcmR1-00237N-FS; Wed, 21 Feb 2024 14:14:51 +0100
-Received: from pza by lupine with local (Exim 4.96)
-	(envelope-from <p.zabel@pengutronix.de>)
-	id 1rcmR1-0008xE-1G;
-	Wed, 21 Feb 2024 14:14:51 +0100
-Message-ID: <d203819f09749f0ff9e08a80471b7fed3dad67a8.camel@pengutronix.de>
-Subject: Re: [PATCH v14 3/3] hwmon: (aspeed-g6-pwm-tacho): Support for
- ASPEED g6 PWM/Fan tach
-From: Philipp Zabel <p.zabel@pengutronix.de>
-To: Billy Tsai <billy_tsai@aspeedtech.com>, jdelvare@suse.com, 
- linux@roeck-us.net, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, 
- conor+dt@kernel.org, joel@jms.id.au, andrew@codeconstruct.com.au,
- corbet@lwn.net,  u.kleine-koenig@pengutronix.de,
- naresh.solanki@9elements.com,  linux-hwmon@vger.kernel.org,
- devicetree@vger.kernel.org,  linux-arm-kernel@lists.infradead.org,
- linux-aspeed@lists.ozlabs.org,  linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org,  linux-pwm@vger.kernel.org,
- BMC-SW@aspeedtech.com, patrick@stwcx.xyz
-Date: Wed, 21 Feb 2024 14:14:51 +0100
-In-Reply-To: <20240221104025.1306227-4-billy_tsai@aspeedtech.com>
-References: <20240221104025.1306227-1-billy_tsai@aspeedtech.com>
-	 <20240221104025.1306227-4-billy_tsai@aspeedtech.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4-2 
+	s=arc-20240116; t=1708521878; c=relaxed/simple;
+	bh=KrK7iNq4+GifJCxvrxb6wK+cw9XXTFp9UkvXE9nlj2Y=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=mjUwELkP4XNUbeDxIOFWSIQq75GbvZ6iq86MNK12kT9dJSjJPO8tyP98s0ReiOviQp7XBbhNu9LUbD45NQu3SbKRHwhJdij1EJ+pD4JmpvjHDhwrUyf2YAA62rIrND/AtjgHhYoB9tsjXHQm2KCGcguxOFnVc4Vxljr9fD7BLO4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=I-love.SAKURA.ne.jp; spf=pass smtp.mailfrom=I-love.SAKURA.ne.jp; arc=none smtp.client-ip=202.181.97.72
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=I-love.SAKURA.ne.jp
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=I-love.SAKURA.ne.jp
+Received: from fsav118.sakura.ne.jp (fsav118.sakura.ne.jp [27.133.134.245])
+	by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 41LDLFIf072277;
+	Wed, 21 Feb 2024 22:21:15 +0900 (JST)
+	(envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
+Received: from www262.sakura.ne.jp (202.181.97.72)
+ by fsav118.sakura.ne.jp (F-Secure/fsigk_smtp/550/fsav118.sakura.ne.jp);
+ Wed, 21 Feb 2024 22:21:15 +0900 (JST)
+X-Virus-Status: clean(F-Secure/fsigk_smtp/550/fsav118.sakura.ne.jp)
+Received: from [192.168.1.6] (M106072142033.v4.enabler.ne.jp [106.72.142.33])
+	(authenticated bits=0)
+	by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTPSA id 41LDL68M072234
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NO);
+	Wed, 21 Feb 2024 22:21:14 +0900 (JST)
+	(envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
+Message-ID: <c5bd4224-8c97-4854-a0d6-253fcd8bd92b@I-love.SAKURA.ne.jp>
+Date: Wed, 21 Feb 2024 22:21:04 +0900
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: p.zabel@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 31/35] lib: add memory allocations report in show_mem()
+To: Vlastimil Babka <vbabka@suse.cz>, Suren Baghdasaryan <surenb@google.com>,
+        Kent Overstreet <kent.overstreet@linux.dev>
+Cc: Steven Rostedt <rostedt@goodmis.org>, Michal Hocko <mhocko@suse.com>,
+        akpm@linux-foundation.org, hannes@cmpxchg.org,
+        roman.gushchin@linux.dev, mgorman@suse.de, dave@stgolabs.net,
+        willy@infradead.org, liam.howlett@oracle.com, corbet@lwn.net,
+        void@manifault.com, peterz@infradead.org, juri.lelli@redhat.com,
+        catalin.marinas@arm.com, will@kernel.org, arnd@arndb.de,
+        tglx@linutronix.de, mingo@redhat.com, dave.hansen@linux.intel.com,
+        x86@kernel.org, peterx@redhat.com, david@redhat.com, axboe@kernel.dk,
+        mcgrof@kernel.org, masahiroy@kernel.org, nathan@kernel.org,
+        dennis@kernel.org, tj@kernel.org, muchun.song@linux.dev,
+        rppt@kernel.org, paulmck@kernel.org, pasha.tatashin@soleen.com,
+        yosryahmed@google.com, yuzhao@google.com, dhowells@redhat.com,
+        hughd@google.com, andreyknvl@gmail.com, keescook@chromium.org,
+        ndesaulniers@google.com, vvvvvv@google.com, gregkh@linuxfoundation.org,
+        ebiggers@google.com, ytcoode@gmail.com, vincent.guittot@linaro.org,
+        dietmar.eggemann@arm.com, bsegall@google.com, bristot@redhat.com,
+        vschneid@redhat.com, cl@linux.com, penberg@kernel.org,
+        iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com, glider@google.com,
+        elver@google.com, dvyukov@google.com, shakeelb@google.com,
+        songmuchun@bytedance.com, jbaron@akamai.com, rientjes@google.com,
+        minchan@google.com, kaleshsingh@google.com, kernel-team@android.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        iommu@lists.linux.dev, linux-arch@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+        linux-modules@vger.kernel.org, kasan-dev@googlegroups.com,
+        cgroups@vger.kernel.org
+References: <Zc3X8XlnrZmh2mgN@tiehlicka>
+ <CAJuCfpHc2ee_V6SGAc_31O_ikjGGNivhdSG+2XNcc9vVmzO-9g@mail.gmail.com>
+ <Zc4_i_ED6qjGDmhR@tiehlicka>
+ <CAJuCfpHq3N0h6dGieHxD6Au+qs=iKAifFrHAMxTsHTcDrOwSQA@mail.gmail.com>
+ <ruxvgrm3scv7zfjzbq22on7tj2fjouydzk33k7m2kukm2n6uuw@meusbsciwuut>
+ <320cd134-b767-4f29-869b-d219793ba8a1@suse.cz>
+ <efxe67vo32epvmyzplmpd344nw2wf37azicpfhvkt3zz4aujm3@n27pl5j5zahj>
+ <20240215180742.34470209@gandalf.local.home>
+ <20240215181648.67170ed5@gandalf.local.home>
+ <20240215182729.659f3f1c@gandalf.local.home>
+ <mi5zw42r6c2yfg7fr2pfhfff6hudwizybwydosmdiwsml7vqna@a5iu6ksb2ltk>
+ <CAJuCfpEARb8t8pc8WVZYB=yPk6G_kYGmJTMOdgiMHaYYKW3fUA@mail.gmail.com>
+ <e017b7bc-d747-46e6-a89d-4ce558ed79b0@suse.cz>
+Content-Language: en-US
+From: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
+In-Reply-To: <e017b7bc-d747-46e6-a89d-4ce558ed79b0@suse.cz>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mi, 2024-02-21 at 18:40 +0800, Billy Tsai wrote:
-> The driver support two functions: PWM and Tachometer. The PWM feature can
-> handle up to 16 output ports, while the Tachometer can monitor to up to 1=
-6
-> input ports as well. This driver implements them by exposing two kernel
-> subsystems: PWM and HWMON. The PWM subsystem can be utilized alongside
-> existing drivers for controlling elements such as fans (pwm-fan.c),
-> beepers (pwm-beeper.c) and so on. Through the HWMON subsystem, the driver
-> provides sysfs interfaces for fan.
->=20
-> Signed-off-by: Billy Tsai <billy_tsai@aspeedtech.com>
-> ---
->  Documentation/hwmon/aspeed-g6-pwm-tach.rst |  26 +
->  Documentation/hwmon/index.rst              |   1 +
->  drivers/hwmon/Kconfig                      |  11 +
->  drivers/hwmon/Makefile                     |   1 +
->  drivers/hwmon/aspeed-g6-pwm-tach.c         | 549 +++++++++++++++++++++
->  5 files changed, 588 insertions(+)
->  create mode 100644 Documentation/hwmon/aspeed-g6-pwm-tach.rst
->  create mode 100644 drivers/hwmon/aspeed-g6-pwm-tach.c
->=20
-[...]
-> diff --git a/drivers/hwmon/aspeed-g6-pwm-tach.c b/drivers/hwmon/aspeed-g6=
--pwm-tach.c
-> new file mode 100644
-> index 000000000000..597b3b019d49
-> --- /dev/null
-> +++ b/drivers/hwmon/aspeed-g6-pwm-tach.c
-> @@ -0,0 +1,549 @@
-[...]
-> +static void aspeed_pwm_tach_reset_assert(void *data)
-> +{
-> +	struct reset_control *rst =3D data;
-> +
-> +	reset_control_assert(rst);
-> +}
-> +
-> +static int aspeed_pwm_tach_probe(struct platform_device *pdev)
-> +{
-[...]
-> +	priv->reset =3D devm_reset_control_get_exclusive(dev, NULL);
-> +	if (IS_ERR(priv->reset))
-> +		return dev_err_probe(dev, PTR_ERR(priv->reset),
-> +				     "Couldn't get reset control\n");
-> +
-> +	ret =3D reset_control_deassert(priv->reset);
-> +	if (ret)
-> +		return dev_err_probe(dev, ret,
-> +				     "Couldn't deassert reset control\n");
-> +	ret =3D devm_add_action_or_reset(dev, aspeed_pwm_tach_reset_assert,
-> +				       priv->reset);
-[...]
-> +}
-> +
-> +static int aspeed_pwm_tach_remove(struct platform_device *pdev)
-> +{
-> +	struct aspeed_pwm_tach_data *priv =3D platform_get_drvdata(pdev);
-> +
-> +	reset_control_assert(priv->reset);
+On 2024/02/21 3:27, Vlastimil Babka wrote:
+> I'm sure more such scenarios exist, Cc: Tetsuo who I recall was an expert on
+> this topic.
 
-This is already done by aspeed_pwm_tach_reset_assert(), looks like
-aspeed_pwm_tach_remove() can be removed. With that, priv->reset can
-become a local variable in aspeed_pwm_tach_probe().
+"[PATCH v3 10/35] lib: code tagging framework" says that codetag_lock_module_list()
+calls down_read() (i.e. sleeping operation), and
+"[PATCH v3 31/35] lib: add memory allocations report in show_mem()" says that
+__show_mem() calls alloc_tags_show_mem_report() after kmalloc(GFP_ATOMIC) (i.e.
+non-sleeping operation) but alloc_tags_show_mem_report() calls down_read() via
+codetag_lock_module_list() !?
 
-regards
-Philipp
+If __show_mem() might be called from atomic context (e.g. kmalloc(GFP_ATOMIC)),
+this will be a sleep in atomic bug.
+If __show_mem() might be called while semaphore is held for write,
+this will be a read-lock after write-lock deadlock bug.
+
+Not the matter of whether to allocate buffer statically or dynamically.
+Please don't hold a lock when trying to report memory usage.
+
 
