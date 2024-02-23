@@ -1,130 +1,94 @@
-Return-Path: <linux-doc+bounces-10629-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-10631-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9ADF3861F87
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Feb 2024 23:21:37 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65AC3861FF4
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Feb 2024 23:42:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B8FDC1C21122
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Feb 2024 22:21:36 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id CFEE5B21D42
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Feb 2024 22:42:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BEE1D14CAC4;
-	Fri, 23 Feb 2024 22:21:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 075A314A0BE;
+	Fri, 23 Feb 2024 22:42:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="nSuZHAG1"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="cBEV+Rt1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (mail-dm6nam11on2077.outbound.protection.outlook.com [40.107.223.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87ED214D44A;
-	Fri, 23 Feb 2024 22:21:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6745F3D6C;
+	Fri, 23 Feb 2024 22:41:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.223.77
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708726895; cv=fail; b=ASyb6Go9aDDg/dKhdnN4nAMWO5iqbFdT7AYVWM43YUA/5EXY5730UbqKb40fW0/RPRhuvxgiNLlSdkmWC4FXfphwypvTTTUuUEivoDW8jLZjDHe9/8tb4aWAdajPnU5jctJ84kag5zf9opwNYenfbvjK+TcTBxaIfRutiFD4HLE=
+	t=1708728133; cv=fail; b=rmv/PzS2ZMDZavgNLKdJMO/Ml6R0k+seEM7wPdy/QT5NzKbylhhUR/oGPemfy9LiBGS3UmPLLi7ZUZ/cUJw2ZeAq+ldIjUJdcocYxc10mAQtY+87qSYtpHUnEz/TAYc0pCjaggcTYAKeHQTylN77TExpAcVXxO4qYKSvMK/7rGk=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708726895; c=relaxed/simple;
-	bh=cBGhTu/BwkDgD6q7Cl6FZSf5GIix0kvPHF4oDBFj2x0=;
-	h=Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=u0OrmG82Ytd3b4GpIJkxH96qBy5pCIAQ+GJqu+EVx7G8UYAs8/q+eYluLJPm3LpaWBPUveRQc811gMiOimC47NmOWe5KbJOrNUBisImv/6maOOzBK1Z0mK3XnUQyvIocZm9H5LBWMwnSdULyZLIsiY+R258plX2TVIiv12m9i9s=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=nSuZHAG1; arc=fail smtp.client-ip=198.175.65.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1708726884; x=1740262884;
-  h=message-id:date:subject:to:cc:references:from:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=cBGhTu/BwkDgD6q7Cl6FZSf5GIix0kvPHF4oDBFj2x0=;
-  b=nSuZHAG1tlJXN761RO5BGHzu+WU2lWPuhyFRNcrjrsRmLPlLTuyYql24
-   sR7HCzvrxn+bSlrn47GX4MeZdMai2BtY7P7OJCYBKI+OWPv9nPs6Vlgt4
-   dvJaWeOnHrj6RjUyfYQkXemEfar/3T5anCxeKZ2GlbVLygFKzmxLjZGIp
-   BtmaHRhBP2Kg725ZPpdhgc7J76HExd+YycmX3cXgF4GgtbHpbhmNjuWUa
-   Chk0Fz/f3e95zw8Ic0BxDyid3oC/k5WC0LMd4V9UU+IKB2gaTgESiqX9X
-   AHFL3acSCxIlGex5tnbAY9HKLytDU1P4Qf6XOR49M9592DH5QTrDurMeu
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10993"; a="3223710"
-X-IronPort-AV: E=Sophos;i="6.06,180,1705392000"; 
-   d="scan'208";a="3223710"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Feb 2024 14:21:22 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.06,180,1705392000"; 
-   d="scan'208";a="6406261"
-Received: from fmsmsx602.amr.corp.intel.com ([10.18.126.82])
-  by orviesa007.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 23 Feb 2024 14:21:21 -0800
-Received: from fmsmsx611.amr.corp.intel.com (10.18.126.91) by
- fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Fri, 23 Feb 2024 14:21:20 -0800
-Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
- fmsmsx611.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Fri, 23 Feb 2024 14:21:19 -0800
-Received: from fmsedg602.ED.cps.intel.com (10.1.192.136) by
- fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35 via Frontend Transport; Fri, 23 Feb 2024 14:21:19 -0800
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (104.47.55.169)
- by edgegateway.intel.com (192.55.55.71) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.35; Fri, 23 Feb 2024 14:21:19 -0800
+	s=arc-20240116; t=1708728133; c=relaxed/simple;
+	bh=gYthuSO+gjabyP0W+NTh+yhcZjesqY4QObU5H3VH4ns=;
+	h=References:From:To:Cc:Subject:Date:In-reply-to:Message-ID:
+	 Content-Type:MIME-Version; b=NqJEB3KaFx/lY29qaySr9kvoRaWOhzOKoyFUfdGEU3Tz6dBCS7s1M19dsKJvZGE4TOOA/7SrG05YkCoPA+QorCTm6HEbWPLAkigAKaTyABLF1U1y+MUKTlxjU3e0LV199op+s95fqXo60jPub18UR1eiDKIWWMH20MpxfnM/VPQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=cBEV+Rt1; arc=fail smtp.client-ip=40.107.223.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AYRym0+iOH+PmrAbEhWTyjnTa4RA2/l3il4fdQd5hGeq0YSTR86oOfp5RKNnz9cbF32Fk8hkVPoLHqVdyV/O4c3eAjIGKZl24xuCACzLSLGCaDrBN0ry0tUjzdH55VgZ0HoYQjVeIqVSrAkTlWroSPeoW97eOPHHYMGZMUrrrv27iMtbSUR00GUVWnWTPivHeu7vqkn/Qjqpbhbu9B+ySLNf4sgJGd5WfiKdfylGQgWcRowBtimrtOyI+AhXxNsH4xNluG1oA5GTu7eOXLrZ6Ruhn+qpLLsA5JMBZ8xY3xIyh5MaQAzhODLDDNhY4rOYSVQNIL5stx3GaEB+M7lvGQ==
+ b=VmD+ymQBNDD+z1s50tplsT528chnZz4OseyB1oBmhL+NLIROWxJU3u6QE/P4n+phOgEVKLwQXiqFMZ24EPgDzBsSi0PVC/vggDVFeHiLmL5knUL3GVHR0oJfOoBdlR21v8MeROO1D9Hikc+unM3pW/VI2DqKW82Cy1lkGSTL1sihpUSbw4MlUHv8EIdd3u5wJGPJqlyALWmgilCQm9rgQFDSompAFUvFbmfwbUgP3JafMo1kBf1JNqnirO4p319yHpLfvt1d1H4ZXm3UmtrL53JZV0GFeR9YrhZny+G9xLS+YlQAhtfPyYgZ8wGsvcH4eMiCvSxanwNmG9TCCQ1F+Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=r+lMoMdwUl2t089i5gFDDmeDH88h2UeBJelvICWdbO8=;
- b=n+YVwK3H9zlYDMvMUpqZVtOZzCWlMEmPdHo7SNuvTvnMxbx3nSygfn/P58Hvn9nAIRYKsejXdHR9RPxFfUoBIpunOrzA6DcXDR04JNAS6tbMpsyT+D4/FnzVHXI6C6k1PI48Uglt3nCtsfzEjb5HJtF60eME5qxr4ZwEE4y/Q75MXTPEqY8aSX6eP8LfPO8+77prJ/i36u+zsuW5qX2J3kExbKMqqL1m4nHom1XaUAl+Yl1AZG1UPUrebO1DOkso6Yq1wy8kIKm2vmEkwZGeVw7Yb8QzSAplhAOLjwzHbbDuobCiw8O6ZlKeZhBmb4Elp+b1eVnOXOQLL9zCrwOc7g==
+ bh=H/Atow9ZHyedikTQcpANYUjM9E5prjHylIXWIHEGs5A=;
+ b=YaC9R3ybQq5FGB3EVOkpm5bm+8uvMQfwAPaGtYupAvW5Sygh0yTP/gQ6Z0s78eOAjJAHgsrFRuzMW56ORb+lNjAyfq5+g5yVYYWws7RQn+c4/u59sOesuVICRkGiddDOfI3yO9oUEBSQWXkWzSRRSAsaDGGNX6EZO0fkTuwAslP8qVMXd8R3ncNasB3BnKBK4rSLNSxHQOUBeUB8ozo/IG+T35z32YtEdOM/oxRs8sGEmuHbwMCs3upYuySmVhTuEDgqAF7f9ykGKNgBZd3GtlJ6TtCYh1Z9nNAwOHU7VZHCRedD2iGYBhiLm55Y+IsOLJ/HTCZa405sYLxmHyyAPQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=H/Atow9ZHyedikTQcpANYUjM9E5prjHylIXWIHEGs5A=;
+ b=cBEV+Rt134Av+Ds+Vm3JUbpBhyGhDr9sotI5KzMHuFUrPqoNKZoSdCB4vgfkY8ATcU1MxuuV6oIUnZ7dfJc0h35eLyZkI5tPOw8/WO/hLuuVtisj+rv6bV0FRLO2wkoO+Jhz52eBF9KqPfxQ5od4JYjcu9kb1gkK3W3+XIZx5tcYvFB3XcOdBjIlZs/yeNff7NC91u/gvt4udo2PnlRuw+iaP9j4jvEUGyLmW0mpCzaFsvzgXjg5LfeNnSmzsUE3KXSlyPkMzT2Nku+in/+XjPXAuEjFc2yyYvHhWJs6MzlrDtDp9HrHmMOJD/pmIOrZQMb89vUPBWKs3IyStYJKcA==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from SJ2PR11MB7573.namprd11.prod.outlook.com (2603:10b6:a03:4d2::10)
- by IA0PR11MB8354.namprd11.prod.outlook.com (2603:10b6:208:48c::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.21; Fri, 23 Feb
- 2024 22:21:16 +0000
-Received: from SJ2PR11MB7573.namprd11.prod.outlook.com
- ([fe80::c903:6ee5:ed69:f4fa]) by SJ2PR11MB7573.namprd11.prod.outlook.com
- ([fe80::c903:6ee5:ed69:f4fa%7]) with mapi id 15.20.7292.036; Fri, 23 Feb 2024
- 22:21:16 +0000
-Message-ID: <9b94b97e-4a8c-415e-af7a-d3f832592cf9@intel.com>
-Date: Fri, 23 Feb 2024 14:21:12 -0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/17] x86/resctrl : Support AMD Assignable Bandwidth
- Monitoring Counters (ABMC)
-Content-Language: en-US
-To: <babu.moger@amd.com>, James Morse <james.morse@arm.com>, <corbet@lwn.net>,
-	<fenghua.yu@intel.com>, <tglx@linutronix.de>, <mingo@redhat.com>,
-	<bp@alien8.de>, <dave.hansen@linux.intel.com>
-CC: <x86@kernel.org>, <hpa@zytor.com>, <paulmck@kernel.org>,
-	<rdunlap@infradead.org>, <tj@kernel.org>, <peterz@infradead.org>,
-	<yanjiewtw@gmail.com>, <kim.phillips@amd.com>, <lukas.bulwahn@gmail.com>,
-	<seanjc@google.com>, <jmattson@google.com>, <leitao@debian.org>,
-	<jpoimboe@kernel.org>, <rick.p.edgecombe@intel.com>,
-	<kirill.shutemov@linux.intel.com>, <jithu.joseph@intel.com>,
-	<kai.huang@intel.com>, <kan.liang@linux.intel.com>,
-	<daniel.sneddon@linux.intel.com>, <pbonzini@redhat.com>,
-	<sandipan.das@amd.com>, <ilpo.jarvinen@linux.intel.com>,
-	<peternewman@google.com>, <maciej.wieczor-retman@intel.com>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<eranian@google.com>
-References: <20231201005720.235639-1-babu.moger@amd.com>
- <cover.1705688538.git.babu.moger@amd.com>
- <2f373abf-f0c0-4f5d-9e22-1039a40a57f0@arm.com>
- <474ebe02-2d24-4ce3-b26a-46c520efd453@amd.com>
- <b6bb6a59-67c2-47bc-b8d3-04cf8fd21219@intel.com>
- <3fe3f235-d8a6-453b-b69d-6b7f81c07ae1@amd.com>
-From: Reinette Chatre <reinette.chatre@intel.com>
-In-Reply-To: <3fe3f235-d8a6-453b-b69d-6b7f81c07ae1@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MW2PR16CA0072.namprd16.prod.outlook.com
- (2603:10b6:907:1::49) To SJ2PR11MB7573.namprd11.prod.outlook.com
- (2603:10b6:a03:4d2::10)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from BYAPR12MB2743.namprd12.prod.outlook.com (2603:10b6:a03:61::28)
+ by DM4PR12MB6010.namprd12.prod.outlook.com (2603:10b6:8:6a::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7316.24; Fri, 23 Feb 2024 22:41:49 +0000
+Received: from BYAPR12MB2743.namprd12.prod.outlook.com
+ ([fe80::459b:b6fe:a74c:5fbf]) by BYAPR12MB2743.namprd12.prod.outlook.com
+ ([fe80::459b:b6fe:a74c:5fbf%6]) with mapi id 15.20.7316.023; Fri, 23 Feb 2024
+ 22:41:49 +0000
+References: <20240223192658.45893-1-rrameshbabu@nvidia.com>
+ <20240223192658.45893-6-rrameshbabu@nvidia.com>
+ <6e0a725f-3bd8-4e14-afda-860f1e4c1dc5@intel.com>
+User-agent: mu4e 1.10.8; emacs 28.2
+From: Rahul Rameshbabu <rrameshbabu@nvidia.com>
+To: Jacob Keller <jacob.e.keller@intel.com>
+Cc: Saeed Mahameed <saeed@kernel.org>, Leon Romanovsky <leon@kernel.org>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet
+ <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+ <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Richard Cochran
+ <richardcochran@gmail.com>, Tariq Toukan <tariqt@nvidia.com>, Gal Pressman
+ <gal@nvidia.com>, Vadim Fedorenko <vadim.fedorenko@linux.dev>, Andrew Lunn
+ <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, Przemek Kitszel
+ <przemyslaw.kitszel@intel.com>, Ahmed  Zaki <ahmed.zaki@intel.com>,
+ Alexander Lobakin <aleksander.lobakin@intel.com>, Hangbin Liu
+ <liuhangbin@gmail.com>, Paul  Greenwalt <paul.greenwalt@intel.com>, Justin
+ Stitt <justinstitt@google.com>, Randy Dunlap <rdunlap@infradead.org>,
+ Maxime Chevallier <maxime.chevallier@bootlin.com>, Kory Maincent
+ <kory.maincent@bootlin.com>, Wojciech Drewek <wojciech.drewek@intel.com>,
+ Vladimir Oltean <vladimir.oltean@nxp.com>, Jiri Pirko <jiri@resnulli.us>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>, Jose Abreu
+ <joabreu@synopsys.com>, Dragos  Tatulea <dtatulea@nvidia.com>,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org
+Subject: Re: [PATCH RFC net-next v1 5/6] tools: ynl: ethtool.py: Make tool
+ invokable from any CWD
+Date: Fri, 23 Feb 2024 14:39:07 -0800
+In-reply-to: <6e0a725f-3bd8-4e14-afda-860f1e4c1dc5@intel.com>
+Message-ID: <87y1bavm50.fsf@nvidia.com>
+Content-Type: text/plain
+X-ClientProxiedBy: BY3PR05CA0021.namprd05.prod.outlook.com
+ (2603:10b6:a03:254::26) To BYAPR12MB2743.namprd12.prod.outlook.com
+ (2603:10b6:a03:61::28)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -132,152 +96,107 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR11MB7573:EE_|IA0PR11MB8354:EE_
-X-MS-Office365-Filtering-Correlation-Id: a2076def-014e-4f92-49c0-08dc34bdc054
-X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+X-MS-TrafficTypeDiagnostic: BYAPR12MB2743:EE_|DM4PR12MB6010:EE_
+X-MS-Office365-Filtering-Correlation-Id: 124c3f4d-259e-4e04-8907-08dc34c09f12
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: vSRoWFhgOhhwyaAuphFi780vLtTZo+3nkkchX2BYDzo1FE+hNC1F6UqVD7un8qcE2iiXnTie4rQIWnoDBvL98598mpdABO/2qYOvqemMXKkcHU0J/CbMzDYoQx9AqB9T9HFyfXEWmwvWoOf7OOS+N5bZ4OlkVs+W9kpo/fNLO9ujFsX3pW//Jm9H/hZUwkAiRPPLxl4T/8IqvOZpmAMs9c4k4BnC2F9bvC+HpV57MTKhv2xQtyK9fUYJhteV6MpvjU4IhLKoBBMZnanCuQQRFx7YgNF3tn0dHPrbH6hWnl03aVpV3BFjmuERulzlXTkgAhOu8e96FfgzaGuEb27OtjYxCs7zzvxFd2tN5u52g5I3i/tPcT663lWJkmKd9Vd3urcIgirgfjpwV/SgRLu7+y3mrGbSv8HDoIUlTIgTzgj4gb+dF02gA2B+RNyB417jL5Ab11WZsXjw0pdfmknNg3nk2fxOq7ZnRDaIc7VUr7RRMDKInV3zp+UZbOuvWrbdOLIroHaG56w2qlaUhvKwaik+beAeIhoYfUXIodblxIg=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ2PR11MB7573.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031);DIR:OUT;SFP:1101;
+X-Microsoft-Antispam-Message-Info:
+	lKMESuvTzENIbWRlf5/Au9qT8YtN4A9B2v8usu7Agyu+VFhlwb4hfREMtO2f0l1VMCRTRIgshR7gWmr2oUIWM51OIvncfto6svaZVLpsoDbggwlROWU1CAKLXA1Xp0toX9wF/ocsHJ9bDvn+jqj00dtftPU/JEdnf5P4OWTzOcp4H6wfz/RGpr574t/ivb91uM5900UHuG8pPeCm4uH3oqtz/cVj0RNGqDeUA41Ar2ueO3U5ij5IOZbm01HhRx0RjtD4opjrgTCWRujvhPCKUOJXhQq2RNc8w2WkVfM/2u9ksP35hye3M4bdFEiYJhCNh4RFQPO/0QGxX0e/D7aILSKN99Ih42s8QSuK3y0Hb3wJyMgL4Png2FFYqRGD0Fx1PkFrvMrR+cAGNCn+ps13YvVchYZQ5i2EhXUn1iFOaR1K245dk1iPuDs9B+XZScDLPSfvPBASchQPRzAnOZgp3RaCjHtNmHOqEdpTkHvoPt2yJ7dGodITfayesd0sSmub4t58FRw4wbkSU0wLEKcoHgAAFJv8ZkvgchHASq0N0z4=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR12MB2743.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cUNmbk1lNlplM3FNa3RjQkJ3U0pHQTB1R3NVTm5lWVorL3JLN2tOUWd2cmti?=
- =?utf-8?B?YTFzZ1F0ZHN0MGZuZ2tTck1kNGhwb2ZPeklQK2JiOGIxUm0rSVJIaWRUUEFG?=
- =?utf-8?B?NFVBQkkreFFqallJOGQrMlArZWlIMWVHNCt5T1FxdDRxS3ZNdjk5WjZGeWpr?=
- =?utf-8?B?WWJRYXVBam1EYmVnemt5MFk0V1NaSGZUR0lJTEZMVXVqQXc1Z05yRy9BRnp6?=
- =?utf-8?B?VjgvQTA3MkZRaW9kT29KMGk4VmJiUVhTQkR5RzZWYmg1ZFRsbnVQOGRoUWRo?=
- =?utf-8?B?VEJBaUMrZWVlaTFneVJlSlFmUUwvZ0dFRlZscW9SNnBuaEkvSDRzMUpDYlFu?=
- =?utf-8?B?NjVDeUo5MWhYSmppdnprRmVyNGpSdklkRlNMNTlXVlVXeUxpaUVSTG5NaXNS?=
- =?utf-8?B?OWt6S01Sd1hRSFVyL0tjZWlqcjE4eEJ3UUxwWTljSnJXMHEvSm9qalVjS0Y5?=
- =?utf-8?B?aUNWQnMvZW1CZFpUYUh5Mk1ud0ZMMnhEMGJ1UEhTOFdSNW5SMHZVZVRQRmZQ?=
- =?utf-8?B?YTJHdWx0RlpLWG9ZMjN5aERBS0R6cC9CdWFGM2VMalNZVEg0NXhwUUFWeW9n?=
- =?utf-8?B?NmJJWWVPd0xITHBkSHQxNVl1QllYMC9xb29pTXFubjVqb2pzakVlRWFzdml6?=
- =?utf-8?B?cFNyYnQya2JBK01rZlRPbzRkZE53K1BwUmEzeFVoOExkTGVJTnMrODR4a1BK?=
- =?utf-8?B?RndFM0tLWFE0UVZneWhuMkZ2b1ZrVGk2Y3ZMMG56Z0RnNkk2Y2E5Zy9XUm1M?=
- =?utf-8?B?TEJpRHlOVTE4cUl2bHk2aWVsNG9rT0lxOTNYSkh6T3JmRWNxWlh2SnZiOW1Q?=
- =?utf-8?B?SCtxcEhIeHp2SDFiTUQxL1BETzF1cm9xby90emtscm9GYTlPZ1NnaUlSTnpw?=
- =?utf-8?B?RmFIVENEbDFscVhSUVd4WUQwc0QvOWRWeDB6SXFGdFN1b2ZmeTJwMEhEaXUx?=
- =?utf-8?B?bEdiWW1LaCtQSHRVYzZTRlpUM3pYNG5la01saEVNTEJOMVgvOENXSmp0b2lY?=
- =?utf-8?B?VTNpZmhWQjFpYVZIZXJBZllXeGtyWHh4d3dtZ1BZU1BkdzhDVlJWRm1KbUd5?=
- =?utf-8?B?S0RBWGhmVWdvZlljajlVVWgzZVh2dUtXVlU1MDljdEhXNXJRMnlvbnJmVlVD?=
- =?utf-8?B?eTFiQ0RKa0wwTVA5c2F5bDkxQnhkUm1ycDhOMGhMSWJYeEVIclBoSitrR1JP?=
- =?utf-8?B?U2VhS2hVWk1WNEU2cXlkWmhNZ2NWNHZwZU5rZHpObXZXYzhQWW1sd1JveWxi?=
- =?utf-8?B?bU4wd2s0VVROU2VGMllyL1NCZDRDQU04RU13Wkt3bm5YVWZ5RzJURDhqdjRG?=
- =?utf-8?B?TERvcjlkMDJCVWJta1d0ZFA4ZThWR1d3dWx4RlYyTjdabnNsRFBNaTFSelNF?=
- =?utf-8?B?ZzRnZGFrYzZhVjJIWGUzdHhIejhNc0Z3ZjRVeTdYdjBocnZWV29zelBVZ1Q0?=
- =?utf-8?B?b2hvc3duNTN3RHpHZFYyT2hyTzFyekU2d0ZCMGRIc21XMFdxem5mUVdhTnpj?=
- =?utf-8?B?U2k3M3g5clhyQjQwK0h2dnFPY2RuZVlaaUFlbTJzejlkZkUzSkxrRkpmdVQx?=
- =?utf-8?B?WVBWWHQ2WmZpWHgxYmc0RHZxRFBZZFJzVmM4V0w0ZDI5VXJRZ1VkR0c4L2pH?=
- =?utf-8?B?KzJEWURsVCtWL3krb3NEY1IxNitMcUluM0llMDFUVVB6b0tHRjBJb1QyVTBk?=
- =?utf-8?B?OFVOc1pTbTdlL0daLzYzUW5oT25BU1o5REVGMktNSDhZSWhpeUxOa1JuSy96?=
- =?utf-8?B?elp4RWYwOXdrdjl0VjRNMjR6N2RjNXArbDNNTHpGM0t4S1RGWmtDT3RrTFly?=
- =?utf-8?B?VkM5U1hST0pWUlNuV0VyaTNyQVZrVjBVWmFIODJuUUxKUTBla2RzeVJySTY0?=
- =?utf-8?B?YXJtVE91MUZSemlub0wxMjk3aVdncUVaTTZWSFNySGw1VXVvYnhJTE8zeXlX?=
- =?utf-8?B?RjM3eUdaQUwrc3JCV3Y0Q2FHL3NTZkhCT1lsczlheFpTMmdBcnBXQ25SSnJs?=
- =?utf-8?B?UFh0RTVJK0xUOVNzRzREYm9DOFNEOGNTL3RmdDJ4eUkzNkdEWHFFUnMvVW9R?=
- =?utf-8?B?MjdBazNtNmYrYjBEbjlXekdkUTJMUkVBQzc4QXUxa3pGSjZ2ejdzYnROT1Nr?=
- =?utf-8?B?cjF0YmpGN0o3MWhFblFUazBzdTh0OGpUUEtIQnRlTlYxMklXVmsxOTdEcWVj?=
- =?utf-8?B?Y3c9PQ==?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2076def-014e-4f92-49c0-08dc34bdc054
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR11MB7573.namprd11.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?WB9Y+/BFhuYlwblQgGOTZ5xfc+8jFpkqWcv/oQbndYVoEh8CJE8pFd8vmCv/?=
+ =?us-ascii?Q?maFWxpJPR9TupRX7QJjY2uvRkB+tQGhJjftkMc+LiyJzXYRY+oM3XcDKe2cb?=
+ =?us-ascii?Q?DrfGK0b/4MMw0x58UyDkGL8OOa+pCqkluZG8ToTPmHex9FLIRKpwEVMA0rIT?=
+ =?us-ascii?Q?62hTjoz8lyOJFOQkMaMylgZunUP6tKu+OovYufj7z1j+la835hGrZcTXSA57?=
+ =?us-ascii?Q?EJZMSKhkzW88ZuIycImJr23cNrpnQejvugqp2xsPWXJJtQhDRSWtrYO9BIav?=
+ =?us-ascii?Q?4Wlkgd6AmR9NI+XknzO3utR0Mz+1gOdLf0xH+oM7zkNZs4Bgq/cq3m5t8lew?=
+ =?us-ascii?Q?7tgO0EyF37TJCK8zH8lBzL82KNey/kP+2dgWdNuREwohuj8uqDrXflk/LvGz?=
+ =?us-ascii?Q?zwOgczrZjXJTDe0MYUbV0RwVyVmgIAc59GKXB5HcMdBaP/MMP+4hfDyhlVtH?=
+ =?us-ascii?Q?9/OHb2B98bQwar2dCILgAlYjiq3nGnhbeadXqZOGSguB2wcJnX9kY00ZCoDi?=
+ =?us-ascii?Q?rAfmEu6W7U0+eDMjrn2bhMPTKhGAMI48N9LQFBwSyMfCx8jnJwT3mShcNVtu?=
+ =?us-ascii?Q?uDMY2GI4dyE0O9VUfposE+VW9A0NXg/Lg0xmirlfhEIEn7ZMNbraVSJtdIEm?=
+ =?us-ascii?Q?JU6utLH3JNRZk9RlVd3rrJ3V6eRKxPHdOvL2+TS6lHXs7PVHyaRR5UEKQ2rv?=
+ =?us-ascii?Q?NNeW7gqiHh0qeGPTxZsXA+bl2iuQaDLX9oIS9F1MH6lAAVG431+b+nSrNCD0?=
+ =?us-ascii?Q?rJVqupvIw+yojrFh3Ad8L1D1BiUVUK6keUgQYqdFwtqVuBPh72oXoVT0BZAj?=
+ =?us-ascii?Q?D9FoBFABmpz3VE2XD2987ODQxOic/nSFQS5aH548w11+68b2dxXR/MRiumkx?=
+ =?us-ascii?Q?vHrKislAO7jD60pvOsoXwcpmlNSy/ASA50oPJuJBnL6ZY8i1y1oNo5DadJKS?=
+ =?us-ascii?Q?QG0Bazq/gTWNM8sUvbgizUW1YUUECZetjNE0CIyGqt3etDXEyb8+RJnQmUW1?=
+ =?us-ascii?Q?o5Cho2mBYBLhiWSLpX3yUgZBn3dzpOaBWS1TQeql1jc9PU6Y4IOHtExT7uer?=
+ =?us-ascii?Q?pKu6LcsfZdWJnQopEVmbUX4sQT3+yrZDTHhLd5bgwvCNdB/5kktaSRH+/Dda?=
+ =?us-ascii?Q?874s29RN4lydrtSdMQJap8Te8qmSE60w9yEW+ta/7Lo/Vm+9sY6OP80kV1VU?=
+ =?us-ascii?Q?XmBv8zGuer/5M0NLuy35VDwnOR3mrgLUKyRhociBU4DPqj9lbChwp29lxGZT?=
+ =?us-ascii?Q?JeFmCmbcW025kCLUC6bA1IL3Hhy3l/lKmxb+dy8w82ZFp21VjZ5jlRFp6eWE?=
+ =?us-ascii?Q?Et0E8xAa/EtYKZ/aUMGO8nODtwpgz93W/4y+jHMA1pVLWfRZaKuWWqicoJzz?=
+ =?us-ascii?Q?n614cNGihXBBajHKGR458LO3EKjS7/WeVA3bUM4mT0qkF0IueZmohoBHqs/y?=
+ =?us-ascii?Q?AziWuLE9LQX1Vg+ErLqFAO7CbMA/IFW18M2Rlop+U/z5UixotKlRGcnsMCfy?=
+ =?us-ascii?Q?v4uPRUP+GV1q3l+t+2z7JUFluMhT+SyI1N4qkr5A9Z+8XpAWNJunEcr2k7g5?=
+ =?us-ascii?Q?goWPpVwOnjq8tEiqACqMnzRlsnylkLNkunHhmI2Jo+GUfz9KUCz+ZYJ1/nnJ?=
+ =?us-ascii?Q?Jw=3D=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 124c3f4d-259e-4e04-8907-08dc34c09f12
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB2743.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Feb 2024 22:21:16.2331
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Feb 2024 22:41:48.8967
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FZQs05o332A602bAefpSz1l3EeoUJzhaphtswvENLcSLWIEp9wusm0e89062oURGbpKlrcb/XHE2Od3Gf73qLNkmxCAZut+Q/5dppv/nxko=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR11MB8354
-X-OriginatorOrg: intel.com
+X-MS-Exchange-CrossTenant-UserPrincipalName: hWcI/UU7JlXx5nhzQT/NQAWssDf7PUPDzWOOBKDPROXCCBZkJbJVn605rmlDcsAx6vwkHIoyu+DU5XATvHmlHg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6010
 
-Hi Babu,
+On Fri, 23 Feb, 2024 13:08:34 -0800 Jacob Keller <jacob.e.keller@intel.com> wrote:
+> On 2/23/2024 11:24 AM, Rahul Rameshbabu wrote:
+>> ethtool.py depends on yml files in a specific location of the linux kernel
+>> tree. Using relative lookup for those files means that ethtool.py would
+>> need to be run under tools/net/ynl/. Lookup needed yml files without
+>> depending on the current working directory that ethtool.py is invoked from.
+>> 
+>> Signed-off-by: Rahul Rameshbabu <rrameshbabu@nvidia.com>
+>> Reviewed-by: Dragos Tatulea <dtatulea@nvidia.com>
+>> ---
+>>  tools/net/ynl/ethtool.py | 8 ++++++--
+>>  1 file changed, 6 insertions(+), 2 deletions(-)
+>> 
+>> diff --git a/tools/net/ynl/ethtool.py b/tools/net/ynl/ethtool.py
+>> index 6c9f7e31250c..44ba3ba58ed9 100755
+>> --- a/tools/net/ynl/ethtool.py
+>> +++ b/tools/net/ynl/ethtool.py
+>> @@ -6,6 +6,7 @@ import json
+>>  import pprint
+>>  import sys
+>>  import re
+>> +import os
+>>  
+>>  from lib import YnlFamily
+>>  
+>> @@ -152,8 +153,11 @@ def main():
+>>      global args
+>>      args = parser.parse_args()
+>>  
+>> -    spec = '../../../Documentation/netlink/specs/ethtool.yaml'
+>> -    schema = '../../../Documentation/netlink/genetlink-legacy.yaml'
+>> +    script_abs_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+>> +    spec = os.path.join(script_abs_dir,
+>> +                        '../../../Documentation/netlink/specs/ethtool.yaml')
+>> +    schema = os.path.join(script_abs_dir,
+>> +                          '../../../Documentation/netlink/genetlink-legacy.yaml')
+>>  
+>
+> This seems like a worthwhile improvement to make the tool more usable.
+>
 
-On 2/23/2024 12:11 PM, Moger, Babu wrote:
-> On 2/23/24 11:17, Reinette Chatre wrote:
->>
->>
->> On 2/20/2024 12:48 PM, Moger, Babu wrote:
->>> On 2/20/24 09:21, James Morse wrote:
->>>> On 19/01/2024 18:22, Babu Moger wrote:
->>
->>>>> e. Enable ABMC mode.
->>>>>
->>>>> 	#echo 1 > /sys/fs/resctrl/info/L3_MON/mbm_assign_enable
->>>>>         #cat /sys/fs/resctrl/info/L3_MON/mbm_assign_enable
->>>>>         1
->>>>
->>>> Why does this mode need enabling? Can't it be enabled automatically on hardware that
->>>> supports it, or enabled implicitly when the first assignment attempt arrives?
->>>>
->>>> I guess this is really needed for a reset - could we implement that instead? This way
->>>> there isn't an extra step user-space has to do to make the assignments work.
->>>
->>> Mostly the new features are added as an opt-in method. So, kept it that
->>> way. If we enable this feature automatically, then we have provide an
->>> option to disable it.
->>>
->>
->> At the same time it sounds to me like ABMC can improve current users'
->> experience without requiring them to do anything. This sounds appealing.
->> For example, if I understand correctly, it may be possible to start resctrl
->> with ABMC enabled by default and the number of monitoring groups (currently
->> exposed to user space via "num_rmids") limited to the number of counters
->> supported by ABMC. Existing users would then by default obtain better behavior
->> of counters not resetting.
-> 
-> Yes, I like the idea. But i will break compatibility with pqos
-> tool(intel_cmt_cat utility). pqos tool monitoring will not work without
-> supporting ABMC enablement in the tool. ABMC feature requires an extra
-> step to assign the counters for monitor to work.
+Unfortunately, even though in the next patch after this one where I add
+the ts stats group as a comment, the tool seems to fail at rendering the
+actual counters of the stats group, so I had to use the ethtool tree to
+test. I should look into that, so that way other contributors such as
+Intel can simply use this script to test that they hooked into the
+ethtool ts stats interface correctly.
 
-I am considering two scenarios, the "default behavior" is what a user will
-experience when booting resctrl on an ABMC system and the "new feature
-behavior" where a user can take full advantage of all that ABMC (and soft
-RMID, and MPAM) can offer.
+--
+Thanks,
 
-So, first, on an ABMC system in the "default behavior" scenario I expect
-that resctrl can do required ABMC counter configuration automatically at
-the time a monitor group is created. In this "default behavior" scenario
-resctrl would expose "num_rmids" to be half of the number of assignable
-counters. When a user then creates a monitor group two counters will be
-used and configured to count the local and total bytes respectively. If
-two counters are not available then ENOSPC returned, just like when system
-is out of closid/rmid.  With this "default behavior" user space thus gets
-improved behavior without making any changes on its part. I do not have
-insight into how many counters ABMC could be expected to expose though ...
-so some users may be surprised at how few monitor groups can be created
-with new hardware? This may not be an issue since that would accurately
-reflect how many _reliable_ monitor groups can be created and if user needs
-more monitor groups then that would be a time to explore the "new feature"
-that requires changes in how user interacts with resctrl.
-
-Apart from the "default behavior" there are two options to consider ...
-(a) the "original" behavior(? I do not know what to call it) - this would be
-    where user space wants(?) to have the current non-ABMC behavior on an ABMC
-    system, where the previous "num_rmids" monitor groups can be created but
-    the counters are reset unpredictably ... should this still be supported
-    on ABMC systems though?
-(b) the "new feature" behavior where user space gets full benefit of ABMC
-    that allows user space to create any number of monitor groups but then
-    user space needs to let hardware (via resctrl) know which
-    events should be counted.
-
-I expect that only (b) above would require user space change. Considering
-that per documentation, "num_rmids" means "This is the upper bound for how
-many "CTRL_MON" + "MON" groups can be created" I expect that "num_rmids"
-becomes undefined when "new feature" is enabled. When this new feature is enabled
-then user space is no longer limited by number of RMIDs on how many monitor
-groups can be created and this is the point that the user interface that you
-and Peter have ideas about comes into play. Specifically, user space needing
-a way to specify:
-(a) "let me create more monitor groups that the hardware can support"/"let me
-     control which events/monitor groups are counted"
-     (like the "mbm_assign" file in your proposal)
-(b) "here are the events that need to be counted" 
-     (like the "monitor_state" and "mbm_{local,total}_bytes_assigned" proposals)
-
-Reinette
-
-
-
+Rahul Rameshbabu
 
