@@ -1,122 +1,201 @@
-Return-Path: <linux-doc+bounces-10637-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-10639-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FFCE8620F9
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Feb 2024 01:07:14 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EC43862144
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Feb 2024 01:37:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 43CA3287B43
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Feb 2024 00:07:13 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4A59C2885B7
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Feb 2024 00:37:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D271391;
-	Sat, 24 Feb 2024 00:07:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E57D17C9;
+	Sat, 24 Feb 2024 00:37:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="JMNC8ZBC"
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="NHes8mXW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A9F8182;
-	Sat, 24 Feb 2024 00:07:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7334C139D;
+	Sat, 24 Feb 2024 00:37:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708733228; cv=none; b=gIw1o0NZfQVKpazyYA7bkruQesUGtzBhXQZ3rf3JN95+ohgGWD9JDXV+ji86s4cMKfVc747WK9ITwJjcTLF7J2JCxfSel/iDJFsbZezDFDYjsR1XvxLz9VRnUG/gSBBP3NgoH/N2DnNOwtTsRXW8AL/aEqrCL10GBP0eXpMh9fI=
+	t=1708735067; cv=none; b=XtxTKGWUuoCnpYjnJkuQRWHYRAMIKljbyEaED9Esn9ucMFt+3RcXJTG9Ay+sid0f5nFLAWSckNPKE/MbDwLLnalsNtIZCFAIYj7K+Zqz/8kNFT6bsoKmtVieToSxaajGobl5VevlowIMb5FMbVvWKH3KScyY2jLIAXO+NL2bQDo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708733228; c=relaxed/simple;
-	bh=qiyDaquhNDRAD1bYDTLfWk1m9ilGG/A8+ouVFaiFqpU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=r+u7w/LOJTVtV+6cW7HdNaEFzZQXVsRVosLU759wO6n4nRcdJ/n4XARuuV6hFjfWESJnFGqmS45lqiLEWxy0C6/1tepYIfcCmAeiSkSda9pke9a3YDXHl4lvwOFBRW/OAp/LX8pDzBfnspsWfbKkt9BsivwMnTHcJxLty+KxKwk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=JMNC8ZBC; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Sender:In-Reply-To:Content-Type:
-	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=RLXEC5G8zhOhURItJOCbBXesZ2wGukLrzFwY7ETSkMI=; b=JMNC8ZBC5npFRya4vizIt421Eo
-	ohsVaPKre0JMqxNQ5HzWUFhhQsj5ugPe6sGbwLSr5gwRiQlVAPIRt7y6Ut1VGhCXzeKQPdEXgLhAi
-	2frsNgx9A7EtvYTXfxh140Wf6Hxeyb5qEZjTxbcI6O000chegytsaOh9Q/5Le0jFYnI7U2dcJVgyY
-	dZSbIqoaBjiODzFG8jyo/3TTl3dZWgSyBQV1ZLkLmSFIgqkcIJfkcx0AVprz5f0vULXIHYDorH26q
-	t4MULcYnZ3kcXgZgzig4+LBYkCLINsoOoNmDqY9fz+sPR17dal6kO/0yyuCd8WOMiaWqIpzDxz0Pc
-	j9LevlwA==;
-Received: from mcgrof by bombadil.infradead.org with local (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1rdfZE-0000000Bdrq-0xdy;
-	Sat, 24 Feb 2024 00:07:00 +0000
-Date: Fri, 23 Feb 2024 16:07:00 -0800
-From: Luis Chamberlain <mcgrof@kernel.org>
-To: John Groves <John@groves.net>
-Cc: John Groves <jgroves@micron.com>, Jonathan Corbet <corbet@lwn.net>,
-	Dan Williams <dan.j.williams@intel.com>,
-	Vishal Verma <vishal.l.verma@intel.com>,
-	Dave Jiang <dave.jiang@intel.com>,
-	Alexander Viro <viro@zeniv.linux.org.uk>,
-	Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
-	Matthew Wilcox <willy@infradead.org>, linux-cxl@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, nvdimm@lists.linux.dev,
-	john@jagalactic.com, Dave Chinner <david@fromorbit.com>,
-	Christoph Hellwig <hch@infradead.org>, dave.hansen@linux.intel.com,
-	gregory.price@memverge.com
-Subject: Re: [RFC PATCH 00/20] Introduce the famfs shared-memory file system
-Message-ID: <ZdkzJM6sze-p3EWP@bombadil.infradead.org>
-References: <cover.1708709155.git.john@groves.net>
+	s=arc-20240116; t=1708735067; c=relaxed/simple;
+	bh=o+dopF+3QwhP/VzUwOvK66g+AD4WW3W8duM1P1rkaZA=;
+	h=Date:From:To:CC:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=TNKne2VT+JxzDd3KuQ80VT2KabSgWJ4ewknGH/nxvzLBz0CZmRmlAFy9QuvoV6UiTxezxUq95aEjBWK+wiRJ2fRsypkWIdqJ7fhXj7TFFLx/pagZ15rVLadHp3oqrZ1DLnt/nH/zHODXYpbE/2T+NqqtKqR0wsI5lm8e0odMBJI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=NHes8mXW; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 41O0KQ2Y031296;
+	Sat, 24 Feb 2024 00:37:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:in-reply-to; s=qcppdkim1; bh=TAeKBPeqKN87BGLYsho5A
+	H76OwarAu5agw9ZvchmLfo=; b=NHes8mXWQwz+Zos60T+OXib+qAd5JkD7dW26c
+	MImKO0FPFpCh58zeMhEvB09Tze2Ok9lYUzTEDazN+cROyP+yDbWzhVOReN3A3k9s
+	r4wto++of7SWLXR3tiuMBVXHJXY0z+mrC65Jy5gTawMM3miTNhaU9EpJnyLz5qGA
+	RDr9zor2WwX/ssKl4UrzuiOR8MhZB/vnB5gKsCmkttGxsfg7tG3XwxWsjnU1wFDz
+	BprDCg64EDrhfjZGil1A5Lr5orGF/+SVq1/h4/6yjuJ+5Pe64Ug4PTtKR6FXT/6K
+	dVTkNTzNzEoXmPEYb6ctfQu3+dk92VKi7A5oBTLFKwHLkocgw==
+Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3wf5tt80mr-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Sat, 24 Feb 2024 00:37:25 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com [10.46.141.250])
+	by NASANPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 41O0bOEZ019289
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Sat, 24 Feb 2024 00:37:24 GMT
+Received: from hu-eberman-lv.qualcomm.com (10.49.16.6) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Fri, 23 Feb 2024 16:37:23 -0800
+Date: Fri, 23 Feb 2024 16:37:23 -0800
+From: Elliot Berman <quic_eberman@quicinc.com>
+To: Christoph Hellwig <hch@infradead.org>, Will Deacon <will@kernel.org>,
+        Quentin Perret <qperret@google.com>,
+        Chris Goldsworthy
+	<quic_cgoldswo@quicinc.com>,
+        Android KVM <android-kvm@google.com>,
+        "Patrick
+ Daly" <quic_pdaly@quicinc.com>
+CC: Alex Elder <elder@linaro.org>,
+        Srinivas Kandagatla
+	<srinivas.kandagatla@linaro.org>,
+        Murali Nalajal <quic_mnalajal@quicinc.com>,
+        Trilok Soni <quic_tsoni@quicinc.com>,
+        Srivatsa Vaddagiri
+	<quic_svaddagi@quicinc.com>,
+        Carl van Schaik <quic_cvanscha@quicinc.com>,
+        Philip Derrin <quic_pderrin@quicinc.com>,
+        Prakruthi Deepak Heragu
+	<quic_pheragu@quicinc.com>,
+        Jonathan Corbet <corbet@lwn.net>, Rob Herring
+	<robh+dt@kernel.org>,
+        Krzysztof Kozlowski
+	<krzysztof.kozlowski+dt@linaro.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Konrad Dybcio <konrad.dybcio@linaro.org>,
+        Bjorn Andersson
+	<andersson@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+        "Fuad
+ Tabba" <tabba@google.com>,
+        Sean Christopherson <seanjc@google.com>,
+        "Andrew
+ Morton" <akpm@linux-foundation.org>,
+        <linux-arm-msm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>, <linux-mm@kvack.org>
+Subject: Re: Re: [PATCH v17 19/35] arch/mm: Export direct {un,}map functions
+Message-ID: <20240223071006483-0800.eberman@hu-eberman-lv.qualcomm.com>
+Mail-Followup-To: Christoph Hellwig <hch@infradead.org>, 
+	Will Deacon <will@kernel.org>, Quentin Perret <qperret@google.com>, 
+	Chris Goldsworthy <quic_cgoldswo@quicinc.com>, Android KVM <android-kvm@google.com>, 
+	Patrick Daly <quic_pdaly@quicinc.com>, Alex Elder <elder@linaro.org>, 
+	Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Murali Nalajal <quic_mnalajal@quicinc.com>, 
+	Trilok Soni <quic_tsoni@quicinc.com>, Srivatsa Vaddagiri <quic_svaddagi@quicinc.com>, 
+	Carl van Schaik <quic_cvanscha@quicinc.com>, Philip Derrin <quic_pderrin@quicinc.com>, 
+	Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Catalin Marinas <catalin.marinas@arm.com>, 
+	Konrad Dybcio <konrad.dybcio@linaro.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Fuad Tabba <tabba@google.com>, 
+	Sean Christopherson <seanjc@google.com>, Andrew Morton <akpm@linux-foundation.org>, 
+	linux-arm-msm@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mm@kvack.org
+References: <20240222-gunyah-v17-0-1e9da6763d38@quicinc.com>
+ <20240222-gunyah-v17-19-1e9da6763d38@quicinc.com>
+ <ZdhEtH7xzbzdhS2j@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <cover.1708709155.git.john@groves.net>
-Sender: Luis Chamberlain <mcgrof@infradead.org>
+In-Reply-To: <ZdhEtH7xzbzdhS2j@infradead.org>
+X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: gNcA6io5WictnmGGjeI8Vk68WZWdapO8
+X-Proofpoint-GUID: gNcA6io5WictnmGGjeI8Vk68WZWdapO8
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-02-23_07,2024-02-23_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011 phishscore=0
+ spamscore=0 impostorscore=0 adultscore=0 malwarescore=0 lowpriorityscore=0
+ priorityscore=1501 bulkscore=0 suspectscore=0 mlxlogscore=999 mlxscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2402120000
+ definitions=main-2402240001
 
-On Fri, Feb 23, 2024 at 11:41:44AM -0600, John Groves wrote:
-> This patch set introduces famfs[1] - a special-purpose fs-dax file system
-> for sharable disaggregated or fabric-attached memory (FAM). Famfs is not
-> CXL-specific in anyway way.
+On Thu, Feb 22, 2024 at 11:09:40PM -0800, Christoph Hellwig wrote:
+> On Thu, Feb 22, 2024 at 03:16:42PM -0800, Elliot Berman wrote:
+> > Firmware and hypervisor drivers can donate system heap memory to their
+> > respective firmware/hypervisor entities. Those drivers should unmap the
+> > pages from the kernel's logical map before doing so.
+> > 
+> > Export can_set_direct_map, set_direct_map_invalid_noflush, and
+> > set_direct_map_default_noflush.
 > 
-> * Famfs creates a simple access method for storing and sharing data in
->   sharable memory. The memory is exposed and accessed as memory-mappable
->   dax files.
-> * Famfs supports multiple hosts mounting the same file system from the
->   same memory (something existing fs-dax file systems don't do).
-> * A famfs file system can be created on either a /dev/pmem device in fs-dax
->   mode, or a /dev/dax device in devdax mode (the latter depending on
->   patches 2-6 of this series).
-> 
-> The famfs kernel file system is part the famfs framework; additional
-> components in user space[2] handle metadata and direct the famfs kernel
-> module to instantiate files that map to specific memory. The famfs user
-> space has documentation and a reasonably thorough test suite.
-> 
-> The famfs kernel module never accesses the shared memory directly (either
-> data or metadata). Because of this, shared memory managed by the famfs
-> framework does not create a RAS "blast radius" problem that should be able
-> to crash or de-stabilize the kernel. Poison or timeouts in famfs memory
-> can be expected to kill apps via SIGBUS and cause mounts to be disabled
-> due to memory failure notifications.
-> 
-> Famfs does not attempt to solve concurrency or coherency problems for apps,
-> although it does solve these problems in regard to its own data structures.
-> Apps may encounter hard concurrency problems, but there are use cases that
-> are imminently useful and uncomplicated from a concurrency perspective:
-> serial sharing is one (only one host at a time has access), and read-only
-> concurrent sharing is another (all hosts can read-cache without worry).
+> Err, not they should not.  And not using such super low-level interfaces
+> from modular code.
 
-Can you do me a favor, curious if you can run a test like this:
+Hi Cristoph,
+ 
+We've observed a few times that Linux can unintentionally access a page
+we've unmapped from host's stage 2 page table via an unaligned load from
+an adjacent page. The stage 2 is managed by Gunyah. There are few
+scenarios where even though we allocate and own a page from buddy,
+someone else could try to access the page without going through the
+hypervisor driver. One such instance we know about is
+load_unaligned_zeropad() via pathlookup_at() [1].
+ 
+load_unaligned_zeropad() could be called near the end of a page. If the
+next page isn't mapped by the kernel in the stage one page tables, then
+the access from to the unmapped page from load_unaligned_zeropad() will
+land in __do_kernel_fault(), call fixup_exception(), and fill the
+remainder of the load with zeroes. If the page in question is mapped in
+stage 1 but was unmapped from stage 2, then the access lands back in
+Linux in do_sea(), leading to a panic().
+ 
+Our preference would be to add fixup_exception() to S2 PTW errors for
+two reasons:
+1. It's cheaper to do performance wise: we've already manipulated S2
+   page table and prevent intentional access to the page because
+   pKVM/Gunyah drivers know that access to the page has been lost.
+2. Page-granular S1 mappings only happen on arm64 with rodata=full.
+ 
+In an off-list discussion with the Android pkvm folks, their preference
+was to have the pages unmapped from stage 1. I've gone with that
+approach to get started but welcome discussion on the best approach.
+ 
+The Android (downstream) implementation of arm64 pkvm is currently
+implementing a hack where s2 ptw faults are given back to the host as s1
+ptw faults (i.e. __do_kernel_fault() gets called and not do_sea()) --
+allowing the kernel to fixup the exception.
+ 
+arm64 pKVM will also face this issue when implementing guest_memfd or
+when donating more memory to the hyp for s2 page tables, etc. As far as
+I can tell, this isn't an issue for arm64 pKVM today because memory
+isn't being dynamically donated to the hypervisor.
+ 
+Thanks,
+Elliot
 
-fio -name=ten-1g-per-thread --nrfiles=10 -bs=2M -ioengine=io_uring                                                                                                                            
--direct=1                                                                                                                                                                                    
---group_reporting=1 --alloc-size=1048576 --filesize=1GiB                                                                                                                                      
---readwrite=write --fallocate=none --numjobs=$(nproc) --create_on_open=1                                                                                                                      
---directory=/mnt 
+[1]:
+path_lookupat+0x340/0x3228
+filename_lookup+0xbc/0x1c0
+__arm64_sys_newfstatat+0xb0/0x4a0
+invoke_syscall+0x58/0x118
 
-What do you get for throughput?
-
-The absolute large the system an capacity the better.
-
-  Luis
 
