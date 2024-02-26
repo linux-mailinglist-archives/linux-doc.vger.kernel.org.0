@@ -1,200 +1,150 @@
-Return-Path: <linux-doc+bounces-10766-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-10768-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7185D867C57
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Feb 2024 17:45:12 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1292B867C79
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Feb 2024 17:49:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 899ED1C2B28A
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Feb 2024 16:45:11 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E05C4B26288
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Feb 2024 16:49:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A228D12C7E2;
-	Mon, 26 Feb 2024 16:44:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F098112C548;
+	Mon, 26 Feb 2024 16:49:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZWdpsm3D"
+	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="O1Fo3E7g"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f47.google.com (mail-oo1-f47.google.com [209.85.161.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3EE312C53E;
-	Mon, 26 Feb 2024 16:44:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22B5F60B9F;
+	Mon, 26 Feb 2024 16:49:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708965888; cv=none; b=jgLBaVD1xYc2uKYUw3W5P064rX+FWUqDmJJacwPlpgU40xAgzGEySXgfxkCAjH7XWCCa9crlG7jcdkuUC/DtSZ4CAj8aVFGo+8RRNvd+7tWgJRfnCBLsLNt+xgcYxo+IfN1iIHek5K1fHHqyi6PW06iGhQnmW/njl2MicmYKiP8=
+	t=1708966178; cv=none; b=UV+p8mXZyF4rPJC7HWrO2HOSiqb1s+SGKUx4m86AAM9QfHv6BzQd1rh2u+dyjY8srIX7mdFjazzCBkTn2Y1lpMAoGSybV7ZudppIDbEhzFsjAPLn8TtEwR7H/ms5a9RmHi29PpVHSEA/K3rkaru89sQITGpDPxNxNgS2/3rwM7A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708965888; c=relaxed/simple;
-	bh=y+X8P6lZt8EXbeQAdvQDhauHvvZupVn0T2o0Xx5B1Hk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=FKgyYQ+9fq/f4jQvtmzNriDD1MMNInD+2lQuWKj5AGHWwOl05rOnr0oTWaloALWWhSXm3LED7gCXwxUXqgWJBNWsisJITf2ZpGCqQiU/XvNv6UEUAoDyZ76F6Z/KrlNSUMu4XFtdqXZoqUKB9SW6ks+kKQkBeG/sQPMmul+ncQE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=groves.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZWdpsm3D; arc=none smtp.client-ip=209.85.161.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=groves.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oo1-f47.google.com with SMTP id 006d021491bc7-59fd6684316so1425987eaf.0;
-        Mon, 26 Feb 2024 08:44:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708965885; x=1709570685; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uCC5ncNmCyuQF9onN0jRe1hUy7kmROTAo9sKcTGzelU=;
-        b=ZWdpsm3DbddeLibftuPD+11d4tcB0cJ971IEmPEThGxaqY6MPGL+8xiWPuYGL3EnX2
-         o14xqgWsT6/tpbvh/OY+8gOFiGRFtDZCxt/WRNdaxmUbGKC7ak2P7wJAjanSxNXtAtrV
-         DCiFVhX0dp4YUFFcVmbTXlhcGUfbzF5uw2uWNTQCyAQhH0SZtjYiUzIralJC56lLOinQ
-         PS3YSSHRpXWwy1osEblsm3QNoHSZl9UTBpmG3+TXMH9OAEThSpfauE23fcUPqK6XEbeU
-         XoFIOMX1a8F+aMwnBA3r5E33EilWbKg8JcBZav62Yn8Y5SV2cHFYwWZG/Drs2uKU8ihl
-         QmFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708965885; x=1709570685;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uCC5ncNmCyuQF9onN0jRe1hUy7kmROTAo9sKcTGzelU=;
-        b=WjGgEoAKuFAQGEBsYXhU4SK9xIkMs52a5E4dRL/9sIxDSC5fvH7bfOVzQ+9FCAnWZI
-         TXuCTJIN1snNu53AxrvfJTkT9QIhhbkQgXO7xEEItjteBpzho4rlUgNbKDUjP12/rqRc
-         nNuX2b6LQdfkud76ITWZAXJcYbIc0muUsbRNpt1RWrc2mTGP5KnRoM+onCoemdV4y/rX
-         xvpHEkkL9nFMDCMPPHYfhsCg3a2xkVqLVhvtkABrnwm+GnNOHpQ7T1IG+fJYZbtliLXX
-         FPecvopNkrFZWt5AsTK20SyrifwTYJb4YZ6I9qEeC1Y3YfYCssKO+63jtJLNklbL8ouj
-         E6Aw==
-X-Forwarded-Encrypted: i=1; AJvYcCUsjnr/P4VTD2Rj79JHiOkfM8Iz6Jkg/7ueoir7OjWpWZAH1hiH+sblO9sp1eJLluhzs19AQRs/gtGbYBgAxifoyfLduYmjlz3IODwjyuSnEjpTuO7FBlnNJYRKd1b+QWKGxdUIBlsqyL1/dnunB3Ow+FgZ7vKhWrCcecT0YZiEoVVoTK1KBV5hwPJa1//x0rM/kzfPVDq/j2cPN3DhWVqudQ==
-X-Gm-Message-State: AOJu0YwVlRQD6GakEOUI0gG3W8JRMatRpgt9hOSPHZzP9/ByPeFsBI3D
-	bwm2y5TPm3sjs+P5JCCpp6f5KQan1u7XBxvitzRzTr1rPbloToHG
-X-Google-Smtp-Source: AGHT+IGozyu7911c+C7gQOncF2bMmF1vQ8RhljhCt730pdXma/C5hAI8bPMVZxZqqVpq06NENGZ+Fw==
-X-Received: by 2002:a4a:2404:0:b0:59f:fc30:d3aa with SMTP id m4-20020a4a2404000000b0059ffc30d3aamr6789393oof.3.1708965884933;
-        Mon, 26 Feb 2024 08:44:44 -0800 (PST)
-Received: from Borg-9.local (070-114-203-196.res.spectrum.com. [70.114.203.196])
-        by smtp.gmail.com with ESMTPSA id q30-20020a4a6c1e000000b0059fead519bdsm1303036ooc.19.2024.02.26.08.44.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Feb 2024 08:44:44 -0800 (PST)
-Sender: John Groves <grovesaustin@gmail.com>
-Date: Mon, 26 Feb 2024 10:44:43 -0600
-From: John Groves <John@groves.net>
-To: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Cc: John Groves <jgroves@micron.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Dan Williams <dan.j.williams@intel.com>, Vishal Verma <vishal.l.verma@intel.com>, 
-	Dave Jiang <dave.jiang@intel.com>, Alexander Viro <viro@zeniv.linux.org.uk>, 
-	Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, Matthew Wilcox <willy@infradead.org>, 
-	linux-cxl@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, nvdimm@lists.linux.dev, john@jagalactic.com, 
-	Dave Chinner <david@fromorbit.com>, Christoph Hellwig <hch@infradead.org>, 
-	dave.hansen@linux.intel.com, gregory.price@memverge.com
-Subject: Re: [RFC PATCH 07/20] famfs: Add include/linux/famfs_ioctl.h
-Message-ID: <z3fx5uiv6uu4sawvxrhfvx42qetchmq4ozxhq2huwg2rrcyk5c@odbiisdhop2m>
-References: <cover.1708709155.git.john@groves.net>
- <b40ca30e4bf689249a8c237909d9a7aaca9861e4.1708709155.git.john@groves.net>
- <20240226123940.0000692c@Huawei.com>
+	s=arc-20240116; t=1708966178; c=relaxed/simple;
+	bh=qgSbrEvPXdgNiC/UJm11zFW9tgsbpt+8ylKHzAn/bhs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=HR6m684adtXxOtAEjubArg48RXaO8Uy1GOm2XZlv9PBmtNsPSb8NefK8ln5IqN8VvV0HogugPNAvMxJDsM+tR1tHEkFQttOUQbK7+5t42CAdBEsfb3mhBKWFmiY2vOokzcj+8GYrfCWpYodxZFpHtaQ8+Nvnj3bu9MOl00IokOM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=O1Fo3E7g; arc=none smtp.client-ip=148.163.158.5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
+Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 41QGh0Rl003527;
+	Mon, 26 Feb 2024 16:47:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=pp1;
+ bh=UdqOq7Lx+mxt1cvwHHbViM4XUO6JWwWx781fxPxQPO8=;
+ b=O1Fo3E7gRgmssVTQRm+zDcPE9BpTYK/yPOvocD7WgmNGodQHNg+OeqrNokSZNOiwyCp8
+ m7ygfj4PjDSeAx6CMEaZJL8TVJwtfNTFzT80cUp2/1LQGU7jDOpev7yuP9kadDVYHM/x
+ 4ozFtXiCDlvs4yXpt19HRFM66QF12FWV59nGIdfehej6zwCgZWcTuQ2uaV1cEamF5cCJ
+ S9Lgn0cNvnfi0w5ld/FyXw9tUfAnatrm4+nVnlPT/0DAnbcurzsTRto8abt8NcJgfJpI
+ R0UIkMuWAG+RwasK9nS2lYyfdL+DWTQXYMPN7hH5oNvYPtl8UhhL8fyjy/hBZ9UhKB+2 fg== 
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3wgxdfr3gg-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 26 Feb 2024 16:47:07 +0000
+Received: from m0353725.ppops.net (m0353725.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 41QGjEsc011226;
+	Mon, 26 Feb 2024 16:47:07 GMT
+Received: from ppma21.wdc07v.mail.ibm.com (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3wgxdfr3fu-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 26 Feb 2024 16:47:07 +0000
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+	by ppma21.wdc07v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id 41QF8J1a021278;
+	Mon, 26 Feb 2024 16:47:06 GMT
+Received: from smtprelay04.fra02v.mail.ibm.com ([9.218.2.228])
+	by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 3wfusntdaw-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 26 Feb 2024 16:47:05 +0000
+Received: from smtpav06.fra02v.mail.ibm.com (smtpav06.fra02v.mail.ibm.com [10.20.54.105])
+	by smtprelay04.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 41QGl14M24183328
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Mon, 26 Feb 2024 16:47:04 GMT
+Received: from smtpav06.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id CAC892004B;
+	Mon, 26 Feb 2024 16:47:01 +0000 (GMT)
+Received: from smtpav06.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 8799C20040;
+	Mon, 26 Feb 2024 16:47:00 +0000 (GMT)
+Received: from [9.171.38.134] (unknown [9.171.38.134])
+	by smtpav06.fra02v.mail.ibm.com (Postfix) with ESMTP;
+	Mon, 26 Feb 2024 16:47:00 +0000 (GMT)
+Message-ID: <f7f47717-276f-47f5-af7d-4117b2eb1338@linux.ibm.com>
+Date: Mon, 26 Feb 2024 17:47:00 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240226123940.0000692c@Huawei.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next v9 06/13] net: Add struct kernel_ethtool_ts_info
+To: Kory Maincent <kory.maincent@bootlin.com>,
+        Florian Fainelli <florian.fainelli@broadcom.com>,
+        Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,
+        Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>,
+        Russell King
+ <linux@armlinux.org.uk>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Richard Cochran <richardcochran@gmail.com>,
+        Radu Pirea <radu-nicolae.pirea@oss.nxp.com>,
+        Jay Vosburgh <j.vosburgh@gmail.com>,
+        Andy Gospodarek <andy@greyhouse.net>,
+        Nicolas Ferre <nicolas.ferre@microchip.com>,
+        Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+        Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Horatiu Vultur <horatiu.vultur@microchip.com>,
+        UNGLinuxDriver@microchip.com, Simon Horman <horms@kernel.org>,
+        Vladimir Oltean <vladimir.oltean@nxp.com>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        Maxime Chevallier <maxime.chevallier@bootlin.com>,
+        Rahul Rameshbabu <rrameshbabu@nvidia.com>
+References: <20240226-feature_ptp_netnext-v9-0-455611549f21@bootlin.com>
+ <20240226-feature_ptp_netnext-v9-6-455611549f21@bootlin.com>
+Content-Language: en-US
+From: Alexandra Winter <wintera@linux.ibm.com>
+In-Reply-To: <20240226-feature_ptp_netnext-v9-6-455611549f21@bootlin.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: LQqKCQFvXnND9bQqkLWZGehnxJwN6suK
+X-Proofpoint-ORIG-GUID: GCCOKM-MW73RDG1Trk6kCKNNLXEvb2s1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-02-26_11,2024-02-26_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
+ adultscore=0 impostorscore=0 clxscore=1011 bulkscore=0 mlxscore=0
+ malwarescore=0 priorityscore=1501 spamscore=0 mlxlogscore=999
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2311290000 definitions=main-2402260127
 
-On 24/02/26 12:39PM, Jonathan Cameron wrote:
-> On Fri, 23 Feb 2024 11:41:51 -0600
-> John Groves <John@Groves.net> wrote:
+
+
+On 26.02.24 14:39, Kory Maincent wrote:
+> In prevision to add new UAPI for hwtstamp we will be limited to the struct
+> ethtool_ts_info that is currently passed in fixed binary format through the
+> ETHTOOL_GET_TS_INFO ethtool ioctl. It would be good if new kernel code
+> already started operating on an extensible kernel variant of that
+> structure, similar in concept to struct kernel_hwtstamp_config vs struct
+> hwtstamp_config.
 > 
-> > Add uapi include file for famfs. The famfs user space uses ioctl on
-> > individual files to pass in mapping information and file size. This
-> > would be hard to do via sysfs or other means, since it's
-> > file-specific.
-> > 
-> > Signed-off-by: John Groves <john@groves.net>
-> > ---
-> >  include/uapi/linux/famfs_ioctl.h | 56 ++++++++++++++++++++++++++++++++
-> >  1 file changed, 56 insertions(+)
-> >  create mode 100644 include/uapi/linux/famfs_ioctl.h
-> > 
-> > diff --git a/include/uapi/linux/famfs_ioctl.h b/include/uapi/linux/famfs_ioctl.h
-> > new file mode 100644
-> > index 000000000000..6b3e6452d02f
-> > --- /dev/null
-> > +++ b/include/uapi/linux/famfs_ioctl.h
-> > @@ -0,0 +1,56 @@
-> > +/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-> > +/*
-> > + * famfs - dax file system for shared fabric-attached memory
-> > + *
-> > + * Copyright 2023-2024 Micron Technology, Inc.
-> > + *
-> > + * This file system, originally based on ramfs the dax support from xfs,
-> > + * is intended to allow multiple host systems to mount a common file system
-> > + * view of dax files that map to shared memory.
-> > + */
-> > +#ifndef FAMFS_IOCTL_H
-> > +#define FAMFS_IOCTL_H
-> > +
-> > +#include <linux/ioctl.h>
-> > +#include <linux/uuid.h>
-> > +
-> > +#define FAMFS_MAX_EXTENTS 2
-> Why 2?
-
-You catch everything! 
-
-This limit is in place to avoid supporting somethign we're not testing. It
-will probably be raised later.
-
-Currently user space doesn't support deleting files, which makes it easy
-to ignore whether any clients have a stale view of metadata. If there is
-no delete, there's actually no reason to have more than 1 extent.
-
-> > +
-> > +enum extent_type {
-> > +	SIMPLE_DAX_EXTENT = 13,
+> Since struct ethtool_ts_info is in include/uapi/linux/ethtool.h, here
+> we introduce the kernel-only structure in include/linux/ethtool.h.
+> The manual copy is then made in the function called by ETHTOOL_GET_TS_INFO.
 > 
-> Comment on this would be good to have
+> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+> ---
 
-Done. Basically we anticipate there being other types of extents in the
-future.
-
-> 
-> > +	INVALID_EXTENT_TYPE,
-> > +};
-> > +
-> > +struct famfs_extent {
-> > +	__u64              offset;
-> > +	__u64              len;
-> > +};
-> > +
-> > +enum famfs_file_type {
-> > +	FAMFS_REG,
-> > +	FAMFS_SUPERBLOCK,
-> > +	FAMFS_LOG,
-> > +};
-> > +
-> > +/**
-> > + * struct famfs_ioc_map
-> > + *
-> > + * This is the metadata that indicates where the memory is for a famfs file
-> > + */
-> > +struct famfs_ioc_map {
-> > +	enum extent_type          extent_type;
-> > +	enum famfs_file_type      file_type;
-> 
-> These are going to be potentially varying in size depending on arch, compiler
-> settings etc.  Been a while, but I though best practice for uapi was always
-> fixed size elements even though we lose the typing.
-
-I might not be following you fully here. User space is running the same
-arch as kernel, so an enum can't be a different size, right? It could be
-a different size on different arches, but this is just between user/kernel.
-
-I initially thought of XDR for on-media-format, which file systems need
-to do with on-media structs (superblocks, logs, inodes, etc. etc.). But
-this struct is not used in that way.
-
-In fact, famfs' on-media/in-memory metadata (superblock, log, log entries)
-is only ever read read and written by user space - so it's the user space
-code that needs XDR on-media-format handling.
-
-So to clarify - do you think those enums should be u32 or the like?
-
-Thanks!
-John
-
+For drivers/s390/net/qeth_ethtool.c  :
+Acked-by: Alexandra Winter <wintera@linux.ibm.com>
 
