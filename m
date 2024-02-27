@@ -1,120 +1,314 @@
-Return-Path: <linux-doc+bounces-10847-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-10849-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9815D869137
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Feb 2024 14:03:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEE1B86915C
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Feb 2024 14:07:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C84841C21BC7
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Feb 2024 13:03:06 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id F17A11C2659F
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Feb 2024 13:07:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3CB2513329D;
-	Tue, 27 Feb 2024 13:02:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7D1F13AA51;
+	Tue, 27 Feb 2024 13:07:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HpmbbDRj"
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="lLjXBkwS";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="QuOdtqlw";
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="TDeXG6qf";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="x7kVZZ2b"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0989113B285;
-	Tue, 27 Feb 2024 13:02:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 681E31332A7;
+	Tue, 27 Feb 2024 13:07:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1709038976; cv=none; b=sJhe9cN2i7ORzDd9mOYO4GJuF1s3IOSBA5w0r9X6FnxtX8JpYQrOXu3ka9ZMBRslsNTcIsDwpTlFsrGJ9iEea1/nSd+aZ9CAkuuPZ3gdAWzaFONlxUNAwPEm5JaGx4GnJ5JESW7dJaco4mCWmttoU4NoPb1sBn+fFyLwJhJzlsc=
+	t=1709039236; cv=none; b=Mio4j+JMNG3gMZG/6mVL1ZR74IJAu3p0R9svJd0VTj9DyaCi9wvSWhahm1sUTFV5pw0iNwlNGwYhFblZfaPoTLvRFgQqKB/CwiZ1xs4gwTlHvvsNbn24BgTUb6OQwpHgIv3TeC0WiyiCv+v+t5qYpiOFR/j2ORhAIa2j2l8YObM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1709038976; c=relaxed/simple;
-	bh=K8zljY/jOjHfxijTuYAHOGluUedQxnvvUsTqJTxkXzg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lheQu2czqLTSeP4NK3mxt33Edb02KQjVy/vzbIwpmyC2cAXBhCnrSl0FIm+7M1+sjkkEwlaM63ZbXKCV2Jimg0wpyMUp6Fd3RdxGX+4rgSXmfY8r82rnPJZbRJepHBQ9PV5w9WFMgOKSQqs1ULqTgiwnSrJragLaGUDaH71vYSs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HpmbbDRj; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1EFF9C433C7;
-	Tue, 27 Feb 2024 13:02:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1709038975;
-	bh=K8zljY/jOjHfxijTuYAHOGluUedQxnvvUsTqJTxkXzg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=HpmbbDRj7DsgN7C+l0Nsac1JlsRLWmqQFqIGFCkbGxKteJFERSFF+sy5GSXwIUKOl
-	 1kkVc2T/o/MNqrMmzbg17m2eYF6giueFjm/iXh9pf2CTrYHd47O+0DLs4CEziLmag8
-	 lqW9T5vGj5jb4I/IQrlatzFgMDOEdJ/eRHcrhERUkTuHuE8WE+FOtIFVQzNJgQI/lj
-	 OFaxV54oZfzgTYDOWj2C6vzyr4cJuzXRtb/dJdW0m/t2DP1h4rYOn8Igyw+lT1MbkT
-	 /xuvt7TFgTDGlZKwg3dCxaPdPdNMiNJuceUy7f/c67/fGV4PZe0iHlh4EjMBSjdirU
-	 qpD4wU3U97/2A==
-Date: Tue, 27 Feb 2024 14:02:52 +0100
-From: Maxime Ripard <mripard@kernel.org>
-To: =?utf-8?B?TWHDrXJh?= Canal <mcanal@igalia.com>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
-	Daniel Vetter <daniel@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, 
-	Sandy Huang <hjc@rock-chips.com>, Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>, 
-	Chen-Yu Tsai <wens@csie.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
-	Samuel Holland <samuel@sholland.org>, Hans Verkuil <hverkuil@xs4all.nl>, 
-	Sebastian Wick <sebastian.wick@redhat.com>, Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>, 
-	dri-devel@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-rockchip@lists.infradead.org, 
-	linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v7 29/36] drm/vc4: tests: Remove vc4_dummy_plane structure
-Message-ID: <y7mxj2i56h7bcnonywjdf2eirdqil66k32drw3wb3z7juqr3ph@4u24mlrvxslc>
-References: <20240222-kms-hdmi-connector-state-v7-0-8f4af575fce2@kernel.org>
- <20240222-kms-hdmi-connector-state-v7-29-8f4af575fce2@kernel.org>
- <244fe6b9-f295-4c85-908a-014ada0033fa@igalia.com>
+	s=arc-20240116; t=1709039236; c=relaxed/simple;
+	bh=0isnxikG8GrDJkS92OJPHouLCX1i2vGfJQ6mWe0D9QQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=gWKCz7FiL3CBvxmYo/SbyOmvBykcvGXO24/TOxl4snwSNIssaQlqH+XFVgXiKF2co4BH0KwbkWa9HW+NOs3QR8zIehiDiq96UrWJRw/IVdpUqnF3A4hqiw9061n7vgjGttTXA5Ik6Ft/HyG7v6jnVUaPjgGtdY/HARk/9F0bgi4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=lLjXBkwS; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=QuOdtqlw; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=TDeXG6qf; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=x7kVZZ2b; arc=none smtp.client-ip=195.135.223.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id A8D1D1FB96;
+	Tue, 27 Feb 2024 13:07:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1709039230; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=cW70zYu78ce27du6nFlEM9h9LcRqy3qIdoJOEMgxHrU=;
+	b=lLjXBkwSq4zVWDpU6/ofgbzfBCnuGD7WdSXfD8ViQQRE1+HKJbO34+Gzh29oHqfhywajAJ
+	xd6VpHYHeA+lMIDc2X0LUuilIJLgFgRUWpX0+2USkX8CkBSSuM5wQ8HcvRNtGEJDU8zQzg
+	B1EiPMFl21up4fU4/nhvYVWOow9hpcQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1709039230;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=cW70zYu78ce27du6nFlEM9h9LcRqy3qIdoJOEMgxHrU=;
+	b=QuOdtqlwB2n5UpUvZAQXn1p6d3jd41mAMNMufuBBkSELyBp/2B9PV6bswWPZs/NGwzSwma
+	MfH9Uc8gUFNHdnBQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1709039228; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=cW70zYu78ce27du6nFlEM9h9LcRqy3qIdoJOEMgxHrU=;
+	b=TDeXG6qfFssifgl/IwZPUo2hz8sRgPKz7Rc+MiJVTP4aR1BZWy7Q6jkFcRNhFXSoq9UfSu
+	cN35aZnq5noMPiPIwcTJ6Wbc9eN5lKdjPWO9jqaZdLUwn/xvaDQoSSCKZCpxQKC8uBTm+U
+	soVbxLp9C4/rdFn1gbl5nYmN0zVuniQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1709039228;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=cW70zYu78ce27du6nFlEM9h9LcRqy3qIdoJOEMgxHrU=;
+	b=x7kVZZ2bAkzoDmE//U9l56lfDmWmTUJkTS193DKe/lp6VGXut63+mJFIV0tJi7b7AxADyk
+	Pb79/ZLGUtSXyIBA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id F129813A58;
+	Tue, 27 Feb 2024 13:07:06 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([10.150.64.162])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id XexAOnre3WWJKQAAD6G6ig
+	(envelope-from <vbabka@suse.cz>); Tue, 27 Feb 2024 13:07:06 +0000
+Message-ID: <4a0e40e5-3542-4d47-bb2b-c0666f6a904d@suse.cz>
+Date: Tue, 27 Feb 2024 14:07:38 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="cwsjmzyidxiy2r5i"
-Content-Disposition: inline
-In-Reply-To: <244fe6b9-f295-4c85-908a-014ada0033fa@igalia.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 22/36] mm/slab: add allocation accounting into slab
+ allocation and free paths
+Content-Language: en-US
+To: Suren Baghdasaryan <surenb@google.com>, akpm@linux-foundation.org
+Cc: kent.overstreet@linux.dev, mhocko@suse.com, hannes@cmpxchg.org,
+ roman.gushchin@linux.dev, mgorman@suse.de, dave@stgolabs.net,
+ willy@infradead.org, liam.howlett@oracle.com,
+ penguin-kernel@i-love.sakura.ne.jp, corbet@lwn.net, void@manifault.com,
+ peterz@infradead.org, juri.lelli@redhat.com, catalin.marinas@arm.com,
+ will@kernel.org, arnd@arndb.de, tglx@linutronix.de, mingo@redhat.com,
+ dave.hansen@linux.intel.com, x86@kernel.org, peterx@redhat.com,
+ david@redhat.com, axboe@kernel.dk, mcgrof@kernel.org, masahiroy@kernel.org,
+ nathan@kernel.org, dennis@kernel.org, tj@kernel.org, muchun.song@linux.dev,
+ rppt@kernel.org, paulmck@kernel.org, pasha.tatashin@soleen.com,
+ yosryahmed@google.com, yuzhao@google.com, dhowells@redhat.com,
+ hughd@google.com, andreyknvl@gmail.com, keescook@chromium.org,
+ ndesaulniers@google.com, vvvvvv@google.com, gregkh@linuxfoundation.org,
+ ebiggers@google.com, ytcoode@gmail.com, vincent.guittot@linaro.org,
+ dietmar.eggemann@arm.com, rostedt@goodmis.org, bsegall@google.com,
+ bristot@redhat.com, vschneid@redhat.com, cl@linux.com, penberg@kernel.org,
+ iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com, glider@google.com,
+ elver@google.com, dvyukov@google.com, shakeelb@google.com,
+ songmuchun@bytedance.com, jbaron@akamai.com, rientjes@google.com,
+ minchan@google.com, kaleshsingh@google.com, kernel-team@android.com,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ iommu@lists.linux.dev, linux-arch@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+ linux-modules@vger.kernel.org, kasan-dev@googlegroups.com,
+ cgroups@vger.kernel.org
+References: <20240221194052.927623-1-surenb@google.com>
+ <20240221194052.927623-23-surenb@google.com>
+From: Vlastimil Babka <vbabka@suse.cz>
+In-Reply-To: <20240221194052.927623-23-surenb@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spam-Level: 
+X-Spam-Score: -2.79
+X-Spamd-Result: default: False [-2.79 / 50.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 XM_UA_NO_VERSION(0.01)[];
+	 FROM_HAS_DN(0.00)[];
+	 TO_DN_SOME(0.00)[];
+	 MID_RHS_MATCH_FROM(0.00)[];
+	 TAGGED_RCPT(0.00)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 NEURAL_HAM_LONG(-1.00)[-1.000];
+	 BAYES_HAM(-3.00)[100.00%];
+	 RCVD_COUNT_THREE(0.00)[3];
+	 TO_MATCH_ENVRCPT_SOME(0.00)[];
+	 DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	 NEURAL_HAM_SHORT(-0.20)[-0.999];
+	 RCPT_COUNT_GT_50(0.00)[74];
+	 DBL_BLOCKED_OPENRESOLVER(0.00)[chromium.org:email,linux.dev:email];
+	 FUZZY_BLOCKED(0.00)[rspamd.com];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 FREEMAIL_CC(0.00)[linux.dev,suse.com,cmpxchg.org,suse.de,stgolabs.net,infradead.org,oracle.com,i-love.sakura.ne.jp,lwn.net,manifault.com,redhat.com,arm.com,kernel.org,arndb.de,linutronix.de,linux.intel.com,kernel.dk,soleen.com,google.com,gmail.com,chromium.org,linuxfoundation.org,linaro.org,goodmis.org,linux.com,lge.com,bytedance.com,akamai.com,android.com,vger.kernel.org,lists.linux.dev,kvack.org,googlegroups.com];
+	 RCVD_TLS_ALL(0.00)[];
+	 SUSPICIOUS_RECIPS(1.50)[]
+X-Spam-Flag: NO
 
 
---cwsjmzyidxiy2r5i
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Hi Ma=EDra,
+On 2/21/24 20:40, Suren Baghdasaryan wrote:
+> Account slab allocations using codetag reference embedded into slabobj_ext.
+> 
+> Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+> Co-developed-by: Kent Overstreet <kent.overstreet@linux.dev>
+> Signed-off-by: Kent Overstreet <kent.overstreet@linux.dev>
+> Reviewed-by: Kees Cook <keescook@chromium.org>
+> ---
+>  mm/slab.h | 66 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  mm/slub.c |  9 ++++++++
+>  2 files changed, 75 insertions(+)
+> 
+> diff --git a/mm/slab.h b/mm/slab.h
+> index 13b6ba2abd74..c4bd0d5348cb 100644
+> --- a/mm/slab.h
+> +++ b/mm/slab.h
+> @@ -567,6 +567,46 @@ static inline struct slabobj_ext *slab_obj_exts(struct slab *slab)
+>  int alloc_slab_obj_exts(struct slab *slab, struct kmem_cache *s,
+>  			gfp_t gfp, bool new_slab);
+>  
+> +static inline bool need_slab_obj_ext(void)
+> +{
+> +#ifdef CONFIG_MEM_ALLOC_PROFILING
+> +	if (mem_alloc_profiling_enabled())
+> +		return true;
+> +#endif
+> +	/*
+> +	 * CONFIG_MEMCG_KMEM creates vector of obj_cgroup objects conditionally
+> +	 * inside memcg_slab_post_alloc_hook. No other users for now.
+> +	 */
+> +	return false;
+> +}
+> +
+> +static inline struct slabobj_ext *
+> +prepare_slab_obj_exts_hook(struct kmem_cache *s, gfp_t flags, void *p)
+> +{
+> +	struct slab *slab;
+> +
+> +	if (!p)
+> +		return NULL;
+> +
+> +	if (!need_slab_obj_ext())
+> +		return NULL;
+> +
+> +	if (s->flags & SLAB_NO_OBJ_EXT)
+> +		return NULL;
+> +
+> +	if (flags & __GFP_NO_OBJ_EXT)
+> +		return NULL;
+> +
+> +	slab = virt_to_slab(p);
+> +	if (!slab_obj_exts(slab) &&
+> +	    WARN(alloc_slab_obj_exts(slab, s, flags, false),
+> +		 "%s, %s: Failed to create slab extension vector!\n",
+> +		 __func__, s->name))
+> +		return NULL;
+> +
+> +	return slab_obj_exts(slab) + obj_to_index(s, slab, p);
+> +}
+> +
+>  #else /* CONFIG_SLAB_OBJ_EXT */
+>  
+>  static inline struct slabobj_ext *slab_obj_exts(struct slab *slab)
+> @@ -589,6 +629,32 @@ prepare_slab_obj_exts_hook(struct kmem_cache *s, gfp_t flags, void *p)
+>  
+>  #endif /* CONFIG_SLAB_OBJ_EXT */
+>  
+> +#ifdef CONFIG_MEM_ALLOC_PROFILING
+> +
+> +static inline void alloc_tagging_slab_free_hook(struct kmem_cache *s, struct slab *slab,
+> +					void **p, int objects)
 
-Thanks for you reviews!
+Only used from mm/slub.c so could move?
 
-On Mon, Feb 26, 2024 at 09:29:32AM -0300, Ma=EDra Canal wrote:
-> On 2/22/24 15:14, Maxime Ripard wrote:
-> > The vc4_dummy_plane structure is an exact equivalent to vc4_plane, so we
->=20
-> Maybe I understood incorrectly, but isn't the vc4_dummy_plane structure
-> equivalent to drm_plane?
+> +{
+> +	struct slabobj_ext *obj_exts;
+> +	int i;
+> +
+> +	obj_exts = slab_obj_exts(slab);
+> +	if (!obj_exts)
+> +		return;
+> +
+> +	for (i = 0; i < objects; i++) {
+> +		unsigned int off = obj_to_index(s, slab, p[i]);
+> +
+> +		alloc_tag_sub(&obj_exts[off].ref, s->size);
+> +	}
+> +}
+> +
+> +#else
+> +
+> +static inline void alloc_tagging_slab_free_hook(struct kmem_cache *s, struct slab *slab,
+> +					void **p, int objects) {}
+> +
+> +#endif /* CONFIG_MEM_ALLOC_PROFILING */
+> +
+>  #ifdef CONFIG_MEMCG_KMEM
+>  void mod_objcg_state(struct obj_cgroup *objcg, struct pglist_data *pgdat,
+>  		     enum node_stat_item idx, int nr);
+> diff --git a/mm/slub.c b/mm/slub.c
+> index 5dc7beda6c0d..a69b6b4c8df6 100644
+> --- a/mm/slub.c
+> +++ b/mm/slub.c
+> @@ -3826,6 +3826,7 @@ void slab_post_alloc_hook(struct kmem_cache *s,	struct obj_cgroup *objcg,
+>  			  unsigned int orig_size)
+>  {
+>  	unsigned int zero_size = s->object_size;
+> +	struct slabobj_ext *obj_exts;
+>  	bool kasan_init = init;
+>  	size_t i;
+>  	gfp_t init_flags = flags & gfp_allowed_mask;
+> @@ -3868,6 +3869,12 @@ void slab_post_alloc_hook(struct kmem_cache *s,	struct obj_cgroup *objcg,
+>  		kmemleak_alloc_recursive(p[i], s->object_size, 1,
+>  					 s->flags, init_flags);
+>  		kmsan_slab_alloc(s, p[i], init_flags);
+> +		obj_exts = prepare_slab_obj_exts_hook(s, flags, p[i]);
+> +#ifdef CONFIG_MEM_ALLOC_PROFILING
+> +		/* obj_exts can be allocated for other reasons */
+> +		if (likely(obj_exts) && mem_alloc_profiling_enabled())
+> +			alloc_tag_add(&obj_exts->ref, current->alloc_tag, s->size);
+> +#endif
 
-Both statements are true :)
+I think that like in the page allocator, this could be better guarded by
+mem_alloc_profiling_enabled() as the outermost thing.
 
-vc4 itself uses vc4_plane to holds its plane-related content, but it
-turns out that there's nothing in that structure anymore and vc4_plane
-=3D=3D drm_plane.
+>  	}
+>  
+>  	memcg_slab_post_alloc_hook(s, objcg, flags, size, p);
+> @@ -4346,6 +4353,7 @@ void slab_free(struct kmem_cache *s, struct slab *slab, void *object,
+>  	       unsigned long addr)
+>  {
+>  	memcg_slab_free_hook(s, slab, &object, 1);
+> +	alloc_tagging_slab_free_hook(s, slab, &object, 1);
 
-In our mock driver, we have another structure meant to store the
-mock-plane-related content which doesn't have anything in it anymore,
-and is thus equivalent to vc4_plane.
+Same here, the static key is not even inside of this?
 
-So, basically, vc4_dummy_plane =3D=3D vc4_plane =3D=3D drm_plane.
+>  
+>  	if (likely(slab_free_hook(s, object, slab_want_init_on_free(s))))
+>  		do_slab_free(s, slab, object, object, 1, addr);
+> @@ -4356,6 +4364,7 @@ void slab_free_bulk(struct kmem_cache *s, struct slab *slab, void *head,
+>  		    void *tail, void **p, int cnt, unsigned long addr)
+>  {
+>  	memcg_slab_free_hook(s, slab, p, cnt);
+> +	alloc_tagging_slab_free_hook(s, slab, p, cnt);
 
-This patch is only about getting rid of vc4_dummy_plane though.
+Ditto.
 
-Is it clearer?
-
-Maxime
-
---cwsjmzyidxiy2r5i
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZd3dfAAKCRDj7w1vZxhR
-xQB3AQCM6yIbUIAvcz/rSyKw6mmw6G4nrZh7GPft2T1APOLu4wEAylXMYpdYV8KH
-P8oZ7t3+gt3/8m9lr6IwSflU4vD4bwI=
-=qSeA
------END PGP SIGNATURE-----
-
---cwsjmzyidxiy2r5i--
+>  	/*
+>  	 * With KASAN enabled slab_free_freelist_hook modifies the freelist
+>  	 * to remove objects, whose reuse must be delayed.
 
