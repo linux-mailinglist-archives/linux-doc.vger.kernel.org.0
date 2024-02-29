@@ -1,125 +1,111 @@
-Return-Path: <linux-doc+bounces-11118-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-11116-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 690BF86D445
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Feb 2024 21:33:48 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 18BDE86D430
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Feb 2024 21:29:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9B0AD1C20826
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Feb 2024 20:33:47 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 973821F23CF6
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Feb 2024 20:29:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8F271428ED;
-	Thu, 29 Feb 2024 20:33:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 181F01428E5;
+	Thu, 29 Feb 2024 20:28:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="d2IgmnOM"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TZx/Wzeb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC5DA12FB0B
-	for <linux-doc@vger.kernel.org>; Thu, 29 Feb 2024 20:33:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FD0913F447;
+	Thu, 29 Feb 2024 20:28:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1709238824; cv=none; b=ezjLJgGuBg5lhEeQKpqyiEgKVWxmCGmNciaiX08CrF+H0qjLusK0RxDAGW7jFBOB6yfTFvFU4VcsMRvSVsakHTXiJO+gXMfGb1xoR6DgjROeq5m0RoRelHbWFVd5q96+EDNAbP7djcuYChT45lWiQF8ilFPCX7qW5H7l966kH24=
+	t=1709238530; cv=none; b=DWiHfWIWkL21BSd13O3A445zlq3+f308CcdWQYrF4dGMdRC1yZQiAqv+LMnK/qlb6H6XI3mN3UHtNw1FcXW5jKQtWZyhkOC6gt/lYzHXK9kx+RDngOXtI2/eU7T9V2fE2EyI7PnS5BHRXx5WCoo77Y60htP0ODNuFI6JmzK7cz4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1709238824; c=relaxed/simple;
-	bh=NVxrcJoo12TU3qZCW+W6Vd8nOd2A/gUPkg/bJzxkS/8=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=s2LI8rsOxaA/NeAHCCt08xieTl0pA/jbD4RNt4RHvHuKNiBtKx6vvQP1gEbplznq6dX7cSEg8oQX5y+vBNC5IlpPqfwtiiJi4//n3yzfgvoITc7rm04pcNwWupDcFDhw3oEE3hN5MkipdxvzzTLXILIGU1dgYiAPZh3kC0rQWdQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=d2IgmnOM; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1709238821;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=SmIHX6Y7vZxIL5GaMIQETwxnKgF7XXugu9W+eqW/pI8=;
-	b=d2IgmnOMk2VyEcgBGVAsEUnQPDs7H9PI48zCxzU7V85XVFSeQAbNhvryPO1MmFUGydztq0
-	P4phTKMbupD/EsFqFMePwLZjx8c1W4zUlO7fKJzZ5lph8XqIdTDXWPK/exqmtStLC01oCI
-	Fhsncu43OHtICu4pp1HIqODFWdLNt5o=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-661-RIDhUS8LP4iqTJPrBISx8w-1; Thu, 29 Feb 2024 15:33:40 -0500
-X-MC-Unique: RIDhUS8LP4iqTJPrBISx8w-1
-Received: by mail-wr1-f72.google.com with SMTP id ffacd0b85a97d-33e0d943844so466379f8f.1
-        for <linux-doc@vger.kernel.org>; Thu, 29 Feb 2024 12:33:40 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709238515; x=1709843315;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+	s=arc-20240116; t=1709238530; c=relaxed/simple;
+	bh=KFX1TCMwnm/yL0uHJIWoMdu2yhBd4riGw+GeL8KJaF8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=tLf6Rm0XP+wiedmqLtvkaKGEklpesdHk/N13nH8qWpYqTpSArT+FkgV5zzGVrP1qJurOaKrVwPqgQqvEKqYilokJe8/UfoWG50LsBdbiJQwN8/loJKLQ77gYo8CpoQ1VEDEjA20kWOlyKIJ+fzPlLc46qNi1bnd4DuQDaq6aMfc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TZx/Wzeb; arc=none smtp.client-ip=209.85.214.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-1dcafff3c50so11789845ad.0;
+        Thu, 29 Feb 2024 12:28:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1709238528; x=1709843328; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=SmIHX6Y7vZxIL5GaMIQETwxnKgF7XXugu9W+eqW/pI8=;
-        b=bUx/vjJxST0YtTqa4htn5Je6n+fgX1Be9XCnjat4IQOOQ5AuG+wOAJ12qjFHaPvu+d
-         Ighz1mxCOGVDDs1Ns9wFMhnSRXwmt5BSzNbCik6+FPXOEqju0hNavBUfImzue67v6eBL
-         e4KD+otcAETtNnCorYbbnFsYaT9Iogl94stkiDWMAQ9E8qR4CteMShtu+DEgEGXZQmAG
-         sXuoo/WkDQROUXTUTJjiHlDpbTUhL0MKpmo3DxVAJcMbR3aT5BFSHaefPkQoQ+/t7w9q
-         o+UR83/DEdwY3P38o2n+fCTsbSUYCwSlcY1wkIYsdqPNpcOQIpOBXx4epOT6yLLHV6/Q
-         r/6g==
-X-Forwarded-Encrypted: i=1; AJvYcCU3oj+BEdyeBcuswWwD6e0asLyKKa2+T6I5LCUrvREF3ayYGbWW5oECI9oSH6mqDqn9g6Pp6w2U+UUus5BFmzytdmWl4zjnVgDV
-X-Gm-Message-State: AOJu0YxYCFndwxvryYiu3jVXK6EJAK0AbxVMlSz+yhT/LKWDFaAP8K42
-	tHPkRX+HIpNIS6b56JTWsZmW8HBy6pbDn/AM8kOZgSZeAn5ApopwSIeQRZapeyhMsal65XBUdd/
-	EB9k7VFUYHnV+QUsQ+3gepzixRuu9lBcWQq9uA34YDK73e7q3Y7ArYvg9iA==
-X-Received: by 2002:a5d:49cb:0:b0:33e:1818:7956 with SMTP id t11-20020a5d49cb000000b0033e18187956mr86353wrs.5.1709238515383;
-        Thu, 29 Feb 2024 12:28:35 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE5Jx2+Irv/obGwjeP9whbDMr+s9YId14EB3u4zXUdHLaSwpMrti0IWA9JKGqUMoV8obWO77Q==
-X-Received: by 2002:a5d:49cb:0:b0:33e:1818:7956 with SMTP id t11-20020a5d49cb000000b0033e18187956mr86343wrs.5.1709238515052;
-        Thu, 29 Feb 2024 12:28:35 -0800 (PST)
-Received: from toolbox.fritz.box ([2001:9e8:8984:bd00:2340:7b35:5e60:4abd])
-        by smtp.gmail.com with ESMTPSA id h5-20020adf9cc5000000b0033dd9b050f9sm2604385wre.14.2024.02.29.12.28.34
+        bh=9VSE+Pm8C/sEK5iU2pg56gusVe39c03R2dAi7lJgdVQ=;
+        b=TZx/Wzebt2rzqyXN8RSVDwErWQV+EpSbv0cWukYa+vzJ47b7HuolBnrNDuEyJJV3/8
+         9PHu54xTlIYaBce/cK4XhcKrBn5fU6ecnTuwCIBf1SqTBof3UunUuOYOiye6yMGibLZ+
+         MALgCvKQkKLyGd3YB+tunO8lIuHNdxHLhPksrmfTWHeHgDy/jbX3YkYfw9+SUPzFK8F4
+         56CeqVlDrv/DPuPBGHrqJbNRmdxfxRzYwNIbGB8Jm6WLiRrWfpQEwCfTkWpqO877VUFB
+         9xqCHl0yBqyi6xJh8YN+HaMqyzmNU/BakwraV61l5+bMZIgNP4fP32iYaJ1Vfo8d52ng
+         xLsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1709238528; x=1709843328;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=9VSE+Pm8C/sEK5iU2pg56gusVe39c03R2dAi7lJgdVQ=;
+        b=P2qFaIbgEK6UQIJRDNecCN4ewTB9QbphVH3IOd+1BEzyo/LI1Ko37ugDhz7iDZvL+o
+         aMh1Th2v8XsbVlicWBB44X+dWZ8H9upF8V8GXzneWHnF8HCdk48+pMunrmXy7hLcXOs2
+         bSYa8x4CIMBBbZDTu88z+3Oq6Q8m9aksSCd4X+rbwhzWfWKtBrxcYQUfK9vsHyeu8Tla
+         oA9AOt+G4AGoBbMCHjCvrZzUl/sOX3hupEW3CGY3S5av8w9EzkqXVmJ78waBmtfUok5F
+         g3pJFFXrCrk1ZQPzzoeA4DIKLLuDHYzHhIBDYUkKScOgMmfBlvSAAa1twzHbhE5kXbt6
+         jJOw==
+X-Forwarded-Encrypted: i=1; AJvYcCWscRtEyfDFGiT6+YSMKtBdWX3EkXzpTASRltdtFrF47bohggu/tqnsArvJUdEV7H53FVe3UKm6JYheer7ryNXiFrdR2t4LetVCNtUu2xEKy1jZIYRKqvkf1csxVCkWVaZijB5Y6LY9pusD9Wrksb+s/yI207OPT42s+MuckCX6yoFNayyRYI2j+i7VzHyLeHwfsyGkkXzj9xEm5Q==
+X-Gm-Message-State: AOJu0Yxw79B6FghOU5npwnZwnIbONjceC24J5g8g77zAbLm1XG1fVeDD
+	sKxM8HYcCgdvxzYifrklZlalDNrFo2hwjflj39kKrFDZzuvvJuQ4
+X-Google-Smtp-Source: AGHT+IGRU+IzisICIwXmJa1iH8rdoES4zwYMUZNyG1kCHKTbFlaZJKAx3cqhxR9JFJXiLqyuOKk7zg==
+X-Received: by 2002:a17:902:e811:b0:1dc:7856:2210 with SMTP id u17-20020a170902e81100b001dc78562210mr4168597plg.36.1709238527798;
+        Thu, 29 Feb 2024 12:28:47 -0800 (PST)
+Received: from localhost ([2620:10d:c090:400::5:8305])
+        by smtp.gmail.com with ESMTPSA id kw13-20020a170902f90d00b001dc90ac1cecsm1917293plb.284.2024.02.29.12.28.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Feb 2024 12:28:34 -0800 (PST)
-From: Sebastian Wick <sebastian.wick@redhat.com>
-To: 
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	Jonathan Corbet <corbet@lwn.net>,
-	dri-devel@lists.freedesktop.org,
-	linux-doc@vger.kernel.org,
+        Thu, 29 Feb 2024 12:28:47 -0800 (PST)
+Sender: Tejun Heo <htejun@gmail.com>
+Date: Thu, 29 Feb 2024 10:28:45 -1000
+From: Tejun Heo <tj@kernel.org>
+To: Xiongwei Song <xiongwei.song@windriver.com>
+Cc: longman@redhat.com, lizefan.x@bytedance.com, hannes@cmpxchg.org,
+	corbet@lwn.net, vbabka@suse.cz, yosryahmed@google.com,
+	rostedt@goodmis.org, cl@linux.com, chengming.zhou@linux.dev,
+	zhengyejian1@huawei.com, cgroups@vger.kernel.org,
+	linux-mmc@vger.kernel.org, linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH] drm: Document requirements for driver-specific KMS props in new drivers
-Date: Thu, 29 Feb 2024 21:28:31 +0100
-Message-ID: <20240229202833.198691-1-sebastian.wick@redhat.com>
-X-Mailer: git-send-email 2.44.0
+Subject: Re: [PATCH 1/2] cgroup/cpuset: Remove cpuset_do_slab_mem_spread()
+Message-ID: <ZeDo_U5j7N7sH_v0@slm.duckdns.org>
+References: <20240229142007.1278610-1-xiongwei.song@windriver.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240229142007.1278610-1-xiongwei.song@windriver.com>
 
-When extending support for a driver-specific KMS property to additional
-drivers, we should apply all the requirements for new properties and
-make sure the semantics are the same and documented.
+On Thu, Feb 29, 2024 at 10:20:06PM +0800, Xiongwei Song wrote:
+> The SLAB allocator has been removed sine 6.8-rc1 [1], so there is no user
+> with SLAB_MEM_SPREAD and cpuset_do_slab_mem_spread(). Then SLAB_MEM_SPREAD
+> is marked as unused by [2]. Here we can remove
+> cpuset_do_slab_mem_spread(). For more details, please check [3].
+> 
+> [1] https://lore.kernel.org/linux-mm/20231120-slab-remove-slab-v2-0-9c9c70177183@suse.cz/
+> [2] https://lore.kernel.org/linux-kernel/20240223-slab-cleanup-flags-v2-0-02f1753e8303@suse.cz/T/
+> [3] https://lore.kernel.org/lkml/32bc1403-49da-445a-8c00-9686a3b0d6a3@redhat.com/T/#mf14b838c5e0e77f4756d436bac3d8c0447ea4350
+> 
+> Signed-off-by: Xiongwei Song <xiongwei.song@windriver.com>
 
-Signed-off-by: Sebastian Wick <sebastian.wick@redhat.com>
----
- Documentation/gpu/drm-kms.rst | 5 +++++
- 1 file changed, 5 insertions(+)
+Applied to cgroup/for-6.9.
 
-diff --git a/Documentation/gpu/drm-kms.rst b/Documentation/gpu/drm-kms.rst
-index 13d3627d8bc0..afa10a28035f 100644
---- a/Documentation/gpu/drm-kms.rst
-+++ b/Documentation/gpu/drm-kms.rst
-@@ -496,6 +496,11 @@ addition to the one mentioned above:
- 
- * An IGT test must be submitted where reasonable.
- 
-+For historical reasons, non-standard, driver-specific properties exist. If a KMS
-+driver wants to add support for one of those properties, the requirements for
-+new properties apply where possible. Additionally, the documented behavior must
-+match the de facto semantics of the existing property to ensure compatibility.
-+
- Property Types and Blob Property Support
- ----------------------------------------
- 
+Thanks.
+
 -- 
-2.43.0
-
+tejun
 
