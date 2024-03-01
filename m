@@ -1,183 +1,133 @@
-Return-Path: <linux-doc+bounces-11158-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-11160-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DD1986E1E0
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Mar 2024 14:20:24 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id F08FE86E1EE
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Mar 2024 14:24:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1ADEF1F21DBB
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Mar 2024 13:20:24 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0A3331C22E6B
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Mar 2024 13:24:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 62C996D517;
-	Fri,  1 Mar 2024 13:19:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F9A86D1D7;
+	Fri,  1 Mar 2024 13:24:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=med.uni-goettingen.de header.i=@med.uni-goettingen.de header.b="Ps5nlape"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout11.his.huawei.com (frasgout11.his.huawei.com [14.137.139.23])
+Received: from mail1.med.uni-goettingen.de (mail1.med.uni-goettingen.de [134.76.103.230])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8867E5F483;
-	Fri,  1 Mar 2024 13:19:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.23
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0267F6D1A7
+	for <linux-doc@vger.kernel.org>; Fri,  1 Mar 2024 13:24:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=134.76.103.230
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1709299178; cv=none; b=iqx66ydRkqEKhPGhqzq4ObCeQ6MEa++wyLmFu93Bocwgo3q0QAfoX9m1zkAx7ipocwMPYTiBWHpsr10vHQy85vnx2seTTG67QOfsT1wlrUQnCZ7cMEtJbilOcIFUwj2Srfs8yVatPii0u47k2h0VqMvgd4KYHWaMMli1V6AeWG4=
+	t=1709299454; cv=none; b=EZtxKDGnGSt1IlW+H5SFl4zfIdteZ5inCjQszM4vJSDUJuWa0xslD8Q71TJVoquIa0vl5JRngVcj4a5zTB7aNuWDpn6lp3regtWQIEWHHiEmEya9874DVFm1YrASQYb3HDDiuSYnkg9/H/fAkliquuWwjMYra4QY++/VDRt7hL0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1709299178; c=relaxed/simple;
-	bh=xRLjt2ZtMD2Q1XzlAIEVwSLp295JjvW6H5VxtRoWhCs=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=VVz/xu4/nMnhNsDnOFsMpXaoaixfFY9kG67aroeQ+ZoUsWr3H+wi3V8zcu9fHAaL2IC29akD7I5FKrZUygj8oyjvWqFvAUu8n9iovs2jlUYf6F7R0IFYX307NUpJENygt7bbCk5Xy9wHcJZYx7SPpS/6X4ll8RkfiHFBcqvwrww=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.23
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.18.186.51])
-	by frasgout11.his.huawei.com (SkyGuard) with ESMTP id 4TmSvw53b9z9y0Nw;
-	Fri,  1 Mar 2024 21:03:56 +0800 (CST)
-Received: from mail02.huawei.com (unknown [7.182.16.27])
-	by mail.maildlp.com (Postfix) with ESMTP id 279D01400D2;
-	Fri,  1 Mar 2024 21:19:32 +0800 (CST)
-Received: from [127.0.0.1] (unknown [10.204.63.22])
-	by APP2 (Coremail) with SMTP id GxC2BwDHACXT1eFlyDx6Aw--.60471S2;
-	Fri, 01 Mar 2024 14:19:31 +0100 (CET)
-Message-ID: <e6f263b25061651e948a881d36bfdff17cfaf1b0.camel@huaweicloud.com>
-Subject: Re: [PATCH v2 14/25] evm: add support for fscaps security hooks
-From: Roberto Sassu <roberto.sassu@huaweicloud.com>
-To: Christian Brauner <brauner@kernel.org>
-Cc: "Seth Forshee (DigitalOcean)" <sforshee@kernel.org>, Serge Hallyn
- <serge@hallyn.com>, Paul Moore <paul@paul-moore.com>, Eric Paris
- <eparis@redhat.com>, James Morris <jmorris@namei.org>, Alexander Viro
- <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>, Stephen Smalley
- <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace@redhat.com>, 
- Casey Schaufler <casey@schaufler-ca.com>, Mimi Zohar <zohar@linux.ibm.com>,
- Roberto Sassu <roberto.sassu@huawei.com>,  Dmitry Kasatkin
- <dmitry.kasatkin@gmail.com>, Eric Snowberg <eric.snowberg@oracle.com>,
- "Matthew Wilcox (Oracle)" <willy@infradead.org>, Jonathan Corbet
- <corbet@lwn.net>, Miklos Szeredi <miklos@szeredi.hu>, Amir Goldstein
- <amir73il@gmail.com>,  linux-kernel@vger.kernel.org,
- linux-fsdevel@vger.kernel.org,  linux-security-module@vger.kernel.org,
- audit@vger.kernel.org,  selinux@vger.kernel.org,
- linux-integrity@vger.kernel.org,  linux-doc@vger.kernel.org,
- linux-unionfs@vger.kernel.org
-Date: Fri, 01 Mar 2024 14:19:11 +0100
-In-Reply-To: <20240301-zucht-umfeld-9a923a7d070a@brauner>
-References: <20240221-idmap-fscap-refactor-v2-0-3039364623bd@kernel.org>
-	 <20240221-idmap-fscap-refactor-v2-14-3039364623bd@kernel.org>
-	 <15a69385b49c4f8626f082bc9b957132388414fb.camel@huaweicloud.com>
-	 <20240301-zucht-umfeld-9a923a7d070a@brauner>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2 
+	s=arc-20240116; t=1709299454; c=relaxed/simple;
+	bh=mxWKJ8RTRnGA7eFG1tywu8YEdQFGZoDBTHm7fjuKdTU=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=rBIK9fTVV36ecI8H9/s1xUfdWNqyEmNxNpA1BcoTllwdsA/5SNfgnb1W706mFUMJ5BvGI4FKv1eCbiI1wWzLxqiQ0jSB0TT6GUWh0Q21lzvCWjhNhFQmLnSg/tYBJ4FSJyn1MCbqASokFPFk7dKVWGjNjUUOXTFGn4uLQNvAuhM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=med.uni-goettingen.de; spf=pass smtp.mailfrom=med.uni-goettingen.de; dkim=pass (2048-bit key) header.d=med.uni-goettingen.de header.i=@med.uni-goettingen.de header.b=Ps5nlape; arc=none smtp.client-ip=134.76.103.230
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=med.uni-goettingen.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=med.uni-goettingen.de
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=med.uni-goettingen.de; s=Mail; h=MIME-Version:Content-Transfer-Encoding:
+	Content-ID:Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:
+	From:Sender:Reply-To:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=mxWKJ8RTRnGA7eFG1tywu8YEdQFGZoDBTHm7fjuKdTU=; b=Ps5nlapeyCdeYTvUj3ICVS2vg5
+	zdj8/b9anNyLt1UWZtGaovWMpHtFfgdPmNCqJqRUXKhG57Rb768EViLErecZeeXSJieDlSKZfVejD
+	UZ6LUzCG5kmlo9ymfCYFTD2CHIFlJpPkW65Ols9p6b/SdLM59hzWfIxpmudRwSp25oS8U2cqZxf55
+	MW/qxwmm9iMIIfGChqZCZsRMIapEdVadnTPb8Y6cvYipCrRD7nWJJTObvU7lDZUtBeGK0uqEIOzY0
+	4tKRJqVJErlvoKVrNlpnlgCtLPkwhmT3t6OseyPy2JwzR6vBoldAejnT5pyNbd21rDTBHGUvjJwbL
+	MYyjszAw==;
+Received: from umg-exc-01.ads.local.med.uni-goettingen.de ([10.76.100.74]:29415)
+	by mail1.med.uni-goettingen.de with esmtps  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.96)
+	(envelope-from <Martin.Uecker@med.uni-goettingen.de>)
+	id 1rg2pg-00032L-0c;
+	Fri, 01 Mar 2024 14:21:48 +0100
+Received: from umg-exc-01.ads.local.med.uni-goettingen.de (10.76.100.74) by
+ umg-exc-01.ads.local.med.uni-goettingen.de (10.76.100.74) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Fri, 1 Mar 2024 14:21:45 +0100
+Received: from umg-exc-01.ads.local.med.uni-goettingen.de
+ ([fe80::2886:b6b:10e3:deea]) by umg-exc-01.ads.local.med.uni-goettingen.de
+ ([fe80::2886:b6b:10e3:deea%6]) with mapi id 15.01.2507.035; Fri, 1 Mar 2024
+ 14:21:45 +0100
+From: "Uecker, Martin" <Martin.Uecker@med.uni-goettingen.de>
+To: "keescook@chromium.org" <keescook@chromium.org>,
+	"linux@rasmusvillemoes.dk" <linux@rasmusvillemoes.dk>,
+	"David.Laight@ACULAB.COM" <David.Laight@ACULAB.COM>
+CC: "corbet@lwn.net" <corbet@lwn.net>, "miguel.ojeda.sandonis@gmail.com"
+	<miguel.ojeda.sandonis@gmail.com>, "linux-kernel@vger.kernel.org"
+	<linux-kernel@vger.kernel.org>, "linux-doc@vger.kernel.org"
+	<linux-doc@vger.kernel.org>, "gustavoars@kernel.org" <gustavoars@kernel.org>,
+	"ndesaulniers@google.com" <ndesaulniers@google.com>,
+	"jani.nikula@linux.intel.com" <jani.nikula@linux.intel.com>,
+	"ojeda@kernel.org" <ojeda@kernel.org>, "linux-hardening@vger.kernel.org"
+	<linux-hardening@vger.kernel.org>
+Subject: Re: [+externe Mail+] RE: [PATCH] compiler.h: Explain how
+ __is_constexpr() works
+Thread-Topic: [+externe Mail+] RE: [PATCH] compiler.h: Explain how
+ __is_constexpr() works
+Thread-Index: AQHaa7zea2tnGf5kn0G3mh48EMfk27EizpQA
+Date: Fri, 1 Mar 2024 13:21:45 +0000
+Message-ID: <22c9c4cc27b13b2fb6f3cd9fa6f827f56f30770b.camel@med.uni-goettingen.de>
+References: <20240301044428.work.411-kees@kernel.org>
+	 <af0eff12e6bc41039614add550406c11@AcuMS.aculab.com>
+In-Reply-To: <af0eff12e6bc41039614add550406c11@AcuMS.aculab.com>
+Accept-Language: de-DE, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <935E7E0ABD95954982DB4A23C34DA0E8@med.uni-goettingen.de>
+Content-Transfer-Encoding: base64
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-CM-TRANSID:GxC2BwDHACXT1eFlyDx6Aw--.60471S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxXFWxtFWkCry7XFW5WF1DGFg_yoW5uw18pa
-	y5Ka4SkF4ktF17Jr92yw4qqw40k3yfJay5Grn5J3y8Zwn8JF1fGrWSk3y3ZF9a9rs3G34a
-	vr4Iya47Zwn8ZaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUkmb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k2
-	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
-	xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxV
-	AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
-	x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
-	0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l42xK82IYc2Ij
-	64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x
-	8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5MIIYY7kG6xAYrwCIc40Y0x0E
-	wIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JV
-	WxJwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AKxVWUJVW8JwCI
-	42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUguHqUUUUU
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAQAJBF1jj5rgNgACsz
 
-On Fri, 2024-03-01 at 13:54 +0100, Christian Brauner wrote:
-> On Fri, Mar 01, 2024 at 10:19:13AM +0100, Roberto Sassu wrote:
-> > On Wed, 2024-02-21 at 15:24 -0600, Seth Forshee (DigitalOcean) wrote:
-> > > Support the new fscaps security hooks by converting the vfs_caps to r=
-aw
-> > > xattr data and then handling them the same as other xattrs.
-> >=20
-> > Hi Seth
-> >=20
-> > I started looking at this patch set.
-> >=20
-> > The first question I have is if you are also going to update libcap
-> > (and also tar, I guess), since both deal with the raw xattr.
-> >=20
-> > From IMA/EVM perspective (Mimi will add on that), I guess it is
-> > important that files with a signature/HMAC continue to be accessible
-> > after applying this patch set.
-> >=20
-> > Looking at the code, it seems the case (if I understood correctly,
-> > vfs_getxattr_alloc() is still allowed).
-> >=20
-> > To be sure that everything works, it would be really nice if you could
-> > also extend our test suite:
-> >=20
-> > https://github.com/mimizohar/ima-evm-utils/blob/next-testing/tests/port=
-able_signatures.test
-> >=20
-> > and
-> >=20
-> > https://github.com/mimizohar/ima-evm-utils/blob/next-testing/tests/evm_=
-hmac.test
-> >=20
-> >=20
-> > The first test we would need to extend is check_cp_preserve_xattrs,
-> > which basically does a cp -a. We would need to set fscaps in the
-> > origin, copy to the destination, and see if the latter is accessible.
-> >=20
-> > I would also extend:
-> >=20
-> > check_tar_extract_xattrs_different_owner
-> > check_tar_extract_xattrs_same_owner
-> > check_metadata_change
-> > check_evm_revalidate
-> > check_evm_portable_sig_ima_appraisal
-> > check_evm_portable_sig_ima_measurement_list
-> >=20
-> > It should not be too complicated. The purpose would be to exercise your
-> > code below.
-> >=20
-> >=20
-> > Regarding the second test, we would need to extend just check_evm_hmac.
-> >=20
-> >=20
-> > Just realized, before extending the tests, it would be necessary to
-> > modify also evmctl.c, to retrieve fscaps through the new interfaces,
-> > and to let users provide custom fscaps the HMAC or portable signature
-> > is calculated on.
->=20
-> While request for tests are obviously fine they should be added by the
-> respective experts for IMA/EVM in this case. I don't think it's
-> appropriate to expect Seth to do that especially because you seem to
-> imply that you currently don't have any tests for fscaps at all. We're
-> always happy to test things and if that'd be adding new IMA/EVM specific
-> features than it would be something to discuss but really we're
-> refactoring so the fact that you don't have tests we can run is not the
-> fault of this patchset and IMA/EVM is just a small portion of it.=20
-
-Hi Christian
-
-I have seen this policy of adding tests in other subsystems (eBPF),
-which in my opinion makes sense, since you want anyway to check that
-you didn't break existing code.
-
-And yes, I agree that we should have better tests, and a better
-workflow (we are working on improving it).
-
-In this particular case, I was not asking to write a test from scratch,
-that should not be difficult per se, but adding additional commands.
-
-If I got it correctly, even if current tests for fscaps would have
-existed, they would not work anyway, since they would have been based
-on getting/setting the raw xattrs (as far as I know, at least for tar).
-
-Happy to try adding the tests, would appreciate your help to review if
-the tests are done in the correct way.
-
-Thanks
-
-Roberto
-
+DQpCVFcgbXkgbWFpbiBlbWFpbCBhZGRlc3MgaXMgbm93OiB1ZWNrZXJAdHVncmF6LmF0DQoNCk15
+IHN1Z2dlc3Rpb24gd291bGQgYWxzbyB0byBsaW1pdCBleHBsYW5hdGlvbi4gTm9ib2R5IHNob3Vs
+ZA0Kd3JpdGUgc3VjaCBjb2RlIGFuZCBpZiB5b3UgbmVlZCB0bywgeW91IGNhbiBmaW5kIGV4cGxh
+bmF0aW9ucw0KYWxsIG92ZXIgdGhlIGludGVybmV0Lg0KDQpGaW5hbGx5LCBJIHN0aWxsIHRoaW5r
+IHRoZSBtb3RpdmF0aW9uIGZvciB0aGlzIG1hY3JvIChyZW1vdmluZw0KVkxBcykgaXMgbWlzZ3Vp
+ZGVkIGlmIHNlY3VyaXR5IGlzIHRoZSBnb2FsIGJlY2F1c2UgVkxBcyBwcm92aWRlDQpwcmVjaXNl
+IGJvdW5kcyBhbmQgbGFyZ2VyIHdvcnN0LWNhc2UgZml4ZWQtc2l6ZSBhcnJheXMgZG8gbm90LiAg
+wqANCg0KSXQgd291bGQgYmUgYmV0dGVyIHRvIHVzZSB0aGUgY29tcGlsZXIgb3B0aW9ucyB0aGF0
+IGRldGVjdA0KcG9zc2libHkgdXNlIG9mIFZMQXMgb2YgdW5ib3VuZGVkIHNpemUgYW5kIGlmIHRo
+ZXJlIGEgcHJvYmxlbXMNCndpdGggdGhpcywgaW1wcm92ZSB0aGlzIG9uIHRoZSBjb21waWxlciBz
+aWRlLg0KDQpNYXJ0aW4NCg0KDQpBbSBGcmVpdGFnLCBkZW0gMDEuMDMuMjAyNCB1bSAwOTozMiAr
+MDAwMCBzY2hyaWViIERhdmlkIExhaWdodDoNCj4gRnJvbTogS2VlcyBDb29rDQo+ID4gU2VudDog
+MDEgTWFyY2ggMjAyNCAwNDo0NQ0KPiA+IFRvOiBSYXNtdXMgVmlsbGVtb2VzIDxsaW51eEByYXNt
+dXN2aWxsZW1vZXMuZGs+DQo+ID4gDQo+ID4gVGhlIF9faXNfY29uc3RleHByKCkgbWFjcm8gaXMg
+ZGFyayBtYWdpYy4gU2hlZCBzb21lIGxpZ2h0IG9uIGl0IHdpdGgNCj4gPiBhIGNvbW1lbnQgdG8g
+ZXhwbGFpbiBob3cgYW5kIHdoeSBpdCB3b3Jrcy4NCj4gDQo+IEFsbCB0aGUgOHMgZG9uJ3QgaGVs
+cC4uLg0KPiANCj4gSSBkb24ndCB0aGluayB5b3UgbmVlZCB0aGF0IG11Y2ggZXhwbGFuYXRpb24u
+DQo+IA0KPiBQZXJoYXBzIGp1c3Qgc2F5aW5nIHRoYXQgdGhlIHR5cGUgb2YgPzogZGVwZW5kcyBv
+biB0aGUgdHlwZXMNCj4gb2YgdGhlIHZhbHVlcyBhbmQgaXMgaW5kZXBlbmRlbnQgb2YgdGhlIGNv
+bmRpdGlvbi4NCj4gVGhlIHR5cGUgb2YgKDAgPyAodm9pZCAqKXAgOiAoZm9vICopcSkgaXMgbm9y
+bWFsbHkgJ3ZvaWQgKicNCj4gKHNvIHRoYXQgYm90aCB2YWx1ZXMgY2FuIGJlIGFzc2lnbmVkIHRv
+IGl0KS4NCj4gQnV0IGlmICdwJyBpcyAnYW4gaW50ZWdlciBjb25zdGFudCBleHByZXNzaW9uIHdp
+dGggdmFsdWUgMCcNCj4gdGhlbiAodm9pZCAqKXAgaXMgTlVMTCBhbmQgdGhlIHR5cGUgaXMgJ2Zv
+byAqJy4NCj4gDQo+IFRoZSB0eXBlIGNhbiB0aGVuIGJlIGNoZWNrZWQgdG8gZmluZCBvdXQgaXQg
+J3AnIGlzIGNvbnN0YW50IDAuDQo+IEEgbm9uLXplcm8gY29uc3RhbnQgJ3AnIGNhbiBiZSBtdWx0
+aXBsZXMgYnkgMC4NCj4gDQo+IEkgbmVlZCB0byByZXBsYWNlIHRoZSBkZWZpbml0aW9uIHdpdGgg
+KHRoZSBtb3JlIHBvcnRhYmxlKToNCj4gI2RlZmluZSBfX2lmX2NvbnN0ZXhwcihjb25kLCBpZl9j
+b25zdCwgaWZfbm90X2NvbnN0KSBcDQo+IAlfR2VuZXJpYygwID8gKHZvaWQgKikoKGxvbmcpKGNv
+bmQpICogMCkgOiAoY2hhciAqKTAsIFwNCj4gCQljaGFyICo6IChpZl9jb25zdCksIFwNCj4gCQl2
+b2lkICo6IChpZl9ub3RfY29uc3QpKQ0KPiB3aGljaCBpcyBhcmd1YWJseSBsZXNzIGNyeXB0aWMu
+DQo+IA0KPiAjZGVmaW5lIF9faXNfY29uc3RleHByKGNvbmQpIF9faWZfY29uc3RleHByKGNvbmQs
+IDEsIDApDQo+IA0KPiBTbyB0aGF0IEkgY2FuIHdyaXRlOg0KPiAjZGVmaW5lIGlzX25vbl9uZWdf
+Y29uc3QoeCkgKF9faWZfY29uc3RleHByKHgsIHggLCAtMSkgPj0gMCkNCj4gYW5kIGF2b2lkIHRo
+ZSBjb21waWxlciBibGVhdGluZyBhYm91dCBzb21lIGNvbXBhcmlzb25zDQo+IGluIHVucmVhY2hh
+YmxlIGNvZGUuDQo+IA0KPiAJRGF2aWQNCj4gDQo+IC0NCj4gUmVnaXN0ZXJlZCBBZGRyZXNzIExh
+a2VzaWRlLCBCcmFtbGV5IFJvYWQsIE1vdW50IEZhcm0sIE1pbHRvbiBLZXluZXMsIE1LMSAxUFQs
+IFVLDQo+IFJlZ2lzdHJhdGlvbiBObzogMTM5NzM4NiAoV2FsZXMpDQo+IA0KDQo=
 
