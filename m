@@ -1,125 +1,189 @@
-Return-Path: <linux-doc+bounces-11194-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-11196-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53F5486EDF2
-	for <lists+linux-doc@lfdr.de>; Sat,  2 Mar 2024 02:47:06 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id AA8B986EF51
+	for <lists+linux-doc@lfdr.de>; Sat,  2 Mar 2024 08:51:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E9042B248D7
-	for <lists+linux-doc@lfdr.de>; Sat,  2 Mar 2024 01:47:03 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B2F891C2174C
+	for <lists+linux-doc@lfdr.de>; Sat,  2 Mar 2024 07:51:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 718DA6FB5;
-	Sat,  2 Mar 2024 01:47:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="YgjFnc9G"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B9BD13AD4;
+	Sat,  2 Mar 2024 07:51:27 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4F436FCC
-	for <linux-doc@vger.kernel.org>; Sat,  2 Mar 2024 01:46:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.180
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D3591125B2;
+	Sat,  2 Mar 2024 07:51:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1709344020; cv=none; b=YdcuSSK+NkKpo+wBB5leiKQgxkYFDeoST4n9P4lK3jyzlnqYoUcf30IseZ4Pa/WhACca8d9fa3QJbeGAqPabqZEY14YPWC/Fti8HIKNnQ+ZZjDc9RY6q7kS7v/IlMNVOCUJCqXScgbmejbEq8rglSY6yKU8eenEifotGBojgcio=
+	t=1709365887; cv=none; b=o9gVrQZA/LT6xxA3VdLA8v25SZ10Exi/pnX+VFFve4TAqoDo+V1j6uH6Kbv9uk3GRO4r+hO6qW7lpNAVxulV6Vz7Ch2rhfRNYoxM83evkeoNd9qRinMkBGNpr23JFfd/585g5Gq3gHXT5GrKEcIcnQxTbJmWoNZof8We0rk2/Ao=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1709344020; c=relaxed/simple;
-	bh=f5A0jR9T6V8+dxH3iXe71oqdvNYD79yPpc1mbD2oH6Q=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ctJOHu2CdkwcN8r4CUX++Q8ZnjUAFutfn2hTIeIWY8pdXqKKbJ3OWxnaoD1eHhcv/erbwwqAQdyYRfWv5EZ+CoQqrOn67/kuoRF7/dXiF8zx1m4xnRGs1a2WhKcS420wKkgqzOcLIDgnRqSqipNlIV9tCxkrRDSPIwSpf1nXUT0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=YgjFnc9G; arc=none smtp.client-ip=209.85.210.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-6e46dcd8feaso1694846b3a.2
-        for <linux-doc@vger.kernel.org>; Fri, 01 Mar 2024 17:46:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1709344018; x=1709948818; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=bn1sv4Ad9NlF+2i+d+RVjC+t58fUwFDzcSAxCmkVqVc=;
-        b=YgjFnc9G2i21CmrASd7cTvULfQqJ5lnyj2K5tZNA6x2L8192PjJDp0ZMoeMmuEmt92
-         FTem8v5JFpoa+r0em6sFzVcK1t55mdCLDQa8y7vlYtc0mg59UepoyuNZVNBnS0NcnkKp
-         HXqYr1yhplYHgACoJPo3YON/n9oMGuad7ZHhs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709344018; x=1709948818;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bn1sv4Ad9NlF+2i+d+RVjC+t58fUwFDzcSAxCmkVqVc=;
-        b=wKyt/oKCq0F5du1kpbFq0t2c8QRpA2E7xsvhJj1jWFiwW84dY9qdFtypKbj3ZTX9XW
-         JHgu3FfWI0GNXowXJVDZZYVfwjpmjt+NMw9r6oQDGKwqiGXuP5Y8dIi0bnx38HCqQXzK
-         7FadapnMM1h5gmFajRInToyVDnxtJ1rn53QkrL6suFwfyCkrqH7ShdlcFIaIbxn9p+sH
-         zR7LLOAhfuEj46EErRWLGGXGmoGG8JYfW3kqq1k06MP17xpxmhmuPFwZ6lsFpa6VWK7h
-         OMnh4VbtGlva7UPdrwOX+hxOSmZRRnpbOE8URBBB+fLiDP5gWrP0mLSAvO6ckwhbWi3H
-         veUA==
-X-Forwarded-Encrypted: i=1; AJvYcCXZFFipjrzwpjdE6h1eQi/kpJ5fMTC5KNY+5K5XDfy2Xrrccy7SWQv2yuJyPTYfS8Sztm/Zqc+q0GZsRzc1b5spgjfmwkRPvpao
-X-Gm-Message-State: AOJu0YxucpY53w+B4ZHfly6It7Rq4CNBcytRSqG83FW6P4LYiRVrMeYD
-	jiieZdkwdKriIRuZKHWOem2GYLjbaMtiC65ZBhjpt09IOurCLCIrFSFZF0wfFw==
-X-Google-Smtp-Source: AGHT+IEaaYGyDdKa4lpimUB+90/393TQuYJQkcqWu1nG5sVyhNG8SR4vBzQBf2k5Ik2uH9QuLqlqJA==
-X-Received: by 2002:a05:6a00:188b:b0:6e5:9698:7cb9 with SMTP id x11-20020a056a00188b00b006e596987cb9mr4448007pfh.4.1709344018139;
-        Fri, 01 Mar 2024 17:46:58 -0800 (PST)
-Received: from www.outflux.net ([198.0.35.241])
-        by smtp.gmail.com with ESMTPSA id a28-20020a62d41c000000b006e555b439c7sm3709005pfh.4.2024.03.01.17.46.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 01 Mar 2024 17:46:56 -0800 (PST)
-Date: Fri, 1 Mar 2024 17:46:55 -0800
-From: Kees Cook <keescook@chromium.org>
-To: Andy Shevchenko <andy.shevchenko@gmail.com>
-Cc: Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-	"Gustavo A . R . Silva" <gustavoars@kernel.org>,
-	Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	David Laight <David.Laight@aculab.com>,
-	Nick Desaulniers <ndesaulniers@google.com>,
-	Martin Uecker <Martin.Uecker@med.uni-goettingen.de>,
-	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-	Miguel Ojeda <ojeda@kernel.org>, linux-kernel@vger.kernel.org,
-	linux-hardening@vger.kernel.org
-Subject: Re: [PATCH] compiler.h: Explain how __is_constexpr() works
-Message-ID: <202403011745.C9851C46@keescook>
-References: <20240301044428.work.411-kees@kernel.org>
- <ZeJ-LAkSxwBlr9_v@surfacebook.localdomain>
+	s=arc-20240116; t=1709365887; c=relaxed/simple;
+	bh=o3q1u0pG1faOVKC8mBP4iV1gk27RLSStqnjTvqSvTpo=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=C62yES3wGZ7gl28qmhU7ER86y9Z4Z9/bC0BYQVg9OTGatrzInB/WwA9UmOss6+ha/i8GnlifPA52y0WisqTt2eqj1cBAzgINrNiTCMliHgwSl29I+pAAyYAyDiIq9dRVyE1XYWkG2CQYFnFo9bhsg3pNjvhDIbg512T6GflyfL8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.2.5.213])
+	by gateway (Coremail) with SMTP id _____8BxuvB62uJldYYTAA--.49603S3;
+	Sat, 02 Mar 2024 15:51:22 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.2.5.213])
+	by localhost.localdomain (Coremail) with SMTP id AQAAf8CxrhN42uJlLU9MAA--.16478S2;
+	Sat, 02 Mar 2024 15:51:20 +0800 (CST)
+From: Bibo Mao <maobibo@loongson.cn>
+To: Huacai Chen <chenhuacai@kernel.org>,
+	Tianrui Zhao <zhaotianrui@loongson.cn>,
+	Juergen Gross <jgross@suse.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: loongarch@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	virtualization@lists.linux.dev,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: [PATCH v6 0/7] LoongArch: Add pv ipi support on LoongArch VM
+Date: Sat,  2 Mar 2024 15:51:13 +0800
+Message-Id: <20240302075120.1414999-1-maobibo@loongson.cn>
+X-Mailer: git-send-email 2.39.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ZeJ-LAkSxwBlr9_v@surfacebook.localdomain>
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:AQAAf8CxrhN42uJlLU9MAA--.16478S2
+X-CM-SenderInfo: xpdruxter6z05rqj20fqof0/
+X-Coremail-Antispam: 1Uk129KBj93XoWxJw4DuF1xWw1xZw48KrWDWrX_yoW7Jw1Dpa
+	yUurnxWFs5Gr93Zwnxtas3ur98Jw1xG34aq3W2yrW8CrW2qF1UZr48Gr98Aas5Jw4fJFW0
+	qF1rGw1Yg3WDAabCm3ZEXasCq-sJn29KB7ZKAUJUUUU7529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUBFb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1q6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv6xkF7I0E14v2
+	6r4j6r4UJwAaw2AFwI0_Jrv_JF1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0c
+	Ia020Ex4CE44I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jw0_
+	WrylYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwI
+	xGrwCY1x0262kKe7AKxVWUAVWUtwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWU
+	JVW8JwCFI7km07C267AKxVWUXVWUAwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4
+	vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IY
+	x2IY67AKxVW8JVW5JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26c
+	xKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAF
+	wI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07UN6p9UUUUU=
 
-On Sat, Mar 02, 2024 at 03:17:32AM +0200, Andy Shevchenko wrote:
-> Thu, Feb 29, 2024 at 08:44:37PM -0800, Kees Cook kirjoitti:
-> > The __is_constexpr() macro is dark magic. Shed some light on it with
-> > a comment to explain how and why it works.
-> 
-> I was under impression that somebody did it already once and it fell through
-> cracks when has been moved (?) to compiler.h.
+On physical machine, ipi HW uses IOCSR registers, however there is trap
+into hypervisor when vcpu accesses IOCSR registers if system is in VM
+mode. SWI is a interrupt mechanism like SGI on ARM, software can send
+interrupt to CPU, only that on LoongArch SWI can only be sent to local CPU
+now. So SWI can not used for IPI on real HW system, however it can be used
+on VM when combined with hypercall method. IPI can be sent with hypercall
+method and SWI interrupt is injected to vcpu, vcpu can treat SWI
+interrupt as IPI.
 
-I tried to do it before (see the v1).
+With PV IPI supported, there is one trap with IPI sending, however with IPI
+receiving there is no trap. with IOCSR HW ipi method, there will be one
+trap with IPI sending and two trap with ipi receiving.
 
-> 
-> Ah, now I see it, https://lore.kernel.org/all/YKeghxRY4FeOKuwb@smile.fi.intel.com/.
-> It was asked, but till now never fulfilled (maybe Reported-by:/Closes: tag?).
+Also IPI multicast support is added for VM, the idea comes from x86 PV ipi.
+IPI can be sent to 128 vcpus in one time. With IPI multicast support, trap
+will be reduced greatly.
 
-Sure! akpm was hardly the first to ask about it, but yeah, makes for
-some good tags.
+Here is the microbenchmarck data with "perf bench futex wake" testcase on
+3C5000 single-way machine, there are 16 cpus on 3C5000 single-way machine,
+VM has 16 vcpus also. The benchmark data is ms time unit to wakeup 16
+threads, the performance is better if data is smaller.
 
-Reported-by: Andrew Morton <akpm@linux-foundation.org>
-Closes: https://lore.kernel.org/all/20210520134112.ee15f156f1b7dbd3d8f16471@linux-foundation.org/
+physical machine                     0.0176 ms
+VM original                          0.1140 ms
+VM with pv ipi patch                 0.0481 ms
 
-:)
+It passes to boot with 128/256 vcpus, runltp command in package ltp-20230516
+passes to run with 16 cores.
 
-> And explanation before was given here:
-> https://stackoverflow.com/questions/49481217/linux-kernels-is-constexpr-macro.
+---
+Change in V6:
+  1. Add privilege checking when emulating cpucfg at index 0x4000000 --
+0x400000FF, return 0 if not executed at kernel mode.
+  2. Add document about LoongArch pv ipi with new creatly directory
+Documentation/virt/kvm/loongarch/
+  3. Fix pv ipi handling in kvm backend function kvm_pv_send_ipi(),
+where min should plus BITS_PER_LONG with second bitmap, otherwise
+VM with more than 64 vpus fails to boot.
+  4. Adjust patch order and code refine with review comments.
+ 
+Change in V5:
+  1. Refresh function/macro name from review comments.
 
-Sure, but I wanted something that lived with the macro and everyone was
-happy with the details.
+Change in V4:
+  1. Modfiy pv ipi hook function name call_func_ipi() and
+call_func_single_ipi() with send_ipi_mask()/send_ipi_single(), since pv
+ipi is used for both remote function call and reschedule notification.
+  2. Refresh changelog.
 
--Kees
+Change in V3:
+  1. Add 128 vcpu ipi multicast support like x86
+  2. Change cpucfg base address from 0x10000000 to 0x40000000, in order
+to avoid confliction with future hw usage
+  3. Adjust patch order in this patchset, move patch
+Refine-ipi-ops-on-LoongArch-platform to the first one.
 
+Change in V2:
+  1. Add hw cpuid map support since ipi routing uses hw cpuid
+  2. Refine changelog description
+  3. Add hypercall statistic support for vcpu
+  4. Set percpu pv ipi message buffer aligned with cacheline
+  5. Refine pv ipi send logic, do not send ipi message with if there is
+pending ipi message.
+---
+Bibo Mao (7):
+  LoongArch/smp: Refine some ipi functions on LoongArch platform
+  LoongArch: KVM: Add hypercall instruction emulation support
+  LoongArch: KVM: Add cpucfg area for kvm hypervisor
+  LoongArch: KVM: Add vcpu search support from physical cpuid
+  LoongArch: KVM: Add pv ipi support on kvm side
+  LoongArch: Add pv ipi support on guest kernel side
+  Documentation: KVM: Add hypercall for LoongArch
+
+ Documentation/virt/kvm/index.rst              |   1 +
+ .../virt/kvm/loongarch/hypercalls.rst         |  79 +++++++++
+ Documentation/virt/kvm/loongarch/index.rst    |  10 ++
+ arch/loongarch/Kconfig                        |   9 +
+ arch/loongarch/include/asm/Kbuild             |   1 -
+ arch/loongarch/include/asm/hardirq.h          |   5 +
+ arch/loongarch/include/asm/inst.h             |   1 +
+ arch/loongarch/include/asm/irq.h              |  10 +-
+ arch/loongarch/include/asm/kvm_host.h         |  27 +++
+ arch/loongarch/include/asm/kvm_para.h         | 156 ++++++++++++++++++
+ arch/loongarch/include/asm/kvm_vcpu.h         |   1 +
+ arch/loongarch/include/asm/loongarch.h        |  11 ++
+ arch/loongarch/include/asm/paravirt.h         |  27 +++
+ .../include/asm/paravirt_api_clock.h          |   1 +
+ arch/loongarch/include/asm/smp.h              |  31 ++--
+ arch/loongarch/include/uapi/asm/Kbuild        |   2 -
+ arch/loongarch/kernel/Makefile                |   1 +
+ arch/loongarch/kernel/irq.c                   |  24 +--
+ arch/loongarch/kernel/paravirt.c              | 151 +++++++++++++++++
+ arch/loongarch/kernel/perf_event.c            |  14 +-
+ arch/loongarch/kernel/smp.c                   |  62 ++++---
+ arch/loongarch/kernel/time.c                  |  12 +-
+ arch/loongarch/kvm/exit.c                     | 141 ++++++++++++++--
+ arch/loongarch/kvm/vcpu.c                     |  94 ++++++++++-
+ arch/loongarch/kvm/vm.c                       |  11 ++
+ 25 files changed, 780 insertions(+), 102 deletions(-)
+ create mode 100644 Documentation/virt/kvm/loongarch/hypercalls.rst
+ create mode 100644 Documentation/virt/kvm/loongarch/index.rst
+ create mode 100644 arch/loongarch/include/asm/kvm_para.h
+ create mode 100644 arch/loongarch/include/asm/paravirt.h
+ create mode 100644 arch/loongarch/include/asm/paravirt_api_clock.h
+ delete mode 100644 arch/loongarch/include/uapi/asm/Kbuild
+ create mode 100644 arch/loongarch/kernel/paravirt.c
+
+
+base-commit: 87adedeba51a822533649b143232418b9e26d08b
 -- 
-Kees Cook
+2.39.3
+
 
