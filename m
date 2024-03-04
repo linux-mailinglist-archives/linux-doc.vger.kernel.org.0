@@ -1,51 +1,52 @@
-Return-Path: <linux-doc+bounces-11263-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-11265-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3CF18702CD
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Mar 2024 14:34:15 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 360B48702F4
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Mar 2024 14:40:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 1A0B6B233A8
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Mar 2024 13:34:13 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id E10FC1F269D5
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Mar 2024 13:40:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3CDCE3F8E4;
-	Mon,  4 Mar 2024 13:32:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="FtebJCye"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C10173EA8F;
+	Mon,  4 Mar 2024 13:39:43 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 882CB3F8E0;
-	Mon,  4 Mar 2024 13:32:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25DD23FE5D
+	for <linux-doc@vger.kernel.org>; Mon,  4 Mar 2024 13:39:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1709559167; cv=none; b=vCVdiCkYV85Rr2n2Rbif1ro7QFCDqgypcvyGJSYTOVO40GNQjyiH6pRRpK66YoUN5DhmZ1cneZH+mDEACcbuaDvhk+lJ8LZq7GF5HAdbe5qDxOa/2mDlvBRpT3aHcyW3lF/hF1QBfo12xcxcVX7hb9YiIVj4xIh0e9Bxzd6OyVw=
+	t=1709559583; cv=none; b=E7RV0o6lmAgxBsO1M/NoieJJ13Vb7czzWW/XXHc2pixoKIIEmbx6UmlXAJ8Di0ZW2C9yM72zI82+HcysWYfgQrcL724b9xhG3q05awFD0nZqC9DZePpsgs9nVEPgB4EICGD1CSrnDiCd+Np0/T6/l9qOCD3OYCJxRCpo7aYB03o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1709559167; c=relaxed/simple;
-	bh=0atBaHXl1e3n7AZO5fT2Mm64OWqwf3KkX/ptCgjWNPE=;
+	s=arc-20240116; t=1709559583; c=relaxed/simple;
+	bh=DSO4nKZfYc4IR1qnz1wjDII1n4yFyBJMYdZUfFC8Mh0=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ezZYGjoAWoQhifxPmGUccPFeVTpjBzdpevudypsjkY0zhqi6vlStMMsZQHi31LdSoHID6lURg9IPakdH98WQ4+RBtXmJYKLG1PeKs+UhLSCTET+lZjoJf9TyPJsKUKxbDh+j4bO8b1hPWUKkKIwz1WYv720t07jRAQ5sUAbGHgM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=FtebJCye; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=OZLHOEQOwrKYkhkP5YCytEcFYTUgdUuOzV0w6B1zc5w=; b=FtebJCyeTDDX8B9ncGsT+3dwiL
-	S/NRnnAK6ew7ipqWGNe7yO3T6105XYq4XD9wuBMEA9pKAL3wxp0sPSpOxvkQp+PKPAoCn4YeKijJQ
-	/TOjzehI3Xhj0WU+wlS/ZS19CRhlv4Re7nhdAmWMH6c3r46K3efgJy+SdsJPdq9Tni7s=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1rh8R0-009KGP-11; Mon, 04 Mar 2024 14:32:50 +0100
-Date: Mon, 4 Mar 2024 14:32:50 +0100
-From: Andrew Lunn <andrew@lunn.ch>
-To: =?iso-8859-1?Q?K=F6ry?= Maincent <kory.maincent@bootlin.com>
-Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
+	 Content-Type:Content-Disposition:In-Reply-To; b=brpksqhNCmG9SGCjYVb/OtBnkGkS2Dmhilo0P181DZN8dLWFo0pK22/1rZmSCuvCE5HFc/jqRZRExcqGRqicl7cQ/M0FTy5fmPDSvjOexKQHp8bHhn7w/8hTEVsr/96HrU9v9g4TvZvjwjMQv0JA8oLz/NujbW5K8jDvLbb/FEI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <ore@pengutronix.de>)
+	id 1rh8X9-0000Pk-8L; Mon, 04 Mar 2024 14:39:11 +0100
+Received: from [2a0a:edc0:2:b01:1d::c5] (helo=pty.whiteo.stw.pengutronix.de)
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <ore@pengutronix.de>)
+	id 1rh8X6-004MgH-Vs; Mon, 04 Mar 2024 14:39:08 +0100
+Received: from ore by pty.whiteo.stw.pengutronix.de with local (Exim 4.96)
+	(envelope-from <ore@pengutronix.de>)
+	id 1rh8X6-001uJD-2q;
+	Mon, 04 Mar 2024 14:39:08 +0100
+Date: Mon, 4 Mar 2024 14:39:08 +0100
+From: Oleksij Rempel <o.rempel@pengutronix.de>
+To: Andrew Lunn <andrew@lunn.ch>
+Cc: =?utf-8?B?S8O2cnk=?= Maincent <kory.maincent@bootlin.com>,
 	"David S. Miller" <davem@davemloft.net>,
 	Eric Dumazet <edumazet@google.com>,
 	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
@@ -66,43 +67,60 @@ Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
 	Dent Project <dentproject@linuxfoundation.org>
 Subject: Re: [PATCH net-next v5 13/17] net: pse-pd: Use regulator framework
  within PSE framework
-Message-ID: <84b300c7-8295-424b-9117-c604fb4cd73e@lunn.ch>
+Message-ID: <ZeXO_NhXZQajGZPr@pengutronix.de>
 References: <20240227-feature_poe-v5-0-28f0aa48246d@bootlin.com>
  <20240227-feature_poe-v5-13-28f0aa48246d@bootlin.com>
  <ZeObuKHkPN3tiWz_@pengutronix.de>
  <20240304102708.5bb5d95c@kmaincent-XPS-13-7390>
+ <84b300c7-8295-424b-9117-c604fb4cd73e@lunn.ch>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20240304102708.5bb5d95c@kmaincent-XPS-13-7390>
+In-Reply-To: <84b300c7-8295-424b-9117-c604fb4cd73e@lunn.ch>
+X-Sent-From: Pengutronix Hildesheim
+X-URL: http://www.pengutronix.de/
+X-Accept-Language: de,en
+X-Accept-Content-Type: text/plain
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ore@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-> > > +	psec = dev_find_pse_control(&phy->mdio.dev);
-> > > +	if (IS_ERR(psec)) {
-> > > +		rc = PTR_ERR(psec);
-> > > +		goto unregister_phy;
-> > > +	}
-> > > +  
+On Mon, Mar 04, 2024 at 02:32:50PM +0100, Andrew Lunn wrote:
+> > > > +	psec = dev_find_pse_control(&phy->mdio.dev);
+> > > > +	if (IS_ERR(psec)) {
+> > > > +		rc = PTR_ERR(psec);
+> > > > +		goto unregister_phy;
+> > > > +	}
+> > > > +  
+> > > 
+> > > I do not think it is a good idea to make PSE controller depend on
+> > > phy->mdio.dev. The only reason why we have fwnode_find_pse_control()
+> > > here was the missing port abstraction.
 > > 
-> > I do not think it is a good idea to make PSE controller depend on
-> > phy->mdio.dev. The only reason why we have fwnode_find_pse_control()
-> > here was the missing port abstraction.
+> > I totally agree that having port abstraction would be more convenient.
+> > Maxime Chevallier is currently working on this and will post it after his
+> > multi-phy series get merged.
+> > Meanwhile, we still need a device pointer for getting the regulator. The
+> > phy->mdio.dev is the only one I can think of as a regulator consumer.
+> > Another idea?
 > 
-> I totally agree that having port abstraction would be more convenient.
-> Maxime Chevallier is currently working on this and will post it after his
-> multi-phy series get merged.
-> Meanwhile, we still need a device pointer for getting the regulator. The
-> phy->mdio.dev is the only one I can think of as a regulator consumer.
-> Another idea?
+> Sorry, i've not been keeping up...
+> 
+> Doesn't the device tree binding determine this? Where is the consumer
+> in the tree?
 
-Sorry, i've not been keeping up...
+The real consumer is outside of the system. Withing the system, it would
+be the RJ45 port, but we have no abstraction for ports so far.
 
-Doesn't the device tree binding determine this? Where is the consumer
-in the tree?
-
-   Andrew
+-- 
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
