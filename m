@@ -1,318 +1,230 @@
-Return-Path: <linux-doc+bounces-11527-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-11533-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5721E8730F6
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Mar 2024 09:41:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B47B87313A
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Mar 2024 09:54:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0CDCB288B4C
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Mar 2024 08:41:50 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5177C28B24B
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Mar 2024 08:54:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C584D1426B;
-	Wed,  6 Mar 2024 08:41:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F8B75DF03;
+	Wed,  6 Mar 2024 08:51:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="aV419pLu"
+	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b="Pf2sSFdh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.153.233])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4FBD199DC;
-	Wed,  6 Mar 2024 08:41:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.235.227.194
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A4325D919;
+	Wed,  6 Mar 2024 08:51:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=68.232.153.233
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1709714507; cv=none; b=Px4y3FjHE/dR6xydal0pAZSOqkQYl0obsaqWw4tOsbT5QxwVFqjqJQ6QmojFhBAlUAdmaA23Gfdn1yp3ynNN6g/HQWCqIIr9L08dzzMUpC4DGU+9r9o12PYkNNn4UnzRC1vlk2aDBkeMAFT7zZObsxKw1XUbQlgwEsHJeXMuWqk=
+	t=1709715118; cv=none; b=F1E0CPG5JgQGrwqsNp5oJHKgvZOO2IOLTMz40X4CcWx0GHJR6nFCsyCIt8DVeEhxlMk0fRzXCm/CHL6sha2qypMhzT5vUANZ/2T7q660p6VVePsw9V6Mb2c9pTWmFIlHCDOjGrEBQtZa6kjxlLG/o7uPnoGxvPofjj03zs5NhMU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1709714507; c=relaxed/simple;
-	bh=jLL7uw3QShSfenzcCONrHzlC6p7IGRjNmLgssHBdP38=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=X4Z6KvcHCKfEPnASvncX36qIKLGSTJvsc/KgZuaDvPEypl8rGyjgBOhluwPQEvuFpQ/8gMfydgNxQfWmxbpkZnTU3uOyxQu+Elq/HbysJKESZXSLLoJEHbba1CMfxMKZ1GY1w4+3fGdodVNoSjORw6ry8NLysap9mBCyAwJ+DpQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=aV419pLu; arc=none smtp.client-ip=46.235.227.194
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1709714504;
-	bh=jLL7uw3QShSfenzcCONrHzlC6p7IGRjNmLgssHBdP38=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=aV419pLugC34HPHE6Z+jNMPXUuQMHsIRJNiFXT2GxQO0JXM0htamhKHpdKYhO+xgL
-	 fbMvWHbQcM1E6H0bOCUz/alBK6REMPbzpBofzr8yUVujmbSjs6cP+eD4zv0suIb8lU
-	 ix3W9ewCkopBERxZ9Mi3SiJn6zgtnwB0KcpXi0pgJEXHXRrHiHhmUSIe+kzw6MVmsR
-	 JdJXYerZb8OeXmybTtjg267MPJwPURT3IPb9vU2Hl9wK8WWbjIMFx6rkgiprPDhapx
-	 PQAWXdoaXzeO5oU0X9OBXWG+iv4CYv2kcmTO91TiysFgPmE/E5gzCz6j0ryLshmDqp
-	 X49REkkngs72g==
-Received: from localhost (cola.collaboradmins.com [195.201.22.229])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 5505937811D4;
-	Wed,  6 Mar 2024 08:41:43 +0000 (UTC)
-Date: Wed, 6 Mar 2024 09:41:42 +0100
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: =?UTF-8?B?QWRyacOhbg==?= Larumbe <adrian.larumbe@collabora.com>
-Cc: robh@kernel.org, steven.price@arm.com, airlied@gmail.com,
- daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, corbet@lwn.net, kernel@collabora.com,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org
-Subject: Re: [PATCH v3 1/1] drm/panfrost: Replace fdinfo's profiling debugfs
- knob with sysfs
-Message-ID: <20240306094142.70c7c974@collabora.com>
-In-Reply-To: <20240306015819.822128-2-adrian.larumbe@collabora.com>
-References: <20240306015819.822128-1-adrian.larumbe@collabora.com>
-	<20240306015819.822128-2-adrian.larumbe@collabora.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.38; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1709715118; c=relaxed/simple;
+	bh=C7wNFMq+Tb6UBHNzMe8Yv9vypVbu/w3sH598lfI8tLg=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=ZPyd8ruqGqcxemAjGFosI8qjJVPLYtFvLeljaTq8TkVxeuF7Fj4HMXg2f/4XYGHRlyBnvlBIGwBI4X4vG5ZDg2Oq0oF2ntO86ONwJA+gYJo/jYipskeiAXwO3pvwLdmXjiRiVqoJF1Fje1RiMUe8feZm1npM28LhxCOw08pHc+o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=microchip.com; spf=pass smtp.mailfrom=microchip.com; dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b=Pf2sSFdh; arc=none smtp.client-ip=68.232.153.233
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1709715117; x=1741251117;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=C7wNFMq+Tb6UBHNzMe8Yv9vypVbu/w3sH598lfI8tLg=;
+  b=Pf2sSFdhiueusHtsHqmg1/NqxthdjU1MF/QzTX2YXEiWkVgF0CSE4z8G
+   y7dBDyoGy7GNkSHayw5LLi7fMvC7x2CMQBbdG6j3nhR8d4f5LnDpGNbqP
+   i5tPI1gafztx5ctbTdSbDQHFPudivVLqnDP++1hCGooVVauPCOKH24CR0
+   IfeONoZjQU+6lYxKgKt7U38xZG/yG7Og21O0rBkaDa3y9J0scxpWZ6sW+
+   JHxCWCU0viEmPHOrpxthaK8Wei4EaDOAUErYeS62r5Dcxh43KGflianmm
+   qmQTYGMqOoivIPrL8iLQWoPYtiGK7gC/uNlUgM7W28WT0uQMAo+JYELT6
+   g==;
+X-CSE-ConnectionGUID: j7Lxr73nSs+FyDFfEdnQPQ==
+X-CSE-MsgGUID: BvQivwjJQWS/LiInTU3jzg==
+X-IronPort-AV: E=Sophos;i="6.06,207,1705388400"; 
+   d="scan'208";a="248037241"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+  by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 06 Mar 2024 01:50:48 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Wed, 6 Mar 2024 01:50:34 -0700
+Received: from CHE-LT-I17164LX.microchip.com (10.10.85.11) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
+ 15.1.2507.35 via Frontend Transport; Wed, 6 Mar 2024 01:50:25 -0700
+From: Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
+To: <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
+	<pabeni@redhat.com>, <horms@kernel.org>, <saeedm@nvidia.com>,
+	<anthony.l.nguyen@intel.com>, <netdev@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <andrew@lunn.ch>, <corbet@lwn.net>,
+	<linux-doc@vger.kernel.org>, <robh+dt@kernel.org>,
+	<krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
+	<devicetree@vger.kernel.org>, <horatiu.vultur@microchip.com>,
+	<ruanjinjie@huawei.com>, <steen.hegelund@microchip.com>,
+	<vladimir.oltean@nxp.com>
+CC: <UNGLinuxDriver@microchip.com>, <Thorsten.Kummermehr@microchip.com>,
+	<Pier.Beruto@onsemi.com>, <Selvamani.Rajagopal@onsemi.com>,
+	<Nicolas.Ferre@microchip.com>, <benjamin.bigler@bernformulastudent.ch>,
+	Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
+Subject: [PATCH net-next v3 00/12] Add support for OPEN Alliance 10BASE-T1x MACPHY Serial Interface
+Date: Wed, 6 Mar 2024 14:20:05 +0530
+Message-ID: <20240306085017.21731-1-Parthiban.Veerasooran@microchip.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Wed,  6 Mar 2024 01:56:36 +0000
-Adri=C3=A1n Larumbe <adrian.larumbe@collabora.com> wrote:
+This patch series contain the below updates,
+- Adds support for OPEN Alliance 10BASE-T1x MACPHY Serial Interface in the
+  net/ethernet/oa_tc6.c.
+  Link to the spec:
+  -----------------
+  https://opensig.org/download/document/OPEN_Alliance_10BASET1x_MAC-PHY_Serial_Interface_V1.1.pdf
 
-> Debugfs isn't always available in production builds that try to squeeze
-> every single byte out of the kernel image, but we still need a way to
-> toggle the timestamp and cycle counter registers so that jobs can be
-> profiled for fdinfo's drm engine and cycle calculations.
->=20
-> Drop the debugfs knob and replace it with a sysfs file that accomplishes
-> the same functionality, and document its ABI in a separate file.
->=20
-> Signed-off-by: Adri=C3=A1n Larumbe <adrian.larumbe@collabora.com>
+- Adds driver support for Microchip LAN8650/1 Rev.B1 10BASE-T1S MACPHY
+  Ethernet driver in the net/ethernet/microchip/lan865x/lan865x.c.
+  Link to the product:
+  --------------------
+  https://www.microchip.com/en-us/product/lan8650
 
-Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
+Testing Details:
+----------------
+The driver performance was tested using iperf3 in the below two setups
+separately.
 
-> ---
->  .../testing/sysfs-driver-panfrost-profiling   | 10 +++++
->  Documentation/gpu/panfrost.rst                |  9 ++++
->  drivers/gpu/drm/panfrost/Makefile             |  2 -
->  drivers/gpu/drm/panfrost/panfrost_debugfs.c   | 21 ----------
->  drivers/gpu/drm/panfrost/panfrost_debugfs.h   | 14 -------
->  drivers/gpu/drm/panfrost/panfrost_device.h    |  2 +-
->  drivers/gpu/drm/panfrost/panfrost_drv.c       | 41 ++++++++++++++++---
->  drivers/gpu/drm/panfrost/panfrost_job.c       |  2 +-
->  8 files changed, 57 insertions(+), 44 deletions(-)
->  create mode 100644 Documentation/ABI/testing/sysfs-driver-panfrost-profi=
-ling
->  delete mode 100644 drivers/gpu/drm/panfrost/panfrost_debugfs.c
->  delete mode 100644 drivers/gpu/drm/panfrost/panfrost_debugfs.h
->=20
-> diff --git a/Documentation/ABI/testing/sysfs-driver-panfrost-profiling b/=
-Documentation/ABI/testing/sysfs-driver-panfrost-profiling
-> new file mode 100644
-> index 000000000000..1d8bb0978920
-> --- /dev/null
-> +++ b/Documentation/ABI/testing/sysfs-driver-panfrost-profiling
-> @@ -0,0 +1,10 @@
-> +What:		/sys/bus/platform/drivers/panfrost/.../profiling
-> +Date:		February 2024
-> +KernelVersion:	6.8.0
-> +Contact:	Adrian Larumbe <adrian.larumbe@collabora.com>
-> +Description:
-> +		Get/set drm fdinfo's engine and cycles profiling status.
-> +		Valid values are:
-> +		0: Don't enable fdinfo job profiling sources.
-> +		1: Enable fdinfo job profiling sources, this enables both the GPU's
-> +		   timestamp and cycle counter registers.
-> \ No newline at end of file
-> diff --git a/Documentation/gpu/panfrost.rst b/Documentation/gpu/panfrost.=
-rst
-> index b80e41f4b2c5..51ba375fd80d 100644
-> --- a/Documentation/gpu/panfrost.rst
-> +++ b/Documentation/gpu/panfrost.rst
-> @@ -38,3 +38,12 @@ the currently possible format options:
-> =20
->  Possible `drm-engine-` key names are: `fragment`, and  `vertex-tiler`.
->  `drm-curfreq-` values convey the current operating frequency for that en=
-gine.
-> +
-> +Users must bear in mind that engine and cycle sampling are disabled by d=
-efault,
-> +because of power saving concerns. `fdinfo` users and benchmark applicati=
-ons which
-> +query the fdinfo file must make sure to toggle the job profiling status =
-of the
-> +driver by writing into the appropriate sysfs node::
-> +
-> +    echo <N> > /sys/bus/platform/drivers/panfrost/[a-f0-9]*.gpu/profiling
-> +
-> +Where `N` is either `0` or `1`, depending on the desired enablement stat=
-us.
-> diff --git a/drivers/gpu/drm/panfrost/Makefile b/drivers/gpu/drm/panfrost=
-/Makefile
-> index 2c01c1e7523e..7da2b3f02ed9 100644
-> --- a/drivers/gpu/drm/panfrost/Makefile
-> +++ b/drivers/gpu/drm/panfrost/Makefile
-> @@ -12,6 +12,4 @@ panfrost-y :=3D \
->  	panfrost_perfcnt.o \
->  	panfrost_dump.o
-> =20
-> -panfrost-$(CONFIG_DEBUG_FS) +=3D panfrost_debugfs.o
-> -
->  obj-$(CONFIG_DRM_PANFROST) +=3D panfrost.o
-> diff --git a/drivers/gpu/drm/panfrost/panfrost_debugfs.c b/drivers/gpu/dr=
-m/panfrost/panfrost_debugfs.c
-> deleted file mode 100644
-> index 72d4286a6bf7..000000000000
-> --- a/drivers/gpu/drm/panfrost/panfrost_debugfs.c
-> +++ /dev/null
-> @@ -1,21 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0
-> -/* Copyright 2023 Collabora ltd. */
-> -/* Copyright 2023 Amazon.com, Inc. or its affiliates. */
-> -
-> -#include <linux/debugfs.h>
-> -#include <linux/platform_device.h>
-> -#include <drm/drm_debugfs.h>
-> -#include <drm/drm_file.h>
-> -#include <drm/panfrost_drm.h>
-> -
-> -#include "panfrost_device.h"
-> -#include "panfrost_gpu.h"
-> -#include "panfrost_debugfs.h"
-> -
-> -void panfrost_debugfs_init(struct drm_minor *minor)
-> -{
-> -	struct drm_device *dev =3D minor->dev;
-> -	struct panfrost_device *pfdev =3D platform_get_drvdata(to_platform_devi=
-ce(dev->dev));
-> -
-> -	debugfs_create_atomic_t("profile", 0600, minor->debugfs_root, &pfdev->p=
-rofile_mode);
-> -}
-> diff --git a/drivers/gpu/drm/panfrost/panfrost_debugfs.h b/drivers/gpu/dr=
-m/panfrost/panfrost_debugfs.h
-> deleted file mode 100644
-> index c5af5f35877f..000000000000
-> --- a/drivers/gpu/drm/panfrost/panfrost_debugfs.h
-> +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0 */
-> -/*
-> - * Copyright 2023 Collabora ltd.
-> - * Copyright 2023 Amazon.com, Inc. or its affiliates.
-> - */
-> -
-> -#ifndef PANFROST_DEBUGFS_H
-> -#define PANFROST_DEBUGFS_H
-> -
-> -#ifdef CONFIG_DEBUG_FS
-> -void panfrost_debugfs_init(struct drm_minor *minor);
-> -#endif
-> -
-> -#endif  /* PANFROST_DEBUGFS_H */
-> diff --git a/drivers/gpu/drm/panfrost/panfrost_device.h b/drivers/gpu/drm=
-/panfrost/panfrost_device.h
-> index 62f7e3527385..cffcb0ac7c11 100644
-> --- a/drivers/gpu/drm/panfrost/panfrost_device.h
-> +++ b/drivers/gpu/drm/panfrost/panfrost_device.h
-> @@ -130,7 +130,7 @@ struct panfrost_device {
->  	struct list_head scheduled_jobs;
-> =20
->  	struct panfrost_perfcnt *perfcnt;
-> -	atomic_t profile_mode;
-> +	bool profile_mode;
-> =20
->  	struct mutex sched_lock;
-> =20
-> diff --git a/drivers/gpu/drm/panfrost/panfrost_drv.c b/drivers/gpu/drm/pa=
-nfrost/panfrost_drv.c
-> index a926d71e8131..9696702800a4 100644
-> --- a/drivers/gpu/drm/panfrost/panfrost_drv.c
-> +++ b/drivers/gpu/drm/panfrost/panfrost_drv.c
-> @@ -20,7 +20,6 @@
->  #include "panfrost_job.h"
->  #include "panfrost_gpu.h"
->  #include "panfrost_perfcnt.h"
-> -#include "panfrost_debugfs.h"
-> =20
->  static bool unstable_ioctls;
->  module_param_unsafe(unstable_ioctls, bool, 0600);
-> @@ -600,10 +599,6 @@ static const struct drm_driver panfrost_drm_driver =
-=3D {
-> =20
->  	.gem_create_object	=3D panfrost_gem_create_object,
->  	.gem_prime_import_sg_table =3D panfrost_gem_prime_import_sg_table,
-> -
-> -#ifdef CONFIG_DEBUG_FS
-> -	.debugfs_init		=3D panfrost_debugfs_init,
-> -#endif
->  };
-> =20
->  static int panfrost_probe(struct platform_device *pdev)
-> @@ -692,6 +687,41 @@ static void panfrost_remove(struct platform_device *=
-pdev)
->  	drm_dev_put(ddev);
->  }
-> =20
-> +static ssize_t profiling_show(struct device *dev,
-> +			      struct device_attribute *attr, char *buf)
-> +{
-> +	struct panfrost_device *pfdev =3D dev_get_drvdata(dev);
-> +
-> +	return sysfs_emit(buf, "%d\n", pfdev->profile_mode);
-> +}
-> +
-> +
-> +static ssize_t profiling_store(struct device *dev,
-> +			       struct device_attribute *attr,
-> +			       const char *buf, size_t len)
-> +{
-> +	struct panfrost_device *pfdev =3D dev_get_drvdata(dev);
-> +	bool value;
-> +	int err;
-> +
-> +	err =3D kstrtobool(buf, &value);
-> +	if (err)
-> +		return err;
-> +
-> +	pfdev->profile_mode =3D value;
-> +
-> +	return len;
-> +}
-> +
-> +static DEVICE_ATTR_RW(profiling);
-> +
-> +static struct attribute *panfrost_attrs[] =3D {
-> +	&dev_attr_profiling.attr,
-> +	NULL,
-> +};
-> +
-> +ATTRIBUTE_GROUPS(panfrost);
-> +
->  /*
->   * The OPP core wants the supply names to be NULL terminated, but we nee=
-d the
->   * correct num_supplies value for regulator core. Hence, we NULL termina=
-te here
-> @@ -789,6 +819,7 @@ static struct platform_driver panfrost_driver =3D {
->  		.name	=3D "panfrost",
->  		.pm	=3D pm_ptr(&panfrost_pm_ops),
->  		.of_match_table =3D dt_match,
-> +		.dev_groups =3D panfrost_groups,
->  	},
->  };
->  module_platform_driver(panfrost_driver);
-> diff --git a/drivers/gpu/drm/panfrost/panfrost_job.c b/drivers/gpu/drm/pa=
-nfrost/panfrost_job.c
-> index 0c2dbf6ef2a5..a61ef0af9a4e 100644
-> --- a/drivers/gpu/drm/panfrost/panfrost_job.c
-> +++ b/drivers/gpu/drm/panfrost/panfrost_job.c
-> @@ -243,7 +243,7 @@ static void panfrost_job_hw_submit(struct panfrost_jo=
-b *job, int js)
->  	subslot =3D panfrost_enqueue_job(pfdev, js, job);
->  	/* Don't queue the job if a reset is in progress */
->  	if (!atomic_read(&pfdev->reset.pending)) {
-> -		if (atomic_read(&pfdev->profile_mode)) {
-> +		if (pfdev->profile_mode) {
->  			panfrost_cycle_counter_get(pfdev);
->  			job->is_profiled =3D true;
->  			job->start_time =3D ktime_get();
+Setup 1:
+--------
+Node 0 - Raspberry Pi 4 with LAN8650 MAC-PHY 
+Node 1 - Raspberry Pi 4 with EVB-LAN8670-USB USB Stick
+
+Setup 2:
+--------
+Node 0 - SAMA7G54-EK with LAN8650 MAC-PHY 
+Node 1 - Raspberry Pi 4 with EVB-LAN8670-USB USB Stick
+
+Achieved maximum of 9.4 Mbps.
+
+Some systems like Raspberry Pi 4 need performance mode enabled to get the
+proper clock speed for SPI. Refer below link for more details.
+
+https://github.com/raspberrypi/linux/issues/3381#issuecomment-1144723750
+
+Changes:
+v2:
+- Removed RFC tag.
+- OA TC6 framework configured in the Kconfig and Makefile to compile as a
+  module.
+- Kerneldoc headers added for all the API methods exposed to MAC driver.
+- Odd parity calculation logic updated from the below link,
+  https://elixir.bootlin.com/linux/latest/source/lib/bch.c#L348
+- Control buffer memory allocation moved to the initial function.
+- struct oa_tc6 implemented as an obaque structure.
+- Removed kthread for handling mac-phy interrupt instead threaded irq is
+  used.
+- Removed interrupt implementation for soft reset handling instead of
+  that polling has been implemented.
+- Registers name in the defines changed according to the specification
+  document.
+- Registers defines are arranged in the order of offset and followed by
+  register fields.
+- oa_tc6_write_register() implemented for writing a single register and
+  oa_tc6_write_registers() implemented for writing multiple registers.
+- oa_tc6_read_register() implemented for reading a single register and
+  oa_tc6_read_registers() implemented for reading multiple registers.
+- Removed DRV_VERSION macro as git hash provided by ethtool.
+- Moved MDIO bus registration and PHY initialization to the OA TC6 lib.
+- Replaced lan865x_set/get_link_ksettings() functions with
+  phy_ethtool_ksettings_set/get() functions.
+- MAC-PHY's standard capability register values checked against the
+  user configured values.
+- Removed unnecessary parameters validity check in various places.
+- Removed MAC address configuration in the lan865x_net_open() function as
+  it is done in the lan865x_probe() function already.
+- Moved standard registers and proprietary vendor registers to the
+  respective files.
+- Added proper subject prefixes for the DT bindings.
+- Moved OA specific properties to a separate DT bindings and corrected the
+  types & mistakes in the DT bindings.
+- Inherited OA specific DT bindings to the LAN865x specific DT bindings.
+- Removed sparse warnings in all the places.
+- Used net_err_ratelimited() for printing the error messages.
+- oa_tc6_process_rx_chunks() function and the content of oa_tc6_handler()
+  function are split into small functions.
+- Used proper macros provided by network layer for calculating the
+  MAX_ETH_LEN.
+- Return value of netif_rx() function handled properly.
+- Removed unnecessary NULL initialization of skb in the
+  oa_tc6_rx_eth_ready() function removed.
+- Local variables declaration ordered in reverse xmas tree notation.
+
+v3:
+- Completely redesigned all the patches.
+- Control and data interface patches are divided into multiple small
+  patches.
+- Device driver APIs added in the oa-tc6-framework.rst file.
+- Code readability improved in all the patches.
+- Defined macros wherever is possible.
+- Changed RESETC to STATUS0_RESETC for improving the readability.
+- Removed OA specific DT bindings.
+- Used default configurations defined in the OA spec.
+- All variables are named properly as per OA spec for more redability.
+- Bigger functions are split into multiple smaller functions.
+- DT binding check is done.
+- Phy mask is removed in phy scanning.
+- Used NET_RX_DROP to compare the rx packet submission status.
+- Indentation in the Kconfig file corrected.
+- Removed CONFIG_OF and CONFIG_ACPI ifdefs.
+- Removed MODULE_ALIAS().
+
+Parthiban Veerasooran (12):
+  Documentation: networking: add OPEN Alliance 10BASE-T1x MAC-PHY serial
+    interface
+  net: ethernet: oa_tc6: implement register write operation
+  net: ethernet: oa_tc6: implement register read operation
+  net: ethernet: oa_tc6: implement software reset
+  net: ethernet: oa_tc6: implement error interrupts unmasking
+  net: ethernet: oa_tc6: implement internal PHY initialization
+  net: ethernet: oa_tc6: enable open alliance tc6 data communication
+  net: ethernet: oa_tc6: implement transmit path to transfer tx ethernet
+    frames
+  net: ethernet: oa_tc6: implement receive path to receive rx ethernet
+    frames
+  net: ethernet: oa_tc6: implement mac-phy interrupt
+  microchip: lan865x: add driver support for Microchip's LAN865X MAC-PHY
+  dt-bindings: net: add Microchip's LAN865X 10BASE-T1S MACPHY
+
+ .../bindings/net/microchip,lan865x.yaml       |   80 ++
+ Documentation/networking/oa-tc6-framework.rst |  491 +++++++
+ MAINTAINERS                                   |   15 +
+ drivers/net/ethernet/Kconfig                  |   15 +
+ drivers/net/ethernet/Makefile                 |    1 +
+ drivers/net/ethernet/microchip/Kconfig        |    1 +
+ drivers/net/ethernet/microchip/Makefile       |    1 +
+ .../net/ethernet/microchip/lan865x/Kconfig    |   19 +
+ .../net/ethernet/microchip/lan865x/Makefile   |    6 +
+ .../net/ethernet/microchip/lan865x/lan865x.c  |  350 +++++
+ drivers/net/ethernet/oa_tc6.c                 | 1235 +++++++++++++++++
+ include/linux/oa_tc6.h                        |   23 +
+ 12 files changed, 2237 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/net/microchip,lan865x.yaml
+ create mode 100644 Documentation/networking/oa-tc6-framework.rst
+ create mode 100644 drivers/net/ethernet/microchip/lan865x/Kconfig
+ create mode 100644 drivers/net/ethernet/microchip/lan865x/Makefile
+ create mode 100644 drivers/net/ethernet/microchip/lan865x/lan865x.c
+ create mode 100644 drivers/net/ethernet/oa_tc6.c
+ create mode 100644 include/linux/oa_tc6.h
+
+-- 
+2.34.1
 
 
