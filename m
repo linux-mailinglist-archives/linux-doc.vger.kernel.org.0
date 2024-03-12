@@ -1,131 +1,88 @@
-Return-Path: <linux-doc+bounces-12008-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12010-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75290879C16
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 20:09:03 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id A3C7F879C31
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 20:18:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8A1271C22136
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 19:09:02 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D5F631C22120
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 19:18:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 80BE8142635;
-	Tue, 12 Mar 2024 19:08:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A43A823BB;
+	Tue, 12 Mar 2024 19:18:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="b2Vdkjqu"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Lq5jRVHK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DD77C139572;
-	Tue, 12 Mar 2024 19:08:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5182979DD4
+	for <linux-doc@vger.kernel.org>; Tue, 12 Mar 2024 19:18:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1710270531; cv=none; b=gVwQucksKi2ti9m4b1G/8jg99UIQUOiAGq+0Zz5cAZ4yNqV/dpQHrx2XtiQckSk/UUR3KxghhEYJWtRM44A0ASObDCMcWJVgri47qLnx+Kb3tY3uvI4QhY+vuTaKgUOmkaw6iHwwd4//YvEjhkQx9NPQyFoPytvn+5dAWn0+YtI=
+	t=1710271114; cv=none; b=YHpz9r4/raHvEFVpdaOUlt9DnQGysoilny5lYcaXmRv3qmseO7xBThFIj2z/xqmXXujABWwdqGkNJmIZ+wlhc/MlfwmRv/DkV5NPsrQRiH8kUiWP2xN20AXLIBzHiZe6Kjv+nFm94zq2ZeE5oAasNrvdyyq9cdcQqUx/+fIAcro=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1710270531; c=relaxed/simple;
-	bh=uJKJ5TT0DIQCG1G4MHwjHdZ45SeGQe6J4lJO/tq7XHI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=T/MMM1kx+1+uqgp/l+IbI3GgmVicURuCQtVRCPtttC5EjbpqiqvKqC0/st/cfm1eC4GnnJHPQqTHiIcBZwHmoXU0CVOUyyun5tVgaXLaUnln3O1eS4gwW3CV0eRtSAGJw6cqwbMio/LsU3kLufmhq6zVpDS4pevbN548xlZ5fNQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=b2Vdkjqu; arc=none smtp.client-ip=13.77.154.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
-Received: from [10.137.106.151] (unknown [167.220.2.23])
-	by linux.microsoft.com (Postfix) with ESMTPSA id 5553320B74C0;
-	Tue, 12 Mar 2024 12:08:49 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 5553320B74C0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1710270529;
-	bh=cWEVzi9QVVsJQgWK0gb+VOtCy9uOsL8ujlhBGevuOmc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=b2VdkjquI/gfoxlQSlcUlTggdkJsZmhj+zejliyOfxmDA1IOrPGJIPBk7VcPkVMUB
-	 Kyh93nFVzbfMhUQjOQDT3EaUahlKkrWKwFQp6K+Hi7CkcTBuyQ2kUmxR8pJHsthWBG
-	 VLEd4uSybXl6Rc41g4x6fT6CHtJAsnZ/gKNEuqzs=
-Message-ID: <746a5548-0e98-4953-9e71-16b881c63aa8@linux.microsoft.com>
-Date: Tue, 12 Mar 2024 12:08:49 -0700
+	s=arc-20240116; t=1710271114; c=relaxed/simple;
+	bh=+kqnd5anT5wzI+bd5hVFx3oIdadn79veWgvw73EE5PA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=hpEjExvPhurETlLUrIeXDULp6QdcUaQWc8OCbCcaXNgErUy3kE3jauRktUb15mw1rRKRJkR9fJq5aEL5Ya9goDdOFfUsHqFzafX7ogJnox0c11ibbz//+spom9iLgfn7lnzJCtGQ/EBZ2IBYmCVBQCt+wf17jxa9mNZPuT1wB4I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=Lq5jRVHK; arc=none smtp.client-ip=90.155.50.34
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=6CXe0g83J/BWt3q6SKLampiKkLdxZASJu+2IKbRVzc0=; b=Lq5jRVHKZx/oJ/ntr7dpP/fH9u
+	QDlquW4LMyYKQZfxvzmQ+OIcnJdF/JwgVUOxhOep8aO2p1gWrYlOb/OT/wUuID4LjIhIsr3G7Mb1y
+	X7xFASria1xX4XR2wok6rHACO9nPo19dR0+MAHAAlurcg+0OuSS3mk9xD9WpknrApyMdl/DbDIY9F
+	XzAnGQR/2NTwuupvyOQs4x27OUzbIRgxXJhvYoywEykkxl+eqbgHED0aNiqVj2+JaS9bbWduo7GK3
+	2dsR1qxj94ZO3g7vHq0Plx5/V7ci2BjpSTKeHR9+x2Adp9qCSn1/m0DgR1gfa0sEkoLIvwBhW4B+s
+	4BB5pVdQ==;
+Received: from willy by casper.infradead.org with local (Exim 4.97.1 #2 (Red Hat Linux))
+	id 1rk7du-00000003iLM-2A7w;
+	Tue, 12 Mar 2024 19:18:30 +0000
+Date: Tue, 12 Mar 2024 19:18:30 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Kendra Moore <kendra.j.moore3443@gmail.com>
+Cc: linux-doc@vger.kernel.org
+Subject: Re: [PATCH] doc: Fix typo in admin-guide/cifs/introduction.rst
+Message-ID: <ZfCqhj07yDwvHcAf@casper.infradead.org>
+References: <20240312084753.27122-1-kendra.j.moore3443@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v14 15/19] fsverity: consume builtin signature via LSM
- hook
-Content-Language: en-CA
-To: Casey Schaufler <casey@schaufler-ca.com>,
- Eric Biggers <ebiggers@kernel.org>
-Cc: corbet@lwn.net, zohar@linux.ibm.com, jmorris@namei.org, serge@hallyn.com,
- tytso@mit.edu, axboe@kernel.dk, agk@redhat.com, snitzer@kernel.org,
- eparis@redhat.com, paul@paul-moore.com, linux-doc@vger.kernel.org,
- linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org,
- dm-devel@lists.linux.dev, audit@vger.kernel.org,
- linux-kernel@vger.kernel.org, Deven Bowers <deven.desai@linux.microsoft.com>
-References: <1709768084-22539-1-git-send-email-wufan@linux.microsoft.com>
- <1709768084-22539-16-git-send-email-wufan@linux.microsoft.com>
- <20240312025712.GE1182@sol.localdomain>
- <20240312030712.GF1182@sol.localdomain>
- <51810153-eb6e-40f7-b5d0-5f72c2f4ee9b@linux.microsoft.com>
- <568fae5e-a6d4-4832-a1a1-ac3f4f93d650@schaufler-ca.com>
-From: Fan Wu <wufan@linux.microsoft.com>
-In-Reply-To: <568fae5e-a6d4-4832-a1a1-ac3f4f93d650@schaufler-ca.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240312084753.27122-1-kendra.j.moore3443@gmail.com>
 
-
-
-On 3/12/2024 11:51 AM, Casey Schaufler wrote:
-> On 3/12/2024 11:14 AM, Fan Wu wrote:
->>
->>
->> On 3/11/2024 8:07 PM, Eric Biggers wrote:
->>> On Mon, Mar 11, 2024 at 07:57:12PM -0700, Eric Biggers wrote:
->>>>
->>>> As I've said before, this commit message needs some work.  It
->>>> currently doesn't
->>>> say anything about what the patch actually does.
->>>>
->>>> BTW, please make sure you're Cc'ing the fsverity mailing list
->>>> (fsverity@lists.linux.dev), not fscrypt
->>>> (linux-fscrypt@vger.kernel.org).
->>>
->>> Also, I thought this patch was using a new LSM hook, but I now see
->>> that you're
->>> actually abusing the existing security_inode_setsecurity() LSM hook.
->>> Currently
->>> that hook is called when an xattr is set.  I don't see any precedent for
->>> overloading it for other purposes.  This seems problematic, as it
->>> means that a
->>> request to set an xattr with the name you chose
->>> ("fsverity.builtin-sig") will be
->>> interpreted by LSMs as the fsverity builtin signature.  A dedicated
->>> LSM hook may
->>> be necessary to avoid issues with overloading the existing xattr hook
->>> like this.
->>>
->>> - Eric
->>
->> Thanks for the suggestion. I found that using
->> security_inode_setsecurity() causes issues with SMACK's
->> inode_setsecurity() hook. I will crate a dedicated new hook like
->> security_inode_setsig() in the next version.
+On Tue, Mar 12, 2024 at 04:47:53AM -0400, Kendra Moore wrote:
+> This patch corrects a spelling error specifically
+> the word "supports" was misspelled "suppors".
 > 
-> What is the issue you encountered with the Smack hook?
+> No functional changes are made by this patch; it
+> only improves the accuracy and readability of the
+> documentation.
 > 
+> Signed-off-by: Kendra Moore <kendra.j.moore3443@gmail.com>
 
-The current hook call for saving file signature will fail at 
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/security/smack/smack_lsm.c#n2855 
-.
+Reviewed-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 
-The issue is file signature size is larger than SMK_LONGLABEL so if 
-SMACK is enabled the SMACK's hook will return -EINVAL, which prevents us 
-to use security_inode_setsecurity() to save file signature into security 
-blob.
+If you wanted to, there are two other occurrences of the word 'suppors'
+in Linux:
 
-We could also make security_inode_setsecurity() more generic instead of 
-for xattr only, any suggestions?
+$ git grep suppors
+Documentation/admin-guide/cifs/introduction.rst:  CIFS Unix extensions, and the Linux client also suppors SMB3 POSIX extensions,
+drivers/media/rc/keymaps/rc-khamsin.c: * BT (STB) modes. This keymap suppors the IR controls.
+drivers/net/ethernet/samsung/sxgbe/sxgbe_main.c: * and allocates the socket buffers. It suppors the chained and ring
 
--Fan
-
-
+which you could submit patches for.  You could also add it to
+scripts/spelling.txt so there's a chance it won't appear in the future.
+None of these are as important as getting this patch in, since this is
+visible documentation.
 
