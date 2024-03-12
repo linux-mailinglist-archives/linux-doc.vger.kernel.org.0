@@ -1,110 +1,183 @@
-Return-Path: <linux-doc+bounces-12009-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-11967-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27762879C22
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 20:12:58 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D645879316
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 12:36:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id C6AE51F23935
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 19:12:57 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 08CB42831BD
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 11:36:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 56DFA139572;
-	Tue, 12 Mar 2024 19:12:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KlgPOKyq"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 48F5578288;
+	Tue, 12 Mar 2024 11:36:20 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6A081386B5
-	for <linux-doc@vger.kernel.org>; Tue, 12 Mar 2024 19:12:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.173
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EE1E920304;
+	Tue, 12 Mar 2024 11:36:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1710270773; cv=none; b=bsZgVO0n2oZZpU7Q1lZuKxddAdbXRjgMWqXotb1z2d9k5sPfkSzehZcIwZ/Cq+qURWJSiM1AtH6dxc1IHOGt65pmtZBTpT0JiXI3lnl5SIIzBoRxydwt+L5RcUUqSvmWpPNXFMBbzCZHyfz7dfw2JIJM+Mdx1OpY3qdPG3bLozs=
+	t=1710243380; cv=none; b=b4Zj/W2hJ9W03jtw95kTKg75f9McQvRQ+9pBz5X5eeeSKNnKtdfPGuWr28LgHjMqdFdffiWZ1aYyhk9N10Zew/xAk95FeETwCENQJtxKX5I329PFSAsyxA0BBarzbH7PQjVXdRFG38DC4txbhRcVRb/tg+untf3eMm2AP6cTmDQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1710270773; c=relaxed/simple;
-	bh=1Brj7Ha5+fbF32x3NFBv4yvdgHj7Tx/5MV5i9z3IqE0=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=HQ6s79B6jiJM+osWdQckJP02HebL88t+d4dZ1JTnBFgYbZ6mzRvxXJEvvQijJ50IMt07wM47dAb4AOON2vaozvZw2IODxOGOLexqXAE7rb9WLgbGuXgrNtIDPM/MLc/ulG6eTx9SuGpaLh+Gaa9UFnnySD0CaRKflD34DXTnWcs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KlgPOKyq; arc=none smtp.client-ip=209.85.128.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-60a5a11b59dso9901697b3.0
-        for <linux-doc@vger.kernel.org>; Tue, 12 Mar 2024 12:12:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710270770; x=1710875570; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=qRLuvuRLRD2eLcvzdQSEvSRDyYr5UyjvEaAEWSq4BXk=;
-        b=KlgPOKyqE5F7i1IX+UtwVFY+Zv6x9cUMA+z/BjrYzDi2sCmlONe4LTAqzVZ+xMZVJ2
-         1oYfCXE0FO5+pDTuw75tq0GCjBEJrWOHLSVGByKkRCPS+l/WptUY7zSC1YOKiPulj47o
-         PHQGXBgYemfeniroVLlrEfoR+mMW7gwi5aQyBX5M3dxC3lxAXQObkytqjP8/FcmwcLLM
-         LIW1yUm9ODLENOUa7xmMqYQkCP+6xyJGaqp9KqRNlUeNzHYBwjeu+L16nh825ndLDrRs
-         TfUw82rrrq2AanRLMsMBMHnhni7GiyKzzIURBMqbmd8Gc15f+B3/c3ounVuhB7hgeaOV
-         wCjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710270770; x=1710875570;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=qRLuvuRLRD2eLcvzdQSEvSRDyYr5UyjvEaAEWSq4BXk=;
-        b=mdiEkGYw/wjAIgRtYLQqgCkkRa7VylCJa404u18ekzycuOkzAy6HrlsONKTiW8qIK2
-         8yGFfeOWoKv6l82iIF4m6pYTWsEPdvrHjXvtBGhvIr0yTpnRS5rRkSVkdYXUuitANIUp
-         TO9thsbh7f+Z+kVqnkdKjYaTxFuummOEtR+1DiF1sS4Tv+8rNMRRnth2FIUBzEuOZ7ko
-         vBcYrHKvXTkRTQxN9sJ6UtW0FYcQHgpT2jxPeh8OAIEzWO3GUPmAktiZj9FCcmFBy6dA
-         1U7KM96SuN7kh1veh7ESybbr1FhNV48S1tM8HB/gA87x3g5R/Q07KQmuljgKVnwLNkcf
-         xg1g==
-X-Gm-Message-State: AOJu0YxxQPl8q6AMbz/iI3PG4VKYRCQ8YlbOmCVGvNK6T2p3bYp8GNAS
-	bHqOrlQk14Qx7co28TVVCIrfnVydlZWvUtnSDe8iP8y7pF1/deClA+ZlKx0/
-X-Google-Smtp-Source: AGHT+IEss7N2gsJ5Yf7mUE0aVs8HBFGYGCtzP6oSSLkM3qaS7UzNzEyp2vMuFNKHR/OehZl05brXwQ==
-X-Received: by 2002:a0d:f082:0:b0:60a:1d7d:c0de with SMTP id z124-20020a0df082000000b0060a1d7dc0demr378769ywe.16.1710270770042;
-        Tue, 12 Mar 2024 12:12:50 -0700 (PDT)
-Received: from localhost.localdomain ([64.234.79.138])
-        by smtp.gmail.com with ESMTPSA id d73-20020a814f4c000000b0060a03c196cdsm2023051ywb.63.2024.03.12.12.12.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Mar 2024 12:12:49 -0700 (PDT)
-From: Kendra Moore <kendra.j.moore3443@gmail.com>
-To: linux-doc@vger.kernel.org
-Cc: Kendra Moore <kendra.j.moore3443@gmail.com>
-Subject: [PATCH] doc: Fix typo in admin-guide/cifs/introduction.rst
-Date: Tue, 12 Mar 2024 04:47:53 -0400
-Message-Id: <20240312084753.27122-1-kendra.j.moore3443@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1710243380; c=relaxed/simple;
+	bh=TPg3Td+XLiyE8SiOwEwur+rbcT0GJ58OK6ENOzskB78=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=BsUZB7vdxKmuXJyU5ANpyD3EWLR+yKykEdEFKjTnhJh9/Cy+lmYkkCNiswBSUgsz66KYpqg7+SIE2zYwYoiImfEbz2JWa1ZslFuoLqVMATk1pDKR8kj1yyL8g7z78fCXqVmIdpPxDM/cKzmab9DvgasHFT6GX/Uwsolr0OqPYd4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 36FC51007;
+	Tue, 12 Mar 2024 04:36:54 -0700 (PDT)
+Received: from [10.37.129.2] (unknown [172.31.20.19])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 301233F762;
+	Tue, 12 Mar 2024 04:36:15 -0700 (PDT)
+From: Balint Dobszay <balint.dobszay@arm.com>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: op-tee@lists.trustedfirmware.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ jens.wiklander@linaro.org, corbet@lwn.net, sudeep.holla@arm.com,
+ rdunlap@infradead.org, krzk@kernel.org, gyorgy.szing@arm.com
+Subject: Re: [PATCH v3 0/4] TEE driver for Trusted Services
+Date: Tue, 12 Mar 2024 12:36:13 +0100
+X-Mailer: MailMate (1.14r5937)
+Message-ID: <173F2BEA-50F1-4339-A072-473ED7CC7DC9@arm.com>
+In-Reply-To: <CAFA6WYPNV5F3h=naCtg=fYr8zfB3rho+G1B6-rggLe_PkqvgnQ@mail.gmail.com>
+References: <20240305101745.213933-1-balint.dobszay@arm.com>
+ <CAFA6WYPNV5F3h=naCtg=fYr8zfB3rho+G1B6-rggLe_PkqvgnQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-This patch corrects a spelling error specifically
-the word "supports" was misspelled "suppors".
+Hi Sumit,
 
-No functional changes are made by this patch; it
-only improves the accuracy and readability of the
-documentation.
+On 6 Mar 2024, at 11:40, Sumit Garg wrote:
 
-Signed-off-by: Kendra Moore <kendra.j.moore3443@gmail.com>
----
- Documentation/admin-guide/cifs/introduction.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Hi Balint,
+>
+> On Tue, 5 Mar 2024 at 15:48, Balint Dobszay <balint.dobszay@arm.com> wr=
+ote:
+>>
+>> This series introduces a TEE driver for Trusted Services [1].
+>>
+>> Trusted Services is a TrustedFirmware.org project that provides a
+>> framework for developing and deploying device Root of Trust services i=
+n
+>> FF-A [2] Secure Partitions. The project hosts the reference
+>> implementation of Arm Platform Security Architecture [3] for Arm
+>> A-profile devices.
+>>
+>> The FF-A Secure Partitions are accessible through the FF-A driver in
+>> Linux. However, the FF-A driver doesn't have a user space interface so=
 
-diff --git a/Documentation/admin-guide/cifs/introduction.rst b/Documentation/admin-guide/cifs/introduction.rst
-index 53ea62906aa5..ffc6e2564dd5 100644
---- a/Documentation/admin-guide/cifs/introduction.rst
-+++ b/Documentation/admin-guide/cifs/introduction.rst
-@@ -28,7 +28,7 @@ Introduction
-   high performance safe distributed caching (leases/oplocks), optional packet
-   signing, large files, Unicode support and other internationalization
-   improvements. Since both Samba server and this filesystem client support the
--  CIFS Unix extensions, and the Linux client also suppors SMB3 POSIX extensions,
-+  CIFS Unix extensions, and the Linux client also supports SMB3 POSIX extensions,
-   the combination can provide a reasonable alternative to other network and
-   cluster file systems for fileserving in some Linux to Linux environments,
-   not just in Linux to Windows (or Linux to Mac) environments.
--- 
-2.34.1
+>> user space clients currently cannot access Trusted Services. The goal =
+of
+>> this TEE driver is to bridge this gap and make Trusted Services
+>> functionality accessible from user space.
+>>
+>> Changelog:
+>> v2[6] -> v3:
+>>   - Add patch "tee: Refactor TEE subsystem header files" from Sumit
+>>   - Remove unnecessary includes from core.c
+>>   - Remove the mutex from "struct ts_context_data" since the same
+>>     mechanism could be implemented by reusing the XArray's internal lo=
+ck
+>>   - Rename tee_shm_pool_op_*_helper functions as suggested by Sumit
+>>   - Replace pr_* with dev_* as previously suggested by Krzysztof
+>>
+>
+> I will also suggest you to add a maintainer's entry for this new
+> Trusted Services TEE driver.
 
+Sure, will do. I plan to post v4 next week.
+
+Regards,
+Balint
+
+>> v1[5] -> v2:
+>>   - Refactor session handling to use XArray instead of IDR and linked
+>>     list (the linked list was redundant as pointed out by Jens, and ID=
+R
+>>     is now deprecated in favor of XArray)
+>>   - Refactor tstee_probe() to not call tee_device_unregister() before
+>>     calling tee_device_register()
+>>   - Address comments from Krzysztof and Jens
+>>   - Address documentation comments from Randy
+>>   - Use module_ffa_driver() macro instead of separate module init / ex=
+it
+>>     functions
+>>   - Reformat max line length 100 -> 80
+>>
+>> RFC[4] -> v1:
+>>   - Add patch for moving pool_op helper functions to the TEE subsystem=
+,
+>>     as suggested by Jens
+>>   - Address comments from Sumit, add patch for documentation
+>>
+>> [1] https://www.trustedfirmware.org/projects/trusted-services/
+>> [2] https://developer.arm.com/documentation/den0077/
+>> [3] https://www.arm.com/architecture/security-features/platform-securi=
+ty
+>> [4] https://lore.kernel.org/linux-arm-kernel/20230927152145.111777-1-b=
+alint.dobszay@arm.com/
+>> [5] https://lore.kernel.org/lkml/20240213145239.379875-1-balint.dobsza=
+y@arm.com/
+>> [6] https://lore.kernel.org/lkml/20240223095133.109046-1-balint.dobsza=
+y@arm.com/
+>>
+>>
+>> Balint Dobszay (3):
+>>   tee: optee: Move pool_op helper functions
+>>   tee: tstee: Add Trusted Services TEE driver
+>>   Documentation: tee: Add TS-TEE driver
+>>
+>> Sumit Garg (1):
+>>   tee: Refactor TEE subsystem header files
+>>
+>>  Documentation/tee/index.rst         |   1 +
+>>  Documentation/tee/ts-tee.rst        |  71 ++++
+>>  MAINTAINERS                         |   1 +
+>>  drivers/tee/Kconfig                 |   1 +
+>>  drivers/tee/Makefile                |   1 +
+>>  drivers/tee/amdtee/amdtee_private.h |   2 +-
+>>  drivers/tee/amdtee/call.c           |   2 +-
+>>  drivers/tee/amdtee/core.c           |   3 +-
+>>  drivers/tee/amdtee/shm_pool.c       |   2 +-
+>>  drivers/tee/optee/call.c            |   2 +-
+>>  drivers/tee/optee/core.c            |  66 +---
+>>  drivers/tee/optee/device.c          |   2 +-
+>>  drivers/tee/optee/ffa_abi.c         |   8 +-
+>>  drivers/tee/optee/notif.c           |   2 +-
+>>  drivers/tee/optee/optee_private.h   |  14 +-
+>>  drivers/tee/optee/rpc.c             |   2 +-
+>>  drivers/tee/optee/smc_abi.c         |  11 +-
+>>  drivers/tee/tee_core.c              |   2 +-
+>>  drivers/tee/tee_private.h           |  35 --
+>>  drivers/tee/tee_shm.c               |  66 +++-
+>>  drivers/tee/tee_shm_pool.c          |   2 +-
+>>  drivers/tee/tstee/Kconfig           |  11 +
+>>  drivers/tee/tstee/Makefile          |   3 +
+>>  drivers/tee/tstee/core.c            | 482 +++++++++++++++++++++++++++=
++
+>>  drivers/tee/tstee/tstee_private.h   |  92 ++++++
+>>  include/linux/tee_core.h            | 306 ++++++++++++++++++
+>>  include/linux/tee_drv.h             | 285 ++--------------
+>>  include/uapi/linux/tee.h            |   1 +
+>>  28 files changed, 1087 insertions(+), 389 deletions(-)
+>>  create mode 100644 Documentation/tee/ts-tee.rst
+>>  create mode 100644 drivers/tee/tstee/Kconfig
+>>  create mode 100644 drivers/tee/tstee/Makefile
+>>  create mode 100644 drivers/tee/tstee/core.c
+>>  create mode 100644 drivers/tee/tstee/tstee_private.h
+>>  create mode 100644 include/linux/tee_core.h
+>>
+>> --
+>> 2.34.1
+>>
 
