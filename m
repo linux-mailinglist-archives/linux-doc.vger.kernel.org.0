@@ -1,88 +1,147 @@
-Return-Path: <linux-doc+bounces-12025-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12027-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17BE2879D7C
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 22:29:14 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BD35879D9C
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 22:43:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id C14861F21BF4
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 21:29:13 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EC0812825AB
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Mar 2024 21:43:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 93AC0143740;
-	Tue, 12 Mar 2024 21:28:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 785E6143C4B;
+	Tue, 12 Mar 2024 21:42:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="b4k4VM02"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E425143736;
-	Tue, 12 Mar 2024 21:28:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.95.11.211
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 340F8143747;
+	Tue, 12 Mar 2024 21:42:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.19
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1710278934; cv=none; b=c1Z2b7pizgN/32qSGZrAdtmKt4c9NG7AxCxsS2J3a4LEvV5pVQj8AjOm/119arXvRx0ilEdmAWWU+ZjVyHpKJWcuGnT9RJVrS2PXo2mcZ2+6E1fg/TsGVOhZKJO9hgEjOztRAwMkq+kCyUfQ+UUbGH0r8vdmMSFpIXgJVMcMJZ8=
+	t=1710279777; cv=none; b=t2ISqHJBePu3oqG9tFJKBinfe3uEQjzf4ut0NS0MUxEqcjvyS9rTDAHxTBquNifjDktP3Et5Ex6os7E54lmXRSGGSUnRCEBgMMxVNZJL89BEktObyR635+AUnMk/XJSdGWg6LxL/bd+0ox1MxdKKqdkIIr9DjOrMSyLe2hqBbQI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1710278934; c=relaxed/simple;
-	bh=BRQTLaIPx6C1TH1fJOMUn+wWNHenNMsiGQ36m5L9rtA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nUaSLr3fMhCWL6/cnQGL7z8+tAZuUBAwPU0MfKC8Stmo5L2Unp0zoRK7urt13mG/M/+rJP0+qpcMy1xOKQ3ggtNf0ZrvVrO9sGDoGYOCbixIBbmWd6eXJrNoT/3vAOLO4l7kaXXlBW/yKU6W1FEtRkkdZOQdSTXygpuhT/saT1o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de; spf=pass smtp.mailfrom=lst.de; arc=none smtp.client-ip=213.95.11.211
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lst.de
-Received: by verein.lst.de (Postfix, from userid 2407)
-	id 514BE68BFE; Tue, 12 Mar 2024 22:28:45 +0100 (CET)
-Date: Tue, 12 Mar 2024 22:28:44 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: Leon Romanovsky <leon@kernel.org>
-Cc: Christoph Hellwig <hch@lst.de>, Jason Gunthorpe <jgg@ziepe.ca>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-	Chaitanya Kulkarni <chaitanyak@nvidia.com>,
-	Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
-	Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>,
-	Yishai Hadas <yishaih@nvidia.com>,
-	Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Alex Williamson <alex.williamson@redhat.com>,
-	=?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org, linux-rdma@vger.kernel.org,
-	iommu@lists.linux.dev, linux-nvme@lists.infradead.org,
-	kvm@vger.kernel.org, linux-mm@kvack.org,
-	Bart Van Assche <bvanassche@acm.org>,
-	Damien Le Moal <damien.lemoal@opensource.wdc.com>,
-	Amir Goldstein <amir73il@gmail.com>,
-	"josef@toxicpanda.com" <josef@toxicpanda.com>,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	"daniel@iogearbox.net" <daniel@iogearbox.net>,
-	Dan Williams <dan.j.williams@intel.com>,
-	"jack@suse.com" <jack@suse.com>, Zhu Yanjun <zyjzyj2000@gmail.com>
-Subject: Re: [RFC RESEND 00/16] Split IOMMU DMA mapping operation to two
- steps
-Message-ID: <20240312212844.GA3018@lst.de>
-References: <20240306162022.GB28427@lst.de> <20240306174456.GO9225@ziepe.ca> <20240306221400.GA8663@lst.de> <20240307000036.GP9225@ziepe.ca> <20240307150505.GA28978@lst.de> <20240307210116.GQ9225@ziepe.ca> <20240308164920.GA17991@lst.de> <20240308202342.GZ9225@ziepe.ca> <20240309161418.GA27113@lst.de> <20240310093513.GB12921@unreal>
+	s=arc-20240116; t=1710279777; c=relaxed/simple;
+	bh=rgmxi5u6+E3/+xxSprJzTUYVwc4SV24nXmvybdtGqRU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=SJK88V79UfjanTxsts9Kbfjb9SqpvPMvi8/9MvLP2GhocU+Y6Ar0tDG1Kgz0WchaTTzeiTpJXqWqv4Bp3ixA5HHdGiuuO0GgQh9w97tlVtiqkj9fQaUqiLklHy65rER+1a/TD1t7OBmfhg+wK8sEWUz3lB+F6ksKDsixgWqGVw4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=b4k4VM02; arc=none smtp.client-ip=198.175.65.19
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1710279775; x=1741815775;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=rgmxi5u6+E3/+xxSprJzTUYVwc4SV24nXmvybdtGqRU=;
+  b=b4k4VM0204tRScdypyq2Xw6DR9vB45QICe+nfRLuSUJctgbZ2KFSy/JR
+   nioy2DYxZKZrLs8HrhWEy2zb79kKreCmZQt9SoUJ6mw8Dvo9AUbRcXLZg
+   pSYhhvfHjoJz3Wsw/Zd8dAl7PWRyVAl0txkQ0Te2WuSKc4dtHFypO5FPT
+   p1sEZ+Kq6iH3g5a3qHnlaTlU+/XtL0nQ2eR+NKQU9Jt3TgcwGNlZnAmZ0
+   XObd91p3f3WdZf7YpgrDirAXUMZPyjii3tPARMeiyHK18mpHJN0hrVX9Y
+   9ERLMIyuyMCmCxQMz2DpdhIkwOfZcnKcQcquvW//XcfRygU9LjCk9OdUj
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11011"; a="4884767"
+X-IronPort-AV: E=Sophos;i="6.07,119,1708416000"; 
+   d="scan'208";a="4884767"
+Received: from orviesa008.jf.intel.com ([10.64.159.148])
+  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Mar 2024 14:42:54 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.07,119,1708416000"; 
+   d="scan'208";a="12280133"
+Received: from agluck-desk3.sc.intel.com ([172.25.222.105])
+  by orviesa008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Mar 2024 14:42:53 -0700
+From: Tony Luck <tony.luck@intel.com>
+To: Fenghua Yu <fenghua.yu@intel.com>,
+	Reinette Chatre <reinette.chatre@intel.com>,
+	Peter Newman <peternewman@google.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	x86@kernel.org
+Cc: Shaopeng Tan <tan.shaopeng@fujitsu.com>,
+	James Morse <james.morse@arm.com>,
+	Jamie Iles <quic_jiles@quicinc.com>,
+	Babu Moger <babu.moger@amd.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Drew Fustini <dfustini@baylibre.com>,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	patches@lists.linux.dev,
+	Tony Luck <tony.luck@intel.com>
+Subject: [PATCH v16 0/9] Add support for Sub-NUMA cluster (SNC) systems
+Date: Tue, 12 Mar 2024 14:42:38 -0700
+Message-ID: <20240312214247.91772-1-tony.luck@intel.com>
+X-Mailer: git-send-email 2.44.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240310093513.GB12921@unreal>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+Content-Transfer-Encoding: 8bit
 
-On Sun, Mar 10, 2024 at 11:35:13AM +0200, Leon Romanovsky wrote:
-> And you will need to have a way to instruct that pin_user_pages() variant
-> to continue anyway, because you asked for FOLL_PCI_P2PDMA. Without that
-> force, you will have !FOLL_PCI_P2PDMA behaviour.
+The Sub-NUMA cluster feature on some Intel processors partitions the CPUs
+that share an L3 cache into two or more sets. This plays havoc with the
+Resource Director Technology (RDT) monitoring features.  Prior to this
+patch Intel has advised that SNC and RDT are incompatible.
 
-I don't understand what you mean.
+Some of these CPU support an MSR that can partition the RMID counters in
+the same way. This allows monitoring features to be used. With the caveat
+that users must be aware that Linux may migrate tasks more frequently
+between SNC nodes than between "regular" NUMA nodes, so reading counters
+from all SNC nodes may be needed to get a complete picture of activity
+for tasks.
 
-> When you say "simplify the overall interface", which interface do you mean?
+Cache and memory bandwidth allocation features continue to operate at
+the scope of the L3 cache.
 
-Primarily the dma mapping interface.  Secondarily also everything around
-it.
+Signed-off-by: Tony Luck <tony.luck@intel.com>
+
+---
+Changes since v15: Link: https://lore.kernel.org/all/20240228112935.8087-tony.luck@intel.com/
+
+0) Note that v14 Reviewed/Testing tags have been removed because of the
+   extent of refactoring to catch up with upstream. But nothing
+   fundamental changed, so everything should look familiar.
+
+1) Refactor to apply on top of Link: https://lore.kernel.org/all/20240308213846.77075-1-tony.luck@intel.com/
+   [So base commit is either tip x86/cache, or upstream current merge PLUS
+    the two patches in that series]
+
+2) Add patch 9 which adds files showing mappings from domains to CPUs
+   Reinette suggested this, James thinks it duplicates information
+   that can be gathered from /sys/devices/system/
+   Discussion here: Link: https://lore.kernel.org/all/ZetcM9GO2PH6SC0j@agluck-desk3/
+   This part is a nice-to-have. I'm fine if just the first eight patches
+   are applied without this while the discussion continues.
+
+Tony Luck (9):
+  x86/resctrl: Prepare for new domain scope
+  x86/resctrl: Prepare to split rdt_domain structure
+  x86/resctrl: Prepare for different scope for control/monitor
+    operations
+  x86/resctrl: Split the rdt_domain and rdt_hw_domain structures
+  x86/resctrl: Add node-scope to the options for feature scope
+  x86/resctrl: Introduce snc_nodes_per_l3_cache
+  x86/resctrl: Sub NUMA Cluster detection and enable
+  x86/resctrl: Update documentation with Sub-NUMA cluster changes
+  x86/resctrl: Add info files to show mappings from domains to lists of
+    cpus
+
+ Documentation/arch/x86/resctrl.rst        |  44 ++-
+ include/linux/resctrl.h                   |  85 +++--
+ arch/x86/include/asm/msr-index.h          |   1 +
+ arch/x86/kernel/cpu/resctrl/internal.h    |  67 ++--
+ arch/x86/kernel/cpu/resctrl/core.c        | 428 ++++++++++++++++++----
+ arch/x86/kernel/cpu/resctrl/ctrlmondata.c |  56 +--
+ arch/x86/kernel/cpu/resctrl/monitor.c     |  70 ++--
+ arch/x86/kernel/cpu/resctrl/pseudo_lock.c |  26 +-
+ arch/x86/kernel/cpu/resctrl/rdtgroup.c    | 213 +++++++----
+ 9 files changed, 718 insertions(+), 272 deletions(-)
+
+-- 
+2.44.0
+
 
