@@ -1,240 +1,174 @@
-Return-Path: <linux-doc+bounces-12245-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12251-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 538A287EDC5
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Mar 2024 17:45:11 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id DD18087EDEE
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Mar 2024 17:50:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D48701F21788
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Mar 2024 16:45:10 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5740E1F22E93
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Mar 2024 16:50:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8BA3F548EE;
-	Mon, 18 Mar 2024 16:45:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DAE1F55E65;
+	Mon, 18 Mar 2024 16:48:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="l2OuYJ57"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ezgxXPKU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5A944CE00;
-	Mon, 18 Mar 2024 16:45:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56FC955E55;
+	Mon, 18 Mar 2024 16:48:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1710780307; cv=none; b=nM3yBQVZaaldDSkNmcYUhIuBP1EUmDogUJoP1dhsJ0BhQe59Mb420dr9jMV3jhB1mQ0NNSUGrVQc4gZL5wlKJtDXVtBkjCkikZgrgDhNeogYguGJcR1SivuqixNVLheQb3tyxlV29CQbCFw/NO4kl+Tfgz1ekH3H1LkGkCu2Mls=
+	t=1710780517; cv=none; b=k5vkQLSu76ZdFE6S8pJEbIV2UxgSDNlHBy6PNtKiY/0WVigiL8ECiupWwEHG6CrIg6ETGp7oPf95Xk2S8J28ZIdZTwzwfnPKk82H2QzX34GzEAyudMo3yJDbc1bXesvjW91sXvACqD8pgEGOc+HfLYiGIA9L5ciBoVyB2LMKa1M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1710780307; c=relaxed/simple;
-	bh=plzgAUqT7eAW3vGS3lxtB9u8E2al/2uQqCBttbfLjko=;
-	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
-	 MIME-Version:Content-Type; b=Y3EWZyqO8vRrjNzi1H8MV72rJKIbKSM/5UdCWz/E+Xm6PLCIdEYOMnPuGd35ZAeeQ8RdOtIsUnG39Ttoj58KR+N5nRcL9h5/UJlB0Y5pSl/uRvub5oxTcbIE7pQjGv4vql3vrQfvopUraqClyk/R4HtjCxMSf2vO7IeWn1DQS/4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=l2OuYJ57; arc=none smtp.client-ip=209.85.128.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+	s=arc-20240116; t=1710780517; c=relaxed/simple;
+	bh=lU1C7DTp85JKeNgKskraiH+mdgY/2X4yC/gVSR1xvnI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=fHZwoEY7EH7/OIXuUfUYVvTY0LU6ieuPCMdYDH5eIJS4Z07xr+OEqAzywxH1nTib8U8IPD5vl2wLizc2CjXnFNXNQlQXI5DqdJTusGKixESX7Nv1lWWkTa9ouo+7g0WtDGxbaLVW8ZQ9VdF+iXPkuBMg+mLU4c7iy1j4mKu7aUE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ezgxXPKU; arc=none smtp.client-ip=209.85.214.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4146178270dso1714005e9.1;
-        Mon, 18 Mar 2024 09:45:05 -0700 (PDT)
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-1def142ae7bso28414725ad.3;
+        Mon, 18 Mar 2024 09:48:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710780303; x=1711385103; darn=vger.kernel.org;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=cwtdj3Qe42//0Pq+EWWaVdxyC3bpLbgB0QXN4bV84So=;
-        b=l2OuYJ575K4vuZI7pj+jww0TtvjAEMhjfrqyKNiL8DsW1Qrx5Slqub9ZUFuwWQKiwY
-         4p9bZV2I2iPq7xvKrRCSDFnnjHfDem1eNtsp4VRlHAiopuIGGs5aCdD+/DCq53u38imR
-         FuL91zTqpkllPqZwtncQqKuIcGyz1wn/bNjH30Ygv8rPPuzmtytJb4Ll9pTYGrhTmFgh
-         va9I3CjQaoGogrnTf9pYdW7wcqinN43EylihMvbwgH4sCOLZRC9PkShr3RBzU+n/UsO7
-         w4iPVP23e/3e4aasRPZiT5TS+KTu8JyleKnpODOdtN57AEg8LDraCrCluhKrwtFZjbGi
-         Fy1A==
+        d=gmail.com; s=20230601; t=1710780515; x=1711385315; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=iZIqnQz5vGWxZVXKOkJZQyu5dPoIWDD5/kalhVDtvps=;
+        b=ezgxXPKUlpRyMJ4S99HXbJ5HusOPCeNyCau+6UixsrOKBru9+4JtrP9RSTw9XMSEvQ
+         /VR7JR9SRgm20Z7eQehWJNF28uOhc9kHS9nH1Bj4vEV/pVrA41o+iXTKRhElQ+UY/aRV
+         JPfnwK99nr6bY0ZNEC92nAREj+VlggvtPvm8gIZReAQ9n6fgiYFzMvo6RRuIWh/ejEye
+         tVhtPRw3d50RsxEHuHjlUE465VsqEktxKzFVwFc/bkSeXz1H/ucxoB7s2odwuGoSyHTA
+         4FRhHE+0h+w/0U3TYRChsctkSHTYIsqoyCpLwIhniAHLetz67Z3pOSVBNO1umhHgD/ZS
+         Oyxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710780303; x=1711385103;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cwtdj3Qe42//0Pq+EWWaVdxyC3bpLbgB0QXN4bV84So=;
-        b=H6FxPQSrYGQBoJzH1gYpoobHqWn4UJFj4+wKKPGi4qGXFsMj2ODsD5/t/Cz/HOjwjn
-         aZGxgr/1sribVYFRWf5FkEJp5sFdcrxZ8eIV2BYXL/YWyaRNb/n1eP4Q+e+NHGPKgOH5
-         +4f/I6cf6R4r/Hp381MTcKE7usgAgsS2usXO4hLs1IFegIvws6iRdPMUyVZmZIP9Orin
-         nvxMauaihoy3jSPLShACRxako6C++/1g9ieUCvaJaUWAXXbk73ptYnxf/sg/UAicsLCT
-         m0hqg4zC4K2A5nQcWlmbvKAb91AvefPZmE8AD8211to5FnGeoCgLq+Pyk6Qo6uEmULJi
-         BJBg==
-X-Forwarded-Encrypted: i=1; AJvYcCW+EOqVVygyIQtm+msFdMiXzJRgRzIdDs8LtlpKJaly2vQpDx+7vcgyNRHIeIMge0o5aYLTbs3ZCKdX8GK4rifjBzsOtuo9W9tgDVFyyQXuVlL9xTMQCiESOYRudJXiSQUHsrQzBaet
-X-Gm-Message-State: AOJu0Ywv1HGOaqCT4uvABknktmig9stP2YC2g2SGnwvxG7JYfXVni9Rc
-	qFVNgG5wqyO/QAc3ZWE2zzLXCG5IGCRoYVq+xngBim5/QG2x3vxXvGLc+1Bm
-X-Google-Smtp-Source: AGHT+IFXhxGmjOSZhXns45Tyfc+M5D405RpzjIABTO/N6+xt4efNHgG2E140V0YoocmejLhApQ8WDA==
-X-Received: by 2002:a05:600c:1c27:b0:414:f4:c6c0 with SMTP id j39-20020a05600c1c2700b0041400f4c6c0mr109496wms.20.1710780303234;
-        Mon, 18 Mar 2024 09:45:03 -0700 (PDT)
-Received: from imac ([2a02:8010:60a0:0:9e5:841d:7d8:c2e2])
-        by smtp.gmail.com with ESMTPSA id fb4-20020a05600c520400b004132901d73asm15210684wmb.46.2024.03.18.09.45.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Mar 2024 09:45:02 -0700 (PDT)
-From: Donald Hunter <donald.hunter@gmail.com>
-To: Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>,  Mauro Carvalho Chehab
- <mchehab@kernel.org>,  Vegard Nossum <vegard.nossum@oracle.com>,  Akira
- Yokosawa <akiyks@gmail.com>,  Jani Nikula <jani.nikula@linux.intel.com>,
-  Randy Dunlap <rdunlap@infradead.org>,  linux-doc@vger.kernel.org,
-  linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] docs: drop the version constraints for sphinx and
- dependencies
-In-Reply-To: <20240301141800.30218-1-lukas.bulwahn@gmail.com> (Lukas Bulwahn's
-	message of "Fri, 1 Mar 2024 15:18:00 +0100")
-Date: Mon, 18 Mar 2024 16:44:55 +0000
-Message-ID: <m21q8732wo.fsf@gmail.com>
-References: <20240301141800.30218-1-lukas.bulwahn@gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+        d=1e100.net; s=20230601; t=1710780515; x=1711385315;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :sender:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iZIqnQz5vGWxZVXKOkJZQyu5dPoIWDD5/kalhVDtvps=;
+        b=RI1a4tSn2iL2euxP5L6JtuFZ1oFB41RvG3DYsHyxmIhaJHpXe5fozvS8FH3w8i2EEM
+         3v30QUSQtgbQ63j2gzS1+SuoNO6N/II/zSErbf/yx4UjH0XSSCwyK58e4rYgzJWXQP2N
+         oCTE04bXlkUeqxh4l4+9gnHF+wlXDYt318l3fvm1FAXVOXGrXDDtBUjupkRCdSBU8W4A
+         0IWsKHsVwm9v3vCF/ASi7mSbP9oNDYYa6llG37ubQgrY4uG6ReRF/pakdwPy1fmBtFqU
+         kBLKQy6I61FC56xlFGjCWye8YsnbbuvA0H1zyQ6FG+LXbeYH+sBc/fLo0SNQxrdKajek
+         NLow==
+X-Forwarded-Encrypted: i=1; AJvYcCU1I1czZG0fkNK1c0COwfVAiIJr3kc4FIq928lPLMIBeTuHEMiBSOpExOohYO7jnMN/40NfYEtp+WcBJI6h6z+6NO9f1rNEKbDP6gvEGZIsTHR+JvZ829TA+ooykg1AL5zqcNFgKscXdCY/9K9poxlFGjVA0eVyVgm+hR4l39Xna+6i92BZMxzb5TDtfzQMiFxL0TL3IfTpuayM3XyGKZEXVf+qaXx2e57/Tc65SvAvKODrKk4DTVFlgE/i
+X-Gm-Message-State: AOJu0Yye7uYGFfiwnEeZm/cJw5Pzlgfivqd7dVgP1537gnVo/BE+KeTc
+	FFePzdyfGQd0u4DoVCF+14f5v0uGlZaoT8MjjR0+B3V7YlIqY9Fs
+X-Google-Smtp-Source: AGHT+IG6M8/5lB2addB/juUQJBdlWWsB8Nf1BI7pBnm8QdHQjPXouIOnERH5hJQZWk8zecX3k6LseA==
+X-Received: by 2002:a17:902:d512:b0:1e0:1355:c6b9 with SMTP id b18-20020a170902d51200b001e01355c6b9mr5063253plg.32.1710780515262;
+        Mon, 18 Mar 2024 09:48:35 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c? ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id f9-20020a170902ce8900b001d949393c50sm2984482plg.187.2024.03.18.09.48.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 18 Mar 2024 09:48:34 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <8adceac6-9b23-4457-bb9a-8f7e55a581f9@roeck-us.net>
+Date: Mon, 18 Mar 2024 09:48:33 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] hwmon: pmbus: adp1050 : Add driver support
+Content-Language: en-US
+To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Radu Sabau <radu.sabau@analog.com>, Jean Delvare <jdelvare@suse.com>,
+ Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Delphine CC Chiu <Delphine_CC_Chiu@Wiwynn.com>, linux-hwmon@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-i2c@vger.kernel.org
+References: <20240318112140.385244-1-radu.sabau@analog.com>
+ <20240318112140.385244-3-radu.sabau@analog.com>
+ <04b39945-e4e1-43bd-83bf-0d7eb3730352@linaro.org>
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ mDW4+i+XlNFUPUYMrIKi9joBhu18ssf5i5Q=
+In-Reply-To: <04b39945-e4e1-43bd-83bf-0d7eb3730352@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Lukas Bulwahn <lukas.bulwahn@gmail.com> writes:
+On 3/18/24 09:12, Krzysztof Kozlowski wrote:
+> On 18/03/2024 12:21, Radu Sabau wrote:
+>> Add support for ADP1050 Digital Controller for Isolated Power Supplies
+>> with PMBus interface Voltage, Current and Temperature Monitor.
+>>
+> 
+> ...
+> 
+>> +static int adp1050_probe(struct i2c_client *client)
+>> +{
+>> +	u32 vin_scale_monitor, iin_scale_monitor;
+>> +	int ret;
+>> +
+>> +	if (!i2c_check_functionality(client->adapter,
+>> +				     I2C_FUNC_SMBUS_WRITE_WORD_DATA))
+>> +		return -ENODEV;
+>> +
+>> +	/* Unlock CHIP's password in order to be able to read/write to it's
+>> +	 * VIN_SCALE and IIN_SCALE registers.
+>> +	*/
+>> +	ret = i2c_smbus_write_word_data(client, ADP1050_CHIP_PASSWORD, 0xFFFF);
+>> +	if (ret < 0) {
+>> +		dev_err_probe(&client->dev, "Device can't be unlocked.\n");
+> 
+> Syntax is: return dev_err_probe(). Same in other places.
+> 
 
-> As discussed (see Links), there is some inertia to move to the recent
-> Sphinx versions for the doc build environment.
->
-> [...]
->
-> Link: https://lore.kernel.org/linux-doc/874jf4m384.fsf@meer.lwn.net/
-> Link: https://lore.kernel.org/linux-doc/20240226093854.47830-1-lukas.bulwahn@gmail.com/
-> Reviewed-by: Akira Yokosawa <akiyks@gmail.com>
-> Tested-by: Vegard Nossum <vegard.nossum@oracle.com>
-> Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
-> ---
-> v1 -> v2:
->   drop jinja2 as suggested by Vegard.
->   add tags from v1 review
->
->  Documentation/doc-guide/sphinx.rst    | 11 ++++++-----
->  Documentation/sphinx/requirements.txt |  7 ++-----
->  scripts/sphinx-pre-install            | 19 +++----------------
->  3 files changed, 11 insertions(+), 26 deletions(-)
+dev_err_probe() expects the error number as second parameter, so I don't
+really understand how the above even compiles.
 
-Apologies if I am a little late to the party here - I am just catching
-up with the changes on docs-next.
+Guenter
 
-I went to install Sphinx 2.4.4 using requirements.txt for some doc work
-and hit the upstream Sphinx dependency breakage. So I pulled docs-next
-with the intention of sending a patch to requirements.txt with pinned
-dependences. When I noticed that things have already moved on in
-docs-next, I decided to spend some time investigating the performance
-regression that has been present in Sphinx from 3.0.0 until now.
-
-With Sphinx 2.4.4 I always get timings in this ballpark:
-
-% time make htmldocs
-...
-real	4m5.417s
-user	17m0.379s
-sys	1m11.889s
-
-With Sphinx 7.2.6 it's typically over 9 minutes:
-
-% time make htmldocs
-...
-real	9m0.533s
-user	15m38.397s
-sys	1m0.907s
-
-I collected profiling data using cProfile:
-
-export srctree=`pwd`
-export BUILDDIR=`pwd`/Documentation/output
-python3 -m cProfile -o profile.dat ./sphinx_latest/bin/sphinx-build \
-    -b html \
-    -c ./Documentation \
-    -d ./Documentation/output/.doctrees \
-    -D version=6.8.0 -D release= \
-    -D kerneldoc_srctree=. -D kerneldoc_bin=./scripts/kernel-doc \
-    ./Documentation \
-    ./Documentation/output
-
-Here's some of the profiling output:
-
-$ python3 -m pstats profile.dat
-Welcome to the profile statistics browser.
-profile.dat% sort tottime
-profile.dat% stats 10
-Fri Mar 15 17:09:39 2024    profile.dat
-
-         3960680702 function calls (3696376639 primitive calls) in 1394.384 seconds
-
-   Ordered by: internal time
-   List reduced from 6733 to 10 due to restriction <10>
-
-   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-770364892  165.102    0.000  165.102    0.000 sphinx/domains/c.py:153(__eq__)
-   104124  163.968    0.002  544.788    0.005 sphinx/domains/c.py:1731(_find_named_symbols)
-543888397  123.767    0.000  176.685    0.000 sphinx/domains/c.py:1679(children_recurse_anon)
-     4292   74.081    0.017   74.081    0.017 {method 'poll' of 'select.poll' objects}
-631233096   69.389    0.000  246.017    0.000 sphinx/domains/c.py:1746(candidates)
-121406721/3359598   65.689    0.000   76.762    0.000 docutils/nodes.py:202(_fast_findall)
-  3477076   64.387    0.000   65.758    0.000 sphinx/util/nodes.py:633(_copy_except__document)
-544032973   52.950    0.000   52.950    0.000 sphinx/domains/c.py:156(is_anon)
-79012597/3430   36.395    0.000   36.395    0.011 sphinx/domains/c.py:1656(clear_doc)
-286882978   31.271    0.000   31.279    0.000 {built-in method builtins.isinstance}
-
-profile.dat% callers c.py:153
-   Ordered by: internal time
-   List reduced from 6733 to 4 due to restriction <'c.py:153'>
-
-Function                            was called by...
-                                       ncalls  tottime  cumtime
-sphinx/domains/c.py:153(__eq__)  <- 631153346  134.803  134.803  sphinx/domains/c.py:1731(_find_named_symbols)
-                                       154878    0.041    0.041  sphinx/domains/c.py:2085(find_identifier)
-                                    139056533   30.259   30.259  sphinx/domains/c.py:2116(direct_lookup)
-                                          135    0.000    0.000  sphinx/util/cfamily.py:89(__eq__)
-
-From that you can see there is a significant call amplification from
-_find_named_symbols (100k calls) to __eq__ (630 million calls), plus
-several other expensive functions. Looking at the code [1], you can see
-why. It's doing a list walk to find matching symbols. When adding new
-symbols it does an exhaustive walk to check for duplicates, so you get
-worst-case performance, with ~13k symbols in a list during the doc
-build.
-
-I have an experimental fix that uses a dict for lookups. With the fix, I
-consistently get times in the sub 5 minute range:
-
-% time make htmldocs
-...
-real	4m27.085s
-user	10m56.985s
-sys	0m56.385s
-
-I expect there are other speedups to be found. I will clean up my Sphinx
-changes and share them on a GitHub branch (as well as push them
-upstream) so that others can try them out.
-
-For some reason, if I run sphinx-build manually with -j 12 (I have a 12
-core machine) I get better performance than make htmldocs:
-
-% sphinx-build -j 12 ...
-...
-real	3m56.074s
-user	9m52.775s
-sys	0m52.905s
-
-I haven't had a chance to look at what makes the difference here, but
-will investigate when I have time.
-
-Cheers,
-Donald.
-
-[1] https://github.com/sphinx-doc/sphinx/blob/ff252861a7b295e8dd8085ea9f6ed85e085273fc/sphinx/domains/c/_symbol.py#L235-L283
-
-> diff --git a/Documentation/sphinx/requirements.txt b/Documentation/sphinx/requirements.txt
-> index 5d47ed443949..5017f307c8a4 100644
-> --- a/Documentation/sphinx/requirements.txt
-> +++ b/Documentation/sphinx/requirements.txt
-> @@ -1,6 +1,3 @@
-> -# jinja2>=3.1 is not compatible with Sphinx<4.0
-> -jinja2<3.1
-> -# alabaster>=0.7.14 is not compatible with Sphinx<=3.3
-> -alabaster<0.7.14
-> -Sphinx==2.4.4
-> +alabaster
-> +Sphinx
->  pyyaml
 
