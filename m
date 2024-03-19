@@ -1,125 +1,126 @@
-Return-Path: <linux-doc+bounces-12314-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12321-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id DACD987FE34
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Mar 2024 14:10:42 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id AAB6E87FE86
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Mar 2024 14:20:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 7C419B23044
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Mar 2024 13:10:40 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 66CCE284254
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Mar 2024 13:19:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 96DFD82D79;
-	Tue, 19 Mar 2024 13:07:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 521C080020;
+	Tue, 19 Mar 2024 13:19:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="M3t41Hbk"
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="zx7C/jNz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07BFF7E591;
-	Tue, 19 Mar 2024 13:07:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B1413FBB9;
+	Tue, 19 Mar 2024 13:19:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1710853635; cv=none; b=tBswZYjkHoIYLPexqvyGrs67ZQyWCh+PZODIj4LPluEJ4G5TGbNL9EQVoY9uPP7bBXx/w6JbtBpr875fkgmY75ql1WsWNMReI/RRL/mYMN9e/2bUGdfak4KttQTIVx1fy3grY+XivQOililn77/OT/3f3QB7ujaWLXiLvJP5eMo=
+	t=1710854383; cv=none; b=jVWqLblXaKqmOPntMsbVKGd3TFnSoYEef2W7ZKs6t0wxTXZviggtJTUGX8aSn93oH0+Tm9afdrFqJWlsaWwkle/gGggQIzsFd1MXUfCZLbvXCe8cejcM4TUW1lFc6ufyitESp3r128YP+8LjdjOnZdknDLOegg3Z5dmB0d1KrSQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1710853635; c=relaxed/simple;
-	bh=h5RpRwAivJEkMgOQGPSE31O4QbdHWmr5WM+YPfbxP60=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=XF9FnYII9uAxAU5jSWoPSB751XohFzdZKF4zM0uKbSgPlXWkrFCc01Ct+EOEVTbhlG2T7rxH9KpV8nvibuvelYZIgA4bYQmIQH2B0WUVCMxkVBd2Zs+hrFm+c2rwu7YSQIPfg5WMpuu9npazxWfJyu3/cQRHrfNNODMd7POKX0w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=M3t41Hbk; arc=none smtp.client-ip=198.175.65.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1710853634; x=1742389634;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=h5RpRwAivJEkMgOQGPSE31O4QbdHWmr5WM+YPfbxP60=;
-  b=M3t41Hbkzhuc/B4cIzSMoiD+DuUu5gIOLSOWj6Z/CDuPiAwCfh/ddUT4
-   ozSUhgisTPIkwNAUUBs9xlB5do8BDXviTVBr39RJFNgDOa/kiGH/lcHBL
-   AXRmSmYTdphPaKrDMHe37S5VtUPbuGFIpNNWCmrCs826CLDb1ReUcXVRY
-   EhiXrgFasjrS599QTWv2yHjg3LzeniqlTsUfr1K99FK4RqR2hYkhdszP6
-   7z2tQYpHw5ZNOcgGfuRfEb5vnS/mTulNy6ErMYLl3hMDj3sUIIkOsOw20
-   G1ydO7fXam9i/S89f/bVh3ODrdHLNNtpcw6umISXq/cTAOi0lwuQuUPuT
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11017"; a="5843148"
-X-IronPort-AV: E=Sophos;i="6.07,137,1708416000"; 
-   d="scan'208";a="5843148"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Mar 2024 06:07:14 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.07,137,1708416000"; 
-   d="scan'208";a="44883266"
-Received: from inlubt0316.iind.intel.com ([10.191.20.213])
-  by fmviesa001.fm.intel.com with ESMTP; 19 Mar 2024 06:07:06 -0700
-From: lakshmi.sowjanya.d@intel.com
-To: tglx@linutronix.de,
-	jstultz@google.com,
-	giometti@enneenne.com,
-	corbet@lwn.net,
-	linux-kernel@vger.kernel.org
-Cc: x86@kernel.org,
-	netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	intel-wired-lan@lists.osuosl.org,
-	andriy.shevchenko@linux.intel.com,
-	eddie.dong@intel.com,
-	christopher.s.hall@intel.com,
-	jesse.brandeburg@intel.com,
-	davem@davemloft.net,
-	alexandre.torgue@foss.st.com,
-	joabreu@synopsys.com,
-	mcoquelin.stm32@gmail.com,
-	perex@perex.cz,
-	linux-sound@vger.kernel.org,
-	anthony.l.nguyen@intel.com,
-	peter.hilber@opensynergy.com,
-	pandith.n@intel.com,
-	mallikarjunappa.sangannavar@intel.com,
-	subramanian.mohan@intel.com,
-	basavaraj.goudar@intel.com,
-	thejesh.reddy.t.r@intel.com,
-	lakshmi.sowjanya.d@intel.com
-Subject: [PATCH v5 11/11] ABI: pps: Add ABI documentation for Intel TIO
-Date: Tue, 19 Mar 2024 18:35:47 +0530
-Message-Id: <20240319130547.4195-12-lakshmi.sowjanya.d@intel.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20240319130547.4195-1-lakshmi.sowjanya.d@intel.com>
-References: <20240319130547.4195-1-lakshmi.sowjanya.d@intel.com>
+	s=arc-20240116; t=1710854383; c=relaxed/simple;
+	bh=xGfGEg1NmOvDoMhIZ7MT4PvjgibSCw62ywA9sT5WeYI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=lheua8Y7GRwbF9TcW60lYV1rGc5Yr0+4j52RkDurCmpvs1RIKm2dQiZNVYAjvx3PO8mpW6JKbn4pu5iKvL1OLYnsOAJuXo0bPr8x9z1+xXv4JsGXyFaad0MlOZnMyKKMtvqgBZBpSviqUMDIRqdUdiatDj5bIk39/RtHjKvU9pQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=zx7C/jNz; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=eM2s0jFpcVvcghsG7scph+n4U/V5mjD2JNZH/KutU6g=; b=zx7C/jNz9btddQyTivtDBwDUVR
+	wThOKRIKBW0/HQS2lbMkEAhKDJt9OMw4V/j17nNBI5cTJ2nlK+5rjQVEJSq927K8tiyb02nRnONh2
+	gJzRZloQ7xupKPMbHyvXAnmJcXxt6cBbfbvUb6uz/6HfS5htJAliKZNYaw/stjpVGFvw=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1rmZN9-00AhnS-Kf; Tue, 19 Mar 2024 14:19:19 +0100
+Date: Tue, 19 Mar 2024 14:19:19 +0100
+From: Andrew Lunn <andrew@lunn.ch>
+To: Parthiban.Veerasooran@microchip.com
+Cc: davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+	pabeni@redhat.com, horms@kernel.org, saeedm@nvidia.com,
+	anthony.l.nguyen@intel.com, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, corbet@lwn.net,
+	linux-doc@vger.kernel.org, robh+dt@kernel.org,
+	krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
+	devicetree@vger.kernel.org, Horatiu.Vultur@microchip.com,
+	ruanjinjie@huawei.com, Steen.Hegelund@microchip.com,
+	vladimir.oltean@nxp.com, UNGLinuxDriver@microchip.com,
+	Thorsten.Kummermehr@microchip.com, Pier.Beruto@onsemi.com,
+	Selvamani.Rajagopal@onsemi.com, Nicolas.Ferre@microchip.com,
+	benjamin.bigler@bernformulastudent.ch
+Subject: Re: [PATCH net-next v3 08/12] net: ethernet: oa_tc6: implement
+ transmit path to transfer tx ethernet frames
+Message-ID: <96dd422f-0bf9-411d-8cc2-5755c1e60e27@lunn.ch>
+References: <20240306085017.21731-1-Parthiban.Veerasooran@microchip.com>
+ <20240306085017.21731-9-Parthiban.Veerasooran@microchip.com>
+ <208fb61b-4740-46bf-8c70-29ab59cbb965@lunn.ch>
+ <f9d8a18c-b1fe-450c-a5ca-d91f96793a04@microchip.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <f9d8a18c-b1fe-450c-a5ca-d91f96793a04@microchip.com>
 
-From: Lakshmi Sowjanya D <lakshmi.sowjanya.d@intel.com>
+On Tue, Mar 19, 2024 at 12:54:30PM +0000, Parthiban.Veerasooran@microchip.com wrote:
+> Hi Andrew,
+> 
+> On 07/03/24 10:38 pm, Andrew Lunn wrote:
+> > EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
+> > 
+> >> @@ -55,6 +77,14 @@
+> >>                                                (OA_TC6_CTRL_MAX_REGISTERS *\
+> >>                                                OA_TC6_CTRL_REG_VALUE_SIZE) +\
+> >>                                                OA_TC6_CTRL_IGNORED_SIZE)
+> >> +#define OA_TC6_CHUNK_PAYLOAD_SIZE            64
+> >> +#define OA_TC6_DATA_HEADER_SIZE                      4
+> >> +#define OA_TC6_CHUNK_SIZE                    (OA_TC6_DATA_HEADER_SIZE +\
+> >> +                                             OA_TC6_CHUNK_PAYLOAD_SIZE)
+> >> +#define OA_TC6_TX_SKB_QUEUE_SIZE             100
+> > 
+> > So you keep up to 100 packets in a queue. If use assume typical MTU
+> > size packets, that is 1,238,400 bits. At 10Mbps, that is 120ms of
+> > traffic. That is quite a lot of latency when a high priority packet is
+> > added to the tail of the queue and needs to wait for all the other
+> > packets to be sent first.
+> > 
+> > Chunks are 64 bytes. So in practice, you only ever need two
+> > packets. You need to be able to fill a chunk with the final part of
+> > one packet, and the beginning of the next. So i would try using a much
+> > smaller queue size. That will allow Linux queue disciplines to give
+> > you the high priority packets first which you send with low latency.
+> Thanks for the detailed explanation. If I understand you correctly,
+> 
+> 1. The tx skb queue size (OA_TC6_TX_SKB_QUEUE_SIZE) should be 2 to avoid 
+> the latency when a high priority packet added.
+> 
+> 2. Need to implement the handling part of the below case,
+> In case if one packet ends in a chunk and that chunk still having some 
+> space left to accommodate some bytes from the next packet if available 
+> from network layer.
 
-Document sysfs interface for Intel Timed I/O PPS driver.
+This second part is clearly an optimisation. If you have lots of full
+MTU packets, 1514 bytes, they take around 24 chunks. Having the last
+chunk only 1/2 full does not waste too much bandwidth. But if you are
+carrying lots of small packets, say voice, 130 bytes, the wasted
+bandwidth starts to add up. But is there a use case for 10Mbps of
+small packets? I doubt it.
 
-Signed-off-by: Lakshmi Sowjanya D <lakshmi.sowjanya.d@intel.com>
----
- Documentation/ABI/testing/sysfs-platform-pps-tio | 7 +++++++
- 1 file changed, 7 insertions(+)
- create mode 100644 Documentation/ABI/testing/sysfs-platform-pps-tio
+So if you don't have the ability to combine two packets into one
+chunk, i would do that later. Lets get the basics merged first, it can
+be optimised later.
 
-diff --git a/Documentation/ABI/testing/sysfs-platform-pps-tio b/Documentation/ABI/testing/sysfs-platform-pps-tio
-new file mode 100644
-index 000000000000..b9b8c97a7840
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-platform-pps-tio
-@@ -0,0 +1,7 @@
-+What:		/sys/devices/platform/INTCxxxx/enable
-+Date:		March 2024
-+KernelVersion	6.9
-+Contact:	Lakshmi Sowjanya D <lakshmi.sowjanya.d@intel.com>
-+Description:
-+		(RW) Enable or disable PPS TIO generator output, read to
-+		see the status of hardware (Enabled/Disabled).
--- 
-2.35.3
-
+	Andrew
 
