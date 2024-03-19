@@ -1,83 +1,90 @@
-Return-Path: <linux-doc+bounces-12317-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12303-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E525287FE49
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Mar 2024 14:12:38 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1592587FE0E
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Mar 2024 14:06:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CA4221C20A79
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Mar 2024 13:12:37 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 651A5B22A23
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Mar 2024 13:06:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 014CE81AA5;
-	Tue, 19 Mar 2024 13:10:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C39DB7E591;
+	Tue, 19 Mar 2024 13:05:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="BzVstWiW"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="iJjaQW4g"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAF1781724;
-	Tue, 19 Mar 2024 13:10:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7421D40854;
+	Tue, 19 Mar 2024 13:05:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1710853814; cv=none; b=lcK0oiHZ/SFoLG2uy49JFHzPnpyePdpCwXRBB9ILloJBy5aoApLyU/VRlq+FgtSDUOvMzeXI1/f1swRTRpGIm/Hx0/ilfU7OYn2icbgdV9p0hBD05J7cNJZFHd1hlIZM91V5QhiUJmEWYEdqjMJLQ+Bhs1y9bR/trfpD1FWN2mE=
+	t=1710853558; cv=none; b=KgDfZUzFTEf/+xD63h/BRYnq7k/b/QwCJcl9gHtU5ykKIH4EeqSjgEIcRtxU7K1DmNRaHNeWkFf+HZHCPDxdDPT437Tkfvsr3fS1HG5PPa2tIO6lf+LEhqKoudReoZzprafyX8N9vgwhss2QINbNswsQ3kdr7kOR1JmUhbCNADA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1710853814; c=relaxed/simple;
-	bh=HMH0aJ/yhL4TtEL6UtwH+nkbeX43Qv6MTp6+ytOSTDE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=YlbOlof590IQW8Y6g0VsZmr/6OFzOjQoymgtogW4UmM7Muom6OzS7+B3tKtqyzQY5abKzRk55hE3tMsnOVbEEdlsOsZgSZNHBlFvE3sdRxEb9DySQ855Z5YM1hpYpGtaegEgmth7YZmfHgeiSEin3HYKTh26aVn9l1Yr7X2S8iI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=BzVstWiW; arc=none smtp.client-ip=90.155.92.199
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=desiato.srs.infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Pmgtt4mh52E0ERFpZQ40Zoz9sGIFhtqH6Ihl0RxJeMs=; b=BzVstWiW0OSzgfgyp5EL36bCHd
-	86Xs7gLeF5roLtNMG54Dn1YYIvNc7gFSioT8eLie20NZCKfUJ6KFGEiyFND8oEuIZ+7+7AezXl03n
-	VULB8oA3SmrzJohhfyMB/jh4zIsGuA4NsqZXoacin9gfq2IfsgoPNeBzKwb6ETlsP3TBvRP2knK0I
-	14S05r5narRksQo6uCu9f5Ck1Eza3Er1wUjTRC2D5JID3D2X6KgDEvDVynePdJ3uWgJlvNRv2ONKu
-	DNdKKV8cej+zKVKSi6KYsz2pAyA7fa/tzmJbKlfx2NpbvBzSA1dDefq3bjUgZhWdByX2Z4P0cUMAm
-	RgiQvtkw==;
-Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
-	by desiato.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1rmZEA-0000000DDly-1ioY;
-	Tue, 19 Mar 2024 13:10:02 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1rmZE9-00000004PN6-0ttC;
-	Tue, 19 Mar 2024 13:10:01 +0000
-From: David Woodhouse <dwmw2@infradead.org>
-To: linux-arm-kernel@lists.infradead.org,
-	kvm@vger.kernel.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Marc Zyngier <maz@kernel.org>,
-	Oliver Upton <oliver.upton@linux.dev>,
-	James Morse <james.morse@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Zenghui Yu <yuzenghui@huawei.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Len Brown <len.brown@intel.com>,
-	Pavel Machek <pavel@ucw.cz>,
-	David Woodhouse <dwmw@amazon.co.uk>,
-	Mostafa Saleh <smostafa@google.com>,
-	Jean-Philippe Brucker <jean-philippe@linaro.org>,
+	s=arc-20240116; t=1710853558; c=relaxed/simple;
+	bh=VdqSfGB+h/sGfm1xuC2PyT3QkI3BNkLrs4O3AWSdhSA=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=exU3JWGH1TlAf1U/nqayM6wJ0yGNterg36YdNVA95f/bFXINXfFTemXGuEHlYse38lbTSaz9zYre5I11Qnf5OpF6RkTzwbY7ZcSxJDFlHG9jYQYgX2gA5O0lYiChkbhRwkeiMBzZE0AYaF/90xyRVeDC+bl1JnNz2YonxRsl1bg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=iJjaQW4g; arc=none smtp.client-ip=198.175.65.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1710853556; x=1742389556;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=VdqSfGB+h/sGfm1xuC2PyT3QkI3BNkLrs4O3AWSdhSA=;
+  b=iJjaQW4g3oFunMEJBWmTys7K16jyatqEr+BK6f/03VweqDdGh/tWtj/K
+   24Zti7LCOThwsaKvutOconG4Y678C6ENVswhjqfZ8a3+Qyd6t3FCwykWr
+   KtjvMq+RYIRveDJ/Igt0fQr1xU1FuiEslMpHX2SGZDqPOcJtgx3ZKlhyc
+   Wr4SCDMnhl+Ocrv5o1x9r3ufiz5ELAVvsuYSdRP1ggW2QGxgCd9T73W/B
+   Um+Zll7BZInDgmYV0egt1+SCcg8k2hP/M9S+uXA0sDUCgLZOuSh+H5Twu
+   h6HLfzF5kVEcee2M//547/cIWOCYl3AZZDVI6jvVMmRzH9T+J6eVpuV5V
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11017"; a="5842875"
+X-IronPort-AV: E=Sophos;i="6.07,137,1708416000"; 
+   d="scan'208";a="5842875"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Mar 2024 06:05:56 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.07,137,1708416000"; 
+   d="scan'208";a="44883155"
+Received: from inlubt0316.iind.intel.com ([10.191.20.213])
+  by fmviesa001.fm.intel.com with ESMTP; 19 Mar 2024 06:05:48 -0700
+From: lakshmi.sowjanya.d@intel.com
+To: tglx@linutronix.de,
+	jstultz@google.com,
+	giometti@enneenne.com,
+	corbet@lwn.net,
+	linux-kernel@vger.kernel.org
+Cc: x86@kernel.org,
+	netdev@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	kvmarm@lists.linux.dev,
-	linux-pm@vger.kernel.org
-Subject: [RFC PATCH v3 5/5] arm64: Use SYSTEM_OFF2 PSCI call to power off for hibernate
-Date: Tue, 19 Mar 2024 12:59:06 +0000
-Message-ID: <20240319130957.1050637-6-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240319130957.1050637-1-dwmw2@infradead.org>
-References: <20240319130957.1050637-1-dwmw2@infradead.org>
+	intel-wired-lan@lists.osuosl.org,
+	andriy.shevchenko@linux.intel.com,
+	eddie.dong@intel.com,
+	christopher.s.hall@intel.com,
+	jesse.brandeburg@intel.com,
+	davem@davemloft.net,
+	alexandre.torgue@foss.st.com,
+	joabreu@synopsys.com,
+	mcoquelin.stm32@gmail.com,
+	perex@perex.cz,
+	linux-sound@vger.kernel.org,
+	anthony.l.nguyen@intel.com,
+	peter.hilber@opensynergy.com,
+	pandith.n@intel.com,
+	mallikarjunappa.sangannavar@intel.com,
+	subramanian.mohan@intel.com,
+	basavaraj.goudar@intel.com,
+	thejesh.reddy.t.r@intel.com,
+	lakshmi.sowjanya.d@intel.com
+Subject: [PATCH v5 00/11] Add support for Intel PPS Generator
+Date: Tue, 19 Mar 2024 18:35:36 +0530
+Message-Id: <20240319130547.4195-1-lakshmi.sowjanya.d@intel.com>
+X-Mailer: git-send-email 2.35.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -85,140 +92,112 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+From: Lakshmi Sowjanya D <lakshmi.sowjanya.d@intel.com>
 
-The PSCI v1.3 specification (alpha) adds support for a SYSTEM_OFF2
-function which is analogous to ACPI S4 state. This will allow hosting
-environments to determine that a guest is hibernated rather than just
-powered off, and handle that state appropriately on subsequent launches.
+The goal of the PPS(Pulse Per Second) hardware/software is to generate a
+signal from the system on a wire so that some third-party hardware can
+observe that signal and judge how close the system's time is to another
+system or piece of hardware.
 
-Since commit 60c0d45a7f7a ("efi/arm64: use UEFI for system reset and
-poweroff") the EFI shutdown method is deliberately preferred over PSCI
-or other methods. So register a SYS_OFF_MODE_POWER_OFF handler which
-*only* handles the hibernation, leaving the original PSCI SYSTEM_OFF as
-a last resort via the legacy pm_power_off function pointer.
+Existing methods (like parallel ports) require software to flip a bit at
+just the right time to create a PPS signal. Many things can prevent
+software from doing this precisely. This (Timed I/O) method is better
+because software only "arms" the hardware in advance and then depends on
+the hardware to "fire" and flip the signal at just the right time.
 
-The hibernation code already exports a system_entering_hibernation()
-function which is be used by the higher-priority handler to check for
-hibernation. That existing function just returns the value of a static
-boolean variable from hibernate.c, which was previously only set in the
-hibernation_platform_enter() code path. Set the same flag in the simpler
-code path around the call to kernel_power_off() too.
+To generate a PPS signal with this new hardware, the kernel wakes up
+twice a second, once for 1->0 edge and other for the 0->1 edge. It does
+this shortly (~10ms) before the actual change in the signal needs to be
+made. It computes the TSC value at which edge will happen, convert to a
+value hardware understands and program this value to Timed I/O hardware.
+The actual edge transition happens without any further action from the
+kernel.
 
-An alternative way to hook SYSTEM_OFF2 into the hibernation code would
-be to register a platform_hibernation_ops structure with an ->enter()
-method which makes the new SYSTEM_OFF2 call. But that would have the
-unwanted side-effect of making hibernation take a completely different
-code path in hibernation_platform_enter(), invoking a lot of special dpm
-callbacks.
+The result here is a signal coming out of the system that is roughly
+1,000 times more accurate than the old methods. If the system is heavily
+loaded, the difference in accuracy is larger in old methods.
 
-Another option might be to add a new SYS_OFF_MODE_HIBERNATE mode, with
-fallback to SYS_OFF_MODE_POWER_OFF. Or to use the sys_off_data to
-indicate whether the power off is for hibernation.
+Application Interface:
+The API to use Timed I/O is very simple. It is enabled and disabled by
+writing a '1' or '0' value to the sysfs enable attribute associated with
+the Timed I/O PPS device. Each Timed I/O pin is represented by a PPS
+device. When enabled, a pulse-per-second(PPS) synchronized with the
+system clock is continuously produced on the Timed I/O pin, otherwise it
+is pulled low.
 
-But this version works and is relatively simple.
+The Timed I/O signal on the motherboard is enabled in the BIOS setup.
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- drivers/firmware/psci/psci.c | 35 +++++++++++++++++++++++++++++++++++
- kernel/power/hibernate.c     |  5 ++++-
- 2 files changed, 39 insertions(+), 1 deletion(-)
+References:
+https://en.wikipedia.org/wiki/Pulse-per-second_signal
+https://drive.google.com/file/d/1vkBRRDuELmY8I3FlfOZaEBp-DxLW6t_V/view
+https://youtu.be/JLUTT-lrDqw
 
-diff --git a/drivers/firmware/psci/psci.c b/drivers/firmware/psci/psci.c
-index d9629ff87861..69d2f6969438 100644
---- a/drivers/firmware/psci/psci.c
-+++ b/drivers/firmware/psci/psci.c
-@@ -78,6 +78,7 @@ struct psci_0_1_function_ids get_psci_0_1_function_ids(void)
- 
- static u32 psci_cpu_suspend_feature;
- static bool psci_system_reset2_supported;
-+static bool psci_system_off2_supported;
- 
- static inline bool psci_has_ext_power_state(void)
- {
-@@ -333,6 +334,28 @@ static void psci_sys_poweroff(void)
- 	invoke_psci_fn(PSCI_0_2_FN_SYSTEM_OFF, 0, 0, 0);
- }
- 
-+#ifdef CONFIG_HIBERNATION
-+static int psci_sys_hibernate(struct sys_off_data *data)
-+{
-+	if (system_entering_hibernation())
-+		invoke_psci_fn(PSCI_FN_NATIVE(1_3, SYSTEM_OFF2),
-+			       PSCI_1_3_HIBERNATE_TYPE_OFF, 0, 0);
-+	return NOTIFY_DONE;
-+}
-+
-+static int __init psci_hibernate_init(void)
-+{
-+	if (psci_system_off2_supported) {
-+		/* Higher priority than EFI shutdown, but only for hibernate */
-+		register_sys_off_handler(SYS_OFF_MODE_POWER_OFF,
-+					 SYS_OFF_PRIO_FIRMWARE + 2,
-+					 psci_sys_hibernate, NULL);
-+	}
-+	return 0;
-+}
-+subsys_initcall(psci_hibernate_init);
-+#endif
-+
- static int psci_features(u32 psci_func_id)
- {
- 	return invoke_psci_fn(PSCI_1_0_FN_PSCI_FEATURES,
-@@ -364,6 +387,7 @@ static const struct {
- 	PSCI_ID_NATIVE(1_1, SYSTEM_RESET2),
- 	PSCI_ID(1_1, MEM_PROTECT),
- 	PSCI_ID_NATIVE(1_1, MEM_PROTECT_CHECK_RANGE),
-+	PSCI_ID_NATIVE(1_3, SYSTEM_OFF2),
- };
- 
- static int psci_debugfs_read(struct seq_file *s, void *data)
-@@ -523,6 +547,16 @@ static void __init psci_init_system_reset2(void)
- 		psci_system_reset2_supported = true;
- }
- 
-+static void __init psci_init_system_off2(void)
-+{
-+	int ret;
-+
-+	ret = psci_features(PSCI_FN_NATIVE(1_3, SYSTEM_OFF2));
-+
-+	if (ret != PSCI_RET_NOT_SUPPORTED)
-+		psci_system_off2_supported = true;
-+}
-+
- static void __init psci_init_system_suspend(void)
- {
- 	int ret;
-@@ -653,6 +687,7 @@ static int __init psci_probe(void)
- 		psci_init_cpu_suspend();
- 		psci_init_system_suspend();
- 		psci_init_system_reset2();
-+		psci_init_system_off2();
- 		kvm_init_hyp_services();
- 	}
- 
-diff --git a/kernel/power/hibernate.c b/kernel/power/hibernate.c
-index 4b0b7cf2e019..ac87b3cb670c 100644
---- a/kernel/power/hibernate.c
-+++ b/kernel/power/hibernate.c
-@@ -676,8 +676,11 @@ static void power_down(void)
- 		}
- 		fallthrough;
- 	case HIBERNATION_SHUTDOWN:
--		if (kernel_can_power_off())
-+		if (kernel_can_power_off()) {
-+			entering_platform_hibernation = true;
- 			kernel_power_off();
-+			entering_platform_hibernation = false;
-+		}
- 		break;
- 	}
- 	kernel_halt();
+Patch 1 adds base clock properties in clocksource structure
+Patch 2 adds function to convert realtime to base clock
+Patch 3 - 7 removes reference to convert_art_to_tsc function across
+drivers
+Patch 8 removes the convert art to tsc functions which are no longer
+used
+Patch 9 adds the pps(pulse per second) generator tio driver to the pps
+subsystem.
+Patch 10 documentation and usage of the pps tio generator module.
+Patch 11 includes documentation for sysfs interface. 
+
+Please help to review the changes.
+
+Thanks in advance,
+Sowjanya
+
+Changes from v2:
+ - Split patch 1 to remove the functions in later stages.
+ - Include required headers in pps_gen_tio.
+
+Changes from v3:
+ - Corrections in Documentation.
+ - Introducing non-RFC version of the patch series.
+
+Changes from v4:
+ - Setting id in ice_ptp
+ - Modified conversion logic in convert_base_to_cs.
+ - Included the usage of the APIs in the commit message of 2nd patch.
+
+Lakshmi Sowjanya D (6):
+  x86/tsc: Add base clock properties in clocksource structure
+  timekeeping: Add function to convert realtime to base clock
+  x86/tsc: Remove art to tsc conversion functions which are obsolete
+  pps: generators: Add PPS Generator TIO Driver
+  Documentation: driver-api: pps: Add Intel Timed I/O PPS generator
+  ABI: pps: Add ABI documentation for Intel TIO
+
+Thomas Gleixner (5):
+  e1000e: remove convert_art_to_tsc()
+  igc: remove convert_art_to_tsc()
+  stmmac: intel: remove convert_art_to_tsc()
+  ALSA: hda: remove convert_art_to_tsc()
+  ice/ptp: remove convert_art_to_tsc()
+
+ .../ABI/testing/sysfs-platform-pps-tio        |   7 +
+ Documentation/driver-api/pps.rst              |  22 ++
+ arch/x86/include/asm/tsc.h                    |   3 -
+ arch/x86/kernel/tsc.c                         |  92 ++-----
+ drivers/net/ethernet/intel/e1000e/ptp.c       |   3 +-
+ drivers/net/ethernet/intel/ice/ice_ptp.c      |   3 +-
+ drivers/net/ethernet/intel/igc/igc_ptp.c      |   6 +-
+ .../net/ethernet/stmicro/stmmac/dwmac-intel.c |   3 +-
+ drivers/pps/generators/Kconfig                |  16 ++
+ drivers/pps/generators/Makefile               |   1 +
+ drivers/pps/generators/pps_gen_tio.c          | 245 ++++++++++++++++++
+ include/linux/clocksource.h                   |  27 ++
+ include/linux/clocksource_ids.h               |   1 +
+ include/linux/timekeeping.h                   |   6 +
+ kernel/time/timekeeping.c                     | 105 +++++++-
+ sound/pci/hda/hda_controller.c                |   3 +-
+ 16 files changed, 460 insertions(+), 83 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-platform-pps-tio
+ create mode 100644 drivers/pps/generators/pps_gen_tio.c
+
 -- 
-2.44.0
+2.35.3
 
 
