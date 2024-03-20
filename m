@@ -1,243 +1,256 @@
-Return-Path: <linux-doc+bounces-12363-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12365-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07512880D39
-	for <lists+linux-doc@lfdr.de>; Wed, 20 Mar 2024 09:41:16 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 95E32880DF8
+	for <lists+linux-doc@lfdr.de>; Wed, 20 Mar 2024 09:55:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6E6DB1F23099
-	for <lists+linux-doc@lfdr.de>; Wed, 20 Mar 2024 08:41:15 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B5AAD1C2292F
+	for <lists+linux-doc@lfdr.de>; Wed, 20 Mar 2024 08:55:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E6BCC381A1;
-	Wed, 20 Mar 2024 08:41:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D463F38DF1;
+	Wed, 20 Mar 2024 08:55:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b="vkgGH/au";
-	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b="y9bMjMpS"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k/LiyTzX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.153.233])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E538B18C19;
-	Wed, 20 Mar 2024 08:41:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=68.232.153.233
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1710924071; cv=fail; b=Me5wUkLePj7HK+Lp9Hu7XzpVbD37tL9iF2i6SnKCEEbFRvij9e6Vs9AXkkqKSpH1z8wQCZAo+x1MNXgGLoU+coyLhc8DdM+/c52hsUCgOsSRnwJg/393Pdz+Kx0EbX7/RaXn1hFSj16Ssx9OdzUuGenAwYTzEJjLmWlbmwU1EQc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1710924071; c=relaxed/simple;
-	bh=OCzx/9PdT6fwvsNwdvNV7XC0LOYamTIIfmSyPBx/kzA=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=lD23JgTm1ROTTExULVyDdeUNZd/Wt8kgkAQCwrHnyYlxUpg1pBY3gaRxCh2t9Uy6Kp6CcYn7wSCz0WYf4nwTvAKqeVOQ1iD3hCL5nviCh9QPmcghaxYB10BpCp89wzW/+uviVa5lWbjCrZK9m6lXoZcALOi6co7SCSJdYamMh3E=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=microchip.com; spf=pass smtp.mailfrom=microchip.com; dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b=vkgGH/au; dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b=y9bMjMpS; arc=fail smtp.client-ip=68.232.153.233
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
-  t=1710924069; x=1742460069;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-id:content-transfer-encoding:
-   mime-version;
-  bh=OCzx/9PdT6fwvsNwdvNV7XC0LOYamTIIfmSyPBx/kzA=;
-  b=vkgGH/auxQPxdfHEjb6bLqEYqTLUgGvRVF4WMIz2NeofVH1jsla6vziH
-   YIH1gQOY9h5Yr6VX8JLJUyUaiDjU+qK3D+GSqxrqlr1cO7avLsYoRdtgG
-   BPu6xl3UvqXBX0obsA2apIxWzsNRsrLFbVqGRabD14Xy+zJBvcW1zUnj8
-   EmKkdj+l9dA8Bd9bvwo0S8Sfoafz+33bpJ4w6gZzya1f/IXdWRZGhY6c2
-   qjHeBigDQTZLORkRDeHBvGiu6U1CaJiB+rpwmkiQfzEuvDAEQDljV/XNJ
-   lo2O4+tmD/2BVbpD8ZL4nGlyQoXBgGBH2Qzou6g66M2pO2BYhE4pWAAU/
-   A==;
-X-CSE-ConnectionGUID: F3rLw0mcQbuJ1Q59Cjbhng==
-X-CSE-MsgGUID: ScrcggLrRouwRMqo+VOX6g==
-X-IronPort-AV: E=Sophos;i="6.07,139,1708412400"; 
-   d="scan'208";a="17893739"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
-  by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 20 Mar 2024 01:41:08 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Wed, 20 Mar 2024 01:40:52 -0700
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com (10.10.215.250)
- by email.microchip.com (10.10.87.71) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35 via Frontend Transport; Wed, 20 Mar 2024 01:40:52 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OhuTRJMrimmLLJmuNZuNuV6oOWfihPEgvVlPA1G5pUW6nCJNibCUUX+PXAvDxs32r0pcAHJKFegRmA8oq/HLDgnhGMhZiO6q7iqu5FmkivvlVmK91sDg66dT3ov4rsG0RkBhZgm5ygyiXLxzwCa5BoCXg0dYj8dmXaskjagk/6GPIXpBure8fG1wPCeNIfFv1mgGBv6nTJyn5KpUClOHpNvW5z5UDLKhzTniTUjGTsMVox9Jc/1ET1oopqYxexn3/lfh8ByIxajJlkkd0FTkcUitodhJamYkBM3cQIz2en+8SskUcoCOSGakUtCAIpdRfVeCE3UdA6klXspCu7CHgA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OCzx/9PdT6fwvsNwdvNV7XC0LOYamTIIfmSyPBx/kzA=;
- b=g5tKWFLTB1br8slvu3GVtPPdMLBV6le039PmvYEbXye6+XkggpHxW4ws4H0rvwqrTiNVVsyvRUWFCtAZqwZGk/5TfVoabsRO8z8Ui7277yI8O1YFOb1usAdTNCAOw9fWkF53lOVDWHcQz1SYp2qDaiEb0VC8ZrPXjcrun89L09RGhznZSxeoJaQT1Kt6UupAn6+sJx/bn7jcrX5MuNfrsls5qqaRCO3/tV9uAihFpHaYi7GJ5C4ypGjUUaOC6hCq3WxBkIFJ5hyF/vLGMGTcI4dSkBmR76Gp8rbf6hlxCPt/boWtBoY47or4OXP75GYYNOE5+2WnL3RAYfbSyq34EA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microchip.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OCzx/9PdT6fwvsNwdvNV7XC0LOYamTIIfmSyPBx/kzA=;
- b=y9bMjMpSkcuvTB92IWfMaXsRVjeib7uBJLMv8OGkKA1nxmzAK5XlQ4JSBsQpsO5FcgzVJko5ZV7sPMVwjXfddswMNzfmUrF4MQZR8r+cts/KHz8mC66g2ukYbQvInd0kY2z6eDq0NieE2bLhZQxxPmyqG8LKjVpho4rA5CXnhzxAUTXoiB+qLW1IFqHO9zOvdEVvh4CPUhjJEAnLRFP2aHP7KCWdCx8H7RAcaulsfCRZNBFWg3oNtHg7CSn9qq7sdmeyTVcvnWOJDfp4IxL8hR4Kk9BE1KGNTDQ9gYKfARUW7G/ORlQUEluSuPxMSSi4w1CmNWXw3Up7IDQ7DobBKg==
-Received: from SA1PR11MB8278.namprd11.prod.outlook.com (2603:10b6:806:25b::19)
- by SN7PR11MB6948.namprd11.prod.outlook.com (2603:10b6:806:2ab::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.11; Wed, 20 Mar
- 2024 08:40:50 +0000
-Received: from SA1PR11MB8278.namprd11.prod.outlook.com
- ([fe80::f633:b9d4:f539:177d]) by SA1PR11MB8278.namprd11.prod.outlook.com
- ([fe80::f633:b9d4:f539:177d%6]) with mapi id 15.20.7386.015; Wed, 20 Mar 2024
- 08:40:50 +0000
-From: <Parthiban.Veerasooran@microchip.com>
-To: <conor@kernel.org>
-CC: <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
-	<pabeni@redhat.com>, <horms@kernel.org>, <saeedm@nvidia.com>,
-	<anthony.l.nguyen@intel.com>, <netdev@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <andrew@lunn.ch>, <corbet@lwn.net>,
-	<linux-doc@vger.kernel.org>, <robh+dt@kernel.org>,
-	<krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
-	<devicetree@vger.kernel.org>, <Horatiu.Vultur@microchip.com>,
-	<ruanjinjie@huawei.com>, <Steen.Hegelund@microchip.com>,
-	<vladimir.oltean@nxp.com>, <UNGLinuxDriver@microchip.com>,
-	<Thorsten.Kummermehr@microchip.com>, <Pier.Beruto@onsemi.com>,
-	<Selvamani.Rajagopal@onsemi.com>, <Nicolas.Ferre@microchip.com>,
-	<benjamin.bigler@bernformulastudent.ch>
-Subject: Re: [PATCH net-next v3 12/12] dt-bindings: net: add Microchip's
- LAN865X 10BASE-T1S MACPHY
-Thread-Topic: [PATCH net-next v3 12/12] dt-bindings: net: add Microchip's
- LAN865X 10BASE-T1S MACPHY
-Thread-Index: AQHab6Ox6ghenOTJpkWNbGLTwd03cbErBYYAgBVf3IA=
-Date: Wed, 20 Mar 2024 08:40:50 +0000
-Message-ID: <a172a0a3-42eb-4905-a22c-8078c0fd343a@microchip.com>
-References: <20240306085017.21731-1-Parthiban.Veerasooran@microchip.com>
- <20240306085017.21731-13-Parthiban.Veerasooran@microchip.com>
- <20240306-spree-islamist-957acf0ee368@spud>
-In-Reply-To: <20240306-spree-islamist-957acf0ee368@spud>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-user-agent: Mozilla Thunderbird
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microchip.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA1PR11MB8278:EE_|SN7PR11MB6948:EE_
-x-ms-office365-filtering-correlation-id: 05470e0d-f824-495a-ecc6-08dc48b97255
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: zGHxGEdw81hFt39ISdaVmxU1Z56+eKKGj49gGtf+QGaPDTPxlVReDyzl2VhCdT6cJ2mea94g2OnFmOd3ezt1vqEWAVjs+umWvlDZKmMM+QCqh5vgE9m2tGCkJ3+5tEIYyWfXluLgsz7d6aBvXJaQyE0mwDmcbpiwVqH1+bHkgSfcs85bawLNFSI5gfmDvszvBBbImwmwQFOf+aw7mVv2geDPAnNEzage+ftSbFJer8/ooWFNmhLyqIwZs0h5teNnUTfQBVg6mG/Ng5bDgBaCunFxiK3UvNH03dbMz9HE+rKbSixgxXw5cSayr+6DyD53X8+isbCABHtjijV0cH6/NEi6NXxowl6kC27R+WFJW4B5D46m5rANpJhZWbCnOHyG4NQ9t04OD81K50Y2QE6/ja6cB8G4S7TdvaADIn5uMoQhVCSU74YF/Mowa/ehd1YWKwSR1BBnap+V85mK32YZ9EawBjlVyh8KzbE4x4+eBv9oaU0EY5n7uXQimT8a+fpKMBNtCpYM45j0BcyFVfg59qlTsatlhMWuob1KoUlpd5DcPYxkKNrJ7fV9+gq/aEizkmjyZzQBJSAMRsZayU9tBwDRpmaNo12bAVCH9VUNQ5okrxvHb/ZoMpta4Xf6XkkhhqqhxrellSHvLz/bttsLXyzBjdopS9cqUuaeKyBpotM=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA1PR11MB8278.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(7416005)(376005)(366007)(1800799015)(38070700009);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Myt0QjFJMGNiZldBbkg3RjV5RmxWWkZtTlNncStsdzFQTC9IZ2s3U2hOTjZ4?=
- =?utf-8?B?aXVtK3M4SFR3am9QRFF2TGJzN1V4UmJXZm41TFFpSFgxaHBjOGpBdWlnMUMy?=
- =?utf-8?B?VkZnaFpqVW1TMnc3anJYTUhsV3drUVhsbndhVEd1bzJ3K0JoRWJGVXB0VXk0?=
- =?utf-8?B?UFJJUGE5MEo2aEhmVkt1STNBcDQrQTJxMHJSVXo1R0hDcWszSEZ3eGJvakU5?=
- =?utf-8?B?b3o5SEMwS0l1MlVLelUwYk12dU5RcFZSSy8rRStZODNkRUJ6aGhCMWVuR0Iy?=
- =?utf-8?B?Skw2SnBNNjlJTE1GbzdNa1AzWGxjYS83SlVJTW9JWkZ3Z1liODA4M0wzU1FK?=
- =?utf-8?B?dlpZSk5xQ1JjZVdtTkV3Y1IxZ0xjZ2tscm84NVZHcVdVSUs5Q1RXQmYyTm9p?=
- =?utf-8?B?Z2lkcEV0YzVYZ0FQRDFQM1M3b1d3VmFsRVFoNEJFenF4dmE5RFFqQU1JSTA3?=
- =?utf-8?B?UU9PekVxL3lnMng0ZFlycVNQQS9FMzJha1MvWWlUUjNuZGR1S29MTCtYQzc2?=
- =?utf-8?B?c3pVQUQzNmZleXBGYWxtRVJVWDlDbzVmRzVDci9sK0ZzMmtzU0doOG1kY0ln?=
- =?utf-8?B?V1pXRkJVYUZ2Y2xxMDl2MndiallMWkQ1SWxwV0o4SkJtNXZkZUkvQlhKemcw?=
- =?utf-8?B?bjRMd2Q1cXdMY3ZhYkczd3RXYzFrSU9KVkQ5NzQ4Ly81dEdYV1lWbTFNQklR?=
- =?utf-8?B?WG5kT3g2Z0cyWksvd3FsalpNNUVSVCtvQ2MrMEVVSkVPdEJ5UGVwRSt0ek1B?=
- =?utf-8?B?RUZvR1R0N2xXS0lWcWVCa3FnS24wWFB2RkhUc1pEMFNzeVBwdjZkamJQWkJy?=
- =?utf-8?B?V3JQSUFHc1Q2RVBiNngwN3hodEJnZE1Ody9iSkxGR0piQklsY2NWbmJMRTVy?=
- =?utf-8?B?SWVxcDdSNFNYa3p4dnV5TC9aQUxhbC9pSk1IWjluTndWUmZWd3BwZUtvNXFj?=
- =?utf-8?B?WlZTV2RuYkVUTmdXNkRaTFowbDJHNzJRNy9nZ20rUUQ5TWlYWG1rWWk5VFRt?=
- =?utf-8?B?K0p4YTlkbjdxbWh5ZU5BL3lWRzRXQnYxN25sRkV3TnRGU1pYUGhwK2JrU1JZ?=
- =?utf-8?B?emc4dWtLR1QxNXowSTFjS29iSlRMNVdzcmM4UWNiR1lvL0huR1hqRVZKeVhD?=
- =?utf-8?B?aFN1Vjd1WGR6UW1TUzhrL0VUZ1Z5bU00a1JvYWwvN21lZEJjZVA3cnpnamlT?=
- =?utf-8?B?TEh2UU1na2MrMEZNWGhCa09yRWhSYVF1R3NwaHZOM2JSVG5rWk5WcVlJYStW?=
- =?utf-8?B?Z2VnRVZTQ2hJN2VoQi9ndXkvSDBka1RkbE1oTkw4VGt5SkwycDEwU05NNTdl?=
- =?utf-8?B?VmxGSkVBdWg5T0tab1gxeU82bkZhNm8zVXFXVTd4RGdhWEp4QTQwbEhqdzJz?=
- =?utf-8?B?Zlp3NkpNcjJza2VrOHpyWWVHTnA1dGZuZjU4eVgxdjh3QUVDU3dGK3hqTUZR?=
- =?utf-8?B?aTFzdGphR2h2VnNBK014NTNRQi9HVEsySFVZYkpOWElsWDNLejNOaHV2UmZp?=
- =?utf-8?B?Zmx0bGRmbk5vVmpac1J2TmJMZVAzckZoaThaQ2pMYTZweDE1MFhqeTRtS0ps?=
- =?utf-8?B?RjF5Rll4TEpEYVU5SlhHbFFrc1A1TTAwOGp1QUpZWE05ZVZJa1RYNW9RVlNp?=
- =?utf-8?B?UU9RcFNXTnpXWUNvemVZN2ZMcVMwdkp4QitQUDh5K05uVkx6bXlEbnI4ZmJh?=
- =?utf-8?B?eHlHR1cyQlRpdWNNa1NjT2Y2RnU5dHNWS2pFaS9mRnRFZTRHeHJoR0pxbTZ0?=
- =?utf-8?B?QWxVQ2YycUp0ejI5SEVTSG9uSnlwMWFSNzZ4QlpUQ3VrM1hxTjZlMGlNU2t4?=
- =?utf-8?B?WXBmQ0kxWHI0TGJkVmdtS1lvZHQ2bW9ianQ5WXk1eW1mb2pxSEdOcXE2cjRO?=
- =?utf-8?B?dGtCSFM5SW9LbGN6YXhnbVlucjlSUVE3eVdMUWhwVmo0dVlBMjRhelhnT05Y?=
- =?utf-8?B?WThSSWhQaE1VQjFHbzNTbzBJb0JlTHRCOHhsdGsrSU03RkxMWTlPalY2Qk50?=
- =?utf-8?B?eWJmeXNkUC82aFBFWEUvbFhRMldBYittVEVJMlVxMnpHeUx2bEt2TUNsQ0xZ?=
- =?utf-8?B?MWQvVGQxUHZORlJ4K2UyV3BnSitYSTZENDlrVkc2R1dvTXpUMENNdC8vb01o?=
- =?utf-8?B?bzhLVkxRT2l0alNaQmw0TWN4YnhKWXFyRE5TbHpVYjdrOGJocktCaXEyUDNk?=
- =?utf-8?Q?GQZQY/xWNPhp/OHClSspV2s=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <5C3AE6C2D5D68E42B9F3C6D6F52A5B26@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CF7838DED;
+	Wed, 20 Mar 2024 08:55:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1710924941; cv=none; b=UHdM1Hg8r1muRhWJkYOF3F2Dex7naIiCUMny0+Nu8k4vZ+gbYU6DEHZUQ4ra8hx8y5mk8O0pDC3gUJTsbj+NtZMeIoB9DvWxqkWc7QZQ6iI51NTfy0NHJwQ6EnTLmpxnPLC8jfK5l4h8MQxPd4P1dVlXBekNSasw6jONQ1D7gkc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1710924941; c=relaxed/simple;
+	bh=gdJJxHO47QTHX7IJIQn/yNoS/qXqccMa+6/0bsPpjEQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=BYL9g3lml6ieP4sXRl2bvE2Za2nD+nGZDMxw5YERMPe9wGS+63JyLTVqK1R9wfq4DMIbLxdZ/MzYetllVDTFe/nRcDNc4s+BNj+HFsyZcW7fvkqlsl7i1/Y1Uzj9nj64r7HfRZmCMjKdsMgynY7dQsXxUVRSnXrG29huU0w3wBg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k/LiyTzX; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66867C433C7;
+	Wed, 20 Mar 2024 08:55:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1710924941;
+	bh=gdJJxHO47QTHX7IJIQn/yNoS/qXqccMa+6/0bsPpjEQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=k/LiyTzXOZm/bpwg/R7K7z83777XKyGQEoOkmI0+JirTc+A3Irgqqlo/MTqIaHAuT
+	 LaDz5/N89UQYLdibXxPlCFj22TikvtLMQmCsrzfiu9c8ExWvxD7lgnlxbCUAnPTxSu
+	 ovGWRjpBoZtNhTrQF2nDJYdWAWTZvyEET/dz7cc/V7Of5+KdYPv3eTw24b9yYI6Vth
+	 LvOmZtFkDBkj+IBOqsu96vPj5qqCbR/FSCbJ8WT6U9SUo/vlTPTqZ2qWSWdndiAJJg
+	 HA55nQnMV03il6CwCvqo9aY5LSDVcJcESBRt/qQPtJTao2MeNigIFRqvGlKDldCtwy
+	 dX0egkjrYM2eg==
+Date: Wed, 20 Mar 2024 10:55:36 +0200
+From: Leon Romanovsky <leon@kernel.org>
+To: Jason Gunthorpe <jgg@ziepe.ca>, Christoph Hellwig <hch@lst.de>
+Cc: Robin Murphy <robin.murphy@arm.com>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+	Chaitanya Kulkarni <chaitanyak@nvidia.com>,
+	Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
+	Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>,
+	Yishai Hadas <yishaih@nvidia.com>,
+	Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Alex Williamson <alex.williamson@redhat.com>,
+	=?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-block@vger.kernel.org, linux-rdma@vger.kernel.org,
+	iommu@lists.linux.dev, linux-nvme@lists.infradead.org,
+	kvm@vger.kernel.org, linux-mm@kvack.org,
+	Bart Van Assche <bvanassche@acm.org>,
+	Damien Le Moal <damien.lemoal@opensource.wdc.com>,
+	Amir Goldstein <amir73il@gmail.com>,
+	"josef@toxicpanda.com" <josef@toxicpanda.com>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	"daniel@iogearbox.net" <daniel@iogearbox.net>,
+	Dan Williams <dan.j.williams@intel.com>,
+	"jack@suse.com" <jack@suse.com>, Zhu Yanjun <zyjzyj2000@gmail.com>
+Subject: Re: [RFC RESEND 00/16] Split IOMMU DMA mapping operation to two steps
+Message-ID: <20240320085536.GA14887@unreal>
+References: <20240306162022.GB28427@lst.de>
+ <20240306174456.GO9225@ziepe.ca>
+ <20240306221400.GA8663@lst.de>
+ <20240307000036.GP9225@ziepe.ca>
+ <20240307150505.GA28978@lst.de>
+ <20240307210116.GQ9225@ziepe.ca>
+ <20240308164920.GA17991@lst.de>
+ <20240308202342.GZ9225@ziepe.ca>
+ <20240309161418.GA27113@lst.de>
+ <20240319153620.GB66976@ziepe.ca>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA1PR11MB8278.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 05470e0d-f824-495a-ecc6-08dc48b97255
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Mar 2024 08:40:50.3889
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: /IChAWpQBz13gN1I/SL+azrU3m10Nrx+DLIu9YO09YTl2h4TT58wQAWiZevfHSPjOE7yu7yQex0srfA3EuuS3ObycTGTfpsYgDIRuvw1UdZWbni4R5janDaa91g1lQZ7
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR11MB6948
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240319153620.GB66976@ziepe.ca>
 
-SGkgQ29ub3IsDQoNCk9uIDA2LzAzLzI0IDExOjQ2IHBtLCBDb25vciBEb29sZXkgd3JvdGU6DQo+
-IE9uIFdlZCwgTWFyIDA2LCAyMDI0IGF0IDAyOjIwOjE3UE0gKzA1MzAsIFBhcnRoaWJhbiBWZWVy
-YXNvb3JhbiB3cm90ZToNCj4+IFRoZSBMQU44NjUwLzEgY29tYmluZXMgYSBNZWRpYSBBY2Nlc3Mg
-Q29udHJvbGxlciAoTUFDKSBhbmQgYW4gRXRoZXJuZXQNCj4+IFBIWSB0byBlbmFibGUgMTBCQVNF
-LVQxUyBuZXR3b3Jrcy4gVGhlIEV0aGVybmV0IE1lZGlhIEFjY2VzcyBDb250cm9sbGVyDQo+PiAo
-TUFDKSBtb2R1bGUgaW1wbGVtZW50cyBhIDEwIE1icHMgaGFsZiBkdXBsZXggRXRoZXJuZXQgTUFD
-LCBjb21wYXRpYmxlDQo+PiB3aXRoIHRoZSBJRUVFIDgwMi4zIHN0YW5kYXJkIGFuZCBhIDEwQkFT
-RS1UMVMgcGh5c2ljYWwgbGF5ZXIgdHJhbnNjZWl2ZXINCj4+IGludGVncmF0ZWQgaW50byB0aGUg
-TEFOODY1MC8xLiBUaGUgY29tbXVuaWNhdGlvbiBiZXR3ZWVuIHRoZSBIb3N0IGFuZCB0aGUNCj4+
-IE1BQy1QSFkgaXMgc3BlY2lmaWVkIGluIHRoZSBPUEVOIEFsbGlhbmNlIDEwQkFTRS1UMXggTUFD
-UEhZIFNlcmlhbA0KPj4gSW50ZXJmYWNlIChUQzYpLg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IFBh
-cnRoaWJhbiBWZWVyYXNvb3JhbjxQYXJ0aGliYW4uVmVlcmFzb29yYW5AbWljcm9jaGlwLmNvbT4N
-Cj4+IC0tLQ0KPj4gICAuLi4vYmluZGluZ3MvbmV0L21pY3JvY2hpcCxsYW44NjV4LnlhbWwgICAg
-ICAgfCA4MCArKysrKysrKysrKysrKysrKysrDQo+PiAgIE1BSU5UQUlORVJTICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICB8ICAxICsNCj4+ICAgMiBmaWxlcyBjaGFuZ2VkLCA4MSBp
-bnNlcnRpb25zKCspDQo+PiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBEb2N1bWVudGF0aW9uL2Rldmlj
-ZXRyZWUvYmluZGluZ3MvbmV0L21pY3JvY2hpcCxsYW44NjV4LnlhbWwNCj4+DQo+PiBkaWZmIC0t
-Z2l0IGEvRG9jdW1lbnRhdGlvbi9kZXZpY2V0cmVlL2JpbmRpbmdzL25ldC9taWNyb2NoaXAsbGFu
-ODY1eC55YW1sIGIvRG9jdW1lbnRhdGlvbi9kZXZpY2V0cmVlL2JpbmRpbmdzL25ldC9taWNyb2No
-aXAsbGFuODY1eC55YW1sDQo+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPj4gaW5kZXggMDAwMDAw
-MDAwMDAwLi5lZTUyZjlkOGU5M2MNCj4+IC0tLSAvZGV2L251bGwNCj4+ICsrKyBiL0RvY3VtZW50
-YXRpb24vZGV2aWNldHJlZS9iaW5kaW5ncy9uZXQvbWljcm9jaGlwLGxhbjg2NXgueWFtbA0KPj4g
-QEAgLTAsMCArMSw4MCBAQA0KPj4gKyMgU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IChHUEwtMi4w
-LW9ubHkgT1IgQlNELTItQ2xhdXNlKQ0KPj4gKyVZQU1MIDEuMg0KPj4gKy0tLQ0KPj4gKyRpZDpo
-dHRwOi8vZGV2aWNldHJlZS5vcmcvc2NoZW1hcy9uZXQvbWljcm9jaGlwLGxhbjg2NXgueWFtbCMN
-Cj4+ICskc2NoZW1hOmh0dHA6Ly9kZXZpY2V0cmVlLm9yZy9tZXRhLXNjaGVtYXMvY29yZS55YW1s
-Iw0KPj4gKw0KPj4gK3RpdGxlOiBNaWNyb2NoaXAgTEFOODY1MC8xIDEwQkFTRS1UMVMgTUFDUEhZ
-IEV0aGVybmV0IENvbnRyb2xsZXJzDQo+PiArDQo+PiArbWFpbnRhaW5lcnM6DQo+PiArICAtIFBh
-cnRoaWJhbiBWZWVyYXNvb3JhbjxwYXJ0aGliYW4udmVlcmFzb29yYW5AbWljcm9jaGlwLmNvbT4N
-Cj4+ICsNCj4+ICtkZXNjcmlwdGlvbjoNCj4+ICsgIFRoZSBMQU44NjUwLzEgY29tYmluZXMgYSBN
-ZWRpYSBBY2Nlc3MgQ29udHJvbGxlciAoTUFDKSBhbmQgYW4gRXRoZXJuZXQNCj4+ICsgIFBIWSB0
-byBlbmFibGUgMTBCQVNF4oCRVDFTIG5ldHdvcmtzLiBUaGUgRXRoZXJuZXQgTWVkaWEgQWNjZXNz
-IENvbnRyb2xsZXINCj4+ICsgIChNQUMpIG1vZHVsZSBpbXBsZW1lbnRzIGEgMTAgTWJwcyBoYWxm
-IGR1cGxleCBFdGhlcm5ldCBNQUMsIGNvbXBhdGlibGUNCj4+ICsgIHdpdGggdGhlIElFRUUgODAy
-LjMgc3RhbmRhcmQgYW5kIGEgMTBCQVNFLVQxUyBwaHlzaWNhbCBsYXllciB0cmFuc2NlaXZlcg0K
-Pj4gKyAgaW50ZWdyYXRlZCBpbnRvIHRoZSBMQU44NjUwLzEuIFRoZSBjb21tdW5pY2F0aW9uIGJl
-dHdlZW4gdGhlIEhvc3QgYW5kDQo+PiArICB0aGUgTUFDLVBIWSBpcyBzcGVjaWZpZWQgaW4gdGhl
-IE9QRU4gQWxsaWFuY2UgMTBCQVNFLVQxeCBNQUNQSFkgU2VyaWFsDQo+PiArICBJbnRlcmZhY2Ug
-KFRDNikuDQo+PiArDQo+PiArYWxsT2Y6DQo+PiArICAtICRyZWY6IGV0aGVybmV0LWNvbnRyb2xs
-ZXIueWFtbCMNCj4+ICsNCj4+ICtwcm9wZXJ0aWVzOg0KPj4gKyAgY29tcGF0aWJsZToNCj4+ICsg
-ICAgb25lT2Y6DQo+PiArICAgICAgLSBpdGVtczoNCj4+ICsgICAgICAgICAgLSBjb25zdDogbWlj
-cm9jaGlwLGxhbjg2NTANCj4+ICsgICAgICAgICAgLSBjb25zdDogbWljcm9jaGlwLGxhbjg2NTEN
-Cj4gVGhlIG9yZGVyIGhlcmUgaXMgd3JvbmcsIGxhbjg1NjEgbmVlZHMgdG8gY29tZSBiZWZvcmUg
-dGhlIGZhbGxiYWNrIG9mDQo+IGxhbjg2NTAuDQpSZXBseSB0byB0aGlzIGNvbW1lbnQgaXMgaW4g
-YW5vdGhlciBlbWFpbC4NCj4gDQo+PiArICAgICAgLSBlbnVtOg0KPj4gKyAgICAgICAgICAtIG1p
-Y3JvY2hpcCxsYW44NjUwDQo+PiArDQo+PiArICByZWc6DQo+PiArICAgIG1heEl0ZW1zOiAxDQo+
-PiArDQo+PiArICBpbnRlcnJ1cHRzOg0KPj4gKyAgICBkZXNjcmlwdGlvbjoNCj4+ICsgICAgICBJ
-bnRlcnJ1cHQgZnJvbSBNQUMtUEhZIGFzc2VydGVkIGluIHRoZSBldmVudCBvZiBSZWNlaXZlIENo
-dW5rcw0KPj4gKyAgICAgIEF2YWlsYWJsZSwgVHJhbnNtaXQgQ2h1bmsgQ3JlZGl0cyBBdmFpbGFi
-bGUgYW5kIEV4dGVuZGVkIFN0YXR1cw0KPj4gKyAgICAgIEV2ZW50Lg0KPj4gKyAgICBtYXhJdGVt
-czogMQ0KPj4gKw0KPj4gKyAgc3BpLW1heC1mcmVxdWVuY3k6DQo+PiArICAgIG1pbmltdW06IDE1
-MDAwMDAwDQo+PiArICAgIG1heGltdW06IDI1MDAwMDAwDQo+IFlvdSdyZSBtaXNzaW5nIGEgcmVm
-ZXJlbmNlIHRvIHNwaS1wZXJpcGhlcmFsLXByb3BzIHdoZXJlIHRoaXMgcHJvcGVydHkNCj4gaXMg
-ZGVmaW5lZC4NCk9LLCBJIHdpbGwgYWRkIHRoZSBiZWxvdyBsaW5lIGluIHRoZSBhYm92ZSAiYWxs
-T2YiIHNlY3Rpb24uDQoNCi0gJHJlZjogL3NjaGVtYXMvc3BpL3NwaS1wZXJpcGhlcmFsLXByb3Bz
-LnlhbWwjDQoNCkJlc3QgcmVnYXJkcywNClBhcnRoaWJhbiBWDQo+IA0KPiBUaGFua3MsDQo+IENv
-bm9yLg0KDQo=
+On Tue, Mar 19, 2024 at 12:36:20PM -0300, Jason Gunthorpe wrote:
+> On Sat, Mar 09, 2024 at 05:14:18PM +0100, Christoph Hellwig wrote:
+> > On Fri, Mar 08, 2024 at 04:23:42PM -0400, Jason Gunthorpe wrote:
+> > > > The DMA API callers really need to know what is P2P or not for
+> > > > various reasons.  And they should generally have that information
+> > > > available, either from pin_user_pages that needs to special case
+> > > > it or from the in-kernel I/O submitter that build it from P2P and
+> > > > normal memory.
+> > > 
+> > > I think that is a BIO thing. RDMA just calls with FOLL_PCI_P2PDMA and
+> > > shoves the resulting page list into in a scattertable. It never checks
+> > > if any returned page is P2P - it has no reason to care. dma_map_sg()
+> > > does all the work.
+> > 
+> > Right now it does, but that's not really a good interface.  If we have
+> > a pin_user_pages variant that only pins until the next relevant P2P
+> > boundary and tells you about we can significantly simplify the overall
+> > interface.
+> 
+> Sorry for the delay, I was away..
+
+<...>
+
+> Can we tweak what Leon has done to keep the hmm_range_fault support
+> and non-uniformity for RDMA but add a uniformity optimized flow for
+> BIO?
+
+Something like this will do the trick.
+
+From 45e739e7073fb04bc168624f77320130bb3f9267 Mon Sep 17 00:00:00 2001
+Message-ID: <45e739e7073fb04bc168624f77320130bb3f9267.1710924764.git.leonro@nvidia.com>
+From: Leon Romanovsky <leonro@nvidia.com>
+Date: Mon, 18 Mar 2024 11:16:41 +0200
+Subject: [PATCH] mm/gup: add strict interface to pin user pages according to
+ FOLL flag
+
+All pin_user_pages*() and get_user_pages*() callbacks allocate user
+pages by partially taking into account their p2p vs. non-p2p properties.
+
+In case, user sets FOLL_PCI_P2PDMA flag, the allocated pages will include
+both p2p and "regular" pages, while if FOLL_PCI_P2PDMA flag is not provided,
+only regular pages are returned.
+
+In order to make sure that with FOLL_PCI_P2PDMA flag, only p2p pages are
+returned, let's introduce new internal FOLL_STRICT flag and provide special
+pin_user_pages_fast_strict() API call.
+
+Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+---
+ include/linux/mm.h |  3 +++
+ mm/gup.c           | 36 +++++++++++++++++++++++++++++++++++-
+ mm/internal.h      |  4 +++-
+ 3 files changed, 41 insertions(+), 2 deletions(-)
+
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index f5a97dec5169..910b65dde24a 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -2491,6 +2491,9 @@ int pin_user_pages_fast(unsigned long start, int nr_pages,
+ 			unsigned int gup_flags, struct page **pages);
+ void folio_add_pin(struct folio *folio);
+ 
++int pin_user_pages_fast_strict(unsigned long start, int nr_pages,
++			       unsigned int gup_flags, struct page **pages);
++
+ int account_locked_vm(struct mm_struct *mm, unsigned long pages, bool inc);
+ int __account_locked_vm(struct mm_struct *mm, unsigned long pages, bool inc,
+ 			struct task_struct *task, bool bypass_rlim);
+diff --git a/mm/gup.c b/mm/gup.c
+index df83182ec72d..11b5c626a4ab 100644
+--- a/mm/gup.c
++++ b/mm/gup.c
+@@ -133,6 +133,10 @@ struct folio *try_grab_folio(struct page *page, int refs, unsigned int flags)
+ 	if (unlikely(!(flags & FOLL_PCI_P2PDMA) && is_pci_p2pdma_page(page)))
+ 		return NULL;
+ 
++	if (flags & FOLL_STRICT)
++		if (flags & FOLL_PCI_P2PDMA && !is_pci_p2pdma_page(page))
++			return NULL;
++
+ 	if (flags & FOLL_GET)
+ 		return try_get_folio(page, refs);
+ 
+@@ -232,6 +236,10 @@ int __must_check try_grab_page(struct page *page, unsigned int flags)
+ 	if (unlikely(!(flags & FOLL_PCI_P2PDMA) && is_pci_p2pdma_page(page)))
+ 		return -EREMOTEIO;
+ 
++	if (flags & FOLL_STRICT)
++		if (flags & FOLL_PCI_P2PDMA && !is_pci_p2pdma_page(page))
++			return -EREMOTEIO;
++
+ 	if (flags & FOLL_GET)
+ 		folio_ref_inc(folio);
+ 	else if (flags & FOLL_PIN) {
+@@ -2243,6 +2251,8 @@ static bool is_valid_gup_args(struct page **pages, int *locked,
+ 	 * - FOLL_TOUCH/FOLL_PIN/FOLL_TRIED/FOLL_FAST_ONLY are internal only
+ 	 * - FOLL_REMOTE is internal only and used on follow_page()
+ 	 * - FOLL_UNLOCKABLE is internal only and used if locked is !NULL
++	 * - FOLL_STRICT is internal only and used to distinguish between p2p
++	 *   and "regular" pages.
+ 	 */
+ 	if (WARN_ON_ONCE(gup_flags & INTERNAL_GUP_FLAGS))
+ 		return false;
+@@ -3187,7 +3197,8 @@ static int internal_get_user_pages_fast(unsigned long start,
+ 	if (WARN_ON_ONCE(gup_flags & ~(FOLL_WRITE | FOLL_LONGTERM |
+ 				       FOLL_FORCE | FOLL_PIN | FOLL_GET |
+ 				       FOLL_FAST_ONLY | FOLL_NOFAULT |
+-				       FOLL_PCI_P2PDMA | FOLL_HONOR_NUMA_FAULT)))
++				       FOLL_PCI_P2PDMA | FOLL_HONOR_NUMA_FAULT |
++				       FOLL_STRICT)))
+ 		return -EINVAL;
+ 
+ 	if (gup_flags & FOLL_PIN)
+@@ -3322,6 +3333,29 @@ int pin_user_pages_fast(unsigned long start, int nr_pages,
+ }
+ EXPORT_SYMBOL_GPL(pin_user_pages_fast);
+ 
++/**
++ * pin_user_pages_fast_strict() - this is pin_user_pages_fast() variant, which
++ * makes sure that only pages with same properties are pinned.
++ *
++ * @start:      starting user address
++ * @nr_pages:   number of pages from start to pin
++ * @gup_flags:  flags modifying pin behaviour
++ * @pages:      array that receives pointers to the pages pinned.
++ *              Should be at least nr_pages long.
++ *
++ * Nearly the same as pin_user_pages_fastt(), except that FOLL_STRICT is set.
++ *
++ * FOLL_STRICT means that the pages are allocated with specific FOLL_* properties.
++ */
++int pin_user_pages_fast_strict(unsigned long start, int nr_pages,
++			       unsigned int gup_flags, struct page **pages)
++{
++	if (!is_valid_gup_args(pages, NULL, &gup_flags, FOLL_PIN | FOLL_STRICT))
++		return -EINVAL;
++	return internal_get_user_pages_fast(start, nr_pages, gup_flags, pages);
++}
++EXPORT_SYMBOL_GPL(pin_user_pages_fast_strict);
++
+ /**
+  * pin_user_pages_remote() - pin pages of a remote process
+  *
+diff --git a/mm/internal.h b/mm/internal.h
+index f309a010d50f..7578837a0444 100644
+--- a/mm/internal.h
++++ b/mm/internal.h
+@@ -1031,10 +1031,12 @@ enum {
+ 	FOLL_FAST_ONLY = 1 << 20,
+ 	/* allow unlocking the mmap lock */
+ 	FOLL_UNLOCKABLE = 1 << 21,
++	/* don't mix pages with different properties, e.g. p2p with "regular" ones */
++	FOLL_STRICT = 1 << 22,
+ };
+ 
+ #define INTERNAL_GUP_FLAGS (FOLL_TOUCH | FOLL_TRIED | FOLL_REMOTE | FOLL_PIN | \
+-			    FOLL_FAST_ONLY | FOLL_UNLOCKABLE)
++			    FOLL_FAST_ONLY | FOLL_UNLOCKABLE | FOLL_STRICT)
+ 
+ /*
+  * Indicates for which pages that are write-protected in the page table,
+-- 
+2.44.0
 
