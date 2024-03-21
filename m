@@ -1,138 +1,129 @@
-Return-Path: <linux-doc+bounces-12495-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12497-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21668885EC6
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 17:55:43 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5487D885EDA
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 17:57:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 997ADB23034
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 16:55:40 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 862221C2327E
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 16:57:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 292731350D1;
-	Thu, 21 Mar 2024 16:43:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7C1501369A9;
+	Thu, 21 Mar 2024 16:49:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="gGi8xJlV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91EF179E0
-	for <linux-doc@vger.kernel.org>; Thu, 21 Mar 2024 16:43:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF69A18AE8;
+	Thu, 21 Mar 2024 16:49:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711039431; cv=none; b=tkDaz2AIMs0VTPLbOh+KnWDxta5BAGuNci04AUR0rPx/UGi9B1NkmPPcrXkuFYkQMJINA7KzdKyCN2FdMoTaukJETbBmnLTSrrGzr1pR9NXvaCe8WY/zy3UHL46jjtXhadnxeHVZwMO88dnabzaXmhD/4AaochgeTRwsFR7vngk=
+	t=1711039767; cv=none; b=bhpLsmamGzj3K5uLsPmqq4c2oAj8/6kOjwdKBGIXrGZUnkyl81L3EOM9KjSVifbmokUcvo4lo45pz7G0uFUlXMGAZhZlf7JZbue/szYF0LOQDGuugZ0ZBFbMCn4haJOO3srV+Vr+h45kbLz3Ocpt0Z/J24CNT6e8kew7X9x7DMQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711039431; c=relaxed/simple;
-	bh=0vV3Rd8QELxZSI2XAgAt3t5uJdcz1UaglyduRhRIYBg=;
+	s=arc-20240116; t=1711039767; c=relaxed/simple;
+	bh=+nZPFZSgmWagI1A3CCJDLhLURWtV5kOkFvKlclMvVCQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Ce5QibvyTIfAxjylhx4PgUOVtQwcVwcct09DD3ZYVQ/V8EI7jxpZ6hHJch2rJGPhbo1pBgJoH9KND4Z4ljbA4BH2bjDmwftgidaTcanETm3GsIhzsgpjHgNfGHQlSNszjM/R8hUIqX7BqeVPMq2a7bHyHRF84NG5+oKtXeLOfHY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ore@pengutronix.de>)
-	id 1rnLVc-0000CG-Lb; Thu, 21 Mar 2024 17:43:16 +0100
-Received: from [2a0a:edc0:2:b01:1d::c5] (helo=pty.whiteo.stw.pengutronix.de)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <ore@pengutronix.de>)
-	id 1rnLVa-007ghN-T2; Thu, 21 Mar 2024 17:43:14 +0100
-Received: from ore by pty.whiteo.stw.pengutronix.de with local (Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1rnLVa-00A8G2-2X;
-	Thu, 21 Mar 2024 17:43:14 +0100
-Date: Thu, 21 Mar 2024 17:43:14 +0100
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: "David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Russ Weight <russ.weight@linux.dev>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Rob Herring <robh+dt@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Conor Dooley <conor+dt@kernel.org>, Mark Brown <broonie@kernel.org>,
-	Frank Rowand <frowand.list@gmail.com>, Andrew Lunn <andrew@lunn.ch>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
-	Dent Project <dentproject@linuxfoundation.org>
-Subject: Re: [PATCH net-next v5 13/17] net: pse-pd: Use regulator framework
- within PSE framework
-Message-ID: <ZfxjosqPMo0ECBmx@pengutronix.de>
-References: <20240227-feature_poe-v5-0-28f0aa48246d@bootlin.com>
- <20240227-feature_poe-v5-13-28f0aa48246d@bootlin.com>
- <ZeObuKHkPN3tiWz_@pengutronix.de>
- <20240304102708.5bb5d95c@kmaincent-XPS-13-7390>
- <ZeWi90H-B4XeSkFs@pengutronix.de>
- <20240321171524.0b04bfcc@kmaincent-XPS-13-7390>
+	 Content-Type:Content-Disposition:In-Reply-To; b=SUfBtNQiUvTYACv5CLU4kYvC9Raad4qR0XaClQIVKcfG1ZfCRSEVcdd0s+RfBo2d+p9J9h9mVvI4NmB3SAhk6wpJWnHxMHw8+7pj3oLfEMYcqdn2HwbRgwgtyS6zZ6rFKPEyOuE8dUZv7b3LOog5SsOHqK5BR8v7yOAKOPauLxs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=gGi8xJlV; arc=none smtp.client-ip=90.155.50.34
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=V9mrRuAn6P0CI166dm0Zpc+lSpGuhBwRxOMqznP0Qc8=; b=gGi8xJlVLOIZ3mUkkfMoCqE6+p
+	GYatoWTGuIQd5mIJqoYod0ls6FiejI1yWosjlReTKpX/4QcfgRsdMndn7H2he5AtOEWNIEMdv6DPj
+	ZRkrHCddWZIHbCcvrE7/i9TnUatU/rJkC1W5mkzmB2GMm50FbmFnSbKcERrsBngy84FyJ5zDJA3ue
+	b28mrMSpQRD3X9KSoKdZo5dJvgVF7WsSod91+d2J7u195+hFp7vmMB1eLvYgh26B8RIToR3Z1idYQ
+	7DqIqZWDxe4h3KOCq8qN6htm+cvV2ALDrz/yfvX53nfhNfOQ9l3tfg2VOFzpq0RrFF/sMMqgsASJ6
+	2EI1+HZQ==;
+Received: from willy by casper.infradead.org with local (Exim 4.97.1 #2 (Red Hat Linux))
+	id 1rnLb3-0000000793s-1qG7;
+	Thu, 21 Mar 2024 16:48:53 +0000
+Date: Thu, 21 Mar 2024 16:48:53 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Suren Baghdasaryan <surenb@google.com>
+Cc: akpm@linux-foundation.org, kent.overstreet@linux.dev, mhocko@suse.com,
+	vbabka@suse.cz, hannes@cmpxchg.org, roman.gushchin@linux.dev,
+	mgorman@suse.de, dave@stgolabs.net, liam.howlett@oracle.com,
+	penguin-kernel@i-love.sakura.ne.jp, corbet@lwn.net,
+	void@manifault.com, peterz@infradead.org, juri.lelli@redhat.com,
+	catalin.marinas@arm.com, will@kernel.org, arnd@arndb.de,
+	tglx@linutronix.de, mingo@redhat.com, dave.hansen@linux.intel.com,
+	x86@kernel.org, peterx@redhat.com, david@redhat.com,
+	axboe@kernel.dk, mcgrof@kernel.org, masahiroy@kernel.org,
+	nathan@kernel.org, dennis@kernel.org, jhubbard@nvidia.com,
+	tj@kernel.org, muchun.song@linux.dev, rppt@kernel.org,
+	paulmck@kernel.org, pasha.tatashin@soleen.com,
+	yosryahmed@google.com, yuzhao@google.com, dhowells@redhat.com,
+	hughd@google.com, andreyknvl@gmail.com, keescook@chromium.org,
+	ndesaulniers@google.com, vvvvvv@google.com,
+	gregkh@linuxfoundation.org, ebiggers@google.com, ytcoode@gmail.com,
+	vincent.guittot@linaro.org, dietmar.eggemann@arm.com,
+	rostedt@goodmis.org, bsegall@google.com, bristot@redhat.com,
+	vschneid@redhat.com, cl@linux.com, penberg@kernel.org,
+	iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com, glider@google.com,
+	elver@google.com, dvyukov@google.com, songmuchun@bytedance.com,
+	jbaron@akamai.com, aliceryhl@google.com, rientjes@google.com,
+	minchan@google.com, kaleshsingh@google.com, kernel-team@android.com,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	iommu@lists.linux.dev, linux-arch@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+	linux-modules@vger.kernel.org, kasan-dev@googlegroups.com,
+	cgroups@vger.kernel.org
+Subject: Re: [PATCH v6 20/37] mm: fix non-compound multi-order memory
+ accounting in __free_pages
+Message-ID: <Zfxk9aFhF7O_-T3c@casper.infradead.org>
+References: <20240321163705.3067592-1-surenb@google.com>
+ <20240321163705.3067592-21-surenb@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240321171524.0b04bfcc@kmaincent-XPS-13-7390>
-X-Sent-From: Pengutronix Hildesheim
-X-URL: http://www.pengutronix.de/
-X-Accept-Language: de,en
-X-Accept-Content-Type: text/plain
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ore@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+In-Reply-To: <20240321163705.3067592-21-surenb@google.com>
 
-On Thu, Mar 21, 2024 at 05:15:24PM +0100, Kory Maincent wrote:
-> Hello Oleksij,
-> 
-> On Mon, 4 Mar 2024 11:31:19 +0100
-> Oleksij Rempel <o.rempel@pengutronix.de> wrote:
-> 
-> > >    
-> > > > Should be tested, but if, instead of "vin-supply", we will use
-> > > > "pse-supply" it will make most part of pse_regulator.c obsolete.  
-> > > 
-> > > Don't know, if it is done at the pse-pi node level it may not break
-> > > pse_regulator.c. Not sure about it.  
-> > 
-> > me too. Before your patch set, the regulator topology for PoDL PSE was
-> > following:
-> > power-source
-> >   fixed-regulator
-> >      PoDL_PSE-consumer
-> > 
-> > Now it will be:
-> > power-source
-> >   fixed-regulator
-> >      PoDL_PSE-consumer
-> >        PSE-PI-provider
-> >          PSE-PI-consumer
-> > 
-> > By porting porting PSE framework to regulator, probably it make sense to
-> > remove two levels of regulators?
-> > power-source
-> >   fixed-regulator
-> >      PSE-PI-consumer
-> 
-> Sorry, I forgot to reply about this.
-> This is specific to pse_regulator driver. Could we tackle this change in another
-> patch series when the current patch series got applied?
-> Also I don't have the hardware to test it.
+On Thu, Mar 21, 2024 at 09:36:42AM -0700, Suren Baghdasaryan wrote:
+>  static inline void pgalloc_tag_add(struct page *page, struct task_struct *task,
+>  				   unsigned int nr) {}
+>  static inline void pgalloc_tag_sub(struct page *page, unsigned int nr) {}
+>  static inline void pgalloc_tag_split(struct page *page, unsigned int nr) {}
+> +static inline struct alloc_tag *pgalloc_tag_get(struct page *page) { return NULL; }
+> +static inline void pgalloc_tag_sub_pages(struct alloc_tag *tag, unsigned int nr) {}
+>  
+>  #endif /* CONFIG_MEM_ALLOC_PROFILING */
+>  
+> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+> index fd1cc5b80a56..00e0ae4cbf2d 100644
+> --- a/mm/page_alloc.c
+> +++ b/mm/page_alloc.c
+> @@ -4700,12 +4700,15 @@ void __free_pages(struct page *page, unsigned int order)
+>  {
+>  	/* get PageHead before we drop reference */
+>  	int head = PageHead(page);
+> +	struct alloc_tag *tag = pgalloc_tag_get(page);
+>  
+>  	if (put_page_testzero(page))
+>  		free_the_page(page, order);
+> -	else if (!head)
+> +	else if (!head) {
+> +		pgalloc_tag_sub_pages(tag, (1 << order) - 1);
+>  		while (order-- > 0)
+>  			free_the_page(page + (1 << order), order);
+> +	}
 
-ACK, no problem.
+Why do you need these new functions instead of just:
 
--- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
++	else if (!head) {
++		pgalloc_tag_sub(page, (1 << order) - 1);
+		while (order-- > 0)
+			free_the_page(page + (1 << order), order);
++	}
 
