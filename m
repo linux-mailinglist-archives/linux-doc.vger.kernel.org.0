@@ -1,241 +1,151 @@
-Return-Path: <linux-doc+bounces-12494-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12496-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4785A885EB2
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 17:53:35 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 686D1885ECA
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 17:55:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B2BB91F225FA
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 16:53:34 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id E77971F218F6
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 16:55:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DB16D1474BC;
-	Thu, 21 Mar 2024 16:38:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E0C9131745;
+	Thu, 21 Mar 2024 16:45:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="J87yunjO"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="p0QhQBUf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yb1-f202.google.com (mail-yb1-f202.google.com [209.85.219.202])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1083914601D
-	for <linux-doc@vger.kernel.org>; Thu, 21 Mar 2024 16:38:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.202
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B956130E54;
+	Thu, 21 Mar 2024 16:45:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711039113; cv=none; b=RmHhDnpXMwygf0Z9jUyjAg4JTtZfLvmxLNqtLekfqGchfgoGkmRJw3x8fBI/TrPpMUbN4YYqVacbInUiPUIfFIJJsc1eWqi7jNMKKqqdjpKWQ7DVI6ZIBaO/u5e0GoK6ALnCfhF6S45ADeLvwO+vJV9Rb50erHwn7hMzP6UfR0s=
+	t=1711039538; cv=none; b=GlbNprUdKcZ5mIV5WYfG5Tbq2xzz3bnv7MnY2h6u6jWPuM5pNk1nbg0PPmJ9c+w7sAPqWW+x1Hoye4aNprxXMt3Lme24S1tQ566+cbdsaZcFohI0A/E5Gi6ntu9efqhpDjpMkphCv6HOkzlGGpnYFxiFiWL24n3oDpBMcWfhOA4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711039113; c=relaxed/simple;
-	bh=BFhSOgRWZw49w/nNVhmrLSuZba9C6QEOmpxWTod6ib8=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=Zu5JwR1dTuECXMaLSL9ab5hGsd2fvm//T66ANz3BxZHhp34bWQMnABJolxS/iiYm2g0Kn/7u7TSL/Nu//f+DdSHVq0ljxnfAbWvsr6Ls1ZRS0NTG0i6uJ3hC93vSLqvtSj9u76QI3bEI6ElswRENC+OjIvfEiJrELcZO9W1lu08=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--surenb.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=J87yunjO; arc=none smtp.client-ip=209.85.219.202
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--surenb.bounces.google.com
-Received: by mail-yb1-f202.google.com with SMTP id 3f1490d57ef6-dbf618042daso1830977276.0
-        for <linux-doc@vger.kernel.org>; Thu, 21 Mar 2024 09:38:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1711039110; x=1711643910; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=zMtv/wiplx2DxF9seTFx3IcU+R2+PFSDAr6m0+A1ntI=;
-        b=J87yunjO28kD8sQDWsH2+886fzZILIU6T5/WoqTovyLEOlsl/gl2THxMnwuCLHdv1E
-         QA9Cjcqi5LSZ1ErCecNbw5YzCKY+clXvW5d7zB8W4PKow2AifOIVrsMUOaAlrdvddNTy
-         4kw+FmmiirxK33a8sFrtidXj9Y9fPn1IMmBGPAtNSOnHjFKU3mFmx+QBuUfSbfq/CDUq
-         Li5TtuVAadBbejEqH8GZlOJjFBJPC/ah4nBW5Fh1B4H9xQ7/D5KKGl3IhZObpsm5m8Vf
-         +I5d0SZ76DKFU024pWR9MUhAZWaHLqglyad/yl3sIDGhPFPUeKhUssBY2PlCaekUYQ3V
-         AJtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711039110; x=1711643910;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=zMtv/wiplx2DxF9seTFx3IcU+R2+PFSDAr6m0+A1ntI=;
-        b=U3SNGbfOjHJVxWXmpBzhRZOALYce+RxP8u0iwSbEqTWQH0atQU8OW+BfWwSiVHt6Mk
-         XjQHBzAzxa17qO0L8uDt6201qXf2qWh/3DkHFuwP4LpTX0/3P7gpfe8grGl1SaZuf1Z6
-         9WhB/n8K27nAictAkyjimfSw0IbvnQ1eSFqNinlmj6wbEmeW17Rv8aY13EZ5YX6fuqFG
-         g+6y6fjT401I3XKF3DXby8SoAIYiCUpG0zcoEtHA6GEbf7IAuEwyffANQa9Zy1F5Mj9b
-         B8HUsDDd86ZdTO4TI2pgM+oyn4P/5cB3fnFfqEpLMFsOEot5RwiF/6hOYrBLv60Lz2Hm
-         +Czg==
-X-Forwarded-Encrypted: i=1; AJvYcCWjQbJBjg1m0txMIEPwpPtVLLZHTWH7+eiBkzGMp8nV+t0Z4v4RgsH8gf0qx50dVSXTqbbDcFbBvM4gKqkIsw5bVT1qBpAVWZQU
-X-Gm-Message-State: AOJu0YylL44QasyX1CPaWMJ07HpNRxKtO9dJVXVimHSD1oLkXMT4BXa6
-	g0vMMVlj2QprE4g5IYXy1Q00w9e77wByzY1PDa+dbSfx/z9oYzgFu0KpEKraCFVvRXD3UCatLBO
-	S7w==
-X-Google-Smtp-Source: AGHT+IHubMkzttSDdMzbBJ1mYbEtkJMz1sywK2vk2BxZuZG66cHkzs6E2Eyy/Ht6uVFkEMl2Xl2C/1q/RI8=
-X-Received: from surenb-desktop.mtv.corp.google.com ([2620:15c:211:201:a489:6433:be5d:e639])
- (user=surenb job=sendgmr) by 2002:a05:6902:240e:b0:dc2:5273:53f9 with SMTP id
- dr14-20020a056902240e00b00dc2527353f9mr1211362ybb.1.1711039110014; Thu, 21
- Mar 2024 09:38:30 -0700 (PDT)
-Date: Thu, 21 Mar 2024 09:36:59 -0700
-In-Reply-To: <20240321163705.3067592-1-surenb@google.com>
+	s=arc-20240116; t=1711039538; c=relaxed/simple;
+	bh=nPVWYcFVife9z6PvN7CZBdrGkGPDFZARTn8Jlbi06jo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=k8Y0fuyQKSLoVwiPVSRFhns/kEWUOlQrcZsVrNTeBslGvIRj0ZhudE3aRvjEPj63D0USUfKZJ8c787auZgXKxbXe2pOkp0y7evzfh6OHM6nFgsK1W+vOtNafWajWbIXCBU8L7vNvNIEgaDCpYmsrA/L41o6KzgjgP+nBi0F7r0k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=p0QhQBUf; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6728AC433C7;
+	Thu, 21 Mar 2024 16:45:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1711039538;
+	bh=nPVWYcFVife9z6PvN7CZBdrGkGPDFZARTn8Jlbi06jo=;
+	h=From:To:Cc:Subject:Date:From;
+	b=p0QhQBUfqBhYa0QHOFz2qzWrrtUZmGwvBVc1ven3CagVdge1xOMt6mi5/CAbFumaG
+	 lLVDLvYdAJA48kGHY0T3BLbfFR0xuoLsnMHIvmvK+RlZKfNqM+eAuExhhPfqxdTUdW
+	 K4KYpS+aA4PRgIzSJ7zbsuxC93sUc0oZPMVS0Jbj65Ggwgq39IW/tsLsnZdokrIHwP
+	 05WBoKY82KPsnR8Gm04ENhFBmDSCPkGSDQM8sWRJxszfcvRE1feRkX1PHWWWcrNagA
+	 6S8wF9mdknt7/Y2QlcfwFarDDJBf9FEVbz8iqHNBI0iVCjMzQR9u1osUuDF4tmuENu
+	 GByjFZx4UYAgQ==
+From: Jarkko Sakkinen <jarkko@kernel.org>
+To: linux-integrity@vger.kernel.org
+Cc: Jarkko Sakkinen <jarkko@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
+	Lino Sanfilippo <l.sanfilippo@kunbus.com>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	Peter Huewe <peterhuewe@gmx.de>,
+	James Bottomley <James.Bottomley@HansenPartnership.com>,
+	Alexander Steffen <Alexander.Steffen@infineon.com>,
+	keyrings@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH v3] Documentation: tpm_tis
+Date: Thu, 21 Mar 2024 18:43:07 +0200
+Message-ID: <20240321164314.14732-1-jarkko@kernel.org>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20240321163705.3067592-1-surenb@google.com>
-X-Mailer: git-send-email 2.44.0.291.gc1ea87d7ee-goog
-Message-ID: <20240321163705.3067592-38-surenb@google.com>
-Subject: [PATCH v6 37/37] memprofiling: Documentation
-From: Suren Baghdasaryan <surenb@google.com>
-To: akpm@linux-foundation.org
-Cc: kent.overstreet@linux.dev, mhocko@suse.com, vbabka@suse.cz, 
-	hannes@cmpxchg.org, roman.gushchin@linux.dev, mgorman@suse.de, 
-	dave@stgolabs.net, willy@infradead.org, liam.howlett@oracle.com, 
-	penguin-kernel@i-love.sakura.ne.jp, corbet@lwn.net, void@manifault.com, 
-	peterz@infradead.org, juri.lelli@redhat.com, catalin.marinas@arm.com, 
-	will@kernel.org, arnd@arndb.de, tglx@linutronix.de, mingo@redhat.com, 
-	dave.hansen@linux.intel.com, x86@kernel.org, peterx@redhat.com, 
-	david@redhat.com, axboe@kernel.dk, mcgrof@kernel.org, masahiroy@kernel.org, 
-	nathan@kernel.org, dennis@kernel.org, jhubbard@nvidia.com, tj@kernel.org, 
-	muchun.song@linux.dev, rppt@kernel.org, paulmck@kernel.org, 
-	pasha.tatashin@soleen.com, yosryahmed@google.com, yuzhao@google.com, 
-	dhowells@redhat.com, hughd@google.com, andreyknvl@gmail.com, 
-	keescook@chromium.org, ndesaulniers@google.com, vvvvvv@google.com, 
-	gregkh@linuxfoundation.org, ebiggers@google.com, ytcoode@gmail.com, 
-	vincent.guittot@linaro.org, dietmar.eggemann@arm.com, rostedt@goodmis.org, 
-	bsegall@google.com, bristot@redhat.com, vschneid@redhat.com, cl@linux.com, 
-	penberg@kernel.org, iamjoonsoo.kim@lge.com, 42.hyeyoo@gmail.com, 
-	glider@google.com, elver@google.com, dvyukov@google.com, 
-	songmuchun@bytedance.com, jbaron@akamai.com, aliceryhl@google.com, 
-	rientjes@google.com, minchan@google.com, kaleshsingh@google.com, 
-	surenb@google.com, kernel-team@android.com, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, iommu@lists.linux.dev, 
-	linux-arch@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-modules@vger.kernel.org, kasan-dev@googlegroups.com, 
-	cgroups@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-From: Kent Overstreet <kent.overstreet@linux.dev>
+Based recent discussions on LKML, provide preliminary bits of tpm_tis_core
+dependent drivers. Includes only bare essentials but can be extended later
+on case by case. This way some people may even want to read it later on.
 
-Provide documentation for memory allocation profiling.
-
-Signed-off-by: Kent Overstreet <kent.overstreet@linux.dev>
-Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+CC: Daniel P. Smith <dpsmith@apertussolutions.com>
+Cc: Lino Sanfilippo <l.sanfilippo@kunbus.com>
+Cc: Jason Gunthorpe <jgg@ziepe.ca>
+Cc: Peter Huewe <peterhuewe@gmx.de>
+Cc: James Bottomley <James.Bottomley@HansenPartnership.com>
+Cc: Alexander Steffen <Alexander.Steffen@infineon.com>
+Cc: keyrings@vger.kernel.org
+Cc: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-integrity@vger.kernel.org
+Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+Signed-off-by: Jarkko Sakkinen <jarkko@kernel.org>
 ---
- Documentation/mm/allocation-profiling.rst | 100 ++++++++++++++++++++++
- Documentation/mm/index.rst                |   1 +
- 2 files changed, 101 insertions(+)
- create mode 100644 Documentation/mm/allocation-profiling.rst
+v3:
+- Fixed incorrect buffer size:
+  https://lore.kernel.org/linux-integrity/d957dbd3-4975-48d7-abc5-1a01c0959ea3@linux.ibm.com/
+v2:
+- Fixed errors reported by Randy:
+  https://lore.kernel.org/all/aed28265-d677-491a-a045-24b351854b24@infradead.org/
+- Improved the text a bit to have a better presentation.
+---
+ Documentation/security/tpm/index.rst   |  1 +
+ Documentation/security/tpm/tpm_tis.rst | 30 ++++++++++++++++++++++++++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 Documentation/security/tpm/tpm_tis.rst
 
-diff --git a/Documentation/mm/allocation-profiling.rst b/Documentation/mm/allocation-profiling.rst
+diff --git a/Documentation/security/tpm/index.rst b/Documentation/security/tpm/index.rst
+index fc40e9f23c85..f27a17f60a96 100644
+--- a/Documentation/security/tpm/index.rst
++++ b/Documentation/security/tpm/index.rst
+@@ -5,6 +5,7 @@ Trusted Platform Module documentation
+ .. toctree::
+ 
+    tpm_event_log
++   tpm_tis
+    tpm_vtpm_proxy
+    xen-tpmfront
+    tpm_ftpm_tee
+diff --git a/Documentation/security/tpm/tpm_tis.rst b/Documentation/security/tpm/tpm_tis.rst
 new file mode 100644
-index 000000000000..d3b733b41ae6
+index 000000000000..078b75666086
 --- /dev/null
-+++ b/Documentation/mm/allocation-profiling.rst
-@@ -0,0 +1,100 @@
++++ b/Documentation/security/tpm/tpm_tis.rst
+@@ -0,0 +1,30 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +
-+===========================
-+MEMORY ALLOCATION PROFILING
-+===========================
++=========================
++TPM FIFO interface Driver
++=========================
 +
-+Low overhead (suitable for production) accounting of all memory allocations,
-+tracked by file and line number.
++FIFO (First-In-First-Out) is the name of the hardware interface used by the
++tpm_tis_core dependent drivers. The prefix "tis" comes from the TPM Interface
++Specification, which is the hardware interface specification for TPM 1.x chips.
 +
-+Usage:
-+kconfig options:
-+- CONFIG_MEM_ALLOC_PROFILING
++Communication is based on a 20 KiB buffer shared by the TPM chip through a
++hardware bus or memory map, depending on the physical wiring. The buffer is
++further split into five equal-size 4 KiB buffers, which provide equivalent
++sets of registers for communication between the CPU and TPM. These
++communication endpoints are called localities in the TCG terminology.
 +
-+- CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT
++When the kernel wants to send commands to the TPM chip, it first reserves
++locality 0 by setting the requestUse bit in the TPM_ACCESS register. The bit is
++cleared by the chip when the access is granted. Once it completes its
++communication, the kernel writes the TPM_ACCESS.activeLocality bit. This
++informs the chip that the locality has been relinquished.
 +
-+- CONFIG_MEM_ALLOC_PROFILING_DEBUG
-+  adds warnings for allocations that weren't accounted because of a
-+  missing annotation
++Pending localities are served in order by the chip in descending order, one at
++a time:
 +
-+Boot parameter:
-+  sysctl.vm.mem_profiling=0|1|never
++- Locality 0 has the lowest priority.
++- Locality 5 has the highest priority.
 +
-+  When set to "never", memory allocation profiling overhead is minimized and it
-+  cannot be enabled at runtime (sysctl becomes read-only).
-+  When CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT=y, default value is "1".
-+  When CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT=n, default value is "never".
-+
-+sysctl:
-+  /proc/sys/vm/mem_profiling
-+
-+Runtime info:
-+  /proc/allocinfo
-+
-+Example output::
-+
-+  root@moria-kvm:~# sort -g /proc/allocinfo|tail|numfmt --to=iec
-+        2.8M    22648 fs/kernfs/dir.c:615 func:__kernfs_new_node
-+        3.8M      953 mm/memory.c:4214 func:alloc_anon_folio
-+        4.0M     1010 drivers/staging/ctagmod/ctagmod.c:20 [ctagmod] func:ctagmod_start
-+        4.1M        4 net/netfilter/nf_conntrack_core.c:2567 func:nf_ct_alloc_hashtable
-+        6.0M     1532 mm/filemap.c:1919 func:__filemap_get_folio
-+        8.8M     2785 kernel/fork.c:307 func:alloc_thread_stack_node
-+         13M      234 block/blk-mq.c:3421 func:blk_mq_alloc_rqs
-+         14M     3520 mm/mm_init.c:2530 func:alloc_large_system_hash
-+         15M     3656 mm/readahead.c:247 func:page_cache_ra_unbounded
-+         55M     4887 mm/slub.c:2259 func:alloc_slab_page
-+        122M    31168 mm/page_ext.c:270 func:alloc_page_ext
-+
-+===================
-+Theory of operation
-+===================
-+
-+Memory allocation profiling builds off of code tagging, which is a library for
-+declaring static structs (that typically describe a file and line number in
-+some way, hence code tagging) and then finding and operating on them at runtime,
-+- i.e. iterating over them to print them in debugfs/procfs.
-+
-+To add accounting for an allocation call, we replace it with a macro
-+invocation, alloc_hooks(), that
-+- declares a code tag
-+- stashes a pointer to it in task_struct
-+- calls the real allocation function
-+- and finally, restores the task_struct alloc tag pointer to its previous value.
-+
-+This allows for alloc_hooks() calls to be nested, with the most recent one
-+taking effect. This is important for allocations internal to the mm/ code that
-+do not properly belong to the outer allocation context and should be counted
-+separately: for example, slab object extension vectors, or when the slab
-+allocates pages from the page allocator.
-+
-+Thus, proper usage requires determining which function in an allocation call
-+stack should be tagged. There are many helper functions that essentially wrap
-+e.g. kmalloc() and do a little more work, then are called in multiple places;
-+we'll generally want the accounting to happen in the callers of these helpers,
-+not in the helpers themselves.
-+
-+To fix up a given helper, for example foo(), do the following:
-+- switch its allocation call to the _noprof() version, e.g. kmalloc_noprof()
-+
-+- rename it to foo_noprof()
-+
-+- define a macro version of foo() like so:
-+
-+  #define foo(...) alloc_hooks(foo_noprof(__VA_ARGS__))
-+
-+It's also possible to stash a pointer to an alloc tag in your own data structures.
-+
-+Do this when you're implementing a generic data structure that does allocations
-+"on behalf of" some other code - for example, the rhashtable code. This way,
-+instead of seeing a large line in /proc/allocinfo for rhashtable.c, we can
-+break it out by rhashtable type.
-+
-+To do so:
-+- Hook your data structure's init function, like any other allocation function.
-+
-+- Within your init function, use the convenience macro alloc_tag_record() to
-+  record alloc tag in your data structure.
-+
-+- Then, use the following form for your allocations:
-+  alloc_hooks_tag(ht->your_saved_tag, kmalloc_noprof(...))
-diff --git a/Documentation/mm/index.rst b/Documentation/mm/index.rst
-index 31d2ac306438..48b9b559ca7b 100644
---- a/Documentation/mm/index.rst
-+++ b/Documentation/mm/index.rst
-@@ -26,6 +26,7 @@ see the :doc:`admin guide <../admin-guide/mm/index>`.
-    page_cache
-    shmfs
-    oom
-+   allocation-profiling
- 
- Legacy Documentation
- ====================
++Further information on the purpose and meaning of the localities can be found
++in section 3.2 of the TCG PC Client Platform TPM Profile Specification.
 -- 
-2.44.0.291.gc1ea87d7ee-goog
+2.43.0
 
 
