@@ -1,85 +1,87 @@
-Return-Path: <linux-doc+bounces-12409-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12411-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B699C885852
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 12:28:22 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 19E618858C0
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 13:04:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6F405282FE6
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 11:28:21 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 313441C210A6
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Mar 2024 12:04:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0BCB858229;
-	Thu, 21 Mar 2024 11:28:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 07AFC757EF;
+	Thu, 21 Mar 2024 12:04:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bjAF72Lx"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NKXFblR4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+Received: from mail-ua1-f48.google.com (mail-ua1-f48.google.com [209.85.222.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EA7658235;
-	Thu, 21 Mar 2024 11:28:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7060D56B68;
+	Thu, 21 Mar 2024 12:04:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711020497; cv=none; b=oVQz+uHkGNfppaRu05q6MidQBSBbxxJz2pO0YRsFy0plucDvXwHSt1PLycoz4EO/fk8pShMnRHbkCTfBfjqqJWyfTuDjks9YrqlFHHIBb9rqL4PmaJvYaZZL/3UB9kmKAGxa4ya46Mw6wxTTBC/wvVggpQkepgYvGXdRWKj9IXs=
+	t=1711022642; cv=none; b=EwoThVxN2y9VN5g7N+4Z4x/Wbtv2L2BWpCPSSZkLxFyM3RwXDPfSnAhhyjXxJFEM+2wHvkktX9vdyHKBQP3v6ipQsQv+mWs3pC2oL78o/fxMBjsS52RB53SNxSszswJwAwkMI/pM6Gv5fDEAkaa9EDRsbgkyfpIi+x2v3uz6Xlk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711020497; c=relaxed/simple;
-	bh=w7BnE4I59f3wITcEro53uED3diG2JipzaV86wYEBpig=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=aTe3Mb1CnIw+Kcsm1ZTesbe9UgaVCSV6mFKSURKVaN7ikwRsmgOnqxJNUyl6m0YtrRetaCOCPEZ/Kh561CTposO9VDpYhItpBVi//eB48B0pWqt0clfD/cM+bJbtVTf5Cwr6a3xxIjSJMZLWEys7Gx1vYtmootExowEmEIF2Pew=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bjAF72Lx; arc=none smtp.client-ip=209.85.210.178
+	s=arc-20240116; t=1711022642; c=relaxed/simple;
+	bh=DTA9W/t9iIbGd7n0PZa6SLoZYst4DuYNjRduEVFThaw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=dWE2GD0xL7490hfu6XX6hCFGdhzYHtzaQ/5oj1+JmDcV7yZgK3WwS08eZvDmT1FH2oB2x8BBR5+Uiln+0ZAPUUGxrDylrl2u1gaobFfuwa0XFI1g97Bq1IFYRrgXdqR+Yv4C4+A7dPBdBb9L7IxXX7rzhJ7k/QPONVNXJUUjKOA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NKXFblR4; arc=none smtp.client-ip=209.85.222.48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-6e6ee9e3cffso566618b3a.1;
-        Thu, 21 Mar 2024 04:28:16 -0700 (PDT)
+Received: by mail-ua1-f48.google.com with SMTP id a1e0cc1a2514c-7e09ba2ac02so488786241.1;
+        Thu, 21 Mar 2024 05:04:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711020496; x=1711625296; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1711022640; x=1711627440; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yzjq/94BD2kg6IEXQY/xyl0j4YLV5g7AivSa/+JXGNg=;
-        b=bjAF72LxeA8GCLYnAxhPZdJMEECJtXURMT2sPHKow3yVKse0Lb6WCJvYt/xVhjfwCY
-         ui/QioSg+55bfkOIgLXEIaF4HYVphxspcfgFEbKQF/K14kKQmEbgICvvZYfr1RtdVm71
-         kJKjKbfr297WQv+kIvfuWphvNEGefFbxlLR7AIXvqM111UHYX7vgS5XOpsJ2weNguw1T
-         lWy9iBzdFEHypmZq5333JdwTFiXwktcRgxQVK1GWhtfYDkQ6FHn95OWuZfGg6/78RE10
-         Y3lKaqSDOe+KeLMirRNnu3veoJHkBnmAujsoUR/4+Ozi0c70Nn68PnwmAyq+R/9bCNzC
-         xLkQ==
+        bh=VWe40Qw2RtIY9rsmg4dS1sWx+IBR19FeZvKGaxKc9lg=;
+        b=NKXFblR4rOqkIgcGtOp8+3fLRjaZcnJMDeVrZhnoRRFyGuQcNaYSMMgpS/Y19NSHMb
+         ns0tsk0lfi9lb1lCSiZwsabhgdPmHkkIqYTjZ/vOk98RNkNbbzkr4lAYo0oGi24oJcXa
+         y6sgjugoF++l3rx7zlYVgQ5zkwPtKwt+Nxq595gjGau+LQLXly2Qk4zD/iIKX1heT3qg
+         lenJSUWNjPFU3kjTrTTJweRXIEE03P13G4hDjOiaYUsh+/+LeoWrDzKAYqHjmZa62uw7
+         eTHn3NsauoVrWT6jCThGu9uZc95HXNaVzoQucX88HiQCj0am8P8eNGdHVtXkFj/0rzsZ
+         Jzgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711020496; x=1711625296;
+        d=1e100.net; s=20230601; t=1711022640; x=1711627440;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=yzjq/94BD2kg6IEXQY/xyl0j4YLV5g7AivSa/+JXGNg=;
-        b=hZGONZ6za0sbtJ9t94u0BDbz1sawm2JbkGi1vQCLIlXMYVffZ3VAR50E44nqbY5A7n
-         tmQfKJWU9weYZfPBykYXwiNxTtQ3DcgwQwQCsJGwT8tkBFVQ3DkuqsPNPWRttLQAvdMb
-         Zz8k9wo2xtukMgA9usesip3NPuptbuITReq2+kMudgPBr4rXENkILkl9h+4ppd9IAh45
-         J8XrdZIpJai4NlpG3Ad4ZwaxiJRY8WgboivJdDN+jvZ5v1GnH/ve2KHoOF9DMvMBs1Lj
-         SYH0HAq1eyk4Rp9Dp2+iHTNfen9KdXvE9fWvaxfxOwaMRmS6jbr3MUHOh2Om97VZCeqB
-         l9Yg==
-X-Forwarded-Encrypted: i=1; AJvYcCXN0fbtjb02+tK+h7BoeUEfMPxowUtqye6MSvSWB2kKtOWnssfmd1lEuLihzUGL2sTJvjtixjfp4fHzGDSaHiu2d1JC3Gd9drzOY6Pl3bCjM5dQ/U9kpdYY3aM0N9W57NFDiLoHYRKXOxhEZffGKnku2bK1ogbKsY05292/h3/BcsHiEEWVXlgcdPGC
-X-Gm-Message-State: AOJu0YzMsrm+XTSv+of3mex25IKAxrZYLDp4ELU0fehZeRTpfYx5ZYTX
-	jt8XOVMjxZ8G0aIFiOFWTee5h8t0m5C7bUGW+k2l6DZNJq8pWbFD
-X-Google-Smtp-Source: AGHT+IFJCj7qVL7+FrjW2hamZ7lK04kKaGLMrwyVH/1I7+T7NQbG5x3hWhvnTiIibpDrn9Yfk4XjIw==
-X-Received: by 2002:a05:6a00:2d82:b0:6ea:7ba2:5003 with SMTP id fb2-20020a056a002d8200b006ea7ba25003mr309328pfb.13.1711020495715;
-        Thu, 21 Mar 2024 04:28:15 -0700 (PDT)
-Received: from sarat-Dell-G16-7630.. ([2405:201:c003:406c:91c7:e7bc:a440:5af9])
-        by smtp.gmail.com with ESMTPSA id n10-20020aa7984a000000b006ea7833e52esm589484pfq.128.2024.03.21.04.28.11
+        bh=VWe40Qw2RtIY9rsmg4dS1sWx+IBR19FeZvKGaxKc9lg=;
+        b=dpp0XQiXpF1upmguUxu4gvQVcmPf2fKW14M7eQ4tIzboKW+ilWH1csLl1U7beEUAUT
+         AivHysojRcN9LXqjHmiEXHbCgOtS5rWavd0slvS/1ExY2D+gNgqho0NFkJFpHWSlwXSE
+         U4wSyyhSePTMZ4nwYdT6ZeddEf8uabwTwWd4CUYKiZSLeKQBYiBYhjbHU4bbtx1TS/IJ
+         gyoqS3CT3KWz3winaDy0fQOzPN1SDN9XbMDLcXNI+l5lyNZtbvtLJUbpqMiNqWzRtVuQ
+         19no8I+v1y9cdg88okNn7y8ZE7biEkG6sRKVzfUZgaIDycwokc0UiC1gesQmqOuCcR0x
+         M17Q==
+X-Forwarded-Encrypted: i=1; AJvYcCVPjRs/tfTgnCZV4LAOAAoeAMMjARJOd/xmNyswACdqcO2dHevibB5VxTP9kdCTuhE/dsGyoIhhgA24Wz6lLHyLxuoDa+jNnig4j724nXdv/KWhf9nJYeAnQ2MdgacyAB+GXhq7zpGk
+X-Gm-Message-State: AOJu0Yx7Wr0nNHIvRI7wvSDAupx7rvH8gsJgkofeM/v1X7ktJPqu3nvO
+	6R2iV9vBusut4SxJPlUPVyo8mqxAPNIsOTuA5jfJ2C/AWmoX3tjyAbeD/R+x0NBKLg==
+X-Google-Smtp-Source: AGHT+IGd6j5zlTykKxJioDolomp0QHiRr0lYiNs6eUgfeEk0yQ8XJOhGTolmdzYlL54znpzC3S1cjQ==
+X-Received: by 2002:a05:6a20:7da4:b0:1a3:63ca:632a with SMTP id v36-20020a056a207da400b001a363ca632amr13355089pzj.58.1711022302257;
+        Thu, 21 Mar 2024 04:58:22 -0700 (PDT)
+Received: from amogh-desk-mint.Dlink ([119.82.120.209])
+        by smtp.gmail.com with ESMTPSA id c23-20020aa78c17000000b006e69cb93585sm13341804pfd.83.2024.03.21.04.58.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Mar 2024 04:28:15 -0700 (PDT)
-From: Sarat Mandava <mandavasarat@gmail.com>
-To: mathieu.desnoyers@efficios.com,
+        Thu, 21 Mar 2024 04:58:21 -0700 (PDT)
+From: Amogh Cheluvaraj <amogh.linux.kernel.dev@gmail.com>
+To: airlied@gmail.com,
+	daniel@ffwll.ch,
+	maarten.lankhorst@linux.intel.com,
+	mripard@kernel.org,
+	tzimmermann@suse.de,
 	corbet@lwn.net,
-	mhiramat@kernel.org,
-	rostedt@goodmis.org
-Cc: Sarat Mandava <mandavasarat@gmail.com>,
+	javier.carrasco.cruz@gmail.com,
+	skhan@linuxfoundation.org
+Cc: Amogh Cheluvaraj <amogh.linux.kernel.dev@gmail.com>,
+	dri-devel@lists.freedesktop.org,
 	linux-doc@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	shuah@kernel.org,
-	javier.carrasco.cruz@gmail.com
-Subject: [PATCH] trace doc: Minor grammatical correction
-Date: Thu, 21 Mar 2024 16:57:57 +0530
-Message-Id: <20240321112757.17502-1-mandavasarat@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] Fix duplicate C declaration warnings
+Date: Thu, 21 Mar 2024 17:27:08 +0530
+Message-ID: <20240321115738.51188-1-amogh.linux.kernel.dev@gmail.com>
+X-Mailer: git-send-email 2.44.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -88,27 +90,40 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use the correct relative pronoun.
+Fix the duplicate C declaration warnings found on
+Documentation/gpu/drm-kms.rst that was found by
+compiling htmldocs
 
-Signed-off-by: Sarat Mandava <mandavasarat@gmail.com>
+Signed-off-by: Amogh Cheluvaraj <amogh.linux.kernel.dev@gmail.com>
 ---
- Documentation/trace/tracepoints.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Documentation/gpu/drm-kms.rst | 6 ------
+ 1 file changed, 6 deletions(-)
 
-diff --git a/Documentation/trace/tracepoints.rst b/Documentation/trace/tracepoints.rst
-index 0cb8d9ca3d60..decabcc77b56 100644
---- a/Documentation/trace/tracepoints.rst
-+++ b/Documentation/trace/tracepoints.rst
-@@ -27,7 +27,7 @@ the tracepoint site).
+diff --git a/Documentation/gpu/drm-kms.rst b/Documentation/gpu/drm-kms.rst
+index 13d3627d8bc0..a4145f391e43 100644
+--- a/Documentation/gpu/drm-kms.rst
++++ b/Documentation/gpu/drm-kms.rst
+@@ -357,9 +357,6 @@ Format Functions Reference
+ .. kernel-doc:: include/drm/drm_fourcc.h
+    :internal:
  
- You can put tracepoints at important locations in the code. They are
- lightweight hooks that can pass an arbitrary number of parameters,
--which prototypes are described in a tracepoint declaration placed in a
-+whose prototypes are described in a tracepoint declaration placed in a
- header file.
+-.. kernel-doc:: drivers/gpu/drm/drm_fourcc.c
+-   :export:
+-
+ .. _kms_dumb_buffer_objects:
  
- They can be used for tracing and performance accounting.
+ Dumb Buffer Objects
+@@ -458,9 +455,6 @@ KMS Locking
+ .. kernel-doc:: include/drm/drm_modeset_lock.h
+    :internal:
+ 
+-.. kernel-doc:: drivers/gpu/drm/drm_modeset_lock.c
+-   :export:
+-
+ KMS Properties
+ ==============
+ 
 -- 
-2.34.1
+2.44.0
 
 
