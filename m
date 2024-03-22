@@ -1,213 +1,121 @@
-Return-Path: <linux-doc+bounces-12566-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12569-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64F84886FFA
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Mar 2024 16:48:43 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 016E888702B
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Mar 2024 17:02:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id E71B41F21AE3
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Mar 2024 15:48:42 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 334711C22A41
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Mar 2024 16:02:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C364F56B8E;
-	Fri, 22 Mar 2024 15:48:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC01C56B61;
+	Fri, 22 Mar 2024 16:02:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jmV2lbD8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from szxga04-in.huawei.com (szxga04-in.huawei.com [45.249.212.190])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F6F953E2E;
-	Fri, 22 Mar 2024 15:48:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.190
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8652A55C26;
+	Fri, 22 Mar 2024 16:02:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711122506; cv=none; b=L82Px5+yuMqpBUvYWZYSdBUxYquSdBBortTJI9xAMSVZS2UlQmk7uFOn6YziV18QsSEWJaKzlpq0D65rkb3hAdA2O1a3bUn+2WJf8IsLhV8piw8juqYp5+orkCsF38KymgiTmMJ0K4qIo6XVHqvzA3mjzkZcHPW1JDxKm3Dp3go=
+	t=1711123336; cv=none; b=KWu4diiDc996oYNK0XhntUbwrSlXfLlp7CoyNHgtz3xLRO10EnK69PcnFO8J5R9grl097zzEG/otSD3d1t2kR4Xo0PA62zYcDW24M+f53TGLyOrJui/vOf6rlhLH6iM/fLMCyvxYhKOJ/4n770j6ZFa8vvRz0w8B/IA87CtBt4Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711122506; c=relaxed/simple;
-	bh=DdDcIrubg/hyr2/B2kcB4NRchW4qrW7wa41j8k7WttI=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=fB3ASkDWVUNVWEohxbMeKlbs8pl2mNdEjcj3WZCOts+7q9BG6o6lpy11ZmHRJrxxOECLfddvdbdtF5jtyEa3AwnQBtwdeCJvdLOlioA3/7WgruywPjX847X40kY1TH/uqxrnOybmqSpHLyJuaZWxRFE0jjZWEheMIqrz+IgLoZA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=45.249.212.190
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.19.88.214])
-	by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4V1RWk0GKhz1xsQj;
-	Fri, 22 Mar 2024 23:46:26 +0800 (CST)
-Received: from kwepemd500012.china.huawei.com (unknown [7.221.188.25])
-	by mail.maildlp.com (Postfix) with ESMTPS id 490B81A016C;
-	Fri, 22 Mar 2024 23:48:21 +0800 (CST)
-Received: from huawei.com (10.90.53.73) by kwepemd500012.china.huawei.com
- (7.221.188.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.28; Fri, 22 Mar
- 2024 23:48:20 +0800
-From: Li Zetao <lizetao1@huawei.com>
-To: <richard@nod.at>, <chengzhihao1@huawei.com>, <corbet@lwn.net>,
-	<kent.overstreet@linux.dev>, <agruenba@redhat.com>
-CC: <lizetao1@huawei.com>, <linux-mtd@lists.infradead.org>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-Subject: [RFC PATCH v2 5/5] ubifs: Introduce ACLs mount options
-Date: Fri, 22 Mar 2024 23:48:12 +0800
-Message-ID: <20240322154812.215369-6-lizetao1@huawei.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240322154812.215369-1-lizetao1@huawei.com>
-References: <20240322154812.215369-1-lizetao1@huawei.com>
+	s=arc-20240116; t=1711123336; c=relaxed/simple;
+	bh=aoF4dmwFvyElelkcyMu8PBXHligJrfzMuWeep9NvMbE=;
+	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=o++SgCsi1gVOqrHHhuslc+4blCyIZ/pJESI3B9ed5GLVh8AqZeJEGSP84Y/EpayIofmsSgbimmEmUWEouizamzLhBxcqfFCjKRhs4TKX0BaalchySLSq9kzQPvYXjCWPiBvXDN6kKImCMSa6I6Fg9VTqKM2DHcAEoeL+e2AFdx0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jmV2lbD8; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 029EEC43390;
+	Fri, 22 Mar 2024 16:02:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1711123336;
+	bh=aoF4dmwFvyElelkcyMu8PBXHligJrfzMuWeep9NvMbE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=jmV2lbD8c9m4XS0wNhC398FxSmiqjv7s7Bi+bn9P468s7vuNLU2ruoJ3MPBccLCWs
+	 rgwR/pvDFZf1bWj6jd0Dhd4gZ+9bGE3/APLKNs/Iz9t5EVO+9zTe7NInnlSLFwKNSZ
+	 2W8bmvrhS3UOcgseDjzYAtGUKnv56maI6uA8aFjAG2gdnlMhDvIwIH4t4hM/J6SJzU
+	 r/BuncZ/jwB6zYWPobFYoj5YxFXNaz7o1HU+Ndw1WKVgcghEDT7KTWf77RYOFGopG3
+	 QJC8nmcK+OiFRLvPxkAuADC7fJND5aBOwvL6kB9t1Cb8eXSZLedn73exd+6T3u8RJ0
+	 lp62WtpQCKA6Q==
+Received: from sofa.misterjones.org ([185.219.108.64] helo=goblin-girl.misterjones.org)
+	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.95)
+	(envelope-from <maz@kernel.org>)
+	id 1rnhLR-00EYDl-8X;
+	Fri, 22 Mar 2024 16:02:13 +0000
+Date: Fri, 22 Mar 2024 16:02:12 +0000
+Message-ID: <86jzluz24b.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: David Woodhouse <dwmw2@infradead.org>
+Cc: linux-arm-kernel@lists.infradead.org,
+	kvm@vger.kernel.org,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Oliver Upton <oliver.upton@linux.dev>,
+	James Morse <james.morse@arm.com>,
+	Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Zenghui Yu <yuzenghui@huawei.com>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Len Brown <len.brown@intel.com>,
+	Pavel Machek <pavel@ucw.cz>,
+	David Woodhouse <dwmw@amazon.co.uk>,
+	Mostafa Saleh <smostafa@google.com>,
+	Jean-Philippe Brucker <jean-philippe@linaro.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	kvmarm@lists.linux.dev,
+	linux-pm@vger.kernel.org
+Subject: Re: [RFC PATCH v3 5/5] arm64: Use SYSTEM_OFF2 PSCI call to power off for hibernate
+In-Reply-To: <20240319130957.1050637-6-dwmw2@infradead.org>
+References: <20240319130957.1050637-1-dwmw2@infradead.org>
+	<20240319130957.1050637-6-dwmw2@infradead.org>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/29.1
+ (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- kwepemd500012.china.huawei.com (7.221.188.25)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: dwmw2@infradead.org, linux-arm-kernel@lists.infradead.org, kvm@vger.kernel.org, pbonzini@redhat.com, corbet@lwn.net, oliver.upton@linux.dev, james.morse@arm.com, suzuki.poulose@arm.com, yuzenghui@huawei.com, catalin.marinas@arm.com, will@kernel.org, mark.rutland@arm.com, lpieralisi@kernel.org, rafael@kernel.org, len.brown@intel.com, pavel@ucw.cz, dwmw@amazon.co.uk, smostafa@google.com, jean-philippe@linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, kvmarm@lists.linux.dev, linux-pm@vger.kernel.org
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
 
-Implement the ability to enable or disable the ACLs feature through
-mount options. "-o acl" option means enable and "-o noacl" means disable
-and it is enable by default.
+On Tue, 19 Mar 2024 12:59:06 +0000,
+David Woodhouse <dwmw2@infradead.org> wrote:
 
-Signed-off-by: Li Zetao <lizetao1@huawei.com>
----
-v1 -> v2:
-  * Remove redundant assignments to mount.acl.
-  * Added the description of acl mount options in ubifs.rst.
+[...]
 
-v1: https://lore.kernel.org/all/20240319161646.2153867-5-lizetao1@huawei.com/
+> +static void __init psci_init_system_off2(void)
+> +{
+> +	int ret;
+> +
+> +	ret = psci_features(PSCI_FN_NATIVE(1_3, SYSTEM_OFF2));
+> +
+> +	if (ret != PSCI_RET_NOT_SUPPORTED)
+> +		psci_system_off2_supported = true;
 
- Documentation/filesystems/ubifs.rst |  4 +++
- fs/ubifs/super.c                    | 41 +++++++++++++++++++++++++++++
- fs/ubifs/ubifs.h                    |  2 ++
- 3 files changed, 47 insertions(+)
+It'd be worth considering the (slightly broken) case where SYSTEM_OFF2
+is supported, but HIBERNATE_OFF is not set in the response, as the
+spec doesn't say that this bit is mandatory (it seems legal to
+implement SYSTEM_OFF2 without any hibernate type, making it similar to
+SYSTEM_OFF).
 
-diff --git a/Documentation/filesystems/ubifs.rst b/Documentation/filesystems/ubifs.rst
-index ced2f7679ddb..f9615104d7a3 100644
---- a/Documentation/filesystems/ubifs.rst
-+++ b/Documentation/filesystems/ubifs.rst
-@@ -105,6 +105,10 @@ auth_key=		specify the key used for authenticating the filesystem.
- auth_hash_name=		The hash algorithm used for authentication. Used for
- 			both hashing and for creating HMACs. Typical values
- 			include "sha256" or "sha512"
-+noacl			This option disables POSIX Access Control List support. If ACL support
-+			is enabled in the kernel configuration (CONFIG_EXT4_FS_POSIX_ACL), ACL
-+			is enabled by default on mount. See the acl(5) manual page for more
-+			information about acl.
- ====================	=======================================================
- 
- 
-diff --git a/fs/ubifs/super.c b/fs/ubifs/super.c
-index 291583005dd1..53ea58ab83f5 100644
---- a/fs/ubifs/super.c
-+++ b/fs/ubifs/super.c
-@@ -457,6 +457,13 @@ static int ubifs_show_options(struct seq_file *s, struct dentry *root)
- 	seq_printf(s, ",assert=%s", ubifs_assert_action_name(c));
- 	seq_printf(s, ",ubi=%d,vol=%d", c->vi.ubi_num, c->vi.vol_id);
- 
-+#ifdef CONFIG_UBIFS_FS_POSIX_ACL
-+	if (c->mount_opts.acl == 2)
-+		seq_puts(s, ",acl");
-+	else if (c->mount_opts.acl == 1)
-+		seq_puts(s, ",noacl");
-+#endif
-+
- 	return 0;
- }
- 
-@@ -967,6 +974,8 @@ static int check_volume_empty(struct ubifs_info *c)
-  * Opt_assert: set ubifs_assert() action
-  * Opt_auth_key: The key name used for authentication
-  * Opt_auth_hash_name: The hash type used for authentication
-+ * Opt_acl: enable posix acl
-+ * Opt_noacl: disable posix acl
-  * Opt_err: just end of array marker
-  */
- enum {
-@@ -981,6 +990,8 @@ enum {
- 	Opt_auth_key,
- 	Opt_auth_hash_name,
- 	Opt_ignore,
-+	Opt_acl,
-+	Opt_noacl,
- 	Opt_err,
- };
- 
-@@ -997,6 +1008,8 @@ static const match_table_t tokens = {
- 	{Opt_ignore, "ubi=%s"},
- 	{Opt_ignore, "vol=%s"},
- 	{Opt_assert, "assert=%s"},
-+	{Opt_acl, "acl"},
-+	{Opt_noacl, "noacl"},
- 	{Opt_err, NULL},
- };
- 
-@@ -1137,6 +1150,21 @@ static int ubifs_parse_options(struct ubifs_info *c, char *options,
- 			break;
- 		case Opt_ignore:
- 			break;
-+#ifdef CONFIG_UBIFS_FS_POSIX_ACL
-+		case Opt_acl:
-+			c->mount_opts.acl = 2;
-+			break;
-+		case Opt_noacl:
-+			c->mount_opts.acl = 1;
-+			break;
-+#else
-+		case Opt_acl:
-+			ubifs_err(c, "acl options not supported");
-+			return -EINVAL;
-+		case Opt_noacl:
-+			ubifs_err(c, "noacl options not supported");
-+			return -EINVAL;
-+#endif
- 		default:
- 		{
- 			unsigned long flag;
-@@ -2017,6 +2045,12 @@ static int ubifs_remount_fs(struct super_block *sb, int *flags, char *data)
- 		return err;
- 	}
- 
-+#ifdef CONFIG_UBIFS_FS_POSIX_ACL
-+	if (c->mount_opts.acl == 1)
-+		c->vfs_sb->s_flags &= ~SB_POSIXACL;
-+	else
-+		c->vfs_sb->s_flags |= SB_POSIXACL;
-+#endif
- 	if (c->ro_mount && !(*flags & SB_RDONLY)) {
- 		if (c->ro_error) {
- 			ubifs_msg(c, "cannot re-mount R/W due to prior errors");
-@@ -2199,6 +2233,13 @@ static int ubifs_fill_super(struct super_block *sb, void *data, int silent)
- 	if (err)
- 		goto out_close;
- 
-+#ifdef CONFIG_UBIFS_FS_POSIX_ACL
-+	if (c->mount_opts.acl == 1)
-+		c->vfs_sb->s_flags &= ~SB_POSIXACL;
-+	else
-+		c->vfs_sb->s_flags |= SB_POSIXACL;
-+#endif
-+
- 	/*
- 	 * UBIFS provides 'backing_dev_info' in order to disable read-ahead. For
- 	 * UBIFS, I/O is not deferred, it is done immediately in read_folio,
-diff --git a/fs/ubifs/ubifs.h b/fs/ubifs/ubifs.h
-index b96c2462237a..731f433ded68 100644
---- a/fs/ubifs/ubifs.h
-+++ b/fs/ubifs/ubifs.h
-@@ -956,6 +956,7 @@ struct ubifs_orphan {
-  *                  specified in @compr_type)
-  * @compr_type: compressor type to override the superblock compressor with
-  *              (%UBIFS_COMPR_NONE, etc)
-+ * @acl: enable/disable posix acl (%0 default, %1 disable, %2 enable)
-  */
- struct ubifs_mount_opts {
- 	unsigned int unmount_mode:2;
-@@ -963,6 +964,7 @@ struct ubifs_mount_opts {
- 	unsigned int chk_data_crc:2;
- 	unsigned int override_compr:1;
- 	unsigned int compr_type:2;
-+	unsigned int acl:2;
- };
- 
- /**
+Thanks,
+
+	M.
+
 -- 
-2.34.1
-
+Without deviation from the norm, progress is not possible.
 
