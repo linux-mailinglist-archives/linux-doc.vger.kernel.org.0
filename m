@@ -1,112 +1,263 @@
-Return-Path: <linux-doc+bounces-12553-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12555-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 581A4886DC1
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Mar 2024 14:48:19 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0690F886E39
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Mar 2024 15:13:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 101B9282ADF
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Mar 2024 13:48:18 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 298761C2095D
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Mar 2024 14:13:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 568BD44C8F;
-	Fri, 22 Mar 2024 13:48:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 81CED481B7;
+	Fri, 22 Mar 2024 14:12:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="GE+vXlar"
+	dkim=pass (2048-bit key) header.d=dabbelt-com.20230601.gappssmtp.com header.i=@dabbelt-com.20230601.gappssmtp.com header.b="1P8Nbhbn"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 150021E522;
-	Fri, 22 Mar 2024 13:48:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BD72481BF
+	for <linux-doc@vger.kernel.org>; Fri, 22 Mar 2024 14:12:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711115294; cv=none; b=SiFvpslf8wzadfnWzCHBeNVJXx7imroI1Mu/UFnBswIDYXHPu2X0PTBBdUxiaci1hvxF+jTB11YbofAKdFwuv+6w4KoV/vSCStqQvXuo/YuQ1oAqB8wg6691dP4KVYgwUngRU53Bj85JWY0C253mvXcQj8YKFw/8soiYiIgOAYU=
+	t=1711116778; cv=none; b=FPsUTWFiCjKha316N/mNQMffjGRHwmr32iOPlpY6599cdQ2LaWmVqVbYSleujrPMR+pMztvgCtEMXtMkC5zlUckrQtlt+GjowqZf9/75i8XvWsUrzg3JT0hO46atIzMy/44Qbql0xR7XK1SycC1McxLA9YnoFWcP2jgLsyCLFoY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711115294; c=relaxed/simple;
-	bh=yAqs6k7CJPGwrhFOqcbBcKT5BMwacTGQwa+/4jfCTog=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KgBC4Tkgw6GpQuauMTPaAVuHE0sTmLEaJgTgZeZn//iR2Wj/LtmedEefIUBxs8xdQ5mxg9y4MJAjZFVLv8sESmdUoumQj+1MLqikAYz6Gt9DEYSDWT/o5/CMFK1ff/pC3wXKX5XgVJ89k0eVipC/aPPGKQemd8/tDTYWj/xG9YY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=GE+vXlar; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31C13C433C7;
-	Fri, 22 Mar 2024 13:48:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1711115293;
-	bh=yAqs6k7CJPGwrhFOqcbBcKT5BMwacTGQwa+/4jfCTog=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=GE+vXlarH6VfHHxUq1E37b8ORsXgcqY5v8ITccO9qaX5tSFL++addXv9zGgVKzrvC
-	 N2wp4AczFsex8Hk+u0Pt335sQrWiBTC63o4Rgy0gXuHNn4AgFsFVn8CH4vsbZbnWE9
-	 Rw8EtV2RqnNPRAE8riAxGV7t40ve6zl3tGw8YTdM=
-Date: Fri, 22 Mar 2024 14:48:11 +0100
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Markus Elfring <Markus.Elfring@web.de>
-Cc: Dan Williams <dan.j.williams@intel.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Linus Torvalds <torvalds@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
-	kernel-janitors@vger.kernel.org,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Ira Weiny <ira.weiny@intel.com>,
-	Jesse Brandeburg <jesse.brandeburg@intel.com>,
-	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-	Julia Lawall <Julia.Lawall@inria.fr>,
-	Lukas Wunner <lukas.wunner@intel.com>
-Subject: Re: [PATCH] cleanup: Add usage and style documentation
-Message-ID: <2024032200-outage-tribute-b630@gregkh>
-References: <171097196970.1011049.9726486429680041876.stgit@dwillia2-xfh.jf.intel.com>
- <8a1adff2-eb83-4dec-b8d0-1e523245de65@web.de>
+	s=arc-20240116; t=1711116778; c=relaxed/simple;
+	bh=uabN1U09dpaxwPgK5zBOg/0q/WFlWJn6j0Uu62VmsG0=;
+	h=Date:Subject:In-Reply-To:CC:From:To:Message-ID:Mime-Version:
+	 Content-Type; b=M3pt5Wmqyt+GgeNq5TQU5GWkxk2/mfpCzF/BDQWBwvkOGaGkbGl0uSDeu+Nqtj8FIffW1E9GUQfPDQWMpeubDwH4fJk6L3QRFNU/GmJeJJJ4JkiM2TIyT6jGr8e0MgoznsW29CxXIPPzKw+vT6ZZvCN9NO0kjhR5Xqil1BVsxyk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=dabbelt.com; spf=pass smtp.mailfrom=dabbelt.com; dkim=pass (2048-bit key) header.d=dabbelt-com.20230601.gappssmtp.com header.i=@dabbelt-com.20230601.gappssmtp.com header.b=1P8Nbhbn; arc=none smtp.client-ip=209.85.128.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=dabbelt.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dabbelt.com
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-60a5a11b59dso23473577b3.0
+        for <linux-doc@vger.kernel.org>; Fri, 22 Mar 2024 07:12:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=dabbelt-com.20230601.gappssmtp.com; s=20230601; t=1711116775; x=1711721575; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:to:from:cc
+         :in-reply-to:subject:date:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yMwbsV2lr5D+n8eq4lwX8uN+1JbL7Okl9fmvTySMdOM=;
+        b=1P8NbhbnBwl0uD4+ytF7L4of28ppw1Wm0FsL9EPH8HtdRrfqOOhyhX9k2xdXB8TjOF
+         PgZ5qMsImMfKMSVOVMj2sr/DAASfWbb5+ednfWUY0u0OwVLvwLs8aTvD8SsON4dGTOe1
+         EbmkRfMDV3bjUz69NB1iTzMu9MX0vsXnjO0gGMzgFlsTeXoj7xtQ6GMiQ2poGtKQNjbx
+         luYtVyt0Ir9qmbXzhLyNM1mgRgQTLnOFzHH5u8n8HRQNmvP2g9pA3fKEP686P18PvsXR
+         qt7QT4OjbJVvsqgrui2FYpQQnbq1PrlthegHg5mWdOBjSYQAip9CtAg+Gy4w348CiZqC
+         Kf8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1711116775; x=1711721575;
+        h=content-transfer-encoding:mime-version:message-id:to:from:cc
+         :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=yMwbsV2lr5D+n8eq4lwX8uN+1JbL7Okl9fmvTySMdOM=;
+        b=uu1Y0CPPP//ZRhol9ewcci7qvskr8uTasj69uM/L/uQ3t42rkv6KhSi2HlJC6/F7kr
+         KAM5VhO4oTtR+ehJMvqWIuFi2Dlyb71nQumzp4JmrFfcmrEPzuJTJQ0TKCAQnpS2iDDJ
+         Ug57D4IomntYSMH98kKKrPn3y3AMM5HIyEVnWTlHsuvRSWGkDu7IsOQNK7G+VTZy0q3h
+         +JCpcAEz5Xn6EBF/kd/OSTABJXZmBmUIYMJoAGSAeDEBFLSpGbJ78WXFSnK1XVK9Oq0Y
+         AXMuHTvNwqh+Ff4aGxCw2YeAiktYXlpxLgeNVPkDA0KTOhOOYVi6EE/hTh0M78VkB4bI
+         BGyQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWNGYfiJ2ERgDSJwat4Nk350o6hMCjuGsPYhV1+xzMxTG9WomGz3x0dcYlPtub2kjJj4Pr1e+GFWhC5D2IE730rtlxUprmPUeif
+X-Gm-Message-State: AOJu0YwjnDPbb8ddlFdd1q+6lD+reV42gajoyhd0gC2pQb/2HRo9MVdB
+	NX1phNUZIY4ROjgpl5BJeJHGfbVXvgZuqaWaiz7LcF5gnKfnubbZmpUh49gRnoHv3srOpLI+dme
+	M
+X-Google-Smtp-Source: AGHT+IF67p/WhASEEUOaMLQ7DminN+c4zr/4NoTc7CLi/rZc+sVKHX93JtQeh2Zc4uFIFtVUaKoXtg==
+X-Received: by 2002:a05:6a21:920a:b0:1a3:7b9a:4dd6 with SMTP id tl10-20020a056a21920a00b001a37b9a4dd6mr2763771pzb.54.1711116379234;
+        Fri, 22 Mar 2024 07:06:19 -0700 (PDT)
+Received: from localhost ([192.184.165.199])
+        by smtp.gmail.com with ESMTPSA id x8-20020a056a000bc800b006ea918dab9csm94982pfu.157.2024.03.22.07.06.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 22 Mar 2024 07:06:18 -0700 (PDT)
+Date: Fri, 22 Mar 2024 07:06:18 -0700 (PDT)
+X-Google-Original-Date: Fri, 22 Mar 2024 07:06:16 PDT (-0700)
+Subject:     Re: [PATCH v3 1/3] riscv: mm: Use hint address in mmap if available
+In-Reply-To: <ZbxTNjQPFKBatMq+@ghost>
+CC: cyy@cyyself.name, alexghiti@rivosinc.com,
+  Paul Walmsley <paul.walmsley@sifive.com>, aou@eecs.berkeley.edu, shuah@kernel.org, corbet@lwn.net, linux-mm@kvack.org,
+  linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+  linux-doc@vger.kernel.org
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: Charlie Jenkins <charlie@rivosinc.com>
+Message-ID: <mhng-5d9bb6c0-9f40-44b2-b9dc-3823cf6dbdef@palmer-ri-x1c9>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <8a1adff2-eb83-4dec-b8d0-1e523245de65@web.de>
 
-On Fri, Mar 22, 2024 at 02:00:42PM +0100, Markus Elfring wrote:
-> …
-> > +++ b/include/linux/cleanup.h
-> > @@ -4,6 +4,118 @@
-> >
-> >  #include <linux/compiler.h>
-> >
-> > +/**
-> > + * DOC: scope-based cleanup helpers
-> > + *
-> > + * The "goto error" pattern is notorious for introducing …
-> 
-> Will any other label become more helpful for this description approach?
-> 
-> 
-> > + * this tedium and can aid in maintaining FILO (first in last out)
->              ⬆
-> Would an other word be more appropriate here?
-> 
+On Thu, 01 Feb 2024 18:28:06 PST (-0800), Charlie Jenkins wrote:
+> On Wed, Jan 31, 2024 at 11:59:43PM +0800, Yangyu Chen wrote:
+>> On Wed, 2024-01-31 at 22:41 +0800, Yangyu Chen wrote:
+>> > On Tue, 2024-01-30 at 17:07 -0800, Charlie Jenkins wrote:
+>> > > On riscv it is guaranteed that the address returned by mmap is less
+>> > > than
+>> > > the hint address. Allow mmap to return an address all the way up to
+>> > > addr, if provided, rather than just up to the lower address space.
+>> > > 
+>> > > This provides a performance benefit as well, allowing mmap to exit
+>> > > after
+>> > > checking that the address is in range rather than searching for a
+>> > > valid
+>> > > address.
+>> > > 
+>> > > It is possible to provide an address that uses at most the same
+>> > > number
+>> > > of bits, however it is significantly more computationally expensive
+>> > > to
+>> > > provide that number rather than setting the max to be the hint
+>> > > address.
+>> > > There is the instruction clz/clzw in Zbb that returns the highest
+>> > > set
+>> > > bit
+>> > > which could be used to performantly implement this, but it would
+>> > > still
+>> > > be slower than the current implementation. At worst case, half of
+>> > > the
+>> > > address would not be able to be allocated when a hint address is
+>> > > provided.
+>> > > 
+>> > > Signed-off-by: Charlie Jenkins <charlie@rivosinc.com>
+>> > > ---
+>> > >  arch/riscv/include/asm/processor.h | 27 +++++++++++---------------
+>> > > -
+>> > >  1 file changed, 11 insertions(+), 16 deletions(-)
+>> > > 
+>> > > diff --git a/arch/riscv/include/asm/processor.h
+>> > > b/arch/riscv/include/asm/processor.h
+>> > > index f19f861cda54..8ece7a8f0e18 100644
+>> > > --- a/arch/riscv/include/asm/processor.h
+>> > > +++ b/arch/riscv/include/asm/processor.h
+>> > > @@ -14,22 +14,16 @@
+>> > >  
+>> > >  #include <asm/ptrace.h>
+>> > >  
+>> > > -#ifdef CONFIG_64BIT
+>> > > -#define DEFAULT_MAP_WINDOW	(UL(1) << (MMAP_VA_BITS - 1))
+>> > > -#define STACK_TOP_MAX		TASK_SIZE_64
+>> > > -
+>> > >  #define arch_get_mmap_end(addr, len, flags)			\
+>> > >  ({								\
+>> > >  	unsigned long
+>> > > mmap_end;					\
+>> > >  	typeof(addr) _addr = (addr);				\
+>> > > -	if ((_addr) == 0 || (IS_ENABLED(CONFIG_COMPAT) &&
+>> > > is_compat_task())) \
+>> > > +	if ((_addr) == 0 ||					\
+>> > > +	    (IS_ENABLED(CONFIG_COMPAT) && is_compat_task()) ||	\
+>> > > +	    ((_addr + len) > BIT(VA_BITS -
+>> > > 1)))			\
+>> > >  		mmap_end = STACK_TOP_MAX;			\
+>> > > -	else if ((_addr) >= VA_USER_SV57)			\
+>> > > -		mmap_end = STACK_TOP_MAX;			\
+>> > > -	else if ((((_addr) >= VA_USER_SV48)) && (VA_BITS >=
+>> > > VA_BITS_SV48)) \
+>> > > -		mmap_end = VA_USER_SV48;			\
+>> > >  	else							\
+>> > > -		mmap_end = VA_USER_SV39;			\
+>> > > +		mmap_end = (_addr + len);			\
+>> > >  	mmap_end;						\
+>> > >  })
+>> > >  
+>> > > @@ -39,17 +33,18 @@
+>> > >  	typeof(addr) _addr = (addr);				\
+>> > >  	typeof(base) _base = (base);				\
+>> > >  	unsigned long rnd_gap = DEFAULT_MAP_WINDOW - (_base);	\
+>> > > -	if ((_addr) == 0 || (IS_ENABLED(CONFIG_COMPAT) &&
+>> > > is_compat_task())) \
+>> > > +	if ((_addr) == 0 ||					\
+>> > > +	    (IS_ENABLED(CONFIG_COMPAT) && is_compat_task()) ||	\
+>> > > +	    ((_addr + len) > BIT(VA_BITS -
+>> > > 1)))			\
+>> > >  		mmap_base = (_base);				\
+>> > > -	else if (((_addr) >= VA_USER_SV57) && (VA_BITS >=
+>> > > VA_BITS_SV57)) \
+>> > > -		mmap_base = VA_USER_SV57 - rnd_gap;		\
+>> > > -	else if ((((_addr) >= VA_USER_SV48)) && (VA_BITS >=
+>> > > VA_BITS_SV48)) \
+>> > > -		mmap_base = VA_USER_SV48 - rnd_gap;		\
+>> > >  	else							\
+>> > > -		mmap_base = VA_USER_SV39 - rnd_gap;		\
+>> > > +		mmap_base = (_addr + len) - rnd_gap;		\
+>> > >  	mmap_base;						\
+>> > >  })
+>> > >  
+>> > > +#ifdef CONFIG_64BIT
+>> > > +#define DEFAULT_MAP_WINDOW	(UL(1) << (MMAP_VA_BITS - 1))
+>> > > +#define STACK_TOP_MAX		TASK_SIZE_64
+>> > >  #else
+>> > >  #define DEFAULT_MAP_WINDOW	TASK_SIZE
+>> > >  #define STACK_TOP_MAX		TASK_SIZE
+>> > > 
+>> > 
+>> > I have carefully tested your patch on qemu with sv57. A bug that
+>> > needs
+>> > to be solved is that mmap with the same hint address without
+>> > MAP_FIXED
+>> > set will fail the second time.
+>> > 
+>> > Userspace code to reproduce the bug:
+>> > 
+>> > #include <sys/mman.h>
+>> > #include <stdio.h>
+>> > #include <stdint.h>
+>> > 
+>> > void test(char *addr) {
+>> >     char *res = mmap(addr, 4096, PROT_READ | PROT_WRITE,
+>> > MAP_ANONYMOUS
+>> > > MAP_PRIVATE, -1, 0);
+>> >     printf("hint %p got %p.\n", addr, res);
+>> > }
+>> > 
+>> > int main (void) {
+>> >     test(1<<30);
+>> >     test(1<<30);
+>> >     test(1<<30);
+>> >     return 0;
+>> > }
+>> > 
+>> > output:
+>> > 
+>> > hint 0x40000000 got 0x40000000.
+>> > hint 0x40000000 got 0xffffffffffffffff.
+>> > hint 0x40000000 got 0xffffffffffffffff.
+>> > 
+>> > output on x86:
+>> > 
+>> > hint 0x40000000 got 0x40000000.
+>> > hint 0x40000000 got 0x7f9171363000.
+>> > hint 0x40000000 got 0x7f9171362000.
+>> > 
+>> > It may need to implement a special arch_get_unmapped_area and
+>> > arch_get_unmapped_area_topdown function.
+>> > 
+>> 
+>> This is because hint address < rnd_gap. I have tried to let mmap_base =
+>> min((_addr + len), (base) + TASK_SIZE - DEFAULT_MAP_WINDOW). However it
+>> does not work for bottom-up while ulimit -s is unlimited. You said this
+>> behavior is expected from patch v2 review. However it brings a new
+>> regression even on sv39 systems.
+>> 
+>> I still don't know the reason why use addr+len as the upper-bound. I
+>> think solution like x86/arm64/powerpc provide two address space switch
+>> based on whether hint address above the default map window is enough.
+>> 
+>
+> Yep this is expected. It is up to the maintainers to decide.
 
-Hi,
+Sorry I forgot to reply to this, I had a buffer sitting around somewhere 
+but I must have lost it.
 
-This is the semi-friendly patch-bot of Greg Kroah-Hartman.
+I think Charlie's approach is the right way to go.  Putting my userspace 
+hat on, I'd much rather have my allocations fail rather than silently 
+ignore the hint when there's memory pressure.
 
-Markus, you seem to have sent a nonsensical or otherwise pointless
-review comment to a patch submission on a Linux kernel developer mailing
-list.  I strongly suggest that you not do this anymore.  Please do not
-bother developers who are actively working to produce patches and
-features with comments that, in the end, are a waste of time.
+If there's some real use case that needs these low hints to be silently 
+ignored under VA pressure then we can try and figure something out that 
+makes those applications work.
 
-Patch submitter, please ignore Markus's suggestion; you do not need to
-follow it at all.  The person/bot/AI that sent it is being ignored by
-almost all Linux kernel maintainers for having a persistent pattern of
-behavior of producing distracting and pointless commentary, and
-inability to adapt to feedback.  Please feel free to also ignore emails
-from them.
-
-thanks,
-
-greg k-h's patch email bot
+>
+> - Charlie
 
