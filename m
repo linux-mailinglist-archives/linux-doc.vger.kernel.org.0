@@ -1,152 +1,142 @@
-Return-Path: <linux-doc+bounces-12640-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12637-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 862E88894F9
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Mar 2024 09:14:37 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E0E8888922F
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Mar 2024 08:00:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3AE011F2FC14
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Mar 2024 08:14:37 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9B0B2292F5D
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Mar 2024 07:00:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 35A69173353;
-	Mon, 25 Mar 2024 03:10:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9A86E1B5DD9;
+	Mon, 25 Mar 2024 00:48:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="iF7DWwIh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC35924A899;
-	Sun, 24 Mar 2024 23:22:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.95.11.211
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BD8D2733F2;
+	Sun, 24 Mar 2024 23:35:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711322547; cv=none; b=Agsj4QlORW1UWFl/bSqBJXKOcGM49TeKqTsbvn5zg3jzx6j6YE0+fz+vUyi+WziMBkdoGFKts+mNUCbxInhkW4rF2MNs8aRxVgkfmuOGAKiBKEakH2pP7qRKXlOyaKWbcbNpSvtPTObZclvXeyIG7pcjP/8V1AoyPKwbRXeUgms=
+	t=1711323325; cv=none; b=V4i42sNwmFtejMoS6ppzpbJFpUqNNR6iU+iyog+EbCKmThdCMoybhazaS3dU8Nr23OUyz6qkz/AbangdluQmAr5yMEhRq+oiBv3/XnzjvNWbsoxNQYuauHUb3h0jrNQFSx9tNGR4vtByFbXUc010kkGyPumHyZJ7s35GkfyQCds=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711322547; c=relaxed/simple;
-	bh=QD2J7s+PbQMl/4TLX0Q9/+FJg4j9efgCpQRUHwRCQyI=;
+	s=arc-20240116; t=1711323325; c=relaxed/simple;
+	bh=w3DndtsjG6zas1wfMjz8RZMmPG7WJq8zOlcY33vgO1k=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Ysn1E/vkAvIpQQdhL/buj0v+IHKqkpgM6yHYp1jGB5CPiljkxWOEFqZT8cv6LIXCuc1R8xyUwEq7TxJo9Xgq9Yx882MCZLashOUeInZZHj/4F8SdUmK33jqUKxbkyjE2SbbE6SbQ9qXDIHPRSJbf655mYinhN+SfSHsvwKo6fa8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de; spf=pass smtp.mailfrom=lst.de; arc=none smtp.client-ip=213.95.11.211
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lst.de
-Received: by verein.lst.de (Postfix, from userid 2407)
-	id 08B4F68D0F; Mon, 25 Mar 2024 00:22:16 +0100 (CET)
-Date: Mon, 25 Mar 2024 00:22:15 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-Cc: Christoph Hellwig <hch@lst.de>, Leon Romanovsky <leon@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-	Chaitanya Kulkarni <chaitanyak@nvidia.com>,
-	Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
-	Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>,
-	Yishai Hadas <yishaih@nvidia.com>,
-	Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Alex Williamson <alex.williamson@redhat.com>,
-	=?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org, linux-rdma@vger.kernel.org,
-	iommu@lists.linux.dev, linux-nvme@lists.infradead.org,
-	kvm@vger.kernel.org, linux-mm@kvack.org,
-	Bart Van Assche <bvanassche@acm.org>,
-	Damien Le Moal <damien.lemoal@opensource.wdc.com>,
-	Amir Goldstein <amir73il@gmail.com>,
-	"josef@toxicpanda.com" <josef@toxicpanda.com>,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	"daniel@iogearbox.net" <daniel@iogearbox.net>,
-	Dan Williams <dan.j.williams@intel.com>,
-	"jack@suse.com" <jack@suse.com>, Zhu Yanjun <zyjzyj2000@gmail.com>
-Subject: Re: [RFC RESEND 00/16] Split IOMMU DMA mapping operation to two
- steps
-Message-ID: <20240324232215.GC20765@lst.de>
-References: <20240306221400.GA8663@lst.de> <20240307000036.GP9225@ziepe.ca> <20240307150505.GA28978@lst.de> <20240307210116.GQ9225@ziepe.ca> <20240308164920.GA17991@lst.de> <20240308202342.GZ9225@ziepe.ca> <20240309161418.GA27113@lst.de> <20240319153620.GB66976@ziepe.ca> <20240321223910.GA22663@lst.de> <20240322184330.GL66976@ziepe.ca>
+	 Content-Type:Content-Disposition:In-Reply-To; b=rTGa00yHWOCy0w9IMnpQoUD3KDYqfX8zJuKF7G5p/jTW/laVf4vZcyQtujh32imp6F9s1ERucJSJIB8fOD4a3UhusvJjgPcHVOCP5uBemqwVo2T0NKQeDWirKAAGtt3IusoP0zZPFh5YbyqpItiOrGTj67v2cHiF9CoF13e3tTU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=iF7DWwIh; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Transfer-Encoding
+	:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
+	Sender:Reply-To:Content-ID:Content-Description;
+	bh=ghVT0JSAZhWZjIMzPkaSyKQMLg9eo2J9vvVmkWYzHY0=; b=iF7DWwIhKNw1JXqENX4aC5VQuT
+	Q+y8J0fuVGe5AwYlRzm3NLZujnu/cR27zhXmnagtXn8d3D3rIzlQWL/6pWHpEyOsjyQKu9U2fsYdZ
+	0j1Mu5FqrQQdlfn/nychyLmO+m2AXW7q8ktbLO3WvzRguveQN+9kvatO/5ZHsKHKGvl81OGqJ/bIy
+	sZGsGxnt09H55+3KNacdrD6wCQHPICcVluG/tqUD+roC24jyBL7Ek0i83zLxKbvBPSHsaoG9qMe/T
+	QWvbXHUSflmRJN4m5L8+F8u1KOq4Yn6T495UloKN1oQ8QbpHceqV4E+DC4cZ93dBQ+vH4TaLdVtcg
+	S6F8ELJQ==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.97.1 #2 (Red Hat Linux))
+	id 1roXMv-0000000Dtyv-0e3z;
+	Sun, 24 Mar 2024 23:35:13 +0000
+Date: Sun, 24 Mar 2024 16:35:13 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Mina Almasry <almasrymina@google.com>
+Cc: Christoph Hellwig <hch@infradead.org>, David Wei <dw@davidwei.uk>,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-alpha@vger.kernel.org,
+	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
+	sparclinux@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+	linux-arch@vger.kernel.org, bpf@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+	Matt Turner <mattst88@gmail.com>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+	Helge Deller <deller@gmx.de>, Andreas Larsson <andreas@gaisler.com>,
+	Jesper Dangaard Brouer <hawk@kernel.org>,
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Arnd Bergmann <arnd@arndb.de>, Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Andrii Nakryiko <andrii@kernel.org>,
+	Martin KaFai Lau <martin.lau@linux.dev>,
+	Eduard Zingerman <eddyz87@gmail.com>, Song Liu <song@kernel.org>,
+	Yonghong Song <yonghong.song@linux.dev>,
+	John Fastabend <john.fastabend@gmail.com>,
+	KP Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@google.com>,
+	Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
+	David Ahern <dsahern@kernel.org>,
+	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+	Shuah Khan <shuah@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Pavel Begunkov <asml.silence@gmail.com>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	Yunsheng Lin <linyunsheng@huawei.com>,
+	Shailend Chand <shailend@google.com>,
+	Harshitha Ramamurthy <hramamurthy@google.com>,
+	Jeroen de Borst <jeroendb@google.com>,
+	Praveen Kaligineedi <pkaligineedi@google.com>
+Subject: Re: [RFC PATCH net-next v6 02/15] net: page_pool: create hooks for
+ custom page providers
+Message-ID: <ZgC4sWfHFGTY9HzY@infradead.org>
+References: <20240305020153.2787423-1-almasrymina@google.com>
+ <20240305020153.2787423-3-almasrymina@google.com>
+ <ZfegzB341oNc_Ocz@infradead.org>
+ <b938514c-61cc-41e6-b592-1003b8deccae@davidwei.uk>
+ <ZfjMopBl27-7asBc@infradead.org>
+ <CAHS8izMT1Smz6UWu2uwAQRqgZPU7jTfS3GKiA_sDw9KLqoP-JA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20240322184330.GL66976@ziepe.ca>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAHS8izMT1Smz6UWu2uwAQRqgZPU7jTfS3GKiA_sDw9KLqoP-JA@mail.gmail.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-On Fri, Mar 22, 2024 at 03:43:30PM -0300, Jason Gunthorpe wrote:
-> If we are going to make caller provided uniformity a requirement, lets
-> imagine a formal memory type idea to help keep this a little
-> abstracted?
+On Fri, Mar 22, 2024 at 10:40:26AM -0700, Mina Almasry wrote:
+> Hi Christoph,
 > 
->  DMA_MEMORY_TYPE_NORMAL
->  DMA_MEMORY_TYPE_P2P_NOT_ACS
->  DMA_MEMORY_TYPE_ENCRYPTED
->  DMA_MEMORY_TYPE_BOUNCE_BUFFER  // ??
+> Sorry for the late reply, I've been out for a few days.
 > 
-> Then maybe the driver flow looks like:
+> On Mon, Mar 18, 2024 at 4:22 PM Christoph Hellwig <hch@infradead.org> wrote:
+> >
+> > On Sun, Mar 17, 2024 at 07:49:43PM -0700, David Wei wrote:
+> > > I'm working on a similar proposal for zero copy Rx but to host memory
+> > > and depend on this memory provider API.
+> >
+> > How do you need a different provider for that vs just udmabuf?
+> >
 > 
-> 	if (transaction.memory_type == DMA_MEMORY_TYPE_NORMAL && dma_api_has_iommu(dev)) {
-
-Add a nice helper to make this somewhat readable, but yes.
-
-> 	} else if (transaction.memory_type == DMA_MEMORY_TYPE_P2P_NOT_ACS) {
-> 		num_hwsgls = transcation.num_sgls;
-> 		for_each_range(transaction, range) {
-> 			hwsgl[i].addr = dma_api_p2p_not_acs_map(range.start_physical, range.length, p2p_memory_provider);
-> 			hwsgl[i].len = range.size;
-> 		}
-> 	} else {
-> 		/* Must be DMA_MEMORY_TYPE_NORMAL, DMA_MEMORY_TYPE_ENCRYPTED, DMA_MEMORY_TYPE_BOUNCE_BUFFER? */
-> 		num_hwsgls = transcation.num_sgls;
-> 		for_each_range(transaction, range) {
-> 			hwsgl[i].addr = dma_api_map_cpu_page(range.start_page, range.length);
-> 			hwsgl[i].len = range.size;
-> 		}
->
-
-And these two are really the same except that we call a different map
-helper underneath.  So I think as far as the driver is concerned
-they should be the same, the DMA API just needs to key off the
-memory tap.
-
-> And the hmm_range_fault case is sort of like:
+> This was discussed on the io_uring ZC RFC in one of the earliest RFCs.
+> Here is a link to Pavel's response:
 > 
-> 		struct dma_api_iommu_state state;
-> 		dma_api_iommu_start(&state, mr.num_pages);
-> 
-> 		[..]
-> 		hmm_range_fault(...)
-> 		if (present)
-> 			dma_link_page(&state, faulting_address_offset, page);
-> 		else
-> 			dma_unlink_page(&state, faulting_address_offset, page);
-> 
-> Is this looking closer?
+> https://patchwork.kernel.org/project/netdevbpf/patch/20231106024413.2801438-6-almasrymina@google.com/#25589471
 
-Yes.
+Undesirable is not a good argument.  We need one proper API that
+different subsystems share for this use case (this is the same Feedback
+I gave Keith for the similar block proposal btw, not picking on the net
+folks here).
 
-> > > So I take it as a requirement that RDMA MUST make single MR's out of a
-> > > hodgepodge of page types. RDMA MRs cannot be split. Multiple MR's are
-> > > not a functional replacement for a single MR.
-> > 
-> > But MRs consolidate multiple dma addresses anyway.
-> 
-> I'm not sure I understand this?
+If dmabuf/udmabuf doesn't work for that we need to enhance or replace
+it, but not come up with little subsystem specific side channels.
 
-The RDMA MRs take a a list of PFNish address, (or SGLs with the
-enhanced MRs from Mellanox) and give you back a single rkey/lkey.
-
-> To go back to my main thesis - I would like a high performance low
-> level DMA API that is capable enough that it could implement
-> scatterlist dma_map_sg() and thus also implement any future
-> scatterlist_v2, bio, hmm_range_fault or any other thing we come up
-> with on top of it. This is broadly what I thought we agreed to at LSF
-> last year.
-
-I think the biggest underlying problem of the scatterlist based
-DMA implementation for IOMMUs is that it's trying to handle to much,
-that is magic coalescing even if the segments boundaries don't align
-with the IOMMU page size.  If we can get rid of that misfeature I
-think we'd greatly simply the API and implementation.
 
