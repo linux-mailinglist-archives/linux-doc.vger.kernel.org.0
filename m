@@ -1,62 +1,88 @@
-Return-Path: <linux-doc+bounces-12711-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12714-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9655188C1FA
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Mar 2024 13:22:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0E0C88C27B
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Mar 2024 13:45:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E2E0EB23E2A
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Mar 2024 12:22:20 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id F2D08B2385C
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Mar 2024 12:45:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E707474E03;
-	Tue, 26 Mar 2024 12:21:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8BD9870CCB;
+	Tue, 26 Mar 2024 12:44:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="m8KYAOl7"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mFsccjEm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 304A87442B;
-	Tue, 26 Mar 2024 12:21:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6D1270CC8;
+	Tue, 26 Mar 2024 12:44:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711455713; cv=none; b=hVzRVSxHSZrj8DBqmDojTM/OYOeIG61SLfPnO2WFYFQ0uuBMdqDvLlw1P1aZobhpB1PDkH8kE++Bh63BaFIh4OfglDmPnENouWD/0hGdjvCcIg3qoE/R8L4iXyY5YGa9UTIvQ4D5140I7YkYQRxZNEeqCQErApYzIczh23S5rqs=
+	t=1711457078; cv=none; b=TuWwnEaHlOLM2QYxtH6hsFFhoDnEJZGFfF2uxsizq2PDXaQ8b+F/2Vqp+tm/JMMkBn9gNScBr49t0rfHIlcrLn6Dpow+euldWKAoxURD4mBy9/xrPeglfSzTFh+14Z7dZYLvjc5iEJ0tqFXNq2LHHa0uRa2CbMKYUOKeyszWJJ4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711455713; c=relaxed/simple;
-	bh=qFy509Zv20pYYf9NMDSDTc0uBl7/uVC4F1+1tRJ4fKs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=PzaouPrH/jExLFkrHiCcfv8H58/v5TLkv2qrkigGZvN5lJ+1EgREw6cNsdyVWz0njni+D+Q4bGraWBdA+3RDBB481RqqDGqjuoxhTlNNMR1nB3VQcUVoCi1g8tiTcrNlRasbQFpRs1BQ+SQnRyOg1GIU2Cd0Ui79UWNLm2c6uk8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=m8KYAOl7; arc=none smtp.client-ip=80.237.130.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:From:Sender:
-	Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:In-Reply-To:
-	References; bh=3NZ/P2d8n2GwW8r6YNLOfK4S660LNZHNaKmSYKCW+RE=; t=1711455711;
-	x=1711887711; b=m8KYAOl7beLbX08GVMNHLllA1jrdTlV9cjO/c20l36V0+DJ/u2b+qoV8xe1b/
-	xB9+jqBJsqENBsZb/NdtA/s3ClRLiPniAwlE37VyvM50Mo9SHpey9cMA+67mSWwtwDBcKltQ9TG5W
-	K3N7XHuxRWgANi03Lj+loJ7nAnjYwzw3K545NR/jrF1bBSt36lgfJp7mYUqGBq6HbHk5bXF41V0Rn
-	4Yars49PjDzqn2iJIV7Q/1DMTC6vos1ze99uxuRIUnsuy/gQ0GeJzpxFdYq9sLClbeI4OMmbyoNh8
-	5DlSisaG4ql07lqIVbksexL+A8976zVfoKzGTK7bMMjA53cgUg==;
-Received: from [77.20.141.166] (helo=truhe.fritz.box); authenticated
-	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	id 1rp5oH-0000kc-O6; Tue, 26 Mar 2024 13:21:45 +0100
-From: Thorsten Leemhuis <linux@leemhuis.info>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: regressions@lists.linux.dev,
+	s=arc-20240116; t=1711457078; c=relaxed/simple;
+	bh=yLArL6EzQjD6rN2Aj7zC8Mt5ZkKc5FSEg4+GU5NkICA=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=HCGM17o6QARkk9vcfsT/xIrZ/4fyG0wV68REtlRA6Fijvp81snzIQuldlJ0Bc2IXCiitzFP2VzzWYveF01ZCIHzww4aRMpwXVULXzcpxV6AmzAkqBXtBSmcXKbK+hYrXT+WuqpN0GikHCCjEU7yQpVFb+0bX+pNEeFBoGLUyiBQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mFsccjEm; arc=none smtp.client-ip=209.85.214.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-1e0025ef1efso34355785ad.1;
+        Tue, 26 Mar 2024 05:44:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1711457076; x=1712061876; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=irHeV37wUtDsPRRRODv8UUmG2Zg8XlgC92IuTPtkaec=;
+        b=mFsccjEmwRu211kiElKhVA9XlYBwVZOTslsRvfV2/r04fDiLbbzfDCJyx9LcQebwzK
+         WlZHrX13u5j+IH65Wr/IYxtHZUqTnxaJp7m7mjoXNWYEW7HV7sBokb6i5HcUnGgsG9zs
+         dqxeLTLxoPVcVitsfawd1BQ11HQ5pVDIKxl3+tdF9XQvYKHg4dgflomtZnT3RiNxc00D
+         JSOOrnzpOe6n3SsGuCxorzZt4Cjaz7bUy9Lw1rE2kJQKLt3U/GaCQyHbUQxNRHedSc6d
+         Q6MwemXw/yTLuutBuBPIn+EkryaKR9K5n7InmXS7aZ4mNglblWxJdveH7kfecVC/+p8X
+         OxPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1711457076; x=1712061876;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=irHeV37wUtDsPRRRODv8UUmG2Zg8XlgC92IuTPtkaec=;
+        b=Y8veOaSVYIEZyLFd/uB0s/A4QqDoMsOk1VX/i2zf9+nd0HUTS11fQ67FnYlMmEWGXX
+         q42TDDrmBKoBQT6/sWjLTO7lLlNqojLd3iJvOtqnGSdU4DtJtWCcYRq0nx32uhxJQ+KE
+         JJKsIxPCSnFpr2zPH1y6/8wUcA14oC4AxaRIJu57H3o55IijUbLPXbRC12GDkY/aBLqf
+         2SgqoloLzVCGEc46CQJoCjkb8Ql6VY9H1bjm6PoDKZ9U+gQqUgwVlFqZ3zjt8k2OitRu
+         w2fCIwe0pZXG+kOV511Z5liR350hnD6fQ2RKD7NeLLiB5u4zP5OT10CuVEbHAUSxlu71
+         7TMw==
+X-Forwarded-Encrypted: i=1; AJvYcCVfWSlaiqM1TiZdynYEfpxSluIjcP+qn0dGwB0xZXflQM4+5KxwF4utxAAXeVGTmhby3Qx2G6S2iRl6Qny5ejE+jUHQFiRDeFCa
+X-Gm-Message-State: AOJu0YzTSxWK0p6kjfZ79iCpHptfB1FKcpJ2K9AJ5mSblRMpYyqPjT+3
+	F38TVO95bxmSeOrE3xgyXtfq/1EPubO2poWAjlBrNa2kwR17X0re
+X-Google-Smtp-Source: AGHT+IEFweVLORfj1rODrrHJga/1xZoO6FFBb47XP0V2dYd+NOJUisWY/6da1T7IjWI+gEr4PfKiIg==
+X-Received: by 2002:a17:902:b20d:b0:1e0:a1c2:2697 with SMTP id t13-20020a170902b20d00b001e0a1c22697mr800912plr.22.1711457076002;
+        Tue, 26 Mar 2024 05:44:36 -0700 (PDT)
+Received: from localhost ([2402:d0c0:11:86::1])
+        by smtp.gmail.com with ESMTPSA id k20-20020a63f014000000b005d8b89bbf20sm7364102pgh.63.2024.03.26.05.44.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 26 Mar 2024 05:44:35 -0700 (PDT)
+From: Alan Huang <mmpgouride@gmail.com>
+To: paulmck@kernel.org,
+	frederic@kernel.org,
+	neeraj.upadhyay@kernel.org,
+	joel@joelfernandes.org,
+	josh@joshtriplett.org,
+	boqun.feng@gmail.com,
+	rostedt@goodmis.org,
+	mathieu.desnoyers@efficios.com,
+	qiang.zhang1211@gmail.com,
+	corbet@lwn.net
+Cc: rcu@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	workflows@vger.kernel.org
-Subject: [RFC PATCH v1 2/2] docs: reporting-issue: rework the TLDR
-Date: Tue, 26 Mar 2024 13:21:29 +0100
-Message-ID: <2f5a78745cbe0a99a4592612d6ffd57a17619fb4.1711455295.git.linux@leemhuis.info>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <cover.1711455295.git.linux@leemhuis.info>
-References: <cover.1711455295.git.linux@leemhuis.info>
+	Alan Huang <mmpgouride@gmail.com>
+Subject: [PATCH v4] docs/RCU: Bring back smp_wmb()
+Date: Tue, 26 Mar 2024 12:44:31 +0000
+Message-Id: <20240326124431.77430-1-mmpgouride@gmail.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -64,154 +90,251 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1711455711;c092b3a9;
-X-HE-SMSGID: 1rp5oH-0000kc-O6
 
-Rework the TLDR (aka the short guide) for various reasons:
+The objects are allocated with SLAB_TYPESAFE_BY_RCU, and there is
+n->next = first within hlist_add_head_rcu() before rcu_assign_pointer(),
+which modifies obj->obj_node.next. We need to make sure obj->key is
+updated before obj->obj_node.next and obj->refcnt, atomic_set_release
+is not enough to provide the required memory barrier.
 
-* People had to read it entirely and then act upon what they learned,
-  which from feedback I got was apparently somewhat hard and confusing
-  given everything we expect from bug reporters; this partly was because
-  the first paragraph covered a special case (regression in
-  stable/longterm kernel) and not the main aspect most people cared
-  about when they came to the document.
+In addition, the example was broken as noted by Paul[1], this patch
+also fixes the broken example and includes wording to explain how the
+the back-pointer[2] works.
 
-  Use a step-by-step approach to avoid this.
+[1] https://lore.kernel.org/all/9eaf506f-cc14-4da6-9efc-057c0c3e56b0@paulmck-laptop/
+[2] https://lore.kernel.org/all/02a84e4b-a322-4c43-ad9d-1832ce277c2f@paulmck-laptop/
 
-* Make use of
-  Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst
-
-* The 'quickly report a stable regression to the stable team' approach
-  hardly worked out: most of the time the regression was not known yet.
-  Try a different approach using the regressions list.
-
-* Reports about stable/longterm regressions most of the time were
-  greeted with a brief reply along the lines of 'Is mainline affected as
-  well?'; this is needed to determine who is responsible, so it might as
-  well make the reporter check that before sending the report (which
-  verify-bugs-and-bisect-regressions.rst already tells them to do, too).
-
-Not-signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
+Signed-off-by: Alan Huang <mmpgouride@gmail.com>
 ---
- .../admin-guide/reporting-issues.rst          | 104 +++++++++++-------
- 1 file changed, 62 insertions(+), 42 deletions(-)
+Paul, apologies for the long delay :)
 
-diff --git a/Documentation/admin-guide/reporting-issues.rst b/Documentation/admin-guide/reporting-issues.rst
-index e6083946c146e8..5f3c840ab94524 100644
---- a/Documentation/admin-guide/reporting-issues.rst
-+++ b/Documentation/admin-guide/reporting-issues.rst
-@@ -5,48 +5,68 @@ Reporting issues
- ++++++++++++++++
+Changelog:
+ V3 -> V4: Fixes the broken example.
+           Add wording to explain how the back-pointer works.
+           Remove the _ONCE added before since the access happens after
+           we get the reference of the object.
+
+ V2 -> V3: Use compute_slot to detect whether the object has been
+           moved. Remove the broken lockless_lookup, use macro instead.
+
+ v1 -> v2: Use _ONCE to protect obj->key.
+
+ Documentation/RCU/rculist_nulls.rst | 149 +++++++++++++++++++++-------
+ 1 file changed, 113 insertions(+), 36 deletions(-)
+
+diff --git a/Documentation/RCU/rculist_nulls.rst b/Documentation/RCU/rculist_nulls.rst
+index 21e40fcc08de..ee1f2458e07e 100644
+--- a/Documentation/RCU/rculist_nulls.rst
++++ b/Documentation/RCU/rculist_nulls.rst
+@@ -34,54 +34,54 @@ objects, which is having below type.
  
+ ::
  
--The short guide (aka TL;DR)
--===========================
--
--Are you facing a regression with vanilla kernels from the same stable or
--longterm series? One still supported? Then search the `LKML
--<https://lore.kernel.org/lkml/>`_ and the `Linux stable mailing list
--<https://lore.kernel.org/stable/>`_ archives for matching reports to join. If
--you don't find any, install `the latest release from that series
--<https://kernel.org/>`_. If it still shows the issue, report it to the stable
--mailing list (stable@vger.kernel.org) and CC the regressions list
--(regressions@lists.linux.dev); ideally also CC the maintainer and the mailing
--list for the subsystem in question.
--
--In all other cases try your best guess which kernel part might be causing the
--issue. Check the :ref:`MAINTAINERS <maintainers>` file for how its developers
--expect to be told about problems, which most of the time will be by email with a
--mailing list in CC. Check the destination's archives for matching reports;
--search the `LKML <https://lore.kernel.org/lkml/>`_ and the web, too. If you
--don't find any to join, install `the latest mainline kernel
--<https://kernel.org/>`_. If the issue is present there, send a report.
--
--The issue was fixed there, but you would like to see it resolved in a still
--supported stable or longterm series as well? Then install its latest release.
--If it shows the problem, search for the change that fixed it in mainline and
--check if backporting is in the works or was discarded; if it's neither, ask
--those who handled the change for it.
--
--**General remarks**: When installing and testing a kernel as outlined above,
--ensure it's vanilla (IOW: not patched and not using add-on modules). Also make
--sure it's built and running in a healthy environment and not already tainted
--before the issue occurs.
--
--If you are facing multiple issues with the Linux kernel at once, report each
--separately. While writing your report, include all information relevant to the
--issue, like the kernel and the distro used. In case of a regression, CC the
--regressions mailing list (regressions@lists.linux.dev) to your report. Also try
--to pin-point the culprit with a bisection; if you succeed, include its
--commit-id and CC everyone in the sign-off-by chain.
--
--Once the report is out, answer any questions that come up and help where you
--can. That includes keeping the ball rolling by occasionally retesting with newer
--releases and sending a status update afterwards.
-+Reporting issues
-+++++++++++++++++
-+
-+The short guide on reporting Linux kernel issues (aka "the TL;DR")
-+==================================================================
-+
-+Rule out something external causes your kernel to misbehave: skim the output of
-+``journalctl -k``; make sure the kernel is not tainted; consider a glitch in the
-+environment (hardware, firmware, initramfs, distribution, file system, ...).
-+
-+If you deal with multiple issues, process each separately.
-+
-+Search `lore <https://lore.kernel.org/all/>`_ for earlier reports and fixes.
-+Then the wider internet. Consult :ref:`MAINTAINERS <maintainers>` to determine
-+how bugs for the affected driver or subsystem must be submitted. This is usually
-+by mail and rarely bugzilla.kernel.org; if the driver or subsystem uses an
-+externally archived list or one of various bug trackers, search those as well.
-+
-+In case you deal with a regression still occurring in a less than two (ideally:
-+one) weeks old kernel that is vanilla or close to it: send a brief email to
-+regressions@lists.linux.dev asking if the regression is known; consider
-+continuing this guide right afterwards, but definitely do so if you do not
-+receive a positive reply within three days.
-+
-+Verify the bug and in case of a regression potentially bisect it as described in
-+Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst; alternatively
-+perform these tasks through different measures as outlined in more detailed
-+step-by-step guide below.
-+
-+Were you unable to reproduce a bug with a mainline kernel you want to see fixed
-+in a stable or longterm series? A bug that is not a regression? Then move over
-+to 'Resolving non-regressions only occurring in stable or longterm kernels'.
-+
-+Compile a report with all important details. This always includes the
-+distribution and kernel version used. Most of the time you also want to describe
-+relevant aspects of your system and make the kernel's log messages available; do
-+the same for everything else most likely relevant. In case of a regression, make
-+that aspect obvious in the title; also specify the last working and first broken
-+early in the body.
-+
-+Submit your report in the appropriate way, which depends on the outcome of the
-+verification:
-+
-+* Are you facing a regression within a stable or longterm kernel series you were
-+  unable to reproduce in a mainline kernel? Then report it by email to the
-+  stable team while CCing the regressions list (e.g. To: Greg Kroah-Hartman
-+  <gregkh@linuxfoundation.org>, Sasha Levin <sashal@kernel.org>;
-+  CC: stable@vger.kernel.org, regressions@lists.linux.dev) and everyone in the
-+  culprit's 'Signed-off-by' chain.
-+
-+* In all other cases, submit the report as specified in MAINTAINERS. In case of
-+  a regression you have to report by mail, CC the regressions list
-+  (regressions@lists.linux.dev); when you know the culprit, also CC everyone in
-+  its 'Signed-off-by' chain. In case of a regression you have to file in a bug
-+  tracker, write a short heads-up email with a link to the report to the list
-+  once you have done so -- if the culprit is known, CC everyone that signed the
-+  culprit off, too.
-+
-+Answer any questions in a timely manner and help where you can to resolve the
-+issue. Retest with at least every first release candidate (-rc1) of a new
-+mainline version and report your findings.
-+
++  object *obj;
++  struct hlist_node *pos, *next;
++  slot = compute_slot(key);
++  head = &table[slot];
+   begin:
+   rcu_read_lock();
+-  obj = lockless_lookup(key);
+-  if (obj) {
++  obj_for_each_entry_rcu(obj, pos, head, next) {
+     if (!try_get_ref(obj)) { // might fail for free objects
+       rcu_read_unlock();
+       goto begin;
+     }
+     /*
+-    * Because a writer could delete object, and a writer could
+-    * reuse these object before the RCU grace period, we
+-    * must check key after getting the reference on object
+-    */
+-    if (obj->key != key) { // not the object we expected
++     * Because a writer could delete object, and a writer could
++     * reuse these object before the RCU grace period, we must check
++     * whether this object has been moved. The smp_wmb() in insertion
++     * algorithm and the smp_rmb() in obj_for_each_entry_rcu() ensure
++     * that if we read the new 'obj->obj_node.next' value, we will also
++     * read the new 'obj->key'.
++     */
++    if (compute_slot(obj->key) != slot) {
+       put_ref(obj);
+       rcu_read_unlock();
+       goto begin;
+     }
++    if (obj->key != key) // not the object we expected
++      put_ref(obj);
++    else
++      goto out;
+   }
++  out:
+   rcu_read_unlock();
  
- The detailed step-by-step guide on reporting Linux kernel issues
- ================================================================
+-Beware that lockless_lookup(key) cannot use traditional hlist_for_each_entry_rcu()
++Beware that obj_for_each_entry_rcu() cannot use traditional hlist_for_each_entry_rcu()
+ but a version with an additional memory barrier (smp_rmb())
+ 
+ ::
+ 
+-  lockless_lookup(key)
+-  {
+-    struct hlist_node *node, *next;
+-    for (pos = rcu_dereference((head)->first);
+-         pos && ({ next = pos->next; smp_rmb(); prefetch(next); 1; }) &&
+-         ({ obj = hlist_entry(pos, typeof(*obj), obj_node); 1; });
+-         pos = rcu_dereference(next))
+-      if (obj->key == key)
+-        return obj;
+-    return NULL;
+-  }
++  for (pos = rcu_dereference((head)->first);
++       pos && ({ next = READ_ONCE(pos->next); smp_rmb(); prefetch(next); 1; }) &&
++       ({ obj = hlist_entry(pos, typeof(*obj), obj_node); 1; });
++       pos = rcu_dereference(next))
+ 
+ And note the traditional hlist_for_each_entry_rcu() misses this smp_rmb()::
+ 
+-  struct hlist_node *node;
+   for (pos = rcu_dereference((head)->first);
+        pos && ({ prefetch(pos->next); 1; }) &&
+        ({ obj = hlist_entry(pos, typeof(*obj), obj_node); 1; });
+        pos = rcu_dereference(pos->next))
+-    if (obj->key == key)
+-      return obj;
+-  return NULL;
+ 
+ Quoting Corey Minyard::
+ 
+@@ -112,7 +112,12 @@ detect the fact that it missed following items in original chain.
+   obj = kmem_cache_alloc(...);
+   lock_chain(); // typically a spin_lock()
+   obj->key = key;
+-  atomic_set_release(&obj->refcnt, 1); // key before refcnt
++  /*
++   * We need to make sure obj->key is updated before obj->obj_node.next
++   * and obj->refcnt.
++   */
++  smp_wmb();
++  atomic_set(&obj->refcnt, 1);
+   hlist_add_head_rcu(&obj->obj_node, list);
+   unlock_chain(); // typically a spin_unlock()
+ 
+@@ -140,7 +145,7 @@ very very fast (before the end of RCU grace period)
+ Avoiding extra smp_rmb()
+ ========================
+ 
+-With hlist_nulls we can avoid extra smp_rmb() in lockless_lookup().
++With hlist_nulls we can avoid extra smp_rmb() in obj_for_each_entry_rcu().
+ 
+ For example, if we choose to store the slot number as the 'nulls'
+ end-of-list marker for each slot of the hash table, we can detect
+@@ -165,18 +170,14 @@ Note that using hlist_nulls means the type of 'obj_node' field of
+   begin:
+   rcu_read_lock();
+   hlist_nulls_for_each_entry_rcu(obj, node, head, obj_node) {
+-    if (obj->key == key) {
+-      if (!try_get_ref(obj)) { // might fail for free objects
+-	rcu_read_unlock();
+-        goto begin;
+-      }
+-      if (obj->key != key) { // not the object we expected
+-        put_ref(obj);
+-	rcu_read_unlock();
+-        goto begin;
+-      }
+-      goto out;
++    if (!try_get_ref(obj)) { // might fail for free objects
++      rcu_read_unlock();
++      goto begin;
+     }
++    if (obj->key != key) // not the object we expected
++      put_ref(obj);
++    else
++      goto out;
+   }
+ 
+   // If the nulls value we got at the end of this lookup is
+@@ -213,3 +214,79 @@ hlist_add_head_rcu().
+    */
+   hlist_nulls_add_head_rcu(&obj->obj_node, list);
+   unlock_chain(); // typically a spin_unlock()
++
++
++
++--------------------------------------------------------------------------
++
++Using Back-pointer
++==================
++
++It is possible to detect a move mid-list, which can reduce the search time.
++To achieve this, we store a back-pointer in every element that points to the
++head of its chain. It is worth noting that we can also utilize 'compute_slot'
++to detect this, which involves a tradeoff between time and space.
++
++::
++
++  struct object {
++    struct hlist_nulls_node obj_node;
++    strcut hlist_nulls_head *backptr;
++    atomic_t refcnt;
++    unsigned int key;
++  };
++
++
++1) lookup algorithm
++-------------------
++
++::
++
++  head = &table[slot];
++  begin:
++  rcu_read_lock();
++  hlist_nulls_for_each_entry_rcu(obj, node, head, obj_node) {
++    if (!try_get_ref(obj)) { // might fail for free objects
++      rcu_read_unlock();
++      goto begin;
++    }
++    if (obj->backptr != head) { // object is moved
++      put_ref(obj);
++      rcu_read_unlock();
++      goto begin;
++    }
++    if (obj->key != key) // not the object we expected
++      put_ref(obj);
++    else
++      goto out;
++  }
++
++  if (get_nulls_value(node) != slot) {
++    put_ref(obj);
++    rcu_read_unlock();
++    goto begin;
++  }
++  obj = NULL;
++
++  out:
++  rcu_read_unlock();
++
++2) Insert algorithm
++-------------------
++
++::
++
++  /*
++   * Please note that new inserts are done at the head of list,
++   * not in the middle or end.
++   */
++  obj = kmem_cache_alloc(cachep);
++  lock_chain(); // typically a spin_lock()
++  obj->key = key;
++  obj->backptr = list;
++  atomic_set_release(&obj->refcnt, 1); // key and backptr before refcnt
++  /*
++   * insert obj in RCU way (readers might be traversing chain)
++   */
++  hlist_nulls_add_head_rcu(&obj->obj_node, list);
++  unlock_chain(); // typically a spin_unlock()
+\ No newline at end of file
 -- 
-2.44.0
+2.34.1
 
 
