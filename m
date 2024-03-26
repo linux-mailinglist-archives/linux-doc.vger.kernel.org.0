@@ -1,174 +1,134 @@
-Return-Path: <linux-doc+bounces-12710-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12712-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 440BA88C191
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Mar 2024 13:07:05 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D17988C1FB
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Mar 2024 13:22:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 646151C28894
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Mar 2024 12:07:04 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id C09531F61428
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Mar 2024 12:22:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3E83F6FE3D;
-	Tue, 26 Mar 2024 12:07:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12FF0757EB;
+	Tue, 26 Mar 2024 12:21:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=web.de header.i=markus.elfring@web.de header.b="Z6BGyx/a"
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="uYSHkLWv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout.web.de (mout.web.de [212.227.15.3])
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8510C6F08E;
-	Tue, 26 Mar 2024 12:06:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.15.3
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A30C74433;
+	Tue, 26 Mar 2024 12:21:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711454820; cv=none; b=M8SerXpMLX39YQa+H2vx1AXb641IUJ/meTLPkAFO2WXMZFUHj38ZXm4UZkcgDl+Pcz6/sFonidRZhqTHZ7CJcXIl354cNfMWKfPVDbmJUxd/MdngQCEV8qfVOVdfyvW2zlCI91UDl+DkhmSwm+JQXCpHQw6D24nbcPTvmg3QTHw=
+	t=1711455714; cv=none; b=D8dsy0B6YeJ68RbPsv1LtpjhybJuzak9MrqhMdKkKotzdyLHwugHvXDnvsHsq+Phsv9BuJgcnJdZzHAZqU6Z12rxjUYzTfioLbgXf2S3SUhIUPJuPeu6GZeXLdaXvXtqWKCVplho+wzsg1huJQrnjDTES1SVnUkt1uioY+iihWk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711454820; c=relaxed/simple;
-	bh=3FzmbtGZZ7DvyD3OJ+z6tU4V4LGQHD6/1YEh2weunmA=;
-	h=Message-ID:Date:MIME-Version:To:Cc:References:Subject:From:
-	 In-Reply-To:Content-Type; b=OX8nY/gjG+47VhQMg2QoQ/siHExaeRXD2xMXOIk6m4NLU+fVp3IEN3lm2Z7qmcWGbe3NFpRpASctpYbixDJNV84Cp0xs8So4RT+jn7rS9d9Eg2oiS1ZVXGpXQt1Ch7GXPEpAqeCZvMA/r5dKLtJz1N0J2JPY3w0p7Ce7sQMVGkU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=web.de; spf=pass smtp.mailfrom=web.de; dkim=pass (2048-bit key) header.d=web.de header.i=markus.elfring@web.de header.b=Z6BGyx/a; arc=none smtp.client-ip=212.227.15.3
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=web.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=web.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
-	s=s29768273; t=1711454772; x=1712059572; i=markus.elfring@web.de;
-	bh=reTJekpRAbVkVaR6Ps74n/JKQGAzpk6naWUcepoHBnc=;
-	h=X-UI-Sender-Class:Date:To:Cc:References:Subject:From:
-	 In-Reply-To;
-	b=Z6BGyx/amhmAtn4HI51cKgC3t5dpc/XA/EsJoLtv7yxJO3njsoXk9lUBiPLMu/jq
-	 r67vRnuvcqFG79dvlW2+7Q2EVdW+wQ/6yoUw9KNL+IgFciz6rP4RI4B7PR42c6ryQ
-	 XTs5A+FtZAaoHgv5Ootx4o/nJ8VK0x4i/x5jJORnkcW3hLZ3PcdLJCRgR5c+fVV+b
-	 eXoeiNphZyj4rzQvGMKvVKpYy1f6rbNRRzKTez+BZ1QVDZVU7flSd3mTchrK8BGlX
-	 zWZiGSsZNxBm5qGOQK2ZX8dJ3OCGmYJNgKvv/Ddxe2Eo3zN/Zgumm/4vUoWrRAODO
-	 t10Nir0Br82/MYW11g==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.178.21] ([94.31.90.95]) by smtp.web.de (mrweb006
- [213.165.67.108]) with ESMTPSA (Nemesis) id 1MzTPQ-1skCSS2uGW-00vQEB; Tue, 26
- Mar 2024 13:06:12 +0100
-Message-ID: <570afd53-b1ed-4456-b83e-fca29857f000@web.de>
-Date: Tue, 26 Mar 2024 13:06:05 +0100
+	s=arc-20240116; t=1711455714; c=relaxed/simple;
+	bh=qyTuZJJBB6SRCYQaUw+XLTTc5thHeDk4mK9OvDwIPpA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Fjs30J1zhZixm/kUYNCRSZHv1l6n57rPh3BnCa5HMfW1WNJ2+Bm6NrDEyLfZg3Wg193BoVD8Trr9JAIKrULt2FV5AaIfBJsAoBk9mByL9F7Tt3B01mFO0L9x+5q2T7h5cz5IAHn84lnjADjVlsRyLTHRFotJgx1ai+84YdZJySg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=uYSHkLWv; arc=none smtp.client-ip=80.237.130.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:MIME-Version:
+	Message-ID:Date:Subject:Cc:To:From:From:Sender:Reply-To:Subject:Date:
+	Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=T7Rg75OUQXr/P0BzSaCpqEAwDPUMWNB+wRhXebgxorI=; t=1711455711; x=1711887711;
+	 b=uYSHkLWv64FkbGkKSuwa305CY9DsjE43kyGFs3OJy03ac9AWv/a51WtI5MZUqovUVbuboGKXZe
+	0ecJ1d7m/dTM8FFfWeiM3MZs8mB3h7VGTFrBHJBr4yLfApnR39Kzv4ESnwAmtK2Sp5uZcxoNq0mXZ
+	u5El0Jh91NPAGzhN03nQCqywXNfD9fyoDFfeXFMUT8THUTMlnyiozF9suwX8VVngg6BaFM3NFK9ov
+	Y5wWsozCAxREv3heTwTi0ezQmJM75P+w3HB7GmGv7Jh4qdpIL1tWTg/aI9l5Gk/W5PrxiN81gdVHE
+	wugyVvLQLhUE3Mnxw8nTDVu8uSzotuAiilQpA==;
+Received: from [77.20.141.166] (helo=truhe.fritz.box); authenticated
+	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	id 1rp5oH-0000kc-8I; Tue, 26 Mar 2024 13:21:45 +0100
+From: Thorsten Leemhuis <linux@leemhuis.info>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: regressions@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	workflows@vger.kernel.org
+Subject: [RFC PATCH v1 0/2] docs: reporting-issues: rework while involving the 'verify bugs' text
+Date: Tue, 26 Mar 2024 13:21:27 +0100
+Message-ID: <cover.1711455295.git.linux@leemhuis.info>
+X-Mailer: git-send-email 2.44.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Dan Williams <dan.j.williams@intel.com>,
- Peter Zijlstra <peterz@infradead.org>,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
- kernel-janitors@vger.kernel.org
-Cc: Bjorn Helgaas <bhelgaas@google.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- Ira Weiny <ira.weiny@intel.com>,
- Jesse Brandeburg <jesse.brandeburg@intel.com>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Julia Lawall <Julia.Lawall@inria.fr>, Kevin Tian <kevin.tian@intel.com>,
- Lukas Wunner <lukas.wunner@intel.com>, Matthew Wilcox <willy@infradead.org>
-References: <171140738438.1574931.15717256954707430472.stgit@dwillia2-xfh.jf.intel.com>
-Subject: Re: [PATCH v2] cleanup: Add usage and style documentation
-Content-Language: en-GB
-From: Markus Elfring <Markus.Elfring@web.de>
-In-Reply-To: <171140738438.1574931.15717256954707430472.stgit@dwillia2-xfh.jf.intel.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:BgFUPW3xHjwYrRMtgoo20y7vIBXuyr8pzAvnoMtyk1VznSTTOA+
- 2HfzRJYuGFNVvMurFxHzbBoNNRYG+EIg6fREeH5NF5yWUGKiU2Vj7TiGIuBcl0cn4JlVhuU
- 9taiqRiAeuyZQieLLOJMQeaT4cVFeOVHJMJ7moDXsY0Xvcg9phuSTdUcJHwk39SCZ2/Ddzs
- 5geFhBWgiMHSGrK9Ee3oA==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:dfm3TQltfcE=;YyoCq04Dxq5vJPAzHeOVEsmsgUJ
- ibbY/IEQoLPNOSviWzWggc96XJUIZgoGt1QKE0Hlf1HjWGR5IEfIdo3Q+N3vmDII6fVcCLJZY
- nzoYlJrchUdt0gEH19pgG7p6WQpAgifS1GN1LvWDE5l6f/P9CGRKc0HpB2F1dMqj8YdNjBZIf
- hS6x+vKNcxc90yHEP8cv1QxtyLTkYsRbclbEtsNEtq+j3rRMDn+2tJ2sSObS45+2E2w2FhH8V
- QBzVKDt89i/4slYMQI0HPK/zxsGpy0IGC/IWUKPj6/OgK3bQzZAEqa4AoOEczrJ+8XMOq80rQ
- STNadkCTBafiH9XAGPJrDq5SkF/xHavXGlF2RzzdSckoXwPSvW+hFfEo4T6A2TSWttoM7RkYJ
- u5CFCkmnRwMDR/pJKABbFnbkk8Xw32G0RiRLMYwUxOJV2q0Vq19VZ0XP+dIFK2yb6FN3ycnIN
- zpqEZe+QKMuiWr/8XF5pgRNcYFCLh3BZ/wmhAX0dvcKbJ824j/VSV6fZcNAPzIp19aLpihA4E
- qfR/gSHODGWGu/Jr+PhonGA6Hgw9wH5KPoheX6okwuLwZIjQNM2lM8MPKak4TP6A3Ii6mARJ3
- LlNMF+4Dg7vIj9K23129gRdhe3M3FtU3GAu/aG7jjzXhpShMv1NNR4EBdEdxkPE8nyT/iHi9L
- wU/eXbcgRSPntqMOzgFe/atxdu+Hbck/U09++JJ5uhcWYmcQv1v6JVQWKMAWLcK98H5jdfXqi
- DwTXP65n7WGkAFKt5xCxY72A5mduJSXcsRz9w+Wyw1ySZ5C+BOoUkQ8X7oNWz4GBfSes5wERl
- bwz/zuTdAccjYHBKaGLbquB6G6fuXD1TcuXoHzE74X6uc=
+Content-Transfer-Encoding: 8bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1711455711;c092b3a9;
+X-HE-SMSGID: 1rp5oH-0000kc-8I
 
-=E2=80=A6
-> +++ b/include/linux/cleanup.h
-> @@ -4,6 +4,157 @@
->
->  #include <linux/compiler.h>
->
-> +/**
-> + * DOC: scope-based cleanup helpers
-> + *
-> + * The "goto error" pattern is notorious for introducing =E2=80=A6
+This is a RFC with two WIP patches that basically rewrite the detailed
+step-by-step guide and the TLDR of
+Documentation/admin-guide/reporting-issues.rst. Those two patches cover
+all main changes I currently plan to do in those areas of the text, but
+the explanations in the reference section are not yet updated to match
+the changed step-by-step guide.
 
-Will any other label become more helpful for this description approach?
+I'm nevertheless posting this now as RFC so people get a chance to
+express things like "Thorsten, you are crazy, go away and find a hobby"
+or "you are on the wrong path, this makes things worse, and would also
+create a lot of trouble for translators for a questionable gain".
+Getting such feedback now would be good: I'd prefer to not waste time on
+updating the reference section if something like the two patches posted
+here have no chance to be merged.
 
-> + * this tedium =E2=80=A6
+That being said: I (obviously) think these changes are worth it, as they
+make both the TLDR and the guide easier to follow and fix a few things
+that didn't work too well. It also offers users a new fast track to
+inquire if a regression is known already. The step-by-step guide
+furthermore is now a bit more verbose, so users have to consult the
+reference section less -- this felt appropriate, now that the TLDR uses
+a step-by-step approach as well that is quite similar.
 
-Would an other wording be more appropriate here?
+In the end it looks like a rewrite, even if many things remained
+similar. And all in all those changes sadly makes both sections larger:
 
+TLDR:
+- before: 374 words, 2332 characters;
+- after: 491 words, 3085 characters
 
-> + *                          =E2=80=A6 maintaining FILO (first in last o=
-ut)
+Step-by-step guide:
+- before: 1058 words, 6279 characters (excluding a section that becomes
+  obsolete)
+- before: 1332 words, 8048 characters (including a section that becomes
+  obsolete)
+- after: 1491 words, 9015 characters;
 
-How does this text fit to your response from yesterday?
-https://lore.kernel.org/all/6601c7f7369d4_2690d29490@dwillia2-mobl3.amr.co=
-rp.intel.com.notmuch/
+Note, the changes to the reference section should not turn out to be as
+extensive as these two patches, as many of the steps in the new detailed
+step-by-step guide had equivalents in the older one; many sections in
+the reference section will thus only need small changes or maybe none at
+all; a few things are also unnecessary now, so the reference section
+should get shorter.
 
+To alleviate reviewing and translations, I plan to submit the changes to
+the reference section in two steps. The first patch will perform all
+changes, but will add newlines before significant changes, which will
+wrap at 120 characters or so: both things should make it easier to see
+the actual changes with ordinary diff. A second patch then will just
+rewrap the text to the usual 80 characters boundary.
 
-> + *                                                       =E2=80=A6 If a=
- function
-> + * wants to invoke pci_dev_put() on error, but return @dev (i.e. withou=
-t
-> + * freeing it) on success, it can do:
-> + *
-> + * ::
-> + *
-> + *	return no_free_ptr(dev);
-> + *
-> + * ...or:
-> + *
-> + * ::
-> + *
-> + *	return_ptr(dev);
-=E2=80=A6
+Side note: the two patches submitted now could and maybe should be
+merged into one, but I decided to keep them separate for now to have
+section-specific diffstats.
 
-Would this macro call be preferred as a succinct specification
-(so that only the shorter one should be mentioned here)?
-https://elixir.bootlin.com/linux/v6.8.1/source/include/linux/cleanup.h#L78
+Thorsten Leemhuis (2):
+  docs: reporting-issue: rework the detailed guide
+  docs: reporting-issue: rework the TLDR
+
+ .../admin-guide/reporting-issues.rst          | 497 ++++++++++--------
+ 1 file changed, 273 insertions(+), 224 deletions(-)
 
 
-> + * Observe the lock is held for the remainder of the "if ()" block not
-> + * the remainder of "func()".
+base-commit: b8cfda5c9065cd619a97c17da081cbfab3b1e756
+-- 
+2.44.0
 
-I suggest to add a word in this sentence.
-
-* Observe the lock is held for the remainder of the "if ()" block
-* (and not the remainder of "func()").
-
-
-> + * the top of the function poses this potential interdependency problem
-
-I suggest to add a comma at the end of this line.
-
-
-> + * the recommendation is to always define and assign variables in one
-> + * statement and not group variable definitions at the top of the
-> + * function when __free() is used.
-
-I became curious how code layout guidance will evolve further also
-according to such an advice.
-
-
-Would you like to increase the collaboration with the macros =E2=80=9CDEFI=
-NE_CLASS=E2=80=9D and =E2=80=9CCLASS=E2=80=9D?
-https://elixir.bootlin.com/linux/v6.8.1/source/include/linux/cleanup.h#L82
-
-Regards,
-Markus
 
