@@ -1,313 +1,128 @@
-Return-Path: <linux-doc+bounces-12905-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12897-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F09488F499
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 02:30:37 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FED588F47A
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 02:23:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C2F541C25B4C
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 01:30:36 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id C744A1F3047E
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 01:23:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2FB2E28383;
-	Thu, 28 Mar 2024 01:30:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 34A46FBEE;
+	Thu, 28 Mar 2024 01:23:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=dorminy.me header.i=@dorminy.me header.b="aduGABxW"
+	dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b="sYYo2Cnb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from box.fidei.email (box.fidei.email [71.19.144.250])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 530FE208C1;
-	Thu, 28 Mar 2024 01:30:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=71.19.144.250
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B4313C0B;
+	Thu, 28 Mar 2024 01:23:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.15.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711589408; cv=none; b=oFqvq1IafdbW03m250IW0g4QC57NIlnHKTOSNbpRLAaqj0X3BFzNb7aDT4KcoE9o9tlu2/dYi8TfSL1hvN16plB6S7L2VfnBVwuL/GOZ/lMBOGCNADpSaWfYemCCH+PSLmdR4l5mVy6WsSaKUz0muUCBNKqH3LrX8JO0iWoA/hI=
+	t=1711589032; cv=none; b=NIVn2s3JbRubycKwpjMChlosp0V+FtMADlGC6O+QCKhrqGPXeliIHMwbKSbLIpC9Sv9JqpCXTaUzqKy383h2aQCIldhYRgUjl956egMIxI4mI8maUorr+PYi+9OxBJqPDdzwbIcDjQQnuB7rb9aZuePU1HEaEgSgoSFTRx+LYwY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711589408; c=relaxed/simple;
-	bh=yWcbsUZELeQA21L3wIoPVhVw/tkcUP8fMSPRMJWRbcE=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=VW7RYa03Y27PUo8lL6p/Sene4zuNJb8WYPLgVrZymh0i9kqNvmpV/M2QySnHPuGr8sX6fWRNKfyHcHDSi+0+ekcx5raA+a0P3mY4qPb35KhqRvi3MOyOeU45rNBu7yHMfx+kRJqnA7iuLvfDwgmAsUEjtFo8U7ttuMxfQqHX0NQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=dorminy.me; spf=pass smtp.mailfrom=dorminy.me; dkim=pass (2048-bit key) header.d=dorminy.me header.i=@dorminy.me header.b=aduGABxW; arc=none smtp.client-ip=71.19.144.250
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=dorminy.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dorminy.me
-Received: from authenticated-user (box.fidei.email [71.19.144.250])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
-	(No client certificate requested)
-	by box.fidei.email (Postfix) with ESMTPSA id 5CBA0827CE;
-	Wed, 27 Mar 2024 21:30:00 -0400 (EDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dorminy.me; s=mail;
-	t=1711589400; bh=yWcbsUZELeQA21L3wIoPVhVw/tkcUP8fMSPRMJWRbcE=;
-	h=From:To:Subject:Date:In-Reply-To:References:From;
-	b=aduGABxWKK84h1Cf6+B5n7yHOh+xvTujiJ38Za1meaLkp461kHfG3k3X/X6Zo3qGA
-	 C2ZxjdeV2vFERqGJxgcb/yx3xqNtnfBGicvA+ceP9QNxjFTd0irTgjgdM4ScsV3kAs
-	 B/jVAGOJUlpUnpaT+yPhKfkrasiXnvBRxZfdkBjICAH1ls0SQ7WWFn5ekrfyawKKs0
-	 npIFRTjowxPeI+Rb7Z1gHzMLElLkQls1bj3GLiwq/7mmAaSc/b5rUj1XP9X37d9iE1
-	 rFvZ2NiB2fY3pa2dl9IXO34EOuxsldcDgt/9mJRzU7etXKnLrIL+QmVUxrZADMZI6g
-	 gBvzU4QdeaeLQ==
-From: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Chris Mason <clm@fb.com>,
-	Josef Bacik <josef@toxicpanda.com>,
-	David Sterba <dsterba@suse.com>,
-	Alexander Viro <viro@zeniv.linux.org.uk>,
-	Christian Brauner <brauner@kernel.org>,
-	Jan Kara <jack@suse.cz>,
-	Sweet Tea Dorminy <sweettea-kernel@dorminy.me>,
+	s=arc-20240116; t=1711589032; c=relaxed/simple;
+	bh=T0T9YUccKe5ykxrxiRSJ6xLuvwRieLVLUQyXUW6FCUY=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=l4edyFiYwxe/9U9FX53TG8Yo0OsGbXXriGDc8Ib/DmXHYt5FnGvy9GmyPYUtmxfspltmYTjS4Qw9LqLsbhtZz/gX0VtUBR96DJC3kdeUpPfnpvE3f2xKAXVjRl4ARTdsCVW61Y7Q1i1OUNvEDoNj07T2SK9PL9d9tRo/cnFMC+U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de; spf=pass smtp.mailfrom=gmx.de; dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b=sYYo2Cnb; arc=none smtp.client-ip=212.227.15.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+	s=s31663417; t=1711589019; x=1712193819; i=w_armin@gmx.de;
+	bh=r/peN7AGjQutxOUwkE2P5/6QxGbI63sh41gzdDoKsO0=;
+	h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+	b=sYYo2CnbaRKXq2r73+imMB0pQvK1qdl9u3+yK57ZZ5Iztz8KlK+mpbo7FNs1FDyv
+	 xMiBCwCwUSMarCJfCAmd7DZv3CQRM7OJ8YTNkZyNCz9eXs244GVILBBkkgC4bkz0w
+	 5RkP8YQsMEFT4wEYl3RHoMtsn387PMOyRAC5SjpFxGRTAt2LbXTbZA7V2amNuCkvh
+	 IlQCeANRmlfgck6vL/w4mEmtUMRizGmVfoVkBDBRIrwbutlQKBkPiiDdkunmMJzcT
+	 MC/rfM2dMs0hIkzvL75TvCfc0hOe4rnN/SYmhs036X+qEvtVaUAmw0uRZjWMtt/PD
+	 ZZPAhsZHFgyBtq2dCA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from mx-amd-b650.users.agdsn.de ([141.30.226.129]) by mail.gmx.net
+ (mrgmx005 [212.227.17.190]) with ESMTPSA (Nemesis) id
+ 1M6UZv-1rwYN943HF-006sgJ; Thu, 28 Mar 2024 02:23:39 +0100
+From: Armin Wolf <W_Armin@gmx.de>
+To: hdegoede@redhat.com,
+	ilpo.jarvinen@linux.intel.com
+Cc: corbet@lwn.net,
 	linux-doc@vger.kernel.org,
-	linux-btrfs@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	kernel-team@meta.com
-Subject: [PATCH v2 5/5] btrfs: fiemap: return extent physical size
-Date: Wed, 27 Mar 2024 21:22:23 -0400
-Message-ID: <93686d5c4467befe12f76e4921bfc20a13a74e2d.1711588701.git.sweettea-kernel@dorminy.me>
-In-Reply-To: <cover.1711588701.git.sweettea-kernel@dorminy.me>
-References: <cover.1711588701.git.sweettea-kernel@dorminy.me>
+	platform-driver-x86@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 1/4] platform/x86: wmi: Mark simple WMI drivers as legacy-free
+Date: Thu, 28 Mar 2024 02:23:33 +0100
+Message-Id: <20240328012336.145612-1-W_Armin@gmx.de>
+X-Mailer: git-send-email 2.39.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:yC2vVWcihw+Nuk8DKQKmxXdwbrFyFLV7FIp1sxxDiQCIrgF0qFK
+ wBhWyK+m4gdeZ/HJBolj+PHKbOX1WKbN78gWBq0B3DlNx4TMJKMd5aiv8X5gnCBpV9cE9BT
+ gJ7aVAJuZEjxb4f+AbW+9WLQT4eYPfRtOKHah8Dv1WfgFP23oAegW2XxZwmAkJCMsD3PO9p
+ icB6aYDCexZ+MadwUmf3A==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:iwDdzcEEZO0=;D9eUlUbAWlGlnijVtbOo4cbm+5q
+ Whv1Ima8PmkdwvNV16SoIyIMuUAzQLqWeKx9NiQpwKg5e4kjSBDicSn3VyS2lgOs0quo6VQVL
+ RO6ed5u6YMD2pDFOlh8MPAFWroO7GDsXSK06E6ssK67GXz5B9/WjEnEUm2M+7k5zQnA4eynJe
+ Pd5OLJ/MLMymefPz6CeEWBM+97dyYmwDpiBIPKgIXatOmeaKMeev7oFUXdwKVi2Aq6DpHavao
+ nK4/WgLqHzfcIMooeHuLZTa9y57Scei06+xBqdTzaEOz6sI500i5Q6m3UqX/jNSOjmjYof3CG
+ 80ifpKCLcqsNt6T4YItxB1qBhsxhK/jsqWRE59UGCYu4uR5+DYGFbZ/lZ0gQoJ+E4MqQh8bIB
+ xTX84f4NIz00JxAuz1o4azJKDwMm1bTy5nRhnljxhcSVftNxiBfIpvYpswG489uluITexUxpA
+ N25OaArHnX+4SP5BwNitlqhT2CKI0AwoeDUSaIAuBr3PM9YEP8pViXolBmlQAqJ57mLI8rVTD
+ Ba6LPksi7xgMT0YX+s0mnj+Ou6KAy7AZNePBnyGGB6tBjpX4vFThrgyesz/H9a0Jdsp3AX9Vm
+ 3A/9aptnP1SI45d0DCFkvvUbREKSJUGj8LG6aetLszFAIUolr5ptvRhByVwD9sejwak5gzAEU
+ /ynpxVPC9+ZWJ4jPqOQ/It/qZYPRNZgziqfOmuVNpj+GEmG6IJlKOco8qJyErsA6gLjX+EMP3
+ BxyTTpPki8Bml7VjqLcyZzqW1muydgLUYz/oY/1P4eFpk8i4jGxcyW9am8JM7WDqj7MG4c3UF
+ esQyLV2lbHn9fFDhdaQ3k7b9dAx7dIj9kiKljTqzoCMto=
 
-Now that fiemap allows returning extent physical size, make btrfs return
-the appropriate extent's actual disk size.
+The inspur_platform_profile driver and the xiaomi-wmi driver both
+meet the requirements for modern WMI drivers, as they both do not
+use the legacy GUID-based interface and can be safely instantiated
+multiple times.
 
-Signed-off-by: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
----
- fs/btrfs/extent_io.c | 70 ++++++++++++++++++++++++++++----------------
- 1 file changed, 45 insertions(+), 25 deletions(-)
+Mark them both as legacy-free using the no_singleton flag.
 
-diff --git a/fs/btrfs/extent_io.c b/fs/btrfs/extent_io.c
-index 30fcbb9393fe..9921dc1567d6 100644
---- a/fs/btrfs/extent_io.c
-+++ b/fs/btrfs/extent_io.c
-@@ -2456,7 +2456,8 @@ int try_release_extent_mapping(struct page *page, gfp_t mask)
- struct btrfs_fiemap_entry {
- 	u64 offset;
- 	u64 phys;
--	u64 len;
-+	u64 log_len;
-+	u64 phys_len;
- 	u32 flags;
+Compile-tested only.
+
+Signed-off-by: Armin Wolf <W_Armin@gmx.de>
+=2D--
+ drivers/platform/x86/inspur_platform_profile.c | 1 +
+ drivers/platform/x86/xiaomi-wmi.c              | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/drivers/platform/x86/inspur_platform_profile.c b/drivers/plat=
+form/x86/inspur_platform_profile.c
+index 743705bddda3..8440defa6788 100644
+=2D-- a/drivers/platform/x86/inspur_platform_profile.c
++++ b/drivers/platform/x86/inspur_platform_profile.c
+@@ -207,6 +207,7 @@ static struct wmi_driver inspur_wmi_driver =3D {
+ 	.id_table =3D inspur_wmi_id_table,
+ 	.probe =3D inspur_wmi_probe,
+ 	.remove =3D inspur_wmi_remove,
++	.no_singleton =3D true,
  };
- 
-@@ -2514,7 +2515,8 @@ struct fiemap_cache {
- 	/* Fields for the cached extent (unsubmitted, not ready, extent). */
- 	u64 offset;
- 	u64 phys;
--	u64 len;
-+	u64 log_len;
-+	u64 phys_len;
- 	u32 flags;
- 	bool cached;
+
+ module_wmi_driver(inspur_wmi_driver);
+diff --git a/drivers/platform/x86/xiaomi-wmi.c b/drivers/platform/x86/xiao=
+mi-wmi.c
+index 54a2546bb93b..1f5f108d87c0 100644
+=2D-- a/drivers/platform/x86/xiaomi-wmi.c
++++ b/drivers/platform/x86/xiaomi-wmi.c
+@@ -83,6 +83,7 @@ static struct wmi_driver xiaomi_wmi_driver =3D {
+ 	.id_table =3D xiaomi_wmi_id_table,
+ 	.probe =3D xiaomi_wmi_probe,
+ 	.notify =3D xiaomi_wmi_notify,
++	.no_singleton =3D true,
  };
-@@ -2527,8 +2529,8 @@ static int flush_fiemap_cache(struct fiemap_extent_info *fieinfo,
- 		int ret;
- 
- 		ret = fiemap_fill_next_extent(fieinfo, entry->offset,
--					      entry->phys, entry->len, 0,
--					      entry->flags);
-+					      entry->phys, entry->log_len,
-+					      entry->phys_len, entry->flags);
- 		/*
- 		 * Ignore 1 (reached max entries) because we keep track of that
- 		 * ourselves in emit_fiemap_extent().
-@@ -2553,7 +2555,8 @@ static int flush_fiemap_cache(struct fiemap_extent_info *fieinfo,
-  */
- static int emit_fiemap_extent(struct fiemap_extent_info *fieinfo,
- 				struct fiemap_cache *cache,
--				u64 offset, u64 phys, u64 len, u32 flags)
-+				u64 offset, u64 phys, u64 log_len,
-+				u64 phys_len, u32 flags)
- {
- 	struct btrfs_fiemap_entry *entry;
- 	u64 cache_end;
-@@ -2561,6 +2564,9 @@ static int emit_fiemap_extent(struct fiemap_extent_info *fieinfo,
- 	/* Set at the end of extent_fiemap(). */
- 	ASSERT((flags & FIEMAP_EXTENT_LAST) == 0);
- 
-+	/* We always set the correct physical length. */
-+	flags |= FIEMAP_EXTENT_HAS_PHYS_LEN;
-+
- 	if (!cache->cached)
- 		goto assign;
- 
-@@ -2596,7 +2602,7 @@ static int emit_fiemap_extent(struct fiemap_extent_info *fieinfo,
- 	 * or equals to what we have in cache->offset. We deal with this as
- 	 * described below.
- 	 */
--	cache_end = cache->offset + cache->len;
-+	cache_end = cache->offset + cache->log_len;
- 	if (cache_end > offset) {
- 		if (offset == cache->offset) {
- 			/*
-@@ -2620,10 +2626,10 @@ static int emit_fiemap_extent(struct fiemap_extent_info *fieinfo,
- 			 * where a previously found file extent item was split
- 			 * due to an ordered extent completing.
- 			 */
--			cache->len = offset - cache->offset;
-+			cache->log_len = offset - cache->offset;
- 			goto emit;
- 		} else {
--			const u64 range_end = offset + len;
-+			const u64 range_end = offset + log_len;
- 
- 			/*
- 			 * The offset of the file extent item we have just found
-@@ -2656,11 +2662,13 @@ static int emit_fiemap_extent(struct fiemap_extent_info *fieinfo,
- 			if (range_end <= cache_end)
- 				return 0;
- 
--			if (!(flags & (FIEMAP_EXTENT_DATA_COMPRESSED | FIEMAP_EXTENT_DELALLOC)))
-+			if (!(flags & (FIEMAP_EXTENT_DATA_COMPRESSED | FIEMAP_EXTENT_DELALLOC))) {
- 				phys += cache_end - offset;
-+				phys_len -= cache_end - offset;
-+			}
- 
- 			offset = cache_end;
--			len = range_end - cache_end;
-+			log_len = range_end - cache_end;
- 			goto emit;
- 		}
- 	}
-@@ -2670,15 +2678,17 @@ static int emit_fiemap_extent(struct fiemap_extent_info *fieinfo,
- 	 * 1) Their logical addresses are continuous
- 	 *
- 	 * 2) Their physical addresses are continuous
--	 *    So truly compressed (physical size smaller than logical size)
--	 *    extents won't get merged with each other
- 	 *
- 	 * 3) Share same flags
-+	 *
-+	 * 4) Not compressed
- 	 */
--	if (cache->offset + cache->len  == offset &&
--	    cache->phys + cache->len == phys  &&
--	    cache->flags == flags) {
--		cache->len += len;
-+	if (cache->offset + cache->log_len  == offset &&
-+	    cache->phys + cache->log_len == phys  &&
-+	    cache->flags == flags &&
-+	    !(flags & FIEMAP_EXTENT_DATA_COMPRESSED)) {
-+		cache->log_len += log_len;
-+		cache->phys_len += phys_len;
- 		return 0;
- 	}
- 
-@@ -2695,7 +2705,7 @@ static int emit_fiemap_extent(struct fiemap_extent_info *fieinfo,
- 		 * to miss it.
- 		 */
- 		entry = &cache->entries[cache->entries_size - 1];
--		cache->next_search_offset = entry->offset + entry->len;
-+		cache->next_search_offset = entry->offset + entry->log_len;
- 		cache->cached = false;
- 
- 		return BTRFS_FIEMAP_FLUSH_CACHE;
-@@ -2704,7 +2714,8 @@ static int emit_fiemap_extent(struct fiemap_extent_info *fieinfo,
- 	entry = &cache->entries[cache->entries_pos];
- 	entry->offset = cache->offset;
- 	entry->phys = cache->phys;
--	entry->len = cache->len;
-+	entry->log_len = cache->log_len;
-+	entry->phys_len = cache->phys_len;
- 	entry->flags = cache->flags;
- 	cache->entries_pos++;
- 	cache->extents_mapped++;
-@@ -2717,7 +2728,8 @@ static int emit_fiemap_extent(struct fiemap_extent_info *fieinfo,
- 	cache->cached = true;
- 	cache->offset = offset;
- 	cache->phys = phys;
--	cache->len = len;
-+	cache->log_len = log_len;
-+	cache->phys_len = phys_len;
- 	cache->flags = flags;
- 
- 	return 0;
-@@ -2743,7 +2755,8 @@ static int emit_last_fiemap_cache(struct fiemap_extent_info *fieinfo,
- 		return 0;
- 
- 	ret = fiemap_fill_next_extent(fieinfo, cache->offset, cache->phys,
--				      cache->len, 0, cache->flags);
-+				      cache->log_len, cache->phys_len,
-+				      cache->flags);
- 	cache->cached = false;
- 	if (ret > 0)
- 		ret = 0;
-@@ -2937,13 +2950,15 @@ static int fiemap_process_hole(struct btrfs_inode *inode,
- 			}
- 			ret = emit_fiemap_extent(fieinfo, cache, prealloc_start,
- 						 disk_bytenr + extent_offset,
--						 prealloc_len, prealloc_flags);
-+						 prealloc_len, prealloc_len,
-+						 prealloc_flags);
- 			if (ret)
- 				return ret;
- 			extent_offset += prealloc_len;
- 		}
- 
- 		ret = emit_fiemap_extent(fieinfo, cache, delalloc_start, 0,
-+					 delalloc_end + 1 - delalloc_start,
- 					 delalloc_end + 1 - delalloc_start,
- 					 FIEMAP_EXTENT_DELALLOC |
- 					 FIEMAP_EXTENT_UNKNOWN);
-@@ -2984,7 +2999,8 @@ static int fiemap_process_hole(struct btrfs_inode *inode,
- 		}
- 		ret = emit_fiemap_extent(fieinfo, cache, prealloc_start,
- 					 disk_bytenr + extent_offset,
--					 prealloc_len, prealloc_flags);
-+					 prealloc_len, prealloc_len,
-+					 prealloc_flags);
- 		if (ret)
- 			return ret;
- 	}
-@@ -3130,6 +3146,7 @@ int extent_fiemap(struct btrfs_inode *inode, struct fiemap_extent_info *fieinfo,
- 		u64 extent_offset = 0;
- 		u64 extent_gen;
- 		u64 disk_bytenr = 0;
-+		u64 disk_size = 0;
- 		u64 flags = 0;
- 		int extent_type;
- 		u8 compression;
-@@ -3192,7 +3209,7 @@ int extent_fiemap(struct btrfs_inode *inode, struct fiemap_extent_info *fieinfo,
- 			flags |= FIEMAP_EXTENT_DATA_INLINE;
- 			flags |= FIEMAP_EXTENT_NOT_ALIGNED;
- 			ret = emit_fiemap_extent(fieinfo, &cache, key.offset, 0,
--						 extent_len, flags);
-+						 extent_len, extent_len, flags);
- 		} else if (extent_type == BTRFS_FILE_EXTENT_PREALLOC) {
- 			ret = fiemap_process_hole(inode, fieinfo, &cache,
- 						  &delalloc_cached_state,
-@@ -3207,6 +3224,7 @@ int extent_fiemap(struct btrfs_inode *inode, struct fiemap_extent_info *fieinfo,
- 						  backref_ctx, 0, 0, 0,
- 						  key.offset, extent_end - 1);
- 		} else {
-+			disk_size = btrfs_file_extent_disk_num_bytes(leaf, ei);
- 			/* We have a regular extent. */
- 			if (fieinfo->fi_extents_max) {
- 				ret = btrfs_is_data_extent_shared(inode,
-@@ -3221,7 +3239,9 @@ int extent_fiemap(struct btrfs_inode *inode, struct fiemap_extent_info *fieinfo,
- 
- 			ret = emit_fiemap_extent(fieinfo, &cache, key.offset,
- 						 disk_bytenr + extent_offset,
--						 extent_len, flags);
-+						 extent_len,
-+						 disk_size - extent_offset,
-+						 flags);
- 		}
- 
- 		if (ret < 0) {
-@@ -3259,7 +3279,7 @@ int extent_fiemap(struct btrfs_inode *inode, struct fiemap_extent_info *fieinfo,
- 		prev_extent_end = range_end;
- 	}
- 
--	if (cache.cached && cache.offset + cache.len >= last_extent_end) {
-+	if (cache.cached && cache.offset + cache.log_len >= last_extent_end) {
- 		const u64 i_size = i_size_read(&inode->vfs_inode);
- 
- 		if (prev_extent_end < i_size) {
--- 
-2.43.0
+ module_wmi_driver(xiaomi_wmi_driver);
+
+=2D-
+2.39.2
 
 
