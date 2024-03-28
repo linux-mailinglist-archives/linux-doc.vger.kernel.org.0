@@ -1,189 +1,124 @@
-Return-Path: <linux-doc+bounces-12896-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12901-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 217D588F2F0
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 00:21:30 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 78B4B88F48E
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 02:30:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CB65229D125
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Mar 2024 23:21:28 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EB6D629A109
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 01:30:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B8C315688A;
-	Wed, 27 Mar 2024 23:19:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0AC1A1D540;
+	Thu, 28 Mar 2024 01:30:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="eAqfAphT"
+	dkim=pass (2048-bit key) header.d=dorminy.me header.i=@dorminy.me header.b="St8XH3fc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+Received: from box.fidei.email (box.fidei.email [71.19.144.250])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1191F154C1A
-	for <linux-doc@vger.kernel.org>; Wed, 27 Mar 2024 23:19:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28F2D3D7A;
+	Thu, 28 Mar 2024 01:30:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=71.19.144.250
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711581554; cv=none; b=A7GF1LnMzpvGHbDeAupWCaOrVnEDuvrGFaoLX6FJzVhRwGJn1bblJM8JcDbdYxOeCpBfRrVkwfFlVYnNY1szuQHch9LsOEp4kzQZP6tZPXhYhvDxyYrm3kJf3IiRPnwyv1weGEQAaOfVz7vP8UrmbrNficJIB9XV48SIh2rpJqE=
+	t=1711589405; cv=none; b=NTW2iHp2daQCRw9a/e7ZOGlL/3WIsoB+Zgrr0LD3tsVnN0i+txTk/SLTGA3e9aPr6OPK3PAmKpxp9FdBaqrqDPodkI/uivBJg9Ey/+aA7GApQWVPcqlvhl7rpqzjXCLy/UzDVeb6xCG2o6XsS3TUSTeixfJvvgxHgLjnI5bnLlc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711581554; c=relaxed/simple;
-	bh=h9SozZx07F/ieSA3Tkw6/3vSYWM+YqSBRP3PPQIUB78=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=hHN1+cir6c4J+HK7F+4KAhsBta4arsF4ldmVRJ36BM3bJYt0EQy4pJeGHCM6tG3iagFMaKxWuSxodfpkdODVTvfdI7hBUEEi3gaSR0wZexQdwDtJFVzTnVFTFcu0t7vpELGSSGlarFhZBMzErWg5ze+/+wVIpTJH0ks5OM36Q9Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=eAqfAphT; arc=none smtp.client-ip=209.85.160.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-222c0572eedso234003fac.3
-        for <linux-doc@vger.kernel.org>; Wed, 27 Mar 2024 16:19:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711581550; x=1712186350; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CJZsj0mH5Na8/6xZVfDNraoADX8hsL14D7DbLT7TMPI=;
-        b=eAqfAphTCe5xMLO7IDsfaBpiCj4b/x+7v8ccb8ODULuM2G7hkEN25kFJncN2sx/fvG
-         QqUtlTjU4y695H2BTg3WTXcN767DuqbeSF6kh71SM1I0HU3UoyK8Q8jlsJwuNGAUdaqX
-         v3y9v/LDcuEfFDJ4KrGbQzJPSwxGrC0/1sCznd7hZFChgt5v4WDZzdU2UoIMUeDGcrs/
-         PvpmycHNdqEKepsxWgg5WbEUrtho04hZf5xJ9rtPoZYW5V2jgvQTNy3hKTKqqAXl9uw2
-         AZCTB49zFOmtYTVDnDYwbARUFzNRGtTcij9x4iAXUwJ5fZatOfL/jouVCMKin9BmsZnq
-         WBCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711581550; x=1712186350;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=CJZsj0mH5Na8/6xZVfDNraoADX8hsL14D7DbLT7TMPI=;
-        b=KD1fqguRXn+69csuSexsLb6pnX6jC2zPZt+Urkq3kY2w4Gbh+FQeEj29u2M/hYwihW
-         2mYT+ORUXspHT4Xo8/I9SFFpQNB6L+kzxHzpF+2bkR49KsKKoOIMq7NgWq9HlIm+bGpS
-         UQg3t+e1fQubfV911YoIDGF0yJdINGskLAqp8s0xZ9emevUHTURitkYPVODsLSzHeOvG
-         b7Ksh186zenosLnNYolROShoDjej9VQsLHe6G38frd/wBwIHZMO+xX7RRTkX83yyYpoJ
-         IrIFXE4SbJUHHJxdWZwgm8x/1OlPnaEWbE5xf4Jz+D40XBPbkcSATInVYRhi8yW/JOJW
-         1CoQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUuJ1v1oOKS6mNoXSDDaqthpn1OpqdWPrFACReQd5Dj+oM4aYD7U5EiVfli2UIilTaR6gMlGd8XLV4QAgDPZLwQY1rSFv1xEB7H
-X-Gm-Message-State: AOJu0YwprGG7GsYKtND/rr8xSiAolUXFGaJphiWQgF8cM4glUU44nb1D
-	+NQgn2Dvk60X39HETWH1T+3lFNT3qlsR+8x2h2oLzNgOBs+uwIOOk7H91fPZtJI=
-X-Google-Smtp-Source: AGHT+IFF6sA3ju+9mCH35rHh1zhgVOle14esmb64OwmiwIjcccCZ+Gff/k0HvFE6jlRCad9wpwZTGw==
-X-Received: by 2002:a05:6871:3a14:b0:221:9013:d783 with SMTP id pu20-20020a0568713a1400b002219013d783mr1213589oac.34.1711581550253;
-        Wed, 27 Mar 2024 16:19:10 -0700 (PDT)
-Received: from freyr.lechnology.com (ip98-183-112-25.ok.ok.cox.net. [98.183.112.25])
-        by smtp.gmail.com with ESMTPSA id js3-20020a056870bac300b0022a0519183csm81381oab.2.2024.03.27.16.19.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Mar 2024 16:19:09 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
+	s=arc-20240116; t=1711589405; c=relaxed/simple;
+	bh=LtHDO0v80y+Lyvcrk62TwQOMWdFY59WKgcJfLJ60cNc=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version; b=jJdW7iBbYOq1x5DzPhN0K/lmFvIYNmvK8EFpnWvlenz1aBoDEYukMCnKt37xcsDhJeazJ/OAHg/PFX3/ouSvcE4xaWFzG2kFjbe4KrapKfWeVN8ustHWwa/t5SDWDd7a0nM8dDnfwOGEnTYc2rvl2jISJ/cJqTrGIoBaPA9XHfQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=dorminy.me; spf=pass smtp.mailfrom=dorminy.me; dkim=pass (2048-bit key) header.d=dorminy.me header.i=@dorminy.me header.b=St8XH3fc; arc=none smtp.client-ip=71.19.144.250
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=dorminy.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dorminy.me
+Received: from authenticated-user (box.fidei.email [71.19.144.250])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	(No client certificate requested)
+	by box.fidei.email (Postfix) with ESMTPSA id 5CC31827B1;
+	Wed, 27 Mar 2024 21:29:57 -0400 (EDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dorminy.me; s=mail;
+	t=1711589397; bh=LtHDO0v80y+Lyvcrk62TwQOMWdFY59WKgcJfLJ60cNc=;
+	h=From:To:Subject:Date:From;
+	b=St8XH3fcQT8527KOe6J4m+oeLb8oEnrb4f5YLKV7C6NIH2/DQ+SQ44ByoTKJsH16w
+	 5agrTV9d2cl8xoMRvvdB6z4PMxDLoIHpBH6eAts5WxvQuvIkS37LH2vyFJ/vGZbhSR
+	 /cHTB7HZrHezcNLbqLXGPnKCXQDkLwN1o6goLihhtaGCExBchuyCeGfuIySKiDNY+E
+	 5G9w+vc2v+JC+JRlPlWu7/lF4MseTRtIktl34cMSFWMiOiZA2ISlKEWpNIZOsXlzKV
+	 sm1swILh6RAnbmOYitzSJjHEVfJiSlbsXkfuFP8pxQpPGhr6zZr3g8z9bDBEVIIVq7
+	 VYjwpjpdp7m6Q==
+From: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
 To: Jonathan Corbet <corbet@lwn.net>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Jean Delvare <jdelvare@suse.com>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Support Opensource <support.opensource@diasemi.com>,
-	Cosmin Tanislav <cosmin.tanislav@analog.com>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Antoniu Miclaus <antoniu.miclaus@analog.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Cc: David Lechner <dlechner@baylibre.com>,
+	Chris Mason <clm@fb.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	David Sterba <dsterba@suse.com>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>,
+	Jan Kara <jack@suse.cz>,
+	Sweet Tea Dorminy <sweettea-kernel@dorminy.me>,
 	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-hwmon@vger.kernel.org,
-	linux-iio@vger.kernel.org,
-	linux-staging@lists.linux.dev,
-	linux-input@vger.kernel.org
-Subject: [PATCH RFC 7/7] Input: mpr121: Use devm_regulator_get_enable_get_voltage()
-Date: Wed, 27 Mar 2024 18:18:56 -0500
-Message-ID: <20240327-regulator-get-enable-get-votlage-v1-7-5f4517faa059@baylibre.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240327-regulator-get-enable-get-votlage-v1-0-5f4517faa059@baylibre.com>
-References: <20240327-regulator-get-enable-get-votlage-v1-0-5f4517faa059@baylibre.com>
+	linux-btrfs@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	kernel-team@meta.com
+Subject: [PATCH v2 0/5] fiemap extension for more physical information
+Date: Wed, 27 Mar 2024 21:22:18 -0400
+Message-ID: <cover.1711588701.git.sweettea-kernel@dorminy.me>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Mailer: b4 0.12.4
 Content-Transfer-Encoding: 8bit
 
-We can reduce boilerplate code by using
-devm_regulator_get_enable_get_voltage().
+For many years, various btrfs users have written programs to discover
+the actual disk space used by files, using root-only interfaces.
+However, this information is a great fit for fiemap: it is inherently
+tied to extent information, all filesystems can use it, and the
+capabilities required for FIEMAP make sense for this additional
+information also.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- drivers/input/keyboard/mpr121_touchkey.c | 45 +++-----------------------------
- 1 file changed, 3 insertions(+), 42 deletions(-)
+Hence, this patchset adds various additional information to fiemap,
+and extends btrfs to return it.  This uses some of the reserved padding
+in the fiemap extent structure, so programs unaware of the changes
+will be unaffected.
 
-diff --git a/drivers/input/keyboard/mpr121_touchkey.c b/drivers/input/keyboard/mpr121_touchkey.c
-index d434753afab1..c59e7451f3cd 100644
---- a/drivers/input/keyboard/mpr121_touchkey.c
-+++ b/drivers/input/keyboard/mpr121_touchkey.c
-@@ -82,42 +82,6 @@ static const struct mpr121_init_register init_reg_table[] = {
- 	{ AUTO_CONFIG_CTRL_ADDR, 0x0b },
- };
- 
--static void mpr121_vdd_supply_disable(void *data)
--{
--	struct regulator *vdd_supply = data;
--
--	regulator_disable(vdd_supply);
--}
--
--static struct regulator *mpr121_vdd_supply_init(struct device *dev)
--{
--	struct regulator *vdd_supply;
--	int err;
--
--	vdd_supply = devm_regulator_get(dev, "vdd");
--	if (IS_ERR(vdd_supply)) {
--		dev_err(dev, "failed to get vdd regulator: %ld\n",
--			PTR_ERR(vdd_supply));
--		return vdd_supply;
--	}
--
--	err = regulator_enable(vdd_supply);
--	if (err) {
--		dev_err(dev, "failed to enable vdd regulator: %d\n", err);
--		return ERR_PTR(err);
--	}
--
--	err = devm_add_action_or_reset(dev, mpr121_vdd_supply_disable,
--				       vdd_supply);
--	if (err) {
--		dev_err(dev, "failed to add disable regulator action: %d\n",
--			err);
--		return ERR_PTR(err);
--	}
--
--	return vdd_supply;
--}
--
- static void mpr_touchkey_report(struct input_dev *dev)
- {
- 	struct mpr121_touchkey *mpr121 = input_get_drvdata(dev);
-@@ -233,7 +197,6 @@ static int mpr121_phys_init(struct mpr121_touchkey *mpr121,
- static int mpr_touchkey_probe(struct i2c_client *client)
- {
- 	struct device *dev = &client->dev;
--	struct regulator *vdd_supply;
- 	int vdd_uv;
- 	struct mpr121_touchkey *mpr121;
- 	struct input_dev *input_dev;
-@@ -241,11 +204,9 @@ static int mpr_touchkey_probe(struct i2c_client *client)
- 	int error;
- 	int i;
- 
--	vdd_supply = mpr121_vdd_supply_init(dev);
--	if (IS_ERR(vdd_supply))
--		return PTR_ERR(vdd_supply);
--
--	vdd_uv = regulator_get_voltage(vdd_supply);
-+	vdd_uv = devm_regulator_get_enable_get_voltage(dev, "vdd");
-+	if (vdd_uv < 0)
-+		return vdd_uv;
- 
- 	mpr121 = devm_kzalloc(dev, sizeof(*mpr121), GFP_KERNEL);
- 	if (!mpr121)
+This is based on next-20240325. I've tested the btrfs part of this with
+the standard btrfs testing matrix locally, and verified that the physical extent
+information returned there is correct.
 
+Changelog:
+
+v2:
+ - Adopted PHYS_LEN flag and COMPRESSED flag from the previous version,
+   as per Andreas Dilger' comment.
+   https://patchwork.ozlabs.org/project/linux-ext4/patch/4f8d5dc5b51a43efaf16c39398c23a6276e40a30.1386778303.git.dsterba@suse.cz/
+
+v1: https://lore.kernel.org/linux-fsdevel/20240315030334.GQ6184@frogsfrogsfrogs/T/#t
+
+Sweet Tea Dorminy (5):
+  fs: fiemap: add physical_length field to extents
+  fs: fiemap: update fiemap_fill_next_extent() signature
+  fs: fiemap: add new COMPRESSED extent state
+  btrfs: fiemap: emit new COMPRESSED fiemap state.
+  btrfs: fiemap: return extent physical size
+
+ Documentation/filesystems/fiemap.rst | 35 ++++++++++----
+ fs/bcachefs/fs.c                     |  7 +--
+ fs/btrfs/extent_io.c                 | 72 ++++++++++++++++++----------
+ fs/ext4/extents.c                    |  1 +
+ fs/f2fs/data.c                       |  8 ++--
+ fs/f2fs/inline.c                     |  3 +-
+ fs/ioctl.c                           | 11 +++--
+ fs/iomap/fiemap.c                    |  2 +-
+ fs/nilfs2/inode.c                    |  6 +--
+ fs/ntfs3/frecord.c                   |  7 +--
+ fs/ocfs2/extent_map.c                |  4 +-
+ fs/smb/client/smb2ops.c              |  1 +
+ include/linux/fiemap.h               |  2 +-
+ include/uapi/linux/fiemap.h          | 34 ++++++++++---
+ 14 files changed, 130 insertions(+), 63 deletions(-)
+
+
+base-commit: 1fdad13606e104ff103ca19d2d660830cb36d43e
 -- 
-2.43.2
+2.43.0
 
 
