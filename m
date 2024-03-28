@@ -1,82 +1,129 @@
-Return-Path: <linux-doc+bounces-12958-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-12960-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 315BE89031E
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 16:34:23 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F329890345
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 16:39:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DA27D28EA30
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 15:34:21 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EEC61B229A9
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Mar 2024 15:39:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B43D57E583;
-	Thu, 28 Mar 2024 15:34:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 904F4130AD3;
+	Thu, 28 Mar 2024 15:39:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Gi66aJaQ"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="yiXFFCxU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7788B32C92
-	for <linux-doc@vger.kernel.org>; Thu, 28 Mar 2024 15:34:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F57B12FB27
+	for <linux-doc@vger.kernel.org>; Thu, 28 Mar 2024 15:39:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.176
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711640059; cv=none; b=hLEen5beTp9asSObN45oimUs5Np0TBCkh0xueAdSLQBYQv0TZlEE1em43n8iGNH5qX5tLyKbu2Uiq0op2EIyMDJ9t+2re91eslL2sa9++8glkhQEiFeQ6L/j+8w3TJXposHWygwAIjYBuaKdTtl9+o2K6QbGmbPXYAolj5VzYy4=
+	t=1711640362; cv=none; b=rZZWqTbhIUfHh+tsWEbeR6kRRydMyjO61pezniFo0YNFvJA4kEPSDi/1soW11lYPWKaCfbh6OSb8Yn7x5gIrOXMjNyUtC7gNpwBPoybu3wauQbldSqOFmG+V5qfW9O4T+lPHQ1EVMH1t8C+aEgbImakfkJzQ74XnOahqRAJK6Wo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711640059; c=relaxed/simple;
-	bh=pq4rM/jkC3pLBCbfs311M7bBO4YHyOpwr1F4hhSa1Qg=;
+	s=arc-20240116; t=1711640362; c=relaxed/simple;
+	bh=G1iRW2zHIY2/EiULrJ1nqfVUKDfTimjQj7b8q3dHoFc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AzhMT2p4li0XPoi7Wo3O6H5692RLaRjAZ9YpFJ0mTbiSbiSBcfRjbmi6xbDwexITjGRLCRAWEuhI4a5KRPOGK9So3gWEVqi2mEZd4FqaIbvAO/Knma/N24pysww8UvOzi7a/us8qrE3+2K/htjNfYjkLLYJF6oRnbcWEjDxOCo4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Gi66aJaQ; arc=none smtp.client-ip=198.175.65.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1711640056; x=1743176056;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=pq4rM/jkC3pLBCbfs311M7bBO4YHyOpwr1F4hhSa1Qg=;
-  b=Gi66aJaQrSbRLpySAbsFkrva2zv2/EwVdfk63Z+ZzJLggeDJNffhmS5p
-   kdNmXxa/zIWgawEJySMEc1PGieyHcZuWh9OzqLG5huMvEZzyDmBZEONk8
-   h4N+junR946kfE+mMyARCMfdFZrJnBio1Ma5mzqJQOECgywP8RrTA/Au4
-   eNox0xWy75AY4WP2/o4TG4Mr7uI9ggn6N9xp1Ul2chkSkJb8w300/DS34
-   wHde1pZzbNtzEGHLrFFfDXkwRtRDAF9VszkqOftbReQbdyd3R1L4/k5ra
-   g9hyeLxdmBH+thoy5ZWFNSRmbELTk24yhz04B4Pms43ezxjaouMbvYl05
-   g==;
-X-CSE-ConnectionGUID: Jj7COS0UTHW5nEkADTXTEQ==
-X-CSE-MsgGUID: iLVYK/ykSwa+6eXcpPiqNg==
-X-IronPort-AV: E=McAfee;i="6600,9927,11027"; a="24249781"
-X-IronPort-AV: E=Sophos;i="6.07,162,1708416000"; 
-   d="scan'208";a="24249781"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Mar 2024 08:34:15 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.07,162,1708416000"; 
-   d="scan'208";a="17080090"
-Received: from lkp-server01.sh.intel.com (HELO be39aa325d23) ([10.239.97.150])
-  by orviesa007.jf.intel.com with ESMTP; 28 Mar 2024 08:34:12 -0700
-Received: from kbuild by be39aa325d23 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1rprlZ-0002Gs-2T;
-	Thu, 28 Mar 2024 15:34:09 +0000
-Date: Thu, 28 Mar 2024 23:33:54 +0800
-From: kernel test robot <lkp@intel.com>
-To: Kefeng Wang <wangkefeng.wang@huawei.com>,
-	Andrew Morton <akpm@linux-foundation.org>
-Cc: oe-kbuild-all@lists.linux.dev,
-	Linux Memory Management List <linux-mm@kvack.org>,
-	willy@infradead.org, Miaohe Lin <linmiaohe@huawei.com>,
-	Naoya Horiguchi <naoya.horiguchi@nec.com>,
-	David Hildenbrand <david@redhat.com>,
-	Oscar Salvador <osalvador@suse.de>, Zi Yan <ziy@nvidia.com>,
-	Hugh Dickins <hughd@google.com>, Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Kefeng Wang <wangkefeng.wang@huawei.com>
-Subject: Re: [PATCH 3/6] mm: remove isolate_lru_page()
-Message-ID: <202403282357.bFSsmYuH-lkp@intel.com>
-References: <20240327141034.3712697-4-wangkefeng.wang@huawei.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=rIDmEyNGI82Y+27KVdKTKAGTsHDr76NqBxPJggvlYBfMTX+F+VzS3H4RNmNaAfJOy/Zt3wtFfrUa7ZjoT9r3J8APpP7Y9jruUXR5OS63VFnjM7yxJio1o9AMmB/aM/XHPRbWtUW/XoI+uSNCN/a+sI4LSHYqxJgVeumNrq3j+6k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=yiXFFCxU; arc=none smtp.client-ip=209.85.210.176
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-6ea80de0e97so827733b3a.2
+        for <linux-doc@vger.kernel.org>; Thu, 28 Mar 2024 08:39:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1711640358; x=1712245158; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=mPjQD/vT8EW8FIsS5EhEUvjw7Yq2DPw74odbleQjQC0=;
+        b=yiXFFCxUidOur1Yje4vLUgh6HPAPLTa0A8Jr+L02ErZCnLUGyA5cbWRfLbW2anYSXf
+         OBw4ySIQT0uhUbGcSG01jSnXmA99UGDz+ieVFtksloTDysGebITCGl5U79aib5tRot4U
+         R4S1ExbeBqVsmWInB4bb8zRKX9QyP7Ax6Eh5Ma6rjz8KpZ8v4vKS3+LuOQnifxodUaJY
+         zzOk4VHwBPO7tnFwFYmLG1MzB7aHaa3xKXAwElEJjPQS4p0yDYFN/Ey+1PpWehd8HZdj
+         vYgMf7EihG/MeLThCAKSbALwA7sdiXDqthcdvgmkCW/VSJ7MQdHCJb7IT9nDNTdo6+e8
+         nNWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1711640358; x=1712245158;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mPjQD/vT8EW8FIsS5EhEUvjw7Yq2DPw74odbleQjQC0=;
+        b=Evz5Z3hK50TV3ntmKRjoYJoc6BWY9C74fa6B/jV+ZzBNSrvScaugNkF1l9J+2Lk5Xv
+         lu6JHbwHNU+09ePE1c7Dl/QtCVTAwnvOhALRuAQU181EON49cVdD6Wm4ivalh/41kS6C
+         xZjCfyYh9yUVut7VubpzVgKOvYxANvLmKc9Hk3GlaxlZApbuDRVIfjGfwAkczo2PiPE4
+         nNWcJJnZbutU16QYL6viyaE8mx2mcuOTEauZPOPVTp1ivnLThJ7IHGMCAevO7wMLaHx4
+         dXIjYQxuPEAuaWn7lX1J43XKkxEygFtV4ziQUznqR9mULPmOnkkad3mRVEPNs3snsl7B
+         nJ+g==
+X-Forwarded-Encrypted: i=1; AJvYcCUPQc4KKYUSlRWFTQw2r4svIhgiIrjJACALnFmQVkBfmrurA92Lm5EiSQyZR5bOptlmhMkKG/d+ImbAJPNzbOVqoaRNUSf99eCb
+X-Gm-Message-State: AOJu0YzGwIR3u0tlOdP1axVADdEnAhKxU8hWc+IdFkS86MiYrimCzFaz
+	D+3Ax6kJcvuR3WyX5mBbU7EmfHyfpvuX8pKjN1QJpMryz7TBBAf4Zvktc45Cmyg=
+X-Google-Smtp-Source: AGHT+IGhUQYINGDQ7hWfiGCoXweY10vLCz/e/x+HjJ8dVvYs43ivIcKXZCgoqnZGIv+19J3DIwIpug==
+X-Received: by 2002:a05:6a00:a12:b0:6ea:92a7:fb82 with SMTP id p18-20020a056a000a1200b006ea92a7fb82mr3800870pfh.27.1711640357806;
+        Thu, 28 Mar 2024 08:39:17 -0700 (PDT)
+Received: from p14s ([2604:3d09:148c:c800:ff63:c57b:4625:b68c])
+        by smtp.gmail.com with ESMTPSA id e2-20020aa798c2000000b006ea923678a6sm1505830pfm.137.2024.03.28.08.39.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 28 Mar 2024 08:39:17 -0700 (PDT)
+Date: Thu, 28 Mar 2024 09:39:10 -0600
+From: Mathieu Poirier <mathieu.poirier@linaro.org>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Richard Weinberger <richard@nod.at>,
+	Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>, Jens Axboe <axboe@kernel.dk>,
+	Marcel Holtmann <marcel@holtmann.org>,
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+	Olivia Mackall <olivia@selenic.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Amit Shah <amit@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Gonglei <arei.gonglei@huawei.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Viresh Kumar <vireshk@kernel.org>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Bartosz Golaszewski <brgl@bgdev.pl>,
+	David Airlie <airlied@redhat.com>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Gurchetan Singh <gurchetansingh@chromium.org>,
+	Chia-I Wu <olvaffe@gmail.com>,
+	Jean-Philippe Brucker <jean-philippe@linaro.org>,
+	Joerg Roedel <joro@8bytes.org>, Alexander Graf <graf@amazon.com>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Eric Van Hensbergen <ericvh@kernel.org>,
+	Latchesar Ionkov <lucho@ionkov.net>,
+	Dominique Martinet <asmadeus@codewreck.org>,
+	Christian Schoenebeck <linux_oss@crudebyte.com>,
+	Stefano Garzarella <sgarzare@redhat.com>,
+	Kalle Valo <kvalo@kernel.org>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Vishal Verma <vishal.l.verma@intel.com>,
+	Dave Jiang <dave.jiang@intel.com>, Ira Weiny <ira.weiny@intel.com>,
+	Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	Vivek Goyal <vgoyal@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
+	Anton Yakovlev <anton.yakovlev@opensynergy.com>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	virtualization@lists.linux.dev, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-um@lists.infradead.org,
+	linux-block@vger.kernel.org, linux-bluetooth@vger.kernel.org,
+	linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-gpio@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	iommu@lists.linux.dev, netdev@vger.kernel.org, v9fs@lists.linux.dev,
+	kvm@vger.kernel.org, linux-wireless@vger.kernel.org,
+	nvdimm@lists.linux.dev, linux-remoteproc@vger.kernel.org,
+	linux-scsi@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	alsa-devel@alsa-project.org, linux-sound@vger.kernel.org
+Subject: Re: [PATCH 19/22] rpmsg: virtio: drop owner assignment
+Message-ID: <ZgWPHntosUk+5qac@p14s>
+References: <20240327-module-owner-virtio-v1-0-0feffab77d99@linaro.org>
+ <20240327-module-owner-virtio-v1-19-0feffab77d99@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -85,126 +132,37 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240327141034.3712697-4-wangkefeng.wang@huawei.com>
+In-Reply-To: <20240327-module-owner-virtio-v1-19-0feffab77d99@linaro.org>
 
-Hi Kefeng,
+On Wed, Mar 27, 2024 at 01:41:12PM +0100, Krzysztof Kozlowski wrote:
+> virtio core already sets the .owner, so driver does not need to.
+> 
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+> 
+> ---
+> 
+> Depends on the first patch.
+> ---
+>  drivers/rpmsg/virtio_rpmsg_bus.c | 1 -
+>  1 file changed, 1 deletion(-)
+> 
+> diff --git a/drivers/rpmsg/virtio_rpmsg_bus.c b/drivers/rpmsg/virtio_rpmsg_bus.c
+> index 1062939c3264..e9e8c1f7829f 100644
+> --- a/drivers/rpmsg/virtio_rpmsg_bus.c
+> +++ b/drivers/rpmsg/virtio_rpmsg_bus.c
+> @@ -1053,7 +1053,6 @@ static struct virtio_driver virtio_ipc_driver = {
+>  	.feature_table	= features,
+>  	.feature_table_size = ARRAY_SIZE(features),
+>  	.driver.name	= KBUILD_MODNAME,
+> -	.driver.owner	= THIS_MODULE,
+>  	.id_table	= id_table,
+>  	.probe		= rpmsg_probe,
+>  	.remove		= rpmsg_remove,
 
-kernel test robot noticed the following build errors:
+Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
 
-[auto build test ERROR on linus/master]
-[also build test ERROR on v6.9-rc1]
-[cannot apply to akpm-mm/mm-everything next-20240328]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Kefeng-Wang/mm-migrate-add-isolate_movable_folio/20240327-221513
-base:   linus/master
-patch link:    https://lore.kernel.org/r/20240327141034.3712697-4-wangkefeng.wang%40huawei.com
-patch subject: [PATCH 3/6] mm: remove isolate_lru_page()
-config: x86_64-randconfig-013-20240328 (https://download.01.org/0day-ci/archive/20240328/202403282357.bFSsmYuH-lkp@intel.com/config)
-compiler: gcc-10 (Ubuntu 10.5.0-1ubuntu1) 10.5.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240328/202403282357.bFSsmYuH-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202403282357.bFSsmYuH-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   mm/migrate_device.c: In function 'migrate_device_unmap':
->> mm/migrate_device.c:388:9: error: implicit declaration of function 'isolate_lru_page' [-Werror=implicit-function-declaration]
-     388 |    if (!isolate_lru_page(page)) {
-         |         ^~~~~~~~~~~~~~~~
-   cc1: some warnings being treated as errors
-
-
-vim +/isolate_lru_page +388 mm/migrate_device.c
-
-76cbbead253ddc Christoph Hellwig       2022-02-16  355  
-76cbbead253ddc Christoph Hellwig       2022-02-16  356  /*
-44af0b45d58d7b Alistair Popple         2022-11-11  357   * Unmaps pages for migration. Returns number of source pfns marked as
-44af0b45d58d7b Alistair Popple         2022-11-11  358   * migrating.
-76cbbead253ddc Christoph Hellwig       2022-02-16  359   */
-241f6885965683 Alistair Popple         2022-09-28  360  static unsigned long migrate_device_unmap(unsigned long *src_pfns,
-241f6885965683 Alistair Popple         2022-09-28  361  					  unsigned long npages,
-241f6885965683 Alistair Popple         2022-09-28  362  					  struct page *fault_page)
-76cbbead253ddc Christoph Hellwig       2022-02-16  363  {
-76cbbead253ddc Christoph Hellwig       2022-02-16  364  	unsigned long i, restore = 0;
-76cbbead253ddc Christoph Hellwig       2022-02-16  365  	bool allow_drain = true;
-241f6885965683 Alistair Popple         2022-09-28  366  	unsigned long unmapped = 0;
-76cbbead253ddc Christoph Hellwig       2022-02-16  367  
-76cbbead253ddc Christoph Hellwig       2022-02-16  368  	lru_add_drain();
-76cbbead253ddc Christoph Hellwig       2022-02-16  369  
-76cbbead253ddc Christoph Hellwig       2022-02-16  370  	for (i = 0; i < npages; i++) {
-241f6885965683 Alistair Popple         2022-09-28  371  		struct page *page = migrate_pfn_to_page(src_pfns[i]);
-4b8554c527f3cf Matthew Wilcox (Oracle  2022-01-28  372) 		struct folio *folio;
-76cbbead253ddc Christoph Hellwig       2022-02-16  373  
-44af0b45d58d7b Alistair Popple         2022-11-11  374  		if (!page) {
-44af0b45d58d7b Alistair Popple         2022-11-11  375  			if (src_pfns[i] & MIGRATE_PFN_MIGRATE)
-44af0b45d58d7b Alistair Popple         2022-11-11  376  				unmapped++;
-76cbbead253ddc Christoph Hellwig       2022-02-16  377  			continue;
-44af0b45d58d7b Alistair Popple         2022-11-11  378  		}
-76cbbead253ddc Christoph Hellwig       2022-02-16  379  
-76cbbead253ddc Christoph Hellwig       2022-02-16  380  		/* ZONE_DEVICE pages are not on LRU */
-76cbbead253ddc Christoph Hellwig       2022-02-16  381  		if (!is_zone_device_page(page)) {
-76cbbead253ddc Christoph Hellwig       2022-02-16  382  			if (!PageLRU(page) && allow_drain) {
-1fec6890bf2247 Matthew Wilcox (Oracle  2023-06-21  383) 				/* Drain CPU's lru cache */
-76cbbead253ddc Christoph Hellwig       2022-02-16  384  				lru_add_drain_all();
-76cbbead253ddc Christoph Hellwig       2022-02-16  385  				allow_drain = false;
-76cbbead253ddc Christoph Hellwig       2022-02-16  386  			}
-76cbbead253ddc Christoph Hellwig       2022-02-16  387  
-f7f9c00dfafffd Baolin Wang             2023-02-15 @388  			if (!isolate_lru_page(page)) {
-241f6885965683 Alistair Popple         2022-09-28  389  				src_pfns[i] &= ~MIGRATE_PFN_MIGRATE;
-76cbbead253ddc Christoph Hellwig       2022-02-16  390  				restore++;
-76cbbead253ddc Christoph Hellwig       2022-02-16  391  				continue;
-76cbbead253ddc Christoph Hellwig       2022-02-16  392  			}
-76cbbead253ddc Christoph Hellwig       2022-02-16  393  
-76cbbead253ddc Christoph Hellwig       2022-02-16  394  			/* Drop the reference we took in collect */
-76cbbead253ddc Christoph Hellwig       2022-02-16  395  			put_page(page);
-76cbbead253ddc Christoph Hellwig       2022-02-16  396  		}
-76cbbead253ddc Christoph Hellwig       2022-02-16  397  
-4b8554c527f3cf Matthew Wilcox (Oracle  2022-01-28  398) 		folio = page_folio(page);
-4b8554c527f3cf Matthew Wilcox (Oracle  2022-01-28  399) 		if (folio_mapped(folio))
-4b8554c527f3cf Matthew Wilcox (Oracle  2022-01-28  400) 			try_to_migrate(folio, 0);
-76cbbead253ddc Christoph Hellwig       2022-02-16  401  
-16ce101db85db6 Alistair Popple         2022-09-28  402  		if (page_mapped(page) ||
-241f6885965683 Alistair Popple         2022-09-28  403  		    !migrate_vma_check_page(page, fault_page)) {
-76cbbead253ddc Christoph Hellwig       2022-02-16  404  			if (!is_zone_device_page(page)) {
-76cbbead253ddc Christoph Hellwig       2022-02-16  405  				get_page(page);
-76cbbead253ddc Christoph Hellwig       2022-02-16  406  				putback_lru_page(page);
-76cbbead253ddc Christoph Hellwig       2022-02-16  407  			}
-76cbbead253ddc Christoph Hellwig       2022-02-16  408  
-241f6885965683 Alistair Popple         2022-09-28  409  			src_pfns[i] &= ~MIGRATE_PFN_MIGRATE;
-76cbbead253ddc Christoph Hellwig       2022-02-16  410  			restore++;
-76cbbead253ddc Christoph Hellwig       2022-02-16  411  			continue;
-76cbbead253ddc Christoph Hellwig       2022-02-16  412  		}
-241f6885965683 Alistair Popple         2022-09-28  413  
-241f6885965683 Alistair Popple         2022-09-28  414  		unmapped++;
-76cbbead253ddc Christoph Hellwig       2022-02-16  415  	}
-76cbbead253ddc Christoph Hellwig       2022-02-16  416  
-76cbbead253ddc Christoph Hellwig       2022-02-16  417  	for (i = 0; i < npages && restore; i++) {
-241f6885965683 Alistair Popple         2022-09-28  418  		struct page *page = migrate_pfn_to_page(src_pfns[i]);
-4eecb8b9163df8 Matthew Wilcox (Oracle  2022-01-28  419) 		struct folio *folio;
-76cbbead253ddc Christoph Hellwig       2022-02-16  420  
-241f6885965683 Alistair Popple         2022-09-28  421  		if (!page || (src_pfns[i] & MIGRATE_PFN_MIGRATE))
-76cbbead253ddc Christoph Hellwig       2022-02-16  422  			continue;
-76cbbead253ddc Christoph Hellwig       2022-02-16  423  
-4eecb8b9163df8 Matthew Wilcox (Oracle  2022-01-28  424) 		folio = page_folio(page);
-4eecb8b9163df8 Matthew Wilcox (Oracle  2022-01-28  425) 		remove_migration_ptes(folio, folio, false);
-76cbbead253ddc Christoph Hellwig       2022-02-16  426  
-241f6885965683 Alistair Popple         2022-09-28  427  		src_pfns[i] = 0;
-4eecb8b9163df8 Matthew Wilcox (Oracle  2022-01-28  428) 		folio_unlock(folio);
-4eecb8b9163df8 Matthew Wilcox (Oracle  2022-01-28  429) 		folio_put(folio);
-76cbbead253ddc Christoph Hellwig       2022-02-16  430  		restore--;
-76cbbead253ddc Christoph Hellwig       2022-02-16  431  	}
-241f6885965683 Alistair Popple         2022-09-28  432  
-241f6885965683 Alistair Popple         2022-09-28  433  	return unmapped;
-241f6885965683 Alistair Popple         2022-09-28  434  }
-241f6885965683 Alistair Popple         2022-09-28  435  
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+> 
+> -- 
+> 2.34.1
+> 
 
