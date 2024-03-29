@@ -1,120 +1,192 @@
-Return-Path: <linux-doc+bounces-13024-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-13052-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B5C5890F0A
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Mar 2024 01:15:15 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99A52890F9F
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Mar 2024 01:30:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D43781F23DF1
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Mar 2024 00:15:14 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4F79528EDEC
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Mar 2024 00:30:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1BDBE3D6A;
-	Fri, 29 Mar 2024 00:14:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67EBB848E;
+	Fri, 29 Mar 2024 00:26:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cDpGxoRY"
+	dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b="hAqQAUfQ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFB02182CC;
-	Fri, 29 Mar 2024 00:14:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32EA1F9F5;
+	Fri, 29 Mar 2024 00:26:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.15.19
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711671251; cv=none; b=cCOw/xhfhj8M8mUF9iEBXNf4IGZ4tyvTDtbifeIvIVfCttHagkAKUtlMxd03KVy/Y0t49StbPmbvRBgsv73xUkV7cpKx0CoKarDfYp0FTovUwEDDUGVMxZ8neKhCVUQNwQmiJnd4d73HKjsS3s6x6bDrV3o6hW8HYdaqzNvHiLs=
+	t=1711672004; cv=none; b=Z0xqDqJYhEkkyB9tOO4bXox/VUhvky5ObUWtITD8lksW6pgkPmOrRxsJMANX6QkxhHdUPueilB7SZi+yo3FyT6Tlg9WVJxnkBsvBkhWbLWxVFYkV44vMTtJ0iZTev7VWz9XYLc0+JVd8gGTLqACSCkjGriOtyFPzSV3JZPm5aZY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711671251; c=relaxed/simple;
-	bh=uwufjRPZpufB4WAKz4BvxO1YI+sO9dPrjMMi385iZbk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=cLQxU21nQ++e7XLPoiyXVkxQyFaXloi2Y4Akn+7Hs0tRQ8AIIwqdPwto4bf/HjXKwdi/YBVzKAUQIcuNt6API1rJLQNO84JLM6B7PGNBAc4vi+7IVdz4cCyTz4wQO6uR5wW3Ddfre30GpVsuMYpUgRp/hbyqTS5LWid8aF77+HQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cDpGxoRY; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00DAEC433C7;
-	Fri, 29 Mar 2024 00:14:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1711671250;
-	bh=uwufjRPZpufB4WAKz4BvxO1YI+sO9dPrjMMi385iZbk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=cDpGxoRYxLjokSzdjyr/XpeJME93UBt6tnftJZ4T9xOVKuDufBc1JIllQnvVnYmCq
-	 rx/lZqfrEU0z1yyRPMbiLf3iggfMot6kYdtd1sW6H4c/9Rvvc0R8JsV6hKHSo0H5uR
-	 ybcPFdq+49uL7I7a5fSGuun4iOvzrI+Xf7f0Y3+Kj4EAEayQAD6NjQ4fMdW1r4/Bbr
-	 jDpLucIYlLtlp0NSYXnDT+vRy3+eyJypFk7diu1AkXTOSAQWvuPNh7dKwMVFYaudJ+
-	 GDtKv9kJUrKjhJDjzg7vBbr4HJK9wBUHffXc3W0Xfu8/S84LBrzhQE2EwJqfwjRk6S
-	 VCmPu+AkdbDyA==
-From: Mark Brown <broonie@kernel.org>
-Date: Fri, 29 Mar 2024 00:13:46 +0000
-Subject: [PATCH v6 5/5] KVM: arm64: selftests: Teach get-reg-list about
- FPMR
+	s=arc-20240116; t=1711672004; c=relaxed/simple;
+	bh=/RyTmpEs6u/P4fbexE9k22xTGTCu+7WJCN5jpKzGScE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Ja0+OnShoxiDzLhXA/03c/rQIbouwsx9gdd+Fy3wEPVaa6uWn3F1Fg/t8uuucWDKvgTykNAd1OTZDYMdIbJF/aAvCrl4lYdKxpVVPodNN3XiBntVq5WtqYyOE1jdWADduenfLyHVNyC5yzDRkfuGZz4oAMKKpGSxejLCyaLUj0M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de; spf=pass smtp.mailfrom=gmx.de; dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b=hAqQAUfQ; arc=none smtp.client-ip=212.227.15.19
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+	s=s31663417; t=1711671991; x=1712276791; i=w_armin@gmx.de;
+	bh=hH9tb/ABgMBjmS58aLfFbzUo9NffBHa2IJqSYOGE9QE=;
+	h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+	 In-Reply-To;
+	b=hAqQAUfQh8/He0hCcxMPrvi/OLwfmKiZn1QDqkAcwRUeYxLhda2W3FvbVes60iun
+	 vz9CKchqmePbEMqnrXH2njVu5N9YpdVv2uFFxpGeHXRsvgDX0HsWMWn26QPfBiW4B
+	 oyRJ9eARbOOl+UgpHghhQcQwIpABN3gzm+pNlgaWDRhiFKscY+eujgnolpsNKm/iT
+	 mmc+97EhASOPObhSdTPHjPZ744wepl3RDgt5aD3ai/OAoU6Ry7+Wc7cbBCUEGtfc2
+	 R+mraBp9g4BrgYhA2xrpbb8fCjPg94mVCw+2raomyInHvlrifX9IK0RzKKSW7g9Qt
+	 3Y1xzW7c0F/vhU4HcA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [141.30.226.129] ([141.30.226.129]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MFsZ3-1s44QC2sd5-00HRsm; Fri, 29
+ Mar 2024 01:26:31 +0100
+Message-ID: <3e41e132-98b9-496d-987f-6838289926b6@gmx.de>
+Date: Fri, 29 Mar 2024 01:26:26 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] platform/x86: xiaomi-wmi: Fix race condition when
+ reporting key events
+To: Kuppuswamy Sathyanarayanan <sathyanarayanan.kuppuswamy@linux.intel.com>,
+ hdegoede@redhat.com, ilpo.jarvinen@linux.intel.com
+Cc: corbet@lwn.net, linux-doc@vger.kernel.org,
+ platform-driver-x86@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20240328012336.145612-1-W_Armin@gmx.de>
+ <20240328012336.145612-2-W_Armin@gmx.de>
+ <b82ded95-d599-4ef7-b984-ac4d8a5c2370@linux.intel.com>
+Content-Language: en-US
+From: Armin Wolf <W_Armin@gmx.de>
+In-Reply-To: <b82ded95-d599-4ef7-b984-ac4d8a5c2370@linux.intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240329-arm64-2023-dpisa-v6-5-ba42db6c27f3@kernel.org>
-References: <20240329-arm64-2023-dpisa-v6-0-ba42db6c27f3@kernel.org>
-In-Reply-To: <20240329-arm64-2023-dpisa-v6-0-ba42db6c27f3@kernel.org>
-To: Catalin Marinas <catalin.marinas@arm.com>, 
- Will Deacon <will@kernel.org>, Marc Zyngier <maz@kernel.org>, 
- Oliver Upton <oliver.upton@linux.dev>, James Morse <james.morse@arm.com>, 
- Suzuki K Poulose <suzuki.poulose@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <shuah@kernel.org>
-Cc: linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
- Dave Martin <Dave.Martin@arm.com>, kvmarm@lists.linux.dev, 
- linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- Mark Brown <broonie@kernel.org>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1321; i=broonie@kernel.org;
- h=from:subject:message-id; bh=uwufjRPZpufB4WAKz4BvxO1YI+sO9dPrjMMi385iZbk=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBmBge+eqk74AMtUMIBPiwGI+pi1wDTEcHLlC4p4q7p
- myPQfbeJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCZgYHvgAKCRAk1otyXVSH0NW5B/
- 0TcU6VavkFfCBJ8vGg2RX9vZ4t77ShVUFmfqiEzDq+KrtNcMcCRhCD6mQXTT/JcxC1Fa6P/PPFjApS
- fFaHMzOG+YHH0ngniUKKS/oLfDAK0z++QRPzBKHLZPzeb3t0Amcim7X703CJdZLdN+bivsNFzkgcqD
- zVgJPTVIrRdEE68SOE/l2KZgFuNqa8YT4v2wEHHG942seRV3ovb6Nt3UmWz1P6w1YRgpxWq+xflPVb
- 1m4RMvSuUwHBEIOLmV4qA0QWlRPEE0gUF+hJIduSa8qLmxJEdxHN/0JRRR86TDzL82F3AJvX308o8V
- /lE+aiJZcM3rN2ebnTtAOrIAl8XjMQ
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+X-Provags-ID: V03:K1:bvn4eBut9GPNTsu7g3IOMs00gYVqoM8iXVOzxQC20UlpStf8ATf
+ OjZx97NzIvW38hCxN+OFCdi1zqGPc6KRVOor/1pYPuXokswLGpySVRZcIPuwKGKxAJqOBqH
+ Hi+TkISNWRfBea4Pwrb1m+2tY2jyYx4pikx7UUtBOlgJTpNuGK/3ye/2x3+Zqs7n0M1NdCQ
+ lYWYGiFK6sJdKQg1b79mw==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:GVUMHmdiY4Y=;rsjU+U4UG60bsDxcEsJbQ4VpeSj
+ prrDNQB1FoJNNWvmX+udk6qVn8WFxVxVrrD5igsZ6XpiMhzpG569xlSW6F+rcVRSb1Efas9C9
+ uyo+au1cecDbHqjpj5OdN8jdHbPbh+tpJaiJ0Vk5DaCdmzEuXQHJQ80oiO9GlHPV7uqy/LEP5
+ sR08m/Af97SlkcJsTJ8QZ+1PhvdjBfut5ao/Kfs6Kjy6zhYiqQstq4poySLTNIwrzyQJtIV/I
+ b1S2EPumMcLLtKpwi1vc4U0xeHjKc23epg42RGyick3d+yMecb5/YTm21Pmton439HzjI1MgC
+ Ar3fdCLyW4TsQuxft5A7S/69SAcmeSr1NXujIQsL1AawOVmqT4/el/ncJbdNhiMa2HgstT2pv
+ 9P0ACIlYOtprqXLY7F2sGdf0yXQI+DNhljl+3Taoo/fyNz7n3xEQr/kFOcuydXwcCXt36rz04
+ rD/i9laElSe7kUB2a2e2ssbUreocCzDibwNnesaOVPS2zaIuvOQWDnWWqn3HC9q5Uf4nN+gvW
+ ABcnEi1aGo4UUTVJNldnpnkS5qNxDBD9cQqDd/aMYCDWIbTUqd6tln6EK7pFnJgsU3PZGQSFp
+ kLpbkoAyCXnvgdvSuv0fbZ0awSA5sCyStYRnIfmw+akW2Y6SyDe+v5BIYk52g9B9kEMJgNDBO
+ boy4XXjr3+LxN2AuLNkV2Po/FEJYpyl+h9D2Wh0F2MewxzcIxjbgJaAYwmnZOeSLjSWWRJEY+
+ l7AHkylKvBT8PrwpJkYGTWhjJnCh3K0VZAQz3vinWz79D/Xd1rmByd56uGCQNeVeMBvCGVOMl
+ 2FZJD3tWpyWqB8iHn6HNSzldv7KY4cMyD+WWbQMN01T28=
 
-FEAT_FPMR defines a new register FMPR which is available at all ELs and is
-discovered via ID_AA64PFR2_EL1.FPMR, add this to the set of registers that
-get-reg-list knows to check for with the required identification register
-depdendency.
+Am 28.03.24 um 03:58 schrieb Kuppuswamy Sathyanarayanan:
 
-Signed-off-by: Mark Brown <broonie@kernel.org>
----
- tools/testing/selftests/kvm/aarch64/get-reg-list.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+> On 3/27/24 6:23 PM, Armin Wolf wrote:
+>> Multiple WMI events can be received concurrently, so multiple instances
+>> of xiaomi_wmi_notify() can be active at the same time. Since the input
+>> device is shared between those handlers, the key input sequence can be
+>> disturbed.
+> Since locking is needed for all notify related calls in all WMI drivers,
+> is there a generic way to add this support in WMI core driver? Like
+> defining some common function which will hold the lock and call
+> driver specific notify handler? I am just thinking aloud.. If it is not
+> feasible, then it is fine.
 
-diff --git a/tools/testing/selftests/kvm/aarch64/get-reg-list.c b/tools/testing/selftests/kvm/aarch64/get-reg-list.c
-index 71ea6ecec7ce..1e43511d1440 100644
---- a/tools/testing/selftests/kvm/aarch64/get-reg-list.c
-+++ b/tools/testing/selftests/kvm/aarch64/get-reg-list.c
-@@ -40,6 +40,12 @@ static struct feature_id_reg feat_id_regs[] = {
- 		ARM64_SYS_REG(3, 0, 0, 7, 3),	/* ID_AA64MMFR3_EL1 */
- 		4,
- 		1
-+	},
-+	{
-+		ARM64_SYS_REG(3, 3, 4, 4, 2),	/* FPMR */
-+		ARM64_SYS_REG(3, 0, 0, 4, 2),	/* ID_AA64PFR2_EL1 */
-+		32,
-+		1
- 	}
- };
- 
-@@ -481,6 +487,7 @@ static __u64 base_regs[] = {
- 	ARM64_SYS_REG(3, 3, 14, 2, 1),	/* CNTP_CTL_EL0 */
- 	ARM64_SYS_REG(3, 3, 14, 2, 2),	/* CNTP_CVAL_EL0 */
- 	ARM64_SYS_REG(3, 4, 3, 0, 0),	/* DACR32_EL2 */
-+	ARM64_SYS_REG(3, 3, 4, 4, 2),	/* FPMR */
- 	ARM64_SYS_REG(3, 4, 5, 0, 1),	/* IFSR32_EL2 */
- 	ARM64_SYS_REG(3, 4, 5, 3, 0),	/* FPEXC32_EL2 */
- };
+Hi,
 
--- 
-2.30.2
+actually, not all notify-related calls need locking. It just so happens that
+input drivers must protect their key sequence, other WMI drivers might not need
+to use any locking at all.
 
+I would prefer if the WMI driver does the locking, so it can be optimized for
+each WMI driver.
+
+Thanks,
+Armin Wolf
+
+>> Fix this by protecting the key input sequence with a mutex.
+>>
+>> Compile-tested only.
+>>
+>> Fixes: edb73f4f0247 ("platform/x86: wmi: add Xiaomi WMI key driver")
+>> Signed-off-by: Armin Wolf <W_Armin@gmx.de>
+>> ---
+>>   drivers/platform/x86/xiaomi-wmi.c | 18 ++++++++++++++++++
+>>   1 file changed, 18 insertions(+)
+>>
+>> diff --git a/drivers/platform/x86/xiaomi-wmi.c b/drivers/platform/x86/xiaomi-wmi.c
+>> index 1f5f108d87c0..7efbdc111803 100644
+>> --- a/drivers/platform/x86/xiaomi-wmi.c
+>> +++ b/drivers/platform/x86/xiaomi-wmi.c
+>> @@ -2,8 +2,10 @@
+>>   /* WMI driver for Xiaomi Laptops */
+>>
+>>   #include <linux/acpi.h>
+>> +#include <linux/device.h>
+>>   #include <linux/input.h>
+>>   #include <linux/module.h>
+>> +#include <linux/mutex.h>
+>>   #include <linux/wmi.h>
+>>
+>>   #include <uapi/linux/input-event-codes.h>
+>> @@ -20,12 +22,21 @@
+>>
+>>   struct xiaomi_wmi {
+>>   	struct input_dev *input_dev;
+>> +	struct mutex key_lock;	/* Protects the key event sequence */
+>>   	unsigned int key_code;
+>>   };
+>>
+>> +static void xiaomi_mutex_destroy(void *data)
+>> +{
+>> +	struct mutex *lock = data;
+>> +
+>> +	mutex_destroy(lock);
+>> +}
+>> +
+>>   static int xiaomi_wmi_probe(struct wmi_device *wdev, const void *context)
+>>   {
+>>   	struct xiaomi_wmi *data;
+>> +	int ret;
+>>
+>>   	if (wdev == NULL || context == NULL)
+>>   		return -EINVAL;
+>> @@ -35,6 +46,11 @@ static int xiaomi_wmi_probe(struct wmi_device *wdev, const void *context)
+>>   		return -ENOMEM;
+>>   	dev_set_drvdata(&wdev->dev, data);
+>>
+>> +	mutex_init(&data->key_lock);
+>> +	ret = devm_add_action_or_reset(&wdev->dev, xiaomi_mutex_destroy, &data->key_lock);
+>> +	if (ret < 0)
+>> +		return ret;
+>> +
+>>   	data->input_dev = devm_input_allocate_device(&wdev->dev);
+>>   	if (data->input_dev == NULL)
+>>   		return -ENOMEM;
+>> @@ -59,10 +75,12 @@ static void xiaomi_wmi_notify(struct wmi_device *wdev, union acpi_object *dummy)
+>>   	if (data == NULL)
+>>   		return;
+>>
+>> +	mutex_lock(&data->key_lock);
+>>   	input_report_key(data->input_dev, data->key_code, 1);
+>>   	input_sync(data->input_dev);
+>>   	input_report_key(data->input_dev, data->key_code, 0);
+>>   	input_sync(data->input_dev);
+>> +	mutex_unlock(&data->key_lock);
+>>   }
+>>
+>>   static const struct wmi_device_id xiaomi_wmi_id_table[] = {
+>> --
+>> 2.39.2
+>>
+>>
 
