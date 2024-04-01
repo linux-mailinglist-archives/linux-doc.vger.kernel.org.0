@@ -1,140 +1,148 @@
-Return-Path: <linux-doc+bounces-13224-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-13226-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F16E893973
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Apr 2024 11:39:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69FA98939BF
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Apr 2024 11:48:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C0E951C20937
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Apr 2024 09:39:02 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9B7901C215F8
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Apr 2024 09:48:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE1B210788;
-	Mon,  1 Apr 2024 09:38:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 592D710A09;
+	Mon,  1 Apr 2024 09:48:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="bOkBk/4p"
+	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="IKkpukb8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3387DDB6;
-	Mon,  1 Apr 2024 09:38:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 905DE1095A;
+	Mon,  1 Apr 2024 09:48:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.235.227.194
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711964338; cv=none; b=LpqzrC1DX79P2eUAhyKq85/hmiUW4Hm9OzTvmjqjX6qIcAtyl13og8ssS04QCPBkm0sztF7jT7t+22whRyedySghZ7m4b5NZJUdb92DKFOBc9HFntSpm+xufXr01gVOS5P6ZLOTDlcD7Y3EReDMwBq+vbnrJSJ10FY6mbCTOsxs=
+	t=1711964889; cv=none; b=iMxA5RUze03NOGMcnJ8ey3HJAXlIoaLgkq1TDpE2oLgpzPzsDKZFmDIV8yoELl0JZF51VeMpx6OZ9S5yFPhw1SC6NncsC+OXqr4PQIgzbBj0QmfxL/gViIw+e1F+SJsPR86onPtH3gfvHqGqYe2hJOoIQ9gNc50YJpvsih3zuLM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711964338; c=relaxed/simple;
-	bh=kiZVMGBa1eAUPnAXQqslxytPb57aNml6Kj1vn0W2qBI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=W48ATV1en7xb0wr3KZi6Augs7jMHJTOUT7Cjxr7pptZRCYXw0aO1dEruHBt7+IA7BQj4aRJH4VfYYqgGa31vr69dUV8NpszBjQX1fmZzfc+/5s3LW30nNprU1Cghpboj6bEdF7BOxZLw6m/TVNhJtckZTPUxs69XPhbvEc1iVLg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=bOkBk/4p; arc=none smtp.client-ip=192.198.163.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1711964337; x=1743500337;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=kiZVMGBa1eAUPnAXQqslxytPb57aNml6Kj1vn0W2qBI=;
-  b=bOkBk/4pJQnME2L3qzPh3C4freXAxkNMnpA9/BrNigN0fqjhQMZrXlcq
-   EQ38eaKzS+DfPE2UwU6Y1VslNYZb5Gp9tfhSA8jSN89HS0ozt/7Ij5j4i
-   /LHvZbor2qK6iKz5KtA0f0mhiIY2UcuaT4zfmzX/LEMEOOJ6/fXWbjzYl
-   LF4GzFGI1rXuGc5gh1+tNZ/2VCc76lA5hyBB9fL5itmKUZrMxOKdyWu2B
-   4SUSCqPPJGWcZM0zWEv+1NBl9jvZ/oCnxK1bXEBjUt5yGN3fyMh0qaiql
-   c9tU337B0Sz5EYmg/uAlX06/cTnlccmpZuswSEAJHZQZUJbyUArXcMUaj
-   Q==;
-X-CSE-ConnectionGUID: 6AdeUXfXTI6IBo8xfElSbA==
-X-CSE-MsgGUID: ZjLlUBF7QaChgdkx3QVRQw==
-X-IronPort-AV: E=McAfee;i="6600,9927,11030"; a="10043267"
-X-IronPort-AV: E=Sophos;i="6.07,171,1708416000"; 
-   d="scan'208";a="10043267"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Apr 2024 02:38:56 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.07,171,1708416000"; 
-   d="scan'208";a="48858934"
-Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.165])
-  by fmviesa001.fm.intel.com with ESMTP; 01 Apr 2024 02:38:54 -0700
-Date: Mon, 1 Apr 2024 17:34:04 +0800
-From: Xu Yilun <yilun.xu@linux.intel.com>
-To: Marco Pagani <marpagan@redhat.com>
-Cc: Moritz Fischer <mdf@kernel.org>, Wu Hao <hao.wu@intel.com>,
-	Xu Yilun <yilun.xu@intel.com>, Tom Rix <trix@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Alan Tull <atull@opensource.altera.com>, linux-fpga@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] fpga: region: add owner module and take its refcount
-Message-ID: <Zgp/jNst2yuXEbpU@yilunxu-OptiPlex-7050>
-References: <20240327160022.202934-1-marpagan@redhat.com>
+	s=arc-20240116; t=1711964889; c=relaxed/simple;
+	bh=06wOk/U0MualMJ4bunj44L58B9nb+s9Iaqf0BY9Iihk=;
+	h=Message-ID:Date:MIME-Version:Cc:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=R0fbu7d0cnvSSeCj3pCBCiwTZkqtlB0XIWrn59lYf7ez8ee3gzmrVeKm1j3rIsioVzGqIXa3ofzsMpcbtw5Vexqdb8RoimQje0WX9K0wZ1LnLPsPeaMuX612eLaUce6H4YpULPJoreYQraGH9UGwICmVPk39VF6Ck1/EyuxJV0M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=IKkpukb8; arc=none smtp.client-ip=46.235.227.194
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1711964885;
+	bh=06wOk/U0MualMJ4bunj44L58B9nb+s9Iaqf0BY9Iihk=;
+	h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+	b=IKkpukb884sj8Eg4Yw/1yM6F+jVI41WbIFR5wppl38DPIFzg7d+snPhJSh90a3YbB
+	 6UxRTezpSmT4wNQmWC70hAfP/JxH0Ch921mvOmRMG6ao7uQPIuZ7OsFD7KR2aH5N87
+	 tG0r+nrikfEXbQvrvlxX1XWEKAWH5gay7UPdFl6DDuIhYIr3WnRTZy/d4En7a/hkhB
+	 ryU3/OINHUKgVPtbeLhy24Ru35rCA0iPfjdVytimtX+uverHEJe3H4njiECn3UAPIe
+	 pNY86YqfqdyTKZh6NivIn+8POtsgH3Jxd+ULYNYtQQqgOUeGD7ZqZngxjW5K5IDaXk
+	 qoDfDq7BJ5Z5Q==
+Received: from [10.193.1.1] (broslavsky.collaboradmins.com [68.183.210.73])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: usama.anjum)
+	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 8BFC2378148F;
+	Mon,  1 Apr 2024 09:47:23 +0000 (UTC)
+Message-ID: <ef72ae20-6b68-496a-a819-8818ade0d433@collabora.com>
+Date: Mon, 1 Apr 2024 14:46:13 +0500
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240327160022.202934-1-marpagan@redhat.com>
+User-Agent: Mozilla Thunderbird
+Cc: Muhammad Usama Anjum <usama.anjum@collabora.com>,
+ paul.walmsley@sifive.com, rick.p.edgecombe@intel.com, broonie@kernel.org,
+ Szabolcs.Nagy@arm.com, kito.cheng@sifive.com, keescook@chromium.org,
+ ajones@ventanamicro.com, conor.dooley@microchip.com, cleger@rivosinc.com,
+ atishp@atishpatra.org, alex@ghiti.fr, bjorn@rivosinc.com,
+ alexghiti@rivosinc.com, samuel.holland@sifive.com, palmer@sifive.com,
+ conor@kernel.org, linux-doc@vger.kernel.org,
+ linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-mm@kvack.org, linux-arch@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, corbet@lwn.net,
+ tech-j-ext@lists.risc-v.org, palmer@dabbelt.com, aou@eecs.berkeley.edu,
+ robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, oleg@redhat.com,
+ akpm@linux-foundation.org, arnd@arndb.de, ebiederm@xmission.com,
+ Liam.Howlett@oracle.com, vbabka@suse.cz, lstoakes@gmail.com,
+ shuah@kernel.org, brauner@kernel.org, andy.chiu@sifive.com,
+ jerry.shih@sifive.com, hankuan.chen@sifive.com, greentime.hu@sifive.com,
+ evan@rivosinc.com, xiao.w.wang@intel.com, charlie@rivosinc.com,
+ apatel@ventanamicro.com, mchitale@ventanamicro.com,
+ dbarboza@ventanamicro.com, sameo@rivosinc.com, shikemeng@huaweicloud.com,
+ willy@infradead.org, vincent.chen@sifive.com, guoren@kernel.org,
+ samitolvanen@google.com, songshuaishuai@tinylab.org, gerg@kernel.org,
+ heiko@sntech.de, bhe@redhat.com, jeeheng.sia@starfivetech.com,
+ cyy@cyyself.name, maskray@google.com, ancientmodern4@gmail.com,
+ mathis.salmen@matsal.de, cuiyunhui@bytedance.com, bgray@linux.ibm.com,
+ mpe@ellerman.id.au, baruch@tkos.co.il, alx@kernel.org, david@redhat.com,
+ catalin.marinas@arm.com, revest@chromium.org, josh@joshtriplett.org,
+ shr@devkernel.io, deller@gmx.de, omosnace@redhat.com, ojeda@kernel.org,
+ jhubbard@nvidia.com
+Subject: Re: [PATCH v2 27/27] kselftest/riscv: kselftest for user mode cfi
+To: Deepak Gupta <debug@rivosinc.com>
+References: <20240329044459.3990638-1-debug@rivosinc.com>
+ <20240329044459.3990638-28-debug@rivosinc.com>
+ <4b38393a-f69d-4a77-a896-b6cd42c7edcf@collabora.com>
+ <CAKC1njQ_RU=uHhrna=MFVdjAMjjQNqZWnkjPoJvO7CxtPMeNuQ@mail.gmail.com>
+Content-Language: en-US
+From: Muhammad Usama Anjum <usama.anjum@collabora.com>
+In-Reply-To: <CAKC1njQ_RU=uHhrna=MFVdjAMjjQNqZWnkjPoJvO7CxtPMeNuQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Mar 27, 2024 at 05:00:20PM +0100, Marco Pagani wrote:
-> The current implementation of the fpga region assumes that the low-level
-> module registers a driver for the parent device and uses its owner pointer
-> to take the module's refcount. This approach is problematic since it can
-> lead to a null pointer dereference while attempting to get the region
-> during programming if the parent device does not have a driver.
+On 3/30/24 1:02 AM, Deepak Gupta wrote:
+> On Fri, Mar 29, 2024 at 12:50 PM Muhammad Usama Anjum
+> <usama.anjum@collabora.com> wrote:
+>>
+>> On 3/29/24 9:44 AM, Deepak Gupta wrote:
+>>> Adds kselftest for RISC-V control flow integrity implementation for user
+>>> mode. There is not a lot going on in kernel for enabling landing pad for
+>>> user mode. Thus kselftest simply enables landing pad for the binary and
+>>> a signal handler is registered for SIGSEGV. Any control flow violation are
+>>> reported as SIGSEGV with si_code = SEGV_CPERR. Test will fail on recieving
+>>> any SEGV_CPERR. Shadow stack part has more changes in kernel and thus there
+>>> are separate tests for that
+>>>       - enable and disable
+>>>       - Exercise `map_shadow_stack` syscall
+>>>       - `fork` test to make sure COW works for shadow stack pages
+>>>       - gup tests
+>>>         As of today kernel uses FOLL_FORCE when access happens to memory via
+>>>         /proc/<pid>/mem. Not breaking that for shadow stack
+>>>       - signal test. Make sure signal delivery results in token creation on
+>>>       shadow stack and consumes (and verifies) token on sigreturn
+>>>     - shadow stack protection test. attempts to write using regular store
+>>>         instruction on shadow stack memory must result in access faults
+>>>
+>>> Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+>>> ---
+>>>  tools/testing/selftests/riscv/Makefile        |   2 +-
+>>>  tools/testing/selftests/riscv/cfi/Makefile    |  10 +
+>>>  .../testing/selftests/riscv/cfi/cfi_rv_test.h |  85 ++++
+>>>  .../selftests/riscv/cfi/riscv_cfi_test.c      |  91 +++++
+>>>  .../testing/selftests/riscv/cfi/shadowstack.c | 376 ++++++++++++++++++
+>>>  .../testing/selftests/riscv/cfi/shadowstack.h |  39 ++
+>> Please add generated binaries in the .gitignore files.
 > 
-> To address this problem, add a module owner pointer to the fpga_region
-> struct and use it to take the module's refcount. Modify the functions for
-> registering a region to take an additional owner module parameter and
-> rename them to avoid conflicts. Use the old function names for helper
-> macros that automatically set the module that registers the region as the
-> owner. This ensures compatibility with existing low-level control modules
-> and reduces the chances of registering a region without setting the owner.
+> hmm...
+> I don't see binary as part of the patch. Which file are you referring
+> to here being binary?
+shadowstack would be generated by the build. Create a .gitignore file and
+add it there. For example, look at
+tools/testing/selftests/riscv/vector/.gitignore to understand.
+
+
 > 
-> Also, update the documentation to keep it consistent with the new interface
-> for registering an fpga region.
+>>
 > 
-> Other changes: unlock the mutex before calling put_device() in
-> fpga_region_put() to avoid potential use after release issues.
 
-Please try not to mix different changes in one patch, especially for
-a "bug fix" as you said.
-
-And I do have concern about the fix, see below.
-
-[...]
-
-> @@ -53,7 +53,7 @@ static struct fpga_region *fpga_region_get(struct fpga_region *region)
->  	}
->  
->  	get_device(dev);
-> -	if (!try_module_get(dev->parent->driver->owner)) {
-> +	if (!try_module_get(region->br_owner)) {
->  		put_device(dev);
->  		mutex_unlock(&region->mutex);
->  		return ERR_PTR(-ENODEV);
-> @@ -75,9 +75,9 @@ static void fpga_region_put(struct fpga_region *region)
->  
->  	dev_dbg(dev, "put\n");
->  
-> -	module_put(dev->parent->driver->owner);
-> -	put_device(dev);
-> +	module_put(region->br_owner);
->  	mutex_unlock(&region->mutex);
-
-If there is concern the region would be freed after put_device(), then
-why still keep the sequence in fpga_region_get()?
-
-And is it possible region is freed before get_device() in
-fpga_region_get()?
-
-Or we should clearly document how/when to use these functions?
-
-Thanks,
-Yilun
-
-> +	put_device(dev);
->  }
+-- 
+BR,
+Muhammad Usama Anjum
 
