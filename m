@@ -1,182 +1,140 @@
-Return-Path: <linux-doc+bounces-13220-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-13224-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63991893961
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Apr 2024 11:29:57 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F16E893973
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Apr 2024 11:39:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EF68228206C
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Apr 2024 09:29:55 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C0E951C20937
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Apr 2024 09:39:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D41110958;
-	Mon,  1 Apr 2024 09:29:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE1B210788;
+	Mon,  1 Apr 2024 09:38:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="RD52WKjU"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="bOkBk/4p"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4238D10788;
-	Mon,  1 Apr 2024 09:29:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3387DDB6;
+	Mon,  1 Apr 2024 09:38:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1711963791; cv=none; b=Ujn4PEqc1aP/bxtzrZPbojMNl4EyjmkDVEMvp1I0Ry8SSsScILCJlKHucf+AGzR1Xyu0iWpeZOTFoe5dMg0pIEiJNJL2Yhec1IiGi5UvucXRB2j7TjImBdPOb820X60jN8Jdz13x9fWLimXxUsyyRR8BgyNTnvotZydY84h8VFA=
+	t=1711964338; cv=none; b=LpqzrC1DX79P2eUAhyKq85/hmiUW4Hm9OzTvmjqjX6qIcAtyl13og8ssS04QCPBkm0sztF7jT7t+22whRyedySghZ7m4b5NZJUdb92DKFOBc9HFntSpm+xufXr01gVOS5P6ZLOTDlcD7Y3EReDMwBq+vbnrJSJ10FY6mbCTOsxs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1711963791; c=relaxed/simple;
-	bh=1xbwl3deUI8EugEpHFtd11RFuw1yy3rmyznd1Szn2Z8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=uadVLD49qJuEP8LM+izAkLpET2yq6Q5othscvx971qiEl0GOiNsIp8mHF4eAvKfNVRuQIrbh2DClFeufMIxdo1IhPp3SgspMvD9IWX6OsYPLX4xc0IOakqF16Atdlya64cYNEP5FLFOgqIITvoUZYSYYHA2KfyJrAYMTBS/49gs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=RD52WKjU; arc=none smtp.client-ip=80.237.130.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:From:Sender:
-	Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:In-Reply-To:
-	References; bh=sBR4AUtbOWGkAitvBQQqQOWJXiRUJp1cu3pYde9QQ8Q=; t=1711963789;
-	x=1712395789; b=RD52WKjUiqye7VkoUPvw7NdOInJIbP1bt0qKHjN2htkjQFlYNMeCGP3EiBnvk
-	KzyMAP0U8P1GS9MXe2S/XCN2bP8z/KAQKrmjhgQGcruADaWmNVysKNnVEN8ZVHEdNiCNOZqf+MNUl
-	f5Pl7cr+13e1K/8NkIdsdo+ghUfCBeL792zBTXVp7RF7R+aEQT1KABF5Tm8ptk+ueIGeewxY4N5mm
-	UM16QXltQaQLqnVfP6PBveTm2woblkHxhDr36WvxP+FZBTmA5HEIgwQtFHQfmHLyzTi5cjF0hFS4m
-	YnWy8XT0UQ/w61+Xr6VSR+C5Wifo25U2Jyx4HqR9VAm/Dx6ttQ==;
-Received: from ip4d148da6.dynamic.kabel-deutschland.de ([77.20.141.166] helo=truhe.fritz.box); authenticated
-	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	id 1rrDz7-0001Lq-Iw; Mon, 01 Apr 2024 11:29:45 +0200
-From: Thorsten Leemhuis <linux@leemhuis.info>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: regressions@lists.linux.dev,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Bagas Sanjaya <bagasdotme@gmail.com>,
-	=?UTF-8?q?Petr=20Tesa=C5=99=C3=ADk?= <petr@tesarici.cz>
-Subject: [PATCH v1 3/3] docs: verify/bisect: describe how to use a build host
-Date: Mon,  1 Apr 2024 11:29:43 +0200
-Message-ID: <0d863aeea2f19f1eac460e503bd09ed2519d09a5.1711963460.git.linux@leemhuis.info>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <cover.1711963460.git.linux@leemhuis.info>
-References: <cover.1711963460.git.linux@leemhuis.info>
+	s=arc-20240116; t=1711964338; c=relaxed/simple;
+	bh=kiZVMGBa1eAUPnAXQqslxytPb57aNml6Kj1vn0W2qBI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=W48ATV1en7xb0wr3KZi6Augs7jMHJTOUT7Cjxr7pptZRCYXw0aO1dEruHBt7+IA7BQj4aRJH4VfYYqgGa31vr69dUV8NpszBjQX1fmZzfc+/5s3LW30nNprU1Cghpboj6bEdF7BOxZLw6m/TVNhJtckZTPUxs69XPhbvEc1iVLg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=bOkBk/4p; arc=none smtp.client-ip=192.198.163.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1711964337; x=1743500337;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=kiZVMGBa1eAUPnAXQqslxytPb57aNml6Kj1vn0W2qBI=;
+  b=bOkBk/4pJQnME2L3qzPh3C4freXAxkNMnpA9/BrNigN0fqjhQMZrXlcq
+   EQ38eaKzS+DfPE2UwU6Y1VslNYZb5Gp9tfhSA8jSN89HS0ozt/7Ij5j4i
+   /LHvZbor2qK6iKz5KtA0f0mhiIY2UcuaT4zfmzX/LEMEOOJ6/fXWbjzYl
+   LF4GzFGI1rXuGc5gh1+tNZ/2VCc76lA5hyBB9fL5itmKUZrMxOKdyWu2B
+   4SUSCqPPJGWcZM0zWEv+1NBl9jvZ/oCnxK1bXEBjUt5yGN3fyMh0qaiql
+   c9tU337B0Sz5EYmg/uAlX06/cTnlccmpZuswSEAJHZQZUJbyUArXcMUaj
+   Q==;
+X-CSE-ConnectionGUID: 6AdeUXfXTI6IBo8xfElSbA==
+X-CSE-MsgGUID: ZjLlUBF7QaChgdkx3QVRQw==
+X-IronPort-AV: E=McAfee;i="6600,9927,11030"; a="10043267"
+X-IronPort-AV: E=Sophos;i="6.07,171,1708416000"; 
+   d="scan'208";a="10043267"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Apr 2024 02:38:56 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.07,171,1708416000"; 
+   d="scan'208";a="48858934"
+Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.165])
+  by fmviesa001.fm.intel.com with ESMTP; 01 Apr 2024 02:38:54 -0700
+Date: Mon, 1 Apr 2024 17:34:04 +0800
+From: Xu Yilun <yilun.xu@linux.intel.com>
+To: Marco Pagani <marpagan@redhat.com>
+Cc: Moritz Fischer <mdf@kernel.org>, Wu Hao <hao.wu@intel.com>,
+	Xu Yilun <yilun.xu@intel.com>, Tom Rix <trix@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Alan Tull <atull@opensource.altera.com>, linux-fpga@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] fpga: region: add owner module and take its refcount
+Message-ID: <Zgp/jNst2yuXEbpU@yilunxu-OptiPlex-7050>
+References: <20240327160022.202934-1-marpagan@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1711963789;9169144f;
-X-HE-SMSGID: 1rrDz7-0001Lq-Iw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240327160022.202934-1-marpagan@redhat.com>
 
-Describe how to build kernels on another system (with and without
-cross-compiling), as building locally can be quite painfully on some
-slow systems. This is done in an add-on section, as it would make the
-step-by-step guide to complicated if this special case would be
-described there.
+On Wed, Mar 27, 2024 at 05:00:20PM +0100, Marco Pagani wrote:
+> The current implementation of the fpga region assumes that the low-level
+> module registers a driver for the parent device and uses its owner pointer
+> to take the module's refcount. This approach is problematic since it can
+> lead to a null pointer dereference while attempting to get the region
+> during programming if the parent device does not have a driver.
+> 
+> To address this problem, add a module owner pointer to the fpga_region
+> struct and use it to take the module's refcount. Modify the functions for
+> registering a region to take an additional owner module parameter and
+> rename them to avoid conflicts. Use the old function names for helper
+> macros that automatically set the module that registers the region as the
+> owner. This ensures compatibility with existing low-level control modules
+> and reduces the chances of registering a region without setting the owner.
+> 
+> Also, update the documentation to keep it consistent with the new interface
+> for registering an fpga region.
+> 
+> Other changes: unlock the mutex before calling put_device() in
+> fpga_region_put() to avoid potential use after release issues.
 
-Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
----
- .../verify-bugs-and-bisect-regressions.rst    | 78 ++++++++++++++++++-
- 1 file changed, 74 insertions(+), 4 deletions(-)
+Please try not to mix different changes in one patch, especially for
+a "bug fix" as you said.
 
-diff --git a/Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst b/Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst
-index 24a54fcd6abe1b..f371c48e9ef603 100644
---- a/Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst
-+++ b/Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst
-@@ -275,6 +275,10 @@ Preparations: set up everything to build your own kernels
- 
- The following steps lay the groundwork for all further tasks.
- 
-+Note: the instructions assume you are building and testing on the same
-+machine; if you want to compile the kernel on another system, check
-+:ref:`Build kernels on a different machine <buildhost_bis>` below.
-+
- .. _backup_bissbs:
- 
- * Create a fresh backup and put system repair and restore tools at hand, just
-@@ -2096,11 +2100,77 @@ problems will arise if the kernelrelease identifier exceeds 63 characters.
- [:ref:`back to step-by-step guide <introoptional_bissbs>`].
- 
- 
--Additional reading material
--===========================
-+Additional information
-+======================
-+
-+.. _buildhost_bis:
-+
-+Build kernels on a different machine
-+------------------------------------
-+
-+To compile kernels on another system, slightly alter the step-by-step guide's
-+instructions:
-+
-+* Start following the guide on the machine where you want to install and test
-+  the kernels later.
-+
-+* After executing ':ref:`Boot into the working kernel and briefly use the
-+  apparently broken feature <bootworking_bissbs>`', save the list of loaded
-+  modules to a file using ``lsmod > ~/test-machine-lsmod``. Then locate the
-+  build configuration for the running kernel (see ':ref:`Start defining the
-+  build configuration for your kernel <oldconfig_bisref>`' for hints on where
-+  to find it) and store it as '~/test-machine-config-working'. Transfer both
-+  files to the home directory of your build host.
-+
-+* Continue the guide on the build host (e.g. with ':ref:`Ensure to have enough
-+  free space for building [...] <diskspace_bissbs>`').
-+
-+* When you reach ':ref:`Start preparing a kernel build configuration[...]
-+  <oldconfig_bissbs>`': before running ``make olddefconfig`` for the first time,
-+  execute the following command to base your configuration on the one from the
-+  test machine's 'working' kernel::
-+
-+    cp ~/test-machine-config-working ~/linux/.config
-+
-+* During the next step to ':ref:`disable any apparently superfluous kernel
-+  modules <localmodconfig_bissbs>`' use the following command instead::
-+
-+    yes '' | make localmodconfig LSMOD=~/lsmod_foo-machine localmodconfig
-+
-+* Continue the guide, but ignore the instructions outlining how to compile,
-+  install, and reboot into a kernel every time they come up. Instead build
-+  like this::
- 
--Further sources
-----------------
-+    cp ~/kernel-config-working .config
-+    make olddefconfig &&
-+    make -j $(nproc --all) targz-pkg
-+
-+  This will generate a gzipped tar file whose name is printed in the last
-+  line shown; for example, a kernel with the kernelrelease identifier
-+  '6.0.0-rc1-local-g928a87efa423' built for x86 machines usually will
-+  be stored as '~/linux/linux-6.0.0-rc1-local-g928a87efa423-x86.tar.gz'.
-+
-+  Copy that file to your test machine's home directory.
-+
-+* Switch to the test machine to check if you have enough space to hold another
-+  kernel. Then extract the file you transferred::
-+
-+    sudo tar -xvzf ~/linux-6.0.0-rc1-local-g928a87efa423-x86.tar.gz -C /
-+
-+  Afterwards :ref:`generate the initramfs and add the kernel to your boot
-+  loader's configuration <install_bisref>`; on some distributions the following
-+  command will take care of both these tasks::
-+
-+    sudo /sbin/installkernel 6.0.0-rc1-local-g928a87efa423 /boot/vmlinuz-6.0.0-rc1-local-g928a87efa423
-+
-+  Now reboot and ensure you started the intended kernel.
-+
-+This approach even works when building for another architecture: just install
-+cross-compilers and add the appropriate parameters to every invocation of make
-+(e.g. ``make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- [...]``).
-+
-+Additional reading material
-+---------------------------
- 
- * The `man page for 'git bisect' <https://git-scm.com/docs/git-bisect>`_ and
-   `fighting regressions with 'git bisect' <https://git-scm.com/docs/git-bisect-lk2009.html>`_
--- 
-2.44.0
+And I do have concern about the fix, see below.
 
+[...]
+
+> @@ -53,7 +53,7 @@ static struct fpga_region *fpga_region_get(struct fpga_region *region)
+>  	}
+>  
+>  	get_device(dev);
+> -	if (!try_module_get(dev->parent->driver->owner)) {
+> +	if (!try_module_get(region->br_owner)) {
+>  		put_device(dev);
+>  		mutex_unlock(&region->mutex);
+>  		return ERR_PTR(-ENODEV);
+> @@ -75,9 +75,9 @@ static void fpga_region_put(struct fpga_region *region)
+>  
+>  	dev_dbg(dev, "put\n");
+>  
+> -	module_put(dev->parent->driver->owner);
+> -	put_device(dev);
+> +	module_put(region->br_owner);
+>  	mutex_unlock(&region->mutex);
+
+If there is concern the region would be freed after put_device(), then
+why still keep the sequence in fpga_region_get()?
+
+And is it possible region is freed before get_device() in
+fpga_region_get()?
+
+Or we should clearly document how/when to use these functions?
+
+Thanks,
+Yilun
+
+> +	put_device(dev);
+>  }
 
