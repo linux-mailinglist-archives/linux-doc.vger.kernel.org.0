@@ -1,182 +1,347 @@
-Return-Path: <linux-doc+bounces-13336-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-13334-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FF4889643A
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Apr 2024 07:47:03 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id C57388963FA
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Apr 2024 07:27:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 57C1B1C21118
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Apr 2024 05:47:02 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 77CB1284683
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Apr 2024 05:27:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 31E2F487B6;
-	Wed,  3 Apr 2024 05:46:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="NcesQ6EC"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E3F14652F;
+	Wed,  3 Apr 2024 05:27:14 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com (mail-dm6nam04on2107.outbound.protection.outlook.com [40.107.102.107])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CF54645;
-	Wed,  3 Apr 2024 05:46:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.102.107
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1712123219; cv=fail; b=htRFVF9+SfU2Db/gVUL5IL1xE++9pj0TKVa6lz2Ew5ghlu54B8Q6NPL0W7Gk4RioZoSWa1veg+ugxcd9oqJqvNNp36kgVdv78YwHihmvkOCcMWpzjweuHSt5zxZD0DRIVVAsHOuF+rG/XyE5TDdNOkybz6XdsLFMoPvOuV3tSaI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1712123219; c=relaxed/simple;
-	bh=OJudV+n1tKL2PiLEQo2+gi91BGv4SCkTWJstbzJUUVY=;
-	h=References:From:To:Cc:Subject:Date:In-reply-to:Message-ID:
-	 Content-Type:MIME-Version; b=FLkmjJlifacFk3jisZCu7UH8gQgaZVCwmxNkZUHerkNHSA6qWOsZOOBScqmrd2Q4UBp6RBViK+Cn9rz18tzjMLZ5hAagQqGUq3vocXE6u6tmDhV7mchrj4nFRusivI+iqNIM6jCsbY4ifO6oYNvdkKERvghPQrGxb4o3z5KFjII=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=NcesQ6EC; arc=fail smtp.client-ip=40.107.102.107
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KPScQHjuPfjPWoIxVRaV0q6ghXJLDXFI4zlHfgd41ZAvNS8u9FX/imcoUPLcnQ83W+szSU/Lg6QcXE5JjdmVxFcsFVZfxuCkcybyIOLQiIrBxcf9sLWsBhslWHwu8AU8ey8n0Y0Nb5HbtZKnbrsYkeM4kfAjwSriLEuTE3s2A/4YCgDYyH2BhQVJu2TGXBYEBRymLCkfn2fVP8TiiDJ1d6dSJn8C2WVtGCjTpLYmmpDgwyxiEcNVFfVYTGSip3KRhRXr6UgD7zBv4mi2TsqU2PXuBRrIv0pWTST8EB7eqGXgP22gyYv1AhUgWm4mijCadRHBOUFtjxc63+4LoanQFg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZDLk5HZw+fSKx+VIXuFdhZN6iMwF9y+6ha0jWrUWf5o=;
- b=Y+1eFRaw5ngh4+CNwqTP5awAD0FsVzu73FLWPBzsOLfJRShFaJTxLmK7iIbFL5uLYPyVR2pUSt++oDaoffPOo7jdeTR1KiemzrlVoAs1yQUfUvrXsTvWB6Oy96sm3ODcbpOWK3L9XPXNZye+pQ/MOHdkFjo8LJ9ckKHuwcJh+Wgrpfyjw0Eybdqf/OaBl9SuZgRt3F/2njidm7IIK8NtbQCFEv6DGd7CUG8pfNKA1oJLNzFJ98v+FaErnGagJDaqtFE2u0l7V94d0JfssSsUNeGY5Ur5jKgajSkSFPCCrezHQpzU3mofyNNhP9Y/qji1nbYEgLk12p+qdo6n1JdHCA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZDLk5HZw+fSKx+VIXuFdhZN6iMwF9y+6ha0jWrUWf5o=;
- b=NcesQ6ECrZiH20fyjxfrmIpitA+zPAlgjO57tFFDQr4GG4EW5IXqfQCInwpRR+hWjSLT6AZ1w97URVKWT3tW9iSSyzlaTKO4CgcegVpHlR+lCjoh1P7P7lRKVFL24lAS69jnRKNVKrJD7QDxLIn8t7XLkwy5JV9UPLr/MQzWRee0KoSm0reW4++HoqASY+G3rLrSooeB14hyN60zuUKpLs5CHxzZBbjzi5tJ8rLa0Fw88Daq9S/5WyaLJmb1Olg5++uAZB0wN9EjzQLS2QvnaHk9w5TUZjKQqK/hejfjc8XWoLrYCmGoeGOR8RM3sILWni+vAQcvUWrgkVlw0F8FeA==
-Received: from BYAPR12MB2743.namprd12.prod.outlook.com (2603:10b6:a03:61::28)
- by DM6PR12MB4044.namprd12.prod.outlook.com (2603:10b6:5:21d::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Wed, 3 Apr
- 2024 05:46:54 +0000
-Received: from BYAPR12MB2743.namprd12.prod.outlook.com
- ([fe80::459b:b6fe:a74c:5fbf]) by BYAPR12MB2743.namprd12.prod.outlook.com
- ([fe80::459b:b6fe:a74c:5fbf%6]) with mapi id 15.20.7409.042; Wed, 3 Apr 2024
- 05:46:54 +0000
-References: <20240402205223.137565-1-rrameshbabu@nvidia.com>
- <20240402205223.137565-2-rrameshbabu@nvidia.com>
- <20240402191842.66decfd3@kernel.org>
-User-agent: mu4e 1.10.8; emacs 28.2
-From: Rahul Rameshbabu <rrameshbabu@nvidia.com>
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, ahmed.zaki@intel.com,
- aleksander.lobakin@intel.com, alexandre.torgue@foss.st.com,
- andrew@lunn.ch, cjubran@nvidia.com, corbet@lwn.net, davem@davemloft.net,
- dtatulea@nvidia.com, edumazet@google.com, gal@nvidia.com,
- hkallweit1@gmail.com, jacob.e.keller@intel.com, jiri@resnulli.us,
- joabreu@synopsys.com, justinstitt@google.com, kory.maincent@bootlin.com,
- leon@kernel.org, liuhangbin@gmail.com, maxime.chevallier@bootlin.com,
- pabeni@redhat.com, paul.greenwalt@intel.com, przemyslaw.kitszel@intel.com,
- rdunlap@infradead.org, richardcochran@gmail.com, saeed@kernel.org,
- tariqt@nvidia.com, vadim.fedorenko@linux.dev, vladimir.oltean@nxp.com,
- wojciech.drewek@intel.com
-Subject: Re: [PATCH net-next v1 1/6] ethtool: add interface to read Tx
- hardware timestamping statistics
-Date: Tue, 02 Apr 2024 22:14:38 -0700
-In-reply-to: <20240402191842.66decfd3@kernel.org>
-Message-ID: <87r0fn2e2b.fsf@nvidia.com>
-Content-Type: text/plain
-X-ClientProxiedBy: BY3PR05CA0018.namprd05.prod.outlook.com
- (2603:10b6:a03:254::23) To BYAPR12MB2743.namprd12.prod.outlook.com
- (2603:10b6:a03:61::28)
+Received: from zg8tmja2lje4os4yms4ymjma.icoremail.net (zg8tmja2lje4os4yms4ymjma.icoremail.net [206.189.21.223])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A01E46425;
+	Wed,  3 Apr 2024 05:27:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=206.189.21.223
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1712122033; cv=none; b=YkVkB7+0gBIAgYFpIKjThSHaxtfHDSJYW4pG5VmnwV9SIRohDv5gcP7IgaNbiD4MYoNfihMKysFxAg9kr+p93rhdFl7NvgkhELuu9UpSuvSk7v0ym6F2OfoWe7gMORuBuE8SV30NqptYeC3Id8kPzqBV0oBhgzfgDgQV3cMDtYs=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1712122033; c=relaxed/simple;
+	bh=6N7jIECO+2D6vYVeR6uVn2crbxUUEAeGweyERPyM42Q=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=pmTFyrwVMWb3XtM4fc0eCa30qCuw5AJzwhlocEHNfdlQ7EqVgkZamL52yWYi2xq0mr3KxpN8coBTO1zwncUbCn0r/CohbCGQ+jnRca4a7hep37J3qBpSKw8KBkjEKAvNhYvIm6sscF9k4QjHKqaVY8nQklDEH17Redh8HUvmUmc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn; spf=pass smtp.mailfrom=hust.edu.cn; arc=none smtp.client-ip=206.189.21.223
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hust.edu.cn
+Received: from hust.edu.cn (unknown [172.16.0.52])
+	by app1 (Coremail) with SMTP id HgEQrAB3eyp46AxmrHCpBA--.62472S2;
+	Wed, 03 Apr 2024 13:26:16 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.12.177.116])
+	by gateway (Coremail) with SMTP id _____wDn7wN26AxmAjJtAQ--.12162S2;
+	Wed, 03 Apr 2024 13:26:15 +0800 (CST)
+From: Haoyang Liu <tttturtleruss@hust.edu.cn>
+To: Alex Shi <alexs@kernel.org>,
+	Yanteng Si <siyanteng@loongson.cn>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: hust-os-kernel-patches@googlegroups.com,
+	Haoyang Liu <tttturtleruss@hust.edu.cn>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2] docs/zh_CN: Add dev-tools/kmemleak Chinese translation
+Date: Wed,  3 Apr 2024 13:25:52 +0800
+Message-Id: <20240403052552.39292-1-tttturtleruss@hust.edu.cn>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB2743:EE_|DM6PR12MB4044:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	pkpZMeGS9rxC1AkjYwpnuYgc9r6LxhN3+HZqdyGZHiu5HIDOkMDw/jaXkv1/cl01twrYJ+7+o4c5fTlV5GiP8f5khyQXpqM4WTK+tMc5kv82naI2pkZ3uLoNLaiWrv1HcK6ZcaDza2aYyEwwuwWuR17iLLNY4POyvfe/ME9v2h/sfczqm0UnY23JRDvAJp8MgLf9VoA9dYGsouOeeqFv6CSipkDB/jOz/+SnPgvWxGBSgAAQQf584UG9mDV8ol6J7v4/Y6JRq9O5upIOf8KfpxidLO52IlDoD1v/y4ATcREi8UBPxCGGgzrw3rvvBy9/TiNqLre0FNveKzjkw6iPVU5ZwCwh4JRSxAmdUnqpje9s45SXH3iPO98A9GKj/SeZJZnoRguFH9XDo5+gjQf3e4cejF+N/RdRwe8V2dzl2Oxn/DOdxAXuE+9O3WuHJsVoPA0muCQ7O75NWoqhyneGwxs8RuR6ZLBWD7FWoQwmxfTD53bAS6sKAOmXsqnkHD6pr9EjyOpnySNp01N3a3yd9xCHaKCEzArXLsixBcFqEQAPnqc7VtV+61OBkjEchHhAdXOzQkbhlZPCOU32fZ7cMfuQKZCuteVKlXkUQQ3lmzhFWQIeyn/pMxk4vxEoCDQ8tgFjy6o6zpbCC9aA8/R1mRYWxSl0mZoiJZxs07C4BRg=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR12MB2743.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366007)(7416005)(376005)(1800799015);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?JJ7xOmvuUZQ2fv6IPHu7mllDxAPhOUEbVo5nxUud3LjspBKeozBwaFsVpg9E?=
- =?us-ascii?Q?ZC1aj5kZf39XiwH4gbJFcJ+LOWZpHdTkvIG4uhQoIbXUzlFmIRZfOzljcSeH?=
- =?us-ascii?Q?wmVy9J5DtFnjl4aFe6DZHPpMi4ihm6k+6Fcd4zsVErhYyLREzkHnqmFYTr1P?=
- =?us-ascii?Q?+NS4onu+JR2PpJ1pQnn+Gl3Vw5MBB1lj/c2O+mkHXOoT1Z0JZxgX5A3WSW0A?=
- =?us-ascii?Q?twNXSwJsqXAi3QgLWsT46QjENJfDMN6vly59eSLlHLEDnhrlScgaCp1aKzi9?=
- =?us-ascii?Q?b2TqTQ+Rx1zbTPG09HbEY+bItMrS9o1eOrjVPq+9qLEwD1MwA7MzDhLtLtVK?=
- =?us-ascii?Q?06msDmpsCxNJ4Pu/vRSEOQI1/cJcStHZap+/3TlWyMhmCtGrhp+w1BOUrxMa?=
- =?us-ascii?Q?ztOOhukEzEmlUEBM0Ua6ahLsXp8Lgoe2dFnbq08/Aj/O6FRh86cEvVVvti7d?=
- =?us-ascii?Q?LEftBW4Pj7cQj0PJ+czm2X/xKVykDkQViElWKTm8ex3oY7qFTFkjPzjdHW38?=
- =?us-ascii?Q?TpXMvDFaN4xMi//ZkvEyb51wAInFqhKh542ZnD7gb75rL5R7Vrq/ZZWhOv7u?=
- =?us-ascii?Q?l1NQLYyoIu0VmRpoJPeayZv/IhoK8J3WJ66PmMXBa3S4zHn6NyogoaioHADg?=
- =?us-ascii?Q?cFbAwfh7zCbsL3Vu45Pwoh8EawD8Scg+BbKuL6xT9zYNNDNSVnXommuSqw4k?=
- =?us-ascii?Q?hj4q/h5WAoV/P8dYx+ZV9dVxel8BxRxSbJYrbkQTR5tk9YdrmOXdvnVptAK1?=
- =?us-ascii?Q?0oMy07baNXNfCipZYsq/igO+NdeTu2DYxxtyXW43wibQFzEO0rrVOsjOlJUq?=
- =?us-ascii?Q?pEDKaKEofPJIZmnMekgk5x7buiFYjwoKDLAn/CnldoUTZWwDTqFkybhdsjtT?=
- =?us-ascii?Q?67lQZt0eHRhyvqKkxPLWrBBPrjav5ET7VeeYYgcroIedURhcWRJB150fER0g?=
- =?us-ascii?Q?0XhUOR8bKO316r8rZAKMjsEYM9ZcU8ookg4RywArjgbuYZSSqnxShnhslqIF?=
- =?us-ascii?Q?39smW4/eLOMa70LAMOdPL2M14PQqBtWPF8mmOoB6kJ0KQBhGA3ovdQRLjXQl?=
- =?us-ascii?Q?Kb+eNdYJWIMnYwJa+Yp2uKoPrLGttRBXWEiEEV3IR40VZM5H5zbwGWKX2btY?=
- =?us-ascii?Q?5L9+FVeEtcSwBdPdhhnm9RuUCIKy1mOMkTdwiJgOVXqZS2wl4woeuvwnALmq?=
- =?us-ascii?Q?2x1whM+sxBwE6YRe3kupaR3qqu8c/IL7pt33TzAqruhwiRVhazx8jgyMva72?=
- =?us-ascii?Q?PTD7v1RWs2oUaF1q8c0gVZU2qCnEIUNMhFwS/lWMa6PEMlUK8R3O8joxjeHv?=
- =?us-ascii?Q?5VVFpbhMVJNesUARrBdypzsRacGQvY9pMxCfKbOUCMfbwjlpobZknPy28gnv?=
- =?us-ascii?Q?cYUH5F1Rz8eo506uIMeURwP1dUspHuEEGEF6T0fo959PCF4mJpKDgLU29ML4?=
- =?us-ascii?Q?C3KPX7V80Roxe7QjI2Ms0IdsTA2WRdxnEhPwOwHY90uoBnLzy438AMbW/sQx?=
- =?us-ascii?Q?ZAbiG/UWqaS/6nEmqwe8hEDM/JAUWz8mdS5nNKuWmb2mhl4JQWcV1PZe9jM/?=
- =?us-ascii?Q?H5nJ4S3kXCt7bmGNo3N2u+pd5xC9L4X6ZV4iw5U1fZFXcs1tT1v7UXwtWcwr?=
- =?us-ascii?Q?Ig=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bbbb3d8b-ed68-46ac-bc42-08dc53a17766
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB2743.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2024 05:46:53.9310
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CXsOx7T8CAoETY5ek3bsB2y2m0cFKsrqXO2MKzhj7mfBXok47xwXF5KU9ofddh+5JWjuGbWh8iPfmCZrDCDlJw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4044
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:HgEQrAB3eyp46AxmrHCpBA--.62472S2
+Authentication-Results: app1; spf=neutral smtp.mail=tttturtleruss@hust
+	.edu.cn;
+X-Coremail-Antispam: 1UD129KBjvAXoW3CrW3Cw4ftw13ZFWrXrW3Awb_yoW8Jw48Wo
+	Z8uFWjkrs7AF1UXF4Sqa15GrW7CanYkF4jya13Cr1q9ry5XF18G3Wvva4fCFy5Z3s8GFsI
+	q3WrGa4xC3WUKF9rn29KB7ZKAUJUUUUx529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+	AaLaJ3UjIYCTnIWjp_UUUOc7k0a2IF6w1UM7kC6x804xWl1xkIjI8I6I8E6xAIw20EY4v2
+	0xvaj40_Wr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7
+	IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1l84ACjcxK
+	6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1ln4kS14v26r
+	126r1DM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx1l5I8C
+	rVACY4xI64kE6c02F40Ex7xfMcIj64x0Y40En7xvr7AKxVW8Jr0_Cr1UMcIj6x8ErcxFaV
+	Av8VW8uFyUJr1UMcIj6xkF7I0En7xvr7AKxVWxJVW8Jr1lOx8S6xCaFVCjc4AY6r1j6r4U
+	M4x0Y48IcxkI7VAKI48JMxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48JMxAIw2
+	8IcVCjz48v1sIEY20_GFW3Jr1UJwCFx2IqxVCFs4IE7xkEbVWUJVW8JwCFI7km07C267AK
+	xVWUAVWUtwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67
+	AF67kF1VAFwI0_JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI
+	42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMI
+	IF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2
+	KfnxnUUI43ZEXa7IU0RRRtUUUUU==
+X-CM-SenderInfo: rxsqjiqrssiko6kx23oohg3hdfq/1tbiAQsPAmYKvLtb7gAIsR
 
-On Tue, 02 Apr, 2024 19:18:42 -0700 Jakub Kicinski <kuba@kernel.org> wrote:
-> On Tue,  2 Apr 2024 13:52:01 -0700 Rahul Rameshbabu wrote:
->> +/**
->> + * struct ethtool_ts_stats - HW timestamping statistics
->> + * @tx_stats: struct group for TX HW timestamping
->> + *	@pkts: Number of packets successfully timestamped by the hardware.
->> + *	@lost: Number of hardware timestamping requests where the timestamping
->> + *		information from the hardware never arrived for submission with
->> + *		the skb.
->> + *	@err: Number of arbitrary timestamp generation error events that the
->> + *		hardware encountered, exclusive of @lost statistics. Cases such
->> + *		as resource exhaustion, unavailability, firmware errors, and
->> + *		detected illogical timestamp values not submitted with the skb
->> + *		are inclusive to this counter.
->> + */
->> +struct ethtool_ts_stats {
->> +	struct_group(tx_stats,
->
-> Doesn't seem like the group should be documented:
->
-> include/linux/ethtool.h:503: warning: Excess struct member 'tx_stats' description in 'ethtool_ts_stats'
+Translate dev-tools/kmemleak.rst into Chinese and add it into
+zh_CN/dev-tools/index.rst.
 
-Was looking into why our internal verification did not catch this. We
-run W=1 with clang, but looks like the warning does not get triggered
-unless explicitly run with scripts/kernel-doc.
+Signed-off-by: Haoyang Liu <tttturtleruss@hust.edu.cn>
+---
+v1 -> v2: Adjust line length and keep consistent with the original content
 
-  https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html#how-to-format-kernel-doc-comments
+ .../translations/zh_CN/dev-tools/index.rst    |   2 +-
+ .../translations/zh_CN/dev-tools/kmemleak.rst | 229 ++++++++++++++++++
+ 2 files changed, 230 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/dev-tools/kmemleak.rst
 
-I have debugged using strace that the way the kernel doc checking works
-when W=1 is set is that the matching source file that is being compiled
-is passed to scripts/kernel-doc, so include files are missed from the
-doc check. I think this is worth adding to the kernel documentation.
+diff --git a/Documentation/translations/zh_CN/dev-tools/index.rst b/Documentation/translations/zh_CN/dev-tools/index.rst
+index c2db3e566b1b..9f52b7f452bd 100644
+--- a/Documentation/translations/zh_CN/dev-tools/index.rst
++++ b/Documentation/translations/zh_CN/dev-tools/index.rst
+@@ -22,6 +22,7 @@ Documentation/translations/zh_CN/dev-tools/testing-overview.rst
+    sparse
+    gcov
+    kasan
++   kmemleak
+    gdb-kernel-debugging
+ 
+ Todolist:
+@@ -29,7 +30,6 @@ Todolist:
+  - coccinelle
+  - kcov
+  - ubsan
+- - kmemleak
+  - kcsan
+  - kfence
+  - kgdb
+diff --git a/Documentation/translations/zh_CN/dev-tools/kmemleak.rst b/Documentation/translations/zh_CN/dev-tools/kmemleak.rst
+new file mode 100644
+index 000000000000..d248c8428095
+--- /dev/null
++++ b/Documentation/translations/zh_CN/dev-tools/kmemleak.rst
+@@ -0,0 +1,229 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/dev-tools/kmemleak.rst
++:Translator: 刘浩阳 Haoyang Liu <tttturtleruss@hust.edu.cn>
++
++内核内存泄露检测器
++==================
++
++Kmemleak 提供了一个类似 `可追踪的垃圾收集器 <https://en.wikipedia.org/wiki/Tra
++cing_garbage_collection>`_ 的方法来检测可能的内核内存泄漏，不同的是孤立对象不会
++被释放，而是仅通过 /sys/kernel/debug/kmemleak 报告。Valgrind 工具
++（``memcheck --leak-check``）使用了一种相似的方法来检测用户空间应用中的内存泄
++露。
++
++用法
++----
++
++"Kernel hacking" 中的 CONFIG_DEBUG_KMEMLEAK 必须被启用。一个内核线程每10分钟
++（默认情况下）扫描一次内存，并且打印出新发现的未被引用的对象个数。
++如果 ``debugfs`` 没有挂载，则执行::
++
++   # mount -t debugfs nodev /sys/kernel/debug/
++
++显示所有扫描出的可能的内存泄漏的细节信息::
++
++   # cat /sys/kernel/debug/kmemleak
++
++启动一次中等程度的内存扫描::
++
++   # echo scan > /sys/kernel/debug/kmemleak
++
++清空当前所有可能的内存泄露列表::
++
++   # echo clear > /sys/kernel/debug/kmemleak
++
++当再次读取 ``/sys/kernel/debug/kmemleak`` 文件时，将会输出自上次扫描以来检测到的
++新的内存泄露。
++
++注意，孤立目标是通过被分配时间来排序的，列表开始的对象可能会导致后续的对象都被
++识别为孤立对象。
++
++可以通过写入 ``/sys/kernel/debug/kmemleak`` 文件在运行时修改内存扫描参数。下面是
++支持的参数：
++
++
++* off
++    禁用 kmemleak（不可逆）
++* stack=on
++    开启任务栈扫描（默认）
++* stack=off
++    禁用任务栈扫描
++* scan=on
++    开启自动内存扫描线程（默认）
++* scan=off
++    关闭自动内存扫描线程
++* scan=<secs>;
++    设定自动内存扫描间隔，以秒为单位（默认值为 600，设置为 0 表示停
++    止自动扫描）
++* scan
++    触发一次内存扫描
++* clear
++    通过标记所有当前已报告的未被引用对象为灰，从而清空当前可能的内存泄露列
++    表；如果 kmemleak 被禁用，则释放所有 kmemleak 对象，。
++* dump=<addr>
++    输出存储在 <addr> 中的对象信息
++
++可以通过在内核命令行中传递 ``kmemleak=off`` 参数从而在启动时禁用 Kmemleak。
++
++在 kmemleak 初始化之前就可能会有内存分配或释放，这些操作被存储在一个早期日志缓
++冲区中。缓冲区的大小通过 CONFIG_DEBUG_KMEMLEAK_MEM_POOL_SIZE 选项配置。
++
++如果 CONFIG_DEBUG_KMEMLEAK_DEFAULT_OFF 被启用，则 kmemleak 默认被禁用。在内核命
++令行中传递 ``kmemleak=on`` 参数来开启这个功能。
++
++如果出现 "Error while writing to stdout" 或 "write_loop: Invalid argument" 这样
++的错误，请确认 kmemleak 被正确启用。
++
++基础算法
++--------
++
++通过 :c:func:`kmalloc`, :c:func:`vmalloc`, :c:func:`kmem_cache_alloc` 以及同类
++函数均被跟踪，指针，包括一些额外的信息如大小和栈追踪等，都被存储在红黑树中。
++对应的释放函数调用也被追踪，并从 kmemleak 数据结构中移除相应指针。
++
++对于一个已分配的内存块，如果通过扫描内存（包括保存寄存器）没有发现任何指针指向
++它的起始地址或者其中的任何位置，则认为这块内存是孤立的。这意味着内核无法将该内
++存块的地址传递给一个释放内存函数，这块内存便被认为泄露了。
++
++扫描算法步骤：
++
++   1. 标记所有对象为白色（最后剩下的白色对象被认为是孤立的）
++   2. 从数据节和栈开始扫描内存，检测每个值是否是红黑树中存储的地址。如果一个指向
++      白色对象的指针被检测到，则将该对象标记为灰色。
++   3. 扫描灰色对象引用的其他对象（有些白色对象可能会变为灰色并被添加到灰名单末尾
++      ）直到灰名单为空。
++   4. 剩余的白色对象就被认为是孤立的并通过 /sys/kernel/debug/kmemleak 报告。
++
++有些指向已分配的内存块的指针存储在内核内部的数据结构中，它们不能被检测为孤立。
++为了避免这种情况，kmemleak 也存储了指向需要被查找的内存块范围内的任意地址的地址
++数量，如此一来这些内存便不会被认为泄露。一个例子是 __vmalloc()。
++
++用 kmemleak 测试特定部分
++------------------------
++
++在初始化启动阶段 /sys/kernel/debug/kmemleak 的输出可能会很多，这也可能是你在开发
++时编写的漏洞百出的代码导致的。为了解决这种情况你可以使用 'clear' 命令来清除
++/sys/kernel/debug/kmemleak 输出的所有的未引用对象。在执行 'clear' 后执行 'scan'
++可以发现新的未引用对象，这将会有利你测试代码的特定部分。
++
++为了用一个空的 kmemleak 测试一个特定部分，执行::
++
++   # echo clear > /sys/kernel/debug/kmemleak
++   ... 测试你的内核或者模块 ...
++   # echo scan > /sys/kernel/debug/kmemleak
++
++然后像平常一样获得报告::
++
++   # cat /sys/kernel/debug/kmemleak
++
++释放 kmemleak 内核对象
++----------------------
++
++为了允许访问先前发现的内存泄露，当用户禁用或发生致命错误导致 kmemleak
++被禁用时，内核中的 kmemleak 对象不会被释放。这些对象可能会占用很大
++一部分物理内存。
++
++在这种情况下，你可以用如下命令回收这些内存::
++
++   # echo clear > /sys/kernel/debug/kmemleak
++
++Kmemleak API
++------------
++
++在 include/linux/kmemleak.h 头文件中查看函数原型：
++
++- ``kmemleak_init`` - 初始化 kmemleak
++- ``kmemleak_alloc`` - 通知一个内存块的分配
++- ``kmemleak_alloc_percpu`` - 通知一个 percpu 类型的内存分配
++- ``kmemleak_vmalloc`` - 通知一个使用 vmalloc() 的内存分配
++- ``kmemleak_free`` - 通知一个内存块的释放
++- ``kmemleak_free_part`` - 通知一个部分的内存释放
++- ``kmemleak_free_percpu`` - 通知一个 percpu 类型的内存释放
++- ``kmemleak_update_trace`` - 更新分配对象过程的栈追踪
++- ``kmemleak_not_leak`` - 标记一个对象内存为未泄露的
++- ``kmemleak_ignore`` - 不要扫描或报告某个对象未泄露的
++- ``kmemleak_scan_area`` - 在内存块中添加扫描区域
++- ``kmemleak_no_scan`` - 不扫描某个内存块
++- ``kmemleak_erase`` - 在指针变量中移除某个旧的值
++- ``kmemleak_alloc_recursive`` - 和 kmemleak_alloc 效果相同但会检查是否有递归的
++   内存分配
++- ``kmemleak_free_recursive`` - 和 kmemleak_free 效果相同但会检查是否有递归的
++   内存释放
++
++下列函数使用一个物理地址作为对象指针并且只在地址有一个 lowmem 映射时做出相应的
++行为：
++
++- ``kmemleak_alloc_phys``
++- ``kmemleak_free_part_phys``
++- ``kmemleak_ignore_phys``
++
++解决假阳性/假阴性
++-----------------
++
++假阴性是指由于在内存扫描中有值指向该对象导致 kmemleak 没有报告的实际存在的内存
++泄露（孤立对象）。为了减少假阴性的出现次数，kmemleak 提供了 kmemleak_ignore，
++kmemleak_scan_area，kmemleak_no_scan 和 kmemleak_erase 函数（见上）。
++任务栈也会增加假阴性的数量并且默认不开启对它们的扫描。
++
++假阳性是对象被误报为内存泄露（孤立对象）。对于已知未泄露的对象，kmemleak
++提供了 kmemleak_not_leak 函数。同时 kmemleak_ignore 可以用于标记已知不包含任何
++其他指针的内存块，标记后该内存块不会再被扫描。
++
++一些被报告的泄露仅仅是暂时的，尤其是在 SMP（对称多处理）系统中，因为其指针
++暂存在 CPU 寄存器或栈中。Kmemleak 定义了 MSECS_MIN_AGE（默认值为 1000）
++来表示一个被报告为内存泄露的对象的最小存活时间。
++
++限制和缺点
++----------
++
++主要的缺点是内存分配和释放的性能下降。为了避免其他的损失，只有当
++/sys/kernel/debug/kmemleak 文件被读取时才会进行内存扫描。无论如何，这个工具是出于
++调试的目标，性能表现可能不是最重要的。
++
++为了保持算法简单，kmemleak 寻找指向某个内存块范围中的任何值。这可能会引发假阴性
++现象的出现。但是，最后一个真正的内存泄露也会变得明显。
++
++非指针值的数据是假阴性的另一个来源。在将来的版本中，kmemleak 仅仅会扫
++描已分配结构体中的指针成员。这个特性会解决上述很多的假阴性情况。
++
++Kmemleak 会报告假阳性。这可能发生在某些被分配的内存块不需要被释放的情况下
++（某些 init_call 函数中），指针的计算是通过其他方法而不是常规的 container_of 宏
++或是指针被存储在 kmemleak 没有扫描的地方。
++
++页分配和 ioremap 不会被追踪。
++
++使用 kmemleak-test 测试
++-----------------------
++
++为了检测是否成功启用了 kmemleak，你可以使用一个故意制造内存泄露的模块
++kmemleak-test。设置 CONFIG_SAMPLE_KMEMLEAK 为模块（不能作为内建模块使用）
++并且启动启用了 kmemleak 的内核。加载模块并执行一次扫描::
++
++   # modprobe kmemleak-test
++   # echo scan > /sys/kernel/debug/kmemleak
++
++注意你可能无法立刻或在第一次扫描后得到结果。当 kmemleak 得到结果，将会输出日
++志 ``kmemleak: <count of leaks> new suspected memory leaks`` 。然后通过读取文件
++获取信息::
++
++   # cat /sys/kernel/debug/kmemleak
++   unreferenced object 0xffff89862ca702e8 (size 32):
++     comm "modprobe", pid 2088, jiffies 4294680594 (age 375.486s)
++     hex dump (first 32 bytes):
++       6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
++       6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b a5  kkkkkkkkkkkkkkk.
++     backtrace:
++       [<00000000e0a73ec7>] 0xffffffffc01d2036
++       [<000000000c5d2a46>] do_one_initcall+0x41/0x1df
++       [<0000000046db7e0a>] do_init_module+0x55/0x200
++       [<00000000542b9814>] load_module+0x203c/0x2480
++       [<00000000c2850256>] __do_sys_finit_module+0xba/0xe0
++       [<000000006564e7ef>] do_syscall_64+0x43/0x110
++       [<000000007c873fa6>] entry_SYSCALL_64_after_hwframe+0x44/0xa9
++   ...
++
++用 ``rmmod kmemleak_test`` 移除模块时也会触发
++kmemleak 的结果输出。
+-- 
+2.25.1
 
-Anyway, I will send out a v2 with this fixed but wait for potentially
-more feedback on v1.
-
---
-Thanks,
-
-Rahul Rameshbabu
 
