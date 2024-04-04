@@ -1,131 +1,147 @@
-Return-Path: <linux-doc+bounces-13518-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-13520-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 035A3898EE1
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Apr 2024 21:21:20 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99057898EFA
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Apr 2024 21:27:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B25AB282B2C
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Apr 2024 19:21:18 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C97411C2817B
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Apr 2024 19:27:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F84C1339A5;
-	Thu,  4 Apr 2024 19:21:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 81ABA135A70;
+	Thu,  4 Apr 2024 19:26:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="KBQj/lSE"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iK0hUQTw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B310F133408
-	for <linux-doc@vger.kernel.org>; Thu,  4 Apr 2024 19:21:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C0B6135A55;
+	Thu,  4 Apr 2024 19:26:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1712258474; cv=none; b=qTmlZLlNukxd15lpn4YYS7rqFqO7YFzSFM/t8ZOEwE94CgU7N9OExWQ8YanfcQzfsTrIENtBF4ygUcEU9CxgmrfI1xtTdibL6df9A7U2o3w5yjA0ctSi4tLBmXGlBebmde3PxSotQXurHnnvp74d55A8FTjWqQ0ZE1l4ypzAKmE=
+	t=1712258812; cv=none; b=E49Xkp+tbPi0dcRz0loCVeDATPJ0nUgEKU3BkkwbvXx8HQVMn2Fs9wF446LYm0luFJ3S+aa2/vZNq91WSo/qDb6ITsUg3DhA0osjsXYR1dseN4heBPMKkX3pCP+32ImCKm+PQFaw9NHbpsKUBI+vfRB0Uw4cgaywZo1GqG5iU1s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1712258474; c=relaxed/simple;
-	bh=CVr2IxXDHjqtPIjdakFNnsSdpqceotjDCl0kfyrywLA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=iN3iyYiu5Oh1Fk1CL6hJ8iut91NeVi98ECRp7lovWGuz+DhxOQfyfQcpSWvPuY+rdVadfPYx20tQvRU19acqzHUdiC8eXG4k4EJWqgR8LYU8ai0JYH7um9lpFhAsul+4cLiKKfd2faI/9VlousE8HVPKhztGhN8LPWwdo++uOSs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=KBQj/lSE; arc=none smtp.client-ip=209.85.128.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
-Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-6154a3df493so19471937b3.1
-        for <linux-doc@vger.kernel.org>; Thu, 04 Apr 2024 12:21:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1712258472; x=1712863272; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Dl/FopeODNdULB5NSwrsajN91zng/VnqM090COn1yWc=;
-        b=KBQj/lSEZpu6lpVtuj6vzcFweWjT8/rKVwz+ZUh6Lv3d8KOkBbvx5uXejk73IwFE35
-         wdKPc+rm0gS14kpdoo06ZOpjSb8GIKeVAh6ZDJdBKJXsIXoB2ZmYJU+yy6gzGJJFmX3P
-         rcJe1Uhilps6C5LDxJUWay3FSyt4mwewYB2J5ANZB/0e6H/WDkTSyoZCL4stNx6dkZjM
-         j2NvxGCyjfPxVs47V+zWIOO9AZmtUvBT4m0snww90NXGvRpfGyUiyUDiIP77xBYD5pZO
-         9Gv2qNFtM1BalkylcoJUt6mXM834x79Rr0oVTr6MaUbOo0F5ZN/Dfr8aNgjNkpR9ePCW
-         +DhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712258472; x=1712863272;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Dl/FopeODNdULB5NSwrsajN91zng/VnqM090COn1yWc=;
-        b=CXujTJ4ogVvNiIupYgzVblAHlG5AQaafiF/TdV6LXtJIHWFGXnZidIcgrIn8ZFXEW3
-         YZL7A9olEkmM1f1kIGUbZCd0DQc+IlG0gF4tTF+ogA4BD2DKvS6WIOgn3mmezpvrWTxo
-         xxSKWklAis+9sz3nCxGOu6kEaNbjEhDwgBj9EwrPkey8gug1CGnOkDqVUOxtkW01h8Sn
-         J8e4Q/mDDPqnmZBADt9ut0dNiFeEpKRZLYQTWhX1PuboU5oP4yC93rcEK+SR5hvqV3Iv
-         gOjIwQT37E91ir2TMAA5tCSXozFczqXJddYqi9N15/ZHYsDeW2tALjntDeSf7VHOjf8H
-         GP4g==
-X-Forwarded-Encrypted: i=1; AJvYcCWGKIjSVCtWF3YYMXoUSbsSiEY8qFE/xZP91MYYHoiT/C8Ri9iFJ6kn7JpeaBhu51QivJ3gi6XT0obL+xHqcMWr7XdvfazVjEp5
-X-Gm-Message-State: AOJu0Yxl+zDWY+kTlTxP57Zn34oWS9jM1oZ9JwVNMpQxik78NS1K178g
-	AVZucJ0gTTifYiTeo1qtheMWrwN5eRlGh9fW4H3k1Zqka8gT1xopUdryBrQtCKDlgRSUeWi+KlW
-	4t9BvbLPJ8HibOGCzqIL0/MzasG0OYZmFMko5cg==
-X-Google-Smtp-Source: AGHT+IGyZ3JMNrz8F2bkpirKnyuGQawxZoeXVCC/y6GzZBE4nmRVGOFkLbxGUyQaEHSmHXKt9NtfMMywjFKnI39zfuA=
-X-Received: by 2002:a0d:dd8c:0:b0:615:e10:691c with SMTP id
- g134-20020a0ddd8c000000b006150e10691cmr414269ywe.1.1712258471733; Thu, 04 Apr
- 2024 12:21:11 -0700 (PDT)
+	s=arc-20240116; t=1712258812; c=relaxed/simple;
+	bh=0guQJ43kZOeFK9RaRxxK/HF/2Akt543i2YM1yup2VqY=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=dI3gXCeXLT3u9Zop3jV4rmRxep6hDuI9dOdWWTzPyq8IqVsgBOOzM3ij09asChpTvK+5A+dlqA2/TUBJ46CZho9aYYRhCB0tgIKQwAwVv4Oxdb0nI8LdIYgFXVIV8aSCSnVXhMHFjryam5nqJIZu8Xcf5o7qGKSA7FOwP6tLLfk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iK0hUQTw; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB8C7C43399;
+	Thu,  4 Apr 2024 19:26:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1712258811;
+	bh=0guQJ43kZOeFK9RaRxxK/HF/2Akt543i2YM1yup2VqY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=iK0hUQTwRSYy33JiDwuEUeSQBqdgS5YZ1GNoaKUX2jKwdjibAtwKzF3/ScOLNEKsB
+	 waNLctbwNPfTnLkOS5FUPocf2RHHfPLzDmzzNAmCHqYyqvH8Ly1BQJhoV8xT8p2pFF
+	 cmMVgYIsfD6E9oacNfMRrnZO9kBb9d3VE8pHNLLUVz5zBkatO4s7sUhCG7NiVrM/iv
+	 o8SfU/eb5jl+bkR5F6d2KdssDw4GMyeXOcs+7IYBJpSayNfq1UjAG264wNoO9WFu3x
+	 +8gqb49hGbAmM2+bwxHSi2yVzi2mCQdIA+so3BH2mkMFue/fHDL/W++rhaa1/ADMhL
+	 pMMyMfalYxPuw==
+Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
+	id 90EDECE0D0C; Thu,  4 Apr 2024 12:26:51 -0700 (PDT)
+From: "Paul E. McKenney" <paulmck@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-arch@vger.kernel.org,
+	kernel-team@meta.com,
+	mingo@kernel.org
+Cc: stern@rowland.harvard.edu,
+	parri.andrea@gmail.com,
+	will@kernel.org,
+	peterz@infradead.org,
+	boqun.feng@gmail.com,
+	npiggin@gmail.com,
+	dhowells@redhat.com,
+	j.alglave@ucl.ac.uk,
+	luc.maranget@inria.fr,
+	akiyks@gmail.com,
+	"Paul E. McKenney" <paulmck@kernel.org>,
+	Daniel Lustig <dlustig@nvidia.com>,
+	Joel Fernandes <joel@joelfernandes.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org
+Subject: [PATCH memory-model 1/3] Documentation/litmus-tests: Add locking tests to README
+Date: Thu,  4 Apr 2024 12:26:47 -0700
+Message-Id: <20240404192649.531112-1-paulmck@kernel.org>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <8550daf1-4bfd-4607-8325-bfb7c1e2d8c7@paulmck-laptop>
+References: <8550daf1-4bfd-4607-8325-bfb7c1e2d8c7@paulmck-laptop>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240403234054.2020347-1-debug@rivosinc.com> <20240403234054.2020347-9-debug@rivosinc.com>
- <8fb37319-288c-4f77-9cd7-92f17bb567ee@redhat.com> <d3689521-58a7-47df-bd6a-0e2e60464491@sirena.org.uk>
- <604863a6-0387-4f29-9c4e-5ef86a8ca904@redhat.com>
-In-Reply-To: <604863a6-0387-4f29-9c4e-5ef86a8ca904@redhat.com>
-From: Deepak Gupta <debug@rivosinc.com>
-Date: Thu, 4 Apr 2024 12:21:00 -0700
-Message-ID: <CAKC1njRT0GHJEY2NYWuPm7Az7yCj0ZWSevYj1NY6npr136jfsA@mail.gmail.com>
-Subject: Re: [PATCH v3 08/29] mm: Define VM_SHADOW_STACK for RISC-V
-To: David Hildenbrand <david@redhat.com>
-Cc: Mark Brown <broonie@kernel.org>, paul.walmsley@sifive.com, 
-	rick.p.edgecombe@intel.com, Szabolcs.Nagy@arm.com, kito.cheng@sifive.com, 
-	keescook@chromium.org, ajones@ventanamicro.com, conor.dooley@microchip.com, 
-	cleger@rivosinc.com, atishp@atishpatra.org, alex@ghiti.fr, bjorn@rivosinc.com, 
-	alexghiti@rivosinc.com, samuel.holland@sifive.com, conor@kernel.org, 
-	linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org, 
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, linux-mm@kvack.org, 
-	linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, corbet@lwn.net, 
-	palmer@dabbelt.com, aou@eecs.berkeley.edu, robh+dt@kernel.org, 
-	krzysztof.kozlowski+dt@linaro.org, oleg@redhat.com, akpm@linux-foundation.org, 
-	arnd@arndb.de, ebiederm@xmission.com, Liam.Howlett@oracle.com, vbabka@suse.cz, 
-	lstoakes@gmail.com, shuah@kernel.org, brauner@kernel.org, 
-	andy.chiu@sifive.com, jerry.shih@sifive.com, hankuan.chen@sifive.com, 
-	greentime.hu@sifive.com, evan@rivosinc.com, xiao.w.wang@intel.com, 
-	charlie@rivosinc.com, apatel@ventanamicro.com, mchitale@ventanamicro.com, 
-	dbarboza@ventanamicro.com, sameo@rivosinc.com, shikemeng@huaweicloud.com, 
-	willy@infradead.org, vincent.chen@sifive.com, guoren@kernel.org, 
-	samitolvanen@google.com, songshuaishuai@tinylab.org, gerg@kernel.org, 
-	heiko@sntech.de, bhe@redhat.com, jeeheng.sia@starfivetech.com, 
-	cyy@cyyself.name, maskray@google.com, ancientmodern4@gmail.com, 
-	mathis.salmen@matsal.de, cuiyunhui@bytedance.com, bgray@linux.ibm.com, 
-	mpe@ellerman.id.au, baruch@tkos.co.il, alx@kernel.org, 
-	catalin.marinas@arm.com, revest@chromium.org, josh@joshtriplett.org, 
-	shr@devkernel.io, deller@gmx.de, omosnace@redhat.com, ojeda@kernel.org, 
-	jhubbard@nvidia.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Thu, Apr 4, 2024 at 12:15=E2=80=AFPM David Hildenbrand <david@redhat.com=
-> wrote:
->
-> On 04.04.24 21:04, Mark Brown wrote:
-> > On Thu, Apr 04, 2024 at 08:58:06PM +0200, David Hildenbrand wrote:
-> >
-> >> or even introduce some ARCH_HAS_SHADOW_STACK so we can remove these
-> >> arch-specific thingies here.
-> >
-> > It would be convenient if you could pull the ARCH_HAS_USER_SHADOW_STACK
-> > patch out of my clone3 series to do that:
-> >
-> >     https://lore.kernel.org/all/20240203-clone3-shadow-stack-v5-3-322c6=
-9598e4b@kernel.org/
->
-> Crazy, I completely forgot about that one. Yes!
+This commit documents the litmus tests in the "locking" directory.
 
-I missed that. Roger.
-Will do that in the next series.
-Thanks.
+Signed-off-by: Paul E. McKenney <paulmck@kernel.org>
+Cc: Alan Stern <stern@rowland.harvard.edu>
+Cc: Will Deacon <will@kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Boqun Feng <boqun.feng@gmail.com>
+Cc: Nicholas Piggin <npiggin@gmail.com>
+Cc: David Howells <dhowells@redhat.com>
+Cc: Jade Alglave <j.alglave@ucl.ac.uk>
+Cc: Luc Maranget <luc.maranget@inria.fr>
+Cc: "Paul E. McKenney" <paulmck@kernel.org>
+Cc: Akira Yokosawa <akiyks@gmail.com>
+Cc: Daniel Lustig <dlustig@nvidia.com>
+Cc: Joel Fernandes <joel@joelfernandes.org>
+Cc: Mark Rutland <mark.rutland@arm.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: <linux-arch@vger.kernel.org>
+Cc: <linux-doc@vger.kernel.org>
+---
+ Documentation/litmus-tests/README | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/Documentation/litmus-tests/README b/Documentation/litmus-tests/README
+index 658d37860d397..5c8915e6fb684 100644
+--- a/Documentation/litmus-tests/README
++++ b/Documentation/litmus-tests/README
+@@ -22,6 +22,35 @@ Atomic-RMW-ops-are-atomic-WRT-atomic_set.litmus
+     NOTE: Require herd7 7.56 or later which supports "(void)expr".
+ 
+ 
++locking (/locking directory)
++----------------------------
++
++DCL-broken.litmus
++	Demonstrates that double-checked locking needs more than just
++	the obvious lock acquisitions and releases.
++
++DCL-fixed.litmus
++	Demonstrates corrected double-checked locking that uses
++	smp_store_release() and smp_load_acquire() in addition to the
++	obvious lock acquisitions and releases.
++
++RM-broken.litmus
++	Demonstrates problems with "roach motel" locking, where code is
++	freely moved into lock-based critical sections.  This example also
++	shows how to use the "filter" clause to discard executions that
++	would be excluded by other code not modeled in the litmus test.
++	Note also that this "roach motel" optimization is emulated by
++	physically moving P1()'s two reads from x under the lock.
++
++	What is a roach motel?	This is from an old advertisement for
++	a cockroach trap, much later featured in one of the "Men in
++	Black" movies.	"The roaches check in.	They don't check out."
++
++RM-fixed.litmus
++	The counterpart to RM-broken.litmus, showing P0()'s two loads from
++	x safely outside of the critical section.
++
++
+ RCU (/rcu directory)
+ --------------------
+ 
+-- 
+2.40.1
+
 
