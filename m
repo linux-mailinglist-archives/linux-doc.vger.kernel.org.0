@@ -1,216 +1,232 @@
-Return-Path: <linux-doc+bounces-13624-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-13626-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3633089BF6D
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Apr 2024 14:50:45 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E8DD89BF86
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Apr 2024 14:54:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 500971C213E0
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Apr 2024 12:50:44 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B52C6B22F2D
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Apr 2024 12:54:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A2C336F53D;
-	Mon,  8 Apr 2024 12:50:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 223C07317D;
+	Mon,  8 Apr 2024 12:54:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="ii/pj0r7"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="cOBge/Yc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com (mail-bn8nam04on2110.outbound.protection.outlook.com [40.107.100.110])
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (mail-dm6nam11on2083.outbound.protection.outlook.com [40.107.223.83])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 949996F065;
-	Mon,  8 Apr 2024 12:50:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.100.110
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D0266F08E;
+	Mon,  8 Apr 2024 12:54:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.223.83
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1712580629; cv=fail; b=ICkUxmHU2N+A5yqpIF+coQsGo34YUhfWfq8V976lfpbZsNaowWFk19MNDdFfR7t4HtxWyq4iUIK/aLUre3Ee3Ul1yiuUzvcXkVhsqphr4ywOMPwymzKbbhCUYcCC1T/llo68X9rFlJ0PphuebAsBJU7wE1qIJdD42e/5THhk5UQ=
+	t=1712580875; cv=fail; b=fkb0qdnT7KRIgf4kbUt17BC858oVFBD3rziHywVwLxgQ30RYkqgbz8NiShN7eHaQ3S4qD5QRT7XwQ5fNVaoBMD1ofafZCifsgrfgvRsDDUFY49Kj+tfowX8Xs78hSQQJHEQv+Ya+lGIIX84lDJ+BUNN1pwlEJllRp6VfPXfnemc=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1712580629; c=relaxed/simple;
-	bh=uTgRxiVO1O0vQ6sszHI19bBLTaNkcC9aW7AFfPPgH4E=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=J3aLBwMJA/oGJ1IbVqh7ECsxBr5S8gF31YJHDX8VCp3AWjxXivfCsNtdIG9UZ6Dzup9eDQIbV9PZ+iWExYsQAQvhqqLIRy+Z429mtgSFOAIWdF8oZ4GfmZaI1AK4iMJUYJkVOWXMNG1OUM9nyAhqDpPsxjJq0hefrEHtD2aduMs=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=ii/pj0r7; arc=fail smtp.client-ip=40.107.100.110
+	s=arc-20240116; t=1712580875; c=relaxed/simple;
+	bh=GzCHQb+b5mjqjQX85hu+ZTeXNPz7/e9N6h8o/vKorxg=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=mMkWExw5DJmugALKTjfM5zKQMg49j7hCDpg9/qmokoEb8YJAcWRzZCadQPBjX1NdZiuQJFi8udQLekZzp6e/hkAjRPZXkOo/3Hg0INL8GbKpnQsTyNBDELUkaWuAj7pTk45CsC1nwg2MWFPMVGmXUO5zEL1sZwRyADdVBSWrLBo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=cOBge/Yc; arc=fail smtp.client-ip=40.107.223.83
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
 Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FSrlsQS7EvT3qZUh14ajBV9qrhplg1FwpqPVuH3CjMnF3Zr3JU1x+7HXzhwwKpcc96CLZoF5Y0HLKMOjeP7w1S2hWPuJQyw2Ewbdohvvq/gveXJAGKEBzUP+tOyD0UYn3MRbc5NtfuFIhb/nLrWw5loiTUKvMjBWTPU0nH5RjyNpXfnbhSkrNqJnYc/yxyD8Ou0j0yIL2z8Kge4ds7m+c8Rg7tZq6D+C2FgGuivN3XXPmTGlYiVhU9gGaCmE7PhxjyLhZxTHQE3fMOsblji5k3EeLTSIvMCl7VEFk/cKf9XLLqG5HdTcVCZDlCkrAjW9f8CjwPFWNZBWxAhGJNMn/w==
+ b=VGxF4rf6toKkc4ymR2ZPEhd7lHG95JLm+Dt/dcZWAPriAp+X0z2jHnr/I4XhjLsZqjhWjccRlbrGzo2H8AR4jzOwWMVyfmTXuZVWJUWfPeK9qdb5PISHp3SQOzrBosy8cSWcWo3RVDctX2QZ/srrR0jcP6cJSxk0+BBSzMN2pQTymS3IrQwezcaNIcn0hIDgM+1G6j9NtINcutg5s8fuCBAglTQumZsGNCKvLZK6UMAfy7zZjblB0fBkYq70RChiKRWEAYEptJrPTmNPCt+cT2qer0SOIs91X0PSIL7THcwuUvan/REKrMHSuZzekL6Bok1bMOmXlDOEjObv2pjwXw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uTgRxiVO1O0vQ6sszHI19bBLTaNkcC9aW7AFfPPgH4E=;
- b=DGARJaDGBLQb2lm+hj48Axhb1x7ORLCObBooYzPUBOlOodSQLLfa6aHu6I0T0rvyVkQtyNDTdULE2bHbFgy8f5nHxnKf5fmlpUNtlHOmYXjO3/K9MC9DIZCzn4t2IjsLkQN8AtcZddVq63lmyvouDnKG6fO7+GHfyZorYDAH1DmRJ2NmXGQ1G5/fUO1PQc6sjgJrvns1tqaS96bI6R5beHXvst9LNxqBLdFl2mebrnesKFdkfFpeEgW3A+mjw217MApNIAlp1ztiPU7Se/sgV+G1lVzQiEY1EGYVTUtDjIiR2914b5GDX0CY0/rcNXnpRfC2IKV+WEsLw3SWQXejpA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
+ bh=vetlP21hQJ95M8t3oHmkorJC8ZQy2jcFN8CRJiGwgN4=;
+ b=ej1WImZ/g/RoRSkGVp/9RETgDJbZUVCrwVxDlRSaYGFPKo5rKXNb1G/Ytsxb+aUCbrVEq+kAjWQbUC2WeudImZfOwXKZGgTHZI2uUzkRIq1U0+wIuTT1B08c8GYo2oV1bbMRmVdSdBoJGZNLH+0LVGQVCEa1ahJREiG97S/HcOlx1yj6C9ZqFwZcBrCorlit0rsQcg4wMvC8y0SuwjUoAIs4pbl3WDF3XihtxlzXmsGmKMPM5uW491m5I7CSlaVDG3Io/ul50qnejo/hnBx0Q7gsfy6pRBME0nD+F/ZsHNOUKkMXUynUDiByfjoz0vEogEUcuWjQT21l8DjM75h7Fg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.160) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uTgRxiVO1O0vQ6sszHI19bBLTaNkcC9aW7AFfPPgH4E=;
- b=ii/pj0r7ewHjgYSzRJYXVxlZ95h/efdpiFkCAAu5xdDEvTAGFuabw8zbp1n6hB2RbJ38FkQXdfXrnUBHzRpBn8AlBn/kbGJkgswukU8I1cNmM/pi+9M/gC1CabgCUzkp0WJtg+MVCK9LmxI2xjeQeqhOPmKbEQnq0e2uZFwHaZ3AJehGWFQtOQMVecYiDYZ4oC3w8qaszjkpXx/djZrwGNwtAlgIWAym2tUIfteaS3nzYDgFZ+LeKZKlvL1sfd/vMJ8YrptiQtw0VrZiZMyPmh2wEINhc0PONni3xo8Q9qWoaH8AoButVaA8vmvgQrB31sNN9weqPE0XqIiBngHrjA==
-Received: from DM6PR12MB4516.namprd12.prod.outlook.com (2603:10b6:5:2ac::20)
- by PH7PR12MB6611.namprd12.prod.outlook.com (2603:10b6:510:211::11) with
+ bh=vetlP21hQJ95M8t3oHmkorJC8ZQy2jcFN8CRJiGwgN4=;
+ b=cOBge/Yclf10Jy7YAh2sxlghAd3aAw7mKzDTPY4k56UzHl3V2ieSvMT4ttsIY1ff1DYR6EOud0FVR46e1yvCPLNPse2kFngUYfjcYZqCrZdYvGSWTEcp3illX5gTMu/i6MrQkFdPE/9lbOjV+sxICF6a0hbMDUtTuOzt7vA7GQaADqeI7LXQ3kIqXWv6OoT7S2tig+x9oC824LdbA9GtERwRV2sfurcF6urEulla01758/oVkS0y6dclImeCbcoviJuQDGzrBIG95ZZ8C5HBgrOW/AiOc+cBMeD2qcMA5NITdOrqmUVR9IXACp8VMZux6Ios/pO2JCSU+sD48Tu38w==
+Received: from BN9PR03CA0797.namprd03.prod.outlook.com (2603:10b6:408:13f::22)
+ by CH0PR12MB8579.namprd12.prod.outlook.com (2603:10b6:610:182::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Mon, 8 Apr
- 2024 12:50:23 +0000
-Received: from DM6PR12MB4516.namprd12.prod.outlook.com
- ([fe80::43e9:7b19:9e11:d6bd]) by DM6PR12MB4516.namprd12.prod.outlook.com
- ([fe80::43e9:7b19:9e11:d6bd%6]) with mapi id 15.20.7409.053; Mon, 8 Apr 2024
- 12:50:23 +0000
+ 2024 12:54:22 +0000
+Received: from BN1PEPF00004689.namprd05.prod.outlook.com
+ (2603:10b6:408:13f:cafe::b2) by BN9PR03CA0797.outlook.office365.com
+ (2603:10b6:408:13f::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.30 via Frontend
+ Transport; Mon, 8 Apr 2024 12:54:22 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ BN1PEPF00004689.mail.protection.outlook.com (10.167.243.134) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7452.22 via Frontend Transport; Mon, 8 Apr 2024 12:54:22 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.41; Mon, 8 Apr 2024
+ 05:54:02 -0700
+Received: from dev-r-vrt-155.mtr.labs.mlnx (10.126.230.35) by
+ rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.12; Mon, 8 Apr 2024 05:53:57 -0700
 From: Danielle Ratson <danieller@nvidia.com>
-To: Andrew Lunn <andrew@lunn.ch>
-CC: "netdev@vger.kernel.org" <netdev@vger.kernel.org>, "davem@davemloft.net"
-	<davem@davemloft.net>, "edumazet@google.com" <edumazet@google.com>,
-	"kuba@kernel.org" <kuba@kernel.org>, "pabeni@redhat.com" <pabeni@redhat.com>,
-	"corbet@lwn.net" <corbet@lwn.net>, "linux@armlinux.org.uk"
-	<linux@armlinux.org.uk>, "sdf@google.com" <sdf@google.com>,
-	"kory.maincent@bootlin.com" <kory.maincent@bootlin.com>,
-	"maxime.chevallier@bootlin.com" <maxime.chevallier@bootlin.com>,
-	"vladimir.oltean@nxp.com" <vladimir.oltean@nxp.com>,
-	"przemyslaw.kitszel@intel.com" <przemyslaw.kitszel@intel.com>,
-	"ahmed.zaki@intel.com" <ahmed.zaki@intel.com>, "richardcochran@gmail.com"
-	<richardcochran@gmail.com>, "shayagr@amazon.com" <shayagr@amazon.com>,
-	"paul.greenwalt@intel.com" <paul.greenwalt@intel.com>, "jiri@resnulli.us"
-	<jiri@resnulli.us>, "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, mlxsw
-	<mlxsw@nvidia.com>, Petr Machata <petrm@nvidia.com>, Ido Schimmel
-	<idosch@nvidia.com>
-Subject: RE: [RFC PATCH net-next 9/9] ethtool: Add ability to flash
- transceiver modules' firmware
-Thread-Topic: [RFC PATCH net-next 9/9] ethtool: Add ability to flash
- transceiver modules' firmware
-Thread-Index: AQHaTQ+QQZNGrHyNcEuTxxeyuUrKM7DrCc6AgAb9nvCAAhi30IBqqhTA
-Date: Mon, 8 Apr 2024 12:50:23 +0000
-Message-ID:
- <DM6PR12MB45161B8BB3E13CED7EAE3311D8002@DM6PR12MB4516.namprd12.prod.outlook.com>
-References: <20240122084530.32451-1-danieller@nvidia.com>
- <20240122084530.32451-10-danieller@nvidia.com>
- <5bf6b526-02c4-4940-b8ec-bf858f9d4a58@lunn.ch>
- <DM6PR12MB45161C82F43B67AD8EDB950BD87C2@DM6PR12MB4516.namprd12.prod.outlook.com>
- <DM6PR12MB4516BC80DBF383A186707F19D87C2@DM6PR12MB4516.namprd12.prod.outlook.com>
-In-Reply-To:
- <DM6PR12MB4516BC80DBF383A186707F19D87C2@DM6PR12MB4516.namprd12.prod.outlook.com>
-Accept-Language: he-IL, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM6PR12MB4516:EE_|PH7PR12MB6611:EE_
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info:
- 5B1u+/TOFBksl+YpSGik1axPTJWwo82fZ3v4dGdl4TYb/nFK5EWvBHPV18dRkpjRc0SYbOpcjyuTP217Fzdo89VnZyWuXS0chSamLswKP46Q2uoF8dAmO4T8m9LI3+h9ubfyJEXqnChrrNDfWPzC+txGqkojJ3y2I1oh9bbrFWVVPkpGUiBFy7m0gYLRmvtDqWgePqmDp4t0516avS4Y8cc4G+bovvwrMT3x9RbYuXHf1NaUYVuPcma5SWGRkilLk2jEJcrE4+UESHzR5j99rvbhnIjzLfibL77ZiUUgn32AfcjtNUZ5FPsoW+lP5aTPl33SjEtVcF+NJpnsd8ANXWdc+X8J502uFT770wdZ3Gm+GCqS6WoyvJMr7ufXgD1M30k0/AoNTP6sxVqzhJvMdNBQA6Ou4Rr+eTUO+OXzzoDJJDAUFohltc3lkitdVtGoHAzT2WuEBggLiL8TsuMvvAxOFlN9PxJMosq5J7p8IK/QY3wMnCnKlGWOsjxoOKnAC4zXMn1dwYbyT8YH4Qogc9VaFTM5Eem0VhG0bkwnP72Q5GL5N/Ifpez+80OKrWa++7E849CvxxtMKxWPvLBgOpjt7iLlmwt7Il8srngKvr8KONso86D6etIF7QCHY5C8/55ZWqlbf03efkF1HBaeuKGFKBjc3M4JIQRDzcsC8O0=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB4516.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(7416005)(376005)(1800799015)(366007);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?TEg2V1ZKNStGVzZvTGFuUGVxNHhPaUxraHdUeUZiejdzRjl5SVdTcGhway9S?=
- =?utf-8?B?RU1EUlZiNk1meTlvWGtyQVRuS0FHWFlHT0pHaG8wT0pFZzBnU3NNNFZ5b3Vl?=
- =?utf-8?B?UFhrOGkvVEZaZjhrWWFuRU1LSXdRWVVlMS9nb05hWkkzZ3phNWE5T2g4ckFE?=
- =?utf-8?B?ZmZVSnF4aThtWk43cVp5ZTcyU1V6SEpFM1FkcjVLTTlZckZ0UURRM1QwRFda?=
- =?utf-8?B?L0Q2VFFEMkhFMHhwc2hMSDB2YXVZV3NBVXNWbzZsSlVaUFJGMGY0TzROeGUz?=
- =?utf-8?B?RTA0TTdEQ3lQTzR6RVhIaHB1Y0Vqbk5Qc1hQTGxXeEtJaGxpOFJya1JMOVdC?=
- =?utf-8?B?MFROc1Jnbm56MldOVGs0eWVHLzVZQnozK0JkYlRuYXQvOXliVSsyVUJLUGZj?=
- =?utf-8?B?SU9EMEJGZW1IZHpEV3UxUTY2YWxYZVA3NGwwYkZqOWxtTUh1QURwMWFsYW1m?=
- =?utf-8?B?OGdZUmFlTExzNkhmZnc3NkpHbzM3MjRTaW1XaFpLTWFHUjF1bFRxTGtCc0tX?=
- =?utf-8?B?N2RqZS80cVQ2b2dwY2hLdDNBL2N5NGI1SlBFbFRNZ2dEZkd1TkpxMGRXNlYw?=
- =?utf-8?B?QTN1eTdPcEFCOThUZXVlNGJseGFHaWs4Y3Z6NnFVSnJMNlA2RTh2bG1hUHY2?=
- =?utf-8?B?RUoxV2drR0xtSHdHNDdYSGw0SHh1Mks3Y0NnQUF1VVpBRDM0Q3hzOUU5akg3?=
- =?utf-8?B?OCt4bzdGNHM2RnBmT1VmdzNoTlZtUXJ1YnJlNGg5ZC8rbmlYaTdVZUxKV2o2?=
- =?utf-8?B?bzdHZEJOTVNvWEJIcUd1UiswMnJwSTBjc3RHYlppR3BZVXBOYSt1WXNBM3ds?=
- =?utf-8?B?a3R2b1RKYlg5WlRwWkZQbW1Ta2tEcmVKekc4QjVYenBlZGlGWGZ0cENsTWsy?=
- =?utf-8?B?eGNnSzljZno1WEpaU0d6RUV3aGxnWTdnR2Q1NE9sdjlmSkNhRzZRQUQ2eng1?=
- =?utf-8?B?VUg4WjlrbHNoNGJIOWk4a1hSZ3Q1T0oxRU9ObVA1MmVtcGpMdFdoWFB5aDdw?=
- =?utf-8?B?YnVQT0kxOW1OWnNKMzZwNFFsclVqNHZnaThHR1ovRmozdVNiR2wrMmFyck5j?=
- =?utf-8?B?akxybUlDbXlQSFJuSXk1eEUxS08xSllWWXVjRjl1UTE5a0dPSW9rRXoyYUVi?=
- =?utf-8?B?bXdRWmhQdDVyWHlXM0FpcWVHZkFUK1NXQW1icVc0M1NLOFN0MldQZXFKOHEw?=
- =?utf-8?B?YjE3Qjl1QUVvejJzMndINjBTbG9GeithYzk1MUxCSXhXQ1BuTHdKaXllWHRT?=
- =?utf-8?B?WUlSNUZVWURtN3RrUzg3c0xFdlJud1ROSGsyaGxGZ0ZUQ09WOUdYLzRRZkxU?=
- =?utf-8?B?V01qREJWV0hXL2EvalNZM3RhenQvTjJEK3piUmNLTUhFSGxPaW93cUNMUHZE?=
- =?utf-8?B?bUNlR0p5MXR4d2hxbDVVRW5iMnNhVk5mZTBObTl5dUpQeGlsTndsNmN2U0Qx?=
- =?utf-8?B?aXZOV3BjbWVRNUVKRW85cmkrUzJWeElDTE82dkNMaGc1Q2ozTGJncDhqSmJV?=
- =?utf-8?B?c2NFMFFxUGNNdEVQRDVhRnFTaWc3MERQRWUxaFNkRGpoaU9KanVCTmJ5cW5C?=
- =?utf-8?B?QlR4ZXdtVFN4OW5DOGJpK2F3Y1BuUjBVT1QrdExQWkpEWHdsb2lNUDRldjB1?=
- =?utf-8?B?VGg3cHA5VE5reW5OUWI5VXZ1UWRORUl4UU1PV0VsMHgvTVlodWd2WnJsUU5z?=
- =?utf-8?B?MTR5ZUNWOUR1bW9mNDI1SmVKNlFxYnRKZElBbGVNTnF1bUxMZnpIeVVuSzlQ?=
- =?utf-8?B?NElkN1FILzVuVU0vMGU4RWNmTFY5TXZNK0t2QnlKOG5PN0ZmVVAyUU15SzVX?=
- =?utf-8?B?Y2VFTDJ4TnJVTzFzdU8ySVdTMlhUa1pua0RLYlFCbVFZbFg0RTBKdlk5ZHM1?=
- =?utf-8?B?V3ZSbEZTdFdxYnNkTzZkamI0OWpDZTJjZnkveFZyVDhJa1FnRjZ0aDUyUTRt?=
- =?utf-8?B?WUR5d1U0Q2NKcm9sU3FheTZzZGRQUXJnZnlPVlZ3SDRYMkl0NEdRa2ZEaURF?=
- =?utf-8?B?YzBjSTY1WTE4d3QwU0h0K0E4aVpsTGorcHV4QmlYQk1QMmFvY01KTVlURng2?=
- =?utf-8?B?OWdnWVhnY2pVaEVQOGgwTTNhbUJFZ0pHejhhbG5mQ0FCS1F1UVJNWHJ0RUIv?=
- =?utf-8?Q?HhZx4RP2QlUrDmGvYedymIzmd?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+To: <netdev@vger.kernel.org>
+CC: <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
+	<pabeni@redhat.com>, <corbet@lwn.net>, <linux@armlinux.org.uk>,
+	<sdf@google.com>, <kory.maincent@bootlin.com>,
+	<maxime.chevallier@bootlin.com>, <vladimir.oltean@nxp.com>,
+	<przemyslaw.kitszel@intel.com>, <ahmed.zaki@intel.com>,
+	<richardcochran@gmail.com>, <shayagr@amazon.com>, <paul.greenwalt@intel.com>,
+	<jiri@resnulli.us>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <mlxsw@nvidia.com>, <petrm@nvidia.com>,
+	<idosch@nvidia.com>, Danielle Ratson <danieller@nvidia.com>
+Subject: [PATCH net-next 00/10] Add ability to flash modules' firmware
+Date: Mon, 8 Apr 2024 15:53:30 +0300
+Message-ID: <20240408125340.2084269-1-danieller@nvidia.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004689:EE_|CH0PR12MB8579:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6c8b7112-7190-49fa-612e-08dc57cb035b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	Y2cX2Q9wRjcNIj86e6549ijVF96MWpc1bzqqaJCBwYdug8ohdrXAmAlqLRWF7t1chXn6DyKIQ8Zx/BnXOZziBYYFO+IKhZfDJZVTpPnrJvHpaLlw/96UW0aVEw94K3YvdNk85hBhP55aMAiOYsJEHI40B793nLqu9JgxEPExwv/WhgTLE+Lbywb2nSmewDeYJ6bZrArAaUnlcIqkes0r2iA2fOZ7xiyCXHif6AnVcR0i1gy5HGRBEuqPf8VGQGDad3+HQL1RvqWL373cJ1AqbManfARtQUE6S5DX+6beU3mYlTvirKY/XY0Nfso8xlSimp+tI8ZVxGDAIeGsX6gpxDmuUSYufobGjqvJXE7qq2EkK1ed8tWHDzH6MH7CcSNE1tH/B3eSz0pcDjlpYu8NNXqPe4diKc8Kj2UAmRRAbknG6ZFtuYfPgPNbeYbdAQwVLLNLMdOIbAhIHtj/RACcFdfOMogQgzbSN0Cxt4b9XToXLR+2d+FVO9dfeArXQbVsWIhL0f+D9yqBM2TuiVh2H7DuICBHhpW3j3Qf16wCXQgJeciImm9E7TqJ2OXvYr3bqQm0kGkL3NLRmJIwrU93yJ2z1oE3eeaJv3q6XSG0fSxCccQitTCjlFriMaBh8sbirfXRSaiTIDSVLnuY+gPSpGHPiV4SBHgPwzZw238vlG9aidqTS3P3iV52Rnnrv0hfc9E/ZFsj6mQAP/zfX4zbckXulrPooKowZKY1IDIRPeNtqlAbw73f4ZVGf9ouIUIJ
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.160;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge1.nvidia.com;CAT:NONE;SFS:(13230031)(36860700004)(82310400014)(1800799015)(7416005)(376005);DIR:OUT;SFP:1101;
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB4516.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f41e69f-d22f-42ab-5e46-08dc57ca74ba
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Apr 2024 12:50:23.2986
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Apr 2024 12:54:22.3721
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 0OIgbBhjLPw6F+ZTiKT4cZs64kp3sHyJWSOr2MNY4VvUeB5LT8IMhmpQOV5fKk31O4rY22UFxcXLd3NfMIzCHw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6611
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6c8b7112-7190-49fa-612e-08dc57cb035b
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.160];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN1PEPF00004689.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB8579
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogRGFuaWVsbGUgUmF0c29u
-DQo+IFNlbnQ6IFdlZG5lc2RheSwgMzEgSmFudWFyeSAyMDI0IDE3OjUzDQo+IFRvOiBBbmRyZXcg
-THVubiA8YW5kcmV3QGx1bm4uY2g+DQo+IENjOiBuZXRkZXZAdmdlci5rZXJuZWwub3JnOyBkYXZl
-bUBkYXZlbWxvZnQubmV0OyBlZHVtYXpldEBnb29nbGUuY29tOw0KPiBrdWJhQGtlcm5lbC5vcmc7
-IHBhYmVuaUByZWRoYXQuY29tOyBjb3JiZXRAbHduLm5ldDsNCj4gbGludXhAYXJtbGludXgub3Jn
-LnVrOyBzZGZAZ29vZ2xlLmNvbTsga29yeS5tYWluY2VudEBib290bGluLmNvbTsNCj4gbWF4aW1l
-LmNoZXZhbGxpZXJAYm9vdGxpbi5jb207IHZsYWRpbWlyLm9sdGVhbkBueHAuY29tOw0KPiBwcnpl
-bXlzbGF3LmtpdHN6ZWxAaW50ZWwuY29tOyBhaG1lZC56YWtpQGludGVsLmNvbTsNCj4gcmljaGFy
-ZGNvY2hyYW5AZ21haWwuY29tOyBzaGF5YWdyQGFtYXpvbi5jb207DQo+IHBhdWwuZ3JlZW53YWx0
-QGludGVsLmNvbTsgamlyaUByZXNudWxsaS51czsgbGludXgtZG9jQHZnZXIua2VybmVsLm9yZzsg
-bGludXgtDQo+IGtlcm5lbEB2Z2VyLmtlcm5lbC5vcmc7IG1seHN3IDxtbHhzd0BudmlkaWEuY29t
-PjsgUGV0ciBNYWNoYXRhDQo+IDxwZXRybUBudmlkaWEuY29tPjsgSWRvIFNjaGltbWVsIDxpZG9z
-Y2hAbnZpZGlhLmNvbT4NCj4gU3ViamVjdDogUkU6IFtSRkMgUEFUQ0ggbmV0LW5leHQgOS85XSBl
-dGh0b29sOiBBZGQgYWJpbGl0eSB0byBmbGFzaCB0cmFuc2NlaXZlcg0KPiBtb2R1bGVzJyBmaXJt
-d2FyZQ0KPiANCj4gPiA+IFN1YmplY3Q6IFJlOiBbUkZDIFBBVENIIG5ldC1uZXh0IDkvOV0gZXRo
-dG9vbDogQWRkIGFiaWxpdHkgdG8gZmxhc2gNCj4gPiA+IHRyYW5zY2VpdmVyIG1vZHVsZXMnIGZp
-cm13YXJlDQo+ID4gPg0KPiA+ID4gPiArc3RhdGljIGludA0KPiA+ID4gPiArbW9kdWxlX2ZsYXNo
-X2Z3X3NjaGVkdWxlKHN0cnVjdCBuZXRfZGV2aWNlICpkZXYsDQo+ID4gPiA+ICsJCQkgc3RydWN0
-IGV0aHRvb2xfbW9kdWxlX2Z3X2ZsYXNoX3BhcmFtcyAqcGFyYW1zLA0KPiA+ID4gPiArCQkJIHN0
-cnVjdCBuZXRsaW5rX2V4dF9hY2sgKmV4dGFjaykgew0KPiA+ID4gPiArCWNvbnN0IHN0cnVjdCBl
-dGh0b29sX29wcyAqb3BzID0gZGV2LT5ldGh0b29sX29wczsNCj4gPiA+ID4gKwlzdHJ1Y3QgZXRo
-dG9vbF9tb2R1bGVfZndfZmxhc2ggKm1vZHVsZV9mdzsNCj4gPiA+ID4gKwlpbnQgZXJyOw0KPiA+
-ID4gPiArDQo+ID4gPiA+ICsJaWYgKCFvcHMtPnNldF9tb2R1bGVfZWVwcm9tX2J5X3BhZ2UgfHwN
-Cj4gPiA+ID4gKwkgICAgIW9wcy0+Z2V0X21vZHVsZV9lZXByb21fYnlfcGFnZSkgew0KPiA+ID4g
-PiArCQlOTF9TRVRfRVJSX01TRyhleHRhY2ssDQo+ID4gPiA+ICsJCQkgICAgICAgIkZsYXNoaW5n
-IG1vZHVsZSBmaXJtd2FyZSBpcyBub3Qgc3VwcG9ydGVkIGJ5DQo+ID4gPiB0aGlzIGRldmljZSIp
-Ow0KPiA+ID4gPiArCQlyZXR1cm4gLUVPUE5PVFNVUFA7DQo+ID4gPiA+ICsJfQ0KPiA+ID4gPiAr
-DQo+ID4gPiA+ICsJaWYgKGRldi0+bW9kdWxlX2Z3X2ZsYXNoX2luX3Byb2dyZXNzKSB7DQo+ID4g
-PiA+ICsJCU5MX1NFVF9FUlJfTVNHKGV4dGFjaywgIk1vZHVsZSBmaXJtd2FyZSBmbGFzaGluZyBh
-bHJlYWR5DQo+ID4gPiBpbiBwcm9ncmVzcyIpOw0KPiA+ID4gPiArCQlyZXR1cm4gLUVCVVNZOw0K
-PiA+ID4gPiArCX0NCj4gPiA+ID4gKw0KPiA+ID4gPiArCW1vZHVsZV9mdyA9IGt6YWxsb2Moc2l6
-ZW9mKCptb2R1bGVfZncpLCBHRlBfS0VSTkVMKTsNCj4gPiA+ID4gKwlpZiAoIW1vZHVsZV9mdykN
-Cj4gPiA+ID4gKwkJcmV0dXJuIC1FTk9NRU07DQo+ID4gPiA+ICsNCj4gPiA+ID4gKwltb2R1bGVf
-ZnctPnBhcmFtcyA9ICpwYXJhbXM7DQo+ID4gPiA+ICsJZXJyID0gcmVxdWVzdF9maXJtd2FyZSgm
-bW9kdWxlX2Z3LT5mdywgbW9kdWxlX2Z3LQ0KPiA+ID4gPnBhcmFtcy5maWxlX25hbWUsDQo+ID4g
-PiA+ICsJCQkgICAgICAgJmRldi0+ZGV2KTsNCj4gPiA+DQo+ID4gPiBIb3cgYmlnIGFyZSB0aGVz
-ZSBmaXJtd2FyZSBibG9icz8NCj4gPiA+DQo+IA0KPiBUaGUgbGFyZ2VzdCBmaWxlIEkgY2FtZSBh
-Y3Jvc3MgaXMgNDAwSy4NCj4gDQo+ID4gPiBJZGVhbGx5IHdlIHdhbnQgdG8gYmUgYWJsZSB0byB1
-c2UgdGhlIHNhbWUgQVBJIHRvIHVwZ3JhZGUgdGhpbmdzDQo+ID4gPiBsaWtlIEdQT04gbW9kdWxl
-cywgd2hpY2ggb2Z0ZW4gcnVuIGFuIG9wZW53cnQgaW1hZ2UsIGFuZCB0aGV5IGFyZQ0KPiA+ID4g
-cGx1Z2dlZCBpbnRvIGEgY2FibGUgbW9kZW0gd2hpY2ggZG9lcyBub3QgaGF2ZSB0b28gbXVjaCBS
-QU0uDQo+ID4gPg0KPiA+ID4gR2l2ZW4gdGhhdCB0aGUgaW50ZXJmYWNlIHRvIHRoZSBFRVBST00g
-aXMgdXNpbmcgMTI4IGJ5dGUgMS8yIHBhZ2VzLA0KPiA+ID4gd291bGQgaXQgYmUgcG9zc2libGUg
-dG8gdXNlIHJlcXVlc3RfcGFydGlhbF9maXJtd2FyZV9pbnRvX2J1ZigpIHRvDQo+ID4gPiByZWFk
-IGl0IG9uIGRlbWFuZCwgcmF0aGVyIHRoYW4gYWxsIGF0IG9uY2U/DQo+ID4gPg0KPiA+ID4gICAg
-ICBBbmRyZXcNCj4gPg0KPiA+IE9LLCBJbGwgaGFuZGxlIHRoYXQgaW4gdGhlIGFjdHVhbCB2ZXJz
-aW9uLg0KPiA+IFRoYW5rcy4NCg0KSGkgQW5kcmV3LA0KDQpUaGFua3MgYWdhaW4gZm9yIHlvdXIg
-ZmVlZGJhY2suDQpJIHRob3VnaHQgYWdhaW4gYWJvdXQgeW91IGNvbW1lbnQsIGFuZCB0aGlzIHBh
-dGNoc2V0IGFkZHMgc3VwcG9ydCBmb3IgZmxhc2hpbmcgQ01JUyBjb21wbGlhbnQgbW9kdWxlcyBv
-bmx5Lg0KTGF0ZXIgb24sIGlmIGl0IHdpbGwgYmUgZXhwYW5kZWQgdG8gbW9yZSBtb2R1bGVzLCBp
-dCB3aWxsIGJlIG1vcmUgcmVhc29uYWJsZSB0byBhZGQgc3VwcG9ydCBsaWtlIHlvdSBoYXZlIHN1
-Z2dlc3RlZCB0byBmaXQgdGhlIG5ldyBzdXBwb3J0ZWQgc3RhbmRhcmQuDQpTbywgY3VycmVudGx5
-IEkgdGhpbmsgaXQgaXMgYmV0dGVyIHRvIG5vdCBhZGQgaXQgdG8gdGhpcyBzcGVjaWZpYyBwYXRj
-aHNldC4NCg0KVGhhbmtzLA0KRGFuaWVsbGUNCg==
+CMIS compliant modules such as QSFP-DD might be running a firmware that
+can be updated in a vendor-neutral way by exchanging messages between
+the host and the module as described in section 7.2.2 of revision
+4.0 of the CMIS standard.
+
+According to the CMIS standard, the firmware update process is done
+using a CDB commands sequence.
+
+CDB (Command Data Block Message Communication) reads and writes are
+performed on memory map pages 9Fh-AFh according to the CMIS standard,
+section 8.12 of revision 4.0.
+
+Add a pair of new ethtool messages that allow:
+
+* User space to trigger firmware update of transceiver modules
+
+* The kernel to notify user space about the progress of the process
+
+The user interface is designed to be asynchronous in order to avoid RTNL
+being held for too long and to allow several modules to be updated
+simultaneously. The interface is designed with CMIS compliant modules in
+mind, but kept generic enough to accommodate future use cases, if these
+arise.
+
+The kernel interface that will implement the firmware update using CDB
+command will include 2 layers that will be added under ethtool:
+
+* The upper layer that will be triggered from the module layer, is
+ cmis_ fw_update.
+* The lower one is cmis_cdb.
+
+In the future there might be more operations to implement using CDB
+commands. Therefore, the idea is to keep the cmis_cdb interface clean and
+the cmis_fw_update specific to the cdb commands handling it.
+
+The communication between the kernel and the driver will be done using
+two ethtool operations that enable reading and writing the transceiver
+module EEPROM.
+The operation ethtool_ops::get_module_eeprom_by_page, that is already
+implemented, will be used for reading from the EEPROM the CDB reply,
+e.g. reading module setting, state, etc.
+The operation ethtool_ops::set_module_eeprom_by_page, that is added in
+the current patchset, will be used for writing to the EEPROM the CDB
+command such as start firmware image, run firmware image, etc.
+
+Therefore in order for a driver to implement module flashing, that
+driver needs to implement the two functions mentioned above.
+
+Patchset overview:
+Patch #1-#2: Implement the EEPROM writing in mlxsw.
+Patch #3: Define the interface between the kernel and user space.
+Patch #4: Add ability to notify the flashing firmware progress.
+Patch #5: Add firmware flashing in progress flag.
+Patch #6: Add extended compliance codes.
+Patch #7: Add the cdb layer.
+Patch #8: Add the fw_update layer.
+Patch #9: Add ability to flash transceiver modules' firmware.
+Patch #10: Veto problematic scenarios.
+
+Danielle Ratson (8):
+  ethtool: Add an interface for flashing transceiver modules' firmware
+  ethtool: Add flashing transceiver modules' firmware notifications
+    ability
+  include: netdevice: Add module firmware flashing in progress flag to
+    net_device
+  net: sfp: Add more extended compliance codes
+  ethtool: cmis_cdb: Add a layer for supporting CDB commands
+  ethtool: cmis_fw_update: add a layer for supporting firmware update
+    using CDB
+  ethtool: Add ability to flash transceiver modules' firmware
+  ethtool: Veto some operations during firmware flashing process
+
+Ido Schimmel (2):
+  ethtool: Add ethtool operation to write to a transceiver module EEPROM
+  mlxsw: Implement ethtool operation to write to a transceiver module
+    EEPROM
+
+ Documentation/netlink/specs/ethtool.yaml      |  63 ++
+ Documentation/networking/ethtool-netlink.rst  |  62 ++
+ .../net/ethernet/mellanox/mlxsw/core_env.c    |  57 ++
+ .../net/ethernet/mellanox/mlxsw/core_env.h    |   6 +
+ drivers/net/ethernet/mellanox/mlxsw/minimal.c |  15 +
+ .../mellanox/mlxsw/spectrum_ethtool.c         |  15 +
+ include/linux/ethtool.h                       |  20 +-
+ include/linux/netdevice.h                     |   4 +-
+ include/linux/sfp.h                           |   6 +
+ include/uapi/linux/ethtool.h                  |  18 +
+ include/uapi/linux/ethtool_netlink.h          |  20 +
+ net/ethtool/Makefile                          |   2 +-
+ net/ethtool/cmis.h                            | 121 ++++
+ net/ethtool/cmis_cdb.c                        | 549 ++++++++++++++++++
+ net/ethtool/cmis_fw_update.c                  | 391 +++++++++++++
+ net/ethtool/eeprom.c                          |   6 +
+ net/ethtool/ioctl.c                           |  12 +
+ net/ethtool/module.c                          | 286 +++++++++
+ net/ethtool/module_fw.h                       |  38 ++
+ net/ethtool/netlink.c                         |  37 +-
+ net/ethtool/netlink.h                         |   2 +
+ 21 files changed, 1719 insertions(+), 11 deletions(-)
+ create mode 100644 net/ethtool/cmis.h
+ create mode 100644 net/ethtool/cmis_cdb.c
+ create mode 100644 net/ethtool/cmis_fw_update.c
+ create mode 100644 net/ethtool/module_fw.h
+
+-- 
+2.43.0
+
 
