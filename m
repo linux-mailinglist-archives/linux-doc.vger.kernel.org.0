@@ -1,112 +1,103 @@
-Return-Path: <linux-doc+bounces-13739-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-13741-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 450C789E2C7
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Apr 2024 20:55:52 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BEE389E305
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Apr 2024 21:10:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id EDC811F23A4B
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Apr 2024 18:55:51 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 178A72816FE
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Apr 2024 19:10:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DCEA1156F36;
-	Tue,  9 Apr 2024 18:55:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D40991586CC;
+	Tue,  9 Apr 2024 19:08:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="KWldweP9"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F/XMayYD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4252113E3E8;
-	Tue,  9 Apr 2024 18:55:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.19
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A24551586C7;
+	Tue,  9 Apr 2024 19:08:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1712688947; cv=none; b=cehb2mpDq0VpN6ZvQaT1qdLU6sY3GxKvEBPIvklNOn1UNhLsU7ZWjJnCnu+BTe0q0S5PWLqvzseEtwAk0WAGRsdlndlCUODYooHBgdxksHjxXC7H1qD8XbqX1R3eCKAt7ADjfQAiTuCzPOd3pHBnpPj8kbTSqeEK4laD+HS5kqQ=
+	t=1712689734; cv=none; b=W6j3x8nI8rk1I5FR6Zs6KrYvUx+32hIkhZyUbSLXoB2kpnNer3V62Fs2WL1EQgpIBnvYuDGVH57Emwd6mnZjaYp5h32EsSQDysw07WyF+nTMsN/lNv95FgUx093sSFBu+JqjiS0xFa/J2b6zCBVmpASIXOKm6poOueqmlD/3W8k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1712688947; c=relaxed/simple;
-	bh=Jo9vvIH5U/HV9EfsCBETk8fcu/gk0vAuBO3iGYCYU6A=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=hebpCfaW3b10jxHJ0ixFpceiRPBEvoonU8XCvnOSxvhvJvopvZHYcQFaUdcCPADTSzpBbRY7L+AvPtS21DyN5tnaC/UEHE4MRJPWRWv1THNjuy1bvaSUy5pWPcuB3n2A4p/aF3+xHGVF+vSSjTZbLUxTVkLjALBUH9r+Il+LkfA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=KWldweP9; arc=none smtp.client-ip=192.198.163.19
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1712688946; x=1744224946;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=Jo9vvIH5U/HV9EfsCBETk8fcu/gk0vAuBO3iGYCYU6A=;
-  b=KWldweP9sDe1+1/lTO7cvkRjQKqXzk4s4lehv/zAQe/UPn2RYF72tCr6
-   YK8SCOL7jH4uSykNhOHTlxOZbJQ7hGw2dmGfj7Dd4h1kJWpT8qpVVOlBL
-   NiCdm0ensyspFgtFJMSPbo29XMElr5XiJOd6A7pB01YxhXF1g44OqTWBj
-   zjthuBA+efMkokFX3wTWKF12wEN23zSLAvue3lAhfVFNwYO7ciVC6aEBh
-   TQKzlXo0cRetZbe1LauRCSV+BbMWXRnv0SNG62XZWfeZ4ihc/B0VsbZ6f
-   6d4v72kWIevEBLgnRFxG66cgSRCTxgPGgG2YwGi7LCr67WSOzN9vR0tW9
-   g==;
-X-CSE-ConnectionGUID: N/u6NRxISOG0Pf8mWpPX5g==
-X-CSE-MsgGUID: rLFh+pNEREeTY5d5k7tFjw==
-X-IronPort-AV: E=McAfee;i="6600,9927,11039"; a="7878068"
-X-IronPort-AV: E=Sophos;i="6.07,190,1708416000"; 
-   d="scan'208";a="7878068"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Apr 2024 11:55:46 -0700
-X-CSE-ConnectionGUID: y7jAz1TPTWaqFLR0JYYEuQ==
-X-CSE-MsgGUID: T2R9OcVAQYiMHo998YUXxA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.07,190,1708416000"; 
-   d="scan'208";a="20755797"
-Received: from mljaencu-mobl.amr.corp.intel.com (HELO [10.125.80.154]) ([10.125.80.154])
-  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Apr 2024 11:55:44 -0700
-Message-ID: <976c385e-2174-464e-9afd-de4cb46f63b8@linux.intel.com>
-Date: Tue, 9 Apr 2024 11:55:43 -0700
+	s=arc-20240116; t=1712689734; c=relaxed/simple;
+	bh=NI4IOOBGPBNQ7za0OvSJUdNySKt0sPGUWBq2CGWF4Mo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=bJcUXgTRF1qCu/1NqlaGXzkksTwb+ELshUKQSGWx3ZJ9QzOE+JkKZIzUz51ASKj6SKw+s3B1C7D08XiQjbSmdJ5NKId36ijfkTHmmE1bqCw/q9m1uBWQ8paYJXwtxzbVdCBTZicbXxtg9aKjlDGYC7KB6K6szxyHw4D3WCzllEk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F/XMayYD; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0BD1C433B2;
+	Tue,  9 Apr 2024 19:08:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1712689734;
+	bh=NI4IOOBGPBNQ7za0OvSJUdNySKt0sPGUWBq2CGWF4Mo=;
+	h=From:To:Cc:Subject:Date:From;
+	b=F/XMayYDtMY7KGUK1e881yn+qkds+5l8C/kPN/eokZvuBc8Eygn5VSHmpgjzJHMrs
+	 ltjQVqRBm1EKjCTaQ3XjCNw5LbZyJ2tSBWbE0jV7q90zjSKtMgdx7GGQXdejh0eBoW
+	 CI2ZxwMqTYHwmJN7MENVUA9QkxfPmTGsEmpKbUvaqgpHdiOmReRdSNZrb/QYSUtgXx
+	 4qufJbamaTgdSU5o9mjIMidm+7dHqlKEIERTohZNM/2KT94XHo3MfqI4WOuT2u9opX
+	 NjgK9Ch+6e5Fh3ti8ar2/DwCeqTDL04j9NA1Hwv2yHlArlc7ufGNUujy3O2eT771n8
+	 yCIpsTiGCsbRQ==
+From: Jarkko Sakkinen <jarkko@kernel.org>
+To: linux-integrity@vger.kernel.org
+Cc: Jarkko Sakkinen <jarkko@kernel.org>,
+	Alexander Steffen <Alexander.Steffen@infineon.com>,
+	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
+	James Bottomley <James.Bottomley@HansenPartnership.com>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lino Sanfilippo <l.sanfilippo@kunbus.com>,
+	Mimi Zohar <zohar@linux.ibm.com>,
+	Peter Huewe <peterhuewe@gmx.de>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/2] TPM documentation updates
+Date: Tue,  9 Apr 2024 22:08:45 +0300
+Message-ID: <20240409190847.10869-1-jarkko@kernel.org>
+X-Mailer: git-send-email 2.44.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] x86/cpu: Fix SPECULATIVE_MITIGATION=n kernels
-To: Sean Christopherson <seanjc@google.com>, Jonathan Corbet
- <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- Peter Zijlstra <peterz@infradead.org>, Josh Poimboeuf <jpoimboe@kernel.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- Pawan Gupta <pawan.kumar.gupta@linux.intel.com>
-References: <20240409175108.1512861-1-seanjc@google.com>
-Content-Language: en-US
-From: Daniel Sneddon <daniel.sneddon@linux.intel.com>
-In-Reply-To: <20240409175108.1512861-1-seanjc@google.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 4/9/24 10:51, Sean Christopherson wrote:
-> Fix the handling of SPECULATION_MITIGATIONS=n so that it actually does
-> what it says it does: disable any and all mitigations.
-> 
-> And because I don't see a way to provide sane behavior for overriding
-> SPECULATION_MITIGATIONS=n at runtime, explicitly disallow doing so via
-> the "mitigations" kernel parameter, e.g. so that the user at least knows
-> that their system is still likely vulnerable to a variety of issues.
-> 
-> Sean Christopherson (3):
->   x86/cpu: Actually turn off mitigations by default for
->     SPECULATION_MITIGATIONS=n
->   x86/cpu: Disable BHI mitigation by default when
->     SPECULATION_MITIGATIONS=n
->   x86/cpu: Ignore "mitigations" kernel parameter if
->     SPECULATION_MITIGATIONS=n
-> 
->  Documentation/admin-guide/kernel-parameters.txt |  3 +++
->  arch/x86/Kconfig                                | 10 +++++++---
->  arch/x86/kernel/cpu/bugs.c                      |  6 +++---
->  kernel/cpu.c                                    |  5 ++++-
->  4 files changed, 17 insertions(+), 7 deletions(-)
-> 
-> 
-> base-commit: 2c71fdf02a95b3dd425b42f28fd47fb2b1d22702
+Re-send of TPM documentation updates. Note that in this patch set the
+patch versions do not have relation to the patch set version, as they
+were before managed as independent patches.
 
-Reviewed-by: Daniel Sneddon <daniel.sneddon@linux.intel.com>
+Cc: Alexander Steffen <Alexander.Steffen@infineon.com>
+CC: Daniel P. Smith <dpsmith@apertussolutions.com>
+Cc: James Bottomley <James.Bottomley@HansenPartnership.com>
+Cc: Jason Gunthorpe <jgg@ziepe.ca>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Lino Sanfilippo <l.sanfilippo@kunbus.com>
+Cc: Mimi Zohar <zohar@linux.ibm.com>
+Cc: Peter Huewe <peterhuewe@gmx.de>
+Cc: Randy Dunlap <rdunlap@infradead.org>
+Cc: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-integrity@vger.kernel.org
+
+v1:
+- Collect the latest versions of patches sent earlier.
+
+Jarkko Sakkinen (2):
+  MAINTAINERS: Update URL's for KEYS/KEYRINGS_INTEGRITY and TPM DEVICE
+    DRIVER
+  Documentation: tpm_tis
+
+ Documentation/security/tpm/index.rst   |  1 +
+ Documentation/security/tpm/tpm_tis.rst | 46 ++++++++++++++++++++++++++
+ MAINTAINERS                            |  3 +-
+ 3 files changed, 49 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/security/tpm/tpm_tis.rst
+
+-- 
+2.44.0
+
 
