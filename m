@@ -1,352 +1,119 @@
-Return-Path: <linux-doc+bounces-13767-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-13769-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D72789E3E5
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Apr 2024 21:50:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3877489E420
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Apr 2024 22:05:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 11D46283957
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Apr 2024 19:50:21 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E66E1287798
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Apr 2024 20:05:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 60B76157E83;
-	Tue,  9 Apr 2024 19:50:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6AB05157A49;
+	Tue,  9 Apr 2024 20:05:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=dilger-ca.20230601.gappssmtp.com header.i=@dilger-ca.20230601.gappssmtp.com header.b="EeHSRD7O"
+	dkim=pass (2048-bit key) header.d=aol.com header.i=@aol.com header.b="ZMpA+yfb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+Received: from sonic313-47.consmr.mail.gq1.yahoo.com (sonic313-47.consmr.mail.gq1.yahoo.com [98.137.65.110])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AFC9157A44
-	for <linux-doc@vger.kernel.org>; Tue,  9 Apr 2024 19:50:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8E86E566
+	for <linux-doc@vger.kernel.org>; Tue,  9 Apr 2024 20:05:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=98.137.65.110
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1712692215; cv=none; b=kgj+uK6QYSgp2dSMyU8JpS32nTF1B6aDbgLdk5Mvct4N4dJAFI8ZZ3fIne8EysLzGNz8g+fIJLF6KTrg2gBJyeKDezQIAwgUhSM26BOmO7/YnMfsB+Tq3bVFDpH6JlI4Gga+vWM1qXGz/gxHXoyXkZQXwPkHWSy4niSV12KRUMA=
+	t=1712693114; cv=none; b=NoCyIAN/0GA0nhoQgifp7cLCczubBWTjZZcfz2NPZQ6cTP21AZMmwCUdS0ojcaMZDTygAuAFgsYkBB+DXh4V5IEMGSRimPDI/EZUtUF6dYknDDd+xwZE13lyYHYM8K5Wx1ggmlTpMgEXfE+NRoIQlLuGh6jn5Cm1LReUCNTYMwU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1712692215; c=relaxed/simple;
-	bh=zBG57+g6OWQxuIYisxSoawye0hcIgd/pRc/vgNjjsGo=;
-	h=From:Message-Id:Content-Type:Mime-Version:Subject:Date:
-	 In-Reply-To:Cc:To:References; b=FsaaZSN0IMWXaG1kAkg5V1RL3v73ce/s4NElYrF19xTibgHx+GgWBfFTYC/3pPiSVWmo9rLM561geUABiozHQENmRyu0uQhFKeMzKpnm+vAhFQOxcVfsGgdB4bqtYlmQrt36WshGNO68j6zCzSof6kfq8s12V10xsaDiozwKxOU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=dilger.ca; spf=pass smtp.mailfrom=dilger.ca; dkim=pass (2048-bit key) header.d=dilger-ca.20230601.gappssmtp.com header.i=@dilger-ca.20230601.gappssmtp.com header.b=EeHSRD7O; arc=none smtp.client-ip=209.85.215.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=dilger.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dilger.ca
-Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-5ce07cf1e5dso4153298a12.2
-        for <linux-doc@vger.kernel.org>; Tue, 09 Apr 2024 12:50:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=dilger-ca.20230601.gappssmtp.com; s=20230601; t=1712692212; x=1713297012; darn=vger.kernel.org;
-        h=references:to:cc:in-reply-to:date:subject:mime-version:message-id
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wZyLNu08PDSjT6gyg1TWlhOYY4G4DIOkCASERAKTzG8=;
-        b=EeHSRD7OD4d0oFOuUUBLbRaq2FLmhM6qeqMv3eoRnXPC6nIv3/CAFCNROFMPJimkqh
-         YtbOMnCeJ6OuL5DX94Z1OaP8TLpL3xYSsoq9Z2ewxb8HpEILjifPruHz0n1teW9BYLLL
-         nT/gmgOU7gsjSkVddlcu2/AAHFXCtbolpD3KtMevjq2/X8Rxcv0e8I/CCVYqbqgfJbXu
-         PjMy3Csx0rZ9e41PB/Koo2xYIAB4DvXORn6VjmtCnYff78ZZoJUTwGSXazM1/0rnKehb
-         UHSR6NsCi2NYCJZJSqaJ4kKnEuG5JXR70YXV+DnWqNnqgVkDQqwRiKnQhen72hCJcRd4
-         DBjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712692212; x=1713297012;
-        h=references:to:cc:in-reply-to:date:subject:mime-version:message-id
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=wZyLNu08PDSjT6gyg1TWlhOYY4G4DIOkCASERAKTzG8=;
-        b=G95VcEA6JFg8toRqhkQIOBIYlatI373/W4zWMv+0JNpnuDJSBQgaDzwKqD2VX/cTPY
-         tHgEbQqL+wJgJtp8G1TrJaYwQvRM90GpA0Fu8g6I4oa2wKFNwdJWwXjVozm7oPCeanuO
-         iU+KNEyMQi9Hc0KAgljWx4dGyrmPJL1DanVcCqec9LnWksZOYayYCaYGD9n2cXd74f7D
-         8dMTv7uF0RAoafLN4Qr+PV1sk01bMjfd04REtjMWgugzSEq17VQYqmd6LtbZa6l6sp6A
-         POT6oYA8Aq7fWzr7HaRtNm5/B8j5p+M1bgxBY2ypwQldQkEXfFuQWcgqxqLcyv/fBSS6
-         Ce2A==
-X-Forwarded-Encrypted: i=1; AJvYcCX5AH7B11JRn2Ri4oBI1A+zw4D6EA0nTQbulgdNO67H1Tc3/diFsEogLBfGSQq6c6Is9W6cqvCRDF1YMkRfhOsZqYjrEJ1k4s5j
-X-Gm-Message-State: AOJu0YxGaIw36haOOjkC6dcovDrQ92DcxrBpNSHPLHTvwGzZPIz7ClyM
-	GY4F+xAhna2oHHyki6vvjPPxf21B2oWxyfBWuHIum7T4PQPXRW1Bv49+HWYtqVw=
-X-Google-Smtp-Source: AGHT+IH2BhIfNslbxdXrrtOrTtS1i/2Ol/r2Z2Qb1u5BZArDRPJcwyViq+GB++/e5kc6Hetz+zaaSA==
-X-Received: by 2002:a05:6300:8086:b0:1a7:3365:d8ed with SMTP id ap6-20020a056300808600b001a73365d8edmr962787pzc.29.1712692211587;
-        Tue, 09 Apr 2024 12:50:11 -0700 (PDT)
-Received: from cabot.adilger.int (S01068c763f81ca4b.cg.shawcable.net. [70.77.200.158])
-        by smtp.gmail.com with ESMTPSA id h21-20020a63c015000000b005b458aa0541sm8438545pgg.15.2024.04.09.12.50.09
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 09 Apr 2024 12:50:11 -0700 (PDT)
-From: Andreas Dilger <adilger@dilger.ca>
-Message-Id: <32378212-7A10-4562-8670-3F0FB7126F9B@dilger.ca>
-Content-Type: multipart/signed;
- boundary="Apple-Mail=_ECA1B460-583E-424F-86F4-A01D2C16C3A3";
- protocol="application/pgp-signature"; micalg=pgp-sha256
+	s=arc-20240116; t=1712693114; c=relaxed/simple;
+	bh=a8ddZuehFg84N+6V98u1My4a2+ltnFQLXir6FRaBgSQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:References; b=ecZdGaxfKmNqhLySi+H4BqE3FsdLBPdPL5WfVYRT77EL24cFUk/g/T/t7H2oHBphZ/h1VExKsxooHh1npSPJ8184IbY9f6bCPwnSr2GJMszNrvp0VVU6X9iR3cgL/hUtW0vS0DI+5hIFDHyDCR4aOtUIvydABUltR4uQJQfQHzQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=aol.com; spf=pass smtp.mailfrom=aol.co.uk; dkim=pass (2048-bit key) header.d=aol.com header.i=@aol.com header.b=ZMpA+yfb; arc=none smtp.client-ip=98.137.65.110
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=aol.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=aol.co.uk
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1712693112; bh=pVMCX21u0wBc9yldyEKLn3Oo8MQzZsaUhaZmg/so+oY=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=ZMpA+yfbAIa4IPtBxYOrUnCKYTWG3fqNVxMdikauZnNh58TclMFqKfImSNUi6uec4CYPiK6iiIlx3HcaHlWJwcpd3Ed9XvFBvjrazS2RQMv61JnMZybJP4/BXET5/p9p6kxXlsO7PDCcpsq3/RACWSnOOyTZYbYcvv3rx1CTzIfNVD20xRlb420DOT1ChhINBH1VCmDr0KQXFcOcLGrvEF+LAQ4mrujKMiEURVHRsSN5UVwYG5Q8m21OEXY9MvDq4K9Xb7I3F4JcBHtiYSps2r6421XfND5cqPHKO8zOYydHdP4VPsamkGcXdD/QYOEKDUXj7tE5/57Ac0yqYSSVJA==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1712693112; bh=gt29ghoDZvbTE/R7JYG6TkhxPeFgwGN5LOBLAYMIGNu=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=Cq1E3HzLJ8LE228BB/a5jyTcuzRxMKMfuPluiry1hErWe8ykYkdne67UUqMP24eN3pqdNnLock0rZ1N+v1/skkYZhkV9K95Kp5UvHiZGs64ltJUJ0ungrCuoYfeQrwijFubqwhIR4KhgGZemPHIwInnu1lIZyjuSIhwjj8HiVMmI0nUz3xoo/R2mXKK7LelM4SoGfZoOITZRVstcmjo7rZZoybdNbNojgw9MhQ6XxhmYadyTbNGb24jrkJUT65Vfsz4EisgGDZhZ2nvfDkI5HwPiY/BsvWGjJqf5i7b/j76Qdeqnl4BzAME4wGNzeEC5GBbCCZJ5jfIV+NGEzijsTA==
+X-YMail-OSG: H8HCUMUVM1noYKYq9pam_9mAHVCFEQ0kfI0TQFRy1CVEGVr4g8aCR.vOpDggtW.
+ 1CtD3qRtSRmDYxZ_5RL1rE6W8z.6AqeLoUp6PxfBH2WcXDrynxwLa9DsKB62xrGjWWiUj9oU..0l
+ 8wW.q7HRey7KCRh6AbzCRGOY3ECnYFp0rGrzzLQW_SMfs57zCP5S.rqTeZ3ptJHiPNEXpnked5BR
+ .u6RHpMyMetA45iiKXDUReY2zkUOXYQXVpYkWDBZ2dqwlDSslXqCyrJ.j9JPpknFabt5U0APXjiN
+ pZWMm_zSD9tsLkPblF71rk5QPbNyN5BrB0HB1tfQLlg5C2Dte0bgJH2UVleA5PHeVoiIhixyeWv1
+ Mni3kF8TL_KhDQiuj.W0hJfH9hJx4xMq6.7iucVmQWSncecOjqhW.wSi0kv_OYOzEeky9pcoEy1U
+ usS2kbQ15OeIrOna_bs6gt0bmxp61wU8OkZI2W.tmw6k5YCU6IQ6jOPqrgPc0pmE1G1t4WVwn0qq
+ Dy0AQHg7QaJaqtpMrQca7FXPx_cbekUBdzJuHmC.U8TYd9fKy1PMam6WNmrlyrg.LhxlEppdlPnv
+ 5gnVoaS65FCKghCMtSpTfaWqoQv.xUHFNKX8XL_QVd.Z_hZAabJ19PkObSNBWMn9lM2qWp.A4w0I
+ 0EPdgxZQA2RoS0e.GVu_FizQcQiTtT6VrKguTxjDPD7E.6psZL5Dm.1L6wzVE1HChrNSWvLY_4Jy
+ rZ25JGl9qRrPBBLNld8.71JV8pKmC1AoME1CcDM145e1EwGEeFSyLTjKRgtitvQKcuWyp_xH6amB
+ FVUofWLZ_8nmOWu2QVNq_nSqKKsxuhp3c7zxQ8i_90oCR.MVszfARK65IYqbvGGEAX.zUGpYNzRo
+ vV4WeU9H20xuPwGiQWv9A_G5LOMsYK7rxJGcHWDKlbzl5wFMrFxUbIfERk4M3haX6j9aj656sqt5
+ nNk4R2pMIIBuAfPNdMaUf9q9X_PeWnLSDCZuik5yFFCAPA_bb1qcsYxRPbtKiwFynPW2FqO3XCEI
+ jHJ5EMDYtYiOMnEKZspuCj6iKSXR8PV0EDNB32GzcHWCfZZQG87JVND1CEfUJ_K2ooWQmtLwcy3u
+ WxuLyla3b1jtt3cLrUohp3Ek5y0oOFhd8c__2WtikLDQ8bFoRT_CmDT39suACkkVzsAMZQ5jCQfh
+ QzURodjD8sC0lDYHefiGNaoiy1e5_c_4EHuq6ab_I7JRuNkbEYyVTiRfSqnHMgEB6B4znhLyQ_Wr
+ GVKLYl4zt.gUdULEIlcG3IodfghiyDfUvjypHOfXfvCRfFIwkOycdK3wV2Kbl9mpClrZYdgs_w.z
+ Eb_pf30KB6d2xzFLmSZyl8jwtqHaJxlaJ8UnRsSBtviIZgZqyqy97wFHmCAmAdC4Fcslh35Zf5ee
+ JXOYmtw0FOkP_7rohmU79RWmdFrJPy8GFhc1YZcRM4Qgbh76rlbFAt6olSVmKBEPBUMknF5m7z2F
+ sg88h09sikiS.sdtyXtBn9Ng7_ljnn_W0FOwx4bcBrt2_grlfo_FRdI_ug340xWoYJh5.aw7OEWp
+ 6VE5lVVN2BUgRAjwigCfnYz0k0n1vlbRVVZgpGqnfgWBLByoYgKQW82ca_l5TYx2gtWowIIa7VtS
+ khzF554apq2d8UkieG._o9Ivk0th2cKxM7dx1xq7lsZMiDwl_KhGbFHUCkibToamd7y2lmJr74pr
+ 90rsXJOi_iP.DNTZeWXKGpmANtmhKbdaXlehb4kDlH9YDNtcQIcpIUik9N8vaYtgJbeUoB.LnGq4
+ co2OXu_a6wraMKFidSY6aMyzyKzCh2In2GalfZqQPqFJDEfdZV5AXnSn4dxng9m.cpmzHZEo2FAd
+ ox6_4yRGzCrKEbo.A3.IWdMaCkBB3XseD3f4bz4DOgrF2fo8ipVpqI60uWOWupMY45RKu6nNnDne
+ wMe3M4gnRtx9QAVP9KWBUl8NY_D2l8GieyLLR7M.swht9flwChw5KcI9ON.NdDqXiKJjoZdnWYsb
+ dee9HAsxH1iyrZX5Kpy35L7I3qWk2xCMCgTO_b_J19GsNbNIYAngZQGfKAh5N1pl1.cIYfnW7yHZ
+ vGAyyz81jfUZpgTgVkzVgkpW9yR8X3vqh4JK8r3iIB3q6FM.7zVIXj536KSc3FHsjdWZu_KbV96s
+ DCHZ2zaWM0PqZ2K5bgTYNDVYBGRXx7EFydLQvTCP_2s_kSkC_TlDPpPX5xSMs67Rk_cWiNsviDTg
+ cdVWwYJq95.FjS8nk6Xue779eoiZCqoHm9NDZHcLCXS7UkixDSH08nD2P
+X-Sonic-MF: <rubenru09@aol.co.uk>
+X-Sonic-ID: adb324b8-0163-488d-a0b9-d8a02d971dbf
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic313.consmr.mail.gq1.yahoo.com with HTTP; Tue, 9 Apr 2024 20:05:12 +0000
+Received: by hermes--production-bf1-7d6dbd57c9-rgkn7 (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID ce6b28aff7bdb6bbe07e2f9d9b252da5;
+          Tue, 09 Apr 2024 19:53:02 +0000 (UTC)
+From: Ruben Wauters <rubenru09@aol.com>
+To: David Airlie <airlied@gmail.com>,
+	Daniel Vetter <daniel@ffwll.ch>
+Cc: Ruben Wauters <rubenru09@aol.com>,
+	dri-devel@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: [PATCH] drm/dp_mst: Remove unnecessary vcpi documentation
+Date: Tue,  9 Apr 2024 20:51:30 +0100
+Message-Id: <20240409195130.25057-1-rubenru09@aol.com>
+X-Mailer: git-send-email 2.40.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-Subject: Re: [PATCH v3 01/13] fs: fiemap: add physical_length field to extents
-Date: Tue, 9 Apr 2024 13:50:08 -0600
-In-Reply-To: <20240409162232.GA6367@frogsfrogsfrogs>
-Cc: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>,
- Jonathan Corbet <corbet@lwn.net>,
- Kent Overstreet <kent.overstreet@linux.dev>,
- Brian Foster <bfoster@redhat.com>,
- Chris Mason <clm@fb.com>,
- Josef Bacik <josef@toxicpanda.com>,
- David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>,
- Chao Yu <chao@kernel.org>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>,
- Jan Kara <jack@suse.cz>,
- =?utf-8?Q?Micka=C3=ABl_Sala=C3=BCn?= <mic@digikod.net>,
- linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- linux-bcachefs@vger.kernel.org,
- linux-btrfs@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net,
- linux-fsdevel@vger.kernel.org,
- kernel-team@meta.com
-To: "Darrick J. Wong" <djwong@kernel.org>
-References: <cover.1712126039.git.sweettea-kernel@dorminy.me>
- <1ba5bfccccbf4ff792f178268badde056797d0c4.1712126039.git.sweettea-kernel@dorminy.me>
- <20240409162232.GA6367@frogsfrogsfrogs>
-X-Mailer: Apple Mail (2.3273)
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+References: <20240409195130.25057-1-rubenru09.ref@aol.com>
 
+Since vcpi has been moved into the atomic payload and
+out of the port struct, the documentation of vcpi on
+the port struct is no longer necessary, and is flagged
+as a warning by make htmldocs
 
---Apple-Mail=_ECA1B460-583E-424F-86F4-A01D2C16C3A3
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Vcpi is also documented elsewhere in this file, in the
+atomic payload struct itself
 
-On Apr 9, 2024, at 10:22 AM, Darrick J. Wong <djwong@kernel.org> wrote:
->=20
-> On Wed, Apr 03, 2024 at 03:22:42AM -0400, Sweet Tea Dorminy wrote:
->> Some filesystems support compressed extents which have a larger =
-logical
->> size than physical, and for those filesystems, it can be useful for
->> userspace to know how much space those extents actually use. For
->> instance, the compsize [1] tool for btrfs currently uses =
-btrfs-internal,
->> root-only ioctl to find the actual disk space used by a file; it =
-would
->> be better and more useful for this information to require fewer
->> privileges and to be usable on more filesystems. Therefore, use one =
-of
->> the padding u64s in the fiemap extent structure to return the actual
->> physical length; and, for now, return this as equal to the logical
->> length.
->>=20
->> [1] https://github.com/kilobyte/compsize
->>=20
->> Signed-off-by: Sweet Tea Dorminy <sweettea-kernel@dorminy.me>
->> ---
->> Documentation/filesystems/fiemap.rst | 28 +++++++++++++++++-------
->> fs/ioctl.c                           |  3 ++-
->> include/uapi/linux/fiemap.h          | 32 =
-++++++++++++++++++++++------
->> 3 files changed, 47 insertions(+), 16 deletions(-)
->>=20
->> diff --git a/Documentation/filesystems/fiemap.rst =
-b/Documentation/filesystems/fiemap.rst
->> index 93fc96f760aa..c2bfa107c8d7 100644
->> --- a/Documentation/filesystems/fiemap.rst
->> +++ b/Documentation/filesystems/fiemap.rst
->> @@ -80,14 +80,24 @@ Each extent is described by a single =
-fiemap_extent structure as
->> returned in fm_extents::
->>=20
->>     struct fiemap_extent {
->> -	    __u64	fe_logical;  /* logical offset in bytes for the =
-start of
->> -				* the extent */
->> -	    __u64	fe_physical; /* physical offset in bytes for the =
-start
->> -				* of the extent */
->> -	    __u64	fe_length;   /* length in bytes for the extent =
-*/
->> -	    __u64	fe_reserved64[2];
->> -	    __u32	fe_flags;    /* FIEMAP_EXTENT_* flags for this =
-extent */
->> -	    __u32	fe_reserved[3];
->> +            /*
->> +             * logical offset in bytes for the start of
->> +             * the extent from the beginning of the file
->> +             */
->> +            __u64 fe_logical;
->> +            /*
->> +             * physical offset in bytes for the start
->> +             * of the extent from the beginning of the disk
->> +             */
->> +            __u64 fe_physical;
->> +            /* logical length in bytes for this extent */
->> +            __u64 fe_logical_length;
->> +            /* physical length in bytes for this extent */
->> +            __u64 fe_physical_length;
->> +            __u64 fe_reserved64[1];
->> +            /* FIEMAP_EXTENT_* flags for this extent */
->> +            __u32 fe_flags;
->> +            __u32 fe_reserved[3];
->>     };
->>=20
->> All offsets and lengths are in bytes and mirror those on disk.  It is =
-valid
->> @@ -175,6 +185,8 @@ FIEMAP_EXTENT_MERGED
->>   userspace would be highly inefficient, the kernel will try to merge =
-most
->>   adjacent blocks into 'extents'.
->>=20
->> +FIEMAP_EXTENT_HAS_PHYS_LEN
->> +  This will be set if the file system populated the physical length =
-field.
->=20
-> Just out of curiosity, should filesystems set this flag and
-> fe_physical_length if fe_physical_length =3D=3D fe_logical_length?
-> Or just leave both blank?
+Signed-off-by: Ruben Wauters <rubenru09@aol.com>
+---
+ include/drm/display/drm_dp_mst_helper.h | 1 -
+ 1 file changed, 1 deletion(-)
 
-In the original thread, Dave thought it would be better to always set
-fe_physical_length and the flag, so that userspace applications which do
-not properly check the flag will not be confused/broken by differences =
-in
-filesystem behavior in the future when this is in use.
+diff --git a/include/drm/display/drm_dp_mst_helper.h b/include/drm/display/drm_dp_mst_helper.h
+index 9b19d8bd520a..3ae88a383a41 100644
+--- a/include/drm/display/drm_dp_mst_helper.h
++++ b/include/drm/display/drm_dp_mst_helper.h
+@@ -83,7 +83,6 @@ struct drm_dp_mst_branch;
+  * @passthrough_aux: parent aux to which DSC pass-through requests should be
+  * sent, only set if DSC pass-through is possible.
+  * @parent: branch device parent of this port
+- * @vcpi: Virtual Channel Payload info for this port.
+  * @connector: DRM connector this port is connected to. Protected by
+  * &drm_dp_mst_topology_mgr.base.lock.
+  * @mgr: topology manager this port lives under.
+-- 
+2.40.1
 
-=
-https://patchwork.ozlabs.org/project/linux-ext4/patch/4f8d5dc5b51a43efaf16=
-c39398c23a6276e40a30.1386778303.git.dsterba@suse.cz/
-
->=20
->> VFS -> File System Implementation
->> ---------------------------------
->> diff --git a/fs/ioctl.c b/fs/ioctl.c
->> index 661b46125669..8afd32e1a27a 100644
->> --- a/fs/ioctl.c
->> +++ b/fs/ioctl.c
->> @@ -138,7 +138,8 @@ int fiemap_fill_next_extent(struct =
-fiemap_extent_info *fieinfo, u64 logical,
->> 	memset(&extent, 0, sizeof(extent));
->> 	extent.fe_logical =3D logical;
->> 	extent.fe_physical =3D phys;
->> -	extent.fe_length =3D len;
->> +	extent.fe_logical_length =3D len;
->> +	extent.fe_physical_length =3D len;
->> 	extent.fe_flags =3D flags;
->>=20
->> 	dest +=3D fieinfo->fi_extents_mapped;
->> diff --git a/include/uapi/linux/fiemap.h =
-b/include/uapi/linux/fiemap.h
->> index 24ca0c00cae3..3079159b8e94 100644
->> --- a/include/uapi/linux/fiemap.h
->> +++ b/include/uapi/linux/fiemap.h
->> @@ -14,14 +14,30 @@
->>=20
->> #include <linux/types.h>
->>=20
->> +/*
->> + * For backward compatibility, where the member of the struct was =
-called
->> + * fe_length instead of fe_logical_length.
->> + */
->> +#define fe_length fe_logical_length
->=20
-> This #define has global scope; are you sure this isn't going to cause =
-a
-> weird build problem downstream with some program that declares an
-> unrelated fe_length symbol?
-
-I guess it's possible.  I'm not dead set on this part of the change.
-I thought it was cleaner to separate the two in the struct, but I
-can see the argument that a UAPI field struct should not change names.
-It would be possible to have:
-
-   #define fe_logical_length fe_length
-
-which would have much less chance of namespace collisions I think.
-New applications can start to use this for some years, before
-making a permanent switch, but again not something I'm stuck on...
-
-Cheers, Andreas
-
->> +
->> struct fiemap_extent {
->> -	__u64 fe_logical;  /* logical offset in bytes for the start of
->> -			    * the extent from the beginning of the file =
-*/
->> -	__u64 fe_physical; /* physical offset in bytes for the start
->> -			    * of the extent from the beginning of the =
-disk */
->> -	__u64 fe_length;   /* length in bytes for this extent */
->> -	__u64 fe_reserved64[2];
->> -	__u32 fe_flags;    /* FIEMAP_EXTENT_* flags for this extent */
->> +	/*
->> +	 * logical offset in bytes for the start of
->> +	 * the extent from the beginning of the file
->> +	 */
->> +	__u64 fe_logical;
->> +	/*
->> +	 * physical offset in bytes for the start
->> +	 * of the extent from the beginning of the disk
->> +	 */
->> +	__u64 fe_physical;
->> +	/* logical length in bytes for this extent */
->> +	__u64 fe_logical_length;
->=20
-> Or why not just leave the field name the same since the "logical =
-length
-> in bytes" comment is present both here in the header and again in the
-> documentation?
->=20
-> --D
->=20
->> +	/* physical length in bytes for this extent */
->> +	__u64 fe_physical_length;
->> +	__u64 fe_reserved64[1];
->> +	/* FIEMAP_EXTENT_* flags for this extent */
->> +	__u32 fe_flags;
->> 	__u32 fe_reserved[3];
->> };
->>=20
->> @@ -66,5 +82,7 @@ struct fiemap {
->> 						    * merged for =
-efficiency. */
->> #define FIEMAP_EXTENT_SHARED		0x00002000 /* Space shared with =
-other
->> 						    * files. */
->> +#define FIEMAP_EXTENT_HAS_PHYS_LEN	0x00004000 /* Physical length is =
-valid
->> +						    * and set by FS. */
->>=20
->> #endif /* _UAPI_LINUX_FIEMAP_H */
->> --
->> 2.43.0
->>=20
->>=20
->=20
-
-
-Cheers, Andreas
-
-
-
-
-
-
---Apple-Mail=_ECA1B460-583E-424F-86F4-A01D2C16C3A3
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - http://gpgtools.org
-
-iQIzBAEBCAAdFiEEDb73u6ZejP5ZMprvcqXauRfMH+AFAmYVm/AACgkQcqXauRfM
-H+CxqRAAu2r0TTDsoXra17ylZesykQhj4IRUya7tEvmLkYpkPw2xkXPWHYjE18n9
-I9ZcaDWdTabEUTDMG6ljdzbyYNJUqscMo3QqX+r9juPamhs95sSX7ZSct4EmDsTg
-4vy0dE1z/gSICqhnnHC2CK4YGGcjDCr3wd29HS1QakiLtVPKNTTAb95JSaOgrokn
-PQp9fge1bF4J8sfIeSC4pxd8fqnNo79HK7v0knS5LN9R8UhdYu+vqIOIE7OJHKol
-ivzNeaMzRUXlwDfv/xxF5tYaEJLty20oVRR1LEjDz/caaox9CtfSJ0WsObka4Bzp
-Oo7epgfbyrqhJps8vUH0u344YRxhwdJFMM4eC5CU/CyZ9KV3THjYh4Eh+H5c8giB
-vsAwd8qqk1VI7XtrlZuYdnyGwmmJQSPdDFiJbLukzJC332UWsOUXbgVZ7Boxcbsc
-s5Mnd/jFmx1QEYIT6pgF0AXzsCVO21vyKJiVtVJFwWiNxvyyKxZ/f2PWHjUtUe7l
-G134UbM3qYKg5xn/C6yt6/uH5QYdoqM2QLjv3AemnYejt6gmMYv+VREYfQenz27a
-pkXV9d8dKxaL99pqIdYvl8K4z/EboYZkcHlC6F5oRtaFI7mvURapN+3n3KXfxmJT
-Di2YKi7MZg1mpxYAbzLS5YIhrpMCx1BGg3j4GJYdZSAqdQFJZuw=
-=bJQI
------END PGP SIGNATURE-----
-
---Apple-Mail=_ECA1B460-583E-424F-86F4-A01D2C16C3A3--
 
