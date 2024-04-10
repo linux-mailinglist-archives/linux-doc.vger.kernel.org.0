@@ -1,135 +1,97 @@
-Return-Path: <linux-doc+bounces-13848-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-13846-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id A48798A01A0
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Apr 2024 23:01:50 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B5658A0193
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Apr 2024 22:59:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 598701F23586
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Apr 2024 21:01:50 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3CCB61C21CD7
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Apr 2024 20:59:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 41DE6181BBC;
-	Wed, 10 Apr 2024 21:01:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A767A181CFE;
+	Wed, 10 Apr 2024 20:58:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="M5RBCr7D"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="j1G70P5U"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6346181322
-	for <linux-doc@vger.kernel.org>; Wed, 10 Apr 2024 21:01:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D84FD181CEB;
+	Wed, 10 Apr 2024 20:58:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1712782906; cv=none; b=tJFGRSNb8E6e9TXh7Ks7xAjaueBqwduKakew5xt3uwfkLuSBBLbloFVMckDr01bn0mVajT6cfBoroOhzX/ITh1W/5sMAl7UJyfHvkjrCAIUPzxDWsRbuxlqPzKeB4aUoqGdf/EVEtm13wUYgXQxlgaUi4WYn8el0YVWXlfk5lag=
+	t=1712782737; cv=none; b=GQOEYUNC2/i9FxowKyYUPSz3YUTHxWRDlwKmCAR89A0P4WmVof8ZozuRUO/6VgCBJ3Pavt33Zla+085YOAi6Q9mrY4rDXaxybZZ88Ie/sDxzi5sBLs8sIE2BsggqA+Qa15teIqN8PnMAoUSYy1t3cf8H0Mi6hP2oDwDRgRivO2M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1712782906; c=relaxed/simple;
-	bh=ki1myCbJ+SIp9GQ2PceX+BUBbr6vmy5/4xsnQqG7Rmg=;
+	s=arc-20240116; t=1712782737; c=relaxed/simple;
+	bh=+/tK43G6OWAgoc1IQTUZhMc0O85NKgsfQkWwbiBN2Vs=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=a03xKbnVo+CdCw51l6VuZu9my3iOh3p/WiXqjZKM10GYPoNJ8WAQCO69NGBurVv7wJ6TC1m8N4cofZ+pTCO4F3DsN7NJeL2b5ufNFXT8X02pD3Dgi4+V2D+foxSNKNEje8k/uY+3vU2bcbMPMxQM+wk7PFlzJVPByv+uX3BJjvo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=M5RBCr7D; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=Gjcio1guYno6LCf9G1PTBXd4vNT2YCWZC4PSVcXXMrkLSFj/DYPQMNrtOQuiEn5ZGOA/xvUiiA5rpp/U3/NUE2A4eEes/JVwmvbHtjJuYW3Xkvz0gsG+efypSkjcoX3jrHRvoMbbXw/y2YWbJRBPbf69j9sXLtGBdYMsPAsqnkc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=j1G70P5U; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net C373147C26
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 0C3A347C3E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1712782358; bh=K0UE5LpZEj22Vla+9d2h1SDJRAq5kGVNwQTHhTz174Y=;
+	t=1712782735; bh=jqS9ei4MBkFAHGGRpxDKU18p0pVh8bcbcGcggGmQPfM=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=M5RBCr7DfHx2xLgPpxWwjy/ALdtWGd3WAUH1XjMW4LVBEnHX2/zZ9q6i2PJ4W7G1m
-	 e1KY9ZUV8SugdQ9DCYDxEZj1ArA+OMsbevePhlicvZ75SOd4prD64fAlgEbUvI/3bs
-	 XH3Dt5JX/79d0/mc7+7KjBze+0VVIMWAhR3hB9G/3evivEwvI3wSMOraPNdIz9VH2A
-	 JbJI26zFvGI91xN5MqY7SaOzEARr3j9coDapmwxXYDX6Le1tfq/vmy4MqLn1R4Rkyt
-	 l9GtKC2DZ+a+78Vj9oRTheaiuyBIKNtAwY9MnPsPIvKJvJM11VoprylqF98cSjK4e3
-	 HqEi0WTCd9WEQ==
+	b=j1G70P5UhkT/YPryiPKQIArCsyH4ERz/0JWB3XBZtl+d1Mh99m05L24oxivtAZIPy
+	 m71uNgfsE++Dp36nTk1fVseOW4fYvwrXSwXMyo5P46FCn5CBGeAyeLEiDLq0XnUFbl
+	 kncHD8tWB8e/3mJDAIk4O9n7dySWBLS0vcgccdUB/TJcgSgM2HdahM2eaiZblhw6SU
+	 RGSNQ5hZYrwqlEwOfgsOO0RYPNybsBcuzVdbcsXVE8swol0cYzkgKctQWU+ZQ9yNu5
+	 zdZtBbMjEhZKJXOdhAZBG7fB8LLgMh0cOi8kil2LHoPrw4yMbB/on/tp9nscMn5BBe
+	 QOIGftY6OqdVg==
 Received: from localhost (unknown [IPv6:2601:280:5e00:625:67c:16ff:fe81:5f9b])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id C373147C26;
-	Wed, 10 Apr 2024 20:52:38 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 0C3A347C3E;
+	Wed, 10 Apr 2024 20:58:54 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Akira Yokosawa <akiyks@gmail.com>
-Cc: linux-doc@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>,
- =?utf-8?B?0JjQstCw0L0g0JjQstCw0L3QvtCy0LjRhw==?= <relect@bk.ru>, Randy
- Dunlap <rdunlap@infradead.org>
-Subject: Re: [PATCH v2] docs: Detect variable fonts and suggest denylisting
- them
-In-Reply-To: <20240406020416.25096-1-akiyks@gmail.com>
-References: <20240323120204.155678-1-akiyks@gmail.com>
- <20240406020416.25096-1-akiyks@gmail.com>
-Date: Wed, 10 Apr 2024 14:52:37 -0600
-Message-ID: <87le5lszxm.fsf@meer.lwn.net>
+To: Thorsten Leemhuis <linux@leemhuis.info>
+Cc: regressions@lists.linux.dev, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, workflows@vger.kernel.org
+Subject: Re: [RFC PATCH v1 1/2] docs: reporting-issue: rework the detailed
+ guide
+In-Reply-To: <ac847c1c539d5f2c3d55ab363a5038ce6d303424.1711455295.git.linux@leemhuis.info>
+References: <cover.1711455295.git.linux@leemhuis.info>
+ <ac847c1c539d5f2c3d55ab363a5038ce6d303424.1711455295.git.linux@leemhuis.info>
+Date: Wed, 10 Apr 2024 14:58:54 -0600
+Message-ID: <87cyqxszn5.fsf@meer.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-Akira Yokosawa <akiyks@gmail.com> writes:
+Thorsten Leemhuis <linux@leemhuis.info> writes:
 
-> Fedora and openSUSE has started deploying "variable font" [1] format
-> Noto CJK fonts [2, 3].  "CJK" here stands for "Chinese, Japanese,
-> and Korean".
+> Rework the detailed step-by-step guide for various reasons:
 >
-> Unfortunately, XeTeX/XeLaTeX doesn't understand those fonts for
-> historical reasons and builds of translations.pdf end up in errors
-> if such fonts are present on the build host.
+> * Simplify the search with the help of lore.kernel.org/all/, which did
+>   not exist when the text was written.
 >
-> To help developers work around the issue, add a script to check the
-> presence of "variable font" Noto CJK fonts and to emit suggestions.
-> The script is invoked in the error path of "make pdfdocs" so that the
-> suggestions are made only when a PDF build actually fails.
+> * Make use of the recently added document
+>   Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst,
+>   which covers many steps this text partly covered way better.
 >
-> The first suggestion is to denylist those "variable font" files by
-> activating a per-user and command-local fontconfig setting.
+> * The 'quickly report a stable regression to the stable team' approach
+>   hardly worked out: most of the time the regression was not known yet.
+>   Try a different approach using the regressions list.
 >
-> For further info and backgrounds, please refer to the header comment
-> of scripts/check-variable-font.sh newly added in this commit.
+> * Reports about stable/longterm regressions most of the time were
+>   greeted with a brief reply along the lines of 'Is mainline affected as
+>   well?'; this is needed to determine who is responsible, so we might as
+>   well make the reporter check that before sending the report (which
+>   verify-bugs-and-bisect-regressions.rst already tells them to do, too).
 >
-> Link: [1] https://en.wikipedia.org/wiki/Variable_font
-> Link: [2] https://fedoraproject.org/wiki/Changes/Noto_CJK_Variable_Fonts
-> Link: [3] https://build.opensuse.org/request/show/1157217
-> Reported-by: Jonathan Corbet <corbet@lwn.net>
-> Link: https://lore.kernel.org/r/8734tqsrt7.fsf@meer.lwn.net/
-> Reported-by: "=D0=98=D0=B2=D0=B0=D0=BD =D0=98=D0=B2=D0=B0=D0=BD=D0=BE=D0=
-=B2=D0=B8=D1=87" <relect@bk.ru>
-> Link: https://lore.kernel.org/linux-doc/1708585803.600323099@f111.i.mail.=
-ru/
-> Cc: Randy Dunlap <rdunlap@infradead.org>
-> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
-> ---
-> Changes in v2:
->
-> - Stop suggesting removal of variable-font packages. (Jon)
-> - Rewrite changelog and add a couple of links for reference. (Randy)
-> - Suggest denylisting "variable font" files for XeLaTeX in "make pdfdocs"
->   as a less invasive option.
-> - Simplify message from check-variable-font.sh and expand the header
->   comments of the script.
-> - Add template of fonts.conf for denylisting in the header comments.
-> - Add rules for activating the XeLaTeX only fonts.conf in
->   Documentation/Makefile.
+> * A lot of fine tuning after seeing what people were struggling with.
 
-Thanks for working on this.
-
-I've verified that the message comes up at the right time (though before
-waiting a half-hour for things to fail would be better :) and that
-following the advice in the script makes the build work.  I *did* have
-to do a "make cleandocs" after adding the fonts.conf file, though,
-before the build would succeed.
-
-So I've applied this, for now at least, but I do wonder: might it be
-better to stash this fonts.conf file in-tree somewhere and just pull it
-in automatically?  Would that create problems for anybody if we were to
-do so?  That might be a bit nicer than failing and making people set up
-the workaround on their own.
-
-Meanwhile, it occurred to me that it would be good to let the Fedora
-folks know that this breaks, so I've filed a bug there; we'll see if
-they have any thoughts on the matter as well.
+So I have read through this, and don't find anything objectionable.  I
+will point out that each of those bullet items above might be better
+handled in a separate patch; the result might be easier to review.
 
 Thanks,
 
