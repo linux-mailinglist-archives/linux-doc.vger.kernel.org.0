@@ -1,129 +1,137 @@
-Return-Path: <linux-doc+bounces-13845-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-13848-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D30C8A012C
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Apr 2024 22:21:06 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id A48798A01A0
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Apr 2024 23:01:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id BEA681C22197
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Apr 2024 20:21:05 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 598701F23586
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Apr 2024 21:01:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9D85F181BA0;
-	Wed, 10 Apr 2024 20:21:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 41DE6181BBC;
+	Wed, 10 Apr 2024 21:01:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="M5RBCr7D"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81E7E1DFC7;
-	Wed, 10 Apr 2024 20:21:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6346181322
+	for <linux-doc@vger.kernel.org>; Wed, 10 Apr 2024 21:01:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1712780460; cv=none; b=I4SX3AkiCvTx8MFCKUozORiH8KN6dsT5/KRR9eXHpDGtam3xd3zqzh09UHceFfhcYEP+IHxpSn1zA8BtKFqvLqDxnPH4JHQmDR7dS8EJRY9fyGF1XoC1uPn7Zz6eRbyCiM+Co4cmnfJbA/gv7hONLvGSMDBGgQ7gZTXrYp2RVfc=
+	t=1712782906; cv=none; b=tJFGRSNb8E6e9TXh7Ks7xAjaueBqwduKakew5xt3uwfkLuSBBLbloFVMckDr01bn0mVajT6cfBoroOhzX/ITh1W/5sMAl7UJyfHvkjrCAIUPzxDWsRbuxlqPzKeB4aUoqGdf/EVEtm13wUYgXQxlgaUi4WYn8el0YVWXlfk5lag=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1712780460; c=relaxed/simple;
-	bh=NHRDwWW5UUprKx17r2oT7Bz2q4irLQyN/KXXpfQZsKw=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=qWUb4grt4qXagE5jSRQOYERAHxe9AdWBZS/94pNBNtAkevP8KWHUpb/08cdC7e/ni/y5+laUO3ibsxd8kmOSqOiHTaxUl2BvPSBI2Lw0R+1Qo6/ofl+EVRjd8J5mxp90eambSe3mUoLRO6CY+DsEk65GjcYF4zu9TgSlera65Y0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A2FDC433C7;
-	Wed, 10 Apr 2024 20:20:59 +0000 (UTC)
-Date: Wed, 10 Apr 2024 16:23:36 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Ali Zahraee <ahzahraee@gmail.com>
-Cc: mhiramat@kernel.org, mathieu.desnoyers@efficios.com, corbet@lwn.net,
- linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, skhan@linuxfoundation.org,
- javier.carrasco.cruz@gmail.com
-Subject: Re: [PATCH] Documentation: tracing: update format of sched_wakeup
- in example
-Message-ID: <20240410162336.618371dd@gandalf.local.home>
-In-Reply-To: <20240314144136.19727-1-ahzahraee@gmail.com>
-References: <20240314144136.19727-1-ahzahraee@gmail.com>
-X-Mailer: Claws Mail 3.19.1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1712782906; c=relaxed/simple;
+	bh=ki1myCbJ+SIp9GQ2PceX+BUBbr6vmy5/4xsnQqG7Rmg=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=a03xKbnVo+CdCw51l6VuZu9my3iOh3p/WiXqjZKM10GYPoNJ8WAQCO69NGBurVv7wJ6TC1m8N4cofZ+pTCO4F3DsN7NJeL2b5ufNFXT8X02pD3Dgi4+V2D+foxSNKNEje8k/uY+3vU2bcbMPMxQM+wk7PFlzJVPByv+uX3BJjvo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=M5RBCr7D; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net C373147C26
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1712782358; bh=K0UE5LpZEj22Vla+9d2h1SDJRAq5kGVNwQTHhTz174Y=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=M5RBCr7DfHx2xLgPpxWwjy/ALdtWGd3WAUH1XjMW4LVBEnHX2/zZ9q6i2PJ4W7G1m
+	 e1KY9ZUV8SugdQ9DCYDxEZj1ArA+OMsbevePhlicvZ75SOd4prD64fAlgEbUvI/3bs
+	 XH3Dt5JX/79d0/mc7+7KjBze+0VVIMWAhR3hB9G/3evivEwvI3wSMOraPNdIz9VH2A
+	 JbJI26zFvGI91xN5MqY7SaOzEARr3j9coDapmwxXYDX6Le1tfq/vmy4MqLn1R4Rkyt
+	 l9GtKC2DZ+a+78Vj9oRTheaiuyBIKNtAwY9MnPsPIvKJvJM11VoprylqF98cSjK4e3
+	 HqEi0WTCd9WEQ==
+Received: from localhost (unknown [IPv6:2601:280:5e00:625:67c:16ff:fe81:5f9b])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id C373147C26;
+	Wed, 10 Apr 2024 20:52:38 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Akira Yokosawa <akiyks@gmail.com>
+Cc: linux-doc@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>,
+ =?utf-8?B?0JjQstCw0L0g0JjQstCw0L3QvtCy0LjRhw==?= <relect@bk.ru>, Randy
+ Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH v2] docs: Detect variable fonts and suggest denylisting
+ them
+In-Reply-To: <20240406020416.25096-1-akiyks@gmail.com>
+References: <20240323120204.155678-1-akiyks@gmail.com>
+ <20240406020416.25096-1-akiyks@gmail.com>
+Date: Wed, 10 Apr 2024 14:52:37 -0600
+Message-ID: <87le5lszxm.fsf@meer.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 14 Mar 2024 15:41:36 +0100
-Ali Zahraee <ahzahraee@gmail.com> wrote:
+Akira Yokosawa <akiyks@gmail.com> writes:
 
-> The format of the sched_wakeup event is used as an example in the
-> documentation. But the given format is obsolete. This patch updates the
-> format in the example to match the current format of this event.
-> 
-> Signed-off-by: Ali Zahraee <ahzahraee@gmail.com>
+> Fedora and openSUSE has started deploying "variable font" [1] format
+> Noto CJK fonts [2, 3].  "CJK" here stands for "Chinese, Japanese,
+> and Korean".
+>
+> Unfortunately, XeTeX/XeLaTeX doesn't understand those fonts for
+> historical reasons and builds of translations.pdf end up in errors
+> if such fonts are present on the build host.
+>
+> To help developers work around the issue, add a script to check the
+> presence of "variable font" Noto CJK fonts and to emit suggestions.
+> The script is invoked in the error path of "make pdfdocs" so that the
+> suggestions are made only when a PDF build actually fails.
+>
+> The first suggestion is to denylist those "variable font" files by
+> activating a per-user and command-local fontconfig setting.
+>
+> For further info and backgrounds, please refer to the header comment
+> of scripts/check-variable-font.sh newly added in this commit.
+>
+> Link: [1] https://en.wikipedia.org/wiki/Variable_font
+> Link: [2] https://fedoraproject.org/wiki/Changes/Noto_CJK_Variable_Fonts
+> Link: [3] https://build.opensuse.org/request/show/1157217
+> Reported-by: Jonathan Corbet <corbet@lwn.net>
+> Link: https://lore.kernel.org/r/8734tqsrt7.fsf@meer.lwn.net/
+> Reported-by: "=D0=98=D0=B2=D0=B0=D0=BD =D0=98=D0=B2=D0=B0=D0=BD=D0=BE=D0=
+=B2=D0=B8=D1=87" <relect@bk.ru>
+> Link: https://lore.kernel.org/linux-doc/1708585803.600323099@f111.i.mail.=
+ru/
+> Cc: Randy Dunlap <rdunlap@infradead.org>
+> Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
 > ---
->  Documentation/trace/events.rst | 25 +++++++++++++------------
->  1 file changed, 13 insertions(+), 12 deletions(-)
-> 
-> diff --git a/Documentation/trace/events.rst b/Documentation/trace/events.rst
-> index 759907c20e75..65fe205c95e6 100644
-> --- a/Documentation/trace/events.rst
-> +++ b/Documentation/trace/events.rst
-> @@ -129,24 +129,25 @@ event::
->  	# cat /sys/kernel/tracing/events/sched/sched_wakeup/format
->  
->  	name: sched_wakeup
-> -	ID: 60
-> +	ID: 70
+> Changes in v2:
+>
+> - Stop suggesting removal of variable-font packages. (Jon)
+> - Rewrite changelog and add a couple of links for reference. (Randy)
+> - Suggest denylisting "variable font" files for XeLaTeX in "make pdfdocs"
+>   as a less invasive option.
+> - Simplify message from check-variable-font.sh and expand the header
+>   comments of the script.
+> - Add template of fonts.conf for denylisting in the header comments.
+> - Add rules for activating the XeLaTeX only fonts.conf in
+>   Documentation/Makefile.
 
-Really don't need to change that, as it's defined at compile time and may
-be different. For example, I have:
+Thanks for working on this.
 
- system: sched
- name: sched_wakeup
- ID: 297
+I've verified that the message comes up at the right time (though before
+waiting a half-hour for things to fail would be better :) and that
+following the advice in the script makes the build work.  I *did* have
+to do a "make cleandocs" after adding the fonts.conf file, though,
+before the build would succeed.
 
+So I've applied this, for now at least, but I do wonder: might it be
+better to stash this fonts.conf file in-tree somewhere and just pull it
+in automatically?  Would that create problems for anybody if we were to
+do so?  That might be a bit nicer than failing and making people set up
+the workaround on their own.
 
->  	format:
->  		field:unsigned short common_type;	offset:0;	size:2;
-> +                	signed:0;
-
-Don't line break the fields, as new lines are part of the format.
-
-
->  		field:unsigned char common_flags;	offset:2;	size:1;
-> -		field:unsigned char common_preempt_count;	offset:3;	size:1;
-> -		field:int common_pid;	offset:4;	size:4;
-> -		field:int common_tgid;	offset:8;	size:4;
-> +                	signed:0;
-> +		field:unsigned char common_preempt_count;	offset:3;
-> +                	size:1; signed:0;
-
-Again, the above needs to be on one line.
+Meanwhile, it occurred to me that it would be good to let the Fedora
+folks know that this breaks, so I've filed a bug there; we'll see if
+they have any thoughts on the matter as well.
 
 Thanks,
 
--- Steve
-
-> +		field:int common_pid;	offset:4;	size:4;	signed:1;
->  
-> -		field:char comm[TASK_COMM_LEN];	offset:12;	size:16;
-> -		field:pid_t pid;	offset:28;	size:4;
-> -		field:int prio;	offset:32;	size:4;
-> -		field:int success;	offset:36;	size:4;
-> -		field:int cpu;	offset:40;	size:4;
-> +		field:char comm[16];	offset:8;	size:16;	signed:0;
-> +		field:pid_t pid;	offset:24;	size:4;	signed:1;
-> +		field:int prio;	offset:28;	size:4;	signed:1;
-> +		field:int target_cpu;	offset:32;	size:4;	signed:1;
->  
-> -	print fmt: "task %s:%d [%d] success=%d [%03d]", REC->comm, REC->pid,
-> -		   REC->prio, REC->success, REC->cpu
-> +	print fmt: "comm=%s pid=%d prio=%d target_cpu=%03d", REC->comm, REC->pid,
-> +        	        REC->prio, REC->target_cpu
->  
-> -This event contains 10 fields, the first 5 common and the remaining 5
-> +This event contains 8 fields, the first 4 common and the remaining 4
->  event-specific.  All the fields for this event are numeric, except for
->  'comm' which is a string, a distinction important for event filtering.
->  
-
+jon
 
