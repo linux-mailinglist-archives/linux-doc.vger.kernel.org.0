@@ -1,112 +1,149 @@
-Return-Path: <linux-doc+bounces-14089-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-14095-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6DAC8A39C2
-	for <lists+linux-doc@lfdr.de>; Sat, 13 Apr 2024 02:58:17 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id D749B8A3A43
+	for <lists+linux-doc@lfdr.de>; Sat, 13 Apr 2024 03:54:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 233C51C214FE
-	for <lists+linux-doc@lfdr.de>; Sat, 13 Apr 2024 00:58:17 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 31542B21400
+	for <lists+linux-doc@lfdr.de>; Sat, 13 Apr 2024 01:54:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89E5A43ADF;
-	Sat, 13 Apr 2024 00:56:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6F492101EE;
+	Sat, 13 Apr 2024 01:54:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="lJOlD+fh"
+	dkim=pass (2048-bit key) header.d=canb.auug.org.au header.i=@canb.auug.org.au header.b="EDqqRVR7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8A68F4C97;
-	Sat, 13 Apr 2024 00:56:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
+Received: from gandalf.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A145DDA3;
+	Sat, 13 Apr 2024 01:53:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1712969774; cv=none; b=QLvoqBuWL3zaSTRplwhzKWnWhS7Ezy0Istr1bFdcrrlUDmZ25arap0NIPWrhtByFD+j2lPkliNdAYskEv153YSW97rlU4xR6yVtQ4kqV9EyLqbX6hcutL8Q5q68+nSvvKuAVlMrRZyxou4RCz+ezRnoStfOCOKUgtfqbqrcQ6GA=
+	t=1712973243; cv=none; b=VmAheqCw4h0zjiS/Gstps6gyeUI1nb3dHw4zcJBV3cFjbXtXa8milFa1zFhxbIK8OKm7xp/Hy1T8MbcP7bjmqxpc+InbFJcJZkLsoKZTfqxkHy3Zk7+5vgFN9xpfBLmqDUj9BrT/A0BrM/O2bqySzDyQndXzf3UbM2kHmyQG+MM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1712969774; c=relaxed/simple;
-	bh=pBU/dUpHcW7hv4jahHyUxb9624g5oZLMksU7XwtQcWg=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References; b=QT8w+tWBGeKDRK8+TEL8NQu/Q/Ua83Td8mWXu6r4T41Qm0kIymA/UImXMWjTai2XwiJVW3Oc1OMgHXyWOU4Xlhmxqu+XYrG30GtuqxMOpV9zpRLmbOLflLfCEG5FQXzfKgaTB3uoTAfU4c9V2+Xz7sI8CYdrn3v+BlTcnwlXetQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=lJOlD+fh; arc=none smtp.client-ip=13.77.154.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
-Received: by linux.microsoft.com (Postfix, from userid 1052)
-	id AD89A20FC5FA; Fri, 12 Apr 2024 17:56:06 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com AD89A20FC5FA
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1712969766;
-	bh=RkLiZLmYY6yXHhJqHQYW5lgf/n+IHqe1I+s8c4aEHFk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=lJOlD+fhAoGAuJ5iZUO71L5J5LCGOsNCchcUL6JHtoAoyT5JDX0HrG3Eqe3ErOvnU
-	 BvMpI3b83kNEU7wV1u0gMFyOywTOm+CFsHhq6jKBWtwaDvWB2gnKNfr6G56JV/toT7
-	 vogkh3rb+v16VTJ9Opjit07BN+AqWythNOtPfyQ8=
-From: Fan Wu <wufan@linux.microsoft.com>
-To: corbet@lwn.net,
-	zohar@linux.ibm.com,
-	jmorris@namei.org,
-	serge@hallyn.com,
-	tytso@mit.edu,
-	ebiggers@kernel.org,
-	axboe@kernel.dk,
-	agk@redhat.com,
-	snitzer@kernel.org,
-	eparis@redhat.com,
-	paul@paul-moore.com
-Cc: linux-doc@vger.kernel.org,
-	linux-integrity@vger.kernel.org,
-	linux-security-module@vger.kernel.org,
-	fsverity@lists.linux.dev,
-	linux-block@vger.kernel.org,
-	dm-devel@lists.linux.dev,
-	audit@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Fan Wu <wufan@linux.microsoft.com>
-Subject: [PATCH v17 21/21] MAINTAINERS: ipe: add ipe maintainer information
-Date: Fri, 12 Apr 2024 17:56:04 -0700
-Message-Id: <1712969764-31039-22-git-send-email-wufan@linux.microsoft.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1712969764-31039-1-git-send-email-wufan@linux.microsoft.com>
-References: <1712969764-31039-1-git-send-email-wufan@linux.microsoft.com>
+	s=arc-20240116; t=1712973243; c=relaxed/simple;
+	bh=nsOYgZD6NcU0rdrT4T38X2Zder785/fBw+JPZN9oFnU=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=nGcfqiP+Hdpg2xgzHavPMlSzRbPiHc/lLMcWk6PwZBuSuhnooz5Txl/5Rmq61+Sm91FlUOBfW1j0wMw0687rDC6TanDNoNCCIFMSgyP9zQ8ooJCqzuDPHM94icRDF6dLYHaKVpHtZBvZqjBfp58iI7hpYa60mq3GQxBCz/ppR3w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=canb.auug.org.au; spf=pass smtp.mailfrom=canb.auug.org.au; dkim=pass (2048-bit key) header.d=canb.auug.org.au header.i=@canb.auug.org.au header.b=EDqqRVR7; arc=none smtp.client-ip=150.107.74.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=canb.auug.org.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=canb.auug.org.au
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canb.auug.org.au;
+	s=201702; t=1712973232;
+	bh=Y4BOwpk8yD9IlKJHunm77VnxmVc/7lRfLru6wBoJFaA=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=EDqqRVR7LZ+SNtsMLjm8Fbb2ebWukmsVwlTD9Z5qqjqBTjJ+ij7wd3FflepCx5rPp
+	 h+Wwxe5GUSHf8dJHrMu8kjC21MG7Pmwk18uIvcfKqOpW/Po2ZP4FHVkBv8VjM7V8cF
+	 9XogbxEee+D2oAoGtql/r7CvmIUHJXpgeisXI96MJbJStyXttEhsr4gawGO9p2JZ39
+	 V+/kD2cFFA9AS3zn4p05EpYKcmW/SNA/bUNixWgkQhNp6LQC0EWRG8sX/VlrHxF8qg
+	 +XqSGud5sE+3h2q9V3srWooQOTG0n+K15PV6b9mm5nJBDm0BFcmCOhFf4c47Q7FKzH
+	 xTPdCfRJOiYSw==
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail.ozlabs.org (Postfix) with ESMTPSA id 4VGc0t0dkgz4wcC;
+	Sat, 13 Apr 2024 11:53:49 +1000 (AEST)
+Date: Sat, 13 Apr 2024 11:53:24 +1000
+From: Stephen Rothwell <sfr@canb.auug.org.au>
+To: Sean Christopherson <seanjc@google.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, Dave Hansen
+ <dave.hansen@linux.intel.com>, x86@kernel.org, Peter Zijlstra
+ <peterz@infradead.org>, Josh Poimboeuf <jpoimboe@kernel.org>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Pawan Gupta
+ <pawan.kumar.gupta@linux.intel.com>, Daniel Sneddon
+ <daniel.sneddon@linux.intel.com>, <linuxppc-dev@lists.ozlabs.org>, Michael
+ Ellerman <mpe@ellerman.id.au>
+Subject: Re: [PATCH 1/3] x86/cpu: Actually turn off mitigations by default
+ for SPECULATION_MITIGATIONS=n
+Message-ID: <20240413115324.53303a68@canb.auug.org.au>
+In-Reply-To: <20240409175108.1512861-2-seanjc@google.com>
+References: <20240409175108.1512861-1-seanjc@google.com>
+	<20240409175108.1512861-2-seanjc@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; boundary="Sig_/NbG7tw_eh21Qan+TJ2Af+bh";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
 
-Update MAINTAINERS to include ipe maintainer information.
+--Sig_/NbG7tw_eh21Qan+TJ2Af+bh
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Fan Wu <wufan@linux.microsoft.com>
+Hi Sean,
 
---
-v1-v16:
-  + Not present
+I noticed this commit in linux-next.
 
-v17:
-  + Introduced
----
- MAINTAINERS | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+On Tue,  9 Apr 2024 10:51:05 -0700 Sean Christopherson <seanjc@google.com> =
+wrote:
+>
+> Initialize cpu_mitigations to CPU_MITIGATIONS_OFF if the kernel is built
+> with CONFIG_SPECULATION_MITIGATIONS=3Dn, as the help text quite clearly
+> states that disabling SPECULATION_MITIGATIONS is supposed to turn off all
+> mitigations by default.
+>=20
+>   =E2=94=82 If you say N, all mitigations will be disabled. You really
+>   =E2=94=82 should know what you are doing to say so.
+>=20
+> As is, the kernel still defaults to CPU_MITIGATIONS_AUTO, which results in
+> some mitigations being enabled in spite of SPECULATION_MITIGATIONS=3Dn.
+>=20
+> Fixes: f43b9876e857 ("x86/retbleed: Add fine grained Kconfig knobs")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Sean Christopherson <seanjc@google.com>
+> ---
+>  kernel/cpu.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/kernel/cpu.c b/kernel/cpu.c
+> index 8f6affd051f7..07ad53b7f119 100644
+> --- a/kernel/cpu.c
+> +++ b/kernel/cpu.c
+> @@ -3207,7 +3207,8 @@ enum cpu_mitigations {
+>  };
+> =20
+>  static enum cpu_mitigations cpu_mitigations __ro_after_init =3D
+> -	CPU_MITIGATIONS_AUTO;
+> +	IS_ENABLED(CONFIG_SPECULATION_MITIGATIONS) ? CPU_MITIGATIONS_AUTO :
+> +						     CPU_MITIGATIONS_OFF;
+> =20
+>  static int __init mitigations_parse_cmdline(char *arg)
+>  {
+> --=20
+> 2.44.0.478.gd926399ef9-goog
+>=20
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index b5b89687680b..93eb4e12a789 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -10745,6 +10745,16 @@ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/zohar/linux-integrity.git
- F:	security/integrity/
- F:	security/integrity/ima/
- 
-+INTEGRITY POLICY ENFORCEMENT (IPE)
-+M:	Fan Wu <wufan@linux.microsoft.com>
-+L:	linux-security-module@vger.kernel.org
-+S:	Supported
-+T:	git https://github.com/microsoft/ipe.git
-+F:	Documentation/admin-guide/LSM/ipe.rst
-+F:	Documentation/security/ipe.rst
-+F:	scripts/ipe/
-+F:	security/ipe/
-+
- INTEL 810/815 FRAMEBUFFER DRIVER
- M:	Antonino Daplas <adaplas@gmail.com>
- L:	linux-fbdev@vger.kernel.org
--- 
-2.44.0
+I noticed because it turned off all mitigations for my PowerPC qemu
+boot tests - probably because CONFIG_SPECULATION_MITIGATIONS only
+exists in arch/x86/Kconfig ... thus for other architectures that have
+cpu mitigations, this will always default them to off, right?
 
+--=20
+Cheers,
+Stephen Rothwell
+
+--Sig_/NbG7tw_eh21Qan+TJ2Af+bh
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEENIC96giZ81tWdLgKAVBC80lX0GwFAmYZ5ZQACgkQAVBC80lX
+0GynlAf/Wrk3YC50MGX7+3M9JTuw86KpBU8ObFWWrRoQMz1pL8HUIJ2r3DD3jmY5
+Q+Wb4noRymG9Y+zIoB5TFzdn84TKTTJSzQhu6EVrn4loYN2rRQTimU8gmhQejExl
+75el/6d9lIOIL2VvgFAddpIvahlc+s2ovo4y1rPXlR7uAQq5LNUEz7H8fuCkGcGO
+/ATBSVfhyDN3ryvmDXO7XU+Nsb24Bz5i3NmHTv20sbdMkij26+u8QCtyZFOhmbrY
+DjMi+IxL0kcsUg4jnoXrAaC/yy1etU96S5iukrMNRj2ENI4Nv8ivwYDdawdpzIdx
+mIFCuaKOVfcaUfJ51s/eUK3Pq0PAVw==
+=K4/i
+-----END PGP SIGNATURE-----
+
+--Sig_/NbG7tw_eh21Qan+TJ2Af+bh--
 
