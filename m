@@ -1,133 +1,165 @@
-Return-Path: <linux-doc+bounces-14179-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-14185-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE27B8A53BE
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 16:30:37 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 11FAD8A5427
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 16:34:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 4E2061F219DA
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 14:30:37 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BC3D12850FB
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 14:34:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0FA9482869;
-	Mon, 15 Apr 2024 14:28:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4054585260;
+	Mon, 15 Apr 2024 14:31:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PVoYqzxV"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="2nqzbcM5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f202.google.com (mail-pg1-f202.google.com [209.85.215.202])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEC0478C75;
-	Mon, 15 Apr 2024 14:28:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB0E9811F7
+	for <linux-doc@vger.kernel.org>; Mon, 15 Apr 2024 14:31:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.202
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1713191316; cv=none; b=oJRv9SFyfKP99PRrbmLMhXG6laYjVBmsdi8hGHJ2EDSpPub24eyzhDkIT5HLtnWrZGM0Sjcit+/0r6QKDM7uGYTfFw6Q3VbTqnEpYCjmZLkgmBqgY1r/byE+FTiJjf3onYvkegdgi/agnuLuKiqbAwBUfar2z7aSclaCi98xaIE=
+	t=1713191487; cv=none; b=ixqjH3rt+PxPfgFI29H6WpqdGNYzvq2ohRKL3XDe5tXNWJYAbenBzCuYAAwV3zwtIfrBhrXsCpSvo7TKnlSqQOsaTtN5zTF0vVDutH4heQbQSUJEBPrquO5PO/4L3b2Rv3KvZ5W/BiYyk3NtuFaaL+S4Ngg05OOjBBXhz3TMPKk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1713191316; c=relaxed/simple;
-	bh=apPf5YxAYqe7YNBX6Cyef/BfXebvMrMHj5etULK04HA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=MT2vHQbxjkU04u1UjZ+cuuI+Ot6C9JRQnJ1xF1ITRHZF4/MsG7K9/BX/YkDc1Gdo6nvEnCCiUocQDVO1DZmxZWg/c0EIhn2ylGudAuYwtM/tx+NKHXjo6UQ1pSlixwpfl+zVY8dF2dYrHeeRwwHMgqUlSdJwR8/r6Wop2fkgLrU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PVoYqzxV; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66DAEC2BD11;
-	Mon, 15 Apr 2024 14:28:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1713191315;
-	bh=apPf5YxAYqe7YNBX6Cyef/BfXebvMrMHj5etULK04HA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=PVoYqzxV6FYz2QdGdPUrtfj/AviX3PbD+lIC58voYZbHaWIlbDiQtx/QSrLGh9Cxu
-	 fxtbAFLtLOAcIFaOofyfd/B88GcuceWzI3sgWI3yE1kraBv1gt4sapwjenC+87Z9XJ
-	 9hFGKoZvIZ79nhAd2P+8ut4HoqUxCA2LtFZHjenRtpzkbsR9SW5Zq33JaF1HL+mZ9+
-	 UQD3tLk1yOAu0n8Xgh1OssQookLWj2d2RW5zOmxwjkqUjHIt5Hi5mNJeOEtZCZbOCN
-	 d4jVOfgZ0kZYTKBL7pSx3JTCoMaxVzKVt+mGUPOlAxwf5160v3sVcSl6ealmyvOZ9E
-	 inKWtr9TQffoQ==
-Date: Mon, 15 Apr 2024 15:28:27 +0100
-From: Simon Horman <horms@kernel.org>
-To: Yi-De Wu <yi-de.wu@mediatek.com>
-Cc: Yingshiuan Pan <yingshiuan.pan@mediatek.com>,
-	Ze-Yu Wang <ze-yu.wang@mediatek.com>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	netdev@vger.kernel.org, linux-mediatek@lists.infradead.org,
-	David Bradil <dbrazdil@google.com>,
-	Trilok Soni <quic_tsoni@quicinc.com>,
-	My Chuang <my.chuang@mediatek.com>,
-	Shawn Hsiao <shawn.hsiao@mediatek.com>,
-	PeiLun Suei <peilun.suei@mediatek.com>,
-	Liju Chen <liju-clr.chen@mediatek.com>,
-	Willix Yeh <chi-shen.yeh@mediatek.com>,
-	Kevenny Hsieh <kevenny.hsieh@mediatek.com>
-Subject: Re: [PATCH v10 04/21] virt: geniezone: Add GenieZone hypervisor
- driver
-Message-ID: <20240415142827.GA2320920@kernel.org>
-References: <20240412065718.29105-1-yi-de.wu@mediatek.com>
- <20240412065718.29105-5-yi-de.wu@mediatek.com>
+	s=arc-20240116; t=1713191487; c=relaxed/simple;
+	bh=ITYC7z7GV55n6mIB+damxcuLZWxyZG3dP037z76+qQ0=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=m5AT52DQWA6yqRcVQDBOvCs8YLTNDzWNnvJYvkbTfXeUxIhqqXOR30QUpUN6ITNJGvCYv7U0KVZueooCQDBYHbalmQQAiWjGksBsr5RzQmaf9MAt1wWVzJVMaVv545A2J5OBVwFZ1lWApCRZR0MK/zvsNAO+Sc3fL3ABZpMaIs0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=2nqzbcM5; arc=none smtp.client-ip=209.85.215.202
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com
+Received: by mail-pg1-f202.google.com with SMTP id 41be03b00d2f7-5c6245bc7caso2524958a12.3
+        for <linux-doc@vger.kernel.org>; Mon, 15 Apr 2024 07:31:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1713191485; x=1713796285; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:from:subject:message-id:references
+         :mime-version:in-reply-to:date:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3c2CdFnxXRBnmzc0kZKqWJbmgAhAN/X9RQGLQm4qlas=;
+        b=2nqzbcM57gPI/2TpPx7+PlH9N3yFxN+xAXfTCwAs6JUNLUFbA7l159Gtl2xCMnfWwn
+         +DHky1MEgJfU3PBlL3vQWc3bHDV8O4/0XhtTcRr+K3zPJRocI5NNcbeosBc9p5ufgncP
+         GPQ7KAehkefVHwbyOti5Wp69be2ZgE0Gvb4VWNgKNE33dDBad/CnP428TEK1B73h1e5t
+         X6kg18mymJydA0JWL0gjJis6NAkkbNXkxNF8E3BYRYncfA+dgKUYzbEXO35VB3+9UxrZ
+         1xR8bSyADvxZB1Haahx/HrZEeaVrg8Y76p/FGOwUsncIM2ylqHHx3BE5hlV8sKD7Scfr
+         DoRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1713191485; x=1713796285;
+        h=content-transfer-encoding:cc:to:from:subject:message-id:references
+         :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=3c2CdFnxXRBnmzc0kZKqWJbmgAhAN/X9RQGLQm4qlas=;
+        b=js4XgozwGlsBWt7n/lmngnfjSCMeVFA+c3/7e21APzJWsfL9uK8gXoFbva/38J9oYn
+         E58YXcTQIgZFSSHg4FXfDYag21jqNPKybDUluIlh4Wi6ayzH1Bf5ZF2P1A6/B0QMciB4
+         rfU2XPYL7NUslLyRUl2F+OEr623yJt540iM+25NyBlD2ZdHXqT704ZtH8oKHtaw4CqSD
+         WAnrNGl14duwt3ycjA4G88zj3MnuTHcYrc19KADKaGB86T5G88igspZgv2FnZwQel/ij
+         9eYXqXd9sOr2BjQ0dnuCufQu0LN1iA+VMqenlILSMEP/SKCkC0S9tXYS+1sY+uKlzMo1
+         LdVQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVlwqaVN3JYtIYAb1oxj0jOrfYVTtnl626rHwsSFD6dbt9uaWqx+mET8+prWS7Q3eQSf5joo5pCieTsDXrmwwA6h9UpBBh46BJk
+X-Gm-Message-State: AOJu0Yw0cVw7iFtt5ZW0ovwA/CA6U4k0apGZWA30/Fm9VTCUAwfKmCXf
+	T6UC1RK+nIUhu+EMSKITC8P/SiJ3XW7UsblNt9jM1QrQXHou3jxnMkXRKPvLZXAN3oEw3BlX09P
+	qAQ==
+X-Google-Smtp-Source: AGHT+IHuch75LMAnc1U2ltEvl5EQtMTtzEb/8rE4LBdYCN+wg04KdOcX1kaXCFsKcUY8MvFdl8nCoh4Cvw4=
+X-Received: from zagreus.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:5c37])
+ (user=seanjc job=sendgmr) by 2002:a63:ec02:0:b0:5dc:bc92:23c4 with SMTP id
+ j2-20020a63ec02000000b005dcbc9223c4mr27975pgh.12.1713191484874; Mon, 15 Apr
+ 2024 07:31:24 -0700 (PDT)
+Date: Mon, 15 Apr 2024 07:31:23 -0700
+In-Reply-To: <CAMuHMdWD+UKZAkiUQUJOeRkOoyT4cH1o8=Gu465=K-Ub7O4y9A@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240412065718.29105-5-yi-de.wu@mediatek.com>
+Mime-Version: 1.0
+References: <20240409175108.1512861-1-seanjc@google.com> <20240409175108.1512861-2-seanjc@google.com>
+ <20240413115324.53303a68@canb.auug.org.au> <87edb9d33r.fsf@mail.lhotse>
+ <87bk6dd2l4.fsf@mail.lhotse> <CAMuHMdWD+UKZAkiUQUJOeRkOoyT4cH1o8=Gu465=K-Ub7O4y9A@mail.gmail.com>
+Message-ID: <Zh06O35yKIF2vNdE@google.com>
+Subject: Re: [PATCH 1/3] x86/cpu: Actually turn off mitigations by default for SPECULATION_MITIGATIONS=n
+From: Sean Christopherson <seanjc@google.com>
+To: Geert Uytterhoeven <geert@linux-m68k.org>
+Cc: Michael Ellerman <mpe@ellerman.id.au>, Stephen Rothwell <sfr@canb.auug.org.au>, 
+	Jonathan Corbet <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, 
+	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	Peter Zijlstra <peterz@infradead.org>, Josh Poimboeuf <jpoimboe@kernel.org>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, 
+	Daniel Sneddon <daniel.sneddon@linux.intel.com>, linuxppc-dev@lists.ozlabs.org, 
+	linux-arch@vger.kernel.org, Catalin Marinas <catalin.marinas@arm.com>, 
+	Will Deacon <will@kernel.org>, Heiko Carstens <hca@linux.ibm.com>, 
+	Linux-Renesas <linux-renesas-soc@vger.kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 12, 2024 at 02:57:01PM +0800, Yi-De Wu wrote:
-> From: "Yingshiuan Pan" <yingshiuan.pan@mediatek.com>
-> 
-> GenieZone hypervisor(gzvm) is a type-1 hypervisor that supports various
-> virtual machine types and provides security features such as TEE-like
-> scenarios and secure boot. It can create guest VMs for security use
-> cases and has virtualization capabilities for both platform and
-> interrupt. Although the hypervisor can be booted independently, it
-> requires the assistance of GenieZone hypervisor kernel driver(gzvm-ko)
-> to leverage the ability of Linux kernel for vCPU scheduling, memory
-> management, inter-VM communication and virtio backend support.
-> 
-> Add the basic hypervisor driver. Subsequent patches will add more
-> supported features to this driver.
-> 
-> Signed-off-by: Yingshiuan Pan <yingshiuan.pan@mediatek.com>
-> Signed-off-by: Jerry Wang <ze-yu.wang@mediatek.com>
-> Signed-off-by: Liju Chen <liju-clr.chen@mediatek.com>
-> Signed-off-by: Yi-De Wu <yi-de.wu@mediatek.com>
+On Mon, Apr 15, 2024, Geert Uytterhoeven wrote:
+> Hi Michael,
+>=20
+> On Sat, Apr 13, 2024 at 11:38=E2=80=AFAM Michael Ellerman <mpe@ellerman.i=
+d.au> wrote:
+> > Michael Ellerman <mpe@ellerman.id.au> writes:
+> > > Stephen Rothwell <sfr@canb.auug.org.au> writes:
+> > ...
+> > >> On Tue,  9 Apr 2024 10:51:05 -0700 Sean Christopherson <seanjc@googl=
+e.com> wrote:
+> > ...
+> > >>> diff --git a/kernel/cpu.c b/kernel/cpu.c
+> > >>> index 8f6affd051f7..07ad53b7f119 100644
+> > >>> --- a/kernel/cpu.c
+> > >>> +++ b/kernel/cpu.c
+> > >>> @@ -3207,7 +3207,8 @@ enum cpu_mitigations {
+> > >>>  };
+> > >>>
+> > >>>  static enum cpu_mitigations cpu_mitigations __ro_after_init =3D
+> > >>> -   CPU_MITIGATIONS_AUTO;
+> > >>> +   IS_ENABLED(CONFIG_SPECULATION_MITIGATIONS) ? CPU_MITIGATIONS_AU=
+TO :
+> > >>> +                                                CPU_MITIGATIONS_OF=
+F;
+> > >>>
+> > >>>  static int __init mitigations_parse_cmdline(char *arg)
+> > >>>  {
+> >
+> > I think a minimal workaround/fix would be:
+> >
+> > diff --git a/drivers/base/Kconfig b/drivers/base/Kconfig
+> > index 2b8fd6bb7da0..290be2f9e909 100644
+> > --- a/drivers/base/Kconfig
+> > +++ b/drivers/base/Kconfig
+> > @@ -191,6 +191,10 @@ config GENERIC_CPU_AUTOPROBE
+> >  config GENERIC_CPU_VULNERABILITIES
+> >         bool
+> >
+> > +config SPECULATION_MITIGATIONS
+> > +       def_bool y
+> > +       depends on !X86
+> > +
+> >  config SOC_BUS
+> >         bool
+> >         select GLOB
+>=20
+> Thanks, that works for me (on arm64), so
+> Tested-by: Geert Uytterhoeven <geert+renesas@glider.be>
 
-...
+Oof.  I completely missed that "cpu_mitigations" wasn't x86-only.  I can't =
+think
+of better solution than an on-by-default generic Kconfig, though can't that=
+ it
+more simply be:
 
-> +static struct platform_driver gzvm_driver = {
-> +	.probe = gzvm_drv_probe,
-> +	.remove = gzvm_drv_remove,
-> +	.driver = {
-> +		.name = KBUILD_MODNAME,
-> +		.owner = THIS_MODULE,
-
-Hi Yi-De Wu,
-
-A minor nit from my side:
-
-There is no need to set owner here as
-owner is set (overridden) by module_platform_driver().
-
-Flagged by Coccinelle.
-
-> +		.of_match_table = gzvm_of_match,
-> +	},
-> +};
-> +
-> +module_platform_driver(gzvm_driver);
-> +
-> +MODULE_DEVICE_TABLE(of, gzvm_of_match);
-> +MODULE_AUTHOR("MediaTek");
-> +MODULE_DESCRIPTION("GenieZone interface for VMM");
-> +MODULE_LICENSE("GPL");
-
-...
+diff --git a/drivers/base/Kconfig b/drivers/base/Kconfig
+index 2b8fd6bb7da0..5930cb56ee29 100644
+--- a/drivers/base/Kconfig
++++ b/drivers/base/Kconfig
+@@ -191,6 +191,9 @@ config GENERIC_CPU_AUTOPROBE
+ config GENERIC_CPU_VULNERABILITIES
+        bool
+=20
++config SPECULATION_MITIGATIONS
++       def_bool !X86
++
+ config SOC_BUS
+        bool
+        select GLOB
 
