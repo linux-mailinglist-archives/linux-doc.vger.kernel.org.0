@@ -1,101 +1,115 @@
-Return-Path: <linux-doc+bounces-14219-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-14221-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3BDC8A5CA7
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 23:08:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 580348A5E38
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Apr 2024 01:22:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id ECF4E1C21197
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 21:08:10 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 888821C20AAF
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 23:22:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C49D2156991;
-	Mon, 15 Apr 2024 21:08:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A5266158DA7;
+	Mon, 15 Apr 2024 23:22:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="gIQ+xICP"
+	dkim=pass (2048-bit key) header.d=crowdstrike.com header.i=@crowdstrike.com header.b="e3D+huNG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from mx0a-00206402.pphosted.com (mx0a-00206402.pphosted.com [148.163.148.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 210D6823CE;
-	Mon, 15 Apr 2024 21:08:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD5F41272B8;
+	Mon, 15 Apr 2024 23:22:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.148.77
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1713215282; cv=none; b=U5Tw0PakOdzk5FYRso9Q83sh9T+TmgbJ6ukC6mSGI1a5pf/56HpmjSNLHplAlns5WEslIXqvXcCm6EirczlLAQZkpzNSLY6m0IIGidwyw433JjSKd00mgFCoX+TFWz5laf1y7+ru9b5PD9MKCypEVV5lSf/6+U526R5Fwb9bHEI=
+	t=1713223349; cv=none; b=BxJkUzhN2HgKCKqrVsOZJefspbmiHL1QaUN7q2FbVRN1mYx/6bKsPvy4O0l0aTkjAk8ahe7GIiTTBvVI1uEWgmy9X0uZYAqtFPONWCkcxsgK2lmJvLvQuI1X23uZJLZzKzdvYZjsEREMCCz/XsdC45Li1rcMZebWH3eWIs1SHM8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1713215282; c=relaxed/simple;
-	bh=TJCFkjZfjstSqTosq2ofApmwxwcsMnKCELg9tffipXQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=B82P15maPpSE57AzApg6QAC6Fbab0j2ozNqXxsE8D4OpysdbEynggBmo3Ny5vIfrgRRf5VIDyEOnMb/IryKCfJy6YIaYereH3ShBDC2XagYc1vjv4goLUy+L+vkxlRuAGf9Ruk+qVSPz9CpZDHJkf9jEBDNdxcRNo9ISmbb/fVY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=gIQ+xICP; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=7+q5a4BFZOQ0nlwK9E3zO3DsPMAmGY9bri/gwPhuncQ=; b=gIQ+xICPtGPVXjX3/kXMEd3bNj
-	/YeR1j2Gj3QOsMBAqM9PLeuQnZVGqdwqlpSlIpfGUnx68Cywwdd04syLRbWGXZlHLsfdIu1EeLU7H
-	9YDDhNW15+gcofUs2psqkJaJdUarmJuAtcKaYHn3fAWYOfK3YwVu6WGQW2xPJObiwaqZ718LKlh9v
-	N07yL1LzBZzTW9NwAdCNFDW/A/Ye1fSf/onmNDQR52y85OsOG/kRWuhVbajPUx8NnQGSoLEEdoXRC
-	jwooLpl7PRhgSFwfuE1JxjYd8ua8dy1v5OF28kcJWNvVDDO8GVi8lV8uHqCYj8W7+no8qJUujWD5C
-	B/cTLbOA==;
-Received: from [50.53.2.121] (helo=[192.168.254.15])
-	by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1rwTYH-00000009v3H-3nHt;
-	Mon, 15 Apr 2024 21:07:47 +0000
-Message-ID: <805af99c-4c78-4f2c-a15b-de69a4b8da99@infradead.org>
-Date: Mon, 15 Apr 2024 14:07:42 -0700
+	s=arc-20240116; t=1713223349; c=relaxed/simple;
+	bh=quDJp0nmfOtlJCGhx+JE1aXmvcXtsbLBxBDLT69n6uw=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=lzdGPF6RFkQ5fGF7jnnivDQ+lbzclroNaqSVyoT/Lfemi8APhrXfebbBVGkuRmcxGRgJkI3//NhkoCpBOYmuHksfj2CYfxyp4PKDC6DhDRAivKfE/tVcYkHWvp34yEeE/mCn/UWr1GNfhwT7Ss0AOjO2TYPvOANvx6KVE4xFXHY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=crowdstrike.com; spf=pass smtp.mailfrom=crowdstrike.com; dkim=pass (2048-bit key) header.d=crowdstrike.com header.i=@crowdstrike.com header.b=e3D+huNG; arc=none smtp.client-ip=148.163.148.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=crowdstrike.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=crowdstrike.com
+Received: from pps.filterd (m0354650.ppops.net [127.0.0.1])
+	by mx0a-00206402.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 43FLxUMx007335;
+	Mon, 15 Apr 2024 23:06:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crowdstrike.com;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=default; bh=14J70gYg9
+	RDH634/oH+jURif/pgn4cONK6QdW2lwxIg=; b=e3D+huNGt/VMyIEpGhWR5/lao
+	GJV8ue40GPQ64jnImeFTcwxkGw5SUybMMvc7ULaU7RVdSJqSNSi4NugdKBRpuKXn
+	Vh+1oSVpR+Yn25KXgEuqZU5KpEld6bc7Wrhg2ayw5ja6s04VkN4EHJnf94Yli1kw
+	1/a6Pc3v5sWhBF7qY+5xbSHlaMLmrlKrr8R878DSwDi0zItqnAwNNgBc8AZYgcxg
+	UqDEZzHZcpk9/6pDk7IILnKtqy04sy190r2xuLl2u0j4xMurUOQ2PmTg/Cb/+E26
+	aGEXbPtlUqyLSuMxHEdLADq/FbFDVSyk7yyOhPToz8dkHtvwhmDj13VDehveQ==
+Received: from 04wpexch06.crowdstrike.sys (dragosx.crowdstrike.com [208.42.231.60] (may be forged))
+	by mx0a-00206402.pphosted.com (PPS) with ESMTPS id 3xhcn083u9-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 15 Apr 2024 23:06:51 +0000 (GMT)
+Received: from LL-556NGK3.crowdstrike.sys (10.100.11.122) by
+ 04wpexch06.crowdstrike.sys (10.100.11.99) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.4; Mon, 15 Apr 2024 23:06:39 +0000
+From: Martin Kelly <martin.kelly@crowdstrike.com>
+To: <bpf@vger.kernel.org>
+CC: <linux-doc@vger.kernel.org>, Alexei Starovoitov <ast@kernel.org>,
+        Daniel
+ Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Martin Kelly <martin.kelly@crowdstrike.com>
+Subject: [PATCH bpf-next] bpf: clarify libbpf skeleton header licensing
+Date: Mon, 15 Apr 2024 16:06:12 -0700
+Message-ID: <20240415230612.658798-1-martin.kelly@crowdstrike.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 01/14] lib: Add TLV parser
-To: Jarkko Sakkinen <jarkko@kernel.org>,
- Roberto Sassu <roberto.sassu@huaweicloud.com>, corbet@lwn.net,
- paul@paul-moore.com, jmorris@namei.org, serge@hallyn.com,
- akpm@linux-foundation.org, shuah@kernel.org, mcoquelin.stm32@gmail.com,
- alexandre.torgue@foss.st.com, mic@digikod.net
-Cc: linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
- bpf@vger.kernel.org, zohar@linux.ibm.com, dmitry.kasatkin@gmail.com,
- linux-integrity@vger.kernel.org, wufan@linux.microsoft.com,
- pbrobinson@gmail.com, zbyszek@in.waw.pl, hch@lst.de, mjg59@srcf.ucam.org,
- pmatilai@redhat.com, jannh@google.com, dhowells@redhat.com,
- jikos@kernel.org, mkoutny@suse.com, ppavlu@suse.com, petr.vorel@gmail.com,
- mzerqung@0pointer.de, kgold@linux.ibm.com,
- Roberto Sassu <roberto.sassu@huawei.com>
-References: <20240415142436.2545003-1-roberto.sassu@huaweicloud.com>
- <20240415142436.2545003-2-roberto.sassu@huaweicloud.com>
- <D0KXTHHYLSX6.1IDLSEIVS9PA5@kernel.org>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <D0KXTHHYLSX6.1IDLSEIVS9PA5@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: 04wpexch02.crowdstrike.sys (10.100.11.92) To
+ 04wpexch06.crowdstrike.sys (10.100.11.99)
+X-Disclaimer: USA
+X-Proofpoint-ORIG-GUID: kwXhQW-ctYVmUNel2rWf6BzMWZeZf576
+X-Proofpoint-GUID: kwXhQW-ctYVmUNel2rWf6BzMWZeZf576
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-15_18,2024-04-15_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
+ malwarescore=0 clxscore=1011 mlxlogscore=563 priorityscore=1501
+ spamscore=0 lowpriorityscore=0 bulkscore=0 suspectscore=0 adultscore=0
+ phishscore=0 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2404010003 definitions=main-2404150155
 
+Add an explicit statement clarifying that generated BPF code bundled
+inside a libbpf skeleton header may have a license distinct from the
+skeleton header (in other words, the bundled code does not alter the
+skeleton header license). This is a follow-up from a previous thread
+discussing licensing terms:
+https://lore.kernel.org/bpf/54d3cb9669644995b6ae787b4d532b73@crowdstrike.com/#r
 
+Signed-off-by: Martin Kelly <martin.kelly@crowdstrike.com>
+---
+ Documentation/bpf/bpf_licensing.rst | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-On 4/15/24 12:19 PM, Jarkko Sakkinen wrote:
-> On Mon Apr 15, 2024 at 5:24 PM EEST, Roberto Sassu wrote:
->> From: Roberto Sassu <roberto.sassu@huawei.com>
->>
->> Add a parser of a generic TLV format:
-> 
-> What is TLV?
-
-type-length-value
-
-i.e., a descriptor that contains a value.
-
-IIUC.
-
+diff --git a/Documentation/bpf/bpf_licensing.rst b/Documentation/bpf/bpf_licensing.rst
+index b19c433f41d2..05bc1b845e64 100644
+--- a/Documentation/bpf/bpf_licensing.rst
++++ b/Documentation/bpf/bpf_licensing.rst
+@@ -89,4 +89,8 @@ Packaging BPF programs with user space applications
+ 
+ Generally, proprietary-licensed applications and GPL licensed BPF programs
+ written for the Linux kernel in the same package can co-exist because they are
+-separate executable processes. This applies to both cBPF and eBPF programs.
++separate executable processes. In particular, BPF code bundled inside a libbpf
++skeleton header may have a different license than that of its surrounding
++skeleton. In other words, the license of the bundled BPF code does not alter the
++license of the skeleton header nor of a program including the header. This
++paragraph applies to both cBPF and eBPF programs.
 -- 
-#Randy
-https://people.kernel.org/tglx/notes-about-netiquette
-https://subspace.kernel.org/etiquette.html
+2.34.1
+
 
