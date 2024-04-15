@@ -1,473 +1,229 @@
-Return-Path: <linux-doc+bounces-14168-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-14170-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C2008A517F
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 15:34:55 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 513848A52D1
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 16:15:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 196871F235CB
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 13:34:55 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 027CE28287B
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Apr 2024 14:15:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC18C12B170;
-	Mon, 15 Apr 2024 13:22:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9045C74BF2;
+	Mon, 15 Apr 2024 14:15:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=kalrayinc.com header.i=@kalrayinc.com header.b="Jy+YBv+D";
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kalrayinc.com header.i=@kalrayinc.com header.b="oq9nWQN6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from szxga05-in.huawei.com (szxga05-in.huawei.com [45.249.212.191])
+Received: from smtpout148.security-mail.net (smtpout148.security-mail.net [85.31.212.148])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB18F763EE;
-	Mon, 15 Apr 2024 13:22:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.191
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1713187351; cv=none; b=ZbP/gUy01InzWgFSEacuc5gboEylrDlg+40nkJMFZI89cHA9TqH+bUOzl3ipE0UM42CN0pZsRQNSy3QmMObBLqKi3pZp3AaMaTIZ6mEL3c5v++aSD79OnKT8aS+O6sdzHzx2pw8E3nFFn5xAoN0LK9HG5uOlUCXBPQGdBijGkY4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1713187351; c=relaxed/simple;
-	bh=XcQf/cJS8UHoY4bIpKI4ut+IWGmNAOYj6Ebdsl+jC0A=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=SYmf7EaFp/gp465TWW5bcGQ6MGvwg4hKP1+SwgV2UNuuenU3whEZZa9uSPdPk3Qqz9F2QwlLYxV6JRAWTKzdrSM5kQT9tQSm839HCSnkNUtxBlMO7QD8Mi3y4kGxmr00I0by5TAfOGDvs+j2gO2+FuERQQ56T1M9PD4d1bA95t0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=45.249.212.191
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.19.88.234])
-	by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4VJ7775GkYz1hwPD;
-	Mon, 15 Apr 2024 21:19:31 +0800 (CST)
-Received: from dggpemm500005.china.huawei.com (unknown [7.185.36.74])
-	by mail.maildlp.com (Postfix) with ESMTPS id EFDE714011B;
-	Mon, 15 Apr 2024 21:22:27 +0800 (CST)
-Received: from localhost.localdomain (10.69.192.56) by
- dggpemm500005.china.huawei.com (7.185.36.74) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.35; Mon, 15 Apr 2024 21:22:27 +0800
-From: Yunsheng Lin <linyunsheng@huawei.com>
-To: <davem@davemloft.net>, <kuba@kernel.org>, <pabeni@redhat.com>
-CC: <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>, Yunsheng Lin
-	<linyunsheng@huawei.com>, Alexander Duyck <alexander.duyck@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>, Andrew Morton <akpm@linux-foundation.org>,
-	<linux-mm@kvack.org>, <linux-doc@vger.kernel.org>
-Subject: [PATCH net-next v2 14/15] mm: page_frag: update documentation for page_frag
-Date: Mon, 15 Apr 2024 21:19:39 +0800
-Message-ID: <20240415131941.51153-15-linyunsheng@huawei.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20240415131941.51153-1-linyunsheng@huawei.com>
-References: <20240415131941.51153-1-linyunsheng@huawei.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 781867442E
+	for <linux-doc@vger.kernel.org>; Mon, 15 Apr 2024 14:15:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=85.31.212.148
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1713190505; cv=fail; b=UnMT8AP+fPvaAossxxtJsn2ZqAJZxvM4sxliTENCl3nCPdu9fml4vNDWiUthhUPPfIwZ7p3n4NEmdNC3v7jOKiucuL+ay/IuN/G/0t8/nXVfPme0+dIW45HybUAtEjfVQRtW+aKdXC2Jxl24Nzr7yYOYdLaDlbKv3ENnFVukcWk=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1713190505; c=relaxed/simple;
+	bh=gTcXzedapfumCfG1C5hGXn5BqA3Ug5Tu69vaTDFYcA8=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=Fx0cuzNMwKlIs4z+U9pw01bGm0Dtb4xRFqIAG+r1wgA72Nb4uudR9T+XsMWuZJgwYTtZle4ia8igNEX64WDsbNp8ic/yH8EWix0jwtmArUHNbKZx/xTKo3zhLI7MgshVMpo8qrP7q9A3+T/JxoInWubEyZ+sDBsqNYhvza24yZI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=kalrayinc.com; spf=pass smtp.mailfrom=kalrayinc.com; dkim=pass (1024-bit key) header.d=kalrayinc.com header.i=@kalrayinc.com header.b=Jy+YBv+D; dkim=fail (2048-bit key) header.d=kalrayinc.com header.i=@kalrayinc.com header.b=oq9nWQN6 reason="signature verification failed"; arc=fail smtp.client-ip=85.31.212.148
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=kalrayinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kalrayinc.com
+Received: from localhost (fx408.security-mail.net [127.0.0.1])
+	by fx408.security-mail.net (Postfix) with ESMTP id 99B07322C72
+	for <linux-doc@vger.kernel.org>; Mon, 15 Apr 2024 16:08:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kalrayinc.com;
+	s=sec-sig-email; t=1713190129;
+	bh=gTcXzedapfumCfG1C5hGXn5BqA3Ug5Tu69vaTDFYcA8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=Jy+YBv+D6tvzCtLBQ2o5cSzI+ChMMN5Cbz0jSi8eN0yT1ehe3TzlibDrBDc8/3kDg
+	 l+uplB0mQYe3E3Zi+KFX4qkoStlsByPMX7xmoEOoQBoNTKcZAYwev2OiQypOL7RMj/
+	 xPBTTg52s3BEU9jUSo76L13IdAqzbhYabXW9aCR8=
+Received: from fx408 (fx408.security-mail.net [127.0.0.1]) by
+ fx408.security-mail.net (Postfix) with ESMTP id C623332267E; Mon, 15 Apr
+ 2024 16:08:48 +0200 (CEST)
+Received: from MRZP264CU002.outbound.protection.outlook.com
+ (mail-francesouthazlp17010003.outbound.protection.outlook.com [40.93.69.3])
+ by fx408.security-mail.net (Postfix) with ESMTPS id B78EE322447; Mon, 15 Apr
+ 2024 16:08:47 +0200 (CEST)
+Received: from PR0P264MB3481.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:14b::6)
+ by PR0P264MB3722.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:163::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Mon, 15 Apr
+ 2024 14:08:46 +0000
+Received: from PR0P264MB3481.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::d918:21af:904a:ce0a]) by PR0P264MB3481.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::d918:21af:904a:ce0a%4]) with mapi id 15.20.7452.049; Mon, 15 Apr
+ 2024 14:08:46 +0000
+X-Virus-Scanned: E-securemail
+Secumail-id: <cd23.661d34ef.b66b7.0>
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PlF3bZWwhLaTdEMNXAAqz+XTjUFeYjzHOgopsM/EwFY7xMgWLmxe7GBXms3k9zzt8DAgQpQWuEe566ITrzzp+3x6TUqkvyQGeGXExVUhSCMDyPMnhgBPhQ15cQdbAwzEmE+mp9dIeILFRtmHUlZHFAkHrZXkRnWRLYCLT4cKmi+yxKkz2IILnT0rPVTY7x9004b3Avd2ciVeg7maRCnShfRziZCc4JCPLVwaa7VTDqLL6yuGfoiq7UMmGmOnHLgbJYIbvps73z3yLtlOKhSzhZlNgeOlvhXepc4U9qtCi+f531rsSv1xgTO/tHJ8MfO1RUDaM+/qoX8SYdm08I95RA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=microsoft.com; s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gimpJ5iCSXhhTGocLKIV8TYNW/mUEWR9BeOUbc3ag34=;
+ b=GhpszUtIi72qX7rqLmCmHoV4q9f1KaukcvcPzNQOzZr9g++mstr8v9o/BrHtZGeTXlCmtgFbriU/HHMrUWGOE3h93r1cmrXCLvdy+J4Kcrzf7EzsJa4fxwBnlK6c3iTf8BGykwInrYFoVNGu6d7dhtrsfl+4TJtRxFgakVk5saIUMWT0KWVfERmjn1qeEOCS5mtTf8naQHPOgIv64qqZLGtWCMsHGWNDAH5t4B9SBv4HJtZU22w9Y09kbMTvYMzihwH9LqDBLa45OXWPXckoZOVaVJE7S8UXFttNaml0x6eF+nJmPvqIHrP8KRggstlMQnY9lrcZ5bcYq5lNKv/grw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kalrayinc.com; dmarc=pass action=none
+ header.from=kalrayinc.com; dkim=pass header.d=kalrayinc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kalrayinc.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gimpJ5iCSXhhTGocLKIV8TYNW/mUEWR9BeOUbc3ag34=;
+ b=oq9nWQN6idNqV7+F5L5xN1Z6HNclGemYIQ4XKEJG79pwSjwKoM0A8DpgMOEZg+EFHCCkdXqyZq59qa2ZgaaxvXOtYIyLjRXhKQqxFxCxal3pyE5ewQZZ7wHkHeBm8pE03wPrB76AzqiRWOfYfnsNrWST7GbXMlrtMa1pLmVxpHTMq7IK8Lr01WZa8eFgVWPxQmTpG2vp13t3ySZ0pz4DJ7+8s2udL68g+nUjLccR9TSS9AIKEWCg3ui5rex9pG1TRLyD9+yQg4lLuXjt1hwzky5hCeiHkwhkFLxegYcX11qSYNb5PiYMfy98T2tMEOpRLIcGkpzlxGk/CNRSQwku1g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=kalrayinc.com;
+Message-ID: <c20b433f-97ef-7faa-5122-9949af41f2fb@kalrayinc.com>
+Date: Mon, 15 Apr 2024 16:08:42 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [RFC PATCH v2 30/31] kvx: Add power controller driver
+Content-Language: en-us
+To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, Yann Sionneau
+ <ysionneau@kalray.eu>, Arnd Bergmann <arnd@arndb.de>, Jonathan Corbet
+ <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>, Marc Zyngier
+ <maz@kernel.org>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski
+ <krzysztof.kozlowski+dt@linaro.org>, Will Deacon <will@kernel.org>, Peter
+ Zijlstra <peterz@infradead.org>, Boqun Feng <boqun.feng@gmail.com>, Mark
+ Rutland <mark.rutland@arm.com>, Eric Biederman <ebiederm@xmission.com>, Kees
+ Cook <keescook@chromium.org>, Oleg Nesterov <oleg@redhat.com>, Ingo Molnar
+ <mingo@redhat.com>, Waiman Long <longman@redhat.com>, "Aneesh Kumar K.V"
+ <aneesh.kumar@linux.ibm.com>, Andrew Morton <akpm@linux-foundation.org>,
+ Nick Piggin <npiggin@gmail.com>, Paul Moore <paul@paul-moore.com>, Eric
+ Paris <eparis@redhat.com>, Christian Brauner <brauner@kernel.org>, Paul
+ Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Albert Ou <aou@eecs.berkeley.edu>, Jules Maselbas <jmaselbas@kalray.eu>,
+ Guillaume Thouvenin <gthouvenin@kalray.eu>, Clement Leger
+ <clement@clement-leger.fr>, Vincent Chardon
+ <vincent.chardon@elsys-design.com>, Marc =?utf-8?b?UG91bGhpw6hz?=
+ <dkm@kataplop.net>, Julian Vetter <jvetter@kalray.eu>, Samuel Jones
+ <sjones@kalray.eu>, Ashley Lesdalons <alesdalons@kalray.eu>, Thomas Costis
+ <tcostis@kalray.eu>, Marius Gligor <mgligor@kalray.eu>, Jonathan Borne
+ <jborne@kalray.eu>, Julien Villette <jvillette@kalray.eu>, Luc Michel
+ <lmichel@kalray.eu>, Louis Morhet <lmorhet@kalray.eu>, Julien Hascoet
+ <jhascoet@kalray.eu>, Jean-Christophe Pince <jcpince@gmail.com>, Guillaume
+ Missonnier <gmissonnier@kalray.eu>, Alex Michon <amichon@kalray.eu>, Huacai
+ Chen <chenhuacai@kernel.org>, WANG Xuerui <git@xen0n.name>, Shaokun Zhang
+ <zhangshaokun@hisilicon.com>, John Garry <john.garry@huawei.com>, Guangbin
+ Huang <huangguangbin2@huawei.com>, Bharat Bhushan <bbhushan2@marvell.com>,
+ Bibo Mao <maobibo@loongson.cn>, Atish Patra <atishp@atishpatra.org>, "Jason
+ A. Donenfeld" <Jason@zx2c4.com>, Qi Liu <liuqi115@huawei.com>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Catalin Marinas <catalin.marinas@arm.com>, Mark
+ Brown <broonie@kernel.org>, Janosch Frank <frankja@linux.ibm.com>, Alexey
+ Dobriyan <adobriyan@gmail.com>
+Cc: Benjamin Mugnier <mugnier.benjamin@gmail.com>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-mm@kvack.org, linux-arch@vger.kernel.org,
+ linux-audit@redhat.com, linux-riscv@lists.infradead.org, bpf@vger.kernel.org
+References: <20230120141002.2442-1-ysionneau@kalray.eu>
+ <20230120141002.2442-31-ysionneau@kalray.eu>
+ <f69adaf2-6582-c134-5671-4d6fd100fcf1@linaro.org>
+From: Yann Sionneau <ysionneau@kalrayinc.com>
+In-Reply-To: <f69adaf2-6582-c134-5671-4d6fd100fcf1@linaro.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AM0PR06CA0082.eurprd06.prod.outlook.com
+ (2603:10a6:208:fa::23) To PR0P264MB3481.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:14b::6)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="y"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- dggpemm500005.china.huawei.com (7.185.36.74)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PR0P264MB3481:EE_|PR0P264MB3722:EE_
+X-MS-Office365-Filtering-Correlation-Id: 265d984c-25f1-4442-6436-08dc5d55906d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: GeLHO8rwWU20dJzkRgVoMZ1iZxskdt7Ph1yYZeG01H6INprEMwy4/RcJLcn+WKBFHGILW0UOhx+wUgcnrsIVqe0SMw0tOHm6w6sNKDuHXEnSjm8/Y01XJvskPzaVEuwozkis5CxZBVxVKtuV96zxY4nBpW4IQeGwY4z9JMkBzP9ju3VBI5bTgF3wexeT786067vrLkpTfR2hvklFh0RFgTALxiyYpikggwhwPEQOGbsd1y4vWALiouHHVbECgJBJYV79gXGJSAHtVzfxldE3xnH5nTS2wj0+dW166rim5bKA7fue/AtOwPgB6O9O1p53PXXkAWeSjdXg0fhIwzWAg8ExTZ6b1227ZRf7KpOogX0FWmN7GaWyrTfR4Yzvn/vt4Yi9RPvAI1Y072gwXWb4rSTISFut1WVdFqHfkTGTvEamAb21F4920EZPm2DHtPEZiedf4lBAgwQJRcs/XuMayDmntJA8/y60xx84eyYCq9l66tZ0r/cYU5gw7WwB0lTUfbgk31NBJnr6p/QOmqPJQhVQh4WZqd9rDdkRbRVWf0lEe02GuiAhn8rU265a4HtWZpmvUHKqn3GRR54tXCkndKY3zbIcWylpaM571jX8PsVqlHdb3oFI1F3+Xhyf3RS9cuUeckwL72xgQ2LOv/ZAfORr9bp7Wa4Rxj56B508kU3EDOm96g52Q0OKTdnLTMg95MFwbkqO5lY8mOz/hhWnUw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PR0P264MB3481.FRAP264.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230031)(376005)(1800799015)(7416005)(366007)(921011);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: e68+7lUOduU7bnAOj67E8vkEWqoi5qMU9yeL+gTSsqMIF6EKB1JGJkE5U+N+WYCWBIC500wlMa87jFQTg3vzAEPSuNHaH599q5DlIl2Eidszo1ybZ5111V07TcWaCV1cP3jASAB9a1cW6gm3hGerZ04Xl3c+qdKjYbaBldG1qbIKJag4qzWtPQXKn8KqSvy2hUM9h6O1xvCr7omGCChuTKmigynUosZvqGNNwdrHN45VnrWeD/wN1XmAt1+EKWo+CmZSliNweFGuRmCIkxWGihq5ASIZdbvKUvCerIvfVIlJZphN7UKr5FriXDF5G9JeqPwvJzeRI+BfQQ4Ne6rH4b/ddC6gtNC1F2PDCHPY1EktbOKZpGsKqxqeYtw8UlcsZjzvel5rrh/68/wNZJV7caeOgi22nhW7bqualMPC21aNpuZOVu8YCzIeFGJc87iBLHXiJEmNm3g8W8s94WHbVNC4EWrMumYEZCWb8zmoWiqphvShLhl9+wF+RwPyPhPZ6sPmJO8zqCJIaB1EAYKDpAzNQQquMqDSQmcB4kQ64m+jlyLMTUKMuuDShn0W3vRHDL3DEdZ5pUG+MxthnwpTVWFxhgKrdJLQBtuv7kwcF4+f3jSL+2R2Hdyb4RuJk/8kkP5eZGRcqUJxW/uAr6lX2v6rYTHcssCwMJpr0dYScz6kXDraumhkP1rN5UvqNsmtTGDPq6jzqf8105f2p9uZ4YEktvOStF1PDGeKY3VV8el83t8uzxjjwYEgGJ6fHd7DnfGSHk73bgagFXYL/1cG9ZDyWidXN3AjikJR6HDlJz0KbGtogxeEBEwCTRe+Rand2Andxhmsd+rrr4HcZpcrt3KOWB5wAkWSaw+trCiZeodfVtxnHg6m6m6CiQdO82d5Bc3ke3fvjIg5rZHpIK6BMKQydQzgcOHDTJ9mH1OAuMBSlbYK+7HMF6J1TH55Adgm
+ C2pq2tMt5UnAIG5p3/ZwucBc6cKpUxXCunHipOqfNBa6XDEzElZD9G8MHpIdy90ZB8uAOJjyKuljAwdVaK7HFcqmZk9GUmJ5Fop7GqRMKkZHEF6hLOykcYzSAVAMstr7WvVTM2r/B9tvqSPMFV/qyOcV2rDzItnu3vsOwUeyymKRpLhwm+ya1jKMjs1i6o7sdQSL4iwfGUVH+iLBcwBf2Mx2oD0XsmP1QnPZbl13oM+IqqzDkOw8D5oOP2YlHqKtGJu4/OVkFeaMGdOnS6zQ66erxyNeD75cYZfCQCr4ZD3S0aO7wcpPTh03Go0w/0795ZDz0EA4FCQKNPC1e57u/auQqJP1GIak/kmUm3HcVch/KoQ9pH/F93QNx3nWBwzDCvbk3gsdbinq7FNRZeoHmRAkB2QFkRH09i2DwPzgJb4VelJpg27qDwzE039tYr73pVe7qziTIhB0ejsoIiL7zA1npsDkkDkV/PTWNJdHPz1F3ff8ub5AXRzIYtBobg4NBqgco0t8U56wJHy4u4PTWbvJe6DpKGMz7HaX4ZJZRj49DSJ/H+THJHeiGAs+jZN3PwAgKNqpaasJvbkFh0iZVwO7mGHDJGV+/KunRLsy9v5W3IHuFkpXJizTmxZxoFg/38CKqSnFo6RJCDhrZ5kKAA==
+X-OriginatorOrg: kalrayinc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 265d984c-25f1-4442-6436-08dc5d55906d
+X-MS-Exchange-CrossTenant-AuthSource: PR0P264MB3481.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2024 14:08:45.9608
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8931925d-7620-4a64-b7fe-20afd86363d3
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vNyGqiDKv5kgsAA0JDcWbgoUGlhPezenqZLJt7PnGcaQmv/cq1ir5+VR8hccXeFhR1r8V7zG9Zjt4PFE09ZANQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB3722
+X-ALTERMIMEV2_out: done
 
-Update documentation about design, implementation and API usages
-for page_frag.
+Hello Krzysztof, Arnd, all,
 
-CC: Alexander Duyck <alexander.duyck@gmail.com>
-Signed-off-by: Yunsheng Lin <linyunsheng@huawei.com>
----
- Documentation/mm/page_frags.rst | 148 +++++++++++++++++++++++++++++++-
- include/linux/page_frag_cache.h | 133 ++++++++++++++++++++++++++++
- mm/page_frag_cache.c            |   4 +
- 3 files changed, 284 insertions(+), 1 deletion(-)
+On 1/22/23 12:54, Krzysztof Kozlowski wrote:
+> On 20/01/2023 15:10, Yann Sionneau wrote:
+>> From: Jules Maselbas <jmaselbas@kalray.eu>
+>>
+>> The Power Controller (pwr-ctrl) control cores reset and wake-up
+>> procedure.
+>> +
+>> +int __init kvx_pwr_ctrl_probe(void)
+>> +{
+>> +	struct device_node *ctrl;
+>> +
+>> +	ctrl = get_pwr_ctrl_node();
+>> +	if (!ctrl) {
+>> +		pr_err("Failed to get power controller node\n");
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	if (!of_device_is_compatible(ctrl, "kalray,kvx-pwr-ctrl")) {
+>> +		pr_err("Failed to get power controller node\n");
+> No. Drivers go to drivers, not to arch directory. This should be a
+> proper driver instead of some fake stub doing its own driver matching.
+> You need to rework this.
 
-diff --git a/Documentation/mm/page_frags.rst b/Documentation/mm/page_frags.rst
-index 503ca6cdb804..ac9dd9e8ee16 100644
---- a/Documentation/mm/page_frags.rst
-+++ b/Documentation/mm/page_frags.rst
-@@ -1,3 +1,5 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
- ==============
- Page fragments
- ==============
-@@ -40,4 +42,148 @@ page via a single call.  The advantage to doing this is that it allows for
- cleaning up the multiple references that were added to a page in order to
- avoid calling get_page per allocation.
- 
--Alexander Duyck, Nov 29, 2016.
-+
-+Architecture overview
-+=====================
-+
-+.. code-block:: none
-+
-+                +----------------------+
-+                | page_frag API caller |
-+                +----------------------+
-+                            ^
-+                            |
-+                            |
-+                            |
-+                            v
-+    +------------------------------------------------+
-+    |             request page fragment              |
-+    +------------------------------------------------+
-+        ^                      ^                   ^
-+        |                      | Cache not enough  |
-+        | Cache empty          v                   |
-+        |             +-----------------+          |
-+        |             | drain old cache |          |
-+        |             +-----------------+          |
-+        |                      ^                   |
-+        |                      |                   |
-+        v                      v                   |
-+    +----------------------------------+           |
-+    |  refill cache with order 3 page  |           |
-+    +----------------------------------+           |
-+     ^                  ^                          |
-+     |                  |                          |
-+     |                  | Refill failed            |
-+     |                  |                          | Cache is enough
-+     |                  |                          |
-+     |                  v                          |
-+     |    +----------------------------------+     |
-+     |    |  refill cache with order 0 page  |     |
-+     |    +----------------------------------+     |
-+     |                       ^                     |
-+     | Refill succeed        |                     |
-+     |                       | Refill succeed      |
-+     |                       |                     |
-+     v                       v                     v
-+    +------------------------------------------------+
-+    |         allocate fragment from cache           |
-+    +------------------------------------------------+
-+
-+API interface
-+=============
-+As the design and implementation of page_frag API, the allocation side does not
-+allow concurrent calling, it is assumed that the caller must ensure there is not
-+concurrent alloc calling to the same page_frag_cache instance by using it's own
-+lock or rely on some lockless guarantee like NAPI softirq.
-+
-+Depending on different use cases, callers expecting to deal with va, page or
-+both va and page for them may call page_frag_alloc_va*, page_frag_alloc_pg*,
-+or page_frag_alloc* API accordingly.
-+
-+There is also a use case that need minimum memory in order for forward
-+progressing, but can do better if there is more memory available. Introduce
-+page_frag_alloc_prepare() and page_frag_alloc_commit() related API, the caller
-+requests the minimum memory it need and the prepare API will return the maximum
-+size of the fragment returned, caller need to report back to the page_frag core
-+how much memory it actually use by calling commit API, or not calling the commit
-+API if deciding to not use any memory.
-+
-+.. kernel-doc:: include/linux/page_frag_cache.h
-+   :identifiers: page_frag_cache_init page_frag_cache_is_pfmemalloc
-+                 page_frag_alloc_va __page_frag_alloc_va_align
-+                 page_frag_alloc_va_align page_frag_alloc_va_prepare
-+                 page_frag_alloc_va_prepare_align page_frag_alloc_pg_prepare
-+                 page_frag_alloc_prepare page_frag_alloc_commit
-+                 page_frag_alloc_commit_noref page_frag_free_va
-+
-+.. kernel-doc:: mm/page_frag_cache.c
-+   :identifiers: page_frag_cache_drain
-+
-+Coding examples
-+===============
-+
-+Init & Drain API
-+----------------
-+
-+.. code-block:: c
-+
-+   page_frag_cache_init(pfrag);
-+   ...
-+   page_frag_cache_drain(pfrag);
-+
-+
-+Alloc & Free API
-+----------------
-+
-+.. code-block:: c
-+
-+    void *va;
-+
-+    va = page_frag_alloc_va_align(pfrag, size, gfp, align);
-+    if (!va)
-+        goto do_error;
-+
-+    err = do_something(va, size);
-+    if (err) {
-+        page_frag_free_va(va);
-+        goto do_error;
-+    }
-+
-+Prepare & Commit API
-+--------------------
-+
-+.. code-block:: c
-+
-+    unsigned int offset, size;
-+    bool merge = true;
-+    struct page *page;
-+    void *va;
-+
-+    size = 32U;
-+    page = page_frag_alloc_prepare(pfrag, &offset, &size, &va);
-+    if (!page)
-+        goto wait_for_space;
-+
-+    copy = min_t(int, copy, size);
-+    if (!skb_can_coalesce(skb, i, page, offset)) {
-+        if (i >= max_skb_frags)
-+            goto new_segment;
-+
-+        merge = false;
-+    }
-+
-+    copy = mem_schedule(copy);
-+    if (!copy)
-+        goto wait_for_space;
-+
-+    err = copy_from_iter_full_nocache(va, copy, iter);
-+    if (err)
-+        goto do_error;
-+
-+    if (merge) {
-+        skb_frag_size_add(&skb_shinfo(skb)->frags[i - 1], copy);
-+        page_frag_alloc_commit_noref(pfrag, offset, copy);
-+    } else {
-+        skb_fill_page_desc(skb, i, page, offset, copy);
-+        page_frag_alloc_commit(pfrag, offset, copy);
-+    }
-diff --git a/include/linux/page_frag_cache.h b/include/linux/page_frag_cache.h
-index 28185969cd2c..529e7c040dad 100644
---- a/include/linux/page_frag_cache.h
-+++ b/include/linux/page_frag_cache.h
-@@ -31,11 +31,28 @@ struct page_frag_cache {
- #endif
- };
- 
-+/**
-+ * page_frag_cache_init() - Init page_frag cache.
-+ * @nc: page_frag cache from which to init
-+ *
-+ * Inline helper to init the page_frag cache.
-+ */
- static inline void page_frag_cache_init(struct page_frag_cache *nc)
- {
- 	nc->va = NULL;
- }
- 
-+/**
-+ * page_frag_cache_is_pfmemalloc() - Check for pfmemalloc.
-+ * @nc: page_frag cache from which to check
-+ *
-+ * Used to check if the current page in page_frag cache is pfmemalloc'ed.
-+ * It has the same calling context expection as the alloc API.
-+ *
-+ * Return:
-+ * Return true if the current page in page_frag cache is pfmemalloc'ed,
-+ * otherwise return false.
-+ */
- static inline bool page_frag_cache_is_pfmemalloc(struct page_frag_cache *nc)
- {
- 	return !!nc->pfmemalloc;
-@@ -46,6 +63,17 @@ void __page_frag_cache_drain(struct page *page, unsigned int count);
- void *page_frag_cache_refill(struct page_frag_cache *nc, unsigned int fragsz,
- 			     gfp_t gfp_mask);
- 
-+/**
-+ * page_frag_alloc_va() - Alloc a page fragment.
-+ * @nc: page_frag cache from which to allocate
-+ * @fragsz: the requested fragment size
-+ * @gfp_mask: the allocation gfp to use when cache need to be refilled
-+ *
-+ * Get a page fragment from page_frag cache.
-+ *
-+ * Return:
-+ * Return va of the page fragment, otherwise return NULL.
-+ */
- static inline void *page_frag_alloc_va(struct page_frag_cache *nc,
- 				       unsigned int fragsz, gfp_t gfp_mask)
- {
-@@ -63,6 +91,19 @@ static inline void *page_frag_alloc_va(struct page_frag_cache *nc,
- 	return va + offset;
- }
- 
-+/**
-+ * __page_frag_alloc_va_align() - Alloc a page fragment with aligning
-+ * requirement.
-+ * @nc: page_frag cache from which to allocate
-+ * @fragsz: the requested fragment size
-+ * @gfp_mask: the allocation gfp to use when cache need to be refilled
-+ * @align: the requested aligning requirement
-+ *
-+ * Get a page fragment from page_frag cache with aligning requirement.
-+ *
-+ * Return:
-+ * Return va of the page fragment, otherwise return NULL.
-+ */
- static inline void *__page_frag_alloc_va_align(struct page_frag_cache *nc,
- 					       unsigned int fragsz,
- 					       gfp_t gfp_mask,
-@@ -75,6 +116,19 @@ static inline void *__page_frag_alloc_va_align(struct page_frag_cache *nc,
- 	return page_frag_alloc_va(nc, fragsz, gfp_mask);
- }
- 
-+/**
-+ * page_frag_alloc_va_align() - Alloc a page fragment with aligning requirement.
-+ * @nc: page_frag cache from which to allocate
-+ * @fragsz: the requested fragment size
-+ * @gfp_mask: the allocation gfp to use when cache need to be refilled
-+ * @align: the requested aligning requirement
-+ *
-+ * WARN_ON_ONCE() checking for align and fragsz before getting a page fragment
-+ * from page_frag cache with aligning requirement.
-+ *
-+ * Return:
-+ * Return va of the page fragment, otherwise return NULL.
-+ */
- static inline void *page_frag_alloc_va_align(struct page_frag_cache *nc,
- 					     unsigned int fragsz,
- 					     gfp_t gfp_mask,
-@@ -86,6 +140,19 @@ static inline void *page_frag_alloc_va_align(struct page_frag_cache *nc,
- 	return __page_frag_alloc_va_align(nc, fragsz, gfp_mask, align);
- }
- 
-+/**
-+ * page_frag_alloc_va_prepare() - Prepare allocing a page fragment.
-+ * @nc: page_frag cache from which to prepare
-+ * @offset: out as the offset of the page fragment
-+ * @size: in as the requested size, out as the available size
-+ * @gfp_mask: the allocation gfp to use when cache need to be refilled
-+ *
-+ * Prepare a page fragment with minimum size of ‘size’, 'size' is also used to
-+ * report the maximum size of the page fragment the caller can use.
-+ *
-+ * Return:
-+ * Return va of the page fragment, otherwise return NULL.
-+ */
- static inline void *page_frag_alloc_va_prepare(struct page_frag_cache *nc,
- 					       unsigned int *offset,
- 					       unsigned int *size,
-@@ -108,6 +175,21 @@ static inline void *page_frag_alloc_va_prepare(struct page_frag_cache *nc,
- 	return va + *offset;
- }
- 
-+/**
-+ * page_frag_alloc_va_prepare_align() - Prepare allocing a page fragment with
-+ * aligning requirement.
-+ * @nc: page_frag cache from which to prepare
-+ * @offset: out as the offset of the page fragment
-+ * @size: in as the requested size, out as the available size
-+ * @align: the requested aligning requirement
-+ * @gfp_mask: the allocation gfp to use when cache need to be refilled
-+ *
-+ * Prepare an aligned page fragment with minimum size of ‘size’, 'size' is also
-+ * used to report the maximum size of the page fragment the caller can use.
-+ *
-+ * Return:
-+ * Return va of the page fragment, otherwise return NULL.
-+ */
- static inline void *page_frag_alloc_va_prepare_align(struct page_frag_cache *nc,
- 						     unsigned int *offset,
- 						     unsigned int *size,
-@@ -144,6 +226,19 @@ static inline void *__page_frag_alloc_pg_prepare(struct page_frag_cache *nc,
- 	return va;
- }
- 
-+/**
-+ * page_frag_alloc_pg_prepare - Prepare allocing a page fragment.
-+ * @nc: page_frag cache from which to prepare
-+ * @offset: out as the offset of the page fragment
-+ * @size: in as the requested size, out as the available size
-+ * @gfp: the allocation gfp to use when cache need to be refilled
-+ *
-+ * Prepare a page fragment with minimum size of ‘size’, 'size' is also used to
-+ * report the maximum size of the page fragment the caller can use.
-+ *
-+ * Return:
-+ * Return the page fragment, otherwise return NULL.
-+ */
- #define page_frag_alloc_pg_prepare(nc, offset, size, gfp)		\
- ({									\
- 	struct page *__page = NULL;					\
-@@ -179,6 +274,21 @@ static inline void *__page_frag_alloc_prepare(struct page_frag_cache *nc,
- 	return nc_va;
- }
- 
-+/**
-+ * page_frag_alloc_prepare - Prepare allocing a page fragment.
-+ * @nc: page_frag cache from which to prepare
-+ * @offset: out as the offset of the page fragment
-+ * @size: in as the requested size, out as the available size
-+ * @va: out as the va of the returned page fragment
-+ * @gfp: the allocation gfp to use when cache need to be refilled
-+ *
-+ * Prepare a page fragment with minimum size of ‘size’, 'size' is also used to
-+ * report the maximum size of the page fragment. Return both 'page' and 'va' of
-+ * the fragment to the caller.
-+ *
-+ * Return:
-+ * Return the page fragment, otherwise return NULL.
-+ */
- #define page_frag_alloc_prepare(nc, offset, size, va, gfp)		\
- ({									\
- 	struct page *__page = NULL;					\
-@@ -191,6 +301,14 @@ static inline void *__page_frag_alloc_prepare(struct page_frag_cache *nc,
- 	__page;								\
- })
- 
-+/**
-+ * page_frag_alloc_commit - Commit allocing a page fragment.
-+ * @nc: page_frag cache from which to commit
-+ * @offset: offset of the page fragment
-+ * @size: size of the page fragment has been used
-+ *
-+ * Commit the alloc preparing by passing offset and the actual used size.
-+ */
- static inline void page_frag_alloc_commit(struct page_frag_cache *nc,
- 					  unsigned int offset,
- 					  unsigned int size)
-@@ -199,6 +317,17 @@ static inline void page_frag_alloc_commit(struct page_frag_cache *nc,
- 	nc->offset = offset + size;
- }
- 
-+/**
-+ * page_frag_alloc_commit_noref - Commit allocing a page fragment without taking
-+ * page refcount.
-+ * @nc: page_frag cache from which to commit
-+ * @offset: offset of the page fragment
-+ * @size: size of the page fragment has been used
-+ *
-+ * Commit the alloc preparing by passing offset and the actual used size, but
-+ * not taking page refcount. Mostly used for fragmemt coaleasing case when the
-+ * current fragmemt can share the same refcount with previous fragmemt.
-+ */
- static inline void page_frag_alloc_commit_noref(struct page_frag_cache *nc,
- 						unsigned int offset,
- 						unsigned int size)
-@@ -206,6 +335,10 @@ static inline void page_frag_alloc_commit_noref(struct page_frag_cache *nc,
- 	nc->offset = offset + size;
- }
- 
-+/**
-+ * page_frag_free_va - Free a page fragment by va.
-+ * @addr: va of page fragment to be freed
-+ */
- void page_frag_free_va(void *addr);
- 
- #endif
-diff --git a/mm/page_frag_cache.c b/mm/page_frag_cache.c
-index 8774cb07e630..8b1d35aafcc1 100644
---- a/mm/page_frag_cache.c
-+++ b/mm/page_frag_cache.c
-@@ -60,6 +60,10 @@ static bool __page_frag_cache_refill(struct page_frag_cache *nc,
- 	return true;
- }
- 
-+/**
-+ * page_frag_cache_drain - Drain the current page from page_frag cache.
-+ * @nc: page_frag cache from which to drain
-+ */
- void page_frag_cache_drain(struct page_frag_cache *nc)
- {
- 	if (!nc->va)
+I am working on a v3 patchset, therefore I am working on a solution for 
+this "pwr-ctrl" driver that needs to go somewhere else than arch/kvx/.
+
+The purpose of this "driver" is just to expose a void 
+kvx_pwr_ctrl_cpu_poweron(unsigned int cpu) function, used by 
+kernel/smpboot.c function __cpu_up() in order to start secondary CPUs in 
+SMP config.
+
+Doing this, on our SoC, requires writing 3 registers in a memory-mapped 
+device named "power controller".
+
+I made some researches in drivers/ but I am not sure yet what's a good 
+place that fits what our device is doing (booting secondary CPUs).
+
+* drivers/power/reset seems to be for resetting the entire SoC
+
+* drivers/power/supply seems to be to control power supplies ICs/periph.
+
+* drivers/reset seems to be for device reset
+
+* drivers/pmdomain maybe ?
+
+* drivers/soc ?
+
+* drivers/platform ?
+
+* drivers/misc ?
+
+What do you think?
+
+Thanks.
+
+Regards,
+
 -- 
-2.33.0
+
+Yann
+
+
+
+
 
 
