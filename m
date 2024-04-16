@@ -1,102 +1,97 @@
-Return-Path: <linux-doc+bounces-14370-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-14372-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 351128A7715
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Apr 2024 23:56:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E3358A77BB
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Apr 2024 00:20:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id C8F5C1F21FA8
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Apr 2024 21:56:36 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id E26901F22FAA
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Apr 2024 22:20:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E0D1D6EB4C;
-	Tue, 16 Apr 2024 21:56:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE76884E13;
+	Tue, 16 Apr 2024 22:19:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="YM/yN5AQ"
+	dkim=pass (2048-bit key) header.d=codeweavers.com header.i=@codeweavers.com header.b="ShQQv/MH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net [217.70.183.193])
+Received: from mail.codeweavers.com (mail.codeweavers.com [4.36.192.163])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C65046BFAB;
-	Tue, 16 Apr 2024 21:56:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.193
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F58D811F8;
+	Tue, 16 Apr 2024 22:19:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=4.36.192.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1713304591; cv=none; b=tMH64F4XNcsJ5xK2tmYfUv0tE0eqa8+cWGxH3qE0IyAeUWjqvlgacMEaPXB68x0cLDVsX08uznHCoroAXrBhH0rggcVOsOtCFuNBLARZhZ5EkGmEznzlhMex7JDmH7WDnKAbA9h1BgzidlALv9JBU73cqdGHAJJmECX/PMShb1A=
+	t=1713305943; cv=none; b=XLDo3RAHCGnbgHgm9hG5e+H5UPDcWi3YSgw+KOY/JXg4zdeBTX9JyeCbHwYrR9yDo7zYCjd1wLe8Nw3dNOxb2HOibJh9fCu6ZEQYQyaUAoWSGJY4lHJv3H+UScyr1YKjYEnIT6JhUl49FpkynX0lCCEYLNC4bBfmdQpTdEwhb3k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1713304591; c=relaxed/simple;
-	bh=tk5H2x1S+80SeDSArKl9t/G5k6/98gXin1OYqB9WW3s=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=q/o9xZeCF0ZIoemd5nzOwr5Ve8kEdol3grhT77MUOu7KOAXtEBBSGxj85SZ5GvGH27eUxx+sdaDb7zFAnLAcOb3Z/ZDD7as3DT1HnS0cu7/p0+Eyi1WHc9/LL1i2ADozmylKAwnk6PHcfYnbOUCBIwhn6R9zoPy8BocDTIvRWps=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=YM/yN5AQ; arc=none smtp.client-ip=217.70.183.193
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id E0BA2240004;
-	Tue, 16 Apr 2024 21:56:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1713304586;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=tk5H2x1S+80SeDSArKl9t/G5k6/98gXin1OYqB9WW3s=;
-	b=YM/yN5AQ7QYGHZdr7orwRpKwojPZXiQ9oP0Vu6J6OeIJ9hvblMKBWBewq09j9mX9SSiSbU
-	XxFT4EU25HAwhx742gAbz3dIm9z/5LuNkRev22B4RJmrA0qKT5cuHrqjeC9ZI4slNXBgWC
-	/CGJw/5DTxLf7pqadnbvdmrD/BiIARe8+pj7V8D/5K1BrpVxccs/NwGCF6UdcI2PGALNQn
-	uCy9xVIP95CAZHF99O2rdMIunVlDzKDy+L366QURD1fuJbfcchZTsWeF/+sHsw0XKfA8c6
-	LU1Np8b6V6zGlI7oSSrmyvRA+tVpK9RYdORY05hv2w97h6GPlFZ/DiYayZ/frw==
-Date: Tue, 16 Apr 2024 23:56:14 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: "David S. Miller" <davem@davemloft.net>, Eric Dumazet
- <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
- <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Luis Chamberlain
- <mcgrof@kernel.org>, Russ Weight <russ.weight@linux.dev>, Greg
- Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J. Wysocki"
- <rafael@kernel.org>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski
- <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
- Oleksij Rempel <o.rempel@pengutronix.de>, Mark Brown <broonie@kernel.org>,
- Frank Rowand <frowand.list@gmail.com>, Andrew Lunn <andrew@lunn.ch>, Heiner
- Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- devicetree@vger.kernel.org, Dent Project <dentproject@linuxfoundation.org>,
- kernel@pengutronix.de, Maxime Chevallier <maxime.chevallier@bootlin.com>
-Subject: Re: [PATCH net-next v8 00/17] net: Add support for Power over
- Ethernet (PoE)
-Message-ID: <20240416235614.1ec98714@kmaincent-XPS-13-7390>
-In-Reply-To: <20240414-feature_poe-v8-0-e4bf1e860da5@bootlin.com>
-References: <20240414-feature_poe-v8-0-e4bf1e860da5@bootlin.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1713305943; c=relaxed/simple;
+	bh=2UTgKuAbrwfWuorBNpc3DoDq6mu+gQFxigrPLV5qftU=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=TitTj6dpCEmX58pbTrJdzubyM6sZw+r7PZDjBfbXLFQ0irTD/IH5SK/CNE/1nWfEJk9LLU3/6vv5Z1avP6eqnj1mZAArY2y8zpPB8ywn62sdQEMhUTIaeKKPLyrkEVGmIKEVax0YljeZ0N9wmF0abCycyU9GYIqkaFd2TRVgT34=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codeweavers.com; spf=pass smtp.mailfrom=codeweavers.com; dkim=pass (2048-bit key) header.d=codeweavers.com header.i=@codeweavers.com header.b=ShQQv/MH; arc=none smtp.client-ip=4.36.192.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codeweavers.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=codeweavers.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=codeweavers.com; s=s1; h=Message-ID:Date:Subject:Cc:To:From:Sender;
+	bh=LjIgFuPbUWQTQ78rm1vu5j/huuLNGgrNm+YPodOSqE0=; b=ShQQv/MHydPLbBH6mC4Cus80Xh
+	Cd/y0Jq20egXeGhhrajocUzcMMi6eRAb27GMj5TF+8l7LGK8uVh8syE4ouMIAiRCqRn9zNVqVXTIQ
+	8WxVviYUjOF+H+xopFnSeGciC6EVEuc+kZbUuNGGjNsAuJPUyBAL0InlpHO1pZgGiQY6MvMzry+wu
+	V9r57YdjOWQTy1WjEdp/GQIgKJNGVfpxdou5zRROR2EmbA9Cd/63Ki/ZfEicMl+RKmF4MZNQYL2B0
+	B28WYRfSUMHQuiQ4Y4KkMCfUlwbvL2dmo5afYjCTuLNxwCIl8fAbJZ/Zpc+fQbtLBID23YRaCWGdW
+	fcoIsLbQ==;
+Received: from [10.69.139.14] (helo=terabithia.localnet)
+	by mail.codeweavers.com with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <zfigura@codeweavers.com>)
+	id 1rwr8j-00GVN4-1I;
+	Tue, 16 Apr 2024 17:18:57 -0500
+From: Elizabeth Figura <zfigura@codeweavers.com>
+To: Peter Zijlstra <peterz@infradead.org>, wine-devel@winehq.org
+Cc: Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
+ linux-kernel@vger.kernel.org, linux-api@vger.kernel.org,
+ wine-devel@winehq.org,
+ =?ISO-8859-1?Q?Andr=E9?= Almeida <andrealmeid@igalia.com>,
+ Wolfram Sang <wsa@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+ Randy Dunlap <rdunlap@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Will Deacon <will@kernel.org>, Waiman Long <longman@redhat.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Elizabeth Figura <zfigura@codeweavers.com>
+Subject: Re: [PATCH v4 00/30] NT synchronization primitive driver
+Date: Tue, 16 Apr 2024 17:18:56 -0500
+Message-ID: <3743440.MHq7AAxBmi@terabithia>
+In-Reply-To: <4340072.ejJDZkT8p0@terabithia>
+References:
+ <20240416010837.333694-1-zfigura@codeweavers.com>
+ <20240416081421.GB31647@noisy.programming.kicks-ass.net>
+ <4340072.ejJDZkT8p0@terabithia>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: kory.maincent@bootlin.com
+Content-Type: text/plain; charset="UTF-8"
 
-On Sun, 14 Apr 2024 16:21:49 +0200
-Kory Maincent <kory.maincent@bootlin.com> wrote:
-
-> From: Kory Maincent (Dent Project) <kory.maincent@bootlin.com>
+On Tuesday, 16 April 2024 16:18:24 CDT Elizabeth Figura wrote:
+> On Tuesday, 16 April 2024 03:14:21 CDT Peter Zijlstra wrote:
+> > I don't support GE has it in his builds? Last time I tried, building
+> > Wine was a bit of a pain.
 >=20
-> This patch series aims at adding support for PoE (Power over Ethernet),
-> based on the already existing support for PoDL (Power over Data Line)
-> implementation. In addition, it adds support for two specific PoE
-> controller, the Microchip PD692x0 and the TI TPS23881.
+> It doesn't seem so. I tried to build a GE-compatible ntsync build, upload=
+ed
+> here (thanks Arek for hosting):
+>=20
+>     https://f002.backblazeb2.com/file/wine-ntsync/ntsync-wine.tar.xz
 
-If by any chance a net maintainer walk nearby and push the merge button I w=
-ould
-really appreciate! ;)
-I am giving a talk tomorrow at Embedded Linux Conference about PoE, do you
-think there would be a chance to have it merged before it? :)
+Oops, the initial version I uploaded had broken paths. Should be fixed now.
 
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+(It's also broken on an unpatched kernel unless explicitly disabled with=20
+WINE_DISABLE_FAST_SYNC=3D1. Not sure what I messed up there=E2=80=94it shou=
+ld fall back=20
+cleanly=E2=80=94but hopefully shouldn't be too important for testing.)
+
+
 
