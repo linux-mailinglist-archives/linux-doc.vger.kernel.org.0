@@ -1,197 +1,455 @@
-Return-Path: <linux-doc+bounces-14411-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-14413-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 856948A7BD9
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Apr 2024 07:29:11 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AE018A7C0D
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Apr 2024 08:06:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id DD9A5B215BC
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Apr 2024 05:29:08 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 095122850E9
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Apr 2024 06:06:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 57A5B524CB;
-	Wed, 17 Apr 2024 05:29:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B21E3535C1;
+	Wed, 17 Apr 2024 06:06:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=codeweavers.com header.i=@codeweavers.com header.b="cOc8ddW/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from zg8tmja2lje4os43os4xodqa.icoremail.net (zg8tmja2lje4os43os4xodqa.icoremail.net [206.189.79.184])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 510D6BE4E;
-	Wed, 17 Apr 2024 05:29:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=206.189.79.184
+Received: from mail.codeweavers.com (mail.codeweavers.com [4.36.192.163])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC82850A6D;
+	Wed, 17 Apr 2024 06:05:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=4.36.192.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1713331744; cv=none; b=LkV6nbBYn2ymN6Hv+d0Dv8tk8gzUFzktdVjOS0pVC7QpriLbyTdFZU6kWWoUDcOR7c5zyVQCzFy49Ol1UClTKzpjNWRBdbB1vHWShlyNpSiJrBCf+0ZG0q64oYzN7LCUyIgIqfusAM3snIREXyS3KJEbnrH7E0ZwdGKna55Pjzc=
+	t=1713333960; cv=none; b=IBB4lYiZvT27mBi4FqP2ORuiKZco3iTj+rxTlaCKkCy4H51fPdpsBKZeQhK3pbkN5VBvC3ZKu0omw7bDuvz+Q5UplPWczcc5HVUxa4nDaiP/NLJp+1Ik2ypqx80PvhOrkaAfrXMyVh2CRNoS4paAwhX5GrJDc5ThcWJs6fflFP8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1713331744; c=relaxed/simple;
-	bh=RG5jLJLKGSwT6sp9rzsGIbTNALBwblQ3jTh4qpDDO3k=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=sS5mudTXkd1fyR5NbQqG5NW6FrMy/dV3bHsNhy6jEGFhKMe0TZvBypeZ/2SFPhyMPmmW29tlYwOcduFwF5zUwT6ycs4Ez5648KTF8PfsFO1e2EhdUmT9jQ7tg89qujix9Z88po+N/Iak84jy0+g/QyJvn6ueefbebzGR+sVgisc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn; spf=pass smtp.mailfrom=hust.edu.cn; arc=none smtp.client-ip=206.189.79.184
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hust.edu.cn
-Received: from hust.edu.cn (unknown [172.16.0.50])
-	by app2 (Coremail) with SMTP id HwEQrAD3Tsf8XR9mApHzAA--.15107S2;
-	Wed, 17 Apr 2024 13:28:28 +0800 (CST)
-Received: from pride-poweredge-r740.. (unknown [222.20.126.129])
-	by gateway (Coremail) with SMTP id _____wD3bjTwXR9mMvkIAQ--.38096S2;
-	Wed, 17 Apr 2024 13:28:24 +0800 (CST)
-From: Dongliang Mu <dzm91@hust.edu.cn>
-To: Alex Shi <alexs@kernel.org>,
-	Yanteng Si <siyanteng@loongson.cn>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Dongliang Mu <dzm91@hust.edu.cn>,
-	Konstantin Ryabitsev <konstantin@linuxfoundation.org>
-Cc: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] docs/zh_CN: add process/cve Chinese translation
-Date: Wed, 17 Apr 2024 13:27:45 +0800
-Message-Id: <20240417052804.1957258-1-dzm91@hust.edu.cn>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1713333960; c=relaxed/simple;
+	bh=nF28r5dIb9I7hljBTQwM6VpAqhvmMaHYLgGiR80GtLk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=MZCrJK2T02e/1oy+GLLt8Pf+OLBc0Tnh8ZPzqL1iTr0I2HNC4tctvtfPnJz6FfUdQCoIOHwv7U9VBbnrgpvru1Ou/5JVwrGxppA1mq79O4JoSV40WadH7MRag1nJV2FOiyrFEWCNOQdpN4/Azu/Ygl+S7iGl+2ziUkgHzaihJig=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codeweavers.com; spf=pass smtp.mailfrom=codeweavers.com; dkim=pass (2048-bit key) header.d=codeweavers.com header.i=@codeweavers.com header.b=cOc8ddW/; arc=none smtp.client-ip=4.36.192.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codeweavers.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=codeweavers.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=codeweavers.com; s=s1; h=Message-ID:Date:Subject:Cc:To:From:Sender;
+	bh=Ml0LgKKueaz/4+UjnF/Zo272NErj5BHcgX9G/wPWQY4=; b=cOc8ddW/d0PsSLzzeMh1D1skyP
+	Q7peel8UtXNpd74DCnPGzzWsSsgC6SgnCCkoH5oT6RMJ2T1SmFyLAfQhzUd4W0sOiMM8FAX6xgduV
+	vnyLwVM0jr0vWAg3jtvotYXMYnRSpAeLlgxxD/3MQgSxmkMgkFjJJ2qe0451KIb3K244nNOxq634Z
+	IxJN6noeza/OeSfMdCEO+ot66H0jGwuFY+CZngCS0RBTTypwImWNJNYByeOggLKjvtOtMaKDniIBJ
+	2xnxYdM1VZ3NNHHlqY1s6be3saDB6P30S3IA0rqc+zonPeolc/Ha4pM5TPoUBTtug1daDhWnIV2y5
+	+lpSbX3w==;
+Received: from [10.69.139.14] (helo=terabithia.localnet)
+	by mail.codeweavers.com with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <zfigura@codeweavers.com>)
+	id 1rwyQX-00GjjY-09;
+	Wed, 17 Apr 2024 01:05:49 -0500
+From: Elizabeth Figura <zfigura@codeweavers.com>
+To: Peter Zijlstra <peterz@infradead.org>
+Cc: Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
+ linux-kernel@vger.kernel.org, linux-api@vger.kernel.org,
+ wine-devel@winehq.org,
+ =?ISO-8859-1?Q?Andr=E9?= Almeida <andrealmeid@igalia.com>,
+ Wolfram Sang <wsa@kernel.org>, Arkadiusz Hiler <ahiler@codeweavers.com>,
+ Andy Lutomirski <luto@kernel.org>, linux-doc@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
+ Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
+ Waiman Long <longman@redhat.com>, Boqun Feng <boqun.feng@gmail.com>
+Subject: Re: [PATCH v4 00/30] NT synchronization primitive driver
+Date: Wed, 17 Apr 2024 01:05:47 -0500
+Message-ID: <1856855.atdPhlSkOF@terabithia>
+In-Reply-To: <20240417052218.GI30852@noisy.programming.kicks-ass.net>
+References:
+ <20240416010837.333694-1-zfigura@codeweavers.com>
+ <2602449.Lt9SDvczpP@terabithia>
+ <20240417052218.GI30852@noisy.programming.kicks-ass.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:HwEQrAD3Tsf8XR9mApHzAA--.15107S2
-Authentication-Results: app2; spf=neutral smtp.mail=dzm91@hust.edu.cn;
-X-Coremail-Antispam: 1UD129KBjvJXoW3WF1kCF1xZrWkWF15Jr43Jrb_yoW3Gr4DpF
-	n7Zr97ta1xta43ArWfKrW8XF48AFsrCFWfKF1xG34fJwn5JryvywnrXF15Ww17Cr1rCa4D
-	XF4vkFZ3ury2k3JanT9S1TB71UUUUj7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUQ2b7Iv0xC_Cr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-	cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
-	v20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwA2z4x0Y4vE
-	x4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAaw2AFwI0_JF
-	0_Jw1lnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF
-	0cIa020Ex4CE44I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0EF7xvrVAajcxG14v26r
-	4UJVWxJr1lYx0E74AGY7Cv6cx26r4fZr1UJr1lYx0Ec7CjxVAajcxG14v26F4j6r4UJwAm
-	72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1l42
-	xK82IYc2Ij64vIr41l42xK82IY6x8ErcxFaVAv8VW8uFyUJr1UMxC20s026xCaFVCjc4AY
-	6r1j6r4UMxCIbckI1I0E14v26r126r1DMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7
-	xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xII
-	jxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw2
-	0EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x02
-	67AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUVWSoDUUUU
-X-CM-SenderInfo: asqsiiirqrkko6kx23oohg3hdfq/
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Translate process/cve.rst into Chinese and add it to
-Documentation/translations/zh_CN directory.
+On Wednesday, 17 April 2024 00:22:18 CDT Peter Zijlstra wrote:
+> On Tue, Apr 16, 2024 at 04:18:19PM -0500, Elizabeth Figura wrote:
+> > Let me know if that's good enough or if I should try to render it into
+> > plain text somehow.
+> 
+> Plain text is much preferred. I'm more of a text editor kinda guy --
+> being a programmer and all that.
 
-Signed-off-by: Dongliang Mu <dzm91@hust.edu.cn>
----
- .../translations/zh_CN/process/cve.rst        | 89 +++++++++++++++++++
- .../translations/zh_CN/process/index.rst      |  1 +
- 2 files changed, 90 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/process/cve.rst
+I can certainly sympathize with that ;-)
 
-diff --git a/Documentation/translations/zh_CN/process/cve.rst b/Documentation/translations/zh_CN/process/cve.rst
-new file mode 100644
-index 000000000000..c1e50d0b61e3
---- /dev/null
-+++ b/Documentation/translations/zh_CN/process/cve.rst
-@@ -0,0 +1,89 @@
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/process/cve.rst
-+:Translator: Dongliang Mu <dzm91@hust.edu.cn>
-+
-+====
-+CVEs
-+====
-+
-+Common Vulnerabilities and Exposure (CVE®) 编号是一种明确的方式来
-+识别、定义和登记公开披露的安全漏洞。随着时间的推移，它们在内核项目中的实用性
-+已经下降，CVE编号经常以不适当的方式和不适当的原因被分配。因此，内核开发社区
-+倾向于避免使用它们。然而，分配CVE与其他形式的安全标识符的持续压力，以及内核
-+社区之外的个人和公司的持续滥用，已经清楚地表明内核社区应该控制这些CVE分配。
-+
-+Linux内核开发团队确实有能力为潜在的Linux内核安全问题分配CVE。CVE的分配
-+独立于 :doc:`安全漏洞报送流程</process/security-bugs>`。
-+
-+所有分配给Linux内核的CVE列表都可以在linux-cve邮件列表的存档中找到，如 
-+https://lore.kernel.org/linux-cve-announce/ 所示。如果想获得已分配
-+CVE的通知，请“订阅”该邮件列表。要获得分配的CVE通知，请订阅该邮件列表：
-+`subscribe <https://subspace.kernel.org/subscribing.html>`_。
-+
-+过程
-+=======
-+
-+作为正常稳定发布过程的一部分，可能存在安全问题的内核更改由负责CVE编号分配
-+的开发人员识别，并自动为其分配CVE编号。这些CVE分配会作为经常性的通告经常
-+发布在linux-cve-announce邮件列表上。
-+
-+注意，由于Linux内核在系统中的特殊地位，几乎任何漏洞都可能被利用来危害内核
-+的安全性，但是当漏洞被修复后，利用的可能性通常不明显。因此，CVE分配团队过于
-+谨慎，并将CVE编号分配给他们识别的任何漏洞修复。这就解释了为什么Linux内核
-+团队会发布大量的CVE。
-+
-+如果CVE分配团队错过了任何用户认为应该分配CVE的特定修复，请发送电子邮件到
-+<cve@kernel.org>，那里的团队将与您一起工作。请注意，任何潜在的安全问题
-+不应被发送到此邮箱，它仅用于为已发布的内核树中的漏洞修复分配CVE。如果你觉得
-+自己发现了一个未修复的安全问题，请按照 :doc:`安全漏洞报送流程
-+</process/security-bugs>` 发送到Linux内核社区。
-+
-+Linux内核不会给未修复的安全问题自动分配CVE；只有在安全修复可用且应用于
-+稳定内核树后，CVE分配才会自动发生，并且它将通过安全修复的Git提交编号进行
-+跟踪。如果有人希望在提交安全修复之前分配CVE，请联系内核CVE分配团队，从
-+他们的一批保留编号中获得相应的CVE编号。
-+
-+对于目前没有得到稳定与长期维护内核团队积极支持的内核版本中发现的任何问题，
-+都不会分配CVEs。当前支持的内核分支列表可以在 https://kernel.org/releases.html
-+上找到。
-+
-+被分配CVE的争论
-+=========================
-+
-+对于为特定内核修改分配的CVE，其争论或修改的权限仅属于受影响子系统的维护者。
-+这一原则确保了漏洞报告的高度准确性和可问责性。只有那些具有深厚专业知识和
-+对子系统深入了解的维护人员，才能有效评估内核漏洞的有效性和范围，并确定其适当的
-+CVE指定策略。在此指定权限之外，任何争论或修改CVE的尝试都可能导致混乱、
-+不准确的报告，并最终危及系统。
-+
-+无效的CVE
-+============
-+
-+如果发现的安全问题存在于仅由某Linux发行版支持的Linux内核中，即安全问题是
-+由于Linux发行版所做的更改导致，或者Linux的发行版内核版本不再是Linux内核
-+社区支持的内核版本，那么Linux内核CVE团队将不能分配CVE，必须从Linux
-+发行版本身请求。
-+
-+内核CVE分配团队以外的任何团队对Linux内核支持版本分配的CVE都不应被
-+视为有效CVE。请通知内核CVE分配团队，以便他们可以通过CNA修复过程使
-+这些条目失效。
-+
-+特定CVE的适用性
-+==============================
-+
-+由于Linux内核可以以许多不同方式使用，外部用户可以通过许多不同方式访问它，或者
-+根本没有访问，因此任何特定CVE的适用性取决于Linux用户，而不是内核CVE分配团队。
-+请不要与我们联系来尝试确定任何特定CVE的适用性。
-+
-+此外，由于源代码树非常大，而任何一个系统都只使用源代码树的一小部分，因此任何
-+Linux用户都应该意识到，大量分配的CVEs与他们的系统无关。
-+
-+简而言之，我们不知道您的用例，也不知道您使用的是内核的哪个部分，因此我们无法
-+确定特定的CVE是否与您的系统相关。
-+
-+与往常一样，最好采取所有发布的内核更改，因为它们是由许多社区成员在一个统一的
-+整体中一起进行测试的，而不是作为个别的精选更改。还要注意，对于许多安全问题来
-+说，整体问题的解决方案并不是在单个更改中找到的，而是在彼此之上的许多修复的总
-+和。理想情况下，CVE将被分配给所有问题的所有修复，但有时我们将无法注意到一些
-+修复，因此某些修复可能在没有CVE的情况下被采取。
-\ No newline at end of file
-diff --git a/Documentation/translations/zh_CN/process/index.rst b/Documentation/translations/zh_CN/process/index.rst
-index 3ca02d281be0..5c6c8ccdd50d 100644
---- a/Documentation/translations/zh_CN/process/index.rst
-+++ b/Documentation/translations/zh_CN/process/index.rst
-@@ -48,6 +48,7 @@ TODOLIST:
-    :maxdepth: 1
- 
-    embargoed-hardware-issues
-+   cve
- 
- TODOLIST:
- 
--- 
-2.34.1
+Here's a (slightly ad-hoc) simplification of the patch into text form inlined 
+into this message; hopefully it's readable enough.
+
+
+===================================
+NT synchronization primitive driver
+===================================
+
+This page documents the user-space API for the ntsync driver.
+
+ntsync is a support driver for emulation of NT synchronization
+primitives by user-space NT emulators. It exists because implementation
+in user-space, using existing tools, cannot match Windows performance
+while offering accurate semantics. It is implemented entirely in
+software, and does not drive any hardware device.
+
+This interface is meant as a compatibility tool only, and should not
+be used for general synchronization. Instead use generic, versatile
+interfaces such as futex(2) and poll(2).
+
+Synchronization primitives
+==========================
+
+The ntsync driver exposes three types of synchronization primitives:
+semaphores, mutexes, and events.
+
+A semaphore holds a single volatile 32-bit counter, and a static 32-bit
+integer denoting the maximum value. It is considered signaled when the
+counter is nonzero. The counter is decremented by one when a wait is
+satisfied. Both the initial and maximum count are established when the
+semaphore is created.
+
+A mutex holds a volatile 32-bit recursion count, and a volatile 32-bit
+identifier denoting its owner. A mutex is considered signaled when its
+owner is zero (indicating that it is not owned). The recursion count is
+incremented when a wait is satisfied, and ownership is set to the given
+identifier.
+
+A mutex also holds an internal flag denoting whether its previous owner
+has died; such a mutex is said to be abandoned. Owner death is not
+tracked automatically based on thread death, but rather must be
+communicated using NTSYNC_IOC_MUTEX_KILL. An abandoned mutex is
+inherently considered unowned.
+
+Except for the "unowned" semantics of zero, the actual value of the
+owner identifier is not interpreted by the ntsync driver at all. The
+intended use is to store a thread identifier; however, the ntsync
+driver does not actually validate that a calling thread provides
+consistent or unique identifiers.
+
+An event holds a volatile boolean state denoting whether it is signaled
+or not. There are two types of events, auto-reset and manual-reset. An
+auto-reset event is designaled when a wait is satisfied; a manual-reset
+event is not. The event type is specified when the event is created.
+
+Unless specified otherwise, all operations on an object are atomic and
+totally ordered with respect to other operations on the same object.
+
+Objects are represented by files. When all file descriptors to an
+object are closed, that object is deleted.
+
+Char device
+===========
+
+The ntsync driver creates a single char device /dev/ntsync. Each file
+description opened on the device represents a unique instance intended
+to back an individual NT virtual machine. Objects created by one ntsync
+instance may only be used with other objects created by the same
+instance.
+
+ioctl reference
+===============
+
+All operations on the device are done through ioctls. There are four
+structures used in ioctl calls::
+
+   struct ntsync_sem_args {
+       __u32 sem;
+       __u32 count;
+       __u32 max;
+   };
+
+   struct ntsync_mutex_args {
+       __u32 mutex;
+       __u32 owner;
+       __u32 count;
+   };
+
+   struct ntsync_event_args {
+       __u32 event;
+       __u32 signaled;
+       __u32 manual;
+   };
+
+   struct ntsync_wait_args {
+       __u64 timeout;
+       __u64 objs;
+       __u32 count;
+       __u32 owner;
+       __u32 index;
+       __u32 alert;
+       __u32 flags;
+       __u32 pad;
+   };
+
+Depending on the ioctl, members of the structure may be used as input,
+output, or not at all. All ioctls return 0 on success.
+
+The ioctls on the device file are as follows:
+
+.. NTSYNC_IOC_CREATE_SEM
+
+  Create a semaphore object. Takes a pointer to struct ntsync_sem_args,
+  which is used as follows:
+
+     * sem:   On output, contains a file descriptor to the created semaphore.
+     * count: Initial count of the semaphore.
+     * max:   Maximum count of the semaphore.
+
+  Fails with EINVAL if `count` is greater than `max`.
+
+.. NTSYNC_IOC_CREATE_MUTEX
+
+  Create a mutex object. Takes a pointer to struct ntsync_mutex_args,
+  which is used as follows:
+
+     * mutex: On output, contains a file descriptor to the created mutex.
+     * count: Initial recursion count of the mutex.
+     * owner: Initial owner of the mutex.
+
+  If ``owner`` is nonzero and ``count`` is zero, or if ``owner`` is zero
+  and ``count`` is nonzero, the function fails with EINVAL.
+
+.. NTSYNC_IOC_CREATE_EVENT
+
+  Create an event object. Takes a pointer to struct ntsync_event_args,
+  which is used as follows:
+
+     * event:    On output, contains a file descriptor to the created event.
+     * signaled: If nonzero, the event is initially signaled, otherwise
+                 nonsignaled.
+     * manual:   If nonzero, the event is a manual-reset event, otherwise
+                 auto-reset.
+
+The ioctls on the individual objects are as follows:
+
+.. NTSYNC_IOC_SEM_POST
+
+  Post to a semaphore object. Takes a pointer to a 32-bit integer,
+  which on input holds the count to be added to the semaphore, and on
+  output contains its previous count.
+
+  If adding to the semaphore's current count would raise the latter
+  past the semaphore's maximum count, the ioctl fails with
+  EOVERFLOW and the semaphore is not affected. If raising the
+  semaphore's count causes it to become signaled, eligible threads
+  waiting on this semaphore will be woken and the semaphore's count
+  decremented appropriately.
+
+.. NTSYNC_IOC_MUTEX_UNLOCK
+
+  Release a mutex object. Takes a pointer to struct ntsync_mutex_args,
+  which is used as follows:
+
+     * mutex: Ignored.
+     * owner: Specifies the owner trying to release this mutex.
+     * count: On output, contains the previous recursion count.
+
+  If ``owner`` is zero, the ioctl fails with EINVAL. If ``owner``
+  is not the current owner of the mutex, the ioctl fails with
+  EPERM.
+
+  The mutex's count will be decremented by one. If decrementing the
+  mutex's count causes it to become zero, the mutex is marked as
+  unowned and signaled, and eligible threads waiting on it will be
+  woken as appropriate.
+
+.. NTSYNC_IOC_SET_EVENT
+
+  Signal an event object. Takes a pointer to a 32-bit integer, which on
+  output contains the previous state of the event.
+
+  Eligible threads will be woken, and auto-reset events will be
+  designaled appropriately.
+
+.. NTSYNC_IOC_RESET_EVENT
+
+  Designal an event object. Takes a pointer to a 32-bit integer, which
+  on output contains the previous state of the event.
+
+.. NTSYNC_IOC_PULSE_EVENT
+
+  Wake threads waiting on an event object while leaving it in an
+  unsignaled state. Takes a pointer to a 32-bit integer, which on
+  output contains the previous state of the event.
+
+  A pulse operation can be thought of as a set followed by a reset,
+  performed as a single atomic operation. If two threads are waiting on
+  an auto-reset event which is pulsed, only one will be woken. If two
+  threads are waiting a manual-reset event which is pulsed, both will
+  be woken. However, in both cases, the event will be unsignaled
+  afterwards, and a simultaneous read operation will always report the
+  event as unsignaled.
+
+.. NTSYNC_IOC_READ_SEM
+
+  Read the current state of a semaphore object. Takes a pointer to
+  struct ntsync_sem_args, which is used as follows:
+
+     * sem:   Ignored.
+     * count: On output, contains the current count of the semaphore.
+     * max:   On output, contains the maximum count of the semaphore.
+
+.. NTSYNC_IOC_READ_MUTEX
+
+  Read the current state of a mutex object. Takes a pointer to struct
+  ntsync_mutex_args, which is used as follows:
+
+     * mutex: Ignored.
+     * owner: On output, contains the current owner of the mutex, or zero
+              if the mutex is not currently owned.
+     * count: On output, contains the current recursion count of the mutex.
+
+  If the mutex is marked as abandoned, the function fails with
+  EOWNERDEAD. In this case, ``count`` and ``owner`` are set to zero.
+
+.. NTSYNC_IOC_READ_EVENT
+
+  Read the current state of an event object. Takes a pointer to struct
+  ntsync_event_args, which is used as follows:
+
+     * event:    Ignored.
+     * signaled: On output, contains the current state of the event.
+     * manual:   On output, contains 1 if the event is a manual-reset event,
+                 and 0 otherwise.
+
+.. NTSYNC_IOC_KILL_OWNER
+
+  Mark a mutex as unowned and abandoned if it is owned by the given
+  owner. Takes an input-only pointer to a 32-bit integer denoting the
+  owner. If the owner is zero, the ioctl fails with EINVAL. If the
+  owner does not own the mutex, the function fails with EPERM.
+
+  Eligible threads waiting on the mutex will be woken as appropriate
+  (and such waits will fail with EOWNERDEAD, as described below).
+
+.. NTSYNC_IOC_WAIT_ANY
+
+  Poll on any of a list of objects, atomically acquiring at most one.
+  Takes a pointer to struct ntsync_wait_args, which is used as follows:
+
+     * timeout: Absolute timeout in nanoseconds. If NTSYNC_WAIT_REALTIME
+                is set, the timeout is measured against the REALTIME
+                clock; otherwise it is measured against the MONOTONIC
+                clock. If the timeout is equal to or earlier than the
+                current time, the function returns immediately without
+                sleeping. If ``timeout`` is U64_MAX, the function will
+                sleep until an object is signaled, and will not fail
+                with ETIMEDOUT.
+
+     * objs:    Pointer to an array of ``count`` file descriptors
+                (specified as an integer so that the structure has the
+                same size regardless of architecture). If any object is
+                invalid, the function fails with EINVAL.
+
+     * count:   Number of objects specified in the ``objs`` array. If
+                greater than NTSYNC_MAX_WAIT_COUNT, the function fails
+                with EINVAL.
+
+     * owner:   Mutex owner identifier. If any object in ``objs`` is a
+                mutex, the ioctl will attempt to acquire that mutex on
+                behalf of ``owner``. If ``owner`` is zero, the ioctl
+                fails with EINVAL.
+
+     * index:   On success, contains the index (into ``objs``) of the
+                object which was signaled. If ``alert`` was signaled
+                instead, this contains ``count``.
+
+     * alert:   Optional event object file descriptor. If nonzero, this
+                specifies an "alert" event object which, if signaled,
+                will terminate the wait. If nonzero, the identifier must
+                point to a valid event.
+
+     * flags:   Zero or more flags. Currently the only flag is
+                NTSYNC_WAIT_REALTIME, which causes the timeout to be
+                measured against the REALTIME clock instead of
+                MONOTONIC.
+
+     * pad:     Unused, must be set to zero.
+
+  This function attempts to acquire one of the given objects. If unable
+  to do so, it sleeps until an object becomes signaled, subsequently
+  acquiring it, or the timeout expires. In the latter case the ioctl
+  fails with ETIMEDOUT. The function only acquires one object, even if
+  multiple objects are signaled.
+
+  A semaphore is considered to be signaled if its count is nonzero, and
+  is acquired by decrementing its count by one. A mutex is considered
+  to be signaled if it is unowned or if its owner matches the ``owner``
+  argument, and is acquired by incrementing its recursion count by one
+  and setting its owner to the ``owner`` argument. An auto-reset event
+  is acquired by designaling it; a manual-reset event is not affected
+  by acquisition.
+
+  Acquisition is atomic and totally ordered with respect to other
+  operations on the same object. If two wait operations (with different
+  ``owner`` identifiers) are queued on the same mutex, only one is
+  signaled. If two wait operations are queued on the same semaphore,
+  and a value of one is posted to it, only one is signaled. The order
+  in which threads are signaled is not specified.
+
+  If an abandoned mutex is acquired, the ioctl fails with
+  EOWNERDEAD. Although this is a failure return, the function may
+  otherwise be considered successful. The mutex is marked as owned by
+  the given owner (with a recursion count of 1) and as no longer
+  abandoned, and ``index`` is still set to the index of the mutex.
+
+  The ``alert`` argument is an "extra" event which can terminate the
+  wait, independently of all other objects. If members of ``objs`` and
+  ``alert`` are both simultaneously signaled, a member of ``objs`` will
+  always be given priority and acquired first.
+
+  It is valid to pass the same object more than once, including by
+  passing the same event in the ``objs`` array and in ``alert``. If a
+  wakeup occurs due to that object being signaled, ``index`` is set to
+  the lowest index corresponding to that object.
+
+  The function may fail with EINTR if a signal is received.
+
+.. NTSYNC_IOC_WAIT_ALL
+
+  Poll on a list of objects, atomically acquiring all of them. Takes a
+  pointer to struct ntsync_wait_args, which is used identically to
+  NTSYNC_IOC_WAIT_ANY, except that ``index`` is always filled with zero
+  on success if not woken via alert.
+
+  This function attempts to simultaneously acquire all of the given
+  objects. If unable to do so, it sleeps until all objects become
+  simultaneously signaled, subsequently acquiring them, or the timeout
+  expires. In the latter case the ioctl fails with ETIMEDOUT and no
+  objects are modified.
+
+  Objects may become signaled and subsequently designaled (through
+  acquisition by other threads) while this thread is sleeping. Only
+  once all objects are simultaneously signaled does the ioctl acquire
+  them and return. The entire acquisition is atomic and totally ordered
+  with respect to other operations on any of the given objects.
+
+  If an abandoned mutex is acquired, the ioctl fails with
+  EOWNERDEAD. Similarly to NTSYNC_IOC_WAIT_ANY, all objects are
+  nevertheless marked as acquired. Note that if multiple mutex objects
+  are specified, there is no way to know which were marked as
+  abandoned.
+
+  As with "any" waits, the ``alert`` argument is an "extra" event which
+  can terminate the wait. Critically, however, an "all" wait will
+  succeed if all members in ``objs`` are signaled, *or* if ``alert`` is
+  signaled. In the latter case ``index`` will be set to ``count``. As
+  with "any" waits, if both conditions are filled, the former takes
+  priority, and objects in ``objs`` will be acquired.
+
+  Unlike NTSYNC_IOC_WAIT_ANY, it is not valid to pass the same
+  object more than once, nor is it valid to pass the same object in
+  ``objs`` and in ``alert``. If this is attempted, the function fails
+  with EINVAL.
+
 
 
