@@ -1,206 +1,121 @@
-Return-Path: <linux-doc+bounces-14564-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-14566-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53D2A8A9AAE
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Apr 2024 15:02:08 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 160768A9AED
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Apr 2024 15:11:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0C9CF282D7E
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Apr 2024 13:02:07 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 47A631C215D3
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Apr 2024 13:11:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E279615FD0D;
-	Thu, 18 Apr 2024 12:58:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3367614535E;
+	Thu, 18 Apr 2024 13:11:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b="Dju61Suu"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="O0+BqKj5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.153.233])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 527931DFCF;
-	Thu, 18 Apr 2024 12:58:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=68.232.153.233
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDE1484D02;
+	Thu, 18 Apr 2024 13:11:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1713445131; cv=none; b=mPDNP0Wo3RiFm8po7mzXwJxfDfVFu65dj31JZqqo4Y9x095EhzbtzsutU9i3EUOsggRRnoMedHD+OFd8VnEWill/iTeYYG8AMVVaL115mzxFJKjC91YtHPOMxZkWMCZ79CERGEcTgYGlpgMBwQAqP0R8bq/+w4quycclMvx/DlU=
+	t=1713445904; cv=none; b=ADHOBQS5N22tjmzYgc7tgVhwypVU+TIY6qO2sryd2hH3nyjKRwzltyl1LuFSACI0Nmpns2VEhd5NzFpP+tUuFuF5t0UFAIT9nFsQkd6B/5Yv/nuM5oYmBi+f3ZVs7UhXrupor5nXluQqeN4Fm2Iw0aV12BxHDzcvQQ3r78I92r8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1713445131; c=relaxed/simple;
-	bh=tciKgcMKuV9qp4J1rqJdA34swl41OB8FHSA89/t6ABM=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=uFYJzam3zK7IRLDEPbgy6EW5mzlJeFraM0XtebqmlnxtciS2IDysKoeInmgZrZCWMHmHsUXucG/hxIReDgQxVM3GLT3iZV1LqBPVLQUrFS9PXNLaIUvf2betcUYNz4VN7Y4yDWpaunOXER2VVL2zvlqpYBaoM++5cxe/BMuVJlM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=microchip.com; spf=pass smtp.mailfrom=microchip.com; dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b=Dju61Suu; arc=none smtp.client-ip=68.232.153.233
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=microchip.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
-  t=1713445130; x=1744981130;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=tciKgcMKuV9qp4J1rqJdA34swl41OB8FHSA89/t6ABM=;
-  b=Dju61SuukUjU/waZIbOQRjKpbJm0jY3dcaiOjQa//rx3bEotBu6dUibx
-   IzBsYqN7STVqkmahp59ws+G/7zOI+AbIeUzwkOLbZzqCaKg3tQGRRnsi1
-   o5zc8dunrT4xmKHI5qGPex3hdJv/iKitiMB0JVSbyaGed/tyAQn5pm3VW
-   eANFQPhMyrVU3FzxPMoJjaI4NRp/ccOmna0EKYsD6+YDJmtQBZiha0s/y
-   OAWKL1XGD8A4Knyjz+3pA2GvEnXdgYISE4aFeGJ9B1fq3dUMeXWRiaD6m
-   6+N9jca3ApIl86haYznx+0hC7s2M4oPVy41Htb+a+BptSWQQfK7adXwSO
-   g==;
-X-CSE-ConnectionGUID: R4Z+IaJ9Sq+C7AnY8YlWDw==
-X-CSE-MsgGUID: ottyMkh8T+mtNYn3IlUW1A==
-X-IronPort-AV: E=Sophos;i="6.07,212,1708412400"; 
-   d="scan'208";a="23619785"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
-  by esa1.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 18 Apr 2024 05:58:48 -0700
-Received: from chn-vm-ex02.mchp-main.com (10.10.87.72) by
- chn-vm-ex02.mchp-main.com (10.10.87.72) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Thu, 18 Apr 2024 05:58:29 -0700
-Received: from CHE-LT-I17164LX.microchip.com (10.10.85.11) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Thu, 18 Apr 2024 05:58:21 -0700
-From: Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
-To: <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
-	<pabeni@redhat.com>, <horms@kernel.org>, <saeedm@nvidia.com>,
-	<anthony.l.nguyen@intel.com>, <netdev@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <andrew@lunn.ch>, <corbet@lwn.net>,
-	<linux-doc@vger.kernel.org>, <robh+dt@kernel.org>,
-	<krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
-	<devicetree@vger.kernel.org>, <horatiu.vultur@microchip.com>,
-	<ruanjinjie@huawei.com>, <steen.hegelund@microchip.com>,
-	<vladimir.oltean@nxp.com>
-CC: <UNGLinuxDriver@microchip.com>, <Thorsten.Kummermehr@microchip.com>,
-	<Pier.Beruto@onsemi.com>, <Selvamani.Rajagopal@onsemi.com>,
-	<Nicolas.Ferre@microchip.com>, <benjamin.bigler@bernformulastudent.ch>,
-	Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
-Subject: [PATCH net-next v4 12/12] dt-bindings: net: add Microchip's LAN865X 10BASE-T1S MACPHY
-Date: Thu, 18 Apr 2024 18:26:48 +0530
-Message-ID: <20240418125648.372526-13-Parthiban.Veerasooran@microchip.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240418125648.372526-1-Parthiban.Veerasooran@microchip.com>
-References: <20240418125648.372526-1-Parthiban.Veerasooran@microchip.com>
+	s=arc-20240116; t=1713445904; c=relaxed/simple;
+	bh=iiylYS4xkEyE6BY66mqdSi98AxDK5kma6xVkGJlBkms=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=bpwfv2GTa/4JsB7O2bb9q75XAmpEHFzQ5sNvWMHDWuA1dRKKiDU25oC2E58X4EKY0f92aq5OfqLb4aBkDW5fdUKzw4wHqSsAdMUPTp11sDyLd2zCRcM8RgL4xYvKTVndC49nyAhUswHECYeqUf9ohz3Ia0d1wEUDZn27zMP/sWM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=O0+BqKj5; arc=none smtp.client-ip=209.85.215.175
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-5e152c757a5so452660a12.2;
+        Thu, 18 Apr 2024 06:11:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1713445902; x=1714050702; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=aH1ycRnJl2DyuElBHXYZMGKIwlTzwH1Z6KsoIshfpnA=;
+        b=O0+BqKj5VkMj/XAh3m0iOEYa9novjrDrhbRu1D8Ml+tMT2xY3vaQdcNv98us7Fltir
+         pRLXRy8fIAef2xfBexNObz9Y+PdC3r5jFx7IyBoCzc61GalwfdG6A9yb+qvCwRk1Yl8H
+         72XaRRvOBswHm/ZAYCVToveGQnUd/j5iomOskD2nvTBYxNbEs1CTSt+/Sgj/tPH+rrPR
+         h9aXZ1i43PdI4apidhPl5hSm9o4lmg7fz5amS+Eew0X3xSNWI4G+2+zes8sJfz0BTn01
+         pUqsyxrbafZK6Hi5m/hapxSa0GThcoVP4y0hLdZlt48srAdU8SRX8Rje9P8hdf6svtCR
+         ALMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1713445902; x=1714050702;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=aH1ycRnJl2DyuElBHXYZMGKIwlTzwH1Z6KsoIshfpnA=;
+        b=l6KLBG8CmbvM4DD3ELBDyircpu38H3G41qzrCZDbzf76zPwkwpeMTOcesDRBS3Q3bt
+         6e1SJQUuPdmJmnZN2pDQccwHw8H7M6IGfN4Mhdn9YXEI3MtyDkPKNqPrKoYRWZJFDln0
+         Uyqn7x65E3dCkmAs4So+IH1DYVk7zZ3WIbAlpy1aLYidLYXhhnect3OpZ6zwkJpfPhGV
+         kUkLo1OqoOUdVaD2jsVX8J4dkniQ8E+iPoy8Ddk7V1mldd/J84QWyBfy0gCT0S6pdbB3
+         tDuowcxHJVvu9Lzwzxw9nduNvS1FSu8tmQjGS+wTRgJoCtY4inqzs6VmNo8369ieWgAC
+         VcEg==
+X-Forwarded-Encrypted: i=1; AJvYcCW5AV1TEAyTUf8fKlcNomYEfd1K++XAZMAUDG9gGO0ek43BUocCkIrYvLPLjAnOuMtC6UtB/8WfdWHElQvZyQ76II/FsMcvkEAMwskTBIn32HEWyT1RgNgSkkzq9HHIS2a/SL2tEs+2
+X-Gm-Message-State: AOJu0YxoW5dSalHN348D3d56vDuQPhtQB4rnQNa+INdSDEpXJz8LWmG3
+	htD3yfZBNrbQp5SRRjIrlj6nExsvNlt2OyOnk09xC01DAvk9J+Xf
+X-Google-Smtp-Source: AGHT+IFG8A/2coA6M18Zs50JxM6PmNtZz6/L011Cn6c44On2bnIqw6pQ2h/cRl19O7jH+XxcXAhqdQ==
+X-Received: by 2002:a05:6a20:2445:b0:1a7:7358:f108 with SMTP id t5-20020a056a20244500b001a77358f108mr3705675pzc.24.1713445902033;
+        Thu, 18 Apr 2024 06:11:42 -0700 (PDT)
+Received: from [192.168.0.107] ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id g21-20020a63e615000000b005f75f325db4sm1379307pgh.29.2024.04.18.06.11.38
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 18 Apr 2024 06:11:41 -0700 (PDT)
+Message-ID: <6ee54e25-a9a6-4cb2-a2cc-92570ab7ace5@gmail.com>
+Date: Thu, 18 Apr 2024 20:11:35 +0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Documentation: workqueue: Inline WQ_* flag pattern
+To: Akira Yokosawa <akiyks@gmail.com>
+Cc: Naohiro.Aota@wdc.com, frederic@kernel.org, jiangshanlai@gmail.com,
+ kent.overstreet@linux.dev, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, penguin-kernel@I-love.SAKURA.ne.jp,
+ tj@kernel.org, Jonathan Corbet <corbet@lwn.net>
+References: <20240418072100.30670-2-bagasdotme@gmail.com>
+ <6875fb17-f781-4594-803a-c11969f36022@gmail.com>
+Content-Language: en-US
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+In-Reply-To: <6875fb17-f781-4594-803a-c11969f36022@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-The LAN8650/1 combines a Media Access Controller (MAC) and an Ethernet
-PHY to enable 10BASE-T1S networks. The Ethernet Media Access Controller
-(MAC) module implements a 10 Mbps half duplex Ethernet MAC, compatible
-with the IEEE 802.3 standard and a 10BASE-T1S physical layer transceiver
-integrated into the LAN8650/1. The communication between the Host and the
-MAC-PHY is specified in the OPEN Alliance 10BASE-T1x MACPHY Serial
-Interface (TC6).
+On 4/18/24 15:23, Akira Yokosawa wrote:
+> [+Cc: Jon]
+> 
+> On Thu, 18 Apr 2024 14:21:01 +0700, Bagas Sanjaya wrote:
+>> - * For detailed information on %WQ_* flags, please refer to
+>> + * For detailed information on ``WQ_*`` flags, please refer to
+>>   * Documentation/core-api/workqueue.rst.
+>>   *
+>>   * RETURNS:
+> 
+> In my opinion, reST-specific clutters like these should be avoided in
+> kernel-doc comments as far as possible.
+> 
+> Instead, I think you can educate kernel-doc (script) so that "*" is
+> allowed in the %CONSTANT pattern, meaning %WQ_* can be converted
+> to ``WQ_*`` in reST.
+> 
+> For similar changes made against the @param pattern, see commits
+> 69fc23efc7e5 ("kernel-doc: Add unary operator * to $type_param_ref")
+> and 8aaf297a0dd6 ("docs: scripts: kernel-doc: accept bitwise negation
+> like ~@var").
+> 
 
-Signed-off-by: Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
----
- .../bindings/net/microchip,lan865x.yaml       | 80 +++++++++++++++++++
- MAINTAINERS                                   |  1 +
- 2 files changed, 81 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/net/microchip,lan865x.yaml
+Thanks for the idea!
 
-diff --git a/Documentation/devicetree/bindings/net/microchip,lan865x.yaml b/Documentation/devicetree/bindings/net/microchip,lan865x.yaml
-new file mode 100644
-index 000000000000..4fdec0ba3532
---- /dev/null
-+++ b/Documentation/devicetree/bindings/net/microchip,lan865x.yaml
-@@ -0,0 +1,80 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/net/microchip,lan865x.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Microchip LAN8650/1 10BASE-T1S MACPHY Ethernet Controllers
-+
-+maintainers:
-+  - Parthiban Veerasooran <parthiban.veerasooran@microchip.com>
-+
-+description:
-+  The LAN8650/1 combines a Media Access Controller (MAC) and an Ethernet
-+  PHY to enable 10BASE‑T1S networks. The Ethernet Media Access Controller
-+  (MAC) module implements a 10 Mbps half duplex Ethernet MAC, compatible
-+  with the IEEE 802.3 standard and a 10BASE-T1S physical layer transceiver
-+  integrated into the LAN8650/1. The communication between the Host and
-+  the MAC-PHY is specified in the OPEN Alliance 10BASE-T1x MACPHY Serial
-+  Interface (TC6).
-+
-+allOf:
-+  - $ref: ethernet-controller.yaml#
-+  - $ref: /schemas/spi/spi-peripheral-props.yaml#
-+
-+properties:
-+  compatible:
-+    oneOf:
-+      - const: microchip,lan8650
-+      - items:
-+          - const: microchip,lan8651
-+          - const: microchip,lan8650
-+
-+  reg:
-+    maxItems: 1
-+
-+  interrupts:
-+    description:
-+      Interrupt from MAC-PHY asserted in the event of Receive Chunks
-+      Available, Transmit Chunk Credits Available and Extended Status
-+      Event.
-+    maxItems: 1
-+
-+  spi-max-frequency:
-+    minimum: 15000000
-+    maximum: 25000000
-+
-+  "#address-cells":
-+    const: 1
-+
-+  "#size-cells":
-+    const: 0
-+
-+required:
-+  - compatible
-+  - reg
-+  - interrupts
-+  - spi-max-frequency
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+    #include <dt-bindings/gpio/gpio.h>
-+
-+    spi {
-+      #address-cells = <1>;
-+      #size-cells = <0>;
-+
-+      ethernet@0 {
-+        compatible = "microchip,lan8651", "microchip,lan8650";
-+        reg = <0>;
-+        pinctrl-names = "default";
-+        pinctrl-0 = <&eth0_pins>;
-+        interrupt-parent = <&gpio>;
-+        interrupts = <6 IRQ_TYPE_EDGE_FALLING>;
-+        local-mac-address = [04 05 06 01 02 03];
-+        spi-max-frequency = <15000000>;
-+      };
-+    };
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f41b7f2257d2..2172431a1935 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -14378,6 +14378,7 @@ MICROCHIP LAN8650/1 10BASE-T1S MACPHY ETHERNET DRIVER
- M:	Parthiban Veerasooran <parthiban.veerasooran@microchip.com>
- L:	netdev@vger.kernel.org
- S:	Maintained
-+F:	Documentation/devicetree/bindings/net/microchip,lan865x.yaml
- F:	drivers/net/ethernet/microchip/lan865x/lan865x.c
- 
- MICROCHIP LAN87xx/LAN937x T1 PHY DRIVER
 -- 
-2.34.1
+An old man doll... just what I always wanted! - Clara
 
 
