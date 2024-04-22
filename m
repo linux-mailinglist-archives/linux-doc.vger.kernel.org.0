@@ -1,219 +1,244 @@
-Return-Path: <linux-doc+bounces-14786-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-14788-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A3388AD5AD
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Apr 2024 22:11:10 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 622398AD603
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Apr 2024 22:43:14 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 780A91F212B8
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Apr 2024 20:11:09 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 855801C20DA5
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Apr 2024 20:43:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 04DB61553AB;
-	Mon, 22 Apr 2024 20:11:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 911181BC30;
+	Mon, 22 Apr 2024 20:43:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="u8DUaG7l"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Pk8dNYGJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB2EE15532F;
-	Mon, 22 Apr 2024 20:11:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E65AB1BDC3;
+	Mon, 22 Apr 2024 20:42:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1713816663; cv=none; b=lHRUhfJHVpOnmDruaC+zHN5f64NpTtzOvokSVALsindgmzwAmG95+m4BZZd88HzwCAPTPtFTyjlsDqOFiX5qqQvDWvUCwYFg4IjYJsmUoKaGkUI5mf6T0AMjor/yWJsKwW6u1u8YQAyPPKjk2te+qbo/z3L/3Uf7w1ofSS5el/s=
+	t=1713818581; cv=none; b=Ni0972SE+U7BXA/SY/WHE/S8fmOVEjrFQmUab7QSvaWPxcOP+me7GOTvv8ELmXPKwSTQthggUmKGIQy6DpOwzVOMXSyU9M2DIBeTYCtbRHpA4k1RSlgTvI9tsFCk6eo1fuB+Hhb02dcMfxjbOT12r121bzJM/BFSgIGpCIUNEAc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1713816663; c=relaxed/simple;
-	bh=8OXJv3D3XB9FIg16Ygxe6dGNkOlCc0SqV2Syf7zCGNw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=l16S0gIREC4XHH53I1uTted6UXY/N54IxjuoV6LBPKeqWT84oDSw9klmtQDyCbJwGWH/gblACf17Pl9Gm37oZ5R2wpqIzT0iBDFzJGR1RSz/xdA3JL0u+MtZKT/pKkKQUvdGIV2tpPCRjB8PcfpCtwgtJSVX7U0jIFXhVj8yBNo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=u8DUaG7l; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0279DC116B1;
-	Mon, 22 Apr 2024 20:10:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1713816663;
-	bh=8OXJv3D3XB9FIg16Ygxe6dGNkOlCc0SqV2Syf7zCGNw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=u8DUaG7l8cWyh+/TFEZenyVAA06XGzbUh+z4QnSZy/SyPW5buJ/voty+9FGtneeKy
-	 oat9XU1D4hCku43EV76z1zlYbnKkvV2RRdLhH4+07d2JN6jwQVBH1ye0hxnOtnmI8N
-	 FvOl9zJX+AOVDQ6IAyTmRp4tuvYDY8Fz/9Imw9qoBDzJZhlIkBypeUuB910of2od/p
-	 OcZSRna5KKmpXistUZzmtTsJ6WY3JIgZXl42fhqqHArdu2Uv+aiIJll7fDZSqTk+mu
-	 eVLEeoBOXQ9CZF0zme8afvDh18EaEsahon1VcjzPND/52FRf6ir7kza0MiZ7IOfw+e
-	 Ti12kNzspTF4Q==
-Date: Mon, 22 Apr 2024 21:10:55 +0100
-From: Simon Horman <horms@kernel.org>
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: Florian Fainelli <florian.fainelli@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Andrew Lunn <andrew@lunn.ch>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Radu Pirea <radu-nicolae.pirea@oss.nxp.com>,
-	Jay Vosburgh <j.vosburgh@gmail.com>,
-	Andy Gospodarek <andy@greyhouse.net>,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Horatiu Vultur <horatiu.vultur@microchip.com>,
-	UNGLinuxDriver@microchip.com,
-	Vladimir Oltean <vladimir.oltean@nxp.com>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Rahul Rameshbabu <rrameshbabu@nvidia.com>
-Subject: Re: [PATCH net-next v11 12/13] net: ethtool: tsinfo: Add support for
- hwtstamp provider and get/set hwtstamp config
-Message-ID: <20240422201055.GG42092@kernel.org>
-References: <20240422-feature_ptp_netnext-v11-0-f14441f2a1d8@bootlin.com>
- <20240422-feature_ptp_netnext-v11-12-f14441f2a1d8@bootlin.com>
+	s=arc-20240116; t=1713818581; c=relaxed/simple;
+	bh=mqvvD4M+5zrVu9tFt8LtTjqLGdgftrUuwLZoC1BIpFI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=e1AwstfL/UPFosenVaLVtoHVWnCl14gA1Q9csQocuYBxlevkkwDQvx5lNttcwjS1lEJvJO/FSz8W3iABlOoRn4+LjlJicEZCjYVryyduXDvVTW5sUynA6H+vZH/5M8M2iKRKUfYrGZIWNNkRYqLp3s3D4Cft2urqBZbo21VHBvM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Pk8dNYGJ; arc=none smtp.client-ip=192.198.163.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1713818580; x=1745354580;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=mqvvD4M+5zrVu9tFt8LtTjqLGdgftrUuwLZoC1BIpFI=;
+  b=Pk8dNYGJGOBLojFZRDezfOG1CzLkVYI5ehBcupBNrPvByaJUS6xnTRIa
+   E4+U2aJmmIK7Gpmi6TsUgBHZwX0mqYUdKvOLzIMGAAo20PHEvqwv2qQup
+   ixd7VXLXRH9q9dVlih3QS7G1/rZa3/O1OatP4YdC27RXfbbhACNwX1WqD
+   i4fAWuZJmCr7Mh5qMSin3v1nQ55Ssl/7BdANqrImmCVbDODR7gS3XmNFy
+   iSsuxicdW6rF8MdcA9PsOs4EKgpjcW8ImKEH+Zzo5sRXZEcKqFVDijFtB
+   fYwxdml8/wN6qL4Ekxz6CKk3CsEC5XVLiLxnLmcCsohZMnqZHrL70HVqm
+   Q==;
+X-CSE-ConnectionGUID: bLbLvGtBQv28PFWmKnQpCQ==
+X-CSE-MsgGUID: A9S3UaK/TF6m/zVvDI6bQw==
+X-IronPort-AV: E=McAfee;i="6600,9927,11052"; a="9234816"
+X-IronPort-AV: E=Sophos;i="6.07,221,1708416000"; 
+   d="scan'208";a="9234816"
+Received: from orviesa008.jf.intel.com ([10.64.159.148])
+  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2024 13:42:19 -0700
+X-CSE-ConnectionGUID: rSzjNxCYSl20z5E0RZYZ6g==
+X-CSE-MsgGUID: uIIvBbpfTemBmMRl7pKJ5w==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.07,221,1708416000"; 
+   d="scan'208";a="24747861"
+Received: from leozhang-mobl.amr.corp.intel.com (HELO [10.212.37.174]) ([10.212.37.174])
+  by orviesa008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2024 13:42:14 -0700
+Message-ID: <93294e52-97e5-4441-a849-867429da6573@linux.intel.com>
+Date: Mon, 22 Apr 2024 15:12:04 -0500
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240422-feature_ptp_netnext-v11-12-f14441f2a1d8@bootlin.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 01/23] ASoC: soc-pcm: cleanup
+ soc_get_playback_capture()
+To: Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
+Cc: =?UTF-8?Q?Amadeusz_S=C5=82awi=C5=84ski?=
+ <amadeuszx.slawinski@linux.intel.com>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Banajit Goswami <bgoswami@quicinc.com>,
+ Bard Liao <yung-chuan.liao@linux.intel.com>, Brent Lu <brent.lu@intel.com>,
+ Cezary Rojewski <cezary.rojewski@intel.com>,
+ Charles Keepax <ckeepax@opensource.cirrus.com>,
+ Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+ Cristian Ciocaltea <cristian.ciocaltea@collabora.com>,
+ Daniel Baluta <daniel.baluta@nxp.com>, Hans de Goede <hdegoede@redhat.com>,
+ Jaroslav Kysela <perex@perex.cz>, Jerome Brunet <jbrunet@baylibre.com>,
+ Jiawei Wang <me@jwang.link>, Jonathan Corbet <corbet@lwn.net>,
+ Kai Vehmanen <kai.vehmanen@linux.intel.com>,
+ Kevin Hilman <khilman@baylibre.com>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>, Maso Huang <maso.huang@mediatek.com>,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>,
+ Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
+ Ranjani Sridharan <ranjani.sridharan@linux.intel.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>, Shawn Guo <shawnguo@kernel.org>,
+ Shengjiu Wang <shengjiu.wang@gmail.com>,
+ Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+ Sylwester Nawrocki <s.nawrocki@samsung.com>, Takashi Iwai <tiwai@suse.com>,
+ Vinod Koul <vkoul@kernel.org>, Xiubo Li <Xiubo.Lee@gmail.com>,
+ alsa-devel@alsa-project.org, imx@lists.linux.dev, linux-doc@vger.kernel.org,
+ linux-sound@vger.kernel.org
+References: <87h6fz8g3u.wl-kuninori.morimoto.gx@renesas.com>
+ <87frvj8g2v.wl-kuninori.morimoto.gx@renesas.com>
+ <a1f63065-6d8a-404f-b4be-331d829f802f@linux.intel.com>
+ <87ttjytayy.wl-kuninori.morimoto.gx@renesas.com>
+ <92054f87-dded-4b66-8108-8b2a10909883@linux.intel.com>
+ <87edaym2cg.wl-kuninori.morimoto.gx@renesas.com>
+Content-Language: en-US
+From: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
+In-Reply-To: <87edaym2cg.wl-kuninori.morimoto.gx@renesas.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Apr 22, 2024 at 02:50:27PM +0200, Kory Maincent wrote:
-> Enhance 'get' command to retrieve tsinfo of hwtstamp providers within a
-> network topology and read current hwtstamp configuration.
+Hi Morimoto-san,
+
+> I still wondering why dpcm_xxx flag itself is needed.
+
+That's an excellent question indeed. And since you started a historical
+review, we can get a lot of information.
+
+> (A) Before, it checks channels_min for DPCM, same as current non-DPCM.
+> This is very clear for me. Let's name this as "validation check"
 > 
-> Introduce support for ETHTOOL_MSG_TSINFO_SET ethtool netlink socket to
-> configure hwtstamp of a PHC provider. Note that simultaneous hwtstamp
-> isn't supported; configuring a new one disables the previous setting.
+> 	if (rtd->dai_link->dynamic || rtd->dai_link->no_pcm) {
+> 		if (cpu_dai->driver->playback.channels_min)
+> 			playback = 1;
+> 		if (cpu_dai->driver->capture.channels_min)
+> 			capture = 1;
 > 
-> Also, add support for a specific dump command to retrieve all hwtstamp
-> providers within the network topology, with added functionality for
-> filtered dump to target a single interface.
+> (B) commit 1e9de42f4324b91ce2e9da0939cab8fc6ae93893
+> ("Explicitly set BE DAI link supported stream directions") force use to
+> dpcm_xxx flag
 > 
-> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+> 	if (rtd->dai_link->dynamic || rtd->dai_link->no_pcm) {
+> 		playback = rtd->dai_link->dpcm_playback;
+> 		capture = rtd->dai_link->dpcm_capture;
 
-Hi Kory,
+The reason for this (B) addition is very clear from the commit message
 
-Some minor feedback from my side.
+"
+Some BE DAIs can be "dummy" (when the DSP is controlling the DAI) and as
+such wont have set a minimum number of playback or capture channels
+required for BE DAI registration (to establish supported stream directions).
+"
 
-> diff --git a/include/linux/ptp_clock_kernel.h b/include/linux/ptp_clock_kernel.h
-> index 23b43f59fcfb..f901394507b3 100644
-> --- a/include/linux/ptp_clock_kernel.h
-> +++ b/include/linux/ptp_clock_kernel.h
-> @@ -426,6 +426,43 @@ struct ptp_clock *ptp_clock_get_by_index(struct device *dev, int index);
->  
->  void ptp_clock_put(struct device *dev, struct ptp_clock *ptp);
->  
-> +/**
-> + * netdev_ptp_clock_find() - obtain the next PTP clock in the netdev
-> + *			     topology
-> + *
-> + * @dev:    Pointer of the net device
-> + * @indexp:  Pointer of ptp clock index start point
-> + */
+So (B) introduced these dpcm_xxx flags as override mechanisms, where the
+dailink information matters more than the dai information.
 
-Recently -Wall was added to the kernel CI ./scripts/kernel-doc -none
-test, which means that Kernel docs are now expected to
-document return values. It would be nice to add them for new
-code.
+> (C) 9b5db059366ae2087e07892b5fc108f81f4ec189
+> ("ASoC: soc-pcm: dpcm: Only allow playback/capture if supported")
+> checks channels_min (= validation check) again
+> 
+> 	if (rtd->dai_link->dynamic || rtd->dai_link->no_pcm) {
+> 		cpu_dai = asoc_rtd_to_cpu(rtd, 0);
+> 		...
+> 		playback = rtd->dai_link->dpcm_playback &&
+> 			snd_soc_dai_stream_valid(cpu_dai, SNDRV_PCM_STREAM_PLAYBACK);
+> 		capture = rtd->dai_link->dpcm_capture &&
+> 			snd_soc_dai_stream_valid(cpu_dai, SNDRV_PCM_STREAM_CAPTURE);
 
-> +
-> +struct ptp_clock *netdev_ptp_clock_find(struct net_device *dev,
-> +					unsigned long *indexp);
+It helps to look at the commit message in detail:
 
-...
+"
+Normally the dpcm_playback/capture parameter should match the
+capabilities of the CPU DAI. However, there is no way to set that
+parameter from the device tree (e.g. with simple-audio-card or
+qcom sound cards). dpcm_playback/capture are always both set to 1.
+"
 
-> diff --git a/net/ethtool/tsinfo.c b/net/ethtool/tsinfo.c
+This is where the direction changed from "dpcm_xxx" being override of
+DAI capabilities to "dpcm_xxx" being required to match DAI capabilities,
+because some machine drivers incorrectly did an override that made no
+sense...
 
-...
+(C) is essentially (A) && (B)
 
-> -const struct nla_policy ethnl_tsinfo_get_policy[] = {
-> +const struct nla_policy
-> +ethnl_tsinfo_hwtstamp_provider_policy[ETHTOOL_A_TSINFO_HWTSTAMP_PROVIDER_MAX + 1] = {
+Clearly there's a contradiction. If (C) was the correct solution, then
+it would revert the direction in (A) and report an error for dummy dais.
 
-ethnl_tsinfo_hwtstamp_provider_policy seems to only be used in this file,
-so it should be static.
+It's been my question from the beginning of this thread, when the
+direction information can come from 2 sources, which one do we trust?
 
-> +	[ETHTOOL_A_TSINFO_HWTSTAMP_PROVIDER_INDEX] =
-> +		NLA_POLICY_MIN(NLA_S32, 0),
-> +	[ETHTOOL_A_TSINFO_HWTSTAMP_PROVIDER_QUALIFIER] =
-> +		NLA_POLICY_MAX(NLA_U32, HWTSTAMP_PROVIDER_QUALIFIER_CNT - 1)
-> +};
-> +
-> +const struct nla_policy ethnl_tsinfo_get_policy[ETHTOOL_A_TSINFO_MAX + 1] = {
->  	[ETHTOOL_A_TSINFO_HEADER]		=
->  		NLA_POLICY_NESTED(ethnl_header_policy_stats),
-> +	[ETHTOOL_A_TSINFO_GHWTSTAMP] =
-> +		NLA_POLICY_MAX(NLA_U8, 1),
-> +	[ETHTOOL_A_TSINFO_HWTSTAMP_PROVIDER_NEST] =
-> +		NLA_POLICY_NESTED(ethnl_tsinfo_hwtstamp_provider_policy),
->  };
+> (D) b73287f0b0745961b14e5ebcce92cc8ed24d4d52
+> ("ASoC: soc-pcm: dpcm: fix playback/capture checks") expanded it to
+> multi connection.
 
-...
+You really want to look at
 
-> +static int ethnl_tsinfo_dump_one_ptp(struct sk_buff *skb, struct net_device *dev,
-> +				     struct netlink_callback *cb,
-> +				     struct ptp_clock *ptp)
-> +{
-> +	struct ethnl_tsinfo_dump_ctx *ctx = (void *)cb->ctx;
-> +	struct tsinfo_reply_data *reply_data;
-> +	struct tsinfo_req_info *req_info;
-> +	void *ehdr;
-> +	int ret;
-> +
-> +	reply_data = ctx->reply_data;
-> +	req_info = ctx->req_info;
-> +	req_info->hwtst.index = ptp_clock_index(ptp);
-> +
-> +	for (; ctx->pos_phcqualifier < HWTSTAMP_PROVIDER_QUALIFIER_CNT;
-> +	     ctx->pos_phcqualifier++) {
-> +		if (!netdev_support_hwtstamp_qualifier(dev,
-> +						       ctx->pos_phcqualifier))
-> +			continue;
-> +
-> +		ehdr = ethnl_dump_put(skb, cb,
-> +				      ETHTOOL_MSG_TSINFO_GET_REPLY);
-> +		if (!ehdr)
-> +			return -EMSGSIZE;
-> +
-> +		memset(reply_data, 0, sizeof(*reply_data));
-> +		reply_data->base.dev = dev;
-> +		req_info->hwtst.qualifier = ctx->pos_phcqualifier;
-> +		ret = tsinfo_prepare_data(&req_info->base,
-> +					  &reply_data->base,
-> +					  genl_info_dump(cb));
-> +		if (ret < 0)
-> +			break;
-> +
-> +		ret = ethnl_fill_reply_header(skb, dev,
-> +					      ETHTOOL_A_TSINFO_HEADER);
-> +		if (ret < 0)
-> +			break;
-> +
-> +		ret = tsinfo_fill_reply(skb, &req_info->base,
-> +					&reply_data->base);
-> +		if (ret < 0)
-> +			break;
-> +	}
-> +
-> +	reply_data->base.dev = NULL;
-> +	if (ret < 0)
-> +		genlmsg_cancel(skb, ehdr);
-> +	else
-> +		genlmsg_end(skb, ehdr);
+(E) 4f8721542f7b75954bfad98c51aa59d683d35b50
+("ASoC: core: use less strict tests for dailink capabilities")
 
-I suppose it can't occur, but if the for loop iterates zero times,
-then ret and ehdr will be uninitialised here.
+"
+This patch modifies the snd_soc_dai_link_set_capabilities() helper so
+that the dpcm_playback (resp. dpcm_capture) dailink capabilities are set
+if at least one dai supports playback (resp. capture).
 
-Flagged by Smatch.
+Likewise the checks are modified so that an error is reported only
+when dpcm_playback (resp. dpcm_capture) is set but none of the CPU
+DAIs support playback (resp. capture).
+"
 
-> +	return ret;
-> +}
+This one has not fundamentally changed the reasons why (C) was
+introduced, the requirement is that dpcm_xxx be aligned with at least
+ONE DAI capability. It's still not clear how dummy-dais would be handled
+since the number of channels may or may not be set for those dummy-dais.
 
-...
+> So, I would say nothing has changed, but become more complicated.
+
+It's not really become more complicated, the open is which of (B) or (C)
+are correct.
+
+> Or if (B) added dpcm_xxx as "option flag", it was understandable for me.
+> like this
+> 
+> 	if (rtd->dai_link->dynamic || rtd->dai_link->no_pcm) {
+> 		playback = (cpu_dai->driver->playback.channels_min > 0) ||
+> 			   rtd->dai_link->dpcm_playback;
+> 		capture  = (cpu_dai->driver->capture.channels_min  > 0) ||
+> 			   rtd->dai_link->dpcm_capture;
+
+That would essentially revert (C), since the direction would ignore the
+actual capabilities of the DAI.
+
+IMHO, we should really try with this revert and go back to the initial
+definition of (A), where dpcm_xxx is an optional escape mechanism to
+allow machine drivers to set the direction. I would guess that would
+impact mostly DT/simple-card users and Qualcomm, if the commit message
+of (C) is still relevant.
+
+Then we can discuss about merging code and removing flags. For now we
+have different directions/opinions on something that's 10 years old,
+last modified 4 years ago. We will break lots of eggs if we don't first
+agree on what works and what doesn't.
+
+This 23-patch code merge/simplification is premature at this point IMHO,
+we should first land in a state where everyone is happy with how
+dpcm_xxx flags need to be handled. We can merge dpcm_xxx and xxx_only
+flags later when we understand what they are supposed to do...
+
+And now I need a coffee refill :-)
+
+Regards,
+-Pierre
 
