@@ -1,368 +1,136 @@
-Return-Path: <linux-doc+bounces-14999-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-15000-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id A480F8B0CBD
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 16:39:19 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id A45168B0D36
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 16:52:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3192D1F216A6
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 14:39:19 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6000A28478D
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 14:52:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A7A0915ECDE;
-	Wed, 24 Apr 2024 14:37:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AC05215F40A;
+	Wed, 24 Apr 2024 14:52:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BPUDLJT3"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="otlWOyP+"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C5D8160885;
-	Wed, 24 Apr 2024 14:37:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 760BE15EFB5;
+	Wed, 24 Apr 2024 14:52:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1713969443; cv=none; b=CLWVj/A5RLL0VwZAV/95wfhOcgJgFb202YjkIDDM0TlvMmPdwJN0BjUGUaN2Qtgz9yOsq4paIBHzITq6HwvvL/pynXg0r0i6cuhfxMQa8j1Z1TWJKOUrpuYM3vAka58g9NS+9RNfkbHec+uUzKnRYbCLtCG3xxBjTDHI/CnMSb8=
+	t=1713970321; cv=none; b=RXMBI8p4Ezzz2oxEgXPTDbMDwPPSekb6j/maHc5ecnwgtclLd/TWYFvRXv89x4LXAywkRBzXsBF1oNo31xnY2t4zWEDuF7k30uTkxE83U9R5t7UEnqkowlOrMBB1dSwLttAfzxjqSgiNTz3XCeoS86FJo6sChRlEICQkfLPidLY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1713969443; c=relaxed/simple;
-	bh=PW/mKN9SsKQYfJubvo/JIUYxbAIyYneBGNWi3qCcTow=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=EwDGnFp0+MzuTB5jdvqPJkW5BHi8LjcxGIBTapNWhfJH8HVP/0gDmCM4T0SC8pNGI4zfxFMcK0wEOj5z4VAFnbOOJYhuzI/B6gb3mvSJphNDgZ8TuqXFbgJSXP8smQmV2CYjEXJXzn998wLGrsEZRD6apkLuUgHJS2D37aD8TyM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BPUDLJT3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9CBF6C2BBFC;
-	Wed, 24 Apr 2024 14:37:21 +0000 (UTC)
+	s=arc-20240116; t=1713970321; c=relaxed/simple;
+	bh=xPav91uI1ZNG9OJ6vetVcvDnMQMHSyXYAwBYPIfWJAY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ws3b4USsO36b7fAOEaymwozxMn7f9kfcjltrqCpuemefG7hXud47ecwLj256cgi72boCkUNwaiL298xeKZsYodwCATG9/Z+bWhS/IHA2BBTz2iFK5oIcEncM2/HKJDjnGr47CPzU332WfnSxptNoQ7YVZbhWNORSthABHUmbzQw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=otlWOyP+; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4CCF5C2BD10;
+	Wed, 24 Apr 2024 14:51:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1713969443;
-	bh=PW/mKN9SsKQYfJubvo/JIUYxbAIyYneBGNWi3qCcTow=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=BPUDLJT38CANyl6uS+s1jGahVWM31z9fmKVu4lCJCA+sF8M1qXGO9ur8w+zLEaIAa
-	 i4yIULeptP3FJfyp73jx7z9ysSWOSLdETgP90wMLtdZodb0jrcWwxFgH34qKu1hpy9
-	 idvKtJ9XUFM7CR1qaaukFi/U/P+23VsrrZqk2dWw+sKZxXnzLrXCqdJ2C5Sb14B/Fu
-	 ZUCA0ND/2hPdTkKb64ZzRBhnwrIeX2Bf0fkp0c8yw3ucvMd0YWm8Zw8NL+EMLRXqbk
-	 hlcfJOWgUmjQOoRwDmW9PVe2fqxAY8yhB9GD5GxHuw9dDfPs0S2a+zk8DbkAOTJ/FP
-	 R2sZda5Kiwv5w==
-From: Daniel Bristot de Oliveira <bristot@kernel.org>
-To: Daniel Bristot de Oliveira <bristot@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	linux-trace-kernel@vger.kernel.org
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Juri Lelli <juri.lelli@redhat.com>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 8/8] rtla: Add --trace-buffer-size option
-Date: Wed, 24 Apr 2024 16:36:57 +0200
-Message-ID: <0281bfbd3b3fed11a0150a8645a1f9941a423c7a.1713968967.git.bristot@kernel.org>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <cover.1713968967.git.bristot@kernel.org>
-References: <cover.1713968967.git.bristot@kernel.org>
+	s=k20201202; t=1713970321;
+	bh=xPav91uI1ZNG9OJ6vetVcvDnMQMHSyXYAwBYPIfWJAY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=otlWOyP+tAKLOQY2jJz85UVBDjxfaJSShJb8fCwhde1QoWBVcXV9L8kOXZ7YiktDq
+	 CRFb4dulN7XW95JUfM340CSKNKybZ2dJ/b22SsZmQHhpqofEEHEXAqU2wibXzCVcS4
+	 HMfrS42NqBU81/dRPTkCtrvTtS8gTilQE5Db4nHV+I76fiYJBhDWN3DjU9kCwIeHh6
+	 4jJBSNhlOmgAMqensikb4v8l+gbU3+tw7ozUQMwFHWkUnxOIf1FA6OpSCkGWp9J4rL
+	 qB5hmqfwunYdSCmCdXGDOuwRopsL05J5I6EI7VnQPgdbplKA3I0ae1TvQI8BIOQKJG
+	 eF4loR+GluPmg==
+Date: Wed, 24 Apr 2024 15:51:54 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Alexandre Ghiti <alex@ghiti.fr>
+Cc: Charlie Jenkins <charlie@rivosinc.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>, Guo Ren <guoren@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Samuel Holland <samuel@sholland.org>,
+	Conor Dooley <conor.dooley@microchip.com>,
+	Evan Green <evan@rivosinc.com>,
+	=?iso-8859-1?Q?Cl=E9ment_L=E9ger?= <cleger@rivosinc.com>,
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
+	linux-riscv@lists.infradead.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, Palmer Dabbelt <palmer@rivosinc.com>,
+	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev,
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH v3 06/17] riscv: Fix extension subset checking
+Message-ID: <20240424-wildly-goofy-c81aac6f8cd7@spud>
+References: <20240420-dev-charlie-support_thead_vector_6_9-v3-0-67cff4271d1d@rivosinc.com>
+ <20240420-dev-charlie-support_thead_vector_6_9-v3-6-67cff4271d1d@rivosinc.com>
+ <6c624361-a968-498b-a9fb-ea2aaec70ce8@ghiti.fr>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="ISCd5ZrJR7K6TsSY"
+Content-Disposition: inline
+In-Reply-To: <6c624361-a968-498b-a9fb-ea2aaec70ce8@ghiti.fr>
 
-Add the option allow the users to set a different buffer size for the
-trace. For example, in large systems, the user might be interested on
-reducing the trace buffer to avoid large tracing files.
 
-The buffer size is specified in kB, and it is only affecting
-the tracing instance.
+--ISCd5ZrJR7K6TsSY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Daniel Bristot de Oliveira <bristot@kernel.org>
----
- Documentation/tools/rtla/common_options.rst |  3 +++
- tools/tracing/rtla/src/osnoise_hist.c       | 13 ++++++++++++-
- tools/tracing/rtla/src/osnoise_top.c        | 14 +++++++++++++-
- tools/tracing/rtla/src/timerlat_hist.c      | 14 +++++++++++++-
- tools/tracing/rtla/src/timerlat_top.c       | 14 +++++++++++++-
- tools/tracing/rtla/src/trace.c              | 15 +++++++++++++++
- tools/tracing/rtla/src/trace.h              |  1 +
- 7 files changed, 70 insertions(+), 4 deletions(-)
+On Wed, Apr 24, 2024 at 04:22:02PM +0200, Alexandre Ghiti wrote:
+> Hi Charlie,
+>=20
+> On 21/04/2024 03:04, Charlie Jenkins wrote:
+> > This loop is supposed to check if ext->subset_ext_ids[j] is valid, rath=
+er
+> > than if ext->subset_ext_ids[i] is valid, before setting the extension
+> > id ext->subset_ext_ids[j] in isainfo->isa.
+> >=20
+> > Signed-off-by: Charlie Jenkins <charlie@rivosinc.com>
+> > Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
+> > Fixes: 0d8295ed975b ("riscv: add ISA extension parsing for scalar crypt=
+o")
+> > ---
+> >   arch/riscv/kernel/cpufeature.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/arch/riscv/kernel/cpufeature.c b/arch/riscv/kernel/cpufeat=
+ure.c
+> > index 48874aac4871..b537731cadef 100644
+> > --- a/arch/riscv/kernel/cpufeature.c
+> > +++ b/arch/riscv/kernel/cpufeature.c
+> > @@ -609,7 +609,7 @@ static int __init riscv_fill_hwcap_from_ext_list(un=
+signed long *isa2hwcap)
+> >   			if (ext->subset_ext_size) {
+> >   				for (int j =3D 0; j < ext->subset_ext_size; j++) {
+> > -					if (riscv_isa_extension_check(ext->subset_ext_ids[i]))
+> > +					if (riscv_isa_extension_check(ext->subset_ext_ids[j]))
+> >   						set_bit(ext->subset_ext_ids[j], isainfo->isa);
+> >   				}
+> >   			}
+> >=20
+>=20
+> I think this should go into -fixes, let's check with Palmer if he wants to
+> take this patch only or if you should send the patch on its own.
 
-diff --git a/Documentation/tools/rtla/common_options.rst b/Documentation/tools/rtla/common_options.rst
-index a96ea0ed662e..7ac7b7581466 100644
---- a/Documentation/tools/rtla/common_options.rst
-+++ b/Documentation/tools/rtla/common_options.rst
-@@ -54,6 +54,9 @@
- 
-         After starting the workload, let it run for *s* seconds before starting collecting the data, allowing the system to warm-up. Statistical data generated during warm-up is discarded.
- 
-+**--trace-buffer-size** *kB*
-+        Set the per-cpu trace buffer size in kB for the tracing output.
-+
- **-h**, **--help**
- 
-         Print help menu.
-diff --git a/tools/tracing/rtla/src/osnoise_hist.c b/tools/tracing/rtla/src/osnoise_hist.c
-index c6100ff46a7f..198a17a3ea2e 100644
---- a/tools/tracing/rtla/src/osnoise_hist.c
-+++ b/tools/tracing/rtla/src/osnoise_hist.c
-@@ -43,6 +43,7 @@ struct osnoise_hist_params {
- 	int			bucket_size;
- 	int			entries;
- 	int			warmup;
-+	int			buffer_size;
- };
- 
- struct osnoise_hist_cpu {
-@@ -469,6 +470,7 @@ static void osnoise_hist_usage(char *usage)
- 		"		d:runtime[us|ms|s]:period[us|ms|s] - use SCHED_DEADLINE with runtime and period",
- 		"						       in nanoseconds",
- 		"	     --warm-up: let the workload run for s seconds before collecting data",
-+		"	     --trace-buffer-size kB: set the per-cpu trace buffer size in kB",
- 		NULL,
- 	};
- 
-@@ -533,13 +535,14 @@ static struct osnoise_hist_params
- 			{"trigger",		required_argument,	0, '4'},
- 			{"filter",		required_argument,	0, '5'},
- 			{"warm-up",		required_argument,	0, '6'},
-+			{"trace-buffer-size",	required_argument,	0, '7'},
- 			{0, 0, 0, 0}
- 		};
- 
- 		/* getopt_long stores the option index here. */
- 		int option_index = 0;
- 
--		c = getopt_long(argc, argv, "a:c:C::b:d:e:E:DhH:p:P:r:s:S:t::T:01234:5:6:",
-+		c = getopt_long(argc, argv, "a:c:C::b:d:e:E:DhH:p:P:r:s:S:t::T:01234:5:6:7:",
- 				 long_options, &option_index);
- 
- 		/* detect the end of the options. */
-@@ -685,6 +688,9 @@ static struct osnoise_hist_params
- 		case '6':
- 			params->warmup = get_llong_from_str(optarg);
- 			break;
-+		case '7':
-+			params->buffer_size = get_llong_from_str(optarg);
-+			break;
- 		default:
- 			osnoise_hist_usage("Invalid option");
- 		}
-@@ -891,6 +897,11 @@ int osnoise_hist_main(int argc, char *argv[])
- 				goto out_hist;
- 		}
- 
-+		if (params->buffer_size > 0) {
-+			retval = trace_set_buffer_size(&record->trace, params->buffer_size);
-+			if (retval)
-+				goto out_hist;
-+		}
- 	}
- 
- 	/*
-diff --git a/tools/tracing/rtla/src/osnoise_top.c b/tools/tracing/rtla/src/osnoise_top.c
-index 53a074c1222e..7e5aab22727d 100644
---- a/tools/tracing/rtla/src/osnoise_top.c
-+++ b/tools/tracing/rtla/src/osnoise_top.c
-@@ -41,6 +41,7 @@ struct osnoise_top_params {
- 	int			cgroup;
- 	int			hk_cpus;
- 	int			warmup;
-+	int			buffer_size;
- 	cpu_set_t		hk_cpu_set;
- 	struct sched_attr	sched_param;
- 	struct trace_events	*events;
-@@ -309,6 +310,7 @@ static void osnoise_top_usage(struct osnoise_top_params *params, char *usage)
- 		"		d:runtime[us|ms|s]:period[us|ms|s] - use SCHED_DEADLINE with runtime and period",
- 		"						       in nanoseconds",
- 		"	     --warm-up s: let the workload run for s seconds before collecting data",
-+		"	     --trace-buffer-size kB: set the per-cpu trace buffer size in kB",
- 		NULL,
- 	};
- 
-@@ -384,13 +386,14 @@ struct osnoise_top_params *osnoise_top_parse_args(int argc, char **argv)
- 			{"trigger",		required_argument,	0, '0'},
- 			{"filter",		required_argument,	0, '1'},
- 			{"warm-up",		required_argument,	0, '2'},
-+			{"trace-buffer-size",	required_argument,	0, '3'},
- 			{0, 0, 0, 0}
- 		};
- 
- 		/* getopt_long stores the option index here. */
- 		int option_index = 0;
- 
--		c = getopt_long(argc, argv, "a:c:C::d:De:hH:p:P:qr:s:S:t::T:0:1:2:",
-+		c = getopt_long(argc, argv, "a:c:C::d:De:hH:p:P:qr:s:S:t::T:0:1:2:3:",
- 				 long_options, &option_index);
- 
- 		/* Detect the end of the options. */
-@@ -517,6 +520,9 @@ struct osnoise_top_params *osnoise_top_parse_args(int argc, char **argv)
- 		case '2':
- 			params->warmup = get_llong_from_str(optarg);
- 			break;
-+		case '3':
-+			params->buffer_size = get_llong_from_str(optarg);
-+			break;
- 		default:
- 			osnoise_top_usage(params, "Invalid option");
- 		}
-@@ -725,6 +731,12 @@ int osnoise_top_main(int argc, char **argv)
- 			if (retval)
- 				goto out_top;
- 		}
-+
-+		if (params->buffer_size > 0) {
-+			retval = trace_set_buffer_size(&record->trace, params->buffer_size);
-+			if (retval)
-+				goto out_top;
-+		}
- 	}
- 
- 	/*
-diff --git a/tools/tracing/rtla/src/timerlat_hist.c b/tools/tracing/rtla/src/timerlat_hist.c
-index 6eb6e38d4a05..d4bab86ca1b9 100644
---- a/tools/tracing/rtla/src/timerlat_hist.c
-+++ b/tools/tracing/rtla/src/timerlat_hist.c
-@@ -54,6 +54,7 @@ struct timerlat_hist_params {
- 	int			bucket_size;
- 	int			entries;
- 	int			warmup;
-+	int			buffer_size;
- };
- 
- struct timerlat_hist_cpu {
-@@ -669,6 +670,7 @@ static void timerlat_hist_usage(char *usage)
- 		"	  -k/--kernel-threads: use timerlat kernel-space threads instead of rtla user-space threads",
- 		"	  -U/--user-load: enable timerlat for user-defined user-space workload",
- 		"	     --warm-up s: let the workload run for s seconds before collecting data",
-+		"	     --trace-buffer-size kB: set the per-cpu trace buffer size in kB",
- 		NULL,
- 	};
- 
-@@ -745,13 +747,14 @@ static struct timerlat_hist_params
- 			{"no-aa",		no_argument,		0, '9'},
- 			{"dump-task",		no_argument,		0, '\1'},
- 			{"warm-up",		required_argument,	0, '\2'},
-+			{"trace-buffer-size",	required_argument,	0, '\3'},
- 			{0, 0, 0, 0}
- 		};
- 
- 		/* getopt_long stores the option index here. */
- 		int option_index = 0;
- 
--		c = getopt_long(argc, argv, "a:c:C::b:d:e:E:DhH:i:knp:P:s:t::T:uU0123456:7:8:9\1\2:",
-+		c = getopt_long(argc, argv, "a:c:C::b:d:e:E:DhH:i:knp:P:s:t::T:uU0123456:7:8:9\1\2:\3",
- 				 long_options, &option_index);
- 
- 		/* detect the end of the options. */
-@@ -926,6 +929,9 @@ static struct timerlat_hist_params
- 		case '\2':
- 			params->warmup = get_llong_from_str(optarg);
- 			break;
-+		case '\3':
-+			params->buffer_size = get_llong_from_str(optarg);
-+			break;
- 		default:
- 			timerlat_hist_usage("Invalid option");
- 		}
-@@ -1179,6 +1185,12 @@ int timerlat_hist_main(int argc, char *argv[])
- 			if (retval)
- 				goto out_hist;
- 		}
-+
-+		if (params->buffer_size > 0) {
-+			retval = trace_set_buffer_size(&record->trace, params->buffer_size);
-+			if (retval)
-+				goto out_hist;
-+		}
- 	}
- 
- 	if (!params->no_aa) {
-diff --git a/tools/tracing/rtla/src/timerlat_top.c b/tools/tracing/rtla/src/timerlat_top.c
-index 0acfefe151f7..3a23e8d481c6 100644
---- a/tools/tracing/rtla/src/timerlat_top.c
-+++ b/tools/tracing/rtla/src/timerlat_top.c
-@@ -47,6 +47,7 @@ struct timerlat_top_params {
- 	int			kernel_workload;
- 	int			pretty_output;
- 	int			warmup;
-+	int			buffer_size;
- 	cpu_set_t		hk_cpu_set;
- 	struct sched_attr	sched_param;
- 	struct trace_events	*events;
-@@ -479,6 +480,7 @@ static void timerlat_top_usage(char *usage)
- 		"	  -k/--kernel-threads: use timerlat kernel-space threads instead of rtla user-space threads",
- 		"	  -U/--user-load: enable timerlat for user-defined user-space workload",
- 		"	     --warm-up s: let the workload run for s seconds before collecting data",
-+		"	     --trace-buffer-size kB: set the per-cpu trace buffer size in kB",
- 		NULL,
- 	};
- 
-@@ -547,13 +549,14 @@ static struct timerlat_top_params
- 			{"dump-tasks",		no_argument,		0, '4'},
- 			{"aa-only",		required_argument,	0, '5'},
- 			{"warm-up",		required_argument,	0, '6'},
-+			{"trace-buffer-size",	required_argument,	0, '7'},
- 			{0, 0, 0, 0}
- 		};
- 
- 		/* getopt_long stores the option index here. */
- 		int option_index = 0;
- 
--		c = getopt_long(argc, argv, "a:c:C::d:De:hH:i:knp:P:qs:t::T:uU0:1:2:345:6:",
-+		c = getopt_long(argc, argv, "a:c:C::d:De:hH:i:knp:P:qs:t::T:uU0:1:2:345:6:7:",
- 				 long_options, &option_index);
- 
- 		/* detect the end of the options. */
-@@ -716,6 +719,9 @@ static struct timerlat_top_params
- 		case '6':
- 			params->warmup = get_llong_from_str(optarg);
- 			break;
-+		case '7':
-+			params->buffer_size = get_llong_from_str(optarg);
-+			break;
- 		default:
- 			timerlat_top_usage("Invalid option");
- 		}
-@@ -973,6 +979,12 @@ int timerlat_top_main(int argc, char *argv[])
- 			if (retval)
- 				goto out_top;
- 		}
-+
-+		if (params->buffer_size > 0) {
-+			retval = trace_set_buffer_size(&record->trace, params->buffer_size);
-+			if (retval)
-+				goto out_top;
-+		}
- 	}
- 
- 	if (!params->no_aa) {
-diff --git a/tools/tracing/rtla/src/trace.c b/tools/tracing/rtla/src/trace.c
-index e1ba6d9f4265..170a706248ab 100644
---- a/tools/tracing/rtla/src/trace.c
-+++ b/tools/tracing/rtla/src/trace.c
-@@ -540,3 +540,18 @@ int trace_is_off(struct trace_instance *tool, struct trace_instance *trace)
- 
- 	return 0;
- }
-+
-+/*
-+ * trace_set_buffer_size - set the per-cpu tracing buffer size.
-+ */
-+int trace_set_buffer_size(struct trace_instance *trace, int size)
-+{
-+	int retval;
-+
-+	debug_msg("Setting trace buffer size to %d Kb\n", size);
-+	retval = tracefs_instance_set_buffer_size(trace->inst, size, -1);
-+	if (retval)
-+		err_msg("Error setting trace buffer size\n");
-+
-+	return retval;
-+}
-diff --git a/tools/tracing/rtla/src/trace.h b/tools/tracing/rtla/src/trace.h
-index 2e9a89a25615..c7c92dc9a18a 100644
---- a/tools/tracing/rtla/src/trace.h
-+++ b/tools/tracing/rtla/src/trace.h
-@@ -48,3 +48,4 @@ int trace_events_enable(struct trace_instance *instance,
- int trace_event_add_filter(struct trace_events *event, char *filter);
- int trace_event_add_trigger(struct trace_events *event, char *trigger);
- int trace_is_off(struct trace_instance *tool, struct trace_instance *trace);
-+int trace_set_buffer_size(struct trace_instance *trace, int size);
--- 
-2.44.0
+I think splitting out this and patch 1 into a new series targeting fixes
+would probably make things clearer?
 
+--ISCd5ZrJR7K6TsSY
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZikcigAKCRB4tDGHoIJi
+0lY6AP9fxMZ4oOWAWRpbaYHs+Q77SeZ+QaOXEZh098c2I789WAEAmdgrmjjeEcJ4
+b2LKa6uCXOLW9VEFR/QJlfNVN9MYwgU=
+=Z23p
+-----END PGP SIGNATURE-----
+
+--ISCd5ZrJR7K6TsSY--
 
