@@ -1,236 +1,102 @@
-Return-Path: <linux-doc+bounces-14961-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-14963-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41C288B0633
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 11:40:21 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 69E678B0644
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 11:42:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id AAAD81F227D6
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 09:40:20 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1C3D31F23C59
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 09:42:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0B630158DB7;
-	Wed, 24 Apr 2024 09:40:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4BD20158D9B;
+	Wed, 24 Apr 2024 09:42:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="fu32h64z"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Qk85HtE1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88194158D74
-	for <linux-doc@vger.kernel.org>; Wed, 24 Apr 2024 09:40:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9E12158A29;
+	Wed, 24 Apr 2024 09:42:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1713951614; cv=none; b=modRyMpBNMtv5UqYIBOTYdsd3Vt+tHVI1OdX9YHF4fgEOipHt2u5I852K0cucFlrf8FGWBoRU04h91waGBlwvNU1fJIYfJa1UmxUz5LkN8w2+nwyOhOBxOaZEYetap+DpLk8EsuqNo/93HcziffVt/oJta6LezzMYKDXECgqKCY=
+	t=1713951747; cv=none; b=mk3T5/4urcqriOfEc/Tnn+FtU51Tl4ssoXz2/C47eWKp4HICq3Jf2UVFbYntALM3uAYjavuWq41wARAA/mvFZYWSNPZb7NMnIimxEIgKZ+y0zI+H/sSYjTIk8N1qis5mHYhxBZt7od648OL97OF9+rcZFbnY0Jc2PZHb8lwgvGM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1713951614; c=relaxed/simple;
-	bh=kxAE2HnK94Uoex6jrFCYsczG+PKC6z/6jWCCSXTIVRg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=HYEvf9ZvI9s5QlnGqsU3jsF9GGHvhmM/irWq/WIZv1UJ99C8lC8wHAkx+GichdQ3hkkpwcNkO71EE/HzpwduL+s4L22veSbktvZKv/QqosMVjwtI4ZRS5gCNN+SLZ9OU7BKvuICaIz+nNc8+osRKmOMVv9ZDb3pDRPHdCbshqVo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=fu32h64z; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1713951612;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=v7ZQm+KUdgib6tZRCwHfwUKJzpflYwxr8pEgfV1EGsA=;
-	b=fu32h64zw50I69hhIVPI1Eb/9bB3pLFhTQfsMvDuypyOsbmWQIfVnWBvPcwtcxxoUyEi5G
-	BEri7xbAaP5BmrBTMEpRd05vFND7rnUzDyWLFDYriaMPCMCCvheQwOHbi6vh4R2s+umOQB
-	V//4/AgXWB8PInYVW4UOFNCPo7nroPM=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-133-93EjYxEOM-WLAhlodJcZ7g-1; Wed, 24 Apr 2024 05:40:11 -0400
-X-MC-Unique: 93EjYxEOM-WLAhlodJcZ7g-1
-Received: by mail-wr1-f70.google.com with SMTP id ffacd0b85a97d-349cafdc8f0so3999152f8f.1
-        for <linux-doc@vger.kernel.org>; Wed, 24 Apr 2024 02:40:10 -0700 (PDT)
+	s=arc-20240116; t=1713951747; c=relaxed/simple;
+	bh=pdUM2PQ6lmcQ67mgawtuU1EkP4dhP3YHKQUjHS9V2qA=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=q29T0DFnwUKO+moiOpt+S/kQXmdtZ8mF8q03tNyGYxoF67yZrRr1AALGiOJASLfyqMaIONJfDLtgrVg04BADgNSi7zBFjC+azTl4kxHmQlIBqg7F0HE3OICa2JUSM1SjVAgNW5YiT0uFUh/GxRuANFr2Ds6NddE8km1GWmIG4Pg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Qk85HtE1; arc=none smtp.client-ip=209.85.221.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-34b66f0500aso1665261f8f.3;
+        Wed, 24 Apr 2024 02:42:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1713951743; x=1714556543; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=OZ1WcXyOys5YIDWCRIW5mC14e4vDyGa7xvoVt1+JFn8=;
+        b=Qk85HtE1yOgELGZfTIz9Hsze9GS5tcnwo9WATyy4F7pqxNfj8GaHjrCLirKkzz/hKw
+         G3lDsJEekhVc016LGr3xykDoEptG0sUlpgTPYz7BcAObG4J3GoSiDkBvsy6ZtsiZxS8b
+         HMsnK+kRJoF91a+AFZmDsJh50HgfiXbAGEswJ0GZd1ovkPzZNOn7foH9wD8r0wHeMx6M
+         w86dHhY2PbS5w70lZxW0oobQ3OD9AQ/uT+EW+abQVKHfrMLR3n8X7kfE9vbBfCOBRfmW
+         B+6bbgiR/XxHtRKJgMX7YGOqXH5iqRPLjAumtzVS91Tpu3L2STrSPJDwBebuuM45FKnZ
+         ONEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713951610; x=1714556410;
-        h=content-transfer-encoding:in-reply-to:organization:autocrypt
-         :content-language:from:references:cc:to:subject:user-agent
-         :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=v7ZQm+KUdgib6tZRCwHfwUKJzpflYwxr8pEgfV1EGsA=;
-        b=ZOSeHNNQk6emk4ctVckYyAKZGjAEfeeFJ9V6w7kxEdJdfxDZ4jtQuiVzk380At9Xj8
-         MPxt5/nkQ9UMxER2bN2Mz+xxCHGS//MAR2GecXNVCoVrvC5PeWWjuKBVTmEcg6V2lRae
-         W8m3MYmNx00FcSk19j9Z5qhcG6bCdDryJAVJpP809csbo2ZBlDFX16sD+HouFUs+0sKk
-         SKYBZOno/U/lbO7jjuGCmB7XoLd5vnxDmmBU+fQDPAPLyFmuNdk7MsdcHEvenaW+xAkJ
-         y1sF/p7f/BrVC88FMCYJos2O5TVhvJdAvRz0VuvVl8tkWjbdrZrQwcp9u90e4XzzvuZA
-         fipg==
-X-Forwarded-Encrypted: i=1; AJvYcCUImyk6oNJj56Qj3+N0aKgbL6Z3Uc5fC+4YBpG05vrLlPGgi8w0qdnZWlcoETSx0ebYRmh9Bb8FMYLjZNnell7Thu6ErbPMNQrX
-X-Gm-Message-State: AOJu0Yzj6gyBlhRywhkWvq1PMlVQPLM7I3aNmuUBiLKZT0/zrDeJDWrs
-	mcNsdxQ26LkXAx01rhyiZiLJNH22wTkqJglB8Q+ul+Ae/PmCYPUUYXd18r/ojYzqABeUxqqpNgB
-	T9kKWbV29s/jJ4KUF24DiW0XVBSgS5GJ3Pmo21yUMRpOEAfvbO5tQdPYsTw==
-X-Received: by 2002:a5d:6e84:0:b0:34a:912c:bb7c with SMTP id k4-20020a5d6e84000000b0034a912cbb7cmr1437586wrz.69.1713951610002;
-        Wed, 24 Apr 2024 02:40:10 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFxDdeQxiT5PNnUKKUzFHvU4KlwyItiJYdD491syZ2ofs/FBe7n5BqA/L51mPCutzUm9D5TZw==
-X-Received: by 2002:a5d:6e84:0:b0:34a:912c:bb7c with SMTP id k4-20020a5d6e84000000b0034a912cbb7cmr1437558wrz.69.1713951609547;
-        Wed, 24 Apr 2024 02:40:09 -0700 (PDT)
-Received: from ?IPV6:2003:cb:c70d:1f00:7a4e:8f21:98db:baef? (p200300cbc70d1f007a4e8f2198dbbaef.dip0.t-ipconnect.de. [2003:cb:c70d:1f00:7a4e:8f21:98db:baef])
-        by smtp.gmail.com with ESMTPSA id o12-20020a5d684c000000b0034aa1e534c2sm11277902wrw.96.2024.04.24.02.40.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 24 Apr 2024 02:40:09 -0700 (PDT)
-Message-ID: <c30fcda1-ed87-46f5-8297-cdedbddac009@redhat.com>
-Date: Wed, 24 Apr 2024 11:40:07 +0200
+        d=1e100.net; s=20230601; t=1713951743; x=1714556543;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=OZ1WcXyOys5YIDWCRIW5mC14e4vDyGa7xvoVt1+JFn8=;
+        b=wA60arQHyvy9YFct1sr+aw2P9eAKHAGfnT/Uww1HBjdiy9sEC6KTycAktcInTznoCW
+         LAButvcgM5oo9GQhQMH2QYmkMD0yWsAt+3hwRcGBbaAxP3rL9SrpyCU6O66nBIvZsQLI
+         /5cdToLPfuir0/d8jHZ+wP/KTauV5bMuqCOc3hNyQT98lKcbQm1GFG2N0rNrlESgpy0Z
+         nvG9TH0iRQZBfKt00UDv17SNStzSY1dTVfbCESBWrXWZTRDjCbAdPVkUbuSRZaFAY7Zb
+         VxFaJdvCt6ww1hCrVn9sZmXRHldy6jfHjAHRFI4TsOHRuO/+55RwQxq4VT4WEPfcjvwr
+         1VHQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVnfVJ3nscCkjMPmYOgGDA6Am6bmHKPc810M/9MOUNQeyf+jtcx0ghkIooHbolOSiDeL2Rsq5XGvd4O7NlfWSRqOOivPVZQzHEzKyJQpE8KfD7CgZPC5/+lW5UJCEoeZa3HmD5x
+X-Gm-Message-State: AOJu0YzF3w4+5L8PUzgoowP7JLq1QpmGz/HtyWieXQmplC+BCXBU3HWa
+	aJ36a61WNxB8oUgRUISp3LumK4xlDR3IU3Y9A4x/hYMny5xyfYwUJ0EtqS/H
+X-Google-Smtp-Source: AGHT+IE9NZ/+nqIl5BW8fpYLEBP5nud8cGXZ3FcNjn3Pr4uGBSO+WLjwtOAW5sy6nLi2HbHzKQnTHA==
+X-Received: by 2002:a5d:5449:0:b0:34a:a836:b940 with SMTP id w9-20020a5d5449000000b0034aa836b940mr1088278wrv.18.1713951743201;
+        Wed, 24 Apr 2024 02:42:23 -0700 (PDT)
+Received: from rbolboac.. ([2a02:2f0e:320d:e800:6acb:a317:3d30:4165])
+        by smtp.gmail.com with ESMTPSA id a12-20020adfed0c000000b0034635bd6ba5sm16683339wro.92.2024.04.24.02.42.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 24 Apr 2024 02:42:22 -0700 (PDT)
+From: Ramona Gradinariu <ramona.bolboaca13@gmail.com>
+X-Google-Original-From: Ramona Gradinariu <ramona.gradinariu@analog.com>
+To: linux-kernel@vger.kernel.org,
+	jic23@kernel.org,
+	linux-iio@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	corbet@lwn.net
+Cc: Ramona Gradinariu <ramona.gradinariu@analog.com>
+Subject: [PATCH 0/1] adis16475 documentation fixes
+Date: Wed, 24 Apr 2024 12:41:51 +0300
+Message-Id: <20240424094152.103667-1-ramona.gradinariu@analog.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 06/18] mm: make folio_mapcount() return 0 for small
- typed folios
-To: linux-kernel@vger.kernel.org
-Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org, cgroups@vger.kernel.org,
- linux-sh@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- "Matthew Wilcox (Oracle)" <willy@infradead.org>, Peter Xu
- <peterx@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>,
- Yin Fengwei <fengwei.yin@intel.com>, Yang Shi <shy828301@gmail.com>,
- Zi Yan <ziy@nvidia.com>, Jonathan Corbet <corbet@lwn.net>,
- Hugh Dickins <hughd@google.com>, Yoshinori Sato
- <ysato@users.sourceforge.jp>, Rich Felker <dalias@libc.org>,
- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
- Chris Zankel <chris@zankel.net>, Max Filippov <jcmvbkbc@gmail.com>,
- Muchun Song <muchun.song@linux.dev>, Miaohe Lin <linmiaohe@huawei.com>,
- Naoya Horiguchi <naoya.horiguchi@nec.com>,
- Richard Chang <richardycc@google.com>
-References: <20240409192301.907377-1-david@redhat.com>
- <20240409192301.907377-7-david@redhat.com>
-From: David Hildenbrand <david@redhat.com>
-Content-Language: en-US
-Autocrypt: addr=david@redhat.com; keydata=
- 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
- WNyWQQ==
-Organization: Red Hat
-In-Reply-To: <20240409192301.907377-7-david@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 09.04.24 21:22, David Hildenbrand wrote:
-> We already handle it properly for large folios. Let's also return "0"
-> for small typed folios, like page_mapcount() currently would.
-> 
-> Consequently, folio_mapcount() will never return negative values for
-> typed folios, but may return negative values for underflows.
-> 
-> Signed-off-by: David Hildenbrand <david@redhat.com>
-> ---
->   include/linux/mm.h | 11 +++++++++--
->   1 file changed, 9 insertions(+), 2 deletions(-)
-> 
-> diff --git a/include/linux/mm.h b/include/linux/mm.h
-> index daf687f0e8e5..d453232bba62 100644
-> --- a/include/linux/mm.h
-> +++ b/include/linux/mm.h
-> @@ -1260,12 +1260,19 @@ static inline int folio_large_mapcount(const struct folio *folio)
->    * references the entire folio counts exactly once, even when such special
->    * page table entries are comprised of multiple ordinary page table entries.
->    *
-> + * Will report 0 for pages which cannot be mapped into userspace, such as
-> + * slab, page tables and similar.
-> + *
->    * Return: The number of times this folio is mapped.
->    */
->   static inline int folio_mapcount(const struct folio *folio)
->   {
-> -	if (likely(!folio_test_large(folio)))
-> -		return atomic_read(&folio->_mapcount) + 1;
-> +	int mapcount;
-> +
-> +	if (likely(!folio_test_large(folio))) {
-> +		mapcount = atomic_read(&folio->_mapcount);
-> +		return page_type_has_type(mapcount) ? 0 : mapcount + 1;
-> +	}
->   	return folio_large_mapcount(folio);
->   }
->   
+Remove in_accel_calibbias_x and in_anglvel_calibbias_x device files
+description, as they do not exist and were added by mistake.
+Add correct naming for in_accel_y_calibbias and in_anglvel_y_calibbias
+device files and update their description.
 
- From 98acfb7ff35cb65fcfca5e799bf58f8afe84a645 Mon Sep 17 00:00:00 2001
-From: David Hildenbrand <david@redhat.com>
-Date: Wed, 24 Apr 2024 10:56:17 +0200
-Subject: [PATCH] !fixup: mm: make folio_mapcount() return 0 for small typed
-  folios
+Ramona Gradinariu (1):
+  docs: iio: adis16475: fix device files tables
 
-Just like page_mapcount(), let's make folio_mapcount() slightly more
-efficient.
+ Documentation/iio/adis16475.rst | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
-  include/linux/mm.h | 7 +++++--
-  1 file changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index cf700c5cdd58b..78e583b50e421 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -1271,8 +1271,11 @@ static inline int folio_mapcount(const struct folio *folio)
-  	int mapcount;
-  
-  	if (likely(!folio_test_large(folio))) {
--		mapcount = atomic_read(&folio->_mapcount);
--		return page_type_has_type(mapcount) ? 0 : mapcount + 1;
-+		mapcount = atomic_read(&folio->_mapcount) + 1;
-+		/* Handle page_has_type() pages */
-+		if (mapcount < PAGE_MAPCOUNT_RESERVE + 1)
-+			mapcount = 0;
-+		return mapcount;
-  	}
-  	return folio_large_mapcount(folio);
-  }
--- 
-2.44.0
-
-
--- 
-Cheers,
-
-David / dhildenb
+--
+2.34.1
 
 
