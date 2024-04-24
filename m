@@ -1,42 +1,76 @@
-Return-Path: <linux-doc+bounces-15001-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-15002-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 488308B0D38
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 16:52:33 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 92DD18B0D48
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 16:54:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6CA361C252D0
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 14:52:32 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3D7F51F220BA
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Apr 2024 14:54:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C0ED315F40F;
-	Wed, 24 Apr 2024 14:52:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3139715EFBC;
+	Wed, 24 Apr 2024 14:53:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="G+8Vet2i"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from netrider.rowland.org (netrider.rowland.org [192.131.102.5])
-	by smtp.subspace.kernel.org (Postfix) with SMTP id 30AC915EFAF
-	for <linux-doc@vger.kernel.org>; Wed, 24 Apr 2024 14:51:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.131.102.5
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C01F415EFA1;
+	Wed, 24 Apr 2024 14:53:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1713970321; cv=none; b=l9HVxHrPU30sM3f8HKWPVWot5gofEaAsHNWV+E5kBSM3zubgFWe7xscv3KxYSrPgAVjQ2JePfHd+N5AF593GN1qmJCyEhP6j4zCKTwJYBF7g/e9esA7RHOVVTh0BlQfdRMaywqTK4k82cBvQkBpTWa12d9NiBTtgtB/UxXvY6RM=
+	t=1713970407; cv=none; b=lz+Uuqi9cWcU8UWc9ZEpso/CYmJmdj+sqOL9Wr7tX9le/j4dN2MmZaGVV9CZVA6zGNVy8KvB4jyYeNiqn3hpuoGzTFhSxmU++LCeGoay3kD2BWBdwFUdYLjo+0hxacSuHb9+9x8PDoOmImXXodIrakZZlHzkXdCMiFGNZ2jxgro=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1713970321; c=relaxed/simple;
-	bh=3Z6uVOtYIw3MLXx0Sb5rRJUYpjtvpVEB1ZfVvMdz0v8=;
+	s=arc-20240116; t=1713970407; c=relaxed/simple;
+	bh=RqfV+hja3oQylqzeWMZG5N4j93kHJlAuYk8CLvh4giQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=cJvOXdu8JS1I3gS8do+cgoI3KR0aQe6RnZlT2cK09RhrTDlED4CSj6Ej0XFHq9KFgK4HfFFuqTarqHALnY8wNumJ2ablu+hm2jfoQkB02+DMPBy51iSAnifQjZB9j5GoFaF7lahC0tM+ObFExbivGO1+k2eYAm2tSX094kEmJSE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=rowland.harvard.edu; spf=pass smtp.mailfrom=netrider.rowland.org; arc=none smtp.client-ip=192.131.102.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=rowland.harvard.edu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=netrider.rowland.org
-Received: (qmail 453342 invoked by uid 1000); 24 Apr 2024 10:51:57 -0400
-Date: Wed, 24 Apr 2024 10:51:57 -0400
-From: Alan Stern <stern@rowland.harvard.edu>
-To: Norihiko Hama <Norihiko.Hama@alpsalpine.com>
-Cc: gregkh@linuxfoundation.org, corbet@lwn.net, linux-doc@vger.kernel.org,
-  linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org,
-  usb-storage@lists.one-eyed-alien.net
-Subject: Re: [PATCH v4] usb-storage: Optimize scan delay more precisely
-Message-ID: <c06aaaa1-a2af-47c6-a615-602f2c70de86@rowland.harvard.edu>
-References: <20240424013134.17307-1-Norihiko.Hama@alpsalpine.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=tszk2kG/wGbjzsguMaksGGz9Km/v/jajDe+1rpd/rjLU1xjNk8eruTGY7+8dIA1xlr9qWCdKmgQ8YsiQovKW0pjq2/1stC/NKW9Ngf/5etmfQdEkeNz5i2uq39QhOit3K/xGPkkPB9hhniz9u27/xjJoh9CW7okWFwohXD0dphg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=G+8Vet2i; arc=none smtp.client-ip=198.175.65.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1713970406; x=1745506406;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=RqfV+hja3oQylqzeWMZG5N4j93kHJlAuYk8CLvh4giQ=;
+  b=G+8Vet2ismbiLI44DRMeFLJ8jUSnUrzxvbLQXJtEiih1JT+iCupXnfJM
+   61mj0dGU/uKToD2/Y0yy4GZFiU/+LNXW807/EUJCxc6WMlbm4rPIRiDgG
+   GZCnNVzKaR8FkC9bQRySSbC2hVnCb8GkGXezk5ucNcvWkw2wp2VIVk0np
+   BJ9t3bSuSbzJ2NcNFaDPWiNm1WZ6WnMslc0exrwJnhCyMOcu96b0QFbsW
+   qWROmusPyqVz0HDd7QXTK6AE8zb0N1Na9pehVVqjIkG5R2rRtDz5Z5iL+
+   RgTE7XxEQwjEwE4wOhBUSjqRKkdxD2xxdHD6QuSLajcmqpmWedF997f8C
+   w==;
+X-CSE-ConnectionGUID: jYbM7rmSS6yoD7WQHEOwRg==
+X-CSE-MsgGUID: mvBx9tbVRfSksat+1Djc3A==
+X-IronPort-AV: E=McAfee;i="6600,9927,11054"; a="9727118"
+X-IronPort-AV: E=Sophos;i="6.07,226,1708416000"; 
+   d="scan'208";a="9727118"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Apr 2024 07:53:26 -0700
+X-CSE-ConnectionGUID: 09S+vG3jRaOAUzAmHorGng==
+X-CSE-MsgGUID: VlkXdLBeS6+qX3IrssO96g==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.07,226,1708416000"; 
+   d="scan'208";a="24620041"
+Received: from smile.fi.intel.com ([10.237.72.54])
+  by orviesa010.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Apr 2024 07:53:24 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.97)
+	(envelope-from <andriy.shevchenko@linux.intel.com>)
+	id 1rzdzt-00000000gI1-1C9q;
+	Wed, 24 Apr 2024 17:53:21 +0300
+Date: Wed, 24 Apr 2024 17:53:21 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Subject: Re: [PATCH v1 0/2] Documentation: process: Clarify use of Cc:
+Message-ID: <Zikc4fDNDer6hSzJ@smile.fi.intel.com>
+References: <20240423132024.2368662-1-andriy.shevchenko@linux.intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -45,234 +79,25 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240424013134.17307-1-Norihiko.Hama@alpsalpine.com>
+In-Reply-To: <20240423132024.2368662-1-andriy.shevchenko@linux.intel.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 
-On Wed, Apr 24, 2024 at 10:31:34AM +0900, Norihiko Hama wrote:
-> Current storage scan delay is reduced by the following old commit.
++Cc: Dmitry
+(have been told by colleague of mine that you also has an opinion on this
+ topic, sorry if I added you by a mistake).
+
+On Tue, Apr 23, 2024 at 04:19:36PM +0300, Andy Shevchenko wrote:
+> Add a couple of recommendations on how to utilise Cc header in
+> environment friendly way.
 > 
-> a4a47bc03fe5 ("Lower USB storage settling delay to something more reasonable")
-> 
-> It means that delay is at least 'one second', or zero with delay_use=0.
-> 'one second' is still long delay especially for embedded system but
-> when delay_use is set to 0 (no delay), still error observed on some USB drives.
-> 
-> So delay_use should not be set to 0 but 'one second' is quite long.
-> Especially for embedded system, it's important for end user
-> how quickly access to USB drive when it's connected.
-> That's why we have a chance to minimize such a constant long delay.
-> 
-> This patch optimizes scan delay more precisely
-> to minimize delay time but not to have any problems on USB drives
-> by extending module parameter 'delay_use' in milliseconds internally.
-> The parameter 'delay_use' is changed to be parsed as 3 decimal point value
-> if it has digit values with '.'.
-> It makes the range of value to 1 / 1000 in internal 32-bit value
-> but it's still enough to set the delay time.
-> By default, delay time is 'one second' for backward compatibility.
-> 
-> For example, it seems to be good by changing delay_use=0.1,
-> that is 100 millisecond delay without issues for most USB pen drives.
-> 
-> Signed-off-by: Norihiko Hama <Norihiko.Hama@alpsalpine.com>
-> ---
-> V3 -> V4: Separate parser functions from module parameter set/get
-> V2 -> V3: Change to use kstrtouint only for parsing decimal point
-> V1 -> V2: Extend existing module parameter 'delay_use' to support decimal points
+> Andy Shevchenko (2):
+>   Documentation: process: Avoid unneeded Cc: tags
+>   Documentation: process: Recommend to put Cc: tags after cutter '---'
+>     line
 
-This is pretty good.  I've got a couple of minor suggestions.
+-- 
+With Best Regards,
+Andy Shevchenko
 
->  .../admin-guide/kernel-parameters.txt         |   5 +
->  drivers/usb/storage/usb.c                     | 120 +++++++++++++++++-
->  2 files changed, 121 insertions(+), 4 deletions(-)
-> 
-> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> index 561d0dd776c7..8248426524d5 100644
-> --- a/Documentation/admin-guide/kernel-parameters.txt
-> +++ b/Documentation/admin-guide/kernel-parameters.txt
-> @@ -6190,6 +6190,11 @@
->  	usb-storage.delay_use=
->  			[UMS] The delay in seconds before a new device is
->  			scanned for Logical Units (default 1).
-> +			The delay can have up to 3 decimal places, giving a
-> +			resolution of one millisecond.
-> +			Example:
-> +				delay_use=2.567
 
-This could go on the previous line.
-
-			Example:  delay_use = 2.567
-
-> +					2.567 second delay
-
-This is obvious; I don't think you need to say it.
-
->  
->  	usb-storage.quirks=
->  			[UMS] A list of quirks entries to supplement or
-> diff --git a/drivers/usb/storage/usb.c b/drivers/usb/storage/usb.c
-> index 90aa9c12ffac..c908cf2a8027 100644
-> --- a/drivers/usb/storage/usb.c
-> +++ b/drivers/usb/storage/usb.c
-> @@ -67,9 +67,121 @@ MODULE_AUTHOR("Matthew Dharm <mdharm-usb@one-eyed-alien.net>");
->  MODULE_DESCRIPTION("USB Mass Storage driver for Linux");
->  MODULE_LICENSE("GPL");
->  
-> -static unsigned int delay_use = 1;
-> -module_param(delay_use, uint, S_IRUGO | S_IWUSR);
-> -MODULE_PARM_DESC(delay_use, "seconds to delay before using a new device");
-> +static unsigned int delay_use = 1 * MSEC_PER_SEC;
-> +
-> +/**
-> + * str_to_fixed_point_uint - parse an unsigned fixed-point decimal integer
-> + * @str: String to parse.
-> + * @ndecimals: Number of decimal places in the fixed-point value.
-> + * @val: Where to store the parsed value.
-> + *
-> + * Parse an unsigned fixed-point decimal value in @str, containing at
-> + * most ndecimal digits to the right of the decimal point.
-> + * Stores the parsed value in @val, scaled by 10^(@ndecimal).
-> + *
-> + * As with kstrtouint(), the string must be NUL-terminated and may
-> + * include a single newline before the terminating NUL.  The first
-> + * character may be a plus sign but not a minus sign.  The decimal
-> + * point and fractional digits are optional.
-> + *
-> + * Returns 0 on success, a negative error code otherwise.
-> + */
-> +static int str_to_fixed_point_uint(const char *str, int ndecimals,
-> +				   unsigned int *val)
-> +{
-> +	int n, n1, n2;
-> +	const char *p;
-> +	char *q;
-> +	char buf[16];
-> +
-> +	n = strlen(str);
-> +	if (n > 0 && str[n - 1] == '\n')
-> +		--n;
-> +
-> +	p = strnchr(str, n, '.');
-> +	if (p) {
-> +		n1 = p++ - str;
-> +		n2 = n - (n1 + 1);
-> +		if (n2 == 0 || n2 > ndecimals)
-> +			return -EINVAL;
-> +	} else {
-> +		n1 = n;
-> +		n2 = 0;
-> +	}
-> +	if (n1 == 0 || n1 + ndecimals > sizeof(buf) - 1)
-> +		return -EINVAL;
-
-There's no reason to rule out strings like ".5" or "2.".  Allow either n1 
-or n2 to be 0, as long as they aren't both 0.  (And even then, the code 
-would accept "+" or "+.", which is bizarre but not terrible.)
-
-> +
-> +	memcpy(buf, str, n1);
-> +	if (p)
-> +		memcpy(buf + n1, p, n2);
-> +	for (q = buf + n1 + n2; n2 < ndecimals; ++n2)
-> +		*q++ = '0';
-> +	*q = 0;
-> +
-> +	return kstrtouint(buf, 10, val);
-> +}
-> +
-> +/**
-> + * fixed_point_uint_to_str - parse into fixed-point decimal integer string
-> + * @val: Integer value to parse.
-> + * @ndecimals: Number of decimal places in the fixed-point value.
-> + * @str: Where to store the parsed string.
-> + * @size: The size of buffer for @str.
-> + *
-> + * Stores the parsed @val scaled by 10^(@ndecimal) into @str.
-> + * The string trailing fractional part '0' is trimmed.
-
-"Parse" is the wrong word here.  You parse a string to understand what it 
-means (so the previous function parses @str).  But here you're converting 
-an integer to a string; that's called "formatting".
-
-So the function's description should be: format a fixed-point decimal value 
-into a string.  @val is the integer value to format, scaled by 
-10^(@ndecimals), and @str is where to store the formatted string.
-
-> + *
-> + * Returns the number of characters written into @str.
-> + */
-> +static int fixed_point_uint_to_str(unsigned int val, int ndecimals,
-> +				   char *str, int size)
-> +{
-> +	unsigned int delay_ms = val;
-> +	unsigned int rem = do_div(delay_ms, int_pow(10, ndecimals));
-> +	int len;
-> +	char buf[16];
-> +
-> +	len = scnprintf(buf, sizeof(buf), "%d", delay_ms);
-> +	if (rem) {
-> +		char format[8];
-> +
-> +		snprintf(format, sizeof(format) - 1, ".%%0%dd", ndecimals);
-> +		len += scnprintf(buf + len, sizeof(buf) - len, format, rem);
-> +		while (buf[len - 1] == '0') {
-> +			buf[len - 1] = '\0';
-> +			if (--len <= 1)
-> +				break;
-> +		}
-
-Small simplification:  You know that len can never reach 0 because rem is 
-nonzero, and in any case buf contains a '.' somewhere.  So this loop 
-can be written as:
-
-		while (buf[--len] == '0')
-			buf[len] = 0;
-
-Alan Stern
-
-> +	}
-> +	return scnprintf(str, size, "%s\n", buf);
-> +}
-> +
-> +static int delay_use_set(const char *s, const struct kernel_param *kp)
-> +{
-> +	unsigned int delay_ms;
-> +	int ret;
-> +
-> +	ret = str_to_fixed_point_uint(skip_spaces(s), 3, &delay_ms);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	*((unsigned int *)kp->arg) = delay_ms;
-> +	return 0;
-> +}
-> +
-> +static int delay_use_get(char *s, const struct kernel_param *kp)
-> +{
-> +	unsigned int delay_ms = *((unsigned int *)kp->arg);
-> +
-> +	return fixed_point_uint_to_str(delay_ms, 3, s, PAGE_SIZE);
-> +}
-> +
-> +static const struct kernel_param_ops delay_use_ops = {
-> +	.set = delay_use_set,
-> +	.get = delay_use_get,
-> +};
-> +module_param_cb(delay_use, &delay_use_ops, &delay_use, 0644);
-> +MODULE_PARM_DESC(delay_use, "time to delay before using a new device");
->  
->  static char quirks[128];
->  module_param_string(quirks, quirks, sizeof(quirks), S_IRUGO | S_IWUSR);
-> @@ -1066,7 +1178,7 @@ int usb_stor_probe2(struct us_data *us)
->  	if (delay_use > 0)
->  		dev_dbg(dev, "waiting for device to settle before scanning\n");
->  	queue_delayed_work(system_freezable_wq, &us->scan_dwork,
-> -			delay_use * HZ);
-> +			msecs_to_jiffies(delay_use));
->  	return 0;
->  
->  	/* We come here if there are any problems */
-> -- 
-> 2.17.1
-> 
-> 
 
