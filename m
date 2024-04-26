@@ -1,104 +1,107 @@
-Return-Path: <linux-doc+bounces-15180-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-15182-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id D045B8B3D17
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Apr 2024 18:48:45 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 578B18B3D4C
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Apr 2024 18:56:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 27E75B221D0
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Apr 2024 16:48:43 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8941B1C21673
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Apr 2024 16:56:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A6C35145358;
-	Fri, 26 Apr 2024 16:48:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 65EE315A4B9;
+	Fri, 26 Apr 2024 16:56:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="i4GNtGnY"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="U5jR77Qx"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net [217.70.183.199])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C4DE12C493;
-	Fri, 26 Apr 2024 16:48:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5E792B9DB;
+	Fri, 26 Apr 2024 16:56:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.199
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1714150118; cv=none; b=PCvgimkLhfMaiFx6pghrN+H77iuCeDfIIbywW46foVlaXro+KZOxvYFxnzqD4ijqRrBVLVLJXYFQPDsILNDVbjH7q4jrHgPGOzDBcEbJwDsqRBdoyuIc+xO34f1cipo3UH3My8+kIt1JyLl4W+o01adL/dLjnbBC8FV/aaQmTQ4=
+	t=1714150610; cv=none; b=oJW+hrNewg6jgilRKSgGYP2l3WBKbqRXYRvCNGcXpAWJLynuPb0TVKhh8Cj58rDPYuXsMclh2OwoFcMr1EV0h+MR8LLrHFKx2En0+CiUupq5fvHGu8X14CNMGIDhrFdVJ3wOgjjNNtDZtGf6VBhD2CBhlLH3vHoiXOyo00OgoOY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1714150118; c=relaxed/simple;
-	bh=isJanjft6Ijm3USO7GK2BudIrWLYWU6b2nnmV6911CY=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=qyPYkL1jayWR9EnXY/BagWnlXa0hqAxGC17Ac1zeKPBiroatZUVvVtc7lo0818GGA6nB8vIaSk61Jdlgc+bcS6irIflbPSMbLxxi9c4vIPk1uzQSLhh4njA65NyDplG3kuYMf38KKgVDxkTveCDGORK+EwYB8nrQWUV3h1LFPbo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=i4GNtGnY; arc=none smtp.client-ip=209.85.216.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-2a5ef566c7aso2094048a91.1;
-        Fri, 26 Apr 2024 09:48:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1714150117; x=1714754917; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JmMXkGy7VPsvwtkKsXV/wpxBJRPdn7aku2j+I7TeRZI=;
-        b=i4GNtGnYY6gYNWxYnMkIMW5cM20mJTmbKrCH42IHcL164NoIIsHwyjlWyQJTGeNLI/
-         A4HjgxdIxAiYSuELIV2QlK8bYhEoD4MrLUDx7ZH2IOmmIoL8lxQogUj+I9CLqIRtaO75
-         gDQNAUJeq1WH/qUFELUdbSr+VtitFBXPOemRWIayRAkjNMqmHdUz50mdqxpdrzb7qYpK
-         gI+iLOGoz+A+Wef4VjfFdqcEbgrjyD5D2svIzhOFJfRYhkNHCj9at31geztNtsypLwb8
-         YZ69pK/g88DMsAYN6nbX68nsW+ZcrLmJ02U0SLiQYljswZWWTakgoNCmHpIhoqwyxz6/
-         tD0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714150117; x=1714754917;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JmMXkGy7VPsvwtkKsXV/wpxBJRPdn7aku2j+I7TeRZI=;
-        b=sQFEc7bvL4GnIo+TuiuQK5szxhL9C5jm0zVXQJt148i7JXGcpnSYOeoO9/iYT3BG+2
-         Ha4Xfvz5aRlaOiipP3Uvo3P8LE/9KBhc4xjBr182prweq1j70YMng2wSNmD+rRCZJbe4
-         tQYKpl9a1rqBk6bUrd+ZML9saUN058sMKS651acjAJ4LqipOUslDFGRPTxdcMn1lqamZ
-         HG/zhvOsB8tNKxkeXwpKiqRlfkbzyIhxzteC5wLpRupN8J12shlKYiiqYOmbMmYZHOiu
-         Vz57G6XxVvNO4yTDAesTgNjBpZX7o7wl0QhAG7sfSx8LNJkYzWVClaDq2ZG8Ab0izkdD
-         Effw==
-X-Forwarded-Encrypted: i=1; AJvYcCVnRa4Zdt8w/exTfUcXx9JIipd79g2CkeWnyzzpB91lJ075fNhjEXWvqxCuv6/UBN+fLXU6Zw4JmT+PjEOg8B4w8SSK16BrnuxhUZmhYALrvLcfhXbe4idD5Wb6AtzQE4M2vmWk3UY1N48=
-X-Gm-Message-State: AOJu0YzmuvUiBKDGszklP8M4QqbAbAzt1TkxmYu4elz64vOmp7UjzFVL
-	19y5yoHO7sCuElzbIcN8Ey293FLRj36Z8v3XOacMLsphslGVDyis/COAZs889S8/9KSISw77lYU
-	b65RZo48gYEe1exCXW2NtEn4YLOeJveZ3
-X-Google-Smtp-Source: AGHT+IGUzYot4aWxYmJQmmtJTaU0cDPgRlNF43MSJ+xR+zOvk17sLDT893O9A18W2SmanyZEbP3mYQ0mJ7tS2z0ZCN8=
-X-Received: by 2002:a17:90a:34c2:b0:2ab:9819:64bc with SMTP id
- m2-20020a17090a34c200b002ab981964bcmr3011377pjf.32.1714150116642; Fri, 26 Apr
- 2024 09:48:36 -0700 (PDT)
+	s=arc-20240116; t=1714150610; c=relaxed/simple;
+	bh=ctBHqodqZgGGTSswC9O8hy6U/QfUzuq3luFOBHlspG8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Yd37dlnugW4sAL5UbsqTruX3LMjZMTqWgfkngwjvQcqtpDWanjKuJ8RCMEwP6VzVumw450hMMRGRliRl2D/u7wAMwgCtG6QVas+KGhjzE8P6O92I/6U3BPA5byZtaOa4Hj5W02vRmJjNq4MffT1KkRG6vbo/4lNhDiasIv8DBZg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=U5jR77Qx; arc=none smtp.client-ip=217.70.183.199
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 09022FF806;
+	Fri, 26 Apr 2024 16:56:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1714150605;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=8I2iXWuHxUfNdCHc6ywXlDR+bk9FdGJkwhwlgVB1g9o=;
+	b=U5jR77Qx90zrGk3o30kM4OBvVWpiFOhpZXN7L+QJZ/BJdxxuJo3CEMkkxsCUk5L+iQP5LT
+	tEbofImG8j/FfqsPm1HEU6IDfQYGGJfEN6hK1/GZEOZ1Fkie83xvKwLP6AzWXB+u9yi70c
+	TBQnJ4K6TzRQf4y7R0m/Jw8OXTm4Fedp+nd0SRYmM+MUxZ4L9jRoWUaAoDWP2rsM/kR8sQ
+	1KIsHqd/NU6J6JlSoZa+PsDx5fAZvgeRswZGmPXA/BSmumm8re5FJIYKtI4Q2kWfX28ZPE
+	eu7eqkwjYHCdVRkrpjDqxiATmq7+Qu/3YxuoB1iMz6WCGNuZKNGaGpVHgEkYnQ==
+From: Luca Ceresoli <luca.ceresoli@bootlin.com>
+Subject: [PATCH v2 00/12] ASoC: doc: dapm: various improvements
+Date: Fri, 26 Apr 2024 18:56:33 +0200
+Message-Id: <20240426-dapm-docs-v2-0-87b07547eb5b@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <cover.1714113680.git.siyanteng@loongson.cn> <CANiq72meE9txt5b09Y7cUJd-hEqcZX1ZtRc_0YYDZqWQgyo3wA@mail.gmail.com>
- <87zftgnsun.fsf@meer.lwn.net>
-In-Reply-To: <87zftgnsun.fsf@meer.lwn.net>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Fri, 26 Apr 2024 18:47:30 +0200
-Message-ID: <CANiq72mHoh=qgOGPj29hpS7EhVcXi5Q_7GYsycKhYwj3QbsTag@mail.gmail.com>
-Subject: Re: [PATCH v2 0/4] rust: docs: Update the translation of rust to 6.9-rc4
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: Yanteng Si <siyanteng@loongson.cn>, ojeda@kernel.org, alex.gaynor@gmail.com, 
-	wedsonaf@gmail.com, boqun.feng@gmail.com, gary@garyguo.net, 
-	bjorn3_gh@protonmail.com, benno.lossin@proton.me, a.hindborg@samsung.com, 
-	aliceryhl@google.com, nathan@kernel.org, ndesaulniers@google.com, 
-	morbo@google.com, justinstitt@google.com, alexs@kernel.org, dzm91@hust.edu.cn, 
-	linux-doc@vger.kernel.org, rust-for-linux@vger.kernel.org, 
-	llvm@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAMHcK2YC/03MSw6CMBSF4a2QO7aGW3kUR+7DMOhTbiKUtKTRk
+ O7dihOH/8nJt0O0gWyEa7VDsIki+aUEP1WgJ7k8LCNTGnjNm/qCLTNynZnxOrJ+UKZFx7veKCj
+ /NVhHr8O6j6UnipsP74NO+F1/SoPdn5KQ1UwKFIYLHJTrbsr77UnLWfsZxpzzB2aOiIykAAAA
+To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+ Bagas Sanjaya <bagasdotme@gmail.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ linux-sound@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Luca Ceresoli <luca.ceresoli@bootlin.com>
+X-Mailer: b4 0.13.0
+X-GND-Sasl: luca.ceresoli@bootlin.com
 
-On Fri, Apr 26, 2024 at 3:42=E2=80=AFPM Jonathan Corbet <corbet@lwn.net> wr=
-ote:
->
-> I guess I don't see any reason why the translation couldn't go through
-> docs-next as usual?  It will all even out during the merge window,
-> right?  Or am I missing something?
+This series applies various improvements to the DAPM documentation: a
+rewrite of a few sections for clarity, style improvements and typo fixes.
 
-Yeah, that is what I am thinking as well, although Yanteng is
-mentioning conflicts somewhere, so I may be missing something too.
+Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
+---
+Changes in v2:
+- avoid wrapping in patch 3 as suggested by Alex
+- Link to v1: https://lore.kernel.org/r/20240416-dapm-docs-v1-0-a818d2819bf6@bootlin.com
 
-Cheers,
-Miguel
+---
+Luca Ceresoli (12):
+      ASoC: doc: dapm: fix typos
+      ASoC: doc: dapm: fix struct name
+      ASoC: doc: dapm: minor rewording
+      ASoC: doc: dapm: remove dash after colon
+      ASoC: doc: dapm: clarify it's an internal API
+      ASoC: doc: dapm: replace "map" with "graph"
+      ASoC: doc: dapm: extend initial descrption
+      ASoC: doc: dapm: describe how widgets and routes are registered
+      ASoC: doc: dapm: fix and improve section "Registering DAPM controls"
+      ASoC: doc: dapm: improve section "Codec/DSP Widget Interconnections"
+      ASoC: doc: dapm: update section "DAPM Widget Events"
+      ASoC: doc: dapm: update event types
+
+ Documentation/sound/soc/dapm-graph.svg | 375 +++++++++++++++++++++++++++++++++
+ Documentation/sound/soc/dapm.rst       | 174 ++++++++++-----
+ 2 files changed, 492 insertions(+), 57 deletions(-)
+---
+base-commit: c942a0cd3603e34dd2d7237e064d9318cb7f9654
+change-id: 20240315-dapm-docs-79bd51f267db
+
+Best regards,
+-- 
+Luca Ceresoli <luca.ceresoli@bootlin.com>
+
 
