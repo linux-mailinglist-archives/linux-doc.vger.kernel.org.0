@@ -1,113 +1,261 @@
-Return-Path: <linux-doc+bounces-15540-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-15542-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FF388B8517
-	for <lists+linux-doc@lfdr.de>; Wed,  1 May 2024 06:49:23 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D89948B8572
+	for <lists+linux-doc@lfdr.de>; Wed,  1 May 2024 07:56:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DA42D284573
-	for <lists+linux-doc@lfdr.de>; Wed,  1 May 2024 04:49:21 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id BFA73B2096B
+	for <lists+linux-doc@lfdr.de>; Wed,  1 May 2024 05:56:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9DCA83D579;
-	Wed,  1 May 2024 04:49:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5437D4AEC6;
+	Wed,  1 May 2024 05:56:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="BmgMcEwZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED8C63D0A9;
-	Wed,  1 May 2024 04:49:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.95.11.211
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F1724AEC3
+	for <linux-doc@vger.kernel.org>; Wed,  1 May 2024 05:56:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1714538958; cv=none; b=IgopjYGljnU5GxO8Gs2tt43zr960E0KRMkWpMYg+jc4O7dM+ZQGZI5MEpThBx2UWXD8spn0ys+hpNQdMU9tVnk/3cVG5iRGJ7kfLbmPCOQ4xLO4a01o4QMJnVBA4L+kTQvA5Ahh6CzEckg9fesyvsIh43benAyv7vKRR3zi//oU=
+	t=1714542962; cv=none; b=jEKJfqRrztwWr/8FWPHuzLCakbgvm4OFCGXFI7SpZlYCC+FzBEtkKWCcZZ4HNqjmTFMiz4VDtE/GeG70rVj6NOXz8yyuPxUZmhykAIrP0oGlkwjyoQNvNfZC/kprmro2Bz/nw/6x9fecN2k9WJbft6mYNj39AbLrNMKBrhttTEU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1714538958; c=relaxed/simple;
-	bh=he/kUeqK0dNeAWJhFxJc2221VUgxwuPvsqDXRRJ2wgk=;
+	s=arc-20240116; t=1714542962; c=relaxed/simple;
+	bh=aadMEr8ariBi8eE4O8hPmKJnX3oge4KGG35B7N3ApoE=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=aBq7BVtosrYqNYpcH/7G+3mTAyx13VHnbzRJVYBMhowOmBwUjFgM1p+mj0sZOLrFTaf73WOF5ATBm4M6756VhB4XVCjiQQ1kOKpxiLBb7Cw2eK9laxVjuev/EoZaeYDpXlShKpYX6ZsO8v3bgHuNYTy6XBCfb7HMjaAtVlZKo9c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de; spf=pass smtp.mailfrom=lst.de; arc=none smtp.client-ip=213.95.11.211
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lst.de
-Received: by verein.lst.de (Postfix, from userid 2407)
-	id 9F6AA67373; Wed,  1 May 2024 06:49:11 +0200 (CEST)
-Date: Wed, 1 May 2024 06:49:10 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Petr =?utf-8?B?VGVzYcWZw61r?= <petr@tesarici.cz>
-Cc: mhkelley58@gmail.com, mhklinux@outlook.com, robin.murphy@arm.com,
-	joro@8bytes.org, will@kernel.org, hch@lst.de,
-	m.szyprowski@samsung.com, corbet@lwn.net, iommu@lists.linux.dev,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	roberto.sassu@huaweicloud.com
-Subject: Re: [PATCH v3 1/1] Documentation/core-api: Add swiotlb
- documentation
-Message-ID: <20240501044910.GD31252@lst.de>
-References: <20240429151337.1069470-1-mhklinux@outlook.com> <20240430132413.69797af1@mordecai>
+	 Content-Type:Content-Disposition:In-Reply-To; b=jwBHYlhuhMi+CQygMWKH8WyYxIwLB0dHtkJugiORH31VEr8diKrUoVEEYPoccayVBNeW4OFLH4XHtw981mxet1eSu3Cenziuf75DoBd0M2gJtgl2HR9BQpti2GMYXQuzcCzGO0LO6nA/4AkyaDA0okclUg19jq0BQWixoHKNHaA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=BmgMcEwZ; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1714542959;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HcKow0zmruCffk3bO4H/bFhUq98xWg7lQzKYw8TpCpk=;
+	b=BmgMcEwZwTfIxPGkX7vuPuC9qe7Bx1lInvNsBx9IfDuNwKCvib0MCw42Phhp4r1yyDBMlQ
+	4fGGSiKfWxeIZoD6ngN8YlZRAAsM3HVWrM2l4IpyuF87hOL7RcYcVLQMJoZYKbRrLO3DqV
+	YAJcEMMbPdBHHahV/6VxvyWuMRhokMI=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-569-_OKBmitQN5a05ixRIgM_zA-1; Wed, 01 May 2024 01:55:57 -0400
+X-MC-Unique: _OKBmitQN5a05ixRIgM_zA-1
+Received: by mail-ej1-f69.google.com with SMTP id a640c23a62f3a-a51eb0c14c8so241483466b.0
+        for <linux-doc@vger.kernel.org>; Tue, 30 Apr 2024 22:55:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1714542956; x=1715147756;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HcKow0zmruCffk3bO4H/bFhUq98xWg7lQzKYw8TpCpk=;
+        b=IqyktfbiXMTYBMdQFYiAJ08dq7ANfxhrVmyNYpcMjwS00NX9BUxEgE5dRtW+WQa/je
+         pQtxLaYcsWxCpmByxxryjGzvqK8uvP5rVn8ZEki6vbuTalr7s4B8MTBz2l7l3K3Z/Mbi
+         dhttk4EJSxxZr13xiI5t/09yS9EEAfw+tiVYcvgzsLPhmfkn+5IjxZdN9xlnfzRaERUX
+         WREcylwK+Ze9C61q3e3IRpyouLm8qCjnngJWX1pXTus05/hK1HVOwlC+Y5sCt+PJvqk2
+         dM7IQOzfWdKtAzsryFffkOVcGYt1Gx21pGtESW267QjZlrT8qNPYxb83V4V3b3ZR3Skz
+         W9/w==
+X-Forwarded-Encrypted: i=1; AJvYcCVj4FUjODd+pPD+SFcnnUx7ddSVztjBRwtHfc3BDu32CxSNx/9c8NmTSzXtGNIK2bVz+nrCzgqum54MdNnfoHhFEAbevKSJhQGR
+X-Gm-Message-State: AOJu0Yyii6aNPqRREW1VhqC3kjJBFA1oS213z2OT0YZ+7KIuukLMhhMx
+	coTraQPmyF9JjsYtlOIjHhlbnxNooeQLJJ8OVAXbUOfGRQ1+cr7eM75hLHdo+ryflp10h15Jnj9
+	Pz3q2Vd8ul/V9hvwUNiSdeGRscQa33HXQr446EAW84l5ipXOK2buUruCpCw==
+X-Received: by 2002:a17:906:e4d:b0:a55:9a35:5e9d with SMTP id q13-20020a1709060e4d00b00a559a355e9dmr977253eji.42.1714542956230;
+        Tue, 30 Apr 2024 22:55:56 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGC1QkCHaw0iBBvM1x7ORwvPKI+KKZASL1NToTNqfz++XpK/I5PdrIKLQ0RzET8wTmc4DTiIQ==
+X-Received: by 2002:a17:906:e4d:b0:a55:9a35:5e9d with SMTP id q13-20020a1709060e4d00b00a559a355e9dmr977237eji.42.1714542955599;
+        Tue, 30 Apr 2024 22:55:55 -0700 (PDT)
+Received: from redhat.com ([2a0d:6fc7:346:6a42:bb79:449b:3f0b:a228])
+        by smtp.gmail.com with ESMTPSA id cb6-20020a170906a44600b00a58864c88aesm9121150ejb.225.2024.04.30.22.55.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 30 Apr 2024 22:55:54 -0700 (PDT)
+Date: Wed, 1 May 2024 01:55:47 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Heng Qi <hengqi@linux.alibaba.com>
+Cc: kernel test robot <lkp@intel.com>, oe-kbuild-all@lists.linux.dev,
+	Jakub Kicinski <kuba@kernel.org>,
+	"David S . Miller" <davem@davemloft.net>,
+	Paolo Abeni <pabeni@redhat.com>, Eric Dumazet <edumazet@google.com>,
+	Jason Wang <jasowang@redhat.com>, Brett Creeley <bcreeley@amd.com>,
+	Ratheesh Kannoth <rkannoth@marvell.com>,
+	Alexander Lobakin <aleksander.lobakin@intel.com>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Tal Gilboa <talgi@nvidia.com>, Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Jiri Pirko <jiri@resnulli.us>,
+	Paul Greenwalt <paul.greenwalt@intel.com>,
+	Ahmed Zaki <ahmed.zaki@intel.com>,
+	Vladimir Oltean <vladimir.oltean@nxp.com>,
+	Kory Maincent <kory.maincent@bootlin.com>,
+	Andrew Lunn <andrew@lunn.ch>, justinstitt@google.com,
+	netdev@vger.kernel.org, virtualization@lists.linux.dev
+Subject: Re: [PATCH net-next v11 2/4] ethtool: provide customized dim profile
+ management
+Message-ID: <20240501015303-mutt-send-email-mst@kernel.org>
+References: <20240430173136.15807-1-hengqi@linux.alibaba.com>
+ <20240430173136.15807-3-hengqi@linux.alibaba.com>
+ <202405011004.Rkw6IrSl-lkp@intel.com>
+ <1714538736.2472136-1-hengqi@linux.alibaba.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240430132413.69797af1@mordecai>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+In-Reply-To: <1714538736.2472136-1-hengqi@linux.alibaba.com>
 
-On Tue, Apr 30, 2024 at 01:24:13PM +0200, Petr Tesařík wrote:
-> > +swiotlb was originally created to handle DMA for devices with addressing
-> > +limitations. As physical memory sizes grew beyond 4 GiB, some devices could
-> > +only provide 32-bit DMA addresses. By allocating bounce buffer memory below
-> > +the 4 GiB line, these devices with addressing limitations could still work and
-> > +do DMA.
+On Wed, May 01, 2024 at 12:45:36PM +0800, Heng Qi wrote:
+> On Wed, 1 May 2024 10:36:03 +0800, kernel test robot <lkp@intel.com> wrote:
+> > Hi Heng,
+> > 
+> > kernel test robot noticed the following build warnings:
+> > 
+> > [auto build test WARNING on net-next/main]
+> > 
+> > url:    https://github.com/intel-lab-lkp/linux/commits/Heng-Qi/linux-dim-move-useful-macros-to-h-file/20240501-013413
+> > base:   net-next/main
+> > patch link:    https://lore.kernel.org/r/20240430173136.15807-3-hengqi%40linux.alibaba.com
+> > patch subject: [PATCH net-next v11 2/4] ethtool: provide customized dim profile management
+> > config: openrisc-defconfig (https://download.01.org/0day-ci/archive/20240501/202405011004.Rkw6IrSl-lkp@intel.com/config)
+> > compiler: or1k-linux-gcc (GCC) 13.2.0
+> > reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240501/202405011004.Rkw6IrSl-lkp@intel.com/reproduce)
+> > 
+> > If you fix the issue in a separate patch/commit (i.e. not just a new version of
+> > the same patch/commit), kindly add following tags
+> > | Reported-by: kernel test robot <lkp@intel.com>
+> > | Closes: https://lore.kernel.org/oe-kbuild-all/202405011004.Rkw6IrSl-lkp@intel.com/
+> > 
+> > All warnings (new ones prefixed by >>):
+> > 
+> >    net/ethtool/coalesce.c: In function 'ethnl_update_profile':
+> >    net/ethtool/coalesce.c:453:46: error: 'struct net_device' has no member named 'irq_moder'
+> >      453 |         struct dim_irq_moder *irq_moder = dev->irq_moder;
+> >          |                                              ^~
+> >    net/ethtool/coalesce.c: At top level:
+> > >> net/ethtool/coalesce.c:446:12: warning: 'ethnl_update_profile' defined but not used [-Wunused-function]
+> >      446 | static int ethnl_update_profile(struct net_device *dev,
+> >          |            ^~~~~~~~~~~~~~~~~~~~
+> > >> net/ethtool/coalesce.c:151:12: warning: 'coalesce_put_profile' defined but not used [-Wunused-function]
+> >      151 | static int coalesce_put_profile(struct sk_buff *skb, u16 attr_type,
+> >          |            ^~~~~~~~~~~~~~~~~~~~
+> > 
 > 
-> IIRC the origins are even older and bounce buffers were used to
-> overcome the design flaws inherited all the way from the original IBM
-> PC.
+> This is a known minor issue,
+> to reduce the use of 'IS_ENABLED(CONFIG_DIMLIB)'
+> mentioned in v10. Since the calls of ethnl_update_profile() and
+> coalesce_put_profile() will only occur when IS_ENABLED(CONFIG_DIMLIB) returns
+> true, the robot's warning can be ignored the code is safe.
 
-[correct, but for swiotlb largely irrelevant PC addressing bits snipped]
+I don't get it. The build seems to fail. How is this a minor issue?
 
-swiotlb was added with the merge of the ia64 port to address 32-bit
-addressing limitations.  The 1MB addressing limitations of the PC did
-and still do of course exist, but weren't dealt with in any coherent
-fashion, and still aren't.  Swiotlb isn't related to them.
 
-> > +data to/from the original target memory buffer. The CPU copying bridges between
-> > +the unencrypted and the encrypted memory. This use of bounce buffers allows
-> > +existing device drivers to "just work" in a CoCo VM, with no modifications
-> > +needed to handle the memory encryption complexity.
+> All NIPA test cases running on my local pass successfully on V11.
 > 
-> This part might be misleading. It sounds as if SWIOTLB would not be
-> needed if drivers were smarter. But IIUC that's not the case. SWIOTLB
-> is used for streaming DMA, where device drivers have little control
-> over the physical placement of a DMA buffer. For example, when a
-> process allocates some memory, the kernel cannot know that this memory
-> will be later passed to a write(2) syscall to do direct I/O of a
-> properly aligned buffer that can go all the way down to the NVMe driver
-> with zero copy.
-
-I think the statement in the text is fine and easy to understand.  CoCo
-drivers could instead always map the memory unencrypted (which would have
-no so nice security and performance properties) or use fixed ringbuffers
-in shared unencrypted memory (which would require a different driver
-architecture).
-
-> > +block. Hence the default memory pool for swiotlb allocations must be
-> > +pre-allocated at boot time (but see Dynamic swiotlb below). Because swiotlb
-> > +allocations must be physically contiguous, the entire default memory pool is
-> > +allocated as a single contiguous block.
+> Alternatively, I remake the series to have IS_ENABLED(CONFIG_DIMLIB) back,
+> up to Kuba (and others). :)
 > 
-> Allocations must be contiguous in target device's DMA address space. In
-> practice this is achieved by being contiguous in CPU physical address
-> space (aka "physically contiguous"), but there might be subtle
-> differences, e.g. in a virtualized environment.
+> Thanks.
 > 
-> Now that I'm thinking about it, leave the paragraph as is, and I'll
-> update it if I write the code for it.
-
-Heh.  The only think making cpu non-contiguous address space contiguous
-for a device is an iommu.  And when we have that we only use swiotlb
-for unaligned iommu pages, so I'm not sure how we'd ever get there.
+> > 
+> > vim +/ethnl_update_profile +446 net/ethtool/coalesce.c
+> > 
+> >    424	
+> >    425	/**
+> >    426	 * ethnl_update_profile - get a profile nest with child nests from userspace.
+> >    427	 * @dev: netdevice to update the profile
+> >    428	 * @dst: profile get from the driver and modified by ethnl_update_profile.
+> >    429	 * @nests: nest attr ETHTOOL_A_COALESCE_*X_PROFILE to set profile.
+> >    430	 * @extack: Netlink extended ack
+> >    431	 *
+> >    432	 * Layout of nests:
+> >    433	 *   Nested ETHTOOL_A_COALESCE_*X_PROFILE attr
+> >    434	 *     Nested ETHTOOL_A_PROFILE_IRQ_MODERATION attr
+> >    435	 *       ETHTOOL_A_IRQ_MODERATION_USEC attr
+> >    436	 *       ETHTOOL_A_IRQ_MODERATION_PKTS attr
+> >    437	 *       ETHTOOL_A_IRQ_MODERATION_COMPS attr
+> >    438	 *     ...
+> >    439	 *     Nested ETHTOOL_A_PROFILE_IRQ_MODERATION attr
+> >    440	 *       ETHTOOL_A_IRQ_MODERATION_USEC attr
+> >    441	 *       ETHTOOL_A_IRQ_MODERATION_PKTS attr
+> >    442	 *       ETHTOOL_A_IRQ_MODERATION_COMPS attr
+> >    443	 *
+> >    444	 * Return: 0 on success or a negative error code.
+> >    445	 */
+> >  > 446	static int ethnl_update_profile(struct net_device *dev,
+> >    447					struct dim_cq_moder __rcu **dst,
+> >    448					const struct nlattr *nests,
+> >    449					struct netlink_ext_ack *extack)
+> >    450	{
+> >    451		int len_irq_moder = ARRAY_SIZE(coalesce_irq_moderation_policy);
+> >    452		struct nlattr *tb[ARRAY_SIZE(coalesce_irq_moderation_policy)];
+> >  > 453		struct dim_irq_moder *irq_moder = dev->irq_moder;
+> >    454		struct dim_cq_moder *new_profile, *old_profile;
+> >    455		int ret, rem, i = 0, len;
+> >    456		struct nlattr *nest;
+> >    457	
+> >    458		if (!nests)
+> >    459			return 0;
+> >    460	
+> >    461		if (!*dst)
+> >    462			return -EOPNOTSUPP;
+> >    463	
+> >    464		old_profile = rtnl_dereference(*dst);
+> >    465		len = NET_DIM_PARAMS_NUM_PROFILES * sizeof(*old_profile);
+> >    466		new_profile = kmemdup(old_profile, len, GFP_KERNEL);
+> >    467		if (!new_profile)
+> >    468			return -ENOMEM;
+> >    469	
+> >    470		nla_for_each_nested_type(nest, ETHTOOL_A_PROFILE_IRQ_MODERATION,
+> >    471					 nests, rem) {
+> >    472			ret = nla_parse_nested(tb, len_irq_moder - 1, nest,
+> >    473					       coalesce_irq_moderation_policy,
+> >    474					       extack);
+> >    475			if (ret)
+> >    476				goto err_out;
+> >    477	
+> >    478			ret = ethnl_update_irq_moder(irq_moder, &new_profile[i].usec,
+> >    479						     ETHTOOL_A_IRQ_MODERATION_USEC,
+> >    480						     tb, DIM_COALESCE_USEC,
+> >    481						     extack);
+> >    482			if (ret)
+> >    483				goto err_out;
+> >    484	
+> >    485			ret = ethnl_update_irq_moder(irq_moder, &new_profile[i].pkts,
+> >    486						     ETHTOOL_A_IRQ_MODERATION_PKTS,
+> >    487						     tb, DIM_COALESCE_PKTS,
+> >    488						     extack);
+> >    489			if (ret)
+> >    490				goto err_out;
+> >    491	
+> >    492			ret = ethnl_update_irq_moder(irq_moder, &new_profile[i].comps,
+> >    493						     ETHTOOL_A_IRQ_MODERATION_COMPS,
+> >    494						     tb, DIM_COALESCE_COMPS,
+> >    495						     extack);
+> >    496			if (ret)
+> >    497				goto err_out;
+> >    498	
+> >    499			i++;
+> >    500		}
+> >    501	
+> >    502		rcu_assign_pointer(*dst, new_profile);
+> >    503		kfree_rcu(old_profile, rcu);
+> >    504	
+> >    505		return 0;
+> >    506	
+> >    507	err_out:
+> >    508		kfree(new_profile);
+> >    509		return ret;
+> >    510	}
+> >    511	
+> > 
+> > -- 
+> > 0-DAY CI Kernel Test Service
+> > https://github.com/intel/lkp-tests/wiki
 
 
