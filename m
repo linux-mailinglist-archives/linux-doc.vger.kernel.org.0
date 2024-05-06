@@ -1,135 +1,83 @@
-Return-Path: <linux-doc+bounces-15817-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-15819-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54CA28BC844
-	for <lists+linux-doc@lfdr.de>; Mon,  6 May 2024 09:25:17 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id A980D8BC855
+	for <lists+linux-doc@lfdr.de>; Mon,  6 May 2024 09:27:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7C56C1C21325
-	for <lists+linux-doc@lfdr.de>; Mon,  6 May 2024 07:25:16 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5F2E51F21031
+	for <lists+linux-doc@lfdr.de>; Mon,  6 May 2024 07:27:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEB4084DFA;
-	Mon,  6 May 2024 07:25:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 103E83FB89;
+	Mon,  6 May 2024 07:27:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="nZznPeyz"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TPi2B+bP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-180.mta1.migadu.com (out-180.mta1.migadu.com [95.215.58.180])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81EB2763E4
-	for <linux-doc@vger.kernel.org>; Mon,  6 May 2024 07:25:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB63D1772F;
+	Mon,  6 May 2024 07:27:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1714980311; cv=none; b=j9o7VZNwweMCh3whoM4ZhbUMKA7j7n0wplmhIEVWlWDFsyj+z4yfa1xn0tySGKORgdXtLIY5oPKlkNfFovtllqtd/LIyZgYJdCM0IizkBVDYoNKDxRd9oXvCLxxxJ0MlHe4c+kz7ltVuGmRBWiSv8VL2ShlrJLBxPeKPi3J8Bgs=
+	t=1714980465; cv=none; b=sT05s4IaPPM9xwktMwimO2+xJULfr7AuYHe3MYcWB/QbPx8pjFfmloTxGKeW0/hggVEaYYfvOxQcdkt9/ROkwj++E5FfxwOGMA67Pu7tAyw3SWmGC8ujQ4/yCAUD786QphUNTSwQa8JeXfebJr6iLKznoG+NnphMRyigBPWEf/o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1714980311; c=relaxed/simple;
-	bh=OVDIWxUDRvlUhkLXJmVPIg7Ss7MCI8rmRJKjNBcIAYc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=txbjHmNq6DPpH/u81RY4g8c/N/3SWr7Ubn6aiP2qxXcXse8XRVUAszpFx4lcDxfGsTvP79wF2s0eN/7dU2QAvyJUWsQCKnvJCEu1uLOn7lPKPbXcpUWg9AdQumYXydcebJqVXZxFx+S2IdQV7Jc6XSAJco2AQsFaWe7d/y9dyeM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=nZznPeyz; arc=none smtp.client-ip=95.215.58.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Message-ID: <1615fe92-d4ff-4ef2-9bd0-199aa9e3a426@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1714980307;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=VNICsQwAZLEIq4FagMWJtT9l3ne94Q3HOggFLnvinbw=;
-	b=nZznPeyzXvBnkwuymZAd7H5uP6FsRpvl2JfkIEHhVLGTRXN2z1loonY6p/619WY28zpwEl
-	Bogs2+q+8zcc500vR6DNiQHdd+mPtphq8OjqAyhbN7IEoPG5hcFcOxw9uMk2A927K9UGj9
-	Kf4xW9Sd1i3DF1NmDYSRbBRBNofkxMI=
-Date: Mon, 6 May 2024 09:25:01 +0200
+	s=arc-20240116; t=1714980465; c=relaxed/simple;
+	bh=9Kw69BfKa5kkeDkJAAyST9I0D7UXthaocRM2ai6H6cA=;
+	h=Message-ID:Date:From:To:Subject:In-Reply-To:References:Cc; b=bxkbhIATY0YhHLvNC2Wy9GAxmYNLc/pkCKsfQmk3zQBj/g3roF5UmBtt4EMAYd0Idb7ZG9A61BH38mi/OjYnsLW+nzwirQBvcNiHtQ/8vslkmYP7pABbr9ecroWOm7B2yCyknShBgL+9X41cKIS7bjeTXg07UQWIgepPBumZDQk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TPi2B+bP; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E091CC4AF63;
+	Mon,  6 May 2024 07:27:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1714980464;
+	bh=9Kw69BfKa5kkeDkJAAyST9I0D7UXthaocRM2ai6H6cA=;
+	h=Date:From:To:Subject:In-Reply-To:References:Cc:From;
+	b=TPi2B+bPlbWrXR0vRrMi7OO7YfR/17oBUiIP3I0reFQOse+6mJiSXTFUDiYz9KNxR
+	 Xgovz8h0zqDVo38VqRUvYWa495nrfut4pabGPBCiTJyx8MjnJDLDH8Es1uxCDl+3hM
+	 UMzY/RS2j75++Trzbyg6e6aITMjsDP7A3+iToxB6REkWgd4QuQHWdTc7nCS3vwzbpc
+	 e0z72+4Ib9oZ/Smq22YUV4CnfxfAHkusWe39MT5oJnmX8+hSa589nJhtRd1NPj/zlH
+	 6O8cxnx+WZaWn5Rm9rYHzlX2ijHikOqIxGr1IQXAhHqQQIo4MkIs7LcwYYge1M3qSq
+	 cXp1IO+KNQZ2w==
+Message-ID: <0aebaa438b4f2fd13b8a7ea5a92ca60d@kernel.org>
+Date: Mon, 06 May 2024 07:27:41 +0000
+From: "Maxime Ripard" <mripard@kernel.org>
+To: "Douglas Anderson" <dianders@chromium.org>
+Subject: Re: [RFT PATCH v2 00/48] drm/panel: Remove most store/double-check
+ of prepared/enabled state
+In-Reply-To: <20240503213441.177109-1-dianders@chromium.org>
+References: <20240503213441.177109-1-dianders@chromium.org>
+Cc: dri-devel@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mediatek@lists.infradead.org, "AngeloGioacchino
+ Del Regno" <angelogioacchino.delregno@collabora.com>, "Chris Morgan" <macromorgan@hotmail.com>, "Daniel
+ Vetter" <daniel@ffwll.ch>, "David Airlie" <airlied@gmail.com>,
+ =?utf-8?b?R3VpZG8gR8O8bnRoZXI=?= <agx@sigxcpu.org>, "Jerry Han" <hanxu5@huaqin.corp-partner.google.com>, "Jessica
+ Zhang" <quic_jesszhan@quicinc.com>, "Jonathan Corbet" <corbet@lwn.net>, "Linus
+ Walleij" <linus.walleij@linaro.org>, "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Matthias
+ Brugger" <matthias.bgg@gmail.com>, "Maxime Ripard" <mripard@kernel.org>, "Neil
+ Armstrong" <neil.armstrong@linaro.org>, "Ondrej Jirman" <megi@xff.cz>, "Purism
+ Kernel Team" <kernel@puri.sm>, "Robert Chiras" <robert.chiras@nxp.com>, "Sam
+ Ravnborg" <sam@ravnborg.org>, "Stefan Mavrodiev" <stefan@olimex.com>, "Sumit
+ Semwal" <sumit.semwal@linaro.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "Yuran
+ Pereira" <yuran.pereira@hotmail.com>
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Subject: Re: [RFC RESEND 16/16] nvme-pci: use blk_rq_dma_map() for NVMe SGL
-To: Leon Romanovsky <leon@kernel.org>
-Cc: Christoph Hellwig <hch@lst.de>, Robin Murphy <robin.murphy@arm.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Joerg Roedel <joro@8bytes.org>,
- Will Deacon <will@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>,
- Chaitanya Kulkarni <chaitanyak@nvidia.com>,
- Chaitanya Kulkarni <kch@nvidia.com>, Jonathan Corbet <corbet@lwn.net>,
- Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>,
- Sagi Grimberg <sagi@grimberg.me>, Yishai Hadas <yishaih@nvidia.com>,
- Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>,
- Kevin Tian <kevin.tian@intel.com>,
- Alex Williamson <alex.williamson@redhat.com>,
- =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-rdma@vger.kernel.org, iommu@lists.linux.dev,
- linux-nvme@lists.infradead.org, kvm@vger.kernel.org, linux-mm@kvack.org,
- Bart Van Assche <bvanassche@acm.org>,
- Damien Le Moal <damien.lemoal@opensource.wdc.com>,
- Amir Goldstein <amir73il@gmail.com>,
- "josef@toxicpanda.com" <josef@toxicpanda.com>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- "daniel@iogearbox.net" <daniel@iogearbox.net>,
- Dan Williams <dan.j.williams@intel.com>, "jack@suse.com" <jack@suse.com>
-References: <cover.1709635535.git.leon@kernel.org>
- <016fc02cbfa9be3c156a6f74df38def1e09c08f1.1709635535.git.leon@kernel.org>
- <c9f9e29e-c2e1-4f99-b359-db0babd41dec@linux.dev>
- <20240505132314.GC68202@unreal>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Zhu Yanjun <yanjun.zhu@linux.dev>
-In-Reply-To: <20240505132314.GC68202@unreal>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
 
+On Fri, 3 May 2024 14:32:41 -0700, Douglas Anderson wrote:
+> 
+> As talked about in commit d2aacaf07395 ("drm/panel: Check for already
+> prepared/enabled in drm_panel"), we want to remove needless code from
+> panel drivers that was storing and double-checking the
+> prepared/enabled state. Even if someone was relying on the
+> 
+> [ ... ]
 
-On 05.05.24 15:23, Leon Romanovsky wrote:
-> On Fri, May 03, 2024 at 04:41:21PM +0200, Zhu Yanjun wrote:
->> On 05.03.24 12:18, Leon Romanovsky wrote:
->>> From: Chaitanya Kulkarni <kch@nvidia.com>
-> <...>
->
->>> This is an RFC to demonstrate the newly added DMA APIs can be used to
->>> map/unmap bvecs without the use of sg list, hence I've modified the pci
->>> code to only handle SGLs for now. Once we have some agreement on the
->>> structure of new DMA API I'll add support for PRPs along with all the
->>> optimization that I've removed from the code for this RFC for NVMe SGLs
->>> and PRPs.
->>>
-> <...>
->
->>> diff --git a/drivers/nvme/host/pci.c b/drivers/nvme/host/pci.c
->>> index e6267a6aa380..140939228409 100644
->>> --- a/drivers/nvme/host/pci.c
->>> +++ b/drivers/nvme/host/pci.c
->>> @@ -236,7 +236,9 @@ struct nvme_iod {
->>>    	unsigned int dma_len;	/* length of single DMA segment mapping */
->>>    	dma_addr_t first_dma;
->>>    	dma_addr_t meta_dma;
->>> -	struct sg_table sgt;
->>> +	struct dma_iova_attrs iova;
->>> +	dma_addr_t dma_link_address[128];
->> Why the length of this array is 128? Can we increase this length of the
->> array?
-> It is combination of two things:
->   * Good enough value for this nvme RFC to pass simple test, which Chaitanya did.
->   * Output of various NVME_CTRL_* defines
+Acked-by: Maxime Ripard <mripard@kernel.org>
 
-Thanks a lot. I enlarged this number to 512. It seems that it can work. 
-Hope this will increase the performance.
-
-Best Regards,
-
-Zhu Yanjun
-
->
-> Thanks
-
--- 
-Best Regards,
-Yanjun.Zhu
-
+Thanks!
+Maxime
 
