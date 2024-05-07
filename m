@@ -1,196 +1,104 @@
-Return-Path: <linux-doc+bounces-15876-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-15878-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED07A8BDDCC
-	for <lists+linux-doc@lfdr.de>; Tue,  7 May 2024 11:12:01 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1003A8BDFD7
+	for <lists+linux-doc@lfdr.de>; Tue,  7 May 2024 12:38:31 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1C3F51C21286
-	for <lists+linux-doc@lfdr.de>; Tue,  7 May 2024 09:12:01 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 93EA31F25693
+	for <lists+linux-doc@lfdr.de>; Tue,  7 May 2024 10:38:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C4BFD14D6E4;
-	Tue,  7 May 2024 09:11:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0A7A514F115;
+	Tue,  7 May 2024 10:38:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=yshyn.com header.i=@yshyn.com header.b="eGRKrAns"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout11.his.huawei.com (frasgout11.his.huawei.com [14.137.139.23])
+Received: from phoenix.uberspace.de (phoenix.uberspace.de [95.143.172.135])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D6BF6BFC0;
-	Tue,  7 May 2024 09:11:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.23
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E9F36F525
+	for <linux-doc@vger.kernel.org>; Tue,  7 May 2024 10:38:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.143.172.135
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1715073117; cv=none; b=oqzXnMjjHJXUi43kpNBrdfh1Z5aaolu2w08440qnU5h/KiYWNRMS1884RCL+Ll11vWmi4QxmXuB8ALdk/7XiR52UTy8jbRzNWOs/mm2STu0p1R5fMhePQ69wyVvM1FtCoNLpTM3SMQXi0+F4GDK5uwJqH2YVvT41XC2psShkeLQ=
+	t=1715078300; cv=none; b=U+ykzOHQpK8pR1AL32FaHE1W+1w8QFXmI4EKXOVMORvNBC/NO2L4yK/eFqd4Lteb9LBQBoCpiVmYJLuRKcY4wCY3VFbLtHclv8At1/sHS3BjLN2FwIaYuOl4mDHey22EQCkBJQJ7AW8lp2TuS5xjvqgbCKT57i085sVRwhF7yQY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1715073117; c=relaxed/simple;
-	bh=YHXlC7kJ8K1unV8F/MZ9J57OGBK3Citlye2x7wU1iwo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ibGOO5FFEL1zWsv57/rwCUAAN5XE/A5qnX5TMry9KHnMOV4xRVAlxBfAntKdvwoWgJZtEAiG2uYQbmEWQI46YS3tz0bojT+GLmPaQ/opmUfI25qx79Q2ByweEUcksSPGZKSuEdlTFbeQWNcK/ufw58U3QGNGWutbhrZZH/GNb4A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.23
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.18.186.29])
-	by frasgout11.his.huawei.com (SkyGuard) with ESMTP id 4VYXCb0gGNz9v7fr;
-	Tue,  7 May 2024 16:54:51 +0800 (CST)
-Received: from mail02.huawei.com (unknown [7.182.16.27])
-	by mail.maildlp.com (Postfix) with ESMTP id A26CE14074A;
-	Tue,  7 May 2024 17:11:40 +0800 (CST)
-Received: from [10.45.158.162] (unknown [10.45.158.162])
-	by APP2 (Coremail) with SMTP id GxC2BwB3Yyc+8DlmamutBw--.32210S2;
-	Tue, 07 May 2024 10:11:40 +0100 (CET)
-Message-ID: <a49c85e2-f5d1-4beb-86d9-43cbc2d59336@huaweicloud.com>
-Date: Tue, 7 May 2024 11:11:19 +0200
+	s=arc-20240116; t=1715078300; c=relaxed/simple;
+	bh=C5Q8d7JYtURFJbkMrFTwRw8yPtwQ4hTSCRGnP6zKl9s=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=F8aWx2oXOT99uV/mywDjnZzP2T/M+m+C6nyToDRG2/sGKppQWRWNrAuWUcT76wq2utDhfS3LKJ6P1d+5mA1lcJddO47gkNU3ndFle4pZBJv59euZfjXSksKZj1Makiq5jqDO/qBKZrJZxIjTYTA2t7ZFSY3D5ZgVjha75P20yYE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=yshyn.com; spf=pass smtp.mailfrom=yshyn.com; dkim=pass (2048-bit key) header.d=yshyn.com header.i=@yshyn.com header.b=eGRKrAns; arc=none smtp.client-ip=95.143.172.135
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=yshyn.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yshyn.com
+Received: (qmail 4617 invoked by uid 988); 7 May 2024 10:31:34 -0000
+Authentication-Results: phoenix.uberspace.de;
+	auth=pass (plain)
+Received: from unknown (HELO unkown) (::1)
+	by phoenix.uberspace.de (Haraka/3.0.1) with ESMTPSA; Tue, 07 May 2024 12:31:34 +0200
+From: Illia Ostapyshyn <illia@yshyn.com>
+To: Tejun Heo <tj@kernel.org>,
+	Zefan Li <lizefan.x@bytedance.com>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Cc: cgroups@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	kernel-janitors@vger.kernel.org,
+	Illia Ostapyshyn <illia@yshyn.com>
+Subject: [PATCH] docs: cgroup-v1: Update page cache removal functions
+Date: Tue,  7 May 2024 12:30:39 +0200
+Message-Id: <20240507103038.541462-1-illia@yshyn.com>
+X-Mailer: git-send-email 2.39.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH memory-model 2/4] Documentation/litmus-tests: Demonstrate
- unordered failing cmpxchg
-To: paulmck@kernel.org, luc.maranget@inria.fr
-Cc: linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
- kernel-team@meta.com, mingo@kernel.org, stern@rowland.harvard.edu,
- parri.andrea@gmail.com, will@kernel.org, peterz@infradead.org,
- boqun.feng@gmail.com, npiggin@gmail.com, dhowells@redhat.com,
- j.alglave@ucl.ac.uk, akiyks@gmail.com,
- Frederic Weisbecker <frederic@kernel.org>, Daniel Lustig
- <dlustig@nvidia.com>, Joel Fernandes <joel@joelfernandes.org>,
- Mark Rutland <mark.rutland@arm.com>, Jonathan Corbet <corbet@lwn.net>,
- linux-doc@vger.kernel.org
-References: <42a43181-a431-44bd-8aff-6b305f8111ba@paulmck-laptop>
- <20240501232132.1785861-2-paulmck@kernel.org>
- <c97f0529-5a8f-4a82-8e14-0078d4372bdc@huaweicloud.com>
- <16381d02-cb70-4ae5-b24e-aa73afad9aed@huaweicloud.com>
- <2a695f63-6c9a-4837-ac03-f0a5c63daaaf@paulmck-laptop>
-From: Jonas Oberhauser <jonas.oberhauser@huaweicloud.com>
-In-Reply-To: <2a695f63-6c9a-4837-ac03-f0a5c63daaaf@paulmck-laptop>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:GxC2BwB3Yyc+8DlmamutBw--.32210S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxAryDXF4kKFy3WFWfZr45trb_yoWrGr1xpF
-	WrKFWUKr1DJ3yUu340va1qqFy0v393JF4Yqw15tryjyan8GF1FvFyYqrWY9r9rtrs3Cw40
-	vr1Y93srZr98AFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUklb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k2
-	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
-	xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxV
-	AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
-	x7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
-	0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l42xK82IYc2Ij
-	64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x
-	8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5MIIYY7kG6xAYrwCIc40Y0x0E
-	wIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JV
-	WxJwCI42IY6xAIw20EY4v20xvaj40_Wr1j6rW3Jr1lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
-	IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU5vQ6JUUUU
-	U==
-X-CM-SenderInfo: 5mrqt2oorev25kdx2v3u6k3tpzhluzxrxghudrp/
+X-Rspamd-Bar: ++
+X-Rspamd-Report: SUSPICIOUS_RECIPS(1.5) BAYES_HAM(-0.001507) MID_CONTAINS_FROM(1) MIME_GOOD(-0.1) R_MISSING_CHARSET(0.5)
+X-Rspamd-Score: 2.898492
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=yshyn.com; s=uberspace;
+	h=from:to:cc:subject:date;
+	bh=C5Q8d7JYtURFJbkMrFTwRw8yPtwQ4hTSCRGnP6zKl9s=;
+	b=eGRKrAnszQmFTpMjqn/A5h3sOPnvpexXMqr5mH+Xbxr5GGA7mBEXY0jQfTjle+2TsalgBkZh0M
+	XPmoMloDmmeavn24pdfuXuQ/ZOX1Hk73CgbRQOSmEzoTw/XzbHWxWDMuZFYMcezmFEHotwHOf1Z/
+	2Pa0npQL2oCKEgBmLjI4BIJwEySseZu2ngdSlsVXEtYJ0U2Ja4+O4hEOgtfwfHrp/gvIz/8jGF2g
+	vwtjuqvIrRx1WCYXyjp6FHPWPmaO3vgO2Vtpu3THdw5qrpBbDSz+nnqmN/Rl4fE55aGdrZ0KjjZ+
+	uRc+tZ1PD9QO2CEkKpaHZ2WilYbTLk0cvt7QbpAQ==
 
+Commit 452e9e6992fe ("filemap: Add filemap_remove_folio and
+__filemap_remove_folio") reimplemented __delete_from_page_cache() as
+__filemap_remove_folio() and delete_from_page_cache() as
+filemap_remove_folio().  The compatibility wrappers were finally removed
+in ece62684dcfb ("hugetlbfs: convert hugetlb_delete_from_page_cache() to
+use folios") and 6ffcd825e7d0 ("mm: Remove __delete_from_page_cache()").
 
+Update the remaining references to dead functions in the memcg
+implementation memo.
 
-Am 5/6/2024 um 8:00 PM schrieb Paul E. McKenney:
-> On Mon, May 06, 2024 at 06:30:45PM +0200, Jonas Oberhauser wrote:
->> Am 5/6/2024 um 12:05 PM schrieb Jonas Oberhauser:
->>> Am 5/2/2024 um 1:21 AM schrieb Paul E. McKenney:
->>>> This commit adds four litmus tests showing that a failing cmpxchg()
->>>> operation is unordered unless followed by an smp_mb__after_atomic()
->>>> operation.
->>>
->>> So far, my understanding was that all RMW operations without suffix
->>> (xchg(), cmpxchg(), ...) will be interpreted as F[Mb];...;F[Mb].
->>>
->>> I guess this shows again how important it is to model these full
->>> barriers explicitly inside the cat model, instead of relying on implicit
->>> conversions internal to herd.
->>>
->>> I'd like to propose a patch to this effect.
->>>
->>> What is the intended behavior of a failed cmpxchg()? Is it the same as a
->>> relaxed one?
-> 
-> Yes, and unless I am too confused, LKMM currently does implement this.
-> Please let me know if I am missing something.
+Signed-off-by: Illia Ostapyshyn <illia@yshyn.com>
+---
+ Documentation/admin-guide/cgroup-v1/memcg_test.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-At least the herd and Dat3M implementations seem to be doing that, at 
-least according to this thread sent to me by Hernan.
-
-https://github.com/herd/herdtools7/issues/384#issue-1243049709
-
-
-> 
->>> My suggestion would be in the direction of marking read and write events
->>> of these operations as Mb, and then defining
->>>
->>> (* full barrier events that appear in non-failing RMW *)
->>> let RMW_MB = Mb & (dom(rmw) | range(rmw))
->>>
->>>
->>> let mb =
->>>       [M] ; fencerel(Mb) ; [M]
->>>     | [M] ; (po \ rmw) ; [RMW_MB] ; po^? ; [M]
->>>     | [M] ; po^? ; [RMW_MB] ; (po \ rmw) ; [M]
->>>     | ...
->>>
->>> The po \ rmw is because ordering is not provided internally of the rmw
->>
->> (removed the unnecessary si since LKMM is still non-mixed-accesses)
-> 
-> Addition of mixed-access support would be quite welcome!
-
-:P
-
-
->> This could also be written with a single rule:
->>
->>       | [M] ; (po \ rmw) & (po^?; [RMW_MB] ; po^?) ; [M]
->>
->>> I suspect that after we added [rmw] sequences it could perhaps be
->>> simplified [...]
->>
->> No, my suspicion is wrong - this would incorrectly let full-barrier RMWs
->> act like strong fences when they appear in an rmw sequence.
->>
->>   if (z==1)  ||  x = 2;     ||  xchg(&y,2)  || if (y==2)
->>     x = 1;   ||  y =_rel 1; ||              ||    z=1;
->>
->>
->> right now, we allow x=2 overwriting x=1 (in case the last thread does not
->> propagate x=2 along with z=1) because on power, the xchg might be
->> implemented with a sync that doesn't get executed until the very end
->> of the program run.
->>
->>
->> Instead of its negative form (everything other than inside the rmw),
->> it could also be rewritten positively. Here's a somewhat short form:
->>
->> let mb =
->>       [M] ; fencerel(Mb) ; [M]
->>     (* everything across a full barrier RMW is ordered. This includes up to
->> one event inside the RMW. *)
->>     | [M] ; po ; [RMW_MB] ; po ; [M]
->>     (* full barrier RMW writes are ordered with everything behind the RMW *)
->>     | [W & RMW_MB] ; po ; [M]
->>     (* full barrier RMW reads are ordered with everything before the RMW *)
->>     | [M] ; po ; [R & RMW_MB]
->>     | ...
-> 
-> Does this produce the results expected by the litmus tests in the Linux
-> kernel source tree and also those at https://github.com/paulmckrcu/litmus?
-
-I suspect that it doesn't work out of the box because of some of the 
-implicit magic herd is doing that could get in the way, so I'd need some 
-help from Luc to actually turn this into a patch that can be tested.
-(or at least confirmation that just by changing a few things in the .def 
-& .bell files we can sidestep the implicit behaviors).
-
-But at least in my proofs it seems to be equivalent.
-(there may still be differences in opinion on what some herd things 
-mean, so what I/Viktor have formalized as the semantics of the herd 
-model may not be exactly the behavior of LKMM in herd. hence testing is 
-necessary too as a sanity check)
-
-best wishes,
-   jonas
+diff --git a/Documentation/admin-guide/cgroup-v1/memcg_test.rst b/Documentation/admin-guide/cgroup-v1/memcg_test.rst
+index 1f128458ddea..4386362f2ed8 100644
+--- a/Documentation/admin-guide/cgroup-v1/memcg_test.rst
++++ b/Documentation/admin-guide/cgroup-v1/memcg_test.rst
+@@ -102,7 +102,7 @@ Under below explanation, we assume CONFIG_SWAP=y.
+ 	The logic is very clear. (About migration, see below)
+ 
+ 	Note:
+-	  __remove_from_page_cache() is called by remove_from_page_cache()
++	  __filemap_remove_folio() is called by filemap_free_folio()
+ 	  and __remove_mapping().
+ 
+ 6. Shmem(tmpfs) Page Cache
+-- 
+2.39.2
 
 
