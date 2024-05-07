@@ -1,737 +1,287 @@
-Return-Path: <linux-doc+bounces-15973-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-15983-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14C1F8BED71
-	for <lists+linux-doc@lfdr.de>; Tue,  7 May 2024 22:00:17 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A20E8BEDD0
+	for <lists+linux-doc@lfdr.de>; Tue,  7 May 2024 22:08:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 6B4EBB23E95
-	for <lists+linux-doc@lfdr.de>; Tue,  7 May 2024 20:00:14 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B34B11C24BDA
+	for <lists+linux-doc@lfdr.de>; Tue,  7 May 2024 20:08:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 459823DABEA;
-	Tue,  7 May 2024 19:52:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D7A516EC10;
+	Tue,  7 May 2024 20:03:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="huytlNlF"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="VGH2pOsC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com (mail-mw2nam04on2069.outbound.protection.outlook.com [40.107.101.69])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E58FD20010B;
-	Tue,  7 May 2024 19:52:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1715111526; cv=none; b=LZWhWH+lr2Z6d441CI+OC1f3Jw3E2nICJPAhFDv9spZXlYrPpz2/O9B7zetfGvnsf5yh59seZBFiCuo+SfX9k5YQzDarthRpCaH7UshtFZD66XU00pRUztbeD2S43BtBfFU5G44ub3FYlNCDkZx+x9jdb175p1Ie9cVhOpju0lQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1715111526; c=relaxed/simple;
-	bh=O5F+oOGqfyWV/tg4dT7xjofn7ZW3+EC+qYEJtWgSNbI=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=EwyoXSSAcmP7cBUMYUxF/a4QXBiBjGGup9VZiDoNh+sICcBfRhw7qFY7yTVaWXoWWIKW0cHUvsYsy6nFUn5SHnfaowN0/1SbCihxOBaPgWy7/a+Xf2NWaGwmU1o9CH/+6tj0owZHNJrohVjWDYscvV9esj79bYmOl420eRFR63E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=huytlNlF; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 447Ivlv6013266;
-	Tue, 7 May 2024 19:51:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-type; s=qcppdkim1; bh=EbmDbcVAgG8RXlVsLx/r
-	KOFWhJKX5lDzIsBPr06jYmk=; b=huytlNlFU853LE4McGS0w2/wWNE++XVIa/2Q
-	kXJ8qjVD9oeu0QXZRrduOwWz2Nyk9OkaVmSwZRSnmpsQeJl/lHtXWjHZ+uwv6pyB
-	+tqa8X8mi3nN/fuYMExbyurLbhEtr3dQa2RxZ6nw0pNZCpc5+Cqbxv+fIddQr43A
-	6bnZDS5ToumI+5cJjnkn3oYSooelDIamQWbU44SR8PX3qJAHu2oRvo2zVoZksRR2
-	vNuiQb7NLW/HvUxVJITqSbCygsC30YqJmw8wywYJYlFrr6t2xxLq0ho8sLFRW0Gy
-	7eEqOOtofHHBtSscBRc2p/7JkJOE4hB6KxYt4j3UcUnW2BzYkQ==
-Received: from nalasppmta03.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3xysg8r5sa-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 07 May 2024 19:51:39 +0000 (GMT)
-Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
-	by NALASPPMTA03.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 447Jpc7W006191
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 7 May 2024 19:51:38 GMT
-Received: from hu-wcheng-lv.qualcomm.com (10.49.16.6) by
- nalasex01b.na.qualcomm.com (10.47.209.197) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Tue, 7 May 2024 12:51:38 -0700
-From: Wesley Cheng <quic_wcheng@quicinc.com>
-To: <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
-        <perex@perex.cz>, <conor+dt@kernel.org>, <corbet@lwn.net>,
-        <lgirdwood@gmail.com>, <andersson@kernel.org>, <krzk+dt@kernel.org>,
-        <gregkh@linuxfoundation.org>, <Thinh.Nguyen@synopsys.com>,
-        <broonie@kernel.org>, <bgoswami@quicinc.com>, <tiwai@suse.com>,
-        <bagasdotme@gmail.com>, <robh@kernel.org>, <konrad.dybcio@linaro.org>
-CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-sound@vger.kernel.org>, <linux-usb@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <alsa-devel@alsa-project.org>, Wesley Cheng <quic_wcheng@quicinc.com>
-Subject: [PATCH v21 39/39] ASoC: doc: Add documentation for SOC USB
-Date: Tue, 7 May 2024 12:51:16 -0700
-Message-ID: <20240507195116.9464-40-quic_wcheng@quicinc.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240507195116.9464-1-quic_wcheng@quicinc.com>
-References: <20240507195116.9464-1-quic_wcheng@quicinc.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54FE614B964;
+	Tue,  7 May 2024 20:03:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.101.69
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1715112216; cv=fail; b=ebhxMnYdCaGpbyPZoTqGZEeXPLLX3hR+5981BWiX4zt4OyhECtHWPDY1M7siUuS9zOuxEXuXtTcL/uKHuBGC9KqhhtI2n8ZnWIxJS1pHlb4lebpwPIanGlWT6rYUO+hRH7z1kFf51VDSTqxgrIssvtVCMkVE78rusZyhA8cXRTE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1715112216; c=relaxed/simple;
+	bh=QwoTZStXdkBVBkhNuDpl++Hzrodkht1xkG+dqGxybbU=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=Drq704ogdH9hTkuq57RBoK8avQKhjkusYc3Dvag51B0yh2v0cBVZOewxzR0+BRZQud33DTwSMLIvYNnrUPNnGNlqE8tAnWZiS12T/jDUlwf+OVSg9Tw4m8v6lw/0gXn++6drFpKbkqMeEOmCBmzTFkdyh/+e4PXkBqTrtIMUfRM=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=VGH2pOsC; arc=fail smtp.client-ip=40.107.101.69
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PTllCNTOBK3pxQQ2XN2fXKTrD7WGMxi0s5xK8JS07Lq1U8SXieTCD+ddyhEIQe/1rPQxP4AiLWvGMmsQFIGmpDrpQ9Y4xYuY3F9f7CJTgCDwpsO9prCinq0o2C+FJu7LsqJDxYjqGr9h1YQy07tmNm+sumYwzLOMQ2AiMLqakNqLwY+ZbL6nrns3O37R9hKuE9poN2k0DO1OUzeIiO6gtJqiLWtFYMn3B3N2AiYagbKevvQlE004fPhql38g/+WS9C/kxkPqb4JJOWvyEK/JfDaHeHwrhZsk8UvItrw2iE7XCLp5NlDY4oaf8bkImfRngTIkGMhFuNIv4JiGsBf6zQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=V4ndVPotJTVXbxdc+CLwXvLt9EoWRTqn5eAFeE9UQro=;
+ b=F2sm17n9GDNvTLa23F6nllatCQN78TVf8oK3Ba+YfUTyKa4aL90gJlBPnJ9UaUllZzSnFOLde23AsAKX5kdL4DmPjf+PFJ0Fv0y0zJYiD/q7PjrfIhnfANqwXXJ0YtjAj3NZIrPBmYic1VCXGjCBWEZf2nMGI/OL3RVQBNkHCfi+yYgHzTQruIo1A0cj3PGahv3sHrn2h3HDM1irYYErg0SPhnXpWcE3sms31yaA6E2UIeurcqCBjODyunvei/w8GpxYzkADOhbVGzpMwwALSZPl2fcTDAbfcUKJkYlvWBwLkD/CsyZZT6UP03Ar+RcygWsZ5CERTO/BhJSsl+l87A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=V4ndVPotJTVXbxdc+CLwXvLt9EoWRTqn5eAFeE9UQro=;
+ b=VGH2pOsCRlLfGvLlc38AWZInPvDqpKjW1FRqg//XMdhRm8J3GolM2388We4qxc0SlVbmv98P/xrtNMBzJXpEI3ZgLqBv6FFEx2ant540TqyhTfKjoeUDZFBsSfxjgRFY0hdWUgPRwaXSM/xkZRQlHA0+4oyT6s2WkugGp2uXeCM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from MW3PR12MB4553.namprd12.prod.outlook.com (2603:10b6:303:2c::19)
+ by DS0PR12MB7801.namprd12.prod.outlook.com (2603:10b6:8:140::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.41; Tue, 7 May
+ 2024 20:03:31 +0000
+Received: from MW3PR12MB4553.namprd12.prod.outlook.com
+ ([fe80::b0ef:2936:fec1:3a87]) by MW3PR12MB4553.namprd12.prod.outlook.com
+ ([fe80::b0ef:2936:fec1:3a87%4]) with mapi id 15.20.7544.041; Tue, 7 May 2024
+ 20:03:30 +0000
+Message-ID: <b247fb17-7234-4b7d-9906-f23689dd5b50@amd.com>
+Date: Tue, 7 May 2024 15:03:26 -0500
+User-Agent: Mozilla Thunderbird
+Reply-To: babu.moger@amd.com
+Subject: Re: [RFC PATCH v3 08/17] x86/resctrl: Initialize assignable counters
+ bitmap
+To: Reinette Chatre <reinette.chatre@intel.com>, corbet@lwn.net,
+ fenghua.yu@intel.com, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+ dave.hansen@linux.intel.com
+Cc: x86@kernel.org, hpa@zytor.com, paulmck@kernel.org, rdunlap@infradead.org,
+ tj@kernel.org, peterz@infradead.org, yanjiewtw@gmail.com,
+ kim.phillips@amd.com, lukas.bulwahn@gmail.com, seanjc@google.com,
+ jmattson@google.com, leitao@debian.org, jpoimboe@kernel.org,
+ rick.p.edgecombe@intel.com, kirill.shutemov@linux.intel.com,
+ jithu.joseph@intel.com, kai.huang@intel.com, kan.liang@linux.intel.com,
+ daniel.sneddon@linux.intel.com, pbonzini@redhat.com, sandipan.das@amd.com,
+ ilpo.jarvinen@linux.intel.com, peternewman@google.com,
+ maciej.wieczor-retman@intel.com, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, eranian@google.com, james.morse@arm.com
+References: <cover.1711674410.git.babu.moger@amd.com>
+ <d9fe6638d901791dfdec26caed034179c636e17b.1711674410.git.babu.moger@amd.com>
+ <aec3fdfa-ad57-402b-9c21-555b5ddc85f9@intel.com>
+Content-Language: en-US
+From: "Moger, Babu" <babu.moger@amd.com>
+In-Reply-To: <aec3fdfa-ad57-402b-9c21-555b5ddc85f9@intel.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: DM6PR07CA0073.namprd07.prod.outlook.com
+ (2603:10b6:5:337::6) To MW3PR12MB4553.namprd12.prod.outlook.com
+ (2603:10b6:303:2c::19)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
- nalasex01b.na.qualcomm.com (10.47.209.197)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: ANF46kG-6GAECwBRMXlN79CUB3D0JwcT
-X-Proofpoint-ORIG-GUID: ANF46kG-6GAECwBRMXlN79CUB3D0JwcT
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.11.176.26
- definitions=2024-05-07_12,2024-05-06_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 adultscore=0
- mlxscore=0 suspectscore=0 mlxlogscore=999 lowpriorityscore=0
- impostorscore=0 priorityscore=1501 bulkscore=0 spamscore=0 malwarescore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2405010000 definitions=main-2405070138
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MW3PR12MB4553:EE_|DS0PR12MB7801:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4739163e-bd27-4e3e-96b8-08dc6ed0c46e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230031|1800799015|7416005|366007|376005;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?ZGd1TUVVbCtpcEhLQzgzSUFoaGZiOGRJUUN4NmFxMmFURmdZRDRxcjV5c1ZH?=
+ =?utf-8?B?b3ZDeTJTY2ZmV01jRzJGZ0J2SElHUGtheVFsVG1MbUlPclNpL21QZnJoY0Va?=
+ =?utf-8?B?S3JmK1VxL0N4dmM4TmhPOEF1NUw5cUpIdmRhYStVRkVxenNiMmFkYlcxQkt6?=
+ =?utf-8?B?OG9vaS9BZjEwUEpGM1A0eWZQZERISTM2aWFkSjIwVVd1REZaRmovM005Y2sz?=
+ =?utf-8?B?NEEycmNUOXQzMTlkcklTYlluMmJZVFQveG43OXFGdzZUdFJCZ2Q3aWVwNWlO?=
+ =?utf-8?B?YU9TdXBTRmNWbjJvYXJKM0ZrUllOdmFpR2dvT1VUUzl4WW5hLzNvSEM5eEhB?=
+ =?utf-8?B?YXVHZTVXQjNpQ21mQ25yUlpjNVVyTzlKUEl6WFFvaFRibVNCbFhnOFJ6a210?=
+ =?utf-8?B?ZnVjQkhuQ1VsRFRTeU05dHZ5WVNCZzg0Zmc1eW5ydngvTGtvWnF6N3JOQmIx?=
+ =?utf-8?B?aDBsSTJpV1NIZ3JDYURhUER5TkF6bW1ieHIwZ3VTWXQxZUlnY3YxTjBSU00w?=
+ =?utf-8?B?R0g2cGZwekROcmFqRFlXSGZsdU1FNE9uTUZUSjgvaSs4SVVTZlZEMFIvaGgy?=
+ =?utf-8?B?K0NqbVVVRkRBelY3VjVHbkR5M0xPMmxETENXQTlkMTFMaUozQnkrSEdBQ2di?=
+ =?utf-8?B?UGtzK1BSNTZFMlJRakVPYXRGTDdRSCtiWjNNdXc5eDl1eDdHMjRCNDRQa09P?=
+ =?utf-8?B?eEFyUG9FZ2RPYThPa0Y1OGFPV1E1OTBtL2lTbEEvbXpBNG1pOVdkK2k4WktD?=
+ =?utf-8?B?N0hwbU1hQUVOdmkxUVllSHhSTjRVb084YmdpODhaOGJsS0o4MHg0SHlRVGNt?=
+ =?utf-8?B?c1pZTzZxR1lLQ1N5NWZkKzVxYkhTMjNYbDM2citWZTAvZkpKVnYrZFhQMkh1?=
+ =?utf-8?B?UjhTVWl1VnR3L241d0FaY2lOL09La20vRjNUbFhBT3NhMkp6dXpOVmpNaFNi?=
+ =?utf-8?B?OWgxVUx4aXhLYUhoUmxGRUVYT1hPOVdhWHVSRFIzcVB6dzJoeGFPdkJ1OWpC?=
+ =?utf-8?B?QnRiclkwTzh5NXhrbFJwYUF4ZTJpS2JCanRpQTN6dnVVaUJJWGE0S3NSY2Nt?=
+ =?utf-8?B?akZ0OHZNK2ZXQ1ZEN3d2MHJyM3dqZEN6eitJQkVuSS9HQmJhRVgrcFFvZ1pQ?=
+ =?utf-8?B?VlAvYUhqZStvK1g0Z0dSbnp4bjZ4RzlsZ1F4b3EzT3lrUk9xNSs5Y0NSUVBW?=
+ =?utf-8?B?UDBISzlMRDBRcnRIa2FMamU2d1hhaDM5SDRKaXh1RUhzNU5LNG5MeS9nRjdt?=
+ =?utf-8?B?UjBwdnQ1T0pPS09CT2JJZkR0Y01CMzdFRWdOL2U0U3FZZkNJSFVhZzd1R3FW?=
+ =?utf-8?B?SVpXZVZKWWROa3NSMWhnLytHbmg2VWg0UFkyYW45M095bHVmcDRDZ0Y0bWd6?=
+ =?utf-8?B?dGVIdkd0aVJiaDhHVkh5UU1hb05SOWZ1RFA4S0gydG5FMy83aUNXL0RFMGxG?=
+ =?utf-8?B?aTVsTnpOZDV1S1pjOTIrSUtHRVg3S3J2akl5VndwSklrWjhCYWxqbmIvQzAw?=
+ =?utf-8?B?c0NrVklXYnNBV0t3Tk9KRmZ2dUhLaXdTVCtSSUJFaExrUmhOQndQejFZOUQ2?=
+ =?utf-8?B?VDh4bVM1UmtkMlVEZnhBdHZDcG43RS9FbXE4czB6eW1ta3ZlSWo1SUVScDd4?=
+ =?utf-8?B?RkFnSjRpdmFHK1dqTHVlZzVKL0RUaFFFYTJGRGxNS3YrUkxObDVPQWlZUW1o?=
+ =?utf-8?B?cjdaYS94Wm5LWlZRT0V3dnlpWVpRTFRBNE1CVmpmc3lkcUswVnV5Qk5BPT0=?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR12MB4553.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(1800799015)(7416005)(366007)(376005);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?aXRLa0pBYlhJZ0VoNjJFWk9JQlRIQzdGU05JVkZoenJONHVTbjF6UUlNaysr?=
+ =?utf-8?B?bGNpemJEd2d4RHh6N3dHcmVTU1BsbG1XNnFlSGNEa0xKMWlXMjg5RDREdmlM?=
+ =?utf-8?B?bTRRVms3eHNLUHlTbzZSMnZDejhMNWZZUXVjem94N2M5QURkbm1wREZQWE5a?=
+ =?utf-8?B?R29JQTFmdzZLRXVQUW9sa3hUYXRFSTRsUVJIdnNkaXJqcXAvdTlIdFMzTk9Y?=
+ =?utf-8?B?WFc4TE12MkROU1djOURkTStHUzdDYUpxWjNCVkRCczd3c05ET2Q1UWRIWFRZ?=
+ =?utf-8?B?SDBHeXN5Wk95ZCs1bzNpZ2dDZHlGc3BNcUlmUXRhbDVCUDArNmZyaTRPNEZN?=
+ =?utf-8?B?bVBpUEhzaHFXVHJFaGErZWpWUFJlTnllMTgrSllubEdLeFNCTUF6OFArK083?=
+ =?utf-8?B?UXV3enNKUHlVUTY3RkVQRkQwWnF5cThXT05jeEVtVUlSN3BON05INndZNzVQ?=
+ =?utf-8?B?cE9xaE1hM0VPU2dFNTYraXBVV0hmUmNoNzBDenJSQlNvenFNR0xLS2RSbThu?=
+ =?utf-8?B?cDF0VnFPQTJ1UTFIU2crRkNyQUl4NEhWaitqazZzUWRIbkNyWUFEM0sxVEE0?=
+ =?utf-8?B?dEZLenRIZFcvNnFENmRDVDBDMGVKaElCNnlCN0l3WS8vNENOWEVmb2MrclEw?=
+ =?utf-8?B?eEZ5eVlWVW15ZXh3R0ZxblBCT2xaMVoyN21JTUxqYWNrNEVwTWtUTEo2Tm5u?=
+ =?utf-8?B?Zm5lQm1lTzhlODJzaG5FOXp1aStVaHY4eUdnNG9TZWptd3kvQkx0TjZxTDg5?=
+ =?utf-8?B?UnNiNkdkaWlNeTlZY0RDaExjQ1hNMEZRYnNRaEdpQXZ0OURUMjdja0JoZzN6?=
+ =?utf-8?B?UGhWM3gyRk9GL2hRVTVrSzBVaUNMcTU1bURPOVdXN1VsdHpYT0UvMWFFY0Vi?=
+ =?utf-8?B?WFhBRnBnalM2OGJCdGJXdlRUNU5LYi8yVjVGbFZUMm1KMGdibnRWbFljUnpv?=
+ =?utf-8?B?TDkrSEtUemF0N012S2Q3ZmI3MUdYaFk0VlZBT28zbVQ2QnFkWnViYTRwTVdC?=
+ =?utf-8?B?WWpGaDVsNjFKNE9PYjhoQWNWb2ZmV2hzQjE0eVlJeW0rN2dSOEFwejRnZStE?=
+ =?utf-8?B?azgwZ2pmZGt6azE3bjZDbW5DWnBjL1ZpZnEyYmNwRG1Vd3ZCT2VpUGZBMmZ2?=
+ =?utf-8?B?Rk02Ykc4TmR4RGVtRTIyWnAxWUMrQ3JuU0hNOGoya1Q5TlM1cURVK3pTRnBY?=
+ =?utf-8?B?b2FxbGxCclhNdlp6V3ViQnUvOGJ0Ulk0RVkyZkVwOU83UVdjODVYRFV0aXhF?=
+ =?utf-8?B?MEkrZnVpckluWTZ1TkZKZElQSW5HSkhmczVlNXJsYVAyUUUzWnpOTURoRG55?=
+ =?utf-8?B?aXFnRVJIalQ1b1V2Q2FkOW9tOFBidXoxeDFjY0ZVSWpmUHpDcm9qcmpQdFQw?=
+ =?utf-8?B?aTZUS1FUdmJmRG9TSzBtOTRHUlI1VU1NZzg0Mm5hNll1MUFRemU3U2dkTmVa?=
+ =?utf-8?B?NVlzODRUWWU3a2xBVHBYZVlOYlcwaVJLVktZb0tBNGtnbTZBQVJaWDVPbnBO?=
+ =?utf-8?B?cER0a1JyQmdWbzJZQnlSZ3ZaZjNLaFA1dzhNRzBacC81bDFGZGFrTHYzYWg0?=
+ =?utf-8?B?RWN0Mjc2cFlrTXhsYzRIUit6TzRya2U4amZGVU4vY2JpY1pmdkZwNEo0c2Ir?=
+ =?utf-8?B?dG5mUDZqbXVnMDBJRjJsdVFnb01tU1Q0Um1jRGt1cDNJVTVsQk1FbnlUc1Vn?=
+ =?utf-8?B?c0JrMktad1Z1WTg0MFBjaXBJZ25Wb3dUSmJ6cU1nNU44azQzZWRWU0FlSXVa?=
+ =?utf-8?B?OXlkV2c3NTB6U3ZmT2NHUDU4NGRyNnR3RDhFNXdiT2t2N1M0dFdKM3hYUGda?=
+ =?utf-8?B?NzJ1SW5icjQrV3A0cWJRU3ltSXF0VTE2UWFpeFZmSm9Beis4N1FJUGc5VEFl?=
+ =?utf-8?B?MTdUWGlQUE90djBKeE54RXRmWkZjbkd6VjJNVEJrY3pxYmw5KzVPSk9VM3Nm?=
+ =?utf-8?B?Z04xRTN5SFg2WDNqb0R6ak1pV0s2dmlNaWo0UTZ2dVNpRHIvdXEzbVMrY0Y2?=
+ =?utf-8?B?bXRXY0tuOVFBSTFIVmxzUy9rY1UzTnAzckU5NzNOVWgwNmtkZFR3OFZ2Mnk3?=
+ =?utf-8?B?WUt4eld1UDh5ZisrNEpYYUFmSWFLU2NxYnJkdTRGOU9GWUgvTmJWZ1RMckV1?=
+ =?utf-8?Q?85vY=3D?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4739163e-bd27-4e3e-96b8-08dc6ed0c46e
+X-MS-Exchange-CrossTenant-AuthSource: MW3PR12MB4553.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2024 20:03:30.8991
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: MXEqs1AgKBRzoSnw1syowPcGsJqISlh6Q/+4xTcxAnUWrAI6KPP7Vl8pqwIsrtSK
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7801
 
-With the introduction of the soc-usb driver, add documentation highlighting
-details on how to utilize the new driver and how it interacts with
-different components in USB SND and ASoC.  It provides examples on how to
-implement the drivers that will need to be introduced in order to enable
-USB audio offloading.
+Hi Reinette,
 
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
----
- Documentation/sound/soc/index.rst |   1 +
- Documentation/sound/soc/usb.rst   | 611 ++++++++++++++++++++++++++++++
- 2 files changed, 612 insertions(+)
- create mode 100644 Documentation/sound/soc/usb.rst
+On 5/3/24 18:31, Reinette Chatre wrote:
+> Hi Babu,
+> 
+> On 3/28/2024 6:06 PM, Babu Moger wrote:
+>> AMD Hardware provides a set of counters when the ABMC feature is supported.
+>> These counters are used for assigning events to the resctrl group.
+>>
+>> Introduce the bitmap assign_cntrs_free_map to allocate and free the
+>> counters.
+>>
+>> Signed-off-by: Babu Moger <babu.moger@amd.com>
+>>
+>> ---
+>> v3: Changed the bitmap name to assign_cntrs_free_map. Removed abmc
+>>     from the name.
+>>
+>> v2: Changed the bitmap name to assignable_counter_free_map from
+>>     abmc_counter_free_map.
+>> ---
+>>  arch/x86/kernel/cpu/resctrl/rdtgroup.c | 19 +++++++++++++++++++
+>>  1 file changed, 19 insertions(+)
+>>
+>> diff --git a/arch/x86/kernel/cpu/resctrl/rdtgroup.c b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
+>> index f49073c86884..2c7583e7b541 100644
+>> --- a/arch/x86/kernel/cpu/resctrl/rdtgroup.c
+>> +++ b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
+>> @@ -186,6 +186,22 @@ bool closid_allocated(unsigned int closid)
+>>  	return !test_bit(closid, &closid_free_map);
+>>  }
+>>  
+>> +static u64 assign_cntrs_free_map;
+>> +static u32 assign_cntrs_free_map_len;
+> 
+> Please provide summary in comments about what these globals are and how they
+> are used.
+> 
 
-diff --git a/Documentation/sound/soc/index.rst b/Documentation/sound/soc/index.rst
-index e57df2dab2fd..8bed8f8f48da 100644
---- a/Documentation/sound/soc/index.rst
-+++ b/Documentation/sound/soc/index.rst
-@@ -18,3 +18,4 @@ The documentation is spilt into the following sections:-
-    jack
-    dpcm
-    codec-to-codec
-+   usb
-diff --git a/Documentation/sound/soc/usb.rst b/Documentation/sound/soc/usb.rst
-new file mode 100644
-index 000000000000..7b649592e2fd
---- /dev/null
-+++ b/Documentation/sound/soc/usb.rst
-@@ -0,0 +1,611 @@
-+================
-+ASoC USB support
-+================
-+
-+Overview
-+========
-+In order to leverage the existing USB sound device support in ALSA, the
-+introduction of the ASoC USB APIs, allow for the entities to communicate
-+with one another.
-+
-+One potential use case would be to support USB audio offloading, which is
-+an implementation that allows for an external DSP on the SoC to handle the
-+transfer of audio data over the USB bus.  This would let the main
-+processor to stay in lower power modes for longer durations.  The following
-+is an example design of how the ASoC and ALSA pieces can be connected
-+together to achieve this:
-+
-+::
-+
-+               USB                   |            ASoC
-+                                     |  _________________________
-+                                     | |   ASoC Platform card    |
-+                                     | |_________________________|
-+                                     |         |           |
-+                                     |      ___V____   ____V____
-+                                     |     |ASoC BE | |ASoC FE  |
-+                                     |     |DAI LNK | |DAI LNK  |
-+                                     |     |________| |_________|
-+                                     |         ^  ^        ^
-+                                     |         |  |________|
-+                                     |      ___V____    |
-+                                     |     |SOC-USB |   |
-+     ________       ________               |        |   |
-+    |USB SND |<--->|USBSND  |<------------>|________|   |
-+    |(card.c)|     |offld   |<----------                |
-+    |________|     |________|___     | |                |
-+        ^               ^       |    | |    ____________V_________
-+        |               |       |    | |   |IPC                   |
-+     __ V_______________V_____  |    | |   |______________________|
-+    |USB SND (endpoint.c)     | |    | |              ^
-+    |_________________________| |    | |              |
-+                ^               |    | |   ___________V___________
-+                |               |    | |->|audio DSP              |
-+     ___________V_____________  |    |    |_______________________|
-+    |XHCI HCD                 |<-    |
-+    |_________________________|      |
-+
-+
-+SOC USB driver
-+==============
-+Structures
-+----------
-+``struct snd_soc_usb``
-+
-+  - ``list``: list head for SND SOC struct list
-+  - ``dev``: USB backend device reference
-+  - ``component``: reference to ASoC component
-+  - ``active_list``: active sessions
-+  - ``num_supported_streams``: number of supported concurrent sessions
-+  - ``connection_status_cb``: callback to notify connection events
-+  - ``put_offload_dev``: callback to select USB sound card/PCM device
-+  - ``get_offload_dev``: callback to fetch selected USB sound card/PCM device
-+  - ``priv_data``: driver data
-+
-+The snd_soc_usb structure can be referenced using the ASoC platform card
-+device, or a USB device (udev->dev).  This is created by the ASoC BE DAI
-+link, and the USB sound entity will be able to pass information to the
-+ASoC BE DAI link using this structure.
-+
-+``struct snd_soc_usb_device``
-+
-+  - ``card_idx``: sound card index associated with USB device
-+  - ``chip_idx``: USB sound chip array index
-+  - ``num_playback``: number of playback streams
-+  - ``num_capture``: number of capture streams
-+
-+The struct snd_soc_usb_device is created by the USB sound offload driver.
-+This will carry basic parameters/limitations that will be used to
-+determine the possible offloading paths for this USB audio device.
-+
-+``struct snd_soc_usb_session``
-+
-+  - ``active_card_idx``: active offloaded sound card
-+  - ``active_pcm_idx``: active offloaded PCM device
-+  - ``state``: USB BE DAI link PCM state
-+
-+The struct snd_soc_usb_session tracks the current offloading state for a
-+particular card and PCM combination.  This structure is carried/saved as
-+part of the active_list within struct snd_soc_usb.
-+
-+The number of entities in the active list corresponds to the number of
-+snd_soc_usb_session structures that are allocated.  This is controlled
-+by the num_supported_streams that is reported as part of the SOC USB
-+structure creation.
-+
-+Functions
-+---------
-+.. code-block:: rst
-+
-+	const char *snd_soc_usb_get_components_tag(bool playback);
-+..
-+
-+  - ``playback``: direction of audio stream
-+
-+**snd_soc_usb_get_components_tag()** returns the tag used for describing if USB
-+offloading is supported for appending to the ASoC platform card's components
-+string.
-+
-+Returns a tag based on the direction of the audio stream.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_find_format(int card_idx, struct snd_pcm_hw_params *params,
-+			int direction)
-+..
-+
-+  - ``card_idx``: the index into the USB sound chip array.
-+  - ``params``: Requested PCM parameters from the USB DPCM BE DAI link
-+  - ``direction``: capture or playback
-+
-+**snd_soc_usb_find_format()** ensures that the requested audio profile being
-+requested by the external DSP is supported by the USB device.
-+
-+Returns 0 on success, and -EOPNOTSUPP on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_connect(struct device *usbdev, struct snd_soc_usb_device *sdev)
-+..
-+
-+  - ``usbdev``: the usb device that was discovered
-+  - ``sdev``: capabilities of the device
-+
-+**snd_soc_usb_connect()** notifies the ASoC USB DCPM BE DAI link of a USB
-+audio device detection.  This can be utilized in the BE DAI
-+driver to keep track of available USB audio devices.  This is intended
-+to be called by the USB offload driver residing in USB SND.
-+
-+Returns 0 on success, negative error code on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_disconnect(struct device *usbdev, struct snd_soc_usb_device *sdev)
-+..
-+
-+  - ``usbdev``: the usb device that was removed
-+  - ``sdev``: capabilities to free
-+
-+**snd_soc_usb_disconnect()** notifies the ASoC USB DCPM BE DAI link of a USB
-+audio device removal.  This is intended to be called by the USB offload
-+driver that resides in USB SND.
-+
-+.. code-block:: rst
-+
-+	void *snd_soc_usb_find_priv_data(struct device *usbdev)
-+..
-+
-+  - ``usbdev``: the usb device to reference to find private data
-+
-+**snd_soc_usb_find_priv_data()** fetches the private data saved to the SOC USB
-+device.
-+
-+Returns pointer to priv_data on success, NULL on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_device_offload_available(struct device *dev)
-+..
-+
-+  - ``dev``: the device to find in SOC USB
-+
-+**snd_soc_usb_device_offload_available()** fetch the sound card number associated
-+to the USB BE DAI link.
-+
-+Returns a valid sound card index on success, negative on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_prepare_session(struct snd_soc_usb *usb, int card_idx, int pcm_idx);
-+..
-+
-+  - ``usb``: SOC USB device
-+  - ``card_idx``: USB sound card index
-+  - ``pcm_idx``: USB PCM device index
-+
-+**snd_soc_usb_prepare_session()** populates active_list with a 'struct
-+snd_soc_usb_session.'  This will move the session into the SND_SOC_USB_PREPARED
-+state.  State updates will always start here.
-+
-+Returns index to active_list on success, -EBUSY on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_shutdown_session(struct snd_soc_usb *usb, int session_id);
-+..
-+
-+  - ``usb``: SOC USB device
-+  - ``session_id``: session id returned by **snd_soc_usb_prepare_session()**
-+
-+**snd_soc_usb_shutdown_session()** frees up a slot in active_list, which signals
-+that there is no longer an active offloading device.  This allows for another
-+session to be started.
-+
-+Returns 0 on success, -EINVAL if session index is invalid.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_set_session_state(struct snd_soc_usb *usb, int session_id,
-+						enum snd_soc_usb_dai_state state);
-+..
-+
-+  - ``usb``: SOC USB device
-+  - ``session_id``: session id returned by **snd_soc_usb_prepare_session()**
-+  - ``state``: state to move into
-+
-+**snd_soc_usb_set_session_state()** moves an offloading session to the desired
-+state.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_setup_offload_jack(struct snd_soc_component *component,
-+					struct snd_soc_jack *jack)
-+..
-+
-+  - ``component``: ASoC component to add the jack
-+  - ``jack``: ASoC sound jack to add
-+
-+**snd_soc_usb_setup_offload_jack()** is a helper to add a sound jack control to
-+the platform sound card.  This will allow for consistent naming to be used on
-+designs that support USB audio offloading.
-+
-+Returns 0 on success, negative otherwise.
-+
-+.. code-block:: rst
-+
-+	struct snd_soc_usb *snd_soc_usb_allocate_port(struct snd_soc_component *component,
-+			int num_supported_streams, void *data);
-+..
-+
-+  - ``component``: DPCM BE DAI link component
-+  - ``num_supported_streams``: number of active streams supported by external DSP
-+  - ``data``: private data
-+
-+**snd_soc_usb_allocate_port()** allocates a SOC USB device and populates standard
-+parameters that is used for further operations.
-+
-+Returns a pointer to struct soc_usb on success, negative on error.
-+
-+.. code-block:: rst
-+
-+	void snd_soc_usb_free_port(struct snd_soc_usb *usb);
-+..
-+
-+  - ``usb``: SOC USB device to free
-+
-+**snd_soc_usb_free_port()** frees a SOC USB device.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_add_port(struct snd_soc_usb *usb);
-+..
-+
-+  - ``usb``: SOC USB device to add
-+
-+**snd_soc_usb_add_port()** add an allocated SOC USB device to the SOC USB framework.
-+Once added, this device can be referenced by further operations.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_remove_port(struct snd_soc_usb *usb);
-+..
-+
-+  - ``usb``: SOC USB device to remove
-+
-+**snd_soc_usb_remove_port()** removes a SOC USB device from the SOC USB framework.
-+After removing a device, any SOC USB operations would not be able to reference the
-+device removed.
-+
-+How to Register to SOC USB
-+--------------------------
-+The ASoC DPCM USB BE DAI link is the entity responsible for allocating and
-+registering the SOC USB device on the component bind.  Likewise, it will
-+also be responsible for freeing the allocated resources.  An example can
-+be shown below:
-+
-+.. code-block:: rst
-+
-+	static int q6usb_component_probe(struct snd_soc_component *component)
-+	{
-+		...
-+		data->usb = snd_soc_usb_allocate_port(component, 1, &data->priv);
-+		if (!data->usb)
-+			return -ENOMEM;
-+
-+		usb->connection_status_cb = q6usb_alsa_connection_cb;
-+
-+		ret = snd_soc_usb_add_port(usb);
-+		if (ret < 0) {
-+			dev_err(component->dev, "failed to add usb port\n");
-+			goto free_usb;
-+		}
-+		...
-+	}
-+
-+	static void q6usb_component_remove(struct snd_soc_component *component)
-+	{
-+		...
-+		snd_soc_usb_remove_port(data->usb);
-+		snd_soc_usb_free_port(data->usb);
-+	}
-+
-+	static const struct snd_soc_component_driver q6usb_dai_component = {
-+		.probe = q6usb_component_probe,
-+		.remove = q6usb_component_remove,
-+		.name = "q6usb-dai-component",
-+		...
-+	};
-+..
-+
-+BE DAI links can pass along vendor specific information as part of the
-+call to allocate the SOC USB device.  This will allow any BE DAI link
-+parameters or settings to be accessed by the USB offload driver that
-+resides in USB SND.
-+
-+USB Audio Device Connection Flow
-+--------------------------------
-+USB devices can be hotplugged into the USB root hub at any point in time.
-+The BE DAI link should be aware of the current state of the physical USB
-+port, i.e. if there are any USB devices with audio interface(s) connected.
-+The following callback can be used to notify the BE DAI link of any change:
-+
-+	**connection_status_cb()**
-+
-+This is called whenever there is a USB SND interface bind or remove event,
-+using snd_soc_usb_connect() or snd_soc_usb_disconnect():
-+
-+.. code-block:: rst
-+
-+	static void qc_usb_audio_offload_probe(struct snd_usb_audio *chip)
-+	{
-+		...
-+		snd_soc_usb_connect(usb_get_usb_backend(udev), sdev);
-+		...
-+	}
-+
-+	static void qc_usb_audio_offload_disconnect(struct snd_usb_audio *chip)
-+	{
-+		...
-+		snd_soc_usb_disconnect(usb_get_usb_backend(chip->dev), dev->sdev);
-+		...
-+	}
-+..
-+
-+In order to account for conditions where driver or device existence is
-+not guaranteed, USB SND exposes snd_usb_rediscover_devices() to resend the
-+connect events for any identified USB audio interfaces.  Consider the
-+the following situtation:
-+
-+	**usb_audio_probe()**
-+	  | --> USB audio streams allocated and saved to usb_chip[]
-+	  | --> Propagate connect event to USB offload driver in USB SND
-+	  | --> **snd_soc_usb_connect()** exits as USB BE DAI link is not ready
-+
-+	BE DAI link component probe
-+	  | --> DAI link is probed and SOC USB port is allocated
-+	  | --> The USB audio device connect event is missed
-+
-+To ensure connection events are not missed, **snd_usb_rediscover_devices()**
-+is executed when the SOC USB device is registered.  Now, when the BE DAI
-+link component probe occurs, the following highlights the sequence:
-+
-+	BE DAI link component probe
-+	  | --> DAI link is probed and SOC USB port is allocated
-+	  | --> SOC USB device added, and **snd_usb_rediscover_devices()** runs
-+
-+	**snd_usb_rediscover_devices()**
-+	  | --> Traverses through usb_chip[] and for non-NULL entries issue
-+	  |     **connection_status_cb()**
-+
-+In the case where the USB offload driver is unbounded, while USB SND is
-+ready, the **snd_usb_rediscover_devices()** is called during module init.
-+This allows for the offloading path to also be enabled with the following
-+flow:
-+
-+	**usb_audio_probe()**
-+	  | --> USB audio streams allocated and saved to usb_chip[]
-+	  | --> Propagate connect event to USB offload driver in USB SND
-+	  | --> USB offload driver **NOT** ready!
-+
-+	BE DAI link component probe
-+	  | --> DAI link is probed and SOC USB port is allocated
-+	  | --> No USB connect event due to missing USB offload driver
-+
-+	USB offload driver probe
-+	  | --> **qc_usb_audio_offload_init()**
-+	  | --> Calls **snd_usb_rediscover_devices()** to notify of devices
-+
-+Advertising USB Audio Offload Capability
-+----------------------------------------
-+As the USB audio offloading can potentially reside within the platform ASoC based
-+sound card, depending on if there is a USB DPCM backend DAI link existing in the
-+platform card definition, then users can utilize the sound card's components string,
-+in order to signal that USB offloading is supported by this sound card.
-+
-+The sound core exposes:
-+
-+	**snd_ctl_card_info()**
-+
-+This allows for userspace applications, i.e. amixer, to fetch the components string
-+that was created as part of the ASoC platform sound card creation routine.  The
-+possible tags that can be seen are:
-+
-+	- **usbplybkoffld: 1**
-+	- **usbcapoffld: 1**
-+
-+**usbplybkoffld** translates to usb offload playback supported, and **usbcapoffld**
-+translates to USB offload capture supported.  Applications can then query the sound
-+card for further offload status parameters.
-+
-+SOC USB and USB Sound Kcontrols
-+===============================
-+Details
-+-------
-+SOC USB and USB sound expose a set of SND kcontrols for applications to select
-+and fetch the current offloading status for the ASoC platform sound card. Kcontrols
-+are split between two layers:
-+
-+	- USB sound - Notifies the sound card number for the ASoC platform sound
-+	  card that it is registered to for supporting audio offload.
-+
-+	- SOC USB - Maintains the current status of the offload path, and device
-+	  (USB sound card and PCM device) information.  This would be the main
-+	  card that applications can read to determine offloading capabilities.
-+
-+Implementation
-+--------------
-+
-+**Example:**
-+
-+  **Sound Cards**:
-+
-+	::
-+
-+	  0 [SM8250MTPWCD938]: sm8250 - SM8250-MTP-WCD9380-WSA8810-VA-D
-+                     SM8250-MTP-WCD9380-WSA8810-VA-DMIC
-+	  1 [C320M          ]: USB-Audio - Plantronics C320-M
-+                     Plantronics Plantronics C320-M at usb-xhci-hcd.1.auto-1, full speed
-+
-+
-+  **Platform Sound Card** - card#0:
-+
-+	::
-+
-+	  USB Offload Playback Route Status      -1, -1 (range -1->32)
-+	  USB Offload Playback Route Select       1, 0 (range -1->32)
-+
-+
-+  **USB Sound Card** - card#1:
-+
-+	::
-+
-+	  USB Offload Playback Capable Card         0 (range -1->32)
-+
-+
-+The platform sound card(card#0) kcontrols are created as part of adding the SOC
-+USB device using **snd_soc_usb_add_port()**.  The following kcontrols are defined
-+as:
-+
-+  - ``USB Offload Playback Route Status`` **(R)**: USB sound card and PCM device
-+    index pair that defines which USB SND resources are currently offloaded.  If
-+    -1, -1 is seen, it signifies that offload is not active.
-+  - ``USB Offload Playback Route Select`` **(R/W)**: USB sound card and PCM device
-+    index pair which selects the USB device to initiate offloading on.  If no value
-+    is written to the kcontrol, then the last USB device discovered will be chosen.
-+
-+The USB sound card(card#1) kcontrols are created as USB audio devices are plugged
-+into the physical USB port and enumerated.  The kcontrols are defined as:
-+
-+  - ``USB Offload Playback Capable Card`` **(R)**: Provides the sound card
-+    number/index that supports USB offloading.  Further/follow up queries about
-+    the current offload state can be handled by reading the offload status
-+    kcontrol exposed by the platform card.
-+
-+USB Offload Playback Route Select Kcontrol
-+------------------------------------------
-+In order to allow for vendor specific implementations on audio offloading device
-+selection, the SOC USB layer exposes the following:
-+
-+.. code-block:: rst
-+
-+	int (*put_offload_dev)(struct snd_kcontrol *kcontrol,
-+			      struct snd_ctl_elem_value *ucontrol);
-+	int (*get_offload_dev)(struct snd_kcontrol *kcontrol,
-+			      struct snd_ctl_elem_value *ucontrol);
-+..
-+
-+These are specific for the **USB Offload Playback Route Select** kcontrol.
-+
-+When users issue get/put calls to the kcontrol, the registered SOC USB callbacks
-+will execute the registered function calls to the DPCM BE DAI link.
-+
-+**Callback Registration:**
-+
-+.. code-block:: rst
-+
-+	static int q6usb_component_probe(struct snd_soc_component *component)
-+	{
-+	...
-+	usb = snd_soc_usb_allocate_port(component, 1, &data->priv);
-+	if (IS_ERR(usb))
-+		return -ENOMEM;
-+
-+	usb->connection_status_cb = q6usb_alsa_connection_cb;
-+	usb->put_offload_dev = q6usb_put_offload_dev;
-+	usb->get_offload_dev = q6usb_get_offload_dev;
-+
-+	ret = snd_soc_usb_add_port(usb);
-+..
-+
-+**PUT Callback:**
-+
-+Can be used to track current device selection, and to issue any external DSP
-+commands that might be required for enabling audio offloading.
-+
-+.. code-block:: rst
-+
-+	static int q6usb_put_offload_dev(struct snd_kcontrol *kcontrol,
-+			      struct snd_ctl_elem_value *ucontrol)
-+	{
-+	...
-+	if ((cardidx >= 0 && test_bit(cardidx, &data->available_card_slot))) {
-+		data->sel_card_idx = cardidx;
-+		changed = 1;
-+	}
-+
-+	if ((pcmidx >= 0 && pcmidx < data->status[cardidx].sdev->num_playback)) {
-+		data->sel_pcm_idx = pcmidx;
-+		changed = 1;
-+	}
-+..
-+
-+The above is an example of keeping track of what the userspace entity is
-+selecting as the playback device.  This can be later used to pass the information
-+along to the external DSP.
-+
-+
-+USB Offload Playback Route Status
-+---------------------------------
-+SOC USB exposes APIs for keeping track of the offloading state, and expects this
-+to be maintained by the BE DAI link that created/added the SOC USB device.
-+
-+**SOC USB State Flow Example**
-+
-+::
-+
-+     PCM Core              |      BE USB DAI Link      |     SOC USB
-+                           |                           |
-+  snd_pcm_hw_params --------> dai_link->ops->hw_params --> snd_soc_usb_prepare_session
-+                           |                           |   |--> state = SND_SOC_USB_PREPARED
-+  ...                      |                           |   |--> slot[0] now active
-+                           |                           |
-+                           |                           |
-+  snd_pcm_do_prepare--------> dai_link->ops->prepare ---> snd_soc_usb_set_session_state
-+                           |                           |   |--> state = SND_SOC_USB_RUNNING
-+  ...                      |                           |
-+                           |                           |
-+  snd_pcm_release_substream-> dai_link->ops->shutdown---> snd_soc_usb_shutdown_session
-+                           |                           |   |--> state = SND_SOC_USB_IDLE
-+                           |                           |   |--> slot[0] now idle
-+
-+
-+When executing the kcontrol get callback, it will loop across the active_list array
-+and report to the application for active USB sound card and USB PCM device indexes.
-+
-+USB Offload Playback Capable Card
-+---------------------------------
-+USB sound also creates a kcontrol for applications to help determine which platform
-+sound card USB offloading is linked to.  This will allow applications to further
-+query the platform sound card for specific information about the current USB offload
-+status.
-+
-+This is added as a separate mixer driver:
-+  - mixer_usb_offload.c
-+  - kcontrol: snd_usb_offload_available_ctl
-+
-+**snd_usb_offload_available_get()** fetches the associated sound card by utilizing
-+the **snd_soc_usb_device_offload_available()** API.
-+
-+Mixer Examples
-+--------------
-+
-+	::
-+
-+	  tinymix -D 0 set 'USB Offload Playback Route Select' 2 0
-+
-+
-+	::
-+
-+	  tinymix -D 0 get 'USB Offload Playback Route Select'
-+	  --> 2, 0 (range 0->32)
-+
-+	::
-+
-+	  tinymix -D 0 get 'USB Offload Playback Route Status'
-+	  --> 2, 0 (range -1->32)   [OFFLD active]
-+	  --> -1, -1 (range -1->32) [OFFLD idle]
-+
-+	::
-+
-+	  tinymix -D 0 get 'USB Offload Playback Capable Card'
-+	  --> 0 (range 0->32)
+Sure.
+
+>> +
+>> +static void assign_cntrs_init(void)
+>> +{
+>> +	struct rdt_resource *r = &rdt_resources_all[RDT_RESOURCE_L3].r_resctrl;
+>> +
+>> +	if (r->mbm_assign_cntrs > 64) {
+>> +		r->mbm_assign_cntrs = 64;
+>> +		WARN(1, "Cannot support more than 64 Assignable counters\n");
+> 
+> I am a bit confused here. The configuration registers are introduced in patch #10
+> and if I counted right there are 5 bits for the counter id. It thus seems to me
+> as though there needs to be some checking during enumeration time to ensure
+> that all counters enumerated can be configured.
+
+Ok. I will remove this check here and move it to enumeration time in
+rdt_get_mon_l3_config.
+
+> 
+>> +	}
+>> +
+>> +	assign_cntrs_free_map = BIT_MASK(r->mbm_assign_cntrs) - 1;
+> 
+> Please use bitmap API. For example, bitmap_fill()
+
+Ok. Sure.
+
+> 
+>> +	assign_cntrs_free_map_len = r->mbm_assign_cntrs;
+>> +}
+>> +
+>>  /**
+>>   * rdtgroup_mode_by_closid - Return mode of resource group with closid
+>>   * @closid: closid if the resource group
+>> @@ -2459,6 +2475,9 @@ static int resctrl_abmc_setup(enum resctrl_res_level l, bool enable)
+>>  	struct rdt_resource *r = &rdt_resources_all[l].r_resctrl;
+>>  	struct rdt_domain *d;
+>>  
+>> +	/* Reset the counters bitmap */
+>> +	assign_cntrs_init();
+>> +
+> 
+> (At this point it is unclear when resctrl_abmc_setup() is called to understand
+> if reset of bitmap may be appropriate. Please do expand all changelogs to help
+> readers along with how this implementation is intended to work.)
+
+resctrl_abmc_setup() is called either while enabling or disabling the ABMC
+feature. In both these cases the bitmap assign_cntrs_free_map needs to be
+reset.
+
+Will add comments here,
+
+
+> 
+>>  	/* Update QOS_CFG MSR on all the CPUs in cpu_mask */
+>>  	list_for_each_entry(d, &r->domains, list) {
+>>  		on_each_cpu_mask(&d->cpu_mask, resctrl_abmc_msrwrite, &enable, 1);
+> 
+> Reinette
+> 
+
+-- 
+Thanks
+Babu Moger
 
