@@ -1,145 +1,200 @@
-Return-Path: <linux-doc+bounces-16031-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16033-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EAD818BFF5D
-	for <lists+linux-doc@lfdr.de>; Wed,  8 May 2024 15:49:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24FC08BFFE2
+	for <lists+linux-doc@lfdr.de>; Wed,  8 May 2024 16:25:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A5CB928D214
-	for <lists+linux-doc@lfdr.de>; Wed,  8 May 2024 13:49:16 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D0CCE2869B8
+	for <lists+linux-doc@lfdr.de>; Wed,  8 May 2024 14:25:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 90CBD84E04;
-	Wed,  8 May 2024 13:48:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 624FD85924;
+	Wed,  8 May 2024 14:25:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="UU3VJf+U"
+	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="PkSz5ZIr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED2676F08B;
-	Wed,  8 May 2024 13:48:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 193B085639
+	for <linux-doc@vger.kernel.org>; Wed,  8 May 2024 14:25:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1715176102; cv=none; b=oUwz4bGROnG9YcJkbkXWumgvMNltD17JeNrxKKPWES52CZD8bNZXYXy6VGCfAct4JpAHDk/UiqHpX9hZpQzbZYIql1j27Bw/iJam+m1+mtMfPOfyR5pvaw0BXNI0aQ7RF7uMQn8kPkbYO1eUZ8iv7YjFPaUvXgVZSmKNHSvXC8A=
+	t=1715178335; cv=none; b=K7KbI19QODx24o/gDQvdv9JiBSXeu7nWNa5S6tdT1xfgXp8w6T2qZfbPQWxsbOed4jrHkx5as+e4BSNqvfFdGbjK2cxqy6XYnFtfgNmi8sNWZ42N39m+X6HNjwzyCb5t2H/rbbklP90Tqy+HfrBb9yHW/Ry9rR3ERc/uto6Wuig=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1715176102; c=relaxed/simple;
-	bh=C+sgypmpkReKGmyko3Nfq67Es9ksH8VsgZ2bo7aqLj4=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Rsn5+A+T8ed8YB80GNb3vCWI9tTYzXljPk7JpBYLZ/NA1DWpvwjf3VQy4iz0NEEx5gcZIAXWe+Wie8UF+nAuk2Z+cNGTbLO+tgHAWrpR8CZLcGVZ4RDFGmEbR8GiohHTGkq/mlEKiKd4C007ugIQUFQxW6TY0Ae7YlAfMacnzzE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=UU3VJf+U; arc=none smtp.client-ip=192.198.163.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1715176101; x=1746712101;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=C+sgypmpkReKGmyko3Nfq67Es9ksH8VsgZ2bo7aqLj4=;
-  b=UU3VJf+U/nSvpFzwjQxLoqom7o/yaFKusPwHOghXN3VdXtNT7H4lGzl+
-   x3EDSU26zasC+I/9DCJYFXlXiLfNjGU/wKo+ovTGVuWaLEpqpqcXfejnu
-   ry5s5qsyMoWmXtfXI1EyZayYHckQ6MjjJk6EYQNCAFJwpCLAs0dyFkHl2
-   LQDeEc/N7Gnw8i9D/sQ/TY4bhXdXC486V8shNYP/ZC/punQ7ZKgcPQ5Wm
-   oIcpiWyuvObGKsegAfxLXRyOlbW1lM9/cLWEP2Of4rCO8DlVJDSWcdOwk
-   G8jRyUBaOZjUe3uClaiJ13Cu0dEwDOXNzPnIr/tD2HU7117ihOLGOu1P8
-   g==;
-X-CSE-ConnectionGUID: Hm2z6y3KRRyixNY0dzUi4g==
-X-CSE-MsgGUID: 4h+rIjNtSpmd/fnWPP+Rjg==
-X-IronPort-AV: E=McAfee;i="6600,9927,11066"; a="10906404"
-X-IronPort-AV: E=Sophos;i="6.08,145,1712646000"; 
-   d="scan'208";a="10906404"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
-  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2024 06:48:20 -0700
-X-CSE-ConnectionGUID: UgV5ODWLS0GoOx4Ys9xqAA==
-X-CSE-MsgGUID: 9T98cWoHS5qNPqS/DUxdjA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,145,1712646000"; 
-   d="scan'208";a="28855160"
-Received: from ijarvine-desk1.ger.corp.intel.com (HELO localhost) ([10.245.247.80])
-  by fmviesa007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2024 06:48:14 -0700
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-To: linux-pci@vger.kernel.org,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-	Rob Herring <robh@kernel.org>,
-	=?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kw@linux.com>,
-	Lukas Wunner <lukas@wunner.de>,
-	Alexandru Gagniuc <mr.nuke.me@gmail.com>,
-	Krishna chaitanya chundru <quic_krichai@quicinc.com>,
-	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	linux-pm@vger.kernel.org,
+	s=arc-20240116; t=1715178335; c=relaxed/simple;
+	bh=4BjthKjlyBrv7qlqiwaK/PtT8pzCfUhJT3JhHavFgDI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Wuly9rerEquYBnImyv1wmkRtFyD5GpbA5NXzqlIuwASg71JSXTmAxUQXv8H/Riw6HzY8JIWs8obIJtv6V3exgMKAqn5PakSzXd4G5lDkEEWPsFBJLfW+7rsB0U5KagqULoWFD3BVuxVNtfPBMAPfd/dUryEDAtekais7PD/5wm8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=PkSz5ZIr; arc=none smtp.client-ip=209.85.161.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
+Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-5b203c9933dso2366192eaf.3
+        for <linux-doc@vger.kernel.org>; Wed, 08 May 2024 07:25:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1715178332; x=1715783132; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=AgrD1WoYkdj8wg28imEY2ANZlllvJHBViF8cNCfVJ94=;
+        b=PkSz5ZIrJA+JdKLTG1OfJOpsC3pIK9p0Yyyccg0hoyFx4nX+QslSRwMwI4DVdChRJP
+         izW8bkDiT9CPlsFn6NWC8ObqLmJqHdv9dPY0oT30ErifiuP39AlKPuvD7Yf+BkCaa7Sb
+         Te00sjo5KeKCTCzDG2Db1vLaDVs3d6arHQrZ1bw9QDP+92DwkxA9EYsv7pLYZJCoOqPF
+         uZtQ58ltzdg1IK0HMjEk0b7ojsbJFvvU8qgxGk4eLmdxoYaDj295d2YoNoZssCzplhTt
+         gIWCjBnmhmKaQvlqOK/z5YS7LMtFLbkb/MYrvH7dBUqJkFBFDaeqoCDz0sPa37MSs4wn
+         v6AQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715178332; x=1715783132;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AgrD1WoYkdj8wg28imEY2ANZlllvJHBViF8cNCfVJ94=;
+        b=P8NfKcwi9A1PuPnwQRK+8f8vcA2lXz97IvBohHzL8vSCsMhTUBDL6xa5/QF2Ll7vmT
+         Fo/sSEz80lIz9IrVnDAkuynJZNwW/eGRDiSL2XnEArFCPA16Q7a4+C+lra4HxlYZ/z+8
+         taC3SkP8D3MDhKxDwMDKLD0zwVQJ5DA8NrQKipJ/+N2X7QzgKwKQKxYqBrVATJs9Kuez
+         LOwAV5klKO5Vqh/ZLrvnb9b5YYtiiba9n1cbQAxN3dPkXTLJM3WK7kcJjFz1xhHbpOUq
+         7QK+cFzLtTmL6tftCTe3tQaubHlppqjBYPnWE7uKgEkkp6bwFe/Affz8TYF+Eqt3DT44
+         ibnw==
+X-Forwarded-Encrypted: i=1; AJvYcCWCeGekJwtyAW2flbmOLeSGosEWEKaVNjgBcbgHCymhIviE9dMUoT/PPiId4kWwwzgy7HGRfQRpKHRG43cwU8A51JiydmGlmPau
+X-Gm-Message-State: AOJu0Yyw/fns6LIP4Nb8/MXigMy0e3J0Uc2ABNjkgT6oeIK0uNOsFRL0
+	akCRJkDkO3Cu/C5umM0Scpq2c7Y9XvFtYF5qBMrmsDglxYZf7FiXCArogRiH3Kk=
+X-Google-Smtp-Source: AGHT+IHjV+YjcifEHKw5oQYkCNsBVkCIuACEQyUL/WL5v5GcAhnL6ouYxG09iM1YvQ+6Pe3rmrQdgA==
+X-Received: by 2002:a4a:8c24:0:b0:5aa:538a:ed60 with SMTP id 006d021491bc7-5b24d28fdb4mr2495842eaf.3.1715178331994;
+        Wed, 08 May 2024 07:25:31 -0700 (PDT)
+Received: from ziepe.ca (hlfxns017vw-142-68-80-239.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.68.80.239])
+        by smtp.gmail.com with ESMTPSA id o18-20020ac86992000000b0043d4245dd4csm4389539qtq.84.2024.05.08.07.25.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 May 2024 07:25:31 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.95)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1s4iEc-0016QI-DE;
+	Wed, 08 May 2024 11:25:30 -0300
+Date: Wed, 8 May 2024 11:25:30 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Pavel Begunkov <asml.silence@gmail.com>
+Cc: Mina Almasry <almasrymina@google.com>,
+	Christoph Hellwig <hch@infradead.org>, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-alpha@vger.kernel.org, linux-mips@vger.kernel.org,
+	linux-parisc@vger.kernel.org, sparclinux@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
+	bpf@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Daniel Lezcano <daniel.lezcano@linaro.org>,
-	Amit Kucheria <amitk@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>,
-	Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
-	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Subject: [PATCH v5 1/8] PCI: Protect Link Control 2 Register with RMW locking
-Date: Wed,  8 May 2024 16:47:37 +0300
-Message-Id: <20240508134744.52134-2-ilpo.jarvinen@linux.intel.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240508134744.52134-1-ilpo.jarvinen@linux.intel.com>
-References: <20240508134744.52134-1-ilpo.jarvinen@linux.intel.com>
+	Richard Henderson <richard.henderson@linaro.org>,
+	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+	Matt Turner <mattst88@gmail.com>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+	Helge Deller <deller@gmx.de>, Andreas Larsson <andreas@gaisler.com>,
+	Jesper Dangaard Brouer <hawk@kernel.org>,
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Arnd Bergmann <arnd@arndb.de>, Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Andrii Nakryiko <andrii@kernel.org>,
+	Martin KaFai Lau <martin.lau@linux.dev>,
+	Eduard Zingerman <eddyz87@gmail.com>, Song Liu <song@kernel.org>,
+	Yonghong Song <yonghong.song@linux.dev>,
+	John Fastabend <john.fastabend@gmail.com>,
+	KP Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@google.com>,
+	Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
+	Steffen Klassert <steffen.klassert@secunet.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	David Ahern <dsahern@kernel.org>,
+	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+	Shuah Khan <shuah@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+	Amritha Nambiar <amritha.nambiar@intel.com>,
+	Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
+	Alexander Mikhalitsyn <alexander@mihalicyn.com>,
+	Kaiyuan Zhang <kaiyuanz@google.com>,
+	Christian Brauner <brauner@kernel.org>,
+	Simon Horman <horms@kernel.org>,
+	David Howells <dhowells@redhat.com>,
+	Florian Westphal <fw@strlen.de>,
+	Yunsheng Lin <linyunsheng@huawei.com>,
+	Kuniyuki Iwashima <kuniyu@amazon.com>, Jens Axboe <axboe@kernel.dk>,
+	Arseniy Krasnov <avkrasnov@salutedevices.com>,
+	Aleksander Lobakin <aleksander.lobakin@intel.com>,
+	Michael Lass <bevan@bi-co.net>, Jiri Pirko <jiri@resnulli.us>,
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	Lorenzo Bianconi <lorenzo@kernel.org>,
+	Richard Gobert <richardbgobert@gmail.com>,
+	Sridhar Samudrala <sridhar.samudrala@intel.com>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Johannes Berg <johannes.berg@intel.com>,
+	Abel Wu <wuyun.abel@bytedance.com>,
+	Breno Leitao <leitao@debian.org>, David Wei <dw@davidwei.uk>,
+	Shailend Chand <shailend@google.com>,
+	Harshitha Ramamurthy <hramamurthy@google.com>,
+	Shakeel Butt <shakeel.butt@linux.dev>,
+	Jeroen de Borst <jeroendb@google.com>,
+	Praveen Kaligineedi <pkaligineedi@google.com>
+Subject: Re: [RFC PATCH net-next v8 02/14] net: page_pool: create hooks for
+ custom page providers
+Message-ID: <20240508142530.GR4718@ziepe.ca>
+References: <20b1c2d9-0b37-414c-b348-89684c0c0998@gmail.com>
+ <20240507161857.GA4718@ziepe.ca>
+ <ZjpVfPqGNfE5N4bl@infradead.org>
+ <CAHS8izPH+sRLSiZ7vbrNtRdHrFEf8XQ61XAyHuxRSL9Jjy8YbQ@mail.gmail.com>
+ <20240507164838.GG4718@ziepe.ca>
+ <0d5da361-cc7b-46e9-a635-9a7a4c208444@gmail.com>
+ <20240507175644.GJ4718@ziepe.ca>
+ <6a50d01a-b5b9-4699-9d58-94e5f8f81c13@gmail.com>
+ <20240507233247.GK4718@ziepe.ca>
+ <54830914-1ec9-4312-96ad-423ac0aeb233@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <54830914-1ec9-4312-96ad-423ac0aeb233@gmail.com>
 
-PCIe Bandwidth Controller performs RMW accesses the Link Control 2
-Register which can occur concurrently to other sources of Link Control
-2 Register writes. Therefore, add Link Control 2 Register among the PCI
-Express Capability Registers that need RMW locking.
+On Wed, May 08, 2024 at 12:30:07PM +0100, Pavel Begunkov wrote:
 
-Signed-off-by: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com>
-Reviewed-by: Lukas Wunner <lukas@wunner.de>
----
- Documentation/PCI/pciebus-howto.rst | 14 +++++++++-----
- include/linux/pci.h                 |  1 +
- 2 files changed, 10 insertions(+), 5 deletions(-)
+> > I'm not going to pretend to know about page pool details, but dmabuf
+> > is the way to get the bulk of pages into a pool within the net stack's
+> > allocator and keep that bulk properly refcounted while.> An object like
+> > dmabuf is needed for the general case because there are
+> > not going to be per-page references or otherwise available.
+> 
+> They are already pinned, memory is owned by the provider, io_uring
+> in this case, and it should not be freed circumventing io_uring,
+> and at this stage calling release_pages() is not such a hassle,
+> especially comparing to introducing an additional object.
 
-diff --git a/Documentation/PCI/pciebus-howto.rst b/Documentation/PCI/pciebus-howto.rst
-index a0027e8fb0d0..cd7857dd37aa 100644
---- a/Documentation/PCI/pciebus-howto.rst
-+++ b/Documentation/PCI/pciebus-howto.rst
-@@ -217,8 +217,12 @@ capability structure except the PCI Express capability structure,
- that is shared between many drivers including the service drivers.
- RMW Capability accessors (pcie_capability_clear_and_set_word(),
- pcie_capability_set_word(), and pcie_capability_clear_word()) protect
--a selected set of PCI Express Capability Registers (Link Control
--Register and Root Control Register). Any change to those registers
--should be performed using RMW accessors to avoid problems due to
--concurrent updates. For the up-to-date list of protected registers,
--see pcie_capability_clear_and_set_word().
-+a selected set of PCI Express Capability Registers:
-+
-+* Link Control Register
-+* Root Control Register
-+* Link Control 2 Register
-+
-+Any change to those registers should be performed using RMW accessors to
-+avoid problems due to concurrent updates. For the up-to-date list of
-+protected registers, see pcie_capability_clear_and_set_word().
-diff --git a/include/linux/pci.h b/include/linux/pci.h
-index 16493426a04f..93faaf08965e 100644
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -1273,6 +1273,7 @@ static inline int pcie_capability_clear_and_set_word(struct pci_dev *dev,
- {
- 	switch (pos) {
- 	case PCI_EXP_LNKCTL:
-+	case PCI_EXP_LNKCTL2:
- 	case PCI_EXP_RTCTL:
- 		return pcie_capability_clear_and_set_word_locked(dev, pos,
- 								 clear, set);
--- 
-2.39.2
+Something needs to co-ordinate when the net stack's allocator is done
+with the bulk of pages and when io_uring and do the final
+put_user_page() to free it. DMABUF is not an unreasonable choice for
+this.
 
+> > topic to me, and honestly hacking into the allocator free function
+> > seems a bit weird..
+> 
+> Do you also think that DMA_BUF_IOCTL_SYNC is a weird hack, because
+> it "delays free" by pinning the dmabuf object and letting the user
+> read memory instead of copying it? I can find many examples
+
+It seems to me the flow you want is for the driver to allocate a page,
+put it on a rx ring, process it through the netstack, and deliver it
+to io_uring. io_uring would then sit on the allocation until userspace
+it done and return it back to the netstack allocator.
+
+Hooking the free of the netstack allocator and then defering it seems
+like a weird and indirect way to get there. Why can't io_uring just be
+the entity that does the final free and not mess with the logic
+allocator?
+
+Jason
 
