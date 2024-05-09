@@ -1,148 +1,219 @@
-Return-Path: <linux-doc+bounces-16132-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16124-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76D838C1605
-	for <lists+linux-doc@lfdr.de>; Thu,  9 May 2024 22:04:13 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B847A8C151C
+	for <lists+linux-doc@lfdr.de>; Thu,  9 May 2024 21:00:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A742B1C22C70
-	for <lists+linux-doc@lfdr.de>; Thu,  9 May 2024 20:04:12 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 765212830F2
+	for <lists+linux-doc@lfdr.de>; Thu,  9 May 2024 19:00:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 960EA12BF3E;
-	Thu,  9 May 2024 20:01:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D05BA7E0F1;
+	Thu,  9 May 2024 19:00:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="Y0RCS5xi"
+	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="JJqxJHRe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5053129E76;
-	Thu,  9 May 2024 20:01:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8C147F476
+	for <linux-doc@vger.kernel.org>; Thu,  9 May 2024 19:00:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1715284877; cv=none; b=VPlUZyzfwnZtyPF88VF+MHkLxsEJrkP1mNnlwHs06kLIJzPqs2I/vNi5eYKPJ7m5Lj2TUywth3BZNpdkXqj543pf+gp4jp0WDXJnZFh8Q9wcuh04UVRfIxhftQwpgvstaFPS7TzGs+iO0nU/3hnSyzW+ZjNtGjCKlEAaptxyx7Q=
+	t=1715281251; cv=none; b=T2DZznl8dGCxP6WDZLC8Osy9CGNLwrkz5342eNjudFztDk1VSmwTgWtjayVZrXH4gA+J4XOc0w1B52KO2ABwvNHt1HHIDP2hNvnb8CwEM+lg5SJBQ9pEz73WO6FbpVJbwYC0fCcA+quzci27A4dpk9snSCsnyt79k5eiuxDC03Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1715284877; c=relaxed/simple;
-	bh=sRaSSg2FFDTPDk8c0zgqQf1W2ss6flB+SQnVqYy9dz0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=Rp9eAEda9Kp1JQlOyhlHngfZsKXhfB7l5263lmNinRT/C4OY57Kph7lvwXVBykZcN7GMHx3OCkf1IUu1Bsxx3y2LqU++QcBfDv7tBmZLjquKKKdFWOxjDhG4gljlrsKfOF7ykb1x+IIRTJX44zjnDvQAaGG2VypnlTi1xQEU5WY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=Y0RCS5xi; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 449B7BB4006645;
-	Thu, 9 May 2024 18:59:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	message-id:date:mime-version:subject:to:cc:references:from
-	:in-reply-to:content-type:content-transfer-encoding; s=
-	qcppdkim1; bh=TGevrFxx2sEOPvGB+uwSE8YqKDHduVwVRYRlUxcJcic=; b=Y0
-	RCS5xi8DUFJJFXkFIvslJpUQrX4N2B3rw2xR16vtDShPPd+qYZIuNsuxZ8i6m4fc
-	7sv6KhcKZSZi7c7QPjJ9wFHg9qg7QGVQt/snMIATkReTj2iuIbCpa3/ALDME/h2B
-	CU7nyRmq6odr22bXb3x44XSJ0rPwr9nR7AxroyipgFa+PXmO9HUJNZ1CM0yxMbFX
-	duZCvXpDtkiw1xsot3uNogv4dk35QIk1CJFL2qZ/2v/glgh5QRyU3/dDK6KTsk8B
-	+YnTz2quCwc3krndrS/xLXeunhRMKGwonDR7tfPtXM+ymDcBxxXnyH9HAl60UaVR
-	id5pYbUb6pp0XEgHAJgA==
-Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3y07wfup54-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 09 May 2024 18:59:55 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
-	by NALASPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 449IxsG5018864
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 9 May 2024 18:59:54 GMT
-Received: from [10.110.104.129] (10.80.80.8) by nalasex01a.na.qualcomm.com
- (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Thu, 9 May 2024
- 11:59:53 -0700
-Message-ID: <1e043ff3-58e0-7fd0-00b6-9117bc81e9ff@quicinc.com>
-Date: Thu, 9 May 2024 11:59:52 -0700
+	s=arc-20240116; t=1715281251; c=relaxed/simple;
+	bh=xF39L+hs0TY+8aNmea7VYtJ+NEfSYKkZrUTY8FQHMiE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LOq+e4dxyZwxya5qiWsUjPpY86SKCmIpJ13blBrxBs+rzDGq1WnpF15hKPlNTMjHujRV+H5ykeiYNkIUbAYQtbceUGPsgMM9at74xuYmFGNcMoVxEPyZCKkdJS9uXImB6o+TxEpARSFqMvOrA8rqrKp0c+Os5SgEA1fDAxhg7Js=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=JJqxJHRe; arc=none smtp.client-ip=209.85.210.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-6f44bcbaae7so1116381b3a.2
+        for <linux-doc@vger.kernel.org>; Thu, 09 May 2024 12:00:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1715281242; x=1715886042; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=suVrTFWe4Q9EJfAXikAfGsbIG5FwHp88I8wjDmo5qhw=;
+        b=JJqxJHRelJ7QcM2PM36uXftB9ooQUS6iPJ+3M48VB7n1Rt0Qvw8nwkvwQdK7vDOnbS
+         aGOCUnx0yvWjP5VLhv8aqijkQH2PhO71MfbI8y33/IpWtnZiY6xNDPK0U8dCpwyd0xpG
+         3dlf94UK2jlFf37YfJTq20Hjh3qjs16ULJthd1fBhrPnwa34PZTYrTwDx0jC2sU1i/0n
+         vsGn9/NidfMsoQPz+QPJfwiNmFIVVlgzvW7oSE4yaFwoFEz1PjPZqXy+FpRLbeyIDEsN
+         mr50KSsUPaB3x61aY+qwHMBle46w/Gy+HE1Vj0UoExGhiAFSeN5W4WLz23Ex5zBWYhf/
+         CT5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715281242; x=1715886042;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=suVrTFWe4Q9EJfAXikAfGsbIG5FwHp88I8wjDmo5qhw=;
+        b=OlVn+YWgDFxBTqykfghrIv1NLKvRer2U8Hl1s9rkCGZnNP2/VxjSA+nT+IVtkt13E+
+         mbzK1ZTxyVnvsOP6h5g5d9KnFzwbaNciLxjywwgSayzpflVAbgdQY226VSSTH3f6Wtje
+         o3lIAIAK93iQaUbyD55QOgmL5tzSXab/k96dSLxB1OBbOfmKAFW1BccB+tBbTeyR9q1g
+         OKYiYkkU7HGzCwiDptd8CageM9UUlApdn8k5LJ75BUlfvZFXTy1ELBV7OX0TvkPIEv73
+         pfhh4QxOeJLPdNgBuG7euBn/zJda2oiVZveuK9nbKEq/RJtcvb1onOknVLlqB7iAKigp
+         s9Ow==
+X-Forwarded-Encrypted: i=1; AJvYcCXhzfmqk8OdkUupSKbK7qYr3i7aP+/Fba5qn1iEaIFA1dHyQlhn7GDk3rfh8Dl5u+MKjoTamW86eytEQ1lNCiiFUZuarAFt11XE
+X-Gm-Message-State: AOJu0Yxm2+LhiZbYYHSX4U0snOWPagGokSodZnRH6JsS4OzFbr/LdjTQ
+	LFhnqf17B6B0MZoEohmXmxOmwieaQvR4jGgDn43mMvPFoWqjk3jeiP8ADbJMFUM=
+X-Google-Smtp-Source: AGHT+IHE3J/hwAQsHqywRim+p5Loya/dtj3SbYe2Ez8JQSaJRUzBly/edfRtpEMzoFQPu7m0vRKdfQ==
+X-Received: by 2002:a05:6300:8002:b0:1af:62a6:e2 with SMTP id adf61e73a8af0-1afde1fb753mr598976637.56.1715281241943;
+        Thu, 09 May 2024 12:00:41 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-6f4d2a6654asm1626451b3a.43.2024.05.09.12.00.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 May 2024 12:00:41 -0700 (PDT)
+Date: Thu, 9 May 2024 12:00:36 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Charlie Jenkins <charlie@rivosinc.com>
+Cc: paul.walmsley@sifive.com, rick.p.edgecombe@intel.com,
+	broonie@kernel.org, Szabolcs.Nagy@arm.com, kito.cheng@sifive.com,
+	keescook@chromium.org, ajones@ventanamicro.com,
+	conor.dooley@microchip.com, cleger@rivosinc.com,
+	atishp@atishpatra.org, alex@ghiti.fr, bjorn@rivosinc.com,
+	alexghiti@rivosinc.com, samuel.holland@sifive.com, conor@kernel.org,
+	linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-mm@kvack.org, linux-arch@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, corbet@lwn.net, palmer@dabbelt.com,
+	aou@eecs.berkeley.edu, robh+dt@kernel.org,
+	krzysztof.kozlowski+dt@linaro.org, oleg@redhat.com,
+	akpm@linux-foundation.org, arnd@arndb.de, ebiederm@xmission.com,
+	Liam.Howlett@oracle.com, vbabka@suse.cz, lstoakes@gmail.com,
+	shuah@kernel.org, brauner@kernel.org, andy.chiu@sifive.com,
+	jerry.shih@sifive.com, hankuan.chen@sifive.com,
+	greentime.hu@sifive.com, evan@rivosinc.com, xiao.w.wang@intel.com,
+	apatel@ventanamicro.com, mchitale@ventanamicro.com,
+	dbarboza@ventanamicro.com, sameo@rivosinc.com,
+	shikemeng@huaweicloud.com, willy@infradead.org,
+	vincent.chen@sifive.com, guoren@kernel.org, samitolvanen@google.com,
+	songshuaishuai@tinylab.org, gerg@kernel.org, heiko@sntech.de,
+	bhe@redhat.com, jeeheng.sia@starfivetech.com, cyy@cyyself.name,
+	maskray@google.com, ancientmodern4@gmail.com,
+	mathis.salmen@matsal.de, cuiyunhui@bytedance.com,
+	bgray@linux.ibm.com, mpe@ellerman.id.au, baruch@tkos.co.il,
+	alx@kernel.org, david@redhat.com, catalin.marinas@arm.com,
+	revest@chromium.org, josh@joshtriplett.org, shr@devkernel.io,
+	deller@gmx.de, omosnace@redhat.com, ojeda@kernel.org,
+	jhubbard@nvidia.com
+Subject: Re: [PATCH v3 01/29] riscv: envcfg save and restore on task switching
+Message-ID: <Zj0dVJ20D05ELAoH@debug.ba.rivosinc.com>
+References: <20240403234054.2020347-1-debug@rivosinc.com>
+ <20240403234054.2020347-2-debug@rivosinc.com>
+ <ZjwUhvLBv13qi77a@ghost>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH] docs: document python version used for compilation
-Content-Language: en-US
-To: Jonathan Corbet <corbet@lwn.net>,
-        Dmitry Baryshkov
-	<dmitry.baryshkov@linaro.org>,
-        Rob Clark <robdclark@gmail.com>, Sean Paul
-	<sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>
-CC: <workflows@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, Masahiro Yamada <masahiroy@kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
-        <freedreno@lists.freedesktop.org>
-References: <20240509-python-version-v1-1-a7dda3a95b5f@linaro.org>
- <87o79faq4a.fsf@meer.lwn.net>
-From: Abhinav Kumar <quic_abhinavk@quicinc.com>
-In-Reply-To: <87o79faq4a.fsf@meer.lwn.net>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: UTN9o-NiCFp8SHChNih0iPS8RnlyCSRO
-X-Proofpoint-ORIG-GUID: UTN9o-NiCFp8SHChNih0iPS8RnlyCSRO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.11.176.26
- definitions=2024-05-09_10,2024-05-09_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 adultscore=0
- spamscore=0 priorityscore=1501 suspectscore=0 bulkscore=0 phishscore=0
- clxscore=1011 lowpriorityscore=0 mlxscore=0 malwarescore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2405010000
- definitions=main-2405090133
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <ZjwUhvLBv13qi77a@ghost>
 
-
-
-On 5/9/2024 9:48 AM, Jonathan Corbet wrote:
-> Dmitry Baryshkov <dmitry.baryshkov@linaro.org> writes:
-> 
->> The drm/msm driver had adopted using Python3 script to generate register
->> header files instead of shipping pre-generated header files. Document
->> the minimal Python version supported by the script.
+On Wed, May 08, 2024 at 05:10:46PM -0700, Charlie Jenkins wrote:
+>On Wed, Apr 03, 2024 at 04:34:49PM -0700, Deepak Gupta wrote:
+>> envcfg CSR defines enabling bits for cache management instructions and
+>> soon will control enabling for control flow integrity and pointer
+>> masking features.
 >>
->> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+>> Control flow integrity enabling for forward cfi and backward cfi are
+>> controlled via envcfg and thus need to be enabled on per thread basis.
+>>
+>> This patch creates a place holder for envcfg CSR in `thread_info` and
+>> adds logic to save and restore on task switching.
+>>
+>> Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 >> ---
->>   Documentation/process/changes.rst | 1 +
->>   1 file changed, 1 insertion(+)
+>>  arch/riscv/include/asm/switch_to.h   | 10 ++++++++++
+>>  arch/riscv/include/asm/thread_info.h |  1 +
+>>  2 files changed, 11 insertions(+)
 >>
->> diff --git a/Documentation/process/changes.rst b/Documentation/process/changes.rst
->> index 5685d7bfe4d0..8d225a9f65a2 100644
->> --- a/Documentation/process/changes.rst
->> +++ b/Documentation/process/changes.rst
->> @@ -63,6 +63,7 @@ cpio                   any              cpio --version
->>   GNU tar                1.28             tar --version
->>   gtags (optional)       6.6.5            gtags --version
->>   mkimage (optional)     2017.01          mkimage --version
->> +Python (optional)      3.5.x            python3 --version
->>   ====================== ===============  ========================================
-> 
-> Is it really optional - can you build the driver without it?
-> 
+>> diff --git a/arch/riscv/include/asm/switch_to.h b/arch/riscv/include/asm/switch_to.h
+>> index 7efdb0584d47..2d9a00a30394 100644
+>> --- a/arch/riscv/include/asm/switch_to.h
+>> +++ b/arch/riscv/include/asm/switch_to.h
+>> @@ -69,6 +69,15 @@ static __always_inline bool has_fpu(void) { return false; }
+>>  #define __switch_to_fpu(__prev, __next) do { } while (0)
+>>  #endif
+>>
+>> +static inline void __switch_to_envcfg(struct task_struct *next)
+>> +{
+>> +	register unsigned long envcfg = next->thread_info.envcfg;
+>
+>This doesn't need the register storage class.
+>
 
-True, we cannot build the driver now without it. So we should be 
-dropping the optional tag.
+yeah. will fix it. thanks.
 
-With that addressed,
+>> +
+>> +	asm volatile (ALTERNATIVE("nop", "csrw " __stringify(CSR_ENVCFG) ", %0", 0,
+>> +							  RISCV_ISA_EXT_XLINUXENVCFG, 1)
+>> +							  :: "r" (envcfg) : "memory");
+>> +}
+>> +
+>
+>Something like:
+>
+>static inline void __switch_to_envcfg(struct task_struct *next)
+>{
+>	if (riscv_has_extension_unlikely(RISCV_ISA_EXT_XLINUXENVCFG))
+>		csr_write(CSR_ENVCFG, next->thread_info.envcfg);
+>}
+>
+>would be easier to read, but the alternative you have written doesn't
+>have the jump that riscv_has_extension_unlikely has so what you have
+>will be more performant.
 
-Reviewed-by: Abhinav Kumar <quic_abhinavk@quicinc.com>
+Yeah looked at codegen of `riscv_has_extension_unlikely` and I didn't like un-necessary jumps,
+specially in switch_to path. All I want is a CSR write. So used alternative to patch nop with
+CSR write.
 
-> This document needs some help... I'm missing a number of things that are
-> *not* marked as "optional" (jfsutils, reiserfsprogs, pcmciautils, ppp,
-> ...) and somehow my system works fine :)  It would be nice to document
-> *why* users might need a specific tool.
-> 
-> But I guess we aren't going to do that now.  I can apply this, but I do
-> wonder about the "optional" marking.
-> 
-> Thanks,
-> 
-> jon
+>
+>Does envcfg need to be save/restored always or just with
+>CONFIG_RISCV_USER_CFI?
+
+There is no save (no read of CSR). Only restore (writes to CSR).
+
+There are pointer masking patches from Samuel Holland where senvcfg needs to be context
+switched on per task basis.
+https://lore.kernel.org/lkml/20240319215915.832127-1-samuel.holland@sifive.com/T/
+
+Given that this CSR controls user execution environment and is per task basis, I thought its
+better to not wrap it under CONFIG_RISCV_USER_CFI and rather make it dependend on
+RISCV_ISA_EXT_XLINUXENVCFG. If any of the extensions which require senvcfg, then simply
+restore this CSR on per task basis.
+
+>
+>- Charlie
+>
+>>  extern struct task_struct *__switch_to(struct task_struct *,
+>>  				       struct task_struct *);
+>>
+>> @@ -80,6 +89,7 @@ do {							\
+>>  		__switch_to_fpu(__prev, __next);	\
+>>  	if (has_vector())					\
+>>  		__switch_to_vector(__prev, __next);	\
+>> +	__switch_to_envcfg(__next);				\
+>>  	((last) = __switch_to(__prev, __next));		\
+>>  } while (0)
+>>
+>> diff --git a/arch/riscv/include/asm/thread_info.h b/arch/riscv/include/asm/thread_info.h
+>> index 5d473343634b..a503bdc2f6dd 100644
+>> --- a/arch/riscv/include/asm/thread_info.h
+>> +++ b/arch/riscv/include/asm/thread_info.h
+>> @@ -56,6 +56,7 @@ struct thread_info {
+>>  	long			user_sp;	/* User stack pointer */
+>>  	int			cpu;
+>>  	unsigned long		syscall_work;	/* SYSCALL_WORK_ flags */
+>> +	unsigned long envcfg;
+>>  #ifdef CONFIG_SHADOW_CALL_STACK
+>>  	void			*scs_base;
+>>  	void			*scs_sp;
+>> --
+>> 2.43.2
+>>
 
