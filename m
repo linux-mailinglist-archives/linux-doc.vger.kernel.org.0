@@ -1,170 +1,179 @@
-Return-Path: <linux-doc+bounces-16433-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16437-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54AC78C7DB6
-	for <lists+linux-doc@lfdr.de>; Thu, 16 May 2024 22:31:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75C988C7EAA
+	for <lists+linux-doc@lfdr.de>; Fri, 17 May 2024 01:00:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 766231C2148B
-	for <lists+linux-doc@lfdr.de>; Thu, 16 May 2024 20:31:16 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 98B801C218F2
+	for <lists+linux-doc@lfdr.de>; Thu, 16 May 2024 23:00:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3A28838F91;
-	Thu, 16 May 2024 20:31:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB9B9364A1;
+	Thu, 16 May 2024 22:59:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dDAWhmUD"
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="nJ7FDvr9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02A27139F;
-	Thu, 16 May 2024 20:31:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EB6C273FC;
+	Thu, 16 May 2024 22:59:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1715891472; cv=none; b=C4WanZoJVEq0EZ/whcMMb0yHtlZBxzOacfRF1e9eDf2fzwLbfNi+5pmrs9xXsy+Ng8R5DmghgpWkiPeNWrpufNDZv10BHU6QNEl3VlNVUNPKj1Xelv4DPSUDSM3x00mjxtKMIavFHwN7oPTPiMm4N1OaDRzhAd1gRjAqfD5Mwww=
+	t=1715900386; cv=none; b=dGGNU7HaJgIDgC3x2Md3rhFX070tZnOFeANWvT/ZhCTCrU2+neTSrQsHalWlZsL6WKnYWEoRp9VUAGcvEh+wzyWQXLPolLrRf7t+K2QIG2VgwTq+LLIRg2W7PYKB8e8zyKZoE/YRxSPLqGLhgy1isZAwS2zrWtBBSv8THKzzb0A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1715891472; c=relaxed/simple;
-	bh=vOAyXMvMO4/iJmPTXPfyexrttf8zBjbSgvoi5gnjzLA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tNLvogHrO0c2p570qXRzxGXHHuGBINs51B5/j+66FIsxhHVvE5evJwhrafD6i+wMXcN2+KEOqgc04iM+wlFzcBvo+/5HHjz3JCqCnvPz4JRAXU9gtkiWjLzs3sPFpZxvS6cnLdwsBMFyk9MuC1ZJcx4o/9LX2iCg7eDSMT6lQr8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dDAWhmUD; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5EBAC113CC;
-	Thu, 16 May 2024 20:31:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1715891471;
-	bh=vOAyXMvMO4/iJmPTXPfyexrttf8zBjbSgvoi5gnjzLA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=dDAWhmUDmLUiJb54Uja30vFjFw9q6NBXP74EOnCuKC8gHyhMuGeRboksCf13pFIJQ
-	 rUG5cbU3P18kx+EqmNzzOa9xJsYGNRBuXzKmlMFge9ZqMr6Wh9rJRQgUfPm5AMqGP0
-	 GRqELF2/2r8X5G7YT1C0WY7xdp7oodx3Z47FIVS4O+uOLNKfohAPMByTt+u7Sz0LWS
-	 WDd62ipGaHqfNN3abosA1QOOV7K+aYDI2KEZs1kaUQTGR9+CbXOZsgapkjBtIeuWri
-	 AN9qyObaZ2Cv/3jMm51bZl3nI90Yvvna1Ko2XgxVzEJqsgvt0JZt/EiSMcYUoo+x0W
-	 qk2FTzTBilR5g==
-Date: Thu, 16 May 2024 21:31:04 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Charlie Jenkins <charlie@rivosinc.com>
-Cc: Andy Chiu <andy.chiu@sifive.com>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>, Guo Ren <guoren@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Samuel Holland <samuel@sholland.org>,
-	Conor Dooley <conor.dooley@microchip.com>,
-	Evan Green <evan@rivosinc.com>,
-	=?iso-8859-1?Q?Cl=E9ment_L=E9ger?= <cleger@rivosinc.com>,
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
-	linux-riscv@lists.infradead.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, Palmer Dabbelt <palmer@rivosinc.com>,
-	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev,
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH v6 03/17] riscv: vector: Use vlenb from DT
-Message-ID: <20240516-sleek-wound-f835b3bf23cf@spud>
-References: <20240503-dev-charlie-support_thead_vector_6_9-v6-0-cb7624e65d82@rivosinc.com>
- <20240503-dev-charlie-support_thead_vector_6_9-v6-3-cb7624e65d82@rivosinc.com>
- <CABgGipXg68VEGt=oZZSENmbqs4-g3PB=CBobNwgqQjLHfxo+VQ@mail.gmail.com>
- <20240516-grandkid-monday-86c698ca4aed@spud>
- <ZkZV3yxbxab4W6I4@ghost>
+	s=arc-20240116; t=1715900386; c=relaxed/simple;
+	bh=69uarWmzmHKnkRD1y5e85vm0oq19eeBBvnrV6aoQPlk=;
+	h=From:Subject:Date:Message-ID:MIME-Version:Content-Type:To:CC; b=rjvr4zm6FOgFK8EY7VAV+UTXOU5Ksc+ANqa5aGGFY5ljZYfUZS8JbunSEofHhzYG59a45dQC2mzrV5p1mARPN1hV3cXUWnReZks+UEVWBi1mgDJRsONT1LAKZB7LrmNNHIAk4rG/MRyVxPJx0kiJyu+sYKw2w2JyPfAgcSggQpU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=nJ7FDvr9; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44GKMUBH017256;
+	Thu, 16 May 2024 22:59:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	from:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding:to:cc; s=qcppdkim1; bh=tFGkOgQk1CQWak
+	kHmlHYIl48bNGXvL5BaBkAJN/8WTo=; b=nJ7FDvr9FKYYcrxKYO2Y2HMMg+FY1q
+	6ebpjMozEpFZhAAdxp6UW7JGZ82MEDWl/i4331jYz6OjIE3qnyXZM4ab6mauZMyi
+	VwW7f+i9x4F6hA1r6IKe+hDNulWCtoc/X2qS2hQkpBNVzZNPWSNyFmlM+7cAubwX
+	rni4bmtaUdI01YGWpGghyhqGvUQpiD9GP9PVzuP7b1sJsSfmI9gTTTHeQcwALVM3
+	ANHKDsx7dKASr9BmByB2Th3Ll/8XbbU1hd6NNRYjJGuK2+u6AL7wON3+a1VzBtke
+	IdxTyJNHlb6mUI/poI0UlNIeewAshNxGvqRgL5pb0srHiDDKk2DrmFDw==
+Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3y3j28shxy-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 16 May 2024 22:59:09 +0000 (GMT)
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
+	by NALASPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 44GMx6Jx012432
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 16 May 2024 22:59:06 GMT
+Received: from hu-clew-lv.qualcomm.com (10.49.16.6) by
+ nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Thu, 16 May 2024 15:59:04 -0700
+From: Chris Lew <quic_clew@quicinc.com>
+Subject: [PATCH 0/7] Add support for hwspinlock bust
+Date: Thu, 16 May 2024 15:58:18 -0700
+Message-ID: <20240516-hwspinlock-bust-v1-0-47a90a859238@quicinc.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="HJGHkHICZT5TWk2k"
-Content-Disposition: inline
-In-Reply-To: <ZkZV3yxbxab4W6I4@ghost>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIqPRmYC/2WNQQ6CMBBFr0Jmbc20lgCuuIdhUYYqE7XFFlBDu
+ LuVuHP5XvLfXyDawDbCMVsg2Jkje5dA7jKg3riLFdwlBoVKY46V6J9xYHfzdBXtFEfR6aowBZI
+ 0BwNpNQR75tdWPDWJe46jD+/tYFZf+2tJ/GvNSqDIW1OSLlGWXVU/JiZ2tCd/h2Zd1w9WPf8us
+ AAAAA==
+To: Bjorn Andersson <andersson@kernel.org>,
+        Baolin Wang
+	<baolin.wang@linux.alibaba.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        "Ingo
+ Molnar" <mingo@redhat.com>, Will Deacon <will@kernel.org>,
+        Waiman Long
+	<longman@redhat.com>, Boqun Feng <boqun.feng@gmail.com>,
+        Jonathan Corbet
+	<corbet@lwn.net>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Rob Herring
+	<robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+	<conor+dt@kernel.org>,
+        Manivannan Sadhasivam
+	<manivannan.sadhasivam@linaro.org>,
+        Konrad Dybcio <konrad.dybcio@linaro.org>
+CC: <linux-remoteproc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+        <devicetree@vger.kernel.org>, Chris Lew <quic_clew@quicinc.com>,
+        "Richard
+ Maina" <quic_rmaina@quicinc.com>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1715900345; l=2621;
+ i=quic_clew@quicinc.com; s=20240508; h=from:subject:message-id;
+ bh=69uarWmzmHKnkRD1y5e85vm0oq19eeBBvnrV6aoQPlk=;
+ b=1uxRXGnN0jTn6ygeG+GtBtrs/pyZD4LD89c7a4az2b2w+xOzJniXhYV/mGAPSJypgpjobItiA
+ yV5hiHcaqUKDB4AaUm/KMvaor/Uz6QFFM7Tyzf7xLX5QkjvFN68hQIU
+X-Developer-Key: i=quic_clew@quicinc.com; a=ed25519;
+ pk=lEYKFaL1H5dMC33BEeOULLcHAwjKyHkTLdLZQRDTKV4=
+X-ClientProxiedBy: nalasex01c.na.qualcomm.com (10.47.97.35) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: BoIJKhdQkUTDNXlkXcvRToDio0vuAlaw
+X-Proofpoint-GUID: BoIJKhdQkUTDNXlkXcvRToDio0vuAlaw
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.11.176.26
+ definitions=2024-05-16_07,2024-05-15_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 spamscore=0
+ impostorscore=0 malwarescore=0 phishscore=0 bulkscore=0 suspectscore=0
+ mlxscore=0 clxscore=1015 priorityscore=1501 mlxlogscore=912
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2405010000 definitions=main-2405160168
 
+hwspinlocks can be acquired by many devices on the SoC. If any of these
+devices go into a bad state before the device releases the hwspinlock,
+then that hwspinlock may end up in an unusable state.
 
---HJGHkHICZT5TWk2k
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In the case of smem, each remoteproc takes a hwspinlock before trying to
+allocate an smem item. If the remoteproc were to suddenly crash without
+releasing this, it would be impossible for other remoteprocs to allocate
+any smem items.
 
-On Thu, May 16, 2024 at 01:28:45PM -0700, Charlie Jenkins wrote:
-> On Thu, May 16, 2024 at 05:24:25PM +0100, Conor Dooley wrote:
-> > On Thu, May 16, 2024 at 10:00:12PM +0800, Andy Chiu wrote:
-> > > On Sat, May 4, 2024 at 2:21=E2=80=AFAM Charlie Jenkins <charlie@rivos=
-inc.com> wrote:
-> >=20
-> > > > +               if (elf_hwcap & COMPAT_HWCAP_ISA_V && has_riscv_hom=
-ogeneous_vlenb() < 0) {
-> > > > +                       pr_warn("Unsupported heterogeneous vlen det=
-ected, vector extension disabled.\
-> > > > +                       elf_hwcap &=3D ~COMPAT_HWCAP_ISA_V;
-> > > > +               }
-> > >=20
-> > > We only touch COMPAT_HWCAP_ISA_V and the failed case only turns off t=
-he
-> > > rectified V. So here we have nothing to do with the Xtheadvector.
-> >=20
-> > There's nothing t-head related in the tree at this point, so doing
-> > anything with it would cause build issues.
-> >=20
-> > > However, I am still confused because I think Xtheadvector would also
-> > > need to call into this check, so as to setup vlenb.
-> >=20
-> >=20
-> > > Apart from that, it seems like some vendor stating Xtheadvector is
-> > > actually vector-0.7.
-> >=20
-> > The T-Head implementation is 0.7.x, but I am not really sure what you
-> > mean by this comment.
->=20
-> Andy, the idea of this patch was to be able to support this binding on
-> more than just xtheadvector.
->=20
-> You are correct though Andy, this is a problem that a later patch in
-> this series doesn't disable xtheadvector when vlenb is not homogeneous.
-> I am going to wait to send out any more versions until after this merge
-> window but I will fix this in the next version. Thank you!=20
+We propose a new api to bust a hwspinlock. This functionality is meant
+for drivers that manage the lifecycle of a device. The driver can use
+the bust api if it detects the device has gone into an error state, thus
+allowing other entities in the system to use the hwspinlock.
 
-Agreed on all counts :)
+The bust API implies multiple devices in linux can get a reference to a
+hwspinlock. We add the ability for multiple devices to get a reference
+to a hwspinlock via hwspin_lock_request_specific().
+hwspin_lock_request() will continue to provide the next unused lock.
 
-> > > Please correct me if I speak anything wrong. One
-> > > thing I noticed is that Xtheadvector wouldn't trap on reading
-> > > th.vlenb but vector-0.7 would. If that is the case, should we require
-> > > Xtheadvector to specify `riscv,vlenb` on the device tree?
-> >=20
-> > In the world of Linux, "vector-0.7" isn't a thing. There's only 1.0, and
-> > after this patchset, "xtheadvector". My understanding, from discussion
-> > on earlier versions of this series the trap is actually accessing
-> > th.vlenb register, despite the documentation stating that it is
-> > unprivileged:
-> > https://github.com/T-head-Semi/thead-extension-spec/blob/master/xtheadv=
-ector.adoc
-> > I assume Charlie tried it but was trapping, as v1 had a comment:
-> > +		 * Although xtheadvector states that th.vlenb exists and
-> > +		 * overlaps with the vector 1.0 extension overlaps, an illegal
-> > +		 * instruction is raised if read. These systems all currently
-> > +		 * have a fixed vector length of 128, so hardcode that value.
->=20
-> On my board with a c906 attempting to read th.vlenb (which is supposed
-> to have the same encoding as vlenb) raises an illegal instruction
-> exception from S-mode even though the documentation states that it
-> shouldn't. Because the documentation states that vlenb is available, I
-> haven't made it required for xtheadvector, I am not sure the proper
-> solution for that.
+For the smem example, the hwspinlock will now be referenced by remoteproc
+and the smem driver.
 
-Would you mind raising an issue on the T-Head extension spec repo about
-this?
+These patches were tested on an sm8650 mtp using engineering cdsp
+firmware that triggers a watchdog with the smem hwspinlock acquired.
 
-Thanks,
-Conor.
+Checked for error in dt-bindings with below.
+ - make DT_CHECKER_FLAGS=-m DT_SCHEMA_FILES=remoteproc/qcom,pas-common.yaml dt_binding_check
+ - make qcom/sm8650-mtp.dtb CHECK_DTBS=1
 
---HJGHkHICZT5TWk2k
-Content-Type: application/pgp-signature; name="signature.asc"
+Signed-off-by: Chris Lew <quic_clew@quicinc.com>
+---
+Chris Lew (2):
+      dt-bindings: remoteproc: qcom,pas: Add hwlocks
+      arm64: dts: qcom: sm8650: Add hwlock to remoteproc
 
------BEGIN PGP SIGNATURE-----
+Richard Maina (5):
+      hwspinlock: Introduce refcount
+      hwspinlock: Enable hwspinlock sharing
+      hwspinlock: Introduce hwspin_lock_bust()
+      hwspinlock: qcom: implement bust operation
+      remoteproc: qcom_q6v5_pas: Add hwspinlock bust on stop
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZkZtCAAKCRB4tDGHoIJi
-0iqUAQDoE9mZU3cwwi2L0msRdNJfiKf3sHdTRqTyprp8fMkE0QEA+E4AIm1pM5DV
-TplcpCK2uFfwFdtBhcs80nkZCt5chgo=
-=Mu0n
------END PGP SIGNATURE-----
+ .../bindings/remoteproc/qcom,pas-common.yaml       |  3 ++
+ Documentation/locking/hwspinlock.rst               | 19 ++++++--
+ arch/arm64/boot/dts/qcom/sm8650.dtsi               |  3 ++
+ drivers/hwspinlock/hwspinlock_core.c               | 52 ++++++++++++++++------
+ drivers/hwspinlock/hwspinlock_internal.h           |  5 +++
+ drivers/hwspinlock/qcom_hwspinlock.c               | 25 +++++++++++
+ drivers/remoteproc/qcom_q6v5_pas.c                 | 28 ++++++++++++
+ include/linux/hwspinlock.h                         |  6 +++
+ 8 files changed, 123 insertions(+), 18 deletions(-)
+---
+base-commit: e7b4ef8fffaca247809337bb78daceb406659f2d
+change-id: 20240509-hwspinlock-bust-d497a70c1a3a
 
---HJGHkHICZT5TWk2k--
+Best regards,
+-- 
+Chris Lew <quic_clew@quicinc.com>
+
 
