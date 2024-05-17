@@ -1,110 +1,150 @@
-Return-Path: <linux-doc+bounces-16477-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16479-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D0F48C8919
-	for <lists+linux-doc@lfdr.de>; Fri, 17 May 2024 17:14:09 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 83F6B8C8928
+	for <lists+linux-doc@lfdr.de>; Fri, 17 May 2024 17:18:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id E5DD41F21F50
-	for <lists+linux-doc@lfdr.de>; Fri, 17 May 2024 15:14:08 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B4B5C1C23F48
+	for <lists+linux-doc@lfdr.de>; Fri, 17 May 2024 15:18:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 09B1169D31;
-	Fri, 17 May 2024 15:14:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE66212D754;
+	Fri, 17 May 2024 15:18:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Rfv23b5/"
+	dkim=pass (2048-bit key) header.d=brainfault-org.20230601.gappssmtp.com header.i=@brainfault-org.20230601.gappssmtp.com header.b="GWSAlyKD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-il1-f177.google.com (mail-il1-f177.google.com [209.85.166.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFBB56A325;
-	Fri, 17 May 2024 15:14:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 491A6848E
+	for <linux-doc@vger.kernel.org>; Fri, 17 May 2024 15:18:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1715958843; cv=none; b=rndg24dPB31N4lAHtKA56uRrw4tiLPNvkVCD/h83ZQ3Q/Bvo2tUtiK7jCjy4MF44jsunfOJ4Maa87l+MiY3eHwcIXR7vTLKnqgkBmBth1K399iKXWLLybtsy6XCyelU+8b9+RirUPmBrvwTn2qKFmkLf9OrM5rqhT15lBupaRXs=
+	t=1715959086; cv=none; b=PrshdvSD8GKULVJYPE96CIys1cbuGnFId/BThHV1XJ+ADEHHVe7fIWJxksi8rV3McYMu+yC0bqawoKjS+khOLHjhfLLVnoKJIUag/tea2MFs0AdLaTJP/3tdoD6oFPhi49M1bPYDHZeA8RJNVJ6dMz11tV//V9+aswgOECtGF2M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1715958843; c=relaxed/simple;
-	bh=b8BwasW2wpCf4km+OXto+ewclPGsdKNXI2hXEUZMm0A=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=L2h7EiSS6t+ASdLbWt7WhecClg/Uok9Ct6JxISKNhXHkzx52RiKsIy2MwSvYXSuLuDJgsTGTS9FB1sJJWDwx275Pj6Ix4NiaIYsTI28OVYK2+y4gtD/m/qOR4wJs++eOzaSblp+WxQtI8FhpFxPjSztOldY0H06OSf3Qpf6BJzw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Rfv23b5/; arc=none smtp.client-ip=217.70.183.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 38FFB60002;
-	Fri, 17 May 2024 15:13:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1715958839;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=b8BwasW2wpCf4km+OXto+ewclPGsdKNXI2hXEUZMm0A=;
-	b=Rfv23b5/HdsOhMcx0s8aGcPQZPDazt8vsyoqc1HVwsEWkgD7QsHCkXUp/hsJolTx32HXDr
-	NSebq+qYhnpRRCOySs6eOlQkM+CrAw2moMP3BBXw/KbQQFRH/PcBvGwNpllONCMXTyPv43
-	/ikugNzujeqdwwfml8K9UIbYhbRw3ebrLd5mhL+LkqSfVUtqxvZ/vdQwfD31cBp/vAxMPd
-	zwd0/2KeqkLvbWWAFIefkrzez32LFsWwNpUABYm3Y92ORlo0lBlS/qYs4uCrjUeAo+J3RE
-	EZENFmsFgrxTmWszoMVPooFz21zlPxz3hXSolzwl04lEuaVY/gMeHu1OyhxmiQ==
-Date: Fri, 17 May 2024 17:13:55 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: Florian Fainelli <florian.fainelli@broadcom.com>, Broadcom internal
- kernel review list <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn
- <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, Russell King
- <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Richard
- Cochran <richardcochran@gmail.com>, Radu Pirea
- <radu-nicolae.pirea@oss.nxp.com>, Jay Vosburgh <j.vosburgh@gmail.com>, Andy
- Gospodarek <andy@greyhouse.net>, Nicolas Ferre
- <nicolas.ferre@microchip.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Jonathan Corbet
- <corbet@lwn.net>, Horatiu Vultur <horatiu.vultur@microchip.com>,
- UNGLinuxDriver@microchip.com, Simon Horman <horms@kernel.org>, Vladimir
- Oltean <vladimir.oltean@nxp.com>, Thomas Petazzoni
- <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Maxime Chevallier
- <maxime.chevallier@bootlin.com>, Rahul Rameshbabu <rrameshbabu@nvidia.com>,
- Willem de Bruijn <willemb@google.com>, Alexandra Winter
- <wintera@linux.ibm.com>
-Subject: Re: [PATCH net-next v12 00/13] net: Make timestamping selectable
-Message-ID: <20240517171355.0a46ad53@kmaincent-XPS-13-7390>
-In-Reply-To: <20240501190925.34c76ada@kernel.org>
-References: <20240430-feature_ptp_netnext-v12-0-2c5f24b6a914@bootlin.com>
-	<20240501190925.34c76ada@kernel.org>
-Organization: bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1715959086; c=relaxed/simple;
+	bh=VJJtaa3CR6YMvRWAqyg1KE5Ku5S+20oB3+0+lzQy9oI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Icz/xMdQ/Oru4IwbJznV2gyyewKHazrXP7ZsJAGICJDwWH5Z9+0Wad2VHPyIERU9rrOeR60Xqdv2zKu6xl56ItRF2GLZKoKEssPO7ez4CMhz+2SWiIUq/BO61PLoAjI1hs5f6ZwkA+qsjFmRZ4SGXeO1Tinvbe5HdmragHXchgE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=brainfault.org; spf=none smtp.mailfrom=brainfault.org; dkim=pass (2048-bit key) header.d=brainfault-org.20230601.gappssmtp.com header.i=@brainfault-org.20230601.gappssmtp.com header.b=GWSAlyKD; arc=none smtp.client-ip=209.85.166.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=brainfault.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=brainfault.org
+Received: by mail-il1-f177.google.com with SMTP id e9e14a558f8ab-36db3304053so8402945ab.2
+        for <linux-doc@vger.kernel.org>; Fri, 17 May 2024 08:18:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=brainfault-org.20230601.gappssmtp.com; s=20230601; t=1715959084; x=1716563884; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ef3MF8Rs0G3jit24HO3OWy+0DrrgzGDkN37Y+6PEB9I=;
+        b=GWSAlyKDzSG/8Lva7AJJemLNxl1/rCKHYRbWzGVGo9u7VdJpzWumg1j6poS3CiCY+h
+         Q/vYwL571bEeuIVHMbZUi7rZgeanWwpDfcNQqZWTvE8BU9jQA47+CZoZS3a6she498eT
+         mmziej6OAzT0RMLi1XR6sWSe5ECSxo3POPkaFGDb0VkDutbZAxpa98GZ9dfmCG+oyGWA
+         acVgxrrCmxIfOMfBd4ua52CwZ2R/XdZHnv+WOrH1xtKuXIIfUXWdR7Zc7tK13EwuXW28
+         cEX4iyzGoB4JpcpEa2YQ2E1/cW9e/xsWDm0ki1JlmtvkF3n3j5rYpahRiKWC+usOR2HB
+         OXeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715959084; x=1716563884;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ef3MF8Rs0G3jit24HO3OWy+0DrrgzGDkN37Y+6PEB9I=;
+        b=kwgdRjJE+DVoTlj7ghZW0QYMvhqiiWsK0RfknTQFRlyk+NmKLr43XsofeDQB+2zYfM
+         SkAVtxZTbdWHWfoyiuiUsXat3xWdYz4KqsuQcT3fBd8klYDcd+KdkD0ajx8DcZ6u19iQ
+         AfVVLEHWBgtXAraYIC2NdbIBwEZXuBoX4Z0yusf3oxM98GmbXbo6DXoATHFu3EbfkIOK
+         JrUawSOoB5zSzr4UeKuVA9OgbvWtGAYQMuVxoDj52e+KkITy2AF8NW6/Bx236d4y++Dp
+         Vaba+KW3UJK8axOw8JFvQ/aXfk6SlMwynsiBJoudq1k4K64qga51PfqIcfmGcuJ9sA+T
+         5qUQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWls1qKy4DD/z2YKuKXsDiSowMtopeB1fzXDyu2KJUjrzZ2DUGQwoMLnmu/Yttpk+K/fqBpFofrDmMCPLlllH540FB095dJ/XSO
+X-Gm-Message-State: AOJu0Yz1vRyuPHLdgr4HvW2rh611EP9jeoxjGp19u4yyhFgQuqwRa/My
+	klywRImSI6Wh5A8NvCtHQ3OFDAtkPgQwQ40yI5qYZIqy8kMalOXfjt39hKMmmm6M84dA5d8T+BF
+	xraS/Gbk8fa8Tc2N1eiVo+45lnW5V93HUUU3MUA==
+X-Google-Smtp-Source: AGHT+IHuY13zH4hhNjNUU8E5CU5OnLiqg38O1otrjb+/eoZzOjdRjWwMMh69eiDOSrh7CQUbUVho6c8rmZEAihhoEvk=
+X-Received: by 2002:a05:6e02:1886:b0:36a:1725:e123 with SMTP id
+ e9e14a558f8ab-36cc14913bfmr268024205ab.14.1715959084494; Fri, 17 May 2024
+ 08:18:04 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+References: <20240517145302.971019-1-cleger@rivosinc.com> <20240517145302.971019-5-cleger@rivosinc.com>
+In-Reply-To: <20240517145302.971019-5-cleger@rivosinc.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Fri, 17 May 2024 20:47:51 +0530
+Message-ID: <CAAhSdy0Ft5KV5ABBPNjxhy71jY0ypF7S6vhrb7gfq892WQkv1w@mail.gmail.com>
+Subject: Re: [PATCH v5 04/16] RISC-V: KVM: Allow Zimop extension for Guest/VM
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Paul Walmsley <paul.walmsley@sifive.com>, 
+	Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
+	Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Shuah Khan <shuah@kernel.org>, 
+	Atish Patra <atishp@atishpatra.org>, linux-doc@vger.kernel.org, 
+	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	devicetree@vger.kernel.org, kvm@vger.kernel.org, 
+	kvm-riscv@lists.infradead.org, linux-kselftest@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: kory.maincent@bootlin.com
 
-On Wed, 1 May 2024 19:09:25 -0700
-Jakub Kicinski <kuba@kernel.org> wrote:
+On Fri, May 17, 2024 at 8:23=E2=80=AFPM Cl=C3=A9ment L=C3=A9ger <cleger@riv=
+osinc.com> wrote:
+>
+> Extend the KVM ISA extension ONE_REG interface to allow KVM user space
+> to detect and enable Zimop extension for Guest/VM.
+>
+> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
 
-> On Tue, 30 Apr 2024 17:49:43 +0200 Kory Maincent wrote:
-> > Up until now, there was no way to let the user select the hardware
-> > PTP provider at which time stamping occurs. The stack assumed that PHY =
-time
-> > stamping is always preferred, but some MAC/PHY combinations were buggy.
-> >=20
-> > This series updates the default MAC/PHY default timestamping and aims to
-> > allow the user to select the desired hwtstamp provider administratively=
-. =20
->=20
-> Looks like there's a linking problem starting with patch 9. On a quick
-> look the functions from a module are now called by build-in code.
+LGTM.
 
-Indeed I have issues in the patch series when building PTP core as module.
-Will fix it. Thanks.
+Reviewed-by: Anup Patel <anup@brainfault.org>
+Acked-by: Anup Patel <anup@brainfault.org>
 
 Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Anup
+
+> ---
+>  arch/riscv/include/uapi/asm/kvm.h | 1 +
+>  arch/riscv/kvm/vcpu_onereg.c      | 2 ++
+>  2 files changed, 3 insertions(+)
+>
+> diff --git a/arch/riscv/include/uapi/asm/kvm.h b/arch/riscv/include/uapi/=
+asm/kvm.h
+> index b1c503c2959c..35a12aa1953e 100644
+> --- a/arch/riscv/include/uapi/asm/kvm.h
+> +++ b/arch/riscv/include/uapi/asm/kvm.h
+> @@ -167,6 +167,7 @@ enum KVM_RISCV_ISA_EXT_ID {
+>         KVM_RISCV_ISA_EXT_ZFA,
+>         KVM_RISCV_ISA_EXT_ZTSO,
+>         KVM_RISCV_ISA_EXT_ZACAS,
+> +       KVM_RISCV_ISA_EXT_ZIMOP,
+>         KVM_RISCV_ISA_EXT_MAX,
+>  };
+>
+> diff --git a/arch/riscv/kvm/vcpu_onereg.c b/arch/riscv/kvm/vcpu_onereg.c
+> index f4a6124d25c9..c6ee763422f2 100644
+> --- a/arch/riscv/kvm/vcpu_onereg.c
+> +++ b/arch/riscv/kvm/vcpu_onereg.c
+> @@ -60,6 +60,7 @@ static const unsigned long kvm_isa_ext_arr[] =3D {
+>         KVM_ISA_EXT_ARR(ZIHINTNTL),
+>         KVM_ISA_EXT_ARR(ZIHINTPAUSE),
+>         KVM_ISA_EXT_ARR(ZIHPM),
+> +       KVM_ISA_EXT_ARR(ZIMOP),
+>         KVM_ISA_EXT_ARR(ZKND),
+>         KVM_ISA_EXT_ARR(ZKNE),
+>         KVM_ISA_EXT_ARR(ZKNH),
+> @@ -137,6 +138,7 @@ static bool kvm_riscv_vcpu_isa_disable_allowed(unsign=
+ed long ext)
+>         case KVM_RISCV_ISA_EXT_ZIHINTNTL:
+>         case KVM_RISCV_ISA_EXT_ZIHINTPAUSE:
+>         case KVM_RISCV_ISA_EXT_ZIHPM:
+> +       case KVM_RISCV_ISA_EXT_ZIMOP:
+>         case KVM_RISCV_ISA_EXT_ZKND:
+>         case KVM_RISCV_ISA_EXT_ZKNE:
+>         case KVM_RISCV_ISA_EXT_ZKNH:
+> --
+> 2.43.0
+>
 
