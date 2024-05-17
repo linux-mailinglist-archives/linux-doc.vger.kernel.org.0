@@ -1,97 +1,45 @@
-Return-Path: <linux-doc+bounces-16476-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16478-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id D99178C88D4
-	for <lists+linux-doc@lfdr.de>; Fri, 17 May 2024 16:59:13 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id D175A8C891C
+	for <lists+linux-doc@lfdr.de>; Fri, 17 May 2024 17:15:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 57083B28BB6
-	for <lists+linux-doc@lfdr.de>; Fri, 17 May 2024 14:59:11 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0DA731C20E80
+	for <lists+linux-doc@lfdr.de>; Fri, 17 May 2024 15:15:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 971ED8005C;
-	Fri, 17 May 2024 14:53:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="IW/nW2rM"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E5F312CD8A;
+	Fri, 17 May 2024 15:15:36 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail-m49197.qiye.163.com (mail-m49197.qiye.163.com [45.254.49.197])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A00CC81730
-	for <linux-doc@vger.kernel.org>; Fri, 17 May 2024 14:53:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10CFD1F93E;
+	Fri, 17 May 2024 15:15:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.197
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1715957620; cv=none; b=h1V4ItLetpSw65YZVux0gGIOyKyRp9+5E+4Lgi4FZFF98eZQmEQuzmhoJGt6LmdGPw3a7GP6wlYhf31b555pQQX05K1Ejmbkzc7OMlXBYmjFNwYlUthDygizUcfuIJqQuqp9WrBc65rAjIaBxUgxMWPpTwe69y1eQgb5/1kFdM0=
+	t=1715958936; cv=none; b=Z3rEy1bJri2zaQqsMJpU5drb4fJbW1w7DUOVk7dwTDyxC+7EX19bGE7BmLvSX91j3+TrwSsUmmGB2iZL3GNkc2z8LTp56+TQgYUMn2w0sufOfObfgn+Gt9W02WI/JuqeqOPM1CO8XMY6RrAz63ytxKsuHfHvLIqKqT4Ch9wM2E4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1715957620; c=relaxed/simple;
-	bh=x/hf7mR8S0PaebbZDXn5tmxtag3p7rdZEs+HYwpAhAM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=gj20HkaOGfvBkg0NiqJliVd9/lpS1Oz1fVYBOtlIYu+7b4vUnZr+hX3+kvMR+b2papqa0ccuI+uUUltNpg4VMNBVeDoznffezXtfL5ADq5+euvZNqUSPJA9S6RBdp7wa+MSjTZk+iNU5n86QujjZV61Z+wB+p2lwe6jlvrdKTtA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=IW/nW2rM; arc=none smtp.client-ip=209.85.221.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-351d86910deso29096f8f.0
-        for <linux-doc@vger.kernel.org>; Fri, 17 May 2024 07:53:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1715957617; x=1716562417; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OClMR/8Jm3sCmLbe455uZIaBUTeeLegIVNx5rAADYDc=;
-        b=IW/nW2rMR73xnHm8jNZUQbrWlFqyJhCMuIepyZZVXuNbWIZ3a4t3ph7lQdVEQJiXG2
-         CAWO2GaRObB0229zeN0GTEfVywrOX7emWOBV1S8BLh8bdPYNcbKiTEuKhJXq6uDjIFgU
-         uvmbLxlpkuDp30MGCBEHCGklSu1GbqARKbrsXe5u17kyCYLYHdd0UQI1gg5uPjtT3Vj7
-         HSLSQA4uyDDTUh6yv9xiSm/3MNIX0UhI8Jag8MdE3TwxF+jYgbpfJ02yiGeCUvT9GlNS
-         //aXyfZbtOZzNXtuMZQ3APskpxf4i41VaTT810rwNKE1fZxijXuRgyUDg4FECZsXnw7u
-         6sDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715957617; x=1716562417;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OClMR/8Jm3sCmLbe455uZIaBUTeeLegIVNx5rAADYDc=;
-        b=m+DfEOvQZkl9zSDeMA1rwXk4GgBshGVdJINBRvDyOp+DaWp2TTNLSMKFAuuwNRTo5P
-         RZ0H60FpgqFlkhqU8p+zD2vPog2Jep/dKV9xuGrGqWy3IuVuWroBiF51KgVDXZ7bV3vP
-         /UIttrmZQS1WsdrNBkclGrZFBOh2HzSBz5jOUNm05RpXbQXk90u6+Vv+HwR96tir6soy
-         PcZ0yHcODyOiVmsJp8VFpvOFzj0FjTccnvXqZWyL0x3Vl0bdFsjHJv5UwUn/tWAlFcrn
-         mmmmOdIkBQVNL/3beWf+5W30ItQj+sXshlwZNlF+zvhiPB1y7OlQ+7VuN6PPMk2HiC05
-         6OCQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVF2u5seXdaU56poxQtvnJTXeVfNyKx9cvXsAVl4fZ4sDU+7bekeM7CrpTGO0yzkUNeTWDCahZksKa7jtdmUQ7DRX3+Hs6zEvC2
-X-Gm-Message-State: AOJu0Yy5mEvtHaeaBPh3f0kRlWrdkdBKo1BXUGKFF4tVsPE4Ic5L1KSN
-	jW7GudXqfvWOIzvERygnhbnDlNEU8cIhbZbejBEVU5YNWWGywyBdmdOsJU5W/ck=
-X-Google-Smtp-Source: AGHT+IFOQbqpkXAFZ+YravAaGBjZr48UyjitjGy6UF5iu6XOF0ZSxSlCzpVIUM9l+O9Eld2jghPS1w==
-X-Received: by 2002:a05:600c:3b86:b0:418:f770:ba0 with SMTP id 5b1f17b1804b1-41fea52ef14mr167166955e9.0.1715957617104;
-        Fri, 17 May 2024 07:53:37 -0700 (PDT)
-Received: from carbon-x1.. ([2a01:e0a:999:a3a0:46f0:3724:aa77:c1f8])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-41fccce9431sm301723695e9.28.2024.05.17.07.53.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 May 2024 07:53:36 -0700 (PDT)
-From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Conor Dooley <conor@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Anup Patel <anup@brainfault.org>,
-	Shuah Khan <shuah@kernel.org>
-Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
-	Atish Patra <atishp@atishpatra.org>,
+	s=arc-20240116; t=1715958936; c=relaxed/simple;
+	bh=tzkeAutgHKDvtezMaRFIFQ1vOKGxq4NGB23kr6qrPCE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=NI4PbtxFjKBzBBKfazPnlMDCjISSNrRK3l8PhRF0KKoo/FCxjwor8agjswJtkcvS9R3+TI7MGCuu/1GVheHznJMBLIP5EA6K7hOd+SxVldsET6OHJUs4mlGtyEV+OVfKQbFl7pVw5WCVN7mnzpfidRyYm6KNNOXwGGvH6Oq2OwU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=link.tyut.edu.cn; spf=pass smtp.mailfrom=link.tyut.edu.cn; arc=none smtp.client-ip=45.254.49.197
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=link.tyut.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=link.tyut.edu.cn
+Received: from localhost.localdomain (unknown [120.208.127.153])
+	by smtp.qiye.163.com (Hmail) with ESMTPA id 2CDA0920119;
+	Fri, 17 May 2024 23:05:50 +0800 (CST)
+From: Hu Haowen <2023002089@link.tyut.edu.cn>
+To: corbet@lwn.net
+Cc: Hu Haowen <2023002089@link.tyut.edu.cn>,
 	linux-doc@vger.kernel.org,
-	linux-riscv@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	kvm@vger.kernel.org,
-	kvm-riscv@lists.infradead.org,
-	linux-kselftest@vger.kernel.org
-Subject: [PATCH v5 16/16] KVM: riscv: selftests: Add Zcmop extension to get-reg-list test
-Date: Fri, 17 May 2024 16:52:56 +0200
-Message-ID: <20240517145302.971019-17-cleger@rivosinc.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240517145302.971019-1-cleger@rivosinc.com>
-References: <20240517145302.971019-1-cleger@rivosinc.com>
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] docs/zh_TW: add translation for glossary
+Date: Fri, 17 May 2024 23:05:28 +0800
+Message-ID: <20240517150529.102958-1-2023002089@link.tyut.edu.cn>
+X-Mailer: git-send-email 2.45.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -100,54 +48,87 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCHx4dVh5LGU0dTxgZQx8ZSVUTARMWGhIXJBQOD1
+	lXWRgSC1lBWUpJS1VJS0NVSklMVUpOSFlXWRYaDxIVHRRZQVlPS0hVSk1DTExPVUpLS1VKQktLWQ
+	Y+
+X-HM-Tid: 0a8f8716f93303a1kunm2cda0920119
+X-HM-MType: 10
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MU06Cio4MzMMOTQUMQ46MAoB
+	DxYwCQxVSlVKTEpOQk5DSENDS09PVTMWGhIXVUlLSUhLS0lLQ0I7FxIVEFUPAg4PVR4fDlUYFUVZ
+	V1kSC1lBWUpJS1VJS0NVSklMVUpOSFlXWQgBWUFITUxJNwY+
 
-The KVM RISC-V allows Zcmop extension for Guest/VM so add this
-extension to get-reg-list test.
+Add translation for glossary and add it to index according to commit
+cac02cbb91f31e28 ("docs/zh_CN: Add a glossary of Chinese translation
+terms").
 
-Signed-off-by: Clément Léger <cleger@rivosinc.com>
-Reviewed-by: Anup Patel <anup@brainfault.org>
-Acked-by: Anup Patel <anup@brainfault.org>
+Signed-off-by: Hu Haowen <2023002089@link.tyut.edu.cn>
 ---
- tools/testing/selftests/kvm/riscv/get-reg-list.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ Documentation/translations/zh_TW/glossary.rst | 36 +++++++++++++++++++
+ Documentation/translations/zh_TW/index.rst    |  5 +--
+ 2 files changed, 39 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/translations/zh_TW/glossary.rst
 
-diff --git a/tools/testing/selftests/kvm/riscv/get-reg-list.c b/tools/testing/selftests/kvm/riscv/get-reg-list.c
-index 61cad4514197..9604c8ece787 100644
---- a/tools/testing/selftests/kvm/riscv/get-reg-list.c
-+++ b/tools/testing/selftests/kvm/riscv/get-reg-list.c
-@@ -59,6 +59,7 @@ bool filter_reg(__u64 reg)
- 	case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV_ISA_EXT_ZCB:
- 	case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV_ISA_EXT_ZCD:
- 	case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV_ISA_EXT_ZCF:
-+	case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV_ISA_EXT_ZCMOP:
- 	case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV_ISA_EXT_ZFA:
- 	case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV_ISA_EXT_ZFH:
- 	case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV_ISA_EXT_ZFHMIN:
-@@ -429,6 +430,7 @@ static const char *isa_ext_single_id_to_str(__u64 reg_off)
- 		KVM_ISA_EXT_ARR(ZCB),
- 		KVM_ISA_EXT_ARR(ZCD),
- 		KVM_ISA_EXT_ARR(ZCF),
-+		KVM_ISA_EXT_ARR(ZCMOP),
- 		KVM_ISA_EXT_ARR(ZFA),
- 		KVM_ISA_EXT_ARR(ZFH),
- 		KVM_ISA_EXT_ARR(ZFHMIN),
-@@ -957,6 +959,7 @@ KVM_ISA_EXT_SIMPLE_CONFIG(zca, ZCA),
- KVM_ISA_EXT_SIMPLE_CONFIG(zcb, ZCB),
- KVM_ISA_EXT_SIMPLE_CONFIG(zcd, ZCD),
- KVM_ISA_EXT_SIMPLE_CONFIG(zcf, ZCF),
-+KVM_ISA_EXT_SIMPLE_CONFIG(zcmop, ZCMOP);
- KVM_ISA_EXT_SIMPLE_CONFIG(zfa, ZFA);
- KVM_ISA_EXT_SIMPLE_CONFIG(zfh, ZFH);
- KVM_ISA_EXT_SIMPLE_CONFIG(zfhmin, ZFHMIN);
-@@ -1017,6 +1020,7 @@ struct vcpu_reg_list *vcpu_configs[] = {
- 	&config_zcb,
- 	&config_zcd,
- 	&config_zcf,
-+	&config_zcmop,
- 	&config_zfa,
- 	&config_zfh,
- 	&config_zfhmin,
+diff --git a/Documentation/translations/zh_TW/glossary.rst b/Documentation/translations/zh_TW/glossary.rst
+new file mode 100644
+index 000000000000..6ff2a5a460ea
+--- /dev/null
++++ b/Documentation/translations/zh_TW/glossary.rst
+@@ -0,0 +1,36 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++術語表
++======
++
++這不是一個完善的術語表，我們只是將有爭議的和陌生的翻譯詞彙記錄於此，
++它的篇幅應該根據內核文檔翻譯的需求而增加。新詞條最好隨翻譯補丁一起
++提交，且僅在以下情況下收錄新詞條：
++
++        - 在翻譯過程中遇到陌生詞彙，且尚無翻譯先例的；
++        - 在審閱過程中，針對某詞條出現了不同的翻譯意見；
++        - 使用頻率不高的詞條和首字母縮寫類型的詞條；
++        - 已經存在且有歧義的詞條翻譯。
++
++
++* atomic: 原子的，一般指不可中斷的極小的臨界區操作。
++* DVFS: 動態電壓頻率升降。（Dynamic Voltage and Frequency Scaling）
++* EAS: 能耗感知調度。（Energy Aware Scheduling）
++* flush: 刷新，一般指對cache的沖洗操作。
++* fork: 創建, 通常指父進程創建子進程。
++* futex: 快速用戶互斥鎖。（fast user mutex）
++* guest halt polling: 客戶機停機輪詢機制。
++* HugePage: 巨頁。
++* hypervisor: 虛擬機超級管理器。
++* memory barriers: 內存屏障。
++* MIPS: 每秒百萬指令。（Millions of Instructions Per Second）,注意與mips指令集區分開。
++* mutex: 互斥鎖。
++* NUMA: 非統一內存訪問。
++* OpenCAPI: 開放相干加速器處理器接口。（Open Coherent Accelerator Processor Interface）
++* OPP: 操作性能值。
++* overhead: 開銷，一般指需要消耗的計算機資源。
++* PELT: 實體負載跟蹤。（Per-Entity Load Tracking）
++* sched domain: 調度域。
++* semaphores: 信號量。
++* spinlock: 自旋鎖。
++* watermark: 水位，一般指頁表的消耗水平。
+diff --git a/Documentation/translations/zh_TW/index.rst b/Documentation/translations/zh_TW/index.rst
+index 660a74d2023c..95809012a9ef 100644
+--- a/Documentation/translations/zh_TW/index.rst
++++ b/Documentation/translations/zh_TW/index.rst
+@@ -119,9 +119,10 @@ TODOList:
+ 術語表
+ ------
+ 
+-TODOList:
++.. toctree::
++   :maxdepth: 1
+ 
+-* glossary
++   glossary
+ 
+ 
+ 索引和表格
 -- 
-2.43.0
+2.45.0
 
 
