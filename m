@@ -1,404 +1,452 @@
-Return-Path: <linux-doc+bounces-16592-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16579-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A96A8C9C8A
-	for <lists+linux-doc@lfdr.de>; Mon, 20 May 2024 13:49:02 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id ECCA48C9BC8
+	for <lists+linux-doc@lfdr.de>; Mon, 20 May 2024 13:02:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2EA5C28331A
-	for <lists+linux-doc@lfdr.de>; Mon, 20 May 2024 11:49:01 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 740411F21A07
+	for <lists+linux-doc@lfdr.de>; Mon, 20 May 2024 11:02:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1606B77119;
-	Mon, 20 May 2024 11:45:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="R4BBaoiC"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8D4550286;
+	Mon, 20 May 2024 11:02:48 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01CE67710A
-	for <linux-doc@vger.kernel.org>; Mon, 20 May 2024 11:45:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=203.254.224.33
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2DB11643A
+	for <linux-doc@vger.kernel.org>; Mon, 20 May 2024 11:02:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716205541; cv=none; b=ZDIszYsv0YCe5QMQczEuaUojctu5lLcfPerK7mg/kBg7H49hBq6wsGDXDuftZkJUSdUaCv+6448L78esfwoTWOGFKCE1Fl56Lb1h4dUPiicVdZNhGA5pheSOGxfg4qMTI8sb+jKl0N01bS9YYhkdy7fYzgL3OkvkUs3fCtMnAs4=
+	t=1716202968; cv=none; b=ubC+YwVhrOwtpJE8wF4SdukGl91tS3qvzkQYlRYr7VXTEvFq4TBU22AHbaHvfg+gjTDcoc+wK6QU0cOrtQeXQooDsXFStOnb1gDMq00Xw7tn8sr6qXfCKQXJIVzghnhQwnB2cocKq4XjTK0vnrsWu7/S6zvb8WAj2S7DgG4p+Bc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716205541; c=relaxed/simple;
-	bh=WxBOT7xRxNJe08AQ2ltG9cdASh90iKIABHzWDmS2oBg=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:Content-Type:
-	 References; b=d2RQSndNH9+ap1nSK+iE//phCnHpZRcb6n6P0yMSLoOpNS2cTQlbwzXoJ7fE473OgId7lRTAizfrp928RLZDi7b0c0jEx2NkxvEu2twHlm2h5mSfjNvlW+Vzs1914MPg2hNztgIcgZbsLiflQBn4bfpdyQbeqWjJ5/R7kR0Ab1o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=R4BBaoiC; arc=none smtp.client-ip=203.254.224.33
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
-Received: from epcas5p1.samsung.com (unknown [182.195.41.39])
-	by mailout3.samsung.com (KnoxPortal) with ESMTP id 20240520114537epoutp0318ba258872879664d77c5b511f5abf19~RL9ftCq4j1829818298epoutp03J
-	for <linux-doc@vger.kernel.org>; Mon, 20 May 2024 11:45:37 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com 20240520114537epoutp0318ba258872879664d77c5b511f5abf19~RL9ftCq4j1829818298epoutp03J
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1716205537;
-	bh=684w/N8yQzC6Tn8Ze9K1madA6uBopMwCq6oINoaC0Mk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=R4BBaoiCg7eO3NbkyQRj20qNXHD/Cb4YTJ/QwhNs+nRp6U6K3WTtYgLBhYAvh8rB3
-	 f+jEdjjnoc9gPqhk0Ol9g6yQeLiyQypbwdyXqovOgDrQNzp1X8hbYdZTg/wtua3cMI
-	 dA3op2tJo3arCHZNMIzTy1/nPpg1yhhsgOAWX/7E=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
-	epcas5p4.samsung.com (KnoxPortal) with ESMTP id
-	20240520114536epcas5p4b47a99e3eb8f8fbcfb7db37da5dd4812~RL9e0A5aO0859008590epcas5p4U;
-	Mon, 20 May 2024 11:45:36 +0000 (GMT)
-Received: from epsmges5p2new.samsung.com (unknown [182.195.38.177]) by
-	epsnrtp4.localdomain (Postfix) with ESMTP id 4VjbNb0ddLz4x9Px; Mon, 20 May
-	2024 11:45:35 +0000 (GMT)
-Received: from epcas5p3.samsung.com ( [182.195.41.41]) by
-	epsmges5p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
-	BD.92.09688.ED73B466; Mon, 20 May 2024 20:45:34 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
-	epcas5p4.samsung.com (KnoxPortal) with ESMTPA id
-	20240520103039epcas5p4373f7234162a32222ac225b976ae30ce~RK8DBSwIz0626706267epcas5p4I;
-	Mon, 20 May 2024 10:30:39 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
-	epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
-	20240520103039epsmtrp14db3a1d303b0f5c58bde00b466dac9a4~RK8DAL2vU2229722297epsmtrp10;
-	Mon, 20 May 2024 10:30:39 +0000 (GMT)
-X-AuditID: b6c32a4a-5dbff700000025d8-99-664b37de4891
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
-	epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
-	E1.98.08924.F462B466; Mon, 20 May 2024 19:30:39 +0900 (KST)
-Received: from green245.sa.corp.samsungelectronics.net (unknown
-	[107.99.41.245]) by epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20240520103035epsmtip2856ca038c4c00631139b63e93b5062cd~RK7-I3dqL2512325123epsmtip2W;
-	Mon, 20 May 2024 10:30:35 +0000 (GMT)
-From: Nitesh Shetty <nj.shetty@samsung.com>
-To: Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>, Alasdair
-	Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>, Mikulas Patocka
-	<mpatocka@redhat.com>, Keith Busch <kbusch@kernel.org>, Christoph Hellwig
-	<hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Chaitanya Kulkarni
-	<kch@nvidia.com>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian
-	Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>
-Cc: martin.petersen@oracle.com, bvanassche@acm.org, david@fromorbit.com,
-	hare@suse.de, damien.lemoal@opensource.wdc.com, anuj20.g@samsung.com,
-	joshi.k@samsung.com, nitheshshetty@gmail.com, gost.dev@samsung.com, Nitesh
-	Shetty <nj.shetty@samsung.com>, Vincent Fu <vincent.fu@samsung.com>,
-	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, dm-devel@lists.linux.dev,
-	linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org
-Subject: [PATCH v20 12/12] null_blk: add support for copy offload
-Date: Mon, 20 May 2024 15:50:25 +0530
-Message-Id: <20240520102033.9361-13-nj.shetty@samsung.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240520102033.9361-1-nj.shetty@samsung.com>
-X-Brightmail-Tracker: H4sIAAAAAAAAA0WTe0xbVRzHc+693LZLOm4KwzOQScqmAuFRoHDYYJsM9TI0IfE5NKuFXh4D
-	Su1j6GLkWcZjjJcoMjaQwdioAQblOZhdEdCypRpegwkDeYjCBEnEDbJhS0H/+/y+5/f45nfy
-	Y+O8LdKeHSdVMnKpOIFP7iHael1c3Kf8w6K9crOFqNHQj6P0wqc40kwWkGipdw2gL1ef4GhO
-	dx6gzXtGHGn7pwCqqr5MoHFdJ4a6q4sxdEPTh6FLX2VgqG/rEYmK9aMAzY+UY6hnwg19k1VD
-	oO6eHwk01FVBospr8yxUN/AMQ0XZIxjqmEsDqG2zEkcNSysE+mHCAc3mZQNkfDpgddyRHhoO
-	ow3VkO4sn2TRxqmbBD10T0U31+eQdEtNCr3Y8jWgb42nkvTViyVWdH7GnyTdqX5oRf81P0HQ
-	K7dHSPqith7Qd6u+Z4XbRMQHxjJiCSN3YqRRSZI4aUwQP+wt0QmR0M9L4C4IQP58J6k4kQni
-	h7wR7v5aXIJpTXyns+IElUkKFysUfM+jgfIklZJxik1SKIP4jEySIPOVeSjEiQqVNMZDyigP
-	C7y8vIWmxI/iY1e0PJk29JOM5cRUYAjMBRw2pHxhW+kCyAV72DzqFoBZv03i5gcetQZgzqqr
-	hdcBXGt32S242jRAWgp6AByu2cAtgRqD6soNUys2m6Tc4OAW26zbUhoc5rUUEeYAp+7jsLZp
-	ATO3sqFegQ8yNdtMUIegdmYFmJlLHYZ/N/wELONegJom3bYljknXta5ue4VUCwfWLmpIS1II
-	zLyfhlvYBv4xoGVZ2B7+XpC1w8nwxhfXSUtxJoDlY+U7E45BtaEAN9vGKRfY2OVpkR1hqaFh
-	2xxO7YX5m3OYRefCjiu77Ay/baza8bAfjv6TtsM0XO6f31lqPoATHbWsQnCg/P8RVQDUg/2M
-	TJEYwyiEMm8pk/zfp0UlJTaD7UtwPdkBZqZXPfQAYwM9gGycb8tt1oZG87gS8afnGHmSSK5K
-	YBR6IDRtsAi33xeVZDolqVIk8A3w8vXz8/MN8PET8J/jLqkvS3hUjFjJxDOMjJHv1mFsjn0q
-	lndIVTI/E3z7+uk+weeVGcKOI1YuR96PjL8zbq3/eeim9dpYybtB6cqi/IC9dRvD1h5nqkPO
-	vrQuupJ+p+Cd41sO3DMHZh92X2oZ7o0qGwvOcj517rFBqPcMXBibD/2VmE5+m/wO9q5/QJzI
-	Xe9RsQ1l0+LPCPC87jxayXnyavqHj91TrgkmT98tNLz8XoORqhgU1VWwjM4X9ultPB2Xwod6
-	ph4VWHGrTvFLM2YjotR2i7YPAsftfFrLWW3L6byI13X+bTORrDKvwlSHN40c6Wjws+J2/8Gj
-	v6Smt5707/KIPZZie3CQtIlp93nRvvWgMjI6T2W3nspTLdQ3uElmHD725vAJRaxY4IrLFeJ/
-	AV/DHzSSBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrGIsWRmVeSWpSXmKPExsWy7bCSvK6/mneaweR36hbrTx1jtmia8JfZ
-	YvXdfjaL14c/MVpM+/CT2eLJgXZGi99nzzNbbDl2j9FiwaK5LBY3D+xkstizaBKTxcrVR5ks
-	Zk9vZrI4+v8tm8WkQ9cYLZ5encVksfeWtsXCtiUsFnv2nmSxuLxrDpvF/GVP2S2WH//HZDGx
-	4yqTxY4njYwW237PZ7ZY9/o9i8WJW9IWj7s7GC3O/z3O6iDrcfmKt8epRRIeO2fdZfc4f28j
-	i8fls6Uem1Z1snlsXlLv8WLzTEaP3Tcb2DwW901m9ehtfsfmsbP1PqvHx6e3WDze77vK5tG3
-	ZRWjx5kFR9gDhKO4bFJSczLLUov07RK4Mt5vESrY4lnR/Ca3gfGUTRcjJ4eEgInE4g3H2boY
-	uTiEBHYzSvya+I0RIiEpsezvEWYIW1hi5b/n7BBFzUwSHet2AyU4ONgEtCVO/+cAiYsIbGeW
-	+NjczQTiMAu8YZY4+/0KO0i3sICjxO2W1UwgNouAqsSWh+/BNvAKWEl8XXcBapu8xOoNB8C2
-	cQLFD2z9ABYXErCUuHv9A9sERr4FjAyrGCVTC4pz03OLDQsM81LL9YoTc4tL89L1kvNzNzGC
-	o1ZLcwfj9lUf9A4xMnEwHmKU4GBWEuHdtMUzTYg3JbGyKrUoP76oNCe1+BCjNAeLkjiv+Ive
-	FCGB9MSS1OzU1ILUIpgsEwenVANT6rmL7QlpPx+HFgq+znct9/FxVXpo2GH/6XbL8eLqxZmf
-	Qu74B8ndFq18KeznE71uAvOkjU3eezQcpvEoaTVYX2Z+//BhSmPi9ezZMwUmqxmKWTsyqm8M
-	ecAY5d53OWeK/EyPmxZVtfmfE4y3hC2O1RHvVvglo3Pam0viP99izlvTv4T/0nlVtP20WdeD
-	508bRC2P/hHgedaWYqDaFeF36OWR3bvnLVxnf1L0uPAP7tzjG0vWzhY4Ua3LFlibX6sby7S2
-	bZJZEY9c9ebYRxv4elm6ykuKm05tvuOq0vvBZu8miUkZq8RCt717E+yjKSed7XDl0DqWjH6b
-	lIVPGc/9nuDKNdXh6dYze150xCmxFGckGmoxFxUnAgBu3X+ISQMAAA==
-X-CMS-MailID: 20240520103039epcas5p4373f7234162a32222ac225b976ae30ce
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: REQ_APPROVE
-CMS-TYPE: 105P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240520103039epcas5p4373f7234162a32222ac225b976ae30ce
-References: <20240520102033.9361-1-nj.shetty@samsung.com>
-	<CGME20240520103039epcas5p4373f7234162a32222ac225b976ae30ce@epcas5p4.samsung.com>
+	s=arc-20240116; t=1716202968; c=relaxed/simple;
+	bh=HfVSPCkIpBgqSPj4OEA1+CzolRA2i1yxTJWqE1IWoyY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=DNzQNHIh2kZm8LKtAdC1u1cw03tUwlMTW9W6iGHiUoKcO/G0tf7J/3XeOyjnBxI56DDv9Q62iQB5YyfbkcW9ljL4MHcD3s49GeX5qLFGrMB21zdA6MfV/LqfPBiYg6GH+a2OzWgAsv3bJAYRa/bfLfj9jUdbklGp4GdReyoFtPI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <mkl@pengutronix.de>)
+	id 1s90mW-0007PH-Eo; Mon, 20 May 2024 13:02:16 +0200
+Received: from [2a0a:edc0:0:b01:1d::7b] (helo=bjornoya.blackshift.org)
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <mkl@pengutronix.de>)
+	id 1s90mT-002FDk-08; Mon, 20 May 2024 13:02:13 +0200
+Received: from pengutronix.de (unknown [172.20.34.65])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	(Authenticated sender: mkl-all@blackshift.org)
+	by smtp.blackshift.org (Postfix) with ESMTPSA id 88E852D40C2;
+	Mon, 20 May 2024 11:02:12 +0000 (UTC)
+Date: Mon, 20 May 2024 13:02:12 +0200
+From: Marc Kleine-Budde <mkl@pengutronix.de>
+To: Pankaj Gupta <pankaj.gupta@nxp.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh+dt@kernel.org>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Shawn Guo <shawnguo@kernel.org>, Sascha Hauer <s.hauer@pengutronix.de>, 
+	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "imx@lists.linux.dev" <imx@lists.linux.dev>, 
+	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>
+Subject: Re: RE: [EXT] Re: [PATCH 4/4] firmware: imx: add driver for NXP
+ EdgeLock Enclave
+Message-ID: <20240520-accurate-intrepid-kestrel-8eb361-mkl@pengutronix.de>
+References: <20240510-imx-se-if-v1-0-27c5a674916d@nxp.com>
+ <20240510-imx-se-if-v1-4-27c5a674916d@nxp.com>
+ <20240513-pretty-quartz-lemming-14d9ea-mkl@pengutronix.de>
+ <AM9PR04MB86044FBF697375EB2C8D285B95EE2@AM9PR04MB8604.eurprd04.prod.outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="dvuxbbj5nymmnkgy"
+Content-Disposition: inline
+In-Reply-To: <AM9PR04MB86044FBF697375EB2C8D285B95EE2@AM9PR04MB8604.eurprd04.prod.outlook.com>
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: mkl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-Implementation is based on existing read and write infrastructure.
-copy_max_bytes: A new configfs and module parameter is introduced, which
-can be used to set hardware/driver supported maximum copy limit.
-Only request based queue mode will support for copy offload.
-Added tracefs support to copy IO tracing.
 
-Reviewed-by: Hannes Reinecke <hare@suse.de>
-Suggested-by: Damien Le Moal <damien.lemoal@opensource.wdc.com>
-Signed-off-by: Anuj Gupta <anuj20.g@samsung.com>
-Signed-off-by: Nitesh Shetty <nj.shetty@samsung.com>
-Signed-off-by: Vincent Fu <vincent.fu@samsung.com>
----
- Documentation/block/null_blk.rst  |   5 ++
- drivers/block/null_blk/main.c     | 102 +++++++++++++++++++++++++++++-
- drivers/block/null_blk/null_blk.h |   1 +
- drivers/block/null_blk/trace.h    |  23 +++++++
- 4 files changed, 128 insertions(+), 3 deletions(-)
+--dvuxbbj5nymmnkgy
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/Documentation/block/null_blk.rst b/Documentation/block/null_blk.rst
-index 4dd78f24d10a..6153e02fcf13 100644
---- a/Documentation/block/null_blk.rst
-+++ b/Documentation/block/null_blk.rst
-@@ -149,3 +149,8 @@ zone_size=[MB]: Default: 256
- zone_nr_conv=[nr_conv]: Default: 0
-   The number of conventional zones to create when block device is zoned.  If
-   zone_nr_conv >= nr_zones, it will be reduced to nr_zones - 1.
-+
-+copy_max_bytes=[size in bytes]: Default: COPY_MAX_BYTES
-+  A module and configfs parameter which can be used to set hardware/driver
-+  supported maximum copy offload limit.
-+  COPY_MAX_BYTES(=128MB at present) is defined in fs.h
-diff --git a/drivers/block/null_blk/main.c b/drivers/block/null_blk/main.c
-index b33b9ebfebd2..dcfbd5275414 100644
---- a/drivers/block/null_blk/main.c
-+++ b/drivers/block/null_blk/main.c
-@@ -172,6 +172,10 @@ static int g_max_sectors;
- module_param_named(max_sectors, g_max_sectors, int, 0444);
- MODULE_PARM_DESC(max_sectors, "Maximum size of a command (in 512B sectors)");
- 
-+static unsigned long g_copy_max_bytes = BLK_COPY_MAX_BYTES;
-+module_param_named(copy_max_bytes, g_copy_max_bytes, ulong, 0444);
-+MODULE_PARM_DESC(copy_max_bytes, "Maximum size of a copy command (in bytes)");
-+
- static unsigned int nr_devices = 1;
- module_param(nr_devices, uint, 0444);
- MODULE_PARM_DESC(nr_devices, "Number of devices to register");
-@@ -433,6 +437,7 @@ NULLB_DEVICE_ATTR(home_node, uint, NULL);
- NULLB_DEVICE_ATTR(queue_mode, uint, NULL);
- NULLB_DEVICE_ATTR(blocksize, uint, NULL);
- NULLB_DEVICE_ATTR(max_sectors, uint, NULL);
-+NULLB_DEVICE_ATTR(copy_max_bytes, uint, NULL);
- NULLB_DEVICE_ATTR(irqmode, uint, NULL);
- NULLB_DEVICE_ATTR(hw_queue_depth, uint, NULL);
- NULLB_DEVICE_ATTR(index, uint, NULL);
-@@ -577,6 +582,7 @@ static struct configfs_attribute *nullb_device_attrs[] = {
- 	&nullb_device_attr_queue_mode,
- 	&nullb_device_attr_blocksize,
- 	&nullb_device_attr_max_sectors,
-+	&nullb_device_attr_copy_max_bytes,
- 	&nullb_device_attr_irqmode,
- 	&nullb_device_attr_hw_queue_depth,
- 	&nullb_device_attr_index,
-@@ -687,7 +693,7 @@ static ssize_t memb_group_features_show(struct config_item *item, char *page)
- 			"shared_tags,size,submit_queues,use_per_node_hctx,"
- 			"virt_boundary,zoned,zone_capacity,zone_max_active,"
- 			"zone_max_open,zone_nr_conv,zone_offline,zone_readonly,"
--			"zone_size,zone_append_max_sectors\n");
-+			"zone_size,zone_append_max_sectors,copy_max_bytes\n");
- }
- 
- CONFIGFS_ATTR_RO(memb_group_, features);
-@@ -753,6 +759,7 @@ static struct nullb_device *null_alloc_dev(void)
- 	dev->queue_mode = g_queue_mode;
- 	dev->blocksize = g_bs;
- 	dev->max_sectors = g_max_sectors;
-+	dev->copy_max_bytes = g_copy_max_bytes;
- 	dev->irqmode = g_irqmode;
- 	dev->hw_queue_depth = g_hw_queue_depth;
- 	dev->blocking = g_blocking;
-@@ -1221,6 +1228,81 @@ static int null_transfer(struct nullb *nullb, struct page *page,
- 	return err;
- }
- 
-+static inline int nullb_setup_copy(struct nullb *nullb, struct request *req,
-+				   bool is_fua)
-+{
-+	sector_t sector_in = 0, sector_out = 0;
-+	loff_t offset_in, offset_out;
-+	void *in, *out;
-+	ssize_t chunk, rem = 0;
-+	struct bio *bio;
-+	struct nullb_page *t_page_in, *t_page_out;
-+	u16 seg = 1;
-+	int status = -EIO;
-+
-+	if (blk_rq_nr_phys_segments(req) != BLK_COPY_MAX_SEGMENTS)
-+		return status;
-+
-+	/*
-+	 * First bio contains information about destination and last bio
-+	 * contains information about source.
-+	 */
-+	__rq_for_each_bio(bio, req) {
-+		if (seg == blk_rq_nr_phys_segments(req)) {
-+			sector_in = bio->bi_iter.bi_sector;
-+			if (rem != bio->bi_iter.bi_size)
-+				return status;
-+		} else {
-+			sector_out = bio->bi_iter.bi_sector;
-+			rem = bio->bi_iter.bi_size;
-+		}
-+		seg++;
-+	}
-+
-+	trace_nullb_copy_op(req, sector_out << SECTOR_SHIFT,
-+			    sector_in << SECTOR_SHIFT, rem);
-+
-+	spin_lock_irq(&nullb->lock);
-+	while (rem > 0) {
-+		chunk = min_t(size_t, nullb->dev->blocksize, rem);
-+		offset_in = (sector_in & SECTOR_MASK) << SECTOR_SHIFT;
-+		offset_out = (sector_out & SECTOR_MASK) << SECTOR_SHIFT;
-+
-+		if (null_cache_active(nullb) && !is_fua)
-+			null_make_cache_space(nullb, PAGE_SIZE);
-+
-+		t_page_in = null_lookup_page(nullb, sector_in, false,
-+					     !null_cache_active(nullb));
-+		if (!t_page_in)
-+			goto err;
-+		t_page_out = null_insert_page(nullb, sector_out,
-+					      !null_cache_active(nullb) ||
-+					      is_fua);
-+		if (!t_page_out)
-+			goto err;
-+
-+		in = kmap_local_page(t_page_in->page);
-+		out = kmap_local_page(t_page_out->page);
-+
-+		memcpy(out + offset_out, in + offset_in, chunk);
-+		kunmap_local(out);
-+		kunmap_local(in);
-+		__set_bit(sector_out & SECTOR_MASK, t_page_out->bitmap);
-+
-+		if (is_fua)
-+			null_free_sector(nullb, sector_out, true);
-+
-+		rem -= chunk;
-+		sector_in += chunk >> SECTOR_SHIFT;
-+		sector_out += chunk >> SECTOR_SHIFT;
-+	}
-+
-+	status = 0;
-+err:
-+	spin_unlock_irq(&nullb->lock);
-+	return status;
-+}
-+
- static blk_status_t null_handle_rq(struct nullb_cmd *cmd)
- {
- 	struct request *rq = blk_mq_rq_from_pdu(cmd);
-@@ -1230,13 +1312,16 @@ static blk_status_t null_handle_rq(struct nullb_cmd *cmd)
- 	sector_t sector = blk_rq_pos(rq);
- 	struct req_iterator iter;
- 	struct bio_vec bvec;
-+	bool fua = rq->cmd_flags & REQ_FUA;
-+
-+	if (op_is_copy(req_op(rq)))
-+		return nullb_setup_copy(nullb, rq, fua);
- 
- 	spin_lock_irq(&nullb->lock);
- 	rq_for_each_segment(bvec, rq, iter) {
- 		len = bvec.bv_len;
- 		err = null_transfer(nullb, bvec.bv_page, len, bvec.bv_offset,
--				     op_is_write(req_op(rq)), sector,
--				     rq->cmd_flags & REQ_FUA);
-+				     op_is_write(req_op(rq)), sector, fua);
- 		if (err)
- 			break;
- 		sector += len >> SECTOR_SHIFT;
-@@ -1721,6 +1806,12 @@ static void null_config_discard(struct nullb *nullb, struct queue_limits *lim)
- 	lim->max_hw_discard_sectors = UINT_MAX >> 9;
- }
- 
-+static void null_config_copy(struct nullb *nullb, struct queue_limits *lim)
-+{
-+	lim->max_copy_hw_sectors = nullb->dev->copy_max_bytes >> SECTOR_SHIFT;
-+	lim->max_copy_sectors = nullb->dev->copy_max_bytes >> SECTOR_SHIFT;
-+}
-+
- static const struct block_device_operations null_ops = {
- 	.owner		= THIS_MODULE,
- 	.report_zones	= null_report_zones,
-@@ -1843,6 +1934,9 @@ static int null_validate_conf(struct nullb_device *dev)
- 		return -EINVAL;
- 	}
- 
-+	if (dev->queue_mode == NULL_Q_BIO)
-+		dev->copy_max_bytes = 0;
-+
- 	return 0;
- }
- 
-@@ -1909,6 +2003,8 @@ static int null_add_dev(struct nullb_device *dev)
- 	if (dev->virt_boundary)
- 		lim.virt_boundary_mask = PAGE_SIZE - 1;
- 	null_config_discard(nullb, &lim);
-+	null_config_copy(nullb, &lim);
-+
- 	if (dev->zoned) {
- 		rv = null_init_zoned_dev(dev, &lim);
- 		if (rv)
-diff --git a/drivers/block/null_blk/null_blk.h b/drivers/block/null_blk/null_blk.h
-index 3234e6c85eed..c588729c17bd 100644
---- a/drivers/block/null_blk/null_blk.h
-+++ b/drivers/block/null_blk/null_blk.h
-@@ -91,6 +91,7 @@ struct nullb_device {
- 	unsigned int queue_mode; /* block interface */
- 	unsigned int blocksize; /* block size */
- 	unsigned int max_sectors; /* Max sectors per command */
-+	unsigned long copy_max_bytes; /* Max copy offload length in bytes */
- 	unsigned int irqmode; /* IRQ completion handler */
- 	unsigned int hw_queue_depth; /* queue depth */
- 	unsigned int index; /* index of the disk, only valid with a disk */
-diff --git a/drivers/block/null_blk/trace.h b/drivers/block/null_blk/trace.h
-index f9eadac6b22f..cda1a2249978 100644
---- a/drivers/block/null_blk/trace.h
-+++ b/drivers/block/null_blk/trace.h
-@@ -76,6 +76,29 @@ TRACE_EVENT(nullb_report_zones,
- );
- #endif /* CONFIG_BLK_DEV_ZONED */
- 
-+TRACE_EVENT(nullb_copy_op,
-+		TP_PROTO(struct request *req,
-+			 sector_t dst, sector_t src, size_t len),
-+		TP_ARGS(req, dst, src, len),
-+		TP_STRUCT__entry(
-+				 __array(char, disk, DISK_NAME_LEN)
-+				 __field(enum req_op, op)
-+				 __field(sector_t, dst)
-+				 __field(sector_t, src)
-+				 __field(size_t, len)
-+		),
-+		TP_fast_assign(
-+			       __entry->op = req_op(req);
-+			       __assign_disk_name(__entry->disk, req->q->disk);
-+			       __entry->dst = dst;
-+			       __entry->src = src;
-+			       __entry->len = len;
-+		),
-+		TP_printk("%s req=%-15s: dst=%llu, src=%llu, len=%lu",
-+			  __print_disk_name(__entry->disk),
-+			  blk_op_str(__entry->op),
-+			  __entry->dst, __entry->src, __entry->len)
-+);
- #endif /* _TRACE_NULLB_H */
- 
- #undef TRACE_INCLUDE_PATH
--- 
-2.17.1
+On 17.05.2024 11:24:46, Pankaj Gupta wrote:
+> > > new file mode 100644
+> > > index 000000000000..0463f26d93c7
+> > > --- /dev/null
+> > > +++ b/drivers/firmware/imx/ele_base_msg.c
+> > > @@ -0,0 +1,287 @@
+> > > +// SPDX-License-Identifier: GPL-2.0+
+> > > +/*
+> > > + * Copyright 2024 NXP
+> > > + */
+> > > +
+> > > +#include <linux/types.h>
+> > > +#include <linux/completion.h>
+> > > +#include <linux/dma-mapping.h>
+> > > +
+> > > +#include "ele_base_msg.h"
+> > > +#include "ele_common.h"
+> > > +
+> > > +int ele_get_info(struct device *dev, struct soc_info *s_info)
+> > > +{
+> > > +	struct se_if_priv *priv =3D dev_get_drvdata(dev);
+> > > +	struct se_api_msg *tx_msg __free(kfree);
+> > > +	struct se_api_msg *rx_msg __free(kfree);
+> > > +	phys_addr_t get_info_addr;
+> > > +	u32 *get_info_data;
+> > > +	u32 status;
+> > > +	int ret;
+> > > +
+> > > +	if (!priv || !s_info)
+> > > +		goto exit;
+> >=20
+> > You should code properly, so that this doesn't happen, your cleanup is
+> > broken, it will work on uninitialized data, as Sascha already mentioned.
+>=20
+> The API(s) part of this file will be later exported and might get used by=
+ driver/crypto/ele/*.c.
+> Still if you think, this check should be removed, I will do it in v2.
 
+It makes no sense to call these functions with NULL pointers, if you do
+so, it's a mistake by the caller. If it's used by some other part of the
+ele driver that should be coded properly.
+
+> > > +
+> > > +	memset(s_info, 0x0, sizeof(*s_info));
+> > > +
+> > > +	if (priv->mem_pool_name)
+> > > +		get_info_data =3D get_phy_buf_mem_pool(dev,
+> > > +						     priv->mem_pool_name,
+> > > +						     &get_info_addr,
+> > > +						     ELE_GET_INFO_BUFF_SZ);
+> > > +	else
+> > > +		get_info_data =3D dmam_alloc_coherent(dev,
+> > > +						    ELE_GET_INFO_BUFF_SZ,
+> > > +						    &get_info_addr,
+> > > +						    GFP_KERNEL);
+> >=20
+> > It's better style to move the init of the dma memory into the probe
+> > function.
+>=20
+> It is not DMA init. It is DMA allocation.
+
+It's better style to move the allocation of the dma memory into the
+probe function.
+
+
+[...]
+
+> > > +	priv->rx_msg =3D rx_msg;
+> > > +	ret =3D imx_ele_msg_send_rcv(priv, tx_msg);
+> >=20
+> > This API looks strange, why put the tx_msg as a parameter the rx_msg
+> > into the private struct?
+>=20
+> The rx_msg is the populated in the interrupt context. Hence, it kept
+> as part of private structure; which is in-turn associated with
+> mbox_client.
+
+These are implementation details, it just feels strange to pass one
+parameter via an arguments and put the other in the private pointer.
+
+> Though, in v2 moving the rx_msg setting to imx_ele_msg_send_rcv(priv,
+> tx_msg, rx_msg);
+
+fine
+
+[...]
+
+> > > +	if (status !=3D priv->success_tag) {
+> > > +		dev_err(dev, "Command Id[%d], Response Failure =3D 0x%x",
+> > > +			ELE_GET_INFO_REQ, status);
+> > > +		ret =3D -1;
+> > > +	}
+> > > +
+> > > +	s_info->imem_state =3D (get_info_data[ELE_IMEM_STATE_WORD]
+> > > +				& ELE_IMEM_STATE_MASK) >> 16;
+> >=20
+> > can you use a struct for get_info_data and use FIELD_GET() (if needed)
+>=20
+> Re-write the structure soc_info, matching the information provided in
+> response to this api.
+
+Looks better. Please compile the driver and check with "pahole" that the
+layout of these structures doesn't contain any unwanted padding.
+Otherwise add "__packed" and if you can guarantee "__aligned(4)".
+
+> struct dev_info {
+>         uint8_t  cmd;
+>         uint8_t  ver;
+>         uint16_t length;
+>         uint16_t soc_id;
+>         uint16_t soc_rev;
+>         uint16_t lmda_val;
+>         uint8_t  ssm_state;
+>         uint8_t  dev_atts_api_ver;
+>         uint8_t  uid[MAX_UID_SIZE];
+>         uint8_t  sha_rom_patch[DEV_GETINFO_ROM_PATCH_SHA_SZ];
+>         uint8_t  sha_fw[DEV_GETINFO_FW_SHA_SZ];
+> };
+>=20
+> struct dev_addn_info {
+>         uint8_t  oem_srkh[DEV_GETINFO_OEM_SRKH_SZ];
+>         uint8_t  trng_state;
+>         uint8_t  csal_state;
+>         uint8_t  imem_state;
+>         uint8_t  reserved2;
+> };
+>=20
+> struct soc_info {
+>         struct dev_info d_info;
+>         struct dev_addn_info d_addn_info;
+> };
+
+[...]
+
+> > > +int imx_ele_msg_send(struct se_if_priv *priv, void *mssg)
+> > > +{
+> > > +	bool is_cmd_lock_tobe_taken =3D false;
+> > > +	int err;
+> > > +
+> > > +	if (!priv->waiting_rsp_dev || priv->no_dev_ctx_used) {
+> > > +		is_cmd_lock_tobe_taken =3D true;
+> > > +		mutex_lock(&priv->se_if_cmd_lock);
+> > > +	}
+> > > +	scoped_guard(mutex, &priv->se_if_lock);
+> > > +
+> > > +	err =3D mbox_send_message(priv->tx_chan, mssg);
+> > > +	if (err < 0) {
+> > > +		dev_err(priv->dev, "Error: mbox_send_message failure.\n");
+> > > +		if (is_cmd_lock_tobe_taken)
+> > > +			mutex_unlock(&priv->se_if_cmd_lock);
+> >=20
+> > Only dropping the lock in case of failure doesn't look right to me.
+>=20
+> The callers of this function, takes the execution flow to aborting the
+> operation on getting return code < 0. No next action is expected under
+> this aborted operation. Unlocking the lock here is not an issue
+>=20
+> > It seems you should better move the lock to the callers of this functio=
+n.
+>
+> Accepted, and moved to the caller of the function for:
+>    - locking
+>    - unlocking in case of error.
+>=20
+> Unlocking in the read API, once response is successfully received and
+> read.
+
+A better design would be: imx_ele_msg_rcv() imx_ele_msg_send() are
+expected to be called locked. Add lockdep_assert_held() to these
+function to document/check this.
+
+The callers of imx_ele_msg_rcv() and imx_ele_msg_send() have to take
+care of the locking.
+
+[...]
+
+> > > +static const struct imx_se_node_info_list imx8ulp_info =3D {
+> > > +	.num_mu =3D 1,
+> > > +	.soc_id =3D SOC_ID_OF_IMX8ULP,
+> > > +	.info =3D {
+> > > +			{
+> > > +				.se_if_id =3D 2,
+> > > +				.se_if_did =3D 7,
+> > > +				.max_dev_ctx =3D 4,
+> > > +				.cmd_tag =3D 0x17,
+> > > +				.rsp_tag =3D 0xe1,
+> > > +				.success_tag =3D 0xd6,
+> > > +				.base_api_ver =3D MESSAGING_VERSION_6,
+> > > +				.fw_api_ver =3D MESSAGING_VERSION_7,
+> > > +				.se_name =3D "hsm1",
+> > > +				.mbox_tx_name =3D "tx",
+> > > +				.mbox_rx_name =3D "rx",
+> > > +				.pool_name =3D "sram",
+> > > +				.fw_name_in_rfs =3D IMX_ELE_FW_DIR\
+> >                                                                 ^
+> >                                                            not needed
+>=20
+> It is needed for i.MX8ULP, dual FW support.
+
+The backslash is not needed.
+
+>=20
+> > > +						  "mx8ulpa2ext-ahab- container.img",
+>=20
+>=20
+> > > +				.soc_register =3D true,
+> > > +				.reserved_dma_ranges =3D true,
+> > > +				.imem_mgmt =3D true,
+> > > +			},
+> > > +	},
+> > > +};
+> > > +
+> > > +static const struct imx_se_node_info_list imx93_info =3D {
+> > > +	.num_mu =3D 1,
+> > > +	.soc_id =3D SOC_ID_OF_IMX93,
+> > > +	.info =3D {
+> > > +			{
+> > > +				.se_if_id =3D 2,
+> > > +				.se_if_did =3D 3,
+> > > +				.max_dev_ctx =3D 4,
+> > > +				.cmd_tag =3D 0x17,
+> > > +				.rsp_tag =3D 0xe1,
+> > > +				.success_tag =3D 0xd6,
+> > > +				.base_api_ver =3D MESSAGING_VERSION_6,
+> > > +				.fw_api_ver =3D MESSAGING_VERSION_7,
+> > > +				.se_name =3D "hsm1",
+> > > +				.mbox_tx_name =3D "tx",
+> > > +				.mbox_rx_name =3D "rx",
+> > > +				.reserved_dma_ranges =3D true,
+> > > +				.imem_mgmt =3D true,
+> > > +				.soc_register =3D true,
+> > > +			},
+> > > +	},
+> >=20
+> >=20
+> > Some (most?) members of these structs are the same. Why do you have this
+> > abstraction if it's not needed right now?
+>
+> It is needed as the values is different for different NXP SoC
+> compatible. It will be needed for NXP i.MX95 platform, whose code will
+> be next in pipeline.
+
+How does the imx95 .info look like?
+
+[...]
+
+> > > +static int imx_fetch_soc_info(struct device *dev)
+> > > +{
+> > > +	struct se_if_priv *priv =3D dev_get_drvdata(dev);
+> > > +	struct imx_se_node_info_list *info_list;
+> > > +	const struct imx_se_node_info *info;
+> > > +	struct soc_device_attribute *attr;
+> > > +	struct soc_device *sdev;
+> > > +	struct soc_info s_info;
+> > > +	int err =3D 0;
+> > > +
+> > > +	info =3D priv->info;
+> > > +	info_list =3D (struct imx_se_node_info_list *)
+> > > +				device_get_match_data(dev->parent);
+> >=20
+> > I think cast is not needed.
+>
+> It returns memory reference with const attribute. SoC revision member
+> of 'info_list', is required to be updated. Thus type casted.
+
+Have you considered that this memory is marked as const for a reason?
+It's const, you cannot change it. Place any values that have to changed
+into your priv.
+
+> > > +	if (info_list->soc_rev)
+> > > +		return err;
+> >=20
+> > What does this check do? You'll only get data you put in the info_list
+> > in the first place.
+
+> info_list->soc_rev, is equal to zero for the first call to this
+> function. To return from this function if this function is already
+> executed.
+
+This looks wrong, see above.
+
+> > > +	err =3D ele_get_info(dev, &s_info);
+> > > +	if (err)
+> > > +		s_info.major_ver =3D DEFAULT_IMX_SOC_VER;
+> >=20
+> > Why continue here in case of error?
+>
+> To continue with SoC registration for the default values (without
+> fetching information from ELE).
+
+Have you tested the driver that it will work, if this fails?
+
+> > > +
+> > > +	info_list->soc_rev =3D s_info.soc_rev;
+> > > +
+> > > +	if (!info->soc_register)
+> > > +		return 0;
+> > > +
+> > > +	attr =3D devm_kzalloc(dev, sizeof(*attr), GFP_KERNEL);
+> > > +	if (!attr)
+> > > +		return -ENOMEM;
+> > > +
+> > > +	if (s_info.minor_ver)
+> > > +		attr->revision =3D devm_kasprintf(dev, GFP_KERNEL, "%x.%x",
+> > > +					   s_info.major_ver,
+> > > +					   s_info.minor_ver);
+> > > +	else
+> > > +		attr->revision =3D devm_kasprintf(dev, GFP_KERNEL, "%x",
+> > > +					   s_info.major_ver);
+> > > +
+> > > +	switch (s_info.soc_id) {
+> > > +	case SOC_ID_OF_IMX8ULP:
+> > > +		attr->soc_id =3D devm_kasprintf(dev, GFP_KERNEL,
+> > > +					      "i.MX8ULP");
+> > > +		break;
+> > > +	case SOC_ID_OF_IMX93:
+> > > +		attr->soc_id =3D devm_kasprintf(dev, GFP_KERNEL,
+> > > +					      "i.MX93");
+> > > +		break;
+> > > +	}
+> > > +
+> > > +	err =3D of_property_read_string(of_root, "model",
+> > > +				      &attr->machine);
+> > > +	if (err) {
+> > > +		devm_kfree(dev, attr);
+> >=20
+> > Why do you do a manual cleanup of devm managed resources? Same applies
+> > to the other devm managed resources, too.
+> >=20
+> Used devm managed memory, as this function is called as part probe.
+> Post device registration, this devm managed memory is un-necessarily
+> blocked. It is better to release it as part of clean-up, under this
+> function only.
+
+Why do you allocate the memory with devm in the first place, if it's not
+needed after probe?
+
+> Other devm managed memory clean-up, under se_probe_cleanup, will be
+> removed, as suggested.
+
+regards,
+Marc
+
+--=20
+Pengutronix e.K.                 | Marc Kleine-Budde          |
+Embedded Linux                   | https://www.pengutronix.de |
+Vertretung N=C3=BCrnberg              | Phone: +49-5121-206917-129 |
+Amtsgericht Hildesheim, HRA 2686 | Fax:   +49-5121-206917-9   |
+
+--dvuxbbj5nymmnkgy
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEUEC6huC2BN0pvD5fKDiiPnotvG8FAmZLLbEACgkQKDiiPnot
+vG+SOgf/YGBZgMjP3BeqAQYz56cPSTV61/SRUZP4EvHDzma8EH83xkVAElGkxUzy
+7yZeHijx/zqnSfe2IR5/dwTPJWXGxBPLms7psmBogYitZd3WnX4P/fgTI78ah3qC
+IO+3kt231mk5aHnOI8o3hbZeMRlUPbdLqRzl300zsZeGPy8PlsC5F3jj5pXKfkQU
+K/7N4IOajyIrsiAkWiaJxcfBvQFoPW5VA1zveDxDZvPp1uoz80xzeSSsEYWCt/zh
+WkNdyIfPw3IMXYgrirubuy9HZF1zJimFPYvTJqbx5+6bEgfU6peTwPr/NBXNaLu3
+907OtaYVSrtwVTtax03Wn9LeOLLjOw==
+=vcYe
+-----END PGP SIGNATURE-----
+
+--dvuxbbj5nymmnkgy--
 
