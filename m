@@ -1,439 +1,199 @@
-Return-Path: <linux-doc+bounces-16721-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16716-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id B39418CBC4C
-	for <lists+linux-doc@lfdr.de>; Wed, 22 May 2024 09:48:13 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id B4E208CBB1D
+	for <lists+linux-doc@lfdr.de>; Wed, 22 May 2024 08:22:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D705A1C20BD1
-	for <lists+linux-doc@lfdr.de>; Wed, 22 May 2024 07:48:12 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 450B31F2193A
+	for <lists+linux-doc@lfdr.de>; Wed, 22 May 2024 06:22:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 296E87C0B7;
-	Wed, 22 May 2024 07:48:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BF02B78C80;
+	Wed, 22 May 2024 06:22:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="BlUpopu7";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="USJvkhZ0";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="BlUpopu7";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="USJvkhZ0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DAA4770E6
-	for <linux-doc@vger.kernel.org>; Wed, 22 May 2024 07:48:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32C7D76405;
+	Wed, 22 May 2024 06:22:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716364092; cv=none; b=uPTDFu0tJF6aEEdozcrftfPQi4/rdhQ0WRXcEb+itKneCSHjp4A24mFWc4gF4ZgpRyZTi0ted1e/rQNcPhyw1A/PeB2IfSIiLub5hGs9enbC59i4l24wgX/vRW0ky/NOTvmMslBUl/f8NNSqx6bldIYoiBSWN4Rpk165qGu3N8U=
+	t=1716358960; cv=none; b=J3qEqm07kYNsm/O+EgBTf6uNE3P8VEuOW53S7zGzJIRdFQ4JaIpR16DrNrUdYw8uNSbVpFMrxJzB8kAd/C4iynhgP7o8yOzyEi1sK7HzQTmF+CRnux39SD7hOXmzN1xwqP0rHXlDsrgukQLQ7qzikyj5vsBwdRBVpAWeXk/gUv0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716364092; c=relaxed/simple;
-	bh=UFileiIY+FcdENlfmaHs7dMmW4+IrMZlQd00Hn5+Gt8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Sd5QQbS7l7BnD8mm+HdJa1kUXBAeNigwW67yVvIYkAGPLbtzxeLzaxxQ6FVHErUptZDZCKFOY5dlpvCfIs3an8OZgjB5yn/+1WF1Hj1H7Qwwdbdn2maMidXnPefXibwlGb+AArtJ6mHmCuxkZK2W7itT3nO+evgOqhFtVTAsMjA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <mkl@pengutronix.de>)
-	id 1s9ghS-00081G-2A; Wed, 22 May 2024 09:47:50 +0200
-Received: from [2a0a:edc0:0:b01:1d::7b] (helo=bjornoya.blackshift.org)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <mkl@pengutronix.de>)
-	id 1s9ghP-002Uky-JB; Wed, 22 May 2024 09:47:47 +0200
-Received: from pengutronix.de (unknown [172.20.34.65])
+	s=arc-20240116; t=1716358960; c=relaxed/simple;
+	bh=dWFbD0hyjBTnHZSjDxti4iwBSEqTJCgP6oKdO+DHDtM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=aZOQrolNsIVhkS3GOD3qtuDAXKd6v9hcJMxL4U/iiHenjpBVc1vJosaC6jnGb3A2QbFlAuLm//9kb2hCj7Cwux05LIL4C0malcAVbdtIjVDLX8nj1uEKlJFIF79bdHCUGUONksrYzxZWwFgUDmf12Y+i4MsueDD1AXPL3FrWqmA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=BlUpopu7; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=USJvkhZ0; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=BlUpopu7; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=USJvkhZ0; arc=none smtp.client-ip=195.135.223.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	(Authenticated sender: mkl-all@blackshift.org)
-	by smtp.blackshift.org (Postfix) with ESMTPSA id 50A9C2D520D;
-	Tue, 21 May 2024 12:27:11 +0000 (UTC)
-Date: Tue, 21 May 2024 14:27:10 +0200
-From: Marc Kleine-Budde <mkl@pengutronix.de>
-To: Pankaj Gupta <pankaj.gupta@nxp.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh+dt@kernel.org>, 
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Shawn Guo <shawnguo@kernel.org>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
-	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "imx@lists.linux.dev" <imx@lists.linux.dev>, 
-	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>
-Subject: Re: RE: RE: [EXT] Re: [PATCH 4/4] firmware: imx: add driver for NXP
- EdgeLock Enclave
-Message-ID: <20240521-handsome-hairy-bullfrog-d2faba-mkl@pengutronix.de>
-References: <20240510-imx-se-if-v1-0-27c5a674916d@nxp.com>
- <20240510-imx-se-if-v1-4-27c5a674916d@nxp.com>
- <20240513-pretty-quartz-lemming-14d9ea-mkl@pengutronix.de>
- <AM9PR04MB86044FBF697375EB2C8D285B95EE2@AM9PR04MB8604.eurprd04.prod.outlook.com>
- <20240520-accurate-intrepid-kestrel-8eb361-mkl@pengutronix.de>
- <AM9PR04MB86045BD682A0362A7D463C5A95EA2@AM9PR04MB8604.eurprd04.prod.outlook.com>
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 43DE65C678;
+	Wed, 22 May 2024 06:22:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1716358957; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=RxcsE1xFuEdCcsKm6YBMU0O/FCyQsR2TEf5Wkf0+zNc=;
+	b=BlUpopu7lfFzGuVYtey10hAI09jmAuC31yfW6GvvmDn9RQMWyaubtSHkaVrj5Bej4Weexg
+	uDE4uRzvaJwypMdbUPGEQ3yUhK1muvUiKd5ArSLeWLy9NLdwHl8+VkfOVlaOGwUOrzuQxZ
+	FxjncxhnRRYHDzf74v+5jq7Yml+KHFY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1716358957;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=RxcsE1xFuEdCcsKm6YBMU0O/FCyQsR2TEf5Wkf0+zNc=;
+	b=USJvkhZ0rAe5SKW+Hevkq3gRvCInKHPvDgudvGa0YY9rv3HIinKlhd8tE5ei4I/5cDSgp3
+	XqEXzO025UO1QGCg==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1716358957; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=RxcsE1xFuEdCcsKm6YBMU0O/FCyQsR2TEf5Wkf0+zNc=;
+	b=BlUpopu7lfFzGuVYtey10hAI09jmAuC31yfW6GvvmDn9RQMWyaubtSHkaVrj5Bej4Weexg
+	uDE4uRzvaJwypMdbUPGEQ3yUhK1muvUiKd5ArSLeWLy9NLdwHl8+VkfOVlaOGwUOrzuQxZ
+	FxjncxhnRRYHDzf74v+5jq7Yml+KHFY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1716358957;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=RxcsE1xFuEdCcsKm6YBMU0O/FCyQsR2TEf5Wkf0+zNc=;
+	b=USJvkhZ0rAe5SKW+Hevkq3gRvCInKHPvDgudvGa0YY9rv3HIinKlhd8tE5ei4I/5cDSgp3
+	XqEXzO025UO1QGCg==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 62EE213A1E;
+	Wed, 22 May 2024 06:22:36 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id NKF0FiyPTWY+AQAAD6G6ig
+	(envelope-from <hare@suse.de>); Wed, 22 May 2024 06:22:36 +0000
+Message-ID: <0f29bcc1-e708-47cc-a562-0d1e69be6b03@suse.de>
+Date: Wed, 22 May 2024 08:22:35 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="7yk6pkmeqxyudczq"
-Content-Disposition: inline
-In-Reply-To: <AM9PR04MB86045BD682A0362A7D463C5A95EA2@AM9PR04MB8604.eurprd04.prod.outlook.com>
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: mkl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v20 09/12] dm: Add support for copy offload
+Content-Language: en-US
+To: Nitesh Shetty <nj.shetty@samsung.com>
+Cc: Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>,
+ Alasdair Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>,
+ Mikulas Patocka <mpatocka@redhat.com>, Keith Busch <kbusch@kernel.org>,
+ Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>,
+ Chaitanya Kulkarni <kch@nvidia.com>, Alexander Viro
+ <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>,
+ Jan Kara <jack@suse.cz>, martin.petersen@oracle.com, bvanassche@acm.org,
+ david@fromorbit.com, damien.lemoal@opensource.wdc.com, anuj20.g@samsung.com,
+ joshi.k@samsung.com, nitheshshetty@gmail.com, gost.dev@samsung.com,
+ linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, dm-devel@lists.linux.dev,
+ linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org
+References: <20240520102033.9361-1-nj.shetty@samsung.com>
+ <CGME20240520103004epcas5p4a18f3f6ba0f218d57b0ab4bb84c6ff18@epcas5p4.samsung.com>
+ <20240520102033.9361-10-nj.shetty@samsung.com>
+ <41228a01-9d0c-415d-9fef-a3d2600b1dfa@suse.de>
+ <20240521140850.m6ppy2sxv457gxgs@green245>
+From: Hannes Reinecke <hare@suse.de>
+In-Reply-To: <20240521140850.m6ppy2sxv457gxgs@green245>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Flag: NO
+X-Spam-Score: -4.29
+X-Spam-Level: 
+X-Spamd-Result: default: False [-4.29 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	XM_UA_NO_VERSION(0.01)[];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	RCVD_TLS_ALL(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.dk,lwn.net,redhat.com,kernel.org,lst.de,grimberg.me,nvidia.com,zeniv.linux.org.uk,suse.cz,oracle.com,acm.org,fromorbit.com,opensource.wdc.com,samsung.com,gmail.com,vger.kernel.org,lists.linux.dev,lists.infradead.org];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_RATELIMIT(0.00)[to_ip_from(RLhytspa9b8ghbrab87o1fjg5u)];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.de:email]
 
+On 5/21/24 16:08, Nitesh Shetty wrote:
+> On 21/05/24 09:11AM, Hannes Reinecke wrote:
+>> On 5/20/24 12:20, Nitesh Shetty wrote:
+>>> Before enabling copy for dm target, check if underlying devices and
+>>> dm target support copy. Avoid split happening inside dm target.
+>>> Fail early if the request needs split, currently splitting copy
+>>> request is not supported.
+>>>
+>>> Signed-off-by: Nitesh Shetty <nj.shetty@samsung.com>
+>>> ---
+>>> @@ -397,6 +397,9 @@ struct dm_target {
+>>>       * bio_set_dev(). NOTE: ideally a target should _not_ need this.
+>>>       */
+>>>      bool needs_bio_set_dev:1;
+>>> +
+>>> +    /* copy offload is supported */
+>>> +    bool copy_offload_supported:1;
+>>>  };
+>>>  void *dm_per_bio_data(struct bio *bio, size_t data_size);
+>>
+>> Errm. Not sure this will work. DM tables might be arbitrarily, 
+>> requiring us to _split_ the copy offload request according to the 
+>> underlying component devices. But we explicitly disallowed a split in 
+>> one of the earlier patches.
+>> Or am I wrong?
+>>
+> Yes you are right w.r.to split, we disallow split.
+> But this flag indicates whether we support copy offload in dm-target or
+> not. At present we support copy offload only in dm-linear.
+> For other dm-target, eventhough underlaying device supports copy
+> offload, dm-target based on it wont support copy offload.
+> If the present series get merged, we can test and integrate more
+> targets.
+> 
+But dm-linear can be concatenated, too; you can easily use dm-linear
+to tie several devices together.
+Which again would require a copy-offload range to be split.
+Hmm?
 
---7yk6pkmeqxyudczq
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Cheers,
 
-On 21.05.2024 11:57:04, Pankaj Gupta wrote:
-> > > > > +
-> > > > > +	memset(s_info, 0x0, sizeof(*s_info));
-> > > > > +
-> > > > > +	if (priv->mem_pool_name)
-> > > > > +		get_info_data =3D get_phy_buf_mem_pool(dev,
-> > > > > +						     priv->mem_pool_name,
-> > > > > +						     &get_info_addr,
-> > > > > +						     ELE_GET_INFO_BUFF_SZ);
-> > > > > +	else
-> > > > > +		get_info_data =3D dmam_alloc_coherent(dev,
-> > > > > +						    ELE_GET_INFO_BUFF_SZ,
-> > > > > +						    &get_info_addr,
-> > > > > +						    GFP_KERNEL);
-> > > >
-> > > > It's better style to move the init of the dma memory into the probe
-> > > > function.
-> > >
-> > > It is not DMA init. It is DMA allocation.
-> >=20
-> > It's better style to move the allocation of the dma memory into the pro=
-be
-> > function.
-> >=20
-> The buffer 'get_info_data', is allocated and freed within this function.
-> This API is called multiple times:
-> - as part of probe.
-> - as part of suspend/resume.
->=20
-> Why to keep the memory retained?
+Hannes
+-- 
+Dr. Hannes Reinecke                  Kernel Storage Architect
+hare@suse.de                                +49 911 74053 688
+SUSE Software Solutions GmbH, Frankenstr. 146, 90461 Nürnberg
+HRB 36809 (AG Nürnberg), GF: I. Totev, A. McDonald, W. Knoblich
 
-I see. Then why do you allocate with dmam_alloc_coherent()?
-
-[...]
-
-> > > > > +int imx_ele_msg_send(struct se_if_priv *priv, void *mssg) {
-> > > > > +	bool is_cmd_lock_tobe_taken =3D false;
-> > > > > +	int err;
-> > > > > +
-> > > > > +	if (!priv->waiting_rsp_dev || priv->no_dev_ctx_used) {
-> > > > > +		is_cmd_lock_tobe_taken =3D true;
-> > > > > +		mutex_lock(&priv->se_if_cmd_lock);
-> > > > > +	}
-> > > > > +	scoped_guard(mutex, &priv->se_if_lock);
-> > > > > +
-> > > > > +	err =3D mbox_send_message(priv->tx_chan, mssg);
-> > > > > +	if (err < 0) {
-> > > > > +		dev_err(priv->dev, "Error: mbox_send_message failure.\n");
-> > > > > +		if (is_cmd_lock_tobe_taken)
-> > > > > +			mutex_unlock(&priv->se_if_cmd_lock);
-> > > >
-> > > > Only dropping the lock in case of failure doesn't look right to me.
-> > >
-> > > The callers of this function, takes the execution flow to aborting the
-> > > operation on getting return code < 0. No next action is expected under
-> > > this aborted operation. Unlocking the lock here is not an issue
-> > >
-> > > > It seems you should better move the lock to the callers of this fun=
-ction.
-> > >
-> > > Accepted, and moved to the caller of the function for:
-> > >    - locking
-> > >    - unlocking in case of error.
-> > >
-> > > Unlocking in the read API, once response is successfully received and
-> > > read.
-> >=20
-> > A better design would be: imx_ele_msg_rcv() imx_ele_msg_send() are
-> > expected to be called locked. Add lockdep_assert_held() to these functi=
-on to
-> > document/check this.
-> >=20
-> > The callers of imx_ele_msg_rcv() and imx_ele_msg_send() have to take ca=
-re
-> > of the locking.
-> >=20
-> > [...]
-> >=20
-> The locking/unlocking of se_if_cmd_lock, is taken care by the callers onl=
-y:
-> - imx_ele_msg_send_rcv calls both the functions:
->   --imx_ele_msg_send.
->   --imx_ele_msg_rcv.
->=20
-> But the lockdep_assert_held, cannot be added to imx_ele_msg_send, as
-> its another caller function imx_ele_miscdev_msg_send calls if for
-> sending:
->  --- command (here command lock is taken).
->  --- response to a command (here command lock is not taken).
-
-miscdev is another patch.
-
-But why can't you use the same lock in imx_ele_miscdev_msg_send()?
-
-
-> > > > > +static const struct imx_se_node_info_list imx93_info =3D {
-> > > > > +	.num_mu =3D 1,
-> > > > > +	.soc_id =3D SOC_ID_OF_IMX93,
-> > > > > +	.info =3D {
-> > > > > +			{
-> > > > > +				.se_if_id =3D 2,
-> > > > > +				.se_if_did =3D 3,
-> > > > > +				.max_dev_ctx =3D 4,
-> > > > > +				.cmd_tag =3D 0x17,
-> > > > > +				.rsp_tag =3D 0xe1,
-> > > > > +				.success_tag =3D 0xd6,
-> > > > > +				.base_api_ver =3D MESSAGING_VERSION_6,
-> > > > > +				.fw_api_ver =3D MESSAGING_VERSION_7,
-> > > > > +				.se_name =3D "hsm1",
-> > > > > +				.mbox_tx_name =3D "tx",
-> > > > > +				.mbox_rx_name =3D "rx",
-> > > > > +				.reserved_dma_ranges =3D true,
-> > > > > +				.imem_mgmt =3D true,
-> > > > > +				.soc_register =3D true,
-> > > > > +			},
-> > > > > +	},
-> > > >
-> > > >
-> > > > Some (most?) members of these structs are the same. Why do you have
-> > > > this abstraction if it's not needed right now?
-> > >
-> > > It is needed as the values is different for different NXP SoC
-> > > compatible. It will be needed for NXP i.MX95 platform, whose code will
-> > > be next in pipeline.
-> >=20
-> > How does the imx95 .info look like?
-> >=20
-> Copied from the internal repo.
-> static const struct imx_info_list imx95_info =3D {
->         .num_mu =3D 4,
->         .soc_id =3D SOC_ID_OF_IMX95,
->         .info =3D {
->                         {
->                                 .socdev =3D false,
->                                 .mu_id =3D 2,
->                                 .mu_did =3D 3,
->                                 .max_dev_ctx =3D 4,
->                                 .cmd_tag =3D 0x17,
->                                 .rsp_tag =3D 0xe1,
->                                 .success_tag =3D 0xd6,
->                                 .base_api_ver =3D MESSAGING_VERSION_6,
->                                 .fw_api_ver =3D MESSAGING_VERSION_7,
->                                 .se_name =3D "hsm1",
->                                 .mbox_tx_name =3D "tx",
->                                 .mbox_rx_name =3D "rx",
->                                 .pool_name =3D NULL,
->                                 .reserved_dma_ranges =3D false,
->                                 .init_fw =3D true,
->                                 .v2x_state_check =3D true,
->                                 .start_rng =3D ele_start_rng,
->                                 .enable_ele_trng =3D true,
->                                 .imem_mgmt =3D false,
->                                 .mu_buff_size =3D 0,
->                                 .fw_name_in_rfs =3D NULL,
->                         },
->                         {
->                                 .socdev =3D false,
->                                 .mu_id =3D 0,
->                                 .mu_did =3D 0,
->                                 .max_dev_ctx =3D 0,
->                                 .cmd_tag =3D 0x17,
->                                 .rsp_tag =3D 0xe1,
->                                 .success_tag =3D 0xd6,
->                                 .base_api_ver =3D 0x2,
->                                 .fw_api_ver =3D 0x2,
->                                 .se_name =3D "v2x_dbg",
->                                 .pool_name =3D NULL,
->                                 .mbox_tx_name =3D "tx",
->                                 .mbox_rx_name =3D "rx",
->                                 .reserved_dma_ranges =3D false,
->                                 .init_fw =3D false,
->                                 .v2x_state_check =3D true,
->                                 .start_rng =3D v2x_start_rng,
->                                 .enable_ele_trng =3D false,
->                                 .imem_mgmt =3D false,
->                                 .mu_buff_size =3D 0,
->                                 .fw_name_in_rfs =3D NULL,
->                         },
->                         {
->                                 .socdev =3D false,
->                                 .mu_id =3D 4,
->                                 .mu_did =3D 0,
->                                 .max_dev_ctx =3D 4,
->                                 .cmd_tag =3D 0x18,
->                                 .rsp_tag =3D 0xe2,
->                                 .success_tag =3D 0xd6,
->                                 .base_api_ver =3D 0x2,
->                                 .fw_api_ver =3D 0x2,
->                                 .se_name =3D "v2x_sv0",
->                                 .pool_name =3D NULL,
->                                 .mbox_tx_name =3D "tx",
->                                 .mbox_rx_name =3D "rx",
->                                 .reserved_dma_ranges =3D false,
->                                 .init_fw =3D false,
->                                 .v2x_state_check =3D true,
->                                 .start_rng =3D NULL,
->                                 .enable_ele_trng =3D false,
->                                 .imem_mgmt =3D false,
->                                 .mu_buff_size =3D 16,
->                                 .fw_name_in_rfs =3D NULL,
->                         },
->                         {
->                                 .socdev =3D false,
->                                 .mu_id =3D 6,
->                                 .mu_did =3D 0,
->                                 .max_dev_ctx =3D 4,
->                                 .cmd_tag =3D 0x1a,
->                                 .rsp_tag =3D 0xe4,
->                                 .success_tag =3D 0xd6,
->                                 .base_api_ver =3D 0x2,
->                                 .fw_api_ver =3D 0x2,
->                                 .se_name =3D "v2x_she",
->                                 .pool_name =3D NULL,
->                                 .mbox_tx_name =3D "tx",
-> 		   .mbox_rx_name =3D "rx",
->                                 .reserved_dma_ranges =3D false,
->                                 .init_fw =3D false,
->                                 .v2x_state_check =3D true,
->                                 .start_rng =3D NULL,
->                                 .enable_ele_trng =3D false,
->                                 .imem_mgmt =3D false,
->                                 .mu_buff_size =3D 16,
->                                 .fw_name_in_rfs =3D NULL,
->                         },
->                         {
->                                 .socdev =3D false,
->                                 .mu_id =3D 6,
->                                 .mu_did =3D 0,
->                                 .max_dev_ctx =3D 4,
->                                 .cmd_tag =3D 0x1a,
->                                 .rsp_tag =3D 0xe4,
->                                 .success_tag =3D 0xd6,
->                                 .base_api_ver =3D 0x2,
->                                 .fw_api_ver =3D 0x2,
->                                 .se_name =3D "v2x_she",
->                                 .pool_name =3D NULL,
->                                 .mbox_tx_name =3D "tx",
->                                 .mbox_rx_name =3D "rx",
->                                 .reserved_dma_ranges =3D false,
->                                 .init_fw =3D false,
->                                 .v2x_state_check =3D true,
->                                 .start_rng =3D NULL,
->                                 .enable_ele_trng =3D false,
->                                 .imem_mgmt =3D false,
->                                 .mu_buff_size =3D 256,
->                                 .fw_name_in_rfs =3D NULL,
->                         },
->         }
-> };
-
-Just looking at _some_, the .cmd_tag, .rsp_tag and .success_tag look the
-same for all SoCs.
-
-[...]
-
-> Created a static variable g_soc_rev in the se_ctrl.c.
-> Accepted and will correct it in v2.
->=20
-> >=20
-> > > > > +	if (info_list->soc_rev)
-> > > > > +		return err;
-> > > >
-> Will change the above condition to g_soc_rev.
-
-"g_" as is global? Don't do that. Use your priv!
-
-[...]
-
-> > > > > +
-> > > > > +	info_list->soc_rev =3D s_info.soc_rev;
-> > > > > +
-> > > > > +	if (!info->soc_register)
-> > > > > +		return 0;
-> > > > > +
-> > > > > +	attr =3D devm_kzalloc(dev, sizeof(*attr), GFP_KERNEL);
-> > > > > +	if (!attr)
-> > > > > +		return -ENOMEM;
-> > > > > +
-> > > > > +	if (s_info.minor_ver)
-> > > > > +		attr->revision =3D devm_kasprintf(dev, GFP_KERNEL, "%x.%x",
-> > > > > +					   s_info.major_ver,
-> > > > > +					   s_info.minor_ver);
-> > > > > +	else
-> > > > > +		attr->revision =3D devm_kasprintf(dev, GFP_KERNEL, "%x",
-> > > > > +					   s_info.major_ver);
-> > > > > +
-> > > > > +	switch (s_info.soc_id) {
-> > > > > +	case SOC_ID_OF_IMX8ULP:
-> > > > > +		attr->soc_id =3D devm_kasprintf(dev, GFP_KERNEL,
-> > > > > +					      "i.MX8ULP");
-> > > > > +		break;
-> > > > > +	case SOC_ID_OF_IMX93:
-> > > > > +		attr->soc_id =3D devm_kasprintf(dev, GFP_KERNEL,
-> > > > > +					      "i.MX93");
-> > > > > +		break;
-> > > > > +	}
-> > > > > +
-> > > > > +	err =3D of_property_read_string(of_root, "model",
-> > > > > +				      &attr->machine);
-> > > > > +	if (err) {
-> > > > > +		devm_kfree(dev, attr);
-> > > >
-> > > > Why do you do a manual cleanup of devm managed resources? Same
-> > > > applies to the other devm managed resources, too.
-> > > >
-> > > Used devm managed memory, as this function is called as part probe.
-> > > Post device registration, this devm managed memory is un-necessarily
-> > > blocked. It is better to release it as part of clean-up, under this
-> > > function only.
-> >=20
-> > Why do you allocate the memory with devm in the first place, if it's not
-> > needed after probe?
->=20
-> Sorry to confuse you. Actually the devm_memory will be needed for the cas=
-e of soc_registration.
-> Meaning, memory with devm, will be needed post probing as well.
->=20
-> If this function fails, the probing will fail too. It will be auto cleane=
-d.
->=20
-> Accepted, will remove the devm_free in v2.
-
-If you don't need the memory past probe() allocate with kzalloc() and
-use kfree(). Only used managed resources for lifetimes beyond the probe
-function.
-
-Marc
-
---=20
-Pengutronix e.K.                 | Marc Kleine-Budde          |
-Embedded Linux                   | https://www.pengutronix.de |
-Vertretung N=C3=BCrnberg              | Phone: +49-5121-206917-129 |
-Amtsgericht Hildesheim, HRA 2686 | Fax:   +49-5121-206917-9   |
-
---7yk6pkmeqxyudczq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEUEC6huC2BN0pvD5fKDiiPnotvG8FAmZMkxsACgkQKDiiPnot
-vG+Z/Af/WMnqhWM48LnZtU6kUIbY7cRacggeGQv2jj71QpNxkSQ62f9qkFrUh3rS
-Zmnt+uZAOghpnCADbwdGszNnOMR8saS83xmewg528L/7StvqR2/2N92ZGAfVC7Q1
-BEn0/fwyAGSWnvNLgmeSGi0gDd+LxVQVfrkhqxSPSYvLCcZMJh0Q0VBiHlv2ikqt
-Sf8hGPnZ5cyeNWzHucZ0luAWy2ilrU2fA9VUiuhrczVRJL4Rb6Tudswv7Dmb2DX2
-jHSD3/RViGgDHR4xUVQnV2BW43sS220cKg8xQ5xeHgtOlxo/PvVfMPbCyrpZZJ11
-Weuh3GM0jY/KBh4rxcm2VBE8FJOfgw==
-=R/M7
------END PGP SIGNATURE-----
-
---7yk6pkmeqxyudczq--
 
