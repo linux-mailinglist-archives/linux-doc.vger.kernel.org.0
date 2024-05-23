@@ -1,167 +1,222 @@
-Return-Path: <linux-doc+bounces-16809-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16806-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F02F8CD31E
-	for <lists+linux-doc@lfdr.de>; Thu, 23 May 2024 15:03:39 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id C7E568CD1D5
+	for <lists+linux-doc@lfdr.de>; Thu, 23 May 2024 14:11:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7CB6C1F2127A
-	for <lists+linux-doc@lfdr.de>; Thu, 23 May 2024 13:03:38 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EC3E91C212C0
+	for <lists+linux-doc@lfdr.de>; Thu, 23 May 2024 12:11:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EF02314830E;
-	Thu, 23 May 2024 13:03:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7AEA213D298;
+	Thu, 23 May 2024 12:11:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="fGPGWWSc"
+	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="bqSOLSqC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
+Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9657713B7BC;
-	Thu, 23 May 2024 13:03:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.20
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A752913B7A6;
+	Thu, 23 May 2024 12:11:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716469413; cv=none; b=qdmCYJobz8o7vWVmgx9JlnKhutO1P6SUaSZAm9xqvah8f6+R6rffAGdrPpJjjsenepBL9/3TYQWsoIQtyDwyLrAdxLHpEfr45WSXZNTJB3mrQOUc6MWUOSnrIFOo0R35YUX8kg0WSRgKTb4YBVtQ+VJ0+OAZrl1l+6zns2WIhHg=
+	t=1716466309; cv=none; b=MYjUiaSxoJudhl1ZGbCqbzWjoFJ7OaLvt7o+Fwl6Rmt0U2fd8ZDI54Juybfr2kN5R2m1iVtY0bfT6O79PBPqWrT3hFVKXa8OpZae8Ki5Kjkd4Y0F5lk4YSnzRMxnQIccwYzBvdMPBvB8dnYUtPa/04DsXbI8qdRDew0EcGaVWaQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716469413; c=relaxed/simple;
-	bh=jw4sR51kSbW7rHYB3afXhuNhtkpAyEH1zeZVnVImweU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=nDzPzQ2ZCYKkkd2uejk1SC9QrOMp2joASQbomVZD43VyrWuT6BNJupUOAnAHGmabeYy9U3+0mrKPyLsfVA8bTVp0JHFt1OjyLEU/QNC11wD7AlfCF4BSC0jNNPqc58q5cqjfN+2aLKbUY2XxX4RtbvkbMPNzAaZNEiOL78EyfeA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=fGPGWWSc; arc=none smtp.client-ip=198.175.65.20
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1716469413; x=1748005413;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=jw4sR51kSbW7rHYB3afXhuNhtkpAyEH1zeZVnVImweU=;
-  b=fGPGWWSccPwk7eVse1GXrTNb7pqV7AcE2m834Y2ieLNB234e+EAO7/Ti
-   t8Y/mfbRq5pC4ouH8X7IBxjqdw1xwyx2z9Z0WNFKUc+wbtgbjFgdFwCfn
-   JIDPhB5YQ6faWW/K6i2bKJiTyjXM8uy4AltpptrTbXYCKxXHgF7fItTld
-   BYQkzkVHrZ6rGm49Z9JeAdIMEhqM2uQlrFgjqm8jqCsTFJrJUzm3NwTd1
-   ObKf6jbH8roHL0Emh2ZEn3yHtsDjcD0Im/zn5oKQrb//QdbM/WL6K+5F5
-   O3wlwaLwhtafgY/9pL7t0csnitcgcaavr/dKLB80TUenFJmh3TnWDmWn+
-   g==;
-X-CSE-ConnectionGUID: j0cotqBmRhqC9hh3x7CP8g==
-X-CSE-MsgGUID: 49mkvzMiRqKfRpyV5+MrQw==
-X-IronPort-AV: E=McAfee;i="6600,9927,11081"; a="12632709"
-X-IronPort-AV: E=Sophos;i="6.08,182,1712646000"; 
-   d="scan'208";a="12632709"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
-  by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 May 2024 06:03:32 -0700
-X-CSE-ConnectionGUID: c61xu0+GRl2iSbzHX4p83g==
-X-CSE-MsgGUID: E1Ph9vJrQzqtcOJwbDdmDw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,182,1712646000"; 
-   d="scan'208";a="33550436"
-Received: from unknown (HELO [10.125.110.41]) ([10.125.110.41])
-  by fmviesa007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 May 2024 06:03:29 -0700
-Message-ID: <37615d72-762e-4ec7-b625-e275a96b2780@linux.intel.com>
-Date: Wed, 22 May 2024 08:35:31 -0500
+	s=arc-20240116; t=1716466309; c=relaxed/simple;
+	bh=vALmUqA5Wog+zqLtOkN/QaJNWqWwzNf0U+orGc33tQU=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=EXXXCSSf6o3bQ5nmEpYYtco/I2s/Qaizrw0wido3EAoDe6euGg3emrpX1psCyVbNVAHUWq3ks9a2WBQxE8NW2WzXOhCs8/89XoBC2l82oY9YwsxwnCGZOKxIh65oaxSPZaVpZ44C/WoItuF4/B9xnr4p+TgISo7cJEFbEx6kANE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=bqSOLSqC; arc=none smtp.client-ip=148.163.135.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
+Received: from pps.filterd (m0167088.ppops.net [127.0.0.1])
+	by mx0a-00128a01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44NA1Zhg011307;
+	Thu, 23 May 2024 08:11:28 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=DKIM; bh=EdFbmO6SN0AAHhccZL9llajYuxh
+	Q6Qu7Stq9Fo0o8LI=; b=bqSOLSqCwZLDDbX8JoO7RBW97SCn8XuOxI+27TcJokM
+	KLZUG350eSX14K4wx79ihiNf5eW4YWaLmJ6YcfzHHIFDztXbS7krYkOrsvCMx2a2
+	v0R4N9RLY1KrsUShFhQsmtLXmk7bcKQswvR1sJgNs+Nwtj8IQg9jo32a5Gmxcqfi
+	B3UfprmhdtVLWHuTK/fWQby5z9RQFJkyhV6UYZBhPPhB8aqqpsEk9xGuYdK/6m82
+	X7V2sAunikz7si4j+nEwV0RXdBBWMDXJyJQ6PKoUbn47b1tSD3QsLPX3el6qsiRW
+	mjrceCRoa0rE9+CX+sYOMMeCeu+04S7bCIb590gqUUw==
+Received: from nwd2mta4.analog.com ([137.71.173.58])
+	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 3y9xwuhgt0-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 23 May 2024 08:11:28 -0400 (EDT)
+Received: from ASHBMBX9.ad.analog.com (ASHBMBX9.ad.analog.com [10.64.17.10])
+	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 44NCBR1k024808
+	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 23 May 2024 08:11:27 -0400
+Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by ASHBMBX9.ad.analog.com
+ (10.64.17.10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.14; Thu, 23 May
+ 2024 08:11:26 -0400
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server id 15.2.986.14 via Frontend
+ Transport; Thu, 23 May 2024 08:11:26 -0400
+Received: from radu.ad.analog.com ([10.48.65.189])
+	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 44NCBF7Y029999;
+	Thu, 23 May 2024 08:11:18 -0400
+From: Radu Sabau <radu.sabau@analog.com>
+To: Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>,
+        Jonathan Corbet <corbet@lwn.net>, <linux-hwmon@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+CC: Radu Sabau <radu.sabau@analog.com>
+Subject: [PATCH v2] drivers: hwmon: max31827: Add PEC support
+Date: Thu, 23 May 2024 15:10:56 +0300
+Message-ID: <20240523121057.5689-1-radu.sabau@analog.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/3] ASoC: soc-pcm: Indicate warning if CPU / Codec
- availability mismatch
-To: Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
- Mark Brown <broonie@kernel.org>
-Cc: =?UTF-8?Q?Amadeusz_S=C5=82awi=C5=84ski?=
- <amadeuszx.slawinski@linux.intel.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Banajit Goswami <bgoswami@quicinc.com>,
- Bard Liao <yung-chuan.liao@linux.intel.com>, Brent Lu <brent.lu@intel.com>,
- Cezary Rojewski <cezary.rojewski@intel.com>,
- Charles Keepax <ckeepax@opensource.cirrus.com>,
- Claudiu Beznea <claudiu.beznea@tuxon.dev>,
- Cristian Ciocaltea <cristian.ciocaltea@collabora.com>,
- Daniel Baluta <daniel.baluta@nxp.com>, Hans de Goede <hdegoede@redhat.com>,
- Jaroslav Kysela <perex@perex.cz>, Jerome Brunet <jbrunet@baylibre.com>,
- Jiawei Wang <me@jwang.link>, Jonathan Corbet <corbet@lwn.net>,
- Kai Vehmanen <kai.vehmanen@linux.intel.com>,
- Kevin Hilman <khilman@baylibre.com>, Liam Girdwood <lgirdwood@gmail.com>,
- Maso Huang <maso.huang@mediatek.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
- Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
- Ranjani Sridharan <ranjani.sridharan@linux.intel.com>,
- Sascha Hauer <s.hauer@pengutronix.de>, Shawn Guo <shawnguo@kernel.org>,
- Shengjiu Wang <shengjiu.wang@gmail.com>,
- Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
- Sylwester Nawrocki <s.nawrocki@samsung.com>, Takashi Iwai <tiwai@suse.com>,
- Vinod Koul <vkoul@kernel.org>, Xiubo Li <Xiubo.Lee@gmail.com>,
- alsa-devel@alsa-project.org, imx@lists.linux.dev, linux-doc@vger.kernel.org,
- linux-sound@vger.kernel.org
-References: <87msole5wc.wl-kuninori.morimoto.gx@renesas.com>
- <87jzjpe5vh.wl-kuninori.morimoto.gx@renesas.com>
- <77e9221e-05d2-453f-9ce1-ff4a4b53d09d@linux.intel.com>
- <87y184cbed.wl-kuninori.morimoto.gx@renesas.com>
- <7b430ea3-3ce8-4ef9-8440-bac02993f676@linux.intel.com>
- <875xv8c6dn.wl-kuninori.morimoto.gx@renesas.com>
- <3e67d62d-fe08-4f55-ab5b-ece8a57154f9@linux.intel.com>
- <1f8e6e3c-a116-48d8-991f-4184d1eebc79@sirena.org.uk>
- <ec063ea9-3d72-457a-9c73-46c5f5b1f6e4@linux.intel.com>
- <37341c4c-3a99-4f71-99b3-efda2d2008e8@sirena.org.uk>
- <878r023epy.wl-kuninori.morimoto.gx@renesas.com>
-Content-Language: en-US
-From: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
-In-Reply-To: <878r023epy.wl-kuninori.morimoto.gx@renesas.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ADIRuleOP-NewSCL: Rule Triggered
+X-Proofpoint-GUID: h9Tr9HCB91KG15ivkVUtZyfpR07p5NaD
+X-Proofpoint-ORIG-GUID: h9Tr9HCB91KG15ivkVUtZyfpR07p5NaD
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.12.28.16
+ definitions=2024-05-23_07,2024-05-23_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ phishscore=0 mlxlogscore=999 spamscore=0 clxscore=1015 suspectscore=0
+ lowpriorityscore=0 impostorscore=0 adultscore=0 bulkscore=0 malwarescore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2405010000 definitions=main-2405230083
 
+Add support for PEC by attaching PEC attribute to the i2c device.
+Add pec_store and pec_show function for accesing the "pec" file.
 
-> In case of ignoring Codec check on DPCM, it allows unexpected direction,
-> I think. For example if it is not using dummy DAI, and in case of CPU can
-> playback/capture, Codec can playback, and user expect playback only,
-> in this case unexpected "capture" will be available. He need to add
-> playback_only flag, but it is not good for me.
-> 
-> Can we avoid validation check if DAI has some kind of new flag, like
-> ignore_pair ?
-> 
-> pseudo code is like this
-> 
-> 	if (valid(cpu, PLAYBACK))
-> 		has_cpu_playback = 1;
-> 
-> 	if (valid(cpu, CAPTURE))
-> 		has_cpu_capture = 1;
-> 
-> 	if (valid(codec, PLAYBACK))
-> 		has_codec_playback = 1;
-> 
-> 	if (valid(codec, CAPTURE))
-> 		has_codec_capture = 1;
-> 
-> 	if (cpu->ignore_pair) {
-> 		has_codec_playback = 1;
-> 		has_codec_capture  = 1;
-> 	}
-> 
-> 	if (codec->ignore_pair) {
-> 		has_cpu_playback = 1;
-> 		has_cpu_capture  = 1;
-> 	}
-> 
-> Or more detail ignore_pair_playback, ignore_pair_capture
+Signed-off-by: Radu Sabau <radu.sabau@analog.com>
+---
+ Documentation/hwmon/max31827.rst | 13 +++++--
+ drivers/hwmon/max31827.c         | 64 ++++++++++++++++++++++++++++++++
+ 2 files changed, 74 insertions(+), 3 deletions(-)
 
-There are two options
-a) we don't even try to test the codec-cpu match in terms of
-capabilities. That means the same behavior as today.
-b) we add a chicken bit for platforms to disable the codec-cpu match if
-it breaks specific platforms.
+diff --git a/Documentation/hwmon/max31827.rst b/Documentation/hwmon/max31827.rst
+index 44ab9dc064cb..9c11a9518c67 100644
+--- a/Documentation/hwmon/max31827.rst
++++ b/Documentation/hwmon/max31827.rst
+@@ -131,7 +131,14 @@ The Fault Queue bits select how many consecutive temperature faults must occur
+ before overtemperature or undertemperature faults are indicated in the
+ corresponding status bits.
+ 
+-Notes
+------
++PEC Support
++-----------
++
++When reading a register value, the PEC byte is computed and sent by the chip.
++
++PEC on word data transaction respresents a signifcant increase in bandwitdh
++usage (+33% for both write and reads) in normal conditions.
+ 
+-PEC is not implemented.
++Since this operation implies there will be an extra delay to each
++transaction, PEC can be disabled or enabled through sysfs.
++Just write 1  to the "pec" file for enabling PEC and 0 for disabling it.
+diff --git a/drivers/hwmon/max31827.c b/drivers/hwmon/max31827.c
+index f8a13b30f100..e86f8890ee72 100644
+--- a/drivers/hwmon/max31827.c
++++ b/drivers/hwmon/max31827.c
+@@ -24,6 +24,7 @@
+ 
+ #define MAX31827_CONFIGURATION_1SHOT_MASK	BIT(0)
+ #define MAX31827_CONFIGURATION_CNV_RATE_MASK	GENMASK(3, 1)
++#define MAX31827_CONFIGURATION_PEC_EN_MASK	BIT(4)
+ #define MAX31827_CONFIGURATION_TIMEOUT_MASK	BIT(5)
+ #define MAX31827_CONFIGURATION_RESOLUTION_MASK	GENMASK(7, 6)
+ #define MAX31827_CONFIGURATION_ALRM_POL_MASK	BIT(8)
+@@ -475,6 +476,54 @@ static ssize_t temp1_resolution_store(struct device *dev,
+ 
+ static DEVICE_ATTR_RW(temp1_resolution);
+ 
++static ssize_t pec_show(struct device *dev, struct device_attribute *devattr,
++			char *buf)
++{
++	struct i2c_client *client = to_i2c_client(dev);
++
++	return scnprintf(buf, PAGE_SIZE, "%d\n", !!(client->flags & I2C_CLIENT_PEC));
++}
++
++static ssize_t pec_store(struct device *dev, struct device_attribute *devattr,
++			 const char *buf, size_t count)
++{
++	struct max31827_state *st = dev_get_drvdata(dev);
++	struct i2c_client *client = to_i2c_client(dev);
++	unsigned int val;
++	int err;
++
++	err = kstrtouint(buf, 10, &val);
++	if (err < 0)
++		return err;
++
++	switch (val) {
++	case 0:
++		err = regmap_update_bits(st->regmap, MAX31827_CONFIGURATION_REG,
++					 MAX31827_CONFIGURATION_PEC_EN_MASK,
++					 val);
++		if (err)
++			return err;
++
++		client->flags &= ~I2C_CLIENT_PEC;
++		break;
++	case 1:
++		err = regmap_update_bits(st->regmap, MAX31827_CONFIGURATION_REG,
++					 MAX31827_CONFIGURATION_PEC_EN_MASK,
++					 val);
++		if (err)
++			return err;
++
++		client->flags |= I2C_CLIENT_PEC;
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	return count;
++}
++
++static DEVICE_ATTR_RW(pec);
++
+ static struct attribute *max31827_attrs[] = {
+ 	&dev_attr_temp1_resolution.attr,
+ 	NULL
+@@ -578,6 +627,11 @@ static int max31827_init_client(struct max31827_state *st,
+ 	return regmap_write(st->regmap, MAX31827_CONFIGURATION_REG, res);
+ }
+ 
++static void max31827_remove_pec(void *dev)
++{
++	device_remove_file(dev, &dev_attr_pec);
++}
++
+ static const struct hwmon_channel_info *max31827_info[] = {
+ 	HWMON_CHANNEL_INFO(temp, HWMON_T_ENABLE | HWMON_T_INPUT | HWMON_T_MIN |
+ 					 HWMON_T_MIN_HYST | HWMON_T_MIN_ALARM |
+@@ -627,6 +681,16 @@ static int max31827_probe(struct i2c_client *client)
+ 	if (err)
+ 		return err;
+ 
++	if (i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_PEC)) {
++		err = device_create_file(dev, &dev_attr_pec);
++		if (err)
++			return err;
++
++		err = devm_add_action_or_reset(dev, max31827_remove_pec, dev);
++		if (err)
++			return err;
++	}
++
+ 	hwmon_dev = devm_hwmon_device_register_with_info(dev, client->name, st,
+ 							 &max31827_chip_info,
+ 							 max31827_groups);
+-- 
+2.34.1
 
-The problem with b) is that we don't know what platforms will break. I
-reported one example that was caught by our CI, but there could be
-additional Chromebooks impacted, who knows.
-
-My vote is a).
 
