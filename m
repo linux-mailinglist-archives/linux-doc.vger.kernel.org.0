@@ -1,728 +1,286 @@
-Return-Path: <linux-doc+bounces-16862-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16865-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F1928CDE94
-	for <lists+linux-doc@lfdr.de>; Fri, 24 May 2024 02:17:02 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B5E68CDF13
+	for <lists+linux-doc@lfdr.de>; Fri, 24 May 2024 03:09:12 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E89D928BB18
-	for <lists+linux-doc@lfdr.de>; Fri, 24 May 2024 00:17:00 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B817CB21FB7
+	for <lists+linux-doc@lfdr.de>; Fri, 24 May 2024 01:09:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B634012AAE8;
-	Fri, 24 May 2024 00:11:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8E635661;
+	Fri, 24 May 2024 01:09:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="R0w2yvwj"
+	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="20MK3HZS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 417966F077;
-	Fri, 24 May 2024 00:11:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 538A53FC2
+	for <linux-doc@vger.kernel.org>; Fri, 24 May 2024 01:09:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716509489; cv=none; b=TDf82rjhrrmsytQiRL0htfVwvy6c+oJY2EfRmrhGt3kX6uz16+9qy4eCajHZikgPuxENRyeY5Ok2/ZleJJflTEHicQU0uiwPFY+19YuAa52e6tZRl/FFtNedJge62r7pdTvDqrPRi+86IcAIKEomHIBqzoc9x4ldmymby3iy5b8=
+	t=1716512944; cv=none; b=URMRogaTGLhF7ObUgexQv0MosurfiHEgyIw/+ZK7aegm3Rhvld72XWlJrb7v8Mh0ZBRvsotD0mpI/+Jjw7MQODRAbNEjcyLGO2kimx4kZeb/VI4GFivHuLivy/xiF/94mb5WYYo6FJD+gwMnIT25GDkenn8O7NhuY9fynvyvhS4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716509489; c=relaxed/simple;
-	bh=j8pL2W9pE0HCb2Z4kXhT16ItCcUSi8egXceXTB93bO4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=HZpncLEn3nAJ5u2GelUTU+sDx4GTLIbqjutj0HLwkQOP3FqPguUFgBJMgDMJMKkB7bZ69cqtDoH3gBcYWPXoKLbAvKH5rLNyLzsnyniJcWbSKF1KFpR/wSQ+EnSRhTb0fKaaAwT1kDd0baiAXJxcUgppt+hQYkzMss/1L056BOs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=R0w2yvwj; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44NNRLu0023987;
-	Fri, 24 May 2024 00:11:07 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=JSGWRsl72jTbP6IVNiOakPmM
-	sd+fpKDw504L0H91tqI=; b=R0w2yvwjYfdI3b7suf2WCIIEH+J1qG5Xy2LUHu0h
-	CsvlUEWyzd+1VhmieAdBWgNvyUAhhBC3I310RJIxsD/10tbnXjTGWkS0mSqTCP9d
-	+IhLl3a4QoE93ldrT9pMCXhg154mbzVY/u+mQnp0EwGF60XoZeGiDq93dmhqU32u
-	zofqED44lVj3sR01ux56+PBXB9nqXX1lFBAroMZ6Txt2JOhBiMoacvdjVDXqjoOy
-	2Z06lnWKPXNxzXAIPbpPu0cpwYOXu836NMgwmrFXaMJPHg2O000qyItEgxEL2J+K
-	qr0BFT1wepAEhnn/mCO6pq2D3qXx0+yEzCxuINbook9JAA==
-Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3yaa9u0qae-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 24 May 2024 00:11:06 +0000 (GMT)
-Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
-	by NALASPPMTA04.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 44O0B5ke009936
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 24 May 2024 00:11:05 GMT
-Received: from hu-wcheng-lv.qualcomm.com (10.49.16.6) by
- nalasex01b.na.qualcomm.com (10.47.209.197) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Thu, 23 May 2024 17:11:05 -0700
-From: Wesley Cheng <quic_wcheng@quicinc.com>
-To: <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
-        <perex@perex.cz>, <conor+dt@kernel.org>, <corbet@lwn.net>,
-        <lgirdwood@gmail.com>, <tiwai@suse.com>, <krzk+dt@kernel.org>,
-        <Thinh.Nguyen@synopsys.com>, <broonie@kernel.org>,
-        <bgoswami@quicinc.com>, <robh@kernel.org>,
-        <gregkh@linuxfoundation.org>
-CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-sound@vger.kernel.org>, <linux-usb@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <alsa-devel@alsa-project.org>, Wesley Cheng <quic_wcheng@quicinc.com>
-Subject: [PATCH v22 38/38] ASoC: doc: Add documentation for SOC USB
-Date: Thu, 23 May 2024 17:10:43 -0700
-Message-ID: <20240524001043.10141-39-quic_wcheng@quicinc.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240524001043.10141-1-quic_wcheng@quicinc.com>
-References: <20240524001043.10141-1-quic_wcheng@quicinc.com>
+	s=arc-20240116; t=1716512944; c=relaxed/simple;
+	bh=8XQWHJJcnaWQIBpyYzCHxp7AnnNYM9fdzlKNZ1TPWgI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=rVw22ZYEtyRxmtS/BT6jB3sd/4LQ29FHu0hdZglLQ8h/H/Q17cGR9bautL7uNwuc28i+dc4HMYPwVZRxDRVYZT1hbZWeATEuBpcDAY0kgl3yt1kNRgFzZqQ0nwJxpkF6fIaRpuKVjFi84AUA/KxpdjXVLu8PN8epj246oii8Rdo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=20MK3HZS; arc=none smtp.client-ip=209.85.218.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-a5a7d28555bso1245763666b.1
+        for <linux-doc@vger.kernel.org>; Thu, 23 May 2024 18:09:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1716512940; x=1717117740; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=d5hsurXO4+PTmTC7t5rP+UCCiN2KRr+N0eUl4vfw5Qc=;
+        b=20MK3HZSy+YIlZd/bhTnx1+hm7PuAQRmtjxEUN3Kb0dVHLsQwDmuMQ9v7jxD9GDii3
+         9bdvlQt7S2vFrPXOFb7MTdnfe/ASwd1SZ1FeWs/DAFrDIzLaI08byIixqvcMllT5x3/E
+         BPdHNcUOKWYOUFHvDBI5vPyroC+E8+bmK1U+W4pDeXN9Cb37+1bAXWWmAzG+LZK6OwDT
+         IGXi031G8W58bknM+vZanomHLYL/dY7YCh7Ww46ljKREOJCH7tj012naZSntF1i96W7u
+         +epeQpIJbXmhEtuKWFM+Ojql+qpgEAl2TDfgbwX0k8ka+XrFG54g5RM6KqldbmWkYYJ9
+         ZfPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1716512940; x=1717117740;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=d5hsurXO4+PTmTC7t5rP+UCCiN2KRr+N0eUl4vfw5Qc=;
+        b=C8WVixdI+23w7pDiO97OfSzKhg79I750JEGoKS1YYxdy45I6eLPPzwjihqBB4a6ppQ
+         Pt+waHXK2BXBRUUSeUeTZXit4qTIzhHFyRyQZhKDAmnhO3O2vcZk1vTQhuEN8+GdiPEv
+         3zBqCV+HKf6e2ytM6DPR5SMFuJVZyqXg1wuY6izCFEqN6aK8WW49svtqVxJYX6wSOrV5
+         oMk2+92l6A/EaoV8+Q7oKvkxA+2wt5aGCWets6E1OA9As8T4jR3oyFkW3yFz1PRqg+26
+         oeXW5j30nSPCrKpAMTinpFIH1L9odZXJXfY1AOHf7tNIIj5bhY8qTZKfIwDELLkgvDoM
+         z0yw==
+X-Forwarded-Encrypted: i=1; AJvYcCVK34VWUbkT7mvuqFkG+gb5Um6BSdX3NChzm+zO5QRaya7Pr/7zjwv57uUumyCWMtpUKJwMF18TjdxKPd5M+d8DthREhhf7Fzd+
+X-Gm-Message-State: AOJu0Yzv7Rh455QwEfv+gf4fwWt/OiXTwHu0pSjyFU0ydHKJxIdEt0br
+	g4rYDHESCkX9GmWKMU/qsC+ZcGGa1vLmmokkJzSFfdffLYYojxRwjpqx1fNOhmHEcmPJaoLcfsR
+	tLrPi6fDpywrgwTlnhFDqgU5dhN0bbYpIwXHofA==
+X-Google-Smtp-Source: AGHT+IG3s/PxfkzALAwXOhQ3ekAOVPLqk+Nn0xM/k7lUsK1tJ7QFxgisyucTWB05LPZ17KPqpgslqJYxANclXkKxTGo=
+X-Received: by 2002:a17:907:3ac2:b0:a5a:2d30:b8c1 with SMTP id
+ a640c23a62f3a-a62641c78c3mr40064366b.14.1716512940597; Thu, 23 May 2024
+ 18:09:00 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-ClientProxiedBy: nalasex01b.na.qualcomm.com (10.47.209.197) To
- nalasex01b.na.qualcomm.com (10.47.209.197)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: BR6HsgV1GRIm3VjZRlZ1gi7Nqz4FQpEB
-X-Proofpoint-ORIG-GUID: BR6HsgV1GRIm3VjZRlZ1gi7Nqz4FQpEB
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.12.28.16
- definitions=2024-05-23_13,2024-05-23_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 phishscore=0
- mlxlogscore=999 priorityscore=1501 bulkscore=0 spamscore=0
- lowpriorityscore=0 malwarescore=0 adultscore=0 impostorscore=0 mlxscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2405170001 definitions=main-2405230166
+References: <tencent_9D721BDDF88C04DBB5151D57711D62524209@qq.com>
+ <tencent_338DF690631BAE788C4CC858233E9FBAE006@qq.com> <CALs-HssGcNso6vTfbcsiWX1h_46jgDDRcEWcfZCTpxXYnubcng@mail.gmail.com>
+ <20240522-d110bb16f54eebb725e943c2@orel> <Zk+ygkJXUcW+H7Rl@ghost>
+In-Reply-To: <Zk+ygkJXUcW+H7Rl@ghost>
+From: Evan Green <evan@rivosinc.com>
+Date: Thu, 23 May 2024 18:08:24 -0700
+Message-ID: <CALs-HssY+UOEcM=LhahK1Ngs+=oEocLTFYZ65-Kn7=bH3qYPOg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] docs: riscv: hwprobe: Clarify misaligned keys are
+ values not bitmasks
+To: Charlie Jenkins <charlie@rivosinc.com>
+Cc: Andrew Jones <ajones@ventanamicro.com>, Yangyu Chen <cyy@cyyself.name>, 
+	linux-riscv@lists.infradead.org, Elliott Hughes <enh@google.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Paul Walmsley <paul.walmsley@sifive.com>, 
+	Palmer Dabbelt <palmer@dabbelt.com>, =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>, 
+	Conor Dooley <conor.dooley@microchip.com>, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-With the introduction of the soc-usb driver, add documentation highlighting
-details on how to utilize the new driver and how it interacts with
-different components in USB SND and ASoC.  It provides examples on how to
-implement the drivers that will need to be introduced in order to enable
-USB audio offloading.
+On Thu, May 23, 2024 at 2:17=E2=80=AFPM Charlie Jenkins <charlie@rivosinc.c=
+om> wrote:
+>
+> On Wed, May 22, 2024 at 09:26:08AM +0200, Andrew Jones wrote:
+> > On Tue, May 21, 2024 at 11:36:06AM GMT, Evan Green wrote:
+> > > On Sat, May 18, 2024 at 9:00=E2=80=AFAM Yangyu Chen <cyy@cyyself.name=
+> wrote:
+> > > >
+> > > > The original documentation says hwprobe keys are bitmasks, but actu=
+ally,
+> > > > they are values. This patch clarifies this to avoid confusion.
+> > > >
+> > > > Signed-off-by: Yangyu Chen <cyy@cyyself.name>
+> > >
+> > > Hm, we also have this problem in the code, since
+> > > hwprobe_key_is_bitmask() returns true for KEY_CPUPERF_0. This results
+> > > in wrong information being returned for queries using the WHICH_CPU
+> > > flag. If usermode asked for the set of CPUs that was specifically SLO=
+W
+> > > or EMULATED, the returned cpuset would also include cpus that were
+> > > FAST. I believe all other queries are okay.
+> > >
+> > > The one-liner fix is to just not return true for that key in
+> > > hwprobe_key_is_bitmask(). But that's technically user-visible: if som=
+e
+> > > software relied on the buggy behavior of FAST cpus being swept up in
+> > > the query for SLOW or EMULATED cpus, this change would expose that.
+> > > The grownups-eat-their-vegetables thing to do would be to define a ne=
+w
+> > > key that returns this same value, but doesn't return true in
+> > > hwprobe_key_is_bitmask(). What do people think?
+> >
+> > Even though I actually enjoy eating vegetables, I think it's unlikely
+> > that we need to be so cautious for this. I feel like kernel updates
+> > provide a bit of freedom to change results of hardware query syscalls,
+> > even when run on the same hardware. Particularly the EMULATED query,
+> > which I guess could change with a firmware update. And, even the SLOW
+> > query could change if the probing was modified directly or indirectly.
+> > IOW, applications that use the which-cpus syscall shouldn't freak out
+> > if they don't get the same cpuset after a kernel update, which means
+> > we can drop the FAST cpus from the result.
+>
+> Dropping FAST does not really address the problem here. These keys are
+> being treated as a bitmap when they are in fact just values. Because
+> they are currently treated as bitmaps, it is semantically acceptable to
+> "or" two of the keys together and pass them into hwprobe. Dropping FAST
+> from the input of EMULATED | SLOW will make it appear to work, but it is
+> not reasonable to try to support or'ing of values that are not bitmaps. I=
+f a
+> key that maps to a value of 5 is ever introduced, then the input of
+> UNSUPPORTED | EMULATED will also return cpus that map to the new key.
+> If hwprobe recieves a value of 3 for CPUPERF_0 and or'ing is supported,
+> that could either be interpreted that the user is asking for cpus that ar=
+e
+> EMULATED or SLOW or FAST, or just FAST, or just EMULATED or SLOW. The
+> current implementation defines that only FAST will be returned because
+> or'ing values like this is nonsense.
 
-Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
----
- Documentation/sound/soc/index.rst |   1 +
- Documentation/sound/soc/usb.rst   | 603 ++++++++++++++++++++++++++++++
- 2 files changed, 604 insertions(+)
- create mode 100644 Documentation/sound/soc/usb.rst
+You're right that if usermode had taken the bitmask aspect to heart,
+they might try to ask for cpus that were SLOW | EMULATED, and expect
+to get the set of both. None of the other combinations make sense, so
+I think this is the only one worth worrying about. That case is super
+broken today as they'd get SLOW | EMULATED | FAST (basically all CPUs
+always). We have no way to distinguish whether they actually passed
+SLOW | EMULATED or FAST. I'm tempted to not worry about this case and
+assume anyone who passed 3 meant FAST, but you're right it's there.
 
-diff --git a/Documentation/sound/soc/index.rst b/Documentation/sound/soc/index.rst
-index e57df2dab2fd..8bed8f8f48da 100644
---- a/Documentation/sound/soc/index.rst
-+++ b/Documentation/sound/soc/index.rst
-@@ -18,3 +18,4 @@ The documentation is spilt into the following sections:-
-    jack
-    dpcm
-    codec-to-codec
-+   usb
-diff --git a/Documentation/sound/soc/usb.rst b/Documentation/sound/soc/usb.rst
-new file mode 100644
-index 000000000000..c5175af52154
---- /dev/null
-+++ b/Documentation/sound/soc/usb.rst
-@@ -0,0 +1,603 @@
-+================
-+ASoC USB support
-+================
-+
-+Overview
-+========
-+In order to leverage the existing USB sound device support in ALSA, the
-+introduction of the ASoC USB APIs, allow for the entities to communicate
-+with one another.
-+
-+One potential use case would be to support USB audio offloading, which is
-+an implementation that allows for an external DSP on the SoC to handle the
-+transfer of audio data over the USB bus.  This would let the main
-+processor to stay in lower power modes for longer durations.  The following
-+is an example design of how the ASoC and ALSA pieces can be connected
-+together to achieve this:
-+
-+::
-+
-+               USB                   |            ASoC
-+                                     |  _________________________
-+                                     | |   ASoC Platform card    |
-+                                     | |_________________________|
-+                                     |         |           |
-+                                     |      ___V____   ____V____
-+                                     |     |ASoC BE | |ASoC FE  |
-+                                     |     |DAI LNK | |DAI LNK  |
-+                                     |     |________| |_________|
-+                                     |         ^  ^        ^
-+                                     |         |  |________|
-+                                     |      ___V____    |
-+                                     |     |SOC-USB |   |
-+     ________       ________               |        |   |
-+    |USB SND |<--->|USBSND  |<------------>|________|   |
-+    |(card.c)|     |offld   |<----------                |
-+    |________|     |________|___     | |                |
-+        ^               ^       |    | |    ____________V_________
-+        |               |       |    | |   |IPC                   |
-+     __ V_______________V_____  |    | |   |______________________|
-+    |USB SND (endpoint.c)     | |    | |              ^
-+    |_________________________| |    | |              |
-+                ^               |    | |   ___________V___________
-+                |               |    | |->|audio DSP              |
-+     ___________V_____________  |    |    |_______________________|
-+    |XHCI HCD                 |<-    |
-+    |_________________________|      |
-+
-+
-+SOC USB driver
-+==============
-+Structures
-+----------
-+``struct snd_soc_usb``
-+
-+  - ``list``: list head for SND SOC struct list
-+  - ``dev``: USB backend device reference
-+  - ``component``: reference to ASoC component
-+  - ``active_list``: active sessions
-+  - ``num_supported_streams``: number of supported concurrent sessions
-+  - ``connection_status_cb``: callback to notify connection events
-+  - ``put_offload_dev``: callback to select USB sound card/PCM device
-+  - ``get_offload_dev``: callback to fetch selected USB sound card/PCM device
-+  - ``priv_data``: driver data
-+
-+The snd_soc_usb structure can be referenced using the ASoC platform card
-+device, or a USB device (udev->dev).  This is created by the ASoC BE DAI
-+link, and the USB sound entity will be able to pass information to the
-+ASoC BE DAI link using this structure.
-+
-+``struct snd_soc_usb_device``
-+
-+  - ``card_idx``: sound card index associated with USB device
-+  - ``chip_idx``: USB sound chip array index
-+  - ``num_playback``: number of playback streams
-+  - ``num_capture``: number of capture streams
-+
-+The struct snd_soc_usb_device is created by the USB sound offload driver.
-+This will carry basic parameters/limitations that will be used to
-+determine the possible offloading paths for this USB audio device.
-+
-+``struct snd_soc_usb_session``
-+
-+  - ``active_card_idx``: active offloaded sound card
-+  - ``active_pcm_idx``: active offloaded PCM device
-+  - ``state``: USB BE DAI link PCM state
-+
-+The struct snd_soc_usb_session tracks the current offloading state for a
-+particular card and PCM combination.  This structure is carried/saved as
-+part of the active_list within struct snd_soc_usb.
-+
-+The number of entities in the active list corresponds to the number of
-+snd_soc_usb_session structures that are allocated.  This is controlled
-+by the num_supported_streams that is reported as part of the SOC USB
-+structure creation.
-+
-+Functions
-+---------
-+.. code-block:: rst
-+
-+	const char *snd_soc_usb_get_components_tag(bool playback);
-+..
-+
-+  - ``playback``: direction of audio stream
-+
-+**snd_soc_usb_get_components_tag()** returns the tag used for describing if USB
-+offloading is supported for appending to the ASoC platform card's components
-+string.
-+
-+Returns a tag based on the direction of the audio stream.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_find_format(int card_idx, struct snd_pcm_hw_params *params,
-+			int direction)
-+..
-+
-+  - ``card_idx``: the index into the USB sound chip array.
-+  - ``params``: Requested PCM parameters from the USB DPCM BE DAI link
-+  - ``direction``: capture or playback
-+
-+**snd_soc_usb_find_format()** ensures that the requested audio profile being
-+requested by the external DSP is supported by the USB device.
-+
-+Returns 0 on success, and -EOPNOTSUPP on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_connect(struct device *usbdev, struct snd_soc_usb_device *sdev)
-+..
-+
-+  - ``usbdev``: the usb device that was discovered
-+  - ``sdev``: capabilities of the device
-+
-+**snd_soc_usb_connect()** notifies the ASoC USB DCPM BE DAI link of a USB
-+audio device detection.  This can be utilized in the BE DAI
-+driver to keep track of available USB audio devices.  This is intended
-+to be called by the USB offload driver residing in USB SND.
-+
-+Returns 0 on success, negative error code on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_disconnect(struct device *usbdev, struct snd_soc_usb_device *sdev)
-+..
-+
-+  - ``usbdev``: the usb device that was removed
-+  - ``sdev``: capabilities to free
-+
-+**snd_soc_usb_disconnect()** notifies the ASoC USB DCPM BE DAI link of a USB
-+audio device removal.  This is intended to be called by the USB offload
-+driver that resides in USB SND.
-+
-+.. code-block:: rst
-+
-+	void *snd_soc_usb_find_priv_data(struct device *usbdev)
-+..
-+
-+  - ``usbdev``: the usb device to reference to find private data
-+
-+**snd_soc_usb_find_priv_data()** fetches the private data saved to the SOC USB
-+device.
-+
-+Returns pointer to priv_data on success, NULL on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_device_offload_available(struct device *dev)
-+..
-+
-+  - ``dev``: the device to find in SOC USB
-+
-+**snd_soc_usb_device_offload_available()** fetch the sound card number associated
-+to the USB BE DAI link.
-+
-+Returns a valid sound card index on success, negative on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_prepare_session(struct snd_soc_usb *usb, int card_idx, int pcm_idx);
-+..
-+
-+  - ``usb``: SOC USB device
-+  - ``card_idx``: USB sound card index
-+  - ``pcm_idx``: USB PCM device index
-+
-+**snd_soc_usb_prepare_session()** populates active_list with a 'struct
-+snd_soc_usb_session.'  This will move the session into the SND_SOC_USB_PREPARED
-+state.  State updates will always start here.
-+
-+Returns index to active_list on success, -EBUSY on failure.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_shutdown_session(struct snd_soc_usb *usb, int session_id);
-+..
-+
-+  - ``usb``: SOC USB device
-+  - ``session_id``: session id returned by **snd_soc_usb_prepare_session()**
-+
-+**snd_soc_usb_shutdown_session()** frees up a slot in active_list, which signals
-+that there is no longer an active offloading device.  This allows for another
-+session to be started.
-+
-+Returns 0 on success, -EINVAL if session index is invalid.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_set_session_state(struct snd_soc_usb *usb, int session_id,
-+						enum snd_soc_usb_dai_state state);
-+..
-+
-+  - ``usb``: SOC USB device
-+  - ``session_id``: session id returned by **snd_soc_usb_prepare_session()**
-+  - ``state``: state to move into
-+
-+**snd_soc_usb_set_session_state()** moves an offloading session to the desired
-+state.
-+
-+.. code-block:: rst
-+
-+	int snd_soc_usb_setup_offload_jack(struct snd_soc_component *component,
-+					struct snd_soc_jack *jack)
-+..
-+
-+  - ``component``: ASoC component to add the jack
-+  - ``jack``: ASoC sound jack to add
-+
-+**snd_soc_usb_setup_offload_jack()** is a helper to add a sound jack control to
-+the platform sound card.  This will allow for consistent naming to be used on
-+designs that support USB audio offloading.
-+
-+Returns 0 on success, negative otherwise.
-+
-+.. code-block:: rst
-+
-+	struct snd_soc_usb *snd_soc_usb_allocate_port(struct snd_soc_component *component,
-+			int num_supported_streams, void *data);
-+..
-+
-+  - ``component``: DPCM BE DAI link component
-+  - ``num_supported_streams``: number of active streams supported by external DSP
-+  - ``data``: private data
-+
-+**snd_soc_usb_allocate_port()** allocates a SOC USB device and populates standard
-+parameters that is used for further operations.
-+
-+Returns a pointer to struct soc_usb on success, negative on error.
-+
-+.. code-block:: rst
-+
-+	void snd_soc_usb_free_port(struct snd_soc_usb *usb);
-+..
-+
-+  - ``usb``: SOC USB device to free
-+
-+**snd_soc_usb_free_port()** frees a SOC USB device.
-+
-+.. code-block:: rst
-+
-+	void snd_soc_usb_add_port(struct snd_soc_usb *usb);
-+..
-+
-+  - ``usb``: SOC USB device to add
-+
-+**snd_soc_usb_add_port()** add an allocated SOC USB device to the SOC USB framework.
-+Once added, this device can be referenced by further operations.
-+
-+.. code-block:: rst
-+
-+	void snd_soc_usb_remove_port(struct snd_soc_usb *usb);
-+..
-+
-+  - ``usb``: SOC USB device to remove
-+
-+**snd_soc_usb_remove_port()** removes a SOC USB device from the SOC USB framework.
-+After removing a device, any SOC USB operations would not be able to reference the
-+device removed.
-+
-+How to Register to SOC USB
-+--------------------------
-+The ASoC DPCM USB BE DAI link is the entity responsible for allocating and
-+registering the SOC USB device on the component bind.  Likewise, it will
-+also be responsible for freeing the allocated resources.  An example can
-+be shown below:
-+
-+.. code-block:: rst
-+
-+	static int q6usb_component_probe(struct snd_soc_component *component)
-+	{
-+		...
-+		data->usb = snd_soc_usb_allocate_port(component, 1, &data->priv);
-+		if (!data->usb)
-+			return -ENOMEM;
-+
-+		usb->connection_status_cb = q6usb_alsa_connection_cb;
-+
-+		ret = snd_soc_usb_add_port(usb);
-+		if (ret < 0) {
-+			dev_err(component->dev, "failed to add usb port\n");
-+			goto free_usb;
-+		}
-+		...
-+	}
-+
-+	static void q6usb_component_remove(struct snd_soc_component *component)
-+	{
-+		...
-+		snd_soc_usb_remove_port(data->usb);
-+		snd_soc_usb_free_port(data->usb);
-+	}
-+
-+	static const struct snd_soc_component_driver q6usb_dai_component = {
-+		.probe = q6usb_component_probe,
-+		.remove = q6usb_component_remove,
-+		.name = "q6usb-dai-component",
-+		...
-+	};
-+..
-+
-+BE DAI links can pass along vendor specific information as part of the
-+call to allocate the SOC USB device.  This will allow any BE DAI link
-+parameters or settings to be accessed by the USB offload driver that
-+resides in USB SND.
-+
-+USB Audio Device Connection Flow
-+--------------------------------
-+USB devices can be hotplugged into the USB root hub at any point in time.
-+The BE DAI link should be aware of the current state of the physical USB
-+port, i.e. if there are any USB devices with audio interface(s) connected.
-+The following callback can be used to notify the BE DAI link of any change:
-+
-+	**connection_status_cb()**
-+
-+This is called whenever there is a USB SND interface bind or remove event,
-+using snd_soc_usb_connect() or snd_soc_usb_disconnect():
-+
-+.. code-block:: rst
-+
-+	static void qc_usb_audio_offload_probe(struct snd_usb_audio *chip)
-+	{
-+		...
-+		snd_soc_usb_connect(usb_get_usb_backend(udev), sdev);
-+		...
-+	}
-+
-+	static void qc_usb_audio_offload_disconnect(struct snd_usb_audio *chip)
-+	{
-+		...
-+		snd_soc_usb_disconnect(usb_get_usb_backend(chip->dev), dev->sdev);
-+		...
-+	}
-+..
-+
-+In order to account for conditions where driver or device existence is
-+not guaranteed, USB SND exposes snd_usb_rediscover_devices() to resend the
-+connect events for any identified USB audio interfaces.  Consider the
-+the following situtation:
-+
-+	**usb_audio_probe()**
-+	  | --> USB audio streams allocated and saved to usb_chip[]
-+	  | --> Propagate connect event to USB offload driver in USB SND
-+	  | --> **snd_soc_usb_connect()** exits as USB BE DAI link is not ready
-+
-+	BE DAI link component probe
-+	  | --> DAI link is probed and SOC USB port is allocated
-+	  | --> The USB audio device connect event is missed
-+
-+To ensure connection events are not missed, **snd_usb_rediscover_devices()**
-+is executed when the SOC USB device is registered.  Now, when the BE DAI
-+link component probe occurs, the following highlights the sequence:
-+
-+	BE DAI link component probe
-+	  | --> DAI link is probed and SOC USB port is allocated
-+	  | --> SOC USB device added, and **snd_usb_rediscover_devices()** runs
-+
-+	**snd_usb_rediscover_devices()**
-+	  | --> Traverses through usb_chip[] and for non-NULL entries issue
-+	  |     **connection_status_cb()**
-+
-+In the case where the USB offload driver is unbounded, while USB SND is
-+ready, the **snd_usb_rediscover_devices()** is called during module init.
-+This allows for the offloading path to also be enabled with the following
-+flow:
-+
-+	**usb_audio_probe()**
-+	  | --> USB audio streams allocated and saved to usb_chip[]
-+	  | --> Propagate connect event to USB offload driver in USB SND
-+	  | --> USB offload driver **NOT** ready!
-+
-+	BE DAI link component probe
-+	  | --> DAI link is probed and SOC USB port is allocated
-+	  | --> No USB connect event due to missing USB offload driver
-+
-+	USB offload driver probe
-+	  | --> **qc_usb_audio_offload_init()**
-+	  | --> Calls **snd_usb_rediscover_devices()** to notify of devices
-+
-+SOC USB and USB Sound Kcontrols
-+===============================
-+Details
-+-------
-+SOC USB and USB sound expose a set of SND kcontrols for applications to select
-+and fetch the current offloading status for the ASoC platform sound card. Kcontrols
-+are split between two layers:
-+
-+	- USB sound - Notifies the sound card number for the ASoC platform sound
-+	  card that it is registered to for supporting audio offload.
-+
-+	- SOC USB - Maintains the current status of the offload path, and device
-+	  (USB sound card and PCM device) information.  This would be the main
-+	  card that applications can read to determine offloading capabilities.
-+
-+Implementation
-+--------------
-+
-+**Example:**
-+
-+  **Sound Cards**:
-+
-+	::
-+
-+	  0 [SM8250MTPWCD938]: sm8250 - SM8250-MTP-WCD9380-WSA8810-VA-D
-+                     SM8250-MTP-WCD9380-WSA8810-VA-DMIC
-+	  1 [C320M          ]: USB-Audio - Plantronics C320-M
-+                     Plantronics Plantronics C320-M at usb-xhci-hcd.1.auto-1, full speed
-+
-+
-+  **Platform Sound Card** - card#0:
-+
-+	::
-+
-+	  USB Offload Playback Route Card Select  1 (range -1->32)
-+	  USB Offload Playback Route PCM Select   0 (range -1->255)
-+	  USB Offload Playback Route Card Status  -1 (range -1->32)
-+	  USB Offload Playback Route PCM Status   -1 (range -1->255)
-+
-+
-+  **USB Sound Card** - card#1:
-+
-+	::
-+
-+	  USB Offload Playback Capable Card         0 (range -1->32)
-+
-+
-+The platform sound card(card#0) kcontrols are created as part of adding the SOC
-+USB device using **snd_soc_usb_add_port()**.  The following kcontrols are defined
-+as:
-+
-+  - ``USB Offload Playback Route Card Status`` **(R)**: USB sound card device index
-+    that defines which USB SND resources are currently offloaded.  If -1 is seen, it
-+    signifies that offload is not active.
-+  - ``USB Offload Playback Route PCM Status`` **(R)**: USB PCM device index
-+    that defines which USB SND resources are currently offloaded.  If -1 is seen, it
-+    signifies that offload is not active.
-+  - ``USB Offload Playback Route Card Select`` **(R/W)**: USB sound card index which
-+    selects the USB device to initiate offloading on.  If no value is written to the
-+    kcontrol, then the last USB device discovered card index will be chosen.
-+  - ``USB Offload Playback Route PCM Select`` **(R/W)**: USB PCM index which selects
-+    the USB device to initiate offloading on.  If no value is written to the
-+    kcontrol, then the last USB device discovered PCM zero index will be chosen.
-+
-+The USB sound card(card#1) kcontrols are created as USB audio devices are plugged
-+into the physical USB port and enumerated.  The kcontrols are defined as:
-+
-+  - ``USB Offload Playback Capable Card`` **(R)**: Provides the sound card
-+    number/index that supports USB offloading.  Further/follow up queries about
-+    the current offload state can be handled by reading the offload status
-+    kcontrol exposed by the platform card.
-+
-+USB Offload Playback Route Select Kcontrol
-+------------------------------------------
-+In order to allow for vendor specific implementations on audio offloading device
-+selection, the SOC USB layer exposes the following:
-+
-+.. code-block:: rst
-+
-+	int (*put_offload_dev)(struct snd_kcontrol *kcontrol,
-+			      struct snd_ctl_elem_value *ucontrol);
-+	int (*get_offload_dev)(struct snd_kcontrol *kcontrol,
-+			      struct snd_ctl_elem_value *ucontrol);
-+..
-+
-+These are specific for the **USB Offload Playback Route Select** kcontrol.
-+
-+When users issue get/put calls to the kcontrol, the registered SOC USB callbacks
-+will execute the registered function calls to the DPCM BE DAI link.
-+
-+**Callback Registration:**
-+
-+.. code-block:: rst
-+
-+	static int q6usb_component_probe(struct snd_soc_component *component)
-+	{
-+	...
-+	usb = snd_soc_usb_allocate_port(component, 1, &data->priv);
-+	if (IS_ERR(usb))
-+		return -ENOMEM;
-+
-+	usb->connection_status_cb = q6usb_alsa_connection_cb;
-+	usb->put_offload_dev = q6usb_put_offload_dev;
-+	usb->get_offload_dev = q6usb_get_offload_dev;
-+
-+	ret = snd_soc_usb_add_port(usb);
-+..
-+
-+**PUT Callback:**
-+
-+Can be used to track current device selection, and to issue any external DSP
-+commands that might be required for enabling audio offloading.
-+
-+.. code-block:: rst
-+
-+	static int q6usb_put_offload_dev(struct snd_kcontrol *kcontrol,
-+			      struct snd_ctl_elem_value *ucontrol)
-+	{
-+	...
-+	if ((cardidx >= 0 && test_bit(cardidx, &data->available_card_slot))) {
-+		data->sel_card_idx = cardidx;
-+		changed = 1;
-+	}
-+	...
-+	if ((pcmidx >= 0 && pcmidx < data->status[cardidx].sdev->num_playback)) {
-+		data->sel_pcm_idx = pcmidx;
-+		changed = 1;
-+	}
-+..
-+
-+The above is an example of keeping track of what the userspace entity is
-+selecting as the playback device.  This can be later used to pass the information
-+along to the external DSP.
-+
-+
-+USB Offload Playback Route Status
-+---------------------------------
-+SOC USB exposes APIs for keeping track of the offloading state, and expects this
-+to be maintained by the BE DAI link that created/added the SOC USB device.
-+
-+**SOC USB State Flow Example**
-+
-+::
-+
-+     PCM Core              |      BE USB DAI Link      |     SOC USB
-+                           |                           |
-+  snd_pcm_hw_params --------> dai_link->ops->hw_params --> snd_soc_usb_prepare_session
-+                           |                           |   |--> state = SND_SOC_USB_PREPARED
-+  ...                      |                           |   |--> slot[0] now active
-+                           |                           |
-+                           |                           |
-+  snd_pcm_do_prepare--------> dai_link->ops->prepare ---> snd_soc_usb_set_session_state
-+                           |                           |   |--> state = SND_SOC_USB_RUNNING
-+  ...                      |                           |
-+                           |                           |
-+  snd_pcm_release_substream-> dai_link->ops->shutdown---> snd_soc_usb_shutdown_session
-+                           |                           |   |--> state = SND_SOC_USB_IDLE
-+                           |                           |   |--> slot[0] now idle
-+
-+
-+When executing the kcontrol get callback, it will loop across the active_list array
-+and report to the application for active USB sound card and USB PCM device indexes.
-+
-+USB Offload Playback Capable Card
-+---------------------------------
-+USB sound also creates a kcontrol for applications to help determine which platform
-+sound card USB offloading is linked to.  This will allow applications to further
-+query the platform sound card for specific information about the current USB offload
-+status.
-+
-+This is added as a separate mixer driver:
-+  - mixer_usb_offload.c
-+  - kcontrol: snd_usb_offload_available_ctl
-+
-+**snd_usb_offload_available_get()** fetches the associated sound card by utilizing
-+the **snd_soc_usb_device_offload_available()** API.
-+
-+Mixer Examples
-+--------------
-+
-+	::
-+
-+	  tinymix -D 0 set 'USB Offload Playback Route Card Select' 2
-+	  tinymix -D 0 set 'USB Offload Playback Route PCM Select' 0
-+
-+
-+	::
-+
-+	  tinymix -D 0 get 'USB Offload Playback Route Card Select'
-+	  --> 2 (range -1->32)
-+	  tinymix -D 0 get 'USB Offload Playback Route PCM Select'
-+	  --> 0 (range -1->255)
-+
-+	::
-+
-+	  tinymix -D 0 get 'USB Offload Playback Route Card Status'
-+	  --> 2 (range -1->32)   [OFFLD active]
-+	  --> -1 (range -1->32) [OFFLD idle]
-+	  tinymix -D 0 get 'USB Offload Playback Route PCM Status'
-+	  --> 0 (range -1->255)   [OFFLD active]
-+	  --> -1 (range -1->255) [OFFLD idle]
-+
-+	::
-+
-+	  tinymix -D 1 get 'USB Offload Playback Capable Card'
-+	  --> 0 (range -1->32)
+>
+> Allowing an input where keys are or'd together should not be supported
+> in CPUPERF_0 since it is what is causing this issue. However, the
+> original intent seems to be to allow an or'ing of keys. The verbosity of
+> using CPUPERF_0 will be greatly increased without the ability to or keys
+> together. If an application wants to know if misaligned accesses are
+> supported, it currently needs 3 separate hwprobe calls, one for each
+> EMULATED, SLOW, and FAST. Changing CPUPERF_0 to be a true bitmap would
+> require changing the values of each of the existing keys which is not an
+> acceptable API change.
+
+Specifying CPUPERF_0 as a bitmask was a mistake (mine) in the
+documentation that got translated to code when the WHICH_CPUS flag was
+introduced and hwprobe_key_is_bitmask() showed up. It was always
+supposed to be an enum, with EMULATED being a (significant) step worse
+than SLOW.
+
+My expectation is that most software will just ask "which cpus are
+FAST" and nothing else. It's not easy to write software that somehow
+takes advantage of the difference between EMULATED and SLOW, though it
+is nice to know for reporting/telemetry purposes.
+
+>
+> In my previous email I proposed a new key, which could be something like
+> RISCV_HWPROBE_KEY_CPUPERF_1, that is actually a bitmap. That way a query
+> of EMULATED | SLOW | FAST would be possible in a single hwprobe call,
+> which seems to be the original intent of CPUPERF_0.
+
+Agreed, it makes sense to me to have HWPROBE_MISALIGNED_* be the only
+value in CPUPERF_0, and add a new CPUPERF_1 key for true bitmap
+features. I currently don't have any bits to stuff into the newly
+proposed key, but when they do I agree it makes sense to put them in a
+new key.
+
+-Evan
+
+>
+> - Charlie
+>
+>
+> >
+> > Thanks,
+> > drew
+> >
+> > >
+> > > -Evan
+> > >
+> > > > ---
+> > > >  Documentation/arch/riscv/hwprobe.rst | 31 ++++++++++++++++--------=
+----
+> > > >  1 file changed, 18 insertions(+), 13 deletions(-)
+> > > >
+> > > > diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/a=
+rch/riscv/hwprobe.rst
+> > > > index 239be63f5089..4abfa3f9fe44 100644
+> > > > --- a/Documentation/arch/riscv/hwprobe.rst
+> > > > +++ b/Documentation/arch/riscv/hwprobe.rst
+> > > > @@ -188,25 +188,30 @@ The following keys are defined:
+> > > >         manual starting from commit 95cf1f9 ("Add changes requested=
+ by Ved
+> > > >         during signoff")
+> > > >
+> > > > -* :c:macro:`RISCV_HWPROBE_KEY_CPUPERF_0`: A bitmask that contains =
+performance
+> > > > +* :c:macro:`RISCV_HWPROBE_KEY_CPUPERF_0`: A value that contains pe=
+rformance
+> > > >    information about the selected set of processors.
+> > > >
+> > > > -  * :c:macro:`RISCV_HWPROBE_MISALIGNED_UNKNOWN`: The performance o=
+f misaligned
+> > > > -    scalar accesses is unknown.
+> > > > +  * :c:macro:`RISCV_HWPROBE_MISALIGNED_MASK`: The bitmask of the m=
+isaligned
+> > > > +    access performance field in the value of key `RISCV_HWPROBE_KE=
+Y_CPUPERF_0`.
+> > > >
+> > > > -  * :c:macro:`RISCV_HWPROBE_MISALIGNED_EMULATED`: Misaligned scala=
+r accesses are
+> > > > -    emulated via software, either in or below the kernel.  These a=
+ccesses are
+> > > > -    always extremely slow.
+> > > > +    The following values (not bitmasks) in this field are defined:
+> > > >
+> > > > -  * :c:macro:`RISCV_HWPROBE_MISALIGNED_SLOW`: Misaligned scalar ac=
+cesses are
+> > > > -    slower than equivalent byte accesses.  Misaligned accesses may=
+ be supported
+> > > > -    directly in hardware, or trapped and emulated by software.
+> > > > +    * :c:macro:`RISCV_HWPROBE_MISALIGNED_UNKNOWN`: The performance=
+ of misaligned
+> > > > +      scalar accesses is unknown.
+> > > >
+> > > > -  * :c:macro:`RISCV_HWPROBE_MISALIGNED_FAST`: Misaligned scalar ac=
+cesses are
+> > > > -    faster than equivalent byte accesses.
+> > > > +    * :c:macro:`RISCV_HWPROBE_MISALIGNED_EMULATED`: Misaligned sca=
+lar accesses are
+> > > > +      emulated via software, either in or below the kernel.  These=
+ accesses are
+> > > > +      always extremely slow.
+> > > >
+> > > > -  * :c:macro:`RISCV_HWPROBE_MISALIGNED_UNSUPPORTED`: Misaligned sc=
+alar accesses
+> > > > -    are not supported at all and will generate a misaligned addres=
+s fault.
+> > > > +    * :c:macro:`RISCV_HWPROBE_MISALIGNED_SLOW`: Misaligned scalar =
+accesses are
+> > > > +      slower than equivalent byte accesses.  Misaligned accesses m=
+ay be supported
+> > > > +      directly in hardware, or trapped and emulated by software.
+> > > > +
+> > > > +    * :c:macro:`RISCV_HWPROBE_MISALIGNED_FAST`: Misaligned scalar =
+accesses are
+> > > > +      faster than equivalent byte accesses.
+> > > > +
+> > > > +    * :c:macro:`RISCV_HWPROBE_MISALIGNED_UNSUPPORTED`: Misaligned =
+scalar accesses
+> > > > +      are not supported at all and will generate a misaligned addr=
+ess fault.
+> > > >
+> > > >  * :c:macro:`RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE`: An unsigned int =
+which
+> > > >    represents the size of the Zicboz block in bytes.
+> > > > --
+> > > > 2.43.0
+> > > >
 
