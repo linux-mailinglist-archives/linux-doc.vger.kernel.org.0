@@ -1,201 +1,228 @@
-Return-Path: <linux-doc+bounces-16872-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16874-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 538EA8CE140
-	for <lists+linux-doc@lfdr.de>; Fri, 24 May 2024 09:00:23 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AB8E8CE16B
+	for <lists+linux-doc@lfdr.de>; Fri, 24 May 2024 09:16:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D1CFF1F221EF
-	for <lists+linux-doc@lfdr.de>; Fri, 24 May 2024 07:00:22 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E5D7F2829AF
+	for <lists+linux-doc@lfdr.de>; Fri, 24 May 2024 07:16:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9219282C88;
-	Fri, 24 May 2024 07:00:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 443725A0FE;
+	Fri, 24 May 2024 07:16:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UcNs+27M"
+	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="y2ijOrSi"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2763D531;
-	Fri, 24 May 2024 07:00:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13C63328DB
+	for <linux-doc@vger.kernel.org>; Fri, 24 May 2024 07:16:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716534018; cv=none; b=KBikYoXYgegZ+S8CCxZV3ThzyK1fiW+JPF6FF0AqOYt6vY0WtW4dRw+HwpDKVZg83dG/0zzJZhpU4DLGy4ZOp2JLwGiZ1kH8hNB/awC3dooHN8zw5PL7xjM0Po+G6vgDogR7KY2NNXOE/UDoYpAcwXZ/19pgaEbwCuniNvV9J88=
+	t=1716534995; cv=none; b=Hq0UZnMG0uht7HSiHIU+cgjOyOqN2ev8g7toRK2KvmYYanYPmLHxnBMZgqoPIHip+IBRD6F8DVhQx5VnN7GCeLVRaICNpRp5B2yV4fkOyhTsAaqzvjOfNmIOL8F/uDFEoFHKhDfZKZSsi5xLFAV6QvfgBYlT0qRpd15Pknj70gw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716534018; c=relaxed/simple;
-	bh=/Q4wNIHNpd2hDoumqVKVM6V4/z4G0gvW+08vuommuZE=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=oJ77lc+RpeA8vvEx931fOucZcZKkKIHs7VfNAJzdpjNlq9Ci2Ehb4LdAetcM2VmN9JVGPAnJZHKowOBVFpQxAQGT/fNec9AUjlrPQs3o8bebANbtAWU0qofJDsjzi56t48SCjNASLrZoOparOdmLqrOnGIF8cxvIO7R/SMB1aHY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UcNs+27M; arc=none smtp.client-ip=209.85.128.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4202c1d19d5so59255325e9.2;
-        Fri, 24 May 2024 00:00:16 -0700 (PDT)
+	s=arc-20240116; t=1716534995; c=relaxed/simple;
+	bh=L5dtxTCrzKCyV3a12hQ+4vBbPtIXGLsw+Pi3J3zri8U=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LkcEoX2VcrnTTDseEELjJ2gzPeL8xDd2lYiOOwuMLsiaj881xvX02G2mCGe3NbpZ0gIcUKhrFlmXKjdSiL+lAMGPt2qjqmyzfB9QV5A/glMy/0nj/oalXiQmCHZkDJG6+rvuV02A8hWDYe7uhQdRHve3Gh6PB7HkR78sVeFr/iA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=y2ijOrSi; arc=none smtp.client-ip=209.85.215.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-662aeb8d157so2783531a12.1
+        for <linux-doc@vger.kernel.org>; Fri, 24 May 2024 00:16:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716534015; x=1717138815; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=1jDrrOeeCstNF+I2pCUYZNOgXXubZuPEt1qmBzr+ubA=;
-        b=UcNs+27MVFe7TmpsV9OnzDUWaf/vKjA2mILmh3WX1JM228RvZoEV1X7f8M3JBn0CdK
-         zUNC6QekAZjOia8BPRq9ybVYJZIVn4j3Sn0MS40E5bxlkfZqNuG4zC5R7BZxmjaT/I9c
-         NT711DZMNOR5Gcc2nD1ES311X1mKK59Yv4zf7yxLQKtZA5KDSveK9trDxUDEQwT2NWb9
-         CsgPj7DwIpZZtyBQ0X6huYcRs6K3JvbebMHo/7f7hvw6OoQcG7/tPxfSJa0gFsl4GcDK
-         Xu7WOIfhgb8Uuy5UT+vzM5eyGx3qXlJO82U1Fk6OFq//J70xxvJYf0gqfXIWCUDH8FBG
-         xnig==
+        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1716534992; x=1717139792; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=G5b7QgiVlAzfw1l+FA1jhqowDIFfn6XCF4+Yt8iGQO0=;
+        b=y2ijOrSiwn8kujMA0869ALapDPpI42dWw9fvOBWqX8Y8XIpcqYXkUkkubl7IuDmmgr
+         UXgs/FYwWQ6cMuIo093RxaHWEmjtTlpcPKupttpXoO4fgnH95uo/yaxP5aiTe2K0XTK6
+         OB8Hf49CztFRHosI56opMlAGwTeRKeLa7jDUtXNV3n1p1lK8CwTzFsc2CcTBhW2OQl9c
+         y5qGjjAYEsJqZqRGr4HQu2IUQ11hKqzITyzCBxl3gLhHVB9p4BNs9O6j/HB/qLxm07aS
+         +zTKlMC5xlJAWs8LHA+/ivB1Cb7gpZt6kBbkLyaNpACXt8lTMYOy0j5JSg5MfxhV1IOJ
+         uvgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716534015; x=1717138815;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=1jDrrOeeCstNF+I2pCUYZNOgXXubZuPEt1qmBzr+ubA=;
-        b=vCrQl/8Q8id+tnf+Iws70QcI/mMB55/NlqjaDuJok17TN7vAjQN2Oq1Nxfyv3OEl6i
-         C1QvJ8m1I5DJ+YXQltvS2r3cYoMamk0bxa0wkmNFNQ/HRJ90vJ7yAheej1pYhcDwFhsD
-         7FFqNo8MP/ZMicjFLRi8L299lKH9gCHTmdkehIDTX1dlSTvK1dK+ZKTVe1qwvvYUDC8C
-         w+nBX+MG8c3Rmm2zufY7JNKyerOYJzi4ta9V+0JF1kfrC7xgc1QA3xFIOEyy8P9vQWij
-         FAUAN2TqkIbbMY7jBjRrkfMm7seZdgcGBmTC8PkMkRGzwIvn8UqhT7bxGDdLGaCyMVMU
-         PLrg==
-X-Forwarded-Encrypted: i=1; AJvYcCUjrNguvc0YsZ+r4nxn/TUWHogDNliFe8hkR6r+uSozj2jG3VX59FFnpuCa5olgOsyCp9OxC/wh8qJzs8WpRwX1eI6pEyvsFTamA3xzWzmV+BotEqEpTyJ7N7/MTIeX03zbzJBkFwmmILJlxkfullH9B6pwpXtcXQtA0t1xe58jpvG84x4=
-X-Gm-Message-State: AOJu0YxpNAtZrF/b1X0Wjh7oMnZcqGcwU9KOT5wH8P1NbvlPvp8BwtJS
-	4tCDCxe/JXml/8AsG2dfc7cual4gQO6sO36y4XgwwEYdZ+27V840
-X-Google-Smtp-Source: AGHT+IHD8KmPhpdD/4cbqFXK3z9zYCfEVbD1T+dG+fybQPZ2mYEegosbtymPbM7n/BIkWOUA3NieUQ==
-X-Received: by 2002:a05:600c:54e3:b0:41c:2499:fa0e with SMTP id 5b1f17b1804b1-421089b2388mr10645125e9.4.1716534014779;
-        Fri, 24 May 2024 00:00:14 -0700 (PDT)
-Received: from nsa.fritz.box ([2001:a61:35f9:9001:40df:88bb:5090:7ab6])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42100e4a3c1sm45027685e9.0.2024.05.24.00.00.14
+        d=1e100.net; s=20230601; t=1716534992; x=1717139792;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=G5b7QgiVlAzfw1l+FA1jhqowDIFfn6XCF4+Yt8iGQO0=;
+        b=MZm3mLyihOw7R7Kl28U+6c3O1VS1azaClKlLXhOFGEn5Qu67nPsJUoDxxGW5c+3wTA
+         pTDK0ROlj4VGnvrvb2e9mzjSyFJj3Vtf2mMJCGiXJUdCQrUih3brGnttUemC9iLEzqEG
+         os15o0YZRJju3alBWjqWjmykvFfJ809fLeqqKjV00NJ6Q7/rEDU1lwzBn/M6U3sSsZcY
+         JW+J6i4f3jHnl6QqEROAam294Ea8qqhZ8giDBDCf2D+j6Hjrad1C3teohyBWGVkWnvVl
+         DJkaejmz01Ea8L/4ofobhk0YoZMx1YLAmXf7oShAQG2296ItE1DUq3Rdhij1wBJ37k2R
+         nD0g==
+X-Forwarded-Encrypted: i=1; AJvYcCW8/5rieVWrrQ2QnlIPxq1eBN27KDXcBUTIkGSExC8H7lNilyApRsXklwYc4IpIoY9JY+dckNEiJzvv9/7ZgXMTbB5MVyNrXf2Z
+X-Gm-Message-State: AOJu0YwROqiOgl+wFJVRpVMkEQBcw2W7mp1RRDuYueVfAx+ihZuya+Wz
+	g4WPnQUKInN1yMDLvES7Em33NUQ90vDVACkOX3Ev4NKVpjPcELq3Wu4DTBRsTaU=
+X-Google-Smtp-Source: AGHT+IEDTqTA76mWXJ68mdGF74fNSFi0v4c+GSsV/TK7Kq0h+0BnWlexLZoWy2cb8clnmvmHxGdpVw==
+X-Received: by 2002:a17:90a:ec12:b0:2bf:5992:31ae with SMTP id 98e67ed59e1d1-2bf5ee1cb71mr1385379a91.20.1716534992281;
+        Fri, 24 May 2024 00:16:32 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2bf5f9b28dcsm742083a91.52.2024.05.24.00.16.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 May 2024 00:00:14 -0700 (PDT)
-Message-ID: <58e17135b41da7eba8afd5d8fb5f25bcaffa7288.camel@gmail.com>
-Subject: Re: [PATCH v2] drivers: hwmon: max31827: Add PEC support
-From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
-To: Guenter Roeck <linux@roeck-us.net>, Radu Sabau <radu.sabau@analog.com>
-Cc: Jean Delvare <jdelvare@suse.com>, Jonathan Corbet <corbet@lwn.net>, 
-	linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Date: Fri, 24 May 2024 09:00:13 +0200
-In-Reply-To: <e52a86de-ead6-40d3-b652-461a90bd5942@roeck-us.net>
-References: <20240523121057.5689-1-radu.sabau@analog.com>
-	 <e52a86de-ead6-40d3-b652-461a90bd5942@roeck-us.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.1 (3.52.1-1.fc40) 
+        Fri, 24 May 2024 00:16:31 -0700 (PDT)
+Date: Fri, 24 May 2024 00:16:27 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc: Alexandre Ghiti <alex@ghiti.fr>, paul.walmsley@sifive.com,
+	rick.p.edgecombe@intel.com, broonie@kernel.org,
+	Szabolcs.Nagy@arm.com, kito.cheng@sifive.com, keescook@chromium.org,
+	ajones@ventanamicro.com, conor.dooley@microchip.com,
+	cleger@rivosinc.com, atishp@atishpatra.org, bjorn@rivosinc.com,
+	samuel.holland@sifive.com, conor@kernel.org,
+	linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-mm@kvack.org, linux-arch@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, corbet@lwn.net, palmer@dabbelt.com,
+	aou@eecs.berkeley.edu, robh+dt@kernel.org,
+	krzysztof.kozlowski+dt@linaro.org, oleg@redhat.com,
+	akpm@linux-foundation.org, arnd@arndb.de, ebiederm@xmission.com,
+	Liam.Howlett@oracle.com, vbabka@suse.cz, lstoakes@gmail.com,
+	shuah@kernel.org, brauner@kernel.org, andy.chiu@sifive.com,
+	jerry.shih@sifive.com, hankuan.chen@sifive.com,
+	greentime.hu@sifive.com, evan@rivosinc.com, xiao.w.wang@intel.com,
+	charlie@rivosinc.com, apatel@ventanamicro.com,
+	mchitale@ventanamicro.com, dbarboza@ventanamicro.com,
+	sameo@rivosinc.com, shikemeng@huaweicloud.com, willy@infradead.org,
+	vincent.chen@sifive.com, guoren@kernel.org, samitolvanen@google.com,
+	songshuaishuai@tinylab.org, gerg@kernel.org, heiko@sntech.de,
+	bhe@redhat.com, jeeheng.sia@starfivetech.com, cyy@cyyself.name,
+	maskray@google.com, ancientmodern4@gmail.com,
+	mathis.salmen@matsal.de, cuiyunhui@bytedance.com,
+	bgray@linux.ibm.com, mpe@ellerman.id.au, baruch@tkos.co.il,
+	alx@kernel.org, david@redhat.com, catalin.marinas@arm.com,
+	revest@chromium.org, josh@joshtriplett.org, shr@devkernel.io,
+	deller@gmx.de, omosnace@redhat.com, ojeda@kernel.org,
+	jhubbard@nvidia.com
+Subject: Re: [PATCH v3 13/29] riscv mmu: write protect and shadow stack
+Message-ID: <ZlA+yxsiHtyUJ/5/@debug.ba.rivosinc.com>
+References: <20240403234054.2020347-1-debug@rivosinc.com>
+ <20240403234054.2020347-14-debug@rivosinc.com>
+ <276fa17b-cd62-433d-b0ec-fa98c65a46ca@ghiti.fr>
+ <ZkJOs6ENmDHFsq/U@debug.ba.rivosinc.com>
+ <CAHVXubhS3CJ87DxC+9+8z6CiWDV1bQ8nK+iOZUDvMiT7vszFLA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAHVXubhS3CJ87DxC+9+8z6CiWDV1bQ8nK+iOZUDvMiT7vszFLA@mail.gmail.com>
 
-On Thu, 2024-05-23 at 07:19 -0700, Guenter Roeck wrote:
-> On Thu, May 23, 2024 at 03:10:56PM +0300, Radu Sabau wrote:
-> > Add support for PEC by attaching PEC attribute to the i2c device.
-> > Add pec_store and pec_show function for accesing the "pec" file.
-> >=20
-> > Signed-off-by: Radu Sabau <radu.sabau@analog.com>
-> > ---
->=20
-> Change log missing.
->=20
-> > =C2=A0Documentation/hwmon/max31827.rst | 13 +++++--
-> > =C2=A0drivers/hwmon/max31827.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 | 64 ++++++++++++++++++++++++++++++++
-> > =C2=A02 files changed, 74 insertions(+), 3 deletions(-)
-> >=20
-> > diff --git a/Documentation/hwmon/max31827.rst b/Documentation/hwmon/max=
-31827.rst
-> > index 44ab9dc064cb..9c11a9518c67 100644
-> > --- a/Documentation/hwmon/max31827.rst
-> > +++ b/Documentation/hwmon/max31827.rst
-> > @@ -131,7 +131,14 @@ The Fault Queue bits select how many consecutive t=
-emperature
-> > faults must occur
-> > =C2=A0before overtemperature or undertemperature faults are indicated i=
-n the
-> > =C2=A0corresponding status bits.
-> > =C2=A0
-> > -Notes
-> > ------
-> > +PEC Support
-> > +-----------
-> > +
-> > +When reading a register value, the PEC byte is computed and sent by th=
-e chip.
-> > +
-> > +PEC on word data transaction respresents a signifcant increase in band=
-witdh
-> > +usage (+33% for both write and reads) in normal conditions.
-> > =C2=A0
-> > -PEC is not implemented.
-> > +Since this operation implies there will be an extra delay to each
-> > +transaction, PEC can be disabled or enabled through sysfs.
-> > +Just write 1=C2=A0 to the "pec" file for enabling PEC and 0 for disabl=
-ing it.
-> > diff --git a/drivers/hwmon/max31827.c b/drivers/hwmon/max31827.c
-> > index f8a13b30f100..e86f8890ee72 100644
-> > --- a/drivers/hwmon/max31827.c
-> > +++ b/drivers/hwmon/max31827.c
-> > @@ -24,6 +24,7 @@
-> > =C2=A0
-> > =C2=A0#define MAX31827_CONFIGURATION_1SHOT_MASK	BIT(0)
-> > =C2=A0#define MAX31827_CONFIGURATION_CNV_RATE_MASK	GENMASK(3, 1)
-> > +#define MAX31827_CONFIGURATION_PEC_EN_MASK	BIT(4)
-> > =C2=A0#define MAX31827_CONFIGURATION_TIMEOUT_MASK	BIT(5)
-> > =C2=A0#define MAX31827_CONFIGURATION_RESOLUTION_MASK	GENMASK(7, 6)
-> > =C2=A0#define MAX31827_CONFIGURATION_ALRM_POL_MASK	BIT(8)
-> > @@ -475,6 +476,54 @@ static ssize_t temp1_resolution_store(struct devic=
-e *dev,
-> > =C2=A0
-> > =C2=A0static DEVICE_ATTR_RW(temp1_resolution);
-> > =C2=A0
-> > +static ssize_t pec_show(struct device *dev, struct device_attribute *d=
-evattr,
-> > +			char *buf)
-> > +{
-> > +	struct i2c_client *client =3D to_i2c_client(dev);
-> > +
-> > +	return scnprintf(buf, PAGE_SIZE, "%d\n", !!(client->flags &
-> > I2C_CLIENT_PEC));
-> > +}
-> > +
-> > +static ssize_t pec_store(struct device *dev, struct device_attribute *=
-devattr,
-> > +			 const char *buf, size_t count)
-> > +{
-> > +	struct max31827_state *st =3D dev_get_drvdata(dev);
-> > +	struct i2c_client *client =3D to_i2c_client(dev);
-> > +	unsigned int val;
-> > +	int err;
-> > +
-> > +	err =3D kstrtouint(buf, 10, &val);
-> > +	if (err < 0)
-> > +		return err;
-> > +
-> > +	switch (val) {
-> > +	case 0:
-> > +		err =3D regmap_update_bits(st->regmap, MAX31827_CONFIGURATION_REG,
-> > +					 MAX31827_CONFIGURATION_PEC_EN_MASK,
-> > +					 val);
->=20
-> While correct, this is misleading. Should write 0.
->=20
-> > +		if (err)
-> > +			return err;
-> > +
-> > +		client->flags &=3D ~I2C_CLIENT_PEC;
-> > +		break;
-> > +	case 1:
-> > +		err =3D regmap_update_bits(st->regmap, MAX31827_CONFIGURATION_REG,
-> > +					 MAX31827_CONFIGURATION_PEC_EN_MASK,
-> > +					 val);
->=20
-> This is wrong. s/val/MAX31827_CONFIGURATION_PEC_EN_MASK/
->=20
->=20
+On Thu, May 23, 2024 at 04:59:30PM +0200, Alexandre Ghiti wrote:
+>Hi Deepak,
+>
+>On Mon, May 13, 2024 at 7:32 PM Deepak Gupta <debug@rivosinc.com> wrote:
+>>
+>> On Sun, May 12, 2024 at 06:31:24PM +0200, Alexandre Ghiti wrote:
+>> >On 04/04/2024 01:35, Deepak Gupta wrote:
+>> >>`fork` implements copy on write (COW) by making pages readonly in child
+>> >>and parent both.
+>> >>
+>> >>ptep_set_wrprotect and pte_wrprotect clears _PAGE_WRITE in PTE.
+>> >>Assumption is that page is readable and on fault copy on write happens.
+>> >>
+>> >>To implement COW on such pages,
+>> >
+>> >
+>> >I guess you mean "shadow stack pages" here.
+>>
+>> Yes I meant shadow stack pages. Will fix the message.
+>>
+>> >
+>> >
+>> >>  clearing up W bit makes them XWR = 000.
+>> >>This will result in wrong PTE setting which says no perms but V=1 and PFN
+>> >>field pointing to final page. Instead desired behavior is to turn it into
+>> >>a readable page, take an access (load/store) fault on sspush/sspop
+>> >>(shadow stack) and then perform COW on such pages.
+>> >>This way regular reads
+>> >>would still be allowed and not lead to COW maintaining current behavior
+>> >>of COW on non-shadow stack but writeable memory.
+>> >>
+>> >>On the other hand it doesn't interfere with existing COW for read-write
+>> >>memory. Assumption is always that _PAGE_READ must have been set and thus
+>> >>setting _PAGE_READ is harmless.
+>> >>
+>> >>Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+>> >>---
+>> >>  arch/riscv/include/asm/pgtable.h | 12 ++++++++++--
+>> >>  1 file changed, 10 insertions(+), 2 deletions(-)
+>> >>
+>> >>diff --git a/arch/riscv/include/asm/pgtable.h b/arch/riscv/include/asm/pgtable.h
+>> >>index 9b837239d3e8..7a1c2a98d272 100644
+>> >>--- a/arch/riscv/include/asm/pgtable.h
+>> >>+++ b/arch/riscv/include/asm/pgtable.h
+>> >>@@ -398,7 +398,7 @@ static inline int pte_special(pte_t pte)
+>> >>  static inline pte_t pte_wrprotect(pte_t pte)
+>> >>  {
+>> >>-     return __pte(pte_val(pte) & ~(_PAGE_WRITE));
+>> >>+     return __pte((pte_val(pte) & ~(_PAGE_WRITE)) | (_PAGE_READ));
+>> >>  }
+>> >>  /* static inline pte_t pte_mkread(pte_t pte) */
+>> >>@@ -581,7 +581,15 @@ static inline pte_t ptep_get_and_clear(struct mm_struct *mm,
+>> >>  static inline void ptep_set_wrprotect(struct mm_struct *mm,
+>> >>                                    unsigned long address, pte_t *ptep)
+>> >>  {
+>> >>-     atomic_long_and(~(unsigned long)_PAGE_WRITE, (atomic_long_t *)ptep);
+>> >>+     volatile pte_t read_pte = *ptep;
+>
+>Sorry I missed this ^. You need to use ptep_get() to get the value of
+>a pte. 
 
-Then, maybe use regmap_set_bits()...
+Noted. will fix it.
 
-- Nuno S=C3=A1
+>And why do you need the volatile here?
 
+I don't remember the reason. It's probably not needed here.
+But I am sure I was debugging something and trying everything.
+And this probably slipped sanitization before sending patches.
+
+Will fix it.
+>
+>> >>+     /*
+>> >>+      * ptep_set_wrprotect can be called for shadow stack ranges too.
+>> >>+      * shadow stack memory is XWR = 010 and thus clearing _PAGE_WRITE will lead to
+>> >>+      * encoding 000b which is wrong encoding with V = 1. This should lead to page fault
+>> >>+      * but we dont want this wrong configuration to be set in page tables.
+>> >>+      */
+>> >>+     atomic_long_set((atomic_long_t *)ptep,
+>> >>+                     ((pte_val(read_pte) & ~(unsigned long)_PAGE_WRITE) | _PAGE_READ));
+>> >>  }
+>> >>  #define __HAVE_ARCH_PTEP_CLEAR_YOUNG_FLUSH
+>> >
+>> >
+>> >Doesn't making the shadow stack page readable allow "normal" loads to
+>> >access the page? If it does, isn't that an issue (security-wise)?
+>>
+>> When shadow stack permissions are there (i.e. R=0, W=1, X=0), then also shadow stack is
+>> readable through "normal" loads. So nothing changes when it converts into a readonly page
+>> from page permissions perspective.
+>>
+>> Security-wise it's not a concern because from threat modeling perspective, if attacker had
+>> read-write primitives (via some bug in program) available to read and write address space
+>> of process/task; then they would have availiblity of return addresses on normal stack. It's
+>> the write primitive that is concerning and to be protected against. And that's why shadow stack
+>> is not writeable using "normal" stores.
+>>
+>> >
+>
+>Thanks for the explanation!
+>
+>With the use of ptep_get(), you can add:
+>
+>Reviewed-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+>
+>Thanks,
+>
+>Alex
 
