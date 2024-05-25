@@ -1,224 +1,164 @@
-Return-Path: <linux-doc+bounces-16975-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-16977-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7366E8CED5D
-	for <lists+linux-doc@lfdr.de>; Sat, 25 May 2024 03:27:58 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 363FE8CEDFC
+	for <lists+linux-doc@lfdr.de>; Sat, 25 May 2024 07:50:08 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 29A81281BDE
-	for <lists+linux-doc@lfdr.de>; Sat, 25 May 2024 01:27:57 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 677951C20BD3
+	for <lists+linux-doc@lfdr.de>; Sat, 25 May 2024 05:50:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 012496FB2;
-	Sat, 25 May 2024 01:27:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 24E91AD56;
+	Sat, 25 May 2024 05:50:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="ipRCtaUF"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="U+5NR9Jw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4CC246A4;
-	Sat, 25 May 2024 01:27:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0BED138E;
+	Sat, 25 May 2024 05:49:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716600450; cv=none; b=qZ05I4oDQMAbV1AFShgvnZnVrDRAV8KwMtDUWKhMVrlvTLAxD2A2X9gP+pNNaiNw7m6ue6yQVhUWY+SrXNRnC/2DUjAx16Kdjj5/M/u4MRN0RDas/aJgHc8cPZtKkf1RchgJCviKQ0BSzugZh/O37pNoj9QW30K2iQVlZ7xT7lY=
+	t=1716616203; cv=none; b=VYAC+d37bcNHyYpI/96WQ4WvOYXLnaCnR5W+rD6nxFzUu+7mCQNH5FeoNVlyMhUmQD0vIvPBYmgrD+EFkKRK2SMWT0l0yfMd0y8/8myaDO4KQ/vYYrtvZC/GBqLF+2H19Af4/BSSwC0KoSM7+ldDueWPKDY+x6fcN879xQAa4l0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716600450; c=relaxed/simple;
-	bh=h8/x/nojwmlf2HnpF6hwawLk+eFeNc0MudxL4faEzdc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=SO9u66ES9jmufzhwV+q8E/wAPTApWVavPgfcSxhNCpYa6rtxC8zH6cKH5hjRSNLXnZRLihcvPXnMmpSVw2doRjNXElfOyZ8HcPUOnpWGLUgmN1ACKVUbdLjGcjGoqW7HUzstlnAZERDYtjBdUhOorRooSWhCFHGbJgi8bPxqLsg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=ipRCtaUF; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44P0JiMu017055;
-	Sat, 25 May 2024 01:27:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	08bJfs2H660VcmuoqOaZBlaE5FuMCkgrQv4/h/sI1t8=; b=ipRCtaUFB/e5y8Z/
-	w4yujab4GiKxbBKkEj017WTYf+IxvmoJiTTCBLZqJG8QZrczXvKSRtwwZQshLFqs
-	EsGc36rn8G7yp8Oce5jkbKDZGivWzJTrOohvY4BWKGCRVpsUjdYei6onQt8ieuqH
-	q7hlyKiaGOM5mayr0EqDVP+4Sy+P2aniQbG3BtoJKdkTuiGpR7MAl8Xp+eyZR+p/
-	y6eWHr0+Do4IZuTgT7osjBN/IvGy9LLMj+Dh73LSgJOm7Kh+c4b2T4c3A9n5wFn5
-	+q4JWH8xI8CCZP2cl7tkFGypRlZ4h5F4Zpz1hvOG3VVxX8d/hHgD40XRAHr0fV4a
-	FYV0VQ==
-Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3yaa9turp7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 25 May 2024 01:27:01 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
-	by NALASPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 44P1Qxc7032128
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 25 May 2024 01:27:00 GMT
-Received: from hu-clew-lv.qualcomm.com (10.49.16.6) by
- nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Fri, 24 May 2024 18:26:59 -0700
-From: Chris Lew <quic_clew@quicinc.com>
-Date: Fri, 24 May 2024 18:26:43 -0700
-Subject: [PATCH v2 4/4] remoteproc: qcom_q6v5_pas: Add hwspinlock bust on
- stop
+	s=arc-20240116; t=1716616203; c=relaxed/simple;
+	bh=VSJIf4tmyz34+ryR8Cz9iQWIiMNUye0lMZyO2dQZvMY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Iq/NeGipyNNescnUHF96TzVwbHHuDzKorDCI4JgSm5xRqdTy8jSRIOWwfxmUmxj2oFnMk8Fi1l1Rgm3ieUaRGtWjlrHmbcvVmJv/FKkBfqSqc2QOOmvvPEmcYOoK0A64MomY7rS4HmdfQcGzT/osjLEK4/GK7FVLsduLiO7Ef/w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=U+5NR9Jw; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=NjAIpWnGAztCMT7g7qkBL9r84roWJZLVxyIj65a/6/g=; b=U+5NR9JwCWW91cWlPKNvy1chd+
+	u0P/4HzM54MNe7A5vcQkxEZIlUb+dWfmrzRfJBHK7ADk3m/B4A/g3f6qMV8dGnYxd3wwq55EjRizS
+	5Y+EPpe2PN/GQIounZZSCkN/jGS6Yr1LjDieV11c/QyKfnzCgNVtzXRhlxBp8T0GznxoyiwSXM5HF
+	6eUbbl0Gwi3JXDOqrdPy99p+rR/7mwSWbXPya1yElAbc1ZkSoTLh0mVeGr+5zhHJ6OFisoRLbNN5A
+	Xx4xVSxUaf6oksx+MpjfGzzO9xL5YETFCy1jlTvVuQ0v3XAO+xr7UnoGj7Fa2estAJlHRGJ7LJepO
+	6Qz1N4sw==;
+Received: from [50.53.4.147] (helo=[192.168.254.15])
+	by bombadil.infradead.org with esmtpsa (Exim 4.97.1 #2 (Red Hat Linux))
+	id 1sAkI1-0000000ASst-1eDf;
+	Sat, 25 May 2024 05:49:57 +0000
+Message-ID: <9ce0c222-c80c-4049-8746-d74e612c3030@infradead.org>
+Date: Fri, 24 May 2024 22:49:54 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/2] proc: restrict /proc/pid/mem
+To: Adrian Ratiu <adrian.ratiu@collabora.com>, linux-fsdevel@vger.kernel.org
+Cc: linux-security-module@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org,
+ kernel@collabora.com, gbiv@google.com, ryanbeltran@google.com,
+ inglorion@google.com, ajordanr@google.com, jorgelo@chromium.org,
+ Guenter Roeck <groeck@chromium.org>, Doug Anderson <dianders@chromium.org>,
+ Kees Cook <keescook@chromium.org>, Jann Horn <jannh@google.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Christian Brauner <brauner@kernel.org>, Mike Frysinger <vapier@chromium.org>
+References: <20240524192858.3206-1-adrian.ratiu@collabora.com>
+ <20240524192858.3206-2-adrian.ratiu@collabora.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20240524192858.3206-2-adrian.ratiu@collabora.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-ID: <20240524-hwspinlock-bust-v2-4-fb88fd17ca0b@quicinc.com>
-References: <20240524-hwspinlock-bust-v2-0-fb88fd17ca0b@quicinc.com>
-In-Reply-To: <20240524-hwspinlock-bust-v2-0-fb88fd17ca0b@quicinc.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Baolin Wang
-	<baolin.wang@linux.alibaba.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        "Ingo
- Molnar" <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-        Waiman Long
-	<longman@redhat.com>, Boqun Feng <boqun.feng@gmail.com>,
-        Jonathan Corbet
-	<corbet@lwn.net>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring
-	<robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
-	<conor+dt@kernel.org>,
-        Manivannan Sadhasivam
-	<manivannan.sadhasivam@linaro.org>,
-        Konrad Dybcio <konrad.dybcio@linaro.org>
-CC: <linux-remoteproc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
-        <devicetree@vger.kernel.org>, Chris Lew <quic_clew@quicinc.com>,
-        "Richard
- Maina" <quic_rmaina@quicinc.com>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1716600418; l=3371;
- i=quic_clew@quicinc.com; s=20240508; h=from:subject:message-id;
- bh=04VWK3g6daj/n9WPpcOfbHpyv8+UkjZcCDj0SDZ6cE8=;
- b=rkRDw9j/Vbw5Sfy9p7uhuLgqMbtCxt99HCUMSJLbzl3BX0avLe+RswqlwChprCCCiBSsJvtw4
- sPg+0yWJYFOCCXD7VnFeTi0qhFwQFiQWSxDSzDNPhRzOaThpgTxVcBh
-X-Developer-Key: i=quic_clew@quicinc.com; a=ed25519;
- pk=lEYKFaL1H5dMC33BEeOULLcHAwjKyHkTLdLZQRDTKV4=
-X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: 2BqomTspuyfdFmaWviBMMXYn6-8mCn4L
-X-Proofpoint-ORIG-GUID: 2BqomTspuyfdFmaWviBMMXYn6-8mCn4L
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.12.28.16
- definitions=2024-05-24_09,2024-05-24_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxscore=0
- spamscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0
- malwarescore=0 adultscore=0 suspectscore=0 phishscore=0 impostorscore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2405170001 definitions=main-2405250010
 
-From: Richard Maina <quic_rmaina@quicinc.com>
+Hi--
 
-When remoteproc goes down unexpectedly this results in a state where any
-acquired hwspinlocks will remain locked possibly resulting in deadlock.
-In order to ensure all locks are freed we include a call to
-qcom_smem_bust_hwspin_lock_by_host() during remoteproc shutdown.
+On 5/24/24 12:28 PM, Adrian Ratiu wrote:
+> diff --git a/security/Kconfig b/security/Kconfig
+> index 412e76f1575d..0cd73f848b5a 100644
+> --- a/security/Kconfig
+> +++ b/security/Kconfig
+> @@ -183,6 +183,74 @@ config STATIC_USERMODEHELPER_PATH
+>  	  If you wish for all usermode helper programs to be disabled,
+>  	  specify an empty string here (i.e. "").
+>  
+> +menu "Procfs mem restriction options"
+> +
+> +config PROC_MEM_RESTRICT_FOLL_FORCE_DEFAULT
+> +	bool "Restrict all FOLL_FORCE flag usage"
+> +	default n
+> +	help
+> +	  Restrict all FOLL_FORCE usage during /proc/*/mem RW.
+> +	  Debuggerg like GDB require using FOLL_FORCE for basic
 
-For qcom_q6v5_pas remoteprocs, each remoteproc has an assigned smem
-host_id. Remoteproc can pass this id to smem to try and bust the lock on
-remoteproc stop.
+	  Debuggers
 
-This edge case only occurs with q6v5_pas watchdog crashes. The error
-fatal case has handling to clear the hwspinlock before the error fatal
-interrupt is triggered.
+> +	  functionality.
+> +
+> +config PROC_MEM_RESTRICT_FOLL_FORCE_PTRACE_DEFAULT
+> +	bool "Restrict FOLL_FORCE usage except for ptracers"
+> +	default n
+> +	help
+> +	  Restrict FOLL_FORCE usage during /proc/*/mem RW, except
+> +	  for ptracer processes. Debuggerg like GDB require using
 
-Signed-off-by: Richard Maina <quic_rmaina@quicinc.com>
-Signed-off-by: Chris Lew <quic_clew@quicinc.com>
----
- drivers/remoteproc/qcom_q6v5_pas.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+	                         Debuggers
 
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 54d8005d40a3..8458bcfe9e19 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -52,6 +52,7 @@ struct adsp_data {
- 	const char *ssr_name;
- 	const char *sysmon_name;
- 	int ssctl_id;
-+	unsigned int smem_host_id;
- 
- 	int region_assign_idx;
- 	int region_assign_count;
-@@ -81,6 +82,7 @@ struct qcom_adsp {
- 	int lite_pas_id;
- 	unsigned int minidump_id;
- 	int crash_reason_smem;
-+	unsigned int smem_host_id;
- 	bool decrypt_shutdown;
- 	const char *info_name;
- 
-@@ -399,6 +401,9 @@ static int adsp_stop(struct rproc *rproc)
- 	if (handover)
- 		qcom_pas_handover(&adsp->q6v5);
- 
-+	if (adsp->smem_host_id)
-+		ret = qcom_smem_bust_hwspin_lock_by_host(adsp->smem_host_id);
-+
- 	return ret;
- }
- 
-@@ -727,6 +732,7 @@ static int adsp_probe(struct platform_device *pdev)
- 	adsp->pas_id = desc->pas_id;
- 	adsp->lite_pas_id = desc->lite_pas_id;
- 	adsp->info_name = desc->sysmon_name;
-+	adsp->smem_host_id = desc->smem_host_id;
- 	adsp->decrypt_shutdown = desc->decrypt_shutdown;
- 	adsp->region_assign_idx = desc->region_assign_idx;
- 	adsp->region_assign_count = min_t(int, MAX_ASSIGN_COUNT, desc->region_assign_count);
-@@ -1196,6 +1202,7 @@ static const struct adsp_data sm8550_adsp_resource = {
- 	.ssr_name = "lpass",
- 	.sysmon_name = "adsp",
- 	.ssctl_id = 0x14,
-+	.smem_host_id = 2,
- };
- 
- static const struct adsp_data sm8550_cdsp_resource = {
-@@ -1216,6 +1223,7 @@ static const struct adsp_data sm8550_cdsp_resource = {
- 	.ssr_name = "cdsp",
- 	.sysmon_name = "cdsp",
- 	.ssctl_id = 0x17,
-+	.smem_host_id = 5,
- };
- 
- static const struct adsp_data sm8550_mpss_resource = {
-@@ -1236,6 +1244,7 @@ static const struct adsp_data sm8550_mpss_resource = {
- 	.ssr_name = "mpss",
- 	.sysmon_name = "modem",
- 	.ssctl_id = 0x12,
-+	.smem_host_id = 1,
- 	.region_assign_idx = 2,
- 	.region_assign_count = 1,
- 	.region_assign_vmid = QCOM_SCM_VMID_MSS_MSA,
-@@ -1275,6 +1284,7 @@ static const struct adsp_data sm8650_cdsp_resource = {
- 	.ssr_name = "cdsp",
- 	.sysmon_name = "cdsp",
- 	.ssctl_id = 0x17,
-+	.smem_host_id = 5,
- 	.region_assign_idx = 2,
- 	.region_assign_count = 1,
- 	.region_assign_shared = true,
-@@ -1299,6 +1309,7 @@ static const struct adsp_data sm8650_mpss_resource = {
- 	.ssr_name = "mpss",
- 	.sysmon_name = "modem",
- 	.ssctl_id = 0x12,
-+	.smem_host_id = 1,
- 	.region_assign_idx = 2,
- 	.region_assign_count = 3,
- 	.region_assign_vmid = QCOM_SCM_VMID_MSS_MSA,
+> +	  FOLL_FORCE for basic functionality.
+> +
+> +config PROC_MEM_RESTRICT_OPEN_READ_DEFAULT
+> +	bool "Restrict all open() read access"
+> +	default n
+> +	help
+> +	  Restrict all open() read access to /proc/*/mem files.
+> +	  Use with caution: this can break init systems, debuggers,
+> +	  container supervisors and other tasks using /proc/*/mem.
+> +
+> +config PROC_MEM_RESTRICT_OPEN_READ_PTRACE_DEFAULT
+> +	bool "Restrict open() for reads except for ptracers"
+> +	default n
+> +	help
+> +	  Restrict open() read access except for ptracer processes.
+> +	  Use with caution: this can break init systems, debuggers,
+> +	  container supervisors and other non-ptrace capable tasks
+> +	  using /proc/*/mem.
+> +
+> +config PROC_MEM_RESTRICT_OPEN_WRITE_DEFAULT
+> +	bool "Restrict all open() write access"
+> +	default n
+> +	help
+> +	  Restrict all open() write access to /proc/*/mem files.
+> +	  Debuggers like GDB and some container supervisors tasks
+> +	  require opening as RW and may break.
+> +
+> +config PROC_MEM_RESTRICT_OPEN_WRITE_PTRACE_DEFAULT
+> +	bool "Restrict open() for writes except for ptracers"
+> +	default n
+> +	help
+> +	  Restrict open() write access except for ptracer processes,
+> +	  usually debuggers.
+> +
+> +config PROC_MEM_RESTRICT_WRITE_DEFAULT
+> +	bool "Restrict all write() calls"
+> +	default n
+> +	help
+> +	  Restrict all /proc/*/mem direct write calls.
+> +	  Open calls with RW modes are still allowed, this blocks
+> +	  just the write() calls.
+> +
+> +config PROC_MEM_RESTRICT_WRITE_PTRACE_DEFAULT
+> +	bool "Restrict write() calls except for ptracers"
+> +	default n
+> +	help
+> +	  Restrict /proc/*/mem direct write calls except for ptracer processes.
+> +	  Open calls with RW modes are still allowed, this blocks just
+> +	  the write() calls.
+> +
+> +endmenu
 
 -- 
-2.25.1
-
+#Randy
+https://people.kernel.org/tglx/notes-about-netiquette
+https://subspace.kernel.org/etiquette.html
 
