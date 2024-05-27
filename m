@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-17035-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17037-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 287458D02D5
-	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 16:12:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57BF78D02CF
+	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 16:11:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0E6D9B2C1E3
-	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 14:01:59 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 40AD5B2CA6A
+	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 14:02:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7439216C437;
-	Mon, 27 May 2024 13:58:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D94016C6AD;
+	Mon, 27 May 2024 13:58:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ub+wU4Wr"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AAmj/kld"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43F0C16C426;
-	Mon, 27 May 2024 13:58:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E35C616C6A9;
+	Mon, 27 May 2024 13:58:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716818319; cv=none; b=l1BxlmLY21f30mi+4Vr1vSLipjZmCB5H3fxFEBU6akwpSw8z5v4xUAK3sDPC0CEfRGjXK0vtXl7a+9BnjuC1s9Ll0nFERUJRPqsagfWMBzSrTyUMkJlygpFk9SMf6IfZ5MXYS+qHJDkWF6Zandoq8AQqaCu7UvHjFcwKZ40OAdM=
+	t=1716818325; cv=none; b=oh/bNj78nMNY/bk10jnyZiOUOhq6NGrA1eviY222E7FvMAfZ9lwn8qM9IKii5YbZ/kWHWeR67RQetceQBR/x5eeEDU8K7Zbnh6J6/9t+0dH22Rkh9Fv9S0fk5wClaLa7RJldSHMhHwm+thjTG4kxu0vhRR18jvzUpTcmFUSzr2w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716818319; c=relaxed/simple;
-	bh=L+f1h3qEgQI0VvM5QxP4rM7AUHSRqAbHmLrc4Ml1MV0=;
+	s=arc-20240116; t=1716818325; c=relaxed/simple;
+	bh=kSiiMjjsZY7K9mTyS1MG3HJC7wR+Nx+5mIpcDTzOUiQ=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Egmygra2ATVy0RtOXiync/czHI/OO1+d4glmHWx9qTo5strSr0+ptoANPcFGrLqciLIividLmzfNyUpqtXhLNf5sy5PJ17r1ZaKGGE7YTcYjrI2GS1GTmRXHxpzZmzJ6WmAhIdZVSUz5cXOiclZi0EziGJUQA97IEgN49wQfON8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ub+wU4Wr; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEB6AC2BBFC;
-	Mon, 27 May 2024 13:58:38 +0000 (UTC)
+	 In-Reply-To:To:Cc; b=sKYgoesyDD+uCL8JkXhureIBco6U6PitHY6idIhXomu+m6ZnSEkVNlljf6e1s8e/Z/fLREzAwVv2RAEOGqPOuezdGLsKjAaXTrIwi+HRgC+J0gZBJYw1Rrm3DvBqWkPPGNR4UBO3hcG9b4CqMcfwFIxUJ+dsNeUqIEWcLNC4fd4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AAmj/kld; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72C45C2BBFC;
+	Mon, 27 May 2024 13:58:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1716818319;
-	bh=L+f1h3qEgQI0VvM5QxP4rM7AUHSRqAbHmLrc4Ml1MV0=;
+	s=k20201202; t=1716818324;
+	bh=kSiiMjjsZY7K9mTyS1MG3HJC7wR+Nx+5mIpcDTzOUiQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=Ub+wU4WrADOPYk14sALzideVQTRPGblfeb7HH8nMCf+iXlSHhKZepX9ZydTTkmSNP
-	 Nq6TmdAK5oKICQ4kuMx5jbnPpEzTgkTuokzAabDkU3y+KRvoKUolrhItgPuRrIFn6x
-	 ADzurDXY4qd8wXohlyZwmsUmkSuJ9ju6Zf5cog98zdGUf3M9mnQj5qsxB/8q9T0nRn
-	 h7U2JdUeXaR6QvI2gw+xlfOrrPyt5vlJt32MItf+PO6N/tcRow4fnIprugmyIaD5fy
-	 l5RvIa9W+AIHUmdGareNsNJSxXJy11YBY+W1/HhvTB4wvCdlpQVo0gCfKr7XCX1zfS
-	 v1a2C50buQiIQ==
+	b=AAmj/kldZpDyJb1uwt4uNH4INUJIMYziJtVPV9R4wgycU0JpYU7pUX32R3xJIcoRn
+	 YBTZbpWGX4J5IAXnwxCTKJLlcfmdjVjVcGNLH+pj7kdudc3rtoaJwoKhVehMTqS/yd
+	 pV3cpZmtm+m28WCYepDDaEWQxQViYFhyRg51uPc5LJwA8aJEbvdHVb/PyzU9+nnewU
+	 Mz9X/vuTXJrr2ee5anxILxDcMIq6N3HTBdpowc/2P69UuZy7Efklgen+QmO0+AbhcY
+	 gSNtEnYs+CgMlr7Vh1ztm1M5NiyZw1okBGJQfp5pEUA8xYRMp0jNEzKjmMmwi3pp0T
+	 Kg2YMhetdUshg==
 From: Maxime Ripard <mripard@kernel.org>
-Date: Mon, 27 May 2024 15:58:00 +0200
-Subject: [PATCH v15 11/29] drm/connector: hdmi: Calculate TMDS character
- rate
+Date: Mon, 27 May 2024 15:58:02 +0200
+Subject: [PATCH v15 13/29] drm/connector: hdmi: Add custom hook to filter
+ TMDS character rate
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -53,7 +53,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240527-kms-hdmi-connector-state-v15-11-c5af16c3aae2@kernel.org>
+Message-Id: <20240527-kms-hdmi-connector-state-v15-13-c5af16c3aae2@kernel.org>
 References: <20240527-kms-hdmi-connector-state-v15-0-c5af16c3aae2@kernel.org>
 In-Reply-To: <20240527-kms-hdmi-connector-state-v15-0-c5af16c3aae2@kernel.org>
 To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
@@ -73,191 +73,368 @@ Cc: Hans Verkuil <hverkuil@xs4all.nl>,
  Dave Stevenson <dave.stevenson@raspberrypi.com>, 
  Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6423; i=mripard@kernel.org;
- h=from:subject:message-id; bh=L+f1h3qEgQI0VvM5QxP4rM7AUHSRqAbHmLrc4Ml1MV0=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDGkhE1NOSRv1TdL4Zi4YtM4zaOIBzqdM23RdgpRdE6o3t
- syutJPomMrCIMzJICumyPJEJuz08vbFVQ72K3/AzGFlAhnCwMUpABO58J2xvuisOecF9l9dRx/t
- yTQ3+O1tvU6mlZvJbPXX5hvCDMeSfqeevXhn540kfZfa0HNVAhWrGOtzbv989K6wRT7afFLpBTY
- Dhp27GIu9bzAznsnutnDVnJvBeS5hFqcn7+yy2QW9R9exVgEA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=12837; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=kSiiMjjsZY7K9mTyS1MG3HJC7wR+Nx+5mIpcDTzOUiQ=;
+ b=kA0DAAkTJ1/OGaI9vnYByyZiAGZUkWWher5pzlPVp5RI1lbMAUZkiIrKKSEjpUf/ZgFtHFI4X
+ YiVBAATCQAdFiEE5BxWy6eHo3pAP6n4J1/OGaI9vnYFAmZUkWUACgkQJ1/OGaI9vnbL3gF/XNdx
+ 4Cjm3Mc/5mBJ7RdpQp98cgOwdt/DISr1nqMAzo4IW/e4V92Uqsr1Vpq1p93zAYDl438rBfAHTo6
+ F6zdkvIgNvBa5S9giBk8FkYbHsdSGWz/IyoDrDZo6Vqg94KxqPJE=
 X-Developer-Key: i=mripard@kernel.org; a=openpgp;
  fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 
-Most HDMI drivers have some code to calculate the TMDS character rate,
-usually to adjust an internal clock to match what the mode requires.
+Most of the HDMI controllers have an upper TMDS character rate limit
+they can't exceed. On "embedded"-grade display controllers, it will
+typically be lower than what high-grade monitors can provide these days,
+so drivers will filter the TMDS character rate based on the controller
+capabilities.
 
-Since the TMDS character rates mostly depends on the resolution, whether
-we need to repeat pixels or not, the bpc count and the format, we can
-now derive it from the HDMI connector state that stores all those infos
-and remove the duplication from drivers.
+To make that easier to handle for drivers, let's provide an optional
+hook to be implemented by drivers so they can tell the HDMI controller
+helpers if a given TMDS character rate is reachable for them or not.
+
+This will then be useful to figure out the best format and bpc count for
+a given mode.
 
 Reviewed-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
 Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 Signed-off-by: Maxime Ripard <mripard@kernel.org>
 ---
- drivers/gpu/drm/display/drm_hdmi_state_helper.c    | 67 ++++++++++++++++++++++
- drivers/gpu/drm/drm_atomic.c                       |  1 +
- drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c |  3 +
- include/drm/drm_connector.h                        |  5 ++
- 4 files changed, 76 insertions(+)
+ drivers/gpu/drm/display/drm_hdmi_state_helper.c    |  9 +++++++
+ drivers/gpu/drm/drm_connector.c                    |  4 +++
+ drivers/gpu/drm/tests/drm_connector_test.c         | 14 ++++++++++
+ drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c |  4 +++
+ include/drm/drm_connector.h                        | 31 ++++++++++++++++++++++
+ 5 files changed, 62 insertions(+)
 
 diff --git a/drivers/gpu/drm/display/drm_hdmi_state_helper.c b/drivers/gpu/drm/display/drm_hdmi_state_helper.c
-index f6cd0612ea2c..08630561d864 100644
+index 08630561d864..063421835dba 100644
 --- a/drivers/gpu/drm/display/drm_hdmi_state_helper.c
 +++ b/drivers/gpu/drm/display/drm_hdmi_state_helper.c
-@@ -1,10 +1,11 @@
- // SPDX-License-Identifier: MIT
- 
- #include <drm/drm_atomic.h>
- #include <drm/drm_connector.h>
- 
-+#include <drm/display/drm_hdmi_helper.h>
- #include <drm/display/drm_hdmi_state_helper.h>
- 
- /**
-  * __drm_atomic_helper_connector_hdmi_reset() - Initializes all HDMI @drm_connector_state resources
-  * @connector: DRM connector
-@@ -23,10 +24,67 @@ void __drm_atomic_helper_connector_hdmi_reset(struct drm_connector *connector,
- 	new_conn_state->max_bpc = max_bpc;
- 	new_conn_state->max_requested_bpc = max_bpc;
- }
- EXPORT_SYMBOL(__drm_atomic_helper_connector_hdmi_reset);
- 
-+static const struct drm_display_mode *
-+connector_state_get_mode(const struct drm_connector_state *conn_state)
-+{
-+	struct drm_atomic_state *state;
-+	struct drm_crtc_state *crtc_state;
-+	struct drm_crtc *crtc;
-+
-+	state = conn_state->state;
-+	if (!state)
-+		return NULL;
-+
-+	crtc = conn_state->crtc;
-+	if (!crtc)
-+		return NULL;
-+
-+	crtc_state = drm_atomic_get_new_crtc_state(state, crtc);
-+	if (!crtc_state)
-+		return NULL;
-+
-+	return &crtc_state->mode;
-+}
-+
-+static enum drm_mode_status
-+hdmi_clock_valid(const struct drm_connector *connector,
-+		 const struct drm_display_mode *mode,
-+		 unsigned long long clock)
-+{
-+	const struct drm_display_info *info = &connector->display_info;
-+
-+	if (info->max_tmds_clock && clock > info->max_tmds_clock * 1000)
-+		return MODE_CLOCK_HIGH;
-+
-+	return MODE_OK;
-+}
-+
-+static int
-+hdmi_compute_clock(const struct drm_connector *connector,
-+		   struct drm_connector_state *conn_state,
-+		   const struct drm_display_mode *mode,
-+		   unsigned int bpc, enum hdmi_colorspace fmt)
-+{
-+	enum drm_mode_status status;
-+	unsigned long long clock;
-+
-+	clock = drm_hdmi_compute_mode_clock(mode, bpc, fmt);
-+	if (!clock)
-+		return -EINVAL;
-+
-+	status = hdmi_clock_valid(connector, mode, clock);
-+	if (status != MODE_OK)
-+		return -EINVAL;
-+
-+	conn_state->hdmi.tmds_char_rate = clock;
-+
-+	return 0;
-+}
-+
- /**
-  * drm_atomic_helper_connector_hdmi_check() - Helper to check HDMI connector atomic state
-  * @connector: DRM Connector
-  * @state: the DRM State object
-  *
-@@ -42,10 +100,19 @@ int drm_atomic_helper_connector_hdmi_check(struct drm_connector *connector,
+@@ -51,15 +51,24 @@ connector_state_get_mode(const struct drm_connector_state *conn_state)
+ static enum drm_mode_status
+ hdmi_clock_valid(const struct drm_connector *connector,
+ 		 const struct drm_display_mode *mode,
+ 		 unsigned long long clock)
  {
- 	struct drm_connector_state *old_conn_state =
- 		drm_atomic_get_old_connector_state(state, connector);
- 	struct drm_connector_state *new_conn_state =
- 		drm_atomic_get_new_connector_state(state, connector);
-+	const struct drm_display_mode *mode =
-+		connector_state_get_mode(new_conn_state);
-+	int ret;
++	const struct drm_connector_hdmi_funcs *funcs = connector->hdmi.funcs;
+ 	const struct drm_display_info *info = &connector->display_info;
+ 
+ 	if (info->max_tmds_clock && clock > info->max_tmds_clock * 1000)
+ 		return MODE_CLOCK_HIGH;
+ 
++	if (funcs && funcs->tmds_char_rate_valid) {
++		enum drm_mode_status status;
 +
-+	ret = hdmi_compute_clock(connector, new_conn_state, mode,
-+				 new_conn_state->hdmi.output_bpc,
-+				 new_conn_state->hdmi.output_format);
-+	if (ret)
-+		return ret;
++		status = funcs->tmds_char_rate_valid(connector, mode, clock);
++		if (status != MODE_OK)
++			return status;
++	}
++
+ 	return MODE_OK;
+ }
  
- 	if (old_conn_state->hdmi.output_bpc != new_conn_state->hdmi.output_bpc ||
- 	    old_conn_state->hdmi.output_format != new_conn_state->hdmi.output_format) {
- 		struct drm_crtc *crtc = new_conn_state->crtc;
- 		struct drm_crtc_state *crtc_state;
-diff --git a/drivers/gpu/drm/drm_atomic.c b/drivers/gpu/drm/drm_atomic.c
-index 8730137baa86..26f9e525c0a0 100644
---- a/drivers/gpu/drm/drm_atomic.c
-+++ b/drivers/gpu/drm/drm_atomic.c
-@@ -1146,10 +1146,11 @@ static void drm_atomic_connector_print_state(struct drm_printer *p,
- 	if (connector->connector_type == DRM_MODE_CONNECTOR_HDMIA ||
- 	    connector->connector_type == DRM_MODE_CONNECTOR_HDMIB) {
- 		drm_printf(p, "\toutput_bpc=%u\n", state->hdmi.output_bpc);
- 		drm_printf(p, "\toutput_format=%s\n",
- 			   drm_hdmi_connector_get_output_format_name(state->hdmi.output_format));
-+		drm_printf(p, "\ttmds_char_rate=%llu\n", state->hdmi.tmds_char_rate);
- 	}
+ static int
+ hdmi_compute_clock(const struct drm_connector *connector,
+diff --git a/drivers/gpu/drm/drm_connector.c b/drivers/gpu/drm/drm_connector.c
+index b629c8e990f4..555eac20e5a4 100644
+--- a/drivers/gpu/drm/drm_connector.c
++++ b/drivers/gpu/drm/drm_connector.c
+@@ -455,10 +455,11 @@ EXPORT_SYMBOL(drmm_connector_init);
+ /**
+  * drmm_connector_hdmi_init - Init a preallocated HDMI connector
+  * @dev: DRM device
+  * @connector: A pointer to the HDMI connector to init
+  * @funcs: callbacks for this connector
++ * @hdmi_funcs: HDMI-related callbacks for this connector
+  * @connector_type: user visible type of the connector
+  * @ddc: optional pointer to the associated ddc adapter
+  * @supported_formats: Bitmask of @hdmi_colorspace listing supported output formats
+  * @max_bpc: Maximum bits per char the HDMI connector supports
+  *
+@@ -474,10 +475,11 @@ EXPORT_SYMBOL(drmm_connector_init);
+  * Zero on success, error code on failure.
+  */
+ int drmm_connector_hdmi_init(struct drm_device *dev,
+ 			     struct drm_connector *connector,
+ 			     const struct drm_connector_funcs *funcs,
++			     const struct drm_connector_hdmi_funcs *hdmi_funcs,
+ 			     int connector_type,
+ 			     struct i2c_adapter *ddc,
+ 			     unsigned long supported_formats,
+ 			     unsigned int max_bpc)
+ {
+@@ -510,10 +512,12 @@ int drmm_connector_hdmi_init(struct drm_device *dev,
+ 	connector->max_bpc = max_bpc;
  
- 	if (connector->connector_type == DRM_MODE_CONNECTOR_WRITEBACK)
- 		if (state->writeback_job && state->writeback_job->fb)
- 			drm_printf(p, "\tfb=%d\n", state->writeback_job->fb->base.id);
+ 	if (max_bpc > 8)
+ 		drm_connector_attach_hdr_output_metadata_property(connector);
+ 
++	connector->hdmi.funcs = hdmi_funcs;
++
+ 	return 0;
+ }
+ EXPORT_SYMBOL(drmm_connector_hdmi_init);
+ 
+ /**
+diff --git a/drivers/gpu/drm/tests/drm_connector_test.c b/drivers/gpu/drm/tests/drm_connector_test.c
+index 8557f722080c..e44dfe2e9455 100644
+--- a/drivers/gpu/drm/tests/drm_connector_test.c
++++ b/drivers/gpu/drm/tests/drm_connector_test.c
+@@ -22,10 +22,13 @@ struct drm_connector_init_priv {
+ 	struct drm_device drm;
+ 	struct drm_connector connector;
+ 	struct i2c_adapter ddc;
+ };
+ 
++static const struct drm_connector_hdmi_funcs dummy_hdmi_funcs = {
++};
++
+ static const struct drm_connector_funcs dummy_funcs = {
+ 	.atomic_destroy_state	= drm_atomic_helper_connector_destroy_state,
+ 	.atomic_duplicate_state	= drm_atomic_helper_connector_duplicate_state,
+ 	.reset			= drm_atomic_helper_connector_reset,
+ };
+@@ -187,10 +190,11 @@ static void drm_test_connector_hdmi_init_valid(struct kunit *test)
+ 	struct drm_connector_init_priv *priv = test->priv;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, &priv->connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       DRM_MODE_CONNECTOR_HDMIA,
+ 				       &priv->ddc,
+ 				       BIT(HDMI_COLORSPACE_RGB),
+ 				       8);
+ 	KUNIT_EXPECT_EQ(test, ret, 0);
+@@ -205,10 +209,11 @@ static void drm_test_connector_hdmi_init_null_ddc(struct kunit *test)
+ 	struct drm_connector_init_priv *priv = test->priv;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, &priv->connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       DRM_MODE_CONNECTOR_HDMIA,
+ 				       NULL,
+ 				       BIT(HDMI_COLORSPACE_RGB),
+ 				       8);
+ 	KUNIT_EXPECT_EQ(test, ret, 0);
+@@ -223,10 +228,11 @@ static void drm_test_connector_hdmi_init_bpc_invalid(struct kunit *test)
+ 	struct drm_connector_init_priv *priv = test->priv;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, &priv->connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       DRM_MODE_CONNECTOR_HDMIA,
+ 				       &priv->ddc,
+ 				       BIT(HDMI_COLORSPACE_RGB),
+ 				       9);
+ 	KUNIT_EXPECT_LT(test, ret, 0);
+@@ -241,10 +247,11 @@ static void drm_test_connector_hdmi_init_bpc_null(struct kunit *test)
+ 	struct drm_connector_init_priv *priv = test->priv;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, &priv->connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       DRM_MODE_CONNECTOR_HDMIA,
+ 				       &priv->ddc,
+ 				       BIT(HDMI_COLORSPACE_RGB),
+ 				       0);
+ 	KUNIT_EXPECT_LT(test, ret, 0);
+@@ -264,10 +271,11 @@ static void drm_test_connector_hdmi_init_bpc_8(struct kunit *test)
+ 	uint64_t val;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       DRM_MODE_CONNECTOR_HDMIA,
+ 				       &priv->ddc,
+ 				       BIT(HDMI_COLORSPACE_RGB),
+ 				       8);
+ 	KUNIT_EXPECT_EQ(test, ret, 0);
+@@ -303,10 +311,11 @@ static void drm_test_connector_hdmi_init_bpc_10(struct kunit *test)
+ 	uint64_t val;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       DRM_MODE_CONNECTOR_HDMIA,
+ 				       &priv->ddc,
+ 				       BIT(HDMI_COLORSPACE_RGB),
+ 				       10);
+ 	KUNIT_EXPECT_EQ(test, ret, 0);
+@@ -342,10 +351,11 @@ static void drm_test_connector_hdmi_init_bpc_12(struct kunit *test)
+ 	uint64_t val;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       DRM_MODE_CONNECTOR_HDMIA,
+ 				       &priv->ddc,
+ 				       BIT(HDMI_COLORSPACE_RGB),
+ 				       12);
+ 	KUNIT_EXPECT_EQ(test, ret, 0);
+@@ -376,10 +386,11 @@ static void drm_test_connector_hdmi_init_formats_empty(struct kunit *test)
+ 	struct drm_connector_init_priv *priv = test->priv;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, &priv->connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       DRM_MODE_CONNECTOR_HDMIA,
+ 				       &priv->ddc,
+ 				       0,
+ 				       8);
+ 	KUNIT_EXPECT_LT(test, ret, 0);
+@@ -394,10 +405,11 @@ static void drm_test_connector_hdmi_init_formats_no_rgb(struct kunit *test)
+ 	struct drm_connector_init_priv *priv = test->priv;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, &priv->connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       DRM_MODE_CONNECTOR_HDMIA,
+ 				       &priv->ddc,
+ 				       BIT(HDMI_COLORSPACE_YUV422),
+ 				       8);
+ 	KUNIT_EXPECT_LT(test, ret, 0);
+@@ -413,10 +425,11 @@ static void drm_test_connector_hdmi_init_type_valid(struct kunit *test)
+ 	unsigned int connector_type = *(unsigned int *)test->param_value;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, &priv->connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       connector_type,
+ 				       &priv->ddc,
+ 				       BIT(HDMI_COLORSPACE_RGB),
+ 				       8);
+ 	KUNIT_EXPECT_EQ(test, ret, 0);
+@@ -446,10 +459,11 @@ static void drm_test_connector_hdmi_init_type_invalid(struct kunit *test)
+ 	unsigned int connector_type = *(unsigned int *)test->param_value;
+ 	int ret;
+ 
+ 	ret = drmm_connector_hdmi_init(&priv->drm, &priv->connector,
+ 				       &dummy_funcs,
++				       &dummy_hdmi_funcs,
+ 				       connector_type,
+ 				       &priv->ddc,
+ 				       BIT(HDMI_COLORSPACE_RGB),
+ 				       8);
+ 	KUNIT_EXPECT_LT(test, ret, 0);
 diff --git a/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c b/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c
-index 8bc1f9b0b12b..4f46a70a5017 100644
+index 8ff53ee54e97..7f9a48902db4 100644
 --- a/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c
 +++ b/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c
-@@ -70,10 +70,13 @@ static int light_up_connector(struct kunit *test,
- 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, state);
+@@ -110,10 +110,13 @@ static int set_connector_edid(struct kunit *test, struct drm_connector *connecto
+ 	KUNIT_ASSERT_GT(test, ret, 0);
  
- 	conn_state = drm_atomic_get_connector_state(state, connector);
- 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, conn_state);
+ 	return 0;
+ }
  
-+	conn_state->hdmi.output_bpc = connector->max_bpc;
-+	conn_state->hdmi.output_format = HDMI_COLORSPACE_RGB;
++static const struct drm_connector_hdmi_funcs dummy_connector_hdmi_funcs = {
++};
 +
- 	ret = drm_atomic_set_crtc_for_connector(conn_state, crtc);
- 	KUNIT_EXPECT_EQ(test, ret, 0);
+ static int dummy_connector_get_modes(struct drm_connector *connector)
+ {
+ 	struct drm_atomic_helper_connector_hdmi_priv *priv =
+ 		connector_to_priv(connector);
+ 	const struct drm_edid *edid;
+@@ -192,10 +195,11 @@ drm_atomic_helper_connector_hdmi_init(struct kunit *test,
+ 	enc->possible_crtcs = drm_crtc_mask(priv->crtc);
  
- 	crtc_state = drm_atomic_get_crtc_state(state, crtc);
- 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, crtc_state);
+ 	conn = &priv->connector;
+ 	ret = drmm_connector_hdmi_init(drm, conn,
+ 				       &dummy_connector_funcs,
++				       &dummy_connector_hdmi_funcs,
+ 				       DRM_MODE_CONNECTOR_HDMIA,
+ 				       NULL,
+ 				       formats,
+ 				       max_bpc);
+ 	KUNIT_ASSERT_EQ(test, ret, 0);
 diff --git a/include/drm/drm_connector.h b/include/drm/drm_connector.h
-index 29883e6f8e50..54899c030031 100644
+index 54899c030031..3c0b6694074f 100644
 --- a/include/drm/drm_connector.h
 +++ b/include/drm/drm_connector.h
-@@ -1047,10 +1047,15 @@ struct drm_connector_state {
+@@ -36,10 +36,11 @@
  
- 		/**
- 		 * @output_format: Pixel format to output in.
+ struct drm_connector_helper_funcs;
+ struct drm_modeset_acquire_ctx;
+ struct drm_device;
+ struct drm_crtc;
++struct drm_display_mode;
+ struct drm_encoder;
+ struct drm_panel;
+ struct drm_property;
+ struct drm_property_blob;
+ struct drm_printer;
+@@ -1055,10 +1056,34 @@ struct drm_connector_state {
  		 */
- 		enum hdmi_colorspace output_format;
-+
-+		/**
-+		 * @tmds_char_rate: TMDS Character Rate, in Hz.
-+		 */
-+		unsigned long long tmds_char_rate;
+ 		unsigned long long tmds_char_rate;
  	} hdmi;
  };
  
++/**
++ * struct drm_connector_hdmi_funcs - drm_hdmi_connector control functions
++ */
++struct drm_connector_hdmi_funcs {
++	/**
++	 * @tmds_char_rate_valid:
++	 *
++	 * This callback is invoked at atomic_check time to figure out
++	 * whether a particular TMDS character rate is supported by the
++	 * driver.
++	 *
++	 * The @tmds_char_rate_valid callback is optional.
++	 *
++	 * Returns:
++	 *
++	 * Either &drm_mode_status.MODE_OK or one of the failure reasons
++	 * in &enum drm_mode_status.
++	 */
++	enum drm_mode_status
++	(*tmds_char_rate_valid)(const struct drm_connector *connector,
++				const struct drm_display_mode *mode,
++				unsigned long long tmds_rate);
++};
++
  /**
   * struct drm_connector_funcs - control connectors on a given device
+  *
+  * Each CRTC may have one or more connectors attached to it.  The functions
+  * below allow the core DRM code to control connectors, enumerate available modes,
+@@ -1923,10 +1948,15 @@ struct drm_connector {
+ 		/**
+ 		 * @supported_formats: Bitmask of @hdmi_colorspace
+ 		 * supported by the controller.
+ 		 */
+ 		unsigned long supported_formats;
++
++		/**
++		 * @funcs: HDMI connector Control Functions
++		 */
++		const struct drm_connector_hdmi_funcs *funcs;
+ 	} hdmi;
+ };
+ 
+ #define obj_to_connector(x) container_of(x, struct drm_connector, base)
+ 
+@@ -1945,10 +1975,11 @@ int drmm_connector_init(struct drm_device *dev,
+ 			int connector_type,
+ 			struct i2c_adapter *ddc);
+ int drmm_connector_hdmi_init(struct drm_device *dev,
+ 			     struct drm_connector *connector,
+ 			     const struct drm_connector_funcs *funcs,
++			     const struct drm_connector_hdmi_funcs *hdmi_funcs,
+ 			     int connector_type,
+ 			     struct i2c_adapter *ddc,
+ 			     unsigned long supported_formats,
+ 			     unsigned int max_bpc);
+ void drm_connector_attach_edid_property(struct drm_connector *connector);
 
 -- 
 2.45.0
