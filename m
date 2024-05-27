@@ -1,67 +1,56 @@
-Return-Path: <linux-doc+bounces-17060-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17062-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE7428D0658
-	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 17:40:02 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 014E68D05D0
+	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 17:19:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C2B10B2A56B
-	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 15:14:31 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 8FAF728ACE9
+	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 15:19:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E6653160860;
-	Mon, 27 May 2024 14:55:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 48C8861FD6;
+	Mon, 27 May 2024 15:08:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="OpSRQSnA"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U+2mgekG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C96A15FD19;
-	Mon, 27 May 2024 14:55:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E80161FC4;
+	Mon, 27 May 2024 15:08:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716821736; cv=none; b=kMeLdXWmhkO8e/hMf/TYVM7EnAObRydUaq/zreA2vbsjgCTboGh6vetIMtqV1rsiSXGUPbnpt9GKujTV0esclmdAt1O3myVK/tvI8oUEKbDYYhOwZBr9TbvqqQdJ2Kq4CwtNVOcUsyl6cutqL8H2E4H7QkGr2n2JthY0G7OVkUo=
+	t=1716822499; cv=none; b=RZvDzqVGJwSqtNwNQqTge9CJ5iV7tWtDV4bWqFbWdPDIizP29KlxeT2QaFQzs3z4/zP3CLIS9aAn62MAj5vplRAJCxDpU9k+r0Ud+K13kOxMMc+BgzMl7E/8Pyp7OyfHhbMeF5UMT1gBpSmLylSz+awBNph2eKap3f8rI3LXAd4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716821736; c=relaxed/simple;
-	bh=WqdfSky25P014jToQJxbbx2jmpw/Y6gIbx3q5jkMXhQ=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=r0oXFDlfO+oXok30RXIXuKr38vstRx2h+cJ3MvyfN/I/egpHWqJyytM9bXPKuuRAWj/7QMsD0UX2uaN6wdpozc8oJ5c3YIwEtvsrXx7Vq7J/+3P/ECBO8oiV6jnIAheAxqy3UO6VM3knhRp11lqopBqelu3SYz6rYZYHs0YEknk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=OpSRQSnA; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 3BD0547C39
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1716821734; bh=JUk9kiyoUx5RdgIxL9VYYk1ttK/biBJXbO+frYzpI0E=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=OpSRQSnAig4IIYY8BNqix2k+Yb6FWJLwUUDh/7zJR3VliwFvSwhjOVu+Z00OWVUTi
-	 KVw4IkJcG5msbhLvlUo1sTFRWleDxOukx7T4tmzLHByyJOy6WBoMQSoE6Z4VSj5BNh
-	 wCoU4L9+TRxIe0jBtjA1q9CovmgzTdxCOQMzpRLTRj3LkpHIAEgFEA6yy5+Q2HGI0Q
-	 FM43LYmqlZedmh5NcbRxWKNjYk8UYXdxqSsRLcfqgT+CyufHyV+BJrCbjenZAOG8kO
-	 7LfrCr41ZPvqI+8bFU0s7/jDCVKQxYGIJHgACbRe+inNRNKS/hgtXKkEvGcJaSVSbY
-	 agwtFAZLmVOSA==
-Received: from localhost (unknown [IPv6:2601:280:5e00:625::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 3BD0547C39;
-	Mon, 27 May 2024 14:55:34 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Yunseong Kim <yskelg@gmail.com>
-Cc: skhan@linuxfoundation.org, Jinwoo Park <pmnxis@gmail.com>, Austin Kim
- <austindh.kim@gmail.com>, shjy180909@gmail.com, workflows@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-kernel-mentees@lists.linuxfoundation.org
-Subject: Re: [PATCH v3] Documentation: cve Korean translation
-In-Reply-To: <8880b0ec-9315-428e-b9c4-e578690d3c08@gmail.com>
-References: <20240527103003.29318-1-yskelg@gmail.com>
- <87ikyzpgqz.fsf@meer.lwn.net>
- <bf37bf39-32d3-457f-abd6-115215d631af@gmail.com>
- <87o78rnz3a.fsf@meer.lwn.net>
- <8880b0ec-9315-428e-b9c4-e578690d3c08@gmail.com>
-Date: Mon, 27 May 2024 08:55:33 -0600
-Message-ID: <877cffnw2i.fsf@meer.lwn.net>
+	s=arc-20240116; t=1716822499; c=relaxed/simple;
+	bh=c8xepSsNCw/pDJJ6ZpKZr2E007AqDxm7P8aGHdNNlWU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=tQJmo4SC+RRxOE7jr/56jN9XZ7vF7k5itFHbyRQ+K4s3tx5Z7i3m9y8PTKufKDvn4rpTmfCnCMRRrp/fkxnlIMWpYpu/T2gjrRCaxJYJzTYbSfFO3cC2vUc5JY1M56Fqm/kqg7huWQpclzqwDpkojalz9xBFfjEHjr63anrjsfY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U+2mgekG; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3890EC2BBFC;
+	Mon, 27 May 2024 15:08:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1716822498;
+	bh=c8xepSsNCw/pDJJ6ZpKZr2E007AqDxm7P8aGHdNNlWU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=U+2mgekG8EG7qFU35dLx7XPdRV+vcKLDci2ly228W8Jr7SkmM0oKeENutlqXL3sS9
+	 dz2zH/b6QeQJs1ZJ3+vW5t/jPS28sqrjUmFOqmZF3/JucX0WRVr1AGwlzYkpcZRF4Z
+	 QdQkLY69z6yXqf/vWtJrg26kEw11t/47XdA1jQV/gT52NXhthGBN9MS+CnmtBfjEXL
+	 TgYi4XHSRQVevrRD7/H6MQzgr9bNO96EFDBaGEXSONh3E9rl8bPquIf+cSJYR5222Q
+	 gORkkbN2WjhCRbrYmfZwr5duCHdJ/qUcszrbw8Z6XWh+em2TRz5yRQQNkrHCBHm9cT
+	 kkpYRi8pwZ27A==
+Date: Mon, 27 May 2024 17:08:13 +0200
+From: Christian Brauner <brauner@kernel.org>
+To: Hongbo Li <lihongbo22@huawei.com>
+Cc: viro@zeniv.linux.org.uk, jack@suse.cz, tytso@mit.edu, 
+	adilger.kernel@dilger.ca, lczerner@redhat.com, cmaiolino@redhat.com, 
+	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org, yi.zhang@huawei.com
+Subject: Re: [PATCH v2 0/4] enhance the path resolution capability in
+ fs_parser
+Message-ID: <20240527-armut-blechnapf-086b9166728e@brauner>
+References: <20240527075854.1260981-1-lihongbo22@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,47 +58,30 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+In-Reply-To: <20240527075854.1260981-1-lihongbo22@huawei.com>
 
-Yunseong Kim <yskelg@gmail.com> writes:
+On Mon, May 27, 2024 at 03:58:50PM +0800, Hongbo Li wrote:
+> Mount options with path should be parsed into block device or inode. As
+> the new mount API provides a serial of parsers, path should also be 
+> looked up into block device within these parsers, not in each specific
+> filesystem.
 
-> On 5/27/24 10:50 =EC=98=A4=ED=9B=84, Jonathan Corbet wrote:
->> Yunseong Kim <yskelg@gmail.com> writes:
->>=20
->>>> 1) Why do I have three versions of it in my mailbox, sent over a period
->>>>    of 13 minutes?  What changed between the versions?
->>>
->>> Sorry, I forgot the name of the reviewer when I first sent the
->>> documentation content related patch version 2.
->>=20
->> Which is fine, but...
->>=20
->>>>    Normally, you want to wait for reviews to come in on one version
->>>>    before posting the next, and you should put a comment after the "--=
--"
->>>>    line saying what changed.
->>>>
->>>> 2) When did this review from Jinwoo Park happen?  I was not copied on
->>>>    that.
->>=20
->> You did not answer this question.  Reviews should generally be done in
->> public, but that does not seem to have happened here?
->
-> Oops, sorry about that, Jonathan.
->
-> Jinwoo Park sent me the review below, and I've updated some of ambiguous
-> words in patch version 2.
->
-> https://lore.kernel.org/linux-doc/57f0d90c-4cc6-4418-ab79-6ae026d8ae09@gm=
-ail.com/T/#t
+The problem is that by moving those options into the VFS layer we're
+dictating when and with what permissions paths are resolved.
 
-It does look like the patch was reviewed, but no Reviewed-by tag was
-offered.  *Never* apply a Reviewed-by tag that has not been explicitly
-given to you.
+Parsing of parameters via fsconfig(FSCONFIG_SET_*) and superblock
+creation via fsconfig(FSCONFIG_CMD_CREAT) can happen in different
+contexts.
 
-Jinwoo, would you like to offer that tag for this patch?
+It's entirely possible that the parameter is set by an unprivileged task
+that cannot open the provided path while the task that actually creates
+the superblock does have the permission to resolve the path.
 
-Thanks,
+It's also legitimate that a filesystem may want to explicitly delay all
+path resolution until the superblock is created and not resolve the path
+right when it's passed.
 
-jon
+That wouldn't be possible anymore after your changes. So this is a more
+subtle change than it seems and I'm not sure it's worth it.
 
