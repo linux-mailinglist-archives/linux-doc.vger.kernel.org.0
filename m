@@ -1,221 +1,88 @@
-Return-Path: <linux-doc+bounces-17011-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17013-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08E968CFEA7
-	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 13:13:41 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A6C98CFECD
+	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 13:21:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 292E51C20F97
-	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 11:13:40 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id DCDD01F22AF4
+	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 11:21:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C4A3E13BC26;
-	Mon, 27 May 2024 11:13:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="UhffPI/f"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D33E913C80E;
+	Mon, 27 May 2024 11:21:15 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4FE113BC11;
-	Mon, 27 May 2024 11:13:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13ED013C699;
+	Mon, 27 May 2024 11:21:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.235.227.194
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716808416; cv=none; b=LlSU5tSP7ekmWicTZUX624gfJKR+AgZ9rYen6XWZr/59WWCZk3WgC38QHXG1+RxhASHDHZ6yNgfdrlrSWcghQoqemobXnto4RxqU+rc+bpXr3O8JE39fD3eV5d3GqJiEg+IbwMb4y3CcRJ1PbrQ5IbzRA/Wgl6Xxv8FAkiPEtYw=
+	t=1716808875; cv=none; b=dOZ647q54GHxpwtpfxCbN1YIwt5UiQ/ElOPuhXOeu/IU+JGPDyJ0XRqz7/MZZZL5GBPCySYZj55I16jaLwMTCfjxIvJnwyI3k97ldZkHhjOIVeoB+IddqAAOJmEe1pAMi8vFcBSVLK7IdWmTgrUiDV4pwqRKDYq5pH1DoueQobE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716808416; c=relaxed/simple;
-	bh=afdDbhmD9ThP1FKZTIsEe/wj5S44yknEdyXRvW/hwco=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ohkPDpJC2Rn4Vr+eIdxsc5V2LK4R5+30A0Vggi6uh+xR7K2UltsJ3IzkKIPij6PA91yRp8wqP7MZ2D6lFafgnSUXdC2edkUAKe9smVVSd8liBja2i6ECB7pezGAkKsrj/csvgWtiDRsZMM1GI3WrfW5Xj4D8QNMuUPTUuwEynV8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=UhffPI/f; arc=none smtp.client-ip=192.198.163.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1716808415; x=1748344415;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=afdDbhmD9ThP1FKZTIsEe/wj5S44yknEdyXRvW/hwco=;
-  b=UhffPI/fa0ytd3xp/4Yg+JTrzCXLBdnFtaii2cMaqq+B0uy/NTOo5tjh
-   2RKlV+1cpb0XCedJ7mRzGUYp9IrPnkgQWcXcR1NwuNl/5QxapngANtTl8
-   PFXxqHzLiyHAPEOmmH7ITVQd+35TW3/uCKTHuh81VadGh8DqdcIFGwonX
-   5/0kb+Q5xDzJtLJi2CYLm25KtRSbqEJnu9Qf7LUKQvoivPoIGSJgEOoQA
-   Vim1RBC3NXY6LXGPaNigAqwTG5Dg6k4Wu8ji9hKq1V3EXZJUQGqGZ3bdh
-   q38jNxS/MAX6anNhVCy2DBuZ26+rFc2/w2XGs1qIz4ZoE31Cs40Vt5P1P
-   A==;
-X-CSE-ConnectionGUID: sKOhbvxISu+GW5VuNg+XLQ==
-X-CSE-MsgGUID: D3S0EL7zSaS25dlmLDxCWA==
-X-IronPort-AV: E=McAfee;i="6600,9927,11084"; a="16069203"
-X-IronPort-AV: E=Sophos;i="6.08,192,1712646000"; 
-   d="scan'208";a="16069203"
-Received: from orviesa008.jf.intel.com ([10.64.159.148])
-  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2024 04:13:34 -0700
-X-CSE-ConnectionGUID: fwN1LcrQSqe8uHf9/d/h2w==
-X-CSE-MsgGUID: zxrOB3amRoymbBaomYW/Rw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,192,1712646000"; 
-   d="scan'208";a="35219496"
-Received: from oandoniu-mobl3.ger.corp.intel.com (HELO tlindgre-MOBL1) ([10.245.244.124])
-  by orviesa008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2024 04:13:27 -0700
-Date: Mon, 27 May 2024 14:13:19 +0300
-From: Tony Lindgren <tony.lindgren@linux.intel.com>
-To: Petr Mladek <pmladek@suse.com>
-Cc: Tony Lindgren <tony@atomide.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	John Ogness <john.ogness@linutronix.de>,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	"David S . Miller" <davem@davemloft.net>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Dhruva Gole <d-gole@ti.com>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Johan Hovold <johan@kernel.org>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org,
-	linux-serial@vger.kernel.org, Sebastian Reichel <sre@kernel.org>,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v7 1/7] printk: Save console options for
- add_preferred_console_match()
-Message-ID: <ZlRqz2b0ZrtkxScL@tlindgre-MOBL1>
-References: <20240327110021.59793-1-tony@atomide.com>
- <20240327110021.59793-2-tony@atomide.com>
- <ZlC6_Um4P4b-_WQE@pathway.suse.cz>
+	s=arc-20240116; t=1716808875; c=relaxed/simple;
+	bh=VbfpEmXuaAG7nWKQNcVSqAIJl4e4QDZ7FZgYw5QlnDI=;
+	h=From:In-Reply-To:Content-Type:References:Date:Cc:To:MIME-Version:
+	 Message-ID:Subject; b=jHO8EKY/oOJDYUfMGyctwtJdW9/JUJ2VWeVKAM/0JdT8YCdbC7T28rtmDAfes0ZhcEVp1pPNcDkeMohzm1PioQQoW+c30BrZKSNhkQ128/qtoNfMLf13Lu/ioOfCvlz4JU+Cyudwu0aq2xdKxfKbkoWUK1em6jh/bO44QdDJxik=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; arc=none smtp.client-ip=46.235.227.194
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+Received: from harlem.collaboradmins.com (harlem.collaboradmins.com [IPv6:2a01:4f8:1c0c:5936::1])
+	by madrid.collaboradmins.com (Postfix) with ESMTP id C9C2E378143B;
+	Mon, 27 May 2024 11:21:10 +0000 (UTC)
+From: "Adrian Ratiu" <adrian.ratiu@collabora.com>
+In-Reply-To: <9ce0c222-c80c-4049-8746-d74e612c3030@infradead.org>
+Content-Type: text/plain; charset="utf-8"
+X-Forward: 127.0.0.1
+References: <20240524192858.3206-1-adrian.ratiu@collabora.com>
+ <20240524192858.3206-2-adrian.ratiu@collabora.com> <9ce0c222-c80c-4049-8746-d74e612c3030@infradead.org>
+Date: Mon, 27 May 2024 12:21:10 +0100
+Cc: linux-fsdevel@vger.kernel.org, linux-security-module@vger.kernel.org, linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org, kernel@collabora.com, gbiv@google.com, ryanbeltran@google.com, inglorion@google.com, ajordanr@google.com, jorgelo@chromium.org, "Guenter Roeck" <groeck@chromium.org>, "Doug Anderson" <dianders@chromium.org>, "Kees Cook" <keescook@chromium.org>, "Jann Horn" <jannh@google.com>, "Andrew Morton" <akpm@linux-foundation.org>, "Christian Brauner" <brauner@kernel.org>, "Mike Frysinger" <vapier@chromium.org>
+To: "Randy Dunlap" <rdunlap@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ZlC6_Um4P4b-_WQE@pathway.suse.cz>
+Message-ID: <1cc802-66546c80-1-65440180@177937837>
+Subject: =?utf-8?q?Re=3A?= [PATCH v4 2/2] =?utf-8?q?proc=3A?= restrict /proc/pid/mem
+User-Agent: SOGoMail 5.10.0
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Saturday, May 25, 2024 08:49 EEST, Randy Dunlap <rdunlap@infradead.o=
+rg> wrote:
 
-On Fri, May 24, 2024 at 06:06:21PM +0200, Petr Mladek wrote:
-> I have finally found time to looks at this again.
+> Hi--
+>=20
+> On 5/24/24 12:28 PM, Adrian Ratiu wrote:
+> > diff --git a/security/Kconfig b/security/Kconfig
+> > index 412e76f1575d..0cd73f848b5a 100644
+> > --- a/security/Kconfig
+> > +++ b/security/Kconfig
+> > @@ -183,6 +183,74 @@ config STATIC=5FUSERMODEHELPER=5FPATH
+> >  	  If you wish for all usermode helper programs to be disabled,
+> >  	  specify an empty string here (i.e. "").
+> > =20
+> > +menu "Procfs mem restriction options"
+> > +
+> > +config PROC=5FMEM=5FRESTRICT=5FFOLL=5FFORCE=5FDEFAULT
+> > +	bool "Restrict all FOLL=5FFORCE flag usage"
+> > +	default n
+> > +	help
+> > +	  Restrict all FOLL=5FFORCE usage during /proc/*/mem RW.
+> > +	  Debuggerg like GDB require using FOLL=5FFORCE for basic
+>=20
+> 	  Debuggers
 
-Great good to hear.
+Hello and thank you for the feedback!
 
-> First, about breaking the preferred console:
-> 
-> The patchset still causes the regression with /dev/console association
-> as already reported for v3, see
-> https://lore.kernel.org/r/ZWnvc6-LnXdjOQLY@alley
+I'll fix these typos in a v5 together with the kernel test robot failur=
+es.
 
-Thanks and sorry for missing this issue. I thought I had this issue
-already handled, but looking at what I tested with earlier, looks like
-I had the console options the wrong way around.
- 
-> I used the following kernel command line:
-> 
->    earlycon=uart8250,io,0x3f8,115200 console=ttyS0,115200 console=tty0 ignore_loglevel log_buf_len=1M
-> 
-> The patchset caused that /dev/console became associated with
-> ttyS0 instead of tty0, see the "C" flag:
-> 
-> 	original # cat /proc/consoles
-> 	tty0                 -WU (EC    )    4:1
-> 	ttyS0                -W- (E  p a)    4:64
-> 
->    vs.
-> 
-> 	patched # cat /proc/consoles
-> 	ttyS0                -W- (EC p a)    4:64
-> 	tty0                 -WU (E     )    4:1
+I'll give v4 a bit more time in case other people have more feedback,
+so I can address them all in one go.
 
-OK
-
-> I have added some debugging messages which nicely show the reason.
-> In the original code, __add_preferred_console() is called twice
-> when processing the command line:
-> 
-> [    0.099312] __add_preferred_console[0]: ttyS, 0 (preferrred_console == 0)
-> [    0.099982] __add_preferred_console[1]: tty, 0 (preferrred_console == 1)
-
-OK thanks for tracking down where things go wrong.
-
-> The code thinks that "ttyS0" has been mentioned on the command line
-> once again. And preferred_console is _wrongly_ set back to '0'.
-> 
-> My view:
-> 
-> The delayed __add_preferred_console() is a way to hell.
-> 
-> The preferences are defined by the ordering on the command line.
-> All entries have to be added when the command line options are
-> being proceed to keep the order.
-
-To me it seems we can fix this by keeping track of the console position
-in the kernel command line. I'll send a fix for this to discuss.
-
-> A solution might be to store "devname" separately in
-> struct console_cmdline and allow empty "name". We could
-> implement then a function similar to
-> add_preferred_console_match() which would try to match
-> "devname" and set/update "name", "index" value when matched.
-> 
-> Note that we might also need to add some synchronization
-> if it might be possible to modify struct console_cmdline
-> in parallel.
-
-OK certainly no objection from me if we can make this happen without
-making things more complex :)
- 
-> Second, about the possible duplication:
-> 
-> I might get it wrong. IMHO, in principle, this patchset tries
-> to achieve similar thing as the "match()" callback, see
-> the commit c7cef0a84912cab3c9 ("console: Add extensible
-> console matching").
-> 
-> The .match() callback in struct console is to match, for example,
-> console=uart8250,io,0x3f8,115200 when the uart8250 driver
-> calls register_console() when it is being properly initialized
-> as "ttyS".
-> 
-> BTW: The .match() needs saved options because it internally calls
->      .setup() callback. IMHO, this is a very ugly detail
->      which complicates design of the register_console() code.
-> 
-> 
-> Both approaches try to match a "driver/device-specific name" with
-> the generic "ttySX".
-> 
->     console=uart8250,io,0x3f8,115200	=> ttyS0
-> vs.
->     console=00:00:0.0,115200		=> ttyS0
-> 
-> 
-> Where console=uart8250,io,0x3f8,115200 is handled by:
-> 
->     - "uart" is added to console_cmdline[]
->     - matched directly via newcon->match() callback
-> 
-> vs. console=00:00:0.0,115200
-> 
->     - 00:00:0.0 is added to conopt[]
->     - "ttyS0" added to console_cmdline[] when "00:00:0.0" initialized
->     - "ttyS0" is then matched directly
-> 
-> 
-> Question: Would it it be able to use the existing .match() callback
-> 	  also to match the DEVNAME?
-> 
-> 	  Or somehow reuse the approach?
-
-Thanks, I'll take a look if .match(), or some parts related to it, can
-be used.
-
-> 	  Could register_console() know how to generate possible
-> 	  DEVNAME for the given struct console?
-
-I don't think we can make much assumptions about the devices early on,
-and we also have the console index -1 issue.
-
-Regards,
-
-Tony
 
