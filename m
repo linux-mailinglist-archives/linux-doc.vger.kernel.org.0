@@ -1,207 +1,258 @@
-Return-Path: <linux-doc+bounces-17008-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17012-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA56F8CFE30
-	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 12:37:06 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id EE9FC8CFEB5
+	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 13:19:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5376A1F2341E
-	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 10:37:06 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A50D1281BF0
+	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2024 11:19:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA98513B28F;
-	Mon, 27 May 2024 10:37:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A224513B7A7;
+	Mon, 27 May 2024 11:18:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="f5ZKdahh"
+	dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b="IV0gq3sg"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx08-001d1705.pphosted.com (mx08-001d1705.pphosted.com [185.183.30.70])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4135979E1;
-	Mon, 27 May 2024 10:37:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.44
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716806221; cv=none; b=bKkYgbMpYIAQt4MTyEHqGGPP+Twk9e+TXgRUkGwpWCn6+mN/5l0nX8ot/0Arz7BfyDnaxN1RfMDOSJ/HTVZS3ongjjPyMjXyLzbKx6yR2tmce44uR9IZZjVVxnECDkuVBm5b7B3GXUxnw9NJkL75YoARZsk06g/OG7TTGwen8fI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716806221; c=relaxed/simple;
-	bh=hHRqAUoBRH82pJuymk4l5g2SstMzMc4ea1ZkfNBzjC8=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=ALuEZf0UYE2ISWeLxCH05cMQlCq8ryT0IaABTMFojoZ4f6x2YCOCOU9+81qC/O4uO7EO51hzpGmpbiN+f7GrZetcwrHVR8mt4hnneWJ9giH8IkmbLigUZ9Y5R5Om+JEJsSTyQVQCaOY1Rm7LZKZYOSTw5hkzfPLymsWvOHbyJco=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=f5ZKdahh; arc=none smtp.client-ip=209.85.160.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-24542b8607fso4871355fac.1;
-        Mon, 27 May 2024 03:37:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716806219; x=1717411019; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=kKFpB0RxiHeU9h9LrzBPuEHdR23O3Fp1vgl2G/bmm/Y=;
-        b=f5ZKdahh9JlMPZfgjZ+vtvctBd9++TGbv+0FVSdafq0EJbmjpb/t1QLilKEwDL6KnK
-         hsTFvOxdNV1DOm+V6UXx0R7FARLZzBNNZ+XCIFUcq/IZT4RnD1sebxMFMrKVuxeQrTtB
-         9A9gY1OLb1OBI+R4V2BY9N030lkflz2YF31lg8t7Q3FksTJgJXzykJPikG4pJcgV3l/X
-         I8VFi1XK+OQSqR7qGpMv022B9ddD6dn16KNBwXC3uT2ViVbf4WB09SjMQwS+KI2LqlNg
-         LkNSQ5RiPAfCZ9/rfvjEV5dDj192MnQvTn0rHOfqJ0FaEzByrCpaFQFFyAolzWFTInz9
-         pnkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716806219; x=1717411019;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=kKFpB0RxiHeU9h9LrzBPuEHdR23O3Fp1vgl2G/bmm/Y=;
-        b=CyvPtXHUZi042JMA45ZIsTw2euBYD5ufigUbEd9KuHPAUj0oOMIWAqKNyWC+JwkJPs
-         UDk63Su/t4dXSee8qwNKxci4Kk184vI+SHj43Ft4+TaFItJkkWC9Xovm/ld2Ego28uXO
-         dNTPTLsG2LAiV2f154rik7j1rUHyVJraNGsjbyOEm2AMMiv5hAAhz03d+Lke3cqsEjeq
-         5yPZKR2W70xVt2gmetftGgr13t9j8G7s8aYlV5hKm41La4uGwoa5emAcKlP+fRgnajVD
-         D8CvkhUyp/jOfuGF/8JvxRH/r1U8eR+KrqRXMZhTYgObyBWGqjSMWTxx35RT5QJg6JdX
-         QGoQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWZXIhtYF9rg7mPrcohYnHVwZ7UhPf5EAOFagNH1dUA8PrcbJWca+DoOCjva0Eyeacive18Zjo2jDCJHfGlZSlQVGlpem+toCD4dDqXWpiy0YmDThw4D8mMD891ZPti4H5NhgpcSlOjo6T5VmX49qPwOht/hbWlllqJuiajvRsdv9WX
-X-Gm-Message-State: AOJu0YzcBDUwNdqMzRWi+I6CH2KrKD8p7Fy3hypZtpEVL2MSJsOx3ADx
-	sKrTfQfsK24YKV8J9Xc8SP/OF4l+MvtNVIAP52a8NO0bSPnpq4Ldu8KHUhYE0rY=
-X-Google-Smtp-Source: AGHT+IFM3r0yjsYplvaxmfygwWUpTBUyxDnVMyuZSf+5aSVRHTWbCemFcPQI11t1+3UREEmjclXR3g==
-X-Received: by 2002:a05:6870:c110:b0:24f:d1f3:a87c with SMTP id 586e51a60fabf-24fd1f3a8edmr5713633fac.10.1716806219202;
-        Mon, 27 May 2024 03:36:59 -0700 (PDT)
-Received: from paran-QEMU-Virtual-Machine.. ([118.32.98.101])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-6f93d308732sm4354512b3a.101.2024.05.27.03.36.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 May 2024 03:36:58 -0700 (PDT)
-From: yskelg@gmail.com
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: skhan@linuxfoundation.org,
-	Jinwoo Park <pmnxis@gmail.com>,
-	Austin Kim <austindh.kim@gmail.com>,
-	shjy180909@gmail.com,
-	workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-kernel-mentees@lists.linuxfoundation.org,
-	Yunseong Kim <yskelg@gmail.com>
-Subject: [PATCH v2] Documentation: security-bugs Korean translation
-Date: Mon, 27 May 2024 19:36:35 +0900
-Message-Id: <20240527103634.31019-1-yskelg@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D24FD50263;
+	Mon, 27 May 2024 11:18:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=185.183.30.70
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1716808737; cv=fail; b=Q3/WVMjXSVk0wPfczoEwpc9O5Mh6QmomLgnnCiITFaA6p6jJ1xz1PiWi+uldpWEan6qh7QFSkRytgIiflZLnGf6/9wTv0vHVBSJveqXbOqI68qflbJJoLh/bIzdmYcmYgCntb1vSqoXZiAwme3PswJgTROux/aYeGYNstJza5b0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1716808737; c=relaxed/simple;
+	bh=CSfcKhBMGmqF9Y4ytXBVzCcKwd1W98MbvenbkV4VK/k=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 MIME-Version:Content-Type; b=YOVp7bdM5YHZcWSlVBHs35q+mLodSI+pNj353R7wCi1kOzT09K/vG3zFwMt8J44flfM2Tkx1OvZ+94pTrKLTlvBDUsOAPgi8bSsqh/VZaBOJd+q8CbiBdTCTolhGfWJGfkh++w1vQOV+ijMdxEX/S7DJYzoTnQuGTyaX+S0XwaE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com; spf=pass smtp.mailfrom=sony.com; dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b=IV0gq3sg; arc=fail smtp.client-ip=185.183.30.70
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sony.com
+Received: from pps.filterd (m0209318.ppops.net [127.0.0.1])
+	by mx08-001d1705.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44RAO72J026624;
+	Mon, 27 May 2024 10:46:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sony.com; h=from
+	:to:cc:subject:date:message-id:references:in-reply-to
+	:mime-version:content-type:content-transfer-encoding; s=S1; bh=R
+	d7ZoGnnuBqe93/OkeG9bOf4LX6GB8kqTKpjE/+uqsU=; b=IV0gq3sg+QByg+5+E
+	23VYy+5LVkc2stjDy8GStHTCLiylhd7VED9KJ+hUbn1XdsrHKdW2qJatqcswFXnz
+	z/A2maNSsQZTImmeG+GLzgaTHttLmp/i9DzsXGMIT0b02hKBtU4Y9nqwrJU20mpy
+	Gh2OFoAV0mZtwfdQlulVgKgvkMk0ijS/uWocnyIBuPQ5ucyPZEHRZhBHR695hu6P
+	2ujP052CV0vFnzLnbn6fQmg468JxH6jQ5Q5mfaOPoupil7BMpfvRhrxz+q8KjK2T
+	RkNJegH6FOWBT36fkHvs7gfgRlqxqTXZ6Jav+78ikaTrcD2YwjgxZexElGYCEvCT
+	GzIRw==
+Received: from jpn01-os0-obe.outbound.protection.outlook.com (mail-os0jpn01lp2105.outbound.protection.outlook.com [104.47.23.105])
+	by mx08-001d1705.pphosted.com (PPS) with ESMTPS id 3yb83b1h06-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Mon, 27 May 2024 10:46:25 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=g3nufA9LxdXv32+/FIff146tuaLFBk3PvPDXsCsoERNhsTLkg1ZGdP7oq6jcL6BaVcoZ1euu1Fp2VojOfKQKtwIyrc03n8OBzACXV/PEtUkMmrdzsrFqdnhm4/cOPBUoSEMVMySULpXG5KpZf0JrRsLFjeGHzBDd4SdThl8Y19dQHWjQokMQ+07weQqrb2b8xOX83pJCVMiteAIGtGcu4JGQY7+btUImrBEKWHn5Pol/D+eCd+S1NNV69RAfuILeLa2m/wwNAc4ZPqzQs1y/ycslyQnHBtzAg/U9OzIOQZGx8LK6+0g18dQyOLEmWqmPb0X6M8ezvseK42XLarRLmw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Rd7ZoGnnuBqe93/OkeG9bOf4LX6GB8kqTKpjE/+uqsU=;
+ b=AnbMg9osmUDZ23VVFMBFj2aQm69i5JYnBJj89ZtEKXZ8qnYNiskAJk0PWhgMrNgG8j+CVpy70f6xraJJ/6hNZqXv3Cf0NQ8Fuh2n4kIK4Y4dmLWIEudHZED8nAjrGdi50sZUDI6uOAHRfs1il9WokBehcEJJj/TvneoZyFVelxDMFN538bjNs7NJ/cjAAi8wG68dh9p8lHPbQzPwaRqrfN8fz8EgMiyVvMfQ1Xe3RCMulONEB0llfiIGE9mWu72drt5PzyJmfv1qzg3TGNYyF7fA4c2TMng6R4b1FCoNQ9Z5kraQzgJsMNY4p4Iqo3P2qeJAQN41XB9FhbfvvnE2/g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=sony.com; dmarc=pass action=none header.from=sony.com;
+ dkim=pass header.d=sony.com; arc=none
+Received: from TYAPR01MB4048.jpnprd01.prod.outlook.com (2603:1096:404:c9::14)
+ by TYCPR01MB6303.jpnprd01.prod.outlook.com (2603:1096:400:7c::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.29; Mon, 27 May
+ 2024 10:46:19 +0000
+Received: from TYAPR01MB4048.jpnprd01.prod.outlook.com
+ ([fe80::3244:9b6b:9792:e6f1]) by TYAPR01MB4048.jpnprd01.prod.outlook.com
+ ([fe80::3244:9b6b:9792:e6f1%3]) with mapi id 15.20.7611.025; Mon, 27 May 2024
+ 10:46:19 +0000
+From: "Sukrit.Bhatnagar@sony.com" <Sukrit.Bhatnagar@sony.com>
+To: Matthew Wilcox <willy@infradead.org>
+CC: Petr Mladek <pmladek@suse.com>, Steven Rostedt <rostedt@goodmis.org>,
+        Andy
+ Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Rasmus Villemoes
+	<linux@rasmusvillemoes.dk>,
+        Sergey Senozhatsky <senozhatsky@chromium.org>,
+        Jonathan Corbet <corbet@lwn.net>, Christoph Lameter <cl@linux.com>,
+        Pekka
+ Enberg <penberg@kernel.org>,
+        David Rientjes <rientjes@google.com>,
+        Joonsoo
+ Kim <iamjoonsoo.kim@lge.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Roman Gushchin <roman.gushchin@linux.dev>,
+        Hyeonggon Yoo <42.hyeyoo@gmail.com>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-mm@kvack.org" <linux-mm@kvack.org>,
+        "linux-trace-kernel@vger.kernel.org" <linux-trace-kernel@vger.kernel.org>
+Subject: RE: [PATCH 2/2] mm: debug: print correct information for slab folios
+Thread-Topic: [PATCH 2/2] mm: debug: print correct information for slab folios
+Thread-Index: AQHarBujHL/xNkAGiUyj8nEOMN94/7GjL+8AgAe8CtA=
+Date: Mon, 27 May 2024 10:46:19 +0000
+Message-ID: 
+ <TYAPR01MB4048A7A5E95A4BB4BAE9A202F6F02@TYAPR01MB4048.jpnprd01.prod.outlook.com>
+References: <20240522074629.2420423-1-Sukrit.Bhatnagar@sony.com>
+ <20240522074629.2420423-3-Sukrit.Bhatnagar@sony.com>
+ <Zk3lzjVbXVrLW0XR@casper.infradead.org>
+In-Reply-To: <Zk3lzjVbXVrLW0XR@casper.infradead.org>
+Accept-Language: en-US, ja-JP, en-GB
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TYAPR01MB4048:EE_|TYCPR01MB6303:EE_
+x-ms-office365-filtering-correlation-id: 98b94482-785e-47e6-e855-08dc7e3a3df0
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230031|366007|376005|7416005|1800799015|38070700009;
+x-microsoft-antispam-message-info: 
+ =?us-ascii?Q?rLzTOkzuwTvfDzj9ThsR7SkYD0bYWZ+IcrrritiaEnm8rqQ9UANr6pPQpjiC?=
+ =?us-ascii?Q?HxQOndLNYoJqXCdDcZRqav2W3ozLPRHuAcKMeF+7fJVYhdJOqGulFW0GSwug?=
+ =?us-ascii?Q?73aBzIPjc9ww/PPFc++AgsJTmwpn43L1VEXYQcxmdcSDsmr91vxFguaIEDxX?=
+ =?us-ascii?Q?pFJIw2N8gVTt9tjUhEYpui3qfXSuG8isqawjSdFOxEKxfoFdXwm8topKYfEu?=
+ =?us-ascii?Q?+j1yLgyxY4j/G0Ca2UPmeCP2CycPzbq5EypQyqT46T5c4JkJ1g43e09pHfkM?=
+ =?us-ascii?Q?q36ee/Flv5GrkQ993kzwlAlkOhcKAli0zd5ob5Z8gmuhvpxLMMqEtKTj0O96?=
+ =?us-ascii?Q?mpJGU8l+1gqLihgh+7rSyLZNSEgRtsSChj4L8AN0QQcwCBB8TZfv1po56pd9?=
+ =?us-ascii?Q?ILHqDImM+p08XnnU/ks/916lDxVI1jnyRTkBJPPFTHBb26cdOkrO0dxlzszR?=
+ =?us-ascii?Q?y/Cv4X16OiwISogSF9wJAIFP/pXGJR3Ocs1b6lwjb7V1Y8N/2YZP75Ft5gfI?=
+ =?us-ascii?Q?PVXz04JKx+TJ+5oniOSLvxdlXgZsVTVp35GvZVlhiQdvTQHAnpFBH+GQvMar?=
+ =?us-ascii?Q?atK3Hwu/T/sg2qTht62DkBLoCYrUMDl2M1Q0pshmwCy46CD6lFGcV9nE5S6q?=
+ =?us-ascii?Q?HfuH5zeFbngS7SsWp6yPNDlCmOkEwDlXEyFOpeKOGDcoq0AN6p2M8+N05UVT?=
+ =?us-ascii?Q?5FXswNWfgt94TppOJgqHNX7Gxr1QNGd1uh7pbm2vkh92V5xTsoG+wWHhGFfs?=
+ =?us-ascii?Q?fFh7WKI/qajH5jcDMFHcvWUHuBTnLd2RfNiK46RvmX7LxZbnleJaSZDtEPXY?=
+ =?us-ascii?Q?BtRGD3GeKTDxWODXQspPRW3Q2oZQEErv6TjZIgt22PK+j1HIGm4Mxf3LE5b8?=
+ =?us-ascii?Q?ZC/avnIosRmfRHGcuWvW+7LWsBF2WtXfyiAusF/GPF3zrit2Zv9gdOF4S6zl?=
+ =?us-ascii?Q?9pMQZhENRVO+Y/vOUTPzSRf/6f3w13UJM5NNPQZqLxIubnhUKBE/tOJhIIQm?=
+ =?us-ascii?Q?S55bvEdHSRF4GwKA0mOMkNYQWsHu2jM4xoEOn2tijxhFZI0M7SQO6DtbGM+Y?=
+ =?us-ascii?Q?t2DI6bgKIWmglPHjelB4NazH2y9FvP+Ps+vdhuU+uXyA71V5a0TYTtawUM21?=
+ =?us-ascii?Q?8s5hQRrREqBQ3vY88uUq8qTNcrX9BFn93ewHv3d1mGSweNb1hkjYzu+r2BJs?=
+ =?us-ascii?Q?QBZlxVmTj2cug3v3Ok5iBEVmKdnDsmL3FBOUgQhT6vZN7nGCUSodQJ5dD1zl?=
+ =?us-ascii?Q?ItrheHiZmVQ6GK8IdeBTNjQqNBsbXJalofkTXUU/9db6LL1nbmKK7c63mUw2?=
+ =?us-ascii?Q?Kd5VXTAfA8a2Orsi90ROGMLQHhI6Jm/DRgWEC3gD7+Ck4w=3D=3D?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TYAPR01MB4048.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366007)(376005)(7416005)(1800799015)(38070700009);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?+ajgu1Wp7E4QPELBh1Q6G79kflYCPc31zZYMKYVDu93GySK+IvJRGW8qzpga?=
+ =?us-ascii?Q?O+pr1it4+IPDHgKPTaHyi4vTBNvJ8oihUBaCVEl7WjIOp0abjXJ0y5JOBYTQ?=
+ =?us-ascii?Q?tPWpDGmrtNbhk1VyFR8wiHMGT9JcHjQ57/kbJz/N22T5VQHHpsR/h+lwLAAj?=
+ =?us-ascii?Q?IjNOmymqkMg8HEL562ckxYHeZAYcKG7icG0IBRXPHHC2AoPOVb7JsQLaQ/VV?=
+ =?us-ascii?Q?QuQIl9M8DHWv5HYzyy/+4ClmlWJVRSW04cms1J8olK5p+009vbhVJKXoN9nK?=
+ =?us-ascii?Q?w0zgdk9XMelclQv//3vlpeRsi8Zt6CkwQmxjBO42n9ZUEDcGIr6vKfwHYzIJ?=
+ =?us-ascii?Q?iFWM3j7HcHsGk2pwiEc3Pi/cIFplbq/a6s+BWCUJOFaXP6TGdyf1+w+GgJ8X?=
+ =?us-ascii?Q?AVXUczWGPy1KgPMtZ4B/qJexy5jLLvEyscyjGqHqvX5UoY/B3C0cfkobBmDn?=
+ =?us-ascii?Q?H8zcl9igcEh3my/n9HM9L74IK4vHJIIyuQHacKSyqmcqVwy/PhD5ewC7+KX1?=
+ =?us-ascii?Q?4kAHL/lMfe9Pb2Sc918mFIOIvozsp2AlhTblQD1Uvs1FUdgyoJU7kiw/DR0P?=
+ =?us-ascii?Q?r0D07LG31g7sOYR8RZbVC6Mayk8RrfHgE4gBLSPKJT3ZW/xmmX1LlftIAQLq?=
+ =?us-ascii?Q?Px90OYy29CegkkqG4y7o0OhYrtMbevUOXOnp0jwHBtAvURK8grntavmngL6S?=
+ =?us-ascii?Q?YNJOxQ3Q0gSscfmMvsQT+XgpCa+gX+XEQVO9fJFrKeDTxc6HS8S8IJ+cKI/q?=
+ =?us-ascii?Q?jrIDWDop+7d2xG+iCPRICERQZ0FAbXGcXDUg5tmn92hc2paaaKGzm6oPnlot?=
+ =?us-ascii?Q?cS/GUJZdMTnSSCv0AQUfdJgcnA/jbfBeD9l1ojQa732CoS8yq62OyalQcni4?=
+ =?us-ascii?Q?JBoEp5ZVemMb0o8r8L0uMV0o8rzoadbq2cDnA/t/9r9IrJlMsCm4O9BiF4TT?=
+ =?us-ascii?Q?wNm9CX7Bn5fLpQGlUhPtM1IFHZOJ34T/BDhLXLZgRyqpgzB16FGuK6WVShBL?=
+ =?us-ascii?Q?8YM56fdSywyyRJp6Psyj3apfUh1nReIjT4+8MikejatSGnSlvhdAbV/azz3w?=
+ =?us-ascii?Q?b2mMjKR+DIprLq9Z17FKolHGLOx0v20dZ0m4ZsLndWPXh9XufbrRzvwDAq8M?=
+ =?us-ascii?Q?HiNXuMp9rXdEouSqmi1S566HyIppU0DL6xZ8sRq1y8YI6eTEtk6Kh1RIDYqN?=
+ =?us-ascii?Q?lt0HDY83sQJ7Yy767bWaaoHzsvYjUELAW1h75e+fHAiD+DsyAbt0Dw1PPioe?=
+ =?us-ascii?Q?8NmFaxH4vDPg6h1sU6ItRw19JzPreOy7s2egSWLt1UNyB78l2OH7H7N4Q3wu?=
+ =?us-ascii?Q?mr0ijVhOrchI+CV/UhG+p4xTraabQbSYKdcn78hzU8TM42VDfag1rm4pH+xL?=
+ =?us-ascii?Q?8ibyH3S9xzKY2MiV+EhWMilePzVxuQZFBRZqFSctuWQti5VdVYMFfK0ZgeiC?=
+ =?us-ascii?Q?wO8Uts/gdBH4TihmtY9UOLOSc4ghJdmxieO8N/+FVD6mqjw6R3Tl2OADJLH3?=
+ =?us-ascii?Q?apSrUb1BsNFXYokcF2T2BGBxOfYzeXjGSlegk3lkEswv53WYUbTb1afp7sRh?=
+ =?us-ascii?Q?qHfqQwHzBtqedqycG0RzjpW/5keXlQMsXFLaS2Fj?=
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
+	knUGBC+SYWzlu/+CzFOSd616ppG6YMIvcZ5c6htfwrK4ZQXAGqUc9trFB+dIy7+zpBthXOp7fd2HlBJ0PIUw8bHjsZ7w2cvXVaeRcU6y76EDOQbJVx4WR25VEPmL9RjTz/k2ITMXUEJ/EpbY3gevBTKrJsVcB6Sw7G8/EeLCJNe06TgB8DieQ+MIgzN8Gp9F/g60YAH+dtpL1rr/1jX3w9cx3vniFs2DFsmfkknBATbcCV1d001sbWOS6uNepHSY2PoIbbAXLptaMKV2fc0wkZKwrZqZcBTqOvL/odtH/YZ54xuMFdWUTc2iBzAqXRVYzRORfK9BcftOSFGb+uBDBHtGJN58yhpRx7ymDZHYQIG7mldALw3cQa2PhtX01xc7ZsgJje9nrZC12olZsjnyxdRVmpV+kkmhDE7o9Ri2QlaX5CmdZsmcy5bGrvPw7jhVCGzODDFLtaxevHgkA5Z1+yYxYv/D89Bw5GXzS6T7zxd9uQ43TR3lPD4Th/75u62uoxfEqO5EQFbJM0RUBb0Yc/xMhAbYdqO2YvRJW65xLkitehFSKV4bkAgYlxQQf4jrZT2LO76wGpj2cy4QoHxjY/IbqssYAB3V8NFJyUqBHZY+zD5uLcRZqUEf1UocT0lS
+X-OriginatorOrg: sony.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TYAPR01MB4048.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98b94482-785e-47e6-e855-08dc7e3a3df0
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 May 2024 10:46:19.1960
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 66c65d8a-9158-4521-a2d8-664963db48e4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ZXsrT8qotow8fMUKLnRPIYhnUoVlNzBDiaHtvlPdXdqgM+AgygbV0KItH6uKjqW5FW5imvcJe5gpV4Pa2ivfUAKdEAEQKKDvqnATJRHx7+I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCPR01MB6303
+X-Proofpoint-ORIG-GUID: YhF108i88Es6Oa7yQSJtmFQaYIyXdSIZ
+X-Proofpoint-GUID: YhF108i88Es6Oa7yQSJtmFQaYIyXdSIZ
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+X-Sony-Outbound-GUID: YhF108i88Es6Oa7yQSJtmFQaYIyXdSIZ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.12.28.16
+ definitions=2024-05-26_09,2024-05-24_01,2024-05-17_01
 
-From: Yunseong Kim <yskelg@gmail.com>
+Hi Matthew,
 
-This is a Documentation/process/security-bugs korean version.
+On 2024-05-22 21:32, Matthew Wilcox wrote:
+> On Wed, May 22, 2024 at 04:46:29PM +0900, Sukrit Bhatnagar wrote:
+>> If the folio tests true for slab, do not print information that does not
+>> apply to it. Instead, print the slab flags stored in the kmem_cache fiel=
+d.
+>>=20
+>> [    7.248722] page: refcount:1 mapcount:0 mapping:0000000000000000 inde=
+x:0xffff888103e6aa87>
+>> [    7.249135] head: order:3 entire_mapcount:0 nr_pages_mapped:0 pincoun=
+t:0
+>> [    7.249429] slab flags: 0x8000000000000840(slab|head|zone=3D2)
+>> [    7.249664] cache flags: 0x10310(HWCACHE_ALIGN|PANIC|TYPESAFE_BY_RCU|=
+CMPXCHG_DOUBLE)
+>> [    7.249999] raw: 8000000000000000 ffffea00040f9a01 ffffea00040f9bc8 d=
+ead000000000400
+>=20
+> You haven't tested this against the current codebase ...
+>
+>> @@ -98,6 +101,8 @@ static void __dump_folio(struct folio *folio, struct =
+page *page,
+>>  		is_migrate_cma_folio(folio, pfn) ? " CMA" : "");
+>>  	if (page_has_type(&folio->page))
+>>  		pr_warn("page_type: %pGt\n", &folio->page.page_type);
+>> +	else if (folio_test_slab(folio))
+>> +		pr_warn("cache flags: %pGs\n", &((struct slab *)&folio->page)->slab_c=
+ache->flags);
+>>=20
+>=20
+> ... because page_has_type() is now true for slab; there is no more
+> PG_slab.  I think you also want:
+>=20
+> 	folio_slab(folio)->slab_cache->flags
 
-Signed-off-by: Yunseong Kim <yskelg@gmail.com>
----
- .../ko_KR/process/security-bugs.rst           | 96 +++++++++++++++++++
- 1 file changed, 96 insertions(+)
- create mode 100644 Documentation/translations/ko_KR/process/security-bugs.rst
+I didn't notice your other patch about removing PG_slab; it pretty much sol=
+ves
+this issue and much more.
+(I had created these patches a few weeks ago.)
 
-diff --git a/Documentation/translations/ko_KR/process/security-bugs.rst b/Documentation/translations/ko_KR/process/security-bugs.rst
-new file mode 100644
-index 000000000000..b8f16fe846ac
---- /dev/null
-+++ b/Documentation/translations/ko_KR/process/security-bugs.rst
-@@ -0,0 +1,96 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+:Original: Documentation/process/security-bugs.rst
-+:Translator: Yunseong Kim <yskelg@gmail.com>
-+
-+보안 버그
-+=========
-+
-+Linux 커널 개발자는 보안을 매우 중요하게 생각합니다.
-+따라서 보안 버그를 발견하면 가능한 한 빨리 수정하고 공개할 수 있도록
-+알려주시기 바랍니다. 보안 버그를 Linux 커널 보안 팀에 신고해 주세요.
-+
-+제보하기
-+--------
-+
-+Linux 커널 보안팀은 <security@kernel.org> 이메일로 연락할 수 있습니다.
-+버그 신고를 확인하고 수정 사항을 개발 및 릴리스하는 데 도움을 줄 보안 담당자의
-+비공개 목록입니다. 이미 수정 사항이 있는 경우 신고에 포함하면 처리 속도가
-+상당히 빨라질 수 있습니다. 보안팀이 보안 취약점을 파악하고 수정하기 위해
-+영역 관리자의 도움을 추가로 받을 수도 있습니다.
-+
-+모든 버그가 그렇듯이 더 많은 정보를 제공할수록 진단과 수정이 더 쉬워집니다.
-+어떤 정보가 도움이 될지 잘 모르겠다면
-+'Documentation/admin-guide/reporting-issues.rst'에
-+나와있는 문제 신고하기 절차를 검토해 주세요. 모든 보안 취약점 공격 코드는
-+매우 유용하며 이미 공개되어 있지 않은 한 신고자의 동의 없이 공개되지 않습니다.
-+
-+가능한 경우 첨부 파일 없이 일반 텍스트 이메일을 보내주세요.
-+첨부 파일에 모든 세부 사항이 숨겨져 있으면 복잡한 문제에 대해 맥락에 맞는
-+토론을 하기가 훨씬 더 어렵습니다. (아직 패치가 없는 경우라도) :doc:`일반적인
-+패치 제출<../../../process/submitting-patches>`과 마찬가지로 문제와 영향을
-+설명하고, 재현 단계를 나열하고, 제안된 수정 사항을 모두 일반 텍스트로
-+작성하세요.
-+
-+공개 및 엠바고 정보
-+-------------------
-+
-+보안 목록은 공개 채널이 아닙니다. 이에 대해서는 아래의 조정 사항을 참조하세요.
-+강력한 수정이 개발되면 릴리스 프로세스가 시작됩니다. 공개적으로 알려진 버그에
-+대한 수정 사항은 즉시 릴리스됩니다.
-+
-+공개적으로 알려지지 않은 버그에 대한 수정 사항이 제공되는 즉시 공개하는 것을
-+선호하지만, 신고자 또는 영향을 받는 당사자의 요청에 따라 공개 프로세스
-+시작일로부터 최대 7일 동안 연기될 수 있으며, 버그의 중요도에 따라 시간이 더
-+필요하다는 데 동의하는 경우 예외적으로 14일까지 연장될 수 있습니다.
-+수정 사항 공개를 연기할 수 있는 유일한 유효한 이유는 릴리스 조율이 필요한 QA
-+및 대규모 롤아웃의 복잡한 실행 계획을 수용하기 위해서입니다.
-+
-+엠바고된 정보는 수정 개발을 위해 신뢰할 수 있는 개인과 공유할 수 있지만,
-+신고자의 허가 없이 수정 사항과 함께 또는 다른 공개 채널에 게시할 수 없습니다.
-+여기에는 원래의 버그 보고서와 후속 논의(있는 경우), 보안 취약점 공격 코드,
-+CVE 정보 또는 신고자의 신원이 포함되지만 이에 국한되지 않습니다.
-+
-+다시 말해, 저희의 유일한 관심사는 버그 수정입니다. 보안 목록에 제출된 기타
-+모든 정보와 보고에 대한 후속 논의는 엠바고가 해제된 후에도 영구적으로 기밀로
-+취급됩니다.
-+
-+다른 그룹과의 협력
-+------------------
-+
-+커널 보안팀은 버그 수정에만 집중하는 반면, 다른 그룹은 배포판의 문제를
-+해결하고 운영 체제 공급업체 간의 공개를 조율하는 데 중점을 둡니다.
-+조율은 일반적으로 "리눅스 배포판" 메일링 리스트에서 처리하고 공개는
-+공공의 "oss-security" 메일링 리스트에서 처리하며, 이 둘은 서로 밀접하게
-+관련되어 있으며 리눅스 배포판 위키에 제시되어 있습니다:
-+<https://oss-security.openwall.org/wiki/mailing-lists/distros>
-+
-+세 가지 목록들이 추구하는 목표가 다르기 때문에 각각의 정책과 규칙이 다르다는
-+점에 유의하세요. 커널 보안 팀과 다른 팀 간의 조율이 어려운 이유는
-+커널 보안 팀의 경우 간혹 엠바고(최대 허용 일수에 따라)는 수정이 가능한
-+시점부터 시작하지만, "리눅스 배포판"의 경우 수정 가능 여부와 관계없이 초기
-+게시물부터 목록에 올라오기 때문입니다.
-+
-+따라서 커널 보안팀은 잠재적인 보안 문제를 신고하는 경우 해당 코드의
-+메인테이너가 수정 사항을 수락하고 위의 배포판 위키 페이지를 읽었으며
-+"리눅스 배포판" 메일링 리스트에 연락하는 것이 자신과 커널 커뮤니티에 부과되는
-+요구 사항임을 완벽히 이해할 때까지 "리눅스 배포판"에 연락하지 않을 것을
-+강력히 권장합니다. 이는 또한 일반적으로 수락된 수정 사항이 아직 병합되지 않은
-+상태에서 조정을 위한 경우를 제외하고는 두 목록을 한 번에 참조하는 것이
-+합리적이지 않다는 것을 의미합니다. 즉, 수정 사항이 수락될 때까지는
-+"리눅스 배포판"을 메일에 참조하지 말고, 병합된 후에는 커널 보안 팀을 메일에
-+참조하지 마세요.
-+
-+CVE 할당
-+--------
-+
-+보안팀은 불필요하게 프로세스를 복잡하게 만들고 버그 처리를 지연시킬 수
-+있으므로 보고나 수정에 대해 CVE를 할당하지 않으며, 이를 요구하지도 않습니다.
-+보고자가 확인된 문제에 대해 CVE 식별자를 할당받고자 하는 경우 :doc:`커널 CVE
-+할당팀<../../../process/cve>`에 연락하여 할당받을 수 있습니다.
-+
-+비공개 계약서
-+-------------
-+
-+Linux 커널 보안 팀은 공식적인 기관이 아니므로 기밀 유지 계약을 체결할 수
-+없습니다.
--- 
-2.34.1
+> Anyway, we have print_slab_info() which is currently static in slub.c.
+> Maybe that needs to become non-static and dump_page() should call that
+> for slabs?
 
+Thank you for the suggestions.
+
+print_slab_info() has a slightly different output string format, which does=
+ not
+match with the dump_page() output style.
+Adding it as-it-is looks a bit weird to me.
+Other than that, I think it may be useful to print it (which would happen o=
+nly
+when SLAB_DEBUG is enabled).
+
+Also: print_slab_info() is printing the folio's flags. Maybe that needs a c=
+hange?
+
+--
+Sukrit
 
