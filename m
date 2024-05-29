@@ -1,293 +1,330 @@
-Return-Path: <linux-doc+bounces-17182-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17184-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FBD78D32E1
-	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 11:24:14 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id CEF4B8D334B
+	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 11:41:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A7896B255C7
-	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 09:24:11 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 078F0B23DD6
+	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 09:41:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 01F2E169AD9;
-	Wed, 29 May 2024 09:24:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D77416C684;
+	Wed, 29 May 2024 09:41:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hVhJ4Im8"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="cTsLtX2Y"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C52A0381C8;
-	Wed, 29 May 2024 09:24:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BEB116A377;
+	Wed, 29 May 2024 09:41:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716974646; cv=none; b=fti7O1y5RJpRgt+o2eM+IxWv1MJrD0a17QvaKx1Cy7z6ou3ckQ5WGoE9zBVyk460sLqoXKD2pgxWpdpFzsv9H0PPJdzH/hM7Ss9nWPmIudvRSIZMiEw1pnSWpmmaGpmKac00IvAHeVXUmcy3lS3Hm2xZk49IYMOOOwqzINgwnZo=
+	t=1716975706; cv=none; b=s96XQFX1s+R2hCBEMI/HlZ4wbrNA6NhtObdpxI0PqJuXHd82wnxn7v/5aFsE7mT4JYJbY8QxcBNFztddh+xXvNKahWpqf+7uhhAbIazGVHuUMJSCANbAX9fSNDcFTCFQvRqqpX19BV8Y/ixWSMlVY+HbPrbcPeNHP5CYQm1MMeQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716974646; c=relaxed/simple;
-	bh=rBGQ1VrulL5ksiCDO9ZkVYWgjPIaCkQXBVisyW3pkOE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=d63gsnKkjz+X0xzxiHG24ITiuDLj51utu8mZDRJEC7qmGH7ZgPc79gb+gZrBSvV6cwa6LnMxTF+0N6iWnSiDKeTvxzn+vuVsHKb6N6jal8lGnQ3Fyg/+RdKFg0jGcZSqWsj5caSIskGvlswbqOZEXFJUmo34Y0A2t9PPfC2FiQU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hVhJ4Im8; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5295FC4AF0A;
-	Wed, 29 May 2024 09:24:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1716974646;
-	bh=rBGQ1VrulL5ksiCDO9ZkVYWgjPIaCkQXBVisyW3pkOE=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=hVhJ4Im8NPkPQ5JPvOOJWHqqcTJEGJ0gd4qy6m/CrRZS/AJ+PSYotRRPZhaiAogGz
-	 mPdLyHS6bi4G8a262UiQUU28NhUFIJh/iICVKqg3k/tojDtPUdrPrNTN/Jt/A/ogIa
-	 6xMaQtZNMgOmgieIFUnrjRTIbvGU0zKmSBwbnlnFWy0zHPsoNSPVa3R/cyM7qb4p0d
-	 rs45oxuhxYC1oqkpExG+K93qcTxDOj4zLa350F/T7JRCv+KX32Whb+g+F+JII7jqqQ
-	 dNYNOwhMVKcxJM+0y9zuE84q4ISHtlCXha94wtaQ4RZAb5vGoMZJBbIXIx+AdBC3lT
-	 9sNtLn05KyMUQ==
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5241b49c0daso2170092e87.0;
-        Wed, 29 May 2024 02:24:06 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCXsg0FI4c7fNRoMEeKwXr6u55feKA6YifVB6Ijso5wbQNrxamqSNX9PCRrodt8rgzxlmD8zSaOxP9qHjrsUhrj0IRUoRc3vSG4jVpaGMq0KQaf8IbCNAxVZXcr+KDmKs2/xbQU1e3E25IJ5Pu3/j72krIULnb9foEqg1nTWwxPVpQynSw==
-X-Gm-Message-State: AOJu0YwF+vFkDKbQhQbJ4rRetre2j/+dKWTevjJb9qUw72V7ZCqTWP8k
-	BqypQbqyMSNxOCkBj/8CxN8ZGiKULbuBtl8QwEgRRIJRTB6xt0bvsXq98JuzTyLzbbyBP7P38wb
-	RBZ3NnyDYnV1tCtaPhrnSban5LrE=
-X-Google-Smtp-Source: AGHT+IElA8UwiOiY8gJyoia8LQoKpjSTPgsqCuD06x/Q6vDZD/ahnuW6xbCvDcq/TynBn6IHwJXBE5f8DxOvVGOdUA0=
-X-Received: by 2002:a19:ad06:0:b0:52b:6eef:41b5 with SMTP id
- 2adb3069b0e04-52b6eef42e5mr201340e87.0.1716974644631; Wed, 29 May 2024
- 02:24:04 -0700 (PDT)
+	s=arc-20240116; t=1716975706; c=relaxed/simple;
+	bh=24TmFTXURDyvGQMiH83h+PTdtXsJry4fou/MpJJP3S8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=q64ficVDyw0qMCUQ1sfmlrCSCvoG3iPZ1cf0DHDuMAMgG4rwJrfRKFI1dmw4i1LIYFX4FIfTlGDB1c+cQeEE6+fy2XOQPZKeK0UgSIkNMZRULvxTX9o6dVCK5TKEeVTXGaXAmcvHeWHGdFJ2fNbfSBrqadAR/WXD9EL82/LJphY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=cTsLtX2Y; arc=none smtp.client-ip=217.70.183.195
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 0B5D26000E;
+	Wed, 29 May 2024 09:41:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1716975696;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=sK5uUXjesKasTbVZKPR3MybUoVyf8g3cgOo59NCsGK8=;
+	b=cTsLtX2Y1TXqSoVKg47U5iWNZjuZ/FtuUfLvMOv1mJ+x7KIQZebBfTWb9QgDj1UPgSKttc
+	Rtd9/zgZ6kUm0RtK9QpzfNTKTHwxc3qHABU4CgdknZQdgbTI/GgPXueecQK8S2M/2WMOnC
+	q5lZ2V+E08FU5tC8uAk2ZwMdWHRw3Whg7F8sjE3hc6c6sdVt9vTCqSmI4boH7Gut1gP9wG
+	8knI7DLC1jqjO6/sbBssIK/Z25hUV+uW+iPqbHzZIHMcS3HvqdH3lQGG2d+RW5xj8xVA3X
+	Q29Tt5hOJBA6B3N48ocTuYA2zMVRJJjMz+QCH9UGuoSuE+rc1zP9m5RDB6v9/g==
+From: Kory Maincent <kory.maincent@bootlin.com>
+Subject: [PATCH net-next v13 00/14] net: Make timestamping selectable
+Date: Wed, 29 May 2024 11:39:32 +0200
+Message-Id: <20240529-feature_ptp_netnext-v13-0-6eda4d40fa4f@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240528151052.313031-1-alexghiti@rivosinc.com> <20240528151052.313031-8-alexghiti@rivosinc.com>
-In-Reply-To: <20240528151052.313031-8-alexghiti@rivosinc.com>
-From: Guo Ren <guoren@kernel.org>
-Date: Wed, 29 May 2024 17:23:53 +0800
-X-Gmail-Original-Message-ID: <CAJF2gTQgg-7Fzoz9TsjWD-_8ABbS7M66aEztCsZ9Ejk8LOvmiQ@mail.gmail.com>
-Message-ID: <CAJF2gTQgg-7Fzoz9TsjWD-_8ABbS7M66aEztCsZ9Ejk8LOvmiQ@mail.gmail.com>
-Subject: Re: [PATCH 7/7] riscv: Add qspinlock support based on Zabha extension
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Paul Walmsley <paul.walmsley@sifive.com>, 
-	Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
-	Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>, 
-	Waiman Long <longman@redhat.com>, Boqun Feng <boqun.feng@gmail.com>, Arnd Bergmann <arnd@arndb.de>, 
-	Leonardo Bras <leobras@redhat.com>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, 
-	linux-arch@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIANT3VmYC/3XQzW6DMAwA4Fepch5TbByS9LT3mKYqUHuNtAECh
+ jpVvPtStKlMwDH++WznpnruIvfqeLipjsfYx6ZOD8ifDqq6hPqds3hOAYUac9AAmXAYvjo+tUN
+ 7qnmo+TpkuaB1xjp2VKrU2XYs8TqzryoVZfcq9ZYyl9gPTfc9zxuLOf8r+015LDKdWQgiFdpSs
+ 3kpm2b4iPVz1XzO4mgfCgBtKzYpZJGt9QaY9FpxfwpphGJbcUkxoIVQiEjKteIXCu4o/r6LMQW
+ AIS8IawX0gyG98zGgk6MlIAdTOR/8hgMLB3HHgeQIpINAMMDZbTi4cHK942BysDKCVBbBA/13p
+ mn6AW4pe4ltAgAA
+To: Florian Fainelli <florian.fainelli@broadcom.com>, 
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, 
+ Russell King <linux@armlinux.org.uk>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Richard Cochran <richardcochran@gmail.com>, 
+ Radu Pirea <radu-nicolae.pirea@oss.nxp.com>, 
+ Jay Vosburgh <j.vosburgh@gmail.com>, Andy Gospodarek <andy@greyhouse.net>, 
+ Nicolas Ferre <nicolas.ferre@microchip.com>, 
+ Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
+ Jonathan Corbet <corbet@lwn.net>, 
+ Horatiu Vultur <horatiu.vultur@microchip.com>, UNGLinuxDriver@microchip.com, 
+ Simon Horman <horms@kernel.org>, Vladimir Oltean <vladimir.oltean@nxp.com>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Maxime Chevallier <maxime.chevallier@bootlin.com>, 
+ Rahul Rameshbabu <rrameshbabu@nvidia.com>, 
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Willem de Bruijn <willemb@google.com>, 
+ Alexandra Winter <wintera@linux.ibm.com>
+X-Mailer: b4 0.13.0
+X-GND-Sasl: kory.maincent@bootlin.com
 
-On Tue, May 28, 2024 at 11:18=E2=80=AFPM Alexandre Ghiti <alexghiti@rivosin=
-c.com> wrote:
->
-> In order to produce a generic kernel, a user can select
-> CONFIG_QUEUED_SPINLOCKS which will fallback at runtime to the ticket
-> spinlock implementation if Zabha is not present.
->
-> Note that we can't use alternatives here because the discovery of
-> extensions is done too late and we need to start with the qspinlock
-> implementation because the ticket spinlock implementation would pollute
-> the spinlock value, so let's use static keys.
->
-> This is largely based on Guo's work and Leonardo reviews at [1].
->
-> Link: https://lore.kernel.org/linux-riscv/20231225125847.2778638-1-guoren=
-@kernel.org/ [1]
-> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> ---
->  .../locking/queued-spinlocks/arch-support.txt |  2 +-
->  arch/riscv/Kconfig                            |  1 +
->  arch/riscv/include/asm/Kbuild                 |  4 +-
->  arch/riscv/include/asm/spinlock.h             | 39 +++++++++++++++++++
->  arch/riscv/kernel/setup.c                     | 18 +++++++++
->  include/asm-generic/qspinlock.h               |  2 +
->  include/asm-generic/ticket_spinlock.h         |  2 +
->  7 files changed, 66 insertions(+), 2 deletions(-)
->  create mode 100644 arch/riscv/include/asm/spinlock.h
->
-> diff --git a/Documentation/features/locking/queued-spinlocks/arch-support=
-.txt b/Documentation/features/locking/queued-spinlocks/arch-support.txt
-> index 22f2990392ff..cf26042480e2 100644
-> --- a/Documentation/features/locking/queued-spinlocks/arch-support.txt
-> +++ b/Documentation/features/locking/queued-spinlocks/arch-support.txt
-> @@ -20,7 +20,7 @@
->      |    openrisc: |  ok  |
->      |      parisc: | TODO |
->      |     powerpc: |  ok  |
-> -    |       riscv: | TODO |
-> +    |       riscv: |  ok  |
->      |        s390: | TODO |
->      |          sh: | TODO |
->      |       sparc: |  ok  |
-> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-> index 184a9edb04e0..ccf1703edeb9 100644
-> --- a/arch/riscv/Kconfig
-> +++ b/arch/riscv/Kconfig
-> @@ -59,6 +59,7 @@ config RISCV
->         select ARCH_SUPPORTS_SHADOW_CALL_STACK if HAVE_SHADOW_CALL_STACK
->         select ARCH_USE_MEMTEST
->         select ARCH_USE_QUEUED_RWLOCKS
-> +       select ARCH_USE_QUEUED_SPINLOCKS if TOOLCHAIN_HAS_ZABHA
-Using qspinlock or not depends on real hardware capabilities, not the
-compiler flag. That's why I introduced combo-spinlock, ticket-spinlock
-& qspinlock three Kconfigs, and the combo-spinlock would compat all
-hardware platforms but waste some qspinlock code size.
+Up until now, there was no way to let the user select the hardware
+PTP provider at which time stamping occurs. The stack assumed that PHY time
+stamping is always preferred, but some MAC/PHY combinations were buggy.
 
->         select ARCH_USES_CFI_TRAPS if CFI_CLANG
->         select ARCH_WANT_BATCHED_UNMAP_TLB_FLUSH if SMP && MMU
->         select ARCH_WANT_DEFAULT_TOPDOWN_MMAP_LAYOUT if MMU
-> diff --git a/arch/riscv/include/asm/Kbuild b/arch/riscv/include/asm/Kbuil=
-d
-> index 504f8b7e72d4..ad72f2bd4cc9 100644
-> --- a/arch/riscv/include/asm/Kbuild
-> +++ b/arch/riscv/include/asm/Kbuild
-> @@ -2,10 +2,12 @@
->  generic-y +=3D early_ioremap.h
->  generic-y +=3D flat.h
->  generic-y +=3D kvm_para.h
-> +generic-y +=3D mcs_spinlock.h
->  generic-y +=3D parport.h
-> -generic-y +=3D spinlock.h
->  generic-y +=3D spinlock_types.h
-> +generic-y +=3D ticket_spinlock.h
->  generic-y +=3D qrwlock.h
->  generic-y +=3D qrwlock_types.h
-> +generic-y +=3D qspinlock.h
->  generic-y +=3D user.h
->  generic-y +=3D vmlinux.lds.h
-> diff --git a/arch/riscv/include/asm/spinlock.h b/arch/riscv/include/asm/s=
-pinlock.h
-> new file mode 100644
-> index 000000000000..e00429ac20ed
-> --- /dev/null
-> +++ b/arch/riscv/include/asm/spinlock.h
-> @@ -0,0 +1,39 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +
-> +#ifndef __ASM_RISCV_SPINLOCK_H
-> +#define __ASM_RISCV_SPINLOCK_H
-> +
-> +#ifdef CONFIG_QUEUED_SPINLOCKS
-> +#define _Q_PENDING_LOOPS       (1 << 9)
-> +
-> +#define __no_arch_spinlock_redefine
-> +#include <asm/ticket_spinlock.h>
-> +#include <asm/qspinlock.h>
-> +#include <asm/alternative.h>
-> +
-> +DECLARE_STATIC_KEY_TRUE(qspinlock_key);
-> +
-> +#define SPINLOCK_BASE_DECLARE(op, type, type_lock)                     \
-> +static __always_inline type arch_spin_##op(type_lock lock)             \
-> +{                                                                      \
-> +       if (static_branch_unlikely(&qspinlock_key))                     \
-> +               return queued_spin_##op(lock);                          \
-> +       return ticket_spin_##op(lock);                                  \
-> +}
-> +
-> +SPINLOCK_BASE_DECLARE(lock, void, arch_spinlock_t *)
-> +SPINLOCK_BASE_DECLARE(unlock, void, arch_spinlock_t *)
-> +SPINLOCK_BASE_DECLARE(is_locked, int, arch_spinlock_t *)
-> +SPINLOCK_BASE_DECLARE(is_contended, int, arch_spinlock_t *)
-> +SPINLOCK_BASE_DECLARE(trylock, bool, arch_spinlock_t *)
-> +SPINLOCK_BASE_DECLARE(value_unlocked, int, arch_spinlock_t)
-> +
-> +#else
-> +
-> +#include <asm/ticket_spinlock.h>
-> +
-> +#endif
-> +
-> +#include <asm/qrwlock.h>
-> +
-> +#endif /* __ASM_RISCV_SPINLOCK_H */
-> diff --git a/arch/riscv/kernel/setup.c b/arch/riscv/kernel/setup.c
-> index 4f73c0ae44b2..31ce75522fd4 100644
-> --- a/arch/riscv/kernel/setup.c
-> +++ b/arch/riscv/kernel/setup.c
-> @@ -244,6 +244,23 @@ static void __init parse_dtb(void)
->  #endif
->  }
->
-> +DEFINE_STATIC_KEY_TRUE(qspinlock_key);
-> +EXPORT_SYMBOL(qspinlock_key);
-> +
-> +static void __init riscv_spinlock_init(void)
-> +{
-> +       asm goto(ALTERNATIVE("nop", "j %[qspinlock]", 0, RISCV_ISA_EXT_ZA=
-BHA, 1)
-> +                : : : : qspinlock);
-> +
-> +       static_branch_disable(&qspinlock_key);
-> +       pr_info("Ticket spinlock: enabled\n");
-> +
-> +       return;
-> +
-> +qspinlock:
-> +       pr_info("Queued spinlock: enabled\n");
-> +}
-> +
->  extern void __init init_rt_signal_env(void);
->
->  void __init setup_arch(char **cmdline_p)
-> @@ -295,6 +312,7 @@ void __init setup_arch(char **cmdline_p)
->         riscv_set_dma_cache_alignment();
->
->         riscv_user_isa_enable();
-> +       riscv_spinlock_init();
->  }
->
->  bool arch_cpu_is_hotpluggable(int cpu)
-> diff --git a/include/asm-generic/qspinlock.h b/include/asm-generic/qspinl=
-ock.h
-> index 0655aa5b57b2..bf47cca2c375 100644
-> --- a/include/asm-generic/qspinlock.h
-> +++ b/include/asm-generic/qspinlock.h
-> @@ -136,6 +136,7 @@ static __always_inline bool virt_spin_lock(struct qsp=
-inlock *lock)
->  }
->  #endif
->
-> +#ifndef __no_arch_spinlock_redefine
->  /*
->   * Remapping spinlock architecture specific functions to the correspondi=
-ng
->   * queued spinlock functions.
-> @@ -146,5 +147,6 @@ static __always_inline bool virt_spin_lock(struct qsp=
-inlock *lock)
->  #define arch_spin_lock(l)              queued_spin_lock(l)
->  #define arch_spin_trylock(l)           queued_spin_trylock(l)
->  #define arch_spin_unlock(l)            queued_spin_unlock(l)
-> +#endif
->
->  #endif /* __ASM_GENERIC_QSPINLOCK_H */
-> diff --git a/include/asm-generic/ticket_spinlock.h b/include/asm-generic/=
-ticket_spinlock.h
-> index cfcff22b37b3..325779970d8a 100644
-> --- a/include/asm-generic/ticket_spinlock.h
-> +++ b/include/asm-generic/ticket_spinlock.h
-> @@ -89,6 +89,7 @@ static __always_inline int ticket_spin_is_contended(arc=
-h_spinlock_t *lock)
->         return (s16)((val >> 16) - (val & 0xffff)) > 1;
->  }
->
-> +#ifndef __no_arch_spinlock_redefine
->  /*
->   * Remapping spinlock architecture specific functions to the correspondi=
-ng
->   * ticket spinlock functions.
-> @@ -99,5 +100,6 @@ static __always_inline int ticket_spin_is_contended(ar=
-ch_spinlock_t *lock)
->  #define arch_spin_lock(l)              ticket_spin_lock(l)
->  #define arch_spin_trylock(l)           ticket_spin_trylock(l)
->  #define arch_spin_unlock(l)            ticket_spin_unlock(l)
-> +#endif
->
->  #endif /* __ASM_GENERIC_TICKET_SPINLOCK_H */
-> --
-> 2.39.2
->
+This series updates the default MAC/PHY default timestamping and aims to
+allow the user to select the desired hwtstamp provider administratively.
 
+Changes in v13:
+- Add PTP builtin code to fix build errors when building PTP as a module.
+- Fix error spotted by smatch and sparse.
+- Link to v12: https://lore.kernel.org/r/20240430-feature_ptp_netnext-v12-0-2c5f24b6a914@bootlin.com
 
---=20
-Best Regards
- Guo Ren
+Changes in v12:
+- Add missing return description in the kdoc.
+- Fix few nit.
+- Link to v11: https://lore.kernel.org/r/20240422-feature_ptp_netnext-v11-0-f14441f2a1d8@bootlin.com
+
+Changes in v11:
+- Add netlink examples.
+- Remove a change of my out of tree marvell_ptp patch in the patch series.
+- Remove useless extern.
+- Link to v10: https://lore.kernel.org/r/20240409-feature_ptp_netnext-v10-0-0fa2ea5c89a9@bootlin.com
+
+Changes in v10:
+- Move declarations to net/core/dev.h instead of netdevice.h
+- Add netlink documentation.
+- Add ETHTOOL_A_TSINFO_GHWTSTAMP netlink attributes instead of a bit in
+  ETHTOOL_A_TSINFO_TIMESTAMPING bitset.
+- Send "Move from simple ida to xarray" patch standalone.
+- Add tsinfo ntf command.
+- Add rcu_lock protection mechanism to avoid memory leak.
+- Fixed doc and kdoc issue.
+- Link to v9: https://lore.kernel.org/r/20240226-feature_ptp_netnext-v9-0-455611549f21@bootlin.com
+
+Changes in v9:
+- Remove the RFC prefix.
+- Correct few NIT fixes.
+- Link to v8: https://lore.kernel.org/r/20240216-feature_ptp_netnext-v8-0-510f42f444fb@bootlin.com
+
+Changes in v8:
+- Drop the 6 first patch as they are now merged.
+- Change the full implementation to not be based on the hwtstamp layer
+  (MAC/PHY) but on the hwtstamp provider which mean a ptp clock and a
+  phc qualifier.
+- Made some patch to prepare the new implementation.
+- Expand netlink tsinfo instead of a new ts command for new hwtstamp
+  configuration uAPI and for dumping tsinfo of specific hwtstamp provider.
+- Link to v7: https://lore.kernel.org/r/20231114-feature_ptp_netnext-v7-0-472e77951e40@bootlin.com
+
+Changes in v7:
+- Fix a temporary build error.
+- Link to v6: https://lore.kernel.org/r/20231019-feature_ptp_netnext-v6-0-71affc27b0e5@bootlin.com
+
+Changes in v6:
+- Few fixes from the reviews.
+- Replace the allowlist to default_timestamp flag to know which phy is
+  using old API behavior.
+- Rename the timestamping layer enum values.
+- Move to a simple enum instead of the mix between enum and bitfield.
+- Update ts_info and ts-set in software timestamping case.
+
+Changes in v5:
+- Update to ndo_hwstamp_get/set. This bring several new patches.
+- Add few patches to make the glue.
+- Convert macb to ndo_hwstamp_get/set.
+- Add netlink specs description of new ethtool commands.
+- Removed netdev notifier.
+- Split the patches that expose the timestamping to userspace to separate
+  the core and ethtool development.
+- Add description of software timestamping.
+- Convert PHYs hwtstamp callback to use kernel_hwtstamp_config.
+
+Changes in v4:
+- Move on to ethtool netlink instead of ioctl.
+- Add a netdev notifier to allow packet trapping by the MAC in case of PHY
+  time stamping.
+- Add a PHY whitelist to not break the old PHY default time-stamping
+  preference API.
+
+Changes in v3:
+- Expose the PTP choice to ethtool instead of sysfs.
+  You can test it with the ethtool source on branch feature_ptp of:
+  https://github.com/kmaincent/ethtool
+- Added a devicetree binding to select the preferred timestamp.
+
+Changes in v2:
+- Move selected_timestamping_layer variable of the concerned patch.
+- Use sysfs_streq instead of strmcmp.
+- Use the PHY timestamp only if available.
+
+Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+---
+Kory Maincent (14):
+      net_tstamp: Add TIMESTAMPING SOFTWARE and HARDWARE mask
+      net: Move dev_set_hwtstamp_phylib to net/core/dev.h
+      net: Make dev_get_hwtstamp_phylib accessible
+      net: Make net_hwtstamp_validate accessible
+      net: Change the API of PHY default timestamp to MAC
+      net: net_tstamp: Add unspec field to hwtstamp_source enumeration
+      net: Add struct kernel_ethtool_ts_info
+      ptp: Add phc source and helpers to register specific PTP clock or get information
+      net: Add the possibility to support a selected hwtstamp in netdevice
+      net: netdevsim: ptp_mock: Convert to netdev_ptp_clock_register
+      net: macb: Convert to netdev_ptp_clock_register
+      net: ptp: Move ptp_clock_index() to builtin symbol
+      net: ethtool: tsinfo: Add support for hwtstamp provider and get/set hwtstamp config
+      netlink: specs: tsinfo: Enhance netlink attributes and add a set command
+
+ Documentation/netlink/specs/ethtool.yaml           |  43 +-
+ Documentation/networking/ethtool-netlink.rst       |  38 +-
+ Documentation/networking/timestamping.rst          |  35 +-
+ drivers/net/bonding/bond_main.c                    |   4 +-
+ drivers/net/can/dev/dev.c                          |   2 +-
+ drivers/net/can/peak_canfd/peak_canfd.c            |   2 +-
+ drivers/net/can/usb/gs_usb.c                       |   2 +-
+ drivers/net/can/usb/peak_usb/pcan_usb_core.c       |   2 +-
+ drivers/net/can/usb/peak_usb/pcan_usb_core.h       |   2 +-
+ drivers/net/dsa/hirschmann/hellcreek_hwtstamp.c    |   2 +-
+ drivers/net/dsa/hirschmann/hellcreek_hwtstamp.h    |   2 +-
+ drivers/net/dsa/microchip/ksz_ptp.c                |   2 +-
+ drivers/net/dsa/microchip/ksz_ptp.h                |   2 +-
+ drivers/net/dsa/mv88e6xxx/hwtstamp.c               |   2 +-
+ drivers/net/dsa/mv88e6xxx/hwtstamp.h               |   4 +-
+ drivers/net/dsa/ocelot/felix.c                     |   2 +-
+ drivers/net/dsa/sja1105/sja1105_ptp.c              |   2 +-
+ drivers/net/dsa/sja1105/sja1105_ptp.h              |   2 +-
+ drivers/net/ethernet/amd/xgbe/xgbe-ethtool.c       |   2 +-
+ .../net/ethernet/aquantia/atlantic/aq_ethtool.c    |   2 +-
+ .../net/ethernet/broadcom/bnx2x/bnx2x_ethtool.c    |   2 +-
+ drivers/net/ethernet/broadcom/bnxt/bnxt_ethtool.c  |   2 +-
+ drivers/net/ethernet/broadcom/tg3.c                |   2 +-
+ drivers/net/ethernet/cadence/macb.h                |   2 +-
+ drivers/net/ethernet/cadence/macb_main.c           |   4 +-
+ drivers/net/ethernet/cadence/macb_ptp.c            |   2 +-
+ drivers/net/ethernet/cavium/liquidio/lio_ethtool.c |   2 +-
+ .../net/ethernet/cavium/thunder/nicvf_ethtool.c    |   2 +-
+ drivers/net/ethernet/chelsio/cxgb4/cxgb4_ethtool.c |   2 +-
+ drivers/net/ethernet/cisco/enic/enic_ethtool.c     |   2 +-
+ drivers/net/ethernet/engleder/tsnep_ethtool.c      |   2 +-
+ drivers/net/ethernet/freescale/dpaa/dpaa_ethtool.c |   2 +-
+ .../net/ethernet/freescale/dpaa2/dpaa2-ethtool.c   |   2 +-
+ .../net/ethernet/freescale/enetc/enetc_ethtool.c   |   2 +-
+ drivers/net/ethernet/freescale/fec_main.c          |   2 +-
+ drivers/net/ethernet/freescale/gianfar_ethtool.c   |   2 +-
+ .../net/ethernet/fungible/funeth/funeth_ethtool.c  |   2 +-
+ drivers/net/ethernet/hisilicon/hns3/hnae3.h        |   2 +-
+ drivers/net/ethernet/hisilicon/hns3/hns3_ethtool.c |   2 +-
+ .../net/ethernet/hisilicon/hns3/hns3pf/hclge_ptp.c |   2 +-
+ .../net/ethernet/hisilicon/hns3/hns3pf/hclge_ptp.h |   2 +-
+ drivers/net/ethernet/intel/e1000e/ethtool.c        |   2 +-
+ drivers/net/ethernet/intel/i40e/i40e_ethtool.c     |   2 +-
+ drivers/net/ethernet/intel/ice/ice_ethtool.c       |   2 +-
+ drivers/net/ethernet/intel/igb/igb_ethtool.c       |   2 +-
+ drivers/net/ethernet/intel/igc/igc_ethtool.c       |   2 +-
+ drivers/net/ethernet/intel/ixgbe/ixgbe_ethtool.c   |   2 +-
+ drivers/net/ethernet/marvell/mvpp2/mvpp2_main.c    |   2 +-
+ .../ethernet/marvell/octeontx2/nic/otx2_ethtool.c  |   2 +-
+ drivers/net/ethernet/mellanox/mlx4/en_ethtool.c    |   2 +-
+ drivers/net/ethernet/mellanox/mlx5/core/en.h       |   2 +-
+ .../net/ethernet/mellanox/mlx5/core/en_ethtool.c   |   4 +-
+ .../ethernet/mellanox/mlx5/core/ipoib/ethtool.c    |   2 +-
+ drivers/net/ethernet/mellanox/mlxsw/spectrum.h     |   2 +-
+ .../net/ethernet/mellanox/mlxsw/spectrum_ethtool.c |   2 +-
+ drivers/net/ethernet/mellanox/mlxsw/spectrum_ptp.c |   4 +-
+ drivers/net/ethernet/mellanox/mlxsw/spectrum_ptp.h |  10 +-
+ drivers/net/ethernet/microchip/lan743x_ethtool.c   |   2 +-
+ .../ethernet/microchip/lan966x/lan966x_ethtool.c   |   2 +-
+ .../net/ethernet/microchip/sparx5/sparx5_ethtool.c |   2 +-
+ drivers/net/ethernet/mscc/ocelot_net.c             |   2 +-
+ drivers/net/ethernet/mscc/ocelot_ptp.c             |   2 +-
+ .../net/ethernet/pensando/ionic/ionic_ethtool.c    |   2 +-
+ drivers/net/ethernet/qlogic/qede/qede_ethtool.c    |   2 +-
+ drivers/net/ethernet/qlogic/qede/qede_ptp.c        |   2 +-
+ drivers/net/ethernet/qlogic/qede/qede_ptp.h        |   2 +-
+ drivers/net/ethernet/renesas/ravb_main.c           |   2 +-
+ drivers/net/ethernet/renesas/rswitch.c             |   2 +-
+ drivers/net/ethernet/sfc/ethtool.c                 |   2 +-
+ drivers/net/ethernet/sfc/falcon/nic.h              |   2 +-
+ drivers/net/ethernet/sfc/ptp.c                     |   2 +-
+ drivers/net/ethernet/sfc/ptp.h                     |   5 +-
+ drivers/net/ethernet/sfc/siena/ethtool.c           |   2 +-
+ drivers/net/ethernet/sfc/siena/ptp.c               |   2 +-
+ drivers/net/ethernet/sfc/siena/ptp.h               |   4 +-
+ .../net/ethernet/stmicro/stmmac/stmmac_ethtool.c   |   2 +-
+ drivers/net/ethernet/ti/am65-cpsw-ethtool.c        |   2 +-
+ drivers/net/ethernet/ti/cpsw_ethtool.c             |   4 +-
+ drivers/net/ethernet/ti/cpsw_priv.h                |   2 +-
+ drivers/net/ethernet/ti/icssg/icssg_ethtool.c      |   2 +-
+ drivers/net/ethernet/ti/netcp_ethss.c              |   4 +-
+ drivers/net/ethernet/xscale/ixp4xx_eth.c           |   2 +-
+ drivers/net/macvlan.c                              |   2 +-
+ drivers/net/netdevsim/ethtool.c                    |   2 +-
+ drivers/net/netdevsim/netdev.c                     |  19 +-
+ drivers/net/phy/bcm-phy-ptp.c                      |   5 +-
+ drivers/net/phy/dp83640.c                          |   4 +-
+ drivers/net/phy/micrel.c                           |  10 +-
+ drivers/net/phy/mscc/mscc_ptp.c                    |   5 +-
+ drivers/net/phy/nxp-c45-tja11xx.c                  |   5 +-
+ drivers/net/phy/phy_device.c                       |  11 +
+ drivers/ptp/Makefile                               |   5 +
+ drivers/ptp/ptp_clock.c                            |  39 +-
+ drivers/ptp/ptp_clock_consumer.c                   | 171 ++++++
+ drivers/ptp/ptp_ines.c                             |   2 +-
+ drivers/ptp/ptp_mock.c                             |   4 +-
+ drivers/ptp/ptp_private.h                          |   7 +
+ drivers/s390/net/qeth_ethtool.c                    |   2 +-
+ include/linux/can/dev.h                            |   2 +-
+ include/linux/ethtool.h                            |  29 +-
+ include/linux/mii_timestamper.h                    |   2 +-
+ include/linux/net_tstamp.h                         |  16 +
+ include/linux/netdevice.h                          |   8 +-
+ include/linux/phy.h                                |  21 +-
+ include/linux/ptp_clock_kernel.h                   | 178 ++++++
+ include/linux/ptp_mock.h                           |   4 +-
+ include/net/dsa.h                                  |   2 +-
+ include/soc/mscc/ocelot.h                          |   2 +-
+ include/uapi/linux/ethtool_netlink.h               |  14 +
+ include/uapi/linux/net_tstamp.h                    |  11 +
+ net/8021q/vlan_dev.c                               |   2 +-
+ net/core/dev.h                                     |   7 +
+ net/core/dev_ioctl.c                               |  56 +-
+ net/core/timestamping.c                            |  49 +-
+ net/dsa/user.c                                     |   2 +-
+ net/ethtool/common.c                               |  40 +-
+ net/ethtool/common.h                               |   5 +-
+ net/ethtool/ioctl.c                                |  12 +-
+ net/ethtool/netlink.c                              |  16 +-
+ net/ethtool/netlink.h                              |   6 +-
+ net/ethtool/tsinfo.c                               | 641 ++++++++++++++++++++-
+ net/sched/sch_taprio.c                             |   2 +-
+ 122 files changed, 1519 insertions(+), 202 deletions(-)
+---
+base-commit: caaa6a85f0658de87358e08fb9e3768d2daf5e01
+change-id: 20231011-feature_ptp_netnext-3f278578e84b
+
+Best regards,
+-- 
+Köry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
+
 
