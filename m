@@ -1,225 +1,193 @@
-Return-Path: <linux-doc+bounces-17230-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17233-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C89E8D3E14
-	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 20:10:42 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 063AB8D3E4C
+	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 20:27:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5C9BC1C21B2E
-	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 18:10:41 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6ED1F1F23705
+	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 18:27:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 467301C2304;
-	Wed, 29 May 2024 18:10:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D16B315D5A0;
+	Wed, 29 May 2024 18:26:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="QicqMx7Q"
+	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="wJMqtpn2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95F4B1836DE;
-	Wed, 29 May 2024 18:10:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB679139588
+	for <linux-doc@vger.kernel.org>; Wed, 29 May 2024 18:26:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717006221; cv=none; b=sSClYK/HuyKWNum7phfVt7RM3Vj02MqPUo54Tq3e16rP74yyD4gwTDDHYvl7hELRFkr9N2s0ltvun6F20BgE+cdlx3RdK7doTvl0NRv3F2l3ipU+EeL5wkYpXMplFhfDWB4fx1xyk896JR1uzxqXY7eerYvwFQBBk9mTRXG6go0=
+	t=1717007217; cv=none; b=Er42iTeHRVLaAX99v+dW2lHhSkNvQ18k7K04DmQqtd/KC4p2d3IexSi6e7U3ZueYWYz/szVY6Ia3G982BRD4bBUmJOHUZBp/dtT2w2v6z+4fRnPJxWGWqUrJPSKY0hrieAfzSHmWzvMDW/IKH4IAfXFab8tvC/ahoS6sY50vX80=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717006221; c=relaxed/simple;
-	bh=0kcDD/5ugp1alfrK4+zeqPWHZ6Ox9wD0gGIKPMAxpIg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=NiOKgqlRl+f8HSqXo+vFSLLpWrxrShSGF4e0OHb1HHa1fV9CUa8GrviKMSc1kM5pkYbc4nCr6xVpbIXX8Eo3RfcXhRFQlH+Hy3imio8lN/udB6+mKnNn/w5dHBQcqOe4vS6h7245xjz3g7rKtM/gt8zzSIRsec99Uznt4PeOLc4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=QicqMx7Q; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44TBHdm9012837;
-	Wed, 29 May 2024 18:10:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	4CscIOPSIzNF/B8vuaT4PurRNfIAAhpAp22/FUwa6ww=; b=QicqMx7QD6mdsxIL
-	opZ57MCOeAvyP046IyzXUsMcPjr86HcDI/m21Q8A+Yxb5PERR7euQm0Q6WR/phw8
-	24HumrXwCLHTmtxkPwtSCczMjB+BT5gk9db5jChcaCo+gKjk/QOk03KnrRLsij80
-	LHhgChrbCXQOWgWxfpVspLjqp+7lsnYm6u1nq7wxHSUuf3gPqXPUeW5G1O9LILqK
-	4UVUCegxKtZWT7nbNlKzcRaUf7fS6reH3Co64zxajRDQRofU9/LbiLjKb3mAz3jJ
-	SmhVI5YSKIqqUZ6y1AbjxS7F1E+QMEcaDugbpGbAfL6WOV/tj6GsQLGkDNjlGavv
-	YNdPPg==
-Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3yba0qhurr-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 29 May 2024 18:10:02 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
-	by NALASPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 44TIA0V5023051
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 29 May 2024 18:10:01 GMT
-Received: from hu-clew-lv.qualcomm.com (10.49.16.6) by
- nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 29 May 2024 11:10:00 -0700
-From: Chris Lew <quic_clew@quicinc.com>
-Date: Wed, 29 May 2024 11:09:58 -0700
-Subject: [PATCH v3 4/4] remoteproc: qcom_q6v5_pas: Add hwspinlock bust on
- stop
+	s=arc-20240116; t=1717007217; c=relaxed/simple;
+	bh=6LVVYXNh21KrADprqmRbX7nwjBAz7XxQbzBF1i9gRd8=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=MVclhhg+tlPqu8zPLWM2PIOifmtM6Wifmcsa5XuOXOWyt30jsLuf3LemBn4hLvZXRAfQienZXiq/tDBvg3uDTL2kv5lxfsBhrge5GPtOrECv57uTs9AOxHccvjvHRfhk8V+dGbKEds5BTo9LshBkWS6TTte69ergUzMa3IsAw8k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=wJMqtpn2; arc=none smtp.client-ip=209.85.214.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1f480624d0fso497955ad.1
+        for <linux-doc@vger.kernel.org>; Wed, 29 May 2024 11:26:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1717007215; x=1717612015; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=wV+9Ayl5aIwRvmUk+4xjSCYb53pq5UWCKjYVecZ6q8o=;
+        b=wJMqtpn2EsmcCuwQlsta+SxjUkeINsfzZKhkV+E5dJy5A8j8Af8HI93mcUYQnajnB3
+         c3lbmiCrh8hs3yy5p1wOJZiMtPTipkXZErolsdOQyN87RpJPCvwEKmCqGVmfEUuOYPl3
+         xdV4S3vcWvokHo5ZCgGNQ4w7Ga2yf50N4o17ZLQQmelfmLAAyanIaGDdCmDVpGISf0sC
+         8aj6yG9ywWRjwxuU48NebSRvgU4U08fSPo2i8MiKGhwfv3V2hFVr+AVmUyHN+prua3DU
+         uqG7LeJeTmUlah8Ve7mLii6WAwo5ZtmMy0mzztnqrkP4CwpDPqa7cVo4s9SaOz6VKKig
+         PUAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1717007215; x=1717612015;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=wV+9Ayl5aIwRvmUk+4xjSCYb53pq5UWCKjYVecZ6q8o=;
+        b=KFOGOG3ETeqVrQ4MvinPHxsR0tfljGozO7b1TxVCRc/JQgdw/NuLNL3BrZ4vU7SVWH
+         BLESuR97eLBBUa+a5s8RDlZFKJ/1Gppenb7dqvmIN9qD0OWCaYiRTpULu/90MFYybbEy
+         6RIm00IBUYHgj97xkSguIzzzWhRW83t5zoLR6oL3RFFPhBWmuWwegvbVTuBssfMMu07d
+         VIfxRWb17CgnTMLaHpw6ANlbl1RUbR7f1FhKmZfpXHYx0KLwD7CXLaWY5WSpBqNYzALc
+         xblaqcgP1sVstr8wnp/1Yf6XBUSjq9bRxWwMDZ4euXF7bID1LM9wZLIf++qYpudZjCb0
+         xghw==
+X-Forwarded-Encrypted: i=1; AJvYcCXN88mhr/ZTwhsoGw9a4nG/0u3hHXGN1v9SVEervrETxkSjF9CiZPWdeNJg43yjUHbmuWXNeRAiht1Q5bfVT+isGy1KgAKezOde
+X-Gm-Message-State: AOJu0Yz65qCInKYbsDpD8S+8XeDdNGYGCgUnaX4YBzZ1pgFcpKKE2H0F
+	O2UMVYdSw48lJKm9SwBOAfOhQGlOm4RZgJeCU5ljo5JgyPbvHSYEALTEH4NX0tQ=
+X-Google-Smtp-Source: AGHT+IHRDxLd9IHo/dFmgMfsngSBbOAxErYqY9dIxF6DeOkxqEZJH9H0vaoSPZZqTHcOxtdRx28xqg==
+X-Received: by 2002:a17:902:f645:b0:1f4:5278:5c19 with SMTP id d9443c01a7336-1f4527863e0mr151718295ad.49.1717007215144;
+        Wed, 29 May 2024 11:26:55 -0700 (PDT)
+Received: from evan.ba.rivosinc.com ([64.71.180.162])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f44c96f67fsm102981055ad.154.2024.05.29.11.26.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 May 2024 11:26:54 -0700 (PDT)
+From: Evan Green <evan@rivosinc.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Yangyu Chen <cyy@cyyself.name>,
+	Evan Green <evan@rivosinc.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	Andrew Jones <ajones@ventanamicro.com>,
+	Andy Chiu <andy.chiu@sifive.com>,
+	=?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
+	Conor Dooley <conor.dooley@microchip.com>,
+	Costa Shulyupin <costa.shul@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Sami Tolvanen <samitolvanen@google.com>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-riscv@lists.infradead.org
+Subject: [PATCH] RISC-V: hwprobe: Add MISALIGNED_PERF key
+Date: Wed, 29 May 2024 11:26:48 -0700
+Message-Id: <20240529182649.2635123-1-evan@rivosinc.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20240529-hwspinlock-bust-v3-4-c8b924ffa5a2@quicinc.com>
-References: <20240529-hwspinlock-bust-v3-0-c8b924ffa5a2@quicinc.com>
-In-Reply-To: <20240529-hwspinlock-bust-v3-0-c8b924ffa5a2@quicinc.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Baolin Wang
-	<baolin.wang@linux.alibaba.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        "Ingo
- Molnar" <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-        Waiman Long
-	<longman@redhat.com>, Boqun Feng <boqun.feng@gmail.com>,
-        Jonathan Corbet
-	<corbet@lwn.net>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring
-	<robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
-	<conor+dt@kernel.org>,
-        Manivannan Sadhasivam
-	<manivannan.sadhasivam@linaro.org>,
-        Konrad Dybcio <konrad.dybcio@linaro.org>
-CC: <linux-remoteproc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
-        <devicetree@vger.kernel.org>, Chris Lew <quic_clew@quicinc.com>,
-        "Richard
- Maina" <quic_rmaina@quicinc.com>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1717006199; l=3424;
- i=quic_clew@quicinc.com; s=20240508; h=from:subject:message-id;
- bh=Fh1qjcjJVfLujRu9lV+ilZpdx4nr3R2fYPbCuSucud0=;
- b=rSI4BNpbFLSlMfe4BSfPwSXFFERdnA9hNZRn5X7NWLgT5aXlj/qia48D3MpjOhCfOULFqWbdr
- cZpOhCtr0lkAotxvR3KzsH3e4Cbd3+qWy8YU+UZjgN/faI9K+LF15cf
-X-Developer-Key: i=quic_clew@quicinc.com; a=ed25519;
- pk=lEYKFaL1H5dMC33BEeOULLcHAwjKyHkTLdLZQRDTKV4=
-X-ClientProxiedBy: nalasex01c.na.qualcomm.com (10.47.97.35) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: yKndioMBwa7xc8se-FGAO4lSJwVPx5JN
-X-Proofpoint-ORIG-GUID: yKndioMBwa7xc8se-FGAO4lSJwVPx5JN
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.12.28.16
- definitions=2024-05-29_14,2024-05-28_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- suspectscore=0 lowpriorityscore=0 impostorscore=0 clxscore=1015 mlxscore=0
- mlxlogscore=999 malwarescore=0 spamscore=0 adultscore=0 bulkscore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2405170001 definitions=main-2405290127
+Content-Transfer-Encoding: 8bit
 
-From: Richard Maina <quic_rmaina@quicinc.com>
+RISCV_HWPROBE_KEY_CPUPERF_0 was mistakenly flagged as a bitmask in
+hwprobe_key_is_bitmask(), when in reality it was an enum value. This
+causes problems when used in conjunction with RISCV_HWPROBE_WHICH_CPUS,
+since SLOW, FAST, and EMULATED have values whose bits overlap with
+each other. If the caller asked for the set of CPUs that was SLOW or
+EMULATED, the returned set would also include CPUs that were FAST.
 
-When remoteproc goes down unexpectedly this results in a state where any
-acquired hwspinlocks will remain locked possibly resulting in deadlock.
-In order to ensure all locks are freed we include a call to
-qcom_smem_bust_hwspin_lock_by_host() during remoteproc shutdown.
+Introduce a new hwprobe key, RISCV_HWPROBE_KEY_MISALIGNED_PERF, which
+returns the same values in response to a direct query (with no flags),
+but is properly handled as an enumerated value. As a result, SLOW,
+FAST, and EMULATED are all correctly treated as distinct values under
+the new key when queried with the WHICH_CPUS flag.
 
-For qcom_q6v5_pas remoteprocs, each remoteproc has an assigned smem
-host_id. Remoteproc can pass this id to smem to try and bust the lock on
-remoteproc stop.
+Leave the old key in place to avoid disturbing applications which may
+have already come to rely on the broken behavior.
 
-This edge case only occurs with q6v5_pas watchdog crashes. The error
-fatal case has handling to clear the hwspinlock before the error fatal
-interrupt is triggered.
+Fixes: e178bf146e4b ("RISC-V: hwprobe: Introduce which-cpus flag")
+Signed-off-by: Evan Green <evan@rivosinc.com>
 
-Signed-off-by: Richard Maina <quic_rmaina@quicinc.com>
-Reviewed-by: Bjorn Andersson <andersson@kernel.org>
-Signed-off-by: Chris Lew <quic_clew@quicinc.com>
 ---
- drivers/remoteproc/qcom_q6v5_pas.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
 
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 54d8005d40a3..8458bcfe9e19 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -52,6 +52,7 @@ struct adsp_data {
- 	const char *ssr_name;
- 	const char *sysmon_name;
- 	int ssctl_id;
-+	unsigned int smem_host_id;
+
+Note: Yangyu also has a fix out for this issue at [1]. That fix is much
+tidier, but comes with the slight risk that some very broken userspace
+application may break now that FAST cpus are not included for the query
+of which cpus are SLOW or EMULATED. I wanted to get this fix out so that
+we have both as options, and can discuss. These fixes are mutually
+exclusive, don't take both.
+
+[1] https://lore.kernel.org/linux-riscv/tencent_01F8E0050FB4B11CC170C3639E43F41A1709@qq.com/
+
+---
+ Documentation/arch/riscv/hwprobe.rst  | 8 ++++++--
+ arch/riscv/include/asm/hwprobe.h      | 2 +-
+ arch/riscv/include/uapi/asm/hwprobe.h | 1 +
+ arch/riscv/kernel/sys_hwprobe.c       | 1 +
+ 4 files changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/riscv/hwprobe.rst
+index 204cd4433af5..616ee372adaf 100644
+--- a/Documentation/arch/riscv/hwprobe.rst
++++ b/Documentation/arch/riscv/hwprobe.rst
+@@ -192,8 +192,12 @@ The following keys are defined:
+        supported as defined in the RISC-V ISA manual starting from commit
+        d8ab5c78c207 ("Zihintpause is ratified").
  
- 	int region_assign_idx;
- 	int region_assign_count;
-@@ -81,6 +82,7 @@ struct qcom_adsp {
- 	int lite_pas_id;
- 	unsigned int minidump_id;
- 	int crash_reason_smem;
-+	unsigned int smem_host_id;
- 	bool decrypt_shutdown;
- 	const char *info_name;
- 
-@@ -399,6 +401,9 @@ static int adsp_stop(struct rproc *rproc)
- 	if (handover)
- 		qcom_pas_handover(&adsp->q6v5);
- 
-+	if (adsp->smem_host_id)
-+		ret = qcom_smem_bust_hwspin_lock_by_host(adsp->smem_host_id);
+-* :c:macro:`RISCV_HWPROBE_KEY_CPUPERF_0`: A bitmask that contains performance
+-  information about the selected set of processors.
++* :c:macro:`RISCV_HWPROBE_KEY_CPUPERF_0`: Deprecated. Returns similar values to
++     :c:macro:`RISCV_HWPROBE_KEY_MISALIGNED_PERF`, but the key was mistakenly
++     classified as a bitmask rather than a value.
 +
- 	return ret;
- }
++* :c:macro:`RISCV_HWPROBE_KEY_MISALIGNED_PERF`: An enum value describing the
++  performance of misaligned scalar accesses on the selected set of processors.
  
-@@ -727,6 +732,7 @@ static int adsp_probe(struct platform_device *pdev)
- 	adsp->pas_id = desc->pas_id;
- 	adsp->lite_pas_id = desc->lite_pas_id;
- 	adsp->info_name = desc->sysmon_name;
-+	adsp->smem_host_id = desc->smem_host_id;
- 	adsp->decrypt_shutdown = desc->decrypt_shutdown;
- 	adsp->region_assign_idx = desc->region_assign_idx;
- 	adsp->region_assign_count = min_t(int, MAX_ASSIGN_COUNT, desc->region_assign_count);
-@@ -1196,6 +1202,7 @@ static const struct adsp_data sm8550_adsp_resource = {
- 	.ssr_name = "lpass",
- 	.sysmon_name = "adsp",
- 	.ssctl_id = 0x14,
-+	.smem_host_id = 2,
- };
+   * :c:macro:`RISCV_HWPROBE_MISALIGNED_UNKNOWN`: The performance of misaligned
+     accesses is unknown.
+diff --git a/arch/riscv/include/asm/hwprobe.h b/arch/riscv/include/asm/hwprobe.h
+index 630507dff5ea..150a9877b0af 100644
+--- a/arch/riscv/include/asm/hwprobe.h
++++ b/arch/riscv/include/asm/hwprobe.h
+@@ -8,7 +8,7 @@
  
- static const struct adsp_data sm8550_cdsp_resource = {
-@@ -1216,6 +1223,7 @@ static const struct adsp_data sm8550_cdsp_resource = {
- 	.ssr_name = "cdsp",
- 	.sysmon_name = "cdsp",
- 	.ssctl_id = 0x17,
-+	.smem_host_id = 5,
- };
+ #include <uapi/asm/hwprobe.h>
  
- static const struct adsp_data sm8550_mpss_resource = {
-@@ -1236,6 +1244,7 @@ static const struct adsp_data sm8550_mpss_resource = {
- 	.ssr_name = "mpss",
- 	.sysmon_name = "modem",
- 	.ssctl_id = 0x12,
-+	.smem_host_id = 1,
- 	.region_assign_idx = 2,
- 	.region_assign_count = 1,
- 	.region_assign_vmid = QCOM_SCM_VMID_MSS_MSA,
-@@ -1275,6 +1284,7 @@ static const struct adsp_data sm8650_cdsp_resource = {
- 	.ssr_name = "cdsp",
- 	.sysmon_name = "cdsp",
- 	.ssctl_id = 0x17,
-+	.smem_host_id = 5,
- 	.region_assign_idx = 2,
- 	.region_assign_count = 1,
- 	.region_assign_shared = true,
-@@ -1299,6 +1309,7 @@ static const struct adsp_data sm8650_mpss_resource = {
- 	.ssr_name = "mpss",
- 	.sysmon_name = "modem",
- 	.ssctl_id = 0x12,
-+	.smem_host_id = 1,
- 	.region_assign_idx = 2,
- 	.region_assign_count = 3,
- 	.region_assign_vmid = QCOM_SCM_VMID_MSS_MSA,
-
+-#define RISCV_HWPROBE_MAX_KEY 6
++#define RISCV_HWPROBE_MAX_KEY 7
+ 
+ static inline bool riscv_hwprobe_key_is_valid(__s64 key)
+ {
+diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/uapi/asm/hwprobe.h
+index dda76a05420b..bc34e33fef23 100644
+--- a/arch/riscv/include/uapi/asm/hwprobe.h
++++ b/arch/riscv/include/uapi/asm/hwprobe.h
+@@ -68,6 +68,7 @@ struct riscv_hwprobe {
+ #define		RISCV_HWPROBE_MISALIGNED_UNSUPPORTED	(4 << 0)
+ #define		RISCV_HWPROBE_MISALIGNED_MASK		(7 << 0)
+ #define RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE	6
++#define RISCV_HWPROBE_KEY_MISALIGNED_PERF	7
+ /* Increase RISCV_HWPROBE_MAX_KEY when adding items. */
+ 
+ /* Flags */
+diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwprobe.c
+index 969ef3d59dbe..c8b7d57eb55e 100644
+--- a/arch/riscv/kernel/sys_hwprobe.c
++++ b/arch/riscv/kernel/sys_hwprobe.c
+@@ -208,6 +208,7 @@ static void hwprobe_one_pair(struct riscv_hwprobe *pair,
+ 		break;
+ 
+ 	case RISCV_HWPROBE_KEY_CPUPERF_0:
++	case RISCV_HWPROBE_KEY_MISALIGNED_PERF:
+ 		pair->value = hwprobe_misaligned(cpus);
+ 		break;
+ 
 -- 
-2.25.1
+2.34.1
 
 
