@@ -1,290 +1,181 @@
-Return-Path: <linux-doc+bounces-17196-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17198-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA14C8D3370
-	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 11:45:53 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 543E48D33DD
+	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 12:00:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1941B1C213BF
-	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 09:45:53 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DB7DE2853CC
+	for <lists+linux-doc@lfdr.de>; Wed, 29 May 2024 10:00:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 02EB5181334;
-	Wed, 29 May 2024 09:41:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="hxq+Veoz"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8196B178CE8;
+	Wed, 29 May 2024 10:00:41 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from albert.telenet-ops.be (albert.telenet-ops.be [195.130.137.90])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A89EB180A88;
-	Wed, 29 May 2024 09:41:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6A7915B14A
+	for <linux-doc@vger.kernel.org>; Wed, 29 May 2024 10:00:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.130.137.90
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1716975718; cv=none; b=VhHswI2P/wUBJBsM7QVPrDt7ybSryQeOJvBHG0WN2Uz2lS9pYERH/RiuRjb3PysDe5fRBwFeLiad/tY0hGLi8UVAMYQOKhAYf3RM+TGOlZArzxTPQ0CaKDRcVQ5PnnB6nFDFa4El9F0woG3wS134L8fQHgh1fUdCJtKIHeBfZSc=
+	t=1716976841; cv=none; b=PpllQonFTHhLcqylhXkTg6P9WN8tK2eD6MwtgYZiGyFu6jDR31cvqBAfnA73AD6GARSGblSkDiqlk/xBe4NwyMgn6ngan5uMYtHzhrcmCMCplUKFxOtMGDrbzlWr5rDHun+dyfMK4e8w3ggJLePt11L1V9TAIPCfr6r+cEDLJPE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1716975718; c=relaxed/simple;
-	bh=5SC4SCTap6xR5jJu0SFRaajHz4hnnGaOKkU6KevpGPI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=gLkmOqLqje6jKbN2tjpfFwVNxT7rNafWjzQ+BIyQO3qHzOlWH7veYXSxJdAAdbqDbsXf0AAyH36I7zxF2fBQCUiMJA9HPygUoyYTYKm/3EViZQyzbstMp778TmdUHFgItQRN+I2vYWKaD4Kcviz34JTQUyezo61RwFAWGN4XkSQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=hxq+Veoz; arc=none smtp.client-ip=217.70.183.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id DD83A6000C;
-	Wed, 29 May 2024 09:41:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1716975715;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=4D/WDNBi2rRpqkB1dWLbSf8v7lY2RM4BPVKzd1iG1gE=;
-	b=hxq+VeozLmuaIh86nz4WP5beXoHfxwfIHZAHwDKpfeNgLPQVmUJyDqcwj3keyfU5K08zON
-	JvJEqpMB17KqSZqo6FybKSXHepj7pjUaEh8qCwGa3tOxuhAkiBr9Vmqy+twQoCzTzkPNTA
-	J1Yt1OefU99zv7r9/K2Pha1sDNY1fMhhdPlozWbTTPDoFt0I3vZlR6HWcDdXP6RgpMjzfH
-	YFDjytStFxWPeDWtKhyto4J6xDcwoBKLlNoh4bNsgJCuRGkcCLL5FS9M+meolEtBbuoi6J
-	w1tc0gKASP0sopplK2qg/fwrEv9ioW8mkswSgDYGsuN0prsaYlz5LYGqhhKRBQ==
-From: Kory Maincent <kory.maincent@bootlin.com>
-Date: Wed, 29 May 2024 11:39:46 +0200
-Subject: [PATCH net-next v13 14/14] netlink: specs: tsinfo: Enhance netlink
- attributes and add a set command
+	s=arc-20240116; t=1716976841; c=relaxed/simple;
+	bh=j15g7+Zs11MXgNdFt9xjPzQq0JE/TjMvjYfFKO5EiIg=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=iM6Z0Csa8GyQVdiPT1gVgebyuJMXY0xQ/D3GrrPFzpnxUvu3m6V8E/oYcbyjodzlqQdwvm/9paqO6m6FGBcAVjj1ST2FGFmMTUtdKEl9QejArQfq2Ubfy1OfCTyQRtO00N0vCFtGBbzXkmNkZKfXc0z2ynl/WIKmlrdqdyaFgT8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=glider.be; spf=none smtp.mailfrom=linux-m68k.org; arc=none smtp.client-ip=195.130.137.90
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=glider.be
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux-m68k.org
+Received: from ramsan.of.borg ([IPv6:2a02:1810:ac12:ed80:1b01:1838:131c:4de4])
+	by albert.telenet-ops.be with bizsmtp
+	id Uy0Y2C00C3VPV9V06y0Ynv; Wed, 29 May 2024 12:00:38 +0200
+Received: from rox.of.borg ([192.168.97.57])
+	by ramsan.of.borg with esmtp (Exim 4.95)
+	(envelope-from <geert@linux-m68k.org>)
+	id 1sCG5l-00GLHw-T9;
+	Wed, 29 May 2024 12:00:32 +0200
+Received: from geert by rox.of.borg with local (Exim 4.95)
+	(envelope-from <geert@linux-m68k.org>)
+	id 1sCG6i-0090jY-88;
+	Wed, 29 May 2024 12:00:32 +0200
+From: Geert Uytterhoeven <geert+renesas@glider.be>
+To: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Alex Shi <alexs@kernel.org>,
+	Yanteng Si <siyanteng@loongson.cn>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Andrew Davis <afd@ti.com>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Andy Shevchenko <andriy.shevchenko@intel.com>
+Cc: devicetree@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Geert Uytterhoeven <geert+renesas@glider.be>
+Subject: [PATCH v2] docs: dt: Update overlay file extension
+Date: Wed, 29 May 2024 12:00:31 +0200
+Message-Id: <977f66b9882b6150a8da5787bf94a418aa9affec.1716976241.git.geert+renesas@glider.be>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240529-feature_ptp_netnext-v13-14-6eda4d40fa4f@bootlin.com>
-References: <20240529-feature_ptp_netnext-v13-0-6eda4d40fa4f@bootlin.com>
-In-Reply-To: <20240529-feature_ptp_netnext-v13-0-6eda4d40fa4f@bootlin.com>
-To: Florian Fainelli <florian.fainelli@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, 
- Russell King <linux@armlinux.org.uk>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Richard Cochran <richardcochran@gmail.com>, 
- Radu Pirea <radu-nicolae.pirea@oss.nxp.com>, 
- Jay Vosburgh <j.vosburgh@gmail.com>, Andy Gospodarek <andy@greyhouse.net>, 
- Nicolas Ferre <nicolas.ferre@microchip.com>, 
- Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
- Jonathan Corbet <corbet@lwn.net>, 
- Horatiu Vultur <horatiu.vultur@microchip.com>, UNGLinuxDriver@microchip.com, 
- Simon Horman <horms@kernel.org>, Vladimir Oltean <vladimir.oltean@nxp.com>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
- Maxime Chevallier <maxime.chevallier@bootlin.com>, 
- Rahul Rameshbabu <rrameshbabu@nvidia.com>, 
- Kory Maincent <kory.maincent@bootlin.com>
-X-Mailer: b4 0.13.0
-X-GND-Sasl: kory.maincent@bootlin.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Add new attributed to tsinfo allowing to get the tsinfo and the hwtstamp
-from a phc provider (composed by a phc index and a phc qualifier) on a
-netdevice's link.
-Add simultaneously a set command to be able to set hwtstamp configuration
-for a specified phc provider.
+Building DTB overlays from .dts files is no longer supported.
+Update the documentation to reflect this.
 
-Here is few examples:
-./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema
-             --dump tsinfo-get
-             --json '{"header":{"dev-name":"eth0"}}'
-[{'header': {'dev-index': 3, 'dev-name': 'eth0'},
-  'hwtst-provider': {'index': 0, 'qualifier': 0},
-  'phc-index': 0,
-  'rx-filters': {'bits': {'bit': [{'index': 0, 'name': 'none'},
-                                  {'index': 2, 'name': 'some'}]},
-                 'nomask': True,
-                 'size': 16},
-  'timestamping': {'bits': {'bit': [{'index': 0, 'name': 'hardware-transmit'},
-                                    {'index': 2, 'name': 'hardware-receive'},
-                                    {'index': 6,
-                                     'name': 'hardware-raw-clock'}]},
-                   'nomask': True,
-                   'size': 17},
-  'tx-types': {'bits': {'bit': [{'index': 0, 'name': 'off'},
-                                {'index': 1, 'name': 'on'}]},
-               'nomask': True,
-               'size': 4}},
- {'header': {'dev-index': 3, 'dev-name': 'eth0'},
-  'hwtst-provider': {'index': 2, 'qualifier': 0},
-  'phc-index': 2,
-  'rx-filters': {'bits': {'bit': [{'index': 0, 'name': 'none'},
-                                  {'index': 1, 'name': 'all'}]},
-                 'nomask': True,
-                 'size': 16},
-  'timestamping': {'bits': {'bit': [{'index': 0, 'name': 'hardware-transmit'},
-                                    {'index': 1, 'name': 'software-transmit'},
-                                    {'index': 2, 'name': 'hardware-receive'},
-                                    {'index': 3, 'name': 'software-receive'},
-                                    {'index': 4,
-                                     'name': 'software-system-clock'},
-                                    {'index': 6,
-                                     'name': 'hardware-raw-clock'}]},
-                   'nomask': True,
-                   'size': 17},
-  'tx-types': {'bits': {'bit': [{'index': 0, 'name': 'off'},
-                                {'index': 1, 'name': 'on'},
-                                {'index': 2, 'name': 'onestep-sync'}]},
-               'nomask': True,
-               'size': 4}}]
-
-./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema --do tsinfo-get
-             --json '{"header":{"dev-name":"eth0"},
-                      "hwtst-provider":{"index":0, "qualifier":0 }
-}'
-{'header': {'dev-index': 3, 'dev-name': 'eth0'},
- 'hwtst-provider': {'index': 0, 'qualifier': 0},
- 'phc-index': 0,
- 'rx-filters': {'bits': {'bit': [{'index': 0, 'name': 'none'},
-                                 {'index': 2, 'name': 'some'}]},
-                'nomask': True,
-                'size': 16},
- 'timestamping': {'bits': {'bit': [{'index': 0, 'name': 'hardware-transmit'},
-                                   {'index': 2, 'name': 'hardware-receive'},
-                                   {'index': 6, 'name': 'hardware-raw-clock'}]},
-                  'nomask': True,
-                  'size': 17},
- 'tx-types': {'bits': {'bit': [{'index': 0, 'name': 'off'},
-                               {'index': 1, 'name': 'on'}]},
-              'nomask': True,
-              'size': 4}}
-
-./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema --do tsinfo-set
-             --json '{"header":{"dev-name":"eth0"},
-                      "hwtst-provider":{"index":2, "qualifier":0}}'
-None
-
-./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema --do tsinfo-get
-             --json '{"header":{"dev-name":"eth0"}, "ghwtstamp":1}'
-{'header': {'dev-index': 3, 'dev-name': 'eth0'},
- 'hwtst-flags': 1,
- 'rx-filters': {'bits': {'bit': [{'index': 0, 'name': 'none'}]},
-                'nomask': True,
-                'size': 16},
- 'tx-types': {'bits': {'bit': [{'index': 0, 'name': 'off'}]},
-              'nomask': True,
-              'size': 4}}
-
-./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema --do tsinfo-set
-             --json '{"header":{"dev-name":"eth0"},
-                      "rx-filters":{"bits": {"bit": {"name":"ptpv2-l4-event"}},
-                                    "nomask": 1},
-                      "tx-types":{"bits": {"bit": {"name":"on"}},
-                                  "nomask": 1}}'
-None
-
-Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+Fixes: 81d362732bac05f6 ("kbuild: Disallow DTB overlays to built from .dts named source files")
+Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Acked-by: Andrew Davis <afd@ti.com>
+Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
 ---
-
-Changes in v8:
-- New patch
-
-Changes in v10:
-- Add ghwtstamp attributes
-- Add tsinfo ntf command
-
-Changes in v11:
-- Add examples in the commit message.
-
-Changes in v13:
-- Replace shorter name by real name.
-- Fix an issue reported by "make -C tools/net/ynl" on the namings.
+v2:
+  - Add Acked-by, Reviewed-by.
 ---
- Documentation/netlink/specs/ethtool.yaml | 43 +++++++++++++++++++++++++++++++-
- 1 file changed, 42 insertions(+), 1 deletion(-)
+ Documentation/devicetree/overlay-notes.rst           | 12 ++++++------
+ .../translations/zh_CN/devicetree/overlay-notes.rst  | 12 ++++++------
+ 2 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/Documentation/netlink/specs/ethtool.yaml b/Documentation/netlink/specs/ethtool.yaml
-index 00dc61358be8..80484908c5ee 100644
---- a/Documentation/netlink/specs/ethtool.yaml
-+++ b/Documentation/netlink/specs/ethtool.yaml
-@@ -576,6 +576,15 @@ attribute-sets:
-       -
-         name: tx-err
-         type: uint
-+  -
-+    name: tsinfo-hwtstamp-provider
-+    attributes:
-+      -
-+        name: index
-+        type: u32
-+      -
-+        name: qualifier
-+        type: u32
-   -
-     name: tsinfo
-     attributes:
-@@ -602,6 +611,16 @@ attribute-sets:
-         name: stats
-         type: nest
-         nested-attributes: ts-stat
-+      -
-+        name: ghwtstamp
-+        type: u8
-+      -
-+        name: hwtstamp-provider
-+        type: nest
-+        nested-attributes: tsinfo-hwtstamp-provider
-+      -
-+        name: hwtstamp-flags
-+        type: u32
-   -
-     name: cable-result
-     attributes:
-@@ -1406,7 +1425,7 @@ operations:
-       notify: eee-get
-     -
-       name: tsinfo-get
--      doc: Get tsinfo params.
-+      doc: Get tsinfo params or hwtstamp config.
+diff --git a/Documentation/devicetree/overlay-notes.rst b/Documentation/devicetree/overlay-notes.rst
+index e139f22b363e9f36..35e79242af9a928d 100644
+--- a/Documentation/devicetree/overlay-notes.rst
++++ b/Documentation/devicetree/overlay-notes.rst
+@@ -38,10 +38,10 @@ Lets take an example where we have a foo board with the following base tree::
+ 	};
+     ---- foo.dts ---------------------------------------------------------------
  
-       attribute-set: tsinfo
+-The overlay bar.dts,
++The overlay bar.dtso,
+ ::
  
-@@ -1414,6 +1433,8 @@ operations:
-         request:
-           attributes:
-             - header
-+            - ghwtstamp
-+            - hwtstamp-provider
-         reply:
-           attributes:
-             - header
-@@ -1422,6 +1443,8 @@ operations:
-             - rx-filters
-             - phc-index
-             - stats
-+            - hwtstamp-provider
-+            - hwtstamp-flags
-       dump: *tsinfo-get-op
-     -
-       name: cable-test-act
-@@ -1730,3 +1753,21 @@ operations:
-       name: mm-ntf
-       doc: Notification for change in MAC Merge configuration.
-       notify: mm-get
-+    -
-+      name: tsinfo-set
-+      doc: Set hwtstamp.
-+
-+      attribute-set: tsinfo
-+
-+      do:
-+        request:
-+          attributes:
-+            - header
-+            - tx-types
-+            - rx-filters
-+            - hwtstamp-provider
-+            - hwtstamp-flags
-+    -
-+      name: tsinfo-ntf
-+      doc: Notification for change in tsinfo configuration.
-+      notify: tsinfo-get
-
+-    ---- bar.dts - overlay target location by label ----------------------------
++    ---- bar.dtso - overlay target location by label ---------------------------
+ 	/dts-v1/;
+ 	/plugin/;
+ 	&ocp {
+@@ -51,7 +51,7 @@ The overlay bar.dts,
+ 			... /* various properties and child nodes */
+ 		};
+ 	};
+-    ---- bar.dts ---------------------------------------------------------------
++    ---- bar.dtso --------------------------------------------------------------
+ 
+ when loaded (and resolved as described in [1]) should result in foo+bar.dts::
+ 
+@@ -88,9 +88,9 @@ in the base DT. In this case, the target path can be provided. The target
+ location by label syntax is preferred because the overlay can be applied to
+ any base DT containing the label, no matter where the label occurs in the DT.
+ 
+-The above bar.dts example modified to use target path syntax is::
++The above bar.dtso example modified to use target path syntax is::
+ 
+-    ---- bar.dts - overlay target location by explicit path --------------------
++    ---- bar.dtso - overlay target location by explicit path -------------------
+ 	/dts-v1/;
+ 	/plugin/;
+ 	&{/ocp} {
+@@ -100,7 +100,7 @@ The above bar.dts example modified to use target path syntax is::
+ 			... /* various properties and child nodes */
+ 		}
+ 	};
+-    ---- bar.dts ---------------------------------------------------------------
++    ---- bar.dtso --------------------------------------------------------------
+ 
+ 
+ Overlay in-kernel API
+diff --git a/Documentation/translations/zh_CN/devicetree/overlay-notes.rst b/Documentation/translations/zh_CN/devicetree/overlay-notes.rst
+index 43e3c0bc5a9f8235..ba5edd05dc1e7fd2 100644
+--- a/Documentation/translations/zh_CN/devicetree/overlay-notes.rst
++++ b/Documentation/translations/zh_CN/devicetree/overlay-notes.rst
+@@ -43,10 +43,10 @@ Documentation/devicetree/dynamic-resolution-notes.rst[1]的配套文档。
+ 	};
+     ---- foo.dts ---------------------------------------------------------------
+ 
+-覆盖bar.dts,
++覆盖bar.dtso,
+ ::
+ 
+-    ---- bar.dts - 按标签覆盖目标位置 ----------------------------
++    ---- bar.dtso - 按标签覆盖目标位置 ---------------------------
+ 	/dts-v1/;
+ 	/插件/;
+ 	&ocp {
+@@ -56,7 +56,7 @@ Documentation/devicetree/dynamic-resolution-notes.rst[1]的配套文档。
+ 			... /* 各种属性和子节点 */
+ 		};
+ 	};
+-    ---- bar.dts ---------------------------------------------------------------
++    ---- bar.dtso --------------------------------------------------------------
+ 
+ 当加载（并按照[1]中描述的方式解决）时，应该产生foo+bar.dts::
+ 
+@@ -90,9 +90,9 @@ Documentation/devicetree/dynamic-resolution-notes.rst[1]的配套文档。
+ DT中的适当位置。在这种情况下，可以提供目标路径。通过标签的目标位置的语法是比
+ 较好的，因为不管标签在DT中出现在哪里，覆盖都可以被应用到任何包含标签的基础DT上。
+ 
+-上面的bar.dts例子被修改为使用目标路径语法，即为::
++上面的bar.dtso例子被修改为使用目标路径语法，即为::
+ 
+-    ---- bar.dts - 通过明确的路径覆盖目标位置 --------------------
++    ---- bar.dtso - 通过明确的路径覆盖目标位置 -------------------
+ 	/dts-v1/;
+ 	/插件/;
+ 	&{/ocp} {
+@@ -102,7 +102,7 @@ DT中的适当位置。在这种情况下，可以提供目标路径。通过标
+ 			... /* 各种外围设备和子节点 */
+ 		}
+ 	};
+-    ---- bar.dts ---------------------------------------------------------------
++    ---- bar.dtso --------------------------------------------------------------
+ 
+ 
+ 内核中关于覆盖的API
 -- 
 2.34.1
 
