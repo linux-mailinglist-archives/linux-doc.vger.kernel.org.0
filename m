@@ -1,143 +1,231 @@
-Return-Path: <linux-doc+bounces-17279-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17281-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68B588D442B
-	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2024 05:28:28 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id CBB2D8D443D
+	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2024 05:39:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 252CD2868B0
-	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2024 03:28:27 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 55F061F21EE4
+	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2024 03:39:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B5F5656B7F;
-	Thu, 30 May 2024 03:28:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 88F1D139CE9;
+	Thu, 30 May 2024 03:39:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="yD0l2WJW"
+	dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b="FKFqrS3j"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out162-62-58-211.mail.qq.com (out162-62-58-211.mail.qq.com [162.62.58.211])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B97F5647B
-	for <linux-doc@vger.kernel.org>; Thu, 30 May 2024 03:28:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50118139CE3;
+	Thu, 30 May 2024 03:39:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.62.58.211
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717039704; cv=none; b=aL5T9OwnIYjv73wHr1dldTlmIra3Z3h1Er2KJip+dNuIC1iOC18GCgRXVxwm8NZNsoDckp40T9/NPJCJ6uWUsG415gxdHQLklaRvZMmg0Lfy0tES20ryiWXN7QGqVOX1id0RjS6LcHKF1C4WrrK/yuitgG2odU3f0Vteeg3cq80=
+	t=1717040387; cv=none; b=JkrSHEDpVswJuMOYg9sqZvhNvu8cDk0oY4PqFE0/sWO6Usv+8YEqx4U+sBGmWoxxiCa3tSRVoA9a8Z3RNGH0+zP3DMbK2DGaQkovGNX577NbHFt29gCrcAGi4p0F+zYu/P3Asqf61AVrcB14Y2KuNrWOTbehGSNTKMcZfQ1stnA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717039704; c=relaxed/simple;
-	bh=lj90chMb5O0KncpLqzXDubS3cuPfyVvzEjua9aYNaYA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=n3X3+tFmy0aBmPd2nDqQ6l2vS0m7Np48OUOF3p1QZmCHTkZGeSQAWOXpJwEtdQ0nj5LLRpJTEDp3aWxlPOs2bc5rORq1v5cXIm5xiIJKL0LY+AxuKDfguy22Ub4hb50OadCGBpOCUvi0JWbrTW8Km10tntW9vGAVv8q3H913/90=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=yD0l2WJW; arc=none smtp.client-ip=209.85.160.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qt1-f178.google.com with SMTP id d75a77b69052e-43dfe020675so187371cf.0
-        for <linux-doc@vger.kernel.org>; Wed, 29 May 2024 20:28:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1717039702; x=1717644502; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CyFUQdvGKe8UpOcfXmkz33OD4v6xcNcft6Wk6HjbLrw=;
-        b=yD0l2WJWsKOG1zMBscp/d+Uwbn7OEEGaETPRVGgBkPKMriKH1UX96/wnam4Nfm+FFh
-         fn9E2HHZG3aZ7+XyQdrRAqJlWSV86ARq4sg6iXkapBSUFWrj+S3pPINPwje6cHKTeENq
-         3ZYii34TdqQcBtd54afejudEW3D7apxROWnpmlhUWw7brozFBYa2CGl7dkLn2kAeOGzU
-         de35IAwvGIIwLJ86QCVBOttVDrMb1JG7GlfZk/cpeeiGF+HAE4QX5kY8R4NkG0TwF2P+
-         1V5i3O0kufjodFjqkNfHzfT0dAkaTnmcMcxwsli2zYO4tiK38yZGxx2stwXN4QPm/PFW
-         l91w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717039702; x=1717644502;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=CyFUQdvGKe8UpOcfXmkz33OD4v6xcNcft6Wk6HjbLrw=;
-        b=vRBwJ6ZWIipKmwblk7l/XV8LoMU0eVG4s52qq3y3GS0mQe2IbDklznVCdtzBnol33w
-         Qyw6sn/r18Vzux/PiiCGVOErlhRLsc8ahxonyw6tQQfZ5PmpEyIacree11EydZR2scL7
-         7LGzu1eyVk9D4gwVUqI61/QYv6erJZdAovvkB09XoYAbid64YiuH41ZpFA4VdgPS1JUv
-         BRNRd6ulyyBxPBwb5U1cRrXV7Vg9HF4eZ7OhVzueOuURO0w7h1B+c3JsilmVOufVRHpy
-         PtZv/D1hEt8gvs/GDbOb43C+8GnKByYA16GiQk2D3rVVsLNjVGpObEvbCgRglZ3Las9O
-         FjoQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXTnZY3706LuydkUU7XcrG/jnq8T6V9KGKJquiYVe2wPXoVnG/vqhf6Ou7sIr1zvEQQX1z/2J2YQkqQFbGY1+LZFTWE5ysco59/
-X-Gm-Message-State: AOJu0YyHB3zHstiStpk5DwZu5zRI7yFI+YRdp6icdsBmOIOMiDtg4RzM
-	O4+enEjgiEqOlT80BcIIHMgxP7k1zZU7E9Kjvk4Ll60y/cCKGoItJRXRx2Yr9cu4aZfkx4geOmV
-	T8JPggXOMFFk458+hT8CgU5Ylca8TGcwIi/d9
-X-Google-Smtp-Source: AGHT+IGBhNbFRaaD0WOEIsVSMflxCvd13kkSSK1hcGeX1B4TzLlXvTq7xC3rTsBmGx8uhqPHEIa2GYmfEXsD+JkYxAs=
-X-Received: by 2002:a05:622a:90e:b0:43e:cb4:1d10 with SMTP id
- d75a77b69052e-43fe8e5f830mr1851431cf.14.1717039701993; Wed, 29 May 2024
- 20:28:21 -0700 (PDT)
+	s=arc-20240116; t=1717040387; c=relaxed/simple;
+	bh=W+5Ks2nSljVj8pYcDqby5hGNu9Ghhwrfc6A07R0SAhQ=;
+	h=Message-ID:Content-Type:Mime-Version:Subject:From:In-Reply-To:
+	 Date:Cc:References:To; b=alp36N/rDURZVd72ZeFHmeYLL2yRDBiLu4qtTLHlUxXAaiVLZZAaK6+ILaPkIJIJUlBV7oIq25WCNn2o1dY7rwOXZ6LTrCtEAl+npxXz5yrp8ART4rMnus+KMCDXP/pY2OVwd7VmuPzNKlK9Dbuk7dHIvbwNcA4ytuA3iyim868=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=cyyself.name; spf=none smtp.mailfrom=cyyself.name; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=FKFqrS3j; arc=none smtp.client-ip=162.62.58.211
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=cyyself.name
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=cyyself.name
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1717040372; bh=W+5Ks2nSljVj8pYcDqby5hGNu9Ghhwrfc6A07R0SAhQ=;
+	h=Subject:From:In-Reply-To:Date:Cc:References:To;
+	b=FKFqrS3j1RoFBSUkSreTg0fwKG/h4vqEAuHwKtmweFQJOhgE8b2GuKAnCPgaAeBtU
+	 CKT3tE1Ev7wuYI7GvwxySsx+q+5ks3t7YA8KtDik6QSS/5Nb/9qAxQmeSyk4uS9Hbb
+	 oZIjZEgnMhs3kd89ZBHHQJ3Gap+r5XD80HH170eU=
+Received: from smtpclient.apple ([2408:8207:18a0:162f:64ab:dad6:af9f:27b2])
+	by newxmesmtplogicsvrsza15-1.qq.com (NewEsmtp) with SMTP
+	id 93BB5C3A; Thu, 30 May 2024 11:36:59 +0800
+X-QQ-mid: xmsmtpt1717040219t0woo2fy3
+Message-ID: <tencent_C5BBD6F106D73F662084BD91904F54504805@qq.com>
+X-QQ-XMAILINFO: M79JLxWTMB1h2KmKdGdTSvzFCeQgQlHjNQ+9jX7TiUQ/waSoCje4RE7QVI5LyL
+	 6+gfl1aJiH2luTL0EegevsOBf2YN64de+BAHGvNykYNmxYgYEss0DiRcvo1MyBxz7r/10zUbHyF5
+	 FYPT1igb/Bk3U8TfJp2gCgQ/lvofOwh95DU3U1sn0nrUDPqKdxqytJZ++u5QdS6+jhz0M4tw5cgN
+	 Z8eeRlHmo7DB8owyGW8jmymZ24mJJEbVKb9wCsI7ttIz1FKhVmDhUw5e1opLaaNx+IKenwTtmLDD
+	 TCiwPAK+3ZyW/3vpvd9WjbfkrkN7YMQrV1PCto48y77kUWTGhup/l14fVX9XBzo0mYuygO5iZng5
+	 JmdbFB1+OTodbJdxWjoJv0NKPv4xtCMYiDt8Pd4iEquB3zYphMiQtNWQcpqTcmNV5n5I2S5lyzLQ
+	 rR+iNYsU5ge5y4LI/5JMNyDROpeeozN9FvaT6nGinTwycdU+T+aURcfoLzkZyJZLyQziOIqZUVoN
+	 fNP13btjlBNhwVWkYyZSvkSO9+ko1p4m4QLGXj7EnvAa26Li8tuEYlt8ArRZ5/UZRWvUv43SSvTu
+	 gAsARXT8u+Ib9qLHj2Io4vbYaovuZDtcUDxv02JTDkM6aNxh0ESQ+rxn+IqSV2Dlnw4XwLb9ljjF
+	 aClPDHiHZQeSgQEvjR3Byxur/miE8BNPrwJLaYzRutNxWeyDstqsX2hXnFMgvxqKTzCDgHgyxiip
+	 k15o/bG0cSX6nZwbp1f5chwTueYg38QQhJwylmwPSzOGFWwA2OC5js0p7n+086cDUt3ewhDaI86M
+	 HPKjbhWomC0jsIXVPRBUlWGM43sOxr7Z/m/z2BoctKg9d3jl/rERFcGce+IaJBqv6Wuu/h9yTkgr
+	 N55Tno5FGxS2dji2DW0gN9ku0CyG0yCTT1iPEDB3gqAciSAYf7zeLTETE3NFhMP0aadGLDg84f1R
+	 iCvl37TOKehlKEbFmJVx6MxdtjuP6UscReRyd1uvJoWJsqUbBCJGGFxMI8dQHv
+X-QQ-XMRINFO: NyFYKkN4Ny6FSmKK/uo/jdU=
+Content-Type: text/plain;
+	charset=us-ascii
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-References: <20240529180510.2295118-1-jthoughton@google.com>
- <20240529180510.2295118-5-jthoughton@google.com> <ZlekYljG7KJwblUj@google.com>
-In-Reply-To: <ZlekYljG7KJwblUj@google.com>
-From: James Houghton <jthoughton@google.com>
-Date: Wed, 29 May 2024 20:27:45 -0700
-Message-ID: <CADrL8HVZxoO33F2UJBoTjF_SXpxyZmH=RTM5G3stgo_kRPjazA@mail.gmail.com>
-Subject: Re: [PATCH v4 4/7] KVM: Move MMU lock acquisition for
- test/clear_young to architecture
-To: Sean Christopherson <seanjc@google.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>, Paolo Bonzini <pbonzini@redhat.com>, 
-	Albert Ou <aou@eecs.berkeley.edu>, Ankit Agrawal <ankita@nvidia.com>, 
-	Anup Patel <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>, 
-	Axel Rasmussen <axelrasmussen@google.com>, Bibo Mao <maobibo@loongson.cn>, 
-	Catalin Marinas <catalin.marinas@arm.com>, David Matlack <dmatlack@google.com>, 
-	David Rientjes <rientjes@google.com>, Huacai Chen <chenhuacai@kernel.org>, 
-	James Morse <james.morse@arm.com>, Jonathan Corbet <corbet@lwn.net>, Marc Zyngier <maz@kernel.org>, 
-	Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
-	Oliver Upton <oliver.upton@linux.dev>, Palmer Dabbelt <palmer@dabbelt.com>, 
-	Paul Walmsley <paul.walmsley@sifive.com>, Raghavendra Rao Ananta <rananta@google.com>, 
-	Ryan Roberts <ryan.roberts@arm.com>, Shaoqin Huang <shahuang@redhat.com>, 
-	Shuah Khan <shuah@kernel.org>, Suzuki K Poulose <suzuki.poulose@arm.com>, 
-	Tianrui Zhao <zhaotianrui@loongson.cn>, Will Deacon <will@kernel.org>, Yu Zhao <yuzhao@google.com>, 
-	Zenghui Yu <yuzenghui@huawei.com>, kvm-riscv@lists.infradead.org, kvm@vger.kernel.org, 
-	kvmarm@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, linux-mips@vger.kernel.org, 
-	linux-mm@kvack.org, linux-riscv@lists.infradead.org, 
-	linuxppc-dev@lists.ozlabs.org, loongarch@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.500.171.1.1\))
+Subject: Re: [PATCH] RISC-V: hwprobe: Add MISALIGNED_PERF key
+From: Yangyu Chen <cyy@cyyself.name>
+In-Reply-To: <20240529182649.2635123-1-evan@rivosinc.com>
+Date: Thu, 30 May 2024 11:36:45 +0800
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Albert Ou <aou@eecs.berkeley.edu>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Andy Chiu <andy.chiu@sifive.com>,
+ =?utf-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Costa Shulyupin <costa.shul@redhat.com>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Paul Walmsley <paul.walmsley@sifive.com>,
+ Sami Tolvanen <samitolvanen@google.com>,
+ linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org,
+ linux-riscv@lists.infradead.org
 Content-Transfer-Encoding: quoted-printable
+X-OQ-MSGID: <4AAEA79D-BC7A-43A1-BD4E-B8CE355DEC0D@cyyself.name>
+References: <20240529182649.2635123-1-evan@rivosinc.com>
+To: Evan Green <evan@rivosinc.com>
+X-Mailer: Apple Mail (2.3774.500.171.1.1)
 
-On Wed, May 29, 2024 at 2:55=E2=80=AFPM Sean Christopherson <seanjc@google.=
-com> wrote:
->
-> On Wed, May 29, 2024, James Houghton wrote:
-> > For implementation mmu_notifier_{test,clear}_young, the KVM memslot
-> > walker used to take the MMU lock for us. Now make the architectures
-> > take it themselves.
->
-> Hmm, *forcing* architectures to take mmu_lock is a step backwards.  Rathe=
-r than
-> add all of this churn, what about adding CONFIG_KVM_MMU_NOTIFIER_LOCKLESS=
-, e.g.
->
-> static __always_inline int kvm_handle_hva_range_no_flush(struct mmu_notif=
-ier *mn,
->                                                          unsigned long st=
-art,
->                                                          unsigned long en=
-d,
->                                                          gfn_handler_t ha=
-ndler)
+On 2024/5/30 02:26, Evan Green wrote:
+> RISCV_HWPROBE_KEY_CPUPERF_0 was mistakenly flagged as a bitmask in
+> hwprobe_key_is_bitmask(), when in reality it was an enum value. This
+> causes problems when used in conjunction with =
+RISCV_HWPROBE_WHICH_CPUS,
+> since SLOW, FAST, and EMULATED have values whose bits overlap with
+> each other. If the caller asked for the set of CPUs that was SLOW or
+> EMULATED, the returned set would also include CPUs that were FAST.
+>=20
+> Introduce a new hwprobe key, RISCV_HWPROBE_KEY_MISALIGNED_PERF, which
+> returns the same values in response to a direct query (with no flags),
+> but is properly handled as an enumerated value. As a result, SLOW,
+> FAST, and EMULATED are all correctly treated as distinct values under
+> the new key when queried with the WHICH_CPUS flag.
+>=20
+> Leave the old key in place to avoid disturbing applications which may
+> have already come to rely on the broken behavior.
+>=20
+> Fixes: e178bf146e4b ("RISC-V: hwprobe: Introduce which-cpus flag")
+> Signed-off-by: Evan Green <evan@rivosinc.com>
+>=20
+> ---
+>=20
+>=20
+> Note: Yangyu also has a fix out for this issue at [1]. That fix is =
+much
+> tidier, but comes with the slight risk that some very broken userspace
+> application may break now that FAST cpus are not included for the =
+query
+> of which cpus are SLOW or EMULATED.
+
+Indeed. Since the value of FAST is 0b11, the SLOW and EMULATED are 0b10 =
+and
+0b01 respectively.
+
+When this key is treated as a bitmask and query with
+RISCV_HWPROBE_WHICH_CPUS if a CPU has a superset bitmask of the =
+requested
+value on the requested key, it will remain in the CPU mask. Otherwise, =
+the
+CPU will be clear in the CPU mask. But when a key is treated as a value, =
+we
+will just do a comparison. if it is not equal, then the CPU will be =
+clear
+in the CPU. That's why FAST cpus are included when querying with SLOW or
+EMULATED with RISCV_HWPROBE_KEY_CPUPERF_0 key now.
+
+For me, deprecating the original hwprobe key and introducing a new key
+would be a better solution than changing the behavior as my patch did.
+
+> I wanted to get this fix out so that
+> we have both as options, and can discuss. These fixes are mutually
+> exclusive, don't take both.
+
+It's better to note this strange behavior on
+Documentation/arch/riscv/hwprobe.rst so users can quickly understand the
+differences on the behavior of these two keys.
+
+The C code part looks good to me.
+
+>=20
+> [1] =
+https://lore.kernel.org/linux-riscv/tencent_01F8E0050FB4B11CC170C3639E43F4=
+1A1709@qq.com/
+>=20
+> ---
+> Documentation/arch/riscv/hwprobe.rst | 8 ++++++--
+> arch/riscv/include/asm/hwprobe.h | 2 +-
+> arch/riscv/include/uapi/asm/hwprobe.h | 1 +
+> arch/riscv/kernel/sys_hwprobe.c | 1 +
+> 4 files changed, 9 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/Documentation/arch/riscv/hwprobe.rst =
+b/Documentation/arch/riscv/hwprobe.rst
+> index 204cd4433af5..616ee372adaf 100644
+> --- a/Documentation/arch/riscv/hwprobe.rst
+> +++ b/Documentation/arch/riscv/hwprobe.rst
+> @@ -192,8 +192,12 @@ The following keys are defined:
+> supported as defined in the RISC-V ISA manual starting from commit
+> d8ab5c78c207 ("Zihintpause is ratified").
+>=20
+> -* :c:macro:`RISCV_HWPROBE_KEY_CPUPERF_0`: A bitmask that contains =
+performance
+> - information about the selected set of processors.
+> +* :c:macro:`RISCV_HWPROBE_KEY_CPUPERF_0`: Deprecated. Returns similar =
+values to
+> + :c:macro:`RISCV_HWPROBE_KEY_MISALIGNED_PERF`, but the key was =
+mistakenly
+> + classified as a bitmask rather than a value.
+> +
+> +* :c:macro:`RISCV_HWPROBE_KEY_MISALIGNED_PERF`: An enum value =
+describing the
+> + performance of misaligned scalar accesses on the selected set of =
+processors.
+>=20
+> * :c:macro:`RISCV_HWPROBE_MISALIGNED_UNKNOWN`: The performance of =
+misaligned
+> accesses is unknown.
+> diff --git a/arch/riscv/include/asm/hwprobe.h =
+b/arch/riscv/include/asm/hwprobe.h
+> index 630507dff5ea..150a9877b0af 100644
+> --- a/arch/riscv/include/asm/hwprobe.h
+> +++ b/arch/riscv/include/asm/hwprobe.h
+> @@ -8,7 +8,7 @@
+>=20
+> #include <uapi/asm/hwprobe.h>
+>=20
+> -#define RISCV_HWPROBE_MAX_KEY 6
+> +#define RISCV_HWPROBE_MAX_KEY 7
+>=20
+> static inline bool riscv_hwprobe_key_is_valid(__s64 key)
 > {
->         struct kvm *kvm =3D mmu_notifier_to_kvm(mn);
->         const struct kvm_mmu_notifier_range range =3D {
->                 .start          =3D start,
->                 .end            =3D end,
->                 .handler        =3D handler,
->                 .on_lock        =3D (void *)kvm_null_fn,
->                 .flush_on_ret   =3D false,
->                 .may_block      =3D false,
->                 .lockless       =3D IS_ENABLED(CONFIG_KVM_MMU_NOTIFIER_LO=
-CKLESS),
->         };
->
->         return __kvm_handle_hva_range(kvm, &range).ret;
-> }
+> diff --git a/arch/riscv/include/uapi/asm/hwprobe.h =
+b/arch/riscv/include/uapi/asm/hwprobe.h
+> index dda76a05420b..bc34e33fef23 100644
+> --- a/arch/riscv/include/uapi/asm/hwprobe.h
+> +++ b/arch/riscv/include/uapi/asm/hwprobe.h
+> @@ -68,6 +68,7 @@ struct riscv_hwprobe {
+> #define RISCV_HWPROBE_MISALIGNED_UNSUPPORTED (4 << 0)
+> #define RISCV_HWPROBE_MISALIGNED_MASK (7 << 0)
+> #define RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE 6
+> +#define RISCV_HWPROBE_KEY_MISALIGNED_PERF 7
+> /* Increase RISCV_HWPROBE_MAX_KEY when adding items. */
+>=20
+> /* Flags */
+> diff --git a/arch/riscv/kernel/sys_hwprobe.c =
+b/arch/riscv/kernel/sys_hwprobe.c
+> index 969ef3d59dbe..c8b7d57eb55e 100644
+> --- a/arch/riscv/kernel/sys_hwprobe.c
+> +++ b/arch/riscv/kernel/sys_hwprobe.c
+> @@ -208,6 +208,7 @@ static void hwprobe_one_pair(struct riscv_hwprobe =
+*pair,
+> break;
+>=20
+> case RISCV_HWPROBE_KEY_CPUPERF_0:
+> + case RISCV_HWPROBE_KEY_MISALIGNED_PERF:
+> pair->value =3D hwprobe_misaligned(cpus);
+> break;
+>=20
 
-Thanks Sean, yes this is a lot better. I will do this for v5.
 
