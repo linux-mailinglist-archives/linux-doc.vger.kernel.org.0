@@ -1,107 +1,220 @@
-Return-Path: <linux-doc+bounces-17397-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17402-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D1968D5EB5
-	for <lists+linux-doc@lfdr.de>; Fri, 31 May 2024 11:45:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C77D98D60CE
+	for <lists+linux-doc@lfdr.de>; Fri, 31 May 2024 13:38:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B7A6F1F2330E
-	for <lists+linux-doc@lfdr.de>; Fri, 31 May 2024 09:45:38 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 56CAE1F2424F
+	for <lists+linux-doc@lfdr.de>; Fri, 31 May 2024 11:38:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2EA601353FE;
-	Fri, 31 May 2024 09:45:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2572F8173C;
+	Fri, 31 May 2024 11:37:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iROFP+Am"
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="Zo5y3Tcr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CB1924B26;
-	Fri, 31 May 2024 09:45:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48062157488
+	for <linux-doc@vger.kernel.org>; Fri, 31 May 2024 11:37:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=203.254.224.25
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717148733; cv=none; b=sWDPVEHmaImbdZXfO7wo0G1jyxXxdD4LdURkAt/kUTvJVjl8LxEbyY5w8+4eUvRSQ3GO5hyBaZ82S6HEUW0e0y1hdMTRWUoAtxukejcLPTQQR2OkfHAXXWQR7T0/UthDQkLJdpQ3/az30MG+EyFbWDXYEcmQ3TmQzsgTytMmOb4=
+	t=1717155472; cv=none; b=Gk5rhi7dgY8TIhttv7tcrch7Uq0qHR0eY5gd0FvSZ8qI+mDCfsxiusEKxmZJqRkePr5/EQcWtI5ZrqY75Z/V3HxCRjjWFF2toowVfhJ6o/o5Do8xU/eJwKFzJKUF/9E+XogmKnMpR8DXovp1w2p/DZ3I02PE0CvpFW6dxTDU5oQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717148733; c=relaxed/simple;
-	bh=lERvVoyJAE/jeXnmH1j9lxgnxLnRxdAv4vYaPklDwFE=;
-	h=Message-ID:Subject:From:To:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=pTfUAMxGhIGUXn/RhdzSJ0M0qinT/whz0oAHdZ/RxOmhYITotIOK9g6Z9DJMKA20jQQ3B18nhuLG4Gsxf1KCRlmPC0O4RuS+YaOv+w0Pob9l1ApJbd3T7Gf31bUtYpCD7M0T0CbPYfwe1RuNn2XU8vRvw00mJPEsA3s8JUZy79w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iROFP+Am; arc=none smtp.client-ip=209.85.218.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a59a352bbd9so292091366b.1;
-        Fri, 31 May 2024 02:45:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717148730; x=1717753530; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:to:from:subject:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lERvVoyJAE/jeXnmH1j9lxgnxLnRxdAv4vYaPklDwFE=;
-        b=iROFP+AmyemW+k/xYH1mkWxyfFqaSyg/qMbCJQOmEYICIslZLFTXc87RVj9/0MqHdS
-         NLIaynR0Q5Bb50+CZ5wRnc2FroOis5t8LeU+Nf6kbaRXrVcB/lGMGEryUHWPLK8y0oIL
-         zxfbdAWVQogZWfy5YNzBrKN2b2XuCjT5Nx+wud6p2I4IFzFfgj8yz6JGXH0MpXiDwTZi
-         LpPgyLI2l2PRD9QMPzp9vrAV980evHYPLyZBMjxy5KK5X7VIiU+5rNYbbikpz0Xe6rhz
-         p63ckITaJz5VBv4as+K06ooLnCFu/0NW0rNYQ2cr0vc4BfEUNWU+AkeXZUMm8zztRHI6
-         5W+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717148730; x=1717753530;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:to:from:subject:message-id:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=lERvVoyJAE/jeXnmH1j9lxgnxLnRxdAv4vYaPklDwFE=;
-        b=BIx90/83KNPIkkutabrbUJLIaGPA3Y+Zjfmh4iLhNIsry6s4S4EgNmLApnQoUd/dpq
-         n3Yer/XcqQzNMSH5kAyipI1r3n0DGsRSsgV7wabJyqz4Dgi/UQ2lezb0kmpeg/F6bgkO
-         t2Z/Lj8P0SmoanvrXt03nc6csXZjX9Kb/YXfz4dmT4RD0B2dbqfWb921833lr+fSG167
-         IW7MTyV3WUavF/EkY18QSvlCb+0QBwYubogm31rsfWfP0rUV098/0WvQXrTd8H5pmIfe
-         8V2CbM9ZMyRR/WbueHa7b5glcIwL6ZMOWcd9/HPEJSdxAUeXu95Bk4gC6450U3pRIHKm
-         xegg==
-X-Forwarded-Encrypted: i=1; AJvYcCUY8rSzVMa8xRAqbMBLw2iX8UajxzZLUnVOhruEKVbJmvGenxBV3FACySGItOHGTnRYO5q1ll4fAwIRd7m5hBHRbGluPufzTm7GybZNCBXGuMSlpbDkAF1GmvVeW+zxJhmRaLazyOFpE8zMPL17nXdgH7AwKKEgHBzKa5rQCaMWEMLffO0=
-X-Gm-Message-State: AOJu0Yz/VbNSYszDvs/jyVaoVYrDdpfucQi+/z2MCuT+IvCbmtn74iJT
-	R75uHglyjscu7KqdUqIj/HtHoN3X5VPu9e17KMmaEUEFnaIg8e0KSDB1F0JfR7M=
-X-Google-Smtp-Source: AGHT+IFTFMH2jNPbQ/gcHw6Zpbe+myU3YyJ7m0d+2DIQGeRbcHm78hJ6xn84ifk1xVD6VmkTxOYzkg==
-X-Received: by 2002:a17:906:414d:b0:a59:c807:72d3 with SMTP id a640c23a62f3a-a681933565fmr134693866b.17.1717148729683;
-        Fri, 31 May 2024 02:45:29 -0700 (PDT)
-Received: from nsa.fritz.box ([2001:a61:35f9:9001:40df:88bb:5090:7ab6])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a682ea1e5c4sm50888966b.115.2024.05.31.02.45.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 May 2024 02:45:29 -0700 (PDT)
-Message-ID: <635356d36f5d402a3a921da12e352a95926ff03d.camel@gmail.com>
-Subject: Re: [PATCH v6 2/2] drivers: hwmon: max31827: Add PEC support
-From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
-To: Radu Sabau <radu.sabau@analog.com>, Jean Delvare <jdelvare@suse.com>, 
- Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>,
- linux-hwmon@vger.kernel.org,  linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Date: Fri, 31 May 2024 11:45:28 +0200
-In-Reply-To: <20240531084645.12935-2-radu.sabau@analog.com>
-References: <20240531084645.12935-1-radu.sabau@analog.com>
-	 <20240531084645.12935-2-radu.sabau@analog.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.1 (3.52.1-1.fc40) 
+	s=arc-20240116; t=1717155472; c=relaxed/simple;
+	bh=5iTMpsvzMyQ/7iNgBxDn85nSx55OLExRikQYm+HZuZw=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:In-Reply-To:
+	 Content-Type:References; b=MprCzG8/xaVRmn7USsQOhp8aTD2QQHC6gO/+0t9xkXXYoGTTGr1hdFlvu2SAC4B4Eyi5Bk6Ohqx3TsPzwSeF0XGmtGpg4z6ZMsgYZF+S97ggRVkq4qGbcfoqoeiV1o+ikPIVmFjdJcqQD+ykuBjPeZqjhUR+tchx0VbZki6Kan0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=Zo5y3Tcr; arc=none smtp.client-ip=203.254.224.25
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+Received: from epcas5p1.samsung.com (unknown [182.195.41.39])
+	by mailout2.samsung.com (KnoxPortal) with ESMTP id 20240531113747epoutp02beddaa64bb589533a857b5f4eb10c209~Uj8ywOmv_3220632206epoutp02i
+	for <linux-doc@vger.kernel.org>; Fri, 31 May 2024 11:37:47 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com 20240531113747epoutp02beddaa64bb589533a857b5f4eb10c209~Uj8ywOmv_3220632206epoutp02i
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1717155467;
+	bh=GuBJyqD/FJYmGRU68Nv2DmyeEsS9lS8noNHMcJZHInE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=Zo5y3TcrmVBhdBVls+HHHYQ2JQckAPhmwsVEfAaUbEm79Dp/0WscpfUCE/jvqvuD7
+	 NM0DbkNPwSjJ5I94T9KDlwZ/GSKo6DL1lWsnzw5839PU3h7a1UGsSAnVOu9dw9UT+/
+	 F/KQTUjkgxxZ/TLQ4CvF3v7Xu1eT1YG528L0E6EI=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+	epcas5p1.samsung.com (KnoxPortal) with ESMTP id
+	20240531113746epcas5p17564f49cdac426bcf4937b284cf1d8b0~Uj8xqSF7O2277522775epcas5p15;
+	Fri, 31 May 2024 11:37:46 +0000 (GMT)
+Received: from epsmges5p1new.samsung.com (unknown [182.195.38.175]) by
+	epsnrtp3.localdomain (Postfix) with ESMTP id 4VrLhS279dz4x9Pw; Fri, 31 May
+	2024 11:37:44 +0000 (GMT)
+Received: from epcas5p2.samsung.com ( [182.195.41.40]) by
+	epsmges5p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+	F6.ED.10047.886B9566; Fri, 31 May 2024 20:37:44 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+	epcas5p4.samsung.com (KnoxPortal) with ESMTPA id
+	20240531102425epcas5p41ac34975c3253e5892c57c1adfd985c1~Ui8vlOYLr1813818138epcas5p4H;
+	Fri, 31 May 2024 10:24:25 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+	epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+	20240531102425epsmtrp10f664c9827b18effa1ea05ad5456a5eb~Ui8vkDLwa1379513795epsmtrp1H;
+	Fri, 31 May 2024 10:24:25 +0000 (GMT)
+X-AuditID: b6c32a49-1d5fa7000000273f-bb-6659b688a794
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+	epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+	4D.5F.08622.955A9566; Fri, 31 May 2024 19:24:25 +0900 (KST)
+Received: from nj.shetty?samsung.com (unknown [107.99.41.245]) by
+	epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20240531102421epsmtip279078faf44b3f9c2ecbcfc63278512ac~Ui8r7n6rH1383313833epsmtip2V;
+	Fri, 31 May 2024 10:24:21 +0000 (GMT)
+Date: Fri, 31 May 2024 10:17:21 +0000
+From: Nitesh Shetty <nj.shetty@samsung.com>
+To: Bart Van Assche <bvanassche@acm.org>
+Cc: Damien Le Moal <dlemoal@kernel.org>, Jens Axboe <axboe@kernel.dk>,
+	Jonathan Corbet <corbet@lwn.net>, Alasdair Kergon <agk@redhat.com>, Mike
+	Snitzer <snitzer@kernel.org>, Mikulas Patocka <mpatocka@redhat.com>, Keith
+	Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg
+	<sagi@grimberg.me>, Chaitanya Kulkarni <kch@nvidia.com>, Alexander Viro
+	<viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara
+	<jack@suse.cz>, martin.petersen@oracle.com, david@fromorbit.com,
+	hare@suse.de, damien.lemoal@opensource.wdc.com, anuj20.g@samsung.com,
+	joshi.k@samsung.com, nitheshshetty@gmail.com, gost.dev@samsung.com,
+	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, dm-devel@lists.linux.dev,
+	linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH v20 02/12] Add infrastructure for copy offload in block
+ and request layer.
+Message-ID: <20240531101721.f3sclknsowyceszx@nj.shetty@samsung.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+In-Reply-To: <abe8c209-d452-4fb5-90eb-f77b5ec1a2dc@acm.org>
+X-Brightmail-Tracker: H4sIAAAAAAAAA02TeVATVxzHfbubzQaHdg12fKItTBhnOIZACqSPS+votMvgHwxYa2lHSGEh
+	FEgyCWhtZyw3CgoiAhJAkdIiR0GOUg6xyH05jOVoSYtSS7DIDVWLiDZhoeN/n/f9/n7v/Y55
+	FC6s55tTYYooVq2QRYhIE6K+3cba/mz9JyGOOfdIVNXXhaO4i+s4Kh9PJ9FM+zJA2YurOJps
+	TQZo7e4gjuq67gM08fMBVFhUQKCx1kYM3Sq6hKHS8k4M5eXEY6jz1RyJLrWNAqQf0WKoRWeH
+	ricVE+hWSy+BhprySXTtez0flXS/xFDG2REMNUzGAlQ5s0CgHt0eNLjezXt/LzM07M30FUGm
+	UTvOZwbvVxPM0N1opqbsHMnUFn/D/F2bC5jmsRiS+TYtk8dciJ8nmcbEBzxmSa8jmIXbIyST
+	VlcGmIHCDr6PmX+4h5yVBbNqS1YRpAwOU4R6irz9Ag4FuEgdJfYSV/SeyFIhi2Q9RYeP+Nh/
+	EBZhGJDI8qQsItog+cg0GpHDfg+1MjqKtZQrNVGeIlYVHKFyVok1skhNtCJUrGCj3CSOju+6
+	GAIDw+X6J4NAVWv25fp5HYgBt+kUIKAg7QwTs0p4KcCEEtLNANY8SyONhpBeBrDxhg9nPDVw
+	Wj9/KyO5s5rPGS0AZtW3ENxhBcDMP1M30gl6H7ysrzdEURRJ28H+V5RR3klbw6cTJRvxON1F
+	wtKSi8BomNGBcK4vg2dkU/oQ7OlOwTjeAXtzJwkjC2h3mNQ6s1ErpKcEcHa8guRKOgy/q6ni
+	cWwGH3fXbZZqDqfTkzb5FCy9fIPkkhMA1P6qBZxxACb2peNGxmk5/Lf1DsHpb8OsvkqM09+A
+	F9YmMU43hQ1Xt9gKVlQVbhaxG44+iyWNHUOagb9XWHBTiSGgrnqcvAje0b7WkPa15zh2g+cW
+	43gcW8D4H/NwreEqnN4DS15SHNrAqiaHQkCWgd2sShMZympcVBIFe+r/jQcpI2vAxgey9WoA
+	4xOL4jaAUaANQAoX7TR9Hno8RGgaLDv9FatWBqijI1hNG3AxLCsDN38rSGn4gYqoAImzq6Oz
+	VCp1dnWSSkS7TGcSC4KFdKgsig1nWRWr3srDKIF5DOZV4b/C3Ju1Lfto4s1fwgQmc+l2/Z7n
+	m3Jyd10rW5p37yjYvmD+9XRfxD7rvH5havNe+56JgdjF5jonPzJu2HdUuvrhVH5S4oNKadfn
+	KQIPicqrouDYi/m6HWM3Y4TS6Sqn3tbrHSeviLzKpw4+SQg4Q1ox+3m+mQ5JcxPBeeYvxMnb
+	+b26tF5qySqw7reclIHh4RXxPzVtD2NXjzl0PM62sUt9pPl4KrRn+Qu+t5AZLi3q+OnRied/
+	KK+4y090f+pXdOT00Z6QfjKz7GGXcnZb8x13t9aKhDMWshJqqGctO6b9oEpfuvqZvUdVU+9f
+	R4t/yLdAjduOi31HR/z9cwNXPG4OiQiNXCaxxdUa2X/Ru+CDyQQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpileLIzCtJLcpLzFFi42LZdlhJXjdyaWSawcJJ6hbrTx1jtmia8JfZ
+	YvXdfjaL14c/MVpM+/CT2eLJgXZGi99nzzNbbDl2j9HiwX57iwWL5rJY3Dywk8liz6JJTBYr
+	Vx9lspg9vZnJ4uj/t2wWkw5dY7R4enUWk8XeW9oWC9uWsFjs2XuSxeLyrjlsFvOXPWW3WH78
+	H5PFxI6rTBY7njQyWqx7/Z7F4sQtaYvzf4+zOsh4XL7i7XFqkYTHzll32T3O39vI4nH5bKnH
+	plWdbB6bl9R7vNg8k9Fj980GNo/FfZNZPXqb37F57Gy9z+rx8ektFo/3+66yefRtWcXocWbB
+	EfYA4Sgum5TUnMyy1CJ9uwSujAOXVjIWHBGo2Hc7vIHxDW8XIyeHhICJRPvRjexdjFwcQgK7
+	GSXat3SyQSQkJZb9PcIMYQtLrPz3nB3EFhL4yCjR9iMaxGYRUJWY8nQbUJyDg01AW+L0fw6Q
+	sIiAhsS3B8tZQGYyC5xhk5jx8AQrSEJYIEHi7amJYDavgLPEieNdTBCLG1gkpvQ1sEMkBCVO
+	znzCAmIzC5hJzNv8kBlkAbOAtMTyfxwQYXmJ5q2zwW7jFLCWaDvwmnUCo+AsJN2zkHTPQuie
+	haR7ASPLKkbJ1ILi3PTcYsMCo7zUcr3ixNzi0rx0veT83E2M4GSipbWDcc+qD3qHGJk4GA8x
+	SnAwK4nw/kqPSBPiTUmsrEotyo8vKs1JLT7EKM3BoiTO++11b4qQQHpiSWp2ampBahFMlomD
+	U6qBaevs3V/fc9jP8NZ+Pm1x0nszGb9p5geCufYsFCkW+zOhR/SJ1CLd14u0KgoWFgositVj
+	uiPg+Dtu8/NrpWxHb05cwGglmiKmo/kn7JTFhQ9v9K/pH41fw/RAULnmfWX0Fq6ZpxPk/i1V
+	2anPwBL2oNZrk9qWM0/410atcXh06Fb1/tS54Vd/212/HODt9NQm4d9U28W3/2QdsbiUvMJo
+	n0HK8SKdsENNv/yEzb5VeQkk7LfZ3nJ65ZRXWy6r3znB5NO+KkNaRUxZ91tj0XaJkL4l2lsf
+	G3XsLK/6yHFCkDfo8o4tkz9xvWOQl7T+lSByqFgn9u9Bxu4Dz61E9X8U+irv8LOtm/DtafSX
+	uccT1JRYijMSDbWYi4oTAfUGRciVAwAA
+X-CMS-MailID: 20240531102425epcas5p41ac34975c3253e5892c57c1adfd985c1
+X-Msg-Generator: CA
+Content-Type: multipart/mixed;
+	boundary="----4kURd6qQA_jt7Hem8gQqXiu1-FVD8qSeML2_RvQot6TDP4ZY=_48084_"
+X-Sendblock-Type: REQ_APPROVE
+CMS-TYPE: 105P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20240520102842epcas5p4949334c2587a15b8adab2c913daa622f
+References: <20240520102033.9361-1-nj.shetty@samsung.com>
+	<CGME20240520102842epcas5p4949334c2587a15b8adab2c913daa622f@epcas5p4.samsung.com>
+	<20240520102033.9361-3-nj.shetty@samsung.com>
+	<eda6c198-3a29-4da4-94db-305cfe28d3d6@acm.org>
+	<20240529061736.rubnzwkkavgsgmie@nj.shetty@samsung.com>
+	<9f1ec1c1-e1b8-48ac-b7ff-8efb806a1bc8@kernel.org>
+	<a866d5b5-5b01-44a2-9ccb-63bf30aa8a51@acm.org>
+	<665850bd.050a0220.a5e6b.5b72SMTPIN_ADDED_BROKEN@mx.google.com>
+	<abe8c209-d452-4fb5-90eb-f77b5ec1a2dc@acm.org>
 
-On Fri, 2024-05-31 at 11:46 +0300, Radu Sabau wrote:
-> Add support for PEC by configuring the chip accordingly to the hwmon core=
- PEC
-> attribute handling
-> Handle hwmon_chip_pec attribute writing in the max31827_write in the
-> hwmon_chip type switch case, approaching the same code structure
-> as for temp writing.
->=20
-> Signed-off-by: Radu Sabau <radu.sabau@analog.com>
-> ---
+------4kURd6qQA_jt7Hem8gQqXiu1-FVD8qSeML2_RvQot6TDP4ZY=_48084_
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
 
-Reviewed-by: Nuno Sa <nuno.sa@analog.com>
+On 30/05/24 10:11AM, Bart Van Assche wrote:
+>On 5/30/24 00:16, Nitesh Shetty wrote:
+>>+static inline bool blk_copy_offload_attempt_combine(struct request_queue *q,
+>>+                         struct bio *bio)
+>>+{
+>>+    struct blk_plug *plug = current->plug;
+>>+    struct request *rq;
+>>+
+>>+    if (!plug || rq_list_empty(plug->mq_list))
+>>+        return false;
+>>+
+>>+    rq_list_for_each(&plug->mq_list, rq) {
+>>+        if (rq->q == q) {
+>>+            if (!blk_copy_offload_combine(rq, bio))
+>>+                return true;
+>>+            break;
+>>+        }
+>>+
+>>+        /*
+>>+         * Only keep iterating plug list for combines if we have multiple
+>>+         * queues
+>>+         */
+>>+        if (!plug->multiple_queues)
+>>+            break;
+>>+    }
+>>+    return false;
+>>+}
+>
+>This new approach has the following two disadvantages:
+>* Without plug, REQ_OP_COPY_SRC and REQ_OP_COPY_DST are not combined. These two
+>  operation types are the only operation types for which not using a plug causes
+>  an I/O failure.
+>* A loop is required to combine the REQ_OP_COPY_SRC and REQ_OP_COPY_DST operations.
+>
+>Please switch to the approach Hannes suggested, namely bio chaining. Chaining
+>REQ_OP_COPY_SRC and REQ_OP_COPY_DST bios before these are submitted eliminates the
+>two disadvantages mentioned above.
+>
+Bart, Hannes,
 
-- Nuno S=C3=A1
->=20
+I see the following challenges with bio-chained approach.
+1. partitioned device:
+	We need to add the code which iterates over all bios and adjusts
+	the sectors offsets.
+2. dm/stacked device:
+	We need to make major changes in dm, such as allocating cloned
+	bios, IO splits, IO offset mappings. All of which need to
+	iterate over chained BIOs.
 
+Overall with chained BIOs we need to add a special handling only for copy
+to iterate over chained BIOs and do the same thing which is being done
+for single BIO at present.
+Or am I missing something here ?
+
+Thank You,
+Nitesh Shetty
+
+------4kURd6qQA_jt7Hem8gQqXiu1-FVD8qSeML2_RvQot6TDP4ZY=_48084_
+Content-Type: text/plain; charset="utf-8"
+
+
+------4kURd6qQA_jt7Hem8gQqXiu1-FVD8qSeML2_RvQot6TDP4ZY=_48084_--
 
