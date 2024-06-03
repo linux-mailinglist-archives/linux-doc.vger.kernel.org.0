@@ -1,218 +1,285 @@
-Return-Path: <linux-doc+bounces-17542-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17548-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 525938D868A
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 17:53:59 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 07F108D86FD
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 18:16:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 067BC2817E7
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 15:53:58 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 68718B21B57
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 16:16:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A412C13664A;
-	Mon,  3 Jun 2024 15:53:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A8AD136653;
+	Mon,  3 Jun 2024 16:16:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="hnQdhHdK"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KD/Yp/8v"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11on2068.outbound.protection.outlook.com [40.107.220.68])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14D25132124;
-	Mon,  3 Jun 2024 15:53:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.220.68
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717430017; cv=fail; b=HyGZ1nwX+e/WlPmYU0sIHo04fJPYTRnabg05NfKNAV6yCbh6Q3PR+ILXsRyZQZHliyyZO2T5AWrHPj7/hoxB4qSSAOa8LtBoGY+sa49IeiMmuxN1Y4cdWlT9mYoHWegPx5dv6TO9tLfhlDQE/BjH2pUVBpJwrDpvmRsxKEDXIBA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717430017; c=relaxed/simple;
-	bh=8OD2Hfx/2G14AFgglBk1QAzWsKVoply2tS4MrhiZpkU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=jvnRkTdVchFg0J3YU4Xtjd/cltMmSp9PYcadtAeS3aL69lCwQUZNW4EBK/RBQDEZvKIQCI+rnuGltHj1i6y25Nv1BtIImRGHm3DORo0xn1NGTEerjfRx6/XJD2vjJYeZkkz6IHQnORL5js0FCZ33tIe35bc2h330GNJBDZXvQKM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=hnQdhHdK; arc=fail smtp.client-ip=40.107.220.68
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IVqPlOxP5f13fl+dwbu6Ro32C98W0v+cSlCr+pW88CJ4b2WK3nvgd2JU2A7NRtFWEG7zzjCbEXnWbjm01Doi6p84qMkd7TaLA584sc4xtxn55CrSJCxmemHZl/+05t1TgVEQhW3WBywmdGgrydxHVyVtmNN1q6hECYMnrJ026PuXjLUy8ODF/yU5c/uibu18xv4W93UWZgCrTyBzL7DmPBGFV9U881QdYjBwPWbFTJCmwiPxsNpi7vXC8ayhCOe55VZp8NmDqzbZWKn2bsZPhLce6yzpiY364Z4LzkuRGqfBQFTNIVgp+Nwk7V8mPBVrsAvioyGkHRKq43Bkqs0RCw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eCI4chK7kbXXkpq7Y0mXZ5pHELGxM+ZuWnWxVCW7XP8=;
- b=OqzQ/xnveD/cEx1OFtAfUuX9PkEJiJCqdDsVrFLY4w2S++058lC0MdNd+hq2Q3HiALqZWg1oqHEIdWXCe0DPr7yosGJP2UvjtvByY/ufQa0ZwhuqcA6P5gPzvmXyy6T7KW4hHPI4/BiIKAD+GxYqGCFKAnw/ZnlCeRke1xRm+wzHhhU67qyL1uc4EgfCzO9gpCuQXH8wxVz0Z+YrFUek04LPHVd80jBN0AAHWeCAxb7abX1bK/9xT53DGmmrRHXpS6L65wNdPRNyK5uYicIfoqyU8a24DY1vaE/5OL95rNKL+xbVPHmnHjks06LihxSCEbrgEvsvleZzD6TUeBi6yQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eCI4chK7kbXXkpq7Y0mXZ5pHELGxM+ZuWnWxVCW7XP8=;
- b=hnQdhHdK2/aZBRnfJ3fEpNpyIhuQMOmvYOCj1ulPTazgu7XkkdJ9mN9ij7ycqsJHI98OJgKPSiLb0fAF5m4fqpPj2xgc12Ete4kGkChaAHWaEb+SUUN2PxmyOlJ7QRvB7+2RdBg60Opz+CD2hY/KMs97wnif2QiQ0Wui4qrjErM5U0rBKaud0IZsPbyt/UbCdvshfdJ5oez1k/zxPCl1SNaSQhpKzLZnzAXil51e7lN1SvK14Bo/ztCx15cLBjL1re34+PvwXJDy6mc46bBmloh1LEUZ4T8OBV6/FK8qrT+pGebqQrvwjC+IGQpPNGDGw0ev7SdX3rX+enLNORy3Ig==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DM6PR12MB3849.namprd12.prod.outlook.com (2603:10b6:5:1c7::26)
- by MN0PR12MB6197.namprd12.prod.outlook.com (2603:10b6:208:3c6::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.21; Mon, 3 Jun
- 2024 15:53:28 +0000
-Received: from DM6PR12MB3849.namprd12.prod.outlook.com
- ([fe80::c296:774b:a5fc:965e]) by DM6PR12MB3849.namprd12.prod.outlook.com
- ([fe80::c296:774b:a5fc:965e%4]) with mapi id 15.20.7633.021; Mon, 3 Jun 2024
- 15:53:28 +0000
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Itay Avraham <itayavr@nvidia.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Leon Romanovsky <leon@kernel.org>,
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4C8513667E;
+	Mon,  3 Jun 2024 16:16:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.41
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1717431375; cv=none; b=opInpXczF8uQVtDapZPIif5UbpfApcSt4qqtF0YNrYDs81/e36TXQ9jxsuGVJoQZAvHEtgktLy25TBywJMCbmYVCNXnC0AZVnYSDLw4FAxTeUQT8WT1A7h+8FPcvj2jqkt7w/VGPXDbuVLWUvEtodCMTmXJtkRKjwBF1WJCchlk=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1717431375; c=relaxed/simple;
+	bh=R4zsvxB0y6E49xztUL915eNuzXp/7rBqKhyWGjTfa00=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=Fj/tzBV7JnnKGLWeNaBuFoK3YxO86JXfIRY/SEpur761JihTIRfnypKnht6RsyauIQoAqTkUSi9vu8V2kXjeLhk/RE5ZXgTTr/MBJeAJilEntlBQIGF+8pzXKvnoU36FqxhXmloXRW8AvKMNMewJld1wKootyTAduxIcZtXcOrk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KD/Yp/8v; arc=none smtp.client-ip=209.85.216.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-2c24115469bso642516a91.0;
+        Mon, 03 Jun 2024 09:16:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1717431373; x=1718036173; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=C/N2SeCGrQ/hc/PUmLOr58aWJUfdAgaipmiw4zP9hpg=;
+        b=KD/Yp/8vz5fTaq0CPa5iHZtmF8IA1ZbkRU7EYdoLK0Pj4oMdo7ybAgscxJs58VK78f
+         r7DVUy5IM4H7ttAICm7stAadAiZojjG51RiTxTfyduamw/xYgnsqedjnYjzYBBp3ziS6
+         1vMfSX1ONpNcN/zRCyC8qPT640PsxMTSVocJDoO3fhWGC0Nnp5AsrpSVc8k3Wyx6QZwN
+         KULYm9OC3/Uad3qo+geUeAk4PL0N9YN7az8jfaSmK7xco1MxaJJ9ADnqhPDXVTrNpaBz
+         buyI4IXPfmveDAYylU95hPRuQsEsgz6kvNR3WR1uo4oFrFR5Ko6z+l9IfeR7QzbF6FEZ
+         SDjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1717431373; x=1718036173;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=C/N2SeCGrQ/hc/PUmLOr58aWJUfdAgaipmiw4zP9hpg=;
+        b=DwYxHnRPwvahnL3TQ38YU2h7YKngccU/iu3MFiOfP6ST2p1BS3MnoxIsQy4InRik7w
+         8/oTBuR9F7+CMZ+EnTs7mrFnOtP4W6ZaPb1cm73DBQ384J8M3FQatQWtgXYlbIfagvYE
+         DhOM0O+CmqaOxMjHTuUDhWsBTGerBIQxfI3hSX58lHyGxXLi059aaNPBNMb9Qf+C1oKt
+         U52AovvtChyPt4eXj+yKs4PmzBN7+fs+4zmzg4Cn5vewWcGexQfW4kKiI0kPqpSuUSrw
+         CMyqI5YHZgUOtfOkVv28IvUpXGtU5dGGQcrw9EUxcdfvNDfS8a7gFSCkOvKcLaN/5e+p
+         Rh6w==
+X-Forwarded-Encrypted: i=1; AJvYcCVaNG9XrKPwZwjOcfr4GcXsrlag7mWktSalZU1lABcHX8D2OCdudYXLOs4UZu1GMCaOS8gcbqGp0umxwpa30tqm+DqEVKkQES9yJlo75WZqVvEOYKA+twjbz5GdikY+d2lQMYuaHWdmRthSKiLtUDun/7uD9aTmtT3xPNLnJTNAD5+6
+X-Gm-Message-State: AOJu0YySTQg7fnY/tLBerG7mJwPpoMem+0z+LbFe4C7uYpPoc2yUEUYe
+	bA5MBJvjEkEIAhr4AGtBIWbhkhx7t6cCaDZpFQcIs3y0eTSd//Aovz9LikRhSXU=
+X-Google-Smtp-Source: AGHT+IEHgrToHEtFQ4qUID6sHHk78/MMQn6dYkUjZkvRhieZSuneVkSqSXSEEI+/NohsmEaRRVxm8g==
+X-Received: by 2002:a17:90a:d142:b0:2a4:79ef:4973 with SMTP id 98e67ed59e1d1-2c253077af4mr166664a91.14.1717431372713;
+        Mon, 03 Jun 2024 09:16:12 -0700 (PDT)
+Received: from paran-QEMU-Virtual-Machine.. ([118.32.98.101])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2c1c27e577fsm6415462a91.32.2024.06.03.09.16.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Jun 2024 09:16:12 -0700 (PDT)
+From: yskelg@gmail.com
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: SeongJae Park <sj@kernel.org>,
+	Jinwoo Park <pmnxis@gmail.com>,
+	Austin Kim <austindh.kim@gmail.com>,
+	shjy180909@gmail.com,
+	workflows@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	linux-rdma@vger.kernel.org,
-	netdev@vger.kernel.org,
-	Paolo Abeni <pabeni@redhat.com>,
-	Saeed Mahameed <saeedm@nvidia.com>,
-	Tariq Toukan <tariqt@nvidia.com>
-Cc: Andy Gospodarek <andrew.gospodarek@broadcom.com>,
-	Aron Silverton <aron.silverton@oracle.com>,
-	Dan Williams <dan.j.williams@intel.com>,
-	David Ahern <dsahern@kernel.org>,
-	Christoph Hellwig <hch@infradead.org>,
-	Jiri Pirko <jiri@nvidia.com>,
-	Leonid Bloch <lbloch@nvidia.com>,
-	Leon Romanovsky <leonro@nvidia.com>,
-	linux-cxl@vger.kernel.org,
-	patches@lists.linux.dev
-Subject: [PATCH 8/8] mlx5: Create an auxiliary device for fwctl_mlx5
-Date: Mon,  3 Jun 2024 12:53:24 -0300
-Message-ID: <8-v1-9912f1a11620+2a-fwctl_jgg@nvidia.com>
-In-Reply-To: <0-v1-9912f1a11620+2a-fwctl_jgg@nvidia.com>
-References:
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: YT4PR01CA0132.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:d5::22) To DM6PR12MB3849.namprd12.prod.outlook.com
- (2603:10b6:5:1c7::26)
+	linux-kernel@vger.kernel.org,
+	Yunseong Kim <yskelg@gmail.com>
+Subject: [PATCH v4] Documentation: cve Korean translation
+Date: Tue,  4 Jun 2024 01:15:31 +0900
+Message-Id: <20240603161530.80789-1-yskelg@gmail.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR12MB3849:EE_|MN0PR12MB6197:EE_
-X-MS-Office365-Filtering-Correlation-Id: caa30098-1afe-4d44-39db-08dc83e54edf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230031|1800799015|7416005|366007|376005|921011;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?VMgqRTUyGMR98NSXW40ZtN3QbjJLZo7IcJ2Go4ySeMQ6iXiuFbCYKV2OpXhI?=
- =?us-ascii?Q?svoimvyjgD05uyCqE1o66Cyg4H7aP+QImh7vEYjpVrZsJxsD+DBsaZq1aMfw?=
- =?us-ascii?Q?3AYkTzAAflAbtjjQ6qoDshocbs+RKNnbyIAk69OV15Rk1aY13EwOXU4dNYfX?=
- =?us-ascii?Q?2Wfh8DO8E2lme+v2RrGrOSkre7CsD6X+laFCiZPp4ZQREJm9O3lZUg9nzMBy?=
- =?us-ascii?Q?7OYIR2o14rc9dZfuXLkRQg4UT888izSCNxx3rEdyApXVCOk+RQijTYCakw5l?=
- =?us-ascii?Q?zKdkWfGPY8u5/v8bs70ioxM8BzyHjb+NlrFn1Tc6V/LIq/WL2C2/XVlUJUdu?=
- =?us-ascii?Q?JPaKMRUL9ALCQAfzYeU+mxhNIkUGP1GQjGdgm3OeRgkyHq0WfhCYwRMnQ4yp?=
- =?us-ascii?Q?F/fPwFZ7ptmj2AA0URLm/a/nAvptcdszxY1jGbXeLbedF8XCceh6+WEB/TBx?=
- =?us-ascii?Q?V79e5slPuU473W7r1mI6EJL/UCukrMQtI1rbqrYRtCLf4962mT6Xa5aoBHWD?=
- =?us-ascii?Q?6r7TWj5DqGMM0/dkSqp9/azL1Pu/OYmMch9UxZ3NMu22/yjRcBizhpBJU5JY?=
- =?us-ascii?Q?D7Tt7P1n9SAP5viEVhFytDit34XNsw+RwPXUitm/tfQnDv7o9bjFQbNncbu4?=
- =?us-ascii?Q?bH6Wua5O2WwUyMDDmHGmCWpaBP8AeWoVUZzQmwh5eBZnBLR3VsgyOK1k9Vfq?=
- =?us-ascii?Q?KlO0yA9d6cHAyT4K9zTofjhSGZjOE2w3eS70b9AKdPc0HOQgSH2FGEL6YcSD?=
- =?us-ascii?Q?yVg9PnG2XxjlH5R1FBjyqQxTl8HN+SBAuT/5PwIRDWAv9YcVLur2zJ5Xhnkb?=
- =?us-ascii?Q?VVjbVdQSZKKSfKQdzQZT2iaV2EaX8THhVwzh23Mmr5yxQNLX4S2R+OLjRFrq?=
- =?us-ascii?Q?nlXPRmFgi22MrXpqGEDmEHL/2Po+WZFHzpk+KX+UOZ0KIVKpb0dfpK7xd7s4?=
- =?us-ascii?Q?jFTv6G0QfVHWA8YtXSoGKyvs2K1H3P0jv2PMsVeKOhxRrE9qAIjpZl1Odn1v?=
- =?us-ascii?Q?X+nkm0itJp5UrYVym853KuUutEX1ZMaWLT6Zhgqp9M6SYvFTAVHjeK0qVZs8?=
- =?us-ascii?Q?I2eAdXlRdo01+Tia8g6BdKJUCayI1opG1nRTHmKhgJw+03wtuTodk68Wes7+?=
- =?us-ascii?Q?BzdgXEYHLWW4Oo0E8dJQrxdB4o4aV/aAXmsDilJ4nDOHY7WP92kbzXWRIqQB?=
- =?us-ascii?Q?uRI/Ht2tEpkizdF4Wl1vdkq7GZJ83g1NkPcgJ2s6kCbdSHoO8+477yb+sqkh?=
- =?us-ascii?Q?CKL3S2K57Tr6j93DgphhtV9viMn/dCf/i5vVE35r2eaHF3+5h3Ind2jtlVKt?=
- =?us-ascii?Q?FoBcbY7rQ5XuChwmY0jZuU/u?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3849.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(1800799015)(7416005)(366007)(376005)(921011);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?WCCcGwGYT7RZJ9C2vHsHOYK/fJ132pdSsREKbLfI2uIxDJyxOyQN/i1pPqsJ?=
- =?us-ascii?Q?YrDnCfSRTk1+4ItXPKMn/0GKAWOJTkRJDcXuBdZxMQHzUIFHJIxkUs4cN1AD?=
- =?us-ascii?Q?cojf3uF0u/lwzGUETxsgul+LUZ0GaLvQVEMg/X5aYNhfvE+yqnsUNQ4tHv1y?=
- =?us-ascii?Q?ZoWvMRCg7/CrqH6N7mDMRofpc9fpOK34UZLq/81aHvShNrEoAj27sFu/TnZZ?=
- =?us-ascii?Q?whkg51GOlrqH6R5821aXVin8Cmolbrf+f9xYjpe3j6HVezr4R28uTIH43pNn?=
- =?us-ascii?Q?Z4g3TaWC1VS0TXPZbFfJoZhYwTglZ97oEeZzbl2bO7JuHALbA+KEfQbTm21T?=
- =?us-ascii?Q?4EKWqraz7RktVCjy4py9oiFHehaZRf0jmj4OQ9kL/0GWIdQEJW8MI8hcWuQK?=
- =?us-ascii?Q?c4djxCWTPvHsTbWXaP2N/VvUEhsOwtvtDCGqTRkx3IljOFfec0eq4JbFBuff?=
- =?us-ascii?Q?zxIxS5163anQgKFuQ7J2SHnbrpXuVS2svH0YyL+CHq7wY3HAxUE0/1TRr2l1?=
- =?us-ascii?Q?HbJx/Df3Py/OYocJNJZPYYVVSAVbyTt2kU6t0a/5Uf2VhXGtfvnjHCrC3WHP?=
- =?us-ascii?Q?v1wWyDRwTonIJFhoqzFFtIf08uaS7e6NMhyLm5cYvjJwKXBnBhzJCqEWfdZv?=
- =?us-ascii?Q?1/jAlXIHHsIXwWRvWqelPu0Rd+C7y+17VPp1gXKf4WPlexrf8KaHPjNV/X+I?=
- =?us-ascii?Q?ydQbEw6VpfimErM0JByxbwWBgyCat7YLzc2C3O9sYC9/Pw5ENvNyDdRpm1lv?=
- =?us-ascii?Q?3x02zr7peF3AeaZNS89U0ncWeRFDoj46Q38ywencxCL2xAGabS96iovm+eL2?=
- =?us-ascii?Q?9K87gC9Mohq+QMfg3XAqClebK0GNnkSi4cPaQmm01qhQVFgde1CNdZiTOLqH?=
- =?us-ascii?Q?675soQaq0pDKXkL2A399vJDjtvJpdlmgUx5LJZd6vL+RgzVPZHPCVSLeYDSX?=
- =?us-ascii?Q?IVPGMz5A0CqihKgoMmTQICCQEE2+Nodte0lbrngUFBN+HZhGy7muGK7Z0nDq?=
- =?us-ascii?Q?sJtVUbjZqgzGphgoyLldVXF0uK14cjPDHURifKwbdJiRQNpkybqgEe43h96T?=
- =?us-ascii?Q?qMiZPOr57ckzG3BxDSKd0qx99kkA72/Nhw09A5A4eqSW/sb9SKN9879pHiVs?=
- =?us-ascii?Q?+kDT/YVWEwlb/ObcmiAIsczj6Ca+Wv4Ae2pMWlUIHCsng55bNjxzJLMV7SsJ?=
- =?us-ascii?Q?QqzwaZ/xOYJ3fTrbNbN6yzs/HIPvTIfx1MrLtCS5XrDdvzQEN/fHkcw42ZXh?=
- =?us-ascii?Q?/3G1XwqCzMb3yBmnwV5Mx84pikGSR5hmG6OaCcZR/4jubSO3i5PPqz64aK5f?=
- =?us-ascii?Q?pZOwxXuXS2yuvwlwJAAFgpM7s7uGSaLU+CAOCQJiAtQPADbHttsEzDFi6We6?=
- =?us-ascii?Q?zBN2QnCLiVy/PlZez5Oit8MtPmzcPDu1er3lBjy9QKhs5n1xK822nKjkINFx?=
- =?us-ascii?Q?rBU05eWDv5LM6Jw367SGcbSB7KG6OwYuSldhSUrsTBcMkeKc11Eu8x/TNpwi?=
- =?us-ascii?Q?LvhICW4EWqeA363ZSPKo/mudGP5mbR7LpXHwlBaVPo8g4CTWEFEZMyYLiW6f?=
- =?us-ascii?Q?+F53lK+zCsfuRZAzMTYI+CL8W9iT97WW97Wer2nF?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: caa30098-1afe-4d44-39db-08dc83e54edf
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3849.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2024 15:53:27.4995
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2k9YKqF/oop0NEkdguYs28VumxJonegN0Z5CiEUzlUlQE79VoUzXXaZjCa5vjgZ0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6197
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Saeed Mahameed <saeedm@nvidia.com>
+From: Yunseong Kim <yskelg@gmail.com>
 
-If the device supports User Context then it can support fwctl. Create an
-auxiliary device to allow fwctl to bind to it.
+This is a Documentation/process/cve korean version.
 
-Create a sysfs like:
+The following changes have been updated based on SeongJae Park’s feedback
+and Austin Kim’s from the last v2 and v3 patches.
 
-$ ls /sys/devices/pci0000:00/0000:00:0a.0/mlx5_core.fwctl.0/driver -l
-lrwxrwxrwx 1 root root 0 Apr 25 19:46 /sys/devices/pci0000:00/0000:00:0a.0/mlx5_core.fwctl.0/driver -> ../../../../bus/auxiliary/drivers/mlx5_fwctl.mlx5_fwctl
-
-Signed-off-by: Saeed Mahameed <saeedm@nvidia.com>
-Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+Signed-off-by: Yunseong Kim <yskelg@gmail.com>
 ---
- drivers/net/ethernet/mellanox/mlx5/core/dev.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ Documentation/translations/ko_KR/index.rst    |   2 +-
+ .../translations/ko_KR/process/cve.rst        | 119 +++++++++---------
+ 2 files changed, 61 insertions(+), 60 deletions(-)
 
-diff --git a/drivers/net/ethernet/mellanox/mlx5/core/dev.c b/drivers/net/ethernet/mellanox/mlx5/core/dev.c
-index 47e7c2639774fd..6781ddb090c475 100644
---- a/drivers/net/ethernet/mellanox/mlx5/core/dev.c
-+++ b/drivers/net/ethernet/mellanox/mlx5/core/dev.c
-@@ -228,8 +228,14 @@ enum {
- 	MLX5_INTERFACE_PROTOCOL_VNET,
+diff --git a/Documentation/translations/ko_KR/index.rst b/Documentation/translations/ko_KR/index.rst
+index 4add6b2fe1f2..f38f0ce19a1e 100644
+--- a/Documentation/translations/ko_KR/index.rst
++++ b/Documentation/translations/ko_KR/index.rst
+@@ -12,7 +12,7 @@
+    :maxdepth: 1
  
- 	MLX5_INTERFACE_PROTOCOL_DPLL,
-+	MLX5_INTERFACE_PROTOCOL_FWCTL,
- };
+    howto
+-
++   process/cve
  
-+static bool is_fwctl_supported(struct mlx5_core_dev *dev)
-+{
-+	return MLX5_CAP_GEN(dev, uctx_cap);
-+}
+ 리눅스 커널 메모리 배리어
+ -------------------------
+diff --git a/Documentation/translations/ko_KR/process/cve.rst b/Documentation/translations/ko_KR/process/cve.rst
+index 94610c177f17..5a84d0d4266f 100644
+--- a/Documentation/translations/ko_KR/process/cve.rst
++++ b/Documentation/translations/ko_KR/process/cve.rst
+@@ -1,7 +1,9 @@
+ .. SPDX-License-Identifier: GPL-2.0
+ 
+-:Original: Documentation/process/cve.rst
+-:Translator: Yunseong Kim <yskelg@gmail.com>
++:원문: Documentation/process/cve.rst
++:역자: 김윤성 <yskelg@gmail.com>
++:감수: 박진우 <pmnxis@gmail.com>, 박성재 <sj@kernel.org>,
++       김동현 <austindh.kim@gmail.com>
+ 
+ ==========
+ CVE 항목들
+@@ -16,92 +18,91 @@ CVE 항목들
+ 지속적인 남용이 결합되면서 커널 커뮤니티가 이러한 할당에 대한 통제권을 가져야
+ 한다는 것이 분명해졌습니다.
+ 
+-Linux 커널 개발자 팀은 잠재적인 Linux 커널 보안 문제에 대해 CVE를 할당할 수
+-있는 권한이 있습니다. 여기서 할당은 :doc:`일반 Linux 커널 보안 버그 보고
+-절차<../process/security-bugs>`와는 별개입니다.
++Linux 커널 개발팀은 잠재적인 Linux 커널 보안 문제에 대해 CVE를 할당할 수
++있는 권한이 있습니다. 여기서 할당은
++:doc:`일반 Linux 커널 보안 버그 보고절차</process/security-bugs>`와는
++별개입니다.
+ 
+ Linux 커널에 할당된 모든 CVE 목록은
+ https://lore.kernel.org/linux-cve-announce/ 에 있는 Linux-CVE 메일링 리스트의
+-아카이브에서 확인할 수 있습니다. 할당된 CVE에 대한 알림을 받으려면 다음의
+-메일링 리스트를 `구독
+-<https://subspace.kernel.org/subscribing.html>`_ 하세요.
++아카이브에서 확인할 수 있습니다. 할당된 CVE에 대한 알림을 받으려면 다음 메일링
++리스트를 `구독<https://subspace.kernel.org/subscribing.html>`_ 하세요.
+ 
+ 절차
+ ====
+ 
+ 일반적인 안정 릴리스 절차의 일부로, 잠재적으로 보안 문제가 될 수 있는 커널
+-변경 사항은 CVE 번호 할당을 담당하는 개발자가 식별하여 CVE 번호를 자동으로
++변경 사항은 CVE 번호 할당 담당을 하는 개발자가 식별하여 CVE 번호를 자동으로
+ 할당합니다. 이러한 할당은 linux-cve-announce 메일링 리스트에 공지사항으로
+ 수시로 게시됩니다.
+ 
+-리눅스 커널이 시스템에 있는 계층으로 인해 거의 모든 버그가 커널의 보안을
+-손상시키는 데 악용될 수 있지만 버그가 수정되면 악용 가능성이 명확하게 드러나지
+-않는 경우가 많습니다. 이 때문에 CVE 할당 팀은 지나치게 조심스럽게 버그 수정이
+-확인되는 모든 버그에 CVE 번호를 할당합니다.
+-이것이 리눅스 커널 팀에서 발행하는 겉으로 보기에 많은 수의 CVE를 설명합니다.
++리눅스 커널은 시스템의 최하단 계층에서 동작합니다. 때문에 거의 모든 버그가
++커널 보안을 취약하게 만들 수 있습니다. 하지만 버그를 수정할 때 악용 가능성을
++명확하게 파악하기 힘든 경우가 많습니다. 이 때문에 CVE 할당 팀은 지나치게
++조심스러워 보일 수도 있는 방식으로 버그 수정이 확인되는 모든 버그에 CVE 번호를
++할당합니다. 이것이 리눅스 커널 팀이 발행한 많은 수의 CVE를 설명합니다.
+ 
+ 사용자가 CVE를 지정해야 한다고 생각하는 특정 수정 사항을 CVE 할당 팀이 놓친
+ 경우에는 <cve@kernel.org>로 이메일을 보내 주시면 커널 CVE 할당 팀에서 함께
+ 작업할 것입니다. 이 별칭은 이미 릴리스된 커널 트리에 있는 수정 사항에 대한
+-CVE 할당 전용이므로 잠재적인 보안 문제는 이 별칭으로 보내서는 안 됩니다.
+-수정되지 않은 보안 문제를 발견했다고 생각되면 :doc:`일반 Linux 커널 보안
+-버그 보고 절차<../process/security-bugs>`를 따르세요.
++CVE 할당 전용이므로 잠재적인 보안 문제는 이 메일 주소로 보내서는 안 됩니다.
++수정되지 않은 보안 문제를 발견했다고 생각되면
++:doc:`일반 Linux 커널 보안 버그 보고 절차</process/security-bugs>`를 따르세요.
+ 
+ Linux 커널에서 수정되지 않은 보안 이슈에 대해서는 CVE가 자동으로 할당되지
+-않으며, 수정이 제공되고 안정적인 커널 트리에 적용된 후에만 자동으로 할당되며,
++않으며, 수정이 제공되고 stable 커널 트리에 적용된 후에만 자동으로 할당되며,
+ 기존 수정의 git 커밋 ID로 추적할 수 있습니다. 커밋으로 문제가 해결되기 전에
+ CVE를 할당받고자 하는 사람은 커널 CVE 할당 팀<cve@kernel.org>에 문의하여
+ 예약된 식별자 항목들에서 식별자를 할당받으시기 바랍니다.
+ 
+-현재 Stable/LTS 커널 팀에서 적극적으로 지원하지 않는 커널 버전에서 발견된
+-문제에 대해서는 CVE가 할당되지 않습니다.
+-현재 지원되는 커널 브랜치 목록은 https://kernel.org/releases.html 에서 확인할
+-수 있습니다.
++현재 Stable/LTS 커널 팀에서 지원하지 않는 커널 버전에서 발견된 문제에 대해서는
++CVE가 할당되지 않습니다. 현재 지원되는 커널 브랜치 목록은
++https://kernel.org/releases.html 에서 확인할 수 있습니다.
+ 
+-할당된 CVE 항목들의 분쟁
+-=========================
++CVE 항목들 할당 분쟁
++====================
+ 
+-특정 커널 변경에 대해 할당된 CVE에 대해 이의를 제기하거나 수정할 권한은
+-전적으로 영향을 받는 관련 하위 시스템의 유지 관리자에게 있습니다.
+-이 원칙은 취약점 보고에 있어 높은 수준의 정확성과 책임성을 보장합니다.
+-하위 시스템에 대한 깊은 전문 지식과 친밀한 지식을 갖춘 사람만이 보고된
+-취약점의 유효성과 범위를 효과적으로 평가하고 적절한 CVE 지정을 결정할 수
+-있습니다. 이 지정된 기관 외부에서 CVE를 수정하거나 이의를 제기하려는 시도는
+-혼란, 부정확한 보고, 궁극적으로 시스템 손상으로 이어질 수 있습니다.
++리눅스 커널 변경 사항에 할당된 CVE에 이의를 제기하거나 수정할 권한은 영향을
++받는 관련 하위 시스템의 관리자에게만 있습니다. 이 원칙은 취약점 보고의 정확성
++및 책임감을 높이기 위해 존재합니다. 하위 시스템에 대한 깊은 전문 지식과 정확한
++이해를 가진 사람만이 보고된 취약점의 유효성과 범위를 효과적으로 판단하고
++적절한 CVE를 지정할 수 있습니다. 지정된 권한 외의 다른 사람이 CVE를 수정 또는
++이의를 제기하려고 시도하면 혼란, 부정확한 보고, 그리고 궁극적으로는 시스템
++손상으로 이어질 수 있습니다.
+ 
+-잘못된 CVE 항목들
+-=================
++유효하지 않은 CVE 항목들
++========================
+ 
+-특정 배포판에서 변경된 사항 적용한 배포판은 더 이상 kernel.org 지원 릴리스가
+-아닌 커널 버전을 지원합니다. 때문에 Linux 배포판에서만 지원되는 Linux 커널에서
+-보안 문제가 발견되는 경우 Linux 커널 CVE 팀에서 CVE를 할당할 수 없습니다.
+-변경된 사항을 적용한 특정 Linux 배포판 자체에 요청해야 합니다.
++개별 배포판에서만 지원되는 커널 버전의 보안 문제가 발견된 경우, 또는 개별
++배포판에서 더 이상 kernel.org에서 지원하지 않는 커널 버전을 지원하고 있는
++경우라면, 보안 문제가 발생하는 경우에 Linux 커널 CVE 팀에서 CVE를 할당할 수
++없습니다. 변경된 사항을 적용한 개별 Linux 배포판에 직접 요청해야 합니다.
+ 
+-커널 할당 CVE 팀이 아닌 다른 그룹에서 적극적으로 지원되는 커널 버전에 대해
+-Linux 커널에 대해 할당된 CVE는 유효한 CVE로 취급해서는 안 됩니다.
+-CNA 수정 절차를 통해 특정 배포판에서 적용한 항목을 무효화할 수 있도록
+-커널 CVE 할당 팀<cve@kernel.org>으로 알려주시기 바랍니다.
++적극적으로 지원되고 있는 커널 버전에 대해 리눅스 커널 CVE 팀 외의 다른 그룹이
++CVE를 할당했다면, 이 CVE는 유효하지 않습니다. CNA 수정 절차를 통해 특정
++배포판에서 적용한 항목을 무효화할 수 있도록 커널 CVE 할당 팀<cve@kernel.org>에
++이메일을 통해 알려주시기 바랍니다.
+ 
+-특정 CVE의 적용 가능성
+-======================
++특정 CVE의 적용 범위
++====================
+ 
+-Linux 커널은 외부 사용자가 다양한 방법으로 접근하거나 전혀 접근하지 않는
+-등 다양한 방식으로 사용될 수 있으므로 특정 CVE의 적용 여부는 Linux 사용자가
+-결정할 사항이며 CVE 할당 팀의 권한이 아닙니다. 특정 CVE의 적용 가능성을
+-판단하기 위해 우리에게 문의하지 마시기 바랍니다.
++리눅스 커널은 다양한 방식으로 사용될 수 있으며, 외부 사용자가 커널에 접근하는
++방법도 여러 가지이며, 전혀 접근하지 않을 수도 있습니다. 따라서 특정 CVE의 적용
++범위는 리눅스 사용자가 결정해야 합니다. CVE 할당 팀은 이를 판단해줄 수
++없습니다. 특정 CVE의 적용 범위를 확인하기 위해 우리 팀에 문의하지 않기를
++바랍니다.
+ 
+-또한 소스 트리가 매우 방대하고 어떤 시스템도 소스 트리의 작은 하위 집합만
+-사용하므로 Linux 사용자는 할당된 많은 수의 CVE가 자신의 시스템과 관련이 없다는
+-사실을 알고 인지해야 합니다.
++또한 소스 트리는 매우 방대하고, 각 시스템은 소스 트리의 일부분만을 사용하기
++때문에 많은 사용자들이 할당된 CVE 중 상당 부분이 자신의 시스템과 관련이 없다는
++사실을 인지해야 합니다.
+ 
+ 즉, 우리는 사용자의 사용 사례를 알지 못하며 사용자가 커널의 어떤 부분을
+ 사용하는지 알 수 없으므로 특정 CVE가 사용자의 시스템과 관련이 있는지 판단할 수
+-있는 방법이 없습니다.
+-
+-항상 그렇듯이 커널 변경 사항은 개별적으로 선별된 변경 사항이 아니라 많은
+-커뮤니티 구성원이 통합된 전체에서 함께 테스트하는 것이므로 릴리스된 모든 커널
+-변경 사항을 적용하는 것이 가장 좋습니다. 또한 많은 버그의 경우 전체 문제에
+-대한 해결책은 단일 변경 사항이 아니라 여러 수정 사항을 모아놓고 보아야 찾을 수
+-있다는 점에 유의하세요. 이상적으로는 모든 문제에 대한 모든 수정 사항에 CVE가
+-할당되지만, 때로는 수정 사항을 발견하지 못하는 경우가 있으므로 CVE가 할당되지
+-않은 일부 변경 사항이 관련성이 있을 수 있다고 가정합니다.
++없습니다.
 +
- static const struct mlx5_adev_device {
- 	const char *suffix;
- 	bool (*is_supported)(struct mlx5_core_dev *dev);
-@@ -252,6 +258,8 @@ static const struct mlx5_adev_device {
- 					   .is_supported = &is_mp_supported },
- 	[MLX5_INTERFACE_PROTOCOL_DPLL] = { .suffix = "dpll",
- 					   .is_supported = &is_dpll_supported },
-+	[MLX5_INTERFACE_PROTOCOL_FWCTL] = { .suffix = "fwctl",
-+					    .is_supported = &is_fwctl_supported },
- };
- 
- int mlx5_adev_idx_alloc(void)
++여태까지 항상 그래왔듯이, 커뮤니티 구성원들의 통합된 테스트를 거친 전체 커널
++변경 사항을 적용하는 것이 좋습니다. 개별적인 부분만 선택하여 적용하는 것을
++권장하지 않습니다. 또한 많은 버그의 경우 전체적인 문제 해결은 단일 변경 사항이
++아니라 여러 수정 사항의 누적을 통해 이루어집니다. 이상적으로는 모든 문제에
++대한 모든 수정 사항에 CVE가 할당되지만, 때로는 누락될 수도 있습니다. 따라서
++CVE가 할당되지 않은 일부 변경 사항도 시스템에 적용하는 것이 중요할 수 있습니다.
 -- 
-2.45.2
+2.34.1
 
 
