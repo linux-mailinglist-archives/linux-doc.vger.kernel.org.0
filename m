@@ -1,121 +1,269 @@
-Return-Path: <linux-doc+bounces-17554-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17556-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 497818D8953
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 21:04:45 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 886688FA5FE
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2024 00:46:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id D6D95B21983
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 19:04:42 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 185CD1F229E8
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 22:46:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9BB06139D04;
-	Mon,  3 Jun 2024 19:04:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F14CB13CA87;
+	Mon,  3 Jun 2024 22:46:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mVEjz1iW"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="2YEB+x82"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EBE7137923;
-	Mon,  3 Jun 2024 19:04:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38C59F9E9
+	for <linux-doc@vger.kernel.org>; Mon,  3 Jun 2024 22:46:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717441480; cv=none; b=tv0QiDGivrhu5GLSUUlvnJqBo/u0WdUmEE9uK6NSGmWVCNcPGDlRojvh3g9UcHfJo22LY44p3XzVjJ6Arg+0m+m7boz0AedOE0BS9QIAzikNRVUic/VDRUzUVwJyXuTaomUYyJAFyCCkz+oj+elvCLjHMAOYzkRdBDNsL/BpsM8=
+	t=1717454798; cv=none; b=ZhZXu7He7YyZzS4WFoqYUPGvoxFF0u56tY9sg857RBr6lcUTyF1BnZrnF11wSoZLDoh70Bh6PcdJNk458aD1tXfkOYWZzt0fV3F7hiabhmfnsyV/cViZEufdJVEuQLlyjv993x9bnOnErZ+09DLr1c+DxoB0TOF7BAeE/7KhcMQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717441480; c=relaxed/simple;
-	bh=SiJjhq+F76gd2xYIUJnRmLkcW/pcUax1GZT5innf0yw=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=qrLXKE9zFrK+JZcref+Ur9RqY+W8j2Drr6f+IxLfJQvtd6vEl57ThmYQrDrGMdKW0o+STTtLGmWLuNuh1/nQneEGOsVpFxyV8XacbJvR/RjEWf5OTDPgQNDtOaWQRMlcFyFJ3Naj6Vo1ZK6NcNSATt8WGdkF5OwpBxrWHCAN7G4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mVEjz1iW; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C3E2C4AF09;
-	Mon,  3 Jun 2024 19:04:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1717441479;
-	bh=SiJjhq+F76gd2xYIUJnRmLkcW/pcUax1GZT5innf0yw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=mVEjz1iWVYBbZpGBAolpFKdBtmgSZ54sICUew0JuIbETnve4H0k0gJUmsATrApj22
-	 8bWCeCg0OiCcFi8uFYMNo/cmw9Mdg40sZ37IMLuOwKlDV10UtX24GdQtamSiblknQ7
-	 N8ZkVCyqV4APP+2d/iduxIXrKn4DMTP8dQ/ahGfBmnajMRdjdlyXqtB1VaT76QmQlo
-	 LSL/mPn4tlLMwEhLzA2regmdBiIcSJT8Ez7w0fwfNO/cK5YfOO+6t9It2nEp6lThez
-	 e6YA2G3EYNY4dDwNQPVvzVNZo0dbgKD4Jp/qBlvlqBEzpZDV1paa2JMVpnOOEXq42d
-	 VfVXoXkIukNyA==
-From: SeongJae Park <sj@kernel.org>
-To: yskelg@gmail.com
-Cc: SeongJae Park <sj@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Jinwoo Park <pmnxis@gmail.com>,
-	Austin Kim <austindh.kim@gmail.com>,
-	shjy180909@gmail.com,
-	workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4] Documentation: cve Korean translation
-Date: Mon,  3 Jun 2024 12:04:36 -0700
-Message-Id: <20240603190436.222077-1-sj@kernel.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240603161530.80789-1-yskelg@gmail.com>
-References: 
+	s=arc-20240116; t=1717454798; c=relaxed/simple;
+	bh=0SDC8BkbIu6webNUXhyFkkBsSVcdj+Sq6u/l89WhDUU=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ZLPzJCsQipJDgPkScI1TIFAtnkpAp+GRZ5BSWuBLCRJ6ECpF5PSUmzxTx4PQ9d0Hrc9xnneqKlWJt+U6jk33LZ4laqscnodrwAe5qJLLxDICNDWzKli1xOh3C6r4ggymUbS17aiUrS4XJWRisPFd/wsp5QZcU0Rs3Q4dasvPqHs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=2YEB+x82; arc=none smtp.client-ip=209.85.160.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-qt1-f170.google.com with SMTP id d75a77b69052e-43fe3289fc5so50441cf.1
+        for <linux-doc@vger.kernel.org>; Mon, 03 Jun 2024 15:46:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1717454796; x=1718059596; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zwApvMmCxi6kRvhFpeZNrHVjs/fSYi202Vq8O0y7Pvc=;
+        b=2YEB+x82iaPcRGgd758Wy0mcQv/zPOKnypfOsXwRqgtxaDBACdtrIJl9FVHN7nGTyB
+         ev9S31pkK8Blef/fm/dVZ5QuTEmXM0RBQRF0tFNYF3D1fJ8EsNW5ww+rFKGaWTD6g5Fz
+         az9/wdiJrTuQLUfBBMB/+9tMrh+WDScVdUwHEthj+IKVYorJQtKUYJLOXMmYDl5T5+p4
+         92iG8gHWXb794e/vtE7iyZZnFTFD+QDzoMPnzSFbIiqL3qRIyYOyDLok+SrYmnaYX66Y
+         1J0f383XKM8jo/SdztHum0F5latvbmw0xnnn6jZeBJN9V54Hw10OS40G9eqbjlzCcTxZ
+         M9Fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1717454796; x=1718059596;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=zwApvMmCxi6kRvhFpeZNrHVjs/fSYi202Vq8O0y7Pvc=;
+        b=DCp1kYvEVc9/Dj6rGIVU6dkVZuDxeZeHnEzTtmyA6d7EtQMXtAoDACgYzIQbYygbcE
+         bsVgIV4ar2uBXxoPnJPvRY+jRlJHNQW/Pg9RLpPStFw0B4nCkchIY36M/59WK+Hm8aPg
+         bEDeyvk9qNfX0WuSxKMdsmAU2hxYIpUpVPiRkmHjNpn1uCGvNKwrRAqRXbb9/w/PSdmW
+         Q2ipxMD/mWjK5kUV5KWr7MljuaSK2BQUkZ3MG/XugEIZI8cag0KTVvXmhFsZlmDlm0G6
+         U6tJdXafsGbiop+Kp+/8NYR3Y8hvqiAdSYO4i+twnCb3NLNjAwNXQ4I7Mow/OzqSVTQM
+         ObTA==
+X-Forwarded-Encrypted: i=1; AJvYcCW+e5EN2mrwTsCcvZBjggYjJwFMtlp8o/VS3gdZJhOhjhAyOW2KaGjKcUAMfDw/IypWW2jcwhvutUHZ1XBeI92Z9YQH5cywcXxB
+X-Gm-Message-State: AOJu0YxB1cu8k9NVr/BJUYU2hb/dErsviBSejzt3aOwWDWMerYa+9w17
+	GYiTcE2OePgj34XxiP4HqZLqkLWpcOMiWijwo+Bki3T+2LkLe4xtUpBGQLBu7PNDQvkay2VPp9f
+	z5jkTtF0NdF1PvhCFNqWFPr/1e5zz933ScxTZ
+X-Google-Smtp-Source: AGHT+IFNqO3Eeca3fb/gjbGejzk9epZFQKuRMTX94UERp2ub7SAJHzg0ElHPjQ2U8grOlDfvsiNhgYwFk5rOK4wQGMU=
+X-Received: by 2002:a05:622a:59ce:b0:43f:ff89:dfb9 with SMTP id
+ d75a77b69052e-4401bd281f4mr1732131cf.6.1717454795966; Mon, 03 Jun 2024
+ 15:46:35 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20240529180510.2295118-1-jthoughton@google.com>
+ <20240529180510.2295118-3-jthoughton@google.com> <CAOUHufYFHKLwt1PWp2uS6g174GZYRZURWJAmdUWs5eaKmhEeyQ@mail.gmail.com>
+ <ZlelW93_T6P-ZuSZ@google.com> <CAOUHufZdEpY6ra73SMHA33DegKxKaUM=Os7A7aDBFND6NkbUmQ@mail.gmail.com>
+ <Zley-u_dOlZ-S-a6@google.com> <CADrL8HXHWg_MkApYQTngzmN21NEGNWC6KzJDw_Lm63JHJkR=5A@mail.gmail.com>
+ <CAOUHufZq6DwpStzHtjG+TOiHaQ6FFbkTfHMCe8Yy0n_M9MKdqw@mail.gmail.com>
+In-Reply-To: <CAOUHufZq6DwpStzHtjG+TOiHaQ6FFbkTfHMCe8Yy0n_M9MKdqw@mail.gmail.com>
+From: James Houghton <jthoughton@google.com>
+Date: Mon, 3 Jun 2024 15:45:59 -0700
+Message-ID: <CADrL8HW44Hx_Ejx_6+FVKt1V17PdgT6rw+sNtKzumqc9UCVDfA@mail.gmail.com>
+Subject: Re: [PATCH v4 2/7] mm: multi-gen LRU: Have secondary MMUs participate
+ in aging
+To: Yu Zhao <yuzhao@google.com>
+Cc: Sean Christopherson <seanjc@google.com>, Andrew Morton <akpm@linux-foundation.org>, 
+	Paolo Bonzini <pbonzini@redhat.com>, Albert Ou <aou@eecs.berkeley.edu>, 
+	Ankit Agrawal <ankita@nvidia.com>, Anup Patel <anup@brainfault.org>, 
+	Atish Patra <atishp@atishpatra.org>, Axel Rasmussen <axelrasmussen@google.com>, 
+	Bibo Mao <maobibo@loongson.cn>, Catalin Marinas <catalin.marinas@arm.com>, 
+	David Matlack <dmatlack@google.com>, David Rientjes <rientjes@google.com>, 
+	Huacai Chen <chenhuacai@kernel.org>, James Morse <james.morse@arm.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Marc Zyngier <maz@kernel.org>, Michael Ellerman <mpe@ellerman.id.au>, 
+	Nicholas Piggin <npiggin@gmail.com>, Oliver Upton <oliver.upton@linux.dev>, 
+	Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <paul.walmsley@sifive.com>, 
+	Raghavendra Rao Ananta <rananta@google.com>, Ryan Roberts <ryan.roberts@arm.com>, 
+	Shaoqin Huang <shahuang@redhat.com>, Shuah Khan <shuah@kernel.org>, 
+	Suzuki K Poulose <suzuki.poulose@arm.com>, Tianrui Zhao <zhaotianrui@loongson.cn>, 
+	Will Deacon <will@kernel.org>, Zenghui Yu <yuzenghui@huawei.com>, kvm-riscv@lists.infradead.org, 
+	kvm@vger.kernel.org, kvmarm@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	linux-mips@vger.kernel.org, linux-mm@kvack.org, 
+	linux-riscv@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, 
+	loongarch@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue,  4 Jun 2024 01:15:31 +0900 yskelg@gmail.com wrote:
+On Thu, May 30, 2024 at 11:06=E2=80=AFPM Yu Zhao <yuzhao@google.com> wrote:
+>
+> On Wed, May 29, 2024 at 7:08=E2=80=AFPM James Houghton <jthoughton@google=
+.com> wrote:
+> >
+> > Hi Yu, Sean,
+> >
+> > Perhaps I "simplified" this bit of the series a little bit too much.
+> > Being able to opportunistically do aging with KVM (even without
+> > setting the Kconfig) is valuable.
+> >
+> > IIUC, we have the following possibilities:
+> > - v4: aging with KVM is done if the new Kconfig is set.
+> > - v3: aging with KVM is always done.
+>
+> This is not true -- in v3, MGLRU only scans secondary MMUs if it can
+> be done locklessly on x86. It uses a bitmap to imply this requirement.
+>
+> > - v2: aging with KVM is done when the architecture reports that it can
+> > probably be done locklessly, set at KVM MMU init time.
+>
+> Not really -- it's only done if it can be done locklessly on both x86 and=
+ arm64.
+>
+> > - Another possibility?: aging with KVM is only done exactly when it
+> > can be done locklessly (i.e., mmu_notifier_test/clear_young() called
+> > such that it will not grab any locks).
+>
+> This is exactly the case for v2.
 
-> From: Yunseong Kim <yskelg@gmail.com>
-> 
-> This is a Documentation/process/cve korean version.
-> 
-> The following changes have been updated based on SeongJae Park’s feedback
-> and Austin Kim’s from the last v2 and v3 patches.
-> 
-> Signed-off-by: Yunseong Kim <yskelg@gmail.com>
-> ---
->  Documentation/translations/ko_KR/index.rst    |   2 +-
->  .../translations/ko_KR/process/cve.rst        | 119 +++++++++---------
->  2 files changed, 61 insertions(+), 60 deletions(-)
-> 
-> diff --git a/Documentation/translations/ko_KR/index.rst b/Documentation/translations/ko_KR/index.rst
-> index 4add6b2fe1f2..f38f0ce19a1e 100644
-> --- a/Documentation/translations/ko_KR/index.rst
-> +++ b/Documentation/translations/ko_KR/index.rst
-> @@ -12,7 +12,7 @@
->     :maxdepth: 1
->  
->     howto
-> -
+Thanks for clarifying; sorry for getting this wrong.
 
-I don't think you need to delete the above line.
+>
+> > I like the v4 approach because:
+> > 1. We can choose whether or not to do aging with KVM no matter what
+> > architecture we're using (without requiring userspace be aware to
+> > disable the feature at runtime with sysfs to avoid regressing
+> > performance if they don't care about proactive reclaim).
+> > 2. If we check the new feature bit (0x8) in sysfs, we can know for
+> > sure if aging is meant to be working or not. The selftest changes I
+> > made won't work properly unless there is a way to be sure that aging
+> > is working with KVM.
+>
+> I'm not convinced, but it doesn't mean your point of view is invalid.
+> If you fully understand the implications of your design choice and
+> document them, I will not object.
+>
+> All optimizations in v2 were measured step by step. Even that bitmap,
+> which might be considered overengineered, brought a readily
+> measuarable 4% improvement in memcached throughput on Altra Max
+> swapping to Optane:
+>
+> Using the bitmap (64 KVM PTEs for each call)
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Type         Ops/sec     Hits/sec   Misses/sec    Avg. Latency     p50
+> Latency     p99 Latency   p99.9 Latency       KB/sec
+> -------------------------------------------------------------------------=
+---------------------------------------------------
+> Sets            0.00          ---          ---             ---
+>     ---             ---             ---         0.00
+> Gets      1012801.92    431436.92     14965.11         0.06246
+> 0.04700         0.16700         4.31900     39635.83
+> Waits           0.00          ---          ---             ---
+>     ---             ---             ---          ---
+> Totals    1012801.92    431436.92     14965.11         0.06246
+> 0.04700         0.16700         4.31900     39635.83
+>
+>
+> Not using the bitmap (1 KVM PTEs for each call)
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Type         Ops/sec     Hits/sec   Misses/sec    Avg. Latency     p50
+> Latency     p99 Latency   p99.9 Latency       KB/sec
+> -------------------------------------------------------------------------=
+---------------------------------------------------
+> Sets            0.00          ---          ---             ---
+>     ---             ---             ---         0.00
+> Gets       968210.02    412443.85     14303.89         0.06517
+> 0.04700         0.15900         7.42300     37890.74
+> Waits           0.00          ---          ---             ---
+>     ---             ---             ---          ---
+> Totals     968210.02    412443.85     14303.89         0.06517
+> 0.04700         0.15900         7.42300     37890.74
+>
+>
+> FlameGraphs with bitmap (1.svg) and without bitmap (2.svg) attached.
+>
+> What I don't think is acceptable is simplifying those optimizations
+> out without documenting your justifications (I would even call it a
+> design change, rather than simplification, from v3 to v4).
 
-> +   process/cve
->  
->  리눅스 커널 메모리 배리어
->  -------------------------
-> diff --git a/Documentation/translations/ko_KR/process/cve.rst b/Documentation/translations/ko_KR/process/cve.rst
-> index 94610c177f17..5a84d0d4266f 100644
-> --- a/Documentation/translations/ko_KR/process/cve.rst
-> +++ b/Documentation/translations/ko_KR/process/cve.rst
-> @@ -1,7 +1,9 @@
->  .. SPDX-License-Identifier: GPL-2.0
->  
-> -:Original: Documentation/process/cve.rst
-> -:Translator: Yunseong Kim <yskelg@gmail.com>
-> +:원문: Documentation/process/cve.rst
-> +:역자: 김윤성 <yskelg@gmail.com>
-> +:감수: 박진우 <pmnxis@gmail.com>, 박성재 <sj@kernel.org>,
+I'll put back something similar to what you had before (like a
+test_clear_young() with a "fast" parameter instead of "bitmap"). I
+like the idea of having a new mmu notifier, like
+fast_test_clear_young(), while leaving test_young() and clear_young()
+unchanged (where "fast" means "prioritize speed over accuracy"). It
+seems a little more straightforward that way.
 
-Thank you for adding me.  However, please don't add me here unless I ask you
-to.
+>
+> > For look-around at eviction time:
+> > - v4: done if the main mm PTE was young and no MMU notifiers are subscr=
+ibed.
+> > - v2/v3: done if the main mm PTE was young or (the SPTE was young and
+> > the MMU notifier was lockless/fast).
+>
+> The host and secondary MMUs are two *independent* cases, IMO:
+> 1. lookaround the host MMU if the PTE mapping the folio under reclaim is =
+young.
+> 2. lookaround the secondary MMU if it can be done locklessly.
+>
+> So the v2/v3 behavior sounds a lot more reasonable to me.
 
+I'll restore the v2/v3 behavior. I initially removed it because,
+without batching, we (mostly) lose the spatial locality that, IIUC,
+look-around is designed to exploit.
 
-Thanks,
-SJ
+>
+> Also a nit -- don't use 'else' in the following case (should_look_around(=
+)):
+>
+>   if (foo)
+>     return bar;
+>   else
+>     do_something();
 
-[...]
+Oh, yes, sorry. I wrote and rewrote should_look_around() quite a few
+times while trying to figure out what made sense in a no-batching
+series. I'll fix this.
+
+>
+> > I made this logic change as part of removing batching.
+> >
+> > I'd really appreciate guidance on what the correct thing to do is.
+> >
+> > In my mind, what would work great is: by default, do aging exactly
+> > when KVM can do it locklessly, and then have a Kconfig to always have
+> > MGLRU to do aging with KVM if a user really cares about proactive
+> > reclaim (when the feature bit is set). The selftest can check the
+> > Kconfig + feature bit to know for sure if aging will be done.
+>
+> I still don't see how that Kconfig helps. Or why the new static branch
+> isn't enough?
+
+Without a special Kconfig, the feature bit just tells us that aging
+with KVM is possible, not that it will necessarily be done. For the
+self-test, it'd be good to know exactly when aging is being done or
+not, so having a Kconfig like LRU_GEN_ALWAYS_WALK_SECONDARY_MMU would
+help make the self-test set the right expectations for aging.
+
+The Kconfig would also allow a user to know that, no matter what,
+we're going to get correct age data for VMs, even if, say, we're using
+the shadow MMU. This is somewhat important for me/Google Cloud. Is
+that reasonable? Maybe there's a better solution.
 
