@@ -1,86 +1,106 @@
-Return-Path: <linux-doc+bounces-17553-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17555-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 830EB8D88C5
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 20:42:58 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D7CDA8D8A3A
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 21:33:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1892B1F22170
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 18:42:58 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9991928E0D7
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Jun 2024 19:33:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 216171386C2;
-	Mon,  3 Jun 2024 18:42:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ca7B5HyH"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D78A03FE2A;
+	Mon,  3 Jun 2024 19:33:24 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from xmailer.gwdg.de (xmailer.gwdg.de [134.76.10.29])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4F781CD38;
-	Mon,  3 Jun 2024 18:42:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83F0D374EA;
+	Mon,  3 Jun 2024 19:33:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=134.76.10.29
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717440173; cv=none; b=jp5ccXD3ah5LAsXGt3DK/4EdF4RyiOpp8s77ouwq1PE0fWMfuE4XofexgLtbxKM5AzAirf8zeRXw1a0v3DC0xTAi/50HeamwiBXO0JhPdIDN1K/AUKz30QBtWWOdPgvy1xZrEobIAt+Oq16tfI1rNofs4fN8lpqtV68GPGyuQCQ=
+	t=1717443204; cv=none; b=DfvIrzAcod4y2olu4UFwl0RaMECxLo6zTL25CDWV5izg5WF+eOpO+k53yVR+AXt9zzCkcyjckblCVccjJVFhv6ReEOEkp377L/UZf75CsiCd8gyemQwkskHpYT7pJofGlkh0pX9Capd0OSNy1661kv8eLjqgS3QsQ8gwcO/ouOA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717440173; c=relaxed/simple;
-	bh=nW1jlc/m9thV6uF+r0tV6tWnOtpg0higsRLy7TBagJ8=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=cZE7Bxmn0A8c9uURNcHAJ1ouw30dCPKFQhXqbv6mdBop9qphr5F8gepTnwdJVrZuT1tf2Dort8/QCpszLXLCpRoco7ZgpFSN16MmB6KOtyeki5WDOucrZ+1M2JUdxdcDBRZsFm4X1gIuNV+Vuu0njDNhwFuPUWTixnKtBOrTDaw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ca7B5HyH; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC6FFC2BD10;
-	Mon,  3 Jun 2024 18:42:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1717440172;
-	bh=nW1jlc/m9thV6uF+r0tV6tWnOtpg0higsRLy7TBagJ8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=Ca7B5HyH9cEPGGyTQxh10LS2F4upi3uZuqCrsvjzvbvUBqaHBJf3zgZQ3ve8h5zCx
-	 Yufh4XpPuC78dKOD/g/70o3il1Auw/7LM0gRmoUfq31dG9NLsjQnTp/ITfUYc9d/g+
-	 PvnenDfdBZxHm4w2/N2j3wTfTq+pABCE54hjTLbTJPk+Qha6b2u3E6rK5hU+d/7gk4
-	 20QdFDQJa27PXBGubHm+yvsbakYoAcHaU6uHQV3doq+VJF/7pO4yWqC2CHhWvXxhle
-	 slW9G/u+ConSfHoIjTT0Fw5Rec/VESNCEYsLCDZtBlYsUfurSnbMbwc2Y5LVxK34dA
-	 hbHpP/582vefQ==
-Date: Mon, 3 Jun 2024 11:42:50 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Itay Avraham <itayavr@nvidia.com>,
- Leon Romanovsky <leon@kernel.org>, linux-doc@vger.kernel.org,
- linux-rdma@vger.kernel.org, netdev@vger.kernel.org, Paolo Abeni
- <pabeni@redhat.com>, Saeed Mahameed <saeedm@nvidia.com>, Tariq Toukan
- <tariqt@nvidia.com>, Andy Gospodarek <andrew.gospodarek@broadcom.com>, Aron
- Silverton <aron.silverton@oracle.com>, Dan Williams
- <dan.j.williams@intel.com>, David Ahern <dsahern@kernel.org>, Christoph
- Hellwig <hch@infradead.org>, Jiri Pirko <jiri@nvidia.com>, Leonid Bloch
- <lbloch@nvidia.com>, Leon Romanovsky <leonro@nvidia.com>,
- linux-cxl@vger.kernel.org, patches@lists.linux.dev
-Subject: Re: [PATCH 0/8] Introduce fwctl subystem
-Message-ID: <20240603114250.5325279c@kernel.org>
-In-Reply-To: <0-v1-9912f1a11620+2a-fwctl_jgg@nvidia.com>
-References: <0-v1-9912f1a11620+2a-fwctl_jgg@nvidia.com>
+	s=arc-20240116; t=1717443204; c=relaxed/simple;
+	bh=ZFG0RzAoaOkp+zsaLv13A2Z5uR/A9GDeP1h90WlRyV0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ZQHsKGh3tfZeqUIazFYkR6t1hAod/SiHKqUT//T0zsdGldbGICF7VUj4l7yJQe1Q8z7gc017vHdn4MTtiZam5p8NPxKPXeYnzG7URRCK2pC5vDYKbYCvQP3l03f7AVV39nIgr1NYPoHspOZcqloqxHBviISZrv8LKbO/JG9DrPY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tuebingen.mpg.de; spf=pass smtp.mailfrom=tuebingen.mpg.de; arc=none smtp.client-ip=134.76.10.29
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tuebingen.mpg.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tuebingen.mpg.de
+Received: from mailgw.tuebingen.mpg.de ([192.124.27.5] helo=tuebingen.mpg.de)
+	by mailer.gwdg.de with esmtp (GWDG Mailer)
+	(envelope-from <maan@tuebingen.mpg.de>)
+	id 1sECtE-0005IN-0g;
+	Mon, 03 Jun 2024 20:58:40 +0200
+Received: from [10.35.40.80] (HELO mailhost.tuebingen.mpg.de)
+  by tuebingen.mpg.de (CommuniGate Pro SMTP 6.2.6)
+  with SMTP id 55632179; Mon, 03 Jun 2024 20:58:39 +0200
+Received: by mailhost.tuebingen.mpg.de (sSMTP sendmail emulation); Mon, 03 Jun 2024 20:58:39 +0200
+Date: Mon, 3 Jun 2024 20:58:39 +0200
+From: Andre Noll <maan@tuebingen.mpg.de>
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Cc: Dan Williams <dan.j.williams@intel.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>,
+	Jonathan Corbet <corbet@lwn.net>, Andre Noll <maan@systemlinux.org>,
+	linux-crypto@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, kernel@pengutronix.de
+Subject: Re: [PATCH v2] docs: crypto: async-tx-api: fix broken code example
+Message-ID: <Zl4SX4mF0EFuJLnc@tuebingen.mpg.de>
+References: <20240529-async-dma-docs-v2-1-8faf87e72e6d@pengutronix.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240529-async-dma-docs-v2-1-8faf87e72e6d@pengutronix.de>
+User-Agent: Mutt/2.2.13 (00d56288) (2024-03-09)
+X-Spam-Level: $
+X-Virus-Scanned: (clean) by clamav
 
-On Mon,  3 Jun 2024 12:53:16 -0300 Jason Gunthorpe wrote:
-> fwctl is a new subsystem intended to bring some common rules and order to
-> the growing pattern of exposing a secure FW interface directly to
-> userspace. Unlike existing places like RDMA/DRM/VFIO/uacce that are
-> exposing a device for datapath operations fwctl is focused on debugging,
-> configuration and provisioning of the device. It will not have the
-> necessary features like interrupt delivery to support a datapath.
+On Wed, May 29, 10:08, Ahmad Fatoum wrote
+> The code example fails to compile:
+> 
+>   1) addr_conv is defined twice, once as a VLA, which have been phased out
+> 
+>   2) submit is not a pointer, but is still dereferenced with ->
+> 
+>   3) The first call to async_xor() lacked the trailing semicolon
+> 
+> Fix these issues and while at it, fix some code style nitpicks as well:
+> 
+>   1) make the functions static as users are unlikely to export them
+> 
+>   2) include the relevant header
+> 
+>   3) Shorten the example a bit by removing a redundant variable
+>      definition
+> 
+> Fixes: 04ce9ab385dc ("async_xor: permit callers to pass in a 'dma/page scribble' region")
+> Signed-off-by: Ahmad Fatoum <a.fatoum@pengutronix.de>
+> ---
+> Changes in v2:
+> - commit message: fix addr_conv typo (Andre)
+> - commit message: note addition of missing semicolon (Andre)
+> - add header include (Andre)
+> - shorten code by removing redundant variable definition (Andre)
+> - Link to v1: https://lore.kernel.org/r/20240523-async-dma-docs-v1-1-b900e0804e11@pengutronix.de
 
-If you have debug problems in your subsystem, put the APIs in your
-subsystem. Don't force your choices on all the subsystems your device
-interacts with:
+Looks good to me now. Feel free to add
 
-Nacked-by: Jakub Kicinski <kuba@kernel.org>
+	Reviewed-by: Andre Noll <maan@tuebingen.mpg.de>
 
-Somewhat related, I saw nVidia sells various interesting features in
-its DOCA stack. Is that Open Source?
+Best
+Andre
+-- 
+Max Planck Institute for Biology
+Tel: (+49) 7071 601 829
+Max-Planck-Ring 5, 72076 Tübingen, Germany
+http://people.tuebingen.mpg.de/maan/
 
