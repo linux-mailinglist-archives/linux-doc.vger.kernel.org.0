@@ -1,83 +1,75 @@
-Return-Path: <linux-doc+bounces-17566-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17568-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id F32DE8FA89F
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2024 05:02:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70B7E8FA93D
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2024 06:31:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 7FE1CB212FB
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2024 03:02:08 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0F60AB243D5
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2024 04:31:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BABC712DD9F;
-	Tue,  4 Jun 2024 03:02:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m6qGZICI"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 195DB13D88F;
+	Tue,  4 Jun 2024 04:31:49 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8064822066;
-	Tue,  4 Jun 2024 03:02:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC53D13D639;
+	Tue,  4 Jun 2024 04:31:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.95.11.211
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717470121; cv=none; b=EFY8ldlV9KEOkOJwb/10YEQLHTfr6AoyQ/QW73+2IkpQFz9pico48XYzgTth+xlPclZ98Xq1ZFV18lkS8WPA+4qzfQjTHpOY4RhAd5GwjQdLynJY9WEuFVUfC/X0iFTQ7OTh42qiLg5gz25TAbBfyKrmrOp2rWY1h8xJcs90d2k=
+	t=1717475509; cv=none; b=shUbwzMFeCdYAbv2PFjDx/2JkLd1/X84M5pZD56Tn0OOD7WahsUdBbnc7r4zZX8jV1v/rB+5CW43U0cdDx88CaPEMA1X7UjcKxyH9+NzmLcjBtauE5ocmQ3X+cEk/GcuF32wMmQvs1CDibThBlbQmlcQB8He9qn5Sb2RDTczoeo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717470121; c=relaxed/simple;
-	bh=tFypGxxnMGIv+NNLghPSJ5V0kL2OPk5U2xXcu3mTl6s=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Od32PYWRbr2av0CgYUtTYVRS4yiyAvDQgtcH7vDmIqtS/qYZffTtV0GAwYBP+Dz9uwGTP/JBco7qkHcwdT0nF0KylCFn87zJzwEiT36o9yCw9uMySZkB3wNUIysLaQMWRyiqXl7ot29dooOXzaQxVEFypMPh8QvvhvhyDFRF68A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m6qGZICI; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06276C2BD10;
-	Tue,  4 Jun 2024 03:01:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1717470121;
-	bh=tFypGxxnMGIv+NNLghPSJ5V0kL2OPk5U2xXcu3mTl6s=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=m6qGZICIthnVF5i6OZIu+ZvfLpKqP5B+j0pCtihanuvYf1e1dw0jyeg3XsOj0GW1P
-	 CvF7Dwj1MQNS8N+RkuUqmWe9wUevnENotrma3cte1DmaO2+IAuiYWbpwqNH0NiARRr
-	 qiYsQC/DHJCIlsY/8Yc7QeaMJF4hCJ6C9Dt+NwevpRSzs7d1tk7jPb0m5LL1T0+ekT
-	 Nf7Xjkq6qjZtImoLhVuhcp+gbGE9cpw6KdgwhgBW3QCY757u5NwSyP1iPX916O23cV
-	 JgIqogKv3PfxDF2sObjWNqIv3of2uz60MA5OcUnxIt8WN8JfBot2j4lX+5l8e6L/W0
-	 DAjzDZW610qRw==
-Message-ID: <214d7d82-0916-4c29-9012-04590e77df73@kernel.org>
-Date: Mon, 3 Jun 2024 21:01:58 -0600
+	s=arc-20240116; t=1717475509; c=relaxed/simple;
+	bh=+P6lCzxMtgkTSM7bfvrnPizzmdH3bqAUPXp7C4X6W4g=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=lHg/lI1wmHaeo3EueASAirCMGtHqoODqEA5Jh7Xe8P+656+6g9GLEfWKqKgWCm3SGJ+/ADjFf384ONT4vQ8BI/6rNUDgHqHxrUfxqe37/AqnLJvoU1OVXL2WHV72uu0+Wy0uRvNs/zgXNOBCYc2+Bpm613KU/AVFeUZzlQHue7w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de; spf=pass smtp.mailfrom=lst.de; arc=none smtp.client-ip=213.95.11.211
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lst.de
+Received: by verein.lst.de (Postfix, from userid 2407)
+	id 2831268D12; Tue,  4 Jun 2024 06:31:43 +0200 (CEST)
+Date: Tue, 4 Jun 2024 06:31:42 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Nitesh Shetty <nj.shetty@samsung.com>
+Cc: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>,
+	Jonathan Corbet <corbet@lwn.net>, Alasdair Kergon <agk@redhat.com>,
+	Mike Snitzer <snitzer@kernel.org>,
+	Mikulas Patocka <mpatocka@redhat.com>,
+	Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>,
+	Chaitanya Kulkarni <kch@nvidia.com>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+	martin.petersen@oracle.com, bvanassche@acm.org, david@fromorbit.com,
+	hare@suse.de, damien.lemoal@opensource.wdc.com,
+	anuj20.g@samsung.com, joshi.k@samsung.com, nitheshshetty@gmail.com,
+	gost.dev@samsung.com, linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	dm-devel@lists.linux.dev, linux-nvme@lists.infradead.org,
+	linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH v20 01/12] block: Introduce queue limits and sysfs for
+ copy-offload support
+Message-ID: <20240604043142.GB28886@lst.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/8] Introduce fwctl subystem
-Content-Language: en-US
-To: Jakub Kicinski <kuba@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Itay Avraham <itayavr@nvidia.com>,
- Leon Romanovsky <leon@kernel.org>, linux-doc@vger.kernel.org,
- linux-rdma@vger.kernel.org, netdev@vger.kernel.org,
- Paolo Abeni <pabeni@redhat.com>, Saeed Mahameed <saeedm@nvidia.com>,
- Tariq Toukan <tariqt@nvidia.com>,
- Andy Gospodarek <andrew.gospodarek@broadcom.com>,
- Aron Silverton <aron.silverton@oracle.com>,
- Dan Williams <dan.j.williams@intel.com>,
- Christoph Hellwig <hch@infradead.org>, Jiri Pirko <jiri@nvidia.com>,
- Leonid Bloch <lbloch@nvidia.com>, Leon Romanovsky <leonro@nvidia.com>,
- linux-cxl@vger.kernel.org, patches@lists.linux.dev
-References: <0-v1-9912f1a11620+2a-fwctl_jgg@nvidia.com>
- <20240603114250.5325279c@kernel.org>
-From: David Ahern <dsahern@kernel.org>
-In-Reply-To: <20240603114250.5325279c@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.5.17 (2007-11-01)
 
-On 6/3/24 12:42 PM, Jakub Kicinski wrote:
-> Somewhat related, I saw nVidia sells various interesting features in its
-> DOCA stack. Is that Open Source?
+On Mon, Jun 03, 2024 at 06:43:56AM +0000, Nitesh Shetty wrote:
+>> Also most block limits are in kb.  Not that I really know why we are
+>> doing that, but is there a good reason to deviate from that scheme?
+>>
+> We followed discard as a reference, but we can move to kb, if that helps
+> with overall readability.
 
-Seriously, Jakub, how is that in any way related to this patch set?
+I'm not really sure what is better.  Does anyone remember why we did
+the _kb version?  Either way some amount of consistency would be nice.
 
-You are basically suggesting that if any vendor ever has an out of tree
-option for its hardware every patch it sends should be considered a ruse
-to enable or simplify proprietary options.
 
