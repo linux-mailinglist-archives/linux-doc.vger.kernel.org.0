@@ -1,98 +1,133 @@
-Return-Path: <linux-doc+bounces-17570-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17572-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 617E08FA95A
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2024 06:40:57 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C6398FAA01
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2024 07:31:15 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 00EFFB24CAD
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2024 04:40:55 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id DE52E1F219D5
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2024 05:31:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 241C613D897;
-	Tue,  4 Jun 2024 04:40:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ECCDA134414;
+	Tue,  4 Jun 2024 05:31:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="WOCOjvy4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+Received: from out30-98.freemail.mail.aliyun.com (out30-98.freemail.mail.aliyun.com [115.124.30.98])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB93613D638;
-	Tue,  4 Jun 2024 04:40:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.95.11.211
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BDBB8BEC;
+	Tue,  4 Jun 2024 05:31:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.98
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717476050; cv=none; b=MtwLwIoSHHG9bk/Yu3ixH8dXfJVgMgIIPPMsx0y5ufuNiwCTdYrIO+sNiz/Ue0CqxFaEPX85nMXZzhlhkhkDQBUkuyPwUMKpsahqaTgsDdPXq3Om08bWSurC+/X5WB2N/gqeY3c2aw+eI5b2EwvX1FyxSSKPcBcg9hnPDF1abio=
+	t=1717479070; cv=none; b=jXQwRD4xMMnV6AAlDk6d/dZO/0t51Mgll2ztM7qwlPoEPdK6frb9MofVKK+xwyvZ7QrBacnPffwKT2RgXvw6ld1lvDNcx6P4wFGLQitFbC7Qe7ebtneHLke/WDRINmEWPuYrv4C+5Jx3g+XsYtYhOh0FoxpvXusWhmjzPrHcUmo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717476050; c=relaxed/simple;
-	bh=YspLg/oZO+NECETpz3U99drDYtBVvMb6eMXzhEQZu1I=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=kjoKciJKskMO8scKIxjtcD8rSfWx52AhznzPgs68r8V9pBmAub31EbPFRz5yg857F//Dv+p8s8ML6p8gyUaKryygBIkf169Ahvqq0jVQ88fjPyr334LoE4KJuOGurTqmYjiCH+Z34s2V6RQQCZdXEiumrnvYWlTSMwlrxFqS2EE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de; spf=pass smtp.mailfrom=lst.de; arc=none smtp.client-ip=213.95.11.211
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lst.de
-Received: by verein.lst.de (Postfix, from userid 2407)
-	id EAF7068D12; Tue,  4 Jun 2024 06:40:42 +0200 (CEST)
-Date: Tue, 4 Jun 2024 06:40:42 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Bart Van Assche <bvanassche@acm.org>
-Cc: Christoph Hellwig <hch@lst.de>, Nitesh Shetty <nj.shetty@samsung.com>,
-	Damien Le Moal <dlemoal@kernel.org>, Jens Axboe <axboe@kernel.dk>,
-	Jonathan Corbet <corbet@lwn.net>, Alasdair Kergon <agk@redhat.com>,
-	Mike Snitzer <snitzer@kernel.org>,
-	Mikulas Patocka <mpatocka@redhat.com>,
-	Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>,
-	Chaitanya Kulkarni <kch@nvidia.com>,
-	Alexander Viro <viro@zeniv.linux.org.uk>,
-	Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
-	martin.petersen@oracle.com, david@fromorbit.com, hare@suse.de,
-	damien.lemoal@opensource.wdc.com, anuj20.g@samsung.com,
-	joshi.k@samsung.com, nitheshshetty@gmail.com, gost.dev@samsung.com,
-	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, dm-devel@lists.linux.dev,
-	linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v20 02/12] Add infrastructure for copy offload in block
- and request layer.
-Message-ID: <20240604044042.GA29094@lst.de>
-References: <20240520102033.9361-1-nj.shetty@samsung.com> <CGME20240520102842epcas5p4949334c2587a15b8adab2c913daa622f@epcas5p4.samsung.com> <20240520102033.9361-3-nj.shetty@samsung.com> <eda6c198-3a29-4da4-94db-305cfe28d3d6@acm.org> <9f1ec1c1-e1b8-48ac-b7ff-8efb806a1bc8@kernel.org> <a866d5b5-5b01-44a2-9ccb-63bf30aa8a51@acm.org> <665850bd.050a0220.a5e6b.5b72SMTPIN_ADDED_BROKEN@mx.google.com> <abe8c209-d452-4fb5-90eb-f77b5ec1a2dc@acm.org> <20240601055931.GB5772@lst.de> <d7ae00c8-c038-4bed-937e-222251bc627a@acm.org>
+	s=arc-20240116; t=1717479070; c=relaxed/simple;
+	bh=0zbgKfvHTJ/R5q9ClkCPrLlxGR7Xha84YTV21PicIHU=;
+	h=Message-ID:Subject:Date:From:To:Cc:References:In-Reply-To; b=GJOWnN+Y6AAouHRQ4vbRi+6TvoX6sSkNRMvvf2QS0Ko6kanCop+7yOuJqSuFoZ9mNAKA6I1GQ0hmG811kJhRQdoa8WPKQtvYvr+ewsrDqICIAZ63pa7BSrbpdkB5euKoqXmgepWBOpvEjdZeJ8I/jjeb4QLeQmA6tjNL1oKGAtg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=WOCOjvy4; arc=none smtp.client-ip=115.124.30.98
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
+DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linux.alibaba.com; s=default;
+	t=1717479064; h=Message-ID:Subject:Date:From:To;
+	bh=on7QTAt93h/XfHQ169rkXSG1LnUtTKMC4HJvTpbfWk8=;
+	b=WOCOjvy4Aq8y6f9BuN6YpGq2rDn4pBCQX1TLsKKkMc0aG5SMOLDMfXbmIBzD037qiezGV9OkXI7rtkMnwaUg16F9HrZBoPbe9jbSYZok6U2G81yixDJtHC5b6Htlh3ljJd7o9nM6rA1yOs9c6IcVCnfwdAludiAbKGI/W9KVhr4=
+X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R411e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=maildocker-contentspam033068173054;MF=hengqi@linux.alibaba.com;NM=1;PH=DS;RN=37;SR=0;TI=SMTPD_---0W7poCxp_1717479060;
+Received: from localhost(mailfrom:hengqi@linux.alibaba.com fp:SMTPD_---0W7poCxp_1717479060)
+          by smtp.aliyun-inc.com;
+          Tue, 04 Jun 2024 13:31:01 +0800
+Message-ID: <1717478006.038663-1-hengqi@linux.alibaba.com>
+Subject: Re: [PATCH net-next v14 3/5] ethtool: provide customized dim profile management
+Date: Tue, 4 Jun 2024 13:13:26 +0800
+From: Heng Qi <hengqi@linux.alibaba.com>
+To: kernel test robot <lkp@intel.com>
+Cc: oe-kbuild-all@lists.linux.dev,
+ Huacai Chen <chenhuacai@loongson.cn>,
+ Xuerui Wang <kernel@xen0n.name>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Guo Ren <guoren@kernel.org>,
+ loongarch@lists.linux.dev,
+ Jakub Kicinski <kuba@kernel.org>,
+ "David S . Miller" <davem@davemloft.net>,
+ Paolo Abeni <pabeni@redhat.com>,
+ Eric Dumazet <edumazet@google.com>,
+ Jason Wang <jasowang@redhat.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Brett Creeley <bcreeley@amd.com>,
+ Ratheesh Kannoth <rkannoth@marvell.com>,
+ Alexander Lobakin <aleksander.lobakin@intel.com>,
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+ Tal Gilboa <talgi@nvidia.com>,
+ Jonathan Corbet <corbet@lwn.net>,
+ linux-doc@vger.kernel.org,
+ Maxime Chevallier <maxime.chevallier@bootlin.com>,
+ Jiri Pirko <jiri@resnulli.us>,
+ Paul Greenwalt <paul.greenwalt@intel.com>,
+ Ahmed Zaki <ahmed.zaki@intel.com>,
+ Vladimir Oltean <vladimir.oltean@nxp.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Andrew Lunn <andrew@lunn.ch>,
+ justinstitt@google.com,
+ donald.hunter@gmail.com,
+ =?utf-8?q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Linux Memory Management List <linux-mm@kvack.org>,
+ Dragos Tatulea <dtatulea@nvidia.com>,
+ Rahul Rameshbabu <rrameshbabu@nvidia.com>,
+ Heiner Kallweit <hkallweit1@gmail.com>,
+ netdev@vger.kernel.org,
+ virtualization@lists.linux.dev
+References: <20240603154727.31998-1-hengqi@linux.alibaba.com>
+ <20240603154727.31998-4-hengqi@linux.alibaba.com>
+ <202406040645.6z95FW1f-lkp@intel.com>
+In-Reply-To: <202406040645.6z95FW1f-lkp@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <d7ae00c8-c038-4bed-937e-222251bc627a@acm.org>
-User-Agent: Mutt/1.5.17 (2007-11-01)
 
-On Mon, Jun 03, 2024 at 10:12:48AM -0700, Bart Van Assche wrote:
-> Consider the following use case:
-> * Task A calls blk_start_plug()
-> * Task B calls blk_start_plug()
-> * Task A submits a REQ_OP_COPY_DST bio and a REQ_OP_COPY_SRC bio.
-> * Task B submits a REQ_OP_COPY_DST bio and a REQ_OP_COPY_SRC bio.
-> * The stacking driver to which all REQ_OP_COPY_* operations have been
->   submitted processes bios asynchronusly.
-> * Task A calls blk_finish_plug()
-> * Task B calls blk_finish_plug()
-> * The REQ_OP_COPY_DST bio from task A and the REQ_OP_COPY_SRC bio from
->   task B are combined into a single request.
-> * The REQ_OP_COPY_DST bio from task B and the REQ_OP_COPY_SRC bio from
->   task A are combined into a single request.
->
-> This results in silent and hard-to-debug data corruption. Do you agree
-> that we should not restrict copy offloading to stacking drivers that
-> process bios synchronously and also that this kind of data corruption
-> should be prevented?
+On Tue, 4 Jun 2024 07:00:35 +0800, kernel test robot <lkp@intel.com> wrote:
+> Hi Heng,
+> 
+> kernel test robot noticed the following build warnings:
+> 
+> [auto build test WARNING on net-next/main]
+> 
+> url:    https://github.com/intel-lab-lkp/linux/commits/Heng-Qi/linux-dim-move-useful-macros-to-h-file/20240603-235834
+> base:   net-next/main
+> patch link:    https://lore.kernel.org/r/20240603154727.31998-4-hengqi%40linux.alibaba.com
+> patch subject: [PATCH net-next v14 3/5] ethtool: provide customized dim profile management
+> config: loongarch-defconfig (https://download.01.org/0day-ci/archive/20240604/202406040645.6z95FW1f-lkp@intel.com/config)
+> compiler: loongarch64-linux-gcc (GCC) 13.2.0
+> reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240604/202406040645.6z95FW1f-lkp@intel.com/reproduce)
+> 
+> If you fix the issue in a separate patch/commit (i.e. not just a new version of
+> the same patch/commit), kindly add following tags
+> | Reported-by: kernel test robot <lkp@intel.com>
+> | Closes: https://lore.kernel.org/oe-kbuild-all/202406040645.6z95FW1f-lkp@intel.com/
+> 
+> All warnings (new ones prefixed by >>):
+> 
+> >> net/ethtool/coalesce.o: warning: objtool: unexpected relocation symbol type in .rela.discard.reachable
 
-There is no requirement to process them synchronously, there is just
-a requirement to preserve the order.  Note that my suggestion a few
-arounds ago also included a copy id to match them up.  If we don't
-need that I'm happy to leave it away.  If need it it to make stacking
-drivers' lifes easier that suggestion still stands.
 
->
-> Thanks,
->
-> Bart.
----end quoted text---
+I'm not sure if this seems to be related to the update of loongarch[1]?
+didn't find this warning on other architectures such as arm/openrisc/x86.
+
++Cc:
+loongarch@lists.linux.dev, Guo Ren <guoren@kernel.org>,
+Xuerui Wang <kernel@xen0n.name>,
+Jiaxun Yang <jiaxun.yang@flygoat.com>,
+Huacai Chen <chenhuacai@loongson.cn>
+
+[1] https://lore.kernel.org/all/20240322135619.1423490-1-chenhuacai@loongson.cn/
+
+> 
+> -- 
+> 0-DAY CI Kernel Test Service
+> https://github.com/intel/lkp-tests/wiki
 
