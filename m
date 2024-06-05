@@ -1,146 +1,128 @@
-Return-Path: <linux-doc+bounces-17715-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17717-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id B76CF8FC198
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 04:16:56 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 56F268FC1AB
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 04:20:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 72C1228508E
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 02:16:55 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id EA2081F25BDD
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 02:20:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 836E82744E;
-	Wed,  5 Jun 2024 02:16:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 338E460B96;
+	Wed,  5 Jun 2024 02:20:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="jvyVgnac"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Tp4vdK6G"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out30-118.freemail.mail.aliyun.com (out30-118.freemail.mail.aliyun.com [115.124.30.118])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D52951EB36;
-	Wed,  5 Jun 2024 02:16:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.118
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05E912744E;
+	Wed,  5 Jun 2024 02:20:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717553807; cv=none; b=hFFka/51V+mIkUXUG6vBXltYggVqnGRixtCF0s/mWaL1crnAZR0Y+/HFM8atlwdCT0UvjDgPZJrK7eD5xmufsLl7+ZNS2CD5TgkzR8YJrBmkMpITIO8Nma4LcJEfGYFlqxX6Oyo6XIO1XPv3koe5JRGdxwEx8aba7kEQYRiQpFU=
+	t=1717554032; cv=none; b=hJGAspW788u2YfRO3lIhDmgo33CLCkgTIbWeW9+90ccDqkHvtfp9ldCf/hi4OmctS+sLC7K7PqZ+PW7fI3yT5OLgVYLz1mAzcmbOYlq6DXPrxfEGjRIKGPKJUgQ+1eN2mjoDCr8BdGBqnkaPUgdtUjXiSMkET72ntuPMA1ArpN8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717553807; c=relaxed/simple;
-	bh=189mdYsXxsccLCMxzEslQckd9F6l5Pkg+vVbG5gSlLA=;
-	h=Message-ID:Subject:Date:From:To:Cc:References:In-Reply-To; b=HbhT5a9E7p8ZMgJsDZIuKWi3yHDpDTJzVdS2SkicZYcWzipOghoeacgSBdMgeLGf2AYMrHpunQkgU9jP0MQ46elOABLtx9igxk7UfJTG1+Cpn+nGEXWjrHbQHjvYBdAWyfK/N8YtNibbQcX0qydsVqGVOlzIdTt2jTZg2G6gTXA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=jvyVgnac; arc=none smtp.client-ip=115.124.30.118
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
-DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux.alibaba.com; s=default;
-	t=1717553797; h=Message-ID:Subject:Date:From:To;
-	bh=ddRm+B+lk3X4PjmjFxIaCezOgjOl1Nl1gTwxZc1qjRA=;
-	b=jvyVgnaci7hNTu33Ryyfer/l281TFTFFufo7oysqY38Hmxzuyh9E5GifGR6crZ7bj3NFMQoK8nA3k+3m8IdAG70V7y2XMFuaFmq6OFOLfa7/0asJPmMx1BdVOFeQmLLqRos3UPInCqIIQZigq1vb4fadP4v1fmROfQpbGg7jUL8=
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R281e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=maildocker-contentspam033037067112;MF=hengqi@linux.alibaba.com;NM=1;PH=DS;RN=38;SR=0;TI=SMTPD_---0W7sUjyI_1717553793;
-Received: from localhost(mailfrom:hengqi@linux.alibaba.com fp:SMTPD_---0W7sUjyI_1717553793)
-          by smtp.aliyun-inc.com;
-          Wed, 05 Jun 2024 10:16:34 +0800
-Message-ID: <1717553610.6275685-4-hengqi@linux.alibaba.com>
-Subject: Re: [PATCH net-next v14 3/5] ethtool: provide customized dim profile management
-Date: Wed, 5 Jun 2024 10:13:30 +0800
-From: Heng Qi <hengqi@linux.alibaba.com>
-To: Heng Qi <hengqi@linux.alibaba.com>
-Cc: oe-kbuild-all@lists.linux.dev,
- Huacai Chen <chenhuacai@loongson.cn>,
- Xuerui Wang <kernel@xen0n.name>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Guo Ren <guoren@kernel.org>,
- loongarch@lists.linux.dev,
- Jakub Kicinski <kuba@kernel.org>,
- "David S . Miller" <davem@davemloft.net>,
- Paolo Abeni <pabeni@redhat.com>,
- Eric Dumazet <edumazet@google.com>,
- Jason Wang <jasowang@redhat.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Brett Creeley <bcreeley@amd.com>,
- Ratheesh Kannoth <rkannoth@marvell.com>,
- Alexander Lobakin <aleksander.lobakin@intel.com>,
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
- Tal Gilboa <talgi@nvidia.com>,
- Jonathan Corbet <corbet@lwn.net>,
- linux-doc@vger.kernel.org,
- Maxime Chevallier <maxime.chevallier@bootlin.com>,
- Jiri Pirko <jiri@resnulli.us>,
- Paul Greenwalt <paul.greenwalt@intel.com>,
- Ahmed Zaki <ahmed.zaki@intel.com>,
- Vladimir Oltean <vladimir.oltean@nxp.com>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Andrew Lunn <andrew@lunn.ch>,
- justinstitt@google.com,
- donald.hunter@gmail.com,
- =?utf-8?q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Linux Memory Management List <linux-mm@kvack.org>,
- Dragos Tatulea <dtatulea@nvidia.com>,
- Rahul Rameshbabu <rrameshbabu@nvidia.com>,
- Heiner Kallweit <hkallweit1@gmail.com>,
- netdev@vger.kernel.org,
- virtualization@lists.linux.dev,
- kernel test robot <lkp@intel.com>
-References: <20240603154727.31998-1-hengqi@linux.alibaba.com>
- <20240603154727.31998-4-hengqi@linux.alibaba.com>
- <202406040645.6z95FW1f-lkp@intel.com>
- <1717478006.038663-1-hengqi@linux.alibaba.com>
-In-Reply-To: <1717478006.038663-1-hengqi@linux.alibaba.com>
+	s=arc-20240116; t=1717554032; c=relaxed/simple;
+	bh=08b//uzEqLqk0Nl2SSIOHmj2RvoFoSkpZUV6ZyaQgQY=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=IaRazvz6OfSTBDNf815cLbeAz5ct2qIkJgs6kvAL00aQmBejbZfXYhAcS9WVA74hfOLKkKEY3kD2mnQkuHuixdPmlQiN4Tdb8chl+yuqHn/L6i3cHhnCMpW2he47JrJsF3Mool2R+uwsvtV84wbGs9X17ClMpsYJ44TOtjn8Cic=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Tp4vdK6G; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 91474C2BBFC;
+	Wed,  5 Jun 2024 02:20:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1717554031;
+	bh=08b//uzEqLqk0Nl2SSIOHmj2RvoFoSkpZUV6ZyaQgQY=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=Tp4vdK6G85uxI6PeMLSbifQinw4Acp0/UMmlwvW/KeOTaIq7EcVqymnnYa9MgS4q5
+	 cEeF4yYTXx91EGHK+dzkrnjl/XznapKRxMxH2GDXZITF5vMLReRB9nUwrvYr8/12oL
+	 Kx7mf1XT3f1xubgxAJimOjboTiq8k6lLabppB9GAhoU9YhXhj7NYSq6llH5phJEkdR
+	 LaC9D9sx5xSNdavQiviDzn4lV0acVPc6qb2dnkr7yhn57rW0h01jzSnQN/C/b4qAK4
+	 cjea4FunarRHQ0R5X02XsKqYXpLxyfsv24wyw3ifjdt8qUcVroGbdolraN1yCppdCn
+	 yLdjUr1RfvdlA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77DF0C25B78;
+	Wed,  5 Jun 2024 02:20:31 +0000 (UTC)
+From: Dmitry Safonov via B4 Relay <devnull+0x7f454c46.gmail.com@kernel.org>
+Subject: [PATCH net-next v2 0/6] net/tcp: TCP-AO and TCP-MD5 tracepoints
+Date: Wed, 05 Jun 2024 03:20:01 +0100
+Message-Id: <20240605-tcp_ao-tracepoints-v2-0-e91e161282ef@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFHLX2YC/12OwQqDMBBEf0X23G2TqAg99T+KlDVuag4mkgSxi
+ P/eGOilx2GY92aHyMFyhHu1Q+DVRutdDupSgZ7IvRntmDMooRrR1hKTXl7kMQXSvHjrUkRDimX
+ D0ohxhDxcAhu7FegTHCd0vCXoczNQZBwCOT2d0F93m8m6cznZmHz4lDerLPsiVqo5xfgnXiUKl
+ K2p5dCZWlD3oJAJdNV+hv44ji81NbuC3wAAAA==
+To: Eric Dumazet <edumazet@google.com>, 
+ "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>, 
+ Paolo Abeni <pabeni@redhat.com>, David Ahern <dsahern@kernel.org>, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Masami Hiramatsu <mhiramat@kernel.org>, 
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: Mohammad Nassiri <mnassiri@ciena.com>, Simon Horman <horms@kernel.org>, 
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Dmitry Safonov <0x7f454c46@gmail.com>
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1717554029; l=1682;
+ i=0x7f454c46@gmail.com; s=20240410; h=from:subject:message-id;
+ bh=08b//uzEqLqk0Nl2SSIOHmj2RvoFoSkpZUV6ZyaQgQY=;
+ b=udDy88sE7uRWWaTJ4YsZBsDtpsCY2MWcWS33lc++xo+jeEiE4cCGOkwYZUnFrEZaR9TvdCDN9TXr
+ 16ekEXZLCdDL19+LuYWiuXoXItVyhUUo6sBV3bGBA+GvGXA0r9nM
+X-Developer-Key: i=0x7f454c46@gmail.com; a=ed25519;
+ pk=cFSWovqtkx0HrT5O9jFCEC/Cef4DY8a2FPeqP4THeZQ=
+X-Endpoint-Received: by B4 Relay for 0x7f454c46@gmail.com/20240410 with
+ auth_id=152
+X-Original-From: Dmitry Safonov <0x7f454c46@gmail.com>
+Reply-To: 0x7f454c46@gmail.com
 
-On Tue, 4 Jun 2024 13:13:26 +0800, Heng Qi <hengqi@linux.alibaba.com> wrote:
-> On Tue, 4 Jun 2024 07:00:35 +0800, kernel test robot <lkp@intel.com> wrote:
-> > Hi Heng,
-> > 
-> > kernel test robot noticed the following build warnings:
-> > 
-> > [auto build test WARNING on net-next/main]
-> > 
-> > url:    https://github.com/intel-lab-lkp/linux/commits/Heng-Qi/linux-dim-move-useful-macros-to-h-file/20240603-235834
-> > base:   net-next/main
-> > patch link:    https://lore.kernel.org/r/20240603154727.31998-4-hengqi%40linux.alibaba.com
-> > patch subject: [PATCH net-next v14 3/5] ethtool: provide customized dim profile management
-> > config: loongarch-defconfig (https://download.01.org/0day-ci/archive/20240604/202406040645.6z95FW1f-lkp@intel.com/config)
-> > compiler: loongarch64-linux-gcc (GCC) 13.2.0
-> > reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240604/202406040645.6z95FW1f-lkp@intel.com/reproduce)
-> > 
-> > If you fix the issue in a separate patch/commit (i.e. not just a new version of
-> > the same patch/commit), kindly add following tags
-> > | Reported-by: kernel test robot <lkp@intel.com>
-> > | Closes: https://lore.kernel.org/oe-kbuild-all/202406040645.6z95FW1f-lkp@intel.com/
-> > 
-> > All warnings (new ones prefixed by >>):
-> > 
-> > >> net/ethtool/coalesce.o: warning: objtool: unexpected relocation symbol type in .rela.discard.reachable
-> 
-> 
-> I'm not sure if this seems to be related to the update of loongarch[1]?
-> didn't find this warning on other architectures such as arm/openrisc/x86.
+Signed-off-by: Dmitry Safonov <0x7f454c46@gmail.com>
+---
+Changes in v2:
+- Fix the build with CONFIG_IPV6=m (Eric Dumazet)
+- Move unused keyid/rnext/maclen later in the series to the patch
+  that uses them (Simon Horman)
+- Reworked tcp_ao selftest lib to allow async tracing non-tcp events
+  (was working on a stress-test that needs trace_kfree_skb() event,
+   not in this series).
+- Separated selftest changes from kernel, as they now have a couple
+  of unrelated to tracepoints changes
+- Wrote a few lines of Documentation/
+- Link to v1: https://lore.kernel.org/r/20240224-tcp-ao-tracepoints-v1-0-15f31b7f30a7@arista.com
 
-I noticed that the loongarch community has submitted a fix[1], and after applying
-the fix, the robot no longer reports the warning. So the warning is specific
-to the loongarch architecture.
+---
+Dmitry Safonov (6):
+      net/tcp: Use static_branch_tcp_{md5,ao} to drop ifdefs
+      net/tcp: Add a helper tcp_ao_hdr_maclen()
+      net/tcp: Move tcp_inbound_hash() from headers
+      net/tcp: Add tcp-md5 and tcp-ao tracepoints
+      net/tcp: Remove tcp_hash_fail()
+      Documentation/tcp-ao: Add a few lines on tracepoints
 
-[1] https://lore.kernel.org/all/20240604150741.30252-1-xry111@xry111.site/
+ Documentation/networking/tcp_ao.rst |   9 +
+ include/net/tcp.h                   |  79 +--------
+ include/net/tcp_ao.h                |  42 +----
+ include/trace/events/tcp.h          | 317 ++++++++++++++++++++++++++++++++++++
+ net/ipv4/tcp.c                      |  87 ++++++++--
+ net/ipv4/tcp_ao.c                   |  24 +--
+ net/ipv4/tcp_input.c                |   8 +-
+ net/ipv4/tcp_ipv4.c                 |   8 +-
+ net/ipv4/tcp_output.c               |   2 +
+ 9 files changed, 434 insertions(+), 142 deletions(-)
+---
+base-commit: a6ba5125f10bd7307e775e585ad21a8f7eda1b59
+change-id: 20240531-tcp_ao-tracepoints-fa2e14e1f0dd
 
-Thanks.
+Best regards,
+-- 
+Dmitry Safonov <0x7f454c46@gmail.com>
 
-> 
-> +Cc:
-> loongarch@lists.linux.dev, Guo Ren <guoren@kernel.org>,
-> Xuerui Wang <kernel@xen0n.name>,
-> Jiaxun Yang <jiaxun.yang@flygoat.com>,
-> Huacai Chen <chenhuacai@loongson.cn>
-> 
-> [1] https://lore.kernel.org/all/20240322135619.1423490-1-chenhuacai@loongson.cn/
-> 
-> > 
-> > -- 
-> > 0-DAY CI Kernel Test Service
-> > https://github.com/intel/lkp-tests/wiki
-> 
+
 
