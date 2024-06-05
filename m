@@ -1,152 +1,121 @@
-Return-Path: <linux-doc+bounces-17743-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17750-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 866FC8FC9BA
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 13:08:50 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC6048FC9FF
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 13:16:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id AA41D1C21C08
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 11:08:49 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 30CD71C23EDB
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 11:16:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C382C1922F1;
-	Wed,  5 Jun 2024 11:08:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 485EB191492;
+	Wed,  5 Jun 2024 11:15:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=crapouillou.net header.i=@crapouillou.net header.b="fnNXiWCz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from aposti.net (aposti.net [89.234.176.197])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BB921946D3;
-	Wed,  5 Jun 2024 11:08:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C717514B974;
+	Wed,  5 Jun 2024 11:15:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=89.234.176.197
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717585724; cv=none; b=V4P7y5Q2oPkXnARuR6CPeSlLpp/R+c5D+xHpKxdDzZfBCZo4wKg79spmdqjCCypEU5DSsURUQECYnYs2qy/2BLVnhYoED0fuS3uL6U+ZWr1/kxvWqiW4ZaHFDBSRGoQvknnEjIiBrWgVN9ZX4BRSbmrDNJDCITEiIyv2WWIhgco=
+	t=1717586156; cv=none; b=tI5qNrbKzzEr1IS5CLGnDht1AlolBma0XptRx36nA8HeMw6MjEgaVC/kSH88cMyZlyU0PiMby/t+SvwAryzJBw7G8EDjSk5S3rKCuTPZvr3n17XfKm7djCgOJATPFMKFLrFTjaDDJNHkH+U6PByB6su6En92LTLLWB9wFgG5DDA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717585724; c=relaxed/simple;
-	bh=l4kG0ENxp5e/iTXDU0KZBxI0YMPvJKRQAC/Xg5l2eMQ=;
-	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=P3kTy77CSKZe/wO2kq2y0+7shreRPx7175LQquEA60p4gq0Qa7gNzkm226Df1SnRInLIATeK7eyJ3NeB1KTZSiyNIM+GVoQfgcsEfwoALcZQpr/QLGbmftWkBnbOc+GlgVvrg0uwqUqwyFfpjTiF69+PrBwZxIcEiYCxIMRWbB4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=Huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=Huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.18.186.31])
-	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4VvPjH3phJz6K67M;
-	Wed,  5 Jun 2024 19:04:03 +0800 (CST)
-Received: from lhrpeml500005.china.huawei.com (unknown [7.191.163.240])
-	by mail.maildlp.com (Postfix) with ESMTPS id 5A06E1400C9;
-	Wed,  5 Jun 2024 19:08:39 +0800 (CST)
-Received: from localhost (10.202.227.76) by lhrpeml500005.china.huawei.com
- (7.191.163.240) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Wed, 5 Jun
- 2024 12:08:38 +0100
-Date: Wed, 5 Jun 2024 12:08:38 +0100
-From: Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-CC: Leon Romanovsky <leon@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Itay
- Avraham <itayavr@nvidia.com>, Jakub Kicinski <kuba@kernel.org>,
-	<linux-doc@vger.kernel.org>, <linux-rdma@vger.kernel.org>,
-	<netdev@vger.kernel.org>, Paolo Abeni <pabeni@redhat.com>, Saeed Mahameed
-	<saeedm@nvidia.com>, Tariq Toukan <tariqt@nvidia.com>, Andy Gospodarek
-	<andrew.gospodarek@broadcom.com>, Aron Silverton <aron.silverton@oracle.com>,
-	Dan Williams <dan.j.williams@intel.com>, "David Ahern" <dsahern@kernel.org>,
-	Christoph Hellwig <hch@infradead.org>, "Jiri Pirko" <jiri@nvidia.com>, Leonid
- Bloch <lbloch@nvidia.com>, <linux-cxl@vger.kernel.org>,
-	<patches@lists.linux.dev>
-Subject: Re: [PATCH 1/8] fwctl: Add basic structure for a class subsystem
- with a cdev
-Message-ID: <20240605120838.00000da5@Huawei.com>
-In-Reply-To: <20240604185200.GN19897@nvidia.com>
-References: <0-v1-9912f1a11620+2a-fwctl_jgg@nvidia.com>
-	<1-v1-9912f1a11620+2a-fwctl_jgg@nvidia.com>
-	<20240604093219.GN3884@unreal>
-	<20240604155009.GJ19897@nvidia.com>
-	<20240604180555.000063c2@Huawei.com>
-	<20240604185200.GN19897@nvidia.com>
-Organization: Huawei Technologies Research and Development (UK) Ltd.
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+	s=arc-20240116; t=1717586156; c=relaxed/simple;
+	bh=j23cpuGAemJTmamOXD92cbvxQHnwkWvNJTIkvGKjv2U=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=EyyjgJFXVDVkY9ihX+6uxmb4JnUuA1oDV5my9RE1oeJ8x/I8BeszBU4phpwUPSvoNsa2Y9hVBObALJKOt/rnzH53k1XJhxfFkZHFHDUzJvreyt1jXD7fRGLni0YVnbyb2CS5smlFBRuy0A9K9e/Qe/cLUcB2joMR/f8gQU0kCnc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=crapouillou.net; spf=pass smtp.mailfrom=crapouillou.net; dkim=pass (1024-bit key) header.d=crapouillou.net header.i=@crapouillou.net header.b=fnNXiWCz; arc=none smtp.client-ip=89.234.176.197
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=crapouillou.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=crapouillou.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
+	s=mail; t=1717585738;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=lbF3Hr41nIth/kjABYAo6ELsT9zfo9W62/2gY+j3W6A=;
+	b=fnNXiWCz+piHjs3cCFKX5GI5TCn9Y2prcen/ET7kh9pye5qm+pIgUBf/O3bV3BnNT1h/2u
+	NyMwYH4qGWbWGr1IYazRbY6rtGSVJoiMLXi/3PHX/GFa4ahJSbYFIZ5go1Y3p1tTrpunF0
+	gFAQsaj5oi/revV7EdeAexrsKXH2qHg=
+From: Paul Cercueil <paul@crapouillou.net>
+To: Jonathan Cameron <jic23@kernel.org>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Vinod Koul <vkoul@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Nuno Sa <nuno.sa@analog.com>,
+	linux-iio@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	dmaengine@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	Paul Cercueil <paul@crapouillou.net>
+Subject: [PATCH v10 0/6] iio: new DMABUF based API v10
+Date: Wed,  5 Jun 2024 13:08:39 +0200
+Message-ID: <20240605110845.86740-1-paul@crapouillou.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: lhrpeml500002.china.huawei.com (7.191.160.78) To
- lhrpeml500005.china.huawei.com (7.191.163.240)
+Content-Transfer-Encoding: 8bit
 
-On Tue, 4 Jun 2024 15:52:00 -0300
-Jason Gunthorpe <jgg@nvidia.com> wrote:
+Hi Jonathan,
 
-> On Tue, Jun 04, 2024 at 06:05:55PM +0100, Jonathan Cameron wrote:
-> 
-> > Trick for this is often to define a small function that allocates both the
-> > ida and the device. With in that micro function handle the one error path
-> > or if you only have two things to do, you can use __free() for the allocation.  
-> 
-> This style is already followed here, the _alloc_device() is the
-> function that does everything before starting reference counting (IMHO
-> it is the best pattern to use). If we move the ida allocation to that
-> function then the if inside release is not needed.
-> 
-> Like this:
+Here is a revised (and hopefully final?) version of my DMABUF patchset.
 
-LGTM (this specific code, not commenting on fwctl in general yet as needs
-more thinking time!)
+This v10 removes the extra "flags" parameter of
+dmaengine_prep_peripheral_dma_vec(), and adds kernel doc to the function
+as Vinod requested.
 
-> 
-> diff --git a/drivers/fwctl/main.c b/drivers/fwctl/main.c
-> index d25b5eb3aee73c..a26697326e6ced 100644
-> --- a/drivers/fwctl/main.c
-> +++ b/drivers/fwctl/main.c
-> @@ -267,8 +267,7 @@ static void fwctl_device_release(struct device *device)
->  	struct fwctl_device *fwctl =
->  		container_of(device, struct fwctl_device, dev);
->  
-> -	if (fwctl->dev.devt)
-> -		ida_free(&fwctl_ida, fwctl->dev.devt - fwctl_dev);
-> +	ida_free(&fwctl_ida, fwctl->dev.devt - fwctl_dev);
->  	mutex_destroy(&fwctl->uctx_list_lock);
->  	kfree(fwctl);
->  }
-> @@ -288,6 +287,7 @@ static struct fwctl_device *
->  _alloc_device(struct device *parent, const struct fwctl_ops *ops, size_t size)
->  {
->  	struct fwctl_device *fwctl __free(kfree) = kzalloc(size, GFP_KERNEL);
-> +	int devnum;
->  
->  	if (!fwctl)
->  		return NULL;
-> @@ -296,6 +296,12 @@ _alloc_device(struct device *parent, const struct fwctl_ops *ops, size_t size)
->  	init_rwsem(&fwctl->registration_lock);
->  	mutex_init(&fwctl->uctx_list_lock);
->  	INIT_LIST_HEAD(&fwctl->uctx_list);
-> +
-> +	devnum = ida_alloc_max(&fwctl_ida, FWCTL_MAX_DEVICES - 1, GFP_KERNEL);
-> +	if (devnum < 0)
-> +		return NULL;
-> +	fwctl->dev.devt = fwctl_dev + devnum;
-> +
->  	device_initialize(&fwctl->dev);
->  	return_ptr(fwctl);
->  }
-> @@ -307,16 +313,10 @@ struct fwctl_device *_fwctl_alloc_device(struct device *parent,
->  {
->  	struct fwctl_device *fwctl __free(fwctl) =
->  		_alloc_device(parent, ops, size);
-> -	int devnum;
->  
->  	if (!fwctl)
->  		return NULL;
->  
-> -	devnum = ida_alloc_max(&fwctl_ida, FWCTL_MAX_DEVICES - 1, GFP_KERNEL);
-> -	if (devnum < 0)
-> -		return NULL;
-> -	fwctl->dev.devt = fwctl_dev + devnum;
-> -
->  	cdev_init(&fwctl->cdev, &fwctl_fops);
->  	fwctl->cdev.owner = THIS_MODULE;
->  
-> Jason
+As Nuno upstreamed support for output buffers, I (slightly) modified
+patch 5/6 and now output buffers are supported with the DMABUF API.
+All I did was remove a "fail if output" check really.
+
+This was based on next-20240605.
+
+Changelog:
+- [1/6]:
+  - Add kernel doc to dmaengine_prep_peripheral_dma_vec()
+  - Remove extra flags parameter
+- [2/6]:
+  - Use the new function prototype (without the extra prep_flags).
+- [5/6]:
+  - Remove extra flags parameter to dmaengine_prep_peripheral_dma_vec()
+  - Add support for TX transfers
+
+Cheers,
+-Paul
+
+Paul Cercueil (6):
+  dmaengine: Add API function dmaengine_prep_peripheral_dma_vec()
+  dmaengine: dma-axi-dmac: Implement device_prep_peripheral_dma_vec
+  iio: core: Add new DMABUF interface infrastructure
+  iio: buffer-dma: Enable support for DMABUFs
+  iio: buffer-dmaengine: Support new DMABUF based userspace API
+  Documentation: iio: Document high-speed DMABUF based API
+
+ Documentation/iio/iio_dmabuf_api.rst          |  54 ++
+ Documentation/iio/index.rst                   |   1 +
+ drivers/dma/dma-axi-dmac.c                    |  40 ++
+ drivers/iio/Kconfig                           |   1 +
+ drivers/iio/buffer/industrialio-buffer-dma.c  | 180 ++++++-
+ .../buffer/industrialio-buffer-dmaengine.c    |  62 ++-
+ drivers/iio/industrialio-buffer.c             | 462 ++++++++++++++++++
+ include/linux/dmaengine.h                     |  33 ++
+ include/linux/iio/buffer-dma.h                |  31 ++
+ include/linux/iio/buffer_impl.h               |  30 ++
+ include/uapi/linux/iio/buffer.h               |  22 +
+ 11 files changed, 896 insertions(+), 20 deletions(-)
+ create mode 100644 Documentation/iio/iio_dmabuf_api.rst
+
+-- 
+2.43.0
 
 
