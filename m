@@ -1,429 +1,562 @@
-Return-Path: <linux-doc+bounces-17773-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17776-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A0D08FCFC0
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 15:43:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 344A98FCFFD
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 15:50:15 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 598A41C24D05
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 13:43:19 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1C7721C234CF
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2024 13:50:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F592188CCA;
-	Wed,  5 Jun 2024 13:33:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 59D0419D092;
+	Wed,  5 Jun 2024 13:36:41 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3102D188CD9
-	for <linux-doc@vger.kernel.org>; Wed,  5 Jun 2024 13:33:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12E14198848;
+	Wed,  5 Jun 2024 13:36:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.188
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717594413; cv=none; b=tjJDEa0by9Fq73EqgbfQy/SV2V2NMyGE+s+DWbbfdWm3klr5bbfxlF07x6oPCZ1L1RNd8C6xHnSCQRC/eE7VSf5wsaUNkqlCUcEBWkkFxto0t9CU/XmEHag1yGsUCh0+khofZr6hsspMpQ92nSjgg4epFFGm6YGeeUCL9DiJ8GI=
+	t=1717594601; cv=none; b=B+O+kU8Vq5iHAm4pMD/lPS3bF6oZlAovjFIfV/2uNMt7p4blxvHTWOrklcQFqrL2uRa6vLAWehnqAkYBX7CUS0b1nRVYqGjkLHGSmT4qK8sP1cx0eWnKyV6BSroZDTb6SiGu/BK6YbRdowYMbO9/5SLKd8ciyy6Wiq+gZabHEXs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717594413; c=relaxed/simple;
-	bh=fEIZ0T7H2KzkeKqoITp+f7bJ1qGx9fTpU8ScSmzHUPw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=HxMFJZMx7/3ozm24Iae4gQqGYn6roS99vHgriSAkqSiYro1mYZWDr9kKhM68jCQc3LwybxYkM0kVAFJn+d2oCDoavoCLOBDRisuaAYlbcZfr30mGZ8CJrxBUx6ntwVo2c6bM7XkSwKtIa49gXon/mRpdyaqQTgIQKK0szovL82Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <m.grzeschik@pengutronix.de>)
-	id 1sEql4-0006Vi-Br; Wed, 05 Jun 2024 15:32:54 +0200
-Received: from [2a0a:edc0:0:1101:1d::ac] (helo=dude04.red.stw.pengutronix.de)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <m.grzeschik@pengutronix.de>)
-	id 1sEql3-000LFi-81; Wed, 05 Jun 2024 15:32:53 +0200
-Received: from localhost ([::1] helo=dude04.red.stw.pengutronix.de)
-	by dude04.red.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <m.grzeschik@pengutronix.de>)
-	id 1sEql3-00FRCH-28;
-	Wed, 05 Jun 2024 15:32:53 +0200
-From: Michael Grzeschik <m.grzeschik@pengutronix.de>
-Date: Wed, 05 Jun 2024 15:32:49 +0200
-Subject: [PATCH v6 3/3] tools: usb: p9_fwd: add usb gadget packet forwarder
- script
+	s=arc-20240116; t=1717594601; c=relaxed/simple;
+	bh=mU5Mi/3nH/oY9sAT1FYa3dBfWd+nkEHewZZI2ZW8aRM=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=sRIF5eKKiUXJM87gl2hYTkoG2P/1/6sEi4Oqzb4uPIqQh5igueL9hrvT3J0nAQmiQ6XgwyFO0h90zqlbbIQ/fgJy8KjChVkDckIh1Q6pFqm18HWY1Dvamv6Ro0qugMsaOKrICSvdUNNH8f0nDFTJDCTKCwy3kiUAWDPx++LS5i8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=45.249.212.188
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.19.163.48])
+	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4VvT3h58Jkzclln;
+	Wed,  5 Jun 2024 21:35:12 +0800 (CST)
+Received: from dggpemm500005.china.huawei.com (unknown [7.185.36.74])
+	by mail.maildlp.com (Postfix) with ESMTPS id DAE7318007A;
+	Wed,  5 Jun 2024 21:36:36 +0800 (CST)
+Received: from localhost.localdomain (10.69.192.56) by
+ dggpemm500005.china.huawei.com (7.185.36.74) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.39; Wed, 5 Jun 2024 21:36:36 +0800
+From: Yunsheng Lin <linyunsheng@huawei.com>
+To: <davem@davemloft.net>, <kuba@kernel.org>, <pabeni@redhat.com>
+CC: <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>, Yunsheng Lin
+	<linyunsheng@huawei.com>, Alexander Duyck <alexander.duyck@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>, Andrew Morton <akpm@linux-foundation.org>,
+	<linux-mm@kvack.org>, <linux-doc@vger.kernel.org>
+Subject: [PATCH net-next v6 14/15] mm: page_frag: update documentation for page_frag
+Date: Wed, 5 Jun 2024 21:33:04 +0800
+Message-ID: <20240605133306.11272-15-linyunsheng@huawei.com>
+X-Mailer: git-send-email 2.33.0
+In-Reply-To: <20240605133306.11272-1-linyunsheng@huawei.com>
+References: <20240605133306.11272-1-linyunsheng@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240116-ml-topic-u9p-v6-3-695977d76dff@pengutronix.de>
-References: <20240116-ml-topic-u9p-v6-0-695977d76dff@pengutronix.de>
-In-Reply-To: <20240116-ml-topic-u9p-v6-0-695977d76dff@pengutronix.de>
-To: Eric Van Hensbergen <ericvh@kernel.org>, 
- Latchesar Ionkov <lucho@ionkov.net>, 
- Dominique Martinet <asmadeus@codewreck.org>, 
- Christian Schoenebeck <linux_oss@crudebyte.com>, 
- Jonathan Corbet <corbet@lwn.net>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: v9fs@lists.linux.dev, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org, 
- kernel@pengutronix.de, Michael Grzeschik <m.grzeschik@pengutronix.de>, 
- Jan Luebbe <jlu@pengutronix.de>
-X-Mailer: b4 0.12.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=12459;
- i=m.grzeschik@pengutronix.de; h=from:subject:message-id;
- bh=fEIZ0T7H2KzkeKqoITp+f7bJ1qGx9fTpU8ScSmzHUPw=;
- b=owEBbQKS/ZANAwAKAb9pWET5cfSrAcsmYgBmYGkE9m8eUuPd11HLn2oA/ntLj/PwO4PjRXJ0u
- jeHrZai8vGJAjMEAAEKAB0WIQQV2+2Fpbqd6fvv0Gi/aVhE+XH0qwUCZmBpBAAKCRC/aVhE+XH0
- q4qhD/4sZK4vMQK0moov2i9Jadj8z36Bq7zmMNrVTFEqCbqu58DNA6+bkY+NSZTeQGKkQ4YjT4Y
- loNpoarAPDyqfODZMxnbG2YLT3RVlDGU0BWq72t2JV3Ce5rinHnsxWydOKWtBbjj4FA+RUAkgmw
- eN/moYaYRLTCEeJ/3pEmL4EO+BC1p9muFB0F2i1PfdbvmR04HHnxfJwteiyx1vkfMxuGgQSVnDC
- 7ZSI6wpj3ZTLPKsaD+nrGLKuOwtFqy5d0Zxp53i96/69eDzJtOusthSRoacvd1l6pqMMNWdrN1d
- 3+0WLoGhekUon0FD95E+bf9+qZI0SfqdSAc+kBO9/Nn/Ft3lH4ACDwr5iB1vz6p5xWyXKAWow8+
- GDLi4PWN2XYbujXwNWmz4/Vg2TdyZbAmPu0dtLNN0rWy09cpYt/F7xlbxFLF7TLkQzTrBN8I5Hv
- 3Syid2KtsVj5Th/D0SSDf2qlZmfk2jeyMpd4Jf18af6cIqz6KbqJkHDwmn8X/bXAOIGl/UBI1tV
- JNgFT1uiWEjk1HbItdb0yb2otyMABAeMq7mxpkAq52PF5E9lZsCZL+he6/zMNQ/LxZGgfgARLsh
- w343fF4eI41utk6nRouKsmvg83EcgTIQ0uFtf3vDBcKD5rJrQumEOTlIpzPmfNof0L0G7tUp/zg
- 2yxE/rmnwTDlQ+w==
-X-Developer-Key: i=m.grzeschik@pengutronix.de; a=openpgp;
- fpr=957BC452CE953D7EA60CF4FC0BE9E3157A1E2C64
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: m.grzeschik@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
+ dggpemm500005.china.huawei.com (7.185.36.74)
 
-This patch is adding an small python tool to forward 9pfs requests
-from the USB gadget to an existing 9pfs TCP server. Since currently all
-9pfs servers lack support for the usb transport this tool is an useful
-helper to get started.
+Update documentation about design, implementation and API usages
+for page_frag.
 
-Refer the Documentation section "USBG Example" in
-Documentation/filesystems/9p.rst on how to use it.
-
-Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
-Signed-off-by: Michael Grzeschik <m.grzeschik@pengutronix.de>
-
+CC: Alexander Duyck <alexander.duyck@gmail.com>
+Signed-off-by: Yunsheng Lin <linyunsheng@huawei.com>
 ---
-v5 -> v6:
-  - set path parameter to None when unused
-v4 -> v5:
-  - updated documentation for new subcommands list/connect
-  - run ruff format
-  - make vid and pid parameterized
-  - add list as subcommand to scan for devices
-  - move connect to extra subcommand
-v3 -> v4: -
-v2 -> v3: -
-v1 -> v2:
-  - added usbg 9pfs detailed instructions to 9p.rst doc
----
- Documentation/filesystems/9p.rst |  41 +++++++
- tools/usb/p9_fwd.py              | 243 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 284 insertions(+)
+ Documentation/mm/page_frags.rst | 163 +++++++++++++++++++++++++++++++-
+ include/linux/page_frag_cache.h | 108 +++++++++++++++++++++
+ mm/page_frag_cache.c            |  77 ++++++++++++++-
+ 3 files changed, 345 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/filesystems/9p.rst b/Documentation/filesystems/9p.rst
-index 10cf79dc287f8..2cc85f3e8659f 100644
---- a/Documentation/filesystems/9p.rst
-+++ b/Documentation/filesystems/9p.rst
-@@ -67,6 +67,47 @@ To mount a 9p FS on a USB Host accessible via the gadget as root filesystem::
- where <device> is the tag associated by the usb gadget transport.
- It is defined by the configfs instance name.
+diff --git a/Documentation/mm/page_frags.rst b/Documentation/mm/page_frags.rst
+index 503ca6cdb804..50360516a139 100644
+--- a/Documentation/mm/page_frags.rst
++++ b/Documentation/mm/page_frags.rst
+@@ -1,3 +1,5 @@
++.. SPDX-License-Identifier: GPL-2.0
++
+ ==============
+ Page fragments
+ ==============
+@@ -40,4 +42,163 @@ page via a single call.  The advantage to doing this is that it allows for
+ cleaning up the multiple references that were added to a page in order to
+ avoid calling get_page per allocation.
  
-+USBG Example
-+============
+-Alexander Duyck, Nov 29, 2016.
 +
-+The USB host exports a filesystem, while the gadget on the USB device
-+side makes it mountable.
++Architecture overview
++=====================
 +
-+Diod (9pfs server) and the forwarder are on the development host, where
-+the root filesystem is actually stored. The gadget is initialized during
-+boot (or later) on the embedded board. Then the forwarder will find it
-+on the USB bus and start forwarding requests.
++.. code-block:: none
 +
-+In this case the 9p requests come from the device and are handled by the
-+host. The reason is that USB device ports are normally not available on
-+PCs, so a connection in the other direction would not work.
++                      +----------------------+
++                      | page_frag API caller |
++                      +----------------------+
++                                  ^
++                                  |
++                                  v
++    +------------------------------------------------------------+
++    |                   request page fragment                    |
++    +------------------------------------------------------------+
++           ^                                 ^                 ^
++           |                                 |                 |
++           |                          Cache not enough         |
++           |                                 |                 |
++           |                                 v                 |
++      Cache empty                   +-----------------+        |
++           |                        | drain old cache |        |
++           |                        +-----------------+        |
++           |                                 ^                 |
++           |_________________________________|                 |
++                             ^                                 |
++                             |                                 |
++            _________________v_______________                  |
++           |                                 |          Cache is enough
++           |                                 |                 |
++PAGE_SIZE < PAGE_FRAG_CACHE_MAX_SIZE         |                 |
++           |                                 |                 |
++           |             PAGE_SIZE >= PAGE_FRAG_CACHE_MAX_SIZE |
++           v                                 |                 |
++    +----------------------------------+     |                 |
++    | refill cache with order > 0 page |     |                 |
++    +----------------------------------+     |                 |
++      ^                    ^                 |                 |
++      |                    |                 |                 |
++      |              Refill failed           |                 |
++      |                    |                 |                 |
++      |                    v                 v                 |
++      |      +----------------------------------+              |
++      |      |  refill cache with order 0 page  |              |
++      |      +----------------------------------+              |
++      |                       ^                                |
++Refill succeed                |                                |
++      |                 Refill succeed                         |
++      |                       |                                |
++      v                       v                                v
++    +------------------------------------------------------------+
++    |             allocate fragment from cache                   |
++    +------------------------------------------------------------+
 +
-+When using the usbg transport, for now there is no native usb host
-+service capable to handle the requests from the gadget driver. For
-+this we have to use the extra python tool p9_fwd.py from tools/usb.
++API interface
++=============
++As the design and implementation of page_frag API implies, the allocation side
++does not allow concurrent calling. Instead it is assumed that the caller must
++ensure there is not concurrent alloc calling to the same page_frag_cache
++instance by using its own lock or rely on some lockless guarantee like NAPI
++softirq.
 +
-+Just start the 9pfs capable network server like diod/nfs-ganesha e.g.:
++Depending on different aligning requirement, the page_frag API caller may call
++page_frag_alloc*_align*() to ensure the returned virtual address or offset of
++the page is aligned according to the 'align/alignment' parameter. Note the size
++of the allocated fragment is not aligned, the caller needs to provide an aligned
++fragsz if there is an alignment requirement for the size of the fragment.
 +
-+        $ diod -f -n -d 0 -S -l 0.0.0.0:9999 -e $PWD
++Depending on different use cases, callers expecting to deal with va, page or
++both va and page for them may call page_frag_alloc_va*, page_frag_alloc_pg*,
++or page_frag_alloc* API accordingly.
 +
-+Optionaly scan your bus if there are more then one usbg gadgets to find their path:
++There is also a use case that needs minimum memory in order for forward progress,
++but more performant if more memory is available. Using page_frag_alloc_prepare()
++and page_frag_alloc_commit() related API, the caller requests the minimum memory
++it needs and the prepare API will return the maximum size of the fragment
++returned. The caller needs to either call the commit API to report how much
++memory it actually uses, or not do so if deciding to not use any memory.
 +
-+        $ python $kernel_dir/tools/usb/p9_fwd.py list
++.. kernel-doc:: include/linux/page_frag_cache.h
++   :identifiers: page_frag_cache_init page_frag_cache_is_pfmemalloc
++                 page_frag_cache_page_offset page_frag_alloc_va
++                 page_frag_alloc_va_align page_frag_alloc_va_prepare_align
++                 page_frag_alloc_probe page_frag_alloc_commit
++                 page_frag_alloc_commit_noref page_frag_alloc_abort
 +
-+        Bus | Addr | Manufacturer     | Product          | ID        | Path
-+        --- | ---- | ---------------- | ---------------- | --------- | ----
-+          2 |   67 | unknown          | unknown          | 1d6b:0109 | 2-1.1.2
-+          2 |   68 | unknown          | unknown          | 1d6b:0109 | 2-1.1.3
++.. kernel-doc:: mm/page_frag_cache.c
++   :identifiers: __page_frag_alloc_va_align page_frag_alloc_pg
++                 page_frag_alloc_va_prepare page_frag_alloc_pg_prepare
++                 page_frag_alloc_prepare page_frag_cache_drain
++                 page_frag_free_va
 +
-+Then start the python transport:
++Coding examples
++===============
 +
-+        $ python $kernel_dir/tools/usb/p9_fwd.py --path 2-1.1.2 connect -p 9999
++Init & Drain API
++----------------
 +
-+After that the gadget driver can be used as described above.
++.. code-block:: c
 +
-+One use-case is to use it as an alternative to NFS root booting during
-+the development of embedded Linux devices.
++   page_frag_cache_init(pfrag);
++   ...
++   page_frag_cache_drain(pfrag);
 +
- Options
- =======
++
++Alloc & Free API
++----------------
++
++.. code-block:: c
++
++    void *va;
++
++    va = page_frag_alloc_va_align(pfrag, size, gfp, align);
++    if (!va)
++        goto do_error;
++
++    err = do_something(va, size);
++    if (err) {
++        page_frag_free_va(va);
++        goto do_error;
++    }
++
++Prepare & Commit API
++--------------------
++
++.. code-block:: c
++
++    unsigned int offset, size;
++    bool merge = true;
++    struct page *page;
++    void *va;
++
++    size = 32U;
++    page = page_frag_alloc_prepare(pfrag, &offset, &size, &va);
++    if (!page)
++        goto wait_for_space;
++
++    copy = min_t(unsigned int, copy, size);
++    if (!skb_can_coalesce(skb, i, page, offset)) {
++        if (i >= max_skb_frags)
++            goto new_segment;
++
++        merge = false;
++    }
++
++    copy = mem_schedule(copy);
++    if (!copy)
++        goto wait_for_space;
++
++    err = copy_from_iter_full_nocache(va, copy, iter);
++    if (err)
++        goto do_error;
++
++    if (merge) {
++        skb_frag_size_add(&skb_shinfo(skb)->frags[i - 1], copy);
++        page_frag_alloc_commit_noref(pfrag, offset, copy);
++    } else {
++        skb_fill_page_desc(skb, i, page, offset, copy);
++        page_frag_alloc_commit(pfrag, offset, copy);
++    }
+diff --git a/include/linux/page_frag_cache.h b/include/linux/page_frag_cache.h
+index e95d44a36ec9..7ee9e188c09d 100644
+--- a/include/linux/page_frag_cache.h
++++ b/include/linux/page_frag_cache.h
+@@ -71,11 +71,28 @@ struct page_frag_cache {
+ #endif
+ };
  
-diff --git a/tools/usb/p9_fwd.py b/tools/usb/p9_fwd.py
-new file mode 100755
-index 0000000000000..12c76cbb046b7
---- /dev/null
-+++ b/tools/usb/p9_fwd.py
-@@ -0,0 +1,243 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0
-+
-+import argparse
-+import errno
-+import logging
-+import socket
-+import struct
-+import time
-+
-+import usb.core
-+import usb.util
-+
-+
-+def path_from_usb_dev(dev):
-+    """Takes a pyUSB device as argument and returns a string.
-+    The string is a Path representation of the position of the USB device on the USB bus tree.
-+
-+    This path is used to find a USB device on the bus or all devices connected to a HUB.
-+    The path is made up of the number of the USB controller followed be the ports of the HUB tree."""
-+    if dev.port_numbers:
-+        dev_path = ".".join(str(i) for i in dev.port_numbers)
-+        return f"{dev.bus}-{dev_path}"
-+    return ""
-+
-+
-+HEXDUMP_FILTER = "".join(chr(x).isprintable() and chr(x) or "." for x in range(128)) + "." * 128
-+
-+
-+class Forwarder:
-+    @staticmethod
-+    def _log_hexdump(data):
-+        if not logging.root.isEnabledFor(logging.TRACE):
-+            return
-+        L = 16
-+        for c in range(0, len(data), L):
-+            chars = data[c : c + L]
-+            dump = " ".join(f"{x:02x}" for x in chars)
-+            printable = "".join(HEXDUMP_FILTER[x] for x in chars)
-+            line = f"{c:08x}  {dump:{L*3}s} |{printable:{L}s}|"
-+            logging.root.log(logging.TRACE, "%s", line)
-+
-+    def __init__(self, server, vid, pid, path):
-+        self.stats = {
-+            "c2s packets": 0,
-+            "c2s bytes": 0,
-+            "s2c packets": 0,
-+            "s2c bytes": 0,
-+        }
-+        self.stats_logged = time.monotonic()
-+
-+        def find_filter(dev):
-+            dev_path = path_from_usb_dev(dev)
-+            if path is not None:
-+                return dev_path == path
-+            return True
-+
-+        dev = usb.core.find(idVendor=vid, idProduct=pid, custom_match=find_filter)
-+        if dev is None:
-+            raise ValueError("Device not found")
-+
-+        logging.info(f"found device: {dev.bus}/{dev.address} located at {path_from_usb_dev(dev)}")
-+
-+        # dev.set_configuration() is not necessary since g_multi has only one
-+        usb9pfs = None
-+        # g_multi adds 9pfs as last interface
-+        cfg = dev.get_active_configuration()
-+        for intf in cfg:
-+            # we have to detach the usb-storage driver from multi gadget since
-+            # stall option could be set, which will lead to spontaneous port
-+            # resets and our transfers will run dead
-+            if intf.bInterfaceClass == 0x08:
-+                if dev.is_kernel_driver_active(intf.bInterfaceNumber):
-+                    dev.detach_kernel_driver(intf.bInterfaceNumber)
-+
-+            if intf.bInterfaceClass == 0xFF and intf.bInterfaceSubClass == 0xFF and intf.bInterfaceProtocol == 0x09:
-+                usb9pfs = intf
-+        if usb9pfs is None:
-+            raise ValueError("Interface not found")
-+
-+        logging.info(f"claiming interface:\n{usb9pfs}")
-+        usb.util.claim_interface(dev, usb9pfs.bInterfaceNumber)
-+        ep_out = usb.util.find_descriptor(
-+            usb9pfs,
-+            custom_match=lambda e: usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_OUT,
-+        )
-+        assert ep_out is not None
-+        ep_in = usb.util.find_descriptor(
-+            usb9pfs,
-+            custom_match=lambda e: usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN,
-+        )
-+        assert ep_in is not None
-+        logging.info("interface claimed")
-+
-+        self.ep_out = ep_out
-+        self.ep_in = ep_in
-+        self.dev = dev
-+
-+        # create and connect socket
-+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-+        self.s.connect(server)
-+
-+        logging.info("connected to server")
-+
-+    def c2s(self):
-+        """forward a request from the USB client to the TCP server"""
-+        data = None
-+        while data is None:
-+            try:
-+                logging.log(logging.TRACE, "c2s: reading")
-+                data = self.ep_in.read(self.ep_in.wMaxPacketSize)
-+            except usb.core.USBTimeoutError:
-+                logging.log(logging.TRACE, "c2s: reading timed out")
-+                continue
-+            except usb.core.USBError as e:
-+                if e.errno == errno.EIO:
-+                    logging.debug("c2s: reading failed with %s, retrying", repr(e))
-+                    time.sleep(0.5)
-+                    continue
-+                logging.error("c2s: reading failed with %s, aborting", repr(e))
-+                raise
-+        size = struct.unpack("<I", data[:4])[0]
-+        while len(data) < size:
-+            data += self.ep_in.read(size - len(data))
-+        logging.log(logging.TRACE, "c2s: writing")
-+        self._log_hexdump(data)
-+        self.s.send(data)
-+        logging.debug("c2s: forwarded %i bytes", size)
-+        self.stats["c2s packets"] += 1
-+        self.stats["c2s bytes"] += size
-+
-+    def s2c(self):
-+        """forward a response from the TCP server to the USB client"""
-+        logging.log(logging.TRACE, "s2c: reading")
-+        data = self.s.recv(4)
-+        size = struct.unpack("<I", data[:4])[0]
-+        while len(data) < size:
-+            data += self.s.recv(size - len(data))
-+        logging.log(logging.TRACE, "s2c: writing")
-+        self._log_hexdump(data)
-+        while data:
-+            written = self.ep_out.write(data)
-+            assert written > 0
-+            data = data[written:]
-+        if size % self.ep_out.wMaxPacketSize == 0:
-+            logging.log(logging.TRACE, "sending zero length packet")
-+            self.ep_out.write(b"")
-+        logging.debug("s2c: forwarded %i bytes", size)
-+        self.stats["s2c packets"] += 1
-+        self.stats["s2c bytes"] += size
-+
-+    def log_stats(self):
-+        logging.info("statistics:")
-+        for k, v in self.stats.items():
-+            logging.info(f"  {k+':':14s} {v}")
-+
-+    def log_stats_interval(self, interval=5):
-+        if (time.monotonic() - self.stats_logged) < interval:
-+            return
-+
-+        self.log_stats()
-+        self.stats_logged = time.monotonic()
-+
-+
-+def try_get_usb_str(dev, name):
-+    try:
-+        with open(f"/sys/bus/usb/devices/{dev.bus}-{dev.address}/{name}") as f:
-+            return f.read().strip()
-+    except FileNotFoundError:
-+        return None
-+
-+
-+def list_usb(args):
-+    vid, pid = [int(x, 16) for x in args.id.split(":", 1)]
-+
-+    print("Bus | Addr | Manufacturer     | Product          | ID        | Path")
-+    print("--- | ---- | ---------------- | ---------------- | --------- | ----")
-+    for dev in usb.core.find(find_all=True, idVendor=vid, idProduct=pid):
-+        path = path_from_usb_dev(dev) or ""
-+        manufacturer = try_get_usb_str(dev, "manufacturer") or "unknown"
-+        product = try_get_usb_str(dev, "product") or "unknown"
-+        print(
-+            f"{dev.bus:3} | {dev.address:4} | {manufacturer:16} | {product:16} | {dev.idVendor:04x}:{dev.idProduct:04x} | {path:18}"
-+        )
-+
-+
-+def connect(args):
-+    vid, pid = [int(x, 16) for x in args.id.split(":", 1)]
-+
-+    f = Forwarder(server=(args.server, args.port), vid=vid, pid=pid, path=args.path)
-+
-+    try:
-+        while True:
-+            f.c2s()
-+            f.s2c()
-+            f.log_stats_interval()
-+    finally:
-+        f.log_stats()
-+
-+
-+def main():
-+    parser = argparse.ArgumentParser(
-+        description="Forward 9PFS requests from USB to TCP",
-+    )
-+
-+    parser.add_argument("--id", type=str, default="1d6b:0109", help="vid:pid of target device")
-+    parser.add_argument("--path", type=str, required=False, help="path of target device")
-+    parser.add_argument("-v", "--verbose", action="count", default=0)
-+
-+    subparsers = parser.add_subparsers()
-+    subparsers.required = True
-+    subparsers.dest = "command"
-+
-+    parser_list = subparsers.add_parser("list", help="List all connected 9p gadgets")
-+    parser_list.set_defaults(func=list_usb)
-+
-+    parser_connect = subparsers.add_parser(
-+        "connect", help="Forward messages between the usb9pfs gadget and the 9p server"
-+    )
-+    parser_connect.set_defaults(func=connect)
-+    connect_group = parser_connect.add_argument_group()
-+    connect_group.required = True
-+    parser_connect.add_argument("-s", "--server", type=str, default="127.0.0.1", help="server hostname")
-+    parser_connect.add_argument("-p", "--port", type=int, default=564, help="server port")
-+
-+    args = parser.parse_args()
-+
-+    logging.TRACE = logging.DEBUG - 5
-+    logging.addLevelName(logging.TRACE, "TRACE")
-+
-+    if args.verbose >= 2:
-+        level = logging.TRACE
-+    elif args.verbose:
-+        level = logging.DEBUG
-+    else:
-+        level = logging.INFO
-+    logging.basicConfig(level=level, format="%(asctime)-15s %(levelname)-8s %(message)s")
-+
-+    args.func(args)
-+
-+
-+if __name__ == "__main__":
-+    main()
-
++/**
++ * page_frag_cache_init() - Init page_frag cache.
++ * @nc: page_frag cache from which to init
++ *
++ * Inline helper to init the page_frag cache.
++ */
+ static inline void page_frag_cache_init(struct page_frag_cache *nc)
+ {
+ 	memset(nc, 0, sizeof(*nc));
+ }
+ 
++/**
++ * page_frag_cache_is_pfmemalloc() - Check for pfmemalloc.
++ * @nc: page_frag cache from which to check
++ *
++ * Used to check if the current page in page_frag cache is pfmemalloc'ed.
++ * It has the same calling context expection as the alloc API.
++ *
++ * Return:
++ * true if the current page in page_frag cache is pfmemalloc'ed, otherwise
++ * return false.
++ */
+ static inline bool page_frag_cache_is_pfmemalloc(struct page_frag_cache *nc)
+ {
+ 	return encoded_page_pfmemalloc(nc->encoded_va);
+@@ -95,6 +112,19 @@ void *__page_frag_alloc_va_align(struct page_frag_cache *nc,
+ 				 unsigned int fragsz, gfp_t gfp_mask,
+ 				 unsigned int align_mask);
+ 
++/**
++ * page_frag_alloc_va_align() - Alloc a page fragment with aligning requirement.
++ * @nc: page_frag cache from which to allocate
++ * @fragsz: the requested fragment size
++ * @gfp_mask: the allocation gfp to use when cache needs to be refilled
++ * @align: the requested aligning requirement for virtual address of fragment
++ *
++ * WARN_ON_ONCE() checking for @align before allocing a page fragment from
++ * page_frag cache with aligning requirement.
++ *
++ * Return:
++ * virtual address of the page fragment, otherwise return NULL.
++ */
+ static inline void *page_frag_alloc_va_align(struct page_frag_cache *nc,
+ 					     unsigned int fragsz,
+ 					     gfp_t gfp_mask, unsigned int align)
+@@ -103,11 +133,32 @@ static inline void *page_frag_alloc_va_align(struct page_frag_cache *nc,
+ 	return __page_frag_alloc_va_align(nc, fragsz, gfp_mask, -align);
+ }
+ 
++/**
++ * page_frag_cache_page_offset() - Return the current page fragment's offset.
++ * @nc: page_frag cache from which to check
++ *
++ * The API is only used in net/sched/em_meta.c for historical reason, do not use
++ * it for new caller unless there is a strong reason.
++ *
++ * Return:
++ * the offset of the current page fragment in the page_frag cache.
++ */
+ static inline unsigned int page_frag_cache_page_offset(const struct page_frag_cache *nc)
+ {
+ 	return page_frag_cache_page_size(nc->encoded_va) - nc->remaining;
+ }
+ 
++/**
++ * page_frag_alloc_va() - Alloc a page fragment.
++ * @nc: page_frag cache from which to allocate
++ * @fragsz: the requested fragment size
++ * @gfp_mask: the allocation gfp to use when cache need to be refilled
++ *
++ * Get a page fragment from page_frag cache.
++ *
++ * Return:
++ * virtual address of the page fragment, otherwise return NULL.
++ */
+ static inline void *page_frag_alloc_va(struct page_frag_cache *nc,
+ 				       unsigned int fragsz, gfp_t gfp_mask)
+ {
+@@ -117,6 +168,21 @@ static inline void *page_frag_alloc_va(struct page_frag_cache *nc,
+ void *page_frag_alloc_va_prepare(struct page_frag_cache *nc, unsigned int *fragsz,
+ 				 gfp_t gfp);
+ 
++/**
++ * page_frag_alloc_va_prepare_align() - Prepare allocing a page fragment with
++ * aligning requirement.
++ * @nc: page_frag cache from which to prepare
++ * @fragsz: in as the requested size, out as the available size
++ * @gfp: the allocation gfp to use when cache need to be refilled
++ * @align: the requested aligning requirement
++ *
++ * WARN_ON_ONCE() checking for @align before preparing an aligned page fragment
++ * with minimum size of @fragsz, @fragsz is also used to report the maximum size
++ * of the page fragment the caller can use.
++ *
++ * Return:
++ * virtual address of the page fragment, otherwise return NULL.
++ */
+ static inline void *page_frag_alloc_va_prepare_align(struct page_frag_cache *nc,
+ 						     unsigned int *fragsz,
+ 						     gfp_t gfp,
+@@ -151,6 +217,21 @@ static inline struct encoded_va *__page_frag_alloc_probe(struct page_frag_cache
+ 	return encoded_va;
+ }
+ 
++/**
++ * page_frag_alloc_probe - Probe the available page fragment.
++ * @nc: page_frag cache from which to probe
++ * @offset: out as the offset of the page fragment
++ * @fragsz: in as the requested size, out as the available size
++ * @va: out as the virtual address of the returned page fragment
++ *
++ * Probe the current available memory to caller without doing cache refilling.
++ * If no space is available in the page_frag cache, return NULL.
++ * If the requested space is available, up to @fragsz bytes may be added to the
++ * fragment using commit API.
++ *
++ * Return:
++ * the page fragment, otherwise return NULL.
++ */
+ #define page_frag_alloc_probe(nc, offset, fragsz, va)			\
+ ({									\
+ 	struct page *__page = NULL;					\
+@@ -165,6 +246,14 @@ static inline struct encoded_va *__page_frag_alloc_probe(struct page_frag_cache
+ 	__page;								\
+ })
+ 
++/**
++ * page_frag_alloc_commit - Commit allocing a page fragment.
++ * @nc: page_frag cache from which to commit
++ * @fragsz: size of the page fragment has been used
++ *
++ * Commit the actual used size for the allocation that was either prepared or
++ * probed.
++ */
+ static inline void page_frag_alloc_commit(struct page_frag_cache *nc,
+ 					  unsigned int fragsz)
+ {
+@@ -173,6 +262,16 @@ static inline void page_frag_alloc_commit(struct page_frag_cache *nc,
+ 	nc->remaining -= fragsz;
+ }
+ 
++/**
++ * page_frag_alloc_commit_noref - Commit allocing a page fragment without taking
++ * page refcount.
++ * @nc: page_frag cache from which to commit
++ * @fragsz: size of the page fragment has been used
++ *
++ * Commit the alloc preparing or probing by passing the actual used size, but
++ * not taking refcount. Mostly used for fragmemt coalescing case when the
++ * current fragment can share the same refcount with previous fragment.
++ */
+ static inline void page_frag_alloc_commit_noref(struct page_frag_cache *nc,
+ 						unsigned int fragsz)
+ {
+@@ -180,6 +279,15 @@ static inline void page_frag_alloc_commit_noref(struct page_frag_cache *nc,
+ 	nc->remaining -= fragsz;
+ }
+ 
++/**
++ * page_frag_alloc_abort - Abort the page fragment alloced using page_frag_alloc()
++ * related API back to the page_frag cache.
++ * @nc: page_frag cache to which the page fragment is aborted back
++ * @fragsz: size of the page fragment to be aborted
++ *
++ * It is expected to be called from the same context as the alloc API.
++ * Mostly used for error handling cases where the fragment is no longer needed.
++ */
+ static inline void page_frag_alloc_abort(struct page_frag_cache *nc,
+ 					 unsigned int fragsz)
+ {
+diff --git a/mm/page_frag_cache.c b/mm/page_frag_cache.c
+index 9f86aa15bbeb..e76f035e63de 100644
+--- a/mm/page_frag_cache.c
++++ b/mm/page_frag_cache.c
+@@ -94,6 +94,18 @@ static struct page *__page_frag_cache_refill(struct page_frag_cache *nc,
+ 	return page;
+ }
+ 
++/**
++ * page_frag_alloc_va_prepare() - Prepare allocing a page fragment.
++ * @nc: page_frag cache from which to prepare
++ * @fragsz: in as the requested size, out as the available size
++ * @gfp: the allocation gfp to use when cache needs to be refilled
++ *
++ * Prepare a page fragment with minimum size of @fragsz, @fragsz is also used
++ * to report the maximum size of the page fragment the caller can use.
++ *
++ * Return:
++ * virtual address of the page fragment, otherwise return NULL.
++ */
+ void *page_frag_alloc_va_prepare(struct page_frag_cache *nc,
+ 				 unsigned int *fragsz, gfp_t gfp)
+ {
+@@ -116,6 +128,19 @@ void *page_frag_alloc_va_prepare(struct page_frag_cache *nc,
+ }
+ EXPORT_SYMBOL(page_frag_alloc_va_prepare);
+ 
++/**
++ * page_frag_alloc_pg_prepare - Prepare allocing a page fragment.
++ * @nc: page_frag cache from which to prepare
++ * @offset: out as the offset of the page fragment
++ * @fragsz: in as the requested size, out as the available size
++ * @gfp: the allocation gfp to use when cache needs to be refilled
++ *
++ * Prepare a page fragment with minimum size of @fragsz, @fragsz is also used
++ * to report the maximum size of the page fragment the caller can use.
++ *
++ * Return:
++ * the page fragment, otherwise return NULL.
++ */
+ struct page *page_frag_alloc_pg_prepare(struct page_frag_cache *nc,
+ 					unsigned int *offset,
+ 					unsigned int *fragsz, gfp_t gfp)
+@@ -146,6 +171,21 @@ struct page *page_frag_alloc_pg_prepare(struct page_frag_cache *nc,
+ }
+ EXPORT_SYMBOL(page_frag_alloc_pg_prepare);
+ 
++/**
++ * page_frag_alloc_prepare - Prepare allocing a page fragment.
++ * @nc: page_frag cache from which to prepare
++ * @offset: out as the offset of the page fragment
++ * @fragsz: in as the requested size, out as the available size
++ * @va: out as the virtual address of the returned page fragment
++ * @gfp: the allocation gfp to use when cache needs to be refilled
++ *
++ * Prepare a page fragment with minimum size of @fragsz, @fragsz is also used
++ * to report the maximum size of the page fragment. Return both 'struct page'
++ * and virtual address of the fragment to the caller.
++ *
++ * Return:
++ * the page fragment, otherwise return NULL.
++ */
+ struct page *page_frag_alloc_prepare(struct page_frag_cache *nc,
+ 				     unsigned int *offset,
+ 				     unsigned int *fragsz,
+@@ -178,6 +218,18 @@ struct page *page_frag_alloc_prepare(struct page_frag_cache *nc,
+ }
+ EXPORT_SYMBOL(page_frag_alloc_prepare);
+ 
++/**
++ * page_frag_alloc_pg - Alloce a page fragment.
++ * @nc: page_frag cache from which to alloce
++ * @offset: out as the offset of the page fragment
++ * @fragsz: the requested fragment size
++ * @gfp: the allocation gfp to use when cache needs to be refilled
++ *
++ * Get a page fragment from page_frag cache.
++ *
++ * Return:
++ * the page fragment, otherwise return NULL.
++ */
+ struct page *page_frag_alloc_pg(struct page_frag_cache *nc,
+ 				unsigned int *offset, unsigned int fragsz,
+ 				gfp_t gfp)
+@@ -208,6 +260,10 @@ struct page *page_frag_alloc_pg(struct page_frag_cache *nc,
+ }
+ EXPORT_SYMBOL(page_frag_alloc_pg);
+ 
++/**
++ * page_frag_cache_drain - Drain the current page from page_frag cache.
++ * @nc: page_frag cache from which to drain
++ */
+ void page_frag_cache_drain(struct page_frag_cache *nc)
+ {
+ 	if (!nc->encoded_va)
+@@ -228,6 +284,19 @@ void __page_frag_cache_drain(struct page *page, unsigned int count)
+ }
+ EXPORT_SYMBOL(__page_frag_cache_drain);
+ 
++/**
++ * __page_frag_alloc_va_align() - Alloc a page fragment with aligning
++ * requirement.
++ * @nc: page_frag cache from which to allocate
++ * @fragsz: the requested fragment size
++ * @gfp_mask: the allocation gfp to use when cache need to be refilled
++ * @align_mask: the requested aligning requirement for the 'va'
++ *
++ * Get a page fragment from page_frag cache with aligning requirement.
++ *
++ * Return:
++ * Return va of the page fragment, otherwise return NULL.
++ */
+ void *__page_frag_alloc_va_align(struct page_frag_cache *nc,
+ 				 unsigned int fragsz, gfp_t gfp_mask,
+ 				 unsigned int align_mask)
+@@ -263,8 +332,12 @@ void *__page_frag_alloc_va_align(struct page_frag_cache *nc,
+ }
+ EXPORT_SYMBOL(__page_frag_alloc_va_align);
+ 
+-/*
+- * Frees a page fragment allocated out of either a compound or order 0 page.
++/**
++ * page_frag_free_va - Free a page fragment.
++ * @addr: va of page fragment to be freed
++ *
++ * Free a page fragment allocated out of either a compound or order 0 page by
++ * virtual address.
+  */
+ void page_frag_free_va(void *addr)
+ {
 -- 
-2.39.2
+2.30.0
 
 
