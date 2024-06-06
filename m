@@ -1,176 +1,276 @@
-Return-Path: <linux-doc+bounces-17870-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17872-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86A288FF2C7
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Jun 2024 18:45:21 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 822618FF309
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Jun 2024 18:54:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D9E481F22D91
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Jun 2024 16:45:20 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A54BCB2C1A1
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Jun 2024 16:51:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6098319883C;
-	Thu,  6 Jun 2024 16:45:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A3DB819883C;
+	Thu,  6 Jun 2024 16:50:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b="4mA5ZvVo"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="NYIFy2S8";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="mbErOurd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from 008.lax.mailroute.net (008.lax.mailroute.net [199.89.1.11])
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D020C26AE7;
-	Thu,  6 Jun 2024 16:45:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=199.89.1.11
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717692314; cv=none; b=nhFggh9R68xTWBB0RZc/vmImZj2WrW4u0F8s3UK965bHXl7nPMmS9GxZzcu6AOyGfdHG9my8pR6+o+SmgZv4HNCcRyPL2dur6/7I5c+1dXrmcW0DA6fgHFQwnW0170TjTPFfIMQBJaLR7rs+JKOHe387LDSrwNTxrlUHFfQiW70=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717692314; c=relaxed/simple;
-	bh=DVWoZ94Ms0F2PXMXl9M29RDWyH9n8ugMwEG4I+rMNwk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ddNdLqWTEqhulc7JylpDcS5yqA3XeOlPBpoQeCNcHpRUKZz9peOgruATBcqTKXhEoumnjgaPGfqdN1B1YmBJdf59FRsSIPAHtf3mlgO2EV2Z2LwxBqSHwnoX1+niSq09vXktk2BIPSQeLrDMy0YaJHvBZ/ka5KDvmSedD3awoD8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org; spf=pass smtp.mailfrom=acm.org; dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b=4mA5ZvVo; arc=none smtp.client-ip=199.89.1.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=acm.org
-Received: from localhost (localhost [127.0.0.1])
-	by 008.lax.mailroute.net (Postfix) with ESMTP id 4Vw9DS0Qyfz6Cnk9Y;
-	Thu,  6 Jun 2024 16:45:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
-	content-transfer-encoding:content-type:content-type:in-reply-to
-	:from:from:content-language:references:subject:subject
-	:user-agent:mime-version:date:date:message-id:received:received;
-	 s=mr01; t=1717692294; x=1720284295; bh=DVWoZ94Ms0F2PXMXl9M29RDW
-	yH9n8ugMwEG4I+rMNwk=; b=4mA5ZvVohYkAsNlESeJ3jT48VdyeK8RVsj3ddKMP
-	SOZ3qL+U8x9NM1ZGSjH50C5K8oZL02MYFmrM4LLS7LcN6Tnu5zK6VqD49X8s+/Wl
-	Q2pqYqBgt3v5m6dNRXCT45LrvYm9WAfeX/gCjCm7WTRpeTMdmX5dtuAQmOOSWnbN
-	hg557ukShq3D5vTZUmN6TJw6dClp7RzjuendtlKDt7Nc9zcakDR8XvWcguj3R4PG
-	/Sit8qPBUqK5xyJbF0768vVr5bMJMJ09pr7q3k1PsWR5jsUvXJYgUG+4L0lkcnZJ
-	KJVBRTo/nHq8gBaiIFh6kHDmcLWyOmgEpPd01gxx+e/Khg==
-X-Virus-Scanned: by MailRoute
-Received: from 008.lax.mailroute.net ([127.0.0.1])
- by localhost (008.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
- id riXgj8xOY7Yj; Thu,  6 Jun 2024 16:44:54 +0000 (UTC)
-Received: from [172.20.24.239] (unknown [204.98.150.10])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bvanassche@acm.org)
-	by 008.lax.mailroute.net (Postfix) with ESMTPSA id 4Vw9D15Xxtz6Cnk9X;
-	Thu,  6 Jun 2024 16:44:49 +0000 (UTC)
-Message-ID: <d4946174-32e1-47f0-b448-38377dae0600@acm.org>
-Date: Thu, 6 Jun 2024 10:44:47 -0600
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5859195804;
+	Thu,  6 Jun 2024 16:50:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1717692633; cv=fail; b=gmd22+dD9GZGo8ph4vtaze3zfrXZcWlEYnRHF1IASp77frU7ArK0QGFQyvYirRMbgnQIpyoJDumf/H6HALPra0nxWGVjBPmiyRC0dqEkrP85w1ftI8E6GE8DFe0nE0XcMvRZw9eud3H7zTjnOVxPtid5PfJnpe/jy0kVQPLHUr4=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1717692633; c=relaxed/simple;
+	bh=p7jPW4u50CRJtJZ7h3/hmofhOdlF4MQr5PjwifrngK4=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=t6JzpP5hhiRVEDvJhkk0p1EudCBPLlDSCPpwQ5FFWB2M+ok8UrETyHyvrcn+3YmHmaO1mGwtB7eO5lH0aI0DQ7CsLVloBkeJdFEJiiGeCR+Nv4PtFaLz5qo49Ar35Gy8+zg5JRh7Unax0jMk7qJNm5BU+HItNc8R2ZfJudx2W4o=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=NYIFy2S8; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=mbErOurd; arc=fail smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 4568i1dG015415;
+	Thu, 6 Jun 2024 16:49:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc :
+ content-transfer-encoding : content-type : date : from : in-reply-to :
+ message-id : mime-version : references : subject : to; s=corp-2023-11-20;
+ bh=Jddht4iiwiZ/P3TEEyOUuXGBDYqXMUZnGP5FSxro/KU=;
+ b=NYIFy2S8emIyoFgQ1vAFSPBOs7bfa5ILYGLTV1vBIurvMyF4LPknYYlWGl9Ji/mohKSB
+ lRSKBZJNbt3y6PxYfVBs4fYXoFAcEoJa0IvSZA6jARobY/XBI8vEjivHy5B+UyO2PSy/
+ DApbJ6W/zxftIiIcve7tKmrt+8reiLvvLloZ46AaiOdCo1tIqFCALLRMAghQY9/9234x
+ aIXwZqOvB+NGT9lcmdpdkO1S5su5LC3NGL/8w3zMQsQMe2UkTw9FY+pI2PbnmGNonGSp
+ iFESqGXI6T7fKYVeTDxtvoOdeuaY1Wh8tis5thC/FJLJ+TjVbVlFnI1GflHC83Ugv5dv fA== 
+Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3yjvwd21gf-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Thu, 06 Jun 2024 16:49:31 +0000
+Received: from pps.filterd (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19) with ESMTP id 456GAssC020581;
+	Thu, 6 Jun 2024 16:49:30 GMT
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2172.outbound.protection.outlook.com [104.47.58.172])
+	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 3ygrj5dj26-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Thu, 06 Jun 2024 16:49:30 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lKf2wPzznLNnz0TkLDqdOxVz2Z58cyOYo0tg784W/MC663vLOaPfuMY7GMLO1on2soBjjqV6ub3zM7DN6oyAYg7mtKtI5MYpssQMwgzOBwD5EcjLq4/rsW9UuMa3M2nYVOL9r1jWZSmB8LC+75WO81HfK2RF8UJWn8RIopnTypYUr9kjock5X8OdkH9eaBk68+PpnlYeh7WzKCaZ4NbbpwxDw5FAYCKgMO97pFn+CbEgpXscTgvemwmSMJrNMrRx/kx4i0eYvs4wi2kjR39bBKFh6sPYXQULjSqPLfThSiTuAM+oIvpDaurp/ll8SWTmW6ynD4S9RnbjaUR/hAGOWg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Jddht4iiwiZ/P3TEEyOUuXGBDYqXMUZnGP5FSxro/KU=;
+ b=PG3vOQ3/cp9mCpUozSOD6nK41LPadlmGSmJ1Rg8dbT+F2Ba0Wf92evhpNPgabTu6cnGJY0/oswYpaXkqLa71THP61hd6NFYmfcGe/p2RuP9qizkpOVwCjkIHjKHj/FTPNonEwpy2Thwer0LfRTtBgM+6AHh84VHGJkBBRMoC050jZa5L/2kd6nmJEbFR2dJreoiXSzBs5l3b3gfVn/wP2r6QA3QCWM7v0gixzVK0iah17kGHfNsAbSvfC4dNrxxxvxScQb3sqy+OIL2ygNzsux68TcxmM351L+B61qprMol+YnHVQFC0UYA6AVS1lg7Ao7eJgdNJFYaiMRhrNpaH/A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Jddht4iiwiZ/P3TEEyOUuXGBDYqXMUZnGP5FSxro/KU=;
+ b=mbErOurdXOZOv2g1fTC0DkdMFuaDxZwNjrJuTooWvAqvXfVlORRSDd/SSdAEJX7n6tlJnlLfaKgktS65mKk9zu9+xlnwlFu5AM6E9XuPUOx7j33afLSUXxVo4C546w27oR8MI9fQYMt7qSlP/tGH53ljfnq77wTNloQyx1rSGTQ=
+Received: from DS0PR10MB7224.namprd10.prod.outlook.com (2603:10b6:8:f5::14) by
+ SN7PR10MB6596.namprd10.prod.outlook.com (2603:10b6:806:2ac::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.30; Thu, 6 Jun
+ 2024 16:49:27 +0000
+Received: from DS0PR10MB7224.namprd10.prod.outlook.com
+ ([fe80::c57:383f:cfb2:47f8]) by DS0PR10MB7224.namprd10.prod.outlook.com
+ ([fe80::c57:383f:cfb2:47f8%3]) with mapi id 15.20.7633.033; Thu, 6 Jun 2024
+ 16:49:27 +0000
+Message-ID: <23961b5b-a52a-483c-876e-e5e39d9e6c01@oracle.com>
+Date: Thu, 6 Jun 2024 09:49:19 -0700
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 04/19] x86: Secure Launch Resource Table header file
+To: Jarkko Sakkinen <jarkko@kernel.org>, linux-kernel@vger.kernel.org,
+        x86@kernel.org, linux-integrity@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-crypto@vger.kernel.org,
+        kexec@lists.infradead.org, linux-efi@vger.kernel.org,
+        iommu@lists.linux-foundation.org
+Cc: dpsmith@apertussolutions.com, tglx@linutronix.de, mingo@redhat.com,
+        bp@alien8.de, hpa@zytor.com, dave.hansen@linux.intel.com,
+        ardb@kernel.org, mjg59@srcf.ucam.org,
+        James.Bottomley@hansenpartnership.com, peterhuewe@gmx.de, jgg@ziepe.ca,
+        luto@amacapital.net, nivedita@alum.mit.edu,
+        herbert@gondor.apana.org.au, davem@davemloft.net, corbet@lwn.net,
+        ebiederm@xmission.com, dwmw2@infradead.org, baolu.lu@linux.intel.com,
+        kanth.ghatraju@oracle.com, andrew.cooper3@citrix.com,
+        trenchboot-devel@googlegroups.com, ross.philipson@oracle.com
+References: <20240531010331.134441-1-ross.philipson@oracle.com>
+ <20240531010331.134441-5-ross.philipson@oracle.com>
+ <D1RFWFIJEYWL.2FC7V79321264@kernel.org>
+ <1eca8cb1-4b3b-402b-993b-53de7c810016@oracle.com>
+ <D1RLBMTUKRFN.34KQXEFZTBA08@kernel.org>
+ <249a9b27-c18d-4377-8b51-9bc610b53a8b@oracle.com>
+ <D1RNKV4JIE5L.1LNG82UAC916M@kernel.org>
+ <f66de08f-4905-48d6-8bcf-5b1ab847492f@oracle.com>
+ <D1RSB1PB5XGS.2X032M0E1VMJW@kernel.org>
+ <a865a25c-336e-47de-9718-de4cb957e6c2@oracle.com>
+ <D1SPFVXS6FOG.IQQB3INFYEF2@kernel.org>
+Content-Language: en-US
+From: ross.philipson@oracle.com
+In-Reply-To: <D1SPFVXS6FOG.IQQB3INFYEF2@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MN2PR02CA0018.namprd02.prod.outlook.com
+ (2603:10b6:208:fc::31) To DS0PR10MB7224.namprd10.prod.outlook.com
+ (2603:10b6:8:f5::14)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v20 02/12] Add infrastructure for copy offload in block
- and request layer.
-To: Nitesh Shetty <nj.shetty@samsung.com>
-Cc: Christoph Hellwig <hch@lst.de>, Damien Le Moal <dlemoal@kernel.org>,
- Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>,
- Alasdair Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>,
- Mikulas Patocka <mpatocka@redhat.com>, Keith Busch <kbusch@kernel.org>,
- Sagi Grimberg <sagi@grimberg.me>, Chaitanya Kulkarni <kch@nvidia.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- martin.petersen@oracle.com, david@fromorbit.com, hare@suse.de,
- damien.lemoal@opensource.wdc.com, anuj20.g@samsung.com, joshi.k@samsung.com,
- nitheshshetty@gmail.com, gost.dev@samsung.com, linux-block@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- dm-devel@lists.linux.dev, linux-nvme@lists.infradead.org,
- linux-fsdevel@vger.kernel.org
-References: <20240520102033.9361-3-nj.shetty@samsung.com>
- <eda6c198-3a29-4da4-94db-305cfe28d3d6@acm.org>
- <9f1ec1c1-e1b8-48ac-b7ff-8efb806a1bc8@kernel.org>
- <a866d5b5-5b01-44a2-9ccb-63bf30aa8a51@acm.org>
- <665850bd.050a0220.a5e6b.5b72SMTPIN_ADDED_BROKEN@mx.google.com>
- <abe8c209-d452-4fb5-90eb-f77b5ec1a2dc@acm.org> <20240601055931.GB5772@lst.de>
- <d7ae00c8-c038-4bed-937e-222251bc627a@acm.org>
- <20240604044042.GA29094@lst.de>
- <4ffad358-a3e6-4a88-9a40-b7e5d05aa53c@acm.org>
- <CGME20240606072827epcas5p285de8d4f3b0f6d3a87f8341414336b42@epcas5p2.samsung.com>
- <66618886.630a0220.4d4fc.1c9cSMTPIN_ADDED_BROKEN@mx.google.com>
-Content-Language: en-US
-From: Bart Van Assche <bvanassche@acm.org>
-In-Reply-To: <66618886.630a0220.4d4fc.1c9cSMTPIN_ADDED_BROKEN@mx.google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR10MB7224:EE_|SN7PR10MB6596:EE_
+X-MS-Office365-Filtering-Correlation-Id: e7ca2e30-5639-48c7-e3c2-08dc8648a07b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230031|7416005|376005|1800799015|366007;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?MVRYbjVyUXg2STlVTkN3ZXJQOEM5UUxiTUhzaXRsY0h3Mkxkd1MrQVhSdDE0?=
+ =?utf-8?B?TTFnT0QwT0FwMDFpaCszdXIzMXdFMDYzUW1NNHc5RTE0SWhwcnhHeldzVXRP?=
+ =?utf-8?B?NExCYksyZHhkWUxuWHpPS2JhUy9tR2JwUTBaTzF6alpCWEEreUlhTjBHdFlN?=
+ =?utf-8?B?cGNJNklCbWJGL2FhU3Z3NFZLQTd3TzJWWVNjVUZ3WFNDMndDZERpeTVURFR2?=
+ =?utf-8?B?VjlReDE3UFZ5dW5aeExSYWRlQi93SUNzdXpIcWFKNnRxWjRoWmhCZ3dGejZV?=
+ =?utf-8?B?cGhSazk5YXpnNE1LTk85VUQrclRMZHM2KzNLSWpmcStnVUZSTTA1ZE8yU2ZK?=
+ =?utf-8?B?NTZZVmdhTnBJclc4b0N2OWFscVozTXJtZ0F4YTVGbjRzbldDLytxSjBFbFRD?=
+ =?utf-8?B?RFpaQXFNQU83b3pidkxTaGZGamVzT3BDeFd0OVZoYis5UWo4ZVVlODNadVF4?=
+ =?utf-8?B?dDNBcXZUV1lqVDhXL1VycTlEblFJaGNzMXJPeVBodE1SMmlwOU45SUZsSWdx?=
+ =?utf-8?B?QlB1TnlVYVFRRHFoaDN1cjFndlRSbWpRdExIeTVsTjJJejlnRW00V3VLdDhR?=
+ =?utf-8?B?QzJMYTc5TnNNMkFaYmY1REJsblVzMXQrZVMrR3dHMExDWk9JdHh0emJRdDB1?=
+ =?utf-8?B?eXVFOUpQWHZuTXNJSSs2MHQxc0hGZ1FHa2dVdFQvdnlzTVVFKzFiS3RCMjA5?=
+ =?utf-8?B?b3RsdE5WWlRLTFVxSGlkZHlLeG5FTUpsRWxHbFdkVHZiWG9jeCtGUmpOQk92?=
+ =?utf-8?B?cUtLU2hGQXdRR2ZkRTVNZ1hQTEgrR1ZGOEVpVjhoRlZzRHZPZkRzT1NtVlV5?=
+ =?utf-8?B?RmdOaE5XRTE5Zm83a0tpSHhRMEJ6eFpFWU5aRTRLTWgwQ1VrYXE4WjlFK3d6?=
+ =?utf-8?B?WlcwL20vNU8zZi9xVllOTGlzVXdXdk1QUko0eWp1cWV3M2xwVWh6Z0syck1K?=
+ =?utf-8?B?ZytJSFVrRit0bkdDVWtRZmE0YVJpVllQQzJjUDFDVVFFUUhSODk5Mlo2aG0w?=
+ =?utf-8?B?K2FyRkd0UExXQUphZVZwMWZvS3VXR1NoNktTWERFWWwwQzVuQktHUEx1eVpD?=
+ =?utf-8?B?OFN0eE5vNGx1Mjg4YkMvWEFRTlBZWHArWVFoNHgzOWgyVEpTOW9TOUFMNGw5?=
+ =?utf-8?B?ZXdXbys0YVJwMWlDVjZEUUoxWlJUdWNpUEJxbUVROGo2cGtLR3hnVDFNUDBK?=
+ =?utf-8?B?N0IxaWFNSlZCdnRLNXUzdE44OVRMSU93OWsrUUFOcmxHTWxFaEV2YkxYSnM0?=
+ =?utf-8?B?VE5HZVdPblZJMk50TXM3cWNvS3NVZC8wczBTa2dUQVRjdk81eE5CVUJrVm1q?=
+ =?utf-8?B?VklISWN4NEthNFZiWUZTVGlNTXFUOGhoZ0dzNmRZSVZlTTByRUhOV0dZUStG?=
+ =?utf-8?B?d1UyajZPNlFIQ0dmeitJN3duU3dEV25QellZSm5RamxIYm9EWkpDWVMwemJE?=
+ =?utf-8?B?RTVIMExZN1NIWEIybWVOdmNYUi9aTE1CcVZvNXZDZko2SUhzREp3TjBUdnU1?=
+ =?utf-8?B?Tk56RzIxam1qa04zOU01cXYyR2szTWhpc1ZsVi9EakZjU3lrQlpLeHBVUVRu?=
+ =?utf-8?B?dzhUeFloVUsySnc1QnJmVkoyUGdVM0ZqbUoyVDZ3TktNbEY1MGtWRkRKeHRa?=
+ =?utf-8?B?U1dXM3NOeVkvZUg4TVR3aElGbkU2RzVwNjVrQTBzZVhFdnNRbGtWVzMvTVRF?=
+ =?utf-8?B?WjZRQnVPemo5NkdERlhvd3d4WXBQTXdyUCtwaHdKNWFxeFkxSjI5cmZuQXNm?=
+ =?utf-8?Q?6x/JmpalDWcptrAQa4no/7P0A4U08ybfN8cbDgw?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR10MB7224.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(7416005)(376005)(1800799015)(366007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?YXoxOFJkU0RyTGtkQ2F4UURFY2VCOEdZaDBTRUpDbSt0OVlSMVdneFJBMWsx?=
+ =?utf-8?B?MjVWalJDMmVjanpxRmJQVXRaR1RkYkdtNW9lQmhQaVdwRkdYQ2daNUJzR0Iw?=
+ =?utf-8?B?ZjBBV3hKN1diRkdUOHcyRWdsd3YrTU1GN1BhVTFweWRQM3RnSXg3elB3c2F1?=
+ =?utf-8?B?U1Z3QkRUajE3Y3plM0pEbVdlMVN3ZFZtZHptNjhvRlhtT1J1aFFKUTJod1Bs?=
+ =?utf-8?B?bkZUUTRER1F1bVVIMVB4SEV0M2x2c2s2VzVXMWVqOHI0SjR1d29aZjI5aWFy?=
+ =?utf-8?B?R3VvRnRndFJuNm1SWDAvcmQ4Q1ZGaDdHaGdQRDhzY2ZzZVJSQ0FwM1hYS1h1?=
+ =?utf-8?B?VGZOKzl2QW1DN2h6ZkhneG5yZFRmeXQ5SEdGejF1cGdFTDV1QVlrOGwrak1J?=
+ =?utf-8?B?T2U0b0pFOFRwQVRudkF4QzdqSUpnR1lyY1pHN1J6aWR0TWVrcmlPSmVadXo1?=
+ =?utf-8?B?QVkxRXNDaURxRjlnSGNHVjd1UnY5d3c1ejJZSnVaUElTbTZ4RmVTMlRISmsv?=
+ =?utf-8?B?emdPMmYzdnpDVWxEL2NSQzZaSGIvMjVja0RESUFKRngwVG1vRHBXQ1QwK0Jl?=
+ =?utf-8?B?bW41WDFia2RqNndnREViV1pFQ3ZVK3ZPSFhudUtzeS9pMlQ3ZzRMZUJUTlcz?=
+ =?utf-8?B?eUQrZXQ1Q1V1UEltNXJ0bEMvM3VvN2s5Y2tQdmw3QWs3ems4eWJtRk9BOGdC?=
+ =?utf-8?B?R1NQc0Q0bDJPMStiRHJxS0FoSDdHS2VCKzc2K0UvZHhHQlF3dzh2UjFsMUk4?=
+ =?utf-8?B?OVVZMk1SSThwMEJoNnN1QmxBcXpYc2J5MmYvdHE3dXpkOW5vbmZFSmlIdGZB?=
+ =?utf-8?B?azlPMUdMRWsrWWpJVlJrd0t0a0F3YzZ3Q0Z6U0lHVWkyeWlUaDhNTEliOGJB?=
+ =?utf-8?B?em1YSW4vcFJZaUYrR2NITlU4cVNQR0xhWHBhcTIvT1krMXVJVkQ3SVd3WjFk?=
+ =?utf-8?B?Q3FLUHN5UVlZOHpHSVZxdVJqckY4RzRyNVUwS2lJK0Fleitxa1JrVVMyakZQ?=
+ =?utf-8?B?U24vR0xhZUlKeS95eGdXU05zVC9mVHhjdTFsSjB0Rmdrd1FOWkVsM2tVY0lF?=
+ =?utf-8?B?cUJSak1aZ3VnQ3hlVnpuM1lkRnlma2c5cG01UmRLTzhpK1dYNGQvUmFkN2Vp?=
+ =?utf-8?B?UnRkeUJ4K040bEw2emVHTkgyeUFrRGh6MlF2a0JqamQraVVGMzB4SFIweC9l?=
+ =?utf-8?B?UFNqdUpUTG1GWUs5WjV4T2xLTXVtMzFwSDBDMElmdm5MbURjYXRLaFNnczNN?=
+ =?utf-8?B?eGJrZm43WUZkYmtJNlcrU2FnazNkUDRmSHEyT2RCblFYTDN4NFE3STJsalA4?=
+ =?utf-8?B?WXgyNjQ0VEg1K21pZEZrb2V1OHJVNEdmNkdQR05ZY1RkZlNFYVZIRDJqQ3BE?=
+ =?utf-8?B?QXZQc1pPcDhMbEl4MHZyMllDRTlDOFhrTjZ3R0tBS3ZGLzNFSCtnTmhhMDh1?=
+ =?utf-8?B?S3JPRUw1VnR5Yk42aHhyKzRTTXdackZZdkVuY3phdWRBMkVaaHRTMDQrZmJ1?=
+ =?utf-8?B?N1NSLy94RUlZTTVVcjZtRHY4b0lFcmJPajJnRTVGekw4K0R5RG9nTTZqVlZP?=
+ =?utf-8?B?UThrbTNYdzQyVVNYZ0Q3c1htbzh5UmhMeDh4aThiTmYrMm04Q1djRHhnRUdu?=
+ =?utf-8?B?YmcvNG8rNVJGZjNQeVhmWk04K2JYOVZGNm9Ea3Q2WWVxaDdGNytXaGgwYVIv?=
+ =?utf-8?B?Ujh3UzgvUEUyUHpjS09OQi8wSlNzNHE1dGVVV1k1Q1NYeDI5L3IwY2VTRWJO?=
+ =?utf-8?B?aDFnUU40cXVMdGI0NjdqQi9CN3VlbkpJY0w4ak9wNW9kQXkzdkFzL0svaFR4?=
+ =?utf-8?B?cDFwV2RVUENJYitHTWY1aTlaQ1JlUmZoUjM5S1FlTTF2MFJKNEZqSDIybzJ1?=
+ =?utf-8?B?STNxbitENGIxMmQrL3hkNVB5SE54MFgzNWlJNHJBbDRDZE9uSU1EY3J6MURK?=
+ =?utf-8?B?aytqb0NiaHE2ZFdRZG5vdURmZWYxT2VTVHZvcCt6VXJyTTIzZ05nbGR2TXky?=
+ =?utf-8?B?Wk5EbUd4UzFzY2doNTJHT1VZeVNMWVV3NDlDeWEwRDcrOVpCeHAyRmlvSmFI?=
+ =?utf-8?B?ZjNZeGJOdmFSQmVXUW14dk1BNzBLTTBNcm1SUUUrOUtyY1JDRTFvb01hMy8x?=
+ =?utf-8?B?UW9BT1hvOTJzU00zbDh3K1hhMEoxWEN4d0VVNkt6cStaVnMvenR5c2tyTjFF?=
+ =?utf-8?B?Zmc9PQ==?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
+	Ux+iWqibADWm+sIar4jds12VZSVG570D+O5feJtBdPRKsjb1P3OiLgbrnl6hjaZO/S3NXnX8xwNObDN1PkWoE1Gie2C15jnRI6i9N839NluKNiGRlyEkDH1CVSN7B7uoh4QplTKoQXDYmovvHkQi+Iv7111OZdAUdRxw9xW+XVIncXWyA/2yvNHjoHot4RrtDyE9a/TAlluVSG1plIl2Aa9Nzy1m+f8pGpmPjavbxK66n0aO/14EFeZWHd2B65MEt+nhoBpHJhX5XfTfVdKPzYS72H7RLM2CaFtyTYCtc8GazgQD6S7ypfJ5l27KdwDD9LFPkdEvcG+R4rxGSaPvvd7NtvnzsPN/PleD+Kn+Gn197mVYC0WAciSQb9FkbVWBKqCz89cPwjZCva4BdzGCycXKWcyQb9vW5c3ar2+1NFlzXtGlLw1hocOh5QimvwJeDoF8qdg/JQfZy1zNUGWDIf1BIrIZmRW+oLKjPISt/fRXj/zs92zQg8nKdoEqKBcBxd1A4E/+gpJNbT6jMg8TXNbn9fc+z7dr7z/2d8JOIFweT+pBKt3jKI9movwRWrN9KxI6vMvga+lkvD1XZuAeHsXSN54WZNVC5EwyM717/Gs=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7ca2e30-5639-48c7-e3c2-08dc8648a07b
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR10MB7224.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2024 16:49:26.9618
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nP13yE/4ui6UBc3bq6qEg1LQg4HV1ingOFs25MSdphLaQRRVOULHuU+M9y3SIMAqjQ8EqxWYabv/tUEJNMla0w/V6MW7KbGDF5CGF1jWGyE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR10MB6596
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-06_13,2024-06-06_02,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0 phishscore=0 bulkscore=0
+ adultscore=0 spamscore=0 mlxlogscore=999 suspectscore=0 malwarescore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2405010000
+ definitions=main-2406060119
+X-Proofpoint-ORIG-GUID: M1_4A__4KLwGeHiEJQWMnUnFnn91-YTr
+X-Proofpoint-GUID: M1_4A__4KLwGeHiEJQWMnUnFnn91-YTr
 
-On 6/6/24 01:28, Nitesh Shetty wrote:
-> On 04/06/24 04:44AM, Bart Van Assche wrote:
->> On 6/3/24 21:40, Christoph Hellwig wrote:
->>> There is no requirement to process them synchronously, there is just
->>> a requirement to preserve the order.=C2=A0 Note that my suggestion a =
-few
->>> arounds ago also included a copy id to match them up.=C2=A0 If we don=
-'t
->>> need that I'm happy to leave it away.=C2=A0 If need it it to make sta=
-cking
->>> drivers' lifes easier that suggestion still stands.
+On 6/5/24 11:02 PM, Jarkko Sakkinen wrote:
+> On Wed Jun 5, 2024 at 10:03 PM EEST,  wrote:
+>> So I did not mean to imply that DRTM support on various
+>> platforms/architectures has a short expiration date. In fact we are
+>> actively working on DRTM support through the TrenchBoot project on
+>> several platforms/architectures. Just a quick rundown here:
 >>
->> Including an ID in REQ_OP_COPY_DST and REQ_OP_COPY_SRC operations soun=
-ds
->> much better to me than abusing the merge infrastructure for combining
->> these two operations into a single request. With the ID-based approach
->> stacking drivers are allowed to process copy bios asynchronously and i=
-t
->> is no longer necessary to activate merging for copy operations if
->> merging is disabled (QUEUE_FLAG_NOMERGES).
+>> Intel: Plenty of Intel platforms are vPro with TXT. It is really just
+>> the lower end systems that don't have it available (like Core i3). And
+>> my guess was wrong about x86s. You can find the spec on the page in the
+>> following link. There is an entire subsection on SMX support on x86s and
+>> the changes to the various GETSEC instruction leaves that were made to
+>> make it work there (see 3.15).
 >>
-> Single request, with bio merging approach:
-> The current approach is to send a single request to driver,
-> which contains both destination and source information inside separate =
-bios.
-> Do you have any different approach in mind ?
+>> https://urldefense.com/v3/__https://www.intel.com/content/www/us/en/developer/articles/technical/envisioning-future-simplified-architecture.html__;!!ACWV5N9M2RV99hQ!Lt-srkRLHstA9PPCB-NWogvHP-9mfh2bHjkml-lARY79BhYlWJjhrHb6RyCN_WdGstcABq1FdqPUKn5dCdw$
+> 
+> Happend to bump into same PDF specification and exactly the seeked
+> information is "3.15 SMX Changes". So just write this down to some
+> patch that starts adding SMX things.
+> 
+> Link: https://urldefense.com/v3/__https://cdrdv2.intel.com/v1/dl/getContent/776648__;!!ACWV5N9M2RV99hQ!Lt-srkRLHstA9PPCB-NWogvHP-9mfh2bHjkml-lARY79BhYlWJjhrHb6RyCN_WdGstcABq1FdqPUuZy8Sfk$
+> 
+> So link and document, and other stuff above is not relevant from
+> upstream context, only potential maintenance burden :-)
 
-No. I did not propose to change how copy offload requests are sent to blo=
-ck
-drivers (other than stacking drivers).
+I am not 100% sure what you mean exactly here...
 
-> If we want to proceed with this single request based approach,
-> we need to merge the destination request with source BIOs at some point=
-.
-> a. We chose to do it via plug approach.
-> b. Alternative I see is scheduler merging, but here we need some way to
-> hold the request which has destination info, until source bio is also
-> submitted.
-> c. Is there any other way, which I am missing here ?
+> 
+> For any architectures dig a similar fact:
+> 
+> 1. Is not dead.
+> 2. Will be there also in future.
+> 
+> Make any architecture existentially relevant for and not too much
+> coloring in the text that is easy to check.
+> 
+> It is nearing 5k lines so you should be really good with measured
+> facts too (not just launch) :-)
 
-There are already exceptions in blk_mq_submit_bio() for zoned writes and =
-for
-flush bios. Another exception could be added for REQ_OP_COPY_* bios. I'm =
-not
-claiming that this is the best possible alternative. I'm only mentioning =
-this
-to show that there are alternatives.
+... but overall I get your meaning. We will spend time on this sort of 
+documentation for the v10 release.
 
-> Copy ID approach:
-> We see 3 possibilities here:
-> 1. No merging: If we include copy-id in src and dst bio, the bio's will=
- get
-> submitted separately and reach to the driver as separate requests.
-> How do we plan to form a copy command in driver ?
-> 2. Merging BIOs:
-> At some point we need to match the src bio with the dst bio and send th=
-is
-> information together to the driver. The current implementation.
-> This still does not solve the asynchronous submission problem, mentione=
-d
-> above.
-> 3. Chaining BIOs:
-> This won't work with stacked devices as there will be cloning, and henc=
-e
-> chain won't be maintained.
+Thanks for the feedback,
+Ross
 
-I prefer option (2). Option (1) could result in a deadlock because the so=
-urce
-and destination bio both would have to be converted into a request before
-these are sent to a request-based driver.
-
-Thanks,
-
-Bart.
+> 
+> BR, Jarkko
+> 
 
 
