@@ -1,209 +1,172 @@
-Return-Path: <linux-doc+bounces-17959-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17961-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB9A490086B
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Jun 2024 17:15:50 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id EBF3F9008D6
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Jun 2024 17:28:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E26FB1C229AB
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Jun 2024 15:15:49 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 690442876DA
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Jun 2024 15:28:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C09271991B1;
-	Fri,  7 Jun 2024 15:14:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 840EB195965;
+	Fri,  7 Jun 2024 15:28:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="R0MjQyeA"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rP16TPHT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2061.outbound.protection.outlook.com [40.107.94.61])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D9CD1991DB;
-	Fri,  7 Jun 2024 15:14:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.94.61
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717773297; cv=fail; b=oJeZoVNs6MA+zecdx1KbzpkRI1+mF60qn9vKbqYCaqQCVaE7WAPEsJKDsjn1OVifTHNd0a/Swe1fvsouwar3fy7J8DWRnstvvH8TBS8OHRbHSPoYyjCEcYZWIAuC3NpVQDVqqRyMGedGxbR0vCjWJXh/XIR7vlJx4tnayEESr60=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717773297; c=relaxed/simple;
-	bh=hj6Fyypx/uVZNu3NHd3nU5qkqAI/V9mLrtGdaOaptEs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=cB0K5BWzgEW+4QmKqJ/zwAItv+rBnVRsCtn3ImMQTUzcPqs6Jg5ImNCa/B4piVgKmZlUxxzznhfuNEQ9V2WaNxMvB6lQPqWoft+PE1QNjlz3LbuKuiOqujrVC9fLYp9kPHDDz/X9BGoRqffPzRk+I1v2ywYLznKjYZ4Al83YAWk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=R0MjQyeA; arc=fail smtp.client-ip=40.107.94.61
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UiGWeH5GlOs+IPqBHPypP3I8F+6OCHawppxYC9N+A59SaA1V68/S/Rt10NBw9n4x4LaIHRBKEQslzGUuuR+P4j6Pm1I5poBNC2eLx6pCSeBQBZK+0Q+oq38ibfTFKBkokc7Fhp3ah0vjNh3CjLegKbDBYm29N4qQ+hdJymJD9rw3bXgGLRIxYkMqX0Z/aKgSOigmIMhNHA90KQiHHAgDy/tlNp2Ob1wL0S9ZnePaj7MZ4JJZdpxatUJ97uY4u5xVoOByqA4Ni7tIxQ2l8rGGReuR250n+KkEmSgtuCxbawKWkrOP6ikGpnn4DKDlFZXAnSrEI/OHFKERtQnfesjdOg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dsTy4KBOo4iQAUBWaR33r0vB+6gAYP/QKA6ERlfo8Vo=;
- b=k/YXSlKf2PXUeTvqWuYMQO1xWGx3Dn0yOq8Mb0hP8dmcc75Z9262Y/r1rizPPJD5ikB5hZwMlMRrZynSOgLehUY14mag3nZ/t0QrB0MDgYqayfMsF78gaqEj7l1g9bIe337MTHYQ1bhTuTkm4z8xRApFrYkbFTzqZ9LnXFjO3aG84CXNRFkzRhwMAKGSgShQJz76pY27xK8yWDnVyaXG+gZCz9RFKjIs4Z8Ss7OVwQ9jJFjak3e/4q4yetzBZiktCX1JcCuo6idSHQ8eunPdCkq1+30gBwr1rARNDPiEo69ibULMym5CJFI/bJP6IlCSgoe76gbB1pJ7EA2L1I1lqw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dsTy4KBOo4iQAUBWaR33r0vB+6gAYP/QKA6ERlfo8Vo=;
- b=R0MjQyeAEequIziUPZ/f13KpM98FwKhL7jyEEeCPa+SnHR3GX5FBFUsV+ZaidCEPTBlBBP4++UCdSxciIlSSRWE14fhJXrmblOi+3lGKp4X3qfXEADe2Ov6qFLLWXW57TlOrV18S5C/KdoXatBI4q9jRcygAK4w0GSQR2lhbZh5MZ5OI2HBKkUtRmXs2dPU53nlX8MZQVK3I24VP4i5eLqbE2AvG79JIjBzeSlQ+GpN97f7HJhCqzPcQ17xugJ/Os6LhtXIPAtUau7aQTyu867N4hksrMSNdmVg+ueoOfLr2LFT+lzt+mvh/bF7vq8Fw7YRjcme1OV8tVNYOdvFboQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DM6PR12MB3849.namprd12.prod.outlook.com (2603:10b6:5:1c7::26)
- by IA1PR12MB7566.namprd12.prod.outlook.com (2603:10b6:208:42e::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.34; Fri, 7 Jun
- 2024 15:14:52 +0000
-Received: from DM6PR12MB3849.namprd12.prod.outlook.com
- ([fe80::c296:774b:a5fc:965e]) by DM6PR12MB3849.namprd12.prod.outlook.com
- ([fe80::c296:774b:a5fc:965e%4]) with mapi id 15.20.7633.033; Fri, 7 Jun 2024
- 15:14:52 +0000
-Date: Fri, 7 Jun 2024 12:14:51 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: David Ahern <dsahern@kernel.org>
-Cc: Jiri Pirko <jiri@resnulli.us>, Jakub Kicinski <kuba@kernel.org>,
-	Dan Williams <dan.j.williams@intel.com>,
-	Jonathan Corbet <corbet@lwn.net>, Itay Avraham <itayavr@nvidia.com>,
-	Leon Romanovsky <leon@kernel.org>, linux-doc@vger.kernel.org,
-	linux-rdma@vger.kernel.org, netdev@vger.kernel.org,
-	Paolo Abeni <pabeni@redhat.com>, Saeed Mahameed <saeedm@nvidia.com>,
-	Tariq Toukan <tariqt@nvidia.com>,
-	Andy Gospodarek <andrew.gospodarek@broadcom.com>,
-	Aron Silverton <aron.silverton@oracle.com>,
-	Christoph Hellwig <hch@infradead.org>, Jiri Pirko <jiri@nvidia.com>,
-	Leonid Bloch <lbloch@nvidia.com>,
-	Leon Romanovsky <leonro@nvidia.com>, linux-cxl@vger.kernel.org,
-	patches@lists.linux.dev
-Subject: Re: [PATCH 0/8] Introduce fwctl subystem
-Message-ID: <20240607151451.GL19897@nvidia.com>
-References: <20240604070451.79cfb280@kernel.org>
- <665fa9c9e69de_4a4e62941e@dwillia2-xfh.jf.intel.com.notmuch>
- <20240605135911.GT19897@nvidia.com>
- <d97144db-424f-4efd-bf10-513a0b895eca@kernel.org>
- <20240606071811.34767cce@kernel.org>
- <20240606144818.GC19897@nvidia.com>
- <20240606080557.00f3163e@kernel.org>
- <4724e6a1-2da1-4275-8807-b7fe6cd9b6c1@kernel.org>
- <ZmKtUkeKiQMUvWhi@nanopsycho.orion>
- <887d1cb7-e9e9-4b12-aebb-651addc6b01c@kernel.org>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <887d1cb7-e9e9-4b12-aebb-651addc6b01c@kernel.org>
-X-ClientProxiedBy: MN2PR19CA0042.namprd19.prod.outlook.com
- (2603:10b6:208:19b::19) To DM6PR12MB3849.namprd12.prod.outlook.com
- (2603:10b6:5:1c7::26)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 503F81847;
+	Fri,  7 Jun 2024 15:28:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1717774112; cv=none; b=LG9MuQ8Lmk1U8Rb+9jXg/iq5f8ap5xPtf3UU9LH14u+/blk7wXuLSBrnL/oo4vb1boZpBgMa+S7YoXYv9Y3zYgAD71wom2oWMCjsjDsoygyMJrE3appUnWjXnDJm6oDjfv4dSZfpd5Ucu3dSqUUE6ee4EDw+WsxyWMRxn4KeQUo=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1717774112; c=relaxed/simple;
+	bh=GElVRuD+0p0S/IMmlhrZvU2cPAkDJYLHz+KKSQ3Dzv4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=slZMkeBjsAOkiWNxKTXf7E650Vshh1vslyafeCDIbxjzsjlzZlj2mDNnEcwN3A3aFW+rWh38504FbJFHHR4qwDibbp2k/z1DLqCVVFzhbgcjM3ZpiCLlbwiBvL/Xr9/yktLGYx/pBk+1eYlyQDI6aOaRpqLBA2QvrbqvwTKPQb8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rP16TPHT; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13DF6C2BBFC;
+	Fri,  7 Jun 2024 15:28:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1717774112;
+	bh=GElVRuD+0p0S/IMmlhrZvU2cPAkDJYLHz+KKSQ3Dzv4=;
+	h=From:Subject:Date:To:Cc:From;
+	b=rP16TPHTVxqovblcXgQTiDn0IIH+OjnKf/W+Efu2JDFro3i68rGeG7Z+t7JbHHJc0
+	 R7Y9NKoknXHhUJ6KWwElFe9CFNopQ+WGyFAHinsF63R0hKZ75TSVhwsNzECEzFWcft
+	 O47Pyp1ngRp3eqSuDBf0ITcnat3RG/Ah8RIQmk9R3M5ZA5Z/wp3PzBMrcHrkkVOGpy
+	 AFGqe61z3YYc0612lKQPHXvy7szocWqP4D4Bwr0ONfKAbb5pfShOxmO8Ah6ajf1zel
+	 z1TyRCDOj/TrEjpnOXZ+7pEp+nsiRuGngxwisL070ZEqnWBtBn/0caMzffqxC/M1JG
+	 OoJthb0392hLQ==
+From: Benjamin Tissoires <bentiss@kernel.org>
+Subject: [PATCH HID v2 00/16] HID: convert HID-BPF into using
+ bpf_struct_ops
+Date: Fri, 07 Jun 2024 17:28:20 +0200
+Message-Id: <20240607-hid_bpf_struct_ops-v2-0-3f95f4d02292@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR12MB3849:EE_|IA1PR12MB7566:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3207f7a9-f489-4f22-e483-08dc870494ad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|376005|7416005|1800799015|366007;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?iPFyBIOKrt3RUMQqlb1MihMSGD4D84VLgg8mlys2h6/jAsid3jtvdFdjdmw1?=
- =?us-ascii?Q?2a/mEeDxBdaqw1CW1ZoZSxpeXmsxPm1zn7B5rdFOLgH5zh+e21Y9BnSd3Qku?=
- =?us-ascii?Q?PO4yZ8MgCdZoB1vxGcXH39JAqG5I+v+2KzybDlU/gRazdAAcacsZUrVc/JdJ?=
- =?us-ascii?Q?+K3X5JOmql2vXGTAEY5gnoA0QOPRRV5r/j8z7AITf593RC+fG0KAt4/7+QVf?=
- =?us-ascii?Q?MygI6e/yjh3irpf91LaxlNntdR6xYo5slgXKTwT0RUM71adAYLifrjbdPfkX?=
- =?us-ascii?Q?WoZjqnIVyHYc831khCnMcLCmj+gB33Zi6/iW4s7/UwitcNK96LC6t1zqeHaG?=
- =?us-ascii?Q?PDJze8aUlLX6J/hpZQHM4KUhoXFAPqqInAGmyAzIS+8HiwgRrxLY+ci0vEfs?=
- =?us-ascii?Q?5kIvwTyqw17QvnW+N7ZmfmIcxyWgJ3zf+SeO8zqZvw9dPaRra0OSbR9mdzWX?=
- =?us-ascii?Q?jFJWoZQ0++kzD3pKYwNncAq0iEzvDDQ6SPFtpUnphMXeSzA37aA+30e67qRR?=
- =?us-ascii?Q?eu6PqMYZnCb0HtWJ1AjOGytCXlDfGGubdQK5RIU/3N8HXD89If8+VeWRaMwF?=
- =?us-ascii?Q?wzCNXSlz2dv4BzM8cVJYD2sRFkH7cJxxWUucRB4BSjfLQ4N7ygo4KN2WgHoh?=
- =?us-ascii?Q?F0TUIdd7a9Y3BqEwA3+g3aA751JnWHYyMKIUn2042j8rtUsuzBytjd0HhIM8?=
- =?us-ascii?Q?PqMjI2aL1tYW8fBWCqUxh5f+L3Ex8xYMIIhCaToee4rQ9NT9a3pVZL/NjvUR?=
- =?us-ascii?Q?hK2pab9YxI3C2Zb7C4mk08ficH2Fvh0Ss6RXcDzmYUoBgFFunbTt3MazAnQZ?=
- =?us-ascii?Q?uotMRH7V/q7fyrJ3+fJlKmNfr5z6ALzAnWDspeW4m7IQj2+hDixNkZ87d+5d?=
- =?us-ascii?Q?+nUvqUMRPd6gjw/xI0t6FLaXERT+W/ZGMJftspDpE74UyFSIEzmnsNszz/Wn?=
- =?us-ascii?Q?IDLHsj1+qEu0R0oK+ZNls9tuwmR2BJJda3b5xDaBiETO7KVX1dL5GJ8HWydT?=
- =?us-ascii?Q?zE+cNslm90dBiYHxCcFe+kIBQkRy4/WrLGxPV5rP7MKz0bOFn8MbOMlDQpx8?=
- =?us-ascii?Q?h7TXxz6RtAlX1yXcX0cv4CVHRpzaOSX862z0it/sSHVq6urrOB6FhSmtS2q3?=
- =?us-ascii?Q?IfZHfbLiepxCpnL4wEu0xcHmeVdDyf1btOEb7oJI1BDTkBJpFXX3SAdIDJYQ?=
- =?us-ascii?Q?656zKhQSieD0amOOyaXaseRF3uLYDDfRqa6Hu1UZYeJC/eEsQ4wOOn6GaEjl?=
- =?us-ascii?Q?KFjLhtUhNJVfiHDmZ0lr0+UmzrlqKjseEl3UYhZf54+yLqkOV6HESRgSJm02?=
- =?us-ascii?Q?W7cGvwx48j1Etwpf/CDRw4aj?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3849.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376005)(7416005)(1800799015)(366007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?Uoy56lueV8Fs8683rLAmYmD2zZGV9Ljd3cmKRJZRIihsRD16F9s3OS5kUG/I?=
- =?us-ascii?Q?yvO1hChAnZFLuwyCmsT9Saue6geES9VhspZBwJfV/qm6yglispS7U+OXLQDM?=
- =?us-ascii?Q?pZ4ajHVuy1lmmH456zv7h9w+LzooBoWExVUR8QgKjm0hTZiMWD2++ntEmNJz?=
- =?us-ascii?Q?NhdR5D7YL+bwVopkABi8WiDnRqh+YxLzNLRgG34DEmU9lQJgMVK5kr86rx1M?=
- =?us-ascii?Q?CkmBN0OPIe3xSW6V9H6G9gtIH9xVteSWh4KdmqgyxIO/ERq2GdPOehLNeVXT?=
- =?us-ascii?Q?5RqRtuciPot7ZINtNNj5xiCqlC05jpNorjmcbbx2InXjzBc3MebkJEoNCyng?=
- =?us-ascii?Q?aO+jdUTWOx83PkWQmpI/WF6GN7V4GWTxf+cbvV6NVhgld8cRzl3D5IeLF8Z8?=
- =?us-ascii?Q?vUPTPTMu1tbCHsek6zbeAewzN8x37Py8C9mfYaJtDWy+HvoNETSXyw7/zByd?=
- =?us-ascii?Q?168u31BQ13yS3md4/nP5QDK7Y6mneLA1MLpIg1AL+rqIzBv7AbHdPG5HtJFW?=
- =?us-ascii?Q?uvNZkXqFlZ/ky8er5CTW9M41Jo5FOZ4Sk5FA+s38Sge/gr5uVdgUVDtBXe63?=
- =?us-ascii?Q?Vy8UXuWFMKs+yHVoNCCR82onzFFJE1K/JiJevgWxhFHuEzvWTYXi27tRXXfH?=
- =?us-ascii?Q?d446KH2wwBFkpQtRLIuTHC6CljGO07Z1kdG7m2zdzQ3cYe+wTsPXgMxQ29BY?=
- =?us-ascii?Q?SlZ11emlVjnbdUwIUOAEhni45+1m1JHTEVw6wIQ1JWga5b7VgRYqybLIikmE?=
- =?us-ascii?Q?dG775oLN4Q/JDYIRItMTUV00e+eun8hj3k6PHeLXGTO97zRhzf2UJKY7Z71X?=
- =?us-ascii?Q?rDVkLRFodac6LTW5h1OtIQehSJtEMEW/+nWlYn6O06FI1jIQDrIGiiNZrXV1?=
- =?us-ascii?Q?oCCDFAmPr1vAUgGyk+0yJPeUwAGPFHOyGhvvY/UKe4uDV7WbiaGGUekhduQf?=
- =?us-ascii?Q?nd4bPZs9VVaq1yiwMNOB1a5mvExDPJrlavJLor7YpQWRljsJiodKfyA2F27y?=
- =?us-ascii?Q?OK2Cy3yiwHCZ+wSgHPz3EuF7mFW/DAKALPB8jpa9CQy7k1Vvav6Yjvyi4Bol?=
- =?us-ascii?Q?DsHo7E73fIzLlqLDIUkf+OdQTTzqeeMJBSILdR4ELa3+ClVrgfzf/NCZbmOW?=
- =?us-ascii?Q?O80x59SG+R+kCLLAMjcowStG4VmtnnuVRYdX05DrMibdHjPT8GDYX9jAiElr?=
- =?us-ascii?Q?1RXT7SU7lGESC8EhDy54PI3gISDYDb7XDuelF8MrRXDdW0BlLqrMgDI4V1d5?=
- =?us-ascii?Q?prxQDCndLE4eKk9WW6bqgzuwuVtWrJQAvqXGJfoJyVyDtAKYWiEsZYClWkIz?=
- =?us-ascii?Q?0vRFkf5ErMrLI7gCxyKSOgwTpDltkRY2Cv50Aa2HHpXVW1bc1RfXSFe0M3et?=
- =?us-ascii?Q?S5NJj9pxEGtkXahOlWPwHgVcmr+Y4Ap8oxLLZmzp/loCFU5ajBKcd2F3TQAB?=
- =?us-ascii?Q?IaPuFTf/PC0hjY6Uzs3LItucdoUgembRlXjA2PxOukKHvwy/B9PkS5B6dqVa?=
- =?us-ascii?Q?2cPqtLxvr2+hiynZx38VSDKMlSlNa4gJOHn3c+hhlyo6F+4FFSCKTLm96V4+?=
- =?us-ascii?Q?5BpIK521+0lkdUF+x7thsl0C2GWBk/pADOiT14DZ?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3207f7a9-f489-4f22-e483-08dc870494ad
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3849.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jun 2024 15:14:52.5136
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IIS+4eFPwZFWrJ3NSfyqwOyeYlWuiAFYXG3B3z7jstGPk0XsAsxn6srVQ1YpOKRZ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7566
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABUnY2YC/22NwQ6CMBBEf4Xs2Rq6UCSePHjQbzCkQbrARkPJF
+ omG8O82ePX4ZjJvFggkTAGOyQJCMwf2QwTcJdD09dCRYhcZMMU8NTpTPTt7H1sbJnk1k/VjUJS
+ hxhoxN8ZAHI5CLb836Q0u1zNUMew5TF4+29Gst+rnxPKfc9YqVWVTFEXmWjy48vQgGei599JBt
+ a7rF2CaTHW6AAAA
+To: Shuah Khan <shuah@kernel.org>, Jiri Kosina <jikos@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>, Alexei Starovoitov <ast@kernel.org>
+Cc: linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ bpf@vger.kernel.org, linux-input@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Benjamin Tissoires <bentiss@kernel.org>, 
+ Peter Hutterer <peter.hutterer@who-t.net>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1717774109; l=4712;
+ i=bentiss@kernel.org; s=20230215; h=from:subject:message-id;
+ bh=GElVRuD+0p0S/IMmlhrZvU2cPAkDJYLHz+KKSQ3Dzv4=;
+ b=+q4XRskmsyQrQvBA78fRG6/EkIyhBx/TqVZc7ewoZNwkh4THHjSeSpeWEJK6gSUx/KnrC53Ay
+ +57w6VtRzsFAtEqO40xt2nkrrc8idtf7sGA2xY0fujmG2zSS1OwvKFr
+X-Developer-Key: i=bentiss@kernel.org; a=ed25519;
+ pk=7D1DyAVh6ajCkuUTudt/chMuXWIJHlv2qCsRkIizvFw=
 
-On Fri, Jun 07, 2024 at 08:50:17AM -0600, David Ahern wrote:
+The purpose of this series is to rethink how HID-BPF is invoked.
+Currently it implies a jmp table, a prog fd bpf_map, a preloaded tracing
+bpf program and a lot of manual work for handling the bpf program
+lifetime and addition/removal.
 
-> Mellanox offers both with the Spectrum line and should have a pretty
-> good understanding of how many customers deploy with the SDK vs
-> switchdev. Why is that? 
+OTOH, bpf_struct_ops take care of most of the bpf handling leaving us
+with a simple list of ops pointers, and we can directly call the
+struct_ops program from the kernel as a regular function.
 
-We offer lots of options with mlx5 switching too, and switchdev is not
-being selected by customers principally for performance reasons, in my
-view.
+The net gain right now is in term of code simplicity and lines of code
+removal (though is an API breakage), but udev-hid-bpf is able to handle
+such breakages.
 
-The OVS space wants to operate the switch much like a firewall and
-this creates a high rate of database updates and exception
-packets. DPDK can operate all the same offload HW from userspace and
-avoid all the system call and other kernel overhead. It is much more
-purpose built to what OVS wants to do. In the >50Gbps space this
-matters a lot and overall DPDK performance notably wins over switchdev
-for many OVS workloads - even though the high speed path is
-near-identical.
+In the near future, we will be able to extend the HID-BPF struct_ops
+with entrypoints for hid_hw_raw_request() and hid_hw_output_report(),
+allowing for covering all of the initial use cases:
+- firewalling a HID device
+- fixing all of the HID device interactions (not just device events as
+  it is right now).
 
-In this role DPDK is effectively a switch SDK, an open source one at
-least.
+The matching user-space loader (udev-hid-bpf) MR is at
+https://gitlab.freedesktop.org/libevdev/udev-hid-bpf/-/merge_requests/86
 
-Sadly I'm seeing signs that proprietary OVS focused SDKs (think
-various P4 offerings and others) are out competing open DPDK on
-merit :(
+I'll put it out of draft once this is merged.
 
-For whatever reason the market for switching is not strongly motivated
-toward open SDKs, and the available open solutions are struggling a
-bit to compete.
+Cheers,
+Benjamin
 
-But to repeat again, fwctl is not for dataplane, it is not for
-implementing a switch SDK (go use RDMA if you want to do that). I will
-write here a commitment to accept patches blocking such usages if
-drivers try to abuse the purpose of the subsystem.
+Signed-off-by: Benjamin Tissoires <bentiss@kernel.org>
+---
+Changes in v2:
+- drop HID_BPF_FLAGS enum and use BPF_F_BEFORE instead
+- fix .init_members to not open code member->offset
+- allow struct hid_device to be writeable from HID-BPF for its name,
+  uniq and phys
+- Link to v1: https://lore.kernel.org/r/20240528-hid_bpf_struct_ops-v1-0-8c6663df27d8@kernel.org
 
-Jason
+---
+Benjamin Tissoires (16):
+      HID: rename struct hid_bpf_ops into hid_ops
+      HID: bpf: add hid_get/put_device() helpers
+      HID: bpf: implement HID-BPF through bpf_struct_ops
+      selftests/hid: convert the hid_bpf selftests with struct_ops
+      HID: samples: convert the 2 HID-BPF samples into struct_ops
+      HID: bpf: add defines for HID-BPF SEC in in-tree bpf fixes
+      HID: bpf: convert in-tree fixes into struct_ops
+      HID: bpf: remove tracing HID-BPF capability
+      selftests/hid: add subprog call test
+      Documentation: HID: amend HID-BPF for struct_ops
+      Documentation: HID: add a small blurb on udev-hid-bpf
+      HID: bpf: Artist24: remove unused variable
+      HID: bpf: error on warnings when compiling bpf objects
+      bpf: allow bpf helpers to be used into HID-BPF struct_ops
+      HID: bpf: rework hid_bpf_ops_btf_struct_access
+      HID: bpf: make part of struct hid_device writable
+
+ Documentation/hid/hid-bpf.rst                      | 173 ++++---
+ drivers/hid/bpf/Makefile                           |   2 +-
+ drivers/hid/bpf/entrypoints/Makefile               |  93 ----
+ drivers/hid/bpf/entrypoints/README                 |   4 -
+ drivers/hid/bpf/entrypoints/entrypoints.bpf.c      |  25 -
+ drivers/hid/bpf/entrypoints/entrypoints.lskel.h    | 248 ---------
+ drivers/hid/bpf/hid_bpf_dispatch.c                 | 266 +++-------
+ drivers/hid/bpf/hid_bpf_dispatch.h                 |  12 +-
+ drivers/hid/bpf/hid_bpf_jmp_table.c                | 565 ---------------------
+ drivers/hid/bpf/hid_bpf_struct_ops.c               | 298 +++++++++++
+ drivers/hid/bpf/progs/FR-TEC__Raptor-Mach-2.bpf.c  |   9 +-
+ drivers/hid/bpf/progs/HP__Elite-Presenter.bpf.c    |   6 +-
+ drivers/hid/bpf/progs/Huion__Kamvas-Pro-19.bpf.c   |   9 +-
+ .../hid/bpf/progs/IOGEAR__Kaliber-MMOmentum.bpf.c  |   6 +-
+ drivers/hid/bpf/progs/Makefile                     |   2 +-
+ .../hid/bpf/progs/Microsoft__XBox-Elite-2.bpf.c    |   6 +-
+ drivers/hid/bpf/progs/Wacom__ArtPen.bpf.c          |   6 +-
+ drivers/hid/bpf/progs/XPPen__Artist24.bpf.c        |  10 +-
+ drivers/hid/bpf/progs/XPPen__ArtistPro16Gen2.bpf.c |  24 +-
+ drivers/hid/bpf/progs/hid_bpf.h                    |   5 +
+ drivers/hid/hid-core.c                             |   6 +-
+ include/linux/hid_bpf.h                            | 125 ++---
+ samples/hid/Makefile                               |   5 +-
+ samples/hid/hid_bpf_attach.bpf.c                   |  18 -
+ samples/hid/hid_bpf_attach.h                       |  14 -
+ samples/hid/hid_mouse.bpf.c                        |  26 +-
+ samples/hid/hid_mouse.c                            |  39 +-
+ samples/hid/hid_surface_dial.bpf.c                 |  10 +-
+ samples/hid/hid_surface_dial.c                     |  53 +-
+ tools/testing/selftests/hid/hid_bpf.c              | 100 +++-
+ tools/testing/selftests/hid/progs/hid.c            | 100 +++-
+ .../testing/selftests/hid/progs/hid_bpf_helpers.h  |  19 +-
+ 32 files changed, 805 insertions(+), 1479 deletions(-)
+---
+base-commit: 70ec81c2e2b4005465ad0d042e90b36087c36104
+change-id: 20240513-hid_bpf_struct_ops-e3212a224555
+
+Best regards,
+-- 
+Benjamin Tissoires <bentiss@kernel.org>
+
 
