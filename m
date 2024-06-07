@@ -1,166 +1,421 @@
-Return-Path: <linux-doc+bounces-17958-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-17960-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CB7A9007BF
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Jun 2024 16:57:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0325B900873
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Jun 2024 17:16:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BCC2928BC64
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Jun 2024 14:57:21 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 32574285599
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Jun 2024 15:16:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A61B19AA7F;
-	Fri,  7 Jun 2024 14:52:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9FDD8197A8A;
+	Fri,  7 Jun 2024 15:15:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="hQJmj9FG"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="Ly+9ds/2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2058.outbound.protection.outlook.com [40.107.236.58])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D60D19AA6B
-	for <linux-doc@vger.kernel.org>; Fri,  7 Jun 2024 14:52:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.174
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1717771971; cv=none; b=NaMqON/L76ubpbwPfth7mabiKz5Zu0H0l0T+aohk6iGcK380NQ3fJlJWdnfhafIFZyuVUMQbbvI9REfKXE6FdD8C1l6NusTk6Vm3XXS8XCB7n9Nsr/QVJ1NYqdj16jOPC9cS1OGg5QwZV4hKYBjlA8MB6pcOXom68bPG6BmvGbA=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1717771971; c=relaxed/simple;
-	bh=lRtTAdTXNw3RVPrpvvNKKuuzE413bhtwKVpiQVvurek=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=p04ZY4oTzEJqeUiCbPKRS3C2Vi9U23hvxxtp5+uPHKI41qJpIQkODxtgcC0p9eUKNy6dxJWnAcfTuIO1yrBJ37s9m57vMVTFISmXQH1cRMkruZ8ltmxIket32nmcsIFaW2KQxDGfQegGu6zYGEuksuG8hI0H2kqLicWJaxEwwfE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=hQJmj9FG; arc=none smtp.client-ip=209.85.222.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
-Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-79533d9fdb3so151286785a.0
-        for <linux-doc@vger.kernel.org>; Fri, 07 Jun 2024 07:52:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1717771968; x=1718376768; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=be9t9+ReZ6YBtow20QbHH2FmkX+nC7rbtPeGa2mS4as=;
-        b=hQJmj9FGqkDWyCgt/SU+4tUjCosWn1r7jPWCOxSoQcFLTAHBHmCt1UPHWUfacLPk0A
-         J27M3PHiZT4a/3dgSP410VtO8nsNQzDfKUKFxJN3iIePAPaAXbaP+l6LyEKYF4CkTy48
-         W7AEcymnLWnS3+i8chqAC7sLqibivCTcSwkpGR1xtaFDOarqDm2RsDk88kHT7kdlDC/+
-         9Z8FIQqtXasRprzwCsdTxihilrlaHvGsr45MSTgHsNCW06TV4YSXg9RXEoJSh9JliJhN
-         EElPiNvBU31l6J6yWS1+Pv/JSZLa707wvYnKwDocL0pue06OzOB0p871OIuyts6x8rd8
-         zTsw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717771968; x=1718376768;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=be9t9+ReZ6YBtow20QbHH2FmkX+nC7rbtPeGa2mS4as=;
-        b=nNgrSwwDcsQ1Z4GMfq3mbKI0J2KBCO1acddT9FPzTjMZ2NPVpGfdSwZOdDyfOq8Nxc
-         YbYN1m9lxjyeW6XkFxElKym7NXHRB98CZ3rkoitn7ZRN1NcqWQxwvMe/yHSDnEAggpdu
-         po3ACjFPLwZRkYfFuGuMjhrG9Blhu1+3a05eVzc9h4bLao3BgvxdjpOZPVZSv09Xrk+z
-         lzf2y80QabhobfcGyTt7adXPFGguR1d3lADqG03kW/MvOnenm67cLJS2XPitrgGNJ12l
-         AKyxs+8jSrrhfA5vwnbVFMtOBCUoCMzMUuc1Vfdw1bbDZ+wXhVj/foxgtjZ2qJHSL+b9
-         qngA==
-X-Forwarded-Encrypted: i=1; AJvYcCXfB04JDLdAlsUHZpPgPRWJgerfvZapdCalorH5w8iTZFZrN9pGQiaKOgDKxLNk7VwPK8gl3b7XVeeewWGsUTn3GRb+sLAenZtk
-X-Gm-Message-State: AOJu0YzQglgV05gr0zSHFNcoqHneq60i9K9qL9XImatRN+dBz/SKJnMj
-	47Cb6HGl6Lte9IIyTb6bZYuylbXv48PGvqHN/0IBIFRk/eqDRUmuf2guNyBmp/E=
-X-Google-Smtp-Source: AGHT+IEol1YR1WI0zC3A5eIuWJjKcIm2ZGRprGfgrv26PYx2gMqkRphUST2lY2DmLHNeG4xW82MRzw==
-X-Received: by 2002:a05:620a:31a8:b0:795:4e67:1ef5 with SMTP id af79cd13be357-7954e672231mr106304685a.11.1717771968557;
-        Fri, 07 Jun 2024 07:52:48 -0700 (PDT)
-Received: from ziepe.ca (hlfxns017vw-142-68-80-239.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.68.80.239])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-79532870231sm173090885a.60.2024.06.07.07.52.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 07 Jun 2024 07:52:48 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.95)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1sFaxT-00HGBa-Cf;
-	Fri, 07 Jun 2024 11:52:47 -0300
-Date: Fri, 7 Jun 2024 11:52:47 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: David Ahern <dsahern@kernel.org>
-Cc: Pavel Begunkov <asml.silence@gmail.com>,
-	Mina Almasry <almasrymina@google.com>,
-	Christoph Hellwig <hch@infradead.org>, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-alpha@vger.kernel.org, linux-mips@vger.kernel.org,
-	linux-parisc@vger.kernel.org, sparclinux@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
-	bpf@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Donald Hunter <donald.hunter@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
-	Matt Turner <mattst88@gmail.com>,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-	Helge Deller <deller@gmx.de>, Andreas Larsson <andreas@gaisler.com>,
-	Jesper Dangaard Brouer <hawk@kernel.org>,
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Arnd Bergmann <arnd@arndb.de>, Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Andrii Nakryiko <andrii@kernel.org>,
-	Martin KaFai Lau <martin.lau@linux.dev>,
-	Eduard Zingerman <eddyz87@gmail.com>, Song Liu <song@kernel.org>,
-	Yonghong Song <yonghong.song@linux.dev>,
-	John Fastabend <john.fastabend@gmail.com>,
-	KP Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@google.com>,
-	Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
-	Steffen Klassert <steffen.klassert@secunet.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
-	Shuah Khan <shuah@kernel.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
-	David Wei <dw@davidwei.uk>, Yunsheng Lin <linyunsheng@huawei.com>,
-	Shailend Chand <shailend@google.com>,
-	Harshitha Ramamurthy <hramamurthy@google.com>,
-	Shakeel Butt <shakeel.butt@linux.dev>,
-	Jeroen de Borst <jeroendb@google.com>,
-	Praveen Kaligineedi <pkaligineedi@google.com>
-Subject: Re: [PATCH net-next v10 02/14] net: page_pool: create hooks for
- custom page providers
-Message-ID: <20240607145247.GG791043@ziepe.ca>
-References: <20240530201616.1316526-1-almasrymina@google.com>
- <20240530201616.1316526-3-almasrymina@google.com>
- <ZlqzER_ufrhlB28v@infradead.org>
- <CAHS8izMU_nMEr04J9kXiX6rJqK4nQKA+W-enKLhNxvK7=H2pgA@mail.gmail.com>
- <5aee4bba-ca65-443c-bd78-e5599b814a13@gmail.com>
- <CAHS8izNmT_NzgCu1pY1RKgJh+kP2rCL_90Gqau2Pkd3-48Q1_w@mail.gmail.com>
- <eb237e6e-3626-4435-8af5-11ed3931b0ac@gmail.com>
- <be2d140f-db0f-4d15-967c-972ea6586b5c@kernel.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7580E19AA62;
+	Fri,  7 Jun 2024 15:15:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.236.58
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1717773311; cv=fail; b=T+zD6HQtCE4Gxe8NvcQbI39CgbdxEGuDnpJVwE3cD8ABUljKreJarTS2g1DfjnZL/0LvdHYM8/1ISSjDJ1Gf4Law4ED87Z7AJ10/Dz26fHD4Y3vH4MNug/ZCyrz3giPqLwW/ahdf370ln2TbhamrYe/aGOseHdqiBbDGaVepC7U=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1717773311; c=relaxed/simple;
+	bh=M+WrdidwYg3eg8sJ7UKN+5nMBlcjisurnsRrJPlKisc=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=NfoD/ULzMZLJGPwvUpozZjQt5yCYVfpIw6QB2O4SghyburJyN5wu3pu0D2R9Yulibm+RlwWqC3QgldNWaYreBCJxbn+ucpAj2Im4mK1DFuhAbRS47l03u9VaNFkt1t5A3q5q5gvOhBkiBLkyb/0MtIc9TnZudqddnYKR2UkoXyI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=Ly+9ds/2; arc=fail smtp.client-ip=40.107.236.58
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FEFOPm7d8NuvqXJgzPjQg4gvTmwlQh09209YYOG71lYRS8x7TCLm1TzAQUmQtcH86+Yliczocp7qhgddeJENbgrVPNG9LXJ8hbH/t6m/drmog5DAH3MXY/oh8UmB15hIpezbYCIRQOREt+c3hC/9+XPN9ECvVUMFbXFYgWo9Ya2yqf8pZedgN19z6L3K1f8k9r2ya6qWweENoOUrztnLW359IeBvTeWVQXNz7f0c5llEvgEPr6khdW4szfRevCSBwjRT9zwAaObNKABZUS6xlpzhhK4FmA9nM9Iln/W3nDwaDcV/DnzwELWcVNxZQnRgDnDCj3wT+OHJjr6BWX/lUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rAAGtLP28LcsngzDgs9+7IqMAFiuVHMWoczvrDR+MZc=;
+ b=F4tvtIcmUInfsGmE6WhKBDFdX3oe028ilbK6VOHlpc2tVgyAC3FRbFDpZ9FS8yARVvm4d9GsqVG3Zqj1tf/QUDiY4puPQiQ4RqP9m27MybRKEtr4u5iwiDDQG407ORbuGM6xNay2S53Z5JpPEH1KeehLkqw7aK0GXSzV6XMtEe7r82y8F3TCcNB734p7kYjwggrN/eNdCilpjkARR3i++MoqoyTMWMMfcZdD3PllFswbR3tA/ZrVy80+aWuXj6UOsQiLpp7oAnDYqvNEFXmdm4T9xKY+qmOVakeFBxQNXrWhTkHN7X5f5mM74s1rSbUQJHAckpnOt2op6KVif/e5tA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=davemloft.net smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rAAGtLP28LcsngzDgs9+7IqMAFiuVHMWoczvrDR+MZc=;
+ b=Ly+9ds/2AGOBlnQLAkyHBbQdX9CEFbKPvKrwMd4jbV5dBeaz0N1AycGfU1bXjim1eLh/8jE5SkOsxp6bVfsZJe1dxiRYzegGQUyak0a4mZOcGgWL/JdK5gRBpcpmHTJ0W34RmQgRf8YkJOVjNZFxw7RUKWYx2DiuWPdQIQ/AlvEB0cdm46yfb+JPPI4IEjlsDvcqb1Qu9Tl/9EPZrwHcFKIN48s003VlKDPCDfLE+LqzL1MfQ3xqoSEJZ3mdnFaWPTU6vqH3AaAa4EpbWKJakUCHE805MXoTsc1mGVY5wpEhSEESBIYvwmLASmurdH0fovp7m1eRLHZ31rQNABjMtA==
+Received: from SA0PR11CA0051.namprd11.prod.outlook.com (2603:10b6:806:d0::26)
+ by BL3PR12MB6474.namprd12.prod.outlook.com (2603:10b6:208:3ba::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.34; Fri, 7 Jun
+ 2024 15:14:59 +0000
+Received: from SA2PEPF00003F66.namprd04.prod.outlook.com
+ (2603:10b6:806:d0:cafe::27) by SA0PR11CA0051.outlook.office365.com
+ (2603:10b6:806:d0::26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7656.17 via Frontend
+ Transport; Fri, 7 Jun 2024 15:14:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ SA2PEPF00003F66.mail.protection.outlook.com (10.167.248.41) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7633.15 via Frontend Transport; Fri, 7 Jun 2024 15:14:58 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 7 Jun 2024
+ 08:14:40 -0700
+Received: from yaviefel.mtl.com (10.126.231.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 7 Jun 2024
+ 08:14:34 -0700
+From: Petr Machata <petrm@nvidia.com>
+To: "David S. Miller" <davem@davemloft.net>, Eric Dumazet
+	<edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+	<pabeni@redhat.com>, <netdev@vger.kernel.org>
+CC: Ido Schimmel <idosch@nvidia.com>, Petr Machata <petrm@nvidia.com>, "David
+ Ahern" <dsahern@kernel.org>, Nikolay Aleksandrov <razor@blackwall.org>,
+	<mlxsw@nvidia.com>, Jonathan Corbet <corbet@lwn.net>,
+	<linux-doc@vger.kernel.org>, Simon Horman <horms@kernel.org>
+Subject: [PATCH net-next v2 2/5] net: ipv4: Add a sysctl to set multipath hash seed
+Date: Fri, 7 Jun 2024 17:13:54 +0200
+Message-ID: <20240607151357.421181-3-petrm@nvidia.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240607151357.421181-1-petrm@nvidia.com>
+References: <20240607151357.421181-1-petrm@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <be2d140f-db0f-4d15-967c-972ea6586b5c@kernel.org>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: rnnvmail201.nvidia.com (10.129.68.8) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003F66:EE_|BL3PR12MB6474:EE_
+X-MS-Office365-Filtering-Correlation-Id: 88f04e75-1232-43d0-0fe0-08dc87049877
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230031|82310400017|7416005|376005|36860700004|1800799015;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?SvX5CbEcYYFqXKmV4mSPlXs0JUusg02dFHczTUABDkHnDJ9Mq4nAY4r4vbCZ?=
+ =?us-ascii?Q?W87lvGDIDMc9+07ok8XS1BzFxIx9mNH8Ks1dnEQRFNzI7+eI9sAYifS7bkCS?=
+ =?us-ascii?Q?RNsNUchGiuqpYCkNk0KOu7Q1CDo0kXuC5cUa0Ol3iu7z95c8S4w1zi93iYnr?=
+ =?us-ascii?Q?CdQye7owryP6MPwz7yrs359KY4GZCBGjB11MzbDIQWTH79mlhnJTBbbv3j4k?=
+ =?us-ascii?Q?y+iYCbAJ03+H67feaenWMk6nP6rgBinIhicUkJpk+9BJnymfeyhDxxVjFfe4?=
+ =?us-ascii?Q?/cDB0doXPQ52PGPgSwNUksiEP++2cy/89cXZSlohoFlZvPUb261klDGTQeLR?=
+ =?us-ascii?Q?excnroXIZCTNkqwftZy1X8+d5QFlgzkr8CI/wH4EDYpkiNDwHpdc3+BJ2Yat?=
+ =?us-ascii?Q?5VqqfXNwbZbIhpk2RGkwigzRlwc/hWKsXHKanyi0NqdiHLiB1j/6a/OTNz8E?=
+ =?us-ascii?Q?6ZDDxdTYRsIEVzKDADx+YHYKqQkCkLiyYU/ZmgjgkFc8T1dRj4C1jBfwF0rW?=
+ =?us-ascii?Q?7jMSS8OdMlWk7t+qdkpP+Vt303VDyKNhbFzZ/Gb3Ce83BQvvNwTCBdWsXG6L?=
+ =?us-ascii?Q?NRXgVPTqzbtMwTMyUluV+I6oWYM056Pg3Ir1SS69JGp7PZv8Z0sX0nUDxLhr?=
+ =?us-ascii?Q?UPVQ3n79IJgMhjJjK7aMRT23VFloABmp0/ZZAXK6z6bv1feE2m34nMLUNrAf?=
+ =?us-ascii?Q?P4S4w3Fi3sTn22wRY2g4oUZUFb9ypjA7sv9/ud8KxZMotAGpoSK+WXH3tRYo?=
+ =?us-ascii?Q?KDTM093UaJl4QlaW/ux0KLMfgvmwm5l441ahAkjX1Skrk/yW21woFWiTdIpV?=
+ =?us-ascii?Q?50OiHDS/fleAfM1kqwEGfII+/EMOaed54DGAIRK4c+tWOfHpMixnOIx45rP1?=
+ =?us-ascii?Q?3yrrR9NdYBq8SAEOoWFMqJfojTSEwY2QNkZbiT/Vvs1cctIL5QTC9weluDoU?=
+ =?us-ascii?Q?BDz+9VPiVdorG9tpQ97koUf5pdMEQkV0ieai/5exmox72CW6cVar7paN/qMm?=
+ =?us-ascii?Q?G7o9jaHs/2T2x5eyVFeUMV2jHoyKNum/j3M/Lt8FMKYlon3/fqm7IGyCaxH6?=
+ =?us-ascii?Q?viiPsrUuE5gBx9xy/YDpyFT5BXHgsOyMwntqiol4IwgOsrKI94gz8p1VwRUg?=
+ =?us-ascii?Q?DN1M/wcAOp1R+2qiKAzoB9S/XmnmHiQtDA/SSLWCe684T67kBXRZlK+Bfdjv?=
+ =?us-ascii?Q?6KpMdtBdGjmm4Qn1zP1l3FwV2QI3w76tO9ZRcFiJ0k2/2JJOWsuChUHCnkqB?=
+ =?us-ascii?Q?hn5gTWpG6mKeF9Qz7YysVSkS9PUVVuL/2ibFkeM32RzRVf5STZ4RYcizBYtw?=
+ =?us-ascii?Q?aSNqnrq+BxlCs9JAepZ56r0XXx+B/RBwqfDuDX7lHPOf7nR6OjwSPSxC1fE/?=
+ =?us-ascii?Q?kTKXGYClv7jFrbnVzNlfvtsvJ5QlB55wKzlkhnPW3e+nH79x5w=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230031)(82310400017)(7416005)(376005)(36860700004)(1800799015);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jun 2024 15:14:58.5920
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 88f04e75-1232-43d0-0fe0-08dc87049877
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SA2PEPF00003F66.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB6474
 
-On Fri, Jun 07, 2024 at 08:27:29AM -0600, David Ahern wrote:
-> On 6/7/24 7:42 AM, Pavel Begunkov wrote:
-> > I haven't seen any arguments against from the (net) maintainers so
-> > far. Nor I see any objection against callbacks from them (considering
-> > that either option adds an if).
-> 
-> I have said before I do not understand why the dmabuf paradigm is not
-> sufficient for both device memory and host memory. A less than ideal
-> control path to put hostmem in a dmabuf wrapper vs extra checks and
-> changes in the datapath. The former should always be preferred.
+When calculating hashes for the purpose of multipath forwarding, both IPv4
+and IPv6 code currently fall back on flow_hash_from_keys(). That uses a
+randomly-generated seed. That's a fine choice by default, but unfortunately
+some deployments may need a tighter control over the seed used.
 
-I think Pavel explained this - his project is principally to replace
-the lifetime policy of pages in the data plane. He wants to change
-when a page is considered available for re-allocation because
-userspace may continue to use the page after the netstack thinks it is
-done with it. It sounds like having a different source of the pages is
-the less important part.
+In this patch, make the seed configurable by adding a new sysctl key,
+net.ipv4.fib_multipath_hash_seed to control the seed. This seed is used
+specifically for multipath forwarding and not for the other concerns that
+flow_hash_from_keys() is used for, such as queue selection. Expose the knob
+as sysctl because other such settings, such as headers to hash, are also
+handled that way. Like those, the multipath hash seed is a per-netns
+variable.
 
-IMHO it seems to compose poorly if you can only use the io_uring
-lifecycle model with io_uring registered memory, and not with DMABUF
-memory registered through Mina's mechanism.
+Despite being placed in the net.ipv4 namespace, the multipath seed sysctl
+is used for both IPv4 and IPv6, similarly to e.g. a number of TCP
+variables.
 
-Jason
+The seed used by flow_hash_from_keys() is a 128-bit quantity. However it
+seems that usually the seed is a much more modest value. 32 bits seem
+typical (Cisco, Cumulus), some systems go even lower. For that reason, and
+to decouple the user interface from implementation details, go with a
+32-bit quantity, which is then quadruplicated to form the siphash key.
+
+Signed-off-by: Petr Machata <petrm@nvidia.com>
+Reviewed-by: Ido Schimmel <idosch@nvidia.com>
+---
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+Cc: Simon Horman <horms@kernel.org>
+
+Notes:
+    v2:
+    - Instead of precomputing the siphash key, construct it in place
+      of use thus obviating the need to use RCU.
+    - Instead of dispatching to the flow dissector for cases where
+      user seed is 0, maintain a separate random seed. Initialize it
+      early so that we can avoid a branch at the seed reader.
+    - In documentation, s/only valid/only present/ (when
+      CONFIG_IP_ROUTE_MULTIPATH). Also mention the algorithm is
+      unspecified and unstable in principle.
+
+ Documentation/networking/ip-sysctl.rst | 14 ++++++
+ include/net/flow_dissector.h           |  2 +
+ include/net/ip_fib.h                   | 23 ++++++++-
+ include/net/netns/ipv4.h               |  8 ++++
+ net/core/flow_dissector.c              |  7 +++
+ net/ipv4/sysctl_net_ipv4.c             | 66 ++++++++++++++++++++++++++
+ 6 files changed, 119 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/networking/ip-sysctl.rst b/Documentation/networking/ip-sysctl.rst
+index 6e99eccdb837..3616389c8c2d 100644
+--- a/Documentation/networking/ip-sysctl.rst
++++ b/Documentation/networking/ip-sysctl.rst
+@@ -131,6 +131,20 @@ fib_multipath_hash_fields - UNSIGNED INTEGER
+ 
+ 	Default: 0x0007 (source IP, destination IP and IP protocol)
+ 
++fib_multipath_hash_seed - UNSIGNED INTEGER
++	The seed value used when calculating hash for multipath routes. Applies
++	to both IPv4 and IPv6 datapath. Only present for kernels built with
++	CONFIG_IP_ROUTE_MULTIPATH enabled.
++
++	When set to 0, the seed value used for multipath routing defaults to an
++	internal random-generated one.
++
++	The actual hashing algorithm is not specified -- there is no guarantee
++	that a next hop distribution effected by a given seed will keep stable
++	across kernel versions.
++
++	Default: 0 (random)
++
+ fib_sync_mem - UNSIGNED INTEGER
+ 	Amount of dirty memory from fib entries that can be backlogged before
+ 	synchronize_rcu is forced.
+diff --git a/include/net/flow_dissector.h b/include/net/flow_dissector.h
+index 99626475c3f4..3e47e123934d 100644
+--- a/include/net/flow_dissector.h
++++ b/include/net/flow_dissector.h
+@@ -442,6 +442,8 @@ static inline bool flow_keys_have_l4(const struct flow_keys *keys)
+ }
+ 
+ u32 flow_hash_from_keys(struct flow_keys *keys);
++u32 flow_hash_from_keys_seed(struct flow_keys *keys,
++			     const siphash_key_t *keyval);
+ void skb_flow_get_icmp_tci(const struct sk_buff *skb,
+ 			   struct flow_dissector_key_icmp *key_icmp,
+ 			   const void *data, int thoff, int hlen);
+diff --git a/include/net/ip_fib.h b/include/net/ip_fib.h
+index b8b3c07e8f7b..6e7984bfb986 100644
+--- a/include/net/ip_fib.h
++++ b/include/net/ip_fib.h
+@@ -520,13 +520,34 @@ void fib_nhc_update_mtu(struct fib_nh_common *nhc, u32 new, u32 orig);
+ #ifdef CONFIG_IP_ROUTE_MULTIPATH
+ int fib_multipath_hash(const struct net *net, const struct flowi4 *fl4,
+ 		       const struct sk_buff *skb, struct flow_keys *flkeys);
+-#endif
+ 
++static void
++fib_multipath_hash_construct_key(siphash_key_t *key, u32 mp_seed)
++{
++	u64 mp_seed_64 = mp_seed;
++
++	key->key[0] = (mp_seed_64 << 32) | mp_seed_64;
++	key->key[1] = key->key[0];
++}
++
++static inline u32 fib_multipath_hash_from_keys(const struct net *net,
++					       struct flow_keys *keys)
++{
++	siphash_aligned_key_t hash_key;
++	u32 mp_seed;
++
++	mp_seed = READ_ONCE(net->ipv4.sysctl_fib_multipath_hash_seed).mp_seed;
++	fib_multipath_hash_construct_key(&hash_key, mp_seed);
++
++	return flow_hash_from_keys_seed(keys, &hash_key);
++}
++#else
+ static inline u32 fib_multipath_hash_from_keys(const struct net *net,
+ 					       struct flow_keys *keys)
+ {
+ 	return flow_hash_from_keys(keys);
+ }
++#endif
+ 
+ int fib_check_nh(struct net *net, struct fib_nh *nh, u32 table, u8 scope,
+ 		 struct netlink_ext_ack *extack);
+diff --git a/include/net/netns/ipv4.h b/include/net/netns/ipv4.h
+index a91bb971f901..5fcd61ada622 100644
+--- a/include/net/netns/ipv4.h
++++ b/include/net/netns/ipv4.h
+@@ -40,6 +40,13 @@ struct inet_timewait_death_row {
+ 
+ struct tcp_fastopen_context;
+ 
++#ifdef CONFIG_IP_ROUTE_MULTIPATH
++struct sysctl_fib_multipath_hash_seed {
++	u32 user_seed;
++	u32 mp_seed;
++};
++#endif
++
+ struct netns_ipv4 {
+ 	/* Cacheline organization can be found documented in
+ 	 * Documentation/networking/net_cachelines/netns_ipv4_sysctl.rst.
+@@ -246,6 +253,7 @@ struct netns_ipv4 {
+ #endif
+ #endif
+ #ifdef CONFIG_IP_ROUTE_MULTIPATH
++	struct sysctl_fib_multipath_hash_seed sysctl_fib_multipath_hash_seed;
+ 	u32 sysctl_fib_multipath_hash_fields;
+ 	u8 sysctl_fib_multipath_use_neigh;
+ 	u8 sysctl_fib_multipath_hash_policy;
+diff --git a/net/core/flow_dissector.c b/net/core/flow_dissector.c
+index 59fe46077b3c..fcd584588baa 100644
+--- a/net/core/flow_dissector.c
++++ b/net/core/flow_dissector.c
+@@ -1806,6 +1806,13 @@ u32 flow_hash_from_keys(struct flow_keys *keys)
+ }
+ EXPORT_SYMBOL(flow_hash_from_keys);
+ 
++u32 flow_hash_from_keys_seed(struct flow_keys *keys,
++			     const siphash_key_t *keyval)
++{
++	return __flow_hash_from_keys(keys, keyval);
++}
++EXPORT_SYMBOL(flow_hash_from_keys_seed);
++
+ static inline u32 ___skb_get_hash(const struct sk_buff *skb,
+ 				  struct flow_keys *keys,
+ 				  const siphash_key_t *keyval)
+diff --git a/net/ipv4/sysctl_net_ipv4.c b/net/ipv4/sysctl_net_ipv4.c
+index bb64c0ef092d..9140d20eb2d4 100644
+--- a/net/ipv4/sysctl_net_ipv4.c
++++ b/net/ipv4/sysctl_net_ipv4.c
+@@ -464,6 +464,61 @@ static int proc_fib_multipath_hash_fields(struct ctl_table *table, int write,
+ 
+ 	return ret;
+ }
++
++static u32 proc_fib_multipath_hash_rand_seed __ro_after_init;
++
++static void proc_fib_multipath_hash_init_rand_seed(void)
++{
++	get_random_bytes(&proc_fib_multipath_hash_rand_seed,
++			 sizeof(proc_fib_multipath_hash_rand_seed));
++}
++
++static void proc_fib_multipath_hash_set_seed(struct net *net, u32 user_seed)
++{
++	struct sysctl_fib_multipath_hash_seed new = {
++		.user_seed = user_seed,
++		.mp_seed = (user_seed ? user_seed :
++			    proc_fib_multipath_hash_rand_seed),
++	};
++
++	WRITE_ONCE(net->ipv4.sysctl_fib_multipath_hash_seed, new);
++}
++
++static int proc_fib_multipath_hash_seed(struct ctl_table *table, int write,
++					void *buffer, size_t *lenp,
++					loff_t *ppos)
++{
++	struct sysctl_fib_multipath_hash_seed *mphs;
++	struct net *net = table->data;
++	struct ctl_table tmp;
++	u32 user_seed;
++	int ret;
++
++	mphs = &net->ipv4.sysctl_fib_multipath_hash_seed;
++	user_seed = mphs->user_seed;
++
++	tmp = *table;
++	tmp.data = &user_seed;
++
++	ret = proc_douintvec_minmax(&tmp, write, buffer, lenp, ppos);
++
++	if (write && ret == 0) {
++		proc_fib_multipath_hash_set_seed(net, user_seed);
++		call_netevent_notifiers(NETEVENT_IPV4_MPATH_HASH_UPDATE, net);
++	}
++
++	return ret;
++}
++#else
++
++static void proc_fib_multipath_hash_init_rand_seed(void)
++{
++}
++
++static void proc_fib_multipath_hash_set_seed(struct net *net, u32 user_seed)
++{
++}
++
+ #endif
+ 
+ static struct ctl_table ipv4_table[] = {
+@@ -1072,6 +1127,13 @@ static struct ctl_table ipv4_net_table[] = {
+ 		.extra1		= SYSCTL_ONE,
+ 		.extra2		= &fib_multipath_hash_fields_all_mask,
+ 	},
++	{
++		.procname	= "fib_multipath_hash_seed",
++		.data		= &init_net,
++		.maxlen		= sizeof(u32),
++		.mode		= 0644,
++		.proc_handler	= proc_fib_multipath_hash_seed,
++	},
+ #endif
+ 	{
+ 		.procname	= "ip_unprivileged_port_start",
+@@ -1550,6 +1612,8 @@ static __net_init int ipv4_sysctl_init_net(struct net *net)
+ 	if (!net->ipv4.sysctl_local_reserved_ports)
+ 		goto err_ports;
+ 
++	proc_fib_multipath_hash_set_seed(net, 0);
++
+ 	return 0;
+ 
+ err_ports:
+@@ -1584,6 +1648,8 @@ static __init int sysctl_ipv4_init(void)
+ 	if (!hdr)
+ 		return -ENOMEM;
+ 
++	proc_fib_multipath_hash_init_rand_seed();
++
+ 	if (register_pernet_subsys(&ipv4_sysctl_ops)) {
+ 		unregister_net_sysctl_table(hdr);
+ 		return -ENOMEM;
+-- 
+2.45.0
+
 
