@@ -1,169 +1,222 @@
-Return-Path: <linux-doc+bounces-18165-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-18167-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0C729029C4
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2024 22:12:43 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93A179029EF
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2024 22:28:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0195C1C231A5
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2024 20:12:43 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F1516286244
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2024 20:28:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3CB5014F9EC;
-	Mon, 10 Jun 2024 20:12:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E5B75481C2;
+	Mon, 10 Jun 2024 20:28:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=toxicpanda-com.20230601.gappssmtp.com header.i=@toxicpanda-com.20230601.gappssmtp.com header.b="LYwY4ug2"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="U3i7pCwa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BC7814F9CE
-	for <linux-doc@vger.kernel.org>; Mon, 10 Jun 2024 20:12:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C7C847A60
+	for <linux-doc@vger.kernel.org>; Mon, 10 Jun 2024 20:28:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718050351; cv=none; b=YiuqE10TPo2naNmT4pTwLQ4L2AAzWndMWSNIGJMvUZFHmEC6GKMh14pi86I1P5C2EL+gNBPzQq2eV1OLk8Za6VAnCUmoSS5NhRdw0JzmAkp2/z0kz0rhlHBc6mU3tYxE6Iq0bOJzN9CMU8dgYnwW3tA+7FBAk8jkbfPejewindE=
+	t=1718051284; cv=none; b=GTZ/RYUeSHMhxXtn/pvTI5YZrYC1YO4cL4znfLxlTVVaizq7JGND4qT9deTzFZO5UJQC7xWCosecimi7dlf5Ve0sqmfs7LdU4HlwFbwZG1JrAXYMlAnrku4jMQL2BIGcBHnrCxGHFzQB/R94QqvHyGicnq5axYq4Op/X/zNjPWs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718050351; c=relaxed/simple;
-	bh=b7+MwoWNMLPQ7YyhI/4+4s4P3K4STGUIbLhPZG0Mamc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=amb9M4ZOT7oDX07ss0JDZrQO/u7v7gna1z6+lOmakg79FnIfyEASifWlMIHW66mGylLtuKeTVo86lmWiRAf2NW71sfDiuVZqnbXu/C5JB02Pvdrvu2nasxOSF8dUc/hJPSYb1OZhk2BBlCgewC/bOAS6pi/CQOkSTsQUc5zXEYY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=toxicpanda.com; spf=none smtp.mailfrom=toxicpanda.com; dkim=pass (2048-bit key) header.d=toxicpanda-com.20230601.gappssmtp.com header.i=@toxicpanda-com.20230601.gappssmtp.com header.b=LYwY4ug2; arc=none smtp.client-ip=209.85.128.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=toxicpanda.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=toxicpanda.com
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-62a087c3a92so48860437b3.2
-        for <linux-doc@vger.kernel.org>; Mon, 10 Jun 2024 13:12:29 -0700 (PDT)
+	s=arc-20240116; t=1718051284; c=relaxed/simple;
+	bh=QLun0ZmSJonCAnqt5EQS+rf8Lz10qIaVszRa5dv+Xy0=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=WvtaJkGo+418pj94FLtyJHLr0cNnLHFLCIO4w3+YU9phJANFAggERSFMc60KyE8X60pAa8DV6+elRXAxxcuXgoV+ivE1DS3NJHzATy6DWSf2zGt9hVUmNXg1FK6i3BdznsaqBTVK1dzAUFH9Nh/z+juzBYbqzORrMUbHr0qWKzU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=U3i7pCwa; arc=none smtp.client-ip=209.85.218.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-a6f176c5c10so35111866b.2
+        for <linux-doc@vger.kernel.org>; Mon, 10 Jun 2024 13:28:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda-com.20230601.gappssmtp.com; s=20230601; t=1718050348; x=1718655148; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=q8U88OhWZh1tCo+0WQ1tID8xLxoIwnJftDZHFtRwK3o=;
-        b=LYwY4ug2iL/vJ4DIUm0/Hp2MvpGURHFsHfCR8hKgvsmAqgzRPxBeFZzp5Tfo48EbCo
-         Euj3YFKE98R3xDK+TVi4X08MQrChZxoR0ZdwAIKYcBEyuT6J6pRA6MFIWpmGlK1QH6yk
-         ayaE24UINt0NKI07iU6nbvvP+ur4CK0DddjWE0Gtpl8JlrD2yRSechl/xjLYVx0XPb6G
-         i76retKit/NIZmraE8AuogV1B4ponmQt72v7gY3tzehh7ckEOuDJ8LHGOKzXVFo5n2E+
-         4LMkjHweMxF1v6LeN1NaZpvEMI8QBe5KxGttDTh645mywME2cc7oJs1j5M/rPYABPg7M
-         UNcA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718050348; x=1718655148;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=google.com; s=20230601; t=1718051281; x=1718656081; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=q8U88OhWZh1tCo+0WQ1tID8xLxoIwnJftDZHFtRwK3o=;
-        b=hh9PhucRREtfaD6YuQFFKEnGKkBsSR1ELZcHNl3v54Ez8SKmVOEkUSSn/BrVgP2OX7
-         npDVx7uhIRC955lOryyTUOD4MryKZTtB/wTRRDRAZuYX46I58xhU4S2fLywQbZebxe7q
-         bpfhHu/FN7lY9AJJDIv9ZbTXUaCBNglLhe/7/1Dqd1EC11ce1OLlm9QZiiLFA8PvDJVA
-         4oCmuFfn4s5dFEuMPjwY6u3OsIK6/7Yq5c8iy8VDVUuDX5iWyHg0k3MPOSSP1GLCbvLU
-         95BZyqK7e3S10Ij0lZ5KVVmSOwZ40etOuX0m2zRNg5uIOScnQm4jS6qtAXnOSILn3+W0
-         1RRg==
-X-Forwarded-Encrypted: i=1; AJvYcCWQRNLovJ5G0nwLqgGhTREPoON8vNs9UWTrkuGRk7mWoAA9KM2v6FNGloXIImxfsocebtTOPhRB34cDBPaVcFNLiRpgbmCM2QoT
-X-Gm-Message-State: AOJu0YwVdgnPmeP1yR8OpN1T++tiH19hboEEGY+LdS8XD+8Wuk9fAlu6
-	MJdT7viiColeU2uai1i2bijZtR4bMR3S2ZaVCAI7RoLtOsK67k1KkkH8NLREe2k=
-X-Google-Smtp-Source: AGHT+IHAq2uat/BxStlvycvWIMemf9chq6bKvr5RgwVh7JekY7oKEJ33MFsCJYBOa4s18l+17nIrDA==
-X-Received: by 2002:a81:ef0e:0:b0:61a:f206:bad6 with SMTP id 00721157ae682-62cd55f6755mr90104707b3.30.1718050348318;
-        Mon, 10 Jun 2024 13:12:28 -0700 (PDT)
-Received: from localhost (syn-076-182-020-124.res.spectrum.com. [76.182.20.124])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-62ccaef2825sm17372997b3.139.2024.06.10.13.12.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Jun 2024 13:12:27 -0700 (PDT)
-Date: Mon, 10 Jun 2024 16:12:27 -0400
-From: Josef Bacik <josef@toxicpanda.com>
-To: Jonathan Calmels <jcalmels@3xx0.net>
-Cc: brauner@kernel.org, ebiederm@xmission.com,
-	Jonathan Corbet <corbet@lwn.net>, Paul Moore <paul@paul-moore.com>,
-	James Morris <jmorris@namei.org>,
-	"Serge E. Hallyn" <serge@hallyn.com>, KP Singh <kpsingh@kernel.org>,
-	Matt Bobrowski <mattbobrowski@google.com>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Andrii Nakryiko <andrii@kernel.org>,
-	Martin KaFai Lau <martin.lau@linux.dev>,
-	Eduard Zingerman <eddyz87@gmail.com>, Song Liu <song@kernel.org>,
-	Yonghong Song <yonghong.song@linux.dev>,
-	John Fastabend <john.fastabend@gmail.com>,
-	Stanislav Fomichev <sdf@google.com>, Hao Luo <haoluo@google.com>,
-	Jiri Olsa <jolsa@kernel.org>, Luis Chamberlain <mcgrof@kernel.org>,
-	Kees Cook <kees@kernel.org>, Joel Granados <j.granados@samsung.com>,
-	John Johansen <john.johansen@canonical.com>,
-	David Howells <dhowells@redhat.com>,
-	Jarkko Sakkinen <jarkko@kernel.org>,
-	Stephen Smalley <stephen.smalley.work@gmail.com>,
-	Ondrej Mosnacek <omosnace@redhat.com>,
-	Mykola Lysenko <mykolal@fb.com>, Shuah Khan <shuah@kernel.org>,
-	containers@lists.linux.dev, linux-kernel@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-security-module@vger.kernel.org, bpf@vger.kernel.org,
-	apparmor@lists.ubuntu.com, keyrings@vger.kernel.org,
-	selinux@vger.kernel.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH v2 0/4] Introduce user namespace capabilities
-Message-ID: <20240610201227.GD235772@perftesting>
-References: <20240609104355.442002-1-jcalmels@3xx0.net>
+        bh=CmaAu+iZsuEjEiEeynNp1R7+/jNy6Qzg+Lrp5NYV5lE=;
+        b=U3i7pCwaO11vdr3llWGTfyNsseYGp70qQSiIFKzj5pGUKTv3PMK8ieH+QEjfklorf4
+         rpnwpBOS62PvvoE4d41pAHsBdXy2DFsrVaZFKOC99WtwxRG3eNn/aoI2V7r4fIDTq/OO
+         S07SiMfRyoH4RCyAFufxbANdGGPlxhUkBNHnfEahyHdBv4F4pIeXW3qv18kffa2dqE1T
+         TlyC5Y2p7MCiKd0EtTWvX9Nw0KV1kS4OZsPTgy7+jHQyQScsvFdLwY4pOeCFPjx0wDgA
+         mC/KByH6wBMIs99mpolRUqNZyPOxMivA1xDlNy2j1+PK2p7cpeto1xg+HYh4kCA5iTU4
+         4e6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718051281; x=1718656081;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=CmaAu+iZsuEjEiEeynNp1R7+/jNy6Qzg+Lrp5NYV5lE=;
+        b=g5GmvDWeWYiMHrF4dfYlescyP1j5uAQc2woaXpJGPN5+Dmy0E8jfi1QQ1VoeHxgpwT
+         pHdqsQtl7zuhoadIAZEQFiv184afb0byHtM9qLfymmoN1LqZGiyaFSLDoR7eDlb6R4St
+         qcmL6hxodyi5rVMjSVG3JYaUBE/QBIdM3NSTkCXhlaahXhiVOYeHqTG6NWuBveBruZlz
+         IGSCqF/ZhjlrS2ocmgP3HA5kV/HqzdvJ3lnQ9CN0JAN+tGOiva3PhSD2Rom3/fKMLfEk
+         qsgcvEMZSGo344joG/tacwnoQpcpJzCGoivjfa28zDKFQS4NbTGyyLfnNiDNVISWbn6D
+         THgA==
+X-Forwarded-Encrypted: i=1; AJvYcCW8QBnfNsZ4kultUwsmbI+8QZvbhK6S5Qtqrxcbgi8MWXCUhnVN3uch2OImLIPnT8W2URTYop3Y5/tjWhdpSWIKNdb8jBCiUgng
+X-Gm-Message-State: AOJu0YxNwuXiNQIOmsoQ8QLdSdC0mBm6wFmvg8RTyk/dpKcCohm/XmRr
+	FfOvgY5XYY+JLtf16Z0KxUKSZ3GZEj5QICbEdWnyXNsGpwrirahe4dqdOgemTAdLjVdw+kXGaml
+	5WmktL6Wy/DkAq7Ps+lETUs/Pv2+8tcWz/p81
+X-Google-Smtp-Source: AGHT+IGXSvDrAADj9Pf8Xu53OIXItT5TQK5ibDqDLkBUNlFNRj/gYFiO9Qxz2XUO3Ze11843IeDDNQqVlc+Qa3ui1pw=
+X-Received: by 2002:a17:906:89a:b0:a6f:1fc0:3fc0 with SMTP id
+ a640c23a62f3a-a6f1fc04524mr225232566b.6.1718051280487; Mon, 10 Jun 2024
+ 13:28:00 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240609104355.442002-1-jcalmels@3xx0.net>
+References: <20240608155316.451600-1-flintglass@gmail.com> <20240608155316.451600-3-flintglass@gmail.com>
+In-Reply-To: <20240608155316.451600-3-flintglass@gmail.com>
+From: Yosry Ahmed <yosryahmed@google.com>
+Date: Mon, 10 Jun 2024 13:27:22 -0700
+Message-ID: <CAJD7tkZAkzUfbXY3C0QOGqCyjQZeiuGzkZac4hmogOoh=yoZsw@mail.gmail.com>
+Subject: Re: [PATCH v1 2/3] mm: zswap: fix global shrinker error handling logic
+To: Takero Funaki <flintglass@gmail.com>
+Cc: Johannes Weiner <hannes@cmpxchg.org>, Nhat Pham <nphamcs@gmail.com>, 
+	Chengming Zhou <chengming.zhou@linux.dev>, Jonathan Corbet <corbet@lwn.net>, 
+	Andrew Morton <akpm@linux-foundation.org>, 
+	Domenico Cerasuolo <cerasuolodomenico@gmail.com>, linux-mm@kvack.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jun 09, 2024 at 03:43:33AM -0700, Jonathan Calmels wrote:
-> This patch series introduces a new user namespace capability set, as
-> well as some plumbing around it (i.e. sysctl, secbit, lsm support).
-> 
-> First patch goes over the motivations for this as well as prior art.
-> 
-> In summary, while user namespaces are a great success today in that they
-> avoid running a lot of code as root, they also expand the attack surface
-> of the kernel substantially which is often abused by attackers. 
-> Methods exist to limit the creation of such namespaces [1], however,
-> application developers often need to assume that user namespaces are
-> available for various tasks such as sandboxing. Thus, instead of
-> restricting the creation of user namespaces, we offer ways for userspace
-> to limit the capabilities granted to them.
-> 
-> Why a new capability set and not something specific to the userns (e.g.
-> ioctl_ns)?
-> 
->     1. We can't really expect userspace to patch every single callsite
->     and opt-in this new security mechanism. 
-> 
->     2. We don't necessarily want policies enforced at said callsites.
->     For example a service like systemd-machined or a PAM session need to
->     be able to place restrictions on any namespace spawned under it.
-> 
->     3. We would need to come up with inheritance rules, querying
->     capabilities, etc. At this point we're just reinventing capability
->     sets.
-> 
->     4. We can easily define interactions between capability sets, thus
->     helping with adoption (patch 2 is an example of this)
-> 
-> Some examples of how this could be leveraged in userspace:
-> 
->     - Prevent user from getting CAP_NET_ADMIN in user namespaces under SSH:
->         echo "auth optional pam_cap.so" >> /etc/pam.d/sshd
->         echo "!cap_net_admin $USER"     >> /etc/security/capability.conf
->         capsh --secbits=$((1 << 8)) -- -c /usr/sbin/sshd
-> 
->     - Prevent containers from ever getting CAP_DAC_OVERRIDE:
->         systemd-run -p CapabilityBoundingSet=~CAP_DAC_OVERRIDE \
->                     -p SecureBits=userns-strict-caps \
->                     /usr/bin/dockerd
->         systemd-run -p UserNSCapabilities=~CAP_DAC_OVERRIDE \
->                     /usr/bin/incusd
-> 
->     - Kernel could be vulnerable to CAP_SYS_RAWIO exploits, prevent it:
->         sysctl -w cap_bound_userns_mask=0x1fffffdffff
-> 
->     - Drop CAP_SYS_ADMIN for this shell and all the user namespaces below it:
->         bwrap --unshare-user --cap-drop CAP_SYS_ADMIN /bin/sh
-> 
+On Sat, Jun 8, 2024 at 8:53=E2=80=AFAM Takero Funaki <flintglass@gmail.com>=
+ wrote:
+>
+> This patch fixes zswap global shrinker that did not shrink zpool as
+> expected.
+>
+> The issue it addresses is that `shrink_worker()` did not distinguish
+> between unexpected errors and expected error codes that should be
+> skipped, such as when there is no stored page in a memcg. This led to
+> the shrinking process being aborted on the expected error codes.
+>
+> The shrinker should ignore these cases and skip to the next memcg.
+> However,  skipping all memcgs presents another problem. To address this,
+> this patch tracks progress while walking the memcg tree and checks for
+> progress once the tree walk is completed.
+>
+> To handle the empty memcg case, the helper function `shrink_memcg()` is
+> modified to check if the memcg is empty and then return -ENOENT.
+>
+> Fixes: a65b0e7607cc ("zswap: make shrinking memcg-aware")
+> Signed-off-by: Takero Funaki <flintglass@gmail.com>
+> ---
+>  mm/zswap.c | 31 ++++++++++++++++++++++++++-----
+>  1 file changed, 26 insertions(+), 5 deletions(-)
+>
+> diff --git a/mm/zswap.c b/mm/zswap.c
+> index d720a42069b6..1a90f434f247 100644
+> --- a/mm/zswap.c
+> +++ b/mm/zswap.c
+> @@ -1393,7 +1393,7 @@ static struct shrinker *zswap_alloc_shrinker(void)
+>
+>  static int shrink_memcg(struct mem_cgroup *memcg)
+>  {
+> -       int nid, shrunk =3D 0;
+> +       int nid, shrunk =3D 0, stored =3D 0;
+>
+>         if (!mem_cgroup_zswap_writeback_enabled(memcg))
+>                 return -EINVAL;
+> @@ -1408,9 +1408,16 @@ static int shrink_memcg(struct mem_cgroup *memcg)
+>         for_each_node_state(nid, N_NORMAL_MEMORY) {
+>                 unsigned long nr_to_walk =3D 1;
+>
+> +               if (!list_lru_count_one(&zswap_list_lru, nid, memcg))
+> +                       continue;
+> +               ++stored;
+>                 shrunk +=3D list_lru_walk_one(&zswap_list_lru, nid, memcg=
+,
+>                                             &shrink_memcg_cb, NULL, &nr_t=
+o_walk);
+>         }
+> +
+> +       if (!stored)
+> +               return -ENOENT;
+> +
 
-Where are the tests for this patchset?  I see you updated the bpf tests for the
-bpf lsm bits, but there's nothing to validate this new behavior or exercise the
-new ioctl you've added.  Thanks,
+Can't we just check nr_to_walk here and return -ENOENT if it remains as 1?
 
-Josef
+Something like:
+
+if (nr_to_walk)
+    return -ENOENT;
+if (!shrunk)
+    return -EAGAIN;
+return 0;
+
+>         return shrunk ? 0 : -EAGAIN;
+>  }
+>
+> @@ -1418,12 +1425,18 @@ static void shrink_worker(struct work_struct *w)
+>  {
+>         struct mem_cgroup *memcg =3D NULL;
+>         struct mem_cgroup *next_memcg;
+> -       int ret, failures =3D 0;
+> +       int ret, failures =3D 0, progress;
+>         unsigned long thr;
+>
+>         /* Reclaim down to the accept threshold */
+>         thr =3D zswap_accept_thr_pages();
+>
+> +       /*
+> +        * We might start from the last memcg.
+> +        * That is not a failure.
+> +        */
+> +       progress =3D 1;
+> +
+>         /* global reclaim will select cgroup in a round-robin fashion.
+>          *
+>          * We save iteration cursor memcg into zswap_next_shrink,
+> @@ -1461,9 +1474,12 @@ static void shrink_worker(struct work_struct *w)
+>                  */
+>                 if (!memcg) {
+>                         spin_unlock(&zswap_shrink_lock);
+> -                       if (++failures =3D=3D MAX_RECLAIM_RETRIES)
+> +
+> +                       /* tree walk completed but no progress */
+> +                       if (!progress && ++failures =3D=3D MAX_RECLAIM_RE=
+TRIES)
+>                                 break;
+
+It seems like we may keep iterating the entire hierarchy a lot of
+times as long as we are making any type of progress. This doesn't seem
+right.
+
+>
+> +                       progress =3D 0;
+>                         goto resched;
+>                 }
+>
+> @@ -1493,10 +1509,15 @@ static void shrink_worker(struct work_struct *w)
+>                 /* drop the extra reference */
+>                 mem_cgroup_put(memcg);
+>
+> -               if (ret =3D=3D -EINVAL)
+> -                       break;
+> +               /* not a writeback candidate memcg */
+> +               if (ret =3D=3D -EINVAL || ret =3D=3D -ENOENT)
+> +                       continue;
+> +
+
+We should probably return -ENOENT for memcg with writeback disabled as well=
+.
+
+>                 if (ret && ++failures =3D=3D MAX_RECLAIM_RETRIES)
+>                         break;
+> +
+> +               ++progress;
+> +               /* reschedule as we performed some IO */
+>  resched:
+>                 cond_resched();
+>         } while (zswap_total_pages() > thr);
+> --
+> 2.43.0
+>
 
