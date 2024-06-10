@@ -1,60 +1,64 @@
-Return-Path: <linux-doc+bounces-18166-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-18164-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 700EA9029CF
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2024 22:16:21 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 750479029BE
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2024 22:11:22 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 578E01C230F8
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2024 20:16:20 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9750D1C23184
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2024 20:11:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A742D2E859;
-	Mon, 10 Jun 2024 20:16:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9A4914F13D;
+	Mon, 10 Jun 2024 20:11:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="VzCs7mYL"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="kpFNdZ0B"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D49A1D52B
-	for <linux-doc@vger.kernel.org>; Mon, 10 Jun 2024 20:16:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A9631B812
+	for <linux-doc@vger.kernel.org>; Mon, 10 Jun 2024 20:11:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718050576; cv=none; b=W66mD/C70ZepheJbsEAnSdHpwpY2nyR7dxGoYal+QztZcGLPuqWOnyLWbWXXCMbonLX3UykBYC3vul8JvwlJZhg/lUTxPHzn6u8pLTtyPpAuSwtI63y1WkxFQHffh/wqYUHBfgI8IpXxYY/DHPHv+uWYZ4NJtKUEbaIcDkWa/Kw=
+	t=1718050268; cv=none; b=TqBhUXsf/FjK8M0tBXPF4931YKRoOsoAs+9ZAh4sNC8yC90AieSg2RgxUW1CsqQyNKPj7FmuExIqY16BsDsG9HifUitVOh3AT0bdYhAjlGx9Y0SC4hCj/FrClGibJfZQKJ8lgqLF2QHlhKXWLHS2mzifyhtWQm5x3dAl3TdfLfI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718050576; c=relaxed/simple;
-	bh=xv1HncOUSh2mVDGXQAEf7Aqqq8CXEPnkpgOCMkHFco8=;
-	h=From:To:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=a3+zdMDL3ZPr1Cbdkkt7PuPaNOONVQlIT+lcKTvf2ztQEoSYr448LxzGBTDYUEDZW9hi+p9ub3VMhLqZ65OaO2Z75E12W4RXDiDbhjHgy4TsKOUZoT/96qz970VhKVkkdZ78hzuAy2zx7puH/Sd+FwaLIrrW3SDVfYHEWv9unN4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=VzCs7mYL; arc=none smtp.client-ip=45.79.88.28
+	s=arc-20240116; t=1718050268; c=relaxed/simple;
+	bh=YPqO2qclEtl0OFV8otBi5M0GXwgx5mDCVdUzmPOwMX0=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=dxCygaiUX1lveIzm17YDhU6CtKBHtyHiPmH1nUQ7GS1cdWA/S3zHL3122HteSO6HgdtVdvUhm1yqxRpMt1BYvniCmUn8EdITwCREtgfnBfaPzKvgupCZ+aMnuK4TJ+aIcU3jy0ttirOPYDesDxinLAc0VkoKvopCipAOGNqsIIE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=kpFNdZ0B; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 54E6C45E06
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 1359745E27
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1718050171; bh=UbstLmb9EnMX2RmrTv1TP8CKBUAgjBs1K87JeM8oCws=;
-	h=From:To:Subject:In-Reply-To:References:Date:From;
-	b=VzCs7mYLoTJaZJiDnthUWbYpqD+3reg2MoSYTWlDtut/98m96dD3Viu8cAqNu7l2O
-	 1VIg9cLlfeq0BDh5kAGtuYlTWtyd0Lx0uP6CHv067g3V3ZmHKZvfM8SYzx5sqJ3YxI
-	 iRSOOIqsEC2yfDnnnekVfmC1engk6zCeoiZArp6ortSx5mi/KuZc8sXbxGYfxJoz1o
-	 JZFof5T5Lm6UVdzyQ+NDAPa2GH7gguivjs+seeS8jlepaHEL0j7aziEa3+rntoMd7B
-	 BoupQhpF0dNvO+RWskXnRW4cx2E02y/WMRYu6KL5Ip8BpR2EjqBGLSalFo/9f9wxRj
-	 FWBk4Co/B4qFQ==
+	t=1718050264; bh=YPqO2qclEtl0OFV8otBi5M0GXwgx5mDCVdUzmPOwMX0=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=kpFNdZ0BZ2DYhFj/jD/x9d7YOmgI5zUmXvYtJiZFFVyHt/g5EylVVl1KXVZoEYjus
+	 UPIVukCbzQa2DHot8Yk+KGwHrNEeiPnAHtv21fzN6+Q9+yzxvLXC7UpVPkdztWTyom
+	 Km87RNohKO1VeYXs2eyTmA5KnBfE5kKYLzVfygMbmeTYh7Hy9pXMJy5nxVrfOfcq/o
+	 IlFmGv2tPXaaS6z6N+c93gJd/ewTtvC30ba/xWrT+C0XV5/ql8E4RQpA6qmUYGubgF
+	 NIKVAlBySLa0IssoLWdfo1Bqym6N2gFjt95CR0kpgsUYGGX+fbaVd8uQyGTnPdHLpw
+	 15QjOA7/Ct0MQ==
 Received: from localhost (unknown [IPv6:2601:280:5e00:625::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 54E6C45E06;
-	Mon, 10 Jun 2024 20:09:31 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 1359745E27;
+	Mon, 10 Jun 2024 20:11:04 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Matic Urbanija <maticurbanija@protonmail.com>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+To: Carlos Bilbao <carlos.bilbao.osdev@gmail.com>, Matthew Wilcox
+ <willy@infradead.org>, Matic Urbanija <maticurbanija@protonmail.com>
+Cc: "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
 Subject: Re: Translation of kernel documentation
-In-Reply-To: <Enls7GJQSRW6Z77NFFcLl19W5U8xKlzEGyKAIOr36JDcFQMaEYewfYgYUz5WcNW3X7Xfi7btGAXNT8Ue_WMGIjaxgdDZiKTk_CcGj-fIMH0=@protonmail.com>
+In-Reply-To: <12acfd83-96a3-4c2a-8aa4-e52709e0cf12@gmail.com>
 References: <Enls7GJQSRW6Z77NFFcLl19W5U8xKlzEGyKAIOr36JDcFQMaEYewfYgYUz5WcNW3X7Xfi7btGAXNT8Ue_WMGIjaxgdDZiKTk_CcGj-fIMH0=@protonmail.com>
-Date: Mon, 10 Jun 2024 14:09:30 -0600
-Message-ID: <87le3cv9tx.fsf@trenco.lwn.net>
+ <ZmNbSZglTdsB7aTv@casper.infradead.org>
+ <44ed000a-8dd4-4dde-853a-2b35fffc8c9d@gmail.com>
+ <12acfd83-96a3-4c2a-8aa4-e52709e0cf12@gmail.com>
+Date: Mon, 10 Jun 2024 14:11:03 -0600
+Message-ID: <87h6e0v9rc.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -63,43 +67,13 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Matic Urbanija <maticurbanija@protonmail.com> writes:
+Carlos Bilbao <carlos.bilbao.osdev@gmail.com> writes:
 
-> first of all, I'm terribly sorry if this isn't the right place to ask
-> about translation. I sent an email to helpdesk but so far no answer
-> from them.
+> By the way, next time you probably want to CC linux-kernel@vger.kernel.org
+> so we can easily search for this thread (e.g., in lkml.org).
 
-As has already been said, this is the right place.
-
-Out of curiosity, which "helpdesk" did you send email to?
-
-> My name is Matic Urbanija, I am a teacher at Vegova - Upper Secondary
-> School of Electrical and Computer Engineering and Technical Gymnasium
-> Ljubljana, Slovenia (https://www.vegova.si/about-us-vegova/).
->
-> I would like to translate kernel documentation into Slovenian
-> language. Maybe some of my students would also like to participate.
->
-> Are there some special requirements or procedures which have to be
-> fulfilled before starting translation project? What is the proper or
-> recommend way to start to translate the kernel documentation?
-
-Best is to look at how the other languages are handled.  I would
-recommend starting with the stuff in Documentation/process/ as being of
-the most general interest.
-
-If you can recruit somebody else to help with review of translation
-patches, that would be most helpful.  On my own, I'm not qualified to
-know what's a good translation and what isn't.
-
-I do have to ask one question: is it your intent to maintain this
-translation once it has gone upstream?  Documentation evolves over time;
-having a bunch of out-of-date translations in the tree is not
-particularly useful.  I'll be a lot happier about accepting a new
-translation if I have some assurance that it will not end up in that
-state.
-
-Thanks,
+Copying linux-kernel is fine, but https://lore.kernel.org/all/ is your
+friend when trying to find patches submitted to any list.
 
 jon
 
