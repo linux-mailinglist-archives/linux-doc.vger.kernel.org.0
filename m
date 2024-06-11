@@ -1,159 +1,105 @@
-Return-Path: <linux-doc+bounces-18234-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-18236-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C797902E37
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Jun 2024 04:07:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0A54902EF9
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Jun 2024 05:17:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id A93141F217A3
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Jun 2024 02:07:51 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6BD041F23395
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Jun 2024 03:17:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3FC1CB657;
-	Tue, 11 Jun 2024 02:07:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="M/yN6w78"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A247216F906;
+	Tue, 11 Jun 2024 03:17:23 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A314C8488;
-	Tue, 11 Jun 2024 02:07:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7267D63CB;
+	Tue, 11 Jun 2024 03:17:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718071668; cv=none; b=FrdLUSXByIoF7mWrs/Zh5eoA/DDPGreAlVsK702J3xfTu3A438VkL9gAO8ICLq7ESlBPLPLM+Bc4pZQpUhysrGNdMp2yevrSezNNBBKZdLeUJ4dmYBl+CiDVLuwWhn/mqGmcg3VM1BlULJmtsPVABOEHGfQlGxZTw1tP4dJDZj0=
+	t=1718075843; cv=none; b=cmPgt/8t5tecvDZx5qAZnHnV89aH0hG+Nw4a/gyD41+S1Lh0B7DInG3PkilwPTrdAi3uMv4PA5MAywrOoBGOmg8xFcd438xQ5OevION7a8wfUk2wLlnuf7117CqsymzzUJ+uw1RDCjhLbooiqpYcH2OzB+Q4XTRwuNZP5BzgpwA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718071668; c=relaxed/simple;
-	bh=t+FQJsYag++4WO2qxLXgPpQ0EMcj6jfCuoNIA7zG5a8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Sho0n4QNIgpcUqwcL5a0fpN1zmVNT3eK0AJxYf3cm5hSeaodlpv5lrPHSpAWYReqTgyKAEnzUZ3ileiWzLyoprFlP0XKeF9FUS6LlhgooY0LoKZ5DIA1cl19lhEZzBuhvL4Kx/HtYgLYrzzBpHGdososLRw+FHADvT7oBDFvK1w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=M/yN6w78; arc=none smtp.client-ip=209.85.161.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-5b96a781b63so1817760eaf.1;
-        Mon, 10 Jun 2024 19:07:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718071665; x=1718676465; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=V7K602fz4gBHUWwZgz6PtHdWhG4F3fJUQgT9uMqHP2k=;
-        b=M/yN6w78Uzs9Wzo3QV21NtxxdI1QUeYTn6RVAN/XpHKW6CwFUiHYzWLvlFj2Q+Yk52
-         R8Rt5Dt6MjKyOYk/+36oQaPS5z+C4boBygL8zbRlDPTQA6ABpyVd9KXhsJ59jAjAc9Ip
-         LzGiwu4ZC+Wyz0DOCMj/s51bjjfGGorfege8fJHt+CqqAUNM00HGxfISTswAlqPKBpIJ
-         FtTirLOQZuJjYJA05GZ00ev3RRfsNNrWK6qk4J8Rt9KgyrKHPZpIkNkc1LPMHU50+yMi
-         5r9/B+Kx14qzOzBmACCMbkcePLBgycdQMgtIOgME9voHpsxs7YbniGoz+5CLAPp96Om0
-         V1hw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718071665; x=1718676465;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=V7K602fz4gBHUWwZgz6PtHdWhG4F3fJUQgT9uMqHP2k=;
-        b=dbXxF61RDS5cb+QbGXZJXEwLbgWKjeXEgpttHTtgADoap039VWv4RiXhp3SpECqx1P
-         Lek7MQvx+RyFbn6j0LXUMKKBligAW24bfzLa+7P7t4Qbl2UgACL5CY1+mKZd9G8K3cxw
-         hYzq21Om/FQ8Okd1YFOS05OzCWhsBhBLqVIfMOVt3aDXEt8TgzUio0HTkgeU1erZTQUV
-         TzslK6TjV4FtVKMMrgy6+uokKLg+iBjtsk09WJV0JJdjc9OKA60po+8U7SSx4tBNEHS/
-         THaF6mNZOHKk2puFltHCjz9+7CRjngsNsSCtMhstId2H1qTc5FpoJyknE9Zs5SxeJNs+
-         zCfw==
-X-Forwarded-Encrypted: i=1; AJvYcCVoeGjvMQQMVa3QHyaXwUZzd5sIoHugfmYxnvtFVoPBzAfOoy0RsnQa8sg5hoLUiXiT/EaQM11h1WSgn/0BfMFSmvNvxVKS7flDJwJBcQHrourykTvsGg+RVmxgMGJhQpYM3X15BMrx
-X-Gm-Message-State: AOJu0Yyr7kpj5MXOyjMs5v8lLTsyI5TYfCrlziJcBwpr43zggpMLsDU4
-	pCcFE615DvBFBXAoKisZi6U6QlU9rm+Dcrj5eDgUf7j+Reu65fHr6wJ1cvKu8IkebEdc2viz53z
-	wiEPfjS+CuAc21g7op/UG0WAGXD8=
-X-Google-Smtp-Source: AGHT+IF5NJP+cpN1QZ14dVDvRLKhqj/JIMm3OyP45URA0uC4Hs/4MNcrZV5+u6AtOEjVEtzm+FJweysb15RclHZy/3E=
-X-Received: by 2002:a05:6820:1c9f:b0:5ba:e5c3:4fa6 with SMTP id
- 006d021491bc7-5bae5c35072mr6628691eaf.6.1718071665549; Mon, 10 Jun 2024
- 19:07:45 -0700 (PDT)
+	s=arc-20240116; t=1718075843; c=relaxed/simple;
+	bh=/60qOc7roiLWpgrlHYTsf+6kSPuXUzcO/tFIko6/+qw=;
+	h=Message-ID:Date:From:To:Cc:Subject; b=SAxQutrCVsWmoxMrl6jv05QL3wcxc1E8q7GM4SMFTN2Srd4NFE32R+DrrzKO4Fw04d5TUAaGUoVIUaNZzKNUYuKv2w0b1nIu4hcLk19jXcG0dv05MccLFgv16kE4/whPKsT/12odw54uyXGBZfIwSheXaExFWsOXjoU18cq4E3k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A354C4AF1A;
+	Tue, 11 Jun 2024 03:17:23 +0000 (UTC)
+Received: from rostedt by gandalf with local (Exim 4.97)
+	(envelope-from <rostedt@goodmis.org>)
+	id 1sGs0v-00000001JgD-3KfX;
+	Mon, 10 Jun 2024 23:17:37 -0400
+Message-ID: <20240611030934.162955582@goodmis.org>
+User-Agent: quilt/0.68
+Date: Mon, 10 Jun 2024 23:09:34 -0400
+From: Steven Rostedt <rostedt@goodmis.org>
+To: linux-kernel@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org,
+ linux-csky@vger.kernel.org,
+ loongarch@lists.linux.dev,
+ linuxppc-dev@lists.ozlabs.org,
+ linux-riscv@lists.infradead.org,
+ linux-s390@vger.kernel.org
+Cc: Masami Hiramatsu <mhiramat@kernel.org>,
+ Mark Rutland <mark.rutland@arm.com>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Will Deacon <will@kernel.org>,
+ Guo Ren <guoren@kernel.org>,
+ Huacai Chen <chenhuacai@kernel.org>,
+ WANG Xuerui <kernel@xen0n.name>,
+ Michael Ellerman <mpe@ellerman.id.au>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ "Naveen N. Rao" <naveen.n.rao@linux.ibm.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Albert Ou <aou@eecs.berkeley.edu>,
+ Heiko Carstens <hca@linux.ibm.com>,
+ Vasily Gorbik <gor@linux.ibm.com>,
+ Alexander Gordeev <agordeev@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Sven Schnelle <svens@linux.ibm.com>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>
+Subject: [PATCH 0/2] function_graph: ftrace_graph_ret_addr(); there can be only one!
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-References: <20240610003520.33839-1-dzm91@hust.edu.cn> <202406100911.QBMVtIpz-lkp@intel.com>
-In-Reply-To: <202406100911.QBMVtIpz-lkp@intel.com>
-From: Dongliang Mu <mudongliangabcd@gmail.com>
-Date: Tue, 11 Jun 2024 10:07:19 +0800
-Message-ID: <CAD-N9QXgU7_iCLmH5z0e78ydCkwgWiz2Mti6zDqQp9jnExiVAw@mail.gmail.com>
-Subject: Re: [PATCH v2] docs/zh_CN: update the translation of security-bugs
-To: kernel test robot <lkp@intel.com>
-Cc: Dongliang Mu <dzm91@hust.edu.cn>, Alex Shi <alexs@kernel.org>, 
-	Yanteng Si <siyanteng@loongson.cn>, Jonathan Corbet <corbet@lwn.net>, 
-	Konstantin Ryabitsev <konstantin@linuxfoundation.org>, Hu Haowen <2023002089@link.tyut.edu.cn>, 
-	Geert Uytterhoeven <geert+renesas@glider.be>, oe-kbuild-all@lists.linux.dev, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 10, 2024 at 10:07=E2=80=AFAM kernel test robot <lkp@intel.com> =
-wrote:
->
-> Hi Dongliang,
->
-> kernel test robot noticed the following build warnings:
->
-> [auto build test WARNING on lwn/docs-next]
-> [also build test WARNING on linus/master v6.10-rc3 next-20240607]
-> [If your patch is applied to the wrong git tree, kindly drop us a note.
-> And when submitting patch, we suggest to use '--base' as documented in
-> https://git-scm.com/docs/git-format-patch#_base_tree_information]
->
-> url:    https://github.com/intel-lab-lkp/linux/commits/Dongliang-Mu/docs-=
-zh_CN-update-the-translation-of-security-bugs/20240610-083729
-> base:   git://git.lwn.net/linux.git docs-next
-> patch link:    https://lore.kernel.org/r/20240610003520.33839-1-dzm91%40h=
-ust.edu.cn
-> patch subject: [PATCH v2] docs/zh_CN: update the translation of security-=
-bugs
-> reproduce: (https://download.01.org/0day-ci/archive/20240610/202406100911=
-.QBMVtIpz-lkp@intel.com/reproduce)
->
-> If you fix the issue in a separate patch/commit (i.e. not just a new vers=
-ion of
-> the same patch/commit), kindly add following tags
-> | Reported-by: kernel test robot <lkp@intel.com>
-> | Closes: https://lore.kernel.org/oe-kbuild-all/202406100911.QBMVtIpz-lkp=
-@intel.com/
->
-> All warnings (new ones prefixed by >>):
->
->    Documentation/userspace-api/netlink/netlink-raw.rst: :doc:`rt_link<../=
-../networking/netlink_spec/rt_link>`
->    Documentation/userspace-api/netlink/netlink-raw.rst: :doc:`tc<../../ne=
-tworking/netlink_spec/tc>`
->    Documentation/userspace-api/netlink/netlink-raw.rst: :doc:`tc<../../ne=
-tworking/netlink_spec/tc>`
->    Warning: Documentation/devicetree/bindings/power/wakeup-source.txt ref=
-erences a file that doesn't exist: Documentation/devicetree/bindings/input/=
-qcom,pm8xxx-keypad.txt
->    Warning: Documentation/devicetree/bindings/regulator/siliconmitus,sm57=
-03-regulator.yaml references a file that doesn't exist: Documentation/devic=
-etree/bindings/mfd/siliconmitus,sm5703.yaml
-> >> Warning: Documentation/translations/zh_TW/admin-guide/reporting-issues=
-.rst references a file that doesn't exist: Documentation/translations/zh_CN=
-/admin-guide/security-bugs.rst
-> >> Warning: Documentation/translations/zh_TW/admin-guide/reporting-issues=
-.rst references a file that doesn't exist: Documentation/translations/zh_CN=
-/admin-guide/security-bugs.rst
-> >> Warning: Documentation/translations/zh_TW/process/submitting-patches.r=
-st references a file that doesn't exist: Documentation/translations/zh_CN/a=
-dmin-guide/security-bugs.rst
 
-Thanks for the report. I've sent a v3 patch with this issue fixed.
+I noticed a slight bug in ftrace_graph_ret_addr() for when
+HAVE_FUNCTION_GRAPH_RET_ADDR_PTR was defined and fixed it up.
+I then noticed it was buggy when not defined. Looking for an
+architecture that did not have it defined, I couldn't find any.
+So I removed it.
 
->    Warning: Documentation/userspace-api/netlink/index.rst references a fi=
-le that doesn't exist: Documentation/networking/netlink_spec/index.rst
->    Warning: Documentation/userspace-api/netlink/specs.rst references a fi=
-le that doesn't exist: Documentation/networking/netlink_spec/index.rst
->    Warning: MAINTAINERS references a file that doesn't exist: Documentati=
-on/devicetree/bindings/reserved-memory/qcom
->    Warning: MAINTAINERS references a file that doesn't exist: Documentati=
-on/devicetree/bindings/display/exynos/
->    Using alabaster theme
->
-> --
-> 0-DAY CI Kernel Test Service
-> https://github.com/intel/lkp-tests/wiki
->
+Steven Rostedt (Google) (2):
+      function_graph: Fix up ftrace_graph_ret_addr()
+      function_graph: Everyone uses HAVE_FUNCTION_GRAPH_RET_ADDR_PTR, remove it
+
+----
+ Documentation/trace/ftrace-design.rst | 12 -------
+ arch/arm64/include/asm/ftrace.h       | 11 -------
+ arch/csky/include/asm/ftrace.h        |  2 --
+ arch/loongarch/include/asm/ftrace.h   |  1 -
+ arch/powerpc/include/asm/ftrace.h     |  2 --
+ arch/riscv/include/asm/ftrace.h       |  1 -
+ arch/s390/include/asm/ftrace.h        |  1 -
+ arch/x86/include/asm/ftrace.h         |  2 --
+ include/linux/ftrace.h                |  2 --
+ kernel/trace/fgraph.c                 | 61 ++++++++++++-----------------------
+ 10 files changed, 20 insertions(+), 75 deletions(-)
 
