@@ -1,290 +1,286 @@
-Return-Path: <linux-doc+bounces-18407-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-18410-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EA0B905BDF
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2024 21:22:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B502905BF6
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2024 21:29:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id F2FE51C239B2
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2024 19:22:02 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7CDD31C2383C
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2024 19:29:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 886DD83CC7;
-	Wed, 12 Jun 2024 19:21:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 33D0782D91;
+	Wed, 12 Jun 2024 19:29:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="r74LmvTJ"
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="ZarlGx8d"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A934482D94
-	for <linux-doc@vger.kernel.org>; Wed, 12 Jun 2024 19:21:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E09082C8E;
+	Wed, 12 Jun 2024 19:29:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718220106; cv=none; b=pqvjGLGbG2j88M/CVtEvjTSH8NdVPI9uiEGQEKEEF/+3saHMBThm947EBQtZjVvtMbbl1/dnQWLwrP6pizB+VXWsxuHxDAhf8wp3J/40phI3Fp3Zl5LGtZwkKEpS0MVHGCy71tNGCvC3rA42O4wyrDDE/Wui/rF/q4c8cvM+EtI=
+	t=1718220554; cv=none; b=VSyV3WOfYRS5tvOmfmId+9rfJPFnGompSYXLhJfwKTj8Q1vOQqtSCylqSdHCcFffmHrhziouTtQYKJ4a5vjavVPeXShyFHVMD6mvkedgBi1pPl92kigppkrG15DE9zlbSe2cka9EjaONipm8KLf3b8plNmNiAL/ATjKSM5aOXfg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718220106; c=relaxed/simple;
-	bh=nYTAeIKAQnbfKWEqhRPle1j756SIOQpvdGbjJq8DHmA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=D8i4Dm70fLC4sOJYhcHjXmLEBjoFWzvAXQ5BBUhAyjeLG7Ld7cpmYjWOA1cfwh0+KhFGxo5hjI7IuWM5HD2He/IqOimKnQ6wjGi5MISlf9+ziCRMbrqtyIk+HWZqdNYbEsgekrE7qfrh0HswH7H2Rpnbkw06s8piD1DcmTvnZXI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=r74LmvTJ; arc=none smtp.client-ip=209.85.167.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-3d23a0a32afso63748b6e.3
-        for <linux-doc@vger.kernel.org>; Wed, 12 Jun 2024 12:21:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718220104; x=1718824904; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nWjk00AKWLCCc2wBmuv0MRbs0RIV4aO29ZnuU1Z2jqM=;
-        b=r74LmvTJEi786hdPB17H0FI7tI/8MNGocXBMnZ9ksdS5YT0fwHcTyuSvYITil3QlrQ
-         QnakzZbNdfgxSURix0k493GYPiGEjj50jj44tofx5mwoiXHh/JD0dAbEX5LSGQ8xaCbY
-         eo8tyATaWdqDpLcRIDd+jMR1XMxKDbagQ14rgPJDJ2NXDMMpiqJ4+Nrd/1d61ku2bPIe
-         hlY6pWDAphNjUwfx/a6kQB25VLArjrgt5JFNKVnQbLp7Qm0CqaJ9iHZYJXSubFUol7Hl
-         oLSKfDUrSvuZ87g2xCraIDiXqUJXoP9uwMUb9eV4Deu8eboSfvYO3ivPEw+1h9EtsWi9
-         2LBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718220104; x=1718824904;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nWjk00AKWLCCc2wBmuv0MRbs0RIV4aO29ZnuU1Z2jqM=;
-        b=jkQPlqo11nZV/MSc2gGa7ntP+r+g9ORBKEE3vnVsCmoj6lcv5TkjWAYaju23ShOxyW
-         N5oQOFfuk8I9VXgMhI8pgWL0Nmjk8FwXRkxdK5kddBITCxdz/1ejBEq5CCPHteX8XmE5
-         oymIuclvBnMZb0F4FKyyKIicMJhkPnet0jkXoKhVzl5Zs20awgJdPwOewsCod33AwSQC
-         CCvPN7SSpqEJmsEEEq+nrF0VMsUXsEnI1eO971YeroC/6fiHP4L40RklAGCmNex4vqzq
-         9h8046edhZ0hssal7g2Gek79nryR8zvap6ST9ohrJVnYP0OwoT/S0VPsygiargmDiDWv
-         pjWQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWyKO6NU4O6ZNGAQUff6ONQDQGZleQea0h/aWfgvw+MYYYpR8eMFoor2fik6ntBbyunpJLoImdMCC5n8FNrsLqpxgA9X5EMMMXi
-X-Gm-Message-State: AOJu0Yw/+YMzAVtrpYt0R/UOQJLsaW8jZMNdPDT2Dfuot4OO4b4WDGyg
-	8bivUbp7iI5eVTELf+I6Cott8EywNT7bi6DpcGRVV+haQeztPRg8hDXXI4xl0j8=
-X-Google-Smtp-Source: AGHT+IEa/VIxRkmieNYQk4VzRYdACSw5OtAZWDJEvPLtR8gg2MekPODBwYIt5gbwQDWgBopvLz4egg==
-X-Received: by 2002:a05:6808:138e:b0:3d2:29c2:9600 with SMTP id 5614622812f47-3d23e00b19fmr3371146b6e.23.1718220103587;
-        Wed, 12 Jun 2024 12:21:43 -0700 (PDT)
-Received: from freyr.lechnology.com (ip98-183-112-25.ok.ok.cox.net. [98.183.112.25])
-        by smtp.gmail.com with ESMTPSA id 5614622812f47-3d236676bfesm648795b6e.12.2024.06.12.12.21.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Jun 2024 12:21:43 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Jonathan Cameron <jic23@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>
-Cc: David Lechner <dlechner@baylibre.com>,
-	Michael Hennerich <michael.hennerich@analog.com>,
-	=?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: [PATCH 3/3] Documentation: iio: Document ad4695 driver
-Date: Wed, 12 Jun 2024 14:20:42 -0500
-Message-ID: <20240612-iio-adc-ad4695-v1-3-6a4ed251fc86@baylibre.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240612-iio-adc-ad4695-v1-0-6a4ed251fc86@baylibre.com>
-References: <20240612-iio-adc-ad4695-v1-0-6a4ed251fc86@baylibre.com>
+	s=arc-20240116; t=1718220554; c=relaxed/simple;
+	bh=m8a6feG9FUitFbvUvIrRN4n8RJcdSpN0pdOMLBnv/bE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=fzizkNSmyF4GfXWjVpgprPsohYYnrj/G853f1nc1bIzd1aAkGdLrh9xxMwhCmzX+MlToiSfkW4Ziq8cdxxTPnxtcRuzu0u8o3w3d4ngCB0/5LKAutkKID7STMspEbS93Cqj2Qp/9EXeP/GFWPo84Sn7w7d+b2cOYV5CJssSFuaA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=ZarlGx8d; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45CGOwMZ032154;
+	Wed, 12 Jun 2024 19:28:43 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	MCkqbtgD+H6fBegUBPh8HWnP7zadlp7CFVslclJwQlw=; b=ZarlGx8debYz7B5p
+	EYodYSlVAT7aFS8RYs6MdKD7WbOXf0fqyFxvh3x5MDVqWNY1rVWIPaVJVA8lsPAF
+	oDpXxBtdMdtvb+FWJK07LEOKF0mMn+MnvjWH/qOyBk6quWAH8A46c4N+cRJTORlI
+	eRtp1ug8vXTHkLKY6Z/9JveeD8o/gz/W3N/bv/u9t+vTfwRL9FTLPEscQApnVDem
+	8kH2gNhljIiVHqJGmnAgq49zpbnzi4lILTX/lGxXioPjadLlaB+ndjvNeZZDWEXX
+	sfjUmH2QIX+AsUeC0YeYCB3c0pUPEyuMwFdTlOTKuX76oqiRM4WSi9hmT3ZFcWJw
+	x0M2TQ==
+Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3yq4s09rc9-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 12 Jun 2024 19:28:43 +0000 (GMT)
+Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
+	by NALASPPMTA02.qualcomm.com (8.17.1.19/8.17.1.19) with ESMTPS id 45CJSfcm009922
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 12 Jun 2024 19:28:41 GMT
+Received: from [10.110.56.180] (10.80.80.8) by nalasex01b.na.qualcomm.com
+ (10.47.209.197) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Wed, 12 Jun
+ 2024 12:28:40 -0700
+Message-ID: <408d9e8e-0f40-7e66-54be-2f8d2c0783a3@quicinc.com>
+Date: Wed, 12 Jun 2024 12:28:40 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Mailer: b4 0.12.4
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v23 32/32] ASoC: doc: Add documentation for SOC USB
+Content-Language: en-US
+To: =?UTF-8?Q?Amadeusz_S=c5=82awi=c5=84ski?=
+	<amadeuszx.slawinski@linux.intel.com>,
+        <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
+        <perex@perex.cz>, <conor+dt@kernel.org>, <corbet@lwn.net>,
+        <broonie@kernel.org>, <lgirdwood@gmail.com>, <krzk+dt@kernel.org>,
+        <Thinh.Nguyen@synopsys.com>, <bgoswami@quicinc.com>, <tiwai@suse.com>,
+        <robh@kernel.org>, <gregkh@linuxfoundation.org>
+CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-sound@vger.kernel.org>, <linux-usb@vger.kernel.org>,
+        <linux-arm-msm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <alsa-devel@alsa-project.org>
+References: <20240610235808.22173-1-quic_wcheng@quicinc.com>
+ <20240610235808.22173-33-quic_wcheng@quicinc.com>
+ <5be51e1f-70c9-4bbc-96fa-1e50e441bd35@linux.intel.com>
+From: Wesley Cheng <quic_wcheng@quicinc.com>
+In-Reply-To: <5be51e1f-70c9-4bbc-96fa-1e50e441bd35@linux.intel.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01b.na.qualcomm.com (10.47.209.197)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-GUID: u75kKKgEq47EV2fB7Am8Eqx2k17JInXf
+X-Proofpoint-ORIG-GUID: u75kKKgEq47EV2fB7Am8Eqx2k17JInXf
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-12_10,2024-06-12_02,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 phishscore=0
+ bulkscore=0 malwarescore=0 impostorscore=0 suspectscore=0 adultscore=0
+ priorityscore=1501 clxscore=1011 lowpriorityscore=0 mlxlogscore=998
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2405170001 definitions=main-2406120137
 
-The Analog Devices Inc. AD4695 (and similar chips) are complex ADCs that
-will benefit from a detailed driver documentation.
+Hi Amadeusz,
 
-This documents the current features supported by the driver.
+On 6/12/2024 7:47 AM, Amadeusz Sławiński wrote:
+> On 6/11/2024 1:58 AM, Wesley Cheng wrote:
+> 
+> (...)
+> 
+>> +In the case where the USB offload driver is unbounded, while USB SND is
+> 
+> unbounded -> unbound
+> 
+> (...)
+> 
+>> +SOC USB and USB Sound Kcontrols
+>> +===============================
+>> +Details
+>> +-------
+>> +SOC USB and USB sound expose a set of SND kcontrols for applications 
+>> to select
+>> +and fetch the current offloading status for the ASoC platform sound 
+>> card. Kcontrols
+>> +are split between two layers:
+>> +
+>> +    - USB sound - Notifies the sound card number for the ASoC 
+>> platform sound
+>> +      card that it is registered to for supporting audio offload.
+>> +
+>> +    - SOC USB - Maintains the current status of the offload path, and 
+>> device
+>> +      (USB sound card and PCM device) information.  This would be the 
+>> main
+>> +      card that applications can read to determine offloading 
+>> capabilities.
+>> +
+>> +Implementation
+>> +--------------
+>> +
+>> +**Example:**
+>> +
+>> +  **Sound Cards**:
+>> +
+>> +    ::
+>> +
+>> +      0 [SM8250MTPWCD938]: sm8250 - SM8250-MTP-WCD9380-WSA8810-VA-D
+>> +                     SM8250-MTP-WCD9380-WSA8810-VA-DMIC
+>> +      1 [C320M          ]: USB-Audio - Plantronics C320-M
+>> +                     Plantronics Plantronics C320-M at 
+>> usb-xhci-hcd.1.auto-1, full speed
+>> +
+>> +
+>> +  **Platform Sound Card** - card#0:
+>> +
+>> +    ::
+>> +
+>> +      USB Offload Playback Route Card Select  1 (range -1->32)
+>> +      USB Offload Playback Route PCM Select   0 (range -1->255)
+>> +      USB Offload Playback Route Card Status  -1 (range -1->32)
+>> +      USB Offload Playback Route PCM Status   -1 (range -1->255)
+>> +
+>> +
+>> +  **USB Sound Card** - card#1:
+>> +
+>> +    ::
+>> +
+>> +      USB Offload Playback Capable Card         0 (range -1->32)
+>> +
+>> +
+>> +The platform sound card(card#0) kcontrols are created as part of 
+>> adding the SOC
+>> +USB device using **snd_soc_usb_add_port()**.  The following kcontrols 
+>> are defined
+>> +as:
+>> +
+>> +  - ``USB Offload Playback Route Card Status`` **(R)**: USB sound 
+>> card device index
+>> +    that defines which USB SND resources are currently offloaded.  If 
+>> -1 is seen, it
+>> +    signifies that offload is not active.
+>> +  - ``USB Offload Playback Route PCM Status`` **(R)**: USB PCM device 
+>> index
+>> +    that defines which USB SND resources are currently offloaded.  If 
+>> -1 is seen, it
+>> +    signifies that offload is not active.
+>> +  - ``USB Offload Playback Route Card Select`` **(R/W)**: USB sound 
+>> card index which
+>> +    selects the USB device to initiate offloading on.  If no value is 
+>> written to the
+>> +    kcontrol, then the last USB device discovered card index will be 
+>> chosen.
+> 
+> I see only one kcontrol, what if hardware is capable of offloading on 
+> more cards, is it possible to do offloading on more than one device?
+> 
+>> +  - ``USB Offload Playback Route PCM Select`` **(R/W)**: USB PCM 
+>> index which selects
+>> +    the USB device to initiate offloading on.  If no value is written 
+>> to the
+>> +    kcontrol, then the last USB device discovered PCM zero index will 
+>> be chosen.
+>> +
+>> +The USB sound card(card#1) kcontrols are created as USB audio devices 
+>> are plugged
+>> +into the physical USB port and enumerated.  The kcontrols are defined 
+>> as:
+>> +
+>> +  - ``USB Offload Playback Capable Card`` **(R)**: Provides the sound 
+>> card
+>> +    number/index that supports USB offloading.  Further/follow up 
+>> queries about
+>> +    the current offload state can be handled by reading the offload 
+>> status
+>> +    kcontrol exposed by the platform card.
+>> +
+> 
+> 
+> Why do we need to some magic between cards? I feel like whole kcontrol 
+> thing is overengineered a bit - I'm not sure I understand the need to do 
+> linking between cards. It would feel a lot simpler if USB card exposed 
+> one "USB Offload" kcontrol on USB card if USB controller supports 
+> offloading and allowed to set it to true/false to allow user to choose 
+> if they want to do offloading on device.
+> 
+> (...)
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- Documentation/iio/ad4695.rst | 145 +++++++++++++++++++++++++++++++++++++++++++
- Documentation/iio/index.rst  |   1 +
- MAINTAINERS                  |   1 +
- 3 files changed, 147 insertions(+)
+Based on feedback from Pierre, what I understood is that for some 
+applications, there won't be an order on which sound card is 
+queried/opened first.
 
-diff --git a/Documentation/iio/ad4695.rst b/Documentation/iio/ad4695.rst
-new file mode 100644
-index 000000000000..6e142561524e
---- /dev/null
-+++ b/Documentation/iio/ad4695.rst
-@@ -0,0 +1,145 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+
-+=============
-+AD4695 driver
-+=============
-+
-+ADC driver for Analog Devices Inc. AD4695 and similar devices. The module name
-+is ``ad4695``.
-+
-+
-+Supported devices
-+=================
-+
-+The following chips are supported by this driver:
-+
-+* `AD4695 <https://www.analog.com/AD4695>`_
-+* `AD4696 <https://www.analog.com/AD4696>`_
-+* `AD4697 <https://www.analog.com/AD4697>`_
-+* `AD4698 <https://www.analog.com/AD4698>`_
-+
-+
-+Supported features
-+==================
-+
-+SPI wiring modes
-+----------------
-+
-+The driver currently supports the following SPI wiring configuration:
-+
-+4-wire mode
-+^^^^^^^^^^^
-+
-+In this mode, CNV and CS are tied together and there is a single SDO line.
-+
-+.. code-block::
-+
-+    +-------------+         +-------------+
-+    |          CS |<-+------| CS          |
-+    |         CNV |<-+      |             |
-+    |     ADC     |         |     HOST    |
-+    |             |         |             |
-+    |         SDI |<--------| SDO         |
-+    |         SDO |-------->| SDI         |
-+    |        SCLK |<--------| SCLK        |
-+    +-------------+         +-------------+
-+
-+To use this mode, in the device tree, omit the ``cnv-gpios`` and
-+``spi-rx-bus-width`` properties.
-+
-+Channel configuration
-+---------------------
-+
-+Since the chip supports multiple ways to configure each channel, this must be
-+described in the device tree based on what is actually wired up to the inputs.
-+
-+There are three typical configurations:
-+
-+Single-ended where a pin is used with the ``REFGND`` pin, pseudo-differential
-+where a pin is used with the ``COM`` pin and differential where two ``INx``
-+pins are used as a pair
-+
-+Single-ended input
-+^^^^^^^^^^^^^^^^^^
-+
-+Each ``INx`` pin can be used as a single-ended input in conjunction with the
-+``REFGND`` pin. The device tree will look like this:
-+
-+.. code-block::
-+
-+    channel@2 {
-+        reg = <2>;
-+    };
-+
-+This will appear on the IIO bus as the ``voltage2`` channel. The processed value
-+(*raw × scale*) will be the voltage between the ``INx`` relative to ``REFGND``.
-+(Offset is always 0 when pairing with ``REFGND``.)
-+
-+Pseudo-differential input
-+^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+Each ``INx`` pin can be used as a pseudo-differential input in conjunction with
-+the ``COM`` pin. The device tree will look like this:
-+
-+.. code-block::
-+
-+    com-supply = <&vref_div_2>;
-+
-+    channel@3 {
-+        reg = <3>;
-+        adi,pin-pairing = "com";
-+        bipolar;
-+    };
-+
-+This will appear on the IIO bus as the ``voltage3`` channel. The processed value
-+(*(raw + offset) × scale*) will be the voltage measured on ``INx`` relative to
-+``REFGND``. (The offset is determined by the ``com-supply`` voltage.)
-+
-+Differential input
-+^^^^^^^^^^^^^^^^^^
-+
-+An even-numbered ``INx`` pin and the following odd-numbered ``INx`` pin can be
-+used as a differential pair. The device tree for using ``IN0`` as the positive
-+input and ``IN1`` as the negative input will look like this:
-+
-+.. code-block::
-+
-+    channel@0 {
-+        reg = <0>;
-+        adi,pin-pairing = "next";
-+        bipolar;
-+    };
-+
-+This will appear on the IIO bus as the ``voltage0-voltage1`` channel. The
-+processed value (*raw × scale*) will be the voltage difference between the two
-+pins. (Offset is always 0 for differential channels.)
-+
-+VCC supply
-+----------
-+
-+The chip supports being powered by an external LDO via the ``VCC`` input or an
-+internal LDO via the ``LDO_IN`` input. The driver looks at the device tree to
-+determine which is being used. If ``ldo-supply`` is present, then the internal
-+LDO is used. If ``vcc-supply`` is present, then the external LDO is used and
-+the internal LDO is disabled.
-+
-+Reference voltage
-+-----------------
-+
-+The chip supports an external reference voltage via the ``REF`` input or an
-+internal buffered reference voltage via the ``REFIN`` input. The driver looks
-+at the device tree to determine which is being used. If ``ref-supply`` is
-+present, then the external reference voltage is used and the internal buffer is
-+disabled. If ``refin-supply`` is present, then the internal buffered reference
-+voltage is used.
-+
-+Unimplemented features
-+----------------------
-+
-+- Additional wiring modes
-+- Buffered reads
-+- Threshold events
-+- Oversampling
-+- Gain/offset calibration
-+- GPIO support
-+- CRC support
-diff --git a/Documentation/iio/index.rst b/Documentation/iio/index.rst
-index 4c13bfa2865c..df69a76bf583 100644
---- a/Documentation/iio/index.rst
-+++ b/Documentation/iio/index.rst
-@@ -17,6 +17,7 @@ Industrial I/O Kernel Drivers
- .. toctree::
-    :maxdepth: 1
- 
-+   ad4695
-    ad7944
-    adis16475
-    adis16480
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 611b7929e650..edd1a4e8f538 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1198,6 +1198,7 @@ L:	linux-iio@vger.kernel.org
- S:	Supported
- W:	https://ez.analog.com/linux-software-drivers
- F:	Documentation/devicetree/bindings/iio/dac/adi,ad3552r.yaml
-+F:	Documentation/iio/index.rst
- F:	drivers/iio/dac/ad3552r.c
- 
- ANALOG DEVICES INC AD4130 DRIVER
+So the end use case example given was if an application opened the USB 
+sound card first, it can see if there is an offload path available.  If 
+there is then it can enable the offload path on the corresponding card 
+if desired.
 
--- 
-2.45.2
+>> +Mixer Examples
+>> +--------------
+>> +
+>> +    ::
+>> +
+>> +      tinymix -D 0 set 'USB Offload Playback Route Card Select' 2
+>> +      tinymix -D 0 set 'USB Offload Playback Route PCM Select' 0
+>> +
+>> +
+>> +    ::
+>> +
+>> +      tinymix -D 0 get 'USB Offload Playback Route Card Select'
+>> +      --> 2 (range -1->32)
+>> +      tinymix -D 0 get 'USB Offload Playback Route PCM Select'
+>> +      --> 0 (range -1->255)
+>> +
+>> +    ::
+>> +
+>> +      tinymix -D 0 get 'USB Offload Playback Route Card Status'
+>> +      --> 2 (range -1->32)   [OFFLD active]
+>> +      --> -1 (range -1->32) [OFFLD idle]
+>> +      tinymix -D 0 get 'USB Offload Playback Route PCM Status'
+>> +      --> 0 (range -1->255)   [OFFLD active]
+>> +      --> -1 (range -1->255) [OFFLD idle]
+>> +
+>> +    ::
+>> +
+>> +      tinymix -D 1 get 'USB Offload Playback Capable Card'
+>> +      --> 0 (range -1->32)
+>>
+> 
+> Yes, looking at examples again, I'm still not sure I understand. There 
+> are two cards and you do linking between them, this feels broken by 
+> design. From my point of view USB Offload should be property of USB card 
+> and not involve any other card in a system.
+> 
 
+Main benefit to having two cards (keeping one for USB SND and another 
+for the ASoC platform sound card) is that current applications won't 
+break.  The behavior is the same, in that if something opens the USB 
+sound card, it will go through the same non-offloaded path.  During 
+initial reviews, I think this was a big point where folks wanted the USB 
+PCM path to still be an option.
+
+If applications want to add the offload capabilities to its environment, 
+they can enable it as an additional feature.
+
+Thanks
+Wesley Cheng
 
