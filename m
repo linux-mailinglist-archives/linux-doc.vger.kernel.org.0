@@ -1,213 +1,174 @@
-Return-Path: <linux-doc+bounces-18478-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-18480-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A067906751
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2024 10:46:15 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B2019068AE
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2024 11:28:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B30991F2133F
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2024 08:46:14 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id CE893B25CB1
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2024 09:28:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 93AE213777D;
-	Thu, 13 Jun 2024 08:45:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DB43813EFE1;
+	Thu, 13 Jun 2024 09:28:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=3xx0.net header.i=@3xx0.net header.b="lp2qj7O8";
-	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="MUzGjO82"
+	dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b="GNKFMSUW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from wflow7-smtp.messagingengine.com (wflow7-smtp.messagingengine.com [64.147.123.142])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6EF22AF1D;
-	Thu, 13 Jun 2024 08:45:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=64.147.123.142
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5E8813E03A
+	for <linux-doc@vger.kernel.org>; Thu, 13 Jun 2024 09:28:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718268329; cv=none; b=o2gp9C5stBnfAuJMDGann63iR2+w2M4e88Kd3awclKApYaVGejMtt9JYab7D5u998QGrckOavwSgBTojNZjAO1coty9q9+ZDVt9nZdW4HC4Mr0YMsVcCD33d3JxXSLezca/t2P9Bk4gQ78uIEfG9ezqg/G70eFpXi2WFNvv9nxs=
+	t=1718270923; cv=none; b=E0rHhm6jk3GMWN+RE7W3p29QL1SVq081ZhRUK37KV8kdePLLsK6LybZ6MiR8WUozLwJSSPDrb8oRkTmDfCb4w3MmQZWPf1a5DbszzA9TXqR8xJ9j/IWQ2rS63Ogu498BfYgW/IjVpHdwllUXx3Yxo1Rth1JIfxbHFhm/KKJ/0y8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718268329; c=relaxed/simple;
-	bh=LMdhkZ0nNad0++Iw4xjgrDk4jTiMrTUkzNpl4vhiYNE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dKtqZ8NYVe1wLpfczxiRBEzrbnTUKCdJRcKW05GnCNQt+XkEUI88KS97VzRvZMC4BZPn/NYnYv7BOrfkoCRKtQlZxFwWnDIPT3VvfPUfn+c3/UWbKyjfM0/hztVgxDvM5cTHGhnq+ecKgPS9Shs6Z+4l82Wtkw0UgeCfGAQVIXM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=3xx0.net; spf=pass smtp.mailfrom=3xx0.net; dkim=pass (2048-bit key) header.d=3xx0.net header.i=@3xx0.net header.b=lp2qj7O8; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=MUzGjO82; arc=none smtp.client-ip=64.147.123.142
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=3xx0.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=3xx0.net
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
-	by mailflow.west.internal (Postfix) with ESMTP id 4DC642CC01C6;
-	Thu, 13 Jun 2024 04:45:24 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute2.internal (MEProxy); Thu, 13 Jun 2024 04:45:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=3xx0.net; h=cc
-	:cc:content-transfer-encoding:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1718268323;
-	 x=1718271923; bh=Duc4P1DZW9aX+Ejfjk47XQeC4s374o0lUU3oX+TajRo=; b=
-	lp2qj7O84zuWkhldM1NCcWcsJ6g+awm7EbTvAOuAcPCn0mdcp7MeiZrcbuO/LAct
-	roCd/EKE04jdiOM5G9klXQOMLz6018a/RszpXoEy2a8MnMBBp/smMcqPrvuAXi0S
-	maGz6Il3BLvmqfgte5/uWnPOs2ps4XTPEdcXhgrAniqgFVr5npukQWoS86+TRLuj
-	phWfxgBFuk5XJmqmDuFCsgmQgXF9mj8ArpNGXHaSxMbQdxmIzq016DpgdQOtGcyl
-	84HyOo2yN6l+znGkdZgm5hh5PQ0hsnDq+1ADstCalDcZbmthlPzwaRCMAnHioAsG
-	iH6S6n4xs4obPy18lqlCjg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1718268323; x=
-	1718271923; bh=Duc4P1DZW9aX+Ejfjk47XQeC4s374o0lUU3oX+TajRo=; b=M
-	UzGjO82mh/NsB26L3vRAl2u49KSI3m9vthRi9a+Et6gRkFztGnIu11FkgYADv/EH
-	lJuGoxQnvov0HenSuF5QcBq5dO16TgCsWSBXtqyiEYQm8t+oGWxuAUIfe4YOSykL
-	5D5oWPIdrawZwf0VJ6EF5fMVl5p3pdfXIfPXqvwNd5Gq0EYgJH5cj7WVXsYog+Ng
-	0rPr8fIevJqb6TLcpV2dsncN3eEdzPq81/BDxdbOAm+Ts3xyYEJvT09nSCRdyU5a
-	QWatMogGwEm6OXSGCVihQRZUjOlapB8EqNnq8Gui/PlDxCud0b4wCFKxmOLmeWdJ
-	Yj5e00O7+RejRbbMY1Umw==
-X-ME-Sender: <xms:o7FqZuRM-I41FTbF3TWfU59QEGZVuHk-VBMczvSDOM8gPVxdidGPRw>
-    <xme:o7FqZjyx89YeqkezBaxx9kYGA6ae98Xqy5IH3NW_oGHSgrSR5nAkYqoWQ8L0a0_ML
-    w24cPA4AuZMvvj8Ggg>
-X-ME-Received: <xmr:o7FqZr22rtn7SAPOi4siw_iR2qQOXq9H-b0mEy17n42R-f9DmtRwRGJxF13N2MjcsNaVKHxW8J2BI4mQoHWFD6M>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfedujedgtdeiucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvfevuffkfhggtggugfgjsehtkefstddttdejnecuhfhrohhmpeflohhn
-    rghthhgrnhcuvegrlhhmvghlshcuoehjtggrlhhmvghlshesfeiggidtrdhnvghtqeenuc
-    ggtffrrghtthgvrhhnpeetgedutdfggeetleefhfeuhedtheduteekieduvdeigeegvdev
-    vddtieekiedvheenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
-    hrohhmpehjtggrlhhmvghlshesfeiggidtrdhnvght
-X-ME-Proxy: <xmx:o7FqZqAIsUiuR-j183p4TJiST7IjY1t1Ce9mUm8DQcTCKRnHenf_OA>
-    <xmx:o7FqZngw5PDa584U3Wh1jwTvQl2qeKL7_2dB0J2zsBM9sM_TByA_4A>
-    <xmx:o7FqZmoPO9Qep-lobaoGhd20w8bSfXQ9DTRKleW3GdYNkJhI4Hqo_w>
-    <xmx:o7FqZqhdVAG5teRZanIWKQVC8C5sAJf45nKlmpoUmtLFT-WNQdPFUQ>
-    <xmx:o7FqZmSdoWwB05Nk0KdtXpg1T3Zo6usTcrge4t5X0g2XO13hsvlrej2W>
-Feedback-ID: i76614979:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 13 Jun 2024 04:45:19 -0400 (EDT)
-Date: Thu, 13 Jun 2024 01:50:29 -0700
-From: Jonathan Calmels <jcalmels@3xx0.net>
-To: John Johansen <john.johansen@canonical.com>
-Cc: Paul Moore <paul@paul-moore.com>, brauner@kernel.org,
- 	ebiederm@xmission.com, Jonathan Corbet <corbet@lwn.net>,
- 	James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>,
- 	KP Singh <kpsingh@kernel.org>,
- Matt Bobrowski <mattbobrowski@google.com>,
- 	Alexei Starovoitov <ast@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>,
- 	Andrii Nakryiko <andrii@kernel.org>,
- Martin KaFai Lau <martin.lau@linux.dev>,
- 	Eduard Zingerman <eddyz87@gmail.com>, Song Liu <song@kernel.org>,
- 	Yonghong Song <yonghong.song@linux.dev>,
- John Fastabend <john.fastabend@gmail.com>,
- 	Stanislav Fomichev <sdf@google.com>, Hao Luo <haoluo@google.com>,
- Jiri Olsa <jolsa@kernel.org>, 	Luis Chamberlain <mcgrof@kernel.org>,
- Kees Cook <kees@kernel.org>, 	Joel Granados <j.granados@samsung.com>,
- David Howells <dhowells@redhat.com>,
- 	Jarkko Sakkinen <jarkko@kernel.org>,
- Stephen Smalley <stephen.smalley.work@gmail.com>,
- 	Ondrej Mosnacek <omosnace@redhat.com>, Mykola Lysenko <mykolal@fb.com>,
- Shuah Khan <shuah@kernel.org>, 	containers@lists.linux.dev,
- linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- 	linux-doc@vger.kernel.org, linux-security-module@vger.kernel.org,
- bpf@vger.kernel.org, 	apparmor@lists.ubuntu.com,
- keyrings@vger.kernel.org, selinux@vger.kernel.org,
- 	linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH v2 4/4] bpf,lsm: Allow editing capabilities in BPF-LSM
- hooks
-Message-ID: <zwh766li4dwx5be6uxnxl2lhtxb4jsiua4atilpqvoeuksgz2h@v3pna3o3ewkp>
-References: <20240609104355.442002-5-jcalmels@3xx0.net>
- <CAHC9VhT5XWbhoY2Nw5jQz4GxpDriUdHw=1YsQ4xLVUtSnFxciA@mail.gmail.com>
- <z2bgjrzeq7crqx24chdbxnaanuhczbjnq6da3xw6al6omjj5xz@mqbzzzfva5sw>
- <887a3658-2d8d-4f9e-98f2-27124bb6f8e6@canonical.com>
- <CAHC9VhQFNPJTOct5rUv3HT6Z2S20mYdW75seiG8no5=fZd7JjA@mail.gmail.com>
- <uuvwcdsy7o4ulmrdzwffr6uywfacmlkjrontmjdj44luantpok@dtatxaa6tzyv>
- <CAHC9VhRnthf8+KgfuzFHXWEAc9RShDO0G_g0kc1OJ-UTih1ywg@mail.gmail.com>
- <rgzhcsblub7wedm734n56cw2qf6czjb4jgck6l5miur6odhovo@n5tgrco74zce>
- <CAHC9VhRGJTND25MFk4gR-FGxoLhMmgUrMpz_YoMFOwL6kr28zQ@mail.gmail.com>
- <ba8d88c8-a251-4c1f-8653-1082b0a101dd@canonical.com>
+	s=arc-20240116; t=1718270923; c=relaxed/simple;
+	bh=vG4qRDV6pQg/Th6atlB32vTGlz7L1/BU8b4zcWJlXT8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=TgRsiq9ImwjNXyBMeNo9+KpCm0zdDCx2+Gz6orrVyC3GafIcE5ksP0rybMmP6l/URie5qFn52Wd5q2rvLeOb41gh/LzD+5ftKMnqJuAhcAbqEvDUHDVbkRFtWlKNl/XGdcgibdnrCBwXH6z+5RDBc7H1V+EHePzgD0UcRsD2IuQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl; spf=none smtp.mailfrom=bgdev.pl; dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b=GNKFMSUW; arc=none smtp.client-ip=209.85.128.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bgdev.pl
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4217d808034so8238125e9.3
+        for <linux-doc@vger.kernel.org>; Thu, 13 Jun 2024 02:28:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1718270920; x=1718875720; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xTL7AN68DXuCJK85qnCP9b24mcfMbuTgeoppKNKx4+E=;
+        b=GNKFMSUWkWy9RL8bJX1e55EBLWJlwKz5eK28rqMTmbqIHWBldOxrDsAoKr1g82bOxm
+         59j3NULqHmCmQBrBWcl/hpGwE820D2JbCK10zP+9U5Sdx7UmjdRbGK/AzyYtHs2QZB+L
+         qgBMFOkX4Th+MK3Tsky9obDv8umao1dsDel6hzmbfqBBn3iCsDmxH+eSnOuR16oAoplS
+         kygN/W1NjIoF8MJBOhFeQB9SCxMINt8vKeoZ2WYfHz8Q02DMdpjIAA4enKv/swlqLEmE
+         bjTPVkOCu6++iiLhY7JNok4KV636NfrppOACCyOjRDz0CICQSPyVg1ujdF+nxkDfD9K+
+         pNTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718270920; x=1718875720;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=xTL7AN68DXuCJK85qnCP9b24mcfMbuTgeoppKNKx4+E=;
+        b=V0s/E5iT64ZNjXbmysU6txx9tZALd1biuPp5ADTu3Zgqmpu7iCZWoUMdyMnRSfpsIM
+         UO3pPQhCD3OxhfMH/Ef8vVDsFRO/NnicpfW0gU1qVddB4M4fQOh6Lm7SW+Cqz4uexraI
+         BmM+q/PKFz+9oLbxqehfJkXYasezzz1eWXigvidTeeOz8S8VQat9npnAXsO2Q22xh2a8
+         VM9REkFmNfWK3qLS4RH/0I/9mK+gusoXxoVU3kq3Th0avojMQ9t5FufScwkQeBIYJvIl
+         bpywBJNrq2kYNQ11cLHArN6qokbdTXX2M3gLeJ2s69tbJFkOHZk/Gxut7W+d/xmEyiWt
+         0kVg==
+X-Forwarded-Encrypted: i=1; AJvYcCUwmqBptxUFwQYbdei7G25L2Yi3C0vpk1/bUpxq99PvvtjJoEc9CcDTwWsfyBNIS5P25eckjUPcXJ1GADDVyCh+0bKCNy2VrzuO
+X-Gm-Message-State: AOJu0YyCmZDcsNGGdyx6dnmTAWXmmslso6oBxafM5DVviZtyDE/Jz9Mq
+	a9SB7DJ54w2cbtK41k3nI7sVyLH1j++GfozRWuytlzQ+uyUv6whj35oPTLIyde4=
+X-Google-Smtp-Source: AGHT+IHyJhmfHkwmz+c60I80UBc53UKeGLW66TsVm0UYMnuExWwyR8x8YdHhjF4yErR5gdcvD6NbTg==
+X-Received: by 2002:a05:600c:470b:b0:422:52c3:7fe0 with SMTP id 5b1f17b1804b1-422864aef80mr42455395e9.22.1718270920108;
+        Thu, 13 Jun 2024 02:28:40 -0700 (PDT)
+Received: from brgl-uxlite.home ([2a01:cb1d:8d3:3800:875c:e292:3280:ccac])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-422874e73e8sm54990205e9.43.2024.06.13.02.28.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Jun 2024 02:28:39 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Linus Walleij <linus.walleij@linaro.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: linux-gpio@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [PATCH v8 0/2] misc: add a virtual driver for testing the GPIO API
+Date: Thu, 13 Jun 2024 11:28:28 +0200
+Message-ID: <20240613092830.15761-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <ba8d88c8-a251-4c1f-8653-1082b0a101dd@canonical.com>
 
-On Wed, Jun 12, 2024 at 08:54:28PM GMT, John Johansen wrote:
-> On 6/12/24 10:29, Paul Moore wrote:
-> > On Wed, Jun 12, 2024 at 4:15 AM Jonathan Calmels <jcalmels@3xx0.net> wrote:
-> > > On Tue, Jun 11, 2024 at 06:38:31PM GMT, Paul Moore wrote:
-> > > > On Tue, Jun 11, 2024 at 6:15 PM Jonathan Calmels <jcalmels@3xx0.net> wrote:
-> > 
-> > ...
-> > 
-> > > > > Arguably, if we do want fine-grained userns policies, we need LSMs to
-> > > > > influence the userns capset at some point.
-> > > > 
-> > > > One could always use, or develop, a LSM that offers additional
-> > > > controls around exercising capabilities.  There are currently four
-> > > > in-tree LSMs, including the capabilities LSM, which supply a
-> > > > security_capable() hook that is used by the capability-based access
-> > > > controls in the kernel; all of these hook implementations work
-> > > > together within the LSM framework and provide an additional level of
-> > > > control/granularity beyond the existing capabilities.
-> > > 
-> > > Right, but the idea was to have a simple and easy way to reuse/trigger
-> > > as much of the commoncap one as possible from BPF. If we're saying we
-> > > need to reimplement and/or use a whole new framework, then there is
-> > > little value.
-> > 
-> > I can appreciate how allowing direct manipulation of capability bits
-> > from a BPF LSM looks attractive, but my hope is that our discussion
-> > here revealed that as you look deeper into making it work there are a
-> > number of pitfalls which prevent this from being a safe option for
-> > generalized systems.
-> > 
-> > > TBH, I don't feel strongly about this, which is why it is absent from
-> > > v1. However, as John pointed out, we should at least be able to modify
-> > > the blob if we want flexible userns caps policies down the road.
-> > 
-> > As discussed in this thread, there are existing ways to provide fine
-> > grained control over exercising capabilities that can be safely used
-> > within the LSM framework.  I don't want to speak to what John is
-> > envisioning, but he should be aware of these mechanisms, and if I
-> > recall he did voice a level of concern about the same worries I
-> > mentioned.
-> > 
-> 
-> sorry, I should have been more clear. I envision LSMs being able to
-> update their own state in the userns hook.
-> 
-> Basically the portion of the patch that removes const from the
-> userns hook.
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Yes, pretty sure we'll need this regardless.
+The GPIO subsystem used to have a serious problem with undefined behavior
+and use-after-free bugs on hot-unplug of GPIO chips. This can be
+considered a corner-case by some as most GPIO controllers are enabled
+early in the boot process and live until the system goes down but most
+GPIO drivers do allow unbind over sysfs, many are loadable modules that
+can be (force) unloaded and there are also GPIO devices that can be
+dynamically detached, for instance CP2112 which is a USB GPIO expender.
 
-> An LSM updating the capset is worrysome for all the reasons you
-> pointed out, and I think a few more. I haven't had a chance to really
-> look at v2 yet, so I didn't want to speak directly on the bpf part of
-> the patch without first giving a good once over.
-> 
-> > I'm happy to discuss ways in which we can adjust the LSM hooks/layer
-> > to support different approaches to capability controls, but one LSM
-> > directly manipulating the state of another is going to be a no vote
-> > from me.
-> > 
-> I might not be as hard no as Paul here, I am always willing to listen
-> to arguments, but it would have to be a really good argument to
-> modify the capset, when there are multiple LSMs in play on a system.
+Bugs can be triggered both from user-space as well as by in-kernel users.
+We have the means of testing it from user-space via the character device
+but the issues manifest themselves differently in the kernel.
 
-The way I see it, it's more about enhancing the capability LSM with BPF
-hooks and have it modify its own state dynamically, not so much
-crosstalk between two distinct LSM frameworks (say one where the BPF
-LSM implements a lot of things like capable()).
+This is a proposition of adding a new virtual driver - a configurable
+GPIO consumer that can be configured over configfs (similarly to
+gpio-sim) or described on the device-tree.
 
-In this context and with enough safeguards (say we only allow dropping
-caps) this could be a net positive. Sure, ordering could come into play
-in very specific scenarios, but at this point I would expect the
-admin/LSM author to be conscious about it.
+This driver is aimed as a helper in spotting any regressions in
+hot-unplug handling in GPIOLIB.
 
-If we think there is no way we can come up with something that's safe
-enough, and that the risks outweigh the benefits, fine by me, we can
-drop this patch from the series.
+v7 -> v8:
+- move the driver to drivers/misc/ as it's not a GPIO provider and so
+  its place is not in drivers/gpio/
+- rework the data structures to make them more compact using unions
+- use correct string helpers for given use-cases
+- drop dependency on the gpio/driver.h, string.h and kernel.h headers
+- add a patch exporting to_ext_attribute() to be used by this driver
+- various minor improvements suggested by Andy
+Link to v7: https://lore.kernel.org/linux-gpio/20240527144054.155503-1-brgl@bgdev.pl/
+
+v6 -> v7:
+- this is a complete rewrite of the original idea, the entire interface
+  has changed so it warrants a new round of reviews
+Link to v6: https://lore.kernel.org/linux-gpio/20230817184356.25020-1-brgl@bgdev.pl/
+
+v5 -> v6:
+- initialize the flags temp variables at declaration and hopefully make
+  Andy happy finally :)
+
+v4 -> v5:
+- add the gpio-consumer docs to the admin-guide/gpio/ index (reported
+  by kernel test robot <lkp@intel.com>)
+
+v3 -> v4:
+- fix the toggle value assignment
+- use guard(mutex)() wherever we can return directly from the subsequent
+  function call
+- use skip_spaces() + strim() to avoid having to do a memmove() when
+  stripping strings off whitespaces
+- DON'T try to save a couple LOC in ifdefs if that makes them less
+  readable (Andy :) )
+
+v2 -> v3:
+- use cleanup.h interfaces
+- add some clarifying commets
+- more minor code tweaks
+
+RFC -> v2:
+- add documentation
+- fix various issues pointed out by Andy: use struct_size() where
+  applicable, improve the logic when storing the 'live' property,
+  improve log messages, remove commas in terminators, etc.
+
+Bartosz Golaszewski (2):
+  drivers: export to_ext_attr()
+  misc: gpio-virtuser: new virtual testing driver for the GPIO API
+
+ .../admin-guide/gpio/gpio-virtuser.rst        |  176 ++
+ Documentation/admin-guide/gpio/index.rst      |    1 +
+ MAINTAINERS                                   |    8 +
+ drivers/base/core.c                           |    2 -
+ drivers/misc/Kconfig                          |    8 +
+ drivers/misc/Makefile                         |    1 +
+ drivers/misc/gpio-virtuser.c                  | 1790 +++++++++++++++++
+ include/linux/device.h                        |    6 +
+ 8 files changed, 1990 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/admin-guide/gpio/gpio-virtuser.rst
+ create mode 100644 drivers/misc/gpio-virtuser.c
+
+-- 
+2.43.0
+
 
