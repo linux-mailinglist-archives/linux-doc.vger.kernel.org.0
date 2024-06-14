@@ -1,66 +1,66 @@
-Return-Path: <linux-doc+bounces-18588-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-18590-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id B880E908671
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2024 10:37:39 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7783D908696
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2024 10:41:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6C2B81F23C5D
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2024 08:37:39 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8E6241C20D3D
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2024 08:41:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E38AD190061;
-	Fri, 14 Jun 2024 08:37:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 266441850A4;
+	Fri, 14 Jun 2024 08:41:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b="YW2yeP5p"
+	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b="ulel9lx9"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.154.123])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95BDC1849;
-	Fri, 14 Jun 2024 08:37:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B61E4186E57;
+	Fri, 14 Jun 2024 08:41:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=68.232.154.123
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718354253; cv=none; b=qVpHxb06o/CNv/e/wjbAAra23FA5c9GHQyuDkZ2S4KGl5Rl3Ly/PfLJa2shkh9MN4DhAiCBSiSe9hR4XEGHdCMfYOKKdOzMYrAgBqQd0vw5btQykblkY/PEb1n1UjjJx9SmbpFHkL+e1hRwKM70NcszWAyDIvNTUaOYlwjoLENo=
+	t=1718354479; cv=none; b=EM7TzQZa/djP1lDqCjQZ8UzsmoKkWIPoLiWwiCeu97Y9ZNSI66aTHM8HHBU/zYlgy2QAw0YPQJbzzCS/V1GAYwfEmz+u9E/KJNgmkCrJiHbGRrPjH0SK94/N/4JSO1CAcmynLmlLxN2FuhA5pSLO+5Jz35m5Hpx8+SHmzd5aMUU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718354253; c=relaxed/simple;
-	bh=IE56RPoqKyRQy8bsSYTv0dvMwFiHl4QLf2TB7HaBQLQ=;
+	s=arc-20240116; t=1718354479; c=relaxed/simple;
+	bh=ZDOfCAptFctnoa5A1SoVoCGucPsxFM9g5sCeJUxH9HE=;
 	h=Date:From:To:CC:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Iu7t63/NqJwZnhLfduzfD0JvGcSlHoRjgwFni/WMEGnBTrsnKC9qhoGb4R5oqGohz4uLAe/Er3bpRPU/g1RL29c1moApE9nsDK+bK+ihJ8P+d3d69hI7O56VRo76IWi9B02WM65dcCzNYkTSadnp4+kd9YJczXaIEC0q1Y5A3XI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=microchip.com; spf=pass smtp.mailfrom=microchip.com; dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b=YW2yeP5p; arc=none smtp.client-ip=68.232.154.123
+	 Content-Type:Content-Disposition:In-Reply-To; b=BiS5lH532MKzZa4LWhfyYl3ftlVx4nsjx1ZRfjU3FN1HujRWX7KN0VpP7P6KScUsMhPLJzecbujrQd6WbPQeEBYE6gNmPJLRN6NHW7XPD78Nsbreao3mzy059Gy+4UxEdDcpyv8yVxthrLL9+FVPf/GrkFXCECcpxvvYtyjU67Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=microchip.com; spf=pass smtp.mailfrom=microchip.com; dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b=ulel9lx9; arc=none smtp.client-ip=68.232.154.123
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
-  t=1718354251; x=1749890251;
+  t=1718354474; x=1749890474;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=IE56RPoqKyRQy8bsSYTv0dvMwFiHl4QLf2TB7HaBQLQ=;
-  b=YW2yeP5pZzSts/P3luQ0AgIei6MKe5tpWM8hJQ+kw8c6ATsNU6apzhIu
-   h7DM5EHCLKgPNQz8clwUulwuJRbIc/Qg2yhzHj6O6JaeBebqclx4mODHV
-   32AAQ5nJIUIBzcKhETJO/sB04O2ysehK8Ptb+1J+YBboh6kfrSdncuFuu
-   3H1/fsocS4RyHltLqWbq2lMRhBB2Er6EHPz2kOHtLJ6CF0TkRS6hUca4o
-   7cDFsxnz0JvYE8LldRGeW1eSVoES9iAwC+pIJ8kSiqgrVdn2KAJiw3d6C
-   pp5q8Bv62572VXlW5kj94xxkeYgq86PPKQxJhDOEYEy3xUKSLNHqnHGMA
-   Q==;
-X-CSE-ConnectionGUID: NG7Mft5MRmOGOwVcOw10MA==
-X-CSE-MsgGUID: T/1ZNyhISGCswnvApzi+sQ==
+  bh=ZDOfCAptFctnoa5A1SoVoCGucPsxFM9g5sCeJUxH9HE=;
+  b=ulel9lx9wnq5xL2xLIq/k/nJviVGsyRvZi0ToURNM/IKjr9ifOtqeTfE
+   XWWwIVzkBYMlQlzo8cxPU49PEvryaP44kxg6qwJPJjNYlu2RsvydKkguJ
+   YTcRCJAWWnc/jwG2F4orJk2E9a89MMl/+1cq5rnoCm4nf5FIlbLEefa4a
+   50RmUC3xeJhusZDrCFbdod6TQ81q7P0nEGwU4WI496jKO2SXreeem2WFZ
+   wdxlc3FpXNexDYz7yF0eQ87adtQAtjJ0vCg86N6DjmXjzIDqgoROvKQvi
+   Ja/1EM3ujQVyjNY5aYyrT+60E4YntBLGXEg0yU8j53Znx4vka6h+IGR4T
+   g==;
+X-CSE-ConnectionGUID: 4NPx0QlnRdWIkhBEFQ6o0w==
+X-CSE-MsgGUID: Ak2QJkQ1QT2Hb92DGF/MQA==
 X-IronPort-AV: E=Sophos;i="6.08,237,1712646000"; 
-   d="asc'?scan'208";a="194925024"
+   d="asc'?scan'208";a="28160744"
 X-Amp-Result: UNKNOWN
 X-Amp-Original-Verdict: FILE UNKNOWN
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
-  by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 14 Jun 2024 01:37:28 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+  by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 14 Jun 2024 01:41:13 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Fri, 14 Jun 2024 01:37:19 -0700
-Received: from wendy (10.10.85.11) by chn-vm-ex04.mchp-main.com (10.10.85.152)
+ 15.1.2507.35; Fri, 14 Jun 2024 01:40:52 -0700
+Received: from wendy (10.10.85.11) by chn-vm-ex01.mchp-main.com (10.10.85.143)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Fri, 14 Jun 2024 01:37:13 -0700
-Date: Fri, 14 Jun 2024 09:36:55 +0100
+ Transport; Fri, 14 Jun 2024 01:40:46 -0700
+Date: Fri, 14 Jun 2024 09:40:29 +0100
 From: Conor Dooley <conor.dooley@microchip.com>
 To: Jesse Taube <jesse@rivosinc.com>
 CC: <linux-riscv@lists.infradead.org>, Jonathan Corbet <corbet@lwn.net>, Paul
@@ -83,9 +83,10 @@ CC: <linux-riscv@lists.infradead.org>, Jonathan Corbet <corbet@lwn.net>, Paul
 	<devicetree@vger.kernel.org>
 Subject: Re: [PATCH v2 4/6] RISC-V: Detect unaligned vector accesses
  supported.
-Message-ID: <20240614-viral-dinghy-71d5f6585a55@wendy>
+Message-ID: <20240614-distaste-negligee-ba9216a8684e@wendy>
 References: <20240613191616.2101821-1-jesse@rivosinc.com>
  <20240613191616.2101821-5-jesse@rivosinc.com>
+ <20240614-viral-dinghy-71d5f6585a55@wendy>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -93,55 +94,58 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="Ytzm/oHaDkbsSGqU"
+	protocol="application/pgp-signature"; boundary="2C5Ng6p8Cz1W0Nqu"
 Content-Disposition: inline
-In-Reply-To: <20240613191616.2101821-5-jesse@rivosinc.com>
+In-Reply-To: <20240614-viral-dinghy-71d5f6585a55@wendy>
 
---Ytzm/oHaDkbsSGqU
+--2C5Ng6p8Cz1W0Nqu
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 13, 2024 at 03:16:13PM -0400, Jesse Taube wrote:
-> --- a/arch/riscv/kernel/unaligned_access_speed.c
-> +++ b/arch/riscv/kernel/unaligned_access_speed.c
-> @@ -19,7 +19,8 @@
->  #define MISALIGNED_BUFFER_ORDER get_order(MISALIGNED_BUFFER_SIZE)
->  #define MISALIGNED_COPY_SIZE ((MISALIGNED_BUFFER_SIZE / 2) - 0x80)
-> =20
-> -DEFINE_PER_CPU(long, misaligned_access_speed);
-> +DEFINE_PER_CPU(long, misaligned_access_speed) =3D RISCV_HWPROBE_MISALIGN=
-ED_UNKNOWN;
-> +DEFINE_PER_CPU(long, vector_misaligned_access) =3D RISCV_HWPROBE_VEC_MIS=
-ALIGNED_UNSUPPORTED;
-> =20
->  #ifdef CONFIG_RISCV_PROBE_UNALIGNED_ACCESS
->  static cpumask_t fast_misaligned_access;
-> @@ -268,12 +269,18 @@ static int check_unaligned_access_all_cpus(void)
-> =20
->  	if (riscv_has_extension_unlikely(RISCV_ISA_EXT_ZICCLSM)) {
->  		for_each_online_cpu(cpu) {
-> +#ifdef CONFIG_RISCV_VECTOR_MISALIGNED
-> +			per_cpu(vector_misaligned_access, cpu) =3D RISCV_HWPROBE_VEC_MISALIGN=
-ED_FAST;
-> +#endif
-> +#ifdef CONFIG_RISCV_MISALIGNED
->  			per_cpu(misaligned_access_speed, cpu) =3D RISCV_HWPROBE_MISALIGNED_FA=
-ST;
-> +#endif
+On Fri, Jun 14, 2024 at 09:36:55AM +0100, Conor Dooley wrote:
+> On Thu, Jun 13, 2024 at 03:16:13PM -0400, Jesse Taube wrote:
+> > --- a/arch/riscv/kernel/unaligned_access_speed.c
+> > +++ b/arch/riscv/kernel/unaligned_access_speed.c
+> > @@ -19,7 +19,8 @@
+> >  #define MISALIGNED_BUFFER_ORDER get_order(MISALIGNED_BUFFER_SIZE)
+> >  #define MISALIGNED_COPY_SIZE ((MISALIGNED_BUFFER_SIZE / 2) - 0x80)
+> > =20
+> > -DEFINE_PER_CPU(long, misaligned_access_speed);
+> > +DEFINE_PER_CPU(long, misaligned_access_speed) =3D RISCV_HWPROBE_MISALI=
+GNED_UNKNOWN;
+> > +DEFINE_PER_CPU(long, vector_misaligned_access) =3D RISCV_HWPROBE_VEC_M=
+ISALIGNED_UNSUPPORTED;
+> > =20
+> >  #ifdef CONFIG_RISCV_PROBE_UNALIGNED_ACCESS
+> >  static cpumask_t fast_misaligned_access;
+> > @@ -268,12 +269,18 @@ static int check_unaligned_access_all_cpus(void)
+> > =20
+> >  	if (riscv_has_extension_unlikely(RISCV_ISA_EXT_ZICCLSM)) {
+> >  		for_each_online_cpu(cpu) {
+> > +#ifdef CONFIG_RISCV_VECTOR_MISALIGNED
+> > +			per_cpu(vector_misaligned_access, cpu) =3D RISCV_HWPROBE_VEC_MISALI=
+GNED_FAST;
+> > +#endif
+> > +#ifdef CONFIG_RISCV_MISALIGNED
+> >  			per_cpu(misaligned_access_speed, cpu) =3D RISCV_HWPROBE_MISALIGNED_=
+FAST;
+> > +#endif
+>=20
+> Can you IS_ENABLED()-ify these two as well please?
 
-Can you IS_ENABLED()-ify these two as well please?
+Ah, you can't cos the variable doesn't exist in the other case.
 
---Ytzm/oHaDkbsSGqU
+--2C5Ng6p8Cz1W0Nqu
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZmwBJwAKCRB4tDGHoIJi
-0o83AP4l3yMCtJznhon+dFQUAVsO6wRiQb2NfRzHzaOsUmMyyQEA3rLtvEQrCOU7
-yZz/D4drHvHR3eCHR57Lvgb+yeiQJww=
-=ToT+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZmwB/QAKCRB4tDGHoIJi
+0lw0AP0dWhFA2S8cu1ZnOnJgSeMCQC978npy6RKjjZB2oEKb2wEAz/ZaOC0iE5/z
+bsJe/o/CJnvi7AXZcpQIaYdEDBNgIgs=
+=RIo5
 -----END PGP SIGNATURE-----
 
---Ytzm/oHaDkbsSGqU--
+--2C5Ng6p8Cz1W0Nqu--
 
