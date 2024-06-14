@@ -1,200 +1,140 @@
-Return-Path: <linux-doc+bounces-18622-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-18624-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D3EE90909E
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2024 18:40:55 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DC5B9091F4
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2024 19:46:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id AB5211F24248
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2024 16:40:54 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 753771C23BA7
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2024 17:46:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D5B2617E47D;
-	Fri, 14 Jun 2024 16:40:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B1A9518130E;
+	Fri, 14 Jun 2024 17:46:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="NQJMfCr6"
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b="RyFScOOv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com [209.85.208.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk [78.32.30.218])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05D594EB55
-	for <linux-doc@vger.kernel.org>; Fri, 14 Jun 2024 16:40:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2065519D89C;
+	Fri, 14 Jun 2024 17:46:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=78.32.30.218
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718383250; cv=none; b=l9unsKEbBjvIdUHd6x4GVtDZeXwN3aV+FxrsJcaf7hAzVt9N2dcyQaAdDPp8EyJHVNXc7hwMoal+gVjz3zvXDP9tLH/wW5uP/29YlI0Nw2jDFm0hzyWfckI/kfonC0ns912ulvtMCQHWxA2Yn+O1N09N9Sd2sPWqMneMkO3K7RI=
+	t=1718387203; cv=none; b=N7uOnnq6SBOYRvbaKkXxblMlO0A1csuA2xA82qlMfMlM7G8Zb9MWvYsqAU44aYrpMbMh1jM1JJVWaSo5DSevl5j/sgx2NPe9iKql9WcQZwupRjuFTVeqy2WGV8A5Gw9HnHcrGhBiM2ffSUd/pumavvGxtrS2gT0OHNR9CaWsctI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718383250; c=relaxed/simple;
-	bh=VbCxgURpkKyzBtAXqrIatdiU7Sj96ybvb6ZXbDGuWnA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Ph5GgGqcjqKyBrlKahfzWGkNeAOvBi0Yp2pqQzEFc+HR+7gVGovgO7Sw9lFbK+sdFDoO0IQnlwy0x0HX96LVwq0faFGviKgjPGoHy/DU08DFlCx6g7WCK2wli2XecW6stewePLfgiTStZMXqEDCvol9pAxUXl60RlA8C6e/HIAg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=NQJMfCr6; arc=none smtp.client-ip=209.85.208.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-lj1-f182.google.com with SMTP id 38308e7fff4ca-2ebeefb9a6eso23528141fa.1
-        for <linux-doc@vger.kernel.org>; Fri, 14 Jun 2024 09:40:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1718383247; x=1718988047; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6N6pWwte8VFmLbcY/vhwWLg5RRbCqF65dXNS8n7ZcdA=;
-        b=NQJMfCr6IktVcTwHU1FWYGHk8lFDSD+gLwUV6emxqROeFyuPel/ANbigDaYB3IUq1g
-         CBHYOT05jeJNJPl7Jn14mC0wwRxHYgHwDH71AD94ptvMWW0OsqI4u5SjcMwrbZRe2y82
-         k6IblGJedPHB2t5M/xHpgx4vJz3eb5qjzxjcIp+KIV7dQDzW9LlbjOiMC53+793kgKHq
-         Jy9LDdX5/IHS6SbqNz9xgk23SFoi+OI8BDaSy44+3T7EW3qGbjm55EjAz1H9iG5T0FDP
-         zS48WAlalPcyTcYuWiMoyBJrZqETiloTnN7neYRTu7iFTImi0kLw0GBxvGUj+0WcjEce
-         oIbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718383247; x=1718988047;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=6N6pWwte8VFmLbcY/vhwWLg5RRbCqF65dXNS8n7ZcdA=;
-        b=GsHVLMpOz+a0k/xmT0KjMD/JZA2RuU1fDwujjb4YhgI2bEIA9Lmt/HsOlOZuGYwLtR
-         vHCPS1CQKg5btn5Actd7fKddS4D6H30R91GUb7o5cVAStSkznen55qqIXuXGVBq6rReK
-         wcmKP6npdrMN7lPwDdwNFXM6J6ZTbEV2bAT3DoicxiOZYIpqfatb7B5S4Z5EeZcK3T2I
-         GXzARYfMvt+r1T5gMs9KLLS4HQT6BHbee8oQbyUtfWMtuwNE8zHQ+lCCLilbeubOFHbI
-         /i8s5OH0Lmju8bAec6imHPDsx2d/C/Nz6IfDOccIIaqbJHp9EAArxT92W+Ho6nJaJ7Cb
-         WD5Q==
-X-Forwarded-Encrypted: i=1; AJvYcCVfBRdlAjEuS0klN8muE7jdi99mYOCBbX/5WjIkmytSSykHFJ4xj+WAg17384Rp4MqcaRA+r2DC5M838gUJtJVGUyQKaneFaB8x
-X-Gm-Message-State: AOJu0YzjGpAvYpmejjqyjQ5OOYFm5Wr+geQ4ez4Yo4Yu4tau3YwIEqcV
-	EbxkvhKMOKSqcQbCumXdRJ22UJLdd1Omia5UUZcWcGyE6zPcW4FaK+Ag50jItNFsIa63iT2r+kX
-	7kC0jXzP0vW5VHXtJZMcysdHXKmYTZ85yG5P+
-X-Google-Smtp-Source: AGHT+IH4PaRix9qpyJ1JsEJsH3dIxJd3lDLxxYmObDN8Ly1c+eahxQ5IY2EEyAYetWZChHlpR8fSMk+66JC39s4R/Bo=
-X-Received: by 2002:a2e:9dd4:0:b0:2ec:453:e46e with SMTP id
- 38308e7fff4ca-2ec0e5a0442mr21871161fa.42.1718383246745; Fri, 14 Jun 2024
- 09:40:46 -0700 (PDT)
+	s=arc-20240116; t=1718387203; c=relaxed/simple;
+	bh=FUhw5QSPT52a+n51aUGW5MWySfTN62An4zO5LFmLXlg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=gmNLvPD69xIC7OUX4yqWTShiFnQuTT32QrmcKiUUyiwAnjyyYO/T7WwFnHZEy+2SizAc6CYKnpPSliMlnnw7hKU6cUmqWqLHHGnWsQjwBwniiAc1wnqSqt1ILwbKFoSY/5Z0Nhiwg/XC6WDoIAue2pRKIxfZE9lyu6NmG8IIMSE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=armlinux.org.uk; spf=none smtp.mailfrom=armlinux.org.uk; dkim=pass (2048-bit key) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b=RyFScOOv; arc=none smtp.client-ip=78.32.30.218
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=armlinux.org.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=armlinux.org.uk
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
+	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=VLp0XKh59OcMtWOpegZjhoT2Uyd2kf1eZygBpGw1rsc=; b=RyFScOOv02S+cmpl/z+zry8jWZ
+	4Ql+RZ9Ko1bSpLGTcwpEN7SHVwBt3hfQp5iAPTG88/4v6NGFkMHHVmI69NYq6tDmIlb+5W08BsY/q
+	XrhqmI6yU6sapMPi4VwjK9ViJDsz7BeG+/vSo/acrDoAb2MeqJObWoT4PMD0j82D/M/VFi0s4chHR
+	DURdpOET2UoxjeoYxfgMp9gCNWoPxARX9i4TxvfPw9i75IOVWSnPgw6TElfepHCPCQZ11xVkvjhWR
+	UYVXOeOKjb+rngRSVfsZzjwzWtpgGnwJZaYlMAMGNlksAy4DDi+JbLmcN8mRTx9uAJ1ko/qBek0bX
+	NyW8uHrg==;
+Received: from shell.armlinux.org.uk ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:59072)
+	by pandora.armlinux.org.uk with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <linux@armlinux.org.uk>)
+	id 1sIB0C-000280-0u;
+	Fri, 14 Jun 2024 18:46:16 +0100
+Received: from linux by shell.armlinux.org.uk with local (Exim 4.94.2)
+	(envelope-from <linux@shell.armlinux.org.uk>)
+	id 1sIB09-0002Jc-8R; Fri, 14 Jun 2024 18:46:13 +0100
+Date: Fri, 14 Jun 2024 18:46:13 +0100
+From: "Russell King (Oracle)" <linux@armlinux.org.uk>
+To: Paolo Abeni <pabeni@redhat.com>
+Cc: Kory Maincent <kory.maincent@bootlin.com>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Andrew Lunn <andrew@lunn.ch>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Richard Cochran <richardcochran@gmail.com>,
+	Radu Pirea <radu-nicolae.pirea@oss.nxp.com>,
+	Jay Vosburgh <j.vosburgh@gmail.com>,
+	Andy Gospodarek <andy@greyhouse.net>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Horatiu Vultur <horatiu.vultur@microchip.com>,
+	UNGLinuxDriver@microchip.com, Simon Horman <horms@kernel.org>,
+	Vladimir Oltean <vladimir.oltean@nxp.com>,
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Rahul Rameshbabu <rrameshbabu@nvidia.com>,
+	Shannon Nelson <shannon.nelson@amd.com>,
+	Alexandra Winter <wintera@linux.ibm.com>
+Subject: Re: [PATCH net-next v15 07/14] net: Add struct kernel_ethtool_ts_info
+Message-ID: <ZmyB5cUz6zWcw4nr@shell.armlinux.org.uk>
+References: <20240612-feature_ptp_netnext-v15-0-b2a086257b63@bootlin.com>
+ <20240612-feature_ptp_netnext-v15-7-b2a086257b63@bootlin.com>
+ <19d5b8f250979c7c244e7b5b08d12783667576ee.camel@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240611215544.2105970-1-jiaqiyan@google.com> <20240611215544.2105970-2-jiaqiyan@google.com>
- <1e6ecf75-c489-7711-3289-e4a396ca9484@huawei.com>
-In-Reply-To: <1e6ecf75-c489-7711-3289-e4a396ca9484@huawei.com>
-From: Jiaqi Yan <jiaqiyan@google.com>
-Date: Fri, 14 Jun 2024 09:40:35 -0700
-Message-ID: <CACw3F52SU=z-nBgSQpmKA43eFz71F1OJ655fsdjNEVP0Pzpihw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] mm/memory-failure: userspace controls
- soft-offlining pages
-To: Miaohe Lin <linmiaohe@huawei.com>
-Cc: muchun.song@linux.dev, akpm@linux-foundation.org, shuah@kernel.org, 
-	corbet@lwn.net, osalvador@suse.de, rientjes@google.com, duenwen@google.com, 
-	fvdl@google.com, linux-mm@kvack.org, linux-kselftest@vger.kernel.org, 
-	linux-doc@vger.kernel.org, nao.horiguchi@gmail.com, jane.chu@oracle.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <19d5b8f250979c7c244e7b5b08d12783667576ee.camel@redhat.com>
+Sender: Russell King (Oracle) <linux@armlinux.org.uk>
 
-On Thu, Jun 13, 2024 at 8:28=E2=80=AFPM Miaohe Lin <linmiaohe@huawei.com> w=
-rote:
->
-> On 2024/6/12 5:55, Jiaqi Yan wrote:
-> > Correctable memory errors are very common on servers with large
-> > amount of memory, and are corrected by ECC. Soft offline is kernel's
-> > additional recovery handling for memory pages having (excessive)
-> > corrected memory errors. Impacted page is migrated to a healthy page
-> > if inuse; the original page is discarded for any future use.
-> >
->
-> Thanks for your update.
->
-> > The actual policy on whether (and when) to soft offline should be
-> > maintained by userspace, especially in case of an 1G HugeTLB page.
-> > Soft-offline dissolves the HugeTLB page, either in-use or free, into
-> > chunks of 4K pages, reducing HugeTLB pool capacity by 1 hugepage.
-> > If userspace has not acknowledged such behavior, it may be surprised
-> > when later mmap hugepages MAP_FAILED due to lack of hugepages.
->
-> s/mmap hugepages MAP_FAILED/fails to mmap hugepages/ ?
->
-> > In case of a transparent hugepage, it will be split into 4K pages
-> > as well; userspace will stop enjoying the transparent performance.
-> >
-> > In addition, discarding the entire 1G HugeTLB page only because of
-> > corrected memory errors sounds very costly and kernel better not
-> > doing under the hood. But today there are at least 2 such cases:
->
-> s/doing/doing so/ ?
->
-> > 1. GHES driver sees both GHES_SEV_CORRECTED and
-> >    CPER_SEC_ERROR_THRESHOLD_EXCEEDED after parsing CPER.
-> > 2. RAS Correctable Errors Collector counts correctable errors per
-> >    PFN and when the counter for a PFN reaches threshold
-> > In both cases, userspace has no control of the soft offline performed
-> > by kernel's memory failure recovery.
-> >
-> > This commit gives userspace the control of softofflining any page:
-> > kernel only soft offlines raw page / transparent hugepage / HugeTLB
-> > hugepage if userspace has agreed to. The interface to userspace is a
-> > new sysctl called enable_soft_offline under /proc/sys/vm. By default
-> > enable_soft_line is 1 to preserve existing behavior in kernel.
->
-> s/enable_soft_line/enable_soft_offline/
+On Fri, Jun 14, 2024 at 04:02:04PM +0200, Paolo Abeni wrote:
+> On Wed, 2024-06-12 at 17:04 +0200, Kory Maincent wrote:
+> > In prevision to add new UAPI for hwtstamp we will be limited to the struct
+> > ethtool_ts_info that is currently passed in fixed binary format through the
+> > ETHTOOL_GET_TS_INFO ethtool ioctl. It would be good if new kernel code
+> > already started operating on an extensible kernel variant of that
+> > structure, similar in concept to struct kernel_hwtstamp_config vs struct
+> > hwtstamp_config.
+> > 
+> > Since struct ethtool_ts_info is in include/uapi/linux/ethtool.h, here
+> > we introduce the kernel-only structure in include/linux/ethtool.h.
+> > The manual copy is then made in the function called by ETHTOOL_GET_TS_INFO.
+> > 
+> > Acked-by: Shannon Nelson <shannon.nelson@amd.com>
+> > Acked-by: Alexandra Winter <wintera@linux.ibm.com>
+> > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+> 
+> I think it would be nice if a few more vendors could actually step-in
+> and test/ack the driver specific bits.
 
-Will fix these 3 typos in v3.
+Well, in part this series was triggered because of an issue having
+PTP support in Marvell's PP2 driver, and then the issue that if we
+add it to the Marvell PHY driver, the platforms that are currently
+using the PP2 based PTP support were forced into the weird situation
+that some of the PTP calls hit the PP2 driver and others hit the
+PHY driver.
 
->
-> >
-> > Signed-off-by: Jiaqi Yan <jiaqiyan@google.com>
-> > ---
-> >  mm/memory-failure.c | 16 ++++++++++++++++
-> >  1 file changed, 16 insertions(+)
-> >
-> > diff --git a/mm/memory-failure.c b/mm/memory-failure.c
-> > index d3c830e817e3..23415fe03318 100644
-> > --- a/mm/memory-failure.c
-> > +++ b/mm/memory-failure.c
-> > @@ -68,6 +68,8 @@ static int sysctl_memory_failure_early_kill __read_mo=
-stly;
-> >
-> >  static int sysctl_memory_failure_recovery __read_mostly =3D 1;
-> >
-> > +static int sysctl_enable_soft_offline __read_mostly =3D 1;
-> > +
-> >  atomic_long_t num_poisoned_pages __read_mostly =3D ATOMIC_LONG_INIT(0)=
-;
-> >
-> >  static bool hw_memory_failure __read_mostly =3D false;
-> > @@ -141,6 +143,15 @@ static struct ctl_table memory_failure_table[] =3D=
- {
-> >               .extra1         =3D SYSCTL_ZERO,
-> >               .extra2         =3D SYSCTL_ONE,
-> >       },
-> > +     {
-> > +             .procname       =3D "enable_soft_offline",
-> > +             .data           =3D &sysctl_enable_soft_offline,
-> > +             .maxlen         =3D sizeof(sysctl_enable_soft_offline),
-> > +             .mode           =3D 0644,
-> > +             .proc_handler   =3D proc_dointvec_minmax,
-> > +             .extra1         =3D SYSCTL_ZERO,
-> > +             .extra2         =3D SYSCTL_ONE,
-> > +     }
-> >  };
-> >
-> >  /*
-> > @@ -2771,6 +2782,11 @@ int soft_offline_page(unsigned long pfn, int fla=
-gs)
-> >       bool try_again =3D true;
-> >       struct page *page;
-> >
-> > +     if (!sysctl_enable_soft_offline) {
-> > +             pr_info("soft offline: %#lx: OS-wide disabled\n", pfn);
-> > +             return -EINVAL;
-> > +     }
-> > +
->
-> IMHO, callers might reach here with page refcnt increased. So we have to =
-take care of releasing it first?
+I had sent Kory an email a couple of weeks ago saying that I'm
+unlikely to be able to test this out in that setup any time soon,
+I've had high work pressure for the last seven-ish weeks, and I
+would need to be in front of the hardware, which is fairly rare
+at the moment, and I'm not going to be in front of the hardware
+until August. So I'm just not going to be able to test it in a
+reasonable time scale.
 
-Ah, I think you are right when MF_COUNT_INCREASED.
+There's not a lot I can do about that, sorry.
 
-I will move this after the pfn_to_online_page check, and release if disable=
-d.
-
-> Also will it be better to return -EOPNOTSUPP or some other better errno?
->
-> Thanks.
-> .
+-- 
+RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
+FTTP is here! 80Mbps down 10Mbps up. Decent connectivity at last!
 
