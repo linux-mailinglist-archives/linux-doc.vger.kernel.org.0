@@ -1,232 +1,207 @@
-Return-Path: <linux-doc+bounces-18705-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-18707-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id C03CB90AF14
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2024 15:24:03 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id D213A90AF27
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2024 15:25:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 4DB8E1F26BD5
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2024 13:24:03 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id AA5D21C22989
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2024 13:25:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D7FC198A33;
-	Mon, 17 Jun 2024 13:18:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4187D1991B9;
+	Mon, 17 Jun 2024 13:20:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="REgcu3hl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com [210.160.252.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 79A5A198A34;
-	Mon, 17 Jun 2024 13:18:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.160.252.172
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0906A1991B0;
+	Mon, 17 Jun 2024 13:20:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718630300; cv=none; b=hCBxsn5MIX94uVpwtBgMvMCAGwjmJMKTgARnKOQmgq9ic/EIWR07HFKc5w9bf0D+m7eOxW2nrojyD37SBiLaUPCbSxOyeJmeE98nogogw+0XdknzPaQwxcaU6rCQlVU/i56pjxelibGiFbfWGJ7luS/zpAQKgOkqlYTtbr20wlA=
+	t=1718630452; cv=none; b=MO56MnwPY9ZAsi8r3gK6tpZeI1fwMvZ/B/seu4ft+4nPxB9hPEo2Bb9fYYTmHY9bggceTfj88sfx24Hh02jNmWQ/sfGX4QDoyVbFGxT2j/4nnnuhxACWzXtkfgfjtuG6rXxQsp2+o+xfT2HSZ6VQwyICJbh4o3xB87iYIo2e+Uk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718630300; c=relaxed/simple;
-	bh=nus8EXCQy5Vw9MTP03RIYqf7FT1L5evjEegx9BPrpLA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=m0ckLTIPDJDln1A4aB0Ex2k9Jf5mugGulXA2r/+Qr2vbOEljgC9DHdWOgPUJ3Kll07BA3YGta8k+/dk9f2ajxER083x0hvpm0ejvWuGBT6jarZ58xu1pSw2MqhVzK0IAXHFghXnR7q6Fjo1yiBEUL50jr8Cwg/JP08flioFI46k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=bp.renesas.com; spf=pass smtp.mailfrom=bp.renesas.com; arc=none smtp.client-ip=210.160.252.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=bp.renesas.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.08,244,1712588400"; 
-   d="asc'?scan'208";a="212215763"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
-  by relmlie6.idc.renesas.com with ESMTP; 17 Jun 2024 22:18:09 +0900
-Received: from [10.226.92.92] (unknown [10.226.92.92])
-	by relmlir6.idc.renesas.com (Postfix) with ESMTP id 54DF54338F32;
-	Mon, 17 Jun 2024 22:18:07 +0900 (JST)
-Message-ID: <c20a8d7c-a732-4425-ad8c-c5998ed8977e@bp.renesas.com>
-Date: Mon, 17 Jun 2024 14:18:05 +0100
+	s=arc-20240116; t=1718630452; c=relaxed/simple;
+	bh=ooe+NfCkDLbyZzNacuckmn0L8ElUEGAsDuJ8Pl8gFyk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=Qgoc1k7HXJHNiUtGnIN7z7SFHuhWM8Jo4DYbwPuIGA3JcqXSzKXYaR3zLPKLpNBw6ezV3zXGgXhZXPZ8yN60jQ9jZWthXXpb0fKcMghYJCFI8M9v1QpRLLgARe8R70GQRonj8AoQYM2+/PjJ/SVXnfDOW4JsXhDD3ntDy87qjt4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=REgcu3hl; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20D6BC4AF1C;
+	Mon, 17 Jun 2024 13:20:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1718630451;
+	bh=ooe+NfCkDLbyZzNacuckmn0L8ElUEGAsDuJ8Pl8gFyk=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=REgcu3hlhIoRqWkLnOV0p7J5S+A3zzdYPzbc7CNYyvPR3nVy0rZ3HCglVdvYIA49B
+	 G3ZiMYyPgfmWoEExKtlfAgnJNGotHAINIPsVdnu0LKlZIEKQMTxmCBNmWXBHQhz62a
+	 C5yde2xKCMzWcSyVN6e02Nj2sWLuEoKnwsxVyto70eLcJdgfPh91nWiXxM4Xf2lSKs
+	 6kZ9HigObgJIQG9E+xILkINLKAI3gBHsizoFjl2dMjzlUZnfSsWAl7fD0AYWSl+rQ1
+	 uZWtojXEUR0lZfu+B+ggS+6tgnMwXOfFqDC+eVOvw8EMjGJpMPUueLqiTCVsTBG6ME
+	 l6V/aqZMEi3Kw==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Cc: Justin Stitt <justinstitt@google.com>,
+	linux-hardening@vger.kernel.org,
+	Kees Cook <keescook@chromium.org>,
+	"Martin K . Petersen" <martin.petersen@oracle.com>,
+	Sasha Levin <sashal@kernel.org>,
+	phil@philpotter.co.uk,
+	corbet@lwn.net,
+	James.Bottomley@HansenPartnership.com,
+	nathan@kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-scsi@vger.kernel.org,
+	llvm@lists.linux.dev
+Subject: [PATCH AUTOSEL 6.9 02/44] scsi: sr: Fix unintentional arithmetic wraparound
+Date: Mon, 17 Jun 2024 09:19:15 -0400
+Message-ID: <20240617132046.2587008-2-sashal@kernel.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240617132046.2587008-1-sashal@kernel.org>
+References: <20240617132046.2587008-1-sashal@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] docs: stable-kernel-rules: remind reader about DCO
-To: Shung-Hsi Yu <shung-hsi.yu@suse.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Sasha Levin <sashal@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- stable@vger.kernel.org, workflows@vger.kernel.org
-References: <20240615020356.5595-1-shung-hsi.yu@suse.com>
- <20240615020356.5595-2-shung-hsi.yu@suse.com>
-Content-Language: en-GB
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-Organization: Renesas Electronics Corporation
-In-Reply-To: <20240615020356.5595-2-shung-hsi.yu@suse.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------wrt1c4Pp6096Reih5PhcYvrU"
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-stable-base: Linux 6.9.5
+Content-Transfer-Encoding: 8bit
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------wrt1c4Pp6096Reih5PhcYvrU
-Content-Type: multipart/mixed; boundary="------------hLlHwquRiT6tFl0rMb6UZ0t7";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Shung-Hsi Yu <shung-hsi.yu@suse.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Sasha Levin <sashal@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- stable@vger.kernel.org, workflows@vger.kernel.org
-Message-ID: <c20a8d7c-a732-4425-ad8c-c5998ed8977e@bp.renesas.com>
-Subject: Re: [PATCH v2 2/2] docs: stable-kernel-rules: remind reader about DCO
-References: <20240615020356.5595-1-shung-hsi.yu@suse.com>
- <20240615020356.5595-2-shung-hsi.yu@suse.com>
-In-Reply-To: <20240615020356.5595-2-shung-hsi.yu@suse.com>
+From: Justin Stitt <justinstitt@google.com>
 
---------------hLlHwquRiT6tFl0rMb6UZ0t7
-Content-Type: multipart/mixed; boundary="------------2RF19yJwrgg8NR7h44Hz0qtc"
+[ Upstream commit 9fad9d560af5c654bb38e0b07ee54a4e9acdc5cd ]
 
---------------2RF19yJwrgg8NR7h44Hz0qtc
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Running syzkaller with the newly reintroduced signed integer overflow
+sanitizer produces this report:
 
-On 15/06/2024 03:03, Shung-Hsi Yu wrote:
-> When sending patch authored by someone else to stable, it is quite easy=
- for the
-> sender to forget adding the Developer's Certification of Origin (DCO, i=
-=2Ee.
-> Signed-off-by). An example of such can be seen in the link below. Menti=
-on DCO
-> explicitly so senders are less likely to forget to do so and cause anot=
-her
-> round-trip.
->=20
-> Add a label in submitting-patches.rst so we can directly link to the DC=
-O
-> section.
->=20
-> Link: https://lore.kernel.org/stable/2024051500-underage-unfixed-5d28@g=
-regkh/
-> Signed-off-by: Shung-Hsi Yu <shung-hsi.yu@suse.com>
-> ---
-> Change from v1:
-> - explicitly refer to the link as an example in the 1st paragraph (Paul=
-)
-> - commit message typo fix s/explicilty/explicitly/ (Paul)
-> ---
->  Documentation/process/stable-kernel-rules.rst | 4 ++++
->  Documentation/process/submitting-patches.rst  | 1 +
->  2 files changed, 5 insertions(+)
->=20
-> diff --git a/Documentation/process/stable-kernel-rules.rst b/Documentat=
-ion/process/stable-kernel-rules.rst
-> index d22aa2280f6e..85a91fd40da9 100644
-> --- a/Documentation/process/stable-kernel-rules.rst
-> +++ b/Documentation/process/stable-kernel-rules.rst
-> @@ -168,6 +168,10 @@ If the submitted patch deviates from the original =
-upstream patch (for example
->  because it had to be adjusted for the older API), this must be very cl=
-early
->  documented and justified in the patch description.
-> =20
-> +Be sure to also include a :ref:`Developer's Certificate of Origin
-> +<sign_your_work>` (i.e. ``Signed-off-by``) when sending patches that y=
-ou did
-> +not author yourself.
-> +
-> =20
->  Following the submission
->  ------------------------
-> diff --git a/Documentation/process/submitting-patches.rst b/Documentati=
-on/process/submitting-patches.rst
-> index 66029999b587..98f1c8d8b429 100644
-> --- a/Documentation/process/submitting-patches.rst
-> +++ b/Documentation/process/submitting-patches.rst
-> @@ -394,6 +394,7 @@ e-mail discussions.
-> =20
->  ``git send-email`` will do this for you automatically.
-> =20
-> +.. _sign_your_work:
-> =20
->  Sign your work - the Developer's Certificate of Origin
->  ------------------------------------------------------
+[   65.194362] ------------[ cut here ]------------
+[   65.197752] UBSAN: signed-integer-overflow in ../drivers/scsi/sr_ioctl.c:436:9
+[   65.203607] -2147483648 * 177 cannot be represented in type 'int'
+[   65.207911] CPU: 2 PID: 10416 Comm: syz-executor.1 Not tainted 6.8.0-rc2-00035-gb3ef86b5a957 #1
+[   65.213585] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   65.219923] Call Trace:
+[   65.221556]  <TASK>
+[   65.223029]  dump_stack_lvl+0x93/0xd0
+[   65.225573]  handle_overflow+0x171/0x1b0
+[   65.228219]  sr_select_speed+0xeb/0xf0
+[   65.230786]  ? __pm_runtime_resume+0xe6/0x130
+[   65.233606]  sr_block_ioctl+0x15d/0x1d0
+...
 
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+Historically, the signed integer overflow sanitizer did not work in the
+kernel due to its interaction with `-fwrapv` but this has since been
+changed [1] in the newest version of Clang. It was re-enabled in the kernel
+with Commit 557f8c582a9b ("ubsan: Reintroduce signed overflow sanitizer").
 
---=20
-Paul Barker
---------------2RF19yJwrgg8NR7h44Hz0qtc
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+Firstly, let's change the type of "speed" to unsigned long as
+sr_select_speed()'s only caller passes in an unsigned long anyways.
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+$ git grep '\.select_speed'
+|	drivers/scsi/sr.c:      .select_speed           = sr_select_speed,
+...
+|	static int cdrom_ioctl_select_speed(struct cdrom_device_info *cdi,
+|	                unsigned long arg)
+|	{
+|	        ...
+|	        return cdi->ops->select_speed(cdi, arg);
+|	}
 
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
+Next, let's add an extra check to make sure we don't exceed 0xffff/177
+(350) since 0xffff is the max speed. This has two benefits: 1) we deal
+with integer overflow before it happens and 2) we properly respect the
+max speed of 0xffff. There are some "magic" numbers here but I did not
+want to change more than what was necessary.
 
---------------2RF19yJwrgg8NR7h44Hz0qtc--
+Link: https://github.com/llvm/llvm-project/pull/82432 [1]
+Closes: https://github.com/KSPP/linux/issues/357
+Cc: linux-hardening@vger.kernel.org
+Signed-off-by: Justin Stitt <justinstitt@google.com>
+Link: https://lore.kernel.org/r/20240508-b4-b4-sio-sr_select_speed-v2-1-00b68f724290@google.com
+Reviewed-by: Kees Cook <keescook@chromium.org>
+Signed-off-by: Martin K. Petersen <martin.petersen@oracle.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ Documentation/cdrom/cdrom-standard.rst | 4 ++--
+ drivers/scsi/sr.h                      | 2 +-
+ drivers/scsi/sr_ioctl.c                | 5 ++++-
+ include/linux/cdrom.h                  | 2 +-
+ 4 files changed, 8 insertions(+), 5 deletions(-)
 
---------------hLlHwquRiT6tFl0rMb6UZ0t7--
+diff --git a/Documentation/cdrom/cdrom-standard.rst b/Documentation/cdrom/cdrom-standard.rst
+index 7964fe134277b..6c1303cff159e 100644
+--- a/Documentation/cdrom/cdrom-standard.rst
++++ b/Documentation/cdrom/cdrom-standard.rst
+@@ -217,7 +217,7 @@ current *struct* is::
+ 		int (*media_changed)(struct cdrom_device_info *, int);
+ 		int (*tray_move)(struct cdrom_device_info *, int);
+ 		int (*lock_door)(struct cdrom_device_info *, int);
+-		int (*select_speed)(struct cdrom_device_info *, int);
++		int (*select_speed)(struct cdrom_device_info *, unsigned long);
+ 		int (*get_last_session) (struct cdrom_device_info *,
+ 					 struct cdrom_multisession *);
+ 		int (*get_mcn)(struct cdrom_device_info *, struct cdrom_mcn *);
+@@ -396,7 +396,7 @@ action need be taken, and the return value should be 0.
+ 
+ ::
+ 
+-	int select_speed(struct cdrom_device_info *cdi, int speed)
++	int select_speed(struct cdrom_device_info *cdi, unsigned long speed)
+ 
+ Some CD-ROM drives are capable of changing their head-speed. There
+ are several reasons for changing the speed of a CD-ROM drive. Badly
+diff --git a/drivers/scsi/sr.h b/drivers/scsi/sr.h
+index 1175f2e213b56..dc899277b3a44 100644
+--- a/drivers/scsi/sr.h
++++ b/drivers/scsi/sr.h
+@@ -65,7 +65,7 @@ int sr_disk_status(struct cdrom_device_info *);
+ int sr_get_last_session(struct cdrom_device_info *, struct cdrom_multisession *);
+ int sr_get_mcn(struct cdrom_device_info *, struct cdrom_mcn *);
+ int sr_reset(struct cdrom_device_info *);
+-int sr_select_speed(struct cdrom_device_info *cdi, int speed);
++int sr_select_speed(struct cdrom_device_info *cdi, unsigned long speed);
+ int sr_audio_ioctl(struct cdrom_device_info *, unsigned int, void *);
+ 
+ int sr_is_xa(Scsi_CD *);
+diff --git a/drivers/scsi/sr_ioctl.c b/drivers/scsi/sr_ioctl.c
+index 5b0b35e60e61f..a0d2556a27bba 100644
+--- a/drivers/scsi/sr_ioctl.c
++++ b/drivers/scsi/sr_ioctl.c
+@@ -425,11 +425,14 @@ int sr_reset(struct cdrom_device_info *cdi)
+ 	return 0;
+ }
+ 
+-int sr_select_speed(struct cdrom_device_info *cdi, int speed)
++int sr_select_speed(struct cdrom_device_info *cdi, unsigned long speed)
+ {
+ 	Scsi_CD *cd = cdi->handle;
+ 	struct packet_command cgc;
+ 
++	/* avoid exceeding the max speed or overflowing integer bounds */
++	speed = clamp(0, speed, 0xffff / 177);
++
+ 	if (speed == 0)
+ 		speed = 0xffff;	/* set to max */
+ 	else
+diff --git a/include/linux/cdrom.h b/include/linux/cdrom.h
+index 98c6fd0b39b63..fdfb61ccf55ae 100644
+--- a/include/linux/cdrom.h
++++ b/include/linux/cdrom.h
+@@ -77,7 +77,7 @@ struct cdrom_device_ops {
+ 				      unsigned int clearing, int slot);
+ 	int (*tray_move) (struct cdrom_device_info *, int);
+ 	int (*lock_door) (struct cdrom_device_info *, int);
+-	int (*select_speed) (struct cdrom_device_info *, int);
++	int (*select_speed) (struct cdrom_device_info *, unsigned long);
+ 	int (*get_last_session) (struct cdrom_device_info *,
+ 				 struct cdrom_multisession *);
+ 	int (*get_mcn) (struct cdrom_device_info *,
+-- 
+2.43.0
 
---------------wrt1c4Pp6096Reih5PhcYvrU
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZnA3jQUDAAAAAAAKCRDbaV4Vf/JGvajf
-AP9BjqgSsCcLfEq6gPcMjJUWEMjAyPxdRpSt7FVAxyfBSgD/YvnS80VR5FnJ+FVdZ5sUBEXXiZj5
-4NCO9opfgYanzwQ=
-=JyRj
------END PGP SIGNATURE-----
-
---------------wrt1c4Pp6096Reih5PhcYvrU--
 
