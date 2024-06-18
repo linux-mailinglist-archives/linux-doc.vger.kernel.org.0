@@ -1,46 +1,46 @@
-Return-Path: <linux-doc+bounces-18814-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-18815-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6B4490CBCA
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Jun 2024 14:36:31 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id DC0DC90CC5C
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Jun 2024 14:48:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D9A45281537
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Jun 2024 12:36:29 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E7C631C222B3
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Jun 2024 12:48:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3BE6513AD04;
-	Tue, 18 Jun 2024 12:36:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F398C14B092;
+	Tue, 18 Jun 2024 12:38:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Rtwp7Zf7"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="N/jCSqrD"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2A1E13AA44;
-	Tue, 18 Jun 2024 12:36:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1EBE14A60E;
+	Tue, 18 Jun 2024 12:38:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718714177; cv=none; b=s5M/QKYkJsejYaSgi7UMrIjBg7CouKQaC5qCzb8aCadXLfGXHzbX10RZlpg5k/YKbJ+wsIIxZ9Z7fYjriUNG0byyjahsBNqtqbwdLnwaDrGUV55G0RQn0rGSY2Oh89Y3dGW7dx0YKbkv8P5sIF0QSOPi73ZS9S/Noe7hfkb/zvA=
+	t=1718714316; cv=none; b=TSLAcogkcHKrt+PwPrOLENwC2HJ/d+M2hHJv/QKS7Lh2TrYQigdTYKD+Si4x3wf+BIaTFdmkU1Izm+Yqq4cIgaqCTHdA7s0ODs5/MSB2aA2NtQz+kgHeLsN8jbn7m2y5+GtS1nxwir6lV3lB0BhpzgAcXuAk+XnRs7QqMt/Iwx0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718714177; c=relaxed/simple;
+	s=arc-20240116; t=1718714316; c=relaxed/simple;
 	bh=ooe+NfCkDLbyZzNacuckmn0L8ElUEGAsDuJ8Pl8gFyk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=epv8OLzZ+m/yhooajqlkOWJgfNkAn7fAsg5GTz+uX2JSZafvcY4SIipyhQWheCvsydJjwfc7q2RIgNYVUbDFx7gskF2uCiEkR6ZvmB6hRmy2IZ76bRqLWg8iWB3u7+0ayr6/lAaFenxci5VDXIKoSe/dN/m0OSsYrf0jbnl04b8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Rtwp7Zf7; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66CD1C4AF48;
-	Tue, 18 Jun 2024 12:36:15 +0000 (UTC)
+	 MIME-Version; b=RnbBHB9BQuKfIQKFFeaN8zhW25Li/XDj0nEQB+zVbu3C+1gzqeSKMI2ZkQJQIqHpZxkvY4ZbiHGZc8lZLWMcx0Ccnb9LfyTPbLNnqR+xvpwtN40UazQ+8+QSnx2MPEdNsk7fWNf9lfGfP5qWV3sksaoBIQ7ldeQcmeJiZZPF6So=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=N/jCSqrD; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C069C4AF1D;
+	Tue, 18 Jun 2024 12:38:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1718714176;
+	s=k20201202; t=1718714316;
 	bh=ooe+NfCkDLbyZzNacuckmn0L8ElUEGAsDuJ8Pl8gFyk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Rtwp7Zf7eCdZ9V8CzE0YqXQFFeTmfYfw0oSx084KA21eHuyJPodQWNsaBP5TT225a
-	 C82/OOdvg15mqpW/1Bev/OKNP+LRkSqjB26se94YytgmsD5HH0600w2Qwl9qf4i/tY
-	 CZLFN60VKBfj9gVQECXBMnm1BJ4Je4YoOCTCTcpqxuKVYrZfGWj5IHJEKeZb4OjKHB
-	 DHru9nnGSpeFrWg48QTMrUNVTniS4uEcqF9Zu/31Txi8HqBUmW+NBG93567lYdvrCE
-	 VN0WlFAonA3v7HdL3yG7gQ5+t0OTQ0K3kUJtLdZFzaiCQE7/Px4bSNaCBbuPTP+Oor
-	 XHpEh15nOTJAA==
+	b=N/jCSqrDQSTCKF2s00fBrzpoKSRgbaAxN9cWhxRtCDUQXgEMDKs2GjbNt7Eq2b4KQ
+	 4JW6qIoiHKHqO7Ro4dE+fwCpu4oNXfVBw9N9C2htWl2d62OT7VoNZIlzTRhcd172hK
+	 NO9yyUV/EoAebilHXcsP5tXzz2AEw+Yjn+v2ItaIHnbS8HeLdt0U5Y/6d7H6Vf3pU4
+	 kKIlngifaj22EDgzpHFQBHOW9kN5VQHATvLz3psqt2bcxpFfRY23xm2F2APKdME6DW
+	 mcN35Ri1YgMbagUQApyxxEKOXLLJNma7mWOv+G9S27NdqTEvLjasUNSokqIg+ObDK3
+	 qYuSRx14wGSjg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -56,12 +56,12 @@ Cc: Justin Stitt <justinstitt@google.com>,
 	linux-doc@vger.kernel.org,
 	linux-scsi@vger.kernel.org,
 	llvm@lists.linux.dev
-Subject: [PATCH AUTOSEL 6.9 02/44] scsi: sr: Fix unintentional arithmetic wraparound
-Date: Tue, 18 Jun 2024 08:34:43 -0400
-Message-ID: <20240618123611.3301370-2-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.6 02/35] scsi: sr: Fix unintentional arithmetic wraparound
+Date: Tue, 18 Jun 2024 08:37:22 -0400
+Message-ID: <20240618123831.3302346-2-sashal@kernel.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240618123611.3301370-1-sashal@kernel.org>
-References: <20240618123611.3301370-1-sashal@kernel.org>
+In-Reply-To: <20240618123831.3302346-1-sashal@kernel.org>
+References: <20240618123831.3302346-1-sashal@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -70,7 +70,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.9.5
+X-stable-base: Linux 6.6.34
 Content-Transfer-Encoding: 8bit
 
 From: Justin Stitt <justinstitt@google.com>
