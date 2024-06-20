@@ -1,59 +1,60 @@
-Return-Path: <linux-doc+bounces-19013-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19015-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2307D910046
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Jun 2024 11:26:44 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id C12DE91009F
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Jun 2024 11:42:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id ADCCF282059
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Jun 2024 09:26:42 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CF9021C22703
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Jun 2024 09:42:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 341381A4F13;
-	Thu, 20 Jun 2024 09:26:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A83051A4F20;
+	Thu, 20 Jun 2024 09:42:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="AimULBvV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3BE021A3BD2;
-	Thu, 20 Jun 2024 09:26:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 982061A4F0C
+	for <linux-doc@vger.kernel.org>; Thu, 20 Jun 2024 09:42:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.117.254.33
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718875589; cv=none; b=puW84N1NhoabYX3bNmHyL0SnjCxYkqRSoQsAY9dU4vrEks0Q+YQULMpCxfNPmCP5DM4nzehzPbyB0l2LhVfATwD0mx2RSglStVzHhBVqyaW0/SDsSd4grJHJFz7qc7SnAgbJt6+15DihKpDuhEBIpp3A1bs1H4AOmVh/COdCeu0=
+	t=1718876533; cv=none; b=lpMxPATsEkcGVskP6Qa9fBXsIwrd40HkroVlH1okvjg84UgWqaz0I4yBZkhYwt0U7gyP8y3fwaA0rkMU07WWEBsJxAGJ83oW0nzfFdvhBgxAf60fgwzPyrX2LArNcJnuffj7xBFACVquxEcnT4WPRFpQ4j6ZPxru11XFi4dm2Fo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718875589; c=relaxed/simple;
-	bh=RWYaooaJ/9WsoqAc7TXG1VEdx/cdTjG07FP3Xl7S7DM=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=lzedm3qZtxX+QjgcZfp7ThHGa3JXt7KfqBdosWWAJrrL0tOSx7EItGBvYxBat3+ajHallnGZMU5HVhuJByTw1RO0OERTXN7KIrTbszRaBDD5xYEYnvlNfGFaNhxTrbJZ3SLkj80TGE8a/vkKqJT0zkj0LXy3ghIkOh3IZfTCo48=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8581BDA7;
-	Thu, 20 Jun 2024 02:26:51 -0700 (PDT)
-Received: from a077893.arm.com (unknown [10.163.46.59])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 1DA173F6A8;
-	Thu, 20 Jun 2024 02:26:21 -0700 (PDT)
-From: Anshuman Khandual <anshuman.khandual@arm.com>
-To: linux-arm-kernel@lists.infradead.org
-Cc: Anshuman Khandual <anshuman.khandual@arm.com>,
+	s=arc-20240116; t=1718876533; c=relaxed/simple;
+	bh=M464FrXG1BzMSxJoRLmhb8x64qRh6UQOdAL9CWcr+44=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ueLWvpPMgP9ZW1ABNKUMOtEXcz+jtHzNlyQepcx3AFXG6hMrD1XUDHEWsB6SMJ2SH9dTJly3T2fu5V+ZQfK85my5jhenpLvnn6YBIiwI5kM9KZjIl6xiC6H4YRoCxX4JqJv0Lj7ZB1OwY9PgMNzsEA3FVSlTH3HbHUwGB8qFIPg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com; spf=pass smtp.mailfrom=sang-engineering.com; dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b=AimULBvV; arc=none smtp.client-ip=194.117.254.33
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	sang-engineering.com; h=from:to:cc:subject:date:message-id
+	:mime-version:content-transfer-encoding; s=k1; bh=B1z8o3F64A+DCT
+	XstfVDYp/68n3Z/j5/2uQhMYJiAuA=; b=AimULBvVdvlYFkN7X0xpWDxwRoLpTu
+	a+/Q0BoDct/2TWNbFRCIlHQQt0nsy6IvDKNQkQZKoyFnU5g+veiOy2TgZ0IaDw3m
+	eZnRdV7O6bR6TL2KA+8KsQkatIWD8iRp6Ek7HgYFWVLTLcIlsYJWDEFdb9Wuc7ha
+	Y8yfha7niZBttr6pDo3jeip5dzf/zSFO8L1h7OjQq94V5KaBL3Kc2u/leFkqmmz2
+	HvGg8UAfN7AZQDg0ft094PKEuCf/N0woc+0pGTaNBE7OZcFBMTQ+Zn0IWOgCXQzJ
+	82YKQOTcoXN7ezrUK2ZIYAPSYZZDjWSssZE2yNnTsVDwL5/Zs7l/7M0Q==
+Received: (qmail 964825 invoked from network); 20 Jun 2024 11:42:06 +0200
+Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 20 Jun 2024 11:42:06 +0200
+X-UD-Smtp-Session: l3s3148p1@SUi6IE8bCtAgAwDPXzjQABqqX1QYyOSW
+From: Wolfram Sang <wsa+renesas@sang-engineering.com>
+To: linux-renesas-soc@vger.kernel.org
+Cc: Wolfram Sang <wsa+renesas@sang-engineering.com>,
+	Bartosz Golaszewski <brgl@bgdev.pl>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Marc Zyngier <maz@kernel.org>,
-	Oliver Upton <oliver.upton@linux.dev>,
-	James Morse <james.morse@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	Mark Brown <broonie@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	kvmarm@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: [RFC V2 2/3] arm64/boot: Enable EL2 requirements for FEAT_Debugv8p9
-Date: Thu, 20 Jun 2024 14:56:06 +0530
-Message-Id: <20240620092607.267132-3-anshuman.khandual@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240620092607.267132-1-anshuman.khandual@arm.com>
-References: <20240620092607.267132-1-anshuman.khandual@arm.com>
+	Linus Walleij <linus.walleij@linaro.org>,
+	linux-doc@vger.kernel.org,
+	linux-gpio@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v10 0/1] gpio: add simple logic analyzer using polling
+Date: Thu, 20 Jun 2024 11:41:57 +0200
+Message-ID: <20240620094159.6785-1-wsa+renesas@sang-engineering.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,135 +63,56 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Fine grained trap control for MDSELR_EL1 register needs to be configured in
-HDFGRTR2_EL2, and HDFGWTR2_EL2 registers when kernel enters at EL1, but EL2
-is also present. This adds a new helper __init_el2_fgt2() initializing this
-new FEAT_FGT2 based fine grained registers.
+Changes since v9:
+* add comment why late_initcall is used
+* use .remove_new instead of .remove
+* add needed includes
+* use devm for allocating mutex
+* remove stray ',' in compatible-array
+* remove success message in probe()
 
-MDCR_EL2.EBWE needs to be enabled for additional (beyond 16) breakpoint and
-watchpoint exceptions when kernel enters at EL1, but EL2 is also present.
-This updates __init_el2_debug() as required for FEAT_Debugv8p9.
+Thank you everyone for the valuable feedback so far. Thing is, I am not
+sure anymore if this is suitable for upstream. Maybe it is a tad too
+hackish. v9 had some ideas for improvements (IIO interface, configfs
+support) which I am not going to tackle. For me, it is (and has been)
+useful as is, but I need to move on. The latest version of what I use
+can be found here:
 
-While here, also update booting.rst with MDCR_EL3 and SCR_EL3 requirements.
+  git://git.kernel.org/pub/scm/linux/kernel/git/wsa/linux.git renesas/topic/gpio-logic-analyzer
 
-Cc: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Will Deacon <will@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Marc Zyngier <maz@kernel.org>
-Cc: Oliver Upton <oliver.upton@linux.dev>
-Cc: linux-arm-kernel@lists.infradead.org
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: kvmarm@lists.linux.dev
-Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
----
- Documentation/arch/arm64/booting.rst | 19 +++++++++++++++++++
- arch/arm64/include/asm/el2_setup.h   | 27 +++++++++++++++++++++++++++
- arch/arm64/include/asm/kvm_arm.h     |  1 +
- 3 files changed, 47 insertions(+)
+If someone wants to continue from here, I am all for it. If that thing
+is useful or educational for someone, I am happy. And for those who
+don't know what this is about, here is an old coverletter:
 
-diff --git a/Documentation/arch/arm64/booting.rst b/Documentation/arch/arm64/booting.rst
-index b57776a68f15..e69d972018cf 100644
---- a/Documentation/arch/arm64/booting.rst
-+++ b/Documentation/arch/arm64/booting.rst
-@@ -285,6 +285,12 @@ Before jumping into the kernel, the following conditions must be met:
- 
-     - SCR_EL3.FGTEn (bit 27) must be initialised to 0b1.
- 
-+  For CPUs with the Fine Grained Traps (FEAT_FGT2) extension present:
-+
-+  - If EL3 is present and the kernel is entered at EL2:
-+
-+    - SCR_EL3.FGTEn2 (bit 59) must be initialised to 0b1.
-+
-   For CPUs with support for HCRX_EL2 (FEAT_HCX) present:
- 
-   - If EL3 is present and the kernel is entered at EL2:
-@@ -319,6 +325,19 @@ Before jumping into the kernel, the following conditions must be met:
-     - ZCR_EL2.LEN must be initialised to the same value for all CPUs the
-       kernel will execute on.
- 
-+  For CPUs with FEAT_Debugv8p9 extension present:
-+
-+  - If the kernel is entered at EL1 and EL2 is present:
-+
-+    - HDFGRTR2_EL2.nMDSELR_EL1 (bit 5) must be initialized to 0b1
-+    - HDFGWTR2_EL2.nMDSELR_EL1 (bit 5) must be initialized to 0b1
-+    - MDCR_EL2.EBWE (bit 43) must be initialized to 0b1
-+
-+  - If EL3 is present:
-+
-+    - MDCR_EL3.TDA (bit 9) must be initialized to 0b0
-+    - MDCR_EL3.EBWE (bit 43) must be initialized to 0b1
-+
-   For CPUs with the Scalable Matrix Extension (FEAT_SME):
- 
-   - If EL3 is present:
-diff --git a/arch/arm64/include/asm/el2_setup.h b/arch/arm64/include/asm/el2_setup.h
-index fd87c4b8f984..0cb26a9f34c3 100644
---- a/arch/arm64/include/asm/el2_setup.h
-+++ b/arch/arm64/include/asm/el2_setup.h
-@@ -97,6 +97,14 @@
- 						// to own it.
- 
- .Lskip_trace_\@:
-+	mrs	x1, id_aa64dfr0_el1
-+	ubfx	x1, x1, #ID_AA64DFR0_EL1_DebugVer_SHIFT, #4
-+	cmp	x1, #ID_AA64DFR0_EL1_DebugVer_V8P9
-+	b.lt	.Lskip_dbg_v8p9_\@
-+
-+	mov	x0, #MDCR_EL2_EBWE
-+	orr	x2, x2, x0
-+.Lskip_dbg_v8p9_\@:
- 	msr	mdcr_el2, x2			// Configure debug traps
- .endm
- 
-@@ -204,6 +212,24 @@
- .Lskip_fgt_\@:
- .endm
- 
-+.macro __init_el2_fgt2
-+	mrs	x1, id_aa64mmfr0_el1
-+	ubfx	x1, x1, #ID_AA64MMFR0_EL1_FGT_SHIFT, #4
-+	cmp	x1, #ID_AA64MMFR0_EL1_FGT_FGT2
-+	b.lt	.Lskip_fgt2_\@
-+
-+	mrs	x1, id_aa64dfr0_el1
-+	ubfx	x1, x1, #ID_AA64DFR0_EL1_DebugVer_SHIFT, #4
-+	cmp	x1, #ID_AA64DFR0_EL1_DebugVer_V8P9
-+	b.lt	.Lskip_dbg_v8p9_\@
-+
-+	mov_q   x0, HDFGWTR2_EL2_nMDSELR_EL1
-+	msr_s	SYS_HDFGWTR2_EL2, x0
-+	msr_s	SYS_HDFGRTR2_EL2, x0
-+.Lskip_dbg_v8p9_\@:
-+.Lskip_fgt2_\@:
-+.endm
-+
- .macro __init_el2_nvhe_prepare_eret
- 	mov	x0, #INIT_PSTATE_EL1
- 	msr	spsr_el2, x0
-@@ -229,6 +255,7 @@
- 	__init_el2_nvhe_idregs
- 	__init_el2_cptr
- 	__init_el2_fgt
-+	__init_el2_fgt2
- .endm
- 
- #ifndef __KVM_NVHE_HYPERVISOR__
-diff --git a/arch/arm64/include/asm/kvm_arm.h b/arch/arm64/include/asm/kvm_arm.h
-index b3fb368bcadb..8621a278ce25 100644
---- a/arch/arm64/include/asm/kvm_arm.h
-+++ b/arch/arm64/include/asm/kvm_arm.h
-@@ -312,6 +312,7 @@
- 				 GENMASK(15, 0))
- 
- /* Hyp Debug Configuration Register bits */
-+#define MDCR_EL2_EBWE		(UL(1) << 43)
- #define MDCR_EL2_E2TB_MASK	(UL(0x3))
- #define MDCR_EL2_E2TB_SHIFT	(UL(24))
- #define MDCR_EL2_HPMFZS		(UL(1) << 36)
+===
+Here is the next update of the in-kernel logic analyzer based on GPIO
+polling with local irqs disabled. It has been tested locally and
+remotely. It provided satisfactory results. Besides the driver, there is
+also a script which isolates a CPU to achieve the best possible result.
+I am aware of the latency limitations. However, the intention is for
+debugging only, not mass production. Especially for remote debugging and
+to get a first impression, this has already been useful. Documentation
+is within the patch, to get a better idea what this is all about.
+
+And an eLinux-wiki page with a picture of a result is here:
+https://elinux.org/Kernel_GPIO_Logic_analyzer
+===
+
+Wolfram Sang (1):
+  gpio: add sloppy logic analyzer using polling
+
+ .../dev-tools/gpio-sloppy-logic-analyzer.rst  |  93 +++++
+ Documentation/dev-tools/index.rst             |   1 +
+ drivers/gpio/Kconfig                          |  17 +
+ drivers/gpio/Makefile                         |   1 +
+ drivers/gpio/gpio-sloppy-logic-analyzer.c     | 344 ++++++++++++++++++
+ tools/gpio/gpio-sloppy-logic-analyzer.sh      | 246 +++++++++++++
+ 6 files changed, 702 insertions(+)
+ create mode 100644 Documentation/dev-tools/gpio-sloppy-logic-analyzer.rst
+ create mode 100644 drivers/gpio/gpio-sloppy-logic-analyzer.c
+ create mode 100755 tools/gpio/gpio-sloppy-logic-analyzer.sh
+
 -- 
-2.25.1
+2.43.0
 
 
