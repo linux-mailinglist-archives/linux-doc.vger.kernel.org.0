@@ -1,189 +1,496 @@
-Return-Path: <linux-doc+bounces-19000-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19002-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13B5D90FB9A
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Jun 2024 05:18:56 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1928690FBA0
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Jun 2024 05:20:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 953411F22C25
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Jun 2024 03:18:55 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B5D0E283E67
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Jun 2024 03:20:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0656A17545;
-	Thu, 20 Jun 2024 03:18:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D52E71EF1D;
+	Thu, 20 Jun 2024 03:20:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HnXlEZsf"
+	dkim=pass (1024-bit key) header.d=nxp.com header.i=@nxp.com header.b="s5tprcSG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com (mail-vi1eur04on2050.outbound.protection.outlook.com [40.107.8.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7AD3B2139C7;
-	Thu, 20 Jun 2024 03:18:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.50
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718853531; cv=none; b=X5381CTE/BeUio0D0OPiTK+QtGOTviXnsBgsQWVveeBqhyYFdt9mrTmzKcQhbBLDYdkOz3ODZNqFzOsyAAbAsrCEnLzKuJfRhHQCM0gdu6LHA40BeOxl9MuKP+IJ43N2rP3qsAtqetpHDimIyu4tTmQZqjgw3QOUvfnIwlCEH0E=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718853531; c=relaxed/simple;
-	bh=Ku4WBWGLxv96+zeTa8DS1MjRgA6aKIiac+KSQePtfA8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NjcgYrRRq3kmEVAUulmBptMloGkyOBJ3oBAV+QFSzkoCl7ybs3HIrFBnm7Qv5x67+mFnwlicvIUM9K3Yv0HHGd/O1hJPr6BpoQB6QKbXrrwOu5481MEBq/NLzlsmNIvKhO/gF2uKdDKnS4iMJbiSkgUTduLfVJwL2EpvbAPEZak=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HnXlEZsf; arc=none smtp.client-ip=209.85.216.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-2c72becd4fdso417248a91.0;
-        Wed, 19 Jun 2024 20:18:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718853530; x=1719458330; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=bxzWE9lbTzRfMB3sOdCyzovZxPNcU5DkIKhPdXbvn8I=;
-        b=HnXlEZsfZN+Za1OuPMF1I9L6cEHgCX1a6hKgeT/KbP2V79qjFgEOs+6pVrV6Qv5Wjo
-         5NJXrCumleGnDWkba0sI7YuycOEsMiynNylMi7MUvWg8qIOu6HwK9Wcz2Kpc+L6yEIK4
-         VVUZF/T1ilFoyAKc60CGuqug3tbWtfqGEXUAralefg3C2akamu49En3174a6jMI0Iiu/
-         yzoYR5oGhEPuN2Xn5BmvG6TLFvV6x8Y8UBMbv8W1Vtr6On6LOL4MdM2ib5ReYrWYlKu3
-         SWj7vGjblrFOIYhRuA1Xc17fFl1QkCwnuK8NOOkPGwIpLpuJ2u0tDSR1UnhmaJkNJ3JA
-         96lA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718853530; x=1719458330;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=bxzWE9lbTzRfMB3sOdCyzovZxPNcU5DkIKhPdXbvn8I=;
-        b=vLIQ/vHPYMgtWTJKzytk8F9Xs5jbBe3vOYnSWEnrcF9+bvz5S0zkfUOhP/7yk1It2C
-         TNIR/J/63UVr2g2p9FLXN1N9RcEyekmVroXGZcZPPlOuvAMDm+cOUt8Fxjx5wuLNfzg3
-         BtJAZazxmCLkANFx5VAwgidNkU/ilblA+Gktptt3YpMm1LUqJLashrSMjciR9QE0Rlh2
-         irEE8Y8NU5UBWJE+Rq1+oL8KulnvR+BJW4+Kwaz/96QF0JekNGMbHJs3BtwZG1NYcpJ2
-         sludBSUkrk5U9YAO7E0C+SNENWmyRaezHhuNiWY2wKy85xp+3cbNOQwj+Ewz+1v1ACNE
-         T9Nw==
-X-Forwarded-Encrypted: i=1; AJvYcCUwcozNQR6DxRNuPB5wbnADZv/BqCkFMXPgU5PmKmtCeU+4Pknq+9irkzCGcJPqAlDR60kfITMsHgqRyUYEM4rGIOiDgPIi7b/NN6FpoAYGWQwH+sQ+FkY83EJlc7q+aO3ocSqFEZDu
-X-Gm-Message-State: AOJu0YzRsjfn8wdshBltDXcNAfDMfzfkFK4r1KduVERIK9i9keXBbSpd
-	ROBNjlsUwC5kcs+lo4dmBIkdWYDyLWT+5sF571KmKFClkiTMfUr0NzZf4Q==
-X-Google-Smtp-Source: AGHT+IEVUyMtZdJrpNx5r5URae5gSqGLqjWpA5GtSjKjJmfpbYmeA8V/5FvfMfs6pMkWBsE5u5GzWw==
-X-Received: by 2002:a17:90a:2f43:b0:2c7:bade:25be with SMTP id 98e67ed59e1d1-2c7bade2676mr3614370a91.14.1718853529711;
-        Wed, 19 Jun 2024 20:18:49 -0700 (PDT)
-Received: from [192.168.255.10] ([43.132.141.24])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2c738c1d57asm3232673a91.1.2024.06.19.20.18.47
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 19 Jun 2024 20:18:49 -0700 (PDT)
-Message-ID: <5f6bd005-81b4-4e26-ae43-803448a0dbbf@gmail.com>
-Date: Thu, 20 Jun 2024 11:18:45 +0800
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 443D91EA8F;
+	Thu, 20 Jun 2024 03:20:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.8.50
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1718853640; cv=fail; b=XmR+i/qoqfUjcbM0VOTPWtG1wSdgmrG1pfmpPBVyBn4yXOpQtA9CYYdXQF9XF/BUaMLCrRC4GxDUDPf4RV+9ztNTSaDwi2O3ApEg0DnPwi6S1B6si52esHpCgzxKV+91iQ+tevEuWqlLOUGvn8WkyTTqts8HxZDAnd4H3PgThHc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1718853640; c=relaxed/simple;
+	bh=HJeCgjhhpZ5xYdji/Xl0UxagIHelGNxxGx5Yu/Tlf2c=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=bymYypTVz7oDWnRBKsXXvEknS24biVNQTcTfV/eZOYeHk03XWXXTFBlr2U7vWb4AhV4gzN/AftgLto6jJI90VqK/mI+zi/Iq0eTofquq0shR1aP8YE8c4r3GR+vJMYg6DCphvwsaaEUhb4xSBpe+Es5ctNAbkGiLzdETsJ6BlJQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; dkim=pass (1024-bit key) header.d=nxp.com header.i=@nxp.com header.b=s5tprcSG; arc=fail smtp.client-ip=40.107.8.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=R7Nh/qTPnnmQorVzreQgsyDEbb+GRE5nB8fEPaHHMVYljpYdADtbdbLXinxmeOF5M720BvGZizN/+sQJAGUd65FWCZyIXZAQdkcQGF/amuU7V22QytC+O1gAwNtC71V3W4tPdBRHFRcuQ5J0CKXQF0xhCVGcYvYc3vytaSvLVPWJ+8ywMEU13SQ1Lko2qlHggKv1pRB0o0UwEXZaElV3NspWMpLFIobewF9TRcDeVkeEIdC9bCmTvf/sPGK6AsPYzSOWXUrDcV2xLLMT7Zp3HQ0vjwcJkNIZxt/0nWGXyApzoIQSa07rs+d5E2gkYUk5aHXnceoP4DxgqCujIBhD9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RKqaBrwFZr63Jl5pqMnOtQTn3JVDhDiGh5ASzKTBAgA=;
+ b=CJ6uSAf/OZRnsQbIql8QwrD0J4b86mVggGUq9Uk++pnniyp446tvT7EuBr2JqI3+5MWeEHNETdtwulXBB+5Q6rF1eP4hkjHtHWyxXQR3TkE1kX4dp9PeHcp50TtGiKhbb2hJiwjKmMEZ9yFrRCuPoBsf4I/THIpu5Y78c67hydtQThy2WFGVYy6rA374DVytA/9Hr6jA+6HAmxXCyo82Kr+HOmsRKA+ye1e5huEJ7sSKrHX5PXZSnBjS/LxXu9O1+Kh61GKzS5gMg22dM9VTKwAw49HRPlTWVXWq/qsaftFTxcIYOQYKmlWn/CSub2BPvMQv7291IGft0nIF4C7fvg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RKqaBrwFZr63Jl5pqMnOtQTn3JVDhDiGh5ASzKTBAgA=;
+ b=s5tprcSGomNmZ2RC2Cj0bWsESsZ7Kne5J1Z3LZjmQnMImZojkvhzaBmcUNmWI9mkmHwbJ45a3mOj9aHmxOA/TRVErC3kXs57NwteqmYjRuAGwXi5O3YP8qX0Z/F+3lkwkMoYz2Bqt0aKv6dmDbnMEZBSqWVVFwdmd6r4Ym1pLMM=
+Received: from AM6PR04MB5941.eurprd04.prod.outlook.com (2603:10a6:20b:9e::16)
+ by AM9PR04MB8210.eurprd04.prod.outlook.com (2603:10a6:20b:3e7::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.21; Thu, 20 Jun
+ 2024 03:20:35 +0000
+Received: from AM6PR04MB5941.eurprd04.prod.outlook.com
+ ([fe80::9f4e:b695:f5f0:5256]) by AM6PR04MB5941.eurprd04.prod.outlook.com
+ ([fe80::9f4e:b695:f5f0:5256%4]) with mapi id 15.20.7698.017; Thu, 20 Jun 2024
+ 03:20:35 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Cristian Marussi <cristian.marussi@arm.com>, "Peng Fan (OSS)"
+	<peng.fan@oss.nxp.com>
+CC: Jonathan Corbet <corbet@lwn.net>, Shawn Guo <shawnguo@kernel.org>, Sascha
+ Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team
+	<kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, Sudeep Holla
+	<sudeep.holla@arm.com>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski
+	<krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"imx@lists.linux.dev" <imx@lists.linux.dev>,
+	"linux-arm-kernel@lists.infradead.org"
+	<linux-arm-kernel@lists.infradead.org>, "devicetree@vger.kernel.org"
+	<devicetree@vger.kernel.org>
+Subject: RE: [PATCH v4 4/6] firmware: arm_scmi: add initial support for i.MX
+ MISC protocol
+Thread-Topic: [PATCH v4 4/6] firmware: arm_scmi: add initial support for i.MX
+ MISC protocol
+Thread-Index: AQHarbcg8tYP6XkRL0OL5bfUz062erHMaO8AgAO7ZlA=
+Date: Thu, 20 Jun 2024 03:20:35 +0000
+Message-ID:
+ <AM6PR04MB59412EBBB6899EAEAF4CB93E88C82@AM6PR04MB5941.eurprd04.prod.outlook.com>
+References: <20240524-imx95-bbm-misc-v2-v4-0-dc456995d590@nxp.com>
+ <20240524-imx95-bbm-misc-v2-v4-4-dc456995d590@nxp.com>
+ <ZnB9ANdbJ9d9MZHD@pluto>
+In-Reply-To: <ZnB9ANdbJ9d9MZHD@pluto>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AM6PR04MB5941:EE_|AM9PR04MB8210:EE_
+x-ms-office365-filtering-correlation-id: b396e06d-058d-40fd-f8a3-08dc90d7f331
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230037|366013|7416011|376011|1800799021|38070700015;
+x-microsoft-antispam-message-info:
+ =?us-ascii?Q?sfvDcq5hRgiYXUc2mLsw7Eii4FvSPxoSM53VHYS0rXpO7AzP9TMkVSSzMMp1?=
+ =?us-ascii?Q?MDvy2pld2yv1A4uyEHC+qVAbfgKJVwp4NMbWq5dkuYvlbyYEMcF9wabK9XHp?=
+ =?us-ascii?Q?pr1LAWy72vNvyEyQt8inbaMzQQ95Nh+ckVwEk6zMjv0OuZRrmrfKuryp01pp?=
+ =?us-ascii?Q?NTXeqDxs0W4kSJSLRONOuMvs++jwqNSDiJ2Jq0KwDUMVVP4h3oo5gLNbE0Gc?=
+ =?us-ascii?Q?YaV4v7DR7LUeNjqF6mQMr6NrOOKNdZESUzEF3NKYWpU57B4BK+ejYmkJ5exp?=
+ =?us-ascii?Q?EzJSYbgGWQrR5d93XLEWjV03JFr8nYx0lLNx7g14qdHAciN4CO3Zb2oLL2sg?=
+ =?us-ascii?Q?Kxkq4e4iHPy8DaZ/8AgugI1bq1sLjE6UqB6LR8PyNrRaKR026MFw7D3ONcIi?=
+ =?us-ascii?Q?vAZe7a5OGC6u6ashG8cravT/L5J8sUVj4Oi2XWL1mh5n4wsb3EvjIjO4EU7g?=
+ =?us-ascii?Q?3Yt67AFzeOT9JIejJiIs74Av7NrJhqqKjBBdiwpdY4uz6383v6SuxQAU0Ejx?=
+ =?us-ascii?Q?OQUyrLKuvdKs9rTIceKPyU/MkLGfe3wnLGNp9WXYcvTAkkob8ZGE4d2OHsZe?=
+ =?us-ascii?Q?hp3cjBUQ6SpAaKkE3FkAS3gnAcnp5CZUGiZDXLdqYD14c98gNd8VXxVEfqkb?=
+ =?us-ascii?Q?4Y0nK2LOl0jYKpnlQLO14F96DvUBNQHhGNIS+5jgGBTxvk3l6y9SAMyse0YC?=
+ =?us-ascii?Q?+2vcawXPAvkwFbxkuSWU0u0CtEtCMVoJfd/c7CqfLpRP4Zk3SCXrtR2+KL0G?=
+ =?us-ascii?Q?1H3pFjGJ8qCqK0WhXyyyjrqArOxEGro7RnX1urtV94WCFz1wtg4lLSa5YuyW?=
+ =?us-ascii?Q?xuDuOANHOtRYn5SNhtjt978kZrZrJepUruVob69/ZhfTqK4pnrDLfjPEMu6j?=
+ =?us-ascii?Q?QwDPEQ8R9S9F4NvfeOkZ+0eDGipXj/Xv8VDrYzX3Brz/hPHkFXzUV431nEG+?=
+ =?us-ascii?Q?CoDFufg+lhVTA/qGiR4uJpjwdb/skaOK+RN8N9AqKAlMwemzUEKicPPEVf4f?=
+ =?us-ascii?Q?8yAJDapT7UB7YNQd/xuSG0xi7PJm5Nv1Q/oR1U7sYxuC8/kDB1AUETceimi4?=
+ =?us-ascii?Q?1VPO17Oi0uHPlIABN0uoh8asbkUQp9WfaBmfSHKMDt+Dey/REi57nDO3J4CF?=
+ =?us-ascii?Q?8h3zMHOq+6GlOdyU4IiX+TfdEjBYch5OpO+eo16sm4qTXZjJnrW2Vfgb6KzB?=
+ =?us-ascii?Q?4LL+c5EHWNp14hB/XZnx5ocO3jQV2zy7TIB+8ZbLgsUBQwQ3Dxv3HMhv3HB3?=
+ =?us-ascii?Q?X5k/lVqy/hxIgBzKlmVfU7N7FlsJ3TarmmmBFLfY3ctKLmMxp34hfwIqE0fw?=
+ =?us-ascii?Q?JLEN8aSQcL7aGbbCCprFRebTjh4ARmiKlbe5t8TFmDPy3LDNKADAlOSsxdeF?=
+ =?us-ascii?Q?DGWW15k=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR04MB5941.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230037)(366013)(7416011)(376011)(1800799021)(38070700015);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?ytVWCpwsJGg/7A7EuJm0d0CoekBPESSIvqI2amR/r8Fhqj5ZT75Q8rTYxKZp?=
+ =?us-ascii?Q?FC5ZmP7aBennMFkjcPTGRo6t1fl+Y4BXLFp1xhERmNA/mPWy2j1zNsZ36iwr?=
+ =?us-ascii?Q?bGUC7k+podhllO390pl0eusum8w2g6VWZ+0+NJsiNP0GUATP1T/lZfDWT7C+?=
+ =?us-ascii?Q?AMV5zZm/yjN9/NShOWEMhfbNyQyh8z0UobFYQlkL/OfjkpoJvHCLhaTMBEpm?=
+ =?us-ascii?Q?k346OXadr/TkIJNMc7loBWi71P1UV5GokQdm5cXslmZg40SXurnTS9xoCA49?=
+ =?us-ascii?Q?rX73QHXDDHOIaQLYUzTl3TxB6EuYw1GLzNEyqpnEzmYGxAWU9tiicNXnYRYX?=
+ =?us-ascii?Q?b0g+xEr7m32olfgc4CpqeSHWRwW+9p71k0XPjJyMGTtN2IsuNexutvQvMFoz?=
+ =?us-ascii?Q?Wh+8kbkR/8rVRFlxc7QdRd9mjCvBdEn9F1iSbXujFcDdHEvFzd6Gj1gj2HTV?=
+ =?us-ascii?Q?DQh9fIElib0mZHgdAOa2YnuO3hpWe3e+YF2q4ce3J0Tu7FkAh4tjKZ9qbJaR?=
+ =?us-ascii?Q?vpNQme5gxnBKDFjjf221PWsbGDONSmcVJROK125bfOFjTb2L+6VjRYhCom/G?=
+ =?us-ascii?Q?uHwOkRBEkVSnGkXV/nHggoCCBnnU6l07IDCY+tHFoWgsINvGvbrcx6cmMi5J?=
+ =?us-ascii?Q?Nbi2UVTgu5Xkshtdnv5AgzdFe7gkCAfBQAf7Jqdn9CrwglX06STuxhLSOHiO?=
+ =?us-ascii?Q?pscpYo4n7s94cGeP/jmxB1e42rSg+8kKNzRE99y4J0zvqaBsuz60dxouUvlx?=
+ =?us-ascii?Q?E5Wtc7v72BA84fn+TJ/xK+J5LlEGCzVH2n79prkqVi68V5etRScRD2MNbDIq?=
+ =?us-ascii?Q?L8O3uwOycZ4gMZs7533ffjtcrPfGJIO0YHBoFrst/cswo4oqz7nWTAyhfCa3?=
+ =?us-ascii?Q?a3vzA9A9wjQH7v7UHq5ba00dV3pz/YGyhFAWMaS2adTfTTZSc4F+gufNR/ly?=
+ =?us-ascii?Q?oIOZTfSAp98jSylZ2PUU9HbNeWkJ3VAtKEcooHQEDhxvfyY1mZMm+l/GfE5z?=
+ =?us-ascii?Q?bJqjzJeR+oMx/9rWiZsyJBDIADPNJkcsgZNQytalxUTUX5BUX1tGatga3sR4?=
+ =?us-ascii?Q?jXd7t2H+fo9bLlLbQLXja7fCCHnphBRAHfE5P6ms/eGZkmOZPXnemY0wb6UP?=
+ =?us-ascii?Q?86d61vJ7K4eil0lWnTt17U2UnaXxsEYtfBFPiLJeDIYBJNf0x/R9wDO0sQwh?=
+ =?us-ascii?Q?VDYhHrn+F49qonjc6ZLhJ2HUI2gQoGZTqdZDvvPUG1cq81ixbGyU3k6GOazt?=
+ =?us-ascii?Q?8HEC7BdlFTbZsenb4r4is2Jvcq6qiIJzyQDc+yPOHPILZ1nznAOhfGjCRSxA?=
+ =?us-ascii?Q?SMImkokE7/IJ/CfRZdR2w7HvZ+KPdw07ATraUUYv3PIuQK0NfwSB1i8b/EAf?=
+ =?us-ascii?Q?/lX7+OUQ/Wg7xeLKpy3Rrwq3FVuebbSgmKmG5J/wSClw1Wpa2nvir6mRmtnQ?=
+ =?us-ascii?Q?6mLTmuMQDOqquDHT3sCkWfG3NVeL/3uew5/yII6fJp6/MOGBgX9xFR8pfBWp?=
+ =?us-ascii?Q?K8XxiVtlaEsADZkvHvQy22Ctf0TcTSqIaFg6sENDwGdymlnD+rvcAn9jpkN0?=
+ =?us-ascii?Q?dgu4Bl2jAfrV6v21JRU=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] zh_CN/admin-guide: Add zh_CN/admin-guide/numastat.rst
- translation document
-To: Tao Zou <wodemia@foxmail.com>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <siyanteng@loongson.cn>, Jonathan Corbet <corbet@lwn.net>
-Cc: Tao Zou <wodemia@linux.alibaba.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <tencent_6C54200469B1518482F88605A0980FBFD20A@qq.com>
-Content-Language: en-US
-From: Alex Shi <seakeel@gmail.com>
-In-Reply-To: <tencent_6C54200469B1518482F88605A0980FBFD20A@qq.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM6PR04MB5941.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b396e06d-058d-40fd-f8a3-08dc90d7f331
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jun 2024 03:20:35.1803
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 4/rqjbLjD6i2I3lv7qi3OSpboZz+oYU8RCZTz4UqMJyt6FRPB+MNRJ2jTwFeddA/hBwFCd+96TQgkViQyxlExA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8210
+
+> Subject: Re: [PATCH v4 4/6] firmware: arm_scmi: add initial support for
+> i.MX MISC protocol
+>=20
+> On Fri, May 24, 2024 at 04:56:46PM +0800, Peng Fan (OSS) wrote:
+> > From: Peng Fan <peng.fan@nxp.com>
+> >
+> > i.MX95 System Manager(SM) firmware includes a SCMI vendor
+> protocol,
+> > SCMI MISC protocol which includes controls that are misc
+> > settings/actions that must be exposed from the SM to agents. They
+> are
+> > device specific and are usually define to access bit fields in various
+> > mix block control modules, IOMUX_GPR, and other General Purpose
+> > registers, Control Status Registers owned by the SM.
+> >
+
+.....
+> > +
+> > +static int scmi_imx_misc_ctrl_validate_id(const struct
+> scmi_protocol_handle *ph,
+> > +					  u32 ctrl_id)
+> > +{
+> > +	struct scmi_imx_misc_info *mi =3D ph->get_priv(ph);
+> > +
+> > +	if ((ctrl_id < BRD_CTRL_START_ID) && (ctrl_id > mi-
+> >nr_dev_ctrl))
+> > +		return -EINVAL;
+> > +	if (ctrl_id >=3D BRD_CTRL_START_ID + mi->nr_brd_ctrl)
+> > +		return -EINVAL;
+>=20
+> ...are these conditions fine ?
+
+Yes. they are correct.
+
+ just checking because they seem a bit
+> odd...but I am certainly missing something...in case they are ok, is it
+> possible to add a comment explaining why those conds lead to -
+> EINVAL ?
+
+We have a flag "MISC_CTRL_FLAG_BRD  0x8000U" to indicate it is
+board ctrl or non-board ctrl
+
+>=20
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +static int scmi_imx_misc_ctrl_notify(const struct
+> scmi_protocol_handle *ph,
+> > +				     u32 ctrl_id, u32 evt_id, u32 flags)
+> {
+> > +	struct scmi_imx_misc_ctrl_notify_in *in;
+> > +	struct scmi_xfer *t;
+> > +	int ret;
+> > +
+> > +	ret =3D scmi_imx_misc_ctrl_validate_id(ph, ctrl_id);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	ret =3D ph->xops->xfer_get_init(ph,
+> SCMI_IMX_MISC_CTRL_NOTIFY,
+> > +				      sizeof(*in), 0, &t);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	in =3D t->tx.buf;
+> > +	in->ctrl_id =3D cpu_to_le32(ctrl_id);
+> > +	in->flags =3D cpu_to_le32(flags);
+> > +
+> > +	ret =3D ph->xops->do_xfer(ph, t);
+> > +
+> > +	ph->xops->xfer_put(ph, t);
+> > +
+> > +	return ret;
+> > +}
+> > +
+> > +static int
+> > +scmi_imx_misc_ctrl_set_notify_enabled(const struct
+> scmi_protocol_handle *ph,
+> > +				      u8 evt_id, u32 src_id, bool enable)
+> {
+> > +	int ret;
+> > +
+> > +	/* misc_ctrl_req_notify is for enablement */
+> > +	if (enable)
+> > +		return 0;
+> > +
+> > +	ret =3D scmi_imx_misc_ctrl_notify(ph, src_id, evt_id, 0);
+> > +	if (ret)
+> > +		dev_err(ph->dev, "FAIL_ENABLED - evt[%X] src[%d] -
+> ret:%d\n",
+> > +			evt_id, src_id, ret);
+> > +
+> > +	return ret;
+> > +}
+> > +
+> > +static int scmi_imx_misc_ctrl_get_num_sources(const struct
+> > +scmi_protocol_handle *ph) {
+> > +	return GENMASK(15, 0);
+> > +}
+>=20
+> This is statically defined at compile time..you dont need to provide this
+> method, which is just for discover number of possible event sources at
+> runtime....just drop it and use .num_sources in scmi_protocol_events
+>=20
 
 
+I see. Fix in v5.
 
-On 6/20/24 11:14 AM, Tao Zou wrote:
-> From: Tao Zou <wodemia@linux.alibaba.com>
-> 
-> Add translation zh_CN/admin-guide/numastat.rst and link it to
-> zh_CN/admin-guide/index.rst while clean its todo entry.
-> 
-> commit 77691ee92d4a ("Documentation: update numastat explanation")
-> 
-> Signed-off-by: Tao Zou <wodemia@linux.alibaba.com>
-> Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
-> ---
->  .../translations/zh_CN/admin-guide/index.rst  |  2 +-
->  .../zh_CN/admin-guide/numastat.rst            | 48 +++++++++++++++++++
->  2 files changed, 49 insertions(+), 1 deletion(-)
->  create mode 100644 Documentation/translations/zh_CN/admin-guide/numastat.rst
-> 
-> diff --git a/Documentation/translations/zh_CN/admin-guide/index.rst b/Documentation/translations/zh_CN/admin-guide/index.rst
-> index ac2960da33e6..0db80ab830a0 100644
-> --- a/Documentation/translations/zh_CN/admin-guide/index.rst
-> +++ b/Documentation/translations/zh_CN/admin-guide/index.rst
-> @@ -68,6 +68,7 @@ Todolist:
->     cpu-load
->     cputopology
->     lockup-watchdogs
-> +   numastat
->     unicode
->     sysrq
->     mm/index
-> @@ -109,7 +110,6 @@ Todolist:
->  *   module-signing
->  *   mono
->  *   namespaces/index
-> -*   numastat
->  *   parport
->  *   perf-security
->  *   pm/index
-> diff --git a/Documentation/translations/zh_CN/admin-guide/numastat.rst b/Documentation/translations/zh_CN/admin-guide/numastat.rst
-> new file mode 100644
-> index 000000000000..817043676c90
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/admin-guide/numastat.rst
-> @@ -0,0 +1,48 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: Documentation/admin-guide/numastat.rst
-> +:Translator: Tao Zou <wodemia@linux.alibaba.com>
-> +
-> +
-> +=======================
-> +Numa策略命中/未命中统计
-> +=======================
-> +
-> +/sys/devices/system/node/node*/numastat
-> +
-> +所有数据的单位都是页面。巨页有独立的计数器。
-> +
-> +numa_hit、numa_miss和numa_foreign计数器反应了进程是否能够在他们偏好的节点上分配内存。
-> +如果进程成功在偏好的节点上分配内存则在偏好的节点上增加numa_hit计数，否则在偏好的节点上增
-> +加numa_foreign计数同时在实际内存分配的节点上增加numa_miss计数。
-> +
-> +通常，偏好的节点是进程运行所在的CPU的本地节点，但是一些限制可以改变这一行为，比如内存策略，
-> +因此同样有两个基于CPU本地节点的计数器。local_node和numa_hit类似，当在CPU所在的节点上分
-> +配内存时增加local_node计数，other_node和numa_miss类似，当在CPU所在节点之外的其他节点
-> +上成功分配内存时增加other_node计数。需要注意，没有和numa_foreign对应的计数器。
-> +
-> +更多细节内容:
-> +
-> +=============== ============================================================
-> +numa_hit        一个进程想要从本节点分配内存并且成功。
-> +
-> +numa_miss       一个进程想要从其他节点分配内存但是最终在本节点完成内存分配。
-> +
-> +numa_foreign    一个进程想要在本节点分配内存但是最终在其他节点完成内存分配。
-> +
-> +local_node      一个进程运行在本节点的CPU上并且从本节点上获得了内存。
-> +
-> +other_node      一个进程运行在其他节点的CPU上但是在本节点上获得了内存。
-> +
-> +interleave_hit  内存交叉分配策略下想要从本节点分配内存并且成功。
-> +=============== ============================================================
-> +
-> +你可以使用numactl软件包（http://oss.sgi.com/projects/libnuma/）中的numastat工具
-> +来辅助阅读。需要注意，numastat工具目前只在有少量CPU的机器上运行良好。
-> +
-> +需要注意，在有无内存节点（一个节点有CPUs但是没有内存）的系统中numa_hit，numa_miss和
+> > +
+> > +static void *
+> > +scmi_imx_misc_ctrl_fill_custom_report(const struct
+> scmi_protocol_handle *ph,
+> > +				      u8 evt_id, ktime_t timestamp,
+> > +				      const void *payld, size_t payld_sz,
+> > +				      void *report, u32 *src_id)
+> > +{
+> > +	const struct scmi_imx_misc_ctrl_notify_payld *p =3D payld;
+> > +	struct scmi_imx_misc_ctrl_notify_report *r =3D report;
+> > +
+> > +	if (sizeof(*p) !=3D payld_sz)
+> > +		return NULL;
+> > +
+> > +	r->timestamp =3D timestamp;
+> > +	r->ctrl_id =3D p->ctrl_id;
+> > +	r->flags =3D p->flags;
+> > +	if (src_id)
+> > +		*src_id =3D r->ctrl_id;
+> > +	dev_dbg(ph->dev, "%s: ctrl_id: %d flags: %d\n", __func__,
+> > +		r->ctrl_id, r->flags);
+> > +
+> > +	return r;
+> > +}
+> > +
+> > +static const struct scmi_event_ops scmi_imx_misc_event_ops =3D {
+> > +	.get_num_sources =3D scmi_imx_misc_ctrl_get_num_sources,
+> drop
+>=20
+> > +	.set_notify_enabled =3D scmi_imx_misc_ctrl_set_notify_enabled,
+> > +	.fill_custom_report =3D scmi_imx_misc_ctrl_fill_custom_report,
+> > +};
+> > +
+> > +static const struct scmi_event scmi_imx_misc_events[] =3D {
+> > +	{
+> > +		.id =3D SCMI_EVENT_IMX_MISC_CONTROL,
+> > +		.max_payld_sz =3D sizeof(struct
+> scmi_imx_misc_ctrl_notify_payld),
+> > +		.max_report_sz =3D sizeof(struct
+> scmi_imx_misc_ctrl_notify_report),
+> > +	},
+> > +};
+> > +
+> > +static struct scmi_protocol_events scmi_imx_misc_protocol_events
+> =3D {
+> > +	.queue_sz =3D SCMI_PROTO_QUEUE_SZ,
+> > +	.ops =3D &scmi_imx_misc_event_ops,
+> > +	.evts =3D scmi_imx_misc_events,
+> > +	.num_events =3D ARRAY_SIZE(scmi_imx_misc_events),
+>=20
+> 	.num_sources =3D MAX_MISC_CTRL_SOURCES,  // GENMASK(15,
+> 0)
+>=20
+> > +};
+> > +
+> > +static int scmi_imx_misc_protocol_init(const struct
+> > +scmi_protocol_handle *ph) {
+> > +	struct scmi_imx_misc_info *minfo;
+> > +	u32 version;
+> > +	int ret;
+> > +
+> > +	ret =3D ph->xops->version_get(ph, &version);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	dev_info(ph->dev, "NXP SM MISC Version %d.%d\n",
+> > +		 PROTOCOL_REV_MAJOR(version),
+> PROTOCOL_REV_MINOR(version));
+> > +
+> > +	minfo =3D devm_kzalloc(ph->dev, sizeof(*minfo), GFP_KERNEL);
+> > +	if (!minfo)
+> > +		return -ENOMEM;
+> > +
+> > +	ret =3D scmi_imx_misc_attributes_get(ph, minfo);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	return ph->set_priv(ph, minfo, version); }
+>=20
+> Same as previous patch please move the init downb below near the
+> scmi_protocol struct right after the ops
+>=20
 
-s/在有无内存节点/存在无内存节点/ ？
 
-Thanks
-Alex
-> +numa_foreign统计数据会被严重曲解。在当前的内核实现中，如果一个进程偏好一个无内存节点（即
-> +进程正在该节点的一个本地CPU上运行），实际上会从距离最近的有内存节点中挑选一个作为偏好节点。
-> +结果会导致相应的内存分配不会增加无内存节点上的numa_foreign计数器，并且会扭曲最近节点上的
-> +numa_hit、numa_miss和numa_foreign统计数据。
+Yeah. Fix in v5.
+
+> > +
+> > +static int scmi_imx_misc_ctrl_get(const struct scmi_protocol_handle
+> *ph,
+> > +				  u32 ctrl_id, u32 *num, u32 *val) {
+> > +	struct scmi_imx_misc_ctrl_get_out *out;
+> > +	struct scmi_xfer *t;
+> > +	int ret, i;
+> > +
+> > +	ret =3D scmi_imx_misc_ctrl_validate_id(ph, ctrl_id);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	ret =3D ph->xops->xfer_get_init(ph, SCMI_IMX_MISC_CTRL_GET,
+> sizeof(u32),
+> > +				      0, &t);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	put_unaligned_le32(ctrl_id, t->tx.buf);
+> > +	ret =3D ph->xops->do_xfer(ph, t);
+> > +	if (!ret) {
+> > +		out =3D t->rx.buf;
+> > +		*num =3D le32_to_cpu(out->num);
+>=20
+> To stay even more safer, by guarding from malformed *num fields and
+> just bail out upfront with an error
+>=20
+> 	if (*num >=3D MISC_MAX_VAL ||
+> 	    *num * sizeof(__le32) > t->rx.len - sizeof(__le32))
+>=20
+> and then just
+>=20
+> 		for (i =3D 0; i < *num; i++)
+>=20
+
+ok. looks good. I will fix in v5.
+
+> > +		for (i =3D 0; i < *num && i < MISC_MAX_VAL; i++)
+> > +			val[i] =3D le32_to_cpu(out->val[i]);
+> > +	}
+> > +
+> > +	ph->xops->xfer_put(ph, t);
+> > +
+> > +	return ret;
+> > +}
+> > +
+> > +static int scmi_imx_misc_ctrl_set(const struct scmi_protocol_handle
+> *ph,
+> > +				  u32 ctrl_id, u32 num, u32 *val) {
+> > +	struct scmi_imx_misc_ctrl_set_in *in;
+> > +	struct scmi_xfer *t;
+> > +	int ret, i;
+> > +
+> > +	ret =3D scmi_imx_misc_ctrl_validate_id(ph, ctrl_id);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	if (num > MISC_MAX_VAL)
+> > +		return -EINVAL;
+> > +
+> > +	ret =3D ph->xops->xfer_get_init(ph, SCMI_IMX_MISC_CTRL_SET,
+> sizeof(*in),
+> > +				      0, &t);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	in =3D t->tx.buf;
+> > +	in->id =3D cpu_to_le32(ctrl_id);
+> > +	in->num =3D cpu_to_le32(num);
+> > +	for (i =3D 0; i < num; i++)
+> > +		in->value[i] =3D cpu_to_le32(val[i]);
+> > +
+> > +	ret =3D ph->xops->do_xfer(ph, t);
+> > +
+> > +	ph->xops->xfer_put(ph, t);
+> > +
+> > +	return ret;
+> > +}
+> > +
+> > +static const struct scmi_imx_misc_proto_ops
+> scmi_imx_misc_proto_ops =3D {
+> > +	.misc_ctrl_set =3D scmi_imx_misc_ctrl_set,
+> > +	.misc_ctrl_get =3D scmi_imx_misc_ctrl_get,
+> > +	.misc_ctrl_req_notify =3D scmi_imx_misc_ctrl_notify, };
+> > +
+> > +static const struct scmi_protocol scmi_imx_misc =3D {
+> > +	.id =3D SCMI_PROTOCOL_IMX_MISC,
+> > +	.owner =3D THIS_MODULE,
+> > +	.instance_init =3D &scmi_imx_misc_protocol_init,
+> > +	.ops =3D &scmi_imx_misc_proto_ops,
+> > +	.events =3D &scmi_imx_misc_protocol_events,
+> > +	.supported_version =3D SCMI_PROTOCOL_SUPPORTED_VERSION,
+> > +	.vendor_id =3D "NXP",
+> > +	.sub_vendor_id =3D "i.MX95 EVK",
+> > +};
+> > +module_scmi_protocol(scmi_imx_misc);
+> > diff --git a/include/linux/scmi_imx_protocol.h
+> > b/include/linux/scmi_imx_protocol.h
+> > index e59aedaa4aec..e9285abfc191 100644
+> > --- a/include/linux/scmi_imx_protocol.h
+> > +++ b/include/linux/scmi_imx_protocol.h
+> > @@ -13,8 +13,14 @@
+> >  #include <linux/notifier.h>
+> >  #include <linux/types.h>
+> >
+> > +#define SCMI_PAYLOAD_LEN	100
+> > +
+> > +#define SCMI_ARRAY(X, Y)	((SCMI_PAYLOAD_LEN - (X)) /
+> sizeof(Y))
+> > +#define MISC_MAX_VAL		SCMI_ARRAY(8, uint32_t)
+> >
+> You base all of this on this fixed payload length, but the payload really
+> depends on the configured underlying transport: you can use the
+> ph->hops->get_max_msg_size to retrieve the configured max payload
+> length
+> for the platform you are running on....nad maybe bailout if the
+> minimum size required by your protocol is not available with the
+> currently configured transport...wouldnt't be more robust and reliable
+> then builtin fixing some payload ?
+
+Your point is valid. But I need check our firmware design and see
+if feasible and update.
+
+Thanks,
+Peng.
+
+>=20
+> Thanks,
+> Cristian
 
