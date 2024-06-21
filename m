@@ -1,131 +1,196 @@
-Return-Path: <linux-doc+bounces-19141-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19143-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 743599121CF
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 12:12:35 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E453912201
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 12:17:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 2A6FB1F2854F
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 10:12:35 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 34139283F1F
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 10:17:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 320DF171084;
-	Fri, 21 Jun 2024 10:10:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8AE49171E64;
+	Fri, 21 Jun 2024 10:14:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rzIJDagQ"
+	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="p3OEOol8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from out30-132.freemail.mail.aliyun.com (out30-132.freemail.mail.aliyun.com [115.124.30.132])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6D8A16E892;
-	Fri, 21 Jun 2024 10:10:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 104DC16DECA;
+	Fri, 21 Jun 2024 10:14:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.132
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718964639; cv=none; b=YRo/+TFyFTyrmqc8CYtNzZ0wtleE+K6rv/1bPfpKEn4VbYKnoo6oh5wtSStnQZsGK8zSpzy1wKLKlRquNW/yOzTXj2aKpMGxY5jRTY+CTQ3Li3IoyJNMSTYPw4W7ktQbn/Rtg56bkPSSMdD8YIArCjWPlb3bybJHMF8TqcIxbQU=
+	t=1718964846; cv=none; b=uE/OTqqkH2AkClFu4fX1tfA6gZIXIEbow1ufpAy53IBNa4G3869db5BL/1i3ZU5ZXP/e/hZtU6NnaAoXIGxwXiaIhNPwUdip4ezh9N9PKxA8QIZIfBmLNcRoFTz4Zbr8VFJsiGTwiDzQfdXa+HH1V/oblE3y5Ods4pWC9fmKcI4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718964639; c=relaxed/simple;
-	bh=2Yi3+MeiUnusqowgqbAbrIq7kxVvPD51ALy39yD86vo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=RbYJr8T3+acIeVYEpeuPhqUhEyBXtYM6Ysba/Ety+vmj6iNZsI8+pjpLDtbCOspBD9arjlZGkXqbCmOVBwGPcfa/epR8xPC0R7rrMSqGE5Bt9j26OYD5prTSzc+dpQcD3IFlYM9858OKFe3XuBBMfjvh/74gAwOoux9cdVqxFG4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rzIJDagQ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5C6EC2BBFC;
-	Fri, 21 Jun 2024 10:10:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1718964638;
-	bh=2Yi3+MeiUnusqowgqbAbrIq7kxVvPD51ALy39yD86vo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=rzIJDagQIE3R0pU/M5rskebUl+aHYaBSrmr01jiLJIdPDlgvbckNiO3dFm6IhwojN
-	 uMYXnAKl9oYrkuIGmRpw0ZFU+FV0iySCwweJFML6f3bixkiRYQpPyjju8F9tiTV7u/
-	 pAyJM2ygE3B6wFb3jX+tX34lLsCQIz6ReZ7BiTnbnYm0RDMYx2WgTNy8B4/sX5jR/o
-	 QMqbhmXRKn1bA/7juRNzlrGWHRf8fehuu5CMAO2syECbcLSsB+act95iLPDJIIV8qr
-	 vqp5zf5A0Pawcg5ctPVk7qVJdwnZxHHviCiFxQhzSVXMdKlqyfyL98vn+RE7A96gjH
-	 cBMT08hOiNM6w==
-Date: Fri, 21 Jun 2024 15:40:34 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Jonathan Cameron <jic23@kernel.org>
-Cc: Paul Cercueil <paul@crapouillou.net>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	Jonathan Corbet <corbet@lwn.net>, Nuno Sa <nuno.sa@analog.com>,
-	linux-iio@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org,
-	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org
-Subject: Re: [PATCH v12 0/7] iio: new DMABUF based API v12
-Message-ID: <ZnVRmsziiGxOVq-4@matsya>
-References: <20240620122726.41232-1-paul@crapouillou.net>
- <ZnRW2axOg7gtKzz0@matsya>
- <20240620201150.72c11599@jic23-huawei>
- <ZnVRCY3PGPag0fSj@matsya>
+	s=arc-20240116; t=1718964846; c=relaxed/simple;
+	bh=H+iVrQ6EShMIb5pA0DE0fQxdrFQTOtSDbaixzspfdYM=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=Vc1A097XIex6+oETa1LgwOei2rwHjEgHQJfqWbg4K1D0TaIKt1BZAeYxVs/oizQLE15uyFlGHr+LK+YpkSg4f0Zjtw1JcQozs3h2zTjmdYFr2pd/RanzqAnFV9hzT4Ly86FtVUe82Trhh1nGEFaKmT98hXMl9DE3xPlluCvOj0s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=p3OEOol8; arc=none smtp.client-ip=115.124.30.132
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
+DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linux.alibaba.com; s=default;
+	t=1718964835; h=From:To:Subject:Date:Message-Id:MIME-Version;
+	bh=06bRi18a2rHKR+TMi3cUkFCw+ljlSnrFlCaSX6QTHNU=;
+	b=p3OEOol8ewES2fWN6tqHoedw+HxyMKjNXm4i0qWQVCy21Y2ishWgDJ48QnhmfW7dZF4KssbivW03nvIHd144hOGezeh+H9lsjUlzJ0rg+EljqoQqxfTfi9p2z6q7WQ/pQ+FfqHDo6RV6gUrGkHL2q/pXIwrUFNa9hQSkWyjom8Q=
+X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R121e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=maildocker-contentspam033045046011;MF=hengqi@linux.alibaba.com;NM=1;PH=DS;RN=31;SR=0;TI=SMTPD_---0W8w4rvH_1718964833;
+Received: from localhost(mailfrom:hengqi@linux.alibaba.com fp:SMTPD_---0W8w4rvH_1718964833)
+          by smtp.aliyun-inc.com;
+          Fri, 21 Jun 2024 18:13:54 +0800
+From: Heng Qi <hengqi@linux.alibaba.com>
+To: netdev@vger.kernel.org,
+	virtualization@lists.linux.dev
+Cc: Jakub Kicinski <kuba@kernel.org>,
+	"David S . Miller" <davem@davemloft.net>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Eric Dumazet <edumazet@google.com>,
+	Jason Wang <jasowang@redhat.com>,
+	"Michael S . Tsirkin" <mst@redhat.com>,
+	Brett Creeley <bcreeley@amd.com>,
+	Ratheesh Kannoth <rkannoth@marvell.com>,
+	Alexander Lobakin <aleksander.lobakin@intel.com>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Tal Gilboa <talgi@nvidia.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Jiri Pirko <jiri@resnulli.us>,
+	Paul Greenwalt <paul.greenwalt@intel.com>,
+	Ahmed Zaki <ahmed.zaki@intel.com>,
+	Vladimir Oltean <vladimir.oltean@nxp.com>,
+	Kory Maincent <kory.maincent@bootlin.com>,
+	Andrew Lunn <andrew@lunn.ch>,
+	justinstitt@google.com,
+	donald.hunter@gmail.com,
+	=?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Dragos Tatulea <dtatulea@nvidia.com>,
+	Rahul Rameshbabu <rrameshbabu@nvidia.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
+	awel Dembicki <paweldembicki@gmail.com>
+Subject: [PATCH net-next v15 0/5] ethtool: provide the dim profile fine-tuning channel
+Date: Fri, 21 Jun 2024 18:13:48 +0800
+Message-Id: <20240621101353.107425-1-hengqi@linux.alibaba.com>
+X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ZnVRCY3PGPag0fSj@matsya>
+Content-Transfer-Encoding: 8bit
 
-On 21-06-24, 15:38, Vinod Koul wrote:
-> On 20-06-24, 20:11, Jonathan Cameron wrote:
-> > On Thu, 20 Jun 2024 21:50:41 +0530
-> > Vinod Koul <vkoul@kernel.org> wrote:
-> > 
-> > > On 20-06-24, 14:27, Paul Cercueil wrote:
-> > > > Hi Jonathan,  
-> > > 
-> > > Hey Jonathan,
-> > > 
-> > > Assuming we are fine with this series, how would you like to proceed.
-> > > Would you be fine with me picking the dmaengine bits and providing a
-> > > signed tag for you to pull?
-> > > 
-> > 
-> > Hi Vinod,
-> > 
-> > Yes. That will work nicely.
-> > From my side it all looks good.
-> 
-> Great, here it is:
-> 
-> The following changes since commit 1613e604df0cd359cf2a7fbd9be7a0bcfacfabd0:
-> 
->   Linux 6.10-rc1 (2024-05-26 15:20:12 -0700)
-> 
-> are available in the Git repository at:
-> 
->   git://git.kernel.org/pub/scm/linux/kernel/git/vkoul/dmaengine.git topic/dma_vec_api
+The NetDIM library provides excellent acceleration for many modern
+network cards. However, the default profiles of DIM limits its maximum
+capabilities for different NICs, so providing a way which the NIC can
+be custom configured is necessary.
 
-Sorry, sent branch instead of signed tag: here is the signed tag
+Currently, the way is based on the commonly used "ethtool -C".
 
-    git://git.kernel.org/pub/scm/linux/kernel/git/vkoul/dmaengine.git dmaengine_topic_dma_vec
+For example,
+on the server side, the virtio-net NIC with rx dim enabled has 8
+queues and runs nginx.
+The client uses the following command to send traffic to the server:
+  ./wrk http://server_ip:80 -c 64 -t 5 -d 30
 
-> for you to fetch changes up to 380afccc2a55e8015adae4266e8beff96ab620be:
-> 
->   Documentation: dmaengine: Document new dma_vec API (2024-06-21 15:31:57 +0530)
-> 
-> ----------------------------------------------------------------
-> Paul Cercueil (3):
->       dmaengine: Add API function dmaengine_prep_peripheral_dma_vec()
->       dmaengine: dma-axi-dmac: Implement device_prep_peripheral_dma_vec
->       Documentation: dmaengine: Document new dma_vec API
-> 
->  Documentation/driver-api/dmaengine/client.rst   |  9 ++++++
->  Documentation/driver-api/dmaengine/provider.rst | 10 +++++++
->  drivers/dma/dma-axi-dmac.c                      | 40 +++++++++++++++++++++++++
->  include/linux/dmaengine.h                       | 33 ++++++++++++++++++++
->  4 files changed, 92 insertions(+)
-> 
-> 
-> Thanks
-> -- 
-> ~Vinod
+Then adjust the default rx-profile for server dim to
 
+  {.usec =   1, .pkts = 256, .comps = n/a,},
+  {.usec =   8, .pkts = 256, .comps = n/a,},
+  {.usec =  30, .pkts = 256, .comps = n/a,},
+  {.usec =  64, .pkts = 256, .comps = n/a,},
+  {.usec = 128, .pkts = 256, .comps = n/a,}
 
+The server PPS is improved by 20%+.
+
+Please review, thank you very much!
+
+Changelog
+=====
+v14->v15:
+  - Modify the mod bit and add some hints.
+
+Jakub feedback: Use RESEND to refresh the review queue.
+
+v13->v14:
+  - Make DIMLIB dependent on NET (patch 2/5).
+
+v12->v13:
+  - Rebase net-next to fix the one-line conflict.
+  - Update tiny comments.
+  - Config ETHTOOL_NETLINK to select DIMLIB.
+
+v11->v12:
+  - Remove the use of IS_ENABLED(DIMLIB).
+  - Update Simon's htmldoc hint.
+
+v10->v11:
+  - Fix and clean up some issues from Kuba, thanks.
+  - Rebase net-next/main
+
+v9->v10:
+  - Collect dim related flags/mode/work into one place.
+  - Use rx_profile + tx_profile instead of four profiles.
+  - Add several helps.
+  - Update commit logs.
+
+v8->v9:
+  - Fix the compilation error of conflicting names of rx_profile in
+    dim.h and ice driver: in dim.h, rx_profile is replaced with
+    dim_rx_profile. So does tx_profile.
+
+v7->v8:
+  - Use kmemdup() instead of kzalloc()/memcpy() in dev_dim_profile_init().
+
+v6->v7:
+  - A new wrapper struct pointer is used in struct net_device.
+  - Add IS_ENABLED(CONFIG_DIMLIB) to avoid compiler warnings.
+  - Profile fields changed from u16 to u32.
+
+v5->v6:
+  - Place the profile in netdevice to bypass the driver.
+    The interaction code of ethtool <-> kernel has not changed at all,
+    only the interaction part of kernel <-> driver has changed.
+
+v4->v5:
+  - Update some snippets from Kuba.
+
+v3->v4:
+  - Some tiny updates and patch 1 only add a new comment.
+
+v2->v3:
+  - Break up the attributes to avoid the use of raw c structs.
+  - Use per-device profile instead of global profile in the driver.
+
+v1->v2:
+  - Use ethtool tool instead of net-sysfs.
+
+Heng Qi (5):
+  linux/dim: move useful macros to .h file
+  dim: make DIMLIB dependent on NET
+  ethtool: provide customized dim profile management
+  dim: add new interfaces for initialization and getting results
+  virtio-net: support dim profile fine-tuning
+
+ Documentation/netlink/specs/ethtool.yaml     |  31 +++
+ Documentation/networking/ethtool-netlink.rst |   8 +
+ Documentation/networking/net_dim.rst         |  42 +++
+ drivers/net/virtio_net.c                     |  54 +++-
+ drivers/soc/fsl/Kconfig                      |   2 +-
+ include/linux/dim.h                          | 113 ++++++++
+ include/linux/ethtool.h                      |   4 +-
+ include/linux/netdevice.h                    |   3 +
+ include/uapi/linux/ethtool_netlink.h         |  22 ++
+ lib/Kconfig                                  |   1 +
+ lib/dim/net_dim.c                            | 144 +++++++++-
+ net/Kconfig                                  |   1 +
+ net/ethtool/coalesce.c                       | 273 ++++++++++++++++++-
+ 13 files changed, 681 insertions(+), 17 deletions(-)
 
 -- 
-~Vinod
+2.32.0.3.g01195cf9f
+
 
