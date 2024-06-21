@@ -1,183 +1,142 @@
-Return-Path: <linux-doc+bounces-19156-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19158-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 669359124D0
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 14:10:53 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 49D02912840
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 16:45:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1C69C281C4E
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 12:10:52 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7C65B1C20D75
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 14:45:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86D92174EC5;
-	Fri, 21 Jun 2024 12:10:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06AED28DB3;
+	Fri, 21 Jun 2024 14:44:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=brainfault-org.20230601.gappssmtp.com header.i=@brainfault-org.20230601.gappssmtp.com header.b="cT3azjG5"
+	dkim=pass (2048-bit key) header.d=web.de header.i=markus.elfring@web.de header.b="lRVwGJme"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-il1-f181.google.com (mail-il1-f181.google.com [209.85.166.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mout.web.de (mout.web.de [212.227.15.4])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 020AE495E5
-	for <linux-doc@vger.kernel.org>; Fri, 21 Jun 2024 12:10:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0C661C6BD;
+	Fri, 21 Jun 2024 14:44:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.15.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718971847; cv=none; b=knK3U6mJFYTW7w3HhU1KCMEwjQoqUQVoD2uK1EnL2j7w6PqfewLRFC0oduyDxieRq75RXLPewLUNQdCrdmDq67S7i3QM5IDApOB7V3NvEPJgmMFSQjEMdG9vmLdYCaiAAXrXgF+4JjjBDE4V6m4GCyOFwE34A1AcGrBSuY6yL+k=
+	t=1718981098; cv=none; b=YtnhOekIq3x95E6TTgcpn7Vi5XBjBj/ZY5filgzsz2a5QMLMmd3exuDZ05czvIN66jzNWY2JgxNzi6rptnuJnF4EaxngKihOesLBNAy0nMjIQdk6hh3t68MnKkW6TepfU7f6DwOaKmZAhiysZqH6EQfSE8l60kX5TCZd+bzyEBw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718971847; c=relaxed/simple;
-	bh=hYfb0a3eCGf8ykplVBIG1npqvx5J/IHFUDDQGZ2qm0c=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=E93phv7LISBsxMvMgaMCM4gtPasYtzVr3oVP+0b5HhdzkRlgDVgjtreguGNzYeV26yfKKy4K2akpMRiE/N/6L3UTkQv1NSPn7f9uspQlaplCzqQYOBTliIV5be51xoXJ8DHRjVKIiytdwIxj22DnCf5KSq4jYireugjaTYGQs08=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=brainfault.org; spf=none smtp.mailfrom=brainfault.org; dkim=pass (2048-bit key) header.d=brainfault-org.20230601.gappssmtp.com header.i=@brainfault-org.20230601.gappssmtp.com header.b=cT3azjG5; arc=none smtp.client-ip=209.85.166.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=brainfault.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=brainfault.org
-Received: by mail-il1-f181.google.com with SMTP id e9e14a558f8ab-3748ebe7e53so7472365ab.1
-        for <linux-doc@vger.kernel.org>; Fri, 21 Jun 2024 05:10:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=brainfault-org.20230601.gappssmtp.com; s=20230601; t=1718971845; x=1719576645; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tXUId7BgiOrJKlvj4EXPaiwGxRE3QDT7xYFFY6+6a4g=;
-        b=cT3azjG5elplraJ1w5TkxKPn9Og1JS4tB7eQlziMFNSjltVT5P7D53Jl4uKyDTGZWS
-         rKrNJLCKpSuVCvwle5G/aGFtoLujR9LX9q5dPn2Nh8A3qZiIev1+JugjqvnoN3Osj1hu
-         ZTeZa8EFkiBhJsV6qBb+GxGoXNaOGyRxFh1c4Kzlyu+4M/G4SqsaMGKpbnZdQ+S442GK
-         ukBrDb/FPJpJ3FItm9FAw9IVNgPA7vsQAVsazFipFBL1Fm57sdmZiTE/QXG0xGsLS6tF
-         dlkBWLRr8A0WRiOQXSuwxtqZCa9MMqIQLEf6I1WYFfObEMzXfV7tysdjIR2QIISDqgFH
-         ocyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718971845; x=1719576645;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=tXUId7BgiOrJKlvj4EXPaiwGxRE3QDT7xYFFY6+6a4g=;
-        b=LEbYizIUVs5xsM8FYfDHY4ZPfqQLfFDqNrt/qdhTyiUURfPTGP6iP48CVKQrzWKeGm
-         Avv1W4KMLxQ/hWuiyQ8mSQlaAMuXaCav1l9h3kKe5dto/jjxNSQrG+8ME8ZCGkWbt25N
-         xZhF3zyI2t/7T4m92NZAFygMdsok1ZKHufS0ka6DFVgzUm5pZUw7mL7QkrUXZUoYadNo
-         TAbs84ujGjg3vnWg/nu+GY+HhDOUb+SBDwpWFETmoyrKJQcHFOJlbvwTDLxRfPvKOLOQ
-         kxjyVIgHupzrXahA/4c/CgIHrzDcal9Mf6ngg+/fuImhZEZheNFxkFxgVGz2V38c28PR
-         6nIw==
-X-Forwarded-Encrypted: i=1; AJvYcCW3NAyIpf6zUEZZXrJ+2IJAA5hiPPuX56ixVJROxb1jqpEv69iS1UnrIbgAWPC74+LV8IkXEVkiFw8pMIc735WIM2E0mRfTbuHn
-X-Gm-Message-State: AOJu0YwHdTTGireOKjPaiRQQdBJV8dLtGMC3nwTLJc04DfgbsgkaAb72
-	Y+gPPZSN4JVltzSP762azC90XBDA8VCzxsOH6Cpn3pSUGi9WWXVCAOgBL/zc0pcAistPFls36SM
-	TXKbFnv1OWVNvGdbnMGE9mQT4V3/lkD6uRfh2NA==
-X-Google-Smtp-Source: AGHT+IE+Q+KOOE0S07ldQyv/lyyHoya7PZRDhlWazWZX8wdUbyDfKI4hFTF8xA69bxE3aHWLPp9UAq+n4zkSLmp8Cqc=
-X-Received: by 2002:a05:6e02:1fc9:b0:375:c240:e7a6 with SMTP id
- e9e14a558f8ab-3761d70b3f1mr87707435ab.24.1718971845149; Fri, 21 Jun 2024
- 05:10:45 -0700 (PDT)
+	s=arc-20240116; t=1718981098; c=relaxed/simple;
+	bh=UPZ+pMVVIZt6Rgz1oxI221a1QLWLiy8Gw1463avvxI0=;
+	h=Message-ID:Date:MIME-Version:To:Cc:References:Subject:From:
+	 In-Reply-To:Content-Type; b=NPK4dfZhAk51l74LILRjUGmgkanoBMTJHp2gLN21TJqEJTsyBEyLPF6S8jBofhTatOFZvfIMzRZqc9J96nrJreviiM5grulDXxMLZgIpom0rU4SbJU7GlYL1BoaaXynYYqvv0Z0ZRNgGIgQ24YzkbAk5CVyMpCHYSBYQ/OZHoyU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=web.de; spf=pass smtp.mailfrom=web.de; dkim=pass (2048-bit key) header.d=web.de header.i=markus.elfring@web.de header.b=lRVwGJme; arc=none smtp.client-ip=212.227.15.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=web.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=web.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+	s=s29768273; t=1718981023; x=1719585823; i=markus.elfring@web.de;
+	bh=SN7RlCBIZ8lBMty9UKSUkIU0BTJtq+6R+JLHTgaFfAM=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:References:
+	 Subject:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 cc:content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=lRVwGJmeZRzMJV7WZ7bhrXq7ofkQ9jwqWb+//R8p/A8eMX5aFENhPNDtTBcJjanC
+	 aF+ODxRvb/CRMtYV1nf1doefZGI4s0h9YbqYBuQ0ryCgRWZoJ3Zi4NNq3Arngs5n+
+	 FTV9QF8QQa1FgFY0k8GPoKxs+yB+4X8qOGrjSWFTWsLwvns9OWLcSCas2qYzGw5r8
+	 hDo70FWvbz9z60k9RB+dm8F3GEtjPD2WVHZM33a+DB0i042YNykMQ7lrCt+QoYEpP
+	 eb60bZ1DHdMszdFe+77w47E0dkR5SjnP+ZXBhjLKJkRr4aDcirUz59ivfy8jQ9LuI
+	 WghZRVt2MgpWgMAMdw==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [192.168.178.21] ([94.31.85.95]) by smtp.web.de (mrweb005
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1Myf3x-1sYcMc0AmL-015ng8; Fri, 21
+ Jun 2024 16:43:43 +0200
+Message-ID: <038fdd79-b465-4fa7-aac1-1526dcb2d87f@web.de>
+Date: Fri, 21 Jun 2024 16:43:15 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240621113143.35827-1-cuiyunhui@bytedance.com>
-In-Reply-To: <20240621113143.35827-1-cuiyunhui@bytedance.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Fri, 21 Jun 2024 17:40:34 +0530
-Message-ID: <CAAhSdy2wU2NCXAJ_muYTkxxx4YECis2HWwRf55u3nuAtNBDVfA@mail.gmail.com>
-Subject: Re: [PATCH v2] RISC-V: Provide the frequency of time CSR via hwprobe
-To: Yunhui Cui <cuiyunhui@bytedance.com>
-Cc: corbet@lwn.net, paul.walmsley@sifive.com, palmer@dabbelt.com, 
-	aou@eecs.berkeley.edu, cleger@rivosinc.com, evan@rivosinc.com, 
-	conor.dooley@microchip.com, costa.shul@redhat.com, andy.chiu@sifive.com, 
-	samitolvanen@google.com, linux-doc@vger.kernel.org, 
-	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org, 
-	Palmer Dabbelt <palmer@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+To: Babu Moger <babu.moger@amd.com>, x86@kernel.org,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ Fenghua Yu <fenghua.yu@intel.com>, Ingo Molnar <mingo@redhat.com>,
+ Jonathan Corbet <corbet@lwn.net>, Reinette Chatre
+ <reinette.chatre@intel.com>, Thomas Gleixner <tglx@linutronix.de>
+Cc: LKML <linux-kernel@vger.kernel.org>, linux-doc@vger.kernel.org,
+ Breno Leitao <leitao@debian.org>,
+ Daniel Sneddon <daniel.sneddon@linux.intel.com>,
+ "H. Peter Anvin" <hpa@zytor.com>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ James Morse <james.morse@arm.com>, Jim Mattson <jmattson@google.com>,
+ Jithu Joseph <jithu.joseph@intel.com>, Josh Poimboeuf <jpoimboe@kernel.org>,
+ Julia Lawall <julia.lawall@inria.fr>, Kai Huang <kai.huang@intel.com>,
+ Kan Liang <kan.liang@linux.intel.com>, Kim Phillips <kim.phillips@amd.com>,
+ Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+ Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, "Paul E. McKenney"
+ <paulmck@kernel.org>, Peter Newman <peternewman@google.com>,
+ Peter Zijlstra <peterz@infradead.org>, Randy Dunlap <rdunlap@infradead.org>,
+ Rick Edgecombe <rick.p.edgecombe@intel.com>,
+ Sandipan Das <sandipan.das@amd.com>, Sean Christopherson
+ <seanjc@google.com>, Stephane Eranian <eranian@google.com>,
+ Tejun Heo <tj@kernel.org>, Yan-Jie Wang <yanjiewtw@gmail.com>
+References: <0148e3317b0de3b5d1eaa58af37a2910783a69c9.1716552602.git.babu.moger@amd.com>
+Subject: Re: [PATCH v4 17/19] x86/resctrl: Introduce the interface switch
+ between ABMC and mbm_legacy
+Content-Language: en-GB
+From: Markus Elfring <Markus.Elfring@web.de>
+In-Reply-To: <0148e3317b0de3b5d1eaa58af37a2910783a69c9.1716552602.git.babu.moger@amd.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:MNnmo/IyHwKqbRCyoIgDHyeZEjlR0nEzdzSPleYk0UD+8BXXGDY
+ FmRjHDJxKGTwjoqH3iwFKGuTZrfyZBsZcAr5ziCVILX9XUi+zdzBnX1oODVzKdT0hEZgPM9
+ 0xVp9/736STKpYtKMLYtVHHoTc1i4n/z2mTmuAkojH39STMU+K/OvodrbHSGqPZQdUYj1/4
+ zyiiUtH+Wuly79wMYzorg==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:OnHt1u3JZdQ=;gd070flUBWNk+k7P8Kx6U+zvKuC
+ pvB1NsP2QsZTxqoncBTsd25maX2Mhqq5BVw0xSjduzbGp3vQSz7OAIzeT+uCrKY6cXFd3yk8E
+ JGBAreD4BEVsoBhkdpuyDrlIH81+J+llZ2pWIKGy2PkijNFi9PHY/wTzvsnkB0Zl0E+ortN+8
+ iuUBQkDaiil/YC6TqUYNvOQdC+Qt12eJ3wPPvdIFFbo8vG51COOVeXHz4Rp00716ZdZ0ropLC
+ nKBpG3skMUlSb7of2/K2mQMmUNX2tBFfrzgl7Wtnzdj9pQa/L63sddmboqCDqltcNOBDcav6O
+ slCL+uJ0DYHdatDvfTc5Acws1+ZudxlipIpwVA2dVS5vroGYAPJ46n2BOrh8VrxJjJlNI6GlS
+ VZwZMgcy5KHKUTV5lT9X17IjhvQliIj+dYoGb2mypmxEsPiENL1riweTJSgrl/8JefDxPrZWR
+ haGd9WwKx28iSERQ98kEXEkVMnV85wGRCELcX9/nnn3Jg016ztM+7U73D4DtXNW4KGlx//er2
+ wXBy1g+3fS/hzT7m/l76LIui27AVd4KBFgFrRDLn/klU2KILZav34tv7y1yZXP+qkaxnogjbr
+ FEuTZiX5PIgmM8O0cBWAzmJgLip+lrZNLzO+RXXOFi71NoHAI/s8+k/FZzFeteK8IJvJLLvE7
+ pXv6bhLhKz2HDPdt3C5VF0i2CyMZE3233XRm9zCQtXp1nHKwKcxU75wikhSigQSYNTpX8lXBT
+ XpIXg9JZHZEGGfbHFyvlR3NGPPdfuyr8zgCu1ze0Hf2fR914MQ0uvppbDxxqAYjB71N9nJhCm
+ Q2BxUYYx1QxQSTj/YXeyYcBOv95jgRQSUPET3yI/Qtduo=
 
-On Fri, Jun 21, 2024 at 5:03=E2=80=AFPM Yunhui Cui <cuiyunhui@bytedance.com=
-> wrote:
->
-> From: Palmer Dabbelt <palmer@rivosinc.com>
->
-> A handful of user-visible behavior is based on the frequency of the
-> time CSR.
->
-> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
-> Signed-off-by: Yunhui Cui <cuiyunhui@bytedance.com>
+=E2=80=A6
+> +++ b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
+=E2=80=A6
+> +static ssize_t rdtgroup_mbm_assign_write(struct kernfs_open_file *of,
+> +					 char *buf, size_t nbytes,
+> +					 loff_t off)
+> +{
+=E2=80=A6
+> +	cpus_read_lock();
+> +	mutex_lock(&rdtgroup_mutex);
+> +
+> +	rdt_last_cmd_clear();
+=E2=80=A6
+> +	mutex_unlock(&rdtgroup_mutex);
+> +	cpus_read_unlock();
+> +
+> +	return ret ?: nbytes;
+> +}
+=E2=80=A6
 
-LGTM.
+Would you become interested to apply statements like the following?
 
-Reviewed-by: Anup Patel <anup@brainfault.org>
+* guard(cpus_read_lock)();
+  https://elixir.bootlin.com/linux/v6.10-rc4/source/include/linux/cleanup.=
+h#L133
+
+* guard(mutex)(&rdtgroup_mutex);
+  https://elixir.bootlin.com/linux/v6.10-rc4/source/include/linux/mutex.h#=
+L196
 
 Regards,
-Anup
-
-> ---
->  Documentation/arch/riscv/hwprobe.rst  | 2 ++
->  arch/riscv/include/asm/hwprobe.h      | 2 +-
->  arch/riscv/include/uapi/asm/hwprobe.h | 1 +
->  arch/riscv/kernel/sys_hwprobe.c       | 5 +++++
->  4 files changed, 9 insertions(+), 1 deletion(-)
->
-> diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/ri=
-scv/hwprobe.rst
-> index fc015b452ebf..c07f159d8906 100644
-> --- a/Documentation/arch/riscv/hwprobe.rst
-> +++ b/Documentation/arch/riscv/hwprobe.rst
-> @@ -229,3 +229,5 @@ The following keys are defined:
->
->  * :c:macro:`RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE`: An unsigned int which
->    represents the size of the Zicboz block in bytes.
-> +
-> +* :c:macro:`RISCV_HWPROBE_KEY_TIME_CSR_FREQ`: Frequency (in Hz) of `mtim=
-e`.
-> diff --git a/arch/riscv/include/asm/hwprobe.h b/arch/riscv/include/asm/hw=
-probe.h
-> index 630507dff5ea..150a9877b0af 100644
-> --- a/arch/riscv/include/asm/hwprobe.h
-> +++ b/arch/riscv/include/asm/hwprobe.h
-> @@ -8,7 +8,7 @@
->
->  #include <uapi/asm/hwprobe.h>
->
-> -#define RISCV_HWPROBE_MAX_KEY 6
-> +#define RISCV_HWPROBE_MAX_KEY 7
->
->  static inline bool riscv_hwprobe_key_is_valid(__s64 key)
->  {
-> diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/u=
-api/asm/hwprobe.h
-> index 7b95fadbea2a..18754341ff14 100644
-> --- a/arch/riscv/include/uapi/asm/hwprobe.h
-> +++ b/arch/riscv/include/uapi/asm/hwprobe.h
-> @@ -73,6 +73,7 @@ struct riscv_hwprobe {
->  #define                RISCV_HWPROBE_MISALIGNED_UNSUPPORTED    (4 << 0)
->  #define                RISCV_HWPROBE_MISALIGNED_MASK           (7 << 0)
->  #define RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE    6
-> +#define RISCV_HWPROBE_KEY_TIME_CSR_FREQ        7
->  /* Increase RISCV_HWPROBE_MAX_KEY when adding items. */
->
->  /* Flags */
-> diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwpr=
-obe.c
-> index 83fcc939df67..fc3b40fb9def 100644
-> --- a/arch/riscv/kernel/sys_hwprobe.c
-> +++ b/arch/riscv/kernel/sys_hwprobe.c
-> @@ -8,6 +8,7 @@
->  #include <asm/cacheflush.h>
->  #include <asm/cpufeature.h>
->  #include <asm/hwprobe.h>
-> +#include <asm/delay.h>
->  #include <asm/sbi.h>
->  #include <asm/switch_to.h>
->  #include <asm/uaccess.h>
-> @@ -226,6 +227,10 @@ static void hwprobe_one_pair(struct riscv_hwprobe *p=
-air,
->                         pair->value =3D riscv_cboz_block_size;
->                 break;
->
-> +       case RISCV_HWPROBE_KEY_TIME_CSR_FREQ:
-> +               pair->value =3D riscv_timebase;
-> +               break;
-> +
->         /*
->          * For forward compatibility, unknown keys don't fail the whole
->          * call, but get their element key set to -1 and value set to 0
-> --
-> 2.20.1
->
->
+Markus
 
