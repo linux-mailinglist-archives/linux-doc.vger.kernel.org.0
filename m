@@ -1,111 +1,121 @@
-Return-Path: <linux-doc+bounces-19101-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19111-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FD94911BD6
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 08:33:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BB7B911C5F
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 09:03:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 34CE61C23C0D
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 06:33:40 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4CC261C20A77
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 07:03:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 158DD152500;
-	Fri, 21 Jun 2024 06:33:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 604F015B12F;
+	Fri, 21 Jun 2024 07:03:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="fZ4PAMuE"
+	dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="UYmWNYpL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out30-97.freemail.mail.aliyun.com (out30-97.freemail.mail.aliyun.com [115.124.30.97])
+Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6586D158DA1;
-	Fri, 21 Jun 2024 06:33:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.97
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9ABC683A14
+	for <linux-doc@vger.kernel.org>; Fri, 21 Jun 2024 07:03:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.117.254.33
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718951614; cv=none; b=i506NH7QnIT56u6dFpTfVyOsBX3S0ia1QmRp9J6VglOYmMWyE5u2DFRN3FKtul7d01o9PS9Z77hT6ZrXs+jGObLEal6bIimCiEFpHc2aX2Ggko1znXUIRG6C4PSKBvJ7iFHJubm7hD1uBfjSwcTcSF9z2Lfi2RbvZpothFQYGuE=
+	t=1718953412; cv=none; b=eDCY5a6Dg1ejoH0T3cHeqDgIFAFgbxMuIpwka/7X1JU3fch0Sjp4zZjWPVBjXkKfLlwgqxo2kd2eNJX0zZh0K2Hs5HKCUqSdi0EH/xYrIrJFGw9bxF97//std0gz1p9H0mVFaQbLEH7yEPExJP/gF5qAzlBsfPGj485V0NTcZrs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718951614; c=relaxed/simple;
-	bh=pfKWFBb7zDxCQi7BvfVsF6Ioi73jz575cHTCkheV/vw=;
-	h=Message-ID:Subject:Date:From:To:Cc:References:In-Reply-To; b=ny33nPfGelvM/5iIR20JR1qTOeHFs/TuSfDZFt84Whn5lLLPTa+1WCvlcYDJTXqn1IaYDkL9vZxbsVVmzGcIK97VZ1x96xXcklD9o81Zibz/Qz1TcCwrRaefvogvaHj1zLhWdfeKLQaS9KahDMm1xxK58RdNrpYLlKm8iT+ynFc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=fZ4PAMuE; arc=none smtp.client-ip=115.124.30.97
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
-DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux.alibaba.com; s=default;
-	t=1718951608; h=Message-ID:Subject:Date:From:To;
-	bh=jguX9efGrTByDGtu7eOLceR5dbAAeAKLWv5lG9X/b2k=;
-	b=fZ4PAMuEFuFk2FgFgUaijpMDdDV9RH2RXSqFantOWSNvMw0Q0QDVO9QxHOu10Ua+hHq4oHHkTxhv2VlVcoHQzDO6ZVYAzVu5FVedSl5I3o7usxg/zAJCbqVejpJOS1W9e0H+aiegvr54lMaFt4VaG3j2C1PYeDSfokV2b3druSE=
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R101e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=maildocker-contentspam033068164191;MF=hengqi@linux.alibaba.com;NM=1;PH=DS;RN=31;SR=0;TI=SMTPD_---0W8vIC3b_1718951605;
-Received: from localhost(mailfrom:hengqi@linux.alibaba.com fp:SMTPD_---0W8vIC3b_1718951605)
-          by smtp.aliyun-inc.com;
-          Fri, 21 Jun 2024 14:33:26 +0800
-Message-ID: <1718951589.6499782-16-hengqi@linux.alibaba.com>
-Subject: Re: [PATCH RESEND net-next v14 3/5] ethtool: provide customized dim profile management
-Date: Fri, 21 Jun 2024 14:33:09 +0800
-From: Heng Qi <hengqi@linux.alibaba.com>
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: netdev@vger.kernel.org,
- virtualization@lists.linux.dev,
- "David S . Miller" <davem@davemloft.net>,
- Paolo Abeni <pabeni@redhat.com>,
- Eric Dumazet <edumazet@google.com>,
- Jason Wang <jasowang@redhat.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Brett Creeley <bcreeley@amd.com>,
- Ratheesh Kannoth <rkannoth@marvell.com>,
- Alexander Lobakin <aleksander.lobakin@intel.com>,
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
- Tal Gilboa <talgi@nvidia.com>,
- Jonathan Corbet <corbet@lwn.net>,
- linux-doc@vger.kernel.org,
- Maxime Chevallier <maxime.chevallier@bootlin.com>,
- Jiri Pirko <jiri@resnulli.us>,
- Paul Greenwalt <paul.greenwalt@intel.com>,
- Ahmed Zaki <ahmed.zaki@intel.com>,
- Vladimir Oltean <vladimir.oltean@nxp.com>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Andrew Lunn <andrew@lunn.ch>,
- justinstitt@google.com,
- donald.hunter@gmail.com,
- =?utf-8?q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Dragos Tatulea <dtatulea@nvidia.com>,
- Rahul Rameshbabu <rrameshbabu@nvidia.com>,
- Heiner Kallweit <hkallweit1@gmail.com>,
- Przemek Kitszel <przemyslaw.kitszel@intel.com>,
- awel Dembicki <paweldembicki@gmail.com>
-References: <20240618025644.25754-1-hengqi@linux.alibaba.com>
- <20240618025644.25754-4-hengqi@linux.alibaba.com>
- <20240620204445.2d589788@kernel.org>
-In-Reply-To: <20240620204445.2d589788@kernel.org>
+	s=arc-20240116; t=1718953412; c=relaxed/simple;
+	bh=9YpIG0vywBEXYfiYSjXWZS4SaYwJoaD6O61rlDfXZsM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fWK7RnPTBfyIPQB+NRGaiCECfpwlRJQCvWyF7DFtntu3JakpGHpHiYs297QFijMfDUuVAdHrl2gRgEXemU3IjgmTP2r6BxxuxkHHo/x9j6bs1ebfSEdv0wk9wJt84YijWDm54m/GEepjUXPb8I0S/+JIuRC7AfjaF4SKYuTZMeU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com; spf=pass smtp.mailfrom=sang-engineering.com; dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b=UYmWNYpL; arc=none smtp.client-ip=194.117.254.33
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	sang-engineering.com; h=date:from:to:cc:subject:message-id
+	:references:mime-version:content-type:in-reply-to; s=k1; bh=9YpI
+	G0vywBEXYfiYSjXWZS4SaYwJoaD6O61rlDfXZsM=; b=UYmWNYpLsZ/h0ty/oCAx
+	o/NDwZnqSRD58/nLMBxymgT9cutC7ytVfIb5EqWhTaTO6IxkclIIvuz3PscTm9yN
+	modIlTDV0sTggUrKuzFI1tdYWBFQX6zR8IswIYzVt9iPHlXwdE7SE/soJbgsZs/5
+	1gIDQ+zny8w2/kMRguBwikKsv1VPgj2Yy8C7wJEasGr/qP0RpUVQdcWsZFqT0qjv
+	tturjHksnliHbJXdqtObeSEcKo1PvNf23mQwKlSJFp0+c/f9r0qt+YDrTmGKO8W4
+	qhFxkHkqe1oKUQaV80rlpUQTXH4zw6bhpO+ef8ktxrI5u8ynJ74Da7D2e5Q8taAv
+	pg==
+Received: (qmail 1271058 invoked from network); 21 Jun 2024 09:03:27 +0200
+Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 21 Jun 2024 09:03:27 +0200
+X-UD-Smtp-Session: l3s3148p1@Uvc6B2Eb7tUgAwDPXzjQABqqX1QYyOSW
+Date: Fri, 21 Jun 2024 09:03:27 +0200
+From: Wolfram Sang <wsa+renesas@sang-engineering.com>
+To: Andi Shyti <andi.shyti@kernel.org>
+Cc: Easwar Hariharan <eahariha@linux.microsoft.com>, 
+	linux-i2c@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 5/6] docs: i2c: summary: document 'local' and 'remote'
+ targets
+Message-ID: <o5sbb2yqwzm3p2elxgoq6atgbw62e7jwzim6trjswbbozkptc2@4yzoaqanmrfn>
+Mail-Followup-To: Wolfram Sang <wsa+renesas@sang-engineering.com>, 
+	Andi Shyti <andi.shyti@kernel.org>, Easwar Hariharan <eahariha@linux.microsoft.com>, 
+	linux-i2c@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20240614081239.7128-8-wsa+renesas@sang-engineering.com>
+ <20240614081239.7128-13-wsa+renesas@sang-engineering.com>
+ <4zxr4rlqnjqbqh3oxmd2ufqi6uk4pxa3tniuya5pgjtqi6tswc@utq4r2zt6z6b>
+ <ed75fyc2xcsnwubq42eposf6ayt5aj2jmqz6mthugk6vm2zpi4@qqwlmuwayoo5>
+ <y34k2k25xdr5z4v7oejp4da237s4o5qym5npihyydwlbsdh75c@vhmfl7sw3pbm>
+ <7d5f800f-fc65-4fbf-adad-616d51501c62@linux.microsoft.com>
+ <boehtgry7j7ulhrw7tenkmzxujahmxfn25imvb7zw2ibtmebbk@u3jryw4v2y7h>
+ <cu2mkl42byhce6eytcnw7yseogbnypgtrkoirlezakwg35egdg@vjjye4ca7yey>
+ <cbwamjer2rupkmyze6atgpkrszajcbhw2udb23ldl73ne3m6qr@jjs7q3codtx5>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="5mhnob3uxzg2llob"
+Content-Disposition: inline
+In-Reply-To: <cbwamjer2rupkmyze6atgpkrszajcbhw2udb23ldl73ne3m6qr@jjs7q3codtx5>
 
-On Thu, 20 Jun 2024 20:44:45 -0700, Jakub Kicinski <kuba@kernel.org> wrote:
-> On Tue, 18 Jun 2024 10:56:42 +0800 Heng Qi wrote:
-> > --- a/Documentation/networking/ethtool-netlink.rst
-> > +++ b/Documentation/networking/ethtool-netlink.rst
-> > @@ -1033,6 +1033,8 @@ Kernel response contents:
-> >    ``ETHTOOL_A_COALESCE_TX_AGGR_MAX_BYTES``     u32     max aggr size, Tx
-> >    ``ETHTOOL_A_COALESCE_TX_AGGR_MAX_FRAMES``    u32     max aggr packets, Tx
-> >    ``ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS``    u32     time (us), aggr, Tx
-> > +  ``ETHTOOL_A_COALESCE_RX_PROFILE``            nested  profile of DIM, Rx
-> > +  ``ETHTOOL_A_COALESCE_TX_PROFILE``            nested  profile of DIM, Tx
-> >    ===========================================  ======  =======================
-> >  
-> >  Attributes are only included in reply if their value is not zero or the
-> 
-> Maybe add a short line in the section for COALESCE_GET linking to dim?
-> Something like:
-> 
-> ``ETHTOOL_A_COALESCE_RX_PROFILE`` and ``ETHTOOL_A_COALESCE_TX_PROFILE``
-> refer to DIM parameters, see ... <- add ReST link to net_dim.rst here.
 
-Will add.
+--5mhnob3uxzg2llob
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks.
 
+> > The refactoring only affects "master/slave" not "adapter/client". We are
+> >=20
+> > aligned here, aren't we?
+>=20
+> Yes, of course. And I'm not really asking for the totality of the
+> "client"'s to be replaced, rather than, when replacing slave, to
+> choose "target" over "client" whenever possible(*).
+
+Okay, phew, seems we got it now :) I'll send out v4 today and probably
+send it to Linus this week. I want this base work to be upstream ASAP,
+so we can base further work on it.
+
+Thanks for your input and cooperation, Easwar and Andi!
+
+
+--5mhnob3uxzg2llob
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmZ1Jb8ACgkQFA3kzBSg
+KbaPXg//QldHT5fYSnWzc0KZgm0U6+CGlWXYHzQgIvHzGmo4NjKL0OnEsD2hTNly
+j9eainm2OTjb1+3YrKclLIlx+paQJxVpU6TVBRa9b/CJX+j1Ub/JZu+AcO2lW6xg
+dx1Iq9LQlKxFzfyzyqRy7r2UorQwvnDWWdw0DaKdhUDufJxK5jIiR0s/BMlrgsyr
+K6EoIxHgJDESmRd3xzKo5rgC0vcD83Iwts1RAihuUrh6c8Wjz+xPgyhECtbH09rZ
+kkvRuzwYuWas+0CX/WQNpK2S49HZTmpI5PcTmn3WAIrStfW0jmFfofkpVBvOj0Wz
+T+ZKTZegE/GrUP5UBEHHkim8fjeLYj4lT8JCR8R1fOp6GVrvVlzj5VBmuAMOcPmG
+OOV9gUpfOmZpSbVdr8amMcbwpZ+epwZiRZnernj9klT0EgUfFZt5tb6oLWZSb0LF
+rAGL3V7txa+396EzIiLLseBJv6AxVBVqHj/yCpy+D7vRCe00QcPi2bkzEe/wLEvE
+jaoZuGhNrXTGKVifwMNY8/JG2Fwrq+OYzy2f+WBNzGE5qCC0a6K3/U0vqQ2tUB7i
+hg50MqNQ3ha7+F5TCA2aSHsIsVDb/mzliLw+4WBv8+1CPue92jep0FXlw05gOGDx
+EEgb3Rl7Gf4ywPwvsDnnUVmvG/q12F3kqHn/nYjD21ePaN5n0Ag=
+=x9EZ
+-----END PGP SIGNATURE-----
+
+--5mhnob3uxzg2llob--
 
