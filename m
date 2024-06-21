@@ -1,225 +1,231 @@
-Return-Path: <linux-doc+bounces-19145-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19148-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61FD9912205
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 12:17:24 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7444991222D
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 12:20:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 90F051C226BE
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 10:17:23 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id DD81C1F265B8
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Jun 2024 10:20:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C06B172763;
-	Fri, 21 Jun 2024 10:14:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B6D117164C;
+	Fri, 21 Jun 2024 10:18:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="dLx1psrT"
+	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="tpa86Fyd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out30-124.freemail.mail.aliyun.com (out30-124.freemail.mail.aliyun.com [115.124.30.124])
+Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00A4017167A;
-	Fri, 21 Jun 2024 10:14:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1897171075;
+	Fri, 21 Jun 2024 10:18:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718964847; cv=none; b=uB4hBXMa1CI/CREYYoIzGg0Sisje/UBkL1ucnwQizLcOXQGVFAAgQX+erx6rkBw12E5dIxocSm30ZvekQlWaxhETxZGkoGMyXuilvxzNYE4BRLH/GAa4eMszZOZmgUEer3I97XjpSwqZ/BW3GKnwekE7tEqUg+wfGJFd/cbaC74=
+	t=1718965134; cv=none; b=QjbX3POt/XXgw1CJ5FnF1EerPbVs/c4Bn/wgxE7iGefowImAWAbaZy9Ye0ufoklxdPd0U3M7NPiPfLqUMnPEqESmkZKKwi2YPXE1oLGYHJzLTy12jKchEvlZ5lqVjrbGdw4ETtqr1+a5VYL8cXVfbuiLGu3nV9AZc51SaepCGCs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718964847; c=relaxed/simple;
-	bh=uIMCM0tL1GxxuI3naWPowFL0cncOs+i8pwsCvIaPZTw=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=aKDk2QA/6xIt7gaXzaVMxE2evorT0ZB4lcUIEiQxoMiiYlhHdEMKGyMmjrKZiGubmNAlACK7t+TKUiEtH9A4ype9hQUay/OXXbS7Xr2+MJs7NAr7+HxcyY6UnrUauLRmCCjRuHNhDEgTUzAvLzwA6PnAOwEBPtDcBZJYs+Rma1A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=dLx1psrT; arc=none smtp.client-ip=115.124.30.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
-DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux.alibaba.com; s=default;
-	t=1718964843; h=From:To:Subject:Date:Message-Id:MIME-Version;
-	bh=ptPslrHvPulymRl74/NfLSZDWHk1L0sBdmbjCSlJpl4=;
-	b=dLx1psrT7Gm25e8XCMbUNJTDVsXHFiqNWvzBMY8z14cz4wYBQrJXzGEWuQP4DYiJHjt6TIeNWPpdGlEX5N1WeTk8LzQaGKpHTzGnkfPoselVWl7uCFIqxzwuGA1+mHIvv2MPATHnDGwtyr+J5a/aPXQTxCG036k7hc7/NTjQ7VI=
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R121e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=maildocker-contentspam033037067113;MF=hengqi@linux.alibaba.com;NM=1;PH=DS;RN=32;SR=0;TI=SMTPD_---0W8w-Xi6_1718964840;
-Received: from localhost(mailfrom:hengqi@linux.alibaba.com fp:SMTPD_---0W8w-Xi6_1718964840)
-          by smtp.aliyun-inc.com;
-          Fri, 21 Jun 2024 18:14:01 +0800
-From: Heng Qi <hengqi@linux.alibaba.com>
-To: netdev@vger.kernel.org,
-	virtualization@lists.linux.dev
-Cc: Jakub Kicinski <kuba@kernel.org>,
-	"David S . Miller" <davem@davemloft.net>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Eric Dumazet <edumazet@google.com>,
-	Jason Wang <jasowang@redhat.com>,
-	"Michael S . Tsirkin" <mst@redhat.com>,
-	Brett Creeley <bcreeley@amd.com>,
-	Ratheesh Kannoth <rkannoth@marvell.com>,
-	Alexander Lobakin <aleksander.lobakin@intel.com>,
-	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-	Tal Gilboa <talgi@nvidia.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Jiri Pirko <jiri@resnulli.us>,
-	Paul Greenwalt <paul.greenwalt@intel.com>,
-	Ahmed Zaki <ahmed.zaki@intel.com>,
-	Vladimir Oltean <vladimir.oltean@nxp.com>,
-	Kory Maincent <kory.maincent@bootlin.com>,
-	Andrew Lunn <andrew@lunn.ch>,
-	justinstitt@google.com,
-	donald.hunter@gmail.com,
-	=?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Dragos Tatulea <dtatulea@nvidia.com>,
-	Rahul Rameshbabu <rrameshbabu@nvidia.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
-	awel Dembicki <paweldembicki@gmail.com>,
-	Simon Horman <horms@kernel.org>
-Subject: [PATCH net-next v15 5/5] virtio-net: support dim profile fine-tuning
-Date: Fri, 21 Jun 2024 18:13:53 +0800
-Message-Id: <20240621101353.107425-6-hengqi@linux.alibaba.com>
-X-Mailer: git-send-email 2.32.0.3.g01195cf9f
-In-Reply-To: <20240621101353.107425-1-hengqi@linux.alibaba.com>
-References: <20240621101353.107425-1-hengqi@linux.alibaba.com>
+	s=arc-20240116; t=1718965134; c=relaxed/simple;
+	bh=N86tT7eNz1UOvLaFQAnMCJPe6jey5vSK8Wint1BvwqM=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=dYAFtfaOCCpnFWAXspKGHtCaS8a8wSwaGyfGYvd3SNb9BsxyfKETANE5Ux0xRrte3km5DuTuS5bquW4nkf+fYTziHVHWBd5IrN3B93W0HWu7ruTJWDodVZMNWFmCa8mIR/ysGnK0ZQ+PxWonwk1I2KL1YcHgcZgc+Xbv9d1UGGc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=tpa86Fyd; arc=none smtp.client-ip=148.163.135.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
+Received: from pps.filterd (m0167089.ppops.net [127.0.0.1])
+	by mx0a-00128a01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45L7ENRv018472;
+	Fri, 21 Jun 2024 06:18:25 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=
+	content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=DKIM; bh=YOkcwxEkHfTflVwa9YPcysUXmuW
+	PUcRPHhhFsL/4ZmU=; b=tpa86FydcHtZEdIHtJ9UgSAewrWT07h11c0ekg8dWNC
+	Q+MCq3MlB65I/ajWdvWcxgpeNQknvlF55y5p1BKsZMTly1dONlNEeCezjHHNPWmz
+	yHiDD0J4j/O9SSx2RQGg5yNCLRDng/74XjW0azlHJ1Bz69UF4uiXEgCEHJthk0Xr
+	vyR5qBztiBCf6OR8VybiXh5AFJpXipXnILXDQ5qPAumKwvaGk+d+ud24xMu2Wnzn
+	8iNgiCpOmpg75P59hyl3FQeagms9gknVO8wmJQmCwRiGGtX78jKgmEhSZafdveVM
+	/dUyiypeh1fwoccXRaN6G0OUCZ3+xV6ZlPdGaRGs4kQ==
+Received: from nwd2mta3.analog.com ([137.71.173.56])
+	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 3yvrkb3b27-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 21 Jun 2024 06:18:24 -0400 (EDT)
+Received: from ASHBMBX9.ad.analog.com (ASHBMBX9.ad.analog.com [10.64.17.10])
+	by nwd2mta3.analog.com (8.14.7/8.14.7) with ESMTP id 45LAINqW046141
+	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 21 Jun 2024 06:18:23 -0400
+Received: from ASHBMBX9.ad.analog.com (10.64.17.10) by ASHBMBX9.ad.analog.com
+ (10.64.17.10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.14; Fri, 21 Jun
+ 2024 06:18:22 -0400
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx9.ad.analog.com
+ (10.64.17.10) with Microsoft SMTP Server id 15.2.986.14 via Frontend
+ Transport; Fri, 21 Jun 2024 06:18:22 -0400
+Received: from amiclaus-VirtualBox.ad.analog.com (AMICLAUS-L02.ad.analog.com [10.48.65.120])
+	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 45LAI4Wu019392;
+	Fri, 21 Jun 2024 06:18:07 -0400
+From: Antoniu Miclaus <antoniu.miclaus@analog.com>
+To: Ramona Gradinariu <ramona.gradinariu@analog.com>,
+        Antoniu Miclaus
+	<antoniu.miclaus@analog.com>,
+        Lars-Peter Clausen <lars@metafoo.de>,
+        Michael
+ Hennerich <Michael.Hennerich@analog.com>,
+        Jonathan Cameron
+	<jic23@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski
+	<krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet
+	<corbet@lwn.net>,
+        Matti Vaittinen <mazziesaccount@gmail.com>,
+        Jun Yan
+	<jerrysteve1101@gmail.com>,
+        Mehdi Djait <mehdi.djait.k@gmail.com>,
+        Mario
+ Limonciello <mario.limonciello@amd.com>,
+        <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: [PATCH v2 1/3] dt-bindings: iio: accel: add ADXL380
+Date: Fri, 21 Jun 2024 13:17:03 +0300
+Message-ID: <20240621101756.27218-1-antoniu.miclaus@analog.com>
+X-Mailer: git-send-email 2.45.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-ADIRuleOP-NewSCL: Rule Triggered
+X-Proofpoint-GUID: GjLCEpzV0EwytikGq_hyWw5TYKWjZGh3
+X-Proofpoint-ORIG-GUID: GjLCEpzV0EwytikGq_hyWw5TYKWjZGh3
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-21_04,2024-06-20_04,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 impostorscore=0
+ clxscore=1015 priorityscore=1501 lowpriorityscore=0 malwarescore=0
+ spamscore=0 phishscore=0 suspectscore=0 mlxlogscore=999 mlxscore=0
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2406140001 definitions=main-2406210076
 
-Virtio-net has different types of back-end device implementations.
-In order to effectively optimize the dim library's gains for different
-device implementations, let's use the new interface params to
-initialize and query dim results from a customized profile list.
+From: Ramona Gradinariu <ramona.gradinariu@analog.com>
 
-Signed-off-by: Heng Qi <hengqi@linux.alibaba.com>
-Reviewed-by: Simon Horman <horms@kernel.org>
+Add dt-bindings for ADXL380/ADLX382 low noise density, low
+power, 3-axis accelerometer with selectable measurement ranges.
+
+Signed-off-by: Ramona Gradinariu <ramona.gradinariu@analog.com>
+Signed-off-by: Antoniu Miclaus <antoniu.miclaus@analog.com>
 ---
- drivers/net/virtio_net.c | 54 ++++++++++++++++++++++++++++++++++------
- 1 file changed, 47 insertions(+), 7 deletions(-)
+ .../bindings/iio/accel/adi,adxl380.yaml       | 83 +++++++++++++++++++
+ MAINTAINERS                                   |  7 ++
+ 2 files changed, 90 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/iio/accel/adi,adxl380.yaml
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index b1f8b720733e..77c23979f687 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -2468,6 +2468,13 @@ static int virtnet_enable_queue_pair(struct virtnet_info *vi, int qp_index)
- 	return err;
- }
- 
-+static void virtnet_cancel_dim(struct virtnet_info *vi, struct dim *dim)
-+{
-+	if (!virtio_has_feature(vi->vdev, VIRTIO_NET_F_VQ_NOTF_COAL))
-+		return;
-+	net_dim_work_cancel(dim);
-+}
+diff --git a/Documentation/devicetree/bindings/iio/accel/adi,adxl380.yaml b/Documentation/devicetree/bindings/iio/accel/adi,adxl380.yaml
+new file mode 100644
+index 000000000000..992e2ab841e2
+--- /dev/null
++++ b/Documentation/devicetree/bindings/iio/accel/adi,adxl380.yaml
+@@ -0,0 +1,83 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/iio/accel/adi,adxl380.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
- static int virtnet_open(struct net_device *dev)
- {
- 	struct virtnet_info *vi = netdev_priv(dev);
-@@ -2494,7 +2501,7 @@ static int virtnet_open(struct net_device *dev)
- 
- 	for (i--; i >= 0; i--) {
- 		virtnet_disable_queue_pair(vi, i);
--		cancel_work_sync(&vi->rq[i].dim.work);
-+		virtnet_cancel_dim(vi, &vi->rq[i].dim);
- 	}
- 
- 	return err;
-@@ -2670,7 +2677,7 @@ static int virtnet_rx_resize(struct virtnet_info *vi,
- 
- 	if (running) {
- 		napi_disable(&rq->napi);
--		cancel_work_sync(&rq->dim.work);
-+		virtnet_cancel_dim(vi, &rq->dim);
- 	}
- 
- 	err = virtqueue_resize(rq->vq, ring_num, virtnet_rq_unmap_free_buf);
-@@ -2931,7 +2938,7 @@ static int virtnet_close(struct net_device *dev)
- 
- 	for (i = 0; i < vi->max_queue_pairs; i++) {
- 		virtnet_disable_queue_pair(vi, i);
--		cancel_work_sync(&vi->rq[i].dim.work);
-+		virtnet_cancel_dim(vi, &vi->rq[i].dim);
- 	}
- 
- 	return 0;
-@@ -4457,7 +4464,7 @@ static void virtnet_rx_dim_work(struct work_struct *work)
- 	if (!rq->dim_enabled)
- 		goto out;
- 
--	update_moder = net_dim_get_rx_moderation(dim->mode, dim->profile_ix);
-+	update_moder = net_dim_get_rx_irq_moder(dev, dim);
- 	if (update_moder.usec != rq->intr_coal.max_usecs ||
- 	    update_moder.pkts != rq->intr_coal.max_packets) {
- 		err = virtnet_send_rx_ctrl_coal_vq_cmd(vi, qnum,
-@@ -5157,6 +5164,36 @@ static void virtnet_tx_timeout(struct net_device *dev, unsigned int txqueue)
- 		   jiffies_to_usecs(jiffies - READ_ONCE(txq->trans_start)));
- }
- 
-+static int virtnet_init_irq_moder(struct virtnet_info *vi)
-+{
-+	u8 profile_flags = 0, coal_flags = 0;
-+	int ret, i;
++title: Analog Devices ADXL380/382 3-Axis Digital Accelerometer
 +
-+	profile_flags |= DIM_PROFILE_RX;
-+	coal_flags |= DIM_COALESCE_USEC | DIM_COALESCE_PKTS;
-+	ret = net_dim_init_irq_moder(vi->dev, profile_flags, coal_flags,
-+				     DIM_CQ_PERIOD_MODE_START_FROM_EQE,
-+				     0, virtnet_rx_dim_work, NULL);
++maintainers:
++  - Ramona Gradinariu <ramona.gradinariu@analog.com>
++  - Antoniu Miclaus <antoniu.miclaus@analog.com>
 +
-+	if (ret)
-+		return ret;
++description: |
++  The ADXL380/ADXL382 is a low noise density, low power, 3-axis
++  accelerometer with selectable measurement ranges. The ADXL380
++  supports the ±4 g, ±8 g, and ±16 g ranges, and the ADXL382 supports
++  ±15 g, ±30 g, and ±60 g ranges.
++  The ADXL380/ADXL382 offers industry leading noise, enabling precision
++  applications with minimal calibration. The low noise, and low power
++  ADXL380/ADXL382 enables accurate measurement in an environment with
++  high vibration, heart sounds and audio.
 +
-+	for (i = 0; i < vi->max_queue_pairs; i++)
-+		net_dim_setting(vi->dev, &vi->rq[i].dim, false);
++  In addition to its low power consumption, the ADXL380/ADXL382 has
++  many features to enable true system level performance. These
++  include a built-in micropower temperature sensor, single / double /
++  triple tap detection and a state machine to prevent a false
++  triggering. In addition, the ADXL380/ADXL382 has provisions for
++  external control of the sampling time and/or an external clock.
 +
-+	return 0;
-+}
++    https://www.analog.com/en/products/adxl380.html
 +
-+static void virtnet_free_irq_moder(struct virtnet_info *vi)
-+{
-+	if (!virtio_has_feature(vi->vdev, VIRTIO_NET_F_VQ_NOTF_COAL))
-+		return;
++properties:
++  compatible:
++    enum:
++      - adi,adxl380
++      - adi,adxl382
 +
-+	rtnl_lock();
-+	net_dim_free_irq_moder(vi->dev);
-+	rtnl_unlock();
-+}
++  reg:
++    maxItems: 1
 +
- static const struct net_device_ops virtnet_netdev = {
- 	.ndo_open            = virtnet_open,
- 	.ndo_stop   	     = virtnet_close,
-@@ -5436,9 +5473,6 @@ static int virtnet_alloc_queues(struct virtnet_info *vi)
- 					 virtnet_poll_tx,
- 					 napi_tx ? napi_weight : 0);
++  interrupts:
++    maxItems: 1
++
++required:
++  - compatible
++  - reg
++  - interrupts
++
++allOf:
++  - $ref: /schemas/spi/spi-peripheral-props.yaml#
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/interrupt-controller/irq.h>
++
++    i2c {
++      #address-cells = <1>;
++      #size-cells = <0>;
++
++      accelerometer@54 {
++        compatible = "adi,adxl380";
++        reg = <0x54>;
++        interrupt-parent = <&gpio>;
++        interrupts = <25 IRQ_TYPE_LEVEL_HIGH>;
++      };
++    };
++  - |
++    #include <dt-bindings/interrupt-controller/irq.h>
++
++    spi {
++      #address-cells = <1>;
++      #size-cells = <0>;
++
++      accelerometer@0 {
++        compatible = "adi,adxl380";
++        reg = <0>;
++        spi-max-frequency = <8000000>;
++        interrupt-parent = <&gpio>;
++        interrupts = <25 IRQ_TYPE_LEVEL_HIGH>;
++      };
++    };
+diff --git a/MAINTAINERS b/MAINTAINERS
+index be590c462d91..1425182c85e2 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -618,6 +618,13 @@ F:	drivers/iio/accel/adxl372.c
+ F:	drivers/iio/accel/adxl372_i2c.c
+ F:	drivers/iio/accel/adxl372_spi.c
  
--		INIT_WORK(&vi->rq[i].dim.work, virtnet_rx_dim_work);
--		vi->rq[i].dim.mode = DIM_CQ_PERIOD_MODE_START_FROM_EQE;
--
- 		sg_init_table(vi->rq[i].sg, ARRAY_SIZE(vi->rq[i].sg));
- 		ewma_pkt_len_init(&vi->rq[i].mrg_avg_pkt_len);
- 		sg_init_table(vi->sq[i].sg, ARRAY_SIZE(vi->sq[i].sg));
-@@ -5867,6 +5901,10 @@ static int virtnet_probe(struct virtio_device *vdev)
- 		for (i = 0; i < vi->max_queue_pairs; i++)
- 			if (vi->sq[i].napi.weight)
- 				vi->sq[i].intr_coal.max_packets = 1;
++ADXL380 THREE-AXIS DIGITAL ACCELEROMETER DRIVER
++M:	Ramona Gradinariu <ramona.gradinariu@analog.com>
++M:	Antoniu Miclaus <antoniu.miclaus@analog.com>
++S:	Supported
++W:	https://ez.analog.com/linux-software-drivers
++F:	Documentation/devicetree/bindings/iio/accel/adi,adxl380.yaml
 +
-+		err = virtnet_init_irq_moder(vi);
-+		if (err)
-+			goto free;
- 	}
- 
- #ifdef CONFIG_SYSFS
-@@ -6018,6 +6056,8 @@ static void virtnet_remove(struct virtio_device *vdev)
- 	disable_rx_mode_work(vi);
- 	flush_work(&vi->rx_mode_work);
- 
-+	virtnet_free_irq_moder(vi);
-+
- 	unregister_netdev(vi->dev);
- 
- 	net_failover_destroy(vi->failover);
+ AF8133J THREE-AXIS MAGNETOMETER DRIVER
+ M:	Ondřej Jirman <megi@xff.cz>
+ S:	Maintained
 -- 
-2.32.0.3.g01195cf9f
+2.45.2
 
 
