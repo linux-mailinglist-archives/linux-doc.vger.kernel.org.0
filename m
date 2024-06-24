@@ -1,169 +1,167 @@
-Return-Path: <linux-doc+bounces-19236-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19238-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD4D8914563
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Jun 2024 10:52:57 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D4B2E91461B
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Jun 2024 11:20:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6614D1F23DDA
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Jun 2024 08:52:57 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 015AE1C209D4
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Jun 2024 09:20:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1206F75809;
-	Mon, 24 Jun 2024 08:52:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 980AA130A7C;
+	Mon, 24 Jun 2024 09:19:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YBOI14/o"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fDUDM/rc"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF1F96A347;
-	Mon, 24 Jun 2024 08:52:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AC5812E1F6;
+	Mon, 24 Jun 2024 09:19:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1719219171; cv=none; b=oBr0nPfayxy4KOPGUogkYyGIzatR3RBvJnYY705td/t/V+/soq85nTusZQW4WgbmZUyvvNE6ZulCw8JYe0YzCqwpsMWEfUgLbJS4Dih4km/GQIqi3Pl56DAgzOUnadk8XcfxPS3svKuQZ/pPpNcUM48aJF33m6Go6LnZh+Vppk4=
+	t=1719220790; cv=none; b=ZYixsa4sKIPUTvHszCbmj/Vf5w7W5bG3BBOr4N1kVVZeFWirMUIQMQ/LjePCvu7scOVi0AveROfT+cGcMo7PIVKDwOD4FJ7/8c45U7XHPZ+sb9auH/XeFXWgr+m/4AVcpV0qHHayps3tQt5oODmZTr5kxf5urbHYzFsAkdZxJqw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1719219171; c=relaxed/simple;
-	bh=Jz2YPX0sMcFcT9gDrGUv+vNcyE/fgQCLh5AW7ZHQyYE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DCfMz14qFLiWagLAjd37nTFxWzAD0Wqs/mhyA8s+XlYV7JeKzygzf9dYP35hEakd0lXfmfFaz6SMhOnj4YZlq/fPyACNsl+3t1z/fUFUhi45piH8LC4ozsl/9FH3JM6tDs7wNqzwn6sDEMpMaU4XpaGe0yAUxtsu3YE0tFmYd7o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YBOI14/o; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A6A0C2BBFC;
-	Mon, 24 Jun 2024 08:52:48 +0000 (UTC)
+	s=arc-20240116; t=1719220790; c=relaxed/simple;
+	bh=oU/8r7bCLv97UE0Vbd5wfZPsGHSnpZEWps6OW3Re6iY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=mvvIm4NmKiWpASZoRitTo0dPQprgxEKwQ4h8fJ3CPGYpX8GArCf4egPKfaN2EJIVRhvPRsz/PiMyJIceq7ITwUKWTQ/yi7YGI1MvKKtPGcwU4ITc5wU8PrNLtZ5B0+lZNuBsf2UNelKSw6trzFep37ygmMmVD26aKb7NRwHCG+c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fDUDM/rc; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0DB07C32789;
+	Mon, 24 Jun 2024 09:19:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1719219170;
-	bh=Jz2YPX0sMcFcT9gDrGUv+vNcyE/fgQCLh5AW7ZHQyYE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=YBOI14/oYPx8q48kf6Xxu1uDVeHExkrJB9bxubtil/4hi6VDo/3eSS814m7EqKNuE
-	 sAUGs9lNICAvuXWfcvd6d/qGekEWhRMKG8agxKIfjzXQWtvWNZ1s6/h4OY2L/v8gLu
-	 D/JR4UifvKjfzypXKqSI0zEuKwQpxuZXvZVUCOAOmrFvfWZ2ZdERiQoxBu+ruSxnY5
-	 Ao8bm9G96rz/dEl393pZtwgv20in3w3Z+0yuUOkTfQ4gfWEWgsqM/M6NWXWeHBBLVR
-	 w7Lq+bwWcvK5homVzrnhRt1Vf7IiL7il3wycrQWaSA5ladKWDgoZe0tvBuH+6RmWJ0
-	 386WOj5EUzWhw==
-Date: Mon, 24 Jun 2024 10:52:45 +0200
-From: Benjamin Tissoires <bentiss@kernel.org>
-To: Alexei Starovoitov <alexei.starovoitov@gmail.com>
-Cc: Jiri Kosina <jikos@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
-	Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	"open list:HID CORE LAYER" <linux-input@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>, bpf <bpf@vger.kernel.org>, 
-	"open list:KERNEL SELFTEST FRAMEWORK" <linux-kselftest@vger.kernel.org>, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH HID 06/12] HID: bpf: add HID-BPF hooks for
- hid_hw_output_report
-Message-ID: <zjcva76d6qk5hshkyf7x6jmkahmicboei4tbxxhrrfbemxcu6v@cv2vdhjszdsf>
-References: <20240621-hid_hw_req_bpf-v1-0-d7ab8b885a0b@kernel.org>
- <20240621-hid_hw_req_bpf-v1-6-d7ab8b885a0b@kernel.org>
- <CAADnVQ+us6cQepSGWbOB4K1bb_0Wh43Cpo4zXJxB2d+SVpYinQ@mail.gmail.com>
- <dcbgoe7gija3fn5zsooulnq3jey4twwqvsxjv4yjijacnrlt2h@q6obu65ifctt>
- <CAADnVQKE6RyGUhQbTiOfa15=D9B_vtAg=VMDv8cfYrUKOv5UFQ@mail.gmail.com>
+	s=k20201202; t=1719220790;
+	bh=oU/8r7bCLv97UE0Vbd5wfZPsGHSnpZEWps6OW3Re6iY=;
+	h=From:To:Cc:Subject:Date:From;
+	b=fDUDM/rcfjvVFi3bB/GzUkANTdmyfRJjUvwindo/e8azmI+AAma0IIVyCPla0ocxG
+	 3Hx0HSaJcjENu71NAcnXuDVZfg/hW2n+/S22/ARbZdiUqWRFVR/C5ZZT3+ZiE/ECNf
+	 CBjJwMMe/AECuukZUN/topehhHRVLeOxwYqkPrCmIDKb0ygf1KM5Epwqtzh6fZc5ET
+	 SdBTWAAY+zbn4eQ3E0lVpUtWBbJmDfzRYJx7EhIYZveNHKg2cx08T19Wl9op6HBRdZ
+	 429WVVaq49nkgWfbiJ6EWN/uWBu4uWdGBFaRr1d03vJWToyk4MretRZYHK0YriCMSI
+	 pKHQ1HOLtaE+A==
+Received: from mchehab by mail.kernel.org with local (Exim 4.97.1)
+	(envelope-from <mchehab@kernel.org>)
+	id 1sLfrX-000000085bc-1UbK;
+	Mon, 24 Jun 2024 11:19:47 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: 
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Borislav Petkov <bp@alien8.de>,
+	Tony Luck <tony.luck@intel.com>,
+	James Morse <james.morse@arm.com>,
+	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+	Shiju Jose <shiju.jose@huawei.com>,
+	linux-efi@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-edac@vger.kernel.org,
+	Ard Biesheuvel <ardb@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Len Brown <lenb@kernel.org>,
+	linux-acpi@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: [PATCH v5 0/4] fix CPER issues related to UEFI 2.9A Errata
+Date: Mon, 24 Jun 2024 11:19:17 +0200
+Message-ID: <cover.1719219886.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.45.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAADnVQKE6RyGUhQbTiOfa15=D9B_vtAg=VMDv8cfYrUKOv5UFQ@mail.gmail.com>
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 
-On Jun 21 2024, Alexei Starovoitov wrote:
-> On Fri, Jun 21, 2024 at 9:08 AM Benjamin Tissoires <bentiss@kernel.org> wrote:
-> >
-> > On Jun 21 2024, Alexei Starovoitov wrote:
-> > > On Fri, Jun 21, 2024 at 1:56 AM Benjamin Tissoires <bentiss@kernel.org> wrote:
-> > > >
-> > > > Same story than hid_hw_raw_requests:
-> > > >
-> > > > This allows to intercept and prevent or change the behavior of
-> > > > hid_hw_output_report() from a bpf program.
-> > > >
-> > > > The intent is to solve a couple of use case:
-> > > >   - firewalling a HID device: a firewall can monitor who opens the hidraw
-> > > >     nodes and then prevent or allow access to write operations on that
-> > > >     hidraw node.
-> > > >   - change the behavior of a device and emulate a new HID feature request
-> > > >
-> > > > The hook is allowed to be run as sleepable so it can itself call
-> > > > hid_hw_output_report(), which allows to "convert" one feature request into
-> > > > another or even call the feature request on a different HID device on the
-> > > > same physical device.
-> > > >
-> > > > Signed-off-by: Benjamin Tissoires <bentiss@kernel.org>
-> > > >
-> > > > ---
-> > > >
-> > > > Here checkpatch complains about:
-> > > > WARNING: use of RCU tasks trace is incorrect outside BPF or core RCU code
-> > > >
-> > > > However, we are jumping in BPF code, so I think this is correct, but I'd
-> > > > like to have the opinion on the BPF folks.
-> > > > ---
-> > > >  drivers/hid/bpf/hid_bpf_dispatch.c   | 37 ++++++++++++++++++++++++++++++++----
-> > > >  drivers/hid/bpf/hid_bpf_struct_ops.c |  1 +
-> > > >  drivers/hid/hid-core.c               | 10 ++++++++--
-> > > >  drivers/hid/hidraw.c                 |  2 +-
-> > > >  include/linux/hid.h                  |  3 ++-
-> > > >  include/linux/hid_bpf.h              | 24 ++++++++++++++++++++++-
-> > > >  6 files changed, 68 insertions(+), 9 deletions(-)
-> > > >
-> > > > diff --git a/drivers/hid/bpf/hid_bpf_dispatch.c b/drivers/hid/bpf/hid_bpf_dispatch.c
-> > > > index 8d6e08b7c42f..2a29a0625a3b 100644
-> > > > --- a/drivers/hid/bpf/hid_bpf_dispatch.c
-> > > > +++ b/drivers/hid/bpf/hid_bpf_dispatch.c
-> > > > @@ -111,6 +111,38 @@ int dispatch_hid_bpf_raw_requests(struct hid_device *hdev,
-> > > >  }
-> > > >  EXPORT_SYMBOL_GPL(dispatch_hid_bpf_raw_requests);
-> > > >
-> > > > +int dispatch_hid_bpf_output_report(struct hid_device *hdev,
-> > > > +                                  __u8 *buf, u32 size, __u64 source,
-> > > > +                                  bool from_bpf)
-> > > > +{
-> > > > +       struct hid_bpf_ctx_kern ctx_kern = {
-> > > > +               .ctx = {
-> > > > +                       .hid = hdev,
-> > > > +                       .allocated_size = size,
-> > > > +                       .size = size,
-> > > > +               },
-> > > > +               .data = buf,
-> > > > +               .from_bpf = from_bpf,
-> > > > +       };
-> > > > +       struct hid_bpf_ops *e;
-> > > > +       int ret;
-> > > > +
-> > > > +       rcu_read_lock_trace();
-> > > > +       list_for_each_entry_rcu(e, &hdev->bpf.prog_list, list) {
-> > > > +               if (e->hid_hw_output_report) {
-> > > > +                       ret = e->hid_hw_output_report(&ctx_kern.ctx, source);
-> > > > +                       if (ret)
-> > > > +                               goto out;
-> > > > +               }
-> > > > +       }
-> > > > +       ret = 0;
-> > > > +
-> > > > +out:
-> > > > +       rcu_read_unlock_trace();
-> > >
-> > > same question.
-> >
-> > re What is this for?:
-> >
-> > e->hid_hw_output_report might sleep, so using a plain rcu_read_lock()
-> > introduces warnings.
-> 
-> Ok, but just replacing rcu_read_lock() with rcu_read_lock_trace()
-> doesn't fix it.
-> rcu and rcu_tasks_trace are different.
-> If you're using call_rcu to wait for GP to free an element in that
-> list the thing will go wrong.
-> 
-> If you really need rcu life times here use srcu. It's a much better fit.
-> There will be srcu_read_lock() here, paired with call_srcu().
+The UEFI 2.9A errata makes clear how ARM processor type encoding should
+be done: it is meant to be equal to Generic processor, using a bitmask.
 
-OK, thanks for the explanation.
+The current code assumes, for both generic and ARM processor types
+that this is an integer, which is an incorrect assumption.
 
-I'll work on this for v2
+Fix it. While here, also fix a compilation issue when using W=1.
 
-Cheers,
-Benjamin
+After the change, Kernel will properly decode receiving two errors at the same
+message, as defined at UEFI spec:
+
+[   75.282430] Memory failure: 0x5cdfd: recovery action for free buddy page: Recovered
+[   94.973081] {2}[Hardware Error]: Hardware error from APEI Generic Hardware Error Source: 1
+[   94.973770] {2}[Hardware Error]: event severity: recoverable
+[   94.974334] {2}[Hardware Error]:  Error 0, type: recoverable
+[   94.974962] {2}[Hardware Error]:   section_type: ARM processor error
+[   94.975586] {2}[Hardware Error]:   MIDR: 0x000000000000cd24
+[   94.976202] {2}[Hardware Error]:   Multiprocessor Affinity Register (MPIDR): 0x000000000000ab12
+[   94.977011] {2}[Hardware Error]:   error affinity level: 2
+[   94.977593] {2}[Hardware Error]:   running state: 0x1
+[   94.978135] {2}[Hardware Error]:   Power State Coordination Interface state: 4660
+[   94.978884] {2}[Hardware Error]:   Error info structure 0:
+[   94.979463] {2}[Hardware Error]:   num errors: 3
+[   94.979971] {2}[Hardware Error]:    first error captured
+[   94.980523] {2}[Hardware Error]:    propagated error captured
+[   94.981110] {2}[Hardware Error]:    overflow occurred, error info is incomplete
+[   94.981893] {2}[Hardware Error]:    error_type: 0x0006: cache error|TLB error
+[   94.982606] {2}[Hardware Error]:    error_info: 0x000000000091000f
+[   94.983249] {2}[Hardware Error]:     transaction type: Data Access
+[   94.983891] {2}[Hardware Error]:     cache error, operation type: Data write
+[   94.984559] {2}[Hardware Error]:     TLB error, operation type: Data write
+[   94.985215] {2}[Hardware Error]:     cache level: 2
+[   94.985749] {2}[Hardware Error]:     TLB level: 2
+[   94.986277] {2}[Hardware Error]:     processor context not corrupted
+
+And the error code is properly decoded according with table N.17 from UEFI 2.10
+spec:
+
+	[   94.981893] {2}[Hardware Error]:    error_type: 0x0006: cache error|TLB error
+
+The error injection logic was checked via QEMU using this patch:
+https://lore.kernel.org/all/20240621165115.336-1-shiju.jose@huawei.com/
+
+v5:
+- Do some cleanups and minor fixes as suggested by Jonathan and Tony:
+  - check errors at strscpy();
+  - simplify cper_bits_to_str() function;
+  - use FIELD_GET() and for_each_set_bit();
+  - use ARRAY_SIZE() on infofx to let it clear that it should be size of newpfx + 1;
+  - fix kernel-doc warning with W=1;
+  - use kernel-doc for two exported functions at cper.c.
+
+v4:
+- The print function had some bugs on it, which was discovered with
+  the help of an error injection tool I'm now using.
+
+v3:
+- It adds a helper function to produce a buffer describing the
+  error bits at cper's printk and ghes pr_warn_bitrated. It also
+  fixes a W=1 error while building cper.
+
+v2:
+- It fixes the way printks are handled on both cper_arm and ghes
+  drivers.
+
+v1: 
+- (tagged as RFC) was mostly to give a heads up that the current 
+  implementation is not following the spec. It also touches
+  only cper code.
+
+
+
+
+Mauro Carvalho Chehab (4):
+  efi/cper: Adjust infopfx size to accept an extra space
+  efi/cper: Add a new helper function to print bitmasks
+  efi/cper: align ARM CPER type with UEFI 2.9A/2.10 specs
+  docs: efi: add CPER functions to driver-api
+
+ .../driver-api/firmware/efi/index.rst         | 11 ++--
+ drivers/acpi/apei/ghes.c                      | 15 +++---
+ drivers/firmware/efi/cper-arm.c               | 52 +++++++++----------
+ drivers/firmware/efi/cper.c                   | 41 ++++++++++++++-
+ include/linux/cper.h                          | 12 +++--
+ 5 files changed, 89 insertions(+), 42 deletions(-)
+
+-- 
+2.45.2
+
+
 
