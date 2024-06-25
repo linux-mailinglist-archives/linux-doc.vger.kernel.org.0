@@ -1,360 +1,561 @@
-Return-Path: <linux-doc+bounces-19383-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19385-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 776C491689A
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Jun 2024 15:09:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B05B09169AD
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Jun 2024 15:59:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 886FDB231B7
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Jun 2024 13:09:22 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0B6D5B25258
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Jun 2024 13:59:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1EBDF14D45E;
-	Tue, 25 Jun 2024 13:09:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 676DD176ABC;
+	Tue, 25 Jun 2024 13:55:58 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 614901482F8
-	for <linux-doc@vger.kernel.org>; Tue, 25 Jun 2024 13:09:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
+Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CA3116B39D;
+	Tue, 25 Jun 2024 13:55:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.189
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1719320958; cv=none; b=T+Qn/vZn+hq6pqOgSwrjEl+C6xKJT4YPLgLKjfhzMc4uHGK00Cij1N1Qq3xLV9mI0Y+zuX+ViUMvRhf38zn1Krsiuklr1GCmD4liSQSJLHhxa1i13NkiEVdUFBGdl3qUzeJm1CQJpPEvOb1s96FBWGmgbh2gLoDADa/xqnuZ3oc=
+	t=1719323758; cv=none; b=LzGcZx27XLo7BmSO0iBDUQPfyBKNudMLFCoAGX44UrBcUifuYsaUJ8ehumV+s4bfWDLTNjCXaIBsa0AT6Obs4qT/6nfZgChNQIwrE8jbGBev6HzDcLpyLyIiWMEjIhjImtut1dsZc2XE0wUIdlSp9sFcd90w5JuwFEpft9C5AyY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1719320958; c=relaxed/simple;
-	bh=HuPh3BdM9tTzyAbCfcvcfFZwsm2IDthLT9vKTZ+84lM=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=koQYlhfvzVHIxyegk3Uafxma2jtuhr7UXNkBuSLYbjqmes2RtGDJGFfjmNApVud6WPexfL4g5lTuORX0Rero7ACgXTqTkdtTB+e2xMdtjlP6R41wpMwpUw2C/xQmmFX2k9bhzC7sste3pkXXXo/IMzA46aKHuCvyJ6etbuf7vvw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
-Received: from loongson.cn (unknown [112.20.110.225])
-	by gateway (Coremail) with SMTP id _____8Dxi+p4wXpmP+IJAA--.40401S3;
-	Tue, 25 Jun 2024 21:09:12 +0800 (CST)
-Received: from localhost.localdomain (unknown [112.20.110.225])
-	by localhost.localdomain (Coremail) with SMTP id AQAAf8AxQcR3wXpmE5IwAA--.13840S2;
-	Tue, 25 Jun 2024 21:09:11 +0800 (CST)
-From: Yanteng Si <siyanteng@loongson.cn>
-To: corbet@lwn.net,
-	alexs@kernel.org
-Cc: dzm91@hust.edu.cn,
-	linux-doc@vger.kernel.org,
-	Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH v3] docs/zh_CN: Add driver-api phy translation
-Date: Tue, 25 Jun 2024 21:09:09 +0800
-Message-Id: <20240625130909.3672446-1-siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.31.4
+	s=arc-20240116; t=1719323758; c=relaxed/simple;
+	bh=8oAC4M7r55JAO10SN1nYJExc8Bxps0aPJHVrDAlxBp4=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=hOycndn88n9ZRzfBhSejwyZyUFDuehP40l+kyU95vzgtlxXWbXBWB2e9XSdmMsK1RwhK3cZ2QdSdu7qUyM0uOWmhFxex1WeY/BJlRPk29X3EAU1hT3BAOuaMktZl8NISAOYhCGUjMw5ju4zVMSloWwU7U++qgkYIAt8s/kECfrM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=45.249.212.189
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.19.163.48])
+	by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4W7mV613LDzQjZ0;
+	Tue, 25 Jun 2024 21:52:14 +0800 (CST)
+Received: from dggpemf200006.china.huawei.com (unknown [7.185.36.61])
+	by mail.maildlp.com (Postfix) with ESMTPS id 9B24218006C;
+	Tue, 25 Jun 2024 21:55:53 +0800 (CST)
+Received: from localhost.localdomain (10.69.192.56) by
+ dggpemf200006.china.huawei.com (7.185.36.61) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Tue, 25 Jun 2024 21:55:53 +0800
+From: Yunsheng Lin <linyunsheng@huawei.com>
+To: <davem@davemloft.net>, <kuba@kernel.org>, <pabeni@redhat.com>
+CC: <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>, Yunsheng Lin
+	<linyunsheng@huawei.com>, Alexander Duyck <alexander.duyck@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>, Andrew Morton <akpm@linux-foundation.org>,
+	<linux-mm@kvack.org>, <linux-doc@vger.kernel.org>
+Subject: [PATCH net-next v9 12/13] mm: page_frag: update documentation for page_frag
+Date: Tue, 25 Jun 2024 21:52:15 +0800
+Message-ID: <20240625135216.47007-13-linyunsheng@huawei.com>
+X-Mailer: git-send-email 2.33.0
+In-Reply-To: <20240625135216.47007-1-linyunsheng@huawei.com>
+References: <20240625135216.47007-1-linyunsheng@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:AQAAf8AxQcR3wXpmE5IwAA--.13840S2
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
-X-Coremail-Antispam: 1Uk129KBj93XoWfGrWkCw17urWftF47GFWxuFX_yoWkAFWrpF
-	4DWFyftw4IqFy7uw4qyF1UWFyjk3Wfur48KF1xua4avrn8XrZ0vF4Utryag3ZxW34kCFy8
-	tF45Ja4fAry7CrcCm3ZEXasCq-sJn29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUk2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r106r15M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
-	xVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx
-	1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv
-	67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41l42xK82IYc2
-	Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s02
-	6x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0x
-	vE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE
-	42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6x
-	kF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU2ID7UUUUU
+Content-Type: text/plain
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ dggpemf200006.china.huawei.com (7.185.36.61)
 
-Translate driver-api/phy.rst into Chinese.
+Update documentation about design, implementation and API usages
+for page_frag.
 
-commit d02aa181ee59 ("phy: Add devm_of_phy_optional_get() helper")
-
-Reviewed-by: Dongliang Mu <dzm91@hust.edu.cn>
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+CC: Alexander Duyck <alexander.duyck@gmail.com>
+Signed-off-by: Yunsheng Lin <linyunsheng@huawei.com>
 ---
-v3:
-Modified some sentences in accordance with Dongliang's comments.
-Pick Dongliang's Reviewed-by tag.
+ Documentation/mm/page_frags.rst | 163 +++++++++++++++++++++++++++++++-
+ include/linux/page_frag_cache.h | 107 +++++++++++++++++++++
+ mm/page_frag_cache.c            |  77 ++++++++++++++-
+ 3 files changed, 344 insertions(+), 3 deletions(-)
 
-v2:
-Modified some sentences in accordance with Dongliang's comments.
-
- .../translations/zh_CN/driver-api/index.rst   |   2 +-
- .../zh_CN/driver-api/phy/index.rst            |  20 ++
- .../translations/zh_CN/driver-api/phy/phy.rst | 212 ++++++++++++++++++
- 3 files changed, 233 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/driver-api/phy/index.rst
- create mode 100644 Documentation/translations/zh_CN/driver-api/phy/phy.rst
-
-diff --git a/Documentation/translations/zh_CN/driver-api/index.rst b/Documentation/translations/zh_CN/driver-api/index.rst
-index 92ff1b7fc3d3..4050a2fb51c6 100644
---- a/Documentation/translations/zh_CN/driver-api/index.rst
-+++ b/Documentation/translations/zh_CN/driver-api/index.rst
-@@ -23,6 +23,7 @@ Linux驱动实现者的API指南
- 
-    gpio/index
-    io_ordering
-+   phy/index
- 
- Todolist:
- 
-@@ -103,7 +104,6 @@ Todolist:
- *   parport-lowlevel
- *   pps
- *   ptp
--*   phy/index
- *   pwm
- *   pldmfw/index
- *   rfkill
-diff --git a/Documentation/translations/zh_CN/driver-api/phy/index.rst b/Documentation/translations/zh_CN/driver-api/phy/index.rst
-new file mode 100644
-index 000000000000..2cdce17b74a9
---- /dev/null
-+++ b/Documentation/translations/zh_CN/driver-api/phy/index.rst
-@@ -0,0 +1,20 @@
+diff --git a/Documentation/mm/page_frags.rst b/Documentation/mm/page_frags.rst
+index 503ca6cdb804..6a4ac2616098 100644
+--- a/Documentation/mm/page_frags.rst
++++ b/Documentation/mm/page_frags.rst
+@@ -1,3 +1,5 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +
-+============
-+PHY 通用框架
-+============
+ ==============
+ Page fragments
+ ==============
+@@ -40,4 +42,163 @@ page via a single call.  The advantage to doing this is that it allows for
+ cleaning up the multiple references that were added to a page in order to
+ avoid calling get_page per allocation.
+ 
+-Alexander Duyck, Nov 29, 2016.
 +
-+.. toctree::
-+
-+   phy
-+
-+Todolist:
-+
-+*   samsung-usb2
-+
-+.. only::  subproject and html
-+
-+   Indices
-+   =======
-+
-+   * :ref:`genindex`
-diff --git a/Documentation/translations/zh_CN/driver-api/phy/phy.rst b/Documentation/translations/zh_CN/driver-api/phy/phy.rst
-new file mode 100644
-index 000000000000..0d7489081b90
---- /dev/null
-+++ b/Documentation/translations/zh_CN/driver-api/phy/phy.rst
-@@ -0,0 +1,212 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/driver-api/phy/phy.rst
-+
-+:翻译:
-+
-+ 司延腾 Yanteng Si <siyanteng@loongson.cn>
-+
-+=========
-+PHY子系统
-+=========
-+
-+:作者: Kishon Vijay Abraham I <kishon@ti.com>
-+
-+本文档解释了 PHY 的通用框架和提供的API，以及使用方法。
-+
-+简介
-+====
-+
-+*PHY* 是物理层的缩写，它被用来把设备连接到一个物理媒介，例如USB控制器
-+有一个提供序列化、反序列化、编码、解码和负责获取所需的数据传输速率的 PHY。
-+注意，有些USB控制器内嵌了 PHY 的功能，其它的则使用了一个外置的PHY，此外
-+使用 PHY 的设备还有无线网、以太网、SATA等（控制器）。
-+
-+创建这个框架的目的是将遍布 Linux 内核的 PHY 驱动程序融入到 drivers/phy，
-+以增加代码的可复用性，进而提高代码的可维护性。
-+
-+该框架仅适用于使用外部 PHY（PHY 功能未嵌入控制器内）的设备。
-+
-+注册/注销PHY provider
++Architecture overview
 +=====================
 +
-+PHY provider是指实现一个或多个 PHY 实例的实体。对于 PHY provider 仅
-+实现单个 PHY 实例的简单情况，框架在 of_phy_simple_xlate 中提供其自己
-+的 of_xlate 实现。如果 PHY provider 实现多个实例，则应提供其自己的
-+of_xlate 实现。of_xlate 仅用于 dt 启动情况。
++.. code-block:: none
 +
-+::
++                      +----------------------+
++                      | page_frag API caller |
++                      +----------------------+
++                                  |
++                                  |
++                                  v
++    +---------------------------------------------------------------+
++    |                   request page fragment                       |
++    +---------------------------------------------------------------+
++             |                                 |                  |
++             |                                 |                  |
++             |                          Cache not enough          |
++             |                                 |                  |
++             |                                 v                  |
++        Cache empty                   +-----------------+         |
++             |                        | drain old cache |         |
++             |                        +-----------------+         |
++             |                                 |                  |
++             v_________________________________v                  |
++                              |                                   |
++                              |                                   |
++             _________________v_______________                    |
++            |                                 |            Cache is enough
++            |                                 |                   |
++ PAGE_SIZE < PAGE_FRAG_CACHE_MAX_SIZE         |                   |
++            |                                 |                   |
++            |               PAGE_SIZE >= PAGE_FRAG_CACHE_MAX_SIZE |
++            v                                 |                   |
++    +----------------------------------+      |                   |
++    | refill cache with order > 0 page |      |                   |
++    +----------------------------------+      |                   |
++      |                    |                  |                   |
++      |                    |                  |                   |
++      |              Refill failed            |                   |
++      |                    |                  |                   |
++      |                    v                  v                   |
++      |      +------------------------------------+               |
++      |      |   refill cache with order 0 page   |               |
++      |      +----------------------------------=-+               |
++      |                       |                                   |
++ Refill succeed               |                                   |
++      |                 Refill succeed                            |
++      |                       |                                   |
++      v                       v                                   v
++    +---------------------------------------------------------------+
++    |             allocate fragment from cache                      |
++    +---------------------------------------------------------------+
 +
-+	#define of_phy_provider_register(dev, xlate)    \
-+		__of_phy_provider_register((dev), NULL, THIS_MODULE, (xlate))
-+
-+	#define devm_of_phy_provider_register(dev, xlate)       \
-+		__devm_of_phy_provider_register((dev), NULL, THIS_MODULE,
-+						(xlate))
-+
-+of_phy_provider_register 和 devm_of_phy_provider_register 宏
-+可用于注册 phy_provider，它以 device 和 of_xlate 作为参数。对于 dt
-+启动情况，所有 PHY provider 都应使用上述两个宏之一来注册 PHY provider。
-+
-+与 PHY provider 关联的设备树节点通常包含一组子节点，每个子节点代表一个
-+PHY。某些绑定可能会为了上下文和可扩展性将子节点嵌套在特别的层级中，在这种
-+情况下，可以使用低级别的 of_phy_provider_register_full() 和
-+devm_of_phy_provider_register_full() 宏来覆盖包含子节点的节点。
-+
-+::
-+
-+	#define of_phy_provider_register_full(dev, children, xlate) \
-+		__of_phy_provider_register(dev, children, THIS_MODULE, xlate)
-+
-+	#define devm_of_phy_provider_register_full(dev, children, xlate) \
-+		__devm_of_phy_provider_register_full(dev, children,
-+						     THIS_MODULE, xlate)
-+
-+	void devm_of_phy_provider_unregister(struct device *dev,
-+		struct phy_provider *phy_provider);
-+	void of_phy_provider_unregister(struct phy_provider *phy_provider);
-+
-+devm_of_phy_provider_unregister 和 of_phy_provider_unregister
-+可以被用来注销PHY.
-+
-+创建PHY
-+=======
-+
-+PHY 驱动程序应创建 PHY，以便其他外围（芯片）控制器能够使用它。PHY 框架
-+提供了 2 个 API 来创建 PHY。
-+
-+::
-+
-+	struct phy *phy_create(struct device *dev, struct device_node *node,
-+			       const struct phy_ops *ops);
-+	struct phy *devm_phy_create(struct device *dev,
-+				    struct device_node *node,
-+				    const struct phy_ops *ops);
-+
-+PHY 驱动程序可以使用上述两个 API 之一，通过传递设备指针和 phy_ops
-+来创建 PHY。
-+
-+phy_ops 是一组用于执行 PHY 操作（例如 init、exit、power_on 和
-+power_off）的函数指针。
-+
-+在 phy_ops 中，PHY provider驱动程序在创建 PHY 后使用 phy_set_drvdata()
-+设置私有数据，使用 phy_get_drvdata() 获取私有数据。
-+
-+获取对 PHY 的引用
-+=================
-+
-+控制器必须先获取对 PHY 的引用，然后才能使用 PHY。此框架提供以下 API
-+来获取对 PHY 的引用。
-+
-+::
-+
-+	struct phy *phy_get(struct device *dev, const char *string);
-+	struct phy *devm_phy_get(struct device *dev, const char *string);
-+	struct phy *devm_phy_optional_get(struct device *dev,
-+					  const char *string);
-+	struct phy *devm_of_phy_get(struct device *dev, struct device_node *np,
-+				    const char *con_id);
-+	struct phy *devm_of_phy_optional_get(struct device *dev,
-+					     struct device_node *np,
-+					     const char *con_id);
-+	struct phy *devm_of_phy_get_by_index(struct device *dev,
-+					     struct device_node *np,
-+					     int index);
-+
-+phy_get、devm_phy_get 和 devm_phy_optional_get 可用于在 dt
-+启动的情况下获取 PHY，字符串参数应包含 dt 数据中给出的 phy 名称，在
-+非 dt 启动的情况下，它应包含 PHY 的标签。两个 devm_phy_get 在成功
-+获取 PHY 后使用 devres 将设备与 PHY 关联。在驱动程序分离时，将在
-+devres 数据上调用 release 函数并释放 devres 数据。当 phy 是可选
-+的时，应使用 _optional_get 变体。这些函数永远不会返回 -ENODEV，而
-+是在找不到 phy 时返回 NULL。一些通用驱动程序（例如 ehci）可能使用
-+多个 phy。在这种情况下，devm_of_phy_get 或 devm_of_phy_get_by_index
-+用于根据名称或索引获取 phy 引用。
-+
-+需要注意的是，NULL 是有效的 phy 引用。NULL phy 上的所有 phy 使用
-+者调用都将成为 NOP。也就是说释放调用，当应用于 NULL phy 时，release
-+调用、phy_init()/phy_exit() 调用、phy_power_on()/phy_power_off()
-+调用都是 NOP。NULL phy 在处理可选的 phy 设备中很有用。
-+
-+API的调用顺序
++API interface
 +=============
++As the design and implementation of page_frag API implies, the allocation side
++does not allow concurrent calling. Instead it is assumed that the caller must
++ensure there is not concurrent alloc calling to the same page_frag_cache
++instance by using its own lock or rely on some lockless guarantee like NAPI
++softirq.
 +
-+通常，调用顺序应该是::
++Depending on different aligning requirement, the page_frag API caller may call
++page_frag_alloc*_align*() to ensure the returned virtual address or offset of
++the page is aligned according to the 'align/alignment' parameter. Note the size
++of the allocated fragment is not aligned, the caller needs to provide an aligned
++fragsz if there is an alignment requirement for the size of the fragment.
 +
-+    [devm_][of_]phy_get()
-+    phy_init()
-+    phy_power_on()
-+    [phy_set_mode[_ext]()]
-+    ...
-+    phy_power_off()
-+    phy_exit()
-+    [[of_]phy_put()]
++Depending on different use cases, callers expecting to deal with va, page or
++both va and page for them may call page_frag_alloc_va*, page_frag_alloc_pg*,
++or page_frag_alloc* API accordingly.
 +
-+一些PHY驱动可能没有实现 :c:func:`phy_init` 或 :c:func:`phy_power_on`,
-+但是控制器应该总是调用这些函数以兼容其它PHY，有些PHY可能要求
-+:c:func:`phy_set_mode <phy_set_mode_ext>` 而其他 PHY 可能使用
-+默认模式（通常通过设备树或其他固件配置）。出于兼容性考虑，如果您知道将
-+使用哪种模式，则应始终调用此函数。通常，应在 :c:func:`phy_power_on`
-+之后调用此函数，尽管某些 PHY 驱动程序可能随时允许调用它。
++There is also a use case that needs minimum memory in order for forward progress,
++but more performant if more memory is available. Using page_frag_alloc_prepare()
++and page_frag_alloc_commit() related API, the caller requests the minimum memory
++it needs and the prepare API will return the maximum size of the fragment
++returned. The caller needs to either call the commit API to report how much
++memory it actually uses, or not do so if deciding to not use any memory.
 +
-+释放对 PHY 的引用
-+=================
++.. kernel-doc:: include/linux/page_frag_cache.h
++   :identifiers: page_frag_cache_init page_frag_cache_is_pfmemalloc
++                 page_frag_cache_page_offset page_frag_alloc_va
++                 page_frag_alloc_va_align page_frag_alloc_va_prepare_align
++                 page_frag_alloc_probe page_frag_alloc_commit
++                 page_frag_alloc_commit_noref page_frag_alloc_abort
 +
-+当控制器不再需要 PHY 时，它必须使用上一节中提到的 API 释放对已获得
-+的 PHY 的引用。PHY 框架提供了 2 个 API 来释放对 PHY 的引用。
++.. kernel-doc:: mm/page_frag_cache.c
++   :identifiers: __page_frag_alloc_va_align page_frag_alloc_pg
++                 page_frag_alloc_va_prepare page_frag_alloc_pg_prepare
++                 page_frag_alloc_prepare page_frag_cache_drain
++                 page_frag_free_va
 +
-+::
++Coding examples
++===============
 +
-+	void phy_put(struct phy *phy);
-+	void devm_phy_put(struct device *dev, struct phy *phy);
++Init & Drain API
++----------------
 +
-+这两个 API 都用于释放对 PHY 的引用，并且 devm_phy_put 会销毁与此
-+PHY 关联的设备资源。
++.. code-block:: c
 +
-+销毁 PHY
-+========
++   page_frag_cache_init(pfrag);
++   ...
++   page_frag_cache_drain(pfrag);
 +
-+当创建 PHY 的驱动程序被卸载时，它应该使用以下 2 个 API 之一销毁其创
-+建的 PHY::
 +
-+	void phy_destroy(struct phy *phy);
-+	void devm_phy_destroy(struct device *dev, struct phy *phy);
++Alloc & Free API
++----------------
 +
-+这两个 API 都会销毁 PHY，并且 devm_phy_destroy 会销毁与此 PHY 关
-+联的 devres。
++.. code-block:: c
 +
-+PM Runtime
-+==========
++    void *va;
 +
-+这个子系统启用了pm runtime。 所以，在创建PHY 时，将调用此子系统创建的
-+phy 设备的 pm_runtime_enable 函数，在销毁 PHY 时，将调用
-+pm_runtime_disable。请注意，此子系统创建的 phy 设备将是调用 phy_create
-+（PHY provider 设备）的设备的子设备。
++    va = page_frag_alloc_va_align(pfrag, size, gfp, align);
++    if (!va)
++        goto do_error;
 +
-+因此，由于父子关系，此子系统创建的 phy_device 的 pm_runtime_get_sync
-+调用 PHY provider 设备的 pm_runtime_get_sync。还应注意，
-+phy_power_on 和 phy_power_off 分别执行 phy_pm_runtime_get_sync 和
-+phy_pm_runtime_put。有导出的 API，如 phy_pm_runtime_get、
-+phy_pm_runtime_get_sync、phy_pm_runtime_put、phy_pm_runtime_put_sync、
-+phy_pm_runtime_allow 和 phy_pm_runtime_forbid，用于执行 PM 操作。
++    err = do_something(va, size);
++    if (err) {
++        page_frag_free_va(va);
++        goto do_error;
++    }
 +
-+PHY映射
-+=======
++Prepare & Commit API
++--------------------
 +
-+为了在没有 DeviceTree 帮助的情况下获取对 PHY 的引用，框架提供了可与
-+clkdev 进行比较的查找，允许将 clk 结构体绑定到设备。当 struct phy 的
-+句柄已存在时，可以在运行时进行查找。
++.. code-block:: c
 +
-+该框架提供以下 API 用于注册和注销查找::
++    unsigned int offset, size;
++    bool merge = true;
++    struct page *page;
++    void *va;
 +
-+	int phy_create_lookup(struct phy *phy, const char *con_id,
-+			      const char *dev_id);
-+	void phy_remove_lookup(struct phy *phy, const char *con_id,
-+			       const char *dev_id);
++    size = 32U;
++    page = page_frag_alloc_prepare(pfrag, &offset, &size, &va);
++    if (!page)
++        goto wait_for_space;
 +
-+DeviceTree绑定
-+==============
++    copy = min_t(unsigned int, copy, size);
++    if (!skb_can_coalesce(skb, i, page, offset)) {
++        if (i >= max_skb_frags)
++            goto new_segment;
 +
-+PHY dt 绑定的文档可以在以下位置找到 @
-+Documentation/devicetree/bindings/phy/phy-bindings.txt
++        merge = false;
++    }
++
++    copy = mem_schedule(copy);
++    if (!copy)
++        goto wait_for_space;
++
++    err = copy_from_iter_full_nocache(va, copy, iter);
++    if (err)
++        goto do_error;
++
++    if (merge) {
++        skb_frag_size_add(&skb_shinfo(skb)->frags[i - 1], copy);
++        page_frag_alloc_commit_noref(pfrag, offset, copy);
++    } else {
++        skb_fill_page_desc(skb, i, page, offset, copy);
++        page_frag_alloc_commit(pfrag, offset, copy);
++    }
+diff --git a/include/linux/page_frag_cache.h b/include/linux/page_frag_cache.h
+index e95d44a36ec9..234b9b1c6f63 100644
+--- a/include/linux/page_frag_cache.h
++++ b/include/linux/page_frag_cache.h
+@@ -71,11 +71,28 @@ struct page_frag_cache {
+ #endif
+ };
+ 
++/**
++ * page_frag_cache_init() - Init page_frag cache.
++ * @nc: page_frag cache from which to init
++ *
++ * Inline helper to init the page_frag cache.
++ */
+ static inline void page_frag_cache_init(struct page_frag_cache *nc)
+ {
+ 	memset(nc, 0, sizeof(*nc));
+ }
+ 
++/**
++ * page_frag_cache_is_pfmemalloc() - Check for pfmemalloc.
++ * @nc: page_frag cache from which to check
++ *
++ * Used to check if the current page in page_frag cache is pfmemalloc'ed.
++ * It has the same calling context expection as the alloc API.
++ *
++ * Return:
++ * true if the current page in page_frag cache is pfmemalloc'ed, otherwise
++ * return false.
++ */
+ static inline bool page_frag_cache_is_pfmemalloc(struct page_frag_cache *nc)
+ {
+ 	return encoded_page_pfmemalloc(nc->encoded_va);
+@@ -95,6 +112,19 @@ void *__page_frag_alloc_va_align(struct page_frag_cache *nc,
+ 				 unsigned int fragsz, gfp_t gfp_mask,
+ 				 unsigned int align_mask);
+ 
++/**
++ * page_frag_alloc_va_align() - Alloc a page fragment with aligning requirement.
++ * @nc: page_frag cache from which to allocate
++ * @fragsz: the requested fragment size
++ * @gfp_mask: the allocation gfp to use when cache needs to be refilled
++ * @align: the requested aligning requirement for virtual address of fragment
++ *
++ * WARN_ON_ONCE() checking for @align before allocing a page fragment from
++ * page_frag cache with aligning requirement.
++ *
++ * Return:
++ * virtual address of the page fragment, otherwise return NULL.
++ */
+ static inline void *page_frag_alloc_va_align(struct page_frag_cache *nc,
+ 					     unsigned int fragsz,
+ 					     gfp_t gfp_mask, unsigned int align)
+@@ -103,11 +133,32 @@ static inline void *page_frag_alloc_va_align(struct page_frag_cache *nc,
+ 	return __page_frag_alloc_va_align(nc, fragsz, gfp_mask, -align);
+ }
+ 
++/**
++ * page_frag_cache_page_offset() - Return the current page fragment's offset.
++ * @nc: page_frag cache from which to check
++ *
++ * The API is only used in net/sched/em_meta.c for historical reason, do not use
++ * it for new caller unless there is a strong reason.
++ *
++ * Return:
++ * the offset of the current page fragment in the page_frag cache.
++ */
+ static inline unsigned int page_frag_cache_page_offset(const struct page_frag_cache *nc)
+ {
+ 	return page_frag_cache_page_size(nc->encoded_va) - nc->remaining;
+ }
+ 
++/**
++ * page_frag_alloc_va() - Alloc a page fragment.
++ * @nc: page_frag cache from which to allocate
++ * @fragsz: the requested fragment size
++ * @gfp_mask: the allocation gfp to use when cache need to be refilled
++ *
++ * Get a page fragment from page_frag cache.
++ *
++ * Return:
++ * virtual address of the page fragment, otherwise return NULL.
++ */
+ static inline void *page_frag_alloc_va(struct page_frag_cache *nc,
+ 				       unsigned int fragsz, gfp_t gfp_mask)
+ {
+@@ -117,6 +168,21 @@ static inline void *page_frag_alloc_va(struct page_frag_cache *nc,
+ void *page_frag_alloc_va_prepare(struct page_frag_cache *nc, unsigned int *fragsz,
+ 				 gfp_t gfp);
+ 
++/**
++ * page_frag_alloc_va_prepare_align() - Prepare allocing a page fragment with
++ * aligning requirement.
++ * @nc: page_frag cache from which to prepare
++ * @fragsz: in as the requested size, out as the available size
++ * @gfp: the allocation gfp to use when cache need to be refilled
++ * @align: the requested aligning requirement
++ *
++ * WARN_ON_ONCE() checking for @align before preparing an aligned page fragment
++ * with minimum size of @fragsz, @fragsz is also used to report the maximum size
++ * of the page fragment the caller can use.
++ *
++ * Return:
++ * virtual address of the page fragment, otherwise return NULL.
++ */
+ static inline void *page_frag_alloc_va_prepare_align(struct page_frag_cache *nc,
+ 						     unsigned int *fragsz,
+ 						     gfp_t gfp,
+@@ -151,6 +217,21 @@ static inline struct encoded_va *__page_frag_alloc_probe(struct page_frag_cache
+ 	return encoded_va;
+ }
+ 
++/**
++ * page_frag_alloc_probe - Probe the available page fragment.
++ * @nc: page_frag cache from which to probe
++ * @offset: out as the offset of the page fragment
++ * @fragsz: in as the requested size, out as the available size
++ * @va: out as the virtual address of the returned page fragment
++ *
++ * Probe the current available memory to caller without doing cache refilling.
++ * If no space is available in the page_frag cache, return NULL.
++ * If the requested space is available, up to @fragsz bytes may be added to the
++ * fragment using commit API.
++ *
++ * Return:
++ * the page fragment, otherwise return NULL.
++ */
+ #define page_frag_alloc_probe(nc, offset, fragsz, va)			\
+ ({									\
+ 	struct page *__page = NULL;					\
+@@ -165,6 +246,14 @@ static inline struct encoded_va *__page_frag_alloc_probe(struct page_frag_cache
+ 	__page;								\
+ })
+ 
++/**
++ * page_frag_alloc_commit - Commit allocing a page fragment.
++ * @nc: page_frag cache from which to commit
++ * @fragsz: size of the page fragment has been used
++ *
++ * Commit the actual used size for the allocation that was either prepared or
++ * probed.
++ */
+ static inline void page_frag_alloc_commit(struct page_frag_cache *nc,
+ 					  unsigned int fragsz)
+ {
+@@ -173,6 +262,16 @@ static inline void page_frag_alloc_commit(struct page_frag_cache *nc,
+ 	nc->remaining -= fragsz;
+ }
+ 
++/**
++ * page_frag_alloc_commit_noref - Commit allocing a page fragment without taking
++ * page refcount.
++ * @nc: page_frag cache from which to commit
++ * @fragsz: size of the page fragment has been used
++ *
++ * Commit the alloc preparing or probing by passing the actual used size, but
++ * not taking refcount. Mostly used for fragmemt coalescing case when the
++ * current fragment can share the same refcount with previous fragment.
++ */
+ static inline void page_frag_alloc_commit_noref(struct page_frag_cache *nc,
+ 						unsigned int fragsz)
+ {
+@@ -180,6 +279,14 @@ static inline void page_frag_alloc_commit_noref(struct page_frag_cache *nc,
+ 	nc->remaining -= fragsz;
+ }
+ 
++/**
++ * page_frag_alloc_abort - Abort the page fragment allocation.
++ * @nc: page_frag cache to which the page fragment is aborted back
++ * @fragsz: size of the page fragment to be aborted
++ *
++ * It is expected to be called from the same context as the alloc API.
++ * Mostly used for error handling cases where the fragment is no longer needed.
++ */
+ static inline void page_frag_alloc_abort(struct page_frag_cache *nc,
+ 					 unsigned int fragsz)
+ {
+diff --git a/mm/page_frag_cache.c b/mm/page_frag_cache.c
+index a6eb0ab2e7f9..b42864ee6f5d 100644
+--- a/mm/page_frag_cache.c
++++ b/mm/page_frag_cache.c
+@@ -91,6 +91,18 @@ static struct page *__page_frag_cache_refill(struct page_frag_cache *nc,
+ 	return page;
+ }
+ 
++/**
++ * page_frag_alloc_va_prepare() - Prepare allocing a page fragment.
++ * @nc: page_frag cache from which to prepare
++ * @fragsz: in as the requested size, out as the available size
++ * @gfp: the allocation gfp to use when cache needs to be refilled
++ *
++ * Prepare a page fragment with minimum size of @fragsz, @fragsz is also used
++ * to report the maximum size of the page fragment the caller can use.
++ *
++ * Return:
++ * virtual address of the page fragment, otherwise return NULL.
++ */
+ void *page_frag_alloc_va_prepare(struct page_frag_cache *nc,
+ 				 unsigned int *fragsz, gfp_t gfp)
+ {
+@@ -113,6 +125,19 @@ void *page_frag_alloc_va_prepare(struct page_frag_cache *nc,
+ }
+ EXPORT_SYMBOL(page_frag_alloc_va_prepare);
+ 
++/**
++ * page_frag_alloc_pg_prepare - Prepare allocing a page fragment.
++ * @nc: page_frag cache from which to prepare
++ * @offset: out as the offset of the page fragment
++ * @fragsz: in as the requested size, out as the available size
++ * @gfp: the allocation gfp to use when cache needs to be refilled
++ *
++ * Prepare a page fragment with minimum size of @fragsz, @fragsz is also used
++ * to report the maximum size of the page fragment the caller can use.
++ *
++ * Return:
++ * the page fragment, otherwise return NULL.
++ */
+ struct page *page_frag_alloc_pg_prepare(struct page_frag_cache *nc,
+ 					unsigned int *offset,
+ 					unsigned int *fragsz, gfp_t gfp)
+@@ -143,6 +168,21 @@ struct page *page_frag_alloc_pg_prepare(struct page_frag_cache *nc,
+ }
+ EXPORT_SYMBOL(page_frag_alloc_pg_prepare);
+ 
++/**
++ * page_frag_alloc_prepare - Prepare allocing a page fragment.
++ * @nc: page_frag cache from which to prepare
++ * @offset: out as the offset of the page fragment
++ * @fragsz: in as the requested size, out as the available size
++ * @va: out as the virtual address of the returned page fragment
++ * @gfp: the allocation gfp to use when cache needs to be refilled
++ *
++ * Prepare a page fragment with minimum size of @fragsz, @fragsz is also used
++ * to report the maximum size of the page fragment. Return both 'struct page'
++ * and virtual address of the fragment to the caller.
++ *
++ * Return:
++ * the page fragment, otherwise return NULL.
++ */
+ struct page *page_frag_alloc_prepare(struct page_frag_cache *nc,
+ 				     unsigned int *offset,
+ 				     unsigned int *fragsz,
+@@ -175,6 +215,18 @@ struct page *page_frag_alloc_prepare(struct page_frag_cache *nc,
+ }
+ EXPORT_SYMBOL(page_frag_alloc_prepare);
+ 
++/**
++ * page_frag_alloc_pg - Alloce a page fragment.
++ * @nc: page_frag cache from which to alloce
++ * @offset: out as the offset of the page fragment
++ * @fragsz: the requested fragment size
++ * @gfp: the allocation gfp to use when cache needs to be refilled
++ *
++ * Get a page fragment from page_frag cache.
++ *
++ * Return:
++ * the page fragment, otherwise return NULL.
++ */
+ struct page *page_frag_alloc_pg(struct page_frag_cache *nc,
+ 				unsigned int *offset, unsigned int fragsz,
+ 				gfp_t gfp)
+@@ -205,6 +257,10 @@ struct page *page_frag_alloc_pg(struct page_frag_cache *nc,
+ }
+ EXPORT_SYMBOL(page_frag_alloc_pg);
+ 
++/**
++ * page_frag_cache_drain - Drain the current page from page_frag cache.
++ * @nc: page_frag cache from which to drain
++ */
+ void page_frag_cache_drain(struct page_frag_cache *nc)
+ {
+ 	if (!nc->encoded_va)
+@@ -225,6 +281,19 @@ void __page_frag_cache_drain(struct page *page, unsigned int count)
+ }
+ EXPORT_SYMBOL(__page_frag_cache_drain);
+ 
++/**
++ * __page_frag_alloc_va_align() - Alloc a page fragment with aligning
++ * requirement.
++ * @nc: page_frag cache from which to allocate
++ * @fragsz: the requested fragment size
++ * @gfp_mask: the allocation gfp to use when cache need to be refilled
++ * @align_mask: the requested aligning requirement for the 'va'
++ *
++ * Get a page fragment from page_frag cache with aligning requirement.
++ *
++ * Return:
++ * Return va of the page fragment, otherwise return NULL.
++ */
+ void *__page_frag_alloc_va_align(struct page_frag_cache *nc,
+ 				 unsigned int fragsz, gfp_t gfp_mask,
+ 				 unsigned int align_mask)
+@@ -260,8 +329,12 @@ void *__page_frag_alloc_va_align(struct page_frag_cache *nc,
+ }
+ EXPORT_SYMBOL(__page_frag_alloc_va_align);
+ 
+-/*
+- * Frees a page fragment allocated out of either a compound or order 0 page.
++/**
++ * page_frag_free_va - Free a page fragment.
++ * @addr: va of page fragment to be freed
++ *
++ * Free a page fragment allocated out of either a compound or order 0 page by
++ * virtual address.
+  */
+ void page_frag_free_va(void *addr)
+ {
 -- 
-2.31.4
+2.33.0
 
 
