@@ -1,264 +1,153 @@
-Return-Path: <linux-doc+bounces-19384-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19386-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A1EB916982
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Jun 2024 15:54:53 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id BBBFE916A06
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Jun 2024 16:16:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2E4691C23FED
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Jun 2024 13:54:52 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5FE961F22D5D
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Jun 2024 14:16:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D3341607B0;
-	Tue, 25 Jun 2024 13:54:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D1CA16C445;
+	Tue, 25 Jun 2024 14:16:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="rdoeJrgL"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="cBDgz0Ir"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-fw-2101.amazon.com (smtp-fw-2101.amazon.com [72.21.196.25])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0957E17C98;
-	Tue, 25 Jun 2024 13:54:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=72.21.196.25
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F8E316C44C
+	for <linux-doc@vger.kernel.org>; Tue, 25 Jun 2024 14:16:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1719323687; cv=none; b=aPBD5nf456HOfkORbNABT/6NsbyzHLqtdJCuRiBrc2an1XmJzlymyyo++tsyHnriekXpGDJgsU5bkENyl3ANdKUlU2i83zWaQkjBF2EuqQa8I9cpaY61K1OP4jLvoH6Z4LCMO6lbbPWA2KE2iAt2QeEQ5Qr3g2M7Es/X6fiC0dk=
+	t=1719324980; cv=none; b=UbXOzvVLwbKb5zvsRgYCmh9qTQBiz2LwNUZcu/qemxnr26YKB8gYaJHxbSTUiSb7m5YcMX3FSuVJq/SksYvOUygbnlCCXaf4ChMqfEmgyPIu/qiBOnPtHeXEN+eOHwUlnwcoFBqgZVjCydqTVwbPwTsPsMAXWuxrHNHIeGW4/IM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1719323687; c=relaxed/simple;
-	bh=BZP7wIc5pf7C1Ls1gm5g1uqTHaYtrk/njLx/PYW/Qeg=;
-	h=Date:From:To:CC:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OdxML4v3tm9rlq2rdpgZAqa5tX7ZhhMbEeGyRRMb/qR33W3rav17PUt6OVyE8uE3LUcxLSxSMkdifJpdepV8MbG0smoUcPxauQOjyLNlY8wAnZh2v84CRWtD046UnLLScQOQ9CP8lhi+8IVwpsZxHVXKQmLO5WdAn3gH0WFG0rA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.de; spf=pass smtp.mailfrom=amazon.de; dkim=pass (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b=rdoeJrgL; arc=none smtp.client-ip=72.21.196.25
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.de
+	s=arc-20240116; t=1719324980; c=relaxed/simple;
+	bh=v5/BN7Hm8eXOX6GvRiGj1yPcrrgAcTj4SdgdQ8HMC7I=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Iip3ducaz0lnRoEyLKzi6YyeGy0UxoK/rVVD+m06qXDXBm1u6O39e+hlPXZ2kZJ+1DvdS7Qq3udsOzoNqFCyRJSmDiAWlfYrcvBZDCEHry484WO3owSHpOM6W4yfSlHgUJkciDi94USHM2bqGtgrL0mxI8vol52Ny95qxU8ldgQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=cBDgz0Ir; arc=none smtp.client-ip=209.85.218.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a724e067017so313216766b.0
+        for <linux-doc@vger.kernel.org>; Tue, 25 Jun 2024 07:16:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
-  t=1719323686; x=1750859686;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=oGCfWHyy2ugxDFebpY3wrACjPmfk419vbwqJZjgreDg=;
-  b=rdoeJrgLexL9/Bd4mkxEcGKsAL9yG/+MCihdcfHgce8siK7beer/ZNHu
-   H6mimKYM+D+ZFcyUNzQXTTc+j7HGgyt2Io+uMPzxlKN9VfLBimV/FtHV1
-   onyypaJGA7x/XzQzkA7HTxkxz7PXFLwsNfA7fbfjz4PhYd1saUWYewsGq
-   s=;
-X-IronPort-AV: E=Sophos;i="6.08,264,1712620800"; 
-   d="scan'208";a="410016268"
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev) ([10.43.8.6])
-  by smtp-border-fw-2101.iad2.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2024 13:54:42 +0000
-Received: from EX19MTAEUA001.ant.amazon.com [10.0.17.79:57826]
- by smtpin.naws.eu-west-1.prod.farcaster.email.amazon.dev [10.0.41.15:2525] with esmtp (Farcaster)
- id 5e7838ba-3b35-4f22-af46-8afabcdb3ea2; Tue, 25 Jun 2024 13:54:40 +0000 (UTC)
-X-Farcaster-Flow-ID: 5e7838ba-3b35-4f22-af46-8afabcdb3ea2
-Received: from EX19D033EUC004.ant.amazon.com (10.252.61.133) by
- EX19MTAEUA001.ant.amazon.com (10.252.50.192) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.34; Tue, 25 Jun 2024 13:54:37 +0000
-Received: from u40bc5e070a0153.ant.amazon.com (10.106.82.20) by
- EX19D033EUC004.ant.amazon.com (10.252.61.133) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.34; Tue, 25 Jun 2024 13:54:34 +0000
-Date: Tue, 25 Jun 2024 15:54:28 +0200
-From: Roman Kagan <rkagan@amazon.de>
-To: Marc Zyngier <maz@kernel.org>
-CC: <linux-arm-kernel@lists.infradead.org>, Catalin Marinas
-	<catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
-	<nh-open-source@amazon.com>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH] irqchip/gicv3-its: Workaround for GIC-700 erratum 2195890
-Message-ID: <ZnrMFIEyr8SKLDKk@u40bc5e070a0153.ant.amazon.com>
-Mail-Followup-To: Roman Kagan <rkagan@amazon.de>,
-	Marc Zyngier <maz@kernel.org>, linux-arm-kernel@lists.infradead.org,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, nh-open-source@amazon.com,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Jonathan Corbet <corbet@lwn.net>
-References: <20240624165541.1286227-1-rkagan@amazon.de>
- <86v81xif6l.wl-maz@kernel.org>
+        d=google.com; s=20230601; t=1719324976; x=1719929776; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=txMg1yBI3C5zZj9b3iG0sb1mrfRfqVzlgNpFi+lwATA=;
+        b=cBDgz0IrhdcnC5u6hsKi2f2IN5dG2AwSD8TmyZDMAREquSUz+kriac2F6yiZ568ao6
+         G1RPef5TOaushP9LQddVaVmc2e51YWdpgTPYaepx5xgt11/yLRwtQ+nA8LeAJvvhNeOQ
+         qcCjZid3nVf1/6jBj8KbcZJ+4JdLMjIedK3FOx8OnuBuLoZsdIF23HNrotNzf7427nwe
+         IeqkgaZF8WjM1Ze0DMoo1SMvfXjKIoCS/0mrA4EcUtW4GVx6vornhhrkfbE8sfic6hnV
+         jxDi1IkPm7UIhldLjcUJKUrEz77aSOjVn+zJ/T3G9SAMH3THXPYlh/mTCNbjuKU49h0S
+         cB8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1719324976; x=1719929776;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=txMg1yBI3C5zZj9b3iG0sb1mrfRfqVzlgNpFi+lwATA=;
+        b=AhHb/nK1twX9aJhZblZo77Ob20Cx3Ecg2jNT9rdN2IQII6/e+jdrK6mnYd63e4Rqjj
+         y4dJfkUA/5oH5hiH5pum28Zj7MgK6QIKgQSleJ6QdCCeD3rZ92cySSlaVw0EDgxttvq/
+         WBM2Ug/WYCP6J4YMnnzOHUtJmIr6dQJXWYZF5iT7LpjYGwyYj4ttwI5sMcjBqoJHFqWd
+         5WvK8srCheUXJJY5hwwPxBVmUnDLxqJcFePWwiGwwHPJco4JTJ+66OmGerZf66dOQ6b9
+         pgyk2L9FgdLK97kEAFytYLk4efzIUU+G/WOszPhoFi5HIoUY0gCaRxBWXiTVWl2WgtV0
+         q4nQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXmByd4/KgaL0hH+VghoSo+gDwF5sEVPIuvIM1OuO5oyTM7EFTmHMLyL8xOfWHN6BCC9mgElPLIGX7gk+TxVhMp5Z5F37Q4WgP/
+X-Gm-Message-State: AOJu0YyptR67oUYTTc4KwK6CKTpwHazeTO2iRUhkUmCF9gy16f2iEFOg
+	uDOBQ2YDBQoT+ePRMnNudI4s6Vnr0lafDCP6tgClIDytLt0xuuX6s8O20dcEFfXWesBSQxxZpPA
+	W3bJCVN7KDe6g0UhXWIq0UQs2IQ4s5obm9xI6
+X-Google-Smtp-Source: AGHT+IFscpUDigK3sjiafRtyPgDq4I1SxTB/v4k5zCynhP82Entzul2Gkuvq6bg+VXWqgIpi6/XH2Nq4EJopbPxoaxU=
+X-Received: by 2002:a17:907:c301:b0:a6f:5f5d:e924 with SMTP id
+ a640c23a62f3a-a7245b4c9bcmr662856066b.6.1719324975303; Tue, 25 Jun 2024
+ 07:16:15 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <86v81xif6l.wl-maz@kernel.org>
-X-ClientProxiedBy: EX19D038UWB001.ant.amazon.com (10.13.139.148) To
- EX19D033EUC004.ant.amazon.com (10.252.61.133)
+References: <20240625024721.2140656-1-almasrymina@google.com>
+In-Reply-To: <20240625024721.2140656-1-almasrymina@google.com>
+From: Mina Almasry <almasrymina@google.com>
+Date: Tue, 25 Jun 2024 07:16:00 -0700
+Message-ID: <CAHS8izO1g5vZodyvKBNyE-Fx7A4EoD70RuDLwXtzE3yvfRw_2g@mail.gmail.com>
+Subject: Re: [PATCH net-next v13 00/13] Device Memory TCP
+To: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-alpha@vger.kernel.org, 
+	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org, 
+	sparclinux@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
+	linux-arch@vger.kernel.org, bpf@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-media@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org
+Cc: "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Donald Hunter <donald.hunter@gmail.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Richard Henderson <richard.henderson@linaro.org>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, 
+	Matt Turner <mattst88@gmail.com>, Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
+	Andreas Larsson <andreas@gaisler.com>, Jesper Dangaard Brouer <hawk@kernel.org>, 
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Arnd Bergmann <arnd@arndb.de>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, 
+	Andrii Nakryiko <andrii@kernel.org>, Martin KaFai Lau <martin.lau@linux.dev>, 
+	Eduard Zingerman <eddyz87@gmail.com>, Song Liu <song@kernel.org>, 
+	Yonghong Song <yonghong.song@linux.dev>, John Fastabend <john.fastabend@gmail.com>, 
+	KP Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@fomichev.me>, Hao Luo <haoluo@google.com>, 
+	Jiri Olsa <jolsa@kernel.org>, Steffen Klassert <steffen.klassert@secunet.com>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, David Ahern <dsahern@kernel.org>, 
+	Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>, 
+	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+	Bagas Sanjaya <bagasdotme@gmail.com>, Christoph Hellwig <hch@infradead.org>, 
+	Nikolay Aleksandrov <razor@blackwall.org>, Pavel Begunkov <asml.silence@gmail.com>, David Wei <dw@davidwei.uk>, 
+	Jason Gunthorpe <jgg@ziepe.ca>, Yunsheng Lin <linyunsheng@huawei.com>, 
+	Shailend Chand <shailend@google.com>, Harshitha Ramamurthy <hramamurthy@google.com>, 
+	Shakeel Butt <shakeel.butt@linux.dev>, Jeroen de Borst <jeroendb@google.com>, 
+	Praveen Kaligineedi <pkaligineedi@google.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 25, 2024 at 09:45:22AM +0100, Marc Zyngier wrote:
-> On Mon, 24 Jun 2024 17:55:41 +0100,
-> Roman Kagan <rkagan@amazon.de> wrote:
-> >
-> > According to Arm CoreLink GIC-700 erratum 2195890, on GIC revisions
-> > r0p0, r0p1, r1p0 under certain conditions LPIs may remain in the Pending
-> > Table until one of a number of external events occurs.
-> 
-> Please add a link to the errata document.
+On Mon, Jun 24, 2024 at 7:47=E2=80=AFPM Mina Almasry <almasrymina@google.co=
+m> wrote:
+>
+> v13: https://patchwork.kernel.org/project/netdevbpf/list/?series=3D861406=
+&archive=3Dboth&state=3D*
+> =3D=3D=3D=3D
+>
+> Major changes:
+> --------------
+>
+> This iteration addresses Pavel's review comments, applies his
+> reviewed-by's, and seeks to fix the patchwork build error (sorry!).
+>
 
-https://developer.arm.com/documentation/SDEN-1769194/
-Will include when respinning.
+This series is showing a inapplicable to net-next error on patchwork:
 
-> >
-> > No LPIs are lost but they may not be delivered in a finite time.
-> >
-> > The workaround is to issue an INV using GICR_INVLPIR to an unused, in
-> > range LPI ID to retrigger the search.
-> >
-> > Add this workaround to the quirk table.  When the quirk is applicable,
-> > carve out one LPI ID from the available range and run periodic work to
-> > do INV to it, in order to prevent GIC from stalling.
-> 
-> The errata document says a lot more:
-> 
-> <quote>
-> For physical LPIs the workaround is to issue an INV using GICR_INVLPIR
-> to an unused, in range LPI ID to retrigger the search. This could be
-> done periodically, for example, in line with a residency change, or as
-> part of servicing LPIs.  If using LPIs as the event, then the
-> GICR_INVLPIR write could be issued after servicing every LPI.
-> 
-> However, it only needs to be issued if:
-> 
-> * At least 4 interrupts in the block of 32 are enabled and mapped to
->   the current PE or, if easier,
-> 
-> * At least 4 interrupts in the block of 32 are enabled and mapped to
->   any PE
-> </quote>
+https://patchwork.kernel.org/project/netdevbpf/list/?series=3D865135
 
-It didn't feel like worth optimizing for.  I'll reconsider.
+What happened here is that I sync'd to net-next, ran all the tests
+including the allmodconfig build which took a few hours, then posted
+the series. In the meantime 34 patches got merged to net-next, and one
+of those patches seems to generate a git am failure when I try to use
+b4 to apply:
 
-> > TT: https://t.corp.amazon.com/D82032616
-> 
-> Gniii????
+b4 am 20240625024721.2140656-2-almasrymina@google.com
+...
+git am ./v13_20240625_almasrymina_device_memory_tcp.mbx
+...
+Applying: tcp: RX path for devmem TCP
+Using index info to reconstruct a base tree...
+M       include/net/sock.h
+M       net/ipv4/tcp_ipv4.c
+Falling back to patching base and 3-way merge...
+Auto-merging net/ipv4/tcp_ipv4.c
+Auto-merging include/net/sock.h
 
-Indeed Q-/
-
-> > Signed-off-by: Elad Rosner <eladros@amazon.com>
-> > Signed-off-by: Mohamed Mediouni <mediou@amazon.com>
-> > Signed-off-by: Roman Kagan <rkagan@amazon.de>
-> 
-> Who is the author?
-
-Joint effort aka inherited ownership.  Will fix according to the
-process doc.
-
-> > +static void __maybe_unused its_quirk_gic700_2195890_work_handler(struct work_struct *work)
-> > +{
-> > +     int cpu;
-> > +     void __iomem *rdbase;
-> > +     u64 gicr_invlpir_val;
-> > +
-> > +     for_each_online_cpu(cpu) {
-> 
-> The errata document doesn't say that this need to happen for *every*
-> RD. Can you please clarify this?
-
-(Digging out a year-old comms with ARM)
-> > In multi-chip GIC system, does this write have to happen in each
-> > chip or would a write to a single GICR trigger the search in all
-> > GICDs?
-> The write needs to occur for each physical PE - in other words, to
-> each individual GICR that the search needs to be re-triggered for.
-
-> > +             raw_spin_lock(&gic_data_rdist_cpu(cpu)->rd_lock);
-> > +             gic_write_lpir(gicr_invlpir_val, rdbase + GICR_INVLPIR);
-> > +             raw_spin_unlock(&gic_data_rdist_cpu(cpu)->rd_lock);
-> 
-> No synchronisation? How is that supposed to work?
-> 
-> Also, if you need to dig into the internals of the driver, extract a
-> helper from __direct_lpi_inv().
-
-ACK
-
-> > +     }
-> > +
-> > +     schedule_delayed_work(&its_quirk_gic700_2195890_data.work,
-> > +             msecs_to_jiffies(ITS_QUIRK_GIC700_2195890_PERIOD_MSEC));
-> 
-> It would be pretty easy to detect whether an LPI was ack'ed since the
-> last pass, and not issue the invalidate.
-
-Makes sense, will look into it.
-
-Overall, do you think this approach with a global work looping over cpus
-is the right one, or we should better try and implement something
-per-cpu?
-
-> > +}
-> > +
-> > +static bool __maybe_unused its_enable_quirk_gic700_2195890(void *data)
-> > +{
-> > +     struct its_node *its = data;
-> > +
-> > +     if (its_quirk_gic700_2195890_data.lpi)
-> > +             return true;
-> > +
-> > +     /*
-> > +      * Use one LPI INTID from the start of the LPI range for GIC prodding,
-> > +      * and make it unavailable for regular LPI use later.
-> > +      */
-> > +     its_quirk_gic700_2195890_data.lpi = lpi_id_base++;
-> > +
-> > +     INIT_DELAYED_WORK(&its_quirk_gic700_2195890_data.work,
-> > +                       its_quirk_gic700_2195890_work_handler);
-> > +     schedule_delayed_work(&its_quirk_gic700_2195890_data.work, 0);
-> > +
-> > +     return true;
-> > +}
-> 
-> It is a bit odd to hook this on an ITS being probed when the ITS isn't
-> really involved. Not a big deal, but a bit clumsy.
-
-True, but the LPI allocation lives in this file so it looked easier to
-wire it all up here.  Where do you think it's more appropriate?
-
-> >  static const struct gic_quirk its_quirks[] = {
-> >  #ifdef CONFIG_CAVIUM_ERRATUM_22375
-> >       {
-> > @@ -4822,6 +4879,17 @@ static const struct gic_quirk its_quirks[] = {
-> >               .property = "dma-noncoherent",
-> >               .init   = its_set_non_coherent,
-> >       },
-> > +#ifdef CONFIG_ARM64_ERRATUM_2195890
-> > +     {
-> > +             .desc   = "ITS: GIC-700 erratum 2195890",
-> > +             /*
-> > +              * Applies to r0p0, r0p1, r1p0: iidr_var(bits 16..19) == 0 or 1
-> > +              */
-> > +             .iidr   = 0x0400043b,
-> > +             .mask   = 0xfffeffff,
-> > +             .init   = its_enable_quirk_gic700_2195890,
-> 
-> This catches r0p0 and r1p0, but not r0p1 (you require that bits 15:12
-> are 0).
-
-Ouch, right.  Given the erratum exact wording
-
-> Fault Status: Present in: r0p0, r0p1, r1p0 Fixed in: r2p0
-
-I guess I should match everything below r2p0 and allow arbitrary bits
-15:12 (i.e. set the third nibble in the mask to 0).
-
-> Overall, this requires a bit of rework. Notably, this could be
-> significantly relaxed to match the requirements of the published
-> workaround.
-
-Thanks for the propmpt review!  Will rework and respin.
-Roman.
-
-
-
-Amazon Web Services Development Center Germany GmbH
-Krausenstr. 38
-10117 Berlin
-Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
-Eingetragen am Amtsgericht Charlottenburg unter HRB 257764 B
-Sitz: Berlin
-Ust-ID: DE 365 538 597
-
+Not sure if I'm getting very unlucky or if this was something I can do
+to avoid this. I think I didn't tax NIPA too much since it's an apply
+error. I'll repost after the 24hr cooldown, sorry again.
 
