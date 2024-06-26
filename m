@@ -1,74 +1,74 @@
-Return-Path: <linux-doc+bounces-19565-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19567-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80EB4918507
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2024 16:57:46 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 14651918586
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2024 17:16:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 2A18E1F210AF
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2024 14:57:46 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B4E02B2C3ED
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2024 15:02:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 43D34186E29;
-	Wed, 26 Jun 2024 14:57:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 22D381891A3;
+	Wed, 26 Jun 2024 15:01:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="09ktxmMs"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Bzp/c9Or"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
+Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52CF818629F
-	for <linux-doc@vger.kernel.org>; Wed, 26 Jun 2024 14:57:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B89F9181D12
+	for <linux-doc@vger.kernel.org>; Wed, 26 Jun 2024 15:01:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1719413858; cv=none; b=GeMWuV69tToDJnQnjqWs9VlykK/LMWr4nM5iu04yprAGbCVmft22t0LlGXCqE59q1OdxX7G8CkHttZgcrD/E05jz2XLp4Axom3vFZb0R0KCXq6+1deXf2ejA4P8+rfPWqfeT/qoRwlCibnFwaFND94zYJJMkRXIXXNmdZxhlECY=
+	t=1719414110; cv=none; b=aWvz/2t5/RYCY0QDHlQyBaEU3Bi4Ynq6uJwBIRFUky01KRL7bIAzX+aBMaQPETxSsMZWBuCe4J56F3hWs3NakKrsNLcrjczJ3aGQfLDOUdjAcag2BQ0+nZVTLaHSSC1c680SQZOAqYZEIexia5SchiyxvovO18y6rnVaOVnHrvk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1719413858; c=relaxed/simple;
-	bh=EyKIBf8rhtksttW3da6l2T13EshR1mCGrN9WMjFdm7I=;
+	s=arc-20240116; t=1719414110; c=relaxed/simple;
+	bh=PK/s4HBULviBheKUttSYV2eJRz8+Cb+6AYgus4Dxk6I=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=i9qBjG5tkQqOZjOsTwO4TybPExEcpQ5lg2mNP02Q1UsmjqSscVUrU9HIDLvVfQOlQEjhBgnfgxK7Tmrk4mBepICJI4/UFD7nuqEgwfyIgmR5j55EyZrNNlZlrhsIWme/GQWd/CqXIGs2Gs3yJ/DjOOYpplie4XDVGeLkjCsojRM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=09ktxmMs; arc=none smtp.client-ip=209.85.210.42
+	 In-Reply-To:Content-Type; b=Yejq89m2u0aPC4sPsSqgg4dXD6nPwGVFe8wtSzuixdDuXbaa1u8SDADjmLCjocDdAdBfAA5yosX86PrMFDf3oc2TC8DvvDDUVKgyso2eOw/0WwF67/0EMNClqevsdJtMKsODxjBhSHnB0I6z5j+UsveR4EZjU2uaZ2ZJnrL8D6Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=Bzp/c9Or; arc=none smtp.client-ip=209.85.167.178
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-ot1-f42.google.com with SMTP id 46e09a7af769-700cc8e447aso795625a34.2
-        for <linux-doc@vger.kernel.org>; Wed, 26 Jun 2024 07:57:35 -0700 (PDT)
+Received: by mail-oi1-f178.google.com with SMTP id 5614622812f47-3d5288e6513so3567934b6e.0
+        for <linux-doc@vger.kernel.org>; Wed, 26 Jun 2024 08:01:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1719413854; x=1720018654; darn=vger.kernel.org;
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1719414107; x=1720018907; darn=vger.kernel.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=ypUeuWdUwZsifKp2oQUDz0+C0S3QazinJXlQdPM0mDg=;
-        b=09ktxmMs/SkeTGiLL1TA1Andi+jM6Mi8vh9PaTQ5DJSIuGvZZ7vYokyRxj1cocsDNX
-         NjpdGtUkhuPdi0RR/YcWd6Zz57oX0v+fV0Fx9LIrX4KHop4SmmqhsiE0IhDc3zP91A6g
-         0q5lGmE1MeGc97Q1DuYrIrd+2HZjfm8pokx/n2tQWXDeAEjvepXBm/fUkl8nP27iA6Sq
-         NlXFpF9h2xefv07zV4Jvu/7FSkEA9zX2NMeRV7flwh0RfTM83j/xn6ujaD//J+sSWVLW
-         PUFDksbA215H8dD+04EytY73Lo0dWrZOv/+5vMhlPZ6GMFcSahNLtHtp7XzeLe/Bndys
-         ttRA==
+        bh=ttyQ/o7Vgxk0yGUj/ek3iXp7cLp/I4AxUIUIqxODvtI=;
+        b=Bzp/c9OraxG8HfyqAV8ZhhMo6aSbPanIdzSrE5QOcq/aV5w/+ylooedc94cxJPrjfY
+         qs2wIVstd/iC84kTJZUT5yTJmCFBBqmbwJwuQZpzbpD4gAsAfq/VlvVT5UXY5MFF3GdM
+         7Wv9FqWSzq8t239Qd3PTmL0PqAHdK7ZoJp+4SsA9x2OJIkmV4f5vPMdaYvwpqnbXaqaz
+         2gatSFtSyh8baz4Eb2nxf3fR+pOmmEv5RaFE3SiDEI6oksdT6K10uA3saxkQQP3xNHKD
+         OIGttXjVIGFuaUf8qhyhJudtPGV6Tftk9rHgQbn6UCR3/N5UjUVQoXoGmEQ47cU2bcyQ
+         YfLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719413854; x=1720018654;
+        d=1e100.net; s=20230601; t=1719414107; x=1720018907;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ypUeuWdUwZsifKp2oQUDz0+C0S3QazinJXlQdPM0mDg=;
-        b=Qc89u/suNSbExnYpo75v/OvUGx3g59Fk6j8PI110bvKP7zvWIOG0s8QgQnOEMzmqoV
-         jK+gPUGdMcMRE3WfTIhw6QcUsk/ZC4PYGp8k/OlyTqb3TkjiEGvD0CVKwam2NaOhyzQg
-         jqUK+d/GcVvXsBTf3h5JjKZpvoLF0qppqpqEkByAEFNZHNmrzOBt1s2bSJietTODwJzR
-         bVy8glCqO/MBnDYXNGtihMu6EAUF7bNjaW/EQIS5eEhv5z1lpY0+RDL3Zq0CF96dKpF+
-         IuL+794VgdEt6UwaoyoXOCw4TaaUoYMNkjkODBKKggoY3IY0MTdOA3pd6bPGJYjaU1sv
-         s2WA==
-X-Forwarded-Encrypted: i=1; AJvYcCXZAijFR82TcY63rllrWPhih1TAQza0h51Wb8O9/sPvogqzT+ZYlrr9noqZXXmX5WWAq57UCyJ1cMyNJ+1bjmrMpmD1MQR/CxPI
-X-Gm-Message-State: AOJu0YwjaxoGMXqwBOMlyztm4D9fQtd7NpNDNxA701Pfr5MyOElxPW34
-	TpHoIE0WX+H4M5DvsPZrg63+TZilZBA1ijLJztbLBm+ruUVbv8RsiAzly/vbOCI=
-X-Google-Smtp-Source: AGHT+IFp/xtG514LhEIAkgQ13lFdNrJwaUD90zQEQk5nJABH3gyJE/Xgli4KVJwoM64l7J2/7wDJ/g==
-X-Received: by 2002:a05:6870:d623:b0:25d:1c0:803e with SMTP id 586e51a60fabf-25d01c080aemr11700233fac.7.1719413854331;
-        Wed, 26 Jun 2024 07:57:34 -0700 (PDT)
+        bh=ttyQ/o7Vgxk0yGUj/ek3iXp7cLp/I4AxUIUIqxODvtI=;
+        b=oLE0L0AfYOm2kBcJlpf0bmR3TD7ytxbZlD+T/sI+k6r8lPcJS+AUbbAqPNFu0gX2KR
+         NUg0t88Qh2eo1i+bgQ8n/K8tyIImsVBc5Z7zTAJQyj4VMxnK1PSaAl2cTH3dPg4v2K99
+         /YS9OS8BoKPuOiw9AtD637yoAKff8IyZJpz5Wz5Agn13MV2Q8csSXtyLKrofmshFJseh
+         PnzUR1TIi2k6KCFuptHYih+lHk+QSKfGwp7CxcZDKFEG1R+qV9XlgNXAvKxWw0ZQnSG/
+         1bd4/94kGmDBlF6LHWoBw/jsLaYZZBDYMDh19rrNaoR4HQgloqpu3t5noXO2S+yAKv+q
+         EXwg==
+X-Forwarded-Encrypted: i=1; AJvYcCWDCCtB0BAvs4nV+OPIHU43X31NViQqTJ29IjrRTT4VbBOTzql8LZOgMqVlOqADZC9b2+Awj+ZNCXDtnswiKMMN+Zr2YLbuOyY7
+X-Gm-Message-State: AOJu0YzS+6uBxZmUnm83z57SsejVeVAXUhgS8Xil3C2P4Su60vYLnzvp
+	gjAKjnxr0KYKNoahvdeCOYgXixF9+LaWBhXtv54W4vY+98k7tU1XLC1oWk0MZN4=
+X-Google-Smtp-Source: AGHT+IGpub5V1HnsVQQgPXpSo9KWHdiL1Hawoz3c1OyBqSL6oM9wSfME+uNBi7tvbERbi6DLKhPbXA==
+X-Received: by 2002:a05:6808:1708:b0:3d2:2d1d:3796 with SMTP id 5614622812f47-3d545964be8mr11659338b6e.18.1719414106811;
+        Wed, 26 Jun 2024 08:01:46 -0700 (PDT)
 Received: from [192.168.0.142] (ip98-183-112-25.ok.ok.cox.net. [98.183.112.25])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-25cd4c056a2sm2926159fac.53.2024.06.26.07.57.33
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-3d561e56766sm229248b6e.30.2024.06.26.08.01.45
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 26 Jun 2024 07:57:33 -0700 (PDT)
-Message-ID: <1d2cde40-ad55-4136-bc72-3d71515f7023@baylibre.com>
-Date: Wed, 26 Jun 2024 09:57:32 -0500
+        Wed, 26 Jun 2024 08:01:46 -0700 (PDT)
+Message-ID: <f63da6b3-cfc3-4452-a638-126c53955c9c@baylibre.com>
+Date: Wed, 26 Jun 2024 10:01:45 -0500
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -76,8 +76,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/7] spi: Enable controllers to extend the SPI protocol
- with MOSI idle configuration
+Subject: Re: [PATCH v5 2/7] spi: bitbang: Implement support for MOSI idle
+ state configuration
 To: Marcelo Schmitt <marcelo.schmitt@analog.com>, broonie@kernel.org,
  lars@metafoo.de, Michael.Hennerich@analog.com, jic23@kernel.org,
  robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
@@ -86,69 +86,26 @@ Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
  linux-spi@vger.kernel.org, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org
 References: <cover.1719351923.git.marcelo.schmitt@analog.com>
- <add14694c64b574af742a5dcd5c9461e0ef5210a.1719351923.git.marcelo.schmitt@analog.com>
+ <7e2231edf30e1769f12273032c04b8a951e28837.1719351923.git.marcelo.schmitt@analog.com>
 Content-Language: en-US
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <add14694c64b574af742a5dcd5c9461e0ef5210a.1719351923.git.marcelo.schmitt@analog.com>
+In-Reply-To: <7e2231edf30e1769f12273032c04b8a951e28837.1719351923.git.marcelo.schmitt@analog.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 6/25/24 4:53 PM, Marcelo Schmitt wrote:
-> diff --git a/include/linux/spi/spi.h b/include/linux/spi/spi.h
-> index e8e1e798924f..8e50a8559225 100644
-> --- a/include/linux/spi/spi.h
-> +++ b/include/linux/spi/spi.h
-> @@ -599,6 +599,12 @@ struct spi_controller {
->  	 * assert/de-assert more than one chip select at once.
->  	 */
->  #define SPI_CONTROLLER_MULTI_CS		BIT(7)
-> +	/*
-> +	 * The spi-controller is capable of keeping the MOSI line low or high
-> +	 * when not clocking out data.
-> +	 */
-> +#define SPI_CONTROLLER_MOSI_IDLE_LOW    BIT(8)  /* Can idle MOSI low */
-> +#define SPI_CONTROLLER_MOSI_IDLE_HIGH   BIT(9)  /* Can idle MOSI high */
+> Some SPI peripherals may require strict MOSI line state when the controller
+> is not clocking out data.
+> Implement support for MOSI idle state configuration (low or high) by
+> setting the data output line level on controller setup and after transfers.
+> Bitbang operations now call controller specific set_mosi_idle() call back
+> to set MOSI to its idle state.
+> The MOSI line is kept at its idle state if no tx buffer is provided.
+> 
+> Acked-by: Nuno Sa <nuno.sa@analog.com>
+> Signed-off-by: Marcelo Schmitt <marcelo.schmitt@analog.com>
+> ---
 
-These two flags above are still not used anywhere and are redundant with
-the SPI_MOSI_IDLE_LOW/HIGH flags below so I don't think we should be adding
-these.
-
->  
->  	/* Flag indicating if the allocation of this struct is devres-managed */
->  	bool			devm_allocated;
-> diff --git a/include/uapi/linux/spi/spi.h b/include/uapi/linux/spi/spi.h
-> index ca56e477d161..ee4ac812b8f8 100644
-> --- a/include/uapi/linux/spi/spi.h
-> +++ b/include/uapi/linux/spi/spi.h
-> @@ -28,7 +28,8 @@
->  #define	SPI_RX_OCTAL		_BITUL(14)	/* receive with 8 wires */
->  #define	SPI_3WIRE_HIZ		_BITUL(15)	/* high impedance turnaround */
->  #define	SPI_RX_CPHA_FLIP	_BITUL(16)	/* flip CPHA on Rx only xfer */
-> -#define SPI_MOSI_IDLE_LOW	_BITUL(17)	/* leave mosi line low when idle */
-> +#define SPI_MOSI_IDLE_LOW	_BITUL(17)	/* leave MOSI line low when idle */
-> +#define SPI_MOSI_IDLE_HIGH	_BITUL(18)	/* leave MOSI line high when idle */
-
-The patch series that added SPI_MOSI_IDLE_LOW [1] also added it to spidev. Do
-we need to do the same for SPI_MOSI_IDLE_HIGH?
-
-Also, what is the plan for adding these flags to other SPI controllers. For
-example, the IMX controller in [1] sounds like it should also support 
-SPI_MOSI_IDLE_HIGH. And your comments on an earlier version of this series
-made it sound like Raspberry Pi is always SPI_MOSI_IDLE_LOW, so should
-have that flag.
-
-[1]: https://lore.kernel.org/linux-spi/20230530141641.1155691-1-boerge.struempfel@gmail.com/
-
->  
->  /*
->   * All the bits defined above should be covered by SPI_MODE_USER_MASK.
-> @@ -38,6 +39,6 @@
->   * These bits must not overlap. A static assert check should make sure of that.
->   * If adding extra bits, make sure to increase the bit index below as well.
->   */
-> -#define SPI_MODE_USER_MASK	(_BITUL(18) - 1)
-> +#define SPI_MODE_USER_MASK	(_BITUL(19) - 1)
->  
->  #endif /* _UAPI_SPI_H */
+Reviewed-by: David Lechner <dlechner@baylibre.com>
 
 
