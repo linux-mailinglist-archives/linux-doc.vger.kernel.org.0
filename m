@@ -1,200 +1,103 @@
-Return-Path: <linux-doc+bounces-19512-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19514-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7783E917FCF
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2024 13:34:52 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E206918019
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2024 13:46:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id D0FFBB2165C
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2024 11:34:49 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3FE1D1C2399C
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2024 11:46:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BAB1E17F383;
-	Wed, 26 Jun 2024 11:34:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72ED317FAD5;
+	Wed, 26 Jun 2024 11:46:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="S0YLvAdE"
+	dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b="1Z6ba+QH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com [209.85.208.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D4FF148FE3;
-	Wed, 26 Jun 2024 11:34:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B672149C53
+	for <linux-doc@vger.kernel.org>; Wed, 26 Jun 2024 11:46:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1719401685; cv=none; b=XOiScjwzMat466cC1vn27YL24aquW3fSiaUs8uMV6Cl3S6LngU8HpFk9+PskIAg0VkTELz64/FiPlstpil86cCpGh4B6grOV7tTOPpA7NKcGEXFip0xXSsBVcjGDLa39sWMFyejdxRu8Kbf/+FylElkfuZ8+GevTE6gsCAPIDi4=
+	t=1719402384; cv=none; b=o+B44MIMNGyor+zPFet4Xw1Nc7WxMovVbAmt5sSRDDs3oHwHjRjxJW3vnWsgwtm2bwOXaNCSLX8xHgyOsFbgeSrQYE3XuX6ySed/JVZ6/pyNjZN2QFr1P7vWBsEqCi3PcJbZbtkKhG2AxJfMvHSTgJSaZnqMP96LBgwiYrLwlXE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1719401685; c=relaxed/simple;
-	bh=qbiy6Fgp2bm0hkADsq5IGcGBc9I/3nBS4s5u3d1poSU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ojzxlRWIYGmW91pHf2xZNJ+t5+lbLETJbQ2T5bnymSqmdrpY2aMlVHtbOSXZ2sTeCs1fTewjlloVOFdK3ksy5npqj0Ue95u8rbJHoRAt3+QnbuSjFU2CRnMJcm2P+peyostfOoMyQCH9A57UZpwnnVRrZS1hBz54pDEI5f8Ypek=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=S0YLvAdE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9A2FC2BD10;
-	Wed, 26 Jun 2024 11:34:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1719401685;
-	bh=qbiy6Fgp2bm0hkADsq5IGcGBc9I/3nBS4s5u3d1poSU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=S0YLvAdEG+rYvLPWUP2jCiTS/JopkRtuPMsE3URFpkubiMX+wUKPF2ONR1Mg3O6r/
-	 ZtLrjgeLuN1p2IvyYpBsDYsy57VTpq6xfUu8Z9nzX6GtOEetvcXabiwUoYhtEUkQDq
-	 0EFcFK909NUINO2NTMH4q/0OcdEHOOaspP92EHuCX3P92nk4wNG4S5vjbHpvrlwtZM
-	 5TlbqoYRQVtE/Teqw7l71o6n+OSzaOyAVY1lrgnNWe3a7rDWfFhDRSMzmI1Zj81A3O
-	 OZO+EGZOmPWsx7/qWwEJwqETLNQrkpKXT+U+PyJi7Hvuw4DjYvX/43TN0E0TeFL0nC
-	 olKJqS8JAh/Ww==
-Date: Wed, 26 Jun 2024 12:34:39 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Marcelo Schmitt <marcelo.schmitt@analog.com>
-Cc: broonie@kernel.org, lars@metafoo.de, Michael.Hennerich@analog.com,
-	jic23@kernel.org, robh+dt@kernel.org,
-	krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org,
-	nuno.sa@analog.com, dlechner@baylibre.com, corbet@lwn.net,
-	marcelo.schmitt1@gmail.com, linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-spi@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5 5/7] dt-bindings: iio: adc: Add AD4000
-Message-ID: <20240626-handbrake-mustang-38c2aab3f04b@spud>
-References: <cover.1719351923.git.marcelo.schmitt@analog.com>
- <10678612efbbd97bb47a31f4a062607cf35b03f9.1719351923.git.marcelo.schmitt@analog.com>
+	s=arc-20240116; t=1719402384; c=relaxed/simple;
+	bh=Xk2LNbzme7MT44mPDYnDDNt56ztybDfUPtZQBVnnN0k=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=HRT+WixLExZHfSVMPrYR4J1lfxhe4mICz4cPXBqCWU9qUSmcVhYh4HZgNmZGcYrFLF9is6PI4DmGGamnjcmrghQIqKYwTUwmPGXOCBUiwl9BD9KyYJTTOC47F5L14OTD4m72LJ2nz0FgNqFtia4iijn97ECSpi+yCMhleoi5YSw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl; spf=none smtp.mailfrom=bgdev.pl; dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b=1Z6ba+QH; arc=none smtp.client-ip=209.85.208.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bgdev.pl
+Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-2ec4eefbaf1so57419481fa.1
+        for <linux-doc@vger.kernel.org>; Wed, 26 Jun 2024 04:46:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1719402381; x=1720007181; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ivKhkKERiob7XeIyEG2ezyLpuRNeSLzhi5OPf/vRhDQ=;
+        b=1Z6ba+QHorNNM88Ul1HC0MfGu7Ztr5io+d43cwUaLra2dUPV8iTbCH6lh3/dF8Tt3w
+         uOgo8g9odiGMuFx4F55hkJ82AVxaA47afict/SjfoNfEnCuWRLuWs2YHj8/0MdZ1kEsa
+         OwrvLTkpuSIqOnmRNVKE4lYAAR1GcWZyH8YEk9xFPIcKbwuVm2BuRuZth87F62ZfrZHM
+         PqiaV7QIcc0B6B268LSWf8DJp4HdBG0EhISuBlZLImZ87d0oeclNrKHitKhDlJ3Uw7/0
+         MLjjzmLDUI7bb3wUH/7t3+DsNYDHd85lMVYTkg96ome79HM/e0YKsvb+Vo+4VwNGEvI/
+         BG/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1719402381; x=1720007181;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ivKhkKERiob7XeIyEG2ezyLpuRNeSLzhi5OPf/vRhDQ=;
+        b=XJ3O/GKYzPWl9Eaxiz3MgzxLkWsguQvPiRcV4m6NUi1c21pMHejIto5oDJST2pdA1i
+         qhpq+RV932TfqS1T6OeEx2S9/EDp5yXDVFmJ7tc8CnJxUvYrThcKcIrbSy/f17riKLiw
+         A395byk2cP4LeTqDyPodFP1KloUeRZ68xdlqrfW189LIFxogQngTbkBXgqOXuupgIEHZ
+         aRWxZK/zpWsp616aQTFftNcYa6yHKmT3u+vjCwMPT4Pv1ezoUuWd8E5TERx6qqxFdT1e
+         x2RhGJxrQoAOcMdk7YdqyMfNlrmspjLDkemE5nfow/0B/81mK+XIWqdbnSGtfeT4b6jd
+         tpRw==
+X-Forwarded-Encrypted: i=1; AJvYcCVGNNtq/sCLN5VcqITXvU4XBgwv2gVDyI+TsHkFXU2Y7NiT5hyyhuJYqiI9Mp0PrUZ6S8OnlA7s95zrj6ZAwPAuW66ujWJ1H5+d
+X-Gm-Message-State: AOJu0YxZYZ4NSpgNBPOylWoMiYUsq1qftvUx8Pg8cp5ZNRQhiM9J4fGm
+	3tV+dlNCdvHBL7C8oH6kQjGKPdwjcA2Ow7PUVPuaBpUwBS0oW9Pm7dUa78Iw9tnJMVkFgsZoDp1
+	EqTblbz5dUbsziP0eFif1o0miyR3EofIXE8HyzA==
+X-Google-Smtp-Source: AGHT+IHZ3UXaVFuTvL/MpPHs91fWdqv+FqBhfwARoeGwnutlQoZWH/zebBBRKJgfItL4zMJThnRDmj/Oj34rj2pK6FQ=
+X-Received: by 2002:a2e:9596:0:b0:2ec:1dfc:45bf with SMTP id
+ 38308e7fff4ca-2ec5b3d496emr54685221fa.42.1719402380803; Wed, 26 Jun 2024
+ 04:46:20 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="QP1fq927jihdQdME"
-Content-Disposition: inline
-In-Reply-To: <10678612efbbd97bb47a31f4a062607cf35b03f9.1719351923.git.marcelo.schmitt@analog.com>
-
-
---QP1fq927jihdQdME
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+References: <20240620094159.6785-1-wsa+renesas@sang-engineering.com> <20240620094159.6785-2-wsa+renesas@sang-engineering.com>
+In-Reply-To: <20240620094159.6785-2-wsa+renesas@sang-engineering.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Wed, 26 Jun 2024 13:46:09 +0200
+Message-ID: <CAMRc=McPFAKh61r_L4kpTdD2HJCWo_u_=Wt3bJ5SMVmtSgE8oA@mail.gmail.com>
+Subject: Re: [PATCH v10 1/1] gpio: add sloppy logic analyzer using polling
+To: Wolfram Sang <wsa+renesas@sang-engineering.com>
+Cc: linux-renesas-soc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>, 
+	Linus Walleij <linus.walleij@linaro.org>, Kent Gibson <warthog618@gmail.com>, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-gpio@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 25, 2024 at 06:55:03PM -0300, Marcelo Schmitt wrote:
-> Add device tree documentation for AD4000 series of ADC devices.
->=20
-> Signed-off-by: Marcelo Schmitt <marcelo.schmitt@analog.com>
-> ---
->  .../bindings/iio/adc/adi,ad4000.yaml          | 190 ++++++++++++++++++
->  MAINTAINERS                                   |   7 +
->  2 files changed, 197 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/iio/adc/adi,ad4000.=
-yaml
->=20
-> diff --git a/Documentation/devicetree/bindings/iio/adc/adi,ad4000.yaml b/=
-Documentation/devicetree/bindings/iio/adc/adi,ad4000.yaml
-> new file mode 100644
-> index 000000000000..76035dff5474
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/iio/adc/adi,ad4000.yaml
-> @@ -0,0 +1,190 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/iio/adc/adi,ad4000.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Analog Devices AD4000 and similar Analog to Digital Converters
-> +
-> +maintainers:
-> +  - Marcelo Schmitt <marcelo.schmitt@analog.com>
-> +
-> +description: |
-> +  Analog Devices AD4000 family of Analog to Digital Converters with SPI =
-support.
-> +  Specifications can be found at:
-> +    https://www.analog.com/media/en/technical-documentation/data-sheets/=
-ad4000-4004-4008.pdf
-> +    https://www.analog.com/media/en/technical-documentation/data-sheets/=
-ad4001-4005.pdf
-> +    https://www.analog.com/media/en/technical-documentation/data-sheets/=
-ad4002-4006-4010.pdf
-> +    https://www.analog.com/media/en/technical-documentation/data-sheets/=
-ad4003-4007-4011.pdf
-> +    https://www.analog.com/media/en/technical-documentation/data-sheets/=
-ad4020-4021-4022.pdf
-> +    https://www.analog.com/media/en/technical-documentation/data-sheets/=
-adaq4001.pdf
-> +    https://www.analog.com/media/en/technical-documentation/data-sheets/=
-adaq4003.pdf
-> +
-> +$ref: /schemas/spi/spi-peripheral-props.yaml#
-> +
-> +properties:
-> +  compatible:
-> +    oneOf:
-> +      - const: adi,ad4000
-> +      - items:
-> +          - enum:
-> +              - adi,ad4004
-> +              - adi,ad4008
-> +          - const: adi,ad4000
+On Thu, Jun 20, 2024 at 11:42=E2=80=AFAM Wolfram Sang
+<wsa+renesas@sang-engineering.com> wrote:
+>
+>  endmenu
+>
+> +menu "GPIO hardware hacking tools"
 
-> +      - const: adi,ad4001
-> +      - items:
-> +          - enum:
-> +              - adi,ad4005
-> +          - const: adi,ad4001
+I want to put my GPIO virtual consumer module in here as well so how
+about calling it "GPIO debug utilities"? I can tweak it when applying.
 
-> +      - const: adi,ad4002
-> +      - items:
-> +          - enum:
-> +              - adi,ad4006
-> +              - adi,ad4010
-> +          - const: adi,ad4002
+I would have changed the general architecture but it's always a
+trade-off between perfection and getting anything done. If Linus is Ok
+with this then I won't block it.
 
-> +      - const: adi,ad4003
-> +      - items:
-> +          - enum:
-> +              - adi,ad4007
-> +              - adi,ad4011
-> +          - const: adi,ad4003
-
-> +      - const: adi,ad4020
-> +      - items:
-> +          - enum:
-> +              - adi,ad4021
-> +              - adi,ad4022
-> +          - const: adi,ad4020
-
-> +      - const: adi,adaq4001
-
-> +      - const: adi,adaq4003
-
-I think some blank lines, maybe like the above, would go a long way with
-this list of compatibles.
-
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  spi-max-frequency:
-> +    maximum: 102040816 # for VIO > 2.7 V, 81300813 for VIO > 1.7 V
-> +
-> +  adi,sdi-pin:
-> +    $ref: /schemas/types.yaml#/definitions/string
-> +    enum: [ high, low, cs ]
-
-    enum: [ high, low, cs, sdi ]
-    default: sdi
-
-I'd do this, so that the default is documented in the binding, not in
-the description text.
-
-Otherwise, this looks good to me.
-
---QP1fq927jihdQdME
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZnv8zwAKCRB4tDGHoIJi
-0niZAP9rjml4FX9J5YcHZEsoDTdGZp2QtDDXoMjlf4egM1sttAD9HWoM7tT1u3x2
-BfEys783Oxp2baO4Uey0cJifxyCBVAU=
-=iNmk
------END PGP SIGNATURE-----
-
---QP1fq927jihdQdME--
+Bart
 
