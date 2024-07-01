@@ -1,205 +1,316 @@
-Return-Path: <linux-doc+bounces-19791-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19795-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id F215E91DA08
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jul 2024 10:34:42 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0616591DA6D
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jul 2024 10:49:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 65DF51F22305
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jul 2024 08:34:42 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 856BF1F22C7E
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jul 2024 08:49:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F2F68289C;
-	Mon,  1 Jul 2024 08:34:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="Lu1ZoyDB"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E2E0985628;
+	Mon,  1 Jul 2024 08:47:38 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com (mail-mw2nam04on2081.outbound.protection.outlook.com [40.107.101.81])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55DE654F87;
-	Mon,  1 Jul 2024 08:34:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.101.81
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1719822878; cv=fail; b=Hb820ioNbNAB282BbX0hyFGYS06pub+FwJVV9CBPMWpwIfKIjNL1ykBPgpPKmkoalU8vc8Y0aPA6vN8FkXEoJh1YrMdav1OsgTzrVyBm8qR4F09X+DDHVqHvhabYIdmqg3AEz0GwI2ocK/I8TainkkofZDQGfIgC/gr026hBVJ8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1719822878; c=relaxed/simple;
-	bh=Z+eZqxll3oRjGhDzRgOcZCV2QjGU0/IJG2a4qNc44As=;
-	h=References:From:To:Cc:Subject:Date:In-reply-to:Message-ID:
-	 Content-Type:MIME-Version; b=ZpeCuPvanC04He1Qru8xKOVqKaS9VsTvrRo/ivIItC3vssj8oI2TqtEXmhOJGBMDQZqDYaYF2NQMOhTuNoGsT8EbXughGoHADmJv5+sm+J9cFrfGbXoYTkoaMbDlINtij6bwYeSgRTrXq5z9q3qDcMBgMiPARjW6D8IvTKN44V4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=Lu1ZoyDB; arc=fail smtp.client-ip=40.107.101.81
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BOtaD0mKyNYxfRgwRv6CaAM+t3Qx3G3Iq7eu1N0SYeAD48y4avhoqNpLWw+dRXmo4KNuBfAXFpeDZVHByYxgq3GU3B1yvQ0hP+Iegcke0hvOlbKdzy5httEsc/4UUksR/owwEsuD7kjFcjRl+2/NqXzcxWmwJXGp5lTT5js1S0GOig4/cJyiXT7xc5eQ2SS9VZdlNkWRi+0UbbHqfg4BRIkgl1tB2tSdAPPBirYZze3o2xaSfkKnFVpAWkaYlWI+0zaJR76RRAKm57dh3KqBBPEBekWeG0uY8WCUBhk6Vy6yi5PB/X5SobBK29XtblkNhrYD+nIMDE/SeDaQD0imhQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PFNw5m7TevX7O32FT2B4WhapzTHm6yB0PYh9fZOVVe0=;
- b=fb1izYFoHe+9UwvN0OQgTc9CY4eCpD2uuLhDXw9y+ChiymaFVDB+2rVlXlHRk8uoW4BfwNvmOJiY97riyVf72tk0Ob8XSLCBVjSO+lwwnga6ZOcgsGUSQjVIz0M4I9QVXR8d9exoGRjWdHVL3IRAGEowF7my62WFW+AFL1FFWsgQZ0I/y0HptBptUlFjJ8yHFb2YcKRmXvs7f6SoMQP3afTyXE5mJf29t3bem8ZyHeQFuThcLAUUrcIDeFUyEd6DdFoMwbwY3xDqPV/lzENPHFL1JwKW/DKZ/irtkcllPhGsuz06knAFFxFaO6CQ1PPLdNmhbASPKRp9yMTlJePfDA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PFNw5m7TevX7O32FT2B4WhapzTHm6yB0PYh9fZOVVe0=;
- b=Lu1ZoyDBnGLn1frb6qiyltBSFMlR5Iwin46tZX2tghr8stvR2GBq6yw50/hQcQmsYYOU6lumh5Ns/SxGSWbTobzmmA7bzpM4hnN1HCDNCtQ1u7isogDu3I3Zv1dfEtABY4jEmDj5HpsopECWJS9o3QKnZx6Oldvq+TimPxkgEIMoHrnZSiO0qA/ehBygY/U6RUETVlPXOftp7b31rYOCPW0qlTOCOfsPHzrFjjzAjp14HUzbunDSI9V3QtNgSNaf8o3TmFE0wuMQ3ETK+GikFcbPYrqit2keyUVGs2yOEfuvupGjd9BlXT1j75b/On2HX94rZOITgFO0XWjkhniKDA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) by
- CY5PR12MB6526.namprd12.prod.outlook.com (2603:10b6:930:31::20) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7719.29; Mon, 1 Jul 2024 08:34:31 +0000
-Received: from DS0PR12MB7726.namprd12.prod.outlook.com
- ([fe80::953f:2f80:90c5:67fe]) by DS0PR12MB7726.namprd12.prod.outlook.com
- ([fe80::953f:2f80:90c5:67fe%6]) with mapi id 15.20.7719.028; Mon, 1 Jul 2024
- 08:34:31 +0000
-References: <cover.66009f59a7fe77320d413011386c3ae5c2ee82eb.1719386613.git-series.apopple@nvidia.com>
- <ZoIvhDvzMCw28VBI@dread.disaster.area>
-User-agent: mu4e 1.10.8; emacs 29.1
-From: Alistair Popple <apopple@nvidia.com>
-To: Dave Chinner <david@fromorbit.com>
-Cc: dan.j.williams@intel.com, vishal.l.verma@intel.com,
- dave.jiang@intel.com, logang@deltatee.com, bhelgaas@google.com,
- jack@suse.cz, jgg@ziepe.ca, catalin.marinas@arm.com, will@kernel.org,
- mpe@ellerman.id.au, npiggin@gmail.com, dave.hansen@linux.intel.com,
- ira.weiny@intel.com, willy@infradead.org, djwong@kernel.org,
- tytso@mit.edu, linmiaohe@huawei.com, david@redhat.com, peterx@redhat.com,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
- nvdimm@lists.linux.dev, linux-cxl@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
- linux-ext4@vger.kernel.org, linux-xfs@vger.kernel.org,
- jhubbard@nvidia.com, hch@lst.de
-Subject: Re: [PATCH 00/13] fs/dax: Fix FS DAX page reference counts
-Date: Mon, 01 Jul 2024 18:33:34 +1000
-In-reply-to: <ZoIvhDvzMCw28VBI@dread.disaster.area>
-Message-ID: <87plrxo6i5.fsf@nvdebian.thelocal>
-Content-Type: text/plain
-X-ClientProxiedBy: SY5P282CA0054.AUSP282.PROD.OUTLOOK.COM
- (2603:10c6:10:20a::13) To DS0PR12MB7726.namprd12.prod.outlook.com
- (2603:10b6:8:130::6)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEB9E13C3D5
+	for <linux-doc@vger.kernel.org>; Mon,  1 Jul 2024 08:47:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1719823658; cv=none; b=HlrhN85Ftp73MMTP4PnlnUCCcYyD2yMxocEKQUjAcvHHkBGLw5YmEnKAwNqOayfHne6yko7/yR0T6edOckOkOBD21nE/grPdT3Rpl6RHQaLfU84qP6R4pFCJVg926UtLqxaVIP62vrtLbKMVIv2O9FDmvF4nElV+EHI+p717YjQ=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1719823658; c=relaxed/simple;
+	bh=Kbav4cGKIbJm8iy3+dlxX1y2wXHK40wZlm2jEB8JAVk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LSWdHzFQ/rQKPUPHEHfH3AeszTIvBWl0OFP/01mI0bTrYLKh45RU0f/5bAgcXQoeAbd6tRpiF+zPTdEjk96mLRUgQlRnWVm3hA9cvDEVD3Cr4CwGSEt8eU9LuQppzPvDWleMrNIqI0RBH9TOyYhLds2bzcKfEO3oXd+sUFVcET4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <sha@pengutronix.de>)
+	id 1sOCgq-0005pO-I7; Mon, 01 Jul 2024 10:47:12 +0200
+Received: from [2a0a:edc0:2:b01:1d::c5] (helo=pty.whiteo.stw.pengutronix.de)
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <sha@pengutronix.de>)
+	id 1sOCgl-006KYd-QZ; Mon, 01 Jul 2024 10:47:07 +0200
+Received: from sha by pty.whiteo.stw.pengutronix.de with local (Exim 4.96)
+	(envelope-from <sha@pengutronix.de>)
+	id 1sOCgl-008Lyc-2K;
+	Mon, 01 Jul 2024 10:47:07 +0200
+Date: Mon, 1 Jul 2024 10:47:07 +0200
+From: Sascha Hauer <s.hauer@pengutronix.de>
+To: Pankaj Gupta <pankaj.gupta@nxp.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Shawn Guo <shawnguo@kernel.org>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+	"imx@lists.linux.dev" <imx@lists.linux.dev>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+Subject: Re: [EXT] Re: [PATCH v3 4/5] firmware: imx: add driver for NXP
+ EdgeLock Enclave
+Message-ID: <ZoJtC-fgyVWQO57C@pengutronix.de>
+References: <20240617-imx-se-if-v3-0-a7d28dea5c4a@nxp.com>
+ <20240617-imx-se-if-v3-4-a7d28dea5c4a@nxp.com>
+ <ZnFF_Z48qzpNvPtj@pengutronix.de>
+ <AM9PR04MB860446165A0826362E7AF58195D32@AM9PR04MB8604.eurprd04.prod.outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|CY5PR12MB6526:EE_
-X-MS-Office365-Filtering-Correlation-Id: 29db7317-e6ac-45d7-d4ae-08dc99a8a116
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?XLlxJb1lVvo85rezcGTpc3hCUtIhEW+5GVosS3jRLn3OyQiKcj0IB0KBeL8P?=
- =?us-ascii?Q?HBbiLmoJpBL2LjBsuMFC7ZwlSVPdNUjngHkCc/DuEKnsF93aEufM6ViwNjiQ?=
- =?us-ascii?Q?gxPkOTQ11h9e9i1HEoPSMXleTt4IeNO/VrxZ1PIN5mfnx2lGNNOjN6sc3aLJ?=
- =?us-ascii?Q?cZxEOW4OpbcK20TaBLMoi0KKdCtMYSUwG9Nye6NE+hANzL+kGdHOmjATmCto?=
- =?us-ascii?Q?Y6NIEKiYhrlOETALl5xvI/leurEe9T9PxkYnVSkzFp5gZe/PnXO+mYjTXupI?=
- =?us-ascii?Q?cRcDZuxQosInHDLiUR5GLK6Ihhj7usG0UQR6PAXwFmdT1IYGhUm+YC+bvhNc?=
- =?us-ascii?Q?gHmLRB9oj2sRgAy0mupZwTU1mKIQ8YsYDHb8sJ64LDn5FjR+xJ9xp9oj5HPg?=
- =?us-ascii?Q?7y2NU977dXameYCFf5ckK89qUdaIXnDwYyfpI5xw0g4Y0dQgCd5pduIda2qh?=
- =?us-ascii?Q?87KKbYiFb5tbZ3F1UCdUH2J19hMVMjBw7k1uxsaFe3K4MBLiMgC0gBTsvQEe?=
- =?us-ascii?Q?F86a0IyRrBDAqgm80TxVxlx10NZX2wgdIxn+bQ4VHptvjnRb4P67H1FaVZyH?=
- =?us-ascii?Q?xnn+fKA3ECj+Hw2YXQlBdNacLsxAkivvSOBdBG6F7gB1JsPajZsqkN8kEejW?=
- =?us-ascii?Q?OSWj/kZMQ6DAl3/onhS0e+D6B3kJdPwbCKS3DGAufg4gqHYxuDysRfSMWsTr?=
- =?us-ascii?Q?to9hpnzLjv7gQABniPQzFjwR94COSMzDyhGLas2Iuqa9ytdlsmXtxGMh+yxG?=
- =?us-ascii?Q?fTGGL5G7gqW/vcJTMG986oIk9THVT/vr2E/g7SE1uT/XSbozdNwFsu7oWe+e?=
- =?us-ascii?Q?Ubcf5gBi04G4+Hmg8BBfsD0w67Ln5gA+lWUvhT+2UsJoweYctVuD83gq7Xlh?=
- =?us-ascii?Q?pV4vioT4DYH7K7r2IpWxGIBcvHrIaJXh1KsVHNeIktP+gBLWrpCiYYQqDXPv?=
- =?us-ascii?Q?Ou+lziSiNUP24xkZkwv8zLliAHBTkLrwU4gzkee7+cj2+RTcaDuuNAWQzRvd?=
- =?us-ascii?Q?gmtkOq00+QIqnvn7Jnc1iQpZm1vn0AouCvZr85l6wYrHjYyoa8nkpAsd21m3?=
- =?us-ascii?Q?VFnlOeoXktWr99FWu2F/4tfCauwmDgaGeoLB35t52j9PhwdeXiKKDoKDiKlK?=
- =?us-ascii?Q?SNQEnqI75DbHOdm0OpLO0VyyZdUtHLpP5gE3XD19+Bxad6NnPbMllYMm6yhx?=
- =?us-ascii?Q?orwhD+mic7wj4RHM8DINSdqOUG0fbzOI0iFl012VwJDV7QBrdh5siC0WttXo?=
- =?us-ascii?Q?R8gM0cojS1C2K7oDnQskZTjohHhKR1ZEiHUoSBPbMRs89wai54hg8bGrRmZT?=
- =?us-ascii?Q?rlCe2gDBasWQHi8lpgbb+uO/puXDmW4G4nWOO4IB+eJZkMz4qEt9QTKZKlLh?=
- =?us-ascii?Q?XX9O7Tk=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB7726.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?tFQ1gux8lhIoMOxgG12dVbV3IjEixEbFCya2zDeqA7Orl+5w8POA3N6+XYp5?=
- =?us-ascii?Q?EBnm3HmGXIxDuxrXll+y4oArT5SVdky9Kd2zGnw3uBmDbpJKozGCE9y26FW7?=
- =?us-ascii?Q?ZspaICZcg6l+jpXUMtG/gYeHwPrlrvgmfa4A3MCk651rf4a1BIQl0Qckzl7Z?=
- =?us-ascii?Q?nSInxSfUo6o64b5w5sxpTpyh+mHjroZlPZW58X7PKat2Kp5ctckQoxxQldDZ?=
- =?us-ascii?Q?jXWb1R8JOn6ZFrCSUJHZhdMSM9bgwZLCIQGw7YA27qOpK9ZvAb8RSpVsZxuC?=
- =?us-ascii?Q?5vPdZkqwM3Tyt4XXOX1NvcIRmypLg0pu7dJnsgm4CqhUsMq8REIsvGzoGcDZ?=
- =?us-ascii?Q?Arz3aruv+SOI7Zw9VZFueiZVKte7QCT11JJJW9hoK5hlvg04dneQO+2IFlTQ?=
- =?us-ascii?Q?M+Jk/LO0ZsnSD2AuD/AjT4V//cPYr0RGt2cDu3vlMB3NjAu0xxN9sfH/QOdO?=
- =?us-ascii?Q?One1KqFR+yUs9Hx4airaQOI1xiEaJMTdexj9QTX/Z7ZMD7edsLFPolCWsvbh?=
- =?us-ascii?Q?orB+a/gOy9zXbFEFxh5FTmZiUhz6CK9lax9W205ZsAMP8ZYG3bCYcDMAyZdn?=
- =?us-ascii?Q?8EJ11DJVweFI9mUn8FO9iPNZWwpxwt0yQzzAvJ/ebMLXfwDwCgTQ6leJrm1M?=
- =?us-ascii?Q?a/xt5uchTAkQj9aQgKo1yIo199/ktYUJE6aY+HVkTEHHX4Jf0Lq+yZam/wZj?=
- =?us-ascii?Q?4sVeIy+KAvzpQr1oDT59ilgT42ghDINQAhB/2aSpd6dCHT2WJk4oc7fQI6Ke?=
- =?us-ascii?Q?Kc6iyj6if7RqB+Twxm+J9R3lbZdsDiGX9lQSE34X90zee+KIcUwM+oZLtyc+?=
- =?us-ascii?Q?YHXl3XqGsoClGTAKb4GYCMLt2t8mSmkHW4FOpwPMpCg8BPFAmhP06ClcrFrW?=
- =?us-ascii?Q?YboMkd0QM0oGPDNuquXnxxfyGKmeI1ma77yPI6Vg+KCYMU+D1mF8yWq3TQ+J?=
- =?us-ascii?Q?TqB6njFNO6axruAyge0UWXX6j0WIxloq+P1xlX1qj6PKW7R+fwvA1GCpOtbG?=
- =?us-ascii?Q?WLcao/idEaCQggecL7Qn1916/xUAK68a28MuET7lRLIDfOr/dlfYjzYcwgN1?=
- =?us-ascii?Q?NYm62zYMQGoGCTpE0L+Pp+b7jRNVtTDlgNTjV/dIFlfEe4KfZw/wN8rCJwW+?=
- =?us-ascii?Q?ZxeHQ2jO7uz9ZbjNL+KSxKSFNVxm9fOb9+7jVAzp+I3OAxErqULN9nnF+SYH?=
- =?us-ascii?Q?yl/RGUAM6xqvZsWDXpCg9SC4ZiE+q/qU1kws7Z6YONqgSdZhU4h7acUNd7cH?=
- =?us-ascii?Q?iYDnfKL7XlBwSKhVhsABAgtPwEfIXrLvFTHibmp19XdIEPJ+RopZ+5ltZzUn?=
- =?us-ascii?Q?lZYUfZfrBQLtzVrfRjd2+c6dj72SKWRZfiDrCfLSyeeJW9mQ8MwrOcTEsfvC?=
- =?us-ascii?Q?nhVhEFpMCHTG1Is3dPrzYGTrIzRNjDuYbiKnxOYw0eJdkFFm9QvDCg6jj3Ji?=
- =?us-ascii?Q?EcceJ2gc9EsweHEM0/WEbR48iP/s0cJV9BYRnh+CV9jhRWGRchApxQL+LhVD?=
- =?us-ascii?Q?jlhWnELEbKsB0UB4/P27LAcZie692+WLWTOc6DGb3YuO9a5OmulzjLOrA6NC?=
- =?us-ascii?Q?4bqComHfNsKOyhbEx6R64vfYMofF8FFC5tq85w0y?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 29db7317-e6ac-45d7-d4ae-08dc99a8a116
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB7726.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2024 08:34:31.7356
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HNHem0PUDLSPzeTvb/VE3gWOqSKXF3DLTDKZ/Gzpie8bR+30UlTlRjb/XsQ8R+oyKrPvSnnD2HeTGWdx5zkKQg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6526
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <AM9PR04MB860446165A0826362E7AF58195D32@AM9PR04MB8604.eurprd04.prod.outlook.com>
+X-Sent-From: Pengutronix Hildesheim
+X-URL: http://www.pengutronix.de/
+X-Accept-Language: de,en
+X-Accept-Content-Type: text/plain
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: sha@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
+On Mon, Jul 01, 2024 at 07:45:20AM +0000, Pankaj Gupta wrote:
+> 
+> 
+> > -----Original Message-----
+> > From: Sascha Hauer <s.hauer@pengutronix.de>
+> > Sent: Tuesday, June 18, 2024 2:02 PM
+> > To: Pankaj Gupta <pankaj.gupta@nxp.com>
+> > Cc: Jonathan Corbet <corbet@lwn.net>; Rob Herring <robh@kernel.org>;
+> > Krzysztof Kozlowski <krzk+dt@kernel.org>; Conor Dooley
+> > <conor+dt@kernel.org>; Shawn Guo <shawnguo@kernel.org>; Pengutronix
+> > Kernel Team <kernel@pengutronix.de>; Fabio Estevam <festevam@gmail.com>;
+> > Rob Herring <robh+dt@kernel.org>; Krzysztof Kozlowski
+> > <krzysztof.kozlowski+dt@linaro.org>; devicetree@vger.kernel.org;
+> > imx@lists.linux.dev; linux-kernel@vger.kernel.org; linux-arm-
+> > kernel@lists.infradead.org; linux-doc@vger.kernel.org
+> > Subject: [EXT] Re: [PATCH v3 4/5] firmware: imx: add driver for NXP EdgeLock
+> > Enclave
+> >
+> > Caution: This is an external email. Please take care when clicking links or
+> > opening attachments. When in doubt, report the message using the 'Report
+> > this email' button
+> >
+> >
+> > Hi Pankaj,
+> >
+> > Here's some review feedback. I think it'll take some more rounds to get this
+> > into shape.
+> >
+> > On Mon, Jun 17, 2024 at 12:59:42PM +0530, Pankaj Gupta wrote:
+> > > NXP hardware IP(s) for secure-enclaves like Edgelock Enclave(ELE), are
+> > > embedded in the SoC to support the features like HSM, SHE & V2X, using
+> > > message based communication interface.
+> > >
+> > > The secure enclave FW communicates on a dedicated messaging unit(MU)
+> > > based interface(s) with application core, where kernel is running.
+> > > It exists on specific i.MX processors. e.g. i.MX8ULP, i.MX93.
+> > >
+> > > This patch adds the driver for communication interface to
+> > > secure-enclave, for exchanging messages with NXP secure enclave HW
+> > > IP(s) like EdgeLock Enclave (ELE) from Kernel-space, used by kernel
+> > > management layers like
+> > > - DM-Crypt.
+> > >
+> > > Signed-off-by: Pankaj Gupta <pankaj.gupta@nxp.com>
+> > > ---
+> > >  drivers/firmware/imx/Kconfig        |  12 +
+> > >  drivers/firmware/imx/Makefile       |   2 +
+> > >  drivers/firmware/imx/ele_base_msg.c | 284 +++++++++++++++++++
+> > > drivers/firmware/imx/ele_base_msg.h |  90 ++++++
+> > >  drivers/firmware/imx/ele_common.c   | 233 ++++++++++++++++
+> > >  drivers/firmware/imx/ele_common.h   |  45 +++
+> > >  drivers/firmware/imx/se_ctrl.c      | 536
+> > ++++++++++++++++++++++++++++++++++++
+> > >  drivers/firmware/imx/se_ctrl.h      |  99 +++++++
+> > >  include/linux/firmware/imx/se_api.h |  14 +
+> > >  9 files changed, 1315 insertions(+)
+> > >
+> > > diff --git a/drivers/firmware/imx/Kconfig
+> > > b/drivers/firmware/imx/Kconfig index 183613f82a11..56bdca9bd917 100644
+> > > --- a/drivers/firmware/imx/Kconfig
+> > > +++ b/drivers/firmware/imx/Kconfig
+> > > @@ -22,3 +22,15 @@ config IMX_SCU
+> > >
+> > >         This driver manages the IPC interface between host CPU and the
+> > >         SCU firmware running on M4.
+> > > +
+> > > +config IMX_SEC_ENCLAVE
+> > > +     tristate "i.MX Embedded Secure Enclave - EdgeLock Enclave Firmware
+> > driver."
+> > > +     depends on IMX_MBOX && ARCH_MXC && ARM64
+> > > +     default m if ARCH_MXC
+> > > +
+> > > +     help
+> > > +       It is possible to use APIs exposed by the iMX Secure Enclave HW IP
+> > called:
+> > > +          - EdgeLock Enclave Firmware (for i.MX8ULP, i.MX93),
+> > > +          like base, HSM, V2X & SHE using the SAB protocol via the shared
+> > Messaging
+> > > +          Unit. This driver exposes these interfaces via a set of file descriptors
+> > > +          allowing to configure shared memory, send and receive messages.
+> > > diff --git a/drivers/firmware/imx/Makefile
+> > > b/drivers/firmware/imx/Makefile index 8f9f04a513a8..aa9033e0e9e3
+> > > 100644
+> > > --- a/drivers/firmware/imx/Makefile
+> > > +++ b/drivers/firmware/imx/Makefile
+> > > @@ -1,3 +1,5 @@
+> > >  # SPDX-License-Identifier: GPL-2.0
+> > >  obj-$(CONFIG_IMX_DSP)                += imx-dsp.o
+> > >  obj-$(CONFIG_IMX_SCU)                += imx-scu.o misc.o imx-scu-irq.o rm.o
+> > imx-scu-soc.o
+> > > +sec_enclave-objs             = se_ctrl.o ele_common.o ele_base_msg.o
+> > > +obj-${CONFIG_IMX_SEC_ENCLAVE}        += sec_enclave.o
+> > > diff --git a/drivers/firmware/imx/ele_base_msg.c
+> > > b/drivers/firmware/imx/ele_base_msg.c
+> > > new file mode 100644
+> > > index 000000000000..5bfd9c7e3f7e
+> > > --- /dev/null
+> > > +++ b/drivers/firmware/imx/ele_base_msg.c
+> > > @@ -0,0 +1,284 @@
+> > > +// SPDX-License-Identifier: GPL-2.0+
+> > > +/*
+> > > + * Copyright 2024 NXP
+> > > + */
+> > > +
+> > > +#include <linux/types.h>
+> > > +#include <linux/completion.h>
+> > > +#include <linux/dma-mapping.h>
+> > > +
+> > > +#include "ele_base_msg.h"
+> > > +#include "ele_common.h"
+> > > +
+> > > +int ele_get_info(struct device *dev, struct ele_dev_info *s_info) {
+> >
+> > I think all currently exported functions should take a struct se_if_priv
+> > * as context pointer.
+> > I can't find any place in which any of these functions is called differently than
+> > with priv->dev.
+> 
+> All the API(s) that construct a message to be exchanged over the device-interface to FW,
+> - will be the exported symbols in the next patch-set, to be used by other Linux kernel modules like: NVMEM driver, linux crypto framework, security/keys etc.
+> - These other Linux layers have to choose from multiple similar devices per secure-enclave.
+> 
+> Kindly Consider these API(s), to be the EXPORT SYMBOLS, in later patches, when used outside of this driver.
 
-Dave Chinner <david@fromorbit.com> writes:
+In that case you could still add a function which translates a struct
+device * into a struct se_if_priv *.
 
-> On Thu, Jun 27, 2024 at 10:54:15AM +1000, Alistair Popple wrote:
->> FS DAX pages have always maintained their own page reference counts
->> without following the normal rules for page reference counting. In
->> particular pages are considered free when the refcount hits one rather
->> than zero and refcounts are not added when mapping the page.
->> 
->> Tracking this requires special PTE bits (PTE_DEVMAP) and a secondary
->> mechanism for allowing GUP to hold references on the page (see
->> get_dev_pagemap). However there doesn't seem to be any reason why FS
->> DAX pages need their own reference counting scheme.
->> 
->> By treating the refcounts on these pages the same way as normal pages
->> we can remove a lot of special checks. In particular pXd_trans_huge()
->> becomes the same as pXd_leaf(), although I haven't made that change
->> here. It also frees up a valuable SW define PTE bit on architectures
->> that have devmap PTE bits defined.
->> 
->> It also almost certainly allows further clean-up of the devmap managed
->> functions, but I have left that as a future improvment.
->> 
->> This is an update to the original RFC rebased onto v6.10-rc5. Unlike
->> the original RFC it passes the same number of ndctl test suite
->> (https://github.com/pmem/ndctl) tests as my current development
->> environment does without these patches.
->
-> I strongly suggest running fstests on pmem devices with '-o
-> dax=always' mount options to get much more comprehensive fsdax test
-> coverage. That exercises a lot of the weird mmap corner cases that
-> cause problems so it would be good to actually test that nothing new
-> got broken in FSDAX by this patchset.
+> >
+> > > +     struct se_if_priv *priv = dev_get_drvdata(dev);
 
-Thanks Dave, I will do that and report back. I suspect it will turn up
-something, given Dan was seeing a crash with these patches.
+This function should also include some sanity checks. It's not good that
+an exported function takes some struct device *, blindly assumes that
+it is of type se_if_priv, and if not just crashes the Kernel.
 
- - Alistair
+> > > +static int imx_fetch_se_soc_info(struct se_if_priv *priv,
+> > > +                              const struct imx_se_node_info_list
+> > > +*info_list) {
+> > > +     const struct imx_se_node_info *info;
+> > > +     struct soc_device_attribute *attr;
+> > > +     struct soc_device *sdev;
+> > > +     u64 serial_num;
+> > > +     u16 soc_rev;
+> > > +     int err = 0;
+> > > +
+> > > +     info = priv->info;
+> > > +
+> > > +     /* This function should be called once.
+> > > +      * Check if the soc_rev is zero to continue.
+> > > +      */
+> > > +     if (priv->soc_rev)
+> > > +             return err;
+> >
+> > Just return 0 here. It takes one step less to understand what this is about.
+> Replacing "err" with "ret", in better understanding.
 
-> -Dave.
+What I meant that you should return the constant '0' here instead of the
+content of a variable. It safes a reader from looking up the value of
+the variable which means it's one step less for the brain to understand
+the code.
 
+> > > +
+> > > +     if (info->se_fetch_soc_info) {
+> > > +             err = info->se_fetch_soc_info(priv->dev, &soc_rev, &serial_num);
+> > > +             if (err < 0) {
+> > > +                     dev_err(priv->dev, "Failed to fetch SoC Info.");
+> > > +                     return err;
+> > > +             }
+> > > +     } else {
+> > > +             dev_err(priv->dev, "Failed to fetch SoC revision.");
+> > > +             if (info->soc_register)
+> > > +                     dev_err(priv->dev, "Failed to do SoC registration.");
+> > > +             err = -EINVAL;
+> > > +             return err;
+> > > +     }
+> >
+> > i.MX93 doesn't have a info->se_fetch_soc_info. Does this mean it doesn't work
+> > on this SoC?
+> >
+> Yes.
+
+Will you fix this?
+
+> > > +     priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
+> > > +     if (!priv) {
+> > > +             ret = -ENOMEM;
+> > > +             goto exit;
+> > > +     }
+> > > +
+> > > +     dev_set_drvdata(dev, priv);
+> > > +
+> > > +     /* Mailbox client configuration */
+> > > +     priv->se_mb_cl.dev              = dev;
+> > > +     priv->se_mb_cl.tx_block         = false;
+> > > +     priv->se_mb_cl.knows_txdone     = true;
+> > > +     priv->se_mb_cl.rx_callback      = se_if_rx_callback;
+> > > +
+> > > +     ret = se_if_request_channel(dev, &priv->tx_chan,
+> > > +                     &priv->se_mb_cl, info->mbox_tx_name);
+> > > +     if (ret)
+> > > +             goto exit;
+> > > +
+> > > +     ret = se_if_request_channel(dev, &priv->rx_chan,
+> > > +                     &priv->se_mb_cl, info->mbox_rx_name);
+> > > +     if (ret)
+> > > +             goto exit;
+> > > +
+> > > +     priv->dev = dev;
+> > > +     priv->info = info;
+> > > +
+> > > +     mutex_init(&priv->se_if_lock);
+> > > +     mutex_init(&priv->se_if_cmd_lock);
+> > > +
+> > > +     priv->cmd_receiver_dev = NULL;
+> > > +     priv->waiting_rsp_dev = NULL;
+> >
+> > These are NULL already.
+> For code readability, it is good to know when and with what value it is initialized.
+> It will help review the 'if' condition based on these structure member variable.
+> Will covert this information into comments.
+
+We already know they are NULL because you used kzalloc to allocate the
+struct. No need to comment that.
+
+Sascha
+
+-- 
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
