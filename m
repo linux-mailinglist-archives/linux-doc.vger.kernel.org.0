@@ -1,215 +1,296 @@
-Return-Path: <linux-doc+bounces-19903-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-19905-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E8CB923C0B
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jul 2024 13:08:27 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C027923CD1
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jul 2024 13:50:08 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B16651F234FE
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Jul 2024 11:08:26 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6B4E71C21757
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Jul 2024 11:50:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BED2715AAC8;
-	Tue,  2 Jul 2024 11:08:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 786EA14D703;
+	Tue,  2 Jul 2024 11:50:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="a+THmIy3"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="Kjm28P0/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2065.outbound.protection.outlook.com [40.107.94.65])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E917159205
-	for <linux-doc@vger.kernel.org>; Tue,  2 Jul 2024 11:08:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1719918501; cv=none; b=Ir0rXQ7v5BqYqmnur9LBSlbVasQcjaB7Nna2K3f0bz9ZdkoGaIZ1qrNYCRj+fHj2ZCjdhFUN4Bb/kgkoIXQqT5bxDHRYF5AqyHBrixKWg+Dbvnurf6O006iQEX6zbeYI5Qk5PK7RMsemrhAqmZbWfhNwGkuCEafewK6ZCJnZ+WI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1719918501; c=relaxed/simple;
-	bh=p2iigvvbcXhuQKdsm3wAClwa/WozdQxNJgLpmemUIpI=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=AwKL+5gTxfB1PCAlhzOnrRjH0Z446oiqp56PZtcjnk3uMtgLd3eSaA/AU4sBIrKLc8V6bdc4mojDL0PagiGz9nH2aU37E1bwRsx6bJl6FG5WSncZlTuHAzZQ1vTS6D8Cbr3DOrg8obmMWgMlKkrK+K7iJ+T2z5sb5R3BndhJUrI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=a+THmIy3; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1719918499;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=yLXwC7q0adn0kB7P9GTh9OjXrMCR2dcYkc/lqgAiV5o=;
-	b=a+THmIy3beA68rmXvNpDSjyMni0fL5kLGVdV7UTB+eWF6pselScgTeAxUzGKGyAyJuaUcY
-	jc9geiWbHsmhfxgyeHi8SND39w2TS0ZVLFMAU6tRqZr65l+XVi+bfBuwFgxHs/xxNRCEKr
-	EaPIkMBP8f8f9IYtH6vF/0ryba9z2xw=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-92-AowS4zR2NEmvzcREqLpBFA-1; Tue, 02 Jul 2024 07:08:17 -0400
-X-MC-Unique: AowS4zR2NEmvzcREqLpBFA-1
-Received: by mail-wm1-f69.google.com with SMTP id 5b1f17b1804b1-4255f5fbfc6so1835915e9.1
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jul 2024 04:08:17 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719918496; x=1720523296;
-        h=mime-version:user-agent:content-transfer-encoding:autocrypt
-         :references:in-reply-to:date:cc:to:from:subject:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=yLXwC7q0adn0kB7P9GTh9OjXrMCR2dcYkc/lqgAiV5o=;
-        b=EwGqRbtPAFqeeqx0fOPmvR5nYtPXvjuYXcjEVzJZRK2gJSvv59oy315HPVApAXOIWv
-         Mkk57QERVGxI8rSXOElDwHUhCGgmuOAt3rfTUT1AoqPITRv7Vf2H51GQHYshwhFFYWk4
-         LatY0KX+JE9Vfl8LyQGZ9U8fESDAyxLaTmqPMH9DyViA92ez3W6ZEtL60rD8tKcK2ijy
-         NFsJUaT1NOwdr9fwZpL3Vh00cSFxkF78xg2g2stGdBNMzBnf7EKETt8oF6JUES7ak2eF
-         LIZIJXe5go0MMJHUtaffF/HFj1sAQ47q+aXboACS80TAsPvfT726iUz/Hb6LkSxAhMLj
-         kUlw==
-X-Forwarded-Encrypted: i=1; AJvYcCUV4wTZMZUTuIE+MfTfSLK9rTjpZ5e+VC5WyyV0P4ys3c1NMF/ZBSshLAHb8tRVK2KZJooXAlNUiNeZfYk4BXhD4KtYMi8t30oe
-X-Gm-Message-State: AOJu0YzdIMjAbsrDDQb458K1DW+mB85HZrw0KKzoLsy09mSY3KgnvJD/
-	W8lcWT0uNEK53OxCsiBpHNqENGh8/GB2UbDWvqZHdESJ3Q4up9d6Zly/6e10GR9waRiaAr48BtG
-	Ki8/RSuzzbDdEoYOEfU1l/dg/uZAq2bp7ACUSmW9UbyWW3oVmlCNw2CQWhA==
-X-Received: by 2002:a05:600c:19c9:b0:424:a74b:32d3 with SMTP id 5b1f17b1804b1-4257a010c08mr62104385e9.0.1719918496677;
-        Tue, 02 Jul 2024 04:08:16 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEKqrIbcrzbaQKWKLXTl4pIVJyKi2r/i/19ZzeCV+kPU4ZooLecdwzZnhxEombaOdJJRY43eg==
-X-Received: by 2002:a05:600c:19c9:b0:424:a74b:32d3 with SMTP id 5b1f17b1804b1-4257a010c08mr62104055e9.0.1719918496277;
-        Tue, 02 Jul 2024 04:08:16 -0700 (PDT)
-Received: from gerbillo.redhat.com ([2a0d:3341:b0a6:6710:872d:b0f7:af0b:a62f])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4256b097bd6sm196621575e9.30.2024.07.02.04.08.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jul 2024 04:08:15 -0700 (PDT)
-Message-ID: <29c65e23b88002eef6b2a8c272357fa2b2a661b6.camel@redhat.com>
-Subject: Re: [PATCH net-next v15 03/14] netdev: support binding dma-buf to
- netdevice
-From: Paolo Abeni <pabeni@redhat.com>
-To: Mina Almasry <almasrymina@google.com>, netdev@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-alpha@vger.kernel.org, linux-mips@vger.kernel.org, 
-	linux-parisc@vger.kernel.org, sparclinux@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, linux-arch@vger.kernel.org, 
-	bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org
-Cc: "David S. Miller" <davem@davemloft.net>, Eric Dumazet
- <edumazet@google.com>,  Jakub Kicinski <kuba@kernel.org>, Donald Hunter
- <donald.hunter@gmail.com>, Jonathan Corbet <corbet@lwn.net>, Richard
- Henderson <richard.henderson@linaro.org>, Ivan Kokshaysky
- <ink@jurassic.park.msu.ru>, Matt Turner <mattst88@gmail.com>, Thomas
- Bogendoerfer <tsbogend@alpha.franken.de>, "James E.J. Bottomley"
- <James.Bottomley@HansenPartnership.com>, Helge Deller <deller@gmx.de>, 
- Andreas Larsson <andreas@gaisler.com>, Jesper Dangaard Brouer
- <hawk@kernel.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Steven
- Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Arnd Bergmann
- <arnd@arndb.de>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann
- <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, Martin KaFai
- Lau <martin.lau@linux.dev>, Eduard Zingerman <eddyz87@gmail.com>, Song Liu
- <song@kernel.org>, Yonghong Song <yonghong.song@linux.dev>, John Fastabend
- <john.fastabend@gmail.com>, KP Singh <kpsingh@kernel.org>, Stanislav
- Fomichev <sdf@fomichev.me>, Hao Luo <haoluo@google.com>, Jiri Olsa
- <jolsa@kernel.org>,  Steffen Klassert <steffen.klassert@secunet.com>,
- Herbert Xu <herbert@gondor.apana.org.au>, David Ahern <dsahern@kernel.org>,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>,  Shuah Khan
- <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian
- =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Bagas Sanjaya
- <bagasdotme@gmail.com>, Christoph Hellwig <hch@infradead.org>, Nikolay
- Aleksandrov <razor@blackwall.org>, Pavel Begunkov <asml.silence@gmail.com>,
- David Wei <dw@davidwei.uk>, Jason Gunthorpe <jgg@ziepe.ca>, Yunsheng Lin
- <linyunsheng@huawei.com>, Shailend Chand <shailend@google.com>, Harshitha
- Ramamurthy <hramamurthy@google.com>,  Shakeel Butt
- <shakeel.butt@linux.dev>, Jeroen de Borst <jeroendb@google.com>, Praveen
- Kaligineedi <pkaligineedi@google.com>, Willem de Bruijn
- <willemb@google.com>, Kaiyuan Zhang <kaiyuanz@google.com>
-Date: Tue, 02 Jul 2024 13:08:11 +0200
-In-Reply-To: <20240628003253.1694510-4-almasrymina@google.com>
-References: <20240628003253.1694510-1-almasrymina@google.com>
-	 <20240628003253.1694510-4-almasrymina@google.com>
-Autocrypt: addr=pabeni@redhat.com; prefer-encrypt=mutual; keydata=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
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.4 (3.50.4-1.fc39) 
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6A181DFD8;
+	Tue,  2 Jul 2024 11:50:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.94.65
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1719921003; cv=fail; b=ZGjnvEBwRY/E5opHDd8rc6j+GrT8b1emFDuqQZLjQUmeLGPPugoXvPVAe4go2veNsv3KGlfz4srz2HHrE5k/id/VzaYyIpP8pAeGM6WdpxxWuXHxZf1MmVyd53rH+XRhefzrMFoF58VLyLh8ygeeI7dOog/mHIbD2OlWMETPfhc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1719921003; c=relaxed/simple;
+	bh=ZPrrGPf4dTj5Sx2jhFugR5ElWYqD9+Bc5rMDfICSgYs=;
+	h=References:From:To:Cc:Subject:Date:In-reply-to:Message-ID:
+	 Content-Type:MIME-Version; b=n9AjsnZLTYDhnVEEHLbnmbqnUO+9SNpdntHl0/m2jYDWjsZBo3zq6ES/ArR/kxj3czFLjqCRSWTjQBHlIgDZvVwE1KnwGrGnmMD1/C7POY34JdBn29Ee7Z5FjUNHRaKJu+QQchaEQDKjQSHQH8czy4sBEWvP7ThD3hNZ1BJmyLk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=Kjm28P0/; arc=fail smtp.client-ip=40.107.94.65
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lkfebbH3ukpwfInBxvWHOZ4yaR4QiGsz5YD+TwdffuWtebT/6M/3jfUkRTf3KrsWdn5oeL9Twh25BqijaF9zF/TADK4zr3xpz1DKK+dYHWrjtYh4hHjURu+/CUTIP7lOr02DsC7SBHhimeffjFxmaZrLq+uWZ57oaHmJglC2fznTsddiDgZVccM8SmDKGpqa0Hw12QtrYiUUNjS02dQkQTiClqgxvDfwsYeZTeBPL9O7xZm1yo53qMIVbedbb/aR5moTtyDPwQ7DmKw7Ihek8AtaPfoqsQInT9CleW4WnsemEIKSZ+J7+PpbMTUSfxF/CNxf58Abzx6beRmvvK306g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=k1KbED5THrpirmsv1R7vn2AOb9iz7vv/cyzdABAaC4E=;
+ b=ewxgLeKh7tdX5re09BmMSAIWNZ6OXHqvRUZrbtcpcFR46FCLspbkTeD2HJrBYQfBU2QDuSh5SaNpVAHUNuEPNpCwLcC8aJbCvjryZvBMX1zvsvZjqPi9/CvbqXJC7CsTVBQk9Zs0JnKk8XM4Mdv46yyBQafL2xRC1orNFY6M9dUj+erpQZl753tuYquv4zfuxeUeXEY2d0w/Y4GqJwWf4j/NYl2AORj2pm1UtmsNhMgPZmVWS927gWRBkOP+PCxUR32q8PnuUTZYgzsYZ4Xt+MzkeVc7sQMyveHCDjI70ZeOxEbJpHqBMuK1jWQgWMyLltRDJ7zLv+xqpAvgFAuE1w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=k1KbED5THrpirmsv1R7vn2AOb9iz7vv/cyzdABAaC4E=;
+ b=Kjm28P0/bD+1TA70CQyFAyo9eTWiANdH3gjMnT0JYyt8Oy3N5dy6DE7svzvQf1cR5ToNboyeDAiDi/ol5u+VxE6MqwqOQnu4OKlv+gYvF1Rcj3PS5ICVws+9rq4BplBAqRO5t1h2wJ2gConrcMp/wJbXqevpVlTHSZVHcJbqaSTJGTrouDhSeWemv0B11kU3+uMZGIZiGEubwaXItCThJlQhdBlovjsJN9POsQ56EQwHBJavFSvf59op9l9M2WDrpSxuj8ne7I9h5goBIOZ1RC8stMKRAZsdkjo3WwsUH1FqarsgUVdCRVVAc6TCfk3/pMi3XKtEucgbEdndxm++Tg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) by
+ CYXPR12MB9388.namprd12.prod.outlook.com (2603:10b6:930:e8::15) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7719.33; Tue, 2 Jul 2024 11:49:58 +0000
+Received: from DS0PR12MB7726.namprd12.prod.outlook.com
+ ([fe80::953f:2f80:90c5:67fe]) by DS0PR12MB7726.namprd12.prod.outlook.com
+ ([fe80::953f:2f80:90c5:67fe%6]) with mapi id 15.20.7741.017; Tue, 2 Jul 2024
+ 11:49:58 +0000
+References: <cover.66009f59a7fe77320d413011386c3ae5c2ee82eb.1719386613.git-series.apopple@nvidia.com>
+ <bd332b0d3971b03152b3541f97470817c5147b51.1719386613.git-series.apopple@nvidia.com>
+ <cf572c69-a754-4d41-b9c4-7a079b25b3c3@redhat.com>
+ <874j98gjfg.fsf@nvdebian.thelocal>
+ <0b549ff0-b0b6-4fc8-aa6f-0d76157575b3@redhat.com>
+User-agent: mu4e 1.10.8; emacs 29.1
+From: Alistair Popple <apopple@nvidia.com>
+To: David Hildenbrand <david@redhat.com>
+Cc: dan.j.williams@intel.com, vishal.l.verma@intel.com,
+ dave.jiang@intel.com, logang@deltatee.com, bhelgaas@google.com,
+ jack@suse.cz, jgg@ziepe.ca, catalin.marinas@arm.com, will@kernel.org,
+ mpe@ellerman.id.au, npiggin@gmail.com, dave.hansen@linux.intel.com,
+ ira.weiny@intel.com, willy@infradead.org, djwong@kernel.org,
+ tytso@mit.edu, linmiaohe@huawei.com, peterx@redhat.com,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
+ nvdimm@lists.linux.dev, linux-cxl@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+ linux-ext4@vger.kernel.org, linux-xfs@vger.kernel.org,
+ jhubbard@nvidia.com, hch@lst.de, david@fromorbit.com
+Subject: Re: [PATCH 07/13] huge_memory: Allow mappings of PUD sized pages
+Date: Tue, 02 Jul 2024 21:30:19 +1000
+In-reply-to: <0b549ff0-b0b6-4fc8-aa6f-0d76157575b3@redhat.com>
+Message-ID: <87wmm4f1y6.fsf@nvdebian.thelocal>
+Content-Type: text/plain
+X-ClientProxiedBy: SY8P282CA0023.AUSP282.PROD.OUTLOOK.COM
+ (2603:10c6:10:29b::33) To DS0PR12MB7726.namprd12.prod.outlook.com
+ (2603:10b6:8:130::6)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR12MB7726:EE_|CYXPR12MB9388:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7a8b46c4-7b4b-4533-0d42-08dc9a8d18ed
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?D8pGyRgVp07woggVV+SrTDqhScTw3FfUxxrtQFwCIusLZGYkJiGqUaBKGHUv?=
+ =?us-ascii?Q?aNxg16rHMrY/EmfAjm+zygsQ8XDQD0MCbsKcP5P1klWGDE5jx9h6t0YYC8S5?=
+ =?us-ascii?Q?u0s0LQC/pP3OPrOh1q3BUxU+H7VLPSUnNsvFDsyAeampY5nUljwVzHI+CyEP?=
+ =?us-ascii?Q?rSZRRSSW1mbXe97xzpC+a5CtO+YygohKgvJ0MZI41YghlKngDIezu4sVjmGX?=
+ =?us-ascii?Q?VI/B68my8Mn35VlblT6tnspe0Kep6cUrAVdUtYf0ko8UqfDxoQu9R/7UHzuY?=
+ =?us-ascii?Q?8HJaHkiaea/EhaCmKwglfzEV2d392MdFz2G7zMqBPD986K7VjZKdiGp6uaMk?=
+ =?us-ascii?Q?PWhqoqsmnUy3tbkzoqvVOzHX8VRYO8s+99RsFpmF0wkVIZBpE4xyJTUurSbn?=
+ =?us-ascii?Q?x9UfrmJqxuPcYkKY7tt55z6zTk0D8S4cIhW47yB47vat6RAe1VJLRISQ3kVa?=
+ =?us-ascii?Q?N71tKSfpTcvwmshFyzSJMSfwH7AVD4zO6MIYFRzG92cM5jWbGwP6eAmVRNIv?=
+ =?us-ascii?Q?Azl9pTGMChFFMJljvpu9dMQdxrYORPJXYjvtdwU8W723s6GdFatmM1OqjzHA?=
+ =?us-ascii?Q?wD0UVuAJ5w18P2WdBHXMkSXwf5baJ03iaJ+d7XEyUdS3Z4qJ5boApaGiLRSU?=
+ =?us-ascii?Q?IiuP49q+u9rlQwQjgeNxjC/pq2DDNOfeUUHtxY5XkWC+4Hfk8BlAwncfhYDy?=
+ =?us-ascii?Q?B4oLFHMoVkIfxPx+Y5Ak4DVx3fmvy1DOV+q4+sq7VZXDIDOIf/rnIrdQg/JN?=
+ =?us-ascii?Q?7101zntU6UNBNVOe6m8ns1GnkgAyeET/nW9DkJ/1xHa1pRLtG27OycayUzs9?=
+ =?us-ascii?Q?7DM40mTNVvua80GoBgehuI9zczHd6xRM7DSJ+xlMkV9D/1RXL8tzux4aMAei?=
+ =?us-ascii?Q?EGguzTjy8zu2NTdoMpfXYJrDEIr+PBnwuF+IkWy+KbKAifMFA2tO7BFFzJbI?=
+ =?us-ascii?Q?iwlJUxqkbW/Oa+YO3PXtjtDO9+4XV3Dg4nStVn/BFvzyTaMSRjhrar6UdOhy?=
+ =?us-ascii?Q?+uiZXG2q+yLxfpjF2+mTfxOSW0Vw6wrmvfeU9uJzOR59HBZFiDaR4UGxCcfn?=
+ =?us-ascii?Q?r5N9Cq8kO03qR3fMHzJMAPFVRuzGjrKDXgWWbEhnOleDC6l+ewWzVeeQCI/w?=
+ =?us-ascii?Q?+o0gKBiT863wtfdQ2tnGJ3TihZcIyKOMc1XjXEl9uZX9U3fJtEf+ffrpaYHP?=
+ =?us-ascii?Q?IWasghkt65X0f0cgXlrnQFKZG5aOqOcfEDzjHJ/bh0HQdgW+8xr1/ELgo+ZC?=
+ =?us-ascii?Q?Kkb3ZspGWYYbpe5x74WJdxYB9Aa/caNC8gQ2+0A94OuyNCRbzCTzOC4OWdqG?=
+ =?us-ascii?Q?yA4EjB3lmxx/sz3x/qYrVfnOsBk40OLZ7wiUMWkocC8Q4w=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB7726.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?B8E+kf1l7HbH1kvNBc0cvdbqepxxD0hAIq1yeSJhaSGlIxqzrji5SdQf70NV?=
+ =?us-ascii?Q?rbfyhx+rpoSCyMz+pbFtRyHSXf5b9sDq8xn8HNciXvFZXd7kROGQ6ahfM2E+?=
+ =?us-ascii?Q?0icI0HjRM5SgpK2uZtAQi2y6CKNYb/MgGJIKOR/QKY96ggKSDKk9W8+Svve4?=
+ =?us-ascii?Q?zspd5jYuzWV/1vR144G4MObrPvMmgO4/Bd6gx8ptDbaPf76yH5bKdR2s9dwH?=
+ =?us-ascii?Q?RtZSvbfUvMFeYfNSPUIgae6o+NfV8Z1tbdjVuX2Lex4vDGQVV03AtYOEv2YZ?=
+ =?us-ascii?Q?59txyHNmYAWIKd42YwUxUdEDfn6KfjIP3iMfxSrqr+PnrqSgR+UdVVg9uxRh?=
+ =?us-ascii?Q?6FgTGptmo9aG633SIRy3l/fHXW1WWVktdJLA9dpQSkRgKIc/837pAZ5e09M9?=
+ =?us-ascii?Q?FKAS3W4KyHJyjbVei71Cfm9/AsIXzpAKDhXmHZczrtszWhmt/yR0t1CzMMCy?=
+ =?us-ascii?Q?myyCgsdZtj0X52gn/1Ygszixduy39bjYeayVoHTBi4TlhzjcXmA9k5IB8voY?=
+ =?us-ascii?Q?RMbwqtMxwvBMWEV2i/c4KWkY0BQBM+zNHUZR43xCA0iBBrsSNOUsm5cmmlNW?=
+ =?us-ascii?Q?rMid8Hl/k1e4gt1QDeRWY9mvF7HrtZL9uyEAtGbzPXsbh8kKhhrmBzPdVFC/?=
+ =?us-ascii?Q?xSlsPYcnPaXYMDo/lllCVSr4gE21kpoU+6qgBuIQoVZoJ5g6touQWG4+79wA?=
+ =?us-ascii?Q?N3tINV3bGhcBKR2Rraf0FNCmRaPs/+wJNFyzTAvEaPXvOQ9ScaNgnH+QXAsk?=
+ =?us-ascii?Q?6yYWRpciWRIeJitnbB31ltQ2KY01Q/DKOp0+E3t9VOjzLozppGjLghRONjWm?=
+ =?us-ascii?Q?hix3SduGk6Y41J57SZ48hszGOlfcLlsHW4ADqDBP4dAj3Mp0H9l78MgY1Gmx?=
+ =?us-ascii?Q?rAeUU1e9vToZ2kPKfjw3331UwkSG29w8bkTDpOCESeU2NQZOAeKoZtQeG60/?=
+ =?us-ascii?Q?aqVY2wazYpMosOYtTudAi1Axg5cT8kKZwpZhP9gUqevkI8Ogs/uZ1RGQsMUD?=
+ =?us-ascii?Q?yputUsJzfb6ddKldPA6df4IXyMsnnUTdBtonjQUAkPGnXu6YAZv8sQKCD2P1?=
+ =?us-ascii?Q?7d7roMmmc3/DiybvTVI46knb8iUI4zs2kO8ngyyxdBIBCg0g6s7NwcyYag/f?=
+ =?us-ascii?Q?9ZKrFhzFcJtg0iPG/OmNgOSU7HjVyCMDUHxsbla7arKadaV/fLSdNhnpxPKm?=
+ =?us-ascii?Q?PIyko/zaZdNw9lN8r3K+SlqCcDXjjiSLfLHwdPfzZOiSQq5ZN96p18BKZQLJ?=
+ =?us-ascii?Q?9a6P4DATw+woYXQmSQOay2T5BPtj6TO49L23M9kGM21ed/kXdkfOFe25HVig?=
+ =?us-ascii?Q?S6F2riRQI1hJSCM6vjBzSal47Byi7OZFPc2lP3dI7MogrpzO5AW1M0BmAeR7?=
+ =?us-ascii?Q?sJnQGkea8VkI5NunKUivKaiGJhVHLW37mJ4zK2Plzn6ha9m4lWuee8GjGSu2?=
+ =?us-ascii?Q?GHx3wbeqpuUUFFhfBPb9EEKUOSVVxkuXtT8RMJ5l0qZhXptUz4DqCo2IEdlk?=
+ =?us-ascii?Q?YbZZ82OFurF4U40zrv4UbZWISIBg554P5pREAxZ7bQSDVwP50CFwXP+M6c4h?=
+ =?us-ascii?Q?LR8JcIdoT0j3f1T7z3jMv94bcG5YRhLHAYSAesRq?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7a8b46c4-7b4b-4533-0d42-08dc9a8d18ed
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB7726.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2024 11:49:58.1916
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rpZJa/uSPnJe45caaPQpmxR9Vu8NrJRJ3CCgnjHboiNI6OswmJlEXp3TXyqmzUGFFwwL73nKVlKIsm5TUbVKFQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR12MB9388
 
-On Fri, 2024-06-28 at 00:32 +0000, Mina Almasry wrote:
-> +int net_devmem_bind_dmabuf(struct net_device *dev, unsigned int dmabuf_f=
-d,
-> +			   struct net_devmem_dmabuf_binding **out)
-> +{
-> +	struct net_devmem_dmabuf_binding *binding;
-> +	static u32 id_alloc_next;
-> +	struct scatterlist *sg;
-> +	struct dma_buf *dmabuf;
-> +	unsigned int sg_idx, i;
-> +	unsigned long virtual;
-> +	int err;
-> +
-> +	dmabuf =3D dma_buf_get(dmabuf_fd);
-> +	if (IS_ERR(dmabuf))
-> +		return -EBADFD;
-> +
-> +	binding =3D kzalloc_node(sizeof(*binding), GFP_KERNEL,
-> +			       dev_to_node(&dev->dev));
-> +	if (!binding) {
-> +		err =3D -ENOMEM;
-> +		goto err_put_dmabuf;
-> +	}
-> +
-> +	binding->dev =3D dev;
-> +
-> +	err =3D xa_alloc_cyclic(&net_devmem_dmabuf_bindings, &binding->id,
-> +			      binding, xa_limit_32b, &id_alloc_next,
-> +			      GFP_KERNEL);
-> +	if (err < 0)
-> +		goto err_free_binding;
-> +
-> +	xa_init_flags(&binding->bound_rxq_list, XA_FLAGS_ALLOC);
-> +
-> +	refcount_set(&binding->ref, 1);
-> +
-> +	binding->dmabuf =3D dmabuf;
-> +
-> +	binding->attachment =3D dma_buf_attach(binding->dmabuf, dev->dev.parent=
-);
-> +	if (IS_ERR(binding->attachment)) {
-> +		err =3D PTR_ERR(binding->attachment);
-> +		goto err_free_id;
-> +	}
-> +
-> +	binding->sgt =3D
-> +		dma_buf_map_attachment(binding->attachment, DMA_FROM_DEVICE);
-> +	if (IS_ERR(binding->sgt)) {
-> +		err =3D PTR_ERR(binding->sgt);
-> +		goto err_detach;
-> +	}
-> +
-> +	/* For simplicity we expect to make PAGE_SIZE allocations, but the
-> +	 * binding can be much more flexible than that. We may be able to
-> +	 * allocate MTU sized chunks here. Leave that for future work...
-> +	 */
-> +	binding->chunk_pool =3D
-> +		gen_pool_create(PAGE_SHIFT, dev_to_node(&dev->dev));
-> +	if (!binding->chunk_pool) {
-> +		err =3D -ENOMEM;
-> +		goto err_unmap;
-> +	}
-> +
-> +	virtual =3D 0;
-> +	for_each_sgtable_dma_sg(binding->sgt, sg, sg_idx) {
-> +		dma_addr_t dma_addr =3D sg_dma_address(sg);
-> +		struct dmabuf_genpool_chunk_owner *owner;
-> +		size_t len =3D sg_dma_len(sg);
-> +		struct net_iov *niov;
-> +
-> +		owner =3D kzalloc_node(sizeof(*owner), GFP_KERNEL,
-> +				     dev_to_node(&dev->dev));
 
-I'm sorry for not catching this earlier, but it looks like the above
-allocation lacks a NULL check.
+David Hildenbrand <david@redhat.com> writes:
 
-Thanks,
+> On 02.07.24 12:19, Alistair Popple wrote:
+>> David Hildenbrand <david@redhat.com> writes:
+>> 
+>>> On 27.06.24 02:54, Alistair Popple wrote:
+>>>> Currently DAX folio/page reference counts are managed differently to
+>>>> normal pages. To allow these to be managed the same as normal pages
+>>>> introduce dax_insert_pfn_pud. This will map the entire PUD-sized folio
+>>>> and take references as it would for a normally mapped page.
+>>>> This is distinct from the current mechanism, vmf_insert_pfn_pud,
+>>>> which
+>>>> simply inserts a special devmap PUD entry into the page table without
+>>>> holding a reference to the page for the mapping.
+>>>
+>>> Do we really have to involve mapcounts/rmap for daxfs pages at this
+>>> point? Or is this only "to make it look more like other pages" ?
+>> The aim of the series is make FS DAX and other ZONE_DEVICE pages
+>> look
+>> like other pages, at least with regards to the way they are refcounted.
+>> At the moment they are not refcounted - instead their refcounts are
+>> basically statically initialised to one and there are all these special
+>> cases and functions requiring magic PTE bits (pXX_devmap) to do the
+>> special DAX reference counting. This then adds some cruft to manage
+>> pgmap references and to catch the 2->1 page refcount transition. All
+>> this just goes away if we manage the page references the same as other
+>> pages (and indeed we already manage DEVICE_PRIVATE and COHERENT pages
+>> the same as normal pages).
+>> So I think to make this work we at least need the mapcounts.
+>> 
+>
+> We only really need the mapcounts if we intend to do something like
+> folio_mapcount() == folio_ref_count() to detect unexpected folio
+> references, and if we have to have things like folio_mapped()
+> working. For now that was not required, that's why I am asking.
 
-Paolo
+Oh I see, thanks for pointing that out. In that case I agree, we don't
+need the mapcounts. As you say we don't currently need to detect
+unexpect references for FS DAX and this series doesn't seek to introduce
+any new behviour/features.
 
+> Background also being that in a distant future folios will be
+> decoupled more from other compound pages, and only folios (or "struct
+> anon_folio" / "struct file_folio") would even have mapcounts.
+>
+> For example, most stuff we map (and refcount!) via vm_insert_page()
+> really must stop involving mapcounts. These won't be "ordinary"
+> mapcount-tracked folios in the future, they are simply some refcounted
+> pages some ordinary driver allocated.
+
+Ok, so for FS DAX we should take a reference on the folio for the
+mapping but not a mapcount?
+
+> For FS-DAX, if we'll be using the same "struct file_folio" approach as
+> for ordinary pageache memory, then this is the right thing to do here.
+>
+>
+>>> I'm asking this because:
+>>>
+>>> (A) We don't support mixing PUD+PMD mappings yet. I have plans to change
+>>>      that in the future, but for now you can only map using a single PUD
+>>>      or by PTEs. I suspect that's good enoug for now for dax fs?
+>> Yep, that's all we support.
+>> 
+>>> (B) As long as we have subpage mapcounts, this prevents vmemmap
+>>>      optimizations [1]. Is that only used for device-dax for now and are
+>>>      there no plans to make use of that for fs-dax?
+>> I don't have any plans to. This is purely focussed on refcounting
+>> pages
+>> "like normal" so we can get rid of all the DAX special casing.
+>> 
+>>> (C) We managed without so far :)
+>> Indeed, although Christoph has asked repeatedly ([1], [2] and likely
+>> others) that this gets fixed and I finally got sick of it coming up
+>> everytime I need to touch something with ZONE_DEVICE pages :)
+>> Also it removes the need for people to understand the special DAX
+>> page
+>> recounting scheme and ends up removing a bunch of cruft as a bonus:
+>>   59 files changed, 485 insertions(+), 869 deletions(-)
+>
+> I'm not challenging the refcounting scheme. I'm purely asking about
+> mapcount handling, which is something related but different.
+
+Got it, thanks. I hadn't quite picked up on the mapcount vs. refcount
+distinction you were asking about.
+
+>> And that's before I clean up all the pgmap reference handling. It
+>> also
+>> removes the pXX_trans_huge and pXX_leaf distinction. So we managed, but
+>> things could be better IMHO.
+>> 
+>
+> Again, all nice things.
+>
+>>> Having that said, with folio->_large_mapcount things like
+>>> folio_mapcount() are no longer terribly slow once we weould PTE-map a
+>>> PUD-sized folio.
+>>>
+>>> Also, all ZONE_DEVICE pages should currently be marked PG_reserved,
+>>> translating to "don't touch the memmap". I think we might want to
+>>> tackle that first.
+>
+> Missed to add a pointer to [2].
+>
+>> Ok. I'm keen to get this series finished and I don't quite get the
+>> connection here, what needs to change there?
+>
+> include/linux/page-flags.h
+>
+> "PG_reserved is set for special pages. The "struct page" of such a
+> page should in general not be touched (e.g. set dirty) except by its
+> owner. Pages marked as PG_reserved include:
+>
+> ...
+>
+> - Device memory (e.g. PMEM, DAX, HMM)
+> "
+>
+> I think we already entered that domain with other ZONE_DEVICE pages
+> being returned from vm_normal_folio(), unfortunately. But that really
+> must be cleaned up for these pages to not look special anymore.
+>
+> Agreed that it likely is something that is not blocking this series.
+
+Great. I'd like to see that cleaned up a little too or at least made
+more understandable. The first time I looked at this it took a
+suprising amount of time to figure out what constituted a "normal"
+page so I'd be happy to help. This series does, in a small way, clean
+that up by removing the pte_devmap special case.
 
