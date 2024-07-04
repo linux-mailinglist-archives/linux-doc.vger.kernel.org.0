@@ -1,381 +1,296 @@
-Return-Path: <linux-doc+bounces-20053-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-20055-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC16D92715C
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2024 10:13:52 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id DD91E927392
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2024 12:01:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 399941F2248F
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2024 08:13:52 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0CC891C21BA0
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2024 10:01:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8DE001AB52B;
-	Thu,  4 Jul 2024 08:12:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0BB421AB53B;
+	Thu,  4 Jul 2024 10:01:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="alKBb3wC"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="diaSJuXY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06C9E1A4F26;
-	Thu,  4 Jul 2024 08:12:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E5D318637;
+	Thu,  4 Jul 2024 10:01:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1720080749; cv=none; b=r2bq4nXnne03MAo03haQtgo5XsCBCs0JXshcByzNZfAq+8KavJlxLdWp4kQLviVyKSOsNIumzErWBXzJWUCmQXew+HCGqWIHkI1aimR6tZ9lUuuBHk21zyq3+LWV7QEXyA4uiRoKn80DaJZ2hqXxQmVxPJSN4nEyL2CnxNcduWY=
+	t=1720087282; cv=none; b=imuUr9ryclmt6158AC12VScSR0BB8mlX+n5Ca0om0ek/IjiyNn72+Pr7KXzvKwMPsnXa8y8qPOY0lxgZl/c8ZXiv+qRhF5MwwcOK1pzLDAfFXSuIWTcTWnVpB/a39QaYxq9ETMvKIfSkrSRN2GkVlxkS429De7+WQ4mIR8fpdkU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1720080749; c=relaxed/simple;
-	bh=3rh8s44gwpVSA2P0H6vqzXgLSYEwL15fgb6w2HXkJC8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=m7FmkvIZ4xUL87Z4iYf8kL62xvBCpdNbv/e4RT2gKqImK0xSvs5Xv1F1KJT6SN+enUur5phl9VzSGqDw74Aeei/YTGrhprcXfYiDbPy5+P25dYR3sSsWwIKx88hrF+BOD+6GSUDLDSSOoQOBGLdWloKOwUYKNcIGsKY01ynYFLg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=alKBb3wC; arc=none smtp.client-ip=217.70.183.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 3ECA51BF210;
-	Thu,  4 Jul 2024 08:12:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1720080739;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3vqbKfcToo2LElfNBxWY9lcXSji4ZLPkqThWOK062gg=;
-	b=alKBb3wCwqblPKG08tmJOISFa2cq+Mj2Y3Gie4zrc/jVnt/bD8zu9zSr+/lGDl99ywe8bP
-	wBKjsFSvWiBUFeKiGD2mS9EEQXPlL7NpWqzM/LM3dHrbyATuFScb2RGWSk9z+gKUmRb/5r
-	YEn3T6VpTcwNX5sVZdP8hSzPU8MBO96tmRnPEVAZ6+V4ODrlcpu4GxiV/rvv3JW2xMD+2c
-	ztXtvJLqO5scRwPTOr6vq7zfVBDqBI6FN3Zg/oVJTGFgMF58XlhquK5uoiIFtGpjSR0N4E
-	cxU1toEhJPhrrfZB4Db/iSrbI1XqDrxQiMdH8PdDDtQaJ5LJF42+3sv7eOU7eQ==
-From: Kory Maincent <kory.maincent@bootlin.com>
-Date: Thu, 04 Jul 2024 10:12:02 +0200
-Subject: [PATCH net-next v6 7/7] net: pse-pd: pd692x0: Enhance with new
- current limit and voltage read callbacks
+	s=arc-20240116; t=1720087282; c=relaxed/simple;
+	bh=KDuBYp6j1WBY8O6g/h9oYOWnceBIGCqMamxaz7sob2E=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=aDvUnmn9KQ3F1aA++0ink5UEBFdGl6cxMT/Ly4tWa6Q3F4dud57rx1OrPWETBIdQAozZAXCZ9BH5VpfDrcrZKGyLKhhBIzHd0Q8gPuEQSEKS88bodqGAPn85f61G5vS+hWRIl0vdvFLPr7PAgGBjgyLouoDxgLJj9gMcCJW4P4c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=diaSJuXY; arc=none smtp.client-ip=192.198.163.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1720087281; x=1751623281;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=KDuBYp6j1WBY8O6g/h9oYOWnceBIGCqMamxaz7sob2E=;
+  b=diaSJuXYtL7uyRSsn6jS8lhNe9z5+AZZKx0Wi93/v9LT2ofmGJ06xMVI
+   CyDnIL0NsYDTqhlxKb/VlShGZ6MilhrrIdRNQBDSkVUWTsCjyR7DE02uE
+   2MUlMnixyiLIS8Qxm0VDLUQ1SjkmAhli7MHs1iI71JRE8UdTsnF+Acb+r
+   0DXHX9CCIE0sZno9ac9+MRv9wNTMDxMcINnH6g7VRQPtMHzw96YDuqdBp
+   Kom60Y0+N8qIGngIv6AdrsOg6sQfLMoKhseIG9Haeqv8QzU5iYNVMLQJa
+   M8mG0/Lw3ZlmSrXMm4rKY6FDO10eS38g9oXUYQFqEt4IahOTDola6Wa5s
+   Q==;
+X-CSE-ConnectionGUID: m+GqS2i4S/KKdvTn3y5gwg==
+X-CSE-MsgGUID: gVOI+zUOS82/cEdbYIbuzw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11122"; a="28752927"
+X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; 
+   d="scan'208";a="28752927"
+Received: from orviesa007.jf.intel.com ([10.64.159.147])
+  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Jul 2024 03:01:18 -0700
+X-CSE-ConnectionGUID: De6J1i8DTYWEVKv/24X/RQ==
+X-CSE-MsgGUID: EnB72ZaqRgm8HS+HPjMF+Q==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; 
+   d="scan'208";a="47207782"
+Received: from aslawinx-mobl.ger.corp.intel.com (HELO [10.94.0.53]) ([10.94.0.53])
+  by orviesa007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Jul 2024 03:01:13 -0700
+Message-ID: <adb4e27b-b328-4eef-87ca-9b8bad6639e6@linux.intel.com>
+Date: Thu, 4 Jul 2024 12:01:09 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240704-feature_poe_power_cap-v6-7-320003204264@bootlin.com>
-References: <20240704-feature_poe_power_cap-v6-0-320003204264@bootlin.com>
-In-Reply-To: <20240704-feature_poe_power_cap-v6-0-320003204264@bootlin.com>
-To: "David S. Miller" <davem@davemloft.net>, 
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
- Paolo Abeni <pabeni@redhat.com>, Donald Hunter <donald.hunter@gmail.com>, 
- Oleksij Rempel <o.rempel@pengutronix.de>, Jonathan Corbet <corbet@lwn.net>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
- Dent Project <dentproject@linuxfoundation.org>, kernel@pengutronix.de, 
- linux-doc@vger.kernel.org, Kory Maincent <kory.maincent@bootlin.com>
-X-Mailer: b4 0.15-dev-8cb71
-X-GND-Sasl: kory.maincent@bootlin.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v23 32/32] ASoC: doc: Add documentation for SOC USB
+Content-Language: en-US
+To: Wesley Cheng <quic_wcheng@quicinc.com>,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+ srinivas.kandagatla@linaro.org, mathias.nyman@intel.com, perex@perex.cz,
+ conor+dt@kernel.org, corbet@lwn.net, broonie@kernel.org,
+ lgirdwood@gmail.com, krzk+dt@kernel.org, Thinh.Nguyen@synopsys.com,
+ bgoswami@quicinc.com, tiwai@suse.com, robh@kernel.org,
+ gregkh@linuxfoundation.org
+Cc: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-sound@vger.kernel.org, linux-usb@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-doc@vger.kernel.org,
+ alsa-devel@alsa-project.org
+References: <20240610235808.22173-1-quic_wcheng@quicinc.com>
+ <20240610235808.22173-33-quic_wcheng@quicinc.com>
+ <5be51e1f-70c9-4bbc-96fa-1e50e441bd35@linux.intel.com>
+ <408d9e8e-0f40-7e66-54be-2f8d2c0783a3@quicinc.com>
+ <ca1e1063-e1bd-4e03-a7cd-91985e9954e9@linux.intel.com>
+ <096d59a0-5e18-092c-c9ae-d98130226f06@quicinc.com>
+ <368d9019-2c96-468e-b472-7e1127f76213@linux.intel.com>
+ <eb6370ea-47a0-3659-3c10-cb7f95e3e520@quicinc.com>
+ <510468c7-b181-48d0-bf2d-3e478b2f2aca@linux.intel.com>
+ <c7a95157-1b71-1489-3657-8fe67f9acb4e@quicinc.com>
+ <90463a4e-c2e7-4b59-9a79-23533b4acd1e@linux.intel.com>
+ <fd8f1eb0-4b21-4697-8175-a61bc3858852@quicinc.com>
+ <f982842a-1804-420b-a539-a609ecf8fb8a@linux.intel.com>
+ <3c358604-6926-4f90-8fc8-8139c68c3418@quicinc.com>
+ <70bf10a7-7f87-4fd1-bd44-1733d3b2b15e@linux.intel.com>
+ <b1fcef2a-2af9-4985-ae00-f348ca5df3f1@linux.intel.com>
+ <ab734271-58ee-4981-926c-9b57f36b8ac6@linux.intel.com>
+ <ccbf9366-f3de-4a80-bffc-e32a8409e1a7@quicinc.com>
+From: =?UTF-8?Q?Amadeusz_S=C5=82awi=C5=84ski?=
+ <amadeuszx.slawinski@linux.intel.com>
+In-Reply-To: <ccbf9366-f3de-4a80-bffc-e32a8409e1a7@quicinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Kory Maincent (Dent Project) <kory.maincent@bootlin.com>
+On 7/4/2024 12:05 AM, Wesley Cheng wrote:
+> 
+> On 7/3/2024 2:50 AM, Pierre-Louis Bossart wrote:
+>>
+>>
+>>>>>>>> There are really multiple layers to deal with
+>>>>>>>>
+>>>>>>>> a) is the controller able to support the offload path? IIRC this is
+>>>>>>>> embedded in an obscure XHCI property, it would make sense to
+>>>>>>>> expose it
+>>>>>>>> as a control, or component string, of the USB card.
+>>>>>>> If a component string/tag is desired, I already have some way of
+>>>>>>> doing that.  I can add it to the USB card.
+>>>>>>>
+>>>>>>>> b) is there a companion card capable of dealing with the offload
+>>>>>>>> path?
+>>>>>>>> Since the presence of this card may depend on driver probe, there
+>>>>>>>> should
+>>>>>>>> be a control on the USB card. userspace could detect changes to this
+>>>>>>>> control and detect if that path is or is no longer enabled.
+>>>>>>> So currently, the "USB Offload Playback Capable Card" kcontrol (on
+>>>>>>> the USB card) will determine if there is an offload path.  However,
+>>>>>>> this differs than what Amadeusz is suggesting, in that he wants a
+>>>>>>> single kcontrol created for EACH USB card identified (per USB audio
+>>>>>>> device), and a simple enable/disable control to determine if the
+>>>>>>> offload path is enabled for that card/pcm stream.
+>>>>>>>
+>>>>>>> It would be a simpler approach for the userspace, and if the card
+>>>>>>> that handles the offload card isn't present, then these
+>>>>>>> enable/disable control will be set to "disabled," and even if users
+>>>>>>> attempt to set the control, it won't go through.
+>>>>>> Not following. Are you suggesting userspace would modify the
+>>>>>> enable/disable status?
+>>>>> Yes, this is the suggestion.  One writeable kcontrol on the USB SND
+>>>>> audio device that will control if that USB audio device is going to
+>>>>> be offloaded.  If the kcontrol reads back "enabled" (or 1) then
+>>>>> userspace knows that the offload path is active.  Else, if it reads
+>>>>> "disabled" (or 0) after the attempt to set the kcontrol, then the
+>>>>> offload path was unsuccessfully enabled, ie maybe due to no available
+>>>>> offload streams.
+>>>> It's a bit over-engineered IMHO.
+>>>>
+>>>> My alternate suggestion is a read-only control reporting that offload is
+>>>> possible. Then userspace attempts to open a PCM device on the ASoC card,
+>>>> any failures due to resources would be handled at that point.
+>>>>
+>>>>>> I would just have a read-only control that reports what the hardware
+>>>>>> can
+>>>>>> do and which other card can deal with offload. It's up to userspace to
+>>>>>> select the offloaded PCM device or not.
+>>>>>>
+>>>>> That is what I have implemented in the previous patch series.  One
+>>>>> USB SND kcontrol within each USB audio device, which points to the
+>>>>> ASoC platform card that supports offloading:
+>>>>>
+>>>>> "USB Offload Playback Capable Card" --> returns the card index to the
+>>>>> ASoC platform card
+>>>>>
+>>>>> >From there the offloading control is all within the ASoC platform
+>>>>> card.  This is opposite to what Amaduesz suggested in that, the
+>>>>> offload control of which USB device to offload should be within USB
+>>>>> SND (not ASoC)
+>>>> It's very hard to follow, I don't understand what userspace needs to
+>>>> 'control' - in the modify sense. What userspace needs is a place to read
+>>>> from, and then select the PCM device and follow usual ALSA configuration
+>>>> with hw_params.
+>>>>
+>>>  From what I've seen I assumed that goal is to allow Offloading of
+>>> specific stream from USB card. Otherwise I would say controls are not
+>>> needed at all, as more user friendly solution is Offloading streams in
+>>> order they are used as long as resources are available.
+>> That's not great in terms of audio routing, you'd really want more rules
+>> or controlled behavior where the order in which devices are used does
+>> not matter.
+> 
+> So to clarify, when I mention to 'control' this is in case userspace does want to modify which USB device is offloaded.  By default, the current behavior is that the latest USB headset is going to be enabled for offloading.  IF say...userspace has some mechanism to switch which USB device is offloaded, they can do so using:
+> 
+> USB Offload Playback Route Card Select
+> 
+> USB Offload Playback Route PCM Select
+> 
+> The above controls are read/write.  read will fetch the current USB card and pcm indexes being enabled for offload.  write will set the USB card and pcm index to enable offload on.  Both reside on the ASoC card that is associated w/ the USB BE DAI link.
+> 
+>>>>>>>> c) which PCM device is actually offloaded? This could be plural
+>>>>>>>> for some
+>>>>>>>> implementations. The mapping between PCM devices exposed by the USB
+>>>>>>>> card, and those exposed by the companion card, should be known to
+>>>>>>>> userspace. I am not sure how this would be done though, a variable
+>>>>>>>> number of controls is a sure way to confuse userspace.
+>>>>>>> Expanding on Amadeusz's suggestion, my idea is to have an
+>>>>>>> enable/disable kcontrol per USB stream.  For example, one USB card
+>>>>>>> could have multiple PCM devices (USB streams).  So we would have
+>>>>>>> something like:
+>>>>>>>
+>>>>>>> PCM Offload Playback Enable Stream#0  enable/disable
+>>>>>>>
+>>>>>>> PCM Offload Playback Enable Stream#1  enable/disable
+>>>>>>>
+>>>>>>> ....
+>>>>>> are those read-only or not?
+>>>>> No, writable and readable.
+>>>> The writable part introduces a complicated error handling, e.g. what
+>>>> happens if you have an offloaded stream and then this control is changed
+>>>> with amixer while streaming?
+>>>>
+>>> -EBUSY? and keep old value
+>> That would require a stop, fw_free, close, reopening of the
+>> non-offloaded device and restart. Best to avoid interrupting streams, if
+>> there are no resources that should be detected with an early fail during
+>> open/hw_params. Once the stream is flowing, it should not be interrupted
+>> - unless the USB device is removed of course.
+> I agree.  We don't want to interrupt streams if some reason someone tries to switch the offload path.  If there is already an active offload stream, then any attempt to switch/control which USB card/pcm stream is offload is going to be ignored.
+>>
+>>>>>>> So we'd know which USB card and PCM device is selected for USB
+>>>>>>> SND.  However, I see what you're getting at in case there are
+>>>>>>> multiple supported streams, because userspace needs to know which
+>>>>>>> ASoC card/pcm combination corresponds to which USB device/combination.
+>>>>>> I don't understand how this would help map the two parts? There's
+>>>>>> got to
+>>>>>> be an additional mapping...
+>>>>> It won't help with the mapping.  That is something which we'd need to
+>>>>> add, suggestion below.
+>>>>>>> What do you think about having a USB card kcontrol to display the
+>>>>>>> mapped ASoC card and PCM indexes?
+>>>>>>>
+>>>>>>> PCM Offload Playback Enable Stream Mapping#0  0, 1 (ASoC card#0,
+>>>>>>> PCM device#1)
+>>>>>>>
+>>>>>>> To summarize, if we did this, I'd plan to remove all the kcontrols
+>>>>>>> in ASoC card, and have the following in the USB card for an USB
+>>>>>>> audio device that supports one USB stream:
+>>>>>>>
+>>>>>>> PCM Offload Playback Enable Stream#0  enable/disable
+>>>>>>>
+>>>>>>> PCM Offload Playback Enable Stream Mapping#0  0, 1 (ASoC card#0,
+>>>>>>> PCM device#1)
+>>>>>> ... which is suggested here.
+>>>>>>
+>>>>>> Assuming these are read-only controls, we would need to know which PCM
+>>>>>> device on the USB card can be optimized with the use of which PCM
+>>>>>> device
+>>>>>> on the ASoC card. That means a set of three values. You would also want
+>>>>>> a number of streams to make the guesswork on controls less painful.
+>>>>> OK, so now to just figuring out something that both you and Amadeusz
+>>>>> can agree on before I put time implementing it.  So I've implemented
+>>>>> the "enable/disable" path that Amadeusz suggested, which is
+>>>>> highlighted in my previous response, for evaluation purposes.  The
+>>>>> overall question is which layer should control the devices that will
+>>>>> be offloaded.  In my submissions up until now, the control was given
+>>>>> to the ASoC platform card to determine which USB device to offload.
+>>>>> Amadeusz mentioned that it might be beneficial to move the control to
+>>>>> the USB SND devices, because what if the offloading is NOT backed by
+>>>>> ASoC. (highlighted in [1])  However, IMO the current implementation
+>>>>> assumes there is ASoC involved, which should mean that there is some
+>>>>> platform "card" that is backing the offload path.  Please let me know
+>>>>> if my understanding is incorrect, @Amadeusz.
+>>>> I still fundamentally don't get why userspace would try and modify any
+>>>> controls, this makes the flows more complicated IMHO since you also have
+>>>> the PCM open/hw_params stages.
+>>>> I really think it'd be more than enough if the USB card exposed
+>>>> read-only values showing that offload is possible and which card/device
+>>>> to map to. Then userspace uses the ASoC PCM device and errors are
+>>>> handled at that level.
+> Just so I understand...is it really desired that userspace doesn't have the flexibility to choose which USB device is offloaded?  I know it complicates what needs to be done, but it could be just an additional feature that can be added later on.  Again, by default, we select the last USB headset plugged in to be enabled for offload by default.
 
-This patch expands PSE callbacks with newly introduced
-pi_get/set_current_limit() and pi_get_voltage() callback.
-It also add the power limit ranges description in the status returned.
-The only way to set ps692x0 port power limit is by configure the power
-class plus a small power supplement which maximum depends on each class.
+If it chooses endpoint by itself perhaps you can send patch set without 
+controls first? This has added benefit of less patches in series, making 
+it easier to review and it won't block whole patch set by discussion on 
+controls feature. Controls can be added in followup series.
 
-Acked-by: Oleksij Rempel <o.rempel@pengutronix.de>
-Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
----
-
-Change in v2:
-- Use uA and uV instead of mA and mV to have more precision in the power
-  calculation. Need to use 64bit variables for the calculation.
-- Modify the behavior in case of setting the current out of the available
-  ranges. Report an error now.
-
-Change in v4:
-- Add support for c33 pse power limit ranges.
----
- drivers/net/pse-pd/pd692x0.c | 218 ++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 216 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/net/pse-pd/pd692x0.c b/drivers/net/pse-pd/pd692x0.c
-index cce1b7ce044b..29cc76a66c13 100644
---- a/drivers/net/pse-pd/pd692x0.c
-+++ b/drivers/net/pse-pd/pd692x0.c
-@@ -74,6 +74,8 @@ enum {
- 	PD692X0_MSG_GET_PORT_STATUS,
- 	PD692X0_MSG_DOWNLOAD_CMD,
- 	PD692X0_MSG_GET_PORT_CLASS,
-+	PD692X0_MSG_GET_PORT_MEAS,
-+	PD692X0_MSG_GET_PORT_PARAM,
- 
- 	/* add new message above here */
- 	PD692X0_MSG_CNT
-@@ -135,7 +137,7 @@ static const struct pd692x0_msg pd692x0_msg_template_list[PD692X0_MSG_CNT] = {
- 	[PD692X0_MSG_SET_PORT_PARAM] = {
- 		.key = PD692X0_KEY_CMD,
- 		.sub = {0x05, 0xc0},
--		.data = {   0, 0xff, 0xff, 0xff,
-+		.data = { 0xf, 0xff, 0xff, 0xff,
- 			 0x4e, 0x4e, 0x4e, 0x4e},
- 	},
- 	[PD692X0_MSG_GET_PORT_STATUS] = {
-@@ -156,6 +158,18 @@ static const struct pd692x0_msg pd692x0_msg_template_list[PD692X0_MSG_CNT] = {
- 		.data = {0x4e, 0x4e, 0x4e, 0x4e,
- 			 0x4e, 0x4e, 0x4e, 0x4e},
- 	},
-+	[PD692X0_MSG_GET_PORT_MEAS] = {
-+		.key = PD692X0_KEY_REQ,
-+		.sub = {0x05, 0xc5},
-+		.data = {0x4e, 0x4e, 0x4e, 0x4e,
-+			 0x4e, 0x4e, 0x4e, 0x4e},
-+	},
-+	[PD692X0_MSG_GET_PORT_PARAM] = {
-+		.key = PD692X0_KEY_REQ,
-+		.sub = {0x05, 0xc0},
-+		.data = {0x4e, 0x4e, 0x4e, 0x4e,
-+			 0x4e, 0x4e, 0x4e, 0x4e},
-+	},
- };
- 
- static u8 pd692x0_build_msg(struct pd692x0_msg *msg, u8 echo)
-@@ -520,6 +534,106 @@ pd692x0_get_ext_state(struct ethtool_c33_pse_ext_state_info *c33_ext_state_info,
- 	}
- }
- 
-+struct pd692x0_class_pw {
-+	int class;
-+	int class_cfg_value;
-+	int class_pw;
-+	int max_added_class_pw;
-+};
-+
-+#define PD692X0_CLASS_PW_TABLE_SIZE 4
-+/* 4/2 pairs class configuration power table in compliance mode.
-+ * Need to be arranged in ascending order of power support.
-+ */
-+static const struct pd692x0_class_pw
-+pd692x0_class_pw_table[PD692X0_CLASS_PW_TABLE_SIZE] = {
-+	{.class = 3, .class_cfg_value = 0x3, .class_pw = 15000, .max_added_class_pw = 3100},
-+	{.class = 4, .class_cfg_value = 0x2, .class_pw = 30000, .max_added_class_pw = 8000},
-+	{.class = 6, .class_cfg_value = 0x1, .class_pw = 60000, .max_added_class_pw = 5000},
-+	{.class = 8, .class_cfg_value = 0x0, .class_pw = 90000, .max_added_class_pw = 7500},
-+};
-+
-+static int pd692x0_pi_get_pw_from_table(int op_mode, int added_pw)
-+{
-+	const struct pd692x0_class_pw *pw_table;
-+	int i;
-+
-+	pw_table = pd692x0_class_pw_table;
-+	for (i = 0; i < PD692X0_CLASS_PW_TABLE_SIZE; i++, pw_table++) {
-+		if (pw_table->class_cfg_value == op_mode)
-+			return pw_table->class_pw + added_pw * 100;
-+	}
-+
-+	return -ERANGE;
-+}
-+
-+static int pd692x0_pi_set_pw_from_table(struct device *dev,
-+					struct pd692x0_msg *msg, int pw)
-+{
-+	const struct pd692x0_class_pw *pw_table;
-+	int i;
-+
-+	pw_table = pd692x0_class_pw_table;
-+	if (pw < pw_table->class_pw) {
-+		dev_err(dev,
-+			"Power limit %dmW not supported. Ranges minimal available: [%d-%d]\n",
-+			pw,
-+			pw_table->class_pw,
-+			pw_table->class_pw + pw_table->max_added_class_pw);
-+		return -ERANGE;
-+	}
-+
-+	for (i = 0; i < PD692X0_CLASS_PW_TABLE_SIZE; i++, pw_table++) {
-+		if (pw > (pw_table->class_pw + pw_table->max_added_class_pw))
-+			continue;
-+
-+		if (pw < pw_table->class_pw) {
-+			dev_err(dev,
-+				"Power limit %dmW not supported. Ranges availables: [%d-%d] or [%d-%d]\n",
-+				pw,
-+				(pw_table - 1)->class_pw,
-+				(pw_table - 1)->class_pw + (pw_table - 1)->max_added_class_pw,
-+				pw_table->class_pw,
-+				pw_table->class_pw + pw_table->max_added_class_pw);
-+			return -ERANGE;
-+		}
-+
-+		msg->data[2] = pw_table->class_cfg_value;
-+		msg->data[3] = (pw - pw_table->class_pw) / 100;
-+		return 0;
-+	}
-+
-+	pw_table--;
-+	dev_warn(dev,
-+		 "Power limit %dmW not supported. Set to highest power limit %dmW\n",
-+		 pw, pw_table->class_pw + pw_table->max_added_class_pw);
-+	msg->data[2] = pw_table->class_cfg_value;
-+	msg->data[3] = pw_table->max_added_class_pw / 100;
-+	return 0;
-+}
-+
-+static int
-+pd692x0_pi_get_pw_ranges(struct pse_control_status *st)
-+{
-+	const struct pd692x0_class_pw *pw_table;
-+	int i;
-+
-+	pw_table = pd692x0_class_pw_table;
-+	st->c33_pw_limit_ranges = kcalloc(PD692X0_CLASS_PW_TABLE_SIZE,
-+					  sizeof(struct ethtool_c33_pse_pw_limit_range),
-+					  GFP_KERNEL);
-+	if (!st->c33_pw_limit_ranges)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < PD692X0_CLASS_PW_TABLE_SIZE; i++, pw_table++) {
-+		st->c33_pw_limit_ranges[i].min = pw_table->class_pw;
-+		st->c33_pw_limit_ranges[i].max = pw_table->class_pw + pw_table->max_added_class_pw;
-+	}
-+
-+	st->c33_pw_limit_nb_ranges = i;
-+	return 0;
-+}
-+
- static int pd692x0_ethtool_get_status(struct pse_controller_dev *pcdev,
- 				      unsigned long id,
- 				      struct netlink_ext_ack *extack,
-@@ -558,9 +672,20 @@ static int pd692x0_ethtool_get_status(struct pse_controller_dev *pcdev,
- 	priv->admin_state[id] = status->c33_admin_state;
- 
- 	pd692x0_get_ext_state(&status->c33_ext_state_info, buf.sub[0]);
--
- 	status->c33_actual_pw = (buf.data[0] << 4 | buf.data[1]) * 100;
- 
-+	msg = pd692x0_msg_template_list[PD692X0_MSG_GET_PORT_PARAM];
-+	msg.sub[2] = id;
-+	memset(&buf, 0, sizeof(buf));
-+	ret = pd692x0_sendrecv_msg(priv, &msg, &buf);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = pd692x0_pi_get_pw_from_table(buf.data[0], buf.data[1]);
-+	if (ret < 0)
-+		return ret;
-+	status->c33_avail_pw_limit = ret;
-+
- 	memset(&buf, 0, sizeof(buf));
- 	msg = pd692x0_msg_template_list[PD692X0_MSG_GET_PORT_CLASS];
- 	msg.sub[2] = id;
-@@ -572,6 +697,10 @@ static int pd692x0_ethtool_get_status(struct pse_controller_dev *pcdev,
- 	if (class <= 8)
- 		status->c33_pw_class = class;
- 
-+	ret = pd692x0_pi_get_pw_ranges(status);
-+	if (ret < 0)
-+		return ret;
-+
- 	return 0;
- }
- 
-@@ -850,12 +979,97 @@ static int pd692x0_setup_pi_matrix(struct pse_controller_dev *pcdev)
- 	return ret;
- }
- 
-+static int pd692x0_pi_get_voltage(struct pse_controller_dev *pcdev, int id)
-+{
-+	struct pd692x0_priv *priv = to_pd692x0_priv(pcdev);
-+	struct pd692x0_msg msg, buf = {0};
-+	int ret;
-+
-+	ret = pd692x0_fw_unavailable(priv);
-+	if (ret)
-+		return ret;
-+
-+	msg = pd692x0_msg_template_list[PD692X0_MSG_GET_PORT_MEAS];
-+	msg.sub[2] = id;
-+	ret = pd692x0_sendrecv_msg(priv, &msg, &buf);
-+	if (ret < 0)
-+		return ret;
-+
-+	/* Convert 0.1V unit to uV */
-+	return (buf.sub[0] << 8 | buf.sub[1]) * 100000;
-+}
-+
-+static int pd692x0_pi_get_current_limit(struct pse_controller_dev *pcdev,
-+					int id)
-+{
-+	struct pd692x0_priv *priv = to_pd692x0_priv(pcdev);
-+	struct pd692x0_msg msg, buf = {0};
-+	int mW, uV, uA, ret;
-+	s64 tmp_64;
-+
-+	msg = pd692x0_msg_template_list[PD692X0_MSG_GET_PORT_PARAM];
-+	msg.sub[2] = id;
-+	ret = pd692x0_sendrecv_msg(priv, &msg, &buf);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = pd692x0_pi_get_pw_from_table(buf.data[2], buf.data[3]);
-+	if (ret < 0)
-+		return ret;
-+	mW = ret;
-+
-+	ret = pd692x0_pi_get_voltage(pcdev, id);
-+	if (ret < 0)
-+		return ret;
-+	uV = ret;
-+
-+	tmp_64 = mW;
-+	tmp_64 *= 1000000000ull;
-+	/* uA = mW * 1000000000 / uV */
-+	uA = DIV_ROUND_CLOSEST_ULL(tmp_64, uV);
-+	return uA;
-+}
-+
-+static int pd692x0_pi_set_current_limit(struct pse_controller_dev *pcdev,
-+					int id, int max_uA)
-+{
-+	struct pd692x0_priv *priv = to_pd692x0_priv(pcdev);
-+	struct device *dev = &priv->client->dev;
-+	struct pd692x0_msg msg, buf = {0};
-+	int uV, ret, mW;
-+	s64 tmp_64;
-+
-+	ret = pd692x0_fw_unavailable(priv);
-+	if (ret)
-+		return ret;
-+
-+	ret = pd692x0_pi_get_voltage(pcdev, id);
-+	if (ret < 0)
-+		return ret;
-+	uV = ret;
-+
-+	msg = pd692x0_msg_template_list[PD692X0_MSG_SET_PORT_PARAM];
-+	msg.sub[2] = id;
-+	tmp_64 = uV;
-+	tmp_64 *= max_uA;
-+	/* mW = uV * uA / 1000000000 */
-+	mW = DIV_ROUND_CLOSEST_ULL(tmp_64, 1000000000);
-+	ret = pd692x0_pi_set_pw_from_table(dev, &msg, mW);
-+	if (ret)
-+		return ret;
-+
-+	return pd692x0_sendrecv_msg(priv, &msg, &buf);
-+}
-+
- static const struct pse_controller_ops pd692x0_ops = {
- 	.setup_pi_matrix = pd692x0_setup_pi_matrix,
- 	.ethtool_get_status = pd692x0_ethtool_get_status,
- 	.pi_enable = pd692x0_pi_enable,
- 	.pi_disable = pd692x0_pi_disable,
- 	.pi_is_enabled = pd692x0_pi_is_enabled,
-+	.pi_get_voltage = pd692x0_pi_get_voltage,
-+	.pi_get_current_limit = pd692x0_pi_get_current_limit,
-+	.pi_set_current_limit = pd692x0_pi_set_current_limit,
- };
- 
- #define PD692X0_FW_LINE_MAX_SZ 0xff
-
--- 
-2.34.1
+>>> I tend to agree, less values to change, less chance something breaks.
+>>> However I think that there should be some way to disable Offload in case
+>>> something doesn't work properly. (It doesn't have to be control, one can
+>>> go with module parameter or sysfs toggle or something.)
+>> Agree with this, a 'static' configuration to disable offload would be
+>> just fine. Module parameter is fine.
+>>
+>> A control to read if offload is possible and what the mapping is would
+>> be good. From there on, userspace may open the offloaded PCM and deal
+>> with all events (hw_params not supported, xruns, removal, etc).
+> 
+> I can look into adding this mapping part to the USB SND card, so we know which ASoC card/pcm devices are associated to the USB SND device for offloading.  Thank you for the discussions and input!
+> 
+> Thanks
+> 
+> Wesley Cheng
+> 
+> 
 
 
