@@ -1,132 +1,164 @@
-Return-Path: <linux-doc+bounces-20224-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-20229-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAC5892A69F
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 18:01:25 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1769D92A6BA
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 18:04:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EB7701C2194F
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 16:01:24 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 381D81C2182C
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 16:04:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 264CE1494B0;
-	Mon,  8 Jul 2024 16:00:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B6FEB13F012;
+	Mon,  8 Jul 2024 16:04:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="GJ+2cbp9"
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="URFzPikS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 772C1148855;
-	Mon,  8 Jul 2024 16:00:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.47.19.142
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D47CEC7
+	for <linux-doc@vger.kernel.org>; Mon,  8 Jul 2024 16:04:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1720454415; cv=none; b=MQ4cf0N90BQccFtHRBcNELGLj+jHyApeJx6exmVPIY7ZrWuYnMxXdiJZfUD2LAzONx6evNvZX2gKCWV5hZVoZbcizffkYIfGqJPMPP/lA7hLK2VM3ZQp6wKS1kGIrosbd+H6n8LhE7Fe9P9siCHFT5xTCR6XGVHLsF9XOZvo0w0=
+	t=1720454645; cv=none; b=Dffu14q2xyruiHCE19Z87LDlASMgpGJwhMdmKyTBhdU2CNPMjJQyc5FfleYzRdc8WBhLLnzeqFFwPcUbRXzAQS4mwX1Y6lgthElJhQeNTKlqYM792Oh74AiGmO/lCFVVA5dypgHaGbMoUpjDjlWlo0H0br4JmClkx5jGAguy+3E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1720454415; c=relaxed/simple;
-	bh=TBwnL3wQbc4QRf7j9akENyB348Gia8jiwKmTJHW1ai0=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=P7gTOfFV5rVqsMIfM/tf+rL6g10vqzskg+gtAs1i9h2N+/Bopt6CXL3TUz226Qmq1RCtmtfV0Oc72JJQzfS+wVzkGUt9GMuWwJAc1IBP/hJd+XL7Kfp6eWpgA31O71p5HW/xAr1fIrGD638pUxrJxsZoKIUhHSu4gUOmVaithMA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=GJ+2cbp9; arc=none smtp.client-ip=198.47.19.142
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 468Fxric046208;
-	Mon, 8 Jul 2024 10:59:53 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1720454393;
-	bh=nqty+XynRb9yhSMGja4MzmxCzRnKyzh3bIOszbGtJeg=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=GJ+2cbp9poQRrJGgNk55dSebq0oXq4sKCJ2cl7QR+MEG9cuFrua3Af+0+gmJ8262f
-	 otMb5PDI8bTk/9ocLrcE+DZwEnTtCXFQF2BsomM07SLWp46OiXm6F/kooHCE5Hen70
-	 8omF1YPsYT5Ei6xARLJNeIPPhs1FMqyeC+PmtqK4=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 468FxrVM023160
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 8 Jul 2024 10:59:53 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Jul 2024 10:59:53 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Jul 2024 10:59:53 -0500
-Received: from localhost (ti.dhcp.ti.com [172.24.227.95] (may be forged))
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 468Fxqh9103605;
-	Mon, 8 Jul 2024 10:59:53 -0500
-From: Devarsh Thakkar <devarsht@ti.com>
-To: <mchehab@kernel.org>, <hverkuil-cisco@xs4all.nl>,
-        <linux-media@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <sebastian.fricke@collabora.com>, <andriy.shevchenko@linux.intel.com>,
-        <jani.nikula@intel.com>, <jirislaby@kernel.org>, <corbet@lwn.net>,
-        <broonie@kernel.org>, <rdunlap@infradead.org>,
-        <linux-doc@vger.kernel.org>
-CC: <laurent.pinchart@ideasonboard.com>, <praneeth@ti.com>, <nm@ti.com>,
-        <vigneshr@ti.com>, <a-bhatia1@ti.com>, <j-luthra@ti.com>,
-        <b-brnich@ti.com>, <detheridge@ti.com>, <p-mantena@ti.com>,
-        <vijayp@ti.com>, <devarsht@ti.com>, <andi.shyti@linux.intel.com>,
-        <nicolas@ndufresne.ca>, <davidgow@google.com>, <dlatypov@google.com>
-Subject: [PATCH 6/6] media: imagination: Round to closest multiple for cropping region
-Date: Mon, 8 Jul 2024 21:29:43 +0530
-Message-ID: <20240708155943.2314427-7-devarsht@ti.com>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20240708155943.2314427-1-devarsht@ti.com>
-References: <20240708155943.2314427-1-devarsht@ti.com>
+	s=arc-20240116; t=1720454645; c=relaxed/simple;
+	bh=mdC7qLfFrgQ8uCM8Z3hnLHwWYWU+viqJ55STx1SEfkQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=COaETXQSnP74m2Wb3GzHqdL+rxzOIT53IzoSe8WSM9QdPaGjGqFCv9txovTK+41siLsfIDYxCG7tL8YUYNoSd6p7jbvzN2acz+4uVmPEgMf5RiSgmuxuUzDAVKGFoYnA5BWQUStnETdE+lbMDG8p517JAyst4kXYtfOWxQDbB7Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=URFzPikS; arc=none smtp.client-ip=209.85.208.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-58b0beaf703so5010208a12.2
+        for <linux-doc@vger.kernel.org>; Mon, 08 Jul 2024 09:04:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1720454642; x=1721059442; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=r/Nh20E7oiLudtA0FS0qlhX52m/6CLHQileRH4RyzWg=;
+        b=URFzPikS5R1yeCqZMErFXW/dv/vk5FWrGul9qMVs7Jr0BuCLIB9HriDK1miOiVWpAg
+         JIoWn7MuxSDrNTV5cEoIFuXaOsBKhEhfISYQyQY/uWY4lJG5SMF8qrrIpqVGHus7VTjM
+         LcfnvAt8waFAoCc6AUpf6EpEEWravCksyZnG0x0EhlXlo1XUOJ0xghWu+7weqjXvF1VJ
+         b9iWQnNJNQZ4BfqqOTjlLha3s6zgvWQDSMzmlpzpmNSRIg2+6d0EgLfCT0FlnvwxeVau
+         DLWu0V9R/D8VZi5tWqqqPFgzVMJYHSXvw2sLErViqljUKQ0a5ABVaHPtqKQQ0L6NkDJ+
+         va9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1720454642; x=1721059442;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=r/Nh20E7oiLudtA0FS0qlhX52m/6CLHQileRH4RyzWg=;
+        b=WaDDn3M5nxwZlURiRSZDYdSymJ/r66pC8sXo+GCl11lIgYwqPW6weH87JAhVPnkxqq
+         Oz7KUKmYhX2x9JcgO4P3bud3mC7y9j8xcdN7pZgwvE6lw7NoLWpDujn+o2VY8RaPRL6M
+         sL2q2516t3Pt6ac6lkyNf8lurW7BDGj8iR+OZuOZOWUUXpEJMcH8vdq8diVMOHK+WgAY
+         cxZEGzAP8iRdj9/mrMrobQTYzdive0Q81JZtiVwigXpbAiUe90O/1j4WoznMB3ZKUMTB
+         M7IupPQGqr5YFIbxJZ/rgb1YxEDBkmcW0R8+yrfakpBlFyIVzxt62jB0jRlaThYb2ORF
+         +KoA==
+X-Forwarded-Encrypted: i=1; AJvYcCXOnFdGOG+ljGSBWEArKFOBjnmxYN62KmACkH4om+vqbH+xr//2cxX8zNnAhUvfUAKUK4xcU19WskjkCwxDtoyl3eV0J8mk7XNM
+X-Gm-Message-State: AOJu0YxQ4QIAxqokFKtT76SCjz4MYy2wEWUjZv2CZ9frYjrMZf7wR9Vn
+	Jeh2UP2X459/ygJFnDycY/oaQLKRlOK4+gIxU0UXhsrWvgf20nIf+TK/OvgK/Xk=
+X-Google-Smtp-Source: AGHT+IHVj7SwwtCWqG3e/oHvkJvsv6UgptYMNeGBr1++0ZWNEn4UoPauERNteSei9ct3YpU1AQM7fQ==
+X-Received: by 2002:a05:6402:2353:b0:57c:c166:ba6 with SMTP id 4fb4d7f45d1cf-594bb58015cmr35695a12.19.1720454641745;
+        Mon, 08 Jul 2024 09:04:01 -0700 (PDT)
+Received: from localhost (109-81-92-226.rct.o2.cz. [109.81.92.226])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-594bc3efb13sm7321a12.42.2024.07.08.09.04.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 08 Jul 2024 09:04:01 -0700 (PDT)
+Date: Mon, 8 Jul 2024 18:04:00 +0200
+From: Michal Hocko <mhocko@suse.com>
+To: xiujianfeng <xiujianfeng@huawei.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>, tj@kernel.org,
+	lizefan.x@bytedance.com, hannes@cmpxchg.org, corbet@lwn.net,
+	cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+	Sidhartha Kumar <sidhartha.kumar@oracle.com>,
+	Miaohe Lin <linmiaohe@huawei.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>
+Subject: Re: [PATCH -next] mm/hugetlb_cgroup: introduce peak and rsvd.peak to
+ v2
+Message-ID: <ZowN8FvmdiEGr_rC@tiehlicka>
+References: <20240702125728.2743143-1-xiujianfeng@huawei.com>
+ <20240702185851.e85a742f3391857781368f6c@linux-foundation.org>
+ <6843023e-3e80-0c1c-6aab-b386ffebd668@huawei.com>
+ <20240703133804.1d8ddf90f738a7d546399b3b@linux-foundation.org>
+ <ZovgDfGFJdc6lVN3@tiehlicka>
+ <5ce7be39-ac42-98c9-65fc-589385b8f65b@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <5ce7be39-ac42-98c9-65fc-589385b8f65b@huawei.com>
 
-If neither of the flags to round down (V4L2_SEL_FLAG_LE) or round up
-(V4L2_SEL_FLAG_GE) are specified by the user, then round to nearest
-multiple of requested value while updating the crop rectangle coordinates.
+On Mon 08-07-24 21:40:39, xiujianfeng wrote:
+> 
+> 
+> On 2024/7/8 20:48, Michal Hocko wrote:
+> > On Wed 03-07-24 13:38:04, Andrew Morton wrote:
+> >> On Wed, 3 Jul 2024 10:45:56 +0800 xiujianfeng <xiujianfeng@huawei.com> wrote:
+> >>
+> >>>
+> >>>
+> >>> On 2024/7/3 9:58, Andrew Morton wrote:
+> >>>> On Tue, 2 Jul 2024 12:57:28 +0000 Xiu Jianfeng <xiujianfeng@huawei.com> wrote:
+> >>>>
+> >>>>> Introduce peak and rsvd.peak to v2 to show the historical maximum
+> >>>>> usage of resources, as in some scenarios it is necessary to configure
+> >>>>> the value of max/rsvd.max based on the peak usage of resources.
+> >>>>
+> >>>> "in some scenarios it is necessary" is not a strong statement.  It
+> >>>> would be helpful to fully describe these scenarios so that others can
+> >>>> better understand the value of this change.
+> >>>>
+> >>>
+> >>> Hi Andrew,
+> >>>
+> >>> Is the following description acceptable for you?
+> >>>
+> >>>
+> >>> Since HugeTLB doesn't support page reclaim, enforcing the limit at
+> >>> page fault time implies that, the application will get SIGBUS signal
+> >>> if it tries to fault in HugeTLB pages beyond its limit. Therefore the
+> >>> application needs to know exactly how many HugeTLB pages it uses before
+> >>> hand, and the sysadmin needs to make sure that there are enough
+> >>> available on the machine for all the users to avoid processes getting
+> >>> SIGBUS.
+> > 
+> > yes, this is pretty much a definition of hugetlb.
+> > 
+> >>> When running some open-source software, it may not be possible to know
+> >>> the exact amount of hugetlb it consumes, so cannot correctly configure
+> >>> the max value. If there is a peak metric, we can run the open-source
+> >>> software first and then configure the max based on the peak value.
+> > 
+> > I would push back on this. Hugetlb workloads pretty much require to know
+> > the number of hugetlb pages ahead of time. Because you need to
+> > preallocate them for the global hugetlb pool. What I am really missing
+> > in the above justification is an explanation of how come you know how to
+> > configure the global pool but you do not know that for a particular
+> > cgroup. How exactly do you configure the global pool then?
+> 
+> Yes, in this scenario, it's indeed challenging to determine the
+> appropriate size for the global pool. Therefore, a feasible approach is
+> to initially configure a larger value. Once the software is running
+> within the container successfully, the maximum value for the container
+> and the size of the system's global pool can be determined based on the
+> peak value, otherwise, increase the size of the global pool and try
+> again. so I believe the peak metric is useful for this scenario.
 
-Use the rounding macro which gives preference to rounding down in case two
-nearest values (high and low) are possible to raise the probability of
-cropping rectangle falling inside the bound region.
+This sounds really backwards to me. Not that I care much about peak
+value itself. It is not really anything disruptive to add nor maintain
+but this approach to configuring the system just feels completely wrong.
+You shouldn't be really using hugetlb cgroup controller if you do not
+have a very specific idea about expected and therefore allowed hugetlb
+pool consumption.
 
-This complies with the VIDIOC_G_SELECTION, VIDIOC_S_SELECTION ioctl
-description as documented in v4l uapi [1] which specifies that driver
-should choose crop rectangle as close as possible if no flags are passed by
-user-space, as quoted below :
-
-"``0`` - The driver can adjust the rectangle size freely and shall choose a
-crop/compose rectangle as close as possible to the requested
- one."
-
-Link: https://www.kernel.org/doc/Documentation/userspace-api/media/v4l/vidioc-g-selection.rst [1]
-Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
----
- drivers/media/platform/imagination/e5010-jpeg-enc.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/media/platform/imagination/e5010-jpeg-enc.c b/drivers/media/platform/imagination/e5010-jpeg-enc.c
-index 187f2d8abfbb..6c3687445803 100644
---- a/drivers/media/platform/imagination/e5010-jpeg-enc.c
-+++ b/drivers/media/platform/imagination/e5010-jpeg-enc.c
-@@ -514,10 +514,10 @@ static int e5010_s_selection(struct file *file, void *fh, struct v4l2_selection
- 
- 	switch (s->flags) {
- 	case 0:
--		s->r.width = round_down(s->r.width, queue->fmt->frmsize.step_width);
--		s->r.height = round_down(s->r.height, queue->fmt->frmsize.step_height);
--		s->r.left = round_down(s->r.left, queue->fmt->frmsize.step_width);
--		s->r.top = round_down(s->r.top, 2);
-+		s->r.width = round_closest_down(s->r.width, queue->fmt->frmsize.step_width);
-+		s->r.height = round_closest_down(s->r.height, queue->fmt->frmsize.step_height);
-+		s->r.left = round_closest_down(s->r.left, queue->fmt->frmsize.step_width);
-+		s->r.top = round_closest_down(s->r.top, 2);
- 
- 		if (s->r.left + s->r.width > queue->width)
- 			s->r.width = round_down(s->r.width + s->r.left - queue->width,
 -- 
-2.39.1
-
+Michal Hocko
+SUSE Labs
 
