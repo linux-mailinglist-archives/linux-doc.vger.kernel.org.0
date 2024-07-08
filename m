@@ -1,380 +1,296 @@
-Return-Path: <linux-doc+bounces-20191-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-20193-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id D99CE92A06E
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 12:43:33 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 268BA92A0DE
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 13:19:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 19221B25D46
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 10:43:10 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9B882282DE9
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 11:19:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C240B78C91;
-	Mon,  8 Jul 2024 10:42:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 99EBE7E0FF;
+	Mon,  8 Jul 2024 11:19:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="yEiMQMwQ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="j008E0SA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF26678C83;
-	Mon,  8 Jul 2024 10:42:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 619E57C6EB;
+	Mon,  8 Jul 2024 11:19:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1720435377; cv=none; b=JFsQIgn3Ir6PMdoI8zWH6hBf14kOpaBI9n2ROqHEaXfq3S9lz6h6BrsdceLyQEZ3dq74rd7n3UkWCu+1kxOYGnnU/MhqIYsT9unQoCKXAUUxCJ9qZzt0H1LLJL1OjaB8KghbyrwdyF2M92OHH/7TGs40WyRN4gBTedDS5AwS810=
+	t=1720437554; cv=none; b=HRL5E+ubJdRmxLDxtexZzq3J46wi1fDvDvNomcnbwQzflzdoNaLJ6ec1K7dFBjxMqM6r3FMnEzmA9Sg321dNMdeSUENiRMWflxiXO0fNv7JhYXMeQCfJpIt2U0hZ24Fu15VDV3Ci7/+dXa5xM0QibKb8YOmupPbqs531x6OYiU4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1720435377; c=relaxed/simple;
-	bh=vCeUQmPgqxtukThWhADI+8vHRpRJykLckYM30EHepIo=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=KxXB9jPoOF31o+yJRwAajbpjDXO5WqYEUbW0fgsHk48Mz+LisQolHCV50EOf4MJTrLZBZkEkSrgQ7cXlOCXwlrWAasmU6WzMfETkIUJAJN6Pg6kfi3iUd8Jc179+kpVvnknxKyTSx7C1DJ1KTce8KHdzAdmL3jA30zjsacuy6Ls=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=yEiMQMwQ; arc=none smtp.client-ip=148.163.135.77
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
-Received: from pps.filterd (m0167089.ppops.net [127.0.0.1])
-	by mx0a-00128a01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4686bAlr028878;
-	Mon, 8 Jul 2024 06:42:36 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=
-	content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=DKIM; bh=3Owtc
-	XWWSQ+Z8Fs/suyn40ABnNTiUpkXm7sco3k4P78=; b=yEiMQMwQniYks0T2PH6Bx
-	RvKVFVOilr+zYBCvgzNIOcprFWA2DuO95nQNQZUcpHUH9ceER30Ny6vrYW7GFnqg
-	pH4zd63kU3RBZaQiZejjHD/5L2RfB0Ra510xNwNNkqE8x9wF7PsPNzU0A2Qxed46
-	2iK2e5qRxINBrhb6vlggD3PQ72GkqYlE5MYzsDOdTSm5+GxbG6aVn/OK+DPCKTnE
-	rAcPKhUOYF+wjhG4t9WdcfUnk7EufiATJlCOvBB1jMLUDuAh1vjt4cQUd0EEHxRD
-	86GWxsaeArCDgD45/AmQG1Xl19lcaXGvHjulx1zN0QRV0qy+hU9UcbD398LdsbdZ
-	A==
-Received: from nwd2mta3.analog.com ([137.71.173.56])
-	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 4072u1ngt8-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 08 Jul 2024 06:42:35 -0400 (EDT)
-Received: from ASHBMBX9.ad.analog.com (ASHBMBX9.ad.analog.com [10.64.17.10])
-	by nwd2mta3.analog.com (8.14.7/8.14.7) with ESMTP id 468AgYcZ001265
-	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 8 Jul 2024 06:42:34 -0400
-Received: from ASHBMBX9.ad.analog.com (10.64.17.10) by ASHBMBX9.ad.analog.com
- (10.64.17.10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.14; Mon, 8 Jul 2024
- 06:42:33 -0400
-Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx9.ad.analog.com
- (10.64.17.10) with Microsoft SMTP Server id 15.2.986.14 via Frontend
- Transport; Mon, 8 Jul 2024 06:42:33 -0400
-Received: from amiclaus-VirtualBox.ad.analog.com (AMICLAUS-L02.ad.analog.com [10.48.65.159])
-	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 468AfZLK008375;
-	Mon, 8 Jul 2024 06:42:28 -0400
-From: Antoniu Miclaus <antoniu.miclaus@analog.com>
-To: Ramona Gradinariu <ramona.gradinariu@analog.com>,
-        Antoniu Miclaus
-	<antoniu.miclaus@analog.com>,
-        Lars-Peter Clausen <lars@metafoo.de>,
-        Michael
- Hennerich <Michael.Hennerich@analog.com>,
-        Jonathan Cameron
-	<jic23@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski
-	<krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet
-	<corbet@lwn.net>,
-        Matti Vaittinen <mazziesaccount@gmail.com>,
-        Jun Yan
-	<jerrysteve1101@gmail.com>,
-        Alexander Sverdlin
-	<alexander.sverdlin@siemens.com>,
-        Mario Limonciello
-	<mario.limonciello@amd.com>,
-        Mehdi Djait <mehdi.djait.k@gmail.com>, <linux-iio@vger.kernel.org>,
-        <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>
-Subject: [PATCH v5 3/3] docs: iio: add documentation for adxl380 driver
-Date: Mon, 8 Jul 2024 13:40:13 +0300
-Message-ID: <20240708104114.29894-3-antoniu.miclaus@analog.com>
+	s=arc-20240116; t=1720437554; c=relaxed/simple;
+	bh=oC15OE0ts5A8K/1eYAbJ9HeUTumGagQU0KI7p+3Ve5Y=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=UX2pW3c2k82B68tH5bEv1NGS6KUutxm4b7NUgk/mQ+jKFghm6alr5yty7r52QYN855FKM9KPh1GAksyKZB3T/QYOFmuY5Sn/55VU+YCDc3zjsP9DQVUi8XQRDlx6Tmupd/JhWkE3cyMyAwiqZ96OKVoZmTszzbhPV01bEtAt1Ns=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=j008E0SA; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 065E1C4AF0B;
+	Mon,  8 Jul 2024 11:19:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1720437554;
+	bh=oC15OE0ts5A8K/1eYAbJ9HeUTumGagQU0KI7p+3Ve5Y=;
+	h=From:To:Cc:Subject:Date:From;
+	b=j008E0SA6PnRAtXijxtSHd1socLvbD6CMjH91VFwjXsANbsNPdXBadj0t2q39yXS/
+	 pacNCVMlaz0jPfVxpymZ3c/aZtxejpg4R8CBUCPRQ2yntTeU+ForD4oYgqSqXkGZMd
+	 k/VtsiP0qwgA9PIzd91sDBX9RQSJdm4m6Na3kkgU6XG1Qu8amw5JpcxIcLtdTAqd9L
+	 CG65OvEfcp5aiiHcMUPAoJqDJheQIwBHpirFZjxM0uKaLJaTRn4/fS3BnuBVMTmrCN
+	 5AVAxBzjKu5KBKyu/AmX/cTZ3GDNLuhnzDbNgv3Z8YlMNby/9eJawzHHJOgNAGgGCz
+	 kmuc/UWEAeNlg==
+Received: from mchehab by mail.kernel.org with local (Exim 4.97.1)
+	(envelope-from <mchehab@kernel.org>)
+	id 1sQmOl-00000001SQW-28jU;
+	Mon, 08 Jul 2024 13:19:11 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Borislav Petkov <bp@alien8.de>,
+	Tony Luck <tony.luck@intel.com>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	James Morse <james.morse@arm.com>,
+	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+	Shiju Jose <shiju.jose@huawei.com>,
+	linux-efi@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-edac@vger.kernel.org,
+	Len Brown <lenb@kernel.org>,
+	linux-acpi@vger.kernel.org,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org
+Subject: [PATCH 0/6] Fix issues with ARM Processor CPER records
+Date: Mon,  8 Jul 2024 13:18:09 +0200
+Message-ID: <cover.1720436039.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240708104114.29894-1-antoniu.miclaus@analog.com>
-References: <20240708104114.29894-1-antoniu.miclaus@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ADIRuleOP-NewSCL: Rule Triggered
-X-Proofpoint-GUID: SGxlw3je1rznkUdjcQxLkC75vPMJbGWW
-X-Proofpoint-ORIG-GUID: SGxlw3je1rznkUdjcQxLkC75vPMJbGWW
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-07-08_05,2024-07-05_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0
- priorityscore=1501 impostorscore=0 lowpriorityscore=0 malwarescore=0
- adultscore=0 mlxscore=0 mlxlogscore=999 suspectscore=0 clxscore=1015
- spamscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2406140001 definitions=main-2407080083
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 
-Add documentation for adxl380 driver which describes the driver
-device files and shows how the user may use the ABI for various
-scenarios (configuration, measurement, etc.).
+This series replaces two previously-sent series:
+- https://lore.kernel.org/linux-edac/cover.1719219886.git.mchehab+huawei@kernel.org/T/#t
+- https://lore.kernel.org/linux-edac/cover.1719484498.git.mchehab+huawei@kernel.org/T/#t
 
-Signed-off-by: Ramona Gradinariu <ramona.gradinariu@analog.com>
-Signed-off-by: Antoniu Miclaus <antoniu.miclaus@analog.com>
----
-no changes in v5.
- Documentation/iio/adxl380.rst | 233 ++++++++++++++++++++++++++++++++++
- Documentation/iio/index.rst   |   1 +
- 2 files changed, 234 insertions(+)
- create mode 100644 Documentation/iio/adxl380.rst
+It is also available at:
 
-diff --git a/Documentation/iio/adxl380.rst b/Documentation/iio/adxl380.rst
-new file mode 100644
-index 000000000000..376dee5fe1dd
---- /dev/null
-+++ b/Documentation/iio/adxl380.rst
-@@ -0,0 +1,233 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===============
-+ADXL380 driver
-+===============
-+
-+This driver supports Analog Device's ADXL380/382 on SPI/I2C bus.
-+
-+1. Supported devices
-+====================
-+
-+* `ADXL380 <https://www.analog.com/ADXL380>`_
-+* `ADXL382 <https://www.analog.com/ADXL382>`_
-+
-+The ADXL380/ADXL382 is a low noise density, low power, 3-axis accelerometer with
-+selectable measurement ranges. The ADXL380 supports the ±4 g, ±8 g, and ±16 g
-+ranges, and the ADXL382 supports ±15 g, ±30 g, and ±60 g ranges.
-+
-+2. Device attributes
-+====================
-+
-+Accelerometer measurements are always provided.
-+
-+Temperature data are also provided. This data can be used to monitor the
-+internal system temperature or to improve the temperature stability of the
-+device via calibration.
-+
-+Each IIO device, has a device folder under ``/sys/bus/iio/devices/iio:deviceX``,
-+where X is the IIO index of the device. Under these folders reside a set of
-+device files, depending on the characteristics and features of the hardware
-+device in questions. These files are consistently generalized and documented in
-+the IIO ABI documentation.
-+
-+The following tables show the adxl380 related device files, found in the
-+specific device folder path ``/sys/bus/iio/devices/iio:deviceX``.
-+
-++---------------------------------------------------+----------------------------------------------------------+
-+| 3-Axis Accelerometer related device files         | Description                                              |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_scale                                    | Scale for the accelerometer channels.                    |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_filter_high_pass_3db_frequency           | Low pass filter bandwidth.                               |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_filter_high_pass_3db_frequency_available | Available low pass filter bandwidth configurations.      |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_filter_low_pass_3db_frequency            | High pass filter bandwidth.                              |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_filter_low_pass_3db_frequency_available  | Available high pass filter bandwidth configurations.     |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_x_calibbias                              | Calibration offset for the X-axis accelerometer channel. |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_x_raw                                    | Raw X-axis accelerometer channel value.                  |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_y_calibbias                              | y-axis acceleration offset correction                    |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_y_raw                                    | Raw Y-axis accelerometer channel value.                  |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_z_calibbias                              | Calibration offset for the Z-axis accelerometer channel. |
-++---------------------------------------------------+----------------------------------------------------------+
-+| in_accel_z_raw                                    | Raw Z-axis accelerometer channel value.                  |
-++---------------------------------------------------+----------------------------------------------------------+
-+
-++----------------------------------+--------------------------------------------+
-+| Temperature sensor related files | Description                                |
-++----------------------------------+--------------------------------------------+
-+| in_temp_raw                      | Raw temperature channel value.             |
-++----------------------------------+--------------------------------------------+
-+| in_temp_offset                   | Offset for the temperature sensor channel. |
-++----------------------------------+--------------------------------------------+
-+| in_temp_scale                    | Scale for the temperature sensor channel.  |
-++----------------------------------+--------------------------------------------+
-+
-++------------------------------+----------------------------------------------+
-+| Miscellaneous device files   | Description                                  |
-++------------------------------+----------------------------------------------+
-+| name                         | Name of the IIO device.                      |
-++------------------------------+----------------------------------------------+
-+| sampling_frequency           | Currently selected sample rate.              |
-++------------------------------+----------------------------------------------+
-+| sampling_frequency_available | Available sampling frequency configurations. |
-++------------------------------+----------------------------------------------+
-+
-+Channels processed values
-+-------------------------
-+
-+A channel value can be read from its _raw attribute. The value returned is the
-+raw value as reported by the devices. To get the processed value of the channel,
-+apply the following formula:
-+
-+.. code-block:: bash
-+
-+        processed value = (_raw + _offset) * _scale
-+
-+Where _offset and _scale are device attributes. If no _offset attribute is
-+present, simply assume its value is 0.
-+
-+The adis16475 driver offers data for 2 types of channels, the table below shows
-+the measurement units for the processed value, which are defined by the IIO
-+framework:
-+
-++-------------------------------------+---------------------------+
-+| Channel type                        | Measurement unit          |
-++-------------------------------------+---------------------------+
-+| Acceleration on X, Y, and Z axis    | Meters per Second squared |
-++-------------------------------------+---------------------------+
-+| Temperature                         | Millidegrees Celsius      |
-++-------------------------------------+---------------------------+
-+
-+Usage examples
-+--------------
-+
-+Show device name:
-+
-+.. code-block:: bash
-+
-+	root:/sys/bus/iio/devices/iio:device0> cat name
-+        adxl382
-+
-+Show accelerometer channels value:
-+
-+.. code-block:: bash
-+
-+        root:/sys/bus/iio/devices/iio:device0> cat in_accel_x_raw
-+        -1771
-+        root:/sys/bus/iio/devices/iio:device0> cat in_accel_y_raw
-+        282
-+        root:/sys/bus/iio/devices/iio:device0> cat in_accel_z_raw
-+        -1523
-+        root:/sys/bus/iio/devices/iio:device0> cat in_accel_scale
-+        0.004903325
-+
-+- X-axis acceleration = in_accel_x_raw * in_accel_scale = −8.683788575 m/s^2
-+- Y-axis acceleration = in_accel_y_raw * in_accel_scale = 1.38273765 m/s^2
-+- Z-axis acceleration = in_accel_z_raw * in_accel_scale = -7.467763975 m/s^2
-+
-+Set calibration offset for accelerometer channels:
-+
-+.. code-block:: bash
-+
-+        root:/sys/bus/iio/devices/iio:device0> cat in_accel_x_calibbias
-+        0
-+
-+        root:/sys/bus/iio/devices/iio:device0> echo 50 > in_accel_x_calibbias
-+        root:/sys/bus/iio/devices/iio:device0> cat in_accel_x_calibbias
-+        50
-+
-+Set sampling frequency:
-+
-+.. code-block:: bash
-+
-+	root:/sys/bus/iio/devices/iio:device0> cat sampling_frequency
-+        16000
-+        root:/sys/bus/iio/devices/iio:device0> cat sampling_frequency_available
-+        16000 32000 64000
-+
-+        root:/sys/bus/iio/devices/iio:device0> echo 32000 > sampling_frequency
-+        root:/sys/bus/iio/devices/iio:device0> cat sampling_frequency
-+        32000
-+
-+Set low pass filter bandwidth for accelerometer channels:
-+
-+.. code-block:: bash
-+
-+        root:/sys/bus/iio/devices/iio:device0> cat in_accel_filter_low_pass_3db_frequency
-+        32000
-+        root:/sys/bus/iio/devices/iio:device0> cat in_accel_filter_low_pass_3db_frequency_available
-+        32000 8000 4000 2000
-+
-+        root:/sys/bus/iio/devices/iio:device0> echo 2000 > in_accel_filter_low_pass_3db_frequency
-+        root:/sys/bus/iio/devices/iio:device0> cat in_accel_filter_low_pass_3db_frequency
-+        2000
-+
-+3. Device buffers
-+=================
-+
-+This driver supports IIO buffers.
-+
-+All devices support retrieving the raw acceleration and temperature measurements
-+using buffers.
-+
-+Usage examples
-+--------------
-+
-+Select channels for buffer read:
-+
-+.. code-block:: bash
-+
-+        root:/sys/bus/iio/devices/iio:device0> echo 1 > scan_elements/in_accel_x_en
-+        root:/sys/bus/iio/devices/iio:device0> echo 1 > scan_elements/in_accel_y_en
-+        root:/sys/bus/iio/devices/iio:device0> echo 1 > scan_elements/in_accel_z_en
-+        root:/sys/bus/iio/devices/iio:device0> echo 1 > scan_elements/in_temp_en
-+
-+Set the number of samples to be stored in the buffer:
-+
-+.. code-block:: bash
-+
-+        root:/sys/bus/iio/devices/iio:device0> echo 10 > buffer/length
-+
-+Enable buffer readings:
-+
-+.. code-block:: bash
-+
-+        root:/sys/bus/iio/devices/iio:device0> echo 1 > buffer/enable
-+
-+Obtain buffered data:
-+
-+.. code-block:: bash
-+
-+        root:/sys/bus/iio/devices/iio:device0> hexdump -C /dev/iio\:device0
-+        ...
-+        002bc300  f7 e7 00 a8 fb c5 24 80  f7 e7 01 04 fb d6 24 80  |......$.......$.|
-+        002bc310  f7 f9 00 ab fb dc 24 80  f7 c3 00 b8 fb e2 24 80  |......$.......$.|
-+        002bc320  f7 fb 00 bb fb d1 24 80  f7 b1 00 5f fb d1 24 80  |......$...._..$.|
-+        002bc330  f7 c4 00 c6 fb a6 24 80  f7 a6 00 68 fb f1 24 80  |......$....h..$.|
-+        002bc340  f7 b8 00 a3 fb e7 24 80  f7 9a 00 b1 fb af 24 80  |......$.......$.|
-+        002bc350  f7 b1 00 67 fb ee 24 80  f7 96 00 be fb 92 24 80  |...g..$.......$.|
-+        002bc360  f7 ab 00 7a fc 1b 24 80  f7 b6 00 ae fb 76 24 80  |...z..$......v$.|
-+        002bc370  f7 ce 00 a3 fc 02 24 80  f7 c0 00 be fb 8b 24 80  |......$.......$.|
-+        002bc380  f7 c3 00 93 fb d0 24 80  f7 ce 00 d8 fb c8 24 80  |......$.......$.|
-+        002bc390  f7 bd 00 c0 fb 82 24 80  f8 00 00 e8 fb db 24 80  |......$.......$.|
-+        002bc3a0  f7 d8 00 d3 fb b4 24 80  f8 0b 00 e5 fb c3 24 80  |......$.......$.|
-+        002bc3b0  f7 eb 00 c8 fb 92 24 80  f7 e7 00 ea fb cb 24 80  |......$.......$.|
-+        002bc3c0  f7 fd 00 cb fb 94 24 80  f7 e3 00 f2 fb b8 24 80  |......$.......$.|
-+        ...
-+
-+See ``Documentation/iio/iio_devbuf.rst`` for more information about how buffered
-+data is structured.
-+
-+4. IIO Interfacing Tools
-+========================
-+
-+See ``Documentation/iio/iio_tools.rst`` for the description of the available IIO
-+interfacing tools.
-diff --git a/Documentation/iio/index.rst b/Documentation/iio/index.rst
-index 9cb4c50cb20d..e84957ccdb2e 100644
---- a/Documentation/iio/index.rst
-+++ b/Documentation/iio/index.rst
-@@ -21,5 +21,6 @@ Industrial I/O Kernel Drivers
-    ad7944
-    adis16475
-    adis16480
-+   adxl380
-    bno055
-    ep93xx_adc
+	https://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-edac.git/log/?h=edac-arm64
+
+This is needed for both kernelspace and userspace properly handle ARM processor CPER
+events.
+
+Patches 1 and 2 of this series fix the UEFI 2.6+ implementation of the ARM 
+trace event, as the original implementation was incomplete.
+Changeset e9279e83ad1f ("trace, ras: add ARM processor error trace event")
+added such event, but it reports only some fields of the CPER record
+defined on UEFI 2.6+ appendix N, table N.16.  Those are not enough 
+actually parse such events on userspace, as not even the event type
+is exported.
+
+Patch 3 fixes a compilation breakage when W=1;
+
+Patch 4 adds a new helper function to be used by cper and ghes drivers to
+display CPER bitmaps;
+
+Patch 5 fixes CPER logic according with UEFI 2.9A errata. Before it, there
+was no description about how processor type field was encoded. The errata
+defines it as a bitmask, and provides the information about how it should
+be encoded.
+
+Patch 6 adds CPER functions to Kernel-doc.
+
+This series was validated with the help of an ARM EINJ code for QEMU:
+
+	https://github.com/mchehab/rasdaemon/wiki/error-injection
+
+Using the QEMU injection code at:
+
+   https://gitlab.com/mchehab_kernel/qemu/-/commits/arm-error-inject-v2?ref_type=heads
+
+Running it on QEMU and sending those commands via QEMU QMP interface:
+
+    { "execute": "qmp_capabilities" } 
+    { "execute": "arm-inject-error", "arguments": {
+	"validation": ["mpidr-valid", "affinity-valid", "running-state-valid", "vendor-specific-valid"],
+	"running-state": [], "psci-state": 1229279264, "error": [
+	{"type": ["tlb-error", "bus-error", "micro-arch-error"], "multiple-error": 2}, 
+	{"type": ["micro-arch-error"]},
+	{"type": ["tlb-error"]}, 
+	{"type": ["bus-error"]}, 
+	{"type": ["cache-error"]}]} }
+
+The CPER event is now properly handled:
+
+[   53.223383] {1}[Hardware Error]: event severity: recoverable
+[   53.223690] {1}[Hardware Error]:  Error 0, type: recoverable
+[   53.224073] {1}[Hardware Error]:   section_type: ARM processor error
+[   53.224419] {1}[Hardware Error]:   MIDR: 0x0000000000000000
+[   53.224694] {1}[Hardware Error]:   Multiprocessor Affinity Register (MPIDR): 0x0000000080000000
+[   53.225029] {1}[Hardware Error]:   error affinity level: 2
+[   53.225266] {1}[Hardware Error]:   running state: 0x0
+[   53.225516] {1}[Hardware Error]:   Power State Coordination Interface state: 1229279264
+[   53.225857] {1}[Hardware Error]:   Error info structure 0:
+[   53.226094] {1}[Hardware Error]:   num errors: 3
+[   53.226317] {1}[Hardware Error]:    first error captured
+[   53.226548] {1}[Hardware Error]:    propagated error captured
+[   53.226806] {1}[Hardware Error]:    overflow occurred, error info is incomplete
+[   53.227180] {1}[Hardware Error]:    error_type: 0x1c: TLB error|bus error|micro-architectural error
+[   53.227549] {1}[Hardware Error]:    error_info: 0x000000000054007f
+[   53.227819] {1}[Hardware Error]:    virtual fault address: 0x0000000067320230
+[   53.228106] {1}[Hardware Error]:    physical fault address: 0x000000005cdfd492
+[   53.228403] {1}[Hardware Error]:   Error info structure 1:
+[   53.228636] {1}[Hardware Error]:   num errors: 3
+[   53.228840] {1}[Hardware Error]:    first error captured
+[   53.229061] {1}[Hardware Error]:    propagated error captured
+[   53.229296] {1}[Hardware Error]:    overflow occurred, error info is incomplete
+[   53.229577] {1}[Hardware Error]:    error_type: 0x10: micro-architectural error
+[   53.229873] {1}[Hardware Error]:    error_info: 0x0000000078da03ff
+[   53.230130] {1}[Hardware Error]:    virtual fault address: 0x0000000067320230
+[   53.230412] {1}[Hardware Error]:    physical fault address: 0x000000005cdfd492
+[   53.230694] {1}[Hardware Error]:   Error info structure 2:
+[   53.230924] {1}[Hardware Error]:   num errors: 3
+[   53.231128] {1}[Hardware Error]:    first error captured
+[   53.231349] {1}[Hardware Error]:    propagated error captured
+[   53.231582] {1}[Hardware Error]:    overflow occurred, error info is incomplete
+[   53.231863] {1}[Hardware Error]:    error_type: 0x04: TLB error
+[   53.232116] {1}[Hardware Error]:    error_info: 0x000000000054007f
+[   53.232396] {1}[Hardware Error]:     transaction type: Instruction
+[   53.232686] {1}[Hardware Error]:     TLB error, operation type: Instruction fetch
+[   53.232998] {1}[Hardware Error]:     TLB level: 1
+[   53.233215] {1}[Hardware Error]:     processor context not corrupted
+[   53.233479] {1}[Hardware Error]:     the error has not been corrected
+[   53.233740] {1}[Hardware Error]:     PC is imprecise
+[   53.233974] {1}[Hardware Error]:    virtual fault address: 0x0000000067320230
+[   53.234264] {1}[Hardware Error]:    physical fault address: 0x000000005cdfd492
+[   53.234547] {1}[Hardware Error]:   Error info structure 3:
+[   53.234776] {1}[Hardware Error]:   num errors: 3
+[   53.234980] {1}[Hardware Error]:    first error captured
+[   53.235199] {1}[Hardware Error]:    propagated error captured
+[   53.235433] {1}[Hardware Error]:    overflow occurred, error info is incomplete
+[   53.235714] {1}[Hardware Error]:    error_type: 0x08: bus error
+[   53.235966] {1}[Hardware Error]:    error_info: 0x00000080d6460fff
+[   53.236223] {1}[Hardware Error]:     transaction type: Generic
+[   53.236478] {1}[Hardware Error]:     bus error, operation type: Generic read (type of instruction or data request cannot be determined)
+[   53.236923] {1}[Hardware Error]:     affinity level at which the bus error occurred: 1
+[   53.237234] {1}[Hardware Error]:     processor context corrupted
+[   53.237481] {1}[Hardware Error]:     the error has been corrected
+[   53.237728] {1}[Hardware Error]:     PC is imprecise
+[   53.237937] {1}[Hardware Error]:     Program execution can be restarted reliably at the PC associated with the error.
+[   53.238329] {1}[Hardware Error]:     participation type: Local processor observed
+[   53.238627] {1}[Hardware Error]:     request timed out
+[   53.238851] {1}[Hardware Error]:     address space: External Memory Access
+[   53.239129] {1}[Hardware Error]:     memory access attributes:0x20
+[   53.239393] {1}[Hardware Error]:     access mode: secure
+[   53.239613] {1}[Hardware Error]:    virtual fault address: 0x0000000067320230
+[   53.239890] {1}[Hardware Error]:    physical fault address: 0x000000005cdfd492
+[   53.240168] {1}[Hardware Error]:   Error info structure 4:
+[   53.240396] {1}[Hardware Error]:   num errors: 3
+[   53.240601] {1}[Hardware Error]:    first error captured
+[   53.240816] {1}[Hardware Error]:    propagated error captured
+[   53.241048] {1}[Hardware Error]:    overflow occurred, error info is incomplete
+[   53.241332] {1}[Hardware Error]:    error_type: 0x02: cache error
+[   53.241589] {1}[Hardware Error]:    error_info: 0x000000000091000f
+[   53.241843] {1}[Hardware Error]:     transaction type: Data Access
+[   53.242101] {1}[Hardware Error]:     cache error, operation type: Data write
+[   53.242385] {1}[Hardware Error]:     cache level: 2
+[   53.242596] {1}[Hardware Error]:     processor context not corrupted
+[   53.242847] {1}[Hardware Error]:    virtual fault address: 0x0000000067320230
+[   53.243125] {1}[Hardware Error]:    physical fault address: 0x000000005cdfd492
+[   53.243426] {1}[Hardware Error]:   Context info structure 0:
+[   53.243675] {1}[Hardware Error]:    register context type: AArch64 EL1 context registers
+[   53.244185] {1}[Hardware Error]:    00000000: 12abde67 00000000 00000000 00000000
+[   53.244540] {1}[Hardware Error]:    00000010: 00000000 00000000 00000000 00000000
+[   53.244864] {1}[Hardware Error]:    00000020: 00000000 00000000 00000000 00000000
+[   53.245183] {1}[Hardware Error]:    00000030: 00000000 00000000 00000000 00000000
+[   53.245504] {1}[Hardware Error]:    00000040: 00000000 00000000 00000000 00000000
+[   53.245828] {1}[Hardware Error]:    00000050: 00000000 00000000 00000000 00000000
+[   53.246149] {1}[Hardware Error]:    00000060: 00000000 00000000 00000000 00000000
+[   53.246475] {1}[Hardware Error]:    00000070: 00000000 00000000 00000000 00000000
+[   53.246799] {1}[Hardware Error]:    00000080: 00000000 00000000 00000000 00000000
+[   53.247122] {1}[Hardware Error]:    00000090: 00000000 00000000 00000000 00000000
+[   53.247446] {1}[Hardware Error]:    000000a0: 00000000 00000000 00000000 00000000
+[   53.247767] {1}[Hardware Error]:    000000b0: 00000000 00000000 00000000 00000000
+[   53.248090] {1}[Hardware Error]:    000000c0: 00000000 00000000 00000000 00000000
+[   53.248415] {1}[Hardware Error]:    000000d0: 00000000 00000000 00000000 00000000
+[   53.248739] {1}[Hardware Error]:    000000e0: 00000000 00000000 00000000 00000000
+[   53.249064] {1}[Hardware Error]:    000000f0: 00000000 00000000 00000000 00000000
+[   53.249398] {1}[Hardware Error]:    00000100: 00000000 00000000 00000000 00000000
+[   53.249727] {1}[Hardware Error]:    00000110: 00000000 00000000 00000000 00000000
+[   53.250053] {1}[Hardware Error]:    00000120: 00000000 00000000 00000000 00000000
+[   53.250377] {1}[Hardware Error]:    00000130: 00000000 00000000 00000000 00000000
+[   53.250700] {1}[Hardware Error]:    00000140: 00000000 00000000 00000000 00000000
+[   53.251038] {1}[Hardware Error]:    00000150: 00000000 00000000 00000000 00000000
+[   53.251368] {1}[Hardware Error]:    00000160: 00000000 00000000 00000000 00000000
+[   53.251694] {1}[Hardware Error]:    00000170: 00000000 00000000 00000000 00000000
+[   53.252017] {1}[Hardware Error]:    00000180: 00000000 00000000 00000000 00000000
+[   53.252342] {1}[Hardware Error]:    00000190: 00000000 00000000 00000000 00000000
+[   53.252664] {1}[Hardware Error]:    000001a0: 00000000 00000000 00000000 00000000
+[   53.252984] {1}[Hardware Error]:    000001b0: 00000000 00000000 00000000 00000000
+[   53.253309] {1}[Hardware Error]:    000001c0: 00000000 00000000 00000000 00000000
+[   53.253630] {1}[Hardware Error]:    000001d0: 00000000 00000000 00000000 00000000
+[   53.253949] {1}[Hardware Error]:    000001e0: 00000000 00000000 00000000 00000000
+[   53.254273] {1}[Hardware Error]:    000001f0: 00000000 00000000 00000000 00000000
+[   53.254595] {1}[Hardware Error]:    00000200: 00000000 00000000 00000000 00000000
+[   53.254917] {1}[Hardware Error]:    00000210: 00000000 00000000 00000000 00000000
+[   53.255245] {1}[Hardware Error]:    00000220: 00000000 00000000 00000000 00000000
+[   53.255569] {1}[Hardware Error]:    00000230: 00000000 00000000 00000000 00000000
+[   53.255890] {1}[Hardware Error]:    00000240: 00000000 00000000 00000000 00000000
+[   53.256794] [Firmware Warn]: GHES: Unhandled processor error type 0x1c: TLB error|bus error|micro-architectural error
+[   53.257203] [Firmware Warn]: GHES: Unhandled processor error type 0x10: micro-architectural error
+[   53.257543] [Firmware Warn]: GHES: Unhandled processor error type 0x04: TLB error
+[   53.257842] [Firmware Warn]: GHES: Unhandled processor error type 0x08: bus error
+
+- 
+
+I also tested the ghes and cper reports both with and without this
+change, using different versions of rasdaemon, with and without 
+support for the extended trace event. Those are a summary of the
+test results:
+
+- adding more fields to the trace events didn't break userspace API:
+  both versions of rasdaemon handled it;
+
+- the rasdaemon patches to handle the new trace report was missing
+  a backward-compatibility logic. I fixed already. So, rasdaemon
+  can now handle both old and new trace events.
+
+Btw, rasdaemon has gained support for the extended trace since its
+version 0.5.8 (released in 2021). I didn't saw any issues there
+complain about troubles on it, so either distros used on ARM servers
+are using an old version of rasdaemon, or they're carrying on the trace
+event changes as well.
+
+Daniel Ferguson (1):
+  RAS: ACPI: APEI: add conditional compilation to ARM error report
+    functions
+
+Mauro Carvalho Chehab (4):
+  efi/cper: Adjust infopfx size to accept an extra space
+  efi/cper: Add a new helper function to print bitmasks
+  efi/cper: align ARM CPER type with UEFI 2.9A/2.10 specs
+  docs: efi: add CPER functions to driver-api
+
+Shengwei Luo (1):
+  RAS: Report all ARM processor CPER information to userspace
+
+ .../driver-api/firmware/efi/index.rst         | 11 ++--
+ drivers/acpi/apei/ghes.c                      | 31 +++++------
+ drivers/firmware/efi/cper-arm.c               | 52 +++++++++----------
+ drivers/firmware/efi/cper.c                   | 43 ++++++++++++++-
+ drivers/ras/ras.c                             | 47 ++++++++++++++++-
+ include/linux/cper.h                          | 12 +++--
+ include/linux/ras.h                           | 16 ++++--
+ include/ras/ras_event.h                       | 48 +++++++++++++++--
+ 8 files changed, 198 insertions(+), 62 deletions(-)
+
 -- 
 2.45.2
+
 
 
