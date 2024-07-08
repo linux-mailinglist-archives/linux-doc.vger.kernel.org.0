@@ -1,123 +1,120 @@
-Return-Path: <linux-doc+bounces-20221-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-20223-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id A706492A66F
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 17:58:07 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1337092A69C
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 18:01:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 531AA1F21D4D
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 15:58:07 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 43B951C22026
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2024 16:01:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 09F3A152786;
-	Mon,  8 Jul 2024 15:54:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B66DE1474DA;
+	Mon,  8 Jul 2024 16:00:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UKGmbJG/"
+	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="GuAFNxQt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C750115253B;
-	Mon,  8 Jul 2024 15:54:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB9EF13C67D;
+	Mon,  8 Jul 2024 16:00:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.47.23.248
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1720454049; cv=none; b=Lbsyjndbh1jK6yEMpdB6UV0da/Ukv9aUX0Q9MCd8g+trlWpx5lASIwLvEgopLkJ4tGG3HAPA23C00Qlk0WgEWVkMpL6mY5/WsmZUP6xe9tPqqoU5dmyBzsOudtZZs7LR/+4FsrEzMV2du2VRJ4K02ybddMvRe5/y8oZsk5jjbf4=
+	t=1720454411; cv=none; b=q5Apa2Hu/vjqskoJg6ebiHs1Xu/83y5+rtvT4QblsDaRQoTTMikFZBcsqF4YzXOPLnIZ2/+prWh4HCSAWc4WR+9mjGuZq1c4hA4oWZRH5rm34GI5FM0uNynY4iUUD0hYDraTmIS1mf662Jr9tbIxHw209XknG1F2zSOVpFlVFe8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1720454049; c=relaxed/simple;
-	bh=pHEQop1T1fiyamd9jcpDhT/4UZTaEZSdDGTRt6fHlCQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=pProLFYyJcMk9tKQ6Ysv7W6yOuCABZdT0rgyfEs5x6+21JBGPo9D7ld0xHFZZc5xj9L6uSsxp9lC2eamXiV0D+m4pWUEsmpxcnR18iTMTcKr/dFE223o/18K9+ldaGw9i5G1/STJhxHaxA8wAajwcFsAP0EsDEbASQSlz+wTgpk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UKGmbJG/; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB567C116B1;
-	Mon,  8 Jul 2024 15:54:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1720454049;
-	bh=pHEQop1T1fiyamd9jcpDhT/4UZTaEZSdDGTRt6fHlCQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=UKGmbJG/7ixB3W/bGJpEZHxm4Uec9QfxZrgFj7++PEuKgl87p3bp8kWMv6leWLkSL
-	 SVE0ZwRWnyuoBKzcBAsY3hxdEa0X62Miv77RfoVOdaXSkuwwXlhguWYSVRCWyNSR8w
-	 UqoXJK6nxT/+k+DVz/Gl3FaKt6L25Cz9EQCL5H/2V/kCaXMFeFETwv0moyo4jhoEX4
-	 t/GJxOCYUspDoZ2uG4F5c2jWw9oAwJGe+MWpZhRyY2YBRCjpOE3bHMVzXy3RGvcUua
-	 XA3VRpPMWHL8cD2MZY1fzsiDd6vNFGncezD7lV3qig4l7B5Ga6JVX4VgJuYhxQ3ZER
-	 Zj6EIUg8C99vQ==
-From: Jeff Layton <jlayton@kernel.org>
-Date: Mon, 08 Jul 2024 11:53:42 -0400
-Subject: [PATCH v4 9/9] tmpfs: add support for multigrain timestamps
+	s=arc-20240116; t=1720454411; c=relaxed/simple;
+	bh=ZQbTkaBr2DOoUJe1drOkDZl3IrtY8+Zz0OkM0BQHeC8=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=TgRtegoQCuUNZBh/epaftpzUiMJ5cNS0AONyoyuteuR8OsNfCjwiCckkSuHEF0ExLGV2hUBeYMxPFJZ32Kgdvpsxtaemix2AlZH9IdE7lqI4Ald5hs2LLq4KJTxk8lHQPM8+uNihX1LtFDkD8MhbkrXyomTA2tfYLYeVcTpZWvg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=GuAFNxQt; arc=none smtp.client-ip=198.47.23.248
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 468FxiSK079666;
+	Mon, 8 Jul 2024 10:59:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1720454384;
+	bh=QkURj1joryyxKfydPczK0vpjAuNzFSZp9U/Qg34mdC0=;
+	h=From:To:CC:Subject:Date;
+	b=GuAFNxQtFxCBsc7Psy96CHyQJ8GG/m/uMfFjpLHfMVLsulfIpDT0Bxw0mgty+q3C3
+	 7n/0qNQM7Id6JUHUcIxiIMop2cxs0tOp12ague3Sv0LfDERm+DO4robvzM55fm1iOa
+	 3FnY69pjAHWBTtcUEMpyN4V0ucNIgcfwjFtxOPHc=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 468FxiQV051938
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 8 Jul 2024 10:59:44 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
+ Jul 2024 10:59:44 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 8 Jul 2024 10:59:44 -0500
+Received: from localhost (ti.dhcp.ti.com [172.24.227.95] (may be forged))
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 468FxhEX103421;
+	Mon, 8 Jul 2024 10:59:44 -0500
+From: Devarsh Thakkar <devarsht@ti.com>
+To: <mchehab@kernel.org>, <hverkuil-cisco@xs4all.nl>,
+        <linux-media@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <sebastian.fricke@collabora.com>, <andriy.shevchenko@linux.intel.com>,
+        <jani.nikula@intel.com>, <jirislaby@kernel.org>, <corbet@lwn.net>,
+        <broonie@kernel.org>, <rdunlap@infradead.org>,
+        <linux-doc@vger.kernel.org>
+CC: <laurent.pinchart@ideasonboard.com>, <praneeth@ti.com>, <nm@ti.com>,
+        <vigneshr@ti.com>, <a-bhatia1@ti.com>, <j-luthra@ti.com>,
+        <b-brnich@ti.com>, <detheridge@ti.com>, <p-mantena@ti.com>,
+        <vijayp@ti.com>, <devarsht@ti.com>, <andi.shyti@linux.intel.com>,
+        <nicolas@ndufresne.ca>, <davidgow@google.com>, <dlatypov@google.com>
+Subject: [PATCH 0/6] Add rounding macros and enable KUnit tests
+Date: Mon, 8 Jul 2024 21:29:37 +0530
+Message-ID: <20240708155943.2314427-1-devarsht@ti.com>
+X-Mailer: git-send-email 2.39.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240708-mgtime-v4-9-a0f3c6fb57f3@kernel.org>
-References: <20240708-mgtime-v4-0-a0f3c6fb57f3@kernel.org>
-In-Reply-To: <20240708-mgtime-v4-0-a0f3c6fb57f3@kernel.org>
-To: Alexander Viro <viro@zeniv.linux.org.uk>, 
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
- Steven Rostedt <rostedt@goodmis.org>, 
- Masami Hiramatsu <mhiramat@kernel.org>, 
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
- Chandan Babu R <chandan.babu@oracle.com>, 
- "Darrick J. Wong" <djwong@kernel.org>, Theodore Ts'o <tytso@mit.edu>, 
- Andreas Dilger <adilger.kernel@dilger.ca>, Chris Mason <clm@fb.com>, 
- Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, 
- Hugh Dickins <hughd@google.com>, Andrew Morton <akpm@linux-foundation.org>, 
- Jonathan Corbet <corbet@lwn.net>
-Cc: Dave Chinner <david@fromorbit.com>, Andi Kleen <ak@linux.intel.com>, 
- Christoph Hellwig <hch@infradead.org>, Uros Bizjak <ubizjak@gmail.com>, 
- Kent Overstreet <kent.overstreet@linux.dev>, kernel-team@fb.com, 
- linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-trace-kernel@vger.kernel.org, linux-xfs@vger.kernel.org, 
- linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-mm@kvack.org, 
- linux-nfs@vger.kernel.org, linux-doc@vger.kernel.org, 
- Jeff Layton <jlayton@kernel.org>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=775; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=pHEQop1T1fiyamd9jcpDhT/4UZTaEZSdDGTRt6fHlCQ=;
- b=owEBbQKS/ZANAwAIAQAOaEEZVoIVAcsmYgBmjAuElSf4XFk52fOEHI6qnk5nkcaimuSsPCsyx
- xjkO5P9aUmJAjMEAAEIAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCZowLhAAKCRAADmhBGVaC
- FesvEADXYZRR3EQySwlhPXaMFRM3Jq6pfSUAjqchFJ5ZK46/YfRIrrnfJ4JbxYnbmshpJcBbFpR
- 0/5Av6Pr9UhcqUkFzuoN+lTegRgHwDiMg9lrS8JZ+RlrxJ/mI1jSkec7pdJeCA1o+uEspCwJlVV
- l2Cm9Wm5OJidm0vx4cGXlLZzmA4IHAdkNfWh2OXgnzFFtS0l40kW+3PF0/WGTPKccPdHhD862y6
- aGl4SZcQo2KyHwKsueuBZ4tdmXuTa0JkEAbMT4bH3FxqToAIDJA4U0MF44gKItQuNoJ2ZaL2Q80
- a3i190J0Loaigui6n9Cpypmy9nDd74qzubrfpMJbIqFWEwRZmDlHfRnv7nbY871QEYQ4xpJ3ili
- ceNhjnXNEO+drx5Re8ocxYDKT6KguzKI/aKc2WahemLhWKP7yaspe4q9VcpmjmlwAgf5tUCteyd
- vL0qw+tr6LTcIURjivpx/9GIxekvsxkhqUC8fzHzoPesyDiTUDc40q83qFeo7qhD1gSz4BEHkE9
- 0xREDDycM33VqUVh2mPB/yAqqTCv4QDPuSl6S7UbBkaTsKVuI4Ib3fx3f0H3D85+gcTUpsfJwua
- sVJEZzud7NP7tgknaFzBM7ymq8J2fUaKNM/KfI0Xna2HmKe/3idcid7UzQ8mWcD7n4ta6cF7NGN
- kEUJE/n2ZdSh2Sg==
-X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
- fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 
-Enable multigrain timestamps, which should ensure that there is an
-apparent change to the timestamp whenever it has been written after
-being actively observed via getattr.
+This adds new rounding macros to round to closest integer along with
+enabling KUnit tests for all math.h macros.  It also updates kernel-doc to
+render math.h related documentation and lastly updates the imagination jpeg
+encoder to use the newly introduced rounding macros to find nearest value.
 
-tmpfs only requires the FS_MGTIME flag.
+Also to note that math.h is orphaned and so these changes need
+to be pulled by subsystem using it as a first as discussed in below
+threads:
 
-Signed-off-by: Jeff Layton <jlayton@kernel.org>
----
- mm/shmem.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Link:
+https://lore.kernel.org/all/1db64af7-3688-4bcc-a671-9440d8f02d1a@xs4all.nl/
+https://lore.kernel.org/all/ZmHDWeuezCEgj20m@smile.fi.intel.com/
 
-diff --git a/mm/shmem.c b/mm/shmem.c
-index 440e2a9d8726..6dc817064140 100644
---- a/mm/shmem.c
-+++ b/mm/shmem.c
-@@ -4649,7 +4649,7 @@ static struct file_system_type shmem_fs_type = {
- 	.parameters	= shmem_fs_parameters,
- #endif
- 	.kill_sb	= kill_litter_super,
--	.fs_flags	= FS_USERNS_MOUNT | FS_ALLOW_IDMAP,
-+	.fs_flags	= FS_USERNS_MOUNT | FS_ALLOW_IDMAP | FS_MGTIME,
- };
- 
- void __init shmem_init(void)
+Daniel Latypov (1):
+  lib: Add basic KUnit test for lib/math
+
+Devarsh Thakkar (5):
+  math.h: Add macros for rounding to closest value
+  math.h: Use kernel-doc syntax for divison macros
+  Documentation: core-api: Add math.h macros and functions
+  lib: math_kunit: Add tests for new macros related to rounding to
+    nearest value
+  media: imagination: Round to closest multiple for cropping region
+
+ Documentation/core-api/kernel-api.rst         |   6 +
+ .../platform/imagination/e5010-jpeg-enc.c     |   8 +-
+ include/linux/math.h                          |  86 ++++-
+ lib/math/Kconfig                              |  14 +
+ lib/math/Makefile                             |   1 +
+ lib/math/math_kunit.c                         | 329 ++++++++++++++++++
+ 6 files changed, 434 insertions(+), 10 deletions(-)
+ create mode 100644 lib/math/math_kunit.c
 
 -- 
-2.45.2
+2.39.1
 
 
