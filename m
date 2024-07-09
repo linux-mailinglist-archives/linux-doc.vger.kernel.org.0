@@ -1,329 +1,260 @@
-Return-Path: <linux-doc+bounces-20296-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-20298-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5689792BC34
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2024 15:57:37 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AB2392BCF2
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2024 16:31:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9B20BB27056
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2024 13:57:34 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7A7EC1C22163
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2024 14:31:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C37E193062;
-	Tue,  9 Jul 2024 13:54:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 587FE15749F;
+	Tue,  9 Jul 2024 14:31:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="HQl5EBvY"
+	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="h9recBh0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C21EE192B71;
-	Tue,  9 Jul 2024 13:54:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81CD4358A7;
+	Tue,  9 Jul 2024 14:31:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.47.19.142
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1720533261; cv=none; b=JhM6uSlFjhTg7ki+0GWsbPSqZwpbBbpv/I944JBbG47SvwJWqh0LxP5G7DdXHY++JyIZNo+w3f670aJ9VisqiKSZRozGT4pta2v919y32iYsM34Nn/ru1rE7303cbyPjYlJef4QNZLBNdOhd6EXl/Q8e0UmrWuKrWlzqTscYaRA=
+	t=1720535496; cv=none; b=V/VeRwMtbEggqgEMNUtsqCxqGSK24WsKFo8lTJ6Ao4DgHQxxYjau0SN6zCm4k8iGFqKCOx/WlTS0W8HaLwdQNKD080tGAArYoJubmmlaT8KONdhFpl7/w56fJ9nKeVicbOc5RDsc12u5v7fJVJsidt9xvUrR502XGWXIr9saBz8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1720533261; c=relaxed/simple;
-	bh=U/rrxL89230dfCn1N7xyO76Wb3rr5XDLFItX8MIGiuM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=pcMQEOJAP5BvhuEcSPP61Nfm0qCa1OjgXe95H3Fg2r48+lUUbwGdpCA01gyrDyiNoKWjIadaJoiSSjo+dT311kjFDAlizSGFRw9PCW8g/aOMQXaoael4O2R8Z9mhLNdjjbOYSx6kXeDmaW89LTp1Webyj90FjWSt+3L7iOAwc5w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=HQl5EBvY; arc=none smtp.client-ip=217.70.183.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id DEE011BF215;
-	Tue,  9 Jul 2024 13:54:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1720533257;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=DTRtCRpypwFu3ITgB0O8mCGVy40pFL3Vl2LtOLRtGRI=;
-	b=HQl5EBvYzTLbQK9fVYV+kNpgPqD9VwAp90AZECH+dJmkJUOfANObaBfZv++97n3ToRLrnK
-	rCWjGCUf4N0nWs6B7E6UZXk7Xa4N+s+jP2n5tukbP0GENBIQEAUlKUT/lQ0wxCbz9rVQDq
-	Ab3eKkjBdes5jkIIahQ/6Vvkfkg3Wx5pe9JW8OKfLnL9OrJbvtROQ/fK8NJFO53pGmzL7r
-	N58PCKLv4dq6CQNKT/bcm6+8Bmu8ioAGvEHMwgAnHo8A8XykbTNsNIMDwDJ7BhOC3Gzhw2
-	p0sfZjc2rGXX2eLb1rE+z1dMbjhY+Aa3NcWF24u01pyONGgvQwBmCbyiHYTBoQ==
-From: Kory Maincent <kory.maincent@bootlin.com>
-Date: Tue, 09 Jul 2024 15:53:46 +0200
-Subject: [PATCH net-next v17 14/14] netlink: specs: Enhance tsinfo netlink
- attributes and add a tsconfig set command
+	s=arc-20240116; t=1720535496; c=relaxed/simple;
+	bh=kbE7E1aC67jpIZ6Ea2GEWtdODIBRtDkbzaxOt3uyn7k=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=srmc5jAUN/tK385wt4lrkizRcj0k31f1fYgnC/E0NTZFj3TbYyC1FahpgtDF2ygRjLfwjdEeV0fUHS1krm4Tkl46cc7YrYGbkOAoyePoLtQm631MGckl9yDmrGeq4BreaD8oR7pVCdQOOEQiyDqXJ+w6DpO2yjJTNcA5ZLVvajw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=h9recBh0; arc=none smtp.client-ip=198.47.19.142
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 469EUxc4114038;
+	Tue, 9 Jul 2024 09:30:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1720535459;
+	bh=JEsmcDLJ0df5pbyPMQ8aHuk3Gr51wAKm5Svyaj62YKI=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=h9recBh0fhHIiTFzmoHPN48cWafhcWX6Y6CuNAIHgO8osQEUB7aafTtEyYu3RAPTn
+	 Oq+2fCs/wDldfWPEwjIbUSBW0LK4XU1FI2LfwuQtsYBkm+qgy4QJEiisstGKb6rPHT
+	 2z9/JGmWVejoZ9/ul1Z7jMhLj/9bMm/CTt0QQIYw=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 469EUxJ7124021
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 9 Jul 2024 09:30:59 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
+ Jul 2024 09:30:59 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 9 Jul 2024 09:30:59 -0500
+Received: from [172.24.227.193] (devarsht.dhcp.ti.com [172.24.227.193] (may be forged))
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 469EUqw5090071;
+	Tue, 9 Jul 2024 09:30:52 -0500
+Message-ID: <91380590-5450-16bc-ddc0-07f117ed6fe1@ti.com>
+Date: Tue, 9 Jul 2024 20:00:51 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240709-feature_ptp_netnext-v17-14-b5317f50df2a@bootlin.com>
-References: <20240709-feature_ptp_netnext-v17-0-b5317f50df2a@bootlin.com>
-In-Reply-To: <20240709-feature_ptp_netnext-v17-0-b5317f50df2a@bootlin.com>
-To: Florian Fainelli <florian.fainelli@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, 
- Russell King <linux@armlinux.org.uk>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Richard Cochran <richardcochran@gmail.com>, 
- Radu Pirea <radu-nicolae.pirea@oss.nxp.com>, 
- Jay Vosburgh <j.vosburgh@gmail.com>, Andy Gospodarek <andy@greyhouse.net>, 
- Nicolas Ferre <nicolas.ferre@microchip.com>, 
- Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
- Jonathan Corbet <corbet@lwn.net>, 
- Horatiu Vultur <horatiu.vultur@microchip.com>, UNGLinuxDriver@microchip.com, 
- Simon Horman <horms@kernel.org>, Vladimir Oltean <vladimir.oltean@nxp.com>, 
- donald.hunter@gmail.com, danieller@nvidia.com, ecree.xilinx@gmail.com
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
- linux-doc@vger.kernel.org, 
- Maxime Chevallier <maxime.chevallier@bootlin.com>, 
- Rahul Rameshbabu <rrameshbabu@nvidia.com>, 
- Willem de Bruijn <willemb@google.com>, 
- Shannon Nelson <shannon.nelson@amd.com>, 
- Alexandra Winter <wintera@linux.ibm.com>, 
- Kory Maincent <kory.maincent@bootlin.com>
-X-Mailer: b4 0.13.0
-X-GND-Sasl: kory.maincent@bootlin.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 1/6] math.h: Add macros for rounding to closest value
+Content-Language: en-US
+To: Jiri Slaby <jirislaby@kernel.org>, <mchehab@kernel.org>,
+        <hverkuil-cisco@xs4all.nl>, <linux-media@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <sebastian.fricke@collabora.com>,
+        <andriy.shevchenko@linux.intel.com>, <jani.nikula@intel.com>,
+        <corbet@lwn.net>, <broonie@kernel.org>, <rdunlap@infradead.org>,
+        <linux-doc@vger.kernel.org>
+CC: <laurent.pinchart@ideasonboard.com>, <praneeth@ti.com>, <nm@ti.com>,
+        <vigneshr@ti.com>, <a-bhatia1@ti.com>, <j-luthra@ti.com>,
+        <b-brnich@ti.com>, <detheridge@ti.com>, <p-mantena@ti.com>,
+        <vijayp@ti.com>, <andi.shyti@linux.intel.com>, <nicolas@ndufresne.ca>,
+        <davidgow@google.com>, <dlatypov@google.com>
+References: <20240708155943.2314427-1-devarsht@ti.com>
+ <20240708155943.2314427-2-devarsht@ti.com>
+ <a0e31542-e77b-4efa-959d-f7f5a8719616@kernel.org>
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <a0e31542-e77b-4efa-959d-f7f5a8719616@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 
-Add new attributed to tsinfo allowing to get the tsinfo from a phc provider
-(composed by a phc index and a phc qualifier) on a netdevice's link.
-Add simultaneously a tsconfig command to be able to get and set hwtstamp
-configuration for a specified phc provider.
+Hi Jiri,
 
-Here is few examples:
-./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema
-             --dump tsinfo-get
-             --json '{"header":{"dev-name":"eth0"}}'
-[{'header': {'dev-index': 3, 'dev-name': 'eth0'},
-  'hwtst-provider': {'index': 0, 'qualifier': 0},
-  'phc-index': 0,
-  'rx-filters': {'bits': {'bit': [{'index': 0, 'name': 'none'},
-                                  {'index': 2, 'name': 'some'}]},
-                 'nomask': True,
-                 'size': 16},
-  'timestamping': {'bits': {'bit': [{'index': 0, 'name': 'hardware-transmit'},
-                                    {'index': 2, 'name': 'hardware-receive'},
-                                    {'index': 6,
-                                     'name': 'hardware-raw-clock'}]},
-                   'nomask': True,
-                   'size': 17},
-  'tx-types': {'bits': {'bit': [{'index': 0, 'name': 'off'},
-                                {'index': 1, 'name': 'on'}]},
-               'nomask': True,
-               'size': 4}},
- {'header': {'dev-index': 3, 'dev-name': 'eth0'},
-  'hwtst-provider': {'index': 2, 'qualifier': 0},
-  'phc-index': 2,
-  'rx-filters': {'bits': {'bit': [{'index': 0, 'name': 'none'},
-                                  {'index': 1, 'name': 'all'}]},
-                 'nomask': True,
-                 'size': 16},
-  'timestamping': {'bits': {'bit': [{'index': 0, 'name': 'hardware-transmit'},
-                                    {'index': 1, 'name': 'software-transmit'},
-                                    {'index': 2, 'name': 'hardware-receive'},
-                                    {'index': 3, 'name': 'software-receive'},
-                                    {'index': 4,
-                                     'name': 'software-system-clock'},
-                                    {'index': 6,
-                                     'name': 'hardware-raw-clock'}]},
-                   'nomask': True,
-                   'size': 17},
-  'tx-types': {'bits': {'bit': [{'index': 0, 'name': 'off'},
-                                {'index': 1, 'name': 'on'},
-                                {'index': 2, 'name': 'onestep-sync'}]},
-               'nomask': True,
-               'size': 4}}]
+Thanks for the review.
 
-./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema --do tsinfo-get
-             --json '{"header":{"dev-name":"eth0"},
-                      "hwtst-provider":{"index":0, "qualifier":0 }
-}'
-{'header': {'dev-index': 3, 'dev-name': 'eth0'},
- 'hwtst-provider': {'index': 0, 'qualifier': 0},
- 'phc-index': 0,
- 'rx-filters': {'bits': {'bit': [{'index': 0, 'name': 'none'},
-                                 {'index': 2, 'name': 'some'}]},
-                'nomask': True,
-                'size': 16},
- 'timestamping': {'bits': {'bit': [{'index': 0, 'name': 'hardware-transmit'},
-                                   {'index': 2, 'name': 'hardware-receive'},
-                                   {'index': 6, 'name': 'hardware-raw-clock'}]},
-                  'nomask': True,
-                  'size': 17},
- 'tx-types': {'bits': {'bit': [{'index': 0, 'name': 'off'},
-                               {'index': 1, 'name': 'on'}]},
-              'nomask': True,
-              'size': 4}}
+On 09/07/24 11:29, Jiri Slaby wrote:
+> On 08. 07. 24, 17:59, Devarsh Thakkar wrote:
+>> Add below rounding related macros:
+>>
+>> round_closest_up(x, y) : Rounds x to closest multiple of y where y is a
+>> power of 2, with a preference to round up in case two nearest values are
+>> possible.
+>>
+>> round_closest_down(x, y) : Rounds x to closest multiple of y where y is a
+>> power of 2, with a preference to round down in case two nearest values are
+>> possible.
+>>
+>> roundclosest(x, y) : Rounds x to closest multiple of y, this macro should
+>> generally be used only when y is not multiple of 2 as otherwise
+>> round_closest* macros should be used which are much faster.
+>>
+>> Examples:
+>>   * round_closest_up(17, 4) = 16
+>>   * round_closest_up(15, 4) = 16
+>>   * round_closest_up(14, 4) = 16
+>>   * round_closest_down(17, 4) = 16
+>>   * round_closest_down(15, 4) = 16
+>>   * round_closest_down(14, 4) = 12
+>>   * roundclosest(21, 5) = 20
+> 
+> With consistency in mind, why is there no underscore?
+> 
 
-./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema --do tsinfo-set
-             --json '{"header":{"dev-name":"eth0"},
-                      "hwtst-provider":{"index":2, "qualifier":0}}'
-None
-./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema --do tsconfig-get
-	     --json '{"header":{"dev-name":"eth0"}}'
-{'header': {'dev-index': 3, 'dev-name': 'eth0'},
- 'hwtstamp-flags': 1,
- 'hwtstamp-provider': {'index': 1, 'qualifier': 0},
- 'rx-filters': {'bits': {'bit': [{'index': 12, 'name': 'ptpv2-event'}]},
-                'nomask': True,
-                'size': 16},
- 'tx-types': {'bits': {'bit': [{'index': 1, 'name': 'on'}]},
-              'nomask': True,
-              'size': 4}}
+This is as per the convention followed in math.h for existing rounding macros
+round_up, roundup, round_down, rounddown :
 
- ./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema --do tsconfig-set
-	      --json '{"header":{"dev-name":"eth0"},
-		       "hwtstamp-provider":{"index":1, "qualifier":0 },
-		       "rx-filters":{"bits": {"bit": {"name":"ptpv2-l4-event"}},
-				     "nomask": 1},
-		       "tx-types":{"bits": {"bit": {"name":"on"}},
-				   "nomask": 1}}'
-None
+for e.g. It use "_" for macros which work on power of 2 for e.g. we  have
+round_down, round_up macros which work on power of 2 and it remove "_" for
+normal rounding macros for e.g. rounddown and roundup which are normal
+rounding macros.
 
-Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
----
+There was already a discussion around naming convention in previous patch
+versions here [1] we aligned on this.
 
-Changes in v8:
-- New patch
+>>   * roundclosest(19, 5) = 20
+>>   * roundclosest(17, 5) = 15
+>>
+>> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+>> Acked-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+>> ---
+>> NOTE: This patch is inspired from the Mentor Graphics IPU driver [1]
+>> which uses similar macro locally and which is updated in further patch
+>> in the series to use this generic macro instead along with other drivers
+>> having similar requirements.
+>>
+>> Link:
+>> https://elixir.bootlin.com/linux/v6.8.9/source/drivers/gpu/ipu-v3/ipu-image-convert.c#L480 [1]
+>> ---
+>>   include/linux/math.h | 63 ++++++++++++++++++++++++++++++++++++++++++++
+>>   1 file changed, 63 insertions(+)
+>>
+>> diff --git a/include/linux/math.h b/include/linux/math.h
+>> index dd4152711de7..79e3dfda77fc 100644
+>> --- a/include/linux/math.h
+>> +++ b/include/linux/math.h
+>> @@ -34,6 +34,52 @@
+>>    */
+>>   #define round_down(x, y) ((x) & ~__round_mask(x, y))
+>>   +/**
+>> + * round_closest_up - round closest to be multiple of specified value
+>> (which is
+>> + *                    power of 2) with preference to rounding up
+>> + * @x: the value to round
+>> + * @y: multiple to round closest to (must be a power of 2)
+>> + *
+>> + * Rounds @x to closest multiple of @y (which must be a power of 2).
+>> + * The value can be either rounded up or rounded down depending upon rounded
+>> + * value's closeness to the specified value. If there are two closest possible
+>> + * values, i.e. the difference between the specified value and it's rounded up
+>> + * and rounded down values is same then preference is given to rounded up
+>> + * value.
+>> + *
+>> + * To perform arbitrary rounding to closest value (not multiple of 2), use
+>> + * roundclosest().
+>> + *
+>> + * Examples:
+>> + * * round_closest_up(17, 4) = 16
+>> + * * round_closest_up(15, 4) = 16
+>> + * * round_closest_up(14, 4) = 16
+>> + */
+>> +#define round_closest_up(x, y) round_down((x) + (y) / 2, (y))
+>> +
+>> +/**
+>> + * round_closest_down - round closest to be multiple of specified value (which
+>> + *            is power of 2) with preference to rounding down
+>> + * @x: the value to round
+>> + * @y: multiple to round closest to (must be a power of 2)
+>> + *
+>> + * Rounds @x to closest multiple of @y (which must be a power of 2).
+>> + * The value can be either rounded up or rounded down depending upon rounded
+>> + * value's closeness to the specified value. If there are two closest possible
+>> + * values, i.e. the difference between the specified value and it's rounded up
+>> + * and rounded down values is same then preference is given to rounded up
+>> + * value.
+> 
+> Too heavy sentence. Did you mean "its" not "it's"?
 
-Changes in v10:
-- Add ghwtstamp attributes
-- Add tsinfo ntf command
+Yeah "its" is the correct one.
+> 
+> What about:
+> There can be two closest values. I.e. the difference between the specified
+> value and its rounded up and down values is the same. In that case, the
+> rounded up value is preferred.
+> ?
+> 
 
-Changes in v11:
-- Add examples in the commit message.
+Yeah this looks good but I would still prefer to prepend to this the text "The
+value can be either rounded up or rounded down depending upon rounded value's
+closeness to the specified value" just to avoid any confusion as it caused a
+bit of confusions in earlier iterations.
 
-Changes in v13:
-- Replace shorter name by real name.
-- Fix an issue reported by "make -C tools/net/ynl" on the namings.
 
-Changes in v16:
-- Move to tsconfig command to get and set hwtstamp configuration.
----
- Documentation/netlink/specs/ethtool.yaml | 73 ++++++++++++++++++++++++++++++++
- 1 file changed, 73 insertions(+)
+> The same for round_closest_up().
+> 
+>> + *
+>> + * To perform arbitrary rounding to closest value (not multiple of 2), use
+>> + * roundclosest().
+>> + *
+>> + * Examples:
+>> + * * round_closest_down(17, 4) = 16
+>> + * * round_closest_down(15, 4) = 16
+>> + * * round_closest_down(14, 4) = 12
+>> + */
+>> +#define round_closest_down(x, y) round_up((x) - (y) / 2, (y))
+>> +
+>>   #define DIV_ROUND_UP __KERNEL_DIV_ROUND_UP
+>>     #define DIV_ROUND_DOWN_ULL(ll, d) \
+>> @@ -77,6 +123,23 @@
+>>   }                            \
+>>   )
+>>   +/**
+>> + * roundclosest - round to nearest multiple
+>> + * @x: the value to round
+>> + * @y: multiple to round nearest to
+>> + *
+>> + * Rounds @x to nearest multiple of @y.
+>> + * The rounded value can be greater than or less than @x depending
+> 
+> greater or less than
+> 
 
-diff --git a/Documentation/netlink/specs/ethtool.yaml b/Documentation/netlink/specs/ethtool.yaml
-index 495e35fcfb21..9bd1f8a7bd3f 100644
---- a/Documentation/netlink/specs/ethtool.yaml
-+++ b/Documentation/netlink/specs/ethtool.yaml
-@@ -624,6 +624,15 @@ attribute-sets:
-       -
-         name: tx-err
-         type: uint
-+  -
-+    name: ts-hwtstamp-provider
-+    attributes:
-+      -
-+        name: index
-+        type: u32
-+      -
-+        name: qualifier
-+        type: u32
-   -
-     name: tsinfo
-     attributes:
-@@ -650,6 +659,10 @@ attribute-sets:
-         name: stats
-         type: nest
-         nested-attributes: ts-stat
-+      -
-+        name: hwtstamp-provider
-+        type: nest
-+        nested-attributes: ts-hwtstamp-provider
-   -
-     name: cable-result
-     attributes:
-@@ -1085,6 +1098,28 @@ attribute-sets:
-       -
-         name: total
-         type: uint
-+  -
-+    name: tsconfig
-+    attributes:
-+      -
-+        name: header
-+        type: nest
-+        nested-attributes: header
-+      -
-+        name: hwtstamp-provider
-+        type: nest
-+        nested-attributes: ts-hwtstamp-provider
-+      -
-+        name: tx-types
-+        type: nest
-+        nested-attributes: bitset
-+      -
-+        name: rx-filters
-+        type: nest
-+        nested-attributes: bitset
-+      -
-+        name: hwtstamp-flags
-+        type: u32
- 
- operations:
-   enum-model: directional
-@@ -1526,6 +1561,7 @@ operations:
-         request:
-           attributes:
-             - header
-+            - hwtstamp-provider
-         reply:
-           attributes:
-             - header
-@@ -1534,6 +1570,7 @@ operations:
-             - rx-filters
-             - phc-index
-             - stats
-+            - hwtstamp-provider
-       dump: *tsinfo-get-op
-     -
-       name: cable-test-act
-@@ -1877,3 +1914,39 @@ operations:
-           - status-msg
-           - done
-           - total
-+    -
-+      name: tsconfig-get
-+      doc: Get hwtstamp config.
-+
-+      attribute-set: tsconfig
-+
-+      do: &tsconfig-get-op
-+        request:
-+          attributes:
-+            - header
-+        reply:
-+          attributes:
-+            - header
-+            - hwtstamp-provider
-+            - tx-types
-+            - rx-filters
-+            - hwtstamp-flags
-+      dump: *tsconfig-get-op
-+    -
-+      name: tsconfig-set
-+      doc: Set hwtstamp config.
-+
-+      attribute-set: tsconfig
-+
-+      do:
-+        request:
-+          attributes:
-+            - header
-+            - hwtstamp-provider
-+            - tx-types
-+            - rx-filters
-+            - hwtstamp-flags
-+    -
-+      name: tsconfig-ntf
-+      doc: Notification for change in tsconfig configuration.
-+      notify: tsconfig-get
+Agreed.
 
--- 
-2.34.1
+>> + * upon it's nearness to @x.
+> 
+> "its"
+> 
+Agreed.
 
+>> If @y will always be a power of 2, consider
+> 
+> If @y is always a power...
+> 
+
+Agreed.
+
+[1]: https://lore.kernel.org/all/Zj42vTpyH71TWeTk@smile.fi.intel.com/
+
+Regards
+Devarsh
 
