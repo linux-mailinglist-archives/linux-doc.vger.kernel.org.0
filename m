@@ -1,92 +1,65 @@
-Return-Path: <linux-doc+bounces-20361-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-20364-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5ECE892CF8A
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jul 2024 12:45:30 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 01AE992CFCF
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jul 2024 12:52:23 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 16AB81F2341B
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jul 2024 10:45:30 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 33BD01C23AC3
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jul 2024 10:52:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C77DC196C6C;
-	Wed, 10 Jul 2024 10:36:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C0AB212DDBF;
+	Wed, 10 Jul 2024 10:50:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="e+BAytUE"
+	dkim=pass (2048-bit key) header.d=ellerman.id.au header.i=@ellerman.id.au header.b="gNkQsN12"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B051194140
-	for <linux-doc@vger.kernel.org>; Wed, 10 Jul 2024 10:36:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE4FB18FC61;
+	Wed, 10 Jul 2024 10:50:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1720607808; cv=none; b=GAlEM9VhKuQqWQxrY7x9BvHAdLQtQZydUplTdCyMFzonXJQLleQDPAMXxhHA8inQKtj5WvxZHkvZrf1Lsqfk3ftTweelwbIXbhwcNZKcgvKahwiGtqScCQQkOTGUSP+EEhpLxhiU267U46c8nZ0Z/gyhNyp2hBWUcUrs9DpbT9c=
+	t=1720608650; cv=none; b=pMQIhI17+URqm+yezYmSlABeyNlvV8pBFJaal8xOk+YXdBB62mCeO950eQp1w4C7uGKU94Wg3amrkPXKTpDfhjq0hdU5DFVR5huk9qu3HYdVk1ZreyrIq8PVg3sw7XMm8baSX48LR/esU84ipqRiWosXQn9l2T3NY+FgVmuJDHM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1720607808; c=relaxed/simple;
-	bh=kqLm5P45NxwgK+tmNpa+OcNHo84diEsXJjayzggqo7c=;
+	s=arc-20240116; t=1720608650; c=relaxed/simple;
+	bh=FlX1+w93lB8zvcMp18OB5EDWF9p6KvhUpbHoFQjJfG8=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=aVfE2Ye71ZESvmYbgQsJzRnILxrIr2d0Cn6XQXsyzBLuhJEszZB6zXFhK7LTwtgzJNhpYwEA8s7EcWJBWWizXFhfVXpz8L+9ltWx5Fcj4xcmbTTjgwZiy/TgBa22W8RrIDtuq/AHsWcK8uOV0bEbSHMpUSxwNNe/5NFf5oG9Hf4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=e+BAytUE; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1720607806;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=TbJg6z7j+ZQBtm21UhpDM4r/48rTnLX4yDmOeuhoEeA=;
-	b=e+BAytUEUePovg/uo48HWDv8cwIBr34355jzalrP+4UHFE3qDQcsbxbVMrAX840DDO1S6V
-	H+JbYaTmfzfZd9H/aXoKFR/IhLH1djsixXwQBPhisg7QD5SF1PPVBo/C3wOn5gENg/ngd/
-	FFZuel0R/Jo/yWst4t8xzBd2tR3e90g=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-186-a07wZjSjMfOCkc_bgrfTiQ-1; Wed,
- 10 Jul 2024 06:36:41 -0400
-X-MC-Unique: a07wZjSjMfOCkc_bgrfTiQ-1
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+	 MIME-Version:Content-Type; b=lyxvIs94wfrY76xxPQ8n86cZyX3QT11+2E3c+h3HHpuJK8KYxulLTFLE2Gb9gQg4b+u+BDhIK3fbweXdAFZ7QpQD6wW0GCV5aE7lxRAip814oon2ee7W6RutYfhlO4GdQvl0pP6/6L9NPFwpZNFwZ5hIwQtfICLbwJc1XNCJaCc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ellerman.id.au; spf=pass smtp.mailfrom=ellerman.id.au; dkim=pass (2048-bit key) header.d=ellerman.id.au header.i=@ellerman.id.au header.b=gNkQsN12; arc=none smtp.client-ip=150.107.74.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ellerman.id.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ellerman.id.au
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ellerman.id.au;
+	s=201909; t=1720608644;
+	bh=Sq7A/5BKly+8nmwJr6uA8HAvkZyan3OjiLaHZGsUBSs=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=gNkQsN1224trz3k4ZWtlSM1G2KLEdd/BtBlc5HWriCQ8icpbMXsA06qGyoYX4LDO2
+	 NM5UWiPY1/r02uvgFChIZnKZ2prBo6qFY9ruKG91mEbhpfuXQD3PlXTjZOI4XgJyEk
+	 ILwDsYRxvQDkAzvSTWdTntj6Tq1wTT5JdQzkOekLokSjdDUi9DaaMfQ/P/E0P7Xhcm
+	 eYChzWePjRQLpsfH51QBI6UjFNwfh5r/5Bpu6wwMI0m5rd2VkbGwthVyBlJImTVXq5
+	 gHDSg22GwdMTWhYmoyHbUFJXVapTWqKd6suvRvPKpyQ6seUhUf1s+tu2v4XaOQjA8g
+	 arChLBtLNmvaw==
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 07722196CE01;
-	Wed, 10 Jul 2024 10:36:36 +0000 (UTC)
-Received: from oldenburg.str.redhat.com (unknown [10.45.224.154])
-	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id A378D19560AE;
-	Wed, 10 Jul 2024 10:36:24 +0000 (UTC)
-From: Florian Weimer <fweimer@redhat.com>
-To: Mark Brown <broonie@kernel.org>
-Cc: Catalin Marinas <catalin.marinas@arm.com>,  Will Deacon
- <will@kernel.org>,  Jonathan Corbet <corbet@lwn.net>,  Andrew Morton
- <akpm@linux-foundation.org>,  Marc Zyngier <maz@kernel.org>,  Oliver Upton
- <oliver.upton@linux.dev>,  James Morse <james.morse@arm.com>,  Suzuki K
- Poulose <suzuki.poulose@arm.com>,  Arnd Bergmann <arnd@arndb.de>,  Oleg
- Nesterov <oleg@redhat.com>,  Eric Biederman <ebiederm@xmission.com>,
-  Shuah Khan <shuah@kernel.org>,  "Rick P. Edgecombe"
- <rick.p.edgecombe@intel.com>,  Deepak Gupta <debug@rivosinc.com>,  Ard
- Biesheuvel <ardb@kernel.org>,  Szabolcs Nagy <Szabolcs.Nagy@arm.com>,
-  Kees Cook <kees@kernel.org>,  "H.J. Lu" <hjl.tools@gmail.com>,  Paul
- Walmsley <paul.walmsley@sifive.com>,  Palmer Dabbelt <palmer@dabbelt.com>,
-  Albert Ou <aou@eecs.berkeley.edu>,  Christian Brauner
- <brauner@kernel.org>,  Thiago Jung Bauermann
- <thiago.bauermann@linaro.org>,  Ross Burton <ross.burton@arm.com>,
-  linux-arm-kernel@lists.infradead.org,  linux-doc@vger.kernel.org,
-  kvmarm@lists.linux.dev,  linux-fsdevel@vger.kernel.org,
-  linux-arch@vger.kernel.org,  linux-mm@kvack.org,
-  linux-kselftest@vger.kernel.org,  linux-kernel@vger.kernel.org,
-  linux-riscv@lists.infradead.org, "Schimpe, Christina"
- <christina.schimpe@intel.com>, "Pandey, Sunil K"
- <sunil.k.pandey@intel.com>
-Subject: Re: [PATCH v9 05/39] arm64/gcs: Document the ABI for Guarded
- Control Stacks
-In-Reply-To: <20240625-arm64-gcs-v9-5-0f634469b8f0@kernel.org> (Mark Brown's
-	message of "Tue, 25 Jun 2024 15:57:33 +0100")
-References: <20240625-arm64-gcs-v9-0-0f634469b8f0@kernel.org>
-	<20240625-arm64-gcs-v9-5-0f634469b8f0@kernel.org>
-Date: Wed, 10 Jul 2024 12:36:21 +0200
-Message-ID: <87a5iph6u2.fsf@oldenburg.str.redhat.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	by mail.ozlabs.org (Postfix) with ESMTPSA id 4WJvlk6F7Lz4wZx;
+	Wed, 10 Jul 2024 20:50:42 +1000 (AEST)
+From: Michael Ellerman <mpe@ellerman.id.au>
+To: Christophe Leroy <christophe.leroy@csgroup.eu>, Nicholas Piggin
+ <npiggin@gmail.com>, Christophe Leroy <christophe.leroy@csgroup.eu>,
+ "Naveen N. Rao" <naveen.n.rao@linux.ibm.com>, Jonathan Corbet
+ <corbet@lwn.net>
+Cc: linuxppc-dev@lists.ozlabs.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Documentation/powerpc: Remove retired CPUs from list of
+ supported CPUs
+In-Reply-To: <e33ba7b242a104259fbcf1a4d4bdb0f1d1db6882.1720539170.git.christophe.leroy@csgroup.eu>
+References: <e33ba7b242a104259fbcf1a4d4bdb0f1d1db6882.1720539170.git.christophe.leroy@csgroup.eu>
+Date: Wed, 10 Jul 2024 20:50:41 +1000
+Message-ID: <877cdt5xmm.fsf@mail.lhotse>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -94,47 +67,66 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
 
-* Mark Brown:
+Christophe Leroy <christophe.leroy@csgroup.eu> writes:
+> 601, power4, 401, 403, 405, e200 and IBM-A2 support was removed by
+> by following commits:
+> - Commit 8b14e1dff067 ("powerpc: Remove support for PowerPC 601")
+> - Commit 471d7ff8b51b ("powerpc/64s: Remove POWER4 support")
+> - Commit 1b5c0967ab8a ("powerpc/40x: Remove support for IBM 403GCX")
+> - Commit 39c8bf2b3cc1 ("powerpc: Retire e200 core (mpc555x processor)")
+> - Commit fb5a515704d7 ("powerpc: Remove platforms/wsp and associated
+> pieces")
+
+There was also: 468a33028edd ("powerpc: Drop support for pre-POWER4 cpus")
+
+> Remove them from the list of supported CPUs.
+
+The CPU families doc is not intended to be a list of supported CPUs,
+it's more of a family tree which includes the currently supported CPUs.
+
+Even when I first added it there were CPUs mentioned that weren't
+supported. (I realise the paragraph at the top of the file doesn't make
+that clear)
+
+I don't mind removing cores that are unsupported and unconnected to
+other things, eg. A2, e200 and the 40x.
+
+But for 601 and the early POWER cores I'd rather we marked the
+unsupported ones with an asterisk or something. That way the family tree
+still connects and includes all the history, otherwise I think it risks
+being confusing.
+
+Or maybe we use a different box outline (~) for unsupported cores? eg:
+
+   +~~~~~~~~~~~~~~+                 +~~~~~~~~~~~~~~~~+
+   |  Old POWER   | --------------> | RS64 (threads) |
+   +~~~~~~~~~~~~~~+                 +~~~~~~~~~~~~~~~~+
+          |
+          |
+          v
+   +~~~~~~~~~~~~~~+                 +----------------+      +------+
+   |     601      | --------------> |      603       | ---> | e300 |
+   +~~~~~~~~~~~~~~+                 +----------------+      +------+
+          |                                 |
+          |                                 |
+          v                                 v
+   +--------------+    +-----+      +----------------+      +-------+
+   |     604      |    | 755 | <--- |    750 (G3)    | ---> | 750CX |
+   +--------------+    +-----+      +----------------+      +-------+
+          |                                 |                   |
+          |                                 |                   |
+          v                                 v                   v
+   +~~~~~~~~~~~~~~+                 +----------------+      +-------+
+   | 620 (64 bit) |                 |      7400      |      | 750CL |
+   +~~~~~~~~~~~~~~+                 +----------------+      +-------+
+          |                                 |                   |
+          |                                 |                   |
+          v                                 v                   v
+   +~~~~~~~~~~~~~~+                 +----------------+      +-------+
+   |  POWER3/630  |                 |      7410      |      | 750FX |
+   +~~~~~~~~~~~~~~+                 +----------------+      +-------+
 
 
-> +4.  Signal handling
-> +--------------------
-> +
-> +* A new signal frame record gcs_context encodes the current GCS mode and
-> +  pointer for the interrupted context on signal delivery.  This will always
-> +  be present on systems that support GCS.
-> +
-> +* The record contains a flag field which reports the current GCS configuration
-> +  for the interrupted context as PR_GET_SHADOW_STACK_STATUS would.
-> +
-> +* The signal handler is run with the same GCS configuration as the interrupted
-> +  context.
-> +
-> +* When GCS is enabled for the interrupted thread a signal handling specific
-> +  GCS cap token will be written to the GCS, this is an architectural GCS cap
-> +  token with bit 63 set and the token type (bits 0..11) all clear.  The
-> +  GCSPR_EL0 reported in the signal frame will point to this cap token.
-
-How does this marker interfere with Top Byte Ignore (TBI; I hope I got
-the name right)?  The specification currently does not say that only
-addresses pushed to the shadow stack with the top byte cleared, which
-potentially makes the markup ambiguous.  On x86-64, the same issue may
-exist with LAM.  I have not tested yet what happens there.  On AArch64
-and RISC-V, it may be more natural to use the LSB instead of the LSB for
-the mark bit because of its instruction alignment.
-
-We also have a gap on x86-64 for backtrace generation because the
-interrupted instruction address does not end up on the shadow stack.
-This address is potentially quite interesting for backtrace generation.
-I assume it's currently missing because the kernel does not resume
-execution using a regular return instruction.  It would be really useful
-if it could be pushed to the shadow stack, or recoverable from the
-shadow stack in some other way (e.g., the address of the signal context
-could be pushed instead).  That would need some form of marker as well.
-
-Thanks,
-Florian
-
+cheers
 
