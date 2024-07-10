@@ -1,162 +1,255 @@
-Return-Path: <linux-doc+bounces-20430-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-20432-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AE2992DCC7
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jul 2024 01:42:28 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AEDA92DCCE
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jul 2024 01:42:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id BE8A31C221FB
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jul 2024 23:42:27 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CAA0D287026
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jul 2024 23:42:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3ABFF158D92;
-	Wed, 10 Jul 2024 23:42:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4FD4A158DA9;
+	Wed, 10 Jul 2024 23:42:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="dWrM/6qT"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="XnR5aA+K"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
+Received: from mail-yb1-f202.google.com (mail-yb1-f202.google.com [209.85.219.202])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A90831586C4
-	for <linux-doc@vger.kernel.org>; Wed, 10 Jul 2024 23:42:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A811214D290
+	for <linux-doc@vger.kernel.org>; Wed, 10 Jul 2024 23:42:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.202
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1720654940; cv=none; b=mZaUL8Y+/p5Efp7ptmULZOVw/1hny6kdBP5P9gxnAH41eVQeU/WRj8aOwUbZP4gtwYLRMaVPjjYC4IIkEGA+UGk2M16awNAgiGtZdnm/kj9yZSAEC7ExOrd8xGXz6b4HutRk1d53rk2V1Waqt8uHYZ3Q02xow61o5pF7+5VOR5w=
+	t=1720654961; cv=none; b=qyKr/qwvkdtFptUgDCgsOoRiaL9R4wJo95OmKEnQgrDPkuASQoSgJDZmwtJjGRGZffb6dJD+PAgm72wZCkhDaeF0S41eUEFEgdtLUSgINOiojg+amoQVx8yPnLDBWX7DsHrZiRQ03BX9eaxVLPV0w+IbqJHCxQj8jwRcBt4epO0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1720654940; c=relaxed/simple;
-	bh=WmCXshM9BwamSUxd01N4bO9J01nXQuiD7Ah98aEMfxw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=uivR/Yf1TJZda5PxXD/Ib47dNgIU0fcchhzZGyQUEOeUMUgOT3Ai5PWcajDOc/pMvYel3Fa2gY+2BDo7HNBxxilQpLowB1qR7E+mamOVarWb1nQhn5Y+1Eql7zUJhqc48c4JIHy05Zf+7Lj8bkicbC/XV/16jWSb9wp02Ze4Hb8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=dWrM/6qT; arc=none smtp.client-ip=209.85.219.52
+	s=arc-20240116; t=1720654961; c=relaxed/simple;
+	bh=+d7MHnXvG9ckN0TU9hoPWKFT9fXHe0SQp2A+udSuB7E=;
+	h=Date:Mime-Version:Message-ID:Subject:From:To:Cc:Content-Type; b=cvV/r88j2TemcpEnbp5AOQJRjGcWulPctqLtcZPkyzBMmjKbfLExr4qkVYK76XatidkhCImMgbW3/mvyDomY+iGZ3U38vFGLUhsS/KLCMoCpJjmegotmXMDcyoe53ZoUzd5z+ZXxdZJ4wDnM8fTDDt27ZzFOXP23g6+LHYeNjm4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--jthoughton.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=XnR5aA+K; arc=none smtp.client-ip=209.85.219.202
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qv1-f52.google.com with SMTP id 6a1803df08f44-6b5d3113168so2040876d6.2
-        for <linux-doc@vger.kernel.org>; Wed, 10 Jul 2024 16:42:17 -0700 (PDT)
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--jthoughton.bounces.google.com
+Received: by mail-yb1-f202.google.com with SMTP id 3f1490d57ef6-e035f7b5976so696007276.0
+        for <linux-doc@vger.kernel.org>; Wed, 10 Jul 2024 16:42:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1720654936; x=1721259736; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=xw22ZH4c8gyTKnFajh7vcYEJsOdrHlsxvg9OLt0kZtA=;
-        b=dWrM/6qT8jNEjecjc9s08cKSX4h+fb6bTc35XK4KJuziyKO+fD/7CbRZJ4UwApGsfl
-         1W71iFYoXZAhm3NUXU7xD7Et5TuKbhgYB9RICTMsmQqsulI9HWNXvdCZHwLpiCf52//6
-         G0IPDLquKspE/p1oSvCYSjr7fUwxb4l6eRxqgiHh75JUIw5D2hPSiYm8K+UJe5eH7SRd
-         /dF+ZtLkEny2rN/U/siaCZX8u0XTToiPx05I65KGy53ugYyndbw8ILn+iDK4dSayMnmE
-         xi0fKa2ZiL0jp2pJtdOoi+Vg+Muzkoc1dZnbx7V4UDdtpTsUIEoFy1CaPVb9D9iyk86J
-         c36A==
+        d=google.com; s=20230601; t=1720654957; x=1721259757; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=i4DifozVZ/fDrEjgZQtvTFkudk1JzJtOjKWrKpGAYuU=;
+        b=XnR5aA+KNkFOrFkdGMSFAMBuqPhPqOTBx07zIv21i+P3e/Fj6yPyAQH0baSHaxrRJU
+         2yiaTNuTgqCtRwvjt6ydcaPtiWsPyfgBVAG1vJ0oyyy8j2G6S2LGrzmmfKzBieO6vHEd
+         u7KRO+b/KLN3ZsFh3LzY2Du3lg+9NQnPyqmzeS7KAhvp3MCodP49bhBmJ5tOZI1tbb/x
+         PzfVZSlNeFO5A+hqoaszJ2SrzxknBWSLKSPZjTcaNmeMohPIcBuO1vZ8OR5hGmr7cpFR
+         X8Nri3u3LUM7J4GpwITuRQN2UwYmyvgE/lL7l+7oARtPfdxvob4LXjgNEGbjb2hq+rNr
+         UTNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720654936; x=1721259736;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=xw22ZH4c8gyTKnFajh7vcYEJsOdrHlsxvg9OLt0kZtA=;
-        b=Efec32fhsZaTYdi6T1WCwWrDc13WeaK2Dt4YtkXELVTe14+gJyOa3Bd567Hbtyhhc6
-         ul5edVi0Qs2MCtpJHGI9PRV8a/nA/UP311k+xafVk3oPuZlRKLEmuj9KC7EboP+0eSFl
-         ekkb4c6Dvz2k4T22gdIr7Ni1Nkl8JEl1naxj/+730+CdSyG56aDu2nO1+vNYrMtzF8rF
-         tmznir2tqvNQVJrnstzwOc0kP+IcEUozbjVsZkDAdhTgpvkXoKW+Dn+Zl3mzaf95o52C
-         x0b8mX6C29swGI7mG0v2AWS3UKlvK4rHsoTXgKNNafdXv0/3LDs89cMUQNBlpOEfHqq2
-         Y+gQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWH8BGwM1hHbSXDXzf/WekeHFqKlC6STwU+e3rGbPPeySkx//9To8Y5gO5jH45DMVRKbjzzYQSN+UBk1FYEXiaoEU4Rfsyqh/lb
-X-Gm-Message-State: AOJu0YxO99XeQIYyou8Clh8N5qg9Yp07h24/75rt5wcqSIrs2mn9xdQZ
-	LeCX/od1xc/DlvqkqDDokPDTUtiSRZmZ5IvAfqrQbH+4/ERtXs6CfBmYVAZSN5GdgNJ9TynLY29
-	xUmuQ0fbVeH8EmffvcDCeTC6DlCA4F9QQDyGf
-X-Google-Smtp-Source: AGHT+IGOLOQ6K3/3da49V2eHyCz+KQjRCyIEiAYnB4b8F1iCu2D4bkJxhlzGFfxvSjmRGC6gzv7EI1OWCLflWXtCr4A=
-X-Received: by 2002:a05:6214:20e2:b0:6b5:9c9c:7baf with SMTP id
- 6a1803df08f44-6b61bca896amr97392016d6.23.1720654936406; Wed, 10 Jul 2024
- 16:42:16 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1720654957; x=1721259757;
+        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=i4DifozVZ/fDrEjgZQtvTFkudk1JzJtOjKWrKpGAYuU=;
+        b=QgQRIgaRnN4k9FiGyDzxQs6363TOq1vp9mXavDq4aDPaC0PA/lBUqqGnjaAP8LE2lc
+         1fEEBGmq88nWoRfftpbUdAwEwdkXqzKfd/PfEmk3ljbHaZ787queUJgR9CZxbX4J56me
+         GhdpbX8xk1zxTmDgusFKqkScU+3y/+xYqHxqmJew0DSvIVCd99tDvrx92Hit68yXOA7G
+         ZO9ZotGyzR0i5lzJCI3pEjKBcm3O2ZfodVF0fCsPgdQ7fdJC9zV7On41ICFP1akj8AEw
+         4t6ww/E0LLyERrrnklwtF+PhWS4qjzP+Sebx3KHcLDGNm4nQDPWf5BI5wLaPnvBfAEK7
+         Am5w==
+X-Forwarded-Encrypted: i=1; AJvYcCWRD9DIT6CxHy/aJmvJ6cWOHtig9c4GmFBMr2ooqQo12E1UL9AL1nbk9D+qDQ3nkVOEmNABivtSKApEneJiMbXN69h8nuL7sjY3
+X-Gm-Message-State: AOJu0YyclVScygYdNMwUUS0l0kVf/psT6bbjUUinwibV8lDKM6XMjQkC
+	UsD4lG2FuxsKK54YvOqb10ZnPSqKTaG+zLZadiWH/hVsXkfAOaCIAZaZLehXsquNBLEfuk2n+9j
+	d2F696rXPCD67EjIcTA==
+X-Google-Smtp-Source: AGHT+IGleZxYUt4mvQCru8lvqfwiOY5k61Gmu5l5Nxb9Gfvqk177LFIz9ZNpte5dLHg976OYyY0/0Rk5LPFmcxhb
+X-Received: from jthoughton.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:2a4f])
+ (user=jthoughton job=sendgmr) by 2002:a05:6902:32a6:b0:e03:61bb:6032 with
+ SMTP id 3f1490d57ef6-e0577fa164amr19023276.1.1720654957517; Wed, 10 Jul 2024
+ 16:42:37 -0700 (PDT)
+Date: Wed, 10 Jul 2024 23:42:04 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-References: <20240710001749.1388631-1-almasrymina@google.com>
- <20240710001749.1388631-6-almasrymina@google.com> <20240710094900.0f808684@kernel.org>
-In-Reply-To: <20240710094900.0f808684@kernel.org>
-From: Mina Almasry <almasrymina@google.com>
-Date: Wed, 10 Jul 2024 16:42:04 -0700
-Message-ID: <CAHS8izPTqsNQnQWKpDPTxULTFL4vr4k6j9Zw8TQzJVDBMXWMaA@mail.gmail.com>
-Subject: Re: [PATCH net-next v16 05/13] page_pool: devmem support
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-alpha@vger.kernel.org, 
-	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org, 
-	sparclinux@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	bpf@vger.kernel.org, linux-media@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, Donald Hunter <donald.hunter@gmail.com>, 
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
-	Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Richard Henderson <richard.henderson@linaro.org>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, 
-	Matt Turner <mattst88@gmail.com>, Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
-	Andreas Larsson <andreas@gaisler.com>, Jesper Dangaard Brouer <hawk@kernel.org>, 
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Arnd Bergmann <arnd@arndb.de>, Steffen Klassert <steffen.klassert@secunet.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, David Ahern <dsahern@kernel.org>, 
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>, 
-	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
-	Bagas Sanjaya <bagasdotme@gmail.com>, Christoph Hellwig <hch@infradead.org>, 
-	Nikolay Aleksandrov <razor@blackwall.org>, Taehee Yoo <ap420073@gmail.com>, 
-	Pavel Begunkov <asml.silence@gmail.com>, David Wei <dw@davidwei.uk>, Jason Gunthorpe <jgg@ziepe.ca>, 
-	Yunsheng Lin <linyunsheng@huawei.com>, Shailend Chand <shailend@google.com>, 
-	Harshitha Ramamurthy <hramamurthy@google.com>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>, linux-mm@kvack.org, 
-	Matthew Wilcox <willy@infradead.org>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.45.2.993.g49e7a77208-goog
+Message-ID: <20240710234222.2333120-1-jthoughton@google.com>
+Subject: [RFC PATCH 00/18] KVM: Post-copy live migration for guest_memfd
+From: James Houghton <jthoughton@google.com>
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Marc Zyngier <maz@kernel.org>, Oliver Upton <oliver.upton@linux.dev>, 
+	James Morse <james.morse@arm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>, 
+	Zenghui Yu <yuzenghui@huawei.com>, Sean Christopherson <seanjc@google.com>, Shuah Khan <shuah@kernel.org>, 
+	Peter Xu <peterx@redhat.org>, Axel Rasmussen <axelrasmussen@google.com>, 
+	David Matlack <dmatlack@google.com>, James Houghton <jthoughton@google.com>, kvm@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 10, 2024 at 9:49=E2=80=AFAM Jakub Kicinski <kuba@kernel.org> wr=
-ote:
->
-> On Wed, 10 Jul 2024 00:17:38 +0000 Mina Almasry wrote:
-> > +static inline struct net_iov *__netmem_clear_lsb(netmem_ref netmem)
-> > +{
-> > +     return (struct net_iov *)((__force unsigned long)netmem & ~NET_IO=
-V);
-> > +}
-> > +
-> > +static inline unsigned long netmem_get_pp_magic(netmem_ref netmem)
-> > +{
-> > +     return __netmem_clear_lsb(netmem)->pp_magic;
-> > +}
-> > +
-> > +static inline void netmem_or_pp_magic(netmem_ref netmem, unsigned long=
- pp_magic)
-> > +{
-> > +     __netmem_clear_lsb(netmem)->pp_magic |=3D pp_magic;
-> > +}
-> > +
-> > +static inline void netmem_clear_pp_magic(netmem_ref netmem)
-> > +{
-> > +     __netmem_clear_lsb(netmem)->pp_magic =3D 0;
-> > +}
-> > +
-> > +static inline struct page_pool *netmem_get_pp(netmem_ref netmem)
-> > +{
-> > +     return __netmem_clear_lsb(netmem)->pp;
-> > +}
-> > +
-> > +static inline void netmem_set_pp(netmem_ref netmem, struct page_pool *=
-pool)
-> > +{
-> > +     __netmem_clear_lsb(netmem)->pp =3D pool;
-> > +}
->
-> Why is all this stuff in the main header? It's really low level.
-> Please put helpers which are only used by the core in a header
-> under net/core/, like net/core/dev.h
+This patch series implements the KVM-based demand paging system that was
+first introduced back in November[1] by David Matlack.
 
-Sorry none of those are only used by net/core/*. Pretty much all of
-these are used by include/net/page_pool/helpers.h, and some have
-callers in net/core/devmem.c or net/core/skbuff.c
+The working name for this new system is KVM Userfault, but that name is
+very confusing so it will not be the final name.
 
-Would you like me to move these pp specific looking ones to
-include/net/page_pool/netmem.h or something similar?
+Problem: post-copy with guest_memfd
+===================================
 
---=20
-Thanks,
-Mina
+Post-copy live migration makes it possible to migrate VMs from one host
+to another no matter how fast they are writing to memory while keeping
+the VM paused for a minimal amount of time. For post-copy to work, we
+need:
+ 1. to be able to prevent KVM from being able to access particular pages
+    of guest memory until we have populated it
+ 2. for userspace to know when KVM is trying to access a particular
+    page.
+ 3. a way to allow the access to proceed.
+
+Traditionally, post-copy live migration is implemented using
+userfaultfd, which hooks into the main mm fault path. KVM hits this path
+when it is doing HVA -> PFN translations (with GUP) or when it itself
+attempts to access guest memory. Userfaultfd sends a page fault
+notification to userspace, and KVM goes to sleep.
+
+Userfaultfd works well, as it is not specific to KVM; everyone who
+attempts to access guest memory will block the same way.
+
+However, with guest_memfd, we do not use GUP to translate from GFN to
+HPA (nor is there an intermediate HVA).
+
+So userfaultfd in its current form cannot be used to support post-copy
+live migration with guest_memfd-backed VMs.
+
+Solution: hook into the gfn -> pfn translation
+==============================================
+
+The only way to implement post-copy with a non-KVM-specific
+userfaultfd-like system would be to introduce the concept of a
+file-userfault[2] to intercept faults on a guest_memfd.
+
+Instead, we take the simpler approach of adding a KVM-specific API, and
+we hook into the GFN -> HVA or GFN -> PFN translation steps (for
+traditional memslots and for guest_memfd respectively).
+
+I have intentionally added support for traditional memslots, as the
+complexity that it adds is minimal, and it is useful for some VMMs, as
+it can be used to fully implement post-copy live migration.
+
+Implementation Details
+======================
+
+Let's break down how KVM implements each of the three core requirements
+for implementing post-copy as laid out above:
+
+--- Preventing access: KVM_MEMORY_ATTRIBUTE_USERFAULT ---
+
+The most straightforward way to inform KVM of userfault-enabled pages is
+to use a new memory attribute, say KVM_MEMORY_ATTRIBUTE_USERFAULT.
+
+There is already infrastructure in place for modifying and checking
+memory attributes. Using this interface is slightly challenging, as there
+is no UAPI for setting/clearing particular attributes; we must set the
+exact attributes we want.
+
+The synchronization that is in place for updating memory attributes is
+not suitable for post-copy live migration either, which will require
+updating memory attributes (from userfault to no-userfault) very
+frequently.
+
+Another potential interface could be to use something akin to a dirty
+bitmap, where a bitmap describes which pages within a memslot (or VM)
+should trigger userfaults. This way, it is straightforward to make
+updates to the userfault status of a page cheap.
+
+When KVM Userfault is enabled, we need to be careful not to map a
+userfault page in response to a fault on a non-userfault page. In this
+RFC, I've taken the simplest approach: force new PTEs to be PAGE_SIZE.
+
+--- Page fault notifications ---
+
+For page faults generated by vCPUs running in guest mode, if the page
+the vCPU is trying to access is a userfault-enabled page, we use
+KVM_EXIT_MEMORY_FAULT with a new flag: KVM_MEMORY_EXIT_FLAG_USERFAULT.
+
+For arm64, I believe this is actually all we need, provided we handle
+steal_time properly.
+
+For x86, where returning from deep within the instruction emulator (or
+other non-trivial execution paths) is infeasible, being able to pause
+execution while userspace fetches the page, just as userfaultfd would
+do, is necessary. Let's call these "asynchronous userfaults."
+
+A new ioctl, KVM_READ_USERFAULT, has been added to read asynchronous
+userfaults, and an eventfd is used to signal that new faults are
+available for reading.
+
+Today, we busy-wait for a gfn to have userfault disabled. This will
+change in the future.
+
+--- Fault resolution ---
+
+Resolving userfaults today is as simple as removing the USERFAULT memory
+attribute on the faulting gfn. This will change if we do not end up
+using memory attributes for KVM Userfault. Having a range-based wake-up
+like userfaultfd (see UFFDIO_WAKE) might also be helpful for
+performance.
+
+Problems with this series
+=========================
+- This cannot be named KVM Userfault! Perhaps "KVM missing pages"?
+- Memory attribute modification doesn't scale well.
+- We busy-wait for pages to not be userfault-enabled.
+- gfn_to_hva and gfn_to_pfn caches are not invalidated.
+- Page tables are not collapsed when KVM Userfault is disabled.
+- There is no self-test for asynchronous userfaults.
+- Asynchronous page faults can be dropped if KVM_READ_USERFAULT fails.
+- Supports only x86 and arm64.
+- Probably many more!
+
+Thanks!
+
+[1]: https://lore.kernel.org/kvm/CALzav=d23P5uE=oYqMpjFohvn0CASMJxXB_XEOEi-jtqWcFTDA@mail.gmail.com/
+[2]: https://lore.kernel.org/kvm/CADrL8HVwBjLpWDM9i9Co1puFWmJshZOKVu727fMPJUAbD+XX5g@mail.gmail.com/
+
+James Houghton (18):
+  KVM: Add KVM_USERFAULT build option
+  KVM: Add KVM_CAP_USERFAULT and KVM_MEMORY_ATTRIBUTE_USERFAULT
+  KVM: Put struct kvm pointer in memslot
+  KVM: Fail __gfn_to_hva_many for userfault gfns.
+  KVM: Add KVM_PFN_ERR_USERFAULT
+  KVM: Add KVM_MEMORY_EXIT_FLAG_USERFAULT
+  KVM: Provide attributes to kvm_arch_pre_set_memory_attributes
+  KVM: x86: Add KVM Userfault support
+  KVM: x86: Add vCPU fault fast-path for Userfault
+  KVM: arm64: Add KVM Userfault support
+  KVM: arm64: Add vCPU memory fault fast-path for Userfault
+  KVM: arm64: Add userfault support for steal-time
+  KVM: Add atomic parameter to __gfn_to_hva_many
+  KVM: Add asynchronous userfaults, KVM_READ_USERFAULT
+  KVM: guest_memfd: Add KVM Userfault support
+  KVM: Advertise KVM_CAP_USERFAULT in KVM_CHECK_EXTENSION
+  KVM: selftests: Add KVM Userfault mode to demand_paging_test
+  KVM: selftests: Remove restriction in vm_set_memory_attributes
+
+ Documentation/virt/kvm/api.rst                |  23 ++
+ arch/arm64/include/asm/kvm_host.h             |   2 +-
+ arch/arm64/kvm/Kconfig                        |   1 +
+ arch/arm64/kvm/arm.c                          |   8 +-
+ arch/arm64/kvm/mmu.c                          |  45 +++-
+ arch/arm64/kvm/pvtime.c                       |  11 +-
+ arch/x86/kvm/Kconfig                          |   1 +
+ arch/x86/kvm/mmu/mmu.c                        |  67 +++++-
+ arch/x86/kvm/mmu/mmu_internal.h               |   3 +-
+ include/linux/kvm_host.h                      |  41 +++-
+ include/uapi/linux/kvm.h                      |  13 ++
+ .../selftests/kvm/demand_paging_test.c        |  46 +++-
+ .../testing/selftests/kvm/include/kvm_util.h  |   7 -
+ virt/kvm/Kconfig                              |   4 +
+ virt/kvm/guest_memfd.c                        |  16 +-
+ virt/kvm/kvm_main.c                           | 213 +++++++++++++++++-
+ 16 files changed, 457 insertions(+), 44 deletions(-)
+
+
+base-commit: 02b0d3b9d4dd1ef76b3e8c63175f1ae9ff392313
+-- 
+2.45.2.993.g49e7a77208-goog
+
 
