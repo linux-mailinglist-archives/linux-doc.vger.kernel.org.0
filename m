@@ -1,149 +1,148 @@
-Return-Path: <linux-doc+bounces-20889-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-20896-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E2AD9336F8
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2024 08:26:09 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B20C93374A
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2024 08:42:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A04971C209FE
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2024 06:26:08 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 05A301F232B4
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2024 06:42:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B18E412E48;
-	Wed, 17 Jul 2024 06:26:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6094A156E4;
+	Wed, 17 Jul 2024 06:42:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="e4bTEgSD"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="D0hHQEEj"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFF29125DE
-	for <linux-doc@vger.kernel.org>; Wed, 17 Jul 2024 06:26:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34AE414F6C;
+	Wed, 17 Jul 2024 06:42:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1721197565; cv=none; b=JTkNOF7ey5q38h+iVlRnw/O/9wrJvfA8tR2Dw5oVTdL/KjW5Brys47WsDmVe4ykPTVKiz/pgPr+2YxIq9T4QGJILjenJhBZwZZt4Qy5p3iRtXuJ3E/fJNk2wvJXMRZlGYBb6ZYnlylUth8lEbxgjbZcGYwjXq6kXrJ7idEazImI=
+	t=1721198542; cv=none; b=Vurol9e6+77yxdAa0ThBW/w3smkeiuE/doC0DVmXhcaf3R0J2KlcuA+C1IrCgzRf/HyTyGXiFBZtBFELW6N8StGR9f8mQegH0LkL0wRFfeiXKNzTg6ksUVC4e5H3DBXKJ65OqJYq69hT3qOsFsXqFLgePiXxJgjTvFE4F/K8RD8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1721197565; c=relaxed/simple;
-	bh=ByuZeLQzwZ5x3nXl8kE+pf2jxHURXs8b01VJ/XfnZeQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=njBKtvu0lcvMU2i0uoua0k0XuxNCziSLZz0mD3FOe12GZQHfmzDDB3gLSBIQ5wby0/aeRxy+1rr1LJVU1hJL3dze1CwOIb03A8Baqj8zPUPF04OLflCkOkc4sZGiofOpbYlHsPJnj01bCCFt6lXaf1mkJPN75p7f6Pf2xXcJHVw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=e4bTEgSD; arc=none smtp.client-ip=209.85.167.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-52ea2f58448so8653017e87.1
-        for <linux-doc@vger.kernel.org>; Tue, 16 Jul 2024 23:26:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1721197562; x=1721802362; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=kRZCoDkETaEFOBCewGIFpdrgG+eZN4FZNraXMVegoL0=;
-        b=e4bTEgSDEfWn7rENkpLoF+hCc9fKY8oY++rP9JBYSRBR7RxLje7itpWbdi3VSGWjIn
-         asaYcjERfn+fP3lnAyyXvTbzvs+etHxKUeSntA4XHTyTX+S9OZeiCBxdT45wnXD2lJ6W
-         tS9ccv3uPT2fFP9ZIO5EMwGVcnwKvNO09kxXAXmULeZTzcVB74tfbvBXxemzePDl4BJz
-         B1GiEYq3ZU+6305EFZUeX6liW5EpBfbK467EgIPNG5AyrEF5vT3byKYjiAhq2FdHpgyS
-         qhxVkO8h1V367NglYzcuxBdJpPtYH4VZBF/AlHvAjvdP+hmS2OIenbbumhhI99Znyl/1
-         R8SQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721197562; x=1721802362;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=kRZCoDkETaEFOBCewGIFpdrgG+eZN4FZNraXMVegoL0=;
-        b=HCmf4HrAHPyEgTon63CUgC0R67DdekEq3qePJozJOTBz2fsi9FCvXnGN0yEPhpmcX4
-         fNKaud4HKgpicczM2y8CmhnCPm10Hf0HcKPe/0hLhFKR+HbZi10744pCogOMmuU9MFbQ
-         m4uHqphZniocYm2KVc7D4zixpBRVOZH2KXOIg4oWrAUU0JODS4OJRlTOsHPSAWxU+8bb
-         S/yX27to7iygqj562/htFu+3iM1pa1sRn4n+C/4r8kHghIJ90zxW1el+/5t/CXbzOIX6
-         Kx2Itj2dWzGHujFR0TlzFPCSkwyHmi0cTxhAnFBzZiNpbhczjxa01h7TM8RWLfpF60S8
-         n10Q==
-X-Forwarded-Encrypted: i=1; AJvYcCX6WCYR4+VldzMnfCfcPc8JfajRmBWmc+D2E7WHJA2fWGR+XKFRCkhSA+RAwQHM4PtV0bLINyc/V4m4ow80ALHAuF+q2SLGReVv
-X-Gm-Message-State: AOJu0YzwC9H7vY7S//Xs8hlIh/m+6XoJwgT3T20aH6wszgybZclWDVPS
-	WBVPy4lTODEHMSF/P+Wx6qtr/aicRCXzk8Mq1PRsPQXGcepiLfoZBRKvLAqqJ3A=
-X-Google-Smtp-Source: AGHT+IGDEwk+nZqPqfNzpH3tY2qHsGGwHFWpWnZPOMmrbDmZO3jaXfhbMrl3VS0/+lWJ0Ywpz+aWEA==
-X-Received: by 2002:a05:6512:104a:b0:52e:9ec8:a3fd with SMTP id 2adb3069b0e04-52ee542718dmr459428e87.45.1721197561796;
-        Tue, 16 Jul 2024 23:26:01 -0700 (PDT)
-Received: from localhost (109-81-86-75.rct.o2.cz. [109.81.86.75])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a79bc5b4f87sm406498866b.48.2024.07.16.23.26.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Jul 2024 23:26:01 -0700 (PDT)
-Date: Wed, 17 Jul 2024 08:26:00 +0200
-From: Michal Hocko <mhocko@suse.com>
-To: David Finkel <davidf@vimeo.com>
-Cc: Tejun Heo <tj@kernel.org>, Muchun Song <muchun.song@linux.dev>,
-	Andrew Morton <akpm@linux-foundation.org>, core-services@vimeo.com,
-	Jonathan Corbet <corbet@lwn.net>,
-	Roman Gushchin <roman.gushchin@linux.dev>,
-	Shuah Khan <shuah@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
-	Zefan Li <lizefan.x@bytedance.com>, cgroups@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-mm@kvack.org,
-	linux-kselftest@vger.kernel.org,
-	Shakeel Butt <shakeel.butt@linux.dev>
-Subject: Re: [PATCH] mm, memcg: cg2 memory{.swap,}.peak write handlers
-Message-ID: <Zpdj-DVZ5U5EdvqL@tiehlicka>
-References: <20240715203625.1462309-1-davidf@vimeo.com>
- <20240715203625.1462309-2-davidf@vimeo.com>
- <ZpZ6IZL482XZT1fU@tiehlicka>
- <ZpajW9BKCFcCCTr-@slm.duckdns.org>
- <Zpa1VGL5Mz63FZ0Z@tiehlicka>
- <ZpbRSv_dxcNNfc9H@slm.duckdns.org>
- <CAFUnj5MTRsFzd_EHJ7UcyjrWWUicg7wRrs2XdnVnvGiG3KmULQ@mail.gmail.com>
+	s=arc-20240116; t=1721198542; c=relaxed/simple;
+	bh=spQRPZaYq5tzQGw7T8xlS+i7lp0wAGAT4aBxUl8eZco=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=oB+cxNKo240403p/cZUv6dQy/P13yE37ERNxdymBekWARwTGaV2cFksZLzWvn24E2ujjkJOKWptCeL2anjLHd9YXUgtJegn1OHKV+TU32XGdCrJKQxQe72+T77i9jzFaA9tMv4GnUrK8NvTweVs3xCvWmilH3AAX7OGflKvAJ2w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=D0hHQEEj; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 17D2AC32782;
+	Wed, 17 Jul 2024 06:42:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1721198541;
+	bh=spQRPZaYq5tzQGw7T8xlS+i7lp0wAGAT4aBxUl8eZco=;
+	h=Date:Subject:To:References:From:In-Reply-To:From;
+	b=D0hHQEEjWyhI/GgZFL35GxpL/9QIa/DMN1CV7+7LwSiCdcM0HYp7NFQsuBjzkxFu7
+	 uTzAXqxcYHlcI4F7z8viOvmXocI5nqeKBYtOkeMHuLGwrJsEz/tBzESq0nuxB1r72a
+	 ovN6hnxaWRAec682e6xGTlWsceSdS7P3nbDuiJQn64fHmZRabijnuy1QZbQpC9Cs5i
+	 7E5H2sPGjyjRNzUvdBBOjqPoaxQtxCyMixY8rYBDX7+tJkN1DVJrwAc3EmMj7oEOf0
+	 2MvxB2JFWR/zv7jonR/WI6x9BOvm0QF18r/NoKvjbnqRNUL0UstN9eUkccBBpTLO9p
+	 /dtey7YdQPTfA==
+Message-ID: <032ca0b4-94e2-4ada-8ea1-9915cba01e86@kernel.org>
+Date: Wed, 17 Jul 2024 08:42:11 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFUnj5MTRsFzd_EHJ7UcyjrWWUicg7wRrs2XdnVnvGiG3KmULQ@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 02/11] dt-bindings: riscv: Add Zabha ISA extension
+ description
+To: Alexandre Ghiti <alexghiti@rivosinc.com>, Jonathan Corbet
+ <corbet@lwn.net>, Paul Walmsley <paul.walmsley@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>,
+ Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Andrea Parri <parri.andrea@gmail.com>, Nathan Chancellor
+ <nathan@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
+ Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
+ Waiman Long <longman@redhat.com>, Boqun Feng <boqun.feng@gmail.com>,
+ Arnd Bergmann <arnd@arndb.de>, Leonardo Bras <leobras@redhat.com>,
+ Guo Ren <guoren@kernel.org>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
+ linux-arch@vger.kernel.org
+References: <20240717061957.140712-1-alexghiti@rivosinc.com>
+ <20240717061957.140712-3-alexghiti@rivosinc.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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 fv0=
+In-Reply-To: <20240717061957.140712-3-alexghiti@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue 16-07-24 18:06:17, David Finkel wrote:
-> On Tue, Jul 16, 2024 at 4:00 PM Tejun Heo <tj@kernel.org> wrote:
-> >
-> > Hello,
-> >
-> > On Tue, Jul 16, 2024 at 08:00:52PM +0200, Michal Hocko wrote:
-> > ...
-> > > > If we want to allow peak measurement of time periods, I wonder whether we
-> > > > could do something similar to pressure triggers - ie. let users register
-> > > > watchers so that each user can define their own watch periods. This is more
-> > > > involved but more useful and less error-inducing than adding reset to a
-> > > > single counter.
-> > >
-> > > I would rather not get back to that unless we have many more users that
-> > > really need that. Absolute value of the memory consumption is a long
-> > > living concept that doesn't make much sense most of the time. People
-> > > just tend to still use it because it is much simpler to compare two different
-> > > values rather than something as dynamic as PSI similar metrics.
-> >
-> > The initial justification for adding memory.peak was that it's mostly to
-> > monitor short lived cgroups. Adding reset would make it used more widely,
-> > which isn't necessarily a bad thing and people most likely will find ways to
-> > use it creatively. I'm mostly worried that that's going to create a mess
-> > down the road. Yeah, so, it's not widely useful now but adding reset makes
-> > it more useful and in a way which can potentially paint us into a corner.
+On 17/07/2024 08:19, Alexandre Ghiti wrote:
+> Add description for the Zabha ISA extension which was ratified in April
+> 2024.
 > 
-> This is a pretty low-overhead feature as-is, but we can reduce it further by
-> changing it so instead of resetting the watermark on any non-empty string,
-> we reset only on one particular string.
-> 
-> I'm thinking of something like "global_reset\n", so if we do something like the
-> PSI interface later, users can write "fd_local_reset\n", and get that
-> nicer behavior.
-> 
-> This also has the benefit of allowing "echo global_reset >
-> /sys/fs/cgroup/.../memory.peak" to do the right thing.
-> (better names welcome)
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
 
-This would be a different behavior than in v1 and therefore confusing
-for those who rely on this in v1 already. So I wouldn't overengineer it
-and keep the semantic as simple as possible. If we decide to add PSI
-triggers they are completely independent on peak value because that is
-reclaim based interface which by definition makes peak value very
-dubious.
--- 
-Michal Hocko
-SUSE Labs
+<form letter>
+Please use scripts/get_maintainers.pl to get a list of necessary people
+and lists to CC. It might happen, that command when run on an older
+kernel, gives you outdated entries. Therefore please be sure you base
+your patches on recent Linux kernel.
+
+Tools like b4 or scripts/get_maintainer.pl provide you proper list of
+people, so fix your workflow. Tools might also fail if you work on some
+ancient tree (don't, instead use mainline) or work on fork of kernel
+(don't, instead use mainline). Just use b4 and everything should be
+fine, although remember about `b4 prep --auto-to-cc` if you added new
+patches to the patchset.
+
+You missed at least devicetree list (maybe more), so this won't be
+tested by automated tooling. Performing review on untested code might be
+a waste of time.
+
+Please kindly resend and include all necessary To/Cc entries.
+</form letter>
+
+Best regards,
+Krzysztof
+
 
