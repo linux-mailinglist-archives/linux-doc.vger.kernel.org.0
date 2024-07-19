@@ -1,509 +1,293 @@
-Return-Path: <linux-doc+bounces-21033-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21035-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F4C193730E
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jul 2024 06:49:26 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FFE1937580
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jul 2024 11:07:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B60E1282144
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jul 2024 04:49:24 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 438071C20BE7
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jul 2024 09:07:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4D7362A1C9;
-	Fri, 19 Jul 2024 04:49:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C35BF3236;
+	Fri, 19 Jul 2024 09:07:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=nxp.com header.i=@nxp.com header.b="T36cmlLr"
+	dkim=pass (1024-bit key) header.d=126.com header.i=@126.com header.b="W4kigf+1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from AS8PR04CU009.outbound.protection.outlook.com (mail-westeuropeazon11011021.outbound.protection.outlook.com [52.101.70.21])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D4E71B86F8;
-	Fri, 19 Jul 2024 04:49:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.70.21
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1721364560; cv=fail; b=YyI8rLUdJMGBQ9uHOO/17DlRtkBR5dpZN4Cwwt9JJpw0mzTjDqaThCpYMme2q6RlLymQKJReBd0rhQKjMEm54Sqj5LLCWGxDNlFoMx4HR/dMlYLGhMY8g6qEhTck4xYXROS3wJKcbmdppt1pajdJRPKOlhc9gCke4eyCjDCaoZ8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1721364560; c=relaxed/simple;
-	bh=PEvtlvtfcIvDGAKayeT28wY6QVobQoFimIi+3+keIjU=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=cgWFFH6SCy8THypOVRZJFbh/QZn5pHPbSsaSaTKzOz0SnI2X7im4jCeLSvJkeULDXAEt1EJjtXLjGSxg2v8SREWQ6CrQQ4sxSP9pDm7CFWxaehqjYL7/7fgqy4sresTIdA+V33Ud68BpR5QOhdf+q2vd2ZfwuhlqoLRWFUvU4s0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; dkim=pass (1024-bit key) header.d=nxp.com header.i=@nxp.com header.b=T36cmlLr; arc=fail smtp.client-ip=52.101.70.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KVr5we6E8Ht5iIUN8fTTH1Gw6bhLfdWJyh/qDrr69tkEZGVs1OngR2pCUXqGqFQEkh9vH9NZ+o/nkaAkNxRE507y6lTc8HEZaHwixaBzZ6L/rwWO7AnbexWotRDubQipKTfSY5q/qa7sKV2vjbqd81HgkWuSET21it2CXiaekpJa3mMQSCQ0l24zPP9JufrBnAraruG3Zhr3qAQ+3JAwsuLaLJzg7Kv6GfAk+DWCivVYYM/eDyurCGn1M/+CSxs+gY36s3BxykuIS7+6w7FNrrL/jjnrBHrMDCyMaYJ+0ZFLTS28x+SsFcLKxjcC+1Wpf064VtfsejuGOSECXiuwHw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=U8uoieJ6ywALqwXkjB/E6gEpOC7kgn75+FlKysKmnZY=;
- b=Edj1BcZfMdlNPdRs+gVOUAp92EIL9pyHwTdwwQ0FxTAiISn02qjcmPg8d9rp9da02azT1QlW+tcb75i6w0VLW8LTu6FwYa4jlkemVy07hoyjeSdqDoIJbPuHvm6xxx4P4rhrowVj3vYKz53FEZRxU+OL8AbMrdEbJFjgb60IyYn6wEAu6nL6Yyf/oGXLqiC0EpYJG3W65DY+6l/Svu/H1dl/zHf3zJp0v0H3qC7ulk/0rmj00pdg95keiEoh7z9e/2pmuyZQpnTbXluFUZP1HxMD2XSh0kYdMRWhZXrj66NIct7btjAzwagn3pSG/YduWnA3s1KnuHyzJquYsnFpag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U8uoieJ6ywALqwXkjB/E6gEpOC7kgn75+FlKysKmnZY=;
- b=T36cmlLrqWivD1yDtTSE/Lr+6Ho4w1P2vLnKww307ARojkGkn62MekDjIogzl5QpAkac25QQsqTV/FKY7MdTkJ222enIEB1YJLIxpD3Z4N7krnEMsIvyaQBDv/LFvIu38RQSJBZQcCBhVxdpkxQlEynPiC6i0Ub4+VxJ3HK95qY=
-Received: from AM9PR04MB8604.eurprd04.prod.outlook.com (2603:10a6:20b:43b::21)
- by GV1PR04MB10330.eurprd04.prod.outlook.com (2603:10a6:150:1cf::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.20; Fri, 19 Jul
- 2024 04:49:14 +0000
-Received: from AM9PR04MB8604.eurprd04.prod.outlook.com
- ([fe80::e751:223e:aa3d:5827]) by AM9PR04MB8604.eurprd04.prod.outlook.com
- ([fe80::e751:223e:aa3d:5827%3]) with mapi id 15.20.7784.017; Fri, 19 Jul 2024
- 04:49:14 +0000
-From: Pankaj Gupta <pankaj.gupta@nxp.com>
-To: Sascha Hauer <s.hauer@pengutronix.de>
-CC: Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Shawn Guo
-	<shawnguo@kernel.org>, Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio
- Estevam <festevam@gmail.com>, Rob Herring <robh+dt@kernel.org>, Krzysztof
- Kozlowski <krzysztof.kozlowski+dt@linaro.org>, "devicetree@vger.kernel.org"
-	<devicetree@vger.kernel.org>, "imx@lists.linux.dev" <imx@lists.linux.dev>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"linux-arm-kernel@lists.infradead.org"
-	<linux-arm-kernel@lists.infradead.org>, "linux-doc@vger.kernel.org"
-	<linux-doc@vger.kernel.org>
-Subject: RE: [EXT] Re: [PATCH v3 4/5] firmware: imx: add driver for NXP
- EdgeLock Enclave
-Thread-Topic: [EXT] Re: [PATCH v3 4/5] firmware: imx: add driver for NXP
- EdgeLock Enclave
-Thread-Index: AQHawIiZBQsZ0s8620ykCNsfnd2JyLHNMuWAgAm9QpCACrVJgIAWBn9wgAYAwyA=
-Date: Fri, 19 Jul 2024 04:49:13 +0000
-Message-ID:
- <AM9PR04MB860407B8EEB86B3E7DD1E12695AD2@AM9PR04MB8604.eurprd04.prod.outlook.com>
-References: <20240617-imx-se-if-v3-0-a7d28dea5c4a@nxp.com>
- <20240617-imx-se-if-v3-4-a7d28dea5c4a@nxp.com>
- <ZnFF_Z48qzpNvPtj@pengutronix.de>
- <AM9PR04MB860446165A0826362E7AF58195D32@AM9PR04MB8604.eurprd04.prod.outlook.com>
- <ZoJtC-fgyVWQO57C@pengutronix.de>
- <AM9PR04MB86044449C38D1EDBF308491695A12@AM9PR04MB8604.eurprd04.prod.outlook.com>
-In-Reply-To:
- <AM9PR04MB86044449C38D1EDBF308491695A12@AM9PR04MB8604.eurprd04.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AM9PR04MB8604:EE_|GV1PR04MB10330:EE_
-x-ms-office365-filtering-correlation-id: b2d7903a-5502-4b7e-5326-08dca7ae237f
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|7416014|376014|1800799024|38070700018;
-x-microsoft-antispam-message-info:
- =?us-ascii?Q?P0TA46aGgRW7mbv2iavMqc2WDKqB+czyzBu9T3wXImlX4n9FUyKops6fYk5p?=
- =?us-ascii?Q?uJIwgXz2d2xrsxUJv4s74dcqKpNOt0c34lY0zAP+7FFWodEUm6pDK8LP/kJz?=
- =?us-ascii?Q?J9+fBLUZmrWlwVBho7gNxv/1+pI7u1C+oMDzYhc/s0OO2Sc6uSLJKcuFe0HD?=
- =?us-ascii?Q?8URDPqknZvNkNUOGkjfkja5VBTZYwioIRsQilixnIF02RqRFxkROZWSIuBxb?=
- =?us-ascii?Q?7VE3zEYTaup7GtHF7bY19UPale08mdYczCTyParZi6yRrykgizf5avWi8vuA?=
- =?us-ascii?Q?OEuC3/jD90+6fcXFDDd+Zbkx01vlwxT/d6mRdvL4IYHnk/NVrzRiqpc0QetJ?=
- =?us-ascii?Q?9uoroV3mB03rgHuW3fgbIrmiT+mylSLgBRVFfCab16/RK+Mmn9fv26vm0wAz?=
- =?us-ascii?Q?8rjUrJhz3Czv8H+4Ax5CC/d1bFVUS1Vo+hJHlHnq2WRsNkEbqrCbP7Fhv9R2?=
- =?us-ascii?Q?shL+Oh79G3czTn44wXY3aBMm01zdrR3sJQfHuaCfmcVyQfF3XzJkQI00Tk8S?=
- =?us-ascii?Q?cZ2ORzMrMI9v/R90j9x888xSl9MgH/dGt62Em9djUo+03y2/lBpig4/4278S?=
- =?us-ascii?Q?2wbh4GRWiMvW5AbNrIwz0HhcrwUZNr54r3rp7Fm1FAcQ6bpGq2KrzcSivsnr?=
- =?us-ascii?Q?vl/KiXfY07k6z0ZiHDyDHhNmp0MPoCMmH3Lj1iiHBuiPrc2QSjkokCcJSuB8?=
- =?us-ascii?Q?bpxY/iBkIxqrB5aFivfx4lCFj250vsMS27t0mzDi0XuhVQ1XBPI//VqWbPBp?=
- =?us-ascii?Q?PeHoSkvR0fIuwNV8TjHUA/0yQBXMYPE1eMgAe4mor9knQJ9NrUXnyqLqujGV?=
- =?us-ascii?Q?CrjAqEriE9+d0d/8O+rP+Kzfhx4MjGe1oqgvcRqGta1RamZZaw9+hT+R5/gg?=
- =?us-ascii?Q?WxPR8if4GUnfEZDIWAD6uMzS1wuw1bNJmm96vRuV4JldplNigmTNyor+CWij?=
- =?us-ascii?Q?2BO3VmfkRUL3HZ5XUIpKpyaU/DjmPw6r6UIoPs6tt1P6WKQDtAz9sIh0K9u5?=
- =?us-ascii?Q?NqebupI7at2Emouwir4m/8lrFk/K05k//R0eW0+S8tbG3Wr4cH/SNQ938klG?=
- =?us-ascii?Q?8xex4yxYbUAgHDE6cELUgYC+WJq5pml+6Nbe3kVwbgZuAht8K3n8YLceN9rr?=
- =?us-ascii?Q?HfVCgss8xY4pxB8D9kce+EUaXXzXQkycEL/TjhptW/xFVtcDK/SHcJZJRLxY?=
- =?us-ascii?Q?Ih/D5CVsJlEoNc4WjHqMYMiCwnyYDq5ZJaLdk3cAa5IeZiHVvHgd2XPezwoa?=
- =?us-ascii?Q?G4VG9ty3b0tHZE0rCUeVw/03jElWAbdySVlHD8oItbDOdKhOLDqPDFtNyuCR?=
- =?us-ascii?Q?5Wk6NfXWg2TnLTYvT+u9okwfjCcbU09oYY8qmkI198UPdelxQ12MjZHe4HRP?=
- =?us-ascii?Q?wwZzAHcPeraIhtsIXnlf+krzBWXgRpVhg/RiJE7i/yNJRZTHuA=3D=3D?=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR04MB8604.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?us-ascii?Q?pcZo98bB03Spqhe/Sn3LYAgvwei2L6RUj4RPT2NxQpHggDH3Mz6J2arQz+82?=
- =?us-ascii?Q?2Rcz0Mwolt1EhriV3lf+HOgqhc3bChha8gScGu0CLXEuhy6Gn5j1+UMTuWO3?=
- =?us-ascii?Q?+mJYa/3311Eip4DwUidXq6bCepyj3vYxKSt4ygbrLz0dAEm7FK9XIHZLlefR?=
- =?us-ascii?Q?aJFyb53ByVdFT31+HkkgANidcBxEKgAZb9A9nfXBHEkWv95QsdXbQ/yGJ9ib?=
- =?us-ascii?Q?G37ItlMLIFCuQ2LRkaAZfdMsmnr3Nrdyimb1SJqFGM5FH8J3MePugTHZqX/t?=
- =?us-ascii?Q?WgJMvxnfl/zAkA84gq8lUhaKXL7epUaV93e/Y2VVC24awO/wsQTp8cqjS97y?=
- =?us-ascii?Q?hEHZt7pPrKOKka/lgwgi80aGm8Kek/524Lq01e7ag/jen1aChiRnmAuCjXw5?=
- =?us-ascii?Q?FOJpDSWx6JKqq/8SGQqIHho4JpS542UXm0UdE2ATHhU5ah8PNuW1s1gXIgcU?=
- =?us-ascii?Q?GzVAskUOAv6zHMc7OJd1jqfSeFWdfQ/O16hZMOoC7L4Nwd/omi6fJL6rZkxh?=
- =?us-ascii?Q?4aJP5fMKkBMrXl1TakjPtMNiMOd3d9jy75KuOtIJoYelPVqNZLRmXaiPjT+7?=
- =?us-ascii?Q?MsK5kudx+yKAtC0x2U4iM9JY/Un8MBujkHtHQLlXketjh181a2Fga2oIcC9x?=
- =?us-ascii?Q?cp+bMuOZMIi4iyTwmfRIhpiYuTosgzRqTxak6iAc199YoyyfxXT7oESAC+lD?=
- =?us-ascii?Q?u0bgMHcZfYPlyNqdsGZDt1+d4DzszksV+nZkjjplSIEmESKH9bdESQ+PudSN?=
- =?us-ascii?Q?BZmOslOlMekvh1vPAV34hYZoxpI8P/QnZhWtQ0pg7tWDvr7h5y4n5dACv5za?=
- =?us-ascii?Q?FFd5hBSvdMvJoRjl3IxopAcpH1hDIr8EXehMLZvTD8es5SBTVwRK0WEn2ED5?=
- =?us-ascii?Q?IlGHhSb4jGqp8H82dtp95RV60DG/kzQE7MPXOS5jEakHW2fGfqkb2/AmBs2P?=
- =?us-ascii?Q?bt/IwYkUNcB0qX021QZvL3bIuVoY5IT6dFLhyhQYv1dFVGuFaT7FL+dghFe+?=
- =?us-ascii?Q?MRwfu+doeJWo6V6hMOibAqU++BGmzhzMqMBGsSO50Sk68T9ysYWxZ0ts7GrY?=
- =?us-ascii?Q?lBSGh6vzoutcNQgTrlCk24xQzDO/YkJFXXcY999CYzvx/slDblvSQcyzPgVw?=
- =?us-ascii?Q?0jiz78vgXNOYjW7l7dhI0QB/qpMxSPj90jAuCp4PGmn2/n9xIv3o6supQHEQ?=
- =?us-ascii?Q?KBFebnDLghja8oNWDoz705UPh8f+TlneWmxa3ac7m/T60J7zAbT56ptdemTh?=
- =?us-ascii?Q?Oq6FkjdBO1fLeR/d6pwe1KcjdB1OZ585+lCqFeTKx+XrAyMMUln2ddDl0MnA?=
- =?us-ascii?Q?G995QjwqcEW9qtV4k+TjumfWmpBNIKLubnV3mFNTHEJM1laBCboNrnqE+NDA?=
- =?us-ascii?Q?IdENR5dpI3ut+3FLYmDztLgaowceODXVJMwfD1bhckH3mCEkX1mubZAzHtR1?=
- =?us-ascii?Q?ypbqGpzeydI2vNX6Y0lQDcy0z+87cM1jnNpR7+egZQTpJP7aO0PjHQoKWiCu?=
- =?us-ascii?Q?DT1nlH5dZsjFKnNtnM4rd8EMo+o9jLZBgDModZ1QH/5bRx8R+y52Z8mTTdux?=
- =?us-ascii?Q?9i1d1HbcFKjY1OxCpTH3qrBtyjgCiKtNZ3exTaVT?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Received: from m16.mail.126.com (m16.mail.126.com [220.197.31.6])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3798657CBC
+	for <linux-doc@vger.kernel.org>; Fri, 19 Jul 2024 09:07:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.6
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1721380025; cv=none; b=SPPBpslRIUqcH+J4VBFKhE+PkC8DXGEwVsz8eDqJ5/g3MP9rZq+rJ+9SlX9rD91Pw4SxHS5l3eaNLG6fNV0poGqv1TkMgIwar8ax78wI86ZQYTM4Fb/tVI5XRKGvFVYbs13Yzb0LIVAlLRk/Bg6I/YPYVcKKRuKX4LySyxxRNAM=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1721380025; c=relaxed/simple;
+	bh=ToRWqfs0O5QgOCyCuB9Y1MQzfjwUaAmBcZ9LF3vdgXM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=IzkeiDug5ziULN51bL5u3oVwCAjz5T580H0MRsbKBGqUcmz6Usw6RJwfnJo6eADVccpaAhGfDZNreMyV/tNRCWFWpDu4uSDE68SAb7erLAQczmE3vQq6Tc4Oauk7Hr4yvZ/nbv5ZDxY6qdVN14eJ7qRfK+rcRlv0tWWJ5oIEggY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=126.com; spf=pass smtp.mailfrom=126.com; dkim=pass (1024-bit key) header.d=126.com header.i=@126.com header.b=W4kigf+1; arc=none smtp.client-ip=220.197.31.6
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=126.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=126.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
+	s=s110527; h=From:Subject:Date:Message-ID:MIME-Version:
+	Content-Type; bh=GhZQKUvweYqZGanauNSoF59A0TnHp5xSiJGnUnKdOZQ=;
+	b=W4kigf+1ZI68Kk7Up/RMUWZEwbAbG7bKkxTuAvD5ZRWdLHE39v6widuLeCrM0t
+	hc2u8rPn4kb1hlg0yOi+LH3rEDdkqfyuojRIjJ/CmCFVlfsxF+wYkgwKcGCjoZl3
+	j38DbjXOimzhs+nN4smtfdoYf+aCG9tsR5LH08oJRmpvg=
+Received: from localhost.localdomain (unknown [39.156.73.13])
+	by gzga-smtp-mta-g1-2 (Coremail) with SMTP id _____wD3__v2IZpm4Ih5AQ--.25148S2;
+	Fri, 19 Jul 2024 16:21:13 +0800 (CST)
+From: cuiyudong123@126.com
+To: siyanteng@loongson.cn,
+	corbet@lwn.net
+Cc: alexs@kernel.org,
+	dzm91@hust.edu.cn,
+	linux-doc@vger.kernel.org,
+	Yudong Cui <cuiyudong@kylinos.cn>
+Subject: [PATCH v4]   docs/zh_CN: Add userspace-api/mseal Chinese translation
+Date: Fri, 19 Jul 2024 16:20:41 +0800
+Message-ID: <20240719082048.1619-1-cuiyudong123@126.com>
+X-Mailer: git-send-email 2.43.0.windows.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8604.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b2d7903a-5502-4b7e-5326-08dca7ae237f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Jul 2024 04:49:14.0951
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: GNqz9SkzZfqBuLplXFi2P80hFjj/ebBu+68ZYtUpJDnGMRv5RbbCjaYQlnNiIP3cFCWLLQDeCo3GoxLSFkcgJA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10330
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wD3__v2IZpm4Ih5AQ--.25148S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW3AF47Kr17Jr17uF4rur4xXrb_yoW3CFy3pa
+	4qkryfWF4rJry7Ar1I9r10gF4UGF18Xay3Aryxt3WYvry5AFy0vr4YkFWfW3s7Wr48Ca15
+	Xa1FkF45C34xKrDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UGzuAUUUUU=
+X-CM-SenderInfo: 5fxl535grqwiist6ij2wof0z/1tbi2wkXtmVLawpH6gABsQ
 
+From: Yudong Cui <cuiyudong@kylinos.cn>
 
+  Translate the following documents into Chinese:
 
-> -----Original Message-----
-> From: Pankaj Gupta
-> Sent: Monday, July 15, 2024 2:49 PM
-> To: Sascha Hauer <s.hauer@pengutronix.de>
-> Cc: Jonathan Corbet <corbet@lwn.net>; Rob Herring <robh@kernel.org>;
-> Krzysztof Kozlowski <krzk+dt@kernel.org>; Conor Dooley
-> <conor+dt@kernel.org>; Shawn Guo <shawnguo@kernel.org>; Pengutronix
-> Kernel Team <kernel@pengutronix.de>; Fabio Estevam
-> <festevam@gmail.com>; Rob Herring <robh+dt@kernel.org>; Krzysztof
-> Kozlowski <krzysztof.kozlowski+dt@linaro.org>; devicetree@vger.kernel.org=
-;
-> imx@lists.linux.dev; linux-kernel@vger.kernel.org; linux-arm-
-> kernel@lists.infradead.org; linux-doc@vger.kernel.org
-> Subject: RE: [EXT] Re: [PATCH v3 4/5] firmware: imx: add driver for NXP
-> EdgeLock Enclave
->=20
->=20
->=20
-> > -----Original Message-----
-> > From: Sascha Hauer <s.hauer@pengutronix.de>
-> > Sent: Monday, July 1, 2024 2:17 PM
-> > To: Pankaj Gupta <pankaj.gupta@nxp.com>
-> > Cc: Jonathan Corbet <corbet@lwn.net>; Rob Herring <robh@kernel.org>;
-> > Krzysztof Kozlowski <krzk+dt@kernel.org>; Conor Dooley
-> > <conor+dt@kernel.org>; Shawn Guo <shawnguo@kernel.org>; Pengutronix
-> > Kernel Team <kernel@pengutronix.de>; Fabio Estevam
-> > <festevam@gmail.com>; Rob Herring <robh+dt@kernel.org>; Krzysztof
-> > Kozlowski <krzysztof.kozlowski+dt@linaro.org>;
-> > devicetree@vger.kernel.org; imx@lists.linux.dev;
-> > linux-kernel@vger.kernel.org; linux-arm- kernel@lists.infradead.org;
-> > linux-doc@vger.kernel.org
-> > Subject: Re: [EXT] Re: [PATCH v3 4/5] firmware: imx: add driver for
-> > NXP EdgeLock Enclave
-> >
-> > Caution: This is an external email. Please take care when clicking
-> > links or opening attachments. When in doubt, report the message using
-> > the 'Report this email' button
-> >
-> >
-> > On Mon, Jul 01, 2024 at 07:45:20AM +0000, Pankaj Gupta wrote:
-> > >
-> > >
-> > > > -----Original Message-----
-> > > > From: Sascha Hauer <s.hauer@pengutronix.de>
-> > > > Sent: Tuesday, June 18, 2024 2:02 PM
-> > > > To: Pankaj Gupta <pankaj.gupta@nxp.com>
-> > > > Cc: Jonathan Corbet <corbet@lwn.net>; Rob Herring
-> > > > <robh@kernel.org>; Krzysztof Kozlowski <krzk+dt@kernel.org>; Conor
-> > > > Dooley <conor+dt@kernel.org>; Shawn Guo <shawnguo@kernel.org>;
-> > > > Pengutronix Kernel Team <kernel@pengutronix.de>; Fabio Estevam
-> > > > <festevam@gmail.com>; Rob Herring <robh+dt@kernel.org>; Krzysztof
-> > > > Kozlowski <krzysztof.kozlowski+dt@linaro.org>;
-> > > > devicetree@vger.kernel.org; imx@lists.linux.dev;
-> > > > linux-kernel@vger.kernel.org; linux-arm-
-> > > > kernel@lists.infradead.org; linux-doc@vger.kernel.org
-> > > > Subject: [EXT] Re: [PATCH v3 4/5] firmware: imx: add driver for
-> > > > NXP EdgeLock Enclave
-> > > >
-> > > > Caution: This is an external email. Please take care when clicking
-> > > > links or opening attachments. When in doubt, report the message
-> > > > using the 'Report this email' button
-> > > >
-> > > >
-> > > > Hi Pankaj,
-> > > >
-> > > > Here's some review feedback. I think it'll take some more rounds
-> > > > to get this into shape.
-> > > >
-> > > > On Mon, Jun 17, 2024 at 12:59:42PM +0530, Pankaj Gupta wrote:
-> > > > > NXP hardware IP(s) for secure-enclaves like Edgelock
-> > > > > Enclave(ELE), are embedded in the SoC to support the features
-> > > > > like HSM, SHE & V2X, using message based communication interface.
-> > > > >
-> > > > > The secure enclave FW communicates on a dedicated messaging
-> > > > > unit(MU) based interface(s) with application core, where kernel
-> > > > > is
-> > running.
-> > > > > It exists on specific i.MX processors. e.g. i.MX8ULP, i.MX93.
-> > > > >
-> > > > > This patch adds the driver for communication interface to
-> > > > > secure-enclave, for exchanging messages with NXP secure enclave
-> > > > > HW
-> > > > > IP(s) like EdgeLock Enclave (ELE) from Kernel-space, used by
-> > > > > kernel management layers like
-> > > > > - DM-Crypt.
-> > > > >
-> > > > > Signed-off-by: Pankaj Gupta <pankaj.gupta@nxp.com>
-> > > > > ---
-> > > > >  drivers/firmware/imx/Kconfig        |  12 +
-> > > > >  drivers/firmware/imx/Makefile       |   2 +
-> > > > >  drivers/firmware/imx/ele_base_msg.c | 284 +++++++++++++++++++
-> > > > > drivers/firmware/imx/ele_base_msg.h |  90 ++++++
-> > > > >  drivers/firmware/imx/ele_common.c   | 233 ++++++++++++++++
-> > > > >  drivers/firmware/imx/ele_common.h   |  45 +++
-> > > > >  drivers/firmware/imx/se_ctrl.c      | 536
-> > > > ++++++++++++++++++++++++++++++++++++
-> > > > >  drivers/firmware/imx/se_ctrl.h      |  99 +++++++
-> > > > >  include/linux/firmware/imx/se_api.h |  14 +
-> > > > >  9 files changed, 1315 insertions(+)
-> > > > >
-> > > > > diff --git a/drivers/firmware/imx/Kconfig
-> > > > > b/drivers/firmware/imx/Kconfig index 183613f82a11..56bdca9bd917
-> > > > > 100644
-> > > > > --- a/drivers/firmware/imx/Kconfig
-> > > > > +++ b/drivers/firmware/imx/Kconfig
-> > > > > @@ -22,3 +22,15 @@ config IMX_SCU
-> > > > >
-> > > > >         This driver manages the IPC interface between host CPU an=
-d the
-> > > > >         SCU firmware running on M4.
-> > > > > +
-> > > > > +config IMX_SEC_ENCLAVE
-> > > > > +     tristate "i.MX Embedded Secure Enclave - EdgeLock Enclave
-> > > > > +Firmware
-> > > > driver."
-> > > > > +     depends on IMX_MBOX && ARCH_MXC && ARM64
-> > > > > +     default m if ARCH_MXC
-> > > > > +
-> > > > > +     help
-> > > > > +       It is possible to use APIs exposed by the iMX Secure
-> > > > > + Enclave HW IP
-> > > > called:
-> > > > > +          - EdgeLock Enclave Firmware (for i.MX8ULP, i.MX93),
-> > > > > +          like base, HSM, V2X & SHE using the SAB protocol via
-> > > > > + the shared
-> > > > Messaging
-> > > > > +          Unit. This driver exposes these interfaces via a set o=
-f file
-> descriptors
-> > > > > +          allowing to configure shared memory, send and receive
-> messages.
-> > > > > diff --git a/drivers/firmware/imx/Makefile
-> > > > > b/drivers/firmware/imx/Makefile index 8f9f04a513a8..aa9033e0e9e3
-> > > > > 100644
-> > > > > --- a/drivers/firmware/imx/Makefile
-> > > > > +++ b/drivers/firmware/imx/Makefile
-> > > > > @@ -1,3 +1,5 @@
-> > > > >  # SPDX-License-Identifier: GPL-2.0
-> > > > >  obj-$(CONFIG_IMX_DSP)                +=3D imx-dsp.o
-> > > > >  obj-$(CONFIG_IMX_SCU)                +=3D imx-scu.o misc.o imx-s=
-cu-irq.o
-> rm.o
-> > > > imx-scu-soc.o
-> > > > > +sec_enclave-objs             =3D se_ctrl.o ele_common.o ele_base=
-_msg.o
-> > > > > +obj-${CONFIG_IMX_SEC_ENCLAVE}        +=3D sec_enclave.o
-> > > > > diff --git a/drivers/firmware/imx/ele_base_msg.c
-> > > > > b/drivers/firmware/imx/ele_base_msg.c
-> > > > > new file mode 100644
-> > > > > index 000000000000..5bfd9c7e3f7e
-> > > > > --- /dev/null
-> > > > > +++ b/drivers/firmware/imx/ele_base_msg.c
-> > > > > @@ -0,0 +1,284 @@
-> > > > > +// SPDX-License-Identifier: GPL-2.0+
-> > > > > +/*
-> > > > > + * Copyright 2024 NXP
-> > > > > + */
-> > > > > +
-> > > > > +#include <linux/types.h>
-> > > > > +#include <linux/completion.h>
-> > > > > +#include <linux/dma-mapping.h>
-> > > > > +
-> > > > > +#include "ele_base_msg.h"
-> > > > > +#include "ele_common.h"
-> > > > > +
-> > > > > +int ele_get_info(struct device *dev, struct ele_dev_info
-> > > > > +*s_info) {
-> > > >
-> > > > I think all currently exported functions should take a struct
-> > > > se_if_priv
-> > > > * as context pointer.
-> > > > I can't find any place in which any of these functions is called
-> > > > differently than with priv->dev.
-> > >
-> > > All the API(s) that construct a message to be exchanged over the
-> > > device-interface to FW,
-> > > - will be the exported symbols in the next patch-set, to be used by
-> > > other
-> > Linux kernel modules like: NVMEM driver, linux crypto framework,
-> > security/keys etc.
-> > > - These other Linux layers have to choose from multiple similar
-> > > devices per
-> > secure-enclave.
-> > >
-> > > Kindly Consider these API(s), to be the EXPORT SYMBOLS, in later
-> > > patches,
-> > when used outside of this driver.
-> >
-> > In that case you could still add a function which translates a struct
-> > device * into a struct se_if_priv *.
-> >
-> > > >
-> > > > > +     struct se_if_priv *priv =3D dev_get_drvdata(dev);
-> >
-> > This function should also include some sanity checks. It's not good
-> > that an exported function takes some struct device *, blindly assumes
-> > that it is of type se_if_priv, and if not just crashes the Kernel.
->=20
-> Will add a wrapper function over "struct se_if_priv *priv =3D
-> dev_get_drvdata(dev);", to add some safety checks.
-> Will fix this in V6.
->=20
+  - userspace-api/mseal.rst
 
-Will add for NULL check for priv data, as a sanity check.
+  commit c010d0990082("mseal: add documentation")
 
-> >
-> > > > > +static int imx_fetch_se_soc_info(struct se_if_priv *priv,
-> > > > > +                              const struct
-> > > > > +imx_se_node_info_list
-> > > > > +*info_list) {
-> > > > > +     const struct imx_se_node_info *info;
-> > > > > +     struct soc_device_attribute *attr;
-> > > > > +     struct soc_device *sdev;
-> > > > > +     u64 serial_num;
-> > > > > +     u16 soc_rev;
-> > > > > +     int err =3D 0;
-> > > > > +
-> > > > > +     info =3D priv->info;
-> > > > > +
-> > > > > +     /* This function should be called once.
-> > > > > +      * Check if the soc_rev is zero to continue.
-> > > > > +      */
-> > > > > +     if (priv->soc_rev)
-> > > > > +             return err;
-> > > >
-> > > > Just return 0 here. It takes one step less to understand what this =
-is about.
-> > > Replacing "err" with "ret", in better understanding.
-> >
-> > What I meant that you should return the constant '0' here instead of
-> > the content of a variable. It safes a reader from looking up the value
-> > of the variable which means it's one step less for the brain to underst=
-and the
-> code.
-> >
-> > > > > +
-> > > > > +     if (info->se_fetch_soc_info) {
-> > > > > +             err =3D info->se_fetch_soc_info(priv->dev, &soc_rev=
-,
-> &serial_num);
-> > > > > +             if (err < 0) {
-> > > > > +                     dev_err(priv->dev, "Failed to fetch SoC Inf=
-o.");
-> > > > > +                     return err;
-> > > > > +             }
-> > > > > +     } else {
-> > > > > +             dev_err(priv->dev, "Failed to fetch SoC revision.")=
-;
-> > > > > +             if (info->soc_register)
-> > > > > +                     dev_err(priv->dev, "Failed to do SoC regist=
-ration.");
-> > > > > +             err =3D -EINVAL;
-> > > > > +             return err;
-> > > > > +     }
-> > > >
-> > > > i.MX93 doesn't have a info->se_fetch_soc_info. Does this mean it
-> > > > doesn't work on this SoC?
-> > > >
-> > > Yes.
-> >
-> > Will you fix this?
-> For i.MX93, SoC registration is not done through this driver.
-> This is implemented as this only. Nothing to be fixed.
->=20
-> >
-> > > > > +     priv =3D devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
-> > > > > +     if (!priv) {
-> > > > > +             ret =3D -ENOMEM;
-> > > > > +             goto exit;
-> > > > > +     }
-> > > > > +
-> > > > > +     dev_set_drvdata(dev, priv);
-> > > > > +
-> > > > > +     /* Mailbox client configuration */
-> > > > > +     priv->se_mb_cl.dev              =3D dev;
-> > > > > +     priv->se_mb_cl.tx_block         =3D false;
-> > > > > +     priv->se_mb_cl.knows_txdone     =3D true;
-> > > > > +     priv->se_mb_cl.rx_callback      =3D se_if_rx_callback;
-> > > > > +
-> > > > > +     ret =3D se_if_request_channel(dev, &priv->tx_chan,
-> > > > > +                     &priv->se_mb_cl, info->mbox_tx_name);
-> > > > > +     if (ret)
-> > > > > +             goto exit;
-> > > > > +
-> > > > > +     ret =3D se_if_request_channel(dev, &priv->rx_chan,
-> > > > > +                     &priv->se_mb_cl, info->mbox_rx_name);
-> > > > > +     if (ret)
-> > > > > +             goto exit;
-> > > > > +
-> > > > > +     priv->dev =3D dev;
-> > > > > +     priv->info =3D info;
-> > > > > +
-> > > > > +     mutex_init(&priv->se_if_lock);
-> > > > > +     mutex_init(&priv->se_if_cmd_lock);
-> > > > > +
-> > > > > +     priv->cmd_receiver_dev =3D NULL;
-> > > > > +     priv->waiting_rsp_dev =3D NULL;
-> > > >
-> > > > These are NULL already.
-> > > For code readability, it is good to know when and with what value it
-> > > is
-> > initialized.
-> > > It will help review the 'if' condition based on these structure
-> > > member
-> > variable.
-> > > Will covert this information into comments.
-> >
-> > We already know they are NULL because you used kzalloc to allocate the
-> > struct. No need to comment that.
-> >
-> > Sascha
-> >
-> > --
-> > Pengutronix e.K.                           |                           =
-  |
-> > Steuerwalder Str. 21                       |
-> >
-> https://eur01.safelinks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fwww.
-> >
-> pengutronix.de%2F&data=3D05%7C02%7Cpankaj.gupta%40nxp.com%7Cc8b7
-> >
-> b605e99744ccf94e08dc99aa66f0%7C686ea1d3bc2b4c6fa92cd99c5c30163
-> >
-> 5%7C0%7C0%7C638554204358183687%7CUnknown%7CTWFpbGZsb3d8e
-> >
-> yJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3
-> >
-> D%7C0%7C%7C%7C&sdata=3DNl8R%2FcwuT69VVUxe00AichgoSEEJexZ0TfhjfuI
-> > BqoY%3D&reserved=3D0  |
-> > 31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0  =
-  |
-> > Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-555=
-5 |
+---
+V1 -> V2: Resolved compilation warnings and optimized the translation of documentation
+V2 -> V3: Fix code formatting errors
+V3 -> V4: Revise the code according to the suggestion
+---
+
+Signed-off-by: Yudong Cui <cuiyudong@kylinos.cn>
+---
+ .../zh_CN/userspace-api/index.rst             |   1 +
+ .../zh_CN/userspace-api/mseal.rst             | 185 ++++++++++++++++++
+ 2 files changed, 186 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/userspace-api/mseal.rst
+
+diff --git a/Documentation/translations/zh_CN/userspace-api/index.rst b/Documentation/translations/zh_CN/userspace-api/index.rst
+index 5b14721c8264..b7da307ec6bb 100644
+--- a/Documentation/translations/zh_CN/userspace-api/index.rst
++++ b/Documentation/translations/zh_CN/userspace-api/index.rst
+@@ -27,6 +27,7 @@ Linux 内核用户空间API指南
+    ebpf/index
+    sysfs-platform_profile
+    futex2
++   mseal
+ 
+ TODOList:
+ 
+diff --git a/Documentation/translations/zh_CN/userspace-api/mseal.rst b/Documentation/translations/zh_CN/userspace-api/mseal.rst
+new file mode 100644
+index 000000000000..d4eece7bfc6a
+--- /dev/null
++++ b/Documentation/translations/zh_CN/userspace-api/mseal.rst
+@@ -0,0 +1,185 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/userspace-api/mseal.rst
++
++:翻译:
++
++ 崔玉栋 cuiyudong <cuiyudong@kylinos.cn>
++
++==========
++mseal 简介
++==========
++
++:作者: Jeff Xu <jeffxu@chromium.org>
++
++现代处理器支持诸如RW和NX位的内存权限。这个内存权限特性提高了内存破坏漏洞
++(memory corruption bug) 的安全性。为了防止攻击者写入任意内存并进行执行，
++内存必须用X位标记，否则会发生异常。
++
++内存封装还额外保护了映射本身不被修改。这对于缓解内存损坏问题很有用，就像
++是一个损坏的指针被传递给内存管理系统这种问题。例如，这样的原始攻击者可以
++破坏控制流完整性保证，因为应该被信任的只读内存可能变得可写，或者 .text
++页面可能会被重新映射。运行时加载程序可以自动应用内存密封来密封.text和
++.rodata页面，并且应用程序可以在运行时额外密封安全关键数据。
++
++XNU内核中已经存在类似的特性
++VM_FLAGS_PERMANENT 标志 [1] 和 OpenBSD 上的可变系统调用 [2]。
++
++用户 API
++========
++mseal()
++-------
++The mseal() 系统调用具有以下签名:
++
++``int mseal(void addr, size_t len, unsigned long flags)``
++
++**addr/len**: 虚拟内存地址范围。
++
++由 ``addr``/``len`` 设置的地址范围必须满足:
++   - 起始地址必须在已分配的VMA中。
++   - 起始地址必须与页面对齐。
++   - 结束地址 (``addr`` + ``len``) 必须在已分配的VMA中。
++   - 起始地址和结束地址之间没有间隙 (未分配的内存) 。
++
++这个 ``len`` 将由内核隐式地进行分页对齐。
++
++**flags**: 保留供将来使用。
++
++**返回值**:
++
++- ``0``: 成功。
++
++- ``-EINVAL``:
++    - 无效的输入 ``flags``。
++    - 起始地址 (``addr``) 未对齐页。
++    - 地址范围 (``addr`` + ``len``) 溢出。
++
++- ``-ENOMEM``:
++    - 起始地址 (``addr``) 未分配。
++    - 结束地址 (``addr`` + ``len``) 未分配。
++    - 一个间隙 (unallocated memory) 起始地址和结束地址之间。
++
++- ``-EPERM``:
++    - 内存密封仅在64位CPU上支持，32位不受支持。
++
++- 对于上述错误情况，用户可以假设给定的内存范围为未修改，即没有部分更新。
++
++- 可能还有其他未在此处列出的内部错误/情况，例如，在合并/拆分VMA
++  （虚拟内存区域）时发生错误，或者进程达到了支持的最大VMA数量。
++  在这些情况下，给定内存范围可能会发生部分更新。然而，这些情况应该很罕见。
++
++**内存密封后的阻塞操作**:
++    通过 munmap() 和 mremap() 取消映射、移动到另一个位置以及缩小大小可以
++    留下一个空白的空间，因此可以用具有一组新属性的VMA替换它。
++
++    通过mremap()，将不同的VMA移动或扩展到当前位置。
++
++    通过mmap(MAP_FIXED)修改VMA。
++
++    通过 mremap() 进行的大小扩展似乎不会对已密封的 VMA（虚拟内存区域）
++    造成任何特定的风险。尽管如此，由于使用场景不明确，这一点还是被包括了进来。
++    无论如何，用户都可以依赖合并操作来扩展已密封的 VMA。
++
++    mprotect() 和 pkey_mprotect()。
++
++    当用户没有内存的写入权限时，匿名内存会出现一些破坏性的 madvice()
++    行为（例如 MADV_DONTNEED）。这些行为可以通过丢弃页面来更改区域内
++    容，这实际上是匿名内存的 memset(0)。
++
++    对于阻塞的操作，内核将返回 -EPERM 。
++
++    对于阻塞操作，可以期望给定的地址不会被修改，
++    即不会发生部分更新。请注意，这与现有的内存管理系统调用行为不同，
++    后者在发现错误并返回给用户空间之前会进行部分更新。举个例子来说：
++
++    假设代码顺序如下:
++
++    - ptr = mmap(null, 8192, PROT_NONE);
++    - munmap(ptr + 4096, 4096);
++    - ret1 = mprotect(ptr, 8192, PROT_READ);
++    - mseal(ptr, 4096);
++    - ret2 = mprotect(ptr, 8192, PROT_NONE);
++
++    ret1 将变成 -ENOMEM, ptr指向的页更新为PROT_READ。
++
++    ret2 将变成 -EPERM, 这个页面仍然是 PROT_READ。
++
++**注意**:
++
++- mseal() 仅适用于64位CPU，不支持32位CPU。
++
++- 用户可以多次调用 mseal() , 对已经密封的内存执行 mseal() 是一个无操作（不报错）。
++
++- 不支持munseal() 。
++
++用例:
++=====
++- glibc:
++  在加载 ELF 可执行文件时，动态链接器可以对非可写内存段应用密封操作。
++
++- Chrome 浏览器: 保护部分对安全敏感的数据结构。
++
++关于哪些内存应该被密封的注意事项:
++=================================
++
++重要的是要注意，密封会改变映射的生命周期，即已密封的映射在进程终止
++或执行 exec 系统调用之前不会被取消映射。应用程序可以从用户空间对任何虚拟
++内存区域应用密封，但在应用密封之前，至关重要的是彻底分析映射的生命周期。
++
++例如:
++
++- aio/shm
++
++  aio/shm 可以代表用户空间调用 mmap()/munmap() , 例如 ksys_shmdt() 在 shm.c 中。
++  这些映射的生命周期并不与进程的生命周期绑定。如果这些内存区域从用户空间被密封，
++  那么 munmap() 将失败，导致在进程的生命周期内 VMA（虚拟内存区域）地址空间中
++  出现泄漏。
++
++- Brk (heap)
++
++  目前，用户空间的应用程序可以通过调用 malloc() 和 mseal() 来密封堆（heap）的
++  部分内存。让我们假设以下来自用户空间的调用:
++
++  - ptr = malloc(size);
++  - mprotect(ptr, size, RO);
++  - mseal(ptr, size);
++  - free(ptr);
++
++  技术上，在 mseal() 被添加之前，用户可以通过调用 mprotect(RO)
++  来改变堆的保护属性。只要用户在调用 free() 之前将保护属性改回 RW（读写），
++  这块内存范围就可以被重用。
++
++  然而，引入 mseal() 之后，堆的部分内存将被密封，用户仍然可以释放这部分内存，
++  但内存将保持为 RO（只读）。如果堆管理器重新使用这个地址来分配另一块内存，
++  进程可能在不久后崩溃。因此，不要对任何可能会被回收的内存应用密封，
++  这是非常重要的。
++
++  此外，即使应用程序从未对指针 ptr 调用 free()，堆管理器也可能会
++  调用 brk 系统调用来缩小堆的大小。在内核中，brk 缩小操作会调用 munmap()。
++  因此，根据 ptr 的位置，brk 缩小操作的结果是不确定的。
++
++其他说明:
++=========
++正如 Jann Horn 在 [3] 中指出的那样,仍然有几种方法可以写入 RO（只读）内存，
++这在某种程度上是设计上的考虑。这些情况不会被 mseal() 涵盖。如果应用程序想
++要阻止这类情况，可以考虑使用沙箱工具（如 seccomp、LSM 等）。
++
++这些情况是：
++
++- 通过/proc/self/mem接口写入只读内存。
++- 通过ptrace(如PTRACE_POKETEXT)写入只读内存。
++- userfaultfd。
++
++这个补丁的灵感来自于 Stephen Röttger’s 在 V8 CFI（控制流完整性）中的工作 [4]。
++ChromeOS中的Chrome浏览器将是此API的第一个用户。
++
++参考:
++=====
++[1] https://github.com/apple-oss-distributions/xnu/blob/1031c584a5e37aff177559b9f69dbd3c8c3fd30a/osfmk/mach/vm_statistics.h#L274
++
++[2] https://man.openbsd.org/mimmutable.2
++
++[3] https://lore.kernel.org/lkml/CAG48ez3ShUYey+ZAFsU2i1RpQn0a5eOs2hzQ426FkcgnfUGLvA@mail.gmail.com
++
++[4] https://docs.google.com/document/d/1O2jwK4dxI3nRcOJuPYkonhTkNQfbmwdvxQMyXgeaRHo/edit#heading=h.bvaojj9fu6hc
+-- 
+2.33.0
+
 
