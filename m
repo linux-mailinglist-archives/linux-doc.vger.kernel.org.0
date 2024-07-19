@@ -1,117 +1,105 @@
-Return-Path: <linux-doc+bounces-21028-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21032-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D5D79372B7
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jul 2024 05:23:47 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 60C359372FE
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jul 2024 06:21:15 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3E6C01C20B75
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jul 2024 03:23:46 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 04F241F2165C
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jul 2024 04:21:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C475BA39;
-	Fri, 19 Jul 2024 03:23:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="LTLBpHUv"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6EA031B86FC;
+	Fri, 19 Jul 2024 04:21:11 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD08B2566
-	for <linux-doc@vger.kernel.org>; Fri, 19 Jul 2024 03:23:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+Received: from azure-sdnproxy.icoremail.net (azure-sdnproxy.icoremail.net [52.237.72.81])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2DB1610A0E
+	for <linux-doc@vger.kernel.org>; Fri, 19 Jul 2024 04:21:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=52.237.72.81
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1721359423; cv=none; b=r64J/3qr1q3sMyhC0Zgv10lrCxO3TVqPpvMBVYF6QdJDbaS6I+Z3A3n/jVqXqA9yhxRtX2T9nVs/FrUs8lAMP91LRaQmBNghEongDAgM8SRXuC4yQWjQZMQXpgdK/gsVuc1F32c36gq8SbUAy6kyEJrExkBASQYJwd75Yfxjin4=
+	t=1721362871; cv=none; b=Zm1w9D+CiKDXgxz/hND1fLkcOLB1j22dOI45NQYjITlEZaKj2dcB7vfCTbH+YM0IkBUXVqrkx+SMnWnK5kobSVaxLVODvt48Aws7MbrMzLHBRPu/mJYLpo9aKBVKx+jaWOU4jBfcEp+1MzmFohalwAunYfgAZgGfQTa8hjNh+4s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1721359423; c=relaxed/simple;
-	bh=LzYtUaIzvRbkHQvbn06to4re3EBwEBR0G3sdQDN5Hq4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qU019SZ439SkvWO5WoMAJfll/32GUVnIUZik8B4aPAfyepHbb3IZOLnVnF1V36C4hr1aCK9+yb6xC58BkzQ/2z+glwUCuGDHc4ONTdhc3I6SMAV7M/mZUnF25vEFLFmRGH6nclK2g66gnsiRingX+pKRfYgnDXqo69Upfi1lBLg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=LTLBpHUv; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1721359419;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=4g/2by4UFmJt1nLIIzaKlS2HPKjw7tCpSzx5XVWX0GE=;
-	b=LTLBpHUvkRH3apzy6ptGf5gzKzfOHT3Uhuvci5JI1c2KpOmtg4tI5ziB3mLPq48+mlK41R
-	vuwknZpYMpdUwfx2yNAtS8nvPv4jPVgalVP47gqrprituf6MaIgk61nwhTZQCYBH4uAS8b
-	Bq3+ew5hB/i9DvC+LuzdO+TQYdzq8Xg=
-Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-182-QO0slx50PEa2lPJEq-XW8w-1; Thu,
- 18 Jul 2024 23:23:35 -0400
-X-MC-Unique: QO0slx50PEa2lPJEq-XW8w-1
-Received: from mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.40])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 9E6561955F43;
-	Fri, 19 Jul 2024 03:23:32 +0000 (UTC)
-Received: from [10.22.32.50] (unknown [10.22.32.50])
-	by mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 0C698195605A;
-	Fri, 19 Jul 2024 03:23:28 +0000 (UTC)
-Message-ID: <fcb8f0ec-59ff-4f79-82dd-7eaf2530aef3@redhat.com>
-Date: Thu, 18 Jul 2024 23:23:28 -0400
+	s=arc-20240116; t=1721362871; c=relaxed/simple;
+	bh=QaeqEE2KOopVRP6CpIlKNpbtOgIadgmB0WZT6P/ushM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=qvlFx0+6ccIOQdVc27hcFj/+WW/wyX/bU5PajhK2evcGZcQZc03QB+4QspVltpMc0zwHY4kSnq6Fi8//TeUtR/ndeKYCK/snCFr9Om1EM9MTe9sQNAFYqStIcWw5yipoQnVkLVDkD8C+ueWwWCcLSnsjQXexZMkJXbewgSpLDxY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn; spf=pass smtp.mailfrom=hust.edu.cn; arc=none smtp.client-ip=52.237.72.81
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hust.edu.cn
+Received: from hust.edu.cn (unknown [172.16.0.50])
+	by app1 (Coremail) with SMTP id HgEQrAAXeG0K6Jlmv2p4AQ--.46078S2;
+	Fri, 19 Jul 2024 12:14:02 +0800 (CST)
+Received: from pride-PowerEdge-R740.. (unknown [222.20.126.129])
+	by gateway (Coremail) with SMTP id _____wAnhh4I6JlmCSoKAA--.20209S2;
+	Fri, 19 Jul 2024 12:14:01 +0800 (CST)
+From: Dongliang Mu <dzm91@hust.edu.cn>
+To: chengziqiu@hust.edu.cn
+Cc: linux-doc@vger.kernel.org,
+	Dongliang Mu <dzm91@hust.edu.cn>
+Subject: [PATCH v3 0/2] Fix checktransupdate.py and add help documents
+Date: Fri, 19 Jul 2024 12:13:32 +0800
+Message-ID: <20240719041400.3909775-1-dzm91@hust.edu.cn>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mm, memcg: cg2 memory{.swap,}.peak write handlers
-To: David Finkel <davidf@vimeo.com>, Johannes Weiner <hannes@cmpxchg.org>
-Cc: Tejun Heo <tj@kernel.org>, Michal Hocko <mhocko@suse.com>,
- Muchun Song <muchun.song@linux.dev>,
- Andrew Morton <akpm@linux-foundation.org>, core-services@vimeo.com,
- Jonathan Corbet <corbet@lwn.net>, Roman Gushchin <roman.gushchin@linux.dev>,
- Shuah Khan <shuah@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
- cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-mm@kvack.org,
- linux-kselftest@vger.kernel.org, Shakeel Butt <shakeel.butt@linux.dev>
-References: <20240715203625.1462309-1-davidf@vimeo.com>
- <20240715203625.1462309-2-davidf@vimeo.com> <ZpZ6IZL482XZT1fU@tiehlicka>
- <ZpajW9BKCFcCCTr-@slm.duckdns.org> <20240717170408.GC1321673@cmpxchg.org>
- <CAFUnj5OkHp3fYjByCnXJQ51rog93DsimSoc1qxcU7UyKw-nFrw@mail.gmail.com>
-Content-Language: en-US
-From: Waiman Long <longman@redhat.com>
-In-Reply-To: <CAFUnj5OkHp3fYjByCnXJQ51rog93DsimSoc1qxcU7UyKw-nFrw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.40
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:HgEQrAAXeG0K6Jlmv2p4AQ--.46078S2
+Authentication-Results: app1; spf=neutral smtp.mail=dzm91@hust.edu.cn;
+X-Coremail-Antispam: 1UD129KBjvJXoW7GFy8JF4rJr18XFy8CFWDXFb_yoW8Jry8pF
+	yYkrWfuas8Kw4aqw1fG3yDZr43AFW8CF4YgF9rJwnxZF4Dtw4Fvr43K3WFv3yDGrWfZayY
+	qrWYkrW09r9avFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUBFb7Iv0xC_Ar1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
+	cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
+	v20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwA2z4x0Y4vE
+	x4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAac4AC62xK8x
+	CEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07AIYIkI8VC2zVCFFI0U
+	Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VACjcxG62k0Y48FwI0_Cr0_Gr1UMcIj6x8Erc
+	xFaVAv8VW8uFyUJr1UMcIj6xkF7I0En7xvr7AKxVW8Jr0_Cr1UMcvjeVCFs4IE7xkEbVWU
+	JVW8JwACjcxG0xvY0x0EwIxGrwCF04k20xvY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26r
+	4fZr1UJr1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s02
+	6x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1Y6r17MIIYrxkI7VAKI48JMIIF0x
+	vE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE
+	42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6x
+	kF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0piF1vhUUUUU=
+X-CM-SenderInfo: asqsiiirqrkko6kx23oohg3hdfq/
 
+This patch set fixes all the issues in the checktransupdate.py reported
+by pylint, and add help documents in both English and Chinese.
 
-On 7/18/24 17:49, David Finkel wrote:
-> I spent some time today attempting to implement this.
-> Here's a branch on github that compiles, and I think is close to what you
-> described, but is definitely still a WIP:
->
-> https://github.com/torvalds/linux/compare/master...dfinkel:linux:memcg2_memory_peak_fd_session
->
-> Since there seems to be significant agreement that this approach is better
-> long-term as a kernel interface, if that continues, I can factor out some of
-> the changes so it supports both memory.peak and memory.swap.peak,
-> fix the tests, and clean up any style issues tomorrow.
->
-> Also, If there are opinions on whether the cgroup_lock is a reasonable way
-> of handling this synchronization, or if I should add a more appropriate spinlock
-> or mutex onto either the pagecounter or the memcg, I'm all ears.
+v3:
+1) fixes all the issues (not most) reported by pylint,
+2) add the functionability to tackle documents that need translation,
+3) add logging to adjust the logging level and log file
+4) fix some issues by Yanteng and Jani
 
-cgroup_lock() should only be used by the cgroup core code, though there 
-are exceptions.
+v2:
+fix some issues according to Randy
 
-You may or may not need lock protection depending on what data you want 
-to protect and if there is any chance that concurrent race may screw 
-thing up. If lock protection is really needed, add your own lock to 
-protect the data. Since your critical sections seem to be pretty short, 
-a regular spinlock will be enough.
+v1:
+This patch fixes most issues with the following contents:
+- add or revise comments for all functions
+- use format string suggested by python
 
-Cheers,
-Longman
+Add help documentation of scripts/checktransupdate.py
+
+Dongliang Mu (2):
+  scripts: fix all issues reported by pylint
+  doc-guide: add help documentation checktransupdate.rst
+
+ Documentation/doc-guide/checktransupdate.rst  |  53 +++++
+ Documentation/doc-guide/index.rst             |   1 +
+ .../zh_CN/doc-guide/checktransupdate.rst      |  55 +++++
+ .../translations/zh_CN/doc-guide/index.rst    |   1 +
+ scripts/checktransupdate.py                   | 214 ++++++++++++------
+ 5 files changed, 251 insertions(+), 73 deletions(-)
+ create mode 100644 Documentation/doc-guide/checktransupdate.rst
+ create mode 100644 Documentation/translations/zh_CN/doc-guide/checktransupdate.rst
+
+-- 
+2.43.0
 
 
