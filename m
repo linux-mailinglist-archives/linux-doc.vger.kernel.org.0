@@ -1,432 +1,132 @@
-Return-Path: <linux-doc+bounces-21113-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21115-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BB8E93867D
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jul 2024 00:19:17 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 78F749386A1
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jul 2024 01:10:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6FA001C209EB
-	for <lists+linux-doc@lfdr.de>; Sun, 21 Jul 2024 22:19:16 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EBD8FB20BCC
+	for <lists+linux-doc@lfdr.de>; Sun, 21 Jul 2024 23:10:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A954F26AFF;
-	Sun, 21 Jul 2024 22:19:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5842611713;
+	Sun, 21 Jul 2024 23:10:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V+AD9s1O"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B005816A955
-	for <linux-doc@vger.kernel.org>; Sun, 21 Jul 2024 22:19:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25EE710A0C;
+	Sun, 21 Jul 2024 23:10:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1721600343; cv=none; b=shVTrgzxHtiJGyn3pUGGcK3fu/g1XzwjwwDctBMuyA+JeLPk7KaWVSdio7ipEyy4dIT4gtyaDTuhqD0pcphfVjsIRL0Syaqoq8AF1X0Zwu0EGFB2I9xHoUOPxdTWcE7O/DzE9iwcc0F8JvmwjxraSzPcxv/cAUQbVkliW4q6EPY=
+	t=1721603417; cv=none; b=P6bF2+L5e918p0IKy+8cw1TEwpZSvuALqVOOiaTvDYTcg0Jz0mezOsTLt+CRTzfCfUAqkLaDPFjsLK/qBd6WAGj+CXrhbwg4OeYoxUf33xJsqeeEftzA9I3gqwM8367NVUyhFrCtKO8udgGhAN/R+7mbUjpU4/CZCwc5WX0mgVQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1721600343; c=relaxed/simple;
-	bh=n8v3UHb9CGmsAgeObB3TTphplifFIKS5LL4OYCQGqCw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Ju8mSneL0gd2KwE8XosTpNcyGS8EH5ikG9BnSrfZtXWzoRkCPio/HXXI+tszKJs86AMWj+COKlSyl7KWWdjkgT40IHXhheKNT6/X0KGyq50Rtm1l+LsdLs1ouiAL7ZBLtA55pVfMcM+BXyUTJa4Qt62JJEGdzAk0joQ4hKeo954=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <m.grzeschik@pengutronix.de>)
-	id 1sVetI-0003m9-C1; Mon, 22 Jul 2024 00:18:52 +0200
-Received: from [2a0a:edc0:0:1101:1d::ac] (helo=dude04.red.stw.pengutronix.de)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <m.grzeschik@pengutronix.de>)
-	id 1sVetH-001Exk-TA; Mon, 22 Jul 2024 00:18:51 +0200
-Received: from localhost ([::1] helo=dude04.red.stw.pengutronix.de)
-	by dude04.red.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <m.grzeschik@pengutronix.de>)
-	id 1sVetH-00FvCr-2f;
-	Mon, 22 Jul 2024 00:18:51 +0200
-From: Michael Grzeschik <m.grzeschik@pengutronix.de>
-Date: Mon, 22 Jul 2024 00:18:48 +0200
-Subject: [PATCH v8 3/3] tools: usb: p9_fwd: add usb gadget packet forwarder
- script
+	s=arc-20240116; t=1721603417; c=relaxed/simple;
+	bh=bw+VvhlF0vZLry6Yx1OT7P3zYLo5EWWOODFGnE6NXKE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=qMeFX+zsIfLpRzCLqlV1ZFmLibdPq1EfAQkkpXWFb/85YdXsiQCe2ckx43ieVNYsmwfqWb+ntIER/521paMv9cwOsXcK1wf4N73xwA2xDLo/mW8Q8vx1bzbDaWh4OyDS64ZAXBlXmwqgo5z0WSjuJjiCd453IXukV1XtngU35Ww=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V+AD9s1O; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3995EC116B1;
+	Sun, 21 Jul 2024 23:10:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1721603416;
+	bh=bw+VvhlF0vZLry6Yx1OT7P3zYLo5EWWOODFGnE6NXKE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=V+AD9s1OlZ1radzKjhu5pCExQ5gPuD5aYt2osC0mWdHJTU5I+8Ml0yYaoKpv2xjoX
+	 r4RBUNLfOqM0bnCVOCfaxJgzZr+RFKl13qwZT6vM79uAHLixOhZvR2lmwf6GBIZ2gX
+	 y1Sa6SzlrKh9VfC4C5d5uyYgrZxFIL8JUimZyR6t4rZWZWpugwvZBAB7MMTzDfbLXb
+	 tvsLKXGaHkR1HPysCg5Kn2X8HSTL0WWVUqZOXVxwnEWb0oW0BIfAzsaMEb0Nz53qsT
+	 6zzjyjg8Zb5B9u2LtRBKJ/5YJ28svRUgdc9ollLn4LV2GYOgX+BuT4L0zJXF19qlif
+	 yFoGvcYZUwDAw==
+Date: Sun, 21 Jul 2024 16:10:14 -0700
+From: Nathan Chancellor <nathan@kernel.org>
+To: =?utf-8?B?0JTQsNCy0YvQtNC+0LIg0JjQstCw0L0g0JDQu9C10LrRgdC10LXQstC40Yc=?= <davydoff33@yandex.ru>
+Cc: linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org, corbet@lwn.net,
+	masahiroy@kernel.org, nicolas@fjasle.eu
+Subject: Re: [PATCH]: kbuild doc typo fix
+Message-ID: <20240721231014.GA9588@thelio-3990X>
+References: <1935A993-DAB0-4092-A1FE-B6501EE8E0DC@yandex.ru>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240116-ml-topic-u9p-v8-3-409e659ca4dd@pengutronix.de>
-References: <20240116-ml-topic-u9p-v8-0-409e659ca4dd@pengutronix.de>
-In-Reply-To: <20240116-ml-topic-u9p-v8-0-409e659ca4dd@pengutronix.de>
-To: Eric Van Hensbergen <ericvh@kernel.org>, 
- Latchesar Ionkov <lucho@ionkov.net>, 
- Dominique Martinet <asmadeus@codewreck.org>, 
- Christian Schoenebeck <linux_oss@crudebyte.com>, 
- Jonathan Corbet <corbet@lwn.net>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Andrzej Pietrasiewicz <andrzej.p@collabora.com>, v9fs@lists.linux.dev, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-usb@vger.kernel.org, kernel@pengutronix.de, 
- Michael Grzeschik <m.grzeschik@pengutronix.de>, 
- Jan Luebbe <jlu@pengutronix.de>
-X-Mailer: b4 0.12.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=12485;
- i=m.grzeschik@pengutronix.de; h=from:subject:message-id;
- bh=n8v3UHb9CGmsAgeObB3TTphplifFIKS5LL4OYCQGqCw=;
- b=owEBbQKS/ZANAwAKAb9pWET5cfSrAcsmYgBmnYlLbN+iUIA3LmUtcFYYbggCxh9Jd5bpsKWit
- Hl6yLm/3l2JAjMEAAEKAB0WIQQV2+2Fpbqd6fvv0Gi/aVhE+XH0qwUCZp2JSwAKCRC/aVhE+XH0
- q3k0EAC9JoaRga9xtDyFN5+Y/SYKo8HYs+RBgx5SgUEeJyuGqD2OLH8eO5VLh0A3NSC4FbEMtmt
- o2gM5uPtol1fAB0tHvuCx2bPMw0+uj7AnFGXP9yE74dvOL/BXK3PImU0rjxhjOxIqJrG0QH515Z
- LQDFaW4rzCpPqa3Vf24u8v/RzpI7qyymhmWzPCpROw6bcw2/GxWfdE0omqiTaIf5yTOXop6WMDO
- 7ZPnevFmMg3X8Fddoz11D976Au6FovCWhmLr8Tm25nlYPfs1aYeVyKBfckcjbd84K4TP67Nytww
- 7TQ+GtddYBXDaRP8ZRv+YshbEKfpdzpCSbzFF1FNXfdzyozOzixjA+DM2mwMH7k+7JBLG/5aJsn
- YJVNKWf42QLAZFV7DdsvpGWn6W3XhjceuSu83vB1MIm9lVRopG7aSesnga9DgAAL5sReX/IY1ah
- JmwYW+bQFEptiw7QaZqaZhLAnmLLjshIvD2uu2wxHlZHZsGSeM+WJ2ETSQ6YXCVdDRyk0Ec5cH4
- X8pVZ7ewItthLlSVBMeEZeoYUuCN2bOQS2uFByFTz8qCv1yzAAVvFEynlzO9W7ONEEaAHFbC4xS
- 2oL0WiKjQ8mwciexT79XJra9/FUF3cCYRuyNmGqYGRp/0d9NpBuejAD/ozXlAwDQbgbv/LrT2Os
- TPvzxMStqmqBI7g==
-X-Developer-Key: i=m.grzeschik@pengutronix.de; a=openpgp;
- fpr=957BC452CE953D7EA60CF4FC0BE9E3157A1E2C64
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: m.grzeschik@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <1935A993-DAB0-4092-A1FE-B6501EE8E0DC@yandex.ru>
 
-This patch is adding an small python tool to forward 9pfs requests
-from the USB gadget to an existing 9pfs TCP server. Since currently all
-9pfs servers lack support for the usb transport this tool is an useful
-helper to get started.
+Hi Ivan,
 
-Refer the Documentation section "USBG Example" in
-Documentation/filesystems/9p.rst on how to use it.
+First of all, thank you for noticing this and sending a patch!
 
-Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
-Signed-off-by: Michael Grzeschik <m.grzeschik@pengutronix.de>
+I think the title of this commit could be improved a little bit. I think
+using the prefix "kbuild: doc:" would be good, as that seems to be the
+most common prefix I see when I look at 'git log --oneline' for this
+file. This is not really a typo fix but more of a generalization because
+clang is now a viable alternative to GCC, which could also be included
+in commit message below. I suspect that was probably not the case when
+this documentation was written.
 
----
-v7 -> v8: -
-v6 -> v7: -
-v5 -> v6:
-  - set path parameter to None when unused
-v4 -> v5:
-  - updated documentation for new subcommands list/connect
-  - run ruff format
-  - make vid and pid parameterized
-  - add list as subcommand to scan for devices
-  - move connect to extra subcommand
-v3 -> v4: -
-v2 -> v3: -
-v1 -> v2:
-  - added usbg 9pfs detailed instructions to 9p.rst doc
----
- Documentation/filesystems/9p.rst |  41 +++++++
- tools/usb/p9_fwd.py              | 243 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 284 insertions(+)
+On Sun, Jul 21, 2024 at 02:37:33PM +0300, Давыдов Иван Алексеевич wrote:
+> In this part of the documentation, $(CC) is meant, but gcc is written.
+> 
+> Signed-off-by: Ivan Davydov <mailto:davydoff33@yandex.ru>
 
-diff --git a/Documentation/filesystems/9p.rst b/Documentation/filesystems/9p.rst
-index 10cf79dc287f8..2cc85f3e8659f 100644
---- a/Documentation/filesystems/9p.rst
-+++ b/Documentation/filesystems/9p.rst
-@@ -67,6 +67,47 @@ To mount a 9p FS on a USB Host accessible via the gadget as root filesystem::
- where <device> is the tag associated by the usb gadget transport.
- It is defined by the configfs instance name.
- 
-+USBG Example
-+============
-+
-+The USB host exports a filesystem, while the gadget on the USB device
-+side makes it mountable.
-+
-+Diod (9pfs server) and the forwarder are on the development host, where
-+the root filesystem is actually stored. The gadget is initialized during
-+boot (or later) on the embedded board. Then the forwarder will find it
-+on the USB bus and start forwarding requests.
-+
-+In this case the 9p requests come from the device and are handled by the
-+host. The reason is that USB device ports are normally not available on
-+PCs, so a connection in the other direction would not work.
-+
-+When using the usbg transport, for now there is no native usb host
-+service capable to handle the requests from the gadget driver. For
-+this we have to use the extra python tool p9_fwd.py from tools/usb.
-+
-+Just start the 9pfs capable network server like diod/nfs-ganesha e.g.:
-+
-+        $ diod -f -n -d 0 -S -l 0.0.0.0:9999 -e $PWD
-+
-+Optionaly scan your bus if there are more then one usbg gadgets to find their path:
-+
-+        $ python $kernel_dir/tools/usb/p9_fwd.py list
-+
-+        Bus | Addr | Manufacturer     | Product          | ID        | Path
-+        --- | ---- | ---------------- | ---------------- | --------- | ----
-+          2 |   67 | unknown          | unknown          | 1d6b:0109 | 2-1.1.2
-+          2 |   68 | unknown          | unknown          | 1d6b:0109 | 2-1.1.3
-+
-+Then start the python transport:
-+
-+        $ python $kernel_dir/tools/usb/p9_fwd.py --path 2-1.1.2 connect -p 9999
-+
-+After that the gadget driver can be used as described above.
-+
-+One use-case is to use it as an alternative to NFS root booting during
-+the development of embedded Linux devices.
-+
- Options
- =======
- 
-diff --git a/tools/usb/p9_fwd.py b/tools/usb/p9_fwd.py
-new file mode 100755
-index 0000000000000..12c76cbb046b7
---- /dev/null
-+++ b/tools/usb/p9_fwd.py
-@@ -0,0 +1,243 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0
-+
-+import argparse
-+import errno
-+import logging
-+import socket
-+import struct
-+import time
-+
-+import usb.core
-+import usb.util
-+
-+
-+def path_from_usb_dev(dev):
-+    """Takes a pyUSB device as argument and returns a string.
-+    The string is a Path representation of the position of the USB device on the USB bus tree.
-+
-+    This path is used to find a USB device on the bus or all devices connected to a HUB.
-+    The path is made up of the number of the USB controller followed be the ports of the HUB tree."""
-+    if dev.port_numbers:
-+        dev_path = ".".join(str(i) for i in dev.port_numbers)
-+        return f"{dev.bus}-{dev_path}"
-+    return ""
-+
-+
-+HEXDUMP_FILTER = "".join(chr(x).isprintable() and chr(x) or "." for x in range(128)) + "." * 128
-+
-+
-+class Forwarder:
-+    @staticmethod
-+    def _log_hexdump(data):
-+        if not logging.root.isEnabledFor(logging.TRACE):
-+            return
-+        L = 16
-+        for c in range(0, len(data), L):
-+            chars = data[c : c + L]
-+            dump = " ".join(f"{x:02x}" for x in chars)
-+            printable = "".join(HEXDUMP_FILTER[x] for x in chars)
-+            line = f"{c:08x}  {dump:{L*3}s} |{printable:{L}s}|"
-+            logging.root.log(logging.TRACE, "%s", line)
-+
-+    def __init__(self, server, vid, pid, path):
-+        self.stats = {
-+            "c2s packets": 0,
-+            "c2s bytes": 0,
-+            "s2c packets": 0,
-+            "s2c bytes": 0,
-+        }
-+        self.stats_logged = time.monotonic()
-+
-+        def find_filter(dev):
-+            dev_path = path_from_usb_dev(dev)
-+            if path is not None:
-+                return dev_path == path
-+            return True
-+
-+        dev = usb.core.find(idVendor=vid, idProduct=pid, custom_match=find_filter)
-+        if dev is None:
-+            raise ValueError("Device not found")
-+
-+        logging.info(f"found device: {dev.bus}/{dev.address} located at {path_from_usb_dev(dev)}")
-+
-+        # dev.set_configuration() is not necessary since g_multi has only one
-+        usb9pfs = None
-+        # g_multi adds 9pfs as last interface
-+        cfg = dev.get_active_configuration()
-+        for intf in cfg:
-+            # we have to detach the usb-storage driver from multi gadget since
-+            # stall option could be set, which will lead to spontaneous port
-+            # resets and our transfers will run dead
-+            if intf.bInterfaceClass == 0x08:
-+                if dev.is_kernel_driver_active(intf.bInterfaceNumber):
-+                    dev.detach_kernel_driver(intf.bInterfaceNumber)
-+
-+            if intf.bInterfaceClass == 0xFF and intf.bInterfaceSubClass == 0xFF and intf.bInterfaceProtocol == 0x09:
-+                usb9pfs = intf
-+        if usb9pfs is None:
-+            raise ValueError("Interface not found")
-+
-+        logging.info(f"claiming interface:\n{usb9pfs}")
-+        usb.util.claim_interface(dev, usb9pfs.bInterfaceNumber)
-+        ep_out = usb.util.find_descriptor(
-+            usb9pfs,
-+            custom_match=lambda e: usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_OUT,
-+        )
-+        assert ep_out is not None
-+        ep_in = usb.util.find_descriptor(
-+            usb9pfs,
-+            custom_match=lambda e: usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN,
-+        )
-+        assert ep_in is not None
-+        logging.info("interface claimed")
-+
-+        self.ep_out = ep_out
-+        self.ep_in = ep_in
-+        self.dev = dev
-+
-+        # create and connect socket
-+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-+        self.s.connect(server)
-+
-+        logging.info("connected to server")
-+
-+    def c2s(self):
-+        """forward a request from the USB client to the TCP server"""
-+        data = None
-+        while data is None:
-+            try:
-+                logging.log(logging.TRACE, "c2s: reading")
-+                data = self.ep_in.read(self.ep_in.wMaxPacketSize)
-+            except usb.core.USBTimeoutError:
-+                logging.log(logging.TRACE, "c2s: reading timed out")
-+                continue
-+            except usb.core.USBError as e:
-+                if e.errno == errno.EIO:
-+                    logging.debug("c2s: reading failed with %s, retrying", repr(e))
-+                    time.sleep(0.5)
-+                    continue
-+                logging.error("c2s: reading failed with %s, aborting", repr(e))
-+                raise
-+        size = struct.unpack("<I", data[:4])[0]
-+        while len(data) < size:
-+            data += self.ep_in.read(size - len(data))
-+        logging.log(logging.TRACE, "c2s: writing")
-+        self._log_hexdump(data)
-+        self.s.send(data)
-+        logging.debug("c2s: forwarded %i bytes", size)
-+        self.stats["c2s packets"] += 1
-+        self.stats["c2s bytes"] += size
-+
-+    def s2c(self):
-+        """forward a response from the TCP server to the USB client"""
-+        logging.log(logging.TRACE, "s2c: reading")
-+        data = self.s.recv(4)
-+        size = struct.unpack("<I", data[:4])[0]
-+        while len(data) < size:
-+            data += self.s.recv(size - len(data))
-+        logging.log(logging.TRACE, "s2c: writing")
-+        self._log_hexdump(data)
-+        while data:
-+            written = self.ep_out.write(data)
-+            assert written > 0
-+            data = data[written:]
-+        if size % self.ep_out.wMaxPacketSize == 0:
-+            logging.log(logging.TRACE, "sending zero length packet")
-+            self.ep_out.write(b"")
-+        logging.debug("s2c: forwarded %i bytes", size)
-+        self.stats["s2c packets"] += 1
-+        self.stats["s2c bytes"] += size
-+
-+    def log_stats(self):
-+        logging.info("statistics:")
-+        for k, v in self.stats.items():
-+            logging.info(f"  {k+':':14s} {v}")
-+
-+    def log_stats_interval(self, interval=5):
-+        if (time.monotonic() - self.stats_logged) < interval:
-+            return
-+
-+        self.log_stats()
-+        self.stats_logged = time.monotonic()
-+
-+
-+def try_get_usb_str(dev, name):
-+    try:
-+        with open(f"/sys/bus/usb/devices/{dev.bus}-{dev.address}/{name}") as f:
-+            return f.read().strip()
-+    except FileNotFoundError:
-+        return None
-+
-+
-+def list_usb(args):
-+    vid, pid = [int(x, 16) for x in args.id.split(":", 1)]
-+
-+    print("Bus | Addr | Manufacturer     | Product          | ID        | Path")
-+    print("--- | ---- | ---------------- | ---------------- | --------- | ----")
-+    for dev in usb.core.find(find_all=True, idVendor=vid, idProduct=pid):
-+        path = path_from_usb_dev(dev) or ""
-+        manufacturer = try_get_usb_str(dev, "manufacturer") or "unknown"
-+        product = try_get_usb_str(dev, "product") or "unknown"
-+        print(
-+            f"{dev.bus:3} | {dev.address:4} | {manufacturer:16} | {product:16} | {dev.idVendor:04x}:{dev.idProduct:04x} | {path:18}"
-+        )
-+
-+
-+def connect(args):
-+    vid, pid = [int(x, 16) for x in args.id.split(":", 1)]
-+
-+    f = Forwarder(server=(args.server, args.port), vid=vid, pid=pid, path=args.path)
-+
-+    try:
-+        while True:
-+            f.c2s()
-+            f.s2c()
-+            f.log_stats_interval()
-+    finally:
-+        f.log_stats()
-+
-+
-+def main():
-+    parser = argparse.ArgumentParser(
-+        description="Forward 9PFS requests from USB to TCP",
-+    )
-+
-+    parser.add_argument("--id", type=str, default="1d6b:0109", help="vid:pid of target device")
-+    parser.add_argument("--path", type=str, required=False, help="path of target device")
-+    parser.add_argument("-v", "--verbose", action="count", default=0)
-+
-+    subparsers = parser.add_subparsers()
-+    subparsers.required = True
-+    subparsers.dest = "command"
-+
-+    parser_list = subparsers.add_parser("list", help="List all connected 9p gadgets")
-+    parser_list.set_defaults(func=list_usb)
-+
-+    parser_connect = subparsers.add_parser(
-+        "connect", help="Forward messages between the usb9pfs gadget and the 9p server"
-+    )
-+    parser_connect.set_defaults(func=connect)
-+    connect_group = parser_connect.add_argument_group()
-+    connect_group.required = True
-+    parser_connect.add_argument("-s", "--server", type=str, default="127.0.0.1", help="server hostname")
-+    parser_connect.add_argument("-p", "--port", type=int, default=564, help="server port")
-+
-+    args = parser.parse_args()
-+
-+    logging.TRACE = logging.DEBUG - 5
-+    logging.addLevelName(logging.TRACE, "TRACE")
-+
-+    if args.verbose >= 2:
-+        level = logging.TRACE
-+    elif args.verbose:
-+        level = logging.DEBUG
-+    else:
-+        level = logging.INFO
-+    logging.basicConfig(level=level, format="%(asctime)-15s %(levelname)-8s %(message)s")
-+
-+    args.func(args)
-+
-+
-+if __name__ == "__main__":
-+    main()
+As for the patch itself, I cannot apply it directly from mutt or the
+mailing list because it is quoted-printable:
 
--- 
-2.39.2
+  $ curl -LSs https://lore.kernel.org/all/1935A993-DAB0-4092-A1FE-B6501EE8E0DC@yandex.ru/raw | git apply -3v
+  error: git diff header lacks filename information when removing 1 leading pathname component (line 63)
 
+I suspect that is also why your signoff has a mailto: in it. Consider
+looking at git-send-email or b4 send for sending your patches so that
+your mail client does not mangle them in this way:
+
+https://nickdesaulniers.github.io/blog/2017/05/16/submitting-your-first-patch-to-the-linux-kernel-and-responding-to-feedback/
+https://b4.docs.kernel.org/en/latest/contributor/send.html
+
+> ---
+> diff --git a/Documentation/kbuild/makefiles.rst b/Documentation/kbuild/makefiles.rst
+> index 991ce6081e35..be43990f1e7f 100644
+> --- a/Documentation/kbuild/makefiles.rst
+> +++ b/Documentation/kbuild/makefiles.rst
+> @@ -578,7 +578,7 @@ cc-option
+>    Note: cc-option uses KBUILD_CFLAGS for $(CC) options
+>  
+>  cc-option-yn
+> -  cc-option-yn is used to check if gcc supports a given option
+> +  cc-option-yn is used to check if $(CC) supports a given option
+>    and return "y" if supported, otherwise "n".
+>  
+>    Example::
+> @@ -596,7 +596,7 @@ cc-option-yn
+>    Note: cc-option-yn uses KBUILD_CFLAGS for $(CC) options
+>  
+>  cc-disable-warning
+> -  cc-disable-warning checks if gcc supports a given warning and returns
+> +  cc-disable-warning checks if $(CC) supports a given warning and returns
+>    the commandline switch to disable it. This special function is needed,
+>    because gcc 4.4 and later accept any unknown -Wno-* option and only
+>    warn about it if there is another warning in the source file.
+> @@ -606,7 +606,7 @@ cc-disable-warning
+>      KBUILD_CFLAGS += $(call cc-disable-warning, unused-but-set-variable)
+>  
+>    In the above example, -Wno-unused-but-set-variable will be added to
+> -  KBUILD_CFLAGS only if gcc really accepts it.
+> +  KBUILD_CFLAGS only if $(CC) really accepts it.
+>  
+>  gcc-min-version
+>    gcc-min-version tests if the value of $(CONFIG_GCC_VERSION) is greater than
+
+Other than the comments above, which are simple process things, this
+change overall looks correct. Consider fixing those up and sending a v2
+and I will be happy to provide a Reviewed-by tag.
+
+Cheers,
+Nathan
 
