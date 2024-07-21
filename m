@@ -1,113 +1,139 @@
-Return-Path: <linux-doc+bounces-21098-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21100-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49FAE938475
-	for <lists+linux-doc@lfdr.de>; Sun, 21 Jul 2024 13:38:02 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F28B9384D9
+	for <lists+linux-doc@lfdr.de>; Sun, 21 Jul 2024 15:44:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 04E62281475
-	for <lists+linux-doc@lfdr.de>; Sun, 21 Jul 2024 11:38:01 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1A5FD28188E
+	for <lists+linux-doc@lfdr.de>; Sun, 21 Jul 2024 13:44:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 727253EA72;
-	Sun, 21 Jul 2024 11:37:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=yandex.ru header.i=@yandex.ru header.b="qgKCVSRH"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 301031662F8;
+	Sun, 21 Jul 2024 13:44:04 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from forward206a.mail.yandex.net (forward206a.mail.yandex.net [178.154.239.87])
+Received: from mailscanner01.zoner.fi (mailscanner01.zoner.fi [84.34.166.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D2A03FE4;
-	Sun, 21 Jul 2024 11:37:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=178.154.239.87
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A1EC166301;
+	Sun, 21 Jul 2024 13:44:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.34.166.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1721561878; cv=none; b=WEcePOGq9ygy6m616M1sBXIfYElU5YpEmktNCMuntsvtyXNXYg6q7RDdWNHUEMZ4mBAYYBpZ1+9Dtd66xhpc8Iy0lMWDgGR215AVj8ao1czTEMnai4Eohyz16X3HHCdXlnRFJMDw+D7QZjRHWkxlqlqBVY25+WcSuUh8qodF15k=
+	t=1721569444; cv=none; b=CGa/Nj3VUMp0pEfmy6ZXqwuP+O1rb9JsF6bKzwConszO4/SLhuIn733ZPgHynF4+Sdfk/r8NnksKOmb4DCv70IDZY61kXfEcEUMnLXr3on6+0N08EaP0p+aOQde0S/HltuROat2Js3De6an84UbXOjEGOhtXFHCCJLhJSMJdKj0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1721561878; c=relaxed/simple;
-	bh=dVZ3mJwUqx0JZWB6HE9/U2wqRzOY6T9qFkeYDT8b+mg=;
-	h=Date:Subject:From:To:CC:Message-ID:Mime-version:Content-type; b=Sa2FemPrKyDoC+z9gw2o/wW+GbnOHPG1Q5zaxrwNsSANDFzSEYZcXU/kwVI7Iq2Yjthxq4+9N9r9qY4MvMFOsXF5rr2eqiwX/qhoKWzvYyOS0VudaxPbyj88jwYlyYX88NUf2c79LuDv/Rp+yRWK4/OLb2Ky93WjsNFpyOkMzqc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=yandex.ru; spf=pass smtp.mailfrom=yandex.ru; dkim=pass (1024-bit key) header.d=yandex.ru header.i=@yandex.ru header.b=qgKCVSRH; arc=none smtp.client-ip=178.154.239.87
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=yandex.ru
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yandex.ru
-Received: from forward101a.mail.yandex.net (forward101a.mail.yandex.net [IPv6:2a02:6b8:c0e:500:1:45:d181:d101])
-	by forward206a.mail.yandex.net (Yandex) with ESMTPS id 4A334650D0;
-	Sun, 21 Jul 2024 14:37:45 +0300 (MSK)
-Received: from mail-nwsmtp-smtp-production-main-31.vla.yp-c.yandex.net (mail-nwsmtp-smtp-production-main-31.vla.yp-c.yandex.net [IPv6:2a02:6b8:c0f:26bf:0:640:efa0:0])
-	by forward101a.mail.yandex.net (Yandex) with ESMTPS id 689FB60917;
-	Sun, 21 Jul 2024 14:37:36 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-31.vla.yp-c.yandex.net (smtp/Yandex) with ESMTPSA id XbKEDM4oEuQ0-hGbF1Fuy;
-	Sun, 21 Jul 2024 14:37:35 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
-	t=1721561855; bh=+AxDBEZ+NCtHbhlME5+tAv5H7FdjBO8oIgOMDjt1xb4=;
-	h=Message-ID:CC:To:From:Subject:Date;
-	b=qgKCVSRHtVulRsCHRl5g+qop0D1pqPz3IuSOIqm/pVOeNXx+Uhp++/qftSXLRfRFp
-	 sioG3mWdJ3V88lSwCUr0A57lVv7pf7ZPxWEUAwL8Qnz5xwK1JmYXT8YgO2zDAIW57A
-	 ayCLeRvR+XH6EkLinMFph/I4Nn0cG83cNCpW5oww=
-Authentication-Results: mail-nwsmtp-smtp-production-main-31.vla.yp-c.yandex.net; dkim=pass header.i=@yandex.ru
-User-Agent: Microsoft-MacOutlook/16.85.24051916
-Date: Sun, 21 Jul 2024 14:37:33 +0300
-Subject: [PATCH]: kbuild doc typo fix
-From: =?UTF-8?B?0JTQsNCy0YvQtNC+0LI=?= =?UTF-8?B?INCY0LLQsNC9?=
- =?UTF-8?B?INCQ0LvQtdC60YHQtdC10LLQuNGH?= <davydoff33@yandex.ru>
-To: <linux-doc@vger.kernel.org>,
-	<linux-kbuild@vger.kernel.org>,
-	<corbet@lwn.net>,
-	<masahiroy@kernel.org>
-CC: <nathan@kernel.org>,
-	<nicolas@fjasle.eu>
-Message-ID: <1935A993-DAB0-4092-A1FE-B6501EE8E0DC@yandex.ru>
-Thread-Topic: [PATCH]: kbuild doc typo fix
+	s=arc-20240116; t=1721569444; c=relaxed/simple;
+	bh=8qs+a53yzMIcJ+Ereum6mH9ProY0V8sD4vafbkMd6yc=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=RS/4CVJJ3OlQ5X5MCncl6PmTGdpHwsgrARCJYwaR4shkhYR9ZwXOSVuRlqxb6mBMC2Ov8V/z/ud77uh2zNnIq5+UgU4s0KwfREQynr878haCorYFRjvbKl0TReJERCapj02lU4VwUDQiA5/SuLrv7yNuVx4MEOFnzteoIIT26cw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tukaani.org; spf=pass smtp.mailfrom=tukaani.org; arc=none smtp.client-ip=84.34.166.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tukaani.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tukaani.org
+Received: from www25.zoner.fi (www25.zoner.fi [84.34.147.45])
+	by mailscanner01.zoner.fi (Postfix) with ESMTPS id 5A37142DE0;
+	Sun, 21 Jul 2024 16:37:04 +0300 (EEST)
+Received: from mail.zoner.fi ([84.34.147.244])
+	by www25.zoner.fi with esmtp (Exim 4.97.1)
+	(envelope-from <lasse.collin@tukaani.org>)
+	id 1sVWkG-00000001SjJ-3vyK;
+	Sun, 21 Jul 2024 16:37:04 +0300
+From: Lasse Collin <lasse.collin@tukaani.org>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Lasse Collin <lasse.collin@tukaani.org>,
+	Sam James <sam@gentoo.org>,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: [PATCH v2 05/16] xz: Fix kernel-doc formatting errors in xz.h
+Date: Sun, 21 Jul 2024 16:36:20 +0300
+Message-ID: <20240721133633.47721-6-lasse.collin@tukaani.org>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240721133633.47721-1-lasse.collin@tukaani.org>
+References: <20240721133633.47721-1-lasse.collin@tukaani.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-version: 1.0
-Content-type: text/plain;
-	charset="UTF-8"
-Content-transfer-encoding: quoted-printable
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-In this part of the documentation, $(CC) is meant, but gcc is written.
+The opaque structs xz_dec and xz_dec_microlzma are declared in xz.h
+but their definitions are in xz_dec_lzma2.c without kernel-doc comments.
+Use regular comments for these structs in xz.h to avoid errors when
+building the docs.
 
-Signed-off-by: Ivan Davydov=C2=A0<mailto:davydoff33@yandex.ru>
+Add a few missing colons.
+
+Cc: linux-doc@vger.kernel.org
+Reviewed-by: Sam James <sam@gentoo.org>
+Signed-off-by: Lasse Collin <lasse.collin@tukaani.org>
 ---
-diff --git a/Documentation/kbuild/makefiles.rst b/Documentation/kbuild/make=
-files.rst
-index 991ce6081e35..be43990f1e7f 100644
---- a/Documentation/kbuild/makefiles.rst
-+++ b/Documentation/kbuild/makefiles.rst
-@@ -578,7 +578,7 @@ cc-option
-   Note: cc-option uses KBUILD_CFLAGS for $(CC) options
-=20
- cc-option-yn
--  cc-option-yn is used to check if gcc supports a given option
-+  cc-option-yn is used to check if $(CC) supports a given option
-   and return "y" if supported, otherwise "n".
-=20
-   Example::
-@@ -596,7 +596,7 @@ cc-option-yn
-   Note: cc-option-yn uses KBUILD_CFLAGS for $(CC) options
-=20
- cc-disable-warning
--  cc-disable-warning checks if gcc supports a given warning and returns
-+  cc-disable-warning checks if $(CC) supports a given warning and returns
-   the commandline switch to disable it. This special function is needed,
-   because gcc 4.4 and later accept any unknown -Wno-* option and only
-   warn about it if there is another warning in the source file.
-@@ -606,7 +606,7 @@ cc-disable-warning
-     KBUILD_CFLAGS +=3D $(call cc-disable-warning, unused-but-set-variable)
-=20
-   In the above example, -Wno-unused-but-set-variable will be added to
--  KBUILD_CFLAGS only if gcc really accepts it.
-+  KBUILD_CFLAGS only if $(CC) really accepts it.
-=20
- gcc-min-version
-   gcc-min-version tests if the value of $(CONFIG_GCC_VERSION) is greater t=
-han
----
+ include/linux/xz.h | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
 
-
+diff --git a/include/linux/xz.h b/include/linux/xz.h
+index 5728d57aecc0..af1e075d9add 100644
+--- a/include/linux/xz.h
++++ b/include/linux/xz.h
+@@ -142,7 +142,7 @@ struct xz_buf {
+ 	size_t out_size;
+ };
+ 
+-/**
++/*
+  * struct xz_dec - Opaque type to hold the XZ decoder state
+  */
+ struct xz_dec;
+@@ -240,15 +240,16 @@ XZ_EXTERN void xz_dec_end(struct xz_dec *s);
+  * marked with XZ_EXTERN. This avoids warnings about static functions that
+  * are never defined.
+  */
+-/**
++
++/*
+  * struct xz_dec_microlzma - Opaque type to hold the MicroLZMA decoder state
+  */
+ struct xz_dec_microlzma;
+ 
+ /**
+  * xz_dec_microlzma_alloc() - Allocate memory for the MicroLZMA decoder
+- * @mode        XZ_SINGLE or XZ_PREALLOC
+- * @dict_size   LZMA dictionary size. This must be at least 4 KiB and
++ * @mode:       XZ_SINGLE or XZ_PREALLOC
++ * @dict_size:  LZMA dictionary size. This must be at least 4 KiB and
+  *              at most 3 GiB.
+  *
+  * In contrast to xz_dec_init(), this function only allocates the memory
+@@ -276,15 +277,15 @@ extern struct xz_dec_microlzma *xz_dec_microlzma_alloc(enum xz_mode mode,
+ 
+ /**
+  * xz_dec_microlzma_reset() - Reset the MicroLZMA decoder state
+- * @s           Decoder state allocated using xz_dec_microlzma_alloc()
+- * @comp_size   Compressed size of the input stream
+- * @uncomp_size Uncompressed size of the input stream. A value smaller
++ * @s:          Decoder state allocated using xz_dec_microlzma_alloc()
++ * @comp_size:  Compressed size of the input stream
++ * @uncomp_size:  Uncompressed size of the input stream. A value smaller
+  *              than the real uncompressed size of the input stream can
+  *              be specified if uncomp_size_is_exact is set to false.
+  *              uncomp_size can never be set to a value larger than the
+  *              expected real uncompressed size because it would eventually
+  *              result in XZ_DATA_ERROR.
+- * @uncomp_size_is_exact  This is an int instead of bool to avoid
++ * @uncomp_size_is_exact:  This is an int instead of bool to avoid
+  *              requiring stdbool.h. This should normally be set to true.
+  *              When this is set to false, error detection is weaker.
+  */
+@@ -294,7 +295,7 @@ extern void xz_dec_microlzma_reset(struct xz_dec_microlzma *s,
+ 
+ /**
+  * xz_dec_microlzma_run() - Run the MicroLZMA decoder
+- * @s           Decoder state initialized using xz_dec_microlzma_reset()
++ * @s:          Decoder state initialized using xz_dec_microlzma_reset()
+  * @b:          Input and output buffers
+  *
+  * This works similarly to xz_dec_run() with a few important differences.
+-- 
+2.45.2
 
 
