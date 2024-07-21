@@ -1,80 +1,81 @@
-Return-Path: <linux-doc+bounces-21103-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21104-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A4F6938549
-	for <lists+linux-doc@lfdr.de>; Sun, 21 Jul 2024 17:36:00 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CA4F938558
+	for <lists+linux-doc@lfdr.de>; Sun, 21 Jul 2024 17:55:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B32E81F210B5
-	for <lists+linux-doc@lfdr.de>; Sun, 21 Jul 2024 15:35:59 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id D942D1F20CE2
+	for <lists+linux-doc@lfdr.de>; Sun, 21 Jul 2024 15:55:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E0AA16131C;
-	Sun, 21 Jul 2024 15:35:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 715F01E531;
+	Sun, 21 Jul 2024 15:55:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AVOKxzAs"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="M//9NHy5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF74915FA8B;
-	Sun, 21 Jul 2024 15:35:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.179
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50E43C8D7;
+	Sun, 21 Jul 2024 15:55:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1721576155; cv=none; b=IIuYnCTlWa+oiOBC84MYJsp/7F5DKqbPwwWE79jadVrgjTcCE84PrkePFdMT9m0uRHst+9f/cg91p3e3CwfM5xWmtSzO4PnKkUmJoRxSfuBO9NIWaMcaG0Evp05mKqq7WTFBSPMdJuEvu0pcVHlkqJ0PI25Cu6qUhNPEZKRegSQ=
+	t=1721577321; cv=none; b=GB5gAwgTUTAFcd2exFJOQ3f6KTzgr9jxfLkvftVtTPH9KtaJcOl9jy/NReyqntlEhZL3TamIC6fEAD4Xl4GnnQ+vDem3XI+nZdsje3JeoFQsvqHs4tRz2ClhpUGzjHjpsVwU1kiGxr/lJuAqcq22Xe5tyySF7gsfbYo2lpEQftU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1721576155; c=relaxed/simple;
-	bh=IW0IuCJ83IqgRVQODnpnxmL0joz6r6VqPz1wclnf6VI=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=XadaGHiTYY8FPHjCfl5Mr/RwybEjjcau4LJJYkqac0ogpYyAhVHGxF+NKMmq7ow8+CuEjMJI2ZnWF4yfsakdNhGAez9tEsIRDvY/OwmAHY1dRmfJxA7FdUrOqWrY58BOxklqw1QBM8VPaAyyw+K9kk57aahCC0FSDRTqmvrmsio=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AVOKxzAs; arc=none smtp.client-ip=209.85.208.179
+	s=arc-20240116; t=1721577321; c=relaxed/simple;
+	bh=+3k0pO+Pr9SPjMCmuTvD2oh22yjKuwrfLBCvp94d9vE=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=i3IYn2B6z7dgOrYBI+anZnw0k/XGY5cPLJ6RUT/yRTS9fGWfaNMlWALmr1qoRlIWjeaIAj8bGa9/X4WpF3dsra7fgRrFh6vCD2UJsUKJ2Zh6rdhQlUEbgfcvTDaPa2W/xzGjwdMk6kMMrW2TcTZxJ6GB2cJ4x5vbW8n8PcBSpv0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=M//9NHy5; arc=none smtp.client-ip=209.85.128.48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-2ef2cb7d562so5013041fa.3;
-        Sun, 21 Jul 2024 08:35:52 -0700 (PDT)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4266b1f1b21so25984395e9.1;
+        Sun, 21 Jul 2024 08:55:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1721576151; x=1722180951; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1721577317; x=1722182117; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=dib4fs9gr0MAjzCmLMyUss3dK8Hy9F2X6IZP1TjTaK4=;
-        b=AVOKxzAshYG3L5ynaBVOmOpVrORk15N7BWKJPzopJAo1CSLNLlTetyDTH7HBxt5Fxg
-         FQVorKDZZwaKzJctvrYkuEPKl6Bx+TJNp88OaVY3xRyOeA37UD8py7BiWy/iLoXBmdPC
-         cUtqEBzcAGgrU+Pn6bINFRs4ij8//Ea4LY8ctpr6jBH5ehZeMqhD8UxIpFfhccyY98Sh
-         JroTwrbIYtHhI1NnpbOFxfzjmNDm7fp+mYnPBychxRIYihg3tgX9fUqtcAVd55oLIzsP
-         FLqVpEBL0Fmw2cNwQWoyNvmvDxYQmSSrl2pFglCxEE7HFNYbRs2YIGoVrNpPNQtg7z3t
-         kJNA==
+        bh=V458JT+ZiqDTA1hPw9kMgC/n9y07ChBzlyGEvWTKnPw=;
+        b=M//9NHy5wPKOyBMaCiletqHqul19/m/CIkiYVk1K4gZAqH0lZliqnl4Uq9AIA67Zww
+         tjmUzHoFbWFiDEKUjf5ZfGSZRkOIXKLavCppHiuTUnmhCsKNJkCNcxW3Duf6nzkSiNQG
+         f9n4I0SThLMiQuHQDzMEwuTbSg0hNBoB5yWs6iFR5yajgVVAZL81Edv3eZfG92tzGNpK
+         puXGBjRDk247GurJ1XVx6Vsh76bC82q+BCiIF9Tbc5fvDEeJltuCfTUUGwgkyf26cln6
+         y7zeMkteDujvVG5u9QFoLMjQO4ded4ir5av/Xx17DlmbhhOg0OtMx54SG6facqfNn0eG
+         DZqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721576151; x=1722180951;
+        d=1e100.net; s=20230601; t=1721577317; x=1722182117;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=dib4fs9gr0MAjzCmLMyUss3dK8Hy9F2X6IZP1TjTaK4=;
-        b=rrdzBUB4f5BUAXFf24H++0lTC9GEYCw3O3QJ06oOh2ZXVgUSHEZN3CZ0CyI38y1NHt
-         3d9R4dupRd6A9PLVyv2qJ7WzFsf5SZdXdmhA7/Le39o+IdmaX8R9i7K9aPSO2l2DM+0F
-         vLeMs4mEDYHrW38Pk0oQ8tAMbwqMgLdp4ywd4e53C/okmjxq5EIJs54YJ4NU7IGdi+ca
-         MMooiuJrwBhIsTj39eHRCSxD5JUcS6NBjyBgsE9kac0X6WjcaR6jmYvnff10Tyfqsea5
-         RBwMhFGEp3ED2bPgDWPhlrA3ca12lV6fUg2b5AJF3f3xI0YK2czOBjUxcgJkuRWFYWxJ
-         c3JA==
-X-Forwarded-Encrypted: i=1; AJvYcCWzC6Lm70mOhohKrpHGo0KFi1Jyef69I2C7owZPDIAhzGJDV+pPfWvPYZtYbRgzR3qHWwCbI/EfV4QV6GMbFAoGNpL0uKpHgzuX2+Vs
-X-Gm-Message-State: AOJu0YwkR6mRki1kWo6STufoxbCns3KjddTwtdtvLD2HZil/gZ3+elPT
-	zpLHGkSHRp/Qt1vS1rpWxy70B3b4XhEfoRsvOAI4wHMkVMB0CKjN
-X-Google-Smtp-Source: AGHT+IEpbqoFB0J1xm4YtQ5snWNNn5dBTeqbwv64Boj61HhPhvt6SXhWD/zTqxZR17ccz8CQuV4/zw==
-X-Received: by 2002:a2e:9590:0:b0:2ee:d8ec:ccd2 with SMTP id 38308e7fff4ca-2ef16849d9bmr39426431fa.33.1721576150608;
-        Sun, 21 Jul 2024 08:35:50 -0700 (PDT)
+        bh=V458JT+ZiqDTA1hPw9kMgC/n9y07ChBzlyGEvWTKnPw=;
+        b=LktV4s3H4tVzhHyPKXGFRcgVsMyGVJnc3UU/F1SNkL3WsuPC+zh2SLocYZFXj6leED
+         aJ5r7U1WEZM4653WT4J3T8rJ3Pl2yio4mWzc3EDDhBCMgo+uf8iKpCXxnXHczLnX2ct3
+         HqLzZECxpwu4KVFr/8Iqy3dAuNZHHHOBfqk4NPbqXaHbqXuOnWA2wDSH2aLGV9KnphC/
+         F2GrNvsv3zg88lqZ2DhC/L1fMvA3rU8vnk6Vlp9YdFofEW/2CyecHz/3Arh3o138+XbR
+         epm4rqgVAItpmNMHhmC8RiQYfeBcU4GNDIfSe7o2Unx8FEwVngTKO8ybtZ6Tc1KKfw7Q
+         KU/Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUNxNhn3ISxLTP+dBfiST+8IUKpmJdu0+q1wftdd4gz7fPrYwlGU+LC1oshrVvl4ux3QIP4LR+QBkq0hmxY1fePzgpssrpGTxNsEKJ3
+X-Gm-Message-State: AOJu0YwQrqnvWmq1so7e4R8KmmCvy+ukP83fOjNM/bsThtQd1Frjedw5
+	wn/gZa4g0YykpXbrnnsjGdxIWZgyPKBKXfoEf8nQlpQmUKq5l22c
+X-Google-Smtp-Source: AGHT+IHxOIjsJffCxAyw7JFwYBe/CAz0MaD4B2BsWm4j85oQUG652ThaKdGytJWBvQA0khrtchWMUw==
+X-Received: by 2002:a05:600c:4f96:b0:426:5b22:4d61 with SMTP id 5b1f17b1804b1-427dc52547emr31078925e9.22.1721577317238;
+        Sun, 21 Jul 2024 08:55:17 -0700 (PDT)
 Received: from laptop.home (83.50.134.37.dynamic.jazztel.es. [37.134.50.83])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-427d2a43034sm123118865e9.3.2024.07.21.08.35.50
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-427d2a6efc5sm122352015e9.21.2024.07.21.08.55.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 21 Jul 2024 08:35:50 -0700 (PDT)
+        Sun, 21 Jul 2024 08:55:16 -0700 (PDT)
 From: =?UTF-8?q?Sergio=20Gonz=C3=A1lez=20Collado?= <sergio.collado@gmail.com>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Bjorn Helgaas <bhelgaas@google.com>,
 	Carlos Bilbao <carlos.bilbao.osdev@gmail.com>
 Cc: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
+	linux-kernel-mentees@lists.linuxfoundation.org,
 	=?UTF-8?q?Sergio=20Gonz=C3=A1lez=20Collado?= <sergio.collado@gmail.com>
-Subject: [PATCH] docs/sp_SP: Add translation for scheduler/sched-bwc.rst
-Date: Sun, 21 Jul 2024 17:35:38 +0200
-Message-Id: <20240721153538.28963-1-sergio.collado@gmail.com>
+Subject: [PATCH v2] docs/sp_SP: Add translation for scheduler/sched-bwc.rst
+Date: Sun, 21 Jul 2024 17:55:14 +0200
+Message-Id: <20240721155514.30235-1-sergio.collado@gmail.com>
 X-Mailer: git-send-email 2.39.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -88,6 +89,8 @@ Content-Transfer-Encoding: 8bit
 Translate Documentation/scheduler/sched-bwc.rst into Spanish
 
 Signed-off-by: Sergio González Collado <sergio.collado@gmail.com>
+---
+v1 -> v2 typos corrected
 ---
  .../translations/sp_SP/scheduler/index.rst    |   1 +
  .../sp_SP/scheduler/sched-bwc.rst             | 288 ++++++++++++++++++
@@ -105,7 +108,7 @@ index 768488d6f001..3aef47ca87e0 100644
 +    sched-bwc
 diff --git a/Documentation/translations/sp_SP/scheduler/sched-bwc.rst b/Documentation/translations/sp_SP/scheduler/sched-bwc.rst
 new file mode 100644
-index 000000000000..3dc571b354d0
+index 000000000000..ee9b34673560
 --- /dev/null
 +++ b/Documentation/translations/sp_SP/scheduler/sched-bwc.rst
 @@ -0,0 +1,288 @@
@@ -160,7 +163,7 @@ index 000000000000..3dc571b354d0
 +y que el sistema es estable. De todas formas, si U fuese > 1, entonces
 +por cada segundo de tiempo de reloj de una tarea, tendríamos que
 +ejecutar más de un segundo de tiempo de ejecución de programa, y
-+obviamente no cumpliriamos con el tiempo límite de ejecución de la
++obviamente no se cumpliría con el tiempo límite de ejecución de la
 +tarea, pero en el siguiente periodo de ejecución el tiempo límite de
 +la tarea estaría todavía más lejos, y nunca se tendría tiempo de alcanzar
 +la ejecución, cayendo así en un fallo no acotado.
@@ -193,9 +196,9 @@ index 000000000000..3dc571b354d0
 +tiempo límite de ejecución será \Sum e_i; esto es una retraso acotado
 +(asumiendo que x+e es de hecho el WCET).
 +
-+La interferencia cuando se usa una ráfaga se evalúa por la posibilidades
++La interferencia cuando se usa una ráfaga se evalúa por las posibilidades
 +de fallar en el cumplimiento del tiempo límite y el promedio de WCET.
-+Los resultados the tests han mostrado que cuando hay muchos cgroups o
++Los resultados de los tests han mostrado que cuando hay muchos cgroups o
 +una CPU está infrautilizada, la interferencia es más limitada. Más detalles
 +se aportan en: https://lore.kernel.org/lkml/5371BD36-55AE-4F71-B9D7-B86DC32E3D2B@linux.alibaba.com/
 +
@@ -280,7 +283,7 @@ index 000000000000..3dc571b354d0
 +Consideraciones jerárquicas
 +---------------------------
 +
-+El interface refuerza que el ancho de banda de una entidad individual
++El interfaz refuerza que el ancho de banda de una entidad individual
 +sea siempre factible, esto es: max(c_i) <= C. De todas maneras,
 +la sobre-suscripción en el caso agregado está explícitamente permitida
 +para hacer posible semánticas de conservación de trabajo dentro de una
@@ -326,7 +329,7 @@ index 000000000000..3dc571b354d0
 +min_cfs_rq_runtime). Este pequeño sobreuso únicamente tiene lugar si
 +la cuota que ha sido asignada a una cpu y no ha sido completamente usada
 +o devuelta en periodos anteriores. Esta cantidad de sobreuso no será
-+transferida entre núcleos. Como resultado, este mecanismo todavía cumplira
++transferida entre núcleos. Como resultado, este mecanismo todavía cumplirá
 +estrictamente los límites de la tarea de grupo en el promedio del uso,
 +pero sobre una ventana de tiempo mayor que un único periodo. Esto
 +también limita la habilidad de un sobreuso a no más de 1ms por cada cpu.
