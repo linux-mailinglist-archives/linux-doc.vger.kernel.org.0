@@ -1,457 +1,179 @@
-Return-Path: <linux-doc+bounces-21270-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21272-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A3CF93B4CF
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2024 18:20:01 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B71C193B4F3
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2024 18:26:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id ADC541C237F3
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2024 16:20:00 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id DA9751C21349
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2024 16:26:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7CCC015ECE5;
-	Wed, 24 Jul 2024 16:19:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AD01415E5D4;
+	Wed, 24 Jul 2024 16:26:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=relay.vimeo.com header.i=@relay.vimeo.com header.b="XUB4aBRx"
+	dkim=pass (2048-bit key) header.d=networkplumber-org.20230601.gappssmtp.com header.i=@networkplumber-org.20230601.gappssmtp.com header.b="uEaY0P7x"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from m47-110.mailgun.net (m47-110.mailgun.net [69.72.47.110])
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5111915ECE0
-	for <linux-doc@vger.kernel.org>; Wed, 24 Jul 2024 16:19:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=69.72.47.110
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B21871C696
+	for <linux-doc@vger.kernel.org>; Wed, 24 Jul 2024 16:25:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1721837994; cv=none; b=RE9++l8RVg6x9OeX4UWdYxl9qbp0Z9U2TV9gMbX5IkvWmmjkvNjf5dKkXKHgnnXRXSUmwBSHtFIANgI5RxzoeCceo8vx4TdB4mQ48h2L98PiclcgtfPeWryxW0cX9D39kR+Dc5hq5mWfJJdT2+M289UMbr+kzWyf72C/ke8s6A4=
+	t=1721838360; cv=none; b=soHGtpCksVW58EqtKbrO7CJGyN9HIdWDbO5z2jurJuzbgQ9+oqBjYb/7xLkZPyfdITvmiNzwU1zgjjIKvlhWU5npZ/OW6A0phNEaAPXGZ2j6FEcOQFQldgGkvrpp1u15n7L9YSU397BJ0q90CCHGlLJgyvuD1+m8av/1eTp1Rx8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1721837994; c=relaxed/simple;
-	bh=PUcsM/fIEpCBs64C6OM9dall8whx4qUci7W0ucIt04Y=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=LBplSrmofGE0iUu0XdQQG3P4awoSfaM4NyQLQOxeLAjhuPI5X/4m7aYrFFPNzDAOyZSBb67VO4xQdZ+CxVNSqrE1WwTFH5ZpgIvh377BR3UiGWqfcTPUSw9V91moJGZ7VzrMM0cisGabgGS+4YTmtfhs5Wx0Ld/W8kjPb2uD9PI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=vimeo.com; spf=pass smtp.mailfrom=relay.vimeo.com; dkim=pass (1024-bit key) header.d=relay.vimeo.com header.i=@relay.vimeo.com header.b=XUB4aBRx; arc=none smtp.client-ip=69.72.47.110
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=vimeo.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=relay.vimeo.com
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=relay.vimeo.com; q=dns/txt; s=mailo; t=1721837992; x=1721845192;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To: Message-Id: Date: Subject: Subject: Cc: To: To: From: From: Sender: Sender;
- bh=t2iHNmDNFh2Lhloylho+v4Z/hy/KUWvSDvmAzMoAG5g=;
- b=XUB4aBRxiTGaIzuR3zTnx0m4f5Fdyi6zRq6IiGgVs8dLFMjq7/BB5d++crbPlsf6qEMtD19Yu4YQ0J1wBxtNGQ7Od4anE2awc1Oze4wLoWS3YiYQbUcXJ5NmOUvgA3N99jXC8G2tTe39bee2dr2tWPpRbKQlYq6Un/gzVglsPBU=
-X-Mailgun-Sending-Ip: 69.72.47.110
-X-Mailgun-Sid: WyJhZDBhNyIsImxpbnV4LWRvY0B2Z2VyLmtlcm5lbC5vcmciLCI5ZDJhMWMiXQ==
-Received: from smtp.vimeo.com (215.71.185.35.bc.googleusercontent.com [35.185.71.215])
- by fa9eff58138b with SMTP id 66a129a8ecd0d8824c83013d (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Wed, 24 Jul 2024 16:19:52 GMT
-Sender: davidf=vimeo.com@relay.vimeo.com
-Received: from nutau (gke-sre-us-east1-main-c45160e0-2rrj.c.vimeo-core.internal [10.56.27.206])
-	by smtp.vimeo.com (Postfix) with ESMTP id D075363DD6;
-	Wed, 24 Jul 2024 16:19:51 +0000 (UTC)
-Received: by nutau (Postfix, from userid 1001)
-	id BA4A2B4128D; Wed, 24 Jul 2024 12:19:51 -0400 (EDT)
-From: David Finkel <davidf@vimeo.com>
-To: Muchun Song <muchun.song@linux.dev>,
-	Tejun Heo <tj@kernel.org>,
-	Roman Gushchin <roman.gushchin@linux.dev>,
-	Andrew Morton <akpm@linux-foundation.org>
-Cc: core-services@vimeo.com,
-	Jonathan Corbet <corbet@lwn.net>,
-	Michal Hocko <mhocko@kernel.org>,
-	Shakeel Butt <shakeel.butt@linux.dev>,
-	Shuah Khan <shuah@kernel.org>,
-	Johannes Weiner <hannes@cmpxchg.org>,
-	Zefan Li <lizefan.x@bytedance.com>,
-	cgroups@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-kselftest@vger.kernel.org,
-	David Finkel <davidf@vimeo.com>
-Subject: [PATCH v5 2/2] mm, memcg: cg2 memory{.swap,}.peak write tests
-Date: Wed, 24 Jul 2024 12:19:42 -0400
-Message-Id: <20240724161942.3448841-3-davidf@vimeo.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240724161942.3448841-1-davidf@vimeo.com>
-References: <20240724161942.3448841-1-davidf@vimeo.com>
+	s=arc-20240116; t=1721838360; c=relaxed/simple;
+	bh=AOGywo1iikFtBJXxpD5YsZIJ95hrAtPqukdcsVWqRio=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=OUQdOaRqkzXEh1T09ODXZhRaoQBAMmtzRfP5juwvIKvORTjCCFLZTnqcu3r0oviYh3zlxm8DdG4MCJo8Yy1wmPNZa6CG77vKcX2wEYCEp3Rq4Mcwn9RsCi/YehpWJrlPFRAVtaPCY4PEK9F/pxDQFotL35AiYbbEdqaLP7U1QRE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=networkplumber.org; spf=pass smtp.mailfrom=networkplumber.org; dkim=pass (2048-bit key) header.d=networkplumber-org.20230601.gappssmtp.com header.i=@networkplumber-org.20230601.gappssmtp.com header.b=uEaY0P7x; arc=none smtp.client-ip=209.85.216.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=networkplumber.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=networkplumber.org
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-2c964f5a037so16842a91.0
+        for <linux-doc@vger.kernel.org>; Wed, 24 Jul 2024 09:25:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=networkplumber-org.20230601.gappssmtp.com; s=20230601; t=1721838358; x=1722443158; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=47rZGXNA+VPEE0h3H688PSCY3FqtCg4+Z4f3yZO4MI8=;
+        b=uEaY0P7xKtxJv/2X5WVnb0r4cJo6uzU5SP2RS1RC5gJDKUjzYnzwcCROyUhdYpemlN
+         MHoLdgRA78Ouewg6F09kaWLVllomyAE0lYzHMSM9GfN1JxZFfIKF5/JV/BmxkaUItF9w
+         LWReSf5RfH8ZBSedO/xX/23U5SkdypbA3sXd1FPKDjz73Mrc7FMNQFzr33iobtbMOTdy
+         tP4w4OWQ2qtq4jex34B4KlkCCXhuSC22pk72qZZaoL4adJoTtAXmsXcZJMuzIInAKx3i
+         cwrmldhYINE+XEXfQhqWCLlrc40PD8ZpYAZEbxySh4YgYaOeOjanozPKCI1Hv+x+Uxea
+         HD2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1721838358; x=1722443158;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=47rZGXNA+VPEE0h3H688PSCY3FqtCg4+Z4f3yZO4MI8=;
+        b=sc1lwXx6DSANJhagNrUd2cGzKMn/IKtvpgj3q6MIqeSYim9a9D1mnLwN5XFcWEwcAh
+         +5mCofDUTLazzXkf9H9K3C016sC9qyTdphxq4hQvKXCWyCqmZD9AEVHvBw7lQnN+eVx3
+         vhgYlKWueQVv0CmVoZYCwh3FRR72Yb5naZNcGmK0e0KOgHrGBZhUY8x47pSAl6jZgdkT
+         vXK5gvefcT9xgoZ/U6PSuUvOMxYm8cDfRhPgLFbMFAaLVJ93BXBUHwx5sk//d+sGIRwV
+         f0l4EmwjXC45dbyRlOD4KIzLnWVB2AH1qOFieZ2O5VmEnGqwEeLh7ED5UI2GdGjX1Q8O
+         FRxA==
+X-Forwarded-Encrypted: i=1; AJvYcCWm3yM8A31U3Lna75iwq+oIfTgXA96BnJpSLiNvv74Oe9g0cmdLMvD57vvQENb3VqzGWkrFsthot9goNYlLFqcf28M5IVin0671
+X-Gm-Message-State: AOJu0Yxf/ib8B7FPbJgH6GBPANlW+ybpJlLqtHYmik9lO0/rapcDWJDb
+	30FWXhO7d23ocf+iQ1+AOn71YhYlYBnz8NfbD4ZenuUc6/9lwDHgK1hNHEfxHnU=
+X-Google-Smtp-Source: AGHT+IG37fSFaVfTdXtnEFGMTuetughKI1Zmm7Q9idfHFeWury0GvTkEpAx1HaZz6lMROu30tv4oTg==
+X-Received: by 2002:a17:90b:388d:b0:2c9:7616:dec7 with SMTP id 98e67ed59e1d1-2cf23770687mr13999a91.6.1721838357984;
+        Wed, 24 Jul 2024 09:25:57 -0700 (PDT)
+Received: from hermes.local (204-195-96-226.wavecable.com. [204.195.96.226])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2cdb746f9a0sm1858462a91.38.2024.07.24.09.25.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 24 Jul 2024 09:25:57 -0700 (PDT)
+Date: Wed, 24 Jul 2024 09:25:55 -0700
+From: Stephen Hemminger <stephen@networkplumber.org>
+To: <jiang.kun2@zte.com.cn>
+Cc: <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
+ <pabeni@redhat.com>, <corbet@lwn.net>, <dsahern@kernel.org>,
+ <netdev@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <fan.yu9@zte.com.cn>,
+ <xu.xin16@zte.com.cn>, <zhang.yunkai@zte.com.cn>, <tu.qiang35@zte.com.cn>,
+ <he.peilin@zte.com.cn>, <yang.yang29@zte.com.cn>
+Subject: Re: [PATCH] net: Provide sysctl to tune local port range to IANA  
+ specification
+Message-ID: <20240724092555.3ecc2538@hermes.local>
+In-Reply-To: <202407241403542217WOxM8U3ABv-nWZT068xe@zte.com.cn>
+References: <202407241403542217WOxM8U3ABv-nWZT068xe@zte.com.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Extend two existing tests to cover extracting memory usage through the
-newly mutable memory.peak and memory.swap.peak handlers.
+On Wed, 24 Jul 2024 14:03:54 +0800 (CST)
+<jiang.kun2@zte.com.cn> wrote:
 
-In particular, make sure to exercise adding and removing watchers with
-overlapping lifetimes so the less-trivial logic gets tested.
+> From: Fan Yu <fan.yu9@zte.com.cn>
+> 
+> The Importance of Following IANA Standards
+> ========================================
+> IANA specifies User ports as 1024-49151, and it just so happens
+> that my application uses port 33060 (reserved for MySQL Database Extended),
+> which conflicts with the Linux default dynamic port range (32768-60999)[1].
+> 
+> In fact, IANA assigns numbers in port range from 32768 to 49151,
+> which is uniformly accepted by the industry. To do this,
+> it is necessary for the kernel to follow the IANA specification.
+> 
+> Drawbacks of existing implementations
+> ========================================
+> In past discussions, follow the IANA specification by modifying the
+> system defaults has been discouraged, which would greatly affect
+> existing users[2].
+> 
+> Theoretically, this can be done by tuning net.ipv4.local_port_range,
+> but there are inconveniences such as:
+> (1) For cloud-native scenarios, each container is expected to follow
+> the IANA specification uniformly, so it is necessary to do sysctl
+> configuration in each container individually, which increases the user's
+> resource management costs.
+> (2) For new applications, since sysctl(net.ipv4.local_port_range) is
+> isolated across namespaces, the container cannot inherit the host's value,
+> so after startup, it remains at the kernel default value of 32768-60999,
+> which reduces the ease of use of the system.
+> 
+> Solution
+> ========================================
+> In order to maintain compatibility, we provide a sysctl interface in
+> host namespace, which makes it easy to tune local port range to
+> IANA specification.
+> 
+> When ip_local_port_range_use_iana=1, the local port range of all network
+> namespaces is tuned to IANA specification (49152-60999), and IANA
+> specification is also used for newly created network namespaces. Therefore,
+> each container does not need to do sysctl settings separately, which
+> improves the convenience of configuration.
+> When ip_local_port_range_use_iana=0, the local port range of all network
+> namespaces are tuned to the original kernel defaults (32768-60999).
+> For example:
+> 	# cat /proc/sys/net/ipv4/ip_local_port_range 
+> 	32768   60999
+> 	# echo 1 > /proc/sys/net/ipv4/ip_local_port_range_use_iana
+> 	# cat /proc/sys/net/ipv4/ip_local_port_range 
+> 	49152   60999
+> 
+> 	# unshare -n
+> 	# cat /proc/sys/net/ipv4/ip_local_port_range 
+> 	49152   60999
+> 
+> Notes
+> ========================================
+> The lower value(49152), consistent with IANA dynamic port lower limit.
+> The upper limit value(60999), which differs from the IANA dynamic upper
+> limit due to the fact that Linux will use 61000-65535 as masquarading/NAT,
+> but this does not conflict with the IANA specification[3].
+> 
+> Note that following the above specification reduces the number of ephemeral
+> ports by half, increasing the risk of port exhaustion[2].
+> 
+> [1]:https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt
+> [2]:https://lore.kernel.org/all/bf42f6fd-cd06-02d6-d7b6-233a0602c437@gmail.com/
+> [3]:https://lore.kernel.org/all/20070512210830.514c7709@the-village.bc.nu/
+> 
+> Co-developed-by: Kun Jiang <jiang.kun2@zte.com.cn>
+> Signed-off-by: Fan Yu <fan.yu9@zte.com.cn>
+> Signed-off-by: Kun Jiang <jiang.kun2@zte.com.cn>
+> Reviewed-by: xu xin <xu.xin16@zte.com.cn>
+> Reviewed-by: Yunkai Zhang <zhang.yunkai@zte.com.cn>
+> Reviewed-by: Qiang Tu <tu.qiang35@zte.com.cn>
+> Reviewed-by: Peilin He<he.peilin@zte.com.cn>
+> Cc: Yang Yang <yang.yang29@zte.com.cn>
+> ---
 
-Signed-off-by: David Finkel <davidf@vimeo.com>
----
- tools/testing/selftests/cgroup/cgroup_util.c  |  22 ++
- tools/testing/selftests/cgroup/cgroup_util.h  |   2 +
- .../selftests/cgroup/test_memcontrol.c        | 226 +++++++++++++++++-
- 3 files changed, 242 insertions(+), 8 deletions(-)
+Yet another NAK
 
-diff --git a/tools/testing/selftests/cgroup/cgroup_util.c b/tools/testing/selftests/cgroup/cgroup_util.c
-index 432db923bced0..1e2d46636a0ca 100644
---- a/tools/testing/selftests/cgroup/cgroup_util.c
-+++ b/tools/testing/selftests/cgroup/cgroup_util.c
-@@ -141,6 +141,16 @@ long cg_read_long(const char *cgroup, const char *control)
- 	return atol(buf);
- }
- 
-+long cg_read_long_fd(int fd)
-+{
-+	char buf[128];
-+
-+	if (pread(fd, buf, sizeof(buf), 0) <= 0)
-+		return -1;
-+
-+	return atol(buf);
-+}
-+
- long cg_read_key_long(const char *cgroup, const char *control, const char *key)
- {
- 	char buf[PAGE_SIZE];
-@@ -183,6 +193,18 @@ int cg_write(const char *cgroup, const char *control, char *buf)
- 	return ret == len ? 0 : ret;
- }
- 
-+/*
-+ * Returns fd on success, or -1 on failure.
-+ * (fd should be closed with close() as usual)
-+ */
-+int cg_open(const char *cgroup, const char *control, int flags)
-+{
-+	char path[PATH_MAX];
-+
-+	snprintf(path, sizeof(path), "%s/%s", cgroup, control);
-+	return open(path, flags);
-+}
-+
- int cg_write_numeric(const char *cgroup, const char *control, long value)
- {
- 	char buf[64];
-diff --git a/tools/testing/selftests/cgroup/cgroup_util.h b/tools/testing/selftests/cgroup/cgroup_util.h
-index e8d04ac9e3d23..19b131ee77072 100644
---- a/tools/testing/selftests/cgroup/cgroup_util.h
-+++ b/tools/testing/selftests/cgroup/cgroup_util.h
-@@ -34,9 +34,11 @@ extern int cg_read_strcmp(const char *cgroup, const char *control,
- extern int cg_read_strstr(const char *cgroup, const char *control,
- 			  const char *needle);
- extern long cg_read_long(const char *cgroup, const char *control);
-+extern long cg_read_long_fd(int fd);
- long cg_read_key_long(const char *cgroup, const char *control, const char *key);
- extern long cg_read_lc(const char *cgroup, const char *control);
- extern int cg_write(const char *cgroup, const char *control, char *buf);
-+extern int cg_open(const char *cgroup, const char *control, int flags);
- int cg_write_numeric(const char *cgroup, const char *control, long value);
- extern int cg_run(const char *cgroup,
- 		  int (*fn)(const char *cgroup, void *arg),
-diff --git a/tools/testing/selftests/cgroup/test_memcontrol.c b/tools/testing/selftests/cgroup/test_memcontrol.c
-index 41ae8047b8895..30730a3c26412 100644
---- a/tools/testing/selftests/cgroup/test_memcontrol.c
-+++ b/tools/testing/selftests/cgroup/test_memcontrol.c
-@@ -161,12 +161,12 @@ static int alloc_pagecache_50M_check(const char *cgroup, void *arg)
- /*
-  * This test create a memory cgroup, allocates
-  * some anonymous memory and some pagecache
-- * and check memory.current and some memory.stat values.
-+ * and checks memory.current, memory.peak, and some memory.stat values.
-  */
--static int test_memcg_current(const char *root)
-+static int test_memcg_current_peak(const char *root)
- {
- 	int ret = KSFT_FAIL;
--	long current;
-+	long current, peak, peak_reset;
- 	char *memcg;
- 
- 	memcg = cg_name(root, "memcg_test");
-@@ -180,15 +180,108 @@ static int test_memcg_current(const char *root)
- 	if (current != 0)
- 		goto cleanup;
- 
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak != 0)
-+		goto cleanup;
-+
- 	if (cg_run(memcg, alloc_anon_50M_check, NULL))
- 		goto cleanup;
- 
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak < MB(50))
-+		goto cleanup;
-+
-+	/*
-+	 * We'll open a few FDs for the same memory.peak file to exercise the free-path
-+	 * We need at least three to be closed in a different order than writes occurred to test
-+	 * the linked-list handling.
-+	 */
-+	int peak_fd = cg_open(memcg, "memory.peak", O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (peak_fd == -1)
-+		goto cleanup;
-+
-+	bool fd2_closed = false, fd3_closed = false, fd4_closed = false;
-+	int peak_fd2 = cg_open(memcg, "memory.peak", O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (peak_fd2 == -1)
-+		goto cleanup;
-+
-+	int peak_fd3 = cg_open(memcg, "memory.peak", O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (peak_fd3 == -1)
-+		goto cleanup;
-+
-+	static const char reset_string[] = "reset\n";
-+
-+	peak_reset = write(peak_fd, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	peak_reset = write(peak_fd2, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	peak_reset = write(peak_fd3, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	/* Make sure a completely independent read isn't affected by our  FD-local reset above*/
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak < MB(50))
-+		goto cleanup;
-+
-+	fd2_closed = true;
-+	if (close(peak_fd2))
-+		goto cleanup;
-+
-+	int peak_fd4 = cg_open(memcg, "memory.peak", O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (peak_fd4 == -1)
-+		goto cleanup;
-+
-+	peak_reset = write(peak_fd4, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(peak_fd);
-+	if (peak > MB(30) || peak < 0)
-+		goto cleanup;
-+
- 	if (cg_run(memcg, alloc_pagecache_50M_check, NULL))
- 		goto cleanup;
- 
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak < MB(50))
-+		goto cleanup;
-+
-+	/* Make sure everything is back to normal */
-+	peak = cg_read_long_fd(peak_fd);
-+	if (peak < MB(50))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(peak_fd4);
-+	if (peak < MB(50))
-+		goto cleanup;
-+
-+	fd3_closed = true;
-+	if (close(peak_fd3))
-+		goto cleanup;
-+
-+	fd4_closed = true;
-+	if (close(peak_fd4))
-+		goto cleanup;
-+
- 	ret = KSFT_PASS;
- 
- cleanup:
-+	close(peak_fd);
-+	if (!fd2_closed)
-+		close(peak_fd2);
-+	if (!fd3_closed)
-+		close(peak_fd3);
-+	if (!fd4_closed)
-+		close(peak_fd4);
- 	cg_destroy(memcg);
- 	free(memcg);
- 
-@@ -817,13 +910,16 @@ static int alloc_anon_50M_check_swap(const char *cgroup, void *arg)
- 
- /*
-  * This test checks that memory.swap.max limits the amount of
-- * anonymous memory which can be swapped out.
-+ * anonymous memory which can be swapped out. Additionally, it verifies that
-+ * memory.swap.peak reflects the high watermark and can be reset.
-  */
--static int test_memcg_swap_max(const char *root)
-+static int test_memcg_swap_max_peak(const char *root)
- {
- 	int ret = KSFT_FAIL;
- 	char *memcg;
--	long max;
-+	long max, peak;
-+
-+	static const char reset_string[] = "reset\n";
- 
- 	if (!is_swap_enabled())
- 		return KSFT_SKIP;
-@@ -840,6 +936,45 @@ static int test_memcg_swap_max(const char *root)
- 		goto cleanup;
- 	}
- 
-+	int swap_peak_fd = cg_open(memcg, "memory.swap.peak",
-+				   O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (swap_peak_fd == -1)
-+		goto cleanup;
-+
-+	int mem_peak_fd = cg_open(memcg, "memory.peak", O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (mem_peak_fd == -1)
-+		goto cleanup;
-+
-+	if (cg_read_long(memcg, "memory.swap.peak"))
-+		goto cleanup;
-+
-+	if (cg_read_long_fd(swap_peak_fd))
-+		goto cleanup;
-+
-+	/* switch the swap and mem fds into local-peak tracking mode*/
-+	int peak_reset = write(swap_peak_fd, reset_string, sizeof(reset_string));
-+
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	if (cg_read_long_fd(swap_peak_fd))
-+		goto cleanup;
-+
-+	if (cg_read_long(memcg, "memory.peak"))
-+		goto cleanup;
-+
-+	if (cg_read_long_fd(mem_peak_fd))
-+		goto cleanup;
-+
-+	peak_reset = write(mem_peak_fd, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	if (cg_read_long_fd(mem_peak_fd))
-+		goto cleanup;
-+
- 	if (cg_read_strcmp(memcg, "memory.max", "max\n"))
- 		goto cleanup;
- 
-@@ -862,6 +997,61 @@ static int test_memcg_swap_max(const char *root)
- 	if (cg_read_key_long(memcg, "memory.events", "oom_kill ") != 1)
- 		goto cleanup;
- 
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long(memcg, "memory.swap.peak");
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(mem_peak_fd);
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(swap_peak_fd);
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	/*
-+	 * open, reset and close the peak swap on another FD to make sure
-+	 * multiple extant fds don't corrupt the linked-list
-+	 */
-+	peak_reset = cg_write(memcg, "memory.swap.peak", (char *)reset_string);
-+	if (peak_reset)
-+		goto cleanup;
-+
-+	peak_reset = cg_write(memcg, "memory.peak", (char *)reset_string);
-+	if (peak_reset)
-+		goto cleanup;
-+
-+	/* actually reset on the fds */
-+	peak_reset = write(swap_peak_fd, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	peak_reset = write(mem_peak_fd, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(swap_peak_fd);
-+	if (peak > MB(10))
-+		goto cleanup;
-+
-+	/*
-+	 * The cgroup is now empty, but there may be a page or two associated
-+	 * with the open FD accounted to it.
-+	 */
-+	peak = cg_read_long_fd(mem_peak_fd);
-+	if (peak > MB(1))
-+		goto cleanup;
-+
-+	if (cg_read_long(memcg, "memory.peak") < MB(29))
-+		goto cleanup;
-+
-+	if (cg_read_long(memcg, "memory.swap.peak") < MB(29))
-+		goto cleanup;
-+
- 	if (cg_run(memcg, alloc_anon_50M_check_swap, (void *)MB(30)))
- 		goto cleanup;
- 
-@@ -869,9 +1059,29 @@ static int test_memcg_swap_max(const char *root)
- 	if (max <= 0)
- 		goto cleanup;
- 
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long(memcg, "memory.swap.peak");
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(mem_peak_fd);
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(swap_peak_fd);
-+	if (peak < MB(19))
-+		goto cleanup;
-+
- 	ret = KSFT_PASS;
- 
- cleanup:
-+	if (close(mem_peak_fd))
-+		ret = KSFT_FAIL;
-+	if (close(swap_peak_fd))
-+		ret = KSFT_FAIL;
- 	cg_destroy(memcg);
- 	free(memcg);
- 
-@@ -1295,7 +1505,7 @@ struct memcg_test {
- 	const char *name;
- } tests[] = {
- 	T(test_memcg_subtree_control),
--	T(test_memcg_current),
-+	T(test_memcg_current_peak),
- 	T(test_memcg_min),
- 	T(test_memcg_low),
- 	T(test_memcg_high),
-@@ -1303,7 +1513,7 @@ struct memcg_test {
- 	T(test_memcg_max),
- 	T(test_memcg_reclaim),
- 	T(test_memcg_oom_events),
--	T(test_memcg_swap_max),
-+	T(test_memcg_swap_max_peak),
- 	T(test_memcg_sock),
- 	T(test_memcg_oom_group_leaf_events),
- 	T(test_memcg_oom_group_parent_events),
--- 
-2.40.1
+Rather than buggy and verbose new sysctl, why not just allow setting
+the port range you want through existing sysctls?
 
+You can configure this through existing sysctl files and startup in your distro.
 
