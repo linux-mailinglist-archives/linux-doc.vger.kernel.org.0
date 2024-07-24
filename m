@@ -1,457 +1,241 @@
-Return-Path: <linux-doc+bounces-21237-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21239-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0612B93A9E5
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2024 01:32:10 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id F01A893AA57
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2024 03:11:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7ADA21F234B5
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jul 2024 23:32:09 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0A4FD282F08
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2024 01:11:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7855149C4E;
-	Tue, 23 Jul 2024 23:32:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D83BDDAD;
+	Wed, 24 Jul 2024 01:11:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=relay.vimeo.com header.i=@relay.vimeo.com header.b="lWbnB1Pr"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="ST7bC6PX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from m47-110.mailgun.net (m47-110.mailgun.net [69.72.47.110])
+Received: from mail-yw1-f202.google.com (mail-yw1-f202.google.com [209.85.128.202])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24373149C47
-	for <linux-doc@vger.kernel.org>; Tue, 23 Jul 2024 23:32:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=69.72.47.110
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 389AB5221
+	for <linux-doc@vger.kernel.org>; Wed, 24 Jul 2024 01:11:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.202
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1721777524; cv=none; b=KnwXxi56uvv6avnb3gdm+PJmuw9SEu8zEvvQI20eCLZHH212gNITXMHBOWi0YZYts2eCp2pzcRpw2XcCT2T7Tx8iBXOmuGzFpl08f8h1c12MdhUfoND3utjsF5NHTqR7mSV+RS8TXvLtquQ6JK6fy+uCd4EsRCf7CaZ6gnl0TOU=
+	t=1721783477; cv=none; b=RVaaxW5azKonpzUe/+FLMA7QRw66U1wWM+QXaph3QeQ2KkQcDH0SPJwlIIl9Z4+MBGugIL79bXmvuFdSgzhzZdUpNFpaxmOz+2JMOpwJDWMon9O8SiewxFMOrhV9UdzWHd41QNkFjeXxM4P6YMqg6Nxvup4rzyUcSUSeXCDFVlM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1721777524; c=relaxed/simple;
-	bh=PUcsM/fIEpCBs64C6OM9dall8whx4qUci7W0ucIt04Y=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=SEsP99B2DBpd0A51m2U7eG0Ou1yGc2/xzhjJt4HU0NnEoI7pmtKua+dmrMVn5Ge6luK+bmtyGJgmPin7D4C6a2bxZEg5U31to5We0M+KQVzNOUq8a6H5cbpGaarEhCcHeIeowZ2W/Vs3BCWhCa5Eu1vGq5/SE6d/XXvKOvN7T8Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=vimeo.com; spf=pass smtp.mailfrom=relay.vimeo.com; dkim=pass (1024-bit key) header.d=relay.vimeo.com header.i=@relay.vimeo.com header.b=lWbnB1Pr; arc=none smtp.client-ip=69.72.47.110
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=vimeo.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=relay.vimeo.com
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=relay.vimeo.com; q=dns/txt; s=mailo; t=1721777522; x=1721784722;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To: Message-Id: Date: Subject: Subject: Cc: To: To: From: From: Sender: Sender;
- bh=t2iHNmDNFh2Lhloylho+v4Z/hy/KUWvSDvmAzMoAG5g=;
- b=lWbnB1PrBinb3d0n/kkWO81D7lqKbSXoJ6L1wulURYA7PnHuQPBEI0pjEegpFpNA9rTAniSPqtZLgk93Qb5Fetj/yCQhltU/liMMGwNZPQ2Hf4p4EKX89RA3qn8KColnAnxR4lNS87O0iKfrW8YKvy8B23RTLv/KvHhzix3deWI=
-X-Mailgun-Sending-Ip: 69.72.47.110
-X-Mailgun-Sid: WyJhZDBhNyIsImxpbnV4LWRvY0B2Z2VyLmtlcm5lbC5vcmciLCI5ZDJhMWMiXQ==
-Received: from smtp.vimeo.com (215.71.185.35.bc.googleusercontent.com [35.185.71.215])
- by 9ee007f60f00 with SMTP id 66a03d72cb8a873c2ea87612 (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Tue, 23 Jul 2024 23:32:02 GMT
-Sender: davidf=vimeo.com@relay.vimeo.com
-Received: from nutau (gke-sre-us-east1-main-7f6ba6de-bm2w.c.vimeo-core.internal [10.56.27.208])
-	by smtp.vimeo.com (Postfix) with ESMTP id 6065164D5F;
-	Tue, 23 Jul 2024 23:32:02 +0000 (UTC)
-Received: by nutau (Postfix, from userid 1001)
-	id 40707B4133E; Tue, 23 Jul 2024 19:32:02 -0400 (EDT)
-From: David Finkel <davidf@vimeo.com>
-To: Muchun Song <muchun.song@linux.dev>,
-	Tejun Heo <tj@kernel.org>,
-	Roman Gushchin <roman.gushchin@linux.dev>,
-	Andrew Morton <akpm@linux-foundation.org>
-Cc: core-services@vimeo.com,
-	Jonathan Corbet <corbet@lwn.net>,
-	Michal Hocko <mhocko@kernel.org>,
-	Shakeel Butt <shakeel.butt@linux.dev>,
-	Shuah Khan <shuah@kernel.org>,
-	Johannes Weiner <hannes@cmpxchg.org>,
-	Zefan Li <lizefan.x@bytedance.com>,
-	cgroups@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-kselftest@vger.kernel.org,
-	David Finkel <davidf@vimeo.com>
-Subject: [PATCH 2/2] mm, memcg: cg2 memory{.swap,}.peak write tests
-Date: Tue, 23 Jul 2024 19:31:49 -0400
-Message-Id: <20240723233149.3226636-3-davidf@vimeo.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240723233149.3226636-1-davidf@vimeo.com>
-References: <20240723233149.3226636-1-davidf@vimeo.com>
+	s=arc-20240116; t=1721783477; c=relaxed/simple;
+	bh=xB/HZWznHKcMWgXIB+wI31jSoGcHZFlKoHxpW+3YZZ4=;
+	h=Date:Mime-Version:Message-ID:Subject:From:To:Cc:Content-Type; b=VFOD0HjT4IsAFANGBAy8O9kcgLSWKaKKOxdz9c9UeLjDvX/mKLPgd7TGEgQem7Vh9BfYU1GQyDMoouK1YS+aGGxufJVudG6l0NPqy81FwADGh6mpaN1TCTjwlSeIgdC/q8+a5zICmBvuuJsOJIjrXW32jpnmLqQ2lYf/jpCvdf4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--jthoughton.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=ST7bC6PX; arc=none smtp.client-ip=209.85.128.202
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--jthoughton.bounces.google.com
+Received: by mail-yw1-f202.google.com with SMTP id 00721157ae682-650fccfd1dfso170838317b3.0
+        for <linux-doc@vger.kernel.org>; Tue, 23 Jul 2024 18:11:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1721783473; x=1722388273; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=4cSOuBWS+C1ycbtiGXOUNR2uU8fUZDxisEhVyZ4yNKI=;
+        b=ST7bC6PXAKw5k66q3GDQy7G2hwyROXVvlJwIjyXzd/dhUZQoY7ccpsvcUq8omrXQqK
+         hJS20WOrX9cNY3U74zA4dvubkPoZKIa/2d85jZ22AiyCCEgoxEzVn990dA5LToxy+GKU
+         hF0N9dt/tO9ZIfr6UEJVYDLjc/R8QY2ObSWT7Aj5IP0V6FLPpqbk5HM7gDhJ3ZGFi6lV
+         AHBkPB8/we7xA9vNTt4u/LUqphGhMj5eVdQ6ZK/fRV6jbZMC2SpbPLfuNq5+Iq2DriWH
+         wIxSJv6kZp8YRzSGbbZH9ZdhvE2E2khpUV5l+5YW1kKPHlSSnsCd6/DOgKK/SX3NzJnq
+         C8mw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1721783473; x=1722388273;
+        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=4cSOuBWS+C1ycbtiGXOUNR2uU8fUZDxisEhVyZ4yNKI=;
+        b=oZ1KKjeaP5NB73F9H3MyW5IreQOQQEqlUAdlFB4ptf8aP8Frxr4qKPNmKljUo2ZlHU
+         xr734QcQGC2CIXxcTncmFBqN6Xdw+k3ON2jk2o4puOHHdbuZax5rUKM7BlLL1gse2DXh
+         7jH9zhLMmG9YB084sCL/N5Hi8d6M+2BrA3Xr6X9P0eM6BP1b7+MOVtdrBFq9K+Ll6v3B
+         rGK6jiS5AcfyLefP+LuuNDIS7n8NZ/2ZgNSnEwo7nQ0iYjpgHiPvd92Hr2SB1kk8/vP2
+         8lGQ6Ur1T+XnPVmVotpT32rD4gz3mL8jtrYa6XYmtQ1CPOftxpQe+D5miXXmcD5lTmRW
+         TS9g==
+X-Forwarded-Encrypted: i=1; AJvYcCXSF+wkCdAbRzOiXR963tduoSzYn4LGFcY6QrxseDGI9xIUYWb2VDJ1qfAgoBqF/xQg4Q0Vw4OSEITufgT176J/Sh3/Qd12sElD
+X-Gm-Message-State: AOJu0YwNbygKMFl6FNx32mzepnmOCxPvotpN9zDmTSbtQbaRC0Fq8yrj
+	tSo4Sy3oJd8cW52hDB29EKLAjncQqHVHoSOmSEnNQf+n+wiJ1iWr5nicOXRL04EabrJgaSUYNxO
+	TNhOs/0r+IRwKpIFnjw==
+X-Google-Smtp-Source: AGHT+IHTWsfjxkFhlZ/efjqoG2otoOld5wqzU0dS4uuWsUR/MGeJLDWGi8tLphMhuDEGJQs1xgmW73pGbIUMunRM
+X-Received: from jthoughton.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:2a4f])
+ (user=jthoughton job=sendgmr) by 2002:a05:690c:289:b0:627:a787:abf4 with SMTP
+ id 00721157ae682-671f0bcbd75mr236647b3.3.1721783473255; Tue, 23 Jul 2024
+ 18:11:13 -0700 (PDT)
+Date: Wed, 24 Jul 2024 01:10:25 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.46.0.rc1.232.g9752f9e123-goog
+Message-ID: <20240724011037.3671523-1-jthoughton@google.com>
+Subject: [PATCH v6 00/11] mm: multi-gen LRU: Walk secondary MMU page tables
+ while aging
+From: James Houghton <jthoughton@google.com>
+To: Andrew Morton <akpm@linux-foundation.org>, Paolo Bonzini <pbonzini@redhat.com>
+Cc: Ankit Agrawal <ankita@nvidia.com>, Axel Rasmussen <axelrasmussen@google.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, David Matlack <dmatlack@google.com>, 
+	David Rientjes <rientjes@google.com>, James Houghton <jthoughton@google.com>, 
+	James Morse <james.morse@arm.com>, Jason Gunthorpe <jgg@ziepe.ca>, Jonathan Corbet <corbet@lwn.net>, 
+	Marc Zyngier <maz@kernel.org>, Oliver Upton <oliver.upton@linux.dev>, 
+	Raghavendra Rao Ananta <rananta@google.com>, Ryan Roberts <ryan.roberts@arm.com>, 
+	Sean Christopherson <seanjc@google.com>, Shaoqin Huang <shahuang@redhat.com>, 
+	Suzuki K Poulose <suzuki.poulose@arm.com>, Wei Xu <weixugc@google.com>, 
+	Will Deacon <will@kernel.org>, Yu Zhao <yuzhao@google.com>, Zenghui Yu <yuzenghui@huawei.com>, 
+	kvmarm@lists.linux.dev, kvm@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org
+Content-Type: text/plain; charset="UTF-8"
 
-Extend two existing tests to cover extracting memory usage through the
-newly mutable memory.peak and memory.swap.peak handlers.
+This patchset makes it possible for MGLRU to consult secondary MMUs
+while doing aging, not just during eviction. This allows for more
+accurate reclaim decisions, which is especially important for proactive
+reclaim.
 
-In particular, make sure to exercise adding and removing watchers with
-overlapping lifetimes so the less-trivial logic gets tested.
+This series does the following:
+ 1. Improve locking for the existing test/clear_young notifiers for x86
+    and arm64.
+ 2. Add a fast_only parameter into test_young() and clear_young(), and
+    add helper functions for using the new parameter (e.g.
+    mmu_notifier_clear_young_fast_only(). Non-trivially implement the
+    fast-only test_young() and clear_young() for x86_64.
+ 3. Incorporate mmu_notifier_clear_young_fast_only() into MGLRU aging.
+ 4. Add an MGLRU mode (-l) to access_tracking_perf_test to show that
+    aging is working properly.
 
-Signed-off-by: David Finkel <davidf@vimeo.com>
----
- tools/testing/selftests/cgroup/cgroup_util.c  |  22 ++
- tools/testing/selftests/cgroup/cgroup_util.h  |   2 +
- .../selftests/cgroup/test_memcontrol.c        | 226 +++++++++++++++++-
- 3 files changed, 242 insertions(+), 8 deletions(-)
+Please note that mmu_notifier_test_young_fast_only() is added but not
+used in this series. I am happy to remove it if that would be
+appropriate.
 
-diff --git a/tools/testing/selftests/cgroup/cgroup_util.c b/tools/testing/selftests/cgroup/cgroup_util.c
-index 432db923bced0..1e2d46636a0ca 100644
---- a/tools/testing/selftests/cgroup/cgroup_util.c
-+++ b/tools/testing/selftests/cgroup/cgroup_util.c
-@@ -141,6 +141,16 @@ long cg_read_long(const char *cgroup, const char *control)
- 	return atol(buf);
- }
- 
-+long cg_read_long_fd(int fd)
-+{
-+	char buf[128];
-+
-+	if (pread(fd, buf, sizeof(buf), 0) <= 0)
-+		return -1;
-+
-+	return atol(buf);
-+}
-+
- long cg_read_key_long(const char *cgroup, const char *control, const char *key)
- {
- 	char buf[PAGE_SIZE];
-@@ -183,6 +193,18 @@ int cg_write(const char *cgroup, const char *control, char *buf)
- 	return ret == len ? 0 : ret;
- }
- 
-+/*
-+ * Returns fd on success, or -1 on failure.
-+ * (fd should be closed with close() as usual)
-+ */
-+int cg_open(const char *cgroup, const char *control, int flags)
-+{
-+	char path[PATH_MAX];
-+
-+	snprintf(path, sizeof(path), "%s/%s", cgroup, control);
-+	return open(path, flags);
-+}
-+
- int cg_write_numeric(const char *cgroup, const char *control, long value)
- {
- 	char buf[64];
-diff --git a/tools/testing/selftests/cgroup/cgroup_util.h b/tools/testing/selftests/cgroup/cgroup_util.h
-index e8d04ac9e3d23..19b131ee77072 100644
---- a/tools/testing/selftests/cgroup/cgroup_util.h
-+++ b/tools/testing/selftests/cgroup/cgroup_util.h
-@@ -34,9 +34,11 @@ extern int cg_read_strcmp(const char *cgroup, const char *control,
- extern int cg_read_strstr(const char *cgroup, const char *control,
- 			  const char *needle);
- extern long cg_read_long(const char *cgroup, const char *control);
-+extern long cg_read_long_fd(int fd);
- long cg_read_key_long(const char *cgroup, const char *control, const char *key);
- extern long cg_read_lc(const char *cgroup, const char *control);
- extern int cg_write(const char *cgroup, const char *control, char *buf);
-+extern int cg_open(const char *cgroup, const char *control, int flags);
- int cg_write_numeric(const char *cgroup, const char *control, long value);
- extern int cg_run(const char *cgroup,
- 		  int (*fn)(const char *cgroup, void *arg),
-diff --git a/tools/testing/selftests/cgroup/test_memcontrol.c b/tools/testing/selftests/cgroup/test_memcontrol.c
-index 41ae8047b8895..30730a3c26412 100644
---- a/tools/testing/selftests/cgroup/test_memcontrol.c
-+++ b/tools/testing/selftests/cgroup/test_memcontrol.c
-@@ -161,12 +161,12 @@ static int alloc_pagecache_50M_check(const char *cgroup, void *arg)
- /*
-  * This test create a memory cgroup, allocates
-  * some anonymous memory and some pagecache
-- * and check memory.current and some memory.stat values.
-+ * and checks memory.current, memory.peak, and some memory.stat values.
-  */
--static int test_memcg_current(const char *root)
-+static int test_memcg_current_peak(const char *root)
- {
- 	int ret = KSFT_FAIL;
--	long current;
-+	long current, peak, peak_reset;
- 	char *memcg;
- 
- 	memcg = cg_name(root, "memcg_test");
-@@ -180,15 +180,108 @@ static int test_memcg_current(const char *root)
- 	if (current != 0)
- 		goto cleanup;
- 
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak != 0)
-+		goto cleanup;
-+
- 	if (cg_run(memcg, alloc_anon_50M_check, NULL))
- 		goto cleanup;
- 
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak < MB(50))
-+		goto cleanup;
-+
-+	/*
-+	 * We'll open a few FDs for the same memory.peak file to exercise the free-path
-+	 * We need at least three to be closed in a different order than writes occurred to test
-+	 * the linked-list handling.
-+	 */
-+	int peak_fd = cg_open(memcg, "memory.peak", O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (peak_fd == -1)
-+		goto cleanup;
-+
-+	bool fd2_closed = false, fd3_closed = false, fd4_closed = false;
-+	int peak_fd2 = cg_open(memcg, "memory.peak", O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (peak_fd2 == -1)
-+		goto cleanup;
-+
-+	int peak_fd3 = cg_open(memcg, "memory.peak", O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (peak_fd3 == -1)
-+		goto cleanup;
-+
-+	static const char reset_string[] = "reset\n";
-+
-+	peak_reset = write(peak_fd, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	peak_reset = write(peak_fd2, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	peak_reset = write(peak_fd3, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	/* Make sure a completely independent read isn't affected by our  FD-local reset above*/
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak < MB(50))
-+		goto cleanup;
-+
-+	fd2_closed = true;
-+	if (close(peak_fd2))
-+		goto cleanup;
-+
-+	int peak_fd4 = cg_open(memcg, "memory.peak", O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (peak_fd4 == -1)
-+		goto cleanup;
-+
-+	peak_reset = write(peak_fd4, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(peak_fd);
-+	if (peak > MB(30) || peak < 0)
-+		goto cleanup;
-+
- 	if (cg_run(memcg, alloc_pagecache_50M_check, NULL))
- 		goto cleanup;
- 
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak < MB(50))
-+		goto cleanup;
-+
-+	/* Make sure everything is back to normal */
-+	peak = cg_read_long_fd(peak_fd);
-+	if (peak < MB(50))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(peak_fd4);
-+	if (peak < MB(50))
-+		goto cleanup;
-+
-+	fd3_closed = true;
-+	if (close(peak_fd3))
-+		goto cleanup;
-+
-+	fd4_closed = true;
-+	if (close(peak_fd4))
-+		goto cleanup;
-+
- 	ret = KSFT_PASS;
- 
- cleanup:
-+	close(peak_fd);
-+	if (!fd2_closed)
-+		close(peak_fd2);
-+	if (!fd3_closed)
-+		close(peak_fd3);
-+	if (!fd4_closed)
-+		close(peak_fd4);
- 	cg_destroy(memcg);
- 	free(memcg);
- 
-@@ -817,13 +910,16 @@ static int alloc_anon_50M_check_swap(const char *cgroup, void *arg)
- 
- /*
-  * This test checks that memory.swap.max limits the amount of
-- * anonymous memory which can be swapped out.
-+ * anonymous memory which can be swapped out. Additionally, it verifies that
-+ * memory.swap.peak reflects the high watermark and can be reset.
-  */
--static int test_memcg_swap_max(const char *root)
-+static int test_memcg_swap_max_peak(const char *root)
- {
- 	int ret = KSFT_FAIL;
- 	char *memcg;
--	long max;
-+	long max, peak;
-+
-+	static const char reset_string[] = "reset\n";
- 
- 	if (!is_swap_enabled())
- 		return KSFT_SKIP;
-@@ -840,6 +936,45 @@ static int test_memcg_swap_max(const char *root)
- 		goto cleanup;
- 	}
- 
-+	int swap_peak_fd = cg_open(memcg, "memory.swap.peak",
-+				   O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (swap_peak_fd == -1)
-+		goto cleanup;
-+
-+	int mem_peak_fd = cg_open(memcg, "memory.peak", O_RDWR | O_APPEND | O_CLOEXEC);
-+
-+	if (mem_peak_fd == -1)
-+		goto cleanup;
-+
-+	if (cg_read_long(memcg, "memory.swap.peak"))
-+		goto cleanup;
-+
-+	if (cg_read_long_fd(swap_peak_fd))
-+		goto cleanup;
-+
-+	/* switch the swap and mem fds into local-peak tracking mode*/
-+	int peak_reset = write(swap_peak_fd, reset_string, sizeof(reset_string));
-+
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	if (cg_read_long_fd(swap_peak_fd))
-+		goto cleanup;
-+
-+	if (cg_read_long(memcg, "memory.peak"))
-+		goto cleanup;
-+
-+	if (cg_read_long_fd(mem_peak_fd))
-+		goto cleanup;
-+
-+	peak_reset = write(mem_peak_fd, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	if (cg_read_long_fd(mem_peak_fd))
-+		goto cleanup;
-+
- 	if (cg_read_strcmp(memcg, "memory.max", "max\n"))
- 		goto cleanup;
- 
-@@ -862,6 +997,61 @@ static int test_memcg_swap_max(const char *root)
- 	if (cg_read_key_long(memcg, "memory.events", "oom_kill ") != 1)
- 		goto cleanup;
- 
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long(memcg, "memory.swap.peak");
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(mem_peak_fd);
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(swap_peak_fd);
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	/*
-+	 * open, reset and close the peak swap on another FD to make sure
-+	 * multiple extant fds don't corrupt the linked-list
-+	 */
-+	peak_reset = cg_write(memcg, "memory.swap.peak", (char *)reset_string);
-+	if (peak_reset)
-+		goto cleanup;
-+
-+	peak_reset = cg_write(memcg, "memory.peak", (char *)reset_string);
-+	if (peak_reset)
-+		goto cleanup;
-+
-+	/* actually reset on the fds */
-+	peak_reset = write(swap_peak_fd, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	peak_reset = write(mem_peak_fd, reset_string, sizeof(reset_string));
-+	if (peak_reset != sizeof(reset_string))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(swap_peak_fd);
-+	if (peak > MB(10))
-+		goto cleanup;
-+
-+	/*
-+	 * The cgroup is now empty, but there may be a page or two associated
-+	 * with the open FD accounted to it.
-+	 */
-+	peak = cg_read_long_fd(mem_peak_fd);
-+	if (peak > MB(1))
-+		goto cleanup;
-+
-+	if (cg_read_long(memcg, "memory.peak") < MB(29))
-+		goto cleanup;
-+
-+	if (cg_read_long(memcg, "memory.swap.peak") < MB(29))
-+		goto cleanup;
-+
- 	if (cg_run(memcg, alloc_anon_50M_check_swap, (void *)MB(30)))
- 		goto cleanup;
- 
-@@ -869,9 +1059,29 @@ static int test_memcg_swap_max(const char *root)
- 	if (max <= 0)
- 		goto cleanup;
- 
-+	peak = cg_read_long(memcg, "memory.peak");
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long(memcg, "memory.swap.peak");
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(mem_peak_fd);
-+	if (peak < MB(29))
-+		goto cleanup;
-+
-+	peak = cg_read_long_fd(swap_peak_fd);
-+	if (peak < MB(19))
-+		goto cleanup;
-+
- 	ret = KSFT_PASS;
- 
- cleanup:
-+	if (close(mem_peak_fd))
-+		ret = KSFT_FAIL;
-+	if (close(swap_peak_fd))
-+		ret = KSFT_FAIL;
- 	cg_destroy(memcg);
- 	free(memcg);
- 
-@@ -1295,7 +1505,7 @@ struct memcg_test {
- 	const char *name;
- } tests[] = {
- 	T(test_memcg_subtree_control),
--	T(test_memcg_current),
-+	T(test_memcg_current_peak),
- 	T(test_memcg_min),
- 	T(test_memcg_low),
- 	T(test_memcg_high),
-@@ -1303,7 +1513,7 @@ struct memcg_test {
- 	T(test_memcg_max),
- 	T(test_memcg_reclaim),
- 	T(test_memcg_oom_events),
--	T(test_memcg_swap_max),
-+	T(test_memcg_swap_max_peak),
- 	T(test_memcg_sock),
- 	T(test_memcg_oom_group_leaf_events),
- 	T(test_memcg_oom_group_parent_events),
+The fast-only notifiers serve a particular purpose: for aging, we
+neither want to delay other operations (e.g. unmapping for eviction)
+nor do we want to be delayed by these other operations ourselves. By
+default, the implementations of test_young() and clear_young() are meant
+to be *accurate*, not fast. The fast-only notifiers will only give age
+information that can be gathered fast.
+
+The fast-only notifiers are non-trivially implemented for only x86_64
+right now (as the KVM/x86 TDP MMU is the only secondary MMU that
+supports lockless Accessed bit harvesting).
+
+To make aging work for more than just x86, the fast-only clear_young()
+notifier must be non-trivially implemented by those other architectures
+and HAVE_KVM_MMU_NOTIFIER_YOUNG_FAST_ONLY needs to be set.
+
+access_tracking_perf_test now has a mode (-p) to check performance of
+MGLRU aging while the VM is faulting memory in. See the v4 cover
+letter[2] for performance data collected with this test.
+
+Previous versions of this series included logic in MGLRU and KVM to
+support batching the updates to secondary page tables. This version
+removes this logic, as it was complex and not necessary to enable
+proactive reclaim. This optimization, as well as enabling aging for
+arm64 and powerpc, can be done in a later series.
+
+=== Previous Versions ===
+
+Since v5[1]:
+ - Reworked test_clear_young_fast_only() into a new parameter for the
+   existing notifiers (thanks Sean).
+ - Added mmu_notifier.has_fast_aging to tell mm if calling fast-only
+   notifiers should be done.
+ - Added mm_has_fast_young_notifiers() to inform users if calling
+   fast-only notifier helpers is worthwhile (for look-around to use).
+ - Changed MGLRU to invoke a single notifier instead of two when
+   aging and doing look-around (thanks Yu).
+ - For KVM/x86, check indirect_shadow_pages > 0 instead of
+   kvm_memslots_have_rmaps() when collecting age information
+   (thanks Sean).
+ - For KVM/arm, some fixes from Oliver.
+ - Small fixes to access_tracking_perf_test.
+ - Added missing !MMU_NOTIFIER version of mmu_notifier_clear_young().
+
+Since v4[2]:
+ - Removed Kconfig that controlled when aging was enabled. Aging will
+   be done whenever the architecture supports it (thanks Yu).
+ - Added a new MMU notifier, test_clear_young_fast_only(), specifically
+   for MGLRU to use.
+ - Add kvm_fast_{test_,}age_gfn, implemented by x86.
+ - Fix locking for clear_flush_young().
+ - Added KVM_MMU_NOTIFIER_YOUNG_LOCKLESS to clean up locking changes
+   (thanks Sean).
+ - Fix WARN_ON and other cleanup for the arm64 locking changes
+   (thanks Oliver).
+
+Since v3[3]:
+ - Vastly simplified the series (thanks David). Removed mmu notifier
+   batching logic entirely.
+ - Cleaned up how locking is done for mmu_notifier_test/clear_young
+   (thanks David).
+ - Look-around is now only done when there are no secondary MMUs
+   subscribed to MMU notifiers.
+ - CONFIG_LRU_GEN_WALKS_SECONDARY_MMU has been added.
+ - Fixed the lockless implementation of kvm_{test,}age_gfn for x86
+   (thanks David).
+ - Added MGLRU functional and performance tests to
+   access_tracking_perf_test (thanks Axel).
+ - In v3, an mm would be completely ignored (for aging) if there was a
+   secondary MMU but support for secondary MMU walking was missing. Now,
+   missing secondary MMU walking support simply skips the notifier
+   calls (except for eviction).
+ - Added a sanity check for that range->lockless and range->on_lock are
+   never both provided for the memslot walk.
+
+For the changes since v2[4], see v3.
+
+Based on latest kvm/next.
+
+[1]: https://lore.kernel.org/linux-mm/20240611002145.2078921-1-jthoughton@google.com/
+[2]: https://lore.kernel.org/linux-mm/20240529180510.2295118-1-jthoughton@google.com/
+[3]: https://lore.kernel.org/linux-mm/20240401232946.1837665-1-jthoughton@google.com/
+[4]: https://lore.kernel.org/kvmarm/20230526234435.662652-1-yuzhao@google.com/
+
+James Houghton (11):
+  KVM: Add lockless memslot walk to KVM
+  KVM: x86: Relax locking for kvm_test_age_gfn and kvm_age_gfn
+  KVM: arm64: Relax locking for kvm_test_age_gfn and kvm_age_gfn
+  mm: Add missing mmu_notifier_clear_young for !MMU_NOTIFIER
+  mm: Add fast_only bool to test_young and clear_young MMU notifiers
+  mm: Add has_fast_aging to struct mmu_notifier
+  KVM: Pass fast_only to kvm_{test_,}age_gfn
+  KVM: x86: Optimize kvm_{test_,}age_gfn a little bit
+  KVM: x86: Implement fast_only versions of kvm_{test_,}age_gfn
+  mm: multi-gen LRU: Have secondary MMUs participate in aging
+  KVM: selftests: Add multi-gen LRU aging to access_tracking_perf_test
+
+ Documentation/admin-guide/mm/multigen_lru.rst |   6 +-
+ arch/arm64/kvm/Kconfig                        |   1 +
+ arch/arm64/kvm/hyp/pgtable.c                  |  15 +-
+ arch/arm64/kvm/mmu.c                          |  30 +-
+ arch/x86/include/asm/kvm_host.h               |   1 +
+ arch/x86/kvm/Kconfig                          |   2 +
+ arch/x86/kvm/mmu/mmu.c                        |  23 +-
+ arch/x86/kvm/mmu/tdp_iter.h                   |  27 +-
+ arch/x86/kvm/mmu/tdp_mmu.c                    |  67 ++-
+ include/linux/kvm_host.h                      |   2 +
+ include/linux/mmu_notifier.h                  |  67 ++-
+ include/linux/mmzone.h                        |   6 +-
+ include/trace/events/kvm.h                    |  19 +-
+ mm/damon/vaddr.c                              |   2 -
+ mm/mmu_notifier.c                             |  38 +-
+ mm/rmap.c                                     |   9 +-
+ mm/vmscan.c                                   | 148 +++++--
+ tools/testing/selftests/kvm/Makefile          |   1 +
+ .../selftests/kvm/access_tracking_perf_test.c | 369 +++++++++++++++--
+ .../selftests/kvm/include/lru_gen_util.h      |  55 +++
+ .../testing/selftests/kvm/lib/lru_gen_util.c  | 391 ++++++++++++++++++
+ virt/kvm/Kconfig                              |   7 +
+ virt/kvm/kvm_main.c                           |  73 ++--
+ 23 files changed, 1194 insertions(+), 165 deletions(-)
+ create mode 100644 tools/testing/selftests/kvm/include/lru_gen_util.h
+ create mode 100644 tools/testing/selftests/kvm/lib/lru_gen_util.c
+
+
+base-commit: 332d2c1d713e232e163386c35a3ba0c1b90df83f
 -- 
-2.40.1
+2.46.0.rc1.232.g9752f9e123-goog
 
 
