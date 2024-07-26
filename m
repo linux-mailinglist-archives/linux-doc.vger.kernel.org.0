@@ -1,118 +1,129 @@
-Return-Path: <linux-doc+bounces-21406-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21408-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id C424D93D418
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2024 15:22:21 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6330493D46D
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2024 15:43:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 50528B23988
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2024 13:22:19 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6F6401C20A15
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2024 13:43:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3AA9517C225;
-	Fri, 26 Jul 2024 13:21:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4094C17C7B1;
+	Fri, 26 Jul 2024 13:43:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I1pi4zNZ"
+	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="OSB9SSV9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail-40134.protonmail.ch (mail-40134.protonmail.ch [185.70.40.134])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05F2D17C220;
-	Fri, 26 Jul 2024 13:21:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A00417C22B
+	for <linux-doc@vger.kernel.org>; Fri, 26 Jul 2024 13:43:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.40.134
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1722000105; cv=none; b=NRK1uH1GuYS6Awz9mc9RL6x7qmW/BMRzIcW9Syi7aEWqDl2Yz/7e0orB65na277uDydiuT8KBF1p9rxmSsbo8PtdlvM2Ba6Qn0xADEWj9tr+uUyJA+n8VjrdRredAqvMYKvixOUrplVfyBfRUnbAUszTo984VhGxHjIEJCDd+Rw=
+	t=1722001427; cv=none; b=MZmx8hxp2ZpzbB3E1E9SRXnckyaZVUyNSadurrIicbIklCS6G/4P0pSGTh1tAQ5ttteOBznOk613cmyQE/r5gQ39vTBX6Z3F0uj1NWwea+3eyZDZUkXvv7SMAdJ5rhkbh14qfmD7Chf+MS7uYbjYFYhdVInaxV3AV3zRmVnmkXo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1722000105; c=relaxed/simple;
-	bh=hRkZNFtwrOf05XyNrDmkh+J3tnB4ZIPfaLmU8WdDarw=;
-	h=Date:Content-Type:MIME-Version:From:To:Cc:In-Reply-To:References:
-	 Message-Id:Subject; b=FrlOGnWV+6IHOHGMFMHo6J8v4PMEnPiWls7m6Dmm2fX2TcUqpjQkpF8MuxDljMgvAsn2gFMFmRFm9E7Eb8/akiwgoviQCTf48fPkvGjGdxZOO2LT21/V9OAI1bPBS/gAZi7S1XKHrYMkTGwZhqGEJkTUNsR0AhuX/6AKuX7qMlM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I1pi4zNZ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 49CEBC32786;
-	Fri, 26 Jul 2024 13:21:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1722000104;
-	bh=hRkZNFtwrOf05XyNrDmkh+J3tnB4ZIPfaLmU8WdDarw=;
-	h=Date:From:To:Cc:In-Reply-To:References:Subject:From;
-	b=I1pi4zNZ/KIVjYz+nhubP2FN7+yyaey1Znec1mFaxZEfuy7yBfPz7cxu/ZOi4Gryp
-	 qQM+zaBzwZrKRJ7121k7vNu3BI+MUxMhPtU+47JMFHaURIyqTr2gS6e8DgJpk9b7sH
-	 qdBH08gsY1PRzZGU9LBkj9H8lFgtllzr5QR+YKBvQ0OTly5NJsBPHVFQXaSuRVgHX5
-	 NqyP82k68zVMLmQGur72itMScYaxkYQ7ozlnE2EXCt4IAX/pCo/8Zk0BWPAT3UMeJt
-	 6F+8zwWnHFCd4mEBHeGTzX0yVF7QOp6ukeNw30k7YSban+qQX2ZN4b414jhOJVTrc/
-	 rl4XG30ObhTAg==
-Date: Fri, 26 Jul 2024 08:21:42 -0500
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	s=arc-20240116; t=1722001427; c=relaxed/simple;
+	bh=LpmTpst9tCOw77A57JCy7v0ELdCC5+ZAdYNsqWRsD3A=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=g0agavYecbZ5rXY3vDKhqWkYWhqBKA9j9vj49xr9YQ8gNqVEdqNhTw/cCgi6gY8DxQ7iC2yAX0DeU20sIyW2RCoaFFXdYGtsmnGQGzSYl28qWmzUViewN7LbhUDeZeMeIp9pLJhHxuPpf9NrjY4ZinIFWW6GQPnKH/ZbMFKC18Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=OSB9SSV9; arc=none smtp.client-ip=185.70.40.134
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1722001423; x=1722260623;
+	bh=YGvFGgwYypuNV9H/Bzk9WCSdRPbec4gTm6JXzoCZIaU=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=OSB9SSV9388drZ8Fu8+t9OWBxkDFtazQ9Ke0aq1EmH5uNneZdAbm73JXkR76jGXQq
+	 thMHYii0+768P+tRY8GykXzTW9s0iPum3ROcVPJYkCyBUxUp23T0L1i72JCE0bCpH5
+	 CNpSoMETqu8/z+a3gCjDW2VBpewTvK4lB8UyfjcEePQTmPutQEU+kBD2VM7R90eQY7
+	 xe5FJSzW+iB4oOuSogTcmvvAPDBh4vTIJakRrQ06qWKcJr4C+1KEdx701fkFKKMnnw
+	 M9zjdCY4OqcN4/N6mK4LcLHQ72CQ88ipMvPObzWRy6uAOslLbVDq4L8h8MtOf7kwM/
+	 1F33F74rytbzw==
+Date: Fri, 26 Jul 2024 13:43:38 +0000
+To: Boqun Feng <boqun.feng@gmail.com>
+From: Benno Lossin <benno.lossin@proton.me>
+Cc: Alice Ryhl <aliceryhl@google.com>, rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Wedson Almeida Filho <wedsonaf@gmail.com>, Gary Guo <gary@garyguo.net>, =?utf-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, Andreas Hindborg <a.hindborg@samsung.com>, Jonathan Corbet <corbet@lwn.net>, Viresh Kumar <viresh.kumar@linaro.org>, Danilo Krummrich <dakr@redhat.com>, Trevor Gross <tmgross@umich.edu>, gregkh@linuxfoundation.org
+Subject: Re: [RFC PATCH] rust: types: Add explanation for ARef pattern
+Message-ID: <beaf1fa3-eebe-443c-bc51-abd9348a411d@proton.me>
+In-Reply-To: <ZqK1l05zcCwGforV@boqun-archlinux>
+References: <20240710032447.2161189-1-boqun.feng@gmail.com> <CAH5fLgjat2Y6RT957BhdOjJHt7rPs0DvZYC6JZ+pHFiP=yDNgA@mail.gmail.com> <ZqE9dzfNrE3Xg3tV@boqun-archlinux> <bcdd74f3-d0c0-4366-976a-5a935081a704@proton.me> <ZqK1l05zcCwGforV@boqun-archlinux>
+Feedback-ID: 71780778:user:proton
+X-Pm-Message-ID: 978f8f08559271b0ce9f750c86bab903fa4f9c00
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
-Cc: steen.hegelund@microchip.com, Thorsten.Kummermehr@microchip.com, 
- andrew@lunn.ch, linux-kernel@vger.kernel.org, robh+dt@kernel.org, 
- corbet@lwn.net, netdev@vger.kernel.org, Pier.Beruto@onsemi.com, 
- davem@davemloft.net, conor+dt@kernel.org, UNGLinuxDriver@microchip.com, 
- edumazet@google.com, saeedm@nvidia.com, Selvamani.Rajagopal@onsemi.com, 
- Nicolas.Ferre@microchip.com, anthony.l.nguyen@intel.com, 
- devicetree@vger.kernel.org, kuba@kernel.org, pabeni@redhat.com, 
- benjamin.bigler@bernformulastudent.ch, ruanjinjie@huawei.com, 
- krzysztof.kozlowski+dt@linaro.org, linux@bigler.io, horms@kernel.org, 
- vladimir.oltean@nxp.com, linux-doc@vger.kernel.org, 
- horatiu.vultur@microchip.com, Conor Dooley <conor.dooley@microchip.com>
-In-Reply-To: <20240726123907.566348-15-Parthiban.Veerasooran@microchip.com>
-References: <20240726123907.566348-1-Parthiban.Veerasooran@microchip.com>
- <20240726123907.566348-15-Parthiban.Veerasooran@microchip.com>
-Message-Id: <172200010240.1530361.10067496666538570000.robh@kernel.org>
-Subject: Re: [PATCH net-next v5 14/14] dt-bindings: net: add Microchip's
- LAN865X 10BASE-T1S MACPHY
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
+On 25.07.24 22:29, Boqun Feng wrote:
+> On Thu, Jul 25, 2024 at 06:12:56PM +0000, Benno Lossin wrote:
+>> On 24.07.24 19:44, Boqun Feng wrote:
+>>> On Tue, Jul 23, 2024 at 11:14:29AM +0200, Alice Ryhl wrote:
+>>>>> +/// However `&Self` represents a reference to the object, and the li=
+fetime of the **reference** is
+>>>>> +/// known at compile-time. E.g. the `Foo::as_ref()` above.
+>>>>> +///
+>>>>> +/// ## `impl Drop` of an `impl AlwaysRefCounted` should not touch th=
+e refcount
+>>>>> +///
+>>>>> +/// [`ARef`] descreases the refcount automatically (in [`ARef::drop`=
+]) when it goes out of the
+>>>>> +/// scope, therefore there's no need to `impl Drop` for the type of =
+objects (e.g. `Foo`) to decrease
+>>>>> +/// the refcount.
+>>>>>  pub struct ARef<T: AlwaysRefCounted> {
+>>>>>      ptr: NonNull<T>,
+>>>>>      _p: PhantomData<T>,
+>>>>> --
+>>>>> 2.45.2
+>>>>>
+>>>>
+>>>> I think this is missing some basic information related to `&Self` ->
+>>>> `ARef<Self>` conversions. We should explain that these conversions are
+>>>> possible, and that you usually don't want `raw_ptr` -> `ARef<Self>` to
+>>>> increment the refcount - instead provide a `raw_ptr` -> `&Self` and
+>>>> convert the `&Self` to `ARef<Self>`.
+>>>>
+>>>
+>>> I could be more explicit on this, but could there be a case where a `T`
+>>> only wants to return `ARef<T>` as a public API? In other words, the
+>>> author of `T` doesn't want to expose an `-> &T` function, therefore a
+>>> `-> ARef<T>` function makes more sense? If all the users of `T` want to
+>>> operate on an `ARef<T>` other than `&T`, I think it makes sense, right?
+>>
+>> You can always get a `&T` from `ARef<T>`, since it implements `Deref`.
+>>
+>=20
+> Yeah, but this is unrelated. I was talking about that API providers can
+> decide whether they want to only provide a `raw_ptr` -> `ARef<Self>` if
+> they don't need to provide a `raw_ptr` -> `&Self`.
+>=20
+>>> Overall, I feel like we don't necessarily make a preference between
+>>> `->&Self` and `->ARef<Self>` functions here, since it's up to the users=
+'
+>>> design?
+>>
+>> I would argue that there should be a clear preference for functions
+>> returning `&Self` when possible (ie there is a parameter that the
+>=20
+> If "possible" also means there's going to be `raw_ptr` -> `&Self`
+> function (as the same publicity level) anyway, then agreed. In other
+> words, if the users only need the `raw_ptr` -> `ARef<Self>`
+> functionality, we don't want to force people to provide a `raw_ptr` ->
+> `&Self` just because, right?
 
-On Fri, 26 Jul 2024 18:09:07 +0530, Parthiban Veerasooran wrote:
-> The LAN8650/1 combines a Media Access Controller (MAC) and an Ethernet
-> PHY to enable 10BASE-T1S networks. The Ethernet Media Access Controller
-> (MAC) module implements a 10 Mbps half duplex Ethernet MAC, compatible
-> with the IEEE 802.3 standard and a 10BASE-T1S physical layer transceiver
-> integrated into the LAN8650/1. The communication between the Host and the
-> MAC-PHY is specified in the OPEN Alliance 10BASE-T1x MACPHY Serial
-> Interface (TC6).
-> 
-> Reviewed-by: Conor Dooley<conor.dooley@microchip.com>
-> Signed-off-by: Parthiban Veerasooran <Parthiban.Veerasooran@microchip.com>
-> ---
->  .../bindings/net/microchip,lan8650.yaml       | 80 +++++++++++++++++++
->  MAINTAINERS                                   |  1 +
->  2 files changed, 81 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/net/microchip,lan8650.yaml
-> 
+I see... I am having a hard time coming up with an example where users
+would exclusively want `ARef<Self>` though... What do you have in mind?
+Normally types wrapped by `ARef` have `&self` methods.
 
-My bot found errors running 'make dt_binding_check' on your patch:
-
-yamllint warnings/errors:
-
-dtschema/dtc warnings/errors:
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/microchip,lan8650.yaml: $id: Cannot determine base path from $id, relative path/filename doesn't match actual path or filename
- 	 $id: http://devicetree.org/schemas/net/microchip,lan865x.yaml
- 	file: /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/microchip,lan8650.yaml
-
-doc reference errors (make refcheckdocs):
-
-See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20240726123907.566348-15-Parthiban.Veerasooran@microchip.com
-
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
-
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
-
-pip3 install dtschema --upgrade
-
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
+Cheers,
+Benno
 
 
