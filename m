@@ -1,133 +1,105 @@
-Return-Path: <linux-doc+bounces-21550-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21557-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90A6E93FE70
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jul 2024 21:40:44 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF761940050
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jul 2024 23:23:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4C3E8284026
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jul 2024 19:40:43 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E14521C22208
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jul 2024 21:23:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CF917188CA7;
-	Mon, 29 Jul 2024 19:40:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 43FCB18D4A4;
+	Mon, 29 Jul 2024 21:23:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k98QF0TB"
+	dkim=pass (1024-bit key) header.d=relay.vimeo.com header.i=@relay.vimeo.com header.b="ffqgKZRz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from m35-116.mailgun.net (m35-116.mailgun.net [69.72.35.116])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92517187858;
-	Mon, 29 Jul 2024 19:40:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44BCA18D4DE
+	for <linux-doc@vger.kernel.org>; Mon, 29 Jul 2024 21:23:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=69.72.35.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1722282037; cv=none; b=cGoMwfutE4vv8ruOu2CthTjZHjDltSXfKFNoLJRxVcDQHQwhWez5fKIeI8FBybITdPKr2Xww107oIPgnsKHy2rrIVoinuVz1k5Uv7CNuBeVSP6ETKjwkigS858yuI2u7n1VY9suQd6pLDSCbS62B1Spb8+ko8RvzI2qYyy98nRs=
+	t=1722288185; cv=none; b=agSw15qMV+NRsKJYUMQZ+xET6b2ty5UvudShB+j0J9Y18+RBLtC0b2/RN8lgksTz3u/26eBWWRSxQ9cM8BOeI/MMIrUAcio36/BhwjWtvXXmFW0KtUyk8tINFyJP41GLN89lTO8M9bjkdQHbIXB0FsC/PBrPUfPfE1bJ7PRfWcA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1722282037; c=relaxed/simple;
-	bh=SBQ2pH87hA0aDlWEhXjDb2G7eJUp6np1Zn/k71CFvCE=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ksbqpZokCgIkwmOxnCCT0+KhugONJ4/5EKiV8nqq7BiBi23OoV41NX5HhfDxzpNgCPc0Xoyq3uopPRvra+WoTMnxSUE0RJM90Ffknv5KiIuqnhuKI/3qPtPNDdlJlkodKuFGOygKGiS0Acf6EW4vp1u277ysq1O7IVWeMEBaxkc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k98QF0TB; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28EF5C32786;
-	Mon, 29 Jul 2024 19:40:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1722282037;
-	bh=SBQ2pH87hA0aDlWEhXjDb2G7eJUp6np1Zn/k71CFvCE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=k98QF0TB/OGdFu8g7+GgDbj6VjlbTXhQXIaNhxgRzQSFYQiTprTp0ZxMP/TgBukuM
-	 cfdY5vBZSqllwf4v7NUAouDeWHKMGVIDk+9cCKO1KXFQMtFrhlbzZF4nxulsk6WNEH
-	 sl9o9H7H0W4YmTZISeChBIOsVX2YYaN6QbUXHjsflfDJkC1uG/7JbsJ8Io19uHl0Xy
-	 GsdC7imSCUD7V7cVycqpa7JyxoxMBjzNLmKgpWexNqzDVuO/XPGT+ATIWcOjrYupOY
-	 CxfxD2ma3lcx8zT+H+xCkvRgwMVi+jDTx8yYMXl9aMo5LqDCr0xFHRcW1IgLlGdSkJ
-	 cRLZg85bkiq/w==
-Date: Mon, 29 Jul 2024 20:40:30 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Mark Brown <broonie@kernel.org>
-Cc: lars@metafoo.de, Michael.Hennerich@analog.com, robh+dt@kernel.org,
- krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org, nuno.sa@analog.com,
- dlechner@baylibre.com, corbet@lwn.net, marcelo.schmitt1@gmail.com, Marcelo
- Schmitt <marcelo.schmitt@analog.com>, linux-iio@vger.kernel.org,
- devicetree@vger.kernel.org, linux-spi@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: (subset) [PATCH v6 0/7] Add support for AD4000 series of ADCs
-Message-ID: <20240729204030.038e4aa3@jic23-huawei>
-In-Reply-To: <172227614374.120386.3055005856415965055.b4-ty@kernel.org>
-References: <cover.1719686465.git.marcelo.schmitt@analog.com>
-	<172227614374.120386.3055005856415965055.b4-ty@kernel.org>
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.43; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1722288185; c=relaxed/simple;
+	bh=54Ak1+K4R79/npDbs4UtUU9rG6vREN5KRCLxgY0YgX0=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=W8t/Pu/tKotMUftc1ane7IYDbfnoUdafyfdR3X2QlgdxghODgF7u2a8Xnfd/xdUFujIA6DMzX87B6RCwdx7szrRrugLn61UR5gTdiGMfqpHfzk6NHOjTHAOhQNi8xUSfz7cYeuJgLZGnX4wuPk3R+IuNUUmx+D8Z10AiTIPM0Yo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=vimeo.com; spf=pass smtp.mailfrom=relay.vimeo.com; dkim=pass (1024-bit key) header.d=relay.vimeo.com header.i=@relay.vimeo.com header.b=ffqgKZRz; arc=none smtp.client-ip=69.72.35.116
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=vimeo.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=relay.vimeo.com
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=relay.vimeo.com; q=dns/txt; s=mailo; t=1722288182; x=1722295382;
+ h=Content-Transfer-Encoding: MIME-Version: Message-Id: Date: Subject: Subject: Cc: To: To: From: From: Sender: Sender;
+ bh=a7Ljw3AXkZDzOFLBKFNTY35O0ifJdJ40YsuUE1AtXfE=;
+ b=ffqgKZRzwWe/rjwPkeU0auwsgZE8n2OXANRPo2taxUJDP0teyQ4lDzl9KAoWMQDz6Vi3AkQYEEsFq7Zi8tFTJ4tx4GDVV7Kc3rRIxBKnd4mM1Wi1rHVoow4GSeaC/aqKf/TWK8teWRy6j+WIyIieLSgxGzM/u9FBtrxxp7rjo6c=
+X-Mailgun-Sending-Ip: 69.72.35.116
+X-Mailgun-Sid: WyJhZDBhNyIsImxpbnV4LWRvY0B2Z2VyLmtlcm5lbC5vcmciLCI5ZDJhMWMiXQ==
+Received: from smtp.vimeo.com (215.71.185.35.bc.googleusercontent.com [35.185.71.215])
+ by 1ba2f445e949 with SMTP id 66a80836c423567e51c57d51 (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 29 Jul 2024 21:23:02 GMT
+Sender: davidf=vimeo.com@relay.vimeo.com
+Received: from nutau (gke-sre-us-east1-main-c45160e0-ow8k.c.vimeo-core.internal [10.56.27.211])
+	by smtp.vimeo.com (Postfix) with ESMTP id 120CA64FC7;
+	Mon, 29 Jul 2024 21:23:02 +0000 (UTC)
+Received: by nutau (Postfix, from userid 1001)
+	id 5BB66B409D2; Mon, 29 Jul 2024 10:38:00 -0400 (EDT)
+From: David Finkel <davidf@vimeo.com>
+To: Muchun Song <muchun.song@linux.dev>,
+	Tejun Heo <tj@kernel.org>,
+	Roman Gushchin <roman.gushchin@linux.dev>,
+	Andrew Morton <akpm@linux-foundation.org>
+Cc: core-services@vimeo.com,
+	Jonathan Corbet <corbet@lwn.net>,
+	Michal Hocko <mhocko@kernel.org>,
+	Shakeel Butt <shakeel.butt@linux.dev>,
+	Shuah Khan <shuah@kernel.org>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Zefan Li <lizefan.x@bytedance.com>,
+	cgroups@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-kselftest@vger.kernel.org,
+	=?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>
+Subject: [PATCH v6] mm, memcg: cg2 memory{.swap,}.peak write handlers
+Date: Mon, 29 Jul 2024 10:37:41 -0400
+Message-Id: <20240729143743.34236-1-davidf@vimeo.com>
+X-Mailer: git-send-email 2.40.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On Mon, 29 Jul 2024 19:02:23 +0100
-Mark Brown <broonie@kernel.org> wrote:
+This is an updated patchset rebasing onto -torvalds master (post
+6.11-rc1), and addressing comments from Michal and Tejun.
 
-> On Sat, 29 Jun 2024 16:04:00 -0300, Marcelo Schmitt wrote:
-> > This patch series extends the SPI bitbang, gpio, and spi-engine controllers to
-> > support configurable MOSI line idle states.
-> > It then introduces the ad4000 driver which uses the MOSI idle configuration to
-> > provide improved support for the AD4000 series of ADCs.
-> > Documentation is added describing the new extension to the SPI protocol.
-> > The currently supported wiring modes for AD4000 devices were documented under
-> > IIO documentation directory.
-> > 
-> > [...]  
-> 
-> Applied to
-> 
->    https://git.kernel.org/pub/scm/linux/kernel/git/broonie/spi.git for-next
-> 
-> Thanks!
-> 
-> [1/7] spi: Enable controllers to extend the SPI protocol with MOSI idle configuration
->       commit: f58872f45c36ded048bccc22701b0986019c24d8
-> [2/7] spi: bitbang: Implement support for MOSI idle state configuration
->       commit: 320f6693097bf89d67f9cabad24a2b911e23073f
-> [3/7] spi: spi-gpio: Add support for MOSI idle state configuration
->       commit: 927d382c7efbcc2206c31fa2f672fa264c0f1d5b
-> [4/7] spi: spi-axi-spi-engine: Add support for MOSI idle configuration
->       commit: a62073f4b2164028fc7c5ae45ceba10c9326cd91
-Hi Mark,
+As requested by Tejun and Johannes, I've removed the explicit check for
+the string "reset", so it now allows any non-empty string. (Empty
+strings get filtered before our write handler executes)
 
-Any chance of a tag + you seem to have also picked up the ADC dt binding.
-Patch 5/7. dt-bindings: iio: adc: Add AD4000
-which I'm assuming was not intentional.
+I've also made several of the field reads and writes atomic with
+{READ,WRITE}_ONCE, and adjusted more of the types to be unsigned.
 
-I think I only need the definition of SPI_MOSI_IDLE_HIGH
-for 5-7 to build fine.
+Documentation/admin-guide/cgroup-v2.rst          |  22 ++--
+include/linux/cgroup-defs.h                      |   5 +
+include/linux/cgroup.h                           |   3 +
+include/linux/memcontrol.h                       |   5 +
+include/linux/page_counter.h                     |  11 +-
+kernel/cgroup/cgroup-internal.h                  |   2 +
+kernel/cgroup/cgroup.c                           |   7 +
+mm/memcontrol.c                                  | 116 +++++++++++++++--
+mm/page_counter.c                                |  30 +++--
+tools/testing/selftests/cgroup/cgroup_util.c     |  22 ++++
+tools/testing/selftests/cgroup/cgroup_util.h     |   2 +
+tools/testing/selftests/cgroup/test_memcontrol.c | 229 +++++++++++++++++++++++++++++++--
+12 files changed, 419 insertions(+), 35 deletions(-)
 
-If needed, I can use a local value for that in the driver and
-we can follow up with a patch using the main define once the trees
-come together upstream.
-
-Jonathan
+[1]: https://lore.kernel.org/cgroups/20240724161942.3448841-3-davidf@vimeo.com/T/
 
 
-> 
-> All being well this means that it will be integrated into the linux-next
-> tree (usually sometime in the next 24 hours) and sent to Linus during
-> the next merge window (or sooner if it is a bug fix), however if
-> problems are discovered then the patch may be dropped or reverted.
-> 
-> You may get further e-mails resulting from automated or manual testing
-> and review of the tree, please engage with people reporting problems and
-> send followup patches addressing any issues that are reported if needed.
-> 
-> If any updates are required or you are submitting further changes they
-> should be sent as incremental updates against current git, existing
-> patches will not be replaced.
-> 
-> Please add any relevant lists and maintainers to the CCs when replying
-> to this mail.
-> 
-> Thanks,
-> Mark
-> 
 
 
