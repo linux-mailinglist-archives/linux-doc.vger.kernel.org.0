@@ -1,265 +1,302 @@
-Return-Path: <linux-doc+bounces-21635-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21649-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DB64940B1A
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2024 10:17:53 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CA77940B69
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2024 10:27:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9087D1C21124
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2024 08:17:52 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9E4F1B20C2E
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2024 08:27:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1573F1922F3;
-	Tue, 30 Jul 2024 08:17:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BE0F919538B;
+	Tue, 30 Jul 2024 08:24:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="K0SNL6uI"
+	dkim=pass (1024-bit key) header.d=mediatek.com header.i=@mediatek.com header.b="j0sVL1jC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out30-110.freemail.mail.aliyun.com (out30-110.freemail.mail.aliyun.com [115.124.30.110])
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D868D18FDC0;
-	Tue, 30 Jul 2024 08:17:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.110
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DF9D192B66;
+	Tue, 30 Jul 2024 08:24:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=60.244.123.138
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1722327468; cv=none; b=hOg1EnHun6w2sxRk/sNH5oKq+3V8bWRg+3hbY3ve4Io0pAAIWMY0KhG+gMl22lNb9a+akU34KXUXi3lfZfG02akaWrJ3CaX8BenoJr8ICN6WDUUARZcoxKsUTRDva0C6i9zWdRHJz9K6co1VNn77HXRajstnSnFUQsiL1uvX+0k=
+	t=1722327899; cv=none; b=FfShFhIVFbFK2X8rhZa2agae2rTyww9MkG5kNlrRQtZhgqxatbpUZbfk3iRV/+icEOg2yk2YNSCtneDgpw7zAfqSWOONQQliOdmT43wNjo9Fg1suFIPAQrpp6L/oLKOca+j2LzLuK2Suvg+mYxdKPDsaNZBULWzj3gtLN6QhrIQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1722327468; c=relaxed/simple;
-	bh=SoTuAhXH8DAcGS2Zg9eo9Y+q6LWEAmfzEF5TC+h8Cco=;
-	h=Message-ID:Subject:Date:From:To:Cc:References:In-Reply-To; b=KrgrT3Qo+/mHbCDS077VXDGPGIE/LZkJC5b9b4hZfNWWI7J6ZhGwBn6NwFd9kihaSydUWRA1Uu5ZeTTUPu7XwotuNo6xcTcmwDURYQI2y4w7HZ54tliBtgVszYrJv66Rglbu3iPoC3TMopfw8ZSDBSIwJfbEKZRI1PfJDR21G+U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=K0SNL6uI; arc=none smtp.client-ip=115.124.30.110
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
-DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux.alibaba.com; s=default;
-	t=1722327455; h=Message-ID:Subject:Date:From:To;
-	bh=BL5MMNWBxRZiD5bwdc51aQGuezbk7sZ94pe6i1nz4Vo=;
-	b=K0SNL6uIC0eITT6Ch2r7BogGPhKmMDjZy9Nxz+6Qhajjb1Vgq/5wlNA9xcpE72fmkEEE7MYawZrvsms1DS5GczCXuJHg1wM70Cz7KiIdGiCXxcAwrzA7UdmVW+UJmSxEwAkF5AoIWCTtZnkCxdajJydcKxgpmyWuYlcQLFHpbj4=
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R101e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=maildocker-contentspam033037067113;MF=xuanzhuo@linux.alibaba.com;NM=1;PH=DS;RN=53;SR=0;TI=SMTPD_---0WBexhuz_1722327451;
-Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com fp:SMTPD_---0WBexhuz_1722327451)
-          by smtp.aliyun-inc.com;
-          Tue, 30 Jul 2024 16:17:32 +0800
-Message-ID: <1722327259.5659568-1-xuanzhuo@linux.alibaba.com>
-Subject: Re: [PATCH net-next v17 01/14] netdev: add netdev_rx_queue_restart()
-Date: Tue, 30 Jul 2024 16:14:19 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: Mina Almasry <almasrymina@google.com>
-Cc: Mina Almasry <almasrymina@google.com>,
- "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>,
- Donald Hunter <donald.hunter@gmail.com>,
- Jonathan Corbet <corbet@lwn.net>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Matt Turner <mattst88@gmail.com>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Helge Deller <deller@gmx.de>,
- Andreas Larsson <andreas@gaisler.com>,
- Jesper Dangaard Brouer <hawk@kernel.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Steven Rostedt <rostedt@goodmis.org>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Arnd Bergmann <arnd@arndb.de>,
- Steffen Klassert <steffen.klassert@secunet.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- David Ahern <dsahern@kernel.org>,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- Shuah Khan <shuah@kernel.org>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Bagas Sanjaya <bagasdotme@gmail.com>,
- Christoph Hellwig <hch@infradead.org>,
- Nikolay Aleksandrov <razor@blackwall.org>,
- Taehee Yoo <ap420073@gmail.com>,
- Pavel Begunkov <asml.silence@gmail.com>,
- David Wei <dw@davidwei.uk>,
- Jason Gunthorpe <jgg@ziepe.ca>,
- Yunsheng Lin <linyunsheng@huawei.com>,
- Shailend Chand <shailend@google.com>,
- Harshitha Ramamurthy <hramamurthy@google.com>,
- Shakeel Butt <shakeel.butt@linux.dev>,
- Jeroen de Borst <jeroendb@google.com>,
- Praveen Kaligineedi <pkaligineedi@google.com>,
- netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org,
- linux-alpha@vger.kernel.org,
- linux-mips@vger.kernel.org,
- linux-parisc@vger.kernel.org,
- sparclinux@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org,
- linux-arch@vger.kernel.org,
- linux-kselftest@vger.kernel.org,
- bpf@vger.kernel.org,
- linux-media@vger.kernel.org,
- dri-devel@lists.freedesktop.org
-References: <20240730022623.98909-1-almasrymina@google.com>
- <20240730022623.98909-2-almasrymina@google.com>
-In-Reply-To: <20240730022623.98909-2-almasrymina@google.com>
+	s=arc-20240116; t=1722327899; c=relaxed/simple;
+	bh=T9TYD+nIBzMWl0sE8jhxkBf952ycrTnmqYpaA8cm1xU=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=sTGLH8Q1LywilolYSXSLFDzAFa5qripcaFWDqdvRzRY0nyXp3bMp+265uOUurYFoCGQYkYwHp62c5k94W7kRXxC8QzIBqqLh+6lx7K71UAovrLLB/1stfY3FQt8KWu5BZrcX+tq5lNq//r1/MslHLKkGV9xSBrxNFZNw7Z5eaD0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com; spf=pass smtp.mailfrom=mediatek.com; dkim=pass (1024-bit key) header.d=mediatek.com header.i=@mediatek.com header.b=j0sVL1jC; arc=none smtp.client-ip=60.244.123.138
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mediatek.com
+X-UUID: 27eb78424e4d11efb5b96b43b535fdb4-20240730
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
+	h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From; bh=A6mn92rUV5LDImegfXO663Es17xIGXd9r6oLaBOe1S4=;
+	b=j0sVL1jCLSQ3GwzhPdm+lyZR+mZqlYoCVunhCKSDEyOFOwz7Hhbnr5JaS84dZD0R+Nk+8ZanedqF87/UGrj+KPTNFVFiqPE0zHSWIAc/IwV/bmSAWkfbj+2SiBf1qon09xK+LGpcf/YKhV7h/tCl033Pj89yS8/isGPjpeRKzG4=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.41,REQID:cc35094d-5258-4f75-95a5-b7541ee68bc5,IP:0,U
+	RL:0,TC:0,Content:-25,EDM:-30,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACT
+	ION:release,TS:-55
+X-CID-META: VersionHash:6dc6a47,CLOUDID:941c11d2-436f-4604-ad9d-558fa44a3bbe,B
+	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:2,IP:nil,UR
+	L:1,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,S
+	PR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 0
+X-CID-BAS: 0,_,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
+X-UUID: 27eb78424e4d11efb5b96b43b535fdb4-20240730
+Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by mailgw01.mediatek.com
+	(envelope-from <liju-clr.chen@mediatek.com>)
+	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+	with ESMTP id 981228636; Tue, 30 Jul 2024 16:24:36 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Tue, 30 Jul 2024 16:24:36 +0800
+Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Tue, 30 Jul 2024 16:24:36 +0800
+From: Liju-clr Chen <liju-clr.chen@mediatek.com>
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Catalin
+ Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Steven
+ Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Richard Cochran
+	<richardcochran@gmail.com>, Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Liju-clr Chen <Liju-clr.Chen@mediatek.com>, Yingshiuan Pan
+	<Yingshiuan.Pan@mediatek.com>, Ze-yu Wang <Ze-yu.Wang@mediatek.com>
+CC: <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+	<linux-trace-kernel@vger.kernel.org>, <netdev@vger.kernel.org>,
+	<linux-mediatek@lists.infradead.org>, Shawn Hsiao <shawn.hsiao@mediatek.com>,
+	PeiLun Suei <PeiLun.Suei@mediatek.com>, Chi-shen Yeh
+	<Chi-shen.Yeh@mediatek.com>, Kevenny Hsieh <Kevenny.Hsieh@mediatek.com>
+Subject: [PATCH v12 00/24] GenieZone hypervisor drivers
+Date: Tue, 30 Jul 2024 16:24:12 +0800
+Message-ID: <20240730082436.9151-1-liju-clr.chen@mediatek.com>
+X-Mailer: git-send-email 2.18.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MTK: N
 
-On Tue, 30 Jul 2024 02:26:05 +0000, Mina Almasry <almasrymina@google.com> wrote:
-> Add netdev_rx_queue_restart() function to netdev_rx_queue.h
+From: Liju-Clr Chen <liju-clr.chen@mediatek.com>
 
+This series is based on linux-next, tag: next-20240730.
 
-Can you say more? As far as I understand, we just release the buffer
-submitted to the rx ring and get a new page pool.
+GenieZone hypervisor(gzvm) is a type-1 hypervisor that supports various
+virtual machine types and provides security features such as TEE-like
+scenarios and secure boot. It can create guest VMs for security use cases
+and has virtualization capabilities for both platform and interrupt.
+Although the hypervisor can be booted independently, it requires the
+assistance of GenieZone hypervisor kernel driver(gzvm-ko) to leverage the
+ability of Linux kernel for vCPU scheduling, memory management, inter-VM
+communication and virtio backend support.
 
-But I personally feel that the interface here is a bit too complicated. In
-particular, we also need to copy the rx struct memory, which means it is a
-dangerous operation for many pointers.
+Changes in v12:
+- Introduce a mechanism to migrate the ARM64 virtual timer from the
+  guest VM to the host Linux system when the execution context switches
+  from the guest VM to the host.
+- Implement CPU idle functionality for guest VMs to reduce CPU usage
+  and achieve power savings.
+- Emulate Inter-Processor Interrupts (IPI) handling for guest VMs.
+- Add Co-developed-by tags, adjust the order of Signed-off-by lines, and
+  remove "From:" lines.
+- Fix coding style from viewer suggestion.
 
-Thanks.
+Changes in v11:
+https://lore.kernel.org/all/20240529084239.11478-1-liju-clr.chen@mediatek.com/
+- Resolve low memory issue by using only one api to get pages for guest VM.
+- The GenieZone hypervisor acts as a vendor firmware to enable platform
+  virtualization, offering an implementation that is independent of
+  Linux-specific implementations. So, relocate dt-binding yaml file to
+  the firmware path, as the dts node is used to confirm the presence of
+  the geniezone hypervisor firmware.
+- Fix coding style from viewer suggestion and checking tools.
 
+Changes in v10:
+https://lore.kernel.org/all/20240412065718.29105-1-yi-de.wu@mediatek.com/
+- Optimize memory allocation: query hypervisor demand paging capability
+  before VM memory population.
+- Fix goto syntax according to ACK reviewer in `gzvm_vcpu.c`.
+- Fix coding style from viewer suggestion and checking tools.
 
->
-> Signed-off-by: David Wei <dw@davidwei.uk>
-> Signed-off-by: Mina Almasry <almasrymina@google.com>
-> Reviewed-by: Pavel Begunkov <asml.silence@gmail.com>
-> Reviewed-by: Jakub Kicinski <kuba@kernel.org>
->
-> ---
->
-> v17:
-> - Use ASSERT_RTNL() (Jakub).
->
-> v13:
-> - Add reviewed-by from Pavel (thanks!)
-> - Fixed comment (Pavel)
->
-> v11:
-> - Fix not checking dev->queue_mgmt_ops (Pavel).
-> - Fix ndo_queue_mem_free call that passed the wrong pointer (David).
->
-> v9: https://lore.kernel.org/all/20240502045410.3524155-4-dw@davidwei.uk/
-> (submitted by David).
-> - fixed SPDX license identifier (Simon).
-> - Rebased on top of merged queue API definition, and changed
->   implementation to match that.
-> - Replace rtnl_lock() with rtnl_is_locked() to make it useable from my
->   netlink code where rtnl is already locked.
->
-> ---
->  include/net/netdev_rx_queue.h |  3 ++
->  net/core/Makefile             |  1 +
->  net/core/netdev_rx_queue.c    | 74 +++++++++++++++++++++++++++++++++++
->  3 files changed, 78 insertions(+)
->  create mode 100644 net/core/netdev_rx_queue.c
->
-> diff --git a/include/net/netdev_rx_queue.h b/include/net/netdev_rx_queue.h
-> index aa1716fb0e53c..e78ca52d67fbf 100644
-> --- a/include/net/netdev_rx_queue.h
-> +++ b/include/net/netdev_rx_queue.h
-> @@ -54,4 +54,7 @@ get_netdev_rx_queue_index(struct netdev_rx_queue *queue)
->  	return index;
->  }
->  #endif
-> +
-> +int netdev_rx_queue_restart(struct net_device *dev, unsigned int rxq);
-> +
->  #endif
-> diff --git a/net/core/Makefile b/net/core/Makefile
-> index 62be9aef25285..f82232b358a2c 100644
-> --- a/net/core/Makefile
-> +++ b/net/core/Makefile
-> @@ -19,6 +19,7 @@ obj-$(CONFIG_NETDEV_ADDR_LIST_TEST) += dev_addr_lists_test.o
->
->  obj-y += net-sysfs.o
->  obj-y += hotdata.o
-> +obj-y += netdev_rx_queue.o
->  obj-$(CONFIG_PAGE_POOL) += page_pool.o page_pool_user.o
->  obj-$(CONFIG_PROC_FS) += net-procfs.o
->  obj-$(CONFIG_NET_PKTGEN) += pktgen.o
-> diff --git a/net/core/netdev_rx_queue.c b/net/core/netdev_rx_queue.c
-> new file mode 100644
-> index 0000000000000..da11720a59830
-> --- /dev/null
-> +++ b/net/core/netdev_rx_queue.c
-> @@ -0,0 +1,74 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +#include <linux/netdevice.h>
-> +#include <net/netdev_queues.h>
-> +#include <net/netdev_rx_queue.h>
-> +
-> +int netdev_rx_queue_restart(struct net_device *dev, unsigned int rxq_idx)
-> +{
-> +	void *new_mem, *old_mem;
-> +	int err;
-> +
-> +	if (!dev->queue_mgmt_ops || !dev->queue_mgmt_ops->ndo_queue_stop ||
-> +	    !dev->queue_mgmt_ops->ndo_queue_mem_free ||
-> +	    !dev->queue_mgmt_ops->ndo_queue_mem_alloc ||
-> +	    !dev->queue_mgmt_ops->ndo_queue_start)
-> +		return -EOPNOTSUPP;
-> +
-> +	ASSERT_RTNL();
-> +
-> +	new_mem = kvzalloc(dev->queue_mgmt_ops->ndo_queue_mem_size, GFP_KERNEL);
-> +	if (!new_mem)
-> +		return -ENOMEM;
-> +
-> +	old_mem = kvzalloc(dev->queue_mgmt_ops->ndo_queue_mem_size, GFP_KERNEL);
-> +	if (!old_mem) {
-> +		err = -ENOMEM;
-> +		goto err_free_new_mem;
-> +	}
-> +
-> +	err = dev->queue_mgmt_ops->ndo_queue_mem_alloc(dev, new_mem, rxq_idx);
-> +	if (err)
-> +		goto err_free_old_mem;
-> +
-> +	err = dev->queue_mgmt_ops->ndo_queue_stop(dev, old_mem, rxq_idx);
-> +	if (err)
-> +		goto err_free_new_queue_mem;
-> +
-> +	err = dev->queue_mgmt_ops->ndo_queue_start(dev, new_mem, rxq_idx);
-> +	if (err)
-> +		goto err_start_queue;
-> +
-> +	dev->queue_mgmt_ops->ndo_queue_mem_free(dev, old_mem);
-> +
-> +	kvfree(old_mem);
-> +	kvfree(new_mem);
-> +
-> +	return 0;
-> +
-> +err_start_queue:
-> +	/* Restarting the queue with old_mem should be successful as we haven't
-> +	 * changed any of the queue configuration, and there is not much we can
-> +	 * do to recover from a failure here.
-> +	 *
-> +	 * WARN if we fail to recover the old rx queue, and at least free
-> +	 * old_mem so we don't also leak that.
-> +	 */
-> +	if (dev->queue_mgmt_ops->ndo_queue_start(dev, old_mem, rxq_idx)) {
-> +		WARN(1,
-> +		     "Failed to restart old queue in error path. RX queue %d may be unhealthy.",
-> +		     rxq_idx);
-> +		dev->queue_mgmt_ops->ndo_queue_mem_free(dev, old_mem);
-> +	}
-> +
-> +err_free_new_queue_mem:
-> +	dev->queue_mgmt_ops->ndo_queue_mem_free(dev, new_mem);
-> +
-> +err_free_old_mem:
-> +	kvfree(old_mem);
-> +
-> +err_free_new_mem:
-> +	kvfree(new_mem);
-> +
-> +	return err;
-> +}
-> --
-> 2.46.0.rc1.232.g9752f9e123-goog
->
->
+Changes in v9:
+https://lore.kernel.org/all/20240129083302.26044-1-yi-de.wu@mediatek.com/
+- Add gzvm_vm_allocate_guest_page function for demand paging support and
+  protected VM memory performance optimization.
+- Fix coding style from viewer suggestion and checking tools.
+
+Changes in v8:
+https://lore.kernel.org/all/20231228105147.13752-1-yi-de.wu@mediatek.com/
+- Add reasons for using dt solution in dt-bindings.
+- Add locks for memory pin/unpin and relinquish operations.
+- Add VM memory stats in debugfs.
+- Add tracing support for hypercall and vcpu exit reasons.
+- Enable PTP for timing synchronization between host and guests.
+- Optimize memory performance for protected VMs.
+- Refactor wording and titles in documentation.
+
+Changes in v7:
+https://lore.kernel.org/all/20231116152756.4250-1-yi-de.wu@mediatek.com/
+- Rebase these patches to the Linux 6.7-rc1 release.
+- Refactor patches 1 to 15 to improve coding style while ensuring they do
+  not violate the majority of the changes made in v6
+- Provide individual VM memory statistics within debugfs in patch 16.
+- Add tracing support for hyper call and vcpu exit_reason.
+
+Changes in v6:
+https://lore.kernel.org/all/20230919111210.19615-1-yi-de.wu@mediatek.com/
+- Rebase based on kernel 6.6-rc1
+- Keep dt solution and leave the reasons in the commit message
+- Remove arch/arm64/include/uapi/asm/gzvm_arch.h due to simplicity
+- Remove resampler in drivers/virt/geniezone/gzvm_irqfd.c due to defeature
+  for now
+- Remove PPI in arch/arm64/geniezone/vgic.c
+- Refactor vm related components into 3 smaller patches, namely adding vm
+  support, setting user memory region and checking vm capability
+- Refactor vcpu and vm component to remove unnecessary ARM prefix
+- Add demand paging to fix crash on destroying memory page, acclerate on
+  booting and support ballooning deflate
+- Add memory pin/unpin memory mechanism to support protected VM
+- Add block-based demand paging for performance concern
+- Response to reviewers and fix coding style accordingly
+
+Changes in v5:
+https://lore.kernel.org/all/20230727080005.14474-1-yi-de.wu@mediatek.com/
+- Add dt solution back for device initialization
+- Add GZVM_EXIT_GZ reason for gzvm_vcpu_run()
+- Add patch for guest page fault handler
+- Add patch for supporitng pin/unpin memory
+- Remove unused enum members, namely GZVM_FUNC_GET_REGS and
+  GZVM_FUNC_SET_REGS
+- Use dev_debug() for debugging when platform device is available, and use
+  pr_debug() otherwise
+- Response to reviewers and fix bugs accordingly
+
+Changes in v4:
+https://lore.kernel.org/all/20230609085214.31071-1-yi-de.wu@mediatek.com/
+- Add macro to set VM as protected without triggering pvmfw in AVF.
+- Add support to pass dtb config to hypervisor.
+- Add support for virtual timer.
+- Add UAPI to pass memory region metadata to hypervisor.
+- Define our own macros for ARM's interrupt number
+- Elaborate more on GenieZone hyperivsor in documentation
+- Fix coding style.
+- Implement our own module for coverting ipa to pa
+- Modify the way of initializing device from dt to a more discoverable way
+- Move refactoring changes into indepedent patches.
+
+Changes in v3:
+https://lore.kernel.org/all/20230512080405.12043-1-yi-de.wu@mediatek.com/
+- Refactor: separate arch/arm64/geniezone/gzvm_arch.c into
+  vm.c/vcpu.c/vgic.c
+- Remove redundant functions
+- Fix reviewer's comments
+
+Changes in v2:
+https://lore.kernel.org/all/20230428103622.18291-1-yi-de.wu@mediatek.com/
+- Refactor: move to drivers/virt/geniezone
+- Refactor: decouple arch-dependent and arch-independent
+- Check pending signal before entering guest context
+- Fix reviewer's comments
+
+Initial Commit in v1:
+https://lore.kernel.org/all/20230413090735.4182-1-yi-de.wu@mediatek.com/
+
+Jerry Wang (5):
+  virt: geniezone: Add memory region purpose for hypervisor
+  virt: geniezone: Add dtb config support
+  virt: geniezone: Add memory pin/unpin support
+  virt: geniezone: Add memory relinquish support
+  virt: geniezone: Provide individual VM memory statistics within
+    debugfs
+
+Kevenny Hsieh (3):
+  virt: geniezone: Enable PTP for synchronizing time between host and
+    guest VMs
+  virt: geniezone: Add support for guest VM CPU idle
+  virt: geniezone: Emulate IPI for guest VM
+
+Liju Chen (1):
+  virt: geniezone: Add tracing support for hyp call and vcpu exit_reason
+
+Willix Yeh (1):
+  virt: geniezone: Add support for virtual timer migration
+
+Yingshiuan Pan (14):
+  virt: geniezone: enable gzvm-ko in defconfig
+  docs: geniezone: Introduce GenieZone hypervisor
+  dt-bindings: hypervisor: Add MediaTek GenieZone hypervisor
+  virt: geniezone: Add GenieZone hypervisor driver
+  virt: geniezone: Add vm support
+  virt: geniezone: Add set_user_memory_region for vm
+  virt: geniezone: Add vm capability check
+  virt: geniezone: Add vcpu support
+  virt: geniezone: Add irqchip support for virtual interrupt injection
+  virt: geniezone: Add irqfd support
+  virt: geniezone: Add ioeventfd support
+  virt: geniezone: Optimize performance of protected VM memory
+  virt: geniezone: Add demand paging support
+  virt: geniezone: Add block-based demand paging support
+
+ .../bindings/firmware/mediatek,geniezone.yaml |  34 +
+ Documentation/virt/geniezone/introduction.rst |  87 +++
+ Documentation/virt/index.rst                  |   1 +
+ MAINTAINERS                                   |  11 +
+ arch/arm64/Kbuild                             |   1 +
+ arch/arm64/configs/defconfig                  |   2 +
+ arch/arm64/geniezone/Makefile                 |   9 +
+ arch/arm64/geniezone/gzvm_arch_common.h       | 120 ++++
+ arch/arm64/geniezone/hvc.c                    |  73 ++
+ arch/arm64/geniezone/vcpu.c                   |  96 +++
+ arch/arm64/geniezone/vgic.c                   |  50 ++
+ arch/arm64/geniezone/vm.c                     | 452 ++++++++++++
+ drivers/virt/Kconfig                          |   2 +
+ drivers/virt/geniezone/Kconfig                |  16 +
+ drivers/virt/geniezone/Makefile               |  12 +
+ drivers/virt/geniezone/gzvm_common.h          |  12 +
+ drivers/virt/geniezone/gzvm_exception.c       | 112 +++
+ drivers/virt/geniezone/gzvm_ioeventfd.c       | 281 ++++++++
+ drivers/virt/geniezone/gzvm_irqfd.c           | 382 ++++++++++
+ drivers/virt/geniezone/gzvm_main.c            | 151 ++++
+ drivers/virt/geniezone/gzvm_mmu.c             | 243 +++++++
+ drivers/virt/geniezone/gzvm_vcpu.c            | 332 +++++++++
+ drivers/virt/geniezone/gzvm_vm.c              | 672 ++++++++++++++++++
+ include/linux/soc/mediatek/gzvm_drv.h         | 271 +++++++
+ include/trace/events/geniezone.h              |  84 +++
+ include/uapi/linux/gzvm.h                     | 405 +++++++++++
+ 26 files changed, 3911 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/firmware/mediatek,geniezone.yaml
+ create mode 100644 Documentation/virt/geniezone/introduction.rst
+ create mode 100644 arch/arm64/geniezone/Makefile
+ create mode 100644 arch/arm64/geniezone/gzvm_arch_common.h
+ create mode 100644 arch/arm64/geniezone/hvc.c
+ create mode 100644 arch/arm64/geniezone/vcpu.c
+ create mode 100644 arch/arm64/geniezone/vgic.c
+ create mode 100644 arch/arm64/geniezone/vm.c
+ create mode 100644 drivers/virt/geniezone/Kconfig
+ create mode 100644 drivers/virt/geniezone/Makefile
+ create mode 100644 drivers/virt/geniezone/gzvm_common.h
+ create mode 100644 drivers/virt/geniezone/gzvm_exception.c
+ create mode 100644 drivers/virt/geniezone/gzvm_ioeventfd.c
+ create mode 100644 drivers/virt/geniezone/gzvm_irqfd.c
+ create mode 100644 drivers/virt/geniezone/gzvm_main.c
+ create mode 100644 drivers/virt/geniezone/gzvm_mmu.c
+ create mode 100644 drivers/virt/geniezone/gzvm_vcpu.c
+ create mode 100644 drivers/virt/geniezone/gzvm_vm.c
+ create mode 100644 include/linux/soc/mediatek/gzvm_drv.h
+ create mode 100644 include/trace/events/geniezone.h
+ create mode 100644 include/uapi/linux/gzvm.h
+
+-- 
+2.18.0
+
 
