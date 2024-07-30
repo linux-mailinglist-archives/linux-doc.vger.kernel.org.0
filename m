@@ -1,204 +1,339 @@
-Return-Path: <linux-doc+bounces-21689-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21692-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D87A9415D3
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2024 17:53:12 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FEA19417D1
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2024 18:16:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id C7F411F254A7
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2024 15:53:11 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 92D741C2294A
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2024 16:16:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 358B91BB69A;
-	Tue, 30 Jul 2024 15:52:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ACC1C18B496;
+	Tue, 30 Jul 2024 16:12:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=vimeo.com header.i=@vimeo.com header.b="lPseiuR5"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="qkGBC0fu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CD421BA875
-	for <linux-doc@vger.kernel.org>; Tue, 30 Jul 2024 15:52:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 842CB18B492;
+	Tue, 30 Jul 2024 16:12:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1722354753; cv=none; b=N12qEQoWajb+XaqbuqIJdI+zvpravXp4lWVkVMfis8uY7mpefpd9WflP6LEq9s5y4L8c64/arb/dDltP9rBHcTqW/PTUlr2ROU80vrPQDLmzUOksu5cnkO1rSEvkSg09SMMe+st0KBVJxfdAwY0BuCcWz5jpAK13lvkymLv9O8A=
+	t=1722355966; cv=none; b=iFXZplx5m4fLbfJxYXHkZ/vrCQmMRJrDZQThhK91AayR7gjnlublqFDA34L7ug8C5QM52DRXpu7oSKv91DlqQ582nPvu7wpNgPaINuNoPQi+D57fAd/nYYoJxJ2jvzRBC/lXpAl3NVM1JuSKqOzf1bl/HMnyfskadQ3/Abgu02M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1722354753; c=relaxed/simple;
-	bh=7nnrTpVQl5o8iqtbM8SeJvLywzfD17VnoiYWUIk6xso=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=u6ACWaRBI8W1WJ29lDjhWNyHHeVsMUfd8XzRSkhbMowhNuwgZgszwx7Lrv57kevUpNYMRLD/Cw50T/0v/S5J4IvtYC1Qu6mSciCUk+bkzO3UoGnkYvXh9IFPeFvp3q/0efamFJBchlvn0MRM9Hp8VQ/xvVM9lxGb1CLai+nXETo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=vimeo.com; spf=fail smtp.mailfrom=vimeo.com; dkim=pass (1024-bit key) header.d=vimeo.com header.i=@vimeo.com header.b=lPseiuR5; arc=none smtp.client-ip=209.85.210.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=vimeo.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=vimeo.com
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-70d23caf8ddso4157584b3a.0
-        for <linux-doc@vger.kernel.org>; Tue, 30 Jul 2024 08:52:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=vimeo.com; s=google; t=1722354751; x=1722959551; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rw8Qsqd/KZkDjyfWp80nFufRwrNoDRQN85CCZLcmUUU=;
-        b=lPseiuR5s0Sa1oDdnqRx1pzB+JOnNBgbS6AXuf5ER+PLGzFms4b1gUiFI69K3eQRjU
-         azUgTyUknCu9YPY+R9LYjBmk/fzj67Tshd7XfdihYj8adUR+VoGPidmYh94/34o+vjil
-         5daUErurEFlNkr019piMBKteV8wfLV9+7MSKI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722354751; x=1722959551;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=rw8Qsqd/KZkDjyfWp80nFufRwrNoDRQN85CCZLcmUUU=;
-        b=OJNtV3P/1YHcwpML16S2bPG29UvQKHIZ46u4TAikomPYu656QxU1eiGo5kSglMovon
-         16LPSmjrxmTPvyv9kZUhvCBxezhOFDcRqxpfBl9RLymsqjf6XjhH5SmzQNhsW69VDO4f
-         gZPL6X6oTHcOpvEXyqCPlYd/GaRNJjrUKb4RaD0XEP+ILZCPNviq5pDHeV4/r6Xrtffq
-         3Mci0Qbqf0XJrqcIJOSuwqcra7LODq9dgeacLe0B5urp2tN1Dv6fyFhqhJhJDHAfpfXS
-         CKcXaUspXkphY3p+DzSBB6kFfAio1FVJBDVYPg9nH2FbXBdNwwXugHMziDwF9XxJKXnF
-         J60Q==
-X-Forwarded-Encrypted: i=1; AJvYcCUbL8GuCllb4b2mTpeNavrR9kyaYEHIJLDO7RFf4xyoi1XL1fgKkQxXABNAYmTetY9D69qSPraY5LR+KkHBOj1CunmUi49TSSY1
-X-Gm-Message-State: AOJu0Yy4828oY4twP6ISFbPS1IWBrt+uEVZ5RN2rtpZ/qop1L1l+HeMJ
-	YQZTmutmngLFTG3I3XOj7vIQ0OXkYCenkwuTXF46S1CvT4gsnF6eWZHk22GXfp/nVpn+6plrjlB
-	q7AvW5ImoXzL0ALosVHHCgK4H8eWuZ/n6kBKds440C4XEy5Sz
-X-Google-Smtp-Source: AGHT+IG+hWn0qpzI+yyalb00iWHFGVyVmH4evfniZ+5SoF6jRo3s3Rz7MBI2RP6u3735TGwDrdJVwWS3SMyNdBUpnWc=
-X-Received: by 2002:a05:6a20:7fa4:b0:1be:e1e1:d5de with SMTP id
- adf61e73a8af0-1c4a12f7ec1mr14013708637.30.1722354750705; Tue, 30 Jul 2024
- 08:52:30 -0700 (PDT)
+	s=arc-20240116; t=1722355966; c=relaxed/simple;
+	bh=kKonLJXt4dPyYwKaL3qLTW+GASb6K3eeslLpbTlLUz0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=MUjtUJn/24rl/Gf2HBPjF/thMGq3TdpWBIMm3PJr0HyEN/cUSFboWXHRq8hSU/lpKp2nmpqQZ8bSsLWg4LmaSnPF1vfnD6ogFMZBGZQ9Ept0BuyjrszaWwNmJuAzC90iOfAaQtOmPUSRXlCwLok8GOeS1GEgaRSVbR0hit/9B0Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=qkGBC0fu; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F38D4C4AF0A;
+	Tue, 30 Jul 2024 16:12:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1722355966;
+	bh=kKonLJXt4dPyYwKaL3qLTW+GASb6K3eeslLpbTlLUz0=;
+	h=From:To:Cc:Subject:Date:From;
+	b=qkGBC0fuRo24WxMX7Fq2oqU7N6lJAW4o4w6SibrDmElng/xw2yJLiC2Xh5DbyHdKM
+	 qqYyAqGI9O3b/04uDegFduwJHro28b6hIzB2c/lJwrHDrxfofe4rsrpAsLQJHiDlTU
+	 UVa9xZgAo4yYcubRoF6CkU/ak0N+saRWjH19VlGM=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: corbet@lwn.net
+Cc: workflows@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Michael Dolan <mdolan@linuxfoundation.org>
+Subject: [PATCH 1/2] Documentation: embargoed-hardware-issues.rst: minor cleanups and fixes
+Date: Tue, 30 Jul 2024 18:09:31 +0200
+Message-ID: <2024073032-outsource-sniff-e8ea@gregkh>
+X-Mailer: git-send-email 2.45.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240729143743.34236-1-davidf@vimeo.com> <20240729143743.34236-3-davidf@vimeo.com>
- <arkcd6cjf42zq62maqsbjzvimxwozrkukusgxhd54v6eyd6ylq@aurn3mek6hr2>
-In-Reply-To: <arkcd6cjf42zq62maqsbjzvimxwozrkukusgxhd54v6eyd6ylq@aurn3mek6hr2>
-From: David Finkel <davidf@vimeo.com>
-Date: Tue, 30 Jul 2024 11:52:19 -0400
-Message-ID: <CAFUnj5O7+kH1bZRs9=AB6hx8hjkygwmGRe3khSK0mFLZc=yehg@mail.gmail.com>
-Subject: Re: [PATCH v6 2/2] mm, memcg: cg2 memory{.swap,}.peak write tests
-To: =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>
-Cc: Muchun Song <muchun.song@linux.dev>, Tejun Heo <tj@kernel.org>, 
-	Roman Gushchin <roman.gushchin@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, 
-	core-services@vimeo.com, Jonathan Corbet <corbet@lwn.net>, Michal Hocko <mhocko@kernel.org>, 
-	Shakeel Butt <shakeel.butt@linux.dev>, Shuah Khan <shuah@kernel.org>, 
-	Johannes Weiner <hannes@cmpxchg.org>, Zefan Li <lizefan.x@bytedance.com>, cgroups@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-mm@kvack.org, 
-	linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Lines: 275
+X-Developer-Signature: v=1; a=openpgp-sha256; l=14818; i=gregkh@linuxfoundation.org; h=from:subject:message-id; bh=kKonLJXt4dPyYwKaL3qLTW+GASb6K3eeslLpbTlLUz0=; b=owGbwMvMwCRo6H6F97bub03G02pJDGkrBWyuyW2a+TchaKvmb7kf78SW+IgJze5RYPewvit/T /f8yzXCHbEsDIJMDLJiiixftvEc3V9xSNHL0PY0zBxWJpAhDFycAjCRmdkM86xOLtz48D+Xys+p wg6yE2sFXn+vNmCYp6XRdaMpLvuiaujhXy/mbeJScCxNAgA=
+X-Developer-Key: i=gregkh@linuxfoundation.org; a=openpgp; fpr=F4B60CC5BF78C2214A313DCB3147D40DDB2DFB29
+Content-Transfer-Encoding: 8bit
 
-Thanks for checking!
+The embargoed-hardware-issues.rst file needed a bunch of minor grammar,
+punctuation, and syntax cleanups based on feedback we have gotten over
+the past few years.  The main change here is the term "silicon" being
+used over "hardware" to differentiate between companies that make a chip
+(i.e. a CPU) and those that take the chip and put it into their system.
 
-On Tue, Jul 30, 2024 at 11:46=E2=80=AFAM Michal Koutn=C3=BD <mkoutny@suse.c=
-om> wrote:
->
-> Hello.
->
-> On Mon, Jul 29, 2024 at 10:37:43AM GMT, David Finkel <davidf@vimeo.com> w=
-rote:
-> > Extend two existing tests to cover extracting memory usage through the
-> > newly mutable memory.peak and memory.swap.peak handlers.
->
-> BTW do the tests pass for you?
+No process changes are made here at all, only clarification for the way
+the current process works.
 
-Yeah, my tests pass when running on top of an ext2 mount.
-At least one of the existing tests failed when running out of tmpfs,
-so I've been testing with an ext2 mount in UML.
->
-> I gave it a try (v6.11-rc1+your patches)
->
-> $ grep "not ok 2" -B30 test.strace
->
-> ...
-> 315   15:19:13.990351 read(6, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0=
-\0\0\0\0\0\0\0\0\0\0\0"..., 4096) =3D 4096
-> 315   15:19:13.994457 read(6, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0=
-\0\0\0\0\0\0\0\0\0\0\0"..., 4096) =3D 4096
-> 315   15:19:13.998562 read(6, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0=
-\0\0\0\0\0\0\0\0\0\0\0"..., 4096) =3D 4096
-> 315   15:19:13.998652 read(6, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0=
-\0\0\0\0\0\0\0\0\0\0\0"..., 4096) =3D 4096
-> 315   15:19:14.002759 read(6, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0=
-\0\0\0\0\0\0\0\0\0\0\0"..., 4096) =3D 4096
-> 315   15:19:14.006864 openat(AT_FDCWD, "/sys/fs/cgroup/memcg_test/memory.=
-current", O_RDONLY) =3D 7
-> 315   15:19:14.006989 read(7, "270336\n", 127) =3D 7
-> 315   15:19:14.011114 close(7)          =3D 0
-> 315   15:19:14.015262 close(6)          =3D 0
-> 315   15:19:14.015448 exit_group(-1)    =3D ?
-> 315   15:19:14.019753 +++ exited with 255 +++
-> 313   15:19:14.019820 <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s)=
- =3D=3D 255}], 0, NULL) =3D 315
-> 313   15:19:14.019878 --- SIGCHLD {si_signo=3DSIGCHLD, si_code=3DCLD_EXIT=
-ED, si_pid=3D315, si_uid=3D0, si_status=3D255, si_utime=3D1 /* 0.01 s */, -
-> 313   15:19:14.019926 close(3)          =3D 0
-> 313   15:19:14.020001 close(5)          =3D 0
-> 313   15:19:14.020072 close(4)          =3D 0
-> 313   15:19:14.024173 rmdir("/sys/fs/cgroup/memcg_test") =3D 0
-> 313   15:19:14.028517 write(1, "not ok 2 test_memcg_current_peak"..., 33)=
- =3D 33
->
-> grep "^315 .*read.*4096" -c test.strace
-> 12800
->
-> Hopefully, unrelated to your changes. I ran this within initrd (rapido
-> image) so it may be an issue how rootfs pagecache is undercharged (due
-> to sharing?), instead of 50M, there's only ~256k.
->
-> To verify, I also tried with memory.peak patch reverted, failing
-> differently:
->
-> ...
-> 238   15:30:29.034623 openat(AT_FDCWD, "/sys/fs/cgroup/memcg_test/memory.=
-current", O_RDONLY) =3D 3
-> 238   15:30:29.034766 read(3, "52801536\n", 127) =3D 9
-> 238   15:30:29.038895 close(3)          =3D 0
-> 238   15:30:29.043048 openat(AT_FDCWD, "/sys/fs/cgroup/memcg_test/memory.=
-stat", O_RDONLY) =3D 3
-> 238   15:30:29.043230 read(3, "anon 52436992\nfile 0\nkernel 1105"..., 40=
-95) =3D 870
-> 238   15:30:29.047379 close(3)          =3D 0
-> 238   15:30:29.051491 munmap(0x7f2473600000, 52432896) =3D 0
-> 238   15:30:29.058516 exit_group(0)     =3D ?
-> 238   15:30:29.062992 +++ exited with 0 +++
-> 237   15:30:29.067054 <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s)=
- =3D=3D 0}], 0, NULL) =3D 238
-> 237   15:30:29.067136 --- SIGCHLD {si_signo=3DSIGCHLD, si_code=3DCLD_EXIT=
-ED, si_pid=3D238, si_uid=3D0, si_status=3D0, si_utime=3D1 /* 0.01 s */, si-
-> 237   15:30:29.067210 openat(AT_FDCWD, "/sys/fs/cgroup/memcg_test/memory.=
-peak", O_RDONLY) =3D 3
-> 237   15:30:29.071349 read(3, "52805632\n", 127) =3D 9
-> 237   15:30:29.075470 close(3)          =3D 0
-> 237   15:30:29.075562 openat(AT_FDCWD, "/sys/fs/cgroup/memcg_test/memory.=
-peak", O_RDWR|O_APPEND|O_CLOEXEC) =3D 3
-> 237   15:30:29.079712 openat(AT_FDCWD, "/sys/fs/cgroup/memcg_test/memory.=
-peak", O_RDWR|O_APPEND|O_CLOEXEC) =3D 4
-> 237   15:30:29.083848 openat(AT_FDCWD, "/sys/fs/cgroup/memcg_test/memory.=
-peak", O_RDWR|O_APPEND|O_CLOEXEC) =3D 5
-> 237   15:30:29.083970 write(3, "reset\n\0", 7) =3D -1 EINVAL (Invalid arg=
-ument)
-> 237   15:30:29.088095 close(3)          =3D 0
-> 237   15:30:29.092209 close(4)          =3D 0
-> 237   15:30:29.092295 close(5)          =3D 0
-> 237   15:30:29.096398 close(-1)         =3D -1 EBADF (Bad file descriptor=
-)
-> 237   15:30:29.100497 rmdir("/sys/fs/cgroup/memcg_test") =3D 0
-> 237   15:30:29.100760 write(1, "not ok 2 test_memcg_current_peak"..., 33)=
- =3D 33
->
-> This failure makes sense but it reminded me --
-> could you please modify the test so that it checks write permission
-> of memory.peak and skips the reset testing on old(er) kernels? That'd be
-> in accordance with other cgroup selftest that maintain partial backwards
-> compatibility when possible.
+All of these changes have been approved by a review from a large number
+of different open source legal members, representing the companies
+involved in this process.
 
-Sure, I'll add that to the tests in a bit.
->
-> Thanks,
-> Michal
+Co-developed-by: Thomas Gleixner <tglx@linutronix.de>
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Co-developed-by: Michael Dolan <mdolan@linuxfoundation.org>
+Signed-off-by: Michael Dolan <mdolan@linuxfoundation.org>
+Co-developed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+Jon, I can take these changes through my tree if you don't object.
 
+ .../process/embargoed-hardware-issues.rst     | 122 ++++++++++--------
+ 1 file changed, 65 insertions(+), 57 deletions(-)
 
+diff --git a/Documentation/process/embargoed-hardware-issues.rst b/Documentation/process/embargoed-hardware-issues.rst
+index 6e9a4597bf2c..2b34bb6b7cda 100644
+--- a/Documentation/process/embargoed-hardware-issues.rst
++++ b/Documentation/process/embargoed-hardware-issues.rst
+@@ -13,9 +13,9 @@ kernel.
+ Hardware issues like Meltdown, Spectre, L1TF etc. must be treated
+ differently because they usually affect all Operating Systems ("OS") and
+ therefore need coordination across different OS vendors, distributions,
+-hardware vendors and other parties. For some of the issues, software
+-mitigations can depend on microcode or firmware updates, which need further
+-coordination.
++silicon vendors, hardware integrators, and other parties. For some of the
++issues, software mitigations can depend on microcode or firmware updates,
++which need further coordination.
+ 
+ .. _Contact:
+ 
+@@ -32,8 +32,8 @@ Linux kernel security team (:ref:`Documentation/admin-guide/
+ <securitybugs>`) instead.
+ 
+ The team can be contacted by email at <hardware-security@kernel.org>. This
+-is a private list of security officers who will help you to coordinate a
+-fix according to our documented process.
++is a private list of security officers who will help you coordinate a fix
++according to our documented process.
+ 
+ The list is encrypted and email to the list can be sent by either PGP or
+ S/MIME encrypted and must be signed with the reporter's PGP key or S/MIME
+@@ -43,7 +43,7 @@ the following URLs:
+   - PGP: https://www.kernel.org/static/files/hardware-security.asc
+   - S/MIME: https://www.kernel.org/static/files/hardware-security.crt
+ 
+-While hardware security issues are often handled by the affected hardware
++While hardware security issues are often handled by the affected silicon
+ vendor, we welcome contact from researchers or individuals who have
+ identified a potential hardware flaw.
+ 
+@@ -65,7 +65,7 @@ of Linux Foundation's IT operations personnel technically have the
+ ability to access the embargoed information, but are obliged to
+ confidentiality by their employment contract. Linux Foundation IT
+ personnel are also responsible for operating and managing the rest of
+-kernel.org infrastructure.
++kernel.org's infrastructure.
+ 
+ The Linux Foundation's current director of IT Project infrastructure is
+ Konstantin Ryabitsev.
+@@ -85,7 +85,7 @@ Memorandum of Understanding
+ 
+ The Linux kernel community has a deep understanding of the requirement to
+ keep hardware security issues under embargo for coordination between
+-different OS vendors, distributors, hardware vendors and other parties.
++different OS vendors, distributors, silicon vendors, and other parties.
+ 
+ The Linux kernel community has successfully handled hardware security
+ issues in the past and has the necessary mechanisms in place to allow
+@@ -103,11 +103,11 @@ the issue in the best technical way.
+ All involved developers pledge to adhere to the embargo rules and to keep
+ the received information confidential. Violation of the pledge will lead to
+ immediate exclusion from the current issue and removal from all related
+-mailing-lists. In addition, the hardware security team will also exclude
++mailing lists. In addition, the hardware security team will also exclude
+ the offender from future issues. The impact of this consequence is a highly
+ effective deterrent in our community. In case a violation happens the
+ hardware security team will inform the involved parties immediately. If you
+-or anyone becomes aware of a potential violation, please report it
++or anyone else becomes aware of a potential violation, please report it
+ immediately to the Hardware security officers.
+ 
+ 
+@@ -124,14 +124,16 @@ method for these types of issues.
+ Start of Disclosure
+ """""""""""""""""""
+ 
+-Disclosure starts by contacting the Linux kernel hardware security team by
+-email. This initial contact should contain a description of the problem and
+-a list of any known affected hardware. If your organization builds or
+-distributes the affected hardware, we encourage you to also consider what
+-other hardware could be affected.
++Disclosure starts by emailing the Linux kernel hardware security team per
++the Contact section above.  This initial contact should contain a
++description of the problem and a list of any known affected silicon. If
++your organization builds or distributes the affected hardware, we encourage
++you to also consider what other hardware could be affected.  The disclosing
++party is responsible for contacting the affected silicon vendors in a
++timely manner.
+ 
+ The hardware security team will provide an incident-specific encrypted
+-mailing-list which will be used for initial discussion with the reporter,
++mailing list which will be used for initial discussion with the reporter,
+ further disclosure, and coordination of fixes.
+ 
+ The hardware security team will provide the disclosing party a list of
+@@ -158,8 +160,8 @@ This serves several purposes:
+  - The disclosed entities can be contacted to name experts who should
+    participate in the mitigation development.
+ 
+- - If an expert which is required to handle an issue is employed by an
+-   listed entity or member of an listed entity, then the response teams can
++ - If an expert who is required to handle an issue is employed by a listed
++   entity or member of an listed entity, then the response teams can
+    request the disclosure of that expert from that entity. This ensures
+    that the expert is also part of the entity's response team.
+ 
+@@ -169,8 +171,8 @@ Disclosure
+ The disclosing party provides detailed information to the initial response
+ team via the specific encrypted mailing-list.
+ 
+-From our experience the technical documentation of these issues is usually
+-a sufficient starting point and further technical clarification is best
++From our experience, the technical documentation of these issues is usually
++a sufficient starting point, and further technical clarification is best
+ done via email.
+ 
+ Mitigation development
+@@ -179,35 +181,39 @@ Mitigation development
+ The initial response team sets up an encrypted mailing-list or repurposes
+ an existing one if appropriate.
+ 
+-Using a mailing-list is close to the normal Linux development process and
+-has been successfully used in developing mitigations for various hardware
++Using a mailing list is close to the normal Linux development process and
++has been successfully used to develop mitigations for various hardware
+ security issues in the past.
+ 
+-The mailing-list operates in the same way as normal Linux development.
+-Patches are posted, discussed and reviewed and if agreed on applied to a
+-non-public git repository which is only accessible to the participating
++The mailing list operates in the same way as normal Linux development.
++Patches are posted, discussed, and reviewed and if agreed upon, applied to
++a non-public git repository which is only accessible to the participating
+ developers via a secure connection. The repository contains the main
+ development branch against the mainline kernel and backport branches for
+ stable kernel versions as necessary.
+ 
+ The initial response team will identify further experts from the Linux
+-kernel developer community as needed. Bringing in experts can happen at any
+-time of the development process and needs to be handled in a timely manner.
++kernel developer community as needed.  Any involved party can suggest
++further experts to be included, each of which will be subject to the same
++requirements outlined above.
+ 
+-If an expert is employed by or member of an entity on the disclosure list
++Bringing in experts can happen at any time in the development process and
++needs to be handled in a timely manner.
++
++If an expert is employed by or a member of an entity on the disclosure list
+ provided by the disclosing party, then participation will be requested from
+ the relevant entity.
+ 
+-If not, then the disclosing party will be informed about the experts
++If not, then the disclosing party will be informed about the experts'
+ participation. The experts are covered by the Memorandum of Understanding
+-and the disclosing party is requested to acknowledge the participation. In
+-case that the disclosing party has a compelling reason to object, then this
+-objection has to be raised within five work days and resolved with the
+-incident team immediately. If the disclosing party does not react within
+-five work days this is taken as silent acknowledgement.
++and the disclosing party is requested to acknowledge their participation.
++In the case where the disclosing party has a compelling reason to object,
++any objection must to be raised within five working days and resolved with
++the incident team immediately. If the disclosing party does not react
++within five working days this is taken as silent acknowledgment.
+ 
+-After acknowledgement or resolution of an objection the expert is disclosed
+-by the incident team and brought into the development process.
++After the incident team acknowledges or resolves an objection, the expert
++is disclosed and brought into the development process.
+ 
+ List participants may not communicate about the issue outside of the
+ private mailing list. List participants may not use any shared resources
+@@ -217,19 +223,20 @@ private mailing list. List participants may not use any shared resources
+ Coordinated release
+ """""""""""""""""""
+ 
+-The involved parties will negotiate the date and time where the embargo
+-ends. At that point the prepared mitigations are integrated into the
+-relevant kernel trees and published. There is no pre-notification process:
+-fixes are published in public and available to everyone at the same time.
++The involved parties will negotiate the date and time when the embargo
++ends. At that point, the prepared mitigations are published into the
++relevant kernel trees.  There is no pre-notification process: the
++mitigations are published in public and available to everyone at the same
++time.
+ 
+ While we understand that hardware security issues need coordinated embargo
+-time, the embargo time should be constrained to the minimum time which is
+-required for all involved parties to develop, test and prepare the
++time, the embargo time should be constrained to the minimum time that is
++required for all involved parties to develop, test, and prepare their
+ mitigations. Extending embargo time artificially to meet conference talk
+-dates or other non-technical reasons is creating more work and burden for
+-the involved developers and response teams as the patches need to be kept
+-up to date in order to follow the ongoing upstream kernel development,
+-which might create conflicting changes.
++dates or other non-technical reasons creates more work and burden for the
++involved developers and response teams as the patches need to be kept up to
++date in order to follow the ongoing upstream kernel development, which
++might create conflicting changes.
+ 
+ CVE assignment
+ """"""""""""""
+@@ -275,34 +282,35 @@ an involved disclosed party. The current ambassadors list:
+ 
+ If you want your organization to be added to the ambassadors list, please
+ contact the hardware security team. The nominated ambassador has to
+-understand and support our process fully and is ideally well connected in
++understand and support our process fully and is ideally well-connected in
+ the Linux kernel community.
+ 
+ Encrypted mailing-lists
+ -----------------------
+ 
+-We use encrypted mailing-lists for communication. The operating principle
++We use encrypted mailing lists for communication. The operating principle
+ of these lists is that email sent to the list is encrypted either with the
+-list's PGP key or with the list's S/MIME certificate. The mailing-list
++list's PGP key or with the list's S/MIME certificate. The mailing list
+ software decrypts the email and re-encrypts it individually for each
+ subscriber with the subscriber's PGP key or S/MIME certificate. Details
+-about the mailing-list software and the setup which is used to ensure the
++about the mailing list software and the setup that is used to ensure the
+ security of the lists and protection of the data can be found here:
+ https://korg.wiki.kernel.org/userdoc/remail.
+ 
+ List keys
+ ^^^^^^^^^
+ 
+-For initial contact see :ref:`Contact`. For incident specific mailing-lists
+-the key and S/MIME certificate are conveyed to the subscribers by email
+-sent from the specific list.
++For initial contact see the :ref:`Contact` section above. For incident
++specific mailing lists, the key and S/MIME certificate are conveyed to the
++subscribers by email sent from the specific list.
+ 
+-Subscription to incident specific lists
++Subscription to incident-specific lists
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 
+-Subscription is handled by the response teams. Disclosed parties who want
+-to participate in the communication send a list of potential subscribers to
+-the response team so the response team can validate subscription requests.
++Subscription to incident-specific lists is handled by the response teams.
++Disclosed parties who want to participate in the communication send a list
++of potential experts to the response team so the response team can validate
++subscription requests.
+ 
+ Each subscriber needs to send a subscription request to the response team
+ by email. The email must be signed with the subscriber's PGP key or S/MIME
+-- 
+2.45.2
 
---=20
-David Finkel
-Senior Principal Software Engineer, Core Services
 
