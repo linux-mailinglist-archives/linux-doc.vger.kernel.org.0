@@ -1,94 +1,95 @@
-Return-Path: <linux-doc+bounces-21771-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21773-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5084942F1E
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Jul 2024 14:50:57 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A3E4942FA1
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Jul 2024 15:02:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8988D1F28811
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Jul 2024 12:50:57 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9A82C1C23E76
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Jul 2024 13:02:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1C5211AED45;
-	Wed, 31 Jul 2024 12:50:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0D8BC1B150F;
+	Wed, 31 Jul 2024 13:01:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="t4Q0+FVO"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="AqfSR9tK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E08551AE85F;
-	Wed, 31 Jul 2024 12:50:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 716281B143B;
+	Wed, 31 Jul 2024 13:01:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1722430233; cv=none; b=fkjsJcX4cEN+n3vR/5yP0txHCgQApfx6FHscz7Go/AkfpHawTs7f1d4ZQlG2CBywkmR08yx4GGk7Pe18cP+EESVNFIRsynFMODfYpBvKaypBd6D1TIZR7RVqitkei5XfChdRYzqc9m1Mh7YFE/KdV3nMEFi0zjBA1yLZMsRO0Q8=
+	t=1722430908; cv=none; b=KxeTFt5RT89FHWta9bZxoG4GXSmMk0au9Uvivs3zhhfEBJNvGFmQSZ2xGMk5DsgKWxOdw7DiH1nCEefzq8Gn4kgSS/fJbdbfzdSX3+udE35HxZ8CgTrjDUzhP+P5aK0WXkC/uYt0k2C5EAPuZ13P+tP+LM1QPbeILGRD/T/Ugas=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1722430233; c=relaxed/simple;
-	bh=I/Fv8yvsDW/2wO5aWeFMZDmvx9xx+bJDvKhCyaXRW6s=;
-	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=mWcSaT5VrhSJszb/N4eSIL9BpgswEcNvBItTlxf09BvBhDUzLju1EOzx7faNc8zIj+lYqVPamNuZsZC2RqQF+2/nK2q9KSIlio2J/Get+DgWFsiTxq5qXmHjXw3u1lPIZhudGLzYzLh41FomfWv5sIjk/Hz3GmmKmtLsBgxtKmM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=t4Q0+FVO; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 72945C4AF0C;
-	Wed, 31 Jul 2024 12:50:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1722430232;
-	bh=I/Fv8yvsDW/2wO5aWeFMZDmvx9xx+bJDvKhCyaXRW6s=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=t4Q0+FVOJ7UtKRMzpi876b5Uv1CIxtbNyo0fICELf4Rxxd7MEwp7mtSO6nbGJGiM7
-	 YvZQ66rN8zEJqZKRgDGWAFjL3ToTrKGRNG1se6m5Pcw1nFfIUlOi4yU0K1mQ3sgp3K
-	 v5A/6fV2Yj+YxblaGuMUqM+n/XhQJSDDyEQig0AHh7Kjkiwp9O4usxx/ajUdZFZmY2
-	 Tf27XGq7gPimbxStX/ebB/5OmmHX91sOxGbJH2C1qe4rHdNZKL+gBwBMNRXhnNtjwG
-	 w89ODBcPLBlEy7nZjbeYb3ZR47CHkMc44gSb5TSIo/qfENSM/G6Wot6pwWDS4vcOqU
-	 edgPzRzSM2kvQ==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id 5FAE5C4332F;
-	Wed, 31 Jul 2024 12:50:32 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	s=arc-20240116; t=1722430908; c=relaxed/simple;
+	bh=KRgI7PxgNp9DkBvVEDZemsNNi/kphaWCK65FVDFc0bI=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=HWEhBJKkiHB5qvw9Hdln43lLrZQ3yKUwRrwwNK//PGUNb9j4jQhC67QqC4nN7ga1B2WWj9Crc1o1LUx3CKtoFXJx4SIWR8ckAa3f1atpoaRH0BaP2FIPhWhXnbdIUoXZNf+Xa9bTlkfzj77JWKOzmz/h9ZeSMcc7owDGmGVrZhc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=AqfSR9tK; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 8040241A31
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1722430905; bh=y7at0mBVFZgrj6t41ps66llEeOR+2sV/BLVoHd3IYNk=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=AqfSR9tKNx+qt6ZcC/0Oc5MscMIVonGU1WgmqZGgLjBL99giNbqgnqnjBPlzStEB7
+	 LxRMbQU7QDQwxpzYFBHz9VlznXH782KhUvJ77shTbBhhW7rpABGbyDuoBmL2TQsRRt
+	 4oKWQQKoMSJAYELLrcZx8e0E/0QXEueKX4A6UPHXhicbKWWeKpHCL9V+fOqW5xp0MP
+	 uMG2PeRQY/yXeBxCfTE69LljAwzkzfGVZbiEiMrOmx9Zy8hRhlP6CzmgnEiTumHBJZ
+	 Z/6TibmSs22dIoRVcDieMYohwKeBXhe9rKwZtTfdJu0/jxS7KNQuyrMUkhzP4t+Znw
+	 bvsPM/MzPj8hw==
+Received: from localhost (c-24-9-249-71.hsd1.co.comcast.net [24.9.249.71])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 8040241A31;
+	Wed, 31 Jul 2024 13:01:45 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Dongliang Mu <mudongliangabcd@gmail.com>
+Cc: Dongliang Mu <dzm91@hust.edu.cn>, chengziqiu@hust.edu.cn, Alex Shi
+ <alexs@kernel.org>, Yanteng Si <siyanteng@loongson.cn>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 2/2] doc-guide: add help documentation
+ checktransupdate.rst
+In-Reply-To: <CAD-N9QVsYGwVOdnnnzUopDk9sr4gOhgjrJFN3muijvuUK7Q6pA@mail.gmail.com>
+References: <20240719041400.3909775-1-dzm91@hust.edu.cn>
+ <20240719041400.3909775-3-dzm91@hust.edu.cn>
+ <87o76f98lr.fsf@trenco.lwn.net>
+ <CAD-N9QVsYGwVOdnnnzUopDk9sr4gOhgjrJFN3muijvuUK7Q6pA@mail.gmail.com>
+Date: Wed, 31 Jul 2024 07:01:44 -0600
+Message-ID: <87h6c57m13.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH net-next v2] Add support for PIO p flag
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <172243023238.26965.12016528241084441662.git-patchwork-notify@kernel.org>
-Date: Wed, 31 Jul 2024 12:50:32 +0000
-References: <20240729220059.3018247-1-prohr@google.com>
-In-Reply-To: <20240729220059.3018247-1-prohr@google.com>
-To: Patrick Rohr <prohr@google.com>
-Cc: davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
- pabeni@redhat.com, corbet@lwn.net, dsahern@kernel.org,
- netdev@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, maze@google.com, lorenzo@google.com,
- equinox@opensourcerouting.org, horms@kernel.org
+Content-Type: text/plain
 
-Hello:
+Dongliang Mu <mudongliangabcd@gmail.com> writes:
 
-This patch was applied to netdev/net-next.git (main)
-by David S. Miller <davem@davemloft.net>:
+>> > +Then the output is something like:
+>> > +
+>> > +::
+>> > +
+>> > +    Documentation/dev-tools/kfence.rst
+>>
+>> Can be more concisely and legibly expressed as:
+>>
+>> > Then the output is something like::
+>> >
+>> >    (literal text here)
+>>
+>
+> Hi jon,
+>
+> If I understand correctly, you mean to remove "::", right?
 
-On Mon, 29 Jul 2024 15:00:59 -0700 you wrote:
-> draft-ietf-6man-pio-pflag is adding a new flag to the Prefix Information
-> Option to signal that the network can allocate a unique IPv6 prefix per
-> client via DHCPv6-PD (see draft-ietf-v6ops-dhcp-pd-per-device).
-> 
-> When ra_honor_pio_pflag is enabled, the presence of a P-flag causes
-> SLAAC autoconfiguration to be disabled for that particular PIO.
-> 
-> [...]
+No, not quite - note that the "::" appears at the end of the line above
+the literal block.
 
-Here is the summary with links:
-  - [net-next,v2] Add support for PIO p flag
-    https://git.kernel.org/netdev/net-next/c/990c30493013
-
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
-
+jon
 
