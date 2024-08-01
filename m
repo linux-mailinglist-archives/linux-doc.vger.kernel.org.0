@@ -1,207 +1,133 @@
-Return-Path: <linux-doc+bounces-21897-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-21889-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE236944799
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Aug 2024 11:13:10 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 756BB94467D
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Aug 2024 10:23:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 57974B2376F
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Aug 2024 09:13:08 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 314E52804D9
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Aug 2024 08:23:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BABE6183CD0;
-	Thu,  1 Aug 2024 09:12:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B8CB16EB4C;
+	Thu,  1 Aug 2024 08:23:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="O9imaoEt"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pLPPm9tY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE3DF170A34;
-	Thu,  1 Aug 2024 09:11:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A35E16C856;
+	Thu,  1 Aug 2024 08:23:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1722503520; cv=none; b=Y0JejNcru6HTqRjanqVx7nvmxsN9fQQG3xFZFq7IsnIFNLYoDRmydyulCP3hToD8vTwasCgczqwpeaTV6XSuWlmmgSG0U9igc1FEybpwWP1ObkTTGSSNcKsM+dmjfv+A/RqmvhhMAjkvdUOR2+PwaYT6R9QFU3bEox79ExHx9sQ=
+	t=1722500605; cv=none; b=SbSEKg6nsQZSL8ykh0FUsZLrlgKb1FfEn+AoBv32T0dvFm0efTxig98k6P+twbNce9OpPEQBZ9RjH8XudB+LOP5Ou7EtBcy4ULYYFOG5vb9vPUBEuIMRHRs/xoxYZ5DhSC4bwyLAhHDKmCEJZ0n+elHFuLxF6uyRNnJHzyrMSrE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1722503520; c=relaxed/simple;
-	bh=YyMMtwwfLvF7XbN3Hd27FU6gmaTz5OzC5jyQFcvLAO4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pH6//PXD/3dYsZFRAbzeItcXx2lcmGI+vtriw2gVImVv5fFwHTzL+XeMeP32CQ1O/vJhpbDYt2W9YlqmuTEfzjWu/4L2FFBpGaXTrsl5r0BUUSQ5N/VC4aJXYFDMJ/TUe0X0cBXz3G3GINUKDZTXma8WgH3/cbhNbjhWwzOWQCs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=O9imaoEt; arc=none smtp.client-ip=198.175.65.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1722503519; x=1754039519;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=YyMMtwwfLvF7XbN3Hd27FU6gmaTz5OzC5jyQFcvLAO4=;
-  b=O9imaoEtsvrnILyp4ZsiMg3UAccO//SL7xjzq7HKgx88PHeFOatLHSDw
-   fIV7tfnrKCG6gJER4JQUUn8uAsi2tbtltbGJocohONUuBatoC0xjt/zjB
-   8JyRFN+MrO/th8vNlUS6wiv0CrwCLHDR8rUWcH8mlT7HVhk59E8umVP3A
-   0SiAnykYLksxs1MgEm8zkB94CGAqVCLOBjWflk5CflET1E46LwKQhm+VM
-   6gtG0QqLUfejXSU82oumWNMAGuRDWojmdHGSgLZA/Io8AzcRyLQ1D2qFU
-   Ji3JIk/Du2U6g/KihmrScFwtP4Ym4J7Cr0uxE7nqExaFb7JOyF2UEShUt
-   w==;
-X-CSE-ConnectionGUID: 0usLmvSVTKeoU76GHYtmpw==
-X-CSE-MsgGUID: yxNdqo/8Tu6uDuYoegDxxg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11150"; a="20383480"
-X-IronPort-AV: E=Sophos;i="6.09,254,1716274800"; 
-   d="scan'208";a="20383480"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Aug 2024 02:11:21 -0700
-X-CSE-ConnectionGUID: ELbweMuJSkOz6l0VdhQiCQ==
-X-CSE-MsgGUID: BARAQ/IiRXWsmTikx+x+nA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.09,254,1716274800"; 
-   d="scan'208";a="59089817"
-Received: from lfiedoro-mobl.ger.corp.intel.com (HELO [10.245.246.220]) ([10.245.246.220])
-  by fmviesa003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Aug 2024 02:11:15 -0700
-Message-ID: <63c20e7a-f62a-4b6c-8ea1-1608e06e5b58@linux.intel.com>
-Date: Thu, 1 Aug 2024 10:11:43 +0200
+	s=arc-20240116; t=1722500605; c=relaxed/simple;
+	bh=Z51j2yPPzqzqUbfDzj+Co7O6I0fAkjzKGVvNCuTWfG0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=NfVPw3iMrhWkZSKF8PYkpkwUckK8yQGFuXCfbkn5Cs10ZMVqQlwT73A+3+ktzBpzSTnL0ZDV3wdX5PW6HdLp6bqew9LRqfgk+21lbgkaKcPINSd1gPyekyNn5Adeigj37WLFJNfkjrECq5vc3jI/Xny3ETgPOm3666zRENZLVUk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pLPPm9tY; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67EE0C4AF09;
+	Thu,  1 Aug 2024 08:23:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1722500604;
+	bh=Z51j2yPPzqzqUbfDzj+Co7O6I0fAkjzKGVvNCuTWfG0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=pLPPm9tY25L0+aND/5OqSFFujF5t/EgH5zvh599BAyny/hYainjuQBiogHSNCgAGO
+	 Y7kzwEXsRDNBjv54Y/EEqw4BYKXaEFCn7v8OjHApMbOQHaqfcokUckHAbLhZHpKJe5
+	 hd3tMOKqmpZDVv1s9l/YmjAwOMeZjPTUNRJQ8L7MZhaA5CUl2Xi2pKuygsj4hNtTxg
+	 4pvoVD8Y9Q30b4LU+wzujooBFZ1aBPO2sHxy2t1ySYeoom2lG7hyga67Rpkh3+fR+A
+	 rNWCSOBwmn/R7rA9x0qk8d9C7fR34HD8VujJRj+ZEbiHZzhonhHNAlXzDLw+9fMPxZ
+	 5tbr1xSKq7UDw==
+Date: Thu, 1 Aug 2024 10:23:22 +0200
+From: Maxime Ripard <mripard@kernel.org>
+To: Hans Verkuil <hverkuil@xs4all.nl>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+	Daniel Vetter <daniel@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, 
+	Sandy Huang <hjc@rock-chips.com>, Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>, 
+	Chen-Yu Tsai <wens@csie.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+	Samuel Holland <samuel@sholland.org>, Andy Yan <andy.yan@rock-chips.com>, 
+	Sebastian Wick <sebastian.wick@redhat.com>, Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>, 
+	dri-devel@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-rockchip@lists.infradead.org, 
+	linux-sunxi@lists.linux.dev, Dave Stevenson <dave.stevenson@raspberrypi.com>, 
+	Sui Jingfeng <sui.jingfeng@linux.dev>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, 
+	Pekka Paalanen <pekka.paalanen@collabora.com>, =?utf-8?B?TWHDrXJh?= Canal <mcanal@igalia.com>, 
+	Andy Yan <andyshrk@163.com>
+Subject: Re: [PATCH v15 00/29] drm/connector: Create HDMI Connector
+ infrastructure
+Message-ID: <20240801-fluffy-cuttlefish-of-abracadabra-389feb@houat>
+References: <20240527-kms-hdmi-connector-state-v15-0-c5af16c3aae2@kernel.org>
+ <e33dc3c4-9d7d-4c85-97db-b6fd94142131@xs4all.nl>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v24 11/34] ASoC: usb: Fetch ASoC card and pcm device
- information
-To: Wesley Cheng <quic_wcheng@quicinc.com>, srinivas.kandagatla@linaro.org,
- mathias.nyman@intel.com, perex@perex.cz, conor+dt@kernel.org,
- corbet@lwn.net, broonie@kernel.org, lgirdwood@gmail.com, krzk+dt@kernel.org,
- Thinh.Nguyen@synopsys.com, bgoswami@quicinc.com, tiwai@suse.com,
- gregkh@linuxfoundation.org, robh@kernel.org
-Cc: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- linux-sound@vger.kernel.org, linux-usb@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-doc@vger.kernel.org,
- alsa-devel@alsa-project.org
-References: <20240801011730.4797-1-quic_wcheng@quicinc.com>
- <20240801011730.4797-12-quic_wcheng@quicinc.com>
-Content-Language: en-US
-From: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
-In-Reply-To: <20240801011730.4797-12-quic_wcheng@quicinc.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha384;
+	protocol="application/pgp-signature"; boundary="2k5tde7ytku6vb3x"
+Content-Disposition: inline
+In-Reply-To: <e33dc3c4-9d7d-4c85-97db-b6fd94142131@xs4all.nl>
 
 
+--2k5tde7ytku6vb3x
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 8/1/24 03:17, Wesley Cheng wrote:
-> USB SND needs to know how the USB offload path is being routed.  This would
-> allow for applications to open the corresponding sound card and pcm device
-> when it wants to take the audio offload path.  This callback should return
-> the mapped indexes based on the USB SND device information.
-> 
-> Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
-> ---
->  include/sound/soc-usb.h | 16 ++++++++++++++++
->  sound/soc/soc-usb.c     | 28 ++++++++++++++++++++++++++++
->  2 files changed, 44 insertions(+)
-> 
-> diff --git a/include/sound/soc-usb.h b/include/sound/soc-usb.h
-> index d6b576f971ae..a167e3de0a78 100644
-> --- a/include/sound/soc-usb.h
-> +++ b/include/sound/soc-usb.h
-> @@ -8,6 +8,11 @@
->  
->  #include <sound/soc.h>
->  
-> +enum snd_soc_usb_kctl {
-> +	SND_SOC_USB_KCTL_CARD_ROUTE,
-> +	SND_SOC_USB_KCTL_PCM_ROUTE,
-> +};
-> +
->  /**
->   * struct snd_soc_usb_device
->   * @card_idx - sound card index associated with USB device
-> @@ -32,6 +37,7 @@ struct snd_soc_usb_device {
->   * @component - reference to ASoC component
->   * @num_supported_streams - number of supported concurrent sessions
->   * @connection_status_cb - callback to notify connection events
-> + * @get_offload_dev - callback to fetch mapped ASoC device
->   * @priv_data - driver data
->   **/
->  struct snd_soc_usb {
-> @@ -40,6 +46,8 @@ struct snd_soc_usb {
->  	unsigned int num_supported_streams;
->  	int (*connection_status_cb)(struct snd_soc_usb *usb,
->  			struct snd_soc_usb_device *sdev, bool connected);
-> +	int (*get_offload_dev)(struct snd_soc_component *component,
-> +				int card, int pcm, enum snd_soc_usb_kctl route);
->  	void *priv_data;
->  };
->  
-> @@ -51,6 +59,8 @@ void *snd_soc_usb_find_priv_data(struct device *dev);
->  int snd_soc_usb_setup_offload_jack(struct snd_soc_component *component,
->  					struct snd_soc_jack *jack);
->  int snd_soc_usb_disable_offload_jack(struct snd_soc_component *component);
-> +int soc_usb_get_offload_device(struct device *dev, int card, int pcm,
-> +				enum snd_soc_usb_kctl route);
->  
->  struct snd_soc_usb *snd_soc_usb_allocate_port(struct snd_soc_component *component,
->  					      int num_streams, void *data);
-> @@ -86,6 +96,12 @@ static inline int snd_soc_usb_disable_offload_jack(struct snd_soc_component *com
->  	return -ENODEV;
->  }
->  
-> +static int soc_usb_get_offload_device(struct device *dev, int card, int pcm,
-> +					enum snd_soc_usb_kctl route)
-> +{
-> +	return -ENODEV;
-> +}
-> +
->  static inline struct snd_soc_usb *snd_soc_usb_allocate_port(
->  					      struct snd_soc_component *component,
->  					      int num_streams, void *data)
-> diff --git a/sound/soc/soc-usb.c b/sound/soc/soc-usb.c
-> index fe2a75a28af4..3c217ac67c57 100644
-> --- a/sound/soc/soc-usb.c
-> +++ b/sound/soc/soc-usb.c
-> @@ -117,6 +117,34 @@ int snd_soc_usb_disable_offload_jack(struct snd_soc_component *component)
->  }
->  EXPORT_SYMBOL_GPL(snd_soc_usb_disable_offload_jack);
->  
-> +/**
-> + * soc_usb_get_offload_device - Set active USB offload path
+Hi Hans,
 
-get or set?
+On Wed, Jul 31, 2024 at 04:56:16PM GMT, Hans Verkuil wrote:
+> Hi Maxime,
+>=20
+> On 27/05/2024 15:57, Maxime Ripard wrote:
+> <snip>
+>=20
+> > Hans Verkuil also expressed interest in implementing a mechanism in v4l2
+> > to retrieve infoframes from HDMI receiver and implementing a tool to
+> > decode (and eventually check) infoframes. His current work on
+> > edid-decode to enable that based on that series can be found here:
+> > https://git.linuxtv.org/hverkuil/edid-decode.git/log/?h=3Dhverkuil
+>=20
+> Since this patch series is now merged in mainline I also pushed support
+> for parsing InfoFrames to the edid-decode git repo.
+>=20
+> I believe the parsing part of the InfoFrames is complete, but the conform=
+ity
+> checks for the AVI and HDMI InfoFrames are still work-in-progress. But it
+> should be easier to develop this now that is merged.
+>=20
+> The git repo for edid-decode is here: https://git.linuxtv.org/edid-decode=
+=2Egit/
+>=20
+> I added test files to the test/if directory, and if you run:
+>=20
+> edid-decode -I audio.test -I avi.test -I vendor.test -I spd.test edid.tes=
+t -c
+>=20
+> you'll get the output below.
 
-> + * @dev - USB device to get offload status
-> + * @card - USB card index
-> + * @pcm - USB PCM device index
-> + *> + * Fetch the current status for the USB SND card and PCM device
-indexes
-> + * specified.
+That's awesome to hear, I'll send a patch for the KMS documentation to
+mention it=20
 
-the function returns an integer, how does this return the 'mapped indices"?
+Thanks!
+Maxime
 
-> + */
-> +int soc_usb_get_offload_device(struct device *dev, int card, int pcm,
-> +				enum snd_soc_usb_kctl route)
+--2k5tde7ytku6vb3x
+Content-Type: application/pgp-signature; name="signature.asc"
 
-missing route in kernel doc.
+-----BEGIN PGP SIGNATURE-----
 
-> +{
-> +	struct snd_soc_usb *ctx;
-> +	int ret;
-> +
-> +	ctx = snd_soc_find_usb_ctx(dev);
-> +	if (!ctx)
-> +		return -ENODEV;
-> +
-> +	mutex_lock(&ctx_mutex);
-> +	if (ctx && ctx->get_offload_dev)
-> +		ret = ctx->get_offload_dev(ctx->component, card, pcm, route);
-> +	mutex_unlock(&ctx_mutex);
-> +
-> +	return ret;
-> +}
-> +EXPORT_SYMBOL_GPL(soc_usb_get_offload_device);
-> +
->  /**
->   * snd_soc_usb_find_priv_data() - Retrieve private data stored
->   * @dev: device reference
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCZqtF9QAKCRAnX84Zoj2+
+dgiBAX4lptP5eciLgerJmky6HFfb4t9iXMA0gMwf454GyprB/6H1qL24e8eHqpXe
+LgfVUI8BfRJ6NBLAdSH0nE87Xf5l/pBV5IacFmB10VRbZ+YSt/9xWQ37E0U2KJAl
+R21moyCKpQ==
+=3fHv
+-----END PGP SIGNATURE-----
 
+--2k5tde7ytku6vb3x--
 
