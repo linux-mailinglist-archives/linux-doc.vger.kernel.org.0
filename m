@@ -1,198 +1,404 @@
-Return-Path: <linux-doc+bounces-22058-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-22061-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06ECB946156
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Aug 2024 18:04:10 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C40A946171
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Aug 2024 18:10:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7EF761F21CD5
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Aug 2024 16:04:09 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5EA841C2105A
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Aug 2024 16:10:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C8C581A34C1;
-	Fri,  2 Aug 2024 16:03:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5BEE81A34C4;
+	Fri,  2 Aug 2024 16:10:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="KIHRQVJe"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="kqLy/byJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A5611A34AB
-	for <linux-doc@vger.kernel.org>; Fri,  2 Aug 2024 16:03:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DCFE1A34A6;
+	Fri,  2 Aug 2024 16:10:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.197
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1722614638; cv=none; b=rJZV5rNPr2JqY/U9FY40YRsxxoTooRpagzy6utd1wzMg1FsLzwPxqB5pIzdh4zo6s2r0GmUo7btiE9KTHDKx+aTAxvBao1VcIXW4KTOcl0U9pyedV/N1JCDkw659YDb/jXU4TD5nrdYg3G1U197v+U2O+k1uP6+XLkKRSYPQvRo=
+	t=1722615017; cv=none; b=QEu0ozt7MPDV6iy+XnX6hrqyeQnDg+fbMZhrz84+vc6Dy7VfolfL5KkULzhJa9VhcZ/u5pMhg/8Rnac7jPtsBzOzv0jR9C+06Z0fEXjDVJ66yNlU69o7gMFLPFFSIJJFR+XR2RvM71c1wPWb8BIl/dqxKZmCErqu4/HuHeLpvKk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1722614638; c=relaxed/simple;
-	bh=D5cezDh4A5XyfwFkC2BlahwYraXx3RdiYvjPIXTBfDE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HA5vn+5iAhYEzQdyXPKp5LgOW7QGcRmk6VcEYvKGCx3WeLxAO6gsefAY2d4GMK0ZMNb5aQ93dgMVBlWFyfTBSbPan7/10IsECYnqrmk7iObPm1TDEBYL518Jgo/r1MmJjzd58Qr1aVze6mHFAh2Ivf88MH025QBlp5MpDL7pnJs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=KIHRQVJe; arc=none smtp.client-ip=209.85.167.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-52efabf5d7bso9972869e87.1
-        for <linux-doc@vger.kernel.org>; Fri, 02 Aug 2024 09:03:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1722614634; x=1723219434; darn=vger.kernel.org;
-        h=user-agent:in-reply-to:content-disposition:mime-version:references
-         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jaYp+4ySrYqox0C2LwNhC4Vws80twAVdjJbOgnZz/S0=;
-        b=KIHRQVJe6Y/MjOKVb2whdHIVWcldHEUXi2MJeyXvjM4BHLaYUig0jy1s7X2FkuHKSY
-         p1YBW9iggKrlP0ONUk6twLdFR8BzPW8lX5v3z9gYbk0dbi5xtlXcc8mfxCMgvxgfWW30
-         2gJjuMpjnPFtW3id7aK7XakxTF6uD+b/lCp8BEsKsXe/YCUastne6o8wzHi5hbeBkzro
-         DvVWPl9FjX3W3JxYk+aM8WoJlpG0+5WJHShAjylf9wW9awbubLcPEDWSJ8ey6v/r3Ude
-         FagQ6FBlfm9ub0v2nYoS9RKYyc6yiBmxmuwO21Tm0NOMTSFGycV/lJUxr2UOp5sq16/K
-         yfwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722614634; x=1723219434;
-        h=user-agent:in-reply-to:content-disposition:mime-version:references
-         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jaYp+4ySrYqox0C2LwNhC4Vws80twAVdjJbOgnZz/S0=;
-        b=HDMNckN6URPtpzp5/KWXX7ngBCmJaxygcECmnLaKqNVpcV25jytbBNGLurQb0mf6Wa
-         3abSo/aVKlpIBpHCc+dXty0igc4w9h52CfeMIa9raShEH57IRrQ5GkJKZmYprCANCHD8
-         9Vc66RkyiYlyvSxt26AsB4w0YcxhMjsfBhU/RsQoIbK1ogvtmj8j9pQ1gilF4as5gY/X
-         ATgyVfEU0O3fx0XaWgQPUcaW79XRq0qoyhEN6u+2HPIzMG3OhBd1TdLjadSqaaq77o14
-         cT9yXNwRVDTh5XHQTK4Tu/LerUSlJDc0OuUDk+dOg4S6QeS7u0rVWP8H4qLstUzMjZmM
-         Zr3Q==
-X-Forwarded-Encrypted: i=1; AJvYcCVXFMiRPfSYFR1wtfGGPrE13ivk/zIpbd942w+sNz9Iu5WyY96ZIHRjgtz9OV8Y/R3BZ3Yb7fZj/yzFeVr6HvTZJmoa88SMvJ5/
-X-Gm-Message-State: AOJu0YxKSb55krbqSsL5HQXTXP83lOoMVJU135A/QgkHGIHzI+wicCJA
-	nyN7IYOi0UiFuAU3aj67cW2dkOR6v9EWQTmMyLvBGzxJQI2jZggmyJLUGERsEr3uYivUmisAHnl
-	oipU=
-X-Google-Smtp-Source: AGHT+IHar+PPGcrxDNcjSr1um3g+3xRCfTrmLOXPeIhwAHJBP67s3XLeWwHx6hWOKLC6el1844qAfg==
-X-Received: by 2002:a05:6512:3ba0:b0:52f:c14e:2533 with SMTP id 2adb3069b0e04-530bb3c79e9mr2525031e87.48.1722614633808;
-        Fri, 02 Aug 2024 09:03:53 -0700 (PDT)
-Received: from mutt (c-9b0ee555.07-21-73746f28.bbcust.telenor.se. [85.229.14.155])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-530bba07dc7sm266293e87.16.2024.08.02.09.03.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Aug 2024 09:03:44 -0700 (PDT)
-Date: Fri, 2 Aug 2024 18:03:27 +0200
-From: Anders Roxell <anders.roxell@linaro.org>
-To: Mark Brown <broonie@kernel.org>
-Cc: Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Marc Zyngier <maz@kernel.org>,
-	Oliver Upton <oliver.upton@linux.dev>,
-	James Morse <james.morse@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Arnd Bergmann <arnd@arndb.de>, Oleg Nesterov <oleg@redhat.com>,
-	Eric Biederman <ebiederm@xmission.com>,
-	Shuah Khan <shuah@kernel.org>,
-	"Rick P. Edgecombe" <rick.p.edgecombe@intel.com>,
-	Deepak Gupta <debug@rivosinc.com>, Ard Biesheuvel <ardb@kernel.org>,
-	Szabolcs Nagy <Szabolcs.Nagy@arm.com>, Kees Cook <kees@kernel.org>,
-	"H.J. Lu" <hjl.tools@gmail.com>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Florian Weimer <fweimer@redhat.com>,
-	Christian Brauner <brauner@kernel.org>,
-	Thiago Jung Bauermann <thiago.bauermann@linaro.org>,
-	Ross Burton <ross.burton@arm.com>,
-	linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-	kvmarm@lists.linux.dev, linux-fsdevel@vger.kernel.org,
-	linux-arch@vger.kernel.org, linux-mm@kvack.org,
-	linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-riscv@lists.infradead.org
-Subject: Re: [PATCH v10 00/40] arm64/gcs: Provide support for GCS in userspace
-Message-ID: <20240802160326.GA36502@mutt>
-References: <20240801-arm64-gcs-v10-0-699e2bd2190b@kernel.org>
+	s=arc-20240116; t=1722615017; c=relaxed/simple;
+	bh=vQ337Cs008y9robnRW6liYIQs2uMbHBO+0+tb04vQkA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=kv3DFd+byX1aU7oG/CtGswi72D6DBZTuzGZBsIsy4ppDk3F2N7GBeXQdo3isK3budT8EEKGavqW6qROPM/lGmrWtX/kfyVQFpUgUdd3zOrBVfXmzJ4Yj8Ma+d7KoOtclHbmOrd5oUc/50Zxk6iRRtD4QJ1JBBCdI+FPf460ZohA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=kqLy/byJ; arc=none smtp.client-ip=217.70.183.197
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 348691C0002;
+	Fri,  2 Aug 2024 16:10:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1722615006;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=FZ/QUwYE8mKmyO8enB5xQYq0pQwXEHaytsYQ0Ouo5Vk=;
+	b=kqLy/byJdqZYnCBVGdtYFsqNTDjKtSguLBKylImbbMkuQ78ycbBIwUjlmCIE9mrPNAmovG
+	1/ipU71BgHhzqWlyIGAoMfDxSVA+YsjPuKXR7fshDbRjdKIGUEszJnbhLSouAfzdshppQp
+	4O31bZRNCc1C7USpwjSn0ghSJG6ow3nMpbU3sLHze3JTfNpPqZ1cIDPSE3rwiT47uuIYSc
+	OmjS9QqvPBiwtmrIDALUZ/HwZ2UA6EAXBZp4S9qxu6sIZNDICCoolC3SoAe5LIrQIM2X1i
+	mzYVhnSLoW5c2RbyC5ogKpBk8RhnjoaoXJr+uGcwiagiV49KHqcitdVh7APrbQ==
+From: Louis Chauvet <louis.chauvet@bootlin.com>
+Subject: [PATCH v9 00/17] drm/vkms: Reimplement line-per-line pixel
+ conversion for plane reading
+Date: Fri, 02 Aug 2024 18:09:45 +0200
+Message-Id: <20240802-yuv-v9-0-08a706669e16@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20240801-arm64-gcs-v10-0-699e2bd2190b@kernel.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAMkErWYC/2XSy27CMBAF0F9BWdet345Z9T+qLvwYF0skaZ0Qg
+ RD/3gkGQZtd7Nzja2VybkYoGcZmuzk3BeY85qHHhX3ZNGHn+i8gOeK64ZRLyikjp8NMmBAmWhq
+ tMrrBpHcjEF9cH3aY7Q/7PW5+F0j5eD364xPXuzxOQzldm2a27P49dGaEEhGcMDpxowV/98Mw7
+ XP/GoZuabmmFdM13WI6pDbq1GopKPxJL30zf+rgoiqOyjntgbfceG/WSjyrW5dAlZLWPFFrZfR
+ rJR9KUFmVRGWwyoUWrLFirdSTYrcbKlSgGQ0+UpEUXyv9UJLaqjSqCCwow9sUDV0r81Dq3mWWL
+ 95SsClBUPRf16UOscDPAX+LqU6yzhrfd3nabmLpSJfH8HZ/ID0cJ6SXXyfHpsZZAgAA
+To: Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>, 
+ Melissa Wen <melissa.srw@gmail.com>, 
+ =?utf-8?q?Ma=C3=ADra_Canal?= <mairacanal@riseup.net>, 
+ Haneen Mohammed <hamohammed.sa@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Jonathan Corbet <corbet@lwn.net>, 
+ rdunlap@infradead.org, arthurgrillo@riseup.net, 
+ pekka.paalanen@haloniitty.fi
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, jeremie.dautheribes@bootlin.com, 
+ miquel.raynal@bootlin.com, thomas.petazzoni@bootlin.com, 
+ seanpaul@google.com, marcheu@google.com, nicolejadeyee@google.com, 
+ Louis Chauvet <louis.chauvet@bootlin.com>, 
+ Pekka Paalanen <pekka.paalanen@collabora.com>, 
+ =?utf-8?q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=14826;
+ i=louis.chauvet@bootlin.com; h=from:subject:message-id;
+ bh=vQ337Cs008y9robnRW6liYIQs2uMbHBO+0+tb04vQkA=;
+ b=owEBbQKS/ZANAwAIASCtLsZbECziAcsmYgBmrQTZ1qYYjktxEYCDyHckpVKpIQJbVbTtk62lE
+ Xe/c/Il41uJAjMEAAEIAB0WIQRPj7g/vng8MQxQWQQgrS7GWxAs4gUCZq0E2QAKCRAgrS7GWxAs
+ 4jheEADL7QJsxGnPHYu/kPsyoVskthpJbFPU0UN7iocBRcDKzjB92IyGPXuooTB6xcoe8yq4YEX
+ 7YrbCba75DlIwa18eOlPpjDmCeYnupwUgpvP1aWXAkVKKEncQxTFpQKDSOxDFJ6aKBfqBlTRyUh
+ Dnm0xNwjb97F+8zLhxj9reiT2cMi1pUnUWUlEWo2fJy/G3/1k67KVBz99EGrRX4cE3ik65EyJJP
+ BgGHXsAIC6+qNmmYmH8ZR6G8Y5AMASVV4pDHsGNBpNey2tdsmeDviW3VQxS1hkesL8GGklLi8tE
+ AWWfaR+27saWZvkTvNW1rGU7mg6qBRJofFM8HerHdvVsuifwH5BYnC7Oj34GTkTK/axHD0NW6PJ
+ +24P6WwUPi/MTynwM3hmRWsLrxAe+wlLZGo5lEcFLTwqfCxCthwBQWusf86dz1jYztAdiYadDHl
+ YDybEzOD50RO3+1YC0b3id9GIGD45d1vfocTZ8FNx8uZsJ8/nKg7DElT2Q733Q1/0x4x9WaWVR7
+ zD54+fdwTJMwr0Lo7BgeVCZNO4T+gERTl4PEh5PaoV0UFBlkjlmPPJvIOuyJDUDHR7r359Bbedv
+ 4QWcfzXB9mcKzt5gH38kxzggHOMeFDd9IZWu1Yak21p/9N1v5lYQp0ieCGmDOpCdvtFf5d0IIy3
+ u6PuuobSW8+EG1g==
+X-Developer-Key: i=louis.chauvet@bootlin.com; a=openpgp;
+ fpr=8B7104AE9A272D6693F527F2EC1883F55E0B40A5
+X-GND-Sasl: louis.chauvet@bootlin.com
 
-On 2024-08-01 13:06, Mark Brown wrote:
-> The arm64 Guarded Control Stack (GCS) feature provides support for
-> hardware protected stacks of return addresses, intended to provide
-> hardening against return oriented programming (ROP) attacks and to make
-> it easier to gather call stacks for applications such as profiling.
-> 
-> When GCS is active a secondary stack called the Guarded Control Stack is
-> maintained, protected with a memory attribute which means that it can
-> only be written with specific GCS operations.  The current GCS pointer
-> can not be directly written to by userspace.  When a BL is executed the
-> value stored in LR is also pushed onto the GCS, and when a RET is
-> executed the top of the GCS is popped and compared to LR with a fault
-> being raised if the values do not match.  GCS operations may only be
-> performed on GCS pages, a data abort is generated if they are not.
-> 
-> The combination of hardware enforcement and lack of extra instructions
-> in the function entry and exit paths should result in something which
-> has less overhead and is more difficult to attack than a purely software
-> implementation like clang's shadow stacks.
-> 
-> This series implements support for use of GCS by userspace, along with
-> support for use of GCS within KVM guests.  It does not enable use of GCS
-> by either EL1 or EL2, this will be implemented separately.  Executables
-> are started without GCS and must use a prctl() to enable it, it is
-> expected that this will be done very early in application execution by
-> the dynamic linker or other startup code.  For dynamic linking this will
-> be done by checking that everything in the executable is marked as GCS
-> compatible.
-> 
-> x86 has an equivalent feature called shadow stacks, this series depends
-> on the x86 patches for generic memory management support for the new
-> guarded/shadow stack page type and shares APIs as much as possible.  As
-> there has been extensive discussion with the wider community around the
-> ABI for shadow stacks I have as far as practical kept implementation
-> decisions close to those for x86, anticipating that review would lead to
-> similar conclusions in the absence of strong reasoning for divergence.
-> 
-> The main divergence I am concious of is that x86 allows shadow stack to
-> be enabled and disabled repeatedly, freeing the shadow stack for the
-> thread whenever disabled, while this implementation keeps the GCS
-> allocated after disable but refuses to reenable it.  This is to avoid
-> races with things actively walking the GCS during a disable, we do
-> anticipate that some systems will wish to disable GCS at runtime but are
-> not aware of any demand for subsequently reenabling it.
-> 
-> x86 uses an arch_prctl() to manage enable and disable, since only x86
-> and S/390 use arch_prctl() a generic prctl() was proposed[1] as part of a
-> patch set for the equivalent RISC-V Zicfiss feature which I initially
-> adopted fairly directly but following review feedback has been revised
-> quite a bit.
-> 
-> We currently maintain the x86 pattern of implicitly allocating a shadow
-> stack for threads started with shadow stack enabled, there has been some
-> discussion of removing this support and requiring the use of clone3()
-> with explicit allocation of shadow stacks instead.  I have no strong
-> feelings either way, implicit allocation is not really consistent with
-> anything else we do and creates the potential for errors around thread
-> exit but on the other hand it is existing ABI on x86 and minimises the
-> changes needed in userspace code.
-> 
-> glibc and bionic changes using this ABI have been implemented and
-> tested.  Headless Android systems have been validated and Ross Burton
-> has used this code has been used to bring up a Yocto system with GCS
-> enabed as standard, a test implementation of V8 support has also been
-> done.
-> 
-> There is an open issue with support for CRIU, on x86 this required the
-> ability to set the GCS mode via ptrace.  This series supports
-> configuring mode bits other than enable/disable via ptrace but it needs
-> to be confirmed if this is sufficient.
-> 
-> The series depends on support for shadow stacks in clone3(), that series
-> includes the addition of ARCH_HAS_USER_SHADOW_STACK.
-> 
->    https://lore.kernel.org/r/20240731-clone3-shadow-stack-v7-0-a9532eebfb1d@kernel.org
-> 
+This patchset is the second version of [1]. It is almost a complete
+rewrite to use a line-by-line algorithm for the composition.
 
-Verified this patchset on a FVP.
+During the development of this series Pekka and Arthur found an issue in
+drm core. The YUV part of this series depend on the fix [9]. I'll let
+Arthur extract it and submit a new independant patch.
 
-Tested-by: Linux Kernel Functional Testing <lkft@linaro.org>
+It can be divided in three parts:
+- PATCH 1 to 4: no functional change is intended, only some formatting and
+  documenting (PATCH 2 is taken from [2])
+- PATCH 5 to 8: Some preparation work not directly related to the
+  line-by-line algorithm
+- PATCH 10: main patch for this series, it reintroduce the
+  line-by-line algorithm
+- PATCH 11: Remove useless drm_simplify_rotation
+- PATCH 12 to 16: taken from Arthur's series [2], with sometimes
+  adaptation to use the pixel-by-pixel algorithm.
+- PATCH 17: Introduce the support for DRM_FORMAT_R1/2/4/8
 
+The PATCH 10 aims to restore the line-by-line pixel reading algorithm. It
+was introduced in 8ba1648567e2 ("drm: vkms: Refactor the plane composer to
+accept new formats") but removed in 8ba1648567e2 ("drm: vkms: Refactor the
+plane composer to accept new formats") in a over-simplification effort.
+At this time, nobody noticed the performance impact of this commit. After
+the first iteration of my series, poeple notice performance impact, and it
+was the case. Pekka suggested to reimplement the line-by-line algorithm.
 
-Cheers,
-Anders
+Expiriments on my side shown great improvement for the line-by-line
+algorithm, and the performances are the same as the original line-by-line
+algorithm. I targeted my effort to make the code working for all the
+rotations and translations. The usage of helpers from drm_rect_* avoid
+reimplementing existing logic.
+
+The only "complex" part remaining is the clipping of the coordinate to
+avoid reading/writing outside of src/dst. Thus I added a lot of comments
+to help when someone will want to add some features (framebuffer resizing
+for example).
+
+The YUV part is not mandatory for this series, but as my first effort was
+to help the integration of YUV, I decided to rebase Arthur's series on
+mine to help. I took [3], [4], [5] and [6] and adapted them to use the
+line-by-line reading. They were also updated to use 32.32 fixed point
+values for yuv conversion instead of 8.8 fixed points.
+
+The last patch of this series introduce DRM_FORMAT_R1/2/4/8 to show how
+the PATCH 7/17 can be used to manage packed pixel formats.
+
+To properly test the rotation algorithm, I had to implement a new IGT
+test [8]. This helped to found one issue in the YUV rotation algortihm.
+
+My series was mainly tested with:
+- kms_plane (for color conversions)
+- kms_rotation_crc (for a subset of rotation and formats)
+- kms_rotation (to test all rotation and formats combinations) [8]
+- kms_cursor_crc (for translations)
+The benchmark used to measure the improvment was done with
+kms_fb_stress [10] with some modifications:
+- Fixing the writeback format to XRGB8888
+- Using a primary plane with odd dimension to avoid failures due to YUV
+  alignment
+The KMs structure was:
+	CRTC:
+		rectangle: 4096x2160+0+0
+	primary:
+		format: ABGR16161616
+		rectangle: 3640x2160+101+0
+	writeback:
+		format: XRGB8888
+		rectangle: 4096x2160+0+0
+Results (on my computer):
+
+8356b9790650: drm/test: Add test cases for drm_rect_rotate_inv() (before any regression)
+322d716a3e8a: drm/vkms: isolate pixel conversion functionality (first regression)
+cc4fd2934d41: drm/vkms: Isolate writeback pixel conversion functions (second regression)
+2c3d1bd284c5: drm/panel: simple: Add Microtips Technology MF-103HIEB0GA0 panel (current drm-misc-next)
+
+ Used format  | This series | 2c3d1bd284c5 | cc4fd2934d41 | 322d716a3e8a | 8356b9790650 |
+--------------+-------------+--------------+--------------+--------------+--------------+
+ XRGB8888     |  13.261666s |   14.289582s |   10.731272s |    9.480001s |    9.277507s |
+ XRGB16161616 |  13.282479s |   13.918926s |   10.712616s |    9.776903s |    9.291766s |
+ RGB565       | 136.154163s |  141.646489s |  101.744050s |  103.712164s |   87.860923s |
+
+This is a 5-10% improvment of the performance. More work need to be done
+on the writeback to gain more.
+
+[1]: https://lore.kernel.org/all/20240201-yuv-v1-0-3ca376f27632@bootlin.com
+[2]: https://lore.kernel.org/all/20240110-vkms-yuv-v2-0-952fcaa5a193@riseup.net/
+[3]: https://lore.kernel.org/all/20240110-vkms-yuv-v2-3-952fcaa5a193@riseup.net/
+[4]: https://lore.kernel.org/all/20240110-vkms-yuv-v2-5-952fcaa5a193@riseup.net/
+[5]: https://lore.kernel.org/all/20240110-vkms-yuv-v2-6-952fcaa5a193@riseup.net/
+[6]: https://lore.kernel.org/all/20240110-vkms-yuv-v2-7-952fcaa5a193@riseup.net/
+[8]: https://lore.kernel.org/r/20240313-new_rotation-v2-0-6230fd5cae59@bootlin.com
+[9]: https://lore.kernel.org/dri-devel/20240306-louis-vkms-conv-v1-1-5bfe7d129fdd@riseup.net/
+[10]: https://lore.kernel.org/all/20240422-kms_fb_stress-dev-v5-0-0c577163dc88@riseup.net/
+
+To: Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>
+To: Melissa Wen <melissa.srw@gmail.com>
+To: Maíra Canal <mairacanal@riseup.net>
+To: Haneen Mohammed <hamohammed.sa@gmail.com>
+To: Daniel Vetter <daniel@ffwll.ch>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+To: Maxime Ripard <mripard@kernel.org>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+To: David Airlie <airlied@gmail.com>
+To: rdunlap@infradead.org
+To: arthurgrillo@riseup.net
+To: Jonathan Corbet <corbet@lwn.net>
+To: pekka.paalanen@haloniitty.fi
+Cc: dri-devel@lists.freedesktop.org
+Cc: linux-kernel@vger.kernel.org
+Cc: jeremie.dautheribes@bootlin.com
+Cc: miquel.raynal@bootlin.com
+Cc: thomas.petazzoni@bootlin.com
+Cc: seanpaul@google.com
+Cc: marcheu@google.com
+Cc: nicolejadeyee@google.com
+Signed-off-by: Louis Chauvet <louis.chauvet@bootlin.com>
+
+Note: after my changes, those tests seems to pass, so [7] may need
+updating (I did not check, it was maybe already the case):
+- kms_cursor_legacy@flip-vs-cursor-atomic
+- kms_pipe_crc_basic@nonblocking-crc
+- kms_pipe_crc_basic@nonblocking-crc-frame-sequence
+- kms_writeback@writeback-pixel-formats
+- kms_writeback@writeback-invalid-parameters
+- kms_flip@flip-vs-absolute-wf_vblank-interruptible
+And those tests pass, I did not investigate why the runners fails:
+- kms_flip@flip-vs-expired-vblank-interruptible
+- kms_flip@flip-vs-expired-vblank
+- kms_flip@plain-flip-fb-recreate
+- kms_flip@plain-flip-fb-recreate-interruptible
+- kms_flip@plain-flip-ts-check-interruptible
+- kms_cursor_legacy@cursorA-vs-flipA-toggle
+- kms_pipe_crc_basic@nonblocking-crc
+- kms_prop_blob@invalid-get-prop
+- kms_flip@flip-vs-absolute-wf_vblank-interruptible
+- kms_invalid_mode@zero-hdisplay
+- kms_invalid_mode@bad-vtotal
+- kms_cursor_crc.* (everything is SUCCEED or SKIP, except for
+  rapid_movement)
+
+[7]: https://lore.kernel.org/all/20240201065346.801038-1-vignesh.raman@collabora.com/
+Changes in v9:
+- PATCH 3/17: Fix docs as Maíra suggested
+- PATCH 4,6,10,12,15,17/17: Fix sparse warning about __le16 casting
+- Link to v8: https://lore.kernel.org/all/20240516-yuv-v8-0-cf8d6f86430e@bootlin.com/
+Changes in v8:
+- PATCH 7/17: Update pitch access to use the proper value for block
+  formats
+- PATCH 9/17: Update pitch access to use the proper value for block 
+  formats
+- Link to v7: https://lore.kernel.org/r/20240513-yuv-v7-0-380e9ffec502@bootlin.com
+Changes in v7:
+- Some typos and indent fixes
+- Add Review-By, Acked-By
+- PATCH 3/17: Clarify src/dst unit
+- PATCH 9/17: Clarify documentation
+- PATCH 9/17: Restrict conditions for direction
+- PATCH 9/17: Rename get_block_step_byte to get_block_step_bytes
+- PATCH 10/17: Clarify kernel doc for clamp_line_coordinates, blend_line, 
+  pixel_read_line_t
+- PATCH 10/17: Fix the case when src_*_start >= fb->width/height
+- PATCH 10/17: Change y in blend to be an int
+- PATCH 10/17: Clarify documentation for read functions
+- PATCH 12/17: Fix the type of rgb variables in argb_u16_from_yuv888
+- PATCH 12/17: Move comments at the right place, remove useless ones
+- PATCH 12/17: Add missing const
+- PATCH 17/17: Use drm_format_info_bpp and computation to avoid hard-coded 
+  values
+- Link to v6: https://lore.kernel.org/r/20240409-yuv-v6-0-de1c5728fd70@bootlin.com
+Changes in v6:
+- Add Randy
+- Add Review-By and Acked-By
+- PATCH 2/17: Remove useless newline
+- PATCH 3/17: Fix kernel doc
+- PATCH 4/17: Fix typo in git commit
+- PATCH 4/17: Fix kernel doc and simplify brief description of typedef
+- PATCH 5/17: Change black default color to Magenta
+- PATCH 5/17: Fix wording in comment
+- PATCH 7/17: Fix typo in packed_pixel_offset
+- PATCH 7/17: Add WARN_ON for currently not supported formats
+- PATCH 8/17: Rename x_limit to pixel_count
+- PATCH 8/17: Clarify kernel doc for pre_mul_alpha_blend
+- PATCH 9/17: Rename get_step_next_block to get_block_step_bytes
+- PATCH 9/17: Change kernel doc order
+- PATCH 9/17: Rework the direction_for_rotation function to use drm
+  helpers
+- PATCH 9/17: Add a warn in direction_for_rotation if the result is not
+  expected
+- PATCH 10/17: Reword the comment of pixel color conversion functions
+- PATCH 10/17: Refactor the blending function to extract functions
+- PATCH 11/17: Remove useless drm_rotation_simplify
+- PATCH 12/17: Fix typo in comments
+- PATCH 12/17: Remove useless define
+- PATCH 12/17: Fix some comments typo and kernel doc
+- PATCH 12/17: Add a comma at the end of the vkms_formats list
+- PATCH 12/17: Use copy of matrix instead of pointers
+- PATCH 12/17: Use 16 bit range for yuv conversion
+- PATCH 17/17: Add a comma at the end of the vkms_formats list
+- PATCH 17/17: Add assertions
+- PATCH 17/17: Fix color conversion... Next time I will read the doc 
+  twice...
+- Link to v5: https://lore.kernel.org/r/20240313-yuv-v5-0-e610cbd03f52@bootlin.com
+Changes in v5:
+- All patches: fix some formatting issues
+- PATCH 4/16: Use the correct formatter for 4cc code
+- PATCH 7/16: Update the pixel accessors to also return the pixel position
+  inside a block.
+- PATCH 8/16: Fix a temporary bug
+- PATCH 9/16: Update the get_step_1x1 to get_step_next_block and update
+  the documentation
+- PATCH 10/16: Update to uses the new pixel accessors
+- PATCH 10/16: Reword some comments
+- PATCH 11/16: Update to use the new pixel accessors
+- PATCH 11/16: Fix a bug in the subsampling offset for inverted reading
+  (right to left/bottom to top). Found by [8].
+- PATCH 11/16: Apply Arthur's modifications (comments, algorithm
+  clarification)
+- PATCH 11/16: Use the correct formatter for 4cc code
+- PATCH 11/16: Update to use the new get_step_next_block
+- PATCH 14/16: Apply Arthur's modification (comments, compilation issue)
+- PATCH 15/16: Add Arthur's patch to explain the kunit tests
+- PATCH 16/16: Introduce DRM_FORMAT_R* support.
+- Link to v4: https://lore.kernel.org/r/20240304-yuv-v4-0-76beac8e9793@bootlin.com
+Changes in v4:
+- PATCH 3/14: Update comments for get_pixel_* functions
+- PATCH 4/14: Add WARN when trying to get unsupported pixel_* functions
+- PATCH 5/14: Create dummy pixel reader/writer to avoid NULL
+  function pointers and kernel OOPS
+- PATCH 6/14: Added the usage of const pointers when needed
+- PATCH 7/14: Extraction of pixel accessors modification
+- PATCH 8/14: Extraction of the blending function modification
+- PATCH 9/14: Extraction of the pixel_read_direction enum
+- PATCH 10/14: Update direction_for_rotation documentation
+- PATCH 10/14: Rename conversion functions to be explicit
+- PATCH 10/14: Replace while(count) by while(out_pixel<end) in read_line
+  callbacks. It avoid a new variable+addition in the composition hot path.
+- PATCH 11/14: Rename conversion functions to be explicit
+- PATCH 11/14: Update the documentation for get_subsampling_offset
+- PATCH 11/14: Add the matrix_conversion structure to remove a test from
+  the hot path.
+- PATCH 11/14: Upadate matrix values to use 32.32 fixed floats for
+  conversion
+- PATCH 12/14: Update commit message
+- PATCH 14/14: Change kunit expected value
+- Link to v3: https://lore.kernel.org/r/20240226-yuv-v3-0-ff662f0994db@bootlin.com
+Changes in v3:
+- Correction of remaining git-rebase artefacts
+- Added Pekka in copy of this patch
+- Link to v2: https://lore.kernel.org/r/20240223-yuv-v2-0-aa6be2827bb7@bootlin.com
+Changes in v2:
+- Rebased the series on top of drm-misc/drm-misc-net
+- Extract the typedef for pixel_read/pixel_write
+- Introduce the line-by-line algorithm per pixel format
+- Add some documentation for existing and new code
+- Port the series [1] to use line-by-line algorithm
+- Link to v1: https://lore.kernel.org/r/20240201-yuv-v1-0-3ca376f27632@bootlin.com
+
+---
+Arthur Grillo (6):
+      drm/vkms: Use drm_frame directly
+      drm/vkms: Add YUV support
+      drm/vkms: Add range and encoding properties to the plane
+      drm/vkms: Drop YUV formats TODO
+      drm/vkms: Create KUnit tests for YUV conversions
+      drm/vkms: Add how to run the Kunit tests
+
+Louis Chauvet (11):
+      drm/vkms: Code formatting
+      drm/vkms: write/update the documentation for pixel conversion and pixel write functions
+      drm/vkms: Add typedef and documentation for pixel_read and pixel_write functions
+      drm/vkms: Add dummy pixel_read/pixel_write callbacks to avoid NULL pointers
+      drm/vkms: Use const for input pointers in pixel_read an pixel_write functions
+      drm/vkms: Update pixels accessor to support packed and multi-plane formats.
+      drm/vkms: Avoid computing blending limits inside pre_mul_alpha_blend
+      drm/vkms: Introduce pixel_read_direction enum
+      drm/vkms: Re-introduce line-per-line composition algorithm
+      drm/vkms: Remove useless drm_rotation_simplify
+      drm/vkms: Add support for DRM_FORMAT_R*
+
+ Documentation/gpu/vkms.rst                    |  14 +-
+ drivers/gpu/drm/vkms/Kconfig                  |  15 +
+ drivers/gpu/drm/vkms/Makefile                 |   1 +
+ drivers/gpu/drm/vkms/tests/.kunitconfig       |   4 +
+ drivers/gpu/drm/vkms/tests/Makefile           |   3 +
+ drivers/gpu/drm/vkms/tests/vkms_format_test.c | 230 +++++++
+ drivers/gpu/drm/vkms/vkms_composer.c          | 318 +++++++--
+ drivers/gpu/drm/vkms/vkms_crtc.c              |   6 +-
+ drivers/gpu/drm/vkms/vkms_drv.c               |   3 +-
+ drivers/gpu/drm/vkms/vkms_drv.h               |  84 ++-
+ drivers/gpu/drm/vkms/vkms_formats.c           | 909 ++++++++++++++++++++++----
+ drivers/gpu/drm/vkms/vkms_formats.h           |  13 +-
+ drivers/gpu/drm/vkms/vkms_plane.c             |  46 +-
+ drivers/gpu/drm/vkms/vkms_writeback.c         |   5 -
+ 14 files changed, 1431 insertions(+), 220 deletions(-)
+---
+base-commit: d97e71e449373efbd2403f1d7a32d416599f32ac
+change-id: 20240201-yuv-1337d90d9576
+
+Best regards,
+-- 
+Louis Chauvet <louis.chauvet@bootlin.com>
+
 
