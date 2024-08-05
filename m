@@ -1,314 +1,116 @@
-Return-Path: <linux-doc+bounces-22202-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-22204-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 567BD9484B4
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Aug 2024 23:30:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 827D09484E5
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Aug 2024 23:35:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A6CA1B22F39
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Aug 2024 21:30:27 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EC899B22A4B
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Aug 2024 21:35:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A4F1B178CCA;
-	Mon,  5 Aug 2024 21:26:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8AD214B07C;
+	Mon,  5 Aug 2024 21:30:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="AHHJcXQc"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jSiv7Ht8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yb1-f202.google.com (mail-yb1-f202.google.com [209.85.219.202])
+Received: from mail-vk1-f177.google.com (mail-vk1-f177.google.com [209.85.221.177])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B671117A595
-	for <linux-doc@vger.kernel.org>; Mon,  5 Aug 2024 21:26:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.202
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6982214F9E6;
+	Mon,  5 Aug 2024 21:30:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1722893171; cv=none; b=u8f5oAL2/m0BxHTW3K5zBK5RWMfqcL67HYiVuj4SzF/AHtFjfVJ5IYJWekpASNyO3qqF0bynVBS0Rkix8areNu7Xn0elbxR4bvyFrQPBtAV8LfzGFG+C2t3b44eEnG7V9zW+Zpfc40T+TO8/YsaOYzs3r83K7Cxh0qVMJbempXk=
+	t=1722893413; cv=none; b=fiq6ucEcWKjvoLDQ+l8f4ZHuuaLSD5YwDyMSKfOSeI2TDBwzUBwLcvsZeDvBJZ6xsC6HWJEOZKwoGYqql00jrVbWTMq4i+4h1sKX0aeJSzsiLJo5HjEbCc6vbVoIfHKs0+fsYtzyRsex6BIBB/zDcjbhb6pjioWfpeQJZb9Jj9w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1722893171; c=relaxed/simple;
-	bh=wF0fKAubblsstfScosCTiCqfX0FmE1CGehpsgu/r8P4=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=nL+j7IqKUAZiOr2miniwzlzcZqGegVLWbyFsYhGjOojuQ1ldyhQHdP1nAmsfpGKRdy2GyyRCrpUEsmTyskdrprDzI80ynlzW3bY2a4QxE1NNBsa8ZGVIFdERcSN09EJE/2ij+w446r2k55tMo25JjFHZYkPJINmWcSWdicCXsjA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--almasrymina.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=AHHJcXQc; arc=none smtp.client-ip=209.85.219.202
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--almasrymina.bounces.google.com
-Received: by mail-yb1-f202.google.com with SMTP id 3f1490d57ef6-e0bebbbebeaso6150644276.3
-        for <linux-doc@vger.kernel.org>; Mon, 05 Aug 2024 14:26:06 -0700 (PDT)
+	s=arc-20240116; t=1722893413; c=relaxed/simple;
+	bh=NfUJkO/2I6MkbJVm3rQsZ2yzf8gMREpnlgWazi1MmEA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=thI9cKpaNcQh744DBHZTqI1XE6slfbZF7ym+qHCv5ikiHPAFRLugAVq57ltMLiH089qSgm9FzZDbDSqeQ9YM1i8zQzplDthAFbnXFIKqZ6oA6AvLPqYjAwULC7NrQE9daieoMSrdo1sOWFsMZqGM1DEZbxQyaGjcyVJX3ksOgRc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jSiv7Ht8; arc=none smtp.client-ip=209.85.221.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-vk1-f177.google.com with SMTP id 71dfb90a1353d-4f527c0c959so11631e0c.1;
+        Mon, 05 Aug 2024 14:30:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1722893165; x=1723497965; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Cxnbg2gRYn4LeOU4CWxMJeU8Zw6y6eLxEpOcLvaAmUQ=;
-        b=AHHJcXQcfzYRr84xfpL23YyO8y0aBq9VOM6rpm7OC60LGpAK5ojftsG7fJe//dTGIk
-         1NPtd8MLF0lrf74DFM8M9xIBX/v74C+7bOcYWjsNdNhd9VFvpAHex+oL+02WhBBx9mZl
-         K3/3Gw7rQoENakVqn2wIMct34acL6EtCAdK9ZgtaEne6jhltkHpiT/vAc4WHVxRPn14p
-         2t//0xtNyUlSjN/cBkDaA7NRA1x+4mZU3QTQK6aTq1zB4XMT1gboV/O29A5CRhly0CUi
-         VtjNdrHi4dh8vUAnVgOkGtlxaDE7DFWVt4BYreM5Atml6n4tBLWkWGZPHESUmNBuEHw6
-         kbhA==
+        d=gmail.com; s=20230601; t=1722893411; x=1723498211; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=7hwKcqnIeZGeHTOMCr7wCkv9rvEMAJ26PnYCpuDDqoQ=;
+        b=jSiv7Ht8q6LD7fvl4Nc969XkgjNIhRhkWYGUlwOUbDkCJUmJeEQT/aqpkRHP+LhivU
+         +sDcoVS1y/Jzh53f1biwo3WyltjeyH8wUywUUsYr+BNF9F5hY+C/zPXvp9zMHbjuQoax
+         OLHmJ5cSHbcRi2bDtR3w/NTYrqlrNBdRVR/8NLdFFJsjbtvxcRQRbL/DvfZYh2vVwB7p
+         K3q5UQD6Qzh2X++lfbXiD863GryocjJzMJE6d9gMOueYdRnbft6OkMbFzztRxIk+vSHy
+         IObAaXF+ZJmlClEmU2ZSj1tt5qC8I+2l5JNmBGdRnaSOYsM7w0MILh+BPZ3xr8TPoe4G
+         Oqzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722893165; x=1723497965;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Cxnbg2gRYn4LeOU4CWxMJeU8Zw6y6eLxEpOcLvaAmUQ=;
-        b=X65DwcuRhKdTYINT8aYvbaEAPjYuuJGjA1VF0OuVY6ai/eQjohKZLcl4X5XULHhQIc
-         8Jhkrr2CSE+VCEjQ43QpV66G8uq1ok5gLncodLjsz4VAl1dcwHP4UM+tUXF91lSOwKlT
-         gMVBjIoCw2TqkgEVn+t3cGntbYkVy5pu1GhFwC4FR0/PZqC5AborQDIMLSOvVhTet4rz
-         lk5+G4Ijw+M70jovVk15rqlyzRO4eALaNnIHsSxIdmAr92+1SpC72xBWt3jkI167RKns
-         lJR3PDwYTTdHTlCIf0GYsNZaSyiIA/Y5TzUHz9+kL8hAu6dhOpegjLF6CmCkYnJNA+9a
-         N6Kg==
-X-Forwarded-Encrypted: i=1; AJvYcCW2GPydTeR2IgaW1XSvhOleyyP+s733QfS5FF9uqYfTMsrVTJQso+0hA7txjnf7iXH5RYibytvBrebnIkNbXsYCRzR0n5zqWmS4
-X-Gm-Message-State: AOJu0YxuCoDqByNrVYW9JXmMfejvfAeiLpDx/OEschWVeDbE7vl4bNmQ
-	jzyCBRt32g7BPhJMdXW+uvZYbpF9O/sE7uxT93UQDJFpJzYRE9GwZ28RMHlIBUI+7W1+hNa5RE8
-	XnV+E3CHoNTy3SPSxe6ikiA==
-X-Google-Smtp-Source: AGHT+IEkV1ijZAyYSziEgd67bBu7N/m6t8dv5aDI4jnUJKJrhZLw43w9JbplBfPvmPwI4UYOjtdz9TFDbsSiP2Xw0w==
-X-Received: from almasrymina.c.googlers.com ([fda3:e722:ac3:cc00:20:ed76:c0a8:4bc5])
- (user=almasrymina job=sendgmr) by 2002:a05:6902:2483:b0:e03:a0b2:f73 with
- SMTP id 3f1490d57ef6-e0bde2f3cdbmr108795276.6.1722893164768; Mon, 05 Aug 2024
- 14:26:04 -0700 (PDT)
-Date: Mon,  5 Aug 2024 21:25:27 +0000
-In-Reply-To: <20240805212536.2172174-1-almasrymina@google.com>
+        d=1e100.net; s=20230601; t=1722893411; x=1723498211;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=7hwKcqnIeZGeHTOMCr7wCkv9rvEMAJ26PnYCpuDDqoQ=;
+        b=UVbyEs9PeiUwGzQMhvhuDDXHQAZJF3zxCWXPyMxPlnB8enHMCJs4wwZgzcf5jmXOiH
+         umJnjGjUo4/HFAawk26GRGhrf8GmAsQC9iop8b8PaMKfmlueyx5uohydDfAhbkmLErnO
+         9PCA1w4KBZEiSEJ9tpu3hLv8w0MTdXx+blIpNSvzprZ+1diPE89X1aCNArJ8RESl97++
+         DJCz7+8jBg7gbpxp7U5Fh7gQLdaHHO56SrsI+Pl9fcOyV5+mwvfafJkOW0Ext0JOi/VV
+         CkiLa8hFZMk92pQEFomB2PlY1SBpTcD+PiGydmLiuPAX27kBCsdvH4CO9t4ThYA8Ts9w
+         EQLA==
+X-Forwarded-Encrypted: i=1; AJvYcCU9plg/LIh3zgRq7wK2MfIizOjd5pNMbECs0gEFkj8ghbPhj6M9TWUrMwffmd1mXZFTjfDkHVg5V7QzivlxQZQ/23t2hSdNGQBH
+X-Gm-Message-State: AOJu0YzlMQWzzKVFM78tnibH9lLbDk0zxce5oYcCfDH7OuPoem9pZ5Ie
+	zKzJZpKBmPCLVANi0xecppyYM1pdXISYNPzpsRXLfbTOrmoH++u4TAc459faqNdpIFSjF4aYfXe
+	A+0yADuG7OxyPKIbJJ377fWXsPX4=
+X-Google-Smtp-Source: AGHT+IFsrqYArL8lD0hsbQZBbDeOSeqsPxTrMV4umHHV7MPiDZhcGtLGtlWxfydz2R5F/Q2u396/3C9z+8wbzgXIHeU=
+X-Received: by 2002:a05:6122:91f:b0:4ef:5e6b:98c0 with SMTP id
+ 71dfb90a1353d-4f8a001105emr15132638e0c.9.1722893411019; Mon, 05 Aug 2024
+ 14:30:11 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20240805212536.2172174-1-almasrymina@google.com>
-X-Mailer: git-send-email 2.46.0.rc2.264.g509ed76dc8-goog
-Message-ID: <20240805212536.2172174-15-almasrymina@google.com>
-Subject: [PATCH net-next v18 14/14] netdev: add dmabuf introspection
-From: Mina Almasry <almasrymina@google.com>
-To: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-alpha@vger.kernel.org, 
-	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org, 
-	sparclinux@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	bpf@vger.kernel.org, linux-media@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org
-Cc: Mina Almasry <almasrymina@google.com>, Donald Hunter <donald.hunter@gmail.com>, 
-	Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Richard Henderson <richard.henderson@linaro.org>, 
-	Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Matt Turner <mattst88@gmail.com>, 
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Helge Deller <deller@gmx.de>, 
-	Andreas Larsson <andreas@gaisler.com>, Jesper Dangaard Brouer <hawk@kernel.org>, 
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Arnd Bergmann <arnd@arndb.de>, Steffen Klassert <steffen.klassert@secunet.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, David Ahern <dsahern@kernel.org>, 
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>, 
-	Sumit Semwal <sumit.semwal@linaro.org>, 
-	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>, Bagas Sanjaya <bagasdotme@gmail.com>, 
-	Christoph Hellwig <hch@infradead.org>, Nikolay Aleksandrov <razor@blackwall.org>, Taehee Yoo <ap420073@gmail.com>, 
-	Pavel Begunkov <asml.silence@gmail.com>, David Wei <dw@davidwei.uk>, Jason Gunthorpe <jgg@ziepe.ca>, 
-	Yunsheng Lin <linyunsheng@huawei.com>, Shailend Chand <shailend@google.com>, 
-	Harshitha Ramamurthy <hramamurthy@google.com>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>
+MIME-Version: 1.0
+References: <5BB255FB-6370-40F8-B5FF-B4B09887C903@gmail.com>
+In-Reply-To: <5BB255FB-6370-40F8-B5FF-B4B09887C903@gmail.com>
+From: Amir Goldstein <amir73il@gmail.com>
+Date: Mon, 5 Aug 2024 23:29:59 +0200
+Message-ID: <CAOQ4uxikxHiiEsF_9HngKrjYEyZuhE-Hp9DgVhQGHfGPmCY__w@mail.gmail.com>
+Subject: Re: Documentation contribution guidelines and suggestions?
+To: Yuriy Belikov <yuriybelikov1@gmail.com>
+Cc: linux-unionfs@vger.kernel.org, 
+	Linux Documentation <linux-doc@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add dmabuf information to page_pool stats:
+On Mon, Aug 5, 2024 at 11:58=E2=80=AFAM Yuriy Belikov <yuriybelikov1@gmail.=
+com> wrote:
+>
+> Greetings
+>
+> I am a student intern in CERN and currently work on Overlay FS related im=
+provements in CERNVM-FS project (cvmfs repo on Github).
+> I want to expand the documentation for Overlay FS by adding a paragraph t=
+o redirect_dir passage with an explanation to which values the attribute co=
+uld be set by a system in cases of merely renaming a directory and moving a=
+ directory to a different directories subtree. As
+> well I want to add a bit of details to metacopy option description regard=
+ing files that are landed in the upper level directory with this feature be=
+ing turned on after metadata modification.
 
-$ ./cli.py --spec ../netlink/specs/netdev.yaml --dump page-pool-get
-...
- {'dmabuf': 10,
-  'id': 456,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 455,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 454,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 453,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 452,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 451,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 450,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 449,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
+Sounds good.
 
-And queue stats:
 
-$ ./cli.py --spec ../netlink/specs/netdev.yaml --dump queue-get
-...
-{'dmabuf': 10, 'id': 8, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 9, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 10, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 11, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 12, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 13, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 14, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 15, 'ifindex': 3, 'type': 'rx'},
+>  Are there any nuances that I should read about contributing to documenta=
+tion on top of the linux kernel doc-guide? I have never contributed to linu=
+x repo before and just want to clarify.
+>
+>
 
-Suggested-by: Jakub Kicinski <kuba@kernel.org>
-Signed-off-by: Mina Almasry <almasrymina@google.com>
-Reviewed-by: Jakub Kicinski <kuba@kernel.org>
+Just follow the "submitting patches" guidelines and you should be fine.
+If there are any other requirements for documentation patches, besides
+that they should be in valid ReST format, I am not aware of those.
 
----
- Documentation/netlink/specs/netdev.yaml | 10 ++++++++++
- include/uapi/linux/netdev.h             |  2 ++
- net/core/netdev-genl.c                  | 10 ++++++++++
- net/core/page_pool_user.c               |  4 ++++
- tools/include/uapi/linux/netdev.h       |  2 ++
- 5 files changed, 28 insertions(+)
-
-diff --git a/Documentation/netlink/specs/netdev.yaml b/Documentation/netlink/specs/netdev.yaml
-index 0c747530c275e..08412c279297b 100644
---- a/Documentation/netlink/specs/netdev.yaml
-+++ b/Documentation/netlink/specs/netdev.yaml
-@@ -167,6 +167,10 @@ attribute-sets:
-           "re-attached", they are just waiting to disappear.
-           Attribute is absent if Page Pool has not been detached, and
-           can still be used to allocate new memory.
-+      -
-+        name: dmabuf
-+        doc: ID of the dmabuf this page-pool is attached to.
-+        type: u32
-   -
-     name: page-pool-info
-     subset-of: page-pool
-@@ -268,6 +272,10 @@ attribute-sets:
-         name: napi-id
-         doc: ID of the NAPI instance which services this queue.
-         type: u32
-+      -
-+        name: dmabuf
-+        doc: ID of the dmabuf attached to this queue, if any.
-+        type: u32
- 
-   -
-     name: qstats
-@@ -543,6 +551,7 @@ operations:
-             - inflight
-             - inflight-mem
-             - detach-time
-+            - dmabuf
-       dump:
-         reply: *pp-reply
-       config-cond: page-pool
-@@ -607,6 +616,7 @@ operations:
-             - type
-             - napi-id
-             - ifindex
-+            - dmabuf
-       dump:
-         request:
-           attributes:
-diff --git a/include/uapi/linux/netdev.h b/include/uapi/linux/netdev.h
-index 91bf3ecc5f1d9..7c308f04e7a06 100644
---- a/include/uapi/linux/netdev.h
-+++ b/include/uapi/linux/netdev.h
-@@ -93,6 +93,7 @@ enum {
- 	NETDEV_A_PAGE_POOL_INFLIGHT,
- 	NETDEV_A_PAGE_POOL_INFLIGHT_MEM,
- 	NETDEV_A_PAGE_POOL_DETACH_TIME,
-+	NETDEV_A_PAGE_POOL_DMABUF,
- 
- 	__NETDEV_A_PAGE_POOL_MAX,
- 	NETDEV_A_PAGE_POOL_MAX = (__NETDEV_A_PAGE_POOL_MAX - 1)
-@@ -131,6 +132,7 @@ enum {
- 	NETDEV_A_QUEUE_IFINDEX,
- 	NETDEV_A_QUEUE_TYPE,
- 	NETDEV_A_QUEUE_NAPI_ID,
-+	NETDEV_A_QUEUE_DMABUF,
- 
- 	__NETDEV_A_QUEUE_MAX,
- 	NETDEV_A_QUEUE_MAX = (__NETDEV_A_QUEUE_MAX - 1)
-diff --git a/net/core/netdev-genl.c b/net/core/netdev-genl.c
-index bd54cf50b658a..e944fd56c6b8e 100644
---- a/net/core/netdev-genl.c
-+++ b/net/core/netdev-genl.c
-@@ -293,6 +293,7 @@ static int
- netdev_nl_queue_fill_one(struct sk_buff *rsp, struct net_device *netdev,
- 			 u32 q_idx, u32 q_type, const struct genl_info *info)
- {
-+	struct net_devmem_dmabuf_binding *binding;
- 	struct netdev_rx_queue *rxq;
- 	struct netdev_queue *txq;
- 	void *hdr;
-@@ -312,6 +313,15 @@ netdev_nl_queue_fill_one(struct sk_buff *rsp, struct net_device *netdev,
- 		if (rxq->napi && nla_put_u32(rsp, NETDEV_A_QUEUE_NAPI_ID,
- 					     rxq->napi->napi_id))
- 			goto nla_put_failure;
-+
-+		binding = (struct net_devmem_dmabuf_binding *)
-+				  rxq->mp_params.mp_priv;
-+		if (binding) {
-+			if (nla_put_u32(rsp, NETDEV_A_QUEUE_DMABUF,
-+					binding->id))
-+				goto nla_put_failure;
-+		}
-+
- 		break;
- 	case NETDEV_QUEUE_TYPE_TX:
- 		txq = netdev_get_tx_queue(netdev, q_idx);
-diff --git a/net/core/page_pool_user.c b/net/core/page_pool_user.c
-index 3a3277ba167b1..ca13363aea343 100644
---- a/net/core/page_pool_user.c
-+++ b/net/core/page_pool_user.c
-@@ -212,6 +212,7 @@ static int
- page_pool_nl_fill(struct sk_buff *rsp, const struct page_pool *pool,
- 		  const struct genl_info *info)
- {
-+	struct net_devmem_dmabuf_binding *binding = pool->mp_priv;
- 	size_t inflight, refsz;
- 	void *hdr;
- 
-@@ -241,6 +242,9 @@ page_pool_nl_fill(struct sk_buff *rsp, const struct page_pool *pool,
- 			 pool->user.detach_time))
- 		goto err_cancel;
- 
-+	if (binding && nla_put_u32(rsp, NETDEV_A_PAGE_POOL_DMABUF, binding->id))
-+		goto err_cancel;
-+
- 	genlmsg_end(rsp, hdr);
- 
- 	return 0;
-diff --git a/tools/include/uapi/linux/netdev.h b/tools/include/uapi/linux/netdev.h
-index 91bf3ecc5f1d9..7c308f04e7a06 100644
---- a/tools/include/uapi/linux/netdev.h
-+++ b/tools/include/uapi/linux/netdev.h
-@@ -93,6 +93,7 @@ enum {
- 	NETDEV_A_PAGE_POOL_INFLIGHT,
- 	NETDEV_A_PAGE_POOL_INFLIGHT_MEM,
- 	NETDEV_A_PAGE_POOL_DETACH_TIME,
-+	NETDEV_A_PAGE_POOL_DMABUF,
- 
- 	__NETDEV_A_PAGE_POOL_MAX,
- 	NETDEV_A_PAGE_POOL_MAX = (__NETDEV_A_PAGE_POOL_MAX - 1)
-@@ -131,6 +132,7 @@ enum {
- 	NETDEV_A_QUEUE_IFINDEX,
- 	NETDEV_A_QUEUE_TYPE,
- 	NETDEV_A_QUEUE_NAPI_ID,
-+	NETDEV_A_QUEUE_DMABUF,
- 
- 	__NETDEV_A_QUEUE_MAX,
- 	NETDEV_A_QUEUE_MAX = (__NETDEV_A_QUEUE_MAX - 1)
--- 
-2.46.0.rc2.264.g509ed76dc8-goog
-
+Thanks,
+Amir.
 
