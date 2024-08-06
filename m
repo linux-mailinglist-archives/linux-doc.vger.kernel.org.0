@@ -1,116 +1,172 @@
-Return-Path: <linux-doc+bounces-22319-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-22321-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43B2D9499B9
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Aug 2024 22:59:35 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C75A949A4D
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Aug 2024 23:38:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id DBC1B1F21F03
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Aug 2024 20:59:34 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DBF47286287
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Aug 2024 21:38:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B3B6E15ECED;
-	Tue,  6 Aug 2024 20:59:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 845D5166F0C;
+	Tue,  6 Aug 2024 21:38:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bD3DuZ2+"
+	dkim=pass (2048-bit key) header.d=soleen-com.20230601.gappssmtp.com header.i=@soleen-com.20230601.gappssmtp.com header.b="E2f6Y387"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com [209.85.160.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50179158DDC;
-	Tue,  6 Aug 2024 20:59:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4C5114F9D7
+	for <linux-doc@vger.kernel.org>; Tue,  6 Aug 2024 21:38:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1722977968; cv=none; b=jnyKKzJB86LyfIogb9FV3tp2NilDiN6apXGRofxGwLftFU0rLww3QykJbxNu/JGQmaBXg0KEzfkxM5cOZBmzS/wEyYYJzwpEln4RjpW/ZdTox2/8OBjSSlZERp4+YRXLFA1NiQ04kGzUh1y6vLmec0lyI0FxDbuWMyYiYqB6Bek=
+	t=1722980285; cv=none; b=uJ/xaoYmicIzGKORm5KM35CEnA9BotmmN8D1RBkj+Mpwm/eltUyFyG8iN6QKaOaSeWE0xLw3C7Hh5Wd/0C7HVyuWMtiC8TM6HJw6a0ju70O0gZ5rH3o2a1TYXeiJqyjY4Ma4OxTrcsAivbMfNWI8rePJeJF5kGOPfMlgUZhztSs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1722977968; c=relaxed/simple;
-	bh=oQ7qityzvDiPJTZS3Szpb70s0aIQdtnagYi0Qj0kT00=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=AEEW477lcgjBGq7yGuKF5TgqGMVBoWFAcobVzlRbN7vhgmmESrDqCfXXAb9DqAlc2Ij2Bei5pW/M8Tayz+OIzBDetdw526ZFhNlJCleNjqROiheIb20yDLN4vhBV1/3snfrIWF+65LbhW/O1DeLVQHFTSmLsgTz7bBVkvwHV75s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bD3DuZ2+; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A82C3C32786;
-	Tue,  6 Aug 2024 20:59:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1722977967;
-	bh=oQ7qityzvDiPJTZS3Szpb70s0aIQdtnagYi0Qj0kT00=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=bD3DuZ2+SxmgaCgzJWHtZH/BYbg66l2gd+LZppP8V0SjvcVqsJKtaaiDssO1v+eTr
-	 DepGkqmJxITFe54Lre2tS/vEGrc22Vu63ljH1RRMC3HUSH2BP59CbVsybYRx5BroxY
-	 QzqlaSzYfm+jheMBLL1UJu7QHVFmgQmRAU9zimWldMZ8D1XFiUqchTvoNAaiXS7hzH
-	 URysUscNMnVRS9xQk9PTPdzDrWF0jmd8XP7i5YGixpWl4NoGrnzp/dD/HTEvG8s/13
-	 HUuL28HXkNnUqRHm0Cu4xB/2+bNxvDDDYP/Iqrw7CXRtllgNPubXkFhZKGOucEcp/W
-	 CHGsOnZxxgIOw==
-Date: Tue, 6 Aug 2024 13:59:24 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Mina Almasry <almasrymina@google.com>
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-alpha@vger.kernel.org,
- linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
- sparclinux@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org,
- bpf@vger.kernel.org, linux-media@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Donald Hunter <donald.hunter@gmail.com>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet
- <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet
- <corbet@lwn.net>, Richard Henderson <richard.henderson@linaro.org>, Ivan
- Kokshaysky <ink@jurassic.park.msu.ru>, Matt Turner <mattst88@gmail.com>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>, "James E.J. Bottomley"
- <James.Bottomley@HansenPartnership.com>, Helge Deller <deller@gmx.de>,
- Andreas Larsson <andreas@gaisler.com>, Jesper Dangaard Brouer
- <hawk@kernel.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Steven
- Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Arnd Bergmann
- <arnd@arndb.de>, Steffen Klassert <steffen.klassert@secunet.com>, Herbert
- Xu <herbert@gondor.apana.org.au>, David Ahern <dsahern@kernel.org>, Willem
- de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>,
- Sumit Semwal <sumit.semwal@linaro.org>, "Christian =?UTF-8?B?S8O2bmln?="
- <christian.koenig@amd.com>, Bagas Sanjaya <bagasdotme@gmail.com>, Christoph
- Hellwig <hch@infradead.org>, Nikolay Aleksandrov <razor@blackwall.org>,
- Taehee Yoo <ap420073@gmail.com>, Pavel Begunkov <asml.silence@gmail.com>,
- David Wei <dw@davidwei.uk>, Jason Gunthorpe <jgg@ziepe.ca>, Yunsheng Lin
- <linyunsheng@huawei.com>, Shailend Chand <shailend@google.com>, Harshitha
- Ramamurthy <hramamurthy@google.com>, Shakeel Butt <shakeel.butt@linux.dev>,
- Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi
- <pkaligineedi@google.com>, Willem de Bruijn <willemb@google.com>, Kaiyuan
- Zhang <kaiyuanz@google.com>
-Subject: Re: [PATCH net-next v18 07/14] memory-provider: dmabuf devmem
- memory provider
-Message-ID: <20240806135924.5bb65ec7@kernel.org>
-In-Reply-To: <20240805212536.2172174-8-almasrymina@google.com>
-References: <20240805212536.2172174-1-almasrymina@google.com>
-	<20240805212536.2172174-8-almasrymina@google.com>
+	s=arc-20240116; t=1722980285; c=relaxed/simple;
+	bh=P+LlFXVAR3ni2Q9lpbZyAlQdpPzTbV2ToRmZ+4oEOIw=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 Cc:Content-Type; b=a2DCUxrKnxuGlOm/nHcxyL4Dbcddg/sfaWP+jUOIzOJZ6nmzVsghlxTAxUqfl0t3IGSy/Kig+sTTEVEJMpP+7OUt3/7HGwxrJsz8yyZD4fQuyo/GNUWCQWOigcGOySOYkZ2UTNaYOCOjPubRazCTkZuHMOPFceD4QMqvyLMusow=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen-com.20230601.gappssmtp.com header.i=@soleen-com.20230601.gappssmtp.com header.b=E2f6Y387; arc=none smtp.client-ip=209.85.160.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=soleen.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
+Received: by mail-qt1-f171.google.com with SMTP id d75a77b69052e-44fe28eb1bfso5645381cf.0
+        for <linux-doc@vger.kernel.org>; Tue, 06 Aug 2024 14:38:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=soleen-com.20230601.gappssmtp.com; s=20230601; t=1722980283; x=1723585083; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9XmlWe99DKTvSLptoxepSTHSiK1+FbVsnMpcepxt5N8=;
+        b=E2f6Y3875sCi+FUMC4NnDIWYjuAY1SAoH/x5FpJ24DePrabii4oI5FqT8pU7OZgMYF
+         qh/rCJ2vIPK16JkeQNZO7vSs9qTrf5R6HaNzKefw/vdlZQtp/tkEvMO2iJxPFqcZSB8C
+         txvjrUzTdKdHw1TpSGJBnuDAFxEPGmAd4WV8VUk2hG7O/+XAjACvYR62XJdUI+x3VxG8
+         UMaRuBy/ESUFzgrVbGEh0qDkhQb72Y9gjuGhRVDD6cL3Zu3V/gKrLdxyGgo1rOPyI8gU
+         Sm6yvVIxln4bsqIZzlf6+2En2jLGeikoP5Xf/2568/veowAkdTOSykr9dyN5QA/nJ43a
+         Qzrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1722980283; x=1723585083;
+        h=content-transfer-encoding:cc:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=9XmlWe99DKTvSLptoxepSTHSiK1+FbVsnMpcepxt5N8=;
+        b=gXFRaw87bDsMr66qtRRcHiqJAhR+eXZHDXxs+xJ1i/iJSF+SD1ewMAyCsosi0OyBUs
+         MHosgAf/GUgVuLfHum1zgJBEjPziRGfih2B6XhcI/zdi/KBOXWooKelQnoVw93ezl62K
+         KzsM6FiABlbdTwFV9b333TZUPfaUJXmVYyTp4CsUdH7uyhAStWLJ+6vtyO0MMQyr9Owv
+         GJ+5wWiG3rdAsaOlrl9omz7/IVj2GuN9v+Brsn9JioP0xuWCzx3pjZ0k5suWcD5xmkUV
+         ngFf3UzZeLL2wkFXYbWvbBld8bjdNZqCkrBEVM4Kz/yib4k3VqPBcYqzRZageMRGU73j
+         u9Qw==
+X-Forwarded-Encrypted: i=1; AJvYcCVJl/iqPp38ja/I3+klfbfntYAOWsykj+yYGh2ZVRvKbVPjofM2QL4nSKv7OQscHC+CVTAee9mUjZIWQq7aws6GYEjZhZllacPt
+X-Gm-Message-State: AOJu0YxNBhT0gKKmRA8ndRhB3VfkrBHQOvsC/PZTOYu8wMzFAO6WFxOv
+	nXYnxM7PKl421fsrOktFr9px8Ey401O6N4fPKX47wJCxeLBu/jbQh3KgUCVoLV/Tt60hEgMlE9Y
+	pPI3OhzJWqstXdeRo6feig8YDWL7xBgPp2VdoZA==
+X-Received: by 2002:a05:622a:1825:b0:447:dc9a:1cea with SMTP id
+ d75a77b69052e-451892561c8mt209894061cf.13.1722980282606; Tue, 06 Aug 2024
+ 14:38:02 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20240605222751.1406125-1-souravpanda@google.com>
+ <Zq0tPd2h6alFz8XF@aschofie-mobl2> <CA+CK2bAfgamzFos1M-6AtozEDwRPJzARJOmccfZ=uzKyJ7w=kQ@mail.gmail.com>
+ <66b15addf1a80_c144829473@dwillia2-xfh.jf.intel.com.notmuch>
+ <CA+CK2bC1ZsT3cuAMDAAUonys3BUxbb2JdnZXs1Ps3NbYZt5W2Q@mail.gmail.com> <ZrKNKRfaH7GliS3C@iweiny-mobl>
+In-Reply-To: <ZrKNKRfaH7GliS3C@iweiny-mobl>
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+Date: Tue, 6 Aug 2024 17:37:24 -0400
+Message-ID: <CA+CK2bDnJsgjK-7H-8qJjdeejKJk7E7m-SDnwXatH4FHr4R0_g@mail.gmail.com>
+Subject: Re: [PATCH v13] mm: report per-page metadata information
+Cc: Dan Williams <dan.j.williams@intel.com>, Alison Schofield <alison.schofield@intel.com>, 
+	Sourav Panda <souravpanda@google.com>, corbet@lwn.net, gregkh@linuxfoundation.org, 
+	rafael@kernel.org, akpm@linux-foundation.org, mike.kravetz@oracle.com, 
+	muchun.song@linux.dev, rppt@kernel.org, david@redhat.com, 
+	rdunlap@infradead.org, chenlinxuan@uniontech.com, yang.yang29@zte.com.cn, 
+	tomas.mudrunka@gmail.com, bhelgaas@google.com, ivan@cloudflare.com, 
+	yosryahmed@google.com, hannes@cmpxchg.org, shakeelb@google.com, 
+	kirill.shutemov@linux.intel.com, wangkefeng.wang@huawei.com, 
+	adobriyan@gmail.com, vbabka@suse.cz, Liam.Howlett@oracle.com, 
+	surenb@google.com, linux-kernel@vger.kernel.org, 
+	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org, linux-mm@kvack.org, 
+	willy@infradead.org, weixugc@google.com, David Rientjes <rientjes@google.com>, 
+	nvdimm@lists.linux.dev, linux-cxl@vger.kernel.org, yi.zhang@redhat.com, 
+	ira.weiny@intel.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon,  5 Aug 2024 21:25:20 +0000 Mina Almasry wrote:
-> +	if (pool->p.queue) {
-> +		/* We rely on rtnl_lock()ing to make sure netdev_rx_queue
-> +		 * configuration doesn't change while we're initializing the
-> +		 * page_pool.
-> +		 */
-> +		ASSERT_RTNL();
-> +		pool->mp_priv = pool->p.queue->mp_params.mp_priv;
+On Tue, Aug 6, 2024 at 4:53=E2=80=AFPM Ira Weiny <iweiny@iweiny-mobl> wrote=
+:
+>
+> On Tue, Aug 06, 2024 at 01:59:54PM -0400, Pasha Tatashin wrote:
+> > On Mon, Aug 5, 2024 at 7:06=E2=80=AFPM Dan Williams <dan.j.williams@int=
+el.com> wrote:
+> > >
+> > > Pasha Tatashin wrote:
+> > > [..]
+> > > > Thank you for the heads up. Can you please attach a full config fil=
+e,
+> > > > also was anyone able to reproduce this problem in qemu with emulate=
+d
+> > > > nvdimm?
+> > >
+> > > Yes, I can reproduce the crash just by trying to reconfigure the mode=
+ of
+> > > a pmem namespace:
+> > >
+> > > # ndctl create-namespace -m raw -f -e namespace0.0
+> > >
+> > > ...where namespace0.0 results from:
+> > >
+> > >     memmap=3D4G!4G
+> > >
+> > > ...passed on the kernel command line.
+> > >
+> > > Kernel config here:
+> > >
+> > > https://gist.github.com/djbw/143705077103d43a735c179395d4f69a
+> >
+> > Excellent, I was able to reproduce this problem.
+> >
+> > The problem appear to be caused by this code:
+> >
+> > Calling page_pgdat() in depopulate_section_memmap():
+> >
+> > static void depopulate_section_memmap(unsigned long pfn, unsigned long =
+nr_pages,
+> >                 struct vmem_altmap *altmap)
+> > {
+> >         unsigned long start =3D (unsigned long) pfn_to_page(pfn);
+> >         unsigned long end =3D start + nr_pages * sizeof(struct page);
+> >
+> >         mod_node_page_state(page_pgdat(pfn_to_page(pfn)), NR_MEMMAP,
+> > <<<< We cannot do it.
+> >                             -1L * (DIV_ROUND_UP(end - start, PAGE_SIZE)=
+));
+> >         vmemmap_free(start, end, altmap);
+> > }
+> >
+> > The page_pgdat() returns NULL starting from:
+> > pageunmap_range()
+> >     remove_pfn_range_from_zone() <- page is removed from the zone.
+>
+> Is there any idea on a fix?  I'm seeing the same error.
+>
+> [  561.867431]  ? mod_node_page_state+0x11/0xa0
+> [  561.867963]  section_deactivate+0x2a0/0x2c0
+> [  561.868496]  __remove_pages+0x59/0x90
+> [  561.868975]  arch_remove_memory+0x1a/0x40
+> [  561.869491]  memunmap_pages+0x206/0x3d0
+> [  561.869972]  devres_release_all+0xa8/0xe0
+> [  561.870466]  device_unbind_cleanup+0xe/0x70
+> [  561.870960]  device_release_driver_internal+0x1ca/0x210
+> [  561.871529]  driver_detach+0x47/0x90
+> [  561.871981]  bus_remove_driver+0x6c/0xf0
+>
+> Shall we revert this patch until we figure out a fix?
 
-How do you know that the driver:
- - supports net_iov at all (let's not make implicit assumptions based
-   on presence of queue API);
- - supports net_iov in current configuration (eg header-data split is
-   enabled)
- - supports net_iov for _this_ pool (all drivers must have separate
-   buffer pools for headers and data for this to work, some will use
-   page pool for both)
+I am working on a fix, and will send it out in a couple hours.
 
-What comes to mind is adding an "I can gobble up net_iovs from this
-pool" flag in page pool params (the struct that comes from the driver),
-and then on the installation path we can check if after queue reset
-the refcount of the binding has increased. If it did - driver has
-created a pool as we expected, otherwise - fail, something must be off.
-Maybe that's a bit hacky?
+Pasha
 
