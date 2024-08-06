@@ -1,307 +1,172 @@
-Return-Path: <linux-doc+bounces-22340-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-22334-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14333949AE0
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Aug 2024 00:06:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97690949AD4
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Aug 2024 00:05:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BE5CF282013
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Aug 2024 22:06:56 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 522A5280F38
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Aug 2024 22:05:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86D081779BA;
-	Tue,  6 Aug 2024 22:03:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC70C17624F;
+	Tue,  6 Aug 2024 22:02:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="FckzXpBB"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QHAf2l1F"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com (mail-bn1nam02on2062.outbound.protection.outlook.com [40.107.212.62])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 800EF1779A4;
-	Tue,  6 Aug 2024 22:03:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.212.62
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1722981804; cv=fail; b=lczDyWDa39OpzDXqAMriNWdhmFhZVLAyeYo1YuKvUCPIeWW8B7j8g0VGt5zW6qFMdNi8RJCXxldHZFjUz1NZYA282Rigv2cfXILFx6hEMEpxh5z9tIJ/wogk3tWPFMLoFK3YgkeZ/QkMYHxQ5DsH3hoTwvQk8d74vikDoAXabcU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1722981804; c=relaxed/simple;
-	bh=MOuQwSGNFscC86zTzkn80jMumpjdWUb9m1Tnq9hlEoo=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=nAgFypTp0DHS4/bOwVsjxIYFGRAHAn3fMulWIt7RPHsvIQtU7E6lqMxL3T+1nd8u5GYb9QQAKLHpvBdEORVTcX8gtMyDREp4Nk1fP9moYPnZRDaz+4/nbs4BmR3t+Pf2rQ3YdLY7ilQymq4+pP5DGJ7F48p/4S4LJwSfkeCIlsc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=FckzXpBB; arc=fail smtp.client-ip=40.107.212.62
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cRJ8i1pvR0wqEsFghTOut7HTd4tcdtSUV+Z5pLnH1ZiI61tMLi3JXJIg7lXHclM5Fy9D4eht4M7hPphQLmIxDNnaOF7ja6+e+gFwFSzqhoTnckhqUCoZaaB5rNucFyDtl6NI5bPZW1i56N6l0JTSREe7odaChZ/flZKpLWjgADIMA58YRXR4Aq6J9Hu8jBRGzxJv88N2QmLT8itu6MPY1DH6aGzBr/lCA8MypjdCdK6MfpRqRKs2rYGLKE3MHrpOxZ5nKRc6OLyC6vX+mO217KNlGpSEnrH/YlqkCpLUjpjKXht+MzKTunyNwPiQqzCHRDkyg7z7ogzxB+7LTX76yQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bXcihIh9y5ASwQh2INcpxsX4hz8BHPj4tnsZYQP9SiM=;
- b=iwqdO/+JR1xsLx7il5pEdDgWpCLvyWdzVNA7Z4sAyml6MR9hqEOTkEoUFonka2TNwUEbhhaXdgTE1KxtfCmENSJHxnHwfHG7PwUDKAxba1gGLAq1BVOiLCdhS8hcuht4wfDxZDgXwVD+mpH8v8zV+RUgcayvHqEkKzb2xdbuPUOV7hh/xDb5T4H9qc7gAvVsh4vJQT8rD13EymsUZrwjdWKt2qwg3h2qPRDc8Gy9hv8Q0MukiTthYT9HW3+aWTKikdFlct1bxZSLW+Kl678HowNL5w8tf1tMSXTw5apax6Gy22W5je3Wt4HIPe48ykDQx8ko5a9+K7/t1LoW+zW5kw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lwn.net smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bXcihIh9y5ASwQh2INcpxsX4hz8BHPj4tnsZYQP9SiM=;
- b=FckzXpBB2osuRVcqee257zo8NF7Ef0arY8o55A5T+NHK+/mcLIoLko39OYrs65ilVEutHFD68wg7kS3AWTSZrGiFHUdwpfVIYuQXxSVZ8MAOdihIoq9QYH2R5sI5BtY4RtYdXPIVWuNhUGqFbAxVRPNe5ZrcngUCzaFugN3Pfl0=
-Received: from PH8PR20CA0015.namprd20.prod.outlook.com (2603:10b6:510:23c::8)
- by BY5PR12MB4083.namprd12.prod.outlook.com (2603:10b6:a03:20d::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.27; Tue, 6 Aug
- 2024 22:03:18 +0000
-Received: from CY4PEPF0000FCC4.namprd03.prod.outlook.com
- (2603:10b6:510:23c:cafe::36) by PH8PR20CA0015.outlook.office365.com
- (2603:10b6:510:23c::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.12 via Frontend
- Transport; Tue, 6 Aug 2024 22:03:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000FCC4.mail.protection.outlook.com (10.167.242.106) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7828.19 via Frontend Transport; Tue, 6 Aug 2024 22:03:17 +0000
-Received: from bmoger-ubuntu.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 6 Aug
- 2024 17:03:14 -0500
-From: Babu Moger <babu.moger@amd.com>
-To: <corbet@lwn.net>, <fenghua.yu@intel.com>, <reinette.chatre@intel.com>,
-	<tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>,
-	<dave.hansen@linux.intel.com>
-CC: <x86@kernel.org>, <hpa@zytor.com>, <paulmck@kernel.org>,
-	<rdunlap@infradead.org>, <tj@kernel.org>, <peterz@infradead.org>,
-	<yanjiewtw@gmail.com>, <babu.moger@amd.com>, <kim.phillips@amd.com>,
-	<lukas.bulwahn@gmail.com>, <seanjc@google.com>, <jmattson@google.com>,
-	<leitao@debian.org>, <jpoimboe@kernel.org>, <rick.p.edgecombe@intel.com>,
-	<kirill.shutemov@linux.intel.com>, <jithu.joseph@intel.com>,
-	<kai.huang@intel.com>, <kan.liang@linux.intel.com>,
-	<daniel.sneddon@linux.intel.com>, <pbonzini@redhat.com>,
-	<sandipan.das@amd.com>, <ilpo.jarvinen@linux.intel.com>,
-	<peternewman@google.com>, <maciej.wieczor-retman@intel.com>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<eranian@google.com>, <james.morse@arm.com>
-Subject: [PATCH v6 17/22] x86/resctrl: Assign/unassign counters by default when ABMC is enabled
-Date: Tue, 6 Aug 2024 17:00:54 -0500
-Message-ID: <48e7516ccc04715d4fd6678cf00a99ccf43fba10.1722981659.git.babu.moger@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1722981659.git.babu.moger@amd.com>
-References: <cover.1722981659.git.babu.moger@amd.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8DA217A591;
+	Tue,  6 Aug 2024 22:02:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1722981763; cv=none; b=Ls1ULLDD62u6yDUxnofEgijghIGaRUxIFoh6+Av2xifymBWX220qEjC+7lWSQVgx05yUd3AAyqA/RUmqMM23yNwi7fPCqdmzEcZGLdNoTDE6hjCSOWof1QOYYdhY07zB80bEWBCakMl+fQb0MxBfrTHJmPpBEX1xIX2kCSuaY08=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1722981763; c=relaxed/simple;
+	bh=aR1W/c9RP1fIj6vHqwGqd/uGjv/1lmu03CBJ0wO/Hw0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=h2pGL+CsGH/hIuFyq5bRX9vYOXi3tDzzLCs0S3gZwu0TU4Vebl/B1I+egxI7gmr3ZQsN1vYl+jvKcowVvr3HywN5NJwTbqLZhe/+xEdnlszanLgVZLBrWBWgkiBEMhrnC+uVN5Z6Xl/dJkZweIIDzz2MNMUcqq2nWxw23qW42ko=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QHAf2l1F; arc=none smtp.client-ip=209.85.128.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-428243f928cso7728005e9.3;
+        Tue, 06 Aug 2024 15:02:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1722981760; x=1723586560; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Mp0WpaiC2XvuDjPrqJ1y4U3Oi9te7Bps6SXi4DFmtEs=;
+        b=QHAf2l1FBhgPDkyoCdWFZG1UzZfy1bEWApONygeVO6l5c1C1WjnS6CvmmiSa8jN0V0
+         3O+UWbWRVIr02Owwe4HC+GN9nasbYkPXoMMcuHvEvllRRQ/jN9Wq2Gsv1i1vcdrfeppD
+         kk9Yj1s4+lx0PCUCz5Jy+Hd7opxHGW8Tso4qWB2Q/Rdjgy4M9gBbXr85Umz5Iru8t9FC
+         +tasr8I9E8HHSlj2VYRvsGGOPmETEwmgXTavf995GOczlNQnRnC2Ya+gXsS04ayQVLRt
+         1czwQUD5Q9Rh4QzvUQIq3vPwhoAVMt9XPHPgEhZm0vhz1UGxN6T9abbmIhiWmf2Femno
+         TTCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1722981760; x=1723586560;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Mp0WpaiC2XvuDjPrqJ1y4U3Oi9te7Bps6SXi4DFmtEs=;
+        b=VQW4V5NWthCN6QZTWYf3S7uLeBh9frrZMGrmbCzqgSVzp0fMLecI+udqRqLRnaRj86
+         8pWw91Jxn8H79fPtLMeqN7Wfo1ENcH0PMHshDoDry6IyPvJgHvOszLD+bb6UK5k5M+yD
+         b+2f2fwNlRLBYubzkIa+jAB9RH6xJMu9I/6G5Ds0yWLP7RHGUHl2yic7FQKnY4ubf8Ri
+         CNPEgAPwPzaJMm84L6W4+CAOMDqD05JJG57WBPRyo577vLt5oCm/oU7K/ueLk787vyR3
+         fkD/O+RmEcJ40rosFyLGJjLftbakZdD6ISSiK1RVaCoT8K5dPVhI0urYd+pnpJUwLInL
+         BQaA==
+X-Forwarded-Encrypted: i=1; AJvYcCVxmZmQy/yfcTGI9Opnkc02hD58DKWJfekEFKZ48SxT8ssZcnIhW+QH42hE9K2StJCwlY25Y3DQAyQuPYOH6BfYNWDs5nV8NnLHFxwOlvT3XAM0MF/LS9b3W2VuBqiTiWFsjCyBtxYr
+X-Gm-Message-State: AOJu0YzqJOhymDcSKB553p8bc+MJNBdVmQviiWC2iRuTKjCIsr8Up9Kf
+	SeQVWAJtlkPtP+XRg1/y7pdVcrLsBEmckk27l91wI/MXw08c69Zy
+X-Google-Smtp-Source: AGHT+IG4Dx1g+NkaBIciA+wHIQJHu1E+LL7rr9z6w9T0IuFUILRLHEvNl+aoTVLSgg2g8CbSu9m0iQ==
+X-Received: by 2002:a05:600c:1f90:b0:427:9dad:e6ac with SMTP id 5b1f17b1804b1-428e6b96b2fmr114221385e9.34.1722981759894;
+        Tue, 06 Aug 2024 15:02:39 -0700 (PDT)
+Received: from ?IPV6:2a02:6b6f:e750:7600:c5:51ce:2b5:970b? ([2a02:6b6f:e750:7600:c5:51ce:2b5:970b])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-429057e8fe9sm255675e9.1.2024.08.06.15.02.39
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 06 Aug 2024 15:02:39 -0700 (PDT)
+Message-ID: <4ed9feaa-b7dc-4a02-a58d-ee845e872bd2@gmail.com>
+Date: Tue, 6 Aug 2024 23:02:38 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/6] mm: add selftests to split_huge_page() to verify
+ unmap/zap of zero pages
+To: kernel test robot <lkp@intel.com>, akpm@linux-foundation.org,
+ linux-mm@kvack.org
+Cc: oe-kbuild-all@lists.linux.dev, hannes@cmpxchg.org,
+ shakeel.butt@linux.dev, roman.gushchin@linux.dev, yuzhao@google.com,
+ david@redhat.com, baohua@kernel.org, ryan.roberts@arm.com, rppt@kernel.org,
+ willy@infradead.org, cerasuolodomenico@gmail.com, corbet@lwn.net,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ kernel-team@meta.com, Alexander Zhu <alexlzhu@fb.com>, riel@surriel.com
+References: <ZqsS/1ts8leyUeEQ@rli9-mobl>
+Content-Language: en-US
+From: Usama Arif <usamaarif642@gmail.com>
+In-Reply-To: <ZqsS/1ts8leyUeEQ@rli9-mobl>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC4:EE_|BY5PR12MB4083:EE_
-X-MS-Office365-Filtering-Correlation-Id: 91bdae0d-6009-4e3e-5e3c-08dcb6639400
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|1800799024|376014|7416014|82310400026;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?tFJRfx3i6T6caiCQ+s7a2Tn0XCCNIv1cUUPmfC408YLI7vw17p9pKiTlbrKw?=
- =?us-ascii?Q?K7LcfQhEo9pJxnjdhsobUyw9cBtJFkN90WYalrVhukGypyXwVQmn/sbZI8o6?=
- =?us-ascii?Q?9e3RwVpHdyt2FM1s5qvyje84IiuGGu+1cP692CULjA7jWU1r+VzXQh7pfv0C?=
- =?us-ascii?Q?JR8p9knzpa/FxM7kJVuyddNfCtPP8kYnUbd5tduS70zlEO6qyPHSNvbrz3P0?=
- =?us-ascii?Q?hvdJPPirUTzBQqV1/E1MfSbwkJCYmp2r0zDCav9dJ2s7K2KolsVgWjxB6n1N?=
- =?us-ascii?Q?YChp7OF3ROATFPcglBOMjhTL0vjfuE8riP3o19faCU4OCddkh5owaAm2T2vt?=
- =?us-ascii?Q?UWImeqfIpqtNIoyAguXUdml+82bf1oxO10sVyk4hK+WYP4Ox+QKGP5ZLgfch?=
- =?us-ascii?Q?YwDpBLkPr8xz/DHHHsDvaPdAvoJRDC59EuLK9hxsOe+vIDBFDvsCNCAcEiWk?=
- =?us-ascii?Q?5s7kk/CdAKE8YzdeJeMmxdSzso/oPeWQXw+xB+H3FutNKyrLQxJ/5d+x7Y/X?=
- =?us-ascii?Q?ZK3Zo3AHxO6nZqsio1dxSmw4z9XhJFXi4wT5IF/zmp1SvyZpXWplOP6yk2zz?=
- =?us-ascii?Q?AzAvAiX6dPfKUyFx+RvwVU8zWKJ6id2VvZMZFQX2Mg/GcHRl78TWYNXHFlUA?=
- =?us-ascii?Q?6U+Yqi3lpwLUWHN0zvUJOfMwKQPmFLk8r1gYWn4lOo34JxfH9kO8ZPc7ufGH?=
- =?us-ascii?Q?OqC8Ef8fGoiQgEkbdwMLzuzcKYmdNniGmuPkp/4LEwvrieKuaP1XAXZkgF9N?=
- =?us-ascii?Q?2IHJ+TC3JjUNSoMyVmPqqLiFDkq2hWgqgF1rTmoz4oIA7hlmHIdudQ9aaXgd?=
- =?us-ascii?Q?nE/L+u4HP/g6z+7iQdU2s0UkawWyo5HFUWtDHliVX7yrUw8dsSKILI44U7vq?=
- =?us-ascii?Q?Tr1BsBv6jqxDy+BMDdPJPnZtWxtCs2SmcNkcqXGtNRGi8oJZ3r6Xqdwue+xh?=
- =?us-ascii?Q?jYTnQvykmAGe656f+59e/K9rmQ/VLrhiQovd5i50ZaQSHWj/kPtxkixeNJUf?=
- =?us-ascii?Q?Wg0Pe+sq7CrEbDE+2+GIcfZRVShihvqwtcxKTWa5B/uGQxNwrVDsrjLGWqk8?=
- =?us-ascii?Q?MNZwPewBdZipFHGuS/Sq8lQyAWp18eWJZ98lyDpPS4rR+6MlloczRAte+bLs?=
- =?us-ascii?Q?aO9BXqIRZflf4346AQzbP7e4afsOasZr8jdJ14azH5dyZ1fHtpYbRdD43aSI?=
- =?us-ascii?Q?HbTcydeaC2+xhFynxbQ+bf8+FiRmU8dLqjjjbN3IdKBBXhJaXYbCqZOBbD3M?=
- =?us-ascii?Q?zoegn5UCwSpJd6N/J9EWxPjQjhE5MoxZGTVsD73PchvOvME9ttBD9JPi42bH?=
- =?us-ascii?Q?iSk93FFf8yVMq2E8Gveltj8MrPPWap/n1h/lScJxNdiFMnnNPyIMU8V1/W2Z?=
- =?us-ascii?Q?cEu87UYUrwjba5wXBY6xnuHxTUZ0WZCvb12/kQIn+LI6MJLAW550A52J18iZ?=
- =?us-ascii?Q?YW1/5GuV/qT7rYYkUdfJc9pRSDpDRe5w?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(376014)(7416014)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2024 22:03:17.9587
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 91bdae0d-6009-4e3e-5e3c-08dcb6639400
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000FCC4.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4083
 
-Assign/unassign counters on resctrl group creation/deletion. Two counters
-are required per group, one for total event and one for local event.
 
-There are only limited number of counters for assignment. If the counters
-are exhausted, report the warnings and continue. It is not required to
-fail group creation for assignment failures. Users have the option to
-modify the assignments later.
 
-Signed-off-by: Babu Moger <babu.moger@amd.com>
----
-v6: Removed the redundant comments on all the calls of
-    rdtgroup_assign_cntrs. Updated the commit message.
-    Dropped printing error message on every call of rdtgroup_assign_cntrs.
+On 01/08/2024 05:45, kernel test robot wrote:
+> Hi Usama,
+> 
+> kernel test robot noticed the following build warnings:
+> 
+> [auto build test WARNING on akpm-mm/mm-everything]
+> 
+> url:    https://github.com/intel-lab-lkp/linux/commits/Usama-Arif/Revert-memcg-remove-mem_cgroup_uncharge_list/20240730-223949
+> base:   https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-everything
+> patch link:    https://lore.kernel.org/r/20240730125346.1580150-6-usamaarif642%40gmail.com
+> patch subject: [PATCH 5/6] mm: add selftests to split_huge_page() to verify unmap/zap of zero pages
+> :::::: branch date: 32 hours ago
+> :::::: commit date: 32 hours ago
+> compiler: gcc-13 (Ubuntu 13.2.0-4ubuntu3) 13.2.0
+> reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240801/202408010618.lgnamdZd-lkp@intel.com/reproduce)
+> 
+> If you fix the issue in a separate patch/commit (i.e. not just a new version of
+> the same patch/commit), kindly add following tags
+> | Reported-by: kernel test robot <lkp@intel.com>
+> | Closes: https://lore.kernel.org/r/202408010618.lgnamdZd-lkp@intel.com/
+> 
+> All warnings (new ones prefixed by >>):
+> 
+>    vm_util.c: In function 'rss_anon':
+>>> vm_util.c:188:41: warning: format '%ld' expects argument of type 'long int *', but argument 3 has type 'uint64_t *' {aka 'long long unsigned int *'} [-Wformat=]
+>      188 |         if (sscanf(buffer, "RssAnon:%10ld kB", &rss_anon) != 1)
+>          |                                     ~~~~^      ~~~~~~~~~
+>          |                                         |      |
+>          |                                         |      uint64_t * {aka long long unsigned int *}
+>          |                                         long int *
+>          |                                     %10lld
+> 
+> 
 
-v5: Removed the code to enable/disable ABMC during the mount.
-    That will be another patch.
-    Added arch callers to get the arch specific data.
-    Renamed fuctions to match the other abmc function.
-    Added code comments for assignment failures.
+Interesting affect of different compilers!
 
-v4: Few name changes based on the upstream discussion.
-    Commit message update.
+If I compile with the above suggestion on my machine, i.e. convert ld to lld, I get a warning on my machine that uint64_t is long unsigned int (and not long long unsigned int as above):
 
-v3: This is a new patch. Patch addresses the upstream comment to enable
-    ABMC feature by default if the feature is available.
----
- arch/x86/kernel/cpu/resctrl/rdtgroup.c | 55 ++++++++++++++++++++++++++
- 1 file changed, 55 insertions(+)
+vm_util.c: In function ‘rss_anon’:
+vm_util.c:188:42: warning: format ‘%lld’ expects argument of type ‘long long int *’, but argument 3 has type ‘uint64_t *’ {aka ‘long unsigned int *’} [-Wformat=]
+  188 |         if (sscanf(buffer, "RssAnon:%10lld kB", &rss_anon) != 1)
+      |                                     ~~~~~^      ~~~~~~~~~
+      |                                          |      |
+      |                                          |      uint64_t * {aka long unsigned int *}
+      |                                          long long int *
+      |                                     %10ld
 
-diff --git a/arch/x86/kernel/cpu/resctrl/rdtgroup.c b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
-index 0c2215dbd497..d93c1d784b91 100644
---- a/arch/x86/kernel/cpu/resctrl/rdtgroup.c
-+++ b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
-@@ -2908,6 +2908,46 @@ static void schemata_list_destroy(void)
- 	}
+
+I will just do below which should work hopefully with all compilers: 
+diff --git a/tools/testing/selftests/mm/vm_util.c b/tools/testing/selftests/mm/vm_util.c
+index 7b7e763ba8e3..bd147bdb1bb2 100644
+--- a/tools/testing/selftests/mm/vm_util.c
++++ b/tools/testing/selftests/mm/vm_util.c
+@@ -172,9 +172,9 @@ uint64_t read_pmd_pagesize(void)
+        return strtoul(buf, NULL, 10);
  }
  
-+/*
-+ * Called when new group is created. Assign the counters if ABMC is
-+ * already enabled. Two counters are required per group, one for total
-+ * event and one for local event. With limited number of counters,
-+ * the assignments can fail in some cases. But, it is not required to
-+ * fail the group creation. Users have the option to modify the
-+ * assignments after the group creation.
-+ */
-+static int rdtgroup_assign_cntrs(struct rdtgroup *rdtgrp)
-+{
-+	int ret = 0;
-+
-+	if (!resctrl_arch_get_abmc_enabled())
-+		return 0;
-+
-+	if (is_mbm_total_enabled())
-+		ret = rdtgroup_assign_cntr(rdtgrp, QOS_L3_MBM_TOTAL_EVENT_ID);
-+
-+	if (!ret && is_mbm_local_enabled())
-+		ret = rdtgroup_assign_cntr(rdtgrp, QOS_L3_MBM_LOCAL_EVENT_ID);
-+
-+	return ret;
-+}
-+
-+static int rdtgroup_unassign_cntrs(struct rdtgroup *rdtgrp)
-+{
-+	int ret = 0;
-+
-+	if (!resctrl_arch_get_abmc_enabled())
-+		return 0;
-+
-+	if (is_mbm_total_enabled())
-+		ret = rdtgroup_unassign_cntr(rdtgrp, QOS_L3_MBM_TOTAL_EVENT_ID);
-+
-+	if (!ret && is_mbm_local_enabled())
-+		ret = rdtgroup_unassign_cntr(rdtgrp, QOS_L3_MBM_LOCAL_EVENT_ID);
-+
-+	return ret;
-+}
-+
- static int rdt_get_tree(struct fs_context *fc)
+-uint64_t rss_anon(void)
++long unsigned rss_anon(void)
  {
- 	struct rdt_fs_context *ctx = rdt_fc2context(fc);
-@@ -2969,6 +3009,8 @@ static int rdt_get_tree(struct fs_context *fc)
- 		if (ret < 0)
- 			goto out_mongrp;
- 		rdtgroup_default.mon.mon_data_kn = kn_mondata;
-+
-+		rdtgroup_assign_cntrs(&rdtgroup_default);
- 	}
+-       uint64_t rss_anon = 0;
++       long unsigned rss_anon = 0;
+        FILE *fp;
+        char buffer[MAX_LINE_LENGTH];
  
- 	ret = rdt_pseudo_lock_init();
-@@ -2999,6 +3041,7 @@ static int rdt_get_tree(struct fs_context *fc)
- out_psl:
- 	rdt_pseudo_lock_release();
- out_mondata:
-+	rdtgroup_unassign_cntrs(&rdtgroup_default);
- 	if (resctrl_arch_mon_capable())
- 		kernfs_remove(kn_mondata);
- out_mongrp:
-@@ -3258,6 +3301,8 @@ static void rdt_kill_sb(struct super_block *sb)
- 		resctrl_arch_disable_alloc();
- 	if (resctrl_arch_mon_capable())
- 		resctrl_arch_disable_mon();
-+
-+	rdtgroup_unassign_cntrs(&rdtgroup_default);
- 	resctrl_mounted = false;
- 	kernfs_kill_sb(sb);
- 	mutex_unlock(&rdtgroup_mutex);
-@@ -3849,6 +3894,8 @@ static int rdtgroup_mkdir_mon(struct kernfs_node *parent_kn,
- 		goto out_unlock;
- 	}
+@@ -185,7 +185,7 @@ uint64_t rss_anon(void)
+        if (!check_for_pattern(fp, "RssAnon:", buffer, sizeof(buffer)))
+                goto err_out;
  
-+	rdtgroup_assign_cntrs(rdtgrp);
-+
- 	kernfs_activate(rdtgrp->kn);
+-       if (sscanf(buffer, "RssAnon:%10ld kB", &rss_anon) != 1)
++       if (sscanf(buffer, "RssAnon:%10lu kB", &rss_anon) != 1)
+                ksft_exit_fail_msg("Reading status error\n");
  
- 	/*
-@@ -3893,6 +3940,8 @@ static int rdtgroup_mkdir_ctrl_mon(struct kernfs_node *parent_kn,
- 	if (ret)
- 		goto out_closid_free;
- 
-+	rdtgroup_assign_cntrs(rdtgrp);
-+
- 	kernfs_activate(rdtgrp->kn);
- 
- 	ret = rdtgroup_init_alloc(rdtgrp);
-@@ -3918,6 +3967,7 @@ static int rdtgroup_mkdir_ctrl_mon(struct kernfs_node *parent_kn,
- out_del_list:
- 	list_del(&rdtgrp->rdtgroup_list);
- out_rmid_free:
-+	rdtgroup_unassign_cntrs(rdtgrp);
- 	mkdir_rdt_prepare_rmid_free(rdtgrp);
- out_closid_free:
- 	closid_free(closid);
-@@ -3988,6 +4038,9 @@ static int rdtgroup_rmdir_mon(struct rdtgroup *rdtgrp, cpumask_var_t tmpmask)
- 	update_closid_rmid(tmpmask, NULL);
- 
- 	rdtgrp->flags = RDT_DELETED;
-+
-+	rdtgroup_unassign_cntrs(rdtgrp);
-+
- 	free_rmid(rdtgrp->closid, rdtgrp->mon.rmid);
- 
- 	/*
-@@ -4034,6 +4087,8 @@ static int rdtgroup_rmdir_ctrl(struct rdtgroup *rdtgrp, cpumask_var_t tmpmask)
- 	cpumask_or(tmpmask, tmpmask, &rdtgrp->cpu_mask);
- 	update_closid_rmid(tmpmask, NULL);
- 
-+	rdtgroup_unassign_cntrs(rdtgrp);
-+
- 	free_rmid(rdtgrp->closid, rdtgrp->mon.rmid);
- 	closid_free(rdtgrp->closid);
- 
--- 
-2.34.1
-
+ err_out:
 
