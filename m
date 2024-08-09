@@ -1,328 +1,153 @@
-Return-Path: <linux-doc+bounces-22518-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-22520-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18D1B94CB2B
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Aug 2024 09:22:33 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A2E294CBBA
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Aug 2024 09:56:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 34C071C20C2E
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Aug 2024 07:22:32 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C922F1C20D16
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Aug 2024 07:56:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B548A175D3D;
-	Fri,  9 Aug 2024 07:22:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 719F718C927;
+	Fri,  9 Aug 2024 07:56:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="qRBJYlZP";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="NTTbxdNS";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="qRBJYlZP";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="NTTbxdNS"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iWy7JWX6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76F63172BD6;
-	Fri,  9 Aug 2024 07:22:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 013EA1552EB;
+	Fri,  9 Aug 2024 07:56:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1723188137; cv=none; b=NroOYfvdsipkMp0bYdD7zD4n0BVA9xvBher0btMdPNbsaKdq3MKkgkadh5N/91D1z9W7FaUZn/2A+OBrUgCYpK/atRkY8TUJhCK1s43k28XisWQLQcEcipXlmuN3lbfYi5ZB4CxNm7yPczsi7Z56K2dzG/gHc2AH80pwlw5iuJs=
+	t=1723190188; cv=none; b=q/icM8tm/GJw5AQmaxamY0zCZ+d7puypdEBlXsVnmGXFm3qgU5ZumjLFz44PqwyjmMTts65fVHiepjd5mgB4OvprVL9Xbqg6UGtfnychHv6wEotwSsI5FGXuHlKrGb3dxBSoT3pDDzqkrkXajJuGpWY8Rev4RoEnA81aK3mRo3w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1723188137; c=relaxed/simple;
-	bh=gYlIP+lBGZf9p56OPaappGgP1Xv0GKlrY9dqQFRES04=;
+	s=arc-20240116; t=1723190188; c=relaxed/simple;
+	bh=WciictBvnZZognJdSB//Vkpj36Vtrbm418N+k4gXKM8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=QXrRuDXLT+iG46WO8YmVZhduuCUx6O9EiRZ05ej6cSjSFRTij0e7yKEv3IA70Cqo6KaIxWtCZTj3abPfUUiIM2LXHtEXLd2K+hLExZauL2RXr4FB67oavKslO5he6RFct4S+xDb2wtoeHkbYZ2ohqy9NQDRuIDNe2tQmeL8iRHI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=qRBJYlZP; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=NTTbxdNS; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=qRBJYlZP; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=NTTbxdNS; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 9170B21EB4;
-	Fri,  9 Aug 2024 07:22:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1723188132; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ahmUJlG6cvn11dfUj1+gsMh+RJ6l5CH2DKkmdQtjC1M=;
-	b=qRBJYlZP10SZWLOuW224PwXJnb9NdkAwHqyzI4zJIbxa7x82Kn5LIRVQo6gYVBZJq/fRhb
-	jWCfop6Rgz7eKAjnPVkWyPujE5f1ZWPn/Td/6U1/1QIQrXNw7NV1SxMc0TZBIg/oh8VFE+
-	GigUI+02Aw/lncykX5e1s4atPk9xdak=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1723188132;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ahmUJlG6cvn11dfUj1+gsMh+RJ6l5CH2DKkmdQtjC1M=;
-	b=NTTbxdNSv22I/uNcvvM5kXc2YMty5QSKzyvVojSy9LCXC0bfiOUc+vbfTpPux/FGx2cW/V
-	7qqDBipp3r8IDEAA==
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1723188132; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ahmUJlG6cvn11dfUj1+gsMh+RJ6l5CH2DKkmdQtjC1M=;
-	b=qRBJYlZP10SZWLOuW224PwXJnb9NdkAwHqyzI4zJIbxa7x82Kn5LIRVQo6gYVBZJq/fRhb
-	jWCfop6Rgz7eKAjnPVkWyPujE5f1ZWPn/Td/6U1/1QIQrXNw7NV1SxMc0TZBIg/oh8VFE+
-	GigUI+02Aw/lncykX5e1s4atPk9xdak=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1723188132;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ahmUJlG6cvn11dfUj1+gsMh+RJ6l5CH2DKkmdQtjC1M=;
-	b=NTTbxdNSv22I/uNcvvM5kXc2YMty5QSKzyvVojSy9LCXC0bfiOUc+vbfTpPux/FGx2cW/V
-	7qqDBipp3r8IDEAA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 77DA513A7D;
-	Fri,  9 Aug 2024 07:22:12 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id 5Yc7HaTDtWbgEAAAD6G6ig
-	(envelope-from <dwagner@suse.de>); Fri, 09 Aug 2024 07:22:12 +0000
-Date: Fri, 9 Aug 2024 09:22:11 +0200
-From: Daniel Wagner <dwagner@suse.de>
-To: Ming Lei <ming.lei@redhat.com>
-Cc: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, 
-	Sagi Grimberg <sagi@grimberg.me>, Thomas Gleixner <tglx@linutronix.de>, 
-	Christoph Hellwig <hch@lst.de>, "Martin K. Petersen" <martin.petersen@oracle.com>, 
-	John Garry <john.g.garry@oracle.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
-	Jason Wang <jasowang@redhat.com>, Kashyap Desai <kashyap.desai@broadcom.com>, 
-	Sumit Saxena <sumit.saxena@broadcom.com>, Shivasharan S <shivasharan.srikanteshwara@broadcom.com>, 
-	Chandrakanth patil <chandrakanth.patil@broadcom.com>, Sathya Prakash Veerichetty <sathya.prakash@broadcom.com>, 
-	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>, Nilesh Javali <njavali@marvell.com>, 
-	GR-QLogic-Storage-Upstream@marvell.com, Jonathan Corbet <corbet@lwn.net>, 
-	Frederic Weisbecker <frederic@kernel.org>, Mel Gorman <mgorman@suse.de>, Hannes Reinecke <hare@suse.de>, 
-	Sridhar Balaraman <sbalaraman@parallelwireless.com>, "brookxu.cn" <brookxu.cn@gmail.com>, 
-	linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, linux-nvme@lists.infradead.org, 
-	linux-scsi@vger.kernel.org, virtualization@lists.linux.dev, megaraidlinux.pdl@broadcom.com, 
-	mpi3mr-linuxdrv.pdl@broadcom.com, MPT-FusionLinux.pdl@broadcom.com, storagedev@microchip.com, 
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v3 15/15] blk-mq: use hk cpus only when isolcpus=io_queue
- is enabled
-Message-ID: <856091db-431f-48f5-9daa-38c292a6bbd2@flourine.local>
-References: <20240806-isolcpus-io-queues-v3-0-da0eecfeaf8b@suse.de>
- <20240806-isolcpus-io-queues-v3-15-da0eecfeaf8b@suse.de>
- <ZrI5TcaAU82avPZn@fedora>
- <253ec223-98e1-4e7e-b138-0a83ea1a7b0e@flourine.local>
- <ZrRXEUko5EwKJaaP@fedora>
+	 Content-Type:Content-Disposition:In-Reply-To; b=lue6vbwtS3HJzRZ4DDuQJNKtEil0h6h4lG6IFkP1B5hZIGG8ikUOuuF5Kcihcvq2LJABgU2zkSn7SqbHzVyIsJVSGrB0gMVkoRhgO4qxg5JpAJ98rXp/4ZTYvfg+2Q4hTsM6NO+bTCsHgTb5IFuX9QdMpXBrbmjngJBHjJfFHqo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iWy7JWX6; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 952AFC4AF0D;
+	Fri,  9 Aug 2024 07:56:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1723190187;
+	bh=WciictBvnZZognJdSB//Vkpj36Vtrbm418N+k4gXKM8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=iWy7JWX63DlQVy2d0mNGhQfP+E5wTH7yt+zLcJ0XE+/2H7ya+xPuYTTvng2lSdR0P
+	 fY3FcxC8uU8GMeAkyI60nvRDENoJPGv+KO8RJqpQagYElLNKgByK/OFTroSX355YCs
+	 LkPyVbDTwM5NLcPamf6V9UY8mS/5OHdlCJ1Bf0Wrzy8CzH4nnoBsnommLbSLYVYa0S
+	 vit/eTqSx1gLR+UhLsyyqz5moCQu5XrPJ2lKHYZlMNpbvAKOB2UKpjpb3hjS9c0GG8
+	 efszcgVI6ngSguWbXJ9ztgvoCk8mZPBFojeGqb+x30Hdvr6lK6GLQBG40LF/KOtnNT
+	 rWCJ8B29HDgmg==
+Date: Fri, 9 Aug 2024 08:56:15 +0100
+From: Simon Horman <horms@kernel.org>
+To: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+Cc: Markus Elfring <Markus.Elfring@web.de>,
+	Mina Almasry <almasrymina@google.com>, netdev@vger.kernel.org,
+	linux-doc@vger.kernel.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
+	Kaiyuan Zhang <kaiyuanz@google.com>,
+	Pavel Begunkov <asml.silence@gmail.com>,
+	Willem de Bruijn <willemb@google.com>, linux-alpha@vger.kernel.org,
+	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
+	sparclinux@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+	linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	bpf@vger.kernel.org, linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	LKML <linux-kernel@vger.kernel.org>,
+	Andreas Larsson <andreas@gaisler.com>,
+	Arnd Bergmann <arnd@arndb.de>, Bagas Sanjaya <bagasdotme@gmail.com>,
+	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+	Christoph Hellwig <hch@infradead.org>,
+	David Ahern <dsahern@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>, David Wei <dw@davidwei.uk>,
+	Donald Hunter <donald.hunter@gmail.com>,
+	Eric Dumazet <edumazet@google.com>,
+	Harshitha Ramamurthy <hramamurthy@google.com>,
+	Helge Deller <deller@gmx.de>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+	Jakub Kicinski <kuba@kernel.org>,
+	"James E. J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	Jeroen de Borst <jeroendb@google.com>,
+	Jesper Dangaard Brouer <hawk@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Matt Turner <mattst88@gmail.com>,
+	Nikolay Aleksandrov <razor@blackwall.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Praveen Kaligineedi <pkaligineedi@google.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Shailend Chand <shailend@google.com>,
+	Shakeel Butt <shakeel.butt@linux.dev>,
+	Shuah Khan <shuah@kernel.org>,
+	Steffen Klassert <steffen.klassert@secunet.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Taehee Yoo <ap420073@gmail.com>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	Yunsheng Lin <linyunsheng@huawei.com>
+Subject: Re: [PATCH net-next v17 03/14] netdev: support binding dma-buf to
+ netdevice
+Message-ID: <20240809075615.GD3075665@kernel.org>
+References: <20240730022623.98909-4-almasrymina@google.com>
+ <5d3c74da-7d44-4b88-8961-60f21f84f0ac@web.de>
+ <CAHS8izPxfCv1VMFBK1FahGTjVmUSSfrabgY5y6V+XtaszoHQ4w@mail.gmail.com>
+ <9aad36fe-cd4c-4ce5-b4d8-6c8619d10c46@web.de>
+ <66b2198686b91_3206cf29453@willemb.c.googlers.com.notmuch>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <ZrRXEUko5EwKJaaP@fedora>
-X-Spam-Score: -2.80
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_TLS_ALL(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[34];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.dk,kernel.org,grimberg.me,linutronix.de,lst.de,oracle.com,redhat.com,broadcom.com,marvell.com,lwn.net,suse.de,parallelwireless.com,gmail.com,vger.kernel.org,lists.infradead.org,lists.linux.dev,microchip.com];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo]
-X-Spam-Flag: NO
-X-Spam-Level: 
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <66b2198686b91_3206cf29453@willemb.c.googlers.com.notmuch>
 
-On Thu, Aug 08, 2024 at 01:26:41PM GMT, Ming Lei wrote:
-> Isolated CPUs are removed from queue mapping in this patchset, when someone
-> submit IOs from the isolated CPU, what is the correct hctx used for handling
-> these IOs?
-
-No, every possible CPU gets a mapping. What this patch series does, is
-to limit/aligns the number of hardware context to the number of
-housekeeping CPUs. There is still a complete ctx-hctc mapping. So
-whenever an user thread on an isolated CPU is issuing an IO a
-housekeeping CPU will also be involved (with the additional overhead,
-which seems to be okay for these users).
-
-Without hardware queue on the isolated CPUs ensures we really never get
-any unexpected IO on those CPUs unless userspace does it own its own.
-It's a safety net.
-
-Just to illustrate it, the non isolcpus configuration (default) map
-for an 8 CPU setup:
-
-queue mapping for /dev/vda
-        hctx0: default 0
-        hctx1: default 1
-        hctx2: default 2
-        hctx3: default 3
-        hctx4: default 4
-        hctx5: default 5
-        hctx6: default 6
-        hctx7: default 7
-
-and with isolcpus=io_queue,2-3,6-7
-
-queue mapping for /dev/vda
-        hctx0: default 0 2
-        hctx1: default 1 3
-        hctx2: default 4 6
-        hctx3: default 5 7
-
-> From current implementation, it depends on implied zero filled
-> tag_set->map[type].mq_map[isolated_cpu], so hctx 0 is used.
+On Tue, Aug 06, 2024 at 08:39:34AM -0400, Willem de Bruijn wrote:
+> Markus Elfring wrote:
+> > >> …
+> > >>> +++ b/include/net/devmem.h
+> > >>> @@ -0,0 +1,115 @@
+> > >> …
+> > >>> +#ifndef _NET_DEVMEM_H
+> > >>> +#define _NET_DEVMEM_H
+> > >> …
+> > >>
+> > >> I suggest to omit leading underscores from such identifiers.
+> > >> https://wiki.sei.cmu.edu/confluence/display/c/DCL37-C.+Do+not+declare+or+define+a+reserved+identifier
+> > >>
+> > >
+> > > I was gonna apply this change, but I ack'd existing files and I find
+> > > that all of them include leading underscores, including some very
+> > > recently added files like net/core/page_pool_priv.h.
+> > >
+> > > I would prefer to stick to existing conventions if that's OK, unless
+> > > there is widespread agreement to the contrary.
+> > 
+> > Under which circumstances would you become interested to reduce development risks
+> > also according to undefined behaviour?
+> > https://wiki.sei.cmu.edu/confluence/display/c/CC.+Undefined+Behavior#CC.UndefinedBehavior-ub_106
 > 
-> During CPU offline, in blk_mq_hctx_notify_offline(),
-> blk_mq_hctx_has_online_cpu() returns true even though the last cpu in
-> hctx 0 is offline because isolated cpus join hctx 0 unexpectedly, so IOs in
-> hctx 0 won't be drained.
+> This series is following established practice in kernel networking.
 > 
-> However managed irq core code still shutdowns the hw queue's irq because all
-> CPUs in this hctx are offline now. Then IO hang is triggered, isn't
-> it?
+> If that conflicts with a C standard, then perhaps that needs to be
+> resolved project wide.
+> 
+> Forcing an individual feature to diverge just brings inconsistency.
+> That said, this appears to be inconsistent already.
+> 
+> Main question is whether this is worth respinning a series already at
+> v17 with no more fundamental feedback.
 
-Thanks for the explanation. I was able to reproduce this scenario, that
-is a hardware context with two CPUs which go offline. Initially, I used
-fio for creating the workload but this never hit the hanger. Instead
-some background workload from systemd-journald is pretty reliable to
-trigger the hanger you describe.
+No, from my point of view, it is not.
 
-Example:
-
-  hctx2: default 4 6
-
-CPU 0 stays online, CPU 1-5 are offline. CPU 6 is offlined:
-
-  smpboot: CPU 5 is now offline
-  blk_mq_hctx_has_online_cpu:3537 hctx3 offline
-  blk_mq_hctx_has_online_cpu:3537 hctx2 offline
-
-and there is no forward progress anymore, the cpuhotplug state machine
-is blocked and an IO is hanging:
-
-  # grep busy /sys/kernel/debug/block/*/hctx*/tags | grep -v busy=0
-  /sys/kernel/debug/block/vda/hctx2/tags:busy=61
-
-and blk_mq_hctx_notify_offline busy loops forever:
-
-   task:cpuhp/6         state:D stack:0     pid:439   tgid:439   ppid:2      flags:0x00004000
-   Call Trace:
-    <TASK>
-    __schedule+0x79d/0x15c0
-    ? lockdep_hardirqs_on_prepare+0x152/0x210
-    ? kvm_sched_clock_read+0xd/0x20
-    ? local_clock_noinstr+0x28/0xb0
-    ? local_clock+0x11/0x30
-    ? lock_release+0x122/0x4a0
-    schedule+0x3d/0xb0
-    schedule_timeout+0x88/0xf0
-    ? __pfx_process_timeout+0x10/0x10d
-    msleep+0x28/0x40
-    blk_mq_hctx_notify_offline+0x1b5/0x200
-    ? cpuhp_thread_fun+0x41/0x1f0
-    cpuhp_invoke_callback+0x27e/0x780
-    ? __pfx_blk_mq_hctx_notify_offline+0x10/0x10
-    ? cpuhp_thread_fun+0x42/0x1f0
-    cpuhp_thread_fun+0x178/0x1f0
-    smpboot_thread_fn+0x12e/0x1c0
-    ? __pfx_smpboot_thread_fn+0x10/0x10
-    kthread+0xe8/0x110
-    ? __pfx_kthread+0x10/0x10
-    ret_from_fork+0x33/0x40
-    ? __pfx_kthread+0x10/0x10
-    ret_from_fork_asm+0x1a/0x30
-    </TASK>
-
-I don't think this is a new problem this code introduces. This problem
-exists for any hardware context which has more than one CPU. As far I
-understand it, the problem is that there is no forward progress possible
-for the IO itself (I assume the corresponding resources for the CPU
-going offline have already been shutdown, thus no progress?) and
-blk_mq_hctx_notifiy_offline isn't doing anything in this scenario.
-
-Couldn't we do something like:
-
-+static bool blk_mq_hctx_timeout_rq(struct request *rq, void *data)
-+{
-+       blk_mq_rq_timed_out(rq);
-+       return true;
-+}
-+
-+static void blk_mq_hctx_timeout_rqs(struct blk_mq_hw_ctx *hctx)
-+{
-+       struct blk_mq_tags *tags = hctx->sched_tags ?
-+                       hctx->sched_tags : hctx->tags;
-+       blk_mq_all_tag_iter(tags, blk_mq_hctx_timeout_rq, NULL);
-+}
-+
-+
- static int blk_mq_hctx_notify_offline(unsigned int cpu, struct hlist_node *node)
- {
-        struct blk_mq_hw_ctx *hctx = hlist_entry_safe(node,
-                        struct blk_mq_hw_ctx, cpuhp_online);
-+       int i;
-
-        if (blk_mq_hctx_has_online_cpu(hctx, cpu))
-                return 0;
-@@ -3551,9 +3589,16 @@ static int blk_mq_hctx_notify_offline(unsigned int cpu, struct hlist_node *node)
-         * requests.  If we could not grab a reference the queue has been
-         * frozen and there are no requests.
-         */
-+       i = 0;
-        if (percpu_ref_tryget(&hctx->queue->q_usage_counter)) {
--               while (blk_mq_hctx_has_requests(hctx))
-+               while (blk_mq_hctx_has_requests(hctx) && i++ < 10)
-                        msleep(5);
-+               if (blk_mq_hctx_has_requests(hctx)) {
-+                       pr_info("%s:%d hctx %d force timeout request\n",
-+                               __func__, __LINE__, hctx->queue_num);
-+                       blk_mq_hctx_timeout_rqs(hctx);
-+               }
-+
-
-This guarantees forward progress and it worked in my test scenario, got
-the corresponding log entries
-
-  blk_mq_hctx_notify_offline:3598 hctx 2 force timeout request
-
-and the hotplug state machine continued. Didn't see an IO error either,
-but I haven't looked closely, this is just a POC.
-
-BTW, when looking at the tag allocator, I didn't see any hctx state
-checks for the batched alloction path. Don't we need to check if the
-corresponding hardware context is active there too?
-
-@ -486,6 +487,15 @@ static struct request *__blk_mq_alloc_requests(struct blk_mq_alloc_data *data)
-        if (data->nr_tags > 1) {
-                rq = __blk_mq_alloc_requests_batch(data);
-                if (rq) {
-+                       if (unlikely(test_bit(BLK_MQ_S_INACTIVE,
-+                                             &data->hctx->state))) {
-+                               blk_mq_put_tag(blk_mq_tags_from_data(data),
-+                                              rq->mq_ctx, rq->tag);
-+                               msleep(3);
-+                               goto retry;
-+                       }
-                        blk_mq_rq_time_init(rq, alloc_time_ns);
-                        return rq;
-                }
-
-But given this is the hotpath and the hotplug path is very unlikely to
-be used at all, at least for the majority of users, I would suggest to
-try to get blk_mq_hctx_notify_offline to guarantee forward progress?.
-This would make the hotpath an 'if' less.
+This really is a trivial and somewhat subjective mater.
+I don't think it should hold up a substantial piece of work.
 
