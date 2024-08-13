@@ -1,184 +1,153 @@
-Return-Path: <linux-doc+bounces-22689-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-22691-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDEF394FD83
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 08:02:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D25A94FE1E
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 08:55:23 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6D3C41F23825
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 06:02:20 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 9AD9B1F21719
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 06:55:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DEA69364A4;
-	Tue, 13 Aug 2024 06:02:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C27803D3BF;
+	Tue, 13 Aug 2024 06:55:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="yfonxd4A";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="2FLaanZn";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="yfonxd4A";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="2FLaanZn"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="O31raPcY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D06942374C;
-	Tue, 13 Aug 2024 06:02:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C2393BBFB
+	for <linux-doc@vger.kernel.org>; Tue, 13 Aug 2024 06:55:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1723528935; cv=none; b=Eqb40expiSzc9MGf9Li8D2WKMWsAyL+jCGWfk/nmYLT2Sx5zN2Dw+yFth81Vh/ojY9KHlmaRRyzZvt6BuaN6+mtUsB3eAxls4+rYUxjapQ3ga06dWTj+omQ7X5KydGdqOts3T01zDmexAncOJz0htOyibwtX4V1gUzxgBwm0WV4=
+	t=1723532118; cv=none; b=Ps4C1gPP2HBoy3wKrTUmAM6xbSztZGSHbockYMHbYAYUbxu8K8TJvpb4gQc/Y72G5F8FGrnWnzdMRAiJfOvWcoxXicTWgLGL96QfoH6eu5arGllVrUDKGiflnJmGOlffMId2Bl34/ee3Vn5DEDOoS6El2f+yeDRm0Hah9H1mjWk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1723528935; c=relaxed/simple;
-	bh=OjLN19HU3mLCsXhYlfdKT7dHHQUZUv/OjRXggZr1QsA=;
-	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=DB2+pypdsKh7iHhCW11iACdnc0vs9C73x1NrXWyOPk0sEIhLTLbW2ggRkRcEautpJlcP/wahBh71e0O7EKDckBZv5fDp0YEJifxh3O1/AC1t5kipcGi/6afRagGtdQJ6wLBZLX92j9yGfUNXpX6FMiHK3WBcj5/iPtjpcKcgZNw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=yfonxd4A; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=2FLaanZn; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=yfonxd4A; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=2FLaanZn; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id B5E312270A;
-	Tue, 13 Aug 2024 06:02:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1723528931; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jYVkwWKxTSpRkPweEImYn5jNfhe+tzmk8OXzSLOoKwg=;
-	b=yfonxd4AO6qRrG9eo8KSQB83I0rwb/ixXqcVyvDW9aAyJ7lJffFzz4kL07tcpjrzDMguP+
-	pIO1tbRdEK+7g97fDeoe/tJmiG/8I0TiqPxFWaVK6KCuZHUMfBKw04SyHKfm1DqW/5OCVm
-	anAlmcSnsKYNzEJEOXsF+bEAYg21Sq4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1723528931;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jYVkwWKxTSpRkPweEImYn5jNfhe+tzmk8OXzSLOoKwg=;
-	b=2FLaanZnIGDZKboPEcw0bPT0FsBmQhguEWH06OxnhxMNumCqP9gdHzoW6+DnxpNaIcXRYf
-	7xMKNovBZx9DJKCw==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=yfonxd4A;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=2FLaanZn
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1723528931; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jYVkwWKxTSpRkPweEImYn5jNfhe+tzmk8OXzSLOoKwg=;
-	b=yfonxd4AO6qRrG9eo8KSQB83I0rwb/ixXqcVyvDW9aAyJ7lJffFzz4kL07tcpjrzDMguP+
-	pIO1tbRdEK+7g97fDeoe/tJmiG/8I0TiqPxFWaVK6KCuZHUMfBKw04SyHKfm1DqW/5OCVm
-	anAlmcSnsKYNzEJEOXsF+bEAYg21Sq4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1723528931;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jYVkwWKxTSpRkPweEImYn5jNfhe+tzmk8OXzSLOoKwg=;
-	b=2FLaanZnIGDZKboPEcw0bPT0FsBmQhguEWH06OxnhxMNumCqP9gdHzoW6+DnxpNaIcXRYf
-	7xMKNovBZx9DJKCw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 60F4013ABD;
-	Tue, 13 Aug 2024 06:02:11 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id 3rMMFuP2umZvCgAAD6G6ig
-	(envelope-from <tiwai@suse.de>); Tue, 13 Aug 2024 06:02:11 +0000
-Date: Tue, 13 Aug 2024 08:02:51 +0200
-Message-ID: <87ikw5c644.wl-tiwai@suse.de>
-From: Takashi Iwai <tiwai@suse.de>
-To: Ivan Orlov <ivan.orlov0322@gmail.com>
-Cc: perex@perex.cz,
-	tiwai@suse.com,
-	corbet@lwn.net,
-	broonie@kernel.org,
-	shuah@kernel.org,
-	linux-kselftest@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	christophe.jaillet@wanadoo.fr,
-	aholzinger@gmx.de
-Subject: Re: [PATCH v4 3/4] ALSA: timer: Introduce virtual userspace-driven timers
-In-Reply-To: <20240811202337.48381-4-ivan.orlov0322@gmail.com>
-References: <20240811202337.48381-1-ivan.orlov0322@gmail.com>
-	<20240811202337.48381-4-ivan.orlov0322@gmail.com>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) Emacs/27.2 Mule/6.0
+	s=arc-20240116; t=1723532118; c=relaxed/simple;
+	bh=8B4zvI1bCw+dHOu3aK2ldYYptYWbx3N9FgU5MDtjVpY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=IZEtQ4XNzH+FNsJoCjyJS4Bde11DPzm1722xPIw8N8OGqolOHq9dguJvwfJiGcN90qO86pKz6I8ZnLQAGqM8ByNxAXI8kYhmILuT+FvBdfTC5vuwMh8YHNs5PJ+gpvufTFu+LraaRB4kHGafn4t/3u0loHWeVfIemS21w59LPRA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=O31raPcY; arc=none smtp.client-ip=209.85.216.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-2cd48ad7f0dso4015915a91.0
+        for <linux-doc@vger.kernel.org>; Mon, 12 Aug 2024 23:55:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1723532116; x=1724136916; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=K8H/cII7rP++UOe4HJzvHxvEEFiXCMFQs92IzUQkIYs=;
+        b=O31raPcYwpzNjqDhsY7PholOUnKh7I0mhQLjhqgexzoVKwQu957dFSxwBHHEgVIuO6
+         vxPzue0TxW+ENu5h8fsZrF/1Az8v7qHVugbhq9fiOz5mcZYf/tHuXvTsqmn4qAGsWqqG
+         ZnfvAaqKWBoiPLld8V7eOUTL80vG1NZ1tRghnVHKbMqJOeTr+o0rCB/90jjBiRz4hlrN
+         V1eIISSe/LJrlKGmJGrVrNmb2eGH1zHkdUj9jlbk6ryTe8l0OPFOIi5PO+4A8aLjNvIX
+         u9TaR1xWKGGnMmZ6AcpoXIYqljoMIa+VrW4BP2bEdRwRhe+/o9MAQE2Ncy/Fdbbs4JEy
+         p8Mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1723532116; x=1724136916;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=K8H/cII7rP++UOe4HJzvHxvEEFiXCMFQs92IzUQkIYs=;
+        b=CMKevJ7p2IITByoKpvvVWkp6hyIEcbmf2ux4qvKT5afkLaEfnJDbzNABlpFR/0P2Y5
+         3GkXZfCSKowIYUF5JbzVTafwIJym4l7BCUOPTN0pglnLG5i1/7nL/Ld5hFgz/eHvr0GT
+         Z9nzxaa8Q2Z9l06hxigwtTNJ+zQNmV77S7UGAkcSdSOesqHqSC3YcmOG/O0kyzrRZUz+
+         hXtCGqoA2lsUnp7Po0NBStYyv+QWpXArbUsfm7UvowhzbiSEXWLzdPflZU/y4ykYMmXD
+         azXDt2oQ/lRpLZ6HIYqbOcRXWQzkxFuXkwXy/lLLDO91618iATiOVRLRHpVX8hjEu3eu
+         EQ6g==
+X-Gm-Message-State: AOJu0YzXqq535uxHpUy/1o05en1fsabu7EWFhyu0XNu0Nbrh9E4ib7Lg
+	6ngjwDReLBGhVmZCR9HQ7DxbbggXoKRagoB8QVLnZl0B0u8fTVpRa1BESbvXwTQ=
+X-Google-Smtp-Source: AGHT+IGxQyyCLfN4Km5Mxtxo9tf7Wyx6f3Hn07VIe47e7HTFli7fPJ0iDS2xS4J2ooTWYsRQkWdmEA==
+X-Received: by 2002:a17:90b:4b85:b0:2cf:cc0d:96cc with SMTP id 98e67ed59e1d1-2d3924d2f34mr2876334a91.9.1723532115633;
+        Mon, 12 Aug 2024 23:55:15 -0700 (PDT)
+Received: from localhost.localdomain (126-84.iitb.ac.in. [103.21.126.84])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2d1c9ca7ca5sm9613470a91.25.2024.08.12.23.55.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Aug 2024 23:55:15 -0700 (PDT)
+From: surajsonawane0215@gmail.com
+To: linux-doc@vger.kernel.org
+Cc: trivial@kernel.org,
+	SurajSonawane2415 <sonawanesr2012@gmail.com>,
+	Suraj Sonawane <surajsonawane0215@gmail.com>
+Subject: [PATCH] LFX Task: Fix grammar and spelling errors in reporting-issues.rst files
+Date: Tue, 13 Aug 2024 06:54:54 +0530
+Message-ID: <20240813012457.388-1-surajsonawane0215@gmail.com>
+X-Mailer: git-send-email 2.43.0.windows.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
-Content-Type: text/plain; charset=US-ASCII
-X-Spam-Score: -4.01
-X-Rspamd-Queue-Id: B5E312270A
-X-Spamd-Result: default: False [-4.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	DWL_DNSWL_MED(-2.00)[suse.de:dkim];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de,wanadoo.fr];
-	FREEMAIL_CC(0.00)[perex.cz,suse.com,lwn.net,kernel.org,vger.kernel.org,wanadoo.fr,gmx.de];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.de:dkim]
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spam-Level: 
-X-Spam-Flag: NO
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sun, 11 Aug 2024 22:23:36 +0200,
-Ivan Orlov wrote:
-> +static int snd_utimer_ioctl_create(struct file *file,
-> +				   struct snd_timer_uinfo __user *_utimer_info)
-> +{
-> +	struct snd_utimer *utimer;
-> +	struct snd_timer_uinfo *utimer_info __free(kfree) = NULL;
-> +	int err;
-> +
-> +	utimer_info = memdup_user(_utimer_info, sizeof(*utimer_info));
-> +	if (IS_ERR(utimer_info))
-> +		return PTR_ERR(no_free_ptr(utimer_info));
-> +
-> +	err = snd_utimer_create(utimer_info, &utimer);
-> +	if (err < 0)
-> +		return err;
-> +
-> +	utimer_info->id = utimer->id;
-> +
-> +	err = copy_to_user(_utimer_info, utimer_info, sizeof(*utimer_info));
-> +	if (err) {
-> +		snd_utimer_free(utimer);
-> +		return -EFAULT;
-> +	}
-> +
-> +	return anon_inode_getfd(utimer->name, &snd_utimer_fops, utimer, O_RDWR | O_CLOEXEC);
+From: SurajSonawane2415 <sonawanesr2012@gmail.com>
 
-Wouldn't utimer be left unfreed if this returns an error?
+    1. Corrected the sentence structure in several places for clarity and readability:
+        Original: "those are described below the step-by-step guide"
+        Corrected: "those are described below in the step-by-step guide"
 
+    2. Fixed grammatical errors:
+        Original: "That why your might need to uninstall the packages with such software to get rid of any 3rd party kernel module."
+        Corrected: "That’s why you might need to uninstall the packages with such software to get rid of any 3rd party kernel module."
 
-thanks,
+    3. Improved phrasing:
+        Original: "might not what you want."
+        Corrected: "might not be what you want."
 
-Takashi
+    4. Clarified instructions:
+        Original: "Instead try search terms like the model line"
+        Corrected: "Instead, try searching terms like the model line."
+
+These changes ensure that the documentation is more readable and accurate.
+
+Signed-off-by: Suraj Sonawane <surajsonawane0215@gmail.com>
+---
+ Documentation/admin-guide/reporting-issues.rst | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/Documentation/admin-guide/reporting-issues.rst b/Documentation/admin-guide/reporting-issues.rst
+index 2fd5a0302..e68c1f8f1 100644
+--- a/Documentation/admin-guide/reporting-issues.rst
++++ b/Documentation/admin-guide/reporting-issues.rst
+@@ -56,7 +56,7 @@ developers. It might be all that's needed for people already familiar with
+ reporting issues to Free/Libre & Open Source Software (FLOSS) projects. For
+ everyone else there is this section. It is more detailed and uses a
+ step-by-step approach. It still tries to be brief for readability and leaves
+-out a lot of details; those are described below the step-by-step guide in a
++out a lot of details; those are described below in the step-by-step guide in a
+ reference section, which explains each of the steps in more detail.
+ 
+ Note: this section covers a few more aspects than the TL;DR and does things in
+@@ -299,7 +299,7 @@ face, even if they look small or totally unrelated. That's why you should report
+ issues with these kernels to the vendor. Its developers should look into the
+ report and, in case it turns out to be an upstream issue, fix it directly
+ upstream or forward the report there. In practice that often does not work out
+-or might not what you want. You thus might want to consider circumventing the
++or might not be what you want. You thus might want to consider circumventing the
+ vendor by installing the very latest Linux kernel core yourself. If that's an
+ option for you move ahead in this process, as a later step in this guide will
+ explain how to do that once it rules out other potential causes for your issue.
+@@ -353,7 +353,7 @@ come up with other words to use as search terms. Also make sure not to use too
+ many search terms at once. Remember to search with and without information like
+ the name of the kernel driver or the name of the affected hardware component.
+ But its exact brand name (say 'ASUS Red Devil Radeon RX 5700 XT Gaming OC')
+-often is not much helpful, as it is too specific. Instead try search terms like
++often is not much helpful, as it is too specific. Instead, try searching terms like
+ the model line (Radeon 5700 or Radeon 5000) and the code name of the main chip
+ ('Navi' or 'Navi10') with and without its manufacturer ('AMD').
+ 
+@@ -472,7 +472,7 @@ before proceeding.
+ Note, you might not be aware that your system is using one of these solutions:
+ they often get set up silently when you install Nvidia's proprietary graphics
+ driver, VirtualBox, or other software that requires a some support from a
+-module not part of the Linux kernel. That why your might need to uninstall the
++module not part of the Linux kernel. That's why you might be need to uninstall the
+ packages with such software to get rid of any 3rd party kernel module.
+ 
+ 
+-- 
+2.34.1
+
 
