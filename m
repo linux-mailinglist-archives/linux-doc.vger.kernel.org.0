@@ -1,97 +1,87 @@
-Return-Path: <linux-doc+bounces-22711-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-22713-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D596F950462
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 14:04:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF21D950474
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 14:09:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 784D62841D6
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 12:04:54 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id AC7E22866FE
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 12:09:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 143BD187348;
-	Tue, 13 Aug 2024 12:03:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8A2911991DD;
+	Tue, 13 Aug 2024 12:09:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Eh526LHw"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GdekcDFO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73CED19AD5C;
-	Tue, 13 Aug 2024 12:03:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0D12198E71;
+	Tue, 13 Aug 2024 12:09:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1723550633; cv=none; b=B9LuEFYe00YARzU8YdS3QlwN4S3k6EBF5IWTPU1aKvMpxetrLx/dPI9cdTn3qzS9UbNym7qqfVyNotgh8tGAWIeXqymJmATOi7qXnyxFRzEa7zYpR1+Fll62IyF6LahoD05EpMWj5qy/I1ZBnlaFFG3SNJW4CDoS0kjBSZ04iK8=
+	t=1723550960; cv=none; b=H22w5dX3GlT1BBSBuend7dSaqB8K2TIKtUHXXxTSJ2etnEkNw5EvblT75Pg/6dWHoRVBlqCcuYh6Wz+mJxa69al8P+gbD4nK0dCne9UOvYgOGl4erf7Q2Wy5U9+zrzCzc6wex3nKbv1hee84usXOQ0UadNK6FR3mv/HxlRzonGc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1723550633; c=relaxed/simple;
-	bh=J8iCl8NFugwQEvqBetgBik9A5B1qMEYPkoEZhRroEr0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=X9Bpj0gzvPUlTvi7E/m7Eq/D/MZWfqbvV3B6apkRJbJEvJpsQT37gBvXeYrYGvPraltCNxrUlSCWh3gOP5zEbXCF47vmRETvZrETFLsm2uyMtElTDMqRmbePBC3TQp4+f9NDuY1FiPFjLR7hcODAT+4yHLIQ1Rpp3GsFH4+Ep+A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Eh526LHw; arc=none smtp.client-ip=209.85.219.50
+	s=arc-20240116; t=1723550960; c=relaxed/simple;
+	bh=dVKFCnEHQj907r8w6DUNC/hFfSLgWVedEBIn+MI3g3Y=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=GNpTMwpwyjHUXTieavYdP50eYFL4CFOeV0LXbc/RbFzAEij7srNfEO2wNagVv7jbv30jMa6gijYRAZsZBR/0RcuQSCbvvhYFFvwEgNU/T0kz0jhQqw25FsiYe9QHIz+pyr3Q8hhOR1IRLwP2WkQgumaYep5S1Da4G1MPdEaOsT4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GdekcDFO; arc=none smtp.client-ip=209.85.128.46
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qv1-f50.google.com with SMTP id 6a1803df08f44-6b79fc76d03so30950326d6.1;
-        Tue, 13 Aug 2024 05:03:51 -0700 (PDT)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4280ef642fbso6104615e9.1;
+        Tue, 13 Aug 2024 05:09:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723550630; x=1724155430; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fpDDmqOnJijcRyZ/zRVr0dfh/EUV8mM0nwD7hiV/Er4=;
-        b=Eh526LHwFRietxpi0Yr2Qp+4lWG2PCwUeOb3l5q8sAcOy/AIgIyXLRAyqONFd9/eir
-         CLa2NoqdvA6LFcjJ9Qwlj2apGGAbzbGxuCFBuf8uZgrdbgf5Io6xUDoh1PWXIobwY9Tx
-         7tJYrKqBdYvrmqwmyIXqfpvCy2mljWdMZPBv01yAm8jE8U21RknRKhipjM2SadF6o3kn
-         Nkn0ARK8Sz3k7nYDf+C3V3CGT8VTl+IF3XBtiohKEA/ub+nFujpvmdie4KipHWJ0aZOn
-         JkZi48aN5+um0QRGtaWeEKahRMgRCoX7Vaz+lMQCS5Vf42D6dKhcANz9XVNZPIumeitc
-         uQWA==
+        d=gmail.com; s=20230601; t=1723550957; x=1724155757; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=95nZPeNDVusw7hJQ2/3QSrV1/eH9G+qFzPCkFd7zD+U=;
+        b=GdekcDFOvFjTMJfuamLhI2C++oQ1buBAGQIyUI2vPm0R+VN7vVT58R4M2tMUfNhEiL
+         rowam3tjuyrk6HGisuGCrcMDsdGfBJiNwZMv40wrKcM/I4X6/yjioB8LP781d73OBtws
+         9hsSITgEfWOxvd7ayBFvOpGebHe6cKigkhKZTO5GUh1EtzF851KkrSPrOEO0VFXZj+Dq
+         ZcMhJ/IeMMj6FknETiomkSPZNsuVj6J1Qh/9BbIBK5cPrDSjnTVcoiN/vVMB1t/6De9b
+         TGM96t2GIqLUVAMrMDJHI03Be3my5bfWxQMfKzhnD257lp6qMqkGC1pxa3PDprGP8X5v
+         JspA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723550630; x=1724155430;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=fpDDmqOnJijcRyZ/zRVr0dfh/EUV8mM0nwD7hiV/Er4=;
-        b=Hi0wWKoYUwLkL1vy21DaZ5nGFbhKVS7wNPhg/U+nLI5rRYPjja2QTklI/Uq02J5F38
-         u3SIfKSb1YlqvFktyhONifMDgzmzC9DDXAE5NUlGQRItsyOTJg0jXIhhR+G2B1K8FxW7
-         Wsw+rUlo0bGoCo6Qmbk0ZWMl9b50fpUWHX0i2UFk0DRoXRUMzKlmWa41aTcmNWpt/1+u
-         2Azt7NCcJ/q+T9y5jH1EEhJfEYXWt3WoDDhjYe33fZJjQbP9x93E2BWImOHBWPC7Mmjz
-         vpz/SfhNHbGRJon4bEv0El41BeSS4kRsl5HY2lxnnsBidAIDW11Kqt6cvB5aGkP8GPbm
-         Qh9Q==
-X-Forwarded-Encrypted: i=1; AJvYcCUOwEiNhwxFk6X9MkWJ4dAKGTLw/i92dKVga3nPmQnK0nK2A8/xukAwEuD781531/6mJtfF8WzfFwAF2moMWLyEtCteM85CG5tSP3s9iHu0DBp6AK4fhlwkOh3TOjYRZ3esjqsIqXum
-X-Gm-Message-State: AOJu0YyevFJofaxCJ1m8xnRfGBBML2LeW8bmGuU/CzGyhUncbsHjSCCi
-	6/lZZ709T9mSWmop/OKKi1NrUQ7sLH1HQvTqENKLb5vyaM76F39o
-X-Google-Smtp-Source: AGHT+IG/p4KHdjtbRHl8jrRDtZpiTzA00oY1agex2KO6TAfMpoEbk5fNk2V++Y8FeIZ5s4O/KzF07g==
-X-Received: by 2002:a05:6214:5f0b:b0:6b7:980b:e0ac with SMTP id 6a1803df08f44-6bf4f7e2315mr29329476d6.32.1723550630417;
-        Tue, 13 Aug 2024 05:03:50 -0700 (PDT)
-Received: from localhost (fwdproxy-ash-011.fbsv.net. [2a03:2880:20ff:b::face:b00c])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-6bd82c81cd0sm33464656d6.53.2024.08.13.05.03.49
+        d=1e100.net; s=20230601; t=1723550957; x=1724155757;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=95nZPeNDVusw7hJQ2/3QSrV1/eH9G+qFzPCkFd7zD+U=;
+        b=XAtJhcc0w+0ER79GJcJa91fOc42A7McGlGE5JK370HFzFNvoVap6bRXvgXxO0Q7be1
+         OkUoFSa68Q1T/HFIMJ62CKVsildFnGxpaezir3vsUYeHW10C5RiVBTyOHI8RLiQ7qV+d
+         ujUon+FCh8aKxDjCGKXVa7l4rJr+27qZGvij4sYKae7hLxYUSX9bJYICe3LG4mXcuw4N
+         ZD0nVGDPfCV+gTZetq34eLyAkzerV1UBQ505nf9tvunwJUUqhyrSU8poJukogpOqGQ5q
+         ZcCrHi1o+snlM3wTdACPSRrbKsxEYZ7B21BcdDTDrpV3oBELD1++7JzZNE4TG2ZEkpxm
+         Y6KA==
+X-Forwarded-Encrypted: i=1; AJvYcCXKOT5aXEca+Dsvw7czgkfHzOu6rrCi+fogWIxo3cHhkXq4/uAJbcv1TYBwQIgZCVsXrcunccCPZRc6bfgQRukOJyM0gVZSJQQieTV9SzecZheycviKWFjiaKduVIGgOShs9rTsjkVvsi9rmA6hea07GwhVHnYo0aiHhqLCGLf+iSHKNyACRW0q56TcfbZvM4NVrfMbamHOgZK/QeU3whHpnx1CBkE=
+X-Gm-Message-State: AOJu0YynGo2qLoubOfzxPqAyDdYYwJgPp9Wmg+cb/0qiL/rjRfkcd2vM
+	w42PQAqYpu48zWOC2hbnfRJOQ+ePe1X8rALjomVEEZLUiKara1Q23n9cxg==
+X-Google-Smtp-Source: AGHT+IEeFZAjMrRFLpsu92UAlKILN8B22ultw43i95rDRVfs5PROELoxXFmSuEpUHo+HUo+RNgW2qw==
+X-Received: by 2002:a5d:6d8d:0:b0:366:eb60:bcf2 with SMTP id ffacd0b85a97d-3716fbf30d6mr906591f8f.4.1723550956592;
+        Tue, 13 Aug 2024 05:09:16 -0700 (PDT)
+Received: from ivan-HLYL-WXX9.. ([2a01:4b00:d20e:7300:6db6:f2bf:8865:5d31])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-36e4e51eb52sm10204590f8f.74.2024.08.13.05.09.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Aug 2024 05:03:50 -0700 (PDT)
-From: Usama Arif <usamaarif642@gmail.com>
-To: akpm@linux-foundation.org,
-	linux-mm@kvack.org
-Cc: hannes@cmpxchg.org,
-	riel@surriel.com,
-	shakeel.butt@linux.dev,
-	roman.gushchin@linux.dev,
-	yuzhao@google.com,
-	david@redhat.com,
-	baohua@kernel.org,
-	ryan.roberts@arm.com,
-	rppt@kernel.org,
-	willy@infradead.org,
-	cerasuolodomenico@gmail.com,
+        Tue, 13 Aug 2024 05:09:16 -0700 (PDT)
+From: Ivan Orlov <ivan.orlov0322@gmail.com>
+To: perex@perex.cz,
+	tiwai@suse.com,
 	corbet@lwn.net,
-	linux-kernel@vger.kernel.org,
+	broonie@kernel.org,
+	shuah@kernel.org
+Cc: Ivan Orlov <ivan.orlov0322@gmail.com>,
+	linux-kselftest@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	kernel-team@meta.com,
-	Usama Arif <usamaarif642@gmail.com>
-Subject: [PATCH v3 6/6] mm: add sysfs entry to disable splitting underutilized THPs
-Date: Tue, 13 Aug 2024 13:02:49 +0100
-Message-ID: <20240813120328.1275952-7-usamaarif642@gmail.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20240813120328.1275952-1-usamaarif642@gmail.com>
-References: <20240813120328.1275952-1-usamaarif642@gmail.com>
+	linux-sound@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	christophe.jaillet@wanadoo.fr,
+	aholzinger@gmx.de
+Subject: [PATCH v5 0/4] Introduce userspace-driven ALSA timers
+Date: Tue, 13 Aug 2024 13:06:57 +0100
+Message-Id: <20240813120701.171743-1-ivan.orlov0322@gmail.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -100,74 +90,85 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-If disabled, THPs faulted in or collapsed will not be added to
-_deferred_list, and therefore won't be considered for splitting under
-memory pressure if underutilized.
+There are multiple possible timer sources which could be useful for
+the sound stream synchronization: hrtimers, hardware clocks (e.g. PTP),
+timer wheels (jiffies). Currently, using one of them to synchronize
+the audio stream of snd-aloop module would require writing a
+kernel-space driver which exports an ALSA timer through the
+snd_timer interface.
 
-Signed-off-by: Usama Arif <usamaarif642@gmail.com>
----
- mm/huge_memory.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+However, it is not really convenient for application developers, who may
+want to define their custom timer sources for audio synchronization.
 
-diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-index 6b32b2d4ab1e..b4d72479330d 100644
---- a/mm/huge_memory.c
-+++ b/mm/huge_memory.c
-@@ -74,6 +74,7 @@ static unsigned long deferred_split_count(struct shrinker *shrink,
- 					  struct shrink_control *sc);
- static unsigned long deferred_split_scan(struct shrinker *shrink,
- 					 struct shrink_control *sc);
-+static bool split_underutilized_thp = true;
- 
- static atomic_t huge_zero_refcount;
- struct folio *huge_zero_folio __read_mostly;
-@@ -439,6 +440,27 @@ static ssize_t hpage_pmd_size_show(struct kobject *kobj,
- static struct kobj_attribute hpage_pmd_size_attr =
- 	__ATTR_RO(hpage_pmd_size);
- 
-+static ssize_t split_underutilized_thp_show(struct kobject *kobj,
-+			    struct kobj_attribute *attr, char *buf)
-+{
-+	return sysfs_emit(buf, "%d\n", split_underutilized_thp);
-+}
-+
-+static ssize_t split_underutilized_thp_store(struct kobject *kobj,
-+			     struct kobj_attribute *attr,
-+			     const char *buf, size_t count)
-+{
-+	int err = kstrtobool(buf, &split_underutilized_thp);
-+
-+	if (err < 0)
-+		return err;
-+
-+	return count;
-+}
-+
-+static struct kobj_attribute split_underutilized_thp_attr = __ATTR(
-+	thp_low_util_shrinker, 0644, split_underutilized_thp_show, split_underutilized_thp_store);
-+
- static struct attribute *hugepage_attr[] = {
- 	&enabled_attr.attr,
- 	&defrag_attr.attr,
-@@ -447,6 +469,7 @@ static struct attribute *hugepage_attr[] = {
- #ifdef CONFIG_SHMEM
- 	&shmem_enabled_attr.attr,
- #endif
-+	&split_underutilized_thp_attr.attr,
- 	NULL,
- };
- 
-@@ -3475,6 +3498,9 @@ void deferred_split_folio(struct folio *folio, bool partially_mapped)
- 	if (folio_order(folio) <= 1)
- 		return;
- 
-+	if (!partially_mapped && !split_underutilized_thp)
-+		return;
-+
- 	/*
- 	 * The try_to_unmap() in page reclaim path might reach here too,
- 	 * this may cause a race condition to corrupt deferred split queue.
+For instance, we could have a network application which receives frames
+and sends them to snd-aloop pcm device, and another application
+listening on the other end of snd-aloop. It makes sense to transfer a
+new period of data only when certain amount of frames is received
+through the network, but definitely not when a certain amount of jiffies
+on a local system elapses. Since all of the devices are purely virtual
+it won't introduce any glitches and will help the application developers
+to avoid using sample-rate conversion.
+
+This patch series introduces userspace-driven ALSA timers: virtual
+timers which are created and controlled from userspace. The timer can
+be created from the userspace using the new ioctl SNDRV_TIMER_IOCTL_CREATE.
+After creating a timer, it becomes available for use system-wide, so it
+can be passed to snd-aloop as a timer source (timer_source parameter
+would be "-1.SNDRV_TIMER_GLOBAL_UDRIVEN.{timer_id}"). When the userspace
+app decides to trigger a timer, it calls another ioctl
+SNDRV_TIMER_IOCTL_TRIGGER on the file descriptor of a timer. It
+initiates a transfer of a new period of data.
+
+Userspace-driven timers are associated with file descriptors. If the
+application wishes to destroy the timer, it can simply release the file
+descriptor of a virtual timer.
+
+I believe introducing new ioctl calls is quite inconvenient (as we have
+a limited amount of them), but other possible ways of app <-> kernel
+communication (like virtual FS) seem completely inappropriate for this
+task (but I'd love to discuss alternative solutions).
+
+This patch series also updates the snd-aloop module so the global timers
+can be used as a timer_source for it (it allows using userspace-driven
+timers as timer source).
+
+V1 -> V2:
+- Fix some problems found by Christophe Jaillet
+<christophe.jaillet@wanadoo.fr>
+V2 -> V3:
+- Add improvements suggested by Takashi Iwai <tiwai@suse.de>
+V3 -> V4:
+- Address comments from Jaroslav Kysela <perex@perex.cz> and Mark Brown
+<broonie@kernel.org>
+V4 -> V5:
+- Add missing error processing noticed by Takashi Iwai <tiwai@suse.de>
+- Return timer file descriptor as part of the snd_timer_uinfo structure.
+This is a more standard way of using ioctl interface, where the return
+value of the ioctl is either 0 or an error code.
+
+Please, find the patch-specific changelog in the following patches.
+
+Ivan Orlov (4):
+  ALSA: aloop: Allow using global timers
+  Docs/sound: Add documentation for userspace-driven ALSA timers
+  ALSA: timer: Introduce virtual userspace-driven timers
+  selftests: ALSA: Cover userspace-driven timers with test
+
+ Documentation/sound/index.rst               |   1 +
+ Documentation/sound/utimers.rst             | 126 +++++++++++
+ include/uapi/sound/asound.h                 |  17 +-
+ sound/core/Kconfig                          |  10 +
+ sound/core/timer.c                          | 225 ++++++++++++++++++++
+ sound/drivers/aloop.c                       |   2 +
+ tools/testing/selftests/alsa/Makefile       |   4 +-
+ tools/testing/selftests/alsa/global-timer.c |  87 ++++++++
+ tools/testing/selftests/alsa/utimer-test.c  | 164 ++++++++++++++
+ 9 files changed, 633 insertions(+), 3 deletions(-)
+ create mode 100644 Documentation/sound/utimers.rst
+ create mode 100644 tools/testing/selftests/alsa/global-timer.c
+ create mode 100644 tools/testing/selftests/alsa/utimer-test.c
+
 -- 
-2.43.5
+2.34.1
 
 
