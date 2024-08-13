@@ -1,128 +1,138 @@
-Return-Path: <linux-doc+bounces-22727-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-22729-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id C70DC950B56
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 19:22:56 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 42CAA950B66
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 19:27:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 837B528432D
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 17:22:55 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 04C70285636
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 17:27:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9513E19FA93;
-	Tue, 13 Aug 2024 17:22:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 312BA1A2C27;
+	Tue, 13 Aug 2024 17:26:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="J21tYD7f"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="qXayL9XZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oo1-f47.google.com (mail-oo1-f47.google.com [209.85.161.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6633170A18;
-	Tue, 13 Aug 2024 17:22:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C29151A2577
+	for <linux-doc@vger.kernel.org>; Tue, 13 Aug 2024 17:26:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1723569771; cv=none; b=iw5aAVVuik3bNP3g9WKSqhEhaVFXoFUIxpQZVnk408bjxUow8SQJDdf3ACAp0SL6oP1t0H2khOily8ctSUqaTYiWMHfWUPnigw7eV4A79wz/hmQkUKzgB8cckNsIkakXEJYbc0rC1wCP5L26NfwROna+Qjmzf+XnfruW9rGWWjo=
+	t=1723570012; cv=none; b=IToQI3lHsaCKR2UE6n20vBWBSyF4r3yhsiGNDoHNZx41fVTxYgDBsuoi8HGSTw3pLW+UvJ9jbflikKk9bCCSKJNjPqxcSNaZwI9swqlDB9IFdLq8mbYkWViAnEvIDPQAmStBsN0xRbuHL+RHa7lRm5vtfAlOaYCr8gDV3nuAl80=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1723569771; c=relaxed/simple;
-	bh=PXjGkj2+4r+pOwvax1EJsHXufhiX5E5s/WYsh43Fu9g=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=dsxQCad0ahCRYNoT2qNFZmap+5uV1bQs52Zsw0Uwei1BAHPlgNXhECyWkf20AFvlRQX+ze9z4mqcRvZUCfTVTe9TrEIMlpKQYxAY/wn97kmsX+qYZO7oiwA/6V2Yls4Eco5eHEft8PWCrZ3W6ROlJkUSd5JutVT2Z5f6NMcqWTQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=J21tYD7f; arc=none smtp.client-ip=192.198.163.8
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1723569770; x=1755105770;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version;
-  bh=PXjGkj2+4r+pOwvax1EJsHXufhiX5E5s/WYsh43Fu9g=;
-  b=J21tYD7f3NOg7A+hHsu/lHuS5Mnv6bUKzP29N75LWZVyJJKpjNRsbdKg
-   iyvj9zupgpC7h50ZWqjEs5nqRUyHpUx3o94hL3x6LdvbAxejx1Ay4jAaC
-   5Vom3aYq7m5ioGkx8Ssj++u9ftHzV0fnpUt2TaZyYZctYworVfVAAJ7n0
-   uxca99Gf8DUW4Jr4d16yWRhzGjOB0lC7FVwF42nolYGYG/gYZ2MkHgBpR
-   LAef8wdZKuzXyLSq6plKFRZC8eO+oZtfV6IU41NHTuedIc46YqY896YU/
-   9/8OX9/kRmJG4QafNF9IBCqi7qzQxPkEHwviv83/3WIif0EhQe32zy8BO
-   g==;
-X-CSE-ConnectionGUID: 1n54UM1rRfazmbduPD0Obg==
-X-CSE-MsgGUID: STHeEZt/RaaaX7DRg7+PPA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11163"; a="39257079"
-X-IronPort-AV: E=Sophos;i="6.09,286,1716274800"; 
-   d="scan'208";a="39257079"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Aug 2024 10:22:49 -0700
-X-CSE-ConnectionGUID: 9AfD1iuWTmC/9e/5rre4IQ==
-X-CSE-MsgGUID: YUgBNSyfR5CAsRM+vDHsaw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.09,286,1716274800"; 
-   d="scan'208";a="58430370"
-Received: from tassilo.jf.intel.com (HELO tassilo.localdomain) ([10.54.38.190])
-  by fmviesa007.fm.intel.com with ESMTP; 13 Aug 2024 10:22:48 -0700
-Received: by tassilo.localdomain (Postfix, from userid 1000)
-	id 474E230125F; Tue, 13 Aug 2024 10:22:48 -0700 (PDT)
-From: Andi Kleen <ak@linux.intel.com>
-To: Usama Arif <usamaarif642@gmail.com>
-Cc: akpm@linux-foundation.org,  linux-mm@kvack.org,  hannes@cmpxchg.org,
-  riel@surriel.com,  shakeel.butt@linux.dev,  roman.gushchin@linux.dev,
-  yuzhao@google.com,  david@redhat.com,  baohua@kernel.org,
-  ryan.roberts@arm.com,  rppt@kernel.org,  willy@infradead.org,
-  cerasuolodomenico@gmail.com,  corbet@lwn.net,
-  linux-kernel@vger.kernel.org,  linux-doc@vger.kernel.org,
-  kernel-team@meta.com
-Subject: Re: [PATCH v3 0/6] mm: split underutilized THPs
-In-Reply-To: <20240813120328.1275952-1-usamaarif642@gmail.com> (Usama Arif's
-	message of "Tue, 13 Aug 2024 13:02:43 +0100")
-References: <20240813120328.1275952-1-usamaarif642@gmail.com>
-Date: Tue, 13 Aug 2024 10:22:48 -0700
-Message-ID: <87y150mj6f.fsf@linux.intel.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	s=arc-20240116; t=1723570012; c=relaxed/simple;
+	bh=ZzTceNq/VahFThxcoefiMSTMiJCAPq1LHWua5OwiDXI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=LPf+1ZpSNot0cin9ImFOvOXGuznLE2tH4pQmc1tz/2umaVj2gdwn/sq+U+FJieoVI6WusxM8Pw/zrmtuu+2YokKSU0TkIJ/Fjj5GwelDXxtoliZQ8i088GKpMtviZyVRXx2b3aXm64BOZS51LjqO3czJbxd2xUNd3RjV1vB8bIY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=qXayL9XZ; arc=none smtp.client-ip=209.85.161.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Received: by mail-oo1-f47.google.com with SMTP id 006d021491bc7-5d5c7f23f22so3311483eaf.0
+        for <linux-doc@vger.kernel.org>; Tue, 13 Aug 2024 10:26:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1723570008; x=1724174808; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xG6x5j0C9GwdQm5O0YJQ35HAaRtvKzSD7igQqCAZy5g=;
+        b=qXayL9XZsDlKOg5GtGZIGosNDrqOdGVcBnMl7PE9F8LwdX7N5KbyRV8hqgeqW5/Nxq
+         2et2S1cL24TuftNYhMarGAZ8PqtEdvFSRiBN46K4oAGT4c+v69lNDNapHcYFugZlwljR
+         Iuh9xPpVyvUSczOidxAAvWeALUj0UVOwgIoOG8xXuVJWhPWg7FbSxVY+yxNd4F3GYAGf
+         qiSk1jnDSwcdcrBrJxQWF2ii1J22hHAG1IM2p/+d5iDCLwPIoVcBlt8t7OURqSU6DAQw
+         /PODmFv9xpTAY2xPp7cGXYho03qyvQF87QmtgF3RR0+JGkzY5ydvMOl0qmUQZbIzunLm
+         h2/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1723570008; x=1724174808;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=xG6x5j0C9GwdQm5O0YJQ35HAaRtvKzSD7igQqCAZy5g=;
+        b=h2AV3eBYzl+Dp5S5IeqxTYbriGF1eH9Mp5Rj2gJYATHjIt7md5r77s9ey6NaiZ6Eaq
+         EE9XbjxDmraP2Ez5VqMDR2O9ShdNXIOBUV5geCHpwxzPhKPCW5KMOI3UA8sdo4mnLsDG
+         G7cX2ZQLMFUV4UHgcq5kcYiptCuDUi1iSVkVQAexQ3xXxMby7KBBtE47IPAmAmDvLrtH
+         ud8FikUJyd229/3N36B9CzQk72keRGBbXPh5YWTLXYAogDMuVEqEpkDq+cVUKVBTrQnB
+         js/3HxK63oKqn9/3M9i+TMt371fEA2Rn+1c21xtnr+2pJm/i5vRRv8zeiAzuq3HrTgkb
+         /2Dw==
+X-Forwarded-Encrypted: i=1; AJvYcCXhRV50VPZCLMzlgOzPPD2kfzdYdGgVzfywXD2J51wsQOlT5yc/CtyBRPFO5HVLCkOA7msz6rjctKwAYMMezJS+SvevUYn7Mbyf
+X-Gm-Message-State: AOJu0Yz2zGvTG53ZHyGkiWpCHkQL6PiR3sAXXkwQnYpCjWaMJWxOy1so
+	h4CZcM7Sx5kwkXeAHYMSn/7++JIGR2xeHORMJanmExOcESowZzmK9sfZQBLorrI=
+X-Google-Smtp-Source: AGHT+IE7cQzWLO3jWd3KSSFLMOSIEVFhEv2EfjOn346VEcwYYVn943aDI4d7Fs3uIL/ohjzsEiDG9w==
+X-Received: by 2002:a05:6870:972b:b0:25e:24d5:4d54 with SMTP id 586e51a60fabf-26fe5bb98afmr324787fac.35.1723570007899;
+        Tue, 13 Aug 2024 10:26:47 -0700 (PDT)
+Received: from freyr.lechnology.com (ip98-183-112-25.ok.ok.cox.net. [98.183.112.25])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-26c7203f908sm2462915fac.11.2024.08.13.10.26.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Aug 2024 10:26:47 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: Jonathan Cameron <jic23@kernel.org>
+Cc: David Lechner <dlechner@baylibre.com>,
+	Michael Hennerich <Michael.Hennerich@analog.com>,
+	=?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-iio@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: [PATCH v2 0/2] iio: adc: ad4695: implement triggered buffer
+Date: Tue, 13 Aug 2024 12:26:39 -0500
+Message-ID: <20240813-iio-adc-ad4695-buffered-read-v2-0-9bb19fc1924b@baylibre.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.14.0
+Content-Transfer-Encoding: 8bit
 
-Usama Arif <usamaarif642@gmail.com> writes:
->
-> This patch-series is an attempt to mitigate the issue of running out of
-> memory when THP is always enabled. During runtime whenever a THP is being
-> faulted in or collapsed by khugepaged, the THP is added to a list.
-> Whenever memory reclaim happens, the kernel runs the deferred_split
-> shrinker which goes through the list and checks if the THP was underutilized,
-> i.e. how many of the base 4K pages of the entire THP were zero-filled.
+This is a fairly simple series that adds support for triggered buffers
+to the ad4695 driver.
 
-Sometimes when writing a benchmark I fill things with zero explictly
-to avoid faults later. For example if you want to measure memory
-read bandwidth you need to fault the pages first, but that fault
-pattern may well be zero.
+Not directly related to this patch, but as a side discussion about
+future possibilities with this chip while we are here...
 
-With your patch if there is memory pressure there are two effects:
+The advanced sequencer on this chip can repeat the same channel multiple
+times which, when combined with the autocycle feature, can be used to
+create different effective sampling rates for individual channels.
 
-- If things are remapped to the zero page the benchmark
-reading memory may give unrealistically good results because
-what is thinks is a big memory area is actually only backed
-by a single page.
+For example if we set up the sequence [IN1, IN2, IN1, IN3] and the time
+between each individual sample in the sequence is the same, then IN1 has
+an effective sampling rate of 2x the other channels.
 
-- If I expect to write I may end up with an unexpected zeropage->real
-memory fault if the pages got remapped. 
+Have there ever been discussions before about implementing something
+like this in the IIO subsystem? I didn't see anything that looked like
+this already implemented in the kernel.
 
-I expect such patterns can happen without benchmarking too.
-I could see it being a problem for latency sensitive applications.
+---
+Changes in v2:
+v2 changes:
+* Don't error when only temperature channel is enabled, just add extra
+  xfer instead.
+* Drop use of reg/mask/val local variables.
+* Use struct initializer for xfer in ad4695_exit_conversion_mode().
+* Simplify return at end ad4695_buffer_preenable().
+* Use t_ACQ instead of t_CNVL to ensure proper acquisition time.
+* The temperature channel changes weren't quite trivial, so I didn't
+  pick up Nuno's Reviewed-by.
+* Link to v1: https://lore.kernel.org/r/20240807-iio-adc-ad4695-buffered-read-v1-0-bdafc39b2283@baylibre.com
 
-Now you could argue that this all should only happen under memory
-pressure and when that happens things may be slow anyways and your
-patch will still be an improvement.
+---
+David Lechner (2):
+      iio: adc: ad4695: implement triggered buffer
+      doc: iio: ad4695: document buffered read
 
-Maybe that's true but there might be still corner cases
-which are negatively impacted by this. I don't have a good solution
-other than a tunable, but I expect it will cause problems for someone.
+ Documentation/iio/ad4695.rst |   9 +-
+ drivers/iio/adc/ad4695.c     | 250 ++++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 255 insertions(+), 4 deletions(-)
+---
+base-commit: d505a9dc8de83df2a8ce8c9e780f7b29887f34af
+change-id: 20240807-iio-adc-ad4695-buffered-read-f49eb511e300
 
-The other problem I have with your patch is that it may cause the kernel
-to pollute CPU caches in the background, which again will cause noise in
-the system. Instead of plain memchr_inv, you should probably use some
-primitive to bypass caches or use a NTA prefetch hint at least.
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
--Andi
 
