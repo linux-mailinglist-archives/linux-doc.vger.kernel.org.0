@@ -1,311 +1,220 @@
-Return-Path: <linux-doc+bounces-22750-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-22752-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC1C0950EE9
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 23:17:07 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 54C0B951002
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Aug 2024 00:58:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A8940284A2A
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 21:17:03 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 71F321C22E2C
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2024 22:58:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A51481AED3A;
-	Tue, 13 Aug 2024 21:13:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 111021AB521;
+	Tue, 13 Aug 2024 22:58:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="Uo3f19j/"
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="bnUyn2ta"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f202.google.com (mail-yw1-f202.google.com [209.85.128.202])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 266561AE855
-	for <linux-doc@vger.kernel.org>; Tue, 13 Aug 2024 21:13:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.202
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0264E1AAE0A;
+	Tue, 13 Aug 2024 22:58:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1723583631; cv=none; b=b8OXLiuv22cdeiWQdwLR2rSMhJ5mkUzYx9Jdvn5KBQi39376wD1bE3BUWiZr1OK8vZsiXaeiBHxHlKz8AlmjtaXsFwhu3khniVBn6GNMn8/mbJeoXi3FUQu8RqZL+d2BflTL/uwKHy3C4e8SHjQWocP5ylcjZNWcKUigdeUXRPw=
+	t=1723589893; cv=none; b=ASRDIGH3jwc5gKWXkhLdjYS1xIDZ+lNsHTPBHRd1ruXT/mYaCMJ90E8NGhIsboSeexiH0y4aPh+Tr8LMQNp6QZGEQ2xHle/ZXWD63/1rGvd+Id2Y3Dy3BMgXfsKhCRmKOriIOtfSClWqlyEP/VkwqKXoQCF+TnoD+yuadPZsE90=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1723583631; c=relaxed/simple;
-	bh=e4G5JvNaur+zqHlm2owDRW9K+aQAG/77haI5TcQ7l1w=;
-	h=Date:Mime-Version:Message-ID:Subject:From:To:Cc:Content-Type; b=YmjnkeRZyQyKgpA85doEPXBcbfeydCcKSqM4vxdUkNZFRro+WiL0MneATy5TBS/Z7u0oFE5oTvAE4ZxXOfnnBR5LAS6+j63VWK7cGhms2xJ1H32aQZj/7TolGrh/fwqKMCi351UUwQ4EnkHkW1JJ8Z0IQBW3pZQ7DTStuniRyy0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--almasrymina.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Uo3f19j/; arc=none smtp.client-ip=209.85.128.202
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--almasrymina.bounces.google.com
-Received: by mail-yw1-f202.google.com with SMTP id 00721157ae682-64b70c4a269so120439177b3.1
-        for <linux-doc@vger.kernel.org>; Tue, 13 Aug 2024 14:13:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1723583625; x=1724188425; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=vVCV87jZy8PxhPLAls7YmMLOhmnFqtjE+KOvYzSFbII=;
-        b=Uo3f19j/2YevWTLyJx+U4ptOWemBHxZhbHNlUldnIxzQqWpv8YNqeUtBICQn07gDIj
-         jPciVtfD9AqyGvWJRPB9P796PF13EKIrIby3FiIkYo0dvQPIPu/vdUouljFTXgpSccZt
-         BRYt/xLhYPpCeFM9SF+xMf8Lir/HKgefOOWRZw1Dzs0hfD0IVLs6Yl8QshETJCLOOeL7
-         NUX22F693WMmIYW3QnH5IJDIkh9EoffIYxeHosKk3dvIvGIvlEJnzX2N/+ZVgZWzXZXb
-         5ByP0EPKuVbsX7wToIKmrYCfRI800EmOWvd80L32e8v1A+A8bgp8XX8DaG79Pk4y2459
-         ovDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723583625; x=1724188425;
-        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=vVCV87jZy8PxhPLAls7YmMLOhmnFqtjE+KOvYzSFbII=;
-        b=bSnvSfGtVV6wbnAGHKg9/DjALkopc0YxGN2+6sZGHpDge/I7Yfjqnq6opZqNhfbRbr
-         OBuz8J/QJRby22T4JNm9+ihK/66Fq9GVJ1mJ4OR4PuFiY2OA276XPzPFNaSRZtr8Xsvu
-         uBOCcafsGLAaENfHQdDNoPW2jzwXkR4PKZ95+nSTJJL3yjTmsBBQHa9G7EK7WlOS8NAj
-         bx8Wupr3A+6f59q1sybmFJbtMMvMJrNiioa0C15p8HzYkyzW65urG/MG9XtEFDEPCxuf
-         8N9WjTzkrWyNKszT2bhpYwFdoSRVnqL0w7Ft2Fm9HP0qVtoSZLPU9upj8oO6uX+IPVns
-         9oow==
-X-Forwarded-Encrypted: i=1; AJvYcCV+DCZAidcbvT6hoElDZKe0RgliJKTYuuj/IaytqBlxQbNfqcooV7RUgQBjAwwBADOZcAB9JPfhxmE=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyy/USRJZMzRHBO3HAEXz3nZduIlAJwU3KnLapdOApM2Tt1mAke
-	wCo8TtZ0izJPEVHQXwuQDjO6xdfuaaUen7JOqwz5dN1Q8HmFQkCzieXCf7MI5LuA8lbZmyNw7cL
-	tLFWlguWzrdC1Ie0+bucKOg==
-X-Google-Smtp-Source: AGHT+IEUS873qk8VJeJaElarGm2oSh0h5cRThNQuqxPVzKK1sq1PaPCKqLN7RDPePKRRnOoG+C0KKCx0gcyeGVu8jA==
-X-Received: from almasrymina.c.googlers.com ([fda3:e722:ac3:cc00:20:ed76:c0a8:4bc5])
- (user=almasrymina job=sendgmr) by 2002:a81:e80a:0:b0:62c:f6fd:5401 with SMTP
- id 00721157ae682-6ac99fa910bmr65837b3.6.1723583624619; Tue, 13 Aug 2024
- 14:13:44 -0700 (PDT)
-Date: Tue, 13 Aug 2024 21:13:15 +0000
+	s=arc-20240116; t=1723589893; c=relaxed/simple;
+	bh=v6pouzSjcUubJw/OLcJ2anfWGui3sH49fxAKvgWiqqg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=MDq7ueVEB8/oyUgTHOKgDEiuz9uUDOdHx9ITC2S64uczaDGy3dzutF2tiqmPB7tEaswlKVJIaP2BMdKKy+KGP+Ui4A4bpHZ1bYrSupKlV62qUxeFA7oq1e9/h02Ypyb3u6Enj8FRojxpilp3+kNAytgWRQYITMvRM+MYUUGHcpU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=bnUyn2ta; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47DCpTrR002395;
+	Tue, 13 Aug 2024 22:57:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	gIL8R124Of5TZX5wuk8bz/6NSDthT5u39JslZvw5xWQ=; b=bnUyn2taEsFo120f
+	aDfi8xAXE4/49Wtnkp+VAjs0ie7H24kmQ0Zb52l2H9wyJoCTanQUlwIXXGs4iiH0
+	lKug3mE1Y6rSOmhAyznmCo1ei9k+wrSv2BIKiImss5YVIGMOC2iIpYRLSD2pVeQk
+	KBFFL2lsPummAneqfAlYXjKdjDew10e5rOw0RON7NebDDuT5WVqDkFTaME6TrgOu
+	CfMPyLOH5XotZ0brNyMxp3JPlFO4CTK7FJkf9U0PwY7vjrVdAqusnvQnQvaQs1Bh
+	ZrhITT2EvsKyaWdycfPcXk2dcfacAx0wTcqdQyGU5HqSVRstzK45b9amykW43gGn
+	uXydyg==
+Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 40x16815va-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 13 Aug 2024 22:57:47 +0000 (GMT)
+Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
+	by NALASPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 47DMvjSW005026
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 13 Aug 2024 22:57:45 GMT
+Received: from [10.110.24.42] (10.80.80.8) by nalasex01b.na.qualcomm.com
+ (10.47.209.197) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Tue, 13 Aug
+ 2024 15:57:45 -0700
+Message-ID: <6855763c-0230-4535-a603-343059de5202@quicinc.com>
+Date: Tue, 13 Aug 2024 15:57:44 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.46.0.76.ge559c4bf1a-goog
-Message-ID: <20240813211317.3381180-14-almasrymina@google.com>
-Subject: [PATCH net-next v19 13/13] netdev: add dmabuf introspection
-From: Mina Almasry <almasrymina@google.com>
-To: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-alpha@vger.kernel.org, 
-	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org, 
-	sparclinux@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	bpf@vger.kernel.org, linux-media@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org
-Cc: Mina Almasry <almasrymina@google.com>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
-	Donald Hunter <donald.hunter@gmail.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Richard Henderson <richard.henderson@linaro.org>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, 
-	Matt Turner <mattst88@gmail.com>, Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Helge Deller <deller@gmx.de>, 
-	Andreas Larsson <andreas@gaisler.com>, Jesper Dangaard Brouer <hawk@kernel.org>, 
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Arnd Bergmann <arnd@arndb.de>, Steffen Klassert <steffen.klassert@secunet.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, David Ahern <dsahern@kernel.org>, 
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>, 
-	Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, 
-	John Fastabend <john.fastabend@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, 
-	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>, Bagas Sanjaya <bagasdotme@gmail.com>, 
-	Christoph Hellwig <hch@infradead.org>, Nikolay Aleksandrov <razor@blackwall.org>, Taehee Yoo <ap420073@gmail.com>, 
-	Pavel Begunkov <asml.silence@gmail.com>, David Wei <dw@davidwei.uk>, Jason Gunthorpe <jgg@ziepe.ca>, 
-	Yunsheng Lin <linyunsheng@huawei.com>, Shailend Chand <shailend@google.com>, 
-	Harshitha Ramamurthy <hramamurthy@google.com>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v24 09/34] ASoC: Add SOC USB APIs for adding an USB
+ backend
+To: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+        <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
+        <perex@perex.cz>, <conor+dt@kernel.org>, <corbet@lwn.net>,
+        <broonie@kernel.org>, <lgirdwood@gmail.com>, <krzk+dt@kernel.org>,
+        <Thinh.Nguyen@synopsys.com>, <bgoswami@quicinc.com>, <tiwai@suse.com>,
+        <gregkh@linuxfoundation.org>, <robh@kernel.org>
+CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-sound@vger.kernel.org>, <linux-usb@vger.kernel.org>,
+        <linux-arm-msm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <alsa-devel@alsa-project.org>
+References: <20240801011730.4797-1-quic_wcheng@quicinc.com>
+ <20240801011730.4797-10-quic_wcheng@quicinc.com>
+ <09fde4e6-c3be-484d-a7a5-bd653dc42094@linux.intel.com>
+ <f761530c-a49b-4dd5-b01c-97d08931e0ab@quicinc.com>
+ <acf4de1d-d551-4539-8353-3c85aa3d965c@linux.intel.com>
+Content-Language: en-US
+From: Wesley Cheng <quic_wcheng@quicinc.com>
+In-Reply-To: <acf4de1d-d551-4539-8353-3c85aa3d965c@linux.intel.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nalasex01b.na.qualcomm.com (10.47.209.197)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-GUID: _WsJpwi-2I3ra7escjcgBbfBvs8wZqXW
+X-Proofpoint-ORIG-GUID: _WsJpwi-2I3ra7escjcgBbfBvs8wZqXW
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-08-13_12,2024-08-13_02,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 clxscore=1015
+ suspectscore=0 mlxlogscore=999 impostorscore=0 malwarescore=0 spamscore=0
+ mlxscore=0 priorityscore=1501 phishscore=0 adultscore=0 lowpriorityscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2407110000
+ definitions=main-2408130165
 
-Add dmabuf information to page_pool stats:
+Hi Pierre,
 
-$ ./cli.py --spec ../netlink/specs/netdev.yaml --dump page-pool-get
-...
- {'dmabuf': 10,
-  'id': 456,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 455,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 454,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 453,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 452,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 451,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 450,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 449,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
+On 8/1/2024 11:26 PM, Pierre-Louis Bossart wrote:
+>
+> On 8/1/24 23:43, Wesley Cheng wrote:
+>> Hi Pierre,
+>>
+>> On 8/1/2024 1:02 AM, Pierre-Louis Bossart wrote:
+>>>
+>>>> +/**
+>>>> + * struct snd_soc_usb_device
+>>>> + * @card_idx - sound card index associated with USB device
+>>>> + * @pcm_idx - PCM device index associated with USB device
+>>>> + * @chip_idx - USB sound chip array index
+>>>> + * @num_playback - number of playback streams
+>>>> + * @num_capture - number of capture streams
+>>> so here we have a clear separation between playback and capture...
+>> Thanks for the quick review of the series, I know that its a lot of work, so its much appreciated.
+>>
+>> I guess in the past revisions there was some discussions that highlighted on the fact that, currently, in our QC USB offload implementation we're supporting playback only, and maybe it should be considered to also expand on the capture path.  I went ahead and added some sprinkles of that throughout the SOC USB layer, since its vendor agnostic, and some vendors may potentially have that type of support.  Is it safe to assume that this is the right thinking?  If so, I will go and review some of the spots that may need to consider both playback and capture paths ONLY for soc-usb. (as you highlighted one below)  Else, I can note an assumption somewhere that soc-usb supports playback only and add the capture path when implemented.
+> I don't think it's as simple as playback only or playback+capture. If
+> there is no support for capture, then there is also no support for
+> devices with implicit feedback - which uses the capture path. So you
+> gradually start drawing a jagged boundary of what is supported and what
+> isn't.
+>
+> My preference would be to add capture in APIs where we can, with TODOs
+> added to make sure no one us under any illusion that the code is fully
+> tested. But at least some of the basic plumbing will be in place.
+>
+> Takashi should chime in on this...
+>
+>>>> + * @list - list head for SoC USB devices
+>>>> + **/
+>>>> +struct snd_soc_usb_device {
+>>>> +	int card_idx;
+>>>> +	int pcm_idx;
+>>>> +	int chip_idx;
+>>>> +	int num_playback;
+>>>> +	int num_capture;
+>>>> +	struct list_head list;
+>>>> +};
+>>>> +
+>>>> +/**
+>>>> + * struct snd_soc_usb
+>>>> + * @list - list head for SND SOC struct list
+>>>> + * @component - reference to ASoC component
+>>>> + * @num_supported_streams - number of supported concurrent sessions
+>>> ... but here we don't. And it's not clear what the working 'sessions'
+>>> means in the comment.
 
-And queue stats:
+After taking a look at this "num_supported_streams" naming a bit more, I wanted to check with you to see adds to the complexity of the terminology being used across soc-usb.
 
-$ ./cli.py --spec ../netlink/specs/netdev.yaml --dump queue-get
-...
-{'dmabuf': 10, 'id': 8, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 9, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 10, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 11, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 12, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 13, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 14, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 15, 'ifindex': 3, 'type': 'rx'},
+The intention of this is to define how many concurrent USB devices the USB backend can support.  So for example, if the audio DSP did support multiple USB devices at the same time, this would denote that.  This is where I wanted to make sure the terminology was right....  So in this case, to me, it makes more sense if num_supported_streams --> num_supported_devices, because it determines how many USB devices the ASoC USB backend DAI can manage/support.  This adds a bit to the reason why I think using the term "port" for explaining the SOC USB context is reasonable.
 
-Suggested-by: Jakub Kicinski <kuba@kernel.org>
-Signed-off-by: Mina Almasry <almasrymina@google.com>
-Reviewed-by: Jakub Kicinski <kuba@kernel.org>
+Thanks
 
----
- Documentation/netlink/specs/netdev.yaml | 10 ++++++++++
- include/uapi/linux/netdev.h             |  2 ++
- net/core/netdev-genl.c                  | 10 ++++++++++
- net/core/page_pool_user.c               |  4 ++++
- tools/include/uapi/linux/netdev.h       |  2 ++
- 5 files changed, 28 insertions(+)
+Wesley Cheng
 
-diff --git a/Documentation/netlink/specs/netdev.yaml b/Documentation/netlink/specs/netdev.yaml
-index 0c747530c275..08412c279297 100644
---- a/Documentation/netlink/specs/netdev.yaml
-+++ b/Documentation/netlink/specs/netdev.yaml
-@@ -167,6 +167,10 @@ attribute-sets:
-           "re-attached", they are just waiting to disappear.
-           Attribute is absent if Page Pool has not been detached, and
-           can still be used to allocate new memory.
-+      -
-+        name: dmabuf
-+        doc: ID of the dmabuf this page-pool is attached to.
-+        type: u32
-   -
-     name: page-pool-info
-     subset-of: page-pool
-@@ -268,6 +272,10 @@ attribute-sets:
-         name: napi-id
-         doc: ID of the NAPI instance which services this queue.
-         type: u32
-+      -
-+        name: dmabuf
-+        doc: ID of the dmabuf attached to this queue, if any.
-+        type: u32
- 
-   -
-     name: qstats
-@@ -543,6 +551,7 @@ operations:
-             - inflight
-             - inflight-mem
-             - detach-time
-+            - dmabuf
-       dump:
-         reply: *pp-reply
-       config-cond: page-pool
-@@ -607,6 +616,7 @@ operations:
-             - type
-             - napi-id
-             - ifindex
-+            - dmabuf
-       dump:
-         request:
-           attributes:
-diff --git a/include/uapi/linux/netdev.h b/include/uapi/linux/netdev.h
-index 91bf3ecc5f1d..7c308f04e7a0 100644
---- a/include/uapi/linux/netdev.h
-+++ b/include/uapi/linux/netdev.h
-@@ -93,6 +93,7 @@ enum {
- 	NETDEV_A_PAGE_POOL_INFLIGHT,
- 	NETDEV_A_PAGE_POOL_INFLIGHT_MEM,
- 	NETDEV_A_PAGE_POOL_DETACH_TIME,
-+	NETDEV_A_PAGE_POOL_DMABUF,
- 
- 	__NETDEV_A_PAGE_POOL_MAX,
- 	NETDEV_A_PAGE_POOL_MAX = (__NETDEV_A_PAGE_POOL_MAX - 1)
-@@ -131,6 +132,7 @@ enum {
- 	NETDEV_A_QUEUE_IFINDEX,
- 	NETDEV_A_QUEUE_TYPE,
- 	NETDEV_A_QUEUE_NAPI_ID,
-+	NETDEV_A_QUEUE_DMABUF,
- 
- 	__NETDEV_A_QUEUE_MAX,
- 	NETDEV_A_QUEUE_MAX = (__NETDEV_A_QUEUE_MAX - 1)
-diff --git a/net/core/netdev-genl.c b/net/core/netdev-genl.c
-index 88017ee22d2f..56b7790607b1 100644
---- a/net/core/netdev-genl.c
-+++ b/net/core/netdev-genl.c
-@@ -293,6 +293,7 @@ static int
- netdev_nl_queue_fill_one(struct sk_buff *rsp, struct net_device *netdev,
- 			 u32 q_idx, u32 q_type, const struct genl_info *info)
- {
-+	struct net_devmem_dmabuf_binding *binding;
- 	struct netdev_rx_queue *rxq;
- 	struct netdev_queue *txq;
- 	void *hdr;
-@@ -312,6 +313,15 @@ netdev_nl_queue_fill_one(struct sk_buff *rsp, struct net_device *netdev,
- 		if (rxq->napi && nla_put_u32(rsp, NETDEV_A_QUEUE_NAPI_ID,
- 					     rxq->napi->napi_id))
- 			goto nla_put_failure;
-+
-+		binding = (struct net_devmem_dmabuf_binding *)
-+				  rxq->mp_params.mp_priv;
-+		if (binding) {
-+			if (nla_put_u32(rsp, NETDEV_A_QUEUE_DMABUF,
-+					binding->id))
-+				goto nla_put_failure;
-+		}
-+
- 		break;
- 	case NETDEV_QUEUE_TYPE_TX:
- 		txq = netdev_get_tx_queue(netdev, q_idx);
-diff --git a/net/core/page_pool_user.c b/net/core/page_pool_user.c
-index cbc54ee4f670..4e18db82450e 100644
---- a/net/core/page_pool_user.c
-+++ b/net/core/page_pool_user.c
-@@ -212,6 +212,7 @@ static int
- page_pool_nl_fill(struct sk_buff *rsp, const struct page_pool *pool,
- 		  const struct genl_info *info)
- {
-+	struct net_devmem_dmabuf_binding *binding = pool->mp_priv;
- 	size_t inflight, refsz;
- 	void *hdr;
- 
-@@ -241,6 +242,9 @@ page_pool_nl_fill(struct sk_buff *rsp, const struct page_pool *pool,
- 			 pool->user.detach_time))
- 		goto err_cancel;
- 
-+	if (binding && nla_put_u32(rsp, NETDEV_A_PAGE_POOL_DMABUF, binding->id))
-+		goto err_cancel;
-+
- 	genlmsg_end(rsp, hdr);
- 
- 	return 0;
-diff --git a/tools/include/uapi/linux/netdev.h b/tools/include/uapi/linux/netdev.h
-index 91bf3ecc5f1d..7c308f04e7a0 100644
---- a/tools/include/uapi/linux/netdev.h
-+++ b/tools/include/uapi/linux/netdev.h
-@@ -93,6 +93,7 @@ enum {
- 	NETDEV_A_PAGE_POOL_INFLIGHT,
- 	NETDEV_A_PAGE_POOL_INFLIGHT_MEM,
- 	NETDEV_A_PAGE_POOL_DETACH_TIME,
-+	NETDEV_A_PAGE_POOL_DMABUF,
- 
- 	__NETDEV_A_PAGE_POOL_MAX,
- 	NETDEV_A_PAGE_POOL_MAX = (__NETDEV_A_PAGE_POOL_MAX - 1)
-@@ -131,6 +132,7 @@ enum {
- 	NETDEV_A_QUEUE_IFINDEX,
- 	NETDEV_A_QUEUE_TYPE,
- 	NETDEV_A_QUEUE_NAPI_ID,
-+	NETDEV_A_QUEUE_DMABUF,
- 
- 	__NETDEV_A_QUEUE_MAX,
- 	NETDEV_A_QUEUE_MAX = (__NETDEV_A_QUEUE_MAX - 1)
--- 
-2.46.0.76.ge559c4bf1a-goog
-
+>>>> + * @connection_status_cb - callback to notify connection events
+>>>> + * @priv_data - driver data
+>>>> + **/
+>>>> +struct snd_soc_usb {
+>>>> +	struct list_head list;
+>>>> +	struct snd_soc_component *component;
+>>>> +	unsigned int num_supported_streams;
+>>>> +	int (*connection_status_cb)(struct snd_soc_usb *usb,
+>>>> +			struct snd_soc_usb_device *sdev, bool connected);
+>>>> +	void *priv_data;
+>>>> +};
+>>>> +/**
+>>>> + * snd_soc_usb_allocate_port() - allocate a SOC USB device
+>>> USB port?
+>> Noted, refer to the last comment.
+>>>> + * @component: USB DPCM backend DAI component
+>>>> + * @num_streams: number of offloading sessions supported
+>>> same comment, is this direction-specific or not?
+>> Depending on what you think about my first comment above, I'll also fix or remove the concept of direction entirely.
+>>>> + * @data: private data
+>>>> + *
+>>>> + * Allocate and initialize a SOC USB device.  This will populate parameters that
+>>>> + * are used in subsequent sequences.
+>>>> + *
+>>>> + */
+>>>> +struct snd_soc_usb *snd_soc_usb_allocate_port(struct snd_soc_component *component,
+>>>> +					      int num_streams, void *data)
+>>>> +{
+>>>> +	struct snd_soc_usb *usb;
+>>>> +
+>>>> +	usb = kzalloc(sizeof(*usb), GFP_KERNEL);
+>>>> +	if (!usb)
+>>>> +		return ERR_PTR(-ENOMEM);
+>>>> +
+>>>> +	usb->component = component;
+>>>> +	usb->priv_data = data;
+>>>> +	usb->num_supported_streams = num_streams;
+>>>> +
+>>>> +	return usb;
+>>>> +}
+>>>> +EXPORT_SYMBOL_GPL(snd_soc_usb_allocate_port);
+>>>> +
+>>>> +/**
+>>>> + * snd_soc_usb_free_port() - free a SOC USB device
+>>>> + * @usb: allocated SOC USB device
+>>>> +
+>>>> + * Free and remove the SOC USB device from the available list of devices.
+>>> Now I am lost again on the device:port relationship. I am sure you've
+>>> explained this before but I forget things and the code isn't
+>>> self-explanatory.
+>>>
+>> Ok, I think the problem is that I'm interchanging the port and device terminology, because from the USB perspective its one device connected to a USB port, so its a one-to-one relation.  Removing that mindset, I think the proper term here would still be "port," because in the end SOC USB is always only servicing a port.  If this is the case, do you have any objections using this terminology in the Q6AFE as well as ASoC?  I will use consistent wording throughout SOC USB if so.
+> I am not sure USB uses 'port' at all. If by 'port' you meant 'connector'
+> it's not quite right, USB audio works across hubs.
+>
+>
 
