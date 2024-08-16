@@ -1,115 +1,132 @@
-Return-Path: <linux-doc+bounces-22918-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-22920-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13DF09545D8
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Aug 2024 11:34:27 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id BC99E9545E2
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Aug 2024 11:37:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B7B0E1F273DD
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Aug 2024 09:34:26 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 676991F24289
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Aug 2024 09:37:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F1002145B10;
-	Fri, 16 Aug 2024 09:33:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 31E0212D1FA;
+	Fri, 16 Aug 2024 09:36:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YhERtfXL"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="meElQHqM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E08513DDDF;
-	Fri, 16 Aug 2024 09:32:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A804320E3;
+	Fri, 16 Aug 2024 09:36:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1723800780; cv=none; b=ajH/7hVUT3GQc8VQ2cF4N+ihowlTCKHWL/dw9SLQYPMs3295eVejkRYorKBOH8UDaIJmxTNMBVli82x47I5Ru8IM+l7CTrFhmVBsEtpyG3GWbmgjkeYCgdHeAI1yRWLV5l2DdR7viEnoTlwEsbb1tWxRH7cXuFhuo3arp56LdJI=
+	t=1723801017; cv=none; b=LE83H/Beasb21JQl7NGXmMGu1F36J4hKgBtPEj8/vZoVA16n7PnEsRtducO3LkwRvWZEy78bZcYR65tsiGQaBnqzChNPFcp9vgcJjRZztzROGJTBPBNXW3O/it5O538ueKrqnxeooOD80B9tFukBEEDNIfmB5F+Edy4ipuNOmho=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1723800780; c=relaxed/simple;
-	bh=vzV7s0uXOhnuzB9vBu1I619DnFq9lY/7GwRKYcwaB+g=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=W01oyoXn0npHOqoV5fScPpGsmoonFGpv4redcwcw9IPwWp0Bg8dSDfIb8xM+SLIeAcugJ94tUzcqHWjlg+gf4ZZnI8TrmlgDIUxaWYejY1F/CxM4M6xg6ht71btk2iwrzuBosl40BwjRUqywnUg2B/Uzn3jgoiqcA+PoxCotqJQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YhERtfXL; arc=none smtp.client-ip=209.85.210.181
+	s=arc-20240116; t=1723801017; c=relaxed/simple;
+	bh=r3gmMajOMo8VTdTFYIotH7psmm327sqr/zDPwXFcatQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=iFg1wTljoQzsO3QIGxjYXkad1edYjzH6yaExxO3CZzcE8OHIcFv+piBccMhuuwQpzWYj+j1C3iSg7qExdscFsvw/2liisMFUFsxYQ3QFS9MTyEGLyda/MrM08fSGYQyIqTWtTe4bXS14cRGp8Kkfeuhigw5AZWaaK3kjXsYTInE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=meElQHqM; arc=none smtp.client-ip=209.85.214.169
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-70d28023accso1459885b3a.0;
-        Fri, 16 Aug 2024 02:32:59 -0700 (PDT)
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-201e64607a5so13282305ad.2;
+        Fri, 16 Aug 2024 02:36:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723800779; x=1724405579; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4K2SAW8wicjlsk7/nPqqUv3f0uftRhtXUIcN9ovpuH0=;
-        b=YhERtfXLg1tWXo67aNgFc+fpCLa7AJp4n4THTcxDAaQttITzgudYZX2Wep36L79HzX
-         UmZcvjjOop9B3Nz1M1G95Yqn7wAMUj5JEiRwAnQ+1eSHVPlxsLuKtTIZgq+XgnLk1Bss
-         8iAHYFZSBH5ui8iIPNKKeNnAX+vUzv7wrBF7GAo2QG1N+b1jttYR9IYZRoboY/k4/Lku
-         7N/yY25LORdP9Q7H36ZK5VeN4ePC7tqoeuISiKJwFv924k911yogw+fQ1JxfxjJ0Q4n2
-         rcF4ZWTrTIlV4+G8iBO3HPW39QLmzudw0rJPQvh7F6XpMFkoLzEycaXA8lj/tkh/tqRb
-         HQ2g==
+        d=gmail.com; s=20230601; t=1723801015; x=1724405815; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NdvxhlCkMHRIJStiK9mOuuQNjL800lm6joC3OBAJcWo=;
+        b=meElQHqM2T6LW8uuEB+wwJEyUhqfcWN8DJaWB1BSHvVXh0NBaW0B63Py1orORKyRbl
+         rzQqLWQsTurCsNJJHfefKZeX/IIHnIO146+JXScNMZ6YHLX0DraPNY3maVkLxGwOWISe
+         NyrDzMF/8rwVMy6Y5NjeTqmsGKA0TwcXOPaq/zn3LaMS5Qa/JizNvNjizJsWHgnhbO4m
+         oRUm95KsmmHpXRkTnssFmx50KT9wPlLVleGi+3GDmxUnKO6GqJZmKmRO3K2pj+e2FZoF
+         KZf9bgOD/j54ZielTrM3SzYvjA521SZdy9v5uraxmqQcLwnmHWm1Ri0UaOyqy0URbul1
+         QDYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723800779; x=1724405579;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=4K2SAW8wicjlsk7/nPqqUv3f0uftRhtXUIcN9ovpuH0=;
-        b=MQqkSPL5bCt0VFMPVFJgv+H72bvKCA5yRF6zT02cjMRPfYBSQpk01+0i2CaS1+QueF
-         YNs0goL4+nUfEdooa3RMroYi5brQkF2CMn5xoOVfP1or8T8ws7kztoafbSiw+8nDnd/a
-         1aAQX/O4XNZm3iARavLgEGPXvA7I7i7K7N3Luv9VvYuoJb+btshEM9aXElBewq/mk3Bp
-         gxrBTfLiQgCIePQ99+L5PSe6ZyU9LKpn5DsnG4NjwPGPzR1HVh95i5e+Pe6ZBF3xOOpg
-         szlnViUZ3AsRKCUrdMOa9+6CxZOv9D5K9D7xNAtpuONVS6KjlTwmBZAZgi73ukIO5EsI
-         UXPQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVIjzsGdpOweK0nb+3d9jNvHPomuYmgiOIZXFj9QeD8nrSac9YPvmnFQmlNKs6Bt9F62le0UYm9/OIiMRfXu16l36FtIX63vXh5iJokFDj7pho14DLv1k5WZ9HO/k22ojliU8A9ZcjK
-X-Gm-Message-State: AOJu0Yw5rmXJ5GsJHqSqdsn8EJD92DqnB/HwleJ1zo6gos+Fx1RUBejI
-	jKV/ly6iyiSYtbh6JvW2GlsofAne36e+9z1U+Jr8JZCDpJ9ysbW67YYcvd+xl+xi+JebT9LJDg3
-	xmemd3ZpO98vYtrf4zaeR8AW7cjU=
-X-Google-Smtp-Source: AGHT+IGuiyJCkiCZWSgYr+KLXxSH3mI/mynqTtCAGa3wQ0oyjddENi8mNVdupx9Sg5znl6H1+pcYB5g0cTCiV2dC1Po=
-X-Received: by 2002:a05:6a21:3a96:b0:1c4:c7ae:ecea with SMTP id
- adf61e73a8af0-1c904f6bc33mr2730930637.11.1723800778713; Fri, 16 Aug 2024
- 02:32:58 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1723801015; x=1724405815;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NdvxhlCkMHRIJStiK9mOuuQNjL800lm6joC3OBAJcWo=;
+        b=XxSWovdTMGQty4MnKxlrKKOlwZjiiWr9UAJ1wF4tmsdfcYelnXgXEaVPhEjkE5cAXA
+         ryZHiOlw9Fv48y1PehggNSRHNDhjqn9kHR13XQhvhVI8KzaJiyi8e5yNc2ByyjFG0unW
+         w4wgpd5R7xFqGWfO4vzKWDV64PeTVdCKnTD+cjR+ZhSD6XRsiPrG1zAMNNljeCTqLM0q
+         fuiOfNrypjYc9gQh0Mc8AU7cAzrhJs60Y/Jm19aqVn/XvLOUNsaV5kz/VsmmLZpHCBcU
+         Vzv8HD+Q6bWrqWLVxWKhN4mLhujX9PF7cdwjocjEdW8dc604eShUG4sYxpxFPM4tVT7/
+         OaUw==
+X-Forwarded-Encrypted: i=1; AJvYcCVMVHyQhCWXfaDDDLNAZlphs/p2l1KAUubnMPg8SLq/3M5+TlbKxOzW9MHMWzhdl4+pt4UsJ4Ctn2WtRJZM1gU9MKsyVdtqNhPtuEIYWB5C8HmhfuHDqV8Rg1K2a7KbsYbPT9R7vNkz
+X-Gm-Message-State: AOJu0YzdQwv9C8FoeIPtn3FdIkRt6OCMNCl6K+VxPw+P2vAS22GmY8kK
+	0Qhr+BFfdpGeaEYwSIfHWXL57Gc1ynxTXPJxeoBKB6hbYCRTw2wU
+X-Google-Smtp-Source: AGHT+IFvZsE2iLKLxiKZ0w7O6KWuL7VWOQUBF+uBCgvhKsviF/EHYAvFR09f7ZJytsckUFN8LJ8uBw==
+X-Received: by 2002:a17:902:c946:b0:202:1547:66ad with SMTP id d9443c01a7336-202154770famr1122845ad.65.1723801014717;
+        Fri, 16 Aug 2024 02:36:54 -0700 (PDT)
+Received: from purva-IdeaPad-Gaming-3-15IHU6.. (126-84.iitb.ac.in. [103.21.126.84])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-201f031bc76sm22277545ad.96.2024.08.16.02.36.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 16 Aug 2024 02:36:54 -0700 (PDT)
+From: SurajSonawane2415 <surajsonawane0215@gmail.com>
+To: linux@leemhuis.info
+Cc: corbet@lwn.net,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	SurajSonawane2415 <surajsonawane0215@gmail.com>
+Subject: [PATCH v3] docs: Fix grammar and phrasing errors in reporting-issues.rst
+Date: Fri, 16 Aug 2024 15:06:46 +0530
+Message-Id: <20240816093646.116091-1-surajsonawane0215@gmail.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240816092536.2444105-1-vincent@woltmann.art>
-In-Reply-To: <20240816092536.2444105-1-vincent@woltmann.art>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Fri, 16 Aug 2024 11:32:45 +0200
-Message-ID: <CANiq72nN+x9FR8whpiEFtUr+4gkBN=pfw6URO9VO31qtX7=5Bg@mail.gmail.com>
-Subject: Re: [PATCH] rust: Remove erronous blockquote in coding guidelines
-To: vincent@woltmann.art
-Cc: rust-for-linux@vger.kernel.org, Miguel Ojeda <ojeda@kernel.org>, 
-	Alex Gaynor <alex.gaynor@gmail.com>, Wedson Almeida Filho <wedsonaf@gmail.com>, 
-	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
-	=?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
-	Benno Lossin <benno.lossin@proton.me>, Andreas Hindborg <a.hindborg@samsung.com>, 
-	Alice Ryhl <aliceryhl@google.com>, Jonathan Corbet <corbet@lwn.net>, Julian Merkle <me@jvmerkle.de>, 
-	Wei Liu <wei.liu@kernel.org>, Sven Van Asbroeck <thesven73@gmail.com>, 
-	Adam Bratschi-Kaye <ark.email@gmail.com>, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, 
-	open list <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 16, 2024 at 11:26=E2=80=AFAM Vincent Woltmann <vincent@woltmann=
-.art> wrote:
->
-> -    While sometimes the reason might look trivial and therefore unneeded=
-,
-> -    writing these comments is not just a good way of documenting what ha=
-s been
-> -    taken into account, but most importantly, it provides a way to know =
-that
-> -    there are no *extra* implicit constraints.
-> +While sometimes the reason might look trivial and therefore unneeded,
-> +writing these comments is not just a good way of documenting what has be=
-en
-> +taken into account, but most importantly, it provides a way to know that
-> +there are no *extra* implicit constraints.
+Fix grammatical errors and improve phrasing in the `reporting-issues.rst`
+documentation file. These changes enhance readability and ensure the
+accuracy of the instructions provided.
 
-Doesn't this part of the change make the paragraph be outside its bullet?
+Signed-off-by: SurajSonawane2415 <surajsonawane0215@gmail.com>
+---
+V2 -> V3: Re-added the fix for the line: "That's why you might be need to uninstall the".
+V1 -> V2: emoved the unwanted change to the line: "try search terms like".
 
-Thanks for the patch!
+ Documentation/admin-guide/reporting-issues.rst | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Cheers,
-Miguel
+diff --git a/Documentation/admin-guide/reporting-issues.rst b/Documentation/admin-guide/reporting-issues.rst
+index 2fd5a030235a..07b2c0b20498 100644
+--- a/Documentation/admin-guide/reporting-issues.rst
++++ b/Documentation/admin-guide/reporting-issues.rst
+@@ -56,7 +56,7 @@ developers. It might be all that's needed for people already familiar with
+ reporting issues to Free/Libre & Open Source Software (FLOSS) projects. For
+ everyone else there is this section. It is more detailed and uses a
+ step-by-step approach. It still tries to be brief for readability and leaves
+-out a lot of details; those are described below the step-by-step guide in a
++out a lot of details; those are described below in the step-by-step guide in a
+ reference section, which explains each of the steps in more detail.
+ 
+ Note: this section covers a few more aspects than the TL;DR and does things in
+@@ -299,7 +299,7 @@ face, even if they look small or totally unrelated. That's why you should report
+ issues with these kernels to the vendor. Its developers should look into the
+ report and, in case it turns out to be an upstream issue, fix it directly
+ upstream or forward the report there. In practice that often does not work out
+-or might not what you want. You thus might want to consider circumventing the
++or might not be what you want. You thus might want to consider circumventing the
+ vendor by installing the very latest Linux kernel core yourself. If that's an
+ option for you move ahead in this process, as a later step in this guide will
+ explain how to do that once it rules out other potential causes for your issue.
+@@ -472,7 +472,7 @@ before proceeding.
+ Note, you might not be aware that your system is using one of these solutions:
+ they often get set up silently when you install Nvidia's proprietary graphics
+ driver, VirtualBox, or other software that requires a some support from a
+-module not part of the Linux kernel. That why your might need to uninstall the
++module not part of the Linux kernel. That's why you might be need to uninstall the
+ packages with such software to get rid of any 3rd party kernel module.
+ 
+ 
+-- 
+2.34.1
+
 
