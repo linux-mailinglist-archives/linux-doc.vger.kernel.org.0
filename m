@@ -1,115 +1,91 @@
-Return-Path: <linux-doc+bounces-23017-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23019-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2ABB89551B2
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Aug 2024 22:03:44 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 64ED39551E3
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Aug 2024 22:38:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BCEF228427D
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Aug 2024 20:03:42 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 57DD01C224F9
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Aug 2024 20:38:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB28F1C3F30;
-	Fri, 16 Aug 2024 20:03:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C2AE31C230D;
+	Fri, 16 Aug 2024 20:38:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=uwaterloo.ca header.i=@uwaterloo.ca header.b="vk8S/x/H"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="z6rR7YkE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from esa.hc503-62.ca.iphmx.com (esa.hc503-62.ca.iphmx.com [216.71.135.51])
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2067.outbound.protection.outlook.com [40.107.92.67])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6948D7E782;
-	Fri, 16 Aug 2024 20:03:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=216.71.135.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC724B664;
+	Fri, 16 Aug 2024 20:38:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.92.67
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1723838619; cv=fail; b=NiLGrZEYONwKrre5VazTTB/miB9YAAqA+VnD7krJiIxdppNpipBDJLsnogmHJxtgKW8YIJKHdmfLGkp0BrnlCnQ/06aPv+aFdmVwixLdnm4xnS4i/PfzfETfr7bsM7RFJB+D1vwy6cF5yinegTkCiuS/CE4JGf2ws0C3wgMwrrA=
+	t=1723840693; cv=fail; b=m0gjmxeRCoY14RipQEauptZDm05C9Ov9cOviLL/+jOhOhRC5Ei5lkmeO0u6nrSMiipMXs0euB6+pEIZf+jRZqIWyit4slw/Tq0iCvFcoatdzSRFISP+xpOLlBl1FhbKEEqCJSS80KbVjChaZnDAfl5OME9B9Dbhb6//qeLQUzG0=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1723838619; c=relaxed/simple;
-	bh=UJzSsKMvsuUx3McTqPHEyeGCyv3Oy7WeQnU5gj+SLAU=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=MTxauF3CIRHTdirr38T5/6NWNdVsQIFQ2OJBlyBPxj49kNff8wsLFifHAD9/X2GdiRh4jGLbt7rWI/xN8HRERwWKlJ2Z5nCu91NqmA48yrKgSBCuXysGDRq/Ow+avVDXlh1n4Rs6CGNqmgoMUWo9zvZHZMU+mxQGIogI5b+BhoA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uwaterloo.ca; spf=pass smtp.mailfrom=uwaterloo.ca; dkim=pass (1024-bit key) header.d=uwaterloo.ca header.i=@uwaterloo.ca header.b=vk8S/x/H; arc=fail smtp.client-ip=216.71.135.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uwaterloo.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=uwaterloo.ca
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=uwaterloo.ca; i=@uwaterloo.ca; q=dns/txt; s=default;
-  t=1723838617; x=1755374617;
-  h=message-id:date:subject:to:cc:references:from:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=UJzSsKMvsuUx3McTqPHEyeGCyv3Oy7WeQnU5gj+SLAU=;
-  b=vk8S/x/Hd3Z+V+3ijJVoKgwyl3MAGBDy4YrH4T3V5+SP53Gr2JmVmUsO
-   NcN1bZefdSvW2matXjYbZ/+DV5HtvXIHAfgujzCLubRZp1QtqpjL8EO1h
-   0UH/BR1KCxQw1embrWPc9PlXGVCFM82XATrRjTiar9ZudyQrCK6nZ3ok4
-   M=;
-X-CSE-ConnectionGUID: JcfOu7zYToWBWV+QrVLC6w==
-X-CSE-MsgGUID: Tc7gAX9EQkWqrvw21cjZxg==
-X-Talos-CUID: 9a23:wOhsamCK+xnBHxP6Ewts+mkJRdIUTnri5kjuYHaiN0JCFqLAHA==
-X-Talos-MUID: 9a23:CXHZfAitY9jcYWrA0panPsMpCMw37I2eWW00kqofodebb3V7OQWNg2Hi
-Received: from mail-canadacentralazlp17011048.outbound.protection.outlook.com (HELO YT5PR01CU002.outbound.protection.outlook.com) ([40.93.18.48])
-  by ob1.hc503-62.ca.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Aug 2024 16:03:28 -0400
+	s=arc-20240116; t=1723840693; c=relaxed/simple;
+	bh=y8/axZ+98u5spoovyq9dK1qShb8HUnT+Oh9mRAelBt8=;
+	h=Message-ID:Date:From:Subject:To:Cc:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=mrYlM6MOgW3PusKtjCKOKx1iNeZZ7AlM0Io9btzhFhaXfB08LoE6VI9B1k5yzACEOLNayJUiKDSDnWDHA4Soj5VkUEirBq5eHRgejX7bDxamqsTW+OiZRzU1kBouYBV/sPa7M9ZZYmdZ9IfXDJsa0Tq1oEoz0ugN/FoU5dHTows=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=z6rR7YkE; arc=fail smtp.client-ip=40.107.92.67
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=chs8DpiA8NfXNj60Cxeg5710IhJh3nLKVX/Y6lqL6750baQ3tqJN0/dVD4DyoVLUNZ9b9M7CSOFDQTqmR9G5axh1qkCho/aakPHkT8zFnyEW1PpH/B6+cSA4lBd20Qkqq72/mbbBLi4CdhiiGKQi4L0paC0z9o9AvKJ2N9UNjUFrCzBYpSKBP2wG83IMErTBrAZyKCBoWxSZ6Dw4ePNlT/9CHYGjV4W6ce1PnDU4zDCBeEhNTm/g1xdY36gFeqEAQeXwbgz14PNGUh6yp2nEHrFgCdHSSi7sdvZsVbB82eYK+VGaz+/mn1Zhaj3xdB9rFAQLKrwVt35WD1yuEMZeEg==
+ b=bQxdWKIEhfOBrKt+Bkg/s+yX6GMdrngbVNu5lx6qwzKi8O1c86uGv2jwOwo9k0nA/l+e05L495REPBw5ry9wQqeCmMm7BF+tXXCubEuvkGWTH5BB4E27aEWl2hK3A403qomBS8gJ32aml22A16BLP1AWtOryIugYP0Q6OO0FS0iy+B4Egq0iAmVy9iOSxoZagpqM350+0OJVItzh8F6NbbTIQle4EaCdIS18vjnGRFr5sQIzd/KdyLRE8yQYPmqqJiGXrOpeIr5/Z+hcK2t2M1Ov72F5jOBHV17juH76MdXPwnDkUS95HVw/wr1UMHeMaTscGiV+S6W0MidD84h58Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=r6GFgaJH1NJYC/+Tmg6NwZAJ5wc8Uc+I+o9yH3MllZU=;
- b=HH4Rn83hLTnDTyrPxl3zWEVEIzkzwWLDx4aLJ5gKbryWhNnuFtEyhNiCCW0NDaBxyvFl2lcUDMlgT4hhhCwYW8pGGY7pk0grM/YK4jyvrLjlOTOuqaXuiR6NU2MZj3kUyPuxUr0CH6Ccz/7AZTPPsxIVAsZeermW9gAGBJSbKWFmJ9mnHex+N1mIFfm0YpyAk9FQd/1uJkEBhjFDPALSB/iwlJrMOMswje3gJiy4JhtlxjRMPMigxu/1Cnz8K4h/Fbz0iiSKJ+lEv1kvkX6jnYnaMUoecjv/nkxukO0NdW19gAzjsHyd/BmjfBLWMFWdgHJt3mJQ0+J04hEQwoRWwg==
+ bh=OgTeXTDiyfEEXMG9nVGyIAB8b/oYqzsby8aN3fiwMHk=;
+ b=IRF7cmhYvGjhajlI/lIpIori5x7ly5VqKASE9sSp8hJ/0D0c5xvx7l6VPb3zxExgXK1X7KyZQX2AQwpWCxHlQ8mBAId07ukTwLKW9CLPEtEgFGIInjN5+L4BV7MH9ziyp0Gg995K0t1ucxvlsNVtkE1pKjDDjB/XxkAf/KLy0ugxM6CDZfwDYRZvDzKVXrC/SLi/482ZVxEuu2eAQjgrv9dbtmUsUknAec+WCZcYBp37TIehsm4l98lkYV5qyBv05YYy0Ad1AQMunCPonCj5rL9hZk6vO1JCEl5Fb26OX3v6mYZUhtMNJ9lr0O3tExAGq8YKTN87StGWCk2g4uXblQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=uwaterloo.ca; dmarc=pass action=none header.from=uwaterloo.ca;
- dkim=pass header.d=uwaterloo.ca; arc=none
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OgTeXTDiyfEEXMG9nVGyIAB8b/oYqzsby8aN3fiwMHk=;
+ b=z6rR7YkEtBlECUj6T+QbkhyC9q+WMbSV0UhOTLhzfOEcPNYPybMLGKlTe/sSGOBLCEkxiTVAJLwxHrTJ3yC6WVOhwNtakg5lsJxzQlNACqvoghgdl9G6DP/6WYFsXgBF7gwHx4lWQ03+gicUYxQDzVhkWgQ78EgcJIkmXFV8/Yw=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=uwaterloo.ca;
-Received: from YQBPR0101MB6572.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:c01:4b::13) by YT4PR01MB9926.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:e4::7) with Microsoft SMTP Server (version=TLS1_2,
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from MW3PR12MB4553.namprd12.prod.outlook.com (2603:10b6:303:2c::19)
+ by SN7PR12MB6689.namprd12.prod.outlook.com (2603:10b6:806:273::17) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.20; Fri, 16 Aug
- 2024 20:03:26 +0000
-Received: from YQBPR0101MB6572.CANPRD01.PROD.OUTLOOK.COM
- ([fe80::d36e:ef93:93fd:930]) by YQBPR0101MB6572.CANPRD01.PROD.OUTLOOK.COM
- ([fe80::d36e:ef93:93fd:930%6]) with mapi id 15.20.7875.019; Fri, 16 Aug 2024
- 20:03:26 +0000
-Message-ID: <02091b4b-de85-457d-993e-0548f788f4a1@uwaterloo.ca>
-Date: Fri, 16 Aug 2024 16:03:26 -0400
+ 2024 20:38:08 +0000
+Received: from MW3PR12MB4553.namprd12.prod.outlook.com
+ ([fe80::b0ef:2936:fec1:3a87]) by MW3PR12MB4553.namprd12.prod.outlook.com
+ ([fe80::b0ef:2936:fec1:3a87%6]) with mapi id 15.20.7875.018; Fri, 16 Aug 2024
+ 20:38:08 +0000
+Message-ID: <8157a684-9855-4085-9e76-72d3e5a7b1eb@amd.com>
+Date: Fri, 16 Aug 2024 15:38:04 -0500
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC net-next 0/5] Suspend IRQs during preferred busy poll
-To: Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- Joe Damato <jdamato@fastly.com>
-Cc: Samiullah Khawaja <skhawaja@google.com>,
- Stanislav Fomichev <sdf@fomichev.me>, netdev@vger.kernel.org,
- amritha.nambiar@intel.com, sridhar.samudrala@intel.com,
- Alexander Lobakin <aleksander.lobakin@intel.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>, Breno Leitao <leitao@debian.org>,
- Christian Brauner <brauner@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, "David S. Miller"
- <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Jan Kara <jack@suse.cz>,
- Jiri Pirko <jiri@resnulli.us>, Johannes Berg <johannes.berg@intel.com>,
- Jonathan Corbet <corbet@lwn.net>,
- "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
- "open list:FILESYSTEMS (VFS and infrastructure)"
- <linux-fsdevel@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>,
- Lorenzo Bianconi <lorenzo@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-References: <ZrqU3kYgL4-OI-qj@mini-arch>
- <d53e8aa6-a5eb-41f4-9a4c-70d04a5ca748@uwaterloo.ca>
- <Zrq8zCy1-mfArXka@mini-arch>
- <5e52b556-fe49-4fe0-8bd3-543b3afd89fa@uwaterloo.ca>
- <Zrrb8xkdIbhS7F58@mini-arch>
- <6f40b6df-4452-48f6-b552-0eceaa1f0bbc@uwaterloo.ca>
- <CAAywjhRsRYUHT0wdyPgqH82mmb9zUPspoitU0QPGYJTu+zL03A@mail.gmail.com>
- <d63dd3e8-c9e2-45d6-b240-0b91c827cc2f@uwaterloo.ca>
- <66bf61d4ed578_17ec4b294ba@willemb.c.googlers.com.notmuch>
- <66bf696788234_180e2829481@willemb.c.googlers.com.notmuch>
- <Zr9vavqD-QHD-JcG@LQ3V64L9R2>
- <66bf85f635b2e_184d66294b9@willemb.c.googlers.com.notmuch>
-Content-Language: en-CA, de-DE
-From: Martin Karsten <mkarsten@uwaterloo.ca>
-In-Reply-To: <66bf85f635b2e_184d66294b9@willemb.c.googlers.com.notmuch>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: YT4PR01CA0103.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:d7::28) To YQBPR0101MB6572.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:c01:4b::13)
+From: "Moger, Babu" <babu.moger@amd.com>
+Subject: Re: [PATCH v6 06/22] x86/resctrl: Add support to enable/disable AMD
+ ABMC feature
+Reply-To: babu.moger@amd.com
+To: James Morse <james.morse@arm.com>
+Cc: x86@kernel.org, hpa@zytor.com, paulmck@kernel.org, rdunlap@infradead.org,
+ tj@kernel.org, peterz@infradead.org, yanjiewtw@gmail.com, corbet@lwn.net,
+ kim.phillips@amd.com, lukas.bulwahn@gmail.com, seanjc@google.com,
+ jmattson@google.com, leitao@debian.org, jpoimboe@kernel.org,
+ rick.p.edgecombe@intel.com, kirill.shutemov@linux.intel.com,
+ jithu.joseph@intel.com, kai.huang@intel.com, kan.liang@linux.intel.com,
+ daniel.sneddon@linux.intel.com, pbonzini@redhat.com, sandipan.das@amd.com,
+ ilpo.jarvinen@linux.intel.com, peternewman@google.com,
+ maciej.wieczor-retman@intel.com, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, eranian@google.com,
+ dave.hansen@linux.intel.com, reinette.chatre@intel.com, mingo@redhat.com,
+ fenghua.yu@intel.com, tglx@linutronix.de, bp@alien8.de
+References: <cover.1722981659.git.babu.moger@amd.com>
+ <140e4e7bb26db9bbad3e37d910c0cea0060e99e2.1722981659.git.babu.moger@amd.com>
+ <20500833-44a0-4fd4-ae6a-729bb906abda@arm.com>
+Content-Language: en-US
+In-Reply-To: <20500833-44a0-4fd4-ae6a-729bb906abda@arm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SJ0PR13CA0006.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c0::11) To MW3PR12MB4553.namprd12.prod.outlook.com
+ (2603:10b6:303:2c::19)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -117,256 +93,269 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: YQBPR0101MB6572:EE_|YT4PR01MB9926:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5b4f876c-e88d-4630-47a4-08dcbe2e7d93
+X-MS-TrafficTypeDiagnostic: MW3PR12MB4553:EE_|SN7PR12MB6689:EE_
+X-MS-Office365-Filtering-Correlation-Id: bb144c84-e602-439f-353e-08dcbe335664
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|7416014|376014;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|1800799024|366016;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?VEZQbFpBYVh4U3lsU1d5QkJNVnYvMmRVZGJUS012dEF3RU5lQnhaZHpkdXNN?=
- =?utf-8?B?dG5uTVFpK21FR2RyLy9CUUxBcHlIMko1MXdrOG1FM0VLQzFzK2tOL2Zkbzc5?=
- =?utf-8?B?ZTlRV1hpZXNXM1U0M3Rwc1k1ZGNRS3RVWEFJeWJZQ0tSUEtFdjNBaW54UFJI?=
- =?utf-8?B?aFlSOFplSVpxMlhCTENGaU45cnBlLzNFODFJVWxLL1g2dTkwYWcrRGpucDlP?=
- =?utf-8?B?d3pCdVBYOG1XU1FGY3A0bFdhRm5tczVjeWVDOHUzeklGNzh3TkdqbXgzdVZ3?=
- =?utf-8?B?MHBLUXBZZXVmT3BOeWFuVnZZQWYrekVVMXozR0NiUlBJczRCbGE1c2l3dGs3?=
- =?utf-8?B?OEl3Z3lkTTZBRzNvZXk0Ty9FeWNXOU14TldtZFNZNGM5bnlaek94RFIvOXFh?=
- =?utf-8?B?QTFhaXMxS3hRZVpSK1dlMm16bUl6TmNuaWloVUFUd25NeGhMa2VoQlk2dHc4?=
- =?utf-8?B?d25Mb0pLZzZnMlZzQ3NOUjlZUHRidzkrQnhyWG13SCt4NnArM2djR0FQd2xi?=
- =?utf-8?B?aHlpVGJqNnRXRXY4cW5kaXJ6YWRkWUs5UURrNDhBanlNUFBtMlg4OFlvTWx5?=
- =?utf-8?B?ZXFjeUE1YU8vMmEvYnZtUy91OWpla3JsV2FMYllZcUVyYmltczl4R2Q2MVZq?=
- =?utf-8?B?OUJ3MzZBb0x4UTBMN1hzMlNwUkV2ekZ2bmhlclQ0ZFdHS1UwZi9Jc2l0YXd6?=
- =?utf-8?B?NnFHRDRrNFFtd2gyd0ZjY3pLR3hlc1Y3Zm5uT052SWs4Z28yMW1DLzBTclNa?=
- =?utf-8?B?WWQ4TjZMem5ESjltdzBwMkJscVQwMEk0WnBxcWk4ekw4VTh5a3I0aGs4SHRy?=
- =?utf-8?B?aEVvdnRUelowL1N5WnJHK05wKzNkV0dieU5ZZDJEV3g1a1lUcldTUjkvcEZR?=
- =?utf-8?B?Nk15K1N2dURDbnpWd2VkNUVKMS9CTVp3aVpBLzIzQUtiRU13bGNTRmU4M3l4?=
- =?utf-8?B?TERsM2xKZTdXbFp4cTJCTFhwd1F0N0YrRS83b21Qb1k5d3RjWnBQTU02KzVH?=
- =?utf-8?B?YkxDK3g4d2t0RzUrNE51aFBGRjdlSkI3WlJVVEcvMlVFdVkzL2tvcEJKYVJn?=
- =?utf-8?B?MmpsUVl3bFk4UjE0TnhDQnNpZTlwOU9MTTB1SHo3MEs1Mmg5VFZsbzZuQkpx?=
- =?utf-8?B?VlNDRys5MFpSNW10dHVzSW9PZFNrejlUanJ1QUt1UU1xTFpNWVdRWDFnai9K?=
- =?utf-8?B?U29tUXhvb0Y3VGRObkRvSFpUa1VUTGpSdTRlRWR3NkZyNTdkK21NMnVBV3Fq?=
- =?utf-8?B?VjVNR1ZqVFFqUmRmSWF2ekJUd0NkeUhUNEZ4TlBUd2xHaU5YNWcvcFA1MlZ6?=
- =?utf-8?B?MmpSY1lMYXdFdG13aU1XY2svOGlBeVkrWEpwQTZoY1F4ckVxVFY3WlF4Z2JJ?=
- =?utf-8?B?blVTWFMxL285aFZEc3VTNG90L3R5MXB2U2pDRkF0S1dBL2MvcEQyZWRBVFhB?=
- =?utf-8?B?ZG1uNExBYURqWU1DSjdLK3huOU95YlZ5RWIreUQzZTdTVTJESlV6MHpuaTVu?=
- =?utf-8?B?QURCemlVbEdYcVNHSllnN1prejEyRVNtcjJQTzN1U2dldEdIeTVjc3gyYXQ3?=
- =?utf-8?B?SnpBTExBWlIyUmtTS2lob1BnTTc5STFGaVN0TlBNbEVxQTRnMWpEeTBWMUhz?=
- =?utf-8?B?Q0Q3Z0ord2lWVGJKd3BVd1d0NEM0WkJsTjl1SHR3VDNGaThGd0wrVm1tTzdl?=
- =?utf-8?B?Q2dHSmh4ZEpnY2JxUkpOWmlGeDh5aHBWL3h6OUtmeitaRTZXUmFTeHRxMEgz?=
- =?utf-8?B?RTJadkJaeTBTQVptdE43OW5SeXZ2VmtOdVFSalZkVXB5TE00dVh5QXA2MFR0?=
- =?utf-8?B?QkVoRGE3dDA2d0xlaDNJQT09?=
+	=?utf-8?B?UWkrcUFmTU5rNUZBalJ1YXh2V2hyOUIxbi9hS3pZNkVDUXNwbGI0eWgyaDVw?=
+ =?utf-8?B?amd5MFlsYU4xOEo3YmJYUGtkWUl3bnZURFNwQzAzaUUxTnk3M0U2L2hoVHFv?=
+ =?utf-8?B?ZUhxaWJwOVZGN3o5L3d3UHdrQWtteHVqWlh2dmFqWnVnSnJWOWh2bGR6bUNF?=
+ =?utf-8?B?YjFOWDZKTUVNSUViZEt2blQxL0MxQmFBaHFYaS96aWhlOTFwUmxUcHVwa01u?=
+ =?utf-8?B?bllUMDlDcU1rK0pJc3cvSVVPYXUvUUFvZlAzaTFlM0VjRGhyd3BaelVzZ2tG?=
+ =?utf-8?B?VjNrYmtwYVU0ZkZRaUYwOElxcDhCQ2t0OGJPMHdHWHhVOVdkWlNhMVdhaVZy?=
+ =?utf-8?B?WGt2T3VKZGovVEpYODRlbnNyQ1h3eUgwemtuM00yYlRuRks2eUJhT3Uxb2g0?=
+ =?utf-8?B?dTVrZEtwUVJuTk00MG50Tjh0ZnlnNjNtQlA5Tkw4VEpTVUluY2ZMaUgzcVB4?=
+ =?utf-8?B?RlhUWUdMci9qdFFZMklRY1RkNFIwNkc4Q0NuYk9FbE5FdFU3TWxhQXFHMDhh?=
+ =?utf-8?B?WHhPd0NaV25CSEZ4YmhBT3dPVXlQTzEya1FuMmVkSTVvcDh6RUwxRFgzRFJh?=
+ =?utf-8?B?RlVsMWdGUTBiZnNCVjY2T0pWd2xOVkpjZXlENVFiZEd0ampWcEFhajVQMFBE?=
+ =?utf-8?B?WlFvbks0c2dKNDdGbXJUNGRqTEwzRERZdTExSDU3NTB6K05mMzNiL2NXNFNy?=
+ =?utf-8?B?UXphREVRYm43cXVEakF5OEozbzdGdDdIOG9wT1NkNGtmWWZGaGlWazRrbGJU?=
+ =?utf-8?B?bXpUbUNRQ1R3UjdQdW4vb3BMUFdqbVFmaDRXRTlmN1hEZ2V5aW1wd0RleEJO?=
+ =?utf-8?B?V1BpSWptSmJFdUZBdjRPV3BsUFFZQTRHQzV4dVZFZExEMnFOaGVHMVRXNGRk?=
+ =?utf-8?B?VWNOc2VUK2ZkMFpFYWVVZW1MVkZrQ0VBZGhBbmxJM3JGdmZJS0oxdnNWbWZX?=
+ =?utf-8?B?UjUrMXNrekFFek9SRUlPN1E5aHVGMk9SQWJMT0IzcDRYVzVPMk1acXVzK0pv?=
+ =?utf-8?B?aEhBeEpmOEVnZExHK0xNelJhQTZsVjJxT3ZGanhObEVvbUJlUyszWkp4WE9h?=
+ =?utf-8?B?dm9YSEVRTXpBYTFnOXpPSlVYWVRsNFdUOEprYWMyNlVMeGhobEN0UGNYYnZu?=
+ =?utf-8?B?MlgyRXdrSHUzNDZVb01vTGRBY0NrYTZhUjBKYURDOUh0dDhVeEYvQkc1cHhX?=
+ =?utf-8?B?YXlKazZ3cjI4amRRMzFhQzBHaXFEUEgxa1JNSFMwdng3czBqZU1NTVR3MjNj?=
+ =?utf-8?B?U2w0aEdQTE1Pd0FGTWY1Z2pYaUN3UjN2bTBCYkM2VnlUZ2R2TjUzdjhhenZi?=
+ =?utf-8?B?V1ZvbEJDL09Gakw5Uk1manVPd04vTDBJM3E3aU5hNVpVUEo0QS9acVlxcWw2?=
+ =?utf-8?B?QWszenFNeTRoOXM1dmFJSHZwVEFHRTBjd1NNb3ZOR3BlaFRBYjVKdmZXelZ2?=
+ =?utf-8?B?eGd0V0haUE1uZ3hUYTAvRTZ6TjdJenNVRVVkSmJuRmZjSkdtWFM5OEFjRUdv?=
+ =?utf-8?B?Y0ljYzZhTU1HbGZRcG1CZW1nMGU5d3BhUVpuamhKL2g4Y3ZDL2phanVBYjBu?=
+ =?utf-8?B?bmZpcDBVQThoT3RFb1MycWxnSnBKK20rTDFEdFBBMTZVR3dJd0dQcHBSMDlJ?=
+ =?utf-8?B?T3ZhN3VBSmNZK3l4OEtaWlV4ZC9Tek5NVTJZa21Ra3psczFOLzRMZmUvSHdU?=
+ =?utf-8?B?RFpCcnJuR20xejJaYTVkVGZRcnNSWlBYbUlwbS92TUxVVDFBOWdEQkF5OFpI?=
+ =?utf-8?B?SlMrSi9uZUxIWFd4ZEM2eWhadlFNYzFoYnZsS2xsRjNFOWltQm8rNHVGVHNh?=
+ =?utf-8?B?bEdpWjQ2TjNYWHZ1bURkUT09?=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:YQBPR0101MB6572.CANPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(7416014)(376014);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR12MB4553.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(366016);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cklaajN0WmFEWFFaWmk2NXRGTXlzMmpOMVZXOUJtUi94ZWZlSU0rQk15RHhW?=
- =?utf-8?B?T3pzYVhaTFBQVU1ISFhUbkJZTlo5b3lmUDk2UHdnUGFVdFQ1UFFlU2s3d3NR?=
- =?utf-8?B?alAvOEQ0QStrZ0FyUklESWs0a3ZkdGgxN292V2FRSnRWaFdLOHFCWUVNSGk5?=
- =?utf-8?B?eVdtNkJVY2tBaWNuOFlSSEV0bjVSa2FPQmMra25jcHhmWG0vd2NWeU8xNDhn?=
- =?utf-8?B?b3Q3K3JVcjkzMzJmRHd0cjRacjFzNUJLTXpoQW1XZ3dhVldNUnZqTTVYVDU3?=
- =?utf-8?B?amJ1OStBM0NEc2xyVGlGZnkrZ1dqNjZpVTZZcFZwUzRmNG03emdtcW9xV2ZI?=
- =?utf-8?B?VUZONEVCQTQwQ0VXYUhtUy9zRjlVQUJ5SlZmMTg1MnJoSkZNOUQxSUFLc3V5?=
- =?utf-8?B?RkdadWpIOENITEFVcGxTVTRIUTRPRlYxbG8yVWNYNU0vWTRlMDVmaXVweFRX?=
- =?utf-8?B?WVY4SnU3NUtSMmgwTzMwQldnS1FaZHdmQWpyRW5mekRnOWoySk9BNnp4Q2Vj?=
- =?utf-8?B?T2hjTWhiWFlrMW44cnd6Q3h4cDA0RExQaVRjeHQxSDVUdG9rRlkxZTl6L2o1?=
- =?utf-8?B?RERDaUYvMzd5TVBwT2FxL3pQY1B4VE9zdmxnNmxmaStXU3YvcTNqRkJnOTZ1?=
- =?utf-8?B?aXJ2V0hRaDB2TTIrcTdqNTQwR2J3Z3lIRy90aWwwZnNybmpkbzNmclZkbzgz?=
- =?utf-8?B?TmkwaGdVbFFyS2RkUUlBSG05bDNnVzdwS1FhZFljMTdGZTd4Qi9QQ1pMRzd1?=
- =?utf-8?B?T1VBS3pFOTcwQlBFV1dIME9jbkw5eFhOZDlScFdMbnhkay9Vd1ZkSWs1bVBX?=
- =?utf-8?B?Tk9WZStVN2VtakFTbEJHVUx5MjF0SExaNzVWWVRQK3JUWWorK2lEVTI4NGM2?=
- =?utf-8?B?VEIzTmh0TnBrT2ZHOHhNUjNrenZzcmcwQWh1akJYcmRKek92TTFxRjY4a1A4?=
- =?utf-8?B?aWhnSEEwcTFNaTZKZmZES0dxQUVCNC91cVJTVHQ4dTE2WW1CSXdPYUk2Y0g3?=
- =?utf-8?B?aEs4LzlYUVNNWVMvMjUvZWQvMVlVVWtSZkE0YmlNdTBzSkMrcVpuQ2ZJNEdl?=
- =?utf-8?B?SXAwU2tpbzhzUFlpMnkxTjY5KzVhVXpOV1p4LzRiVXNyNlgzS1pPU3NZRDZz?=
- =?utf-8?B?ZmtxaUFuTUNOS09xSjZZOEJ4YUdtR3ZXc3hHZWZMYTdmWkJWVnM1Qjg2VFh6?=
- =?utf-8?B?dFhMS0lpeXMzNUw4aVc4KzZLdlA5eEhQWHFLSWMvcloremRNblpDMG1YVTBT?=
- =?utf-8?B?ZjdPYldVY2kzR2l0bWNIOVhBTjVDOHdFU2dqa1YvVXBoU1gyWXhzdWJmUVR0?=
- =?utf-8?B?RzZybWVpTWJyNEgwZ09LNU5oNWRnTTY5QmNsTzVyUHM1YTdObDVFOXRtd0Zn?=
- =?utf-8?B?QnNoMFhIenlSK0J5OWhTSlZsN2FGNVhjNXRkNVNDaEllVW52VWJpaE5vWW1l?=
- =?utf-8?B?RmxlMXFiMGZaM1Qvd3RXVzBlN2drUlFBZXJ5aURIdVR3OTFqYzlpczhtNlc5?=
- =?utf-8?B?Q0ZDTTFvamExTnZVVDFTQmtLTCtleXlYU0w1QzJUMXJnd2thUEh2cFB2ckhn?=
- =?utf-8?B?RlFyZFBHSytHdGlsbFdoQ0duMFBBSS94MnpmTWw3L2NsNTk1OHB6Si9aUC82?=
- =?utf-8?B?bmZjeUFvNWN0VWFnbCtUTkJZemIvZDViUnBMeklnUjV0cVRmTEErNEVnT2Jk?=
- =?utf-8?B?dVBLcU1tWTRNRjJGUzkyZWpDdlhYUlNUZ0NtUGVHazNhcjVkdUJMNWp3YThm?=
- =?utf-8?B?S3NtQnM1Uy9PZXo3L2o0ZlpTWVhlaERjOWhkaXZnM0NhY3lxcmkyWmtyN0xZ?=
- =?utf-8?B?SE5IZFNHLzhXalJ0akk2aGZIUVMxR3pXcDVIMEp1LzNhU29DU2hJUmJvSzdE?=
- =?utf-8?B?SXBOcUlHYVd5UTlJbnlNd0lmL3FidlZvMTUrOHFZL1VGOUJtQXpZT2YwVUU4?=
- =?utf-8?B?SjdGTzRQSG5mUEZvNHphcmFUUEtVZ01QRlNkeGI4Rm1TU0YzL2MxL0VQNjdC?=
- =?utf-8?B?K21wVFNOK2t2cjZ1Q2crVDhxUlQ3WkxydTc1dThKazhZTzg3R3lwZjZNR2Jn?=
- =?utf-8?B?VkVvQXlJd3UrSUNWVXdIUTlLOFJWdDQ3S1lZYU9QdDNEVm5sUVc2ZFhjMFZx?=
- =?utf-8?B?cUlHcndpdFQzdVQ0b2J5M3A3eXdLdmVUN1N2dENnMDVab1loK1VrbDVOWGJD?=
- =?utf-8?B?TGc9PQ==?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	th8gvMndEP9rdlGrwFWDV3Gl5vfI2p++oHlNdDb0nJoWuAdn8AvwW2GgGO6jZUHAzhkM3Drgv0z7BDAQ1YNkuMEhvGhf3snXuFn+JlK0ooxMNPz/78kXimPCUAaGpJSInxBsz4sbYqhKNuOXhxBqdXB5HjPYKHuZJG5N3b3bxkryhQmVEEbUSa1ZeAYCj67ls7cH4/J9rkwhdaYZJNrNXB7ipSKlzkeRl0BF4wBnKZZAd3eR4X2jhF/qYYeWOCG3F8hc/1u5UIQwIaowXD/yDzRNa5BVhdPpF1sXbQmMgESVEaGoENbIlm/7adiucWWRllOE/x+epIaP2QxC1hN1PF/8/6mb1MAIROHUN7h+Y7wRMYVJMp797HTjLitpPBbDymX4KVFdyIDlze8LKp3swukIVbR6L4kGFxewV91hNVX3vUMo+50I8u+lcXCqkSg9kk8AJE+BgVhXE4WZOiCWkzmLQrcZ8KfWVziRyr3+3kahw7iFNs7XKDUvL7LYqAQwPUfyk3YHqYgqc+4IL8KYTmyB+qGFk5uB0OCBR1K/FgAU/Et+EbVNuJgWUB9aySWYIFWzJteq7YtyEwHe0pEsNJQ3ACsGMqgXEhxz60XnMljE7rDsinroDACfFaUFIMKY
-X-OriginatorOrg: uwaterloo.ca
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5b4f876c-e88d-4630-47a4-08dcbe2e7d93
-X-MS-Exchange-CrossTenant-AuthSource: YQBPR0101MB6572.CANPRD01.PROD.OUTLOOK.COM
+	=?utf-8?B?YU5Qb2U3RjlMYUcrc0FCYUFvQXFWbmlhTSt6RU1iSzdralhKLy9nUFpad0ZE?=
+ =?utf-8?B?MjZkVmF2eG5wTGNvaXJTOFlaRnl5ekptNmtoZUxsSW9MbmVoSUVybzRtS1Z5?=
+ =?utf-8?B?TFE2RmhLM0gyV1c2MFdDWVJ2TDR3VUdqZ2ttWktUOHJOQUVWc3IwcmdJV20r?=
+ =?utf-8?B?VXgrY28ycU1PbGhuaXh6WEoyT0pWSmJaYTlrY1hGOXpUUjBWWUUxbHZjNjRY?=
+ =?utf-8?B?ZFdWcDU4eXpBUjNrS3ExbzNHOWdicE10TTdyRVVCWnJuWnlhOXJpUFF4ZUtC?=
+ =?utf-8?B?TXB4S21pNEFKMGFCcDF5SUtJV2RERTZ1eUZIclVaWHZjRDBvdXJVVlIwU2tZ?=
+ =?utf-8?B?Mm1yd2NLbzVWclB4YW9QcGQ4L05McFc3QlVYVE9iblRFRlB4cjh0VllZVGtK?=
+ =?utf-8?B?ZDVFMUxXSTFOU1ZldXdsZVJKUUhmYUp1Z1NJenI0c3gyYUVVR2NaNngxSSt0?=
+ =?utf-8?B?bUQ4VDYvaTBjUmF3anMyWjNPTXV4b0ZDb29pZmR3djFyN0wvV0M2aFhVaS81?=
+ =?utf-8?B?ckR0b2t4WnhGQXdLS3lkRng3UG92WGk4NFE5cTJxSmlGU3oyMXF3Z3FxdVJv?=
+ =?utf-8?B?Z3ZBZENLSzUyUlEzYldlZFpVTysrS2lhTVVmaGxmYXBXcUQrS1VZdmtkYTJM?=
+ =?utf-8?B?RjcrSnhYK3V6RWVGbDA2S05BMUNXWWtWVWRTakRnVmw3Z3IvSDUzODFwQWNL?=
+ =?utf-8?B?Z2g3d0RzVm5tLzgzQWFxMEowWGpxTEozbVR1RDlqcjE1UUlnM3FMdVQ0Z2Zi?=
+ =?utf-8?B?SXNwVVVZZFc1VU84STYyNngrbWdiR1k1MzBzTDd3UDBqcUlBNU1DK3JBcWVP?=
+ =?utf-8?B?VmxBRnBkQ0RyZjZLWHZvNUlRL0daOVdHVGdJNXNmaHN3YWxuaS9EYkw1Ukow?=
+ =?utf-8?B?LzU0S1Y4c2N0Znl0N0NML0NSVnJQMU56cko0b3Y1a3FLQnFQOVE1NDFKSGhJ?=
+ =?utf-8?B?WENoM2FyWkQ0TTdTWmIxU3V5RGVaTGlUNkJTN0tqSG1PTUR3OHpKUHJjMkp3?=
+ =?utf-8?B?M3JTUW5VeHl4MmlaQWZpdEphQVlXaVQ0VHlvQS9OMk9zWXYzSzdkRGFqb256?=
+ =?utf-8?B?eGloWTVRd1BPSVlSNU9iVWlpTHp1ZVlVb0FEV0pmN2Q1NGtHcFhsWktNek1m?=
+ =?utf-8?B?RnMzU3lZblU4V1hYdkNkN05hTk1sTTlRR0hlRW8wYThldU5USU84RDJjMWQv?=
+ =?utf-8?B?UkswY2xFejd5SWlUamFGa203enJ5ZGxzc0pVQXBjWWYzV0RFbTVySXQ4QnpG?=
+ =?utf-8?B?UnpVKzUwd012N2o3aC9jZmIxVEJnaWJyTTdVa3JVZ0tBc2V6czFKN2VVWFZ0?=
+ =?utf-8?B?UlFHUVVLbXNna2ZjU21wT1NPcjBhVFg0VmpoYmVIU0t0ZXFMcTNVcUdCRm1C?=
+ =?utf-8?B?cjQ1YlRMRlR1cmJpMHFtb1ZrU1dGMEZZSWloclE0T1FtNm1Id3FjTFg1eWRx?=
+ =?utf-8?B?bCtDNWw1YTI4dFhwaE1rOWlSbFJsSEFPUVo5YUpQS0EwYU52NlZsNVFzRVF4?=
+ =?utf-8?B?bjkwdlZCYTh3RWVJRzJiNjVPTTkwaFdkRm5BbFBwN1d5OHVGeXZZdXd2dWEx?=
+ =?utf-8?B?ZUk2ZW93d3RiR0VERm1kUERvenVvd0JpcHFpdjF1eGp3SWRDT0FWQnhTMGxC?=
+ =?utf-8?B?MU5ITzE5MnBnZk1MZ2lwUUJzN096NENnT08yYjRkVHkxWnE5K3RmbUx5RS9x?=
+ =?utf-8?B?Q3MraDA1VFB0TnNOeDRZRDU0OVdoYVRZNURlYnRjeDFMYjV2ZXBwMVpLcEp5?=
+ =?utf-8?B?RDZrejdmUHBQS29aT2g2bzBTZnRnMWpId1E1a21XdWVkQUhudXZqdlk0TlZH?=
+ =?utf-8?B?a3FsUG9CUUxZMFBoSVBpWkZqdHFXY0E2bFB4Tmx5ZW11cGlQV0tFTlJMR1pv?=
+ =?utf-8?B?UXZucHRTV0REOVIxZE1QWWVpYlphemVnZiswL2g0T0ExZW45OTFpRWgyR0ty?=
+ =?utf-8?B?OHJ4akx6K3BLNE5pWG9LaUlaWWl3cHE2TklQNkNKR1VlSytkOGMxamgwNUxN?=
+ =?utf-8?B?WlJKKzlhYjkzN1YwSnpHNWVONXZLT1dqd0ZidzF5Q3B3Mm9JZmxhRisrUjFN?=
+ =?utf-8?B?cGlZMEw4MFhWSUdwNnBwcUI0aVN1RjN3ZXM2azk0R3hhamt1Y2w1OGx4T3ln?=
+ =?utf-8?Q?00Xg=3D?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb144c84-e602-439f-353e-08dcbe335664
+X-MS-Exchange-CrossTenant-AuthSource: MW3PR12MB4553.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Aug 2024 20:03:26.5643
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Aug 2024 20:38:08.3363
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 723a5a87-f39a-4a22-9247-3fc240c01396
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GmRdF0v4M9Kyb22147Xpiwz3LQT38rTXGkJ4GEBxVrRsKNSKbhGZLIEQRswr3/U7p3HOh8KvhWNS8QDEt79GlA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: YT4PR01MB9926
+X-MS-Exchange-CrossTenant-UserPrincipalName: aAxGj6d0oqN4dUshOvOc4aTOwJJmxM+DLVhhrI9MwV5kA67ClYFz1VrlVUL/fI0E
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6689
 
-On 2024-08-16 13:01, Willem de Bruijn wrote:
-> Joe Damato wrote:
->> On Fri, Aug 16, 2024 at 10:59:51AM -0400, Willem de Bruijn wrote:
->>> Willem de Bruijn wrote:
->>>> Martin Karsten wrote:
->>>>> On 2024-08-14 15:53, Samiullah Khawaja wrote:
->>>>>> On Tue, Aug 13, 2024 at 6:19 AM Martin Karsten <mkarsten@uwaterloo.ca> wrote:
->>>>>>>
->>>>>>> On 2024-08-13 00:07, Stanislav Fomichev wrote:
->>>>>>>> On 08/12, Martin Karsten wrote:
->>>>>>>>> On 2024-08-12 21:54, Stanislav Fomichev wrote:
->>>>>>>>>> On 08/12, Martin Karsten wrote:
->>>>>>>>>>> On 2024-08-12 19:03, Stanislav Fomichev wrote:
->>>>>>>>>>>> On 08/12, Martin Karsten wrote:
->>>>>>>>>>>>> On 2024-08-12 16:19, Stanislav Fomichev wrote:
->>>>>>>>>>>>>> On 08/12, Joe Damato wrote:
->>>>>>>>>>>>>>> Greetings:
->>>>>
->>>>> [snip]
->>>>>
->>>>>>>>>>> Note that napi_suspend_irqs/napi_resume_irqs is needed even for the sake of
->>>>>>>>>>> an individual queue or application to make sure that IRQ suspension is
->>>>>>>>>>> enabled/disabled right away when the state of the system changes from busy
->>>>>>>>>>> to idle and back.
->>>>>>>>>>
->>>>>>>>>> Can we not handle everything in napi_busy_loop? If we can mark some napi
->>>>>>>>>> contexts as "explicitly polled by userspace with a larger defer timeout",
->>>>>>>>>> we should be able to do better compared to current NAPI_F_PREFER_BUSY_POLL
->>>>>>>>>> which is more like "this particular napi_poll call is user busy polling".
->>>>>>>>>
->>>>>>>>> Then either the application needs to be polling all the time (wasting cpu
->>>>>>>>> cycles) or latencies will be determined by the timeout.
->>>>>> But if I understand correctly, this means that if the application
->>>>>> thread that is supposed
->>>>>> to do napi busy polling gets busy doing work on the new data/events in
->>>>>> userspace, napi polling
->>>>>> will not be done until the suspend_timeout triggers? Do you dispatch
->>>>>> work to a separate worker
->>>>>> threads, in userspace, from the thread that is doing epoll_wait?
->>>>>
->>>>> Yes, napi polling is suspended while the application is busy between
->>>>> epoll_wait calls. That's where the benefits are coming from.
->>>>>
->>>>> The consequences depend on the nature of the application and overall
->>>>> preferences for the system. If there's a "dominant" application for a
->>>>> number of queues and cores, the resulting latency for other background
->>>>> applications using the same queues might not be a problem at all.
->>>>>
->>>>> One other simple mitigation is limiting the number of events that each
->>>>> epoll_wait call accepts. Note that this batch size also determines the
->>>>> worst-case latency for the application in question, so there is a
->>>>> natural incentive to keep it limited.
->>>>>
->>>>> A more complex application design, like you suggest, might also be an
->>>>> option.
->>>>>
->>>>>>>>> Only when switching back and forth between polling and interrupts is it
->>>>>>>>> possible to get low latencies across a large spectrum of offered loads
->>>>>>>>> without burning cpu cycles at 100%.
->>>>>>>>
->>>>>>>> Ah, I see what you're saying, yes, you're right. In this case ignore my comment
->>>>>>>> about ep_suspend_napi_irqs/napi_resume_irqs.
->>>>>>>
->>>>>>> Thanks for probing and double-checking everything! Feedback is important
->>>>>>> for us to properly document our proposal.
->>>>>>>
->>>>>>>> Let's see how other people feel about per-dev irq_suspend_timeout. Properly
->>>>>>>> disabling napi during busy polling is super useful, but it would still
->>>>>>>> be nice to plumb irq_suspend_timeout via epoll context or have it set on
->>>>>>>> a per-napi basis imho.
->>>>>> I agree, this would allow each napi queue to tune itself based on
->>>>>> heuristics. But I think
->>>>>> doing it through epoll independent interface makes more sense as Stan
->>>>>> suggested earlier.
->>>>>
->>>>> The question is whether to add a useful mechanism (one sysfs parameter
->>>>> and a few lines of code) that is optional, but with demonstrable and
->>>>> significant performance/efficiency improvements for an important class
->>>>> of applications - or wait for an uncertain future?
->>>>
->>>> The issue is that this one little change can never be removed, as it
->>>> becomes ABI.
->>>>
->>>> Let's get the right API from the start.
->>>>
->>>> Not sure that a global variable, or sysfs as API, is the right one.
->>>
->>> Sorry per-device, not global.
->>>
->>> My main concern is that it adds yet another user tunable integer, for
->>> which the right value is not obvious.
->>
->> This is a feature for advanced users just like SO_INCOMING_NAPI_ID
->> and countless other features.
->>
->> The value may not be obvious, but guidance (in the form of
->> documentation) can be provided.
+Hi James,
+
+On 8/16/24 11:29, James Morse wrote:
+> Hi Babu,
 > 
-> Okay. Could you share a stab at what that would look like?
+> Some boring comments about where the code goes...
 
-The timeout needs to be large enough that an application can get a 
-meaningful number of incoming requests processed without softirq 
-interference. At the same time, the timeout value determines the 
-worst-case delivery delay that a concurrent application using the same 
-queue(s) might experience. Please also see my response to Samiullah 
-quoted above. The specific circumstances and trade-offs might vary, 
-that's why a simple constant likely won't do.
+No worries. Lets address it when we can.
 
->>> If the only goal is to safely reenable interrupts when the application
->>> stops calling epoll_wait, does this have to be user tunable?
->>>
->>> Can it be either a single good enough constant, or derived from
->>> another tunable, like busypoll_read.
->>
->> I believe you meant busy_read here, is that right?
->>
->> At any rate:
->>
->>    - I don't think a single constant is appropriate, just as it
->>      wasn't appropriate for the existing mechanism
->>      (napi_defer_hard_irqs/gro_flush_timeout), and
->>
->>    - Deriving the value from a pre-existing parameter to preserve the
->>      ABI, like busy_read, makes using this more confusing for users
->>      and complicates the API significantly.
->>
->> I agree we should get the API right from the start; that's why we've
->> submit this as an RFC ;)
->>
->> We are happy to take suggestions from the community, but, IMHO,
->> re-using an existing parameter for a different purpose only in
->> certain circumstances (if I understand your suggestions) is a much
->> worse choice than adding a new tunable that clearly states its
->> intended singular purpose.
 > 
-> Ack. I was thinking whether an epoll flag through your new epoll
-> ioctl interface to toggle the IRQ suspension (and timer start)
-> would be preferable. Because more fine grained.
+> On 06/08/2024 23:00, Babu Moger wrote:
+>> Add the functionality to enable/disable AMD ABMC feature.
+>>
+>> AMD ABMC feature is enabled by setting enabled bit(0) in MSR
+>> L3_QOS_EXT_CFG.  When the state of ABMC is changed, the MSR needs
+>> to be updated on all the logical processors in the QOS Domain.
+>>
+>> Hardware counters will reset when ABMC state is changed. Reset the
+>> architectural state so that reading of hardware counter is not considered
+>> as an overflow in next update.
+>>
+>> The ABMC feature details are documented in APM listed below [1].
+>> [1] AMD64 Architecture Programmer's Manual Volume 2: System Programming
+>> Publication # 24593 Revision 3.41 section 19.3.3.3 Assignable Bandwidth
+>> Monitoring (ABMC).
+> 
+>> diff --git a/arch/x86/kernel/cpu/resctrl/internal.h b/arch/x86/kernel/cpu/resctrl/internal.h
+>> index 2bd207624eec..154983a67646 100644
+>> --- a/arch/x86/kernel/cpu/resctrl/internal.h
+>> +++ b/arch/x86/kernel/cpu/resctrl/internal.h
+> 
+>> @@ -536,6 +541,14 @@ int resctrl_arch_set_cdp_enabled(enum resctrl_res_level l, bool enable);
+>>  
+>>  void arch_mon_domain_online(struct rdt_resource *r, struct rdt_mon_domain *d);
+>>  
+>> +static inline bool resctrl_arch_get_abmc_enabled(void)
+>> +{
+>> +	return rdt_resources_all[RDT_RESOURCE_L3].mbm_cntr_assign_enabled;
+>> +}
+> 
+> Once the filesystem code moves to /fs/resctrl, this can't be inlined from the
+> architectures internal.h. Accessing rdt_resources_all[] from asm/resctrl.h isn't something
+> that is done today... could you move this to be a non-inline function in core.c?
 
-A value provided by an application through the epoll ioctl would not be 
-subject to admin oversight, so a misbehaving application could set an 
-arbitrary timeout value. A sysfs value needs to be set by an admin. The 
-ideal timeout value depends both on the particular target application as 
-well as concurrent applications using the same queue(s) - as sketched above.
+Sure.
 
-> Also, the value is likely dependent more on the expected duration
-> of userspace processing? If so, it would be the same for all
-> devices, so does a per-netdev value make sense?
+> 
+> (this saves me moving it later!)
+> 
+> 
+>> +int resctrl_arch_mbm_cntr_assign_enable(void);
+>> +void resctrl_arch_mbm_cntr_assign_disable(void);
+> 
+> Please add these in linux/resctrl.h - it saves me moving them later!
+> 
 
-It is per-netdev in the current proposal to be at the same granularity 
-as gro_flush_timeout and napi_defer_hard_irqs, because irq suspension 
-operates at the same level/granularity. This allows for more control 
-than a global setting and it can be migrated to per-napi settings along 
-with gro_flush_timeout and napi_defer_hard_irqs when the time comes.
+Sure.
 
-Thanks,
-Martin
+> 
+>> diff --git a/arch/x86/kernel/cpu/resctrl/rdtgroup.c b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
+>> index 7e76f8d839fc..6075b1e5bb77 100644
+>> --- a/arch/x86/kernel/cpu/resctrl/rdtgroup.c
+>> +++ b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
+>> @@ -2402,6 +2402,63 @@ int resctrl_arch_set_cdp_enabled(enum resctrl_res_level l, bool enable)
+> 
+>> +static void _resctrl_abmc_enable(struct rdt_resource *r, bool enable)
+>> +{
+>> +	struct rdt_mon_domain *d;
+> 
+> 
+>> +	/*
+>> +	 * Hardware counters will reset after switching the monitor mode.
+>> +	 * Reset the architectural state so that reading of hardware
+>> +	 * counter is not considered as an overflow in the next update.
+>> +	 */
+>> +	list_for_each_entry(d, &r->mon_domains, hdr.list) {
+>> +		on_each_cpu_mask(&d->hdr.cpu_mask,
+>> +				 resctrl_abmc_set_one_amd, &enable, 1);
+>> +		resctrl_arch_reset_rmid_all(r, d);
+>> +	}
+> 
+> Is there any mileage in getting resctrl_arch_mbm_cntr_assign_enable()'s caller to do this?
+> Every architecture that supports this will have to do this, and neither x86 nor arm64 are
+> able to do it atomically, or quicker than calling resctrl_arch_reset_rmid_all() for each
+> domain.
 
+Yes. I think it is better to it at at higher level(at
+rdtgroup_mbm_mode_write). That way it is common across all the architectures.
 
+> 
+>> +}
+> 
+> 
+>> +int resctrl_arch_mbm_cntr_assign_enable(void)
+> 
+> Could we pass the struct rdt_resource in - instead of hard coding it to be the L3 - you
+> already check hw_res->mbm_cntr_assign_enabled so no additional check is needed...
+> 
+> Background: I'd like to reduce the amount of "I magically know its the L3" to reduce the
+> work for whoever has to add monitor support for something other than the L3.
+> (I've currently no plans - but someone is going to build it!)
+
+Yes. We can pass struct rdt_resource.
+> 
+> 
+>> +{
+>> +	struct rdt_resource *r = &rdt_resources_all[RDT_RESOURCE_L3].r_resctrl;
+>> +	struct rdt_hw_resource *hw_res = resctrl_to_arch_res(r);
+> 
+>> +	lockdep_assert_held(&rdtgroup_mutex);
+> 
+> After the split between the architecture and filesystem code - this lock is private to the
+> filesystem. If you need to prevent concurrent enable/disable calls the architecture should
+> take its own mutex.
+> 
+> | static DEFINE_MUTEX(abmc_lock);
+> ?
+
+These calls are originated from filesystem (in this case
+rdtgroup_mbm_mode_write) which holds the mutex already. I don't think we
+need a separate lock here. Let me know If I am missing something here.
+
+> 
+> 
+>> +	if (r->mon.mbm_cntr_assignable && !hw_res->mbm_cntr_assign_enabled) {
+>> +		_resctrl_abmc_enable(r, true);
+>> +		hw_res->mbm_cntr_assign_enabled = true;
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +void resctrl_arch_mbm_cntr_assign_disable(void)
+>> +{
+>> +	struct rdt_resource *r = &rdt_resources_all[RDT_RESOURCE_L3].r_resctrl;
+>> +	struct rdt_hw_resource *hw_res = resctrl_to_arch_res(r);
+>> +
+>> +	lockdep_assert_held(&rdtgroup_mutex);
+> 
+> (same plea for passing the resource in, and not referring to the filesystem's locks)
+
+Sure.
+
+> 
+> 
+>> +	if (hw_res->mbm_cntr_assign_enabled) {
+>> +		_resctrl_abmc_enable(r, false);
+>> +		hw_res->mbm_cntr_assign_enabled = false;
+>> +	}
+>> +}
+> 
+> 
+> The work you do in these functions is pretty symmetric. Is it worth combining them into:
+> | resctrl_arch_mbm_cntr_assign_set(struct rdt_resource *r, bool enable) {
+> |	struct rdt_hw_resource *hw_res = resctrl_to_arch_res(r);
+> |
+> |	if (hw_res->mbm_cntr_assign_enabled != enable) {
+> |		_resctrl_abmc_enable(r, enable
+> |		hw_res->mbm_cntr_assign_enabled = enable;
+> |	}
+> | }
+
+Yes. We can do it.
+
+> 
+> I think you need a resctrl_arch_mbm_cntr_assign_test() too - I'll comment on that patch...
+> 
+> 
+> Thanks,
+> 
+> James
+> 
+
+-- 
+Thanks
+Babu Moger
 
