@@ -1,320 +1,227 @@
-Return-Path: <linux-doc+bounces-23259-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23273-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3B5E9576E9
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Aug 2024 23:56:20 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 155A2957A22
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Aug 2024 01:59:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 605851F23CF0
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Aug 2024 21:56:20 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C0826284C13
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Aug 2024 23:59:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B03351DC473;
-	Mon, 19 Aug 2024 21:56:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A47131667ED;
+	Mon, 19 Aug 2024 23:59:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=wanadoo.fr header.i=@wanadoo.fr header.b="mERexwoy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-vk1-f176.google.com (mail-vk1-f176.google.com [209.85.221.176])
+Received: from smtp.smtpout.orange.fr (smtp-18.smtpout.orange.fr [80.12.242.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D69571898E7;
-	Mon, 19 Aug 2024 21:56:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.176
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDFE8B657;
+	Mon, 19 Aug 2024 23:59:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.12.242.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724104567; cv=none; b=f1lHvCbh+Nv5jr/sHs4lsVpNlgzshWUVuM4H2MeTz6MLh99lPnoGea72Nk5oPCXtgMR8fhgHswr9E1RKDg6+OiN57Han7OQYAvxKnWsuGNBkUVpsF5vmcNL9KdfT1gFG/G1cEszVRtDrVk18Eq6X5hQVj+8BgYZXWxgO3/fWIHY=
+	t=1724111982; cv=none; b=XOF8bEeSb6NicyNCeMncWwAAFrom7/3bUVfTeXF3WP8bWa2T1OOuPShDHNBdbRbuIbrkyZ4Z783Tacmd5+8V1L6hnCvWZ5f+0Ifum0+wMisSiDc51WkVEtWszka42Flo3Tnmwo7mancmy1rHMztXt6NUFwfPRVEWUf1qGmdKgn8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724104567; c=relaxed/simple;
-	bh=TmkekAM5jlfjmMrWHESQvgf0yK9ZI7F0wPA+OBf51uA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=jsftzT245OQhNn8ECX282xC4EOJr3lNl057A6oW7zWcVPriuUBj19GcIjNL5gReSjcPT/3ozGlrgDd34dEPCFqwPDffRsB9ooRuzeHDK1FuRqZdKpjRqyk2eXbVq31BYYULMyMq6B85WWRSniobsQcaEDdpBPABQsfGZGcRRAME=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.221.176
-Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-vk1-f176.google.com with SMTP id 71dfb90a1353d-4fc7bd8763cso806428e0c.2;
-        Mon, 19 Aug 2024 14:56:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724104565; x=1724709365;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=68jtH1gMT0hvORY1A0IXRpMKwJhK5A/kT7YX0AeFdQk=;
-        b=at2bkFWjyO3yxrcwE0lpeVYT/py4gKkQLgJxGN9w/TkFhBnbVv52ykBKXBaS9HsVoU
-         uxMKOOVFx4bXppNoirhfkm69uxER9e+lOU9ecaMU+OzBfTGdEVWfSOcQfs+fUB2kNhaH
-         uE4IlS5euYQADcpV8CSBamXdARsmcfoug98vGtl+s1hcmPe09SLpFKcQsboizJD2tRVg
-         HhaG0Qe2dKvBh9vluaaDmIGaQdiAU4AEA9GazyApwmXx2esVUF0bECi3fZZ6S6QM2z3E
-         1pg+Ptu2nQJE/anvxlHsi6gEXxXxMthUxzQd90qhCNnyLUAhkBujhcqmHKSYUK/aZGC3
-         yUcA==
-X-Forwarded-Encrypted: i=1; AJvYcCU+zHjQU+AXpi7CStA4W1oOkFl161eGPBbzXIOMVnzkn8N+YW6UxXlSPVDqV44OpFZXMoXJT5XkYL1wJvm6rvFZmMXiqsBsWqNZOSfjQSsDFH97lQDmJSGOm5K4eOs0JgjZzjKm3O0A
-X-Gm-Message-State: AOJu0YwU0X3H3IHyMWY9vOmdpTkYjpilppz5bkMFdIifGc3XWk1GQ7yI
-	7Wh/7XOHDzcJZmWWL1Xndg0/B3lPPESTLt0Q3fSCnLOazdOhiyWSDEzRWdc6QLryPxCEGlw/5Tz
-	/JXKGu3rZIb34Ll7grSB7jXS2oxk=
-X-Google-Smtp-Source: AGHT+IEZIdw8wpoXSQOM21Stk7hHbJ3kSdIpE6PCXQlMRY/gGlOQJDe11aHF960J0st3NKJdV4kLVgMJRI2OLtGqyp4=
-X-Received: by 2002:a05:6122:2193:b0:4f6:b094:80b1 with SMTP id
- 71dfb90a1353d-4fc6c9fff96mr10350034e0c.11.1724104564640; Mon, 19 Aug 2024
- 14:56:04 -0700 (PDT)
+	s=arc-20240116; t=1724111982; c=relaxed/simple;
+	bh=yuIaNRdT2XsbRktrinM+nAtjGpiDnUSrUd78oiucAek=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=N2J//nk2eWjb5f7nQxAiHogMm1Tjrszgf//tPAvrXPYmGJzRbLMHXGuGGxbvTMyDwiKyBN56bG0ptxneE2X+KeII/szBvp+XurEd3YI1jwYVz0ZUj1kIvhXQPtaowFWJuFMsb7JveSu8rJJt6gmLaUxq2y/F5+JOX5xYHpoEenY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wanadoo.fr; spf=pass smtp.mailfrom=wanadoo.fr; dkim=pass (2048-bit key) header.d=wanadoo.fr header.i=@wanadoo.fr header.b=mERexwoy; arc=none smtp.client-ip=80.12.242.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wanadoo.fr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=wanadoo.fr
+Received: from [192.168.1.37] ([90.11.132.44])
+	by smtp.orange.fr with ESMTPA
+	id g6yfszJBlQRySg6yfszKrO; Mon, 19 Aug 2024 20:19:44 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wanadoo.fr;
+	s=t20230301; t=1724091584;
+	bh=i2piStncb9aJgwDrvhVqFSwNM+FZr5qttsR8sW3kpiA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:From;
+	b=mERexwoyPzlfOebBUEnIZsOtSDCyALgn06bAE0XuHJCOZf7MgURweOtCYf6D5ucvJ
+	 hMxqf1tym0+N1Yh1Kbtxnt/uiEN5D/QjnWk+qeYU1kf9fnNGIcOfFfUV8ildjug1Wj
+	 +AeJZMCJpizoL16BT/5H1yRsJWk4bK4mOJMcJ5w1C1DdkuK+LTxHCusEYR4OwF84Ku
+	 +LejUCxpLFrzVaYKQL35SlVlnRKXCLRCjGATL+8fj/YDf1K9GFn7lWZ/Qy8KDoyJRY
+	 4PIjpQAMLXkiwAulAoaPdD5hVIViRIDkDDoFS+N0BjfpoxS/HV8fdzvU2do0815ek2
+	 I0eIZaE9SrODA==
+X-ME-Helo: [192.168.1.37]
+X-ME-Auth: bWFyaW9uLmphaWxsZXRAd2FuYWRvby5mcg==
+X-ME-Date: Mon, 19 Aug 2024 20:19:44 +0200
+X-ME-IP: 90.11.132.44
+Message-ID: <74e9109a-ac59-49e2-9b1d-d825c9c9f891@wanadoo.fr>
+Date: Mon, 19 Aug 2024 20:19:28 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240819023145.2415299-1-usamaarif642@gmail.com>
- <20240819023145.2415299-5-usamaarif642@gmail.com> <CAGsJ_4yKuvMSazWABXqaeRr84hLEubET0nCUhPFYHQnfR4Tm8w@mail.gmail.com>
- <a09b6af0-4fdb-4ac1-9cbe-9b422ebc3308@gmail.com> <CAGsJ_4xeWt9n3zX3-DknE=NftkWS0fe2vKTJT9tLuJPM4EaEwg@mail.gmail.com>
- <9a58e794-2156-4a9f-a383-1cdfc07eee5e@gmail.com> <CAGsJ_4xiG+oGkjt3nf0Zh2rdztz8h_AaahZWs4N3UARhw7DcgQ@mail.gmail.com>
-In-Reply-To: <CAGsJ_4xiG+oGkjt3nf0Zh2rdztz8h_AaahZWs4N3UARhw7DcgQ@mail.gmail.com>
-From: Barry Song <baohua@kernel.org>
-Date: Tue, 20 Aug 2024 09:55:49 +1200
-Message-ID: <CAGsJ_4z2YL01wvVgsFsbzGAQ5KowXgxLcj=Y7DSX7ODOF5MUvw@mail.gmail.com>
-Subject: Re: [PATCH v4 4/6] mm: Introduce a pageflag for partially mapped folios
-To: Usama Arif <usamaarif642@gmail.com>
-Cc: akpm@linux-foundation.org, linux-mm@kvack.org, hannes@cmpxchg.org, 
-	riel@surriel.com, shakeel.butt@linux.dev, roman.gushchin@linux.dev, 
-	yuzhao@google.com, david@redhat.com, ryan.roberts@arm.com, rppt@kernel.org, 
-	willy@infradead.org, cerasuolodomenico@gmail.com, ryncsn@gmail.com, 
-	corbet@lwn.net, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	kernel-team@meta.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 8/9] vdap: solidrun: Replace deprecated PCI functions
+To: Philipp Stanner <pstanner@redhat.com>, onathan Corbet <corbet@lwn.net>,
+ Jens Axboe <axboe@kernel.dk>, Wu Hao <hao.wu@intel.com>,
+ Tom Rix <trix@redhat.com>, Moritz Fischer <mdf@kernel.org>,
+ Xu Yilun <yilun.xu@intel.com>, Andy Shevchenko <andy@kernel.org>,
+ Linus Walleij <linus.walleij@linaro.org>, Bartosz Golaszewski
+ <brgl@bgdev.pl>, "David S. Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Jose Abreu <joabreu@synopsys.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Alvaro Karsz <alvaro.karsz@solid-run.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?=
+ <eperezma@redhat.com>, Richard Cochran <richardcochran@gmail.com>,
+ Mark Brown <broonie@kernel.org>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-block@vger.kernel.org, linux-fpga@vger.kernel.org,
+ linux-gpio@vger.kernel.org, netdev@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org, linux-pci@vger.kernel.org,
+ virtualization@lists.linux.dev
+References: <20240819165148.58201-2-pstanner@redhat.com>
+ <20240819165148.58201-10-pstanner@redhat.com>
+Content-Language: en-US, fr-FR
+From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+In-Reply-To: <20240819165148.58201-10-pstanner@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Tue, Aug 20, 2024 at 9:34=E2=80=AFAM Barry Song <baohua@kernel.org> wrot=
-e:
->
-> On Tue, Aug 20, 2024 at 8:16=E2=80=AFAM Usama Arif <usamaarif642@gmail.co=
-m> wrote:
-> >
-> >
-> >
-> > On 19/08/2024 20:00, Barry Song wrote:
-> > > On Tue, Aug 20, 2024 at 2:17=E2=80=AFAM Usama Arif <usamaarif642@gmai=
-l.com> wrote:
-> > >>
-> > >>
-> > >>
-> > >> On 19/08/2024 09:29, Barry Song wrote:
-> > >>> Hi Usama,
-> > >>>
-> > >>> I feel it is much better now! thanks!
-> > >>>
-> > >>> On Mon, Aug 19, 2024 at 2:31=E2=80=AFPM Usama Arif <usamaarif642@gm=
-ail.com> wrote:
-> > >>>>
-> > >>>> Currently folio->_deferred_list is used to keep track of
-> > >>>> partially_mapped folios that are going to be split under memory
-> > >>>> pressure. In the next patch, all THPs that are faulted in and coll=
-apsed
-> > >>>> by khugepaged are also going to be tracked using _deferred_list.
-> > >>>>
-> > >>>> This patch introduces a pageflag to be able to distinguish between
-> > >>>> partially mapped folios and others in the deferred_list at split t=
-ime in
-> > >>>> deferred_split_scan. Its needed as __folio_remove_rmap decrements
-> > >>>> _mapcount, _large_mapcount and _entire_mapcount, hence it won't be
-> > >>>> possible to distinguish between partially mapped folios and others=
- in
-> > >>>> deferred_split_scan.
-> > >>>>
-> > >>>> Eventhough it introduces an extra flag to track if the folio is
-> > >>>> partially mapped, there is no functional change intended with this
-> > >>>> patch and the flag is not useful in this patch itself, it will
-> > >>>> become useful in the next patch when _deferred_list has non partia=
-lly
-> > >>>> mapped folios.
-> > >>>>
-> > >>>> Signed-off-by: Usama Arif <usamaarif642@gmail.com>
-> > >>>> ---
-> > >>>>  include/linux/huge_mm.h    |  4 ++--
-> > >>>>  include/linux/page-flags.h | 11 +++++++++++
-> > >>>>  mm/huge_memory.c           | 23 ++++++++++++++++-------
-> > >>>>  mm/internal.h              |  4 +++-
-> > >>>>  mm/memcontrol.c            |  3 ++-
-> > >>>>  mm/migrate.c               |  3 ++-
-> > >>>>  mm/page_alloc.c            |  5 +++--
-> > >>>>  mm/rmap.c                  |  5 +++--
-> > >>>>  mm/vmscan.c                |  3 ++-
-> > >>>>  9 files changed, 44 insertions(+), 17 deletions(-)
-> > >>>>
-> > >>>> diff --git a/include/linux/huge_mm.h b/include/linux/huge_mm.h
-> > >>>> index 4c32058cacfe..969f11f360d2 100644
-> > >>>> --- a/include/linux/huge_mm.h
-> > >>>> +++ b/include/linux/huge_mm.h
-> > >>>> @@ -321,7 +321,7 @@ static inline int split_huge_page(struct page =
-*page)
-> > >>>>  {
-> > >>>>         return split_huge_page_to_list_to_order(page, NULL, 0);
-> > >>>>  }
-> > >>>> -void deferred_split_folio(struct folio *folio);
-> > >>>> +void deferred_split_folio(struct folio *folio, bool partially_map=
-ped);
-> > >>>>
-> > >>>>  void __split_huge_pmd(struct vm_area_struct *vma, pmd_t *pmd,
-> > >>>>                 unsigned long address, bool freeze, struct folio *=
-folio);
-> > >>>> @@ -495,7 +495,7 @@ static inline int split_huge_page(struct page =
-*page)
-> > >>>>  {
-> > >>>>         return 0;
-> > >>>>  }
-> > >>>> -static inline void deferred_split_folio(struct folio *folio) {}
-> > >>>> +static inline void deferred_split_folio(struct folio *folio, bool=
- partially_mapped) {}
-> > >>>>  #define split_huge_pmd(__vma, __pmd, __address)        \
-> > >>>>         do { } while (0)
-> > >>>>
-> > >>>> diff --git a/include/linux/page-flags.h b/include/linux/page-flags=
-.h
-> > >>>> index a0a29bd092f8..c3bb0e0da581 100644
-> > >>>> --- a/include/linux/page-flags.h
-> > >>>> +++ b/include/linux/page-flags.h
-> > >>>> @@ -182,6 +182,7 @@ enum pageflags {
-> > >>>>         /* At least one page in this folio has the hwpoison flag s=
-et */
-> > >>>>         PG_has_hwpoisoned =3D PG_active,
-> > >>>>         PG_large_rmappable =3D PG_workingset, /* anon or file-back=
-ed */
-> > >>>> +       PG_partially_mapped =3D PG_reclaim, /* was identified to b=
-e partially mapped */
-> > >>>>  };
-> > >>>>
-> > >>>>  #define PAGEFLAGS_MASK         ((1UL << NR_PAGEFLAGS) - 1)
-> > >>>> @@ -861,8 +862,18 @@ static inline void ClearPageCompound(struct p=
-age *page)
-> > >>>>         ClearPageHead(page);
-> > >>>>  }
-> > >>>>  FOLIO_FLAG(large_rmappable, FOLIO_SECOND_PAGE)
-> > >>>> +FOLIO_TEST_FLAG(partially_mapped, FOLIO_SECOND_PAGE)
-> > >>>> +/*
-> > >>>> + * PG_partially_mapped is protected by deferred_split split_queue=
-_lock,
-> > >>>> + * so its safe to use non-atomic set/clear.
-> > >>>> + */
-> > >>>> +__FOLIO_SET_FLAG(partially_mapped, FOLIO_SECOND_PAGE)
-> > >>>> +__FOLIO_CLEAR_FLAG(partially_mapped, FOLIO_SECOND_PAGE)
-> > >>>>  #else
-> > >>>>  FOLIO_FLAG_FALSE(large_rmappable)
-> > >>>> +FOLIO_TEST_FLAG_FALSE(partially_mapped)
-> > >>>> +__FOLIO_SET_FLAG_NOOP(partially_mapped)
-> > >>>> +__FOLIO_CLEAR_FLAG_NOOP(partially_mapped)
-> > >>>>  #endif
-> > >>>>
-> > >>>>  #define PG_head_mask ((1UL << PG_head))
-> > >>>> diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-> > >>>> index 2d77b5d2291e..70ee49dfeaad 100644
-> > >>>> --- a/mm/huge_memory.c
-> > >>>> +++ b/mm/huge_memory.c
-> > >>>> @@ -3398,6 +3398,7 @@ int split_huge_page_to_list_to_order(struct =
-page *page, struct list_head *list,
-> > >>>>                          * page_deferred_list.
-> > >>>>                          */
-> > >>>>                         list_del_init(&folio->_deferred_list);
-> > >>>> +                       __folio_clear_partially_mapped(folio);
-> > >>>>                 }
-> > >>>>                 spin_unlock(&ds_queue->split_queue_lock);
-> > >>>>                 if (mapping) {
-> > >>>> @@ -3454,11 +3455,13 @@ void __folio_undo_large_rmappable(struct f=
-olio *folio)
-> > >>>>         if (!list_empty(&folio->_deferred_list)) {
-> > >>>>                 ds_queue->split_queue_len--;
-> > >>>>                 list_del_init(&folio->_deferred_list);
-> > >>>> +               __folio_clear_partially_mapped(folio);
-> > >>>
-> > >>> is it possible to make things clearer by
-> > >>>
-> > >>>  if (folio_clear_partially_mapped)
-> > >>>     __folio_clear_partially_mapped(folio);
-> > >>>
-> > >>> While writing without conditions isn't necessarily wrong, adding a =
-condition
-> > >>> will improve the readability of the code and enhance the clarity of=
- my mTHP
-> > >>> counters series. also help decrease smp cache sync if we can avoid
-> > >>> unnecessary writing?
-> > >>>
-> > >>
-> > >> Do you mean if(folio_test_partially_mapped(folio))?
-> > >>
-> > >> I don't like this idea. I think it makes the readability worse? If I=
- was looking at if (test) -> clear for the first time, I would become confu=
-sed why its being tested if its going to be clear at the end anyways?
-> > >
-> > > In the pmd-order case, the majority of folios are not partially mappe=
-d.
-> > > Unconditional writes will trigger cache synchronization across all
-> > > CPUs (related to the MESI protocol), making them more costly. By
-> > > using conditional writes, such as "if(test) write," we can avoid
-> > > most unnecessary writes, which is much more efficient. Additionally,
-> > > we only need to manage nr_split_deferred when the condition
-> > > is met. We are carefully evaluating all scenarios to determine
-> > > if modifications to the partially_mapped flag are necessary.
-> > >
-> >
-> >
-> > Hmm okay, as you said its needed for nr_split_deferred anyways. Somethi=
-ng like below is ok to fold in?
-> >
-> > commit 4ae9e2067346effd902b342296987b97dee29018 (HEAD)
-> > Author: Usama Arif <usamaarif642@gmail.com>
-> > Date:   Mon Aug 19 21:07:16 2024 +0100
-> >
-> >     mm: Introduce a pageflag for partially mapped folios fix
-> >
-> >     Test partially_mapped flag before clearing it. This should
-> >     avoid unnecessary writes and will be needed in the nr_split_deferre=
-d
-> >     series.
-> >
-> >     Signed-off-by: Usama Arif <usamaarif642@gmail.com>
-> >
-> > diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-> > index 5d67d3b3c1b2..ccde60aaaa0f 100644
-> > --- a/mm/huge_memory.c
-> > +++ b/mm/huge_memory.c
-> > @@ -3479,7 +3479,8 @@ void __folio_undo_large_rmappable(struct folio *f=
-olio)
-> >         if (!list_empty(&folio->_deferred_list)) {
-> >                 ds_queue->split_queue_len--;
-> >                 list_del_init(&folio->_deferred_list);
-> > -               __folio_clear_partially_mapped(folio);
-> > +               if (folio_test_partially_mapped(folio))
-> > +                       __folio_clear_partially_mapped(folio);
-> >         }
-> >         spin_unlock_irqrestore(&ds_queue->split_queue_lock, flags);
-> >  }
-> > @@ -3610,7 +3611,8 @@ static unsigned long deferred_split_scan(struct s=
-hrinker *shrink,
-> >                 } else {
-> >                         /* We lost race with folio_put() */
-> >                         list_del_init(&folio->_deferred_list);
-> > -                       __folio_clear_partially_mapped(folio);
-> > +                       if (folio_test_partially_mapped(folio))
-> > +                               __folio_clear_partially_mapped(folio);
-> >                         ds_queue->split_queue_len--;
-> >                 }
-> >                 if (!--sc->nr_to_scan)
-> >
->
-> Do we also need if (folio_test_partially_mapped(folio)) in
-> split_huge_page_to_list_to_order()?
->
-> I recall that in Yu Zhao's TAO, there=E2=80=99s a chance of splitting (sh=
-attering)
-> non-partially-mapped folios. To be future-proof, we might want to handle
-> both cases equally.
+Le 19/08/2024 à 18:51, Philipp Stanner a écrit :
+> solidrun utilizes pcim_iomap_regions(), which has been deprecated by the
+> PCI subsystem in commit e354bb84a4c1 ("PCI: Deprecate
+> pcim_iomap_table(), pcim_iomap_regions_request_all()"), among other
+> things because it forces usage of quite a complicated bitmask mechanism.
+> The bitmask handling code can entirely be removed by replacing
+> pcim_iomap_regions() and pcim_iomap_table().
+> 
+> Replace pcim_iomap_regions() and pcim_iomap_table() with
+> pci_iomap_region().
+> 
+> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+> ---
+>   drivers/vdpa/solidrun/snet_main.c | 47 +++++++++++--------------------
+>   1 file changed, 16 insertions(+), 31 deletions(-)
+> 
+> diff --git a/drivers/vdpa/solidrun/snet_main.c b/drivers/vdpa/solidrun/snet_main.c
+> index 99428a04068d..abf027ca35e1 100644
+> --- a/drivers/vdpa/solidrun/snet_main.c
+> +++ b/drivers/vdpa/solidrun/snet_main.c
+> @@ -556,33 +556,24 @@ static const struct vdpa_config_ops snet_config_ops = {
+>   static int psnet_open_pf_bar(struct pci_dev *pdev, struct psnet *psnet)
+>   {
+>   	char name[50];
+> -	int ret, i, mask = 0;
+> +	int i;
+> +
+> +	snprintf(name, sizeof(name), "psnet[%s]-bars", pci_name(pdev));
+> +
+>   	/* We don't know which BAR will be used to communicate..
+>   	 * We will map every bar with len > 0.
+>   	 *
+>   	 * Later, we will discover the BAR and unmap all other BARs.
+>   	 */
+>   	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
+> -		if (pci_resource_len(pdev, i))
+> -			mask |= (1 << i);
+> -	}
+> -
+> -	/* No BAR can be used.. */
+> -	if (!mask) {
+> -		SNET_ERR(pdev, "Failed to find a PCI BAR\n");
+> -		return -ENODEV;
+> -	}
+> -
+> -	snprintf(name, sizeof(name), "psnet[%s]-bars", pci_name(pdev));
+> -	ret = pcim_iomap_regions(pdev, mask, name);
+> -	if (ret) {
+> -		SNET_ERR(pdev, "Failed to request and map PCI BARs\n");
+> -		return ret;
+> -	}
+> +		if (pci_resource_len(pdev, i)) {
+> +			psnet->bars[i] = pcim_iomap_region(pdev, i, name);
 
-we recall we also have a real case which can split entirely_mapped
-folio:
+Hi,
 
-mm: huge_memory: enable debugfs to split huge pages to any order
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?=
-id=3Dfc4d182316bd5309b4066fd9ef21529ea397a7d4
+Unrelated to the patch, but is is safe to have 'name' be on the stack?
 
->
-> By the way, we might not need to clear the flag for a new folio. This dif=
-fers
-> from the init_list, which is necessary. If a new folio has the partially_=
-mapped
-> flag, it indicates that we failed to clear it when freeing the folio to
-> the buddy system, which is a bug we need to fix in the free path.
->
-> Thanks
-> Barry
+pcim_iomap_region()
+--> __pcim_request_region()
+--> __pcim_request_region_range()
+--> request_region() or __request_mem_region()
+--> __request_region()
+--> __request_region_locked()
+--> res->name = name;
+
+So an address on the stack ends in the 'name' field of a "struct resource".
+
+According to a few grep, it looks really unusual.
+
+I don't know if it is used, but it looks strange to me.
+
+
+If it is an issue, it was apparently already there before this patch.
+
+> +			if (IS_ERR(psnet->bars[i])) {
+> +				SNET_ERR(pdev, "Failed to request and map PCI BARs\n");
+> +				return PTR_ERR(psnet->bars[i]);
+> +			}
+> +		}
+>   
+> -	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
+> -		if (mask & (1 << i))
+> -			psnet->bars[i] = pcim_iomap_table(pdev)[i];
+>   	}
+>   
+>   	return 0;
+> @@ -591,18 +582,15 @@ static int psnet_open_pf_bar(struct pci_dev *pdev, struct psnet *psnet)
+>   static int snet_open_vf_bar(struct pci_dev *pdev, struct snet *snet)
+>   {
+>   	char name[50];
+> -	int ret;
+>   
+>   	snprintf(name, sizeof(name), "snet[%s]-bar", pci_name(pdev));
+>   	/* Request and map BAR */
+> -	ret = pcim_iomap_regions(pdev, BIT(snet->psnet->cfg.vf_bar), name);
+> -	if (ret) {
+> +	snet->bar = pcim_iomap_region(pdev, snet->psnet->cfg.vf_bar, name);
+
+Same
+
+Just my 2c.
+
+CJ
+
+> +	if (IS_ERR(snet->bar)) {
+>   		SNET_ERR(pdev, "Failed to request and map PCI BAR for a VF\n");
+> -		return ret;
+> +		return PTR_ERR(snet->bar);
+>   	}
+>   
+> -	snet->bar = pcim_iomap_table(pdev)[snet->psnet->cfg.vf_bar];
+> -
+>   	return 0;
+>   }
+>   
+> @@ -650,15 +638,12 @@ static int psnet_detect_bar(struct psnet *psnet, u32 off)
+>   
+>   static void psnet_unmap_unused_bars(struct pci_dev *pdev, struct psnet *psnet)
+>   {
+> -	int i, mask = 0;
+> +	int i;
+>   
+>   	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
+>   		if (psnet->bars[i] && i != psnet->barno)
+> -			mask |= (1 << i);
+> +			pcim_iounmap_region(pdev, i);
+>   	}
+> -
+> -	if (mask)
+> -		pcim_iounmap_regions(pdev, mask);
+>   }
+>   
+>   /* Read SNET config from PCI BAR */
+
 
