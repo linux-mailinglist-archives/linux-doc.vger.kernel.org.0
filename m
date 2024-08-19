@@ -1,227 +1,290 @@
-Return-Path: <linux-doc+bounces-23273-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23260-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 155A2957A22
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Aug 2024 01:59:51 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 38BF8957722
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Aug 2024 00:08:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C0826284C13
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Aug 2024 23:59:49 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id B8D9C1F21BCE
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Aug 2024 22:08:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A47131667ED;
-	Mon, 19 Aug 2024 23:59:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B30E15A849;
+	Mon, 19 Aug 2024 22:08:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=wanadoo.fr header.i=@wanadoo.fr header.b="mERexwoy"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="aui03HRM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.smtpout.orange.fr (smtp-18.smtpout.orange.fr [80.12.242.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com (mail-dm3nam02on2047.outbound.protection.outlook.com [40.107.95.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDFE8B657;
-	Mon, 19 Aug 2024 23:59:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.12.242.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724111982; cv=none; b=XOF8bEeSb6NicyNCeMncWwAAFrom7/3bUVfTeXF3WP8bWa2T1OOuPShDHNBdbRbuIbrkyZ4Z783Tacmd5+8V1L6hnCvWZ5f+0Ifum0+wMisSiDc51WkVEtWszka42Flo3Tnmwo7mancmy1rHMztXt6NUFwfPRVEWUf1qGmdKgn8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724111982; c=relaxed/simple;
-	bh=yuIaNRdT2XsbRktrinM+nAtjGpiDnUSrUd78oiucAek=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=N2J//nk2eWjb5f7nQxAiHogMm1Tjrszgf//tPAvrXPYmGJzRbLMHXGuGGxbvTMyDwiKyBN56bG0ptxneE2X+KeII/szBvp+XurEd3YI1jwYVz0ZUj1kIvhXQPtaowFWJuFMsb7JveSu8rJJt6gmLaUxq2y/F5+JOX5xYHpoEenY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wanadoo.fr; spf=pass smtp.mailfrom=wanadoo.fr; dkim=pass (2048-bit key) header.d=wanadoo.fr header.i=@wanadoo.fr header.b=mERexwoy; arc=none smtp.client-ip=80.12.242.18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wanadoo.fr
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=wanadoo.fr
-Received: from [192.168.1.37] ([90.11.132.44])
-	by smtp.orange.fr with ESMTPA
-	id g6yfszJBlQRySg6yfszKrO; Mon, 19 Aug 2024 20:19:44 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wanadoo.fr;
-	s=t20230301; t=1724091584;
-	bh=i2piStncb9aJgwDrvhVqFSwNM+FZr5qttsR8sW3kpiA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:From;
-	b=mERexwoyPzlfOebBUEnIZsOtSDCyALgn06bAE0XuHJCOZf7MgURweOtCYf6D5ucvJ
-	 hMxqf1tym0+N1Yh1Kbtxnt/uiEN5D/QjnWk+qeYU1kf9fnNGIcOfFfUV8ildjug1Wj
-	 +AeJZMCJpizoL16BT/5H1yRsJWk4bK4mOJMcJ5w1C1DdkuK+LTxHCusEYR4OwF84Ku
-	 +LejUCxpLFrzVaYKQL35SlVlnRKXCLRCjGATL+8fj/YDf1K9GFn7lWZ/Qy8KDoyJRY
-	 4PIjpQAMLXkiwAulAoaPdD5hVIViRIDkDDoFS+N0BjfpoxS/HV8fdzvU2do0815ek2
-	 I0eIZaE9SrODA==
-X-ME-Helo: [192.168.1.37]
-X-ME-Auth: bWFyaW9uLmphaWxsZXRAd2FuYWRvby5mcg==
-X-ME-Date: Mon, 19 Aug 2024 20:19:44 +0200
-X-ME-IP: 90.11.132.44
-Message-ID: <74e9109a-ac59-49e2-9b1d-d825c9c9f891@wanadoo.fr>
-Date: Mon, 19 Aug 2024 20:19:28 +0200
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC25514D70E;
+	Mon, 19 Aug 2024 22:08:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.95.47
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1724105313; cv=fail; b=XUV2aAJ1LZJkfmCoxgl8fdZ+vhcjdMx99GbYhRl3d6n0mKpevOnJP4Bq/0dnpwx9DPIYJZlyG8LdmdrXUlMcFVQwbXReuihx1fMnwBk9VXqIyPQbZ9/gjvP3kvPFLxlqIL2SOeR7i8yiET2XfDjeq9L8TwujScYBePjLQjV03EA=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1724105313; c=relaxed/simple;
+	bh=gjYftU9o7VzKkwq/bgU9ISEWb88xoZwudL0SApkMZXA=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=mRvw9VXNzUtdKFwZ36iIqV50YadSGOXZdUlGYEfXSTe+b/0ZaoLgNbG61iZYa+qSvb0dP+jARBAT4f2UUKzJ5HhthpQBIEdZUPwL/gby7HJ6mFpbqcG8Lfdrm5WYSTNrKjFEDD9Tnnacy5cAuIqkkyPIOlgkLu/Nr2ju/r1fqWo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=aui03HRM; arc=fail smtp.client-ip=40.107.95.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kCEcKQaNfzFZMX8dyCzBH6YdoYPbckX3GOp3QMBHMYdorsjeIGFENIHzEsrxUPMc8MCJciDQpdUHntR8d7vvzZfsWUPyGY+JOozWBvCVba20uIsBPO4i7eiH4EBV0H6Wijz75VoYczzsjcCAf+bFCS3s3wLeBHlRPTkfbc9HjYGtE76hwjz0FnP2lJLwjW72aM4gv5FjAcnwyMw/oZfuAUDiPkzBQIABtnIrFUAAoz7A2mEuU38+k1jDgKrg2R3PA8KZQp/9+NtP+tvrToJ3WkxwI7x9wbMmCikv8/UBcIDStJu+tyqQw6jhRJ9pT1gkPR2Jk1Gp24PhEnrZza5Yzg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bAWPpH98uB1OTCvvhWjODEhWm2A9dY5cc7zY2QcbBew=;
+ b=cMw6L/ooSYq4w8lB00YRAN7/xtEjpDGpEZQKCR0IFuwSEerdmtdzAqUuRCaOJ3H1R2K/FKRO/FUEJ2PHuOVF1jn1ICQ8RIDFQz3wAmeJoVSubZEUMjxIbLmlLgKirBv9M7aKJ5bbVeZ+4RdOwHDOQBrqVyGvRWTj9Qt53X5lyRNruBp4Mu1SZQOW84eBfFcNF34EA7MvSBLeTrdgL8hBQ62DLZ+etYMbbpf5r0S7feplJvpzQczqRz01vJ6pJ5OR3uLj1TnA6gqF1LLLY2ek3yJnPrQyogzDpWfymownvWSGnLHF/rMGEfLf8cb0Rr9ZXdQDTH2cQUNZE1Jlz719DQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=arm.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bAWPpH98uB1OTCvvhWjODEhWm2A9dY5cc7zY2QcbBew=;
+ b=aui03HRMWDpgcQjSkzW01NKZ1H6/NLixB5ob0040Gg+0FDGu1dc9kUkA0EUPLDZOqjSKHuYTb7fYLfsZjhr12mjJg5gjmNqhouVuF56bPdbxgK370HZt3suoHUKzkh3KgpUKAPGEih5q13h3IaxgcLStuHnTc8HWLUNtF8jqM0csT+ZaN1trn9jEzdRG5w6adbKbMmQAkHOZyomY2KeH0+9oopUiuj8vpCSBt4R49JNgzwgI6UrH8bknY+eEUZVDNQS2j7XHG++COwAZ6c0mj+As20yCXZBRPyDMd8gK/+g49frDo1dmU8uMKkVAh76pL8r3wGVQfJdNyLX9z4h46A==
+Received: from SJ0PR13CA0222.namprd13.prod.outlook.com (2603:10b6:a03:2c1::17)
+ by SN7PR12MB6984.namprd12.prod.outlook.com (2603:10b6:806:260::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.21; Mon, 19 Aug
+ 2024 22:08:26 +0000
+Received: from SJ1PEPF0000231D.namprd03.prod.outlook.com
+ (2603:10b6:a03:2c1:cafe::65) by SJ0PR13CA0222.outlook.office365.com
+ (2603:10b6:a03:2c1::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.13 via Frontend
+ Transport; Mon, 19 Aug 2024 22:08:26 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ SJ1PEPF0000231D.mail.protection.outlook.com (10.167.242.234) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7897.11 via Frontend Transport; Mon, 19 Aug 2024 22:08:26 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 19 Aug
+ 2024 15:08:07 -0700
+Received: from rnnvmail205.nvidia.com (10.129.68.10) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 19 Aug
+ 2024 15:08:07 -0700
+Received: from SDONTHINENI-DESKTOP.nvidia.com (10.127.8.12) by mail.nvidia.com
+ (10.129.68.10) with Microsoft SMTP Server id 15.2.1544.4 via Frontend
+ Transport; Mon, 19 Aug 2024 15:08:06 -0700
+From: Shanker Donthineni <sdonthineni@nvidia.com>
+To: James Morse <james.morse@arm.com>
+CC: Catalin Marinas <catalin.marinas@arm.com>, Shanker Donthineni
+	<sdonthineni@nvidia.com>, Rohit Mathew <rohit.mathew@arm.com>,
+	<linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, Vikram Sethi <vsethi@nvidia.com>
+Subject: [PATCH] arm_mpam: resctrl: Update only requested configuration
+Date: Mon, 19 Aug 2024 17:07:52 -0500
+Message-ID: <20240819220752.201815-1-sdonthineni@nvidia.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 8/9] vdap: solidrun: Replace deprecated PCI functions
-To: Philipp Stanner <pstanner@redhat.com>, onathan Corbet <corbet@lwn.net>,
- Jens Axboe <axboe@kernel.dk>, Wu Hao <hao.wu@intel.com>,
- Tom Rix <trix@redhat.com>, Moritz Fischer <mdf@kernel.org>,
- Xu Yilun <yilun.xu@intel.com>, Andy Shevchenko <andy@kernel.org>,
- Linus Walleij <linus.walleij@linaro.org>, Bartosz Golaszewski
- <brgl@bgdev.pl>, "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Jose Abreu <joabreu@synopsys.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Bjorn Helgaas <bhelgaas@google.com>,
- Alvaro Karsz <alvaro.karsz@solid-run.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?=
- <eperezma@redhat.com>, Richard Cochran <richardcochran@gmail.com>,
- Mark Brown <broonie@kernel.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-block@vger.kernel.org, linux-fpga@vger.kernel.org,
- linux-gpio@vger.kernel.org, netdev@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, linux-pci@vger.kernel.org,
- virtualization@lists.linux.dev
-References: <20240819165148.58201-2-pstanner@redhat.com>
- <20240819165148.58201-10-pstanner@redhat.com>
-Content-Language: en-US, fr-FR
-From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
-In-Reply-To: <20240819165148.58201-10-pstanner@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-NVConfidentiality: public
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231D:EE_|SN7PR12MB6984:EE_
+X-MS-Office365-Filtering-Correlation-Id: d557f863-a273-4687-4eaf-08dcc09b7325
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?G8Uk1baU+nkh+UCr9HBGOnviPEutCfBo0VJdbLYW7yQjyrE6akFI/ZSMOKYu?=
+ =?us-ascii?Q?971KkJZLL0AHXdzSwtb3Qk9pAMU7d0z9DE22fUqgVEAqUBl4XYQuMKj8k/oh?=
+ =?us-ascii?Q?QgOuInjNVlGDhynxn0x+HJ9/lmqcnH+cc35RGlnkgzZvEoUtge0w25aoSU1z?=
+ =?us-ascii?Q?8m3WFzqgTT6lhikHaTSyrConrJgmQdUiu+qGkgW8qtSRdcywTCexaBlZTGOI?=
+ =?us-ascii?Q?hTfpzAVk5CW6i86QxFW6kj1D4RTGmBLDgttYFT/qhZMS4kptmZYVoUWT6KkN?=
+ =?us-ascii?Q?TbgpJ53tC454MA1ZE29fJZeB3PPhg0NWmAJDxa5TZWV1WSZdV7x97f7dQ5LR?=
+ =?us-ascii?Q?WSMl7LCI9JpjYxUvKZ1YE83yjAd3jRRbVat/uVKU0D5LHKRlF4zgUoTXNneJ?=
+ =?us-ascii?Q?q5JJ2i2QoOkcmsSv1LqYLIgt/UErrjQ17zSbgujWHJnQ86Uat0wABRB8rDaM?=
+ =?us-ascii?Q?J6VXz2SgKMUvhMLGbQDPS3/sZiS2Jne2hp5BZhdTs0VAMuB9j79JbzQrf1q7?=
+ =?us-ascii?Q?b0jgs9xXKob9qIhQxfGpB/N8TSuvYZI5+ewViQyD4XA/VM9h3cOQN+6sYBGR?=
+ =?us-ascii?Q?RNhR5GHjkHfomLXCC8bTUR1iu2HoWdicMXp7/J10G4DCey6gjiVTjCO5EMJV?=
+ =?us-ascii?Q?hUth3xG5Mv0acF1NIiOqp7Z5nlAGwQI8BWlgMrQcquHU5TK7mWmiVHi1/FdH?=
+ =?us-ascii?Q?ysKzeVPUvLQpiUsv9KnXOYg0aO8N05KmDO6qnqR74jIVESe+Gvuefsnf9+oO?=
+ =?us-ascii?Q?qEmdiow+q8nRptwMP/bU86se+TF6ME77242+2EogKUmvDoeQfgJUqmgoicdu?=
+ =?us-ascii?Q?5Tyo2aZJ3qyEN18e80KFhU6pZn64wedAFYohAN5m3J4iDxldrnxywhK+7sBu?=
+ =?us-ascii?Q?lzSsJEiDQhKuxBykNWKELxe+HolOMyebKJq4l1X01P8xXC1D4aoXJJocV8ij?=
+ =?us-ascii?Q?XWS+R5dWsYn0sOEBRX50ELDWymI9+oBF7gcfieXYMZ8yKl4omfKn/DGDx2rM?=
+ =?us-ascii?Q?awjvpI9Nbb9fnYW5XUIoFrw1ttO7P5g0xy9f1h15BIz6F3NS+ehYM5qonK4V?=
+ =?us-ascii?Q?eX/IDsu3IawDCrDGzBMqRD7jAK2tHPJm1Vgc5BmHJQU9TiBrY1yWk1W2yOrg?=
+ =?us-ascii?Q?4z/6kLSHsQCKSF7cUuartsyjg9c7tZ4HjWgbklto6mSUSzL9QR249bfJMgch?=
+ =?us-ascii?Q?B84k6Zu6syoE+zHfXHTLYiMd8Z3+dn1yEJTQ2JtOoOp2EtwDWcXbdZeLOxr2?=
+ =?us-ascii?Q?Gimh0cOqZ9nNNne/s6jTi1RlJeLukdpoSGAGXZhvvbAe/jNr6ck9u9+HyGgF?=
+ =?us-ascii?Q?pnyvCDEmXHq1Bm+F4LT5af4aKtKR/vjfSBQoqrwX+eCYCCvzt9bXqdXSRlSz?=
+ =?us-ascii?Q?5LJlnaDN7zcg63jediY++a6Duu4u6BsVKgYUhET3zjDBg7RvNnhxbpvkACLn?=
+ =?us-ascii?Q?gCaL1vsgHGapcYvJGVPqjFeswkIdh9Sv?=
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2024 22:08:26.2806
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d557f863-a273-4687-4eaf-08dcc09b7325
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF0000231D.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6984
 
-Le 19/08/2024 à 18:51, Philipp Stanner a écrit :
-> solidrun utilizes pcim_iomap_regions(), which has been deprecated by the
-> PCI subsystem in commit e354bb84a4c1 ("PCI: Deprecate
-> pcim_iomap_table(), pcim_iomap_regions_request_all()"), among other
-> things because it forces usage of quite a complicated bitmask mechanism.
-> The bitmask handling code can entirely be removed by replacing
-> pcim_iomap_regions() and pcim_iomap_table().
-> 
-> Replace pcim_iomap_regions() and pcim_iomap_table() with
-> pci_iomap_region().
-> 
-> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
-> ---
->   drivers/vdpa/solidrun/snet_main.c | 47 +++++++++++--------------------
->   1 file changed, 16 insertions(+), 31 deletions(-)
-> 
-> diff --git a/drivers/vdpa/solidrun/snet_main.c b/drivers/vdpa/solidrun/snet_main.c
-> index 99428a04068d..abf027ca35e1 100644
-> --- a/drivers/vdpa/solidrun/snet_main.c
-> +++ b/drivers/vdpa/solidrun/snet_main.c
-> @@ -556,33 +556,24 @@ static const struct vdpa_config_ops snet_config_ops = {
->   static int psnet_open_pf_bar(struct pci_dev *pdev, struct psnet *psnet)
->   {
->   	char name[50];
-> -	int ret, i, mask = 0;
-> +	int i;
-> +
-> +	snprintf(name, sizeof(name), "psnet[%s]-bars", pci_name(pdev));
-> +
->   	/* We don't know which BAR will be used to communicate..
->   	 * We will map every bar with len > 0.
->   	 *
->   	 * Later, we will discover the BAR and unmap all other BARs.
->   	 */
->   	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
-> -		if (pci_resource_len(pdev, i))
-> -			mask |= (1 << i);
-> -	}
-> -
-> -	/* No BAR can be used.. */
-> -	if (!mask) {
-> -		SNET_ERR(pdev, "Failed to find a PCI BAR\n");
-> -		return -ENODEV;
-> -	}
-> -
-> -	snprintf(name, sizeof(name), "psnet[%s]-bars", pci_name(pdev));
-> -	ret = pcim_iomap_regions(pdev, mask, name);
-> -	if (ret) {
-> -		SNET_ERR(pdev, "Failed to request and map PCI BARs\n");
-> -		return ret;
-> -	}
-> +		if (pci_resource_len(pdev, i)) {
-> +			psnet->bars[i] = pcim_iomap_region(pdev, i, name);
+The resctrl has helper functions for updating CPOR and MBW configuration
+updates. While the existing resctrl_arch_update_one() effectively updates
+the specified configuration as intended, it inadvertently overrides other
+configurations with default values.
 
-Hi,
+Example bandwdith value is not applied:
+ root# cat /sys/fs/resctrl/schemata
+ MB:1=100
+ L3:1=fff
 
-Unrelated to the patch, but is is safe to have 'name' be on the stack?
+ root# echo -e "L3:1=fff\nMB:1=50" > /sys/fs/resctrl/schemata
+ root# cat /sys/fs/resctrl/schemata
+ MB:1=100
+ L3:1=fff
 
-pcim_iomap_region()
---> __pcim_request_region()
---> __pcim_request_region_range()
---> request_region() or __request_mem_region()
---> __request_region()
---> __request_region_locked()
---> res->name = name;
+Fix the potential loss of accuracy during the conversion of MBW_MAX from
+percentage to fixed-point representation, and vice versa. The updated
+functions provide fixed-point values that closely align with the values
+specified in the MPAM specification, Table 9-3 for Fraction Widths And
+Hex Representation.
 
-So an address on the stack ends in the 'name' field of a "struct resource".
+Before this fix:
+ root# echo -e "MB:1=1" > /sys/fs/resctrl/schemata
+ root# cat /sys/fs/resctrl/schemata
+ MB:1=000
+ L3:1=fff
 
-According to a few grep, it looks really unusual.
+ root# echo -e "MB:1=2" > /sys/fs/resctrl/schemata
+ root# cat /sys/fs/resctrl/schemata
+ MB:1=001
+ L3:1=fff
 
-I don't know if it is used, but it looks strange to me.
+ root# echo -e "MB:1=3" > /sys/fs/resctrl/schemata
+ root@pset# cat /sys/fs/resctrl/schemata
+ MB:1=001
+ L3:1=fff
 
+With this patch:
+ root# echo -e "MB:1=1" > /sys/fs/resctrl/schemata
+ root# cat /sys/fs/resctrl/schemata
+ MB:1=001
+ L3:1=fff
 
-If it is an issue, it was apparently already there before this patch.
+ root# echo -e "MB:1=2" > /sys/fs/resctrl/schemata
+ root# cat /sys/fs/resctrl/schemata
+ MB:1=002
+ L3:1=fff
 
-> +			if (IS_ERR(psnet->bars[i])) {
-> +				SNET_ERR(pdev, "Failed to request and map PCI BARs\n");
-> +				return PTR_ERR(psnet->bars[i]);
-> +			}
-> +		}
->   
-> -	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
-> -		if (mask & (1 << i))
-> -			psnet->bars[i] = pcim_iomap_table(pdev)[i];
->   	}
->   
->   	return 0;
-> @@ -591,18 +582,15 @@ static int psnet_open_pf_bar(struct pci_dev *pdev, struct psnet *psnet)
->   static int snet_open_vf_bar(struct pci_dev *pdev, struct snet *snet)
->   {
->   	char name[50];
-> -	int ret;
->   
->   	snprintf(name, sizeof(name), "snet[%s]-bar", pci_name(pdev));
->   	/* Request and map BAR */
-> -	ret = pcim_iomap_regions(pdev, BIT(snet->psnet->cfg.vf_bar), name);
-> -	if (ret) {
-> +	snet->bar = pcim_iomap_region(pdev, snet->psnet->cfg.vf_bar, name);
+ root# echo -e "MB:1=3" > /sys/fs/resctrl/schemata
+ root@pset# cat /sys/fs/resctrl/schemata
+ MB:1=003
+ L3:1=fff
 
-Same
+Signed-off-by: Shanker Donthineni <sdonthineni@nvidia.com>
+---
+ drivers/platform/arm64/mpam/mpam_resctrl.c | 49 ++++------------------
+ 1 file changed, 7 insertions(+), 42 deletions(-)
 
-Just my 2c.
-
-CJ
-
-> +	if (IS_ERR(snet->bar)) {
->   		SNET_ERR(pdev, "Failed to request and map PCI BAR for a VF\n");
-> -		return ret;
-> +		return PTR_ERR(snet->bar);
->   	}
->   
-> -	snet->bar = pcim_iomap_table(pdev)[snet->psnet->cfg.vf_bar];
-> -
->   	return 0;
->   }
->   
-> @@ -650,15 +638,12 @@ static int psnet_detect_bar(struct psnet *psnet, u32 off)
->   
->   static void psnet_unmap_unused_bars(struct pci_dev *pdev, struct psnet *psnet)
->   {
-> -	int i, mask = 0;
-> +	int i;
->   
->   	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
->   		if (psnet->bars[i] && i != psnet->barno)
-> -			mask |= (1 << i);
-> +			pcim_iounmap_region(pdev, i);
->   	}
-> -
-> -	if (mask)
-> -		pcim_iounmap_regions(pdev, mask);
->   }
->   
->   /* Read SNET config from PCI BAR */
+diff --git a/drivers/platform/arm64/mpam/mpam_resctrl.c b/drivers/platform/arm64/mpam/mpam_resctrl.c
+index 258a39e90f2e..f4da24cad600 100644
+--- a/drivers/platform/arm64/mpam/mpam_resctrl.c
++++ b/drivers/platform/arm64/mpam/mpam_resctrl.c
+@@ -574,23 +574,7 @@ static u32 mbw_pbm_to_percent(const unsigned long mbw_pbm, struct mpam_props *cp
+ 
+ static u32 mbw_max_to_percent(u16 mbw_max, struct mpam_props *cprops)
+ {
+-	int bit;
+-	u8 num_bits = 0;
+-	u32 divisor = 2, value = 0;
+-
+-	for (bit = 16; bit > (16 - cprops->bwa_wd); bit--) {
+-		if (mbw_max & BIT(bit - 1)) {
+-			num_bits++;
+-			value += MAX_MBA_BW / divisor;
+-		}
+-		divisor <<= 1;
+-	}
+-
+-	/* Lest user-space get confused... */
+-	if (num_bits == cprops->bwa_wd)
+-		return 100;
+-
+-	return value;
++	return DIV_ROUND_CLOSEST((mbw_max + 1) * 100, 65536);
+ }
+ 
+ static u32 percent_to_mbw_pbm(u8 pc, struct mpam_props *cprops)
+@@ -605,31 +589,7 @@ static u32 percent_to_mbw_pbm(u8 pc, struct mpam_props *cprops)
+ 
+ static u16 percent_to_mbw_max(u8 pc, struct mpam_props *cprops)
+ {
+-	u8 bit;
+-	u32 divisor = 2, value = 0, milli_pc;
+-
+-	/*
+-	 * To ensure 100% sets all the bits, we need to the contribution
+-	 * of bits worth less than 1%. Scale everything up by 1000.
+-	 */
+-	milli_pc = pc * 1000;
+-
+-	for (bit = 16; bit > (16 - cprops->bwa_wd); bit--) {
+-		if (milli_pc >= MAX_MBA_BW * 1000 / divisor) {
+-			milli_pc -= MAX_MBA_BW * 1000 / divisor;
+-			value |= BIT(bit - 1);
+-		}
+-		divisor <<= 1;
+-
+-		if (!milli_pc)
+-			break;
+-	}
+-
+-	/* Mask out unimplemented bits */
+-	if (cprops->bwa_wd <= 16)
+-		value &= GENMASK(15, 16 - cprops->bwa_wd);
+-
+-	return value;
++	return (((pc * 65536) / 100) - 1);
+ }
+ 
+ /* Find the L3 component that holds this CPU */
+@@ -1167,6 +1127,9 @@ int resctrl_arch_update_one(struct rdt_resource *r, struct rdt_ctrl_domain *d,
+ 	if (!r->alloc_capable || partid >= resctrl_arch_get_num_closid(r))
+ 		return -EINVAL;
+ 
++	/* Update with requested configuration only */
++	cfg = dom->comp->cfg[partid];
++
+ 	switch (r->rid) {
+ 	case RDT_RESOURCE_L2:
+ 	case RDT_RESOURCE_L3:
+@@ -1182,6 +1145,8 @@ int resctrl_arch_update_one(struct rdt_resource *r, struct rdt_ctrl_domain *d,
+ 		} else if (mpam_has_feature(mpam_feat_mbw_max, cprops)) {
+ 			cfg.mbw_max = percent_to_mbw_max(cfg_val, cprops);
+ 			mpam_set_feature(mpam_feat_mbw_max, &cfg);
++			/* Resctrl doesn't support MBW_MIN yet, use default value */
++			mpam_clear_feature(mpam_feat_mbw_min, &cfg.features);
+ 			break;
+ 		}
+ 		fallthrough;
+-- 
+2.25.1
 
 
