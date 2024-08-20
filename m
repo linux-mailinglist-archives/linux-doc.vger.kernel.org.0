@@ -1,173 +1,177 @@
-Return-Path: <linux-doc+bounces-23374-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23376-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E198958CE2
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Aug 2024 19:12:07 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 19F4C958CEE
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Aug 2024 19:16:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B5FB41F23D3A
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Aug 2024 17:12:06 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3C5B11C219F5
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Aug 2024 17:16:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EEFD81C3F08;
-	Tue, 20 Aug 2024 17:11:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 57314190462;
+	Tue, 20 Aug 2024 17:16:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="JWmOKv5y"
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="wh4IxtXn"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEFAE1BF31F
-	for <linux-doc@vger.kernel.org>; Tue, 20 Aug 2024 17:11:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 328FE101C4;
+	Tue, 20 Aug 2024 17:16:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724173898; cv=none; b=Xayh3Ex2AgfrquAxyVhFrV0ufcS67REw4XABZ/0whJ/hRkGxHrVdNjU0LGEjq+PcIeQvJ+rH7akHd+KajfxJC8Lek7R9P75HhznyhlRhD98CZGlYB5/kVN8/uYzfuQ5I9aVzL1Q0cWCQFvWtMhOwYHfqDCHzmljagmqSmGYCYAA=
+	t=1724174196; cv=none; b=EE9JUSm4KjnBVvlhQAbSs8K9LL0+JEVPlWib6X1xtLWkwHmfpbtl2IuTH6aQaXT+itTlPjLBh2D0bZxXzYI16KbKVZCCGXioAd94Lq46jkE9dYtLbcp61LRuu4ni55FH+iVP1I/RgYWrD+aE05efrliPopjfFSBVu7+0EGBPoPU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724173898; c=relaxed/simple;
-	bh=ikTvvm8hy1BF7FARpr0gNXmT5GHf2xyQyuwgTHN+X+g=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=IIHJjJrZr8cUZ9pg4tm/7U1BT9JZzTbqIDBArnpIq/7B+mMJePOHy/oqWSzWgGXlIYqRuljx//hklfsJtA0kktsvxrr+El1CpHj8h/9MUDHSDR6kedlsQ0xg5+aA68mhFROJ3Hz2q/rTcgVMOtplvjIXyHK5FWHGmH+5ie/H1AQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=JWmOKv5y; arc=none smtp.client-ip=209.85.160.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qt1-f169.google.com with SMTP id d75a77b69052e-44fee2bfd28so12671cf.1
-        for <linux-doc@vger.kernel.org>; Tue, 20 Aug 2024 10:11:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1724173894; x=1724778694; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BnG3mTCoiILr908gRTdf9mnBK5WkLmZC0rD5sCvrluY=;
-        b=JWmOKv5yFFrJYd0LYbJtplkPK52qutozBVpTDlR6h+LSHVOjhg/2SljhLQIvJ2HEQT
-         +NNa8SD7+iSJfKA9KL+U2Ogypc/RK9UMZq2bPTXyrSme/uujKl349EEvAT3ITGGZBK62
-         tBlrIe9SgCjTtx9JmA8eROKqjtV5WeB5KjOZsjtoGmWTinqVuLhTv5O601XQi4aeYVYg
-         T70IWupGYoYP44H5SD6gORN8+FMaJIM+CJWXJF38Vk1zIF6sWECLdX9yGsOKELtiPcVX
-         chxzwT2WtIBUY2XO36g+aSgU5ewta39r0aoyRdar4rChdI6kBTc1HGotditr/kHFXPni
-         x9Eg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724173894; x=1724778694;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BnG3mTCoiILr908gRTdf9mnBK5WkLmZC0rD5sCvrluY=;
-        b=g7cga11tdWKmR3P9b3UzoxrvGDq5SkK6wh5oMcBZ+nK9rasH7AaIUARVBxW8YF8qoX
-         RovAgKVxVzW28p9AZhvCDUMs75q73CQN1arMh+bpdEQ/OKPexYCmXEtluX3uSZqoLaLt
-         2lkMIGlXfU71w54IpMMMSSV/pY3crfzWu/FUrFONWXM+GZ0kiuHMLVocaeviWT0ptzbr
-         AHkxjjnkXRCVmOH/KhniGVeD+WkYWXytUfXKBSg9sGkvp/O4lHaN+4e8Z/SfL45p9ME3
-         KA0gQvTh8pkLjcByuVO/RGp7BmutNMmSq4HmTxqGIq15hvA6g8/lfOzc/kcTm9jgOlEV
-         3YLQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUg/xpQUNv3bpL912pgGR8OznVP5pvdUe6cCsKe9QTiGt4qdralTNGEgJhW8kztfB3hxhi/3+/4QrI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwxKBiuDaeEZayV+34w37x/jENfJtamenn5FjMX9/T73e5JYDyr
-	PTJN1T46UTFKccFi6W8APrdcCnTfm3C27n51+F47gK0l9wooGk3ny+rsfsM2us44yqTVG6Oc4Cv
-	N8L/KeDuoqnQte0Mt1l6KkYV1WPDYnKL4i1f+prz0szQ3icyeRDXn
-X-Google-Smtp-Source: AGHT+IEBYChI7KLbhDnxhptDasxvi66SSRGAyIIecU3g/9eHhycAcmIuoWtzgGhG2Nmu+KCELaheAYpAv+Ak2asKVEA=
-X-Received: by 2002:a05:622a:5297:b0:453:5f2f:d5d2 with SMTP id
- d75a77b69052e-454e852f800mr2224121cf.1.1724173894153; Tue, 20 Aug 2024
- 10:11:34 -0700 (PDT)
+	s=arc-20240116; t=1724174196; c=relaxed/simple;
+	bh=KlsDqUJM1mHlRFZZFUQbW7vF2f4ODUm8dttJhifoJp4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Ure30b4Ndnbq2fWmin497ymrSVregGElm/zSDFxmbdE5NllUQqY4G3jsSg93Co0DCxdow6dN7HLo41FuCcX/QZCnAahXX1CG2Tf0O60eewnSdPyxcmn9/HnLFN9q2891n62h3h/7IFGTYknJjl8EELGvDWGrvT3nJXLkGY+rlt4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=wh4IxtXn; arc=none smtp.client-ip=80.237.130.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:From:
+	Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+	Content-Transfer-Encoding:Content-ID:Content-Description:In-Reply-To:
+	References; bh=2kmbQKZObU3hlHNGeGrG2jsrvoxmn7benNNYZxhr1dM=; t=1724174194;
+	x=1724606194; b=wh4IxtXn88nm8TrO5LcCBDm41I7zTjm0/mqhiC4yd2+s+qxbMkpwIowzNN7cd
+	iEhqIbl0/Wo48w04OLmq+cRM6DbBL4oFB3RaoMeR7vaOVXlKI4ccpuI5O6eAFB9zdfHlN1KjC/1ja
+	JRMQiTOwJlYBuzGO4ihcsGI+N6dznZdggtJUJHloUJCU9j2PcjDFUP9TQtPXe1G3HlKHZxS9uFXXP
+	PYaQ5LVaA6xFfy765q1911KkuvHXD5g4DtfBdY5jnCcRqwO6svCF7NZjYqsSIM0IJmTpvawjNUSHQ
+	r3hF8X7XMt+hy3jRcmH67yxImym0mfCOZ+TAFpM14YmubwX7pg==;
+Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
+	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	id 1sgST5-0004pl-Gt; Tue, 20 Aug 2024 19:16:27 +0200
+Message-ID: <e6681b51-297e-4ef8-a199-d36712088740@leemhuis.info>
+Date: Tue, 20 Aug 2024 19:16:25 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240813211317.3381180-4-almasrymina@google.com>
- <CAMArcTWWxjsg_zwS6waWkLpyHhwdXDm_NJeVGm_dr+eT5QDZiA@mail.gmail.com>
- <20240819155257.1148e869@kernel.org> <CAHS8izPL4YdqFjkTpYavdxQn816=kkUv0xravQJF4Uno7Bn3ZQ@mail.gmail.com>
- <20240820081920.6630a73f@kernel.org>
-In-Reply-To: <20240820081920.6630a73f@kernel.org>
-From: Mina Almasry <almasrymina@google.com>
-Date: Tue, 20 Aug 2024 13:11:20 -0400
-Message-ID: <CAHS8izO-F2qwbEEtYONOYgNFsP3jxpv0etgSKknnAQ8itA5Cdw@mail.gmail.com>
-Subject: Re: [PATCH net-next v19 03/13] netdev: support binding dma-buf to netdevice
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: Taehee Yoo <ap420073@gmail.com>, netdev@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-alpha@vger.kernel.org, linux-mips@vger.kernel.org, 
-	linux-parisc@vger.kernel.org, sparclinux@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, linux-arch@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, bpf@vger.kernel.org, 
-	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
-	Paolo Abeni <pabeni@redhat.com>, Donald Hunter <donald.hunter@gmail.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Richard Henderson <richard.henderson@linaro.org>, 
-	Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Matt Turner <mattst88@gmail.com>, 
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
-	Andreas Larsson <andreas@gaisler.com>, Jesper Dangaard Brouer <hawk@kernel.org>, 
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Arnd Bergmann <arnd@arndb.de>, Steffen Klassert <steffen.klassert@secunet.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, David Ahern <dsahern@kernel.org>, 
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>, 
-	Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, 
-	John Fastabend <john.fastabend@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, 
-	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
-	Bagas Sanjaya <bagasdotme@gmail.com>, Christoph Hellwig <hch@infradead.org>, 
-	Nikolay Aleksandrov <razor@blackwall.org>, Pavel Begunkov <asml.silence@gmail.com>, David Wei <dw@davidwei.uk>, 
-	Jason Gunthorpe <jgg@ziepe.ca>, Yunsheng Lin <linyunsheng@huawei.com>, 
-	Shailend Chand <shailend@google.com>, Harshitha Ramamurthy <hramamurthy@google.com>, 
-	Shakeel Butt <shakeel.butt@linux.dev>, Jeroen de Borst <jeroendb@google.com>, 
-	Praveen Kaligineedi <pkaligineedi@google.com>, Willem de Bruijn <willemb@google.com>, 
-	Kaiyuan Zhang <kaiyuanz@google.com>, Daniel Vetter <daniel.vetter@ffwll.ch>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] docs: bug-bisect: rewrite to better match the other
+ bisecting text
+To: Petr Tesarik <ptesarik@suse.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, regressions@lists.linux.dev,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Bagas Sanjaya <bagasdotme@gmail.com>
+References: <fbeae4056ae8174f454c3865bc45633281bb1b31.1723997526.git.linux@leemhuis.info>
+ <20240820140751.0e024f21@mordecai>
+From: Thorsten Leemhuis <linux@leemhuis.info>
+Content-Language: en-US, de-DE
+Autocrypt: addr=linux@leemhuis.info; keydata=
+ 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 n7RI
+In-Reply-To: <20240820140751.0e024f21@mordecai>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1724174194;02ac1176;
+X-HE-SMSGID: 1sgST5-0004pl-Gt
 
-On Tue, Aug 20, 2024 at 11:19=E2=80=AFAM Jakub Kicinski <kuba@kernel.org> w=
-rote:
+On 20.08.24 14:07, Petr Tesarik wrote:
+> On Sun, 18 Aug 2024 18:12:13 +0200
+> Thorsten Leemhuis <linux@leemhuis.info> wrote:
 >
-> On Tue, 20 Aug 2024 00:01:02 -0400 Mina Almasry wrote:
-> > Took a bit of a look here. Forgive me, I'm not that familiar with XDP
-> > and virtual interfaces, so I'm a bit unsure what to do here.
-> >
-> > For veth, it seems, the device behind the veth is stored in
-> > veth_priv->peer, so it seems maybe a dev_get_max_mp_channel() check on
-> > veth_priv->peer is the way to go to disable this for veth? I think we
-> > need to do this check on creation of the veth and on the ndo_bpf of
-> > veth.
->
-> veth is a SW device pair, it can't reasonably support netmem.
-> Given all the unreasonable features it grew over time we can't
-> rule out that someone will try, but that's not our problem now.
->
-> > For bonding, it seems we need to add mp channel check in bond_xdp_set,
-> > and bond_enslave?
->
-> Sort of, I'd factor out that logic into the core first, as some
-> sort of "xdp propagate" helper. Then we can add that check once.
-> I don't see anything bond specific in the logic.
->
-> > There are a few other drivers that define ndo_add_slave, seems a check
-> > in br_add_slave is needed as well.
->
-> I don't think it's that broad. Not many drivers propagate XDP:
->
-> $ git grep -C 200 '\.ndo_add_slave' | grep '\.ndo_bpf'
-> drivers/net/bonding/bond_main.c-        .ndo_bpf                =3D bond_=
-xdp,
->
-> $ git grep --files-with-matches  'ops->ndo_bpf' -- drivers/
-> drivers/net/bonding/bond_main.c
-> drivers/net/hyperv/netvsc_bpf.c
->
+>> Rewrite the short document on bisecting kernel bugs. The new text
+>> improves .config handling, brings a mention of 'git skip', and explains
+> Nitpick: git bisect skip
 
-OK, got it, I'll take a deeper look and hopefully figure out something
-reasonable here.
+Ohh, one of those cases where one misses the most obvious mistakes. Thx
+for pointing this out!
 
-> > This seems like a potentially deep rabbit hole with a few checks to
-> > add all of the place. Is this blocking the series?
->
-> Protecting the stack from unreadable memory is *the* challenge
-> in this series. The rest is a fairly straightforward.
+Also: many thx for your feedback in general, performed a most of the
+changes you suggested (thx again), only replying to a few other bits.
 
-Understandable. I pulled the trigger on v21 with the build fix last
-night after reading your response on the other thread. If you manage
-to review that and let me know of any other issues I'm going to run
-into down the road, that would be great. But I read in some other
-thread that you're overloaded. Sorry if I'm piling on. Feel free to cr
-it if necessary, of course.
+ 
+> But it's still difficult to parse for me. Maybe it would be better to
+> reorder the sentence like this:
+> 
+>   After issuing one of these commands, if Git checks out another
+>   bisection point and prints something like 'Bisecting: 675 revisions
+>   left to test affter this (roughly 10 steps)', then go back to step 1.
 
---
-Thanks,
-Mina
+Chose to do it slightly different:
+
+   After issuing one of these two commands, Git will usually check out another
+   bisection point and print something like 'Bisecting: 675 revisions left to
+   test after this (roughly 10 steps)'. In that case go back to step 1. 
+
+>> +  Git might reject this, for example when the bisection landed on a merge
+>> +  commit. In that case, abandon the attempt. Do the same, if Git fails to revert
+>> +  the culprit on its own because later changes depend on it -- at least unless
+>> +  you bisected using a stable or longterm kernel series, in which case you want
+>> +  to retry using the latest code from that series.
+> 
+> Admittedly, this paragraph left me a bit confused. So, what is your
+> suggestion if I bisected using a stable or longterm kernel series (BTW
+> shouldn't we use Git-speak and call it a branch?)
+
+Not having a strong opinion here, but I'd say "series" is the better word
+here; but maybe "using" should go (see below).
+
+> and Git fails to
+> revert the commit because some later changes depend on the commit?
+> Are you trying to say I should check out the current head of that
+> stable or longterm branch and retry the revert there?
+
+Yeah. Changed the text slightly; does it make things better?
+ 
+  Git might reject this, for example when the bisection landed on a merge
+  commit. In that case, abandon the attempt. Do the same, if Git fails to revert
+  the culprit on its own because later changes depend on it -- at least unless
+  you bisected a stable or longterm kernel series, in which case you want to
+  check out its latest codebase and try a revert there.
+
+> Overall, it all looks good to me.
+> Thank you very much for your effort!
+
+Thx for saying that, the time your spend, and your feedback, 
+much appreciated!
+
+Ciao, Thorsten
 
