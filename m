@@ -1,107 +1,119 @@
-Return-Path: <linux-doc+bounces-23676-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23678-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D6C295D032
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Aug 2024 16:42:42 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 418BA95D016
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Aug 2024 16:37:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8783EB29D95
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Aug 2024 14:35:30 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id ECBC91F22071
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Aug 2024 14:37:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E2C191990D9;
-	Fri, 23 Aug 2024 14:24:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C3173188587;
+	Fri, 23 Aug 2024 14:29:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="cRoM0eyq"
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b="ozuKZJeI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
+Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65145188937;
-	Fri, 23 Aug 2024 14:24:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B66C118786B;
+	Fri, 23 Aug 2024 14:29:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=178.60.130.6
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724423068; cv=none; b=jbC/P0screEKs15J/CDY3cQsS1FVhK/u53Chd73rqtM0d/buNTa1u3Jq6lqQxGXgVXxaCTzKp/BeUiyPOuG2y268dd9UevuN1XFoGcOhprl7Hpquci6Hj6Afzm7janVDxkrrdNXnP8+n1ujurYYwSbqCfZCOti+Xv8zNavvgnSo=
+	t=1724423353; cv=none; b=bmhHBGvJBToz+7l2yuVAaCee1FX0s5LcR00q9pW4aS0iUlLs1ysBAxGHfEPVqwNt6Gx9+4tVHP6Jp38Y9lwKQDRm7931+hSlxQAZz2uBDnPeHnkQEX5ZsciYTeLQ+XJ8lnJLafLjt5S/A8mp/CWpGuoftUO1xhjBMp9MRcommt4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724423068; c=relaxed/simple;
-	bh=vwghNAchrEC2r0wG0GawuHbrPuP/OZEDrYilXmYG7UY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hQSpfxV1XQ/G2Jwyt7A1k64pBV+j26GzSgkEHY5AEZod+WltUIXlACuGfp73yHl0v5y75uN9fM+IvHQt9vmTcQfO2rACnYcsyKA1bevlOmleGGwu5zjtr1ViGIiirv+0X8/SuVDBmJOGeSQwTAbDUM3Kk+084WfPN3wBKWWGcsM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=cRoM0eyq; arc=none smtp.client-ip=192.198.163.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1724423067; x=1755959067;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=vwghNAchrEC2r0wG0GawuHbrPuP/OZEDrYilXmYG7UY=;
-  b=cRoM0eyqVcOMLJFXsS21gNSgDPeGDHU8JdtrH28aMLtdoN7lNL0cDanh
-   rPniOXc5PDdr3KhvbxQ40VCcPvLAIi5nS/sSuGECA7gJ0GODR7m2JlgCr
-   iy2nKNgUCTNQj2M8m9hWmu/j5x4EmoyUhYRDaSRifkxgTqa2WPF9AFciJ
-   +IdOZxthJLZKMszt3mBsvSGTpbBCwhDmJazFn2nIRk8mmmk1UAIaSYr8j
-   GzFiZyKZ/tQ+DkjMzA4zOiZ8OTXP7oU60xG8bHCAVlXVHMcNJn9AS6JdE
-   GSdwjPP3hAsRaP4hiFRjZEtkZexi7EgEUEyfyXwo51KWP15am4w+shxCG
-   w==;
-X-CSE-ConnectionGUID: yy8VfHXxTvOLWIvFYRLZXA==
-X-CSE-MsgGUID: U2tbvM7TQWiuhSVvq2gqog==
-X-IronPort-AV: E=McAfee;i="6700,10204,11172"; a="34309184"
-X-IronPort-AV: E=Sophos;i="6.10,170,1719903600"; 
-   d="scan'208";a="34309184"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Aug 2024 07:24:27 -0700
-X-CSE-ConnectionGUID: C1dZ5DV3SLaGHKoI9IJIaQ==
-X-CSE-MsgGUID: z+hcqswCTgWpo9fvVMnQGQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,170,1719903600"; 
-   d="scan'208";a="61810721"
-Received: from smile.fi.intel.com ([10.237.72.54])
-  by fmviesa008.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Aug 2024 07:24:23 -0700
-Received: from andy by smile.fi.intel.com with local (Exim 4.98)
-	(envelope-from <andriy.shevchenko@linux.intel.com>)
-	id 1shVDA-00000000opy-3xIt;
-	Fri, 23 Aug 2024 17:24:20 +0300
-Date: Fri, 23 Aug 2024 17:24:20 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: subramanian.mohan@intel.com
-Cc: gregkh@linuxfoundation.org, tglx@linutronix.de, giometti@enneenne.com,
-	corbet@lwn.net, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, eddie.dong@intel.com,
-	christopher.s.hall@intel.com, pandith.n@intel.com,
-	thejesh.reddy.t.r@intel.com, david.zage@intel.com,
-	srinivasan.chinnadurai@intel.com
-Subject: Re: [PATCH v12 3/3] ABI: pps: Add ABI documentation for Intel TIO
-Message-ID: <ZsiblBUJ08PwustJ@smile.fi.intel.com>
-References: <20240823070109.27815-1-subramanian.mohan@intel.com>
- <20240823070109.27815-4-subramanian.mohan@intel.com>
+	s=arc-20240116; t=1724423353; c=relaxed/simple;
+	bh=YCwmfOQ4+j5ZTua/y1w9BRTVk9yDOdoM0dPoqpyi2pM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=lqKiFnEwUH8e/IedwETFBpOIaKZyQrlB+AWnPplIUls7Onz6JsTL7tPjAwhGiHHB+t9k3CR7whwV9lJXKNr3+x//l+NTr1D4dkVHS+i/EACod8I8O1g0WWMLaQajrHABTqzbNjANnu8swUrAGEfCllX/EBiYfCw/rqqk9teplN8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=igalia.com; spf=pass smtp.mailfrom=igalia.com; dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b=ozuKZJeI; arc=none smtp.client-ip=178.60.130.6
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=igalia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=s7YPy+QRRfbLk38fcA19eeP3a4qxXdeXDpbv4x1kpi0=; b=ozuKZJeIB1KUMIczATebdsWN3P
+	aefS7hQGqVuJlxfTVgpH22EUXlsTymgj+GsNfBMCaI8GiwjUMXvT1wy9Z7aNXTIUNYnSIf7HIIjCc
+	n+AYUjOoW6rkw4JZXOOHX87CknOHrw2adzCqzQcE6Rq6qChGkqTGfj6wDuXBRk67FIuOKsLmqeffW
+	E4dCtAyB40n8by8IgpTZ7tY4LZbL29Sk2J655LHStRXCR/BkJZGam6gk9JTrBvwDvGAGuMOto3wxO
+	OdlOMi4wbz+lxQ8T7367hCQoe+nO8VzebTV9/qwXu3r9Zd3nAvusno1M8aJhcH8i7+z9r7Qva9hhJ
+	F6/GXBMg==;
+Received: from [177.76.152.96] (helo=localhost)
+	by fanzine2.igalia.com with esmtpsa 
+	(Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+	id 1shVHa-00458Y-5f; Fri, 23 Aug 2024 16:28:54 +0200
+From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+To: linux-doc@vger.kernel.org
+Cc: corbet@lwn.net,
+	linux-fsdevel@vger.kernel.org,
+	linux-block@vger.kernel.org,
+	kernel-dev@igalia.com,
+	kernel@gpiccoli.net,
+	"Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+	"Darrick J. Wong" <djwong@kernel.org>,
+	Jan Kara <jack@suse.cz>
+Subject: [PATCH V2] Documentation: Document the kernel flag bdev_allow_write_mounted
+Date: Fri, 23 Aug 2024 11:26:07 -0300
+Message-ID: <20240823142840.63234-1-gpiccoli@igalia.com>
+X-Mailer: git-send-email 2.46.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240823070109.27815-4-subramanian.mohan@intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 23, 2024 at 12:31:08PM +0530, subramanian.mohan@intel.com wrote:
-> From: Subramanian Mohan <subramanian.mohan@intel.com>
-> 
-> Document sysfs interface for Intel Timed I/O PPS driver.
+Commit ed5cc702d311 ("block: Add config option to not allow writing to mounted
+devices") added a Kconfig option along with a kernel command-line tuning to
+control writes to mounted block devices, as a means to deal with fuzzers like
+Syzkaller, that provokes kernel crashes by directly writing on block devices
+bypassing the filesystem (so the FS has no awareness and cannot cope with that).
 
-...
+The patch just missed adding such kernel command-line option to the kernel
+documentation, so let's fix that.
 
-> +Contact:	Christopher Hall <christopher.s.hall@intel.com>
-> +		Subramanian Mohan<subramanian.mohan@intel.com>
+Cc: Darrick J. Wong <djwong@kernel.org>
+Cc: Jan Kara <jack@suse.cz>
+Signed-off-by: Guilherme G. Piccoli <gpiccoli@igalia.com>
+---
 
-Missing space. This seems like a warrant for v13, but again, let's wait a bit
-for others to comment.
+V2: Improved wording (thanks Darrick!)
 
+V1 link: https://lore.kernel.org/r/20240819225626.2000752-2-gpiccoli@igalia.com
+
+
+ Documentation/admin-guide/kernel-parameters.txt | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 09126bb8cc9f..7c5283f11308 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -517,6 +517,18 @@
+ 			Format: <io>,<irq>,<mode>
+ 			See header of drivers/net/hamradio/baycom_ser_hdx.c.
+ 
++	bdev_allow_write_mounted=
++			Format: <bool>
++			Control the ability of directly writing to mounted block
++			devices' page cache, i.e., allow / disallow writes that
++			bypasses the FS. This was implemented as a means to
++			prevent fuzzers from crashing the kernel by overwriting
++			the metadata underneath a mounted FS without its awareness.
++			This also prevents destructive formatting of mounted
++			filesystems by naive storage tooling that don't use
++			O_EXCL. Default is Y and can be changed through the
++			Kconfig option CONFIG_BLK_DEV_WRITE_MOUNTED.
++
+ 	bert_disable	[ACPI]
+ 			Disable BERT OS support on buggy BIOSes.
+ 
 -- 
-With Best Regards,
-Andy Shevchenko
-
+2.46.0
 
 
