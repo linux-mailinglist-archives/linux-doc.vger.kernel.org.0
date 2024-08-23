@@ -1,132 +1,212 @@
-Return-Path: <linux-doc+bounces-23646-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23648-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A45795C5FA
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Aug 2024 09:02:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8825895C6AB
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Aug 2024 09:38:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3056D1F2397D
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Aug 2024 07:02:06 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 137931F26BB8
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Aug 2024 07:38:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 261E8139D15;
-	Fri, 23 Aug 2024 07:01:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="AdxoyAuN"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12853143C5F;
+	Fri, 23 Aug 2024 07:37:09 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 616F513C9D9;
-	Fri, 23 Aug 2024 07:01:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50D6113DDC2
+	for <linux-doc@vger.kernel.org>; Fri, 23 Aug 2024 07:37:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724396489; cv=none; b=eiMPm31lETlhOUEcTLNf3eUuMzTtdqscXFFDKhHAOQskjb7WCKW1d+f6Ig/Nfw4Ldd5HJo1zaTGPP73C3g0zMl6U1FBnJu5+ddJrwiNTso1oHDSTQ6aRQDdaU+F+2I8RKcfQfMSXiFj3AHmv1O3WR8/GLJlypx3RHd5flzZ75tM=
+	t=1724398629; cv=none; b=tYwE0pCGmHRupyYnwWx44l4UxUX+nJqAhmOUFZhjf9ag0pDywiO4YuWrNuPtK0Y+pk14+qTmHnHbc8nZlD+83wOLvBkyACi6i0LxuMwPOBpYbLjg/a2QtfCz0dq4PbjKURqRJyZ9mhbpRVaeKjS7UaWMb/Qj4zh2zdiDiIJVKqc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724396489; c=relaxed/simple;
-	bh=M7u8dwEi2+oYVWiHViJ2HEDlciSMLJc87pWlx3bLL8Q=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=tS4gzlZ/kOpFx/XynOezthbV7/ecUpyJs1Wrr/emKZj57B0C4+6YcQFmIrZAJW9QsjCrUnjHuaLC54CM1B6ZnFC7MlaUPe+Agdv5dNNX+WLRztJTA2WxOe4GS13qNYI+hl8sxPGJBp8bgfcZCTOQWsct8ZTJR8l6KwIxYHgO3hg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=AdxoyAuN; arc=none smtp.client-ip=192.198.163.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1724396487; x=1755932487;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=M7u8dwEi2+oYVWiHViJ2HEDlciSMLJc87pWlx3bLL8Q=;
-  b=AdxoyAuNH/wcL5TVEuh85zOvXrGNkFFwFaItgn0xqpCO+J2fBPkT0Iux
-   a6ROWHy+/0y3b2g/lKT8IU2dzTl3YRH8kOQ3uk5310krhW32EeVK2rfhm
-   ptclAIMKpb/nOl+IfSGEQj9HcI7NVHeBbVJ5xmKfeXvtfN50Pkxbt0+7z
-   QMrlgF05i+d96PZO//NueWSbWwtnBufTd4g+wCBectWxhMgWFKMO08IRy
-   2owsoI4W8MpM0IGEr+JAc7xW8Tz4t/+DyATUQtD5qVs1RYywYS74op9gW
-   qeWufEH9JWAWDc8KDSsDy/sHvyKXNl0I2RNN9TexPxFLLn+OW6jatDESe
-   A==;
-X-CSE-ConnectionGUID: /utSTpCsT0C7IdmPouo4Fg==
-X-CSE-MsgGUID: 70UcUZlhRsekWRrORG8S2w==
-X-IronPort-AV: E=McAfee;i="6700,10204,11172"; a="26717165"
-X-IronPort-AV: E=Sophos;i="6.10,169,1719903600"; 
-   d="scan'208";a="26717165"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Aug 2024 00:01:26 -0700
-X-CSE-ConnectionGUID: E2DHWZGKT4GD78r/w6LRWQ==
-X-CSE-MsgGUID: 3VpCxLsjQaSRNVn3PskVaQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,169,1719903600"; 
-   d="scan'208";a="62004893"
-Received: from inlubt0246.iind.intel.com ([10.191.24.87])
-  by orviesa006.jf.intel.com with ESMTP; 23 Aug 2024 00:01:22 -0700
-From: subramanian.mohan@intel.com
-To: gregkh@linuxfoundation.org,
-	tglx@linutronix.de,
-	giometti@enneenne.com,
-	corbet@lwn.net,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Cc: andriy.shevchenko@linux.intel.com,
-	eddie.dong@intel.com,
-	christopher.s.hall@intel.com,
-	pandith.n@intel.com,
-	thejesh.reddy.t.r@intel.com,
-	david.zage@intel.com,
-	srinivasan.chinnadurai@intel.com,
-	subramanian.mohan@intel.com
-Subject: [PATCH v12 3/3] ABI: pps: Add ABI documentation for Intel TIO
-Date: Fri, 23 Aug 2024 12:31:08 +0530
-Message-Id: <20240823070109.27815-4-subramanian.mohan@intel.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20240823070109.27815-1-subramanian.mohan@intel.com>
-References: <20240823070109.27815-1-subramanian.mohan@intel.com>
+	s=arc-20240116; t=1724398629; c=relaxed/simple;
+	bh=eroYpqdyOiSP4cxkVpk2TA7jSZdwEq21PIcg/hcChc4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=V68kND1jS6c/iZ6rNbyr1umPDfX3kv2rGEFDsnOAPQ53XXm7B5VtVgp4MJSY5jvAseuXotD8+27a3BT0Yn8jc+9o6Q1f0aNn9pibk9ny5q76L4xBt8XO63XfOkdZzBCfrel6PX42Do8BS2+kYX19OspvL9IZ0//pbTbxZdIrbd4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <m.grzeschik@pengutronix.de>)
+	id 1shOqr-0004KT-Kz; Fri, 23 Aug 2024 09:36:53 +0200
+Received: from [2a0a:edc0:0:1101:1d::ac] (helo=dude04.red.stw.pengutronix.de)
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <m.grzeschik@pengutronix.de>)
+	id 1shOqn-002R4L-5k; Fri, 23 Aug 2024 09:36:49 +0200
+Received: from localhost ([::1] helo=dude04.red.stw.pengutronix.de)
+	by dude04.red.stw.pengutronix.de with esmtp (Exim 4.96)
+	(envelope-from <m.grzeschik@pengutronix.de>)
+	id 1shOqn-00AtQT-0J;
+	Fri, 23 Aug 2024 09:36:49 +0200
+From: Michael Grzeschik <m.grzeschik@pengutronix.de>
+Subject: [PATCH v9 0/3] usb: gadget: 9pfs transport
+Date: Fri, 23 Aug 2024 09:36:46 +0200
+Message-Id: <20240116-ml-topic-u9p-v9-0-93d73f47b76b@pengutronix.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAA48yGYC/33Py26DMBAF0F+JvK4bv4276n9UXfgxDpYIIENQq
+ oh/r2Fb18s7unNG80IL5AQL+ri8UIYtLWkaSzBvF+R7O94Ap1AyYoQJQqnC9wGv05w8fpgZd0Y
+ yLSQn4CgqK84ugF22o++PpftwH65n+1raR2HOENPzvPf1XXKflnXKP+f5jR7Tfy5tFBNsQ+c5U
+ dFYAZ8zjLfHmqcxPd8DoEPbWEtgRXBCeRelYUaxqsBbAi+CV8xyBd4HS6uCaAmiCJoxCKxzxIb
+ 6F7IlyCJICMS6IDlEWRVUS1BFUEYarYNWIcaqoFuCLgK3FACi1tHVv+haQlcEQQwoabwVIfwR9
+ n3/Be6NkVycAgAA
+To: Eric Van Hensbergen <ericvh@kernel.org>, 
+ Latchesar Ionkov <lucho@ionkov.net>, 
+ Dominique Martinet <asmadeus@codewreck.org>, 
+ Christian Schoenebeck <linux_oss@crudebyte.com>, 
+ Jonathan Corbet <corbet@lwn.net>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Andrzej Pietrasiewicz <andrzej.p@collabora.com>, v9fs@lists.linux.dev, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-usb@vger.kernel.org, kernel@pengutronix.de, 
+ Michael Grzeschik <m.grzeschik@pengutronix.de>, 
+ Jan Luebbe <jlu@pengutronix.de>
+X-Mailer: b4 0.12.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5641;
+ i=m.grzeschik@pengutronix.de; h=from:subject:message-id;
+ bh=eroYpqdyOiSP4cxkVpk2TA7jSZdwEq21PIcg/hcChc4=;
+ b=owEBbQKS/ZANAwAKAb9pWET5cfSrAcsmYgBmyDwPcmiUnUg90Z5vYStde383Rnzy6DR7cQjdG
+ LrE+HLauOCJAjMEAAEKAB0WIQQV2+2Fpbqd6fvv0Gi/aVhE+XH0qwUCZsg8DwAKCRC/aVhE+XH0
+ qzNuD/4p66j34UbVtTX1LBfJy2ZgIOqotnBmsrQtrg14PTIp26+4K6hf7z79yhFBhWHuxcoLRtb
+ JaOeeHd2UV7EA3X/j5LFGAo+YDUiBiNLLNCmRblqPnApPytxnQYGGnXYtlQADj+vzfzF/kF3SlB
+ 4a1al1gw5Gzu3qANa5RVYe0QCBl8CQaQvhyF0G3Tbb/zSlcuexaaF0Y4+EHOxbYwVNzTuwPbE9U
+ d7KBNsBc4u+JUAGVHbvSnm55QtsJTpZiraH8ALt/vVQWgOUON5vcdUOq5sU8k5ToY+8RQb6T2fr
+ 5Kxw2lJ991SMnJg3/dTAG42UOpkIsWPvrJ0HsiVI3CdcMGbaqq1oPQHJuJ0yWBPK9ECBapcK8Fv
+ GWYI4JUgDmelgBlgju/BAer10K+GPoQwHxfQA9YTA76+Fl3zfOGPHC+LLjUsjsFeWMS0/tcgsFJ
+ dlUmnIwUP5mkItEQ7GpDtgToWWZxz2DezWK3gvXStz4+XRAl6pSlJam/P90K7ZyyMhSjr3rD4hi
+ 3rivLzAYvHK0aUUq+YOiZrdI1X273O6Ju4kj/Xsjoa3p15OWV7ZquOLW1G5oHoT1uNMQ3VSRQJc
+ 9C8HTYrmDJhISBSDquMi7zGS8a3IwI2/EWRuDN5v8vxIylZ+7IE2oxg8f8E+8xeJwj/uu1xsmUW
+ CoguOWFCY2ScWXw==
+X-Developer-Key: i=m.grzeschik@pengutronix.de; a=openpgp;
+ fpr=957BC452CE953D7EA60CF4FC0BE9E3157A1E2C64
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: m.grzeschik@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-From: Subramanian Mohan <subramanian.mohan@intel.com>
+This series is adding support to mount usb hostside exported 9pfs
+filesystems via the usb gadget interface. It also includes a simple tool
+(p9_fwd.py) to translate an tcp 9pfs transport and reuse it via the usb
+interface.
 
-Document sysfs interface for Intel Timed I/O PPS driver.
+    +--------------------------+    |    +--------------------------+
+    |  9PFS mounting client    |    |    |  9PFS exporting server   |
+ SW |                          |    |    |                          |
+    |   (this:trans_usbg)      |    |    |(e.g. diod or nfs-ganesha)|
+    +-------------^------------+    |    +-------------^------------+
+                  |                 |                  |
+                  |                 |           +------v------+
+                  |                 |           |  p9_fwd.py  |
+                  |                 |           +------^------+
+                  |                 |                  |
+------------------|------------------------------------|-------------
+                  |                 |                  |
+    +-------------v------------+    |    +-------------v------------+
+    |                          |    |    |                          |
+ HW |   USB Device Controller  <--------->   USB Host Controller    |
+    |                          |    |    |                          |
+    +--------------------------+    |    +--------------------------+
 
-Signed-off-by: Lakshmi Sowjanya D <lakshmi.sowjanya.d@intel.com>
-Acked-by: Christopher Hall <christopher.s.hall@intel.com>
-Signed-off-by: Subramanian Mohan <subramanian.mohan@intel.com>
+The USB host exports a filesystem, while the gadget on the USB device
+side makes it mountable.
+
+Diod (9pfs server) and the forwarder are on the development host, where
+the root filesystem is actually stored. The gadget is initialized during
+boot (or later) on the embedded board. Then the forwarder will find it
+on the USB bus and start forwarding requests.
+
+In this case the 9p requests come from the device and are handled by the
+host. The reason is that USB device ports are normally not available on
+PCs, so a connection in the other direction would not work.
+
+One use-case is to use it as an alternative to NFS root booting during
+the development of embedded Linux devices.
+
+Signed-off-by: Michael Grzeschik <m.grzeschik@pengutronix.de>
 ---
- Documentation/ABI/testing/sysfs-platform-pps-tio | 8 ++++++++
- MAINTAINERS                                      | 1 +
- 2 files changed, 9 insertions(+)
- create mode 100644 Documentation/ABI/testing/sysfs-platform-pps-tio
+Changes in v9:
+- solved the error return path by using wait_for_completion instead of
+  running in the usb complete callback in a loop
+- by using wait_for_completion solves the req_lock
+- using req->context instead of using a state variable
+- Link to v8: https://lore.kernel.org/r/20240116-ml-topic-u9p-v8-0-409e659ca4dd@pengutronix.de
 
-diff --git a/Documentation/ABI/testing/sysfs-platform-pps-tio b/Documentation/ABI/testing/sysfs-platform-pps-tio
-new file mode 100644
-index 000000000000..8face1dc8010
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-platform-pps-tio
-@@ -0,0 +1,8 @@
-+What:		/sys/devices/platform/INTCxxxx/enable
-+Date:		September 2024
-+KernelVersion:	6.12
-+Contact:	Christopher Hall <christopher.s.hall@intel.com>
-+		Subramanian Mohan<subramanian.mohan@intel.com>
-+Description:
-+		(RW) Enable or disable PPS TIO generator output, read to
-+		see the status of hardware (Enabled/Disabled).
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f328373463b0..242d9784ee5d 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -18263,6 +18263,7 @@ M:	Rodolfo Giometti <giometti@enneenne.com>
- L:	linuxpps@ml.enneenne.com (subscribers-only)
- S:	Maintained
- W:	http://wiki.enneenne.com/index.php/LinuxPPS_support
-+F:	Documentation/ABI/testing/sysfs-platform-pps-tio
- F:	Documentation/ABI/testing/sysfs-pps
- F:	Documentation/devicetree/bindings/pps/pps-gpio.yaml
- F:	Documentation/driver-api/pps.rst
+Changes in v8:
+- this time really added the req_lock spinlock
+- Link to v7: https://lore.kernel.org/r/20240116-ml-topic-u9p-v7-0-3a1eeef77fbe@pengutronix.de
+
+Changes in v7:
+- added back the req_lock spinlock
+- Link to v6: https://lore.kernel.org/r/20240116-ml-topic-u9p-v6-0-695977d76dff@pengutronix.de
+
+Changes in v6:
+- fixed the python script not to have path set by default
+- improved the lock init
+- fixed usb9pfs status change to connected
+- Link to v5: https://lore.kernel.org/r/20240116-ml-topic-u9p-v5-0-5ed0abd53ef5@pengutronix.de
+
+Changes in v5:
+- fixed lockup in mount -> remount -> monut scenario
+- improved p9_fwd transport script with more options
+- Link to v4: https://lore.kernel.org/r/20240116-ml-topic-u9p-v4-0-722ed28b0ade@pengutronix.de
+
+Changes in v4:
+- reworked the naming scheme to be set by the configfs instance
+- added conn_cancel function to properly stop the transfers
+- ensured that umount -f will work even when the host side has crahed
+- added all the review feedback from Andrzej Pietrasiewicz
+- Link to v3: https://lore.kernel.org/r/20240116-ml-topic-u9p-v3-0-c62a36eccda1@pengutronix.de
+
+Changes in v3:
+- dropped patch "usb: gadget: legacy: add 9pfs multi gadget" as discussed with gregkh
+- Link to v2: https://lore.kernel.org/r/20240116-ml-topic-u9p-v2-0-b46cbf592962@pengutronix.de
+
+Changes in v2:
+- improved the commit messages
+- introduced an patch to move the header u_f.h to include/linux/usb to compile usb gadget functions treewide
+- moved usbg gadget function to net/9p/
+- adderessed several comments in function driver, like the cleanup path and kbuild errors
+- improved the documentation in Documentation/filesystems/9p.rst
+- Link to v1: https://lore.kernel.org/r/20240116-ml-topic-u9p-v1-0-ad8c306f9a4e@pengutronix.de
+
+---
+Michael Grzeschik (3):
+      usb: gadget: function: move u_f.h to include/linux/usb/func_utils.h
+      net/9p/usbg: Add new usb gadget function transport
+      tools: usb: p9_fwd: add usb gadget packet forwarder script
+
+ Documentation/filesystems/9p.rst                   |  58 +-
+ drivers/usb/gadget/configfs.c                      |   2 +-
+ drivers/usb/gadget/function/f_fs.c                 |   2 +-
+ drivers/usb/gadget/function/f_hid.c                |   2 +-
+ drivers/usb/gadget/function/f_loopback.c           |   2 +-
+ drivers/usb/gadget/function/f_midi.c               |   2 +-
+ drivers/usb/gadget/function/f_midi2.c              |   2 +-
+ drivers/usb/gadget/function/f_sourcesink.c         |   2 +-
+ drivers/usb/gadget/u_f.c                           |   2 +-
+ .../gadget/u_f.h => include/linux/usb/func_utils.h |   2 +-
+ net/9p/Kconfig                                     |   6 +
+ net/9p/Makefile                                    |   4 +
+ net/9p/trans_usbg.c                                | 982 +++++++++++++++++++++
+ tools/usb/p9_fwd.py                                | 243 +++++
+ 14 files changed, 1301 insertions(+), 10 deletions(-)
+---
+base-commit: 47ac09b91befbb6a235ab620c32af719f8208399
+change-id: 20240116-ml-topic-u9p-895274530eb1
+
+Best regards,
 -- 
-2.35.3
+Michael Grzeschik <m.grzeschik@pengutronix.de>
 
 
