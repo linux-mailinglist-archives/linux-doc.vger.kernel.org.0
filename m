@@ -1,103 +1,96 @@
-Return-Path: <linux-doc+bounces-23788-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23790-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 348F895E63C
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Aug 2024 03:24:27 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B9DE495E686
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Aug 2024 03:57:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 95ED4B20907
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Aug 2024 01:24:24 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id ECEEA1C208EC
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Aug 2024 01:57:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1781B7F9;
-	Mon, 26 Aug 2024 01:24:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E384CDDBC;
+	Mon, 26 Aug 2024 01:57:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=codewreck.org header.i=@codewreck.org header.b="LKEek1ya"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Yw1AqE3f"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from submarine.notk.org (submarine.notk.org [62.210.214.84])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E61B733EC;
-	Mon, 26 Aug 2024 01:24:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.210.214.84
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC125D2E5;
+	Mon, 26 Aug 2024 01:57:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724635460; cv=none; b=LviDB21gwSVt3R2LMy6fMPMNz4kcTNWMTjOqUfvld/BuCXEQQqKtwxL+USvRcGA+eXJPp6UTj1ZT4XgJCa/jLoNBpk9vCd/gbnSmCg/HlW6NNxUaLablmZg52iusZVCCgCexDw2mbfApabbCt6DrtrNaWe1ulHgDLhXGnAdYwwU=
+	t=1724637466; cv=none; b=Ao46xb2XtWG23BmfNWdasG3ybk6pEfh2w7KzF7U8Wa/o/dkUZuFr5k4W8BIpejCX3nucmDzHjw/CbTyzxYiAeKeSKVehoa9cnxGd5EYvyqQRDcWRI5+b1yaB6zec+oty6tDM8uPHXGQkvWHQF+x3ADiQvElbPrXlTK3HVy5rOnQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724635460; c=relaxed/simple;
-	bh=2lhZOhnyTlMgqD2SrXiAJZIq3W7WNtFgPBl1dA/44rA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LcjXJm0ZwBfRTnm3XxLJrllsjb3rhH6rjVfNRLKp8tqL/VYH6l6NSh7A/FLtGYtRj4hwdDUhuX6+q6cFdiTtTouDRH+wRhNqkin1fm3wvv8l6deaaTG6/LtJd9kdwrj66aP4O2niyItjobJBqyXrALmT65nZJTrWqrPSAPgbqD0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codewreck.org; spf=pass smtp.mailfrom=codewreck.org; dkim=pass (2048-bit key) header.d=codewreck.org header.i=@codewreck.org header.b=LKEek1ya; arc=none smtp.client-ip=62.210.214.84
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codewreck.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=codewreck.org
-Received: from gaia.codewreck.org (localhost [127.0.0.1])
-	by submarine.notk.org (Postfix) with ESMTPS id C959314C1E1;
-	Mon, 26 Aug 2024 03:19:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org;
-	s=2; t=1724635146;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=J+QcNhh0VWoV5otdU1nJZBsnrM5AKjg1RiGKnZhNWAU=;
-	b=LKEek1yaWqoDk84IfnpqG0lhZ37tuLeMPuKXe+WPDcZP8odwd4NHtDjlk725lR12m4ipgc
-	TGvPNDbEQ4bGYQbqCYGPt9B2ecQskBMKhEuS/kAR5lO3ms5/EDkwAPXmcYPb42NJm956Me
-	su6g+JeDlUPuI4ZuvpaZE1Nq0m5SsWIOIY7B2TNcNfvZq23BgSV3YIVCKFL0Jy7xNoHGW+
-	5on+AjCi8ph0vtnAqyJYCnJr8mwa42YNkDwQHt4Pkd3knoJbCZCpNTZJS1w/+Crwx6OdLG
-	cKlOepP+fIBVcAayYGnX85svwu5j6ZtxsViwNIPjxwvZRZ4n1Tlxf3hXaFwYzg==
-Received: from localhost (gaia.codewreck.org [local])
-	by gaia.codewreck.org (OpenSMTPD) with ESMTPA id ca8414c2;
-	Mon, 26 Aug 2024 01:19:02 +0000 (UTC)
-Date: Mon, 26 Aug 2024 10:18:47 +0900
-From: Dominique Martinet <asmadeus@codewreck.org>
-To: SeongJae Park <sj@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Eric Van Hensbergen <ericvh@kernel.org>,
-	Latchesar Ionkov <lucho@ionkov.net>,
-	Christian Schoenebeck <linux_oss@crudebyte.com>,
-	v9fs@lists.linux.dev, linux-doc@vger.kernel.org,
+	s=arc-20240116; t=1724637466; c=relaxed/simple;
+	bh=1DWacq6Bie9HfW9DxzVr4yQ9ts9B9V5LvU0EHPMdUGw=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=CZPDTd6jZxmAvbfmuh0pEXmEVB5OgjFKLFs+hLhpQR5W9L6kQeLiTDG+9crzwqmJGD1ypPdWllTtIEbdxC+9AgCsfK0kYMbeXv4hPVPYx8fDCQ8qg6QstBPlez94x5WhvbB38CPMlWJzwjY2uPgrE3lmTCwKUff1nW4Nl6maFGY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Yw1AqE3f; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A54E0C4AF52;
+	Mon, 26 Aug 2024 01:57:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1724637465;
+	bh=1DWacq6Bie9HfW9DxzVr4yQ9ts9B9V5LvU0EHPMdUGw=;
+	h=From:To:Cc:Subject:Date:From;
+	b=Yw1AqE3fnbVRtScAmhwhQ+RuB6Xj9tAwihT8mQ1DhcRf66iD/AnC/GX57dizJd8NO
+	 hqHet9ohD47qyY+FW4SFdasYgTdDyfoToUGRdcdy6moOqc2uPluPS9UmU7pjXSmrYx
+	 ssxdE761f0ejd++67XPMGmf76gN0nWh3K7R21aD8v2ZkWEpyQIeHEsSoeO+FraSwcD
+	 YRiVJ9NSAPjkhD6oev24Aetu/jBH5r3dfsn0VILfCB1Sn1mad4cTy6Grdun0yvn2nl
+	 QrlRJxRI3hVMUevDw+z52rDrtZa6luom246ziYI48ZG5pGCrj9ZxJNTW0i3dOZc1jd
+	 TqAvPiIlUSUSQ==
+From: SeongJae Park <sj@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: SeongJae Park <sj@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Alex Shi <alexs@kernel.org>,
+	Hu Haowen <2023002089@link.tyut.edu.cn>,
+	Yanteng Si <siyanteng@loongson.cn>,
+	damon@lists.linux.dev,
+	linux-mm@kvack.org,
+	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 3/3] Docs/filesystems/9p: Convert a goo.gl URL to
- original one
-Message-ID: <ZsvX90dovlI52Ohd@codewreck.org>
-References: <20240826010949.78305-1-sj@kernel.org>
- <20240826010949.78305-3-sj@kernel.org>
+Subject: [PATCH 0/3] Docs/damon: update GitHub repo URLs and maintainer-profile
+Date: Sun, 25 Aug 2024 18:57:38 -0700
+Message-Id: <20240826015741.80707-1-sj@kernel.org>
+X-Mailer: git-send-email 2.39.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20240826010949.78305-3-sj@kernel.org>
+Content-Transfer-Encoding: 8bit
 
-SeongJae Park wrote on Sun, Aug 25, 2024 at 06:09:49PM -0700:
-> Google URL shortner will be unavailable soon[1].  Replace a shortened
-> URL on 9p.rst with its original one.
-> 
-> [1] https://developers.googleblog.com/en/google-url-shortener-links-will-no-longer-be-available/
-> 
-> Signed-off-by: SeongJae Park <sj@kernel.org>
+Misc updates for DAMON documentation.
 
-Sorry, we (9p maintainers) slacked on this one - there's been a better
-patch for this one:
-https://lkml.kernel.org/r/20240725180041.80862-1-linux@treblig.org
+Replace GitHub URLS on DAMON documents for none-kernel parts DAMON repos
+with new ones[1] via the first patch.  With following two patches,
+wordsmith maitnainer-profile for better readability, and document the
+Google clendsar for bi-weekly meetups, respectively.
 
-The sciweavers link doesn't actually work, so it doesn't make sense to
-replace as is.
-(although you could argue that it's probably been broken forever an
-nobody noticed, so it could just as well be removed...)
+[1] https://lore.kernel.org/20240813232158.83903-1-sj@kernel.org
 
-There's no patch queued for 9p, so if you (Jonathan) want to take the
-other patch please feel free to.
-If it goes through the 9p tree it'll get in the next time we send
-something as I don't feel the need to send Linus a PR just for this, so
-that might be a couple of months further down.
-(I don't like patch series where folks are added in Cc on individual
-patches because it's never clear who is expected to grab the patch in
-the end...)
+SeongJae Park (3):
+  Docs/damon: use damonitor GitHub organization instead of awslabs
+  Docs/damon/maintainer-profile: add links in place
+  Docs/damon/maintainer-profile: document Google calendar for bi-weekly
+    meetups
+
+ Documentation/admin-guide/mm/damon/start.rst  |  4 +-
+ Documentation/admin-guide/mm/damon/usage.rst  |  8 +-
+ Documentation/mm/damon/design.rst             |  2 +-
+ Documentation/mm/damon/maintainer-profile.rst | 86 ++++++++++---------
+ .../zh_CN/admin-guide/mm/damon/start.rst      |  4 +-
+ .../zh_CN/admin-guide/mm/damon/usage.rst      |  8 +-
+ .../zh_TW/admin-guide/mm/damon/start.rst      |  4 +-
+ .../zh_TW/admin-guide/mm/damon/usage.rst      |  8 +-
+ 8 files changed, 65 insertions(+), 59 deletions(-)
 
 
-Thanks,
+base-commit: c7968eec021805d3259f06bd85a5d285fec4e9af
 -- 
-Dominique
+2.39.2
+
 
