@@ -1,95 +1,217 @@
-Return-Path: <linux-doc+bounces-23866-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23868-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 282E995FBF1
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Aug 2024 23:45:29 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0072D95FBFF
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Aug 2024 23:47:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9DFEBB22E5B
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Aug 2024 21:45:26 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 248C61C210A0
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Aug 2024 21:47:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 84943143734;
-	Mon, 26 Aug 2024 21:45:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="pDouXqIw"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8502564A;
+	Mon, 26 Aug 2024 21:47:47 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01E4626AC3;
-	Mon, 26 Aug 2024 21:45:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56A18146599
+	for <linux-doc@vger.kernel.org>; Mon, 26 Aug 2024 21:47:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724708721; cv=none; b=Ivr1SKMNLx7q/Xi/kQWrffeBztZ1LgyEZerDoYdZMRgV9p3d5LcdCprErhhrmuh7yrEutb+iGp7NV0oeM12S76Unh0ma3ocg6rpS2fo/Xl1gJLT8PbjsOojG1rX3ugKGcy6F5UfPCTtbvy0Em6pfuaBEyxAsgcIs+JGcCuJ9hBo=
+	t=1724708867; cv=none; b=FWqNlxzeq1nHJa6u1tfLRwnSCzUlWLY9znZQfeoIp1kccg07PuaXfMqYUJB+PsID3H0aW0NLnC5Y1MRb/YA3UEiEM8Q2M1oe8XqA8J/TFVmWoi6gVRxGt/7a3mIozgLL6lfpy0NtC6PjRA1t1McLP/xhcAsSNwNN0v1YYNGZNMY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724708721; c=relaxed/simple;
-	bh=9HuQOiSNN6/kKxzX7pc6LVjoP+jiMmXY4yGzX/h5pGg=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=nID1GCfSf3KyIwUirloEwWSw63kpz5VCVMZ9j56MxknxJhu/yRWtVR00P0DM9SkqH6peNM2RIwED5URwtjqQmi2rR3g+Tr5JBUCPTMx/SSJlKMeqRTRQqLsi7ZW5kBzbR1lyCZVUajgUrkgQNRNqUamf4ct8ckNu6zywOzdEbkg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=pDouXqIw; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 2151F41AB9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1724708719; bh=4Sdbpb1WMKaV3Ic3jTBKuIlKBSluMuTdNbalX8xuK/4=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=pDouXqIwDro5X4QCaXAhhs/9gu7YN9wTUNttrlWbQfRbwBfL/RbWzgLBKl279Hxgs
-	 qkpj0Bu2cDfk5hPiHMpBU/ojS9SAkLd5ofMDL1+p5GVhb61MN5bW6hH84dWFYLJGXM
-	 Q8xoGsOViVGfUZrcmu28p8frWVsVT9QPFgYNiZxT0BV4QID1re/uBNubinNuvIL8LP
-	 W9ldrIQbweVKadknoAg6s06geYlvoAdeGANWTnGTCHSYEhIYzmHy5Y05oV0H1P9pwW
-	 w+3CIq2Rc/UTb0sjydpRcFfxVp5OoMGqiyQ+yLPPCych8jjuiTS3DbdCsJZriURSD2
-	 8xf3Bu4Xp2Lpg==
-Received: from localhost (unknown [IPv6:2601:280:5e00:625::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 2151F41AB9;
-	Mon, 26 Aug 2024 21:45:19 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Haoyang Liu <tttturtleruss@hust.edu.cn>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <siyanteng@loongson.cn>, Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling
- <morbo@google.com>, Justin Stitt <justinstitt@google.com>
-Cc: hust-os-kernel-patches@googlegroups.com, Haoyang Liu
- <tttturtleruss@hust.edu.cn>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, llvm@lists.linux.dev
-Subject: Re: [PATCH v7] docs/zh_CN: Add dev-tools/kcsan Chinese translation
-In-Reply-To: <20240817175151.164923-1-tttturtleruss@hust.edu.cn>
-References: <20240817175151.164923-1-tttturtleruss@hust.edu.cn>
-Date: Mon, 26 Aug 2024 15:45:18 -0600
-Message-ID: <87seur5575.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1724708867; c=relaxed/simple;
+	bh=4b9TVZV+/P6OWnFe2bY7DUdUBLLL1+SMh4s9585M/o4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=BCLHn9bWrzmZwlvgHyZ9N4p0ZsuLdPEelCppnafkCw7z5vmu54L3BuUKlEhl/U3ozcmXVQyorOlzGA6QKtAVEyqpjbKgpnLKB9Tf6pKDQttswzmvEAw1gGdytlcAzTZSrMVq/5uMqcOv3hhHxZ7ETnplrhTz9XZBLHfc4+hpBpc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <m.grzeschik@pengutronix.de>)
+	id 1sihYj-0006Uw-Mm; Mon, 26 Aug 2024 23:47:33 +0200
+Received: from [2a0a:edc0:0:1101:1d::ac] (helo=dude04.red.stw.pengutronix.de)
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <m.grzeschik@pengutronix.de>)
+	id 1sihYh-003HK7-Rj; Mon, 26 Aug 2024 23:47:31 +0200
+Received: from localhost ([::1] helo=dude04.red.stw.pengutronix.de)
+	by dude04.red.stw.pengutronix.de with esmtp (Exim 4.96)
+	(envelope-from <m.grzeschik@pengutronix.de>)
+	id 1sihYh-002LCx-12;
+	Mon, 26 Aug 2024 23:47:31 +0200
+From: Michael Grzeschik <m.grzeschik@pengutronix.de>
+Subject: [PATCH v10 0/3] usb: gadget: 9pfs transport
+Date: Mon, 26 Aug 2024 23:47:28 +0200
+Message-Id: <20240116-ml-topic-u9p-v10-0-a85fdeac2c52@pengutronix.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPH3zGYC/33PSW7DMAwF0KsEWleNZlld9R5FFxqoREBiG7Zjp
+ Ah899LeVtWSxOf74IvMMBWYycfpRSZYy1yGHgfO3k4kXn1/AVoSLohgQjHODb3f6DKMJdKHG2n
+ ntLBKSwaBEzwJfgYaJt/H6350v91v5yN9xvQeGCfI5XkUfn3jfC3zMkw/R//K9+0/TSunjPrUR
+ clMdl7B5wj95bFMQ1+e7wnIrq2iJQgUgjIxZO2EM6IqyJYgUYhGeGkgxuR5VVAtQaFghYAkusB
+ 8qn+hW4JGQUNiPiQtIeuqYFqCQcE47axN1qScq4JtCRYF6TkAZGtzqH/RtYQOBcUcGO2iVylVB
+ dcSHApOJiuzssGa8EfYtu0Xw+kE9N8CAAA=
+To: Eric Van Hensbergen <ericvh@kernel.org>, 
+ Latchesar Ionkov <lucho@ionkov.net>, 
+ Dominique Martinet <asmadeus@codewreck.org>, 
+ Christian Schoenebeck <linux_oss@crudebyte.com>, 
+ Jonathan Corbet <corbet@lwn.net>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Andrzej Pietrasiewicz <andrzej.p@collabora.com>, v9fs@lists.linux.dev, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-usb@vger.kernel.org, kernel@pengutronix.de, 
+ Michael Grzeschik <m.grzeschik@pengutronix.de>, 
+ Jan Luebbe <jlu@pengutronix.de>
+X-Mailer: b4 0.12.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5868;
+ i=m.grzeschik@pengutronix.de; h=from:subject:message-id;
+ bh=4b9TVZV+/P6OWnFe2bY7DUdUBLLL1+SMh4s9585M/o4=;
+ b=owEBbQKS/ZANAwAKAb9pWET5cfSrAcsmYgBmzPfyyyk3SEXGfYjxEI+G30ad9ovd08TwwYaK1
+ +NFUZ/21z6JAjMEAAEKAB0WIQQV2+2Fpbqd6fvv0Gi/aVhE+XH0qwUCZsz38gAKCRC/aVhE+XH0
+ qzVyEACihOt58dUuIwTQRkLZvq8poIrA1rc9tbQsaPmPyF4y+wGzPhcq0xH/OPVvvUtlNmDrfgy
+ VIcQHl0QNbcC5Hb09mKIOnrYPV/CTm8YajPm1dMRjgU7i1kK1/3M3TLYpjiD7T8Gk3Vd3+XxuVI
+ Ou1bX4hlkI8msYXIuXQCpfQCe0C2ny7HFqeEiX044CuHZ4QMkWgcrwIawvF3o2xAwRNBQ8Sp62j
+ QlOyCuMxMG/8unKK74hCE4I5K98iX492Zh/PrlQrJgCGLMKlR33bbrNbVu3H2vE9jE+tWpuDmP6
+ zJqq7wFiz0sSMDxVBeNbQmjYS0mn4ZW5bs2H5Kyfy2ifXe88m3A46YTVcLfLmPWERuSaB0QnueD
+ q6VOHeYwve7Naa988ThJW+gxot+EbXy7h8yQEqio0CWMKWW6w4YW9aKTbuU8/wjlKC1vwiyqOdJ
+ ToNE06M1XxVBjebzBm9S3kael6763JJngAcqWyD98da9Bdhc2oMVkpUv8Lm8uXt1ItRiH2wjG+0
+ B39OptwXguP1KfNnozfR4ENIfnwNbGRxIvH8woTsu9ij7BmDmIe36uZmL+RGtvgLh8fteoTRnis
+ KrdC7fOIRN7aYj5kSiwejRsHaUbaGWxvsRl3qfjJ1q4MD5cVnSVevdVR0botrk0mDgRho6Bq1MS
+ mF9JH3f8IqKD7PA==
+X-Developer-Key: i=m.grzeschik@pengutronix.de; a=openpgp;
+ fpr=957BC452CE953D7EA60CF4FC0BE9E3157A1E2C64
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: m.grzeschik@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-Haoyang Liu <tttturtleruss@hust.edu.cn> writes:
+This series is adding support to mount usb hostside exported 9pfs
+filesystems via the usb gadget interface. It also includes a simple tool
+(p9_fwd.py) to translate an tcp 9pfs transport and reuse it via the usb
+interface.
 
-> Translate dev-tools/kcsan commit 31f605a308e6
-> ("kcsan, compiler_types: Introduce __data_racy type qualifier")
-> into Chinese and add it in dev-tools/zh_CN/index.rst
->
-> Signed-off-by: Haoyang Liu <tttturtleruss@hust.edu.cn>
-> Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
-> ---
-> v6 -> v7: Replace duplicated inclusion with a note to avoid compile warnings.
-> v5 -> v6: Fix a typo.
-> v4 -> v5: Translate link into Chinese as well according to reviewer's advice.
-> v3 -> v4: Added original English text for proper nouns and modified some unclear experessions.
-> v2 -> v3: Revised some sentences based on reviewer's suggestions and updated the KTSAN url.
-> v1 -> v2: Added commit tag and fixed style problems according to reviewer's suggestions. 
->
->  .../translations/zh_CN/dev-tools/index.rst    |   2 +-
->  .../translations/zh_CN/dev-tools/kcsan.rst    | 320 ++++++++++++++++++
->  2 files changed, 321 insertions(+), 1 deletion(-)
->  create mode 100644 Documentation/translations/zh_CN/dev-tools/kcsan.rst
+    +--------------------------+    |    +--------------------------+
+    |  9PFS mounting client    |    |    |  9PFS exporting server   |
+ SW |                          |    |    |                          |
+    |   (this:trans_usbg)      |    |    |(e.g. diod or nfs-ganesha)|
+    +-------------^------------+    |    +-------------^------------+
+                  |                 |                  |
+                  |                 |           +------v------+
+                  |                 |           |  p9_fwd.py  |
+                  |                 |           +------^------+
+                  |                 |                  |
+------------------|------------------------------------|-------------
+                  |                 |                  |
+    +-------------v------------+    |    +-------------v------------+
+    |                          |    |    |                          |
+ HW |   USB Device Controller  <--------->   USB Host Controller    |
+    |                          |    |    |                          |
+    +--------------------------+    |    +--------------------------+
 
-Applied, thanks.
+The USB host exports a filesystem, while the gadget on the USB device
+side makes it mountable.
 
-jon
+Diod (9pfs server) and the forwarder are on the development host, where
+the root filesystem is actually stored. The gadget is initialized during
+boot (or later) on the embedded board. Then the forwarder will find it
+on the USB bus and start forwarding requests.
+
+In this case the 9p requests come from the device and are handled by the
+host. The reason is that USB device ports are normally not available on
+PCs, so a connection in the other direction would not work.
+
+One use-case is to use it as an alternative to NFS root booting during
+the development of embedded Linux devices.
+
+Signed-off-by: Michael Grzeschik <m.grzeschik@pengutronix.de>
+---
+Changes in v10:
+- fixed reset of tx req context in complete handler
+- added suggestions from Cristoph JAILLET from v9 review
+- Link to v9: https://lore.kernel.org/r/20240116-ml-topic-u9p-v9-0-93d73f47b76b@pengutronix.de
+
+Changes in v9:
+- solved the error return path by using wait_for_completion instead of
+  running in the usb complete callback in a loop
+- by using wait_for_completion solves the req_lock
+- using req->context instead of using a state variable
+- Link to v8: https://lore.kernel.org/r/20240116-ml-topic-u9p-v8-0-409e659ca4dd@pengutronix.de
+
+Changes in v8:
+- this time really added the req_lock spinlock
+- Link to v7: https://lore.kernel.org/r/20240116-ml-topic-u9p-v7-0-3a1eeef77fbe@pengutronix.de
+
+Changes in v7:
+- added back the req_lock spinlock
+- Link to v6: https://lore.kernel.org/r/20240116-ml-topic-u9p-v6-0-695977d76dff@pengutronix.de
+
+Changes in v6:
+- fixed the python script not to have path set by default
+- improved the lock init
+- fixed usb9pfs status change to connected
+- Link to v5: https://lore.kernel.org/r/20240116-ml-topic-u9p-v5-0-5ed0abd53ef5@pengutronix.de
+
+Changes in v5:
+- fixed lockup in mount -> remount -> monut scenario
+- improved p9_fwd transport script with more options
+- Link to v4: https://lore.kernel.org/r/20240116-ml-topic-u9p-v4-0-722ed28b0ade@pengutronix.de
+
+Changes in v4:
+- reworked the naming scheme to be set by the configfs instance
+- added conn_cancel function to properly stop the transfers
+- ensured that umount -f will work even when the host side has crahed
+- added all the review feedback from Andrzej Pietrasiewicz
+- Link to v3: https://lore.kernel.org/r/20240116-ml-topic-u9p-v3-0-c62a36eccda1@pengutronix.de
+
+Changes in v3:
+- dropped patch "usb: gadget: legacy: add 9pfs multi gadget" as discussed with gregkh
+- Link to v2: https://lore.kernel.org/r/20240116-ml-topic-u9p-v2-0-b46cbf592962@pengutronix.de
+
+Changes in v2:
+- improved the commit messages
+- introduced an patch to move the header u_f.h to include/linux/usb to compile usb gadget functions treewide
+- moved usbg gadget function to net/9p/
+- adderessed several comments in function driver, like the cleanup path and kbuild errors
+- improved the documentation in Documentation/filesystems/9p.rst
+- Link to v1: https://lore.kernel.org/r/20240116-ml-topic-u9p-v1-0-ad8c306f9a4e@pengutronix.de
+
+---
+Michael Grzeschik (3):
+      usb: gadget: function: move u_f.h to include/linux/usb/func_utils.h
+      net/9p/usbg: Add new usb gadget function transport
+      tools: usb: p9_fwd: add usb gadget packet forwarder script
+
+ Documentation/filesystems/9p.rst                   |  58 +-
+ drivers/usb/gadget/configfs.c                      |   2 +-
+ drivers/usb/gadget/function/f_fs.c                 |   2 +-
+ drivers/usb/gadget/function/f_hid.c                |   2 +-
+ drivers/usb/gadget/function/f_loopback.c           |   2 +-
+ drivers/usb/gadget/function/f_midi.c               |   2 +-
+ drivers/usb/gadget/function/f_midi2.c              |   2 +-
+ drivers/usb/gadget/function/f_sourcesink.c         |   2 +-
+ drivers/usb/gadget/u_f.c                           |   2 +-
+ .../gadget/u_f.h => include/linux/usb/func_utils.h |   2 +-
+ net/9p/Kconfig                                     |   6 +
+ net/9p/Makefile                                    |   4 +
+ net/9p/trans_usbg.c                                | 959 +++++++++++++++++++++
+ tools/usb/p9_fwd.py                                | 243 ++++++
+ 14 files changed, 1278 insertions(+), 10 deletions(-)
+---
+base-commit: 47ac09b91befbb6a235ab620c32af719f8208399
+change-id: 20240116-ml-topic-u9p-895274530eb1
+
+Best regards,
+-- 
+Michael Grzeschik <m.grzeschik@pengutronix.de>
+
 
