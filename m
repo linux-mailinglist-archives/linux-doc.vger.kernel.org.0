@@ -1,113 +1,90 @@
-Return-Path: <linux-doc+bounces-23943-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23946-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5ECE8960C0A
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 15:29:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C35D960C58
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 15:40:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 07B4A1F247F7
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 13:29:48 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id AA69C1F22320
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 13:40:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B02DF1BD01E;
-	Tue, 27 Aug 2024 13:29:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CBACF1BF331;
+	Tue, 27 Aug 2024 13:40:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Ut06LWvQ"
+	dkim=pass (2048-bit key) header.d=muxel.dev header.i=@muxel.dev header.b="Gear0AYt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+Received: from mail.larkspur.one (mail.larkspur.one [45.132.244.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 224D71B3F2B;
-	Tue, 27 Aug 2024 13:29:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C6AA19D076;
+	Tue, 27 Aug 2024 13:40:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.132.244.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724765383; cv=none; b=sSom1mc/Ft9NsD7/H0QenrCF75fCI/ya5mwQOTtX3iPEmnRQGv2MkMouXX3AZsAQRdWjGjZEmevzQWx9mkX1j4//C5pp3rEHp435KlehfP2JnXKgH14mdYfqonn6m7eklJPBXf8eE5q0uS5TUzZiN8BPj/HQHtI1ZoJ/rhW5SRU=
+	t=1724766007; cv=none; b=XZpmP9Og6EBiR4xpMapLJ8T1yLdhIfQJ30t9IPRd0J12buH15XutmPqoFT/xVV9MO7Ywvjc2OCjnOTzWZ5qADtdICOljecXwpXBiOMSV1VOmM6qTbMVde7ohP5AYlfOGCzxbF74ulplw2A+xiZosvitf8l2cYRT0K9/EzeOAJTA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724765383; c=relaxed/simple;
-	bh=m4va17MNKF1s/LDPwp8wFhie2OyGpeLYqP5feOuDO98=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qF6Xd/RPSOYxbXkJGSFB40hweE+e/pVPms2GUlkMBOsKk7RapBGuOTOrTGO3UyUWpCMSPm7CATHk5B81hjhQ/J4Mh9lPebYOzBmdJHlg42OPEsElsw80O9ANQp5Nci2lxu/XkfNnZYxTco1TFwpppxX1QCe8fqYxnL3jWXp7jgI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Ut06LWvQ; arc=none smtp.client-ip=192.198.163.8
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1724765382; x=1756301382;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=m4va17MNKF1s/LDPwp8wFhie2OyGpeLYqP5feOuDO98=;
-  b=Ut06LWvQ6NDXbbswAyBu3+Dmnf0zPL1hikIwaNgHfh9ebSAqdcQRFUZ9
-   gnBIzAVmSEET9Jn6MpwNuXJWC7dtRKNTMU8E8qN+0Lt4XvHMGAQTpXbq9
-   8wQLolTimOeHX9mx/bz6qQh3pSO4QK++had/HP6xDE6bYFE2/oIAWSIYk
-   IOnVL/0LWyg9BZiHU6rqiwj9oA21J14WQ6tZc5At54+p4wjwzals9QJ0k
-   FLmqRP/kHljq2gOG0M/1kh9KY/hFho2PhT1JdYHKbI7emD4vBHQYE57C5
-   7sypr41tVnzIhEo8kxk2Y8DqeYaU95nTAXqV6+pWIjWznWV4MJJHP7IKj
-   Q==;
-X-CSE-ConnectionGUID: Pr9RyI3WSaKFehJUEvuk+w==
-X-CSE-MsgGUID: hGRvoufSTd6Xu2TwcjnLtg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11176"; a="40745442"
-X-IronPort-AV: E=Sophos;i="6.10,180,1719903600"; 
-   d="scan'208";a="40745442"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Aug 2024 06:29:40 -0700
-X-CSE-ConnectionGUID: I77NCGnzSRKWcxgffA5GTg==
-X-CSE-MsgGUID: xutKtHd8Sf6XVcoUGwmUHQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,180,1719903600"; 
-   d="scan'208";a="62532831"
-Received: from smile.fi.intel.com ([10.237.72.54])
-  by fmviesa006.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Aug 2024 06:29:37 -0700
-Received: from andy by smile.fi.intel.com with local (Exim 4.98)
-	(envelope-from <andriy.shevchenko@linux.intel.com>)
-	id 1siwG7-00000002H5E-1FvU;
-	Tue, 27 Aug 2024 16:29:19 +0300
-Date: Tue, 27 Aug 2024 16:29:18 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Petr Mladek <pmladek@suse.com>, Steven Rostedt <rostedt@goodmis.org>,
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	John Ogness <john.ogness@linutronix.de>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/2] hexdump: Allow skipping identical lines
-Message-ID: <Zs3UrlufPJ9wVyep@smile.fi.intel.com>
-References: <20240826162416.74501-1-miquel.raynal@bootlin.com>
- <Zsy8JPaiGknBypw9@smile.fi.intel.com>
- <20240827110147.29a7481a@xps-13>
+	s=arc-20240116; t=1724766007; c=relaxed/simple;
+	bh=+C1+fgbMw/euXjSrNWrrXTv/5xMsGTkbdtcYL89zMfY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=tcCbvosO9izRzFjsuP6P4/1bZ0Q0boUoO8BqW4QYUAtQfANm9qWzY85vSgi2nDMi7tB1I3XXMmnPUsBBqSO0nhGKIF5b65MR2a+pddX4egD0OKV/r62+s1iJJSkqbrnWbWTMADYr2ririx0f2imksbiUibblNRjGa+4CplGcq7w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=muxel.dev; spf=pass smtp.mailfrom=muxel.dev; dkim=pass (2048-bit key) header.d=muxel.dev header.i=@muxel.dev header.b=Gear0AYt; arc=none smtp.client-ip=45.132.244.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=muxel.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=muxel.dev
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D6FAE29256;
+	Tue, 27 Aug 2024 15:33:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=muxel.dev; s=dkim;
+	t=1724765603; h=from:subject:date:message-id:to:cc:mime-version:
+	 content-transfer-encoding; bh=8lFMmSd3p/v694tPfIzHSO9zh7Sd8dCwn2X3I4gCA04=;
+	b=Gear0AYtVrr9EGpr7TCJGcaSN2aZJYMzN0Gb0pATHJ72f6azewUhN0e5YkFhpMR6nwob2k
+	dqIYG29JsavZNINjhfkydHNU6MnC8OC0CbJjEcv52rqyZgq0N8mL0sokA52QQ95xoRVIfV
+	ENqObpVHWAvW05bF+rQSeukgCeUUwCKkVeiuBjiv4dlwvfPoFbs/Fs/foEm6/R/ETIadlT
+	hmpPI+lchJgy5kmokhgKQ/A2CW+59cFaaFYOH2LmPBE9ZZqPYEM8U0zjVAt/MlLB16EeiO
+	lgrnYUAxthYq9pl2q8G9azKx8xKarKGVWIH7WkofGXUpf4sSNVI+iEvuy9L7OA==
+From: Sebastian Muxel <sebastian@muxel.dev>
+To: Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Sebastian Muxel <sebastian@muxel.dev>
+Subject: [PATCH] scripts: sphinx-pre-install: remove unnecessary double check for $cur_version
+Date: Tue, 27 Aug 2024 15:32:24 +0200
+Message-ID: <20240827133224.160776-1-sebastian@muxel.dev>
+X-Mailer: git-send-email 2.46.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240827110147.29a7481a@xps-13>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Tue, Aug 27, 2024 at 11:01:47AM +0200, Miquel Raynal wrote:
-> andriy.shevchenko@linux.intel.com wrote on Mon, 26 Aug 2024 20:32:20
-> +0300:
-> > On Mon, Aug 26, 2024 at 06:24:14PM +0200, Miquel Raynal wrote:
+$cur_version is currently being tested twice with the first test
+resulting in an unhelpful "$sphinx returned an error", not continuing to
+the more helpful "$sphinx didn't return its version".
 
-...
+This patch removes the first test to return the more useful message.
 
-> > Also here is the formal NAK till the series gains the test cases.
-> 
-> What test cases are you talking about?
+Fixes: a8b380c379ef ("scripts: sphinx-pre-install: only ask to activate valid venvs")
+Signed-off-by: Sebastian Muxel <sebastian@muxel.dev>
+---
+ scripts/sphinx-pre-install | 2 --
+ 1 file changed, 2 deletions(-)
 
-Anything meaningful you come up with to show that the printed data is
-what it's expected. The module has a complimentary test case,
-lib/test_hexdump.c. Without changes in that file, there is no go
-to what ever golden ideas you have.
-
+diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
+index c1121f098542..ad9945ccb0cf 100755
+--- a/scripts/sphinx-pre-install
++++ b/scripts/sphinx-pre-install
+@@ -300,8 +300,6 @@ sub check_sphinx()
+ 	}
+ 
+ 	$cur_version = get_sphinx_version($sphinx);
+-	die ("$sphinx returned an error") if (!$cur_version);
+-
+ 	die "$sphinx didn't return its version" if (!$cur_version);
+ 
+ 	if ($cur_version lt $min_version) {
 -- 
-With Best Regards,
-Andy Shevchenko
-
+2.46.0
 
 
