@@ -1,192 +1,229 @@
-Return-Path: <linux-doc+bounces-23957-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23964-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2AC596137E
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 18:02:47 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id B45229614B0
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 18:55:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 90061284735
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 16:02:46 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 287DFB240C1
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 16:55:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 662201C6F4F;
-	Tue, 27 Aug 2024 16:02:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E135A1CEAB7;
+	Tue, 27 Aug 2024 16:54:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IRfrdUMQ"
+	dkim=pass (1024-bit key) header.d=os.amperecomputing.com header.i=@os.amperecomputing.com header.b="Gg0d7dp1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com [209.85.219.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from CH1PR05CU001.outbound.protection.outlook.com (mail-northcentralusazon11020112.outbound.protection.outlook.com [52.101.193.112])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCD711CF96;
-	Tue, 27 Aug 2024 16:02:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.178
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724774563; cv=none; b=uEF7BFzW3KRXLRG0qBMdOPDiqWcApZnGSqjCtSL3DWs2xJmfPrz7Ro/21FQNGWJI1WcdkZRPAh0f2hvbuz8kEcFd7f/ePkskVNzOzXBRwYxSHoRAY+UMbaUBsFNo8uNA5zkqeor5XtpHJ4FL+frNve/eu6p0CQEUyA2F2Pr46ao=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724774563; c=relaxed/simple;
-	bh=bftQR8XAiOa4Kj1zRha66tu+wQd2k7qmj7VrqkjwAew=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lXZDM0hW3ua2TAocsU5uDcjkYQNbEvJRCKoQH1auWO/z+/RyqQd6fOGb5/sETRUmxlbT4Pou2bZCMIbSgz9dbO3Z3pg1bmbdcjOSVXLEse0mvqrCNR/uYzFGlPGZIuoDDu9F1EQJ5v/Adxok519jMzuBEuBDbTLNZgUMuXNaTXM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IRfrdUMQ; arc=none smtp.client-ip=209.85.219.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yb1-f178.google.com with SMTP id 3f1490d57ef6-e13d5cbc067so5833920276.2;
-        Tue, 27 Aug 2024 09:02:41 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 292011C27;
+	Tue, 27 Aug 2024 16:54:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.193.112
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1724777654; cv=fail; b=gT6k6/xrzAfj/Qa1fb/8e+WPdnqtNjc7wMgc4P7QSHAJNHAkGMx/wGlLxanyJpn1NkwkYvdyUuNcPXyqasnpZDHlZ29hyOaLn1KZawBdBfDKR0KnGx4GH7FQ2joEisKameFZ+09LoCtPlKjtwRTvtBOT+yToGSBXYLeDT2U/i4M=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1724777654; c=relaxed/simple;
+	bh=6Lq/o/1B3btATZSO50VBzDR0DYzEWf7kTAYc6D+1w6I=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 Content-Type:MIME-Version; b=rOtHRvcpCWXhrS0zP+/N7tel0fgj+cCvgitTgRmGFf47/wbAENCrwiB8OAVGmwRDsW1J8akKTARq1jQp+GODFuX9TywYazBloO91UJJQH2J3bv/5WnEaLFbYpC/PWdeKA4mN26IiRuFsSOhFPGAxns/vE0yn/8QSoQHCv0r1v/I=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=os.amperecomputing.com; spf=pass smtp.mailfrom=os.amperecomputing.com; dkim=pass (1024-bit key) header.d=os.amperecomputing.com header.i=@os.amperecomputing.com header.b=Gg0d7dp1; arc=fail smtp.client-ip=52.101.193.112
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=os.amperecomputing.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=os.amperecomputing.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZkGNO4xNGchfLUYIbsz55bAksWekfVy6c2ngc8tOm9P6KIwAem4z6XRFpZE2Gz+oKLurIsjIu9vS6BfbW8FOsIPh8GF/nl8U4pl6eaXPMb9vdGYNNlJFDXfQsPw+sjIeMhjbXyaGKAKnQbFHtmotUrBmJ6yVChOnMo8cAy6PD9H77npS1ppVueynuW1wU4VDi1S/q9HRJunCY1ag7yOGRqcU/znwgbf+5KiliNW65gqWi/r9N4jZpPs9zsu4CE8XL8TTOQNmhxWWPDBv64b2CJIqRk9j00rJVag8EWxNYnk3KKKQHOeN8uf6TvL/+GmpF5sAASBBzjZIWm0hXs4AnA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BTJJooAIsiNvWaH3T7kLHuPL2VURzAcZzdTI50pUV4U=;
+ b=P41GoMUVN5iUBDRc1nuLJospEDhgu/Ks+hYtOwIsXK1guGfxkFVPYzxA3siHppksNnYXry/hqmBMw2i4QfaRE/4kvtPNCMjyoK0GFfISIYiA1Ryxy1IRl+DkafuPnwAgbS33U97/s0cj/IqkXjRbJEjqiTtS8sgZXN3FvuEMBDSyEw8n6Bf9/3Y7nFCIP4hlLqPh8wyehn6unXGq2HKsSwIfJYaR90sa3u9uUcxTOxeKsXWx87jboPa8bvnobXCr0c/grv7XlFK92uewIyMb8MaobihemUbLR+/wHD/xwtY/YeFFqSnW+gRiTjL6soQfQMOjkIVGSzEDwtWyQAJmpQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=os.amperecomputing.com; dmarc=pass action=none
+ header.from=os.amperecomputing.com; dkim=pass
+ header.d=os.amperecomputing.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724774561; x=1725379361; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YUynhOlcmLN7T5QW4XtgVMkPbI5R+at4MqJPO3psk2k=;
-        b=IRfrdUMQ5LIBSERPSFNw1r4BKjv6Lpg23bTF7uQ6mpb/lVGuQiNitZUY4JAt9Je3yz
-         jmqRbZrKaqkwaPEsPvvj1K0lf40zlSp0FNItxkKiPgu6dYTutXfa3yoIbd+e6asRBftl
-         EG5UVJa5FtD9fCDhLAiFybdy2hgKdyzNxGmP5Q0hTKqX7TNayg9oSV7tYzn0y7vK0QB4
-         /Qy7nAZkxaATBs90V4xvweZQXC2BXrsAvVJxhs8WbFVq68/9wt/E6Z+wfKnACTmENo1A
-         jnKfVL87Rd5MkZablrCdk0wru87gYZgVYizFLKkNryNEHGno4vYqQfOi/+iwvCUm09sH
-         dYtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724774561; x=1725379361;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YUynhOlcmLN7T5QW4XtgVMkPbI5R+at4MqJPO3psk2k=;
-        b=QFhinz2ZacM7SBPxLyr84YVhCqpLeztL/lOCVcf3nWzzXgXnS0+4t1VYuwNjbhItb1
-         1JM5GXXvRME1PkpLgyzPrPrA7fQ/L1g1d3lqSdccNsxtggkZKnvktgcDUEvWn4kmM9Z8
-         3RmkEAVBrDeESNZi/fA9wpC1jqplRPEnCxlzk8CqDDCmX9oGiXfUSwLJAo4sLPY43Ocb
-         ev2wfZLT3YIMCfhnsxKJwhvNOyGXf9FrEbKQT9LRmmu1O2WzvX71PX58n+FKxdSiojAS
-         8G3c30t2rcfxWUvJG9MNtUBWMq3hlvfhqUwFQgt49ZE18UFXDMwjvik4sQO9xE2lFEgP
-         TjWA==
-X-Forwarded-Encrypted: i=1; AJvYcCVjfcoOQMifa3mSSBK17V6/iePZSNbprLwTVzDCPJ7ZnfeplfVd+akYh+GhnTvORQiza9+M89A5Fk2w@vger.kernel.org, AJvYcCWHxyzijiUI/xfvyQrqXMwm4Gsk4ZlnwmiAZaZwZoXVYSHAmG10+/+qWBi1WAObpVicF57lEYrhzfAB@vger.kernel.org, AJvYcCWfeP/snpfXeNZUdyXcdbyZLNSB5Jy7WslA35UV7JgGH1hmOSyD+MAV7HTFpsU7f5tCUKOqF6/PVnTHMw==@vger.kernel.org, AJvYcCXnb2b+Ol88KjNC8yQHuMAE97ojuo/MUeryafbIthXFU3MOXUVymkIjXff2W0anrdb01RBJiNTXLIEwqxpV@vger.kernel.org
-X-Gm-Message-State: AOJu0YxIna3bSwY4ne/QeP2/rMgUYHUmqLQ4UN4CrqxoXY23CFp3C8DB
-	zpwGkCJxYufztGgesmoZ439vQ7LoGJDcAV6RMKSPbj9y7n4wBKZ8
-X-Google-Smtp-Source: AGHT+IExAE08HkQ1ORhHjbfWeAfdnCQmLvshPsVsu4uByYzu2KqQJJMTlxqXuTwlDzVPJS9Zd5JWcQ==
-X-Received: by 2002:a05:6902:2202:b0:e13:d6f2:1181 with SMTP id 3f1490d57ef6-e1a2a5da391mr3211223276.26.1724774560695;
-        Tue, 27 Aug 2024 09:02:40 -0700 (PDT)
-Received: from fan ([50.205.20.42])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e178e4b3883sm2584126276.32.2024.08.27.09.02.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Aug 2024 09:02:40 -0700 (PDT)
-From: Fan Ni <nifan.cxl@gmail.com>
-X-Google-Original-From: Fan Ni <fan.ni@samsung.com>
-Date: Tue, 27 Aug 2024 09:02:11 -0700
-To: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Cc: Fan Ni <nifan.cxl@gmail.com>, ira.weiny@intel.com,
-	Dave Jiang <dave.jiang@intel.com>,
-	Navneet Singh <navneet.singh@intel.com>, Chris Mason <clm@fb.com>,
-	Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>,
-	Petr Mladek <pmladek@suse.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Dan Williams <dan.j.williams@intel.com>,
-	Davidlohr Bueso <dave@stgolabs.net>,
-	Alison Schofield <alison.schofield@intel.com>,
-	Vishal Verma <vishal.l.verma@intel.com>,
-	linux-btrfs@vger.kernel.org, linux-cxl@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	nvdimm@lists.linux.dev
-Subject: Re: [PATCH v3 18/25] cxl/extent: Process DCD events and realize
- region extents
-Message-ID: <Zs34b4DoMmd9GO28@fan>
-References: <20240816-dcd-type2-upstream-v3-0-7c9b96cba6d7@intel.com>
- <20240816-dcd-type2-upstream-v3-18-7c9b96cba6d7@intel.com>
- <Zsj_8IckEFpwmA5L@fan>
- <20240827130829.00004660@Huawei.com>
+ d=os.amperecomputing.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BTJJooAIsiNvWaH3T7kLHuPL2VURzAcZzdTI50pUV4U=;
+ b=Gg0d7dp1wjG097yM+JfXgfj7n7UhzgcTkFF4gLlVjg0KzWc96lVjxIaLm7g5BNtan4YIqi9hCqR+FuDGN9gDqY9E4r2pofSl8cSoNlUhkLHmEIXkrfkNPvopBftJIK3eKiB50VhFYSGwB1O/9qRA5YP1LNaRiq6/GU/mEoA2LSE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=os.amperecomputing.com;
+Received: from LV2PR01MB7792.prod.exchangelabs.com (2603:10b6:408:14f::10) by
+ SA1PR01MB8325.prod.exchangelabs.com (2603:10b6:806:387::19) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7897.26; Tue, 27 Aug 2024 16:54:10 +0000
+Received: from LV2PR01MB7792.prod.exchangelabs.com
+ ([fe80::2349:ebe6:2948:adb9]) by LV2PR01MB7792.prod.exchangelabs.com
+ ([fe80::2349:ebe6:2948:adb9%6]) with mapi id 15.20.7897.021; Tue, 27 Aug 2024
+ 16:54:09 +0000
+From: D Scott Phillips <scott@os.amperecomputing.com>
+To: Anshuman Khandual <anshuman.khandual@arm.com>, Oliver Upton
+ <oliver.upton@linux.dev>
+Cc: Catalin Marinas <catalin.marinas@arm.com>, Will Deacon
+ <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Mark Rutland
+ <mark.rutland@arm.com>, linux-arm-kernel@lists.infradead.org,
+ linux-doc@vger.kernel.org, Besar Wicaksono <bwicaksono@nvidia.com>, Easwar
+ Hariharan <eahariha@linux.microsoft.com>, Rob Herring <robh@kernel.org>,
+ Andre Przywara <andre.przywara@arm.com>, linux-kernel@vger.kernel.org,
+ patches@amperecomputing.com, Marc Zyngier <maz@kernel.org>,
+ kvmarm@lists.linux.dev, James Morse <james.morse@arm.com>, Suzuki K
+ Poulose <suzuki.poulose@arm.com>, Zenghui Yu <yuzenghui@huawei.com>
+Subject: Re: [PATCH] arm64: errata: Enable the AC03_CPU_38 workaround for
+ ampere1a
+In-Reply-To: <314b8893-2ffd-4148-974b-725cfaa97d18@arm.com>
+References: <20240826215933.1263453-1-scott@os.amperecomputing.com>
+ <Zs0OelXKn_-6jtqN@linux.dev>
+ <314b8893-2ffd-4148-974b-725cfaa97d18@arm.com>
+Date: Tue, 27 Aug 2024 09:02:58 -0700
+Message-ID: <86zfoy2bt9.fsf@scott-ph-mail.amperecomputing.com>
+Content-Type: text/plain
+X-ClientProxiedBy: MW4PR04CA0316.namprd04.prod.outlook.com
+ (2603:10b6:303:82::21) To LV2PR01MB7792.prod.exchangelabs.com
+ (2603:10b6:408:14f::10)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240827130829.00004660@Huawei.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV2PR01MB7792:EE_|SA1PR01MB8325:EE_
+X-MS-Office365-Filtering-Correlation-Id: ff0287ab-6cef-44c5-b067-08dcc6b8dea9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|52116014|7416014|376014|38350700014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?x2k4kDNo2U7mblMIoYA9imQhx7jCzvdHvmS7zUX9fYaQWdQHrVeTM+4wn5LZ?=
+ =?us-ascii?Q?A2wBd0Z4HT3G0qU9vOZnA7fhWJK5BRD31cSCFtgsCyIJZfeTpt5Dcp4gDmwD?=
+ =?us-ascii?Q?ZBeW7edRZw5fd12Ga0wNxfuxUlvLIZVtIQ3sgFA3RTCF3l8kT00Kswpn5Jaf?=
+ =?us-ascii?Q?xk3zw8yycoYCiNF5ERsIOSawMMTvXEsIG1rL0guqC0hw+apgkyblQ5xEcgCZ?=
+ =?us-ascii?Q?AgSmD7CGZpIM6towJzj0/zCI/HwFStGIyHK19A0GiHzv02ShwBmPPwpcWvXB?=
+ =?us-ascii?Q?ZzaljU+RaGbxN+1MXp46a7gOQKhHFO78Bu3Mn8zUK2h5ZR1oA8OOVEMZLLoY?=
+ =?us-ascii?Q?OwHZt05PaDdKQ6GrrfCkVC8q5zEPE3Yi//07FO0ANExuQ5/jHgHVCsxc6KO3?=
+ =?us-ascii?Q?pJsdz9kS1QaOTog2rY+r5Omi2+f7TeY53RiNziRV0pi8GZP6P1bXlbrO/wBm?=
+ =?us-ascii?Q?uf30TOjtZXPCMo2zNkrjlwPJ/O7CveK0efHg5Awk3HddOukbxBzA8MOjIOlU?=
+ =?us-ascii?Q?vcEi/x+S/lk7QR96DwhacPiS6b7EmbDRJoIAaoVpxIM8YNBvl1GFQymSkjzT?=
+ =?us-ascii?Q?/aYwQYWJPTa6vxcETIJiLZGkVEZRnzRrZoyMHP5WaezYTbYuV0rMAWnb0yMv?=
+ =?us-ascii?Q?nEk7VPA4Wz1o2d17KsdytzUlapsejF4wexMbixxF0qlrN54dFYkaqqCMbfhU?=
+ =?us-ascii?Q?VD+gB5JKMR+tGQckRo32wZikz5av2ttUFGbqj2XphiWUuIAKpU13VtDFc/+D?=
+ =?us-ascii?Q?OTzhNvf1CnH/gjmMqaIMsJ+nCmhQMC2z6Ci1hVg4s55DRW7FA3i3ZrYDXWJI?=
+ =?us-ascii?Q?FOwBGn0bdoHSXLbbt2fU0vbM9E+oXXrRfoffcd6MkD0o5Z0bEg6wl6EiClkt?=
+ =?us-ascii?Q?fQQpgSAaes1zLU/XlSQHvT1DNrbnlqLiR2u6wPpY2wQSchD7Wnb6bFtDr3Tc?=
+ =?us-ascii?Q?wu26K9v8QjRLGV1ajoZRC0POV8C3tie3b9lHwGgkul3lzt2bFO/NcB5Din7Q?=
+ =?us-ascii?Q?fZBWy4ALahHjavvB/eZ7kFA+LNxYjKx4fuy57lFehsUnnUv7cl60u+RkVQ08?=
+ =?us-ascii?Q?0fgaxSvHz6ohRJED2dSw7bOCYbbebyIc04Mc0ouAr1bU3ErcneQQtAROrXRO?=
+ =?us-ascii?Q?7zTxXMOEeY7EEeinlifE9hR8/SW7owyRZdSde+ueUyetWL7hlymMnxPwvjYV?=
+ =?us-ascii?Q?MYZjelIr5PpVMTQylaFg0mLmTwoGh/+tr/L44MDF9LLGgrRmyVHd8jUbzTsW?=
+ =?us-ascii?Q?RrBX9DQhVhMXSC90sIw0S7JsBCQsRqRG6e7xRAKgzcvSP7kURAvTtMOV5A9n?=
+ =?us-ascii?Q?WcyKrp3OdN9Fxsy5ZG0QOe+Yy5af0wKou/ai5RYnQka++HSvTOMklyWPCUDU?=
+ =?us-ascii?Q?l4MG8AqNkBWMvQN+iki62j3jOKp+TfIf1J5ZnVsd+z8YcVd9NQ=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV2PR01MB7792.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(52116014)(7416014)(376014)(38350700014);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?n1gl3o0S4YEXVCzxfn2vwGfB4mrV58QQGsfbSb2BZTFOrJJBZMSUvfkW+fpm?=
+ =?us-ascii?Q?u4hQocE4U1Qom4uYFSGhFVYwzms6XeQeYzFH+b3rCqnGjPrhj8WfluW7qWml?=
+ =?us-ascii?Q?Bd+39qmAMKrDAndpW89m9LUjnY2LCqmDUO14aVIzh7QiNxIm6oHGkgeRGr98?=
+ =?us-ascii?Q?jeF/dVVNdqGx/veF1UpN/D+QD7+1bGJb5+KW+gWEFwSXjW2bwEhKtu20bcGj?=
+ =?us-ascii?Q?HLbAGvhI081soar7x2w/0OYMn8724zUrcA3Vf9zUVq0priSqLd9Oxukn6U7u?=
+ =?us-ascii?Q?QjFnVKERl+qreIsz7QJvjiFsJ4MM7cA4F99nc9QNPnn+NwcwGoAvyTtGfXTT?=
+ =?us-ascii?Q?6D0Sss9LkrBEKBPJFcWAlY7XDhSwwk2W5LYUFCFb2fUNXLCLL/aWua8K1vtP?=
+ =?us-ascii?Q?jIv79pRmgdH9PTVbFfxIURrJMm5HuSavFNiFtPAxzNbqX3ZL23sU81qSMFvB?=
+ =?us-ascii?Q?rMXjagwmY/2gWrMkfhI6BMmcN0E/eCU5tsgvY2U7lsIOTVY7stbl4tGDmqcD?=
+ =?us-ascii?Q?WhRJ7QAI+bskBJtVJzDRiok84gwMgCYeuImuTFfO7q193+z8X6biZcygCu4c?=
+ =?us-ascii?Q?GJKl5+edkQgOlQiSZKuk7huppA2qTATZPUD+MmyrbSO6mZHMKVyiVuFXnxQd?=
+ =?us-ascii?Q?vzhndlJRTq/SzSjFRBVuvNjeZKpATFFXdMnfQz9Gce4gS4qRFwkMfucHiDuW?=
+ =?us-ascii?Q?1q3eoAwKGri+EyYZcEu7w9tfrdgNRrBRmB3avHD5yYjYa+kreKNKXWYPXUc+?=
+ =?us-ascii?Q?bBxh0ncQFcQW532ywwtolhOzjdaJTXj+ZJXx//lc9hwwTjAsiNQmNY6k4qt4?=
+ =?us-ascii?Q?j2t8AheqsxWTe/tPbDoWCOx64H9UfCdlY2ujbktLnzuCOlm7P1a+MItwuoKe?=
+ =?us-ascii?Q?nxPPmsoYnoviX4FAzb8z5zMsiofhUI2epSQyQX8w6fLB2CUyfmNkGnUHCNq3?=
+ =?us-ascii?Q?9WAwMILmJ5B+L60p4nedRyzkQeezZx7TosOch48CMcVtE/g3IZRT52V1n2Il?=
+ =?us-ascii?Q?lTJoPRp0p5lRmHs3Vx58kBOkD68VrhW5ETCwbjgdUx4mgmS9wt9tqkqh1rrx?=
+ =?us-ascii?Q?wDb9sk/2p8q+THF3kVLK/HzZRjCD+2DcIbwW6L5jAtt0L+43cukUDp1Do1hk?=
+ =?us-ascii?Q?kBTjfXJaX84ffkF/fUlZKgmSousmTY3/WgBRPhm1FMqKtF8o5QgJvMzZLMCB?=
+ =?us-ascii?Q?Xb2zdI55WEPEwOgBHRck9nw6s4CoR4bC5Az/ZL/0GJ0+fxexG+mxFo1FZ0NM?=
+ =?us-ascii?Q?0CAfaJRjH+fofbTNkFciQ1MOpx/czue4KUJWtFhH8a1DAZaMdVFD0FdYNoUe?=
+ =?us-ascii?Q?GAMuaydFsdZ+ce4RTp6gBWqxrwk2Wk6ML7Q64uTKCq56fS/MlhtCz3CrrEZp?=
+ =?us-ascii?Q?YFLtesY3W+9ywqbSE45wy8Q/v3JazoY9w9GMoYikFH17SPoB4kIsoS5/sFrY?=
+ =?us-ascii?Q?fcI1xFszewzqE3oOLpqciIviIw1WTs/WY2yqHTiaGNwXDIXUg5kbEVy3cEOx?=
+ =?us-ascii?Q?MbuevgIBI8j9pzeLm3rwUoNkbYGQ0TkW7vviiJDG+DanwR9dfDVg0DWB43+s?=
+ =?us-ascii?Q?+ABhLDAeQsOuAarer/c9tO0XDs5hOYF375r0pQfvZ3afYd8n3GZwmA7jHteu?=
+ =?us-ascii?Q?udVD75es+REX5d+2xMqAapg=3D?=
+X-OriginatorOrg: os.amperecomputing.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ff0287ab-6cef-44c5-b067-08dcc6b8dea9
+X-MS-Exchange-CrossTenant-AuthSource: LV2PR01MB7792.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2024 16:54:09.6002
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3bc2b170-fd94-476d-b0ce-4229bdc904a7
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: w+fU+ovy49WIaEbBAoBxu9uHw8Sa9UYxBpM5hB4aa2BQOZ8mohjc1AUnW1eh7i3NmWmxjF4/L9G3wA8APCADSkg9VQ5KGC7q7V/0OR01jonyuJA+As+BKVppXx/nsmMC
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR01MB8325
 
-On Tue, Aug 27, 2024 at 01:08:29PM +0100, Jonathan Cameron wrote:
-> On Fri, 23 Aug 2024 14:32:32 -0700
-> Fan Ni <nifan.cxl@gmail.com> wrote:
-> 
-> > On Fri, Aug 16, 2024 at 09:44:26AM -0500, ira.weiny@intel.com wrote:
-> > > From: Navneet Singh <navneet.singh@intel.com>
-> > > 
-> > > A dynamic capacity device (DCD) sends events to signal the host for
-> > > changes in the availability of Dynamic Capacity (DC) memory.  These
-> > > events contain extents describing a DPA range and meta data for memory
-> > > to be added or removed.  Events may be sent from the device at any time.
-> > > 
-> > > Three types of events can be signaled, Add, Release, and Force Release.
-> > > 
-> > > On add, the host may accept or reject the memory being offered.  If no
-> > > region exists, or the extent is invalid, the extent should be rejected.
-> > > Add extent events may be grouped by a 'more' bit which indicates those
-> > > extents should be processed as a group.
-> > > 
-> > > On remove, the host can delay the response until the host is safely not
-> > > using the memory.  If no region exists the release can be sent
-> > > immediately.  The host may also release extents (or partial extents) at
-> > > any time.  Thus the 'more' bit grouping of release events is of less
-> > > value and can be ignored in favor of sending multiple release capacity
-> > > responses for groups of release events.
-> > > 
-> > > Force removal is intended as a mechanism between the FM and the device
-> > > and intended only when the host is unresponsive, out of sync, or
-> > > otherwise broken.  Purposely ignore force removal events.
-> > > 
-> > > Regions are made up of one or more devices which may be surfacing memory
-> > > to the host.  Once all devices in a region have surfaced an extent the
-> > > region can expose a corresponding extent for the user to consume.
-> > > Without interleaving a device extent forms a 1:1 relationship with the
-> > > region extent.  Immediately surface a region extent upon getting a
-> > > device extent.
-> > > 
-> > > Per the specification the device is allowed to offer or remove extents
-> > > at any time.  However, anticipated use cases can expect extents to be
-> > > offered, accepted, and removed in well defined chunks.
-> > > 
-> > > Simplify extent tracking with the following restrictions.
-> > > 
-> > > 	1) Flag for removal any extent which overlaps a requested
-> > > 	   release range.
-> > > 	2) Refuse the offer of extents which overlap already accepted
-> > > 	   memory ranges.
-> > > 	3) Accept again a range which has already been accepted by the
-> > > 	   host.  (It is likely the device has an error because it
-> > > 	   should already know that this range was accepted.  But from
-> > > 	   the host point of view it is safe to acknowledge that
-> > > 	   acceptance again.)
-> > > 
-> > > Management of the region extent devices must be synchronized with
-> > > potential uses of the memory within the DAX layer.  Create region extent
-> > > devices as children of the cxl_dax_region device such that the DAX
-> > > region driver can co-drive them and synchronize with the DAX layer.
-> > > Synchronization and management is handled in a subsequent patch.
-> > > 
-> > > Process DCD events and create region devices.
-> > > 
-> > > Signed-off-by: Navneet Singh <navneet.singh@intel.com>
-> > > Co-developed-by: Ira Weiny <ira.weiny@intel.com>
-> > > Signed-off-by: Ira Weiny <ira.weiny@intel.com>
-> > >   
-> > 
-> > One minor change inline.
-> Hi Fan,
-> 
-> Crop please.  I scanned past it 3 times when scrolling without noticing
-> what you'd actually commented on.
+Anshuman Khandual <anshuman.khandual@arm.com> writes:
 
-Sure. I will crop in the future.
-Thanks for the tips, Jonathan.
+> On 8/27/24 04:53, Oliver Upton wrote:
+>> Hi D Scott,
+>> 
+>> On Mon, Aug 26, 2024 at 02:59:33PM -0700, D Scott Phillips wrote:
+>>> The ampere1a cpu is affected by erratum AC04_CPU_10 which is the same
+>>> bug as AC03_CPU38. Add ampere1a to the AC03_CPU_38 workaround midr list.
+>>>
+>>> Signed-off-by: D Scott Phillips <scott@os.amperecomputing.com>
+>>> ---
+>>>  Documentation/arch/arm64/silicon-errata.rst | 2 ++
+>>>  arch/arm64/Kconfig                          | 2 +-
+>>>  arch/arm64/include/asm/cputype.h            | 2 ++
+>>>  arch/arm64/kernel/cpu_errata.c              | 1 +
+>>>  4 files changed, 6 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/Documentation/arch/arm64/silicon-errata.rst b/Documentation/arch/arm64/silicon-errata.rst
+>>> index 50327c05be8d1..39c52385f11fb 100644
+>>> --- a/Documentation/arch/arm64/silicon-errata.rst
+>>> +++ b/Documentation/arch/arm64/silicon-errata.rst
+>>> @@ -55,6 +55,8 @@ stable kernels.
+>>>  +----------------+-----------------+-----------------+-----------------------------+
+>>>  | Ampere         | AmpereOne       | AC03_CPU_38     | AMPERE_ERRATUM_AC03_CPU_38  |
+>>>  +----------------+-----------------+-----------------+-----------------------------+
+>>> +| Ampere         | AmpereOne AC04  | AC04_CPU_10     | AMPERE_ERRATUM_AC03_CPU_38  |
+>>> ++----------------+-----------------+-----------------+-----------------------------+
+>> 
+>> We tend to stick the marketing term for a part in the second column so
+>> it is more recognizable for the user. Is this a placeholder for something
+>> different from "ampere1a"?
+>
+> Agreed, even the MIDR being added here is for AMPERE1A. Probably something
+> like 'AmpereOneA' might be more suitable.
 
-Fan
+"AmpereOne AC04" was given to me by our marketing department, so that
+should be the user visible name of the part when they buy/use
+it. ampere1a is the name of the core in the SoC and the thing you can
+use in gcc's --mtune=, similar to "neoverse-n1" within "Ampere Altra".
 
-> 
-> > > +/* See CXL 3.0 8.2.9.2.1.5 */  
-> > 
-> > Update the reference to reflect CXL 3.1.
-> > 
-> > Fan
-> > 
+>> 
+>>> diff --git a/arch/arm64/kernel/cpu_errata.c b/arch/arm64/kernel/cpu_errata.c
+>>> index f6b6b45073571..748aa536446ae 100644
+>>> --- a/arch/arm64/kernel/cpu_errata.c
+>>> +++ b/arch/arm64/kernel/cpu_errata.c
+>>> @@ -773,6 +773,7 @@ const struct arm64_cpu_capabilities arm64_errata[] = {
+>>>  		.desc = "AmpereOne erratum AC03_CPU_38",
+>>>  		.capability = ARM64_WORKAROUND_AMPERE_AC03_CPU_38,
+>>>  		ERRATA_MIDR_ALL_VERSIONS(MIDR_AMPERE1),
+>>> +		ERRATA_MIDR_ALL_VERSIONS(MIDR_AMPERE1A),
+>> 
+>> This will break the workaround on AC03, since the second macro reassigns
+>> ::midr_range.
+>> 
+>> You'll want to use ERRATA_MIDR_RANGE_LIST() instead w/ an array of
+>> affected MIDRs.
+>> 
+>
+> +1
+>
+> Although ERRATA_MIDR_RANGE_LIST() in turn creates such a list.
+
+Oops, my mistake. I'll fix this.
 
