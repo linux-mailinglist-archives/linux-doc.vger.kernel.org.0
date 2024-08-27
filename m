@@ -1,90 +1,176 @@
-Return-Path: <linux-doc+bounces-23946-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-23944-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C35D960C58
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 15:40:36 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 53639960C3F
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 15:37:34 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id AA69C1F22320
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 13:40:35 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 780171C22DF5
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2024 13:37:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CBACF1BF331;
-	Tue, 27 Aug 2024 13:40:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 49BAF1C0DC6;
+	Tue, 27 Aug 2024 13:37:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=muxel.dev header.i=@muxel.dev header.b="Gear0AYt"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="XC1fSUzL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.larkspur.one (mail.larkspur.one [45.132.244.49])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C6AA19D076;
-	Tue, 27 Aug 2024 13:40:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.132.244.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6856E1BFDF3;
+	Tue, 27 Aug 2024 13:37:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724766007; cv=none; b=XZpmP9Og6EBiR4xpMapLJ8T1yLdhIfQJ30t9IPRd0J12buH15XutmPqoFT/xVV9MO7Ywvjc2OCjnOTzWZ5qADtdICOljecXwpXBiOMSV1VOmM6qTbMVde7ohP5AYlfOGCzxbF74ulplw2A+xiZosvitf8l2cYRT0K9/EzeOAJTA=
+	t=1724765830; cv=none; b=XIsLOo4c5WV+3tlhrRdj5Bf+/C26h6Ir1PS7Re4vu/nxi8ml6C5nTQB4BK4zk2SiZK8PAOANfDNeprDIyy2bEQZQKTcuDYOi02nwLjz8I0FBvHgIuUxbHiL5TI96uZuayuFHQuBkbLnxYMnwBqc7+snJTjb6BzIXMFphn4Y+wWo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724766007; c=relaxed/simple;
-	bh=+C1+fgbMw/euXjSrNWrrXTv/5xMsGTkbdtcYL89zMfY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=tcCbvosO9izRzFjsuP6P4/1bZ0Q0boUoO8BqW4QYUAtQfANm9qWzY85vSgi2nDMi7tB1I3XXMmnPUsBBqSO0nhGKIF5b65MR2a+pddX4egD0OKV/r62+s1iJJSkqbrnWbWTMADYr2ririx0f2imksbiUibblNRjGa+4CplGcq7w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=muxel.dev; spf=pass smtp.mailfrom=muxel.dev; dkim=pass (2048-bit key) header.d=muxel.dev header.i=@muxel.dev header.b=Gear0AYt; arc=none smtp.client-ip=45.132.244.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=muxel.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=muxel.dev
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D6FAE29256;
-	Tue, 27 Aug 2024 15:33:18 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=muxel.dev; s=dkim;
-	t=1724765603; h=from:subject:date:message-id:to:cc:mime-version:
-	 content-transfer-encoding; bh=8lFMmSd3p/v694tPfIzHSO9zh7Sd8dCwn2X3I4gCA04=;
-	b=Gear0AYtVrr9EGpr7TCJGcaSN2aZJYMzN0Gb0pATHJ72f6azewUhN0e5YkFhpMR6nwob2k
-	dqIYG29JsavZNINjhfkydHNU6MnC8OC0CbJjEcv52rqyZgq0N8mL0sokA52QQ95xoRVIfV
-	ENqObpVHWAvW05bF+rQSeukgCeUUwCKkVeiuBjiv4dlwvfPoFbs/Fs/foEm6/R/ETIadlT
-	hmpPI+lchJgy5kmokhgKQ/A2CW+59cFaaFYOH2LmPBE9ZZqPYEM8U0zjVAt/MlLB16EeiO
-	lgrnYUAxthYq9pl2q8G9azKx8xKarKGVWIH7WkofGXUpf4sSNVI+iEvuy9L7OA==
-From: Sebastian Muxel <sebastian@muxel.dev>
-To: Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Sebastian Muxel <sebastian@muxel.dev>
-Subject: [PATCH] scripts: sphinx-pre-install: remove unnecessary double check for $cur_version
-Date: Tue, 27 Aug 2024 15:32:24 +0200
-Message-ID: <20240827133224.160776-1-sebastian@muxel.dev>
-X-Mailer: git-send-email 2.46.0
+	s=arc-20240116; t=1724765830; c=relaxed/simple;
+	bh=F7uwwE8fWUXezGAg782tjWqtQAIrRqH0usOHJInnYUM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=SYiSLsP5/KMSC6h/jTy+PCSi6VHMZajeWpv6DxJNncuYfWdJV/ngO+y8n/HYqkEgiMU9ayQNraQGKH6Z2hVGCHnNHnXi37pgKbGWdjjJdtAM3vuCk55ttGliBjZ9ejP7d+CX+l8Ebfdg0aoYwFCFxR66goEjCKTKl4tUyYsn84s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=XC1fSUzL; arc=none smtp.client-ip=198.175.65.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1724765828; x=1756301828;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=F7uwwE8fWUXezGAg782tjWqtQAIrRqH0usOHJInnYUM=;
+  b=XC1fSUzLIeLL4uY69seqfC98xLTodAkR+XIdXGGdK8za+prNpEbJ5BW6
+   LF7ntldvU+xmi4Of28bu6/AridNyMqQDPL+0iJ5g/IvCMHT55A2NlKFHR
+   i8RKxCKSe3/yH9SLGd7fJHBKFeomq69ARfYns6gNKomV4wZB49nDb9Vhr
+   rCiJXSK+IlNRQXyddkGsI4XQyEE1xAjjdX6Hf/SV+KW1qZzQUtntSttDU
+   10s5rfMx3Bk3El7iXTc41bqW2idVLVT5jEG/9QeuUL3U/Z+gWywquDCrD
+   MLxeqzDP1ytjaujyUl7r6wcttiga0liEK5FP5QvlTuYfBsI+xwWMq4dRV
+   g==;
+X-CSE-ConnectionGUID: bd6A78AAQA6lonvWkRSv+w==
+X-CSE-MsgGUID: 5kl5DMgsQjeSA64xnwgbGA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11177"; a="23418976"
+X-IronPort-AV: E=Sophos;i="6.10,180,1719903600"; 
+   d="scan'208";a="23418976"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Aug 2024 06:37:07 -0700
+X-CSE-ConnectionGUID: Bz6r6OChQHqZieZ/aNQnAA==
+X-CSE-MsgGUID: RgBshjT6R36pYYBbEpG8mA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,180,1719903600"; 
+   d="scan'208";a="62916912"
+Received: from smile.fi.intel.com ([10.237.72.54])
+  by fmviesa009.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Aug 2024 06:37:05 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.98)
+	(envelope-from <andriy.shevchenko@linux.intel.com>)
+	id 1siwMs-00000002HBP-1qOb;
+	Tue, 27 Aug 2024 16:36:18 +0300
+Date: Tue, 27 Aug 2024 16:36:04 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Petr Mladek <pmladek@suse.com>, Steven Rostedt <rostedt@goodmis.org>,
+	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+	Sergey Senozhatsky <senozhatsky@chromium.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	John Ogness <john.ogness@linutronix.de>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/2] hexdump: Allow skipping identical lines
+Message-ID: <Zs3WRKOgsvhIP8Es@smile.fi.intel.com>
+References: <20240826162416.74501-1-miquel.raynal@bootlin.com>
+ <20240826162416.74501-3-miquel.raynal@bootlin.com>
+ <Zsy86HZ7uew9-Ef6@smile.fi.intel.com>
+ <20240827111353.0341c571@xps-13>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240827111353.0341c571@xps-13>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 
-$cur_version is currently being tested twice with the first test
-resulting in an unhelpful "$sphinx returned an error", not continuing to
-the more helpful "$sphinx didn't return its version".
+On Tue, Aug 27, 2024 at 11:13:53AM +0200, Miquel Raynal wrote:
+> andriy.shevchenko@linux.intel.com wrote on Mon, 26 Aug 2024 20:35:36
+> +0300:
+> > On Mon, Aug 26, 2024 at 06:24:16PM +0200, Miquel Raynal wrote:
+> > > When dumping long buffers (especially for debug purposes) it may be very
+> > > convenient to sometimes avoid spitting all the lines of the buffer if
+> > > the lines are identical. Typically on embedded devices, the console
+> > > would be wired to a UART running at 115200 bauds, which makes the dumps
+> > > very (very) slow. In this case, having a flag to avoid printing
+> > > duplicated lines is handy.
+> > > 
+> > > Example of a made up repetitive output:
+> > > 0f 53 63 47 56 55 78 7a aa b7 8c ff ff ff ff ff
+> > > ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+> > > ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+> > > ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+> > > ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+> > > ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+> > > ff ff ff ff ff ff ff ff ff ff ff ff 01 2a 39 eb
+> > > 
+> > > Same but with the flag enabled:
+> > > 0f 53 63 47 56 55 78 7a aa b7 8c ff ff ff ff ff
+> > > ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+> > > *
+> > > ff ff ff ff ff ff ff ff ff ff ff ff 01 2a 39 eb  
+> > 
+> > The problem here is that without offset we can't see how many lines were
+> > skipped.
+> 
+> Yes, this is intended, I prefer to mimic userspace tools behavior.
+> 
+> > Two ways to solve (that come to my mind immediately, maybe more and better):
+> > 1) make sure that new flag implies or expects (otherwise BUILD_BUG_ON() or so)
+> >   the OFFSET to be set;
+> 
+> It depends what you are looking for. When I print a 2kiB page and want
+> to compare the output with some other dump, I will immediately see if
+> there are more or less skipped lines in the diff. When I want to just
+> grab the UBI header and skip all the ff's following while asking a full
+> buffer to be dumped (for kernel development reasons), the amount of
+> skipped lines is not of interest to me either. Of course this is my own
+> use case, but I guess there are others.
+> 
+> However this is true it is sometimes also useful to know where we are in
+> the dump, but the hexdump helpers already include all the interesting
+> bits for that through the 'prefix_type' parameter :
+> 
+> enum {
+> 	DUMP_PREFIX_NONE,
+> 	DUMP_PREFIX_ADDRESS,
+> 	DUMP_PREFIX_OFFSET
+> };
+> 
+> See https://elixir.bootlin.com/linux/v4.20.17/source/include/linux/printk.h
+> 
+> I anyway understand the request and will change the example with
+> something more common, probably, by using one of the two other
+> prefixes.
+> 
+> > 2) [OR] add number of lines skipped in that * line.
+> 
+> As mentioned above, this is not the intended output.
+> 
+> > Personally I prefer the 1) as I think that you tried to follow the existing
+> > format of user space tools and there is a chance that there are other tools or
+> > scripts that parse the dump to restore the binary contents.
+> 
+> Exactly. Also, just simply using the diff command over two dumps
+> without being polluted by any additions on one side or the other is very
+> convenient.
 
-This patch removes the first test to return the more useful message.
+I got it, then provide a good examples in the cover letter / commit message,
+documentation, and test cases.
 
-Fixes: a8b380c379ef ("scripts: sphinx-pre-install: only ask to activate valid venvs")
-Signed-off-by: Sebastian Muxel <sebastian@muxel.dev>
----
- scripts/sphinx-pre-install | 2 --
- 1 file changed, 2 deletions(-)
+After thinking more about this, if the caller asked for DUMP_PREFIX_NONE,
+that's what they get if they add also SKIP flag. So, maybe here is no
+problem after all :-)
 
-diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
-index c1121f098542..ad9945ccb0cf 100755
---- a/scripts/sphinx-pre-install
-+++ b/scripts/sphinx-pre-install
-@@ -300,8 +300,6 @@ sub check_sphinx()
- 	}
- 
- 	$cur_version = get_sphinx_version($sphinx);
--	die ("$sphinx returned an error") if (!$cur_version);
--
- 	die "$sphinx didn't return its version" if (!$cur_version);
- 
- 	if ($cur_version lt $min_version) {
 -- 
-2.46.0
+With Best Regards,
+Andy Shevchenko
+
 
 
