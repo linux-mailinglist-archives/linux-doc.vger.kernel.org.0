@@ -1,46 +1,46 @@
-Return-Path: <linux-doc+bounces-24005-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-24006-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E472D962DA4
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Aug 2024 18:30:00 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 72854962DA5
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Aug 2024 18:30:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8C6E91F2437A
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Aug 2024 16:30:00 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D62FE286E38
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Aug 2024 16:30:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A0DE31A3BA0;
-	Wed, 28 Aug 2024 16:29:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 64E071A4B81;
+	Wed, 28 Aug 2024 16:30:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kfsBCMZ6"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oZkPS99P"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 705FD44C68;
-	Wed, 28 Aug 2024 16:29:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 355781A3BDD;
+	Wed, 28 Aug 2024 16:30:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724862596; cv=none; b=bQVjbP+xB/R8UPiR4EcjlIG3wT108tBRU+8optk7CAHGMXTEVSDXtp0jVKcL13Aef0LXicTkKqDSB5AJuJbLu6Z+xIBGkAWN0ymX89kuZ0+2xRbQLGVjhdzBcE5Mz0IGx8w67BEQ8FrVuSWpA0dy3JO2YDu0wv8eBAu2ZjM6CqQ=
+	t=1724862604; cv=none; b=ZdxYtt0rz328P0mk79L/QiZ9T1QFWL/C+P0Ox08xBZZOVSgt/vJNffyRn4qAyi3/DBmQbYTfiGTX8XIYPMxpw55zkN7F/0oMY3tNYbY9zL8H1YdEkLGp9uSOk8MYHh06cucpdScnlqad706Pq6KZi0IoO9UiIWX/thBFTVXlk7g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724862596; c=relaxed/simple;
-	bh=heMEFFxgFnO2TTBcSgnerIm3y6uCUk6NyKGxrB/IYn8=;
-	h=From:To:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=JCpCOD9yaJmal2fRTnMjAx4eAdUE3ww8XtGIE6D/gck/WN/HFpZTqffwj1o711KnbafrT0/DvwgyCFxyv/RpKvMniMTNYPzI1psNn2EHzWMUPSiWQsVnnetcybf8LeQFFMTSp6KHkKS5lgOVKKJBs6WAn/Grjc4bhR966fdTyY4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kfsBCMZ6; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E9E0C4FEA2;
-	Wed, 28 Aug 2024 16:29:48 +0000 (UTC)
+	s=arc-20240116; t=1724862604; c=relaxed/simple;
+	bh=j4jLeDpIzPZKbskW68/+PpTVh0tjaeer4IOaG6DDChY=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=NZQ6L1p7uMu+Evrd+ll+lvp9i3fvi/Y3v0kzc5Nd1WokmLFslUexdOaRU7t/Crvo2dXh5K78T9WjckpEdP0++iO20bEwOS3J5LAJHwqMXDeZzIw76vJgKWVBs98KEfD+3AcUo9HElYZZGk+nY8vXZVlGqzRrE+/3eOtPOFAWbXU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oZkPS99P; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50236C4FEA7;
+	Wed, 28 Aug 2024 16:29:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1724862595;
-	bh=heMEFFxgFnO2TTBcSgnerIm3y6uCUk6NyKGxrB/IYn8=;
-	h=From:To:In-Reply-To:References:Subject:Date:From;
-	b=kfsBCMZ6iC/51f34BX86sfPqUAEINT3MLKTcwsVdo/V1cRz/kJoinjaAyUkx8k0j1
-	 jXgmNC+QBBdTZNU+XXMqCN8PNH90d7/4ZdItm08Yviv89qFo5Qiq8VU3TzamWijLLU
-	 OEAaIPEgQmqLpD1GYVWycegLbMGW2mw7nhVocRUx2D9pLbPbKiKI92hVC+TCrtzlIr
-	 hA5QtGdwuDDT0/1OhksgAVfrV5xLRk5Nmq8SD19FKkIWtBk8sYJ5nlHqRX3D5PeKT4
-	 2zlGNf1D9tDEjvNtRYZhUhw4S7W8zFFp7UF2EAih0dWVwYNVH6YbS2N5T0UqrhqfX1
-	 fAgSoM+Xr5Zlg==
+	s=k20201202; t=1724862603;
+	bh=j4jLeDpIzPZKbskW68/+PpTVh0tjaeer4IOaG6DDChY=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+	b=oZkPS99PMjSQDlmejYO5DOcf0J3MZYC6EnN2Zr6EL6r2frkfw+sOqhNkQxVgAz9pg
+	 qn0oMddBruo3l7QFyqNFw3zET4JnpwOuAoVc3lf0QRdSisREGea6eSAbEPr78wfqku
+	 tUF1pHngBz7YASQgcya4e+3DZGy5g8czchAMrwZX90O3khwNU4jTA7M/e9Mx4uS9Xh
+	 pMAksliy4Q3mCZVMEZJxuq3Yf4Vo+atWiwCMzVfZG57a4GIci6M8lddceEAkH7IUiO
+	 iv3MFi7T9DwTwyVMYhr7dotfhQjE6lPKxdnwvgwxfJEkF3NPoqIuldShLB9GEqa6/x
+	 aIQxdccnE40Ww==
 From: Mark Brown <broonie@kernel.org>
 To: =?utf-8?q?Amadeusz_S=C5=82awi=C5=84ski?= <amadeuszx.slawinski@linux.intel.com>, 
  Alexandre Belloni <alexandre.belloni@bootlin.com>, 
@@ -69,14 +69,14 @@ To: =?utf-8?q?Amadeusz_S=C5=82awi=C5=84ski?= <amadeuszx.slawinski@linux.intel.co
  Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, 
  Sylwester Nawrocki <s.nawrocki@samsung.com>, Takashi Iwai <tiwai@suse.com>, 
  Vinod Koul <vkoul@kernel.org>, Xiubo Li <Xiubo.Lee@gmail.com>, 
- alsa-devel@alsa-project.org, imx@lists.linux.dev, linux-doc@vger.kernel.org, 
- linux-sound@vger.kernel.org, 
  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
-In-Reply-To: <87bk4oqerx.wl-kuninori.morimoto.gx@renesas.com>
-References: <87bk4oqerx.wl-kuninori.morimoto.gx@renesas.com>
-Subject: Re: [PATCH v5 0/4] ASoC: grace time for DPCM cleanup
-Message-Id: <172486258823.92851.2758535753129650442.b4-ty@kernel.org>
-Date: Wed, 28 Aug 2024 17:29:48 +0100
+Cc: alsa-devel@alsa-project.org, imx@lists.linux.dev, 
+ linux-doc@vger.kernel.org, linux-sound@vger.kernel.org
+In-Reply-To: <87r0ctwzr4.wl-kuninori.morimoto.gx@renesas.com>
+References: <87r0ctwzr4.wl-kuninori.morimoto.gx@renesas.com>
+Subject: Re: [PATCH v6 0/4] ASoC: grace time for DPCM cleanup
+Message-Id: <172486259605.92851.6497771216257265041.b4-ty@kernel.org>
+Date: Wed, 28 Aug 2024 17:29:56 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -87,10 +87,10 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.15-dev-37811
 
-On Thu, 30 May 2024 01:17:39 +0000, Kuninori Morimoto wrote:
+On Wed, 19 Jun 2024 00:19:11 +0000, Kuninori Morimoto wrote:
 > Cc each ASoC driver maintainer
 > 
-> This is v5 of DPCM cleanup
+> This is resend of v6 of DPCM cleanup
 > 
 > As we discussed in [1], we don't need to use dpcm_playback/capture flag,
 > so we remove it. But we have been using it for 10 years, some driver might
