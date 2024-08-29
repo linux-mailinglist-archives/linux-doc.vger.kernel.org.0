@@ -1,182 +1,139 @@
-Return-Path: <linux-doc+bounces-24106-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-24108-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D468D964708
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2024 15:42:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2774B9647A9
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2024 16:12:34 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CF9171C216C0
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2024 13:42:37 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3FB1D1C223E3
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2024 14:12:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BE9361AB505;
-	Thu, 29 Aug 2024 13:41:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA9611AC44C;
+	Thu, 29 Aug 2024 14:12:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=apertussolutions.com header.i=dpsmith@apertussolutions.com header.b="fRJYXpXL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from michel.telenet-ops.be (michel.telenet-ops.be [195.130.137.88])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com [136.143.188.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E75C1A707F
-	for <linux-doc@vger.kernel.org>; Thu, 29 Aug 2024 13:41:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.130.137.88
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1724938888; cv=none; b=X5rgoNZcD31fb8IpkcY+qMw8FMUJy+jhECcxT/PXMMG0QNZZg0NfoBkLKHOWccT3m+xG7Xb70Br3qb1Bm4+hlMJjiqnDZ3XMXn/w6hmFwDEpWm6vzPqT2pf7bqpKP6YYpk/VAq8RZtPhdsnhsFEmqq/1C+T/rlzmELkvc8hMZ3I=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1724938888; c=relaxed/simple;
-	bh=j15g7+Zs11MXgNdFt9xjPzQq0JE/TjMvjYfFKO5EiIg=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=mCE4whHpYARrjWQHAxs3uUbCApJshvcr7lwVlwuew3/LY2ghihyIYJn3TtJdqnLbuK7BTGOITW97UZ0a2Snrqvj/u7nOH/CQ3NecF6YtPzh1/ad47B2FXNxnvWXqaTH5IukIT+t4py9cIqJSVWOpobrX7WzrrDUi1QLtlUdMoXM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=glider.be; spf=none smtp.mailfrom=linux-m68k.org; arc=none smtp.client-ip=195.130.137.88
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=glider.be
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux-m68k.org
-Received: from ramsan.of.borg ([IPv6:2a02:1810:ac12:ed80:fbdf:b855:e99a:9ec0])
-	by michel.telenet-ops.be with cmsmtp
-	id 5phL2D00Q0Yrr4n06phL2C; Thu, 29 Aug 2024 15:41:24 +0200
-Received: from rox.of.borg ([192.168.97.57])
-	by ramsan.of.borg with esmtp (Exim 4.95)
-	(envelope-from <geert@linux-m68k.org>)
-	id 1sjfOn-001GR8-Oo;
-	Thu, 29 Aug 2024 15:41:20 +0200
-Received: from geert by rox.of.borg with local (Exim 4.95)
-	(envelope-from <geert@linux-m68k.org>)
-	id 1sjfOq-0002Uf-Dp;
-	Thu, 29 Aug 2024 15:41:20 +0200
-From: Geert Uytterhoeven <geert+renesas@glider.be>
-To: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Alex Shi <alexs@kernel.org>,
-	Yanteng Si <siyanteng@loongson.cn>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Andrew Davis <afd@ti.com>,
-	Masahiro Yamada <masahiroy@kernel.org>,
-	Andy Shevchenko <andriy.shevchenko@intel.com>
-Cc: devicetree@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Geert Uytterhoeven <geert+renesas@glider.be>
-Subject: [PATCH v2 resend] docs: dt: Update overlay file extension
-Date: Thu, 29 Aug 2024 15:41:18 +0200
-Message-Id: <4661808d64fe4cb53ec3f291045f62256c7a7755.1724938789.git.geert+renesas@glider.be>
-X-Mailer: git-send-email 2.34.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9034E1A3BDD;
+	Thu, 29 Aug 2024 14:12:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.51
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1724940747; cv=pass; b=MbqgQEZK5Xk+2D+sOpjtK2h+HFdl+0bfkj37W1K1Uds1NxXSt78iZyNW93HJ2rFrgcJzjKZMxgYrhyvsJpTZ87TKTGpadfQfoTBwhTaexdPGBv5T7SB1uCKGR37iXhBTzW/4zZHknpr67Vv3YwgMiqf/Ah8ym8wJMIiAo15+A/o=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1724940747; c=relaxed/simple;
+	bh=7hB/1UOJaiqQ99Joa1DObT9nogjXVp6w2U15f4FVo3Y=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Lxb0veOerT8BEIzmJq9Tk7r/EASVTsWNexoWFtVdf0MxZOZfnpPtwQ+VtE1GHfeH/V3xMNoD2tNr8GuK6Y7VWRCRCJgqDLDOKK6CpYcj5wwtUJWS9N4ED2EpPwtwequwRmLlVNfxbsu3UpsA0DFVu51hnzxJ/y8gQzsIfBRX+jA=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=apertussolutions.com; spf=pass smtp.mailfrom=apertussolutions.com; dkim=pass (1024-bit key) header.d=apertussolutions.com header.i=dpsmith@apertussolutions.com header.b=fRJYXpXL; arc=pass smtp.client-ip=136.143.188.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=apertussolutions.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=apertussolutions.com
+ARC-Seal: i=1; a=rsa-sha256; t=1724940676; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=E7EusWO6er6F2xI1Zxfssj17795cFIrBU9nS7H5PyLGs+6UWBCNXAkfV+JQpsvkn4X6QnDjZg59GcAbdwpZwp541+ugqTaxP6T/nv6M351s7VISQpTXJZegJ/QpLmHKW8PhIgd5ObyYNwREe1/OqSZxAHGA/WYAAlVOJLcXTMDk=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1724940676; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=HgDBKtReaNoT627XPwozc8cV/1MN4aAoTtHPOciy3pM=; 
+	b=F8+Ieta99m9Sb6grjg5r5Hse1Vt8cQANARXzRz4E2JRoFdXjGYznYWVRmMvi/k0t3GJxjfgkNXCi7mbnz93mta8ovG1WRwOCa2szi73evgpHYzIgytv1sd3soamVZ71SpJYmuyZoaySGKcb25OExw2BJMSP43syvz3OmqKbf23o=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1724940676;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=HgDBKtReaNoT627XPwozc8cV/1MN4aAoTtHPOciy3pM=;
+	b=fRJYXpXL9J45pXy0RROxungza/op8PLpbcAgBCB2imI/b3vHv4nw02sEX8neAivz
+	PPiCX2FneFCwIi7K74vsx1xZ2NcmUIkgDl+v3rZoRF1EkHBouBvTymaYqasGUoGZL83
+	itV4OEfBmfm1uvXSAhidcGZMH/LIAtY/V/1UW3+4=
+Received: by mx.zohomail.com with SMTPS id 1724940674239491.862092879441;
+	Thu, 29 Aug 2024 07:11:14 -0700 (PDT)
+Message-ID: <e3194ad1-e976-40a6-a8f3-98081b0b07ea@apertussolutions.com>
+Date: Thu, 29 Aug 2024 10:11:11 -0400
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 01/15] x86/boot: Place kernel_info at a fixed offset
+To: Ard Biesheuvel <ardb@kernel.org>, Stuart Yoder <stuart.yoder@arm.com>
+Cc: Ross Philipson <ross.philipson@oracle.com>, linux-kernel@vger.kernel.org,
+ x86@kernel.org, linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-crypto@vger.kernel.org, kexec@lists.infradead.org,
+ linux-efi@vger.kernel.org, tglx@linutronix.de, mingo@redhat.com,
+ bp@alien8.de, hpa@zytor.com, dave.hansen@linux.intel.com,
+ mjg59@srcf.ucam.org, James.Bottomley@hansenpartnership.com,
+ peterhuewe@gmx.de, jarkko@kernel.org, jgg@ziepe.ca, luto@amacapital.net,
+ nivedita@alum.mit.edu, herbert@gondor.apana.org.au, davem@davemloft.net,
+ kanth.ghatraju@oracle.com, trenchboot-devel@googlegroups.com
+References: <20240214221847.2066632-1-ross.philipson@oracle.com>
+ <20240214221847.2066632-2-ross.philipson@oracle.com>
+ <CAMj1kXH3Gvr3vDRLDdXuc0s7ZAQYE6+D7tmCRBjJWwWt2fn4-w@mail.gmail.com>
+ <9d01a6d2-4dd9-4331-8fc9-b01c07cfdbb5@apertussolutions.com>
+ <CAMj1kXHn6xeAskWiDLvvA4oG3j9_tqx+iMYJXMqmgvyX4pMzgg@mail.gmail.com>
+Content-Language: en-US
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+In-Reply-To: <CAMj1kXHn6xeAskWiDLvvA4oG3j9_tqx+iMYJXMqmgvyX4pMzgg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 
-Building DTB overlays from .dts files is no longer supported.
-Update the documentation to reflect this.
+On 8/28/24 13:45, Ard Biesheuvel wrote:
+> (cc Stuart)
+> 
+> On Thu, 21 Mar 2024 at 15:46, Daniel P. Smith
+> <dpsmith@apertussolutions.com> wrote:
+>>
+>> Hi Ard!
+>>
+>> On 2/15/24 02:56, Ard Biesheuvel wrote:
+>>> On Wed, 14 Feb 2024 at 23:31, Ross Philipson <ross.philipson@oracle.com> wrote:
+>>>>
+>>>> From: Arvind Sankar <nivedita@alum.mit.edu>
+>>>>
+>>>> There are use cases for storing the offset of a symbol in kernel_info.
+>>>> For example, the trenchboot series [0] needs to store the offset of the
+>>>> Measured Launch Environment header in kernel_info.
+>>>>
+>>>
+>>> Why? Is this information consumed by the bootloader?
+>>
+>> Yes, the bootloader needs a standardized means to find the offset of the
+>> MLE header, which communicates a set of meta-data needed by the DCE in
+>> order to set up for and start the loaded kernel. Arm will also need to
+>> provide a similar metadata structure and alternative entry point (or a
+>> complete rewrite of the existing entry point), as the current Arm entry
+>> point is in direct conflict with Arm DRTM specification.
+>>
+> 
+> Digging up an old thread here: could you elaborate on this? What do
+> you mean by 'Arm entry point' and how does it conflict directly with
+> the Arm DRTM specification? The Linux/arm64 port predates that spec by
+> about 10 years, so I would expect the latter to take the former into
+> account. If that failed to happen, we should fix the spec while we
+> still can.
 
-Fixes: 81d362732bac05f6 ("kbuild: Disallow DTB overlays to built from .dts named source files")
-Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
-Acked-by: Andrew Davis <afd@ti.com>
-Reviewed-by: Yanteng Si <siyanteng@loongson.cn>
----
-v2:
-  - Add Acked-by, Reviewed-by.
----
- Documentation/devicetree/overlay-notes.rst           | 12 ++++++------
- .../translations/zh_CN/devicetree/overlay-notes.rst  | 12 ++++++------
- 2 files changed, 12 insertions(+), 12 deletions(-)
+Yes, we have been working with Stuart regarding the specification and 
+crafting a compliant implementation approach. It is still very early 
+days, we are attempting to draft a plan around the specification with no 
+physical implementation to validate against. After some discussion, the 
+concern that a separate entry point may be needed has faded and in fact 
+it likely will not be needed. As always, the devil is in the details, 
+and until we have a hardware that has implemented the specification, and 
+we attempt to light it up, we won't know what will be needed for the 
+implementation.
 
-diff --git a/Documentation/devicetree/overlay-notes.rst b/Documentation/devicetree/overlay-notes.rst
-index e139f22b363e9f36..35e79242af9a928d 100644
---- a/Documentation/devicetree/overlay-notes.rst
-+++ b/Documentation/devicetree/overlay-notes.rst
-@@ -38,10 +38,10 @@ Lets take an example where we have a foo board with the following base tree::
- 	};
-     ---- foo.dts ---------------------------------------------------------------
- 
--The overlay bar.dts,
-+The overlay bar.dtso,
- ::
- 
--    ---- bar.dts - overlay target location by label ----------------------------
-+    ---- bar.dtso - overlay target location by label ---------------------------
- 	/dts-v1/;
- 	/plugin/;
- 	&ocp {
-@@ -51,7 +51,7 @@ The overlay bar.dts,
- 			... /* various properties and child nodes */
- 		};
- 	};
--    ---- bar.dts ---------------------------------------------------------------
-+    ---- bar.dtso --------------------------------------------------------------
- 
- when loaded (and resolved as described in [1]) should result in foo+bar.dts::
- 
-@@ -88,9 +88,9 @@ in the base DT. In this case, the target path can be provided. The target
- location by label syntax is preferred because the overlay can be applied to
- any base DT containing the label, no matter where the label occurs in the DT.
- 
--The above bar.dts example modified to use target path syntax is::
-+The above bar.dtso example modified to use target path syntax is::
- 
--    ---- bar.dts - overlay target location by explicit path --------------------
-+    ---- bar.dtso - overlay target location by explicit path -------------------
- 	/dts-v1/;
- 	/plugin/;
- 	&{/ocp} {
-@@ -100,7 +100,7 @@ The above bar.dts example modified to use target path syntax is::
- 			... /* various properties and child nodes */
- 		}
- 	};
--    ---- bar.dts ---------------------------------------------------------------
-+    ---- bar.dtso --------------------------------------------------------------
- 
- 
- Overlay in-kernel API
-diff --git a/Documentation/translations/zh_CN/devicetree/overlay-notes.rst b/Documentation/translations/zh_CN/devicetree/overlay-notes.rst
-index 43e3c0bc5a9f8235..ba5edd05dc1e7fd2 100644
---- a/Documentation/translations/zh_CN/devicetree/overlay-notes.rst
-+++ b/Documentation/translations/zh_CN/devicetree/overlay-notes.rst
-@@ -43,10 +43,10 @@ Documentation/devicetree/dynamic-resolution-notes.rst[1]的配套文档。
- 	};
-     ---- foo.dts ---------------------------------------------------------------
- 
--覆盖bar.dts,
-+覆盖bar.dtso,
- ::
- 
--    ---- bar.dts - 按标签覆盖目标位置 ----------------------------
-+    ---- bar.dtso - 按标签覆盖目标位置 ---------------------------
- 	/dts-v1/;
- 	/插件/;
- 	&ocp {
-@@ -56,7 +56,7 @@ Documentation/devicetree/dynamic-resolution-notes.rst[1]的配套文档。
- 			... /* 各种属性和子节点 */
- 		};
- 	};
--    ---- bar.dts ---------------------------------------------------------------
-+    ---- bar.dtso --------------------------------------------------------------
- 
- 当加载（并按照[1]中描述的方式解决）时，应该产生foo+bar.dts::
- 
-@@ -90,9 +90,9 @@ Documentation/devicetree/dynamic-resolution-notes.rst[1]的配套文档。
- DT中的适当位置。在这种情况下，可以提供目标路径。通过标签的目标位置的语法是比
- 较好的，因为不管标签在DT中出现在哪里，覆盖都可以被应用到任何包含标签的基础DT上。
- 
--上面的bar.dts例子被修改为使用目标路径语法，即为::
-+上面的bar.dtso例子被修改为使用目标路径语法，即为::
- 
--    ---- bar.dts - 通过明确的路径覆盖目标位置 --------------------
-+    ---- bar.dtso - 通过明确的路径覆盖目标位置 -------------------
- 	/dts-v1/;
- 	/插件/;
- 	&{/ocp} {
-@@ -102,7 +102,7 @@ DT中的适当位置。在这种情况下，可以提供目标路径。通过标
- 			... /* 各种外围设备和子节点 */
- 		}
- 	};
--    ---- bar.dts ---------------------------------------------------------------
-+    ---- bar.dtso --------------------------------------------------------------
- 
- 
- 内核中关于覆盖的API
--- 
-2.34.1
+In short, at this point it was determined no update to the DRTM spec is 
+needed. As hardware becomes available, and we do battle with it, Stuart 
+will be kept up to date. We will work with him to ensure any changes are 
+captured that will help reduce chances that vendors and developers do 
+not misinterpret the spec.
 
+V/r,
+Daniel P. Smith
 
