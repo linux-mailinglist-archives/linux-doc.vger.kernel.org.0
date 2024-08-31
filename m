@@ -1,320 +1,173 @@
-Return-Path: <linux-doc+bounces-24262-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-24264-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2B80966E2A
-	for <lists+linux-doc@lfdr.de>; Sat, 31 Aug 2024 02:47:20 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id F2387966EAA
+	for <lists+linux-doc@lfdr.de>; Sat, 31 Aug 2024 03:49:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6C161287D6F
-	for <lists+linux-doc@lfdr.de>; Sat, 31 Aug 2024 00:47:19 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id DC044B20F25
+	for <lists+linux-doc@lfdr.de>; Sat, 31 Aug 2024 01:49:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 331E222089;
-	Sat, 31 Aug 2024 00:43:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B3A9522F1C;
+	Sat, 31 Aug 2024 01:49:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="oR9bz7Ca"
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="U38Ldbdo"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f202.google.com (mail-yw1-f202.google.com [209.85.128.202])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F50014D422
-	for <linux-doc@vger.kernel.org>; Sat, 31 Aug 2024 00:43:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.202
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D25711BC5C;
+	Sat, 31 Aug 2024 01:49:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1725065035; cv=none; b=gc5szaqCx5AJYHuOY7uJTq6/2ZIREvKyvjzOFcv61P2s+VE/UpOdN9z7/IupxCUiccWQhGiBi319Wgk4vS2/Gf4jgt5M/7qUCPixZ/zpI4zUWflsIH3MrO1Pc7xd+jCeMNh5RUrdX+kG0r+J4oEq3BnzHvNBoHxHPlfnGrB3mto=
+	t=1725068977; cv=none; b=ZLwLFe6qJbkYQnDWVcFjWDXnkUML9UoU1EtQDq3K0IFEX7/NfYfa3XhcxDIr3ioG7JuU+8/fQoK00vf0ILIdEU7dg1VqH055bkXNNWhWkGCISI83lutHWzeDsfFQC9yPp2LFlZsURcxDeZDBBfle1Ok4kMa2sc3UHObBdXMt5TA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1725065035; c=relaxed/simple;
-	bh=XIJboEPcL1EwhHPzY1CQStoWIon4AiLaTBqvNotvMKg=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=Yr4sPw/G7tQ0NVcOwUcXd6noHCeOOLp8KWhm3fO3YnsG6te0A7tFBm8efLJse0mAua3h48cmseFeppgbz1A0nqx4WcRrLMESpLiABcblx8bePTwllRsv2p0+c3JnrmGyAfxEJlSIoLC6OVmTRigFMjnYQZuivg+qLYIDNNQRRwI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--almasrymina.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=oR9bz7Ca; arc=none smtp.client-ip=209.85.128.202
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--almasrymina.bounces.google.com
-Received: by mail-yw1-f202.google.com with SMTP id 00721157ae682-6b47ff8a5c4so41687167b3.2
-        for <linux-doc@vger.kernel.org>; Fri, 30 Aug 2024 17:43:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1725065028; x=1725669828; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=jKys/joTXpfZhwIK7WZYB+S0gWaRcW4vQQYF7K5JoYU=;
-        b=oR9bz7CaHCsZ2CCOSY9UGHx9AbTMM2TKGrYeBZxIlA2f3kG72t+5+c7ufwXqhV99Uf
-         BwYCuDAcqYuW82tpNHA0PLOssvrRPHLMF3Z5tglzL4p7V5ASA7NNRD/nt/1EUmC/+mhH
-         0UdZ9uxFaqwIfmN0QTOzKimtyzqYgEtgxJqmaFpjahsDumBRqVj+kOctnHfNP81tHFhx
-         xmV6vDwTAYVcpcwM80GmNbyNjXn0eo6rRLOf7Ssgs0n0JyVt3HFmFppwb7hOk4esSc/F
-         KRcCZjdTb/vb4CQ1DG2KzyRZOSUDVGPvngzaAQyFX0tGdYfEsqPQl/3VvUePrXOT6SVC
-         eK+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725065028; x=1725669828;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=jKys/joTXpfZhwIK7WZYB+S0gWaRcW4vQQYF7K5JoYU=;
-        b=FCGxoSvPv3LbXkyIH/Pm2kDlZrOmW33Z7ZYpCwXv7VSaGvJ2OVCd7ce5Kd12fxFYEh
-         lED4FXEbr9EuXHBWQeB/uaI5vJpyBhahxYwwrp9Y5QLg3Hw3FGWdKazKVJ4RGOZ3L2kT
-         t1E1E7rGBdJP3OY0WoCVvmx/p8/FFqzXd0E44Z0NocWzHsTu+YJ+ckC9ydg/Gk5jZ8F2
-         Gzz8Lph86NaaIsratQNLeiN0XHyR4MDHKstcoHfUMddNh2c9HR+kGLjt9x5amzWEugfn
-         7uP1cacLG8qJvOl1E/ReX7N+bQORqBiL6PdH/I+cI6D+6a/cSDBmLk5adaa9EyCPrOFO
-         P4jA==
-X-Forwarded-Encrypted: i=1; AJvYcCUtJ+CG+OmyPyUc52suJKu/pujd8MumJIF6ZrBGFQYDdTprPA3GwIfE+spah8ui6kz9d+inhOvFkn8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxyiSVc6fCp4vOYOYnZUVD9gbla21Ge7Amo09LGkJe1BPSoyjsu
-	FqdLsRJsl0VCXPF6tThgk/08qzrba5RNZ+s2Wk+51RT5m5TdWjUj2K9RsbfQ82SkZhLAMU5v9AM
-	V6c1WufHv6pdElIdyNdDN5Q==
-X-Google-Smtp-Source: AGHT+IEP9h/T/b2TDoRsNPvD8OrnhsPa1JJNyOh9WVxRax47/ulcraGc7q6+qsDZyEAq7CCaWYiLVoEr/5fe/OVsUQ==
-X-Received: from almasrymina.c.googlers.com ([fda3:e722:ac3:cc00:20:ed76:c0a8:4bc5])
- (user=almasrymina job=sendgmr) by 2002:a05:690c:47ca:b0:6ad:feb0:d01c with
- SMTP id 00721157ae682-6d40f342178mr76997b3.3.1725065027663; Fri, 30 Aug 2024
- 17:43:47 -0700 (PDT)
-Date: Sat, 31 Aug 2024 00:43:13 +0000
-In-Reply-To: <20240831004313.3713467-1-almasrymina@google.com>
+	s=arc-20240116; t=1725068977; c=relaxed/simple;
+	bh=COgP8gtOwj9866IMzZkzcjlN1M8qSRLRfPhLqL3mK+A=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=sBnsII6kJl+VeS4Wf+9KXzDYxGF3PoRiTjqN1dM2N7IP39IpM1OY4MzfYv3UdIVbc92iorzrGVZFyu0FT9tG27pb8lK79LB42YQQvto8bMvkqGWaZ8wRxLD4fmGzw1MYe4N2MrcQW8IO7xtmRGzEIr8MGELi5dWVizs6u5oWFGA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=U38Ldbdo; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47V1lkCb014463;
+	Sat, 31 Aug 2024 01:49:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	/G28frVMVZQFN7ykoLWCfBQ91+/BjNk3d7oGSSViOkc=; b=U38Ldbdoft5FS4jS
+	FGIsftdcLD4R5LALOdJe2Li7yl7bWJvSriY7C9/G/+b2IK9+QjkqGIiVBYrTkZsR
+	PRGTGPvaYjKET9r1vOCxCMbK78Y61p8w87LfVDb36fYtdtULvClkUIdZKlYwq7bo
+	tCwbdc5ZiuKt73Cn5wZqffSM78SIe+FZb9LRqUxDbC6mwibL4bKg61Q9oP4xZOta
+	T7c3Vmk7//oXhqdDoGDrMf6uFSNyMLho9KtGjoR0wxluNRbq75VTxpHPQi0a4eZ5
+	ToqbLViLcOGzVvK6la1BowVyWCz3t1ZD+0WTA9PQKQ2uBFITbNdq86NqjybH8IXd
+	f/i8bA==
+Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 41ax4mm825-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Sat, 31 Aug 2024 01:49:12 +0000 (GMT)
+Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
+	by NALASPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 47V1nBQb020803
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Sat, 31 Aug 2024 01:49:11 GMT
+Received: from [10.110.4.92] (10.80.80.8) by nalasex01b.na.qualcomm.com
+ (10.47.209.197) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Fri, 30 Aug
+ 2024 18:49:10 -0700
+Message-ID: <b027dd79-56e3-40d8-a4ca-779b4b5914c5@quicinc.com>
+Date: Fri, 30 Aug 2024 18:49:10 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20240831004313.3713467-1-almasrymina@google.com>
-X-Mailer: git-send-email 2.46.0.469.g59c65b2a67-goog
-Message-ID: <20240831004313.3713467-14-almasrymina@google.com>
-Subject: [PATCH net-next v24 13/13] netdev: add dmabuf introspection
-From: Mina Almasry <almasrymina@google.com>
-To: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-alpha@vger.kernel.org, 
-	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org, 
-	sparclinux@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-arch@vger.kernel.org, bpf@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, linux-media@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org
-Cc: Mina Almasry <almasrymina@google.com>, Donald Hunter <donald.hunter@gmail.com>, 
-	Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Richard Henderson <richard.henderson@linaro.org>, 
-	Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Matt Turner <mattst88@gmail.com>, 
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Helge Deller <deller@gmx.de>, 
-	Andreas Larsson <andreas@gaisler.com>, Jesper Dangaard Brouer <hawk@kernel.org>, 
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Arnd Bergmann <arnd@arndb.de>, Steffen Klassert <steffen.klassert@secunet.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, David Ahern <dsahern@kernel.org>, 
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
-	"=?UTF-8?q?Bj=C3=B6rn=20T=C3=B6pel?=" <bjorn@kernel.org>, Magnus Karlsson <magnus.karlsson@intel.com>, 
-	Maciej Fijalkowski <maciej.fijalkowski@intel.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, 
-	Shuah Khan <shuah@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
-	Daniel Borkmann <daniel@iogearbox.net>, John Fastabend <john.fastabend@gmail.com>, 
-	Sumit Semwal <sumit.semwal@linaro.org>, 
-	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>, Pavel Begunkov <asml.silence@gmail.com>, 
-	David Wei <dw@davidwei.uk>, Jason Gunthorpe <jgg@ziepe.ca>, Yunsheng Lin <linyunsheng@huawei.com>, 
-	Shailend Chand <shailend@google.com>, Harshitha Ramamurthy <hramamurthy@google.com>, 
-	Shakeel Butt <shakeel.butt@linux.dev>, Jeroen de Borst <jeroendb@google.com>, 
-	Praveen Kaligineedi <pkaligineedi@google.com>, Bagas Sanjaya <bagasdotme@gmail.com>, 
-	Christoph Hellwig <hch@infradead.org>, Nikolay Aleksandrov <razor@blackwall.org>, Taehee Yoo <ap420073@gmail.com>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v26 16/33] ASoC: doc: Add documentation for SOC USB
+To: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+        <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
+        <perex@perex.cz>, <conor+dt@kernel.org>, <dmitry.torokhov@gmail.com>,
+        <corbet@lwn.net>, <broonie@kernel.org>, <lgirdwood@gmail.com>,
+        <tiwai@suse.com>, <krzk+dt@kernel.org>, <Thinh.Nguyen@synopsys.com>,
+        <bgoswami@quicinc.com>, <robh@kernel.org>,
+        <gregkh@linuxfoundation.org>
+CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-sound@vger.kernel.org>, <linux-input@vger.kernel.org>,
+        <linux-usb@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <alsa-devel@alsa-project.org>
+References: <20240829194105.1504814-1-quic_wcheng@quicinc.com>
+ <20240829194105.1504814-17-quic_wcheng@quicinc.com>
+ <522dd841-2060-4e7c-b8ce-7e9ea2fa8498@linux.intel.com>
+Content-Language: en-US
+From: Wesley Cheng <quic_wcheng@quicinc.com>
+In-Reply-To: <522dd841-2060-4e7c-b8ce-7e9ea2fa8498@linux.intel.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01b.na.qualcomm.com (10.47.209.197)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-GUID: ZLPf2EcXuyfBRx9vfV8fRBTvbL_dFQ2S
+X-Proofpoint-ORIG-GUID: ZLPf2EcXuyfBRx9vfV8fRBTvbL_dFQ2S
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-08-30_12,2024-08-30_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=910
+ impostorscore=0 spamscore=0 suspectscore=0 adultscore=0 priorityscore=1501
+ lowpriorityscore=0 bulkscore=0 malwarescore=0 phishscore=0 mlxscore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2407110000 definitions=main-2408310012
 
-Add dmabuf information to page_pool stats:
 
-$ ./cli.py --spec ../netlink/specs/netdev.yaml --dump page-pool-get
-...
- {'dmabuf': 10,
-  'id': 456,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 455,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 454,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 453,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 452,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 451,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 450,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 449,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
+On 8/30/2024 2:03 AM, Pierre-Louis Bossart wrote:
+>> diff --git a/Documentation/sound/soc/index.rst b/Documentation/sound/soc/index.rst
+>> index e57df2dab2fd..8bed8f8f48da 100644
+>> --- a/Documentation/sound/soc/index.rst
+>> +++ b/Documentation/sound/soc/index.rst
+>> @@ -18,3 +18,4 @@ The documentation is spilt into the following sections:-
+>>     jack
+>>     dpcm
+>>     codec-to-codec
+>> +   usb
+>> diff --git a/Documentation/sound/soc/usb.rst b/Documentation/sound/soc/usb.rst
+>> new file mode 100644
+>> index 000000000000..bd3d9eb86b07
+>> --- /dev/null
+>> +++ b/Documentation/sound/soc/usb.rst
+>> @@ -0,0 +1,429 @@
+>> +================
+>> +ASoC USB support
+>> +================
+>> +
+>> +Overview
+>> +========
+>> +In order to leverage the existing USB sound device support in ALSA, the
+>> +ASoC USB APIs are introduced to allow for the entities to communicate
+>> +with one another.
+> nit-pick: entities is rather vague and an overloaded term in USB audio.
+> Maybe "allow the subsystems to exchange configuration information"
+Sure, will make that change.
+>> +One potential use case would be to support USB audio offloading, which is
+>> +an implementation that allows for an external DSP on the SoC to handle the
+> nit-pick: not sure about the reference to an 'external DSP'. "external"
+> would usually to a stand-alone device and there's no real need for DSP
+> capabilities for USB offload, e.g. a regular embedded core would do just
+> fine.
+>
+> maybe "allows for an alternate power-optimized path in the audio
+> subsystem to handle the transfer of audio data over the USB bus"
+Yeah, I guess external doesn't make sense, its just another core within the SoC.
+>> +transfer of audio data over the USB bus.  This would let the main
+>> +processor to stay in lower power modes for longer duration.  The following
+>> +is an example design of how the ASoC and ALSA pieces can be connected
+>> +together to achieve this:
+>> +	int snd_soc_usb_update_offload_route(struct device *dev, int card, int pcm,
+>> +					     int direction, long *route)
+>> +..
+>> +
+>> +  - ``dev``: USB device to look up offload path mapping
+>> +  - ``card``: USB sound card index
+>> +  - ``pcm``: USB sound PCM device index
+>> +  - ``direction``: direction to fetch offload routing information
+>> +  - ``route``: mapping of sound card and pcm indexes for the offload path
+> nit-pick: again explain how the card and pcm indices are handled.
+>
+Will do.
+>> +--------------------------------
+>> +USB devices can be hotplugged into the USB root hub at any point in time.
+> "root hub" really?
+>
+> Is this really required? I would think the entire framework would work
+> just fine if the device is connected to any hub at any level, not just
+> "the" root hub.
 
-And queue stats:
+Yes, you're right. Will clarify this as well.  My test set up for this involves doing audio transfers on multiple devices over an external 4port USB hub.
 
-$ ./cli.py --spec ../netlink/specs/netdev.yaml --dump queue-get
-...
-{'dmabuf': 10, 'id': 8, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 9, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 10, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 11, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 12, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 13, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 14, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 15, 'ifindex': 3, 'type': 'rx'},
+Thanks
 
-Suggested-by: Jakub Kicinski <kuba@kernel.org>
-Signed-off-by: Mina Almasry <almasrymina@google.com>
-Reviewed-by: Jakub Kicinski <kuba@kernel.org>
+Wesley Cheng
 
----
-
-v24:
-- Code cleanup, no cast and use 1 if statement (Jakub)
-
----
- Documentation/netlink/specs/netdev.yaml | 10 ++++++++++
- include/uapi/linux/netdev.h             |  2 ++
- net/core/netdev-genl.c                  |  7 +++++++
- net/core/page_pool_user.c               |  4 ++++
- tools/include/uapi/linux/netdev.h       |  2 ++
- 5 files changed, 25 insertions(+)
-
-diff --git a/Documentation/netlink/specs/netdev.yaml b/Documentation/netlink/specs/netdev.yaml
-index 0c747530c275..08412c279297 100644
---- a/Documentation/netlink/specs/netdev.yaml
-+++ b/Documentation/netlink/specs/netdev.yaml
-@@ -167,6 +167,10 @@ attribute-sets:
-           "re-attached", they are just waiting to disappear.
-           Attribute is absent if Page Pool has not been detached, and
-           can still be used to allocate new memory.
-+      -
-+        name: dmabuf
-+        doc: ID of the dmabuf this page-pool is attached to.
-+        type: u32
-   -
-     name: page-pool-info
-     subset-of: page-pool
-@@ -268,6 +272,10 @@ attribute-sets:
-         name: napi-id
-         doc: ID of the NAPI instance which services this queue.
-         type: u32
-+      -
-+        name: dmabuf
-+        doc: ID of the dmabuf attached to this queue, if any.
-+        type: u32
- 
-   -
-     name: qstats
-@@ -543,6 +551,7 @@ operations:
-             - inflight
-             - inflight-mem
-             - detach-time
-+            - dmabuf
-       dump:
-         reply: *pp-reply
-       config-cond: page-pool
-@@ -607,6 +616,7 @@ operations:
-             - type
-             - napi-id
-             - ifindex
-+            - dmabuf
-       dump:
-         request:
-           attributes:
-diff --git a/include/uapi/linux/netdev.h b/include/uapi/linux/netdev.h
-index 91bf3ecc5f1d..7c308f04e7a0 100644
---- a/include/uapi/linux/netdev.h
-+++ b/include/uapi/linux/netdev.h
-@@ -93,6 +93,7 @@ enum {
- 	NETDEV_A_PAGE_POOL_INFLIGHT,
- 	NETDEV_A_PAGE_POOL_INFLIGHT_MEM,
- 	NETDEV_A_PAGE_POOL_DETACH_TIME,
-+	NETDEV_A_PAGE_POOL_DMABUF,
- 
- 	__NETDEV_A_PAGE_POOL_MAX,
- 	NETDEV_A_PAGE_POOL_MAX = (__NETDEV_A_PAGE_POOL_MAX - 1)
-@@ -131,6 +132,7 @@ enum {
- 	NETDEV_A_QUEUE_IFINDEX,
- 	NETDEV_A_QUEUE_TYPE,
- 	NETDEV_A_QUEUE_NAPI_ID,
-+	NETDEV_A_QUEUE_DMABUF,
- 
- 	__NETDEV_A_QUEUE_MAX,
- 	NETDEV_A_QUEUE_MAX = (__NETDEV_A_QUEUE_MAX - 1)
-diff --git a/net/core/netdev-genl.c b/net/core/netdev-genl.c
-index 582b67dd921b..2e5086950385 100644
---- a/net/core/netdev-genl.c
-+++ b/net/core/netdev-genl.c
-@@ -293,6 +293,7 @@ static int
- netdev_nl_queue_fill_one(struct sk_buff *rsp, struct net_device *netdev,
- 			 u32 q_idx, u32 q_type, const struct genl_info *info)
- {
-+	struct net_devmem_dmabuf_binding *binding;
- 	struct netdev_rx_queue *rxq;
- 	struct netdev_queue *txq;
- 	void *hdr;
-@@ -312,6 +313,12 @@ netdev_nl_queue_fill_one(struct sk_buff *rsp, struct net_device *netdev,
- 		if (rxq->napi && nla_put_u32(rsp, NETDEV_A_QUEUE_NAPI_ID,
- 					     rxq->napi->napi_id))
- 			goto nla_put_failure;
-+
-+		binding = rxq->mp_params.mp_priv;
-+		if (binding && nla_put_u32(rsp, NETDEV_A_QUEUE_DMABUF,
-+					   binding->id))
-+				goto nla_put_failure;
-+
- 		break;
- 	case NETDEV_QUEUE_TYPE_TX:
- 		txq = netdev_get_tx_queue(netdev, q_idx);
-diff --git a/net/core/page_pool_user.c b/net/core/page_pool_user.c
-index ce5167eb5548..92d8b1d1022a 100644
---- a/net/core/page_pool_user.c
-+++ b/net/core/page_pool_user.c
-@@ -213,6 +213,7 @@ static int
- page_pool_nl_fill(struct sk_buff *rsp, const struct page_pool *pool,
- 		  const struct genl_info *info)
- {
-+	struct net_devmem_dmabuf_binding *binding = pool->mp_priv;
- 	size_t inflight, refsz;
- 	void *hdr;
- 
-@@ -242,6 +243,9 @@ page_pool_nl_fill(struct sk_buff *rsp, const struct page_pool *pool,
- 			 pool->user.detach_time))
- 		goto err_cancel;
- 
-+	if (binding && nla_put_u32(rsp, NETDEV_A_PAGE_POOL_DMABUF, binding->id))
-+		goto err_cancel;
-+
- 	genlmsg_end(rsp, hdr);
- 
- 	return 0;
-diff --git a/tools/include/uapi/linux/netdev.h b/tools/include/uapi/linux/netdev.h
-index 91bf3ecc5f1d..7c308f04e7a0 100644
---- a/tools/include/uapi/linux/netdev.h
-+++ b/tools/include/uapi/linux/netdev.h
-@@ -93,6 +93,7 @@ enum {
- 	NETDEV_A_PAGE_POOL_INFLIGHT,
- 	NETDEV_A_PAGE_POOL_INFLIGHT_MEM,
- 	NETDEV_A_PAGE_POOL_DETACH_TIME,
-+	NETDEV_A_PAGE_POOL_DMABUF,
- 
- 	__NETDEV_A_PAGE_POOL_MAX,
- 	NETDEV_A_PAGE_POOL_MAX = (__NETDEV_A_PAGE_POOL_MAX - 1)
-@@ -131,6 +132,7 @@ enum {
- 	NETDEV_A_QUEUE_IFINDEX,
- 	NETDEV_A_QUEUE_TYPE,
- 	NETDEV_A_QUEUE_NAPI_ID,
-+	NETDEV_A_QUEUE_DMABUF,
- 
- 	__NETDEV_A_QUEUE_MAX,
- 	NETDEV_A_QUEUE_MAX = (__NETDEV_A_QUEUE_MAX - 1)
--- 
-2.46.0.469.g59c65b2a67-goog
-
+>
 
