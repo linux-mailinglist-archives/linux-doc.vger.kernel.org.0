@@ -1,165 +1,226 @@
-Return-Path: <linux-doc+bounces-24279-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-24282-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBF6696767F
-	for <lists+linux-doc@lfdr.de>; Sun,  1 Sep 2024 14:48:48 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2342D967BD7
+	for <lists+linux-doc@lfdr.de>; Sun,  1 Sep 2024 21:11:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7A567281FC2
-	for <lists+linux-doc@lfdr.de>; Sun,  1 Sep 2024 12:48:47 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2A128281AE8
+	for <lists+linux-doc@lfdr.de>; Sun,  1 Sep 2024 19:11:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CED7617C9FB;
-	Sun,  1 Sep 2024 12:48:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KVkTrIw9"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D62E22C9D;
+	Sun,  1 Sep 2024 19:11:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com [209.85.216.67])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5749016A938;
-	Sun,  1 Sep 2024 12:48:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.67
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7E8259167
+	for <linux-doc@vger.kernel.org>; Sun,  1 Sep 2024 19:11:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1725194923; cv=none; b=o/t72xVVddA86SiYHqR0Mm8KW/+D2TzOyC4oKzAoKVKJhEdv11x6jSRtnVwe7Ud+eJfpLzN5wQmwMm0kZhBC759w44pSBL5S8fryDH6/4WIT7M9SLVA1m4FZiRO8nXnmvBQZkdcO6QMr0msl/c46tG1Zl3XzIMxnnIBfIsoxX8c=
+	t=1725217904; cv=none; b=rlY+npmCUqGAuMDXEjheboTYD3ZqKbnRJmjzHkQ3kSluhY0rHuW81kY0SomQn2+jY+u6xT7y8M2t+CV7XjhADKdbdGivvbythoh1aTo9UsNB9BLwP+MqUVIBYRMU8W4qcSeDh/x2rOv9hPaAVsyRva3+qsDT2bPUge5bhovOEN8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1725194923; c=relaxed/simple;
-	bh=samEHV0jUn7URIWtdg/4icgKiqYX0iRtvAJqyxfr5+Y=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=npfgkWRzeckLaI+y08u88y5r96vz4pJSKuredK0LVactTipfVjQBRTRVdGVi732W1NGLQVOufL4P82SvioHBc9aASbX3Pz1xIHmqXiawe4IX+9cGdz2+/RiwWM/ptemAQdVCuv/LREd38Fq4eSG7cUiRbBPZTIbWj+JDEIAgLZA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KVkTrIw9; arc=none smtp.client-ip=209.85.216.67
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f67.google.com with SMTP id 98e67ed59e1d1-2d8a744aa9bso459282a91.3;
-        Sun, 01 Sep 2024 05:48:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1725194922; x=1725799722; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=EHDZ89ZCH8BG0OnvARBGCqyVQ1Az25bpqUNy0Tps9uM=;
-        b=KVkTrIw9HI1RIn8aNf8niDvFUs/T/1RVIQiFcg7nK0EGoK9Yh6txWqOSGZF/F9+LJl
-         6NKPFT23k2TJLedaF7hMbCZa9r9VdnBZZys6xClU5LpCdedr2R5kyg1knAMHfgyRSCIj
-         RUrHFb1eggxKrq4CxYkLkoiWMC8+5Tkj9U/dKwnLr/rh/SGioM5Zsps47Q+X1C0Fpe+O
-         0jnkaMfP/IJx/E5Fo9t6bu8CK4NVyHFQk4PvgAx90y5b94smyOJwD1pmM6iT9h4KFvl5
-         zCPdOHYydESu307lYxnNYm3KXFsiixGQZ5Dwe2KZzJrihaylpVNzuOxXtkJBleOFLyxq
-         HSdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725194922; x=1725799722;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=EHDZ89ZCH8BG0OnvARBGCqyVQ1Az25bpqUNy0Tps9uM=;
-        b=vUBI9cP5H4UDOhkN9CKRrnRGZuit+RWENvULt1nADckTbwiI/ihVHxY1OftlDQwUGV
-         AyxAPbotXhc8WaQhvkX+zd6KjhQZCjmQ8PokFNrIVCX8Y+Ot9uePFIzHLTGNDIgifM8Z
-         dNkN/kWM1E3mbAjXfmuc4KQHiYDC7qD1g0cBa8Gfo3g2TqpGWcvY43j0m8oWnoiHMKSF
-         nOeVzFzFxOguV35nyx11eNOhid1+z5TFGH36Y4G7dllYb1qdC1afhjBGmaq2TMmRi1XB
-         yXyrPjfH+ktoycaNlxoT9e742vM15h1OjzZlSg/b2RsJVQLnmQYHLlECNlc4yrePNcNT
-         TBzw==
-X-Forwarded-Encrypted: i=1; AJvYcCVhhYhmB2C3vJhl7YURgjJo2T/vcCsh6jJYIB+nTzqS2VjsVdXXy+HOjrkeLL0AJ2Z/A+E3U25+LQQ=@vger.kernel.org, AJvYcCXDMq8Va2WhcHSEP+EJpQAejlk8Y4Uj+0WncRXWoRvP+bsStCWTMvC/4jbkWBeKbCS/B5trpT+hblIIVz7O@vger.kernel.org
-X-Gm-Message-State: AOJu0YxIzHP2Z3vGQP4TFODDz+/crvjwXG/8fwzdwtjfe/rnwSTulm/o
-	tQtfELEluupRY0qR3WxQ+D3mIgVg3yTagZ6M/oj+C/pehs4JY8NH
-X-Google-Smtp-Source: AGHT+IHNPGYZH2Q3By8yr2BcK+qndvFwTyIiLLbuRFNZ+8D6GOScYCcHZ1bWib54ZWWoXTNPiT5bFA==
-X-Received: by 2002:a17:902:f691:b0:203:a0c3:b342 with SMTP id d9443c01a7336-2054bc909a0mr27514865ad.9.1725194921590;
-        Sun, 01 Sep 2024 05:48:41 -0700 (PDT)
-Received: from [192.168.3.171] ([183.159.77.249])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-205152b3343sm51993695ad.30.2024.09.01.05.48.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 01 Sep 2024 05:48:41 -0700 (PDT)
-Message-ID: <9eb5af0d-730c-459d-9c2e-5ad7b78f30d7@gmail.com>
-Date: Sun, 1 Sep 2024 20:48:28 +0800
+	s=arc-20240116; t=1725217904; c=relaxed/simple;
+	bh=7Dqnzu4OI88UdtAfkzrUCgMAN8G6HbgriW4lk9+LvSU=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=GPORha2g42X9iyuWcr4rqvEYD0MNToAS/D6/TTIGYxIF0xT2w0uXP3XVF2hrl1oXXOyR5auvdZewY+DgJA6Lndrzl8PhXPPRxDng0ZTavxoSWDNHtuSP2aeoAerubnZqovS9t9s+BVJ/HKJC5GAd7D2PdE1uUhwmxkyivJ7Ii+c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <m.grzeschik@pengutronix.de>)
+	id 1skpyy-0006ZW-E3; Sun, 01 Sep 2024 21:11:28 +0200
+Received: from [2a0a:edc0:0:1101:1d::ac] (helo=dude04.red.stw.pengutronix.de)
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <m.grzeschik@pengutronix.de>)
+	id 1skpyw-004jEq-R6; Sun, 01 Sep 2024 21:11:26 +0200
+Received: from localhost ([::1] helo=dude04.red.stw.pengutronix.de)
+	by dude04.red.stw.pengutronix.de with esmtp (Exim 4.96)
+	(envelope-from <m.grzeschik@pengutronix.de>)
+	id 1skpyw-00727u-0z;
+	Sun, 01 Sep 2024 21:11:26 +0200
+From: Michael Grzeschik <m.grzeschik@pengutronix.de>
+Subject: [PATCH v12 0/3] usb: gadget: 9pfs transport
+Date: Sun, 01 Sep 2024 21:11:15 +0200
+Message-Id: <20240116-ml-topic-u9p-v12-0-9a27de5160e0@pengutronix.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/6] mm: Introduce a pageflag for partially mapped
- folios
-To: Usama Arif <usamaarif642@gmail.com>, Barry Song <baohua@kernel.org>
-Cc: akpm@linux-foundation.org, linux-mm@kvack.org, hannes@cmpxchg.org,
- riel@surriel.com, shakeel.butt@linux.dev, roman.gushchin@linux.dev,
- yuzhao@google.com, david@redhat.com, ryan.roberts@arm.com, rppt@kernel.org,
- willy@infradead.org, cerasuolodomenico@gmail.com, ryncsn@gmail.com,
- corbet@lwn.net, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- kernel-team@meta.com, libang.li@antgroup.com,
- Lance Yang <ioworker0@gmail.com>
-References: <20240819023145.2415299-1-usamaarif642@gmail.com>
- <20240819023145.2415299-5-usamaarif642@gmail.com>
- <CAGsJ_4yKuvMSazWABXqaeRr84hLEubET0nCUhPFYHQnfR4Tm8w@mail.gmail.com>
- <a09b6af0-4fdb-4ac1-9cbe-9b422ebc3308@gmail.com>
- <CAGsJ_4xeWt9n3zX3-DknE=NftkWS0fe2vKTJT9tLuJPM4EaEwg@mail.gmail.com>
- <9a58e794-2156-4a9f-a383-1cdfc07eee5e@gmail.com>
- <CAGsJ_4xiG+oGkjt3nf0Zh2rdztz8h_AaahZWs4N3UARhw7DcgQ@mail.gmail.com>
- <CAGsJ_4z2YL01wvVgsFsbzGAQ5KowXgxLcj=Y7DSX7ODOF5MUvw@mail.gmail.com>
- <953d398d-58be-41c6-bf30-4c9df597de77@gmail.com>
- <CAGsJ_4y49c8-hDgjNuqMZnNWfUT-ktxeqkfX0EQz4-Pu3x9-Dg@mail.gmail.com>
- <5ed479c9-21eb-4bc8-8c17-79e1b6081355@gmail.com>
-Content-Language: en-US
-From: Bang Li <libang.linux@gmail.com>
-In-Reply-To: <5ed479c9-21eb-4bc8-8c17-79e1b6081355@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFO81GYC/33SO27DMAwG4KsEmqtG70en3qPoIIlUIiCxDTsxU
+ gS5e2WvVTWSID+CwP8kC84FF/JxeJIZ17KUcagFF28Hks5hOCEtUBtEMKEY54ZeL/Q2TiXRu5+
+ o81pYpSXDyEldiWFBGucwpPO2dL1cL8d9+lint4Fpxlwe+8Gv71qfy3Ib55/9/sq37j+XVk4ZD
+ eCSZCb7oPBzwuF0v83jUB7vgGTTVtETRBWiMilm7YU3oinIniCrkIwI0mBKEHhTUD1BVcEKgSB
+ cZAHaX+ieoKugEViIoCVm3RRMTzBVMF57a8EayLkp2J5gqyADR8RsbY7tL1xPcFVQzKPRPgUF0
+ BR8T/BV8BKszMpGa2JT4KwbKbZlyukMGJJIup0I3o8l31PlPENmrJThj/F6vX4BTrIToGcDAAA
+ =
+To: Eric Van Hensbergen <ericvh@kernel.org>, 
+ Latchesar Ionkov <lucho@ionkov.net>, 
+ Dominique Martinet <asmadeus@codewreck.org>, 
+ Christian Schoenebeck <linux_oss@crudebyte.com>, 
+ Jonathan Corbet <corbet@lwn.net>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Andrzej Pietrasiewicz <andrzej.p@collabora.com>, v9fs@lists.linux.dev, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-usb@vger.kernel.org, kernel@pengutronix.de, 
+ Michael Grzeschik <m.grzeschik@pengutronix.de>, 
+ Jan Luebbe <jlu@pengutronix.de>
+X-Mailer: b4 0.12.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6221;
+ i=m.grzeschik@pengutronix.de; h=from:subject:message-id;
+ bh=7Dqnzu4OI88UdtAfkzrUCgMAN8G6HbgriW4lk9+LvSU=;
+ b=owEBbQKS/ZANAwAKAb9pWET5cfSrAcsmYgBm1LxZCkKV+/Nyjbxp7/bq/Ju4h9r7Luoeoncv5
+ 1/RhU2pqZ+JAjMEAAEKAB0WIQQV2+2Fpbqd6fvv0Gi/aVhE+XH0qwUCZtS8WQAKCRC/aVhE+XH0
+ q5amD/487D24Hws8Qhmt39tdMri4cSMPbDrLtY8lyffuiFce3TObo22nnFSw6BJzvRqhBfQzoT1
+ O84c4q5d0wxagalEgftcdIn0AR2SdkLqNK9bzi0nK80OrZlsTt/CSNqs5NAaPnAZy0CUXvycHzv
+ afz4q6Ze2UdsggGFXKMwhqWk3RV7h3XOyuOta2t9sEs2uC89SdqDSaKxqoEurV5wBOMj4loj1rM
+ oz0/dr+CvV8PE/bXWzAgfH9lJSZ7zRMAWCuudU0wDGtCJ/NpEOvY1QZ3yMLL/jbLH9d7q+XqJ8A
+ fiBFLo3998HDnvTT9zprVgCLRIKPqkqdGNCBXJNa/A2rbYmeqOAomK7p7Zygo98e/lstuejXXlh
+ S1/vqg7mmYrdS+OtQSUjE47Tn3g2+B1iL1ckUlipBm6R3BlAZOJDMvJJFWISbVZVAjSrss0KojB
+ cU3g6qpKzZBZBP7kCLf26+bk7cMqRBAtfBUqAZTnx95VJmNsgyraCte6IZTflj9oVrn8yFbYvFr
+ huPIIitlzN3Nmsf8DYLwxbbjZ42p29bO05PwVo7A6HVOuvRXxuCU9X36RjG8Gg5FcDCc1N1TsNb
+ 0WyTjXNstR0Kx/tuL96GGjr6n2jLZb5LZ5zHsamx6ppBoTFi0cyn/OIC/KxBmUnAbQnOeacLF8I
+ Q/G6n7R6jYneSsQ==
+X-Developer-Key: i=m.grzeschik@pengutronix.de; a=openpgp;
+ fpr=957BC452CE953D7EA60CF4FC0BE9E3157A1E2C64
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: m.grzeschik@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-hi, Usama
+This series is adding support to mount usb hostside exported 9pfs
+filesystems via the usb gadget interface. It also includes a simple tool
+(p9_fwd.py) to translate an tcp 9pfs transport and reuse it via the usb
+interface.
 
-On 2024/8/22 3:04, Usama Arif wrote:
+    +--------------------------+    |    +--------------------------+
+    |  9PFS mounting client    |    |    |  9PFS exporting server   |
+ SW |                          |    |    |                          |
+    |   (this:trans_usbg)      |    |    |(e.g. diod or nfs-ganesha)|
+    +-------------^------------+    |    +-------------^------------+
+                  |                 |                  |
+                  |                 |           +------v------+
+                  |                 |           |  p9_fwd.py  |
+                  |                 |           +------^------+
+                  |                 |                  |
+------------------|------------------------------------|-------------
+                  |                 |                  |
+    +-------------v------------+    |    +-------------v------------+
+    |                          |    |    |                          |
+ HW |   USB Device Controller  <--------->   USB Host Controller    |
+    |                          |    |    |                          |
+    +--------------------------+    |    +--------------------------+
 
->
-> On 20/08/2024 17:30, Barry Song wrote:
->
->> Hi Usama,
->> thanks! I can't judge if we need this partially_mapped flag. but if we
->> need, the code
->> looks correct to me. I'd like to leave this to David and other experts to ack.
->>
-> Thanks for the reviews!
->
->> an alternative approach might be two lists? one for entirely_mapped,
->> the other one
->> for split_deferred. also seems ugly ?
->>
-> That was my very first prototype! I shifted to using a bool which I sent in v1, and then a bit in _flags_1 as David suggested. I believe a bit in _flags_1 is the best way forward, as it leaves the most space in folio for future work.
->
->> On the other hand, when we want to extend your patchset to mTHP other than PMD-
->> order, will the only deferred_list create huge lock contention while
->> adding or removing
->> folios from it?
->>
-> Yes, I would imagine so. the deferred_split_queue is per memcg/node, so that helps.
->
-> Also, this work is tied to khugepaged. So would need some thought when doing it for mTHP.
->
-> I would imagine doing underused shrinker for mTHP would be less beneficial compared to doing it for 2M THP. But probably needs experimentation.
->
-> Thanks
+The USB host exports a filesystem, while the gadget on the USB device
+side makes it mountable.
 
-Below is the core code snippet to support "split underused mTHP". Can we extend the
-khugepaged_max_ptes_none value to mthp and keep its semantics unchanged? With a small
-modification, Only folios with page numbers greater than khugepaged_max_ptes_none - 1
-can be added to the deferred_split list and can be split. What do you think?
+Diod (9pfs server) and the forwarder are on the development host, where
+the root filesystem is actually stored. The gadget is initialized during
+boot (or later) on the embedded board. Then the forwarder will find it
+on the USB bus and start forwarding requests.
 
-diff --git a/mm/memory.c b/mm/memory.c
-index b95fce7d190f..ef503958d6a0 100644
---- a/mm/memory.c
-+++ b/mm/memory.c
-@@ -4789,6 +4789,8 @@ static vm_fault_t do_anonymous_page(struct vm_fault *vmf)
-         }
+In this case the 9p requests come from the device and are handled by the
+host. The reason is that USB device ports are normally not available on
+PCs, so a connection in the other direction would not work.
 
-         folio_ref_add(folio, nr_pages - 1);
-+       if (nr_pages > 1 && nr_pages > khugepaged_max_ptes_none - 1)
-+               deferred_split_folio(folio, false);
-         add_mm_counter(vma->vm_mm, MM_ANONPAGES, nr_pages);
-         count_mthp_stat(folio_order(folio), MTHP_STAT_ANON_FAULT_ALLOC);
-         folio_add_new_anon_rmap(folio, vma, addr, RMAP_EXCLUSIVE);
+One use-case is to use it as an alternative to NFS root booting during
+the development of embedded Linux devices.
 
-shmem THP has the same memory expansion problem when the shmem_enabled configuration is
-set to always. In my opinion, it is necessary to support "split underused shmem THP",
-but I am not sure if there is any gap in the implementation?
+Signed-off-by: Michael Grzeschik <m.grzeschik@pengutronix.de>
+---
+Changes in v12:
+- removed the unused "struct usb_function *f" catched by kbuild test robot
+- Link to v11: https://lore.kernel.org/r/20240116-ml-topic-u9p-v11-0-b4890e06733a@pengutronix.de
 
-Bang
-Thanks
+Changes in v11:
+- fixed the include guard in func_utils.h
+- Link to v10: https://lore.kernel.org/r/20240116-ml-topic-u9p-v10-0-a85fdeac2c52@pengutronix.de
+
+Changes in v10:
+- fixed reset of tx req context in complete handler
+- added suggestions from Cristoph JAILLET from v9 review
+- Link to v9: https://lore.kernel.org/r/20240116-ml-topic-u9p-v9-0-93d73f47b76b@pengutronix.de
+
+Changes in v9:
+- solved the error return path by using wait_for_completion instead of
+  running in the usb complete callback in a loop
+- by using wait_for_completion solves the req_lock
+- using req->context instead of using a state variable
+- Link to v8: https://lore.kernel.org/r/20240116-ml-topic-u9p-v8-0-409e659ca4dd@pengutronix.de
+
+Changes in v8:
+- this time really added the req_lock spinlock
+- Link to v7: https://lore.kernel.org/r/20240116-ml-topic-u9p-v7-0-3a1eeef77fbe@pengutronix.de
+
+Changes in v7:
+- added back the req_lock spinlock
+- Link to v6: https://lore.kernel.org/r/20240116-ml-topic-u9p-v6-0-695977d76dff@pengutronix.de
+
+Changes in v6:
+- fixed the python script not to have path set by default
+- improved the lock init
+- fixed usb9pfs status change to connected
+- Link to v5: https://lore.kernel.org/r/20240116-ml-topic-u9p-v5-0-5ed0abd53ef5@pengutronix.de
+
+Changes in v5:
+- fixed lockup in mount -> remount -> monut scenario
+- improved p9_fwd transport script with more options
+- Link to v4: https://lore.kernel.org/r/20240116-ml-topic-u9p-v4-0-722ed28b0ade@pengutronix.de
+
+Changes in v4:
+- reworked the naming scheme to be set by the configfs instance
+- added conn_cancel function to properly stop the transfers
+- ensured that umount -f will work even when the host side has crahed
+- added all the review feedback from Andrzej Pietrasiewicz
+- Link to v3: https://lore.kernel.org/r/20240116-ml-topic-u9p-v3-0-c62a36eccda1@pengutronix.de
+
+Changes in v3:
+- dropped patch "usb: gadget: legacy: add 9pfs multi gadget" as discussed with gregkh
+- Link to v2: https://lore.kernel.org/r/20240116-ml-topic-u9p-v2-0-b46cbf592962@pengutronix.de
+
+Changes in v2:
+- improved the commit messages
+- introduced an patch to move the header u_f.h to include/linux/usb to compile usb gadget functions treewide
+- moved usbg gadget function to net/9p/
+- adderessed several comments in function driver, like the cleanup path and kbuild errors
+- improved the documentation in Documentation/filesystems/9p.rst
+- Link to v1: https://lore.kernel.org/r/20240116-ml-topic-u9p-v1-0-ad8c306f9a4e@pengutronix.de
+
+---
+Michael Grzeschik (3):
+      usb: gadget: function: move u_f.h to include/linux/usb/func_utils.h
+      net/9p/usbg: Add new usb gadget function transport
+      tools: usb: p9_fwd: add usb gadget packet forwarder script
+
+ Documentation/filesystems/9p.rst                   |  58 +-
+ drivers/usb/gadget/configfs.c                      |   2 +-
+ drivers/usb/gadget/function/f_fs.c                 |   2 +-
+ drivers/usb/gadget/function/f_hid.c                |   2 +-
+ drivers/usb/gadget/function/f_loopback.c           |   2 +-
+ drivers/usb/gadget/function/f_midi.c               |   2 +-
+ drivers/usb/gadget/function/f_midi2.c              |   2 +-
+ drivers/usb/gadget/function/f_sourcesink.c         |   2 +-
+ drivers/usb/gadget/u_f.c                           |   2 +-
+ .../gadget/u_f.h => include/linux/usb/func_utils.h |   8 +-
+ net/9p/Kconfig                                     |   6 +
+ net/9p/Makefile                                    |   4 +
+ net/9p/trans_usbg.c                                | 956 +++++++++++++++++++++
+ tools/usb/p9_fwd.py                                | 243 ++++++
+ 14 files changed, 1278 insertions(+), 13 deletions(-)
+---
+base-commit: 47ac09b91befbb6a235ab620c32af719f8208399
+change-id: 20240116-ml-topic-u9p-895274530eb1
+
+Best regards,
+-- 
+Michael Grzeschik <m.grzeschik@pengutronix.de>
 
 
