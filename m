@@ -1,384 +1,176 @@
-Return-Path: <linux-doc+bounces-24446-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-24448-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id F244F96AF27
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Sep 2024 05:22:12 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id B349096B0F5
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Sep 2024 08:07:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 41B8DB24280
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Sep 2024 03:22:10 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7524B286EB5
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Sep 2024 06:07:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9218C54774;
-	Wed,  4 Sep 2024 03:20:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9EF6984E0A;
+	Wed,  4 Sep 2024 06:07:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hbOdppse"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mxde.zte.com.cn (mxde.zte.com.cn [209.9.37.143])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 748444F602;
-	Wed,  4 Sep 2024 03:20:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.9.37.143
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66DC084A36;
+	Wed,  4 Sep 2024 06:07:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1725420043; cv=none; b=m+2hk8E2pmtEAvOct6UNiEBlZ0hhCtv/t7lCm3OYgvS5tgSglK93fQiz5NP/CtCgebx/nLxn05SuFbJrhfh3zETny8YNR31V9WlqeOSM0tM9hKKkkBGVbbTwnEgIdnOEqZ5pOYrAyRxj5bEUPYKCUpWR/mlnFarHdPRdR0eGfKA=
+	t=1725430064; cv=none; b=UMT2guDJyKy6LQKfUolomz0E2L4RLVJOp6HWPK+SiGEQ1CLRMjW/mpyj3yLks2XGvOFUvpxjV87soxTG9sgdF0ip0oWpQ0aJVYkWGQYc94uFz144hYxrCZB0if1ePDudcfW3Rd3EM1q3P18iJognWXyaDMlS3Ez6dqOsopo/zwk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1725420043; c=relaxed/simple;
-	bh=hrVGS7gbi55EwZ/K1bvbNtVuM2ezHlmmo9TpwVpiXhc=;
-	h=Date:Message-ID:Mime-Version:From:To:Cc:Subject:Content-Type; b=BI/O7Xk1Me4qOrwG+qohU39yzrgm+qrI/Enclja2amYxZehQxtxJP7W1B6hDUf0fK6YXfB9LFUyX3+uNX7MdSzS6LKRc2FfEZ+w0OQ++ZR0Rcc7pXIlSLRI+fNvaxhm+fNc8CxPMPpClK5Hlbu69WlUAbnSE0vWY+cNtZ2QWlpE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn; spf=pass smtp.mailfrom=zte.com.cn; arc=none smtp.client-ip=209.9.37.143
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
-Received: from mxhk.zte.com.cn (unknown [192.168.250.138])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mxde.zte.com.cn (FangMail) with ESMTPS id 4Wz76S6fX5z5TsVf;
-	Wed,  4 Sep 2024 11:20:32 +0800 (CST)
-Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4Wz76H3BsJz5B1Jd;
-	Wed,  4 Sep 2024 11:20:23 +0800 (CST)
-Received: from njy2app01.zte.com.cn ([10.40.12.136])
-	by mse-fl2.zte.com.cn with SMTP id 4843KIob053770;
-	Wed, 4 Sep 2024 11:20:19 +0800 (+08)
-	(envelope-from jiang.kun2@zte.com.cn)
-Received: from mapi (njb2app07[null])
-	by mapi (Zmail) with MAPI id mid204;
-	Wed, 4 Sep 2024 11:20:20 +0800 (CST)
-Date: Wed, 4 Sep 2024 11:20:20 +0800 (CST)
-X-Zmail-TransId: 2aff66d7d1f42ca-6569d
-X-Mailer: Zmail v1.0
-Message-ID: <20240904112020232OieLhsFZ_M10gBxJtUieP@zte.com.cn>
+	s=arc-20240116; t=1725430064; c=relaxed/simple;
+	bh=EPR34i1ApP1W3IN8ZGV5gYeG+Qdt78uCwjXb2+lkZ7E=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=TSIE2/HprRnwFkUdfg4GgKp6641Cfy3WvhnqqpMCaQzssbM5sANOUP/AF8oujc55I8PQNhN1wmdPKqbTLQxJONOKXl+KBxeivQX9GFT5XdjuQlfABWZTE0vHmna+IUEvc3eOBHinyG1S/t0nGOd624Rj78hTQaOROxm46KAqbPU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hbOdppse; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1DC72C4CECA;
+	Wed,  4 Sep 2024 06:07:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1725430064;
+	bh=EPR34i1ApP1W3IN8ZGV5gYeG+Qdt78uCwjXb2+lkZ7E=;
+	h=From:To:Cc:Subject:Date:From;
+	b=hbOdppseLYiL43y+tAVIiYWL2VdtT043qE/WzBHwrFRYQk6vUA2QrqxoQPuaM+6JK
+	 2ZbU0w3Vavl8lhwfSoe7VY13CRmoS9lfNZlb7k8SbENTUpiMWrj35TUUPZ8XgJvJrg
+	 Fyz4E1a/lZnxBsjwypa55JgLao0rgc6rPC+seKwuch2ZDO0HMACYUnjVn5mojUjWL6
+	 H+Cr8MRwd9Jj70aWbMnRB+zg67VQ8v1ABL60JrXqpYIskCQO1iRUQ9+tMboh19GjJt
+	 QE14MJdgPt0HbWrzHan8id3Q6dfO7Akhj/nPHtYuNVomEQocI1y9EPbYF3vZYtTsMM
+	 eBDXUoaU/QvCA==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1sljB8-00000006Ite-04Ih;
+	Wed, 04 Sep 2024 08:07:42 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Borislav Petkov <bp@alien8.de>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Ard Biesheuvel <mchehab+huawei@kernel.org>,
+	James Morse <james.morse@arm.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Len Brown <mchehab+huawei@kernel.org>,
+	Tony Luck <tony.luck@intel.com>,
+	linux-acpi@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-edac@vger.kernel.org,
+	linux-efi@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3 0/5] Fix issues with ARM Processor CPER records
+Date: Wed,  4 Sep 2024 08:07:13 +0200
+Message-ID: <cover.1725429659.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.46.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-From: <jiang.kun2@zte.com.cn>
-To: <alexs@kernel.org>, <siyanteng@loongson.cn>, <corbet@lwn.net>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-Cc: <wang.yaxin@zte.com.cn>, <fan.yu9@zte.com.cn>, <xu.xin16@zte.com.cn>,
-        <he.peilin@zte.com.cn>, <tu.qiang35@zte.com.cn>,
-        <qiu.yutan@zte.com.cn>, <zhang.yunkai@zte.com.cn>
-Subject: =?UTF-8?B?W1BBVENIIHYyXSBEb2N1bWVudGF0aW9uL21tOiBUcmFuc2xhdGUgcGh5c2ljYWxfbWVtb3J5LnJzdCB0byBTaW1wbGlmaWVkCgogQ2hpbmVzZQ==?=
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL:mse-fl2.zte.com.cn 4843KIob053770
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 66D7D1FF.001/4Wz76S6fX5z5TsVf
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-From: Yaxin Wang <wang.yaxin@zte.com.cn>
+This is needed for both kernelspace and userspace properly handle
+ARM processor CPER events.
 
-This patch translates the "physical_memory.rst" document into
-Simplified Chinese to improve accessibility for Chinese-speaking
-developers and users.
+Patch 1 of this series fix the UEFI 2.6+ implementation of the ARM
+trace event, as the original implementation was incomplete.
+Changeset e9279e83ad1f ("trace, ras: add ARM processor error trace event")
+added such event, but it reports only some fields of the CPER record
+defined on UEFI 2.6+ appendix N, table N.16.  Those are not enough
+actually parse such events on userspace, as not even the event type
+is exported.
 
-The translation was done with attention to technical accuracy
-and readability, ensuring that the document remains informative
-and useful in its translated form.
+Patch 2 fixes a compilation breakage when W=1;
 
-Signed-off-by: Yaxin Wang <wang.yaxin@zte.com.cn>
+Patch 3 adds a new helper function to be used by cper and ghes drivers to
+display CPER bitmaps;
+
+Patch 4 fixes CPER logic according with UEFI 2.9A errata. Before it, there
+was no description about how processor type field was encoded. The errata
+defines it as a bitmask, and provides the information about how it should
+be encoded.
+
+Patch 5 adds CPER functions to Kernel-doc.
+
+This series was validated with the help of an ARM EINJ code for QEMU:
+
+	https://gitlab.com/mchehab_kernel/qemu/-/tree/qemu_submission
+
+$ scripts/ghes_inject.py -d arm -p 0xdeadbeef -t cache,bus,micro-arch
+
+[   11.094205] {1}[Hardware Error]: Hardware error from APEI Generic Hardware Error Source: 0
+[   11.095009] {1}[Hardware Error]: event severity: recoverable
+[   11.095486] {1}[Hardware Error]:  Error 0, type: recoverable
+[   11.096090] {1}[Hardware Error]:   section_type: ARM processor error
+[   11.096399] {1}[Hardware Error]:   MIDR: 0x00000000000f0510
+[   11.097135] {1}[Hardware Error]:   Multiprocessor Affinity Register (MPIDR): 0x0000000080000000
+[   11.097811] {1}[Hardware Error]:   running state: 0x0
+[   11.098193] {1}[Hardware Error]:   Power State Coordination Interface state: 0
+[   11.098699] {1}[Hardware Error]:   Error info structure 0:
+[   11.099174] {1}[Hardware Error]:   num errors: 2
+[   11.099682] {1}[Hardware Error]:    error_type: 0x1a: cache error|bus error|micro-architectural error
+[   11.100150] {1}[Hardware Error]:    physical fault address: 0x00000000deadbeef
+[   11.111214] Memory failure: 0xdeadb: recovery action for free buddy page: Recovered
+
+- 
+
+I also tested the ghes and cper reports both with and without this
+change, using different versions of rasdaemon, with and without
+support for the extended trace event. Those are a summary of the
+test results:
+
+- adding more fields to the trace events didn't break userspace API:
+  both versions of rasdaemon handled it;
+
+- the rasdaemon patches to handle the new trace report was missing
+  a backward-compatibility logic. I fixed already. So, rasdaemon
+  can now handle both old and new trace events.
+
+Btw, rasdaemon has gained support for the extended trace since its
+version 0.5.8 (released in 2021). I didn't saw any issues there
+complain about troubles on it, so either distros used on ARM servers
+are using an old version of rasdaemon, or they're carrying on the trace
+event changes as well.
+
 ---
-v1->v2:
-Some fixes according to:
-https://lore.kernel.org/all/1add7be9-0da0-4463-a3ea-80e2fd99bd19@gmail.com/
 
- .../translations/zh_CN/mm/physical_memory.rst | 285 ++++++++++++++++++
- 1 file changed, 285 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/mm/physical_memory.rst
+v3:
+ - history of patch 1 improved with a chain of co-developed-by;
+ - add a better description and an example on patch 3;
+ - use BIT_ULL() on patch 3;
+ - add a missing include on patch 4.
 
-diff --git a/Documentation/translations/zh_CN/mm/physical_memory.rst b/Documentation/translations/zh_CN/mm/physical_memory.rst
-new file mode 100644
-index 000000000000..810606605c6c
---- /dev/null
-+++ b/Documentation/translations/zh_CN/mm/physical_memory.rst
-@@ -0,0 +1,285 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+:Original: Documentation/mm/physical_memory.rst
-+
-+:翻译:
-+
-+ 王亚鑫 Yaxin Wang <wang.yaxin@zte.com.cn>
-+
-+===============
-+物理内存
-+===============
-+
-+Linux可用于多种架构，因此需要一个与架构无关的抽象来表示物理内存。本章描述了管理运行系统
-+中物理内存的结构。
-+
-+第一个与内存管理相关的主要概念是`非一致性内存访问(NUMA)<https://en.wikipedia.org/
-+wiki/Non-uniform_memory_access>`
-+
-+在多核和多插槽机器中，内存可能被组织成不同的存储区，这些存储区根据与处理器的“距离”不同而有不同的
-+访问开销。例如，可能为每个CPU分配内存存储区，或者为外围设备在附近分配一个非常适合DMA的内存存储区。
-+
-+每个存储区被称为一个节点，节点在Linux中表示为 ``struct pglist_data``，即使是在UMA架构中
-+也是这样表示。该结构总是通过 ``pg_data_t``来引用。特定节点的 ``pg_data_t`` 结构体可以通过
-+NODE_DATA(nid)引用，其中nid被称为该节点的ID。
-+
-+对于非一致性内存访问（NUMA）架构，节点数据结构在引导时由特定于架构的代码早期分配。通常，这些
-+结构在他们所在的内存区上本地分配。对于一致性内存访问（UMA）架构，只使用一个静态的 ``pg_data_t``
-+结构体，称为 ``contig_page_data``。节点将会在ref:`Nodes <nodes>`章节中进一步讨论。
-+
-+整个物理内存被划分为一个或多个被称为区域的块，这些区域表示内存的范围。这些范围通常由访问内存
-+的架构限制来决定。在节点内，与特定区域对应的内存范围由 ``struct zone`` 结构体描述，该结构被定义为
-+``zone_t``，每种区域都属于以下描述类型的一种。
-+
-+* ``ZONE_DMA``和 ``ZONE_DMA32``在历史上代表适用于DMA的内存，这些内存由那些不能访问所有可寻址内存的
-+外设访问。多年来，已经有了更好、更稳固的接口来获取满足特定DMA需求的内存（这些接口由Documentation/
-+core-api/dma-api.rst文档描述），但是 ``ZONE_DMA``和 ``ZONE_DMA32``仍然表示访问受限的内存范围。
-+
-+取决于架构的不同，这两种区域可以在构建时通过关闭 ``CONFIG_ZONE_DMA``和 ``CONFIG_ZONE_DMA32``配置选项
-+来禁用。一些64位的平台可能需要这两种区域，因为他们支持具有不同DMA寻址限制的外设。
-+
-+* ``ZONE_NORMAL`` 是普通内存的区域，这种内存可以被内核随时访问。如果DMA设备支持将数据传输到
-+所有可寻址的内存区域，那么可以在该区域的页面上执行DMA操作。 ``ZONE_NORMAL`` 总是开启的。
-+
-+* ``ZONE_HIGHMEM`` 是指那些没有在内核页表中永久映射的物理内存部分。该区域的内存只能通过临时映射
-+被内核访问。该区域只在某些32位架构上可用，并且是通过 ``CONFIG_HIGHMEM`` 选项开启。
-+
-+* ``ZONE_MOVABLE`` 是用于可访问的普通内存区域，就像 ``ZONE_NORMAL`` 一样。不同之处在于 ``ZONE_MOVABLE``
-+ 中的大多数页面内容是可移动的。这意味着这些页面的虚拟地址不会改变，但它们的内容可能会在不同的物理
-+ 页面之间移动。通常，在内存热插拔期间填充 ``ZONE_MOVABLE``，但在启动时也可以使用 ``kernelcore``、
-+ ``movablecore`` 和 ``movable_node`` 这些内核命令行参数来填充。有关更多详细信息，请参阅内核文档
-+ Documentation/mm/page_migration.rst 和 Documentation/admin-guide/mm/memory-hotplug.rst。
-+
-+* ``ZONE_DEVICE`` 表示位于诸如持久性内存（PMEM）和图形处理单元（GPU）等设备上的内存。它与RAM区域类型有
-+不同的特性，并且它的存在是为了提供:ref:`struct page <Pages>` 结构和内存映射服务，以便设备驱动程序能识别物理地址
-+范围。 ``ZONE_DEVICE`` 通过配置选项 ``CONFIG_ZONE_DEVICE`` 开启。
-+
-+需要注意的是，许多内核操作只能使用 ``ZONE_NORMAL`` 来执行，因此它是性能最关键区域。区域在
-+:ref:`Zones <zones>` 节中有更详细的讨论。
-+
-+节点和区域范围之间的关系由固件报告的物理内存映射决定，另外也由内存寻址的架构约束以及内核命令行中的某些参数决定。
-+
-+例如，在具有2GB RAM的x86统一内存架构（UMA）机器上运行32位内核时，整个内存将位于节点0，并且将有三个
-+区域： ``ZONE_DMA``、 ``ZONE_NORMAL`` 和 ``ZONE_HIGHMEM``。
-+
-+  0                                                            2G
-+  +-------------------------------------------------------------+
-+  |                            node 0                           |
-+  +-------------------------------------------------------------+
-+
-+  0         16M                    896M                        2G
-+  +----------+-----------------------+--------------------------+
-+  | ZONE_DMA |      ZONE_NORMAL      |       ZONE_HIGHMEM       |
-+  +----------+-----------------------+--------------------------+
-+
-+
-+在内核构建时关闭 ``ZONE_DMA`` 开启 ``ZONE_DMA32``，并且在具有16GB RAM平均分配在两个节点上的arm64
-+机器上，使用 ``movablecore=80%`` 参数启动时， ``ZONE_DMA32``、 ``ZONE_NORMAL`` 和
-+``ZONE_MOVABLE`` 位于节点0，而 ``ZONE_NORMAL`` 和 ``ZONE_MOVABLE`` 位于节点1。
-+
-+
-+ 1G                                9G                         17G
-+  +--------------------------------+ +--------------------------+
-+  |              node 0            | |          node 1          |
-+  +--------------------------------+ +--------------------------+
-+
-+  1G       4G        4200M          9G          9320M          17G
-+  +---------+----------+-----------+ +------------+-------------+
-+  |  DMA32  |  NORMAL  |  MOVABLE  | |   NORMAL   |   MOVABLE   |
-+  +---------+----------+-----------+ +------------+-------------+
-+
-+
-+内存存储区可能位于交错的节点。在下面的例子中，一台x86机器有16GB的RAM分布在4个内存存储区上，偶数编号的内存存储区
-+属于节点0，奇数编号的内存条属于节点1::
-+
-+  0              4G              8G             12G            16G
-+  +-------------+ +-------------+ +-------------+ +-------------+
-+  |    node 0   | |    node 1   | |    node 0   | |    node 1   |
-+  +-------------+ +-------------+ +-------------+ +-------------+
-+
-+  0   16M      4G
-+  +-----+-------+ +-------------+ +-------------+ +-------------+
-+  | DMA | DMA32 | |    NORMAL   | |    NORMAL   | |    NORMAL   |
-+  +-----+-------+ +-------------+ +-------------+ +-------------+
-+
-+在这种情况下，节点0将覆盖从0到12GB的内存范围，而节点1将覆盖从4GB到16GB的内存范围。
-+
-+.. _nodes:
-+
-+节点
-+=====
-+
-+正如我们所提到的，内存中的每个节点都由 ``pg_data_t`` 描述，它是由 ``struct pglist_data`` 结构体的类型定义。
-+在分配页面时，默认情况下，Linux使用节点本地分配策略，从离当前运行CPU的最近节点分配内存。由于进程倾向于
-+在同一个CPU上运行，很可能会使用当前节点的内存。分配策略可以由用户控制，如内核文档 Documentation/admin-guide
-+/mm/numa_memory_policy.rst 中所述。
-+
-+大多数NUMA（非统一内存访问）架构维护了一个指向节点结构的指针数组。这些实际的结构在启动过程中的早期被分配，
-+这时特定于架构的代码解析了固件报告的物理内存映射。节点初始化的大部分工作是在由 free_area_init()实现的启
-+动过程之后完成，该函数在后面的小节 :ref:`Initialization <initialization>` 中有详细描述。
-+
-+除了节点结构，内核还维护了一个名为 ``node_states`` 的 ``nodemask_t`` 位掩码数组。这个数组中的每个位掩码代表一组
-+特定属性的节点，这些属性由 ``enum node_states`` 定义，定义如下：
-+
-+``N_POSSIBLE``
-+节点可能在某个时刻上线。
-+
-+``N_ONLINE``
-+节点已经上线。
-+
-+``N_NORMAL_MEMORY``
-+节点拥有普通内存。
-+
-+``N_HIGH_MEMORY``
-+节点拥有普通或高端内存。当关闭 ``CONFIG_HIGHMEM`` 配置时，也可以称为 ``N_NORMAL_MEMORY`` 。
-+
-+``N_MEMORY``
-+节点拥有（普通、高端、可移动）内存。
-+
-+``N_CPU``
-+节点拥有一个或多个CPU。
-+
-+对于具有上述属性的每个节点， ``node_states[<property>]``掩码中对应于节点ID的位会被置位。
-+
-+例如，对于具有常规内存和CPU的节点2，第二个bit将被设置::
-+
-+  node_states[N_POSSIBLE]
-+  node_states[N_ONLINE]
-+  node_states[N_NORMAL_MEMORY]
-+  node_states[N_HIGH_MEMORY]
-+  node_states[N_MEMORY]
-+  node_states[N_CPU]
-+
-+有关使用节点掩码（nodemasks）可能进行的各种操作，请参考 ``include/linux/nodemask.h``。
-+
-+除此之外，节点掩码（nodemasks）提供用于遍历节点的宏，即 ``for_each_node()`` 和
-+ ``for_each_online_node()``。
-+
-+例如，要为每个在线节点调用函数 foo()，可以这样操作：
-+
-+  for_each_online_node(nid) {
-+		  pg_data_t *pgdat = NODE_DATA(nid);
-+
-+		  foo(pgdat);
-+	}
-+
-+节点数据结构
-+--------------
-+
-+节点结构 ``struct pglist_data`` 在 ``include/linux/mmzone.h`` 中声明。这里我们
-+将简要描述这个结构体的字段：
-+
-+通用字段
-+~~~~~~~
-+
-+``node_zones``
-+该节点的区域列表。并非所有区域都可能被填充，但这是完整的列表。它被该节点的node_zonelists以及其它
-+节点的node_zonelists引用。
-+
-+``node_zonelists``
-+所有节点中所有区域的列表。此列表定义了分配内存时首选的区域顺序。 ``node_zonelists`` 在核心内存管理
-+结构初始化期间，由 ``mm/page_alloc.c`` 中的 ``build_zonelists()`` 函数设置的。
-+
-+``nr_zones``
-+此节点中已填充区域的数量。
-+
-+``node_mem_map``
-+对于使用FLATMEM内存模型的UMA系统，0号节点的 ``node_mem_map`` 表示每个物理帧的 struct pages 数组。
-+
-+``node_page_ext``
-+对于使用FLATMEM内存模型的UMA系统，0号节点的 ``node_page_ext`` 是struct pages的扩展数组。
-+只有在构建时开启了 ``CONFIG_PAGE_EXTENSION`` 选项的内核中才可用。
-+
-+``node_start_pfn``
-+此节点中起始页面帧的页面帧号。
-+
-+``node_present_pages``
-+此节点中存在的物理页面的总数。
-+
-+``node_spanned_pages``
-+包括空洞在内的物理页面范围的总大小。
-+
-+``node_size_lock``
-+一个保护定义节点范围字段的锁。仅在开启了 ``CONFIG_MEMORY_HOTPLUG`` 或
-+``CONFIG_DEFERRED_STRUCT_PAGE_INIT`` 配置选项中的某一个时才定义。提供了
-+``pgdat_resize_lock()`` 和 ``pgdat_resize_unlock()`` 用来操作 ``node_size_lock``，
-+而无需检查 ``CONFIG_MEMORY_HOTPLUG`` 或 ``CONFIG_DEFERRED_STRUCT_PAGE_INIT``选项。
-+
-+``node_id``
-+节点的节点ID（NID），从0开始。
-+
-+``totalreserve_pages``
-+这是每个节点保留的页面，这些页面不可用于用户空间分配。
-+
-+``first_deferred_pfn``
-+如果大型机器上的内存初始化被推迟，那么第一个PFN（页帧号）是需要初始化的。仅在开启了
-+``CONFIG_DEFERRED_STRUCT_PAGE_INIT`` 选项时定义。
-+
-+``deferred_split_queue``
-+每个节点的大页队列，这些大页的拆分被推迟了。仅在开启了 ``CONFIG_TRANSPARENT_HUGEPAGE``
-+配置选项时定义。
-+
-+``__lruvec``
-+每个节点的lruvec持有LRU（最近最少使用）列表和相关参数。仅在禁用了内存控制组（cgroups）
-+时使用。它不应该直接访问，而应该使用 ``mem_cgroup_lruvec()`` 来查找 lruvecs。
-+
-+回收控制
-+~~~~~~~~~~~~~~~
-+
-+另见内核文档 Documentation/mm/page_reclaim.rst 文件。
-+
-+``kswapd``
-+每个节点的kswapd内核线程实例。
-+
-+``kswapd_wait``, ``pfmemalloc_wait``, ``reclaim_wait``
-+同步内存回收任务的工作队列。
-+
-+``nr_writeback_throttled``
-+等待写回脏页时，被限制的任务数量。
-+
-+``kswapd_order``
-+控制kswapd尝试回收的order。
-+
-+``kswapd_highest_zoneidx``
-+kswapd线程可以回收的最高区域索引。
-+
-+``kswapd_failures``
-+kswapd无法回收任何页面的运行次数。
-+
-+``min_unmapped_pages``
-+无法回收的未映射文件支持的最小页面数量。由 ``vm.min_unmapped_ratio`` 系统控制台（sysctl）
-+参数决定。仅在开启 ``CONFIG_NUMA`` 配置时定义。
-+
-+``min_slab_pages``
-+无法回收的SLAB页面的最少数量。由 ``vm.min_slab_ratio`` 系统控制台（sysctl）参数决定。仅在
-+开启 ``CONFIG_NUMA`` 时定义。
-+
-+``flags``
-+控制回收行为的标志位。
-+
-+内存压缩控制
-+~~~~~~~~~~~~~~~~~~
-+
-+``kcompactd_max_order``
-+kcompactd应尝试实现的页面order。
-+
-+``kcompactd_highest_zoneidx``
-+kcompactd可以压缩的最高区域索引。
-+
-+``kcompactd_wait``
-+同步内存压缩任务的工作队列。
-+
-+``kcompactd``
-+每个节点的kcompactd内核线程实例。
-+
-+``proactive_compact_trigger``
-+决定是否使用主动压缩。由 ``vm.compaction_proactiveness`` 系统控制台（sysctl）参数控制。
-+
-+统计信息
-+~~~~~~~~~~
-+
-+``per_cpu_nodestats``
-+节点的Per-CPU虚拟内存统计信息。
-+
-+``vm_stat``
-+节点的虚拟内存统计数据。
+v2:
+  - removed an uneeded patch adding #ifdef for CONFIG_ARM/ARM64;
+  - cper_bits_to_str() now returns the number of chars filled at the buffer;
+  - did a cosmetic (blank lines) improvement at include/linux/ras.h;
+  - arm_event trace dynamic arrays renamed to pei_buf/ctx_buf/oem_buf.
+    
+
+
+Jason Tian (1):
+  RAS: Report all ARM processor CPER information to userspace
+
+Mauro Carvalho Chehab (4):
+  efi/cper: Adjust infopfx size to accept an extra space
+  efi/cper: Add a new helper function to print bitmasks
+  efi/cper: align ARM CPER type with UEFI 2.9A/2.10 specs
+  docs: efi: add CPER functions to driver-api
+
+ .../driver-api/firmware/efi/index.rst         | 11 +++-
+ drivers/acpi/apei/ghes.c                      | 27 ++++----
+ drivers/firmware/efi/cper-arm.c               | 52 ++++++++--------
+ drivers/firmware/efi/cper.c                   | 62 ++++++++++++++++++-
+ drivers/ras/ras.c                             | 41 +++++++++++-
+ include/linux/cper.h                          | 12 ++--
+ include/linux/ras.h                           | 16 ++++-
+ include/ras/ras_event.h                       | 48 ++++++++++++--
+ 8 files changed, 210 insertions(+), 59 deletions(-)
+
 -- 
-2.27.0
+2.46.0
+
+
 
