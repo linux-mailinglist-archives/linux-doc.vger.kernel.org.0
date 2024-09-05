@@ -1,98 +1,135 @@
-Return-Path: <linux-doc+bounces-24556-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-24557-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F9FC96D761
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Sep 2024 13:41:32 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CFC496D7D8
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Sep 2024 14:04:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 222091F2655F
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Sep 2024 11:41:32 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4C38D28809E
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Sep 2024 12:04:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 39F0119995E;
-	Thu,  5 Sep 2024 11:41:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3BCBA199933;
+	Thu,  5 Sep 2024 12:04:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lsmod.de header.i=@lsmod.de header.b="o2IZF5Kw"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="EVaN3Ekv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.bmwiedemann.de (mail.bmwiedemann.de [188.40.142.18])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC01B1991A8
-	for <linux-doc@vger.kernel.org>; Thu,  5 Sep 2024 11:41:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.40.142.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F0131991B0
+	for <linux-doc@vger.kernel.org>; Thu,  5 Sep 2024 12:04:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1725536490; cv=none; b=FCw5zznFbn3YxJkBsQu/lUfJR0H6RmgcJ8bzia3aiMlY1u6oFOXvNOg2anANYB74ZGLe3LULV3YggdFFbLCGDgKhiofFIO2Lh+OyjdUa2fddQ5drINCvxTNRDy07haDCU9pnsUDjriQf7nrNh9GqT83FspqrHxI97dL68l5YHLQ=
+	t=1725537869; cv=none; b=c5u0WJLiFTWsF3I8gTpQC+zr8BVMeiLVqXiWTBnGK+5IRV2+N35QJCowSaqkLstOvf0et/FVfl6Oex2B3z3pqHMSqgp5MxJ9YYn6LuIOshDWo9l8OS85FrS32tgRRRoCXu51VGdePdmJysidDtfR6waeG3EyfzFxXNiq6d8RSYw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1725536490; c=relaxed/simple;
-	bh=azYt1SxJTamLF5rOj/Amgi2OeIeh6aaV1hObDT5TCr4=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=T7CEXLsDbnBILS1EBE7Zt4sSM8J2gqUy6ytzvrYLxZszCN9aEfCLyHPbl6QKhIj+kzE2I99PkThRhhB4DEPCjgMUCxV1gJbIQHCbudMvXMSPVojT/OJBvMsdg7ygotvv6LSu/j7Bu0OJi4lfX00d/jRG7ty5Xi/7DjLOK6Qzc0k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=lsmod.de; spf=none smtp.mailfrom=adrian.zq1.de; dkim=pass (2048-bit key) header.d=lsmod.de header.i=@lsmod.de header.b=o2IZF5Kw; arc=none smtp.client-ip=188.40.142.18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=lsmod.de
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=adrian.zq1.de
-Received: from mail.bmwiedemann.de (localhost [127.0.0.1])
-	by mail.bmwiedemann.de (Postfix) with ESMTP id 30D6C4464;
-	Thu,  5 Sep 2024 11:35:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=lsmod.de; s=202205;
-	t=1725536134; bh=azYt1SxJTamLF5rOj/Amgi2OeIeh6aaV1hObDT5TCr4=;
-	h=From:To:Cc:Subject:Date:From;
-	b=o2IZF5KwJ6X/R06Bnirz4uzw4S69birXQ5vmtLsosa45WADgfVbuFi3cCfmmKA8Gk
-	 AYTNQpD9YT7r7g9sUVJ+Al4jAbPPRCwhuKt5hrlrhNwVlvetqZJyAdaTr62hJKBySv
-	 9vZX7z1IM0qSifqv64Ewg8v2Lo4FdANGqB8nJwLr0B907i3mc6jk7dw+66N7vkpI34
-	 5Pr1rbl8nlKNQs787TUmyqL2TIqGEGcTNoYUiZtW+vLvwpvb7Ue3kIdxIX68wEylfF
-	 ofVl4ELHrofhQZdNZSMGwZF4cg1Wu08CsmAt+uNbHeY6eYST43vQbvmQe+UQb15TDO
-	 I3BYJPBGHo+mw==
-X-Spam-Level: 
-Received: from adrian.zq1.de (unknown [10.8.5.20])
-	by mail.bmwiedemann.de (Postfix) with ESMTP;
-	Thu,  5 Sep 2024 11:35:34 +0000 (UTC)
-Received: by adrian.zq1.de (Postfix, from userid 1000)
-	id E31ECE02B5; Thu, 05 Sep 2024 13:35:33 +0200 (CEST)
-From: bernhard+linux-doc@lsmod.de
-To: Mauro Carvalho Chehab <mchehab@kernel.org>,
-	linux-doc@vger.kernel.org
+	s=arc-20240116; t=1725537869; c=relaxed/simple;
+	bh=gHIYGqZJwGtEvfGWF8fA2dwhS4sVsotDmNNYzW/iVeg=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=dD4+nN6b2Up6HveqmpDl/13Hye2fgHqw0q9b/KK/uIgTsrCvw1bz0dkZyOp7FG0x85tfbv0RyetLV8i74KEvzUGjynVlizXk4DUdOh71GnL96/WtZILi2vSg/PelMR8+nREH8/TGjzOlTxC6QXWWOpszzK300uYWQhHZQKHfKNs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=EVaN3Ekv; arc=none smtp.client-ip=192.198.163.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1725537866; x=1757073866;
+  h=from:to:cc:subject:in-reply-to:references:date:
+   message-id:mime-version;
+  bh=gHIYGqZJwGtEvfGWF8fA2dwhS4sVsotDmNNYzW/iVeg=;
+  b=EVaN3EkvovWbonlrAF+l4DYIi+K3T3Ztb1PBCAi66uzeDWYnPYvHDXI/
+   YFLvRxNP8hONZ/R2KBkSHqScN1HJaOuSpUdof6Zfv5Zkxb31F/VCfGJXW
+   SpgsqWXnZtDfDwhO3aFUNRef7dTxIIIkWzntoAOWgSOYMCiVpUWqJnHF0
+   ItxZKAr/IEWgiHBRlYNXDsU/xtlHqiKRcfBT2Cmr5PY0x153sduVcTUFT
+   RwHcvh2nbhJnUT6VvNtwp/6VjOsMr0k+5mzvZOTYPxhw6U5SjIpPC8Mc7
+   /eFBSD4poGf/9vMgj2ee5rcYiDhCvh/CzYH3ab+tcVm4qG8mU4BVbzKma
+   Q==;
+X-CSE-ConnectionGUID: 4MKEGNLHRBmxPftu7iKxww==
+X-CSE-MsgGUID: 0SIO+WAoSuaA4bMlZiDhQg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11185"; a="13386111"
+X-IronPort-AV: E=Sophos;i="6.10,204,1719903600"; 
+   d="scan'208";a="13386111"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Sep 2024 05:04:26 -0700
+X-CSE-ConnectionGUID: dk6kbgdUQtyvAeKlD8+1OA==
+X-CSE-MsgGUID: q4P3sh0HSDGEtgTkjj/7GA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,204,1719903600"; 
+   d="scan'208";a="65260228"
+Received: from jnikula-mobl4.fi.intel.com (HELO localhost) ([10.237.66.160])
+  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Sep 2024 05:04:24 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: bernhard+linux-doc@lsmod.de, Mauro Carvalho Chehab <mchehab@kernel.org>,
+ linux-doc@vger.kernel.org
 Cc: "Bernhard M. Wiedemann" <bwiedemann@suse.de>
-Subject: [PATCH] docs: Build kernel docs deterministically
-Date: Thu,  5 Sep 2024 13:35:31 +0200
-Message-ID: <20240905113531.65375-1-bernhard+linux-doc@lsmod.de>
-X-Mailer: git-send-email 2.46.0
+Subject: Re: [PATCH] docs: Build kernel docs deterministically
+In-Reply-To: <20240905113531.65375-1-bernhard+linux-doc@lsmod.de>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20240905113531.65375-1-bernhard+linux-doc@lsmod.de>
+Date: Thu, 05 Sep 2024 15:04:21 +0300
+Message-ID: <878qw6qpbu.fsf@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: "Bernhard M. Wiedemann" <bwiedemann@suse.de>
+On Thu, 05 Sep 2024, bernhard+linux-doc@lsmod.de wrote:
+> From: "Bernhard M. Wiedemann" <bwiedemann@suse.de>
+>
+> Because we want reproducible builds
+> and https://github.com/sphinx-doc/sphinx/issues/6714
+> did not receive any love from Sphinx devs in five years,
+> let's disable parallel doc builds until that Sphinx issue is fixed.
 
-Because we want reproducible builds
-and https://github.com/sphinx-doc/sphinx/issues/6714
-did not receive any love from Sphinx devs in five years,
-let's disable parallel doc builds until that Sphinx issue is fixed.
+You mention in [1] that this is likely a duplicate of [2] i.e. multiple
+Sphinx instances running in parallel and racing in doctree access.
 
-This patch was done while working on reproducible builds for openSUSE,
-sponsored by the NLnet NGI0 fund.
+In kernel, does the issue then boil down to:
 
-Signed-off-by: Bernhard M. Wiedemann <bwiedemann@suse.de>
----
- Documentation/sphinx/parallel-wrapper.sh | 3 +++
- 1 file changed, 3 insertions(+)
+htmldocs:
+	@$(srctree)/scripts/sphinx-pre-install --version-check
+	@+$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,html,$(var),,$(var)))
 
-diff --git a/Documentation/sphinx/parallel-wrapper.sh b/Documentation/sphinx/parallel-wrapper.sh
-index e54c44ce117d..cb93626bd86e 100644
---- a/Documentation/sphinx/parallel-wrapper.sh
-+++ b/Documentation/sphinx/parallel-wrapper.sh
-@@ -10,6 +10,9 @@ sphinx="$1"
- shift || true
- 
- parallel="$PARALLELISM"
-+# Because of issues in Sphinx(https://github.com/sphinx-doc/sphinx/issues/6714)
-+# we disable parallel doc generation to get deterministic build results
-+parallel=1
- if [ -z "$parallel" ] ; then
- 	# If no parallelism is specified at the top-level make, then
- 	# fall back to the expected "-jauto" mode that the "htmldocs"
+i.e. multiple Sphinx invocations instead of just one?
+
+Broken record, I still think we should axe the Makefile hacks out of the
+Sphinx build altogether, and let Sphinx handle everything, via
+extensions if necessary.
+
+BR,
+Jani.
+
+
+[1] https://github.com/sphinx-doc/sphinx/issues/6714#issuecomment-1848975385
+[2] https://github.com/sphinx-doc/sphinx/issues/2946
+
+>
+> This patch was done while working on reproducible builds for openSUSE,
+> sponsored by the NLnet NGI0 fund.
+>
+> Signed-off-by: Bernhard M. Wiedemann <bwiedemann@suse.de>
+> ---
+>  Documentation/sphinx/parallel-wrapper.sh | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/Documentation/sphinx/parallel-wrapper.sh b/Documentation/sphinx/parallel-wrapper.sh
+> index e54c44ce117d..cb93626bd86e 100644
+> --- a/Documentation/sphinx/parallel-wrapper.sh
+> +++ b/Documentation/sphinx/parallel-wrapper.sh
+> @@ -10,6 +10,9 @@ sphinx="$1"
+>  shift || true
+>  
+>  parallel="$PARALLELISM"
+> +# Because of issues in Sphinx(https://github.com/sphinx-doc/sphinx/issues/6714)
+> +# we disable parallel doc generation to get deterministic build results
+> +parallel=1
+>  if [ -z "$parallel" ] ; then
+>  	# If no parallelism is specified at the top-level make, then
+>  	# fall back to the expected "-jauto" mode that the "htmldocs"
+
 -- 
-2.46.0
+Jani Nikula, Intel
 
