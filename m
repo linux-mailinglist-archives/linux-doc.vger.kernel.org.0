@@ -1,110 +1,193 @@
-Return-Path: <linux-doc+bounces-24622-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-24624-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 506B196E0D8
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Sep 2024 19:10:53 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C6FB96E0F1
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Sep 2024 19:15:47 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id BD1F6B242FC
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Sep 2024 17:10:50 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1E05D1F23C84
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Sep 2024 17:15:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F0921A257F;
-	Thu,  5 Sep 2024 17:10:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C7A213DDDF;
+	Thu,  5 Sep 2024 17:15:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b="XsUmZi5H"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout12.his.huawei.com (frasgout12.his.huawei.com [14.137.139.154])
+Received: from out162-62-58-211.mail.qq.com (out162-62-58-211.mail.qq.com [162.62.58.211])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 511C01A0B06;
-	Thu,  5 Sep 2024 17:10:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.154
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 208A8522F
+	for <linux-doc@vger.kernel.org>; Thu,  5 Sep 2024 17:15:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.62.58.211
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1725556238; cv=none; b=gE+0R40yZjshxn/opCc8pLsX2sW6BVfMOdcJOdpibOaglHhLmm/de4o/svPSEQyUGuZuOsHHnXU4MkeljKADMYWERosuFtvz19sxrJQL286vjuCJfMsBcMAovj4tI1JUtnHAMIgVPS+ZAA7CrdTXeIDZjb9tbMAfQso/xVTQ4EA=
+	t=1725556542; cv=none; b=PrdUTPs0mKO7FFn9V/hYNLLmgkOaDFSp/38TvC33CFaj1BQmraKgNOREdJKZJfSy58pNw1VHMyeCf7kJR4kB2ddjbYPYTDch5fieBe6Q2Ah+RP1ITqACO0HfVqE+IbulEIfE5TQaOkTUTCtMh9hpVE7SKWeMV/qqdXK2TtHqfNE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1725556238; c=relaxed/simple;
-	bh=txJaOor+9ZWaoWB3yu0QW4hZEAgJucHNaOLbH3vB1vE=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=e7SmJx46m2SqXmzFHBgKlbzxR65Y/yT51xxK2CRa9R6VJKtoqROwHTUI0JuIl6fTHcj8Pz5lGyzhFYOZMHvt5a1EKdCYDsc6JsnGRIwpfsMZOgNWXlAmOdLKaCzcRCl198vBvhXho6HfRZMOUtxpat8tX82bcLmkijJjK6a2Xzw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.154
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.18.186.29])
-	by frasgout12.his.huawei.com (SkyGuard) with ESMTP id 4X04wm4HLTz9v7Jf;
-	Fri,  6 Sep 2024 00:45:28 +0800 (CST)
-Received: from mail02.huawei.com (unknown [7.182.16.27])
-	by mail.maildlp.com (Postfix) with ESMTP id 772AF140FEB;
-	Fri,  6 Sep 2024 01:10:24 +0800 (CST)
-Received: from [127.0.0.1] (unknown [10.204.63.22])
-	by APP2 (Coremail) with SMTP id GxC2BwCH6cnv5dlmbH5WAA--.17402S2;
-	Thu, 05 Sep 2024 18:10:23 +0100 (CET)
-Message-ID: <0cd494edfc48232257753f870d9b88436bee25bc.camel@huaweicloud.com>
-Subject: Re: [PATCH v5 13/14] selftests/digest_cache: Add selftests for the
- Integrity Digest Cache
-From: Roberto Sassu <roberto.sassu@huaweicloud.com>
-To: Jeff Johnson <quic_jjohnson@quicinc.com>, zohar@linux.ibm.com, 
-	dmitry.kasatkin@gmail.com, eric.snowberg@oracle.com, corbet@lwn.net, 
-	akpm@linux-foundation.org, paul@paul-moore.com, jmorris@namei.org, 
-	serge@hallyn.com, shuah@kernel.org, mcoquelin.stm32@gmail.com, 
-	alexandre.torgue@foss.st.com
-Cc: linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, wufan@linux.microsoft.com,
- pbrobinson@gmail.com,  zbyszek@in.waw.pl, hch@lst.de, mjg59@srcf.ucam.org,
- pmatilai@redhat.com,  jannh@google.com, dhowells@redhat.com,
- jikos@kernel.org, mkoutny@suse.com,  ppavlu@suse.com, petr.vorel@gmail.com,
- mzerqung@0pointer.de, kgold@linux.ibm.com,  Roberto Sassu
- <roberto.sassu@huawei.com>
-Date: Thu, 05 Sep 2024 19:10:04 +0200
-In-Reply-To: <c6ac95bd-df49-4db7-8f5c-1281a9f95ecd@quicinc.com>
-References: <20240905150543.3766895-1-roberto.sassu@huaweicloud.com>
-	 <20240905150543.3766895-14-roberto.sassu@huaweicloud.com>
-	 <c6ac95bd-df49-4db7-8f5c-1281a9f95ecd@quicinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2 
+	s=arc-20240116; t=1725556542; c=relaxed/simple;
+	bh=b3J0zmDqUTroBSZmui7RtRtrLz5VtHqzff2jtxVhDnk=;
+	h=Message-ID:Content-Type:Mime-Version:Subject:From:In-Reply-To:
+	 Date:Cc:References:To; b=Uj2C1UQ4NiTNbaElWguBowQSgf36dKw4/bFbOPqF91PyOMzJIxHqsZopWqAOfnpiqjgH6mU89oG6+OtF+0+x86ViuikHDzBAC6F19zzQ5SQmWQ+sv/GEids3t+TG6p6rF1SwL9LtgQnUMdy27nb/YpvE5plqTOvOG+rXLNBnz1A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=cyyself.name; spf=none smtp.mailfrom=cyyself.name; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=XsUmZi5H; arc=none smtp.client-ip=162.62.58.211
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=cyyself.name
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=cyyself.name
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1725556518; bh=IdmLzzE4Y30s9YeYCM0UVuwavqz/aTp5LLdmTh4K8f0=;
+	h=Subject:From:In-Reply-To:Date:Cc:References:To;
+	b=XsUmZi5HPqQjER2B98kOFc2PPfFs8IGDZYwGuoonrTzf9KFuX8IJjXUIxr8wTFikf
+	 5f366F/4LO6GWGn1TbgtVF+juAFuzy1Mg+1iDo7z9qu1SxNdiVwQ+tP2PccyjRCqaI
+	 oxL4xwV5gzqX76ew2bykD20WrZw/Pf7UWpCQla2M=
+Received: from smtpclient.apple ([2001:da8:c800:d084:a0ed:5d47:36ee:f762])
+	by newxmesmtplogicsvrszc19-0.qq.com (NewEsmtp) with SMTP
+	id 3CF3FE5C; Fri, 06 Sep 2024 01:15:15 +0800
+X-QQ-mid: xmsmtpt1725556515tl5azvo8d
+Message-ID: <tencent_B49BC6F11F5737662664B35196CF50904805@qq.com>
+X-QQ-XMAILINFO: ODdZrkDuTlAgtf9EojIpmtCpfUBNWoLW0j3WAfyUMzA3bmwJ7yeQCYEc7UNFBn
+	 dgh4i/ubTQJldg/Ixe82HlksCUKuP6ZB9TbSRJBKn41i3yBB2sRE7UvmO3YIC1QadIh8rIj/U8Ob
+	 xH7bwli6OntCsqeLXERo7Y0XmcVZVpp1clpxOMdhqTinb81fAts36L1vK8A+E7h2Mf5Hldqx5cw1
+	 Yh1mPCbyW5t+OXe9JQuZiQHaBL5Tgi+M8fqLuqsqpn2IOD6+uiIq3lfhyh4XjmrrH7DdlZ6Jzkib
+	 kVJz16UBYU8LzQHK1p4nAPJrBTi7vHY4UZNzZ/5grKw7LomY+65wIzlpDI+bKGJqB9A6tjY/U24G
+	 QkI6/AcMcoh1NoUKktLykS5V1O7JTc72+tHKbZhrP2UpPXaWITkdAhdVW1HGgAG+kXTlZpcvLh/Y
+	 8cpdW+BsQI0yAsgApBmRlPDdPDE/ZrbPs8dicFV9WM8cZwe9x48K/ZBKXKCTqVxqnOiKqXEyz72l
+	 ZCEhLxim4Nn/TV4mxzfNuiu+Da5NUfHJ3+w2yPm9qk1A0127lY/g/Pk0kL08DiDn5mQz8jdY4tdl
+	 8bs9yiNxXxzyqzwRNBOts1bSTKhyPoDOSDVpGRR0It1732B7jTZvZ2ZxB1/b9c4pMZfX7vuXSQNw
+	 2UuHfqJH6fhYR7CUn72aJtd8RIZR+2YbwsI8lZvt2dvJrJ8nuuBMZgHjqN+0CmzCFrkTU1irKZNm
+	 2Meayw7xkV0dXhvVEmvLrzv375PBa8l7NAjRa9C0wnDMGPMWduh8lpGneRF0E3V/nNOj6vCaALJk
+	 B8AEFCvseA/R67BkrBlCzy7HjhoKhEzOzq2YodvvCsYqH6lgwH2nzVcn5Zkr2R5wXd2D71Zlq/yF
+	 ow3eN1KFSzysK54VOaYlROVEN801XV85jm9ownawFqEtQ1NDGDvayh16w3Ot3KgCCu8Y8Wy4ZdBv
+	 qxg4sXU4K+3FSYX4TYO/9OJF01ZzV4O6nmyo/XVJzdPzuwYjBm9/mYtXGswYJ1suUI3Ztp28A=
+X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
+Content-Type: text/plain;
+	charset=us-ascii
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-X-CM-TRANSID:GxC2BwCH6cnv5dlmbH5WAA--.17402S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrKF43Jw4kXrykuF13tryrZwb_yoWxCwbEgw
-	4vvryfC3y3ZF129a1jyas8JFy2ga1vgw1Yqr1kJF95XryfA39IkrWkK3sIvw18Cw4ftF93
-	AayDAwnxtr1SvjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUIcSsGvfJTRUUUbxxYFVCjjxCrM7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20E
-	Y4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwV
-	A0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8IcVCY1x02
-	67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26F4j6r4UJwA2z4x0Y4vEx4A2jsIEc7CjxV
-	AFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2
-	j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7x
-	kEbVWUJVW8JwACjcxG0xvEwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY1x0262kKe7AK
-	xVW8ZVWrXwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
-	0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Wrv_Gr1U
-	MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
-	0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWx
-	JVW8Jr1lIxAIcVC2z280aVCY1x0267AKxVW0oVCq3bIYCTnIWIevJa73UjIFyTuYvjxUsB
-	HqDUUUU
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAgARBGbZE-oL1gACse
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3776.700.51\))
+Subject: Re: [PATCH 3/3] riscv: mm: Do not restrict mmap address based on hint
+From: Yangyu Chen <cyy@cyyself.name>
+In-Reply-To: <mhng-ad0c8c3b-568a-484d-bc3d-49b56a11dcd6@palmer-ri-x1c9>
+Date: Fri, 6 Sep 2024 01:15:04 +0800
+Cc: Charlie Jenkins <charlie@rivosinc.com>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Paul Walmsley <paul.walmsley@sifive.com>,
+ Albert Ou <aou@eecs.berkeley.edu>,
+ Shuah Khan <shuah@kernel.org>,
+ Levi Zim <rsworktech@outlook.com>,
+ Alexandre Ghiti <alexghiti@rivosinc.com>,
+ linux-doc@vger.kernel.org,
+ linux-riscv@lists.infradead.org,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ linux-kselftest@vger.kernel.org
+Content-Transfer-Encoding: quoted-printable
+X-OQ-MSGID: <AFED66DE-BE37-467B-A7FD-BF6D530CE0D3@cyyself.name>
+References: <mhng-ad0c8c3b-568a-484d-bc3d-49b56a11dcd6@palmer-ri-x1c9>
+To: Palmer Dabbelt <palmer@rivosinc.com>
+X-Mailer: Apple Mail (2.3776.700.51)
 
-On Thu, 2024-09-05 at 10:02 -0700, Jeff Johnson wrote:
-> On 9/5/24 08:05, Roberto Sassu wrote:
-> ...
-> > +module_init(digest_cache_test_init);
-> > +module_exit(digest_cache_test_fini);
-> > +MODULE_LICENSE("GPL");
+
+
+> On Sep 3, 2024, at 22:27, Palmer Dabbelt <palmer@rivosinc.com> wrote:
 >=20
-> Missing MODULE_DESCRIPTION()
+> On Mon, 26 Aug 2024 19:24:38 PDT (-0700), cyy@cyyself.name wrote:
+>>=20
+>>=20
+>>> On Aug 27, 2024, at 00:36, Charlie Jenkins <charlie@rivosinc.com> =
+wrote:
+>>> The hint address should not forcefully restrict the addresses =
+returned
+>>> by mmap as this causes mmap to report ENOMEM when there is memory =
+still
+>>> available.
+>>=20
+>> Fixing in this way will break userspace on Sv57 machines as some
+>> issues mentioned in the patch [1].
+>>=20
+>> I suggest restricting to BIT(47) by default, like patch [2], to
+>> align with kernel behavior on x86 and aarch64, and this does exist
+>> on x86 and aarch64 for quite a long time. In that way, we will also
+>> solve the problem mentioned in the first patch [1], as QEMU enables
+>> Sv57 by default now and will not break userspace.
+>>=20
+>> [1] =
+https://lore.kernel.org/linux-riscv/20230809232218.849726-1-charlie@rivosi=
+nc.com/
+>> [2] =
+https://lore.kernel.org/linux-riscv/tencent_B2D0435BC011135736262764B51199=
+4F4805@qq.com/
 >=20
-> Since commit 1fffe7a34c89 ("script: modpost: emit a warning when the
-> description is missing"), a module without a MODULE_DESCRIPTION() will
-> result in a warning when built with make W=3D1. Recently, multiple
-> developers have been eradicating these warnings treewide, and very few
-> are left, so please don't introduce a new one :)
+> I'm going to pick this up as it's a revert and a bug fix, so we can =
+backport it.  If the right answer is to just forget about the sv39 =
+userspace and only worry about sv48 userspace then your patches are =
+likely the way to go,
 
-Argh, thanks for the reminder! You mentioned in the PGP patch set.
+I think we don't need to care about restricting to sv39 now since
+the ASAN bug has been fixed. We should care about what to do to not
+break userspace on sv57 machines as QEMU enables sv57 by default,
+which is widely used.
 
-Roberto
+> but there's a handful of discussions around that which might take a =
+bit.
+>=20
+>>=20
+>> Thanks,
+>> Yangyu Chen
+>>=20
+>>> Signed-off-by: Charlie Jenkins <charlie@rivosinc.com>
+>>> Fixes: b5b4287accd7 ("riscv: mm: Use hint address in mmap if =
+available")
+>>> Fixes: add2cc6b6515 ("RISC-V: mm: Restrict address space for =
+sv39,sv48,sv57")
+>>> Closes: =
+https://lore.kernel.org/linux-kernel/ZbxTNjQPFKBatMq+@ghost/T/#mccb1890466=
+bf5a488c9ce7441e57e42271895765
+>>> ---
+>>> arch/riscv/include/asm/processor.h | 26 ++------------------------
+>>> 1 file changed, 2 insertions(+), 24 deletions(-)
+>>> diff --git a/arch/riscv/include/asm/processor.h =
+b/arch/riscv/include/asm/processor.h
+>>> index 8702b8721a27..efa1b3519b23 100644
+>>> --- a/arch/riscv/include/asm/processor.h
+>>> +++ b/arch/riscv/include/asm/processor.h
+>>> @@ -14,36 +14,14 @@
+>>> #include <asm/ptrace.h>
+>>> -/*
+>>> - * addr is a hint to the maximum userspace address that mmap should =
+provide, so
+>>> - * this macro needs to return the largest address space available =
+so that
+>>> - * mmap_end < addr, being mmap_end the top of that address space.
+>>> - * See Documentation/arch/riscv/vm-layout.rst for more details.
+>>> - */
+>>> #define arch_get_mmap_end(addr, len, flags) \
+>>> ({ \
+>>> - unsigned long mmap_end; \
+>>> - typeof(addr) _addr =3D (addr); \
+>>> - if ((_addr) =3D=3D 0 || is_compat_task() || \
+>>> -    ((_addr + len) > BIT(VA_BITS - 1))) \
+>>> - mmap_end =3D STACK_TOP_MAX; \
+>>> - else \
+>>> - mmap_end =3D (_addr + len); \
+>>> - mmap_end; \
+>>> + STACK_TOP_MAX; \
+>>> })
+>>> #define arch_get_mmap_base(addr, base) \
+>>> ({ \
+>>> - unsigned long mmap_base; \
+>>> - typeof(addr) _addr =3D (addr); \
+>>> - typeof(base) _base =3D (base); \
+>>> - unsigned long rnd_gap =3D DEFAULT_MAP_WINDOW - (_base); \
+>>> - if ((_addr) =3D=3D 0 || is_compat_task() || \
+>>> -    ((_addr + len) > BIT(VA_BITS - 1))) \
+>>> - mmap_base =3D (_base); \
+>>> - else \
+>>> - mmap_base =3D (_addr + len) - rnd_gap; \
+>>> - mmap_base; \
+>>> + base; \
+>>> })
+>>> #ifdef CONFIG_64BIT
+>>> --=20
+>>> 2.45.0
 
 
