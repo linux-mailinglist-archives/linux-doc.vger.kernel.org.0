@@ -1,64 +1,62 @@
-Return-Path: <linux-doc+bounces-24716-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-24714-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEDBF96FBB2
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Sep 2024 20:59:42 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 72AD396FBA9
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Sep 2024 20:59:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7E07928A689
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Sep 2024 18:59:41 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3090D283303
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Sep 2024 18:59:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F291913D508;
-	Fri,  6 Sep 2024 18:59:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 825CD13C3F2;
+	Fri,  6 Sep 2024 18:58:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="prk3V34/"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="fOzH+ew4"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 717403398E;
-	Fri,  6 Sep 2024 18:59:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D496582499
+	for <linux-doc@vger.kernel.org>; Fri,  6 Sep 2024 18:58:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1725649170; cv=none; b=OYUALJs0uPLvkDkDqztbDLejLm2VaxAiYbPMlErGYt+vtVUQSulwVasM+uNATx2fcZPOX3k4rDkAoduzsB2wRP1biIGo/EVI0A0dwW2cTK5IGup91YNBQgeoWWu+zG6zBQjec5Q3miJ6R2o8i0z/KtmsV14FiQDWAHnQXttGbHw=
+	t=1725649099; cv=none; b=TiBUKpMoJQER7ttKexrS4l4BI+vMmBtaOF79XhcNBORGZEoFLoFBR0VDuajnQkVmYa2lepvC98qm+solw8a7WaT89C8oU9hejOBpFP0+kFQcvS/LcWaONhD6VoXSSV62KrflC+wOHaVrPDv8pFrgW+Ye8I4WUorxVwqJiflmDi8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1725649170; c=relaxed/simple;
-	bh=FeFiU2RQCm12lf/G35s+LptqEV/4ZnlRsXE2aVu6Mm4=;
+	s=arc-20240116; t=1725649099; c=relaxed/simple;
+	bh=+GJGIsf/GNmqEh/LCJBCHrAWzcC3VoN9mLZ6HvjumGA=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=Cm6H5b2I5VDkcNJUl99caWF2tjv9JRU+j3zs8I/re0vE554Z/rTIuyPJNBWr7taxij0KTKOlsgRg1kod59Y0QF9dOJKYBvPbZnDaWeADsB0hZy+udYrBJlamH0yvQbgB6aMSrcMVcpKZS6GynbgUrJZfh25ODQvWMVOT38j9hVU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=prk3V34/; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=l3UaqGJtri0nAlWXme83ICSNasUPAkW/M2XkWGfXoq5fQQ8asXEWASzl4mffdsQtuKBe4KrMZMaYC7rCvd1/mZoGcbbxzHTboFLzHf6agw8Tbp6K93ES8yDz0lqMFlo4+Ymmtvmwm+yDkjZltkDtP+ChO1cRTY3rZOffQ5xVWTw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=fOzH+ew4; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net CDF1942B32
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net E0E9F42B35
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1725648800; bh=lx6igYfktFv/HLabqfYLn2bMTPo2JbeZaHvnRymqUx0=;
+	t=1725649095; bh=EPkIjVYkyDGeKm7wBvSFb6h5SitylDSarmkLEZaW9Rs=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=prk3V34/u2gYj/HwnfH+S5t85S6+9fVc543BQj2sSZh3vz2K9CYLdr5FKUCYjRU45
-	 zfK7N5r/ZfpogcNNpQNs2PnTgQ2AUCYiBVPhLXJ//3Z2f+b/r08Zn38AQ2zRP6F2qY
-	 NEl7rxRy1XNhpRVMH7sYPEoTwX0cVUZMe6YNT9QcJelYY+w83RwkHmPVP+ddYnX8mu
-	 QKtqahiN2x75gxmzwF3IJ9MefYHt5YO6Rb3UDvxZUWbKyw/hcl09R0uCpkuF9jWhnj
-	 mAeLzX5wD11X0DGMcoIGm17TNpodzMF7wDOhOy0fb6o2r5nklHZJmcJTYARrNb6gqs
-	 DN073ZKLgwynw==
+	b=fOzH+ew48NNQcFbqStrx6ULYuBDFPvWWWoce9ZW3hBRyrojRMaAvYayfoBgQLDF0t
+	 WHo7Wq/80r4xlQooiLcSGnuGO4KVkymBVe8MugJgxdiryFWEHUByY6eBld5NjRbJRS
+	 MYfe26Xdk0pVABs2v7DtoNAx6zx5CNZ1VagnCmBtLGvG1AUzVs3GV7j4eXYm13Nt2t
+	 WsfNQOc7umweg8vXesyUISoDqGmB4wgn84ZJyMagPs7AGOic3SqKIPQ3YZbgiYHqnN
+	 +SxGiq/0AmuyD4DYIusI8r466vaJP/XO8GHIblzrMazlLHLKZ/Wvk2hWr+vC72SSIg
+	 vO1sG5s7E/rvQ==
 Received: from localhost (c-24-9-249-71.hsd1.co.comcast.net [24.9.249.71])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id CDF1942B32;
-	Fri,  6 Sep 2024 18:53:19 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id E0E9F42B35;
+	Fri,  6 Sep 2024 18:58:14 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Abdul Rahim <abdul.rahim@myyahoo.com>, Bjorn Helgaas <helgaas@kernel.org>
-Cc: bhelgaas@google.com, linux-kernel@vger.kernel.org,
- linux-pci@vger.kernel.org, linux-doc@vger.kernel.org,
- abdul.rahim@myyahoo.com
-Subject: Re: [PATCH] PCI: Fixed spelling in Documentation/PCI/pci.rst
-In-Reply-To: <i432epqedna43bnow5twmm7bdf7dlms54kt5xjewalf5koamks@6kn4bx5lrubz>
-References: <20240906124518.10308-1-abdul.rahim@myyahoo.com>
- <20240906164152.GA424952@bhelgaas>
- <i432epqedna43bnow5twmm7bdf7dlms54kt5xjewalf5koamks@6kn4bx5lrubz>
-Date: Fri, 06 Sep 2024 12:53:18 -0600
-Message-ID: <87cylgehr5.fsf@trenco.lwn.net>
+To: Akira Yokosawa <akiyks@gmail.com>
+Cc: linux-doc@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>
+Subject: Re: [PATCH] docs: kerneldoc-preamble.sty: Suppress extra spaces in
+ CJK literal blocks
+In-Reply-To: <bb98d966-8c3f-4351-84ae-961c7776bd8f@gmail.com>
+References: <20240905050941.31439-1-akiyks@gmail.com>
+ <bb98d966-8c3f-4351-84ae-961c7776bd8f@gmail.com>
+Date: Fri, 06 Sep 2024 12:58:13 -0600
+Message-ID: <878qw4ehiy.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -67,41 +65,21 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Abdul Rahim <abdul.rahim@myyahoo.com> writes:
+Akira Yokosawa <akiyks@gmail.com> writes:
 
-> On Fri, Sep 06, 2024 at 11:41:52AM GMT, Bjorn Helgaas wrote:
->> On Fri, Sep 06, 2024 at 06:15:18PM +0530, Abdul Rahim wrote:
->> > Fixed spelling and edited for clarity.
->> > 
->> > Signed-off-by: Abdul Rahim <abdul.rahim@myyahoo.com>
->> > ---
->> >  Documentation/PCI/pci.rst | 2 +-
->> >  1 file changed, 1 insertion(+), 1 deletion(-)
->> > 
->> > diff --git a/Documentation/PCI/pci.rst b/Documentation/PCI/pci.rst
->> > index dd7b1c0c21da..344c2c2d94f9 100644
->> > --- a/Documentation/PCI/pci.rst
->> > +++ b/Documentation/PCI/pci.rst
->> > @@ -52,7 +52,7 @@ driver generally needs to perform the following initialization:
->> >    - Enable DMA/processing engines
->> >  
->> >  When done using the device, and perhaps the module needs to be unloaded,
->> > -the driver needs to take the follow steps:
->> > +the driver needs to perform the following steps:
->> 
->> I don't see a spelling fix here, and personally I wouldn't bother with
->> changing "take" to "perform" unless we have other more significant
->> changes to make at the same time.
+> On Thu,  5 Sep 2024 14:09:41 +0900, Akira Yokosawa wrote:
+>> Note for Jon:
+>>   Current docs-next won't complete full "make htmldocs".
 >
-> - "follow" has been corrected to "following", which is more appriopriate
-> in this context.
-> - I know its trivial, but can disturb the readers flow
-> - do you want me to change the message to "Edited for clarity"
+> Oh well...
+> I made a typo here, I wanted to say       "make pdfdocs"
+>
+> Jon, looks like it affected the change log of the back merge.
+>
+> Is it too late to amend it?
 
-The problem is not s/follow/following/, it is the other, unrelated
-change you made that does not improve the text.  There are reasons why
-we ask people not to mix multiple changes.  If you submit just the
-"following" fix, it will surely be applied.
+I'd have to rebase the tree, which I prefer to avoid when I can.  And it
+*did* create troubles for the htmldocs build too...:)
 
 Thanks,
 
