@@ -1,328 +1,92 @@
-Return-Path: <linux-doc+bounces-24779-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-24781-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABB2E970D92
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Sep 2024 07:46:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0562971053
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Sep 2024 09:53:00 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 35B2D282818
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Sep 2024 05:46:58 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id AC9D12830EF
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Sep 2024 07:52:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E0C0B1B1D49;
-	Mon,  9 Sep 2024 05:43:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4035A1B1409;
+	Mon,  9 Sep 2024 07:52:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="zyzNRDE7"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ThRjNgdf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f202.google.com (mail-pg1-f202.google.com [209.85.215.202])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 784F21B1412
-	for <linux-doc@vger.kernel.org>; Mon,  9 Sep 2024 05:43:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.202
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0875A1AF4DC;
+	Mon,  9 Sep 2024 07:52:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1725860634; cv=none; b=k2b1fXZxgWPe49HLwApAsVstqeoKSbS1iSv2s6glxnW0kbmrI4fRXfMfi2KxeZCVQC8zs+PEiY/KXO14HgeInhKIsfIYyp97jASFYwjSvB5I1T7v0UTWnrALznMCNO3fbfzahJWroqIrhB/cLlGg861J/MhGhGmeOmmdR5qXqAo=
+	t=1725868368; cv=none; b=baHKIOYopIogjQASMFZSJA5q3bfdiRt5/qmN9FLifDgNi0H5NIvOPZGX150r4LwLZtHbGjWJJocePPG24J6coyTLsNEfrPEQxq8TP9oiR/Dnqc09UBXWSjbKa3vJyQPyxqQKxffZ6XJY+WFRKlhD10SoRl9HweA3wCbKZ0nGdG8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1725860634; c=relaxed/simple;
-	bh=PJB8MnDkY64lJweDrjdNdgxrCAth9X9p/HaOyMbjVAA=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=VhzKoRRayhytYRUPuQyZltyqki2suwJO7Qd6fGRyG6Xo3zu+L5LAFSUyEpDXQO5ScMfB3M97vtTuooONhRAYr15Mmb2aQT3sy+bzHPqg1usJWeZM4AqQFMzrqzou3k1oRKfYggjdZxXVQfvty1U9EGVY2JEMD2UdNw3D6pTSoS0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--almasrymina.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=zyzNRDE7; arc=none smtp.client-ip=209.85.215.202
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--almasrymina.bounces.google.com
-Received: by mail-pg1-f202.google.com with SMTP id 41be03b00d2f7-7d5a54dcaefso2566673a12.2
-        for <linux-doc@vger.kernel.org>; Sun, 08 Sep 2024 22:43:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1725860627; x=1726465427; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=WTSeEQvvLz7JMkJB8rY34SUA6KPOOIDr3cyazlDccxw=;
-        b=zyzNRDE7xjpLtYQFTF8vVtOy13ywuAy6CDiVYTdTMVn9pS95jYAedOpFKpp56FfYj2
-         tcg3cEjVpZckSULwcYPb2E1HxPNGWuT3hTfPjN22Wc0h0ceLD2SUvNlPPYyo17fNGcIn
-         QJsNl3YCC79wN+S5Fjt9cBuNL5hCsd6YJVRK2FNZForQ+IsFnWt2nPviAtTRFSWGP9OJ
-         h4ur3DUN3+RhWOr8jbAUcF0yW07ST576k7NBMQ8QEgS1VNKu5Cv5MCESYtaHy8IV3VUq
-         p1Pcwpz9TLr2IJUKBAtA6uJZ6dRt8fwMVJI86q0FgH9StPmYWmpmX9vaJ9Dww9UImF1Z
-         AXvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725860627; x=1726465427;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=WTSeEQvvLz7JMkJB8rY34SUA6KPOOIDr3cyazlDccxw=;
-        b=ARq1ZkJjPREq9XJUf5JnaJuId3ZL/3WTUcVtQSpXtdasH6BitaAVXOAOhYTIhvuiHt
-         iAMYygRFM6qISOWXRRXdNrHN1tyjqAvaxvG/xhvdDy2Kr3qi+3Bolt1D1NggvSXKO6KB
-         tP2fHbWJBoKJvT/OFC1XkY+YnNmK1seUvp1o7t6W7YR6x+W6Z12hAG4jV0IpR7dKv666
-         AZf2IJF84O/JDksoN4dW3c/yR7Ow36cxTak/aGBF56lzzNESrd+51oMMda4Yft3RVs4u
-         AIa7RHNdwTuJflW80ETfymGvTVT1c+nKVZSgj2UzVNirw/wvPNBNkHWKX7nu8GBLm9lG
-         +Whw==
-X-Forwarded-Encrypted: i=1; AJvYcCXHwMh7MNtyQfKvMNrU5LbkzYmkotWzA90pazNyvjmw10J05oGpPD3lMnOPww+vtm1HGEpCblM11+U=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw3ocCa9k+QTj/M0QAzmEKi/GJgPglMY+h4XhQLcdjrjLy8hMP3
-	GRXd3YHamHpQv0lV0M2EBLpv0RSen+sZWqDekA7YNXxuarPxHpTqt1DQdZzbc8BVi0yohy3LVZp
-	caySKfqUVH2xG4CPPVQui6w==
-X-Google-Smtp-Source: AGHT+IFlawdC4KCQfLhqI0Xy7yk4ED2go+LFfUpiqb3BRrNWwO5I+1bNuk03iJCYZid8NNj/xbpv1Yi7TsuSmuqPKg==
-X-Received: from almasrymina.c.googlers.com ([fda3:e722:ac3:cc00:20:ed76:c0a8:4bc5])
- (user=almasrymina job=sendgmr) by 2002:a63:3755:0:b0:6f3:b24:6c27 with SMTP
- id 41be03b00d2f7-7d79f6e5f59mr68139a12.5.1725860627260; Sun, 08 Sep 2024
- 22:43:47 -0700 (PDT)
-Date: Mon,  9 Sep 2024 05:43:18 +0000
-In-Reply-To: <20240909054318.1809580-1-almasrymina@google.com>
+	s=arc-20240116; t=1725868368; c=relaxed/simple;
+	bh=qOaesh/TAKQrrzKDplHaxB6/8unPc3QHMjB/XOYRlec=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=oBUOj1c2Vp1qmzxHoLe3N58p9Ir4WBt0M1wjaR9y7scQYZQx+J3Citmq0DGoTdVDdgI8zm0npaUAqYUpAKiW3Uu3WGC00ZTWsAYmdZJjOHqllBxot3QirBE/ifEyIHHEmm8EaO4erm5kbpJYkyWLsUDrI4ODhjAjKDekFtQWN+o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ThRjNgdf; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F9F2C4CEC5;
+	Mon,  9 Sep 2024 07:52:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1725868367;
+	bh=qOaesh/TAKQrrzKDplHaxB6/8unPc3QHMjB/XOYRlec=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=ThRjNgdfZsk/SqlPY4+gtwcBYkOWhvLjzicDqHP+hacZRi3wO6DkW1Bd5bCMwEfCz
+	 zl0Ukc4YGvII7kh871XU8j2OBKF6oPzYacXr23mXrp6g60PoYisGsmcd3dcx9QlTxy
+	 qZO7BFhr7p+ExjOOh/6xRBHT7eYbN6sFKow+Kcdbo4xqW3xu1VMiciWFZg2bwgIBjw
+	 8IkJ6c7mosalkDKHmdZGQ3ox2w3yWseHaN+2jf5bxysoyYJUUgpYh6i8aBKOLss7kJ
+	 Afpm61Z65OGWvb5WUF9Bn6RzE91tDcnvWJIeQzl5kK2eC0sncyoSWq50NBxkcBkJmk
+	 0PjoqB/TRx4nQ==
+From: Christian Brauner <brauner@kernel.org>
+To: Dennis Lam <dennis.lamerice@gmail.com>
+Cc: Christian Brauner <brauner@kernel.org>,
+	netfs@lists.linux.dev,
+	linux-fsdevel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	dhowells@redhat.com,
+	jlayton@kernel.org,
+	corbet@lwn.net
+Subject: Re: [PATCH] docs:filesystems: fix spelling and grammar mistakes on netfs library page
+Date: Mon,  9 Sep 2024 09:52:33 +0200
+Message-ID: <20240909-bebte-sonst-e4939ee628df@brauner>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240908192307.20733-3-dennis.lamerice@gmail.com>
+References: <20240908192307.20733-3-dennis.lamerice@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20240909054318.1809580-1-almasrymina@google.com>
-X-Mailer: git-send-email 2.46.0.469.g59c65b2a67-goog
-Message-ID: <20240909054318.1809580-14-almasrymina@google.com>
-Subject: [PATCH net-next v25 13/13] netdev: add dmabuf introspection
-From: Mina Almasry <almasrymina@google.com>
-To: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-alpha@vger.kernel.org, 
-	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org, 
-	sparclinux@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-arch@vger.kernel.org, bpf@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, linux-media@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org
-Cc: Mina Almasry <almasrymina@google.com>, Donald Hunter <donald.hunter@gmail.com>, 
-	Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Richard Henderson <richard.henderson@linaro.org>, 
-	Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Matt Turner <mattst88@gmail.com>, 
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Helge Deller <deller@gmx.de>, 
-	Andreas Larsson <andreas@gaisler.com>, Jesper Dangaard Brouer <hawk@kernel.org>, 
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Arnd Bergmann <arnd@arndb.de>, Steffen Klassert <steffen.klassert@secunet.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, David Ahern <dsahern@kernel.org>, 
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
-	"=?UTF-8?q?Bj=C3=B6rn=20T=C3=B6pel?=" <bjorn@kernel.org>, Magnus Karlsson <magnus.karlsson@intel.com>, 
-	Maciej Fijalkowski <maciej.fijalkowski@intel.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, 
-	Shuah Khan <shuah@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
-	Daniel Borkmann <daniel@iogearbox.net>, John Fastabend <john.fastabend@gmail.com>, 
-	Sumit Semwal <sumit.semwal@linaro.org>, 
-	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>, Pavel Begunkov <asml.silence@gmail.com>, 
-	David Wei <dw@davidwei.uk>, Jason Gunthorpe <jgg@ziepe.ca>, Yunsheng Lin <linyunsheng@huawei.com>, 
-	Shailend Chand <shailend@google.com>, Harshitha Ramamurthy <hramamurthy@google.com>, 
-	Shakeel Butt <shakeel.butt@linux.dev>, Jeroen de Borst <jeroendb@google.com>, 
-	Praveen Kaligineedi <pkaligineedi@google.com>, Bagas Sanjaya <bagasdotme@gmail.com>, 
-	Christoph Hellwig <hch@infradead.org>, Nikolay Aleksandrov <razor@blackwall.org>, Taehee Yoo <ap420073@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=849; i=brauner@kernel.org; h=from:subject:message-id; bh=qOaesh/TAKQrrzKDplHaxB6/8unPc3QHMjB/XOYRlec=; b=owGbwMvMwCU28Zj0gdSKO4sYT6slMaTdW+m+9s36Gd5hDvM32Ezes1pbk/Py1yi3vgMWWiu4Q 2f0b7Ob2VHKwiDGxSArpsji0G4SLrecp2KzUaYGzBxWJpAhDFycAjCRWdMY/oc1yvLvr4lOYjDk 0jd9kXDl6Tvu1qvuqT7TJv8VPFy6IJnhr9Brx93r6s/HFLcuCDu/re9nhErV3OPmMu9fefxOcdD s5gcA
+X-Developer-Key: i=brauner@kernel.org; a=openpgp; fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
+Content-Transfer-Encoding: 8bit
 
-Add dmabuf information to page_pool stats:
+On Sun, 08 Sep 2024 15:23:09 -0400, Dennis Lam wrote:
+> 
 
-$ ./cli.py --spec ../netlink/specs/netdev.yaml --dump page-pool-get
-...
- {'dmabuf': 10,
-  'id': 456,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 455,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 454,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 453,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 452,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 451,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 450,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
- {'dmabuf': 10,
-  'id': 449,
-  'ifindex': 3,
-  'inflight': 1023,
-  'inflight-mem': 4190208},
 
-And queue stats:
+Applied to the vfs.netfs branch of the vfs/vfs.git tree.
+Patches in the vfs.netfs branch should appear in linux-next soon.
 
-$ ./cli.py --spec ../netlink/specs/netdev.yaml --dump queue-get
-...
-{'dmabuf': 10, 'id': 8, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 9, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 10, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 11, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 12, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 13, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 14, 'ifindex': 3, 'type': 'rx'},
-{'dmabuf': 10, 'id': 15, 'ifindex': 3, 'type': 'rx'},
+Please report any outstanding bugs that were missed during review in a
+new review to the original patch series allowing us to drop it.
 
-Suggested-by: Jakub Kicinski <kuba@kernel.org>
-Signed-off-by: Mina Almasry <almasrymina@google.com>
-Reviewed-by: Jakub Kicinski <kuba@kernel.org>
+It's encouraged to provide Acked-bys and Reviewed-bys even though the
+patch has now been applied. If possible patch trailers will be updated.
 
----
+Note that commit hashes shown below are subject to change due to rebase,
+trailer updates or similar. If in doubt, please check the listed branch.
 
-v24:
-- Code cleanup, no cast and use 1 if statement (Jakub)
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
+branch: vfs.netfs
 
----
- Documentation/netlink/specs/netdev.yaml | 10 ++++++++++
- include/uapi/linux/netdev.h             |  2 ++
- net/core/netdev-genl.c                  |  7 +++++++
- net/core/page_pool_user.c               |  5 +++++
- tools/include/uapi/linux/netdev.h       |  2 ++
- 5 files changed, 26 insertions(+)
-
-diff --git a/Documentation/netlink/specs/netdev.yaml b/Documentation/netlink/specs/netdev.yaml
-index 0c747530c275..08412c279297 100644
---- a/Documentation/netlink/specs/netdev.yaml
-+++ b/Documentation/netlink/specs/netdev.yaml
-@@ -167,6 +167,10 @@ attribute-sets:
-           "re-attached", they are just waiting to disappear.
-           Attribute is absent if Page Pool has not been detached, and
-           can still be used to allocate new memory.
-+      -
-+        name: dmabuf
-+        doc: ID of the dmabuf this page-pool is attached to.
-+        type: u32
-   -
-     name: page-pool-info
-     subset-of: page-pool
-@@ -268,6 +272,10 @@ attribute-sets:
-         name: napi-id
-         doc: ID of the NAPI instance which services this queue.
-         type: u32
-+      -
-+        name: dmabuf
-+        doc: ID of the dmabuf attached to this queue, if any.
-+        type: u32
- 
-   -
-     name: qstats
-@@ -543,6 +551,7 @@ operations:
-             - inflight
-             - inflight-mem
-             - detach-time
-+            - dmabuf
-       dump:
-         reply: *pp-reply
-       config-cond: page-pool
-@@ -607,6 +616,7 @@ operations:
-             - type
-             - napi-id
-             - ifindex
-+            - dmabuf
-       dump:
-         request:
-           attributes:
-diff --git a/include/uapi/linux/netdev.h b/include/uapi/linux/netdev.h
-index 91bf3ecc5f1d..7c308f04e7a0 100644
---- a/include/uapi/linux/netdev.h
-+++ b/include/uapi/linux/netdev.h
-@@ -93,6 +93,7 @@ enum {
- 	NETDEV_A_PAGE_POOL_INFLIGHT,
- 	NETDEV_A_PAGE_POOL_INFLIGHT_MEM,
- 	NETDEV_A_PAGE_POOL_DETACH_TIME,
-+	NETDEV_A_PAGE_POOL_DMABUF,
- 
- 	__NETDEV_A_PAGE_POOL_MAX,
- 	NETDEV_A_PAGE_POOL_MAX = (__NETDEV_A_PAGE_POOL_MAX - 1)
-@@ -131,6 +132,7 @@ enum {
- 	NETDEV_A_QUEUE_IFINDEX,
- 	NETDEV_A_QUEUE_TYPE,
- 	NETDEV_A_QUEUE_NAPI_ID,
-+	NETDEV_A_QUEUE_DMABUF,
- 
- 	__NETDEV_A_QUEUE_MAX,
- 	NETDEV_A_QUEUE_MAX = (__NETDEV_A_QUEUE_MAX - 1)
-diff --git a/net/core/netdev-genl.c b/net/core/netdev-genl.c
-index 9153a8ab0cf8..1cb954f2d39e 100644
---- a/net/core/netdev-genl.c
-+++ b/net/core/netdev-genl.c
-@@ -295,6 +295,7 @@ static int
- netdev_nl_queue_fill_one(struct sk_buff *rsp, struct net_device *netdev,
- 			 u32 q_idx, u32 q_type, const struct genl_info *info)
- {
-+	struct net_devmem_dmabuf_binding *binding;
- 	struct netdev_rx_queue *rxq;
- 	struct netdev_queue *txq;
- 	void *hdr;
-@@ -314,6 +315,12 @@ netdev_nl_queue_fill_one(struct sk_buff *rsp, struct net_device *netdev,
- 		if (rxq->napi && nla_put_u32(rsp, NETDEV_A_QUEUE_NAPI_ID,
- 					     rxq->napi->napi_id))
- 			goto nla_put_failure;
-+
-+		binding = rxq->mp_params.mp_priv;
-+		if (binding &&
-+		    nla_put_u32(rsp, NETDEV_A_QUEUE_DMABUF, binding->id))
-+			goto nla_put_failure;
-+
- 		break;
- 	case NETDEV_QUEUE_TYPE_TX:
- 		txq = netdev_get_tx_queue(netdev, q_idx);
-diff --git a/net/core/page_pool_user.c b/net/core/page_pool_user.c
-index cd6267ba6fa3..48335766c1bf 100644
---- a/net/core/page_pool_user.c
-+++ b/net/core/page_pool_user.c
-@@ -9,6 +9,7 @@
- #include <net/page_pool/types.h>
- #include <net/sock.h>
- 
-+#include "devmem.h"
- #include "page_pool_priv.h"
- #include "netdev-genl-gen.h"
- 
-@@ -213,6 +214,7 @@ static int
- page_pool_nl_fill(struct sk_buff *rsp, const struct page_pool *pool,
- 		  const struct genl_info *info)
- {
-+	struct net_devmem_dmabuf_binding *binding = pool->mp_priv;
- 	size_t inflight, refsz;
- 	void *hdr;
- 
-@@ -242,6 +244,9 @@ page_pool_nl_fill(struct sk_buff *rsp, const struct page_pool *pool,
- 			 pool->user.detach_time))
- 		goto err_cancel;
- 
-+	if (binding && nla_put_u32(rsp, NETDEV_A_PAGE_POOL_DMABUF, binding->id))
-+		goto err_cancel;
-+
- 	genlmsg_end(rsp, hdr);
- 
- 	return 0;
-diff --git a/tools/include/uapi/linux/netdev.h b/tools/include/uapi/linux/netdev.h
-index 91bf3ecc5f1d..7c308f04e7a0 100644
---- a/tools/include/uapi/linux/netdev.h
-+++ b/tools/include/uapi/linux/netdev.h
-@@ -93,6 +93,7 @@ enum {
- 	NETDEV_A_PAGE_POOL_INFLIGHT,
- 	NETDEV_A_PAGE_POOL_INFLIGHT_MEM,
- 	NETDEV_A_PAGE_POOL_DETACH_TIME,
-+	NETDEV_A_PAGE_POOL_DMABUF,
- 
- 	__NETDEV_A_PAGE_POOL_MAX,
- 	NETDEV_A_PAGE_POOL_MAX = (__NETDEV_A_PAGE_POOL_MAX - 1)
-@@ -131,6 +132,7 @@ enum {
- 	NETDEV_A_QUEUE_IFINDEX,
- 	NETDEV_A_QUEUE_TYPE,
- 	NETDEV_A_QUEUE_NAPI_ID,
-+	NETDEV_A_QUEUE_DMABUF,
- 
- 	__NETDEV_A_QUEUE_MAX,
- 	NETDEV_A_QUEUE_MAX = (__NETDEV_A_QUEUE_MAX - 1)
--- 
-2.46.0.469.g59c65b2a67-goog
-
+[1/1] docs:filesystems: fix spelling and grammar mistakes on netfs library page
+      https://git.kernel.org/vfs/vfs/c/8bec52672c67
 
