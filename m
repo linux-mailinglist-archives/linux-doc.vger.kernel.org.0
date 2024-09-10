@@ -1,83 +1,71 @@
-Return-Path: <linux-doc+bounces-24938-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-24940-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A8F09744AA
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Sep 2024 23:16:51 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AA439744D9
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Sep 2024 23:31:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3DB0A288F05
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Sep 2024 21:16:50 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EC15FB25675
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Sep 2024 21:31:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEF441A7AE4;
-	Tue, 10 Sep 2024 21:16:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="lYwCp1Uy"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9055D1AB536;
+	Tue, 10 Sep 2024 21:30:55 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15D01176FCF;
-	Tue, 10 Sep 2024 21:16:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+Received: from s959244.srvape.com (unknown [91.184.248.174])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EB0E81AB51F
+	for <linux-doc@vger.kernel.org>; Tue, 10 Sep 2024 21:30:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.184.248.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1726003004; cv=none; b=lXouyFWls88wJFwGgcjLV7D8hEKheoeoq+Srk6ie6/IXFXL6k9geo3RtX7Kvo0WtJTgwhCS2iO2rMlNaFdVvX9ZqA+ZQgCQxfI6mwfL1ocR4cansGsdvlu+er1PTbSfXU4MyilSd2iHbaefjPupduoPJlg4JG9eMghoDwu2RidQ=
+	t=1726003855; cv=none; b=VnjDtJ3yrlEibu9AL80xaHiNyKxNMizHeeeZUeHIeVUDIMc9YjGi6FykhBKdkw/exP8RevGl6wvI31vnFisGKkmPW9gmFfKgMbf5MLc0cM3fB8He4W/X6pnqwfxbQg6sc2cSvWRD8aDjX5reaM9zvSHhU0YwxRZUXUPRoIzzSIM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1726003004; c=relaxed/simple;
-	bh=yY98ZnPqutD75dS1CZ6FtP8zEL2DopNaLCFMIdLjsDY=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=bcZBjRnOayMsDEyatIDt0Xd46JXqslMU0NSow9j3yev8zksV5E3I+jwq8f3JnOoaM2DpAsG2IDi5SsMIjSJqCbzpoC92eQvRP2r+K+AqXRE3ZK5yAXIzUpv2Cj6odfLHnOokUb7lYBFnJcP5yxHCyr5TQ0VPyfH62HnuYQ43pkU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=lYwCp1Uy; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 17F034188E
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1726003002; bh=3BCuHwWtjEsbkVAy+MWuOWEp+1aiLJTFeNM0th+mSVY=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=lYwCp1Uy8PWuJwBvdd4aS7lt8Z3RH5h8jKHHdBI1kAXRXyLcxfqNzKTpEmcFhls2g
-	 Jl80W79rF1SoaTYeONVMRgWySBW5kcogcLvL3TQOLWBiscGdAiIsnB+xuviDDBhZFY
-	 o6QQbh1GXd6Dft0RNW2a/6bJ0JR7TOLF4FXIUYTIau/JOmrFBNk7rQ6RMyTF3lqdsO
-	 guo9F+mL9MDHzYefA9fX71jAjVXBExz+bLuMJ824EC3a0SdlBxNd7AS7G0zDH7aRwH
-	 L5Lc/9Kvi9tMAiA7VWAnWSgKfCu2nUocekn6uJZvBMVgUuFdaSaxWjTj1Y8mxxqpWh
-	 pB0iJUwl6e1Zw==
-Received: from localhost (mdns.lwn.net [45.79.72.68])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 17F034188E;
-	Tue, 10 Sep 2024 21:16:42 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Andrew Kreimer <algonell@gmail.com>
-Cc: workflows@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org, Andrew
- Kreimer <algonell@gmail.com>
-Subject: Re: [PATCH v2] docs/process: fix typos
-In-Reply-To: <20240907122534.15998-1-algonell@gmail.com>
-References: <20240907122534.15998-1-algonell@gmail.com>
-Date: Tue, 10 Sep 2024 15:16:41 -0600
-Message-ID: <87ikv36wg6.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1726003855; c=relaxed/simple;
+	bh=/TDL9kAqKPBL91Q13HiwjFooHQVVtwSDIlPWE3vdLxg=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=GiL2Fh4aNuzxffSMSlXMaxtEscswmwAeF3m5Wg7WYupx3P3GtvSHib+K8yILQtQo9UyJmAKfjufdp8pvBEMetsq27w1CJLud8g8cffs2Y4UYtcLrPX+zGgzS0gWqkvjK1Pn3bp/ZdDGXa6uCWb12Ws2sObbNHA8dD7m40LJj1VI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=serviceetihadaviationgroup.com; spf=fail smtp.mailfrom=serviceetihadaviationgroup.com; arc=none smtp.client-ip=91.184.248.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=serviceetihadaviationgroup.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=serviceetihadaviationgroup.com
+Received: from ip32.ip-198-50-226.net (localhost [IPv6:::1])
+	by s959244.srvape.com (Postfix) with ESMTP id 2C13629B6D5
+	for <linux-doc@vger.kernel.org>; Tue, 10 Sep 2024 23:25:00 +0200 (CEST)
+Reply-To: vendorscontractor@serviceetihadaviationgroup.com
+From: Etihad Aviation Group PJSC<admin@serviceetihadaviationgroup.com>
+To: linux-doc@vger.kernel.org
+Subject: Vendor Registration
+Date: 10 Sep 2024 14:25:00 -0700
+Message-ID: <20240910142500.C207A867F2E2E08D@serviceetihadaviationgroup.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Andrew Kreimer <algonell@gmail.com> writes:
+Attn: Sir/Madam,
 
-> Fix typos in documentation.
->
-> Signed-off-by: Andrew Kreimer <algonell@gmail.com>
-> ---
-> Synced with docs-next as requested.
->
->  Documentation/process/coding-style.rst   | 2 +-
->  Documentation/process/maintainer-tip.rst | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+Greetings from Etihad Aviation Group, UAE.
 
-Applied, thanks.
+We are happy to contact your company and also extend our=20
+invitation to your esteemed company to Vendor/Contractor=20
+Partnership registration with Etihad Aviation Group, UAE 2024/
+2025 projects. If your company has intention to participate in=20
+the process, please confirm your interest by asking for Vendor=20
+Questionnaire and EOI.
 
-jon
+We appreciate your interest in this invitation, and look forward=20
+to your early response.
+
+Kind Regards,
+
+Mr. Ben Stokes
+Contractors Coordinator
+Group Procurement & Contracts Shared Services Center
+Etihad Aviation Group PJSC
+Etihad Airways - Head office, New Airport Road,
+Khalifa City, PO Box 35566, Abu Dhabi
+United Arab Emirates.
 
