@@ -1,151 +1,168 @@
-Return-Path: <linux-doc+bounces-25120-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25125-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BB48977224
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Sep 2024 21:45:07 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BC40977290
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Sep 2024 22:05:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 691771C231BF
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Sep 2024 19:45:06 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9EB711C233E4
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Sep 2024 20:05:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 275AC1CCB21;
-	Thu, 12 Sep 2024 19:40:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4B72B1C174F;
+	Thu, 12 Sep 2024 20:05:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="R3pxgM5d"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="YmQIWbI9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f74.google.com (mail-pj1-f74.google.com [209.85.216.74])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9940C1C0DF0;
-	Thu, 12 Sep 2024 19:40:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5099C13D530
+	for <linux-doc@vger.kernel.org>; Thu, 12 Sep 2024 20:05:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.74
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1726170026; cv=none; b=NuAB80l2OTPk2wuaLZUrRfbzQjdZPAswJNi/Hqx1F+pf0YV1YOUJ75tyKntuKx+xQ/UbnbBoyZqnzHMQ3dth2ak7HDTzBkWgBHNsGA2G9rn55xhxksuvStoH/TPK+Knj7n4DZXKB4O6UttcuCaUbAQvaVRon02/J2AIUkYxV/TM=
+	t=1726171549; cv=none; b=CMNY6ktHUtWSmfQvaYzETOa8LwmDlpVdzde816Vs7NJqVKIeP85hdVzykBRHm1+FnjHkUI1i8Kx2bi2lw5D2iIbb33Xei+xX+EY/ZiXXo8LRv7LQTcvEEJE8O/3QvRhZ04lrDwLNbQJaUg2CTcLqQWqimYQAZdK92xK8f3vc1DY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1726170026; c=relaxed/simple;
-	bh=prnyaP8xdPvgf7lPSdgoOnTFSQEEfdLilloaJUXm1RE=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=d8H3J7DM9tfjMjm8R9XjYGaX0C9ZODgPS9zhYkkYFfCqpAcmuK97ecHJFqh2M3PBexj27HnT1eq9nzWqEBVJUo4rVa4RlqIKi3xMKS89stsy63wn0q7ZV5Xk6hWi2ixidU6Be1PNLthJIjeOCdZG2+RIopLKJ7CUv+qxCf4cil0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=R3pxgM5d; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 48CHtE53009379;
-	Thu, 12 Sep 2024 19:39:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IHuzCQGYpXyTPH0RihFbQD623zcQRcB8CUdC3cqWdMA=; b=R3pxgM5dNh9T2Az8
-	PZ5ac24L2Q8WQ/2fKUD/e/lochroPqS9LGXSO1VmS1fyup/qE+XRUPYUt4seyEum
-	P82YhN689vuOSeFV3Er0e1JvIoh8/cSEmjeDUHztrw2sJyqVv2i22TC/wqS6sBZf
-	W1d+vrhDiD4du2Idr2ppYi4i3MMLWEiivJu9VMcGcYSvw+pBtYQBVUqEfxoovTkJ
-	XYfRRLZayzK8+6wHQTr9IvC7cKepQSmbrR6pMhnJnBwnTWP1NSlZ+nE19fjAvj+t
-	NzO8OeZfTtbu9v/bB4gnZQ9r+g9pq7RGzXqXKHWmcbCFDXxFT0Brsh1fsU6sV9as
-	IrPD/Q==
-Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 41gy6peeyj-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 12 Sep 2024 19:39:56 +0000 (GMT)
-Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
-	by NALASPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 48CJdubu006060
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 12 Sep 2024 19:39:56 GMT
-Received: from hu-wcheng-lv.qualcomm.com (10.49.16.6) by
- nalasex01b.na.qualcomm.com (10.47.209.197) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Thu, 12 Sep 2024 12:39:55 -0700
-From: Wesley Cheng <quic_wcheng@quicinc.com>
-To: <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
-        <perex@perex.cz>, <conor+dt@kernel.org>, <dmitry.torokhov@gmail.com>,
-        <corbet@lwn.net>, <broonie@kernel.org>, <lgirdwood@gmail.com>,
-        <tiwai@suse.com>, <krzk+dt@kernel.org>,
-        <pierre-louis.bossart@linux.intel.com>, <Thinh.Nguyen@synopsys.com>,
-        <bgoswami@quicinc.com>, <robh@kernel.org>,
-        <gregkh@linuxfoundation.org>
-CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-sound@vger.kernel.org>, <linux-input@vger.kernel.org>,
-        <linux-usb@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <alsa-devel@alsa-project.org>,
-        Wesley Cheng
-	<quic_wcheng@quicinc.com>
-Subject: [PATCH v27 32/32] ASoC: usb: Rediscover USB SND devices on USB port add
-Date: Thu, 12 Sep 2024 12:39:35 -0700
-Message-ID: <20240912193935.1916426-33-quic_wcheng@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240912193935.1916426-1-quic_wcheng@quicinc.com>
-References: <20240912193935.1916426-1-quic_wcheng@quicinc.com>
+	s=arc-20240116; t=1726171549; c=relaxed/simple;
+	bh=zgVFGLKcvsfnGJiJdgrGdKWJuix6jbiZzKyiHN3clf0=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=O+m9Cy6sK3ROD8GXZ4odU7jAfN5jb2cjaFfPNLZknQU/I3waHUuxgQXdsjAY2lTvt0ZF/VHJBWjDh634uDjQDxn0duEObGKT7IHkIP8OQTZO7Qwbh+/ua1vO8vdx4YmubBKpvAbPXBRRuvtf2k6zuFRGgn7ZspYVyjPUz9Z0GTY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=YmQIWbI9; arc=none smtp.client-ip=209.85.216.74
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com
+Received: by mail-pj1-f74.google.com with SMTP id 98e67ed59e1d1-2d88641e9a8so1605326a91.0
+        for <linux-doc@vger.kernel.org>; Thu, 12 Sep 2024 13:05:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1726171546; x=1726776346; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=fnnjrlSetIbQ77vTIX4XItRIWsi2rxf02mpUNlAPpck=;
+        b=YmQIWbI97wgABO+GqgWJ7XMiY9/CGbBe/9xIwKUz27Ea6y3uyU5WGZlx+R+S1FotXo
+         Aei2SflW7WkconSAOn+f9KjSR/8l8Pl4Ix8LWEoIp7TeR04rIVB8LY7QjGw9LP5pd6am
+         WJFyI5oYK/VBYjMezQOnrrzjVmTiifU3dYXP+3rdRGqHiUd5aD1wXAIg+K3FDawnf4+i
+         SACvAFPY40QrscIryoTNhFEVzWLKL/eMJabpv3q4lf90OMCDnYmHrEC8jAVYsrzY52w5
+         jFwkf23lV710yKESQQ8syXYNPPqRnv2QObGatwqqxls1xnsztm+Fw7LwEviIXdGd0gJO
+         6r/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1726171546; x=1726776346;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=fnnjrlSetIbQ77vTIX4XItRIWsi2rxf02mpUNlAPpck=;
+        b=KzWqH9rh7euxAazuvYesx4+lj4xVQXa7N8djOmonOLkLztd4gA4IhnGN0KThg+Gxve
+         c4mp/50RfdoIyGFM8BjiIrC6abc/J4iNGVs8F53ohiLLoaTv3dJdRJZslq3SWBIPughO
+         RRGB7GwDPPCn9xGtUf1AImFNSYh92SYtdR4qUMxf1wgre0xzAtG3QQanGTpfDUtpE1eS
+         hAk9uoqcWqU4VkPMCSnm2UzsVukvYW3aSf3ChiFSKOnY6siPeGuJInU+shLOUVdPQ3jp
+         S4VwMRpFrBDVzJ7swRAYl7sm37jx5kkaCYFoilV5Zvb/7OUchUoiyIY9n0Z0+XMR+xWA
+         dRjw==
+X-Forwarded-Encrypted: i=1; AJvYcCUv9+1i+tsWJlhrOSuGl7vF2fCmsd/8OkEXF8f6vOzTf0uNGPGvoxtxdvHwqIP5l+i4RetvJorMuLw=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxl/TDjBzw9UkywRW/HkDQQFrQUH6I4a9wcOgsB5wxklg/j35dX
+	bbrNAXZDXpRPb/k0FP8M67NK35kfynOHNYZn7riBDaydfJjVUmRvlFol/FE3nIyLk/QA96Wv4RD
+	KAA==
+X-Google-Smtp-Source: AGHT+IGMbV565ZUceOdGGm+YNdFHzG/XNLZao6v/FtV6YMEzbuF+laauyv9Oc3FC1PC6/WerO4BWUeVoybg=
+X-Received: from zagreus.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:5c37])
+ (user=seanjc job=sendgmr) by 2002:a17:90a:d791:b0:2d8:7c76:45d7 with SMTP id
+ 98e67ed59e1d1-2dba0061767mr25737a91.4.1726171545428; Thu, 12 Sep 2024
+ 13:05:45 -0700 (PDT)
+Date: Thu, 12 Sep 2024 13:05:43 -0700
+In-Reply-To: <feefa9d1-f266-414f-bb7b-b770ef0d8ec6@zytor.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: nalasex01c.na.qualcomm.com (10.47.97.35) To
- nalasex01b.na.qualcomm.com (10.47.209.197)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: ogiyPitW642ue2kmpSl3oPFemrvuiZ_P
-X-Proofpoint-GUID: ogiyPitW642ue2kmpSl3oPFemrvuiZ_P
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 adultscore=0
- bulkscore=0 lowpriorityscore=0 mlxlogscore=999 spamscore=0 phishscore=0
- impostorscore=0 suspectscore=0 mlxscore=0 malwarescore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2408220000 definitions=main-2409120144
+Mime-Version: 1.0
+References: <20240207172646.3981-1-xin3.li@intel.com> <20240207172646.3981-8-xin3.li@intel.com>
+ <ZiJzFsoHR41Sd8lE@chao-email> <ZmoT0jaX_3Ww3Uzu@google.com> <feefa9d1-f266-414f-bb7b-b770ef0d8ec6@zytor.com>
+Message-ID: <ZuNJlzXntREQVb3n@google.com>
+Subject: Re: [PATCH v2 07/25] KVM: VMX: Set intercept for FRED MSRs
+From: Sean Christopherson <seanjc@google.com>
+To: Xin Li <xin@zytor.com>
+Cc: Chao Gao <chao.gao@intel.com>, Xin Li <xin3.li@intel.com>, linux-kernel@vger.kernel.org, 
+	kvm@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, pbonzini@redhat.com, corbet@lwn.net, 
+	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, 
+	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, shuah@kernel.org, 
+	vkuznets@redhat.com, peterz@infradead.org, ravi.v.shankar@intel.com
+Content-Type: text/plain; charset="us-ascii"
 
-In case the USB backend device has not been initialized/probed, USB SND
-device connections can still occur.  When the USB backend is eventually
-made available, previous USB SND device connections are not communicated to
-the USB backend.  Call snd_usb_rediscover_devices() to generate the connect
-callbacks for all USB SND devices connected.  This will allow for the USB
-backend to be updated with the current set of devices available.
+On Thu, Sep 05, 2024, Xin Li wrote:
+> On 6/12/2024 2:32 PM, Sean Christopherson wrote:
+> > On Fri, Apr 19, 2024, Chao Gao wrote:
+> > > On Wed, Feb 07, 2024 at 09:26:27AM -0800, Xin Li wrote:
+> > > > Add FRED MSRs to the valid passthrough MSR list and set FRED MSRs intercept
+> > > > based on FRED enumeration.
+> > 
+> > This needs a *much* more verbose explanation.  It's pretty darn obvious _what_
+> > KVM is doing, but it's not at all clear _why_ KVM is passing through FRED MSRs.
+> > E.g. why is FRED_SSP0 not included in the set of passthrough MSRs?
+> > 
+> > > > static void vmx_vcpu_config_fred_after_set_cpuid(struct kvm_vcpu *vcpu)
+> > > > {
+> > > > 	struct vcpu_vmx *vmx = to_vmx(vcpu);
+> > > > +	bool fred_enumerated;
+> > > > 
+> > > > 	kvm_governed_feature_check_and_set(vcpu, X86_FEATURE_FRED);
+> > > > +	fred_enumerated = guest_can_use(vcpu, X86_FEATURE_FRED);
+> > > > 
+> > > > -	if (guest_can_use(vcpu, X86_FEATURE_FRED)) {
+> > > > +	if (fred_enumerated) {
+> > > > 		vm_entry_controls_setbit(vmx, VM_ENTRY_LOAD_IA32_FRED);
+> > > > 		secondary_vm_exit_controls_setbit(vmx,
+> > > > 						  SECONDARY_VM_EXIT_SAVE_IA32_FRED |
+> > > > @@ -7788,6 +7793,16 @@ static void vmx_vcpu_config_fred_after_set_cpuid(struct kvm_vcpu *vcpu)
+> > > > 						    SECONDARY_VM_EXIT_SAVE_IA32_FRED |
+> > > > 						    SECONDARY_VM_EXIT_LOAD_IA32_FRED);
+> > > > 	}
+> > > > +
+> > > > +	vmx_set_intercept_for_msr(vcpu, MSR_IA32_FRED_RSP0, MSR_TYPE_RW, !fred_enumerated);
+> > > > +	vmx_set_intercept_for_msr(vcpu, MSR_IA32_FRED_RSP1, MSR_TYPE_RW, !fred_enumerated);
+> > > > +	vmx_set_intercept_for_msr(vcpu, MSR_IA32_FRED_RSP2, MSR_TYPE_RW, !fred_enumerated);
+> > > > +	vmx_set_intercept_for_msr(vcpu, MSR_IA32_FRED_RSP3, MSR_TYPE_RW, !fred_enumerated);
+> > > > +	vmx_set_intercept_for_msr(vcpu, MSR_IA32_FRED_STKLVLS, MSR_TYPE_RW, !fred_enumerated);
+> > > > +	vmx_set_intercept_for_msr(vcpu, MSR_IA32_FRED_SSP1, MSR_TYPE_RW, !fred_enumerated);
+> > > > +	vmx_set_intercept_for_msr(vcpu, MSR_IA32_FRED_SSP2, MSR_TYPE_RW, !fred_enumerated);
+> > > > +	vmx_set_intercept_for_msr(vcpu, MSR_IA32_FRED_SSP3, MSR_TYPE_RW, !fred_enumerated);
+> > > > +	vmx_set_intercept_for_msr(vcpu, MSR_IA32_FRED_CONFIG, MSR_TYPE_RW, !fred_enumerated);
+> > > 
+> > > Use a for-loop here? e.g.,
+> > > 	for (i = MSR_IA32_FRED_RSP0; i <= MSR_IA32_FRED_CONFIG; i++)
+> > 
+> > Hmm, I'd prefer to keep the open coded version.  It's not pretty, but I don't
+> > expect this to have much, if any, maintenance cost.  And using a loop makes it
+> > harder to both understand _exactly_ what's happening, and to search for relevant
+> > code.  E.g. it's quite difficult to see that FRED_SSP0 is still intercepted (see
+> > my comment regarding the changelog).
+> 
+> 
+> I owe you an explanation; I have been thinking about figuring out a way
+> to include FRED SSP0 in the FRED KVM patch set...
+> 
+> MSR_IA32_FRED_SSP0 is an alias of the CET MSR_IA32_PL0_SSP and likely to
+> be used in the same way as FRED RSP0, i.e., host FRED SSP0 _should_ be
+> restored in arch_exit_to_user_mode_prepare().  However as of today Linux
+> has no plan to utilize kernel shadow stack thus no one cares host FRED
+> SSP0 (no?).  But lets say anyway it is host's responsibility to manage
+> host FRED SSP0, then KVM only needs to take care of guest FRED SSP0
+> (just like how KVM should handle guest FRED RSP0) even before the
+> supervisor shadow stack feature is advertised to guest.
 
-The chip array entries are all populated and removed while under the
-register_mutex, so going over potential race conditions:
+Heh, I'm not sure what your question is, or if there even is a question.  KVM
+needs to context switch FRED SSP0 if FRED is exposed to the guest, but presumably
+that will be done through XSAVE state?  If that's the long term plan, I would
+prefer to focus on merging CET virtualization first, and then land FRED virtualization
+on top so that KVM doesn't have to carry intermediate code to deal with the aliased
+MSR.
 
-Thread#1:
-  q6usb_component_probe()
-    --> snd_soc_usb_add_port()
-      --> snd_usb_rediscover_devices()
-        --> mutex_lock(register_mutex)
+Ugh, but what happens if a CPU (or the host kernel) supports FRED but not CET SS?
+Or is that effectively an illegal combination?
 
-Thread#2
-  --> usb_audio_disconnect()
-    --> mutex_lock(register_mutex)
+> Another question is should KVM handle userspace request to set/get FRED
+> SSP0?  IMO, it should be part of CET state management.
 
-So either thread#1 or thread#2 will complete first.  If
-
-Thread#1 completes before thread#2:
-  SOC USB will notify DPCM backend of the device connection.  Shortly
-  after, once thread#2 runs, we will get a disconnect event for the
-  connected device.
-
-Thread#2 completes before thread#1:
-  Then during snd_usb_rediscover_devices() it won't notify of any
-  connection for that particular chip index.
-
-Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
----
- sound/soc/soc-usb.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/sound/soc/soc-usb.c b/sound/soc/soc-usb.c
-index f88ccf90df32..3457bb51a0a1 100644
---- a/sound/soc/soc-usb.c
-+++ b/sound/soc/soc-usb.c
-@@ -252,6 +252,8 @@ void snd_soc_usb_add_port(struct snd_soc_usb *usb)
- 	mutex_lock(&ctx_mutex);
- 	list_add_tail(&usb->list, &usb_ctx_list);
- 	mutex_unlock(&ctx_mutex);
-+
-+	snd_usb_rediscover_devices();
- }
- EXPORT_SYMBOL_GPL(snd_soc_usb_add_port);
- 
+Yes, KVM needs to allow userspace to get/set FRED SSP0.  In general, KVM needs to
+allow reads/writes to MSRs even if they can be saved/restored through some other
+means.  In most cases, including this one, it's a moot point, because KVM needs
+to have the necessary code anyways, e.g. if KVM encounters a RDMSR/WRMSR while
+emulating.
 
