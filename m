@@ -1,102 +1,386 @@
-Return-Path: <linux-doc+bounces-25052-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25057-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF4FC976663
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Sep 2024 12:07:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCDA997668C
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Sep 2024 12:14:07 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7DF0A1F22A2D
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Sep 2024 10:07:50 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0CE6D1F22378
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Sep 2024 10:14:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F32319F40B;
-	Thu, 12 Sep 2024 10:07:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06A0818F2CB;
+	Thu, 12 Sep 2024 10:13:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="K48XCpxE"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="JokuuGst"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1581B19F404;
-	Thu, 12 Sep 2024 10:07:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C28FC193426
+	for <linux-doc@vger.kernel.org>; Thu, 12 Sep 2024 10:13:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1726135660; cv=none; b=BnBBZBNwq2Ui7yq3zba2wRrHSeEFya9sTqYVQzoVAS99esF/NH0NxlqGUggmTIeev9rCteqjV7qeP01ZHWbnYhySYCZI3Ly5VepQxJqyo3f8wa6Yj1s9V9A+G9zZwaCLO1Up5njA+/G+7s/8V/W1bXvMTkIUCQMRp+8UtxeWWvo=
+	t=1726136038; cv=none; b=dnqRQjbCU1xLK8d6POR1/Qm+8j4ftO5u5WSVPENJ0Vi3OSmrIv0DVFw4K5uKwtZZmLL/asmAooziAoxg/RIU5Sweimy6isAxYPjQzlIzYbtqj2oiwJ6BCplXKm8Wmh5y+d4oYVAXsGPfWyXGw/+/f6gds0OMln5STXfJrqrfvYI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1726135660; c=relaxed/simple;
-	bh=IpdC1qHf35nRG6qUjgDllXwIwjChqVrshS7gOGlNxCk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=PdKc15De0Ui0fk2m9jr9EQuV7w9hErQBYTL8KPWl6RhVucgEZ+Lp0wUFbDOzDgvBLccFPY7EyMsuRZV1k6lE72islnX3jBxWioPNnw5PkVaDEMTd76bJTiA9fl70TZ9KnRNwnISGKZ+7JTsLTZb2xLDXh1sHR9lWDpAA01KX6vo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=K48XCpxE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7194C4CEC3;
-	Thu, 12 Sep 2024 10:07:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1726135659;
-	bh=IpdC1qHf35nRG6qUjgDllXwIwjChqVrshS7gOGlNxCk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=K48XCpxEBtS3sCUM32a2hL29xTUoKht3NYuzmOq/4grw8ydiTrinOYO/kFGu+xyLz
-	 I+8FSSXQMEVaSYYHKtnR91/4vrZLCuKKFGfi1oXHR63EQZ8McOhZ8vt5vsVwU0INT6
-	 3tifCnKVxu5JL1tourN6tczzGgBI0qwwWilMxlOOOPCs5rNNm6douO2FT5OkNHg5qk
-	 QcLd1zEu3GCunannyrXiV2rOvoRh2ECgVeLAOOExb4vtguFq+eCerN3ZnKlP/sjUhL
-	 LYdtJXE+3UZsjeZbon2gun4DlRaw/OUlBL0Tu+s7LbGOMkmF7fH9GBU+LGLeCvsI57
-	 FXwyA//Yt594Q==
-Date: Thu, 12 Sep 2024 12:07:31 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Benjamin Coddington <bcodding@redhat.com>
-Cc: Chuck Lever <chuck.lever@oracle.com>, Jeff Layton <jlayton@kernel.org>, 
-	Amir Goldstein <amir73il@gmail.com>, Neil Brown <neilb@suse.de>, Trond Myklebust <trondmy@kernel.org>, 
-	Anna Schumaker <anna@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Andreas Gruenbacher <agruenba@redhat.com>, Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>, 
-	Joseph Qi <joseph.qi@linux.alibaba.com>, Alexander Viro <viro@zeniv.linux.org.uk>, 
-	Jan Kara <jack@suse.cz>, Alexander Ahring Oder Aring <aahringo@redhat.com>, 
-	linux-fsdevel@vger.kernel.org, linux-nfs@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, gfs2@lists.linux.dev, ocfs2-devel@lists.linux.dev
-Subject: Re: [PATCH v1 0/4] Fixup NLM and kNFSD file lock callbacks
-Message-ID: <20240912-zuspielen-selektiert-01ef380e0c1b@brauner>
-References: <cover.1726083391.git.bcodding@redhat.com>
+	s=arc-20240116; t=1726136038; c=relaxed/simple;
+	bh=pWuYnZdetnnnu+3BlcUE/4gNPjsDaaKXpqGIDigZmfw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=OeWeWSgUJ8oiYox2q4IC5KjcvjL6jxA06b7viGTjxEyIf94JdP4PtuAsN2vsq8XZC69byOjURQ23Jo8S/TuADjTcQvTImPai4psHvT79GpBukOHgAq4NqFpiFklEpVf3T7WwJAdHdP76TejafjYxXdF4Fq1n14eQ4s7u9vyP574=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=JokuuGst; arc=none smtp.client-ip=209.85.221.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-374c4c6cb29so741699f8f.3
+        for <linux-doc@vger.kernel.org>; Thu, 12 Sep 2024 03:13:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1726136034; x=1726740834; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Ax7dbBbCuzQUcfZcqCi06hx4jCIx6kiT7TrMLm6qkD0=;
+        b=JokuuGstRYcrSol6rHF/9RQNn64YhBGHUl6S/EZTgWdA0EUDqUwl5diQvGkE/vF2Nc
+         T3u05t7H5HchK7hV25w6vwUI0ouqHTdRtzTvxX07VXCnuFAiIXcMnnYJdF0SHOWCQGlG
+         jDr2rdFU42Tqu6t5If0wksq7yOIUHem0WyegHbgR+8Y/7qGVwVAPmZrU6JhVhWGzQCzF
+         +DQtswEyex8LsMsaJN941rUO6bGfYB7NiXxio+TY0vtuuSFvcD7v1S/8rc7To4IH1K38
+         ml+8+Z8NCZIXWpCAHPgRKv5Kq0I636kKbZjaLJGFZgqjF4cckmNKTaPVTuvQOHjSxJ8E
+         74gw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1726136034; x=1726740834;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ax7dbBbCuzQUcfZcqCi06hx4jCIx6kiT7TrMLm6qkD0=;
+        b=jBWOEApUV+o7e6Yy+hRKuU+rdF2aJjE0vO3t4iyt7sdOmbqUrSHh/wTiclyKJJle6C
+         7TkuJOf9AhjK9tXxz/YFV6n3roFss1enIfFVqjuCP6HRwfUxwEg20R5wuxozJYti6nVu
+         RVsL7ehxHt0Vf9z+2dY2sMUmxELYppsX7oUqt7/fwPr/3Tkvl33Yj23x6CyXaRc8kAND
+         guwooClr5Is0eliilXc4p8/OpNUsna3tLmnt26Et/JnmCQ5N4eyaesWT4xJaqInLqdzk
+         I/DRRgCwmCheS0I/B4xmrqS4A6LVU7wTRFQlV8wVqZa6Z33H7n/6oIOBbpiZwalDHWBb
+         PBkA==
+X-Forwarded-Encrypted: i=1; AJvYcCWQgSRALWp4mfzDCSXK8YF9u87f0MK0GmQ5kcEH6iVBToBoRWKOHLathUX/DZJbFS/6BOt9Ecqs8Jc=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzk62PQnuMDLh/zRO+RyNRpM43M4whFS61zGfC3h7VU3Rkln5kD
+	DvOTaSkQEu4wuhL62DKpJJgqyzv6upfyA1LWIiOKjs0r+pPKvgGZxDzKd8wTrlg=
+X-Google-Smtp-Source: AGHT+IGupFXKL8Oc6nvWjZJWcoxASYjloZVWY9tJWtiOtX2e41F+Jn5Rq4bbYQ4F3WiAHGg87siCJA==
+X-Received: by 2002:adf:eec5:0:b0:374:c231:a5ea with SMTP id ffacd0b85a97d-378c2cd39f8mr1794861f8f.5.1726136033785;
+        Thu, 12 Sep 2024 03:13:53 -0700 (PDT)
+Received: from ?IPV6:2a02:8428:e55b:1101:a464:2bc6:7cd8:5d56? (2a02-8428-e55b-1101-a464-2bc6-7cd8-5d56.rev.sfr.net. [2a02:8428:e55b:1101:a464:2bc6:7cd8:5d56])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-378956d3941sm13981214f8f.84.2024.09.12.03.13.52
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 12 Sep 2024 03:13:53 -0700 (PDT)
+Message-ID: <31a1dfeb-2d72-44bc-b3ca-36b4115c3010@baylibre.com>
+Date: Thu, 12 Sep 2024 12:13:51 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <cover.1726083391.git.bcodding@redhat.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 8/8] iio:adc:ad7606: Add iio-backend support
+To: =?UTF-8?Q?Nuno_S=C3=A1?= <noname.nuno@gmail.com>,
+ =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <ukleinek@kernel.org>,
+ Lars-Peter Clausen <lars@metafoo.de>,
+ Michael Hennerich <Michael.Hennerich@analog.com>,
+ Jonathan Cameron <jic23@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc: linux-pwm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-fbdev@vger.kernel.org, linux-iio@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
+ 20240705211452.1157967-2-u.kleine-koenig@baylibre.com,
+ 20240712171821.1470833-2-u.kleine-koenig@baylibre.com,
+ cover.1721040875.git.u.kleine-koenig@baylibre.com, aardelean@baylibre.com
+References: <20240815-ad7606_add_iio_backend_support-v1-0-cea3e11b1aa4@baylibre.com>
+ <20240815-ad7606_add_iio_backend_support-v1-8-cea3e11b1aa4@baylibre.com>
+ <5dedf51d8ec19b7b3bd0c6cb136048344f1c1007.camel@gmail.com>
+Content-Language: en-US
+From: Guillaume Stols <gstols@baylibre.com>
+In-Reply-To: <5dedf51d8ec19b7b3bd0c6cb136048344f1c1007.camel@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wed, Sep 11, 2024 at 03:42:56PM GMT, Benjamin Coddington wrote:
-> Last year both GFS2 and OCFS2 had some work done to make their locking more
-> robust when exported over NFS.  Unfortunately, part of that work caused both
-> NLM (for NFS v3 exports) and kNFSD (for NFSv4.1+ exports) to no longer send
-> lock notifications to clients.
-> 
-> This in itself is not a huge problem because most NFS clients will still
-> poll the server in order to acquire a conflicted lock, but now that I've
-> noticed it I can't help but try to fix it because there are big advantages
-> for setups that might depend on timely lock notifications, and we've
-> supported that as a feature for a long time.
-> 
-> Its important for NLM and kNFSD that they do not block their kernel threads
-> inside filesystem's file_lock implementations because that can produce
-> deadlocks.  We used to make sure of this by only trusting that
-> posix_lock_file() can correctly handle blocking lock calls asynchronously,
-> so the lock managers would only setup their file_lock requests for async
-> callbacks if the filesystem did not define its own lock() file operation.
-> 
-> However, when GFS2 and OCFS2 grew the capability to correctly
-> handle blocking lock requests asynchronously, they started signalling this
-> behavior with EXPORT_OP_ASYNC_LOCK, and the check for also trusting
-> posix_lock_file() was inadvertently dropped, so now most filesystems no
-> longer produce lock notifications when exported over NFS.
-> 
-> I tried to fix this by simply including the old check for lock(), but the
-> resulting include mess and layering violations was more than I could accept.
-> There's a much cleaner way presented here using an fop_flag, which while
-> potentially flag-greedy, greatly simplifies the problem and grooms the
+On 9/5/24 10:40, Nuno Sá wrote:
+> On Thu, 2024-08-15 at 12:12 +0000, Guillaume Stols wrote:
+>> - Basic support for iio backend.
+>> - Supports IIO_CHAN_INFO_SAMP_FREQ R/W.
+>> - Only hardware mode is available, and that IIO_CHAN_INFO_RAW is not
+>>    supported if iio-backend mode is selected.
+>>
+>> A small correction was added to the driver's file name in the Kconfig
+>> file's description.
+>>
+>> Signed-off-by: Guillaume Stols <gstols@baylibre.com>
+>> ---
+> Hi Guillaume,
+>
+> Some initial feedback from me...
+>
+>>   drivers/iio/adc/Kconfig      |   3 +-
+>>   drivers/iio/adc/ad7606.c     | 103 +++++++++++++++++++++++++++++++++++-------
+>> -
+>>   drivers/iio/adc/ad7606.h     |  16 +++++++
+>>   drivers/iio/adc/ad7606_par.c |  98 +++++++++++++++++++++++++++++++++++++++-
+>>   4 files changed, 200 insertions(+), 20 deletions(-)
+>>
+>> diff --git a/drivers/iio/adc/Kconfig b/drivers/iio/adc/Kconfig
+>> index 88e8ce2e78b3..01248b6df868 100644
+>> --- a/drivers/iio/adc/Kconfig
+>> +++ b/drivers/iio/adc/Kconfig
+>> @@ -227,9 +227,10 @@ config AD7606_IFACE_PARALLEL
+>>   	help
+>>   	  Say yes here to build parallel interface support for Analog
+>> Devices:
+>>   	  ad7605-4, ad7606, ad7606-6, ad7606-4 analog to digital converters
+>> (ADC).
+>> +	  It also support iio_backended devices for AD7606B.
+>>   
+>>   	  To compile this driver as a module, choose M here: the
+>> -	  module will be called ad7606_parallel.
+>> +	  module will be called ad7606_par.
+>>   
+>>   config AD7606_IFACE_SPI
+>>   	tristate "Analog Devices AD7606 ADC driver with spi interface
+>> support"
+>> diff --git a/drivers/iio/adc/ad7606.c b/drivers/iio/adc/ad7606.c
+>> index 99d5ca5c2348..a753d5caa9f8 100644
+>> --- a/drivers/iio/adc/ad7606.c
+>> +++ b/drivers/iio/adc/ad7606.c
+>> @@ -21,6 +21,7 @@
+>>   #include <linux/util_macros.h>
+>>   #include <linux/units.h>
+>> +
+>> +	/* backend manages interruptions by itself.*/
+> missing space before closing the comment (also not sure the comments adds much)
 
-It's fine. I've explicitly added the fop_flags so that stuff like this
-we would not want to put into f->f_mode can live there.
 
-> way for future uses by both filesystems and lock managers alike.
+thx, will check again
+
+
+>
+>> +	if (!st->back) {
+>> +		ret = wait_for_completion_timeout(&st->completion,
+>> +						  msecs_to_jiffies(1000));
+>> +		if (!ret) {
+>> +			ret = -ETIMEDOUT;
+>> +			goto error_ret;
+>> +		}
+>>   	}
+>>   
+>>   	ret = ad7606_read_samples(st);
+>> @@ -271,6 +284,12 @@ static int ad7606_read_raw(struct iio_dev *indio_dev,
+>>   	case IIO_CHAN_INFO_OVERSAMPLING_RATIO:
+>>   		*val = st->oversampling;
+>>   		return IIO_VAL_INT;
+>> +	case IIO_CHAN_INFO_SAMP_FREQ:
+>> +		pwm_get_state_hw(st->cnvst_pwm, &cnvst_pwm_state);
+>> +		/* If the PWM is swinging, return the real frequency,
+>> otherwise 0 */
+>> +		*val = ad7606_pwm_is_swinging(st) ?
+>> +			DIV_ROUND_CLOSEST_ULL(NSEC_PER_SEC,
+>> cnvst_pwm_state.period) : 0;
+>> +		return IIO_VAL_INT;
+>>   	}
+>>   	return -EINVAL;
+>>   }
+>> @@ -360,6 +379,8 @@ static int ad7606_write_raw(struct iio_dev *indio_dev,
+>>   			return ret;
+>>   
+>>   		return 0;
+>> +	case IIO_CHAN_INFO_SAMP_FREQ:
+>> +		return ad7606_set_sampling_freq(st, val);
+>>   	default:
+>>   		return -EINVAL;
+>>   	}
+>> @@ -482,7 +503,6 @@ static int ad7606_buffer_postenable(struct iio_dev
+>> *indio_dev)
+>>   	struct ad7606_state *st = iio_priv(indio_dev);
+>>   
+>>   	gpiod_set_value(st->gpio_convst, 1);
+>> -	ad7606_pwm_set_swing(st);
+>>   
+>>   	return 0;
+>>   }
+>> @@ -492,19 +512,53 @@ static int ad7606_buffer_predisable(struct iio_dev
+>> *indio_dev)
+>>   	struct ad7606_state *st = iio_priv(indio_dev);
+>>   
+>>   	gpiod_set_value(st->gpio_convst, 0);
+>> -	ad7606_pwm_set_low(st);
+>>   
+>>   	return 0;
+>>   }
+>>   
+>> +static int ad7606_pwm_buffer_postenable(struct iio_dev *indio_dev)
+>> +{
+>> +	struct ad7606_state *st = iio_priv(indio_dev);
+>> +
+>> +	return ad7606_pwm_set_swing(st);
+>> +}
+>> +
+>> +static int ad7606_pwm_buffer_predisable(struct iio_dev *indio_dev)
+>> +{
+>> +	struct ad7606_state *st = iio_priv(indio_dev);
+>> +
+>> +	return ad7606_pwm_set_low(st);
+>> +}
+> Maybe I'm missing something but are we removing the gpiod calls?
+
+
+Well actually the pwm is meant to be used only with backend. Though it 
+could be used without it, I dont think it is a very good idea because 
+interrupt handling + transmission init takes quite some time, and a new 
+rising edge could happen before the current samples are effectively 
+transferred. However, since PWM and backend are two separate things, I 
+wanted to show an usage for the PWM when introducing it, and one way to 
+do it was to use it to emulate a GPIO by setting the duty cycle 100% for 
+having a 1 (set_high) and 0% for having a 0 (set_low). Then on this 
+patch, since we introduce iio-backend, I removed this 'mock' usage of it.
+
+But I think that I should separate the removal into an additional patch 
+to avoid confusions. Or shall I just remove the mock usage from the PWM 
+patch ?
+
+
+>> +
+>> +static int ad7606_update_scan_mode(struct iio_dev *indio_dev,
+>> +				   const unsigned long *scan_mask)
+>> +{
+>> +	struct ad7606_state *st = iio_priv(indio_dev);
+>> +
+>> +	/* The update scan mode is only for iio backend compatible drivers.
+>> +	 * If the specific update_scan_mode is not defined in the bus ops,
+>> +	 * just do nothing and return 0.
+>> +	 */
+>> +	if (st->bops->update_scan_mode)
+>> +		return st->bops->update_scan_mode(indio_dev, scan_mask);
+>> +	else
+>> +		return 0;
+> Redundant else
+
+
+ack
+
+>> -	if (ret)
+>> -		return ret;
+>>   
+>> +	if (st->bops->iio_backend_config) {
+>> +		st->bops->iio_backend_config(dev, indio_dev);
+>> +		indio_dev->setup_ops = &ad7606_pwm_buffer_ops;
+> Ignoring error code
+
+
+will handle
+
+
+>
+>> +	} else {
+>> +		/* Reserve the PWM use only for backend (force gpio_convst
+>> definition)*/
+>> +		if (!st->gpio_convst)
+>> +			return dev_err_probe(dev, -EINVAL,
+>> +					     "Convst pin must be defined when
+>> not in backend mode");
+>> +
+>> +		init_completion(&st->completion);
+>> +		ret = devm_request_threaded_irq(dev, irq,
+>> +						NULL,
+>> +						&ad7606_interrupt,
+>> +						IRQF_TRIGGER_FALLING |
+>> IRQF_ONESHOT,
+>> +						chip_info->name, indio_dev);
+>> +		if (ret)
+>> +			return ret;
+>> +	}
+> Are we still calling devm_iio_triggered_buffer_setup() in case we have a backend
+> device?
+
+
+No, this portion of code is only executed if convst is defined 
+(conversion trigger GPIO), which is not the case if there is a backend.
+
+
+>
+>>   	return devm_iio_device_register(dev, indio_dev);
+>>   }
+> ...
+>
+>> +#ifdef CONFIG_IIO_BACKEND
+> Not a fan of this #ifef... It's not that much code so I would just select
+> IIO_BACKEND for this driver. In fact, I don't think we can separately enable
+> IIO_BACKEND in the menuconfig menu?
+
+
+OK I can do it that way.
+
+>> +static int ad7606_bi_setup_iio_backend(struct device *dev, struct iio_dev
+>> *indio_dev)
+>> +{
+>> +		struct ad7606_state *st = iio_priv(indio_dev);
+>> +		unsigned int ret, c;
+>> +
+>> +		st->back = devm_iio_backend_get(dev, NULL);
+>> +		if (IS_ERR(st->back))
+>> +			return PTR_ERR(st->back);
+>> +
+>> +		/* If the device is iio_backend powered the PWM is mandatory
+>> */
+>> +		if (!st->cnvst_pwm)
+>> +			return -EINVAL;
+>> +
+>> +		ret = devm_iio_backend_request_buffer(dev, st->back,
+>> indio_dev);
+>> +		if (ret)
+>> +			return ret;
+>> +
+>> +		ret = devm_iio_backend_enable(dev, st->back);
+>> +		if (ret)
+>> +			return ret;
+>> +
+>> +		struct iio_backend_data_fmt data = {
+>> +			.sign_extend = true,
+>> +			.enable = true,
+>> +		};
+> I would follow typical kernel coding style and have this declared at the
+> beginning of the function.
+
+
+aouch, yes !
+
+
+>> -
+>> +#ifdef CONFIG_IIO_BACKEND
+>> +	struct iio_backend *back;
+>> +
+>> +	/*For now, only the AD7606B is backend compatible.*/
+>> +	if (chip_info->has_backend) {
+>> +		back = devm_iio_backend_get(&pdev->dev, NULL);
+>> +		if (IS_ERR(back))
+>> +			return PTR_ERR(back);
+>> +
+>> +		return ad7606_probe(&pdev->dev, 0, NULL,
+>> +				    chip_info,
+>> +				    &ad7606_bi_bops);
+>> +	}
+>> +#endif
+> Not sure I follow the above? You also get the backend in
+> ad7606_bi_setup_iio_backend()? So it seems to be that the has_backend flag is
+> not really needed?
+
+
+The first call to devm_iio_backend_get checks if there is a backend 
+available, and if so the backend bops (ad7606_bi_bops)are passed to the 
+generic probe function.
+
+At this stage, the backend cannot be stored in the ad7606_state 
+structure because it is not initialized yet, it will be in the generic 
+probe function, hence the second call.
+
+The has_backend flag is discussed in my answer to Jonathan's comment, 
+and will probably be removed.
+
+>
+> - Nuno Sá
+>
+>
 
