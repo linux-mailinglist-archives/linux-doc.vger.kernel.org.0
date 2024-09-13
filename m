@@ -1,261 +1,271 @@
-Return-Path: <linux-doc+bounces-25237-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25240-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC65D9789BC
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Sep 2024 22:16:37 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id ABA1F978A23
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Sep 2024 22:44:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 8CC16287AAD
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Sep 2024 20:16:36 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0E1E1B24A66
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Sep 2024 20:44:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B7312155CBF;
-	Fri, 13 Sep 2024 20:14:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 288991465A4;
+	Fri, 13 Sep 2024 20:44:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="nMkqisAw"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="diPNKoqG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3086154BEA;
-	Fri, 13 Sep 2024 20:14:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.177.32
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1726258451; cv=none; b=XjoOwlRcWZ0a2tovgPJPFabuKPRrtbnzAVVb5ZeAYBDSc94yrqB9vKE51Wcok8+lA27vYGt5f4dg5ObFwzy+Xkz6/B1fXnnGoDjXXa2pjKJlIm2k+k1CAUAFaZI/zenvg66R+WfJdWdahOstcvf65q4Jl4Bvbis5y/xBLRP7avc=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1726258451; c=relaxed/simple;
-	bh=sOk43r6vmFxmdtIXNcG4EaKtbQdXQhOxZVsz4aP4vhw=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=JLPMRquTfGsLKi1MFlSsbiEVdEwUUgmE4EvuGwbXuQTS4wX4KUrY20hlyCZwhd/m8TpJHwPLAb8hmHm1m7Lbcei0RrPPEIYhx+RSrpJmV/wBWd4S9a968fiA5CgLRt95H+KsqTi7z/oVXUuJncQVHe4zg9BGwGhPqx8xwsNIz9s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=nMkqisAw; arc=none smtp.client-ip=205.220.177.32
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 48DJ0oB9030201;
-	Fri, 13 Sep 2024 20:13:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=
-	from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding; s=corp-2023-11-20; bh=Y
-	Nv2wwZ99egsX3bHuUPzbFYitff09OWNP/lW0iaYo1Q=; b=nMkqisAw4rBgWVKtx
-	ALxzYUEvvjwLojF6KN0oOhpBt/M0SUOWZLUk7ZwZGHSFIV584Y1TMIIAFl3O0i2c
-	mbTcBVHrLYz/mPIilqoyvaBA4oBkQOdMJ0XDsPwNYfMLsgRqujle/LN2LVe7ISjG
-	7UaeFsVTvOgJ4lqni9ygKmEuSUAAmKfrELrPC38uxzJjDgrFk4lKZcRO4x+MMl1z
-	qe/omF1a/ztXURay0TIjPhjohaEQrZoQowIYroONUOWbPNbV7v4n580NsPVsscaj
-	VP6qm3Z8mZOkIYgGwmJhNLYpslGQDOjuGMqV3u8iWGYT3zGEW4YxqAn5GHY83q55
-	WcYZQ==
-Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 41gjbux97g-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 13 Sep 2024 20:13:22 +0000 (GMT)
-Received: from pps.filterd (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
-	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 48DKCr13040758;
-	Fri, 13 Sep 2024 20:13:21 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 41gd9etg7s-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Fri, 13 Sep 2024 20:13:21 +0000
-Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 48DKDKtL029564;
-	Fri, 13 Sep 2024 20:13:20 GMT
-Received: from localhost.us.oracle.com (bur-virt-x6-2-100.us.oracle.com [10.153.92.40])
-	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 41gd9etg5a-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Fri, 13 Sep 2024 20:13:20 +0000
-From: Ross Philipson <ross.philipson@oracle.com>
-To: linux-kernel@vger.kernel.org, x86@kernel.org,
-        linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-crypto@vger.kernel.org, kexec@lists.infradead.org,
-        linux-efi@vger.kernel.org, iommu@lists.linux-foundation.org
-Cc: ross.philipson@oracle.com, dpsmith@apertussolutions.com,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
-        dave.hansen@linux.intel.com, ardb@kernel.org, mjg59@srcf.ucam.org,
-        James.Bottomley@hansenpartnership.com, peterhuewe@gmx.de,
-        jarkko@kernel.org, jgg@ziepe.ca, luto@amacapital.net,
-        nivedita@alum.mit.edu, herbert@gondor.apana.org.au,
-        davem@davemloft.net, corbet@lwn.net, ebiederm@xmission.com,
-        dwmw2@infradead.org, baolu.lu@linux.intel.com,
-        kanth.ghatraju@oracle.com, andrew.cooper3@citrix.com,
-        trenchboot-devel@googlegroups.com
-Subject: [PATCH v11 20/20] x86/efi: EFI stub DRTM launch support for Secure Launch
-Date: Fri, 13 Sep 2024 13:05:17 -0700
-Message-Id: <20240913200517.3085794-21-ross.philipson@oracle.com>
-X-Mailer: git-send-email 2.39.3
-In-Reply-To: <20240913200517.3085794-1-ross.philipson@oracle.com>
-References: <20240913200517.3085794-1-ross.philipson@oracle.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79B8512C470;
+	Fri, 13 Sep 2024 20:44:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.15
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1726260266; cv=fail; b=is7YE2xYgJIpUyCWHK/fjtHr4HxmCbeNo0nKp6KyENIvgkEMwnEIqFlYIPCJLoZVowLsBzZ0cVOSz6WFIqpihPTUAJ1TwIZDiAH7ejVemNlQTdWal7wB/eveEhXZ2VdkiDh2+kERdqMh9/6xvJ8ifXdD7Dlrb+8bWNh14twvIVg=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1726260266; c=relaxed/simple;
+	bh=Y/mPrN8QjONFEjGF59sUGAmyG7TKFQtOCIq3I/0Be+4=;
+	h=Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=ifcdP1zBAvjJNaxUOjcPXLUBDy0fcKWqyCDoDZnRQbTDT/SFVZubMJxup4GhqBk+ib+snzI8N9ZReY2vzV1NprDqNFvMxowhu5aQux6Ney7M8Tbc4uMo/HF62dX3s/JpjVqeXmoLlKDbUymFc+A9iJayvlbm0H78b82iVQnnbjU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=diPNKoqG; arc=fail smtp.client-ip=198.175.65.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1726260265; x=1757796265;
+  h=message-id:date:subject:to:cc:references:from:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=Y/mPrN8QjONFEjGF59sUGAmyG7TKFQtOCIq3I/0Be+4=;
+  b=diPNKoqG9J5N5AsqLgLImc95VkPQGE1xvBPTnEW+mQuEkVH/SFjHMj18
+   SIt7jz7HM1+WHgZgGvmbbJXe/eNjlbls42We6kmk9WHXqwPxw/1BlkdJq
+   XbvLefZppmitP3PRJwQX37dU4eCwugcSKgAGVY+OopQN4p/CRMCGgX5wK
+   h1+imSeJBrL3yyfq46dF/2l3k9x5pL6iTK9qlx7Ll/S3/f/4hqFmtygQW
+   QeDiGvMspm64/52CIRfyvlOdZ6cnX0WQoEdlMjFh82lpsiuKTc+n4TKp+
+   8DIFIVM2bV1DoPwvBaiey8751LVifN85WEGd03vFP90MswL7iOi9/ymEm
+   A==;
+X-CSE-ConnectionGUID: Se/+eswbSOmKW91MgZoc5Q==
+X-CSE-MsgGUID: D2x+NM61SLCTGBRGeRKULg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11194"; a="28921490"
+X-IronPort-AV: E=Sophos;i="6.10,227,1719903600"; 
+   d="scan'208";a="28921490"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Sep 2024 13:44:24 -0700
+X-CSE-ConnectionGUID: uHQ5DTp1RfO4t9tSLgVzZg==
+X-CSE-MsgGUID: KUBn9xSTShKpEMKDdJiPFw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,227,1719903600"; 
+   d="scan'208";a="68052252"
+Received: from fmsmsx602.amr.corp.intel.com ([10.18.126.82])
+  by orviesa010.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 13 Sep 2024 13:44:23 -0700
+Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
+ fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Fri, 13 Sep 2024 13:44:23 -0700
+Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
+ fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Fri, 13 Sep 2024 13:44:22 -0700
+Received: from fmsedg602.ED.cps.intel.com (10.1.192.136) by
+ fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39 via Frontend Transport; Fri, 13 Sep 2024 13:44:22 -0700
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (104.47.66.44) by
+ edgegateway.intel.com (192.55.55.71) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.39; Fri, 13 Sep 2024 13:44:22 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=iMpDmA/W1/EELHCloOCm/+tJe1amM6ol4GWaWzP0sfyVmAIvNxl/9vd52sKAS7K/FdLjW1Th7RjODXWYtZZv7+/vFenA+DH8iajkIwNqP/8nChgS1wFTFkVAtPd4kbpzyTNN2WDNaqhzUUuooJlr1iT4+WDlvMKSEleNdW+p6J2+v55PSAOw/qKe+M5s2YUVZwHDGyT2/fAj1pe8Zry+kkhf3hewp8o4o7Nxooj8Iji2wTkJeU9vRcV5lNTxRBF2kbw/N3FocVXLia3oAoBaJRUXFbL4e1HjBM8O4nHRbqJC5/mpjvV2kY4gVKssrJOZpsG2ZN4qzXKGACK04bvyCw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KX7sutQkrkOjj1/bEsWT+RHrhlt80gtdgGPkzdqXWrg=;
+ b=C6gSwtSi++1O+dCSPsklufMO4W40Sww1xccp632M4F4RRP43NBDF0j0LS1iwbuulb9Jxlqpy7c/6RS02YWwomvefdqvH/6x7tjMagfh9KOseeBHslE+kDmhsY6Sjm/PnObovdd4lguqbCa9zpkJE2g+VoJPsbIZ4xQzsfMx2NOOE0QpXCJLVLzkO0F6WEMBYHCJfESPRuhtxP71gwVPNpT/Cqv2K3vjopuDPcYjxWlODE+T7tZ51a+A6B5HVa/X5k8xkFdWtsW+Uq+QHSIDpKAvF2sc2Deu6Q6SRBFG3YDm8SG+xlyF+pkg3/iV6Ez2X5JaCF6FGvD/67kgX4Qzg6A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from SJ2PR11MB7573.namprd11.prod.outlook.com (2603:10b6:a03:4d2::10)
+ by IA1PR11MB7293.namprd11.prod.outlook.com (2603:10b6:208:42a::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.17; Fri, 13 Sep
+ 2024 20:44:19 +0000
+Received: from SJ2PR11MB7573.namprd11.prod.outlook.com
+ ([fe80::61a:aa57:1d81:a9cf]) by SJ2PR11MB7573.namprd11.prod.outlook.com
+ ([fe80::61a:aa57:1d81:a9cf%3]) with mapi id 15.20.7939.022; Fri, 13 Sep 2024
+ 20:44:19 +0000
+Message-ID: <902dbdb5-25c8-4330-a983-f76ae98f7493@intel.com>
+Date: Fri, 13 Sep 2024 13:44:15 -0700
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/7] x86/resctrl : Support L3 Smart Data Cache Injection
+ Allocation Enforcement (SDCIAE)
+To: Babu Moger <babu.moger@amd.com>, <corbet@lwn.net>, <tglx@linutronix.de>,
+	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>,
+	<x86@kernel.org>
+CC: <fenghua.yu@intel.com>, <hpa@zytor.com>, <paulmck@kernel.org>,
+	<thuth@redhat.com>, <xiongwei.song@windriver.com>, <ardb@kernel.org>,
+	<pawan.kumar.gupta@linux.intel.com>, <daniel.sneddon@linux.intel.com>,
+	<sandipan.das@amd.com>, <kai.huang@intel.com>, <peterz@infradead.org>,
+	<kan.liang@linux.intel.com>, <pbonzini@redhat.com>, <xin3.li@intel.com>,
+	<ebiggers@google.com>, <alexandre.chartre@oracle.com>, <perry.yuan@amd.com>,
+	<tan.shaopeng@fujitsu.com>, <james.morse@arm.com>, <tony.luck@intel.com>,
+	<maciej.wieczor-retman@intel.com>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <peternewman@google.com>,
+	<eranian@google.com>
+References: <cover.1723824984.git.babu.moger@amd.com>
+From: Reinette Chatre <reinette.chatre@intel.com>
+Content-Language: en-US
+In-Reply-To: <cover.1723824984.git.babu.moger@amd.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MW4PR03CA0313.namprd03.prod.outlook.com
+ (2603:10b6:303:dd::18) To SJ2PR11MB7573.namprd11.prod.outlook.com
+ (2603:10b6:a03:4d2::10)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-13_11,2024-09-13_02,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 suspectscore=0
- mlxlogscore=999 mlxscore=0 malwarescore=0 phishscore=0 adultscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2408220000 definitions=main-2409130143
-X-Proofpoint-GUID: FHwIIj5XO5_PqZa7Fmt9wI4g6gsR6zGP
-X-Proofpoint-ORIG-GUID: FHwIIj5XO5_PqZa7Fmt9wI4g6gsR6zGP
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR11MB7573:EE_|IA1PR11MB7293:EE_
+X-MS-Office365-Filtering-Correlation-Id: 48a563c4-fd94-4101-5e71-08dcd434d6dc
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|7416014|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MWlZbGxveVFFVGxzQWVyZTFpSGRBYWVXQjlOYmpEOVl3UGUwUGJpY25Gd1Rh?=
+ =?utf-8?B?RXVWd3E3dTJvS0RnK3RpbzM0bTlYTFVNTVhVSmhUNTg2T3dhOUFoNm9rNU1u?=
+ =?utf-8?B?RFJ6MTBuTjhOZFBjOStlYlVscVZsQS9wOW5ZT0tvQnNhZEdPN0FnQWN2cDlK?=
+ =?utf-8?B?cXBsSDFiek01SGIxMWhpYkFQSkd5M1VYN1BEa2kyZlF3R3hxUk9FN3d3SnBD?=
+ =?utf-8?B?eU5ldDduUUkrQ3VGUllyS1Q1NnZhbmpTSWsrekVGMS91UHlnMytOK0F0TDZY?=
+ =?utf-8?B?b21NZ1BSVk5WRFk1YlNEaGJueXJmcUpVaVRKM2p2cU1URkJQYWdVTGlMMHl1?=
+ =?utf-8?B?eVlJcFplOXZFZnp6L1BtZ3hQV2puL3VyQjB6ZnlzR2lVTWlZLzJMbHBhdTFu?=
+ =?utf-8?B?YkR4WTlLeFA5OUdSK0xQa3VLczZYb1N4VTdTL1YzbDhpRDd3U1NMZDFBWk1H?=
+ =?utf-8?B?UU9ab3dJaFhyM2svZVMvQTBXSk5ZcjlsK2NpbGpRSHpnbzZReEhBYUY3M2Mv?=
+ =?utf-8?B?LzNSNGlWUHhhY2ZQeS9hd2dlRzRURVVTV2c2dEtlYm9oVkJJWkdXQW82b3hL?=
+ =?utf-8?B?WFNqK0I2a28wTVJxSlZEbXkvSzNScjFHRUtOV0ZaWmszc0QvUk00NnZENzNy?=
+ =?utf-8?B?SDlMOGIxcGhTY0dmOEt2Y3RlUHp0ajFJYTJveWxUOVk2Skt4akR5R1ROV0Fs?=
+ =?utf-8?B?eFJ3MGdNMzBJVnJWWUcrSjBmSGZCT3Z3L0lqb0xrdFA4ZU9HZDVKNUdIclpa?=
+ =?utf-8?B?V2tXSVN4L0JYOHdpZVN2Q2lzWld6UWx6c3FHWldGV0ZNT1NpV29iN0JwWWNN?=
+ =?utf-8?B?dHFDZ25BcVprVGhQT3BOakZoOFM2Sk5DQ2drQ0FmQVBodG1ueDk4ZnhEbGtv?=
+ =?utf-8?B?MG5rUjFZT2g2U0xsdTVPMzAwYUNUVC9ubmdSK09ZSERCOGV4Y0FpY1Fkd0Q4?=
+ =?utf-8?B?bEFLWFdHb29RU1BwRGN1V3RJbjZ6TlVuZHkwMWZRTGIvK3czWW1MS1JXbTc5?=
+ =?utf-8?B?S2hoN1ByalZ6NUtucnVwdTBMck1pV3ZYbHZ1dkZuMWYxbzNhakZkVEdvWTdm?=
+ =?utf-8?B?VERYdjVyNWdoY2Q1dS9PTzVIdUQ2bHdlNEpHMlF0cGlpM2RwVlBLanRiRzZI?=
+ =?utf-8?B?Ty82clRINkJsTU9PdXBSakFpdkkrVUN1cjVEaEJiSmt4RnBSWGdsb1RQMEF5?=
+ =?utf-8?B?dnVQZGE1d2Y1TTk5VFV4cldWTmhmZ1hCMXNkM2Y3c2ZUQ3Q3c0dyaFNUSUh0?=
+ =?utf-8?B?V0dtV3g0MkJ6dkdtTEdnWXBydE9jMzhlQUpVYTM0Q2FEdVdQWWdrT3pZWEdw?=
+ =?utf-8?B?SEhBc1I0eXJCY3g0c3hxMHh5OWxJcXA5VmtOVUZTdjlnVWRPRFF4VVRmS3M1?=
+ =?utf-8?B?RzNKZnd1SzFQMkViL2pOUmNRbVQ3OG84TTh4OTQwWEZXNHgwV0Q3RU1pOFlO?=
+ =?utf-8?B?RkNwaVlIVU5MK0FqZC8zaU4rb09OMkVDRW1uSHNoZUVDTVVPbllrby9KYktJ?=
+ =?utf-8?B?WGNsTVltVFNqZ1k1dUhYOExSbEx2ZmJSbjQrVmxncjJIQ3p2UkVQTFRweVk5?=
+ =?utf-8?B?OTF1VkZVMjVsWlZVWDNrS1kvZ3p4NTIzTUg5dXdkNVNteXdtNVFYWVhTWE8y?=
+ =?utf-8?B?dkdRUHVuNnBvZC9YbllIdDNOSXNUWnRSekMwVjBVQWlHREk1SXhsV2tyL1dq?=
+ =?utf-8?B?U01WQ1BpYWZNOVNqZDlrSWZQZjFuam9peFhSNkJvWFo1TE1oazgzVWVpenNJ?=
+ =?utf-8?B?eWgrK3gyNVBENGJQVWZFQ1p6QUxETVd3NVlPd3JxRzhJdko2ZkV4a2k3dmN1?=
+ =?utf-8?Q?92BZMfRxleZqO7mWm5nGjp/PKOIFxCiZJVTfQ=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ2PR11MB7573.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(7416014)(376014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RFQxbVdBNUg0Z1ZEOThOcUxkZXgvZmJyS2ZtMm00OTIxRjNvaklmQVZMTVgz?=
+ =?utf-8?B?K1dJc2oxUXZkSHBrMTB6WmVOZktKdkU2VTNrcVlsWnBwT0FrNTY5VXMxUzVI?=
+ =?utf-8?B?RDdqRHJOa0xickVvSWIzdTQweDJkdHJDaGFZTmY3SzAxQlhSNWhWczdFZmxw?=
+ =?utf-8?B?Vmx0eWhKc3cxTUFwcXQrUUl5Ty9hVTlqN29NUVFqTlJTWEVoek4weWRsejYw?=
+ =?utf-8?B?eUdjQW1Ucnh4YTdFQVVaVTcvWDVhUlFRdncvbTU3QUwxUWlPTlpoNmh5S2pD?=
+ =?utf-8?B?SVRqQUdxb3FSUWVTTnJGYk5hdjdGZWNkN2JqVnJaMUVYbVRXa296WVoxeVl3?=
+ =?utf-8?B?eU9sWnVPV1I1ZStiY05KbjYxdFFNNk1iSG1WcnJpdnByQjF6MWxaZzU5REN0?=
+ =?utf-8?B?d2N4ZEdqa0UySGVjbmZuMGJTK3lHbXRwTXFJanFleUhBdjJwYjBhaUpoNnZr?=
+ =?utf-8?B?QjdCT3ZhNGlCd2pmWFhUdWJCYTR2ZFpvcWxSNUcveEZxdForU3hqcWJHME1a?=
+ =?utf-8?B?b0hPZi9EcXdiSVBnYlJ0bFhIdDJocThZNGZTREZsUWpWNW5XM2I5b0QzMjV1?=
+ =?utf-8?B?MytCNUVxUjVDTG5VdVBQT3B1bXJpNk1iZ1BPaDU1eEJOZ0Jrb21aT1hWTFpv?=
+ =?utf-8?B?TDFkNzlwbXlZTGhSNEE4YzBCVkNnL09MY0pNbllPNXRmK0FQbWlEakgxZ2k5?=
+ =?utf-8?B?SEhrSGFxUFZsb0htVVVkcHFocmQrdERhL1pSZTJDUlFqUXM3Q3paUlplYUtm?=
+ =?utf-8?B?T1BTV29xNmxWZ1hOaG1kUzdxZkVjRFB3UEc2NUs5S2xySlVwbVBSTisranc5?=
+ =?utf-8?B?T3daNUJmWVFjM1dkaWlFWHVsVTIyeisyWjdqd3VIVWZBVEN2czh1WFVkUDlj?=
+ =?utf-8?B?TDg1NjRKSERBSjNwUk44T3orcTZHSlFzZzFjckI4ZkdQLzlvVHlBZDBhbDI4?=
+ =?utf-8?B?NEd6MHdERnJWTFZhSEZ3Nyt5b0NpWm0xNEVoUjNDRUtiQ3NSNUcwMkRtT052?=
+ =?utf-8?B?VW1ZR0lON0w4L3BzSWtpbGw2MzMwb2RsaTVPNU1Yd2htUFpYK0tueXN5dGlh?=
+ =?utf-8?B?S0xobzNIWjFGb284eTRXRHlCY1FBTWRUOFRHNG0raGFzL0c3c2tWbmZhSk1F?=
+ =?utf-8?B?WXgvZHhNbGRMUVlISUozMlBwbllQcFh0a3o4bkFrclVnVWlBU3dXQmpvK1N5?=
+ =?utf-8?B?MHhYanljRkFERS85eHVQMnhnR3lqS0VpSkNDQjBNenUxaUp6WmJCbTR2MU54?=
+ =?utf-8?B?SkFWTVlIOEsxd1g0SlAyTmpmcXFkT2RTVm92akRyRlljSVUxTy9yYVJlOGVz?=
+ =?utf-8?B?QjlQTkQ3N3FjQXB3Wml4R1hsblY0c3R5TmNwcDZPQlRDaDFPZjdxTU1WYkps?=
+ =?utf-8?B?OEpVTXVGank2L0JZVnpwOC95VzNnemQ2allxNmxzdmxtSE1XYkdLTjAvNmhk?=
+ =?utf-8?B?Q0dtRzZ1NE9ZUzdvMzU2b3ZGblhaa1RhajFDUTFTRzBFZFhRazVmenZTMmk0?=
+ =?utf-8?B?RCtQZE1CbjZrVXF1MzY3bTVxRzc3aTU0TWoranRwZ2h1VDQzTURXMS9RY3o2?=
+ =?utf-8?B?cTZUcU9wbVNTWFVwQ1FtOG55WGRTZWpGZjd3c1NFZkJzam1EazNmd3UyQUlp?=
+ =?utf-8?B?R2JjbDFUZTNOcHBvMkhmdGpNdDFuNkwyejNSYVd5cjRmb2t0aW5uRHA3SU5B?=
+ =?utf-8?B?Y2JqZGt1WFdqT1V2c2ptL2htNzJsWmdEby9maUpyalFLalE1QUF2QUhYQjNB?=
+ =?utf-8?B?dklVcEI3c2c2TVFTTGRNT3VzSWQ2M0Q0UFhwajhSd1N6bmZwTFZKb3ZRZGI3?=
+ =?utf-8?B?SFVTaFYwdlJSZ295TXlyMTY5SzNhRC9ubGRwTWNIWW9mdzd5Y0JVMVlCNU5O?=
+ =?utf-8?B?VzlaM1ZSL29XNVpWK2w3MXNIUXJrdm02OEhKcEplYW5xUEtjQlBBazA1VlBG?=
+ =?utf-8?B?Q2QvQUxkTWhjbWJUV3I4TXFZWk1BS293VHlpdHFEeXNWb0RXZUZaUFJWdnFh?=
+ =?utf-8?B?NHFQSGdyMUorK3BYYkI3Nyt2RG0wZmFIVXhBSVR2RUhPYkVyQnRmZk9ZNkxv?=
+ =?utf-8?B?NWJzV1ZvYVpNaDFaR2EvajV0NHI2SGNYdm51S1dweTZ4Y3ZOQjJSNEZ4MnRk?=
+ =?utf-8?B?WWpIOEtjUThILzRvUDA5YlRHcytySjR1WHpMK2k0UzhiMmc5d0RKOFNjL0h5?=
+ =?utf-8?B?eUE9PQ==?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 48a563c4-fd94-4101-5e71-08dcd434d6dc
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR11MB7573.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2024 20:44:18.9576
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VJLtauIxY42Fd53W+K09DCPjnAffdQqMWvMVSdjerSSWvCv7ZvrJMoNLf2p1hLGoPmDCo1j8XKVqJTE4/z4h54x+bLCgxnxhgA/DfiN1RSI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7293
+X-OriginatorOrg: intel.com
 
-This support allows the DRTM launch to be initiated after an EFI stub
-launch of the Linux kernel is done. This is accomplished by providing
-a handler to jump to when a Secure Launch is in progress. This has to be
-called after the EFI stub does Exit Boot Services.
+Hi Babu,
 
-Signed-off-by: Ross Philipson <ross.philipson@oracle.com>
-Reviewed-by: Ard Biesheuvel <ardb@kernel.org>
----
- drivers/firmware/efi/libstub/efistub.h  |  8 ++
- drivers/firmware/efi/libstub/x86-stub.c | 99 +++++++++++++++++++++++++
- 2 files changed, 107 insertions(+)
+On 8/16/24 9:16 AM, Babu Moger wrote:
+> 
+> This series adds the support for L3 Smart Data Cache Injection Allocation
+> Enforcement (SDCIAE) to resctrl infrastructure.
+> 
+> Upcoming AMD hardware implements Smart Data Cache Injection (SDCI).
+> Smart Data Cache Injection (SDCI) is a mechanism that enables direct
+> insertion of data from I/O devices into the L3 cache. By directly caching
+> data from I/O devices rather than first storing the I/O data in DRAM, SDCI
+> reduces demands on DRAM bandwidth and reduces latency to the processor
+> consuming the I/O data. The SDCIAE (SDCI Allocation Enforcement) PQE
+> feature allows system software to limit the portion of the L3 cache used
+> for SDCI.
+> 
 
-diff --git a/drivers/firmware/efi/libstub/efistub.h b/drivers/firmware/efi/libstub/efistub.h
-index d33ccbc4a2c6..baf42d6d0796 100644
---- a/drivers/firmware/efi/libstub/efistub.h
-+++ b/drivers/firmware/efi/libstub/efistub.h
-@@ -135,6 +135,14 @@ void efi_set_u64_split(u64 data, u32 *lo, u32 *hi)
- 	*hi = upper_32_bits(data);
- }
- 
-+static inline
-+void efi_set_u64_form(u32 lo, u32 hi, u64 *data)
-+{
-+	u64 upper = hi;
-+
-+	*data = lo | upper << 32;
-+}
-+
- /*
-  * Allocation types for calls to boottime->allocate_pages.
-  */
-diff --git a/drivers/firmware/efi/libstub/x86-stub.c b/drivers/firmware/efi/libstub/x86-stub.c
-index f8e465da344d..2e063bce1080 100644
---- a/drivers/firmware/efi/libstub/x86-stub.c
-+++ b/drivers/firmware/efi/libstub/x86-stub.c
-@@ -9,6 +9,8 @@
- #include <linux/efi.h>
- #include <linux/pci.h>
- #include <linux/stddef.h>
-+#include <linux/slr_table.h>
-+#include <linux/slaunch.h>
- 
- #include <asm/efi.h>
- #include <asm/e820/types.h>
-@@ -923,6 +925,98 @@ static efi_status_t efi_decompress_kernel(unsigned long *kernel_entry)
- 	return efi_adjust_memory_range_protection(addr, kernel_text_size);
- }
- 
-+#if (IS_ENABLED(CONFIG_SECURE_LAUNCH))
-+static bool efi_secure_launch_update_boot_params(struct slr_table *slrt,
-+						 struct boot_params *boot_params)
-+{
-+	struct slr_entry_intel_info *txt_info;
-+	struct slr_entry_policy *policy;
-+	struct txt_os_mle_data *os_mle;
-+	bool updated = false;
-+	int i;
-+
-+	txt_info = slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_INTEL_INFO);
-+	if (!txt_info)
-+		return false;
-+
-+	os_mle = txt_os_mle_data_start((void *)txt_info->txt_heap);
-+	if (!os_mle)
-+		return false;
-+
-+	os_mle->boot_params_addr = (u64)boot_params;
-+
-+	policy = slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_ENTRY_POLICY);
-+	if (!policy)
-+		return false;
-+
-+	for (i = 0; i < policy->nr_entries; i++) {
-+		if (policy->policy_entries[i].entity_type == SLR_ET_BOOT_PARAMS) {
-+			policy->policy_entries[i].entity = (u64)boot_params;
-+			updated = true;
-+			break;
-+		}
-+	}
-+
-+	/*
-+	 * If this is a PE entry into EFI stub the mocked up boot params will
-+	 * be missing some of the setup header data needed for the second stage
-+	 * of the Secure Launch boot.
-+	 */
-+	if (image) {
-+		struct setup_header *hdr = (struct setup_header *)((u8 *)image->image_base +
-+					    offsetof(struct boot_params, hdr));
-+		u64 cmdline_ptr;
-+
-+		boot_params->hdr.setup_sects = hdr->setup_sects;
-+		boot_params->hdr.syssize = hdr->syssize;
-+		boot_params->hdr.version = hdr->version;
-+		boot_params->hdr.loadflags = hdr->loadflags;
-+		boot_params->hdr.kernel_alignment = hdr->kernel_alignment;
-+		boot_params->hdr.min_alignment = hdr->min_alignment;
-+		boot_params->hdr.xloadflags = hdr->xloadflags;
-+		boot_params->hdr.init_size = hdr->init_size;
-+		boot_params->hdr.kernel_info_offset = hdr->kernel_info_offset;
-+		efi_set_u64_form(boot_params->hdr.cmd_line_ptr, boot_params->ext_cmd_line_ptr,
-+				 &cmdline_ptr);
-+		boot_params->hdr.cmdline_size = strlen((const char *)cmdline_ptr);
-+	}
-+
-+	return updated;
-+}
-+
-+static void efi_secure_launch(struct boot_params *boot_params)
-+{
-+	struct slr_entry_dl_info *dlinfo;
-+	efi_guid_t guid = SLR_TABLE_GUID;
-+	dl_handler_func handler_callback;
-+	struct slr_table *slrt;
-+
-+	/*
-+	 * The presence of this table indicated a Secure Launch
-+	 * is being requested.
-+	 */
-+	slrt = (struct slr_table *)get_efi_config_table(guid);
-+	if (!slrt || slrt->magic != SLR_TABLE_MAGIC)
-+		return;
-+
-+	/*
-+	 * Since the EFI stub library creates its own boot_params on entry, the
-+	 * SLRT and TXT heap have to be updated with this version.
-+	 */
-+	if (!efi_secure_launch_update_boot_params(slrt, boot_params))
-+		return;
-+
-+	/* Jump through DL stub to initiate Secure Launch */
-+	dlinfo = slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_DL_INFO);
-+
-+	handler_callback = (dl_handler_func)dlinfo->dl_handler;
-+
-+	handler_callback(&dlinfo->bl_context);
-+
-+	unreachable();
-+}
-+#endif
-+
- static void __noreturn enter_kernel(unsigned long kernel_addr,
- 				    struct boot_params *boot_params)
- {
-@@ -1050,6 +1144,11 @@ void __noreturn efi_stub_entry(efi_handle_t handle,
- 		goto fail;
- 	}
- 
-+#if (IS_ENABLED(CONFIG_SECURE_LAUNCH))
-+	/* If a Secure Launch is in progress, this never returns */
-+	efi_secure_launch(boot_params);
-+#endif
-+
- 	/*
- 	 * Call the SEV init code while still running with the firmware's
- 	 * GDT/IDT, so #VC exceptions will be handled by EFI.
--- 
-2.39.3
+This series introduces new user interface. Could you please describe the
+new user interface in the cover letter and how users are expected to interact
+with this interface to be able to use this new feature? Please also describe
+the impact on existing resctrl interfaces related to cache allocation from
+I/O hardware, for example "shareable_bits", "bit_usage", etc. These existing
+interfaces are used to communicate to user space how portions of cache are
+used by I/O hardware but I cannot tell from this series how this work builds on
+this.
 
+How does this feature work with the existing "L3 Cache Allocation Sharing Mask"
+that is enumerated as part of CAT feature?
+
+> The feature details are documented in the APM listed below [1].
+> [1] AMD64 Architecture Programmer's Manual Volume 2: System Programming
+> Publication # 24593 Revision 3.41 section 19.4.7 L3 Smart Data Cache
+> Injection Allocation Enforcement (SDCIAE)
+> Link: https://bugzilla.kernel.org/show_bug.cgi?id=206537
+> 
+> The feature requires linux support of TPH (TLP Processing Hints).
+> The support is ongoing and patches are currently under review.
+> https://lore.kernel.org/lkml/20240717205511.2541693-2-wei.huang2@amd.com/
+
+Please note that the cover letter [1] of that series mentions "Cache Injection
+allows PCIe endpoints to inject I/O Coherent DMA writes directly into an L2 ..."
+while this series implements and refers to L3 only.
+
+> 
+> The patches are based on top of commit
+> ad1b4b6ed19f (tip/master) Merge branch into tip/master: 'x86/timers'
+> 
+
+Reinette
+
+[1] https://lore.kernel.org/lkml/20240717205511.2541693-1-wei.huang2@amd.com/
 
