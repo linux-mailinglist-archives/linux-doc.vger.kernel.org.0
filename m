@@ -1,240 +1,198 @@
-Return-Path: <linux-doc+bounces-25323-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25311-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3713D979F82
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Sep 2024 12:37:38 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC879979EFB
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Sep 2024 12:13:07 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5C03E1C21A95
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Sep 2024 10:37:37 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 686F9284BCD
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Sep 2024 10:13:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2551E149C4F;
-	Mon, 16 Sep 2024 10:36:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 75E9514D6E1;
+	Mon, 16 Sep 2024 10:13:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="v1sVvDod";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="ft94qdf3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from wind.enjellic.com (wind.enjellic.com [76.10.64.91])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3EC7E15445E;
-	Mon, 16 Sep 2024 10:36:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=76.10.64.91
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 542DD14BFB0;
+	Mon, 16 Sep 2024 10:12:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1726483010; cv=none; b=tpV1/h/hnn/WZgiaykUL/lqHKvDY/il2vwEBR5oTz8c3QQa3ed3/wqQDEKIZqMOh3lKOkBjc9EaFqJ56Y0BQEL5y5IEgnzavIjC2+8XMnnEcddjqTMZhzgkI2XnqHvTL+ChBHA1yMvJiGadqg+r1H4RIXwKcAkaQOcQLPjM/1qQ=
+	t=1726481581; cv=none; b=PpixcNevIYC8HE6xL65nbcSMlvo04w3Zh0Ttiq5XmzgmHVsIask1/9Ha8cvrAhbg1N5xgY86WMQZmcHnIHbte+CffDOJNAxEC4KV+Kvsn+TpAxTlsLOAClPXasIJEnYfQ8df7lLa0WAQ8heEFX4GFC8hO4SUWlQ8337TCgr0TY0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1726483010; c=relaxed/simple;
-	bh=OQzx1VY3FA53WmYJxavNHFf3H1NYy38Zj5pmYpMWFGw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Mime-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lFlLS2XakK9Af6Np703XWd63O64MN62RmpTdB5Ia3+ZlAI6u1RtWFYEcnv6+ahzYtnkekZbvJRp6HZ5X5TZQHlQCX60+CZb1eIB2w4ZHspB9BL803N3928sg4KaH39fLivBrnV4GtB/BKHNHtZmIIulCvJFixHFeYcXLGEaedvU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=enjellic.com; spf=pass smtp.mailfrom=wind.enjellic.com; arc=none smtp.client-ip=76.10.64.91
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=enjellic.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=wind.enjellic.com
-Received: from wind.enjellic.com (localhost [127.0.0.1])
-	by wind.enjellic.com (8.15.2/8.15.2) with ESMTP id 48GA5wMY005315;
-	Mon, 16 Sep 2024 05:05:58 -0500
-Received: (from greg@localhost)
-	by wind.enjellic.com (8.15.2/8.15.2/Submit) id 48GA5plc005314;
-	Mon, 16 Sep 2024 05:05:51 -0500
-Date: Mon, 16 Sep 2024 05:05:51 -0500
-From: "Dr. Greg" <greg@enjellic.com>
-To: Roberto Sassu <roberto.sassu@huaweicloud.com>
-Cc: zohar@linux.ibm.com, dmitry.kasatkin@gmail.com, eric.snowberg@oracle.com,
-        corbet@lwn.net, akpm@linux-foundation.org, paul@paul-moore.com,
-        jmorris@namei.org, serge@hallyn.com, shuah@kernel.org,
-        mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
-        linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, wufan@linux.microsoft.com,
-        pbrobinson@gmail.com, zbyszek@in.waw.pl, hch@lst.de,
-        mjg59@srcf.ucam.org, pmatilai@redhat.com, jannh@google.com,
-        dhowells@redhat.com, jikos@kernel.org, mkoutny@suse.com,
-        ppavlu@suse.com, petr.vorel@gmail.com, mzerqung@0pointer.de,
-        kgold@linux.ibm.com, Roberto Sassu <roberto.sassu@huawei.com>,
-        torvalds@linux-foundation.org
-Subject: Re: [PATCH v5 00/14] integrity: Introduce the Integrity Digest Cache
-Message-ID: <20240916100551.GA5059@wind.enjellic.com>
-Reply-To: "Dr. Greg" <greg@enjellic.com>
-References: <20240905150543.3766895-1-roberto.sassu@huaweicloud.com>
+	s=arc-20240116; t=1726481581; c=relaxed/simple;
+	bh=7f22G+6r66QEwau72pU8x4w4ZuPvjQGUXc8asSZd1lI=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=UaOQMJm1JaeMiVU4tSZDBhKKOVC8Npq/iseFUs9P0hqGQnXuAzTS0QaMYDLAm2KtGr8cahzyH8fEGuRkvV0J877xTTfvcJmOHCEpYbxjKRVrqrTLSc5bKKLGBtdVqG9lmJW64aTDVViwW/x3tfl6Gbg58ZjoGEFdwqn5/Lr9qgA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=v1sVvDod; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=ft94qdf3; arc=none smtp.client-ip=193.142.43.55
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
+From: Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1726481577;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=v3ll6KO8H5UrZC6yCuHnxrKwZc40QeoVwfA712SGpCg=;
+	b=v1sVvDodszPQaC6MYGfaSe4O0YiaY1fze0PmCKJ6c2G23tPz7qhE8S1B1sLtwUgWIXMmak
+	lcl5g5XiApkWPI1SCVyw7s9z1iO9KN6mpCWlZuVUdZluKI8O4fUF6eIdjm1NesbAgwTjm9
+	L5r8Exaw6kxoLg3DrFsWi8+mp8bsCM3zkFSSojxJ6whDP0q0k1EnEEodbLafdu9xFs6uaz
+	8eHdofzdFoTnlGmddqeYRaFKXUxsd24x8fzw0LItUenj5KjkqN5heAotraD7Uf01iomULo
+	x3kKNZ67/a7jl0TuyFLafUFm2vFpo2t7LtFrG+RNKJkiP8/m8yTSt9sPqggSzw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1726481577;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=v3ll6KO8H5UrZC6yCuHnxrKwZc40QeoVwfA712SGpCg=;
+	b=ft94qdf3mKKez4Fq6giUKHTG2x5ATRcMmRN9N6Lxg1hlqvpyZTzutygIeaN9KywFwHwHHJ
+	c1DaKC+nUT0MDZDQ==
+To: Jeff Layton <jlayton@kernel.org>, John Stultz <jstultz@google.com>,
+ Stephen Boyd <sboyd@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, Steven
+ Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Jonathan Corbet
+ <corbet@lwn.net>, Chandan Babu R <chandan.babu@oracle.com>, "Darrick J.
+ Wong" <djwong@kernel.org>, Theodore Ts'o <tytso@mit.edu>, Andreas Dilger
+ <adilger.kernel@dilger.ca>, Chris Mason <clm@fb.com>, Josef Bacik
+ <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Hugh Dickins
+ <hughd@google.com>, Andrew Morton <akpm@linux-foundation.org>, Chuck Lever
+ <chuck.lever@oracle.com>, Vadim Fedorenko <vadim.fedorenko@linux.dev>
+Cc: Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-xfs@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org,
+ linux-nfs@vger.kernel.org, linux-mm@kvack.org, Jeff Layton
+ <jlayton@kernel.org>
+Subject: Re: [PATCH v8 01/11] timekeeping: move multigrain timestamp floor
+ handling into timekeeper
+In-Reply-To: <20240914-mgtime-v8-1-5bd872330bed@kernel.org>
+References: <20240914-mgtime-v8-0-5bd872330bed@kernel.org>
+ <20240914-mgtime-v8-1-5bd872330bed@kernel.org>
+Date: Mon, 16 Sep 2024 12:12:55 +0200
+Message-ID: <87a5g79aag.ffs@tglx>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240905150543.3766895-1-roberto.sassu@huaweicloud.com>
-User-Agent: Mutt/1.4i
-X-Greylist: Sender passed SPF test, not delayed by milter-greylist-4.2.3 (wind.enjellic.com [127.0.0.1]); Mon, 16 Sep 2024 05:05:58 -0500 (CDT)
+MIME-Version: 1.0
+Content-Type: text/plain
 
-On Thu, Sep 05, 2024 at 05:05:29PM +0200, Roberto Sassu wrote:
+On Sat, Sep 14 2024 at 13:07, Jeff Layton wrote:
+> For multigrain timestamps, we must keep track of the latest timestamp
 
-Good morning, I hope the week is starting well for everyone
+What is a multgrain timestamp? Can you please describe the concept
+behind it? I'm not going to chase random documentation or whatever
+because change logs have to self contained.
 
-Apologies for the delay in getting these thoughts out, scrambling to
-catch up on my e-mail backlog.
+And again 'we' do nothing. Describe the problem in technical terms and
+do not impersonate code.
 
-I looped Linus in, secondary to the conversations surrounding the PGP
-verification infrastructure in the kernel, given that the primary use
-case at this time appears to be the digest cache and his concerns
-regarding that use.
+> To maximize the window of this occurring when multiple tasks are racing
+> to update the floor, ktime_get_coarse_real_ts64_mg returns a cookie
+> value that represents the state of the floor tracking word, and
+> ktime_get_real_ts64_mg accepts a cookie value that it uses as the "old"
+> value when calling cmpxchg().
 
-Our proposed TSEM LSM, most recent submission here:
+Clearly:
 
-https://lore.kernel.org/linux-security-module/20240826103728.3378-1-greg@enjellic.com/T/#t
+> +void ktime_get_real_ts64_mg(struct timespec64 *ts, u64 cookie)
 
-Is a superset of IMA functionality and depends heavily on file
-checksums, hence our interest and reflections in your efforts with
-this.
+Can you please get your act together?
 
-> From: Roberto Sassu <roberto.sassu@huawei.com>
-> 
-> Integrity detection and protection has long been a desirable feature, to
-> reach a large user base and mitigate the risk of flaws in the software
-> and attacks.
-> 
-> However, while solutions exist, they struggle to reach a large user base,
-> due to requiring higher than desired constraints on performance,
-> flexibility and configurability, that only security conscious people are
-> willing to accept.
+> +/**
+> + * ktime_get_coarse_real_ts64_mg - get later of coarse grained time or floor
+> + * @ts: timespec64 to be filled
+> + *
+> + * Adjust floor to realtime and compare it to the coarse time. Fill
+> + * @ts with the latest one.
 
-No argument here, inherent in better and more effective security
-architectures is better useability, pure and simple.
+This explains nothing.
 
-> For example, IMA measurement requires the target platform to collect
-> integrity measurements, and to protect them with the TPM, which
-> introduces a noticeable overhead (up to 10x slower in a
-> microbenchmark) on frequently used system calls, like the open().
+>      Note that this is a filesystem-specific
+> + * interface and should be avoided outside of that context.
+> + */
+> +void ktime_get_coarse_real_ts64_mg(struct timespec64 *ts)
+> +{
+> +	struct timekeeper *tk = &tk_core.timekeeper;
+> +	u64 floor = atomic64_read(&mg_floor);
+> +	ktime_t f_real, offset, coarse;
+> +	unsigned int seq;
+> +
+> +	WARN_ON(timekeeping_suspended);
+> +
+> +	do {
+> +		seq = read_seqcount_begin(&tk_core.seq);
+> +		*ts = tk_xtime(tk);
+> +		offset = *offsets[TK_OFFS_REAL];
 
-The future for trusted systems will not be in TPM's, as unpopular a
-notion as that may be in some circles.  They represent a design from a
-quarter century ago that struggles to have relevance with our current
-system architectures.
+Why this indirection? What's wrong with using
+tk_core.timekeeper.offs_real directly?
 
-If a TPM is present, TSEM will extend the security coefficients for
-the root modeling namespace into a PCR to establish a root of trust
-that the rest of the trust orchestration system can be built on.  Ours
-is a worst case scenario beyond IMA since there is a coefficient
-generated for each LSM call that is being modeled.
+> +	} while (read_seqcount_retry(&tk_core.seq, seq));
+> +
+> +	coarse = timespec64_to_ktime(*ts);
+> +	f_real = ktime_add(floor, offset);
 
-We had to go to asynchronous updates through an ordered workqueue in
-order to have something less than abysmal performance, even with
-vTPM's running in a Xen hypervisor domain.  This is without the
-current performance impacts being discussed with respect to HMAC based
-TPM session authentication.
+How is any of this synchronized against concurrent updates of the floor
+value or the offset? I'm failing to see anything which keeps this
+consistent. If this is magically consistent then it wants a big fat
+comment in the code which explains it.
 
-> IMA Appraisal currently requires individual files to be signed and
-> verified, and Linux distributions to rebuild all packages to include
-> file signatures (this approach has been adopted from Fedora
-> 39+). Like a TPM, also signature verification introduces a
-> significant overhead, especially if it is used to check the
-> integrity of many files.
->
-> This is where the new Integrity Digest Cache comes into play, it
-> offers additional support for new and existing integrity solutions,
-> to make them faster and easier to deploy.
->
-> The Integrity Digest Cache can help IMA to reduce the number of TPM
-> operations and to make them happen in a deterministic way. If IMA
-> knows that a file comes from a Linux distribution, it can measure
-> files in a different way: measure the list of digests coming from
-> the distribution (e.g. RPM package headers), and subsequently
-> measure a file if it is not found in that list.
->
-> The performance improvement comes at the cost of IMA not reporting
-> which files from installed packages were accessed, and in which
-> temporal sequence. This approach might not be suitable for all use
-> cases.
+> +void ktime_get_real_ts64_mg(struct timespec64 *ts, u64 cookie)
 
-That, in and of itself, is certainly not the end of the world.
+What is this cookie argument for and how does that match the
+declaration?
 
-With TSEM we offer the notion of the 'state' of a security namespace,
-which is the extension sum of the security coefficients after they
-have been sorted in natural (big-endian) hash order.  In this model
-you know what files have been accessed but you do not have a statement
-on temporal ordering of access.
+> +extern void ktime_get_real_ts64_mg(struct timespec64 *ts);
 
-Given scheduling artifacts, let alone the almost absolute ubiquity of
-multi-core, the simple TPM/TCG linear extension model seems to
-struggle with respect to any relevancy as a security metric.
+This does not even build.
 
-> The Integrity Digest Cache can also help IMA for appraisal. IMA can simply
-> lookup the calculated digest of an accessed file in the list of digests
-> extracted from package headers, after verifying the header signature. It is
-> sufficient to verify only one signature for all files in the package, as
-> opposed to verifying a signature for each file.
-> 
-> The same approach can be followed by other LSMs, such as Integrity Policy
-> Enforcement (IPE), and BPF LSM.
+> +{
+> +	struct timekeeper *tk = &tk_core.timekeeper;
+> +	ktime_t old = atomic64_read(&mg_floor);
+> +	ktime_t offset, mono;
+> +	unsigned int seq;
+> +	u64 nsecs;
+> +
+> +	WARN_ON(timekeeping_suspended);
 
-As we've noted above, TSEM would also be a potential consumer, which
-is why we wanted to seek clarifications on the architecture.
+WARN_ON_ONCE() if at all.
 
-We've reviewed the patch set and the documentation, and will freely
-admit that we may still misunderstand all of this, but it would seem
-that the architecture, as it stands, would be subject to Time Of
-Measurement Time Of Use (TOMTOU) challenges.
+> +	do {
+> +		seq = read_seqcount_begin(&tk_core.seq);
+> +
+> +		ts->tv_sec = tk->xtime_sec;
+> +		mono = tk->tkr_mono.base;
+> +		nsecs = timekeeping_get_ns(&tk->tkr_mono);
+> +		offset = *offsets[TK_OFFS_REAL];
+> +	} while (read_seqcount_retry(&tk_core.seq, seq));
+> +
+> +	mono = ktime_add_ns(mono, nsecs);
+> +
+> +	if (atomic64_try_cmpxchg(&mg_floor, &old, mono)) {
+> +		ts->tv_nsec = 0;
+> +		timespec64_add_ns(ts, nsecs);
+> +	} else {
+> +		/*
+> +		 * Something has changed mg_floor since "old" was
+> +		 * fetched. "old" has now been updated with the
+> +		 * current value of mg_floor, so use that to return
+> +		 * the current coarse floor value.
 
-The Time Of Measurement will be when the distribution generates an
-RPM, or equivalent construct, ie. .deb, and signs the digest list with
-their packaging key.  What is elusive to us is how can their be an
-expectation that the file, on medium, when accessed (Time Of Use),
-matches the digest of the file that was signed by the distribution?
+'Something has changed' is a truly understandable technical
+explanation.
 
-At a minimum, there would seem to be a need to have the kernel read
-and validate the on medium checksum of the file, as the in-kernel RPM
-parser reads each signature from the package list.  At that point, as
-long as the kernel is running, the digest cache will represent a valid
-statement on the cryptographic checksum of a file held in the digest
-cache, as your patch series seem to have invalidation support well in
-hand.
+I'm not going to accept this voodoo which makes everyone scratch his
+head who wasn't involved in this.
 
-After a system reboot, it would seem to be that all bets are off, and
-from a security perspective, there would be a need to re-verify that
-the on medium file checksums match those from a signed digest list.
-IMA has the ability to do protection against offline modification but
-you are then back to a possibly expensive operation on each file
-access.
+Thanks,
 
-We see in the thread on PGP infrastructure in the kernel you make the
-following statement:
-
-"If the calculated digest of a file being accessed matches one
-extracted from the RPM header, access is granted otherwise it is
-denied."
-
-Which would seem to imply that you do compute the on-medium checksum
-of each file and verify it against a reference value from the RPM
-header, but it isn't clear where that happens in the patch series.
-The only kernel based file read operation we could find is what
-appears to be a call to read the digest list files.
-
-IMA already has the concept of a digest cache, as does TSEM.  If you
-need to read a file in order to match its medium based checksum
-against the value from a package list, in order to avoid a TOMTOU
-condition, it is unclear how one gains a performance improvement.
-Unless of course the objective is to prime the digest cache at boot so
-that all subsequent integrity verifications are answered from cache
-rather than by computing the checksum at file access time.
-
-In the thread on PGP access you indicate that all of this needs to be
-in the kernel in order to be tamper proof.  FWIW, the kernel has the
-ability to know if kernel + userspace should be trusted at any given
-time, that is one of the security statements that we seek to offer
-with TSEM.
-
-If the kernel can make a judgement, that in a limited execution
-context, such as system boot and initialization, that userspace has
-not acted in an untrusted manner, it can punt verification and parsing
-of RPM headers and priming of something like the digest cache to
-userspace.
-
-Again, apologies if we misunderstand the architecture, any
-clarifications would be appreciated.
-
-Have a good week.
-
-As always,
-Dr. Greg
-
-The Quixote Project - Flailing at the Travails of Cybersecurity
-              https://github.com/Quixote-Project
+        tglx
 
