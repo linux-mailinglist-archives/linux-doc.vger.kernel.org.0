@@ -1,203 +1,240 @@
-Return-Path: <linux-doc+bounces-25310-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25323-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08F1B979E45
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Sep 2024 11:19:13 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3713D979F82
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Sep 2024 12:37:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C161A281238
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Sep 2024 09:19:11 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5C03E1C21A95
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Sep 2024 10:37:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 426B61494B5;
-	Mon, 16 Sep 2024 09:19:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mnW2KrCs"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2551E149C4F;
+	Mon, 16 Sep 2024 10:36:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DDB222318
-	for <linux-doc@vger.kernel.org>; Mon, 16 Sep 2024 09:19:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+Received: from wind.enjellic.com (wind.enjellic.com [76.10.64.91])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3EC7E15445E;
+	Mon, 16 Sep 2024 10:36:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=76.10.64.91
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1726478348; cv=none; b=dPDJx1pYAJS6DaBo9k3n6SqEay2zd5NsYQDnkyb9eBBZD0a3FQgR3WPWz+3yviH+NbdIkVAUnJNRf7Su1kDF22GaFUGjKN1AHnmzGXjm/Fckm+tNM0dO0cIo+659asSCE4AT2to10Kifn+yW2B2Cb95ZY2JUnJpkOUV0AUHxbU4=
+	t=1726483010; cv=none; b=tpV1/h/hnn/WZgiaykUL/lqHKvDY/il2vwEBR5oTz8c3QQa3ed3/wqQDEKIZqMOh3lKOkBjc9EaFqJ56Y0BQEL5y5IEgnzavIjC2+8XMnnEcddjqTMZhzgkI2XnqHvTL+ChBHA1yMvJiGadqg+r1H4RIXwKcAkaQOcQLPjM/1qQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1726478348; c=relaxed/simple;
-	bh=tUn3Lb8xB6w5JpvkBfX8jr4Rmxy4aQ9cSkNjcTe14E0=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
-	 References:In-Reply-To; b=E+KbjEKEBfyFFXEP1RWgQpOJzL+TIb5u/fzjNHNKcrjgAQkXN5Y1zXX9Al0bwvRUbEJ7Qlh8OxwO/Q+lAtovKdKcyStSNacsvs7v5fySo5p5ir13fsTXDep1kmJqBLUVeLrY8FbtC4ze8902YtKS1SKuxzLXuGuhYU/ZGHsazbs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=mnW2KrCs; arc=none smtp.client-ip=209.85.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4280ca0791bso41341395e9.1
-        for <linux-doc@vger.kernel.org>; Mon, 16 Sep 2024 02:19:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1726478344; x=1727083144; darn=vger.kernel.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3S0+hnJtME97aYVYNEFjXn7v5J7Z9ezZzdhIUThh/M4=;
-        b=mnW2KrCsukwIHvFgTRnD99W6i3JiusOmnT/9JNoAcEqcsPi4jSPQFo4/sngLw5H4Xh
-         zbQ0ya6+2S1XN3bzj/4LoBxc/9LHaFg3NegV5wUs/wncGjNesdKcG2gLV2F0Qt2DYzdI
-         233ZvArSV3qszjeqDgzJvkFn6BnU1NDIFwuubPr3JVcugYQ/jtQIB6iyLwGC8TSuHak+
-         K3s1VUYlmHq0vKYKMZnFo69SWPbz8RDU7JN/UG56EnlN2vHTyTMSTLVn3PY/KtzB2qtw
-         m96DXjZV7vLPQhx5JyyxnxakQJ7hKTHwpbcwQj0E/uH30R7csiYB/1tEeEeCuVIRpTYV
-         eaIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726478344; x=1727083144;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=3S0+hnJtME97aYVYNEFjXn7v5J7Z9ezZzdhIUThh/M4=;
-        b=e+Bd38svjXbV5+HtWt8w4k05ezHW0q+MgP9y5tp6vqTNpe4dVZZcUQvyfAsWHoQ0s4
-         qDgq3mqsO/k9sL4Ok+t/IkgP6omozU8fFbTFlY6vuWNJoPJ8tn/ZoMQWb0yeTQHuxuiO
-         SrjVAwW2518nxk5IJooAlBkR+QLdiefMcfDD6qjjmDvjJLXEga43F6aCG3r36nN857sz
-         qttGTDlNeMwTffSIDoO4QE87Hdhgiw0W1kFjBRbRBOhGuvBj5AHZLplASoQmQtaKJEWm
-         Pq8/xY9SHYN0NwzH9eA/Wt92I6xq9JqwFbxwLI4J66kobJvxRXA0Y6wWo5soC3rvBHpz
-         xH4g==
-X-Forwarded-Encrypted: i=1; AJvYcCXeDSA/ZaPwuS6scGi7h1Yu1ruGXnZkJiVh9lO9f7yJB7P+e21xEthHGo/TB1uA2di2TC7JrIKImZk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxksGK58ROEQGuFv5ZFcH8Qb4859J0md6FGn2OkhBOKHsbjxJAc
-	L/Nug1yV2rFZ5xWlP64vLtmCkOUc3vp0HaRuiU2Qcie0iEIecSS6XLh4jX6rU4k=
-X-Google-Smtp-Source: AGHT+IHAcQcrc3voHWoxZH5ruJpkQ2UnBhuAfFL7M0m2Kh1+BP66VwdpFaj9SlK3Tb1udKSqVEmBjA==
-X-Received: by 2002:a05:600c:4f51:b0:42c:b95c:65b7 with SMTP id 5b1f17b1804b1-42cdb531b1cmr103606165e9.8.1726478344247;
-        Mon, 16 Sep 2024 02:19:04 -0700 (PDT)
-Received: from localhost (amontpellier-556-1-151-252.w109-210.abo.wanadoo.fr. [109.210.7.252])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-378e6f2486esm6806258f8f.0.2024.09.16.02.19.02
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 16 Sep 2024 02:19:03 -0700 (PDT)
+	s=arc-20240116; t=1726483010; c=relaxed/simple;
+	bh=OQzx1VY3FA53WmYJxavNHFf3H1NYy38Zj5pmYpMWFGw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Mime-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=lFlLS2XakK9Af6Np703XWd63O64MN62RmpTdB5Ia3+ZlAI6u1RtWFYEcnv6+ahzYtnkekZbvJRp6HZ5X5TZQHlQCX60+CZb1eIB2w4ZHspB9BL803N3928sg4KaH39fLivBrnV4GtB/BKHNHtZmIIulCvJFixHFeYcXLGEaedvU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=enjellic.com; spf=pass smtp.mailfrom=wind.enjellic.com; arc=none smtp.client-ip=76.10.64.91
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=enjellic.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=wind.enjellic.com
+Received: from wind.enjellic.com (localhost [127.0.0.1])
+	by wind.enjellic.com (8.15.2/8.15.2) with ESMTP id 48GA5wMY005315;
+	Mon, 16 Sep 2024 05:05:58 -0500
+Received: (from greg@localhost)
+	by wind.enjellic.com (8.15.2/8.15.2/Submit) id 48GA5plc005314;
+	Mon, 16 Sep 2024 05:05:51 -0500
+Date: Mon, 16 Sep 2024 05:05:51 -0500
+From: "Dr. Greg" <greg@enjellic.com>
+To: Roberto Sassu <roberto.sassu@huaweicloud.com>
+Cc: zohar@linux.ibm.com, dmitry.kasatkin@gmail.com, eric.snowberg@oracle.com,
+        corbet@lwn.net, akpm@linux-foundation.org, paul@paul-moore.com,
+        jmorris@namei.org, serge@hallyn.com, shuah@kernel.org,
+        mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
+        linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, wufan@linux.microsoft.com,
+        pbrobinson@gmail.com, zbyszek@in.waw.pl, hch@lst.de,
+        mjg59@srcf.ucam.org, pmatilai@redhat.com, jannh@google.com,
+        dhowells@redhat.com, jikos@kernel.org, mkoutny@suse.com,
+        ppavlu@suse.com, petr.vorel@gmail.com, mzerqung@0pointer.de,
+        kgold@linux.ibm.com, Roberto Sassu <roberto.sassu@huawei.com>,
+        torvalds@linux-foundation.org
+Subject: Re: [PATCH v5 00/14] integrity: Introduce the Integrity Digest Cache
+Message-ID: <20240916100551.GA5059@wind.enjellic.com>
+Reply-To: "Dr. Greg" <greg@enjellic.com>
+References: <20240905150543.3766895-1-roberto.sassu@huaweicloud.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 16 Sep 2024 09:19:02 +0000
-Message-Id: <D47LHT5XPYTX.3OWFQR9N23FZH@baylibre.com>
-Cc: "Lars-Peter Clausen" <lars@metafoo.de>, "Michael Hennerich"
- <Michael.Hennerich@analog.com>, "Rob Herring" <robh@kernel.org>, "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
- "Nuno Sa" <nuno.sa@analog.com>, "Jonathan Corbet" <corbet@lwn.net>,
- <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, "David Lechner" <dlechner@baylibre.com>,
- <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH 4/6] iio: adc: ad4030: add support for ad4630-24 and
- ad4630-16
-From: "Esteban Blanc" <eblanc@baylibre.com>
-To: "Jonathan Cameron" <jic23@kernel.org>, =?utf-8?q?Nuno_S=C3=A1?=
- <noname.nuno@gmail.com>
-X-Mailer: aerc 0.18.2-0-ge037c095a049
-References: <20240822-eblanc-ad4630_v1-v1-0-5c68f3327fdd@baylibre.com>
- <20240822-eblanc-ad4630_v1-v1-4-5c68f3327fdd@baylibre.com>
- <20240826102748.4be0b642@jic23-huawei>
- <D452E2M75XCM.13OQGAPJ7JJ4A@baylibre.com>
- <0a4e7fe39cf36774b28c86f6baab5ef8c20e3d6b.camel@gmail.com>
- <D4567LFFTYJQ.2YC5OODKOVPNB@baylibre.com>
- <84961c1f857dfc8498c41ac97235a037111ed6d5.camel@gmail.com>
- <20240914122529.14759e63@jic23-huawei>
-In-Reply-To: <20240914122529.14759e63@jic23-huawei>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240905150543.3766895-1-roberto.sassu@huaweicloud.com>
+User-Agent: Mutt/1.4i
+X-Greylist: Sender passed SPF test, not delayed by milter-greylist-4.2.3 (wind.enjellic.com [127.0.0.1]); Mon, 16 Sep 2024 05:05:58 -0500 (CDT)
 
-On Sat Sep 14, 2024 at 11:25 AM UTC, Jonathan Cameron wrote:
-> On Fri, 13 Sep 2024 15:46:17 +0200
-> Nuno S=C3=A1 <noname.nuno@gmail.com> wrote:
+On Thu, Sep 05, 2024 at 05:05:29PM +0200, Roberto Sassu wrote:
+
+Good morning, I hope the week is starting well for everyone
+
+Apologies for the delay in getting these thoughts out, scrambling to
+catch up on my e-mail backlog.
+
+I looped Linus in, secondary to the conversations surrounding the PGP
+verification infrastructure in the kernel, given that the primary use
+case at this time appears to be the digest cache and his concerns
+regarding that use.
+
+Our proposed TSEM LSM, most recent submission here:
+
+https://lore.kernel.org/linux-security-module/20240826103728.3378-1-greg@enjellic.com/T/#t
+
+Is a superset of IMA functionality and depends heavily on file
+checksums, hence our interest and reflections in your efforts with
+this.
+
+> From: Roberto Sassu <roberto.sassu@huawei.com>
+> 
+> Integrity detection and protection has long been a desirable feature, to
+> reach a large user base and mitigate the risk of flaws in the software
+> and attacks.
+> 
+> However, while solutions exist, they struggle to reach a large user base,
+> due to requiring higher than desired constraints on performance,
+> flexibility and configurability, that only security conscious people are
+> willing to accept.
+
+No argument here, inherent in better and more effective security
+architectures is better useability, pure and simple.
+
+> For example, IMA measurement requires the target platform to collect
+> integrity measurements, and to protect them with the TPM, which
+> introduces a noticeable overhead (up to 10x slower in a
+> microbenchmark) on frequently used system calls, like the open().
+
+The future for trusted systems will not be in TPM's, as unpopular a
+notion as that may be in some circles.  They represent a design from a
+quarter century ago that struggles to have relevance with our current
+system architectures.
+
+If a TPM is present, TSEM will extend the security coefficients for
+the root modeling namespace into a PCR to establish a root of trust
+that the rest of the trust orchestration system can be built on.  Ours
+is a worst case scenario beyond IMA since there is a coefficient
+generated for each LSM call that is being modeled.
+
+We had to go to asynchronous updates through an ordered workqueue in
+order to have something less than abysmal performance, even with
+vTPM's running in a Xen hypervisor domain.  This is without the
+current performance impacts being discussed with respect to HMAC based
+TPM session authentication.
+
+> IMA Appraisal currently requires individual files to be signed and
+> verified, and Linux distributions to rebuild all packages to include
+> file signatures (this approach has been adopted from Fedora
+> 39+). Like a TPM, also signature verification introduces a
+> significant overhead, especially if it is used to check the
+> integrity of many files.
 >
-> > On Fri, 2024-09-13 at 12:55 +0000, Esteban Blanc wrote:
-> > > On Fri Sep 13, 2024 at 10:18 AM UTC, Nuno S=C3=A1 wrote: =20
-> > > > On Fri, 2024-09-13 at 09:55 +0000, Esteban Blanc wrote: =20
-> > > > > On Mon Aug 26, 2024 at 9:27 AM UTC, Jonathan Cameron wrote: =20
-> > > > > > On Thu, 22 Aug 2024 14:45:20 +0200
-> > > > > > Esteban Blanc <eblanc@baylibre.com> wrote: =20
-> > > > > > > +static const unsigned long ad4630_channel_masks[] =3D {
-> > > > > > > +	/* Differential only */
-> > > > > > > +	BIT(0) | BIT(2),
-> > > > > > > +	/* Differential with common byte */
-> > > > > > > +	GENMASK(3, 0), =20
-> > > > > > The packing of data isn't going to be good. How bad to shuffle
-> > > > > > to put the two small channels next to each other?
-> > > > > > Seems like it means you will want to combine your deinterleave
-> > > > > > and channel specific handling above, which is a bit fiddly but
-> > > > > > not much worse than current code. =20
-> > > > >=20
-> > > > > I can do it since that was what I had done in the RFC in the firs=
-t place.
-> > > > > Nuno asked for in this email
-> > > > > https://lore.kernel.org/r/0036d44542f8cf45c91c867f0ddd7b45d1904d6=
-b.camel@gmail.com/
-> > > > > :
-> > > > >  =20
-> > > > > > > > * You're pushing the CM channels into the end. So when we a=
- 2 channel
-> > > > > > > > device
-> > > > > > > > we'll have: =20
-> > > > >  =20
-> > > > > > > > in_voltage0 - diff
-> > > > > > > > in_voltage1 - diff
-> > > > > > > > in_voltage2 - CM associated with chan0
-> > > > > > > > in_voltage0 - CM associated with chan1
-> > > > > > > >=20
-> > > > > > > > I think we could make it so the CM channel comes right afte=
-r the channel
-> > > > > > > > where
-> > > > > > > > it's data belongs too. So for example, odd channels would b=
-e CM channels
-> > > > > > > > (and
-> > > > > > > > labels could also make sense). =20
-> > > > >=20
-> > > > > So that's what I did here :D
-> > > > >=20
-> > > > > For the software side off things here it doesn't change a lot of =
-things
-> > > > > since we have to manipulate the data anyway, putting the extra by=
-te at the
-> > > > > end or in between is no extra work.
-> > > > > For the offload engine however, it should be easier to ask for 24=
- bits
-> > > > > then 8 bits for each channel as it would return two u32 per "hard=
-ware
-> > > > > channel".
-> > > > >=20
-> > > > > In order to avoid having two different layouts, I was kind of sol=
-d by
-> > > > > Nuno's idea of having the CM in between each diff channel.
-> > > > >  =20
-> > > >=20
-> > > > Tbh, I was not even thinking about the layout when I proposed the a=
-rrangement.
-> > > > Just
-> > > > made sense to me (from a logical point of view) to have them togeth=
-er as they
-> > > > relate
-> > > > to the same physical channel. FWIW, we're also speaking bytes in he=
-re so not sure
-> > > > if
-> > > > it's that important (or bad). =20
-> > >=20
-> > > The best we can do (if we managed to do it HDL wise) is to reorder th=
-e
-> > > data to get both CM byte in a single u32 after the 2 u32 of both diff
-> > > channel. That would be 3 u32 instead of 4.
+> This is where the new Integrity Digest Cache comes into play, it
+> offers additional support for new and existing integrity solutions,
+> to make them faster and easier to deploy.
 >
-> Entirely up to you. :)
+> The Integrity Digest Cache can help IMA to reduce the number of TPM
+> operations and to make them happen in a deterministic way. If IMA
+> knows that a file comes from a Linux distribution, it can measure
+> files in a different way: measure the list of digests coming from
+> the distribution (e.g. RPM package headers), and subsequently
+> measure a file if it is not found in that list.
+>
+> The performance improvement comes at the cost of IMA not reporting
+> which files from installed packages were accessed, and in which
+> temporal sequence. This approach might not be suitable for all use
+> cases.
 
-Ok so here is the plan I propose:
- 1. Use the layout of this patch (common byte channels just after their
- respective diff channel) as it should work out of the box for the offload
- engine (once it's merged [1]).
- 2. In case of performance issue, switch to the RFC layout (both diff
- channels then both common byte channels) and try to modify the HDL for
- the offload engine to reduce the memory footprint by one byte for the 2
- hardware channels case.
+That, in and of itself, is certainly not the end of the world.
 
-[1]: https://lore.kernel.org/lkml/20240722-dlech-mainline-spi-engine-offloa=
-d-2-v3-0-7420e45df69b@baylibre.com/
+With TSEM we offer the notion of the 'state' of a security namespace,
+which is the extension sum of the security coefficients after they
+have been sorted in natural (big-endian) hash order.  In this model
+you know what files have been accessed but you do not have a statement
+on temporal ordering of access.
 
-Best regards,
+Given scheduling artifacts, let alone the almost absolute ubiquity of
+multi-core, the simple TPM/TCG linear extension model seems to
+struggle with respect to any relevancy as a security metric.
 
---=20
-Esteban Blanc
-BayLibre
+> The Integrity Digest Cache can also help IMA for appraisal. IMA can simply
+> lookup the calculated digest of an accessed file in the list of digests
+> extracted from package headers, after verifying the header signature. It is
+> sufficient to verify only one signature for all files in the package, as
+> opposed to verifying a signature for each file.
+> 
+> The same approach can be followed by other LSMs, such as Integrity Policy
+> Enforcement (IPE), and BPF LSM.
 
+As we've noted above, TSEM would also be a potential consumer, which
+is why we wanted to seek clarifications on the architecture.
+
+We've reviewed the patch set and the documentation, and will freely
+admit that we may still misunderstand all of this, but it would seem
+that the architecture, as it stands, would be subject to Time Of
+Measurement Time Of Use (TOMTOU) challenges.
+
+The Time Of Measurement will be when the distribution generates an
+RPM, or equivalent construct, ie. .deb, and signs the digest list with
+their packaging key.  What is elusive to us is how can their be an
+expectation that the file, on medium, when accessed (Time Of Use),
+matches the digest of the file that was signed by the distribution?
+
+At a minimum, there would seem to be a need to have the kernel read
+and validate the on medium checksum of the file, as the in-kernel RPM
+parser reads each signature from the package list.  At that point, as
+long as the kernel is running, the digest cache will represent a valid
+statement on the cryptographic checksum of a file held in the digest
+cache, as your patch series seem to have invalidation support well in
+hand.
+
+After a system reboot, it would seem to be that all bets are off, and
+from a security perspective, there would be a need to re-verify that
+the on medium file checksums match those from a signed digest list.
+IMA has the ability to do protection against offline modification but
+you are then back to a possibly expensive operation on each file
+access.
+
+We see in the thread on PGP infrastructure in the kernel you make the
+following statement:
+
+"If the calculated digest of a file being accessed matches one
+extracted from the RPM header, access is granted otherwise it is
+denied."
+
+Which would seem to imply that you do compute the on-medium checksum
+of each file and verify it against a reference value from the RPM
+header, but it isn't clear where that happens in the patch series.
+The only kernel based file read operation we could find is what
+appears to be a call to read the digest list files.
+
+IMA already has the concept of a digest cache, as does TSEM.  If you
+need to read a file in order to match its medium based checksum
+against the value from a package list, in order to avoid a TOMTOU
+condition, it is unclear how one gains a performance improvement.
+Unless of course the objective is to prime the digest cache at boot so
+that all subsequent integrity verifications are answered from cache
+rather than by computing the checksum at file access time.
+
+In the thread on PGP access you indicate that all of this needs to be
+in the kernel in order to be tamper proof.  FWIW, the kernel has the
+ability to know if kernel + userspace should be trusted at any given
+time, that is one of the security statements that we seek to offer
+with TSEM.
+
+If the kernel can make a judgement, that in a limited execution
+context, such as system boot and initialization, that userspace has
+not acted in an untrusted manner, it can punt verification and parsing
+of RPM headers and priming of something like the digest cache to
+userspace.
+
+Again, apologies if we misunderstand the architecture, any
+clarifications would be appreciated.
+
+Have a good week.
+
+As always,
+Dr. Greg
+
+The Quixote Project - Flailing at the Travails of Cybersecurity
+              https://github.com/Quixote-Project
 
