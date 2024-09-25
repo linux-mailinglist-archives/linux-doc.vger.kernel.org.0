@@ -1,252 +1,394 @@
-Return-Path: <linux-doc+bounces-25712-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25745-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id A62959861C7
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 17:01:41 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 82AAF986356
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 17:23:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5F20F28DF74
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 15:01:40 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A4A661C278A2
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 15:23:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED44B18CBF4;
-	Wed, 25 Sep 2024 14:36:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED0ED142E83;
+	Wed, 25 Sep 2024 15:05:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="CW6+ZdtE"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ks+QM/hh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C50FC17C9A9;
-	Wed, 25 Sep 2024 14:36:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEDA026286;
+	Wed, 25 Sep 2024 15:05:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727274987; cv=none; b=OxJ0QQlEbMnpiWHGtLzzIj/sPwRiHH4v3NWKdZNEQE6hHLOLxVdPEzM+5vBHGtmIG742YkkyLknlQR/oF84rkAP6FotDR3avB30VJsuRmtH0FWWd54uAhytQjN6y9Ws/rAS9Ud701ppWZzLHM5CajSsrKRkJH3hKLUF5OhMr8PM=
+	t=1727276714; cv=none; b=luBU95mCMvRywEmKVRPpU+psK2EA8EMohdkOQY92DH3ZTYcIKckD0dFPs7Bbm2h1bJlPlKZLja1/x8pB6voXSl4K0PeXweh5yTt/4+5Jh4brBf89W4OzI+PS1Ppfo+7pSB5hFVLIceOyL75l+g0UPfh1UsekVyk1nwn9T8Hp3LM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727274987; c=relaxed/simple;
-	bh=Ud1Wh4GTBi6jLxNAiO/ptsjGRRySTSynM9fjc4WRSqQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=foa8f20uby/v2U8WEGTRR1v/ud2vdeAXITD5QLleD/sagLIBwPykbM7BLQ2Pnu4eMkFNk1jeQqpzVvMCfZnOMsalvkZPh+ma71+zSTYbLsqQnLMhAwZtQ2TsHLMOXEK285GaD7lR0CUGeaQs4HvO6eCtB/b4n1pVP0+zumIq0Lo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=CW6+ZdtE; arc=none smtp.client-ip=198.175.65.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1727276714; c=relaxed/simple;
+	bh=T2zrorYH38ZeDMov/K20BC/o421pWzvHIB0IRUXQoGU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=M8D3BW5305Jzml+StmdKgBAGlQFNKRPD8Mf3PVbohad3CmNCAEnO9yke/SiLcxWWYdeoWGipjyEcGGPIWMPFQvShDOci1LcLX5Vx/G8eBZnyANm8loIVFtp0aE4w+VRIFvzx0MPXghCLHa9CJnW3/hUah6eYpnO2U1sA4giQWEQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ks+QM/hh; arc=none smtp.client-ip=192.198.163.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1727274986; x=1758810986;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=Ud1Wh4GTBi6jLxNAiO/ptsjGRRySTSynM9fjc4WRSqQ=;
-  b=CW6+ZdtEcKo2jz4cZmf3tABdpCIIPqrYvjbdXgQsK9wSsKA1OOqbUrAa
-   3HIoO9mbThIKqJwLbGYGC0V/naShLxrjO2KzuIoD26ac62IRf77PA8mQX
-   +fn4IHuMHYxm2SK88fUJCeFb2I8NvgsOPtf5s5IWK5ZFp/9pbWyc8Yurb
-   IZpy6m6h5RdwsT/ZuZD5whfMVOvO4Y5ibWGYY+w9aWjZD6XPjFkPuSVUp
-   6pkzpd1ffC8i6Tt4i8nFIzbWY4TIk6MqBlFWPinlTlEFtkOsziXTcnFJa
-   OhWU5LP0QmgOlOX6UDuM0Wv944OsDm/XTNs6tM1Ep2SAlLb4ny7nBsB2s
-   Q==;
-X-CSE-ConnectionGUID: y5yFU8VJSuixvxBRat67mw==
-X-CSE-MsgGUID: BBZLiS6KQlqGjXAyDSRkHw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11206"; a="37710319"
+  t=1727276713; x=1758812713;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=T2zrorYH38ZeDMov/K20BC/o421pWzvHIB0IRUXQoGU=;
+  b=ks+QM/hhaf1WUtBHoJ+RUOYoprDLkBqL/Uwf7uJVQXLG35LEclETvLGe
+   Zy4vEYDSHKonKsVAguASqN0sG9Iz6EDj2/5mbr2uy+x37YhX9goLO9kkU
+   2u256LKWajNN4x4r2NKc1VG4QzcFDtd9607LKgpdOYCh675g27Mkltd1H
+   YGicwrcEhUtlpAnsZjMEOahT4DbHTNKQSCvHiI+HcGaeP25S/Syo3rNp6
+   C2VENOb9npmU+e7uxLKUa7YFzzsbbZWQIBL71FscyMxLkaeLlBZz46SlU
+   3/IPVsBxuWR9+vA5dNN5iRMGF38+wazYM1YF+49XOuajWi46hdci8+uTQ
+   A==;
+X-CSE-ConnectionGUID: zSbyeRstQ2ir3NfzqlFjtA==
+X-CSE-MsgGUID: Rjv4HdsKTXKREES34Ld1/Q==
+X-IronPort-AV: E=McAfee;i="6700,10204,11206"; a="26482893"
 X-IronPort-AV: E=Sophos;i="6.10,257,1719903600"; 
-   d="scan'208";a="37710319"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2024 07:36:26 -0700
-X-CSE-ConnectionGUID: cQ2kt2YvRQeEVrR4a/v3pg==
-X-CSE-MsgGUID: z6MCUjSeSWSLsH3UT/D40A==
+   d="scan'208";a="26482893"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2024 08:05:13 -0700
+X-CSE-ConnectionGUID: IjO7nbUrSZOqVow0coJEug==
+X-CSE-MsgGUID: VVIHvXAeRGu7a+YerlxuNw==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.10,257,1719903600"; 
-   d="scan'208";a="76183373"
-Received: from lkp-server01.sh.intel.com (HELO 53e96f405c61) ([10.239.97.150])
-  by fmviesa005.fm.intel.com with ESMTP; 25 Sep 2024 07:36:20 -0700
-Received: from kbuild by 53e96f405c61 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1stT7q-000JbY-1g;
-	Wed, 25 Sep 2024 14:36:18 +0000
-Date: Wed, 25 Sep 2024 22:35:41 +0800
-From: kernel test robot <lkp@intel.com>
-To: Yikai Tsai <yikai.tsai.wiwynn@gmail.com>, patrick@stwcx.xyz,
-	Jean Delvare <jdelvare@suse.com>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Carsten =?iso-8859-1?Q?Spie=DF?= <mail@carsten-spiess.de>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Magnus Damm <magnus.damm@gmail.com>
-Cc: oe-kbuild-all@lists.linux.dev, Yikai Tsai <yikai.tsai.wiwynn@gmail.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, linux-hwmon@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-renesas-soc@vger.kernel.org
-Subject: Re: [PATCH v7 2/2] hwmon: (isl28022) new driver for ISL28022 power
- monitor
-Message-ID: <202409252244.3ZXLJlyK-lkp@intel.com>
-References: <20240925031131.14645-3-yikai.tsai.wiwynn@gmail.com>
+   d="scan'208";a="76317677"
+Received: from kniemiec-mobl1.ger.corp.intel.com (HELO [10.245.246.30]) ([10.245.246.30])
+  by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2024 08:05:07 -0700
+Message-ID: <86c557ca-2b86-4334-bc42-40dfe8203b71@linux.intel.com>
+Date: Wed, 25 Sep 2024 16:43:57 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240925031131.14645-3-yikai.tsai.wiwynn@gmail.com>
-
-Hi Yikai,
-
-kernel test robot noticed the following build errors:
-
-[auto build test ERROR on groeck-staging/hwmon-next]
-[also build test ERROR on linus/master v6.11 next-20240925]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Yikai-Tsai/dt-bindings-hwmon-add-renesas-isl28022/20240925-111332
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/groeck/linux-staging.git hwmon-next
-patch link:    https://lore.kernel.org/r/20240925031131.14645-3-yikai.tsai.wiwynn%40gmail.com
-patch subject: [PATCH v7 2/2] hwmon: (isl28022) new driver for ISL28022 power monitor
-config: openrisc-allyesconfig (https://download.01.org/0day-ci/archive/20240925/202409252244.3ZXLJlyK-lkp@intel.com/config)
-compiler: or1k-linux-gcc (GCC) 14.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240925/202409252244.3ZXLJlyK-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202409252244.3ZXLJlyK-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   drivers/hwmon/isl28022.c: In function 'isl28022_read_properties':
->> drivers/hwmon/isl28022.c:396:36: error: passing argument 2 of 'dev_err_probe' makes integer from pointer without a cast [-Wint-conversion]
-     396 |                 dev_err_probe(dev, "renesas,shunt-range-microvolt invalid value %d\n", val);
-         |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         |                                    |
-         |                                    char *
-   In file included from include/linux/device.h:15,
-                    from include/linux/acpi.h:14,
-                    from include/linux/i2c.h:13,
-                    from drivers/hwmon/isl28022.c:11:
-   include/linux/dev_printk.h:278:64: note: expected 'int' but argument is of type 'char *'
-     278 | __printf(3, 4) int dev_err_probe(const struct device *dev, int err, const char *fmt, ...);
-         |                                                            ~~~~^~~
->> drivers/hwmon/isl28022.c:396:88: error: passing argument 3 of 'dev_err_probe' makes pointer from integer without a cast [-Wint-conversion]
-     396 |                 dev_err_probe(dev, "renesas,shunt-range-microvolt invalid value %d\n", val);
-         |                                                                                        ^~~
-         |                                                                                        |
-         |                                                                                        u32 {aka unsigned int}
-   include/linux/dev_printk.h:278:81: note: expected 'const char *' but argument is of type 'u32' {aka 'unsigned int'}
-     278 | __printf(3, 4) int dev_err_probe(const struct device *dev, int err, const char *fmt, ...);
-         |                                                                     ~~~~~~~~~~~~^~~
-   drivers/hwmon/isl28022.c:406:36: error: passing argument 2 of 'dev_err_probe' makes integer from pointer without a cast [-Wint-conversion]
-     406 |                 dev_err_probe(dev, "renesas,average-samples invalid value %d\n", val);
-         |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         |                                    |
-         |                                    char *
-   include/linux/dev_printk.h:278:64: note: expected 'int' but argument is of type 'char *'
-     278 | __printf(3, 4) int dev_err_probe(const struct device *dev, int err, const char *fmt, ...);
-         |                                                            ~~~~^~~
-   drivers/hwmon/isl28022.c:406:82: error: passing argument 3 of 'dev_err_probe' makes pointer from integer without a cast [-Wint-conversion]
-     406 |                 dev_err_probe(dev, "renesas,average-samples invalid value %d\n", val);
-         |                                                                                  ^~~
-         |                                                                                  |
-         |                                                                                  u32 {aka unsigned int}
-   include/linux/dev_printk.h:278:81: note: expected 'const char *' but argument is of type 'u32' {aka 'unsigned int'}
-     278 | __printf(3, 4) int dev_err_probe(const struct device *dev, int err, const char *fmt, ...);
-         |                                                                     ~~~~~~~~~~~~^~~
-   drivers/hwmon/isl28022.c:414:28: error: passing argument 2 of 'dev_err_probe' makes integer from pointer without a cast [-Wint-conversion]
-     414 |         dev_err_probe(dev, "renesas,shunt-resistor-microvolt invalid value %d\n", data->shunt);
-         |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         |                            |
-         |                            char *
-   include/linux/dev_printk.h:278:64: note: expected 'int' but argument is of type 'char *'
-     278 | __printf(3, 4) int dev_err_probe(const struct device *dev, int err, const char *fmt, ...);
-         |                                                            ~~~~^~~
-   drivers/hwmon/isl28022.c:414:87: error: passing argument 3 of 'dev_err_probe' makes pointer from integer without a cast [-Wint-conversion]
-     414 |         dev_err_probe(dev, "renesas,shunt-resistor-microvolt invalid value %d\n", data->shunt);
-         |                                                                                   ~~~~^~~~~~~
-         |                                                                                       |
-         |                                                                                       u32 {aka unsigned int}
-   include/linux/dev_printk.h:278:81: note: expected 'const char *' but argument is of type 'u32' {aka 'unsigned int'}
-     278 | __printf(3, 4) int dev_err_probe(const struct device *dev, int err, const char *fmt, ...);
-         |                                                                     ~~~~~~~~~~~~^~~
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v28 18/32] ASoC: doc: Add documentation for SOC USB
+To: Wesley Cheng <quic_wcheng@quicinc.com>, srinivas.kandagatla@linaro.org,
+ mathias.nyman@intel.com, perex@perex.cz, conor+dt@kernel.org,
+ dmitry.torokhov@gmail.com, corbet@lwn.net, broonie@kernel.org,
+ lgirdwood@gmail.com, tiwai@suse.com, krzk+dt@kernel.org,
+ Thinh.Nguyen@synopsys.com, bgoswami@quicinc.com, robh@kernel.org,
+ gregkh@linuxfoundation.org
+Cc: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-sound@vger.kernel.org, linux-input@vger.kernel.org,
+ linux-usb@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-doc@vger.kernel.org, alsa-devel@alsa-project.org
+References: <20240925010000.2231406-1-quic_wcheng@quicinc.com>
+ <20240925010000.2231406-19-quic_wcheng@quicinc.com>
+Content-Language: en-US
+From: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
+In-Reply-To: <20240925010000.2231406-19-quic_wcheng@quicinc.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
 
-vim +/dev_err_probe +396 drivers/hwmon/isl28022.c
+> +	int snd_soc_usb_setup_offload_jack(struct snd_soc_component *component,
+> +					struct snd_soc_jack *jack)
+> +..
+> +
+> +  - ``component``: ASoC component to add the jack
+> +  - ``jack``: jack component to populate
+> +
+> +**snd_soc_usb_setup_offload_jack()** is a helper to add a sound jack control to
+> +the platform sound card.  This will allow for consistent naming to be used on
+> +designs that support USB audio offloading.
+> +
+> +Returns 0 on success, negative otherwise.
+> +
+> +.. code-block:: rst
+> +
+> +	int snd_soc_usb_disable_offload_jack(struct snd_soc_component *component)
+> +..
+> +
+> +  - ``component``: ASoC component to disable the jack
+> +
+> +**snd_soc_usb_disable_offload_jack()** is a helper to disable a sound jack control
+> +on the platform sound card.
 
-   346	
-   347	/*
-   348	 * read property values and make consistency checks.
-   349	 *
-   350	 * following values for shunt range and resistor are allowed:
-   351	 *   40 mV -> gain 1, shunt min.  800 micro ohms
-   352	 *   80 mV -> gain 2, shunt min. 1600 micro ohms
-   353	 *  160 mV -> gain 4, shunt min. 3200 micro ohms
-   354	 *  320 mV -> gain 8, shunt min. 6400 micro ohms
-   355	 */
-   356	static int isl28022_read_properties(struct device *dev, struct isl28022_data *data)
-   357	{
-   358		u32 val;
-   359		int err;
-   360	
-   361		err = device_property_read_u32(dev, "shunt-resistor-micro-ohms", &val);
-   362		if (err == -EINVAL)
-   363			val = 10000;
-   364		else if (err < 0)
-   365			return err;
-   366		data->shunt = val;
-   367	
-   368		err = device_property_read_u32(dev, "renesas,shunt-range-microvolt", &val);
-   369		if (err == -EINVAL)
-   370			val = 320000;
-   371		else if (err < 0)
-   372			return err;
-   373	
-   374		switch (val) {
-   375		case 40000:
-   376			data->gain = 1;
-   377			if (data->shunt < 800)
-   378				goto shunt_invalid;
-   379			break;
-   380		case 80000:
-   381			data->gain = 2;
-   382			if (data->shunt < 1600)
-   383				goto shunt_invalid;
-   384			break;
-   385		case 160000:
-   386			data->gain = 4;
-   387			if (data->shunt < 3200)
-   388				goto shunt_invalid;
-   389			break;
-   390		case 320000:
-   391			data->gain = 8;
-   392			if (data->shunt < 6400)
-   393				goto shunt_invalid;
-   394			break;
-   395		default:
- > 396			dev_err_probe(dev, "renesas,shunt-range-microvolt invalid value %d\n", val);
-   397			return -EINVAL;
-   398		}
-   399	
-   400		err = device_property_read_u32(dev, "renesas,average-samples", &val);
-   401		if (err == -EINVAL)
-   402			val = 1;
-   403		else if (err < 0)
-   404			return err;
-   405		if (val > 128 || hweight32(val) != 1) {
-   406			dev_err_probe(dev, "renesas,average-samples invalid value %d\n", val);
-   407			return -EINVAL;
-   408		}
-   409		data->average = val;
-   410	
-   411		return 0;
-   412	
-   413	shunt_invalid:
-   414		dev_err_probe(dev, "renesas,shunt-resistor-microvolt invalid value %d\n", data->shunt);
-   415		return -EINVAL;
-   416	}
-   417	
+is disable_offload_jack() the companion operation to setup_offload_jack()?
 
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+it's not clear to me if there's any relationship between the two.
+
+> +
+> +Returns 0 on success, negative otherwise.
+> +
+> +.. code-block:: rst
+> +
+> +	int snd_soc_usb_update_offload_route(struct device *dev, int card, int pcm,
+> +					     int direction, long *route)
+> +..
+> +
+> +  - ``dev``: USB device to look up offload path mapping
+> +  - ``card``: USB sound card index
+> +  - ``pcm``: USB sound PCM device index
+> +  - ``direction``: direction to fetch offload routing information
+> +  - ``route``: mapping of sound card and pcm indexes for the offload path.  This is
+> +	       an array of two integers that will carry the card and pcm device indexes
+> +	       in that specific order.  This can be used as the array for the kcontrol
+> +	       output.
+> +
+> +**snd_soc_usb_update_offload_route()** calls a registered callback to the USB BE DAI
+> +link to fetch the information about the mapped ASoC devices for executing USB audio
+> +offload for the device. ``route`` may be a pointer to a kcontrol value output array,
+> +which carries values when the kcontrol is read.
+> +
+> +Returns 0 on success, negative otherwise.
+
+please clarify what happens if there is no offloaded device for a
+specific USB card. from [2] below it looks like the intended behavior
+for a device without offload capabilities would be to return 0 but the
+mapping would use the -1 magic value to state there is no offload?
+
+
+> +**snd_soc_usb_free_port()** frees a SOC USB device.
+> +
+> +.. code-block:: rst
+> +
+> +	void snd_soc_usb_add_port(struct snd_soc_usb *usb);
+> +..
+> +
+> +  - ``usb``: SOC USB device to add
+> +
+> +**snd_soc_usb_add_port()** add an allocated SOC USB device to the SOC USB framework.
+> +Once added, this device can be referenced by further operations.
+> +
+> +.. code-block:: rst
+> +
+> +	void snd_soc_usb_remove_port(struct snd_soc_usb *usb);
+> +..
+> +
+> +  - ``usb``: SOC USB device to remove
+> +
+> +**snd_soc_usb_remove_port()** removes a SOC USB device from the SOC USB framework.
+> +After removing a device, any SOC USB operations would not be able to reference the
+> +device removed.
+
+I don't think the last sentence is correct, below [1] you show an
+example where the free_port() routine is required...
+
+
+> +
+> +	static void q6usb_component_remove(struct snd_soc_component *component)
+> +	{
+> +		...
+
+[1]
+
+> +		snd_soc_usb_remove_port(data->usb);
+> +		snd_soc_usb_free_port(data->usb);
+> +	}
+> +
+> +	static const struct snd_soc_component_driver q6usb_dai_component = {
+> +		.probe = q6usb_component_probe,
+> +		.remove = q6usb_component_remove,
+> +		.name = "q6usb-dai-component",
+> +		...
+> +	};
+> +..
+> +
+> +BE DAI links can pass along vendor specific information as part of the
+> +call to allocate the SOC USB device.  This will allow any BE DAI link
+> +parameters or settings to be accessed by the USB offload driver that
+> +resides in USB SND.
+> +
+> +USB Audio Device Connection Flow
+> +--------------------------------
+> +USB devices can be hotplugged into the USB ports at any point in time.
+> +The BE DAI link should be aware of the current state of the physical USB
+> +port, i.e. if there are any USB devices with audio interface(s) connected.
+> +connection_status_cb() can be used to notify the BE DAI link of any change.
+> +
+> +This is called whenever there is a USB SND interface bind or remove event,
+> +using snd_soc_usb_connect() or snd_soc_usb_disconnect():
+> +
+> +.. code-block:: rst
+> +
+> +	static void qc_usb_audio_offload_probe(struct snd_usb_audio *chip)
+> +	{
+> +		...
+> +		snd_soc_usb_connect(usb_get_usb_backend(udev), sdev);
+> +		...
+> +	}
+> +
+> +	static void qc_usb_audio_offload_disconnect(struct snd_usb_audio *chip)
+> +	{
+> +		...
+> +		snd_soc_usb_disconnect(usb_get_usb_backend(chip->dev), dev->sdev);
+> +		...
+> +	}
+> +..
+> +
+> +In order to account for conditions where driver or device existence is
+> +not guaranteed, USB SND exposes snd_usb_rediscover_devices() to resend the
+> +connect events for any identified USB audio interfaces.  Consider the
+> +the following situation:
+> +
+> +	**usb_audio_probe()**
+> +	  | --> USB audio streams allocated and saved to usb_chip[]
+> +	  | --> Propagate connect event to USB offload driver in USB SND
+> +	  | --> **snd_soc_usb_connect()** exits as USB BE DAI link is not ready
+> +
+> +	BE DAI link component probe
+> +	  | --> DAI link is probed and SOC USB port is allocated
+> +	  | --> The USB audio device connect event is missed
+> +
+> +To ensure connection events are not missed, **snd_usb_rediscover_devices()**
+> +is executed when the SOC USB device is registered.  Now, when the BE DAI
+> +link component probe occurs, the following highlights the sequence:
+> +
+> +	BE DAI link component probe
+> +	  | --> DAI link is probed and SOC USB port is allocated
+> +	  | --> SOC USB device added, and **snd_usb_rediscover_devices()** runs
+> +
+> +	**snd_usb_rediscover_devices()**
+> +	  | --> Traverses through usb_chip[] and for non-NULL entries issue
+> +	  |     **connection_status_cb()**
+> +
+> +In the case where the USB offload driver is unbound, while USB SND is ready,
+> +the **snd_usb_rediscover_devices()** is called during module init.  This allows
+> +for the offloading path to also be enabled with the following flow:
+> +
+> +	**usb_audio_probe()**
+> +	  | --> USB audio streams allocated and saved to usb_chip[]
+> +	  | --> Propagate connect event to USB offload driver in USB SND
+> +	  | --> USB offload driver **NOT** ready!
+> +
+> +	BE DAI link component probe
+> +	  | --> DAI link is probed and SOC USB port is allocated
+> +	  | --> No USB connect event due to missing USB offload driver
+> +
+> +	USB offload driver probe
+> +	  | --> **qc_usb_audio_offload_init()**
+> +	  | --> Calls **snd_usb_rediscover_devices()** to notify of devices
+> +
+> +USB Offload Related Kcontrols
+> +=============================
+> +Details
+> +-------
+> +A set of kcontrols can be utilized by applications to help select the proper sound
+> +devices to enable USB audio offloading.  SOC USB exposes the get_offload_dev()
+> +callback that designs can use to ensure that the proper indices are returned to the
+> +application.
+> +
+> +Implementation
+> +--------------
+> +
+> +**Example:**
+> +
+> +  **Sound Cards**:
+> +
+> +	::
+> +
+> +	  0 [SM8250MTPWCD938]: sm8250 - SM8250-MTP-WCD9380-WSA8810-VA-D
+> +						SM8250-MTP-WCD9380-WSA8810-VA-DMIC
+> +	  1 [Seri           ]: USB-Audio - Plantronics Blackwire 3225 Seri
+> +						Plantronics Plantronics Blackwire
+> +						3225 Seri at usb-xhci-hcd.1.auto-1.1,
+> +						full sp
+> +	  2 [C320M          ]: USB-Audio - Plantronics C320-M
+> +                      Plantronics Plantronics C320-M at usb-xhci-hcd.1.auto-1.2, full speed
+> +
+> +  **USB Sound Card** - card#1:
+> +
+> +	::
+> +
+> +	  USB Offload Playback Route PCM#0        -1, -1 (range -1->255)
+> +
+> +  **USB Sound Card** - card#2:
+> +
+> +	::
+> +
+> +	  USB Offload Playback Route PCM#0        0, 1 (range -1->255)
+> +
+> +The above example shows a scenario where the system has one ASoC platform card
+> +(card#0) and two USB sound devices connected (card#1 and card#2).  When reading
+> +the available kcontrols for each USB audio device, the following kcontrol lists
+> +the mapped offload path for the specific device:
+> +
+> +	``USB Offload Playback Route#*``
+> +
+> +The kcontrol is indexed, because a USB audio device could potentially have
+> +several PCM devices.  The above kcontrols are defined as:
+> +
+> +  - ``USB Offload Playback Route PCM`` **(R)**: Returns the ASoC platform sound
+> +    card and PCM device index.  The output **"0, 1"** (card index, PCM device index)
+> +    signifies that there is an available offload path for the USB SND device
+> +    through card#0 - PCM device#1.  If **"-1, -1"** is seen, then no offload path is
+> +    available for the USB SND device.
+
+[2]
+
+maybe I got this wrong but you may want to clarify that the kcontrol is
+always created, but the values indicate if the offload support is real
+or not?
+
+
+> +
+> +USB Offload Playback Route Kcontrol
+> +-----------------------------------
+> +In order to allow for vendor specific implementations on audio offloading device
+> +selection, the SOC USB layer exposes the following:
+> +
+> +.. code-block:: rst
+> +
+> +	int (*update_offload_route_info)(struct snd_soc_component *component,
+> +				int card, int pcm, long *route);
+> +..
+> +
+> +These are specific for the **USB Offload Playback Route PCM#** kcontrol.
+> +
+> +When users issue get calls to the kcontrol, the registered SOC USB callbacks will
+> +execute the registered function calls to the DPCM BE DAI link.
+> +
+> +**Callback Registration:**
+> +
+> +.. code-block:: rst
+> +
+> +	static int q6usb_component_probe(struct snd_soc_component *component)
+> +	{
+> +	...
+> +	usb = snd_soc_usb_allocate_port(component, 1, &data->priv);
+> +	if (IS_ERR(usb))
+> +		return -ENOMEM;
+> +
+> +	usb->connection_status_cb = q6usb_alsa_connection_cb;
+> +	usb->update_offload_route_info = q6usb_get_offload_dev;
+> +
+> +	ret = snd_soc_usb_add_port(usb);
+> +..
+> +
+> +Existing USB Sound Kcontrol
+> +---------------------------
+> +With the introduction of USB offload support, the above USB offload kcontrol
+> +can be added to the pre existing list of kcontrols identified by the USB sound
+
+is this 'can be added' or 'will be added'? The latter seems more correct
+to me, I don't see anything optional or conditional in the description
+and the example below.
+
+> +framework.  These kcontrols are still the main controls that are used to
+> +modify characteristics pertaining to the USB audio device.
+> +
+> +	::
+> +
+> +	  Number of controls: 9
+> +	  ctl     type    num     name                                    value
+> +	  0       INT     2       Capture Channel Map                     0, 0 (range 0->36)
+> +	  1       INT     2       Playback Channel Map                    0, 0 (range 0->36)
+> +	  2       BOOL    1       Headset Capture Switch                  On
+> +	  3       INT     1       Headset Capture Volume                  10 (range 0->13)
+> +	  4       BOOL    1       Sidetone Playback Switch                On
+> +	  5       INT     1       Sidetone Playback Volume                4096 (range 0->8192)
+> +	  6       BOOL    1       Headset Playback Switch                 On
+> +	  7       INT     2       Headset Playback Volume                 20, 20 (range 0->24)
+> +	  8       INT     2       USB Offload Playback Route PCM#0        -1, -1 (range -1->255)
+> +
+> +Since USB audio device controls are handled over the USB control endpoint, use the
+> +existing mechanisms present in the USB mixer to set parameters, such as volume.
+
 
