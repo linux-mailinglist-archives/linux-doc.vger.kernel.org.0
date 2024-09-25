@@ -1,174 +1,135 @@
-Return-Path: <linux-doc+bounces-25709-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25744-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 374EB9863B4
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 17:36:01 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF77798634F
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 17:23:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A4427B33EF5
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 14:48:43 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 72B0A28AE5E
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 15:23:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA49918DF62;
-	Wed, 25 Sep 2024 14:12:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CF77DDDA0;
+	Wed, 25 Sep 2024 15:05:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="4WVAvYoQ"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="U9Fe9Oh8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com [209.85.219.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41FF618308A
-	for <linux-doc@vger.kernel.org>; Wed, 25 Sep 2024 14:12:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E08141D5AAA;
+	Wed, 25 Sep 2024 15:05:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727273529; cv=none; b=n/DRIJ38xt1uA56tFGr3zG1dj0b6zs330xUNVU86jm+tSuux7wrRrHPCYEqxDzRTKlsJyhDKxlsloTEfEjdZjNZB8R0TYVoyUWNe/Ewp0gZVJPNbbScjDY2DIOfi6M0JoMzch7rjm0n1fNwX9lwXBUJkF6S8oSUwJKxYIiD3Cbw=
+	t=1727276708; cv=none; b=fMYRLdOblJbZDD+MbTiFhC8KRIAPH4/v3TpoC0I3pChTA9lrAEcEWikq5tnezkzrPEItiKxebdqlm6XVHXwWBRmvy4XNojYyh+8HsMgxwb2xn0FslqWmlWYwz88gFO2IrBE6D9wNbLlSALtpV/dAyM/1qsJMwNP52xCHUxLzKEo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727273529; c=relaxed/simple;
-	bh=caZMVSss+hfeV7WP34KAQwEKIbUpl7RXfA/CctTtTn0=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=gDn46G9DOOma29Os41i97Ex/vbC9KVzKCNm/Qim7O1eTnu3N96Nr0Tcc5Fnmqu/pJ1eOmwAvxKIBUex6cTyxyhhKRV8CoPTt9NqqLtYrxdWUfJC0FlmSe10lzs8DJO7pOhP41RSZmcxcaUEgUoLmh6DiuhxxAz9JeGejOkfLLRI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=4WVAvYoQ; arc=none smtp.client-ip=209.85.219.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com
-Received: by mail-yb1-f201.google.com with SMTP id 3f1490d57ef6-e02b5792baaso11021571276.2
-        for <linux-doc@vger.kernel.org>; Wed, 25 Sep 2024 07:12:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727273527; x=1727878327; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:from:subject:message-id:references
-         :mime-version:in-reply-to:date:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=zfLBjs5PHlghwVrU7vpRjJ03RkAESW4WXi5zlWV+fXA=;
-        b=4WVAvYoQaD0Fi/WB33In28H6NeooazTCZfrEguVrRSL5+HpcrSnZLgTgFo3mVAWUWQ
-         oFhsSzjoaDth7euLFYf4xWnBD1AncMfaBV3wWQO2iHoTEZPg8vjt7rY7+vMal1v3ib0n
-         UsWbiuFD9icZu0iO+38YfwM1U6zJikyYlcpEMm7779BkPbMvzhNq3wzJYviXsQHQg4bP
-         fakYM7NRbozwlTcQXcQvlsw4ZCTjGZXyOL9+upqaZvfJKqkzOTwsahW2cFP4HoVIXI6o
-         zDxbe+TYTH0InXa56qJ67fYiOiwIujwf+id5X4ApuYiZqv2gpM/Mr3Fx953h0tJDeraZ
-         WJSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727273527; x=1727878327;
-        h=content-transfer-encoding:cc:to:from:subject:message-id:references
-         :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=zfLBjs5PHlghwVrU7vpRjJ03RkAESW4WXi5zlWV+fXA=;
-        b=JP1WJ9VmxE62i0WZ6oNVK56MPdpRaGb2QTtfZ6opwkrYULiC7QdT1nOnB98expbIUU
-         kO/EW24nOwWlXI5ytylWgmrVDTx5UnyZ88RIO028XkNBzo5zH1p3v40PIx6nc5XKov3V
-         Ju1O9DM4Q3AMxjdhtdnRb7l5D2wKMGdmWwktB2VXE09ixpXTEPJcTEwkgUj/j/VTzbRT
-         qMtqU4VpHe6KznuwaLG4qzMsvzBpJyzGDqGjRZD7XM7zal3Cyag155cpn8Rkm9Ixga25
-         XnCQ9//JKp2RMpAaD89sxo9NOmAiYMRBIxWfpkLYYlM+GN78I3lrteFqvX+rgLjDSLVf
-         UaAg==
-X-Forwarded-Encrypted: i=1; AJvYcCVzAd4fkY5k8sU4DZ/49jbftR5oGYF3IdDCzAT3mLGDpIxR0vq73zsq2ueivhLFUmwcd/5S/MxRZQ0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyE/7OLh4WyPj1p39cUlY+c0Y07rQhPfCwFZEn/U7BPUhPsSEbG
-	eeJFy4iDS8gG+qiKxOIDMDaUPcN+guw4BJz5VdU0Wg30MjyUYKY0CBOHVk1QdFY7i72YqwPJJnb
-	bHQ==
-X-Google-Smtp-Source: AGHT+IEPGReoQdLJ0WXkwCLY6OOacP06JYe3XTYe/8Qo1kKrLFuqeITXcsLs6p91L7BG4e12yJbQXU3iqh4=
-X-Received: from zagreus.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:5c37])
- (user=seanjc job=sendgmr) by 2002:a05:6902:289:b0:e0b:af9b:fb79 with SMTP id
- 3f1490d57ef6-e24d7a104admr29937276.3.1727273527163; Wed, 25 Sep 2024 07:12:07
- -0700 (PDT)
-Date: Wed, 25 Sep 2024 07:12:05 -0700
-In-Reply-To: <d65e62d2-ca64-4b29-8656-bb8411fe837d@zytor.com>
+	s=arc-20240116; t=1727276708; c=relaxed/simple;
+	bh=7vCwXwDG+bsxtvd02iytviiUSMi6iO6Ybyp3t8WIe5Y=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=EQu8t/nznrNR3OkpPm6MsAyiFJv4qtrSfl63IbksG79098MUJJAQGF5apIT32M5yxf7DTU+/qv3K1WbeJ6EADbYo8zcuUVphfpBSv62zKej6/VJLMxx/a6vjzygD8AAD1z3pYvHJCb4BVHAi8UlGtgO3BqkXB8kF65K3WyF0JiE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=U9Fe9Oh8; arc=none smtp.client-ip=192.198.163.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1727276707; x=1758812707;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=7vCwXwDG+bsxtvd02iytviiUSMi6iO6Ybyp3t8WIe5Y=;
+  b=U9Fe9Oh85bH/PdB5ZG1jCEY+QRRj55hwj7XIodC22A7jYo4Avc+wg1mO
+   PGMKuVlUAk2Yp5qlPefe8EQdkgRtupzwPWIcsCkpdcxTJA86bMYKunnBY
+   0BhcRhC9H13g8i/TvbEMBS8B5UEMqZUWaGkeCRnCRlP2zFI7FWfUOq/Uu
+   DPXzVp1MPW4DZkBiWIxamV+QfzF9setHH/7SDNONg3wVw91hAwssItPVR
+   e4lVtB4qJsUaXtnSa1sweti1avul1ZL7dNvtl0yhuMFIsELtciHHRhyNj
+   grt1cIIuCfbZsx+h4CN5cqrePfF7gLO2suIhGO5RRfarndugLf/vbd+Ms
+   Q==;
+X-CSE-ConnectionGUID: dhq0LvMBQ+SbeGGKCscbqQ==
+X-CSE-MsgGUID: 8a9LlwOmQGekzzPceke9SQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11206"; a="26482876"
+X-IronPort-AV: E=Sophos;i="6.10,257,1719903600"; 
+   d="scan'208";a="26482876"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2024 08:05:06 -0700
+X-CSE-ConnectionGUID: KkJZz6O4SrW69iXt+QA+QQ==
+X-CSE-MsgGUID: dfMikm4UR6+Y2DTcJrvcFA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,257,1719903600"; 
+   d="scan'208";a="76317626"
+Received: from kniemiec-mobl1.ger.corp.intel.com (HELO [10.245.246.30]) ([10.245.246.30])
+  by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2024 08:05:01 -0700
+Message-ID: <52f10356-ecf7-4c92-b0c3-78f7a63ae85c@linux.intel.com>
+Date: Wed, 25 Sep 2024 16:22:57 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20240207172646.3981-1-xin3.li@intel.com> <20240207172646.3981-8-xin3.li@intel.com>
- <ZiJzFsoHR41Sd8lE@chao-email> <ZmoT0jaX_3Ww3Uzu@google.com>
- <feefa9d1-f266-414f-bb7b-b770ef0d8ec6@zytor.com> <ZuNJlzXntREQVb3n@google.com>
- <d65e62d2-ca64-4b29-8656-bb8411fe837d@zytor.com>
-Message-ID: <ZvQaNRhrsSJTYji3@google.com>
-Subject: Re: [PATCH v2 07/25] KVM: VMX: Set intercept for FRED MSRs
-From: Sean Christopherson <seanjc@google.com>
-To: Xin Li <xin@zytor.com>
-Cc: Chao Gao <chao.gao@intel.com>, Xin Li <xin3.li@intel.com>, linux-kernel@vger.kernel.org, 
-	kvm@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, pbonzini@redhat.com, corbet@lwn.net, 
-	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, 
-	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, shuah@kernel.org, 
-	vkuznets@redhat.com, peterz@infradead.org, ravi.v.shankar@intel.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v28 12/32] ALSA: usb-audio: Save UAC sample size
+ information
+To: Wesley Cheng <quic_wcheng@quicinc.com>, srinivas.kandagatla@linaro.org,
+ mathias.nyman@intel.com, perex@perex.cz, conor+dt@kernel.org,
+ dmitry.torokhov@gmail.com, corbet@lwn.net, broonie@kernel.org,
+ lgirdwood@gmail.com, tiwai@suse.com, krzk+dt@kernel.org,
+ Thinh.Nguyen@synopsys.com, bgoswami@quicinc.com, robh@kernel.org,
+ gregkh@linuxfoundation.org
+Cc: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-sound@vger.kernel.org, linux-input@vger.kernel.org,
+ linux-usb@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-doc@vger.kernel.org, alsa-devel@alsa-project.org
+References: <20240925010000.2231406-1-quic_wcheng@quicinc.com>
+ <20240925010000.2231406-13-quic_wcheng@quicinc.com>
+Content-Language: en-US
+From: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
+In-Reply-To: <20240925010000.2231406-13-quic_wcheng@quicinc.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 18, 2024, Xin Li wrote:
-> > > MSR_IA32_FRED_SSP0 is an alias of the CET MSR_IA32_PL0_SSP and likely=
- to
-> > > be used in the same way as FRED RSP0, i.e., host FRED SSP0 _should_ b=
-e
-> > > restored in arch_exit_to_user_mode_prepare().  However as of today Li=
-nux
-> > > has no plan to utilize kernel shadow stack thus no one cares host FRE=
-D
-> > > SSP0 (no?).  But lets say anyway it is host's responsibility to manag=
-e
-> > > host FRED SSP0, then KVM only needs to take care of guest FRED SSP0
-> > > (just like how KVM should handle guest FRED RSP0) even before the
-> > > supervisor shadow stack feature is advertised to guest.
-> >=20
-> > Heh, I'm not sure what your question is, or if there even is a question=
-.  KVM
-> > needs to context switch FRED SSP0 if FRED is exposed to the guest, but =
-presumably
-> > that will be done through XSAVE state?  If that's the long term plan, I=
- would
-> > prefer to focus on merging CET virtualization first, and then land FRED=
- virtualization
-> > on top so that KVM doesn't have to carry intermediate code to deal with=
- the aliased
-> > MSR.
->=20
-> You mean the following patch set, right?
 
-Yep, and presumably the KVM support as well:
 
-https://lore.kernel.org/all/20240219074733.122080-1-weijiang.yang@intel.com
+On 9/25/24 02:59, Wesley Cheng wrote:
+> Within the UAC descriptor, there is information describing the size of a
+> sample (bSubframeSize/bSubslotSize) and the number of relevant bits
+> (bBitResolution).  Currently, fmt_bits carries only the bit resolution,
+> however, some offloading entities may also require the overall size of the
+> sample.  Save this information in a separate parameter, as depending on the
+> UAC format type, the sample size can not easily be decoded from other
+> existing parameters.
+> 
+> Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
 
-> https://lore.kernel.org/kvm/20240531090331.13713-1-weijiang.yang@intel.co=
-m/
+Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
 
-...
+> ---
+>  sound/usb/card.h   | 1 +
+>  sound/usb/format.c | 1 +
+>  2 files changed, 2 insertions(+)
+> 
+> diff --git a/sound/usb/card.h b/sound/usb/card.h
+> index 4f4f3f39b7fa..b65163c60176 100644
+> --- a/sound/usb/card.h
+> +++ b/sound/usb/card.h
+> @@ -15,6 +15,7 @@ struct audioformat {
+>  	unsigned int channels;		/* # channels */
+>  	unsigned int fmt_type;		/* USB audio format type (1-3) */
+>  	unsigned int fmt_bits;		/* number of significant bits */
+> +	unsigned int fmt_sz;		/* overall audio sub frame/slot size */
+>  	unsigned int frame_size;	/* samples per frame for non-audio */
+>  	unsigned char iface;		/* interface number */
+>  	unsigned char altsetting;	/* corresponding alternate setting */
+> diff --git a/sound/usb/format.c b/sound/usb/format.c
+> index 3b45d0ee7693..5fde543536a8 100644
+> --- a/sound/usb/format.c
+> +++ b/sound/usb/format.c
+> @@ -80,6 +80,7 @@ static u64 parse_audio_format_i_type(struct snd_usb_audio *chip,
+>  	}
+>  
+>  	fp->fmt_bits = sample_width;
+> +	fp->fmt_sz = sample_bytes;
+>  
+>  	if ((pcm_formats == 0) &&
+>  	    (format == 0 || format == (1 << UAC_FORMAT_TYPE_I_UNDEFINED))) {
 
-> > Ugh, but what happens if a CPU (or the host kernel) supports FRED but n=
-ot CET SS?
-> > Or is that effectively an illegal combination?
->=20
-> The FRED Spec says:
->=20
-> IA32_FRED_SSP1, IA32_FRED_SSP2, and IA32_FRED_SSP3 (MSR indices 1D1H=E2=
-=80=93
-> 1D3H). Together with the existing MSR IA32_PL0_SSP (MSR index 6A4H), thes=
-e
-> are the FRED SSP MSRs.
->=20
-> The FRED SSP MSRs are supported by any processor that enumerates
-> CPUID.(EAX=3D7,ECX=3D1):EAX.FRED[bit 17] as 1. If such a processor does n=
-ot
-> support CET, FRED transitions will not use the MSRs (because shadow stack=
-s
-> are not enabled), but the MSRs would still be accessible using RDMSR and
-> WRMSR.
->=20
->=20
-> So they are independent, just that FRED SSP MSRs are NOT used if
-> supervisor shadow stacks are not enabled (obviously Qemu can be
-> configured to not advertise CET but FRED).
->=20
-> When FRED is advertised to a guest, KVM should allow FRED SSP MSRs
-> accesses through disabling FRED SSP MSRs interception no matter whether
-> supervisor shadow stacks are enabled or not.
-
-KVM doesn't necessarily need to disabling MSR interception, e.g. if the exp=
-ectation
-is that the guest will rarely/never access the MSRs when CET is unsupported=
-, then
-we're likely better off going with a trap-and-emulate model.  KVM needs to =
-emulate
-RDMSR and WRMSR no matter what, e.g. in case the guest triggers a WRMSR whe=
-n KVM
-is emulating, and so that userspace can get/set MSR values.
-
-And this means that yes, FRED virtualization needs to land after CET virtua=
-lization,
-otherwise managing the conflicts/dependencies will be a nightmare.
 
