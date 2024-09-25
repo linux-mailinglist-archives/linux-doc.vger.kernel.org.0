@@ -1,134 +1,175 @@
-Return-Path: <linux-doc+bounces-25749-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25753-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82083986477
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 18:07:42 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2279698649F
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 18:17:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 12131B3296C
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 15:32:36 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8D543B2413B
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 15:59:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C761C335C0;
-	Wed, 25 Sep 2024 15:28:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 654181BC58;
+	Wed, 25 Sep 2024 15:59:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="gn1G19OX"
+	dkim=pass (2048-bit key) header.d=arndb.de header.i=@arndb.de header.b="UVKMXiTj";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="VkQkxhzM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from fout-a4-smtp.messagingengine.com (fout-a4-smtp.messagingengine.com [103.168.172.147])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F239C1D5AA0
-	for <linux-doc@vger.kernel.org>; Wed, 25 Sep 2024 15:28:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB8AA18637;
+	Wed, 25 Sep 2024 15:59:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=103.168.172.147
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727278116; cv=none; b=QwE3yJYRQtuvd/LtkLdHgQMOfYRGZ47jjydWyT7QHr3g2ZLPZWyXKg6au8D38OCOvr4LAcmuO5/STEsxThLZpn1rDBsMXS2tzsyrrHkt6kW1QbZcodtFopJhpOzxl90OA0dAVpLtnOrLqqBo/M/JazStYJBgIzabsWTGz2WO6/s=
+	t=1727279955; cv=none; b=sa3WV09dVjCJIafIgmJk2N19Jdlj4pASEe6ccIBr1YJXkX3hNuCqg7AjFjdfe2bdAKGjK+yIDFR38IXi9HzjCfvohiUX7s10aexaOah4ORmy7e9hMhJgfDeIrmBrhkTjXcsnj6qll1LUBcsqPZuuDVTiKuRpPbGAJgK/2MJsMrg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727278116; c=relaxed/simple;
-	bh=/B5KIkZH/dNJd7K8EFl1NpdgaaqQMbqnQYkG9BZCTKU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=dZEbbmo2B3TSg7c8mzWhUJ6elqWqSsb/VW5BoKizWC7qX62YG/Ofh5D/VSz0EeE3udnnSY51FsRCXAC7nON0SqHb7kSUnzL3Zrfgy6Pb2mXqtWHt4waRA6N0+l9q7qIR9utg8uOTbapStmTYigBvlXMEM5bxCspQ4fH27XeTRqg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=gn1G19OX; arc=none smtp.client-ip=209.85.221.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-3770320574aso4449955f8f.2
-        for <linux-doc@vger.kernel.org>; Wed, 25 Sep 2024 08:28:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727278113; x=1727882913; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=7PSyy4BN71dy5mqHVexLDzboTAsKUKc2hyFTi3KyPtk=;
-        b=gn1G19OXvt7rEurdAa8o/mgW1cbswZDlAue5/ctfmtRQnkDA1PZbr8XG69QmmNTOMH
-         YBxkygZYOg0nYw09E6kpdKdpiBb9uyWyZtSRlAq/PvGDMii6Di+aRKWE5pz+YtVcEreb
-         TD32bPwy5GO+cbESQHN+PCkcjY0XXnbufAuT1QzXvqbSivMPxPLgw427ztIBVVtXdbJm
-         y01UAZPFDNDnjdID6dRcx20sj7mKtG+DOzG1nUTNYFG+KKDEF46On9UcrgP0kGIhB0uK
-         Ahw9N3fVEz4NwH3JR19ciq4Cmr0jojnbfcc9hCkb2Zs13GWbbRcSExLP2q3r5Mn7t4ev
-         Wfdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727278113; x=1727882913;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=7PSyy4BN71dy5mqHVexLDzboTAsKUKc2hyFTi3KyPtk=;
-        b=GIDh3+P+jB8M1WqZfvHMtabrAgIrh4ejZir3E2KyuwE2xzxxpiBn7P/SyTHgDKYT4N
-         tH7eonIXA5k5Z4XydFJUHYHdCi7zExO/estMlTOZwxZUeyQVznOS52HajyOvZCmL/BEm
-         nr7LNbsnWukcYKHnkGO7+2XKb0iosQq8Yj4FNRwTNMgVnB0ogzbMG8LiZrtg22uCptXa
-         O+WdKXRRPn4IXhrJpnRTEe9I9YvPWh1Ml7fc/UHRpaJX3nAeFw/8pS+tG+XBcfgorMb3
-         kvs2qO1Qe3tR5o2GMQTRDqU1QLQi/+BmbSmb2qR456qGMzptSppf4wA8VKPBSJqTStMA
-         f/bA==
-X-Forwarded-Encrypted: i=1; AJvYcCUI+fc4ajSAVbWA6iCTfHn4O2cHjcWRj4CbryROePRNGGDdOwT+9LgM/0O9X5r/RjQOLCwBwv5dwAw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwQrAzcJysSXt3U7ROcwjRDmLohW8eRx+/pnlEdAfwvHBY2R3/E
-	8dKNhbc76PQVUiWUWPIv+DZwv2Z6TVglc1u8MU0+d1fA9zJ2pfOuG7e5u7cmZbw=
-X-Google-Smtp-Source: AGHT+IFp1PAa7fUkvNR1Hu5TOkbb60Z/zetDN4Gii2Kf3uJUYk6thZOMukVHn10+sCEkHp+fUTfHpw==
-X-Received: by 2002:a5d:6e10:0:b0:374:cea0:7d3d with SMTP id ffacd0b85a97d-37cc24c5a71mr2197820f8f.53.1727278112851;
-        Wed, 25 Sep 2024 08:28:32 -0700 (PDT)
-Received: from [10.2.5.161] (amontpellier-556-1-151-252.w109-210.abo.wanadoo.fr. [109.210.7.252])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37cc4a57d00sm1747754f8f.64.2024.09.25.08.28.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Sep 2024 08:28:32 -0700 (PDT)
-Message-ID: <da15af17-e5cc-4714-9fe1-4683d990abbb@baylibre.com>
-Date: Wed, 25 Sep 2024 17:28:30 +0200
+	s=arc-20240116; t=1727279955; c=relaxed/simple;
+	bh=yaiCoyV8POwmw8mOFb1CvfBnHJKh54ULmKz45sixybQ=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=sR6mKxNyUsHZ9p8KwYp6mnBXK+81DWVn8SWXpavv2Kfhigs1vRNqgAt7l6GYZup1UB0DQC04k5mMJeeeQLoAw1XRJk2rOwz7nt/xwgXFm9ux6fDmqlGt6CeV1rURVK2DCI1b0ys5pWTf9Xwi6sAluwk/cqqE/TOHSxCJa5BneWs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de; spf=pass smtp.mailfrom=arndb.de; dkim=pass (2048-bit key) header.d=arndb.de header.i=@arndb.de header.b=UVKMXiTj; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=VkQkxhzM; arc=none smtp.client-ip=103.168.172.147
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arndb.de
+Received: from phl-compute-10.internal (phl-compute-10.phl.internal [10.202.2.50])
+	by mailfout.phl.internal (Postfix) with ESMTP id ECD7113803AA;
+	Wed, 25 Sep 2024 11:59:10 -0400 (EDT)
+Received: from phl-imap-11 ([10.202.2.101])
+  by phl-compute-10.internal (MEProxy); Wed, 25 Sep 2024 11:59:10 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1727279950;
+	 x=1727366350; bh=3HZx7sec5GV7f3nA3v8u1Fjv7A5gsnEaqY5PBAiqOkk=; b=
+	UVKMXiTjaRWc30bxZNATVWbRhgICrxpyR1x16ghxJOAQTl5BOunfXp9FwWV9WhlV
+	+aUa/RGQh0Kyz4py6ifpIJ0+eLmjwMyTDfXsi0XWrcC8RcdTOOgH0YZTuBZbucr/
+	z2c10MA43k2yciVzwTab6t6eXgWSHOOzeHnWuiGcynxher7cWBmML1U9Sevdd5iI
+	uzvkVwSmr0CDT4xYR/kN0N6RZhrsVcoWwgNNDis6Dv19wAKQhSHm5ns+KjaDg8od
+	S9wcHRzFhbGHOVeS9mXFTuId4wpU9p1MK04NIfi1O27zhlWafosj7W3qPNzL6+H+
+	DB2IwVwmKjOI85hzhAEKpQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1727279950; x=
+	1727366350; bh=3HZx7sec5GV7f3nA3v8u1Fjv7A5gsnEaqY5PBAiqOkk=; b=V
+	kQkxhzMWnh9soxOXto4eo35XEnniTH4Wu+9ZskAHzs93bDP7LBa6DgPrj6HceGdo
+	8YKYsjg/9l4PP68f+e9rStsWE3nv4yrfFwW9zxVUxAAoxu92B7DwkCnMDEB5z++5
+	B2Uj+lbSbXt+XIWbOH6RMp3gHONT6vsyJTj7kIzfZlBMjfQMJfIdjyljGakAIjbV
+	dxtEToc/zuQB6+/68rKtO42kB6GLy1P4svOtLC8opNfW/Ibh4Rj6RfYs1tmv6qEF
+	/xMtI7xZqb2slX9RiE52KgOWpCCVFgL5Cu2jlVC9WPk3512KFFuAVu9ynYuhKCE0
+	r2M9NYYjcQEpvrsJmEDGg==
+X-ME-Sender: <xms:TTP0ZqmgT4Iz-DjvOhb6TEsmbNcedL4jv-HXEBZ14JusRndh8E3guQ>
+    <xme:TTP0Zh1aAfi2-W_sHtCvZrcYc2NMKYejucSvVVwIJzXQiogHFgrFj3dCt8w6MAvoP
+    d41cQblQb2fa8wiyNo>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrvddthedgleehucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
+    rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnh
+    htshculddquddttddmnecujfgurhepofggfffhvfevkfgjfhfutgfgsehtjeertdertddt
+    necuhfhrohhmpedftehrnhguuceuvghrghhmrghnnhdfuceorghrnhgusegrrhhnuggsrd
+    guvgeqnecuggftrfgrthhtvghrnhepfefhheetffduvdfgieeghfejtedvkeetkeejfeek
+    keelffejteevvdeghffhiefhnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlh
+    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrrhhnugesrghr
+    nhgusgdruggvpdhnsggprhgtphhtthhopeegtddpmhhouggvpehsmhhtphhouhhtpdhrtg
+    hpthhtohepmhgrthhhihgvuhdruggvshhnohihvghrshesvghffhhitghiohhsrdgtohhm
+    pdhrtghpthhtohepuhgsihiijhgrkhesghhmrghilhdrtghomhdprhgtphhtthhopegrrh
+    gusgdoghhithesghhoohhglhgvrdgtohhmpdhrtghpthhtohepihhrohhgvghrshesghho
+    ohhglhgvrdgtohhmpdhrtghpthhtohepjhhushhtihhnshhtihhtthesghhoohhglhgvrd
+    gtohhmpdhrtghpthhtohepphgvthgvrhiisehinhhfrhgruggvrggurdhorhhgpdhrtghp
+    thhtoheprggurhhirghnrdhhuhhnthgvrhesihhnthgvlhdrtghomhdprhgtphhtthhope
+    hkvghithhhpheskhgvihhthhhprdgtohhmpdhrtghpthhtoheprggtmhgvsehkvghrnhgv
+    lhdrohhrgh
+X-ME-Proxy: <xmx:TTP0ZorEpf8uhg8h7KUOuuyxmkFTuOqd8M-ijgxDXgHXHnEsCAqn1A>
+    <xmx:TTP0ZukWROg85Ojj1n7scTnPh_o5BOn4tFS4d6Wlg35ADB7gm5yxxQ>
+    <xmx:TTP0Zo3bonoZfA7r9k_xttbCf96LxvWQCw6nio7M3wIvLzzRaNhFBA>
+    <xmx:TTP0ZlvFerWdcwY5EIw3orvEavM3V7Yt9LqH5F0Xmjy4Y5rHiisqdQ>
+    <xmx:TjP0ZmWuFxpdl1lIuEttTBR3BrOqJ-pJA32wqZmkpWVgyRHgKyKtEXao>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+	id 792C62220071; Wed, 25 Sep 2024 11:59:09 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/10] dt-bindings: iio: adc: ad7606: Make corrections
- on spi conditions
-To: Conor Dooley <conor@kernel.org>
-Cc: =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <ukleinek@kernel.org>,
- Lars-Peter Clausen <lars@metafoo.de>,
- Michael Hennerich <Michael.Hennerich@analog.com>,
- Jonathan Cameron <jic23@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- linux-pwm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-fbdev@vger.kernel.org, linux-iio@vger.kernel.org,
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
- aardelean@baylibre.com, dlechner@baylibre.com, jstephan@baylibre.com
-References: <20240920-ad7606_add_iio_backend_support-v2-0-0e78782ae7d0@baylibre.com>
- <20240920-ad7606_add_iio_backend_support-v2-2-0e78782ae7d0@baylibre.com>
- <20240921-playgroup-regally-f26c17be26dc@spud>
- <56090167-15a0-4386-89a6-c379d70faae6@baylibre.com>
- <20240924-unvocal-playback-2753bbbb0e45@spud>
-Content-Language: en-US
-From: Guillaume Stols <gstols@baylibre.com>
-In-Reply-To: <20240924-unvocal-playback-2753bbbb0e45@spud>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Date: Wed, 25 Sep 2024 15:58:38 +0000
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Ard Biesheuvel" <ardb+git@google.com>, linux-kernel@vger.kernel.org
+Cc: "Ard Biesheuvel" <ardb@kernel.org>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, "Andy Lutomirski" <luto@kernel.org>,
+ "Peter Zijlstra" <peterz@infradead.org>,
+ "Uros Bizjak" <ubizjak@gmail.com>, "Dennis Zhou" <dennis@kernel.org>,
+ "Tejun Heo" <tj@kernel.org>, "Christoph Lameter" <cl@linux.com>,
+ "Mathieu Desnoyers" <mathieu.desnoyers@efficios.com>,
+ "Paolo Bonzini" <pbonzini@redhat.com>,
+ "Vitaly Kuznetsov" <vkuznets@redhat.com>,
+ "Juergen Gross" <jgross@suse.com>,
+ "Boris Ostrovsky" <boris.ostrovsky@oracle.com>,
+ "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ "Masahiro Yamada" <masahiroy@kernel.org>, "Kees Cook" <kees@kernel.org>,
+ "Nathan Chancellor" <nathan@kernel.org>,
+ "Keith Packard" <keithp@keithp.com>,
+ "Justin Stitt" <justinstitt@google.com>,
+ "Josh Poimboeuf" <jpoimboe@kernel.org>,
+ "Arnaldo Carvalho de Melo" <acme@kernel.org>,
+ "Namhyung Kim" <namhyung@kernel.org>, "Jiri Olsa" <jolsa@kernel.org>,
+ "Ian Rogers" <irogers@google.com>,
+ "Adrian Hunter" <adrian.hunter@intel.com>,
+ "Kan Liang" <kan.liang@linux.intel.com>, linux-doc@vger.kernel.org,
+ linux-pm@vger.kernel.org, kvm@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-efi@vger.kernel.org,
+ Linux-Arch <linux-arch@vger.kernel.org>, linux-sparse@vger.kernel.org,
+ linux-kbuild@vger.kernel.org, linux-perf-users@vger.kernel.org,
+ rust-for-linux@vger.kernel.org, llvm@lists.linux.dev
+Message-Id: <c4868f63-b688-4489-a112-05bf04280bde@app.fastmail.com>
+In-Reply-To: <20240925150059.3955569-32-ardb+git@google.com>
+References: <20240925150059.3955569-30-ardb+git@google.com>
+ <20240925150059.3955569-32-ardb+git@google.com>
+Subject: Re: [RFC PATCH 02/28] Documentation: Bump minimum GCC version to 8.1
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+On Wed, Sep 25, 2024, at 15:01, Ard Biesheuvel wrote:
+> From: Ard Biesheuvel <ardb@kernel.org>
+>
+> Bump the minimum GCC version to 8.1 to gain unconditional support for
+> referring to the per-task stack cookie using a symbol rather than
+> relying on the fixed offset of 40 bytes from %GS, which requires
+> elaborate hacks to support.
+>
+> Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+> ---
+>  Documentation/admin-guide/README.rst | 2 +-
+>  Documentation/process/changes.rst    | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 
-On 9/24/24 16:59, Conor Dooley wrote:
-> On Tue, Sep 24, 2024 at 04:41:50PM +0200, Guillaume Stols wrote:
->> On 9/21/24 23:55, Conor Dooley wrote:
->>> On Fri, Sep 20, 2024 at 05:33:22PM +0000, Guillaume Stols wrote:
->>>> The SPI conditions are not always required, because there is also a
->>>> parallel interface. The way used to detect that the SPI interface is
->>>> used is to check if the reg value is between 0 and 256.
->>> And, yaknow, not that the bus you're on is a spi bus? I don't think this
->>> comment is relevant to the binding, especially given you have a property
->>> for it.
->> Apologies, I missed to change the commit message, it will be fixed in the
->> next series.
->>
->> Since Jonathan did not like very much inferring the interface with the reg's
->> value that I used i the previous verison, I introduced this flag.
->>
->> However this is only intended to be use in bindings, to determine whether or
->> not spi properties should be added.
-> To be honest, if it is not needed by software to understand what bus the
-> device is on, it shouldn't be in the bindings at all. What was Jonathan
-> opposed to? Doing an if reg < 1000: do y, otherwise do x?
-> I'd not bother with any of that, and just make cpha (or w/e it was)
-> optional with a description explaining the circumstances in which is it
-> needed.
-OK, it will be removed from the series and sent as a side patch because 
-it anyways does not really belong to this series.
->> In the driver side of things, the bus interface is inferred by the parent's
->> node (SPI driver is an module_spi_driver while parallel driver is
->> module_platform_driver).
+Acked-by: Arnd Bergmann <arnd@arndb.de>
+
+As we discussed during plumbers, I think this is reasonable,
+both the gcc-8.1 version and the timing after the 6.12-LTS
+kernel.
+
+We obviously need to go through all the other version checks
+to see what else can be cleaned up. I would suggest we also
+raise the binutils version to 2.30+, which is what RHEL8
+shipped alongside gcc-8. I have not found other distros that
+use older binutils in combination with gcc-8 or higher,
+Debian 10 uses binutils-2.31.
+I don't think we want to combine the additional cleanup with
+your series, but if we can agree on the version, we can do that
+in parallel.
+
+FWIW, here are links to the last few times we discussed this,
+and there are already has a few other things that would
+benefit from more modern compilers:
+
+https://lore.kernel.org/lkml/dca5b082-90d1-40ab-954f-8b3b6f51138c@app.fastmail.com/
+https://lore.kernel.org/lkml/CAFULd4biN8FPRtU54Q0QywfBFvvWV-s1M3kWF9YOmozyAX9+ZQ@mail.gmail.com/
+https://lore.kernel.org/lkml/CAK8P3a1Vt17Yry_gTQ0dwr7_tEoFhuec+mQzzKzFvZGD5Hrnow@mail.gmail.com/
+
+     Arnd
 
