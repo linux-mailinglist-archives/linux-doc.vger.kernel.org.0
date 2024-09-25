@@ -1,151 +1,131 @@
-Return-Path: <linux-doc+bounces-25666-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25685-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14FF898500C
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 03:06:12 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8EB3898513C
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 05:11:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CDCD028316B
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 01:06:10 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 4550A1F24317
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 03:11:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F028E157A67;
-	Wed, 25 Sep 2024 01:01:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6968B149C4B;
+	Wed, 25 Sep 2024 03:11:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="pjldD4f9"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YqW46Se6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com [209.85.214.195])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DF56157469;
-	Wed, 25 Sep 2024 01:01:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF0DD148827;
+	Wed, 25 Sep 2024 03:11:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727226084; cv=none; b=TkWadC7bC1vD5t2E825/3R924n6BKRsmjYCoKcR+e6bi/jJqFDxALEJmmS+IdWfZKnxTl7Ex31ogTSVWCfwDDYHihj67LJRFBy0NGKHIHLbynVd1BlnMdSS7BMlZd9OPRLu1Nw8k5lku7LmxTKEwojhcPCpr3zOCOk2nWXUpBVc=
+	t=1727233903; cv=none; b=pa2vJhgLPzxyAuMdjB02jH0TP2bYu/+HRIwdytJDBroLngnJWacrmPnvaFqbAxvOTE99Y6Qp/UcwfvR2WJmW7hSmUM79rTzVLtINBuVts+HaSoU+oAKqB05y7/WOG6k76AHJMuIYOLEVVSdHMme7D508GNdkVwINrq7SsJcFeOI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727226084; c=relaxed/simple;
-	bh=prnyaP8xdPvgf7lPSdgoOnTFSQEEfdLilloaJUXm1RE=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=kl5rjkOEDANeZGK0kS0a/pcoC4zsnFan+QyH7OjC7kHworObx8AEfPfHJzHwQPsPNY2RyUwsXJjh9+2NQpDHfhIpi5kOG6MPxdPK9zBhgzTe7J1EGpjU4Wx19Z3ohhxMzHh3nSr6ZyPO32gCyyExhUWheBYNIhK5DXdw3VX1w7A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=pjldD4f9; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 48OIJGAj001625;
-	Wed, 25 Sep 2024 01:00:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IHuzCQGYpXyTPH0RihFbQD623zcQRcB8CUdC3cqWdMA=; b=pjldD4f9IXUoQo+6
-	v0DhTrFEJMo29LhW+GBGrrCDkdYe00bE7NcqwI+9FiM4djrz0OYEDpDczfE8hVOS
-	3C4ivw4yDwn+gJEkjIdkLy9uf0kfmgkki+u+Q8lGxIs346X47HAtcOYfwHf6tlii
-	nKkIuAjL9QutcCbd6MiS8pNOBegMxhWwd3107CTRhcnMeL7GXmsi1EwgCvzGSqFL
-	pJODt2TPVDdE4uDtOhKtyhRE+WF1b/32DaW0U275vhBMnKZVfTvwlRmnMyJ4sPut
-	MKHLvDF1hPGGlDdjZ7xTIhQeGkAoIoZft1FFbAoD6XVdMhTnvz8CtXkNMpsfYD/+
-	XpGafg==
-Received: from nalasppmta03.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 41snqyjg40-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 25 Sep 2024 01:00:21 +0000 (GMT)
-Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
-	by NALASPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 48P10Kac022123
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 25 Sep 2024 01:00:20 GMT
-Received: from hu-wcheng-lv.qualcomm.com (10.49.16.6) by
- nalasex01b.na.qualcomm.com (10.47.209.197) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Tue, 24 Sep 2024 18:00:20 -0700
-From: Wesley Cheng <quic_wcheng@quicinc.com>
-To: <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
-        <perex@perex.cz>, <conor+dt@kernel.org>, <dmitry.torokhov@gmail.com>,
-        <corbet@lwn.net>, <broonie@kernel.org>, <lgirdwood@gmail.com>,
-        <tiwai@suse.com>, <krzk+dt@kernel.org>,
-        <pierre-louis.bossart@linux.intel.com>, <Thinh.Nguyen@synopsys.com>,
-        <bgoswami@quicinc.com>, <robh@kernel.org>,
-        <gregkh@linuxfoundation.org>
-CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-sound@vger.kernel.org>, <linux-input@vger.kernel.org>,
-        <linux-usb@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <alsa-devel@alsa-project.org>,
-        Wesley Cheng
-	<quic_wcheng@quicinc.com>
-Subject: [PATCH v28 32/32] ASoC: usb: Rediscover USB SND devices on USB port add
-Date: Tue, 24 Sep 2024 18:00:00 -0700
-Message-ID: <20240925010000.2231406-33-quic_wcheng@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240925010000.2231406-1-quic_wcheng@quicinc.com>
-References: <20240925010000.2231406-1-quic_wcheng@quicinc.com>
+	s=arc-20240116; t=1727233903; c=relaxed/simple;
+	bh=gCBGuzSl8cBmJxH8mzZ3ckkNIaz+0nxbWmCKeTi9DLY=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=BtY9L4eaLgc/UcpghFVjYZMNrY5MikiM/ItnWFuItMlBsvZZP7KAB83Dfd9wO5BE0sKWcO8YCE4GNWeX+t0dmd1sJCozMchNXji/xJxfT3s0cnz78rI2O7pzLviSw+6FyeihgZ/PSfsee89AEQJS3f3jdZjxTEe3Gr64pgqbWFA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YqW46Se6; arc=none smtp.client-ip=209.85.214.195
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f195.google.com with SMTP id d9443c01a7336-2068acc8a4fso57925355ad.1;
+        Tue, 24 Sep 2024 20:11:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1727233901; x=1727838701; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=auEqSUiyFPZDvz0xrjANQSiS2t1vbnL0bLMHfAJAGi0=;
+        b=YqW46Se6Y2R0PeZwOC2iPLpdHllB0Gr7MzIvm/kS+saDVD/qfxClhq5GHVdDjbAGz4
+         wFyc7DDiDmJmZzhGu7mgGhivQzIOn2QvrR6GGWUqOHecwDwUv+vfXgBYEDfQF4CDeHBs
+         +wai6UWNWEPPKsdZTNq/shjFu7DOYgN/arA1tWc1FwclMMLC+zr38HCgTx1Fiq/qoJnB
+         qDpoRBg4erUHQMy+/MjTgRFyEmtk3AOoY2hkQ7Fz+9auQZKmaH1hNW4MHEhBuPkKubJl
+         zCTm1GmIdTMQNk0sX4LAE/hnfX00GhloYRM/U1TwdXjRFXDZ3aDrCyM8YSAoeg7S8JmN
+         U0YA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1727233901; x=1727838701;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=auEqSUiyFPZDvz0xrjANQSiS2t1vbnL0bLMHfAJAGi0=;
+        b=TonA+eK1255Pjr5CAI7TGvneI3MF6/wTdbwx7qE6BHwR3RU7dkjVRQNGVXkS2vaxxI
+         xtxi3EETOC04XakSWLdVGiU0WMxTL0hXK43OuddV4gvFXtxI/jTNUYbkoHgS1kjVsNKs
+         qW+iSnomHlhgSCulJnZioCmDlgQnHyBRHbGRtRcFQGhT+2MtfvX/etn0jh7RynKqKRep
+         fuMoOTYGse0NFc4nbqvC6olRV6yyGBzfoUOsGZDcOFp6El9trO2f4sKEg5SPOdcUBTDC
+         UMIfC+fqvS54B9ofLAdw5AjeNSos5nayARRtyPOX6qhIktVkFK9SyONxj/bpUVViAO/u
+         enJg==
+X-Forwarded-Encrypted: i=1; AJvYcCV84crYCttIGhjp0Quv7rXnRFpnbDOHhXS8m5brCPm65o3/RUGuSU1Fci26jy+4KID11PfUuRqQ+VA2@vger.kernel.org, AJvYcCVtaog40bD24dJRTjMf6RRsRZtr85cS5zYfMTtO0csowTW79BCwe/QGeA1A1u+8i4da6jQ83enFDh+2@vger.kernel.org, AJvYcCWB3tgu8f+OcBH98PMhlkoAF/uTvPd3HLVSLOdCTT/19UVhtSV2qQUZMaZcu1HB+IAiNVT00rI3q8jw5qMa@vger.kernel.org, AJvYcCX9JbT0KK1rX5SOXnQUeqVYELYlTUpy7zXNodd/kk+To2na60Fz7oLWQIlS0b5hqM99VEjh0tKrWGTxphA=@vger.kernel.org, AJvYcCXMOQuYfzEm8EQlYNNP7WkG0Vg2l8uxz89ZdZWKPW/CIrn399rquQuJCy3ipL4lo7V6A2E45PlMj8/sVJ3z0Hel4SM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxa7VJdSS7ArOs9jlvpNTGwit/1hZgVAGOyrLU2YFSzuQhWHX7M
+	N4RIAbQ3I0L0r9vV6JkqnqwwFB3pTIA/s1wayP1w45maBdvSuk7M
+X-Google-Smtp-Source: AGHT+IHMx3tZCW7JCMLZSzE6kI+6VCIyxhtz77AJNoj5eY752D2n0Ig3kEes6medKPqvrvFWBlGC2A==
+X-Received: by 2002:a17:902:e5d1:b0:206:d6ac:8552 with SMTP id d9443c01a7336-20afc5f9e64mr18069905ad.52.1727233901090;
+        Tue, 24 Sep 2024 20:11:41 -0700 (PDT)
+Received: from localhost.localdomain (27-51-112-33.adsl.fetnet.net. [27.51.112.33])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-20af185be0csm16054755ad.294.2024.09.24.20.11.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 Sep 2024 20:11:40 -0700 (PDT)
+From: Yikai Tsai <yikai.tsai.wiwynn@gmail.com>
+To: patrick@stwcx.xyz,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Magnus Damm <magnus.damm@gmail.com>
+Cc: Yikai Tsai <yikai.tsai.wiwynn@gmail.com>,
+	=?UTF-8?q?Carsten=20Spie=C3=9F?= <mail@carsten-spiess.de>,
+	Jean Delvare <jdelvare@suse.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-hwmon@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-renesas-soc@vger.kernel.org
+Subject: [PATCH v7 0/2] hwmon: (isl28022) new driver for ISL28022 power monitor
+Date: Wed, 25 Sep 2024 11:11:26 +0800
+Message-Id: <20240925031131.14645-1-yikai.tsai.wiwynn@gmail.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: nalasex01c.na.qualcomm.com (10.47.97.35) To
- nalasex01b.na.qualcomm.com (10.47.209.197)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: vKi0Sn_XlvQ3aFwyj_s_nRXk2lodc4I0
-X-Proofpoint-ORIG-GUID: vKi0Sn_XlvQ3aFwyj_s_nRXk2lodc4I0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- impostorscore=0 adultscore=0 bulkscore=0 phishscore=0 mlxlogscore=999
- spamscore=0 lowpriorityscore=0 clxscore=1015 mlxscore=0 malwarescore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2408220000 definitions=main-2409250005
 
-In case the USB backend device has not been initialized/probed, USB SND
-device connections can still occur.  When the USB backend is eventually
-made available, previous USB SND device connections are not communicated to
-the USB backend.  Call snd_usb_rediscover_devices() to generate the connect
-callbacks for all USB SND devices connected.  This will allow for the USB
-backend to be updated with the current set of devices available.
+Driver for Renesas ISL28022 power monitor chip.
+Found e.g. on Ubiquiti Edgerouter ER-6P
 
-The chip array entries are all populated and removed while under the
-register_mutex, so going over potential race conditions:
+v7: review comments and code refactoring
+v6: shunt voltage in mV and revise code
+v5: review comments incorporated
+v4: property compatible fixed
+v3: changelog added
+v2: properties reworked
+v2: calculations fixed
+v2: shunt voltage input moved to debugfs
+v2: documentation and devicetree schema reworked
+v1: created
 
-Thread#1:
-  q6usb_component_probe()
-    --> snd_soc_usb_add_port()
-      --> snd_usb_rediscover_devices()
-        --> mutex_lock(register_mutex)
+Yikai Tsai (2):
+  dt-bindings: hwmon: add renesas,isl28022
+  hwmon: (isl28022) new driver for ISL28022 power monitor
 
-Thread#2
-  --> usb_audio_disconnect()
-    --> mutex_lock(register_mutex)
+ .../bindings/hwmon/renesas,isl28022.yaml      |  64 +++
+ Documentation/hwmon/index.rst                 |   1 +
+ Documentation/hwmon/isl28022.rst              |  63 +++
+ MAINTAINERS                                   |   8 +
+ drivers/hwmon/Kconfig                         |  11 +
+ drivers/hwmon/Makefile                        |   1 +
+ drivers/hwmon/isl28022.c                      | 533 ++++++++++++++++++
+ 7 files changed, 681 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/hwmon/renesas,isl28022.yaml
+ create mode 100644 Documentation/hwmon/isl28022.rst
+ create mode 100644 drivers/hwmon/isl28022.c
 
-So either thread#1 or thread#2 will complete first.  If
+-- 
+2.25.1
 
-Thread#1 completes before thread#2:
-  SOC USB will notify DPCM backend of the device connection.  Shortly
-  after, once thread#2 runs, we will get a disconnect event for the
-  connected device.
-
-Thread#2 completes before thread#1:
-  Then during snd_usb_rediscover_devices() it won't notify of any
-  connection for that particular chip index.
-
-Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
----
- sound/soc/soc-usb.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/sound/soc/soc-usb.c b/sound/soc/soc-usb.c
-index f88ccf90df32..3457bb51a0a1 100644
---- a/sound/soc/soc-usb.c
-+++ b/sound/soc/soc-usb.c
-@@ -252,6 +252,8 @@ void snd_soc_usb_add_port(struct snd_soc_usb *usb)
- 	mutex_lock(&ctx_mutex);
- 	list_add_tail(&usb->list, &usb_ctx_list);
- 	mutex_unlock(&ctx_mutex);
-+
-+	snd_usb_rediscover_devices();
- }
- EXPORT_SYMBOL_GPL(snd_soc_usb_add_port);
- 
 
