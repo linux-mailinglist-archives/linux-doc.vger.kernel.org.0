@@ -1,84 +1,65 @@
-Return-Path: <linux-doc+bounces-25704-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25706-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0D95985CC7
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 14:54:44 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 115BE985CEC
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 14:57:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 65CB61F20C80
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 12:54:44 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C99B528910F
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 12:57:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF6431AED4F;
-	Wed, 25 Sep 2024 12:00:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 77B2F1B0101;
+	Wed, 25 Sep 2024 12:01:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gUQLQixt"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RfZeW5Dp"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82A661AED48;
-	Wed, 25 Sep 2024 12:00:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B7A81D6DA9;
+	Wed, 25 Sep 2024 12:01:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727265637; cv=none; b=bQFBiDSaS2rdVouTsLJjrWyieIm78olBL92nET9biYJ3H5mPvH+JjJ7ZPYhV1A4FbLcaDGfB8j2M5295urbRGGV/utiHf6Gx/MaHczjWynnAX+fGaptxCtKUardt8P1n00nPvBmGAGOQ78vxVIpQPEb5i3uew7+n/wmFOyP0AcQ=
+	t=1727265663; cv=none; b=YHKBx5wFlv3OItN1fwlRc3A3Q3jkZaIsYbHSdFjFyFXsWzDUYEkvDF2KscM9iixp3XpT6bx2CGXX4dVPvilFJxTqBEunPEw3ZDxiUYL4YC2AzHtcdkLdKwfgLLnLq+gHiH333i7ele6PlPaQ3yW7CiRbba0DQjLt9OVlIL7FVpc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727265637; c=relaxed/simple;
-	bh=fo9Wus1YGakrmE0lyb6iV/Vnz4Aa5fMEZ1xe+PPDEcw=;
+	s=arc-20240116; t=1727265663; c=relaxed/simple;
+	bh=Ypqn6EbV4SU1GIt4PkWfocYKnz8CcAC9Daos3SZCbFk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hFHc1uVR2S984ZGU2JsvLZHPHg+eZth05ep0zmcA0gDcLtg4U7neOzrv6JPc8ozZHxnooS/qL7Nq4vHkeEeoc1tGPOuy6WUoBz/g6rZ3OqGo8KBMUFmck1+uBapuGlbG1ByGFSNMCunCvyMJm9qMVtC0WADOQ2VdtUL7GG1y2i0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gUQLQixt; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2D2DBC4CEC7;
-	Wed, 25 Sep 2024 12:00:33 +0000 (UTC)
+	 MIME-Version; b=rvCoRqU8CAR0KBSl6z5a9f9Lm1oGizRUzNx3pIIZM5PEFJvHCbq6oE/9n+BPWE4mtLGge/2xIKurUh3YZSE417j9U3C87nmarydzJDzaJe6BKAUnCq3yrUvXHFWRlnZjDUZ7sqGyzIx25GdSjACmpCtAAgGahjOOrnSC4ltl7EA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RfZeW5Dp; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E147CC4CECD;
+	Wed, 25 Sep 2024 12:01:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1727265637;
-	bh=fo9Wus1YGakrmE0lyb6iV/Vnz4Aa5fMEZ1xe+PPDEcw=;
+	s=k20201202; t=1727265663;
+	bh=Ypqn6EbV4SU1GIt4PkWfocYKnz8CcAC9Daos3SZCbFk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=gUQLQixt+2oQkYcnuZ3YY/k+31MtGq8E/IS1C6dYrzx5Umtubv1Ld/VubGFLt8DYl
-	 Y5ixO1XBVv7md3ZCnDKGOtkMBL9fJvolb0uOAplNs3rSkoeQC6deHbtF6o1Bj4jEr9
-	 scqfqFK+d+XekTz23tXoIhL6Kh3ZR/kRKjRLmU/S6NpCEM+XTZCYEMF3XVlNhm/KQk
-	 vLo8Em2+GVn1PQIbuF7mqY1NtOk+W0/Ly+ecl8F0vTSCBI7Oe5epJM6CVW+8RzqxAV
-	 oA/wtZ4dcgANIbgOyV9IceWgdcAnuXYQ8XRfqBSawg8FYZXhz3dBXCNh/kIrTmAuEm
-	 O6Rc3vrAjMn4w==
+	b=RfZeW5DptNHHR6hUtJqdE/w2mCnJAxdmqnruWapgpExmUlKyI8+P6g0TprdBrclbd
+	 0bxjLd6UCdekzdtF3oA3VuwUy9MsehTeypwCTV6+bNl14gstmR8ExJ84pm1kO+VH9Q
+	 gv9F+tso+j3FO64RJSm/R/OGc+u19JOI/yuGlsGcSubvM9u3fCjm5RJZLww/WnF7iX
+	 jnvMgUMygnhxw+EAL7qRY7V2iCQrwfsmbUSF81Nmmy7htVWyJp865M3ypWFRoRuhPq
+	 gS8K1AJp4qt7HjBQLzfvV76RyMKH14LszCCvr+M8PVGNqC12UJ+o/TeRsS5C/zHbd+
+	 wg2YPj1sPCc4g==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Cc: Adrian Ratiu <adrian.ratiu@collabora.com>,
-	Doug Anderson <dianders@chromium.org>,
-	Jeff Xu <jeffxu@google.com>,
-	Jann Horn <jannh@google.com>,
-	Kees Cook <kees@kernel.org>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	Christian Brauner <brauner@kernel.org>,
-	Linus Torvalds <torvalds@linux-foundation.org>,
+Cc: Joe Damato <jdamato@fastly.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Eric Dumazet <edumazet@google.com>,
 	Sasha Levin <sashal@kernel.org>,
+	davem@davemloft.net,
+	pabeni@redhat.com,
 	corbet@lwn.net,
-	paul@paul-moore.com,
-	jmorris@namei.org,
-	serge@hallyn.com,
-	thuth@redhat.com,
-	bp@alien8.de,
-	jpoimboe@kernel.org,
-	tglx@linutronix.de,
-	paulmck@kernel.org,
-	tony@atomide.com,
-	xiongwei.song@windriver.com,
-	akpm@linux-foundation.org,
-	oleg@redhat.com,
-	chengming.zhou@linux.dev,
-	mic@digikod.net,
-	yang.lee@linux.alibaba.com,
-	jlayton@kernel.org,
-	amir73il@gmail.com,
-	casey@schaufler-ca.com,
-	adobriyan@gmail.com,
-	linux-doc@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	linux-security-module@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.10 054/197] proc: add config & param to block forcing mem writes
-Date: Wed, 25 Sep 2024 07:51:13 -0400
-Message-ID: <20240925115823.1303019-54-sashal@kernel.org>
+	leitao@debian.org,
+	johannes.berg@intel.com,
+	hkallweit1@gmail.com,
+	aleksander.lobakin@intel.com,
+	netdev@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: [PATCH AUTOSEL 6.10 064/197] net: napi: Prevent overflow of napi_defer_hard_irqs
+Date: Wed, 25 Sep 2024 07:51:23 -0400
+Message-ID: <20240925115823.1303019-64-sashal@kernel.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240925115823.1303019-1-sashal@kernel.org>
 References: <20240925115823.1303019-1-sashal@kernel.org>
@@ -93,198 +74,123 @@ X-Patchwork-Hint: Ignore
 X-stable-base: Linux 6.10.11
 Content-Transfer-Encoding: 8bit
 
-From: Adrian Ratiu <adrian.ratiu@collabora.com>
+From: Joe Damato <jdamato@fastly.com>
 
-[ Upstream commit 41e8149c8892ed1962bd15350b3c3e6e90cba7f4 ]
+[ Upstream commit 08062af0a52107a243f7608fd972edb54ca5b7f8 ]
 
-This adds a Kconfig option and boot param to allow removing
-the FOLL_FORCE flag from /proc/pid/mem write calls because
-it can be abused.
+In commit 6f8b12d661d0 ("net: napi: add hard irqs deferral feature")
+napi_defer_irqs was added to net_device and napi_defer_irqs_count was
+added to napi_struct, both as type int.
 
-The traditional forcing behavior is kept as default because
-it can break GDB and some other use cases.
+This value never goes below zero, so there is not reason for it to be a
+signed int. Change the type for both from int to u32, and add an
+overflow check to sysfs to limit the value to S32_MAX.
 
-Previously we tried a more sophisticated approach allowing
-distributions to fine-tune /proc/pid/mem behavior, however
-that got NAK-ed by Linus [1], who prefers this simpler
-approach with semantics also easier to understand for users.
+The limit of S32_MAX was chosen because the practical limit before this
+patch was S32_MAX (anything larger was an overflow) and thus there are
+no behavioral changes introduced. If the extra bit is needed in the
+future, the limit can be raised.
 
-Link: https://lore.kernel.org/lkml/CAHk-=wiGWLChxYmUA5HrT5aopZrB7_2VTa0NLZcxORgkUe5tEQ@mail.gmail.com/ [1]
-Cc: Doug Anderson <dianders@chromium.org>
-Cc: Jeff Xu <jeffxu@google.com>
-Cc: Jann Horn <jannh@google.com>
-Cc: Kees Cook <kees@kernel.org>
-Cc: Ard Biesheuvel <ardb@kernel.org>
-Cc: Christian Brauner <brauner@kernel.org>
-Suggested-by: Linus Torvalds <torvalds@linux-foundation.org>
-Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
-Signed-off-by: Adrian Ratiu <adrian.ratiu@collabora.com>
-Link: https://lore.kernel.org/r/20240802080225.89408-1-adrian.ratiu@collabora.com
-Signed-off-by: Christian Brauner <brauner@kernel.org>
+Before this patch:
+
+$ sudo bash -c 'echo 2147483649 > /sys/class/net/eth4/napi_defer_hard_irqs'
+$ cat /sys/class/net/eth4/napi_defer_hard_irqs
+-2147483647
+
+After this patch:
+
+$ sudo bash -c 'echo 2147483649 > /sys/class/net/eth4/napi_defer_hard_irqs'
+bash: line 0: echo: write error: Numerical result out of range
+
+Similarly, /sys/class/net/XXXXX/tx_queue_len is defined as unsigned:
+
+include/linux/netdevice.h:      unsigned int            tx_queue_len;
+
+And has an overflow check:
+
+dev_change_tx_queue_len(..., unsigned long new_len):
+
+  if (new_len != (unsigned int)new_len)
+          return -ERANGE;
+
+Suggested-by: Jakub Kicinski <kuba@kernel.org>
+Signed-off-by: Joe Damato <jdamato@fastly.com>
+Reviewed-by: Eric Dumazet <edumazet@google.com>
+Link: https://patch.msgid.link/20240904153431.307932-1-jdamato@fastly.com
+Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- .../admin-guide/kernel-parameters.txt         | 10 +++
- fs/proc/base.c                                | 61 ++++++++++++++++++-
- security/Kconfig                              | 32 ++++++++++
- 3 files changed, 102 insertions(+), 1 deletion(-)
+ Documentation/networking/net_cachelines/net_device.rst | 2 +-
+ include/linux/netdevice.h                              | 4 ++--
+ net/core/net-sysfs.c                                   | 6 +++++-
+ 3 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index c82446cef8e21..2c8e062eb2ce5 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -4791,6 +4791,16 @@
- 	printk.time=	Show timing data prefixed to each printk message line
- 			Format: <bool>  (1/Y/y=enable, 0/N/n=disable)
+diff --git a/Documentation/networking/net_cachelines/net_device.rst b/Documentation/networking/net_cachelines/net_device.rst
+index 70c4fb9d4e5ce..d68f37f5b1f82 100644
+--- a/Documentation/networking/net_cachelines/net_device.rst
++++ b/Documentation/networking/net_cachelines/net_device.rst
+@@ -98,7 +98,7 @@ unsigned_int                        num_rx_queues
+ unsigned_int                        real_num_rx_queues      -                   read_mostly         get_rps_cpu
+ struct_bpf_prog*                    xdp_prog                -                   read_mostly         netif_elide_gro()
+ unsigned_long                       gro_flush_timeout       -                   read_mostly         napi_complete_done
+-int                                 napi_defer_hard_irqs    -                   read_mostly         napi_complete_done
++u32                                 napi_defer_hard_irqs    -                   read_mostly         napi_complete_done
+ unsigned_int                        gro_max_size            -                   read_mostly         skb_gro_receive
+ unsigned_int                        gro_ipv4_max_size       -                   read_mostly         skb_gro_receive
+ rx_handler_func_t*                  rx_handler              read_mostly         -                   __netif_receive_skb_core
+diff --git a/include/linux/netdevice.h b/include/linux/netdevice.h
+index d20c6c99eb887..23b6b07419806 100644
+--- a/include/linux/netdevice.h
++++ b/include/linux/netdevice.h
+@@ -354,7 +354,7 @@ struct napi_struct {
  
-+	proc_mem.force_override= [KNL]
-+			Format: {always | ptrace | never}
-+			Traditionally /proc/pid/mem allows memory permissions to be
-+			overridden without restrictions. This option may be set to
-+			restrict that. Can be one of:
-+			- 'always': traditional behavior always allows mem overrides.
-+			- 'ptrace': only allow mem overrides for active ptracers.
-+			- 'never':  never allow mem overrides.
-+			If not specified, default is the CONFIG_PROC_MEM_* choice.
-+
- 	processor.max_cstate=	[HW,ACPI]
- 			Limit processor to maximum C-state
- 			max_cstate=9 overrides any DMI blacklist limit.
-diff --git a/fs/proc/base.c b/fs/proc/base.c
-index 72a1acd03675c..f389c69767fa5 100644
---- a/fs/proc/base.c
-+++ b/fs/proc/base.c
-@@ -85,6 +85,7 @@
- #include <linux/elf.h>
- #include <linux/pid_namespace.h>
- #include <linux/user_namespace.h>
-+#include <linux/fs_parser.h>
- #include <linux/fs_struct.h>
- #include <linux/slab.h>
- #include <linux/sched/autogroup.h>
-@@ -117,6 +118,40 @@
- static u8 nlink_tid __ro_after_init;
- static u8 nlink_tgid __ro_after_init;
+ 	unsigned long		state;
+ 	int			weight;
+-	int			defer_hard_irqs_count;
++	u32			defer_hard_irqs_count;
+ 	unsigned long		gro_bitmask;
+ 	int			(*poll)(struct napi_struct *, int);
+ #ifdef CONFIG_NETPOLL
+@@ -2089,7 +2089,7 @@ struct net_device {
+ 	unsigned int		real_num_rx_queues;
+ 	struct netdev_rx_queue	*_rx;
+ 	unsigned long		gro_flush_timeout;
+-	int			napi_defer_hard_irqs;
++	u32			napi_defer_hard_irqs;
+ 	unsigned int		gro_max_size;
+ 	unsigned int		gro_ipv4_max_size;
+ 	rx_handler_func_t __rcu	*rx_handler;
+diff --git a/net/core/net-sysfs.c b/net/core/net-sysfs.c
+index 15ad775ddd3c1..dc0c622d453e1 100644
+--- a/net/core/net-sysfs.c
++++ b/net/core/net-sysfs.c
+@@ -32,6 +32,7 @@
+ #ifdef CONFIG_SYSFS
+ static const char fmt_hex[] = "%#x\n";
+ static const char fmt_dec[] = "%d\n";
++static const char fmt_uint[] = "%u\n";
+ static const char fmt_ulong[] = "%lu\n";
+ static const char fmt_u64[] = "%llu\n";
  
-+enum proc_mem_force {
-+	PROC_MEM_FORCE_ALWAYS,
-+	PROC_MEM_FORCE_PTRACE,
-+	PROC_MEM_FORCE_NEVER
-+};
-+
-+static enum proc_mem_force proc_mem_force_override __ro_after_init =
-+	IS_ENABLED(CONFIG_PROC_MEM_NO_FORCE) ? PROC_MEM_FORCE_NEVER :
-+	IS_ENABLED(CONFIG_PROC_MEM_FORCE_PTRACE) ? PROC_MEM_FORCE_PTRACE :
-+	PROC_MEM_FORCE_ALWAYS;
-+
-+static const struct constant_table proc_mem_force_table[] __initconst = {
-+	{ "always", PROC_MEM_FORCE_ALWAYS },
-+	{ "ptrace", PROC_MEM_FORCE_PTRACE },
-+	{ "never", PROC_MEM_FORCE_NEVER },
-+	{ }
-+};
-+
-+static int __init early_proc_mem_force_override(char *buf)
-+{
-+	if (!buf)
-+		return -EINVAL;
-+
-+	/*
-+	 * lookup_constant() defaults to proc_mem_force_override to preseve
-+	 * the initial Kconfig choice in case an invalid param gets passed.
-+	 */
-+	proc_mem_force_override = lookup_constant(proc_mem_force_table,
-+						  buf, proc_mem_force_override);
-+
-+	return 0;
-+}
-+early_param("proc_mem.force_override", early_proc_mem_force_override);
-+
- struct pid_entry {
- 	const char *name;
- 	unsigned int len;
-@@ -835,6 +870,28 @@ static int mem_open(struct inode *inode, struct file *file)
- 	return ret;
- }
+@@ -425,6 +426,9 @@ NETDEVICE_SHOW_RW(gro_flush_timeout, fmt_ulong);
  
-+static bool proc_mem_foll_force(struct file *file, struct mm_struct *mm)
-+{
-+	struct task_struct *task;
-+	bool ptrace_active = false;
-+
-+	switch (proc_mem_force_override) {
-+	case PROC_MEM_FORCE_NEVER:
-+		return false;
-+	case PROC_MEM_FORCE_PTRACE:
-+		task = get_proc_task(file_inode(file));
-+		if (task) {
-+			ptrace_active =	READ_ONCE(task->ptrace) &&
-+					READ_ONCE(task->mm) == mm &&
-+					READ_ONCE(task->parent) == current;
-+			put_task_struct(task);
-+		}
-+		return ptrace_active;
-+	default:
-+		return true;
-+	}
-+}
-+
- static ssize_t mem_rw(struct file *file, char __user *buf,
- 			size_t count, loff_t *ppos, int write)
+ static int change_napi_defer_hard_irqs(struct net_device *dev, unsigned long val)
  {
-@@ -855,7 +912,9 @@ static ssize_t mem_rw(struct file *file, char __user *buf,
- 	if (!mmget_not_zero(mm))
- 		goto free;
++	if (val > S32_MAX)
++		return -ERANGE;
++
+ 	WRITE_ONCE(dev->napi_defer_hard_irqs, val);
+ 	return 0;
+ }
+@@ -438,7 +442,7 @@ static ssize_t napi_defer_hard_irqs_store(struct device *dev,
  
--	flags = FOLL_FORCE | (write ? FOLL_WRITE : 0);
-+	flags = write ? FOLL_WRITE : 0;
-+	if (proc_mem_foll_force(file, mm))
-+		flags |= FOLL_FORCE;
+ 	return netdev_store(dev, attr, buf, len, change_napi_defer_hard_irqs);
+ }
+-NETDEVICE_SHOW_RW(napi_defer_hard_irqs, fmt_dec);
++NETDEVICE_SHOW_RW(napi_defer_hard_irqs, fmt_uint);
  
- 	while (count > 0) {
- 		size_t this_len = min_t(size_t, count, PAGE_SIZE);
-diff --git a/security/Kconfig b/security/Kconfig
-index 412e76f1575d0..a93c1a9b7c283 100644
---- a/security/Kconfig
-+++ b/security/Kconfig
-@@ -19,6 +19,38 @@ config SECURITY_DMESG_RESTRICT
- 
- 	  If you are unsure how to answer this question, answer N.
- 
-+choice
-+	prompt "Allow /proc/pid/mem access override"
-+	default PROC_MEM_ALWAYS_FORCE
-+	help
-+	  Traditionally /proc/pid/mem allows users to override memory
-+	  permissions for users like ptrace, assuming they have ptrace
-+	  capability.
-+
-+	  This allows people to limit that - either never override, or
-+	  require actual active ptrace attachment.
-+
-+	  Defaults to the traditional behavior (for now)
-+
-+config PROC_MEM_ALWAYS_FORCE
-+	bool "Traditional /proc/pid/mem behavior"
-+	help
-+	  This allows /proc/pid/mem accesses to override memory mapping
-+	  permissions if you have ptrace access rights.
-+
-+config PROC_MEM_FORCE_PTRACE
-+	bool "Require active ptrace() use for access override"
-+	help
-+	  This allows /proc/pid/mem accesses to override memory mapping
-+	  permissions for active ptracers like gdb.
-+
-+config PROC_MEM_NO_FORCE
-+	bool "Never"
-+	help
-+	  Never override memory mapping permissions
-+
-+endchoice
-+
- config SECURITY
- 	bool "Enable different security models"
- 	depends on SYSFS
+ static ssize_t ifalias_store(struct device *dev, struct device_attribute *attr,
+ 			     const char *buf, size_t len)
 -- 
 2.43.0
 
