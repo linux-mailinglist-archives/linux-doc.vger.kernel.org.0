@@ -1,139 +1,138 @@
-Return-Path: <linux-doc+bounces-25713-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25746-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id B02029861E8
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 17:04:17 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0345C98635A
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 17:24:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 78B0228CECD
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 15:04:16 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id A306E1F26EA2
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 15:24:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 144DE14B94C;
-	Wed, 25 Sep 2024 14:47:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8DFA214B94C;
+	Wed, 25 Sep 2024 15:05:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rtuuYyWe"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="F6uBOEmf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E122526AF5;
-	Wed, 25 Sep 2024 14:47:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6608146A93;
+	Wed, 25 Sep 2024 15:05:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727275666; cv=none; b=SeLry5j71YyXLSnWtKHaHeehK1R2mDMJmYwTGmz0t4psVewlFUqKm9Qm0kXav8MJZmPD+4dERE5ze8NiyZ+gJ5WpyLdzPBRtUb8svPnOi0+qFQCvUGLWOg2AQ/WTHz6ONaQMeTd3lkOULaOKc8Nr29zshdHSZdcSfnmqTelLeS8=
+	t=1727276721; cv=none; b=JzBknpG4YWtH7Ri/vP8G2wi+R4cUZzISgutnil85leRgidU6kUVtLleIux6hmyxVxueRwkEd+uWocc/c7JomXUggZxWO2yDz0YJcO+Qfc8lRNDdglB78Vhlbi/LjW9zlimT97Y6c4OVjNa48PUyN/3CXvfxZLASaXViWl17wApE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727275666; c=relaxed/simple;
-	bh=wx8YONyUFoGvQ+t2pLQ0u5COnOIGNKXY8cwi+lc2Zpc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=F1wDn1FejJnLLvK26Yd2HWX0KPLUbS+ZPqQYfqsRG8E3sJ1dInLZV9I3zY9VzDpwo+dTTF0evbfZvFGVgA82615u1k8IGzLIoUNE8vlBqtaVuioflf7f1h5n7LOwPFC/F34ctNGggUAG38agmPBxdX4QTr3c+MXamU1Zt25GmaE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rtuuYyWe; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DBD0C4CEC3;
-	Wed, 25 Sep 2024 14:47:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1727275665;
-	bh=wx8YONyUFoGvQ+t2pLQ0u5COnOIGNKXY8cwi+lc2Zpc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=rtuuYyWe9+JJVya0RkxlfL4RuzBsZJP3OJCBfm+2SHkU3FCcLuNGiklfW35bglE1J
-	 8cl6ghnUjRTXjyZ0y8VUvJwoeyYbYrYq+EYeePRoQQBV2U2pPeM2dsyCVy0fV1Q+Pf
-	 xj1Y9wyKs48+hczjLdOfEYQkVYz52z4j1zEvlex+kOHP6f452YT2tCR+n1ovH/bqPZ
-	 +oHYf+YBaHXlbt6iA+C5GRN+1RrTonQ+kKFDBfI0DTTfjRXelJUyPmHEwOo6RRBajU
-	 WPKmtKD7sZxa66LQ76LMbbPNNLfzE6ozEHrotWmMagLj5aJJlI6Xv977BsheIpZbi4
-	 +l3rlznWXQuIQ==
-Date: Wed, 25 Sep 2024 15:47:41 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Nam Cao <namcao@linutronix.de>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	=?iso-8859-1?Q?Cl=E9ment_L=E9ger?= <cleger@rivosinc.com>,
-	Evan Green <evan@rivosinc.com>,
-	Charlie Jenkins <charlie@rivosinc.com>,
-	Andrew Jones <ajones@ventanamicro.com>, linux-doc@vger.kernel.org,
-	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] Documentation: riscv: Fix typo MIMPLID -> MIMPID
-Message-ID: <20240925-ammonia-expenses-e13bb113538c@spud>
-References: <20240925142532.31808-1-namcao@linutronix.de>
+	s=arc-20240116; t=1727276721; c=relaxed/simple;
+	bh=WIUE+NR4dmM7UiIRiFrWrzm0HxLBv/l07VyuLoQbaoI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=gtmzuJxhyrALssZkovzCUjZG0X3KtwPogw5StuPDUFuiUWiTQYE/NFgVdST6Kaz12UIC/d2TG+IbQhmoTFOkKwMX0uH13icUIzqwFF+8kaM2k8wikDT3/ZruHD4E7qhquSVMWmS8lDD9NLc76t0sNdiaMWRHbcm6ffHYiQxmXag=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=F6uBOEmf; arc=none smtp.client-ip=192.198.163.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1727276720; x=1758812720;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=WIUE+NR4dmM7UiIRiFrWrzm0HxLBv/l07VyuLoQbaoI=;
+  b=F6uBOEmfKCbi9HKqANQtAE24cZL0GEl5UT69eWZwQ586ye77FIPrfIOF
+   GhgVkBWFjEKycU9lFmK5qzK981ctHwFiPOegsH3qP6mWEuAlktd8xjWcz
+   Xc3FVI1iUmrBiYP8g1pDRtoACTem8UiNVzmJLG9K4iu9ugPbrEZ1qL7Jr
+   gufR5NsaHAvcneBJOMWwRE6R6eDfOShBLjz+wyTud8X3X9qZXBVU5HsVb
+   spVYBUVsAhhupbpr8/F6I72ePviKIfr8N6tRECblhZHSbPLTEuKST0Ibz
+   9dRbTFR6uLm9ae7q4ELUEpIMyIsehZnVEScJ0Oz/uyYMWDPLBCfcEnkFn
+   w==;
+X-CSE-ConnectionGUID: fP72wt0hRUyeIRqur4gWTg==
+X-CSE-MsgGUID: +YflIJCgTf2lUB1Wdr2xuw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11206"; a="26482928"
+X-IronPort-AV: E=Sophos;i="6.10,257,1719903600"; 
+   d="scan'208";a="26482928"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2024 08:05:19 -0700
+X-CSE-ConnectionGUID: t0VHFxgySvWLh5P88yN8lA==
+X-CSE-MsgGUID: D7kHPYD7S9yt1ec8gM4MTA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,257,1719903600"; 
+   d="scan'208";a="76317712"
+Received: from kniemiec-mobl1.ger.corp.intel.com (HELO [10.245.246.30]) ([10.245.246.30])
+  by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2024 08:05:13 -0700
+Message-ID: <a7e97534-0351-4673-9fbe-e02b2aef998c@linux.intel.com>
+Date: Wed, 25 Sep 2024 16:48:38 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="SsDGt9N5z5dUUoB0"
-Content-Disposition: inline
-In-Reply-To: <20240925142532.31808-1-namcao@linutronix.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v28 25/32] ASoC: qcom: qdsp6: Fetch USB offload mapped
+ card and PCM device
+To: Wesley Cheng <quic_wcheng@quicinc.com>, srinivas.kandagatla@linaro.org,
+ mathias.nyman@intel.com, perex@perex.cz, conor+dt@kernel.org,
+ dmitry.torokhov@gmail.com, corbet@lwn.net, broonie@kernel.org,
+ lgirdwood@gmail.com, tiwai@suse.com, krzk+dt@kernel.org,
+ Thinh.Nguyen@synopsys.com, bgoswami@quicinc.com, robh@kernel.org,
+ gregkh@linuxfoundation.org
+Cc: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-sound@vger.kernel.org, linux-input@vger.kernel.org,
+ linux-usb@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-doc@vger.kernel.org, alsa-devel@alsa-project.org
+References: <20240925010000.2231406-1-quic_wcheng@quicinc.com>
+ <20240925010000.2231406-26-quic_wcheng@quicinc.com>
+Content-Language: en-US
+From: Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
+In-Reply-To: <20240925010000.2231406-26-quic_wcheng@quicinc.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
 
---SsDGt9N5z5dUUoB0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> +static int q6usb_update_offload_route(struct snd_soc_component *component, int card,
+> +				      int pcm, int direction, long *route)
+> +{
+> +	struct q6usb_port_data *data = dev_get_drvdata(component->dev);
+> +	struct snd_soc_usb_device *sdev;
+> +	int ret = 0;
+> +	int cidx = -1;
+> +	int pidx = -1;
+> +
+> +	mutex_lock(&data->mutex);
+> +
+> +	if (list_empty(&data->devices) ||
+> +	    direction == SNDRV_PCM_STREAM_CAPTURE) {
+> +		ret = -ENODEV;
+> +		goto out;
+> +	}
 
-On Wed, Sep 25, 2024 at 04:25:32PM +0200, Nam Cao wrote:
-> The macro that is really defined is RISCV_HWPROBE_KEY_MIMPID, not
-> RISCV_HWPROBE_KEY_MIMPLID (difference is the 'L').
+well the code above seems to invalidate what I understood earlier, in
+that an error code is returned instead of a set of -1 values...
 
-Heh, it is indeed.
-Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
-
->=20
-> Also, the riscv privileged specification names the register "mimpid", not
-> "mimplid".
->=20
-> Correct these typos.
->=20
-> Signed-off-by: Nam Cao <namcao@linutronix.de>
-> ---
-> ask me how I found out..
-
-Gowan, hit us with it...
-
-
->=20
->  Documentation/arch/riscv/hwprobe.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/ri=
-scv/hwprobe.rst
-> index 85b709257918..fb0affa61eb9 100644
-> --- a/Documentation/arch/riscv/hwprobe.rst
-> +++ b/Documentation/arch/riscv/hwprobe.rst
-> @@ -51,7 +51,7 @@ The following keys are defined:
->  * :c:macro:`RISCV_HWPROBE_KEY_MARCHID`: Contains the value of ``marchid`=
-`, as
->    defined by the RISC-V privileged architecture specification.
-> =20
-> -* :c:macro:`RISCV_HWPROBE_KEY_MIMPLID`: Contains the value of ``mimplid`=
-`, as
-> +* :c:macro:`RISCV_HWPROBE_KEY_MIMPID`: Contains the value of ``mimpid``,=
- as
->    defined by the RISC-V privileged architecture specification.
-> =20
->  * :c:macro:`RISCV_HWPROBE_KEY_BASE_BEHAVIOR`: A bitmask containing the b=
-ase
-> --=20
-> 2.39.2
->=20
->=20
-> _______________________________________________
-> linux-riscv mailing list
-> linux-riscv@lists.infradead.org
-> http://lists.infradead.org/mailman/listinfo/linux-riscv
-
---SsDGt9N5z5dUUoB0
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZvQijQAKCRB4tDGHoIJi
-0vCHAQC/XuZFxbv10n6zq5HRutrUOVvtWK7lHh7PZezj2Bj7aQD6AgswVFQjsVnR
-ztulw03/EAqAWsUyR6omJckf2DYNbQA=
-=cFBD
------END PGP SIGNATURE-----
-
---SsDGt9N5z5dUUoB0--
+> +
+> +	sdev = list_last_entry(&data->devices, struct snd_soc_usb_device, list);
+> +
+> +	/*
+> +	 * Will always look for last PCM device discovered/probed as the
+> +	 * active offload index.
+> +	 */
+> +	if (card == sdev->card_idx &&
+> +	    pcm == sdev->ppcm_idx[sdev->num_playback - 1]) {
+> +		cidx = component->card->snd_card->number;
+> +		pidx = q6usb_get_pcm_id(component);
+> +	}
+> +
+> +	if (cidx < 0 || pidx < 0) {
+> +		cidx = -1;
+> +		pidx = -1;
+> +	}
+> +
+> +out:
+> +	route[0] = cidx;
+> +	route[1] = pidx;
+> +
+> +	mutex_unlock(&data->mutex);
+> +
+> +	return ret;
+> +}
+> +
 
