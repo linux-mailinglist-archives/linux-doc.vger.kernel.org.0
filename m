@@ -1,187 +1,240 @@
-Return-Path: <linux-doc+bounces-25760-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25762-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0439986622
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 20:11:48 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id ABBA498665C
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 20:33:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 76DF11F254BB
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 18:11:48 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6E8EA285CCF
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Sep 2024 18:33:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 83C78487B0;
-	Wed, 25 Sep 2024 18:11:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E6B2513A89B;
+	Wed, 25 Sep 2024 18:33:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YVgOh0cM"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bXl9LiMB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-il1-f179.google.com (mail-il1-f179.google.com [209.85.166.179])
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2474D520
-	for <linux-doc@vger.kernel.org>; Wed, 25 Sep 2024 18:11:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.179
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CE541849;
+	Wed, 25 Sep 2024 18:33:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727287904; cv=none; b=Flf1bJ1Hwdj3tQqiHuL3UvfvHCbC9jJT1g9xldh5/fTUA3MqTKcX+pgYoDlyl3dKpEDuqI71R7yjNzSaBkwAVwyJCsLcUY47mwBmumgUonaroDNqiqGELwwiZrZI6HY7sIE9G3ut6glgR0ApNHZNl5uU2jbLk/a9Bhx/MeR16i0=
+	t=1727289186; cv=none; b=tgYBhJ9Gk2AMqoflPAQme3kVF40DCPd1jic+dT4qbM3UAbjz+FDukJ8sK/+J7pK0LhZuDrUuSH9xcgqpj4n4Dpbpsr/F3LAK3lsanpgmB8vlWKggNZJDcw8PuyBcoXmM9lvU0Rxwp9ddFhD5HchtnAp5uX9DmajdJGX4WznUNKM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727287904; c=relaxed/simple;
-	bh=o/BqsOUbRW2PLEH5UW7R+v2uvcqPG2KMiapyfSTvB6w=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=jrG3ttQKEXk3gGyphL4qkB040wkNPcTSwYe50EgtdhvDhCYss4dpxySK1FWqAxdqViYRuouxsycGASZlf7azHkHNn59LoS8lCMA7NbP89xlx03NaZ7cBoIQHcdmkjh+gSBCHPdBQISX/tnYtbHG2LvIjIS43WRuq5tQcttcsd30=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YVgOh0cM; arc=none smtp.client-ip=209.85.166.179
+	s=arc-20240116; t=1727289186; c=relaxed/simple;
+	bh=a4TscZhPkFUpuRsMP0BamYUYJ4NTFPOf/N+pr3km5jk=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=kqJ92P2j3kcDogPsZ/HLzVIvEuPCbBxI1YJfd9XcTxKHTe8daW5Xq2hodOYIvXaSqdSMJho8gIFi6yQfz/SMkSgGpd1nQ9WGAOmKqmQNJCuX+iNKYt/Krq1NpUCQuQlIgSq9CDQWQmWwJVmTIshP1HN/cwlwJdYzIyWAgchlxII=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bXl9LiMB; arc=none smtp.client-ip=209.85.208.178
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-il1-f179.google.com with SMTP id e9e14a558f8ab-3a274ef3bdeso449775ab.2
-        for <linux-doc@vger.kernel.org>; Wed, 25 Sep 2024 11:11:42 -0700 (PDT)
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-2f75428b9f8so1845681fa.3;
+        Wed, 25 Sep 2024 11:33:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727287902; x=1727892702; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1727289183; x=1727893983; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=l18dqr7r9F9txo16NZNMw1wW/6ItJHDNgA0JuyNX2ag=;
-        b=YVgOh0cMUB4YAvnrvN7vEiYYxOAbyfIkEE7jqezO1cWayDQtoxNPuaudyoTIWWpGYT
-         +lDWOCth3yD68qkpMzco7HaBRVHfa5dNkoTgVi5lnw6D8diQDCPtsOyLQutTfhwKyyVl
-         GLimqX1c1Y9/6tsXaj6EyjEoOJCinCFOOOYRLjTgrPX1Yz1f9pe4ilMJsr7sUQKWT0zV
-         ppWAO8+fsJAkKl6DOPJoaE1g8hRcnWNqZ9jb7LQOevbN5YSFmVwnTMkY1iixDhEZWqRS
-         U5w3V1dNN9y3bmSLUl5q9cna8KNjZ3NpGv7f9GIRIttF1GLNbv11xVEtTyhwRrBUDkwU
-         7XcQ==
+        bh=2TaypDUy15NjLViQ9n5rNlOiyd4lGW04UgUrk3q1RZw=;
+        b=bXl9LiMBmzEzDgRr3sc7CDMCPyF4vnp2L9UB+CbKIzbtJtQ5WlMSTjAPPTqnXzeeI3
+         quDwGKG/MBmtMHmjq3csRWcD1yBmlCFAoBftNBBfOKVT56qlSAiceIbC/9Cfo+G75dWI
+         gLYFfbUtJ65ZlNVS4zv5JMoGHod+bQZAkPYQVvB0L4sqq8nYJJCejMq3cMrzk3PSrchX
+         FBKPnj0lg9//QDRcuigQt7MUxlnDYZv7ufMnQFyJQP9zZI3/5gRzy2KzgkSMHONxctLk
+         GKUSc5SnKqvX2F0NKNG/wAXtaNScuPZn4MONR5OjNgFmqfnlAbQlg9I9+sqyfH7bjVda
+         COaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727287902; x=1727892702;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1727289183; x=1727893983;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=l18dqr7r9F9txo16NZNMw1wW/6ItJHDNgA0JuyNX2ag=;
-        b=f0i6DUr+h6q8OTCoQ5Jn9GYVglJCtg0dEfHJrkKPakZIX8Pyt6nGC//Y943vVTCw8B
-         ukAxFuvyC8d0Ri5y0HpcrkHov+xonVBVRf57vlVjI0uvc3DtKj0dsTA0I8ZqnnlmBpgo
-         byINwFb/lOX1jF4FPIQM88UYzg6NNERLdbxTxVx352xv44PcmDmhKkPT3naA0cZgIA9J
-         pv/kHlPt/Oa9BRclP/gI8dhP/hk0C51KirFk5CzonkV8MUL7xHu7ztxeaDTVdpRMKzJ2
-         N4S0mKVV9dfG7ZUhzhbGIRgPsCq1GWLZbUgSo6RvHBDWyzhrNrMMszBZBk423M0zg/ri
-         oY2w==
-X-Forwarded-Encrypted: i=1; AJvYcCVr5wmOOTE+fzVA+BoTasVrbGa5AjIacdDUlvNH1ah3MkeiNbPKmnPughcGggdJuoaXzzAU1kkeTIY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzlCsfWtNLM4y3L9XTawsXSA7QsVM6uJlN52pXFCqoit7s/2cmk
-	AceFd+iHN+qQCAXNji9vwUnkrh0+kk8VIVzrnvo6/MicoJ+RIHYG
-X-Google-Smtp-Source: AGHT+IHiOM+N4TCOGfcMNjCy+UWwmmGSKa53HMArrxMUFz/ke4n7IB1EDpxyxm906Ysx8FEW8zjp7w==
-X-Received: by 2002:a05:6e02:20e8:b0:3a1:a3bd:adcc with SMTP id e9e14a558f8ab-3a26d7492ebmr38605645ab.6.1727287901821;
-        Wed, 25 Sep 2024 11:11:41 -0700 (PDT)
-Received: from frodo.. (c-73-78-62-130.hsd1.co.comcast.net. [73.78.62.130])
-        by smtp.googlemail.com with ESMTPSA id e9e14a558f8ab-3a1a56c3389sm12470605ab.10.2024.09.25.11.11.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Sep 2024 11:11:41 -0700 (PDT)
-From: Jim Cromie <jim.cromie@gmail.com>
-To: intel-gfx-trybot@lists.freedesktop.org
-Cc: jbaron@akamai.com,
-	Jim Cromie <jim.cromie@gmail.com>,
-	linux-doc@vger.kernel.org
-Subject: [PATCH 20/61] dyndbg-doc: add classmap info to howto
-Date: Wed, 25 Sep 2024 12:10:12 -0600
-Message-ID: <20240925181053.94319-21-jim.cromie@gmail.com>
-X-Mailer: git-send-email 2.46.1
-In-Reply-To: <20240925181053.94319-1-jim.cromie@gmail.com>
-References: <20240925181053.94319-1-jim.cromie@gmail.com>
+        bh=2TaypDUy15NjLViQ9n5rNlOiyd4lGW04UgUrk3q1RZw=;
+        b=rHtDLDzlgnuB5Va3dYXeAoZhH2pKJbUR+Mie165yL8GCtK3QNBLZOm7bSV4kODVAma
+         WLP/YDv/RT89+cY+/doqIgaGQe6W7PSxQ35q8EIFnKWAxLM3OxceHPJ2QLHpzk/H7S51
+         eFve69gtqPfgU3jDOELt8CcKqhGpLEDeiIvHU8M7d9W5zPq8SG9DQE7bKGTGMnwjBCpN
+         JU4cWjyMTKWt9bgTri1/N2liopJXb090g5E+6NWXqfq1RYQ5U2y48vrYuGiR8Nkkfyqc
+         LQkvva/+BCo15AOi71SD8N0AVzsZkXwfhJAjUz4pvcn4oGs/JxBcEY/6gmM5Z+cmsClP
+         VaNg==
+X-Forwarded-Encrypted: i=1; AJvYcCVCOESDAfMj1rrgtPrkfP3KWh4OykJLCb0Ff7Y+2rVCX+EgPw2Bhnp4UbVibYfQQZJ/fA4=@vger.kernel.org, AJvYcCVMPKGirMekiNL6aHSz1vcEhBXvHuKrE3fkNYPKSHv00zkInV8KpnxiyCetaawi5ePPgp8EQwlNyI08LRU6jOyQig==@vger.kernel.org, AJvYcCVc9QbURf7tj07gBdiaN9oukDHryNzp0EKItL/IugM815iC9MwZLKWttem1VyatBtLAjiF5Yiqv1sg=@vger.kernel.org, AJvYcCVjqJk//MeUYrkq0fptGMbWFT5yT7RLILEyCQRMkEOl97ABAcRpg94OeLLHcdY5cAYYXjwKOyb72IOz@vger.kernel.org, AJvYcCW+paV9En8u5/mcJXR3mQhZjts2oNVBL0QBKDo4xdfWct0da0y1CcZ0FepA5i+AZuetIkDWei/LNvznB0V6qF8=@vger.kernel.org, AJvYcCWpjNssfGrDBKCpAmOKEUZ18AaYuu7RpnA5CTkbywlwpNlO0FtW5UgFBmFc38+X3+zeGpzJKKilpDIv@vger.kernel.org, AJvYcCX42LE/z/XO36MN52i23UYNVqzUoiF0O+h6D43VYMULWq6mJf6MRRLG4pHNBnbGUaEcq9GP6WGIW9XJ4w==@vger.kernel.org, AJvYcCXQMH1GPR6DozAP4ICmQmfkh3n0WykoXDY/qpg+0LrADNS9KtH3td4iLIaoctersLwKm7TcRGe1LsbvuEpV@vger.kernel.org, AJvYcCXlxsQkHdbilJAS9/+qanZzyyh//O621l/pBkb2w+nRZc96ddyMLVLOx7+5/S357OtsOFE0jojZvw3+I8Dn@vger.kernel.org
+X-Gm-Message-State: AOJu0YwYfTYzMsdVsxJ9W8yeSN9SwSQupO3aR4NAYJpmmEHR/4QWEKhF
+	VXUn+jVRvQmNg24hdLfHMjDdBUEAohqVpeK5Wg3kM3rt0+5hwVqHzCrJkOSeINKN//n8a2/O9Qd
+	OFlZD9s9iua0p4gC3D6t9B7Q+BJk=
+X-Google-Smtp-Source: AGHT+IFnZSeaSdTnLQgfoNEdeVLMhBqMGfqv8DaMO7rq1jJMGCnw0pqCqh/uqtAkx22xjLrl+mG72CuzpXzogM33B5U=
+X-Received: by 2002:a2e:be1c:0:b0:2f7:562d:cb5b with SMTP id
+ 38308e7fff4ca-2f915fc0ad0mr37129861fa.7.1727289182671; Wed, 25 Sep 2024
+ 11:33:02 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240925150059.3955569-30-ardb+git@google.com> <20240925150059.3955569-35-ardb+git@google.com>
+In-Reply-To: <20240925150059.3955569-35-ardb+git@google.com>
+From: Uros Bizjak <ubizjak@gmail.com>
+Date: Wed, 25 Sep 2024 20:32:50 +0200
+Message-ID: <CAFULd4ZNwfPZO-yDjrtT2ANV509HeeYgR80b9AFachaVW5zqrg@mail.gmail.com>
+Subject: Re: [RFC PATCH 05/28] x86: Define the stack protector guard symbol explicitly
+To: Ard Biesheuvel <ardb+git@google.com>
+Cc: linux-kernel@vger.kernel.org, Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@linux.com>, 
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross <jgross@suse.com>, 
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>, 
+	Masahiro Yamada <masahiroy@kernel.org>, Kees Cook <kees@kernel.org>, 
+	Nathan Chancellor <nathan@kernel.org>, Keith Packard <keithp@keithp.com>, 
+	Justin Stitt <justinstitt@google.com>, Josh Poimboeuf <jpoimboe@kernel.org>, 
+	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>, 
+	Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, 
+	Kan Liang <kan.liang@linux.intel.com>, linux-doc@vger.kernel.org, 
+	linux-pm@vger.kernel.org, kvm@vger.kernel.org, xen-devel@lists.xenproject.org, 
+	linux-efi@vger.kernel.org, linux-arch@vger.kernel.org, 
+	linux-sparse@vger.kernel.org, linux-kbuild@vger.kernel.org, 
+	linux-perf-users@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+	llvm@lists.linux.dev, Brian Gerst <brgerst@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Describe the 3 API macros providing dynamic_debug's classmaps
+On Wed, Sep 25, 2024 at 5:02=E2=80=AFPM Ard Biesheuvel <ardb+git@google.com=
+> wrote:
+>
+> From: Ard Biesheuvel <ardb@kernel.org>
+>
+> Specify the guard symbol for the stack cookie explicitly, rather than
+> positioning it exactly 40 bytes into the per-CPU area. Doing so removes
+> the need for the per-CPU region to be absolute rather than relative to
+> the placement of the per-CPU template region in the kernel image, and
+> this allows the special handling for absolute per-CPU symbols to be
+> removed entirely.
+>
+> This is a worthwhile cleanup in itself, but it is also a prerequisite
+> for PIE codegen and PIE linking, which can replace our bespoke and
+> rather clunky runtime relocation handling.
 
-DYNDBG_CLASSMAP_DEFINE - create, exports a module's classmap
-DYNDBG_CLASSMAP_USE    - refer to exported map
-DYNDBG_CLASSMAP_PARAM  - bind control param to the classmap
-DYNDBG_CLASSMAP_PARAM_REF + use module's storage - __drm_debug
+I would like to point out a series that converted the stack protector
+guard symbol to a normal percpu variable [1], so there was no need to
+assume anything about the location of the guard symbol.
 
-cc: linux-doc@vger.kernel.org
-Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
----
-v5 adjustments per Randy Dunlap
-v7 checkpatch fixes
-v8 more
----
- .../admin-guide/dynamic-debug-howto.rst       | 63 ++++++++++++++++++-
- 1 file changed, 62 insertions(+), 1 deletion(-)
+[1] "[PATCH v4 00/16] x86-64: Stack protector and percpu improvements"
+https://lore.kernel.org/lkml/20240322165233.71698-1-brgerst@gmail.com/
 
-diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
-index 691e0f7d4de1..89d94aab41ec 100644
---- a/Documentation/admin-guide/dynamic-debug-howto.rst
-+++ b/Documentation/admin-guide/dynamic-debug-howto.rst
-@@ -230,7 +230,6 @@ the ``p`` flag has meaning, other flags are ignored.
- Note the regexp ``^[-+=][fslmpt_]+$`` matches a flags specification.
- To clear all flags at once, use ``=_`` or ``-fslmpt``.
- 
--
- Debug messages during Boot Process
- ==================================
- 
-@@ -380,3 +379,65 @@ just a shortcut for ``print_hex_dump(KERN_DEBUG)``.
- For ``print_hex_dump_debug()``/``print_hex_dump_bytes()``, format string is
- its ``prefix_str`` argument, if it is constant string; or ``hexdump``
- in case ``prefix_str`` is built dynamically.
-+
-+Dynamic Debug classmaps
-+=======================
-+
-+Dyndbg allows selection/grouping of *prdbg* callsites using structural
-+info: module, file, function, line.  Classmaps allow authors to add
-+their own domain-oriented groupings using class-names.  Classmaps are
-+exported, so they referencable from other modules.
-+
-+  # enable classes individually
-+  :#> ddcmd class DRM_UT_CORE +p
-+  :#> ddcmd class DRM_UT_KMS +p
-+  # or more selectively
-+  :#> ddcmd class DRM_UT_CORE module drm +p
-+
-+The "class FOO" syntax protects class'd prdbgs from generic overwrite::
-+
-+  # IOW this doesn't wipe any DRM.debug settings
-+  :#> ddcmd -p
-+
-+To support the DRM.debug parameter, DYNDBG_CLASSMAP_PARAM* updates all
-+classes in a classmap, mapping param-bits 0..N onto the classes:
-+DRM_UT_<*> for the DRM use-case.
-+
-+Dynamic Debug Classmap API
-+==========================
-+
-+DYNDBG_CLASSMAP_DEFINE - modules use this to create classmaps, naming
-+each of the classes (stringified enum-symbols: "DRM_UT_<*>"), and
-+type, and mapping the class-names to consecutive _class_ids.
-+
-+By doing so, modules tell dyndbg that they have prdbgs with those
-+class_ids, and they authorize dyndbg to accept "class FOO" for the
-+module defining the classmap, and its contained classnames.
-+
-+DYNDBG_CLASSMAP_USE - drm drivers invoke this to ref the CLASSMAP that
-+drm DEFINEs.  This shares the classmap definition, and authorizes
-+dyndbg to apply changes to the user module's class'd pr_debugs.  It
-+also tells dyndbg how to initialize the user's prdbgs at modprobe,
-+based upon the current setting of the parent's controlling param.
-+
-+There are 2 types of classmaps:
-+
-+ DD_CLASS_TYPE_DISJOINT_BITS: classes are independent, like DRM.debug
-+ DD_CLASS_TYPE_LEVEL_NUM: classes are relative, ordered (V3 > V2)
-+
-+DYNDBG_CLASSMAP_PARAM - modelled after module_param_cb, it refers to a
-+DEFINEd classmap, and associates it to the param's data-store.  This
-+state is then applied to DEFINEr and USEr modules when they're modprobed.
-+
-+This interface also enforces the DD_CLASS_TYPE_LEVEL_NUM relation
-+amongst the contained classnames; all classes are independent in the
-+control parser itself.
-+
-+Modules or module-groups (drm & drivers) can define multiple
-+classmaps, as long as they share the limited 0..62 per-module-group
-+_class_id range, without overlap.
-+
-+``#define DEBUG`` will enable all pr_debugs in scope, including any
-+class'd ones.  This won't be reflected in the PARAM readback value,
-+but the class'd pr_debug callsites can be forced off by toggling the
-+classmap-kparam all-on then all-off.
--- 
-2.46.1
+Uros.
 
+>
+> Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+> ---
+>  arch/x86/Makefile                     |  4 ++++
+>  arch/x86/include/asm/init.h           |  2 +-
+>  arch/x86/include/asm/processor.h      | 11 +++--------
+>  arch/x86/include/asm/stackprotector.h |  4 ----
+>  tools/perf/util/annotate.c            |  4 ++--
+>  5 files changed, 10 insertions(+), 15 deletions(-)
+>
+> diff --git a/arch/x86/Makefile b/arch/x86/Makefile
+> index 6b3fe6e2aadd..b78b7623a4a9 100644
+> --- a/arch/x86/Makefile
+> +++ b/arch/x86/Makefile
+> @@ -193,6 +193,10 @@ else
+>          KBUILD_RUSTFLAGS +=3D -Cno-redzone=3Dy
+>          KBUILD_RUSTFLAGS +=3D -Ccode-model=3Dkernel
+>
+> +        ifeq ($(CONFIG_STACKPROTECTOR),y)
+> +                KBUILD_CFLAGS +=3D -mstack-protector-guard-symbol=3Dfixe=
+d_percpu_data
+> +        endif
+> +
+>          # Don't emit relaxable GOTPCREL relocations
+>          KBUILD_AFLAGS_KERNEL +=3D -Wa,-mrelax-relocations=3Dno
+>          KBUILD_CFLAGS_KERNEL +=3D -Wa,-mrelax-relocations=3Dno
+> diff --git a/arch/x86/include/asm/init.h b/arch/x86/include/asm/init.h
+> index 14d72727d7ee..3ed0e8ec973f 100644
+> --- a/arch/x86/include/asm/init.h
+> +++ b/arch/x86/include/asm/init.h
+> @@ -2,7 +2,7 @@
+>  #ifndef _ASM_X86_INIT_H
+>  #define _ASM_X86_INIT_H
+>
+> -#define __head __section(".head.text")
+> +#define __head __section(".head.text") __no_stack_protector
+>
+>  struct x86_mapping_info {
+>         void *(*alloc_pgt_page)(void *); /* allocate buf for page table *=
+/
+> diff --git a/arch/x86/include/asm/processor.h b/arch/x86/include/asm/proc=
+essor.h
+> index 4a686f0e5dbf..56bc36116814 100644
+> --- a/arch/x86/include/asm/processor.h
+> +++ b/arch/x86/include/asm/processor.h
+> @@ -402,14 +402,9 @@ struct irq_stack {
+>  #ifdef CONFIG_X86_64
+>  struct fixed_percpu_data {
+>         /*
+> -        * GCC hardcodes the stack canary as %gs:40.  Since the
+> -        * irq_stack is the object at %gs:0, we reserve the bottom
+> -        * 48 bytes of the irq stack for the canary.
+> -        *
+> -        * Once we are willing to require -mstack-protector-guard-symbol=
+=3D
+> -        * support for x86_64 stackprotector, we can get rid of this.
+> +        * Since the irq_stack is the object at %gs:0, the bottom 8 bytes=
+ of
+> +        * the irq stack are reserved for the canary.
+>          */
+> -       char            gs_base[40];
+>         unsigned long   stack_canary;
+>  };
+>
+> @@ -418,7 +413,7 @@ DECLARE_INIT_PER_CPU(fixed_percpu_data);
+>
+>  static inline unsigned long cpu_kernelmode_gs_base(int cpu)
+>  {
+> -       return (unsigned long)per_cpu(fixed_percpu_data.gs_base, cpu);
+> +       return (unsigned long)&per_cpu(fixed_percpu_data, cpu);
+>  }
+>
+>  extern asmlinkage void entry_SYSCALL32_ignore(void);
+> diff --git a/arch/x86/include/asm/stackprotector.h b/arch/x86/include/asm=
+/stackprotector.h
+> index 00473a650f51..d1dcd22a0a4c 100644
+> --- a/arch/x86/include/asm/stackprotector.h
+> +++ b/arch/x86/include/asm/stackprotector.h
+> @@ -51,10 +51,6 @@ static __always_inline void boot_init_stack_canary(voi=
+d)
+>  {
+>         unsigned long canary =3D get_random_canary();
+>
+> -#ifdef CONFIG_X86_64
+> -       BUILD_BUG_ON(offsetof(struct fixed_percpu_data, stack_canary) !=
+=3D 40);
+> -#endif
+> -
+>         current->stack_canary =3D canary;
+>  #ifdef CONFIG_X86_64
+>         this_cpu_write(fixed_percpu_data.stack_canary, canary);
+> diff --git a/tools/perf/util/annotate.c b/tools/perf/util/annotate.c
+> index 37ce43c4eb8f..7ecfedf5edb9 100644
+> --- a/tools/perf/util/annotate.c
+> +++ b/tools/perf/util/annotate.c
+> @@ -2485,10 +2485,10 @@ static bool is_stack_operation(struct arch *arch,=
+ struct disasm_line *dl)
+>
+>  static bool is_stack_canary(struct arch *arch, struct annotated_op_loc *=
+loc)
+>  {
+> -       /* On x86_64, %gs:40 is used for stack canary */
+> +       /* On x86_64, %gs:0 is used for stack canary */
+>         if (arch__is(arch, "x86")) {
+>                 if (loc->segment =3D=3D INSN_SEG_X86_GS && loc->imm &&
+> -                   loc->offset =3D=3D 40)
+> +                   loc->offset =3D=3D 0)
+>                         return true;
+>         }
+>
+> --
+> 2.46.0.792.g87dc391469-goog
+>
 
