@@ -1,108 +1,152 @@
-Return-Path: <linux-doc+bounces-25805-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25807-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66B9C986BE4
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Sep 2024 07:00:05 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EF9E986F46
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Sep 2024 10:50:14 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id CB096B21F12
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Sep 2024 05:00:02 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A5C0F1C21129
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Sep 2024 08:50:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 09C0B39AD6;
-	Thu, 26 Sep 2024 04:59:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1F7A1A42AD;
+	Thu, 26 Sep 2024 08:50:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=aruba.it header.i=@aruba.it header.b="OzPmiQbc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtpcmd13147.aruba.it (smtpcmd13147.aruba.it [62.149.156.147])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6F5FBE6C;
-	Thu, 26 Sep 2024 04:59:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17235192B65
+	for <linux-doc@vger.kernel.org>; Thu, 26 Sep 2024 08:50:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.149.156.147
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727326798; cv=none; b=M/g/uNQYasdaUJkUC9LeEOFb+znNE6NtbEd8arxyz4LRRJ0k0LiORTK/aMiOXtdbes+65oWKCeWAtWWzmBL0xU+oOqDJAmSSEoNmMcRGZrv0B1q+fOyXeI4pa9hO8G2HcrblhyBQdY7J+SAsum1VPd03zaeHlFwcCjSRIfZpQZk=
+	t=1727340608; cv=none; b=U2rRnUjQ1knSlrG6p6ozRe/aOoQ2CKGXQGVX16wa0TuCgCo2r1ZurmGeqtjceALKs8n8Chb0aL9sQVVJ5hrTUMXLHflXLuDjYAw4PKZ4KO/qgIOopJbwsmfuqspdt3XOTt3dpJBYZEfQljKGRLMTITcpVHNP9vLtTvj8JpUODqA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727326798; c=relaxed/simple;
-	bh=2XIXGD2Rn6RQu8hB0JdURTj3F2UEZ6CeicHcLbUObOI=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=VnuptMe5zOn4qRcmCUc9tNYqeH9WQeuKjJEZ7FsooBjLmlC2QjUoT4VJqFLbrb6c1grrsj9b86/2bvGW5ojcHSvqtfWP+SdNPux7b/FMSzbWByWbtdBayIxudVRRwWXGR8+ZRkSSFpmh0bGUqr/XXzWZXVJu8d8IH+F4+2k/L84=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0B71FC4CEC5;
-	Thu, 26 Sep 2024 04:59:55 +0000 (UTC)
-Date: Thu, 26 Sep 2024 00:59:52 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: "Yo-Jung (Leo) Lin" <0xff07@gmail.com>
-Cc: linux-kernel-mentees@lists.linuxfoundation.org, ricardo@marliere.net,
- skhan@linuxfoundation.org, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu
- Desnoyers <mathieu.desnoyers@efficios.com>, Jonathan Corbet
- <corbet@lwn.net>, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, "Rafael J.
- Wysocki" <rafael@kernel.org>, linux-pm@vger.kernel.org
-Subject: Re: [PATCH] trace doc: document the device_pm_callback events
-Message-ID: <20240926005952.5ba2fda4@rorschach.local.home>
-In-Reply-To: <20240922132636.34413-1-0xff07@gmail.com>
-References: <20240922132636.34413-1-0xff07@gmail.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1727340608; c=relaxed/simple;
+	bh=4AupH/BviNHtaHpZmQ9S7ipD1OFuKiaMUUbNa6H3IJQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=I7aCPALxW1XsssVcYczou7+jPK8RvetCcUFXocOHOsQ/1GEl+TLvCnI9tDfy1NC+tvk89gPX7G5xrPslVhNwrJ7buBEPc/56SKwvn7nekAnPX2pRetwYZSkHOqgS56bM+LjHQ+IfVUMb3wFwjilBjkqIUf/MhH2RGMTLauuv8z4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=enneenne.com; spf=pass smtp.mailfrom=enneenne.com; dkim=pass (2048-bit key) header.d=aruba.it header.i=@aruba.it header.b=OzPmiQbc; arc=none smtp.client-ip=62.149.156.147
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=enneenne.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=enneenne.com
+Received: from [192.168.1.57] ([79.0.204.227])
+	by Aruba Outgoing Smtp  with ESMTPSA
+	id tk9GsxGjg8U42tk9HsMf3E; Thu, 26 Sep 2024 10:46:56 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aruba.it; s=a1;
+	t=1727340416; bh=4AupH/BviNHtaHpZmQ9S7ipD1OFuKiaMUUbNa6H3IJQ=;
+	h=Date:MIME-Version:Subject:To:From:Content-Type;
+	b=OzPmiQbcYU4Tn8TiRv+eEu4jTjOm+vCSLoKQsHKWwlwjmvqh2y6n7mERYvSKNTCro
+	 vr3l0S8kphfyniViG6Ic5bxhkPIr+bB4LKVtjxw/24wH7cU1Ee/lR8A510FcohlgSd
+	 aLlTidJqVOkx55UtptgbUZtoGTZLQm/fLP3B7/dOn2kRFuyKNfKtrem+r4LkiNmTfA
+	 VbXndxp5XvWK1+fnvslma51qBsC/rZA3UquRfn/FVMydUVtB3SZzPq6Qqg6yNiQwmk
+	 vPiCWBCZ88WMD1kGH5EtK53UjAWwchTFuyJeq8VNHfKk1nhu6GWMI6RbcZQNJ3408z
+	 xPQCUIxdO5k7A==
+Message-ID: <e88f2d6f-033a-41b5-afdb-8a3f6bcf3d06@enneenne.com>
+Date: Thu, 26 Sep 2024 10:46:54 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v12 2/3] Documentation: driver-api: pps: Add Intel Timed
+ I/O PPS generator
+To: "Hall, Christopher S" <christopher.s.hall@intel.com>
+Cc: "Mohan, Subramanian" <subramanian.mohan@intel.com>,
+ "tglx@linutronix.de" <tglx@linutronix.de>, "corbet@lwn.net"
+ <corbet@lwn.net>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+ "andriy.shevchenko@linux.intel.com" <andriy.shevchenko@linux.intel.com>,
+ "Dong, Eddie" <eddie.dong@intel.com>, "N, Pandith" <pandith.n@intel.com>,
+ "T R, Thejesh Reddy" <thejesh.reddy.t.r@intel.com>,
+ "Zage, David" <david.zage@intel.com>,
+ "Chinnadurai, Srinivasan" <srinivasan.chinnadurai@intel.com>,
+ Greg KH <gregkh@linuxfoundation.org>
+References: <20240823070109.27815-1-subramanian.mohan@intel.com>
+ <20240823070109.27815-3-subramanian.mohan@intel.com>
+ <2024082456-kitchen-astride-7892@gregkh>
+ <801c7a93-667b-4c23-9493-4cbe979847a2@enneenne.com>
+ <2024090304-viewing-lavish-c05e@gregkh>
+ <PH7PR11MB69787046B1F9CDA610523FE5C2692@PH7PR11MB6978.namprd11.prod.outlook.com>
+From: Rodolfo Giometti <giometti@enneenne.com>
+Content-Language: en-US
+In-Reply-To: <PH7PR11MB69787046B1F9CDA610523FE5C2692@PH7PR11MB6978.namprd11.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-CMAE-Envelope: MS4xfMug2r+xb8fM0qHgPmLgkam22qBK9bSW3EXeA1dfwYDwXC3Mp2LaQFKs5Arg1qfTvDxefz5LtFt1wWsN7Z6DM0eqhlfEhqFMV/JhZHjDlfasJQTPH+vq
+ gLGIHG8oGtycnDEVSfAFWdeIZ0eirMwJc2UZXHvhOFG0rBWAeiPdTCptyNy9q+YUlG0gr+q/oUdoOMOkflsO16AevFd0trnw7VAx7AW85CJjaqw9eR+mOk24
+ +nFvVtMXNEFk9jFpZOK65n9/22PwptVXMcwwccOkt3U6B7UiE5NIkHgHCtgbpDNbTRE6jXZ8xvmAxKWSNWGxNSIlpidYHbfL0iXB5kfS8UZuu7r7cqeTqNqJ
+ N2zsrLXkG6FnyhLfc935uUHwes6QU5mP3024YI0zJ3kc2o9j+MP4/7TRp8VlBXGbqyspuGLLpdoUfvI0azyyzpC1CSpNScJj9HUhLQgAca5O0rUWDWRJoqh0
+ j015aasJRrn8vRAcKFhRKa5FDXV2WYtEM1QMbWG6CJZJCP+RL2RsiaTP8NOHyt+Vf9OyjEsyTJLEh/lwVo3LCg72IfE8NkqaWGQZ+NUf+AYRUQzFwV3xSi3M
+ +koHSS0/Gx1xtfkwwGMCpJ3juwcAfdRCzap/5k5HKc0JJZm3UFs4eUDVsnzdWaTF+W8=
 
+On 25/09/24 23:55, Hall, Christopher S wrote:
+> Hi Rodolfo,
 
-This needs an ack from one of the power management maintainers.
+Hello.
 
--- Steve
-
-
-On Sun, 22 Sep 2024 21:26:28 +0800
-"Yo-Jung (Leo) Lin" <0xff07@gmail.com> wrote:
-
-> Add documentation for the device_pm_callback_{start, end} events
-> under the "Subsystem Trace Points: power" section.
+>> From: Greg KH <gregkh@linuxfoundation.org>
+>> Sent: Tuesday, September 03, 2024 3:25 AM
+>> To: Rodolfo Giometti <giometti@enneenne.com>
 > 
-> Signed-off-by: Yo-Jung (Leo) Lin <0xff07@gmail.com>
-> ---
->  Documentation/trace/events-power.rst | 27 +++++++++++++++++++++++++++
->  1 file changed, 27 insertions(+)
+>> Subject: Re: [PATCH v12 2/3] Documentation: driver-api: pps: Add Intel Timed
+>> I/O PPS generator
+>>
 > 
-> diff --git a/Documentation/trace/events-power.rst b/Documentation/trace/events-power.rst
-> index f45bf11fa88d..7031954f7ed3 100644
-> --- a/Documentation/trace/events-power.rst
-> +++ b/Documentation/trace/events-power.rst
-> @@ -102,3 +102,30 @@ And, there are events used for CPU latency QoS add/update/remove request.
->    pm_qos_remove_request     "value=%d"
->  
->  The parameter is the value to be added/updated/removed.
-> +
-> +5. Device PM callback events
-> +============================
-> +The device PM callback events are placed right before and after an invocation of
-> +a device PM callback during a system-wide suspend/resume attempt.
-> +::
-> +
-> +  device_pm_callback_start     "%s %s, parent: %s, %s[%s]"
-> +  device_pm_callback_end       "%s %s, err=%d"
-> +
-> +The first two parameters in both events are the same. They are:
-> +
-> +  - The name of the driver.
-> +  - The device whose PM callbacks get called.
-> +
-> +For device_pm_callback_start, the rest of the parameters are:
-> +
-> +  - The parent device of the device (if any).
-> +  - Level in the power management hierarchy the callback belongs to (e.g. power
-> +    domain, type, class, bus, driver). Some stages (e.g. early, late, noirq)
-> +    will also be explicitly mentioned in this string.
-> +  - The ongoing PM event. You may find definitions of those events in the
-> +    PM_EVENT_* macros in include/linux/pm.h
-> +
-> +For device_pm_callback_end, the only remaining parameter is:
-> +
-> +  - The return value of the PM callback.
+>>> If you are willing to stop the inclusion due this fact maybe its time to add
+>>> such PPS generators interface... on the other hand, if you agree for
+>>> inclusion we can do this job as soon as the code has been included, in order
+>>> to fix this anomalous status.
+>>
+>> Please make a generic pps subsystem for this, it would make it simpler
+>> for everyone.
+> 
+> What is required to move this? We can certainly test the code and do some
+> of this work, but I would look to you to define the interface.
+
+The problem is that a pps-generator has no related device, then no sysfs entries.
+
+I think the right-thing(TM) to do is adding a new class named "pps-generator", 
+so we will get the directory /sys/class/pps-generator with several devices as 
+pps-generator0, pps-generator1, etc. For each device we should add at least 
+these sysfs entries:
+
+- system       : This file return "1" if the generator takes the timing from
+                  the system clock, while it returns "0" if not (i.e. from a
+                  peripheral device clock).
+
+- time         : This file contains the current time stored into the generator
+                  clock as two integers representing the current time seconds and
+                  nanoseconds.
+
+- enable       : This write-only file enables or disables generation of the
+                  PPS signal.
+
+- period       : This file defines the period for the generator signal. When
+                  read, by default, it returns "1 0" which represent the period
+                  second and nanoseconds (i.e. a PPS signal). When written, it
+                  sets the period accordingly or ENOTSUPP if not supported.
+
+- start_time   : This file defines the starting time for the the generator
+                  signal. When read, by default, it returns "0 0" which means
+                  "now". When written, it sets the starting time accordingly or
+                  ENOTSUPP if not supported.
+
+Please, let me know what do you think about this proposal. I'm going to provide 
+a draft in the next weeks since I'm stuck on another project right now. :(
+
+Ciao,
+
+Rodolfo
+
+-- 
+GNU/Linux Solutions                  e-mail: giometti@enneenne.com
+Linux Device Driver                          giometti@linux.it
+Embedded Systems                     phone:  +39 349 2432127
+UNIX programming
 
 
