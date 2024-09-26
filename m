@@ -1,190 +1,115 @@
-Return-Path: <linux-doc+bounces-25806-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25808-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10CB3986F33
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Sep 2024 10:47:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE0AE986F67
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Sep 2024 10:56:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 21CCE1C21B67
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Sep 2024 08:47:29 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1B7111C21BCE
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Sep 2024 08:56:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E6661A42AD;
-	Thu, 26 Sep 2024 08:47:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 075C31A7252;
+	Thu, 26 Sep 2024 08:56:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="lNTazN9P"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VzH3qq4J"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A822214884C;
-	Thu, 26 Sep 2024 08:47:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.197
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A3CF1A7256;
+	Thu, 26 Sep 2024 08:56:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727340445; cv=none; b=JL12vieBiFaU7qccMDAqjykP8D+BqOa42tgvl4WnFeA4twyI1UCKP2t56YvhrEnt44QBfeFBtH+ZoeGNALnhuhDLXq1b1kIcdfNuHpK2buA8LUJGBAKP9N0AUMH/iGhj5fkLWpKU63vBWH24vvmjZTZnMJPPmVP76TBFaJp4cFk=
+	t=1727340963; cv=none; b=tkVwcn7PumCQrc3w+q0Oxj9HwD3ExvtAOvn9JKgdVqENL9PujdzEqzuvUF3muGhVJlDBnrt3DnUK2MhtClKcY6Ye1tyw3DPRiDcZAcO1oNRDRp8VN/QlLspa/psw6ZXFkM2UYIjbUB/OEdPwKkLNMSMIKmYqZowbEjmt3Umt1WE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727340445; c=relaxed/simple;
-	bh=U4bxZTwT2YaLl+cJuAaGnd5Xz6gw3YAeiyLLHefNmK8=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Bt+FCcOliBX0ji2wqnq4gBgQI4bpkoZqRSAp6XQOFYgkgW4q/+eRoO5GXXx1UcerZWCj6MRMgBqR+twSZpTT7MpswnR5UhYH6yq7/SYfh9oij3rysADJyQsNu0B+EkZt0bjDUByMZDmNdCFsuWV0yrPaeWcnTOEnnBoW03sHoz0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=lNTazN9P; arc=none smtp.client-ip=217.70.183.197
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 0E8701C000F;
-	Thu, 26 Sep 2024 08:47:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1727340435;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=hZ9Wisee95FqaPjfkdd5lfW+HMn3+ekkbZ+x5uP4V4E=;
-	b=lNTazN9P1SF3c5yc3oqWbAwmS4Vrtxmw84oD7vL/mJ+IN9lAFDW2RyOxgCfbVHDAfYjD+a
-	tSO9CXIhduKnVg20dNubp5tU3KTS0ISP+Kceeem6osuYCUdq7X8rWL0tUQI2+koHt//nBP
-	usHWfv2yqp+Tx9yL9KctHMk1KoC0gXipG9lbtIANK6/OOs47+jSS9RpHCoYcPb/HtSpwlo
-	MBOwNAlEEsC2UGQWWsJmRJLTgT1MaofX6IOnIaAxuqYsed2/Yc+6Gq8dwLPk97MIbhW7/l
-	HEtm9godSlOjhX9es9tLluZiGBAR+PGzOgqGnEOsL9m8Jvd4/zm4C7+Tg07UBA==
-Date: Thu, 26 Sep 2024 10:47:12 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: Florian Fainelli <florian.fainelli@broadcom.com>, Broadcom internal
- kernel review list <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn
- <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, Russell King
- <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Richard
- Cochran <richardcochran@gmail.com>, Radu Pirea
- <radu-nicolae.pirea@oss.nxp.com>, Jay Vosburgh <j.vosburgh@gmail.com>, Andy
- Gospodarek <andy@greyhouse.net>, Nicolas Ferre
- <nicolas.ferre@microchip.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Jonathan Corbet
- <corbet@lwn.net>, Horatiu Vultur <horatiu.vultur@microchip.com>,
- UNGLinuxDriver@microchip.com, Simon Horman <horms@kernel.org>, Vladimir
- Oltean <vladimir.oltean@nxp.com>, donald.hunter@gmail.com,
- danieller@nvidia.com, ecree.xilinx@gmail.com, Thomas Petazzoni
- <thomas.petazzoni@bootlin.com>, linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, linux-doc@vger.kernel.org, Maxime Chevallier
- <maxime.chevallier@bootlin.com>, Rahul Rameshbabu <rrameshbabu@nvidia.com>,
- Willem de Bruijn <willemb@google.com>, Shannon Nelson
- <shannon.nelson@amd.com>, Alexandra Winter <wintera@linux.ibm.com>
-Subject: Re: [PATCH net-next v17 13/14] net: ethtool: Add support for
- tsconfig command to get/set hwtstamp config
-Message-ID: <20240926104712.6a55d263@kmaincent-XPS-13-7390>
-In-Reply-To: <20240715075926.7f3e368c@kernel.org>
-References: <20240709-feature_ptp_netnext-v17-0-b5317f50df2a@bootlin.com>
- <20240709-feature_ptp_netnext-v17-13-b5317f50df2a@bootlin.com>
- <20240715075926.7f3e368c@kernel.org>
-Organization: bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1727340963; c=relaxed/simple;
+	bh=N/MdxSZRRgXw6t3FZKYPDKlvTtCCPAM4Bq/l5Av5B0Q=;
+	h=Message-ID:Subject:From:To:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=tnrCTXF/jqrBFrHmb1s6KAHTQ1U0mT+kfUiu67EJqN7auixqb4WnJ0jZ1NI90PH+NKhQz+UrCigv1qHrO3Dm7Qn0VXy+89WJW8N7k0jbFUTxE6vHOccsY7PzI/CiZKlv5WshFq5DuXtu0IgKi6oFyiZssP95jvI2LWAozaDqRTE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VzH3qq4J; arc=none smtp.client-ip=209.85.167.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5365c512b00so877098e87.3;
+        Thu, 26 Sep 2024 01:56:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1727340960; x=1727945760; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:to:from:subject:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=N/MdxSZRRgXw6t3FZKYPDKlvTtCCPAM4Bq/l5Av5B0Q=;
+        b=VzH3qq4J6UhrWLgoEJy+061mlEkDyf+60fk4+psrb2zsYRr7+Ik0/jleeJnYpwwTLh
+         1yTVrvlG3Mxl1P+VMfBr4krYO7VMFrL+Pxf6sPSdYeasaCukVTLcqcdmJs4jy6AXyBCW
+         H1JuubBJRvI8WP34ME/trQXJ2Xcqm/598E4ASh2Q1YreFaBddHYBcz7nD9J8qwtazXhU
+         yqQdUU0Fv9jamXdL541TzGiT5rlHjUrnZz7Rl9J0ZdZSuktXg63nj7LHfAiosIt71wkI
+         XYEPkLjEFe+AruqBjpgi9x8pupvgfmWLkJAkjEe4CpHSusATN8BLfLL8JIacdwcha0+0
+         YxTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1727340960; x=1727945760;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:to:from:subject:message-id:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=N/MdxSZRRgXw6t3FZKYPDKlvTtCCPAM4Bq/l5Av5B0Q=;
+        b=elVbZc9Fq7RjLDxQMlccj2weUE3bksBRF5oIBVP3r9KFd4QSQhAdjCa7kqFCfvW1qB
+         vd5Pn2xdcsne/BWPeGZ1p/tBH6oyhHN5rm3SKemd+uI7HtwsP9i0yRQ7lo+CpjUiliRE
+         KqbucLJbS3oynLspFtyjQWbu2bsTfcvRozvfl01rim1rPFN3/ouW9LcAP81f44ewleVS
+         wI+7oPMTRJ0aGAbDo6KuuZLZtneN7PRqaHocGwbQ0EpDlIEcGr+ulRKXMGERh1YVTJLS
+         YQOrqXN043njMXy4aoYtahzpqVZe8icb7ikSopk+Xdtu2UsmlJMH93uHijKrQonf1djd
+         kjdQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVKhj1i2SXAcflFtVpAKqWFtBPeUfBrPDn/ZhlCu2+DM260AjhqTiTJQizPKqwCiEk9pOPzcScLbDtr@vger.kernel.org, AJvYcCVdSWFCTSdV8GBzmKngJEcbfNCsWvDOBtJTwdpQcpNdJRzSJqJ/nr/5OmN4fsemP/RNalyXyPVBi3pKc1eC@vger.kernel.org, AJvYcCW4x7TJibjXQWPaJqKP8QbJkdzbrX9SR17yyQQxaEDRUivz7EB0L8uvIQj4KG/LRa5OmW8=@vger.kernel.org, AJvYcCWh6a2ViwT43xpy0invLvDdOqHbjPEEevnW4n88rqmdyP6VrqRlwaHAM8wQz6EqaaLZ3F6xIDnGwuQ=@vger.kernel.org, AJvYcCWqTUNxlfN9WCa8pHE6ngboze6zKXaTG0rwOEz2xf6jhIHltbeEKVJuu/qa8RUyyryQHS0DlRjjqvUyKR7cOuWW@vger.kernel.org
+X-Gm-Message-State: AOJu0YzrAftNrIBVkGaMDFtLpASnRoqAl8FmZCzarXeU+IfSca2G6RMU
+	t5yMJQzG5lXh6iZgej5KpFfqYkyjSsFq/w1lHMX3hBwUBBIuZqCm
+X-Google-Smtp-Source: AGHT+IHhrS4QXSILHTgsdhqbb5hO7tNCXVRYEYz1SUiLl+OS5YyvI4GPgvxdfXnxwqpZqVHN5fGjFQ==
+X-Received: by 2002:a05:6512:33cc:b0:536:55cc:9641 with SMTP id 2adb3069b0e04-53877538012mr3938709e87.16.1727340959984;
+        Thu, 26 Sep 2024 01:55:59 -0700 (PDT)
+Received: from ?IPv6:2001:b07:5d29:f42d:438a:71d4:3b8a:6ddf? ([2001:b07:5d29:f42d:438a:71d4:3b8a:6ddf])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5c5cf4c52aesm2878777a12.59.2024.09.26.01.55.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Sep 2024 01:55:59 -0700 (PDT)
+Message-ID: <15f38d57ca10606e444ca422f802e0961908f02f.camel@gmail.com>
+Subject: Re: [PATCH v4 1/6] firmware/psci: Add definitions for PSCI v1.3
+ specification
+From: Francesco Lavra <francescolavra.fl@gmail.com>
+To: David Woodhouse <dwmw2@infradead.org>, Paolo Bonzini
+ <pbonzini@redhat.com>,  Jonathan Corbet <corbet@lwn.net>, Marc Zyngier
+ <maz@kernel.org>, Oliver Upton <oliver.upton@linux.dev>, James Morse
+ <james.morse@arm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>, Zenghui
+ Yu <yuzenghui@huawei.com>, Catalin Marinas <catalin.marinas@arm.com>, Will
+ Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>, Lorenzo
+ Pieralisi <lpieralisi@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
+ Pavel Machek <pavel@ucw.cz>, Len Brown <len.brown@intel.com>, Shuah Khan
+ <shuah@kernel.org>, David Woodhouse <dwmw@amazon.co.uk>,
+ kvm@vger.kernel.org,  linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org,  linux-arm-kernel@lists.infradead.org,
+ kvmarm@lists.linux.dev,  linux-pm@vger.kernel.org,
+ linux-kselftest@vger.kernel.org
+Date: Thu, 26 Sep 2024 10:55:57 +0200
+In-Reply-To: <20240924160512.4138879-1-dwmw2@infradead.org>
+References: <20240924160512.4138879-1-dwmw2@infradead.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4-2 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: kory.maincent@bootlin.com
 
-Hello Jakub,=20
-
-On Mon, 15 Jul 2024 07:59:26 -0700
-Jakub Kicinski <kuba@kernel.org> wrote:
-
-Thanks for the review and sorry for the late reply.
-
-> On Tue, 09 Jul 2024 15:53:45 +0200 Kory Maincent wrote:
-> > +	/* Get the hwtstamp config from netlink */
-> > +	if (tb[ETHTOOL_A_TSCONFIG_TX_TYPES]) {
-> > +		ret =3D ethnl_parse_bitset(&req_tx_type, &mask,
-> > +					 __HWTSTAMP_TX_CNT,
-> > +					 tb[ETHTOOL_A_TSCONFIG_TX_TYPES],
-> > +					 ts_tx_type_names, info->extack);
-> > +		if (ret < 0)
-> > +			goto err_clock_put;
-> > +
-> > +		/* Select only one tx type at a time */
-> > +		if (ffs(req_tx_type) !=3D fls(req_tx_type)) {
-> > +			ret =3D -EINVAL;
-> > +			goto err_clock_put;
-> > +		}
-> > +
-> > +		hwtst_config.tx_type =3D ffs(req_tx_type) - 1;
-> > +	}
-> > +	if (tb[ETHTOOL_A_TSCONFIG_RX_FILTERS]) {
-> > +		ret =3D ethnl_parse_bitset(&req_rx_filter, &mask,
-> > +					 __HWTSTAMP_FILTER_CNT,
-> > +					 tb[ETHTOOL_A_TSCONFIG_RX_FILTERS],
-> > +					 ts_rx_filter_names, info->extack);
-> > +		if (ret < 0)
-> > +			goto err_clock_put;
-> > +
-> > +		/* Select only one rx filter at a time */
-> > +		if (ffs(req_rx_filter) !=3D fls(req_rx_filter)) {
-> > +			ret =3D -EINVAL;
-> > +			goto err_clock_put;
-> > +		}
-> > +
-> > +		hwtst_config.rx_filter =3D ffs(req_rx_filter) - 1;
-> > +	}
-> > +	if (tb[ETHTOOL_A_TSCONFIG_HWTSTAMP_FLAGS]) {
-> > +		ret =3D nla_get_u32(tb[ETHTOOL_A_TSCONFIG_HWTSTAMP_FLAGS]);
-> > +		if (ret < 0)
-> > +			goto err_clock_put;
-> > +		hwtst_config.flags =3D ret;
-> > +	} =20
+On Tue, 2024-09-24 at 17:05 +0100, David Woodhouse wrote:
+> From: David Woodhouse <dwmw@amazon.co.uk>
 >=20
-> We should be tracking mod on these, too. Separately from the provider
-> mod bit, let's not call the driver and send notification if nothing
-> changed.
+> The v1.3 PSCI spec (https://developer.arm.com/documentation/den0022)
+> adds
+> SYSTEM_OFF2, CLEAN_INV_MEMREGION and CLEAN_INV_MEMREGION_ATTRIBUTES
+> functions. Add definitions for them and their parameters, along with
+> the
+> new TIMEOUT, RATE_LIMITED and BUSY error values.
 
-Ok
-=20
-> > +	ret =3D net_hwtstamp_validate(&hwtst_config);
-> > +	if (ret)
-> > +		goto err_clock_put;
-> > +
-> > +	/* Disable current time stamping if we try to enable another one */
-> > +	if (mod && (hwtst_config.tx_type || hwtst_config.rx_filter)) {
-> > +		struct kernel_hwtstamp_config zero_config =3D {0};
-> > +
-> > +		ret =3D dev_set_hwtstamp_phylib(dev, &zero_config,
-> > info->extack);
-> > +		if (ret < 0)
-> > +			goto err_clock_put;
-> > +	}
-> > +
-> > +	/* Changed the selected hwtstamp source if needed */
-> > +	if (mod) {
-> > +		struct hwtstamp_provider *__hwtstamp;
-> > +
-> > +		__hwtstamp =3D rcu_replace_pointer_rtnl(dev->hwtstamp,
-> > hwtstamp);
-> > +		if (__hwtstamp)
-> > +			call_rcu(&__hwtstamp->rcu_head,
-> > +				 remove_hwtstamp_provider);
-> > +	}
-> > +
-> > +	ret =3D dev_set_hwtstamp_phylib(dev, &hwtst_config, info->extack);
-> > +	if (ret < 0)
-> > +		return ret; =20
->=20
-> We can't unwind to old state here?
-
-Yes indeed we could unwind old state here. I will update it in next version.
-
-> Driver can change hwtst_config right? "upgrade" the rx_filter=20
-> to a broader one, IIRC. Shouldn't we reply to the set command with=20
-> the resulting configuration, in case it changed? Basically provide=20
-> the same info as the notification would.
-
-Yes, the driver does that.
-Indeed that's a good idea to report the resulting configuration.
-I will take a look at how I can do that.
-
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+The CLEAN_INV_MEMREGION and CLEAN_INV_MEMREGION_ATTRIBUTES
+functions were added in the alpha release of the spec but have been
+dropped in the beta release, and are not included in the final spec. So
+IMO the uapi header file should not contain these definitions.
+The same goes for the TIMEOUT, RATE_LIMITED and BUSY error values.
 
