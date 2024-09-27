@@ -1,141 +1,266 @@
-Return-Path: <linux-doc+bounces-25892-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25894-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21C8D9889C5
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Sep 2024 19:50:09 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id EB7D79889ED
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Sep 2024 20:11:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 9C8F91F22251
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Sep 2024 17:50:07 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A1A0E281583
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Sep 2024 18:11:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 360971C1741;
-	Fri, 27 Sep 2024 17:50:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0FD6E1C1ABA;
+	Fri, 27 Sep 2024 18:11:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="Y67HVPvl"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="vNCvMQu1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2077.outbound.protection.outlook.com [40.107.237.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40F7923B0;
-	Fri, 27 Sep 2024 17:49:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727459402; cv=none; b=q8z1aa3T2c73yd6HD4NtHH+chmyGml9H9aWO9lOwWNuV+s6Fw1S+y1ef0gwsGD4DvkVc8G5Yb8nHONItxYZEjDrWxOeWhxX88O72XM7BERJ4Jbx0sXcNrPmdwXyOe26blDv88NpSK2P0SlW7dkIZrHrXUueN/0u+khxof2n7u2I=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727459402; c=relaxed/simple;
-	bh=OQ8UJ21YYnXWk8uGEtOeg4cUNizdeSHYo13CO6Dp/7c=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=silTTQXtJjq59jAZSgMWPyJWwweEXsgjVF1CRH6wvOJfVkc91RPHHTjOI4t46UbdyeqgZ9OTsF0Avyg8jTkYeimSacqzs+TpqXIvsBIZ4VAtiRHH1pz3f7U2uMHTbv4q4o7XNsFCJOm9GDoXH1YdCweRaXfuhc5VM+zfAwfrS60=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=Y67HVPvl; arc=none smtp.client-ip=198.137.202.136
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
-Received: from [192.168.7.205] ([71.202.166.45])
-	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 48RHmuBk1788498
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
-	Fri, 27 Sep 2024 10:48:56 -0700
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 48RHmuBk1788498
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2024091601; t=1727459337;
-	bh=SF0FL9WmYDEbaKMO13C88v3yLZ0MrWkzlusCVl5FVsI=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
-	b=Y67HVPvl61EVkWatxnhOVeXKW63UykF8TU4cDEDQiKbePtlNSYbVPcCS7S1o7qRmW
-	 ki644wA0aln7/r+v87u68bpGmD+gJ/XFRJKJrP2lvuXu2IkbCYXV8wReZwNVkJATHP
-	 fv8LId0DEgqsrTbBisdaSSSwg/iEGOY7mz+Zw5EA5ttwpHkdZfOpefApYvzPdlNxU0
-	 Kcerz93cj51dM7YRIk4YWSUMNUJ9bx2cTpxJKXy8J3kiE8gNmPf/uB48ITrEvtSZJX
-	 bgR0btyYoKr9XBOBoeWKFWPg8KpyBiiMmKXHJSWil8jM0W79ajOOIfFEkfQt9keelb
-	 vIPxGdpQNNGNg==
-Message-ID: <208429ae-d9c5-4b73-86ff-a9b31e68f7eb@zytor.com>
-Date: Fri, 27 Sep 2024 10:48:55 -0700
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 532471C1AD6;
+	Fri, 27 Sep 2024 18:11:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.237.77
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1727460676; cv=fail; b=Hq01T6O6ghTglDrHVJxSghvcBevMQZHNx6EQ14E1gvoYhbMugTdNgQCDPTitYdUBOAq8zGgKuDwTNcqnBMY+3mjoln1xHi/XPXr5C1FXQYIMl82UCuA4w17Qt9PvdDYa9PgKF8CcXXT8rJa/a3rLIstgBdaFyvzbepd8l8fZZaQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1727460676; c=relaxed/simple;
+	bh=ukB0l+LBlPYbrStSkGVfuSiI8FcY10gFr2wWPz8fePQ=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=amgwC6kZQmzKtG1NJ/Vbr6Rj1UVtCDcFAD5f+dE+FFPuFJ8MFHy+dLZ2OqGfu9gUHClnpt7Em26oKYGhl7tND1dZJ2/k90W02ICddmyszU2M6ysj4iLhHriwEMu56zykexBOj8eWT56GRvR2yhxqS8gXZhbLP6Ky/3JHh9C3RFg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=vNCvMQu1; arc=fail smtp.client-ip=40.107.237.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=X/b9V3ep7JTC4N9Ac+58+154DI+79l3gCqV2V9aAJj9WYno/8cd26YoM1fCZmwnhnsACf/qkiM3hp17x67WViz5xzG7nlg1NWNx0tUVjQ5DO19nhc2CBKcbBQCjETj4cXfBZbdB1XrtSNk0byoww1vyEyhyS7iNrDzcYXIRyi95lVBClNhl295iiVIhJBPBiiABUhrOVFIrIN+RMF1z8IRyRuQ0C1xRVKCue2rrGpodz922GakImm6fXqDdmaYXIBMsOmlOSoOIlRUTVoTCMlxC9T4sjRpKor6ZR6Xq0vtNiJ2KUOA9aNqPPF+qYozT6HwfqxvYWjq3kn8A6TeCTCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JK+RnqXIB1CTAaIT5UWkv7wn6GbTzpyLsGPRBIZVG5g=;
+ b=LICJPo+hH9KHfZu4XS8OKaBF3Q4SfaHPRxCCj9yQ5hpigOU9hCR8tNDzXiCGnfUdooympGZSWb7g3SBwtcO6oG0R5DlOUds79JA6FSwPCSo47Gmva5R9NasI065D4IxaasjtruViYKvkgtQEqqdi1docKeMiHOf2kNSHKuvDMgyP8GJpu2cz2JDsbzXi30S9S+GTQTm/rs0KH4TvBelx9rJGShvMH0RjiSfCF9uvYMjt9KdLiK6WX8If0hlGI06nYMQfatZSqw/RqIJMU7qzxxmrO0Cy4P7DPeco8GFiSQ9xad4yWseuY43MljCrxkeatJvVfPQHiZX5593gQLs4Iw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JK+RnqXIB1CTAaIT5UWkv7wn6GbTzpyLsGPRBIZVG5g=;
+ b=vNCvMQu1vdUQP/HrvXIaeso9I796wKHU1QXeLONz1VLYxAyZR8ElHCALpySYkQrrXQa+/whsHr1CZ/xIYHmqd1R47nQ8XnetJqD3XIHAl5fOt+IbPK2EVZVKvPFs8dPDGcNmk42t9DPwuTrWj+CCmr1e3sj+jNw+srD9xyWeSUg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SA0PR12MB4557.namprd12.prod.outlook.com (2603:10b6:806:9d::10)
+ by IA0PR12MB7505.namprd12.prod.outlook.com (2603:10b6:208:443::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.24; Fri, 27 Sep
+ 2024 18:11:12 +0000
+Received: from SA0PR12MB4557.namprd12.prod.outlook.com
+ ([fe80::d22d:666e:be69:117f]) by SA0PR12MB4557.namprd12.prod.outlook.com
+ ([fe80::d22d:666e:be69:117f%5]) with mapi id 15.20.8005.024; Fri, 27 Sep 2024
+ 18:11:12 +0000
+Message-ID: <23c04f34-eb70-e73a-7ec5-44a23f152d3b@amd.com>
+Date: Fri, 27 Sep 2024 13:11:08 -0500
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Reply-To: babu.moger@amd.com
+Subject: Re: [PATCH v7 00/24] x86/resctrl : Support AMD Assignable Bandwidth
+ Monitoring Counters (ABMC)
+Content-Language: en-US
+To: Reinette Chatre <reinette.chatre@intel.com>,
+ Babu Moger <babu.moger@amd.com>, corbet@lwn.net, fenghua.yu@intel.com,
+ tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+ dave.hansen@linux.intel.com
+Cc: x86@kernel.org, hpa@zytor.com, paulmck@kernel.org, rdunlap@infradead.org,
+ tj@kernel.org, peterz@infradead.org, yanjiewtw@gmail.com,
+ kim.phillips@amd.com, lukas.bulwahn@gmail.com, seanjc@google.com,
+ jmattson@google.com, leitao@debian.org, jpoimboe@kernel.org,
+ rick.p.edgecombe@intel.com, kirill.shutemov@linux.intel.com,
+ jithu.joseph@intel.com, kai.huang@intel.com, kan.liang@linux.intel.com,
+ daniel.sneddon@linux.intel.com, pbonzini@redhat.com, sandipan.das@amd.com,
+ ilpo.jarvinen@linux.intel.com, peternewman@google.com,
+ maciej.wieczor-retman@intel.com, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, eranian@google.com, james.morse@arm.com
+References: <cover.1725488488.git.babu.moger@amd.com>
+ <6a806972-568a-4959-811d-7a666901da66@intel.com>
+From: "Moger, Babu" <bmoger@amd.com>
+In-Reply-To: <6a806972-568a-4959-811d-7a666901da66@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SA9PR13CA0076.namprd13.prod.outlook.com
+ (2603:10b6:806:23::21) To SA0PR12MB4557.namprd12.prod.outlook.com
+ (2603:10b6:806:9d::10)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/25] KVM: VMX: Set intercept for FRED MSRs
-From: Xin Li <xin@zytor.com>
-To: Sean Christopherson <seanjc@google.com>
-Cc: Chao Gao <chao.gao@intel.com>, Xin Li <xin3.li@intel.com>,
-        linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        pbonzini@redhat.com, corbet@lwn.net, tglx@linutronix.de,
-        mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
-        x86@kernel.org, hpa@zytor.com, shuah@kernel.org, vkuznets@redhat.com,
-        peterz@infradead.org, ravi.v.shankar@intel.com
-References: <20240207172646.3981-1-xin3.li@intel.com>
- <20240207172646.3981-8-xin3.li@intel.com> <ZiJzFsoHR41Sd8lE@chao-email>
- <ZmoT0jaX_3Ww3Uzu@google.com>
- <feefa9d1-f266-414f-bb7b-b770ef0d8ec6@zytor.com>
- <ZuNJlzXntREQVb3n@google.com>
- <d65e62d2-ca64-4b29-8656-bb8411fe837d@zytor.com>
- <ZvQaNRhrsSJTYji3@google.com>
- <496a337d-a20d-4122-93a9-1520779c6d2d@zytor.com>
-Content-Language: en-US
-Autocrypt: addr=xin@zytor.com; keydata=
- xsDNBGUPz1cBDACS/9yOJGojBFPxFt0OfTWuMl0uSgpwk37uRrFPTTLw4BaxhlFL0bjs6q+0
- 2OfG34R+a0ZCuj5c9vggUMoOLdDyA7yPVAJU0OX6lqpg6z/kyQg3t4jvajG6aCgwSDx5Kzg5
- Rj3AXl8k2wb0jdqRB4RvaOPFiHNGgXCs5Pkux/qr0laeFIpzMKMootGa4kfURgPhRzUaM1vy
- bsMsL8vpJtGUmitrSqe5dVNBH00whLtPFM7IbzKURPUOkRRiusFAsw0a1ztCgoFczq6VfAVu
- raTye0L/VXwZd+aGi401V2tLsAHxxckRi9p3mc0jExPc60joK+aZPy6amwSCy5kAJ/AboYtY
- VmKIGKx1yx8POy6m+1lZ8C0q9b8eJ8kWPAR78PgT37FQWKYS1uAroG2wLdK7FiIEpPhCD+zH
- wlslo2ETbdKjrLIPNehQCOWrT32k8vFNEMLP5G/mmjfNj5sEf3IOKgMTMVl9AFjsINLHcxEQ
- 6T8nGbX/n3msP6A36FDfdSEAEQEAAc0WWGluIExpIDx4aW5Aenl0b3IuY29tPsLBDQQTAQgA
- NxYhBIUq/WFSDTiOvUIqv2u9DlcdrjdRBQJlD89XBQkFo5qAAhsDBAsJCAcFFQgJCgsFFgID
- AQAACgkQa70OVx2uN1HUpgv/cM2fsFCQodLArMTX5nt9yqAWgA5t1srri6EgS8W3F+3Kitge
- tYTBKu6j5BXuXaX3vyfCm+zajDJN77JHuYnpcKKr13VcZi1Swv6Jx1u0II8DOmoDYLb1Q2ZW
- v83W55fOWJ2g72x/UjVJBQ0sVjAngazU3ckc0TeNQlkcpSVGa/qBIHLfZraWtdrNAQT4A1fa
- sWGuJrChBFhtKbYXbUCu9AoYmmbQnsx2EWoJy3h7OjtfFapJbPZql+no5AJ3Mk9eE5oWyLH+
- QWqtOeJM7kKvn/dBudokFSNhDUw06e7EoVPSJyUIMbYtUO7g2+Atu44G/EPP0yV0J4lRO6EA
- wYRXff7+I1jIWEHpj5EFVYO6SmBg7zF2illHEW31JAPtdDLDHYcZDfS41caEKOQIPsdzQkaQ
- oW2hchcjcMPAfyhhRzUpVHLPxLCetP8vrVhTvnaZUo0xaVYb3+wjP+D5j/3+hwblu2agPsaE
- vgVbZ8Fx3TUxUPCAdr/p73DGg57oHjgezsDNBGUPz1gBDAD4Mg7hMFRQqlzotcNSxatlAQNL
- MadLfUTFz8wUUa21LPLrHBkUwm8RujehJrzcVbPYwPXIO0uyL/F///CogMNx7Iwo6by43KOy
- g89wVFhyy237EY76j1lVfLzcMYmjBoTH95fJC/lVb5Whxil6KjSN/R/y3jfG1dPXfwAuZ/4N
- cMoOslWkfZKJeEut5aZTRepKKF54T5r49H9F7OFLyxrC/uI9UDttWqMxcWyCkHh0v1Di8176
- jjYRNTrGEfYfGxSp+3jYL3PoNceIMkqM9haXjjGl0W1B4BidK1LVYBNov0rTEzyr0a1riUrp
- Qk+6z/LHxCM9lFFXnqH7KWeToTOPQebD2B/Ah5CZlft41i8L6LOF/LCuDBuYlu/fI2nuCc8d
- m4wwtkou1Y/kIwbEsE/6RQwRXUZhzO6llfoN96Fczr/RwvPIK5SVMixqWq4QGFAyK0m/1ap4
- bhIRrdCLVQcgU4glo17vqfEaRcTW5SgX+pGs4KIPPBE5J/ABD6pBnUUAEQEAAcLA/AQYAQgA
- JhYhBIUq/WFSDTiOvUIqv2u9DlcdrjdRBQJlD89ZBQkFo5qAAhsMAAoJEGu9DlcdrjdR4C0L
- /RcjolEjoZW8VsyxWtXazQPnaRvzZ4vhmGOsCPr2BPtMlSwDzTlri8BBG1/3t/DNK4JLuwEj
- OAIE3fkkm+UG4Kjud6aNeraDI52DRVCSx6xff3bjmJsJJMb12mWglN6LjdF6K+PE+OTJUh2F
- dOhslN5C2kgl0dvUuevwMgQF3IljLmi/6APKYJHjkJpu1E6luZec/lRbetHuNFtbh3xgFIJx
- 2RpgVDP4xB3f8r0I+y6ua+p7fgOjDLyoFjubRGed0Be45JJQEn7A3CSb6Xu7NYobnxfkwAGZ
- Q81a2XtvNS7Aj6NWVoOQB5KbM4yosO5+Me1V1SkX2jlnn26JPEvbV3KRFcwV5RnDxm4OQTSk
- PYbAkjBbm+tuJ/Sm+5Yp5T/BnKz21FoCS8uvTiziHj2H7Cuekn6F8EYhegONm+RVg3vikOpn
- gao85i4HwQTK9/D1wgJIQkdwWXVMZ6q/OALaBp82vQ2U9sjTyFXgDjglgh00VRAHP7u1Rcu4
- l75w1xInsg==
-In-Reply-To: <496a337d-a20d-4122-93a9-1520779c6d2d@zytor.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA0PR12MB4557:EE_|IA0PR12MB7505:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4f6ee57a-1e28-4a84-3e53-08dcdf1fc4e4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?bm1tSm1PdnRSSkgwU2Mwak0zeGxDK3M1QWx0ak1TWFh0K2pMQmRzM3hTbnoy?=
+ =?utf-8?B?cUgxWnJGOVpNdjQ5b0U5QWhjKzlqNjhGMHphTm1ielpwRWpBT1d4MTNkem5B?=
+ =?utf-8?B?TWFQY1JtOVhJc2NFMGQ2NkxwWDhyYjREelBMbDlZQVAxSkh3Z2FZdzltYlMv?=
+ =?utf-8?B?M3FQUVRZNzlyK1ZJZnlWeUlqaEtkbG4vb0RQU1NJMnNJQnFSOU5tZ2swSGtk?=
+ =?utf-8?B?WFhobTlldExEcVlSZmJCTHc4aUxBaGYyTWU4Sm9xN0lXNnM3Ny85V0s4d0l0?=
+ =?utf-8?B?UjFuZVlGQVo1ZG13RWlzTkljNDgybXhnZUFIWmRBWW5yc3NTd1FQQlBoYk53?=
+ =?utf-8?B?TWo1djNPKzlhWGZKeE1mZUpKaU5nUnk3bVROZDRuYmdQZEVyWFpIRk83b00r?=
+ =?utf-8?B?MVJybTNuQnNIeVlpditkT1NDWDUvNzR2Q0xKQitZamg0N0F6aWFXMlA1M2la?=
+ =?utf-8?B?MWpTbExnSmRRNlVHa0V1V1hKZFZPNTluVExsVUVkNENaV1poTExWdUJCUCtu?=
+ =?utf-8?B?VkVQcExqS1pqZDlYMXphWU9YeTdQRVJGSm5rTzM2S3VjT1hhUlFKNUE3ZDky?=
+ =?utf-8?B?Q3VXNUQ5SzNRL2JadUxWYkk1N01zRTUyUnFWZnM2YlhoSk5NS0h5UFJNL3BD?=
+ =?utf-8?B?QVNteTdIZGRUWFk4MFFQYjdSTmlUcHlRVDFUd1VQeTFncmo1djBpQzlKUHV6?=
+ =?utf-8?B?UDJ4ZVhKRnJOM3d2K25nbHFjWTNvQytQUTBVQmd4WUhXdVJRYUZ1QjV5TmNQ?=
+ =?utf-8?B?UW4zM0NGek5UeE5WUmdpWnkweTRManZtUUxLdXZIR0lFQ2dwa2QyOCtveUww?=
+ =?utf-8?B?NUFQY3l6aWFCVVdjeCtHWEhheFBVUHVDSXlRMXVmS29HY1ZyTnhaZUljOW50?=
+ =?utf-8?B?eGZVNWp6dWNXTnpPZGxMZWp0cmxiZjBWNCsvMjNhUFVnNzBPR3lDT0ZWcjV5?=
+ =?utf-8?B?VkZUczdNTTE1R045aHFia2tkUHJkdllONWtEQ0FQd1N3ZnZKN1JidnhKNlZW?=
+ =?utf-8?B?VjRNeW1RLzh2T0lCeWxwb1VSVVBZaXVTYVdKbHJyMThFR0tHQzFGa2N0S1Vv?=
+ =?utf-8?B?Qy9tTHV4M0FWSVBpM2NpNUhFT0V5V1AxR2o3V2ZQbjA1T2RVNUZsRnFyYkkx?=
+ =?utf-8?B?VW5XRWNRTE9qazVtbDByU05IZlZLMFlNQy9WTU1XbUFWdDhQS2RsZGFHbEhL?=
+ =?utf-8?B?djJiWDNOdUZpRmtqSmdYU05nZzlzYTZlSFRZZTVPSTgvZEdBMHd0Q1RvY25V?=
+ =?utf-8?B?K0c4RlE0dWU2dDJab2h6RTE3eW1UQW9LUXlWZlhHbzRiR2NxeXFlRG12NVBj?=
+ =?utf-8?B?NHVyUUdBMDhrck1QRk12d21qT3RsVFhzVlRVa1R1ankzeGQvSm9qZ3RySUhZ?=
+ =?utf-8?B?V3Z1RldrTVVwTjRxRVVzNVRVeUhCcUZybVBma3VlNStiSVpPcVQxdUZsQUlw?=
+ =?utf-8?B?OERGMTlabHh1b0txVTBUQ211RzF5QmQ3U1FEeUJ6UzJ2ZG9SSktpejBjMUFG?=
+ =?utf-8?B?ZXNtVjVCV2ZhclJVOUo4UnBYeE5zZnYzeFF1SWI3MHd6L2xxUlNYTEJiMTBN?=
+ =?utf-8?B?QUk1VGkwTmZQNDFhN3hETVZZWkFwd01PU2ZsMC83UjcwMVh6UktiaEhSZUNM?=
+ =?utf-8?B?aWNPMy9ZQmJTeFFFbmhNSzJHS285d09RSDlXUFRpQlpybGhCZ1hHRUhFN1c3?=
+ =?utf-8?B?THJ5YzdLb3lCaTB6T21UbDY4Nm1WNllNMFY3TVlJQ05iM2hZNTBJMTVucUhE?=
+ =?utf-8?B?RENUM2dyUDkrVUJ2Q0JuUDZoMUI5emZyUWtySHdBaC8xd20rdzlhU1JFNjBK?=
+ =?utf-8?B?NExkWGF2d3RVUkYwd3lhZz09?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR12MB4557.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?VDBxR3VTNnBMK0xSM1cwZFFPaHhVYUd0MHBhNFJzSFVHRWtjcUd1elhjYkxh?=
+ =?utf-8?B?Qitqa0RBUndoTExTK1RKd2YrZ0RyZHV5Y0hJMWRGYmJONkZad2ptQzdwSXJ1?=
+ =?utf-8?B?a3NOVUVVTXFoWlJHWUZkRHlHTTJNOUZvclZqWlFyUzYxM1ZUTC9yZGRoMlV5?=
+ =?utf-8?B?YzVOc3lvTGpoak1VMHRSZ21YOHRPdmJpNGRZdG03RytibGtSYU1ETFM3S0t3?=
+ =?utf-8?B?TEQrMGgzYklKMUJqd21TVEVadmtYdFB5V3hVb1FISWNNWmo2R3ZYZFRMK05u?=
+ =?utf-8?B?bWtwN2xCZFZyYUhFTE9hZGdHTi9KVkZ4dm50U1ZQaDkvTVJ1bmhkTVNzUVFS?=
+ =?utf-8?B?MUE0bnVLaWlUVjRpSlJHdDdUZTRwelRrZzVubHNIMVJYc1NvQVFJZjFuV0Mz?=
+ =?utf-8?B?U2NKNWZZdGVKTUdiNjBOeGt2aUJJQ01ZaW9mUlNGSmxVMFowdnUxSEY0UDFT?=
+ =?utf-8?B?L290MVNlbzFlc0V3SVRWYUFLem80Yzc0ZFExOWJFODFZTjNXNUkxYUhSRU92?=
+ =?utf-8?B?bUNHQ0V4cjlPTGQrUGRTQkgwMGhabHRkV052THhJTFhNd3pVaGRJdXg1UGl4?=
+ =?utf-8?B?LzlIMHIrK2lRSkY3RjVyeHo4UklwQnN0QmpvbnNYb1V4UTBjWHI0RVNIS0Vy?=
+ =?utf-8?B?RndxTHN3N05ldExSZC9BRWJXZXBlR2RiQTVVUFZPay9NendCQVlCUGJ4dUJ3?=
+ =?utf-8?B?eHRMTlRsZUFkVWIrMnZYelF5SmZCQ2dpZ1N1NTdtWHdTL0wrcmYwalk3YjZE?=
+ =?utf-8?B?LzA3VS9jU2N2V0RZWG1zaGdPZWs4SFRXK1BwS255TDd4NGR0MTNQQ2lIeHZP?=
+ =?utf-8?B?MVRhTWJQMFZDTXlPcmxPS3NFOVNOdzZNa0w2eFZPVmhNSDZYaldPRjJ2VnlJ?=
+ =?utf-8?B?ZExHOXpsVVZHbW93aGRmdlY5WHdvQ2FzYzdpTGErck5nZkZ2dG1JYjJvZnYz?=
+ =?utf-8?B?R21SWkJlV0lISzIrV29RdHR0S2dhajB3TkZsUnc4R1daZ01WeFdsa3hqa016?=
+ =?utf-8?B?VEtGYkdScWNwRVMxYkJvS3ZMUlF0YnV6aldyVXVUTCttbEtSbzRpaUtKVnRL?=
+ =?utf-8?B?T2R4aVdWQ1RmUlZPMTFGNVk0NzBYc2hELzI0QWprMWFCVE42d3AydUlIVXd6?=
+ =?utf-8?B?Y0dHQjcvZWJlYVgza0xOaWViZG1ud0pwUlBNOHlFUy9qRkxvKzlnajNQbGZ4?=
+ =?utf-8?B?YzhXdmZpK3FNc0l6MGRsbEpXek9BRVhJaUJ2MWpLdVFuU09qdCt0ZHdRSkx6?=
+ =?utf-8?B?UENaNlorcUZBVTVNUzZFN0d1YWl5cEdLVWxKNUFFUm9tQmZ6SjZHMFdpVCt2?=
+ =?utf-8?B?blJYYjM0aThXMXVaR2hscWVwRkV0Znh1UjY3aXlJdldCWnJmbkMvNnZGZU9T?=
+ =?utf-8?B?Ui9IMzZkeENlc3ZFOVc1OEZpb1ExRXQ5bmN3ZGxSWUlmamtYaXRrd20zbU03?=
+ =?utf-8?B?bHhUU2x4QXRCVFRqbG0zK081TG1UOVMrQjRNejMyaG1OTUVyWGNaT2hrdXI1?=
+ =?utf-8?B?L3dJd2JGYitmUGNlMUxqbi9zQkNwMEwwUEJpSEIrZmJUTDNpMVA4cDB0bmtl?=
+ =?utf-8?B?Z2QwdmpXaXZtK3ZINjVmczJsWEkxUlZ4d2loVllwRFdlMmNNSWYzcmEzNDVG?=
+ =?utf-8?B?SFdSTGdNMHMvYnRZYjBPTjloYXRyc0ZucXVWWHZPQlp1blRabHROMHFoeHRo?=
+ =?utf-8?B?RUl1ZFdvUUxoQnY4Z1dGdWtUcXRpbGR3QUhueFhZc2lSWXlRSGQvdHdkdXNG?=
+ =?utf-8?B?MUxlNDhROE4zSG9LbWVpT09HU0h3MzFrR05WMisxTlJlWGZiN3JvQmg4YXM5?=
+ =?utf-8?B?K0U2c0tEOWxZUTg2aXA3WnhOQWN3eW44Q1VHOXRMdUFqTDhiL3ptaC9XenUr?=
+ =?utf-8?B?dG91TGFiV2JQNjBHbGk4ejFINERkSkxHUXA2NVVFak5yN3BEOHc2aHVSTTVU?=
+ =?utf-8?B?OGswUDhLL2V2TC9sWWVJU1hRMlR0cFZGVDlzSzdzbnBGcFlURi9XQmQ5UDc5?=
+ =?utf-8?B?NlB6TUpoSXpBTDV0aDRVZVN2bE5Ncm5DdG1RTmNCRHIzUkU1bjN1S00zWmIx?=
+ =?utf-8?B?K2VydUt0aW5BQjkxUWozTzk4eVdLS3k3ZTcxUGltc3BxZTVvQlBhbk1iRCs2?=
+ =?utf-8?Q?7QzWf5Kgyt/AdVngyZaKu/4L+?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4f6ee57a-1e28-4a84-3e53-08dcdf1fc4e4
+X-MS-Exchange-CrossTenant-AuthSource: SA0PR12MB4557.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2024 18:11:12.2348
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kCNdjtK2lzB9E6GV6j5roHRKGDLMbbEaOk/em4JY2dhD0KYh4HL3R/TSxcEK298v
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7505
 
->>> When FRED is advertised to a guest, KVM should allow FRED SSP MSRs
->>> accesses through disabling FRED SSP MSRs interception no matter whether
->>> supervisor shadow stacks are enabled or not.
->>
->> KVM doesn't necessarily need to disabling MSR interception, e.g. if 
->> the expectation
->> is that the guest will rarely/never access the MSRs when CET is 
->> unsupported, then
->> we're likely better off going with a trap-and-emulate model.  KVM 
->> needs to emulate
->> RDMSR and WRMSR no matter what, e.g. in case the guest triggers a 
->> WRMSR when KVM
->> is emulating, and so that userspace can get/set MSR values.
->>
->> And this means that yes, FRED virtualization needs to land after CET 
->> virtualization,
->> otherwise managing the conflicts/dependencies will be a nightmare.
->>
+Hi Reinette,
 
-I still plan to send another iteration of the FRED patch set for review,
-however I haven't seen your x86 KVM changes land into Linus' tree, it
-will happen soon, right?
+On 9/19/2024 1:00 PM, Reinette Chatre wrote:
+> Hi Babu,
+> 
+> On 9/4/24 3:21 PM, Babu Moger wrote:
+>> # Linux Implementation
+>>
+>> Create a generic interface aimed to support user space assignment
+>> of scarce counters used for monitoring. First usage of interface
+>> is by ABMC with option to expand usage to "soft-ABMC" and MPAM
+>> counters in future.
+>>
+>> Feature adds following interface files:
+>>
+>> /sys/fs/resctrl/info/L3_MON/mbm_assign_mode: Reports the list of assignable
+>> monitoring features supported. The enclosed brackets indicate which
+>> feature is enabled.
+>>
+>> /sys/fs/resctrl/info/L3_MON/num_mbm_cntrs: Reports the number of monitoring
+>> counters available for assignment.
+>>
+>> /sys/fs/resctrl/info/L3_MON/mbm_assign_control: Reports the resctrl group and monitor
+>> status of each group. Assignment state can be updated by writing to the
+>> interface.
+> 
+> At this point I think the architecture is settling with the remaining work focusing
+> on polishing the code and making it more robust. To get confidence in this big addition
+> it will be valuable to hear from Peter and James to confirm if soft-ABMC and
+> MPAM can build on this.
+
+Agree. Peter/James, Please let me know if there are any concerns with 
+the interface.
 
 > 
-> No argument.
+>>
+>> # Examples
+>>
+>> a. Check if ABMC support is available
+>> 	#mount -t resctrl resctrl /sys/fs/resctrl/
+>>
+>> 	#cat /sys/fs/resctrl/info/L3_MON/mbm_assign_mode
+>> 	[mbm_cntr_assign]
+>> 	default
+>>
+>> 	ABMC feature is detected and it is enabled.
+>>
+>> b. Check how many ABMC counters are available.
+>>
+>> 	#cat /sys/fs/resctrl/info/L3_MON/num_mbm_cntrs
+>> 	32
+>>
+>> c. Create few resctrl groups.
+>>
+>> 	# mkdir /sys/fs/resctrl/mon_groups/child_default_mon_grp
+>> 	# mkdir /sys/fs/resctrl/non_default_ctrl_mon_grp
+>> 	# mkdir /sys/fs/resctrl/non_default_ctrl_mon_grp/mon_groups/child_non_default_mon_grp
+>>
+>>
+>> d. This series adds a new interface file /sys/fs/resctrl/info/L3_MON/mbm_assign_control
+>>     to list and modify the group's monitoring states. File provides single place
+> 
+> "modify the group's monitoring states" -> "modify any group's monitoring states"?
+
+Sure.
+
+> 
+>>     to list monitoring states of all the resctrl groups. It makes it easier for
+>>     user space to to learn about the used counters without needing to traverse
+> 
+> "to to learn" -> "to learn"
+
+Sure.
+
+> 
+> Reinette
+> 
+
+Thanks
+- Babu Moger
 
