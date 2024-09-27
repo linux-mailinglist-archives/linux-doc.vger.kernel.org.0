@@ -1,179 +1,137 @@
-Return-Path: <linux-doc+bounces-25860-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-25862-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77D2F987CBC
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Sep 2024 03:52:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FD9E987CE0
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Sep 2024 04:11:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EB8FFB209BE
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Sep 2024 01:52:56 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0CBD3B20D46
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Sep 2024 02:11:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3596F165F01;
-	Fri, 27 Sep 2024 01:52:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C548169AE4;
+	Fri, 27 Sep 2024 02:11:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nQ/KMT5o"
+	dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b="R3IQC8x6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com [209.85.219.49])
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F15614A60D;
-	Fri, 27 Sep 2024 01:52:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FD648467
+	for <linux-doc@vger.kernel.org>; Fri, 27 Sep 2024 02:11:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727401973; cv=none; b=KHcrLV1CxadFKnEZuSeOus4EHs8FTJNwwo6CVZH/xztEpUonpuoeYk6a4f4heCDlfKwoMzKJwCOFBnTxLwiYYnKJaBbPaAMAHWM2L5yA5Y4ibK87Df+AxEnkWoOpDB96nZ/zq9T8POCoZGJ0EH+Ch5ewrBTmDHJNS4H6H7ye3Rg=
+	t=1727403082; cv=none; b=moktD84GmIpxqAmBgEP9HgB8s5O1kYr6lYPsv74y9H/b1et6Vk/Bs0+ZzCha1C3cHeKVQL3vJqyyO4+Y7g43yMw5w5DW10nVooFlQCKIBJRf9oLa+SPsZu/HAjNr1YLv44eC0v5MvwWS9IizpVAMhl80yO2jatBcuHuz1pZ2MXY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727401973; c=relaxed/simple;
-	bh=xAnrZRaJyD7HBPI7XnenJ3MGc9tNIxZl2rrNgLUBi3g=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZyG5RHiDicUho7YivKIXLNLzqlwX4S3byO643urlzene4iDt3+6PhwwtN9nrI2q4tto4S6w49ipPx4gR9FDE4c6j1me1rcUHmCj9rBjIfT9BJL+wb8TrPdvEA9NlWKX3aiePWUTzdlR3YSKk/JDanESxunRRHZYxrTVrwUmAF+s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nQ/KMT5o; arc=none smtp.client-ip=209.85.219.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qv1-f49.google.com with SMTP id 6a1803df08f44-6cb2c5128d5so11175136d6.0;
-        Thu, 26 Sep 2024 18:52:51 -0700 (PDT)
+	s=arc-20240116; t=1727403082; c=relaxed/simple;
+	bh=z2u3XIUIO6fq3zsKBJpUIQZilOD/xOQQm7u9WYiUdWA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=UzmqZO7thNUj1CO2VAvhI0TzZ4tOD8ynDx8YV8ToG+refqj3KKNFVFO80uGxl7MLC8ID18Xrb+fslygFnAfz1cPRo9jLpR2NOISeaZ/NPYgA3JnLyBFslEm4xXNnJfd86Nd8kJ5JxcbuaSO1r5wL523f3eFUNhy/QfF//zxsMUo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com; spf=none smtp.mailfrom=daynix.com; dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b=R3IQC8x6; arc=none smtp.client-ip=209.85.215.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=daynix.com
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-7d50e7a3652so1060889a12.3
+        for <linux-doc@vger.kernel.org>; Thu, 26 Sep 2024 19:11:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727401970; x=1728006770; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=xAnrZRaJyD7HBPI7XnenJ3MGc9tNIxZl2rrNgLUBi3g=;
-        b=nQ/KMT5oaw578zvC8rNyPhWfeMoLYAlyEgU/9MacV7pOHnhDX0UmggCZAjAvx1ySUG
-         kCOHv1LokU/flAEjGMXzqTs7EM4vbQB/BegPm27NYJeLsiDdjQ5B+Oofp8raENoEqn7s
-         O5c1EQF0sY8ULqq0vjFnkbwW00yjT149kLE7ACCNusQCZXnde6tKHjI9QsDtQLvDvpZ0
-         TcDcyXfJJXK8k56uFXqHa1ha/EYsXlBwzUv7FMgsYUrZ4V1cxe7NbE84+MEc8AIqFiLE
-         eEcGHcwof7U0RF/Sr+cemjF4v3cKI66fBFoI5UyAAlHlywg73DYbqoCbr+vOdJ3iAINh
-         l7fA==
+        d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1727403080; x=1728007880; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=uf2tPCUdEA01GCYGd4noA0WD0ijkHEkhZlFEu8nmNFY=;
+        b=R3IQC8x6Bcu4TPK3yCuQKMEcOAruWM0FQDmDaOnAyXyNaU1iZVkTGtIJfZpD/JFTkF
+         gSZzR5nnZ2m+JXiSNYh8mnFSqOsvMctpT+4qV+uCeVc1DJEoeuVVaNQzqmQgZi/B5vco
+         9IjRUqU0iytNbdwo2awIXQjF5DMBWG+i1Tle8Q1T3K90SwjqBybFfNU7f+z3AJu9LwoW
+         MhWhh4ZXuygLFjzHpWlfFbKnsjazY11p5yc6/5SJdX9OQrmTlUOvUOAgovnck4km9WdJ
+         R+2yQonls0SBjqxWZJBI7a8Y9zRbRL0xzxaHS2/UJjbevJ2o6yUD7CJ/gh55QPg2975+
+         zYCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727401970; x=1728006770;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=xAnrZRaJyD7HBPI7XnenJ3MGc9tNIxZl2rrNgLUBi3g=;
-        b=vyDe5hwNbuqyS+LP6enNhTzpNeVDo2LHoZoOfSilV3LVSiomgmA1UpXSBiG1V5Fg+5
-         DPolIxy/FVeWCC9CJ853zFxph36bBJriGj/ZbXdCl2LSiXVjUY85wf4lzMt0Fbfi7X5u
-         UKiZKAKot6hqmApXLATvwZ3atCGCToSHRaC85W3EhlOy0NdC/vmcCSwDad5NSXttSNoN
-         HqrzkIjpHEFzR9jYX2q2as08xB6S2Gqh3kWp379e930fcL6T9q3eHZUJzDtmAWusRrTy
-         A0XKyKXfOC61Cl+pfA8Lip9oh7o22Tz4eEBEeImBzk2zZ47+4bGl7Hy2mitP36JSct4a
-         UuuQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVjGDxQLdTGh+RAhRlU/tiBPBVKJXIm5p2RxI6zGnM/EOwBrTcWlaD6KCmJCF22PF15p+Dd+g/Uipxu@vger.kernel.org, AJvYcCX6H6Xp+ZHivEE1R7gM8z/7t/62MPh+qyvglo7Vlo9Jr2Db1c57FkpnxrlTapP9b2/Qpd1w4ZIz@vger.kernel.org
-X-Gm-Message-State: AOJu0YzJdBq7cSBmqHau2Bb0c2if1MjBnWKQiQSCMqxXQAnHq2D+BU5/
-	OnrBiR59t7ZP72v1ZE3H4Hu9ylQEdYx+vXHnkM4KRL6NIRvqI22HLBCv+3lUtO8fLlEFTr4zpl6
-	znTDMozQx5OhsJ8GItlZR5bR9gng=
-X-Google-Smtp-Source: AGHT+IHCPKsx7efhs3k311WYqpjW68lnnDe97yjX9qnvjdLXn0K9KjZ7hrrKjK7KTeq6a5vgyQ5IgQgX4WMdpOgg9FQ=
-X-Received: by 2002:ad4:4450:0:b0:6cb:3ba3:8eab with SMTP id
- 6a1803df08f44-6cb3ba38f1amr20584326d6.31.1727401970400; Thu, 26 Sep 2024
- 18:52:50 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1727403080; x=1728007880;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=uf2tPCUdEA01GCYGd4noA0WD0ijkHEkhZlFEu8nmNFY=;
+        b=XUk4XIcrGq+f4crmJ9El5FxD69UUcEv1hcfDsBFijL5eDPtSyNxNc/kP5Wwb8ueIiI
+         76T+Qlqkizn7lq3NfKZWj486aBE/XkVImaDZeuY+fF+33jtC95Otuq+cobYMrJWkMppD
+         oZkTdbkhFESPLXKP7OZxIQ4m7ZzIF2BLlSwAn9C31zWrsHuJlbFKtEm7Yiobc9nSOWcu
+         oWCnDXFsU1lf0rAV7TZPs7nc5vANH2ttbrXgsjA6RklxUvIFcSMn86ZOXLrsBGSWKFw0
+         e5cADn3lBcgIU2HsfjIBsPCW5xE7o6Jv5th9e97L4iaINULx3FlHj9KfxWwI5qdqes/v
+         guHA==
+X-Forwarded-Encrypted: i=1; AJvYcCW1loi7nN0y0mx8taVXJkKgRn6TvJikvLf6ebzjD7oqX9JNtNy27DM9ZGnFpscKsbngWNn0i7VzrhQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx6qqlRU1cywKFLmstRRaAG1rZaQYdc0KqRpvfAhwunlOiOvdJu
+	E51bEAT1FrOapVvu/SCa5UFcCN7hH40Xk3OW++OjNrbPfoJKX1K0FwcF91jajFk=
+X-Google-Smtp-Source: AGHT+IE7cjRrb25dzMXmo+VfgnfSpwEWOl/UW7HQEnq4EHsE9dGMvjEK+lxgfFogzB4DCdWpnrgmFQ==
+X-Received: by 2002:a05:6a20:4ca6:b0:1d4:fcfe:e1ee with SMTP id adf61e73a8af0-1d4fcfeee5fmr1089565637.9.1727403080438;
+        Thu, 26 Sep 2024 19:11:20 -0700 (PDT)
+Received: from [157.82.207.107] ([157.82.207.107])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-71b264bc1a3sm559085b3a.75.2024.09.26.19.11.16
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 26 Sep 2024 19:11:19 -0700 (PDT)
+Message-ID: <c3bc8d58-1f0e-4633-bb01-d646fcd03f54@daynix.com>
+Date: Fri, 27 Sep 2024 11:11:15 +0900
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240926225531.700742-1-intelfx@intelfx.name> <CAKEwX=MmCKrOkvDO5Yc_M8EB+k5U9AZ3boEiu4u2HUb7p0z+Kw@mail.gmail.com>
- <dba9d7d9542d4f3d979a89f88253418c1d8a9775.camel@intelfx.name>
-In-Reply-To: <dba9d7d9542d4f3d979a89f88253418c1d8a9775.camel@intelfx.name>
-From: Nhat Pham <nphamcs@gmail.com>
-Date: Thu, 26 Sep 2024 18:52:39 -0700
-Message-ID: <CAKEwX=N3m3cTkyh3ebA+79_oOEe4QMDbU2BxjEJCgfRanX9g9Q@mail.gmail.com>
-Subject: Re: [PATCH] zswap: improve memory.zswap.writeback inheritance
-To: Ivan Shapovalov <intelfx@intelfx.name>
-Cc: linux-kernel@vger.kernel.org, Mike Yuan <me@yhndnzj.com>, Tejun Heo <tj@kernel.org>, 
-	Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, 
-	=?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Yosry Ahmed <yosryahmed@google.com>, 
-	Chengming Zhou <chengming.zhou@linux.dev>, Michal Hocko <mhocko@kernel.org>, 
-	Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, 
-	Chris Li <chrisl@kernel.org>, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-mm@kvack.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC v4 0/9] tun: Introduce virtio-net hashing feature
+To: Jason Wang <jasowang@redhat.com>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Xuan Zhuo
+ <xuanzhuo@linux.alibaba.com>, Shuah Khan <shuah@kernel.org>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ netdev@vger.kernel.org, kvm@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-kselftest@vger.kernel.org,
+ Yuri Benditovich <yuri.benditovich@daynix.com>,
+ Andrew Melnychenko <andrew@daynix.com>,
+ Stephen Hemminger <stephen@networkplumber.org>, gur.stavi@huawei.com
+References: <20240924-rss-v4-0-84e932ec0e6c@daynix.com>
+ <CACGkMEvMuBe5=wQxZMns4R-oJtVOWGhKM3sXy8U6wSQX7c=iWQ@mail.gmail.com>
+Content-Language: en-US
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <CACGkMEvMuBe5=wQxZMns4R-oJtVOWGhKM3sXy8U6wSQX7c=iWQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Sep 26, 2024 at 4:40=E2=80=AFPM Ivan Shapovalov <intelfx@intelfx.na=
-me> wrote:
->
-> On 2024-09-26 at 16:12 -0700, Nhat Pham wrote:
-> > On Thu, Sep 26, 2024 at 3:55=E2=80=AFPM Ivan Shapovalov <intelfx@intelf=
-x.name> wrote:
-> > >
-> > > Improve the inheritance behavior of the `memory.zswap.writeback` cgro=
-up
-> > > attribute introduced during the 6.11 cycle. Specifically, in 6.11 we
-> > > walk the parent cgroups until we find a _disabled_ writeback, which d=
-oes
-> > > not allow the user to selectively enable zswap writeback while having=
- it
-> > > disabled by default.
-> >
-> > Is there an actual need for this? This is a theoretical use case I
-> > thought of (and raised), but I don't think anybody actually wants
-> > this...?
->
-> This is of course anecdata, but yes, it does solve a real use-case that
-> I'm having right now, as well as a bunch of my colleagues who recently
-> complained to me (in private) about pretty much the same use-case.
->
-> The use-case is following: it turns out that it could be beneficial for
-> desktop systems to run with a pretty high swappiness and zswap
-> writeback globally disabled, to nudge the system to compress cold pages
-> but not actually write them back to the disk (which would happen pretty
-> aggressively if it was not disabled) to reduce I/O and latencies.
-> However, under this setup it is sometimes needed to re-enable zswap
-> writeback for specific memory-heavy applications that allocate a lot of
-> cold pages, to "allow" the kernel to actually swap those programs out.
+On 2024/09/25 12:30, Jason Wang wrote:
+> On Tue, Sep 24, 2024 at 5:01 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
+>>
+>> virtio-net have two usage of hashes: one is RSS and another is hash
+>> reporting. Conventionally the hash calculation was done by the VMM.
+>> However, computing the hash after the queue was chosen defeats the
+>> purpose of RSS.
+>>
+>> Another approach is to use eBPF steering program. This approach has
+>> another downside: it cannot report the calculated hash due to the
+>> restrictive nature of eBPF.
+>>
+>> Introduce the code to compute hashes to the kernel in order to overcome
+>> thse challenges.
+>>
+>> An alternative solution is to extend the eBPF steering program so that it
+>> will be able to report to the userspace, but it is based on context
+>> rewrites, which is in feature freeze. We can adopt kfuncs, but they will
+>> not be UAPIs. We opt to ioctl to align with other relevant UAPIs (KVM
+>> and vhost_net).
+>>
+> 
+> I wonder if we could clone the skb and reuse some to store the hash,
+> then the steering eBPF program can access these fields without
+> introducing full RSS in the kernel?
 
-Out of pure curiosity (and to make sure I fully grasp the problem at
-hand), is this the capacity-based zswap writeback (i.e the one
-triggered by limits), or the memory pressure based dynamic shrinker?
+I don't get how cloning the skb can solve the issue.
 
-If you disable the latter and only rely on the former, it should not
-"write pages aggressively". Limits are rarely reached (IIUC, zswap.max
-are frequently used as binary knobs, and global limits are hard to
-reach), so usually pages that are going to disk swap are just pages
-zswap reject (i.e mostly just pages that fail to compress). This
-should be a very small category. You will still see "swap" usage due
-to a quirk in zswap architecture (which I'm working to fix), but there
-should rarely be any IOs. So the setup itself is not super necessary.
+We can certainly implement Toeplitz function in the kernel or even with 
+tc-bpf to store a hash value that can be used for eBPF steering program 
+and virtio hash reporting. However we don't have a means of storing a 
+hash type, which is specific to virtio hash reporting and lacks a 
+corresponding skb field.
 
-If it's the latter then yeah I can kinda see the need for the setup.
-
->
-> >
-> > Besides, most people who want this can just:
-> >
-> > 1. Enable zswap writeback on root cgroup (and all non-leaf cgroups).
-> >
-> > 2. Disable zswap writeback on leaf cgroups on creation by default.
-> >
-> > 3. Selectively enable zswap writeback for the leaf cgroups.
-> >
-> > All of this is quite doable in userspace. It's not even _that_ racy -
-> > just do this before adding tasks etc. to the cgroup?
->
-> Well, yes, it is technically doable from userspace, just like it was
-> technically doable prior to commit e39925734909 to have userspace
-> explicitly control the entire hierarchy of writeback settings.
-> However it _is_ pretty painful, and the flow you described would
-> essentially negate any benefits of that patch (it would require
-> userspace to, once again, manage the entire hierarchy explicitly
-> without any help from the kernel).
-
-I think it's a tad different. In the case of the commit e39925734909,
-the hierarchical behavior of zswap.writeback knob is quite
-semantically confusing, almost counter-intuitive (and does not conform
-to the convention of other cgroup knobs, which use the most
-restrictive limit - check out zswap.max limit checking for example).
-That commit arguably fixes it for the "common" case (i.e you want the
-hierarchical enforcement to hold for the most part). That's why there
-were even conversations about cc-ing the stable mailing list for
-backporting it to older kernels.
-
-This is more of a "new use case" patch. It complicates the API, for
-something readily doable in userspace - the kernel does not do
-anything that userspace cannot achieve. So it should undergo stricter
-scrutiny. :)
-
-Anyway, Yosry, Johannes, how do you feel about this?
+Regards,
+Akihiko Odaki
 
