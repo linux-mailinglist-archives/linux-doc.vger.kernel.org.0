@@ -1,196 +1,177 @@
-Return-Path: <linux-doc+bounces-26042-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-26051-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA37E98B312
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Oct 2024 06:36:41 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BCF698B33E
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Oct 2024 07:02:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 911D11F242E4
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Oct 2024 04:36:41 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 25518283F8A
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Oct 2024 05:02:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5953A1B86C3;
-	Tue,  1 Oct 2024 04:36:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DB6C01BC9FC;
+	Tue,  1 Oct 2024 05:02:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="WH9cmggB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B711E1B86C0;
-	Tue,  1 Oct 2024 04:36:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80788191F8D;
+	Tue,  1 Oct 2024 05:02:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727757385; cv=none; b=kOGqzElOFSof1JgqDS96mmpIjFGw6ktUQR3O7dsQLMSUtDVMJ2SAZn9kKtzNjr3jkz3dT4MLcVh3JH6dJPOb+E/7ztTdfm9szB81La1RivzbmYUcuYn0MgMWJHAvy/z4ah+0Ma2UXbGWW2hZUc6fgGyvqzATAiH79Fca9XIX07Y=
+	t=1727758938; cv=none; b=OX1tacmnlnnIoz2VyJfv+LgI8jWjAVHjky+eX0op2OgkLKnua+nigERPPnehvUYAgO/yukQfWhY76vHQrxNZEB73wnSqCfAEVmLVrdB05x/SImusjAwj7SnCWUooj8Uv4aQ2B7x4lP+xdkhpUChnopUvvQDKdNhHn/rXpiML7CY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727757385; c=relaxed/simple;
-	bh=jNMnAtlVBE7KJ3eRs67wCvFiwM5szzlTZ+ig/4QzQx8=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=bJ5lzCwcP4BsSmIpHMJnNcGf1ohlMSvayOMbyvEylUu5WuTjII8hBFvd4G46vn6ikHml2MKz3rYb8+k3Ni5EaF0/MalzK5hi8TPzXH/botnvVzv6QhgGbJI+v2Z7p5BVlQKxCDxNV1i9iCXmIYCr9Fvu4CQq1wahSlyoJ41nlG4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D37E2339;
-	Mon, 30 Sep 2024 21:36:51 -0700 (PDT)
-Received: from a077893.blr.arm.com (a077893.blr.arm.com [10.162.16.61])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 2A5463F58B;
-	Mon, 30 Sep 2024 21:36:17 -0700 (PDT)
-From: Anshuman Khandual <anshuman.khandual@arm.com>
-To: linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org
-Cc: Anshuman Khandual <anshuman.khandual@arm.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Marc Zyngier <maz@kernel.org>,
-	Oliver Upton <oliver.upton@linux.dev>,
-	James Morse <james.morse@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	Mark Brown <broonie@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	kvmarm@lists.linux.dev,
-	linux-doc@vger.kernel.org
-Subject: [PATCH 2/3] arm64/boot: Enable EL2 requirements for FEAT_Debugv8p9
-Date: Tue,  1 Oct 2024 10:06:01 +0530
-Message-Id: <20241001043602.1116991-3-anshuman.khandual@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241001043602.1116991-1-anshuman.khandual@arm.com>
-References: <20241001043602.1116991-1-anshuman.khandual@arm.com>
+	s=arc-20240116; t=1727758938; c=relaxed/simple;
+	bh=U7EmXCkYhk+0D2z/ABSBBVPD3dz44DJtR3mhNRJtEpU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=gDyjgNPelG6503HcU3Hf+uFvAbRg2TRjI633gjzUNfhVVOGRx4PezdGmm4KGWKpzSZm9BA3HzHl+NbhfjZmbG1blf05jYg2LDJMqtI8gK1QBm5wwu7UIusZqFUp+1xmPFO2a7R8oBBQHLUbl0B4rBLJ6nd2NThYZerRjm2Ksj8Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=WH9cmggB; arc=none smtp.client-ip=198.137.202.136
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
+Received: from terminus.zytor.com (terminus.zytor.com [IPv6:2607:7c80:54:3:0:0:0:136])
+	(authenticated bits=0)
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 49151A7P3643828
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+	Mon, 30 Sep 2024 22:01:15 -0700
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 49151A7P3643828
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2024091601; t=1727758876;
+	bh=ySJL6936WxkCzK3GYA0yow9swO+GvxRvS+6BpZdApcM=;
+	h=From:To:Cc:Subject:Date:From;
+	b=WH9cmggBQZBWV0QFzUo3SfhUErsHuiV0Q68lhSeG9pqKeRUAkB7fg75Rhp8zLFGHE
+	 fmeAVNR8YSnO0LRYEvBEAqGU+8clWZEcI8YGA7AJrF2gYjJU3yT5RYnavgcGn+FzLX
+	 GcisfceOd2DAm4SKVtSoazMkOkBZqMFa7v8vCKI7H0F5lEosytgJ+fu9AkHC1xFgLS
+	 V9xphBxYQxxOvnnoLOg+NFsOKT/5gWUKG0meBCBOrAALdbQU4KEql3PQUY6Z6iiF6d
+	 ftCcQXBpVUX6bO8cJfV8AzouxREy6PWg9tEQjN2RZeKVW/V8kmUdrGziQ/dVYT+uDI
+	 7S/gIWSgahS0w==
+From: "Xin Li (Intel)" <xin@zytor.com>
+To: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Cc: seanjc@google.com, pbonzini@redhat.com, corbet@lwn.net, tglx@linutronix.de,
+        mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
+        x86@kernel.org, hpa@zytor.com, luto@kernel.org, peterz@infradead.org,
+        andrew.cooper3@citrix.com, xin@zytor.com
+Subject: [PATCH v3 00/27] Enable FRED with KVM VMX
+Date: Mon, 30 Sep 2024 22:00:43 -0700
+Message-ID: <20241001050110.3643764-1-xin@zytor.com>
+X-Mailer: git-send-email 2.46.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Fine grained trap control for MDSELR_EL1 register needs to be configured in
-HDFGRTR2_EL2, and HDFGWTR2_EL2 registers when kernel enters at EL1, but EL2
-is also present. This adds a new helper __init_el2_fgt2() initializing this
-new FEAT_FGT2 based fine grained registers.
+This patch set enables the Intel flexible return and event delivery
+(FRED) architecture with KVM VMX to allow guests to utilize FRED.
 
-MDCR_EL2.EBWE needs to be enabled for additional (beyond 16) breakpoint and
-watchpoint exceptions when kernel enters at EL1, but EL2 is also present.
-This updates __init_el2_debug() as required for FEAT_Debugv8p9.
+The FRED architecture defines simple new transitions that change
+privilege level (ring transitions). The FRED architecture was
+designed with the following goals:
 
-While here, also update booting.rst with MDCR_EL3 and SCR_EL3 requirements.
+1) Improve overall performance and response time by replacing event
+   delivery through the interrupt descriptor table (IDT event
+   delivery) and event return by the IRET instruction with lower
+   latency transitions.
 
-Cc: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Will Deacon <will@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Marc Zyngier <maz@kernel.org>
-Cc: Oliver Upton <oliver.upton@linux.dev>
-Cc: linux-arm-kernel@lists.infradead.org
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: kvmarm@lists.linux.dev
-Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
----
- Documentation/arch/arm64/booting.rst | 19 +++++++++++++++++++
- arch/arm64/include/asm/el2_setup.h   | 27 +++++++++++++++++++++++++++
- arch/arm64/include/asm/kvm_arm.h     |  1 +
- 3 files changed, 47 insertions(+)
+2) Improve software robustness by ensuring that event delivery
+   establishes the full supervisor context and that event return
+   establishes the full user context.
 
-diff --git a/Documentation/arch/arm64/booting.rst b/Documentation/arch/arm64/booting.rst
-index b57776a68f15..e69d972018cf 100644
---- a/Documentation/arch/arm64/booting.rst
-+++ b/Documentation/arch/arm64/booting.rst
-@@ -285,6 +285,12 @@ Before jumping into the kernel, the following conditions must be met:
- 
-     - SCR_EL3.FGTEn (bit 27) must be initialised to 0b1.
- 
-+  For CPUs with the Fine Grained Traps (FEAT_FGT2) extension present:
-+
-+  - If EL3 is present and the kernel is entered at EL2:
-+
-+    - SCR_EL3.FGTEn2 (bit 59) must be initialised to 0b1.
-+
-   For CPUs with support for HCRX_EL2 (FEAT_HCX) present:
- 
-   - If EL3 is present and the kernel is entered at EL2:
-@@ -319,6 +325,19 @@ Before jumping into the kernel, the following conditions must be met:
-     - ZCR_EL2.LEN must be initialised to the same value for all CPUs the
-       kernel will execute on.
- 
-+  For CPUs with FEAT_Debugv8p9 extension present:
-+
-+  - If the kernel is entered at EL1 and EL2 is present:
-+
-+    - HDFGRTR2_EL2.nMDSELR_EL1 (bit 5) must be initialized to 0b1
-+    - HDFGWTR2_EL2.nMDSELR_EL1 (bit 5) must be initialized to 0b1
-+    - MDCR_EL2.EBWE (bit 43) must be initialized to 0b1
-+
-+  - If EL3 is present:
-+
-+    - MDCR_EL3.TDA (bit 9) must be initialized to 0b0
-+    - MDCR_EL3.EBWE (bit 43) must be initialized to 0b1
-+
-   For CPUs with the Scalable Matrix Extension (FEAT_SME):
- 
-   - If EL3 is present:
-diff --git a/arch/arm64/include/asm/el2_setup.h b/arch/arm64/include/asm/el2_setup.h
-index e0ffdf13a18b..2e6a8de5e4e4 100644
---- a/arch/arm64/include/asm/el2_setup.h
-+++ b/arch/arm64/include/asm/el2_setup.h
-@@ -97,6 +97,14 @@
- 						// to own it.
- 
- .Lskip_trace_\@:
-+	mrs	x1, id_aa64dfr0_el1
-+	ubfx	x1, x1, #ID_AA64DFR0_EL1_DebugVer_SHIFT, #4
-+	cmp	x1, #ID_AA64DFR0_EL1_DebugVer_V8P9
-+	b.lt	.Lskip_dbg_v8p9_\@
-+
-+	mov	x0, #MDCR_EL2_EBWE
-+	orr	x2, x2, x0
-+.Lskip_dbg_v8p9_\@:
- 	msr	mdcr_el2, x2			// Configure debug traps
- .endm
- 
-@@ -215,6 +223,24 @@
- .Lskip_fgt_\@:
- .endm
- 
-+.macro __init_el2_fgt2
-+	mrs	x1, id_aa64mmfr0_el1
-+	ubfx	x1, x1, #ID_AA64MMFR0_EL1_FGT_SHIFT, #4
-+	cmp	x1, #ID_AA64MMFR0_EL1_FGT_FGT2
-+	b.lt	.Lskip_fgt2_\@
-+
-+	mrs	x1, id_aa64dfr0_el1
-+	ubfx	x1, x1, #ID_AA64DFR0_EL1_DebugVer_SHIFT, #4
-+	cmp	x1, #ID_AA64DFR0_EL1_DebugVer_V8P9
-+	b.lt	.Lskip_dbg_v8p9_\@
-+
-+	mov_q   x0, HDFGWTR2_EL2_nMDSELR_EL1
-+	msr_s	SYS_HDFGWTR2_EL2, x0
-+	msr_s	SYS_HDFGRTR2_EL2, x0
-+.Lskip_dbg_v8p9_\@:
-+.Lskip_fgt2_\@:
-+.endm
-+
- .macro __init_el2_nvhe_prepare_eret
- 	mov	x0, #INIT_PSTATE_EL1
- 	msr	spsr_el2, x0
-@@ -240,6 +266,7 @@
- 	__init_el2_nvhe_idregs
- 	__init_el2_cptr
- 	__init_el2_fgt
-+	__init_el2_fgt2
- .endm
- 
- #ifndef __KVM_NVHE_HYPERVISOR__
-diff --git a/arch/arm64/include/asm/kvm_arm.h b/arch/arm64/include/asm/kvm_arm.h
-index 850fac9a7840..18aeec43efc2 100644
---- a/arch/arm64/include/asm/kvm_arm.h
-+++ b/arch/arm64/include/asm/kvm_arm.h
-@@ -312,6 +312,7 @@
- 				 GENMASK(15, 0))
- 
- /* Hyp Debug Configuration Register bits */
-+#define MDCR_EL2_EBWE		(UL(1) << 43)
- #define MDCR_EL2_E2TB_MASK	(UL(0x3))
- #define MDCR_EL2_E2TB_SHIFT	(UL(24))
- #define MDCR_EL2_HPMFZS		(UL(1) << 36)
+The new transitions defined by the FRED architecture are FRED event
+delivery and, for returning from events, two FRED return instructions.
+FRED event delivery can effect a transition from ring 3 to ring 0, but
+it is used also to deliver events incident to ring 0. One FRED
+instruction (ERETU) effects a return from ring 0 to ring 3, while the
+other (ERETS) returns while remaining in ring 0. Collectively, FRED
+event delivery and the FRED return instructions are FRED transitions.
+
+Intel VMX architecture is extended to run FRED guests, and the major
+changes are:
+
+1) New VMCS fields for FRED context management, which includes two new
+event data VMCS fields, eight new guest FRED context VMCS fields and
+eight new host FRED context VMCS fields.
+
+2) VMX nested-exception support for proper virtualization of stack
+levels introduced with FRED architecture.
+
+Search for the latest FRED spec in most search engines with this search
+pattern:
+
+  site:intel.com FRED (flexible return and event delivery) specification
+
+The first 20 patches add FRED support to VMX, and the rest 7 patches
+add FRED support to nested VMX.
+
+
+Following is the link to the v2 of this patch set:
+https://lore.kernel.org/kvm/20240207172646.3981-1-xin3.li@intel.com/
+
+Sean Christopherson (3):
+  KVM: x86: Use a dedicated flow for queueing re-injected exceptions
+  KVM: VMX: Don't modify guest XFD_ERR if CR0.TS=1
+  KVM: VMX: Pass XFD_ERR as pseudo-payload when injecting #NM
+
+Xin Li (21):
+  KVM: VMX: Add support for the secondary VM exit controls
+  KVM: VMX: Initialize FRED VM entry/exit controls in vmcs_config
+  KVM: VMX: Disable FRED if FRED consistency checks fail
+  KVM: VMX: Initialize VMCS FRED fields
+  KVM: x86: Use KVM-governed feature framework to track "FRED enabled"
+  KVM: VMX: Set FRED MSR interception
+  KVM: VMX: Save/restore guest FRED RSP0
+  KVM: VMX: Add support for FRED context save/restore
+  KVM: x86: Add a helper to detect if FRED is enabled for a vCPU
+  KVM: VMX: Virtualize FRED event_data
+  KVM: VMX: Virtualize FRED nested exception tracking
+  KVM: x86: Mark CR4.FRED as not reserved when guest can use FRED
+  KVM: VMX: Dump FRED context in dump_vmcs()
+  KVM: x86: Allow FRED/LKGS to be advertised to guests
+  KVM: x86: Allow WRMSRNS to be advertised to guests
+  KVM: VMX: Invoke vmx_set_cpu_caps() before nested setup
+  KVM: nVMX: Add support for the secondary VM exit controls
+  KVM: nVMX: Add a prerequisite to SHADOW_FIELD_R[OW] macros
+  KVM: nVMX: Add FRED VMCS fields
+  KVM: nVMX: Add VMCS FRED states checking
+  KVM: nVMX: Allow VMX FRED controls
+
+Xin Li (Intel) (3):
+  x86/cea: Export per CPU variable cea_exception_stacks
+  KVM: VMX: Do not use MAX_POSSIBLE_PASSTHROUGH_MSRS in array definition
+  KVM: nVMX: Add a prerequisite to existence of VMCS fields
+
+ Documentation/virt/kvm/x86/nested-vmx.rst |  19 ++
+ arch/x86/include/asm/kvm_host.h           |   9 +-
+ arch/x86/include/asm/msr-index.h          |   1 +
+ arch/x86/include/asm/vmx.h                |  32 ++-
+ arch/x86/kvm/cpuid.c                      |   4 +-
+ arch/x86/kvm/governed_features.h          |   1 +
+ arch/x86/kvm/kvm_cache_regs.h             |  15 ++
+ arch/x86/kvm/svm/svm.c                    |  15 +-
+ arch/x86/kvm/vmx/capabilities.h           |  17 +-
+ arch/x86/kvm/vmx/nested.c                 | 291 ++++++++++++++++----
+ arch/x86/kvm/vmx/nested.h                 |   8 +
+ arch/x86/kvm/vmx/nested_vmcs_fields.h     |  25 ++
+ arch/x86/kvm/vmx/vmcs.h                   |   1 +
+ arch/x86/kvm/vmx/vmcs12.c                 |  19 ++
+ arch/x86/kvm/vmx/vmcs12.h                 |  38 +++
+ arch/x86/kvm/vmx/vmcs_shadow_fields.h     |  37 ++-
+ arch/x86/kvm/vmx/vmx.c                    | 308 +++++++++++++++++++---
+ arch/x86/kvm/vmx/vmx.h                    |  15 +-
+ arch/x86/kvm/x86.c                        | 140 ++++++----
+ arch/x86/kvm/x86.h                        |   8 +-
+ arch/x86/mm/cpu_entry_area.c              |   1 +
+ 21 files changed, 846 insertions(+), 158 deletions(-)
+ create mode 100644 arch/x86/kvm/vmx/nested_vmcs_fields.h
+
+
+base-commit: 9852d85ec9d492ebef56dc5f229416c925758edc
 -- 
-2.25.1
+2.46.2
 
 
