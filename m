@@ -1,92 +1,107 @@
-Return-Path: <linux-doc+bounces-26352-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-26356-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B6E298E5D3
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2024 00:10:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25D8998E5DE
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2024 00:13:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A040DB22E20
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Oct 2024 22:10:06 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 996ABB22ED6
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Oct 2024 22:13:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 409AB19993E;
-	Wed,  2 Oct 2024 22:09:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F1F91991BB;
+	Wed,  2 Oct 2024 22:13:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b="KE1N9Hho"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PK2c/sZ7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-io1-f100.google.com (mail-io1-f100.google.com [209.85.166.100])
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5741B1991B0
-	for <linux-doc@vger.kernel.org>; Wed,  2 Oct 2024 22:09:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.100
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5758F2F22;
+	Wed,  2 Oct 2024 22:13:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727906996; cv=none; b=aR+SIKF9m0FX8NvlSR3PsWzV4Di69DJJYKuo39cpm+qaqeo7JSOWIl4lz0k+sYempnSkJHyfaRByRfJXyXnldSCXCcWw2JTXVkzBOFLCdMnvd9ij2t/2PhY+NEfESNkwJhEXcLifOOxBUryTnDPvJ0dZImpl2MmXk3yMsqyVW+A=
+	t=1727907225; cv=none; b=Q9mL19TMlH7X4dL6uRv03TfLCCcvSmLz3ii29+65xCuz825p8by/c55hn8qt4cZ+2HqgiiVVoRFYjcUN0O+2zmckry+7TGD2GswjFKV1mDAyc3uknhCNSQbU9kxm5sHqKBxLidNiD3zdaGSsALYgUTaJMK+vxh6kUYRiGiI74+8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727906996; c=relaxed/simple;
-	bh=TJenoRWV5iiSMiVOxQG4wyi5AwZ8LKNj3o2D831+6/w=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=oM8GenOB3fy5JCIUAMkanOVCcPsEbIrTmJ3dlUulunPBOXd0LxVHA50L7l9FZEiASXamP8k/y3B9FD2CjuJbkNZlPBIAB2flQWReCRakOKZ+QBQIYaFnxNr2bW4bsAQ/LlUUkJKPnOzTceNrep3d2nttxUX15IGty1Cr59Q7Z4M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com; spf=fail smtp.mailfrom=purestorage.com; dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b=KE1N9Hho; arc=none smtp.client-ip=209.85.166.100
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=purestorage.com
-Received: by mail-io1-f100.google.com with SMTP id ca18e2360f4ac-82ce603d8daso12967339f.0
-        for <linux-doc@vger.kernel.org>; Wed, 02 Oct 2024 15:09:54 -0700 (PDT)
+	s=arc-20240116; t=1727907225; c=relaxed/simple;
+	bh=/vSxzzdnxtM0HOi6z5vD6IUAh4pVhAXIgMFytU3+dMM=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version; b=bH58qCid/0rYQlWynzXdjcRly9Ug6eDNHDXl43u6gqgrOBCSVH7wLV7bXSRka1bwMKt+8zxqLH1ofHBDFm5Z1KKsU6z2gdfHPb55LQl9XHaRQPET5ZBa+eNIW/H4TvlJ65XvHG228H8HbRg4XiYHnz+m+wEftCvbCUuIyXbHQXw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PK2c/sZ7; arc=none smtp.client-ip=209.85.128.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-42cb6f3a5bcso2798215e9.2;
+        Wed, 02 Oct 2024 15:13:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=purestorage.com; s=google2022; t=1727906993; x=1728511793; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JvBX01KOMTIf/+HpfXBZ3dslZpJTYSb0gO68n0vITBY=;
-        b=KE1N9Hhofadaf+dhb9BjtLDtFM8vigCalvipXAfkKM6GJ8i+0PImvCitLy1kDg3uD5
-         hUt+0Lp0r3Y6sVLoET0H98qydWUruoqSOY4CNBkbCN/AjL0/bljuvsFWvRCgRRbBHjPc
-         3joqz73YZhxNxMkIDB6rJo+bjLhq2hbs3SiiLi3uYDrrDCCK8CaaH1DIx5qV9BDMkwIp
-         CmZmlXyWxZ3dcIclJ2bTNJ7DKuaIqcj+TqMJQ6w6YPSiQyFTIkLDSaPBQ/DNzIvVdf/7
-         wO1QhW0iYvcdxSGTV6sQSLhP9Q642hg/5s0ktPXqITHs6OTMOpUPP4K98OrsUtj0aaLN
-         gXDQ==
+        d=gmail.com; s=20230601; t=1727907221; x=1728512021; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=z0S2HFaO2ayyfhdvTGH+PY+VatOA3lIK5x/wfc5GpFA=;
+        b=PK2c/sZ7bVrg6CHZy1EVX+DDQUAWllGb9l5rYkZDuzYeim41vMsQTg9iUOyuB811ow
+         5K+cAANeyll+tyb4D6sVuBDXxvgFPozneQmvm2FVNR/U+2+lGVwT/YSatn9LuW/7jxqp
+         80QtfL2awFiBg+B+9t6qwbe9N0dKtrk1Pw7pKb1SABLuDiYLMtRQk+etPhXR7mE371LF
+         u0ptAgzti3oFe+0v0j+hAkuh+agGsPVz2YbVcRNqtsdRTtSHS1mDQKiXg691YDSoApdn
+         KyhNylJ+VrPDblYS51ZwXjA/+i2GIPeIfHZXw6/aCjMhb5D0LPEZk96BbtJJDPB0/Jo2
+         iwkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727906993; x=1728511793;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JvBX01KOMTIf/+HpfXBZ3dslZpJTYSb0gO68n0vITBY=;
-        b=AYQwjU6bum2dl38cg6M9fuIazpudVRoytlB3mU2LhUU7RF1jjeT/3p+W7o1cBWGDiA
-         SFQOzcq8tWMXYV6gEk25XAqtNOXxHUHehLUviV3Q+lr+qsXSfh8fqSYFhvQdo0XRLUaz
-         3nAQCpqXx814WSmHqk6sa60VroErrMpgas2/Zch8kglYI0iiPSmqeZH3KJgqHv7DCVCu
-         bhGUytgrzweQ7V2GwXYFPovoKeBk220GbQADq6fy/C+3J5rGDPMqwGSi1vN4YouNvj5o
-         gEb8NhBEIfBzaf5xVn3ss/+UZ2sXtXZNNpKcvYxssordfV21JspbJTBkdg4hUmRlHC4k
-         9rVA==
-X-Forwarded-Encrypted: i=1; AJvYcCV/of9/7OrHA26zyKLZB3NDYglDlHPgqoayNXFAkzZESgTZlHKcU/Slm/LHRdvorjFcpfM7+VjD2io=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz0EDuKu9Chtin8Lftpmj9jRL50NLsgyx8hja+hcJv8y+DYAx3F
-	28jTFk6K0RuE0r1oyx4oJ0B4zL6PTMREoBL1av8941qtDju3EV+Y4wybUYBuXJ1Q4yM8Mm7+QpD
-	Ifl2EBpd0wiBNXBSotNRVuWU3wn0Dv5Rf0cferaEiDRe4XgU7
-X-Google-Smtp-Source: AGHT+IEUQBqUN2Ik5UhWSJCVcsujMau92n2zjWjJUTlnRvpP4TrCkzP0tz2V0cVswP1sKaFckGF+qIIs2i84
-X-Received: by 2002:a05:6602:2dc2:b0:81f:8f5d:6e19 with SMTP id ca18e2360f4ac-834d83de15cmr426823139f.2.1727906993308;
-        Wed, 02 Oct 2024 15:09:53 -0700 (PDT)
-Received: from c7-smtp-2023.dev.purestorage.com ([2620:125:9017:12:36:3:5:0])
-        by smtp-relay.gmail.com with ESMTPS id ca18e2360f4ac-834936b0e27sm18711439f.6.2024.10.02.15.09.52
+        d=1e100.net; s=20230601; t=1727907221; x=1728512021;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=z0S2HFaO2ayyfhdvTGH+PY+VatOA3lIK5x/wfc5GpFA=;
+        b=Ek0tFWmTKrEGomg2VLY6A/X3724E3bBDPSFSyqwszbGjVSVM0EhybdIsi/ULYVf93B
+         edlkUxjQ7E5SDWbP5c7zn+Bgtq/eDTYSQ2rsATpWQnA9J9HFx6lWwAYUNCfrJIMLeFH5
+         2l7na3ex7jeeVQyA6iYEyzeDI3T9uo2166iTi9sththqqe2l+jJw0D8RVW8txMdhtcDh
+         mfV0KTtU5YGA3KcoG2SzXxj5Q1sNrNV8m5AFMkAju0RGNvqZYzDMjpC/RhvXj0SdPacR
+         gmvh8IN9ireBXZM6VArKN1Xo0Gjt5YyxymRKX8myZt3FSZIn+X9vha1xCbESqqmoaDzN
+         dvYw==
+X-Forwarded-Encrypted: i=1; AJvYcCVhCqsaTT70MxW6SQYUDM6lq71UHaKdCIglQwLzq8zx1KChvtNGX0OehI6gGcoDjIzFgHAjlaDLVa1E@vger.kernel.org, AJvYcCVt17GHGxKfDhiyo/m2fZteQhiKPKQ76eXU8iUbNRBpGC3RevCcbBtuL3efCXkZZstaYqJa7TUkHbzY@vger.kernel.org, AJvYcCWUhBpzR/nowH1s9s4J+YFXqZT8e0TIIZnmB/RHh7Ci/jS9z8UzkMKxmOB7cpwsEmEsb/kQ1Jljn/Xg@vger.kernel.org, AJvYcCWVJDNb2az9Wb9jYaDyt3uAMdxjtlO55CyQCE0Rr03I+ExMuWUBgrfDhMGeyRGkqj19onE3h0Mh/gWpm14k@vger.kernel.org, AJvYcCXOFVHy3KOUCwywYkurz68LyHOCjUdwUsBvhA3rMnGc2kE+hqcHgvSZyxpMrOAz7MNeOGsC0283InXspOQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzrk8GZnqGgm5XEsGgm/f9oVNaWoM/nMSQts55iZHlHiVCece4W
+	RdgmcnIbSfzSjLND11m2eD35KDxM2Iv3Wh3HWMjyXWdweYTOSj18
+X-Google-Smtp-Source: AGHT+IGnm4XY5ZYU87xjpGoupm9OuMzZZrmfG2JaiUPs9J7pC5TIWa2/V5qZHM8+eoZ8IoUMiX/nAQ==
+X-Received: by 2002:a05:600c:1c1e:b0:42c:bd5a:9455 with SMTP id 5b1f17b1804b1-42f777c3654mr42745285e9.18.1727907221100;
+        Wed, 02 Oct 2024 15:13:41 -0700 (PDT)
+Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it. [93.34.90.105])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-42f79ead1absm29218245e9.17.2024.10.02.15.13.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Oct 2024 15:09:53 -0700 (PDT)
-X-Relaying-Domain: purestorage.com
-Received: from dev-ushankar.dev.purestorage.com (dev-ushankar.dev.purestorage.com [IPv6:2620:125:9007:640:7:70:36:0])
-	by c7-smtp-2023.dev.purestorage.com (Postfix) with ESMTP id 7BD5B3407CE;
-	Wed,  2 Oct 2024 16:09:51 -0600 (MDT)
-Received: by dev-ushankar.dev.purestorage.com (Postfix, from userid 1557716368)
-	id 78E4EE51EFD; Wed,  2 Oct 2024 16:09:51 -0600 (MDT)
-From: Uday Shankar <ushankar@purestorage.com>
-To: Ming Lei <ming.lei@redhat.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Uday Shankar <ushankar@purestorage.com>,
+        Wed, 02 Oct 2024 15:13:39 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Jens Axboe <axboe@kernel.dk>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Ulf Hansson <ulf.hansson@linaro.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Christian Marangi <ansuelsmth@gmail.com>,
+	Daniel Golle <daniel@makrotopia.org>,
+	INAGAKI Hiroshi <musashino.open@gmail.com>,
+	Christian Brauner <brauner@kernel.org>,
+	Al Viro <viro@zeniv.linux.org.uk>,
+	Ming Lei <ming.lei@redhat.com>,
+	Li Lingfeng <lilingfeng3@huawei.com>,
+	Christian Heusel <christian@heusel.eu>,
+	Avri Altman <avri.altman@wdc.com>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	Riyan Dhiman <riyandhiman14@gmail.com>,
+	Mikko Rapeli <mikko.rapeli@linaro.org>,
+	Jorge Ramirez-Ortiz <jorge@foundries.io>,
+	Li Zhijian <lizhijian@fujitsu.com>,
+	Dominique Martinet <dominique.martinet@atmark-techno.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>,
+	Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
 	linux-block@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: [PATCH v3 5/5] Documentation: ublk: document UBLK_F_USER_RECOVERY_FAIL_IO
-Date: Wed,  2 Oct 2024 16:09:49 -0600
-Message-Id: <20241002220949.3087902-6-ushankar@purestorage.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241002220949.3087902-1-ushankar@purestorage.com>
-References: <20241002220949.3087902-1-ushankar@purestorage.com>
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mmc@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	Lorenzo Bianconi <lorenzo@kernel.org>,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	upstream@airoha.com,
+	Christoph Hellwig <hch@infradead.org>
+Subject: [PATCH v6 0/6] block: partition table OF support
+Date: Thu,  3 Oct 2024 00:11:40 +0200
+Message-ID: <20241002221306.4403-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.45.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -95,61 +110,120 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Uday Shankar <ushankar@purestorage.com>
----
-New in v3
+Hi,
+this is an initial proposal to complete support for manually defining
+partition table.
 
- Documentation/block/ublk.rst | 24 ++++++++++++++++++------
- 1 file changed, 18 insertions(+), 6 deletions(-)
+Some background on this. Many OEM on embedded device (modem, router...)
+are starting to migrate from NOR/NAND flash to eMMC. The reason for this
+is that OEM are starting to require more and more space for the firmware
+and price difference is becoming so little that using eMMC is only benefits
+and no cons.
 
-diff --git a/Documentation/block/ublk.rst b/Documentation/block/ublk.rst
-index ff74b3ec4a98..51665a3e6a50 100644
---- a/Documentation/block/ublk.rst
-+++ b/Documentation/block/ublk.rst
-@@ -199,24 +199,36 @@ managing and controlling ublk devices with help of several control commands:
- 
- - user recovery feature description
- 
--  Two new features are added for user recovery: ``UBLK_F_USER_RECOVERY`` and
--  ``UBLK_F_USER_RECOVERY_REISSUE``.
--
--  With ``UBLK_F_USER_RECOVERY`` set, after one ubq_daemon(ublk server's io
-+  Three new features are added for user recovery: ``UBLK_F_USER_RECOVERY``,
-+  ``UBLK_F_USER_RECOVERY_REISSUE``, and ``UBLK_F_USER_RECOVERY_FAIL_IO``. To
-+  enable recovery of ublk devices after the ublk server exits, the ublk server
-+  should specify the ``UBLK_F_USER_RECOVERY`` flag when creating the device. The
-+  ublk server may additionally specify at most one of
-+  ``UBLK_F_USER_RECOVERY_REISSUE`` and ``UBLK_F_USER_RECOVERY_FAIL_IO`` to
-+  modify how I/O is handled while the ublk server is dying/dead (this is called
-+  the ``nosrv`` case in the driver code).
-+
-+  With just ``UBLK_F_USER_RECOVERY`` set, after one ubq_daemon(ublk server's io
-   handler) is dying, ublk does not delete ``/dev/ublkb*`` during the whole
-   recovery stage and ublk device ID is kept. It is ublk server's
-   responsibility to recover the device context by its own knowledge.
-   Requests which have not been issued to userspace are requeued. Requests
-   which have been issued to userspace are aborted.
- 
--  With ``UBLK_F_USER_RECOVERY_REISSUE`` set, after one ubq_daemon(ublk
--  server's io handler) is dying, contrary to ``UBLK_F_USER_RECOVERY``,
-+  With ``UBLK_F_USER_RECOVERY_REISSUE`` additionally set, after one ubq_daemon
-+  (ublk server's io handler) is dying, contrary to ``UBLK_F_USER_RECOVERY``,
-   requests which have been issued to userspace are requeued and will be
-   re-issued to the new process after handling ``UBLK_CMD_END_USER_RECOVERY``.
-   ``UBLK_F_USER_RECOVERY_REISSUE`` is designed for backends who tolerate
-   double-write since the driver may issue the same I/O request twice. It
-   might be useful to a read-only FS or a VM backend.
- 
-+  With ``UBLK_F_USER_RECOVERY_FAIL_IO`` additionally set, after the ublk server
-+  exits, requests which have issued to userspace are failed, as are any
-+  subsequently issued requests. Applications continuously issuing I/O against
-+  devices with this flag set will see a stream of I/O errors until a new ublk
-+  server recovers the device.
-+
- Unprivileged ublk device is supported by passing ``UBLK_F_UNPRIVILEGED_DEV``.
- Once the flag is set, all control commands can be sent by unprivileged
- user. Except for command of ``UBLK_CMD_ADD_DEV``, permission check on
+Given these reason, OEM are also using very custom way to provide a
+partition table and doesn't relay on common method like writing a table
+on the eMMC.
+
+One way that is commonly used is to hardcode the partition table and
+pass it to the system via various way (cmdline, special glue driver,
+block2mtd...)
+This way is also used on Android where the partition table
+is passed from the bootloader via cmdline.
+
+One reason to use this method is to save space on the device and to
+permit more flexibility on partition handling.
+
+What this series does is complete support for this feature.
+It's possible to use the cmdline to define a partition table similar
+to how it's done for MTD but this is problematic for a number of device
+where tweaking the cmdline is not possible. This series adds OF support
+to make it possible to define a partition table in the Device Tree.
+
+We implement a similar schema to the MTD fixed-partition, where we define
+a "label" and a "reg" with "offset" and "size".
+
+A new block partition parser is introduced that check if the disk device
+have an OF node attached and check if a fixed-partition table is defined.
+
+block driver can use the device_add_of_disk() function to register a new
+disk and attach a fwnode to it for usage with the OF parser.
+
+This permits flexibility from the driver side to implement the partitions
+node in different nodes across different block devices.
+
+If a correct node is found, then partition table is filled. cmdline will
+still have priority to this new parser.
+
+Some block device also implement boot1 and boot2 additional disk. Similar
+to the cmdline parser, these disk can have OF support using the
+"partitions-boot1" and "partitions-boot2" additional node. Also eMMC
+gp 1/2/3/4 disk are supported.
+
+It's also completed support for declaring partition as read-only as this
+feature was introduced but never finished in the cmdline parser.
+
+I hope this solution is better accepted as downstream this is becoming
+a real problem with a growing number of strange solution for the simple
+task of providing a fixed partition table.
+
+Changes v6:
+- Rename device_add_of_disk() to add_disk_fwnode()
+- Add kdocs for add_disk_fwnode()
+- Improve variables order in OF block partition code
+- Add Reviewed-by tag
+Changes v5:
+- Introduce device_add_of_disk() function
+- Detach eMMC special disk from OF block partition code and move
+  parsing to eMMC block driver (as requested by Christoph)
+- Rework OF block partition to use the device disk device_node
+- Extend support for eMMC GP1/2/3/4
+- Rename boot0/1 to boot1/2
+- Drop strends patch (unused now)
+Changes v4:
+- Fix wrong description and title in Kconfig
+- Validate reg len with addr and size cells
+- Drop offset 0 constraint (not needed)
+- Rework bytes to sector conversion
+- Follow common logic with ignore partitions after state->limit
+- Better handle device_node put
+- Add suggested strends string helper
+Changes v3:
+- Out of RFC
+- Drop partition schema generalization and simplify it
+- Require fixed-partitions compatible to adapt to MTD schema
+- Make label property optional and fallback to node name
+Changes v2:
+- Reference bytes in DT instead of Sector Size
+- Validate offset and size after Sector Size conversion
+- Limit boot0 and boot1 to eMMC and add comments about JEDEC spec
+- Generalize MTD partition schema and introduce block partitions schema
+- Add missing code to actually attach the OF parser to block partition core
+- Add reviewed by tag for read-only patch
+
+Christian Marangi (6):
+  block: add support for defining read-only partitions
+  docs: block: Document support for read-only partition in cmdline part
+  block: introduce add_disk_fwnode()
+  mmc: block: attach partitions fwnode if found in mmc-card
+  block: add support for partition table defined in OF
+  dt-bindings: mmc: Document support for partition table in mmc-card
+
+ Documentation/block/cmdline-partition.rst     |   5 +-
+ .../devicetree/bindings/mmc/mmc-card.yaml     |  52 +++++++++
+ block/blk.h                                   |   1 +
+ block/genhd.c                                 |  28 ++++-
+ block/partitions/Kconfig                      |   9 ++
+ block/partitions/Makefile                     |   1 +
+ block/partitions/check.h                      |   1 +
+ block/partitions/cmdline.c                    |   3 +
+ block/partitions/core.c                       |   6 +
+ block/partitions/of.c                         | 110 ++++++++++++++++++
+ drivers/mmc/core/block.c                      |  55 ++++++++-
+ include/linux/blkdev.h                        |   3 +
+ 12 files changed, 268 insertions(+), 6 deletions(-)
+ create mode 100644 block/partitions/of.c
+
 -- 
-2.34.1
+2.45.2
 
 
