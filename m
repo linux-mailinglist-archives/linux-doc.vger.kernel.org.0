@@ -1,174 +1,152 @@
-Return-Path: <linux-doc+bounces-26451-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-26453-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90DA698F67B
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2024 20:50:13 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6352098F6D3
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2024 21:12:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 36E211F224FA
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2024 18:50:13 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0E640282815
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2024 19:12:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C72AD1A726B;
-	Thu,  3 Oct 2024 18:50:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B78CE1AC42A;
+	Thu,  3 Oct 2024 19:12:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="nXaSTFEp"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="mLezQL+G"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32998224EA
-	for <linux-doc@vger.kernel.org>; Thu,  3 Oct 2024 18:50:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 274DE1ABEC5;
+	Thu,  3 Oct 2024 19:12:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727981407; cv=none; b=IuaLGpPqjAQI5JavoPymM0BssepfyaZMhOnz3GxqOEuCGvn90ehSwC2ASBeabG2DjZTNlkfIIzbHtOIUWq3sHYE2nvlb0A6Ha1kHNL7xBc08EE5TymnYfanlgWh4rfrPgZXImaoqL88vVWmXJvcpWW0WFGzBMiD6sl07aYyjW8M=
+	t=1727982760; cv=none; b=Hu/TjEtM2R/QV+MvdJr2M5r7LABVW/J1w0JzK+9Q1VZp1Cnm8fNLbH6Vlgov0yN8wB3mOh5Bj/yA1YowOCgOTrPwkD/WK23ODIPSJQxztVcCOL9AEdSsyKCkVwc9gosIncNC9Zxqi8GoOH7uBISsuNTKPhW+rvCQ3/R9T7ACBkE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727981407; c=relaxed/simple;
-	bh=Cc2rc24biNT5FidwfDdT2ehpmzoiBj0lvneMp2e8LmU=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=WXP5WiIEG0h7IZrjBUzXLC9KjqWXfZttqji3qP9fkaAGskJlhKEgDAYhbFEi8zF9QxWOIHg33xL+0aBakIilp1N49TNj8rVzc64HHiCFPMQNL59e5YJWcr82F+OcohE6AbclbKrkLTmFwBkWdaHHmFN3dpJvb4xdf4ULUdELs1o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=nXaSTFEp; arc=none smtp.client-ip=209.85.160.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qt1-f175.google.com with SMTP id d75a77b69052e-4581cec6079so47411cf.0
-        for <linux-doc@vger.kernel.org>; Thu, 03 Oct 2024 11:50:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1727981405; x=1728586205; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1I8W3N/B/EZ3NCCFlPhihj2D3CtLtqtAkm3xJ/FbH4Q=;
-        b=nXaSTFEpZSCGRr/Znz3vwknJRipVVIUrJ6uCptk0U2t/QXYqOTS4b+f2knZ/Iu6k+3
-         1zGrC9G5rkCyglFnnNFV0PekzpAzetSDfJo8FEZfkYixHu6rGQil8G6eaQ4IVeycsaId
-         NJCmjNs/nY8tzjT4wTJV3qB92CAGkgIcR4lR8Rzp3el03Q9uLAxBmATQ0sJJfuJ3FpA2
-         b3pNri9vYRxoFrzxW5xVuUDoRLyiobL/4YLeYa/+GA91IILkobK8Ef1At7QaRONlCrfp
-         EfL2NjVkLvnY+pzAY1/Mt9c6f9w7NL6aAPDHYYvuHpcYRZiA9TPcAQMDToAjsilPo1Jz
-         soig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727981405; x=1728586205;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1I8W3N/B/EZ3NCCFlPhihj2D3CtLtqtAkm3xJ/FbH4Q=;
-        b=VsIccfdaUukX/njIH6yAu5iJROBClTuMCECmc6rCxL5wY4vxC3gcRKGj18xyUe4a3J
-         xifoGcGjYtfHmazk+DKy93RRtJVm3Ub12tbUfKNhKa1rIIkjdGylCs1cd/BgPZp4UHot
-         /rEwNfAhpn+Lu+oaUyxJCXPTMzD4Arwz9XEFLYMMOFywz60cTE2ko3ZwSLoswAp+5DTr
-         Oq1TVI3hfL65zLc8QhxU8psGqLR/m3T3dbyt9Yg3WXl2CQfsAL1ycIcgAYdbvynOjU6Z
-         YW/rEMNQFbhjF9b9vUz/D+r1r9Cz19r01J0zhe+PiICDSiMWdqacC5k2gUH8d1BB5AUB
-         Ihow==
-X-Forwarded-Encrypted: i=1; AJvYcCXJWhyhwE371EpQfrlvUDOffClISyJ9x4jB05G5ovsVGtOvXu4LYMbShTfPHo8MZnNx+pWVzw/WUVc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwWgJbhwtiioMkOS1reH0Y+jBRm3lZ2T5Uat14yQ43qznv0tFKr
-	0IQeqRYTEp5lqbU1CAncLQXmYQqBlim1KSiyibhgryr6f05uYrVm+nFxvlFGx7e0L4cBwi/eSz8
-	oEQMD7rswCOb3ik8LUAkdk0mOs+RWIVatzyvq
-X-Google-Smtp-Source: AGHT+IEfi69B4j11ef1E/2a7Nfj+fGGfwbLrmyvR/Er5LdQXuT5OJbLFiFkKJXazj8oKbsaxMlmeZMP0PtfuvdQechg=
-X-Received: by 2002:a05:622a:838c:b0:456:7d9f:2af8 with SMTP id
- d75a77b69052e-45d9bbdd3d3mr136181cf.7.1727981404822; Thu, 03 Oct 2024
- 11:50:04 -0700 (PDT)
+	s=arc-20240116; t=1727982760; c=relaxed/simple;
+	bh=hvlsSwwXr3uVgXhII8AsI8In1V5uADcu6NhIrhrEW24=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=LVUwSc2w4WYiv4Gi9D6ZKHz8Ioi+Jo4q9IdcjCHAV0pgvfXXQ2udtgEhFvbpXs1UO8M9uR83jxteBiDLiAXmecSgx3zKxn96sN6hTS1UqRLGqOGkytsUJY2oDTA8UXCrdZ/sWvFFZ2z4e9JSv6sHRmbx5/aPF+6idPyQa+/xbHA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=mLezQL+G; arc=none smtp.client-ip=198.175.65.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1727982759; x=1759518759;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=hvlsSwwXr3uVgXhII8AsI8In1V5uADcu6NhIrhrEW24=;
+  b=mLezQL+GlS+bUaojnWhdMBYgaE2xxne6eIO5L1/TY9EgMscWD8+IJbF+
+   JiYIek3C7LS0jQf/HXiuR+H6txuFt8V3SdzuIJoY6z8EsSeTFT+X7cNmM
+   lSRrLoPZ5jJ8VXqJI45VG0a4t2lLR0BpjtrySFnVcOu2NfYXZ9mxfCr5m
+   TQApBCBHmmVrbJdygNazDQ4cvgNjR2eZDAYpaud9dS1QACjVTsGSCWQ0Z
+   21sbTs4LDvLiRn8sMfouJz3udyx9urao1DDF8dH5GfGGqyX5L9X+20BD1
+   BgcrMzM6YNy+s6nnvXK9n4FNi6byfgDuxq3wuwzQO3S2nIYWCpMVmB2RB
+   w==;
+X-CSE-ConnectionGUID: O5x8WhJ9R+qhbBz520EUEg==
+X-CSE-MsgGUID: Ug0BVAhnR/WJxoB+Ox9y2Q==
+X-IronPort-AV: E=McAfee;i="6700,10204,11214"; a="27287491"
+X-IronPort-AV: E=Sophos;i="6.11,175,1725346800"; 
+   d="scan'208";a="27287491"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Oct 2024 12:12:35 -0700
+X-CSE-ConnectionGUID: 9eE1duPJQdef+UdkRs0ajQ==
+X-CSE-MsgGUID: DjuvuxPXS9eMuLAJp9H6hg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.11,175,1725346800"; 
+   d="scan'208";a="74031030"
+Received: from agluck-desk3.sc.intel.com ([172.25.222.70])
+  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Oct 2024 12:12:35 -0700
+From: Tony Luck <tony.luck@intel.com>
+To: Fenghua Yu <fenghua.yu@intel.com>,
+	Reinette Chatre <reinette.chatre@intel.com>,
+	Peter Newman <peternewman@google.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	x86@kernel.org
+Cc: Shaopeng Tan <tan.shaopeng@fujitsu.com>,
+	James Morse <james.morse@arm.com>,
+	Jamie Iles <quic_jiles@quicinc.com>,
+	Babu Moger <babu.moger@amd.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	patches@lists.linux.dev,
+	Tony Luck <tony.luck@intel.com>
+Subject: [PATCH v7 0/4] x86/resctrl: mba_MBps enhancements
+Date: Thu,  3 Oct 2024 12:12:24 -0700
+Message-ID: <20241003191228.67541-1-tony.luck@intel.com>
+X-Mailer: git-send-email 2.46.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20241003160620.1521626-1-ap420073@gmail.com> <20241003160620.1521626-6-ap420073@gmail.com>
- <70c16ec6-c1e8-4de2-8da7-a9cc83df816a@amd.com>
-In-Reply-To: <70c16ec6-c1e8-4de2-8da7-a9cc83df816a@amd.com>
-From: Mina Almasry <almasrymina@google.com>
-Date: Thu, 3 Oct 2024 11:49:50 -0700
-Message-ID: <CAHS8izPmg8CJNYVQfdJB9BoyE75qf+wrz_68pTDdYffpEWDQMg@mail.gmail.com>
-Subject: Re: [PATCH net-next v3 5/7] net: devmem: add ring parameter filtering
-To: Brett Creeley <bcreeley@amd.com>
-Cc: Taehee Yoo <ap420073@gmail.com>, davem@davemloft.net, kuba@kernel.org, 
-	pabeni@redhat.com, edumazet@google.com, netdev@vger.kernel.org, 
-	linux-doc@vger.kernel.org, donald.hunter@gmail.com, corbet@lwn.net, 
-	michael.chan@broadcom.com, kory.maincent@bootlin.com, andrew@lunn.ch, 
-	maxime.chevallier@bootlin.com, danieller@nvidia.com, hengqi@linux.alibaba.com, 
-	ecree.xilinx@gmail.com, przemyslaw.kitszel@intel.com, hkallweit1@gmail.com, 
-	ahmed.zaki@intel.com, paul.greenwalt@intel.com, rrameshbabu@nvidia.com, 
-	idosch@nvidia.com, asml.silence@gmail.com, kaiyuanz@google.com, 
-	willemb@google.com, aleksander.lobakin@intel.com, dw@davidwei.uk, 
-	sridhar.samudrala@intel.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 3, 2024 at 11:35=E2=80=AFAM Brett Creeley <bcreeley@amd.com> wr=
-ote:
->
->
->
-> On 10/3/2024 9:06 AM, Taehee Yoo wrote:
-> > Caution: This message originated from an External Source. Use proper ca=
-ution when opening attachments, clicking links, or responding.
-> >
-> >
-> > If driver doesn't support ring parameter or tcp-data-split configuratio=
-n
-> > is not sufficient, the devmem should not be set up.
-> > Before setup the devmem, tcp-data-split should be ON and
-> > tcp-data-split-thresh value should be 0.
-> >
-> > Signed-off-by: Taehee Yoo <ap420073@gmail.com>
-> > ---
-> >
-> > v3:
-> >   - Patch added.
-> >
-> >   net/core/devmem.c | 18 ++++++++++++++++++
-> >   1 file changed, 18 insertions(+)
-> >
-> > diff --git a/net/core/devmem.c b/net/core/devmem.c
-> > index 11b91c12ee11..a9e9b15028e0 100644
-> > --- a/net/core/devmem.c
-> > +++ b/net/core/devmem.c
-> > @@ -8,6 +8,8 @@
-> >    */
-> >
-> >   #include <linux/dma-buf.h>
-> > +#include <linux/ethtool.h>
-> > +#include <linux/ethtool_netlink.h>
-> >   #include <linux/genalloc.h>
-> >   #include <linux/mm.h>
-> >   #include <linux/netdevice.h>
-> > @@ -131,6 +133,8 @@ int net_devmem_bind_dmabuf_to_queue(struct net_devi=
-ce *dev, u32 rxq_idx,
-> >                                      struct net_devmem_dmabuf_binding *=
-binding,
-> >                                      struct netlink_ext_ack *extack)
-> >   {
-> > +       struct kernel_ethtool_ringparam kernel_ringparam =3D {};
-> > +       struct ethtool_ringparam ringparam =3D {};
-> >          struct netdev_rx_queue *rxq;
-> >          u32 xa_idx;
-> >          int err;
-> > @@ -146,6 +150,20 @@ int net_devmem_bind_dmabuf_to_queue(struct net_dev=
-ice *dev, u32 rxq_idx,
-> >                  return -EEXIST;
-> >          }
-> >
-> > +       if (!dev->ethtool_ops->get_ringparam) {
-> > +               NL_SET_ERR_MSG(extack, "can't get ringparam");
-> > +               return -EINVAL;
-> > +       }
->
-> Is EINVAL the correct return value here? I think it makes more sense as
-> EOPNOTSUPP.
->
-> > +
-> > +       dev->ethtool_ops->get_ringparam(dev, &ringparam,
-> > +                                       &kernel_ringparam, extack);
-> > +       if (kernel_ringparam.tcp_data_split !=3D ETHTOOL_TCP_DATA_SPLIT=
-_ENABLED ||
-> > +           kernel_ringparam.tcp_data_split_thresh) {
-> > +               NL_SET_ERR_MSG(extack,
-> > +                              "tcp-header-data-split is disabled or th=
-reshold is not zero");
-> > +               return -EINVAL;
-> > +       }
-> > +
-> Maybe just my personal opinion, but IMHO these checks should be separate
-> so the error message can be more concise/clear.
->
+[
+	Bringing this old patch series out of hibernation since last December
+]
 
-Good point. The error message in itself is valuable.
+Two changes relating to the MBA Software Controller(mba_sc):
+
+1) Add a new mount option so the user can choose which memory
+bandwidth monitoring event to use as the input to the feedback
+loop.
+
+2) Update the "mba_MBps" mount option to make use of total memory
+bandwidth event on systems that do not support local bandwidth
+event.
+
+Signed-off-by: Tony Luck <tony.luck@intel.com>
+
+---
+Changes since v6: https://lore.kernel.org/all/20231207195613.153980-1-tony.luck@intel.com/
+
+Peter Newman:
+	s/"mbm_Local_bytes"/"mbm_local_bytes"/
+	Added WARN_ON() to check non-null return from get_mbm_state()
+	Don't allow both local and total mount options at same time
+
+Reinette Chatre:
+	Use flag (enable_mba_mbps) and value (mba_mbps_event) in
+	struct rdt_fs_context. Then pass the value to r->membw.mba_mbps_event
+	Ditto Peter's comment to block multiple uses of mount options.
+	Use invalfc() for better error reporting to user
+	Note in kerneldoc that mba_mbps_event only valid when @mba_sc is true
+	Declare mba_sc_event_opt_name() as "const char *"
+	Rework resctrl.rst patch based on comments
+
+Babu Moger:
+	Clean up calling sequence for set_mba_sc() to avoid dummy 2nd argument
+
+Other changes:
+	I split first patch into two parts:
+	1) the periodic updates to use r->membw.mba_mbps_event to choose
+	   the event
+	2) The new mount option
+
+	Also noticed code duplication in mbm_update() as the local
+	and total clauses are now identical. Split that code into
+	a helper function mbm_update_one_event()
+
+
+Tony Luck (4):
+  x86/resctrl: Make input event for MBA Software Controller configurable
+  x86/resctrl: Add mount option to pick input event for mba_MBps mode
+  x86/resctrl: Use total bandwidth for mba_MBps option when local isn't
+    present
+  x86/resctrl: Add new "mba_MBps_event" mount option to documentation
+
+ Documentation/arch/x86/resctrl.rst     | 27 +++++++--
+ include/linux/resctrl.h                |  2 +
+ arch/x86/kernel/cpu/resctrl/internal.h |  1 +
+ arch/x86/kernel/cpu/resctrl/monitor.c  | 80 ++++++++++++--------------
+ arch/x86/kernel/cpu/resctrl/rdtgroup.c | 51 +++++++++++++---
+ 5 files changed, 102 insertions(+), 59 deletions(-)
+
+-- 
+2.46.1
+
 
