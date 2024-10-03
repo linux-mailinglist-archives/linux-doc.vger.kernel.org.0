@@ -1,165 +1,262 @@
-Return-Path: <linux-doc+bounces-26455-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-26457-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id E073998F6D7
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2024 21:13:10 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B4EB98F6DC
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2024 21:14:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9A9CC282553
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2024 19:13:09 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8640F1C21932
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2024 19:14:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C76A81AD9F8;
-	Thu,  3 Oct 2024 19:12:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 80DC91ABEB7;
+	Thu,  3 Oct 2024 19:14:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="AttPN6u9"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LKNXzzeM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28A661AC445;
-	Thu,  3 Oct 2024 19:12:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91A47768FD;
+	Thu,  3 Oct 2024 19:13:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727982762; cv=none; b=F/8kVWa0lkZJ/Mnrt7gE/EVCXaj+YkcUUjuBLY/39gSBmQYKU5STfkC+5iNVgnODh52Kp+kdMLB561nZlimzm3iLNHcX5EzhGkiHMCxoZxZoNN3EMlNT2KZ9X2GeOk3xbBqOuFcoAgltPwavhqPby97KWKe0RbjVHBEeOZJudaM=
+	t=1727982840; cv=none; b=F5Q9p4oWzY0K83VZtDl+4ou7HKYxmR84qsF1sMMVRQdgY26pmuFLHjHkAFOn2YnMX3yU/qyZlG2Qz+dFWcB4I+/urNvnjwAbzRc0TM8DCxfarFQh6qcnJzsPKkmv0FI+t64tzvaslj56gbpELcJY7CORBTTg2/C8ovjJs6ZsXyU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727982762; c=relaxed/simple;
-	bh=sDrMH2vMq/rOASOnomz+Tq6S88RIiBBasNCK7KSIlt4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=SeOHGjK4iA+yqggGLBCUjXEw2wWy2VvbPm4Be4ggG78q+aAAGegmrNC0rPBEYgngbZY0Yb1Xkl+cDZ2CYeBrheSHLv9IWKMQ21Dm4xn2F+SbYruutMDPmFAS/DQIXddAO9CHDeuMWetSV6Xbt+dUDYwID6Fo0htK5kadCacpu/U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=AttPN6u9; arc=none smtp.client-ip=198.175.65.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1727982761; x=1759518761;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=sDrMH2vMq/rOASOnomz+Tq6S88RIiBBasNCK7KSIlt4=;
-  b=AttPN6u9NSfpQTGlFw/EXtE0QLzTLHSnUXvoz5RDiL7NjU/e2UvTBgV9
-   3efeLTiEBzgcI67gaInrwL6H6uJFwR1t3OsBYM5j4T+wmx9LBbfG0mrYg
-   r1LyeUZrRz7DCHiTiSxuBMqVgIDRG/GYHlQqGKJuFlF+/yxkII+Ndsaj8
-   9V+zqrpzWKn8iQSweejKDzZ7nYHBCeq222/R2TL6WBp81HAnI1ivewsFT
-   ZocV1V0tzJSzbZUXEcRsQcaV+apR1Ps0BPOPzgwvzvjOx1dIDXVYV8Qaf
-   edC4Yn7fqrOStasGWoOdCf8Zxh/jkoD0Slo6NxLg/tRzEF6NDgpAQ/OBE
-   w==;
-X-CSE-ConnectionGUID: +KIIyio5R+GAFRR1j8VU8w==
-X-CSE-MsgGUID: aJyNdKIETTuOVwIHH7dynQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11214"; a="27287533"
-X-IronPort-AV: E=Sophos;i="6.11,175,1725346800"; 
-   d="scan'208";a="27287533"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Oct 2024 12:12:36 -0700
-X-CSE-ConnectionGUID: TkfdpTCnR326mxjRWMqr0w==
-X-CSE-MsgGUID: KPr0GTWXQl+BqWmZhg6stA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,175,1725346800"; 
-   d="scan'208";a="74031042"
-Received: from agluck-desk3.sc.intel.com ([172.25.222.70])
-  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Oct 2024 12:12:36 -0700
-From: Tony Luck <tony.luck@intel.com>
-To: Fenghua Yu <fenghua.yu@intel.com>,
-	Reinette Chatre <reinette.chatre@intel.com>,
-	Peter Newman <peternewman@google.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	x86@kernel.org
-Cc: Shaopeng Tan <tan.shaopeng@fujitsu.com>,
-	James Morse <james.morse@arm.com>,
-	Jamie Iles <quic_jiles@quicinc.com>,
-	Babu Moger <babu.moger@amd.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	patches@lists.linux.dev,
-	Tony Luck <tony.luck@intel.com>
-Subject: [PATCH v7 4/4] x86/resctrl: Add new "mba_MBps_event" mount option to documentation
-Date: Thu,  3 Oct 2024 12:12:28 -0700
-Message-ID: <20241003191228.67541-5-tony.luck@intel.com>
-X-Mailer: git-send-email 2.46.1
-In-Reply-To: <20241003191228.67541-1-tony.luck@intel.com>
-References: <20241003191228.67541-1-tony.luck@intel.com>
+	s=arc-20240116; t=1727982840; c=relaxed/simple;
+	bh=rUpIlU9CxfluuN2X6xBMhc5YUcJlcPM5txNkuRo1cfA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=HuWyfX22CFI4ectnaNVzKoF2HzUVG9Z1h0MyGcwoRF0aoIJYSTipeJerffVbYg3XmsG6b+K4jE3pvZrNPQFilhHEk/WZlaZbTlZdHTcCYY3sV5tuoRq1worIdqLXeEofA2nl8BR2EzzuGXm+HZ5CmjDEbvrPHtifCdLd8htVCKQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LKNXzzeM; arc=none smtp.client-ip=209.85.167.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5398e53ca28so1574862e87.3;
+        Thu, 03 Oct 2024 12:13:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1727982837; x=1728587637; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rUpIlU9CxfluuN2X6xBMhc5YUcJlcPM5txNkuRo1cfA=;
+        b=LKNXzzeM8Op8BsTUg7PrxXsUETUYB2NnsJMJRERPONc3CdkZqX52jyhG9tsY66uM60
+         T7RjXlGbAbGJlYY9RAeECX4CDvz5SFVD9kPnDhNQlMj6pIo+mSAMfJWYopWWDuqRn8yh
+         7odXShpP3U/2G3IoF2vQ2FoX5V4IqbhhWwXoKytbVnoOZN5I6ak5VLqDj7XcwimsVOHN
+         am4NHt1qst47ilrxzGYfE504rvNjXuR8t59xMq30mmjmgVU7JDrtEOpt7OkzarIgBtO+
+         JiCXldqkUo2djLy+ifWhApsMej8acmLa3OiY4ax3qVaaac7orS6V/oXlK22ygfNJJ7AL
+         rc2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1727982837; x=1728587637;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=rUpIlU9CxfluuN2X6xBMhc5YUcJlcPM5txNkuRo1cfA=;
+        b=H1kogJlPD9A4NAIPIAdvaxP2Rr3r9jqWVnLqX6UjcWEVoTXY+be+sNRJNo7F3Eowuw
+         lv17GWfUGw0toi7ObmWui/lBKHEYWxpOoirOBW4DSFqKcvf2WzprG5AAQmTisXL27VPL
+         YNDxmeDhcY/oynGmeX1r1C3KJhsIVR0+P+u7+ncYT7Z2c971ELaOVclSsxNI7JgEFtNp
+         /Y0qlItPnjITHlZ8KqAUUoL/tEnILh1VpK4voXZGzPIPZqz6P2H9dPoeTAJpS7k6POi6
+         qcx5nQX7wiO9NvM7zLoldrv/PYEQbFpzcfBzJQydzJtmjmutkMG9RzJ29GcBisVrF9An
+         TfBA==
+X-Forwarded-Encrypted: i=1; AJvYcCVPMDV8kAhTnyL5aUZkqERIOTYugRhMgksd/Hj3SxfidHFdvgqJHVAsvGnkIeMznm2wFmTbWUJY@vger.kernel.org, AJvYcCWoML6mxI9yYSyGI5Q5+OOzOVsv3y8ZLNMKIkMEeXuotlqT1qHi/gm4t460v/H8oGan2csEEWkNa0s=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxAAnx4EY7uCVsLXEnwMEcs22oJUx0yHdt+R0LdY33+P/Rpxlzk
+	6XUPNNVCQh3IFxin4G+qnVIkxpwAddAsbnAmaXBuUFQ+SIXVrss1sSdwoY7L7+AiYkbOfeGKkoV
+	gSVxc/EtOvP82Smg4W8/7L5StOFo=
+X-Google-Smtp-Source: AGHT+IEmnB3eGreIjWOb6opisiIa52GM2HVtMY/aA2HRWo3FEUHoTXl+HWYb+rccvXwXxMqlsy+LvJimS6X/dYUCMfI=
+X-Received: by 2002:a05:6512:3d87:b0:52e:9b9e:a6cb with SMTP id
+ 2adb3069b0e04-539ab876cedmr237065e87.15.1727982836210; Thu, 03 Oct 2024
+ 12:13:56 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241003160620.1521626-1-ap420073@gmail.com> <20241003160620.1521626-5-ap420073@gmail.com>
+ <0913d63c-1df5-407a-a7c0-d5bef0210e8e@amd.com>
+In-Reply-To: <0913d63c-1df5-407a-a7c0-d5bef0210e8e@amd.com>
+From: Taehee Yoo <ap420073@gmail.com>
+Date: Fri, 4 Oct 2024 04:13:44 +0900
+Message-ID: <CAMArcTVQi2j-i4jk+ZgSafz=+Dc96Ls1bha2G3giX3U2VjuEtw@mail.gmail.com>
+Subject: Re: [PATCH net-next v3 4/7] bnxt_en: add support for
+ tcp-data-split-thresh ethtool command
+To: Brett Creeley <bcreeley@amd.com>
+Cc: davem@davemloft.net, kuba@kernel.org, pabeni@redhat.com, 
+	edumazet@google.com, almasrymina@google.com, netdev@vger.kernel.org, 
+	linux-doc@vger.kernel.org, donald.hunter@gmail.com, corbet@lwn.net, 
+	michael.chan@broadcom.com, kory.maincent@bootlin.com, andrew@lunn.ch, 
+	maxime.chevallier@bootlin.com, danieller@nvidia.com, hengqi@linux.alibaba.com, 
+	ecree.xilinx@gmail.com, przemyslaw.kitszel@intel.com, hkallweit1@gmail.com, 
+	ahmed.zaki@intel.com, paul.greenwalt@intel.com, rrameshbabu@nvidia.com, 
+	idosch@nvidia.com, asml.silence@gmail.com, kaiyuanz@google.com, 
+	willemb@google.com, aleksander.lobakin@intel.com, dw@davidwei.uk, 
+	sridhar.samudrala@intel.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-New mount option may be used to choose a specific memory bandwidth
-monitoring event to feed the MBA Software Controller(mba_sc) feedback
-loop.
+On Fri, Oct 4, 2024 at 3:13=E2=80=AFAM Brett Creeley <bcreeley@amd.com> wro=
+te:
+>
+>
+>
+> On 10/3/2024 9:06 AM, Taehee Yoo wrote:
+> > Caution: This message originated from an External Source. Use proper ca=
+ution when opening attachments, clicking links, or responding.
+> >
+> >
+> > The bnxt_en driver has configured the hds_threshold value automatically
+> > when TPA is enabled based on the rx-copybreak default value.
+> > Now the tcp-data-split-thresh ethtool command is added, so it adds an
+> > implementation of tcp-data-split-thresh option.
+> >
+> > Configuration of the tcp-data-split-thresh is allowed only when
+> > the tcp-data-split is enabled. The default value of
+> > tcp-data-split-thresh is 256, which is the default value of rx-copybrea=
+k,
+> > which used to be the hds_thresh value.
+> >
+> > # Example:
+> > # ethtool -G enp14s0f0np0 tcp-data-split on tcp-data-split-thresh 256
+> > # ethtool -g enp14s0f0np0
+> > Ring parameters for enp14s0f0np0:
+> > Pre-set maximums:
+> > ...
+> > TCP data split thresh: 256
+> > Current hardware settings:
+> > ...
+> > TCP data split: on
+> > TCP data split thresh: 256
+> >
+> > It enables tcp-data-split and sets tcp-data-split-thresh value to 256.
+> >
+> > # ethtool -G enp14s0f0np0 tcp-data-split off
+> > # ethtool -g enp14s0f0np0
+> > Ring parameters for enp14s0f0np0:
+> > Pre-set maximums:
+> > ...
+> > TCP data split thresh: 256
+> > Current hardware settings:
+> > ...
+> > TCP data split: off
+> > TCP data split thresh: n/a
+> >
+> > Signed-off-by: Taehee Yoo <ap420073@gmail.com>
+> > ---
+> >
+> > v3:
+> > - Drop validation logic tcp-data-split and tcp-data-split-thresh.
+> >
+> > v2:
+> > - Patch added.
+> >
+> > drivers/net/ethernet/broadcom/bnxt/bnxt.c | 3 ++-
+> > drivers/net/ethernet/broadcom/bnxt/bnxt.h | 2 ++
+> > drivers/net/ethernet/broadcom/bnxt/bnxt_ethtool.c | 4 ++++
+> > 3 files changed, 8 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/net/ethernet/broadcom/bnxt/bnxt.c b/drivers/net/et=
+hernet/broadcom/bnxt/bnxt.c
+> > index f046478dfd2a..872b15842b11 100644
+> > --- a/drivers/net/ethernet/broadcom/bnxt/bnxt.c
+> > +++ b/drivers/net/ethernet/broadcom/bnxt/bnxt.c
+> > @@ -4455,6 +4455,7 @@ static void bnxt_init_ring_params(struct bnxt *bp=
+)
+> > {
+> > bp->rx_copybreak =3D BNXT_DEFAULT_RX_COPYBREAK;
+> > bp->flags |=3D BNXT_FLAG_HDS;
+> > + bp->hds_threshold =3D BNXT_DEFAULT_RX_COPYBREAK;
+> > }
+> >
+> > /* bp->rx_ring_size, bp->tx_ring_size, dev->mtu, BNXT_FLAG_{G|L}RO flag=
+s must
+> > @@ -6429,7 +6430,7 @@ static int bnxt_hwrm_vnic_set_hds(struct bnxt *bp=
+, struct bnxt_vnic_info *vnic)
+> > VNIC_PLCMODES_CFG_REQ_FLAGS_HDS_IPV6);
+> > req->enables |=3D
+> > cpu_to_le32(VNIC_PLCMODES_CFG_REQ_ENABLES_HDS_THRESHOLD_VALID);
+> > - req->hds_threshold =3D cpu_to_le16(bp->rx_copybreak);
+> > + req->hds_threshold =3D cpu_to_le16(bp->hds_threshold);
+> > }
+> > req->vnic_id =3D cpu_to_le32(vnic->fw_vnic_id);
+> > return hwrm_req_send(bp, req);
+> > diff --git a/drivers/net/ethernet/broadcom/bnxt/bnxt.h b/drivers/net/et=
+hernet/broadcom/bnxt/bnxt.h
+> > index 35601c71dfe9..48f390519c35 100644
+> > --- a/drivers/net/ethernet/broadcom/bnxt/bnxt.h
+> > +++ b/drivers/net/ethernet/broadcom/bnxt/bnxt.h
+> > @@ -2311,6 +2311,8 @@ struct bnxt {
+> > int rx_agg_nr_pages;
+> > int rx_nr_rings;
+> > int rsscos_nr_ctxs;
+> > +#define BNXT_HDS_THRESHOLD_MAX 256
+> > + u16 hds_threshold;
+>
+> Putting this here creates a 2 byte hole right after hds_threshold and
+> also puts a 4 byte hole after cp_nr_rings.
+>
+> Since hds_threshold doesn't seem to be used in the hotpath maybe it
+> would be best to fill a pre-existing hole in struct bnxt to put it?
+>
 
-Resctrl will automatically switch to using total memory bandwidth
-on systems that do not support monitroing local bandwidth.
+Yes, hds_threshold makes an additional 2bytes hole.
+I checked pre-existing holes in struct bnxt, and almost all members
+are sorted by purpose.
+However, I think under num_tc would be a pretty good place for hds_threshol=
+d.
 
-Signed-off-by: Tony Luck <tony.luck@intel.com>
----
- Documentation/arch/x86/resctrl.rst | 27 +++++++++++++++++++++------
- 1 file changed, 21 insertions(+), 6 deletions(-)
+Before:
+/* size: 7000, cachelines: 110, members: 185 */
+/* sum members: 6931, holes: 21, sum holes: 64 */
+/* sum bitfield members: 2 bits, bit holes: 1, sum bit holes: 6 bits */
+/* padding: 4 */
+/* paddings: 7, sum paddings: 25 */
+/* last cacheline: 24 bytes */
 
-diff --git a/Documentation/arch/x86/resctrl.rst b/Documentation/arch/x86/resctrl.rst
-index a824affd741d..ab0868713f4a 100644
---- a/Documentation/arch/x86/resctrl.rst
-+++ b/Documentation/arch/x86/resctrl.rst
-@@ -35,7 +35,8 @@ about the feature from resctrl's info directory.
- 
- To use the feature mount the file system::
- 
-- # mount -t resctrl resctrl [-o cdp[,cdpl2][,mba_MBps][,debug]] /sys/fs/resctrl
-+ # mount -t resctrl resctrl [-o cdp[,cdpl2][,mba_MBps] \
-+ [,mba_MBps_event=[mbm_local_bytes|mbm_total_bytes]][,debug]] /sys/fs/resctrl
- 
- mount options are:
- 
-@@ -44,8 +45,14 @@ mount options are:
- "cdpl2":
- 	Enable code/data prioritization in L2 cache allocations.
- "mba_MBps":
--	Enable the MBA Software Controller(mba_sc) to specify MBA
--	bandwidth in MiBps
-+	Use a software feedback loop from the memory bandwidth monitoring
-+	feature to automatically adjust memory bandwidth allocation
-+	throttling so that the user can specify MBA control values in MiBps.
-+	Defaults to using MBM local bandwidth, but will use total bandwidth on
-+	systems that do not support local bandwidth monitoring.
-+"mba_MBps_event=[mbm_local_bytes|mbm_total_bytes]":
-+	Enable the "mba_MBps" option with an explicitly chosen monitor
-+	event as input to the software feedback loop.
- "debug":
- 	Make debug files accessible. Available debug files are annotated with
- 	"Available only with debug option".
-@@ -561,16 +568,24 @@ increase or vary although user specified bandwidth percentage is same.
- In order to mitigate this and make the interface more user friendly,
- resctrl added support for specifying the bandwidth in MiBps as well.  The
- kernel underneath would use a software feedback mechanism or a "Software
--Controller(mba_sc)" which reads the actual bandwidth using MBM counters
--and adjust the memory bandwidth percentages to ensure::
-+Controller(mba_sc)" which reads the actual bandwidth using either local
-+or total memory bandwidth MBM counters and adjusts the memory bandwidth
-+percentages to ensure::
- 
- 	"actual bandwidth < user specified bandwidth".
- 
- By default, the schemata would take the bandwidth percentage values
- where as user can switch to the "MBA software controller" mode using
--a mount option 'mba_MBps'. The schemata format is specified in the below
-+the mount option 'mba_MBps' or explicitly choose which MBM event with
-+the 'mba_MBps_event' option. The schemata format is specified in the below
- sections.
- 
-+The software feedback mechanism uses measurement of local
-+memory bandwidth to make adjustments to throttling levels. If a system
-+is running applications with poor NUMA locality users may want to use
-+the "mba_MBps_event=mbm_total_bytes" mount option which will use total
-+memory bandwidth measurements instead of local.
-+
- L3 schemata file details (code and data prioritization disabled)
- ----------------------------------------------------------------
- With CDP disabled the L3 schemata format is::
--- 
-2.46.1
+After:
+/* size: 6992, cachelines: 110, members: 185 */
+/* sum members: 6931, holes: 19, sum holes: 56 */
+/* sum bitfield members: 2 bits, bit holes: 1, sum bit holes: 6 bits */
+/* padding: 4 */
+/* paddings: 7, sum paddings: 25 */
+/* last cacheline: 16 bytes */
 
+So, I would like to change it in a v4 patch if there are no objections.
+
+Thanks a lot!
+Taehee Yoo
+
+> Thanks,
+>
+> Brett
+>
+> >
+> > u32 tx_ring_size;
+> > u32 tx_ring_mask;
+> > diff --git a/drivers/net/ethernet/broadcom/bnxt/bnxt_ethtool.c b/driver=
+s/net/ethernet/broadcom/bnxt/bnxt_ethtool.c
+> > index e9ef65dd2e7b..af6ed492f688 100644
+> > --- a/drivers/net/ethernet/broadcom/bnxt/bnxt_ethtool.c
+> > +++ b/drivers/net/ethernet/broadcom/bnxt/bnxt_ethtool.c
+> > @@ -839,6 +839,9 @@ static void bnxt_get_ringparam(struct net_device *d=
+ev,
+> > else
+> > kernel_ering->tcp_data_split =3D ETHTOOL_TCP_DATA_SPLIT_DISABLED;
+> >
+> > + kernel_ering->tcp_data_split_thresh =3D bp->hds_threshold;
+> > + kernel_ering->tcp_data_split_thresh_max =3D BNXT_HDS_THRESHOLD_MAX;
+> > +
+> > ering->tx_max_pending =3D BNXT_MAX_TX_DESC_CNT;
+> >
+> > ering->rx_pending =3D bp->rx_ring_size;
+> > @@ -871,6 +874,7 @@ static int bnxt_set_ringparam(struct net_device *de=
+v,
+> > case ETHTOOL_TCP_DATA_SPLIT_UNKNOWN:
+> > case ETHTOOL_TCP_DATA_SPLIT_ENABLED:
+> > bp->flags |=3D BNXT_FLAG_HDS;
+> > + bp->hds_threshold =3D (u16)kernel_ering->tcp_data_split_thresh;
+> > break;
+> > case ETHTOOL_TCP_DATA_SPLIT_DISABLED:
+> > bp->flags &=3D ~BNXT_FLAG_HDS;
+> > --
+> > 2.34.1
+> >
 
