@@ -1,127 +1,125 @@
-Return-Path: <linux-doc+bounces-26491-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-26503-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE1D399027E
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Oct 2024 13:50:26 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id F41FB99044E
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Oct 2024 15:29:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2704F1C21BB6
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Oct 2024 11:50:26 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9D4F2B22CC1
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Oct 2024 13:29:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F35AB15855D;
-	Fri,  4 Oct 2024 11:50:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC4B6210183;
+	Fri,  4 Oct 2024 13:27:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k6TkvVj7"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EHF1MGNE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC0541D5AD8;
-	Fri,  4 Oct 2024 11:50:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28A55149DF4;
+	Fri,  4 Oct 2024 13:27:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728042619; cv=none; b=S5AarNBgJUmP63fqpOcfwj+AhPtpLj7HHk9TJO5ndyPQsL1p2qNMNbzXxKQwHy+TeCdaLbGJn3vUHFejs9ZjniMkNdnvyllUf+MGEnmYFjFmfT8GU0p8eJsVkupfHzXurmdgUyimdK22niYEKnoDXEXuFNeEp1sdea9XMmxFftI=
+	t=1728048451; cv=none; b=Q/XLr5BWjzEFvhe0KAkOJZh7KcWOEuTZJJ/PbY0IsgZZIDnzHDr+PbzRmqDLBbbfehZopAOf2bKh/gMeXyfC+ztzDxZFDRXPZ3YInV/rutO9ttkTTAYwysPaLaqlHhhPTAXgxa/3vfmjmlSlR/p2z63WX33GKi4sG1tMhDqYbYg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728042619; c=relaxed/simple;
-	bh=+BeodDaFGWOje549S0KudeQ/WQofpaiwc9P5QexdJr4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=O13Ic9kOUeIdwP7Hpvq0DJ/oG65uHXhkWSvAQ+eLFyFjXK3z0rDkr7gf8nU0vLbZIlyZ+jXQ3u3kYDg+KESLiRuvANuzquIHkHMZVSQeVR+is8lE7NptAYP0a0tzpXY+9whttbIKNR8WobKYyOZINyd5gWhvetsYrf3XIFe5FH4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k6TkvVj7; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83680C4CEC6;
-	Fri,  4 Oct 2024 11:50:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1728042618;
-	bh=+BeodDaFGWOje549S0KudeQ/WQofpaiwc9P5QexdJr4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=k6TkvVj7GMjGbmKB1HJLF/vkMjkfzBK2z4CFAq24H++hZNqit5hWnu+qiurDMqtJ9
-	 DW7IidlCRTM3QaMhphpojCHjZ9fTG9JpZUW3qZPbU5yq9fQl1YgOGiV+fPAEKsj4YY
-	 lHObhuf9Yt8SIkxWEEYLeXqbYgcv7Or4B9En46bl/EKtkJpsJKrdkSrdZTlfIUvbGS
-	 HHtgo5u5ZT9DkHGaMrAGkcfT9+xGVcKVHfYCKheZIw9xBKQUz0jS4MB3qmjis5vPXQ
-	 hgzdrNECfwJPJwiQuKv4im1uOOuAQYJSeqvyP18pTTVOMYiRTqVEpfylWiGr7FpOK+
-	 w/AUkl/4UDraA==
-Date: Fri, 4 Oct 2024 12:50:08 +0100
-From: Mark Brown <broonie@kernel.org>
-To: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Marc Zyngier <maz@kernel.org>,
-	Oliver Upton <oliver.upton@linux.dev>,
-	James Morse <james.morse@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Arnd Bergmann <arnd@arndb.de>, Oleg Nesterov <oleg@redhat.com>,
-	Eric Biederman <ebiederm@xmission.com>,
-	Shuah Khan <shuah@kernel.org>,
-	"Rick P. Edgecombe" <rick.p.edgecombe@intel.com>,
-	Deepak Gupta <debug@rivosinc.com>, Ard Biesheuvel <ardb@kernel.org>,
-	Szabolcs Nagy <Szabolcs.Nagy@arm.com>, Kees Cook <kees@kernel.org>,
-	"H.J. Lu" <hjl.tools@gmail.com>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Florian Weimer <fweimer@redhat.com>,
-	Christian Brauner <brauner@kernel.org>,
-	Thiago Jung Bauermann <thiago.bauermann@linaro.org>,
-	Ross Burton <ross.burton@arm.com>,
-	David Spickett <david.spickett@arm.com>,
-	Yury Khrustalev <yury.khrustalev@arm.com>,
-	Wilco Dijkstra <wilco.dijkstra@arm.com>,
-	linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-	kvmarm@lists.linux.dev, linux-fsdevel@vger.kernel.org,
-	linux-arch@vger.kernel.org, linux-mm@kvack.org,
-	linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-riscv@lists.infradead.org
-Subject: Re: [PATCH v13 22/40] arm64/gcs: Ensure that new threads have a GCS
-Message-ID: <0e4d84e6-81ae-41ea-a17e-484df90f4444@sirena.org.uk>
-References: <20241001-arm64-gcs-v13-0-222b78d87eee@kernel.org>
- <20241001-arm64-gcs-v13-22-222b78d87eee@kernel.org>
- <Zv_PFVffwIkKevzE@arm.com>
+	s=arc-20240116; t=1728048451; c=relaxed/simple;
+	bh=a93hVSkItuu3hCe0uBJSZlAAwH2LqSJVgJljySUsJm0=;
+	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
+	 MIME-Version:Content-Type; b=hTfrWNDCe1yJLX2/UsabU9YfH3DpCtvoOHJync3zuXbuFCAzMJW0NkyX0c8+mtyTcfHXDvfnXp0A4HEzNQ0INd2QnLuc6KchjsUXMPfOE4xScUCj0Rct7qkQIPUwtx3EPQlHt2XL3H5kaeIknM8paN7ckcNJF4H4gVRr2klkXH4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EHF1MGNE; arc=none smtp.client-ip=209.85.128.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-42cb0f28bfbso18431355e9.1;
+        Fri, 04 Oct 2024 06:27:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1728048448; x=1728653248; darn=vger.kernel.org;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=22cBRwE57Xw0sioNBB/NhLn4DPgBWGUrQGpJqtIVHq0=;
+        b=EHF1MGNEizcZ1/XVgly+zR8gvTHJpnwPYL9/97TgrWzvL+07D50gLHKbxQY1aYh5V3
+         WEOUAXXcVgoDfcWKOYJCrwYYwF+FJ6viFRyq1wZolJjXLKjErtRTyCoOHo7vjJRvF306
+         NohzWoesjZ/934aBgM0+h5EySNYjFf8zrrgYO0f8wwAeOEbzOQrSoOlhY0l1/0v8qHz6
+         jx1+QnGoe2J8dH2gvCVCjwbeeukiOUdy2fcVSwITCCGoY2WjMH2JwlwJSEZF4mQUvNjy
+         qFaS9AScbvrQMjntfplNoKpxB3D49xqaABiK6HIvDRqK4ro0MFQTg6O8SjGdeu7TDpW9
+         S2XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1728048448; x=1728653248;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=22cBRwE57Xw0sioNBB/NhLn4DPgBWGUrQGpJqtIVHq0=;
+        b=RNo8V5pKGEuKCVlpo5Rii5temWPieXxTloWtAhNwRwwrKnPgzrotgkXW6a6JaWe3+a
+         A84tY0uX+5nT8tq4CXRtRF6VboKZFsQoAdldLklV/aYl6zOBWWHnsJCQJkQy7kudyBaV
+         9AxKYoQ/bOmVseAFwcZW0xHEAl22KeHikjf5cW2o0LpVdrw0vWNQObZqqV5aS7ZbZB7I
+         hRbTMgAvVeHzYXpUJ22Krm1ibELffG49b4R8RKm5M6PLy3oF0JEBGzuPJ/dDdEyVuLkI
+         elKq+kP1rPZ4D9vrpEZVitwwFTjS6UBTDX3xpY6sPN3As/ktvsJI+xRrtisY8H4ZgdSq
+         fbBQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUmhvoYKebDfU3OPCqt+13bgmbXfeRhc2JKsCMFG3LVrKoMrDkNe+zUXu5XGDa9BwI79vXkSoJ7@vger.kernel.org, AJvYcCUu6C9vpPrV6XuVvFbXu5i4J36Ztej7Gbag21bIbGXxm3ARwjW6VBjxh3zpoZhgTntjubC4xrDaHkc=@vger.kernel.org, AJvYcCXLzNNrrjDbtGKdDsWLz0gvw1Bw4u9civeQCPhEwPrQrW0rSYIuCwSnpd/EAqflEgCsqQD27R66i6a5HuAh@vger.kernel.org
+X-Gm-Message-State: AOJu0YywBDHCTE6yxFFWpUq/ADrwXsnBPnCsboQ+X9dxmRI72D5Rfsd2
+	tjBX0ftyueNx9u1xd8ZEYDjCrk1CKQZs35b877Jz6u95ELbQI7OD
+X-Google-Smtp-Source: AGHT+IH3yRfRGBBOHC0hZKS9HHSTVHJgXqCz4P71fKXwCQTPx3XtSJMJI4pbwzjjO5SWKJWuVhC+aw==
+X-Received: by 2002:a05:600c:3507:b0:42c:b309:8d18 with SMTP id 5b1f17b1804b1-42f85ac1ff6mr20186185e9.19.1728048448049;
+        Fri, 04 Oct 2024 06:27:28 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:395e:c10e:1999:d9f1])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37d07fde1fesm3303168f8f.0.2024.10.04.06.27.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Oct 2024 06:27:27 -0700 (PDT)
+From: Donald Hunter <donald.hunter@gmail.com>
+To: Kory Maincent <kory.maincent@bootlin.com>
+Cc: Oleksij Rempel <o.rempel@pengutronix.de>,  "David S. Miller"
+ <davem@davemloft.net>,  Eric Dumazet <edumazet@google.com>,  Jakub
+ Kicinski <kuba@kernel.org>,  Paolo Abeni <pabeni@redhat.com>,  Jonathan
+ Corbet <corbet@lwn.net>,  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+  linux-kernel@vger.kernel.org,  netdev@vger.kernel.org,
+  linux-doc@vger.kernel.org,  Kyle Swenson <kyle.swenson@est.tech>,  Dent
+ Project <dentproject@linuxfoundation.org>,  kernel@pengutronix.de
+Subject: Re: [PATCH net-next 07/12] netlink: specs: Expand the PSE netlink
+ command with C33 prio attributes
+In-Reply-To: <20241002-feature_poe_port_prio-v1-7-787054f74ed5@bootlin.com>
+	(Kory Maincent's message of "Wed, 02 Oct 2024 18:28:03 +0200")
+Date: Fri, 04 Oct 2024 11:44:47 +0100
+Message-ID: <m2r08wf8ps.fsf@gmail.com>
+References: <20241002-feature_poe_port_prio-v1-0-787054f74ed5@bootlin.com>
+	<20241002-feature_poe_port_prio-v1-7-787054f74ed5@bootlin.com>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="LKVsNEPzgkEHa/nF"
-Content-Disposition: inline
-In-Reply-To: <Zv_PFVffwIkKevzE@arm.com>
-X-Cookie: A bachelor is an unaltared male.
+Content-Type: text/plain
 
+Kory Maincent <kory.maincent@bootlin.com> writes:
 
---LKVsNEPzgkEHa/nF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+> From: Kory Maincent (Dent Project) <kory.maincent@bootlin.com>
+>
+> Expand the c33 PSE attributes with priority and priority max to be able to
+> set and get the PSE Power Interface priority.
+>
+> ./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema --do pse-get
+>              --json '{"header":{"dev-name":"eth1"}}'
+> {'c33-pse-actual-pw': 1700,
+>  'c33-pse-admin-state': 3,
+>  'c33-pse-avail-pw-limit': 97500,
+>  'c33-pse-prio': 2,
+>  'c33-pse-prio-max': 2,
+>  'c33-pse-pw-class': 4,
+>  'c33-pse-pw-d-status': 4,
+>  'c33-pse-pw-limit-ranges': [{'max': 18100, 'min': 15000},
+>                              {'max': 38000, 'min': 30000},
+>                              {'max': 65000, 'min': 60000},
+>                              {'max': 97500, 'min': 90000}],
+>  'header': {'dev-index': 5, 'dev-name': 'eth1'}}
+>
+> ./ynl/cli.py --spec netlink/specs/ethtool.yaml --no-schema --do pse-set
+>              --json '{"header":{"dev-name":"eth1"},
+>                       "c33-pse-prio":1}'
+> None
+>
+> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 
-On Fri, Oct 04, 2024 at 02:18:45PM +0300, Catalin Marinas wrote:
-
-> I think Szabolcs mentioned a GCS leak with v12:
-
-> https://lore.kernel.org/r/ZtrihWQFyb2/XrQV@arm.com
-
-> (and in some private messages IIRC)
-
-> Has this been identified? The changelog only mentions a leak in v8.
-
-Yes, it's this in the changelog:
-
-  - Implement mm_release() and free transparently allocated GCSs there.
-
---LKVsNEPzgkEHa/nF
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmb/1m8ACgkQJNaLcl1U
-h9CX5Qf/YXV4PCUMoouOlHODLlWL0QpqxDnrB4g2yYs90X9BTpJIF7Ax3i9mVe6N
-UETYxylUWRj9l39/OFtO1HFZkJcLdlWYkYREST9X6NX4htudvuu/5oAN06NXH9jd
-znOG1a/FdzPxRygtN3Lt6P6eodHJct9XRgduDANTu4oCEl7PAuW6ob88izh/c+FO
-MaiKZXsdWB+nc0KOSVk3HA0ogs8szrCQcWNti/LArlYFZWwurCtfYxgCUQFEzSSh
-SDemv5W+sFX+l7V/S4YCawDcIcLv0B+jV9lx0ECWzyhLeOrIxBDTYSKr3ukgLR7n
-+XdVZaKYGBSKeIaoCVbZcVM3Ul+CTQ==
-=zRYX
------END PGP SIGNATURE-----
-
---LKVsNEPzgkEHa/nF--
+Reviewed-by: Donald Hunter <donald.hunter@gmail.com>
 
