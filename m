@@ -1,61 +1,60 @@
-Return-Path: <linux-doc+bounces-26674-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-26676-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6818C993485
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 19:13:12 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C1F6993491
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 19:15:14 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 19E5E1F23E3F
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 17:13:12 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A92841C23BA4
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 17:15:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B68381DCB27;
-	Mon,  7 Oct 2024 17:13:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6B74F2AD05;
+	Mon,  7 Oct 2024 17:15:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="iavcBMRx"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="l4KxShK2"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66F0A1DC18F;
-	Mon,  7 Oct 2024 17:13:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C8A54206B;
+	Mon,  7 Oct 2024 17:15:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728321188; cv=none; b=qrAuIoJ+pdFcHnSX/nghI/wc0HtN6ET6JjGaJ0UP/IBH+a9pb/rElN26xztuaGyW8Zgd4ySBugxWRc5bWiZIWeHC+K5QWC0cvKOuszYSZy9cek5KrmWANITboIh0TXjdUotEOciX1DtXVbFL7xwCvBu87KsmJQ9Zs2QAnL1LKXg=
+	t=1728321312; cv=none; b=OO9T+QV41sY/IdIMXxlp2oFbWbrOstiuarrutwQXMw2yP2A1Lp5DpPt9U/feQTzQ81I9w+NURoAF2dHua9GRo08j+ej74sS/t8/IyCLjU9AzeOug99ygLgn/vGp1h7GYGVBtJKC7txmpnrG2Lb58327MH6VXA8IgDfTtqVX1WXc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728321188; c=relaxed/simple;
-	bh=tPuWQZb9Uudhvv0lmGKN/UPb9yurcbpTbE9L1CfpiqA=;
+	s=arc-20240116; t=1728321312; c=relaxed/simple;
+	bh=00mryIRBvibRHOqXTg3rORxCVqOmCM8JQ/HjF0QejAA=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=V2s++0+VVGzj4DTqDbO9xZREO+X7/i/E7hjqGrf5O4yNgJn0Jzwa4S+sYYQY6S3CUuFI81BYliLv5Vm/HEnZqQS5c8AQcAX9M7i/Izw05ryG4SWqVcLeMqyKzrpJNSsCoxo5iLkL2gXOfjs6gDXHrKyF34JFx7cTiQS5Z+vDfAk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=iavcBMRx; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=Hhck3p+a0cw6bz4wh/MloJbZovTzO3G5x99IchAPa5ucTNe6zGGtrijwIhT8TWgVkYvKfn/qaoMFhMnUPpnZ2NisaqO8xjGOik6vK1fCFbe9HRjqU/k27sAwYn3C/HvU71+Tb3s9JmRaZELzpaCjv+Y8Du9s6Wv+pOFRusHLYRQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=l4KxShK2; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9D30342C0D
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 3C63A42B38
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1728321186; bh=tPuWQZb9Uudhvv0lmGKN/UPb9yurcbpTbE9L1CfpiqA=;
+	t=1728321310; bh=IIY8m2TRYmRTYNrUvNLs7VtH3uwBH7HpUvyATNHs+hA=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=iavcBMRxvF2CegKq5hiJDAzw3ETGVtzIdA72o/6LYux+xYhoCvLRlQc8aCKtjYG6u
-	 DBKbRIKBmyw7/sAoG6uUfgTMmpkGqe+dZ0IuvYhpw5gPBW6F01F5h64wcn0ahWMm5s
-	 UUiLn5bWfgFjUMpiL+mDVOlkwYuK1Ba6zb1STWeaDYoI6R3GytLbhIjClgYEWezHNS
-	 L/YyCvaEYU9MsPHY+WloYZwxAeg+kUpcuUPu6Pf/hVEIKboD82k/6fwvDxD3WX92i0
-	 5xtqEMkaeuIj8kk2PJpqc3v025rBUP/6yLy7qNPPL1+D7Ks4iL0pNysn3MSlI6JdnO
-	 mM+W8thGUGKvQ==
+	b=l4KxShK2kO2zPj06K2dkJy4DLOgUNHyo7SJZcBM49iUfC5NRn8kKhuxwrKSfnUfdR
+	 +t7qN8XBaNfzkM3RA4EPZcLHRCSsJkkndGRbdEvayC4aDUE+Yf40nHfIz3X3pCoBne
+	 2J39xwxiS7DelLCMCK6YJN2hk3ELN1LQ99q0orPVnYChTy3xyGm5WrazpEGBEP+6Us
+	 ykJ07y5K5r1xD1FRmxXdDGoz03fxaI6Pq/QGmUhXufB/Go7tS1XJ2lOlf/F6ZvAOPa
+	 K2Ehx0uJkSieXe7dkHQErjKYHVaXbhGkjAFKZ5co4q/6pPtQqwmK03Nvha95CFgUOJ
+	 ZVWJR/WWvsgMw==
 Received: from localhost (unknown [IPv6:2601:280:5e00:625::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 9D30342C0D;
-	Mon,  7 Oct 2024 17:13:06 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 3C63A42B38;
+	Mon,  7 Oct 2024 17:15:10 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Federico Vaga <federico.vaga@vaga.pv.it>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Federico Vaga
- <federico.vaga@vaga.pv.it>
-Subject: Re: [PATCH v3] doc:it_IT: update documents in process/
-In-Reply-To: <20240930202433.37110-1-federico.vaga@vaga.pv.it>
-References: <20240930202433.37110-1-federico.vaga@vaga.pv.it>
-Date: Mon, 07 Oct 2024 11:13:05 -0600
-Message-ID: <87a5ffkfa6.fsf@trenco.lwn.net>
+To: Lucas De Marchi <lucas.demarchi@intel.com>, linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, Lucas De Marchi <lucas.demarchi@intel.com>
+Subject: Re: [PATCH] Documentation: core-api/cpuhotplug: Fix missing prefix
+In-Reply-To: <20240927185229.2362599-1-lucas.demarchi@intel.com>
+References: <20240927185229.2362599-1-lucas.demarchi@intel.com>
+Date: Mon, 07 Oct 2024 11:15:09 -0600
+Message-ID: <875xq3kf6q.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -64,32 +63,27 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Federico Vaga <federico.vaga@vaga.pv.it> writes:
+Lucas De Marchi <lucas.demarchi@intel.com> writes:
 
-> Update Italian translation following these changes under Documentation/process
+> Add the missing cpuhp_ prefix in cpuhp_remove_multi_state().
 >
-> commit eb5ed2fae197 ("docs: submitting-patches: Advertise b4")
-> commit 413e775efaec ("Documentation: fix links to mailing list services")
-> commit 47c67ec1e8ef ("docs: submit-checklist: use subheadings")
-> commit 5969fbf30274 ("docs: submit-checklist: structure by category")
-> commit 5f99665ee8f4 ("kbuild: raise the minimum GNU Make requirement to 4.0")
-> commit 627395716cc3 ("docs: document python version used for compilation")
-> commit 7a23b027ec17 ("arm64: boot: Support Flat Image Tree")
-> commit 56f64b370612 ("rust: upgrade to Rust 1.78.0")
-> commit 82b8000c28b5 ("net: drop special comment style")
-> commit 6813216bbdba ("Documentation: coding-style: ask function-like macros to evaluate parameters")
-> commit 91031ca349ee ("docs: improve comment consistency in .muttrc example configuration")
-> commit 7fe7de7be828 ("Docs/process/email-clients: Document HacKerMaiL")
-> commit 9c03bc90c065 ("Documentation: process: Revert "Document suitability of Proton Mail for kernel development"")
-> commit f9a4f4a0e1f5 ("Docs: Move magic-number from process to staging")
-> commit 7400d25a0a5c ("Docs/process/index: Remove riscv/patch-acceptance from 'Other materi
-> al' section")
+> Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
+> ---
+>  Documentation/core-api/cpu_hotplug.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Signed-off-by: Federico Vaga <federico.vaga@vaga.pv.it>
+> diff --git a/Documentation/core-api/cpu_hotplug.rst b/Documentation/core-api/cpu_hotplug.rst
+> index dcb0e379e5e8..33e8e80b5e00 100644
+> --- a/Documentation/core-api/cpu_hotplug.rst
+> +++ b/Documentation/core-api/cpu_hotplug.rst
+> @@ -616,7 +616,7 @@ ONLINE section for notifications on online and offline operation::
+>     ....
+>     cpuhp_remove_instance(state, &inst2->node);
+>     ....
+> -   remove_multi_state(state);
+> +   cpuhp_remove_multi_state(state);
 
-This fails to apply to docs-next; care to respin?
-
-Thanks,
+Applied, thanks.
 
 jon
 
