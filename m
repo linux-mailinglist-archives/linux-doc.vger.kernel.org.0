@@ -1,86 +1,91 @@
-Return-Path: <linux-doc+bounces-26666-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-26675-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB43199341F
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 18:58:18 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A89F99348F
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 19:15:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 284BF1C2069E
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 16:58:18 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 2E46F1F2495F
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 17:15:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 060471DC044;
-	Mon,  7 Oct 2024 16:54:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D49D1DD537;
+	Mon,  7 Oct 2024 17:14:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RugleReU"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="kvVV1kR0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFD071D9673;
-	Mon,  7 Oct 2024 16:54:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E79D1DD534;
+	Mon,  7 Oct 2024 17:14:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728320053; cv=none; b=KQ6z4N/l8zD/fBaHO+CfDXDY9l0SSWex97fAfDabz32HpE93yeIfejnr5GI5heLHyPjv2Acfu6NZ49XjbzufjkTWS2OuvdYQuoz1XTS7kg4Y9SWamgDhSNxIfPfjK7Qtl7/ypYg8iuVDXhl7n6vJLZ9U5zCyMUlfDzZS2nHO6BU=
+	t=1728321298; cv=none; b=Kr24yHc7IYxEg0l4YiZ5GMHWVPDvqoTY+CQq+Fdy4x0bOksG5npyEBy2w3PN7isi9ULM4spOPbchoz6KX/RqGBSE/pWj7Kjb7QX9nHsjaPd6j6rAi2RZvB3r0GQ5Pr+wx5RcQR6hFvBmVfilGm6c2+lYkVQou3NleaiQdNp5GHo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728320053; c=relaxed/simple;
-	bh=Z55+alHHbN75NJWr2PUTisn4u0T5tliMseWxml0Kkis=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=i2d/xSW8/UvW7B/cHQ5otXVOPvDnTfwZeJfR/u5jR8Z6pFuHcypwk4C94vCwxO0H1RFAvWv9fQ5PGErZKkeof/zP4hX/EpeB0gB9d0ELUKwgsMW82cUbUv6qI++YZvE7maCDCxteR19tULLpu4BdaE4wRclWyIRenClWC51tvAQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RugleReU; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 475E6C4CEC6;
-	Mon,  7 Oct 2024 16:54:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1728320053;
-	bh=Z55+alHHbN75NJWr2PUTisn4u0T5tliMseWxml0Kkis=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=RugleReUCcPaIBW6jMPb3QzJw6yIz+PPaz8YuCS7xqA3FSP1J6BG7vMaa8QQGkAo8
-	 umXBPeAJr3M2+XOF6dg3UE4anqoP/B4ofUpaeY+Z/eXzx3C6iPdp38UHiKa7RfZ77h
-	 NmPcS4xYTjrxPuIAF/PEM9hW7jPEJoA+7B6vEXNX07Oio7e6YoAx+N4M7eHTJRNGZW
-	 aCR7CEkU9NBKBlufd6Wd14bmmyZa+vjIcW6eps7LUiNc/Hlh6ZPUvE9TzWEZ5FTvwU
-	 4LWRIZIlg7547A7OEvJjRAgsvQkpkjPktPa0Nj549kh0lCpKlF6Xb7RjMADFGP15cF
-	 p/7WjScPOJEvw==
-Date: Mon, 7 Oct 2024 09:54:12 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Simon Horman <horms@kernel.org>
-Cc: "David S. Miller" <davem@davemloft.net>, Eric Dumazet
- <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet
- <corbet@lwn.net>, netdev@vger.kernel.org, workflows@vger.kernel.org,
+	s=arc-20240116; t=1728321298; c=relaxed/simple;
+	bh=UKymu+mzuZLEK69UaQG2sYNhML4Ojs7J1jeASLinB+k=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=cAescQhNhNy+KzFFgCVOzR+33QZFMWJYu6jSw9ijO7kcrt7O/t12GS2WqeRgchTfc/YUMxW75Nw1T2KITJkVTLkk+yFQ2MUBdPzkFN5VmOUCyRTS/+4s2j+UmKxn5pXAulws28v3IksB/rcFuFrnVsAKG4ah6SoJzyPKaVI4BhA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=kvVV1kR0; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 3B61A42B38
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1728320698; bh=HfbsOkmGxKTMn8UUu6s8L07CkPvNg5PaKCyqCkClrFI=;
+	h=From:To:Cc:Subject:Date:From;
+	b=kvVV1kR0NUD2LHQ9PlPj2IROekdRvtzVJL2kVZzltv6QZGUYvv5lQoW9srUUpv8fY
+	 stRCRzThSe8zH5Sfu0pE5ESnmF+lzmjPTDWZd0PzH5aQEJkfPLLBFjmd8aFxRYQGet
+	 oA35kKX+o2MibQJuOmwunrPHWqkSe+gKtlA8oBedlF1a5kK78Eh8ST6HY3pWKCSK4d
+	 sXdTJAH5CKLYo/DmJkYXFhHAQabevtC7BabQsuarZOW9B+M628ETL89+Ql3f9te37y
+	 otv5VgP0n4lqZYyl22TjKjx1vcdB144iSH9ot2bQuSG0VIj3Kfym+lJ2xfPSyuRUO/
+	 W8C+ODd6dj+Jg==
+Received: from localhost (unknown [IPv6:2601:280:5e00:625::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 3B61A42B38;
+	Mon,  7 Oct 2024 17:04:58 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Christian Brauner <brauner@kernel.org>
+Cc: David Howells <dhowells@redhat.com>, linux-fsdevel@vger.kernel.org,
  linux-doc@vger.kernel.org
-Subject: Re: [PATCH RFC net] docs: netdev: document guidance on cleanup
- patches
-Message-ID: <20241007095412.5a2a6e2c@kernel.org>
-In-Reply-To: <20241007161501.GJ32733@kernel.org>
-References: <20241004-doc-mc-clean-v1-1-20c28dcb0d52@kernel.org>
-	<20241007082430.21de3848@kernel.org>
-	<20241007155521.GI32733@kernel.org>
-	<20241007090828.05c3f0da@kernel.org>
-	<20241007161501.GJ32733@kernel.org>
+Subject: [PATCH] netfs: fix documentation build error
+Date: Mon, 07 Oct 2024 11:04:57 -0600
+Message-ID: <874j5nlu86.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 
-On Mon, 7 Oct 2024 17:15:01 +0100 Simon Horman wrote:
-> > > We could merge or otherwise rearrange that section with the one proposed by
-> > > this patch. But I didn't feel it was necessary last week.  
-> > 
-> > Somewhat, we don't push back on correct use of device-managed APIs.
-> > But converting ancient drivers to be device-managed just to save 
-> > 2 or 3 LoC is pointless churn. Which in my mind falls squarely
-> > under the new section, the new section is intended for people sending
-> > trivial patches.  
-> 
-> Thanks, I can try and work with that. Do you want to call out older drivers
-> too? I was intentionally skipping that for now. But I do agree it should
-> be mentioned at some point.
+Commit 86b374d061ee ("netfs: Remove fs/netfs/io.c") did what it said on the
+tin, but failed to remove the reference to fs/netfs/io.c from the
+documentation, leading to this docs build error:
 
-What is and isn't considered old may be hard to determine. I hope that
-your existing "not part of other work" phrasing will give us the same
-effect, as there's usually no other work for old drivers.
+  WARNING: kernel-doc './scripts/kernel-doc -rst -enable-lineno -sphinx-version 7.3.7 ./fs/netfs/io.c' failed with return code 1
+
+Remove the offending kernel-doc line, making the docs build process a
+little happier.
+
+Fixes: 86b374d061ee ("netfs: Remove fs/netfs/io.c")
+Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+---
+ Documentation/filesystems/netfs_library.rst | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/Documentation/filesystems/netfs_library.rst b/Documentation/filesystems/netfs_library.rst
+index f0d2cb257bb8..73f0bfd7e903 100644
+--- a/Documentation/filesystems/netfs_library.rst
++++ b/Documentation/filesystems/netfs_library.rst
+@@ -592,4 +592,3 @@ API Function Reference
+ 
+ .. kernel-doc:: include/linux/netfs.h
+ .. kernel-doc:: fs/netfs/buffered_read.c
+-.. kernel-doc:: fs/netfs/io.c
+-- 
+2.46.2
+
 
