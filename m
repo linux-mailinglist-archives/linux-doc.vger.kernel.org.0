@@ -1,907 +1,180 @@
-Return-Path: <linux-doc+bounces-26727-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-26729-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59138993B20
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Oct 2024 01:25:28 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BE53993B34
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Oct 2024 01:30:25 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C9355B24D05
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 23:25:25 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 06EF0B20D0E
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 23:30:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DCC7B1E0DBC;
-	Mon,  7 Oct 2024 23:17:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E0E41925A7;
+	Mon,  7 Oct 2024 23:30:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="lCtfLBGq"
+	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="ktby9xLk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 904831E0DA6;
-	Mon,  7 Oct 2024 23:17:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4E6119069B
+	for <linux-doc@vger.kernel.org>; Mon,  7 Oct 2024 23:30:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728343058; cv=none; b=U4cGyouDdP1nl1O4hFboaTfY+g1ASs7Y6yf/818+ML0yFmKMPc8WsigjOP4d9IXcs6khOoB31J6ObOyFmjZxOzhAix+PIvQuu0Pyw8UA+EprGCB4UXb3YnYtayc+gTb7MzxwpDsdKqH2i3DxltOtON7ptXy6NvmNZACRAx1JLXw=
+	t=1728343815; cv=none; b=Jtx/U3ZkM4oU4Qjjlbv7p3vuIok4VOH3PWLFTwOOM1IfmQjG/jzlZRxxv6aGKjStmQM7AYvXkGn6c2dzL9Ac3mhu9HSHvrRKPgMSFhBvXP5v6MnSosXV8n0y1kgdK3fRxGMl9LTI4hEY1HcYTfBEEOS+Uc4mP0tEty/KY0FJvbA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728343058; c=relaxed/simple;
-	bh=0PO9Hx4MA+2p9Wm1vIRiNz0Ua1TJ7pMAU4CK8x2Ycwo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=L2lODwLtIKzyNsvO6d7UyUTmJUwuedxCwQwxLo8ec6pY6D3QIkIh8Daz6aEMwg0ARQsuwgYXT3EumZI6hO/Ec8cDx+VID3daAGj7NA1eDzpd72ofjHsdKy6dpT0VfMAU8Bm9PuPxfRn1O0KVVeV486yHTNFdfivpE2xKJ4Io0ac=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=lCtfLBGq; arc=none smtp.client-ip=192.198.163.18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1728343057; x=1759879057;
-  h=from:date:subject:mime-version:content-transfer-encoding:
-   message-id:references:in-reply-to:to:cc;
-  bh=0PO9Hx4MA+2p9Wm1vIRiNz0Ua1TJ7pMAU4CK8x2Ycwo=;
-  b=lCtfLBGqD2jyJiVFoEe35eoY6GiZrVAlZPqRvkD/CGVPA4vAwMxxAZj0
-   0lb7kqqQTcHuNofE/k1uXCPQ6mHd7co7/cM6ANUS1Uqqdzu065okO2JY5
-   G8H/7OARbKN4QP05+cMNtgC54de52kLqKJ/NnyLj1ZfiNfys7RtnRfc1V
-   gUYDFwz0aMdKDIwOPM7XQEMHCa624Ar4VPkkeXUSO9RcEn1DC6F6PUphP
-   bZNxWUsUDAzMZnsNo6jkRWed9ArBS1QJGLddk1qACN5y7brXJOfs3xIlY
-   4jHKpCcOJnmImlxNEqid0e7eUka/y3bC7RmJSYD68ddmT1HeHbbyo4zrV
-   w==;
-X-CSE-ConnectionGUID: o6kwYxz2SC2eToVcSTFQwQ==
-X-CSE-MsgGUID: ZdHDSp+XRMmYDmDhyqGeJg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11218"; a="26972726"
-X-IronPort-AV: E=Sophos;i="6.11,185,1725346800"; 
-   d="scan'208";a="26972726"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
-  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Oct 2024 16:17:36 -0700
-X-CSE-ConnectionGUID: yjku3WaJTaWNW119ouXc1A==
-X-CSE-MsgGUID: Pv6cjjJXQpSM4UmUNZt4Bg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,185,1725346800"; 
-   d="scan'208";a="76001854"
-Received: from ldmartin-desk2.corp.intel.com (HELO localhost) ([10.125.110.112])
-  by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Oct 2024 16:17:34 -0700
-From: Ira Weiny <ira.weiny@intel.com>
-Date: Mon, 07 Oct 2024 18:16:34 -0500
-Subject: [PATCH v4 28/28] tools/testing/cxl: Add DC Regions to mock mem
- data
+	s=arc-20240116; t=1728343815; c=relaxed/simple;
+	bh=S1F++puxXk1Ulj8gHCvxmOOAcPGjm+vi9Ym0UiVV8hc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ozvza2XS71opsD/TFZUnPaz/8fsNmWHdlB3FyeieKeP6qUIBiUvGBYOd4tvpa1ZMjhUa7tqA6V/rTUYERa5Zl5OKHxAiQvERQ5qbPyzr+TJ83/4UNwsknR69Ze5/6EcoAQCTfm+j/iXqmmnXgaxPTHdxOBjPhyUUjYgd8U59IKY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=ktby9xLk; arc=none smtp.client-ip=209.85.210.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-71df0dbee46so1793411b3a.0
+        for <linux-doc@vger.kernel.org>; Mon, 07 Oct 2024 16:30:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728343812; x=1728948612; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=e7/GR1vy5g6MzSW/6AGsBA6lPgGhyPg9oR0WwZB3CYI=;
+        b=ktby9xLkZAr2/l0cdYu5vXBZSpJTc8C1WJY4c0br7+rLMbpYJICVnk5B8OlUVXfThH
+         WiW2iiUvC5W0J2qdKb/9cuSXSuQF4i51HcPsmcDJpiaBmm6YjTRrH2tBqMMlaV++p3fG
+         u0E26Y23eCqRzhG6wbKWlJJIvsfnQ98Jy1HKkmUM2sv1Zg6jL/s+woWdKI+17vZr+XXC
+         OYorqtcblNuNivuqozuxo2THjZyAK2r1TCSwDiOf1tz9n3Dkfeon1W/kvpl+j6kegFsF
+         w5Ea1KLLz5H33G8KmASrKvkCvKstLrFWKDHQ5r8yEUOyR15C3KJlRe5TCnXqknDhd2oO
+         /60w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1728343812; x=1728948612;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=e7/GR1vy5g6MzSW/6AGsBA6lPgGhyPg9oR0WwZB3CYI=;
+        b=pIi72sx5I9yCBNgJbAzhycpJs+BI1aRp4mp9yAnygOQK2/ZgU2t9DS4Z19iNHK/XIj
+         rN1Fbk7o16MYc3qbmBnBW7y90SOY9mOl4qvJaBoGGSCrVm/RXx2fwRNwOqefvMJpFN+G
+         QLXWc3379spzpJIov8Xsqo50Mi36Osc3e3L6l0l1WEcM+m5t6JvioUSo1WQGlqBKmYRS
+         9wa7za9IKdQdzvJGqajfoskhFwUrtaf+SLxQ6jmX4bndongO1h9CyBYVAHXfCGQJ76vC
+         eH/Zi65eCoaIeq1Sve2gGlQ8dZG7uF6qTz30zQMTb3tbsPvyZ+a5uCJ8v9/L61kD/CSp
+         ZmOA==
+X-Forwarded-Encrypted: i=1; AJvYcCUZpNDXSenZ4z2ecKeKSFMz3lAtpZaG4SvPhKGnwELXztaQFSCTdGoKue6BWP1pDytTIeptFQb/sow=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwoRAJJIUyNSG1dBhur4CBW4Jscg2OMG/uQmC+34vQk+GzL0ykM
+	FpkIxee87D4dFRQnMdzgept5lRa1R1w/8yDn0KBUacspzOmjfgm2M9+9LZ2EsH8=
+X-Google-Smtp-Source: AGHT+IGbBDU9FuYkbc/ROL+eEuwX1ANHvoegHjKgVYPBMiJcEOGbwaOtHTQqomqAdeFDnRJFbE5XwQ==
+X-Received: by 2002:a05:6a00:8a03:b0:71d:ee1b:c854 with SMTP id d2e1a72fcca58-71dee1bcacamr11916142b3a.9.1728343812103;
+        Mon, 07 Oct 2024 16:30:12 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-71df0cbba1csm4970382b3a.33.2024.10.07.16.30.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Oct 2024 16:30:11 -0700 (PDT)
+Date: Mon, 7 Oct 2024 16:30:08 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Zong Li <zong.li@sifive.com>
+Cc: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>, Conor Dooley <conor@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Christian Brauner <brauner@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Oleg Nesterov <oleg@redhat.com>,
+	Eric Biederman <ebiederm@xmission.com>, Kees Cook <kees@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
+	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org, linux-riscv@lists.infradead.org,
+	devicetree@vger.kernel.org, linux-arch@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	alistair.francis@wdc.com, richard.henderson@linaro.org,
+	jim.shu@sifive.com, andybnac@gmail.com, kito.cheng@sifive.com,
+	charlie@rivosinc.com, atishp@rivosinc.com, evan@rivosinc.com,
+	cleger@rivosinc.com, alexghiti@rivosinc.com,
+	samitolvanen@google.com, broonie@kernel.org,
+	rick.p.edgecombe@intel.com
+Subject: Re: [PATCH 16/33] riscv/shstk: If needed allocate a new shadow stack
+ on clone
+Message-ID: <ZwRvAEwFbrpq3zZq@debug.ba.rivosinc.com>
+References: <20241001-v5_user_cfi_series-v1-0-3ba65b6e550f@rivosinc.com>
+ <20241001-v5_user_cfi_series-v1-16-3ba65b6e550f@rivosinc.com>
+ <CANXhq0rpwQkZ9+mZLGVUq=r4WiA8BbZ-eeTDogf3fzeEPqeeqA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241007-dcd-type2-upstream-v4-28-c261ee6eeded@intel.com>
-References: <20241007-dcd-type2-upstream-v4-0-c261ee6eeded@intel.com>
-In-Reply-To: <20241007-dcd-type2-upstream-v4-0-c261ee6eeded@intel.com>
-To: Dave Jiang <dave.jiang@intel.com>, Fan Ni <fan.ni@samsung.com>, 
- Jonathan Cameron <Jonathan.Cameron@huawei.com>, 
- Navneet Singh <navneet.singh@intel.com>, Jonathan Corbet <corbet@lwn.net>, 
- Andrew Morton <akpm@linux-foundation.org>
-Cc: Dan Williams <dan.j.williams@intel.com>, 
- Davidlohr Bueso <dave@stgolabs.net>, 
- Alison Schofield <alison.schofield@intel.com>, 
- Vishal Verma <vishal.l.verma@intel.com>, Ira Weiny <ira.weiny@intel.com>, 
- linux-btrfs@vger.kernel.org, linux-cxl@vger.kernel.org, 
- linux-doc@vger.kernel.org, nvdimm@lists.linux.dev, 
- linux-kernel@vger.kernel.org
-X-Mailer: b4 0.15-dev-37811
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1728342968; l=22422;
- i=ira.weiny@intel.com; s=20221211; h=from:subject:message-id;
- bh=0PO9Hx4MA+2p9Wm1vIRiNz0Ua1TJ7pMAU4CK8x2Ycwo=;
- b=GSEsQvpuQzmddgkt1NmUfWo+lS0hqYEVcCptirXOaEO/TTRB2RAmSMCPeSkfSDj8fZYh+Z0CH
- xxGocKcthq8C8d9uisa88lhrWvV6g/r273BqFaaD8zTJaRid11XTHZ5
-X-Developer-Key: i=ira.weiny@intel.com; a=ed25519;
- pk=noldbkG+Wp1qXRrrkfY1QJpDf7QsOEthbOT7vm0PqsE=
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CANXhq0rpwQkZ9+mZLGVUq=r4WiA8BbZ-eeTDogf3fzeEPqeeqA@mail.gmail.com>
 
-cxl_test provides a good way to ensure quick smoke and regression
-testing.  The complexity of Dynamic Capacity (DC) extent processing as
-well as the complexity of the new sparse DAX regions can mostly be
-tested through cxl_test.  This includes management of sparse regions and
-DAX devices on those regions; the management of extent device lifetimes;
-and the processing of DCD events.
+On Mon, Oct 07, 2024 at 04:17:47PM +0800, Zong Li wrote:
+>On Wed, Oct 2, 2024 at 12:20 AM Deepak Gupta <debug@rivosinc.com> wrote:
+>>
+>> Userspace specifies CLONE_VM to share address space and spawn new thread.
+>> `clone` allow userspace to specify a new stack for new thread. However
+>> there is no way to specify new shadow stack base address without changing
+>> API. This patch allocates a new shadow stack whenever CLONE_VM is given.
+>>
+>> In case of CLONE_VFORK, parent is suspended until child finishes and thus
+>> can child use parent shadow stack. In case of !CLONE_VM, COW kicks in
+>> because entire address space is copied from parent to child.
+>>
+>> `clone3` is extensible and can provide mechanisms using which shadow stack
+>> as an input parameter can be provided. This is not settled yet and being
+>> extensively discussed on mailing list. Once that's settled, this commit
+>> will adapt to that.
+>>
+>> Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+>> ---
+>>  arch/riscv/include/asm/usercfi.h |  25 ++++++++
 
-The only missing functionality from this test is actual interrupt
-processing.
+... snipped...
 
-Mock memory devices can easily mock DC information and manage fake
-extent data.
+>> +
+>> +/*
+>> + * This gets called during clone/clone3/fork. And is needed to allocate a shadow stack for
+>> + * cases where CLONE_VM is specified and thus a different stack is specified by user. We
+>> + * thus need a separate shadow stack too. How does separate shadow stack is specified by
+>> + * user is still being debated. Once that's settled, remove this part of the comment.
+>> + * This function simply returns 0 if shadow stack are not supported or if separate shadow
+>> + * stack allocation is not needed (like in case of !CLONE_VM)
+>> + */
+>> +unsigned long shstk_alloc_thread_stack(struct task_struct *tsk,
+>> +                                          const struct kernel_clone_args *args)
+>> +{
+>> +       unsigned long addr, size;
+>> +
+>> +       /* If shadow stack is not supported, return 0 */
+>> +       if (!cpu_supports_shadow_stack())
+>> +               return 0;
+>> +
+>> +       /*
+>> +        * If shadow stack is not enabled on the new thread, skip any
+>> +        * switch to a new shadow stack.
+>> +        */
+>> +       if (is_shstk_enabled(tsk))
+>
+>Hi Deepak,
+>Should it be '!' is_shstk_enabled(tsk)?
 
-Define mock_dc_region information within the mock memory data.  Add
-sysfs entries on the mock device to inject and delete extents.
+Yes it is a bug. It seems like fork without CLONE_VM or with CLONE_VFORK, it was returning
+0 anyways. And in the case of CLONE_VM (used by pthread), it was not doing the right thing.
+Most of the testing has been with busybox build (independent binaries0 driven via buildroot
+setup. Wondering why it wasn't caught.
 
-The inject format is <start>:<length>:<tag>:<more_flag>
-The delete format is <start>:<length>
+Anyways, will fix it. Thanks for catching it.
 
-Directly call the event irq callback to simulate irqs to process the
-test extents.
-
-Add DC mailbox commands to the CEL and implement those commands.
-
-Signed-off-by: Ira Weiny <ira.weiny@intel.com>
----
-Changes:
-[Jonathan: use min()]
-[Jonathan: remove cxl_mock_mem_remove()]
-[Jonathan/jgroves/iweiny: Remove extent tags]
----
- tools/testing/cxl/test/mem.c | 692 ++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 691 insertions(+), 1 deletion(-)
-
-diff --git a/tools/testing/cxl/test/mem.c b/tools/testing/cxl/test/mem.c
-index 5e453aa2819b..30c56ff3e032 100644
---- a/tools/testing/cxl/test/mem.c
-+++ b/tools/testing/cxl/test/mem.c
-@@ -20,6 +20,7 @@
- #define FW_SLOTS 3
- #define DEV_SIZE SZ_2G
- #define EFFECT(x) (1U << x)
-+#define BASE_DYNAMIC_CAP_DPA DEV_SIZE
- 
- #define MOCK_INJECT_DEV_MAX 8
- #define MOCK_INJECT_TEST_MAX 128
-@@ -97,6 +98,22 @@ static struct cxl_cel_entry mock_cel[] = {
- 				      EFFECT(SECURITY_CHANGE_IMMEDIATE) |
- 				      EFFECT(BACKGROUND_OP)),
- 	},
-+	{
-+		.opcode = cpu_to_le16(CXL_MBOX_OP_GET_DC_CONFIG),
-+		.effect = CXL_CMD_EFFECT_NONE,
-+	},
-+	{
-+		.opcode = cpu_to_le16(CXL_MBOX_OP_GET_DC_EXTENT_LIST),
-+		.effect = CXL_CMD_EFFECT_NONE,
-+	},
-+	{
-+		.opcode = cpu_to_le16(CXL_MBOX_OP_ADD_DC_RESPONSE),
-+		.effect = cpu_to_le16(EFFECT(CONF_CHANGE_IMMEDIATE)),
-+	},
-+	{
-+		.opcode = cpu_to_le16(CXL_MBOX_OP_RELEASE_DC),
-+		.effect = cpu_to_le16(EFFECT(CONF_CHANGE_IMMEDIATE)),
-+	},
- };
- 
- /* See CXL 2.0 Table 181 Get Health Info Output Payload */
-@@ -153,6 +170,7 @@ struct mock_event_store {
- 	u32 ev_status;
- };
- 
-+#define NUM_MOCK_DC_REGIONS 2
- struct cxl_mockmem_data {
- 	void *lsa;
- 	void *fw;
-@@ -169,6 +187,11 @@ struct cxl_mockmem_data {
- 	u8 event_buf[SZ_4K];
- 	u64 timestamp;
- 	unsigned long sanitize_timeout;
-+	struct cxl_dc_region_config dc_regions[NUM_MOCK_DC_REGIONS];
-+	u32 dc_ext_generation;
-+	struct mutex ext_lock;
-+	struct xarray dc_extents;
-+	struct xarray dc_accepted_exts;
- };
- 
- static struct mock_event_log *event_find_log(struct device *dev, int log_type)
-@@ -568,6 +591,237 @@ static void cxl_mock_event_trigger(struct device *dev)
- 	cxl_mem_get_event_records(mdata->mds, mes->ev_status);
- }
- 
-+struct cxl_extent_data {
-+	u64 dpa_start;
-+	u64 length;
-+	u8 tag[CXL_EXTENT_TAG_LEN];
-+	bool shared;
-+};
-+
-+static int __devm_add_extent(struct device *dev, struct xarray *array,
-+			     u64 start, u64 length, const char *tag,
-+			     bool shared)
-+{
-+	struct cxl_extent_data *extent;
-+
-+	extent = devm_kzalloc(dev, sizeof(*extent), GFP_KERNEL);
-+	if (!extent)
-+		return -ENOMEM;
-+
-+	extent->dpa_start = start;
-+	extent->length = length;
-+	memcpy(extent->tag, tag, min(sizeof(extent->tag), strlen(tag)));
-+	extent->shared = shared;
-+
-+	if (xa_insert(array, start, extent, GFP_KERNEL)) {
-+		devm_kfree(dev, extent);
-+		dev_err(dev, "Failed xarry insert %#llx\n", start);
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+static int devm_add_extent(struct device *dev, u64 start, u64 length,
-+			   const char *tag, bool shared)
-+{
-+	struct cxl_mockmem_data *mdata = dev_get_drvdata(dev);
-+
-+	guard(mutex)(&mdata->ext_lock);
-+	return __devm_add_extent(dev, &mdata->dc_extents, start, length, tag,
-+				 shared);
-+}
-+
-+/* It is known that ext and the new range are not equal */
-+static struct cxl_extent_data *
-+split_ext(struct device *dev, struct xarray *array,
-+	  struct cxl_extent_data *ext, u64 start, u64 length)
-+{
-+	u64 new_start, new_length;
-+
-+	if (ext->dpa_start == start) {
-+		new_start = start + length;
-+		new_length = (ext->dpa_start + ext->length) - new_start;
-+
-+		if (__devm_add_extent(dev, array, new_start, new_length,
-+				      ext->tag, false))
-+			return NULL;
-+
-+		ext = xa_erase(array, ext->dpa_start);
-+		if (__devm_add_extent(dev, array, start, length, ext->tag,
-+				      false))
-+			return NULL;
-+
-+		return xa_load(array, start);
-+	}
-+
-+	/* ext->dpa_start != start */
-+
-+	if (__devm_add_extent(dev, array, start, length, ext->tag, false))
-+		return NULL;
-+
-+	new_start = ext->dpa_start;
-+	new_length = start - ext->dpa_start;
-+
-+	ext = xa_erase(array, ext->dpa_start);
-+	if (__devm_add_extent(dev, array, new_start, new_length, ext->tag,
-+			      false))
-+		return NULL;
-+
-+	return xa_load(array, start);
-+}
-+
-+/*
-+ * Do not handle extents which are not inside a single extent sent to
-+ * the host.
-+ */
-+static struct cxl_extent_data *
-+find_create_ext(struct device *dev, struct xarray *array, u64 start, u64 length)
-+{
-+	struct cxl_extent_data *ext;
-+	unsigned long index;
-+
-+	xa_for_each(array, index, ext) {
-+		u64 end = start + length;
-+
-+		/* start < [ext) <= start */
-+		if (start < ext->dpa_start ||
-+		    (ext->dpa_start + ext->length) <= start)
-+			continue;
-+
-+		if (end <= ext->dpa_start ||
-+		    (ext->dpa_start + ext->length) < end) {
-+			dev_err(dev, "Invalid range %#llx-%#llx\n", start,
-+				end);
-+			return NULL;
-+		}
-+
-+		break;
-+	}
-+
-+	if (!ext)
-+		return NULL;
-+
-+	if (start == ext->dpa_start && length == ext->length)
-+		return ext;
-+
-+	return split_ext(dev, array, ext, start, length);
-+}
-+
-+static int dc_accept_extent(struct device *dev, u64 start, u64 length)
-+{
-+	struct cxl_mockmem_data *mdata = dev_get_drvdata(dev);
-+	struct cxl_extent_data *ext;
-+
-+	dev_dbg(dev, "Host accepting extent %#llx\n", start);
-+	mdata->dc_ext_generation++;
-+
-+	guard(mutex)(&mdata->ext_lock);
-+	ext = find_create_ext(dev, &mdata->dc_extents, start, length);
-+	if (!ext) {
-+		dev_err(dev, "Extent %#llx-%#llx not found\n",
-+			start, start + length);
-+		return -ENOMEM;
-+	}
-+	ext = xa_erase(&mdata->dc_extents, ext->dpa_start);
-+	return xa_insert(&mdata->dc_accepted_exts, start, ext, GFP_KERNEL);
-+}
-+
-+static void release_dc_ext(void *md)
-+{
-+	struct cxl_mockmem_data *mdata = md;
-+
-+	xa_destroy(&mdata->dc_extents);
-+	xa_destroy(&mdata->dc_accepted_exts);
-+}
-+
-+/* Pretend to have some previous accepted extents */
-+struct pre_ext_info {
-+	u64 offset;
-+	u64 length;
-+} pre_ext_info[] = {
-+	{
-+		.offset = SZ_128M,
-+		.length = SZ_64M,
-+	},
-+	{
-+		.offset = SZ_256M,
-+		.length = SZ_64M,
-+	},
-+};
-+
-+static int inject_prev_extents(struct device *dev, u64 base_dpa)
-+{
-+	int rc;
-+
-+	dev_dbg(dev, "Adding %ld pre-extents for testing\n",
-+		ARRAY_SIZE(pre_ext_info));
-+
-+	for (int i = 0; i < ARRAY_SIZE(pre_ext_info); i++) {
-+		u64 ext_dpa = base_dpa + pre_ext_info[i].offset;
-+		u64 ext_len = pre_ext_info[i].length;
-+
-+		dev_dbg(dev, "Adding pre-extent DPA:%#llx LEN:%#llx\n",
-+			ext_dpa, ext_len);
-+
-+		rc = devm_add_extent(dev, ext_dpa, ext_len, "", false);
-+		if (rc) {
-+			dev_err(dev, "Failed to add pre-extent DPA:%#llx LEN:%#llx; %d\n",
-+				ext_dpa, ext_len, rc);
-+			return rc;
-+		}
-+
-+		rc = dc_accept_extent(dev, ext_dpa, ext_len);
-+		if (rc)
-+			return rc;
-+	}
-+	return 0;
-+}
-+
-+static int cxl_mock_dc_region_setup(struct device *dev)
-+{
-+	struct cxl_mockmem_data *mdata = dev_get_drvdata(dev);
-+	u64 base_dpa = BASE_DYNAMIC_CAP_DPA;
-+	u32 dsmad_handle = 0xFADE;
-+	u64 decode_length = SZ_512M;
-+	u64 block_size = SZ_512;
-+	u64 length = SZ_512M;
-+	int rc;
-+
-+	mutex_init(&mdata->ext_lock);
-+	xa_init(&mdata->dc_extents);
-+	xa_init(&mdata->dc_accepted_exts);
-+
-+	rc = devm_add_action_or_reset(dev, release_dc_ext, mdata);
-+	if (rc)
-+		return rc;
-+
-+	for (int i = 0; i < NUM_MOCK_DC_REGIONS; i++) {
-+		struct cxl_dc_region_config *conf = &mdata->dc_regions[i];
-+
-+		dev_dbg(dev, "Creating DC region DC%d DPA:%#llx LEN:%#llx\n",
-+			i, base_dpa, length);
-+
-+		conf->region_base = cpu_to_le64(base_dpa);
-+		conf->region_decode_length = cpu_to_le64(decode_length /
-+						CXL_CAPACITY_MULTIPLIER);
-+		conf->region_length = cpu_to_le64(length);
-+		conf->region_block_size = cpu_to_le64(block_size);
-+		conf->region_dsmad_handle = cpu_to_le32(dsmad_handle);
-+		dsmad_handle++;
-+
-+		rc = inject_prev_extents(dev, base_dpa);
-+		if (rc) {
-+			dev_err(dev, "Failed to add pre-extents for DC%d\n", i);
-+			return rc;
-+		}
-+
-+		base_dpa += decode_length;
-+	}
-+
-+	return 0;
-+}
-+
- static int mock_gsl(struct cxl_mbox_cmd *cmd)
- {
- 	if (cmd->size_out < sizeof(mock_gsl_payload))
-@@ -1383,6 +1637,175 @@ static int mock_activate_fw(struct cxl_mockmem_data *mdata,
- 	return -EINVAL;
- }
- 
-+static int mock_get_dc_config(struct device *dev,
-+			      struct cxl_mbox_cmd *cmd)
-+{
-+	struct cxl_mbox_get_dc_config_in *dc_config = cmd->payload_in;
-+	struct cxl_mockmem_data *mdata = dev_get_drvdata(dev);
-+	u8 region_requested, region_start_idx, region_ret_cnt;
-+	struct cxl_mbox_get_dc_config_out *resp;
-+	int i;
-+
-+	region_requested = min(dc_config->region_count, NUM_MOCK_DC_REGIONS);
-+
-+	if (cmd->size_out < struct_size(resp, region, region_requested))
-+		return -EINVAL;
-+
-+	memset(cmd->payload_out, 0, cmd->size_out);
-+	resp = cmd->payload_out;
-+
-+	region_start_idx = dc_config->start_region_index;
-+	region_ret_cnt = 0;
-+	for (i = 0; i < NUM_MOCK_DC_REGIONS; i++) {
-+		if (i >= region_start_idx) {
-+			memcpy(&resp->region[region_ret_cnt],
-+				&mdata->dc_regions[i],
-+				sizeof(resp->region[region_ret_cnt]));
-+			region_ret_cnt++;
-+		}
-+	}
-+	resp->avail_region_count = NUM_MOCK_DC_REGIONS;
-+	resp->regions_returned = i;
-+
-+	dev_dbg(dev, "Returning %d dc regions\n", region_ret_cnt);
-+	return 0;
-+}
-+
-+static int mock_get_dc_extent_list(struct device *dev,
-+				   struct cxl_mbox_cmd *cmd)
-+{
-+	struct cxl_mbox_get_extent_out *resp = cmd->payload_out;
-+	struct cxl_mockmem_data *mdata = dev_get_drvdata(dev);
-+	struct cxl_mbox_get_extent_in *get = cmd->payload_in;
-+	u32 total_avail = 0, total_ret = 0;
-+	struct cxl_extent_data *ext;
-+	u32 ext_count, start_idx;
-+	unsigned long i;
-+
-+	ext_count = le32_to_cpu(get->extent_cnt);
-+	start_idx = le32_to_cpu(get->start_extent_index);
-+
-+	memset(resp, 0, sizeof(*resp));
-+
-+	guard(mutex)(&mdata->ext_lock);
-+	/*
-+	 * Total available needs to be calculated and returned regardless of
-+	 * how many can actually be returned.
-+	 */
-+	xa_for_each(&mdata->dc_accepted_exts, i, ext)
-+		total_avail++;
-+
-+	if (start_idx > total_avail)
-+		return -EINVAL;
-+
-+	xa_for_each(&mdata->dc_accepted_exts, i, ext) {
-+		if (total_ret >= ext_count)
-+			break;
-+
-+		if (total_ret >= start_idx) {
-+			resp->extent[total_ret].start_dpa =
-+						cpu_to_le64(ext->dpa_start);
-+			resp->extent[total_ret].length =
-+						cpu_to_le64(ext->length);
-+			memcpy(&resp->extent[total_ret].tag, ext->tag,
-+					sizeof(resp->extent[total_ret]));
-+			total_ret++;
-+		}
-+	}
-+
-+	resp->returned_extent_count = cpu_to_le32(total_ret);
-+	resp->total_extent_count = cpu_to_le32(total_avail);
-+	resp->generation_num = cpu_to_le32(mdata->dc_ext_generation);
-+
-+	dev_dbg(dev, "Returning %d extents of %d total\n",
-+		total_ret, total_avail);
-+
-+	return 0;
-+}
-+
-+static int mock_add_dc_response(struct device *dev,
-+				struct cxl_mbox_cmd *cmd)
-+{
-+	struct cxl_mbox_dc_response *req = cmd->payload_in;
-+	u32 list_size = le32_to_cpu(req->extent_list_size);
-+
-+	for (int i = 0; i < list_size; i++) {
-+		u64 start = le64_to_cpu(req->extent_list[i].dpa_start);
-+		u64 length = le64_to_cpu(req->extent_list[i].length);
-+		int rc;
-+
-+		rc = dc_accept_extent(dev, start, length);
-+		if (rc)
-+			return rc;
-+	}
-+
-+	return 0;
-+}
-+
-+static void dc_delete_extent(struct device *dev, unsigned long long start,
-+			     unsigned long long length)
-+{
-+	struct cxl_mockmem_data *mdata = dev_get_drvdata(dev);
-+	unsigned long long end = start + length;
-+	struct cxl_extent_data *ext;
-+	unsigned long index;
-+
-+	dev_dbg(dev, "Deleting extent at %#llx len:%#llx\n", start, length);
-+
-+	guard(mutex)(&mdata->ext_lock);
-+	xa_for_each(&mdata->dc_extents, index, ext) {
-+		u64 extent_end = ext->dpa_start + ext->length;
-+
-+		/*
-+		 * Any extent which 'touches' the released delete range will be
-+		 * removed.
-+		 */
-+		if ((start <= ext->dpa_start && ext->dpa_start < end) ||
-+		    (start <= extent_end && extent_end < end)) {
-+			xa_erase(&mdata->dc_extents, ext->dpa_start);
-+		}
-+	}
-+
-+	/*
-+	 * If the extent was accepted let it be for the host to drop
-+	 * later.
-+	 */
-+}
-+
-+static int release_accepted_extent(struct device *dev, u64 start, u64 length)
-+{
-+	struct cxl_mockmem_data *mdata = dev_get_drvdata(dev);
-+	struct cxl_extent_data *ext;
-+
-+	guard(mutex)(&mdata->ext_lock);
-+	ext = find_create_ext(dev, &mdata->dc_accepted_exts, start, length);
-+	if (!ext) {
-+		dev_err(dev, "Extent %#llx not in accepted state\n", start);
-+		return -EINVAL;
-+	}
-+	xa_erase(&mdata->dc_accepted_exts, ext->dpa_start);
-+	mdata->dc_ext_generation++;
-+
-+	return 0;
-+}
-+
-+static int mock_dc_release(struct device *dev,
-+			   struct cxl_mbox_cmd *cmd)
-+{
-+	struct cxl_mbox_dc_response *req = cmd->payload_in;
-+	u32 list_size = le32_to_cpu(req->extent_list_size);
-+
-+	for (int i = 0; i < list_size; i++) {
-+		u64 start = le64_to_cpu(req->extent_list[i].dpa_start);
-+		u64 length = le64_to_cpu(req->extent_list[i].length);
-+
-+		dev_dbg(dev, "Extent %#llx released by host\n", start);
-+		release_accepted_extent(dev, start, length);
-+	}
-+
-+	return 0;
-+}
-+
- static int cxl_mock_mbox_send(struct cxl_mailbox *cxl_mbox,
- 			      struct cxl_mbox_cmd *cmd)
- {
-@@ -1468,6 +1891,18 @@ static int cxl_mock_mbox_send(struct cxl_mailbox *cxl_mbox,
- 	case CXL_MBOX_OP_ACTIVATE_FW:
- 		rc = mock_activate_fw(mdata, cmd);
- 		break;
-+	case CXL_MBOX_OP_GET_DC_CONFIG:
-+		rc = mock_get_dc_config(dev, cmd);
-+		break;
-+	case CXL_MBOX_OP_GET_DC_EXTENT_LIST:
-+		rc = mock_get_dc_extent_list(dev, cmd);
-+		break;
-+	case CXL_MBOX_OP_ADD_DC_RESPONSE:
-+		rc = mock_add_dc_response(dev, cmd);
-+		break;
-+	case CXL_MBOX_OP_RELEASE_DC:
-+		rc = mock_dc_release(dev, cmd);
-+		break;
- 	default:
- 		break;
- 	}
-@@ -1538,6 +1973,10 @@ static int cxl_mock_mem_probe(struct platform_device *pdev)
- 		return -ENOMEM;
- 	dev_set_drvdata(dev, mdata);
- 
-+	rc = cxl_mock_dc_region_setup(dev);
-+	if (rc)
-+		return rc;
-+
- 	mdata->lsa = vmalloc(LSA_SIZE);
- 	if (!mdata->lsa)
- 		return -ENOMEM;
-@@ -1591,6 +2030,10 @@ static int cxl_mock_mem_probe(struct platform_device *pdev)
- 	if (rc)
- 		return rc;
- 
-+	rc = cxl_dev_dynamic_capacity_identify(mds);
-+	if (rc)
-+		return rc;
-+
- 	rc = cxl_mem_create_range_info(mds);
- 	if (rc)
- 		return rc;
-@@ -1703,14 +2146,261 @@ static ssize_t sanitize_timeout_store(struct device *dev,
- 
- 	return count;
- }
--
- static DEVICE_ATTR_RW(sanitize_timeout);
- 
-+/* Return if the proposed extent would break the test code */
-+static bool new_extent_valid(struct device *dev, size_t new_start,
-+			     size_t new_len)
-+{
-+	struct cxl_mockmem_data *mdata = dev_get_drvdata(dev);
-+	struct cxl_extent_data *extent;
-+	size_t new_end, i;
-+
-+	if (!new_len)
-+		return false;
-+
-+	new_end = new_start + new_len;
-+
-+	dev_dbg(dev, "New extent %zx-%zx\n", new_start, new_end);
-+
-+	guard(mutex)(&mdata->ext_lock);
-+	dev_dbg(dev, "Checking extents starts...\n");
-+	xa_for_each(&mdata->dc_extents, i, extent) {
-+		if (extent->dpa_start == new_start)
-+			return false;
-+	}
-+
-+	dev_dbg(dev, "Checking accepted extents starts...\n");
-+	xa_for_each(&mdata->dc_accepted_exts, i, extent) {
-+		if (extent->dpa_start == new_start)
-+			return false;
-+	}
-+
-+	return true;
-+}
-+
-+struct cxl_test_dcd {
-+	uuid_t id;
-+	struct cxl_event_dcd rec;
-+} __packed;
-+
-+struct cxl_test_dcd dcd_event_rec_template = {
-+	.id = CXL_EVENT_DC_EVENT_UUID,
-+	.rec = {
-+		.hdr = {
-+			.length = sizeof(struct cxl_test_dcd),
-+		},
-+	},
-+};
-+
-+static int log_dc_event(struct cxl_mockmem_data *mdata, enum dc_event type,
-+			u64 start, u64 length, const char *tag_str, bool more)
-+{
-+	struct device *dev = mdata->mds->cxlds.dev;
-+	struct cxl_test_dcd *dcd_event;
-+
-+	dev_dbg(dev, "mock device log event %d\n", type);
-+
-+	dcd_event = devm_kmemdup(dev, &dcd_event_rec_template,
-+				     sizeof(*dcd_event), GFP_KERNEL);
-+	if (!dcd_event)
-+		return -ENOMEM;
-+
-+	dcd_event->rec.flags = 0;
-+	if (more)
-+		dcd_event->rec.flags |= CXL_DCD_EVENT_MORE;
-+	dcd_event->rec.event_type = type;
-+	dcd_event->rec.extent.start_dpa = cpu_to_le64(start);
-+	dcd_event->rec.extent.length = cpu_to_le64(length);
-+	memcpy(dcd_event->rec.extent.tag, tag_str,
-+	       min(sizeof(dcd_event->rec.extent.tag),
-+		   strlen(tag_str)));
-+
-+	mes_add_event(mdata, CXL_EVENT_TYPE_DCD,
-+		      (struct cxl_event_record_raw *)dcd_event);
-+
-+	/* Fake the irq */
-+	cxl_mem_get_event_records(mdata->mds, CXLDEV_EVENT_STATUS_DCD);
-+
-+	return 0;
-+}
-+
-+/*
-+ * Format <start>:<length>:<tag>
-+ *
-+ * start and length must be a multiple of the configured region block size.
-+ * Tag can be any string up to 16 bytes.
-+ *
-+ * Extents must be exclusive of other extents
-+ */
-+static ssize_t __dc_inject_extent_store(struct device *dev,
-+					struct device_attribute *attr,
-+					const char *buf, size_t count,
-+					bool shared)
-+{
-+	struct cxl_mockmem_data *mdata = dev_get_drvdata(dev);
-+	unsigned long long start, length, more;
-+	char *len_str, *tag_str, *more_str;
-+	size_t buf_len = count;
-+	int rc;
-+
-+	char *start_str __free(kfree) = kstrdup(buf, GFP_KERNEL);
-+	if (!start_str)
-+		return -ENOMEM;
-+
-+	len_str = strnchr(start_str, buf_len, ':');
-+	if (!len_str) {
-+		dev_err(dev, "Extent failed to find len_str: %s\n", start_str);
-+		return -EINVAL;
-+	}
-+
-+	*len_str = '\0';
-+	len_str += 1;
-+	buf_len -= strlen(start_str);
-+
-+	tag_str = strnchr(len_str, buf_len, ':');
-+	if (!tag_str) {
-+		dev_err(dev, "Extent failed to find tag_str: %s\n", len_str);
-+		return -EINVAL;
-+	}
-+	*tag_str = '\0';
-+	tag_str += 1;
-+
-+	more_str = strnchr(tag_str, buf_len, ':');
-+	if (!more_str) {
-+		dev_err(dev, "Extent failed to find more_str: %s\n", tag_str);
-+		return -EINVAL;
-+	}
-+	*more_str = '\0';
-+	more_str += 1;
-+
-+	if (kstrtoull(start_str, 0, &start)) {
-+		dev_err(dev, "Extent failed to parse start: %s\n", start_str);
-+		return -EINVAL;
-+	}
-+
-+	if (kstrtoull(len_str, 0, &length)) {
-+		dev_err(dev, "Extent failed to parse length: %s\n", len_str);
-+		return -EINVAL;
-+	}
-+
-+	if (kstrtoull(more_str, 0, &more)) {
-+		dev_err(dev, "Extent failed to parse more: %s\n", more_str);
-+		return -EINVAL;
-+	}
-+
-+	if (!new_extent_valid(dev, start, length))
-+		return -EINVAL;
-+
-+	rc = devm_add_extent(dev, start, length, tag_str, shared);
-+	if (rc) {
-+		dev_err(dev, "Failed to add extent DPA:%#llx LEN:%#llx; %d\n",
-+			start, length, rc);
-+		return rc;
-+	}
-+
-+	rc = log_dc_event(mdata, DCD_ADD_CAPACITY, start, length, tag_str, more);
-+	if (rc) {
-+		dev_err(dev, "Failed to add event %d\n", rc);
-+		return rc;
-+	}
-+
-+	return count;
-+}
-+
-+static ssize_t dc_inject_extent_store(struct device *dev,
-+				      struct device_attribute *attr,
-+				      const char *buf, size_t count)
-+{
-+	return __dc_inject_extent_store(dev, attr, buf, count, false);
-+}
-+static DEVICE_ATTR_WO(dc_inject_extent);
-+
-+static ssize_t dc_inject_shared_extent_store(struct device *dev,
-+					     struct device_attribute *attr,
-+					     const char *buf, size_t count)
-+{
-+	return __dc_inject_extent_store(dev, attr, buf, count, true);
-+}
-+static DEVICE_ATTR_WO(dc_inject_shared_extent);
-+
-+static ssize_t __dc_del_extent_store(struct device *dev,
-+				     struct device_attribute *attr,
-+				     const char *buf, size_t count,
-+				     enum dc_event type)
-+{
-+	struct cxl_mockmem_data *mdata = dev_get_drvdata(dev);
-+	unsigned long long start, length;
-+	char *len_str;
-+	int rc;
-+
-+	char *start_str __free(kfree) = kstrdup(buf, GFP_KERNEL);
-+	if (!start_str)
-+		return -ENOMEM;
-+
-+	len_str = strnchr(start_str, count, ':');
-+	if (!len_str) {
-+		dev_err(dev, "Failed to find len_str: %s\n", start_str);
-+		return -EINVAL;
-+	}
-+	*len_str = '\0';
-+	len_str += 1;
-+
-+	if (kstrtoull(start_str, 0, &start)) {
-+		dev_err(dev, "Failed to parse start: %s\n", start_str);
-+		return -EINVAL;
-+	}
-+
-+	if (kstrtoull(len_str, 0, &length)) {
-+		dev_err(dev, "Failed to parse length: %s\n", len_str);
-+		return -EINVAL;
-+	}
-+
-+	dc_delete_extent(dev, start, length);
-+
-+	if (type == DCD_FORCED_CAPACITY_RELEASE)
-+		dev_dbg(dev, "Forcing delete of extent %#llx len:%#llx\n",
-+			start, length);
-+
-+	rc = log_dc_event(mdata, type, start, length, "", false);
-+	if (rc) {
-+		dev_err(dev, "Failed to add event %d\n", rc);
-+		return rc;
-+	}
-+
-+	return count;
-+}
-+
-+/*
-+ * Format <start>:<length>
-+ */
-+static ssize_t dc_del_extent_store(struct device *dev,
-+				   struct device_attribute *attr,
-+				   const char *buf, size_t count)
-+{
-+	return __dc_del_extent_store(dev, attr, buf, count,
-+				     DCD_RELEASE_CAPACITY);
-+}
-+static DEVICE_ATTR_WO(dc_del_extent);
-+
-+static ssize_t dc_force_del_extent_store(struct device *dev,
-+					 struct device_attribute *attr,
-+					 const char *buf, size_t count)
-+{
-+	return __dc_del_extent_store(dev, attr, buf, count,
-+				     DCD_FORCED_CAPACITY_RELEASE);
-+}
-+static DEVICE_ATTR_WO(dc_force_del_extent);
-+
- static struct attribute *cxl_mock_mem_attrs[] = {
- 	&dev_attr_security_lock.attr,
- 	&dev_attr_event_trigger.attr,
- 	&dev_attr_fw_buf_checksum.attr,
- 	&dev_attr_sanitize_timeout.attr,
-+	&dev_attr_dc_inject_extent.attr,
-+	&dev_attr_dc_inject_shared_extent.attr,
-+	&dev_attr_dc_del_extent.attr,
-+	&dev_attr_dc_force_del_extent.attr,
- 	NULL
- };
- ATTRIBUTE_GROUPS(cxl_mock_mem);
-
--- 
-2.46.0
-
+>
+>> +               return 0;
+>> +
+>> +       /*
 
