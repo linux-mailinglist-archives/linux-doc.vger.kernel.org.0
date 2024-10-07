@@ -1,77 +1,79 @@
-Return-Path: <linux-doc+bounces-26691-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-26688-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36B9D993613
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 20:24:50 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B6E799360D
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 20:24:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 7DE97B219BC
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 18:24:47 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3D2C31C23AC5
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Oct 2024 18:24:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89DC91DDC38;
-	Mon,  7 Oct 2024 18:24:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EB9931DE2AB;
+	Mon,  7 Oct 2024 18:24:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b="Q7lhBTJ2"
+	dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b="DbXwFhFp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lf1-f100.google.com (mail-lf1-f100.google.com [209.85.167.100])
+Received: from mail-lj1-f225.google.com (mail-lj1-f225.google.com [209.85.208.225])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 056711DDC37
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF6441DDC34
 	for <linux-doc@vger.kernel.org>; Mon,  7 Oct 2024 18:24:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.100
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.225
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728325476; cv=none; b=UpN3c/tpQY8uCpFCFBHa9C1YJwbpWbqykIzDPFT6Z5INu6xKuq6JXjeBv0nmxub4AWh+OEmSzD00namDJUfmHVhfJBH14RcNDJPkq+mZ3Ik/DtwBLpVmIcO/SfWpAurO6t7sQ+VvBNPQ0+nKycJ/h1rkhW3bRHBWC/lVgy2PdBk=
+	t=1728325475; cv=none; b=dawZ4t4GOFjeDBtXzlJPXdpBUGj9KrO/bB+ytUwhX+nz3oIzQaGc1ammMCQhlUxvRYCRe0a4qaPdGMOJugIk1mDPYqCB0tL721iP86WLqFtBedxJoD9FCXq8btDOBakn1FnwgmOBzobgBssIlzg/+yKFAT3keUfai6Ji6eQ8Gro=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728325476; c=relaxed/simple;
-	bh=Bm8pohTrWTkYKI3XXcCRH7TxwPDICL+HxiIBiPqI2Ts=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=uG3zud373xV8BqoHCZs3qYCkZiVGsc2gYp1EYyLaRJwgQwoeALfpGLveN6OwyHIJvN2Va6CBVdSESAlVNAdNIf60Gdea/pbdAfl2w92Bu3gf4sfMBf4FrqGAjt0SDsw0HOdukXCs0oE28EVPCSIaCIx6qlICNqBHPGNc8ctA/0E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com; spf=fail smtp.mailfrom=purestorage.com; dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b=Q7lhBTJ2; arc=none smtp.client-ip=209.85.167.100
+	s=arc-20240116; t=1728325475; c=relaxed/simple;
+	bh=vGyCPabMAbOh+4jbtzjEEtcRZNRpv9x7chfzociw/IQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=i6Cnfv9uflAy0Lfjcj98WXelUVrn5JFO6zIKNpwoZ/nd62JrthnIBb2TE+3sLTq1t6Ef9HIFsGQcWKoRh1NXKveHO7AOIFkYp81CcIgxbz7/SxLHZvxW8ZZfwYKCb4JVK0yal/gnEVnkuhI85Zh+YdeP/trAxGGRodQAmJpCd/8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com; spf=fail smtp.mailfrom=purestorage.com; dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b=DbXwFhFp; arc=none smtp.client-ip=209.85.208.225
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com
 Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=purestorage.com
-Received: by mail-lf1-f100.google.com with SMTP id 2adb3069b0e04-5398996acbeso5264810e87.1
+Received: by mail-lj1-f225.google.com with SMTP id 38308e7fff4ca-2fadb636abaso46809121fa.3
         for <linux-doc@vger.kernel.org>; Mon, 07 Oct 2024 11:24:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=purestorage.com; s=google2022; t=1728325472; x=1728930272; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=d7F+reMg7nqljdqdR3c2o8Ja1h9e3wiG2vM32ITmUUU=;
-        b=Q7lhBTJ247f85xIxDSqv2NMmAlDZP4EizVr+cvnyHRwS7pJ0F0K9erQKD8z4/VqUkX
-         lgcoSOgKbURMFXC4QG0tN7JI4f5hZHTj0gjkRffs0NqQOnHaxn0TKbBtQP6pq8CisIzM
-         uP8bBiaU4oTCnO5VDHYCMWu57NbyZsxZ1zez1ibUBu2fsaXwxn6rKnvkzyMwF+X57IWp
-         MaKwXL1wicretbCkvWAK9gfgkFABvKB+XFq93nYX8xzFQem+Ed/0DvZwGmbekd/AdZhp
-         wMpksez9yMtWp4eCdXn3RKQHXjbNQtVVM9nYDfRlZdpBD4jI1UiuYEPS5YrYg1YdPF+u
-         Ctvw==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pV02ciEJA9IyAtmxJn8482aGKbVkirPtp9fOh2sSSus=;
+        b=DbXwFhFp2WvjBXtl7UEt42sho6gORgPdbfjjwa7w3GnQjSmaUIhAjCIV8NKuOFDn67
+         1A2EO/kQ5eqZ+Twr5bxbGTY7ZBkgDNyu04KjV1dh3H5bW3D4FNjJoPfDJ8CGOeAkwI76
+         qdP7vgLVcru5MqG5xZ5h1mmNPXrOMkzKXSav6McJ9EO0ZINqrzz4hIkfG/DfCj2w5HSq
+         jRbaGrytB7tDuM/54r1T/uKVXsx7QVzEXtQhEO+VNo/DXenw1y1WQNaWI8xWVHZsW5lu
+         A9O4K+eeRzVWHp+t5YvpEPxuey87/gXjDCDfonjBd60AFkc4gykrZ84EZjUTBAkgmewv
+         mWCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1728325472; x=1728930272;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=d7F+reMg7nqljdqdR3c2o8Ja1h9e3wiG2vM32ITmUUU=;
-        b=Gk6LfaOaEKkDCIFcgI7q9NQl7aCgWZKyZx2L6/+pZbuLXp1xmQR0qAJXUMKN93LQBr
-         +0lsg0sZD4LXn/MGcUHM0aHXLUcuZTLDxqMBqC6m8emilQ0Xnl1+MjA76FTsFCOmtmVJ
-         bunPXcyS8JiAvy2Y14HPOTixWjyHECoHhQh9WoS0GP0u+lmNEnTcuyt3ebVE7tqTUlSr
-         C/OR0rIT2nAs3mg6evOjEBbHRN29MgrFVCBagv7cil1tg0JQKW/8YVPNGXkWz8vwCjAy
-         aNhNmoJD6ccWxC2EDEFjerRVuzkB20Smt3H5MbU62yw3Bg/LT+FS5umnfZibAmh5En08
-         1xLA==
-X-Forwarded-Encrypted: i=1; AJvYcCVicVxUnHe2VyBMVmprrvYCm7yPyGvvDT6RH1X1zBMTnqcQJClT+MlJ7D4Owc6m8tAtAYuZzhAoTZU=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy35TkZm82dCv/UFmlIFLyMDHlNdLKRt+R17rGcEcbpjaTTxozA
-	0QmPW+B5mDlasKqt3Rw1UsuyZblXx7cLrRYfMJ7krjr3hZnMbpFW9C+Z4br3IE0M1GWQuww51ad
-	QLIovv9oO7sglpL3Vc31uMaAecG3WqAlT
-X-Google-Smtp-Source: AGHT+IGV2t3SngtLGsSeHOFwsPlCDhCLEKm2RUGTjOXvgRo5Y3Xv6FXDDHYkwFJhHaqW8oG3UkU/YWg0ALw8
-X-Received: by 2002:a05:6512:6c5:b0:52c:de29:9ff with SMTP id 2adb3069b0e04-539ab84e79emr5326901e87.2.1728325471882;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=pV02ciEJA9IyAtmxJn8482aGKbVkirPtp9fOh2sSSus=;
+        b=AtDO1rzlwp9aWadAohQ4ZVssIdzOZPNMPwuOG2slCyiX83CgcQmjsE2ANcaQ96owZ6
+         lxgPYtEHZFPVVe/J+qfsAS+hq0NSQaiyGaS3IHHfl/K0mwykOmPu3N1xerrYmC7Nb8MV
+         lrJfD8ErocxWsgiPH4RCwsM2q7KyWC5GmMy84gXYB/5N2Mr+gTTjfd5XtOUfSxUXPemJ
+         fywvZARzJk2UPu4aiXGOtzTZrjID2b3adzshVW2r8qf/6KaWB1RDjJauw5GMMHnIrlAo
+         M2srlxkRbuqocpqQbFaInBoRcgf7kMyNMOu6a9wVusmc9YV+xYDMzmpwS4MsNvFElILE
+         MnbQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXWmLL1LOGPkzajO8wxPEaTN6FKHu8IV+DuPWkJ0Xj2tG9ahbcr2XkBodOrVzyp4rrx4ZH7sB1w1cw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxXzIKhSijFb5jdDPZGQgIrwofTn5jy9Ze+HWMXOQLIFKiCC5uy
+	iKQVCbmAlYHx313a+9glq2HU3cyvUodpAFGywT07WupNduNkBp1wjyl9PZNqTKOMUNXpUMe9fyY
+	3my5NNaPGdznnz/iFateIEqnjgOrRmw6n
+X-Google-Smtp-Source: AGHT+IEGrVvDsKQOxqj+lfsL0Jj2PQJAKrxu587qjLPVFyw24AbNaEqKpQYNkS23cVwhqDr/CB4s8MFzLwLd
+X-Received: by 2002:a05:6512:159d:b0:536:53a9:96d5 with SMTP id 2adb3069b0e04-539ab866484mr5825828e87.17.1728325471874;
         Mon, 07 Oct 2024 11:24:31 -0700 (PDT)
-Received: from c7-smtp-2023.dev.purestorage.com ([208.88.159.128])
-        by smtp-relay.gmail.com with ESMTPS id 2adb3069b0e04-539afee57cesm172020e87.70.2024.10.07.11.24.31
+Received: from c7-smtp-2023.dev.purestorage.com ([208.88.159.129])
+        by smtp-relay.gmail.com with ESMTPS id 2adb3069b0e04-539afec199asm167836e87.17.2024.10.07.11.24.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 07 Oct 2024 11:24:31 -0700 (PDT)
 X-Relaying-Domain: purestorage.com
-Received: from dev-ushankar.dev.purestorage.com (dev-ushankar.dev.purestorage.com [10.7.70.36])
-	by c7-smtp-2023.dev.purestorage.com (Postfix) with ESMTP id 2F69B340204;
+Received: from dev-ushankar.dev.purestorage.com (dev-ushankar.dev.purestorage.com [IPv6:2620:125:9007:640:7:70:36:0])
+	by c7-smtp-2023.dev.purestorage.com (Postfix) with ESMTP id 3B094340CD2;
 	Mon,  7 Oct 2024 12:24:30 -0600 (MDT)
 Received: by dev-ushankar.dev.purestorage.com (Postfix, from userid 1557716368)
-	id 23EF1E41398; Mon,  7 Oct 2024 12:24:30 -0600 (MDT)
+	id 2889DE4062A; Mon,  7 Oct 2024 12:24:30 -0600 (MDT)
 From: Uday Shankar <ushankar@purestorage.com>
 To: Ming Lei <ming.lei@redhat.com>,
 	Jens Axboe <axboe@kernel.dk>,
@@ -79,10 +81,12 @@ To: Ming Lei <ming.lei@redhat.com>,
 Cc: Uday Shankar <ushankar@purestorage.com>,
 	linux-block@vger.kernel.org,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v4 0/5] ublk: support device recovery without I/O queueing
-Date: Mon,  7 Oct 2024 12:24:13 -0600
-Message-Id: <20241007182419.3263186-1-ushankar@purestorage.com>
+Subject: [PATCH v4 1/5] ublk: check recovery flags for validity
+Date: Mon,  7 Oct 2024 12:24:14 -0600
+Message-Id: <20241007182419.3263186-2-ushankar@purestorage.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241007182419.3263186-1-ushankar@purestorage.com>
+References: <20241007182419.3263186-1-ushankar@purestorage.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -91,45 +95,48 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-ublk currently supports the following behaviors on ublk server exit:
+Setting UBLK_F_USER_RECOVERY_REISSUE without also setting
+UBLK_F_USER_RECOVERY is currently silently equivalent to not setting any
+recovery flags at all, even though that's obviously not intended. Check
+for this case and fail add_dev (with a paranoid warning to aid debugging
+any program which might rely on the old behavior) with EINVAL if it is
+detected.
 
-A: outstanding I/Os get errors, subsequently issued I/Os get errors
-B: outstanding I/Os get errors, subsequently issued I/Os queue
-C: outstanding I/Os get reissued, subsequently issued I/Os queue
+Signed-off-by: Uday Shankar <ushankar@purestorage.com>
+Reviewed-by: Ming Lei <ming.lei@redhat.com>
+---
+ drivers/block/ublk_drv.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-and the following behaviors for recovery of preexisting block devices by
-a future incarnation of the ublk server:
-
-1: ublk devices stopped on ublk server exit (no recovery possible)
-2: ublk devices are recoverable using start/end_recovery commands
-
-The userspace interface allows selection of combinations of these
-behaviors using flags specified at device creation time, namely:
-
-default behavior: A + 1
-UBLK_F_USER_RECOVERY: B + 2
-UBLK_F_USER_RECOVERY|UBLK_F_USER_RECOVERY_REISSUE: C + 2
-
-A + 2 is a currently unsupported behavior. This patch series aims to add
-support for it.
-
-Userspace support and testing for this flag are available at:
-https://github.com/ublk-org/ublksrv/pull/73
-
-Uday Shankar (5):
-  ublk: check recovery flags for validity
-  ublk: refactor recovery configuration flag helpers
-  ublk: merge stop_work and quiesce_work
-  ublk: support device recovery without I/O queueing
-  Documentation: ublk: document UBLK_F_USER_RECOVERY_FAIL_IO
-
- Documentation/block/ublk.rst  |  24 +++--
- drivers/block/ublk_drv.c      | 191 +++++++++++++++++++++++-----------
- include/uapi/linux/ublk_cmd.h |  18 ++++
- 3 files changed, 165 insertions(+), 68 deletions(-)
-
-
-base-commit: 8faa82888e7109d91902260ecffd12291abb4bf6
+diff --git a/drivers/block/ublk_drv.c b/drivers/block/ublk_drv.c
+index a6c8e5cc6051..318a4dfe8266 100644
+--- a/drivers/block/ublk_drv.c
++++ b/drivers/block/ublk_drv.c
+@@ -62,6 +62,9 @@
+ 		| UBLK_F_USER_COPY \
+ 		| UBLK_F_ZONED)
+ 
++#define UBLK_F_ALL_RECOVERY_FLAGS (UBLK_F_USER_RECOVERY \
++		| UBLK_F_USER_RECOVERY_REISSUE)
++
+ /* All UBLK_PARAM_TYPE_* should be included here */
+ #define UBLK_PARAM_TYPE_ALL                                \
+ 	(UBLK_PARAM_TYPE_BASIC | UBLK_PARAM_TYPE_DISCARD | \
+@@ -2372,6 +2375,14 @@ static int ublk_ctrl_add_dev(struct io_uring_cmd *cmd)
+ 	else if (!(info.flags & UBLK_F_UNPRIVILEGED_DEV))
+ 		return -EPERM;
+ 
++	/* forbid nonsense combinations of recovery flags */
++	if ((info.flags & UBLK_F_USER_RECOVERY_REISSUE) &&
++	    !(info.flags & UBLK_F_USER_RECOVERY)) {
++		pr_warn("%s: invalid recovery flags %llx\n", __func__,
++			info.flags & UBLK_F_ALL_RECOVERY_FLAGS);
++		return -EINVAL;
++	}
++
+ 	/*
+ 	 * unprivileged device can't be trusted, but RECOVERY and
+ 	 * RECOVERY_REISSUE still may hang error handling, so can't
 -- 
 2.34.1
 
