@@ -1,114 +1,143 @@
-Return-Path: <linux-doc+bounces-27019-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-27021-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 437FB9978B0
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Oct 2024 00:50:06 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 67D6399796E
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Oct 2024 02:01:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id DA8A5B21F73
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Oct 2024 22:50:03 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 12BCE1F229EB
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Oct 2024 00:01:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26FA7185949;
-	Wed,  9 Oct 2024 22:49:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 509024C6C;
+	Thu, 10 Oct 2024 00:01:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="kJfy9KZm"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XTJI3SJR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76D1138DD6;
-	Wed,  9 Oct 2024 22:49:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D05236C;
+	Thu, 10 Oct 2024 00:01:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728514198; cv=none; b=gFgxzg7hIHkmi0pDTepPqXGuiiUu4JsGZv7ERh+N8a6AbbNcSBI0u3h88KmvHbh6K7RwbilpGGee27NzSROR/yFaq2IQg99KVrasMqN33X2oKH3qQmLbn5nr+ZgoowAcVPdgm5iZ6A5lPBb3bxh52HAmyGl8Jmgj9cJZtU7QuaY=
+	t=1728518465; cv=none; b=bLoJCEqBDSpLUmqbT0ijnhDk9gLyU/xDEqsdPoFn2EBUEXJwTJQ0TA5dfUIXO9zFXIMoWjTp94rmj8a01kC4Njk/HDDcwovFw7DshIsI5os4VFJaVzYyvL4zRTglgfDUIlHFvMhi5kddB4tmiPiH2zwYfdrzqaoifULd0/rm1bk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728514198; c=relaxed/simple;
-	bh=nnKhiTwhrqvQYFpTidsGVlvlfsjbATVtPhWeAvKUamc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pPxei3rQRvnnAJqQKTq9uIYKpXPf9rLeicEb+JR0I43Xh97y36FrqTzCrkYwL57UeO5G/J+K0UofHLL8AN4d0qXN8ustucL2JE6mebsvwBiCE20HsTyVRqiH5F2I//YYHePcdtUYy+L5RuVBlfCRV1Pmm++vG4RVfQeT+iqiF/k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=kJfy9KZm; arc=none smtp.client-ip=198.175.65.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1728514197; x=1760050197;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=nnKhiTwhrqvQYFpTidsGVlvlfsjbATVtPhWeAvKUamc=;
-  b=kJfy9KZmJNFk4S0EGR5bvId7+quKjuNUpiRndJRyZACFAA2snrOc2nbE
-   DBVTrs51J+GFZG4X/2hDBkqueWqrxnx8kTDefi54lWwvEw6xM1/ezP0vx
-   E8B8skvP4yzSHgOIvXaLGpsWJVpLTsPE8g8SUmC3g1V1RpMy3VlvjHjvQ
-   oolUMvtuJEu2vQunlnbMfFb0ajpPIRGqvNPT3jV8l66dprc5L+xxWir38
-   OHlXS+yi5D8cV0f//a6df6lX9mLensSV0rOZcdSLqaBDmCZAM1Xeu6O52
-   +Up8qk1b/1bmeVChesWL/17K8yhLh0gx9IIx9jBCrNv+mhIgyGMa1j72g
-   w==;
-X-CSE-ConnectionGUID: NVZqPxy5RimtY1lMdTuaUA==
-X-CSE-MsgGUID: W3x7mm6aQNWgWD6ut7tVrw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11220"; a="27796598"
-X-IronPort-AV: E=Sophos;i="6.11,191,1725346800"; 
-   d="scan'208";a="27796598"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2024 15:49:56 -0700
-X-CSE-ConnectionGUID: 24G4knOcRTKqwkgXjy4biw==
-X-CSE-MsgGUID: bmuFdtb4QCGJQq+vFTnbBA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,191,1725346800"; 
-   d="scan'208";a="107245887"
-Received: from agluck-desk3.sc.intel.com ([172.25.222.70])
-  by orviesa002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2024 15:49:55 -0700
-Date: Wed, 9 Oct 2024 15:49:53 -0700
-From: Tony Luck <tony.luck@intel.com>
-To: Babu Moger <babu.moger@amd.com>
-Cc: corbet@lwn.net, fenghua.yu@intel.com, reinette.chatre@intel.com,
-	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-	paulmck@kernel.org, rdunlap@infradead.org, tj@kernel.org,
-	peterz@infradead.org, yanjiewtw@gmail.com, kim.phillips@amd.com,
-	lukas.bulwahn@gmail.com, seanjc@google.com, jmattson@google.com,
-	leitao@debian.org, jpoimboe@kernel.org, rick.p.edgecombe@intel.com,
-	kirill.shutemov@linux.intel.com, jithu.joseph@intel.com,
-	kai.huang@intel.com, kan.liang@linux.intel.com,
-	daniel.sneddon@linux.intel.com, pbonzini@redhat.com,
-	sandipan.das@amd.com, ilpo.jarvinen@linux.intel.com,
-	peternewman@google.com, maciej.wieczor-retman@intel.com,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	eranian@google.com, james.morse@arm.com
-Subject: Re: [PATCH v8 08/25] x86/resctrl: Introduce interface to display
- number of monitoring counters
-Message-ID: <ZwcIkf_oy2oKByNu@agluck-desk3.sc.intel.com>
-References: <cover.1728495588.git.babu.moger@amd.com>
- <c79fdf4196d974325df995eb334221463747689e.1728495588.git.babu.moger@amd.com>
+	s=arc-20240116; t=1728518465; c=relaxed/simple;
+	bh=dr2LfrrEzJmigC9ayHJC4QWG19jmWEVbmR0xRv/38xk=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=sUhBbcfLe6e71O+AMDDdM8AcbFQCj4fhV5rslxn2sPyYfy1T9YrrAIthOg7ZttpgtrwSypRpzfUNgndJSiNyVf7T/pGwgxT+EGJpkstNlpH8s8Rrjq0OJYZ3A0teJudJrwKjOGeN+eDKFAYqtmz6Kp9UuLmjnSAOJGCADDpKO30=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XTJI3SJR; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E348C4CECD;
+	Thu, 10 Oct 2024 00:01:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1728518464;
+	bh=dr2LfrrEzJmigC9ayHJC4QWG19jmWEVbmR0xRv/38xk=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=XTJI3SJR+XkmjG4/z0dQeNBgU1dMp3gSFYEShLQ6ZuSHtZZ6syHCBQfFy9/NpW5Ij
+	 toDP0PxtZVpQSMDEGMQZWUMPMKmrmNv4p1u67XlgxLFXpyzeAAhwz7NndHcjQPWUBN
+	 +OXWy8IVAPJQIpIXtFjhKyhCEvsvQaJqpHpBu+VYMsRsSa6RrVVB7acXSkwvdG2euT
+	 CIskZESML2QpmzlcAM0uMhDoK4OdrumwJVqXanjtR9BYlFjkxBMZFntb/TUw8T2t+2
+	 xZLbd+i+OjFzaKOzL54Yk4z9SRgqaA52b84lDB+JuTSbzyir5B6Gfr2159VSD72EpR
+	 kB56xfftfdWNQ==
+Date: Wed, 9 Oct 2024 17:01:02 -0700
+From: Jakub Kicinski <kuba@kernel.org>
+To: Taehee Yoo <ap420073@gmail.com>, Mina Almasry <almasrymina@google.com>
+Cc: davem@davemloft.net, pabeni@redhat.com, edumazet@google.com,
+ netdev@vger.kernel.org, linux-doc@vger.kernel.org, donald.hunter@gmail.com,
+ corbet@lwn.net, michael.chan@broadcom.com, kory.maincent@bootlin.com,
+ andrew@lunn.ch, maxime.chevallier@bootlin.com, danieller@nvidia.com,
+ hengqi@linux.alibaba.com, ecree.xilinx@gmail.com,
+ przemyslaw.kitszel@intel.com, hkallweit1@gmail.com, ahmed.zaki@intel.com,
+ paul.greenwalt@intel.com, rrameshbabu@nvidia.com, idosch@nvidia.com,
+ asml.silence@gmail.com, kaiyuanz@google.com, willemb@google.com,
+ aleksander.lobakin@intel.com, dw@davidwei.uk, sridhar.samudrala@intel.com,
+ bcreeley@amd.com
+Subject: Re: [PATCH net-next v3 7/7] bnxt_en: add support for device memory
+ tcp
+Message-ID: <20241009170102.1980ed1d@kernel.org>
+In-Reply-To: <CAMArcTWVrQ7KWPt+c0u7X=jvBd2VZGVLwjWYCjMYhWZTymMRTg@mail.gmail.com>
+References: <20241003160620.1521626-1-ap420073@gmail.com>
+	<20241003160620.1521626-8-ap420073@gmail.com>
+	<CAHS8izO-7pPk7xyY4JdyaY4hZpd7zerbjhGanRvaTk+OOsvY0A@mail.gmail.com>
+	<CAMArcTU61G=fexf-RJDSW_sGp9dZCkJsJKC=yjg79RS9Ugjuxw@mail.gmail.com>
+	<20241008125023.7fbc1f64@kernel.org>
+	<CAMArcTWVrQ7KWPt+c0u7X=jvBd2VZGVLwjWYCjMYhWZTymMRTg@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <c79fdf4196d974325df995eb334221463747689e.1728495588.git.babu.moger@amd.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Wed, Oct 09, 2024 at 12:39:33PM -0500, Babu Moger wrote:
-> +"num_mbm_cntrs":
-> +	The number of monitoring counters available for assignment when the
-> +	architecture supports mbm_cntr_assign mode.
+On Thu, 10 Oct 2024 00:37:49 +0900 Taehee Yoo wrote:
+> > Yes, but netmem_ref can be either a net_iov or a normal page,
+> > and skb_add_rx_frag_netmem() and similar helpers should automatically
+> > set skb->unreadable or not.
+> >
+> > IOW you should be able to always use netmem-aware APIs, no?  
+> 
+> I'm not sure the update skb->unreadable flag is possible because
+> frag API like skb_add_rx_frag_netmem(), receives only frag, not skb.
+> How about an additional API to update skb->unreadable flag?
+> skb_update_unreadable() or skb_update_netmem()?
 
-It's not obvious (to me) how these counters work. When I create
-a group with both local and total monitoring enabled, does that
-use up two counters (even though I only used up one RMID)?
+Ah, the case where we don't get skb is because we're just building XDP
+frame at that stage. And XDP can't be netmem.
 
-Are the counters multi-purpose. E.g. if I disable local counting
-on all groups, are the freed-up counters available for use to
-count total bandwidth on some additional groups?
+In that case switching to skb_frag_fill_netmem_desc() should be enough.
 
-From the examples it looks like if there are free counters
-available when user does mkdir, then they will be assigned
-to the new rdtgroup. If only one counter is free, does it
-get assigned to local or total?
+> > > The reason why the branch exists here is the PP_FLAG_ALLOW_UNREADABLE_NETMEM
+> > > flag can't be used with PP_FLAG_DMA_SYNC_DEV.  
+> >
+> > Hm. Isn't the existing check the wrong way around? Is the driver
+> > supposed to sync the buffers for device before passing them down?  
+> 
+> I haven't thought the failure of PP_FLAG_DMA_SYNC_DEV
+> for dmabuf may be wrong.
+> I think device memory TCP is not related to this flag.
+> So device memory TCP core API should not return failure when
+> PP_FLAG_DMA_SYNC_DEV flag is set.
+> How about removing this condition check code in device memory TCP core?
 
-Thanks
+I think we need to invert the check..
+Mina, WDYT?
 
--Tony
+diff --git a/net/core/devmem.c b/net/core/devmem.c
+index 11b91c12ee11..c5cace3f9831 100644
+--- a/net/core/devmem.c
++++ b/net/core/devmem.c
+@@ -331,12 +331,6 @@ int mp_dmabuf_devmem_init(struct page_pool *pool)
+ 	if (!binding)
+ 		return -EINVAL;
+ 
+-	if (!pool->dma_map)
+-		return -EOPNOTSUPP;
+-
+-	if (pool->dma_sync)
+-		return -EOPNOTSUPP;
+-
+ 	if (pool->p.order != 0)
+ 		return -E2BIG;
+ 
+diff --git a/net/core/page_pool.c b/net/core/page_pool.c
+index a813d30d2135..c8dbbf262de3 100644
+--- a/net/core/page_pool.c
++++ b/net/core/page_pool.c
+@@ -287,6 +287,12 @@ static int page_pool_init(struct page_pool *pool,
+ 	}
+ 
+ 	if (pool->mp_priv) {
++		if (!pool->dma_map || !pool->dma_sync)
++			return -EOPNOTSUPP;
++
++		/* Memory provider is responsible for syncing the pages. */
++		pool->dma_sync = 0;
++
+ 		err = mp_dmabuf_devmem_init(pool);
+ 		if (err) {
+ 			pr_warn("%s() mem-provider init failed %d\n", __func__,
 
