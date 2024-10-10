@@ -1,203 +1,213 @@
-Return-Path: <linux-doc+bounces-27124-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-27128-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AEAE9992A9
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Oct 2024 21:40:33 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF2C39992C2
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Oct 2024 21:42:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 229592854D8
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Oct 2024 19:40:32 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 528061F264E5
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Oct 2024 19:42:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6C7051EABC3;
-	Thu, 10 Oct 2024 19:37:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A35B81E47C8;
+	Thu, 10 Oct 2024 19:41:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="uwVRjs1U"
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b="ZiTJG6Nz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com (mail-dm3nam02on2062.outbound.protection.outlook.com [40.107.95.62])
+Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A456C1CF2B4;
-	Thu, 10 Oct 2024 19:37:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.95.62
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728589079; cv=fail; b=AfxeRTVhroVnwK/kNZez3C6lQ1r5q2TfE+SyqiNHfdBey2FGYD7IT8mFb6VN60CO4poshZQ+Sd42WI6iYUNWwhXAKt4lwPM4GoIzcRolwgmmBStw4gLeKmp3AiHg+u2mxGJhvWbGwBpXV84gtHHMhrL+9dFqW4fUTVufkz1vpxY=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728589079; c=relaxed/simple;
-	bh=5MwpwAK0XAOIBD3SIGN511DONmNC0pEPVIZm3eyrnvg=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=mD0VYhi6WFi72J6MAAtStX6cnwlLy+oubUt6nHVoZaRfbyYi03WYF7PLNn7bbS316mqWXDJwB0J41PMbrOms14XMKcmck1g83Z42nAl4ikByIIpGPQzUvaxRCo0BkBUpDOHkT1ApTWB1dHRFEXAPmMlUfL1sgukfBvvEQ0Vv7Wk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=uwVRjs1U; arc=fail smtp.client-ip=40.107.95.62
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fmeQEySZIgKBl7ZTDC099U05YryvTxZeFGGWJMsfQVAaYXSy6W2x9wUv6uiGoBQxYB6YFpzHx87ghLS3URrN3RuJ4/o+uKknFedvykvxOGu0ZIiz8PyAf3cxotv5DOqf3BfJyZbP82Tag3wMVbtpa8NYqzIrAFt5jVedHsnTogwKTO9ifixnQCgh36kSkTyNUonFPwdsM2YH+BkewbpyV8owFDzBPP8J6B8RMOXIoblAOUgMsvJGqs4wWMigRToRvjgTi76+B6EH1SXCLII3cGEfXTqFxXQaBDxcMpKpTWH4NMW0WB6rS5HGvb8EataLAb2GimA/aRF6YvB8QiRSAA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GElOAKDz1JLyshcJfsdRfLDz3rfkEDU9C+Or6ZrSaXs=;
- b=KXuZesrOwqAn9wZ3fuSqgdNKiuhLO5sBXM28l5Lj7wh7m4SNWOqExgn2DGl4eaoNjCXWOba8puWh0DYPOlQBQ27YDk/auU2L8fz9nS7LOpKd695A5yPybcCI+uRwEx/AebPpRNvj9qTYR8c0Zmnxt5GtFJn+hx+eCgaq09WsXLcqKy7OatNt15VA2JbrRNO5sMycmV8cl9AZI3BgzVMiBIVm0ZEdc3zYTg5tKLsBX3E4X7nFKcfAjCgnwscC1YTPBF05vk7QniwGibr5pAStzyuoKuXWZO2vXCkB2TRyd18VJfvUkuSLe2d3jS5CJ6D9ZmtFHsNx0OO6cgUzfzoTzg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=alien8.de smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GElOAKDz1JLyshcJfsdRfLDz3rfkEDU9C+Or6ZrSaXs=;
- b=uwVRjs1Uvif5AOz4GRN+yrUzGeLbbFTR0jI93DSNTx1Kz4vkYih9cYhPY6hol/q32lI11E7Ad7SfWQc4XxIh8Al0t3/SVgXaegBc8LLQTI3Aag5TtpBrOnGxTAAnVPzdXN7snG+B0rDXytSpdEnWKrB72w7l3xyWux5Ugt7hpmU=
-Received: from SA1PR04CA0013.namprd04.prod.outlook.com (2603:10b6:806:2ce::19)
- by MW5PR12MB5682.namprd12.prod.outlook.com (2603:10b6:303:19f::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.18; Thu, 10 Oct
- 2024 19:37:54 +0000
-Received: from SA2PEPF000015CA.namprd03.prod.outlook.com
- (2603:10b6:806:2ce:cafe::9a) by SA1PR04CA0013.outlook.office365.com
- (2603:10b6:806:2ce::19) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.19 via Frontend
- Transport; Thu, 10 Oct 2024 19:37:54 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SA2PEPF000015CA.mail.protection.outlook.com (10.167.241.200) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8048.13 via Frontend Transport; Thu, 10 Oct 2024 19:37:54 +0000
-Received: from AUS-P9-MLIMONCI.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 10 Oct
- 2024 14:37:52 -0500
-From: Mario Limonciello <mario.limonciello@amd.com>
-To: Borislav Petkov <bp@alien8.de>, Hans de Goede <hdegoede@redhat.com>,
-	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-CC: <x86@kernel.org>, "Gautham R . Shenoy" <gautham.shenoy@amd.com>, "Mario
- Limonciello" <mario.limonciello@amd.com>, Perry Yuan <perry.yuan@amd.com>,
-	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-pm@vger.kernel.org>, <platform-driver-x86@vger.kernel.org>, "Shyam
- Sundar S K" <Shyam-sundar.S-k@amd.com>
-Subject: [PATCH v2 13/13] platform/x86/amd: hfi: Set ITMT priority from ranking data
-Date: Thu, 10 Oct 2024 14:37:05 -0500
-Message-ID: <20241010193705.10362-14-mario.limonciello@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241010193705.10362-1-mario.limonciello@amd.com>
-References: <20241010193705.10362-1-mario.limonciello@amd.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E67B1A01B9;
+	Thu, 10 Oct 2024 19:41:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=178.60.130.6
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1728589271; cv=none; b=okWbnuGAAJJBwz44x4HIysAyJSN3oK+UIDpcwr+Y1n68fbYqY6XX6ruJlviNuTsbDCKGxMyJT0d6KA36Jui7oEeWsY82wCMyo2MjSiYhSATRcOTwT3gMcPuvhQznQxJRKHJHEx9So7gDHvbwIhn6CaHfChK56fCDDErvGmLP3Bc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1728589271; c=relaxed/simple;
+	bh=MK88nhn1oQ7OMjkxgADNCjkPzV+bAEJrglSsBKJJrqo=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=thOC9AS3FSvByap3+9pqVA9ghgPpzFMLToFZ2n9sMp89bAM4dRONria2OT5UXNrTxl03Q1EtSl+rZrjc1tA/2jIESw3x07ybrcK3ofhIit8Co0rCwZh1H7ow9gZY4wgzlYsJoK6C6kVaNaoekIOhQvdeGplxiuj+YAAWBgfR0TY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com; spf=pass smtp.mailfrom=igalia.com; dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b=ZiTJG6Nz; arc=none smtp.client-ip=178.60.130.6
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+	Message-Id:Date:Subject:From:Sender:Reply-To:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=09iDL1axmjrQDK0WLyH9ikUE9Gcp6sSd7bv4iS9IhBM=; b=ZiTJG6NzvItlCYUUoKNFotHlTC
+	wTRRu93p2T6Vj5ZwwttyWGXHm295exVkVXgTcN+RieoPmCiQLSyFoYfNHu17NkTY5rDVxpAsiYCDg
+	pNi3d+AehnJrvn8Tjt6BR6MHInjD+eQgXCOA1eU+UGmGwkHwYHuO1NPE+colgtMPc0pShAoloVXdx
+	HI67LCm81xTigYHkmIvpFNOx/H7a9awRU5IZcyoYf4H5bqhtP29IDquq1nEOwpkwtDul3ul/dGUv6
+	PJtjjfLKI8/xGI7fLmJMVePALWsVjJAtUizTGiGYAOP/t3S6EZzUvwC2vKQUlDMlfXjIRG0/sGfRg
+	YHrbE7og==;
+Received: from [187.57.199.212] (helo=[192.168.15.100])
+	by fanzine2.igalia.com with esmtpsa 
+	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+	id 1syz1u-007SHz-2w; Thu, 10 Oct 2024 21:40:58 +0200
+From: =?utf-8?q?Andr=C3=A9_Almeida?= <andrealmeid@igalia.com>
+Subject: [PATCH v6 00/10] tmpfs: Add case-insensitive support for tmpfs
+Date: Thu, 10 Oct 2024 16:39:35 -0300
+Message-Id: <20241010-tonyk-tmpfs-v6-0-79f0ae02e4c8@igalia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF000015CA:EE_|MW5PR12MB5682:EE_
-X-MS-Office365-Filtering-Correlation-Id: a3738b1b-d99c-4f6e-894d-08dce9630930
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?I+5C4qrkIdTNcPemA4x4qRscndtj+8Tjbl31FSswMkKViwy96Um9qPoQU/z7?=
- =?us-ascii?Q?EhWPpdqoJluYpvRXnCW4bBNP9ie9Nmdu8apI85bvBUT5ieW1Wu4REbdxdoLD?=
- =?us-ascii?Q?4/cPpVuP8Xr4Ddqqvq8GnWYFWE6FLl/L4wghA/SP9LI9X4VJwsXzwEhLmqYe?=
- =?us-ascii?Q?i1TbFGwXVLJ1ltniHPItOyXUAAu46GX3QbQJsKcfgFrLAbFgQg+AaCHrbH6t?=
- =?us-ascii?Q?wl2jl5XnTShB3c5xmoT+4Sl58lWkuuD2//FiTDeRxA81qIzR+yMMvpigDRpv?=
- =?us-ascii?Q?d+ih3GdlApW3Um7bOeP9xFfX5wkb9kopq1Swq0Xb34Ohlz6IGJjviGQTy6pg?=
- =?us-ascii?Q?CNoroBuTezLIyVAb4vudCO2gMm07M4aVVGiryGBNYpZBS9vSYtADE8S6q7Zi?=
- =?us-ascii?Q?T5CfsjMxqsmOqlRqSrLsWn1DGEFmovLEJxF1wgjPPwq9FUxBPQc0E4Rmdfqd?=
- =?us-ascii?Q?syt/k87QjdHzx7TiD0AJAZOdMtN647TSQAxi7jhZXLO7tilbQNIDSFI9Ldpv?=
- =?us-ascii?Q?8derBw8P581CW25uyzCx1txUFoshJmwbi63J8OHs33Vv74wsFlGeuFjuCDVz?=
- =?us-ascii?Q?7Gy9csanQVybQjC/0f2qTPqF55aPYQoxsNmSPmaZS6Ek3Xv9mfZ48zIURwPZ?=
- =?us-ascii?Q?M/h9hGmkDln5Ok3GlMMV45uZdjsA09zNRWVMvOjn4jWKyeOWahlsaEm9DhaQ?=
- =?us-ascii?Q?OFf1kINxPiSn1epeORhftYvnWH/NqRWwDf90syDloPKIuECs9bnQopf0zMTG?=
- =?us-ascii?Q?7c2wCCztmml/F83HNYg8GtewOB3TEr+a+wsOZXmuhsUNdZ6LDfIWT7HYdW7Y?=
- =?us-ascii?Q?DM2WfbcUo3wUlylz1nEZGrGIJCAvlvnUQw9TPHEM1bceRFK4h1A3zbL/7+ev?=
- =?us-ascii?Q?lWYQJmfM7IIC+DVPcgZd8yUW6cu2N6D1A6rpbejh1tCEp3ICxEBpnwBDDQ/a?=
- =?us-ascii?Q?BdoAiJHFOl3/wX460JjI+OVu1gOjyNhtlEpRP83xENz38RDKZyymX97qhk8/?=
- =?us-ascii?Q?6KfKNavl1qWosfAbwjDaXTHGt0XxnYPpbPrkeu+3WlesUGYRI06dIGypwBnf?=
- =?us-ascii?Q?SupxqvRzwaSs/Xk9iyhgKpfZEO2pQxnw8CadH/tGEQ6M8JEiTPiN7ZqeOhHI?=
- =?us-ascii?Q?1vq8mVM5nTNmSJY/asJvk7IHg2aPEvSLW3Vkcgow6WvLow3J1M7ppZ0+8lqD?=
- =?us-ascii?Q?9nSynDkQqgMKf+k3EaN4IjJz4EJXhLQAz0hia6Wy196py+vNAu0WkKG7qiRz?=
- =?us-ascii?Q?Q9c8v3T8ZN4cP0gctMy5Vy8zviWtEVg4VOvMHUs+L/D5zIuWEdj/FDpgxT9I?=
- =?us-ascii?Q?zKSP0YtP/k+DidKvMo89S7uV6v20uy7iY+VzsUojEx3nL6EPkUGiEX1uC8vE?=
- =?us-ascii?Q?rCmW0Ow=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2024 19:37:54.4040
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a3738b1b-d99c-4f6e-894d-08dce9630930
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SA2PEPF000015CA.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR12MB5682
+X-B4-Tracking: v=1; b=H4sIAHctCGcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyzHQUlJIzE
+ vPSU3UzU4B8JSMDIxNDA0MD3ZL8vMps3ZLcgrRi3bQUk1RDC0NLQ+MUIyWgjoKi1LTMCrBp0bG
+ 1tQC++7WtXQAAAA==
+X-Change-ID: 20241010-tonyk-tmpfs-fd4e181913d2
+To: Gabriel Krisman Bertazi <krisman@kernel.org>, 
+ Alexander Viro <viro@zeniv.linux.org.uk>, 
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
+ Theodore Ts'o <tytso@mit.edu>, Andreas Dilger <adilger.kernel@dilger.ca>, 
+ Hugh Dickins <hughd@google.com>, Andrew Morton <akpm@linux-foundation.org>, 
+ Jonathan Corbet <corbet@lwn.net>, smcv@collabora.com
+Cc: kernel-dev@igalia.com, linux-fsdevel@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-ext4@vger.kernel.org, 
+ linux-mm@kvack.org, linux-doc@vger.kernel.org, 
+ Gabriel Krisman Bertazi <krisman@suse.de>, 
+ =?utf-8?q?Andr=C3=A9_Almeida?= <andrealmeid@igalia.com>
+X-Mailer: b4 0.14.2
 
-The static ranking data that is read at module load should be used
-to set up the priorities for the cores relative to the performance
-values.
+Hi,
 
-Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
+This patchset adds support for case-insensitive file names lookups in
+tmpfs. The main difference from other casefold filesystems is that tmpfs
+has no information on disk, just on RAM, so we can't use mkfs to create a
+case-insensitive tmpfs.  For this implementation, I opted to have a mount
+option for casefolding. The rest of the patchset follows a similar approach
+as ext4 and f2fs.
+
+* Use case (from the original cover letter)
+
+The use case for this feature is similar to the use case for ext4, to
+better support compatibility layers (like Wine), particularly in
+combination with sandboxing/container tools (like Flatpak). Those
+containerization tools can share a subset of the host filesystem with an
+application. In the container, the root directory and any parent
+directories required for a shared directory are on tmpfs, with the
+shared directories bind-mounted into the container's view of the
+filesystem.
+
+If the host filesystem is using case-insensitive directories, then the
+application can do lookups inside those directories in a
+case-insensitive way, without this needing to be implemented in
+user-space. However, if the host is only sharing a subset of a
+case-insensitive directory with the application, then the parent
+directories of the mount point will be part of the container's root
+tmpfs. When the application tries to do case-insensitive lookups of
+those parent directories on a case-sensitive tmpfs, the lookup will
+fail.
+
+For example, if /srv/games is a case-insensitive directory on the host,
+then applications will expect /srv/games/Steam/Half-Life and
+/srv/games/steam/half-life to be interchangeable; but if the
+container framework is only sharing /srv/games/Steam/Half-Life and
+/srv/games/Steam/Portal (and not the rest of /srv/games) with the
+container, with /srv, /srv/games and /srv/games/Steam as part of the
+container's tmpfs root, then making /srv/games a case-insensitive
+directory inside the container would be necessary to meet that
+expectation.
+
+* Testing
+
+I send a patch for xfstests to enable the casefold test (generic/556) for
+tmpfs.[1] The test succeed.
+
+You can test this patchset using:
+
+  sudo mount -t tmpfs -o casefold tmpfs mnt/
+
+And making a dir case-insensitive:
+
+  mkdir mnt/dir
+  chattr +F mnt/dir
+
+[1] https://lore.kernel.org/fstests/20240823173008.280917-1-andrealmeid@igalia.com/
+
+Changes in v6:
+ - Fixed kernel bot warning 'shmem_ci_dentry_ops' defined but not used
+ v5: https://lore.kernel.org/lkml/20241002234444.398367-1-andrealmeid@igalia.com/
+
+Changes in v5:
+ - New patch "Always set simple_dentry_operations as dentry ops"
+ - "Squashed libfs: Check for casefold dirs on simple_lookup()" into "tmpfs: Add
+    casefold lookup support"
+ - Fail to mount if strict_encoding is used without encoding
+ - Inlined generic_ci_validate_strict_name()
+ - Added IS_ENABLED(UNICODE) guards to public generic_ci_ funcs
+ - Dropped .d_revalidate = fscrypt_d_revalidate, tmpfs doesn't support it
+ v4: https://lore.kernel.org/lkml/20240911144502.115260-1-andrealmeid@igalia.com/
+
+Changes in v4:
+ - Got rid of shmem_lookup() and changed simple_lookup() to cover casefold use
+   case
+ - Simplified shmem_parse_opt_casefold() and how it handle the lastest_version
+   option
+ - Simplified utf8_parse_version() to return the version in one variable instead
+   of three
+ - Rewrote part of the documentation patch
+ - Make sure that d_sb->s_d_op is set during mount time
+ - Moved `generic_ci_always_del_dentry_ops` to mm/shmem.c as `shmem_ci_dentry_ops`
+v3: https://lore.kernel.org/lkml/20240905190252.461639-1-andrealmeid@igalia.com/
+
+Changes in v3:
+ - Renamed utf8_check_strict_name() to generic_ci_validate_strict_name(), and
+ reworked the big if(...) to be more clear
+ - Expose the latest UTF-8 version in include/linux/unicode.h
+ - shmem_lookup() now sets d_ops
+ - reworked shmem_parse_opt_casefold()
+ - if `mount -o casefold` has no param, load latest UTF-8 version
+ - using (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir) when possible
+ - Fixed bug when adding a non-casefold flag in a non-empty dir
+v2: https://lore.kernel.org/lkml/20240902225511.757831-1-andrealmeid@igalia.com/
+
+Changes in v2:
+ - Found and fixed a bug in utf8_load()
+ - Created a helper for checking strict file names (Krisman)
+ - Merged patch 1/ and 3/ together (Krisman)
+ - Reworded the explanation about d_compare (Krisman)
+ - Removed bool casefold from shmem_sb_info (Krisman)
+ - Reworked d_add(dentry, NULL) to be called as d_add(dentry, inode) (Krisman)
+ - Moved utf8_parse_version to common unicode code
+ - Fixed some smatch/sparse warnings (kernel test bot/Dan Carpenter)
+v1: https://lore.kernel.org/linux-fsdevel/20240823173332.281211-1-andrealmeid@igalia.com/
+
 ---
- drivers/platform/x86/amd/hfi/Kconfig | 1 +
- drivers/platform/x86/amd/hfi/hfi.c   | 9 +++++++++
- 2 files changed, 10 insertions(+)
+André Almeida (10):
+      libfs: Create the helper function generic_ci_validate_strict_name()
+      ext4: Use generic_ci_validate_strict_name helper
+      unicode: Export latest available UTF-8 version number
+      unicode: Recreate utf8_parse_version()
+      libfs: Export generic_ci_ dentry functions
+      tmpfs: Always set simple_dentry_operations as dentry ops
+      tmpfs: Add casefold lookup support
+      tmpfs: Add flag FS_CASEFOLD_FL support for tmpfs dirs
+      tmpfs: Expose filesystem features via sysfs
+      docs: tmpfs: Add casefold options
 
-diff --git a/drivers/platform/x86/amd/hfi/Kconfig b/drivers/platform/x86/amd/hfi/Kconfig
-index 08051cd4f74d..4dfa7641b35b 100644
---- a/drivers/platform/x86/amd/hfi/Kconfig
-+++ b/drivers/platform/x86/amd/hfi/Kconfig
-@@ -7,6 +7,7 @@ config AMD_HFI
- 	bool "AMD Hetero Core Hardware Feedback Driver"
- 	depends on ACPI
- 	depends on CPU_SUP_AMD
-+	depends on SCHED_MC_PRIO
- 	help
- 	 Select this option to enable the AMD Heterogeneous Core Hardware Feedback Interface. If
- 	 selected, hardware provides runtime thread classification guidance to the operating system
-diff --git a/drivers/platform/x86/amd/hfi/hfi.c b/drivers/platform/x86/amd/hfi/hfi.c
-index 0263993b0a94..f212820a0e4a 100644
---- a/drivers/platform/x86/amd/hfi/hfi.c
-+++ b/drivers/platform/x86/amd/hfi/hfi.c
-@@ -121,6 +121,12 @@ static DEFINE_PER_CPU(struct amd_hfi_cpuinfo, amd_hfi_cpuinfo) = {.class_index =
- 
- static DEFINE_MUTEX(hfi_cpuinfo_lock);
- 
-+static void amd_hfi_sched_itmt_work(struct work_struct *work)
-+{
-+	sched_set_itmt_support();
-+}
-+static DECLARE_WORK(sched_amd_hfi_itmt_work, amd_hfi_sched_itmt_work);
-+
- static int find_cpu_index_by_apicid(unsigned int target_apicid)
- {
- 	int cpu_index;
-@@ -241,6 +247,8 @@ static int amd_set_hfi_ipcc_score(struct amd_hfi_cpuinfo *hfi_cpuinfo, int cpu)
- 		WRITE_ONCE(hfi_cpuinfo->ipcc_scores[i],
- 			   hfi_cpuinfo->amd_hfi_classes[i].perf);
- 
-+	sched_set_itmt_core_prio(hfi_cpuinfo->ipcc_scores[0], cpu);
-+
- 	return 0;
- }
- 
-@@ -482,6 +490,7 @@ static int amd_hfi_probe(struct platform_device *pdev)
- 	if (ret < 0)
- 		goto out;
- 
-+	schedule_work(&sched_amd_hfi_itmt_work);
- out:
- 	return ret < 0 ? ret : 0;
- }
+ Documentation/filesystems/tmpfs.rst |  24 ++++
+ fs/ext4/namei.c                     |   5 +-
+ fs/libfs.c                          |  12 +-
+ fs/unicode/utf8-core.c              |  26 +++++
+ fs/unicode/utf8-selftest.c          |   3 -
+ include/linux/fs.h                  |  49 ++++++++
+ include/linux/shmem_fs.h            |   6 +-
+ include/linux/unicode.h             |   4 +
+ mm/shmem.c                          | 226 ++++++++++++++++++++++++++++++++++--
+ 9 files changed, 332 insertions(+), 23 deletions(-)
+---
+base-commit: eb952c47d154ba2aac794b99c66c3c45eb4cc4ec
+change-id: 20241010-tonyk-tmpfs-fd4e181913d2
+
+Best regards,
 -- 
-2.43.0
+André Almeida <andrealmeid@igalia.com>
 
 
