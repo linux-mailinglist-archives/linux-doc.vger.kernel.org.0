@@ -1,234 +1,277 @@
-Return-Path: <linux-doc+bounces-27288-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-27290-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C5ED99AC31
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 21:01:14 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7870A99AC7E
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 21:15:00 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0ADF41F2673B
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 19:01:14 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B67F7B2869E
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 19:14:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 702D41EF951;
-	Fri, 11 Oct 2024 18:55:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 230BB1CB51E;
+	Fri, 11 Oct 2024 19:14:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b="G/takFEN"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JyXeDu87"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD8E61E9082
-	for <linux-doc@vger.kernel.org>; Fri, 11 Oct 2024 18:54:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A0CA1C2327;
+	Fri, 11 Oct 2024 19:14:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728672904; cv=none; b=eM5YmH+l6dXFOFiOZd5h/si+7jTfcfUeikLIzTrzbCYWhwtLPSVZnyujNUa5FwgFzsoED0pu9Spdf5s4L1ikhsZzu/CGQbkM0KrPxPCWsoRgJ7aiEzLLgncyjvfL5akog+Lsc0ZvuATE1p4JRESLIE6U+wbN3+hcC1o8SNQNJB4=
+	t=1728674092; cv=none; b=NYp/0IsqPrcvW/iF3vxFnBOP2Q9j2W+Lw26CIjca0WEbckKmwR/OLB0OHuqZk8uRZEg5BOk2f7RJMqBmMFPlZxH+Xci8pTMiOZTcgIDnYgt29xHlcRI6tTisZgaJVfhMPZZuVzBFtuLKSJiknDhWU7wLqV6IYq9CvyOC0qewBXY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728672904; c=relaxed/simple;
-	bh=OIWWabmelC5btwN2gfeevvPbxnebFsy0zVddm/OruKs=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=ouICXcRfPdcGFIwE8sh1j1R3V26d41AL2FrjDyWA3X2DYf0cJyQkRFy8DMFD/1kURXbWBH9PMctSt2sQlJcGREfCB85/9SC6tiIjNDKZTof8k5xXa2eEh9QdPw9jsNQ0XDLg0rvVj9Y8+cCLIsS3EDE+BSqz3Xk7PiAP5Hg4C0Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl; spf=none smtp.mailfrom=bgdev.pl; dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b=G/takFEN; arc=none smtp.client-ip=209.85.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bgdev.pl
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-43115887867so15637275e9.0
-        for <linux-doc@vger.kernel.org>; Fri, 11 Oct 2024 11:54:57 -0700 (PDT)
+	s=arc-20240116; t=1728674092; c=relaxed/simple;
+	bh=aQRSA1yeJHJ4TV/I8uMqgU5sOulw5Aa610ReT/Pi0PE=;
+	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=h+Fncn5q9R9CyfmoHa36VwXfo4skzKs/xI3vfMELOb9BwS7SuykN1T4d3GR2aThSNLxP7Afz6T99QEt8zxKpC3775iGNMWjuzYUaRLhwYmW6EjtVrbm/VryzZ5R8Ws9zfTbmxW2p1VIx0h6giD2rWffPF+HwxEfVY1qS2ti7nbE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JyXeDu87; arc=none smtp.client-ip=209.85.210.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-71e427e29c7so491576b3a.3;
+        Fri, 11 Oct 2024 12:14:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1728672893; x=1729277693; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=pJWiTUDuRR7vOAvQq+eZZdwnLB5y+NGdJReP7c36nPQ=;
-        b=G/takFEN0BzAGP36Vm4TlsJPdHzbZLpEw8uv36p3LEMFmnd80JL1Cn11wSsunIU1sr
-         IIrPLfKrcKE04uQZHJxMf1NqC+DhnrKCM7SyNw2zQDGnNF0jI1GOpZBII1rPIHLG0ARw
-         MghlbCiAiBDVDT82jV20OajIn/41Cy4XLRhwlyDL0k/OLz/jnaOxRMClsxaYP/SXDOPY
-         bvE94LIxHNHUkV3yf4uftqtoP51E0mzapYiBVKnG7KN0TzlHoXeRUotmyueo/vg2f+fv
-         7CpStwelIHF8y4ncE/o2ojjIg248JjdmHKvpKzTwWQGtQhbzsxp2vEfdFrNdsizs6xuy
-         /sJA==
+        d=gmail.com; s=20230601; t=1728674090; x=1729278890; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=9RwrXc2bfBcpRHPltvXo1MSSyTQE/O8f245siaXgKRY=;
+        b=JyXeDu87bcdwUy/O4BIBd8os6O6gxxFpLQZ39uG4buE/xmrJ+HLnd/lYHlmTKyeI+o
+         sUuYtCjnvBpH9BnjtuaadmJ/QhFECzF4QSBv3lvF4dlBQQVr5YANm610e7hAyVPCq9G1
+         XVLqoJQtWgeOfS1KJ+G+0pwTESq0mJZdlRYAUMkeF4RdjQxPl/Kg1Bi8MuUqQ5b2A1aB
+         kCdOb+bUJIQIj3ZGGSTC9cPzPoiU8fLIjr/e8AH0UwHWHtpCWEX9JbHbZe/XEYsDX67H
+         GHnbCrnan5kbFAeRkyGJmz2FYoLcBJdjio8cgeLf+mfqtUL5k11qJ8rPJu1Lw731/+di
+         FNBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728672893; x=1729277693;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=pJWiTUDuRR7vOAvQq+eZZdwnLB5y+NGdJReP7c36nPQ=;
-        b=pNkX/H2iiJyaU9e3CyMyQeuiVsSNHA723ePyMRRkwil6ZDR73Q0TtmKPZsoJlzAj9w
-         XrNfphVGCvfxZn9hgNrMRIecSpOX/5z1prSKxsP4wY7BPAlpNQhlmWoW6FFRcNoT2Ff9
-         oyJUnDVmicIMdNyN8ObGfz6xEQNYIPa6IXE5tOXtb4fXneXSXQWcbvboM0DLid+vxHDr
-         4Oa7uIYLvJ6eeOBiNvYPh0VWGXx03zGjXbJHxfLlOm1LynJr3XmRS1Li7j4g8puR+rjl
-         XmnBNW+Lh8QX6r0QAJn07F1jqVbbF6en0Ri/2yZCw4MCXqffG3TK5As+hh2gExl1dNh3
-         IgOQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUK3ObnwcTl7DooqnkVr285G/sv+PYNrg7mw7H6aooW8cd1RcdEiFOBplbUUWzQfraq0g0uQmlaNjA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxJ5COlzWudEwjO/yiFzwXwBCrxwsGSnySCd6DOJFsH/j3jVKQg
-	6xl9MLoG1qzSje5TXbse6wiKE6JfVXa8lMLEJKeUKVJm6FCC+mGnAbwxHds/8u4=
-X-Google-Smtp-Source: AGHT+IF4oPL/69dvloN/ttCbmyTZVnb7zids2XsRUs2vvmnifEkACtdYLqCY02BzZ1634QY6/vy55A==
-X-Received: by 2002:a05:600c:19d1:b0:426:63bc:f031 with SMTP id 5b1f17b1804b1-4311d88444fmr28494055e9.1.1728672893399;
-        Fri, 11 Oct 2024 11:54:53 -0700 (PDT)
-Received: from [127.0.1.1] ([2a01:cb1d:dc:7e00:68b8:bef:b7eb:538f])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37d4b79fe7csm4559161f8f.70.2024.10.11.11.54.52
+        d=1e100.net; s=20230601; t=1728674090; x=1729278890;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:date:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9RwrXc2bfBcpRHPltvXo1MSSyTQE/O8f245siaXgKRY=;
+        b=jgDPlqxWgHEkfL5gJSrdgzA+Fo2VK8ko3nKGUWT7CsARGrzkHbdHlMzqkspxk0FZkD
+         EwjMLm+Ek4qbNQAEcDDD6cAyuum5caAh+gUdif/pATuWqQdvFyxbI+S9euwYuVs7xuwW
+         nHBrVNiHSDp+FcrgAoP3/lmWsb28v1eeeAgQeZIHGLHvft10jMzZUPpJC5N1bFGF9OKF
+         JOaKCph0KeXVEJoTbSZM/98qXmU3y9XlNa81r49HWcGrdkEHs2XAErvAokhZ/jozZmp5
+         ijC8JEWD2Gqxegz3uWuVh7CIPtcU9Yymk0A+31NAMKQ5zY6hnZBa90JWBnNyGdQREAJx
+         j31A==
+X-Forwarded-Encrypted: i=1; AJvYcCV3FxpAiIZx6+xkkrGGWIbzrVa3nWaEzIwIEtcAxx7ADGhz8txgSC6sSw+AKPwfd9s2rdcC+vPUhHhX@vger.kernel.org, AJvYcCVcDrli3JgNZooWwkAGFWv8deMhlCr6d7Gaf3FqO+gwz0Rw4RMWDfeqYmT8zBAWJdI+S1hO41RODdhX@vger.kernel.org, AJvYcCW7SJe5DxEy8rFHSQnngkPqMruLTB9rvvDy98YUDcLiYw2Mtb3dsDNgDbMkOKnNAleZroCsBoBeVV16ow==@vger.kernel.org, AJvYcCXHsME4wDQX4R66md4/A779GcDyMa2uUueaUWSFcCOm6HFjKkuxRoly2k0Y3PpREaHWezqckIsya4V9rI2B@vger.kernel.org
+X-Gm-Message-State: AOJu0YybJnVxSZFCUEOfDufgEtVqsZMornPuxQZ6oPB1X3+zOMmMVqhe
+	iMvc53oL61k8CVSOB5PbCvib8kbmJMgNeBWEc4excFTUPtyl0xCv
+X-Google-Smtp-Source: AGHT+IGVCV+SFYfjW4RcGOZJynL6OplbrhtCwww1MFkvESFVXDS6nOzvMGaek+UcLI4OxxU65Gaiug==
+X-Received: by 2002:aa7:8890:0:b0:71d:e93e:f542 with SMTP id d2e1a72fcca58-71e4c1cfdffmr870472b3a.21.1728674089661;
+        Fri, 11 Oct 2024 12:14:49 -0700 (PDT)
+Received: from fan ([2601:646:8f03:9fee:fa84:fdda:e412:45e])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-71e48e54f46sm643539b3a.57.2024.10.11.12.14.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Oct 2024 11:54:53 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Fri, 11 Oct 2024 20:54:16 +0200
-Subject: [PATCH v7 17/17] ufs: host: add support for generating, importing
- and preparing wrapped keys
+        Fri, 11 Oct 2024 12:14:49 -0700 (PDT)
+From: Fan Ni <nifan.cxl@gmail.com>
+X-Google-Original-From: Fan Ni <fan.ni@samsung.com>
+Date: Fri, 11 Oct 2024 12:14:26 -0700
+To: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Cc: Ira Weiny <ira.weiny@intel.com>, "Li, Ming4" <ming4.li@intel.com>,
+	Dave Jiang <dave.jiang@intel.com>,
+	Navneet Singh <navneet.singh@intel.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Davidlohr Bueso <dave@stgolabs.net>,
+	Alison Schofield <alison.schofield@intel.com>,
+	Vishal Verma <vishal.l.verma@intel.com>,
+	linux-btrfs@vger.kernel.org, linux-cxl@vger.kernel.org,
+	linux-doc@vger.kernel.org, nvdimm@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 21/28] cxl/extent: Process DCD events and realize
+ region extents
+Message-ID: <Zwl5Esr7uV8EpxMP@fan>
+References: <20241007-dcd-type2-upstream-v4-0-c261ee6eeded@intel.com>
+ <20241007-dcd-type2-upstream-v4-21-c261ee6eeded@intel.com>
+ <4337ddd9-312b-4fb7-9597-81e8b00d57cb@intel.com>
+ <6706de3530f5c_40429294b8@iweiny-mobl.notmuch>
+ <20241010155014.00004bdd@Huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241011-wrapped-keys-v7-17-e3f7a752059b@linaro.org>
-References: <20241011-wrapped-keys-v7-0-e3f7a752059b@linaro.org>
-In-Reply-To: <20241011-wrapped-keys-v7-0-e3f7a752059b@linaro.org>
-To: Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>, 
- Alasdair Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>, 
- Mikulas Patocka <mpatocka@redhat.com>, 
- Adrian Hunter <adrian.hunter@intel.com>, 
- Asutosh Das <quic_asutoshd@quicinc.com>, 
- Ritesh Harjani <ritesh.list@gmail.com>, 
- Ulf Hansson <ulf.hansson@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
- Avri Altman <avri.altman@wdc.com>, Bart Van Assche <bvanassche@acm.org>, 
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, 
- "Martin K. Petersen" <martin.petersen@oracle.com>, 
- Eric Biggers <ebiggers@kernel.org>, "Theodore Y. Ts'o" <tytso@mit.edu>, 
- Jaegeuk Kim <jaegeuk@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, 
- Gaurav Kashyap <quic_gaurkash@quicinc.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: linux-block@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, dm-devel@lists.linux.dev, 
- linux-mmc@vger.kernel.org, linux-scsi@vger.kernel.org, 
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, 
- Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, 
- Om Prakash Singh <quic_omprsing@quicinc.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4227;
- i=bartosz.golaszewski@linaro.org; h=from:subject:message-id;
- bh=7z0AVztT5cMGpKL1HOXiPwLEES90yGUwCX8SCOsuW3M=;
- b=owEBbQKS/ZANAwAKARGnLqAUcddyAcsmYgBnCXRh2LQ7bAQ7CKxS1EQC/uEajCQAo6Z5GLJTK
- XdDvQt2bvmJAjMEAAEKAB0WIQQWnetsC8PEYBPSx58Rpy6gFHHXcgUCZwl0YQAKCRARpy6gFHHX
- cmERD/9iIKvoDWCKjog0/bhMPZvD8+KwCdCudAqeJomfaC53GCIhB55GfJB9IvaqB7GITu6o1Hx
- pB5Owey9Mczn/fnrP3IBnkT+ExpEg9S0RC9B7kKDlO+0D8t1FdWgX/PPa0p3OTAugqOGEbMr+tO
- ywY3a+9yf3oNvwMlLIbiElfE5apx4PoQMJmVV0gDsM+/FfSm+1vg98FxuVm6yTBkL5Pul1toJX2
- 0ToHYVD7S3IR6DVI9H/prAY3LZhhqlZQLrCempZWfJxqHsUpEihJGnWXTz0MNXnuaiu/uJBsOw+
- 6+IdZp8u6u94M8jOIZRB3+ZYstukyF0mnse2DFOuOfMd09VFMSeJIPjbPxaeDhvdGR7Vjl3AfeH
- Y2n40Ca84gGNZRQH0Ug2Rov4BuUUZoD/LVBFEqOr/cgfcWK34hLQrwC53XoApnxq5nQl5aME7Ix
- i+LGaZaNxEz/WFZKcZU+jAShzzR7brXh9zYAD2eAKFJKMX6sKIgH/VlVl3r20q9d4HyHRZf1VZF
- xafLajzlgytdG5AzMClH3QVbQg6YwarQka35XEEtDzbkErocGzKHTPdOnjj594AcGvDNFOMs1pm
- YaNP7GGIBf9XLF9Pue0N/T+Rru1jQtTwt420hOPlUAFhVlbHoWbmwmfdPNgOla5U4c6iXvZSrZk
- aADVpm6/ZZMgxrQ==
-X-Developer-Key: i=bartosz.golaszewski@linaro.org; a=openpgp;
- fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241010155014.00004bdd@Huawei.com>
 
-From: Gaurav Kashyap <quic_gaurkash@quicinc.com>
+On Thu, Oct 10, 2024 at 03:50:14PM +0100, Jonathan Cameron wrote:
+> On Wed, 9 Oct 2024 14:49:09 -0500
+> Ira Weiny <ira.weiny@intel.com> wrote:
+> 
+> > Li, Ming4 wrote:
+> > > On 10/8/2024 7:16 AM, ira.weiny@intel.com wrote:  
+> > > > From: Navneet Singh <navneet.singh@intel.com>
+> > > >  
+> > 
+> > [snip]
+> > 
+> > > >
+> > > > Signed-off-by: Navneet Singh <navneet.singh@intel.com>
+> > > > Co-developed-by: Ira Weiny <ira.weiny@intel.com>
+> > > > Signed-off-by: Ira Weiny <ira.weiny@intel.com>
+> > > >  
+> > > Hi Ira,
+> > > 
+> > > I guess you missed my comments for V3, I comment it again for this patch.  
+> > 
+> > Apologies.  Yes I totally missed your reply.  :-(
+> > 
+> > >   
+> > > > +static bool extents_contain(struct cxl_dax_region *cxlr_dax,
+> > > > +			    struct cxl_endpoint_decoder *cxled,
+> > > > +			    struct range *new_range)
+> > > > +{
+> > > > +	struct device *extent_device;
+> > > > +	struct match_data md = {
+> > > > +		.cxled = cxled,
+> > > > +		.new_range = new_range,
+> > > > +	};
+> > > > +
+> > > > +	extent_device = device_find_child(&cxlr_dax->dev, &md, match_contains);
+> > > > +	if (!extent_device)
+> > > > +		return false;
+> > > > +
+> > > > +	put_device(extent_device);  
+> > > could use __free(put_device) to drop this 'put_device(extent_device)'  
+> > 
+> > Yep.
+> > 
+> > > > +	return true;
+> > > > +}  
+> > > [...]  
+> > > > +static bool extents_overlap(struct cxl_dax_region *cxlr_dax,
+> > > > +			    struct cxl_endpoint_decoder *cxled,
+> > > > +			    struct range *new_range)
+> > > > +{
+> > > > +	struct device *extent_device;
+> > > > +	struct match_data md = {
+> > > > +		.cxled = cxled,
+> > > > +		.new_range = new_range,
+> > > > +	};
+> > > > +
+> > > > +	extent_device = device_find_child(&cxlr_dax->dev, &md, match_overlaps);
+> > > > +	if (!extent_device)
+> > > > +		return false;
+> > > > +
+> > > > +	put_device(extent_device);  
+> > > Same as above.  
+> > 
+> > Done.
+> > 
+> > > > +	return true;
+> > > > +}
+> > > > +  
+> > > [...]  
+> > > > +static int cxl_send_dc_response(struct cxl_memdev_state *mds, int opcode,
+> > > > +				struct xarray *extent_array, int cnt)
+> > > > +{
+> > > > +	struct cxl_mailbox *cxl_mbox = &mds->cxlds.cxl_mbox;
+> > > > +	struct cxl_mbox_dc_response *p;
+> > > > +	struct cxl_mbox_cmd mbox_cmd;
+> > > > +	struct cxl_extent *extent;
+> > > > +	unsigned long index;
+> > > > +	u32 pl_index;
+> > > > +	int rc;
+> > > > +
+> > > > +	size_t pl_size = struct_size(p, extent_list, cnt);
+> > > > +	u32 max_extents = cnt;
+> > > > +
+> > > > +	/* May have to use more bit on response. */
+> > > > +	if (pl_size > cxl_mbox->payload_size) {
+> > > > +		max_extents = (cxl_mbox->payload_size - sizeof(*p)) /
+> > > > +			      sizeof(struct updated_extent_list);
+> > > > +		pl_size = struct_size(p, extent_list, max_extents);
+> > > > +	}
+> > > > +
+> > > > +	struct cxl_mbox_dc_response *response __free(kfree) =
+> > > > +						kzalloc(pl_size, GFP_KERNEL);
+> > > > +	if (!response)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	pl_index = 0;
+> > > > +	xa_for_each(extent_array, index, extent) {
+> > > > +
+> > > > +		response->extent_list[pl_index].dpa_start = extent->start_dpa;
+> > > > +		response->extent_list[pl_index].length = extent->length;
+> > > > +		pl_index++;
+> > > > +		response->extent_list_size = cpu_to_le32(pl_index);
+> > > > +
+> > > > +		if (pl_index == max_extents) {
+> > > > +			mbox_cmd = (struct cxl_mbox_cmd) {
+> > > > +				.opcode = opcode,
+> > > > +				.size_in = struct_size(response, extent_list,
+> > > > +						       pl_index),
+> > > > +				.payload_in = response,
+> > > > +			};
+> > > > +
+> > > > +			response->flags = 0;
+> > > > +			if (pl_index < cnt)
+> > > > +				response->flags &= CXL_DCD_EVENT_MORE;  
+> > > 
+> > > It should be 'response->flags |= CXL_DCD_EVENT_MORE' here.  
+> > 
+> > Ah yea.  Good catch.
+> > 
+> > > 
+> > > Another issue is if 'cnt' is N times bigger than 'max_extents'(e,g. cnt=20, max_extents=10). all responses will be sent in this xa_for_each(), and CXL_DCD_EVENT_MORE will be set in the last response but it should not be set in these cases.
+> > >   
+> > 
+> > Ah yes.  cnt must be decremented.  As I looked at the patch just now the
+> > 
+> > 	if (cnt == 0 || pl_index)
+> > 
+> > ... seemed very wrong to me.  That change masked this bug.
+> > 
+> > This should fix it:
+> > 
+> > diff --git a/drivers/cxl/core/mbox.c b/drivers/cxl/core/mbox.c
+> > index d66beec687a0..99200274dea8 100644
+> > --- a/drivers/cxl/core/mbox.c
+> > +++ b/drivers/cxl/core/mbox.c
+> > @@ -1119,10 +1119,11 @@ static int cxl_send_dc_response(struct cxl_memdev_state *mds, int opcode,
+> >                         if (rc)
+> >                                 return rc;
+> >                         pl_index = 0;
+> > +                       cnt -= pl_index;
+> >                 }
+> >         }
+> >  
+> > -       if (cnt == 0 || pl_index) {
+> 
+> I thought this cnt == 0 check was to deal with the no valid
+> extents case where an empty reply is needed.
 
-Extend the UFS core ops to include callbacks for generating, importing
-and prepating HW wrapped keys using the lower-level block crypto
-operations and implement them for QCom UFS.
+Agreed. Based on current code logic, there are two cases that cnt == 0:
+1. no extent is accepted so cnt is passed as 0;
+2. cnt was decreased to 0 and response has already been sent.
 
-Reviewed-by: Om Prakash Singh <quic_omprsing@quicinc.com>
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Gaurav Kashyap <quic_gaurkash@quicinc.com>
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
----
- drivers/ufs/host/ufs-qcom.c | 34 ++++++++++++++++++++++++++++++++++
- include/ufs/ufshcd.h        | 11 +++++++++++
- 2 files changed, 45 insertions(+)
+For case 1, we still need to send a response with zero extents;
+For case 2, we do not need to handle.
 
-diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
-index 862e02bf8f64..180e13a44b36 100644
---- a/drivers/ufs/host/ufs-qcom.c
-+++ b/drivers/ufs/host/ufs-qcom.c
-@@ -195,10 +195,41 @@ static int ufs_qcom_ice_derive_sw_secret(struct ufs_hba *hba, const u8 wkey[],
- 	return qcom_ice_derive_sw_secret(host->ice, wkey, wkey_size, sw_secret);
- }
- 
-+static int ufs_qcom_ice_generate_key(struct ufs_hba *hba,
-+				     u8 lt_key[BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE])
-+{
-+	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
-+
-+	return qcom_ice_generate_key(host->ice, lt_key);
-+}
-+
-+static int ufs_qcom_ice_prepare_key(struct ufs_hba *hba,
-+				    const u8 *lt_key, size_t lt_key_size,
-+				    u8 eph_key[BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE])
-+{
-+	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
-+
-+	return qcom_ice_prepare_key(host->ice, lt_key, lt_key_size,
-+				    eph_key);
-+}
-+
-+static int ufs_qcom_ice_import_key(struct ufs_hba *hba,
-+				   const u8 *imp_key, size_t imp_key_size,
-+				   u8 lt_key[BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE])
-+{
-+	struct ufs_qcom_host *host = ufshcd_get_variant(hba);
-+
-+	return qcom_ice_import_key(host->ice, imp_key, imp_key_size,
-+				   lt_key);
-+}
-+
- #else
- 
- #define ufs_qcom_ice_program_key NULL
- #define ufs_qcom_ice_derive_sw_secret NULL
-+#define ufs_qcom_ice_generate_key NULL
-+#define ufs_qcom_ice_prepare_key NULL
-+#define ufs_qcom_ice_import_key NULL
- 
- static inline void ufs_qcom_ice_enable(struct ufs_qcom_host *host)
- {
-@@ -1847,6 +1878,9 @@ static const struct ufs_hba_variant_ops ufs_hba_qcom_vops = {
- 	.config_scaling_param = ufs_qcom_config_scaling_param,
- 	.program_key		= ufs_qcom_ice_program_key,
- 	.derive_sw_secret	= ufs_qcom_ice_derive_sw_secret,
-+	.generate_key		= ufs_qcom_ice_generate_key,
-+	.prepare_key		= ufs_qcom_ice_prepare_key,
-+	.import_key		= ufs_qcom_ice_import_key,
- 	.reinit_notify		= ufs_qcom_reinit_notify,
- 	.mcq_config_resource	= ufs_qcom_mcq_config_resource,
- 	.get_hba_mac		= ufs_qcom_get_hba_mac,
-diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
-index c172c1dd9209..c52acb486688 100644
---- a/include/ufs/ufshcd.h
-+++ b/include/ufs/ufshcd.h
-@@ -324,6 +324,9 @@ struct ufs_pwr_mode_info {
-  * @config_scaling_param: called to configure clock scaling parameters
-  * @program_key: program or evict an inline encryption key
-  * @derive_sw_secret: derive sw secret from a wrapped key
-+ * @generate_key: generate a storage key and return longterm wrapped key
-+ * @prepare_key: unwrap longterm key and return ephemeral wrapped key
-+ * @import_key: import sw storage key and return longterm wrapped key
-  * @fill_crypto_prdt: initialize crypto-related fields in the PRDT
-  * @event_notify: called to notify important events
-  * @reinit_notify: called to notify reinit of UFSHCD during max gear switch
-@@ -376,6 +379,14 @@ struct ufs_hba_variant_ops {
- 	int	(*derive_sw_secret)(struct ufs_hba *hba, const u8 wkey[],
- 				    unsigned int wkey_size,
- 				    u8 sw_secret[BLK_CRYPTO_SW_SECRET_SIZE]);
-+	int	(*generate_key)(struct ufs_hba *hba,
-+				u8 lt_key[BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE]);
-+	int	(*prepare_key)(struct ufs_hba *hba,
-+			       const u8 *lt_key, size_t lt_key_size,
-+			       u8 eph_key[BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE]);
-+	int	(*import_key)(struct ufs_hba *hba,
-+			      const u8 *imp_key, size_t imp_key_size,
-+			      u8 lt_key[BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE]);
- 	int	(*fill_crypto_prdt)(struct ufs_hba *hba,
- 				    const struct bio_crypt_ctx *crypt_ctx,
- 				    void *prdt, unsigned int num_segments);
+Fan
+
+> 
+> 
+> > +       if (pl_index) {
+> >                 mbox_cmd = (struct cxl_mbox_cmd) {
+> >                         .opcode = opcode,
+> >                         .size_in = struct_size(response, extent_list,
+> > 
+> > 
+> > Thank you, and sorry again for missing your feedback.
+> > 
+> > Ira
+> > 
+> > [snip]
+> > 
+> 
 
 -- 
-2.43.0
-
+Fan Ni
 
