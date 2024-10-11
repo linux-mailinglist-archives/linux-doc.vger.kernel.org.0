@@ -1,172 +1,192 @@
-Return-Path: <linux-doc+bounces-27149-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-27166-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B74E9995D2
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 01:55:12 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 19B08999655
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 02:11:14 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 38A502845EE
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Oct 2024 23:55:11 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 9D1451F23D3A
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 00:11:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 74D011C1AD8;
-	Thu, 10 Oct 2024 23:55:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51F2C194A40;
+	Fri, 11 Oct 2024 00:07:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="k5y2A0KT"
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="pzUkIjt+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC1E41A704B
-	for <linux-doc@vger.kernel.org>; Thu, 10 Oct 2024 23:55:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 890031A269;
+	Fri, 11 Oct 2024 00:07:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728604508; cv=none; b=lHN1FScX+XPQ6wJWw0W1r5zISeCJ92giN4GLutDd6wZE463L3rf+E9ubHA8NZk7gEGkFjDJ2BXzEeIQZjKK6vPp7MAXxTtwOncO62pBv+LmMAsQP9DC0Qa+Eo6VvT+qhmo3S4VJXqZH/XodPbvJKY8llLmKBQFcTq3nhC/13t68=
+	t=1728605255; cv=none; b=f4lGoRqYq9EvR4AM24s9FcDY6nImkrmCQiKn8WGbj86w0un/RSo9SR1FYqyR3v7KK6LVWrI8H1uykiqxXIBwWYmMO3BGn+kiEJ16/lJ3NaLskxj0Wdbaz/T7BNnx8sIRqAJlX0oHerNvPX1sHrdgTL9PFw+TpnsujSzcf82oScQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728604508; c=relaxed/simple;
-	bh=KHqXPixWG9aXv6WohiHYIwXMRo6WFOd5Wo6gjSfxyYk=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=Y+oU+dwgZsWrWFGVCsD7p35DtJt3CRK8c5G1TO1/GvwuEKrsXcydFIZTJldDq+DJ+V4aX9SMQJHMC5R9Xp16W2nibbceyjuK9y6mcXoWgHCo6Ql1jDUICjTacwCE2jT10BS+1l77m5efJC1c2goJfn8Qk+jX+JHzBCjO04E4DB0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=k5y2A0KT; arc=none smtp.client-ip=90.155.92.199
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
-	:In-Reply-To:References:Cc:To:From:Subject:MIME-Version:Date:Message-ID:
-	Sender:Reply-To:Content-ID:Content-Description;
-	bh=snqs3EHvQQFe5TlwVU9Fqyfnun53AdSjkQFSmOW8rqg=; b=k5y2A0KTzzhh1N8FNtU6Rdqy7o
-	Zi5Aw1wAZJ+Dw8nItthR3rpyIm+YsPBYhuFaZfsancwNjOqDFLMybm7ClX1L5YMEc37/0pyu00uLa
-	Nr/d3Q+gZ2q9aeELopN6NbOgzpZZMNGJDqMaEJTUGAaokGoZfVzevvIHohmXXX4c1g9aoEVshRd1a
-	mKtRz4vbCwnMKXnkS78s+UKdb9/qxKoFN+fiq2nlmCG0C09JuFWjFMRCUsbVaRE5b/CEdhoUUr6cj
-	RqQ09iemAlqK0IB4hjEM++BfEzt3LF4trW75rxzE42i8o37ozPxXjNpZpi0MleQEfay+JwIcXV5X3
-	FY7x6UQA==;
-Received: from [50.53.2.24] (helo=[192.168.254.17])
-	by desiato.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
-	id 1sz2za-00000005k0I-2q5f;
-	Thu, 10 Oct 2024 23:54:51 +0000
-Message-ID: <5b16b00f-749c-431b-baeb-7accb76b492b@infradead.org>
-Date: Thu, 10 Oct 2024 16:54:46 -0700
+	s=arc-20240116; t=1728605255; c=relaxed/simple;
+	bh=3nFyRTVOUVhLHMFASESfShsxhY8idPyIGAYXXG9qqd0=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=CssK+Cu7+R/iG69awYCscKPO9MSFCTG/LWihAWCFkH/1HbBTVyDCRACvq7/19DOUzFjnyYzWnZDcpMVyMBpGGKQkTfmU+s3Egs3QYxpGjBul4H+qAGczK7ynzSSdg8oWC7VBuM/ND5TtY/1dZN8PdOjxBAFjm/zMRJZDbBo/RgA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=pzUkIjt+; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49AChYNC022461;
+	Fri, 11 Oct 2024 00:07:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	SVZiV+f4SnId4RLZpdWICppkMgvqXrXjIq8fTSzECKc=; b=pzUkIjt+B0Nzr/b4
+	3FA5sySkb7gjKrTtGyT2NNnHRRWtwvEW1GmC54HN4vxzoL/8iumfOqoF+D1OyGgN
+	j+MnfklG7WigbXebKQdg1atQxI1ZG+76B5fTlLR1b8D+wxagb+n34m0JTJA7cByb
+	muZtiaRxgTkJpgyXkuYADHHxNTYmcMGgh0UdcK3M9E/lEFX5XWYVVH4Wqp/qa9Kz
+	5AFijDMG4qfDuMIv9p1iOGf1US9Xh1bGhLL/6DeHs1hMnIM6eEevhneZlGG5N4tL
+	fx1NrMBev+Ss1Iqdaxk2R7brqxMmLImJsOX000yghyB5fB0sVUwlcuR/XBZ9bRn8
+	+jVG7g==
+Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 425xptv1eg-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 11 Oct 2024 00:07:03 +0000 (GMT)
+Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
+	by NALASPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 49B072lg003264
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 11 Oct 2024 00:07:03 GMT
+Received: from hu-wcheng-lv.qualcomm.com (10.49.16.6) by
+ nalasex01b.na.qualcomm.com (10.47.209.197) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Thu, 10 Oct 2024 17:07:02 -0700
+From: Wesley Cheng <quic_wcheng@quicinc.com>
+To: <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
+        <perex@perex.cz>, <conor+dt@kernel.org>, <dmitry.torokhov@gmail.com>,
+        <corbet@lwn.net>, <broonie@kernel.org>, <lgirdwood@gmail.com>,
+        <tiwai@suse.com>, <krzk+dt@kernel.org>,
+        <pierre-louis.bossart@linux.intel.com>, <Thinh.Nguyen@synopsys.com>,
+        <bgoswami@quicinc.com>, <robh@kernel.org>,
+        <gregkh@linuxfoundation.org>
+CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-sound@vger.kernel.org>, <linux-input@vger.kernel.org>,
+        <linux-usb@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <alsa-devel@alsa-project.org>,
+        Mathias Nyman
+	<mathias.nyman@linux.intel.com>,
+        Wesley Cheng <quic_wcheng@quicinc.com>
+Subject: [PATCH v28 01/32] xhci: add helper to stop endpoint and wait for completion
+Date: Thu, 10 Oct 2024 17:05:46 -0700
+Message-ID: <20241011000650.2585600-2-quic_wcheng@quicinc.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241011000650.2585600-1-quic_wcheng@quicinc.com>
+References: <20241011000650.2585600-1-quic_wcheng@quicinc.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [partial fix] Re: [PATCH] mm, slab: add kerneldocs for common
- SLAB_ flags
-From: Randy Dunlap <rdunlap@infradead.org>
-To: Jonathan Corbet <corbet@lwn.net>, Vlastimil Babka <vbabka@suse.cz>,
- David Rientjes <rientjes@google.com>, Christoph Lameter <cl@linux.com>,
- Horia Geanta <horia.geanta@freescale.com>
-Cc: Hyeonggon Yoo <42.hyeyoo@gmail.com>,
- Roman Gushchin <roman.gushchin@linux.dev>,
- Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org,
- linux-doc@vger.kernel.org
-References: <20241009142936.56092-2-vbabka@suse.cz>
- <878quxe2kw.fsf@trenco.lwn.net>
- <f6fa720b-e8af-4afa-906f-29019aefe49a@suse.cz>
- <878quxb4rm.fsf@trenco.lwn.net>
- <8b0c1bb9-4a9a-4f8e-87df-275994df739d@infradead.org>
- <1406d498-84bf-49aa-9efd-6480ad618582@infradead.org>
- <46c52676-c402-4b39-b634-a401f7a7a571@infradead.org>
-Content-Language: en-US
-In-Reply-To: <46c52676-c402-4b39-b634-a401f7a7a571@infradead.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: nalasex01b.na.qualcomm.com (10.47.209.197) To
+ nalasex01b.na.qualcomm.com (10.47.209.197)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: 4FvtNjJ74vgtkAz9L-lRDfWM-dvAy39X
+X-Proofpoint-GUID: 4FvtNjJ74vgtkAz9L-lRDfWM-dvAy39X
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ adultscore=0 suspectscore=0 spamscore=0 mlxscore=0 bulkscore=0
+ phishscore=0 mlxlogscore=999 lowpriorityscore=0 clxscore=1011
+ impostorscore=0 malwarescore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2409260000 definitions=main-2410100159
 
+From: Mathias Nyman <mathias.nyman@linux.intel.com>
 
+Expose xhci_stop_endpoint_sync() which is a synchronous variant of
+xhci_queue_stop_endpoint().  This is useful for client drivers that are
+using the secondary interrupters, and need to stop the current endpoint
+session.
 
-On 10/10/24 4:43 PM, Randy Dunlap wrote:
-> 
-> 
-> On 10/9/24 10:06 PM, Randy Dunlap wrote:
->>
->>
->> On 10/9/24 3:02 PM, Randy Dunlap wrote:
->>>
->>>
->>> On 10/9/24 9:49 AM, Jonathan Corbet wrote:
->>>> Vlastimil Babka <vbabka@suse.cz> writes:
->>>>
->>>>> Thanks for the hints. I hope if we can agree that documenting the macros was
->>>>> intended to be supported, doesn't break the build (there are users already)
->>>>> and has only those minor rendering issues, it can be used?
->>>>
->>>> I'd totally forgotten that this was supposed to work.
->>>>
->>>> Yes it can be used... $WE just need to find a way to make it work
->>>> properly.
->>>
->>> The code probably isn't expecting a macro on the right side. I'll take a look,
->>> but no promises.
->>>
->> That would have been too simple.
->> I haven't found the problem yet. Ran out of time. Will continue on it tommorrow/Thursday.
-> 
-> The main problem is that output_function_rst() does not support object-like macros while
-> output_function_man() does.  There is still a bunch of sphinx_version handling that I know
-> nothing about, so the present output (after my trivial patch) leaves more to be done.
-> 
-> Well, the *main* problem is that the output is not consistent. Sometimes my tests don't fail
-> as they did at first.
-> 
-> 
-> This patch drops the trailing "()" for object-like macros in output_function_rst()
-> but there is still more to be done.
-> 
-> ---------------------
-> From: Randy Dunlap <rdunlap@infradead.org>
-> Subject: [PATCH] kernel-doc: allow object-like macros in ReST output
-> 
-> output_function_rst() does not handle object-like macros. It presents
-> a trailing "()" while output_function_man() handles these macros
-> correctly.
-> 
-> Fixes: cbb4d3e6510b ("scripts/kernel-doc: handle object-like macros")
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Horia Geanta <horia.geanta@freescale.com>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: linux-doc@vger.kernel.org
-> Cc: Vlastimil Babka <vbabka@suse.cz>
-> ---
->  scripts/kernel-doc |    8 ++++++--
->  1 file changed, 6 insertions(+), 2 deletions(-)
-> 
-> --- linux-next-20241009.orig/scripts/kernel-doc
-> +++ linux-next-20241009/scripts/kernel-doc
-> @@ -822,10 +822,12 @@ sub output_function_rst(%) {
->      my $oldprefix = $lineprefix;
->  
->      my $signature = "";
-> +    my $noret = $signature eq "";
+This does not go through the normal xhci_handle_cmd_stop_ep() command
+completion handler, because it utilizes the completion path to achieve
+synchronous behavior.  Users of this API are primarily intended to be
+clients that maintain their own transfer rings, such as in the case of USB
+audio offload.
 
-^^^ That line is in the wrong location. Still working on it....
+Signed-off-by: Mathias Nyman <mathias.nyman@linux.intel.com>
+Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
+---
+ drivers/usb/host/xhci.c | 45 +++++++++++++++++++++++++++++++++++++++++
+ drivers/usb/host/xhci.h |  2 ++
+ 2 files changed, 47 insertions(+)
 
-> +
->      if ($args{'functiontype'} ne "") {
->          $signature = $args{'functiontype'} . " " . $args{'function'} . " (";
->      } else {
-> -        $signature = $args{'function'} . " (";
-> +        $signature = $args{'function'} . " ";
->      }
->  
->      my $count = 0;
-> @@ -844,7 +846,9 @@ sub output_function_rst(%) {
->          }
->      }
->  
-> -    $signature .= ")";
-> +    if (!$noret) {
-> +    	$signature .= ")";
-> +    }
->  
->      if ($sphinx_major < 3) {
->          if ($args{'typedef'}) {
-> 
-> 
-
--- 
-~Randy
+diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
+index ed1bb7ed44b0..8d7566e33faf 100644
+--- a/drivers/usb/host/xhci.c
++++ b/drivers/usb/host/xhci.c
+@@ -2784,6 +2784,51 @@ static int xhci_reserve_bandwidth(struct xhci_hcd *xhci,
+ 	return -ENOMEM;
+ }
+ 
++/*
++ * Synchronous XHCI stop endpoint helper.  Issues the stop endpoint command and
++ * waits for the command completion before returning.  This does not call
++ * xhci_handle_cmd_stop_ep(), which has additional handling for 'context error'
++ * cases, along with transfer ring cleanup.
++ *
++ * xhci_stop_endpoint_sync() is intended to be utilized by clients that manage
++ * their own transfer ring, such as offload situations.
++ */
++int xhci_stop_endpoint_sync(struct xhci_hcd *xhci, struct xhci_virt_ep *ep, int suspend,
++			    gfp_t gfp_flags)
++{
++	struct xhci_command *command;
++	unsigned long flags;
++	int ret;
++
++	command = xhci_alloc_command(xhci, true, gfp_flags);
++	if (!command)
++		return -ENOMEM;
++
++	spin_lock_irqsave(&xhci->lock, flags);
++	ret = xhci_queue_stop_endpoint(xhci, command, ep->vdev->slot_id,
++				       ep->ep_index, suspend);
++	if (ret < 0) {
++		spin_unlock_irqrestore(&xhci->lock, flags);
++		goto out;
++	}
++
++	xhci_ring_cmd_db(xhci);
++	spin_unlock_irqrestore(&xhci->lock, flags);
++
++	wait_for_completion(command->completion);
++
++	/* No handling for COMP_CONTEXT_STATE_ERROR done at command completion*/
++	if (command->status == COMP_COMMAND_ABORTED ||
++	    command->status == COMP_COMMAND_RING_STOPPED) {
++		xhci_warn(xhci, "Timeout while waiting for stop endpoint command\n");
++		ret = -ETIME;
++	}
++out:
++	xhci_free_command(xhci, command);
++
++	return ret;
++}
++EXPORT_SYMBOL_GPL(xhci_stop_endpoint_sync);
+ 
+ /* Issue a configure endpoint command or evaluate context command
+  * and wait for it to finish.
+diff --git a/drivers/usb/host/xhci.h b/drivers/usb/host/xhci.h
+index 324644165d93..51a992d8ffcf 100644
+--- a/drivers/usb/host/xhci.h
++++ b/drivers/usb/host/xhci.h
+@@ -1917,6 +1917,8 @@ void xhci_ring_doorbell_for_active_rings(struct xhci_hcd *xhci,
+ void xhci_cleanup_command_queue(struct xhci_hcd *xhci);
+ void inc_deq(struct xhci_hcd *xhci, struct xhci_ring *ring);
+ unsigned int count_trbs(u64 addr, u64 len);
++int xhci_stop_endpoint_sync(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
++			    int suspend, gfp_t gfp_flags);
+ 
+ /* xHCI roothub code */
+ void xhci_set_link_state(struct xhci_hcd *xhci, struct xhci_port *port,
 
