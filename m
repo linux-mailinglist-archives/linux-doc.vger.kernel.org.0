@@ -1,92 +1,149 @@
-Return-Path: <linux-doc+bounces-27242-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-27244-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E602699A500
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 15:28:48 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id B009499A5B2
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 16:03:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 74D99283EC1
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 13:28:47 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5EBE528654D
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Oct 2024 14:03:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 700492185B9;
-	Fri, 11 Oct 2024 13:28:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3CE6DD517;
+	Fri, 11 Oct 2024 14:03:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="mfK7qYWO"
+	dkim=pass (1024-bit key) header.d=riseup.net header.i=@riseup.net header.b="lJvNMdTo"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEDC120CCE6;
-	Fri, 11 Oct 2024 13:28:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A2024431;
+	Fri, 11 Oct 2024 14:03:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.252.153.129
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728653324; cv=none; b=GsxM8XD1Iqjc1y8/ufxeRgYq45VPvKwAwJRtyJ2KXF+VZxrTOJR1tx5Lndnf3S4L6VufNCVa6wGAJx6T9+nhiz5tXKzO/jvo7B0oZJpyEsMAxlBDXO/1ervX8fVpbHc2LkqUFBCZAzjdwm4YFUDqvESXP45mWOwd8RxOtVAeIvo=
+	t=1728655394; cv=none; b=QOyq/O5Bcq5Gg39YdiRfRmZkOnuGNnLEa0defX/pmNY6QUcsv8+ymP3jnfiaSlsP9t4ME5wtyHsnweF8K2xurGFWLpPGzp7MPAF3Pb2HJwwV8lmOESTCevUm4cTdJpq5UcwdfO2UFTaT451MThPhT/ve7yLoVfyPCjCAgj3rxYY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728653324; c=relaxed/simple;
-	bh=0KN4PAuarD15cBjtwViE6vOds69mPESC9M3ECcMXUwU=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=T3BoT5Ph2C8Yr912gh9pXqXTwEdf/3pE1Oddo7I1HUpo0Jfbqwt5JAs53ScPf5hSLnjzStyGWZb+ibjq9QyxO8XmswOXiKnAfXogL1d987LSm9wHe63iGUEAN2XHlJDsUwAuj682uribxv2uTkiWynXuZeKgwwnVK+HXth9BE48=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=mfK7qYWO; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net B041E418B6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1728653321; bh=lHvB7mQigSlwaSn/vOH3/OOzW0hyZvIFE2loiiES9og=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=mfK7qYWOLpuITnbZcMdT3SYp5n/tBuxmwq/p85oL1znYqUmgEBvfrOZ8TZUy6NtID
-	 770CkerjGdweTHQCZMMKb3GTx8/jcVyY/dNKT8u7O+eHcdWaHfvD+11+gGWZcb99w4
-	 pYkqwaKuUUzie2mXe0tlvkDVMdZoNQpoK8TB4GOZJMpequs1/7R60dxQFoUuQXIYdh
-	 YhNRyI8UweCuX0fHgU6SPgvlq7MtOJ3YG32+bS8rVXXcrw+175BxvV1oGy0aN/E2cU
-	 U8iKIhLDiasZdzuVGcPVPmBy7Z8UzKJCKHvpEckZZnXe8rk/HUDauMQ7+oFfAjJmvP
-	 xBfIWj5xgt9rw==
-Received: from localhost (unknown [IPv6:2601:280:5e00:625::1fe])
+	s=arc-20240116; t=1728655394; c=relaxed/simple;
+	bh=n1WOgztgdZol/yqRy+BG+Mbi1frWGk6AMzu1Epuh+V4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=b1PO/nyXnSz6efGAfIeJzcWu+xeBS2j4ZwhRqI61OIybRpv/uDPOgnBJP3S8fKk9AZMKZ8dEcaWD97vhNwSVuvHHidmZa8FhD54xW2P+Fd854GEvftLXpPvQiRA4sdML/cWaRSCxfzp6R5kuRIgWvt5uzQS301znkoKhOYU1ccM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riseup.net; spf=pass smtp.mailfrom=riseup.net; dkim=pass (1024-bit key) header.d=riseup.net header.i=@riseup.net header.b=lJvNMdTo; arc=none smtp.client-ip=198.252.153.129
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riseup.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riseup.net
+Received: from mx0.riseup.net (mx0-pn.riseup.net [10.0.1.42])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id B041E418B6;
-	Fri, 11 Oct 2024 13:28:41 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Suraj Sonawane <surajsonawane0215@gmail.com>, Steven Rostedt
- <rostedt@goodmis.org>
-Cc: mhiramat@kernel.org, mathieu.desnoyers@efficios.com,
- linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-Subject: Re: [PATCH] docs: fix WARNING document not included in any toctree
-In-Reply-To: <e7851def-91ce-43e7-880a-22dc5752c4ad@gmail.com>
-References: <20241002195817.22972-1-surajsonawane0215@gmail.com>
- <20241010154708.0bf658a3@gandalf.local.home>
- <87y12vzqg0.fsf@trenco.lwn.net>
- <e7851def-91ce-43e7-880a-22dc5752c4ad@gmail.com>
-Date: Fri, 11 Oct 2024 07:28:40 -0600
-Message-ID: <87h69izs3b.fsf@trenco.lwn.net>
+	by mx1.riseup.net (Postfix) with ESMTPS id 4XQ7QS5CYqzDq6L;
+	Fri, 11 Oct 2024 13:54:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
+	t=1728654848; bh=n1WOgztgdZol/yqRy+BG+Mbi1frWGk6AMzu1Epuh+V4=;
+	h=Date:Subject:To:References:From:In-Reply-To:From;
+	b=lJvNMdTozdaJX+XqPr/cNp3cqj41SoepdQ0WV/W7Mq35yhjskxEf9sLWm6ujQ4rTD
+	 pUZ+tua2dPphvIxtCGs5dUFIz+SWqdd0AXQ6WvvzFJeAR9fsixNXMSi7maZ3R4Uda7
+	 nORsfHJrjMVetgI1cs0PtHVOrL+4hERm2Rm+dmps=
+Received: from fews02-sea.riseup.net (fews02-sea-pn.riseup.net [10.0.1.112])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx0.riseup.net (Postfix) with ESMTPS id 4XQ7QK6MYsz9tt6;
+	Fri, 11 Oct 2024 13:54:01 +0000 (UTC)
+X-Riseup-User-ID: DE0616E53A0FE088A8995C5F0A19FD8B9EDA153B7652DC58E32077D8E8E2CD23
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	 by fews02-sea.riseup.net (Postfix) with ESMTPSA id 4XQ7QB6JnQzFrsK;
+	Fri, 11 Oct 2024 13:53:54 +0000 (UTC)
+Message-ID: <608074ed-567c-4e6d-b1c2-9e0ecf1d102b@riseup.net>
+Date: Fri, 11 Oct 2024 10:53:52 -0300
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Subject: Re: [PATCH v12 09/15] drm/vkms: Remove useless drm_rotation_simplify
+To: Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
+ Melissa Wen <melissa.srw@gmail.com>,
+ Haneen Mohammed <hamohammed.sa@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+ Simona Vetter <simona@ffwll.ch>, rdunlap@infradead.org,
+ arthurgrillo@riseup.net, pekka.paalanen@haloniitty.fi,
+ Simona Vetter <simona.vetter@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ thomas.petazzoni@bootlin.com, jeremie.dautheribes@bootlin.com,
+ miquel.raynal@bootlin.com, seanpaul@google.com, marcheu@google.com,
+ nicolejadeyee@google.com
+References: <20241007-yuv-v12-0-01c1ada6fec8@bootlin.com>
+ <20241007-yuv-v12-9-01c1ada6fec8@bootlin.com>
+ <Zwjxo2TEAR3PelO9@louis-chauvet-laptop>
+Content-Language: en-US
+From: Maira Canal <mairacanal@riseup.net>
+In-Reply-To: <Zwjxo2TEAR3PelO9@louis-chauvet-laptop>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Suraj Sonawane <surajsonawane0215@gmail.com> writes:
+Hi Louis,
 
-> Can I send an updated patch with this change (moving debugging section 
-> to the top)?
+On 10/11/24 06:36, Louis Chauvet wrote:
+> 
+> Hi all,
+> 
+> Until this point, this series has not received any major comments since
+> v9. I will commit patches 1-9 next week if there are no further comments.
+> 
 
-The patch is already applied, so no.  You can send a new patch against
-docs-next if that sort of movement is warranted.
+Although we are maintainers of VKMS, it isn't recommended that we push
+our own changes without even the Ack of another person. Please, read the
+"drm-misc Committer Guidelines" [1].
 
-Honestly, though, just shuffling one file around only seems so useful.
-What would be nice would be to turn index.rst into a good starting point
-for people wanting to learn about tracing, rather than just a jumble of
-files.  It needs organization into sections and some connecting text; as
-an example, see the (minimal) organizational work that I did for
-Documentation/process/index.rst. 
+I can ack patches 05/15, 07/15, and 09/15, but it would be more
+beneficial for the community if you ask for an ack (from me or from the
+DRM maintainers, which are always around), instead of saying that you
+are going to commit the patches without any review.
 
-It's more work, but would certainly pay off.
+[1] 
+https://drm.pages.freedesktop.org/maintainer-tools/committer/committer-drm-misc.html
 
-Thanks,
+Best Regards,
+- Maíra
 
-jon
+> For patches 10-15, I am currently waiting for feedback from Maxime to
+> send the next iteration with a fix for kunit tests.
+> 
+> Thanks,
+> Louis Chauvet
+> 
+> On 07/10/24 - 18:10, Louis Chauvet wrote:
+>> As all the rotation are now supported by VKMS, this simplification does
+>> not make sense anymore, so remove it.
+>>
+>> Signed-off-by: Louis Chauvet <louis.chauvet@bootlin.com>
+>> ---
+>>   drivers/gpu/drm/vkms/vkms_plane.c | 7 +------
+>>   1 file changed, 1 insertion(+), 6 deletions(-)
+>>
+>> diff --git a/drivers/gpu/drm/vkms/vkms_plane.c b/drivers/gpu/drm/vkms/vkms_plane.c
+>> index 8875bed76410..5a028ee96c91 100644
+>> --- a/drivers/gpu/drm/vkms/vkms_plane.c
+>> +++ b/drivers/gpu/drm/vkms/vkms_plane.c
+>> @@ -115,12 +115,7 @@ static void vkms_plane_atomic_update(struct drm_plane *plane,
+>>   	frame_info->fb = fb;
+>>   	memcpy(&frame_info->map, &shadow_plane_state->data, sizeof(frame_info->map));
+>>   	drm_framebuffer_get(frame_info->fb);
+>> -	frame_info->rotation = drm_rotation_simplify(new_state->rotation, DRM_MODE_ROTATE_0 |
+>> -									  DRM_MODE_ROTATE_90 |
+>> -									  DRM_MODE_ROTATE_270 |
+>> -									  DRM_MODE_REFLECT_X |
+>> -									  DRM_MODE_REFLECT_Y);
+>> -
+>> +	frame_info->rotation = new_state->rotation;
+>>   
+>>   	vkms_plane_state->pixel_read_line = get_pixel_read_line_function(fmt);
+>>   }
+>>
+>> -- 
+>> 2.46.2
+>>
 
