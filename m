@@ -1,277 +1,156 @@
-Return-Path: <linux-doc+bounces-27554-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-27556-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C233499E996
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2024 14:20:13 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA14499EA37
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2024 14:46:22 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EFB9EB24996
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2024 12:20:10 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 794882884B6
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2024 12:46:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 57C9A1EF93F;
-	Tue, 15 Oct 2024 12:19:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EB2741AF0B9;
+	Tue, 15 Oct 2024 12:44:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bbKbeUOf"
+	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="o45USyq5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25C651EF934;
-	Tue, 15 Oct 2024 12:19:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4977E1AF0B0
+	for <linux-doc@vger.kernel.org>; Tue, 15 Oct 2024 12:44:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728994754; cv=none; b=hZcFlURz83U4KycokIihpQC6oQkIO6JJbI3PSVq5aL3tCBUdG3be+s6HNMLusSUyhF1mjoyZfa6X6bCfTI/MXQ3gZjDK5hpGdH+IZvLLFIBnjbm97dDIezrQpoXMBoi8TCmZA4AsLT1Evh8YhcVodm761LwsrVmNwhsWRVdEUq8=
+	t=1728996298; cv=none; b=Eg6HV2TU1hugfOp3rTcFPaFctzoHn/Hv9NEga9yeT28PjbxHXxujypzlxzPKPwyDmhYv1Zzl6hGspWPTzzNTuWyc95yMsTQp+ZSAwuNW0ejPnebBuXkYuHszvpXmHUqdDwz1e2VO2byzkq/C2EYV8PMPjLgRAR2Fiw7mHs9izbc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728994754; c=relaxed/simple;
-	bh=h4+7by0rAf1o7D24l+y+0PKeuIiAXm/n19ReSlgbZAA=;
+	s=arc-20240116; t=1728996298; c=relaxed/simple;
+	bh=wVh/PfXghRTayRgATzYAANgZDc6hAGSW3hAg0noljF0=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=S7qIKT2jDM08UGP2TqZu8lv2lQL+tyC1Oh1uybYVQNjN0lgIfOlHx7XDJhEdX56Kn9lfDeK00xrkbUnYlLdoODUg9xujeRSvepTzlL8Rk3Pud+GFaGQbzQcEwSW2BlwFCVusYa8nyWvODCCjxebs08V/Uj4/P3kdlIlV38UglmM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bbKbeUOf; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0037C4CEC6;
-	Tue, 15 Oct 2024 12:19:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1728994753;
-	bh=h4+7by0rAf1o7D24l+y+0PKeuIiAXm/n19ReSlgbZAA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=bbKbeUOfn9nyDXrtBn7g19Dpfjiiw77gfgeY76w/MQudeJ+b61eaCe1lNNUr/wZsx
-	 NPYYUCCNZqjY+e0FpiMV0ssGHtIM4kTnGCLC/d7Nkj7MozDRcNrxTwPsujBUIQd6dh
-	 I7iGN20nS0P09TvQqbm0ZYkIwkbZECUW+yKmPcegYF8REA5wenOFpRoO2SVolOkynd
-	 nTd0FKRDimQvqjAtQjL34RYpNOxdkS2f+FMd4CvvRoEYfynQsvPeYauSwnLRHBt0id
-	 XBJTOVhu64U/+vudH7ZYapQVuQFYm6Y/c5zlyGCODMyTrwKlF3NtvOZ9lcr+LvwugG
-	 ChpqrAC7oGC8A==
-Date: Tue, 15 Oct 2024 15:15:27 +0300
-From: Mike Rapoport <rppt@kernel.org>
-To: Suren Baghdasaryan <surenb@google.com>
-Cc: akpm@linux-foundation.org, kent.overstreet@linux.dev, corbet@lwn.net,
-	arnd@arndb.de, mcgrof@kernel.org, paulmck@kernel.org,
-	thuth@redhat.com, tglx@linutronix.de, bp@alien8.de,
-	xiongwei.song@windriver.com, ardb@kernel.org, david@redhat.com,
-	vbabka@suse.cz, mhocko@suse.com, hannes@cmpxchg.org,
-	roman.gushchin@linux.dev, dave@stgolabs.net, willy@infradead.org,
-	liam.howlett@oracle.com, pasha.tatashin@soleen.com,
-	souravpanda@google.com, keescook@chromium.org, dennis@kernel.org,
-	jhubbard@nvidia.com, yuzhao@google.com, vvvvvv@google.com,
-	rostedt@goodmis.org, iamjoonsoo.kim@lge.com, rientjes@google.com,
-	minchan@google.com, kaleshsingh@google.com,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arch@vger.kernel.org, linux-mm@kvack.org,
-	linux-modules@vger.kernel.org, kernel-team@android.com
-Subject: Re: [PATCH v3 3/5] alloc_tag: populate memory for module tags as
- needed
-Message-ID: <Zw5c3zjW4sUUmont@kernel.org>
-References: <20241014203646.1952505-1-surenb@google.com>
- <20241014203646.1952505-4-surenb@google.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=Tu1q34hiKBzhUDdYwGQivbpqYpaDsX8qV4uvYo6mB0pXyJMcnwrobmHGg1G7t3unKRcFfnvZuVWayODAFDgcnMGjgvCf6lYLn8pjGnVLazAxe10Pr55m2CB7vqwGM6GMwP8F/eBlj6q3b2BTtunvshzJLueKXHWsUW9xtqSWwEQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=o45USyq5; arc=none smtp.client-ip=209.85.222.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
+Received: by mail-qk1-f182.google.com with SMTP id af79cd13be357-7b13fe8f4d0so9629285a.0
+        for <linux-doc@vger.kernel.org>; Tue, 15 Oct 2024 05:44:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1728996296; x=1729601096; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=k5CheOpmFVuHDTdLA/ct9VgQX0jeKNrF+bQMzA1sDyM=;
+        b=o45USyq5sF//zp83TiKNJGSVkCfje368LJJR2zW4sZ47UFkDQqqMGqwjozeLDn7HF8
+         kCXqmZ5gYNdqpPJ93rkoi9C4FaCZafQ604q8ZvYBbfnvReKYfkFL35ieMkfzosgDb7ML
+         E6cCV+fsZJosknmoIvULFPy/5UklA2S1BlvOQkVeD7s74Yj0Cxe8IIoRs/OSZylSJtEN
+         rNgt2nrPF5Xd/FBkD7LTHVfC4wKrkFU2g8z/L6P1kqKELv9SFCMwhalK/Fvj3Q5ia5BU
+         5k7TMXdoKlm4u0rM8dgMJ+q43ziypJrxlGa8Ef/tDPDdFEXGgp7FwusHjm2JzavwniSA
+         KCOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1728996296; x=1729601096;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=k5CheOpmFVuHDTdLA/ct9VgQX0jeKNrF+bQMzA1sDyM=;
+        b=E5e0FMZtMIngvI/w9aTLusmhMKrio6KCwIMSKF4KrttldlCQ9NZicPCRqv8PSVhUbq
+         3spSg/vZDT2tGgnPEi+5Lszl3lEnmbIc6nx65Aq011xozf3QBhaXj+D6LrfjcFk3Rkf9
+         u0nUUn0BA5Z+awNGcdHNTmFQKBQw8agMUNUILWDCf8v6Oriq5Q3jKhaAHZ9+X59CCfeF
+         awMRmteWkPCRNHkkDMcaODIJTw3TawC7JZDcYJuzEt7NZ8NikqXhEEypNpiS2UpCUhKi
+         wxsNi+E/8unhUKu6X8WKGOays38eZDNZr1x4MxUh93Gm7LDlKa+39iaD0yuJN1iC1Ta0
+         aLHA==
+X-Forwarded-Encrypted: i=1; AJvYcCUASGD/za/9XLeOYh6kLd9+XzmgkeWNzMhG+seDnvi/lXxMpSWZS1VLbaRCUMZIuvIPcGFzh/Aocig=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw0SZRJ135covynZEkwpeqC0ribv5Kv/H6LwARotpVi6C1j8INe
+	vtYX7d3gUKzLqPNjtP0HzBjwwUC25m/K/QAqU8+1jpYOdf3Ud9pQ1Fi79b95uMA=
+X-Google-Smtp-Source: AGHT+IFkU72pW7TaPk0fI+367yJvc7Z2aTPyKHQ+I/sJcmZxH4pRTQOG3TQdSLZKAXFmdiUkR7Zl9A==
+X-Received: by 2002:a05:620a:44d6:b0:79f:1873:5463 with SMTP id af79cd13be357-7b11a352dd7mr2383262985a.6.1728996296149;
+        Tue, 15 Oct 2024 05:44:56 -0700 (PDT)
+Received: from ziepe.ca (hlfxns017vw-142-68-128-5.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.68.128.5])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-7b1361661fesm67032885a.11.2024.10.15.05.44.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Oct 2024 05:44:55 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.95)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1t0gv1-00D1jL-65;
+	Tue, 15 Oct 2024 09:44:55 -0300
+Date: Tue, 15 Oct 2024 09:44:55 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Mina Almasry <almasrymina@google.com>
+Cc: Jakub Kicinski <kuba@kernel.org>, Leon Romanovsky <leonro@nvidia.com>,
+	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+	Samiullah Khawaja <skhawaja@google.com>,
+	Taehee Yoo <ap420073@gmail.com>, davem@davemloft.net,
+	pabeni@redhat.com, edumazet@google.com, netdev@vger.kernel.org,
+	linux-doc@vger.kernel.org, donald.hunter@gmail.com, corbet@lwn.net,
+	michael.chan@broadcom.com, kory.maincent@bootlin.com,
+	andrew@lunn.ch, maxime.chevallier@bootlin.com, danieller@nvidia.com,
+	hengqi@linux.alibaba.com, ecree.xilinx@gmail.com,
+	przemyslaw.kitszel@intel.com, hkallweit1@gmail.com,
+	ahmed.zaki@intel.com, paul.greenwalt@intel.com,
+	rrameshbabu@nvidia.com, idosch@nvidia.com, asml.silence@gmail.com,
+	kaiyuanz@google.com, willemb@google.com,
+	aleksander.lobakin@intel.com, dw@davidwei.uk,
+	sridhar.samudrala@intel.com, bcreeley@amd.com
+Subject: Re: [PATCH net-next v3 7/7] bnxt_en: add support for device memory
+ tcp
+Message-ID: <20241015124455.GH1825128@ziepe.ca>
+References: <20241008125023.7fbc1f64@kernel.org>
+ <CAMArcTWVrQ7KWPt+c0u7X=jvBd2VZGVLwjWYCjMYhWZTymMRTg@mail.gmail.com>
+ <20241009170102.1980ed1d@kernel.org>
+ <CAHS8izMwd__+RkW-Nj3r3uG4gmocJa6QEqeHChzNXux1cbSS=w@mail.gmail.com>
+ <20241010183440.29751370@kernel.org>
+ <CAHS8izPuWkSmp4VCTYm93JB9fEJyUTztcT5u3UMX4b8ADWZGrA@mail.gmail.com>
+ <20241011234227.GB1825128@ziepe.ca>
+ <CAHS8izNzK4=6AMdACfn9LWqH9GifCL1vVxH1y2DmF9mFZbB72g@mail.gmail.com>
+ <20241014171636.3b5b7383@kernel.org>
+ <CAHS8izOVzOetQH5Dr6sJzRpO6Bihv=66Z2OttGS7vU7xjC=POw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20241014203646.1952505-4-surenb@google.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAHS8izOVzOetQH5Dr6sJzRpO6Bihv=66Z2OttGS7vU7xjC=POw@mail.gmail.com>
 
-On Mon, Oct 14, 2024 at 01:36:44PM -0700, Suren Baghdasaryan wrote:
-> The memory reserved for module tags does not need to be backed by
-> physical pages until there are tags to store there. Change the way
-> we reserve this memory to allocate only virtual area for the tags
-> and populate it with physical pages as needed when we load a module.
+On Tue, Oct 15, 2024 at 04:10:44AM +0300, Mina Almasry wrote:
+> On Tue, Oct 15, 2024 at 3:16 AM Jakub Kicinski <kuba@kernel.org> wrote:
+> >
+> > On Tue, 15 Oct 2024 01:38:20 +0300 Mina Almasry wrote:
+> > > Thanks Jason. In that case I agree with Jakub we should take in his change here:
+> > >
+> > > https://lore.kernel.org/netdev/20241009170102.1980ed1d@kernel.org/
+> > >
+> > > With this change the driver would delegate dma_sync_for_device to the
+> > > page_pool, and the page_pool will skip it altogether for the dma-buf
+> > > memory provider.
+> >
+> > And we need a wrapper for a sync for CPU which will skip if the page
+> > comes from an unreadable pool?
 > 
-> Signed-off-by: Suren Baghdasaryan <surenb@google.com>
-> ---
->  include/linux/execmem.h | 11 ++++++
->  include/linux/vmalloc.h |  9 +++++
->  lib/alloc_tag.c         | 84 +++++++++++++++++++++++++++++++++--------
->  mm/execmem.c            | 16 ++++++++
->  mm/vmalloc.c            |  4 +-
->  5 files changed, 106 insertions(+), 18 deletions(-)
+> This is where it gets a bit tricky, no?
 > 
-> diff --git a/include/linux/execmem.h b/include/linux/execmem.h
-> index 7436aa547818..a159a073270a 100644
-> --- a/include/linux/execmem.h
-> +++ b/include/linux/execmem.h
-> @@ -127,6 +127,17 @@ void *execmem_alloc(enum execmem_type type, size_t size);
->   */
->  void execmem_free(void *ptr);
->  
-> +/**
-> + * execmem_vmap - create virtual mapping for executable memory
-> + * @type: type of the allocation
-> + * @size: size of the virtual mapping in bytes
-> + *
-> + * Maps virtually contiguous area that can be populated with executable code.
-> + *
-> + * Return: the area descriptor on success or %NULL on failure.
-> + */
-> +struct vm_struct *execmem_vmap(enum execmem_type type, size_t size);
-> +
+> Our production code does a dma_sync_for_cpu but no
+> dma_sync_for_device. That has been working reliably for us with GPU
 
-I think it's better limit it to EXECMEM_MODULE_DATA
+Those functions are all NOP on systems you are testing on.
 
->  /**
->   * execmem_update_copy - copy an update to executable memory
->   * @dst:  destination address to update
-> diff --git a/include/linux/vmalloc.h b/include/linux/vmalloc.h
-> index 9a012cd4fad2..9d64cc6f24d1 100644
-> --- a/include/linux/vmalloc.h
-> +++ b/include/linux/vmalloc.h
-> @@ -202,6 +202,9 @@ extern int remap_vmalloc_range_partial(struct vm_area_struct *vma,
->  extern int remap_vmalloc_range(struct vm_area_struct *vma, void *addr,
->  							unsigned long pgoff);
->  
-> +int vmap_pages_range(unsigned long addr, unsigned long end,
-> +		pgprot_t prot, struct page **pages, unsigned int page_shift);
-> +
->
->  /*
->   * Architectures can set this mask to a combination of PGTBL_P?D_MODIFIED values
->   * and let generic vmalloc and ioremap code know when arch_sync_kernel_mappings()
-> @@ -239,6 +242,12 @@ extern struct vm_struct *__get_vm_area_caller(unsigned long size,
->  					unsigned long flags,
->  					unsigned long start, unsigned long end,
->  					const void *caller);
-> +struct vm_struct *__get_vm_area_node(unsigned long size,
-> +				     unsigned long align, unsigned long shift,
-> +				     unsigned long flags, unsigned long start,
-> +				     unsigned long end, int node, gfp_t gfp_mask,
-> +				     const void *caller);
-> +
+The question is what is correct to do on systems where it is not a
+NOP, and none of this is really right, as I explained..
 
-This is not used outside mm/, let's put it into mm/internal.h
+> But if you or Jason think that enforcing the 'no dma_buf_sync_for_cpu'
+> now is critical, no problem. We can also provide this patch, and seek
+> to revert it or fix it up properly later in the event it turns out it
+> causes issues.
 
->  void free_vm_area(struct vm_struct *area);
->  extern struct vm_struct *remove_vm_area(const void *addr);
->  extern struct vm_struct *find_vm_area(const void *addr);
-> diff --git a/lib/alloc_tag.c b/lib/alloc_tag.c
-> index b10e7f17eeda..648f32d52b8d 100644
-> --- a/lib/alloc_tag.c
-> +++ b/lib/alloc_tag.c
-> @@ -8,6 +8,7 @@
->  #include <linux/proc_fs.h>
->  #include <linux/seq_buf.h>
->  #include <linux/seq_file.h>
-> +#include <linux/vmalloc.h>
->  
->  static struct codetag_type *alloc_tag_cttype;
->  
-> @@ -153,6 +154,7 @@ static void __init procfs_init(void)
->  #ifdef CONFIG_MODULES
->  
->  static struct maple_tree mod_area_mt = MTREE_INIT(mod_area_mt, MT_FLAGS_ALLOC_RANGE);
-> +static struct vm_struct *vm_module_tags;
->  /* A dummy object used to indicate an unloaded module */
->  static struct module unloaded_mod;
->  /* A dummy object used to indicate a module prepended area */
-> @@ -195,6 +197,25 @@ static void clean_unused_module_areas_locked(void)
->  	}
->  }
->  
-> +static int vm_module_tags_grow(unsigned long addr, unsigned long bytes)
-> +{
-> +	struct page **next_page = vm_module_tags->pages + vm_module_tags->nr_pages;
-> +	unsigned long more_pages = ALIGN(bytes, PAGE_SIZE) >> PAGE_SHIFT;
-> +	unsigned long nr;
-> +
-> +	nr = alloc_pages_bulk_array_node(GFP_KERNEL | __GFP_NOWARN,
-> +					 NUMA_NO_NODE, more_pages, next_page);
-> +	if (nr != more_pages)
-> +		return -ENOMEM;
-> +
-> +	vm_module_tags->nr_pages += nr;
-> +	if (vmap_pages_range(addr, addr + (nr << PAGE_SHIFT),
-> +			     PAGE_KERNEL, next_page, PAGE_SHIFT) < 0)
-> +		return -ENOMEM;
-> +
-> +	return 0;
-> +}
-> +
->  static void *reserve_module_tags(struct module *mod, unsigned long size,
->  				 unsigned int prepend, unsigned long align)
->  {
-> @@ -202,7 +223,7 @@ static void *reserve_module_tags(struct module *mod, unsigned long size,
->  	MA_STATE(mas, &mod_area_mt, 0, section_size - 1);
->  	bool cleanup_done = false;
->  	unsigned long offset;
-> -	void *ret;
-> +	void *ret = NULL;
->  
->  	/* If no tags return NULL */
->  	if (size < sizeof(struct alloc_tag))
-> @@ -239,7 +260,7 @@ static void *reserve_module_tags(struct module *mod, unsigned long size,
->  		goto repeat;
->  	} else {
->  		ret = ERR_PTR(-ENOMEM);
-> -		goto out;
-> +		goto unlock;
->  	}
->  
->  found:
-> @@ -254,7 +275,7 @@ static void *reserve_module_tags(struct module *mod, unsigned long size,
->  		mas_store(&mas, &prepend_mod);
->  		if (mas_is_err(&mas)) {
->  			ret = ERR_PTR(xa_err(mas.node));
-> -			goto out;
-> +			goto unlock;
->  		}
->  		mas.index = offset;
->  		mas.last = offset + size - 1;
-> @@ -263,7 +284,7 @@ static void *reserve_module_tags(struct module *mod, unsigned long size,
->  			ret = ERR_PTR(xa_err(mas.node));
->  			mas.index = pad_start;
->  			mas_erase(&mas);
-> -			goto out;
-> +			goto unlock;
->  		}
->  
->  	} else {
-> @@ -271,18 +292,33 @@ static void *reserve_module_tags(struct module *mod, unsigned long size,
->  		mas_store(&mas, mod);
->  		if (mas_is_err(&mas)) {
->  			ret = ERR_PTR(xa_err(mas.node));
-> -			goto out;
-> +			goto unlock;
->  		}
->  	}
-> +unlock:
-> +	mas_unlock(&mas);
-> +	if (IS_ERR(ret))
-> +		return ret;
->  
-> -	if (module_tags.size < offset + size)
-> -		module_tags.size = offset + size;
-> +	if (module_tags.size < offset + size) {
-> +		unsigned long phys_size = vm_module_tags->nr_pages << PAGE_SHIFT;
->  
-> -	ret = (struct alloc_tag *)(module_tags.start_addr + offset);
-> -out:
-> -	mas_unlock(&mas);
-> +		module_tags.size = offset + size;
-> +		if (phys_size < module_tags.size) {
-> +			int grow_res;
-> +
-> +			grow_res = vm_module_tags_grow(module_tags.start_addr + phys_size,
-> +						       module_tags.size - phys_size);
-> +			if (grow_res) {
-> +				static_branch_disable(&mem_alloc_profiling_key);
-> +				pr_warn("Failed to allocate tags memory for module %s. Memory profiling is disabled!\n",
-> +					mod->name);
-> +				return ERR_PTR(grow_res);
-> +			}
-> +		}
-> +	}
+What is important is you organize things going forward to be able to
+do this properly, which means the required sync type is dependent on
+the actual page being synced and you will eventually somehow learn
+which is required from the dmabuf.
 
-The diff for reserve_module_tags() is hard to read, and the function itself
-becomes really complex to follow with all the gotos back and forth.
-Maybe it's possible to split out some parts of it as helpers?
+Most likely nobody will ever run this code on system where dma_sync is
+not a NOP, but we should still use the DMA API properly and things
+should make architectural sense.
 
-> -	return ret;
-> +	return (struct alloc_tag *)(module_tags.start_addr + offset);
->  }
->  
-
--- 
-Sincerely yours,
-Mike.
+Jason
 
