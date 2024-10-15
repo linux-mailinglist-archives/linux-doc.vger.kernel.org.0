@@ -1,70 +1,87 @@
-Return-Path: <linux-doc+bounces-27560-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-27562-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BEFC99EE0D
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2024 15:43:35 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id C9B7D99EE30
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2024 15:53:22 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0B54DB22C27
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2024 13:43:33 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 8EA10282020
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2024 13:53:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 80D7C1C4A1A;
-	Tue, 15 Oct 2024 13:40:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B854E1AF0DF;
+	Tue, 15 Oct 2024 13:53:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=krisman.be header.i=@krisman.be header.b="Sr0LYTIG"
+	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="jdkft+J3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net [217.70.183.200])
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FD571AF0B2;
-	Tue, 15 Oct 2024 13:40:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.200
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6209B1AF0CD;
+	Tue, 15 Oct 2024 13:53:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1728999637; cv=none; b=Cd4dUNaMM2YjTQeRYhd9mqUUSNOXfHI//KxoQgAIy3KqI9uuhEEwemBjjff1K+y/Zw7Eiwy3VjCZM00OTMK5dMQKna6oHEgCeD+ITYNsvBiDSKCJ335+UHzad4kGyn0YC1W8AMBIq5v6et5MnJ7Q+CSOdKJm2jHs3wb8w13m9tg=
+	t=1729000385; cv=none; b=aVsgmHQdPsMXfy6+r04jqCMZV/DZ2a+aDypda33fVOuc2D0w5ZVd3XUpQbFSBzXp1MLKggsOozdSffU3vOH2dXIa02kOOQfHigIYB/EWcUwQWlMWXcstJsxA38HIuxqFpdLOUJRJUU2nnTaaBbshik4mvZr+GE/IvKuCvDgEMoQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1728999637; c=relaxed/simple;
-	bh=hWsnXqzWUVbS/LFkW+4v8ACd0XaCqMw01lVnIK0YzH4=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=hD/aPi2GKHs4iBTkl2EwESZCYA288Y5m5PurPV7w6l9IM0voneqxlg5bdLiji4k6jmNlwWt3saaFSdOhFTM47JiE1QoTvZilK1BBEwo+CujgC2iD/ek+7ABQVyEBD8O15nSZS/Yu9jnAKg/ViEk8U424cHAni3UfvwLUhy38vEc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=krisman.be; spf=pass smtp.mailfrom=krisman.be; dkim=pass (2048-bit key) header.d=krisman.be header.i=@krisman.be header.b=Sr0LYTIG; arc=none smtp.client-ip=217.70.183.200
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=krisman.be
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=krisman.be
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 7042120011;
-	Tue, 15 Oct 2024 13:40:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=krisman.be; s=gm1;
-	t=1728999627;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=RFLmJEq84/4RSf31UFW/K0HnFE3ckCo/P5dpzh8CF5M=;
-	b=Sr0LYTIGO6411b3ukyZwFgc6ppUe4er18qohZzBB0p+hCXn1ltg+9xq5LMJ+sr0G37Dn/4
-	wAYFJ8NOvvS/+Y9E0NYXTqP1YIZNqn8h5+kXbPlrjX1XU0LHp6P8/cVyY+bO2s7Q320xkg
-	bC1ZkeQho1T6MfgxXKusejSY53Jx7uqZ3oqM5p9KjfUOKCqfsP7zt8A9zHQK3wKF80SWzh
-	hXBw7Pdo27zw5KquEeUdtV8l8/PaEeCIJ+AHIqq8kbsIhRTSkxhwFLt9eO3vywozEGq2sf
-	xvYjpRHeEqhHLxv12w5W0MQ9eAm+Csm4Lyr2uf1qFIjcsBz+utrJY8scDns45g==
-From: Gabriel Krisman Bertazi <gabriel@krisman.be>
-To: =?utf-8?Q?Andr=C3=A9?= Almeida <andrealmeid@igalia.com>
-Cc:  Alexander Viro <viro@zeniv.linux.org.uk>,  Christian Brauner
- <brauner@kernel.org>,  Jan Kara <jack@suse.cz>,  Theodore Ts'o
- <tytso@mit.edu>,  Andreas Dilger <adilger.kernel@dilger.ca>,  Hugh Dickins
- <hughd@google.com>,  Andrew Morton <akpm@linux-foundation.org>,  Jonathan
- Corbet <corbet@lwn.net>,  smcv@collabora.com,  kernel-dev@igalia.com,
-  linux-fsdevel@vger.kernel.org,  linux-kernel@vger.kernel.org,
-  linux-ext4@vger.kernel.org,  linux-mm@kvack.org,
-  linux-doc@vger.kernel.org
-Subject: Re: [PATCH v6 03/10] unicode: Export latest available UTF-8 version
- number
-In-Reply-To: <20241010-tonyk-tmpfs-v6-3-79f0ae02e4c8@igalia.com>
- (=?utf-8?Q?=22Andr=C3=A9?=
-	Almeida"'s message of "Thu, 10 Oct 2024 16:39:38 -0300")
-References: <20241010-tonyk-tmpfs-v6-0-79f0ae02e4c8@igalia.com>
-	<20241010-tonyk-tmpfs-v6-3-79f0ae02e4c8@igalia.com>
-Date: Tue, 15 Oct 2024 09:40:22 -0400
-Message-ID: <87o73lscvt.fsf@mailhost.krisman.be>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	s=arc-20240116; t=1729000385; c=relaxed/simple;
+	bh=H2j8tAxArH59yBDbzIrl/MGCWx5bBjQgQoB0i4mdJuU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Gl3wNXJNTA00d1Jcp+t+Gb6MCYUvXpC6IQYfjjjFo0yPC24hPuXQXZtJYQFbUIzB9HY1GDEsOdGd6gABLlh7BMeu4/D638fIy0a2dRu5wQb4/rNW3z2sFWXdBi8jTcZBL/XQbp8qvd8pmNSr2oeGC22BVOdI5WfwrWr7MOtQyrY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=jdkft+J3; arc=none smtp.client-ip=65.109.113.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id D8BF340E0198;
+	Tue, 15 Oct 2024 13:53:00 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+	header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id fRYxJ-Jjmc2o; Tue, 15 Oct 2024 13:52:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+	t=1729000376; bh=IndR389A56EgJLmSWnnTj3gROCafm4Xdw9n+uR2RGCM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=jdkft+J3SSI5ZXcvcV/k5hX3cOtNWyBIEvTpdM2GoZrSE/jn4WoU69GIN4e52j/wq
+	 /PRHj1ovwgYX7fRy9ZthF0WRFR/6vxUDs5SfOsdLV4l86xTmEyE3MUDYuPXcJD5j3M
+	 sNij5PdsnkO/psDzydolB6nvMkepsXfV5JkVJpKo6ImwvqO9oH8XoT+QA34wLpwlxL
+	 /EMfBxinh0RQSy1R5NQpJGrjAyrxq2YiSi7oPQp/DUXXIBRpVw/jeeAzsP7SehrQoN
+	 arRDdbAyDW3xsxpnJRDYjRX3+39kSTLk0uM0yaevYUZ5e3ZnTt2RP0brVd0gKJYxq/
+	 u6Isbz5PPh/lGtgo+3R7vzfEMvvB45fW4yr9N5aseWkDXfJsFXs761FrHdsZsTKNcz
+	 yicGbCQd4GWmYNKS5V4aoDSjoLocyMCRcD/2pVYqwFhQ8azfsU7l5knK60zw6clpJW
+	 BRC1QYxVgI5zd2KOiO6NJW4ftNrb2KQoarT6nGy+kTk4NNNfNZbQbaZZchKgEzeRgl
+	 4HZTFTjS/svrSQDPapdTDTHPOOaM8/FE2TidJjbw9iEycQScZqWvXxUqR2z0JqdPdG
+	 6R/1Y5JLlKPdlVVKiJDYmhV1nU4marIkRR4GtOevV1yw8eHuKhBXIpg3l5hs8RC4J6
+	 QI6uqckTWiOyOkTlrhjxZZ4M=
+Received: from zn.tnic (p5de8e8eb.dip0.t-ipconnect.de [93.232.232.235])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
+	(No client certificate requested)
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 576D240E0169;
+	Tue, 15 Oct 2024 13:52:43 +0000 (UTC)
+Date: Tue, 15 Oct 2024 15:52:31 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Daniel Sneddon <daniel.sneddon@linux.intel.com>
+Cc: Josh Poimboeuf <jpoimboe@kernel.org>,
+	"Kaplan, David" <David.Kaplan@amd.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"x86@kernel.org" <x86@kernel.org>, "hpa@zytor.com" <hpa@zytor.com>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"pawan.kumar.gupta@linux.intel.com" <pawan.kumar.gupta@linux.intel.com>
+Subject: Re: [PATCH 1/6] x86/bugs: Create single parameter for VERW based
+ mitigations
+Message-ID: <20241015135231.GCZw5zn0fnI8dXpHtw@fat_crate.local>
+References: <20240924223140.1054918-2-daniel.sneddon@linux.intel.com>
+ <LV3PR12MB92651F4DF654C886B9F2BCF7947E2@LV3PR12MB9265.namprd12.prod.outlook.com>
+ <20241010045219.vgpcl7nfqaimqrne@treble.attlocal.net>
+ <20241010145737.GOZwfrYaGxCOOlaVhy@fat_crate.local>
+ <88baaae8-d9fe-4c8a-a5e2-383d6b641e2c@linux.intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -72,25 +89,40 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: gabriel@krisman.be
+Content-Disposition: inline
+In-Reply-To: <88baaae8-d9fe-4c8a-a5e2-383d6b641e2c@linux.intel.com>
 
-Andr=C3=A9 Almeida <andrealmeid@igalia.com> writes:
+On Mon, Oct 14, 2024 at 08:42:26AM -0700, Daniel Sneddon wrote:
+> The reason I did the patches this way wasn't so much "need" as it just seemed a
+> simpler way to do it. Why have 4 knobs when there is really only 1 mitigation
+> under the hood? My question for you then is what you mean by "proper sync"? I'm
+> guessing you mean that if any one of those 4 mitigations is set to off then
+> assume all are off? 
 
-> Export latest available UTF-8 version number so filesystems can easily
-> load the newest one.
->
-> Signed-off-by: Andr=C3=A9 Almeida <andrealmeid@igalia.com>
-> Acked-by: Gabriel Krisman Bertazi <krisman@suse.de>
+Well, up until now at least, we have handled under the assumption that not
+every user knows exactly what needs to be configured in order to be safe.
 
-This will clash with another change sent to fs/unicode[1].
+So, we have always aimed for a sane default.
 
-This is just a FYI.  No need to resend. It should be handled during the
-merge. That is, unless it reaches mainline before your patchset is
-merged.
+IOW, if a user wants to disable one mitigation but all 4 are mitigated by the
+same thing, then we probably should issue a warning saying something like:
 
-See [1] 20241011072509.3068328-8-davidgow@google.com
+	"If you want to disable W, then you need to disable W, X and Y too in
+	order to disable W effectively as all 4 are mitigated by the same
+	mechanism."
 
---=20
-Gabriel Krisman Bertazi
+And problem solved.
+
+IOW, I don't expect someone would consciously want to disable a subset of
+those mitigations but leave the remaining ones on. What usually happens, is
+people do "mitigations=off" in order to regain their performance but not do
+this selective thing which doesn't make a whole lot sense to me anyway.
+
+Thx.
+
+-- 
+Regards/Gruss,
+    Boris.
+
+https://people.kernel.org/tglx/notes-about-netiquette
 
