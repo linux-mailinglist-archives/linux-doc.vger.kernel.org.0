@@ -1,145 +1,136 @@
-Return-Path: <linux-doc+bounces-27965-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-27967-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80BB89A416C
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Oct 2024 16:42:41 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 54F539A4194
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Oct 2024 16:49:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 16222288DA5
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Oct 2024 14:42:40 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 14CA32882A4
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Oct 2024 14:49:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DB5871FCF70;
-	Fri, 18 Oct 2024 14:42:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B25B2010EA;
+	Fri, 18 Oct 2024 14:48:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=aruba.it header.i=@aruba.it header.b="fOT+jI20"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="MqtpwFO9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpcmd0986.aruba.it (smtpcmd0986.aruba.it [62.149.156.86])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBC804C69
-	for <linux-doc@vger.kernel.org>; Fri, 18 Oct 2024 14:42:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.149.156.86
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4876A200CB8;
+	Fri, 18 Oct 2024 14:48:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1729262549; cv=none; b=hiNTxiH0Nz9OyLOemD95QUXpsdzpV45aeGw7ZoukvERPblxCv6WzXaMZIizgGMED+9LSdVgcjtcM6Ay/CzDIXs0W9GtP6wHnUcu7+k8MtGA+OuTeQ8mvCxt0Ec0+4THv6jXpQM8nQ8U5rYDk7AOPKZmR3RVXvevrmab8fPNs5yA=
+	t=1729262912; cv=none; b=d7rz+vALOrypiFnFpY3dayKyEV/Lavu0KPR5XuLrNTfTEk3tG/F3WyPjL3sVHqb01T2+Zmrh5bcNx58zN6VsCQxRFIW+MDR75M++EY7q19R5YRdLiVLBDzE+NcfdMjLEQR7nDgVgQGM4sBXJa8nIJ1SZrO+K58x/1T0H8Alw9Io=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1729262549; c=relaxed/simple;
-	bh=L/7lI5InFA2FdeoR5QCDWagzEdB/60JLN6iA+Qyt6+8=;
+	s=arc-20240116; t=1729262912; c=relaxed/simple;
+	bh=DlMv1MbTan41VzmOrQ04+mc8hraTENCiEUVtWinjsT0=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=owcNMxim+X5jrvcVwbQb/mK6O8tds5P9npmANHyde96XXtHyTDeFFDPf6I8gD/3886tXD2mawL/LXZVN8IDndWUSfBM5F+i1ufY/2r79tYYhhZmv81LzFoDSYPMNF3+Ja9HvTmwobFuXiW3R8FblbvZOsCvq5o8rW15plxOYyog=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=enneenne.com; spf=pass smtp.mailfrom=enneenne.com; dkim=pass (2048-bit key) header.d=aruba.it header.i=@aruba.it header.b=fOT+jI20; arc=none smtp.client-ip=62.149.156.86
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=enneenne.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=enneenne.com
-Received: from polimar.homenet.telecomitalia.it ([79.0.204.227])
-	by Aruba Outgoing Smtp  with ESMTPSA
-	id 1o8JtbKaEcvwV1o8LtrUBE; Fri, 18 Oct 2024 16:39:18 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aruba.it; s=a1;
-	t=1729262358; bh=L/7lI5InFA2FdeoR5QCDWagzEdB/60JLN6iA+Qyt6+8=;
-	h=From:To:Subject:Date:MIME-Version;
-	b=fOT+jI20ZByatyzZu6FqG9VJL6UADfEkHFzu4f3bygyfSEJN9n1ArFHWjPC0WzJpN
-	 7ueVqzXnwR9Yu1RAL4nJp9ppNK9Yw6xdObGTCGuD2xfB+fkzL5ErBDhiFJQpXL8W5v
-	 SJq+qW2BGVWmVHUz7y5jwu16LQpYVMHgTgftyDMMUYSqa69F2JCwtPoj90ksNV5Mqh
-	 2yBjhqpO6FVOW+7JYGC4ls78dlCYJSz7h9eHp9Th7euVmjs+RPpz/wexGW/w83iYEU
-	 sxmAcrDplWY4vz76It9WTqwhsBLpPpGk47EGEuW8zcsuCVHNmyVczunCQmcL8F3Rcw
-	 1K4WJlsly2w4g==
-From: Rodolfo Giometti <giometti@enneenne.com>
-To: linux-doc@vger.kernel.org,
+	 MIME-Version:Content-Type; b=UYwSzKll7LvDBdwUHE7OgR8uL1PuCdNlOUMEXkvebuAuCoqhiQDNxZJSIvPaZouCAQMh8zxhWLmsR7Dtu755l3jvSNxqZ8LLqOrMXCK6KlbgWdn+MB2L7w79k50T2M0GWBkWk0kCky3OwSq8ThXtQEd9CLkeqtsH6K4n91PVRs0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=MqtpwFO9; arc=none smtp.client-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1729262910; x=1760798910;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=DlMv1MbTan41VzmOrQ04+mc8hraTENCiEUVtWinjsT0=;
+  b=MqtpwFO9K3kNe7smMRfpd5J35EPBDceBtkvDHGzxousvNGiJ+ue6HZNw
+   +Krg5tjPBKAEF5AWccCoE7/itfL+VzhT98QT6mlq5pf9q1HpEdQ6h8wpS
+   gNM4H2jIfWntSV1iWDqulEMDJJbIq9y3bhHifTiuaFLgWJpGsou8zkfXh
+   BBJ7jG1evQ06Ma+jaGW0O7cp4EnmbNdBUCcnjhF9j0Wtq/y3eakVgfCqP
+   qPqmXeaFCsGV/Kab65Kwv/zZk1yIuvxCH5603trzbKvVwhBOAiHmlmsdY
+   ZcclBOEjCbzobwJjSbYHrr5gCSvUYpzE9cTzI7JazyhCYGeYN3PGJh8f+
+   g==;
+X-CSE-ConnectionGUID: cW0FkppmQsio7LwNFOuuOw==
+X-CSE-MsgGUID: oTwnmrtjRZWiVORPlyc7VQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11229"; a="46296834"
+X-IronPort-AV: E=Sophos;i="6.11,214,1725346800"; 
+   d="scan'208";a="46296834"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Oct 2024 07:48:29 -0700
+X-CSE-ConnectionGUID: jJB+MDW6Rd6hmWeSO42tGg==
+X-CSE-MsgGUID: LIzzA/n4Rg2pX9bw4jGO1w==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.11,214,1725346800"; 
+   d="scan'208";a="83658164"
+Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.244.217])
+  by orviesa005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Oct 2024 07:48:23 -0700
+From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+To: linux-pci@vger.kernel.org,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+	Rob Herring <robh@kernel.org>,
+	=?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kw@linux.com>,
+	"Maciej W . Rozycki" <macro@orcam.me.uk>,
+	Jonathan Cameron <Jonathan.Cameron@Huawei.com>,
+	Lukas Wunner <lukas@wunner.de>,
+	Alexandru Gagniuc <mr.nuke.me@gmail.com>,
+	Krishna chaitanya chundru <quic_krichai@quicinc.com>,
+	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	linux-pm@vger.kernel.org,
+	Smita Koralahalli <Smita.KoralahalliChannabasappa@amd.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Cc: Andrew Morton <akpm@linux-foundation.org>,
-	Greg KH <greg@kroah.com>,
-	corbet@lwn.net,
-	Hall Christopher S <christopher.s.hall@intel.com>,
-	Mohan Subramanian <subramanian.mohan@intel.com>,
-	tglx@linutronix.de,
-	andriy.shevchenko@linux.intel.com,
-	Dong Eddie <eddie.dong@intel.com>,
-	N Pandith <pandith.n@intel.com>,
-	T R Thejesh Reddy <thejesh.reddy.t.r@intel.com>,
-	Zage David <david.zage@intel.com>,
-	Chinnadurai Srinivasan <srinivasan.chinnadurai@intel.com>,
-	Rodolfo Giometti <giometti@enneenne.com>
-Subject: [V1 4/4] Documentation ABI: add PPS generators documentation
-Date: Fri, 18 Oct 2024 16:39:15 +0200
-Message-Id: <20241018143915.3877425-5-giometti@enneenne.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241018143915.3877425-1-giometti@enneenne.com>
-References: <20241018143915.3877425-1-giometti@enneenne.com>
+Cc: Daniel Lezcano <daniel.lezcano@linaro.org>,
+	Amit Kucheria <amitk@kernel.org>,
+	Zhang Rui <rui.zhang@intel.com>,
+	Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Subject: [PATCH v9 1/9] Documentation PCI: Reformat RMW ops documentation
+Date: Fri, 18 Oct 2024 17:47:47 +0300
+Message-Id: <20241018144755.7875-2-ilpo.jarvinen@linux.intel.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241018144755.7875-1-ilpo.jarvinen@linux.intel.com>
+References: <20241018144755.7875-1-ilpo.jarvinen@linux.intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CMAE-Envelope: MS4xfJrnHruLi3tY5UzQyuP1rDyaDg/+bwqZDkO0LeUU29FCatvnZx+2biKbcQwlQiAM+3tIzxrridS1H2GE6mADoe23fMmhWK4KyuyheffSfuA/YW7UN7Ez
- hgbxk7eVNSum9UkK3ON30Hsmp+4kBqDy87Sj2MRiTjl3xniglg8eGx1cgK8CfS7Uu3CFKSrNY7frP6oEafPCYt+0yWVpkYTZXIv5bYBIlU/c9ScQouMf3GyA
- wtVUhe0aV1/0/XhvRBIGm+UCyQ1MLH2YKykxjSaLTFd5XvGhSnZStC+23lOlD9qjKLjdjasNsCOxLGXVvG/9eyzmNATQU6rN2SIzvnQmNNqur+LB2vj2lPfS
- LUFhIhJ9C0eOqGd7Gs2fnjsOzjxdGlkjCCWMdtQZi3+uqsCWNelzL80r/Pf5HHShjRDIXpSpUmOEs4l1vXXjxTByWfvdYOCR16CkJbVfxyRKHAw2QcXF4+ur
- khYORs/JK+SMwlLU8u8xjO4QsdD8ktS5tDfxFmbiNRXR4yncdueVdirqVqOoJpGBw4yPgL45uP5x6+ifrMLh6aC4j0iyj48BTe1bjBzVqa9lYOeA/K09Swix
- y2TrMhyaqM2pyGtucEGK9uq5EPzR/4ZghMxTB/xLZbUwsaWOmgAfx/sH8zpYeJYaBTL/7dJEwEPZAbkBFXS2Sbn1m9e4fvkbQASja9w8wCA+0r36rxIrzVNf
- 3KoU5wq5fSQBaXQ6IQvj3JET1jHonfP4
 
-This patch adds the documentation for the ABI between the Linux kernel
-and userspace regarding the PPS generators.
+Extract the list of RMW protected PCIe Capability registers into a
+bullet list to make them easier to pick up on a glance. An upcoming
+change is going to add one more register among them so it will be much
+cleaner to have them as bullets.
 
-Signed-off-by: Rodolfo Giometti <giometti@enneenne.com>
+Signed-off-by: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com>
+Reviewed-by: Lukas Wunner <lukas@wunner.de>
+Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
 ---
- Documentation/ABI/testing/sysfs-pps-gen | 44 +++++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
- create mode 100644 Documentation/ABI/testing/sysfs-pps-gen
+ Documentation/PCI/pciebus-howto.rst | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-pps-gen b/Documentation/ABI/testing/sysfs-pps-gen
-new file mode 100644
-index 000000000000..427ba985f413
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-pps-gen
-@@ -0,0 +1,44 @@
-+What:		/sys/class/pps-gen/
-+Date:		October 2024
-+Contact:	Rodolfo Giometti <giometti@enneenne.com>
-+Description:
-+		The /sys/class/pps-gen/ directory will contain files and
-+		directories that will provide a unified interface to
-+		the PPS generators.
+diff --git a/Documentation/PCI/pciebus-howto.rst b/Documentation/PCI/pciebus-howto.rst
+index f344452651e1..e48d01422efc 100644
+--- a/Documentation/PCI/pciebus-howto.rst
++++ b/Documentation/PCI/pciebus-howto.rst
+@@ -217,8 +217,11 @@ capability structure except the PCI Express capability structure,
+ that is shared between many drivers including the service drivers.
+ RMW Capability accessors (pcie_capability_clear_and_set_word(),
+ pcie_capability_set_word(), and pcie_capability_clear_word()) protect
+-a selected set of PCI Express Capability Registers (Link Control
+-Register and Root Control Register). Any change to those registers
+-should be performed using RMW accessors to avoid problems due to
+-concurrent updates. For the up-to-date list of protected registers,
+-see pcie_capability_clear_and_set_word().
++a selected set of PCI Express Capability Registers:
 +
-+What:		/sys/class/pps-gen/pps-genX/
-+Date:		October 2024
-+Contact:	Rodolfo Giometti <giometti@enneenne.com>
-+Description:
-+		The /sys/class/pps-gen/pps-genX/ directory is related to X-th
-+		PPS generator into the system. Each directory will
-+		contain files to manage and control its PPS generator.
++* Link Control Register
++* Root Control Register
 +
-+What:		/sys/class/pps-gen/pps-genX/enable
-+Date:		October 2024
-+Contact:	Rodolfo Giometti <giometti@enneenne.com>
-+Description:
-+		This write-only file enables or disables generation of the
-+		PPS signal.
-+
-+What:		/sys/class/pps-gen/pps-genX/name
-+Date:		October 2024
-+Contact:	Rodolfo Giometti <giometti@enneenne.com>
-+Description:
-+		This read-only file reports the name of the X-th generator.
-+
-+What:		/sys/class/pps-gen/pps-genX/system
-+Date:		October 2024
-+Contact:	Rodolfo Giometti <giometti@enneenne.com>
-+Description:
-+		This read-only file returns "1" if the generator takes the
-+		timing from the system clock, while it returns "0" if not
-+		(i.e. from a peripheral device clock).
-+
-+What:		/sys/class/pps-gen/pps-genX/time
-+Date:		October 2024
-+Contact:	Rodolfo Giometti <giometti@enneenne.com>
-+Description:
-+		This read-only file contains the current time stored into the
-+		generator clock as two integers representing the current time
-+		seconds and nanoseconds.
++Any change to those registers should be performed using RMW accessors to
++avoid problems due to concurrent updates. For the up-to-date list of
++protected registers, see pcie_capability_clear_and_set_word().
 -- 
-2.34.1
+2.39.5
 
 
