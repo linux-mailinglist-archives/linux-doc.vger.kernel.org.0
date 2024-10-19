@@ -1,169 +1,526 @@
-Return-Path: <linux-doc+bounces-28011-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28012-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68B679A4AC0
-	for <lists+linux-doc@lfdr.de>; Sat, 19 Oct 2024 02:51:18 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 25C429A4B42
+	for <lists+linux-doc@lfdr.de>; Sat, 19 Oct 2024 07:12:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 545861C21DFE
-	for <lists+linux-doc@lfdr.de>; Sat, 19 Oct 2024 00:51:17 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D6ED32833E5
+	for <lists+linux-doc@lfdr.de>; Sat, 19 Oct 2024 05:12:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6904D198E84;
-	Sat, 19 Oct 2024 00:51:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E72E1D460F;
+	Sat, 19 Oct 2024 05:12:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mfUIGGy9"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a2847Lu/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7280820E31C;
-	Sat, 19 Oct 2024 00:51:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98E8D1CC8A3;
+	Sat, 19 Oct 2024 05:12:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1729299072; cv=none; b=C0AwNNsEXR7oH85yZlLaKuY2r8nM6azOKoX/3NDDENx74uJ4Ce/9I4Z0lE8YfecULTRxVIwlGVVXJxm8hV6zuC4VrrjAIekDUPaBA4u5O4PRTGwimxguKA0ZcTtFPMKeuJAiVGjRGwJVa1mkrJ8V5qjNMCFFi0HoLlx/UcSvP+Y=
+	t=1729314764; cv=none; b=iiiDUOmjAqU7BlSTW4SwBva1zI/x7NzCTtLy0358R4FBxKpoCN3V3ERgdR/3Hd7ONgwr5l4iCcdAUOrfvz7tM6xN0jRmacC1q8/3mVAtseev/s1N1bYEfkbjKKz8O6w+dalyJ/f2P1GMYlB4lSO4beYRZGdUkWVbqPstciZt+wI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1729299072; c=relaxed/simple;
-	bh=MD5kkzyjVlGnny+gqQDDv1+RFxFDxvzSYdWohCFC5o4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HnwPpz23hgFWe7QZRy0Ab/NxN9azNsya7h3F4w2IpDulb7RIo8U9hpB7vW5HAUZn9JGt/tS3IR5W0E9LG1oQ4cddgN62h1abYsJqr2cvGGerrMORkdhy3pfazHpgQ3ICh+OeZsJdeci2bsBIVuJIWc+VJqmkCfke/dSG11uWn6w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mfUIGGy9; arc=none smtp.client-ip=209.85.214.177
+	s=arc-20240116; t=1729314764; c=relaxed/simple;
+	bh=3wwp6mNq52ljBWFrdmcUTM5lM5GU2bPG/Rwe2Uo3zAo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=CRaAYeiUeeyTf+gY4FchDobFDAN6JtuqnWpo1zDkhL9fyQooVDx8Vnz94PMRJRrSfcB/L/l2KOaBDUPF77J1wqc4SBSdRBtNUDC6zWph1lH1bf1buN2wrsxIq/97RrOf6QV5aOEdBG3Np+m8SudrXVdWmzRQbCCsAn4qqK0WuB8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=a2847Lu/; arc=none smtp.client-ip=209.85.128.178
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-20c767a9c50so26156145ad.1;
-        Fri, 18 Oct 2024 17:51:10 -0700 (PDT)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-6e59a9496f9so33677117b3.0;
+        Fri, 18 Oct 2024 22:12:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729299069; x=1729903869; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=FL67X8g8ez0faSQl99ijSyvjCoKB8ojvzNqVtmVcfiE=;
-        b=mfUIGGy9bR9aKPRo55Evj5Y0+Syw/iJz2/yhdhO+b63hHvIHvYDxUA4Ui3G3+UmBHF
-         J1Iz8GUcEliAjAfmLwQqHL2mZKvgiWNxOcsfxrku6y4ZsOmRCTzsXz6nGHpxuZ1Vq1d6
-         XUyGqsxaFwmAjY017JagKBpd9uY7PRmIupDMo59mPAYkYPwIFcIGR5ERu6qb2ytDIkOn
-         Rvn6t8PFzt3PXkGZC405xgF0bzEfEyegSPqg+Zh3TrhApgKjaYqi1v4Rfd9KUMnVxAbh
-         l+PI2T9OQ2LH6XTlWvnIOXHa3/Blz+X/eH6rNMkoIt6k5ijcibNIUC8v8Uvks2N8/9Gn
-         Yh+A==
+        d=gmail.com; s=20230601; t=1729314761; x=1729919561; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=VaMvfH9xw7iwhP6gOC9Jb/Mc5nX1vxnwkZ0cnou9VP8=;
+        b=a2847Lu/n0OGGb4yU90p0oIu0Yu9qeywUgDO1hSDCE7nvVd5Y05aQI02MEQeyVroKl
+         EkdhrQKt9UJODk1eA6FEGr6J0sXlyXYwK2z7fXHXmcn8JliPCWRZ6+YvmzNSG513wR4L
+         yu1JSnC/Nqq/1gGkYBI05NIpIn47RIzz0mzuaWFDRX7Dt1YZu1E7gZ4JsFal+X6qnGHJ
+         jWURxRHWGjmgeb2n0ST2ofS+Cg6iCP8F+Drmjq2vX9ylOMeKK1wMzMwslELEwgeJjYI7
+         k2dTGs5Ps0UiIRo+JowpfSG+fdV74KdtNoFiUTMAbMyiX2oMoFJp3EVsx4+NPEtxz1+A
+         /t3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729299069; x=1729903869;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
+        d=1e100.net; s=20230601; t=1729314761; x=1729919561;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=FL67X8g8ez0faSQl99ijSyvjCoKB8ojvzNqVtmVcfiE=;
-        b=FQOxsZXfjPWufy8q3dUAS65HKcItAmG2JFBh4cmyFXbFNZp5+lvVyIPwthbejeQFiw
-         cWFyktYcTc9+qT2DQlebuvo0xe/t3zG2HK+eYex6sH/3PfFargT6WCZnKCU3gKc8JWI/
-         AJDaq/PXNQfgHvGOcjfx9NTb1/eFBkrH4t3qIKwZPyINODVxBBc4tw4HsDot8lt3h5Pq
-         t82sBsLBeeyi6bofsVUM65cBxvBwzHI8agqeTVEGdqj9NmuiLxWL41gbHyGhdBfJskpF
-         ATQDx5tCSnlYLLcTQcWyYNR/xyeQOVNCcIW4+A0nGhUR2OJMO7rvzqL+IQ3SUQng/6Fs
-         TP5Q==
-X-Forwarded-Encrypted: i=1; AJvYcCV/LyoaH2bGNe0/sgXvMjjQUZXMFCVSpf5H1z2ffLdnBxrPtK6CuP/FgeC601IUWz6WnzsYzi89@vger.kernel.org, AJvYcCWQUCtrD+3m+iNCrq9EZKoG1qVniZX9lo2GwnAYHHLSqA+sNWKv0YC8Ziux0v6UHKh2pO8=@vger.kernel.org, AJvYcCWeyTMY2Y5TqnS3mTOXrQOFVZ9e/X1inVMrFjF5lHTK7pvmPjlJu+A89o4QO4ZNW+kDVR01MQowo4QV@vger.kernel.org, AJvYcCWmNlobGS9L1UAKuZWbmAEnYr9fVySSPLJJNXSE27qkT5VPQAngw/acEAS6EGcCx3WAjPBsI0xcFpYe9gCZ@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywt8ZRLsAmfKnPa+OB5/ptLDGVes3EN0HmxK16SVbZXOaV+SqU7
-	8nvJ8+uen9u9+Qy/EWIGTZKOI3hWO7vIi1nwpajtH5i4e+AAGiwy
-X-Google-Smtp-Source: AGHT+IEiV0cgKjHKe/2kpiCIm2aoibAX3dlE1cBZR9js0twjZlqgxio5Kuo8jbhyx35sK6LlhoZUUA==
-X-Received: by 2002:a17:903:192:b0:20b:9c8c:e9f3 with SMTP id d9443c01a7336-20e5a7663c2mr41358935ad.14.1729299069456;
-        Fri, 18 Oct 2024 17:51:09 -0700 (PDT)
-Received: from fedora ([43.228.180.230])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7eacc28b869sm1967300a12.68.2024.10.18.17.51.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Oct 2024 17:51:09 -0700 (PDT)
-Date: Sat, 19 Oct 2024 00:51:00 +0000
-From: Hangbin Liu <liuhangbin@gmail.com>
-To: Simon Horman <horms@kernel.org>
-Cc: Toke =?iso-8859-1?Q?H=F8iland-J=F8rgensen?= <toke@redhat.com>,
-	netdev@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Jesper Dangaard Brouer <hawk@kernel.org>,
-	John Fastabend <john.fastabend@gmail.com>,
-	Jiri Pirko <jiri@resnulli.us>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Lorenzo Bianconi <lorenzo@kernel.org>,
-	Andrii Nakryiko <andriin@fb.com>, Jussi Maki <joamaki@gmail.com>,
-	Jay Vosburgh <jv@jvosburgh.net>,
-	Andy Gospodarek <andy@greyhouse.net>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Andrew Lunn <andrew+netdev@lunn.ch>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, bpf@vger.kernel.org,
-	Nikolay Aleksandrov <razor@blackwall.org>
-Subject: Re: [PATCHv2 net-next 2/3] bonding: use correct return value
-Message-ID: <ZxMCdP1X-h9qyU0u@fedora>
-References: <20241017020638.6905-1-liuhangbin@gmail.com>
- <20241017020638.6905-3-liuhangbin@gmail.com>
- <878qumzszs.fsf@toke.dk>
- <ZxGv2s4bl5VQV4g-@fedora>
- <20241018094139.GD1697@kernel.org>
- <87o73hy7hh.fsf@toke.dk>
- <20241018142104.GP1697@kernel.org>
+        bh=VaMvfH9xw7iwhP6gOC9Jb/Mc5nX1vxnwkZ0cnou9VP8=;
+        b=q7G19WiDa+/B6gTu5uOejVpR2qtynuH8wQ+mAYcMOF24kx79KOd7RQXMZxVU7/aOJD
+         FKIrNtrWBhfXNvuqJ3XFD5T/H9Tn2FvzArxa/AzSWcsP6wrrJDNYOIW64BXF56rhB22F
+         UQahn3KoeOwQOg+H3Pdmsl5JLqa11sPEY+KKI0Ci/mJIrMLYFW6CYbAvVo0dqhfrnhnG
+         ZLhDSfr8A+NxhO219NuNABNohc/nNtwEM/dlG7D+VN6YnyvanqkHZ7+3oxybg1EPgs86
+         0Q9CJMIfdQ2+1EOSSk5y0Slidnh2XrJMGlJqRKQyq91i5KanCmnf+mriGpy8PLOXCfpY
+         GJjg==
+X-Forwarded-Encrypted: i=1; AJvYcCVdTswfRml8aDSI5IJ2cXPEtqmgDJoGjg7oPZu/SHl/FFcbSxAtDE4cnzliPRHZ/MbRrDWX2wyGPGiC5Ry8@vger.kernel.org, AJvYcCXMtf7DfOvi/j4xdF1HSwUOxdZbcktdnRuVSFxYGaVmWnKHB3MUOLd2lNsZhj8duHNYSuB2lShNkUE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyS5r7BIQS8CFFG6O9x2VEADIaF2QWzOTB3yNTxlNTvLxFpF0Cq
+	+84fS444DwhKtTxMCWFPtRU/9Ql7Tomh6CfoEzjVLG+vNj1csphi
+X-Google-Smtp-Source: AGHT+IER7zvYYTqnvc/6+danFJXkgeQcNj8O3MAIaGA7tor1KCqNkzbrp98gCoQ3uOxMAAOPUV4Pug==
+X-Received: by 2002:a05:690c:9a06:b0:6e3:17b4:aeee with SMTP id 00721157ae682-6e5bfc67b08mr50904327b3.43.1729314761113;
+        Fri, 18 Oct 2024 22:12:41 -0700 (PDT)
+Received: from [192.168.2.226] ([107.175.133.150])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e5c00e4d90sm6248247b3.53.2024.10.18.22.12.31
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 18 Oct 2024 22:12:39 -0700 (PDT)
+Message-ID: <12d30624-88eb-44a1-9e42-99f553c2d732@gmail.com>
+Date: Sat, 19 Oct 2024 13:12:17 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] docs/zh_CN: add translation of dev-tools/kmsan.rst
+To: Haoyang Liu <tttturtleruss@hust.edu.cn>, Alex Shi <alexs@kernel.org>,
+ Yanteng Si <siyanteng@loongson.cn>, Jonathan Corbet <corbet@lwn.net>,
+ Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling
+ <morbo@google.com>, Justin Stitt <justinstitt@google.com>
+Cc: hust-os-kernel-patches@googlegroups.com, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, llvm@lists.linux.dev
+References: <20241015202949.538149-1-tttturtleruss@hust.edu.cn>
+Content-Language: en-US
+From: Alex Shi <seakeel@gmail.com>
+In-Reply-To: <20241015202949.538149-1-tttturtleruss@hust.edu.cn>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20241018142104.GP1697@kernel.org>
 
-On Fri, Oct 18, 2024 at 03:21:04PM +0100, Simon Horman wrote:
-> On Fri, Oct 18, 2024 at 01:29:30PM +0200, Toke H�iland-J�rgensen wrote:
-> > Simon Horman <horms@kernel.org> writes:
-> > 
-> > > On Fri, Oct 18, 2024 at 12:46:18AM +0000, Hangbin Liu wrote:
-> > >> On Thu, Oct 17, 2024 at 04:47:19PM +0200, Toke H�iland-J�rgensen wrote:
-> > >> > > diff --git a/drivers/net/bonding/bond_main.c b/drivers/net/bonding/bond_main.c
-> > >> > > index f0f76b6ac8be..6887a867fe8b 100644
-> > >> > > --- a/drivers/net/bonding/bond_main.c
-> > >> > > +++ b/drivers/net/bonding/bond_main.c
-> > >> > > @@ -5699,7 +5699,7 @@ static int bond_xdp_set(struct net_device *dev, struct bpf_prog *prog,
-> > >> > >  		if (dev_xdp_prog_count(slave_dev) > 0) {
-> > >> > >  			SLAVE_NL_ERR(dev, slave_dev, extack,
-> > >> > >  				     "Slave has XDP program loaded, please unload before enslaving");
-> > >> > > -			err = -EOPNOTSUPP;
-> > >> > > +			err = -EEXIST;
-> > >> > 
-> > >> > Hmm, this has been UAPI since kernel 5.15, so can we really change it
-> > >> > now? What's the purpose of changing it, anyway?
-> > >> 
-> > >> I just think it should return EXIST when the error is "Slave has XDP program
-> > >> loaded". No special reason. If all others think we should not change it, I
-> > >> can drop this patch.
-> > >
-> > > Hi Toke,
-> > >
-> > > Could you add some colour to what extent user's might rely on this error code?
-> > >
-> > > Basically I think that if they do then we shouldn't change this.
-> > 
-> > Well, that's the trouble with UAPI, we don't really know. In libxdp and
-> > xdp-tools we look at the return code to provide a nicer error message,
-> > like:
-> > 
-> > https://github.com/xdp-project/xdp-tools/blob/master/lib/libxdp/libxdp.c#L615
-> > 
-> > and as a signal to fall back to loading the programme without a dispatcher:
-> > 
-> > https://github.com/xdp-project/xdp-tools/blob/master/lib/libxdp/libxdp.c#L1824
-> > 
-> > Both of these cases would be unaffected (or even improved) by this
-> > patch, so in that sense I don't have a concrete objection, just a
-> > general "userspace may react to this". In other words, my concern is
-> > more of a general "we don't know, so this seems risky". If any of you
-> > have more information about how bonding XDP is generally used, that may
-> > help get a better idea of this?
+For the translation part, 
+Reviewed-by: Alex Shi <alexs@kernel.org>
+
+
+On 10/16/24 04:29, Haoyang Liu wrote:
+> Add translation of kmsan.rst and remove it from TODO list.
 > 
-> Yes, that is the trouble with the UAPI. I was hoping you might be able to
-> provide the clarity you ask for above. But alas, things are as clear as
-> mud.
+> Signed-off-by: Haoyang Liu <tttturtleruss@hust.edu.cn>
+> ---
+>  .../translations/zh_CN/dev-tools/index.rst    |   2 +-
+>  .../translations/zh_CN/dev-tools/kmsan.rst    | 392 ++++++++++++++++++
+>  2 files changed, 393 insertions(+), 1 deletion(-)
+>  create mode 100644 Documentation/translations/zh_CN/dev-tools/kmsan.rst
 > 
-> In lieu of more information I suggest caution and dropping this change for
-> now.
-
-OK, I will drop this one.
-
-Thanks
-Hangbin
+> diff --git a/Documentation/translations/zh_CN/dev-tools/index.rst b/Documentation/translations/zh_CN/dev-tools/index.rst
+> index 6a8c637c0be1..869d0be24bff 100644
+> --- a/Documentation/translations/zh_CN/dev-tools/index.rst
+> +++ b/Documentation/translations/zh_CN/dev-tools/index.rst
+> @@ -20,6 +20,7 @@ Documentation/translations/zh_CN/dev-tools/testing-overview.rst
+>  
+>     testing-overview
+>     sparse
+> +   kmsan
+>     kcov
+>     kcsan
+>     gcov
+> @@ -32,7 +33,6 @@ Todolist:
+>  
+>   - checkpatch
+>   - coccinelle
+> - - kmsan
+>   - kfence
+>   - kgdb
+>   - kselftest
+> diff --git a/Documentation/translations/zh_CN/dev-tools/kmsan.rst b/Documentation/translations/zh_CN/dev-tools/kmsan.rst
+> new file mode 100644
+> index 000000000000..81bc338f5086
+> --- /dev/null
+> +++ b/Documentation/translations/zh_CN/dev-tools/kmsan.rst
+> @@ -0,0 +1,392 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +.. include:: ../disclaimer-zh_CN.rst
+> +
+> +:Original: Documentation/dev-tools/kmsan.rst
+> +:Translator: 刘浩阳 Haoyang Liu <tttturtleruss@hust.edu.cn>
+> +
+> +=======================
+> +内核内存消毒剂（KMSAN）
+> +=======================
+> +
+> +KMSAN 是一个动态错误检测器，旨在查找未初始化值的使用。它基于编译器插桩，类似于用
+> +户空间的 `MemorySanitizer tool`_。
+> +
+> +需要注意的是 KMSAN 并不适合生产环境，因为它会大幅增加内核内存占用并降低系统运行速度。
+> +
+> +使用方法
+> +========
+> +
+> +构建内核
+> +--------
+> +
+> +要构建带有 KMSAN 的内核，你需要一个较新的 Clang (14.0.6+)。
+> +请参阅 `LLVM documentation`_ 了解如何构建 Clang。
+> +
+> +现在配置并构建一个启用 CONFIG_KMSAN 的内核。
+> +
+> +示例报告
+> +--------
+> +
+> +以下是一个 KMSAN 报告的示例::
+> +
+> +  =====================================================
+> +  BUG: KMSAN: uninit-value in test_uninit_kmsan_check_memory+0x1be/0x380 [kmsan_test]
+> +   test_uninit_kmsan_check_memory+0x1be/0x380 mm/kmsan/kmsan_test.c:273
+> +   kunit_run_case_internal lib/kunit/test.c:333
+> +   kunit_try_run_case+0x206/0x420 lib/kunit/test.c:374
+> +   kunit_generic_run_threadfn_adapter+0x6d/0xc0 lib/kunit/try-catch.c:28
+> +   kthread+0x721/0x850 kernel/kthread.c:327
+> +   ret_from_fork+0x1f/0x30 ??:?
+> +
+> +  Uninit was stored to memory at:
+> +   do_uninit_local_array+0xfa/0x110 mm/kmsan/kmsan_test.c:260
+> +   test_uninit_kmsan_check_memory+0x1a2/0x380 mm/kmsan/kmsan_test.c:271
+> +   kunit_run_case_internal lib/kunit/test.c:333
+> +   kunit_try_run_case+0x206/0x420 lib/kunit/test.c:374
+> +   kunit_generic_run_threadfn_adapter+0x6d/0xc0 lib/kunit/try-catch.c:28
+> +   kthread+0x721/0x850 kernel/kthread.c:327
+> +   ret_from_fork+0x1f/0x30 ??:?
+> +
+> +  Local variable uninit created at:
+> +   do_uninit_local_array+0x4a/0x110 mm/kmsan/kmsan_test.c:256
+> +   test_uninit_kmsan_check_memory+0x1a2/0x380 mm/kmsan/kmsan_test.c:271
+> +
+> +  Bytes 4-7 of 8 are uninitialized
+> +  Memory access of size 8 starts at ffff888083fe3da0
+> +
+> +  CPU: 0 PID: 6731 Comm: kunit_try_catch Tainted: G    B       E     5.16.0-rc3+ #104
+> +  Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.14.0-2 04/01/2014
+> +  =====================================================
+> +
+> +报告指出本地变量 ``uninit`` 在 ``do_uninit_local_array()`` 中未初始化。
+> +第三个堆栈跟踪对应于该变量创建的位置。
+> +
+> +第一个堆栈跟踪显示了未初始化值的使用位置（在
+> +``test_uninit_kmsan_check_memory()``）。
+> +工具显示了局部变量中未初始化的字节及其被复制到其他内存位置前的堆栈。
+> +
+> +KMSAN 会在以下情况下报告未初始化的值 ``v``:
+> +
+> + - 在条件判断中，例如 ``if (v) { ... }``；
+> + - 在索引或指针解引用中，例如 ``array[v]`` 或 ``*v``；
+> + - 当它被复制到用户空间或硬件时，例如 ``copy_to_user(..., &v, ...)``；
+> + - 当它作为函数参数传递，并且启用 ``CONFIG_KMSAN_CHECK_PARAM_RETVAL`` 时（见下文）。
+> +
+> +这些情况（除了复制数据到用户空间或硬件外，这是一个安全问题）被视为 C11 标准下的未定义行为。
+> +
+> +禁用插桩
+> +--------
+> +
+> +可以用 ``__no_kmsan_checks`` 标记函数。这样，KMSAN 会忽略该函数中的未初始化值，
+> +并将其输出标记为已初始化。如此，用户不会收到与该函数相关的 KMSAN 报告。
+> +
+> +KMSAN 还支持 ``__no_sanitize_memory`` 函数属性。KMSAN 不会对拥有该属性的函数进行
+> +插桩，这在我们不希望编译器干扰某些底层代码（例如标记为 ``noinstr`` 的代码，该
+> +代码隐式添加了 ``__no_sanitize_memory``）时可能很有用。
+> +
+> +然而，这会有代价：此类函数的栈分配将具有不正确的影子/初始值，可能导致误报。来
+> +自非插桩代码的函数也可能接收到不正确的元数据。
+> +
+> +
+> +作为经验之谈，避免显式使用 ``__no_sanitize_memory``。
+> +
+> +也可以通过 Makefile 禁用 KMSAN 对某个文件（例如 main.o）的作用::
+> +
+> +  KMSAN_SANITIZE_main.o := n
+> +
+> +或者对整个目录::
+> +
+> +  KMSAN_SANITIZE := n
+> +
+> +将其应用到文件或目录中的每个函数。大多数用户不会需要 KMSAN_SANITIZE
+> +的代码被 KMSAN 破坏（例如在早期启动时运行）。
+> +
+> +还可以通过调用 ``kmsan_disable_current()`` 和 ``kmsan_enable_current()``
+> +暂时对当前任务禁用 KMSAN 检查。每个 ``kmsan_enable_current()`` 必须在
+> +``kmsan_disable_current()`` 之后调用；这些调用对可以嵌套。在调用时需要注意保持
+> +嵌套区域简短，并且尽可能使用其他方法禁用插桩。
+> +
+> +支持
+> +====
+> +
+> +为了使用 KMSAN，内核必须使用 Clang 构建，到目前为止，Clang 是唯一支持 KMSAN
+> +的编译器。内核插桩过程基于用户空间的 `MemorySanitizer tool`_。
+> +
+> +目前运行时库仅支持 x86_64 架构。
+> +
+> +KMSAN 的工作原理
+> +================
+> +
+> +KMSAN 阴影内存
+> +--------------
+> +
+> +KMSAN 将一个元数据字节（也称为阴影字节）与每个内核内存字节关联。仅当内核内存字节
+> +的相应位未初始化时，阴影字节中的一个比特位才会被设置。将内存标记为未初始化（即
+> +将其阴影字节设置为 ``0xff``）称为中毒，将其标记为已初始化（将阴影字节设置为
+> +``0x00``）称为解毒。
+> +
+> +当在栈上分配新变量时，默认情况下它会中毒，这由编译器插入的插桩代码完成（除非它
+> +是立即初始化的栈变量）。任何未使用 ``__GFP_ZERO`` 的堆分配也会中毒。
+> +
+> +编译器插桩还跟踪阴影值在代码中的使用。当需要时，插桩代码会调用 ``mm/kmsan/`` 中
+> +的运行时库以持久化阴影值。
+> +
+> +基本或复合类型的阴影值是长度相同的字节数组。当常量值写入内存时，该内存会被解毒
+> +。当从内存读取值时，其阴影内存也会被获取，并传递到所有使用该值的操作中。对于每
+> +个需要一个或多个值的指令，编译器会生成代码根据这些值及其阴影来计算结果的阴影。
+> +
+> +
+> +示例::
+> +
+> +  int a = 0xff;  // i.e. 0x000000ff
+> +  int b;
+> +  int c = a | b;
+> +
+> +在这种情况下， ``a`` 的阴影为 ``0``， ``b`` 的阴影为 ``0xffffffff``，
+> +``c`` 的阴影为 ``0xffffff00``。这意味着 ``c`` 的高三个字节未初始化，而低字节已
+> +初始化。
+> +
+> +起源跟踪
+> +--------
+> +
+> +每四字节的内核内存都有一个所谓的源点与之映射。这个源点描述了在程序执行中，未初
+> +始化值的创建点。每个源点都与完整的分配栈（对于堆分配的内存）或包含未初始化变
+> +量的函数（对于局部变量）相关联。
+> +
+> +当一个未初始化的变量在栈或堆上分配时，会创建一个新的源点值，并将该变量的初始值
+> +填充为这个值。当从内存中读取一个值时，其初始值也会被读取并与阴影一起保留。对于
+> +每个接受一个或多个值的指令，结果的源点是与任何未初始化输入相对应的源点之一。如
+> +果一个污染值被写入内存，其起源也会被写入相应的存储中。
+> +
+> +示例 1::
+> +
+> +  int a = 42;
+> +  int b;
+> +  int c = a + b;
+> +
+> +在这种情况下， ``b`` 的源点是在函数入口时生成的，并在加法结果写入内存之前存储到
+> +``c`` 的源点中。
+> +
+> +如果几个变量共享相同的源点地址，则它们被存储在同一个四字节块中。在这种情况下，
+> +对任何变量的每次写入都会更新所有变量的源点。在这种情况下我们必须牺牲精度，因
+> +为为单独的位（甚至字节）存储源点成本过高。
+> +
+> +示例 2::
+> +
+> +  int combine(short a, short b) {
+> +    union ret_t {
+> +      int i;
+> +      short s[2];
+> +    } ret;
+> +    ret.s[0] = a;
+> +    ret.s[1] = b;
+> +    return ret.i;
+> +  }
+> +
+> +如果 ``a`` 已初始化而 ``b`` 未初始化，则结果的阴影为 0xffff0000，结果的源点为
+> +``b`` 的源点。 ``ret.s[0]`` 会有相同的起源，但它不会被使用，因为该变量已初始化。
+> +
+> +如果两个函数参数都未初始化，则只保留第二个参数的源点。
+> +
+> +源点链
+> +~~~~~~
+> +
+> +为了便于调试，KMSAN 在每次将未初始化值存储到内存时都会创建一个新的源点。新的源点
+> +引用了其创建栈以及值的前一个起源。这可能导致内存消耗增加，因此我们在运行时限制
+> +了源点链的长度。
+> +
+> +Clang 插桩 API
+> +--------------
+> +
+> +Clang 插桩通过在内核代码中插入定义在 ``mm/kmsan/instrumentation.c`` 中的函数调用
+> +来实现。
+> +
+> +
+> +阴影操作
+> +~~~~~~~~
+> +
+> +对于每次内存访问，编译器都会发出一个函数调用，该函数返回一对指针，指向给定内存
+> +的阴影和原始地址::
+> +
+> +  typedef struct {
+> +    void *shadow, *origin;
+> +  } shadow_origin_ptr_t
+> +
+> +  shadow_origin_ptr_t __msan_metadata_ptr_for_load_{1,2,4,8}(void *addr)
+> +  shadow_origin_ptr_t __msan_metadata_ptr_for_store_{1,2,4,8}(void *addr)
+> +  shadow_origin_ptr_t __msan_metadata_ptr_for_load_n(void *addr, uintptr_t size)
+> +  shadow_origin_ptr_t __msan_metadata_ptr_for_store_n(void *addr, uintptr_t size)
+> +
+> +函数名依赖于内存访问的大小。
+> +
+> +编译器确保对于每个加载的值，其阴影和原始值都从内存中读取。当一个值存储到内存时
+> +，其阴影和原始值也会通过元数据指针进行存储。
+> +
+> +处理局部变量
+> +~~~~~~~~~~~~
+> +
+> +一个特殊的函数用于为局部变量创建一个新的原始值，并将该变量的原始值设置为该值::
+> +
+> +  void __msan_poison_alloca(void *addr, uintptr_t size, char *descr)
+> +
+> +访问每个任务数据
+> +~~~~~~~~~~~~~~~~
+> +
+> +在每个插桩函数的开始处，KMSAN 插入一个对 ``__msan_get_context_state()`` 的调用
+> +::
+> +
+> +  kmsan_context_state *__msan_get_context_state(void)
+> +
+> +``kmsan_context_state`` 在 ``include/linux/kmsan.h`` 中声明::
+> +
+> +  struct kmsan_context_state {
+> +    char param_tls[KMSAN_PARAM_SIZE];
+> +    char retval_tls[KMSAN_RETVAL_SIZE];
+> +    char va_arg_tls[KMSAN_PARAM_SIZE];
+> +    char va_arg_origin_tls[KMSAN_PARAM_SIZE];
+> +    u64 va_arg_overflow_size_tls;
+> +    char param_origin_tls[KMSAN_PARAM_SIZE];
+> +    depot_stack_handle_t retval_origin_tls;
+> +  };
+> +
+> +KMSAN 使用此结构体在插桩函数之间传递参数阴影和原始值（除非立刻通过
+> + ``CONFIG_KMSAN_CHECK_PARAM_RETVAL`` 检查参数）。
+> +
+> +将未初始化的值传递给函数
+> +~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +Clang 的 MemorySanitizer 插桩有一个选项 ``-fsanitize-memory-param-retval``，该
+> +选项使编译器检查按值传递的函数参数，以及函数返回值。
+> +
+> +该选项由 ``CONFIG_KMSAN_CHECK_PARAM_RETVAL`` 控制，默认启用以便 KMSAN 更早报告
+> +未初始化的值。有关更多细节，请参考 `LKML discussion`_。
+> +
+> +由于 LLVM 中的实现检查的方式（它们仅应用于标记为 ``noundef`` 的参数），并不是所
+> +有参数都能保证被检查，因此我们不能放弃 ``kmsan_context_state`` 中的元数据存储
+> +。
+> +
+> +字符串函数
+> +~~~~~~~~~~~
+> +
+> +编译器将对 ``memcpy()``/``memmove()``/``memset()`` 的调用替换为以下函数。这些函
+> +数在数据结构初始化或复制时也会被调用，确保阴影和原始值与数据一起复制::
+> +
+> +  void *__msan_memcpy(void *dst, void *src, uintptr_t n)
+> +  void *__msan_memmove(void *dst, void *src, uintptr_t n)
+> +  void *__msan_memset(void *dst, int c, uintptr_t n)
+> +
+> +错误报告
+> +~~~~~~~~
+> +
+> +对于每个值的使用，编译器发出一个阴影检查，在值中毒的情况下调用
+> +``__msan_warning()``::
+> +
+> +  void __msan_warning(u32 origin)
+> +
+> +``__msan_warning()`` 使 KMSAN 运行时打印错误报告。
+> +
+> +内联汇编插桩
+> +~~~~~~~~~~~~
+> +
+> +KMSAN 对每个内联汇编输出进行插桩，调用::
+> +
+> +  void __msan_instrument_asm_store(void *addr, uintptr_t size)
+> +
+> +，该函数解除内存区域的污染。
+> +
+> +这种方法可能会掩盖某些错误，但也有助于避免许多位操作、原子操作等中的假阳性。
+> +
+> +有时传递给内联汇编的指针不指向有效内存。在这种情况下，它们在运行时被忽略。
+> +
+> +
+> +运行时库
+> +--------
+> +
+> +代码位于 ``mm/kmsan/``。
+> +
+> +每个任务 KMSAN 状态
+> +~~~~~~~~~~~~~~~~~~~
+> +
+> +每个 task_struct 都有一个关联的 KMSAN 任务状态，它保存 KMSAN
+> +上下文（见上文）和一个每个任务计数器以禁止 KMSAN 报告::
+> +
+> +  struct kmsan_context {
+> +    ...
+> +    unsigned int depth;
+> +    struct kmsan_context_state cstate;
+> +    ...
+> +  }
+> +
+> +  struct task_struct {
+> +    ...
+> +    struct kmsan_context kmsan;
+> +    ...
+> +  }
+> +
+> +KMSAN 上下文
+> +~~~~~~~~~~~~
+> +
+> +在内核任务上下文中运行时，KMSAN 使用 ``current->kmsan.cstate`` 来
+> +保存函数参数和返回值的元数据。
+> +
+> +但在内核运行于中断、softirq 或 NMI 上下文中， ``current`` 不可用时，
+> +KMSAN 切换到每 CPU 中断状态::
+> +
+> +  DEFINE_PER_CPU(struct kmsan_ctx, kmsan_percpu_ctx);
+> +
+> +元数据分配
+> +~~~~~~~~~~
+> +
+> +内核中有多个地方存储元数据。
+> +
+> +1. 每个 ``struct page`` 实例包含两个指向其影子和内存页面的指针
+> +::
+> +
+> +  struct page {
+> +    ...
+> +    struct page *shadow, *origin;
+> +    ...
+> +  };
+> +
+> +在启动时，内核为每个可用的内核页面分配影子和源页面。这是在内核地址空间已经碎片
+> +化时后完成的，完成的相当晚，因此普通数据页面可能与元数据页面任意交错。
+> +
+> +这意味着通常两个相邻的内存页面，它们的影子/源页面可能不是连续的。因此，如果内存
+> +访问跨越内存块的边界，访问影子/源内存可能会破坏其他页面或从中读取错误的值。
+> +
+> +实际上，由相同 ``alloc_pages()`` 调用返回的连续内存页面将具有连续的元数据，而
+> +如果这些页面属于两个不同的分配，它们的元数据页面可能会被碎片化。
+> +
+> +对于内核数据（ ``.data``、 ``.bss`` 等）和每 CPU 内存区域，也没有对元数据连续
+> +性的保证。
+> +
+> +在 ``__msan_metadata_ptr_for_XXX_YYY()`` 遇到两个页面之间的
+> +非连续元数据边界时，它返回指向假影子/源区域的指针::
+> +
+> +  char dummy_load_page[PAGE_SIZE] __attribute__((aligned(PAGE_SIZE)));
+> +  char dummy_store_page[PAGE_SIZE] __attribute__((aligned(PAGE_SIZE)));
+> +
+> +``dummy_load_page`` 被初始化为零，因此读取它始终返回零。对 ``dummy_store_page`` 的
+> +所有写入都被忽略。
+> +
+> +2. 对于 vmalloc 内存和模块，内存范围、影子和源之间有一个直接映射。KMSAN 将
+> +vmalloc 区域缩小了 3/4，仅使前四分之一可用于 ``vmalloc()``。vmalloc
+> +区域的第二个四分之一包含第一个四分之一的影子内存，第三个四分之一保存源。第四个
+> +四分之一的小部分包含内核模块的影子和源。有关更多详细信息，请参阅
+> +``arch/x86/include/asm/pgtable_64_types.h``。
+> +
+> +当一系列页面映射到一个连续的虚拟内存空间时，它们的影子和源页面也以连续区域的方
+> +式映射。
+> +
+> +参考文献
+> +========
+> +
+> +E. Stepanov, K. Serebryany. `MemorySanitizer: fast detector of uninitialized
+> +memory use in C++
+> +<https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43308.pdf>`_.
+> +In Proceedings of CGO 2015.
+> +
+> +.. _MemorySanitizer tool: https://clang.llvm.org/docs/MemorySanitizer.html
+> +.. _LLVM documentation: https://llvm.org/docs/GettingStarted.html
+> +.. _LKML discussion: https://lore.kernel.org/all/20220614144853.3693273-1-glider@google.com/
 
