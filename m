@@ -1,85 +1,80 @@
-Return-Path: <linux-doc+bounces-28037-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28040-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FDE39A500F
-	for <lists+linux-doc@lfdr.de>; Sat, 19 Oct 2024 19:26:28 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 415559A5096
+	for <lists+linux-doc@lfdr.de>; Sat, 19 Oct 2024 21:56:27 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id CAB5CB25AAE
-	for <lists+linux-doc@lfdr.de>; Sat, 19 Oct 2024 17:26:25 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3C6F21C21691
+	for <lists+linux-doc@lfdr.de>; Sat, 19 Oct 2024 19:56:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B39AC192B6D;
-	Sat, 19 Oct 2024 17:25:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 481411917F1;
+	Sat, 19 Oct 2024 19:55:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="aJMdKFy7"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ValaT436"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA3011917E6;
-	Sat, 19 Oct 2024 17:25:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48F541917C8;
+	Sat, 19 Oct 2024 19:55:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1729358718; cv=none; b=Nyj+fFX5rqgMdSbd44wnqr4fGli56antfK0IbL7byuXCJm7wjQIYzu0f9LO9YgZbVB1NuN9Y4K3nMKepQzyn34VfcYNjoyt0dfCLthsdgaIOjzT4SRzqwoJOJmtkN4lOqui9Q7z3ne+f157bUp7LISZjQSI7Xtc/SsZpd3IlH/s=
+	t=1729367742; cv=none; b=stBpdE/LzATCehzGfoYfOg/fvRZzYfL52w+iDIt7e30U296g36sfdya2UHhQmF21IsCWIB961GIzdvln3N2NYfvcdyzfVpr+5RKniIFHda/lgs6j/QJ/r/CCcdYb1x0gRX4gl4ndYtWX4cTngzJK5/O4YvBQil8ilptqUmuCwoQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1729358718; c=relaxed/simple;
-	bh=K2m8obFhWuwPQuikGUdYpspkIHuhwoUO0TZOETINH7I=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hlQYFIk3KVTck5f0rCeCAhufN/+fiWco35JUyL98adgJxXZf1GKax9x36k3pin2+gW3OqqPESYrzyudICGHlSc7z05Krc8nJeivwM8HN6tH/nW7bIbsQ/XSbR4Kq+rqa7K4kOo6ChpZ6Usy8xB4OAm/hgZI3qAgkl0jpfVsZUbA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=aJMdKFy7; arc=none smtp.client-ip=90.155.50.34
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=casper.srs.infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
-	Cc:Content-Type:Content-ID:Content-Description;
-	bh=T/6p2P3AuQICDZdTmCqeIRHYUbD9P11W996yxXSWcPU=; b=aJMdKFy7DJvlTP1XnRcUjL6xbY
-	Q5EoK5K3U51yRlgxxEb40YRiBgw/w7hBzAWytf0A1aXUXARRqTR8mw4PqxNKx+HwUEscYrVaMJ6UG
-	liArW3tl3xOmGMt4Dpt5nfhKf9vp8d8pBn8fEF0P4V48jTe19emOfLUMSKevdrre9oaVr0tzxPX68
-	KfkJ/EsRHkgLLB5dH7lDB4jVFjJfjpSy7Y5Mw2LDmiGnt1LIQ4CxfZRhtcrH3zNvWAd2AAUQHcieH
-	OM3tssMkLM/axWzt9O7aiyFjtlV312lwVSI0HPBT/9ylp6SB+/poGIBPaux2rtzL8LJBP7GtVHMPr
-	/yWn6Ahw==;
-Received: from [2001:8b0:10b:1::ebe] (helo=i7.infradead.org)
-	by casper.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
-	id 1t2DCK-0000000EUiq-3cTV;
-	Sat, 19 Oct 2024 17:25:07 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.97.1 #2 (Red Hat Linux))
-	id 1t2DCI-00000009TKv-3xjU;
-	Sat, 19 Oct 2024 18:25:02 +0100
-From: David Woodhouse <dwmw2@infradead.org>
-To: Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Marc Zyngier <maz@kernel.org>,
-	Oliver Upton <oliver.upton@linux.dev>,
-	James Morse <james.morse@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Zenghui Yu <yuzenghui@huawei.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Pavel Machek <pavel@ucw.cz>,
-	Len Brown <len.brown@intel.com>,
-	Shuah Khan <shuah@kernel.org>,
-	David Woodhouse <dwmw@amazon.co.uk>,
-	kvm@vger.kernel.org,
-	linux-doc@vger.kernel.org,
+	s=arc-20240116; t=1729367742; c=relaxed/simple;
+	bh=3YzDJtGgEsBQV09adTrsUWDISVwgI5xvmQh03TrS9RI=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=gcMAnthkKKJQG+lGjFRUoK9co+YB7lrH1nNegP55xnHrtoGhysNud9wYgaavMr7Hrm6k1ogkUzODhNzuS7+i6SadC8cnE0IMi0Erp9y7k3rYrzAgRMp6Ut8SSBTOignmmRku4wq4XKrnRDZ8UB1pBADzD/1VRnVK2vQtNbH2QZk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ValaT436; arc=none smtp.client-ip=209.85.215.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-7ea8d7341e6so2408702a12.3;
+        Sat, 19 Oct 2024 12:55:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1729367739; x=1729972539; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NL2p85b0pJ2aUHZll7jQWQmYBswCfn3xX90Xd1KWwm8=;
+        b=ValaT436ZoDVZ7o2LinfvhFTckWaTE8atM+F9duJlPKAT7A77nQXBgB2U/MOFVTr3L
+         maIuqN7yZ3JkISCfOXN0Gi0NEPe0hQiVRTX7L7G5Bdd/cRg6QlIx0OasR1Gn6kYa1C+m
+         Z3j5YEu3mtynhafI3r6T1VymX5JKRIiEQ5OPe4VEGiVuqpMBkjgpPXRFhKvJXlzIhtjY
+         SfNYoIhE5WGJ9UgY00rLRSKC/4rjz9nbxyb44++tFTdzFJtObg3JmGqmziYOH7H+wJm/
+         88zwZ0z6rDiEQaqYwTS4qDAOy0M+XFqla/T0jHNxHQjyOR0ULYxhe5b2PIhGhf4vDn8b
+         JZdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1729367739; x=1729972539;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NL2p85b0pJ2aUHZll7jQWQmYBswCfn3xX90Xd1KWwm8=;
+        b=n0tyHdOLXpHoejlzHcFZnm+gBstdZdxB9/JnLwvldMgeOF4S+eMTpzPNyxkjHlWDRv
+         ng3q77g4JKnR/eNyjoOsFZDwNW16pCTjw7oULN2El/Wv6l74RTSpmkUan3iW7zhpGajn
+         HAVNhzp7c6og1+Bfq8Mv93Hrm2vLNsXYAkvjmAQXHvjOSBUHYDflVYpjeBbDJ0quffCH
+         h9zR7eHYXie58IYQCkoM/yN24Q9l+lC3nuyuThO4ojydU37BStMIL/zh5nHbfOOtaRD8
+         fl93IK+iBa0iWkp6MCvB95fbL7A2qqysbyf+Sw5z18aH49Pgt7E4aHR9TW6yb9Qlyv5u
+         bbdA==
+X-Forwarded-Encrypted: i=1; AJvYcCWnpJUX3bOov854wp1NxjeILAYEfm67Obp/CTtZPUiAzCBKhAL/JKZTSKThhEgzWShF0nsRJ50iQfNpxng=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzsnVCWkCgf+B0x6Vy4lo61rwMfwVXDv6wGH7+QRclNpJzUrNcT
+	p5eeBZNGMnGmpIrYtd674/If900L+yPuv1zlRJpCiNBF/Vy/7+XB
+X-Google-Smtp-Source: AGHT+IEO8I5gcyZMFJN2Y315SbCjIOMPlLyq4rx/Fr+BhSEemycqRnYvbo7i5iCQeLN2I9Or1mXUfg==
+X-Received: by 2002:a05:6a21:114f:b0:1d6:5f3d:4ab7 with SMTP id adf61e73a8af0-1d92c503c07mr9694576637.22.1729367739330;
+        Sat, 19 Oct 2024 12:55:39 -0700 (PDT)
+Received: from anishs-Air.attlocal.net ([2600:1700:3bdc:8c10:183b:c6cf:8f19:74f6])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7eaeab1dc5esm125133a12.25.2024.10.19.12.55.37
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Sat, 19 Oct 2024 12:55:37 -0700 (PDT)
+From: anish kumar <yesanishhere@gmail.com>
+To: jassisinghbrar@gmail.com,
+	corbet@lwn.net
+Cc: linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	kvmarm@lists.linux.dev,
-	linux-pm@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
-	Francesco Lavra <francescolavra.fl@gmail.com>,
-	Miguel Luis <miguel.luis@oracle.com>
-Subject: [PATCH v6 6/6] arm64: Use SYSTEM_OFF2 PSCI call to power off for hibernate
-Date: Sat, 19 Oct 2024 18:15:47 +0100
-Message-ID: <20241019172459.2241939-7-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20241019172459.2241939-1-dwmw2@infradead.org>
-References: <20241019172459.2241939-1-dwmw2@infradead.org>
+	anish kumar <yesanishhere@gmail.com>
+Subject: [PATCH 1/2] mailbox: Documentation: remove the old documentation
+Date: Sat, 19 Oct 2024 12:55:33 -0700
+Message-Id: <20241019195534.79603-1-yesanishhere@gmail.com>
+X-Mailer: git-send-email 2.39.3 (Apple Git-146)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -87,148 +82,152 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+In preparation of better and latest documentation,
+remove the current documentation.
 
-The PSCI v1.3 specification adds support for a SYSTEM_OFF2 function
-which is analogous to ACPI S4 state. This will allow hosting
-environments to determine that a guest is hibernated rather than just
-powered off, and handle that state appropriately on subsequent launches.
-
-Since commit 60c0d45a7f7a ("efi/arm64: use UEFI for system reset and
-poweroff") the EFI shutdown method is deliberately preferred over PSCI
-or other methods. So register a SYS_OFF_MODE_POWER_OFF handler which
-*only* handles the hibernation, leaving the original PSCI SYSTEM_OFF as
-a last resort via the legacy pm_power_off function pointer.
-
-The hibernation code already exports a system_entering_hibernation()
-function which is be used by the higher-priority handler to check for
-hibernation. That existing function just returns the value of a static
-boolean variable from hibernate.c, which was previously only set in the
-hibernation_platform_enter() code path. Set the same flag in the simpler
-code path around the call to kernel_power_off() too.
-
-An alternative way to hook SYSTEM_OFF2 into the hibernation code would
-be to register a platform_hibernation_ops structure with an ->enter()
-method which makes the new SYSTEM_OFF2 call. But that would have the
-unwanted side-effect of making hibernation take a completely different
-code path in hibernation_platform_enter(), invoking a lot of special dpm
-callbacks.
-
-Another option might be to add a new SYS_OFF_MODE_HIBERNATE mode, with
-fallback to SYS_OFF_MODE_POWER_OFF. Or to use the sys_off_data to
-indicate whether the power off is for hibernation.
-
-But this version works and is relatively simple.
-
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Acked-by: Rafael J. Wysocki <rafael@kernel.org>
+Signed-off-by: anish kumar <yesanishhere@gmail.com>
 ---
- drivers/firmware/psci/psci.c | 42 ++++++++++++++++++++++++++++++++++++
- kernel/power/hibernate.c     |  5 ++++-
- 2 files changed, 46 insertions(+), 1 deletion(-)
+ Documentation/driver-api/mailbox.rst | 129 ---------------------------
+ 1 file changed, 129 deletions(-)
+ delete mode 100644 Documentation/driver-api/mailbox.rst
 
-diff --git a/drivers/firmware/psci/psci.c b/drivers/firmware/psci/psci.c
-index 2328ca58bba6..8809455a61a6 100644
---- a/drivers/firmware/psci/psci.c
-+++ b/drivers/firmware/psci/psci.c
-@@ -78,6 +78,7 @@ struct psci_0_1_function_ids get_psci_0_1_function_ids(void)
- 
- static u32 psci_cpu_suspend_feature;
- static bool psci_system_reset2_supported;
-+static bool psci_system_off2_hibernate_supported;
- 
- static inline bool psci_has_ext_power_state(void)
- {
-@@ -333,6 +334,33 @@ static void psci_sys_poweroff(void)
- 	invoke_psci_fn(PSCI_0_2_FN_SYSTEM_OFF, 0, 0, 0);
- }
- 
-+#ifdef CONFIG_HIBERNATION
-+static int psci_sys_hibernate(struct sys_off_data *data)
-+{
-+	/*
-+	 * Zero is an acceptable alternative to PSCI_1_3_OFF_TYPE_HIBERNATE_OFF
-+	 * and is supported by hypervisors implementing an earlier version
-+	 * of the pSCI v1.3 spec.
-+	 */
-+	if (system_entering_hibernation())
-+		invoke_psci_fn(PSCI_FN_NATIVE(1_3, SYSTEM_OFF2),
-+			       0 /*PSCI_1_3_OFF_TYPE_HIBERNATE_OFF*/, 0, 0);
-+	return NOTIFY_DONE;
-+}
-+
-+static int __init psci_hibernate_init(void)
-+{
-+	if (psci_system_off2_hibernate_supported) {
-+		/* Higher priority than EFI shutdown, but only for hibernate */
-+		register_sys_off_handler(SYS_OFF_MODE_POWER_OFF,
-+					 SYS_OFF_PRIO_FIRMWARE + 2,
-+					 psci_sys_hibernate, NULL);
-+	}
-+	return 0;
-+}
-+subsys_initcall(psci_hibernate_init);
-+#endif
-+
- static int psci_features(u32 psci_func_id)
- {
- 	return invoke_psci_fn(PSCI_1_0_FN_PSCI_FEATURES,
-@@ -364,6 +392,7 @@ static const struct {
- 	PSCI_ID_NATIVE(1_1, SYSTEM_RESET2),
- 	PSCI_ID(1_1, MEM_PROTECT),
- 	PSCI_ID_NATIVE(1_1, MEM_PROTECT_CHECK_RANGE),
-+	PSCI_ID_NATIVE(1_3, SYSTEM_OFF2),
- };
- 
- static int psci_debugfs_read(struct seq_file *s, void *data)
-@@ -525,6 +554,18 @@ static void __init psci_init_system_reset2(void)
- 		psci_system_reset2_supported = true;
- }
- 
-+static void __init psci_init_system_off2(void)
-+{
-+	int ret;
-+
-+	ret = psci_features(PSCI_FN_NATIVE(1_3, SYSTEM_OFF2));
-+	if (ret < 0)
-+		return;
-+
-+	if (ret & PSCI_1_3_OFF_TYPE_HIBERNATE_OFF)
-+		psci_system_off2_hibernate_supported = true;
-+}
-+
- static void __init psci_init_system_suspend(void)
- {
- 	int ret;
-@@ -655,6 +696,7 @@ static int __init psci_probe(void)
- 		psci_init_cpu_suspend();
- 		psci_init_system_suspend();
- 		psci_init_system_reset2();
-+		psci_init_system_off2();
- 		kvm_init_hyp_services();
- 	}
- 
-diff --git a/kernel/power/hibernate.c b/kernel/power/hibernate.c
-index e35829d36039..1f87aa01ba44 100644
---- a/kernel/power/hibernate.c
-+++ b/kernel/power/hibernate.c
-@@ -685,8 +685,11 @@ static void power_down(void)
- 		}
- 		fallthrough;
- 	case HIBERNATION_SHUTDOWN:
--		if (kernel_can_power_off())
-+		if (kernel_can_power_off()) {
-+			entering_platform_hibernation = true;
- 			kernel_power_off();
-+			entering_platform_hibernation = false;
-+		}
- 		break;
- 	}
- 	kernel_halt();
+diff --git a/Documentation/driver-api/mailbox.rst b/Documentation/driver-api/mailbox.rst
+deleted file mode 100644
+index 0ed95009cc30..000000000000
+--- a/Documentation/driver-api/mailbox.rst
++++ /dev/null
+@@ -1,129 +0,0 @@
+-============================
+-The Common Mailbox Framework
+-============================
+-
+-:Author: Jassi Brar <jaswinder.singh@linaro.org>
+-
+-This document aims to help developers write client and controller
+-drivers for the API. But before we start, let us note that the
+-client (especially) and controller drivers are likely going to be
+-very platform specific because the remote firmware is likely to be
+-proprietary and implement non-standard protocol. So even if two
+-platforms employ, say, PL320 controller, the client drivers can't
+-be shared across them. Even the PL320 driver might need to accommodate
+-some platform specific quirks. So the API is meant mainly to avoid
+-similar copies of code written for each platform. Having said that,
+-nothing prevents the remote f/w to also be Linux based and use the
+-same api there. However none of that helps us locally because we only
+-ever deal at client's protocol level.
+-
+-Some of the choices made during implementation are the result of this
+-peculiarity of this "common" framework.
+-
+-
+-
+-Controller Driver (See include/linux/mailbox_controller.h)
+-==========================================================
+-
+-
+-Allocate mbox_controller and the array of mbox_chan.
+-Populate mbox_chan_ops, except peek_data() all are mandatory.
+-The controller driver might know a message has been consumed
+-by the remote by getting an IRQ or polling some hardware flag
+-or it can never know (the client knows by way of the protocol).
+-The method in order of preference is IRQ -> Poll -> None, which
+-the controller driver should set via 'txdone_irq' or 'txdone_poll'
+-or neither.
+-
+-
+-Client Driver (See include/linux/mailbox_client.h)
+-==================================================
+-
+-
+-The client might want to operate in blocking mode (synchronously
+-send a message through before returning) or non-blocking/async mode (submit
+-a message and a callback function to the API and return immediately).
+-
+-::
+-
+-	struct demo_client {
+-		struct mbox_client cl;
+-		struct mbox_chan *mbox;
+-		struct completion c;
+-		bool async;
+-		/* ... */
+-	};
+-
+-	/*
+-	* This is the handler for data received from remote. The behaviour is purely
+-	* dependent upon the protocol. This is just an example.
+-	*/
+-	static void message_from_remote(struct mbox_client *cl, void *mssg)
+-	{
+-		struct demo_client *dc = container_of(cl, struct demo_client, cl);
+-		if (dc->async) {
+-			if (is_an_ack(mssg)) {
+-				/* An ACK to our last sample sent */
+-				return; /* Or do something else here */
+-			} else { /* A new message from remote */
+-				queue_req(mssg);
+-			}
+-		} else {
+-			/* Remote f/w sends only ACK packets on this channel */
+-			return;
+-		}
+-	}
+-
+-	static void sample_sent(struct mbox_client *cl, void *mssg, int r)
+-	{
+-		struct demo_client *dc = container_of(cl, struct demo_client, cl);
+-		complete(&dc->c);
+-	}
+-
+-	static void client_demo(struct platform_device *pdev)
+-	{
+-		struct demo_client *dc_sync, *dc_async;
+-		/* The controller already knows async_pkt and sync_pkt */
+-		struct async_pkt ap;
+-		struct sync_pkt sp;
+-
+-		dc_sync = kzalloc(sizeof(*dc_sync), GFP_KERNEL);
+-		dc_async = kzalloc(sizeof(*dc_async), GFP_KERNEL);
+-
+-		/* Populate non-blocking mode client */
+-		dc_async->cl.dev = &pdev->dev;
+-		dc_async->cl.rx_callback = message_from_remote;
+-		dc_async->cl.tx_done = sample_sent;
+-		dc_async->cl.tx_block = false;
+-		dc_async->cl.tx_tout = 0; /* doesn't matter here */
+-		dc_async->cl.knows_txdone = false; /* depending upon protocol */
+-		dc_async->async = true;
+-		init_completion(&dc_async->c);
+-
+-		/* Populate blocking mode client */
+-		dc_sync->cl.dev = &pdev->dev;
+-		dc_sync->cl.rx_callback = message_from_remote;
+-		dc_sync->cl.tx_done = NULL; /* operate in blocking mode */
+-		dc_sync->cl.tx_block = true;
+-		dc_sync->cl.tx_tout = 500; /* by half a second */
+-		dc_sync->cl.knows_txdone = false; /* depending upon protocol */
+-		dc_sync->async = false;
+-
+-		/* ASync mailbox is listed second in 'mboxes' property */
+-		dc_async->mbox = mbox_request_channel(&dc_async->cl, 1);
+-		/* Populate data packet */
+-		/* ap.xxx = 123; etc */
+-		/* Send async message to remote */
+-		mbox_send_message(dc_async->mbox, &ap);
+-
+-		/* Sync mailbox is listed first in 'mboxes' property */
+-		dc_sync->mbox = mbox_request_channel(&dc_sync->cl, 0);
+-		/* Populate data packet */
+-		/* sp.abc = 123; etc */
+-		/* Send message to remote in blocking mode */
+-		mbox_send_message(dc_sync->mbox, &sp);
+-		/* At this point 'sp' has been sent */
+-
+-		/* Now wait for async chan to be done */
+-		wait_for_completion(&dc_async->c);
+-	}
 -- 
-2.44.0
+2.39.3 (Apple Git-146)
 
 
