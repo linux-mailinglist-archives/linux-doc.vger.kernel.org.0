@@ -1,64 +1,65 @@
-Return-Path: <linux-doc+bounces-28140-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28142-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id E451B9A6E69
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Oct 2024 17:41:10 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 715739A6E70
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Oct 2024 17:42:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8E7421F2455F
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Oct 2024 15:41:10 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0F9EDB21C7B
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Oct 2024 15:42:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0FF98131182;
-	Mon, 21 Oct 2024 15:41:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 003A61C3F3E;
+	Mon, 21 Oct 2024 15:41:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="Ye9KiAH7"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="b7Kwv6qM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60B5E1C3F3D;
-	Mon, 21 Oct 2024 15:41:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F18A1C3F09;
+	Mon, 21 Oct 2024 15:41:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1729525269; cv=none; b=j8D68C/Gr844p3rw6AkgNoX6I3UBGuJthPBm1zcCyACfrqLvhUC2Xo+akXwdL01HMocRQf6VW+dQOZBjFcQuwEwh9ewrZLBAZ/gj41e+fJpzTSIE9tV5MFXK2c30OvtQ/1uw+PSeKGoe9QTCQdzFCaD7l1fY+SZ8cA7cKS06jZg=
+	t=1729525318; cv=none; b=lqJ04t0aCqBZTU33TiKQmYayz4jFWYIbRpsM+OqBd3pIP4QVP7OHRPAVPG91TdPRg+phRI6dA0ovPFdu98WVLgJvu5rQpT5Q4bK0ye0koSTLWHa8U50DZW/2t3zHUw5NjSnZeaprb6rH90cRFZA8H3xLtbshQprQUeW6uQwl+a0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1729525269; c=relaxed/simple;
-	bh=G9g+40I8y3M6ZPqDqPCDEioYPdPdVJlcAMLaxbn18jQ=;
+	s=arc-20240116; t=1729525318; c=relaxed/simple;
+	bh=FMpS0Lsl+VBRqbb3k6riNLLqD+xLpIh15GzMW5SXq7s=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=GoqTO0T4nXP4++5kL1fLJwQK41f9Tlzqd8GloSFGrxHFoWAeImign9ZKImeW7cnn/j5eIJy+fGOO7uunEf50Gn6BXb1cCvPCocpjYUd3ueFNKX41BuFiYrt8cMK6KkhLf2ZH8GQdI4dntdxMZlZdqw6eZsn1SZraLELCwFb/G6M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=Ye9KiAH7; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=rAgaPw9c/kkBaCoBJE/YPRUU0vVOtZTht0r6NW5vPRo2NdOAFAA6WBzySEJ47efRR2Q0pXtMum6mktlUR+Cq0c2DIll7F7ivvgVB/ft69woUUe8mQaMKnzp0YDHnpACDqY/jhVGMWL9kJn85P+D6+7wUjGwQnOLptN/Xcgaf77E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=b7Kwv6qM; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 8EC2042B3D
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9E76842B3D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1729525266; bh=ObyUSrRbCbrFOSElhJg5GzVNZKZY84H+OFfgijxbNy8=;
+	t=1729525316; bh=yHZtiOPkYumw5Q6y1t2bZkvKcfsinMNcU7MREGar9ng=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=Ye9KiAH7hiuBxzbb3obwZA9Kjr+0PSpvkkUJ4fKy+0WhYP9fD8BEjlD6MrLOGhqSc
-	 sW2z9Cdr+KMwB6Owu/MZIZxoz/nYSlvqQnPtbQTvijg6nOvjghErkFMjKYwgBtACnc
-	 mR34yM7IT8xnNIMnXv5HT1PcVl1kx7IN1l31/VjpC5n8Dq1201fLmElDgwlLxKoBbz
-	 zgQe/QbW20uF1k10aQJSXJkB1gqmnZ2eMzGeIx8T/z6YEfyHn1nuuZhB8WhAKebdJQ
-	 Hcyn4ELq1j6cVCnbt5EcXBhJd2KUklckxA3DwmUSMhfsZ4ZF1hIAqgriXkvXONWs+x
-	 KiatALe7XZgww==
+	b=b7Kwv6qMQ6XADaK6eCKoTvN9mnCOWpR3i4Y9zQ79ciUTkEyeCa7XIOxvXpTrOBg18
+	 xI39/1gRkz/dRrK3XiYfKccVdqLYg+DGSAcx4DqH1XN8VOWgKZ9zDpK5aiaOW2O+Si
+	 LS/JAc2tMiIFeI9M4ChKNW/Pxy6tmR4d8I9aF4MDEE/zIf5Q+j8FNCMaeHLeTFwk63
+	 5Zc+UVPSDQVtY84mgNYV58cuSIRskXD+kpcWnmI+/cJevf13h1NsXut7lI3DBKSEig
+	 uu3xsYphcfbzCW7JHwLy2cP10WgrKkJSNP2luvwdRfphG8eHUuxSBLQIEL3l418A7I
+	 bPgYE0wB/iVlQ==
 Received: from localhost (unknown [IPv6:2601:280:5e00:625::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 8EC2042B3D;
-	Mon, 21 Oct 2024 15:41:06 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 9E76842B3D;
+	Mon, 21 Oct 2024 15:41:56 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
 To: Dongliang Mu <dzm91@hust.edu.cn>, si.yanteng@linux.dev, Alex Shi
- <alexs@kernel.org>, Yanteng Si <siyanteng@loongson.cn>, Dongliang Mu
- <dzm91@hust.edu.cn>
+ <alexs@kernel.org>, Yanteng Si <siyanteng@loongson.cn>, SeongJae Park
+ <sj@kernel.org>, Dongliang Mu <dzm91@hust.edu.cn>, Federico Vaga
+ <federico.vaga@vaga.pv.it>, Thorsten Blum <thorsten.blum@toblux.com>
 Cc: hust-os-kernel-patches@googlegroups.com, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org
 Subject: Re: [PATCH v2] docs/zh_CN: update the translation of
- process/email-clients.rst
-In-Reply-To: <20241018014908.3783976-1-dzm91@hust.edu.cn>
-References: <20241018014908.3783976-1-dzm91@hust.edu.cn>
-Date: Mon, 21 Oct 2024 09:41:05 -0600
-Message-ID: <87a5extqem.fsf@trenco.lwn.net>
+ process/coding-style.rst
+In-Reply-To: <20241018014609.3781089-1-dzm91@hust.edu.cn>
+References: <20241018014609.3781089-1-dzm91@hust.edu.cn>
+Date: Mon, 21 Oct 2024 09:41:55 -0600
+Message-ID: <875xpltqd8.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,26 +70,20 @@ Content-Type: text/plain
 
 Dongliang Mu <dzm91@hust.edu.cn> writes:
 
-> Update to commit 91031ca349ee ("docs: improve comment consistency in
-> .muttrc example configuration")
+> Update to commit c5d436f05a3f ("docs/process: fix typos")
 >
 > scripts/checktransupdate.py reports:
 >
-> Documentation/translations/zh_CN/process/email-clients.rst
-> commit 91031ca349ee ("docs: improve comment consistency in .muttrc
-> example configuration")
-> commit 7fe7de7be828 ("Docs/process/email-clients: Document HacKerMaiL")
-> commit 9c03bc90c065 ("Documentation: process: Revert "Document suitability
-> of Proton Mail for kernel development"")
-> commit 1d2ed9234c85 ("Documentation: process: Document suitability of
-> Proton Mail for kernel development")
-> 4 commits needs resolving in total
+> Documentation/translations/zh_CN/process/coding-style.rst
+> commit c5d436f05a3f ("docs/process: fix typos")
+> commit 82b8000c28b5 ("net: drop special comment style")
+> 2 commits needs resolving in total
 >
 > Signed-off-by: Dongliang Mu <dzm91@hust.edu.cn>
 > ---
 > v1->v2: revise the script name
->  .../translations/zh_CN/process/email-clients.rst         | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
+>  .../translations/zh_CN/process/coding-style.rst       | 11 -----------
+>  1 file changed, 11 deletions(-)
 
 Applied, thanks.
 
