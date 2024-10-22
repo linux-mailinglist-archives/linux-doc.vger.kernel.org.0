@@ -1,85 +1,162 @@
-Return-Path: <linux-doc+bounces-28211-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28213-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DC2D9A9580
-	for <lists+linux-doc@lfdr.de>; Tue, 22 Oct 2024 03:39:10 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 888DA9A958C
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Oct 2024 03:41:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 99DD1B2265F
-	for <lists+linux-doc@lfdr.de>; Tue, 22 Oct 2024 01:39:07 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id DE127B229F5
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Oct 2024 01:41:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CA4101E51D;
-	Tue, 22 Oct 2024 01:38:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D8C485C5E;
+	Tue, 22 Oct 2024 01:40:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="lGocdDBy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 161CD2AE7C;
-	Tue, 22 Oct 2024 01:38:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.188
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B0DC25760;
+	Tue, 22 Oct 2024 01:40:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1729561137; cv=none; b=RMofTQUzLZJiNGWAEewCsTRJI6fboQTY2SGSN9BUhIme5t6bQU3IHe8jhOErAGjJoKagCxL8YNL+fopv9IbIJWN3vS2gMKWziqpMdrZMmnmm0DBVbr/NuoGLVQoHINDC3GU17I0AnbcFW1LbHddkMcxzHRgUhSzJvO1U9lXiGOM=
+	t=1729561250; cv=none; b=pFTDN3ggz/mw2IGIKEClgjRUQHL+e9iPNKyxr1VeYFeIfi2w5mtRgTFf9zvbgynUSvCb3hj3WsC4RDGT8LJjCoM6oar+zIryltEl34AlXLCF9aoQ5AB0hVjB5i0925R/wxJ7+eBoPIkSVAWZZvMWF5tnrz5z8vLMnClNM190HFo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1729561137; c=relaxed/simple;
-	bh=EAE6dlldhalsC3j55bduOLp/lHd3aELx7JoM3R38/Qc=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=IUF2sbDq/T+tCWCOXgu2DJwXkZMQEkE3bKaEdm9HZ7vJP5CcHlw2+KsdQ+gbOIjl+vEbVFGlzmtdZBB1trcAQs1TfghGqVGHe57pn18X8RhyFuK/4UxXT1GUr/15gGea/Me4HcgWTAbEqWWd9Zk+R/EznURnx+qFgwOglpT1QVw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=45.249.212.188
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.19.163.252])
-	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4XXZXl0r7RzpX9R;
-	Tue, 22 Oct 2024 09:36:55 +0800 (CST)
-Received: from dggpeml500022.china.huawei.com (unknown [7.185.36.66])
-	by mail.maildlp.com (Postfix) with ESMTPS id 506611800DB;
-	Tue, 22 Oct 2024 09:38:52 +0800 (CST)
-Received: from huawei.com (10.90.53.73) by dggpeml500022.china.huawei.com
- (7.185.36.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Tue, 22 Oct
- 2024 09:38:52 +0800
-From: Hongbo Li <lihongbo22@huawei.com>
-To: <dhowells@redhat.com>, <jlayton@kernel.org>, <corbet@lwn.net>
-CC: <linux-fsdevel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<lihongbo22@huawei.com>
-Subject: [PATCH] doc: correcting the debug path for cachefiles
-Date: Tue, 22 Oct 2024 09:38:12 +0800
-Message-ID: <20241022013812.2880883-1-lihongbo22@huawei.com>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1729561250; c=relaxed/simple;
+	bh=Gt/PVUYQV6El5J261GXUty1BMmEhHEOaIC9LhPGHzqE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=VVfLCiX6uhmt93fvn0yYPsEalXqw59dn+RNaWrCYcTq/soKAuG5BrYRwzPl2wT+768wsU/oX2uT+5oWkX0hzyEosz3b4324uupm+OYflsfMkWmHKYvUcmm9o/qGzDNaLuhxDoO8ahFVXvb5C6pNx/d8l7ouyCp8yZBPckfDflr8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=lGocdDBy; arc=none smtp.client-ip=198.175.65.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1729561249; x=1761097249;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=Gt/PVUYQV6El5J261GXUty1BMmEhHEOaIC9LhPGHzqE=;
+  b=lGocdDByzxcPfYUtvyGW1Sk7Fu1P3xcxx5EGmbImsnqasOf5amaypGBc
+   lgwvDfdIiMngAZafLd986N++AQq81ycoUvzZ9ao/oZ/hIOGwtpAkzzQ0X
+   tD8a8/0H2uSf9Kw1IM+3WIfU0teIgk4f2arhpoHVhTErX6B6AfAT2fv9V
+   GGUGIjelKNZyeiAU0NZA7UiXfkpeVG68sQq5e66QEQ1nfH6Di/s9fF4yy
+   ZW/0S5+AiDWOUo8voN+0Y3ipBJp0Yctf3sqfFvX5eE3Dm26DGeUHkpcc2
+   xxGsr9Q61j81tryGDBxwDEtOj8SDS/oXudLKFGQgifo7yLZdRpDplv9Ue
+   A==;
+X-CSE-ConnectionGUID: W43EMA1WQCO7DOg3BVq4vg==
+X-CSE-MsgGUID: Fa4pKtEpSlGWRjzSpW/eLQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11222"; a="39614924"
+X-IronPort-AV: E=Sophos;i="6.11,199,1725346800"; 
+   d="scan'208";a="39614924"
+Received: from orviesa003.jf.intel.com ([10.64.159.143])
+  by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2024 18:40:48 -0700
+X-CSE-ConnectionGUID: Ov7jbqTHRKKh7fWxhpNGLQ==
+X-CSE-MsgGUID: z6t+j8m+Q32GhMOy8xLdTQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.11,199,1725346800"; 
+   d="scan'208";a="84517902"
+Received: from aschofie-mobl2.amr.corp.intel.com (HELO aschofie-mobl2.lan) ([10.125.110.129])
+  by ORVIESA003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2024 18:40:47 -0700
+Date: Mon, 21 Oct 2024 18:40:45 -0700
+From: Alison Schofield <alison.schofield@intel.com>
+To: Ira Weiny <ira.weiny@intel.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+	Petr Mladek <pmladek@suse.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+	Sergey Senozhatsky <senozhatsky@chromium.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Davidlohr Bueso <dave@stgolabs.net>,
+	Jonathan Cameron <jonathan.cameron@huawei.com>,
+	Dave Jiang <dave.jiang@intel.com>,
+	Vishal Verma <vishal.l.verma@intel.com>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Fan Ni <fan.ni@samsung.com>, Bagas Sanjaya <bagasdotme@gmail.com>,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-cxl@vger.kernel.org
+Subject: Re: [PATCH 3/3] cxl/cdat: Use %pra for dpa range outputs
+Message-ID: <ZxcCnbV8fsSbTeGf@aschofie-mobl2.lan>
+References: <20241018-cxl-pra-v1-0-7f49ba58208b@intel.com>
+ <20241018-cxl-pra-v1-3-7f49ba58208b@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- dggpeml500022.china.huawei.com (7.185.36.66)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241018-cxl-pra-v1-3-7f49ba58208b@intel.com>
 
-The original debug path is under "/sys/modules", that's
-wrong. The real path in kernel is "/sys/module". So we
-can correct it.
+On Fri, Oct 18, 2024 at 02:46:26PM -0500, Ira Weiny wrote:
+> Now that there is a printf specifier for struct range use it to enhance
+> the debug output of CDAT data.
+> 
+> Signed-off-by: Ira Weiny <ira.weiny@intel.com>
+> ---
+>  drivers/cxl/core/cdat.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/cxl/core/cdat.c b/drivers/cxl/core/cdat.c
+> index ef1621d40f05..438869df241a 100644
+> --- a/drivers/cxl/core/cdat.c
+> +++ b/drivers/cxl/core/cdat.c
+> @@ -247,8 +247,8 @@ static void update_perf_entry(struct device *dev, struct dsmas_entry *dent,
+>  	dpa_perf->dpa_range = dent->dpa_range;
+>  	dpa_perf->qos_class = dent->qos_class;
+>  	dev_dbg(dev,
+> -		"DSMAS: dpa: %#llx qos: %d read_bw: %d write_bw %d read_lat: %d write_lat: %d\n",
+> -		dent->dpa_range.start, dpa_perf->qos_class,
+> +		"DSMAS: dpa: %pra qos: %d read_bw: %d write_bw %d read_lat: %d write_lat: %d\n",
+> +		&dent->dpa_range, dpa_perf->qos_class,
+>  		dent->coord[ACCESS_COORDINATE_CPU].read_bandwidth,
+>  		dent->coord[ACCESS_COORDINATE_CPU].write_bandwidth,
+>  		dent->coord[ACCESS_COORDINATE_CPU].read_latency,
+> @@ -279,8 +279,8 @@ static void cxl_memdev_set_qos_class(struct cxl_dev_state *cxlds,
+>  			 range_contains(&pmem_range, &dent->dpa_range))
+>  			update_perf_entry(dev, dent, &mds->pmem_perf);
+>  		else
+> -			dev_dbg(dev, "no partition for dsmas dpa: %#llx\n",
+> -				dent->dpa_range.start);
+> +			dev_dbg(dev, "no partition for dsmas dpa: %pra\n",
+> +				&dent->dpa_range);
+>  	}
+>  }
 
-Signed-off-by: Hongbo Li <lihongbo22@huawei.com>
----
- Documentation/filesystems/caching/cachefiles.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This is a bit different than what I expected to find as the initial use case
+because it wasn't printing a range. With this change we go from printing only
+the .start to printing the range. Seems the wording of the dev_ message could
+change too since 'dpa' has been replaced with a 'dpa range'.
 
-diff --git a/Documentation/filesystems/caching/cachefiles.rst b/Documentation/filesystems/caching/cachefiles.rst
-index e04a27bdbe19..b3ccc782cb3b 100644
---- a/Documentation/filesystems/caching/cachefiles.rst
-+++ b/Documentation/filesystems/caching/cachefiles.rst
-@@ -115,7 +115,7 @@ set up cache ready for use.  The following script commands are available:
- 
- 	This mask can also be set through sysfs, eg::
- 
--		echo 5 >/sys/modules/cachefiles/parameters/debug
-+		echo 5 > /sys/module/cachefiles/parameters/debug
- 
- 
- Starting the Cache
--- 
-2.34.1
+There are a few places that print the range now and can be cleaned up w this
+specifier. Those are the real 'uglies' like this:
 
+diff --git a/drivers/cxl/core/hdm.c b/drivers/cxl/core/hdm.c
+index 223c273c0cd1..85a121b7b2b5 100644
+--- a/drivers/cxl/core/hdm.c
++++ b/drivers/cxl/core/hdm.c
+@@ -941,8 +941,8 @@ static int init_hdm_decoder(struct cxl_port *port, struct cxl_decoder *cxld,
+                return rc;
+        }
+
+-       dev_dbg(&port->dev, "decoder%d.%d: range: %#llx-%#llx iw: %d ig: %d\n",
+-               port->id, cxld->id, cxld->hpa_range.start, cxld->hpa_range.end,
++       dev_dbg(&port->dev, "decoder%d.%d: range: %pra iw: %d ig: %d\n",
++               port->id, cxld->id, &cxld->hpa_range,
+                cxld->interleave_ways, cxld->interleave_granularity);
+
+
+I guess you could (ducks) pick them all up here, or we can leave it
+for a future cleanup, or we can just say no cleanups and we'll use
+%pra going forward only.
+
+-- Alison
+
+>  
+> 
+> -- 
+> 2.47.0
+> 
 
