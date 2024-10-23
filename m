@@ -1,311 +1,486 @@
-Return-Path: <linux-doc+bounces-28379-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28377-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91BE09AD034
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Oct 2024 18:25:06 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AD6E9AD02C
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Oct 2024 18:24:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id D93B9B21534
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Oct 2024 16:25:03 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3C5B51C21BEB
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Oct 2024 16:24:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A04D21D89FA;
-	Wed, 23 Oct 2024 16:22:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 094A51CEEB5;
+	Wed, 23 Oct 2024 16:22:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="k4kc1p9l"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="uElm/43r"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (mail-mw2nam12on2045.outbound.protection.outlook.com [40.107.244.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D5461D0420;
-	Wed, 23 Oct 2024 16:22:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1729700553; cv=none; b=uNaf5tv+NNpOUluvqvs8MSqh7y5AOn6uTChem3ddsqvIInYM0lfq9cCNGCrW3p3wHVs1J7t0ENPLJKFYTawUiC6gMZui0afjhGXcpn2WNkuarNzq77UDjr0mKvewuk+byYJZakASFqE14HRXi0wtdOOytZabCjfPK4NPF3f0mDg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1729700553; c=relaxed/simple;
-	bh=++qKOZJo27KGohGX0xqmoaGV0Ljw/o1512tvlgX9ZQM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=V+bm5S7uClwhgeA2SPRNcZ6HJHeO2BVkNecybemJBObz0xwDFLfYbLoakLBQ8F/3TJIuIVNq2bWeng5Ux6GfDQinQh6KQJZuhuy6Wd0wvKN7kRR+9huo+bcIPAAZ9FFEN/RjrkYNoNU54KrcXeFatQa9RshP4J+YtJpkeFQ9PUo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=k4kc1p9l; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49N9emoX029512;
-	Wed, 23 Oct 2024 16:21:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	O05BUXY+Iyyfw6rJeI+5Tllnngy7zhbX4JR2+pf7q5Q=; b=k4kc1p9lhXA5+/0k
-	dscB1G5WAXkiRm4sA74sdWLSXlFD4uIXrVfjUtQHhsV1b41dKBHmukNKXv8YWrI7
-	pjCR8COFqk8k2RM5oeIdrs3VIsexTfogdvpUHlfrXvx/fvsi/SQgmwrTYmvY/Li0
-	bGfrkl+CpTv3u1lL/kpPSjDJkrPuChEtBuFIkF9mARWTlKKglL7sGNW88O/MxHGJ
-	3Ml4HueCJIpsrr7GAH42ZbLuU5/9GAMjnVWjR6neafEYk2aKIQaW1jHjeJZ+HI1Q
-	BvjLnGF6lUv4y+Ybj++KcA1DFCRTyoKxm9cvh7LbFo2zVKmb+u2Juh9OKY8PG674
-	N45H1Q==
-Received: from nalasppmta03.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 42em3w2urq-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 23 Oct 2024 16:21:48 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
-	by NALASPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 49NGLlYG022401
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 23 Oct 2024 16:21:47 GMT
-Received: from [10.216.22.63] (10.80.80.8) by nalasex01a.na.qualcomm.com
- (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Wed, 23 Oct
- 2024 09:21:41 -0700
-Message-ID: <a4055cb8-3067-44a5-a3bb-8fe264b03b5a@quicinc.com>
-Date: Wed, 23 Oct 2024 21:51:34 +0530
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16DDE1CF5DF;
+	Wed, 23 Oct 2024 16:22:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.244.45
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1729700533; cv=fail; b=srNyFe8fKu8YL6S42zHD78fR5UxrQRsonKzC33SFFSs6ZgSjsMsw3ffB5H/X+Oi+9oi4aXRp+pnJUDMjR37/WNiCiTO0xwsC9/V66m0gM5eZaDqCWaQ9YE2OfH1jlVpOAb+z5hnkVPUIh6l7WJIAzYYiPXkC028wpSrIS9FQY7I=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1729700533; c=relaxed/simple;
+	bh=TJwdEE4HIlMn6Pg+0QOOHyvjt3rMVGdyJXMXXdWs4JE=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=S8O15YIaoDadC1Qi/dxswey16l6DAaZkb1bQXBPeXxAYOXstoSYZe+H0sVNwLmXEr5KC+iz8+HtOXXq6XeHVizks1aAaURAhmjVnfaBHiATXxl5dxOrEE+66hxIjZDjHIlvnNQDeZzkhvgTJ7NTV88d8V7RV4Y+D2khrazXpQlw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=uElm/43r; arc=fail smtp.client-ip=40.107.244.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=P26qulQQJsD29+OptC55NmNMLrW0pclOWKp6+TtbtPVz2NFlB1kAnpA7EgdluQvRJccocV+MYDnKryHoln7vcDAXH/4DtMky43vnkXDGBYBeARdAQwue9F4xQi35JkRM3lufKdIsARB9G9doHymdN16RL7ihBBM0sW2NkhPJjDr31vNgUmGeFkLam+8R/qnqAp1tCCjyCRzW5Si2iC5K+qBdT5JAA1h0d4QS+QlWGoOAOO194BfF2QBJ4XGbjucSHaVbpTupsg1HPAlV5svghypOKDLBuKAIs+HflXUKmfm3Tk+JWMQyH2dTBkTcV3m6QkN8yPg2oIU+gVUBC9ZxtA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GIrJy3QSg1/3v97/H+6Im0MTit75W0XgVuVvs3Z9u4w=;
+ b=PQFvOMGkB6K/izKIUDLwXJNBxRp/GlErwUpOsFENVVSxcDBJPPT9Vbok/TUBhCC4oyC18ttOpRzGg81iSY4K6q1Vico16SMVJHpf4laA3oD1C6OSwai2F4B5HVKFG1eWjd8JL/9PZww4fEeX5P6Z9ea5nOIb8gCp2LcVkgD9cvXK3liIc8mkSrq+J/07o08uOj8v7gwV/HKmk86Cc312xKkbqNiqO6Ekii2if4PtdH3vtoH3DSm34CcjoieuAjbpmqLJsRhKjK+GsUcJVQkbjRjrqAtvn3huumkQa+zhfDjdeNp5L2RQwEVp5L57y5+N6kZmO6E5ehXpH1OKWs4V/Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GIrJy3QSg1/3v97/H+6Im0MTit75W0XgVuVvs3Z9u4w=;
+ b=uElm/43ruFQhZksmSQg+DGf3DPJJIUKeIzmhcqTStonRq4/hm/4SvpcYVowPJXyNE3lvSs87nShlDaxFWGRZFilIklFwzkwvRCm+zbWSb97nFCKakJwapu2AP+EFJJ+eu+OUy8T3MizZC63XPFjJf8zSLUJsPhGfywivUPFKf9fDnXuy/GOPzEg218ytsrdMhwyTZn6jStYYTH19EBjhP6V1lO9PMhpRW38hfxmuxTQbjzfNgeJsDD6IKdyIYNOkn249rp9YJBjHQwCpJBXiuWv/43Fe08beV7xCqAk7qRdr07MZuJHsay0OUPKKVQaNob2uU/KRo3/Fl12rZ48/3g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DS7PR12MB9473.namprd12.prod.outlook.com (2603:10b6:8:252::5) by
+ MN6PR12MB8591.namprd12.prod.outlook.com (2603:10b6:208:471::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.18; Wed, 23 Oct
+ 2024 16:22:07 +0000
+Received: from DS7PR12MB9473.namprd12.prod.outlook.com
+ ([fe80::5189:ecec:d84a:133a]) by DS7PR12MB9473.namprd12.prod.outlook.com
+ ([fe80::5189:ecec:d84a:133a%7]) with mapi id 15.20.8093.018; Wed, 23 Oct 2024
+ 16:22:07 +0000
+From: Zi Yan <ziy@nvidia.com>
+To: Usama Arif <usamaarif642@gmail.com>
+Cc: akpm@linux-foundation.org, linux-mm@kvack.org, hannes@cmpxchg.org,
+ riel@surriel.com, shakeel.butt@linux.dev, roman.gushchin@linux.dev,
+ yuzhao@google.com, david@redhat.com, npache@redhat.com, baohua@kernel.org,
+ ryan.roberts@arm.com, rppt@kernel.org, willy@infradead.org,
+ cerasuolodomenico@gmail.com, ryncsn@gmail.com, corbet@lwn.net,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ kernel-team@meta.com, Shuang Zhai <zhais@google.com>
+Subject: Re: [PATCH v5 2/6] mm: remap unused subpages to shared zeropage when
+ splitting isolated thp
+Date: Wed, 23 Oct 2024 12:21:57 -0400
+X-Mailer: MailMate (1.14r6065)
+Message-ID: <4B7449C4-D2B8-4285-973C-97178C09CE7E@nvidia.com>
+In-Reply-To: <20240830100438.3623486-3-usamaarif642@gmail.com>
+References: <20240830100438.3623486-1-usamaarif642@gmail.com>
+ <20240830100438.3623486-3-usamaarif642@gmail.com>
+Content-Type: multipart/signed;
+ boundary="=_MailMate_720C5D8A-8AE9-4AF0-AFD0-ABF2C61ED944_=";
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+X-ClientProxiedBy: IA1P220CA0012.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:208:461::16) To BL4PR12MB9478.namprd12.prod.outlook.com
+ (2603:10b6:208:58e::9)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 00/11] Preemption support for A7XX
-To: Rob Clark <robdclark@gmail.com>
-CC: <g@hu-akhilpo-hyd.qualcomm.com>, <neil.armstrong@linaro.org>,
-        "Antonino
- Maniscalco" <antomani103@gmail.com>,
-        Sean Paul <sean@poorly.run>,
-        "Abhinav
- Kumar" <quic_abhinavk@quicinc.com>,
-        Dmitry Baryshkov
-	<dmitry.baryshkov@linaro.org>,
-        Marijn Suijten
-	<marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, "Daniel
- Vetter" <daniel@ffwll.ch>,
-        Maarten Lankhorst
-	<maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Jonathan Corbet <corbet@lwn.net>, <linux-arm-msm@vger.kernel.org>,
-        <dri-devel@lists.freedesktop.org>, <freedreno@lists.freedesktop.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        Sharat Masetty <smasetty@codeaurora.org>,
-        "Konrad Dybcio" <konradybcio@kernel.org>
-References: <20240917-preemption-a750-t-v4-0-95d48012e0ac@gmail.com>
- <c70392bb-bda1-48c7-824e-23d6f92f54ef@linaro.org>
- <CAF6AEGso-AZhmOb+V_bc6w5Bw4Yz1fhoPOXbC0uoLXQ7QGnLqQ@mail.gmail.com>
- <20240920161425.y5ae2y4h64tsfjjx@hu-akhilpo-hyd.qualcomm.com>
- <CAF6AEGvmfKu2cD5r27KL6KRh8E9PJ1AprR4J8OrrSX+-W0OxNQ@mail.gmail.com>
-Content-Language: en-US
-From: Akhil P Oommen <quic_akhilpo@quicinc.com>
-In-Reply-To: <CAF6AEGvmfKu2cD5r27KL6KRh8E9PJ1AprR4J8OrrSX+-W0OxNQ@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: lLqYS_Uey1Dcw6LH9uHD2gEI7tJVXgnD
-X-Proofpoint-GUID: lLqYS_Uey1Dcw6LH9uHD2gEI7tJVXgnD
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=999
- priorityscore=1501 impostorscore=0 bulkscore=0 lowpriorityscore=0
- clxscore=1011 suspectscore=0 spamscore=0 malwarescore=0 mlxscore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2409260000 definitions=main-2410230101
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS7PR12MB9473:EE_|MN6PR12MB8591:EE_
+X-MS-Office365-Filtering-Correlation-Id: c39c5f68-5b90-4622-2d15-08dcf37ed5ee
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?DPYsiUK2si0rbxXrpJldZckIcbLoeYnLRxDHPyO+0L+UqPnjHkuN514uC9PI?=
+ =?us-ascii?Q?xneLWbin6g6GMm485Em/JwBbb+XWg5WqxhhthSmT/jmZU6WCUWI6sRmTOwWf?=
+ =?us-ascii?Q?YxJB2xUIgG2e1GHMuU0D9X2E9CtdKHuN68mvjv6zUIa/hxzgHTN2GE46jmY2?=
+ =?us-ascii?Q?grqT7bltrYnoUB/DWnW80iDP1mSA1B0gswCV8eTKm7fTEE75Bx9fVFgd71tx?=
+ =?us-ascii?Q?WyNMv9FdeNZ+8XiFqktv+F+L035zxjVQFzgac3Xx/rC11yr69ZUm9dV9/sQz?=
+ =?us-ascii?Q?7BU/NK4kz9fphL651pwPJUI0PAijfAQNq+n47GKjp2ZtOP1jOSPb3obfgtFo?=
+ =?us-ascii?Q?CeYOcZGWUReCIP89YgOwWxIOdoBdKBellmB9qW3pXk41IjMhqlIXRQ7Itbv4?=
+ =?us-ascii?Q?Emp2i1sw63srSjUG2S/Ri4fFIu/QDp93SytCgnWK0J57SSK3CcaiRTOupat5?=
+ =?us-ascii?Q?zf7HRNo015/Iz2ZulLnyx7zmKCAVO95AYjy6elADEgvuN2x/s0rTSV/1f4ko?=
+ =?us-ascii?Q?qpMJoG3uLg5G9KJD+IoC8AAnya0DmAhHDAiGxCewTWVwl2LT26KO9S8WMGmU?=
+ =?us-ascii?Q?TpuB9kpCUQ545AXH/jqwmWBwaX6mKJfGir3lMOrUzC92SkaXR6XQGy6DqD+m?=
+ =?us-ascii?Q?ix+uv5UnUwisUBKcO1773d3+3zmWaiednzGPFU7Mau/tYPapxT6VDLxBTgsC?=
+ =?us-ascii?Q?nOL8XammZ0LWpdzF3DbB0rsyx0ofqgTb6/BVn8jDERM5jpCiBvEO7jqZzvTE?=
+ =?us-ascii?Q?SRpz9bC9Ch3/WciYMHs8VYdlUbHeCkfm3WUQZvqD+r/VKbCV4q8oJNeqhW9c?=
+ =?us-ascii?Q?CcBxjsj5vJEW5IdX2pq/3Scthb4mdgq2lEhrW/78TmJO8UpFsrdYy1CH6AkA?=
+ =?us-ascii?Q?zXcuVLnAq7wF+pd0M0HPVueHIQQLKRsbfrBRrLiY3iLCzj8QS1EUyQlxb60Z?=
+ =?us-ascii?Q?vYKUCppLsxiS1GJrtUJij5kCRxbuoS5EA9EjxuX0+a/QM/k5xnVuqGFx8xsG?=
+ =?us-ascii?Q?JYQv7RkKL7wtHp73x59+/zxQ11btJpm0BRnFJwG8twbMobbvjSewvEID5lLN?=
+ =?us-ascii?Q?3wP8Syqdg3EYxcVrbCUDuuia1C2Aq3/4Iv2Hn5J7VJGi5g3ge/M7Df4eS4fp?=
+ =?us-ascii?Q?qoMT8TzLP0QN1VqA1u/LLN1/hUN4R+iCpMeFToYyu0d155al459DQx/Ig8p1?=
+ =?us-ascii?Q?AJ2wLiBS/mlOQRX9GmwE8Py2elPefW8vXTE1L0JAS4ewpHwf9TrAnlXYUQqt?=
+ =?us-ascii?Q?QvUXwDFF0UsHSsu2brvcwt3tOTil6np1fnU94o5UY2vE6+fqCan9TQDRCR7y?=
+ =?us-ascii?Q?7BeGb5009iSO4A4OnTvW/5WN?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR12MB9473.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?odGoRq6MzQ+aVmdHdC+9ls0azkq5a4AEwXyiA/eRdkQyOIRTPXdViiqC5zOa?=
+ =?us-ascii?Q?ZgXvn+8DLh1o8KkWqwa1bjG2ZPDV9M3/dOeNAr40qm3gVXegi1AJbQvOGscx?=
+ =?us-ascii?Q?er4UwWMDDQSOXXdyYknykn882AssKNcY1RRL4R8FkAYSvB87xC9urPU121wS?=
+ =?us-ascii?Q?fikXc2VToCDfY/hkazjPTlo2b+W5Ebuw826y9iT1845IpLVoUtLn4wrlz0a7?=
+ =?us-ascii?Q?mm3nxBWkrA1WZUxpYmvBp8/2lhNUPbzDnAO2SZpQEAOlD+Uh332CdAyOsjwx?=
+ =?us-ascii?Q?zpwiMxTX98rNwHdaziRaxk9cQygL0tHxpgj5Hfe5BDDpH8VovxHkGe/2g3L1?=
+ =?us-ascii?Q?w+N5tQl5Z+VUFMZv43kqtcdb4ObpJbJJagrCZQ6KLGPo+Y7F4uB8VlXMaUoC?=
+ =?us-ascii?Q?Oo/sFfPhXw4322OUZ5o7qrWAtv0MEt2inFm6DyCqOBh6zzrawVj5BBJrdNa/?=
+ =?us-ascii?Q?kMRRVdPtCVRLuaHUdxTM5sQbsKhBBEslUV6BuRFDdhWRnJB6LYvnv7SRfIqh?=
+ =?us-ascii?Q?79Tc6BEyAbye81kttjzi2DW9cbbSe/jOkXlOfRQybCoXAFozNkEBLTn+U/hD?=
+ =?us-ascii?Q?4Fl4hO+o0RVCfIkCdMiaAUlWjmz4yhYlSZxTMCRiAWsS+R21GiXspGoT707Q?=
+ =?us-ascii?Q?ZkDeVp7JLdD3Am7dWp/CrCieAAoSxJ2+HzzIiMOKCPsnS86AIUJooIMJxR3a?=
+ =?us-ascii?Q?+2/rxBLoByQqsC09h0NFceRPC8sIePaJD0xSLpS9iv4rjIm+4l30alGw7WaD?=
+ =?us-ascii?Q?Ih+hJvPHXvUTaYpCge5IqqrTJX8UxiJ8R9xOhe0jeViXGlQ1fqBafBn8VMoO?=
+ =?us-ascii?Q?9GvKei6QqZjLUxLTbuN60jAgKCLDhj+lp1yDQDRJPcpVk+hYlkaWNVXLHIQt?=
+ =?us-ascii?Q?I8+7dFGshiMHv5ttQe5S0X8MlofFFSoVvzF02STbbZT4u697VfP2uQ4IN2na?=
+ =?us-ascii?Q?CtpIPqKO/CXHc6JQN4BqfDiuw0LORlFgw8blJePDkkACv24GGIcgW1oPYQ/8?=
+ =?us-ascii?Q?kLo/VhgqBIqkrQCi4dQ4MNoCcORzslxbUWamQDjxF5Rpz1xBbwEFTpYmxjS2?=
+ =?us-ascii?Q?UtxQpx/S5Puxe8ZKWjLEq9GZc7xYPddYZBnsDDo2xKY7YNZB30CjKQaTUxHr?=
+ =?us-ascii?Q?QZb7j8yuCYrF8nnOnzw/aayNxUSIuMF4nzl+BJkYiqGHW5uc1XqeE8CdYkx8?=
+ =?us-ascii?Q?ulssTkv7FcRfAzwyWRCoT3bwWeafLx2wRsWY25oVRZtvA5qw80eNnKh6sFCO?=
+ =?us-ascii?Q?jqHBDDZSRKi8Idl443JrpcUEW/Lg+uqb7udYhXz1NGByFL2JgqUSttnT/Ggo?=
+ =?us-ascii?Q?YRyYVzLOEcX7/5Rv3Zn8yL+jDjxtsgtdyuq/+R90MPChBypGQdTk2smLUZzG?=
+ =?us-ascii?Q?hlfYzVk+OfFJ/h4KGHngGzMyS0Shz+yf3MPqJ+NOLIWavcM/0whKnSJ4HXiA?=
+ =?us-ascii?Q?KghOn0dzZMJo1PTqpg+zriOp7pR6wmTR3k318HQLr1qEdECT08+tjbey95ki?=
+ =?us-ascii?Q?BPpLOIX+yF8sgPKnfdtluKtkthNWQRAxDz7TKbz9td1DRNVSEDKHUTkyPITX?=
+ =?us-ascii?Q?v8fB8iEmgtONLk613y6Vs0fcyzxWsR88R3mdrrJB?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c39c5f68-5b90-4622-2d15-08dcf37ed5ee
+X-MS-Exchange-CrossTenant-AuthSource: BL4PR12MB9478.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2024 16:22:07.3707
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: QHWvC2PFr6LmfRA5fFCW5c8UtG1lhcRYGccQsT68M0YMeMt2esXOx5/YzQV8sb5R
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR12MB8591
 
-On 10/22/2024 8:35 PM, Rob Clark wrote:
-> On Fri, Sep 20, 2024 at 9:15 AM Akhil P Oommen <quic_akhilpo@quicinc.com> wrote:
->>
->> On Wed, Sep 18, 2024 at 08:39:30AM -0700, Rob Clark wrote:
->>> On Wed, Sep 18, 2024 at 12:46 AM Neil Armstrong
->>> <neil.armstrong@linaro.org> wrote:
->>>>
->>>> Hi,
->>>>
->>>> On 17/09/2024 13:14, Antonino Maniscalco wrote:
->>>>> This series implements preemption for A7XX targets, which allows the GPU to
->>>>> switch to an higher priority ring when work is pushed to it, reducing latency
->>>>> for high priority submissions.
->>>>>
->>>>> This series enables L1 preemption with skip_save_restore which requires
->>>>> the following userspace patches to function:
->>>>>
->>>>> https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/30544
->>>>>
->>>>> A flag is added to `msm_submitqueue_create` to only allow submissions
->>>>> from compatible userspace to be preempted, therefore maintaining
->>>>> compatibility.
->>>>>
->>>>> Preemption is currently only enabled by default on A750, it can be
->>>>> enabled on other targets through the `enable_preemption` module
->>>>> parameter. This is because more testing is required on other targets.
->>>>>
->>>>> For testing on other HW it is sufficient to set that parameter to a
->>>>> value of 1, then using the branch of mesa linked above, `TU_DEBUG=hiprio`
->>>>> allows to run any application as high priority therefore preempting
->>>>> submissions from other applications.
->>>>>
->>>>> The `msm_gpu_preemption_trigger` and `msm_gpu_preemption_irq` traces
->>>>> added in this series can be used to observe preemption's behavior as
->>>>> well as measuring preemption latency.
->>>>>
->>>>> Some commits from this series are based on a previous series to enable
->>>>> preemption on A6XX targets:
->>>>>
->>>>> https://lkml.kernel.org/1520489185-21828-1-git-send-email-smasetty@codeaurora.org
->>>>>
->>>>> Signed-off-by: Antonino Maniscalco <antomani103@gmail.com>
->>>>> ---
->>>>> Changes in v4:
->>>>> - Added missing register in pwrup list
->>>>> - Removed and rearrange barriers
->>>>> - Renamed `skip_inline_wptr` to `restore_wptr`
->>>>> - Track ctx seqno per ring
->>>>> - Removed secure preempt context
->>>>> - NOP out postamble to disable it instantly
->>>>> - Only emit pwrup reglist once
->>>>> - Document bv_rptr_addr
->>>>> - Removed unused A6XX_PREEMPT_USER_RECORD_SIZE
->>>>> - Set name on preempt record buffer
->>>>> - Link to v3: https://lore.kernel.org/r/20240905-preemption-a750-t-v3-0-fd947699f7bc@gmail.com
->>>>>
->>>>> Changes in v3:
->>>>> - Added documentation about preemption
->>>>> - Use quirks to determine which target supports preemption
->>>>> - Add a module parameter to force disabling or enabling preemption
->>>>> - Clear postamble when profiling
->>>>> - Define A6XX_CP_CONTEXT_SWITCH_CNTL_LEVEL fields in a6xx.xml
->>>>> - Make preemption records MAP_PRIV
->>>>> - Removed user ctx record (NON_PRIV) and patch 2/9 as it's not needed
->>>>>    anymore
->>>>> - Link to v2: https://lore.kernel.org/r/20240830-preemption-a750-t-v2-0-86aeead2cd80@gmail.com
->>>>>
->>>>> Changes in v2:
->>>>> - Added preept_record_size for X185 in PATCH 3/7
->>>>> - Added patches to reset perf counters
->>>>> - Dropped unused defines
->>>>> - Dropped unused variable (fixes warning)
->>>>> - Only enable preemption on a750
->>>>> - Reject MSM_SUBMITQUEUE_ALLOW_PREEMPT for unsupported targets
->>>>> - Added Akhil's Reviewed-By tags to patches 1/9,2/9,3/9
->>>>> - Added Neil's Tested-By tags
->>>>> - Added explanation for UAPI changes in commit message
->>>>> - Link to v1: https://lore.kernel.org/r/20240815-preemption-a750-t-v1-0-7bda26c34037@gmail.com
->>>>>
->>>>> ---
->>>>> Antonino Maniscalco (11):
->>>>>        drm/msm: Fix bv_fence being used as bv_rptr
->>>>>        drm/msm/A6XX: Track current_ctx_seqno per ring
->>>>>        drm/msm: Add a `preempt_record_size` field
->>>>>        drm/msm: Add CONTEXT_SWITCH_CNTL bitfields
->>>>>        drm/msm/A6xx: Implement preemption for A7XX targets
->>>>>        drm/msm/A6xx: Sync relevant adreno_pm4.xml changes
->>>>>        drm/msm/A6xx: Use posamble to reset counters on preemption
->>>>>        drm/msm/A6xx: Add traces for preemption
->>>>>        drm/msm/A6XX: Add a flag to allow preemption to submitqueue_create
->>>>>        drm/msm/A6xx: Enable preemption for A750
->>>>>        Documentation: document adreno preemption
->>>>>
->>>>>   Documentation/gpu/msm-preemption.rst               |  98 +++++
->>>>>   drivers/gpu/drm/msm/Makefile                       |   1 +
->>>>>   drivers/gpu/drm/msm/adreno/a2xx_gpu.c              |   2 +-
->>>>>   drivers/gpu/drm/msm/adreno/a3xx_gpu.c              |   2 +-
->>>>>   drivers/gpu/drm/msm/adreno/a4xx_gpu.c              |   2 +-
->>>>>   drivers/gpu/drm/msm/adreno/a5xx_gpu.c              |   6 +-
->>>>>   drivers/gpu/drm/msm/adreno/a6xx_catalog.c          |   7 +-
->>>>>   drivers/gpu/drm/msm/adreno/a6xx_gpu.c              | 325 ++++++++++++++-
->>>>>   drivers/gpu/drm/msm/adreno/a6xx_gpu.h              | 174 ++++++++
->>>>>   drivers/gpu/drm/msm/adreno/a6xx_preempt.c          | 440 +++++++++++++++++++++
->>>>>   drivers/gpu/drm/msm/adreno/adreno_gpu.h            |   9 +-
->>>>>   drivers/gpu/drm/msm/msm_drv.c                      |   4 +
->>>>>   drivers/gpu/drm/msm/msm_gpu.c                      |   2 +-
->>>>>   drivers/gpu/drm/msm/msm_gpu.h                      |  11 -
->>>>>   drivers/gpu/drm/msm/msm_gpu_trace.h                |  28 ++
->>>>>   drivers/gpu/drm/msm/msm_ringbuffer.h               |  18 +
->>>>>   drivers/gpu/drm/msm/msm_submitqueue.c              |   3 +
->>>>>   drivers/gpu/drm/msm/registers/adreno/a6xx.xml      |   7 +-
->>>>>   .../gpu/drm/msm/registers/adreno/adreno_pm4.xml    |  39 +-
->>>>>   include/uapi/drm/msm_drm.h                         |   5 +-
->>>>>   20 files changed, 1117 insertions(+), 66 deletions(-)
->>>>> ---
->>>>> base-commit: 7c626ce4bae1ac14f60076d00eafe71af30450ba
->>>>> change-id: 20240815-preemption-a750-t-fcee9a844b39
->>>>>
->>>>> Best regards,
->>>>
->>>> I've been running vulkan-cts (1.3.7.3-0-gd71a36db16d98313c431829432a136dbda692a08 from Yocto)
->>>> on SM8650-QRD, SM8550-QRD & SM8450-HDK boards with enable_preemption in default value
->>>> and forced to 1, and I've seen no regression so far
->>>>
->>>> On SM8550, I've seen a few:
->>>> platform 3d6a000.gmu: [drm:a6xx_hfi_send_msg.constprop.0 [msm]] *ERROR* Message HFI_H2F_MSG_GX_BW_PERF_VOTE id 2743 timed out waiting for response
->>>> platform 3d6a000.gmu: [drm:a6xx_hfi_send_msg.constprop.0 [msm]] *ERROR* Unexpected message id 2743 on the response queue
->>>> but it's unrelated to preempt
->>>>
->>>> and on SM8450:
->>>> platform 3d6a000.gmu: [drm:a6xx_gmu_set_oob [msm]] *ERROR* Timeout waiting for GMU OOB set GPU_SET: 0x0
->>>> msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 7.3.0.1: hangcheck detected gpu lockup rb 0!
->>>> msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 7.3.0.1:     completed fence: 331235
->>>> msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 7.3.0.1:     submitted fence: 331236
->>>> adreno 3d00000.gpu: [drm:a6xx_irq [msm]] *ERROR* gpu fault ring 0 fence 50de4 status 00800005 rb 0000/0699 ib1 0000000000000000/0000 ib2 0000000000000000/0000
->>>> msm_dpu ae01000.display-controller: [drm:recover_worker [msm]] *ERROR* 7.3.0.1: hangcheck recover!
->>>> msm_dpu ae01000.display-controller: [drm:recover_worker [msm]] *ERROR* 7.3.0.1: offending task: deqp-vk (/usr/lib/vulkan-cts/deqp-vk)
->>>> msm_dpu ae01000.display-controller: [drm:recover_worker [msm]] *ERROR* 7.3.0.1: hangcheck recover!
->>>> leading to a VK_ERROR_DEVICE_LOST, but again unrelated to preempt support.
->>>
->>> I suspect on newer devices we have trouble resetting the GMU, leading
->>> to (what I assume is happening here) the CPU thinking the GMU is in a
->>> different state than it is.
->>>
->>> Which has led to some stability issues on a660 in mesa CI, if anything
->>> crashes the gpu in the CI run it tends to kill the rest of the run
->>> until the board is power cycled.
->>>
->>> https://gitlab.freedesktop.org/drm/msm/-/issues/37
->>>
->>> I think we have some work to do on making recovery more robust on
->>> things newer than early a6xx things.
->>
->> Is this seen only with a particular scenario or is recovery always
->> broken? I fixed recovery on 7c3 (a660 based) a couple of year ago,
->> not sure what exactly regressed. At least I didn't see any issue on
->> x185.
-> 
-> More recently my x1e (x1-85) and sc8280xp (a690) have been pretty
-> reliable about recovery.  And mesa CI seems to have gotten more
-> reliable at recovery when they uprev'd from v6.6x to v6.11.x, so I
-> guess something in that range improved things?  But maybe not 100%,
-> kernel-ci (msm/msm_recovery@gpu-fault) can sometimes reproduce this,
-> apparently:
-> 
-> https://gitlab.freedesktop.org/drm/msm/-/issues/65
-> 
-> This test does 16 submits, with the 10th one having an invalid opc,
-> and then checks that all the ones before and after successfully
-> execute a CP_MEM_WRITE:
-> 
-> https://gitlab.freedesktop.org/drm/igt-gpu-tools/-/blob/master/tests/msm/msm_recovery.c?ref_type=heads#L145
+--=_MailMate_720C5D8A-8AE9-4AF0-AFD0-ABF2C61ED944_=
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
+
+On 30 Aug 2024, at 6:03, Usama Arif wrote:
+
+> From: Yu Zhao <yuzhao@google.com>
 >
+> Here being unused means containing only zeros and inaccessible to
+> userspace. When splitting an isolated thp under reclaim or migration,
+> the unused subpages can be mapped to the shared zeropage, hence saving
+> memory. This is particularly helpful when the internal
+> fragmentation of a thp is high, i.e. it has many untouched subpages.
+>
+> This is also a prerequisite for THP low utilization shrinker which will=
 
-I suppose we don't have a gpu coredump available. A663 is pretty similar to
-A660, so I can try to reproduce this issue there. Will check this out.
+> be introduced in later patches, where underutilized THPs are split, and=
 
--Akhil
+> the zero-filled pages are freed saving memory.
+>
+> Signed-off-by: Yu Zhao <yuzhao@google.com>
+> Tested-by: Shuang Zhai <zhais@google.com>
+> Signed-off-by: Usama Arif <usamaarif642@gmail.com>
+> ---
+>  include/linux/rmap.h |  7 ++++-
+>  mm/huge_memory.c     |  8 ++---
+>  mm/migrate.c         | 72 ++++++++++++++++++++++++++++++++++++++------=
 
-> BR,
-> -R
-> 
->> -Akhil.
->>
->>>
->>> BR,
->>> -R
->>>
->>>> So you can also add:
->>>> Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD
->>>> Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8450-HDK
->>>>
->>>> Thanks,
->>>> Neil
+>  mm/migrate_device.c  |  4 +--
+>  4 files changed, 75 insertions(+), 16 deletions(-)
+>
+> diff --git a/include/linux/rmap.h b/include/linux/rmap.h
+> index 91b5935e8485..d5e93e44322e 100644
+> --- a/include/linux/rmap.h
+> +++ b/include/linux/rmap.h
+> @@ -745,7 +745,12 @@ int folio_mkclean(struct folio *);
+>  int pfn_mkclean_range(unsigned long pfn, unsigned long nr_pages, pgoff=
+_t pgoff,
+>  		      struct vm_area_struct *vma);
+>
+> -void remove_migration_ptes(struct folio *src, struct folio *dst, bool =
+locked);
+> +enum rmp_flags {
+> +	RMP_LOCKED		=3D 1 << 0,
+> +	RMP_USE_SHARED_ZEROPAGE	=3D 1 << 1,
+> +};
+> +
+> +void remove_migration_ptes(struct folio *src, struct folio *dst, int f=
+lags);
+>
+>  /*
+>   * rmap_walk_control: To control rmap traversing for specific needs
+> diff --git a/mm/huge_memory.c b/mm/huge_memory.c
+> index 0c48806ccb9a..af60684e7c70 100644
+> --- a/mm/huge_memory.c
+> +++ b/mm/huge_memory.c
+> @@ -3020,7 +3020,7 @@ bool unmap_huge_pmd_locked(struct vm_area_struct =
+*vma, unsigned long addr,
+>  	return false;
+>  }
+>
+> -static void remap_page(struct folio *folio, unsigned long nr)
+> +static void remap_page(struct folio *folio, unsigned long nr, int flag=
+s)
+>  {
+>  	int i =3D 0;
+>
+> @@ -3028,7 +3028,7 @@ static void remap_page(struct folio *folio, unsig=
+ned long nr)
+>  	if (!folio_test_anon(folio))
+>  		return;
+>  	for (;;) {
+> -		remove_migration_ptes(folio, folio, true);
+> +		remove_migration_ptes(folio, folio, RMP_LOCKED | flags);
+>  		i +=3D folio_nr_pages(folio);
+>  		if (i >=3D nr)
+>  			break;
+> @@ -3240,7 +3240,7 @@ static void __split_huge_page(struct page *page, =
+struct list_head *list,
+>
+>  	if (nr_dropped)
+>  		shmem_uncharge(folio->mapping->host, nr_dropped);
+> -	remap_page(folio, nr);
+> +	remap_page(folio, nr, PageAnon(head) ? RMP_USE_SHARED_ZEROPAGE : 0);
+>
+>  	/*
+>  	 * set page to its compound_head when split to non order-0 pages, so
+> @@ -3542,7 +3542,7 @@ int split_huge_page_to_list_to_order(struct page =
+*page, struct list_head *list,
+>  		if (mapping)
+>  			xas_unlock(&xas);
+>  		local_irq_enable();
+> -		remap_page(folio, folio_nr_pages(folio));
+> +		remap_page(folio, folio_nr_pages(folio), 0);
+>  		ret =3D -EAGAIN;
+>  	}
+>
+> diff --git a/mm/migrate.c b/mm/migrate.c
+> index 6f9c62c746be..d039863e014b 100644
+> --- a/mm/migrate.c
+> +++ b/mm/migrate.c
+> @@ -204,13 +204,57 @@ bool isolate_folio_to_list(struct folio *folio, s=
+truct list_head *list)
+>  	return true;
+>  }
+>
+> +static bool try_to_map_unused_to_zeropage(struct page_vma_mapped_walk =
+*pvmw,
+> +					  struct folio *folio,
+> +					  unsigned long idx)
+> +{
+> +	struct page *page =3D folio_page(folio, idx);
+> +	bool contains_data;
+> +	pte_t newpte;
+> +	void *addr;
+> +
+> +	VM_BUG_ON_PAGE(PageCompound(page), page);
 
+This should be:
+
+diff --git a/mm/migrate.c b/mm/migrate.c
+index e950fd62607f..7ffdbe078aa7 100644
+--- a/mm/migrate.c
++++ b/mm/migrate.c
+@@ -206,7 +206,8 @@ static bool try_to_map_unused_to_zeropage(struct page=
+_vma_mapped_walk *pvmw,
+        pte_t newpte;
+        void *addr;
+
+-       VM_BUG_ON_PAGE(PageCompound(page), page);
++       if (PageCompound(page))
++               return false;
+        VM_BUG_ON_PAGE(!PageAnon(page), page);
+        VM_BUG_ON_PAGE(!PageLocked(page), page);
+        VM_BUG_ON_PAGE(pte_present(*pvmw->pte), page);
+
+Otherwise, splitting anonymous large folios to non order-0 ones just
+triggers this BUG_ON.
+
+> +	VM_BUG_ON_PAGE(!PageAnon(page), page);
+> +	VM_BUG_ON_PAGE(!PageLocked(page), page);
+> +	VM_BUG_ON_PAGE(pte_present(*pvmw->pte), page);
+> +
+> +	if (folio_test_mlocked(folio) || (pvmw->vma->vm_flags & VM_LOCKED) ||=
+
+> +	    mm_forbids_zeropage(pvmw->vma->vm_mm))
+> +		return false;
+> +
+> +	/*
+> +	 * The pmd entry mapping the old thp was flushed and the pte mapping
+> +	 * this subpage has been non present. If the subpage is only zero-fil=
+led
+> +	 * then map it to the shared zeropage.
+> +	 */
+> +	addr =3D kmap_local_page(page);
+> +	contains_data =3D memchr_inv(addr, 0, PAGE_SIZE);
+> +	kunmap_local(addr);
+> +
+> +	if (contains_data)
+> +		return false;
+> +
+> +	newpte =3D pte_mkspecial(pfn_pte(my_zero_pfn(pvmw->address),
+> +					pvmw->vma->vm_page_prot));
+> +	set_pte_at(pvmw->vma->vm_mm, pvmw->address, pvmw->pte, newpte);
+> +
+> +	dec_mm_counter(pvmw->vma->vm_mm, mm_counter(folio));
+> +	return true;
+> +}
+> +
+> +struct rmap_walk_arg {
+> +	struct folio *folio;
+> +	bool map_unused_to_zeropage;
+> +};
+> +
+>  /*
+>   * Restore a potential migration pte to a working pte entry
+>   */
+>  static bool remove_migration_pte(struct folio *folio,
+> -		struct vm_area_struct *vma, unsigned long addr, void *old)
+> +		struct vm_area_struct *vma, unsigned long addr, void *arg)
+>  {
+> -	DEFINE_FOLIO_VMA_WALK(pvmw, old, vma, addr, PVMW_SYNC | PVMW_MIGRATIO=
+N);
+> +	struct rmap_walk_arg *rmap_walk_arg =3D arg;
+> +	DEFINE_FOLIO_VMA_WALK(pvmw, rmap_walk_arg->folio, vma, addr, PVMW_SYN=
+C | PVMW_MIGRATION);
+>
+>  	while (page_vma_mapped_walk(&pvmw)) {
+>  		rmap_t rmap_flags =3D RMAP_NONE;
+> @@ -234,6 +278,9 @@ static bool remove_migration_pte(struct folio *foli=
+o,
+>  			continue;
+>  		}
+>  #endif
+> +		if (rmap_walk_arg->map_unused_to_zeropage &&
+> +		    try_to_map_unused_to_zeropage(&pvmw, folio, idx))
+> +			continue;
+>
+>  		folio_get(folio);
+>  		pte =3D mk_pte(new, READ_ONCE(vma->vm_page_prot));
+> @@ -312,14 +359,21 @@ static bool remove_migration_pte(struct folio *fo=
+lio,
+>   * Get rid of all migration entries and replace them by
+>   * references to the indicated page.
+>   */
+> -void remove_migration_ptes(struct folio *src, struct folio *dst, bool =
+locked)
+> +void remove_migration_ptes(struct folio *src, struct folio *dst, int f=
+lags)
+>  {
+> +	struct rmap_walk_arg rmap_walk_arg =3D {
+> +		.folio =3D src,
+> +		.map_unused_to_zeropage =3D flags & RMP_USE_SHARED_ZEROPAGE,
+> +	};
+> +
+>  	struct rmap_walk_control rwc =3D {
+>  		.rmap_one =3D remove_migration_pte,
+> -		.arg =3D src,
+> +		.arg =3D &rmap_walk_arg,
+>  	};
+>
+> -	if (locked)
+> +	VM_BUG_ON_FOLIO((flags & RMP_USE_SHARED_ZEROPAGE) && (src !=3D dst), =
+src);
+> +
+> +	if (flags & RMP_LOCKED)
+>  		rmap_walk_locked(dst, &rwc);
+>  	else
+>  		rmap_walk(dst, &rwc);
+> @@ -934,7 +988,7 @@ static int writeout(struct address_space *mapping, =
+struct folio *folio)
+>  	 * At this point we know that the migration attempt cannot
+>  	 * be successful.
+>  	 */
+> -	remove_migration_ptes(folio, folio, false);
+> +	remove_migration_ptes(folio, folio, 0);
+>
+>  	rc =3D mapping->a_ops->writepage(&folio->page, &wbc);
+>
+> @@ -1098,7 +1152,7 @@ static void migrate_folio_undo_src(struct folio *=
+src,
+>  				   struct list_head *ret)
+>  {
+>  	if (page_was_mapped)
+> -		remove_migration_ptes(src, src, false);
+> +		remove_migration_ptes(src, src, 0);
+>  	/* Drop an anon_vma reference if we took one */
+>  	if (anon_vma)
+>  		put_anon_vma(anon_vma);
+> @@ -1336,7 +1390,7 @@ static int migrate_folio_move(free_folio_t put_ne=
+w_folio, unsigned long private,
+>  		lru_add_drain();
+>
+>  	if (old_page_state & PAGE_WAS_MAPPED)
+> -		remove_migration_ptes(src, dst, false);
+> +		remove_migration_ptes(src, dst, 0);
+>
+>  out_unlock_both:
+>  	folio_unlock(dst);
+> @@ -1474,7 +1528,7 @@ static int unmap_and_move_huge_page(new_folio_t g=
+et_new_folio,
+>
+>  	if (page_was_mapped)
+>  		remove_migration_ptes(src,
+> -			rc =3D=3D MIGRATEPAGE_SUCCESS ? dst : src, false);
+> +			rc =3D=3D MIGRATEPAGE_SUCCESS ? dst : src, 0);
+>
+>  unlock_put_anon:
+>  	folio_unlock(dst);
+> diff --git a/mm/migrate_device.c b/mm/migrate_device.c
+> index 8d687de88a03..9cf26592ac93 100644
+> --- a/mm/migrate_device.c
+> +++ b/mm/migrate_device.c
+> @@ -424,7 +424,7 @@ static unsigned long migrate_device_unmap(unsigned =
+long *src_pfns,
+>  			continue;
+>
+>  		folio =3D page_folio(page);
+> -		remove_migration_ptes(folio, folio, false);
+> +		remove_migration_ptes(folio, folio, 0);
+>
+>  		src_pfns[i] =3D 0;
+>  		folio_unlock(folio);
+> @@ -840,7 +840,7 @@ void migrate_device_finalize(unsigned long *src_pfn=
+s,
+>  			dst =3D src;
+>  		}
+>
+> -		remove_migration_ptes(src, dst, false);
+> +		remove_migration_ptes(src, dst, 0);
+>  		folio_unlock(src);
+>
+>  		if (folio_is_zone_device(src))
+> -- =
+
+> 2.43.5
+
+Best Regards,
+Yan, Zi
+
+--=_MailMate_720C5D8A-8AE9-4AF0-AFD0-ABF2C61ED944_=
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename=signature.asc
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQJDBAEBCgAtFiEEh7yFAW3gwjwQ4C9anbJR82th+ooFAmcZIqYPHHppeUBudmlk
+aWEuY29tAAoJEJ2yUfNrYfqKY1AP/A9PBq6LncqBAoaQtFtfCdyRVty1wT24BDrj
+2U+9Uuza2izeVULj5OSAEoou6+R3S6Rgcc65pXj4hdUV2VTGJc0FPPWrqlyo75zp
+6yhbYVFZmr0s0Fgs7/+4VqZTpVR8i9TSKWDbLAkJYshlukk6VTBNisjj4jA1wjMh
+vVjEUy4IW668/fMxH9lz9QQfN9wRFm8PQk/iscQyI2Zn7i2xkYFhbEeyLZVnnbBr
+9HcrZbWkhO5knH8pCqItmYWLEBpvnXxvHa5VbTRcVegF3F2b3rrAhS+7PR1QqKEy
+4l9d0qTby76mTTGtnie+nLdWgVYNXLOQxdWhNVZfbQbwTd7BUvCYAbZuwlzio1qw
+ACJ/kFKmcoQoP9Q+GBA6/rNtNYQ+VP5P/kxZ57a3MG9CTjDN6Vp+xUcnwk0BNPcv
+33tbc6DYBGSXEf/eYEHmQXvdtxwXT4a/TpAYXt7XWTNsTtLSBnxIXPoaewVpvBQU
+rmcH2myww9VTO7HCtZsLV24kg6QjfRcnI/FuYuWjaOc/o+5DGy6xb1WSaHbgDFLE
+KFan6xTJmGEGDcL5zweiSnXtNSAbdgzhA3Ctujzbu4fDs3hAA4IYMwpWlzzu85Pp
+dAZgFnt06sSOZ6RNyU9Dd/R598gLa/P4jrHbmGMnaGLAkBk4st79aEk7S9jaJFrU
+hYG7O+LB
+=WKL5
+-----END PGP SIGNATURE-----
+
+--=_MailMate_720C5D8A-8AE9-4AF0-AFD0-ABF2C61ED944_=--
 
