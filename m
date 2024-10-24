@@ -1,444 +1,159 @@
-Return-Path: <linux-doc+bounces-28480-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28482-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DFAB9ADEC4
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Oct 2024 10:17:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9824F9ADEED
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Oct 2024 10:19:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 558D1287987
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Oct 2024 08:17:13 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 508C828A500
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Oct 2024 08:19:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 430AB1D5163;
-	Thu, 24 Oct 2024 08:12:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D547E1C4A0E;
+	Thu, 24 Oct 2024 08:17:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Gqs0L43R"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jp2WD3Rz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 839891D1512;
-	Thu, 24 Oct 2024 08:11:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BF891B0F35
+	for <linux-doc@vger.kernel.org>; Thu, 24 Oct 2024 08:17:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1729757522; cv=none; b=ullAapHyIUxuQ5RFVmGGezHnxFy5gPyZ8YTcF14sgSBZ70tSOd6NyFy3z50LKWeMaYvE3YXBw5usrpeyu5pD2MpTuEwJfRac0GZF8HKEvG8BKi3vg4NNW6S8bEf3jLswTi11bEW0wVErtF/+VLALBK3m59rm0yoYIy67j3xppgI=
+	t=1729757850; cv=none; b=pQSHjdLIACdCXfHFMsE8pg9EnJRRA9lMAf59F4s8sxKFaoPKY8oAstJrMHK7/kU0GuHorzRzN6mannQUZ/OXIKYJq2UlxoTw7dIbHn2yzLMvSe8nlSXEhqztPp8Vna/svT1509eWT7J+xaUTNj0c+gmHxjzI/LdF6gB/WpQU0RY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1729757522; c=relaxed/simple;
-	bh=tNxpycssazDt0iI4wc/OsewbFOkrxnl3tjY/JqZOqco=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=LT7yBkZf6FBgjPhVoRwcfRnPdeidN28M6QYOGqE6y8bxrl5MnO+s8dVsmBVAyVLkt8QnQe9LvnVCET99NAU3SIpq32nhZ6t+YM+Q0qdvzTXaYTnViZwutsjXCiPAn7donmciLCiQxAVa7y5vwUppP9XlArf3VXK0TQcyUGa+8cI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Gqs0L43R; arc=none smtp.client-ip=198.175.65.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1729757520; x=1761293520;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=tNxpycssazDt0iI4wc/OsewbFOkrxnl3tjY/JqZOqco=;
-  b=Gqs0L43RsImtSWoX3Jozzj3oRzkIuBkaTT2eIPqZma3mPuVrwK70PYUE
-   27Ey0B12D6GtKycImwKSjFy+N9ccXvfFI7jC67Q6SyWvWmm/2AcbEnDZT
-   M7I/wp2eO6kC7GTXSNpZmWnmXMojKhd5tUU8vmEDG/geXBlHPyGMU/q5d
-   ktQiVln8ur77+khkmQJekAqkrQiJjBlkMtyHEXfgUQtZt5WH1g0rKsWZX
-   Bzq1XnRE5uBRDzqAxTVcwanIRzJfWecq6Ye63RAPzVfC3TphStrKgfz/F
-   DBpEXICfgtXL8P2U68OzCThKz99tDMeQQgI5un1DkNF8T5k1xDtkrKYzH
-   A==;
-X-CSE-ConnectionGUID: koqb8jVTQSCtPh0Q8I3U/w==
-X-CSE-MsgGUID: zStqrv5URS6oaEwERm7b0g==
-X-IronPort-AV: E=McAfee;i="6700,10204,11222"; a="29501172"
-X-IronPort-AV: E=Sophos;i="6.11,199,1725346800"; 
-   d="scan'208";a="29501172"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Oct 2024 01:12:00 -0700
-X-CSE-ConnectionGUID: qvad9TrpTBWU7mNGrDHfVw==
-X-CSE-MsgGUID: 3M+Bn78QTG+482BdLL17dQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,228,1725346800"; 
-   d="scan'208";a="80691101"
-Received: from shsensorbuild.sh.intel.com ([10.239.133.18])
-  by orviesa006.jf.intel.com with ESMTP; 24 Oct 2024 01:11:57 -0700
-From: Even Xu <even.xu@intel.com>
-To: jikos@kernel.org,
-	bentiss@kernel.org,
-	corbet@lwn.net
-Cc: linux-input@vger.kernel.or,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Even Xu <even.xu@intel.com>,
-	Xinpeng Sun <xinpeng.sun@intel.com>,
-	Rui Zhang <rui1.zhang@intel.com>,
-	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
-Subject: [PATCH v1 22/22] HID: intel-thc-hid: intel-quicki2c: Add PM implementation
-Date: Thu, 24 Oct 2024 16:10:23 +0800
-Message-Id: <20241024081023.1468951-23-even.xu@intel.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20241024081023.1468951-1-even.xu@intel.com>
-References: <20241024081023.1468951-1-even.xu@intel.com>
+	s=arc-20240116; t=1729757850; c=relaxed/simple;
+	bh=5+PPddUOggBcLzUgVM4JAjl8yf57Cfb1Vspg+FOHcvE=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=KSwf8rzCeN6ZPyBCDGUXA+JguxfUzluOX+xB2sQpXSxOv4EmBeSa63ebL7XXnXBEU9o5HRCVTyNRVdOg7/1z5Cj5GLdn1/o64SA5OeNG/vcPaI4YMIzkeZSPlm5DcIa0sup84/boFvqtAuWRr5peGCUGjvpsCPqWKs/p9uW+ojs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=jp2WD3Rz; arc=none smtp.client-ip=209.85.128.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-43167ff0f91so6280245e9.1
+        for <linux-doc@vger.kernel.org>; Thu, 24 Oct 2024 01:17:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1729757842; x=1730362642; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4dTM6QAgU0iBX1/55GNjACOUfUPsURXI/ZYFo7NvddM=;
+        b=jp2WD3RzYsD/rrhoPjzwKAVbbI96vp2o/tRu0Shs0cKzwzcabClhxJClIP4D4N6kDY
+         ztHVvD5/1zFbdY+1u1oCG9SqcF5Yt6SoINRVZnytD0Ja/lUk+N1ii1cVjXYjUqq1bsUf
+         BbQrkWDiBt/U3GmXVXXX4ADGiIE3jewLW4Famp9N/b+GNPQF7P19Ybscqb7Uzeu3YEA2
+         C0Kmprc9/HFsJgrMvdqUIW610j67EFYgXq/phh3g2ACxbWA13veZh5PMalGpK3J2M3+G
+         Oww9eu0GAggky/0Kx6GOY5PMH1dE6zrgsS9xoa41WY3AUfu0+Z6I5aVor7+58TtF4Mfp
+         yDaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1729757842; x=1730362642;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=4dTM6QAgU0iBX1/55GNjACOUfUPsURXI/ZYFo7NvddM=;
+        b=C/l3ksaR2sHqg03xO3dF64CEqS/4KtMCXrw+qa8TC6yg8NXT8UwmbiZmFvBNFQj13I
+         1+bzGxDiMbKxo0ETgotuqbFHhPXho3sTga5n5I/akQK89eFgs6mAYUI5rZO0Leno4tGI
+         g+0Pth5ID/NH21mVwRBF2PxkY2X8Fxr3krKPKZIpEza+T013MMq9MJQejtLKLAxwIlaS
+         a6B3PtcK65thAJR8vOqOSEJ9oTViB2z50WIWYualAuB2EhubB1fK+ADeKeoseqMY/kUl
+         HDc4+lt0xk1GgQLTvs0y/xWiT4OGWx6u5gYVmMtPo2+HhD+Zud/yNKI4yU5wRMAoTCHI
+         3oIA==
+X-Forwarded-Encrypted: i=1; AJvYcCUSaycqPobk4kTlsyeqQ0PJsIo7k8oqRvEA0kXv9UesVT+yn828AMdHriRab3i0v6PeM/yKbzSHWR0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwcoPMJmZrhQV2b4Yw7+7qvwIu4GZV3GdfgqZbPxqdiE5iky+ev
+	jYkYkBqN2vB/yMi0U+5vyFgglFOzponcAMdazpUZ0acKsYZYCsOFIpIMFUChVOM=
+X-Google-Smtp-Source: AGHT+IGRnp0CPyE9Lu8MiPJUC8cE2tOabAKZQUMJoKtx0sHKMX+8ebn9dBSN/PK5Xm3LKaO9EFz3xQ==
+X-Received: by 2002:a05:600c:3595:b0:42c:a8cb:6a75 with SMTP id 5b1f17b1804b1-4318415f707mr48674225e9.17.1729757842561;
+        Thu, 24 Oct 2024 01:17:22 -0700 (PDT)
+Received: from [192.168.1.64] (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net. [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37ee0b93d53sm10828922f8f.70.2024.10.24.01.17.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Oct 2024 01:17:22 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Subject: [PATCH v3 0/4] ad7380: add adaq4370-4 and adaq4380-4 support
+Date: Thu, 24 Oct 2024 10:16:55 +0200
+Message-Id: <20241024-ad7380-add-adaq4380-4-support-v3-0-6a29bd0f79da@baylibre.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAHcCGmcC/42Py2rDMBBFf8VoXQU9Y8Wr/kfpYiSNGkESO5JjG
+ oL/PWObQuimXQzDncWZcx+sYslYWdc8WMEp19xfKOi3hoUjXL6Q50iZKaGMFNJyiK12glakgat
+ ZguH1Ngx9Gbk0McgWgxDqwIgxFEz5e+V/fG654PVGb8btyDxU5KE/n/PYNc4jaNc6kFZKHxBiU
+ Mkn5YwXwodgQSGlyF71umaTE+ZHjl6uRidqxvW+bfXehuQAukmzReOY69iX+9p6kqvHPwtOkgs
+ eFUo42OSVce8e7qfsC+6oxAqf1AtQ6b+AagFam4Cqe4zpF3Ce5ydvb9P9pQEAAA==
+X-Change-ID: 20241015-ad7380-add-adaq4380-4-support-14dc17ec0029
+To: Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
+ David Lechner <dlechner@baylibre.com>, Jonathan Cameron <jic23@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.14.2
 
-Implement THC QuickI2C driver power management callbacks.
+Hello,
 
-Co-developed-by: Xinpeng Sun <xinpeng.sun@intel.com>
-Signed-off-by: Xinpeng Sun <xinpeng.sun@intel.com>
-Signed-off-by: Even Xu <even.xu@intel.com>
-Tested-by: Rui Zhang <rui1.zhang@intel.com>
-Reviewed-by: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+This series add support for adaq4370-4 (2MSPS) and adaq4380-4 (4MSPS)
+which are quad-channel precision data acquisition signal chain μModule
+solutions compatible with the ad738x family, with the following differences:
+
+- pin selectable gain in front of each 4 adc
+- internal reference is 3V derived from refin-supply (5V)
+- additional supplies
+
+This series depends on [1] which fix several supplies issues
+
+[1]: https://lore.kernel.org/all/20241007-ad7380-fix-supplies-v1-0-badcf813c9b9@baylibre.com/
+
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- .../intel-quicki2c/pci-quicki2c.c             | 233 ++++++++++++++++++
- .../intel-quicki2c/quicki2c-dev.h             |   8 +
- .../intel-quicki2c/quicki2c-hid.c             |   8 +
- 3 files changed, 249 insertions(+)
+Changes in v3:
+bindings:
+  - remove item from channel reg property (should be part of V2, but get
+    lost during rebase)
+  - remove unnecessary () for channel property
+  - keep consistent quotes
 
-diff --git a/drivers/hid/intel-thc-hid/intel-quicki2c/pci-quicki2c.c b/drivers/hid/intel-thc-hid/intel-quicki2c/pci-quicki2c.c
-index 0c1082f0da34..707d86aed3dc 100644
---- a/drivers/hid/intel-thc-hid/intel-quicki2c/pci-quicki2c.c
-+++ b/drivers/hid/intel-thc-hid/intel-quicki2c/pci-quicki2c.c
-@@ -9,6 +9,7 @@
- #include <linux/irqreturn.h>
- #include <linux/pci.h>
- #include <linux/sizes.h>
-+#include <linux/pm_runtime.h>
- 
- #include "intel-thc-dev.h"
- #include "intel-thc-hw.h"
-@@ -289,10 +290,15 @@ static irqreturn_t quicki2c_irq_thread_handler(int irq, void *dev_id)
- 	struct quicki2c_device *qcdev = dev_id;
- 	int err_recover = 0;
- 	int int_mask;
-+	int ret;
- 
- 	if (qcdev->state == QUICKI2C_DISABLED)
- 		return IRQ_HANDLED;
- 
-+	ret = pm_runtime_resume_and_get(qcdev->dev);
-+	if (ret)
-+		return IRQ_HANDLED;
-+
- 	int_mask = thc_interrupt_handler(qcdev->thc_hw);
- 
- 	if (int_mask & BIT(THC_FATAL_ERR_INT) || int_mask & BIT(THC_TXN_ERR_INT) ||
-@@ -314,6 +320,9 @@ static irqreturn_t quicki2c_irq_thread_handler(int irq, void *dev_id)
- 		if (try_recover(qcdev))
- 			qcdev->state = QUICKI2C_DISABLED;
- 
-+	pm_runtime_mark_last_busy(qcdev->dev);
-+	pm_runtime_put_autosuspend(qcdev->dev);
-+
- 	return IRQ_HANDLED;
- }
- 
-@@ -637,6 +646,13 @@ static int quicki2c_probe(struct pci_dev *pdev,
- 
- 	qcdev->state = QUICKI2C_ENABLED;
- 
-+	/* Enable runtime power management */
-+	pm_runtime_use_autosuspend(qcdev->dev);
-+	pm_runtime_set_autosuspend_delay(qcdev->dev, DEFAULT_AUTO_SUSPEND_DELAY_MS);
-+	pm_runtime_mark_last_busy(qcdev->dev);
-+	pm_runtime_put_noidle(qcdev->dev);
-+	pm_runtime_put_autosuspend(qcdev->dev);
-+
- 	dev_dbg(&pdev->dev, "QuickI2C probe success\n");
- 
- 	return 0;
-@@ -673,6 +689,8 @@ static void quicki2c_remove(struct pci_dev *pdev)
- 	quicki2c_hid_remove(qcdev);
- 	quicki2c_dma_deinit(qcdev);
- 
-+	pm_runtime_get_noresume(qcdev->dev);
-+
- 	quicki2c_dev_deinit(qcdev);
- 
- 	pcim_iounmap_regions(pdev, BIT(0));
-@@ -703,6 +721,220 @@ static void quicki2c_shutdown(struct pci_dev *pdev)
- 	quicki2c_dev_deinit(qcdev);
- }
- 
-+static int quicki2c_suspend(struct device *device)
-+{
-+	struct pci_dev *pdev = to_pci_dev(device);
-+	struct quicki2c_device *qcdev;
-+	int ret;
-+
-+	qcdev = pci_get_drvdata(pdev);
-+	if (!qcdev)
-+		return -ENODEV;
-+
-+	/*
-+	 * As I2C is THC subsystem, no register auto save/restore support,
-+	 * need driver to do that explicitly for every D3 case.
-+	 */
-+	ret = thc_i2c_subip_regs_save(qcdev->thc_hw);
-+	if (ret)
-+		return ret;
-+
-+	ret = thc_interrupt_quiesce(qcdev->thc_hw, true);
-+	if (ret)
-+		return ret;
-+
-+	thc_interrupt_enable(qcdev->thc_hw, false);
-+
-+	thc_dma_unconfigure(qcdev->thc_hw);
-+
-+	return 0;
-+}
-+
-+static int quicki2c_resume(struct device *device)
-+{
-+	struct pci_dev *pdev = to_pci_dev(device);
-+	struct quicki2c_device *qcdev;
-+	int ret;
-+
-+	qcdev = pci_get_drvdata(pdev);
-+	if (!qcdev)
-+		return -ENODEV;
-+
-+	ret = thc_port_select(qcdev->thc_hw, THC_PORT_TYPE_I2C);
-+	if (ret)
-+		return ret;
-+
-+	ret = thc_i2c_subip_regs_restore(qcdev->thc_hw);
-+	if (ret)
-+		return ret;
-+
-+	thc_interrupt_config(qcdev->thc_hw);
-+
-+	thc_interrupt_enable(qcdev->thc_hw, true);
-+
-+	ret = thc_dma_configure(qcdev->thc_hw);
-+	if (ret)
-+		return ret;
-+
-+	ret = thc_interrupt_quiesce(qcdev->thc_hw, false);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int quicki2c_freeze(struct device *device)
-+{
-+	struct pci_dev *pdev = to_pci_dev(device);
-+	struct quicki2c_device *qcdev;
-+	int ret;
-+
-+	qcdev = pci_get_drvdata(pdev);
-+	if (!qcdev)
-+		return -ENODEV;
-+
-+	ret = thc_interrupt_quiesce(qcdev->thc_hw, true);
-+	if (ret)
-+		return ret;
-+
-+	thc_interrupt_enable(qcdev->thc_hw, false);
-+
-+	thc_dma_unconfigure(qcdev->thc_hw);
-+
-+	return 0;
-+}
-+
-+static int quicki2c_thaw(struct device *device)
-+{
-+	struct pci_dev *pdev = to_pci_dev(device);
-+	struct quicki2c_device *qcdev;
-+	int ret;
-+
-+	qcdev = pci_get_drvdata(pdev);
-+	if (!qcdev)
-+		return -ENODEV;
-+
-+	ret = thc_dma_configure(qcdev->thc_hw);
-+	if (ret)
-+		return ret;
-+
-+	thc_interrupt_enable(qcdev->thc_hw, true);
-+
-+	ret = thc_interrupt_quiesce(qcdev->thc_hw, false);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int quicki2c_poweroff(struct device *device)
-+{
-+	struct pci_dev *pdev = to_pci_dev(device);
-+	struct quicki2c_device *qcdev;
-+	int ret;
-+
-+	qcdev = pci_get_drvdata(pdev);
-+	if (!qcdev)
-+		return -ENODEV;
-+
-+	ret = thc_interrupt_quiesce(qcdev->thc_hw, true);
-+	if (ret)
-+		return ret;
-+
-+	thc_interrupt_enable(qcdev->thc_hw, false);
-+
-+	thc_ltr_unconfig(qcdev->thc_hw);
-+
-+	quicki2c_dma_deinit(qcdev);
-+
-+	return 0;
-+}
-+
-+static int quicki2c_restore(struct device *device)
-+{
-+	struct pci_dev *pdev = to_pci_dev(device);
-+	struct quicki2c_device *qcdev;
-+	int ret;
-+
-+	qcdev = pci_get_drvdata(pdev);
-+	if (!qcdev)
-+		return -ENODEV;
-+
-+	/* Reconfig THC HW when back from hibernate */
-+	ret = thc_port_select(qcdev->thc_hw, THC_PORT_TYPE_I2C);
-+	if (ret)
-+		return ret;
-+
-+	ret = thc_i2c_subip_init(qcdev->thc_hw, qcdev->i2c_slave_addr,
-+				 qcdev->i2c_speed_mode,
-+				 qcdev->i2c_clock_hcnt,
-+				 qcdev->i2c_clock_lcnt);
-+	if (ret)
-+		return ret;
-+
-+	thc_interrupt_config(qcdev->thc_hw);
-+
-+	thc_interrupt_enable(qcdev->thc_hw, true);
-+
-+	ret = thc_interrupt_quiesce(qcdev->thc_hw, false);
-+	if (ret)
-+		return ret;
-+
-+	ret = thc_dma_configure(qcdev->thc_hw);
-+	if (ret)
-+		return ret;
-+
-+	thc_ltr_config(qcdev->thc_hw,
-+		       qcdev->active_ltr_val,
-+		       qcdev->low_power_ltr_val);
-+
-+	thc_change_ltr_mode(qcdev->thc_hw, THC_LTR_MODE_ACTIVE);
-+
-+	return 0;
-+}
-+
-+static int quicki2c_runtime_suspend(struct device *device)
-+{
-+	struct pci_dev *pdev = to_pci_dev(device);
-+	struct quicki2c_device *qcdev;
-+
-+	qcdev = pci_get_drvdata(pdev);
-+	if (!qcdev)
-+		return -ENODEV;
-+
-+	thc_change_ltr_mode(qcdev->thc_hw, THC_LTR_MODE_LP);
-+
-+	pci_save_state(pdev);
-+
-+	return 0;
-+}
-+
-+static int quicki2c_runtime_resume(struct device *device)
-+{
-+	struct pci_dev *pdev = to_pci_dev(device);
-+	struct quicki2c_device *qcdev;
-+
-+	qcdev = pci_get_drvdata(pdev);
-+	if (!qcdev)
-+		return -ENODEV;
-+
-+	thc_change_ltr_mode(qcdev->thc_hw, THC_LTR_MODE_ACTIVE);
-+
-+	return 0;
-+}
-+
-+static const struct dev_pm_ops quicki2c_pm_ops = {
-+	.suspend = quicki2c_suspend,
-+	.resume = quicki2c_resume,
-+	.freeze = quicki2c_freeze,
-+	.thaw = quicki2c_thaw,
-+	.poweroff = quicki2c_poweroff,
-+	.restore = quicki2c_restore,
-+	.runtime_suspend = quicki2c_runtime_suspend,
-+	.runtime_resume = quicki2c_runtime_resume,
-+	.runtime_idle = NULL,
-+};
-+
- static const struct pci_device_id quicki2c_pci_tbl[] = {
- 	{PCI_VDEVICE(INTEL, THC_LNL_DEVICE_ID_I2C_PORT1), },
- 	{PCI_VDEVICE(INTEL, THC_LNL_DEVICE_ID_I2C_PORT2), },
-@@ -716,6 +948,7 @@ static struct pci_driver quicki2c_driver = {
- 	.probe = quicki2c_probe,
- 	.remove = quicki2c_remove,
- 	.shutdown = quicki2c_shutdown,
-+	.driver.pm = &quicki2c_pm_ops,
- 	.driver.probe_type = PROBE_PREFER_ASYNCHRONOUS,
- };
- 
-diff --git a/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-dev.h b/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-dev.h
-index d9fac30da827..00aaf094d2d3 100644
---- a/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-dev.h
-+++ b/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-dev.h
-@@ -32,6 +32,14 @@
- #define QUICKI2C_DEFAULT_LP_LTR_VALUE		500
- #define QUICKI2C_RPM_TIMEOUT_MS			500
- 
-+/*
-+ * THC uses runtime auto suspend to dynamically switch between THC active LTR
-+ * and low power LTR to save CPU power.
-+ * Default value is 5000ms, that means if no touch event in this time, THC will
-+ * change to low power LTR mode.
-+ */
-+#define DEFAULT_AUTO_SUSPEND_DELAY_MS			5000
-+
- enum quicki2c_dev_state {
- 	QUICKI2C_NONE,
- 	QUICKI2C_RESETING,
-diff --git a/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-hid.c b/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-hid.c
-index e8e6f10b7952..5c3ec95bb3fd 100644
---- a/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-hid.c
-+++ b/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-hid.c
-@@ -3,6 +3,7 @@
- 
- #include <linux/hid.h>
- #include <linux/input.h>
-+#include <linux/pm_runtime.h>
- 
- #include "quicki2c-dev.h"
- #include "quicki2c-hid.h"
-@@ -55,6 +56,10 @@ static int quicki2c_hid_raw_request(struct hid_device *hid,
- 	struct quicki2c_device *qcdev = hid->driver_data;
- 	int ret = 0;
- 
-+	ret = pm_runtime_resume_and_get(qcdev->dev);
-+	if (ret)
-+		return ret;
-+
- 	switch (reqtype) {
- 	case HID_REQ_GET_REPORT:
- 		ret = quicki2c_get_report(qcdev, rtype, reportnum, buf, len);
-@@ -67,6 +72,9 @@ static int quicki2c_hid_raw_request(struct hid_device *hid,
- 		break;
- 	}
- 
-+	pm_runtime_mark_last_busy(qcdev->dev);
-+	pm_runtime_put_autosuspend(qcdev->dev);
-+
- 	return ret;
- }
- 
+- Link to v2: https://lore.kernel.org/r/20241023-ad7380-add-adaq4380-4-support-v2-0-d55faea3bedf@baylibre.com
+
+Changes in v2:
+- fix commit messages and documentation about the gain: pin selectable
+  gain instead of configurable gain
+- add the enum of available gains inthe binding and array of available
+  gains in the driver as ad4000 series
+- in the bindings, remove item from channel reg property
+- in the bindings, merge additional supplies and channel properties inside
+  the same if branch for adaq devices
+- fix comment as suggested by Jonathan in the driver
+
+- Link to v1: https://lore.kernel.org/r/20241015-ad7380-add-adaq4380-4-support-v1-0-d2e1a95fb248@baylibre.com
+
+---
+Julien Stephan (4):
+      dt-bindings: iio: adc: ad7380: add adaq4370-4 and adaq4380-4 compatible parts
+      iio: adc: ad7380: fix oversampling formula
+      iio: adc: ad7380: add support for adaq4370-4 and adaq4380-4
+      docs: iio: ad7380: add adaq4370-4 and adaq4380-4
+
+ .../devicetree/bindings/iio/adc/adi,ad7380.yaml    | 120 +++++++++++++++++
+ Documentation/iio/ad7380.rst                       |  18 +++
+ drivers/iio/adc/ad7380.c                           | 149 +++++++++++++++++++--
+ 3 files changed, 278 insertions(+), 9 deletions(-)
+---
+base-commit: 8bea3878a1511bceadc2fbf284b00bcc5a2ef28d
+change-id: 20241015-ad7380-add-adaq4380-4-support-14dc17ec0029
+prerequisite-change-id: 20241004-ad7380-fix-supplies-3677365cf8aa:v3
+prerequisite-patch-id: 6127a52d3b14e82d1a6081c7e504d0e4eb323089
+prerequisite-patch-id: 7dee57142d0d12682b0be3b62f1c16851aeac069
+prerequisite-patch-id: f737e56a372cd91e5fac651a2063b06827f9aa21
+prerequisite-patch-id: 7c8d5fbde82810057630b95e12bb2f6576da6980
+prerequisite-patch-id: 972bdbf06bafa7c56f604dbe8eb7d236aadaad99
+
+Best regards,
 -- 
-2.40.1
+Julien Stephan <jstephan@baylibre.com>
 
 
