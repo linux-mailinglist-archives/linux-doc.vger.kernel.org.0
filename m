@@ -1,117 +1,166 @@
-Return-Path: <linux-doc+bounces-28678-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28680-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC7099B1261
-	for <lists+linux-doc@lfdr.de>; Sat, 26 Oct 2024 00:13:08 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3FC949B12AD
+	for <lists+linux-doc@lfdr.de>; Sat, 26 Oct 2024 00:33:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 879A4B2198E
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Oct 2024 22:13:06 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 724261C20ECE
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Oct 2024 22:33:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA15D20EA3A;
-	Fri, 25 Oct 2024 22:13:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="GsqKIeiV"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DBFA021315D;
+	Fri, 25 Oct 2024 22:32:48 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com [91.218.175.186])
+Received: from trager.us (trager.us [52.5.81.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70DE51D0E28
-	for <linux-doc@vger.kernel.org>; Fri, 25 Oct 2024 22:12:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.186
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7C4421312D;
+	Fri, 25 Oct 2024 22:32:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=52.5.81.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1729894380; cv=none; b=VN+1q2Tq/D4JBGNQpMWln0ITt05PXLC15wh9lIXVDuwzvwYRjmzAqQuYH9vl8iuJ2p/2v1wIQgVoTOSwnnM+c5/Vec6kw2qwTg6dl6hfLyOeVCQt4BZex7na8BhfH9rP2Hnw6oRo6J85+//RJ4HRrK/8UnPF+sfgYBbAHKhpkQM=
+	t=1729895568; cv=none; b=T9kVWajy+6LZkxrMzOKeW7//ZIF/BwXjIeYlHhwIrxTtrQfF4sOdX+V8DfYsZ5qtaoPPiYeYONen2/vAwFhQUBX/JfD2lpLpYlgN7oX6mRplCgin4zz4xkNrEJZp7AajWveNuRbTsCWyvN9S9+lRgFBFDRn7bVn0ooInn19rKPM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1729894380; c=relaxed/simple;
-	bh=wLE7gbHS/zil2nem3fEemkkOYe/GUpOOrZThEvr7q0s=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Wm8qh/hTCCXGyBpTL6QdkVuiVHJ6NOmDQiKKNC6AqnlwbEOsUjzanehvs5HIRTZKNIWHy27SOWWbahtHeuOBD3amPnK+Cvg6bq9PUnMWOj/7kEVNdTZRs2JIUzi25aQtUsx9pJ2xETlj6/lOxCcfh6fK7xUULSr/A+9U5vtlQkE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=GsqKIeiV; arc=none smtp.client-ip=91.218.175.186
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1729894375;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zT1JrWE0wCzIdFq3Ykrqf07oSRTFil0hjG6CI7HG/ls=;
-	b=GsqKIeiVrOjDeIqr8pui3jQ5t9ZLl0riwXzeEm3iMypLtUcBfhsFMieprt7Jp5OCC0vXYD
-	VeR8QxXxWX+5gPplyWcBcmvxVFiiLWnU3/GseaivcagIBJbS3cu7H4+xzUuK/o30WeNPCG
-	EK6wMoMIt90L9dhTT5SxTL+0e1zn780=
-From: Oliver Upton <oliver.upton@linux.dev>
-To: Zenghui Yu <yuzenghui@huawei.com>,
-	James Morse <james.morse@arm.com>,
-	linux-doc@vger.kernel.org,
-	David Woodhouse <dwmw2@infradead.org>,
-	Marc Zyngier <maz@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	kvmarm@lists.linux.dev,
-	Len Brown <len.brown@intel.com>,
-	Mark Rutland <mark.rutland@arm.com>,
-	linux-kernel@vger.kernel.org,
-	Pavel Machek <pavel@ucw.cz>,
-	Shuah Khan <shuah@kernel.org>,
-	kvm@vger.kernel.org,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	David Woodhouse <dwmw@amazon.co.uk>,
-	Miguel Luis <miguel.luis@oracle.com>,
-	Will Deacon <will@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	linux-kselftest@vger.kernel.org,
-	Francesco Lavra <francescolavra.fl@gmail.com>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	linux-pm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org
-Cc: Oliver Upton <oliver.upton@linux.dev>
-Subject: Re: (subset) [PATCH v6 0/6] Add PSCI v1.3 SYSTEM_OFF2 support for hibernation
-Date: Fri, 25 Oct 2024 22:12:41 +0000
-Message-ID: <172989416837.3684225.4795897590830335669.b4-ty@linux.dev>
-In-Reply-To: <20241019172459.2241939-1-dwmw2@infradead.org>
-References: <20241019172459.2241939-1-dwmw2@infradead.org>
+	s=arc-20240116; t=1729895568; c=relaxed/simple;
+	bh=KwnQJqiRsCWMxc9Z25pBZlicEvkalDLV1dR5FfpXCtg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=J+aQKylV15OSbO83s3MRF0e3JWXGhODV9fbV4PZdSv5jaWR95sNv7eqp607fswzXYllB+CGnrAl5mZeaWuD1MkstlG93d860dJOTYZQp0yAB4PYO0KScdvLGWYUJu12S39CSHzkjabI+K0x0i6fbsh7wgKwghbhAVUMUzJwnjBM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=trager.us; spf=pass smtp.mailfrom=trager.us; arc=none smtp.client-ip=52.5.81.116
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=trager.us
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=trager.us
+Received: from c-76-104-255-50.hsd1.wa.comcast.net ([76.104.255.50] helo=[192.168.1.226])
+	by trager.us with esmtpsa (TLSv1.3:TLS_AES_128_GCM_SHA256:128)
+	(Exim 4.92.3)
+	(envelope-from <lee@trager.us>)
+	id 1t4SrI-0002DC-C4; Fri, 25 Oct 2024 22:32:40 +0000
+Message-ID: <13229808-dde5-4805-b908-ce65c8b342b4@trager.us>
+Date: Fri, 25 Oct 2024 15:32:32 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next v2 2/2] eth: fbnic: Add devlink dev flash support
+To: Simon Horman <horms@kernel.org>
+Cc: Alexander Duyck <alexanderduyck@fb.com>, Jakub Kicinski
+ <kuba@kernel.org>, kernel-team@meta.com,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, Sanman Pradhan
+ <sanmanpradhan@meta.com>, Al Viro <viro@zeniv.linux.org.uk>,
+ Mohsin Bashir <mohsin.bashr@gmail.com>, netdev@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20241012023646.3124717-1-lee@trager.us>
+ <20241022014319.3791797-1-lee@trager.us> <20241024091032.GI402847@kernel.org>
+Content-Language: en-US
+From: Lee Trager <lee@trager.us>
+In-Reply-To: <20241024091032.GI402847@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, 19 Oct 2024 18:15:41 +0100, David Woodhouse wrote:
-> The PSCI v1.3 spec (https://developer.arm.com/documentation/den0022)
-> adds support for a SYSTEM_OFF2 function enabling a HIBERNATE_OFF state
-> which is analogous to ACPI S4. This will allow hosting environments to
-> determine that a guest is hibernated rather than just powered off, and
-> ensure that they preserve the virtual environment appropriately to
-> allow the guest to resume safely (or bump the hardware_signature in the
-> FACS to trigger a clean reboot instead).
-> 
-> [...]
 
-I grabbed the KVM portions of this series, as they look ready to go. Happy
-to take the last one through kvmarm tree w/ acks, and can toss it on top.
+On 10/24/24 2:10 AM, Simon Horman wrote:
+> On Mon, Oct 21, 2024 at 06:42:24PM -0700, Lee Trager wrote:
+>> fbnic supports updating firmware using a PLDM image signed and distributed
+>> by Meta. PLDM images are written into stored flashed. Flashing does not
+>> interrupt operation.
+>>
+>> On host reboot the newly flashed UEFI driver will be used. To run new
+>> control or cmrt firmware the NIC must be power cycled.
+>>
+>> Signed-off-by: Lee Trager <lee@trager.us>
+> ...
+>
+>> diff --git a/drivers/net/ethernet/meta/fbnic/fbnic_devlink.c b/drivers/net/ethernet/meta/fbnic/fbnic_devlink.c
+> ...
+>
+>> @@ -109,8 +110,274 @@ static int fbnic_devlink_info_get(struct devlink *devlink,
+>>   	return 0;
+>>   }
+>>
+>> +/**
+>> + * fbnic_send_package_data - Send record package data to firmware
+>> + * @context: PLDM FW update structure
+>> + * @data: pointer to the package data
+>> + * @length: length of the package data
+>> + *
+>> + * Send a copy of the package data associated with the PLDM record matching
+>> + * this device to the firmware.
+>> + *
+>> + * Return: zero on success
+>> + *	    negative error code on failure
+>> + */
+>> +static int fbnic_send_package_data(struct pldmfw *context, const u8 *data,
+>> +				   u16 length)
+>> +{
+>> +	struct device *dev = context->dev;
+>> +
+>> +	/* Temp placeholder required by devlink */
+>> +	dev_info(dev,
+>> +		 "Sending %u bytes of PLDM record package data to firmware\n",
+>> +		 length);
+> Could you clarify what is meant by "Temp placeholder" here and in
+> fbnic_send_component_table(). And what plans there might be for
+> a non-temporary solution.
 
-Applied to kvmarm/next, thanks!
+Temp placeholder may not have been the best wording here. pldmfw 
+requires all ops to be defined as they are always called[1] when 
+updating. fbnic has an info message here so its doing something but we 
+have no current plans to expand on fbnic_send_package_data nor 
+fbnic_finalize_update.
 
-[1/6] firmware/psci: Add definitions for PSCI v1.3 specification
-      https://git.kernel.org/kvmarm/kvmarm/c/2f2d46959808
-[2/6] KVM: arm64: Add PSCI v1.3 SYSTEM_OFF2 function for hibernation
-      https://git.kernel.org/kvmarm/kvmarm/c/97413cea1c48
-[3/6] KVM: arm64: Add support for PSCI v1.2 and v1.3
-      https://git.kernel.org/kvmarm/kvmarm/c/8be82d536a9f
-[4/6] KVM: selftests: Add test for PSCI SYSTEM_OFF2
-      https://git.kernel.org/kvmarm/kvmarm/c/72be5aa6be4a
-[5/6] KVM: arm64: nvhe: Pass through PSCI v1.3 SYSTEM_OFF2 call
-      https://git.kernel.org/kvmarm/kvmarm/c/94f985c39a1e
+[1] 
+https://elixir.bootlin.com/linux/v6.12-rc4/source/lib/pldmfw/pldmfw.c#L723
 
---
-Best,
-Oliver
+>
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +/**
+>> + * fbnic_send_component_table - Send PLDM component table to the firmware
+>> + * @context: PLDM FW update structure
+>> + * @component: The component to send
+>> + * @transfer_flag: Flag indication location in component tables
+>> + *
+>> + * Read relevant data from component table and forward it to the firmware.
+>> + * Check response to verify if the firmware indicates that it wishes to
+>> + * proceed with the update.
+>> + *
+>> + * Return: zero on success
+>> + *	    negative error code on failure
+>> + */
+>> +static int fbnic_send_component_table(struct pldmfw *context,
+>> +				      struct pldmfw_component *component,
+>> +				      u8 transfer_flag)
+>> +{
+>> +	struct device *dev = context->dev;
+>> +	u16 id = component->identifier;
+>> +	u8 test_string[80];
+>> +
+>> +	switch (id) {
+>> +	case QSPI_SECTION_CMRT:
+>> +	case QSPI_SECTION_CONTROL_FW:
+>> +	case QSPI_SECTION_OPTION_ROM:
+>> +		break;
+>> +	default:
+>> +		dev_err(dev, "Unknown component ID %u\n", id);
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	dev_dbg(dev, "Sending PLDM component table to firmware\n");
+>> +
+>> +	/* Temp placeholder */
+>> +	strscpy(test_string, component->version_string,
+>> +		min_t(u8, component->version_len, 79));
+>> +	dev_info(dev, "PLDMFW: Component ID: %u version %s\n",
+>> +		 id, test_string);
+>> +
+>> +	return 0;
+>> +}
+> ...
+>
 
