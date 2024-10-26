@@ -1,147 +1,232 @@
-Return-Path: <linux-doc+bounces-28723-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28725-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCAF09B1A47
-	for <lists+linux-doc@lfdr.de>; Sat, 26 Oct 2024 20:03:57 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 830AB9B1A9B
+	for <lists+linux-doc@lfdr.de>; Sat, 26 Oct 2024 21:38:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2C39C1C20DE3
-	for <lists+linux-doc@lfdr.de>; Sat, 26 Oct 2024 18:03:55 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 13BE31F21B63
+	for <lists+linux-doc@lfdr.de>; Sat, 26 Oct 2024 19:38:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7DE7314A91;
-	Sat, 26 Oct 2024 18:03:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8DFC1D86DC;
+	Sat, 26 Oct 2024 19:38:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b="QqSWk7fc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 68F1333F6;
-	Sat, 26 Oct 2024 18:03:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=163.172.96.212
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8FA51D5CD6;
+	Sat, 26 Oct 2024 19:38:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.17.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1729965831; cv=none; b=IH/6LwHEUNKBi6/VkXO8XDGj7gfeyLoAzNQ5kijKMVNT9Ppz8JBxCm/Wn4bj9lEifehDNDgNOgwxFLM6oW8lEEzevL2rtH7vgmZVVtQXNR5x6j2J6kedoxaqeBTcE1LpT3aWFICQrb5T61Zket1tF0rXWlq5S8zckcjDxjXvUU4=
+	t=1729971507; cv=none; b=glp4jPNayPR/gdpBVcvgpdhXO1oHcFT4vRw31SPQS1fIMVtBMuPuPxpYSwxGPRJEift7jk/NdnPW0r8yN2n7exE6lyD7YUjK1T8YBbHa9F87rIVRNnMNwfqDxIQq44J50MoTF8XAxBtgSVOCtoqv9ho2eSjvLc5YtOklzdrkEaE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1729965831; c=relaxed/simple;
-	bh=x0J2jXABQk0AfmWQJSvPjWMMy56gbFwY6CO7ZEFdsrs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=StL/f4JvJPknClmCD3I1juVVa7Qkq1tuo7es3QGPuhObAx+dPvQE95bw2wuu/rWR2BDKI2V8aroUY3Dn57eUPkCeyS2ySBEaSp4zcQoievy2mq0lnqg6IbPeS/uQc+Re6SVomsamEpoz/d1SGUwjhSlDN6rV23S1j5OY56tsDXI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; arc=none smtp.client-ip=163.172.96.212
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=1wt.eu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=1wt.eu
-Received: (from willy@localhost)
-	by pcw.home.local (8.15.2/8.15.2/Submit) id 49QHskX0009892;
-	Sat, 26 Oct 2024 19:54:46 +0200
-Date: Sat, 26 Oct 2024 19:54:46 +0200
-From: Willy Tarreau <w@1wt.eu>
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: "Theodore Ts'o" <tytso@mit.edu>, linux-kernel@vger.kernel.org,
-        conduct@kernel.org, security@kernel.org, cve@kernel.org,
-        linux-doc@vger.kernel.org,
-        "stable@vger.kernel.org" <stable@vger.kernel.org>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>, shuah@kernel.org,
-        lee@kernel.org, sashal@kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: Re: Concerns over transparency of informal kernel groups
-Message-ID: <20241026175446.GA9630@1wt.eu>
-Reply-To: linux-kernel@vger.kernel.org
-References: <73b8017b-fce9-4cb1-be48-fc8085f1c276@app.fastmail.com>
- <20241026145640.GA4029861@mit.edu>
- <522bd817-339a-45b0-84c2-2b1a4a87980a@app.fastmail.com>
+	s=arc-20240116; t=1729971507; c=relaxed/simple;
+	bh=d1V/dguyMdkQ894qaTrU0VIKewUzrG583siX1uYRUuk=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=OBiEA8OTYC3T6aa1SBv5Vx/WA/VgjfniSGZJRTizTExDcXIH17QLZxYNEjWNPLYe8wf9G30FEFbukatDwT5qtj4viWeMISNKVH1o7ePnR2ndMeVd3hjj3jjEXUahu13RyYFsM2CM70zi2KpTpEmKspxxYVx+4bqFB532N9Hkcxs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de; spf=pass smtp.mailfrom=gmx.de; dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b=QqSWk7fc; arc=none smtp.client-ip=212.227.17.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+	s=s31663417; t=1729971487; x=1730576287; i=w_armin@gmx.de;
+	bh=Gf9Rm3uYqtLsaxiRDrxMARdgLCzi8xnbixUi1ilrFmg=;
+	h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-Id:
+	 MIME-Version:Content-Transfer-Encoding:cc:
+	 content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=QqSWk7fcd0sb3b6lpx1yidaJyy2nQ/4a56xvHLt1jE0XLa50W/MBwMruYZyAFe3k
+	 CVaLh8V/o7N2OLRPcYmVKIZ3RMWz7pemdryKKSn4qVETzCv7iP+ljknmAEZovvuV0
+	 k2fdprSSyl7ukQ4WY+GYmXiLYBBLgVhkrzcPtPby3RpOXDGpT2yrChZYuIcgZjuPk
+	 54KcC2SDmH9+qSx2xNSL56SN+Ev9uBXjaNSON/QIKtxxPJplQSqDLKXeLJ8bRAc/1
+	 DDIDczVc6/SZk/0plekT9um5TP/CF/osEJSF8XFD63krdcDsbQYuV5xsyLHyEJdXL
+	 /y7K00/s0gy+EsOZ9Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from mx-amd-b650.users.agdsn.de ([141.30.226.129]) by mail.gmx.net
+ (mrgmx105 [212.227.17.168]) with ESMTPSA (Nemesis) id
+ 1MvsEx-1tuoxs2HEl-015nSX; Sat, 26 Oct 2024 21:38:07 +0200
+From: Armin Wolf <W_Armin@gmx.de>
+To: hdegoede@redhat.com,
+	ilpo.jarvinen@linux.intel.com,
+	corbet@lwn.net
+Cc: platform-driver-x86@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 1/3] platform/x86: wmi: Remove wmi_block_list
+Date: Sat, 26 Oct 2024 21:38:01 +0200
+Message-Id: <20241026193803.8802-1-W_Armin@gmx.de>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <522bd817-339a-45b0-84c2-2b1a4a87980a@app.fastmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:kZJhtkoclHRproBQXZZet/ATUoqs3c+/9DMHHFpC39RiWdUuA2y
+ jZbyFccFYjKB3NwKarpL4kevuAg6zIyANBG18bTCK0JGWighPXHTKLG2KM2rtV37ypXvkQU
+ Dy6Ew/pZfy2llSbCsmw7OS6zfb+P/JV/Ha1WWJ16PS7TlQQUN1LAlvcLgPUgHmC9S3YOAvt
+ 9Nmn2A/tASxe37qpwUmew==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:2p/BzGKeGUs=;q/CARAxDSmw5TpR4a5JsaF3rEt7
+ nxnD/vcPlb1lbxzS6jO367m7vs7GOQqEUk4YuYhMbPV7VwsNri3tk2+Q8ylByrkR26aw5GeCY
+ bEPESbC3fDMVFeSWw0jn4u391I2HEl1Sb9gMAvEUyzs0yGTD6EASY40sA9077nHMUnUglVazJ
+ O7kXLjgC3/izmC8H+nDIuT9FcD0QJJLgqxCO3groo+17BDCQ28eK0d2ResntZA2zJiDEkj2FH
+ NrJyfRuMV4APDtAJLUHrQ1pTPa0E3O4RWaxkk8T7a3GrY4lgBINyek3GZwa8e3wA3p8iTmnXN
+ +uodMD44loQIzq3nndqxCSVZ6TDaALZg7op2ybudBKdQOqTkU8FMbnDTNEYYXsVnm7WnhbHUD
+ ht+HczaEYCmLg0saUwmlw0PZKTCnORgQ0NmmrqH2y4p85b3zKACPu67GVKwu0A8C/buvvSkeQ
+ TBAGsSZlnO2UYDOm1SILCgHfmQoIxxZdiYJu95nV084HjrXxObX/IgpBb4vK53lCkPvHCY2zZ
+ UC4fWHZctU+gStLJUWLmRp/VkIo6OTmbffFsdbVnTO58LDyOi4faIC8vkEFr9vVoFHHfu/RAd
+ dhYExKREU+9KddG7bl8q2xw8lBxK/YZtIozBV466NpLFoC4IVeYxWdw6n5Opqw8BoOyaSPkxz
+ /YWrIPbfTO2gtwYPITTVzGa3TDH7efOlU7P8/OcslUgq2WCkNP1MX1yi1a3iE4rJNRpnLEZvH
+ u6Ih0ruhdkA8MAO2UErKTd3bgb3emj+N6l78TcNunqVo7EEYQrBnzWfQEcFPbJQMctJk7BDO2
+ W/UffGmvUTX6cl+2sIvlDlQQ==
 
-On Sat, Oct 26, 2024 at 05:33:16PM +0100, Jiaxun Yang wrote:
-> > There's quite a bit of information available in the Linux Kernel
-> > documentation.  For example:
-> >
-> > * https://www.kernel.org/doc/html/latest/process/security-bugs.html
-> > * https://www.kernel.org/doc/html/latest/process/code-of-conduct.html
-> > * https://www.kernel.org/code-of-conduct.html
-> 
-> Thank you for the pointers. My concerns actually rooted from the first two
-> documents, and I was directed to the third link off-list following my
-> initial post.
-> 
-> In process/security-bugs, the term "security officers" is consistently mentioned,
-> yet it's unclear who they are, what specific privileges they hold compared to
-> regular developers,
+The wmi_block_list is only used by guid_count() and without proper
+protection. It also duplicates some of the WMI bus functionality.
 
-The "security officers" is just a small group of trusted maintainers
-(~20) who devote some of their spare time (and possibly some work time
-as well) reviewing, triaging, and forwarding some security reports that
-arrive there. I think the term "security officers" is used essentially
-to remind that reporters are interacting with real people without the
-heavy weight of processes or whatever some could possibly imagine.
+Remove the wmi_block_list and use bus_for_each_dev() instead.
 
-I'm not aware of a public list of participants, though the list of
-participants is shared between the members from time to time when one
-arrives or leaves. I think discretion is key here because I'm not even
-sure that every participant's employer knows that they're on that list,
-and it's better this way, as some might try to exert pressure to try
-to get some early notifications, which is absolutely forbidden.
+Signed-off-by: Armin Wolf <W_Armin@gmx.de>
+=2D--
+ drivers/platform/x86/wmi.c | 50 +++++++++++++++++++++-----------------
+ 1 file changed, 28 insertions(+), 22 deletions(-)
 
-Participants are quite responsible people. Some have already left the
-list by lacking time to participate, some temporarily or definitely.
-New participants are sometimes asked to join because they're involved
-in many of the reports, and that way they can directly interact with
-the reporter without anyone having to review and forward them the
-messages first.
+diff --git a/drivers/platform/x86/wmi.c b/drivers/platform/x86/wmi.c
+index 2d6885c67ac0..4704e79197f6 100644
+=2D-- a/drivers/platform/x86/wmi.c
++++ b/drivers/platform/x86/wmi.c
+@@ -22,7 +22,6 @@
+ #include <linux/device.h>
+ #include <linux/init.h>
+ #include <linux/kernel.h>
+-#include <linux/list.h>
+ #include <linux/module.h>
+ #include <linux/platform_device.h>
+ #include <linux/rwsem.h>
+@@ -37,8 +36,6 @@ MODULE_AUTHOR("Carlos Corbacho");
+ MODULE_DESCRIPTION("ACPI-WMI Mapping Driver");
+ MODULE_LICENSE("GPL");
 
-So if you wonder who's there, just ask yourself who can speed up the
-process by participating when there are frequent reports in their area
-of expertise, and you'll guess by yourself a few of them :-)
+-static LIST_HEAD(wmi_block_list);
+-
+ struct guid_block {
+ 	guid_t guid;
+ 	union {
+@@ -63,7 +60,6 @@ enum {	/* wmi_block flags */
 
-> and how security fixes are expected to reach Linus's tree
-> during an embargo period.
+ struct wmi_block {
+ 	struct wmi_device dev;
+-	struct list_head list;
+ 	struct guid_block gblock;
+ 	struct acpi_device *acpi_device;
+ 	struct rw_semaphore notify_lock;	/* Protects notify callback add/remove =
+*/
+@@ -73,6 +69,10 @@ struct wmi_block {
+ 	unsigned long flags;
+ };
 
-There's no hard-rule there. Some fixes are written by some of the team
-members because the bug is directly in the subsystem they maintain so
-for them the easiest path is to take the patch and add it to their
-pending queue. Most of the time the fixes are forwarded to maintainers
-not part of the list and they deal with them the way they're used to
-for other bugs reports. Most of the time bug reporters are told that
-their report is not critical and should be handled the regular way (as
-it's always better to have public discussions on fixes). It's super
-rare that fixes are merged directly by Linus himself. It could happen
-because there's a huge emergency, but history told us that bugs handled
-in emergency do not always result in the best fixes. Also if one is
-seeking discretion, the last thing to do is to merge the fix without
-sharing it on a public list, as that's what attracts suspecting eyes :-)
++struct wmi_guid_count_context {
++	const guid_t *guid;
++	int count;
++};
 
-Also, for the vast majority of bug reports there's no embargo period
-requested by the reporter, as most of them just want bugs to be fixed.
-I think it might be less than 1-2% for which an embargo is requested,
-and that's fine because fixes don't wait. Most of the time once the
-fix is agreed upon by the different parties and passes the reporter's
-tests, it gets merged in the maintainer's tree.
+ /*
+  * If the GUID data block is marked as expensive, we must enable and
+@@ -942,21 +942,30 @@ static const struct device_type wmi_type_data =3D {
+ 	.release =3D wmi_dev_release,
+ };
 
-I noticed many times that there are some fantasies around the security
-list because it's not public, so people in quest of amazing stories may
-imagine lots of stuff happening there. The reality is that it's exactly
-like any other topic list where bugs are discussed between maintainers
-and bug reporters, but the discussions are just not public since they
-would directly put many users around the world in trouble without even
-having a chance to protect themselves. Another benefit of not being
-public is that it's easier for reporters to share traces, captures etc.
-They don't need to waste their time anonymizing them (though most of the
-time there's absolutely nothing confidential shared anyway, but an IP or
-MAC address can remain without having to hide them as is often done on
-public reports).
+-/*
+- * _WDG is a static list that is only parsed at startup,
+- * so it's safe to count entries without extra protection.
+- */
++static int wmi_count_guids(struct device *dev, void *data)
++{
++	struct wmi_guid_count_context *context =3D data;
++	struct wmi_block *wblock =3D dev_to_wblock(dev);
++
++	if (guid_equal(&wblock->gblock.guid, context->guid))
++		context->count++;
++
++	return 0;
++}
++
+ static int guid_count(const guid_t *guid)
+ {
+-	struct wmi_block *wblock;
+-	int count =3D 0;
++	struct wmi_guid_count_context context =3D {
++		.guid =3D guid,
++		.count =3D 0,
++	};
++	int ret;
 
-Really there's nothing special about that list, it simply helps to put
-bug reporter in relation with the appropriate maintainers and save them
-from trivial mistakes, because it's always frightening to report a
-security issue to a project, you always fear you're sending to the wrong
-people and will cause unexpected trouble. That list is there to address
-this specific point, and to make sure the report is not forgotten.
+-	list_for_each_entry(wblock, &wmi_block_list, list) {
+-		if (guid_equal(&wblock->gblock.guid, guid))
+-			count++;
+-	}
++	ret =3D bus_for_each_dev(&wmi_bus_type, NULL, &context, wmi_count_guids)=
+;
++	if (ret < 0)
++		return ret;
 
-I hope this clarifies its role a bit!
-Willy
+-	return count;
++	return context.count;
+ }
+
+ static int wmi_create_device(struct device *wmi_bus_dev,
+@@ -967,7 +976,7 @@ static int wmi_create_device(struct device *wmi_bus_de=
+v,
+ 	struct acpi_device_info *info;
+ 	acpi_handle method_handle;
+ 	acpi_status status;
+-	uint count;
++	int count;
+
+ 	if (wblock->gblock.flags & ACPI_WMI_EVENT) {
+ 		wblock->dev.dev.type =3D &wmi_type_event;
+@@ -1035,6 +1044,9 @@ static int wmi_create_device(struct device *wmi_bus_=
+dev,
+ 	wblock->dev.dev.parent =3D wmi_bus_dev;
+
+ 	count =3D guid_count(&wblock->gblock.guid);
++	if (count < 0)
++		return count;
++
+ 	if (count) {
+ 		dev_set_name(&wblock->dev.dev, "%pUL-%d", &wblock->gblock.guid, count);
+ 		set_bit(WMI_GUID_DUPLICATED, &wblock->flags);
+@@ -1120,14 +1132,11 @@ static int parse_wdg(struct device *wmi_bus_dev, s=
+truct platform_device *pdev)
+ 			continue;
+ 		}
+
+-		list_add_tail(&wblock->list, &wmi_block_list);
+-
+ 		retval =3D wmi_add_device(pdev, &wblock->dev);
+ 		if (retval) {
+ 			dev_err(wmi_bus_dev, "failed to register %pUL\n",
+ 				&wblock->gblock.guid);
+
+-			list_del(&wblock->list);
+ 			put_device(&wblock->dev.dev);
+ 		}
+ 	}
+@@ -1227,9 +1236,6 @@ static void acpi_wmi_notify_handler(acpi_handle hand=
+le, u32 event, void *context
+
+ static int wmi_remove_device(struct device *dev, void *data)
+ {
+-	struct wmi_block *wblock =3D dev_to_wblock(dev);
+-
+-	list_del(&wblock->list);
+ 	device_unregister(dev);
+
+ 	return 0;
+=2D-
+2.39.5
+
 
