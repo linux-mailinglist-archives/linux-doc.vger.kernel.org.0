@@ -1,107 +1,117 @@
-Return-Path: <linux-doc+bounces-30187-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30196-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCE7C9C05FB
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 13:40:33 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id C4FA49C0839
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 14:56:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 090671C20DEF
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 12:40:33 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 791D01F22919
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 13:56:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D955520E335;
-	Thu,  7 Nov 2024 12:40:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RmtHNgc5"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8A4D72101B0;
+	Thu,  7 Nov 2024 13:56:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC3051DB534;
-	Thu,  7 Nov 2024 12:40:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6552F20F5AA;
+	Thu,  7 Nov 2024 13:56:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730983228; cv=none; b=XS8RI0hKdKhik+2ZAjp7tjMLMY4JChwDlxOJVjoWel7JSZPJwaEL3RpeBmYNpYi6IbjcmC0MK/KVC2TDpEP4TtmrqhE+oey1ZzB9hKrK5BNAk9IXXssMYP/wy+xLuGoIS0LtCibEv96da2wKd4Yg/fOe9dvNOoERPsIikZWw24U=
+	t=1730987811; cv=none; b=JrC8PiAaxFINzymortJjSjk9uCVqie7c44YFo0hEiv1zUghJepPTqlxdbpZfx666Zaff/rMFHD+ozTAzQR2LIfJiyqiZ5VXOGdC214XU3dBrpWZv1Y0yUqFkV320d1xrQYxNqeJ5hFpo0MjT7rNi+l6dXXmUjmo1aFv4Z9W5TUU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730983228; c=relaxed/simple;
-	bh=VZ/R76eZ40KfZxIQM47Eo9NR0UwGvAKmLQ8wW76gHE8=;
-	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=q3vXZhR4Lhe6E//Sck0fS0SKfmdxiJysf6ker/PwNn4mfzBoAaNH5GPZvR6XbUAU8eTYhe44GIpRSaKLUBgNU0pOj/pdZd4BDBN5QgRVjD880YpMRHmZcTsVQw1ZxnvwtAh/Jsrbs9NRavrUIp7YziQcf4LW6tO4syRn8cncxZA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RmtHNgc5; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1EF80C4CECC;
-	Thu,  7 Nov 2024 12:40:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1730983226;
-	bh=VZ/R76eZ40KfZxIQM47Eo9NR0UwGvAKmLQ8wW76gHE8=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=RmtHNgc5aEh2jxi4LKZXroPeeq47lr+t5xy/sjX88jCya+GqX/J23XpfTXiHkbo+P
-	 RkA8aL9tmby/TCWLNUuHku7wuB8l63MMBCBNrFM9wX0+3Ymg8fydtjGDkRIgzVX6Bs
-	 vtTE28ikWXgdpm4UILIzcRJ+/JYjeuX3+/r+CFtodst2X9BkJa/4/cYOlCgl/3nuRA
-	 AwcqX74NgvsR86bxTMveB+M1h+M5NmIk9+D7LGHotpxVd3EY36gpbiOP9OVqkOg2Wh
-	 IYM2FJN7T9qe5mjoTjKMgcgO82f1BhXBcVrVaHb8TJwEvm0CQ4uES1rNlZP1vHwC6v
-	 88HD52YJcLtBQ==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 70F763809A80;
-	Thu,  7 Nov 2024 12:40:36 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	s=arc-20240116; t=1730987811; c=relaxed/simple;
+	bh=7v/jldVNPehBirnoJkZk0fUgltTH/iaWGYa4s4Cqmj0=;
+	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=Mk4McP2LNQeX9YVta3Ttp+buwVB1UlNMuilIvD4C3UQpSrs4+UxBM16JHSTW05EmQh0yycMNqFUQUAwF6jOCkvb4gewyblesLvCJwd7NUHpeHVKbjeDSmEV+9DrGs+bNhAwsRKuSaxLeAIH0yN1kwAjhMCLLWh4nc3yB+5P6bAw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=Huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=Huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.186.31])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4Xkk952JS5z6K99D;
+	Thu,  7 Nov 2024 21:55:05 +0800 (CST)
+Received: from frapeml500008.china.huawei.com (unknown [7.182.85.71])
+	by mail.maildlp.com (Postfix) with ESMTPS id A05BF140856;
+	Thu,  7 Nov 2024 21:56:45 +0800 (CST)
+Received: from localhost (10.203.177.66) by frapeml500008.china.huawei.com
+ (7.182.85.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Thu, 7 Nov
+ 2024 14:56:44 +0100
+Date: Mon, 28 Oct 2024 17:05:21 +0000
+From: Jonathan Cameron <Jonathan.Cameron@Huawei.com>
+To: Robert Budai <robert.budai@analog.com>
+CC: Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich
+	<Michael.Hennerich@analog.com>, Nuno Sa <nuno.sa@analog.com>, "Ramona
+ Gradinariu" <ramona.gradinariu@analog.com>, Antoniu Miclaus
+	<antoniu.miclaus@analog.com>, Jonathan Cameron <jic23@kernel.org>, "Rob
+ Herring" <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, "Conor
+ Dooley" <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Jagath Jog J
+	<jagathjog1996@gmail.com>, <linux-iio@vger.kernel.org>,
+	<devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <robi_budai@yahoo.com>
+Subject: Re: [PATCH 0/5] Add support for ADIS16550 and ADIS16550W
+Message-ID: <20241028170521.0000325c@Huawei.com>
+In-Reply-To: <20241028123550.9128-1-robert.budai@analog.com>
+References: <20241028123550.9128-1-robert.budai@analog.com>
+Organization: Huawei Technologies Research and Development (UK) Ltd.
+X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [net-next v8 0/3] net: wwan: t7xx: Add t7xx debug ports
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <173098323525.1650074.3036692889717501713.git-patchwork-notify@kernel.org>
-Date: Thu, 07 Nov 2024 12:40:35 +0000
-References: <20241104094436.466861-1-jinjian.song@fibocom.com>
-In-Reply-To: <20241104094436.466861-1-jinjian.song@fibocom.com>
-To: Jinjian Song <jinjian.song@fibocom.com>
-Cc: chandrashekar.devegowda@intel.com, chiranjeevi.rapolu@linux.intel.com,
- haijun.liu@mediatek.com, m.chetan.kumar@linux.intel.com,
- ricardo.martinez@linux.intel.com, loic.poulain@linaro.org,
- ryazanov.s.a@gmail.com, johannes@sipsolutions.net, davem@davemloft.net,
- edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
- linux-doc@vger.kernel.org, angelogioacchino.delregno@collabora.com,
- linux-arm-kernel@lists.infradead.org, matthias.bgg@gmail.com, corbet@lwn.net,
- linux-mediatek@lists.infradead.org, helgaas@kernel.org,
- danielwinkler@google.com, korneld@google.com, andrew+netdev@lunn.ch,
- horms@kernel.org
+X-ClientProxiedBy: lhrpeml100001.china.huawei.com (7.191.160.183) To
+ frapeml500008.china.huawei.com (7.182.85.71)
 
-Hello:
+On Mon, 28 Oct 2024 14:35:42 +0200
+Robert Budai <robert.budai@analog.com> wrote:
 
-This series was applied to netdev/net-next.git (main)
-by Paolo Abeni <pabeni@redhat.com>:
+> The ADIS16550 is a complete inertial system that includes a triaxis gyros=
+cope
+> and a triaxis accelerometer. Each inertial sensor in the ADIS16550 combin=
+es
+> industry leading MEMS only technology with signal conditioning that optim=
+izes
+> dynamic performance. The factory calibration characterizes each sensor fo=
+r
+> sensitivity, bias, and alignment. As a result, each sensor has its own dy=
+namic
+> compensation formulas that provide accurate sensor measurements.
 
-On Mon,  4 Nov 2024 17:44:33 +0800 you wrote:
-> Add support for t7xx WWAN device to debug by ADB (Android Debug Bridge)
-> port and MTK MIPCi (Modem Information Process Center) port.
-> 
-> Application can use ADB (Android Debug Bridge) port to implement
-> functions (shell, pull, push ...) by ADB protocol commands.
-> 
-> Application can use MIPC (Modem Information Process Center) port
-> to debug antenna tuner or noise profiling through this MTK modem
-> diagnostic interface.
-> 
-> [...]
 
-Here is the summary with links:
-  - [net-next,v8,1/3] wwan: core: Add WWAN ADB and MIPC port type
-    https://git.kernel.org/netdev/net-next/c/495e7c8e9601
-  - [net-next,v8,2/3] net: wwan: t7xx: Add debug ports
-    https://git.kernel.org/netdev/net-next/c/61329a1152dd
-  - [net-next,v8,3/3] net: wwan: t7xx: Unify documentation column width
-    https://git.kernel.org/netdev/net-next/c/238f2ca1e61f
+Dropping the more marketing parts of this preferred.  Second
+sentence doesn't add much that we care about.
+The rest is fine.
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+>=20
+> Nuno S=E1 (3):
+>   iio: imu: adis: Add custom ops struct
+>   iio: imu: adis: Add DIAG_STAT register size
+>   iio: imu: adis16550: add adis16550 support
+>=20
+> Ramona Gradinariu (2):
+>   dt-bindings: iio: Add adis16550 bindings
+>   docs: iio: add documentation for adis16550 driver
+>=20
+>  .../bindings/iio/imu/adi,adis16550.yaml       |   95 ++
+>  Documentation/iio/adis16550.rst               |  389 ++++++
+>  Documentation/iio/index.rst                   |    1 +
+>  MAINTAINERS                                   |   10 +
+>  drivers/iio/imu/Kconfig                       |   13 +
+>  drivers/iio/imu/Makefile                      |    1 +
+>  drivers/iio/imu/adis.c                        |   33 +-
+>  drivers/iio/imu/adis16550.c                   | 1228 +++++++++++++++++
+>  include/linux/iio/imu/adis.h                  |   33 +-
+>  9 files changed, 1788 insertions(+), 15 deletions(-)
+>  create mode 100644 Documentation/devicetree/bindings/iio/imu/adi,adis165=
+50.yaml
+>  create mode 100644 Documentation/iio/adis16550.rst
+>  create mode 100644 drivers/iio/imu/adis16550.c
+>=20
 
 
