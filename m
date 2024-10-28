@@ -1,106 +1,149 @@
-Return-Path: <linux-doc+bounces-28808-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28810-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C8C49B23DF
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Oct 2024 05:28:23 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B16F9B23FE
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Oct 2024 06:05:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id EC72A1F21E1F
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Oct 2024 04:28:22 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 891071C210C6
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Oct 2024 05:05:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C3A3818C03F;
-	Mon, 28 Oct 2024 04:28:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B63518C355;
+	Mon, 28 Oct 2024 05:04:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="WUPgRR8U"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XC9uW5+X"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7494D18BBB0;
-	Mon, 28 Oct 2024 04:28:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE6F918A922;
+	Mon, 28 Oct 2024 05:04:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730089690; cv=none; b=d3BUfaKm0hwYUAy3ReowdDRQJWQ6Sbwzouk4QTnbslRLuesF88dvp+mA0F9ogRAc7xP2f+/v7wO7R4mh9/pn6SvfIEVhjYD60ck7j0lID7qOc1JdNeIGFBCMcNKPNcuMNkI4qrURz+UgmbYLPhRdwkv0mDxZDi1qAYxgbdOL3nA=
+	t=1730091896; cv=none; b=OnEcsHOQYSii8QeU4g9Vt6ni4M/pdIcPs3VBTZYfOOiafp5rj+1wh2QJbea7tHnBAmd2HOdP6OXG7ExnCIa+X7qlvO2Xzx8HOh/MNpIya7g1AL7HJXI0GJqy08GGzkuulECp4t1bLX5DbrFNDJVk48RxxgxyuSuZMvGaZ2MteMc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730089690; c=relaxed/simple;
-	bh=mDuCAI6LSQDh4SG5bqEDz4VLNvrKLfvacIM86++9sRo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=R97uerEZR1YyeiX8dYJ97WhxGXLVe+W09CReDylEYBToMRCrUYVyLq+cycdyCpF6UncQ5xdwCWAW+kAK93o688M4S1CcqHF4QE8ZgbMmxJxO54SC9OcWuXREm0uicLPrHq5rR8xRugKYuwhavXFryjtft9/0m67hAUz1RSdRAPY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=WUPgRR8U; arc=none smtp.client-ip=90.155.92.199
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
-	:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
-	Sender:Reply-To:Content-ID:Content-Description;
-	bh=8qxi9dDg0WBqbF2V//P0hAMZo/mIu3S+yaHiB5RbDgg=; b=WUPgRR8Uzd4pw52yJOdsIrrEKi
-	BXBPxwqIzeREW7g7tCClwWlpwTzZGq6AvO4e/pQ+ZVUvo5L2XHQdLlwgoASsvK0WFyHwG8Ow2aF2m
-	BB120cJGDaSCqUqJbzsVpVNlct8pkrAum3DpC8F4R7IBBlZqFntwyjuZ8psUYLgWe7mUpmjWqMH1Z
-	iXvTZ5vjF+ZWqkOjZLyyaRD9tpQEsBn6gL1Chq9xXfZYYpX6ihoa9q2SOPs3a3WbRFamKxrD9pWGB
-	RQWTWi28eOZheW80t2O+jUOviiyPVRGMjLekaAqcU3ztUUbUCwg7xJf4zoXL/7J96cv+CLJhpSPDr
-	4+4a2o2g==;
-Received: from [50.53.2.24] (helo=[192.168.254.17])
-	by desiato.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
-	id 1t5HMB-00000009YD7-2aqK;
-	Mon, 28 Oct 2024 04:28:01 +0000
-Message-ID: <8b13719b-522d-48ec-92fe-6c98d651f947@infradead.org>
-Date: Sun, 27 Oct 2024 21:27:50 -0700
+	s=arc-20240116; t=1730091896; c=relaxed/simple;
+	bh=KuSSNhqQmzngUtpZ6jNSAOFuo/FQ56fjZ1xFMr/wqYI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=rvZUov9ghAXFLkoZMz4FVeTL6kns0ySv5viwZ0YxR50KXTr16352Mjg3S13T78rInTAVIaFn5l4sjXmEVkzlW9JV7x6G/f2Bu3yF3Xgl466TLgAZVIJ4SoKN33qtQpBpRO9PIvxjpLMI9owNnm0WtEgQL6C6HKFN5QzqI2L1OEI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XC9uW5+X; arc=none smtp.client-ip=209.85.214.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-20c7ee8fe6bso31680155ad.2;
+        Sun, 27 Oct 2024 22:04:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1730091894; x=1730696694; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=KuSSNhqQmzngUtpZ6jNSAOFuo/FQ56fjZ1xFMr/wqYI=;
+        b=XC9uW5+XczWtbwH8VkSC4XYfJFtYoctLkL+RHQawyW2AtS7fRDB+2b29RydMoewZhv
+         HdZQnMJfxBZk6uBbc0MBGs8syquc/daT9eItGIU+OmfuLPneB/9sB5bQL2cEtrhXik2j
+         FIWiJZHOuxjxcYZjTrqSODOakZPRHyK95PEZpYnZYl8CR24SjCr+RTGTcNth+YSFzqv8
+         nXeU1JJAga4ReahdcLigpd8zcw6lY+OZgcR0uMrA6Vfl6oycXvI1M0jTvqYYjALhMJ26
+         NB5GiovNNoM5v0oc4IKCPR+NJDs1JCYPeIcW3Sk4zkgMML2lKf7k4XXl/dblO+pqg85g
+         pv+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730091894; x=1730696694;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KuSSNhqQmzngUtpZ6jNSAOFuo/FQ56fjZ1xFMr/wqYI=;
+        b=vGJJMPj7gyuPNdXzSN0dDbzBh9/I15qobw3ihh1p5IsaKr5JstHJWwUQpGwFvqUOYZ
+         Oqz0E8iv0sqcGphjLbzq+Ub7bzma+Jtfh1PFOpyO6Q/GDEaC/4dh22YQN6kaiCMCRziL
+         /CcKIQ3yfEB847r/jGLVFLc6n/PZRdQr4vFDfl+d//nbefxvrK7pU1HPJ8wvoIoE+cHd
+         EQWF4II6ZvlW97Zj55bpKhHswas1lUy6yffTCvn6c6yMDYeX/MvuCivYQlbr1EZE3EGQ
+         fFDF8PAB2RKVM6Qw2w4ig/lhmKZaGqnBeSQ+T7X048t0GDbGLxQcScYAFeI2YWPICuCi
+         CgMg==
+X-Forwarded-Encrypted: i=1; AJvYcCUJO1j2StY18lqaR1iMZnlmalRD3LkgBzqrxpGYi+B41lE8fgt+jHYWjItzkMLBuytsMhATZvAXcq/jzkk=@vger.kernel.org, AJvYcCW1NeXoHrtLzJaYgpZ2uu35bfLoW1W1imk1kDYKfUNwX/tBOu59yzrWql9i2cVwfPIcsVZxjtMLLZm44N5QvlzfAg==@vger.kernel.org, AJvYcCWa0dVTCpQoR/BuaXatsEFbBvdkchr4opz55GhsZooftf+0NLPNYtYSxTq5bGAI7qmy9AD6DF8qRHoQJVqd@vger.kernel.org, AJvYcCWuBFWTGZFbL5WPyBitsrqiNtGb5EB8Tu0f5JvDN+ePiTlNB1HI3CPtcRKzVp3+AgQktnZFgqQdoC2H@vger.kernel.org, AJvYcCXRDsaycE7DJSUfLnGV2GeCYt0xacJokEvHT2Z4lbCTdd7eod14zrc4bFj54xLwoU5ox5DACpqiGeboBmoOBH4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzO/Ekhbm8HQpYsmJ65p/n+6Sz9e6E5IJSWTJzVZADCD+kIO+dU
+	Tr34/IQI/QUSG8VsqjazHdjz78RCPdzPIn9/UectwFiH63CMTHF1
+X-Google-Smtp-Source: AGHT+IFjK2HF1Z+Lhqb8mZhwem9i4EjiyHfk2esq+mfa/s946c5Oe9L6ORNV02D3IRkDrGQj3ss3Jg==
+X-Received: by 2002:a17:903:2286:b0:20c:f648:e3a3 with SMTP id d9443c01a7336-210c6ccf557mr87225585ad.60.1730091893804;
+        Sun, 27 Oct 2024 22:04:53 -0700 (PDT)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-210bc012fd7sm42876435ad.180.2024.10.27.22.04.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 27 Oct 2024 22:04:52 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id 6BFB54433471; Mon, 28 Oct 2024 12:04:50 +0700 (WIB)
+Date: Mon, 28 Oct 2024 12:04:50 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: colyli@suse.de, kent.overstreet@linux.dev, msakai@redhat.com,
+	corbet@lwn.net, peterz@infradead.org, mingo@redhat.com,
+	acme@kernel.org, namhyung@kernel.org, akpm@linux-foundation.org,
+	mark.rutland@arm.com, alexander.shishkin@linux.intel.com,
+	jolsa@kernel.org, irogers@google.com, adrian.hunter@intel.com,
+	kan.liang@linux.intel.com, willy@infradead.org,
+	jserv@ccns.ncku.edu.tw, linux-kernel@vger.kernel.org,
+	linux-bcache@vger.kernel.org, dm-devel@lists.linux.dev,
+	linux-bcachefs@vger.kernel.org, linux-perf-users@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 00/10] Enhance min heap API with non-inline functions
+ and optimizations
+Message-ID: <Zx8bcny4yPuLTxD7@archie.me>
+References: <20241020040200.939973-1-visitorckw@gmail.com>
+ <ZxYf8VvQIZv9_Y1j@archie.me>
+ <ZxZbgWc2IsztAOOx@visitorckw-System-Product-Name>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Documentation: admin: reorganize kernel-parameters intro
-To: Bagas Sanjaya <bagasdotme@gmail.com>, linux-doc@vger.kernel.org
-Cc: patches@lists.linux.dev, Jonathan Corbet <corbet@lwn.net>
-References: <20241028005356.214369-1-rdunlap@infradead.org>
- <Zx8ML4Q6GyGPw-sy@archie.me>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <Zx8ML4Q6GyGPw-sy@archie.me>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="Zbhjczx96AMnlB/2"
+Content-Disposition: inline
+In-Reply-To: <ZxZbgWc2IsztAOOx@visitorckw-System-Product-Name>
 
 
+--Zbhjczx96AMnlB/2
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 10/27/24 8:59 PM, Bagas Sanjaya wrote:
-> On Sun, Oct 27, 2024 at 05:53:56PM -0700, Randy Dunlap wrote:
->> +This document may not be entirely up to date and comprehensive. The command
->> +"modinfo -p ${modulename}" shows a current list of all parameters of a loadable
->> +module. Loadable modules, after being loaded into the running kernel, also
->> +reveal their parameters in /sys/module/${modulename}/parameters/. Some of these
->> +parameters may be changed at runtime by the command
->> +``echo -n ${value} > /sys/module/${modulename}/parameters/${parm}``.
-> 
-> How can users get support for parameters not documented here? Post to LKML
-> (and hoping that they also Cc: relevant maintainers and mailing list)?
+On Mon, Oct 21, 2024 at 09:47:45PM +0800, Kuan-Wei Chiu wrote:
+> On Mon, Oct 21, 2024 at 04:33:37PM +0700, Bagas Sanjaya wrote:
+> > On Sun, Oct 20, 2024 at 12:01:50PM +0800, Kuan-Wei Chiu wrote:
+> > > Add non-inline versions of the min heap API functions in lib/min_heap=
+=2Ec
+> > > and updates all users outside of kernel/events/core.c to use these
+> > > non-inline versions. To mitigate the performance impact of indirect
+> > > function calls caused by the non-inline versions of the swap and
+> > > compare functions, a builtin swap has been introduced that swaps
+> > > elements based on their size. Additionally, it micro-optimizes the
+> > > efficiency of the min heap by pre-scaling the counter, following the
+> > > same approach as in lib/sort.c. Documentation for the min heap API has
+> > > also been added to the core-api section.
+> >=20
+> > What tree (and commit) this series is based on?
+> >=20
+> > Confused...
+> >=20
+> This patchset is based on Linus' tree, commit 715ca9dd687f ("Merge tag
+> 'io_uring-6.12-20241019' of git://git.kernel.dk/linux"). Since it
+> touches multiple subsystems, I'm not entirely sure which tree I should
+> base it on. Should it be linux-next, perhaps?
 
-That's probably the best option currently.
+Nope.
 
->> +KMG suffixes
->> +~~~~~~~~~~~~
->> +
->> +The [KMG] suffix is commonly described after a number of kernel
->> +parameter values. These 'K', 'M', and 'G' letters represent the _binary_
->> +multipliers 'Kilo', 'Mega', and 'Giga', equaling 2^10, 2^20, and 2^30
->> +bytes respectively. Such letter suffixes can also be entirely omitted.
->> +
-> 
-> Metric suffixes?
+Anyway, series applied for docs review. Thanks!
 
-Hm, it looks like memparse() supports all of these suffixes: K, M, G, T, P, E.
+--=20
+An old man doll... just what I always wanted! - Clara
 
-So the heading could be Metric suffixes along with some changed text.
+--Zbhjczx96AMnlB/2
+Content-Type: application/pgp-signature; name="signature.asc"
 
-thanks.
+-----BEGIN PGP SIGNATURE-----
 
-[waiting for more comments]
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCZx8bbgAKCRD2uYlJVVFO
+o6sgAQDOkl5ght0n7cwDsycgwxL9nCtWIpsch3Hr4knwbp1t6gEAy9bIkKuWrBqb
+t32VfpdXUndKdvmFzkg/I0/Jqw1yvAc=
+=BNr4
+-----END PGP SIGNATURE-----
 
--- 
-~Randy
-
+--Zbhjczx96AMnlB/2--
 
