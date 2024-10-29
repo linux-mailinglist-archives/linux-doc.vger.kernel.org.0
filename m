@@ -1,121 +1,106 @@
-Return-Path: <linux-doc+bounces-28997-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28999-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AAB79B4CC7
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Oct 2024 16:01:20 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 49A619B4CE2
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Oct 2024 16:04:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9B23F1C22669
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Oct 2024 15:01:19 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0E92D284449
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Oct 2024 15:04:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7C0D1591E3;
-	Tue, 29 Oct 2024 15:01:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AA150193062;
+	Tue, 29 Oct 2024 15:04:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="g15wgTdD"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Au7j5G2c"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B78E9BA50;
-	Tue, 29 Oct 2024 15:01:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F34C192B95;
+	Tue, 29 Oct 2024 15:04:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730214075; cv=none; b=WGMGH1Bb1IkkEj9R64XYzhohi4fsyQDFvZFqwKv94Mr38HcsLEvDe5OC0b1nxKRaZ9rjp8m87h33F39gwg8vSFdhOdegJde9mX1pQsktM9D1foUFftW1JshfLoJy4gIMpbNs9G6h5Yy9Xkw0bxvCN2d+1NwHv2SVHO18s45xDg4=
+	t=1730214278; cv=none; b=TbT0Ib5WL6bMzRDFt4VyuTHi2qPI+yr7D33bQ+tDQ4Xk05PPnVIfUVTUmk963iQaSwNIjkAxhiyBBOJ8B84vRcVhsRnhnS88DLUP6zCYKuQSwNV4nRbQRtu9qx1+5658CEl6XCQ7c6FCBxHH6Jddu+ZHQF55YJAbXi+99K3JWvA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730214075; c=relaxed/simple;
-	bh=5V7TnhjLSxuQ4wNJlJDE3n0MdEfDCaLHH/wxrUBQ7Jo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=GKSqEUQ0N2CZAIQ/7L1CAFIDZgi6CNQf72X+rZvBaJrwMxMN56Bebfx/mgmNzbU013Z88jCnlWmTnGs8qEMD5x5Nvblz0qDv7VZm0IjLRykYlb32rqPY6Dbn99XX3f23AEVK5ZOLcD4B7qZp8fKSBcfFXari/dorD8VTtwGlH3o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=g15wgTdD; arc=none smtp.client-ip=65.109.113.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 9EA0E40E0198;
-	Tue, 29 Oct 2024 15:01:11 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
-	header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
-	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id QlJVClWK1fkm; Tue, 29 Oct 2024 15:01:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-	t=1730214056; bh=KOpQcw9nRB9EeS0gpi3ZtVgUYbOH/D9pZeyW+FzZPBE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=g15wgTdDZFYgcBpLRk56xoJhOtQsQMZuYz6uwo+OYrIWpod6c92RsQQs1ezsoQfaZ
-	 9Q66CSZcIy3uixamWVSoF3QyXgESBy5v2IKvNGPjtTMpiD1ChQRlrI9S2aP7owP3p+
-	 0QD0/2psOtaoAtlDTC7CsRIpPHrdsO51N0eTh2Vo6uEn0LtKAlLjrncTKzg0Od+BL9
-	 2Hir7MMPd/2InRnQ9momIaPq6u6RawLDjvvLOIO9aTIdDPiESPC9CoXK4U6G/lkKMV
-	 w7qo5g1tvHP9OTzjMRZetxLO5qSq0ztRCR3pOM17sMaKO6FLswpojrym00Rn9637NH
-	 rbouFtGHpsx6u5fWlKC0/udE+jCnNUU6VLoJ9fUDVzfvPqxF7gNU/hYPERq2aIs2my
-	 dUrvecH9bDY2g5G+ttJTMzFfBIpE+4HNfTPhNdBNM+Z5eTcVl0coVL0X7WFKgLAVFJ
-	 82fm7kNVDJe5SOaShvXGhZJCd4EpShwep1VjYgC8e+VV+7CxPp0hBKamIYXuYpBedj
-	 5/brviA5TLCsV33V0XoeHxYdxega511D7MVsg5YC7dl3GAbiq7mmxIttVnXeiq/pyT
-	 biG0D54sEEXuQoU2bzb/N60POjVZT6U03mlINOYmA6Ne3j4WkRTmpNCzE8IFx6Ugml
-	 Rl40Ot9W5qzs3SaMd2atA9Yc=
-Received: from zn.tnic (p5de8e8eb.dip0.t-ipconnect.de [93.232.232.235])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
-	(No client certificate requested)
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id A076940E0284;
-	Tue, 29 Oct 2024 15:00:43 +0000 (UTC)
-Date: Tue, 29 Oct 2024 16:00:38 +0100
-From: Borislav Petkov <bp@alien8.de>
-To: Daniel Sneddon <daniel.sneddon@linux.intel.com>,
-	David Kaplan <David.Kaplan@amd.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	hpa@zytor.com, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, pawan.kumar.gupta@linux.intel.com
-Subject: Re: [PATCH 2/2] x86/bugs: Clean-up verw mitigations
-Message-ID: <20241029150022.GJZyD4ht9wYcVetdDS@fat_crate.local>
-References: <cover.1730158506.git.daniel.sneddon@linux.intel.com>
- <20992658d2c79f27de91a474a7b122782be5f04b.1730158506.git.daniel.sneddon@linux.intel.com>
- <20241029113702.GUZyDI3u_6IxiCWOBJ@fat_crate.local>
- <c5fa82d7-e5e9-4612-a238-3c58152c40d0@linux.intel.com>
+	s=arc-20240116; t=1730214278; c=relaxed/simple;
+	bh=NfmD68x1xHWzB0oNQ2YFY4K/YnAEEUd4ugxIBTU+hqk=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=dzqwFnOzfVr9VvNcCWeOiY8aBK41S2dHS65dkQg86Sdvfis/1nd/UEAJVIr4C4ilfWUOGdI+rp78LcL9BiloL/YGPsGLMbh25ic3hQxpHNYTBUjZD9x/ZrH9zhEVNTx1gi8uZChMf8C1WyQOByNDCXYOlk3ynKgulT7oKWYEHZQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Au7j5G2c; arc=none smtp.client-ip=192.198.163.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1730214277; x=1761750277;
+  h=from:to:cc:in-reply-to:references:subject:message-id:
+   date:mime-version:content-transfer-encoding;
+  bh=NfmD68x1xHWzB0oNQ2YFY4K/YnAEEUd4ugxIBTU+hqk=;
+  b=Au7j5G2ctwDOQIcpWRJ+EvTNo59vy4EP7jLzLFOzpd/hc0LRQMmPK/ad
+   4G5eTiRIYBbGlrO9iiQ0feLdtwBiILlZFEWiDnP/fmrqIlknOVHwFt/e7
+   BoqTwJmn9tsC3vG18yk+5dG78OvvLGxpKn+UnhYnSBRVfjOj1lBGzCtI9
+   tBH6zS9Ve5sqQ4bdec+xYJv9JSIOWpEfUd1hZGZaZrYU3quYxHY2HSkT/
+   5/Xy8BuVaimJSDGLEy6mTsWpazX5HV+0YgVKkp/gaKbqCsDfXSQxRm2DR
+   bEiS2fQN0OctYRE9bEnsL5FnVIR7otc/l0RpV5ImMSekBlh758JAuN8uo
+   A==;
+X-CSE-ConnectionGUID: h1LYpBr2RYCAXVPBYzi9yg==
+X-CSE-MsgGUID: keyZE3cISreabXbq7Y0ehA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11240"; a="29968451"
+X-IronPort-AV: E=Sophos;i="6.11,241,1725346800"; 
+   d="scan'208";a="29968451"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Oct 2024 08:02:56 -0700
+X-CSE-ConnectionGUID: E2alJhzjQdyNuCNk6/d1dA==
+X-CSE-MsgGUID: AoHYHcrSTVipS8akjRd2qg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.11,241,1725346800"; 
+   d="scan'208";a="82315544"
+Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.244.83])
+  by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Oct 2024 08:02:53 -0700
+From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+To: hdegoede@redhat.com, corbet@lwn.net, Armin Wolf <W_Armin@gmx.de>
+Cc: platform-driver-x86@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20241026193803.8802-1-W_Armin@gmx.de>
+References: <20241026193803.8802-1-W_Armin@gmx.de>
+Subject: Re: [PATCH 1/3] platform/x86: wmi: Remove wmi_block_list
+Message-Id: <173021416876.2801.15156306724313702863.b4-ty@linux.intel.com>
+Date: Tue, 29 Oct 2024 17:02:48 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <c5fa82d7-e5e9-4612-a238-3c58152c40d0@linux.intel.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 
-On Tue, Oct 29, 2024 at 07:40:28AM -0700, Daniel Sneddon wrote:
-> Sure, I'll split this up as much as possible.
+On Sat, 26 Oct 2024 21:38:01 +0200, Armin Wolf wrote:
 
-Actually, thinking about this more and looking at David's rework:
+> The wmi_block_list is only used by guid_count() and without proper
+> protection. It also duplicates some of the WMI bus functionality.
+> 
+> Remove the wmi_block_list and use bus_for_each_dev() instead.
+> 
+> 
 
-https://lore.kernel.org/r/20240912190857.235849-1-david.kaplan@amd.com
 
-his basically is achieving what you're doing - a post-everything routine which
-selects the final mitigation strategy once all the mitigation options have
-been parsed and evaluated.
+Thank you for your contribution, it has been applied to my local
+review-ilpo branch. Note it will show up in the public
+platform-drivers-x86/review-ilpo branch only once I've pushed my
+local branch there, which might take a while.
 
-So I'm wondering if we should simply take his directly...
+The list of commits applied:
+[1/3] platform/x86: wmi: Remove wmi_block_list
+      commit: 049571ce7678221767ec3ee5d522bc3de7d57ed3
+[2/3] platform/x86: wmi: Replace dev_to_wdev() with to_wmi_device()
+      commit: c382429b587ac49bd179d768f13e7fa5e7ed1787
+[3/3] platform/x86: wmi: Introduce to_wmi_driver()
+      commit: e001341a984e709e377b275123aecb5a763eaef9
 
-He removes that md_clear* function:
+--
+ i.
 
-https://lore.kernel.org/r/20240912190857.235849-8-david.kaplan@amd.com
-
-in favor of doing the final selection in the ->apply* functions and keeping
-each mitigation functions simple.
-
-Yours does this in a single function.
-
-Practically speaking, the end result is the same.
-
-Hmm...
-
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
 
