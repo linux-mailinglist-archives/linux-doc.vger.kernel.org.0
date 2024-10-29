@@ -1,113 +1,122 @@
-Return-Path: <linux-doc+bounces-28942-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-28947-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE2B39B3EE3
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Oct 2024 01:10:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 342DD9B3F1B
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Oct 2024 01:24:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id F11EE1C22408
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Oct 2024 00:10:17 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 510741C21049
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Oct 2024 00:24:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F5E25227;
-	Tue, 29 Oct 2024 00:10:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8FDF079F5;
+	Tue, 29 Oct 2024 00:24:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jTZr1/0b"
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b="NVEpLQIt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB1AF4A2D;
-	Tue, 29 Oct 2024 00:10:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 874782F24;
+	Tue, 29 Oct 2024 00:24:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=178.60.130.6
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730160604; cv=none; b=aYQPXuodyioqec2xqlKpqYPuIEHnK8f7wX4OAydoa2lcxEWUCe+VwF66NGAohBIyPKmjGehyDBCyqnraRA3CG6hSRv9+Exs6YKLa/yZmfdBFXNc4nzPka7nhRpY+RfKd65MXhfrnzjBwLf3fVi2ow9RtPMWswUZJqTT06Q+NIXU=
+	t=1730161454; cv=none; b=CdkS2pG+ZXPGtO9E+KYKNbfUQKjpf9AfZQnQtDTGT+Hk/rcV7i5FMcYLHKhPBBxCiP7pRs5MwmBQm7N1wTrrq49Z9rzjnJeV9AfBBrJBtIgLyg5rv7+SCHer8A8QgQUS+aWiNURpePZZ/RbW4yP26EgTFjtYP9yUjVvB6EbgkHA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730160604; c=relaxed/simple;
-	bh=CcH7XW3XrvkZndtH10ZtxH80+gXvC7h4Zu9smQr3Dcs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=fj64bZ3IaOcnbtXNzLvjkQhD92YhKLNn26Y6F1f70nsxoCrKhXV1vyNunrGk0kMtCkUGRKmME5NLAfcQF9ra0sge3GMGvW3Y+nRRKAVYE+nhMP//w6JgO1nlwwK1MVrgMIxKHufSj8TTagV/44Ci5ahALp0MCjvBRTBTXJYIyfc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jTZr1/0b; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E500C4CEC3;
-	Tue, 29 Oct 2024 00:10:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1730160603;
-	bh=CcH7XW3XrvkZndtH10ZtxH80+gXvC7h4Zu9smQr3Dcs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=jTZr1/0bb0pqwmzeUkQvCvby7J2pvADOr6K7JDWHSa9kbYp2SjYObe319rTcWkBxd
-	 1savu+cGUhJIwcLng1zwJ1V0T4rmi5e28qWjoeH+fpzobGlcC+Kbunr3Yj28CgUh6c
-	 YNlxnHYNPm4GzH2U1uuQKOznhtiilFhPQ+qnYGnCaiKBizYd7fL2CIgClJmBo4JrCB
-	 QiwXXGEHAVVYv5eZ9GdTLkzWVervGbqROHNj0wEnwf1l8COdWiQ4o2LvrhGN/yOgwW
-	 hc6MgF1mkGN6m4PEI5IcRecBJgIbmeAX0myxgVAsw5WltUlm4kMvxd9pXKpAD3H6i4
-	 WYJxD6XGZniew==
-Date: Mon, 28 Oct 2024 17:10:00 -0700
-From: Kees Cook <kees@kernel.org>
-To: Rong Xu <xur@google.com>
-Cc: Alice Ryhl <aliceryhl@google.com>,
+	s=arc-20240116; t=1730161454; c=relaxed/simple;
+	bh=ItBVawkyYZp0EWfT6+0yoKLozZTxgVKCBDrO8HsDXCE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=RpZU94TZFXF7fWX2Xc/uxPPsWJ+6HanhVqZxJKpMSjgJWPeKiVqaTMI/+TU8NLgpSC7I3I66qGUo8YUsYgRL5P3PmCvVYCR01XmO2SCPdBqlTru7U2H4M1r0t4JNrWpa5BUgARD/ZOnlUVX4x2TTKleyJx7RdBJqq/3KreJ8Ack=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com; spf=pass smtp.mailfrom=igalia.com; dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b=NVEpLQIt; arc=none smtp.client-ip=178.60.130.6
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:
+	Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=fFRnu4Vhx5cKk2OMgERMj2QYR1dV0sibmG9c5odqYW4=; b=NVEpLQItEvLlotnrUjSWwdx51r
+	TLI7pFN3GbUCN0r/6IL209FWWEni3m9SkvRbYtyLhRvs36MCwqfXOb0jKlZt342cjdCkffZ7dY5Xl
+	+X3/yMKAH8rcl1j4p0N0HHSMzfBEpv+AsuEe+JXiP7BBnRFYqNDnpQDdz4Coa+RxQy81Kw2I+t5+Z
+	UuuEw6cWgb/0pCWafga7PLsTBWDQ3W19nIOMl986ukwjr4uGyuTBnvzNJ5Y6G2+bqEimoGYuBq+zB
+	fHIVSuXeKGI9eRhTUvQLoV4ekTRw6SxJlRmZdDd49UQD4LmsHogc/O7UsKNdqwnA8/EFpYynusSV0
+	D6BTaS8w==;
+Received: from [187.36.213.55] (helo=morissey..)
+	by fanzine2.igalia.com with esmtpsa 
+	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+	id 1t5a1P-00GIrd-PZ; Tue, 29 Oct 2024 01:23:44 +0100
+From: =?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>
+To: Jonathan Corbet <corbet@lwn.net>,
 	Andrew Morton <akpm@linux-foundation.org>,
-	Arnd Bergmann <arnd@arndb.de>, Bill Wendling <morbo@google.com>,
-	Borislav Petkov <bp@alien8.de>, Breno Leitao <leitao@debian.org>,
-	Brian Gerst <brgerst@gmail.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	David Li <davidxl@google.com>, Han Shen <shenhan@google.com>,
-	Heiko Carstens <hca@linux.ibm.com>,
-	"H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
-	Jann Horn <jannh@google.com>, Jonathan Corbet <corbet@lwn.net>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Justin Stitt <justinstitt@google.com>,
-	Masahiro Yamada <masahiroy@kernel.org>,
-	"Mike Rapoport (IBM)" <rppt@kernel.org>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Nick Desaulniers <ndesaulniers@google.com>,
-	Nicolas Schier <nicolas@fjasle.eu>,
-	"Paul E. McKenney" <paulmck@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Sami Tolvanen <samitolvanen@google.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Wei Yang <richard.weiyang@gmail.com>, workflows@vger.kernel.org,
-	Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
-	Maksim Panchenko <max4bolt@gmail.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Andreas Larsson <andreas@gaisler.com>,
-	Yonghong Song <yonghong.song@linux.dev>,
-	Yabin Cui <yabinc@google.com>,
-	Krzysztof Pszeniczny <kpszeniczny@google.com>,
-	Sriraman Tallam <tmsriram@google.com>,
-	Stephane Eranian <eranian@google.com>, x86@kernel.org,
-	linux-arch@vger.kernel.org, sparclinux@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org,
-	linux-kernel@vger.kernel.org, llvm@lists.linux.dev
-Subject: Re: [PATCH v6 5/7] AutoFDO: Enable -ffunction-sections for the
- AutoFDO build
-Message-ID: <202410281709.DDFE98FA3@keescook>
-References: <20241026051410.2819338-1-xur@google.com>
- <20241026051410.2819338-6-xur@google.com>
+	Hugh Dickins <hughd@google.com>,
+	Barry Song <baohua@kernel.org>,
+	David Hildenbrand <david@redhat.com>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Lance Yang <ioworker0@gmail.com>
+Cc: linux-mm@kvack.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	kernel-dev@igalia.com,
+	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>
+Subject: [PATCH v2 0/4] mm: add more kernel parameters to control mTHP
+Date: Mon, 28 Oct 2024 21:13:04 -0300
+Message-ID: <20241029002324.1062723-1-mcanal@igalia.com>
+X-Mailer: git-send-email 2.46.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241026051410.2819338-6-xur@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Oct 25, 2024 at 10:14:07PM -0700, Rong Xu wrote:
-> Enable -ffunction-sections by default for the AutoFDO build.
-> 
-> With -ffunction-sections, the compiler places each function in its own
-> section named .text.function_name instead of placing all functions in
-> the .text section. In the AutoFDO build, this allows the linker to
-> utilize profile information to reorganize functions for improved
-> utilization of iCache and iTLB.
-> 
-> Co-developed-by: Han Shen <shenhan@google.com>
-> Signed-off-by: Han Shen <shenhan@google.com>
+This series introduces three patches related to the kernel parameters
+controlling mTHP. The first patch is a straightforward documentation update,
+correcting the format of the kernel parameter ``thp_anon=``.
 
-Reviewed-by: Kees Cook <kees@kernel.org>
+The second and third patches focus on controlling THP support for shmem
+via the kernel command line. The second patch introduces a parameter to
+control the global default huge page allocation policy for the internal
+shmem mount. The third patch implements a parameter similar to ``thp_anon=``,
+but for shmem.
+
+The goal of these changes is to simplify the configuration of systems that
+rely on mTHP support for shmem. For instance, a platform with a GPU that
+benefits from huge pages may want to enable huge pages for shmem. Having
+these kernel parameters streamlines the configuration process and ensures
+consistency across setups.
+
+v1 -> v2: https://lore.kernel.org/linux-mm/20241027175743.1056710-1-mcanal@igalia.com/T/
+
+* [1/4] s/fix the format/fix the doc in the commit's subject (Barry Song & David Hildenbrand)
+* [1/4] Add Barry's A-b to PATCH 1/3 (Barry Song)
+* [1/4] s/64KB/64K (David Hildenbrand)
+* [1/4] Add David's A-b to PATCH 1/3 (David Hildenbrand)
+* [2/4] Create the function `shmem_valid_huge()` to reduce code-duplication (Baolin Wang)
+* [3/4] New PATCH: generalize the function `setup_thp_anon()` and add it to common file
+* [4/4] Fix typo in the documentation: s/shmem_anon/thp_shmem (Barry Song)
+* [4/4] Reduce code-duplication (Barry Song)
+
+Best Regards,
+- Maíra
+
+Maíra Canal (4):
+  mm: fix docs for the kernel parameter ``thp_anon=``
+  mm: shmem: control THP support through the kernel command line
+  mm: generalize the implementation of ``thp_anon=``
+  mm: shmem: override mTHP shmem default with a kernel parameter
+
+ .../admin-guide/kernel-parameters.txt         |  19 ++-
+ Documentation/admin-guide/mm/transhuge.rst    |  25 +++-
+ include/linux/huge_mm.h                       |  29 +++++
+ mm/huge_memory.c                              | 109 ++++++++----------
+ mm/shmem.c                                    |  91 +++++++++++++--
+ 5 files changed, 201 insertions(+), 72 deletions(-)
 
 -- 
-Kees Cook
+2.46.2
+
 
