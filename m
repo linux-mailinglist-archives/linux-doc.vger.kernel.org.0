@@ -1,171 +1,198 @@
-Return-Path: <linux-doc+bounces-29261-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-29263-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C5349B6987
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Oct 2024 17:49:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B271B9B69BF
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Oct 2024 17:56:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C4DF9B21A41
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Oct 2024 16:49:38 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 2FB31B23A87
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Oct 2024 16:56:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ACD2D215024;
-	Wed, 30 Oct 2024 16:49:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A949219C83;
+	Wed, 30 Oct 2024 16:54:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="Dzr+tNNu"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="KgLcdbaY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E0072144C4;
-	Wed, 30 Oct 2024 16:49:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B1CF218D8B;
+	Wed, 30 Oct 2024 16:53:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.198
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730306974; cv=none; b=kfBFtsYjzHtN/D+gUzEHEilzFlhK1KSkzogU8xjQusEmL3QjKxrzJwXI+mm15TidodrwZJQMel3Euyiyzp9+IqJsA5fJtIT8Ny3sPtaEynRpSEzcMOsdGqQFxaStQnIGrRcWMIWpivIXH6ckTmjJqDfm6k8dPcXYNSmuotYNYyw=
+	t=1730307243; cv=none; b=snfMiZdBFfUSMWcdXxOJFrRqT8jyHrLvClajxYJRMVg+Row5IlZbOaXP1d033by/e5VIC0HWVjQB39kLgpkhwCHz4uq9qo5kwf+1KGEWgC4VJ7Ah3GSCsW91lN48PKZ43MnLGIK7EXKVY9C/W1PAM53RkwGvsb9iJA0HxicGTSM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730306974; c=relaxed/simple;
-	bh=RkVeWxeRRkmjJB4/R7UwIT9Q1ckLvtqNuXSUaE0JnBQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=JPec4y9hZD7lyE9y/qt9yKjTPAB820piO8LOsqWZMKsPotA1TqRHbDC2YeLadbmkKLaNvrClVgsLFv8RV4DoX1yH+bU31gmxq6BMHeHIPidH9iq93OJOXbKWZGj3TcP+yNxsFec/KR3jn9FtoQZk/smUsCGXtsz21/M5Yu7LNvc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=Dzr+tNNu; arc=none smtp.client-ip=148.163.158.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49UDw8OD013373;
-	Wed, 30 Oct 2024 16:49:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=KZ6C4b
-	GdYZUKbQoFAev6EjLz2yF6JNszEp8+h5mO/4w=; b=Dzr+tNNufTYPEu1dQYorW5
-	dK/D6fZITiadDV9BMVF1AG27hir1YVtc/gdNGJU23+WMbxnlZdAxz6L5GarfzTxw
-	qnYx68Agj/yZYYdrva5TpVHqYDA4et5S4qzTeS3ms47QQlyr2FR0V/8Clgih+CD2
-	oazy+hJphs/3RDNDdFC3V09lFa12aIQc7UR0DMdjap+wL4y3o5cJhbylyuEHLwjd
-	PrdT0zpL3wmzSeyPdP4+NhkL2wvPXMqZssLb+lgKwsawKuyTrOH2liSxOOAdna28
-	SqDj+Cv9dMH68rRdFJQMhyFfecx49oDQguRdn3X/SScBn+L7rvP3bxhE6dk0pEaw
-	==
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 42jb65knun-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 30 Oct 2024 16:49:22 +0000 (GMT)
-Received: from m0353725.ppops.net (m0353725.ppops.net [127.0.0.1])
-	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 49UGnMiH014907;
-	Wed, 30 Oct 2024 16:49:22 GMT
-Received: from ppma23.wdc07v.mail.ibm.com (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 42jb65knuj-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 30 Oct 2024 16:49:22 +0000 (GMT)
-Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma23.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 49UGEWDl018808;
-	Wed, 30 Oct 2024 16:49:21 GMT
-Received: from smtprelay03.fra02v.mail.ibm.com ([9.218.2.224])
-	by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 42hc8k8ttu-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 30 Oct 2024 16:49:21 +0000
-Received: from smtpav04.fra02v.mail.ibm.com (smtpav04.fra02v.mail.ibm.com [10.20.54.103])
-	by smtprelay03.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 49UGnHmj58720682
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 30 Oct 2024 16:49:17 GMT
-Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 2EDAD2004B;
-	Wed, 30 Oct 2024 16:49:17 +0000 (GMT)
-Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 4805720040;
-	Wed, 30 Oct 2024 16:49:16 +0000 (GMT)
-Received: from [9.171.2.34] (unknown [9.171.2.34])
-	by smtpav04.fra02v.mail.ibm.com (Postfix) with ESMTP;
-	Wed, 30 Oct 2024 16:49:16 +0000 (GMT)
-Message-ID: <67a85d88-6705-4e8e-ba48-7b945aca4d8f@linux.ibm.com>
-Date: Wed, 30 Oct 2024 17:49:15 +0100
+	s=arc-20240116; t=1730307243; c=relaxed/simple;
+	bh=3XsbbW4sr4SJSBoaNnKi5Q9cIfnZzEuphOmXvS46jww=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=N2N3Wtp7IhJRaRX1OARJCcuznF7i57m1qSb/t7GaugROWCura/YYLt4ZPKOHyt0dN4guWuoVKOK6gr9/kDHrGKl+u+xRu9L1JA5o9Ns7o7W4Xpu+EsR/GMPEZzoesAh/93nuvIbFmnkBhGBSVm5PkEAI/KR8uZMbcYawlo3NRXw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=KgLcdbaY; arc=none smtp.client-ip=217.70.183.198
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 5EE15C0008;
+	Wed, 30 Oct 2024 16:53:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1730307232;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=7j2sBWY5RXFhC8oixeSMD8lLx9ABilvNsg/ZOsTJzYM=;
+	b=KgLcdbaY0O9EDEA0St6+bMizfFt2hty/9KKyDKFKvm1D7mttcpsmHb4W1jhqDFI/ApcrPd
+	Z6/i1SgYiEpN/i2JIzftPn5McUDpyWP7RUByh7ffkyNAvc+1/mkv6SGbJ/TdE2hE7H6I88
+	Wr25Ds1fKT9dDeB9BOa7TwSVek5j2OA9IaYsNkMmg0vyTBEKFXPufCWc805rSLKNAsIJQE
+	UYGIzrguAOKspgYKnlvgR0IqiSOslCR7fPQn5lk4Izq0C0qs0xKHghvIiHLl/lf4c5LO6D
+	4D40hjVx7fKCXvRogyUapYgSdkMFxMTX7bEWGLBbfFxhOp+Om86raqUBF53S4Q==
+From: Kory Maincent <kory.maincent@bootlin.com>
+Subject: [PATCH RFC net-next v2 00/18] Add support for PSE port priority
+Date: Wed, 30 Oct 2024 17:53:02 +0100
+Message-Id: <20241030-feature_poe_port_prio-v2-0-9559622ee47a@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/7] virtio-mem: s390 support
-To: Heiko Carstens <hca@linux.ibm.com>, David Hildenbrand <david@redhat.com>,
-        Eric Farman <farman@linux.ibm.com>
-Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        linux-s390@vger.kernel.org, virtualization@lists.linux.dev,
-        linux-doc@vger.kernel.org, kvm@vger.kernel.org,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Alexander Gordeev
- <agordeev@linux.ibm.com>,
-        Sven Schnelle <svens@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Janosch Frank <frankja@linux.ibm.com>,
-        Claudio Imbrenda <imbrenda@linux.ibm.com>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        Jason Wang <jasowang@redhat.com>,
-        Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-        =?UTF-8?Q?Eugenio_P=C3=A9rez?=
- <eperezma@redhat.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Hendrik Brueckner <brueckner@linux.ibm.com>
-References: <20241025141453.1210600-1-david@redhat.com>
- <20241030093453.6264-H-hca@linux.ibm.com>
-Content-Language: en-US
-From: Christian Borntraeger <borntraeger@linux.ibm.com>
-In-Reply-To: <20241030093453.6264-H-hca@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: qom_Th8fefJ6KQNAeS0Ea6VlUPdeBuG0
-X-Proofpoint-GUID: lghy8jOAyVd359QXEI4RS9zRmCQXmgAp
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
- definitions=2024-10-15_01,2024-10-11_01,2024-09-30_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- clxscore=1015 adultscore=0 phishscore=0 bulkscore=0 mlxlogscore=999
- impostorscore=0 spamscore=0 suspectscore=0 mlxscore=0 malwarescore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2409260000 definitions=main-2410300131
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAG9kImcC/3WNwQrCMBBEf6Xs2UiStkQ9CYIf4FVKie3WLmi2J
+ LFUSv/dtHcPcxhm5s0MAT1hgFM2g8eRArFLRu8yaHrrniioTR601IU8qlx0aOPHYz3wKh/rwRM
+ LWyqLrclzjQ2k7eCxo2nj3uF2vWQOo3A4RahS2lOI7L/b6ai2zspXUuo//FEJKczByLLoTIFte
+ X4wxxe5fcNvqJZl+QEZBxdzygAAAA==
+To: Andrew Lunn <andrew@lunn.ch>, Oleksij Rempel <o.rempel@pengutronix.de>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Donald Hunter <donald.hunter@gmail.com>, 
+ Rob Herring <robh@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+ Simon Horman <horms@kernel.org>, Heiner Kallweit <hkallweit1@gmail.com>, 
+ Russell King <linux@armlinux.org.uk>, Liam Girdwood <lgirdwood@gmail.com>, 
+ Mark Brown <broonie@kernel.org>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
+ linux-doc@vger.kernel.org, Kyle Swenson <kyle.swenson@est.tech>, 
+ Dent Project <dentproject@linuxfoundation.org>, kernel@pengutronix.de, 
+ Maxime Chevallier <maxime.chevallier@bootlin.com>, 
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Kalesh AP <kalesh-anakkur.purayil@broadcom.com>
+X-Mailer: b4 0.15-dev-8cb71
+X-GND-Sasl: kory.maincent@bootlin.com
 
+From: Kory Maincent (Dent Project) <kory.maincent@bootlin.com>
 
+This series brings support for port priority in the PSE subsystem.
+PSE controllers can set priorities to decide which ports should be
+turned off in case of special events like over-current.
 
-Am 30.10.24 um 10:34 schrieb Heiko Carstens:
-> On Fri, Oct 25, 2024 at 04:14:45PM +0200, David Hildenbrand wrote:
->> Let's finally add s390 support for virtio-mem; my last RFC was sent
->> 4 years ago, and a lot changed in the meantime.
->>
->> The latest QEMU series is available at [1], which contains some more
->> details and a usage example on s390 (last patch).
->>
->> There is not too much in here: The biggest part is querying a new diag(500)
->> STORAGE_LIMIT hypercall to obtain the proper "max_physmem_end".
-> 
-> ...
-> 
->> David Hildenbrand (7):
->>    Documentation: s390-diag.rst: make diag500 a generic KVM hypercall
->>    Documentation: s390-diag.rst: document diag500(STORAGE LIMIT)
->>      subfunction
->>    s390/physmem_info: query diag500(STORAGE LIMIT) to support QEMU/KVM
->>      memory devices
->>    virtio-mem: s390 support
->>    lib/Kconfig.debug: default STRICT_DEVMEM to "y" on s390
->>    s390/sparsemem: reduce section size to 128 MiB
->>    s390/sparsemem: provide memory_add_physaddr_to_nid() with CONFIG_NUMA
->>
->>   Documentation/virt/kvm/s390/s390-diag.rst | 35 +++++++++++++----
->>   arch/s390/boot/physmem_info.c             | 47 ++++++++++++++++++++++-
->>   arch/s390/boot/startup.c                  |  7 +++-
->>   arch/s390/include/asm/physmem_info.h      |  3 ++
->>   arch/s390/include/asm/sparsemem.h         | 10 ++++-
->>   drivers/virtio/Kconfig                    | 12 +++---
->>   lib/Kconfig.debug                         |  2 +-
->>   7 files changed, 98 insertions(+), 18 deletions(-)
-> 
-> I'll apply the whole series as soon as there are ACKs for the third
-> patch, and from the KVM guys for the whole series.
-> Christian, Janosch, Claudio?
+I have added regulator maintainers to have their opinion on adding power
+budget regulator constraint see patches 11 and 12.
 
-Acked-by: Christian Borntraeger <borntraeger@linux.ibm.com>
-for the series.
+This patch series adds support for two mode port priority modes.
+1. Static Method:
 
-@Eric Farman,
-Was someone from your team planning to look into this (testing, review whatever)?
+   This method involves distributing power based on PD classification.
+   It’s straightforward and stable, the PSE core keeping track of the
+   budget and subtracting the power requested by each PD’s class.
+
+   Advantages: Every PD gets its promised power at any time, which
+   guarantees reliability.
+
+   Disadvantages: PD classification steps are large, meaning devices
+   request much more power than they actually need. As a result, the power
+   supply may only operate at, say, 50% capacity, which is inefficient and
+   wastes money.
+
+2. Dynamic Method:
+
+   To address the inefficiencies of the static method, vendors like
+   Microchip have introduced dynamic power budgeting, as seen in the
+   PD692x0 firmware. This method monitors the current consumption per port
+   and subtracts it from the available power budget. When the budget is
+   exceeded, lower-priority ports are shut down.
+
+   Advantages: This method optimizes resource utilization, saving costs.
+
+   Disadvantages: Low-priority devices may experience instability.
+
+The UAPI allows adding support for software port priority mode managed from
+userspace later if needed.
+
+This patch series is currently untested and still lacks driver-level
+support for port priority. I would appreciate your feedback on the current
+implementation of port priority in the PSE core before proceeding further.
+
+Several Reviewed-by have been removed due to the changes.
+
+Thanks Oleksij for your pointers.
+
+Patches 1-3: Cosmetics.
+Patch 4: Adds support for last supported features in the TPS23881 drivers.
+Patches 5,6: Add support for PSE index in PSE core and ethtool.
+Patches 7-9: Add support for interrupt event report in PSE core, ethtool
+	     and ethtool specs.
+Patch 10: Adds support for interrupt and event report in TPS23881 driver.
+Patches 11,12: Add support for power budget in regulator framework.
+Patches 13,14: Add support for PSE power domain in PSE core and ethtool.
+Patches 15-17: Add support for port priority in PSE core, ethtool and
+	       ethtool specs.
+Patches 18: Add support for port priority in PD692x0 drivers.
+
+Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+---
+Changes in v2:
+- Rethink the port priority management.
+- Add PSE id.
+- Add support for PSE power domains.
+- Add get power budget regulator constraint.
+- Link to v1: https://lore.kernel.org/r/20241002-feature_poe_port_prio-v1-0-787054f74ed5@bootlin.com
+
+---
+Kory Maincent (18):
+      net: pse-pd: Remove unused pse_ethtool_get_pw_limit function declaration
+      net: pse-pd: tps23881: Simplify function returns by removing redundant checks
+      net: pse-pd: tps23881: Use helpers to calculate bit offset for a channel
+      net: pse-pd: tps23881: Add support for power limit and measurement features
+      net: pse-pd: Add support for PSE device index
+      net: ethtool: Add support for new PSE device index description
+      net: ethtool: Add support for ethnl_info_init_ntf helper function
+      net: pse-pd: Add support for reporting events
+      netlink: specs: Add support for PSE netlink notifications
+      net: pse-pd: tps23881: Add support for PSE events and interrupts
+      regulator: Add support for power budget description
+      regulator: dt-bindings: Add regulator-power-budget property
+      net: pse-pd: Add support for PSE power domains
+      net: ethtool: Add support for new power domains index description
+      net: pse-pd: Add support for getting and setting port priority
+      net: ethtool: Add PSE new port priority support feature
+      netlink: specs: Expand the PSE netlink command with newly supported features
+      net: pse-pd: pd692x0: Add support for PSE PI priority feature
+
+ .../devicetree/bindings/regulator/regulator.yaml   |   3 +
+ Documentation/netlink/specs/ethtool.yaml           |  53 ++
+ Documentation/networking/ethtool-netlink.rst       |  71 +++
+ drivers/net/mdio/fwnode_mdio.c                     |  26 +-
+ drivers/net/pse-pd/pd692x0.c                       |  24 +
+ drivers/net/pse-pd/pse_core.c                      | 568 ++++++++++++++++++++-
+ drivers/net/pse-pd/tps23881.c                      | 529 ++++++++++++++++---
+ drivers/regulator/core.c                           |  11 +
+ drivers/regulator/of_regulator.c                   |   3 +
+ include/linux/ethtool_netlink.h                    |   9 +
+ include/linux/pse-pd/pse.h                         |  75 ++-
+ include/linux/regulator/consumer.h                 |   6 +
+ include/linux/regulator/machine.h                  |   2 +
+ include/uapi/linux/ethtool.h                       |  35 ++
+ include/uapi/linux/ethtool_netlink.h               |  17 +
+ net/ethtool/netlink.c                              |   5 +
+ net/ethtool/netlink.h                              |   2 +
+ net/ethtool/pse-pd.c                               |  93 ++++
+ 18 files changed, 1442 insertions(+), 90 deletions(-)
+---
+base-commit: 982a5437362e09def6c3152a9ec1392b9da16ece
+change-id: 20240913-feature_poe_port_prio-a51aed7332ec
+
+Best regards,
+-- 
+Köry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
+
 
