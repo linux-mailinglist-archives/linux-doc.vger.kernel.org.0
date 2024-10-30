@@ -1,106 +1,162 @@
-Return-Path: <linux-doc+bounces-29219-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-29221-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id C19D59B6606
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Oct 2024 15:35:01 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id DCF8E9B6610
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Oct 2024 15:35:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6C7D91F22C7B
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Oct 2024 14:35:01 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0C8F41C20C70
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Oct 2024 14:35:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A14C81E2831;
-	Wed, 30 Oct 2024 14:32:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0655E1F9A93;
+	Wed, 30 Oct 2024 14:32:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OMupvtV7"
+	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="ojzq15pw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f44.google.com (mail-oo1-f44.google.com [209.85.161.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB3751F426B
-	for <linux-doc@vger.kernel.org>; Wed, 30 Oct 2024 14:32:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1F1C1F942B;
+	Wed, 30 Oct 2024 14:32:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730298750; cv=none; b=l+UzyxIGcCHQVpFN49quwoQrePM5PBoJuLc9S4wJLOmO7wb9NanpPiLzxMI6PdJnTz3fnGL40i/1HCvRWkrz5lJ3miwOi+Rtx2baJDACNnjPFlT70d1hzhaD6p4s5qgAVyTiRNgdkpOdKTkJvRpy/sS7A22eLcOUOfo9288GS+8=
+	t=1730298766; cv=none; b=elqm7JfBQE333mFJOke2hbMltSjndq7wmEVMggAZovLVFZm22X6KvmxK4RfxFgkI0brzCIvwWkKOF7a3UEgxHoF1agAM+5jGLgzFQDaLQHriEv0ljfaMZIV+V7i2x1Mt2CFLX5Lc2gFFEumXfROj0sHySJDGc8JXiWOO3e4izjs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730298750; c=relaxed/simple;
-	bh=SGT2AIkoRmj7H5+Uq/8vMaBtkCRayM23+SR3bZUMwus=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=CgNXU74zxrz2PAwBWTO+CnwAmMNUEbf3Aczvgs01TRlzxF3+v5JEEjThr4Yb1nLsrnhmqTr2Zv6EHW+HTRC71V76pw4h2vjSoWRxs0H1Vl3onZcZzbUKnv3kHMmZO5hBOrHs3SgxMW0VkY6skSqECalABk6+r7WBukr7EelOjqc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=OMupvtV7; arc=none smtp.client-ip=209.85.161.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-oo1-f44.google.com with SMTP id 006d021491bc7-5ebc03951abso3130190eaf.2
-        for <linux-doc@vger.kernel.org>; Wed, 30 Oct 2024 07:32:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1730298747; x=1730903547; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=EO8e1nRgxnqufLQ6d2cN8DPEeVmYd+WDTeF7P9l0cFQ=;
-        b=OMupvtV7OqVm2T/nNecC7hEzLIUp6A3CEx4/+gpJZX7srai5vQbLskqxqCJWVRKimz
-         YYt+7gtTM6pl2GR3qDp9WuS+/bacm4+SODUhOvGLOzE7oblrY5IG2jVzdTHLebUqi0kP
-         Q84hT2v0amONRw1zC1MD6aHOfnx2TZJZx7Hz8A17EWo5yvgtKGJip7kDvSVhPOeqhJW0
-         288BuiRfACCcPH/6vifRkWXso1NctGEuJJV4yiDlmqMdIxLe/idxCFijLc3RhlWmrx8b
-         DmoGvQ0NDECS9qA8sbJsznwRn2+FvMwWMFRXyrVcCgcAAOJur/1EAIH/smDCHBy56cVS
-         PRtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730298747; x=1730903547;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=EO8e1nRgxnqufLQ6d2cN8DPEeVmYd+WDTeF7P9l0cFQ=;
-        b=su8zYotTfVqlwSjdxxQcFpUobnJ6UoaE78RHM/8VviGI0CnpzHJ4xl2sBWTpCo8iOS
-         4yNOvyKZLGFFY0FgUzYB1GzwxPDTFfd6D/r13CLG/z5L/CMl1rsH3oEQ1Gh3gOQAqFrx
-         qY0jPD2Cnf5DlctcS45hLFf0Dj6CZRIMn8PA6c0hxB1u8rTUVI+1m2b544ZISE9JOixB
-         bmIJGzshZX5WaJQ/7wlKko/yDlW9kKGoQu6NsexpqWE5nnSSg2CfiOpN5l9MJRGHqV12
-         mPhrJhaIz4Pit7K57dcs4Fv5erbS+vRbG0CTsBKQOTrLGRyJ17ml2tDAY4h/yGxSDeLm
-         0jMA==
-X-Forwarded-Encrypted: i=1; AJvYcCXKE4WsPH9DrttrHdgn1BsTmjn4Nrkn9YvAGi5S3hhjDvKrimCk6yQKhY8ao4afLVri2pYnnEa9hww=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxzjx/dI59SQ0CqhTAPheqKY3cMHPSTOJMxz3R/FsIRL0xsXw/L
-	6+8iLYbRb+CIKy3jWX+/mT1opjF7hUtbm1Z+ME8d46MrYTJYSAJoZXzsLgySbwE=
-X-Google-Smtp-Source: AGHT+IFgChmc5MXJ9o3G/rmPEWmG7iNApA4OCV8tb1mZxdLLEWfHEgUK622U7JMkqFFaF0MofAwR3w==
-X-Received: by 2002:a05:6820:168e:b0:5eb:85ee:2cbd with SMTP id 006d021491bc7-5ec23a03f23mr10985838eaf.6.1730298746911;
-        Wed, 30 Oct 2024 07:32:26 -0700 (PDT)
-Received: from [192.168.0.142] (ip98-183-112-25.ok.ok.cox.net. [98.183.112.25])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-5ec186fc10bsm2802631eaf.37.2024.10.30.07.32.23
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 30 Oct 2024 07:32:25 -0700 (PDT)
-Message-ID: <78073c49-899a-4646-a834-6d5006d59501@baylibre.com>
-Date: Wed, 30 Oct 2024 09:32:23 -0500
+	s=arc-20240116; t=1730298766; c=relaxed/simple;
+	bh=cn2teZpK3OPgToY7WNAOAX7QIfO6Mj7lweEWlJT0Wjs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=FQEZb/L1kl7f5E6GzVJy+xf2ZK3wqRkLAZdgkwSgT6veIKtsZBrIXZaY2e4XOTtzqmqLFPvRSzvWvGccSVoDtPwcK2pyb9OZ0dvOXLufOnhA31lYIf4HQNwQmUvFJ6NJaQm0Q6HLrCLwpJzpf0OtE8VZPM+dqDVj9IuCRqvaAdE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=ojzq15pw; arc=none smtp.client-ip=148.163.158.5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
+Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49UDwEwE012371;
+	Wed, 30 Oct 2024 14:32:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=vmMkYxLTIEYmUUGwLeUXCP8MhWVjgD
+	ZL4z98/WCvP3Q=; b=ojzq15pwZXZvaEtljHFqGLIRelwP7RfBZEGtZoP3r6Fb0m
+	ms7uhp/eaWQ48jSnbPgZ0IDa7YVomELf2fXsnKL38EQTUAxtJz/1qkRzUWZVgmVz
+	v9//JNA4RF9ZvNsj/Iazawrs+7KFF8d2QwcbjjrA1CIPgKTqGxNkzj0dQYMadD/B
+	K9RSnB9YTny5ufxnDuRyrnxAvnIjqCtWQg5EweQ8DH6yswgKKZHjk3rTsO+Y4Kzl
+	brsVnwjEn9Se0vogWrvhyD9GkAS8p/9zR387YvhHxJsWmp4BIkiiJBThzIkp5Ysc
+	802BXMMtzweFZIw8jCVLKhtjBhLADvEiKESK0kag==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 42jyhbpbey-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 30 Oct 2024 14:32:33 +0000 (GMT)
+Received: from m0356516.ppops.net (m0356516.ppops.net [127.0.0.1])
+	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 49UEWWXa001457;
+	Wed, 30 Oct 2024 14:32:32 GMT
+Received: from ppma21.wdc07v.mail.ibm.com (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 42jyhbpbet-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 30 Oct 2024 14:32:32 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+	by ppma21.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 49UC3uHN013616;
+	Wed, 30 Oct 2024 14:32:31 GMT
+Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
+	by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 42hbrn0dmx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 30 Oct 2024 14:32:31 +0000
+Received: from smtpav01.fra02v.mail.ibm.com (smtpav01.fra02v.mail.ibm.com [10.20.54.100])
+	by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 49UEWRWV22020408
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 30 Oct 2024 14:32:28 GMT
+Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id E080820040;
+	Wed, 30 Oct 2024 14:32:27 +0000 (GMT)
+Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 6CF5E20043;
+	Wed, 30 Oct 2024 14:32:27 +0000 (GMT)
+Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown [9.155.204.135])
+	by smtpav01.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+	Wed, 30 Oct 2024 14:32:27 +0000 (GMT)
+Date: Wed, 30 Oct 2024 15:32:26 +0100
+From: Alexander Gordeev <agordeev@linux.ibm.com>
+To: David Hildenbrand <david@redhat.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linux-s390@vger.kernel.org, virtualization@lists.linux.dev,
+        linux-doc@vger.kernel.org, kvm@vger.kernel.org,
+        Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Sven Schnelle <svens@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
+        Cornelia Huck <cohuck@redhat.com>,
+        Janosch Frank <frankja@linux.ibm.com>,
+        Claudio Imbrenda <imbrenda@linux.ibm.com>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowang@redhat.com>,
+        Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+        Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>,
+        Eric Farman <farman@linux.ibm.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jonathan Corbet <corbet@lwn.net>, Mario Casquero <mcasquer@redhat.com>
+Subject: Re: [PATCH v3 3/7] s390/physmem_info: query diag500(STORAGE LIMIT)
+ to support QEMU/KVM memory devices
+Message-ID: <ZyJDelNH7bvo/TnO@li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com>
+References: <20241025141453.1210600-1-david@redhat.com>
+ <20241025141453.1210600-4-david@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/5] ad7380: add adaq4370-4 and adaq4380-4 support
-To: Julien Stephan <jstephan@baylibre.com>,
- Lars-Peter Clausen <lars@metafoo.de>,
- Michael Hennerich <Michael.Hennerich@analog.com>,
- =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
- Jonathan Cameron <jic23@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- Conor Dooley <conor.dooley@microchip.com>
-References: <20241030-ad7380-add-adaq4380-4-support-v4-0-864ff02babae@baylibre.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20241030-ad7380-add-adaq4380-4-support-v4-0-864ff02babae@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241025141453.1210600-4-david@redhat.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: o0oMqycScrBsgJn-Wm-yIyXZO4bLMyZD
+X-Proofpoint-ORIG-GUID: tkzhKRRM0rBtbKmnHezVCceiN8aV8C4d
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-10-15_01,2024-10-11_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxscore=0
+ malwarescore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0
+ suspectscore=0 phishscore=0 impostorscore=0 mlxlogscore=779 spamscore=0
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2409260000 definitions=main-2410300111
 
-On 10/30/24 8:44 AM, Julien Stephan wrote:
-> Hello,
+On Fri, Oct 25, 2024 at 04:14:48PM +0200, David Hildenbrand wrote:
+> To support memory devices under QEMU/KVM, such as virtio-mem,
+> we have to prepare our kernel virtual address space accordingly and
+> have to know the highest possible physical memory address we might see
+> later: the storage limit. The good old SCLP interface is not suitable for
+> this use case.
 > 
-> This series add support for adaq4370-4 (2MSPS) and adaq4380-4 (4MSPS)
-> which are quad-channel precision data acquisition signal chain μModule
-> solutions compatible with the ad738x family, with the following differences:
+> In particular, memory owned by memory devices has no relationship to
+> storage increments, it is always detected using the device driver, and
+> unaware OSes (no driver) must never try making use of that memory.
+> Consequently this memory is located outside of the "maximum storage
+> increment"-indicated memory range.
 > 
-Reviewed-by: David Lechner <dlechner@baylibre.com>
+> Let's use our new diag500 STORAGE_LIMIT subcode to query this storage
+> limit that can exceed the "maximum storage increment", and use the
+> existing interfaces (i.e., SCLP) to obtain information about the initial
+> memory that is not owned+managed by memory devices.
+> 
+> If a hypervisor does not support such memory devices, the address exposed
+> through diag500 STORAGE_LIMIT will correspond to the maximum storage
+> increment exposed through SCLP.
+> 
+> To teach kdump on s390 to include memory owned by memory devices, there
+> will be ways to query the relevant memory ranges from the device via a
+> driver running in special kdump mode (like virtio-mem already implements
+> to filter /proc/vmcore access so we don't end up reading from unplugged
+> device blocks).
+> 
+> Update setup_ident_map_size(), to clarify that there can be more than
+> just online and standby memory.
+> 
+> Tested-by: Mario Casquero <mcasquer@redhat.com>
+> Signed-off-by: David Hildenbrand <david@redhat.com>
+> ---
+>  arch/s390/boot/physmem_info.c        | 47 +++++++++++++++++++++++++++-
+>  arch/s390/boot/startup.c             |  7 +++--
+>  arch/s390/include/asm/physmem_info.h |  3 ++
+>  3 files changed, 54 insertions(+), 3 deletions(-)
 
+Reviewed-by: Alexander Gordeev <agordeev@linux.ibm.com>
 
