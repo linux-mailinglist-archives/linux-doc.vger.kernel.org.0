@@ -1,188 +1,218 @@
-Return-Path: <linux-doc+bounces-29403-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-29405-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 512039B7CA5
-	for <lists+linux-doc@lfdr.de>; Thu, 31 Oct 2024 15:20:22 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id CB4F89B7D47
+	for <lists+linux-doc@lfdr.de>; Thu, 31 Oct 2024 15:49:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9768EB21D66
-	for <lists+linux-doc@lfdr.de>; Thu, 31 Oct 2024 14:20:19 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5055E1F2431A
+	for <lists+linux-doc@lfdr.de>; Thu, 31 Oct 2024 14:49:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF9DD19B3C5;
-	Thu, 31 Oct 2024 14:20:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 343B61A0BCA;
+	Thu, 31 Oct 2024 14:49:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b="J19kYMGV"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="V8o1ljCI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C719781751;
-	Thu, 31 Oct 2024 14:20:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=178.60.130.6
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730384416; cv=none; b=o0E07ssfkS7TrpDSSYgk4AUohKV+uYoO0Ag4k/6QX4OyGx3kCu8cz2K+OpBcn9GhJB3Mc/PGiIj1XGsS0zs7oDgYC74XF8m48P9juEDgWb0sL2JQMaW6Pa5J7FHXO/6bGBubp8fEhlCk4FgGx5nObwpmSSH2v0GficPxe9l7lx0=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730384416; c=relaxed/simple;
-	bh=V2z3r4p0OygZ4QgyQBLc05eGv+c1PrkFwqAlmlFoYns=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=mEJyI1OD4vKEIYaCIa/aR7tssFaFb/Q7VuufBFbk4UIlo9YAGKqWHCg7N6/1gBj+kDrAjt/UwXNTDmBzef+sBWqD2YxYFpP/pcYZOlu6T/a/l98iwdYc8p1/smVkEAfo+baad5T9bssCCWK4cFosS6KaJoehu2hz7yLhq0EY+K0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com; spf=pass smtp.mailfrom=igalia.com; dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b=J19kYMGV; arc=none smtp.client-ip=178.60.130.6
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=Kg0P4lg1nIKp7KumwZpkm4ToOJ5Q8FhIO5DTYH2Efw4=; b=J19kYMGVQBi9BBy59O83uP3nZm
-	qv00IduAsft95dR149ebJI5EcUeesPLgDi1fMriDmvGIeEQrHDA6F8f9JEFm26GlMNngGIdhmsV62
-	h/7yj142b7Xd6LLecv+0jUetn6wsAj3UYIncaduyjw89Ah4cgF4Ms+gVwfQdxztU5bczF8fvyHV4R
-	F/NNIEHtCLTmopnxOQYA5TtrjE25SsHWCYUZZwUvB46BUfBPheXO8+IAy27Y+iTWZvSl/LfNyyuPY
-	6bK4BjJRKoBGN/uImWHNk9v9YQNnIOTZfCAwLotVcPblJmN/STBf8o/jvcPjNH3aY8bVXddyWGzST
-	9iuCnPKw==;
-Received: from [187.36.213.55] (helo=[192.168.1.103])
-	by fanzine2.igalia.com with esmtpsa 
-	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
-	id 1t6W1h-0002xI-19; Thu, 31 Oct 2024 15:19:53 +0100
-Message-ID: <d65176f1-df6f-4e21-b281-469ec958f26f@igalia.com>
-Date: Thu, 31 Oct 2024 11:19:45 -0300
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE1161A01C6;
+	Thu, 31 Oct 2024 14:49:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=192.198.163.8
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1730386148; cv=fail; b=byJzvgFU4b0axtEvf/grWD/09jBGDZdIIHcd4QK9SnTDRDujGSZKHl7F+UJhuQByL6HrrDpzKPcJF9bIjHmUEjNOKqhgygZvgkC71b/pTYA992149rVShFEJFirEHu0PWxiivMf9b1Ho7NRz3GG37HbZlwwI8m+5Mux4vDpPMuE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1730386148; c=relaxed/simple;
+	bh=QuK1olTQdxzJQMF5lGc3QldY7lfKvlbXpz13DJQG83Q=;
+	h=Date:From:To:CC:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=O8ReYN7Tsic21wsPGOUFtxRYCbPOLOyafjggCP2J4ozdvYMQrRMam3XI+Y5ip+U05t4ISJOHhhYiEkG0Fu8FPOsAzR1GAT6A0KdYb/unyDgo66R9iib385VGW0Yptzb251olVJvo5SMKhKDxfzL3GaamzKU9s7KPi4FLKQSfNgQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=V8o1ljCI; arc=fail smtp.client-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1730386146; x=1761922146;
+  h=date:from:to:cc:subject:message-id:references:
+   in-reply-to:mime-version;
+  bh=QuK1olTQdxzJQMF5lGc3QldY7lfKvlbXpz13DJQG83Q=;
+  b=V8o1ljCIeQUq2JXaatc1HIDBlYzY/1V08wJcOva6Qe1UUYcaJiSbgvJo
+   JmpeXkfIjThjGMTA58Bpao26C6JudDzRGuMVe0O3DzuCaN8V1l6UHvFZi
+   oUJVLiXBi4BgiVFCzgh/vkUTNFbb6aqg/1t/EgvdxByi3b0+oZ/CxzyYn
+   w/cOpePWtzDbtmr8ap6aId1W+bBfzfJTbaj7MI9qhPQ/0c/Oaq8zSYsz4
+   7ghxvJ3eKhVjwMTdNVpC38QyQMJ7QP1iT2ncpatmgMNMadk5+v27JxqQ5
+   VjIIVjkphI/34lKSc4O99zXz4jPMkwqHdUuHlXBucg7kMU76XTnRYCq5e
+   w==;
+X-CSE-ConnectionGUID: u3WVJLnvRD+DC+GUAxkbgw==
+X-CSE-MsgGUID: /nke67tDRVGZhgq9m/WFXw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11242"; a="47600525"
+X-IronPort-AV: E=Sophos;i="6.11,247,1725346800"; 
+   d="scan'208";a="47600525"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Oct 2024 07:49:04 -0700
+X-CSE-ConnectionGUID: ILAajtqpQsuUq/YXRHg/Tw==
+X-CSE-MsgGUID: 7FHBsGaCR++ycVQqU9QLeQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.11,247,1725346800"; 
+   d="scan'208";a="82806579"
+Received: from fmsmsx601.amr.corp.intel.com ([10.18.126.81])
+  by orviesa006.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 31 Oct 2024 07:49:03 -0700
+Received: from fmsmsx603.amr.corp.intel.com (10.18.126.83) by
+ fmsmsx601.amr.corp.intel.com (10.18.126.81) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Thu, 31 Oct 2024 07:49:02 -0700
+Received: from fmsedg602.ED.cps.intel.com (10.1.192.136) by
+ fmsmsx603.amr.corp.intel.com (10.18.126.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39 via Frontend Transport; Thu, 31 Oct 2024 07:49:02 -0700
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (104.47.58.175)
+ by edgegateway.intel.com (192.55.55.71) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.39; Thu, 31 Oct 2024 07:49:02 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gorOw5HkKTQo7Jo8MC7A9q2HC4AbVK63V7NaJR7+a4U5Pc/IEzvuz1EKpwgwWcT9fQZNGuR+8Yp65JeF5yvj4iYntDOEGhUgsbvzrOBxP9xm93q+vzzha5n9Fp+lFUBvTi84aNDW4SC5ZKmprHVCJTPiF8ln4MT5y//Grag5MMM2TP5p8yFa34evNGTByGi1ffAHarmt8Aka4HOp7z1bq8ORKNoGuoqO9xAxg+b16q4ufKSTe5i0QALdOybpr78UJWsW3sNY4u5wh78fdmujiK4uAsgxDame9k3YmfQsQ6VPYGxjJ/FTvVia55D9W7rCvWLefCYHkT6qaJ0z4hh4Fg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uJ9X0Iiy/uKNDh/RiTEm6C+uMTW2Px1DUUhnAmVUPYo=;
+ b=uiHcgnWs7bYb2gA49JoPTqX02FROEEkaDR8pU1FP7d6oSNwxSDXfNkZ04CdgZZIMrOGmj8xMDM7AWRH8Iyjh6lylX8pA8/RNf69i0sa6YCZNkMYYkCro766rCIQWf/Tqf5S9mOpTUUX4wA0ZudJ/KBGMWFRk645/ecC66Qo9An7cHCrn4TXd+4Y6BnshAjJ+z9TptYxPoryAaeWu3DB629Q2aBX/fW1nryqD2i07MDGM0qtaM/1aDH8pPj0glZZpmtlEDurCSJc1JibtDDQc+FgeaItoYKwNwvfem+chLJ2NmMG7AlYh1RYq0RMO4DYIWowXA423gYIsPxuiHuuAvA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from SA1PR11MB6733.namprd11.prod.outlook.com (2603:10b6:806:25c::17)
+ by DM4PR11MB6263.namprd11.prod.outlook.com (2603:10b6:8:a6::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.24; Thu, 31 Oct
+ 2024 14:48:59 +0000
+Received: from SA1PR11MB6733.namprd11.prod.outlook.com
+ ([fe80::cf7d:9363:38f4:8c57]) by SA1PR11MB6733.namprd11.prod.outlook.com
+ ([fe80::cf7d:9363:38f4:8c57%3]) with mapi id 15.20.8093.027; Thu, 31 Oct 2024
+ 14:48:58 +0000
+Date: Thu, 31 Oct 2024 09:48:53 -0500
+From: Ira Weiny <ira.weiny@intel.com>
+To: Davidlohr Bueso <dave@stgolabs.net>, <ira.weiny@intel.com>
+CC: Dave Jiang <dave.jiang@intel.com>, Fan Ni <fan.ni@samsung.com>, "Jonathan
+ Cameron" <Jonathan.Cameron@huawei.com>, Navneet Singh
+	<navneet.singh@intel.com>, Jonathan Corbet <corbet@lwn.net>, Andrew Morton
+	<akpm@linux-foundation.org>, Dan Williams <dan.j.williams@intel.com>, "Alison
+ Schofield" <alison.schofield@intel.com>, Vishal Verma
+	<vishal.l.verma@intel.com>, <linux-cxl@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <nvdimm@lists.linux.dev>,
+	<linux-kernel@vger.kernel.org>, Kees Cook <kees@kernel.org>, "Gustavo A. R.
+ Silva" <gustavoars@kernel.org>, <linux-hardening@vger.kernel.org>
+Subject: Re: [PATCH v5 08/27] cxl/mem: Read dynamic capacity configuration
+ from the device
+Message-ID: <672398d5caa17_7b1f129472@iweiny-mobl.notmuch>
+References: <20241029-dcd-type2-upstream-v5-0-8739cb67c374@intel.com>
+ <20241029-dcd-type2-upstream-v5-8-8739cb67c374@intel.com>
+ <20241031002422.cu53abpaimetzrdx@offworld>
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20241031002422.cu53abpaimetzrdx@offworld>
+X-ClientProxiedBy: MW4PR04CA0213.namprd04.prod.outlook.com
+ (2603:10b6:303:87::8) To SA1PR11MB6733.namprd11.prod.outlook.com
+ (2603:10b6:806:25c::17)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/4] mm: shmem: override mTHP shmem default with a
- kernel parameter
-To: David Hildenbrand <david@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
- Andrew Morton <akpm@linux-foundation.org>, Hugh Dickins <hughd@google.com>,
- Barry Song <baohua@kernel.org>, Ryan Roberts <ryan.roberts@arm.com>,
- Baolin Wang <baolin.wang@linux.alibaba.com>, Lance Yang <ioworker0@gmail.com>
-Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, kernel-dev@igalia.com
-References: <20241030130308.1066299-1-mcanal@igalia.com>
- <20241030130308.1066299-4-mcanal@igalia.com>
- <2c507326-3267-431e-936a-23e2ab6a3baf@redhat.com>
- <899284fa-953f-48a1-af29-222d0d55881c@igalia.com>
- <cfcfaed5-8612-46f4-b3dd-67e1d81d049f@redhat.com>
- <95c48a30-0696-4110-950e-e81afb4ffc2a@igalia.com>
- <5745d2ca-4d87-4d1f-b38f-734c7086f462@redhat.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>
-In-Reply-To: <5745d2ca-4d87-4d1f-b38f-734c7086f462@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA1PR11MB6733:EE_|DM4PR11MB6263:EE_
+X-MS-Office365-Filtering-Correlation-Id: 44741af5-40ce-412c-7b24-08dcf9bb26da
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?w2vg3ZbWysjdAonfNvtyMFah6bNBPlkqd/LydpnislZ7Eij+bmfwXaSjtR9E?=
+ =?us-ascii?Q?XI6s+Fg7npAE19t8aNSUH+sDTXT1MnGFcjJ290rKcKBG/2cPMEcc0tPIpvaq?=
+ =?us-ascii?Q?WBOF1Q643uO1fQqkBhf46GddJHCRLyjB0Wd7w3Osz7fltGKfkzycA0qjWmtD?=
+ =?us-ascii?Q?GJiA0om4rZorXUEOPRGmq7gLLTknSEAdDppZx9N9BlZo2sWKBinw2P9k0pvH?=
+ =?us-ascii?Q?YIRjqLIT4ZM6B7EIQNLUq+ukhTXi+JXui+NG/cU8GvMXEYot/yU1FOjCT6dr?=
+ =?us-ascii?Q?akqurMHSv8dDAJCHTV6H2NSVIiwgqHNhaFOzZuDmebn40QrueXQm7v6FNMJg?=
+ =?us-ascii?Q?cj3nrXJL+kYpt8GzfJsO8Yq3M4FM7LQMMLyHZOb12A/aUh1zBRfCOm6AnVr5?=
+ =?us-ascii?Q?HbZ7Gmof+/WO61nq4xaf7ff/j9qG4fDdP9tVTt2trO/bhV+xfZGirB6IeaIu?=
+ =?us-ascii?Q?bEHXI1NA6biFeOGdLOrjIH+uH3swuvfAZNaMX+va/I16He1fn6kpllrl4HRL?=
+ =?us-ascii?Q?n1Asyf6dBS5M62OInKG8zuK/bxm8WrHH8K2OtPYcfe1Kwge6TVMbPU+XoFzM?=
+ =?us-ascii?Q?L2vZ2fIDGp3KbN5IHFrymCQe+sNcD1BewcYWIPevSNVzou3sOUT6RgkxsT/d?=
+ =?us-ascii?Q?nPnpgFErnrlOOPf/KLSPDgMi1AmHsokCzpihxjYtzlgREOKUYyz4H4ObP/pk?=
+ =?us-ascii?Q?rmTmId84UAfFe714iextu6yauNQhHvDvC/8o2OpLNHUBFP4pWCTsQmGrEdZs?=
+ =?us-ascii?Q?0cH0XoRwe5JeTOxyRagGX19x4xsF/aVq/UopweMIh/Dqy0xDWYuqzv0berVW?=
+ =?us-ascii?Q?uZs96op0qhjA8wRSyYxg3+ulYzG0UoxReN2wibL5aL9gkuaZpJY7/fIgLmhp?=
+ =?us-ascii?Q?lDFDrL6bP9NsBOW6sO38TKiCKxNTY0d6dUJo8s6atQJZlOV8/yZ+h/RwOFlf?=
+ =?us-ascii?Q?eIMrWWHb1G8AwQrrNY5XYnk7yobW4hXL27GrkyAQfdnE9njor+yjYjxW3UWR?=
+ =?us-ascii?Q?jDeaRGIrJEgq0SfVuPkWCxILHnTR8d1K4O3iKrfZSHbC0v7o8DC/DkvTbk0H?=
+ =?us-ascii?Q?re5WGbY5TLeFqD1RW9m71u819TKAUW7dk0QK8+PgfOCEYwX9b46d/FmCV52M?=
+ =?us-ascii?Q?+TSfXNxKDvJiME76+45ua+xJnNnAd0qCLePgwl4QKbqAJ5fhGEqKNNqPQfUB?=
+ =?us-ascii?Q?CQ+/dBMBsxRKAPOVPJMs97BIemelisS4Fc2KC0Gg/YnlzwU7kTayIjcXLTfS?=
+ =?us-ascii?Q?Dx/nV24uGCAk/OhfSVHiTR6pMnzGyNBwkjQU60M+Oq/5pGiIh2POOWFOj4J1?=
+ =?us-ascii?Q?ZG9jHZqoHJyh9w38yej2w+x6?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA1PR11MB6733.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Rfd1D2Wg5A6aHaAqM2vZOoJgeSDlZy/cWEibBpwczBq/H36LSMwGIhpVi4m6?=
+ =?us-ascii?Q?r49ATNgKhpCLHulsbvQIxtqvlNZjvQEC58kNPhjgB6goUm0Pdgrg6zWlBum4?=
+ =?us-ascii?Q?PbYTI7F9+OP8ZjKlZ/r/VIMkcXzGD2qRTERY3Jd0Bb/l1Xqdj9hAkaaa7xlO?=
+ =?us-ascii?Q?5QOmHGltCfrsLgP5VsbXUI+tV7NXOK8g0TbdFaqD2qyjld1dH/06SOiiWaof?=
+ =?us-ascii?Q?khvilGdA/oOvviJ/Ka1k3kCoI8p07auOTetG2+pXX8bLujx7x4WJ/PHUYvoH?=
+ =?us-ascii?Q?LoBwQkWvNc6wpvKr7+k8YAQXi9WfUq7eJhy+c5Emza3aXuQYjpgnwkHCjl7z?=
+ =?us-ascii?Q?vVW64wFIEUPU4GuGCN0y6sBka4IK0gVkjGy8cgtie0XFi/l2rJYm/Ysd9v0m?=
+ =?us-ascii?Q?j2MKyZ1yC9E76B/cOQYe11ZgjtjjgXmbwfc+vZSkdNPGIwRsZd8iHMwfUBA8?=
+ =?us-ascii?Q?kL0esRQWVj3hWxHSAZ1gzqmNztYWR1OnVyXQtoBGQ6qwjPcPHJ4WRBaoE2aE?=
+ =?us-ascii?Q?alYpIv3vcmTMEnPmpFxsnovdqf4tbbyOecnsslDwcD6BjfHG3yeF9XXFtkaR?=
+ =?us-ascii?Q?BH7g81wi7ACmrkulO8tumGTJL2l1J7vLOcwJoyJK1+GLhizDxPo489R3lubT?=
+ =?us-ascii?Q?vLeDgINxo8PcIwp6a9KdXR/ZcnO3gRHixW/EbqMMKPpcfEnDImBbV5znFab2?=
+ =?us-ascii?Q?p7p10qgebga/c2Q6Z9T/fSODMlqNcYQIY/ChD9SAipKAIbtY7/lpsaKWapR8?=
+ =?us-ascii?Q?Gopb1NF2bwlgviJLw7k5saSDP+f9w0h4EkmqlW5vva8jtNBzOGtw+nhE/7om?=
+ =?us-ascii?Q?NxM1/+c+MFvl8lKo2unfOsOA4xXR4+kHZr/6lSTGcq8QHUJDEdgRWvgzlUuR?=
+ =?us-ascii?Q?RYE7Zp1DRa1GZy23Z2qsz5oRKRDXU6hLZGcPy3vf5esRlYBwg9RskPrbxdWK?=
+ =?us-ascii?Q?9Jf2z8W8ncDicpGLTLQ1RJWIGO/1rUc2iot8VdKwrDOzfDJwdjWH5qs6OXxU?=
+ =?us-ascii?Q?C0S2kLT98xvEI1lxOhbiWWQ46LpAVNZb/e79jCg6G7t7hji9XdLjVn0j+5tP?=
+ =?us-ascii?Q?sFaa1kdh04noBHsAsMkJoKhlag5FnAmR153JRRI1peDV1lj+mt1VDWtSBylN?=
+ =?us-ascii?Q?yE8xNmgjVb1L9kt3SJGlDIxI14M/Wu5E3SEq6/sM0eLzbs5clRuIF2cbseVy?=
+ =?us-ascii?Q?aUU9/NjAPKgUOZKqeHq149wdHtaczs7GbnNUDaZALDbS/KDc9qOUXFgYg5et?=
+ =?us-ascii?Q?eBLXpS4yXXGMWfUzooxoCddmMQNoyaOuL2Y2Urqa9I3PhWIyUqMGAOEd0isb?=
+ =?us-ascii?Q?vWuiOj4zjMhYs5lKCYrRzGj1pVFdRZe9j00RaWMVw002FvblXqPk11sqxrwT?=
+ =?us-ascii?Q?8Z1rt7AACAeEUDSrUoYyAqoi89Hi6aUxCzBsPcHpQ2JVbBUOfbWXhBVAHY+T?=
+ =?us-ascii?Q?5GweBC9GwlrlvMJAxMtJtJhva1YrF9Gs5cAbAfWjXn/ZrJ6p9Uo1IdlkIE4S?=
+ =?us-ascii?Q?d4bDy2tk308lzYeTE4HZuagT39HyfiXmMuPP9O7B+V08vNlewmEnEy5260aJ?=
+ =?us-ascii?Q?nsxqMW9ImjW5p2QJzaVZpwBT97Rm9ROAVy4dmaNn?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 44741af5-40ce-412c-7b24-08dcf9bb26da
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR11MB6733.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2024 14:48:58.8588
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: TDDGYIJFtwHcjF06DkDjOgmTTATq0ldZaD1kgoCjgEI2/nU2v22+gi9/vbtIqBnZDfSlXRaiUXb0dqOVmtho1w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB6263
+X-OriginatorOrg: intel.com
 
-On 31/10/24 10:33, David Hildenbrand wrote:
-> On 31.10.24 14:24, Maíra Canal wrote:
->> Hi David,
->>
->> On 31/10/24 09:57, David Hildenbrand wrote:
->>> On 31.10.24 13:51, Maíra Canal wrote:
->>>> Hi David,
->>>>
->>>> On 31/10/24 09:37, David Hildenbrand wrote:
->>>>> On 30.10.24 13:58, Maíra Canal wrote:
->>>>>> Add the ``thp_shmem=`` kernel command line to allow specifying the
->>>>>> default policy of each supported shmem hugepage size. The kernel
->>>>>> parameter
->>>>>> accepts the following format:
->>>>>>
->>>>>> thp_shmem=<size>[KMG],<size>[KMG]:<policy>;<size>[KMG]-
->>>>>> <size>[KMG]:<policy>
->>>>>>
->>>>>> For example,
->>>>>>
->>>>>> thp_shmem=16K-64K:always;128K,512K:inherit;256K:advise;1M-2M:never;4M-8M:within_size
->>>>>>
->>>>>> By configuring the default policy of several shmem hugepages, the 
->>>>>> user
->>>>>> can take advantage of mTHP before it's been configured through sysfs.
->>>>>>
->>>>>> Signed-off-by: Maíra Canal <mcanal@igalia.com>
->>>>>> ---
->>>>>>     .../admin-guide/kernel-parameters.txt         |  10 ++
->>>>>>     Documentation/admin-guide/mm/transhuge.rst    |  17 +++
->>>>>>     mm/shmem.c                                    | 109 +++++++++++++
->>>>>> ++++-
->>>>>>     3 files changed, 135 insertions(+), 1 deletion(-)
->>>>>>
->>>>
->>>> [...]
->>>>
->>>>>> diff --git a/mm/shmem.c b/mm/shmem.c
->>>>>> index dfcc88ec6e34..c2299fa0b345 100644
->>>>>> --- a/mm/shmem.c
->>>>>> +++ b/mm/shmem.c
->>>>>> @@ -136,6 +136,7 @@ static unsigned long huge_shmem_orders_always
->>>>>> __read_mostly;
->>>>>>     static unsigned long huge_shmem_orders_madvise __read_mostly;
->>>>>>     static unsigned long huge_shmem_orders_inherit __read_mostly;
->>>>>>     static unsigned long huge_shmem_orders_within_size __read_mostly;
->>>>>> +static bool shmem_orders_configured __initdata;
->>>>>>     #endif
->>>>>>     #ifdef CONFIG_TMPFS
->>>>>> @@ -5027,7 +5028,8 @@ void __init shmem_init(void)
->>>>>>          * Default to setting PMD-sized THP to inherit the global
->>>>>> setting and
->>>>>>          * disable all other multi-size THPs.
->>>>>>          */
->>>>>> -    huge_shmem_orders_inherit = BIT(HPAGE_PMD_ORDER);
->>>>>> +    if (!shmem_orders_configured)
->>>>>> +        huge_shmem_orders_inherit = BIT(HPAGE_PMD_ORDER);
->>>>>>     #endif
->>>>>>         return;
->>>>>> @@ -5180,6 +5182,26 @@ struct kobj_attribute
->>>>>> thpsize_shmem_enabled_attr =
->>>>>>     #if defined(CONFIG_TRANSPARENT_HUGEPAGE)
->>>>>> +static inline int get_order_from_str(const char *size_str)
->>>>>> +{
->>>>>> +    unsigned long size;
->>>>>> +    char *endptr;
->>>>>> +    int order;
->>>>>> +
->>>>>> +    size = memparse(size_str, &endptr);
->>>>>> +
->>>>>> +    if (!is_power_of_2(size))
->>>>>> +        goto err;
->>>>>> +    order = get_order(size);
->>>>>> +    if (BIT(order) & ~THP_ORDERS_ALL_FILE_DEFAULT)
->>>>>> +        goto err;
->>>>>> +
->>>>>> +    return order;
->>>>>> +err:
->>>>>> +    pr_err("invalid size %s in thp_shmem boot parameter\n", 
->>>>>> size_str);
->>>>>> +    return -EINVAL;
->>>>>> +}
->>>>>
->>>>> Hm, mostly copy and paste. You could reuse existing 
->>>>> get_order_from_str()
->>>>> simply by passing in the supported orders and moving error 
->>>>> reporting to
->>>>> the caller.
->>>>>
->>>>
->>>> Can I use functions from mm/huge_memory.c here?
->>>
->>> Yes, that's the idea.
->>>
->>
->> Unfortunately, it isn't possible without adding the function to a
->> header.
+Davidlohr Bueso wrote:
+> On Tue, 29 Oct 2024, ira.weiny@intel.com wrote:
 > 
-> Well ... sure, what's the problem with that?
-
-David & Barry, how do you feel about adding `get_order_from_str()` to
-lib/cmdline.c?
-
-Best Regards,
-- Maíra
-
+> >Linux has no use for the trailing fields of the Get Dynamic Capacity
+> >Configuration Output Payload (Total number of supported extents, number
+> >of available extents, total number of supported tags, and number of
+> >available tags).  Avoid defining those fields to use the more useful
+> >dynamic C array.
 > 
+> More of a general question, if anyone knows: why does the spec define
+> the fields in that order, and not put the region config structure(s)
+> at the end, as with all other cmds, afaik.
 
+Because the 3.0 spec only left 7 bytes of reserved space before the region
+config structure array.  One might argue that no one would ever implement
+the 3.0 spec for DCD but at the time it was seen as an unbreakable
+structure.
+
+While it is not impossible to utilize those fields they are not required
+right now.  So in this implementation it was better to use the dynamic C
+array's and leave the use of those fields for another day.
+
+Ira
 
