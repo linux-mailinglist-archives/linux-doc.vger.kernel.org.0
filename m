@@ -1,160 +1,141 @@
-Return-Path: <linux-doc+bounces-29582-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-29589-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39E949B95F1
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Nov 2024 17:56:32 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id A6CD49B9649
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Nov 2024 18:11:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F2E892828A8
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Nov 2024 16:56:30 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 21649B2103E
+	for <lists+linux-doc@lfdr.de>; Fri,  1 Nov 2024 17:11:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D8301C9B80;
-	Fri,  1 Nov 2024 16:56:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 777991A3BD5;
+	Fri,  1 Nov 2024 17:11:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="PCk7D6/X"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LktIwCgK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-fw-33001.amazon.com (smtp-fw-33001.amazon.com [207.171.190.10])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53B681CA81;
-	Fri,  1 Nov 2024 16:56:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=207.171.190.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A50631CA81;
+	Fri,  1 Nov 2024 17:11:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730480185; cv=none; b=Iq/AZrugbDcDrZScwSAd/j2quUAj+xi9SQZHf2ZfvMajiO13pl921lb7wuqNRwKEjzP82Q3SWh6BVN4dIc/yNeSNyPX8tjKBI5yI9jtRjTdWW7mPjDiXLGbQ0njKopxPDIvQu3j9r6mmeqURMQZ7nM/guSWSAhEimi8qeL4sdko=
+	t=1730481076; cv=none; b=nmQ/QVTMmuSmBOsA6hr90SewZu5IL+0v/PzVmmmDE5Hd44i6ZWYPPvczMBQdT1puFq1/fDSVPop03LbIxlgNQuF8dYDfFnvSPvFphqRr46HNPDePlRCncZpXDlU5IAa4w4UFu+q1wIZ1V9Iqm268VdWGlIRG6WS4RMu1iSCzlNs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730480185; c=relaxed/simple;
-	bh=KmcSGZZTBepw/haBxjfNfgGPXnl3daZOBZVZzzq5xe4=;
-	h=Message-ID:Date:MIME-Version:To:CC:References:Subject:From:
-	 In-Reply-To:Content-Type; b=Fk0ljucdrdtRL3rhaYIE/c4hLceyFDWYfzvcXPWK//4f6fJus2LK9I6XyDBZBYZ3BrozDnprQ/tZB8nymIARIK9EFgS9PmnHo5CzVAYfGEDSxCQUuLH0pJzWUH9Hd7vGcZ4kKGgKUJs1hkfiSmoTC/wq8s/HxlWunPUUyCpseXg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com; spf=pass smtp.mailfrom=amazon.com; dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b=PCk7D6/X; arc=none smtp.client-ip=207.171.190.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.com
+	s=arc-20240116; t=1730481076; c=relaxed/simple;
+	bh=hrmMYL51uQ+aNmsN/cZfyxdeBlGg+T9v2778IgPjGn8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=YU/e4YL95v+wW3KSSpqnQF9+k+JFRE4QGSQQcyg1w5IaCZgFAVEUOEpf0pTern77BnEkqA9BvUT9yGuKpe5GGYu9sD4aSySyPjFAbrb1sbJGE+T22zXxI/yhrQ/vFqddLXsOUA/Y9IE0UCEi/6WBNLlF4NokRvFbHw5RGwj7iqk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LktIwCgK; arc=none smtp.client-ip=209.85.208.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-5cec7cde922so443177a12.3;
+        Fri, 01 Nov 2024 10:11:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1730480183; x=1762016183;
-  h=message-id:date:mime-version:to:cc:references:subject:
-   from:in-reply-to:content-transfer-encoding;
-  bh=KmcSGZZTBepw/haBxjfNfgGPXnl3daZOBZVZzzq5xe4=;
-  b=PCk7D6/Xsej0yYJGNbxAPA+qHiAKeCt3/rm3MZKcin/UJ4i9Xlw8usDF
-   74YFiJIFV5pNWSgyXDidK4xnYBMdbXIg7Bbaex4VP8vHcUtep44nGDNTK
-   hbuSj1UrFzhta5y4XhmMB438agIqZasDU0cgObqoRmZjBjNpEUpR6dMam
-   A=;
-X-IronPort-AV: E=Sophos;i="6.11,250,1725321600"; 
-   d="scan'208";a="381765496"
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev) ([10.25.36.210])
-  by smtp-border-fw-33001.sea14.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Nov 2024 16:56:22 +0000
-Received: from EX19MTAUWA001.ant.amazon.com [10.0.38.20:55997]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.34.72:2525] with esmtp (Farcaster)
- id 6a9142ea-5ddd-46d3-9d40-2688c563fdd9; Fri, 1 Nov 2024 16:56:21 +0000 (UTC)
-X-Farcaster-Flow-ID: 6a9142ea-5ddd-46d3-9d40-2688c563fdd9
-Received: from EX19D003UWC002.ant.amazon.com (10.13.138.169) by
- EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.34;
- Fri, 1 Nov 2024 16:56:20 +0000
-Received: from [192.168.208.156] (10.106.101.42) by
- EX19D003UWC002.ant.amazon.com (10.13.138.169) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.35;
- Fri, 1 Nov 2024 16:56:17 +0000
-Message-ID: <7bd627df-0303-4ded-b8c8-ceb84fb20f0d@amazon.com>
-Date: Fri, 1 Nov 2024 09:56:12 -0700
+        d=gmail.com; s=20230601; t=1730481073; x=1731085873; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hrmMYL51uQ+aNmsN/cZfyxdeBlGg+T9v2778IgPjGn8=;
+        b=LktIwCgKzBarY8Ugz1EPYWV9v4ac7TZZTqaelSoQGRuCOpm15EtK6RL6Xj/T6SiQAp
+         ljy8FuLWMIUYacV0OV2M3nYsGvA9s8l3Sf4tD16X+7pN3mTvO0u+i29zioKzU+GwUbLU
+         DhobWACS9ghPGVi3MDChGYkdLxuCHlkZHzTnBRAwKWbYxhGybm4cOsx7M/YI4cnlvo8b
+         uZNxpl14RMwAmlxo7y2CmgSmfqO0vhLATqjXyYZe3qtzK6mK6uJjvekhSCb5LkZTR9YD
+         40nmfDkLI2d+UisWEc37une6RJnmCHgDIlnBlBz7UQ6xbB3T08BN5F+SkVU3cXWhHri8
+         CAog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730481073; x=1731085873;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=hrmMYL51uQ+aNmsN/cZfyxdeBlGg+T9v2778IgPjGn8=;
+        b=WWzvBvmBoplLjB9vHNNrak0l1POhWs5czIIDyeRGHFtZRFIXWOtkTRDvuTBQ6HTgmo
+         ciWgrvL+R/hhl45F9pS5nbTY/iz2Fg5rhnJksdOQTUIKVwlFGS0Wm/ytU0BLMlr7gDv0
+         4gId3pCUZvFktPWyq+R1qMm1GrhLxlq7BPD9YnaouTSa/iNkAUWod7KbgyXQbS2ZshpM
+         pIwT1PdKDy//bSu4FBa1bOgU2OpaJgadbCe4Xygz0noysOuUPMz5cMTZxka+jMvbE3uH
+         d5Q9uSshgpp638J/wYlujVWAvSQbiN7kFhlo+MQoVyr8piZ4GIeOuLdB3vt0TRof86Mp
+         z5pA==
+X-Forwarded-Encrypted: i=1; AJvYcCWaxMd0RYU0IOQvC5qfQN/ewFXcxn29JN9TgfNJME0eZrRP8mMzc4BV8OR1M77tphtW5w17Gdgm@vger.kernel.org, AJvYcCXu4V+/N4KhgbPQhwVNsk7VGJIZxt6/WIunEw0h1yt+DNDzjKToYea8ytPh6VAUK/MQkqAKZ7CSEc8=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzr91CLhsBJ7E3cKe04W5uku2TND9FecZJ5pAVO27wfOLDz8PFC
+	Ave8jP1AXoUCr18eKFUGgPsX8SDWSsx5uzrxXVqzF7OE1lvVip0vaEIzfN1GRNC1Q/u7wwsCRqS
+	lUzE8ugbhxh9WMSVpfAjbI65ovRk=
+X-Google-Smtp-Source: AGHT+IEOYvjsewNxQ2cVWG6mSdsgcMhdy0Cf69WHKLUDeI2pXZkA5dAmk6XtbsPAup5IW3HXr4B0ph3rxctp4mgrEyQ=
+X-Received: by 2002:a05:6402:518a:b0:5c9:76ca:705b with SMTP id
+ 4fb4d7f45d1cf-5cd54afde73mr8495018a12.34.1730481072531; Fri, 01 Nov 2024
+ 10:11:12 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: <dave.hansen@intel.com>
-CC: <ackerleytng@google.com>, <agordeev@linux.ibm.com>,
-	<aou@eecs.berkeley.edu>, <borntraeger@linux.ibm.com>, <bp@alien8.de>,
-	<catalin.marinas@arm.com>, <chenhuacai@kernel.org>, <corbet@lwn.net>,
-	<dave.hansen@linux.intel.com>, <david@redhat.com>, <derekmn@amazon.com>,
-	<gerald.schaefer@linux.ibm.com>, <gor@linux.ibm.com>, <graf@amazon.com>,
-	<hca@linux.ibm.com>, <hpa@zytor.com>, <jgowans@amazon.com>,
-	<jthoughton@google.com>, <kalyazin@amazon.com>, <kernel@xen0n.name>,
-	<kvm@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<linux-kselftest@vger.kernel.org>, <linux-mm@kvack.org>,
-	<linux-riscv@lists.infradead.org>, <linux-s390@vger.kernel.org>,
-	<linux-trace-kernel@vger.kernel.org>, <loongarch@lists.linux.dev>,
-	<luto@kernel.org>, <mathieu.desnoyers@efficios.com>, <mhiramat@kernel.org>,
-	<mingo@redhat.com>, <palmer@dabbelt.com>, <paul.walmsley@sifive.com>,
-	<pbonzini@redhat.com>, <peterz@infradead.org>, <quic_eberman@quicinc.com>,
-	<rostedt@goodmis.org>, <roypat@amazon.co.uk>, <rppt@kernel.org>,
-	<seanjc@google.com>, <shuah@kernel.org>, <svens@linux.ibm.com>,
-	<tabba@google.com>, <tglx@linutronix.de>, <vannapurve@google.com>,
-	<will@kernel.org>, <x86@kernel.org>, <xmarcalx@amazon.com>,
-	<mlipp@amazon.at>, <canellac@amazon.at>, <elena.reshetova@intel.com>
-References: <784d1522-0451-4844-a334-8b7d49019437@intel.com>
-Subject: Re: [RFC PATCH v3 0/6] Direct Map Removal for guest_memfd
-Content-Language: en-US
-From: "Manwaring, Derek" <derekmn@amazon.com>
-In-Reply-To: <784d1522-0451-4844-a334-8b7d49019437@intel.com>
+References: <20241003160620.1521626-1-ap420073@gmail.com> <20241003160620.1521626-3-ap420073@gmail.com>
+ <20241008111926.7056cc93@kernel.org> <CAMArcTU+r+Pj_y7rUvRwTrDWqg57xy4e-OacjWCfKRCUa8A-aw@mail.gmail.com>
+ <20241009082837.2735cd97@kernel.org> <CAMArcTVXJhJopGTHc-DqK1ydCkaQj5-VRGoJ-saGNGeTLXZHcw@mail.gmail.com>
+ <20241031165624.5a7f8618@kernel.org>
+In-Reply-To: <20241031165624.5a7f8618@kernel.org>
+From: Taehee Yoo <ap420073@gmail.com>
+Date: Sat, 2 Nov 2024 02:11:00 +0900
+Message-ID: <CAMArcTWQijQ5S44rJzrpNWrbgo6hyJiyUddcuA6ZoegZmkvTLg@mail.gmail.com>
+Subject: Re: [PATCH net-next v3 2/7] bnxt_en: add support for tcp-data-split
+ ethtool command
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: davem@davemloft.net, pabeni@redhat.com, edumazet@google.com, 
+	almasrymina@google.com, netdev@vger.kernel.org, linux-doc@vger.kernel.org, 
+	donald.hunter@gmail.com, corbet@lwn.net, michael.chan@broadcom.com, 
+	kory.maincent@bootlin.com, andrew@lunn.ch, maxime.chevallier@bootlin.com, 
+	danieller@nvidia.com, hengqi@linux.alibaba.com, ecree.xilinx@gmail.com, 
+	przemyslaw.kitszel@intel.com, hkallweit1@gmail.com, ahmed.zaki@intel.com, 
+	paul.greenwalt@intel.com, rrameshbabu@nvidia.com, idosch@nvidia.com, 
+	asml.silence@gmail.com, kaiyuanz@google.com, willemb@google.com, 
+	aleksander.lobakin@intel.com, dw@davidwei.uk, sridhar.samudrala@intel.com, 
+	bcreeley@amd.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: EX19D038UWB002.ant.amazon.com (10.13.139.185) To
- EX19D003UWC002.ant.amazon.com (10.13.138.169)
+Content-Transfer-Encoding: quoted-printable
 
-+Elena
-
-On 2024-11-01 at 16:06+0000, Dave Hansen wrote:
-> On 10/31/24 17:10, Manwaring, Derek wrote:
-> > TDX and SEV encryption happens between the core and main memory, so
-> > cached guest data we're most concerned about for transient execution
-> > attacks isn't necessarily inaccessible.
+On Fri, Nov 1, 2024 at 8:56=E2=80=AFAM Jakub Kicinski <kuba@kernel.org> wro=
+te:
+>
+> On Fri, 1 Nov 2024 02:34:59 +0900 Taehee Yoo wrote:
+> > While I'm writing a patch I face an ambiguous problem here.
+> > ethnl_set_ring() first calls .get_ringparam() to get current config.
+> > Then it calls .set_ringparam() after it sets the current config + new
+> > config to param structures.
+> > The bnxt_set_ringparam() may receive ETHTOOL_TCP_DATA_SPLIT_ENABLED
+> > because two cases.
+> > 1. from user
+> > 2. from bnxt_get_ringparam() because of UNKNWON.
+> > The problem is that the bnxt_set_ringparam() can't distinguish them.
+> > The problem scenario is here.
+> > 1. tcp-data-split is UNKNOWN mode.
+> > 2. HDS is automatically enabled because one of LRO or GRO is enabled.
+> > 3. user changes ring parameter with following command
+> > `ethtool -G eth0 rx 1024`
+> > 4. ethnl_set_rings() calls .get_ringparam() to get current config.
+> > 5. bnxt_get_ringparam() returns ENABLE of HDS because of UNKNWON mode.
+> > 6. ethnl_set_rings() calls .set_ringparam() after setting param with
+> > configs comes from .get_ringparam().
+> > 7. bnxt_set_ringparam() is passed ETHTOOL_TCP_DATA_SPLIT_ENABLED but
+> > the user didn't set it explicitly.
+> > 8. bnxt_set_ringparam() eventually force enables tcp-data-split.
 > >
-> > I'd be interested what Intel, AMD, and other folks think on this, but I
-> > think direct map removal is worthwhile for CoCo cases as well.
+> > I couldn't find a way to distinguish them so far.
+> > I'm not sure if this is acceptable or not.
+> > Maybe we need to modify a scenario?
 >
-> I'm not sure specifically which attacks you have in mind.  [...]
->
-> I _think_ you might be thinking of attacks like MDS where some random
-> microarchitectural buffer contains guest data after a VM exit and then
-> an attacker extracts it.  Direct map removal doesn't affect these
-> buffers and doesn't mitigate an attacker getting the data out.
+> I thought we discussed this, but I may be misremembering.
+> You may need to record in the core whether the setting came
+> from the user or not (similarly to IFF_RXFH_CONFIGURED).
+> User setting UNKNWON would mean "reset".
+> Maybe I'm misunderstanding..
 
-Right, the only attacks we can thwart with direct map removal are
-transient execution attacks on the host kernel whose leak origin is
-"Mapped memory" in Table 1 of the Quarantine paper [2]. Maybe the
-simplest hypothetical to consider here is a new spectre v1 gadget in the
-host kernel.
+Thanks a lot for that!
+I will try to add a new variable, that indicates tcp-data-split is set by
+user. It would be the tcp_data_split_mod in the
+kernel_ethtool_ringparam structure.
 
-> The main thing I think you want to keep in mind is mentioned in the "TDX
-> Module v1.5 Base Architecture Specification"[1]:
->
-> > Any software except guest TD or TDX module must not be able to
-> > speculatively or non-speculatively access TD private memory,
->
-> That's a pretty broad claim and it involves mitigations in hardware and
-> the TDX module.
->
-> 1. https://cdrdv2.intel.com/v1/dl/getContent/733575
-
-Thank you, I hadn't seen that. That is a very strong claim as far as
-preventing speculative access; I didn't realize Intel claimed that about
-TDX. The comma followed by "to detect if a prior corruption attempt was
-successful" makes me wonder a bit if the statement is not quite as broad
-as it sounds, but maybe that's just meant to relate it to the integrity
-section?
-
-> If the attack is mitigated when the > data is _mapped_, then it's
-> certainly not possible _unmapped_.
->
-> So why bother with direct map removal for TDX?  A VMM write to TD
-> private data causes machine checks.  So any kernel bug that even
-> accidentally writes to kernel memory can bring the whole system down.
-> Not nice.
-
-Fair enough. It hasn't been clear to me if there is a machine check when
-the host kernel accesses guest memory only transiently. I was assuming
-there is not. But if other mitigations completely prevent even
-speculative access of TD private memory like you're saying, then agree
-nothing to gain from direct map removal in the TDX case.
-
-Derek
-
-
-[2] https://download.vusec.net/papers/quarantine_raid23.pdf
+Thanks a lot!
+Taehee Yoo
 
