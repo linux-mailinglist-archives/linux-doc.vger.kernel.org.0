@@ -1,81 +1,94 @@
-Return-Path: <linux-doc+bounces-29679-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-29681-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F4099BA0DF
-	for <lists+linux-doc@lfdr.de>; Sat,  2 Nov 2024 15:54:43 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id EADF49BA143
+	for <lists+linux-doc@lfdr.de>; Sat,  2 Nov 2024 16:37:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 374DB1F219DF
-	for <lists+linux-doc@lfdr.de>; Sat,  2 Nov 2024 14:54:43 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 942EB1F21868
+	for <lists+linux-doc@lfdr.de>; Sat,  2 Nov 2024 15:37:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1E4B318A944;
-	Sat,  2 Nov 2024 14:54:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B88B1A0B07;
+	Sat,  2 Nov 2024 15:37:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AYVmfx3z"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hrgxVF67"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E665815A856;
-	Sat,  2 Nov 2024 14:54:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B68D433B9;
+	Sat,  2 Nov 2024 15:37:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730559278; cv=none; b=qSHNyCtI6w0BYxPKib1IxsqmY7RC+PLxENHcr43RyUG/x5r/6OdA12GoJp849nFVdp72IjqngDoTKYRRjY//2B3Nmb5EqrmYcs+CUw9CLALVi2EeB7dyhxWKzEDDHdMFnaf43zE+PABF8wt1uoDZqkHApfIRrAWLSq/JyWaRx2c=
+	t=1730561848; cv=none; b=CyRYEtcAZyulisbrbodsPfceNnO/I8DkhXRQe7AKn6mtMtv16cQ5V9bHc6Ah0rkLnbsH5dZp7KGhVbgFx2yN6CWRvXei2wiPWLRso13blfJizqisb8U5/S3mtiCWHZcgJJwqXkp+/QI6CamFzBggWMiV/N6PVPOuELQOivS4XZY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730559278; c=relaxed/simple;
-	bh=JWsU0s/lAvc2Fk2HY0b9OTdWjv3rVfDYEP25bPd4z30=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=kYykfMGLkCF1as7Q9DVMjE+Dmtzm+Ldr9vVi6M/YyWFz77KyItE0l8Z512u08KNZLstAf6WxMNL4N7ql9ckQxBixBZksdEcebi6W4dFc5Bc2wnCuchtdeVRrANh6+gcMElFSF1cPr1EM1pI1RvtX9/x/kEJV+1vZH40y8GM9Uw4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AYVmfx3z; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E83AC4CEC3;
-	Sat,  2 Nov 2024 14:54:30 +0000 (UTC)
+	s=arc-20240116; t=1730561848; c=relaxed/simple;
+	bh=y4HIF/v1R+URt/KUSeF/i8MxNK8ybhm+h85nTRc+ivY=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=fdKRVYg0Rn0RXeSwFFjNQA6MiF9scK5SBmNiirZrriqXXi2zK/pKECqeC7SnxWiaB931NLLzPGPnxrhb4LKXgJdv23y82GA+RVn8SQbWuOf616t2qSfUeBwVc5gKTfvjKjbfuhW7C7+9j67tIlwU30V3wL1rEk0K1xEBgZn6gqA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hrgxVF67; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3609C4CEC3;
+	Sat,  2 Nov 2024 15:37:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1730559277;
-	bh=JWsU0s/lAvc2Fk2HY0b9OTdWjv3rVfDYEP25bPd4z30=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=AYVmfx3zNNq56YhKO92+y9ZqUvMDKy01eX3enKE53TrIyHfDUexHN67uC8ywu6nmK
-	 eSka+nhlVxE7lOPNw9Cis01L7o1dl+3VZQpgO51ZL6TidW4moKUNygc41I5LtYWsLf
-	 qtHrYwyD+U0+dFWpCD9u4EKsbr1GEp8BCqQ5nF7Mvs9IX+/IrB6ELJ36XVCMbWUkXl
-	 0SpZOTWGaNSLluOlybxyXqFLQCk8uMhGEGg5g2pZ+8/03iYOEdPzuPWYCZS7CMEevA
-	 5YvbTJ9B/a0T02B808R2+OBduGAazKFhoob1Gq86A3nCF/YhDfZFa5Nw0Cmdlv6uW6
-	 a+m7nh14NuDNw==
-Date: Sat, 2 Nov 2024 14:54:27 +0000
-From: Simon Horman <horms@kernel.org>
-To: Linu Cherian <lcherian@marvell.com>
-Cc: davem@davemloft.net, sgoutham@marvell.com, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org, gakula@marvell.com,
-	hkelam@marvell.com, sbhatta@marvell.com, jerinj@marvell.com,
-	edumazet@google.com, kuba@kernel.org, pabeni@redhat.comi,
-	jiri@resnulli.us, corbet@lwn.net, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v4 net-next 2/3] octeontx2-af: Knobs for NPC default rule
- counters
-Message-ID: <20241102145427.GO1838431@kernel.org>
-References: <20241029035739.1981839-1-lcherian@marvell.com>
- <20241029035739.1981839-3-lcherian@marvell.com>
+	s=k20201202; t=1730561846;
+	bh=y4HIF/v1R+URt/KUSeF/i8MxNK8ybhm+h85nTRc+ivY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=hrgxVF67fuPP2897pEiPpK6JyOjLWBDvAe9kLrBWrFYg0zn0RWdx7Sn4Ha8k6hJis
+	 IQ8xfvcYaBriJ+piVP1oGhLs+6Uavwubvby2PLxleXGnA+P6wpAF9NQ8maogWoFVER
+	 Iq/NpFzY4WLPpLtF20Apxt9DkviLyIOuzPoMJ4nSCG10xnXJmKLJfHpxwOfBsw9ZHd
+	 rwxKH4v6qbcCTIRtkd82nUZYTBtaF2X3R6DG+ed4tmky0HIGj1es2bJ/bLFDf40Yfm
+	 AaGBvEGPqdnBpv/DgEBFFc2VGdRHyqWW9Vyo7LJnw+HX4z0g1XQMixJUleYoUgbyjF
+	 hPIbFAGnNAYzQ==
+Date: Sat, 2 Nov 2024 15:37:18 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, Lars-Peter Clausen
+ <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, Nuno
+ =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Conor Dooley
+ <conor.dooley@microchip.com>
+Subject: Re: [PATCH v4 0/5] ad7380: add adaq4370-4 and adaq4380-4 support
+Message-ID: <20241102153718.6d12295e@jic23-huawei>
+In-Reply-To: <78073c49-899a-4646-a834-6d5006d59501@baylibre.com>
+References: <20241030-ad7380-add-adaq4380-4-support-v4-0-864ff02babae@baylibre.com>
+	<78073c49-899a-4646-a834-6d5006d59501@baylibre.com>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.43; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241029035739.1981839-3-lcherian@marvell.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 29, 2024 at 09:27:38AM +0530, Linu Cherian wrote:
-> Add devlink knobs to enable/disable counters on NPC
-> default rule entries.
-> 
-> Sample command to enable default rule counters:
-> devlink dev param set <dev> name npc_def_rule_cntr value true cmode runtime
-> 
-> Sample command to read the counter:
-> cat /sys/kernel/debug/cn10k/npc/mcam_rules
-> 
-> Signed-off-by: Linu Cherian <lcherian@marvell.com>
+On Wed, 30 Oct 2024 09:32:23 -0500
+David Lechner <dlechner@baylibre.com> wrote:
 
-Reviewed-by: Simon Horman <horms@kernel.org>
+> On 10/30/24 8:44 AM, Julien Stephan wrote:
+> > Hello,
+> >=20
+> > This series add support for adaq4370-4 (2MSPS) and adaq4380-4 (4MSPS)
+> > which are quad-channel precision data acquisition signal chain =CE=BCMo=
+dule
+> > solutions compatible with the ad738x family, with the following differe=
+nces:
+> >  =20
+> Reviewed-by: David Lechner <dlechner@baylibre.com>
+
+FWIW, this looks fine to me and I can tweak the voltage in the docs whilst
+applying.  I'm stalled on merging this series by the fix dependency working
+it's way into upstream.=20
+
+Thanks,
+
+Jonathan
+
+>=20
 
 
