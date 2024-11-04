@@ -1,175 +1,188 @@
-Return-Path: <linux-doc+bounces-29782-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-29779-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id EABB19BB441
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Nov 2024 13:11:29 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id EFFDE9BB41B
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Nov 2024 13:02:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1ABA31C21BD2
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Nov 2024 12:11:29 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B1A49280E0A
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Nov 2024 12:02:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 161751B6CE3;
-	Mon,  4 Nov 2024 12:11:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="mJ88Vh8f"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 21A551AF0B3;
+	Mon,  4 Nov 2024 12:02:41 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from szxga04-in.huawei.com (szxga04-in.huawei.com [45.249.212.190])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC47E1B5EBC
-	for <linux-doc@vger.kernel.org>; Mon,  4 Nov 2024 12:11:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 109EF7C0BE
+	for <linux-doc@vger.kernel.org>; Mon,  4 Nov 2024 12:02:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.190
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730722283; cv=none; b=RdpwSmJVJCim8yaepn1xGOB6NtrzXdK3yPGscmSgc6XcQBtmHUGnsLqgNta0WHjUbmMZreSv1/Zd3VsaHBUNyd/6FIOy830xMgbnTVJbI3GBEpjNQMZ2BbHHfatCrEClISe7X3/C0xQourU5Zm7UfiqJCUZN5cWaaUj7ybAdXIM=
+	t=1730721761; cv=none; b=i8agLGp60/q4UY6X6ZAHUpE5AZS2xgZ/3G+yqRwUkqtv+GNTA4vtvxMWHwTnJVtP3sP90fLb8ndGqOn4KjaDRSYKTFyVw+Ohl+Eu0TqZrmVi7bNiZ65oo0OxRFk94xNJrXGXYqHKaoaBQh+S7WiKkKOxgBURqFhCpNGU4uhZTSA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730722283; c=relaxed/simple;
-	bh=EW/+kcRIbtWGNG3/HSSUqqzHxBuvplmY1+As85O/USI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kp4oIneUsZ5W1JUehAM7isFVLRVv34hRQVqTbkErUopHlsQ+9ITVuk3I6zns97Pg3yppcklvDzqs3/EUo87Mb60fewoROQuXQZA23zxLTdunoBEWaDt8vbsxvIR1jRnrdZVfOvutV53O+OlAc5jzcmM2jpc2yCtPzJGq5RWtVXA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=mJ88Vh8f; arc=none smtp.client-ip=209.85.128.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-431695fa98bso31861855e9.3
-        for <linux-doc@vger.kernel.org>; Mon, 04 Nov 2024 04:11:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1730722279; x=1731327079; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=TZ56fmXjiTYLxN4xJpDGh5ZMZmSWUVoHQN6nZMrXMmc=;
-        b=mJ88Vh8f4AgqdZfk6jOIOxM/mqdr9htX0xvZa6bK5j/v/qP1gv7qRBKwsfXaA4j3Nq
-         2pBlTY/M2TgbIMc4M/kwFFQL+dqv/Iu/dSJ+ETnMXZDq7nriS1JUUrEsRryGE2hPSt9S
-         7PTbgZsfMwW6StKBNNUsOhh0hDbY6E5UrP5FhN/hLG7byRh5Yy53XLfiVg+8qzr+A1Bv
-         k+3ZeN+ZsX7Xieyg9jCRZeT+JCgookHmAvD6uqAzWiYljoiC1QFOoVlgoVex37l60Z9G
-         cU3qe6kYYaWsCryBHQBpc1WZR0O3VXM7NgrcsD1snktUZVEmxniQ+Nl4H5WFX+gBf9XU
-         +bZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730722279; x=1731327079;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=TZ56fmXjiTYLxN4xJpDGh5ZMZmSWUVoHQN6nZMrXMmc=;
-        b=XVYCntHv0QTU9tWMsH3XfP71n/mPmhEr4bUL6amqXtMQT0kppFORmSrXSEqBB2NICX
-         gt2KFNA1yqkCh/nIaQvR2HyiJdOXwX39z2EpJvDAGRsOBUq85XS5mkooluPvh6ff9j+i
-         BojZkdtXPFdlEcBU4rFX4R8UsOIQ3/n726FGfgLRlwD1fQHvpTchVDHL1v6A/P7dwmXa
-         k4VCVenXBVjqakmGbqZLTG6rPIKUrPAH74jmt71DZANpBxCbji+NM9TTQF6UEHO8ANrP
-         x80DC6+bbXTaAVsVHskEb9dBToEz+UHJmAuJatbqNKMJ/u5CcetC8BZL/R9wI89OA/27
-         SJXA==
-X-Gm-Message-State: AOJu0YxO2WvNbSf9QHbnHBkFu0l1CCHJfVRJuj5hLPrei3/TprRdGb4j
-	fERxAcuU/RJcrPJhCw/8+gFjpXTk5Hux273fwKmCw5/lS4ZQeC4I2JqONV7OmiA=
-X-Google-Smtp-Source: AGHT+IG0KNeictXp2keg0xKTrwSw2dpZ3byLRxQUDBWwUtsFo73cuCa8JZLWaGjBv/Dn/iKV+Gzl5g==
-X-Received: by 2002:a05:600c:1f0e:b0:431:5ba2:2450 with SMTP id 5b1f17b1804b1-4319ad253ecmr271545645e9.33.1730722278899;
-        Mon, 04 Nov 2024 04:11:18 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:e17:9700:16d2:7456:6634:9626? ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4327d698144sm156541575e9.39.2024.11.04.04.11.17
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 04 Nov 2024 04:11:18 -0800 (PST)
-Message-ID: <b823ad91-af5c-43a7-bf16-78d683937e0e@rivosinc.com>
-Date: Mon, 4 Nov 2024 13:11:17 +0100
+	s=arc-20240116; t=1730721761; c=relaxed/simple;
+	bh=RKfETeJ5M6wul7ruC9euhfuUUfanF67mO987XR1Xo/M=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Z3jolilvAs0KJZWXo0V5/Fr+DSylnimbaUuUQghN6vJQdPzcL7pDZeen49aioHpSPg4OqqNTzmZVpTGIRQsBCn95tTRMiGU1jV/U7bkKMC1rvlaYSpBOmnXL5Hl2cD+C97TON56SDivwANdaUhBUqNgPcuJV/WsFtu7svIFS5T4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=hisilicon.com; spf=pass smtp.mailfrom=hisilicon.com; arc=none smtp.client-ip=45.249.212.190
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=hisilicon.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hisilicon.com
+Received: from mail.maildlp.com (unknown [172.19.163.17])
+	by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4Xhqmj1RD8z2Fb4P;
+	Mon,  4 Nov 2024 20:00:53 +0800 (CST)
+Received: from kwepemd200012.china.huawei.com (unknown [7.221.188.145])
+	by mail.maildlp.com (Postfix) with ESMTPS id BF0DB1A0188;
+	Mon,  4 Nov 2024 20:02:31 +0800 (CST)
+Received: from huawei.com (10.145.6.51) by kwepemd200012.china.huawei.com
+ (7.221.188.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Mon, 4 Nov
+ 2024 20:02:30 +0800
+From: Zhou Wang <wangzhou1@hisilicon.com>
+To: <maz@kernel.org>, <tglx@linutronix.de>
+CC: <linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>, Zhou
+ Wang <wangzhou1@hisilicon.com>, Nianyao Tang <tangnianyao@huawei.com>
+Subject: [PATCH] irqchip/gicv3-its: Add workaround for hip09 ITS erratum 162100801
+Date: Mon, 4 Nov 2024 20:11:43 +0800
+Message-ID: <20241104121143.2169264-1-wangzhou1@hisilicon.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] riscv: hwprobe: export bfloat16 ISA extension
-To: Inochi Amaoto <inochiama@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
- Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>,
- Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Evan Green <evan@rivosinc.com>,
- Charlie Jenkins <charlie@rivosinc.com>,
- Andrew Jones <ajones@ventanamicro.com>, Andy Chiu <andybnac@gmail.com>,
- Xiao Wang <xiao.w.wang@intel.com>, Samuel Holland <samuel.holland@sifive.com>
-Cc: linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- Yixun Lan <dlan@gentoo.org>, Longbin Li <looong.bin@gmail.com>
-References: <20241103074959.1135240-1-inochiama@gmail.com>
- <20241103074959.1135240-4-inochiama@gmail.com>
-Content-Language: en-US
-From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-In-Reply-To: <20241103074959.1135240-4-inochiama@gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ kwepemd200012.china.huawei.com (7.221.188.145)
 
+When enabled GICv4.1 in hip09, VMAPP will fail to clear some caches
+during unmapping operation, which will cause some vSGIs interrupts lost.
 
+To fix the issue, it needs to send vinvall command after vmovp.
 
-On 03/11/2024 08:49, Inochi Amaoto wrote:
-> Export Zfbmin, Zvfbfmin, Zvfbfwma ISA extension through hwprobe.
-> 
-> Signed-off-by: Inochi Amaoto <inochiama@gmail.com>
-> ---
->  Documentation/arch/riscv/hwprobe.rst  | 12 ++++++++++++
->  arch/riscv/include/uapi/asm/hwprobe.h |  3 +++
->  arch/riscv/kernel/sys_hwprobe.c       |  3 +++
->  3 files changed, 18 insertions(+)
-> 
-> diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/riscv/hwprobe.rst
-> index 85b709257918..8c30dd06f3c0 100644
-> --- a/Documentation/arch/riscv/hwprobe.rst
-> +++ b/Documentation/arch/riscv/hwprobe.rst
-> @@ -239,6 +239,18 @@ The following keys are defined:
->         ratified in commit 98918c844281 ("Merge pull request #1217 from
->         riscv/zawrs") of riscv-isa-manual.
->  
-> +  * :c:macro:`RISCV_HWPROBE_EXT_ZFBFMIN`: The Zfbfmin extension is supported as
-> +       defined in the RISC-V ISA manual starting from commit 4dc23d6229de
-> +       ("Added Chapter title to BF16").
-> +
-> +  * :c:macro:`RISCV_HWPROBE_EXT_ZVFBFMIN`: The Zvfbfmin extension is supported as
-> +       defined in the RISC-V ISA manual starting from commit 4dc23d6229de
-> +       ("Added Chapter title to BF16").
-> +
-> +  * :c:macro:`RISCV_HWPROBE_EXT_ZVFBFWMA`: The Zvfbfwma extension is supported as
-> +       defined in the RISC-V ISA manual starting from commit 4dc23d6229de
-> +       ("Added Chapter title to BF16").
-> +
->  * :c:macro:`RISCV_HWPROBE_KEY_CPUPERF_0`: Deprecated.  Returns similar values to
->       :c:macro:`RISCV_HWPROBE_KEY_MISALIGNED_SCALAR_PERF`, but the key was
->       mistakenly classified as a bitmask rather than a value.
-> diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/uapi/asm/hwprobe.h
-> index 1e153cda57db..95d00a065b4e 100644
-> --- a/arch/riscv/include/uapi/asm/hwprobe.h
-> +++ b/arch/riscv/include/uapi/asm/hwprobe.h
-> @@ -72,6 +72,9 @@ struct riscv_hwprobe {
->  #define		RISCV_HWPROBE_EXT_ZCF		(1ULL << 46)
->  #define		RISCV_HWPROBE_EXT_ZCMOP		(1ULL << 47)
->  #define		RISCV_HWPROBE_EXT_ZAWRS		(1ULL << 48)
-> +#define		RISCV_HWPROBE_EXT_ZFBFMIN	(1ULL << 49)
-> +#define		RISCV_HWPROBE_EXT_ZVFBFMIN	(1ULL << 50)
-> +#define		RISCV_HWPROBE_EXT_ZVFBFWMA	(1ULL << 51)
->  #define RISCV_HWPROBE_KEY_CPUPERF_0	5
->  #define		RISCV_HWPROBE_MISALIGNED_UNKNOWN	(0 << 0)
->  #define		RISCV_HWPROBE_MISALIGNED_EMULATED	(1 << 0)
-> diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwprobe.c
-> index cea0ca2bf2a2..de1966bd1776 100644
-> --- a/arch/riscv/kernel/sys_hwprobe.c
-> +++ b/arch/riscv/kernel/sys_hwprobe.c
-> @@ -131,6 +131,8 @@ static void hwprobe_isa_ext0(struct riscv_hwprobe *pair,
->  			EXT_KEY(ZVE64D);
->  			EXT_KEY(ZVE64F);
->  			EXT_KEY(ZVE64X);
-> +			EXT_KEY(ZVFBFMIN);
-> +			EXT_KEY(ZVFBFWMA);
->  			EXT_KEY(ZVFH);
->  			EXT_KEY(ZVFHMIN);
->  			EXT_KEY(ZVKB);
-> @@ -147,6 +149,7 @@ static void hwprobe_isa_ext0(struct riscv_hwprobe *pair,
->  			EXT_KEY(ZCD);
->  			EXT_KEY(ZCF);
->  			EXT_KEY(ZFA);
-> +			EXT_KEY(ZFBFMIN);
->  			EXT_KEY(ZFH);
->  			EXT_KEY(ZFHMIN);
->  		}
+Signed-off-by: Nianyao Tang <tangnianyao@huawei.com>
+Signed-off-by: Zhou Wang <wangzhou1@hisilicon.com>
+---
+ Documentation/arch/arm64/silicon-errata.rst |  2 ++
+ arch/arm64/Kconfig                          | 10 ++++++
+ drivers/irqchip/irq-gic-v3-its.c            | 36 ++++++++++++++++-----
+ 3 files changed, 40 insertions(+), 8 deletions(-)
 
+diff --git a/Documentation/arch/arm64/silicon-errata.rst b/Documentation/arch/arm64/silicon-errata.rst
+index 65bfab1b1861..77db10e944f0 100644
+--- a/Documentation/arch/arm64/silicon-errata.rst
++++ b/Documentation/arch/arm64/silicon-errata.rst
+@@ -258,6 +258,8 @@ stable kernels.
+ | Hisilicon      | Hip{08,09,10,10C| #162001900      | N/A                         |
+ |                | ,11} SMMU PMCG  |                 |                             |
+ +----------------+-----------------+-----------------+-----------------------------+
++| Hisilicon      | Hip09           | #162100801      | HISILICON_ERRATUM_162100801 |
+++----------------+-----------------+-----------------+-----------------------------+
+ +----------------+-----------------+-----------------+-----------------------------+
+ | Qualcomm Tech. | Kryo/Falkor v1  | E1003           | QCOM_FALKOR_ERRATUM_1003    |
+ +----------------+-----------------+-----------------+-----------------------------+
+diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
+index fd9df6dcc593..27082e075d1a 100644
+--- a/arch/arm64/Kconfig
++++ b/arch/arm64/Kconfig
+@@ -1232,6 +1232,16 @@ config HISILICON_ERRATUM_161600802
+ 
+ 	  If unsure, say Y.
+ 
++config HISILICON_ERRATUM_162100801
++	bool "Hip09 162100801 erratum support"
++	default y
++	help
++	  When enabled GICv4.1 in hip09, VMAPP will fail to clear some caches
++	  during unmapping operation, which will cause some vSGIs interrupts
++	  lost. So fix it by sending vinvall commands after vmovp.
++
++	  If unsure, say Y.
++
+ config QCOM_FALKOR_ERRATUM_1003
+ 	bool "Falkor E1003: Incorrect translation due to ASID change"
+ 	default y
+diff --git a/drivers/irqchip/irq-gic-v3-its.c b/drivers/irqchip/irq-gic-v3-its.c
+index 52f625e07658..69b09072d24d 100644
+--- a/drivers/irqchip/irq-gic-v3-its.c
++++ b/drivers/irqchip/irq-gic-v3-its.c
+@@ -44,6 +44,7 @@
+ #define ITS_FLAGS_WORKAROUND_CAVIUM_22375	(1ULL << 1)
+ #define ITS_FLAGS_WORKAROUND_CAVIUM_23144	(1ULL << 2)
+ #define ITS_FLAGS_FORCE_NON_SHAREABLE		(1ULL << 3)
++#define ITS_FLAGS_WORKAROUND_HISILICON_162100801	(1ULL << 4)
+ 
+ #define RD_LOCAL_LPI_ENABLED                    BIT(0)
+ #define RD_LOCAL_PENDTABLE_PREALLOCATED         BIT(1)
+@@ -1314,6 +1315,14 @@ static void its_send_vmapp(struct its_node *its,
+ 	its_send_single_vcommand(its, its_build_vmapp_cmd, &desc);
+ }
+ 
++static void its_send_vinvall(struct its_node *its, struct its_vpe *vpe)
++{
++	struct its_cmd_desc desc;
++
++	desc.its_vinvall_cmd.vpe = vpe;
++	its_send_single_vcommand(its, its_build_vinvall_cmd, &desc);
++}
++
+ static void its_send_vmovp(struct its_vpe *vpe)
+ {
+ 	struct its_cmd_desc desc = {};
+@@ -1351,17 +1360,12 @@ static void its_send_vmovp(struct its_vpe *vpe)
+ 
+ 		desc.its_vmovp_cmd.col = &its->collections[col_id];
+ 		its_send_single_vcommand(its, its_build_vmovp_cmd, &desc);
++		if (is_v4_1(its) && (its->flags &
++			    ITS_FLAGS_WORKAROUND_HISILICON_162100801))
++			its_send_vinvall(its, vpe);
+ 	}
+ }
+ 
+-static void its_send_vinvall(struct its_node *its, struct its_vpe *vpe)
+-{
+-	struct its_cmd_desc desc;
+-
+-	desc.its_vinvall_cmd.vpe = vpe;
+-	its_send_single_vcommand(its, its_build_vinvall_cmd, &desc);
+-}
+-
+ static void its_send_vinv(struct its_device *dev, u32 event_id)
+ {
+ 	struct its_cmd_desc desc;
+@@ -4781,6 +4785,14 @@ static bool its_set_non_coherent(void *data)
+ 	return true;
+ }
+ 
++static bool __maybe_unused its_enable_quirk_hip09_162100801(void *data)
++{
++	struct its_node *its = data;
++
++	its->flags |= ITS_FLAGS_WORKAROUND_HISILICON_162100801;
++	return true;
++}
++
+ static const struct gic_quirk its_quirks[] = {
+ #ifdef CONFIG_CAVIUM_ERRATUM_22375
+ 	{
+@@ -4827,6 +4839,14 @@ static const struct gic_quirk its_quirks[] = {
+ 		.init	= its_enable_quirk_hip07_161600802,
+ 	},
+ #endif
++#ifdef CONFIG_HISILICON_ERRATUM_162100801
++	{
++		.desc	= "ITS: Hip09 erratum 162100801",
++		.iidr	= 0x00051736,
++		.mask	= 0xffffffff,
++		.init	= its_enable_quirk_hip09_162100801,
++	},
++#endif
+ #ifdef CONFIG_ROCKCHIP_ERRATUM_3588001
+ 	{
+ 		.desc   = "ITS: Rockchip erratum RK3588001",
+-- 
+2.34.1
 
-Looks good to me !
-
-Reviewed-by: Clément Léger <cleger@rivosinc.com>
-
-Thanks
 
