@@ -1,136 +1,158 @@
-Return-Path: <linux-doc+bounces-29778-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-29780-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05F839BB39F
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Nov 2024 12:39:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38EF79BB42E
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Nov 2024 13:08:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B02701F23297
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Nov 2024 11:39:34 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id E507B1F2413F
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Nov 2024 12:08:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5D7671AF0A7;
-	Mon,  4 Nov 2024 11:39:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C65D1B4F14;
+	Mon,  4 Nov 2024 12:07:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FCNZl80y"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="npXjDaGG"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DC3C185B4D;
-	Mon,  4 Nov 2024 11:39:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1065418DF85;
+	Mon,  4 Nov 2024 12:07:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730720369; cv=none; b=IfXP4NHpuW3B2eJ8lYZxrEY/8SzRa3zN2jfDv3NV5EdzB52FMbbfKFGNZpEaRqTIpG5Y3BpEL+q0GUrFDjGjSwAF8xxhC1Z8wayKx2J7akm4FRT1EJ6ljZ3kk05q0b2Z9nSGrWkjrB7cL/QoOlVXMIPGp3NryKVAO1tY2qkSiRo=
+	t=1730722076; cv=none; b=fT6HXfnB1Y4u7Mt5HL1056wA744M24TOH0lHwmfmNE3uyKoTVYVtcDWLoKLVtsrJmPOJxTvzJWhzjH7sCsboJlDCfICo1Zqi7UiVCrwVkH0/WtroYxv5EYWdor8tlyfwEG5uB373esFc8DDGF//T1/8w+vFx00Xxj5l1/ld5ec4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730720369; c=relaxed/simple;
-	bh=NEDVbMitndD/iK6JWHs2o1S6pn7h57zEQ83wRjOGbwM=;
+	s=arc-20240116; t=1730722076; c=relaxed/simple;
+	bh=vsi/33NO427ZAndINphaIY00QOvDA9ey0no25IMNd9Q=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=T4X21Z2//bEFcE/Mnm7SRAEbSe2Hv30g+1ieVBA2BegoCMvZRAoZOdSYFpbC4l5dWo/3l6/XioIhCYr0byPK6IIo/c0GUEkwnb/QtZ52vhrykbqbJ639Y5Z0Py3PptiFz59LSlKcCL2rXk+pa2DGBNiLTqUUqvjENG+VpJVB3hU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FCNZl80y; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E43EC4CECE;
-	Mon,  4 Nov 2024 11:39:25 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=mc5++0RyXAxDRHiBJNhPl43yVFYk37RbUn4Mej/Pq5sm12rtvFDnsoJQqL1fSioxBNd72HSau6l1cOChAGGA/BiLYx8BK9+9DAeKGMOmjYD+pK58QIQJyfD1R0/Sve2UI2Be8QH/E7wG0gtspWgwJHVq9CGDLjxjuxCUwkhuXJE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=npXjDaGG; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2F5DC4CED1;
+	Mon,  4 Nov 2024 12:07:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1730720366;
-	bh=NEDVbMitndD/iK6JWHs2o1S6pn7h57zEQ83wRjOGbwM=;
+	s=k20201202; t=1730722075;
+	bh=vsi/33NO427ZAndINphaIY00QOvDA9ey0no25IMNd9Q=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=FCNZl80yEk5l8SaYaoCBd/ngvAnMVCC2ZjSDbwZfQ8mrGoQAQHq0KZ0YySad2w6iD
-	 bhKUdk2VJPuLxk2n0zNkeYqVTjWimCe0KY+EoWT4fqvV1+YLhQUvABpjnzxQEgdqFM
-	 2BpPxg0LwBCTYbhkxkUYZgp3KkOsOZRDo+BKC3lH3JeAsOEk2fzj8ARLQQ14RhFnrX
-	 uXWBkNGPfoaMl6N4kDz6OiMk0Mf/BwrYcYvvPP+t71xWn1ZjQA3Q6lgcGNVObYG5Gq
-	 GbS2qup3wwHfcN9yIP+AIN4pioJI5Luew6aYTY7gCJ1DnGQC9xzlf55e02PVxyG0ae
-	 QwBznLzmgrROQ==
-Date: Mon, 4 Nov 2024 13:39:20 +0200
-From: Leon Romanovsky <leon@kernel.org>
-To: Christoph Hellwig <hch@lst.de>
-Cc: Robin Murphy <robin.murphy@arm.com>, Jens Axboe <axboe@kernel.dk>,
-	Jason Gunthorpe <jgg@ziepe.ca>, Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>, Sagi Grimberg <sagi@grimberg.me>,
-	Keith Busch <kbusch@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Logan Gunthorpe <logang@deltatee.com>,
-	Yishai Hadas <yishaih@nvidia.com>,
-	Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Alex Williamson <alex.williamson@redhat.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	=?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
-	linux-rdma@vger.kernel.org, iommu@lists.linux.dev,
-	linux-nvme@lists.infradead.org, linux-pci@vger.kernel.org,
-	kvm@vger.kernel.org, linux-mm@kvack.org
-Subject: Re: [PATCH v1 00/17] Provide a new two step DMA mapping API
-Message-ID: <20241104113920.GD99170@unreal>
-References: <cover.1730298502.git.leon@kernel.org>
- <3567312e-5942-4037-93dc-587f25f0778c@arm.com>
- <20241104095831.GA28751@lst.de>
+	b=npXjDaGGZ80pU4vZ5j/r8KHDcCtmUDdEQC/2TlGdDWGbkKhfeTBrNjRXVd7bo7N3M
+	 Zf0PhHihION3wOtFDRHym/jLTMhd5BgFjLC4dZKe6ZCBsX0EeKJptLeGOyPMvZ+RCR
+	 TP3nYhIziZ8vdu67APyeHjs8ItLBeVBhP94zT/nGgHUxxed+aSSJPGroRnOH5EIZY9
+	 QdocH/QeuOfA7dVrUer1mBV7sQj4EE5HN2j+T3C00hfXWDr1d4xGqUc/9PjK/JWDQo
+	 HMekwVt4NgTs/4OzDZYcc+ITCiSr5ojkNf6AH8bhqb14UkMNzb/M5FIIAoKwRX0RhE
+	 T6rnPFfharIUQ==
+Date: Mon, 4 Nov 2024 12:07:49 +0000
+From: Conor Dooley <conor@kernel.org>
+To: =?iso-8859-1?Q?Cl=E9ment_L=E9ger?= <cleger@rivosinc.com>
+Cc: Inochi Amaoto <inochiama@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Evan Green <evan@rivosinc.com>,
+	Charlie Jenkins <charlie@rivosinc.com>,
+	Andrew Jones <ajones@ventanamicro.com>,
+	Andy Chiu <andybnac@gmail.com>, Xiao Wang <xiao.w.wang@intel.com>,
+	Samuel Holland <samuel.holland@sifive.com>,
+	linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+	Yixun Lan <dlan@gentoo.org>, Longbin Li <looong.bin@gmail.com>
+Subject: Re: [PATCH v2 2/3] riscv: add ISA extension parsing for bfloat16 ISA
+ extension
+Message-ID: <20241104-number-recall-85e044c9b72d@spud>
+References: <20241103074959.1135240-1-inochiama@gmail.com>
+ <20241103074959.1135240-3-inochiama@gmail.com>
+ <2e775421-0c3e-48ef-8a8c-6734f7fcf298@rivosinc.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="vFZn2GDfm8gUnKj9"
 Content-Disposition: inline
-In-Reply-To: <20241104095831.GA28751@lst.de>
+In-Reply-To: <2e775421-0c3e-48ef-8a8c-6734f7fcf298@rivosinc.com>
 
-On Mon, Nov 04, 2024 at 10:58:31AM +0100, Christoph Hellwig wrote:
-> On Thu, Oct 31, 2024 at 09:17:45PM +0000, Robin Murphy wrote:
 
-<...>
+--vFZn2GDfm8gUnKj9
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> >>   2. VFIO PCI live migration code is building a very large "page list"
-> >>      for the device. Instead of allocating a scatter list entry per allocated
-> >>      page it can just allocate an array of 'struct page *', saving a large
-> >>      amount of memory.
-> >
-> > VFIO already assumes a coherent device with (realistically) an IOMMU which 
-> > it explicitly manages - why is it even pretending to need a generic DMA 
-> > API?
-> 
-> AFAIK that does isn't really vfio as we know it but the control device
-> for live migration.  But Leon or Jason might fill in more.
+On Mon, Nov 04, 2024 at 10:15:56AM +0100, Cl=E9ment L=E9ger wrote:
+>=20
+>=20
+> On 03/11/2024 08:49, Inochi Amaoto wrote:
+> > Add parsing for Zfbmin, Zvfbfmin, Zvfbfwma ISA extension which
+> > were ratified in 4dc23d62 ("Added Chapter title to BF16") of
+> > the riscv-isa-manual.
+> >=20
+> > Signed-off-by: Inochi Amaoto <inochiama@gmail.com>
+> > ---
+> >  arch/riscv/include/asm/hwcap.h | 3 +++
+> >  arch/riscv/kernel/cpufeature.c | 3 +++
+> >  2 files changed, 6 insertions(+)
+> >=20
+> > diff --git a/arch/riscv/include/asm/hwcap.h b/arch/riscv/include/asm/hw=
+cap.h
+> > index 46d9de54179e..97657fb63af6 100644
+> > --- a/arch/riscv/include/asm/hwcap.h
+> > +++ b/arch/riscv/include/asm/hwcap.h
+> > @@ -93,6 +93,9 @@
+> >  #define RISCV_ISA_EXT_ZCMOP		84
+> >  #define RISCV_ISA_EXT_ZAWRS		85
+> >  #define RISCV_ISA_EXT_SVVPTC		86
+> > +#define RISCV_ISA_EXT_ZFBFMIN		87
+> > +#define RISCV_ISA_EXT_ZVFBFMIN		88
+> > +#define RISCV_ISA_EXT_ZVFBFWMA		89
+> > =20
+> >  #define RISCV_ISA_EXT_XLINUXENVCFG	127
+> > =20
+> > diff --git a/arch/riscv/kernel/cpufeature.c b/arch/riscv/kernel/cpufeat=
+ure.c
+> > index 3a8eeaa9310c..1b286f5bc591 100644
+> > --- a/arch/riscv/kernel/cpufeature.c
+> > +++ b/arch/riscv/kernel/cpufeature.c
+> > @@ -325,6 +325,7 @@ const struct riscv_isa_ext_data riscv_isa_ext[] =3D=
+ {
+> >  	__RISCV_ISA_EXT_DATA(zacas, RISCV_ISA_EXT_ZACAS),
+> >  	__RISCV_ISA_EXT_DATA(zawrs, RISCV_ISA_EXT_ZAWRS),
+> >  	__RISCV_ISA_EXT_DATA(zfa, RISCV_ISA_EXT_ZFA),
+> > +	__RISCV_ISA_EXT_DATA(zfbfmin, RISCV_ISA_EXT_ZFBFMIN),
+> >  	__RISCV_ISA_EXT_DATA(zfh, RISCV_ISA_EXT_ZFH),
+> >  	__RISCV_ISA_EXT_DATA(zfhmin, RISCV_ISA_EXT_ZFHMIN),
+> >  	__RISCV_ISA_EXT_DATA(zca, RISCV_ISA_EXT_ZCA),
+> > @@ -357,6 +358,8 @@ const struct riscv_isa_ext_data riscv_isa_ext[] =3D=
+ {
+> >  	__RISCV_ISA_EXT_SUPERSET(zve64d, RISCV_ISA_EXT_ZVE64D, riscv_zve64d_e=
+xts),
+> >  	__RISCV_ISA_EXT_SUPERSET(zve64f, RISCV_ISA_EXT_ZVE64F, riscv_zve64f_e=
+xts),
+> >  	__RISCV_ISA_EXT_SUPERSET(zve64x, RISCV_ISA_EXT_ZVE64X, riscv_zve64x_e=
+xts),
+> > +	__RISCV_ISA_EXT_DATA(zvfbfmin, RISCV_ISA_EXT_ZVFBFMIN),
+> > +	__RISCV_ISA_EXT_DATA(zvfbfwma, RISCV_ISA_EXT_ZVFBFWMA),
+>=20
+> @Conor,
+>=20
+> Should we wait for your V/F validation support to be merged before this
+> one ?
 
-Yes, you are right, as it is written above "VFIO PCI live migration ...".
-That piece of code directly connected to the underlying real HW device
-and uses DMA API to provide live migration functionality to/from that
-device.
+Uh, I don't really see a reason to hold this up on my account. I can
+easily rebase on top when I get the motivation to do more work on that
+series.
 
-> 
-> The point is that quite a few devices have these page list based APIs
-> (RDMA where mlx5 comes from, NVMe with PRPs, AHCI, GPUs).
-> 
-> >
-> >>   3. NVMe PCI demonstrates how a BIO can be converted to a HW scatter
-> >>      list without having to allocate then populate an intermediate SG table.
-> >
-> > As above, given that a bio_vec still deals in struct pages, that could 
-> > seemingly already be done by just mapping the pages, so how is it proving 
-> > any benefit of a fragile new interface?
-> 
-> Because we only need to preallocate the tiny constant sized dma_iova_state
-> as part of the request instead of an additional scatterlist that requires
-> sizeof(struct page *) + sizeof(dma_addr_t) + 3 * sizeof(unsigned int)
-> per segment, including a memory allocation per I/O for that.
-> 
-> > My big concern here is that a thin and vaguely-defined wrapper around the 
-> > IOMMU API is itself a step which smells strongly of "abuse and design 
-> > mistake", given that the basic notion of allocating DMA addresses in 
-> > advance clearly cannot generalise. Thus it really demands some considered 
-> > justification beyond "We must do something; This is something; Therefore we 
-> > must do this." to be convincing.
-> 
-> At least for the block code we have a nice little core wrapper that is
-> very easy to use, and provides a great reduction of memory use and
-> allocations.  The HMM use case I'll let others talk about.
+--vFZn2GDfm8gUnKj9
+Content-Type: application/pgp-signature; name="signature.asc"
 
-I'm not sure about which wrappers Robin talks, but if we are talking
-about HMM wrappers, they gave us perfect combination of usability,
-performance and maintenance. All HMM users use same pattern, same
-structures and don't need to worry about internal DMA/IOMMU details.
+-----BEGIN PGP SIGNATURE-----
 
-Thanks
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZyi5FQAKCRB4tDGHoIJi
+0nLvAP9dZnNwlwpdYASHbLLL4ZVIYfSR0JyUNfivFOkfosM0aQEAhemaFYVfqvPL
+YewSufLQLOeK2QCh4rruU59GZSdYwAQ=
+=uyWh
+-----END PGP SIGNATURE-----
+
+--vFZn2GDfm8gUnKj9--
 
