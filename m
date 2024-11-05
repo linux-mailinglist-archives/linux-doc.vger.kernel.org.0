@@ -1,155 +1,119 @@
-Return-Path: <linux-doc+bounces-29913-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-29915-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BE0A9BCC95
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Nov 2024 13:19:39 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 980B29BCD3A
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Nov 2024 14:01:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4DBFB1C2264D
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Nov 2024 12:19:38 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 4F6BC1F22138
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Nov 2024 13:01:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F3761D5170;
-	Tue,  5 Nov 2024 12:19:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51BEC1D5AB6;
+	Tue,  5 Nov 2024 13:01:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RsP5FKWE"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="pMfwgyvr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DF2A1D432F;
-	Tue,  5 Nov 2024 12:19:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F4CD1D318C
+	for <linux-doc@vger.kernel.org>; Tue,  5 Nov 2024 13:01:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730809174; cv=none; b=jsSNbKeejLlTejC9f7d/TW9gTx73gEJhPtTD3nft+a15HsJe3hBXzkiYKlzPwcbX4/QWmR5TsIHzZaRolzfujD2SGhVOKguSScOs91z7s44iVOTSXDa9G8RLJD90Tv6+CMeB/trjxs23wmi3G5ge7WF1X+/SW0hMtZnFY/9kBy4=
+	t=1730811666; cv=none; b=aSy0ZGKCqidh7klABq0JNX96FL2xKSNA48Sysei6ElYwOKlu12eeAwWRphXMhJGJ/yat2gOI1TS3yPiSQsXD0Ce0Cegpgyq0rM+aYzA0pZIX7muyAwcgGrZR6QyTIE8A0n5fwcC3nhqgxjnib5dzA4eJeuHH+55aFqA4qO8KHgM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730809174; c=relaxed/simple;
-	bh=h1aJVB7kfHKHA1YbmjR9Z7DNmt6WC/Sb761iSgpkmes=;
+	s=arc-20240116; t=1730811666; c=relaxed/simple;
+	bh=D0WTw+MUtdg41qhocX1Oe1iRLsKsP8vyHesg6BiksAA=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=oYubwxMLROB+PT4d5ILrIyVzgUgW7rLP6vS73CjzVTX3rK3Fn/0ogaLlJmQ58Is50JPpAZl3R8ITeLMj2Cgg0lYCuSchFryZKDg3jxOgcOz5pLSHZodw6b3zupLuGAORF55+UMasERwLk00YgtILULiJJ0DwRioePFEu1mmjt6k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RsP5FKWE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72063C4CECF;
-	Tue,  5 Nov 2024 12:19:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1730809173;
-	bh=h1aJVB7kfHKHA1YbmjR9Z7DNmt6WC/Sb761iSgpkmes=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=RsP5FKWEj+1el3l4IO/Mlh59SCivOXxdtDdow7Qya6uqbJDTaIYr72WuCFscgN9O2
-	 GZqgQNgoNsJOzmzcnwpYk3BLJW1ocsjL9ghjZU8vKNBVX+qzNW5PTBOANn+JZUAtnc
-	 xcbGRIIgaEQ6554sT/fqM0fcdaRuZiZs5l4DNTOVSVjO9TtUZZvxoxv/mmoPS5Kfp2
-	 jbMLAWb8jSUK4gz2lQ0h3C4FApgnXUMNdFbTzVBi3Mgu36SIn4tU6sRYPJ/A25S+Dn
-	 Q6lGTd+6TWZ+GTlFNV3i3aLAhZTtJlBVULzQKsACY06gSBZdY+EjV790Ww7J2aoXPl
-	 Ibbm0EKv6pEUw==
-Received: by mail-yb1-f172.google.com with SMTP id 3f1490d57ef6-e290222fdd0so4756065276.2;
-        Tue, 05 Nov 2024 04:19:33 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCU9kX4tlzO0vjQViMNSePOnsI/cQBXIc0QZGAPYBrgB7J2ct9+BPsxoof1455sgH7RPImzI7eHF79Gu@vger.kernel.org, AJvYcCURw4SOxiAWldC+kEPPS6wW5cH647IFSZe0KpQw1UNBQQX5ASyQEq4x+8DV8NYbMfMEIaQ2LrfJ35ul@vger.kernel.org, AJvYcCXzwcwIgY0XJpxpVAb/n7kxUkakrfm+Z9WTv9+JtKAKzT+sFyOdLJGwKlTRSNvlZwtghijwibt2AvlKWRc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyPWMrBxKN73XrJ8enJmob0IJeKuTpbdpt0NPdFuzHtCJcw8nWs
-	sH7ZWM+GIuEAqLZFQaHS0oYXJQGpDfaszlmuiwHesZKfg1MYehY9EFjbA4sHatamwfA/MDePzLd
-	73H51GcIBxVrVNFEfPcke6ZIhaQ==
-X-Google-Smtp-Source: AGHT+IGPGLC/cFCX6a2oh4sGRWazmbURqTDroOc3OiioS+x/p/dswRaHUBTrPMv7WMxNYiKoyRuVELZ5PyRR+H+ZzsM=
-X-Received: by 2002:a05:6902:188c:b0:e30:e1f3:2a9c with SMTP id
- 3f1490d57ef6-e30e1f32bd7mr20240797276.0.1730809172628; Tue, 05 Nov 2024
- 04:19:32 -0800 (PST)
+	 To:Cc:Content-Type; b=bMGRL2DLkTusUyMOA7ecS94knb8CsGq7i9ThGqC8KkvhVG/mjX1cC11Q7lXKDzv+hvhq02S2t29eCVvEvgXW659QOts9g74104agO/gMkctg06ZmPAlkIhJgnkHSZu6yQWkHyWZ1S/BRQ2rnalxllISvSWP6q0os85BtKH+3QS8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=pMfwgyvr; arc=none smtp.client-ip=209.85.208.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-5c9388a00cfso6351865a12.3
+        for <linux-doc@vger.kernel.org>; Tue, 05 Nov 2024 05:01:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1730811663; x=1731416463; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=D0WTw+MUtdg41qhocX1Oe1iRLsKsP8vyHesg6BiksAA=;
+        b=pMfwgyvr9BHIvYoDsMTV8qvik4euwFpld8TvEJQAbogrITOmthop4cO78gqWWhcymj
+         ZbYGMEuUQqIl/biCagL4GOSavABXbj+JnQWGRuzLNIiQHH2gR73cCB5hjTNtmhx4AO1R
+         3aDT8XzQ5CLZZXKEHP+z+w1lrNTFB2jvokBlLbwg7miir+5o2Ypax9uN7EMeSNP50GFw
+         zq2nU8Aefh6jbF7r556J2jTdI2ESJVvsK/H3EUh3ZugjQruC3jvmTWubzzL9jlytO8ZY
+         L3RrM0d6cL+/s8PhlUYkTJ7rILagsxJwPObDun5A+fjc3iDo4+eYzQPjEY9dq+gzAyJ7
+         ZwjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730811663; x=1731416463;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=D0WTw+MUtdg41qhocX1Oe1iRLsKsP8vyHesg6BiksAA=;
+        b=etz41tL8hWWhWr+RE03M5FtCR6oPgaFrk5j3gF/pWjjj+s+uOHSuh8cT2M90iqubjo
+         kNfe01TA9NMpvHlncN4w03AdEgEB8c+GVZ5cZOlDknxV/cgDJDSQa9LPGUwUfDurRzq5
+         5aubM7qLhn7oJYuzouCfYuK/RRK24DoEaQvXv1xvJ1u4sG/RkjiVHP7J/iCiljHNTvHS
+         8/ZtaiOTYoOH+u/uJeuv44oWCfe73++8ewG5TbwT2BKdVwv7GFxZUgJu3ZXoUlHm+OTy
+         Lq7N+SFEnKE13tn4MuicqJa8SHS+NMU7ku5crIK/HI5wCoAEu9P/kiQHIaBb0tBi1bPh
+         V0pg==
+X-Forwarded-Encrypted: i=1; AJvYcCULoJVHCBQcFTASdTKManLD7vYOjmZHvNXe3+MmgzYdD+8hY/rlUrAxnFrA6tctwJSjtXh+TxGs6vU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwyZODMOjgCvJ3qW2KLR9o83h84ydOXAC+Wykeinf1Fr1+8TIc+
+	9MUaPjrh7oikHqIdvbUsZtYQGXhIyp48bOHN2+9v/ziVYfCK3bFo8ReoH8/o4ZyVmfIlRk2AA6+
+	03pNWbo1tb6yHqC1nLehhK0NvEsNF+ecmTq4uVA==
+X-Google-Smtp-Source: AGHT+IGdKsOe4uUI+pQsDjBeFjVYPEKnH5Eo7FvRYwbGqpXjSLbX+ykZRbMa+upNnN9HPEwQU7Vdq7xJqtyj1W3FckE=
+X-Received: by 2002:a05:6402:3508:b0:5ce:ddd6:d100 with SMTP id
+ 4fb4d7f45d1cf-5ceddd6d143mr3955032a12.32.1730811661239; Tue, 05 Nov 2024
+ 05:01:01 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <cover.1730326915.git.grantpeltier93@gmail.com>
- <1dff1f63a2e122788e2c17f192472705491aa5b8.1730326916.git.grantpeltier93@gmail.com>
- <CAL_JsqJqhxcMu2yeqvJvUOJ_g3uDv3t1JwaMxAfZQGXFj3rAvw@mail.gmail.com> <0f855c81-ce0e-41e8-ae08-5f653d3ca8b0@roeck-us.net>
-In-Reply-To: <0f855c81-ce0e-41e8-ae08-5f653d3ca8b0@roeck-us.net>
-From: Rob Herring <robh@kernel.org>
-Date: Tue, 5 Nov 2024 06:19:21 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqK=kgoKvusMMqdtx7b4z2aveE5O9Q=UHXCgook5UBS4bA@mail.gmail.com>
-Message-ID: <CAL_JsqK=kgoKvusMMqdtx7b4z2aveE5O9Q=UHXCgook5UBS4bA@mail.gmail.com>
-Subject: Re: [PATCH v6 2/2] dt-bindings: hwmon: isl68137: add bindings to
- support voltage dividers
-To: Guenter Roeck <linux@roeck-us.net>
-Cc: Grant Peltier <grantpeltier93@gmail.com>, geert+renesas@glider.be, 
-	magnus.damm@gmail.com, grant.peltier.jg@renesas.com, 
-	brandon.howell.jg@renesas.com, linux-hwmon@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+References: <20241105004749.83424-1-yesanishhere@gmail.com>
+In-Reply-To: <20241105004749.83424-1-yesanishhere@gmail.com>
+From: Mathieu Poirier <mathieu.poirier@linaro.org>
+Date: Tue, 5 Nov 2024 06:00:48 -0700
+Message-ID: <CANLsYkxKteXHMvG3GfPOKz1G_NfQV8D0D4JxYeF0ZmiYv=Mviw@mail.gmail.com>
+Subject: Re: [PATCH 0/3] Documentation: remoteproc: update various sections
+To: anish kumar <yesanishhere@gmail.com>
+Cc: andersson@kernel.org, corbet@lwn.net, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
+	kernel test robot <lkp@intel.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 4, 2024 at 7:20=E2=80=AFPM Guenter Roeck <linux@roeck-us.net> w=
-rote:
+On Mon, 4 Nov 2024 at 17:47, anish kumar <yesanishhere@gmail.com> wrote:
 >
-> On 11/4/24 07:08, Rob Herring wrote:
-> > On Wed, Oct 30, 2024 at 5:41=E2=80=AFPM Grant Peltier <grantpeltier93@g=
-mail.com> wrote:
-> >>
-> >> Add devicetree bindings to support declaring optional voltage dividers=
- to
-> >> the rail outputs of supported digital multiphase regulators. Some
-> >> applications require Vout to exceed the voltage range that the Vsense =
-pin
-> >> can detect. This binding definition allows users to define the
-> >> characteristics of a voltage divider placed between Vout and the Vsens=
-e
-> >> pin for any rail powered by the device.
-> >>
-> >> These bindings copy the vout-voltage-divider property defined in the
-> >> maxim,max20730 bindings schema since it is the best fit for the use ca=
-se
-> >> of scaling hwmon PMBus telemetry. The generic voltage-divider property
-> >> used by many iio drivers was determined to be a poor fit because that
-> >> schema is tied directly to iio for the purpose of scaling io-channel
-> >> voltages and the isl68137 driver is not an iio driver.
-> >>
-> >> Signed-off-by: Grant Peltier <grantpeltier93@gmail.com>
-> >> ---
-> >>   .../hwmon/pmbus/renesas,isl68137.yaml         | 147 ++++++++++++++++=
-++
-> >>   1 file changed, 147 insertions(+)
-> >>   create mode 100644 Documentation/devicetree/bindings/hwmon/pmbus/ren=
-esas,isl68137.yaml
-> >>
-> >> diff --git a/Documentation/devicetree/bindings/hwmon/pmbus/renesas,isl=
-68137.yaml b/Documentation/devicetree/bindings/hwmon/pmbus/renesas,isl68137=
-.yaml
-> >> new file mode 100644
-> >> index 000000000000..ed659c2baadf
-> >> --- /dev/null
-> >> +++ b/Documentation/devicetree/bindings/hwmon/pmbus/renesas,isl68137.y=
-aml
-> >> @@ -0,0 +1,147 @@
-> >> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> >> +%YAML 1.2
-> >> +---
-> >> +
-> >> +$id: http://devicetree.org/schemas/hwmon/pmbus/renesas,isl68137.yaml#
-> >> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> >> +
-> >> +title: Renesas Digital Multiphase Voltage Regulators with PMBus
-> >> +
-> >> +maintainers:
-> >> +  - Grant Peltier <grant.peltier.jg@renesas.com>
-> >> +
-> >> +description: |
-> >> +  Renesas digital multiphase voltage regulators with PMBus.
-> >> +  https://www.renesas.com/en/products/power-management/multiphase-pow=
-er/multiphase-dcdc-switching-controllers
-> >> +
-> >> +properties:
-> >> +  compatible:
-> >> +    enum:
-> >
-> > Somehow "isl68137" is missing from your list. "make
-> > dt_compatible_check" reports it as not documented.
-> >
+> V6:
+> divided the patches for each section as suggested by mathieu.
+> First patch is updating introduction section
+> second patch is for new overview section as suggested
+> third patch is for devm version of rprod_add
 >
-> Turns out it is also documented as "isil,isl68137" in trivial-devices.yam=
-l
-> (together with isil,isl69260). Both are referenced in .dts files. How sho=
-uld
-> that be handled ?
+> V5:
+> based on comment from mathieu poirier, remove all files
+> and combined that in the original file and as he adviced
+> nothing with respect to old documentation was changed.
+>
+> V4:
+> Fixed compilation errors and moved documentation to
+> driver-api directory.
+>
+> V3:
+> Seperated out the patches further to make the intention
+> clear for each patch.
+>
+> V2:
+> Reported-by: kernel test robot <lkp@intel.com>
+> Closes: https://lore.kernel.org/oe-kbuild-all/202410161444.jOKMsoGS-lkp@intel.com/
+>
+> Hi Mathieu,
+>
+> Hopefully this time around, I have not messed up
+> patches. I have created three patches.
 
-Move those compatibles here. And this file should be renamed to
-isil,isl68137.yaml or some other actual compatible value.
+And the patchset version?
 
-Rob
+> Thanks,
+> anish
 
