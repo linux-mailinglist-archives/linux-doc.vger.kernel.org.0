@@ -1,181 +1,126 @@
-Return-Path: <linux-doc+bounces-29912-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-29914-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9E509BCC4C
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Nov 2024 13:03:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 054A69BCD20
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Nov 2024 13:56:16 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 481E81F22675
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Nov 2024 12:03:59 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id B918C1F21F08
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Nov 2024 12:56:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 03A481D47AE;
-	Tue,  5 Nov 2024 12:03:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C15F91D5AB2;
+	Tue,  5 Nov 2024 12:56:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PZlJiItq"
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="ODV8cuM+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 509851D31A2;
-	Tue,  5 Nov 2024 12:03:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E51C91E485;
+	Tue,  5 Nov 2024 12:56:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730808234; cv=none; b=e6TL5GJSregsXpHkpaQ4z4b6rhRP6cG9vWfavjn8axStd0fwyVWrz/akR0VlXo5XGrLULl+SALwDmnoHrMKxaA2uK5ooxVem21BD/02ssZFzEMtXZresWRBAeda/s2DnmDv5XSUsr4Qm4yc3FIMePUdFci59kecC9yIv73mFCkg=
+	t=1730811370; cv=none; b=ENFPux+Bvv7Y54lPfwV159W7LzO8dCFnHwFfD3PMQJSUFFOp6vf8PEKj2pGDXujtgKPnalSp4p3eIwinrfWn0jnQ32HnA3PKag+K66WrY3g9yq0OJpiA/ZlyYTcoGYQq5HTaLWqr3A7dv6HDhUBRXjEcK39f64c1HbqIHw1DET8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730808234; c=relaxed/simple;
-	bh=2scUw8T/1u0DGMQY0Ee1Um3A775p657KQNRNFv94Y3A=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=mySSuyyUpTcyWiJRd2rziGtXbVLkhKFrpT4EnNO5BTBoP28T6LYsz/aghHl+clH2V5B0bJ32gduCuD44wFUhG6v54+NjhpeVVkHqMKmXZM+cWIxuAWHw6CIn/1Ah24DLgSZ1X25Vdw4vYd3HCoN5k1qf+N4bKCPwlRoy6XkM5LQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PZlJiItq; arc=none smtp.client-ip=209.85.219.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-e30cef4ac5dso4782617276.0;
-        Tue, 05 Nov 2024 04:03:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730808232; x=1731413032; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
-         :date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4mQe9CPTZg0iYP3rFcpBCYNv2Ed7deu8K6ZCVDXo57I=;
-        b=PZlJiItqbNtj3h5tU9i9F02aZ0AERZT4ovmvX4xKq1Osv02b5kU5A7LPzxf5JkNsWY
-         fBaTUYY9yT1h8kMMXAWEJ8bFMl8/ryeYslkJvdYTJopuSJBwng9+CdxVbWXJmbeZxofB
-         tn0J+sfGGubamu6mfA6wAN2keN6fxf3Mu2WP8vzccf12tsk2Le5Yagb/1EOZT24a+xgR
-         9QySfBv06GTVND8U6MwANNeYO3SOXcWvYlo7FKizR5trqjrhT9XRQ3MqYQuha1w6kqRB
-         c7SafQV5LSxxEa5OsLJwQ4JWOxWKDTj+4+AJcHBtcBAHVCU108+By7Sp3Bex9EBxOVJO
-         uSjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730808232; x=1731413032;
-        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
-         :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4mQe9CPTZg0iYP3rFcpBCYNv2Ed7deu8K6ZCVDXo57I=;
-        b=ZuDlaSkgBA+mVWUSn194dsKimX06av/yNCVx2OEl7Tuine0jfgiazz1sq1rk58PPN1
-         jAqfcVMelMAVPgDvetqCSqM11+ptfil7g3OQkHz5KA8D7ruADE5DWFMHXJuB5ZctvbDz
-         p3iY9AL2zTK0yCrrbiLboaA/GsRXgKpkR22mYFzqFlRy8iSVtIlO4OK0bH0yuFy6LTnO
-         5bPaTS4xQv+jOxuLMQmoRvcZAvGG8W0H0tCfAhGR7Y4cOB4gEc4QKN5AvYIJeUp+vTLm
-         +80U3WOL1hCDYjekR9UJrmlaHZU2sw3tUbHc4Cgs+1jXSf99Jo/jZ7p+Ed/++Zr54qbW
-         X+2g==
-X-Forwarded-Encrypted: i=1; AJvYcCURXAUPw42sW4LGcx2AqWLvrYzH5BjW94fEgItgqPSz+hPkGeBrC/r0C3fVyx7j5R21MxznGsVQQOU=@vger.kernel.org, AJvYcCWzgcyM6PUPeRKBb8J1jfvVxccx6mVYK8MQvWwGPfD6X4sVPf02q+YJNqELc+0GqI9FDJq0X0y+J0ng/F1B@vger.kernel.org
-X-Gm-Message-State: AOJu0YwItYmFMtxjhkWj97d/FMB47phYgtt3qSQLCtgu8opHOJqb6DKj
-	6Oz2DYL0h9PlhaHHF7oByIuJl/6SsVqyxIV5Dad6uzrwi3izzdbbSCmqukC1et4=
-X-Google-Smtp-Source: AGHT+IGFzGNU7gdlibESHBuvspL2ArIC4VbdyAKDhERoA2yh98mJEI+YtpvI0J6+dmCG02TAJZyeeA==
-X-Received: by 2002:a05:6902:18c6:b0:e29:6571:e25e with SMTP id 3f1490d57ef6-e30cf4323e8mr24573611276.27.1730808231767;
-        Tue, 05 Nov 2024 04:03:51 -0800 (PST)
-Received: from 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa (186-189-50-43.setardsl.aw. [186.189.50.43])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e30e8a6113csm2466779276.2.2024.11.05.04.03.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 04:03:50 -0800 (PST)
-From: Tamir Duberstein <tamird@gmail.com>
-Date: Tue, 05 Nov 2024 08:03:42 -0400
-Subject: [PATCH RESEND v5] XArray: minor documentation improvements
+	s=arc-20240116; t=1730811370; c=relaxed/simple;
+	bh=w3JMgfuFTvntwMiNKM/54/p0TbGf6IGQEHhRrd75ai0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=M5C6FPJmoB7SKI/rlNbtfIbAiX2ZfJYU4QNHKc2DPeDPIk8lom0VxIGq/i98x9trckKpi1hCnvkNYa4fxtoXvFnHx/i4Yhje5WKyVna+n4MFD9YtJtPCplGzrQ7wpVx0CbeK7qlfiJEhtFvwfQE2X3p+DdpaZKd/gPyzcMlm2W4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=ODV8cuM+; arc=none smtp.client-ip=80.237.130.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:MIME-Version:
+	Message-ID:Date:Subject:Cc:To:From:From:Sender:Reply-To:Subject:Date:
+	Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=lYh6j74LAa+ERZg3LYzldvBM6FUrcS/3jU83qs+jMws=; t=1730811366; x=1731243366;
+	 b=ODV8cuM+boYWKKsvAhtCqqHhss4QuR2BYHOzLYwgv1n+a9ANUEmqv+sxADFQRKdRWl2fpRLqoF
+	gMNLhElfYxFY9ysbdptRZYCoZQ06YOoTYtY0UYO3g16SnFhz6p56HatLRvMqbMfv2l+p9DBMQRjx9
+	NHD8+pZin7gDHoG8MBGNSacv0OFh/B0mPIGSu2YpznJhHFXHYpRLHi+q9dbTrmGQtMpjym6SMitQc
+	f5cGgeXx/JPclQMj9rsAvCkEl1jv3gVzfxAeCqE13FZrUF9WO6ciEa6AG0gsV5+pn5OxR0wWsB2UA
+	IRgqbrT6l3023S8kCd9W6a1GxUP/rJgAJAp+w==;
+Received: from ip4d148da6.dynamic.kabel-deutschland.de ([77.20.141.166] helo=truhe.fritz.box); authenticated
+	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	id 1t8IOq-0001oY-KB; Tue, 05 Nov 2024 13:11:08 +0100
+From: Thorsten Leemhuis <linux@leemhuis.info>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-next@vger.kernel.org,
+	Mark Brown <broonie@kernel.org>
+Subject: [PATCH v3] docs: bug-bisect: add a note about bisecting -next
+Date: Tue,  5 Nov 2024 13:11:08 +0100
+Message-ID: <ec19d5fc503ff7db3d4c4ff9e97fff24cc78f72a.1730808651.git.linux@leemhuis.info>
+X-Mailer: git-send-email 2.45.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241105-xarray-documentation-v5-1-8e1702321b41@gmail.com>
-To: Matthew Wilcox <willy@infradead.org>, Jonathan Corbet <corbet@lwn.net>
-Cc: linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>, 
- Bagas Sanjaya <bagasdotme@gmail.com>, Tamir Duberstein <tamird@gmail.com>
-X-Mailer: b4 0.15-dev
+Content-Transfer-Encoding: 8bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1730811366;c1366f73;
+X-HE-SMSGID: 1t8IOq-0001oY-KB
 
-- Replace "they" with "you" where "you" is used in the preceding
-  sentence fragment.
-- Mention `xa_erase` in discussion of multi-index entries.  Split this
-  into a separate sentence.
-- Add "call" parentheses on "xa_store" for consistency and
-  linkification.
-- Add caveat that `xa_store` and `xa_erase` are not equivalent in the
-  presence of `XA_FLAGS_ALLOC`.
+Explicitly mention how to bisect -next, as nothing in the kernel tree
+currently explains that bisects between -next versions won't work well
+and it's better to bisect between mainline and -next.
 
-Acked-by: Randy Dunlap <rdunlap@infradead.org>
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-Signed-off-by: Tamir Duberstein <tamird@gmail.com>
+Co-developed-by: Mark Brown <broonie@kernel.org>
+Signed-off-by: Mark Brown <broonie@kernel.org>
+Reviewed-by: Mark Brown <broonie@kernel.org>
+Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
 ---
-Changes in v5:
-- Add trailers; otherwise resend of v4. Sent as v5 due to tooling issue.
-- Link to v4: https://lore.kernel.org/r/20241010214150.52895-2-tamird@gmail.com/
+v3
+- add a optional 'that' for readability/understandability
 
-Changes in v4:
-- Remove latent sentence fragment.
+v2:
+- slightly change patch descption
+- make the text more how-toish to better match the rest of the document
 
-Changes in v3:
-- metion `xa_erase`/`xa_store(NULL)` in multi-index entry discussion.
-- mention non-equivalent of `xa_erase`/`xa_store(NULL)` in the presence
-  of `XA_FLAGS_ALLOC`.
-
-Changes in v2:
-- s/use/you/ (Darrick J. Wong)
+v1: https://lore.kernel.org/all/20241022-doc-bisect-next-v1-1-196c0a60d554@kernel.org/
+- initial release
 ---
- Documentation/core-api/xarray.rst | 24 +++++++++++++-----------
- 1 file changed, 13 insertions(+), 11 deletions(-)
+ Documentation/admin-guide/bug-bisect.rst | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/Documentation/core-api/xarray.rst b/Documentation/core-api/xarray.rst
-index 77e0ece2b1d6f8e632e7d28d17fd1c60fcf0b5c4..f6a3eef4fe7f0a84068048175cb857d566f63516 100644
---- a/Documentation/core-api/xarray.rst
-+++ b/Documentation/core-api/xarray.rst
-@@ -42,8 +42,8 @@ call xa_tag_pointer() to create an entry with a tag, xa_untag_pointer()
- to turn a tagged entry back into an untagged pointer and xa_pointer_tag()
- to retrieve the tag of an entry.  Tagged pointers use the same bits that
- are used to distinguish value entries from normal pointers, so you must
--decide whether they want to store value entries or tagged pointers in
--any particular XArray.
-+decide whether you want to store value entries or tagged pointers in any
-+particular XArray.
+diff --git a/Documentation/admin-guide/bug-bisect.rst b/Documentation/admin-guide/bug-bisect.rst
+index 585630d14581c7..f4f867cabb1778 100644
+--- a/Documentation/admin-guide/bug-bisect.rst
++++ b/Documentation/admin-guide/bug-bisect.rst
+@@ -108,6 +108,27 @@ a fully reliable and straight-forward way to reproduce the regression, too.*
+ With that the process is complete. Now report the regression as described by
+ Documentation/admin-guide/reporting-issues.rst.
  
- The XArray does not support storing IS_ERR() pointers as some
- conflict with value entries or internal entries.
-@@ -52,8 +52,9 @@ An unusual feature of the XArray is the ability to create entries which
- occupy a range of indices.  Once stored to, looking up any index in
- the range will return the same entry as looking up any other index in
- the range.  Storing to any index will store to all of them.  Multi-index
--entries can be explicitly split into smaller entries, or storing ``NULL``
--into any entry will cause the XArray to forget about the range.
-+entries can be explicitly split into smaller entries. Unsetting (using
-+xa_erase() or xa_store() with ``NULL``) any entry will cause the XArray
-+to forget about the range.
++Bisecting linux-next
++--------------------
++
++If you face a problem only happening in linux-next, bisect between the
++linux-next branches 'stable' and 'master'. The following commands will start
++the process for a linux-next tree you added as a remote called 'next'::
++
++  git bisect start
++  git bisect good next/stable
++  git bisect bad next/master
++
++The 'stable' branch refers to the state of linux-mainline that the current
++linux-next release (found in the 'master' branch) is based on -- the former
++thus should be free of any problems that show up in -next, but not in Linus'
++tree.
++
++This will bisect across a wide range of changes, some of which you might have
++used in earlier linux-next releases without problems. Sadly there is no simple
++way to avoid checking them: bisecting from one linux-next release to a later
++one (say between 'next-20241020' and 'next-20241021') is impossible, as they
++share no common history.
  
- Normal API
- ==========
-@@ -63,13 +64,14 @@ for statically allocated XArrays or xa_init() for dynamically
- allocated ones.  A freshly-initialised XArray contains a ``NULL``
- pointer at every index.
- 
--You can then set entries using xa_store() and get entries
--using xa_load().  xa_store will overwrite any entry with the
--new entry and return the previous entry stored at that index.  You can
--use xa_erase() instead of calling xa_store() with a
--``NULL`` entry.  There is no difference between an entry that has never
--been stored to, one that has been erased and one that has most recently
--had ``NULL`` stored to it.
-+You can then set entries using xa_store() and get entries using
-+xa_load().  xa_store() will overwrite any entry with the new entry and
-+return the previous entry stored at that index.  You can unset entries
-+using xa_erase() or by setting the entry to ``NULL`` using xa_store().
-+There is no difference between an entry that has never been stored to
-+and one that has been erased with xa_erase(); an entry that has most
-+recently had ``NULL`` stored to it is also equivalent except if the
-+XArray was initialized with ``XA_FLAGS_ALLOC``.
- 
- You can conditionally replace an entry at an index by using
- xa_cmpxchg().  Like cmpxchg(), it will only succeed if
+ Additional reading material
+ ---------------------------
 
----
-base-commit: 850925a8133c73c4a2453c360b2c3beb3bab67c9
-change-id: 20241026-xarray-documentation-86e1f2d047db
-
-Best regards,
------BEGIN SSH SIGNATURE-----
-U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgtYz36g7iDMSkY5K7Ab51ksGX7h
-JgsMRt+XVZTrIzMVIAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
-AAAAQC+xZK2BwwOe02PlxGG7H8RrxZYY51gb8CdxLI3ED8WXT/GVeL/Ya7k+bir1TUuu/A
-pWBj+lROjke/NRDPTiJAQ=
------END SSH SIGNATURE-----
+base-commit: 062d98be0e3f6dcf08e40a1101e967b2eb4fb92f
 -- 
-Tamir Duberstein <tamird@gmail.com>
+2.45.0
 
 
