@@ -1,130 +1,140 @@
-Return-Path: <linux-doc+bounces-30012-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30014-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id A64819BDD55
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Nov 2024 03:56:53 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 41BA19BDD6B
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Nov 2024 04:10:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 109E4B217CB
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Nov 2024 02:56:45 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id ECCE21F215CB
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Nov 2024 03:10:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9D25E18FC8C;
-	Wed,  6 Nov 2024 02:56:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9901718FC70;
+	Wed,  6 Nov 2024 03:10:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b="cDQKclOx"
+	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="OHssCBSi"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5900E18A922
-	for <linux-doc@vger.kernel.org>; Wed,  6 Nov 2024 02:56:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD2AC18D63A;
+	Wed,  6 Nov 2024 03:10:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730861800; cv=none; b=hG+tn+lvWsMPcxzp44p+fpOLDJr33X8i65beC3MWh9rFdigJb2uVqAmcx4mOtqjTaRTsacVZOfXfUDGNCfjKhVsOoLHgxmgTadO2zK0eitNO1RRWrdcwx/mRua5VMUjIzYlw9UY+9tMO8SjUU/Cxe8SY1Y+7N3TFcZYrO1zNUQM=
+	t=1730862612; cv=none; b=q9oxaz+TvvupFqkR7ypK0Qz4B5fET6H/qkAKTP9GI4heHEdVxp61l2r+JWMBQXmgUczYcIGaIJTHZXGTIKW/BBvL0yOVm7WzhHChqxLXDSvCT0VL54wZ2bMNmg3TbBAabIi7SYMCEzrY3YlX4cpFCsXlB/a+jKmP6gvwrJ3dH9Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730861800; c=relaxed/simple;
-	bh=v7EMBM5wtdNiLlk/MSFZIFIKgzmDktDMJeqDXyO8rfc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=tdx90KilBEbxWUEZQr+1AixZsZQoYHoyAnLJf720wnmZMDucrBgA1HnYvVqmN3/HLq7aRGVGt4iTfJZ4oKxRO0X7NlEaS9QxALrT7AgmQwin4Rmp/BbZe1+jlZlu2KvotDvyMY63sUqngUwpyW4kahGTUb9L6xTHN7rcOMAQObE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com; spf=pass smtp.mailfrom=bytedance.com; dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b=cDQKclOx; arc=none smtp.client-ip=209.85.216.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bytedance.com
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-2e2ad9825a7so4523566a91.0
-        for <linux-doc@vger.kernel.org>; Tue, 05 Nov 2024 18:56:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1730861798; x=1731466598; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=M6v8RHSDXZgHsuLc1Cv4dDOGwWTdVAAFVIsGb+m4CYc=;
-        b=cDQKclOxwfg/v3zFze9wv1ocPK2gpkac00AEaJ6LIf9pJ8xlDFQ50OELzHaM+5LGwd
-         g27ZGzIGQgEihpCJtoaiVSez0YDlyTTyQPI73pNouUPHa5XjS1ut9BpA16uFveS3oRLR
-         1XwAtobZ+k5P1DBuJcz59MEcdCzRuWKPNvdFsRrd8oDD6d9VPs3dfIk7OXMwpKWCW4Lq
-         FtAaHbzo4TUU1Kuamga+Ba1ad5Yfh25rl24UJlLBypwkm/RDseBqdbpaxWlnib5biqm0
-         Jps8YyvZF24BuZksuNt+uwMeE6ogeFXXYG/sLfnp6T0ES3D14hEq3AXgEena3hb6bbxE
-         XghA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730861798; x=1731466598;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=M6v8RHSDXZgHsuLc1Cv4dDOGwWTdVAAFVIsGb+m4CYc=;
-        b=MPEd/IaDUJAFyGfNrhlyTQFKfB5xjnpu9/Y1CBHK4yqrGc/mLsFR7xhN5u6ztf9dPh
-         EgDzhiqScwFaPDYVxCT5xmnTGzyMhP/WqZXRdumqkJsl9xDauv+lh42PBNex9S9sqsqK
-         PqTL2GY9TQoLG6jefecvqheEaiJnzyfOUhBFoD2K6zyEH/YBIAV97e++81hWgjrRI/qT
-         mh+ebYj4rs7Wx7aqlV4e4PFbDQ/ZTqvjQQPVzTSQJpbz+3KU4R8+LuyZXyvfC2gjF/L0
-         kDHm3tN6KQdQZqf1cXm1uENZwYyd+wBSbKCfu4/XmlTpfpXRj/ETqz/CelLfRFgMYnt5
-         9UAQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWXurgyYYNS1BWKFIGWkhA3+0FbySXA120+c/0Cyap96dAxHkOS5JeDaoE+V1vUwOLijEO1G15uaZU=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwSKoCv3qTPJsBF9JXoem6jOKJLvF5FF5JrqcsRA+czeT5Qhiyi
-	v9ROWZAPhhtJ/01ig+JcLpsPSyb0QuwFUzr1q5b9LE4JdJoDBjkUvlNignCv9/w=
-X-Google-Smtp-Source: AGHT+IHIE44rAIMR6CmM88Kutnzf0JaYRrQsw3mD4TNQQAzGQub8JUfRY9RzhGAHTVMgGodOek2h5Q==
-X-Received: by 2002:a17:90a:2ca7:b0:2e2:c15f:1ffd with SMTP id 98e67ed59e1d1-2e8f1071bdbmr39545597a91.14.1730861797615;
-        Tue, 05 Nov 2024 18:56:37 -0800 (PST)
-Received: from [10.84.149.95] ([63.216.146.178])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2e99a541e16sm302276a91.21.2024.11.05.18.56.32
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 05 Nov 2024 18:56:37 -0800 (PST)
-Message-ID: <5969f498-a515-4394-a2b6-5d3abe2872aa@bytedance.com>
-Date: Wed, 6 Nov 2024 10:56:29 +0800
+	s=arc-20240116; t=1730862612; c=relaxed/simple;
+	bh=6eZ65GPoMgVb9yxX3xjFcyTRt2/rtFyKP28nwsFw4L0=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=CwKQllidCrBmoWBzPXZm0Lcx/q45EzoZ5yv7XQY/ySCCTR/KTmf+Yrb7YB1IQLUNmnmcn0wFVBUV/2n9pt6EwAfBycz9t2q6V7UGfX4DAO9NJ+UKJf+UErKqEJ2XbQRogRSeb6RLTqIn7q7nrjq2BPTipm3FsFmOWEtPNJRmWlQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=OHssCBSi; arc=none smtp.client-ip=148.163.135.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
+Received: from pps.filterd (m0167088.ppops.net [127.0.0.1])
+	by mx0a-00128a01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4A6333rh019664;
+	Tue, 5 Nov 2024 22:09:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=DKIM; bh=MjBSLT7/0Kh3uJWj6Sy8sL6Cwdk
+	nLRL7WbWd2y19vIQ=; b=OHssCBSi5YFzhl9IlsU1gj0WXVmx5y8Fa8tWA40/7dF
+	f3FRQKcm4pEO07CzBjXEYKJryQEfUXKAT4/EGTInuUtcIBO3pjBsx1DpVilkvIr5
+	gjEu4Q6Uni5o22wPRVCq09XfBUrd5P1o+UnYt+aeMDsOHNbP5d8ih3GLWe+exFCk
+	XccYbwrw7ERs9HeKISE6wBhTnBjPUdcFuUK7W5J2obTsLJosU8ZBRqfd+9vqgV8i
+	KPfySP88tD7EtI9aHfh+G1FitnZKOnEo8gjQ/tNtxTu7boRBMxQBPW7dHtEolWM1
+	qkLulffBckLf1JQFNwwwxJpFVCRyv/cZayGw+id2+fQ==
+Received: from nwd2mta4.analog.com ([137.71.173.58])
+	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 42qbq359u7-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 05 Nov 2024 22:09:50 -0500 (EST)
+Received: from ASHBMBX9.ad.analog.com (ASHBMBX9.ad.analog.com [10.64.17.10])
+	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 4A639n98012172
+	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 5 Nov 2024 22:09:49 -0500
+Received: from ASHBMBX9.ad.analog.com (10.64.17.10) by ASHBMBX9.ad.analog.com
+ (10.64.17.10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.14; Tue, 5 Nov 2024
+ 22:09:49 -0500
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx9.ad.analog.com
+ (10.64.17.10) with Microsoft SMTP Server id 15.2.986.14 via Frontend
+ Transport; Tue, 5 Nov 2024 22:09:49 -0500
+Received: from CENCARNA-L02.ad.analog.com ([10.117.116.147])
+	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 4A639R2u010682;
+	Tue, 5 Nov 2024 22:09:30 -0500
+From: Cedric Encarnacion <cedricjustine.encarnacion@analog.com>
+To: <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-i2c@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-hwmon@vger.kernel.org>
+CC: Guenter Roeck <linux@roeck-us.net>, Jean Delvare <jdelvare@suse.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Delphine CC Chiu
+	<Delphine_CC_Chiu@Wiwynn.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof
+ Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Peter Yin
+	<peteryin.openbmc@gmail.com>,
+        Noah Wang <noahwang.wang@outlook.com>, Marek
+ Vasut <marex@denx.de>,
+        Lukas Wunner <lukas@wunner.de>,
+        Cedric Encarnacion
+	<cedricjustine.encarnacion@analog.com>
+Subject: [PATCH v2 0/2] Add driver for LTP8800-1A, LTP8800-2 and LTP8800-4A
+Date: Wed, 6 Nov 2024 11:09:16 +0800
+Message-ID: <20241106030918.24849-1-cedricjustine.encarnacion@analog.com>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] docs/mm: add VMA locks documentation
-Content-Language: en-US
-To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, Jann Horn <jannh@google.com>
-Cc: Jonathan Corbet <corbet@lwn.net>,
- Andrew Morton <akpm@linux-foundation.org>,
- "Liam R . Howlett" <Liam.Howlett@oracle.com>,
- Vlastimil Babka <vbabka@suse.cz>, Alice Ryhl <aliceryhl@google.com>,
- Boqun Feng <boqun.feng@gmail.com>, Matthew Wilcox <willy@infradead.org>,
- Mike Rapoport <rppt@kernel.org>, linux-mm@kvack.org,
- linux-kernel@vger.kernel.org, Suren Baghdasaryan <surenb@google.com>,
- "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-References: <20241101185033.131880-1-lorenzo.stoakes@oracle.com>
- <CAG48ez0qsAM-dkOUDetmNBSK4typ5t_FvMvtGiB7wQsP-G1jVg@mail.gmail.com>
- <2bf6329e-eb3b-4c5e-bd3a-b519eefffd63@lucifer.local>
-From: Qi Zheng <zhengqi.arch@bytedance.com>
-In-Reply-To: <2bf6329e-eb3b-4c5e-bd3a-b519eefffd63@lucifer.local>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-ADIRuleOP-NewSCL: Rule Triggered
+X-Proofpoint-ORIG-GUID: fRbfalxhoaMavOyNX3kS6KG08sda516X
+X-Proofpoint-GUID: fRbfalxhoaMavOyNX3kS6KG08sda516X
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
+ suspectscore=0 phishscore=0 spamscore=0 bulkscore=0 clxscore=1015
+ mlxlogscore=999 impostorscore=0 priorityscore=1501 adultscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2409260000 definitions=main-2411060023
+
+changes in v2:
+
+ltp8800:
+  * Added short commit description for LTP8800.
+  * Removed scanned addresses.
+  * Refactored documentation to unify all chips into a single prefix.
+  * Removed unused headers.
+  * Removed redundant i2c_check_functionality in probe.
+  * Moved regulator configurations directly in ltp8800_info.
+  * Used single compatible and device IDs instead of three.
+
+Bindings:
+  * Used "adi,ltp8800" instead of three entries.
+
+Cedric Encarnacion (2):
+  dt-bindings: trivial-devices: add ltp8800
+  hwmon: pmbus: add driver for ltp8800-1a, ltp8800-4a, and ltp8800-2
+
+ .../devicetree/bindings/trivial-devices.yaml  |  2 +
+ Documentation/hwmon/index.rst                 |  1 +
+ Documentation/hwmon/ltp8800.rst               | 91 +++++++++++++++++++
+ MAINTAINERS                                   |  7 ++
+ drivers/hwmon/pmbus/Kconfig                   | 18 ++++
+ drivers/hwmon/pmbus/Makefile                  |  1 +
+ drivers/hwmon/pmbus/ltp8800.c                 | 63 +++++++++++++
+ 7 files changed, 183 insertions(+)
+ create mode 100644 Documentation/hwmon/ltp8800.rst
+ create mode 100644 drivers/hwmon/pmbus/ltp8800.c
 
 
-
-On 2024/11/5 00:42, Lorenzo Stoakes wrote:
-> On Sat, Nov 02, 2024 at 02:45:35AM +0100, Jann Horn wrote:
->> On Fri, Nov 1, 2024 at 7:50 PM Lorenzo Stoakes
-
-[...]
-
->>> +
->>> +Page table locks
->>> +----------------
-
-Many thanks to Lorenzo for documenting page table locks! This is really
-needed. And at a glance, I agree with Jann's additions.
-
->>
->> (except last-level page tables: khugepaged already deletes those for
->> file mappings without using the mmap lock at all in
->> retract_page_tables(), and there is a pending series that will do the
->> same with page tables in other VMAs too, see
->> <https://lore.kernel.org/all/cover.1729157502.git.zhengqi.arch@bytedance.com/>)
-
-Thanks to Jann for mentioning this series, I just updated it to v2
-recently:
-
-https://lore.kernel.org/lkml/cover.1730360798.git.zhengqi.arch@bytedance.com/
-
-> 
-> Ugh wut OK haha. Will look into this.
-
-Thanks!
+base-commit: 30a984c0c9d8c631cc135280f83c441d50096b6d
+-- 
+2.39.5
 
 
