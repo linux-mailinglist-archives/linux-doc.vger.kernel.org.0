@@ -1,129 +1,139 @@
-Return-Path: <linux-doc+bounces-30214-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30216-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90CD59C0BEB
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 17:45:44 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id B08E59C0CB0
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 18:18:29 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 577552821F0
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 16:45:43 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D2C4B1C242C1
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 17:18:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9185C18660F;
-	Thu,  7 Nov 2024 16:45:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 71A46213EC7;
+	Thu,  7 Nov 2024 17:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qGwe81Pj"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aLnNPBEe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com [209.85.208.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 643F9DDBE;
-	Thu,  7 Nov 2024 16:45:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3239212EF0;
+	Thu,  7 Nov 2024 17:18:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730997940; cv=none; b=MPCATpW3Ar9xKNCI7SWUgd4os+RdzcKZCV3mbUC5/Ce4AdkodqOSsOpJ7FSvGWwVQ2NEmZ1iPsxhc3Uk70ypUql72EaVMuIwJMn8Pkb7J27t4uCfGJUx9nPy0if+Kic5IdgbK/supLNhBaBvJVkkpbtEUIIqoownfN1KS/IWTDI=
+	t=1730999904; cv=none; b=HiWATJGyJBxS/zheoqwZit5JcDv7WZH9mWOikvFeQp7lDkrBBQXr/bLU5b8WJGLasbv4z4EiYqlBU5X4vIlmQBwJcVDxHVTxzNpU2pUdkVsaxZwgYVTKjv3Ot28xoctpZMELbIKCALAbDPengLHM4ZhIh7CxADgP9b1QttoosFs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730997940; c=relaxed/simple;
-	bh=Be7kVOqc9oDldRngyHDx9b/u8eyDM+L+Oo7d4LCyzzE=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
-	 References:In-Reply-To; b=Apa3JuB32dA4V7uPYobV3x9+AECx76zuISWmXy29OV0nb71CtIeFsUn76uZMO+tWw2w8s1SiLKDtrDQZtwhmmqQpJpL78GICEMP3JyAj6pXwBVugIwZxBTTxzwG33ABzBx0fgTtEaVbQqv32s7mhFSc4tnespcvPyGuw3s6PMo8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qGwe81Pj; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 671C3C4CECC;
-	Thu,  7 Nov 2024 16:45:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1730997939;
-	bh=Be7kVOqc9oDldRngyHDx9b/u8eyDM+L+Oo7d4LCyzzE=;
-	h=Date:Cc:Subject:From:To:References:In-Reply-To:From;
-	b=qGwe81PjHYQN7GxX/Ql27Z+dHxd7xgchW+3Pfzi52Lo8B20FXA+byY1BJC6ZrUHYY
-	 h9oZpbQIfGI6qHDfPdKwHo5TLsYFSzywTAWXLxvusHMZvIA7g8YDvnksK7adgv/S8/
-	 +5QzeqPPauL9SaNfaW0DoMmLaeMU8CRaf4D7wmgU1PKN+YDcstXnKzQhNYa5A6MYWP
-	 6fMHRKp9oRcA/lPRbROwSNasiAAvbxpxSH2TKErlHDKVx+zjZuKUXD8DzixxhyeOvB
-	 3nc8GJ05I127RIjYNsuyQRBN3lyesC/CbUBtm4RAjF3SEJyL5a9YJ/jKOcweSwU0fM
-	 gf+GDGvF+QNOA==
+	s=arc-20240116; t=1730999904; c=relaxed/simple;
+	bh=3L2w8sk0IewHmNOdYMkEGuOpJA2AnrnOMzLbeG9YLuo=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=nQEpS9oYPkmZAFjdNbzmAdoIT/v5nB170AP4GLKwGPbLF+V4IU7CC7XAK1GEK+3jx908XkTckYU77iXhGP5dX0Rqity9Fhdtq3Sy+Ea9Y8P68t2VBZTlAaVG0Iihad1BayD5aLhVKRa0zP1hPqzb5ULjD19mnteTCXVyEegLqjA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aLnNPBEe; arc=none smtp.client-ip=209.85.208.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-2fb5fa911aaso18194841fa.2;
+        Thu, 07 Nov 2024 09:18:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1730999901; x=1731604701; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lCQcscgVQW9TCpLgV+TKeC9YuIl0nvTbO9Vm0LDTTMo=;
+        b=aLnNPBEeUJH1AuwAIHa0E6zd9qLGKzGsU9oWcmZmohExhKuQGux2Se/HZu3iiWDP9c
+         B89PtbRxw11WcENltxtGgK0bkZHlZjEQ1xpwYZq0Znq0Na1b+yIXmuica92c45n579Jc
+         3ARx05Dl3JtTgsVc1P6M9d8BGAz76DoBqR+8C78ka2EANWm2sGOfFJTiYa19a/VsUTrv
+         +pKipyh6GXPDSVSY286AGiZj2YhvnYRqJbKVlmzHiA8oCiBcwfrYtDgvCorNJkouugZ3
+         VrsQJMRTqsNJTHsW98R5gYkEWnbSn9LeUsR672Klz9+5KULA+5YU6hTyr5dWl30cJAKm
+         CF2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730999901; x=1731604701;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lCQcscgVQW9TCpLgV+TKeC9YuIl0nvTbO9Vm0LDTTMo=;
+        b=fxJiG7c932g2lLvp4FIJl0KLsvTtWxH4XZIkTFMJ/DpkJjuOcRHtTsmHBTqomCo4NV
+         vXuO0VxhJR7m70U6mv5SaYCLnIwatagcgpuWwdOM36zT8jNWyCEnj60Y9ABekGL4T/PW
+         wSjuvOMa9Xfw4xG3DXMySR9vT6ptPiZ83fto4S7DP1N9kj9r8Run6wXo8grj3yAiMTe4
+         qGTlwBzBnifzjbyEsRDe5WQR3e+15Rs5u8W90oRqzrpH8ua2XoasmRhKhq5VpoYZQmNP
+         dDnXhzB0SDWJCxuFS2Uel9pgMEyWtdADwryq+BB9I0roqqxzoWxYO2CoIfMPiwhfDHco
+         W/cQ==
+X-Forwarded-Encrypted: i=1; AJvYcCU01vfrIcCUfz19KwTjRiQQHK91/V1M7cD2ShrEnXYJXutdPp3Hch3IxC6B642itMo3yEo9m2Pa2G8=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy6Py5pOymfqA0JpVmtuAiLIJHo7uUqcZtMAbV6pja9ls1P0dU/
+	hK4Y7JdWh4sAQL6fWN379PaqIlFNUbAH0lych14lbhxA36AHw4zdAt2TUMCmvSlHSck9+1BwTVP
+	0kKJALYZ1oJkUBAtcLVDZPmQeUqYKVvXzALc=
+X-Google-Smtp-Source: AGHT+IEwkOTrQhYLXYKOVmXFMdan5Xz1LVGnbN+vdBDj11DstOSVIbAfHtM4ppHEWuEpf40Q1zC+Rcgp0Eu169Gf63E=
+X-Received: by 2002:a2e:ab0d:0:b0:2fa:c0b5:ac8c with SMTP id
+ 38308e7fff4ca-2ff1f68df7fmr2046251fa.21.1730999900430; Thu, 07 Nov 2024
+ 09:18:20 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
+MIME-Version: 1.0
+References: <20241105045535.84071-1-yesanishhere@gmail.com>
+In-Reply-To: <20241105045535.84071-1-yesanishhere@gmail.com>
+From: anish kumar <yesanishhere@gmail.com>
+Date: Thu, 7 Nov 2024 09:18:09 -0800
+Message-ID: <CABCoZhAK7wTrUFouz306QJ_i1ytgo6cLEKemc_5qhez6Wo-1Zg@mail.gmail.com>
+Subject: Re: [PATCH] drivers: core: Clarify EPROBE_DEFER retry mechanism
+To: corbet@lwn.net
+Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 07 Nov 2024 18:45:35 +0200
-Message-Id: <D5G3K1QSPRNS.153H4EMMWEEBU@kernel.org>
-Cc: "Roberto Sassu" <roberto.sassu@huawei.com>, <linux-doc@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v2] tpm: Opt-in in disable PCR integrity protection
-From: "Jarkko Sakkinen" <jarkko@kernel.org>
-To: "Mimi Zohar" <zohar@linux.ibm.com>, <linux-integrity@vger.kernel.org>,
- "Jonathan Corbet" <corbet@lwn.net>, "Peter Huewe" <peterhuewe@gmx.de>,
- "Jason Gunthorpe" <jgg@ziepe.ca>, "James Bottomley"
- <James.Bottomley@HansenPartnership.com>
-X-Mailer: aerc 0.18.2
-References: <20241107095138.78209-1-jarkko@kernel.org>
- <e015a939893d35efe75e598152725adcc2befdd8.camel@linux.ibm.com>
- <D5FZRXBCH2B4.1GQIIVQHVB2XI@kernel.org>
- <7f77c0e8b481fd813b3a76b84d33d8db62e235f7.camel@linux.ibm.com>
-In-Reply-To: <7f77c0e8b481fd813b3a76b84d33d8db62e235f7.camel@linux.ibm.com>
 
-On Thu Nov 7, 2024 at 4:00 PM EET, Mimi Zohar wrote:
-> On Thu, 2024-11-07 at 15:47 +0200, Jarkko Sakkinen wrote:
-> > On Thu Nov 7, 2024 at 3:44 PM EET, Mimi Zohar wrote:
-> > > >=20
-> > > > @@ -232,18 +236,26 @@ int tpm2_pcr_extend(struct tpm_chip *chip, u3=
-2 pcr_idx,
-> > > >  	int rc;
-> > > >  	int i;
-> > > > =20
-> > > > -	rc =3D tpm2_start_auth_session(chip);
-> > > > -	if (rc)
-> > > > -		return rc;
-> > > > +	if (!disable_pcr_integrity_protection) {
-> > > > +		rc =3D tpm2_start_auth_session(chip);
-> > > > +		if (rc)
-> > > > +			return rc;
-> > > > +	}
-> > > > =20
-> > > >  	rc =3D tpm_buf_init(&buf, TPM2_ST_SESSIONS, TPM2_CC_PCR_EXTEND);
-> > > >  	if (rc) {
-> > > > -		tpm2_end_auth_session(chip);
-> > > > +		if (!disable_pcr_integrity_protection)
-> > > > +			tpm2_end_auth_session(chip);
-> > > >  		return rc;
-> > > >  	}
-> > > > =20
-> > > > -	tpm_buf_append_name(chip, &buf, pcr_idx, NULL);
-> > > > -	tpm_buf_append_hmac_session(chip, &buf, 0, NULL, 0);
-> > > > +	if (!disable_pcr_integrity_protection) {
-> > > > +		tpm_buf_append_name(chip, &buf, pcr_idx);
-> > >=20
-> > > tpm_buf_append_name() parameters didn't change.  Don't remove the 'na=
-me' field
-> > > here.
-> >=20
-> > Hmm... weird I'll check this. Maybe I had something left to staging...
+Hello Jonathan,
 
-Yes! This was correct in my clone but not in the patch.
+Wondering if you have any comments?
 
-Clearly a sign that I wait until next week before sending a new version
-:-)
-
-
-> >=20
-> > >=20
-> > >=20
-> > > > +		tpm_buf_append_hmac_session(chip, &buf, 0, NULL, 0);
-> > > > +	} else {
-> > > > +		tpm_buf_append_handle(chip, &buf, pcr_idx);
-> > >=20
-> >=20
-> > > Or here.
-> >=20
-> > Here I think it is appropriate
+On Mon, Nov 4, 2024 at 8:55=E2=80=AFPM anish kumar <yesanishhere@gmail.com>=
+ wrote:
 >
-> Agreed
-
-Great
-
-BR, Jarkko
+> The existing documentation for EPROBE_DEFER explains its purpose
+> and usage, but does not specify when deferred probes are retried.
+> This patch adds information about the retry mechanism to provide
+> a more complete explanation of how EPROBE_DEFER works.
+>
+> Specifically, it clarifies that:
+>
+> 1. Deferred probes are added to a pending list
+> 2. A successful probe of any device triggers moving all devices
+>    from the pending list to an active list
+> 3. A workqueue processes the active list to retry deferred probes
+>
+> This additional context helps developers better understand the
+> behavior and implications of using EPROBE_DEFER in their drivers.
+>
+> Signed-off-by: anish kumar <yesanishhere@gmail.com>
+> ---
+>  Documentation/driver-api/driver-model/driver.rst | 11 +++++++----
+>  1 file changed, 7 insertions(+), 4 deletions(-)
+>
+> diff --git a/Documentation/driver-api/driver-model/driver.rst b/Documenta=
+tion/driver-api/driver-model/driver.rst
+> index 06f818b1d622..c86b948d0dfe 100644
+> --- a/Documentation/driver-api/driver-model/driver.rst
+> +++ b/Documentation/driver-api/driver-model/driver.rst
+> @@ -171,10 +171,13 @@ released all resources it allocated.
+>  Optionally, probe() may return -EPROBE_DEFER if the driver depends on
+>  resources that are not yet available (e.g., supplied by a driver that
+>  hasn't initialized yet).  The driver core will put the device onto the
+> -deferred probe list and will try to call it again later. If a driver
+> -must defer, it should return -EPROBE_DEFER as early as possible to
+> -reduce the amount of time spent on setup work that will need to be
+> -unwound and reexecuted at a later time.
+> +deferred probe list and will retry again as and when a device or driver
+> +gets added to the system. A successful probe of any device will trigger
+> +moving all devices from pending list to active list. A workqueue process=
+es
+> +the active list to retry deferred probes. If a driver must defer, it
+> +should return -EPROBE_DEFER as early as possible to reduce the amount
+> +of time spent on setup work that will need to be unwound and reexecuted
+> +at a later time.
+>
+>  .. warning::
+>        -EPROBE_DEFER must not be returned if probe() has already created
+> --
+> 2.39.3 (Apple Git-146)
+>
 
