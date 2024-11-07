@@ -1,224 +1,496 @@
-Return-Path: <linux-doc+bounces-30150-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30152-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3458C9BFC46
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 03:06:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D96339BFC50
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 03:06:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 93A8028762F
-	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 02:06:01 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 985EA288445
+	for <lists+linux-doc@lfdr.de>; Thu,  7 Nov 2024 02:06:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E850C16419;
-	Thu,  7 Nov 2024 02:04:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7BEF117B402;
+	Thu,  7 Nov 2024 02:05:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="hyAIBR3b"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="d+Woo7jt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2087.outbound.protection.outlook.com [40.107.94.87])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-il1-f170.google.com (mail-il1-f170.google.com [209.85.166.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3221917543;
-	Thu,  7 Nov 2024 02:04:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.94.87
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1730945050; cv=fail; b=RbS9I1eIUxhZCWBO0SES3e9FEeQsrbNCIaUgFCM+W1/cpSR4ZPXWO7fpKXfto8e87+9dgnEm6QPl+ZisZgXFGBv5EuL9Pzn0c4yuXwYIaTT1nYtdQQMoosiPJ46VZcDEEfrNKuYuGLDqzj4TSDg9qE+qyq6JC9pvG16G31gGKkc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1730945050; c=relaxed/simple;
-	bh=Xhiaz+LpQKUhoWfAqFTEXDXz+kW3EG1tqV/BBwXvnt8=;
-	h=Date:From:To:CC:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IUupyhUW2UtmT8l07W087IZdQwVLrbcasTSg1BpvUBpjSP3FpH8SHDK+yIdOhZtAKjwzGjycj6WOLbAk9jm+4CuKlaHjt8bv0HzrM+9Fz7C0QGIOSuvqrKGFe4c/CTn4bX/QdmluLBhrN/Dnk/3LN5yje3knbxRVpGLQ3FIMl9M=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=hyAIBR3b; arc=fail smtp.client-ip=40.107.94.87
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qtjPUnVrNUiiJl3y1dMdiCT5Zfem62gaLc8xDWDJzmgYsV+GYKO0gXMzC+xS+8MiDYupW8VZMgdRscJrdTjRQR77hT7OwTcth0G44aYsogz0y5m9tsUVy4Gz0oSrUp+Y9RF8sn6onfoxw4BG0afq8COwtGgJskyVyWnREZID1Yt8CkKLQcA3aLiqYDD8G3xv1VKSukYe+RASpqLimDQ6Sw+6bxnQ9GMaipoW9MUONc+v+04tvJ8I5asRZ5/7nC0TzSGrQkQeXU0fHpwOMDfjZQRmzWWbYwJFTfjj1wCVWS6ApsbFZQB6yRdzwilzdkaG4l46714BdwnKS13yZDuQJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ldrTXPp60r4e5hy1bxsuE0mX7WgDFfm0ch2UWXjVKZY=;
- b=nClEPHkjRQMU6oE6PDT855FwY368BGaxDQEtLi9k0hXdnSLY/yZHlYGhgsKbGJrIDuTW/NqxAWa9/bxnnfDeZJmWeTADKrUoqNxSFhYr1jpVrBb4H7Gwwn3plNbqEvL1VjdycYUAPohin0TYYWU7Kme7v70jV/k5tx9y4j8hUdusyBLqGtqsR5osUeV3X6gYq4dWI18RAah/a+/+GzXB0jpnzM5QJZ445bUycf4oM5QndUivHwq0BuPniWcxk9pfCP8PWDnLiJqs9s2WeWcY7VIQEaz9S86utaaoi+Pq7hgg8w7Y3XbRcsrXthhfNwi0ClVA68QGDgg7Mez4BjIbOw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=amd.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ldrTXPp60r4e5hy1bxsuE0mX7WgDFfm0ch2UWXjVKZY=;
- b=hyAIBR3bguA/NOSu4+3GIM8G+Fj9IC25HFdUetnLBmFzByJLlypjTiws9l3sU1nqilPMWbquAD6CClfc4qP/hpjw3V8jGIevLGPDK/r/oMl95M251s+h/YmBhtBNs+YMrjENxhPAUBW6XaetMbOoXC0aMF00X63mBLFTKAzqkWkuMcuBAaiYHDs4F/NF1vKUcvB8Ff4SD8hDg1FAl9mKfORqWMuVozEIrADWI8WxxpEpHk5z8bkz5yKtKEf5Wv5dxyt4KirVf22V8z/RKuRyhQKxpJmAkwDSZ1JEWhP7R7p5jYfLs7jXQq0Fd5yURNW/7TyijhWrEOrCB3HqKI6HrA==
-Received: from SA1P222CA0055.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:2c1::7)
- by CY5PR12MB6179.namprd12.prod.outlook.com (2603:10b6:930:24::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.30; Thu, 7 Nov
- 2024 02:04:06 +0000
-Received: from SN1PEPF0002636D.namprd02.prod.outlook.com
- (2603:10b6:806:2c1:cafe::38) by SA1P222CA0055.outlook.office365.com
- (2603:10b6:806:2c1::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8137.18 via Frontend
- Transport; Thu, 7 Nov 2024 02:04:06 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- SN1PEPF0002636D.mail.protection.outlook.com (10.167.241.138) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8137.17 via Frontend Transport; Thu, 7 Nov 2024 02:04:06 +0000
-Received: from rnnvmail202.nvidia.com (10.129.68.7) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Wed, 6 Nov 2024
- 18:03:54 -0800
-Received: from rnnvmail205.nvidia.com (10.129.68.10) by rnnvmail202.nvidia.com
- (10.129.68.7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Wed, 6 Nov 2024
- 18:03:53 -0800
-Received: from Asurada-Nvidia (10.127.8.13) by mail.nvidia.com (10.129.68.10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4 via Frontend
- Transport; Wed, 6 Nov 2024 18:03:52 -0800
-Date: Wed, 6 Nov 2024 18:03:50 -0800
-From: Nicolin Chen <nicolinc@nvidia.com>
-To: Alexey Kardashevskiy <aik@amd.com>
-CC: <jgg@nvidia.com>, <kevin.tian@intel.com>, <corbet@lwn.net>,
-	<joro@8bytes.org>, <suravee.suthikulpanit@amd.com>, <will@kernel.org>,
-	<robin.murphy@arm.com>, <dwmw2@infradead.org>, <shuah@kernel.org>,
-	<iommu@lists.linux.dev>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
-	<baolu.lu@linux.intel.com>, <eric.auger@redhat.com>,
-	<jean-philippe@linaro.org>, <mdf@kernel.org>, <mshavit@google.com>,
-	<shameerali.kolothum.thodi@huawei.com>, <smostafa@google.com>,
-	<yi.l.liu@intel.com>, <zhangfei.gao@linaro.org>, <patches@lists.linux.dev>
-Subject: Re: [PATCH v6 05/13] iommufd/viommu: Add IOMMU_VIOMMU_ALLOC ioctl
-Message-ID: <ZywgBswnOahnFATB@Asurada-Nvidia>
-References: <cover.1730313237.git.nicolinc@nvidia.com>
- <5d2efe229821f5db7a832d9d6be84217289ac3f4.1730313237.git.nicolinc@nvidia.com>
- <40c1587f-a6af-4851-8632-cb02adece66b@amd.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7986312B63;
+	Thu,  7 Nov 2024 02:05:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.170
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1730945159; cv=none; b=WeBT2Gt+vYSZnEVdsnlMgXTfrgm82u/2wugCtv+aj/H6uxUXmm7Psm5QZkW9FYfPGlOOPNt+flUWfVh9D+u48OkDe0ZEnFtkWwJWrqusdiHRu4ORsamy8SpfFRS8a6ZLCjUidtk8O+W/vrP8xX+Wa1bU//XMgNcTXZPuZseZx5I=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1730945159; c=relaxed/simple;
+	bh=DDDjae2/2sJOrdAym8U2UMDV5vGP6TgBpRl8o46nmio=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HfDmT+UPaBHZjrwgVI4KYLkc5kGR+98G0j5G9RF4rJ6hz0vCsq3ZljbUmT3UAyKZJJqOZ2PEJuLzfusKb+7i1hSGjj62iYrl1K1icfTa9+vdevLZnyouP/JJmH5P/oJUBb/cfT2J/4LiY7bK/db1cuh+DdElv2xQFPBwPYZ7M6k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=d+Woo7jt; arc=none smtp.client-ip=209.85.166.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-il1-f170.google.com with SMTP id e9e14a558f8ab-3a6bfc1dc8eso2077405ab.1;
+        Wed, 06 Nov 2024 18:05:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1730945156; x=1731549956; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=MgEcCxJ+vSGeMhm3xx61MSV2wsR7XP5lXQM+qvnm9uY=;
+        b=d+Woo7jtzB3zn3mBXsSLiHAJap5y7bHZf8RYS54/bEPZQ5VhoTplZ5aY75c1VH3wzu
+         c9iTHqmpcfL72mWsHAkO+z3BtXOB/gHdLjoCUnaeepWnmNPPbzlRQXL4bFCbWyYDBmmI
+         DqiwvBVlW9EndiwKvsdfA/9xYUKEtdoNX/Q/a2s2kmQhqYIoXjuCj5g6XXdeadD1LBE5
+         CXdSqoXrb7wEEDEdnghRZC11Nsr4FE/hrKKwHwFdAeVwJwr3Z4OAsUiEiKuOnemWRxdW
+         qDuzsrLMC65M1fPb1p4YkFvQfPX0JNYMCOB6A2D+5t54gJzHA9jv1szOeHkQ1ENTUaPS
+         kV2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730945156; x=1731549956;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=MgEcCxJ+vSGeMhm3xx61MSV2wsR7XP5lXQM+qvnm9uY=;
+        b=Lo6IXshcwzlBiyNGTA74QWnohYl8E7AiaML+QSi69jZAnqz+WNPLx6DTKqo+7j2Bdq
+         SmN4Lle0T6KxEXsA3D/RSlk2IhpMcGyIQKGulYgsqz69mF8Rvrsr3KZD3Ihm24kjdsIA
+         g8X5grSAugFPxZAKUUM9kti0KcSrnJ9lm/yaSjjI2XtleBQ/lnON5MoO7xNPZbHtTrBb
+         wpCV4mstHlmJdKZSXXNaqztDX3Ft484608XH9aifwwuTUQv4qSKbc9te8ZRZ8mJPJ7sm
+         tMBDK4Cwc0LplLOuxYpfxzyjfC7RG8cFw97/gWKEgFWabiXMPTqkvjYrZM+nG0tPWHQ4
+         LQ9g==
+X-Forwarded-Encrypted: i=1; AJvYcCV6xLBwPJAdeKxHZfugyssaZ7GpqANPUjZlvcrKe8uGAqcOD7a1vogOTO4wSF/MAg2L4Vn+LSDgmTo=@vger.kernel.org, AJvYcCX+ha8gjyW/t+8+NK7Z0qaoxgHD0HWTBMwclJsFMlrmnbW8VOhNTtjpaazeKygbwjAwZu4qDlT6e7Kei1Gz@vger.kernel.org
+X-Gm-Message-State: AOJu0YxvoZPmCY854Fz23kvb+9QCnfGnzd5VdLMQgOl4DThQVIKqdtPA
+	w/YLtvzTtyyPbTQYCzMlkvxGY5xixqk/0pGSWHbei/ZjLAGG4RqI+NRUxaaM
+X-Google-Smtp-Source: AGHT+IGV/viUi+Z/f8UPB3vsHgORPSReBIDTUJnpLbmGttm8PJBxlSWePUTdS6VaLZKXH09czGPNAw==
+X-Received: by 2002:a05:6e02:1d9e:b0:3a2:7592:2c5 with SMTP id e9e14a558f8ab-3a6b031a2e7mr229105845ab.17.1730945156304;
+        Wed, 06 Nov 2024 18:05:56 -0800 (PST)
+Received: from localhost (fwdproxy-prn-036.fbsv.net. [2a03:2880:ff:24::face:b00c])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7f41f64386asm201379a12.57.2024.11.06.18.05.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 06 Nov 2024 18:05:55 -0800 (PST)
+From: Sanman Pradhan <sanman.p211993@gmail.com>
+To: netdev@vger.kernel.org
+Cc: alexanderduyck@fb.com,
+	kuba@kernel.org,
+	kernel-team@meta.com,
+	davem@davemloft.net,
+	edumazet@google.com,
+	pabeni@redhat.com,
+	horms@kernel.org,
+	corbet@lwn.net,
+	mohsin.bashr@gmail.com,
+	sanmanpradhan@meta.com,
+	andrew+netdev@lunn.ch,
+	vadim.fedorenko@linux.dev,
+	jdamato@fastly.com,
+	sdf@fomichev.me,
+	sanman.p211993@gmail.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH net-next v2] eth: fbnic: Add PCIe hardware statistics
+Date: Wed,  6 Nov 2024 18:05:55 -0800
+Message-ID: <20241107020555.321245-1-sanman.p211993@gmail.com>
+X-Mailer: git-send-email 2.43.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <40c1587f-a6af-4851-8632-cb02adece66b@amd.com>
-X-NV-OnPremToCloud: ExternallySecured
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002636D:EE_|CY5PR12MB6179:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f458d30-a3fc-45fe-8bcb-08dcfed075f4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700013|7416014|376014|82310400026;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?GSxZi/ylwCc0uYVqM/eObdFyuom8SibsM9pHJFQbwJB1fDDNXxGNdy8w/ZCp?=
- =?us-ascii?Q?m1h4LXwA1ByoDFqHsM+VHhFOGr+zopSjdnDBSkbauxOlcis0Rqrjd5PtCQ8c?=
- =?us-ascii?Q?BMpVf6ug134CEkvdoy+T/igWrcDL2JhDlfvX6dc0rVhzoOrMhgZgqYHA9Kvh?=
- =?us-ascii?Q?mRqeTCHRCp5YmnWBJXjFI5Jc5/GvFEiU/LoTCu9mzMyeYhkl3fab/CzRJrMl?=
- =?us-ascii?Q?mGC35A8kyeu6eg+ySC4mVS3Dd7qDUtnhB/kjb3Kgb+JcVcxZwnEaTbDlbN8q?=
- =?us-ascii?Q?3dL9Ph2Ex06HuAsorcrKX+wuIpouQ9JunGoEbqJc7GSa3r+4brARCXmOxNPb?=
- =?us-ascii?Q?NO6T6YzI66YdGFEtE+3CDq1UJSyZpe5FBwXlGRIGfMSEXoL+64HL0e3C/zZy?=
- =?us-ascii?Q?iNk0LL8T3W2pHvalR2RDIfz142AN8QoYravQb/QBmRtQx31zcuxlIqj9URg5?=
- =?us-ascii?Q?Vym1k8pBofo1EgfWz9tcnoqa1FiY2yYYiew5yAiwiLJc9iwvD8F9Xf91YZpj?=
- =?us-ascii?Q?9Yp+vTl8pkggOXNIMTyxqEjMS5imnmGKyEGnrKXh2P3U3AfTPu8/T5G50ZQb?=
- =?us-ascii?Q?lCXBe3o2E/nc3GN0Coi8y6JIpSUzpa+erKQUWS9+UcOmxdboNllr+dyyfMCp?=
- =?us-ascii?Q?03uh3l/L7285GV5vt0vbydukyeqsYQ5SHPFWiJjd6KrgMGVgMDNNJve7YEFh?=
- =?us-ascii?Q?z5pJak4Uk/idpzIBRVyOnbksz1xyH4i+9S1WRq5Npi6f380opN+FGkKJFas8?=
- =?us-ascii?Q?gNVClzyqMNJz14Ldx12xrxA2af7fAN6ePUym3ekwZ+Fk1VDxRUH8UPD6qQXq?=
- =?us-ascii?Q?cfj5pfJm7xtvhrqvahuCoaOQrP4mQ2y5kO1YN8Xyf+fMWP0yToYfu2P4eKMr?=
- =?us-ascii?Q?jBwLp4IwWlF+IRgzZSbQJKI9Wy/sAFJ/BKr9wl9FcQooRBx1Fe3qSCkaVmKA?=
- =?us-ascii?Q?gohgX4ccBKZUvVTGOdKTEDV3N0Vfd9OWDgtVPU02RSqDndxDhzQEYKjuObP3?=
- =?us-ascii?Q?rN7qrQUePM6dmvf33H+1PObRHFvEVHgwiKOfKiynKUBQPSd7HxXFiSzKOk1e?=
- =?us-ascii?Q?wKvMnd4q3hVoPeJm+04Jcv1h+GhR/oWdYhnSJ81a13aQJS+rg8HU5hu/huzk?=
- =?us-ascii?Q?8RcYDFCi8eRn4RsmNb7FgUjk1NZTAi67EQeyyRL/YFiJs8Nb6skax2h16ZCG?=
- =?us-ascii?Q?9Ib2A/Cvl3cnEElYOuIp9+3n45hM9dMpmzc4mx3JZXu+KcNXrvi8V5QUgOhp?=
- =?us-ascii?Q?rnORh3nLkgzULsHKm6kUlEC9P4H1HE94bTIwIHdCPBdkmzv0gdXBSAbMnk3g?=
- =?us-ascii?Q?n5HXefMSCd+Q09KnOMlBJ99Lj18ugaCa+0Seleu0a2ONSCjijguoOySaK6Wb?=
- =?us-ascii?Q?DGGVs4lokyjh7stEF9dgCv8c5fd56sAD0RuretrfqQSDFV3Meg=3D=3D?=
-X-Forefront-Antispam-Report:
-	CIP:216.228.117.160;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge1.nvidia.com;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(7416014)(376014)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2024 02:04:06.3818
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f458d30-a3fc-45fe-8bcb-08dcfed075f4
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.160];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SN1PEPF0002636D.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6179
+Content-Transfer-Encoding: 8bit
 
-On Thu, Nov 07, 2024 at 12:37:59PM +1100, Alexey Kardashevskiy wrote:
-> On 31/10/24 08:34, Nicolin Chen wrote:
-> > +int iommufd_viommu_alloc_ioctl(struct iommufd_ucmd *ucmd)
-> > +{
-> > +     struct iommu_viommu_alloc *cmd = ucmd->cmd;
-> > +     struct iommufd_hwpt_paging *hwpt_paging;
-> > +     struct iommufd_viommu *viommu;
-> > +     struct iommufd_device *idev;
-> > +     const struct iommu_ops *ops;
-> > +     int rc;
-> > +
-> > +     if (cmd->flags || cmd->type == IOMMU_VIOMMU_TYPE_DEFAULT)
-> > +             return -EOPNOTSUPP;
-> > +
-> > +     idev = iommufd_get_device(ucmd, cmd->dev_id);
-> > +     if (IS_ERR(idev))
-> > +             return PTR_ERR(idev);
-> > +
-> > +     ops = dev_iommu_ops(idev->dev);
-> > +     if (!ops->viommu_alloc) {
-> > +             rc = -EOPNOTSUPP;
-> > +             goto out_put_idev;
-> > +     }
-> > +
-> > +     hwpt_paging = iommufd_get_hwpt_paging(ucmd, cmd->hwpt_id);
-> > +     if (IS_ERR(hwpt_paging)) {
-> > +             rc = PTR_ERR(hwpt_paging);
-> > +             goto out_put_idev;
-> > +     }
-> > +
-> > +     if (!hwpt_paging->nest_parent) {
-> 
-> 
-> I am trying to use this for my so-called viommu which does not have this
-> so this fails. My viommu is only visible to the VM via paravirt
-> interface to populate sDTE (secure device table) so no viommu device in
-> the guest or nested paging, nothing like this just yet.
-> 
-> Is there a writeup somewhere about possible uses of this
-> IOMMU_HWPT_ALLOC_NEST_PARENT? I'd think one pass through device equals 1
-> IOAS, 1 HWPT, 1 domain, 1 viommu, even with guest visible vIOMMU but it
-> is not the case, is it?
+Add PCIe hardware statistics support to the fbnic driver. These stats
+provide insight into PCIe transaction performance and error conditions.
 
-So far, the vIOMMU is exclusively designed for nesting, with the
-only use case of ARM SMMUv3. So, a nesting parent HWPT/domain is
-a must. So long as your use case is a good fit, we can drop this
-when adding support for your case, assuming there would be some
-new iommufd patches.
+Which includes, read/write and completion TLP counts and DWORD counts and
+debug counters for tag, completion credit and NP credit exhaustion
 
-For nesting, there will be at least two HWPTs (i.e. two domains)
-for 2 stages. And stage-2 HWPT/domain is the nesting parent one.
+The stats are exposed via ethtool and can be used to monitor PCIe
+performance and debug PCIe issues.
 
-> btw is there a way to get a snapshot of all current objects in iommufd?
-> They all use "dev_id" and not file descriptors so cannot look at
-> /proc/><pid>/fd, and there is nothing in debugfs either.
+Signed-off-by: Sanman Pradhan <sanman.p211993@gmail.com>
+---
+v1:
+	- https://patchwork.kernel.org/project/netdevbpf/patch/20241106002625.1857904-1-sanman.p211993@gmail.com/
+	- Removed unnecessary code blocks
+	- Rephrased the commit message
+---
+ .../device_drivers/ethernet/meta/fbnic.rst    |  27 +++++
+ drivers/net/ethernet/meta/fbnic/fbnic_csr.h   |  39 ++++++
+ .../net/ethernet/meta/fbnic/fbnic_ethtool.c   |  77 +++++++++++-
+ .../net/ethernet/meta/fbnic/fbnic_hw_stats.c  | 114 ++++++++++++++++++
+ .../net/ethernet/meta/fbnic/fbnic_hw_stats.h  |  12 ++
+ .../net/ethernet/meta/fbnic/fbnic_netdev.c    |   3 +
+ drivers/net/ethernet/meta/fbnic/fbnic_pci.c   |   2 +
+ 7 files changed, 272 insertions(+), 2 deletions(-)
 
-I am not aware of anything like that. How would you like to use
-it if there was one?
+diff --git a/Documentation/networking/device_drivers/ethernet/meta/fbnic.rst b/Documentation/networking/device_drivers/ethernet/meta/fbnic.rst
+index 32ff114f5c26..31c6371c45f8 100644
+--- a/Documentation/networking/device_drivers/ethernet/meta/fbnic.rst
++++ b/Documentation/networking/device_drivers/ethernet/meta/fbnic.rst
+@@ -27,3 +27,30 @@ driver takes over.
+ devlink dev info provides version information for all three components. In
+ addition to the version the hg commit hash of the build is included as a
+ separate entry.
++
++
++PCIe Statistics
++---------------
++
++The fbnic driver exposes PCIe hardware performance statistics through ethtool.
++These statistics provide insights into PCIe transaction behavior and potential
++performance bottlenecks.
++
++Statistics Categories
++
++1. PCIe Transaction Counters:
++
++   These counters track PCIe transaction activity:
++        - pcie_ob_rd_tlp: Outbound read Transaction Layer Packets count
++        - pcie_ob_rd_dword: DWORDs transferred in outbound read transactions
++        - pcie_ob_wr_tlp: Outbound write Transaction Layer Packets count
++        - pcie_ob_wr_dword: DWORDs transferred in outbound write transactions
++        - pcie_ob_cpl_tlp: Outbound completion TLP count
++        - pcie_ob_cpl_dword: DWORDs transferred in outbound completion TLPs
++
++2. PCIe Resource Monitoring:
++
++   These counters indicate PCIe resource exhaustion events:
++        - pcie_ob_rd_no_tag: Read requests dropped due to tag unavailability
++        - pcie_ob_rd_no_cpl_cred: Read requests dropped due to completion credit exhaustion
++        - pcie_ob_rd_no_np_cred: Read requests dropped due to non-posted credit exhaustion
+diff --git a/drivers/net/ethernet/meta/fbnic/fbnic_csr.h b/drivers/net/ethernet/meta/fbnic/fbnic_csr.h
+index 79cdd231d327..9ee562acbdfc 100644
+--- a/drivers/net/ethernet/meta/fbnic/fbnic_csr.h
++++ b/drivers/net/ethernet/meta/fbnic/fbnic_csr.h
+@@ -882,6 +882,45 @@ enum {
+ #define FBNIC_MAX_QUEUES		128
+ #define FBNIC_CSR_END_QUEUE	(0x40000 + 0x400 * FBNIC_MAX_QUEUES - 1)
 
-> For my current hack, I can pass IOMMU_HWPT_ALLOC_NEST_PARENT to QEMU's
-> iommufd_backend_alloc_hwpt() but it is... meh. Thanks,
- 
-Again, assuming you have some other iommufd patches, I think you
-could have a small patch dropping this check -- we might need an
-additional flag or another HWPT type, but we can discuss later.
++#define FBNIC_TCE_DROP_CTRL		0x0403d		/* 0x100f0*/
++
++/* PUL User Registers*/
++#define FBNIC_PUL_USER_OB_RD_TLP_CNT_31_0 \
++					0x3106e		/* 0xc41b8 */
++#define FBNIC_PUL_USER_OB_RD_DWORD_CNT_31_0 \
++					0x31070		/* 0xc41c0 */
++#define FBNIC_PUL_USER_OB_RD_DWORD_CNT_63_32 \
++					0x31071		/* 0xc41c4 */
++#define FBNIC_PUL_USER_OB_WR_TLP_CNT_31_0 \
++					0x31072		/* 0xc41c8 */
++#define FBNIC_PUL_USER_OB_WR_TLP_CNT_63_32 \
++					0x31073		/* 0xc41cc */
++#define FBNIC_PUL_USER_OB_WR_DWORD_CNT_31_0 \
++					0x31074		/* 0xc41d0 */
++#define FBNIC_PUL_USER_OB_WR_DWORD_CNT_63_32 \
++					0x31075		/* 0xc41d4 */
++#define FBNIC_PUL_USER_OB_CPL_TLP_CNT_31_0 \
++					0x31076		/* 0xc41d8 */
++#define FBNIC_PUL_USER_OB_CPL_TLP_CNT_63_32 \
++					0x31077		/* 0xc41dc */
++#define FBNIC_PUL_USER_OB_CPL_DWORD_CNT_31_0 \
++					0x31078		/* 0xc41e0 */
++#define FBNIC_PUL_USER_OB_CPL_DWORD_CNT_63_32 \
++					0x31079		/* 0xc41e4 */
++#define FBNIC_PUL_USER_OB_RD_DBG_CNT_CPL_CRED_31_0 \
++					0x3107a		/* 0xc41e8 */
++#define FBNIC_PUL_USER_OB_RD_DBG_CNT_CPL_CRED_63_32 \
++					0x3107b		/* 0xc41ec */
++#define FBNIC_PUL_USER_OB_RD_DBG_CNT_TAG_31_0 \
++					0x3107c		/* 0xc41f0 */
++#define FBNIC_PUL_USER_OB_RD_DBG_CNT_TAG_63_32 \
++					0x3107d		/* 0xc41f4 */
++#define FBNIC_PUL_USER_OB_RD_DBG_CNT_NP_CRED_31_0 \
++					0x3107e		/* 0xc41f8 */
++#define FBNIC_PUL_USER_OB_RD_DBG_CNT_NP_CRED_63_32 \
++					0x3107f		/* 0xc41fc */
++#define FBNIC_CSR_END_PUL_USER	0x31080	/* CSR section delimiter */
++
+ /* BAR 4 CSRs */
 
-Thanks
-Nicolin
+ /* The IPC mailbox consists of 32 mailboxes, with each mailbox consisting
+diff --git a/drivers/net/ethernet/meta/fbnic/fbnic_ethtool.c b/drivers/net/ethernet/meta/fbnic/fbnic_ethtool.c
+index 1117d5a32867..9f590a42a9df 100644
+--- a/drivers/net/ethernet/meta/fbnic/fbnic_ethtool.c
++++ b/drivers/net/ethernet/meta/fbnic/fbnic_ethtool.c
+@@ -6,6 +6,39 @@
+ #include "fbnic_netdev.h"
+ #include "fbnic_tlv.h"
+
++struct fbnic_stat {
++	u8 string[ETH_GSTRING_LEN];
++	unsigned int size;
++	unsigned int offset;
++};
++
++#define FBNIC_STAT_FIELDS(type, name, stat) { \
++	.string = name, \
++	.size = sizeof_field(struct type, stat), \
++	.offset = offsetof(struct type, stat), \
++}
++
++/* Hardware statistics not captured in rtnl_link_stats */
++#define FBNIC_HW_STAT(name, stat) \
++	FBNIC_STAT_FIELDS(fbnic_hw_stats, name, stat)
++
++static const struct fbnic_stat fbnic_gstrings_hw_stats[] = {
++	/* PCIE */
++	FBNIC_HW_STAT("pcie_ob_rd_tlp", pcie.ob_rd_tlp),
++	FBNIC_HW_STAT("pcie_ob_rd_dword", pcie.ob_rd_dword),
++	FBNIC_HW_STAT("pcie_ob_wr_tlp", pcie.ob_wr_tlp),
++	FBNIC_HW_STAT("pcie_ob_wr_dword", pcie.ob_wr_dword),
++	FBNIC_HW_STAT("pcie_ob_cpl_tlp", pcie.ob_cpl_tlp),
++	FBNIC_HW_STAT("pcie_ob_cpl_dword", pcie.ob_cpl_dword),
++	FBNIC_HW_STAT("pcie_ob_rd_no_tag", pcie.ob_rd_no_tag),
++	FBNIC_HW_STAT("pcie_ob_rd_no_cpl_cred", pcie.ob_rd_no_cpl_cred),
++	FBNIC_HW_STAT("pcie_ob_rd_no_np_cred", pcie.ob_rd_no_np_cred),
++};
++
++#define FBNIC_HW_FIXED_STATS_LEN ARRAY_SIZE(fbnic_gstrings_hw_stats)
++#define FBNIC_HW_STATS_LEN \
++	(FBNIC_HW_FIXED_STATS_LEN)
++
+ static int
+ fbnic_get_ts_info(struct net_device *netdev,
+ 		  struct kernel_ethtool_ts_info *tsinfo)
+@@ -51,6 +84,43 @@ static void fbnic_set_counter(u64 *stat, struct fbnic_stat_counter *counter)
+ 		*stat = counter->value;
+ }
+
++static void fbnic_get_strings(struct net_device *dev, u32 sset, u8 *data)
++{
++	int i;
++
++	switch (sset) {
++	case ETH_SS_STATS:
++		for (i = 0; i < FBNIC_HW_STATS_LEN; i++)
++			ethtool_puts(&data, fbnic_gstrings_hw_stats[i].string);
++		break;
++	}
++}
++
++static int fbnic_get_sset_count(struct net_device *dev, int sset)
++{
++	switch (sset) {
++	case ETH_SS_STATS:
++		return FBNIC_HW_STATS_LEN;
++	default:
++		return -EOPNOTSUPP;
++	}
++}
++
++static void fbnic_get_ethtool_stats(struct net_device *dev,
++				    struct ethtool_stats *stats, u64 *data)
++{
++	struct fbnic_net *fbn = netdev_priv(dev);
++	const struct fbnic_stat *stat;
++	int i;
++
++	fbnic_get_hw_stats(fbn->fbd);
++
++	for (i = 0; i < FBNIC_HW_STATS_LEN; i++) {
++		stat = &fbnic_gstrings_hw_stats[i];
++		data[i] = *(u64 *)((u8 *)&fbn->fbd->hw_stats + stat->offset);
++	}
++}
++
+ static void
+ fbnic_get_eth_mac_stats(struct net_device *netdev,
+ 			struct ethtool_eth_mac_stats *eth_mac_stats)
+@@ -117,10 +187,13 @@ static void fbnic_get_ts_stats(struct net_device *netdev,
+ }
+
+ static const struct ethtool_ops fbnic_ethtool_ops = {
+-	.get_drvinfo		= fbnic_get_drvinfo,
+ 	.get_ts_info		= fbnic_get_ts_info,
+-	.get_ts_stats		= fbnic_get_ts_stats,
++	.get_drvinfo		= fbnic_get_drvinfo,
++	.get_strings		= fbnic_get_strings,
++	.get_sset_count		= fbnic_get_sset_count,
++	.get_ethtool_stats	= fbnic_get_ethtool_stats,
+ 	.get_eth_mac_stats	= fbnic_get_eth_mac_stats,
++	.get_ts_stats		= fbnic_get_ts_stats,
+ };
+
+ void fbnic_set_ethtool_ops(struct net_device *dev)
+diff --git a/drivers/net/ethernet/meta/fbnic/fbnic_hw_stats.c b/drivers/net/ethernet/meta/fbnic/fbnic_hw_stats.c
+index a0acc7606aa1..eb19b49fe306 100644
+--- a/drivers/net/ethernet/meta/fbnic/fbnic_hw_stats.c
++++ b/drivers/net/ethernet/meta/fbnic/fbnic_hw_stats.c
+@@ -25,3 +25,117 @@ u64 fbnic_stat_rd64(struct fbnic_dev *fbd, u32 reg, u32 offset)
+ 	 */
+ 	return ((u64)upper << 32);
+ }
++
++static void fbnic_hw_stat_rst64(struct fbnic_dev *fbd, u32 reg, s32 offset,
++				struct fbnic_stat_counter *stat)
++{
++	/* Record initial counter values and compute deltas from there to ensure
++	 * stats start at 0 after reboot/reset. This avoids exposing absolute
++	 * hardware counter values to userspace.
++	 */
++	stat->u.old_reg_value_64 = fbnic_stat_rd64(fbd, reg, offset);
++}
++
++static void fbnic_hw_stat_rd64(struct fbnic_dev *fbd, u32 reg, s32 offset,
++			       struct fbnic_stat_counter *stat)
++{
++	u64 new_reg_value;
++
++	new_reg_value = fbnic_stat_rd64(fbd, reg, offset);
++	stat->value += new_reg_value - stat->u.old_reg_value_64;
++	stat->u.old_reg_value_64 = new_reg_value;
++}
++
++static void fbnic_reset_pcie_stats_asic(struct fbnic_dev *fbd,
++					struct fbnic_pcie_stats *pcie)
++{
++	fbnic_hw_stat_rst64(fbd,
++			    FBNIC_PUL_USER_OB_RD_TLP_CNT_31_0,
++			    1,
++			    &pcie->ob_rd_tlp);
++	fbnic_hw_stat_rst64(fbd,
++			    FBNIC_PUL_USER_OB_RD_DWORD_CNT_31_0,
++			    1,
++			    &pcie->ob_rd_dword);
++	fbnic_hw_stat_rst64(fbd,
++			    FBNIC_PUL_USER_OB_CPL_TLP_CNT_31_0,
++			    1,
++			    &pcie->ob_cpl_tlp);
++	fbnic_hw_stat_rst64(fbd,
++			    FBNIC_PUL_USER_OB_CPL_DWORD_CNT_31_0,
++			    1,
++			    &pcie->ob_cpl_dword);
++	fbnic_hw_stat_rst64(fbd,
++			    FBNIC_PUL_USER_OB_WR_TLP_CNT_31_0,
++			    1,
++			    &pcie->ob_wr_tlp);
++	fbnic_hw_stat_rst64(fbd,
++			    FBNIC_PUL_USER_OB_WR_DWORD_CNT_31_0,
++			    1,
++			    &pcie->ob_wr_dword);
++
++	fbnic_hw_stat_rst64(fbd,
++			    FBNIC_PUL_USER_OB_RD_DBG_CNT_TAG_31_0,
++			    1,
++			    &pcie->ob_rd_no_tag);
++	fbnic_hw_stat_rst64(fbd,
++			    FBNIC_PUL_USER_OB_RD_DBG_CNT_CPL_CRED_31_0,
++			    1,
++			    &pcie->ob_rd_no_cpl_cred);
++	fbnic_hw_stat_rst64(fbd,
++			    FBNIC_PUL_USER_OB_RD_DBG_CNT_NP_CRED_31_0,
++			    1,
++			    &pcie->ob_rd_no_np_cred);
++}
++
++static void fbnic_get_pcie_stats_asic64(struct fbnic_dev *fbd,
++					struct fbnic_pcie_stats *pcie)
++{
++	fbnic_hw_stat_rd64(fbd,
++			   FBNIC_PUL_USER_OB_RD_TLP_CNT_31_0,
++			   1,
++			   &pcie->ob_rd_tlp);
++	fbnic_hw_stat_rd64(fbd,
++			   FBNIC_PUL_USER_OB_RD_DWORD_CNT_31_0,
++			   1,
++			   &pcie->ob_rd_dword);
++	fbnic_hw_stat_rd64(fbd,
++			   FBNIC_PUL_USER_OB_WR_TLP_CNT_31_0,
++			   1,
++			   &pcie->ob_wr_tlp);
++	fbnic_hw_stat_rd64(fbd,
++			   FBNIC_PUL_USER_OB_WR_DWORD_CNT_31_0,
++			   1,
++			   &pcie->ob_wr_dword);
++	fbnic_hw_stat_rd64(fbd,
++			   FBNIC_PUL_USER_OB_CPL_TLP_CNT_31_0,
++			   1,
++			   &pcie->ob_cpl_tlp);
++	fbnic_hw_stat_rd64(fbd,
++			   FBNIC_PUL_USER_OB_CPL_DWORD_CNT_31_0,
++			   1,
++			   &pcie->ob_cpl_dword);
++
++	fbnic_hw_stat_rd64(fbd,
++			   FBNIC_PUL_USER_OB_RD_DBG_CNT_TAG_31_0,
++			   1,
++			   &pcie->ob_rd_no_tag);
++	fbnic_hw_stat_rd64(fbd,
++			   FBNIC_PUL_USER_OB_RD_DBG_CNT_CPL_CRED_31_0,
++			   1,
++			   &pcie->ob_rd_no_cpl_cred);
++	fbnic_hw_stat_rd64(fbd,
++			   FBNIC_PUL_USER_OB_RD_DBG_CNT_NP_CRED_31_0,
++			   1,
++			   &pcie->ob_rd_no_np_cred);
++}
++
++void fbnic_reset_hw_stats(struct fbnic_dev *fbd)
++{
++	fbnic_reset_pcie_stats_asic(fbd, &fbd->hw_stats.pcie);
++}
++
++void fbnic_get_hw_stats(struct fbnic_dev *fbd)
++{
++	fbnic_get_pcie_stats_asic64(fbd, &fbd->hw_stats.pcie);
++}
+diff --git a/drivers/net/ethernet/meta/fbnic/fbnic_hw_stats.h b/drivers/net/ethernet/meta/fbnic/fbnic_hw_stats.h
+index 30348904b510..39d8b3f62d8f 100644
+--- a/drivers/net/ethernet/meta/fbnic/fbnic_hw_stats.h
++++ b/drivers/net/ethernet/meta/fbnic/fbnic_hw_stats.h
+@@ -11,6 +11,16 @@ struct fbnic_stat_counter {
+ 	bool reported;
+ };
+
++struct fbnic_pcie_stats {
++	struct fbnic_stat_counter ob_rd_tlp, ob_rd_dword;
++	struct fbnic_stat_counter ob_wr_tlp, ob_wr_dword;
++	struct fbnic_stat_counter ob_cpl_tlp, ob_cpl_dword;
++
++	struct fbnic_stat_counter ob_rd_no_tag;
++	struct fbnic_stat_counter ob_rd_no_cpl_cred;
++	struct fbnic_stat_counter ob_rd_no_np_cred;
++};
++
+ struct fbnic_eth_mac_stats {
+ 	struct fbnic_stat_counter FramesTransmittedOK;
+ 	struct fbnic_stat_counter FramesReceivedOK;
+@@ -33,8 +43,10 @@ struct fbnic_mac_stats {
+
+ struct fbnic_hw_stats {
+ 	struct fbnic_mac_stats mac;
++	struct fbnic_pcie_stats pcie;
+ };
+
+ u64 fbnic_stat_rd64(struct fbnic_dev *fbd, u32 reg, u32 offset);
+
++void fbnic_reset_hw_stats(struct fbnic_dev *fbd);
+ void fbnic_get_hw_stats(struct fbnic_dev *fbd);
+diff --git a/drivers/net/ethernet/meta/fbnic/fbnic_netdev.c b/drivers/net/ethernet/meta/fbnic/fbnic_netdev.c
+index c08798fad203..9cb850b78795 100644
+--- a/drivers/net/ethernet/meta/fbnic/fbnic_netdev.c
++++ b/drivers/net/ethernet/meta/fbnic/fbnic_netdev.c
+@@ -627,6 +627,9 @@ struct net_device *fbnic_netdev_alloc(struct fbnic_dev *fbd)
+
+ 	fbnic_reset_queues(fbn, default_queues, default_queues);
+
++	/* Capture snapshot of hardware stats so netdev can calculate delta */
++	fbnic_reset_hw_stats(fbd);
++
+ 	fbnic_reset_indir_tbl(fbn);
+ 	fbnic_rss_key_fill(fbn->rss_key);
+ 	fbnic_rss_init_en_mask(fbn);
+diff --git a/drivers/net/ethernet/meta/fbnic/fbnic_pci.c b/drivers/net/ethernet/meta/fbnic/fbnic_pci.c
+index 2de5a6fde7e8..cd1fe1114819 100644
+--- a/drivers/net/ethernet/meta/fbnic/fbnic_pci.c
++++ b/drivers/net/ethernet/meta/fbnic/fbnic_pci.c
+@@ -455,6 +455,8 @@ static void __fbnic_pm_attach(struct device *dev)
+ 	struct net_device *netdev = fbd->netdev;
+ 	struct fbnic_net *fbn;
+
++	fbnic_reset_hw_stats(fbd);
++
+ 	if (fbnic_init_failure(fbd))
+ 		return;
+
+--
+2.43.5
 
