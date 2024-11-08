@@ -1,160 +1,144 @@
-Return-Path: <linux-doc+bounces-30288-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30291-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E88219C162F
-	for <lists+linux-doc@lfdr.de>; Fri,  8 Nov 2024 06:52:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38A289C1718
+	for <lists+linux-doc@lfdr.de>; Fri,  8 Nov 2024 08:39:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id A0D691F22315
-	for <lists+linux-doc@lfdr.de>; Fri,  8 Nov 2024 05:52:03 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id BE63A1F22278
+	for <lists+linux-doc@lfdr.de>; Fri,  8 Nov 2024 07:39:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B85F71CF293;
-	Fri,  8 Nov 2024 05:52:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 667181D1731;
+	Fri,  8 Nov 2024 07:38:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="imDMGRyR"
+	dkim=temperror (0-bit key) header.d=aruba.it header.i=@aruba.it header.b="Css2DYNF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtpcmd0756.aruba.it (smtpcmd0756.aruba.it [62.149.156.56])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9048F1CF5C8;
-	Fri,  8 Nov 2024 05:51:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10D701D043C
+	for <linux-doc@vger.kernel.org>; Fri,  8 Nov 2024 07:38:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.149.156.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1731045120; cv=none; b=QiMQnF15C0qKIfHJt5GihvdwYpzIjAWZFY/ctTDtFUbNRSGxc5LUKqNHs/YcRI8wl27Ph5db6ITqYbRaHAA0E1KWiPqOnEFMnVKGHGTAJPbITbPovFJcz9s/i4l5srDbBMmhLWW3CIqSJEyIknChzxC78vnPrqLJZpbIzIZRWMQ=
+	t=1731051520; cv=none; b=Hs4CrOydYswdM4L9f4nSWJQVq05ZPb4QxWQz6byjl4dEQEYHymnddaUg2PAQvbettfhY2zHBm6CW4TWXEsu4sv1ZdxwlJGUOxWj5FYJn2JCcWZWkPvbnyrM/YoaesFDbzcQ5+oBUs8hIsq+vuLxFtEDrA3DG71xJDEMkV7YLgt4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1731045120; c=relaxed/simple;
-	bh=FldH5ezVCKzA4ilhWwESkXoEsqQSxz+NQnJCrsnSmDo=;
-	h=References:From:To:Cc:Subject:Date:In-reply-to:Message-ID:
-	 MIME-Version:Content-Type; b=AQ+O2oTe9fn+Y7cKCAwahkd/hS5+lsubLpdJdnziHdYIc03Xouw8Q35Lvk+CL+nnL3xnfj4agdAyAhnMJ0TT3KFySJC9p1glhP7VcYXMCfEegOAdlVh4OwDtY/z06W5j4QEKDgL0nrqjnKhbHPlDV8P+uwUBw6gqGryOifEv/kQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=imDMGRyR; arc=none smtp.client-ip=209.85.160.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-288661760d3so935197fac.3;
-        Thu, 07 Nov 2024 21:51:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1731045117; x=1731649917; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
-         :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OqQKVoQIIB/alco7tDnCa7tsUMIzxx7+4InKayAOpSw=;
-        b=imDMGRyRqwhaM7xaIuhA8vIf7aO3Uv7G2chzV4oPGqJDRvUFoqCtCJ4ah0oixEBcH/
-         5cYdkjDuy0+JFcLzduPfqMdcI6lD2wCTOZyD1DeYBakFOssH6BelvRrC9iiCzLZ5cYAh
-         wD5dqHRscZKWGQSLai4isgYpSstR2ftfxJpP2T/xx2TGtfFukBMbtjSWk1HR+F+mt06u
-         hPTeJ2Tcu296eiik7O0QXLZ5yVvE3KV2mIsA+lET6rVZ3ru6Brhozn8+vDMdUIsKn8IO
-         eFi+hty103KE8F05g4DZK/tVHer7dj3zgOceo1Qlsju2ny210jrzs9zDpM+DNRvNEaPw
-         U4ng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731045117; x=1731649917;
-        h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
-         :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=OqQKVoQIIB/alco7tDnCa7tsUMIzxx7+4InKayAOpSw=;
-        b=IfFDqdttZ6P3pxfVUn4mdwSQ2/+NvkEu7uc50Qbh4j5KkclorBUCnKUeH9fCgwV0Ya
-         R6MiiY7T2JTSDoglW5dAduPwN5Lo1lhpCCoOvmmKHvuhS+mNT6ERAS8rYdfc9DqTiq4A
-         xBX9PPQmErPxRcJph+mY5VwVDOviYYoRZHO6Fc0hzygWFwYR2TkAoargKugLxujRGYCb
-         iOnpmWxVpkX4HwJHhByGw4FPS0n2YFWNTmpuWgmAO0ZmFns6t+S/kI9vC8BAj/HcisHW
-         3lVQDpPz00l7gQVPzcHDLfbxzEi64bamSndG/yr02DdYRFcNfhK4GU/ibHODJxq7SX38
-         cPRA==
-X-Forwarded-Encrypted: i=1; AJvYcCV6MhxjwRCVTCVaCk7oq6D7QZHyHczF0rrSlQClZjypGsl98F2qjqsoxM9B1xG2rahaUFAyGEQ6ZgHCo56H@vger.kernel.org, AJvYcCWHCoCTHeQMgF2gNimVKZSvTxgzQe9KG5SMitXo4TwbmyUmpEy3IMNzK81bDd8y4wRhcL37pjZMG4Q=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzyxr58X9BEBPKXqYi/sf+eblEeqyqV8wx70rKs2EUDfFgpkkiS
-	xQ4htwgBfVSaMG74CxYGM9MtTjwY7n3Z6X95Wqdil+LUwET0J1ki
-X-Google-Smtp-Source: AGHT+IFkZaTZJxaNXXPpZuSOVEsTRJR2nEjo5hkiRAfTbYsTwu37oqi4krQ0l4Ej1anGCJLRJlEz4A==
-X-Received: by 2002:a05:6870:5e53:b0:27b:55af:ca2b with SMTP id 586e51a60fabf-295600c5b27mr1930081fac.11.1731045117421;
-        Thu, 07 Nov 2024 21:51:57 -0800 (PST)
-Received: from 1337 (ms-studentunix-nat0.cs.ucalgary.ca. [136.159.16.20])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-724078a7ec7sm2752918b3a.55.2024.11.07.21.51.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 07 Nov 2024 21:51:56 -0800 (PST)
-References: <20241107063042.106228-1-xandfury@gmail.com>
- <464b1628-957a-485b-87d9-47636491de22@infradead.org>
-User-agent: mu4e 1.6.10; emacs 28.1
-From: Abhinav Saxena <xandfury@gmail.com>
-To: Randy Dunlap <rdunlap@infradead.org>
-Cc: linux-kernel-mentees@lists.linuxfoundation.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Jonathan Corbet
- <corbet@lwn.net>, Matthew Wilcox <willy@infradead.org>, Zhihao Cheng
- <chengzhihao1@huawei.com>, Richard Weinberger <richard@nod.at>
-Subject: Re: [PATCH 1/2] Documentation/mm: Fix spelling in hwpoison.rst
-Date: Thu, 07 Nov 2024 22:50:46 -0700
-In-reply-to: <464b1628-957a-485b-87d9-47636491de22@infradead.org>
-Message-ID: <87ed3me0j3.fsf@gmail.com>
+	s=arc-20240116; t=1731051520; c=relaxed/simple;
+	bh=QKoQV9rzxbUvExdR1zo8vScm8DHJmBVckIzULfmkNq8=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=bGn6zqCAOZcOiglM7M5Nqw/VT+vQCcLxMgN1GiQWX4AV1/Od0Vl0PK9wie0PFzBcVUYlLdT6L2lUii33IK3cV9zyACcFjBmSIN8QhbNYDF+Exyg96QhUke3GijET69bi6NhHJSAXM0NRza4ncP/bkWb0CVxjUqovMCw+m3wUBjw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=enneenne.com; spf=pass smtp.mailfrom=enneenne.com; dkim=temperror (0-bit key) header.d=aruba.it header.i=@aruba.it header.b=Css2DYNF; arc=none smtp.client-ip=62.149.156.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=enneenne.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=enneenne.com
+Received: from polimar.everex.local ([79.0.204.227])
+	by Aruba Outgoing Smtp  with ESMTPSA
+	id 9JSetHUHi6epj9JSetjpcz; Fri, 08 Nov 2024 08:31:19 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aruba.it; s=a1;
+	t=1731051079; bh=QKoQV9rzxbUvExdR1zo8vScm8DHJmBVckIzULfmkNq8=;
+	h=From:To:Subject:Date:MIME-Version;
+	b=Css2DYNFJ5B6EdJYZMlVwAsyPJzJiibXDvBc21lQMFqdgePig2rXzsK7ETgbxIPiD
+	 /qcw+gsfMk6nm9jpNTQAPquLREtdsfEW5vtBkE5sZP7+40Mk1+XgM8TlPuFgEBs33f
+	 qE53drtY5Mg/AQwZPJYYNikiJO74w1iGmpqEp1Kwe32I09/vcTjkWwhPGK0SeifLXX
+	 Gy/V9Ox6PEMxjrYALPSAz2EXNQBXeEa6Wxc3EI2BuzJpIIWtAqaSfQbZWYcs84crs/
+	 DkOFXHjXZ8MQMyR7AIufMsODyvuylh0e0973qDloPxAmN3ueGPsTF8Vceq2ls9Xprt
+	 aGUzf2xkm9Kqg==
+From: Rodolfo Giometti <giometti@enneenne.com>
+To: linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+	Greg KH <greg@kroah.com>,
+	corbet@lwn.net,
+	Hall Christopher S <christopher.s.hall@intel.com>,
+	Mohan Subramanian <subramanian.mohan@intel.com>,
+	tglx@linutronix.de,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Dong Eddie <eddie.dong@intel.com>,
+	N Pandith <pandith.n@intel.com>,
+	T R Thejesh Reddy <thejesh.reddy.t.r@intel.com>,
+	Zage David <david.zage@intel.com>,
+	Chinnadurai Srinivasan <srinivasan.chinnadurai@intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
+	Rodolfo Giometti <giometti@enneenne.com>
+Subject: [V3 0/4] Add PPS generators
+Date: Fri,  8 Nov 2024 08:31:11 +0100
+Message-Id: <20241108073115.759039-1-giometti@enneenne.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-CMAE-Envelope: MS4xfIBaUzqGFrtQ02cmwgNzNriiHgUdh/O/4Y9/6+QLfKGpQzi/Oocxj8WMsGcqh/iO4av9lut/DG1WSvh3DgPAhHYOD7lV86qwTd5jtGM1QttjjiMNtePX
+ dcRcId4705JuhB0WwEnU9K3WepmCJYHBUY651kLCkTB7yKE5GJAxvkhziiAT5j5mv4OVak+nP36dggj8EC2jOdTuKRuYhksTzuPbbhNWqIMXhpCGhDrbMIAF
+ vE7ImzH1uTi/QXd/ZUOyaEL0Z/clsji7FIinah41+Z7GSFS4BCt2UEejewlgDWF5lGrRFxMcfg5f0Q3PH4g/rpFr2e7BuwuRitSkub4dxSQ82PWJAPuiU6Dc
+ Cp/8yu5zCpkq63wQb3QbKE4AIUqDSlBjf//8tEhKABPYf4g7A12G4GN1FwFE9PmS+oM3p9z2V6LLba3rf32pGbnsC47fQuG2oYK2qhL3wxuEYQkFkv1m0ABW
+ zHlI8FtFfogevQTB6obZd2Ywv5MowZliZMyYxBq8rSAJfdIRBFGusoOIqnD4WHaub6ASPLaYoltiCte8tUBdg4ElZCFwtc2fctLP+ORmJiRLHNclSAcW/HVW
+ 5DlfSxHbuVa7sTbXg7rI5qleyr3IqrB74o/OHUiHSME+IcjJ9Q3YfshIDl2wdyh0K6EyPZ9cL1IYOfvXXnS+KBzCHTs9RH4nTSul5zz1VYLm8CS7Usz3/iW8
+ QSMcjVVY78Pz8fvHWgiQwkrFk7bM8RtQMD/r9dRoYAiIhYlVDb3AdSxUcHE8HbQrE9fGgDpi7Wc=
 
+PPS generators are special hardware which are able to produce PPS
+(Pulse Per Second) signals.
 
-Randy Dunlap <rdunlap@infradead.org> writes:
+This patchset adds PPS generators class in order to have a well-defined
+interface for these devices.
 
-> On 11/6/24 10:30 PM, Abhinav Saxena wrote:
->> Fix spelling of "focusses" to "focuses" to follow standard English usage.
->>=20
->
-> We accept British spellings.
->
-> internet says:
-> "Both spellings are acceptable in American and British English."
+Changelog:
 
-Ah. I should've checked contributing.rst[1] first. checkpatch.pl flagged it
-for me. I did not look more into it.
+V2 -> V3:
+    * KernelVersion entry added to the Documentation ABI
+    * spelling and/or syntax errors fixed
 
-Thanks for the detailed reply!
+V1 -> V2:
+    * new file Documentation/ABI/testing/sysfs-pps-gen added in MAINTAINERS
+    * date for the documentation ABI set to v6.13 which will be released on 2025-02
+    * removed documentation for non-existent sysfs "name" entry
+    * spelling and/or syntax errors fixed
 
-[1] - Documentation/doc-guide/contributing.rst
+RFC -> V1:
+    * char device reworked (get_device/set_device)
+    * dummy driver has been moved in a separate patch
+    * idr_ replaced with ida_* functions
+    * fixes in include/uapi/linux/pps_gen.h
+    * MAINTAINERS updated
+    * new ioctl PPS_GEN_USESYSTEMCLOCK added
+    * new ioctl PPS_GEN_FETCHEVENT added
+    * .compat_ioctl dropped
+    * WARN_ON() removed from pps_gen_cdev_release()
+    * not needed pr_*() calls removed or replaced with dev_*()
+    * more quite driver
+    * name attribute dropped
+    * white spaces removed
 
->
-> "Focused" is the past tense of the verb "focus" and can also be used as a=
-n adjective to mean clear. For example, "She had a focused approach in trai=
-ning".=20
-> The plural of the noun "focus" can be either "foci" or "focuses".=20
->
->     FOCUS definition and meaning | Collins English Dictionary
->     ), plural, 3rd person singular present tense focuses , focusing , pas=
-t tense, past participle focused language note: The spellings...
->     Collins Dictionary
->
-> Focussed vs Focused | Spelling, Explanation & Examples - QuillBot
-> Sep 10, 2024 =E2=80=94 Published on September 10, 2024 by Trevor Marshall=
-, MSc. Revised on October 29, 2024. Both focussed and focused are ac...
-> QuillBot
-> Spelling Tips: Focused or Focussed? | Australia's Best Writing Tips
-> May 7, 2020 =E2=80=94 Summary: Focused or Focussed? 'Focused' and 'focuss=
-ed' are two spellings of the same word: Focused (one 's') is the sta...
-> getproofed.com.au
->
->     Show all
->
-> "
->> Checkpatch.pl reported this issue.
->>=20
->> Signed-off-by: Abhinav Saxena <xandfury@gmail.com>
->> ---
->>  Documentation/mm/hwpoison.rst | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>=20
->> diff --git a/Documentation/mm/hwpoison.rst b/Documentation/mm/hwpoison.r=
-st
->> index 483b72aa7c11..dd02fae484dc 100644
->> --- a/Documentation/mm/hwpoison.rst
->> +++ b/Documentation/mm/hwpoison.rst
->> @@ -17,7 +17,7 @@ To quote the overview comment::
->>  	hardware as being corrupted usually due to a 2bit ECC memory or cache
->>  	failure.
->>=20=20
->> -	This focusses on pages detected as corrupted in the background.
->> +	This focuses on pages detected as corrupted in the background.
->>  	When the current CPU tries to consume corruption the currently
->>  	running process can just be killed directly instead. This implies
->>  	that if the error cannot be handled for some reason it's safe to
+Rodolfo Giometti (4):
+  drivers pps: add PPS generators support
+  drivers pps/generators: add dummy PPS generator
+  Documentation pps.rst: add PPS generators documentation
+  Documentation ABI: add PPS generators documentation
 
+ Documentation/ABI/testing/sysfs-pps-gen       |  43 +++
+ Documentation/driver-api/pps.rst              |  40 ++
+ .../userspace-api/ioctl/ioctl-number.rst      |   1 +
+ MAINTAINERS                                   |   2 +
+ drivers/pps/Makefile                          |   3 +-
+ drivers/pps/generators/Kconfig                |  22 +-
+ drivers/pps/generators/Makefile               |   4 +
+ drivers/pps/generators/pps_gen-dummy.c        |  96 +++++
+ drivers/pps/generators/pps_gen.c              | 344 ++++++++++++++++++
+ drivers/pps/generators/sysfs.c                |  75 ++++
+ include/linux/pps_gen_kernel.h                |  78 ++++
+ include/uapi/linux/pps_gen.h                  |  37 ++
+ 12 files changed, 743 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-pps-gen
+ create mode 100644 drivers/pps/generators/pps_gen-dummy.c
+ create mode 100644 drivers/pps/generators/pps_gen.c
+ create mode 100644 drivers/pps/generators/sysfs.c
+ create mode 100644 include/linux/pps_gen_kernel.h
+ create mode 100644 include/uapi/linux/pps_gen.h
 
---=20
---=20
-Abhinav Saxena
+-- 
+2.34.1
+
 
