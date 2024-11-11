@@ -1,257 +1,231 @@
-Return-Path: <linux-doc+bounces-30510-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30513-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81C469C485A
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Nov 2024 22:44:02 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E8DE69C4854
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Nov 2024 22:42:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 80153B37941
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Nov 2024 21:07:17 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 00AF9B38FC0
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Nov 2024 21:09:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 93BAB1EABB1;
-	Mon, 11 Nov 2024 20:55:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DA6AC1BD9FC;
+	Mon, 11 Nov 2024 20:55:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="wDSRLfiX"
+	dkim=pass (1024-bit key) header.d=broadcom.com header.i=@broadcom.com header.b="eZn6Py1d"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7389D1E3DDD
-	for <linux-doc@vger.kernel.org>; Mon, 11 Nov 2024 20:55:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C812D1F754C
+	for <linux-doc@vger.kernel.org>; Mon, 11 Nov 2024 20:55:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1731358512; cv=none; b=M+WjDnq4vnQwKZ8PDnBd0R68a+D6CsH6mI82nRSO5GrY5O8bq55dpf0xEzpL0id6qesrDJKbv6wSuvtuju6uI3jGm6joyI3aI597hK0w6OIbSEBo7KA/C0vks52OssFHnupKSZqt/w+S1Bm9lDp7ZCaGOzyuNpFuwptlzyDNRR0=
+	t=1731358531; cv=none; b=VxjunSD9Wq4/G+hEFfA+8/bWviyOFfqULxvmks/At1Ooh2Rt1wp87RzWLa3N0CH31GwSpr1ezF3SATzk5bAug/RdaHn642JuEaUo7i92y3iCAZOXY7rLZUjiC8JyMKbkkOiPsEc8dFdrg6IDOdNIx6WE8TAAK67Vid5LeYYmsfQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1731358512; c=relaxed/simple;
-	bh=BeiMS+xyfmhJj3g3y2WUDREZYbmsnXkNmVasjeb888o=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=m0FaOX4fHFc6xSWvv1X9jfJx34Gtf4znWDpNuoKtrBbzcoI0lqwy4vdyQM5r4Slu1wChpMgCISYuFW7UwZb/vKM7EhJPsWd64pVwe0vupTmxVROVXtckNcbthDRbziOqaTdsYH792rXGQr2KJf5+wVWJbh7tFeZlMM4rXTnjivw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=wDSRLfiX; arc=none smtp.client-ip=209.85.214.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-21145812538so45248795ad.0
-        for <linux-doc@vger.kernel.org>; Mon, 11 Nov 2024 12:55:09 -0800 (PST)
+	s=arc-20240116; t=1731358531; c=relaxed/simple;
+	bh=LgM4AE7Tzv9AeqRy7Q+sooaI9o29H4tTVyGDKuUHyHY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=M2uvW6vSW6mgaIZ0kHUsZ8GX4pzWoo1c+FbOI/DV2KkMoZyez9mrAf2Nyp3QS6zlA5tvsNDpjbQAPVgUkeCAZVeGH21nR9ESy1QRkIPECHHlr9WzTCav2R5J5dBbFQbyKahW4uSz+5WWXy9fqaX1ajYsw+xRVU9qYAD8Ag5lZE8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com; spf=fail smtp.mailfrom=broadcom.com; dkim=pass (1024-bit key) header.d=broadcom.com header.i=@broadcom.com header.b=eZn6Py1d; arc=none smtp.client-ip=209.85.218.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=broadcom.com
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-a9ed7d8d4e0so762266466b.1
+        for <linux-doc@vger.kernel.org>; Mon, 11 Nov 2024 12:55:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1731358509; x=1731963309; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=IhmPwONIKNZXNlLItF/RqS4Q7SWFxV+hpF07L6+CC7I=;
-        b=wDSRLfiXTLsANtCzbQVD60NdSAZpeNTSMlSxgIYX0Zs4EJdEBWbCB5byMnmkjGBxdF
-         FZwA8zuhcrnjOGdVmiEUbdM74QYxti+6qnPYXVweMOEKcizuk4Npc/T4GbhRANUqIDdO
-         jh364JaGidNpvKu5JmJjmPIXazuciE13v1B5ODWbo2bdzwdXlmEzpf30NO9o4dtIS8pk
-         gBXEhJznIGHvuYLOEpt+dS22nGVNqgGGDB5pbiYwK8jOtvvJICpDsTdh4xFTuWrcr5ih
-         fYSa3jf4ic5eC5ea6MNWvg52JTCuzx3gBmr5J3FBVViWa21ytVCQ3YQZswfOEgTjrv1V
-         9xSQ==
+        d=broadcom.com; s=google; t=1731358528; x=1731963328; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=5PzwaJfpjCWLO4jufnqOHdSuICRaS5WL/Td3je3MgZo=;
+        b=eZn6Py1dfumgs1cm6dhEDE1YmLGi3J74BijEyhzL8aDGHwnAclF7mOsMXgUog28FuH
+         ZI8X/Z6w/HKJxtsRVXdTJAJOciZlVF0JxYneHt4YQX/uHtL+85wbFv4x+PfsdwhowN+w
+         yl+UTGGsugdjwNq0G+d7jXtSbgFldcX2bdfVo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731358509; x=1731963309;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1731358528; x=1731963328;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=IhmPwONIKNZXNlLItF/RqS4Q7SWFxV+hpF07L6+CC7I=;
-        b=fcS43zTzAGsrGWoqBwHHzco6qsnC+BiG5rXhiC2i51GGfxvVPACTAAKUiQ/wKpJQES
-         YCg/itpn859KvVXOCdiQqOPaUe1k35FUjm0n8BP9JBZ9AP+Qf6j49ldjA19LQ/i/mQdY
-         HsnJszo7WAD3hC8uJszWXpHnOu5YJtLmk3RLVgEw+ZQcOYIAQTnj3RFsGb/VuWW0fmyy
-         ZQjrleThnj/lYiF+INjeW/w1MTwjGoNz4PXt3ap5FvfuxR+HvX0FNarG0V0DZWGBrYe1
-         QeD+z/0kiIURlPizqJFFIc+JTrDMRoRbxFjH2Ixjatx/icwl1+vfX6GmiNvIDoaanLok
-         6nOw==
-X-Forwarded-Encrypted: i=1; AJvYcCVdmnIgEuWMk2Sr3e1GA/myQl/QjGtFCdXLkBDjbrcgw2KBfQCmGpxUCrGgfbbMWWgiO5LmxAvADNw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwFqDrUDfII0IElycTRm1FSeEdahZDdsM0GgRqcN4rsIwMbf7BQ
-	tIjl7mciFbGRHdyQE3LKxy+Q5PC3E6VSjq/GjUpB7qjyg/N0DvGmF8bjsYM5xYg=
-X-Google-Smtp-Source: AGHT+IF0EBbCrqmpMhAGCsvP469pTxbIurWJLKmyeQcT28uswVwp6gE4Luabd0L5cnP4I+jH5QjLew==
-X-Received: by 2002:a17:90b:4a87:b0:2e2:aef9:8f60 with SMTP id 98e67ed59e1d1-2e9b14ddb3bmr18445116a91.0.1731358508607;
-        Mon, 11 Nov 2024 12:55:08 -0800 (PST)
-Received: from debug.ba.rivosinc.com ([64.71.180.162])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2e9a5fd1534sm9059974a91.42.2024.11.11.12.55.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 Nov 2024 12:55:08 -0800 (PST)
-From: Deepak Gupta <debug@rivosinc.com>
-Date: Mon, 11 Nov 2024 12:54:12 -0800
-Subject: [PATCH v8 27/29] riscv: Documentation for landing pad / indirect
- branch tracking
+        bh=5PzwaJfpjCWLO4jufnqOHdSuICRaS5WL/Td3je3MgZo=;
+        b=P4VlScMsOxZAXWjWIQJY32k6NHrCl5E7Nar2uAU4Zj69HPCBLIPQrq7ByfgssU5y92
+         ubcqfTRWvsuwt6UVgw8+2L+iRgrlvZ7VkYn1mFArHkDxA/NZZleYglRBF87C5hnN9rCc
+         TbjBZGOn4OcZ3qx1sN17og3JWFWsdpqd2LzluHm/MsxeHJqR0ePurreC4QcpM59zz8kn
+         eCAoVK8BIDDdRngHkk8k9sQ1oUQWxpKGaSu5OFVZbyv5TAkaY8yxQaIrgth7v5Bvreut
+         jL1xDP8m7golwQq5sqXgVYDhUoXHN4UOEAEjLhHrVIVr/kA/Dbh912ek1XliQRl77mCZ
+         wAig==
+X-Forwarded-Encrypted: i=1; AJvYcCVkxhDwXcQ6HSF4w8eucICPLMQhJgPILF+vo62XEbLSoJiJCtvhcKMdgBNEoJy3TO1Ro5LuWtoCBXI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzYm1GyeAC3mu9EIimDKjHqMlmzO6k86DVBr5YH/2gMkuZZN7Gy
+	2NwUXtJuyjnLL0gKJvx90r23kbZxz4zXtwIcgzvf2mHfjy3Ouv0247W3IWlq0WYH8lKZKxd/3wi
+	xbEKrcDfkdJ7JXdiqZXeYB7y4aCymwXMnLQq9ZDwZwHGz344KYeU6gSFPKN38xErv0B/7BPLh01
+	StEgQ0fjgyuoqbe0y7ZMGusg==
+X-Google-Smtp-Source: AGHT+IHtHJN2wlO/dS5Ho/xwNaDeL38A3oTas8GP+XhFN9vBlIEyqtN762oFpzrjya5bJyQoWb9F5Nm6P8AF1PfXcNY=
+X-Received: by 2002:a17:907:2cc7:b0:a9e:6e77:3ecd with SMTP id
+ a640c23a62f3a-a9ef00191a8mr1012446866b.54.1731358527999; Mon, 11 Nov 2024
+ 12:55:27 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241111-v5_user_cfi_series-v8-27-dce14aa30207@rivosinc.com>
-References: <20241111-v5_user_cfi_series-v8-0-dce14aa30207@rivosinc.com>
-In-Reply-To: <20241111-v5_user_cfi_series-v8-0-dce14aa30207@rivosinc.com>
-To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, 
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
- Andrew Morton <akpm@linux-foundation.org>, 
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
- Vlastimil Babka <vbabka@suse.cz>, 
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
- Paul Walmsley <paul.walmsley@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
- Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
- Christian Brauner <brauner@kernel.org>, 
- Peter Zijlstra <peterz@infradead.org>, Oleg Nesterov <oleg@redhat.com>, 
- Eric Biederman <ebiederm@xmission.com>, Kees Cook <kees@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
- linux-mm@kvack.org, linux-riscv@lists.infradead.org, 
- devicetree@vger.kernel.org, linux-arch@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- alistair.francis@wdc.com, richard.henderson@linaro.org, jim.shu@sifive.com, 
- andybnac@gmail.com, kito.cheng@sifive.com, charlie@rivosinc.com, 
- atishp@rivosinc.com, evan@rivosinc.com, cleger@rivosinc.com, 
- alexghiti@rivosinc.com, samitolvanen@google.com, broonie@kernel.org, 
- rick.p.edgecombe@intel.com, Deepak Gupta <debug@rivosinc.com>
-X-Mailer: b4 0.14.0
+References: <20241030033514.1728937-1-zack.rusin@broadcom.com>
+ <20241030033514.1728937-3-zack.rusin@broadcom.com> <CABgObfaRP6zKNhrO8_atGDLcHs=uvE0aT8cPKnt_vNHHM+8Nxg@mail.gmail.com>
+ <CABQX2QMR=Nsn23zojFdhemR7tvGUz6_UM8Rgf6WLsxwDqoFtxg@mail.gmail.com>
+ <Zy0__5YB9F5d0eZn@google.com> <CABQX2QNxFDhH1frsGpSQjSs3AWSdTibkxPrjq1QC7FGZC8Go-Q@mail.gmail.com>
+ <e3f943a7-a40a-45cb-b0d9-e3ed58344d8b@redhat.com> <CADH9ctD1uf_yBA3NXNQu7TJa_TPhLRN=0YZ3j2gGhgmaFRdCFg@mail.gmail.com>
+ <c3026876-8061-4ab2-9321-97cc05bad510@redhat.com>
+In-Reply-To: <c3026876-8061-4ab2-9321-97cc05bad510@redhat.com>
+From: Doug Covelli <doug.covelli@broadcom.com>
+Date: Mon, 11 Nov 2024 15:55:17 -0500
+Message-ID: <CADH9ctBivnvP1tNcatLKzd8EDz8Oo6X65660j8ccxYzk3aFzCA@mail.gmail.com>
+Subject: Re: [PATCH 2/3] KVM: x86: Add support for VMware guest specific hypercalls
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Zack Rusin <zack.rusin@broadcom.com>, Sean Christopherson <seanjc@google.com>, kvm@vger.kernel.org, 
+	Jonathan Corbet <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, 
+	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Shuah Khan <shuah@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
+	Arnaldo Carvalho de Melo <acme@redhat.com>, Isaku Yamahata <isaku.yamahata@intel.com>, 
+	Joel Stanley <joel@jms.id.au>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Adding documentation on landing pad aka indirect branch tracking on riscv
-and kernel interfaces exposed so that user tasks can enable it.
+On Mon, Nov 11, 2024 at 1:49=E2=80=AFPM Paolo Bonzini <pbonzini@redhat.com>=
+ wrote:
+>
+> On 11/9/24 22:11, Doug Covelli wrote:
+> > On Sat, Nov 9, 2024 at 1:20=E2=80=AFPM Paolo Bonzini <pbonzini@redhat.c=
+om> wrote:
+> >> On 11/8/24 06:03, Zack Rusin wrote:
+> >>>>> There's no spec but we have open headers listing the hypercalls.
+> >>>>> There's about a 100 of them (a few were deprecated), the full
+> >>>>> list starts here:
+> >>>>> https://github.com/vmware/open-vm-tools/blob/739c5a2f4bfd4cdda491e6=
+a6f6869d88c0bd6972/open-vm-tools/lib/include/backdoor_def.h#L97
+> >>>>> They're not well documented, but the names are pretty self-explenat=
+ory.
+> >>>>
+> >>>> At a quick glance, this one needs to be handled in KVM:
+> >>>>
+> >>>>     BDOOR_CMD_VCPU_MMIO_HONORS_PAT
+> >>>>
+> >>>> and these probably should be in KVM:
+> >>>>
+> >>>>     BDOOR_CMD_GETTIME
+> >>>>     BDOOR_CMD_SIDT
+> >>>>     BDOOR_CMD_SGDT
+> >>>>     BDOOR_CMD_SLDT_STR
+> >>>>     BDOOR_CMD_GETTIMEFULL
+> >>>>     BDOOR_CMD_VCPU_LEGACY_X2APIC_OK
+> >>>>     BDOOR_CMD_STEALCLOCK
+> >>>
+> >>> I'm not sure if there's any value in implementing a few of them.
+> >>
+> >> The value is that some of these depend on what the hypervisor does, no=
+t
+> >> on what userspace does.  For Hypervisor.framework you have a lot of
+> >> leeway, for KVM and Hyper-V less so. [..] From the KVM maintainers'
+> >> point of view, the feature you're adding might be used by others and
+> >> not just VMware Workstation.  Microsoft and Apple might see things
+> >> differently (Apple in particular has a much thinner wrapper around
+> >> the processor's virtualization capbilities).
+> >
+> > [...]
+> >
+> > the SGDT/SLDT/STR/SIDT backdoor calls these were added > 20
+> > years ago for SW that used these instructions from CPL3 which did not
+> > work well before VT/SVM were introduced.  These are really of no use
+> > on modern CPUs and will be blocked if the guest OS has enabled UMIP.
+> > [...]
+> >
+> > For stolen time the backdoor call is [...] currently
+> > really only supported by ESX (and only currently used by Photon OS) so
+> > I don't think adding that support to KVM is critical.
+>
+> Sounds good.  All I want is ensuring that someone with access to the
+> spec did the exercise.
+>
+> Still guessing, but for MMIO_HONORS_PAT we probably want to add a
+> separate KVM_CHECK_EXTENSION capability.
+>
+> Is BDOOR_CMD_VCPU_LEGACY_X2APIC_OK something where you can just return a
+> constant?
+>
+> This leaves just GETTIME and GETTIMEFULL.  If four hypercalls require
+> some care in the hypervisor (which may or may not be an in-kernel
+> implementation), that's not bad.  Can you share a bit more about these fo=
+ur?
 
-Signed-off-by: Deepak Gupta <debug@rivosinc.com>
----
- Documentation/arch/riscv/index.rst   |   1 +
- Documentation/arch/riscv/zicfilp.rst | 115 +++++++++++++++++++++++++++++++++++
- 2 files changed, 116 insertions(+)
+BDOOR_CMD_VCPU_MMIO_HONORS_PAT and BDOOR_CMD_VCPU_LEGACY_X2APIC_OK are not
+actually backdoor calls - they are flags returned by BDOOR_CMD_GET_VCPU_INF=
+O.
 
-diff --git a/Documentation/arch/riscv/index.rst b/Documentation/arch/riscv/index.rst
-index eecf347ce849..be7237b69682 100644
---- a/Documentation/arch/riscv/index.rst
-+++ b/Documentation/arch/riscv/index.rst
-@@ -14,6 +14,7 @@ RISC-V architecture
-     uabi
-     vector
-     cmodx
-+    zicfilp
- 
-     features
- 
-diff --git a/Documentation/arch/riscv/zicfilp.rst b/Documentation/arch/riscv/zicfilp.rst
-new file mode 100644
-index 000000000000..a188d78fcde6
---- /dev/null
-+++ b/Documentation/arch/riscv/zicfilp.rst
-@@ -0,0 +1,115 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+:Author: Deepak Gupta <debug@rivosinc.com>
-+:Date:   12 January 2024
-+
-+====================================================
-+Tracking indirect control transfers on RISC-V Linux
-+====================================================
-+
-+This document briefly describes the interface provided to userspace by Linux
-+to enable indirect branch tracking for user mode applications on RISV-V
-+
-+1. Feature Overview
-+--------------------
-+
-+Memory corruption issues usually result in to crashes, however when in hands of
-+an adversary and if used creatively can result into variety security issues.
-+
-+One of those security issues can be code re-use attacks on program where adversary
-+can use corrupt function pointers and chain them together to perform jump oriented
-+programming (JOP) or call oriented programming (COP) and thus compromising control
-+flow integrity (CFI) of the program.
-+
-+Function pointers live in read-write memory and thus are susceptible to corruption
-+and allows an adversary to reach any program counter (PC) in address space. On
-+RISC-V zicfilp extension enforces a restriction on such indirect control
-+transfers:
-+
-+- indirect control transfers must land on a landing pad instruction ``lpad``.
-+  There are two exception to this rule:
-+
-+  - rs1 = x1 or rs1 = x5, i.e. a return from a function and returns are
-+    protected using shadow stack (see zicfiss.rst)
-+
-+  - rs1 = x7. On RISC-V compiler usually does below to reach function
-+    which is beyond the offset possible J-type instruction::
-+
-+      auipc x7, <imm>
-+      jalr (x7)
-+
-+	Such form of indirect control transfer are still immutable and don't rely
-+    on memory and thus rs1=x7 is exempted from tracking and considered software
-+    guarded jumps.
-+
-+``lpad`` instruction is pseudo of ``auipc rd, <imm_20bit>`` with ``rd=x0`` and
-+is a HINT nop. ``lpad`` instruction must be aligned on 4 byte boundary and
-+compares 20 bit immediate withx7. If ``imm_20bit`` == 0, CPU don't perform any
-+comparision with ``x7``. If ``imm_20bit`` != 0, then ``imm_20bit`` must match
-+``x7`` else CPU will raise ``software check exception`` (``cause=18``) with
-+``*tval = 2``.
-+
-+Compiler can generate a hash over function signatures and setup them (truncated
-+to 20bit) in x7 at callsites and function prologues can have ``lpad`` with same
-+function hash. This further reduces number of program counters a call site can
-+reach.
-+
-+2. ELF and psABI
-+-----------------
-+
-+Toolchain sets up :c:macro:`GNU_PROPERTY_RISCV_FEATURE_1_FCFI` for property
-+:c:macro:`GNU_PROPERTY_RISCV_FEATURE_1_AND` in notes section of the object file.
-+
-+3. Linux enabling
-+------------------
-+
-+User space programs can have multiple shared objects loaded in its address space
-+and it's a difficult task to make sure all the dependencies have been compiled
-+with support of indirect branch. Thus it's left to dynamic loader to enable
-+indirect branch tracking for the program.
-+
-+4. prctl() enabling
-+--------------------
-+
-+:c:macro:`PR_SET_INDIR_BR_LP_STATUS` / :c:macro:`PR_GET_INDIR_BR_LP_STATUS` /
-+:c:macro:`PR_LOCK_INDIR_BR_LP_STATUS` are three prctls added to manage indirect
-+branch tracking. prctls are arch agnostic and returns -EINVAL on other arches.
-+
-+* prctl(PR_SET_INDIR_BR_LP_STATUS, unsigned long arg)
-+
-+If arg1 is :c:macro:`PR_INDIR_BR_LP_ENABLE` and if CPU supports ``zicfilp``
-+then kernel will enabled indirect branch tracking for the task. Dynamic loader
-+can issue this :c:macro:`prctl` once it has determined that all the objects
-+loaded in address space support indirect branch tracking. Additionally if there
-+is a `dlopen` to an object which wasn't compiled with ``zicfilp``, dynamic
-+loader can issue this prctl with arg1 set to 0 (i.e.
-+:c:macro:`PR_INDIR_BR_LP_ENABLE` being clear)
-+
-+* prctl(PR_GET_INDIR_BR_LP_STATUS, unsigned long arg)
-+
-+Returns current status of indirect branch tracking. If enabled it'll return
-+:c:macro:`PR_INDIR_BR_LP_ENABLE`
-+
-+* prctl(PR_LOCK_INDIR_BR_LP_STATUS, unsigned long arg)
-+
-+Locks current status of indirect branch tracking on the task. User space may
-+want to run with strict security posture and wouldn't want loading of objects
-+without ``zicfilp`` support in it and thus would want to disallow disabling of
-+indirect branch tracking. In that case user space can use this prctl to lock
-+current settings.
-+
-+5. violations related to indirect branch tracking
-+--------------------------------------------------
-+
-+Pertaining to indirect branch tracking, CPU raises software check exception in
-+following conditions:
-+
-+- missing ``lpad`` after indirect call / jmp
-+- ``lpad`` not on 4 byte boundary
-+- ``imm_20bit`` embedded in ``lpad`` instruction doesn't match with ``x7``
-+
-+In all 3 cases, ``*tval = 2`` is captured and software check exception is
-+raised (``cause=18``)
-+
-+Linux kernel will treat this as :c:macro:`SIGSEV`` with code =
-+:c:macro:`SEGV_CPERR` and follow normal course of signal delivery.
+BDOOR_CMD_VCPU_MMIO_HONORS_PAT is only ever set to 1 on ESX as it is only
+relevant for PCI passthru which is not supported on Linux/Windows/macOS.  I=
+IRC
+this was added over 10 years ago for some Infiniband device vendor to use i=
+n
+their driver although I'm not sure that ever materialized.
 
--- 
-2.45.0
+BDOOR_CMD_VCPU_LEGACY_X2APIC_OK indicates if it is OK to use x2APIC w/o
+interrupt remapping (e.g a virtual IOMMU).  I'm not sure if KVM supports th=
+is
+but I think this one can be set to TRUE unconditionally as we have no plans=
+ to
+use KVM_CREATE_IRQCHIP - if anything we would use KVM_CAP_SPLIT_IRQCHIP alt=
+hough
+my preference would be to handle all APIC/IOAPIC/PIC emulation ourselves
+provided we can avoid CR8 exits but that is another discussion.
 
+For now I think it makes sense to handle BDOOR_CMD_GET_VCPU_INFO at userlev=
+el
+like we do on Windows and macOS.
+
+BDOOR_CMD_GETTIME/BDOOR_CMD_GETTIMEFULL are similar with the former being
+deprecated in favor of the latter.  Both do essentially the same thing whic=
+h is
+to return the host OS's time - on Linux this is obtained via gettimeofday. =
+ I
+believe this is mainly used by tools to fix up the VM's time when resuming =
+from
+suspend.  I think it is fine to continue handling these at userlevel.
+
+Doug
+
+> >> Anyway, one question apart from this: is the API the same for the I/O
+> >> port and hypercall backdoors?
+> >
+> > Yeah the calls and arguments are the same.  The hypercall based
+> > interface is an attempt to modernize the backdoor since as you pointed
+> > out the I/O based interface is kind of hacky as it bypasses the normal
+> > checks for an I/O port access at CPL3.  It would be nice to get rid of
+> > it but unfortunately I don't think that will happen in the foreseeable
+> > future as there are a lot of existing VMs out there with older SW that
+> > still uses this interface.
+>
+> Yeah, but I think it still justifies that the KVM_ENABLE_CAP API can
+> enable the hypercall but not the I/O port.
+>
+> Paolo
+>
+
+--=20
+This electronic communication and the information and any files transmitted=
+=20
+with it, or attached to it, are confidential and are intended solely for=20
+the use of the individual or entity to whom it is addressed and may contain=
+=20
+information that is confidential, legally privileged, protected by privacy=
+=20
+laws, or otherwise restricted from disclosure to anyone else. If you are=20
+not the intended recipient or the person responsible for delivering the=20
+e-mail to the intended recipient, you are hereby notified that any use,=20
+copying, distributing, dissemination, forwarding, printing, or copying of=
+=20
+this e-mail is strictly prohibited. If you received this e-mail in error,=
+=20
+please return the e-mail to the sender, delete it from your computer, and=
+=20
+destroy any printed copy of it.
 
