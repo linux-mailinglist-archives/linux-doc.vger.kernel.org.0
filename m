@@ -1,133 +1,137 @@
-Return-Path: <linux-doc+bounces-30582-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30585-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91D839C62BE
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 21:42:31 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76DA69C622B
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 21:08:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0B40FB2C0D7
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 20:01:13 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3B4B7283B39
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 20:08:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6C1F6217F47;
-	Tue, 12 Nov 2024 20:01:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C7EA5219C9E;
+	Tue, 12 Nov 2024 20:08:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="gydRKv/b"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="R6Jsvxhs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com [209.85.219.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8E501A76D2;
-	Tue, 12 Nov 2024 20:01:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2114D218D7C
+	for <linux-doc@vger.kernel.org>; Tue, 12 Nov 2024 20:08:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1731441666; cv=none; b=G5i5rhoVeeS6oNs+LWp7tSfwySo5b3WYGQvXPxeKUitA7UXykyhLskXBC421X7dDKT07ClZ1nwpkcq9zR0/7wCTUtK2S6dZ4K30n8H4LkjNcjS0bpvkfyY4hr56TQI6cFRqQdkabvjV3bNSo9AUtXGW8d+oXaAihjtYFiLc6cfY=
+	t=1731442085; cv=none; b=CMXnRv4eEWYOrxOm3cToUnK12B7oQt+UESAkDpYlpXdwjtMGFrf3wvJdz2q85O7EpqiGEGyT2gIYq6DU9L9SqFKwaE3mxs4CC+KfXd9PYnfixCOFgm8qDLXGlRI9rR2ZSd0XhSkAGUdQPKL6uSXJEVS93/+gR3tbb2QQdNVa67g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1731441666; c=relaxed/simple;
-	bh=RXwZmyHbDcELcc1EhrddiOHZqNAKbFxq8U7X31wbOAE=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=D4LZ3YVyYr+nBol354LmkDj4BTumA5nflUCtAMsq/hyNhabnRc0eQPUcgSDIHDIojHjM8VVQi2OX5L/EARqwIfAeKVlYadR6D6vDz5q2B4ZmwkVtoUX90lN00stsl7e7Zuj4CDx5aMXWY9+LQNnd7hmM17jRrDFNiA9gs4XSHW0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=gydRKv/b; arc=none smtp.client-ip=148.163.158.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4ACJe5oA018239;
-	Tue, 12 Nov 2024 20:00:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=hbhBz1
-	Oy+jKfbQqQt1BOFteePij3tic9j7u6NDmqbSE=; b=gydRKv/bl1JXnA+Sr18U47
-	VgT1tad+1a0+t4+ElPb5Pk13SX5CgXmxqiu2C2w5s/BO6F6kiYr5aQnY9AQbGIJ0
-	ERJV0eLPznDa1CKYM7mwAoVUQTuP4Np9i0rE+DatzGEBSPB0D3xiBvHKByh5W6+s
-	akYUR35F4FPw5vxaqFoGebU4qREtUqp003vT2yLjzS9q6MY3synIJajiZO3C+jGh
-	IygVhaN1LaCPE6CxlQNms0xoIBqdbhBPmYsHtOzYJWxF6OS0PixVwhemaLc6P9gS
-	aIJwLwAO6IzNvVwsZTubcqkc81GDVJLQTvUvmh+4xy7vCgs1cBszCVNBYxwktFhw
-	==
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 42vdcer2kf-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 12 Nov 2024 20:00:40 +0000 (GMT)
-Received: from m0360072.ppops.net (m0360072.ppops.net [127.0.0.1])
-	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 4ACK0eRb026341;
-	Tue, 12 Nov 2024 20:00:40 GMT
-Received: from ppma23.wdc07v.mail.ibm.com (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 42vdcer2kb-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 12 Nov 2024 20:00:40 +0000 (GMT)
-Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma23.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 4ACJ6a5b029721;
-	Tue, 12 Nov 2024 20:00:39 GMT
-Received: from smtprelay02.dal12v.mail.ibm.com ([172.16.1.4])
-	by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 42tkjkvn0k-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 12 Nov 2024 20:00:39 +0000
-Received: from smtpav05.dal12v.mail.ibm.com (smtpav05.dal12v.mail.ibm.com [10.241.53.104])
-	by smtprelay02.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 4ACK0dUk44761372
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 12 Nov 2024 20:00:39 GMT
-Received: from smtpav05.dal12v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 1786258052;
-	Tue, 12 Nov 2024 20:00:39 +0000 (GMT)
-Received: from smtpav05.dal12v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 89AE258056;
-	Tue, 12 Nov 2024 20:00:38 +0000 (GMT)
-Received: from li-43857255-d5e6-4659-90f1-fc5cee4750ad.ibm.com (unknown [9.31.103.152])
-	by smtpav05.dal12v.mail.ibm.com (Postfix) with ESMTP;
-	Tue, 12 Nov 2024 20:00:38 +0000 (GMT)
-Message-ID: <6679269b50c54bc9796fa4093ff8bbdbced26148.camel@linux.ibm.com>
-Subject: Re: [PATCH v2] tpm: Opt-in in disable PCR integrity protection
-From: Mimi Zohar <zohar@linux.ibm.com>
-To: Jarkko Sakkinen <jarkko@kernel.org>,
-        James Bottomley
- <James.Bottomley@HansenPartnership.com>,
-        linux-integrity@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Peter Huewe <peterhuewe@gmx.de>, Jason
- Gunthorpe <jgg@ziepe.ca>
-Cc: Roberto Sassu <roberto.sassu@huawei.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Date: Tue, 12 Nov 2024 15:00:38 -0500
-In-Reply-To: <D5KE7X6LMR5Z.AA8PPWDBPQP7@kernel.org>
-References: <20241107095138.78209-1-jarkko@kernel.org>
-	 <76d9ae11c339b589a8ec94f010e7439b7ce7d283.camel@HansenPartnership.com>
-	 <D5FZT0QPHL0O.231WD6VUHC48X@kernel.org>
-	 <10296fd8b0fcbf1d813577ef41738ffea12b70d1.camel@HansenPartnership.com>
-	 <dd51366e50de86e8a6002f2f53801c53a9b770f3.camel@linux.ibm.com>
-	 <D5KE7X6LMR5Z.AA8PPWDBPQP7@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.4 (3.52.4-1.fc40) 
+	s=arc-20240116; t=1731442085; c=relaxed/simple;
+	bh=RHZ3bzWQ32ir8dvykH3nttL8q/pnHAH4dgFUQF3xSZc=;
+	h=Date:Mime-Version:Message-ID:Subject:From:To:Cc:Content-Type; b=W5fjudWoTsyX0ZPKJtLmp0yKR9vKQsLbWgbNP3c69f2KaKkzc2tCicBT1cAKQFPvl3sB/XclQLJ9/vSdf4KCO2pAKe6iJMYqCcf/Zbffp2Of+5M+3r8AGHqHf5FLRFpkMCPmqYYBq9wmSlUwkOfJqhJ7yMfD2dBL6Ot3jgy7Q8g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--rmoar.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=R6Jsvxhs; arc=none smtp.client-ip=209.85.219.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--rmoar.bounces.google.com
+Received: by mail-yb1-f201.google.com with SMTP id 3f1490d57ef6-e02fff66a83so9529025276.0
+        for <linux-doc@vger.kernel.org>; Tue, 12 Nov 2024 12:08:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1731442083; x=1732046883; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=TNJMf/dEdEXGOQzVC+DsIsgZe/E51V+ULiXsqRjRICw=;
+        b=R6Jsvxhs4K7870mi+/AOrewXYL5We9lpDjFQYs1fUicKEGk9ReOwxhnAJxgd1BgEOS
+         PNkV2JzLsJm+IbMrFbKL9XJ9VMd2g8SahE1Qec5NYM4dW/BBkVXiT/yF71twc3ldOOye
+         lS6aKRrHW0JXE+d3NgS1dHQLvALI7v+2zjMz/7eWJf6biIxC6PROPEIrsteycmOTXdbc
+         gb+Fx36wKGlTNpEiiYe/otl3Ra/F457Y4S0IaVd0XeW4UVIp2HhrZyUSKjYxlKWTJ9zg
+         /Hzy0BBoIzNS2qv1Ol8m3W3rXeSbgfTS+WtGXOwVIPW3E/K5ygsu444yTxlRq3FmhEEV
+         QmRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731442083; x=1732046883;
+        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=TNJMf/dEdEXGOQzVC+DsIsgZe/E51V+ULiXsqRjRICw=;
+        b=cXwc9BGJbfMtoW5jblR9ec0ZfDqgibnNdcsbvVXlgEsT0FiltieKiYgErtnNx3oLmB
+         5VwuXX7ywqyxnF4XNudDbMTZVPyHS5PVLGnWniJnKERF7EFkC2SeJ57XxvuCLSsr9qSU
+         /XQhjmPAUCnuc9IfqzJ7B77A0SGuX419lVgYICZtog6Ehn+9MqFBH8OO7zlYHwcv/Vzi
+         mcn+lDEIwXp3xbbiOlkT0jd67zeHU2GcNzycpfaYNVU1ZTiJbk7VS38u0/9p3ZRcsRm/
+         NRsLD5cYWhhy+shQwo7NxZvTg/ZxN8yAViP7eGE/rmrZuE8jjOLeKjdTyTDiaLrHRlXd
+         M4FQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX4X597YB6y6yVro3sr1XjtLKN0XNItIfluAJ1Lj9ILpaP3nFdiDfkP8WHHNLH846Bfd6VFiH0slIA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxkSxCU237FptMro+ufo6b7EZ+jciMtDmgPopH2t1UcqBtTBSRZ
+	zo0PSSIfwcMUczNk3ngK96ao5mhavqGnPMSc5qO3n5ss5PYKFCNStIephhypRrSgDh4OS4lnCQ=
+	=
+X-Google-Smtp-Source: AGHT+IGWbxSkKKXBUo0jXvLY76zHqclSM/Sk5GYrZs492hudc1yUtPuCSAnoXDL51XUAfvEFlt5QUI6Nfw==
+X-Received: from rmoar-specialist.c.googlers.com ([fda3:e722:ac3:cc00:d3:4d64:ac12:6a5d])
+ (user=rmoar job=sendgmr) by 2002:a25:ef03:0:b0:e30:be64:f7e6 with SMTP id
+ 3f1490d57ef6-e35ecdea920mr175276.3.1731442082279; Tue, 12 Nov 2024 12:08:02
+ -0800 (PST)
+Date: Tue, 12 Nov 2024 20:07:43 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: BSxIN89-wLj06R1EaXcmpdmF9rfiGIG-
-X-Proofpoint-ORIG-GUID: HMTXxOC6vnppCo9_9Vox7GchxXXu5dm1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
- definitions=2024-10-15_01,2024-10-11_01,2024-09-30_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 phishscore=0
- spamscore=0 clxscore=1015 malwarescore=0 mlxlogscore=534
- priorityscore=1501 bulkscore=0 mlxscore=0 impostorscore=0 suspectscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2409260000 definitions=main-2411120157
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.47.0.277.g8800431eea-goog
+Message-ID: <20241112200748.791828-1-rmoar@google.com>
+Subject: [PATCH 0/5] release of KTAP version 2
+From: Rae Moar <rmoar@google.com>
+To: frowand.list@gmail.com, davidgow@google.com, keescook@chromium.org, 
+	Tim.Bird@sony.com, shuah@kernel.org, brendanhiggins@google.com
+Cc: tytso@google.com, gustavo.padovan@collabora.com, 
+	ricardo.canuelo@collabora.com, corbet@lwn.net, kernelci@lists.linux.dev, 
+	linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Rae Moar <rmoar@google.com>
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 2024-11-12 at 19:57 +0200, Jarkko Sakkinen wrote:
-> On Mon Nov 11, 2024 at 9:53 PM EET, Mimi Zohar wrote:
-> > > The original open coded the empty auth append with struct
-> > > tpm2_null_auth since it's the only user.  However, since we do have
-> > > another user in trusted keys, it might make sense to consolidate.
-> >=20
-> > Instead of delaying the current patch from being upstreamed, perhaps th=
-is change
-> > can be deferred?
->=20
-> Yes.
+This patch series represents the final release of KTAP version 2.
 
-Thanks.  As soon as you repost the patch, I'll re-test.
+There have been having open discussions on version 2 for just over 2
+years. This patch series marks the end of KTAP version 2 development
+and beginning of the KTAP version 3 development.
 
-Mimi
+The largest component of KTAP version 2 release is the addition of test
+metadata to the specification. KTAP metadata could include any test
+information that is pertinent for user interaction before or after the
+running of the test. For example, the test file path or the test speed.
+
+Example of KTAP Metadata:
+
+ KTAP version 2
+ #:ktap_test: main
+ #:ktap_arch: uml
+ 1..1
+     KTAP version 2
+     #:ktap_test: suite_1
+     #:ktap_subsystem: example
+     #:ktap_test_file: lib/test.c
+     1..2
+     ok 1 test_1
+     #:ktap_test: test_2
+     #:ktap_speed: very_slow
+     # test_2 has begun
+     #:custom_is_flaky: true
+     ok 2 test_2
+ # suite_1 has passed
+ ok 1 suite_1
+
+The release also includes some formatting fixes and changes to update
+the specification to version 2.
+
+Frank Rowand (2):
+  ktap_v2: change version to 2-rc in KTAP specification
+  ktap_v2: change "version 1" to "version 2" in examples
+
+Rae Moar (3):
+  ktap_v2: add test metadata
+  ktap_v2: formatting fixes to ktap spec
+  ktap_v2: change version to 2 in KTAP specification
+
+ Documentation/dev-tools/ktap.rst | 276 +++++++++++++++++++++++++++++--
+ 1 file changed, 260 insertions(+), 16 deletions(-)
+
+
+base-commit: 2d5404caa8c7bb5c4e0435f94b28834ae5456623
+-- 
+2.47.0.277.g8800431eea-goog
+
 
