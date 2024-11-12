@@ -1,94 +1,127 @@
-Return-Path: <linux-doc+bounces-30583-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30589-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35C6D9C6441
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 23:27:31 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5461D9C64CF
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Nov 2024 00:05:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 3A07CB2C6CF
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 20:07:24 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E7B94BC0450
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 20:09:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E3D6F218D7C;
-	Tue, 12 Nov 2024 20:07:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 71604219CB6;
+	Tue, 12 Nov 2024 20:08:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="bM22XmXE"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="XZ51q6Xs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com [209.85.219.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF0FB217472;
-	Tue, 12 Nov 2024 20:07:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D078E21A4DA
+	for <linux-doc@vger.kernel.org>; Tue, 12 Nov 2024 20:08:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1731442037; cv=none; b=mR3PJfFJxNRRQO5Vl25LdhXB9/H++/nAJ5bxpIPmH7JN9Cvnrdp2Td9FFUVHTcjh8iT4ZwQVmNNiHq7XjRU6WITPBaLOGyOO6cZptW5Xy4qgai0boMnbVy+obK2XDPfyPtYnajtJXIS5NIWyKNmxTBqtchQweAGVdY55Nz5liXo=
+	t=1731442098; cv=none; b=hsMbnDOUDY2/K+aGBmQHWSiX4Vh7W1mUB0gs+H7Ngdz0G6nPOap3rHREiMJqPlsE3kXWR7O05RuMds2ExcoGSvn0NzLp6oeCFHHT3+pm5d6CMlbEURymtZ9I+v2xuob1YrUSBT+nLf4t8ORGdl72S2gLlwZXjXlAcB1ugma1t5w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1731442037; c=relaxed/simple;
-	bh=VN4DPZ/Ubeh3yRvty7vLKSmzphCNXMsWhZKtu8onML8=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=NjvHHsOkyA3zbVolDvN+vTvfwzmLyD8IOusea/ZmaA3BN9yTlb+7DodklxpGrTvnCWswJwZdBZtERxYpwhB2DQ7r9HxH+0Jp3wdi3A3+lXWwL6aVzdGl9X2aRDjN0tM/tTrngNlpfFnG/5nR49vo5/EDZRhLgqqJUya6CYZFRvs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=bM22XmXE; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net D3E66403E4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1731442029; bh=u02gc8HT0igfeDobZAawC06098CdEuav8BmYMyCYA70=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=bM22XmXEfD+b/s4fGla3r+FP9+37fjjLLmC3Jv9po3J7gvVjV2VcKaOIVIGSzQ2fz
-	 scZDvVLPZ9+pE4lP1qedM12m9uK3WjDZks0AWQes/XqF2cV8LypoXvzO0n8nhM4auy
-	 ZxmVlqKsCgbPRqdTo3Q8ZX+BP/O+d/+qsq9Rw8hBf0t0NbX/lJvDX2auOpDWQ41YHp
-	 2XWPA/j1TX4MGm+3j5tlMnQGYGS+KL6ZEuHTNx0xshP6G8o55oYgkVCxMH5OGD7HiF
-	 TxGdC62h16ShwQpSqtkC8BgnDqYjNQfHurT965EhCC/Cq6YK5X+3kM1DtpOkAK6Tj/
-	 AmaCjMFJ7PFoA==
-Received: from localhost (unknown [IPv6:2601:280:5e00:625::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id D3E66403E4;
-	Tue, 12 Nov 2024 20:07:08 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Thorsten Leemhuis <linux@leemhuis.info>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-next@vger.kernel.org, Mark Brown <broonie@kernel.org>
-Subject: Re: [PATCH v3] docs: bug-bisect: add a note about bisecting -next
-In-Reply-To: <ec19d5fc503ff7db3d4c4ff9e97fff24cc78f72a.1730808651.git.linux@leemhuis.info>
-References: <ec19d5fc503ff7db3d4c4ff9e97fff24cc78f72a.1730808651.git.linux@leemhuis.info>
-Date: Tue, 12 Nov 2024 13:07:08 -0700
-Message-ID: <87v7wsqkr7.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1731442098; c=relaxed/simple;
+	bh=FJxuu9SZEvE8/lpXK8JtYaTHBfXuBPx5hwpAA4obJiI=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=tfNAkLzVZXuJg9CoiBHVEGYuBXkbXz89zXomy7gh24Uz1pbgFWKBJuNdEByE20S4TBN86Pwur5MymXdXnDH8uNGoQiWXkI1xK3x91cceHNT7CMvhxdKuenbhisweFEMLnhfJY/+0k6zoPRiEGw4sryyyag+pm9CriFBGQbXU/fQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--rmoar.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=XZ51q6Xs; arc=none smtp.client-ip=209.85.219.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--rmoar.bounces.google.com
+Received: by mail-yb1-f201.google.com with SMTP id 3f1490d57ef6-e2971589916so9674644276.3
+        for <linux-doc@vger.kernel.org>; Tue, 12 Nov 2024 12:08:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1731442096; x=1732046896; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=FZebOFvXhdHbUqBa6VoAUwcXkgGJWlmZrSal3cue+e0=;
+        b=XZ51q6XshVizEXnh5VDUie5LrWsdSgFXmg7auY3003qlpQXCLSqlY/bOx1JkBpxMN3
+         xF83J8BTjEezwB2F62KmjaGSkQMtJbSpuwtHNsb1ctmFLfWU4JJRH8zozy9NUtVU1V8Y
+         9wbT7zYXLPRD4O1sS2acXb6m+fTTMeGAoOJ3FbR69vYIOQA2BepmNbRw1Y9R+qPNpfNk
+         mz9qE1hdV94y5KfKNmh9sZ7wT48pRKkMtuozEp4REgd7ZftVA0pW9nYxQuLSr4Je0EdX
+         z4RR72T4Fic19WZdPKBwOWtQsN8vSeVMLS9iR5mjKO8hJRUo9CcNtdVdsr7uCobwL3w9
+         aqew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731442096; x=1732046896;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=FZebOFvXhdHbUqBa6VoAUwcXkgGJWlmZrSal3cue+e0=;
+        b=o3KCIQV3vRhszRm/ou3J3jqmJ/Zs/BVp6gpvTTkRBZ/HAloH2RVtIXr2bRvKVyn5Zz
+         nBnWWKXVlV+cUJSVmKTznFuczadmTYsVRp5At93nCWf7PajBQiosOQbeqmsrLHwzNGo0
+         IvQsiqAipAU98u2jj1OdTKd63FV/l6Rchjw89qabpSCfX5iw1zJMEQcnOOsc40xZ5Iuw
+         9chuix5b0GbtjXfIe4EdIOoBkmBJlor/3FPtQ7nXdE4EbFfjedsyUkh3yciia+p1kvul
+         1J6E4VZaMikVnkvyTHIIuGlvbeeU3aRdDmcMBdrt1sbUIzw59PacuWeb7XgHjI6/ghP4
+         nUDg==
+X-Forwarded-Encrypted: i=1; AJvYcCWnw6q+BUuQtt3qjXSTLS5l6GJWsNPv//BQIZis+3Sjt3hyA0sH0KF0ZR/Zb8Xtb7Pf+lraNS2uy+k=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzgvf81q83/p+NEq0a9aLjXoFeD500rXBwD6f/MgTf0LHCKTRJO
+	/vWATrq2UhYsPKzYlUmx8V7ZXImor5J05GsGO/LF/AOa9+/hzp421PPNBqoCd53iUZZcoCWqNA=
+	=
+X-Google-Smtp-Source: AGHT+IFHMV1811rm2dOpYbT3VPVmCYSYVxNohph1lrNLKTBJ3I8s7FaDFr3MiHn8g8q048q+n0kQifFS+A==
+X-Received: from rmoar-specialist.c.googlers.com ([fda3:e722:ac3:cc00:d3:4d64:ac12:6a5d])
+ (user=rmoar job=sendgmr) by 2002:a25:6fc1:0:b0:e2b:cd55:11b3 with SMTP id
+ 3f1490d57ef6-e35ed246250mr179276.5.1731442095955; Tue, 12 Nov 2024 12:08:15
+ -0800 (PST)
+Date: Tue, 12 Nov 2024 20:07:47 +0000
+In-Reply-To: <20241112200748.791828-1-rmoar@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain
+Mime-Version: 1.0
+References: <20241112200748.791828-1-rmoar@google.com>
+X-Mailer: git-send-email 2.47.0.277.g8800431eea-goog
+Message-ID: <20241112200748.791828-5-rmoar@google.com>
+Subject: [PATCH 4/5] ktap_v2: formatting fixes to ktap spec
+From: Rae Moar <rmoar@google.com>
+To: frowand.list@gmail.com, davidgow@google.com, keescook@chromium.org, 
+	Tim.Bird@sony.com, shuah@kernel.org, brendanhiggins@google.com
+Cc: tytso@google.com, gustavo.padovan@collabora.com, 
+	ricardo.canuelo@collabora.com, corbet@lwn.net, kernelci@lists.linux.dev, 
+	linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Rae Moar <rmoar@google.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Thorsten Leemhuis <linux@leemhuis.info> writes:
+Fix formatting of bulleted lists on KTAP specification for new version.
 
-> Explicitly mention how to bisect -next, as nothing in the kernel tree
-> currently explains that bisects between -next versions won't work well
-> and it's better to bisect between mainline and -next.
->
-> Co-developed-by: Mark Brown <broonie@kernel.org>
-> Signed-off-by: Mark Brown <broonie@kernel.org>
-> Reviewed-by: Mark Brown <broonie@kernel.org>
-> Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
-> ---
-> v3
-> - add a optional 'that' for readability/understandability
->
-> v2:
-> - slightly change patch descption
-> - make the text more how-toish to better match the rest of the document
->
-> v1: https://lore.kernel.org/all/20241022-doc-bisect-next-v1-1-196c0a60d554@kernel.org/
-> - initial release
-> ---
->  Documentation/admin-guide/bug-bisect.rst | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
+Signed-off-by: Rae Moar <rmoar@google.com>
+---
+ Documentation/dev-tools/ktap.rst | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Applied, thanks.
+diff --git a/Documentation/dev-tools/ktap.rst b/Documentation/dev-tools/ktap.rst
+index d4529f4e38c7..496799e7b87a 100644
+--- a/Documentation/dev-tools/ktap.rst
++++ b/Documentation/dev-tools/ktap.rst
+@@ -22,6 +22,7 @@ consists of important supplemental test information and can be
+ machine-readable.
+ 
+ KTAP output is built from five different types of lines:
++
+ - Version lines
+ - Plan lines
+ - Test case result lines
+@@ -40,6 +41,7 @@ All KTAP-formatted results begin with a "version line" which specifies which
+ version of the (K)TAP standard the result is compliant with.
+ 
+ For example:
++
+ - "KTAP version 1"
+ - "KTAP version 2"
+ - "TAP version 13"
+@@ -517,6 +519,7 @@ Example KTAP output
+ This output defines the following hierarchy:
+ 
+ A single test called "main_test", which fails, and has three subtests:
++
+ - "example_test_1", which passes, and has one subtest:
+ 
+    - "test_1", which passes, and outputs the diagnostic message "test_1: initializing test_1"
+-- 
+2.47.0.277.g8800431eea-goog
 
-jon
 
