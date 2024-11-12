@@ -1,55 +1,50 @@
-Return-Path: <linux-doc+bounces-30533-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30531-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAF649C4D08
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 04:08:58 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 383E79C4CF1
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 04:00:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9FFE828708D
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 03:08:54 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 72F13289F61
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2024 03:00:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5D849204952;
-	Tue, 12 Nov 2024 03:08:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 79CD919E819;
+	Tue, 12 Nov 2024 03:00:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YfG2EWvN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from dggsgout12.his.huawei.com (dggsgout12.his.huawei.com [45.249.212.56])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF8F31B6525;
-	Tue, 12 Nov 2024 03:08:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B5C7E574;
+	Tue, 12 Nov 2024 03:00:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1731380930; cv=none; b=do1zuumwYZvyzc+RDAmGFeP+ch/JYWHhIE/4f+NjdynkGZk1SO3Yrn2oF/XIE1IpIPyuqgjmN+R+9W0PU90mqNwwr5h/rr+JrhbZKTS5wZlcXWpMkmLPFnWA+H8h1Eq0q4v88E8r73Y2S3eCK6koPpfDK7pUhZ1ubxb6U08jLAU=
+	t=1731380423; cv=none; b=XXukFjrp0MJXcY2pgNinDlMhof8bDDdgLgE9PDg7Vruln4xlU8WOu16Zhv9K6BJ267hNTVDtXAGNmvULOWvZ3P09EF1eR3Jyx7CL9PsfIh1wE8nd6VRlGyqwlvg0oR3I3pA4Xzq5kgF3LmNumB8SCHefV8vBCdz8uNTtgcMC6WM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1731380930; c=relaxed/simple;
-	bh=C57Eg147c9BHu8+LFHpTE8LpIa4Dq+f0HtSO3R0n6xQ=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=c/qGK+poFwrAEjCjeiHnBguLKVY78OGL93X4F1J6BpxgavEo2PYOELqTf5Kb946+cRuH3L+pz1sHv01cBo+PBWCiTtVK3Dq0Roc4N3446fMiMNF7L7ORTiQ/+wFwcf0vIukRZSNp82Dkppei/EyLt2qI9c3tFsd42pMgL3a2Uwk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=45.249.212.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.19.163.216])
-	by dggsgout12.his.huawei.com (SkyGuard) with ESMTP id 4XnWZW624vz4f3jXn;
-	Tue, 12 Nov 2024 11:08:19 +0800 (CST)
-Received: from mail02.huawei.com (unknown [10.116.40.128])
-	by mail.maildlp.com (Postfix) with ESMTP id 09F831A0196;
-	Tue, 12 Nov 2024 11:08:38 +0800 (CST)
-Received: from huaweicloud.com (unknown [10.67.174.26])
-	by APP4 (Coremail) with SMTP id gCh0CgDnwoa0xjJnvTEqBg--.2387S2;
-	Tue, 12 Nov 2024 11:08:37 +0800 (CST)
-From: Xiu Jianfeng <xiujianfeng@huaweicloud.com>
-To: peterz@infradead.org,
-	mingo@redhat.com,
-	will@kernel.org,
-	longman@redhat.com,
-	boqun.feng@gmail.com,
-	corbet@lwn.net
-Cc: linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: [PATCH -next] docs/locking: Fix grammar in percpu-rw-semaphore.rst
-Date: Tue, 12 Nov 2024 02:57:24 +0000
-Message-Id: <20241112025724.474881-1-xiujianfeng@huaweicloud.com>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1731380423; c=relaxed/simple;
+	bh=5wk4mK60EoHVsMCvX1Li3jR8LsNWik4rErnD/bTn/LU=;
+	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc; b=Fw65HqTs5NoLcbrxug0Va0oXtthMAH36tPV5uzUaQ228OfFuEDq1R7+UgAbvtohRbHZtxT3pRrTaVOvqM0+O7b0mmUCPy/M90klbj0cr2nCtwcKbSlxTL4fMXnGpGcAb8bJYB3wYL/P4Sq0C7s8tSiWOXZ9e3pm97RcWPP4/PpM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YfG2EWvN; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5ADFC4CECF;
+	Tue, 12 Nov 2024 03:00:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1731380422;
+	bh=5wk4mK60EoHVsMCvX1Li3jR8LsNWik4rErnD/bTn/LU=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+	b=YfG2EWvNsFWWKrvzuehWMvYVI5NSsA9yfl9Mmw1poL3yT1T5Z98T/1UsZAvy88Q87
+	 mgmweCLkvt/0tZLID1W4dZgyH+F8qxriU+QyzTMAH/4dJmOG7+12zuWLPd6OuL56vV
+	 TaMP3XYWjwh3gRTQQnBqIqz5MvceYGUAOIUZ25ZxQ1h31GkR7+LejDQNZvl5hQZFlS
+	 Xd/mXG1lMIa9fVZRu3grLBYy+GbB/SLa/dkHAf2bLWhJTe/VBJCvoWbXFh08kC/qqe
+	 2BH/5qk0diSp/Qj6tUdjEl8UTui+udO52HKcUDVFMZx6ZFeH5aGBueoj7vN2PFshnn
+	 yt1zAzaPPFMsQ==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id EAE563809A80;
+	Tue, 12 Nov 2024 03:00:33 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,49 +52,64 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:gCh0CgDnwoa0xjJnvTEqBg--.2387S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrurykWr48Aw1rurWUXF4UXFb_yoWkGFgEya
-	4Yqay5Xr4rXws7KFyUCF10qasYkr1Utr4F9343tFsxX340ya98J3Z7CF15Zr4UWF4a9rZ8
-	uFZ8uFWa9w17WjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUIcSsGvfJTRUUUbzkYFVCjjxCrM7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E6xAIw20E
-	Y4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwV
-	A0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x02
-	67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I
-	0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
-	x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
-	0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1l42xK82IYc2Ij
-	64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x
-	8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE
-	2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42
-	xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF
-	7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07UK2NtUUUUU=
-X-CM-SenderInfo: x0lxyxpdqiv03j6k3tpzhluzxrxghudrp/
+Subject: Re: [PATCH net-next v9 0/6] Suspend IRQs during application busy periods
+From: patchwork-bot+netdevbpf@kernel.org
+Message-Id: 
+ <173138043276.62607.2860647577086593902.git-patchwork-notify@kernel.org>
+Date: Tue, 12 Nov 2024 03:00:32 +0000
+References: <20241109050245.191288-1-jdamato@fastly.com>
+In-Reply-To: <20241109050245.191288-1-jdamato@fastly.com>
+To: Joe Damato <jdamato@fastly.com>
+Cc: netdev@vger.kernel.org, corbet@lwn.net, hdanton@sina.com,
+ bagasdotme@gmail.com, pabeni@redhat.com, namangulati@google.com,
+ edumazet@google.com, amritha.nambiar@intel.com, sridhar.samudrala@intel.com,
+ sdf@fomichev.me, peter@typeblog.net, m2shafiei@uwaterloo.ca,
+ bjorn@rivosinc.com, hch@infradead.org, willy@infradead.org,
+ willemdebruijn.kernel@gmail.com, skhawaja@google.com, kuba@kernel.org,
+ aleksander.lobakin@intel.com, viro@zeniv.linux.org.uk, andrew+netdev@lunn.ch,
+ bpf@vger.kernel.org, brauner@kernel.org, danielj@nvidia.com,
+ dsahern@kernel.org, davem@davemloft.net, donald.hunter@gmail.com,
+ jack@suse.cz, hawk@kernel.org, jiri@resnulli.us, johannes.berg@intel.com,
+ linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+ lorenzo@kernel.org, mkarsten@uwaterloo.ca, almasrymina@google.com,
+ bigeasy@linutronix.de, shuah@kernel.org, horms@kernel.org,
+ xuanzhuo@linux.alibaba.com
 
-From: Xiu Jianfeng <xiujianfeng@huawei.com>
+Hello:
 
-s/'is initialized'/'is initialized with'
+This series was applied to netdev/net-next.git (main)
+by Jakub Kicinski <kuba@kernel.org>:
 
-Signed-off-by: Xiu Jianfeng <xiujianfeng@huawei.com>
----
- Documentation/locking/percpu-rw-semaphore.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Sat,  9 Nov 2024 05:02:30 +0000 you wrote:
+> Greetings:
+> 
+> Welcome to v9, see changelog below.
+> 
+> This revision addresses feedback Willem gave on the selftests. No
+> functional or code changes to the implementation were made and
+> performance tests were not re-run.
+> 
+> [...]
 
-diff --git a/Documentation/locking/percpu-rw-semaphore.rst b/Documentation/locking/percpu-rw-semaphore.rst
-index 247de6410855..a105bf2dd812 100644
---- a/Documentation/locking/percpu-rw-semaphore.rst
-+++ b/Documentation/locking/percpu-rw-semaphore.rst
-@@ -16,8 +16,8 @@ writing is very expensive, it calls synchronize_rcu() that can take
- hundreds of milliseconds.
- 
- The lock is declared with "struct percpu_rw_semaphore" type.
--The lock is initialized percpu_init_rwsem, it returns 0 on success and
---ENOMEM on allocation failure.
-+The lock is initialized with percpu_init_rwsem, it returns 0 on success
-+and -ENOMEM on allocation failure.
- The lock must be freed with percpu_free_rwsem to avoid memory leak.
- 
- The lock is locked for read with percpu_down_read, percpu_up_read and
+Here is the summary with links:
+  - [net-next,v9,1/6] net: Add napi_struct parameter irq_suspend_timeout
+    https://git.kernel.org/netdev/net-next/c/5dc51ec86df6
+  - [net-next,v9,2/6] net: Add control functions for irq suspension
+    https://git.kernel.org/netdev/net-next/c/3fcbecbdeb04
+  - [net-next,v9,3/6] eventpoll: Trigger napi_busy_loop, if prefer_busy_poll is set
+    https://git.kernel.org/netdev/net-next/c/ab5b28b007a7
+  - [net-next,v9,4/6] eventpoll: Control irq suspension for prefer_busy_poll
+    https://git.kernel.org/netdev/net-next/c/8a6de2627fd3
+  - [net-next,v9,5/6] selftests: net: Add busy_poll_test
+    (no matching commit)
+  - [net-next,v9,6/6] docs: networking: Describe irq suspension
+    https://git.kernel.org/netdev/net-next/c/a90a91e24b48
+
+You are awesome, thank you!
 -- 
-2.34.1
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
 
 
