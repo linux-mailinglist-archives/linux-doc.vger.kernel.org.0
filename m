@@ -1,116 +1,177 @@
-Return-Path: <linux-doc+bounces-30660-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30663-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BA969C7A3C
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Nov 2024 18:48:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 776CF9C7A4B
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Nov 2024 18:51:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 497CAB24380
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Nov 2024 16:55:32 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 83725B2F653
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Nov 2024 17:13:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE6B41E0E09;
-	Wed, 13 Nov 2024 16:55:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1B77201113;
+	Wed, 13 Nov 2024 17:13:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="EBHpjLZQ"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="bCI6g6B8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 946341DFE06
-	for <linux-doc@vger.kernel.org>; Wed, 13 Nov 2024 16:55:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.179
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F4341F80BB
+	for <linux-doc@vger.kernel.org>; Wed, 13 Nov 2024 17:13:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1731516927; cv=none; b=lzmdn+2nJ8YLtPOs2b7RhLYQGuLa2UvLcGNbfPW0r9GKx1KaiJ1lPio9UF+OXAohxCa+cay6GBmcwxqUCZskHq0TajFP2Ap0FYyNPVV5tj6j99kIgvX/PpI3pfO5f37wfYD1N9i3IuZmLEehA6xfgGc1LLH3MlT+m49U+KQDdiU=
+	t=1731518001; cv=none; b=nEguuft67HYs9Tl8RBwcVwQYmMior3QNy/bBkVux5ZJdftBYYmLdT405c0OPxxp/BD13xtWblfD9H1FXP50hCyVlN3TWYu7+DCpUxIhwwKhSq6DuicQ/VtfruSyYxSuayoqnzI8t4Iff9vNsLjhdGdBBcmv7mSWjqTZ0czkJzVM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1731516927; c=relaxed/simple;
-	bh=/Tjor6KKk4xz4p2UNnx1L3Hj+WRdCr3/2Kvmk9fys44=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Hr70DdAUSBjfaaPi1o/HaJJFS7bm9Snjw3yij601QCzwYne5WB9lPrAiHaJldy64qjjpY9r4G/vJ4/dSTNYcPYHarnRfFm6k+N6LnCbKgC0+sOMPz8AHkEPIh2SJMN7gtI9NnQ2Z5X3gORkxB1dW6gd6aQckQmjz9Br/zoE8kXQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=EBHpjLZQ; arc=none smtp.client-ip=209.85.167.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-oi1-f179.google.com with SMTP id 5614622812f47-3e604425aa0so4107902b6e.0
-        for <linux-doc@vger.kernel.org>; Wed, 13 Nov 2024 08:55:25 -0800 (PST)
+	s=arc-20240116; t=1731518001; c=relaxed/simple;
+	bh=P5LV97zKsjwbvc8pKFqu/eBd7S75Qg86hvnx5B/heBs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=YjwunrZrMAkGKZKt21i+Htz5n4ixd8lAIq+FIVWry1tI+EcI1UZDVwUjlw4oYVRXE96jxDmyQmEUdke6PvZjFqQkeFS0Ty8ZDjiUFSwN4dDOeGeHsa17Acsi4drXfntoYevzt2ZHpeQ42afCdPYMmWXCgc0UdikmiuOPZoVQKVM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=bCI6g6B8; arc=none smtp.client-ip=209.85.210.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-720b2d8bb8dso5261645b3a.1
+        for <linux-doc@vger.kernel.org>; Wed, 13 Nov 2024 09:13:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1731516924; x=1732121724; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:mime-version:message-id:date
-         :subject:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=x1zaQxPIwogRJjHGN9609O4s9HbrZpDwx8BCPdVZsJE=;
-        b=EBHpjLZQXj+/e9GYrmZ4S9I0jW3osiycHkIQghrBVC7gZamF8+BeHKvn6J/5pWoV6p
-         Ex7mFXp15e6Wnm7A680mbc0sv6oZB0yTP79m1S0YCEdVfhR+v8w6Bt79hTgTReYfGdWY
-         s2QcizovsOdJTuyyQBiwau1UTV4fFkHhpCNu4snMETQtlVRX+/dYJpVuMHx1pQcbWhMf
-         NNKOhaDDN+Vl6tB5XOnhUC00NZiwV/2Qo/s7qTLjsa+nipMDhigjeuVE5CuPqWYo3J+1
-         T6Pua4rviHOwKCPWkWNvxLSIhKUyJGSGZggJW1NldJ1/BpUtsRtmCu7F6cHqSZw9Ovg5
-         JCvA==
+        d=linaro.org; s=google; t=1731517996; x=1732122796; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=ifvUbRomJOM9ONw4x5k/S8xJ/QeZBsF+nhD23qyoV9U=;
+        b=bCI6g6B8fhBjG+1zPQgjTq0GcuA5XQMmy6Cm7G0HInY+hloNZUq9aEZzkD7YABiDvK
+         PxLd6ikGadIkoU65ldATGxvyfKYmQ9/0sk2qt73OlCybI/iqNsFFbaIHMvjk0GVk+iOT
+         oxsMuu+hlFXM/9W4OhDWdNiLMu7g7GMte/TXxwdzDcYn/HN6ljhFIQWke0v/EivcYmsw
+         F5/RDFGg/5caipm+Jv6quRKhMDEELp+smHKid/CamYHFWQas0a+9lp1jq4r9yfsAphC6
+         K5vvxfT0DDNBMtZXZfKNJHX3z2L6mt1bt6K5xQwguQ/zPcbgm1a9ITwxSlDCgYozWRxm
+         GI/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731516924; x=1732121724;
-        h=cc:to:content-transfer-encoding:mime-version:message-id:date
-         :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=x1zaQxPIwogRJjHGN9609O4s9HbrZpDwx8BCPdVZsJE=;
-        b=FMrjbebxlqAeWQbjWkh+G/EsNz3RBeYwW8KPBCzfg8jNXk8oXLGOlxphlalR57Uy/W
-         j5IrZF6hfKWC9q0et3K1SeFWJPtxvb9kZ7bCN8FgMoD63oWvQ3pka8d5PkdpeK6kPZDO
-         WG6K/To41ObJfHE8BOqgaajcI+c/qEHCvq8QbeJNLPoR5MDxmzJ33E4VvdJxTZkY/VNV
-         R5r5TUmDNGG3746bPl/Ren/So/tpyRuRCkC/X0040rt66WSgWTFyfVmot4Dh9gYmx09v
-         k/SeZxjhNcGK+iQagSldjyzdf1ktNDU699qvztnjGNXeAcJLYPzgqH7+9LmKbX32ap7/
-         avYQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVI0iP/C4ob8vyD4mJxfv7FfPq5ZLKdIPgBMmWoFl93EkdjidUPV9MVrO4gp6OpdiiD4j60OEb2/IM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyEZsIon+lUndLwLbWXwO0PeZYC9ApHUjNF3p8RC0dLBKYEHuFK
-	0U4QbW9RMjLMtGxRTZJmRg7jJwmtj+7cS3WTbgSdxOFGoUSWrhYu8lX+T3Ov4F4=
-X-Google-Smtp-Source: AGHT+IE1xuqZj09odVIcRE3lFsD/PKcU5+G/h9X7w5dwUoGWic8F3HSh6Ho0wCSYo0NNczzVP7u5Hg==
-X-Received: by 2002:a05:6870:6107:b0:287:c014:c979 with SMTP id 586e51a60fabf-295600989c8mr17393653fac.13.1731516924484;
-        Wed, 13 Nov 2024 08:55:24 -0800 (PST)
-Received: from [127.0.1.1] (ip98-183-112-25.ok.ok.cox.net. [98.183.112.25])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-295e8fe5c61sm873432fac.23.2024.11.13.08.55.23
+        d=1e100.net; s=20230601; t=1731517996; x=1732122796;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ifvUbRomJOM9ONw4x5k/S8xJ/QeZBsF+nhD23qyoV9U=;
+        b=Q4qQyMJEO8v7TGA+P0dVm51o09VlfbFtsds0SrBtlekrXtfogzqx3Zl8dYiitxvYes
+         UXGQbqgSVLsUBfEgyzWpkxzObM9g3NtUDl9Y/o/7wJck0kbTMBx5baEAmoi73wa9texV
+         0zO87TQ3AubmcjyECkBEjsYfbrfuMDFc1K2wYH1CR3UWdIMSytmApE23cBfdvqBZRSbo
+         wOWOA6p2rKd/HX3oVgKhmMg1NnIfVvOtMQIuxkbyhgkhkgLQPLbV/TY/eJ0qwIIc0Ygr
+         ch0voNbwmmFQMQzLyGi6G9uFWhBu3Ob8T4Psgziw6tGcrNkgCwbXvGAU5/rItT7bUG88
+         UHLw==
+X-Forwarded-Encrypted: i=1; AJvYcCUruHhAy0tBrjG2J9eCLw3DIC1gDJgOac5w+yd1ZytvnB32KywxGhjnngcpJdy6l/V1+iPrKy7pox4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwzOMrb9geiOZ0hgPNjsHjey+mmFoUF2wvf3i8DcUi3lFYOBqY+
+	NiLr0hUYxjsbuMGIE9F/9h8jjEffWqAjVtWLSe1aZHdyNuMDkzytW2Qkm3mLHNM=
+X-Google-Smtp-Source: AGHT+IHA5WiA7MiqyH8efQNCAK7Lo6QO+3s/96CcV1jpasTbglmJ9Zdpo8EFQj71/9GwdyTBs800kA==
+X-Received: by 2002:aa7:888c:0:b0:71e:4e2a:38bf with SMTP id d2e1a72fcca58-724133632a1mr27813959b3a.18.1731517996303;
+        Wed, 13 Nov 2024 09:13:16 -0800 (PST)
+Received: from p14s ([2604:3d09:148c:c800:fd79:a2fb:87a9:f18])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72407a50493sm13427196b3a.172.2024.11.13.09.13.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 Nov 2024 08:55:24 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/2] iio: adc: ad4695: move dt-bindings header
-Date: Wed, 13 Nov 2024 10:55:18 -0600
-Message-Id: <20241113-iio-adc-ad4695-move-dt-bindings-header-v1-0-aba1f0f9b628@baylibre.com>
+        Wed, 13 Nov 2024 09:13:15 -0800 (PST)
+Date: Wed, 13 Nov 2024 10:13:13 -0700
+From: Mathieu Poirier <mathieu.poirier@linaro.org>
+To: anish kumar <yesanishhere@gmail.com>
+Cc: andersson@kernel.org, corbet@lwn.net, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-remoteproc@vger.kernel.org
+Subject: Re: [RESEND PATCH V6 2/3] Documentation: remoteproc: add overview
+ section
+Message-ID: <ZzTeKTieC8YHC1Pv@p14s>
+References: <20241106051016.89113-1-yesanishhere@gmail.com>
+ <20241106051016.89113-3-yesanishhere@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAPbZNGcC/x2NwQqDMBAFf0X23IVuTBX7K6WH6K76DiYlKVIQ/
- 73BwxzmMnNQsQwr9GwOyrajIMUqcmtoWkNcjKHVyd2dF5GWgcRBp4rvhgdvaTfWL4+IirgUXi2
- oZdZucM7mXqX1VGOfbDN+1+j1Ps8/vhsUhngAAAA=
-To: Jonathan Cameron <jic23@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: Michael Hennerich <michael.hennerich@analog.com>, 
- =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
- Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- devicetree@vger.kernel.org, David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241106051016.89113-3-yesanishhere@gmail.com>
 
-During review, no one caught that the dt-bindings header was not in the
-preferred location when the bindings were created. Move the header to
-the correct location.
+On Tue, Nov 05, 2024 at 09:10:15PM -0800, anish kumar wrote:
+> Added overview section which details
+> how the remote processor framework works and
+> how it handles crashes.
+> 
+> Signed-off-by: anish kumar <yesanishhere@gmail.com>
+> ---
+>  Documentation/staging/remoteproc.rst | 43 ++++++++++++++++++++++++++++
+>  1 file changed, 43 insertions(+)
+> 
+> diff --git a/Documentation/staging/remoteproc.rst b/Documentation/staging/remoteproc.rst
+> index eeebbeca71de..e0bf68ceade8 100644
+> --- a/Documentation/staging/remoteproc.rst
+> +++ b/Documentation/staging/remoteproc.rst
+> @@ -46,6 +46,49 @@ of several key components:
+>  - **Virtio Support**: Facilitates interaction with the virtio and
+>    rpmsg bus.
+>  
+> +Overview
+> +========
+> +
+> +The framework begins by gathering information about the firmware file
+> +to be downloaded through the request_firmware function. It supports
+> +the ELF format and parses the firmware image to identify the physical
+> +addresses that need to be populated from the corresponding ELF sections.
+> +Once this information is obtained from the driver, the framework transfers
+> +the data to the specified addresses and starts the remote processor,
+> +along with subdevices.
 
----
-David Lechner (2):
-      iio: adc: ad4695: move dt-bindings header
-      dt-bindings: iio: adc: adi,ad4695: change include path
+Here again, some information is inaccurate and some is incomplete.
 
- Documentation/devicetree/bindings/iio/adc/adi,ad4695.yaml | 7 ++++---
- Documentation/iio/ad4695.rst                              | 2 +-
- MAINTAINERS                                               | 2 +-
- drivers/iio/adc/ad4695.c                                  | 2 +-
- include/dt-bindings/iio/{ => adc}/adi,ad4695.h            | 0
- 5 files changed, 7 insertions(+), 6 deletions(-)
----
-base-commit: 9dd2270ca0b38ee16094817f4a53e7ba78e31567
-change-id: 20241113-iio-adc-ad4695-move-dt-bindings-header-d6922ef7d134
+> +
+> +Dependent devices, referred to as `subdevices` within the framework,
+> +are also managed post-registration by their respective drivers.
+> +Subdevices can register themselves using `rproc_(add/remove)_subdev`.
+> +Non-remoteproc drivers can use subdevices as a way to logically connect
+> +to remote and get lifecycle notifications of the remote.
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+All of the above is pretty much inaccurate.
 
+I do not see a way forward for this revision and as such will stop here.
+
+As I suggested before, I advise you to take time to read the documentation for
+other subsystems.  You will find that narrating what the code does, as you
+are conveying in this work, is not a common practice.  The code speaks for
+itself, there is no need for duplication.
+
+You are obviously able to read and understand code, have you thought about
+fixing kernel problems?  Buy a development board, boot a kernel on it, follow
+the patches people are sending for that specific SoC and start testing them.
+You will find more problems to fix that you can handle, and it's a lot of fun.
+
+Regards,
+Mathieu
+
+> +
+> +The framework oversees the lifecycle of the remote and
+> +provides the `rproc_report_crash` function, which the driver invokes
+> +upon receiving a crash notification from the remote. The
+> +notification method can differ based on the design of the remote
+> +processor and its communication with the application processor. For
+> +instance, if the remote is a DSP equipped with a watchdog,
+> +unresponsive behavior triggers the watchdog, generating an interrupt
+> +that routes to the application processor, allowing it to call
+> +`rproc_report_crash` in the driver's interrupt context.
+> +
+> +During crash handling, the framework performs the following actions:
+> +
+> +a. Sends a request to stop the remote and any connected or
+> +   dependent subdevices.
+> +b. Generates a coredump, dumping all `resources` requested by the
+> +   remote alongside relevant debugging information. Resources are
+> +   explained below.
+> +c. Reloads the firmware and restarts the remote processor.
+> +
+> +If the `RPROC_FEAT_ATTACH_ON_RECOVERY` flag is set, the detach and
+> +attach callbacks of the driver are invoked without reloading the
+> +firmware. This is useful when the remote requires no
+> +assistance for recovery, or when the application processor can restart
+> +independently. After recovery, the application processor can reattach
+> +to the remote.
+> +
+>  User API
+>  ========
+>  
+> -- 
+> 2.39.3 (Apple Git-146)
+> 
 
