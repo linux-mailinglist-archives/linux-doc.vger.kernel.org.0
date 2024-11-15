@@ -1,137 +1,109 @@
-Return-Path: <linux-doc+bounces-30844-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-30846-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id A18489CD4F8
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Nov 2024 02:19:58 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CB6C9CD517
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Nov 2024 02:39:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 587681F2243C
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Nov 2024 01:19:58 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3B6AD281319
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Nov 2024 01:39:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1119C7DA6F;
-	Fri, 15 Nov 2024 01:19:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BE0837DA6F;
+	Fri, 15 Nov 2024 01:39:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="W2lHmIDj"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I862EZ8M"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EDCF77F1B;
-	Fri, 15 Nov 2024 01:19:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91E5B1F16B;
+	Fri, 15 Nov 2024 01:39:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1731633587; cv=none; b=cmdbcqyCJ0q+rMYxtBWPQPffyrcEmo5L5i0Xk9NtIKcMOfkD/j3fV6eFwTbf13BaEuAkYATPxkaXrOxOFarsX0LNLqZCJyKX+I2oeBPVjZmkT62hL3rJQ5OZaTEahFLFlxQP62v70FNSTIBOTzg8czW1kWupM5Jsyh0vqe67Y6I=
+	t=1731634749; cv=none; b=sTgnu3a8REwpbbxy15orLNErpJdrP+RKuot1MvLQYtCHi7A4qe4Mqo3i/0jFmte9vfytmX/9yGqw9XCiDRQAjVVrLaBbswABrQJXo2ARtRUhU+49O97mZBCk7DMOFuGvN3emdngZWHfszUcPppHHcDzx6k19y46bXEXa3gFDVOU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1731633587; c=relaxed/simple;
-	bh=h7oRV1nbfjsFc00eUaw9KaflULdd94NiX150E/lhGig=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=AhZoB4wz1v14a8/3E2WHxsGSm0iRkWodnR+yMgv806mP7cqu/GBtfV65kIyrjig/V2TPRgBP65/BC0AUjG4CsS5fCX+cQ9XSZqmmeiQ/UW1KyXZL2B6w7cOPMnnONSIo7RUHnJR2D9FYngDsTpLMSmYvoI0jNGId2xE1rRqnf9E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=W2lHmIDj; arc=none smtp.client-ip=209.85.208.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-5c95a962c2bso350718a12.2;
-        Thu, 14 Nov 2024 17:19:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1731633583; x=1732238383; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=OTJiLj8Cl/gid6IIoC6CA3YIEMl5qRRB8q0gUg2Qs+w=;
-        b=W2lHmIDjyUqglGGgfaMAYDQZ6bpE2T746VG19dns/YZu9JGZm9mobHocFVvqAywBwT
-         ZlPxWdKlV1V0jwknJRAl86pHhkJI3hnPGdwtmk1mLieXM62oCmJfNKac0zZ9modgrW0R
-         0AreC0LyvxfjklM30dlzhOf7SPxllnjcRRtfxnT9pLxa9XAL01Jlr6UmhuiVtTKaQm69
-         1X4Jo6rbwaJ9CkcxEuvQccRAn8QJsmlSCwXJ5ujRPcdn+9rZrhPpi3nO/m6RL72C1iwE
-         Yr23djfzEs5/TJeMjxllm/RnG0Lrlu+nbfGAoOIybyXphnSklUnhmC+qvE9AMDGgZStR
-         /Ntg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731633583; x=1732238383;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=OTJiLj8Cl/gid6IIoC6CA3YIEMl5qRRB8q0gUg2Qs+w=;
-        b=ShY/thZ0lzxkDfzjrJIQr0BXii5w9/OX3C4EkzKZQwsmmcbW4m3LOKYEEv0oHf408O
-         ljROXXJBD1FGxj/6htS2z5Umw/vvg1Zmpmr95tVhxoqeY5KeVYwhAKc+L/FuNew5DsDm
-         4RSkMgrEGE/pClFMjv3RG62e42OLDnEC2kU9LHvNL1ImaEsKkEHbt0NK40aCzRr393+j
-         nNdFYSE751xw8DvYRUv7icod01Cd8Gkm8VMTQxKr+myZusBcW4QMGDd0QA1QJNVpH0I5
-         9hE/0B3jrC9ZKfNKkpCfwDiGQAy+dzgLsbXelSKe1kaDKBoSU7MtAfyYecmy3qRYp7w6
-         goRQ==
-X-Forwarded-Encrypted: i=1; AJvYcCU8Yle7Pz4tIObXx0HPbmskgpOIuQCuUn07jI/tx/FdGtCR5iVEPt1L7L6yXUyWqmys1xo=@vger.kernel.org, AJvYcCUIG2KmewvUQhNM/UjxQDp3/8qUcroKTpDS2FU97Hjs+Tjt1WBBJvPYsLQdnr1OZhlh3B712L5g6wkhc7qn@vger.kernel.org, AJvYcCXUFsUnyX12++WSMsuW4Bt7IYvfM6hicB/tB81FYAZ5O0mV0kGOdalu0EbxK+tEqYw++2H7ibd9lU35@vger.kernel.org
-X-Gm-Message-State: AOJu0YzkYGDeelDlv3W/L2ngD5NX24AOEVrunEmyLxYgucihNNdXVhVH
-	yt3D1yH2l0A6Q2cp5FOHeJiKA0xjmCm8Qup4+kHVvV3PYNl21RNz
-X-Google-Smtp-Source: AGHT+IGtW9iSQmpcrn6weGm5G253EH2j+gzOxZzvx687F8weem2GgXEiQKu5n+yi+N9etxW9vKM2UA==
-X-Received: by 2002:aa7:c3c9:0:b0:5cf:9004:bd4c with SMTP id 4fb4d7f45d1cf-5cf9004be90mr278753a12.29.1731633583291;
-        Thu, 14 Nov 2024 17:19:43 -0800 (PST)
-Received: from ?IPV6:2a01:e11:5400:7400:dc78:53a0:d8e6:28cd? ([2a01:e11:5400:7400:dc78:53a0:d8e6:28cd])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5cf79bb3b04sm1065585a12.42.2024.11.14.17.19.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 14 Nov 2024 17:19:42 -0800 (PST)
-Message-ID: <d824d93d-8724-4e71-acb9-215010d8c3fb@gmail.com>
-Date: Fri, 15 Nov 2024 02:19:41 +0100
+	s=arc-20240116; t=1731634749; c=relaxed/simple;
+	bh=P0J40b7glC7/Mp8K4L3ngJXbPo5jPgKO1ADYUFBreaE=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=cesyVWIqiZg9fARL0CQtYQvbAAH0xxS5ve2lTwf4B6FB14DyZopw067p3sHDuRwcQUHGznhma/QZgPFvlDdWwxUv1hjSQ5aiiF1luN6bA1y8hoS7LzWvxU7N44UEBfC7ELfcbnN+ONInnc9Zu/sK/45rxrswyPD3aVe9uYxHRoM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I862EZ8M; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F256C4CECD;
+	Fri, 15 Nov 2024 01:39:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1731634749;
+	bh=P0J40b7glC7/Mp8K4L3ngJXbPo5jPgKO1ADYUFBreaE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=I862EZ8MHJsGm98dQkMHrQTqO1OCOTzGm+CXlfIZsD0/eA52QBvHLPfKsTG/zn66K
+	 rF41xnP6L3XPBTbhx5/EaKRt6MNKvIdk5z0LgHen1UhiQoPi6snmAAsyuVVhlqioEk
+	 bwAqh6oZZrBGg07JU5YMrhVyv8rEHl2Acb41MXTD7NUIxHBdpRxb3vA5WhhgNL+TQg
+	 o9aD0Xnw7N5FPXCDRZF7HvrY/esqf8zVllCPTELummijB1fOyaBbLMn5WZmKTLT5sG
+	 JCnHLpjE+XthjsNtZHdhIak6f6004y/lFtQ1AmGe+CAuGZ4sHLZvmrSWoPxWxGPZv2
+	 KuIpfbpesCVOA==
+Date: Thu, 14 Nov 2024 17:39:06 -0800
+From: Jakub Kicinski <kuba@kernel.org>
+To: Kory Maincent <kory.maincent@bootlin.com>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>, Broadcom internal
+ kernel review list <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn
+ <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, Russell King
+ <linux@armlinux.org.uk>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Richard
+ Cochran <richardcochran@gmail.com>, Radu Pirea
+ <radu-nicolae.pirea@oss.nxp.com>, Jay Vosburgh <j.vosburgh@gmail.com>, Andy
+ Gospodarek <andy@greyhouse.net>, Nicolas Ferre
+ <nicolas.ferre@microchip.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Jonathan Corbet
+ <corbet@lwn.net>, Horatiu Vultur <horatiu.vultur@microchip.com>,
+ UNGLinuxDriver@microchip.com, Simon Horman <horms@kernel.org>, Vladimir
+ Oltean <vladimir.oltean@nxp.com>, donald.hunter@gmail.com,
+ danieller@nvidia.com, ecree.xilinx@gmail.com, Andrew Lunn
+ <andrew+netdev@lunn.ch>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+ linux-doc@vger.kernel.org, Maxime Chevallier
+ <maxime.chevallier@bootlin.com>, Rahul Rameshbabu <rrameshbabu@nvidia.com>,
+ Willem de Bruijn <willemb@google.com>, Shannon Nelson
+ <shannon.nelson@amd.com>, Alexandra Winter <wintera@linux.ibm.com>, Jacob
+ Keller <jacob.e.keller@intel.com>
+Subject: Re: [PATCH net-next v19 03/10] ptp: Add phc source and helpers to
+ register specific PTP clock or get information
+Message-ID: <20241114173906.71e9e6fb@kernel.org>
+In-Reply-To: <20241114114610.1eb4a5da@kmaincent-XPS-13-7390>
+References: <20241030-feature_ptp_netnext-v19-0-94f8aadc9d5c@bootlin.com>
+	<20241030-feature_ptp_netnext-v19-3-94f8aadc9d5c@bootlin.com>
+	<20241111150609.2b0425f6@kernel.org>
+	<20241112111232.1637f814@kmaincent-XPS-13-7390>
+	<20241112182226.2a6c8bab@kernel.org>
+	<20241113113808.4f8c5a0b@kmaincent-XPS-13-7390>
+	<20241113163925.7b3bd3d9@kernel.org>
+	<20241114114610.1eb4a5da@kmaincent-XPS-13-7390>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Documentation: kvm: fix tipo in api.rst
-To: Sean Christopherson <seanjc@google.com>
-Cc: corbet@lwn.net, pbonzini@redhat.com, kvm@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20241114223738.290924-3-gianf.trad@gmail.com>
- <ZzaE9dYmSqg3U33y@google.com>
-From: Gianfranco Trad <gianf.trad@gmail.com>
-Content-Language: en-US, it
-Autocrypt: addr=gianf.trad@gmail.com; keydata=
- xjMEZyAY2RYJKwYBBAHaRw8BAQdA3W2zVEPRi03dmb95c7NkmFyBZi+VAplZZX9YVcsduG3N
- JkdpYW5mcmFuY28gVHJhZCA8Z2lhbmYudHJhZEBnbWFpbC5jb20+wo8EExYIADcWIQRJFQhW
- JFLZFapGQPDIleIjeBnIywUCZyAY2QUJA8JnAAIbAwQLCQgHBRUICQoLBRYCAwEAAAoJEMiV
- 4iN4GcjL+JkA/RWGFWAqY06TH+ZZKuhNhvJhj2+dqgPF0QRjILpGSVJyAQCsvpKVS6H9ykYP
- Qyi/UyxIKxa8tcdSP1oUj9YIAHUcC844BGcgGNkSCisGAQQBl1UBBQEBB0BlosN6xF2pP/d7
- RVTlTFktASXfYhN0cghGG6dk5r47NgMBCAfCfgQYFggAJhYhBEkVCFYkUtkVqkZA8MiV4iN4
- GcjLBQJnIBjZBQkDwmcAAhsMAAoJEMiV4iN4GcjLuIIBAJBEkfB4sVF7T46JBpJBP5jBHm4B
- nmn274Qd7agQUZR4AQDfkC/p4qApuqZvZ3H0qOkexpf9swGV1UtmmzYQdmjyAw==
-In-Reply-To: <ZzaE9dYmSqg3U33y@google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On 15/11/24 00:17, Sean Christopherson wrote:
-> I must know.  Is the "tipo" in the shortlog intentional? :-)
-> 
-> On Thu, Nov 14, 2024, Gianfranco Trad wrote:
->> Fix minor typo in api.rst where the word physical was misspelled
->> as physcial.
->>
->> Signed-off-by: Gianfranco Trad <gianf.trad@gmail.com>
->> ---
->>   Documentation/virt/kvm/api.rst | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
->> index edc070c6e19b..4ed8f222478a 100644
->> --- a/Documentation/virt/kvm/api.rst
->> +++ b/Documentation/virt/kvm/api.rst
->> @@ -5574,7 +5574,7 @@ KVM_XEN_ATTR_TYPE_SHARED_INFO_HVA
->>     in guest physical address space. This attribute should be used in
->>     preference to KVM_XEN_ATTR_TYPE_SHARED_INFO as it avoids
->>     unnecessary invalidation of an internal cache when the page is
->> -  re-mapped in guest physcial address space.
->> +  re-mapped in guest physical address space.
->>   
->>     Setting the hva to zero will disable the shared_info page.
->>   
->> -- 
->> 2.43.0
->>
-Ouch... I wish it was, that would have been a hell of a story :,-).
-I might think of it for future patches *jokes*. But no, probably my 
-brain's italian side subconsciously kicked in (tipo is an existent word 
-in italian), in that moment...
+On Thu, 14 Nov 2024 11:46:10 +0100 Kory Maincent wrote:
+> > > I see what you mean! It is not something easy to think of as I don't really
+> > > know how it would be implemented.
+> > > Do you think adding simply the PHC source and the phydev pointer or index
+> > > would fit?     
+> > 
+> > In net_device? Yes, I think so.  
+>  
+> Also as the "user" is not described in the ptp_clock structure the only way to
+> find it is to roll through all the PTP of the concerned net device topology.
+> This find ptp loop will not be in the hotpath but only when getting the tsinfo
+> of a PHC or changing the current PHC. Is it ok for you?
 
-Thanks for noticing Sean, I'll send a v2 asap.
+I think so :) We need to be able to figure out if it's the MAC PHC
+quickly, because MAC timestamping can be high rate. But IIUC PHY
+timestamping will usually involve async work and slow buses, so
+walking all PHYs of a netdev should be fine. Especially that 99%
+of the time there will only be one. Hope I understood the question..
 
---Gian
+> I am at v20 so I ask for confirmation before changing the full patch series! ;)
 
