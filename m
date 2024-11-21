@@ -1,104 +1,145 @@
-Return-Path: <linux-doc+bounces-31341-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31337-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id E76A09D5020
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Nov 2024 16:51:56 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 825029D4FB9
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Nov 2024 16:31:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id AC6F4283903
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Nov 2024 15:51:55 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 490292817A7
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Nov 2024 15:31:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0478818594A;
-	Thu, 21 Nov 2024 15:51:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A33EF18594A;
+	Thu, 21 Nov 2024 15:30:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="IkQk+h08"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="jtbwyGXC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mslow1.mail.gandi.net (mslow1.mail.gandi.net [217.70.178.240])
+Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF8AB15D5C3;
-	Thu, 21 Nov 2024 15:51:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.178.240
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E993B1553AB;
+	Thu, 21 Nov 2024 15:30:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1732204311; cv=none; b=jZvuC5lLozLzvYEEqu14yHRoGx7O1TFCV2ofdNcVykV3Czy5qxSuGEtM10URQGiXJtWuQDRNElla+p/Ccf7gc5FtuFgemH2+EIyROmPcn7o4eC8wbw7yw1CUhhwFRy4Tus0vBbFjxhD6F/Ep3KlZmJO4+PpMUfERVxJgdsU6Ioc=
+	t=1732203021; cv=none; b=oOrVJU6a/UqtsxndvDzmHU8e63LW/zWUbW7ZIKVf47v5wOM7b78uR5QA4C9dvxr7oo5HrZG/rE7AGLDE1QPGSwpf+68nApjnMAc6gnxB50sTtRzrTqhcLXgxFe9okfO6d9iQMG1nNuBpO27WfMykQuQFAwH7UMfhxrFW/YyWU4A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1732204311; c=relaxed/simple;
-	bh=X7hwPZmjY8q8t6ar3X/nRv/1vY7FPM9xlv+jJsMT4L8=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=IyXKrZ+1ZP94I4JZn2AlOEm+jq/BdJBPYlK3VdmOSIxFWKionM3QhFusOzyELTxa1eeVb+W25ki2UuFNih34vM55o1kRfA9ontjoOlUK9DdFRiNuTv83otu7l8mOE70JFCNdKSLhuZhLyD6DOvky3WMrRJvMT6AVfev4FArmiik=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=IkQk+h08; arc=none smtp.client-ip=217.70.178.240
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: from relay4-d.mail.gandi.net (unknown [IPv6:2001:4b98:dc4:8::224])
-	by mslow1.mail.gandi.net (Postfix) with ESMTP id 16AE2C351D;
-	Thu, 21 Nov 2024 15:27:52 +0000 (UTC)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 4498CE0015;
-	Thu, 21 Nov 2024 15:27:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1732202864;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=7vNUEM2nqa5ru8I3224DdW8toFKm1983QOZjCOpdhak=;
-	b=IkQk+h08kyzyl0ixQitvGKYANR/xMCGTYLxz+REOBqQ2sHLSvUez5TvQC8OF9DmBr2MHXp
-	liDAmVLJzuMzHMGk7B/aD8IhuMo2Qy859j28+aN0UyuBZepcKG7X65GSToOn8Hksg/NHy8
-	3TCmAmr76JWvf0ym9NkKxgatvqCq4CnYLKiCjCf14pIKyE0GketAiOH3CHCtt1m3PsKoE5
-	K7OkzjtQMjXPVtYthRtTdDifYI/PvOfzQRYULXMQMNGC8/4sls67l/2oNREMiTckwx1lwa
-	4py66em/riyMwXy4OOo7+eEygZZGNzaRVzYOC6llfdg7B+2eWTOTgVrmF9coAg==
-Date: Thu, 21 Nov 2024 16:27:39 +0100
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Mark Brown <broonie@kernel.org>
-Cc: Andrew Lunn <andrew@lunn.ch>, Oleksij Rempel <o.rempel@pengutronix.de>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet
- <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
- <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Donald Hunter
- <donald.hunter@gmail.com>, Rob Herring <robh@kernel.org>, Andrew Lunn
- <andrew+netdev@lunn.ch>, Simon Horman <horms@kernel.org>, Heiner Kallweit
- <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, Liam Girdwood
- <lgirdwood@gmail.com>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
- linux-doc@vger.kernel.org, Kyle Swenson <kyle.swenson@est.tech>, Dent
- Project <dentproject@linuxfoundation.org>, kernel@pengutronix.de, Maxime
- Chevallier <maxime.chevallier@bootlin.com>
-Subject: Re: [PATCH RFC net-next v3 17/27] regulator: dt-bindings: Add
- regulator-power-budget property
-Message-ID: <20241121162739.6c566d85@kmaincent-XPS-13-7390>
-In-Reply-To: <9b5c62aa-fc01-4391-9fab-219889fa0cf6@sirena.org.uk>
-References: <20241121-feature_poe_port_prio-v3-0-83299fa6967c@bootlin.com>
-	<20241121-feature_poe_port_prio-v3-17-83299fa6967c@bootlin.com>
-	<9b5c62aa-fc01-4391-9fab-219889fa0cf6@sirena.org.uk>
-Organization: bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1732203021; c=relaxed/simple;
+	bh=t1OS0SZ4JnSMKv7XRJ70eysyTs6yIg/uNEDpFJowCak=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=bUqcPhvNphSBgYEGneiMuI/oqQ0xehM2cq7QsoMybNcAAG1XMxGkht/LQSL2m8XtwRnF016jnc8ZtAtJSFt30OE70mYUaYTOqZjlGfgYnePRLxe2euJzc+YyVb8z9Fb+49orh9r07sErPgpKsVsRni2fIPszjTWFemzEzorgLEY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=jtbwyGXC; arc=none smtp.client-ip=90.155.92.199
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=idhvmbSpjgyt1zH7fW+NeMIym2Pxx0s6Zv4Z+MCkqpE=; b=jtbwyGXCj+fwhrEMqG86bsZNay
+	X+Nhdx5L2GrnjsPVKZMH/9Xlth2dXn7V1q8B2uGnwZSnS6VwBnDlo5l2mF+gNGa53bifeHhjLxjzg
+	LuuxbLivsvnoJwHFWwJ9HtpsFFWT8w0DB1+4DsJiSAIW+c3l+jOZYuC50VHY94USWDg0cH0Q7S79T
+	1ZsOjEJHR7cDhHo4Vg+1JyCeUwWbUtSCdu8Z1iaCD/rwUxfrFtSe4/gPhcmFLw431+Dp/q/9biI53
+	QSscxd44bVnld3NBcnhmjIxaeXKZ8sAp+fCs+CkEKohDWDGM4zASCp/XotZ1Hh/spjqUWQHzjx5dH
+	aH1ns5Yg==;
+Received: from j130084.upc-j.chello.nl ([24.132.130.84] helo=noisy.programming.kicks-ass.net)
+	by desiato.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
+	id 1tE98L-00000000av5-0FLU;
+	Thu, 21 Nov 2024 15:30:17 +0000
+Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
+	id 3DCD6300848; Thu, 21 Nov 2024 16:30:16 +0100 (CET)
+Date: Thu, 21 Nov 2024 16:30:16 +0100
+From: Peter Zijlstra <peterz@infradead.org>
+To: Dave Hansen <dave.hansen@intel.com>
+Cc: Valentin Schneider <vschneid@redhat.com>, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, kvm@vger.kernel.org, linux-mm@kvack.org,
+	bpf@vger.kernel.org, x86@kernel.org, rcu@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Wanpeng Li <wanpengli@tencent.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Frederic Weisbecker <frederic@kernel.org>,
+	"Paul E. McKenney" <paulmck@kernel.org>,
+	Neeraj Upadhyay <quic_neeraju@quicinc.com>,
+	Joel Fernandes <joel@joelfernandes.org>,
+	Josh Triplett <josh@joshtriplett.org>,
+	Boqun Feng <boqun.feng@gmail.com>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Lai Jiangshan <jiangshanlai@gmail.com>,
+	Zqiang <qiang.zhang1211@gmail.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Uladzislau Rezki <urezki@gmail.com>,
+	Christoph Hellwig <hch@infradead.org>,
+	Lorenzo Stoakes <lstoakes@gmail.com>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Jason Baron <jbaron@akamai.com>, Kees Cook <keescook@chromium.org>,
+	Sami Tolvanen <samitolvanen@google.com>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Juerg Haefliger <juerg.haefliger@canonical.com>,
+	Nicolas Saenz Julienne <nsaenz@kernel.org>,
+	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
+	Nadav Amit <namit@vmware.com>, Dan Carpenter <error27@gmail.com>,
+	Chuang Wang <nashuiliang@gmail.com>,
+	Yang Jihong <yangjihong1@huawei.com>,
+	Petr Mladek <pmladek@suse.com>,
+	"Jason A. Donenfeld" <Jason@zx2c4.com>, Song Liu <song@kernel.org>,
+	Julian Pidancet <julian.pidancet@oracle.com>,
+	Tom Lendacky <thomas.lendacky@amd.com>,
+	Dionna Glaze <dionnaglaze@google.com>,
+	Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>,
+	Juri Lelli <juri.lelli@redhat.com>,
+	Marcelo Tosatti <mtosatti@redhat.com>,
+	Yair Podemsky <ypodemsk@redhat.com>,
+	Daniel Wagner <dwagner@suse.de>, Petr Tesarik <ptesarik@suse.com>
+Subject: Re: [RFC PATCH v3 13/15] context_tracking,x86: Add infrastructure to
+ defer kernel TLBI
+Message-ID: <20241121153016.GL39245@noisy.programming.kicks-ass.net>
+References: <20241119153502.41361-1-vschneid@redhat.com>
+ <20241119153502.41361-14-vschneid@redhat.com>
+ <20241120152216.GM19989@noisy.programming.kicks-ass.net>
+ <20241120153221.GM38972@noisy.programming.kicks-ass.net>
+ <xhsmhldxdhl7b.mognet@vschneid-thinkpadt14sgen2i.remote.csb>
+ <20241121111221.GE24774@noisy.programming.kicks-ass.net>
+ <4b562cd0-7500-4b3a-8f5c-e6acfea2896e@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: kory.maincent@bootlin.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <4b562cd0-7500-4b3a-8f5c-e6acfea2896e@intel.com>
 
-On Thu, 21 Nov 2024 14:58:06 +0000
-Mark Brown <broonie@kernel.org> wrote:
+On Thu, Nov 21, 2024 at 07:07:44AM -0800, Dave Hansen wrote:
+> On 11/21/24 03:12, Peter Zijlstra wrote:
+> >> I see e.g. ds_clear_cea() clears PTEs that can have the _PAGE_GLOBAL flag,
+> >> and it correctly uses the non-deferrable flush_tlb_kernel_range().
+> > 
+> > I always forget what we use global pages for, dhansen might know, but
+> > let me try and have a look.
+> > 
+> > I *think* we only have GLOBAL on kernel text, and that only sometimes.
+> 
+> I think you're remembering how _PAGE_GLOBAL gets used when KPTI is in play.
 
-> On Thu, Nov 21, 2024 at 03:42:43PM +0100, Kory Maincent wrote:
-> >    regulator-input-current-limit-microamp:
-> >      description: maximum input current regulator allows
-> > =20
-> > +  regulator-power-budget:
-> > +    description: power budget of the regulator in mW
-> > + =20
->=20
-> Properties are supposed to include the unit in the name.
+Yah, I suppose I am. That was the last time I had a good look at this
+stuff :-)
 
-Oh ok, thanks!
+> Ignoring KPTI for a sec... We use _PAGE_GLOBAL for all kernel mappings.
+> Before PCIDs, global mappings let the kernel TLB entries live across CR3
+> writes. When PCIDs are in play, global mappings let two different ASIDs
+> share TLB entries.
 
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Hurmph.. bah. That means we do need that horrible CR4 dance :/
+
+
 
