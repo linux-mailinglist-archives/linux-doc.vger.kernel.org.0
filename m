@@ -1,112 +1,221 @@
-Return-Path: <linux-doc+bounces-31704-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31707-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0A069DBA7B
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Nov 2024 16:26:32 +0100 (CET)
-Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9164B9DBB0A
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Nov 2024 17:11:56 +0100 (CET)
+Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 22D05B2255B
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Nov 2024 15:26:30 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 40E6816270B
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Nov 2024 16:11:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B51DB1BD9F9;
-	Thu, 28 Nov 2024 15:26:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4BC9B1BD9EE;
+	Thu, 28 Nov 2024 16:11:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="U4f2V+0R"
+	dkim=pass (2048-bit key) header.d=treblig.org header.i=@treblig.org header.b="oj7sLfEs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+Received: from mx.treblig.org (mx.treblig.org [46.235.229.95])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7060D1B85FA;
-	Thu, 28 Nov 2024 15:26:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5774F3232;
+	Thu, 28 Nov 2024 16:11:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.235.229.95
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1732807566; cv=none; b=cSHrCEgB+u2oN5n7NYJFnM6qCRPXlaa5dZotnoqAOm6oaMe0TXFQyzQCDmxFeMQOwTb1Ov8c3sKRIrvv1HbHeBxtt+DJsoxG51xAdLCNFLpyHC+dC2yd1r2cmjjaijYB/khsq0r1bMLw9+wCRqn46mIFRryxtE8tpoYjkURG/qU=
+	t=1732810311; cv=none; b=Sqiv6kPNrCZ/fFaXfnmBjNRAwC4DB9euiuFVlfNyIv3a8fGHqHF1KRzeMvu9RhQaXlITTaU8mSReZ665L1Ow3JHe8rG2ppVZWia2q84VJ7LOV4sYT3nIXWRvWuzGH8knfJbNggQvEuvei29vggdMRrJdl17CEq2t0AkJZoq2ZO4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1732807566; c=relaxed/simple;
-	bh=1ZmSgvBb2pwzdo6/2+ajRYrL3ptMyaLsPP92DvTk+ok=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=I8Z5SIOdISKGws4zNyX0O7luZW4Sv4druSfPRUEX/1/GrbcjRZlP3vimRNkJ6R/sb2AituzZeZZGQ1iQ4D5KcDGEyFym8HnEEIOkyvPwKjqOEIdvrBEPkX1qO2/yGLWFFltZRlmD+hf8A1j2zbTui9uNRrwu3qD5pzyBPHM0Yyo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=U4f2V+0R; arc=none smtp.client-ip=192.198.163.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1732807561; x=1764343561;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=1ZmSgvBb2pwzdo6/2+ajRYrL3ptMyaLsPP92DvTk+ok=;
-  b=U4f2V+0RZ8OATVAuG4cwxPVJ8uZpXktAJlK7fjNnO8k28OmaTJK1Ua54
-   wCdOCoH/ibfv9v275HYJhSDVZOuBbhM5XkjAhmUOro74d9w6QXe9SOSpy
-   oESgMV35UrNpOAGe2iYOcRsCtZjRWzszayMxYDKyU11ZiT1RCAHh4HR7s
-   ZR2BzhBSxErUvVZmq6XXfUvgDfnmdL5V68E4Ioip9QaBrpYFs8cdD/Frr
-   z5oPDnIhhVphN8M9/tijglJe+Tg6ZbTlRTzk9dBVDHhPiHlwhIIsfeEuJ
-   /WYUGVzRuR/u2qG/K41rFJdMlff1qnUIkm2e/eFCvKTqczQwnFjoGUqXd
-   Q==;
-X-CSE-ConnectionGUID: OimlX63PRTeFSCvzDQwVKQ==
-X-CSE-MsgGUID: iuRUHS3zSfqalAS8XxNohg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11270"; a="43711934"
-X-IronPort-AV: E=Sophos;i="6.12,192,1728975600"; 
-   d="scan'208";a="43711934"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
-  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Nov 2024 07:25:55 -0800
-X-CSE-ConnectionGUID: Jswr1ClCTRy57oZIJcfozA==
-X-CSE-MsgGUID: 4top4WzTQCGRgcxwvRhuhw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,192,1728975600"; 
-   d="scan'208";a="123119571"
-Received: from black.fi.intel.com ([10.237.72.28])
-  by orviesa002.jf.intel.com with ESMTP; 28 Nov 2024 07:25:52 -0800
-Received: by black.fi.intel.com (Postfix, from userid 1003)
-	id AFCA94F4; Thu, 28 Nov 2024 17:25:50 +0200 (EET)
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Cc: Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH v1 3/3] x86/Documentation: Elaborate Intel MID device list
-Date: Thu, 28 Nov 2024 17:23:40 +0200
-Message-ID: <20241128152546.2396782-4-andriy.shevchenko@linux.intel.com>
-X-Mailer: git-send-email 2.43.0.rc1.1336.g36b5255a03ac
-In-Reply-To: <20241128152546.2396782-1-andriy.shevchenko@linux.intel.com>
-References: <20241128152546.2396782-1-andriy.shevchenko@linux.intel.com>
+	s=arc-20240116; t=1732810311; c=relaxed/simple;
+	bh=hk8fpGiKL3O9Sh34djHrjeiSXuSViWedgIE4zr39bXI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Dkbac5zC6KkK9hSJwyy09Ug+uLkrbYdBd0yxeAEEPvSubUyrgtGUIghZoUUxGwm4rexhTdVMrw1FSsQNCnLD/NhFuRxD6CrkPrMqPM+WWMM3Gya7ZPLV0iLWznNHu7dSmnfTKyU7L953qvxFLshx+Al80jCHk++9V6h+FZtgMgI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=treblig.org; spf=pass smtp.mailfrom=treblig.org; dkim=pass (2048-bit key) header.d=treblig.org header.i=@treblig.org header.b=oj7sLfEs; arc=none smtp.client-ip=46.235.229.95
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=treblig.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=treblig.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
+	; s=bytemarkmx; h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
+	:Subject; bh=fEbXQkB4IJYXc22/B7PWcP9nVPx5MuixvHf7IuMVJrg=; b=oj7sLfEs8oHFPkrx
+	cah6DeKryAR3itpdcsZ4mcsKq1FrI+IbxK6S1XfOrpdGu+o1Ku6YYJ3jbM+IqkW3ieeiHyVukbsYo
+	CQCIEQzhYDF8pXNI1cIZ4wHfFvbAnPRTCR65UcQ526G5b8BgNEw76d61mbeyWKSdGLVBfwx77cXp6
+	u9hgZ1VEJu96JfwVPdVQQntt8BZzC+R6uAEbvpqnFgTFPEZ4uN/bYQ3h8WN9nozX58zk+Y96n1jSO
+	/nJEBJP0v5BS/6Vz+BhjuWzlqWTOLlTg/0wYvbdoPlQjzJkKJzRnfTi/KVqDaeo1fsD1XkIYnHC46
+	oOV3bCcsFP3kKlfm6A==;
+Received: from dg by mx.treblig.org with local (Exim 4.96)
+	(envelope-from <dg@treblig.org>)
+	id 1tGh7E-002Qml-1t;
+	Thu, 28 Nov 2024 16:11:40 +0000
+Date: Thu, 28 Nov 2024 16:11:40 +0000
+From: "Dr. David Alan Gilbert" <linux@treblig.org>
+To: myungjoo.ham@samsung.com, kyungmin.park@samsung.com,
+	cw00.choi@samsung.com
+Cc: linux-pm@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] PM / devfreq: Remove unused
+ devm_devfreq_(un)register_notifier
+Message-ID: <Z0iWPCzjv9YQ4kO_@gallifrey>
+References: <20241028021344.477984-1-linux@treblig.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <20241028021344.477984-1-linux@treblig.org>
+X-Chocolate: 70 percent or better cocoa solids preferably
+X-Operating-System: Linux/6.1.0-21-amd64 (x86_64)
+X-Uptime: 16:11:27 up 204 days,  3:25,  1 user,  load average: 0.02, 0.03,
+ 0.00
+User-Agent: Mutt/2.2.12 (2023-09-09)
 
-Intel MID includes several SoCs in the family, elaborate this
-in the respective line of the documentation.
+* linux@treblig.org (linux@treblig.org) wrote:
+> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+> 
+> devm_devfreq_register_notifier() and devm_devfreq_unregister_notifier()
+> have been unused since 2019's
+> commit 0ef7c7cce43f ("PM / devfreq: passive: Use non-devm notifiers")
+> 
+> Remove them, and the helpers they used.
+> 
+> Note, devm_devfreq_register_notifier() is still used as an example
+> in Documentation/doc-guide/contributing.rst but that's just
+> an example of an old doc bug rather than anything about the function
+> itself.
+> 
+> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
 
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
----
- Documentation/arch/x86/boot.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Ping.
 
-diff --git a/Documentation/arch/x86/boot.rst b/Documentation/arch/x86/boot.rst
-index 069073ecc87e..76f53d3450e7 100644
---- a/Documentation/arch/x86/boot.rst
-+++ b/Documentation/arch/x86/boot.rst
-@@ -754,7 +754,7 @@ Protocol:	2.07+
-   0x00000000	The default x86/PC environment
-   0x00000001	lguest
-   0x00000002	Xen
--  0x00000003	Moorestown MID
-+  0x00000003	Intel MID (Moorestown, CloverTrail, Merrifield, Moorefield)
-   0x00000004	CE4100 TV Platform
-   ==========	==============================
- 
+Thanks,
+
+Dave
+> ---
+>  drivers/devfreq/devfreq.c | 67 ---------------------------------------
+>  include/linux/devfreq.h   | 23 --------------
+>  2 files changed, 90 deletions(-)
+> 
+> diff --git a/drivers/devfreq/devfreq.c b/drivers/devfreq/devfreq.c
+> index 98657d3b9435..6c3b241b4458 100644
+> --- a/drivers/devfreq/devfreq.c
+> +++ b/drivers/devfreq/devfreq.c
+> @@ -2224,70 +2224,3 @@ int devfreq_unregister_notifier(struct devfreq *devfreq,
+>  	return ret;
+>  }
+>  EXPORT_SYMBOL(devfreq_unregister_notifier);
+> -
+> -struct devfreq_notifier_devres {
+> -	struct devfreq *devfreq;
+> -	struct notifier_block *nb;
+> -	unsigned int list;
+> -};
+> -
+> -static void devm_devfreq_notifier_release(struct device *dev, void *res)
+> -{
+> -	struct devfreq_notifier_devres *this = res;
+> -
+> -	devfreq_unregister_notifier(this->devfreq, this->nb, this->list);
+> -}
+> -
+> -/**
+> - * devm_devfreq_register_notifier()
+> - *	- Resource-managed devfreq_register_notifier()
+> - * @dev:	The devfreq user device. (parent of devfreq)
+> - * @devfreq:	The devfreq object.
+> - * @nb:		The notifier block to be unregistered.
+> - * @list:	DEVFREQ_TRANSITION_NOTIFIER.
+> - */
+> -int devm_devfreq_register_notifier(struct device *dev,
+> -				struct devfreq *devfreq,
+> -				struct notifier_block *nb,
+> -				unsigned int list)
+> -{
+> -	struct devfreq_notifier_devres *ptr;
+> -	int ret;
+> -
+> -	ptr = devres_alloc(devm_devfreq_notifier_release, sizeof(*ptr),
+> -				GFP_KERNEL);
+> -	if (!ptr)
+> -		return -ENOMEM;
+> -
+> -	ret = devfreq_register_notifier(devfreq, nb, list);
+> -	if (ret) {
+> -		devres_free(ptr);
+> -		return ret;
+> -	}
+> -
+> -	ptr->devfreq = devfreq;
+> -	ptr->nb = nb;
+> -	ptr->list = list;
+> -	devres_add(dev, ptr);
+> -
+> -	return 0;
+> -}
+> -EXPORT_SYMBOL(devm_devfreq_register_notifier);
+> -
+> -/**
+> - * devm_devfreq_unregister_notifier()
+> - *	- Resource-managed devfreq_unregister_notifier()
+> - * @dev:	The devfreq user device. (parent of devfreq)
+> - * @devfreq:	The devfreq object.
+> - * @nb:		The notifier block to be unregistered.
+> - * @list:	DEVFREQ_TRANSITION_NOTIFIER.
+> - */
+> -void devm_devfreq_unregister_notifier(struct device *dev,
+> -				      struct devfreq *devfreq,
+> -				      struct notifier_block *nb,
+> -				      unsigned int list)
+> -{
+> -	WARN_ON(devres_release(dev, devm_devfreq_notifier_release,
+> -			       devm_devfreq_dev_match, devfreq));
+> -}
+> -EXPORT_SYMBOL(devm_devfreq_unregister_notifier);
+> diff --git a/include/linux/devfreq.h b/include/linux/devfreq.h
+> index d312ffbac4dd..ea161657ebc6 100644
+> --- a/include/linux/devfreq.h
+> +++ b/include/linux/devfreq.h
+> @@ -263,14 +263,6 @@ int devfreq_register_notifier(struct devfreq *devfreq,
+>  int devfreq_unregister_notifier(struct devfreq *devfreq,
+>  				struct notifier_block *nb,
+>  				unsigned int list);
+> -int devm_devfreq_register_notifier(struct device *dev,
+> -				struct devfreq *devfreq,
+> -				struct notifier_block *nb,
+> -				unsigned int list);
+> -void devm_devfreq_unregister_notifier(struct device *dev,
+> -				struct devfreq *devfreq,
+> -				struct notifier_block *nb,
+> -				unsigned int list);
+>  struct devfreq *devfreq_get_devfreq_by_node(struct device_node *node);
+>  struct devfreq *devfreq_get_devfreq_by_phandle(struct device *dev,
+>  				const char *phandle_name, int index);
+> @@ -420,21 +412,6 @@ static inline int devfreq_unregister_notifier(struct devfreq *devfreq,
+>  	return 0;
+>  }
+>  
+> -static inline int devm_devfreq_register_notifier(struct device *dev,
+> -					struct devfreq *devfreq,
+> -					struct notifier_block *nb,
+> -					unsigned int list)
+> -{
+> -	return 0;
+> -}
+> -
+> -static inline void devm_devfreq_unregister_notifier(struct device *dev,
+> -					struct devfreq *devfreq,
+> -					struct notifier_block *nb,
+> -					unsigned int list)
+> -{
+> -}
+> -
+>  static inline struct devfreq *devfreq_get_devfreq_by_node(struct device_node *node)
+>  {
+>  	return ERR_PTR(-ENODEV);
+> -- 
+> 2.47.0
+> 
 -- 
-2.43.0.rc1.1336.g36b5255a03ac
-
+ -----Open up your eyes, open up your mind, open up your code -------   
+/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
+\        dave @ treblig.org |                               | In Hex /
+ \ _________________________|_____ http://www.treblig.org   |_______/
 
