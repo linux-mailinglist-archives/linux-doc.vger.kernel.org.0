@@ -1,151 +1,229 @@
-Return-Path: <linux-doc+bounces-31727-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31729-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8FB59DC081
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Nov 2024 09:31:41 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id C8CC79DC0B7
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Nov 2024 09:48:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6573A282264
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Nov 2024 08:31:40 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 4A91DB21571
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Nov 2024 08:48:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C09D41581F0;
-	Fri, 29 Nov 2024 08:31:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E58D716B75C;
+	Fri, 29 Nov 2024 08:48:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=marvell.com header.i=@marvell.com header.b="baqm5Fbp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout11.his.huawei.com (frasgout11.his.huawei.com [14.137.139.23])
+Received: from mx0b-0016f401.pphosted.com (mx0b-0016f401.pphosted.com [67.231.156.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93A9314B088;
-	Fri, 29 Nov 2024 08:31:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.23
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 170D2AD23;
+	Fri, 29 Nov 2024 08:48:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=67.231.156.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1732869097; cv=none; b=uGpi5T0WkdJh4fwc0nQV4pUc2f1LQmo9mtxTd0s/v4U0KvkQUreRSLjleBy5kTkdQpjIqXbq5zDW3zDJpYDcH3NN59QJjELuqafaff4XL3ixAzjyjLR/yuUarmMJAQCnAc/vxBKFY5wGbmUny4saIIEOap2kV3b8UssPfckbIsQ=
+	t=1732870082; cv=none; b=lbGpUlh0o4K0PGBMWULF/CabA787JH+CKZ05xIC2bmFI7QwCHBv9t+lWDoysdFjHbRb5rnLmR8TXEb11VJ6U6BEFGS/Akt6y6lOyfA/PpIfM5C1KTwMmJoblLvwQAUrFibpZij4mBBM0M4sGAASYS5C4U9E4Hw3xFXTP3E4L/tk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1732869097; c=relaxed/simple;
-	bh=wp3UfZMfbn7EeJtbLpA0FbA0vGdnG3AkBrdTYstEirE=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=cLOJUfpzWpLBy+VOB//m2WuciYJpOLXRv6A7ZmOjx1SmsvhEkahwpJPLeHARya+07MyHZV4uQqmoqgPi+TVA3FP3xICKx+YO57OWdBb7h3kTXV+5592c5dqBf0xqiTOUj0RoovtgGWH/Cf/OwzH+ZDpMQEdn+uhfyN7jzodSbcg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.23
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.18.186.51])
-	by frasgout11.his.huawei.com (SkyGuard) with ESMTP id 4Y05TF2lVTz9v7Vd;
-	Fri, 29 Nov 2024 16:10:25 +0800 (CST)
-Received: from mail02.huawei.com (unknown [7.182.16.27])
-	by mail.maildlp.com (Postfix) with ESMTP id 12FBD1407B1;
-	Fri, 29 Nov 2024 16:31:19 +0800 (CST)
-Received: from [127.0.0.1] (unknown [10.204.63.22])
-	by APP2 (Coremail) with SMTP id GxC2BwDHLn69e0lnwkiCAg--.19693S2;
-	Fri, 29 Nov 2024 09:31:15 +0100 (CET)
-Message-ID: <57f07e0048ff15fd1ebfb58054e93abdbf8f029c.camel@huaweicloud.com>
-Subject: Re: [PATCH v6 07/15] digest_cache: Allow registration of digest
- list parsers
-From: Roberto Sassu <roberto.sassu@huaweicloud.com>
-To: Luis Chamberlain <mcgrof@kernel.org>, mmaurer@google.com, 
-	samitolvanen@google.com, KP Singh <kpsingh@kernel.org>
-Cc: zohar@linux.ibm.com, dmitry.kasatkin@gmail.com,
- eric.snowberg@oracle.com,  corbet@lwn.net, petr.pavlu@suse.com,
- da.gomez@samsung.com,  akpm@linux-foundation.org, paul@paul-moore.com,
- jmorris@namei.org,  serge@hallyn.com, shuah@kernel.org,
- mcoquelin.stm32@gmail.com,  alexandre.torgue@foss.st.com,
- linux-integrity@vger.kernel.org,  linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org,  linux-api@vger.kernel.org,
- linux-modules@vger.kernel.org,  linux-security-module@vger.kernel.org,
- linux-kselftest@vger.kernel.org,  wufan@linux.microsoft.com,
- pbrobinson@gmail.com, zbyszek@in.waw.pl, hch@lst.de,  mjg59@srcf.ucam.org,
- pmatilai@redhat.com, jannh@google.com, dhowells@redhat.com, 
- jikos@kernel.org, mkoutny@suse.com, ppavlu@suse.com, petr.vorel@gmail.com, 
- mzerqung@0pointer.de, kgold@linux.ibm.com, Roberto Sassu
- <roberto.sassu@huawei.com>
-Date: Fri, 29 Nov 2024 09:30:49 +0100
-In-Reply-To: <Z0jVQ8Q7AT_9NodI@bombadil.infradead.org>
-References: <20241119104922.2772571-1-roberto.sassu@huaweicloud.com>
-	 <20241119104922.2772571-8-roberto.sassu@huaweicloud.com>
-	 <Z0UN9ub0iztWvgLi@bombadil.infradead.org>
-	 <d428a5d926d695ebec170e98463f7501a1b00793.camel@huaweicloud.com>
-	 <Z0Ybvzy7ianR-Sx9@bombadil.infradead.org>
-	 <3dc25195b0362b3e5b6d6964df021ff4e7e1b226.camel@huaweicloud.com>
-	 <Z0d4vXuCqjTo_QW1@bombadil.infradead.org>
-	 <10c8fd4b53f946c2d7e933a35c6eb36557e8c592.camel@huaweicloud.com>
-	 <Z0jVQ8Q7AT_9NodI@bombadil.infradead.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2 
+	s=arc-20240116; t=1732870082; c=relaxed/simple;
+	bh=CZKSnPvXYzdQgX1Wo383K+AeUpHdj/ZNk4nrCx9T02U=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=hKrFcDLB1Jyyn0CYqlkpjhn9IeKzCHd+/wdmKx8kks4oGaoNIrgfnMXkqvvb7SBIoDcgLrzX8pFtGHfIkNWNh8v0B62EJptq6NmFmAjTM+OYNT1rGrWo5gv+D4EIDXoprfFyHj1pPhJruxM7roqhwtY0BPN/Ul3AafMH5PYwLcM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=marvell.com; spf=pass smtp.mailfrom=marvell.com; dkim=pass (2048-bit key) header.d=marvell.com header.i=@marvell.com header.b=baqm5Fbp; arc=none smtp.client-ip=67.231.156.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=marvell.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=marvell.com
+Received: from pps.filterd (m0431383.ppops.net [127.0.0.1])
+	by mx0b-0016f401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AT8i1EX032099;
+	Fri, 29 Nov 2024 00:47:51 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marvell.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=pfpt0220; bh=sCagdYC/OuAg1kCvoW4nE4i
+	0Dda25ckfx6b1MSpZc0U=; b=baqm5FbpLZ3lXs/bFB0TzTKQ6sT5ISY8RtzQxle
+	6y0ihtnf78uWYnSWGuGW56Z2Q4GV08XhIMhadGjqGsiNyK98ndBDmPQj09teRdTn
+	hMtTJXl6HWS+Lgru7rFxbsYyTWLWVTamDIOnEc4P7a2JSLSd6+zajWkOICc77MJD
+	wqHvgLYaScMiYZKPKi/ors0zTMvCYL1yhml6mpkjraGINT/xavPmJLzrPc/WnhTg
+	KYhRVh9BGa3AI/vOgwZGaRxmWe7VSALMC7KnSIhv1t9fyWTBAc5pI9tuYOF3Zuhu
+	x4mETGV1dgvp2pRGKaPabGEBI11YRvGNj1QdLLwCZtQYA3w==
+Received: from dc5-exch05.marvell.com ([199.233.59.128])
+	by mx0b-0016f401.pphosted.com (PPS) with ESMTPS id 437abyg07n-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 29 Nov 2024 00:47:50 -0800 (PST)
+Received: from DC5-EXCH05.marvell.com (10.69.176.209) by
+ DC5-EXCH05.marvell.com (10.69.176.209) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.4; Fri, 29 Nov 2024 00:47:38 -0800
+Received: from maili.marvell.com (10.69.176.80) by DC5-EXCH05.marvell.com
+ (10.69.176.209) with Microsoft SMTP Server id 15.2.1544.4 via Frontend
+ Transport; Fri, 29 Nov 2024 00:47:38 -0800
+Received: from virtx40.. (unknown [10.28.34.196])
+	by maili.marvell.com (Postfix) with ESMTP id 27AC05C68F3;
+	Fri, 29 Nov 2024 00:47:33 -0800 (PST)
+From: Linu Cherian <lcherian@marvell.com>
+To: <suzuki.poulose@arm.com>, <mike.leach@linaro.org>, <james.clark@arm.com>
+CC: <linux-arm-kernel@lists.infradead.org>, <coresight@lists.linaro.org>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <robh@kernel.org>, <krzk+dt@kernel.org>, <conor+dt@kernel.org>,
+        <corbet@lwn.net>, <devicetree@vger.kernel.org>, <sgoutham@marvell.com>,
+        <gcherian@marvell.com>, Linu Cherian <lcherian@marvell.com>
+Subject: [PATCH v12 0/8] Coresight for Kernel panic and watchdog reset
+Date: Fri, 29 Nov 2024 14:17:06 +0530
+Message-ID: <20241129084714.3057080-1-lcherian@marvell.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-CM-TRANSID:GxC2BwDHLn69e0lnwkiCAg--.19693S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Cry5Jr1kKw47uFy3JF17GFg_yoW8CFyrpF
-	WFqa4IkFWktr1UCrs29w4UZrW0krsaqry7Gwn8Gr9IvrW3KFy2vryFgF45uFZrKr1xW347
-	tw4Fv3sxWws5Za7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUv0b4IE77IF4wAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k2
-	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
-	xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxV
-	AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
-	x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
-	0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAaw2AF
-	wI0_Wrv_ZF1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
-	xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4U
-	JwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x
-	0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_
-	Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU0
-	EksDUUUUU==
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAQACBGdJJrUBzwABs1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: svdnKV3AvZHecOqFCEfes9OSuAA_4fSF
+X-Proofpoint-GUID: svdnKV3AvZHecOqFCEfes9OSuAA_4fSF
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.687,Hydra:6.0.235,FMLib:17.0.607.475
+ definitions=2020-10-13_15,2020-10-13_02,2020-04-07_01
 
-On Thu, 2024-11-28 at 12:40 -0800, Luis Chamberlain wrote:
-> On Thu, Nov 28, 2024 at 09:23:57AM +0100, Roberto Sassu wrote:
-> > On Wed, 2024-11-27 at 11:53 -0800, Luis Chamberlain wrote:
-> > > On Wed, Nov 27, 2024 at 10:51:11AM +0100, Roberto Sassu wrote:
-> > > > For eBPF programs we are also in a need for a better way to
-> > > > measure/appraise them.
-> > >=20
-> > > I am confused now, I was under the impression this "Integrity Digest
-> > > Cache" is just a special thing for LSMs, and so I was under the
-> > > impression that kernel_read_file() lsm hook already would take care
-> > > of eBPF programs.
-> >=20
-> > Yes, the problem is that eBPF programs are transformed in user space
-> > before they are sent to the kernel:
-> >=20
-> > https://lwn.net/Articles/977394/
->=20
-> That issue seems to be orthogonal to your eandeavor though, which just
-> supplements LSMS, right?
+This patch series is rebased on coresight-next-v6.12.rc4
 
-Yes, correct, the Integrity Digest Cache would be used to search
-whatever digest was calculated by LSMs.
+* Patches 1 & 2 adds support for allocation of trace buffer pages from reserved RAM
+* Patches 3 & 4 adds support for saving metadata at the time of kernel panic 
+* Patch 5 adds support for reading trace data captured at the time of panic
+* Patches 6 & 7 adds support for disabling coresight blocks at the time of panic
+* Patch 8: Gives the full description about this feature as part of documentation 
 
-Thanks
+V11 is posted here,
+https://lore.kernel.org/linux-arm-kernel/20241111124746.2210378-1-lcherian@marvell.com/
 
-Roberto
+Changelog from v11:
+Convert all commands to literal code blocks, that was missed out in v11.
+No other code changes.
 
-> Anyway, in case this helps:
->=20
-> The Rust folks faced some slighty related challenges with our CRC
-> validations for symbols, our CRC are slapped on with genksyms but this
-> relies on the source code and with Rust the compiler may do final
-> touches to data. And so DWARF is being used [1].
->=20
-> Although I am not sure of the state of eBPF DWARF support, there is also
-> BTF support [0] and most distros are relying on it to make live introspec=
-tion=20
-> easier, and the output is much smaller. So could DWARF or BTF information
-> from eBPF programs be used by the verifier in similar way to verify eBPF
-> programs?
->=20
-> Note that to support BTF implicates DWARF and the leap of faith for Rust
-> modversions support is that most distros will support DWARF, and so BTF
-> can become the norm [2].
->=20
-> [0] https://www.kernel.org/doc/html/latest/bpf/btf.html
-> [1] https://lwn.net/Articles/986892/
-> [2] https://lwn.net/Articles/991719/
->=20
->   Luis
+Changelog from v10:
+* Converted all csdev_access_* to readl functions in tmc_panic_sync_*
+* Added "tmc" prefix for register snapshots in struct tmc_crash_metadata
+* Converted dev_info to dev_dbg in panic handlers 
+* Converted dsb to dmb in panic handlers 
+* Fixed marking metadata as invalid when a user is trying to use the
+  reserved buffer. Earlier this was wrongly set at the time of reading
+  reserved trace buffer.
+* Moved common validation checks to is_tmc_crashdata_valid and minor
+  code rearrangements for efficiency
+* Got rid of sink specific prepare/unprepare invocations  
+* Got rid of full from struct tmc_resrv_buf
+* While reading crashdata, size is now calculated from metdata instead 
+  of relying on reserved buffer size populated by dtb 
+* Minor documenation fixes
+
+Changelog from v9:
+* Add common helper function of_tmc_get_reserved_resource_by_name
+  for better code reuse
+* Reserved buffer validity and crashdata validity has been separated to
+  avoid interdependence
+* New fields added to crash metadata: version, ffcr, ffsr, mode
+* Version checks added for metadata validation
+* Special file /dev/crash_tmc_xxx would be available only when
+  crash metadata is valid
+* Removed READ_CRASHDATA mode meant for special casing crashdata reads.
+  Instead, dedicated read function added for crashdata reads from reserved
+  buffer which is common for both ETR and ETF sinks as well.
+* Documentation added to Documentation/tracing/coresight/panic.rst
+
+Changelog from v8:
+* Added missing exit path on error in __tmc_probe.
+* Few whitespace fixes, checkpatch fixes.
+* With perf sessions honouring stop_on_flush sysfs attribute, 
+  removed redundant variable stop_on_flush_en. 
+
+Changelog from v7:
+* Fixed breakage on perf test -vvvv  "arm coresight".
+  No issues seen with and without "resrv" buffer mode
+* Moved the crashdev registration into a separate function.
+* Removed redundant variable in tmc_etr_setup_crashdata_buf
+* Avoided a redundant memcpy in tmc_panic_sync_etf.
+* Tested kernel panic with trace session started uisng perf.   
+  Please see the title "Perf based testing" below for details.
+  For this, stop_on_flush sysfs attribute is taken into 
+  consideration while starting perf sessions as well. 
+
+Changelog from v6:
+* Added special device files for reading crashdata, so that
+  read_prevboot mode flag is removed. 
+* Added new sysfs TMC device attribute, stop_on_flush.
+  Stop on flush trigger event is disabled by default. 
+  User need to explicitly enable this from sysfs for panic stop
+  to work.
+* Address parameter for panicstop ETM configuration is   
+  chosen as kernel "panic" address by default.
+* Added missing tmc_wait_for_tmcready during panic handling
+* Few other misc code rearrangements. 
+
+Changelog from v5:
+* Fixed issues reported by CONFIG_DEBUG_ATOMIC_SLEEP
+* Fixed a memory leak while reading data from /dev/tmc_etrx in
+  READ_PREVBOOT mode
+* Tested reading trace data from crashdump kernel
+
+Changelog from v4:
+* Device tree binding
+  - Description is made more explicit on the usage of reserved memory
+    region
+  - Mismatch in memory region names in dts binding and driver fixed
+  - Removed "mem" suffix from the memory region names
+* Rename "struct tmc_register_snapshot" ->  "struct tmc_crash_metadata",
+  since it contains more than register snapshot.
+  Related variables are named accordingly.
+* Rename struct tmc_drvdata members
+   resrv_buf -> crash_tbuf
+   metadata  -> crash_mdata
+* Size field in metadata refers to RSZ register and hence indicates the
+  size in 32 bit words. ETR metadata follows this convention, the same
+  has been extended to ETF metadata as well.
+* Added crc32 for more robust metadata and tracedata validation.
+* Added/modified dev_dbg messages during metadata validation
+* Fixed a typo in patch 5 commit description
+
+Changelog from v3:
+* Converted the Coresight ETM driver change to a named configuration.
+  RFC tag has been removed with this change.
+* Fixed yaml issues reported by "make dt_binding_check"
+* Added names for reserved memory regions 0 and 1
+* Added prevalidation checks for metadata processing
+* Fixed a regression introduced in RFC v3
+  - TMC Status register was getting saved wrongly
+* Reverted memremap attribute changes from _WB to _WC to match
+  with the dma map attributes
+* Introduced reserved buffer mode specific .sync op.
+  This fixes a possible crash when reserved buffer mode was used in
+  normal trace capture, due to unwanted dma maintenance operations.
+
+
+
+ 
+Linu Cherian (8):
+  dt-bindings: arm: coresight-tmc: Add "memory-region" property
+  coresight: tmc-etr: Add support to use reserved trace memory
+  coresight: core: Add provision for panic callbacks
+  coresight: tmc: Enable panic sync handling
+  coresight: tmc: Add support for reading crash data
+  coresight: tmc: Stop trace capture on FlIn
+  coresight: config: Add preloaded configuration
+  Documentation: coresight: Panic support
+
+ .../bindings/arm/arm,coresight-tmc.yaml       |  26 ++
+ Documentation/trace/coresight/panic.rst       | 362 ++++++++++++++++++
+ drivers/hwtracing/coresight/Makefile          |   2 +-
+ .../coresight/coresight-cfg-preload.c         |   2 +
+ .../coresight/coresight-cfg-preload.h         |   2 +
+ .../hwtracing/coresight/coresight-cfg-pstop.c |  83 ++++
+ drivers/hwtracing/coresight/coresight-core.c  |  42 ++
+ .../hwtracing/coresight/coresight-tmc-core.c  | 326 +++++++++++++++-
+ .../hwtracing/coresight/coresight-tmc-etf.c   |  92 ++++-
+ .../hwtracing/coresight/coresight-tmc-etr.c   | 181 ++++++++-
+ drivers/hwtracing/coresight/coresight-tmc.h   | 104 +++++
+ include/linux/coresight.h                     |  12 +
+ 12 files changed, 1222 insertions(+), 12 deletions(-)
+ create mode 100644 Documentation/trace/coresight/panic.rst
+ create mode 100644 drivers/hwtracing/coresight/coresight-cfg-pstop.c
+
+-- 
+2.34.1
 
 
