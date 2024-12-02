@@ -1,113 +1,247 @@
-Return-Path: <linux-doc+bounces-31869-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31879-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DDDC9E0C3F
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 20:37:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7E0E9E0C9B
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 20:55:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EA80BB27373
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 17:11:20 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0C50FB26CD9
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 19:12:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA03B1D9A41;
-	Mon,  2 Dec 2024 17:11:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B0A41B6D0A;
+	Mon,  2 Dec 2024 19:12:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="NWzK/hld"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="g1n7Lcdb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA22E125B9;
-	Mon,  2 Dec 2024 17:11:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52A9A1DE2BA
+	for <linux-doc@vger.kernel.org>; Mon,  2 Dec 2024 19:12:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733159476; cv=none; b=Fqf0DlyTXrhvrGmNnPixbrPzSYzW6C7DnTq05RkWzJiF+ATcBvqiG69ksXaI4D15v2h5SPOq4qFZeY2CAvHuZpZya5MNkHcAFBUOpB3Okzj8BSce+hG5FqjNOjEO6Hg3s7petxLzdGpXRwaNBXNMF7kYdjrIQbhl1fYo5cHvLQs=
+	t=1733166759; cv=none; b=KFroRMEMHA9wQIiIksnhdOmwvwMxG16OkK31AXW2nvX70kQa/X0R7hlbxO4bMLusJRtOQyUjVaoQ27DRBSvsZnRJ4iyOj2fqSGYWs7IGRhDZSeS+zlSju0YGXsr8BmvjBF6uy6/QqlVTyw78QOhF2xSQ0WiDLf8obGeKOPC3+qM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733159476; c=relaxed/simple;
-	bh=vABmO3a9ptqVa7aijKK3nhvQcpmmGcr5OTsWgzjsOZA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AyEiG0UIxl7hW2Xql/nonj3KHjKbXJM1+1F1/SJj1bvrgaZuAta0nl7O7HkQV6vaNwh7wtrTtxA8FstZFB3YvzeCJo7uo3mT4NWc7OA+DmarvAEjN2IG+Fa4wg6k5AiPMas+85g9JpRukqiOJ1GzV2Z3gdWxSAr3Chkpdj2m40A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=NWzK/hld; arc=none smtp.client-ip=90.155.50.34
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=Pzu6FHFKvY1fkmm5m6RJBFQICe/d040JPPfejReux0k=; b=NWzK/hldf3qSAHq8nyp0nMG9F7
-	sqlP+bpMbg9PF7hbNfEq0pDtg4Oglxv0DeMv3VDfJmRCFKLYbtkjYY2MvjJB7DNcJfR0G+Dl3G1Sz
-	c8ytxQYeZJg5DRcROmH65fbOgC6TDalF4PBa/7T/U9oLjBIhXVB2OQaqwrH3mgDF/QIXk2qDK/JuC
-	ZGeZRUGYaEA0QIFf+nqodenZpUbaRwuhLDK+eKED/ao+1WeWa1Rtw9ZySwHO37URQk4R42pmxSUjj
-	7XRp6AitcWQtbA0s1foZriTyHEXUsYclIz+gTAyDpTMBft0MhEpdbjuudwuLQiMZJCeMo7ZXiTy66
-	/Th27nBg==;
-Received: from willy by casper.infradead.org with local (Exim 4.98 #2 (Red Hat Linux))
-	id 1tI9wq-00000008MCm-2TtC;
-	Mon, 02 Dec 2024 17:11:00 +0000
-Date: Mon, 2 Dec 2024 17:11:00 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: Dan Williams <dan.j.williams@intel.com>,
-	Jonathan Corbet <corbet@lwn.net>, apw@canonical.com,
-	joe@perches.com, dwaipayanray1@gmail.com, lukas.bulwahn@gmail.com,
-	workflows@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, wens@csie.org
-Subject: Re: [PATCH v2 0/3] Make Helped-by tag supported
-Message-ID: <Z03qJKpjBqJ9vAhY@casper.infradead.org>
-References: <cover.1730874296.git.dsimic@manjaro.org>
- <87h68k4esb.fsf@trenco.lwn.net>
- <cabfa180845df30bfb7a541a701a57e9@manjaro.org>
- <672e628111eb0_10bc629436@dwillia2-xfh.jf.intel.com.notmuch>
- <28c0a0ecc2e2880e4cb98449767e2842@manjaro.org>
- <9ae99d14dcd8867333fceacfaaa4430a@manjaro.org>
+	s=arc-20240116; t=1733166759; c=relaxed/simple;
+	bh=PCqlM+3BfC76KzUSF5fEfBFma5s6DwjBlWJwKQHa9fQ=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Rexwd7yIIw3G0Oc+Tvxr+o7GJcemE/CfDRPNVMolMQ1ryEqGVPbCylGevsz444ifZ146Smo8zd4+tDPNFA0fn2NITAnO4o6EP8xIYlxIO3pb1RxFNFcKvEm5cCgEyCAISySKTkEp637v3qSvRK0i4OxMpW4j/iK2HPUNgk+RoJY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=g1n7Lcdb; arc=none smtp.client-ip=209.85.167.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-53de7321675so4890043e87.2
+        for <linux-doc@vger.kernel.org>; Mon, 02 Dec 2024 11:12:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1733166755; x=1733771555; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Y5P0+db7NElW+RfhzCk/WkVDLZpj6atKSAhLo042qRI=;
+        b=g1n7Lcdbo1EYfd+gORk48JpqKOV15uopC3E/srXqWXFuxGemGFY+/C6KdoUcjCTGYC
+         Z4p5SUXEF8DmXectlKZYD01CtV7hd2HPztwxQECcc2TboOX0+5XDTNVRT44LZ/8ceNqY
+         dlffXAm7VGwqGwMkUSKOGe80fAC86CH1EAn5RV6horOk2uJTdIXXCclxbcyBkie9xdpa
+         O/C0rr343wktDSCEDvmsUFyh8RqBI4zgoTWc/yRn0pp26p3FqxIboJCEN2kqMQJkHYa1
+         +9Y1Hn+BFpodi0+TJBoHuTyt9NH4FefZYfvwXZ7Se7LhRwKBv/Zxw5H2UxeE+nZRZ511
+         mhqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1733166755; x=1733771555;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Y5P0+db7NElW+RfhzCk/WkVDLZpj6atKSAhLo042qRI=;
+        b=FUk1q4W85IxkfWULkcvUUiisyVR2sPna+frpFwIId/KiO8+z+Lm5gflhk5gWHzKC3R
+         zuoU0kVEfTEGAtM0SPnh6uhlp+5Q5mTeWVamMs3BCLVxTPj3/hULMI2wa5EDplFTY+Is
+         8O1r0ajjbH7s6p6TaPDwWQL1LQjRQKaLM9mrQbg9LnwGaKNnG0LfHI/H4wyyrAiwrInB
+         /5ksqM+yFoA2LbbZfGOAEKaCgz4QwAd1nzGe2QbPItu4F8iT3S3X/iEqmqFZ/YFQxAGf
+         a+4ZFan8kO5B9plu2Hjon75Vy0qbwDk5EzqoRtplxquRI5UNEmd5EsGsP5tR45wm/bB4
+         4dbQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXoDDQFnKUyr66RNtqgupwuvTQOD2sQYtaQwUOIbln2huyB52a7ZyQME3J5i6UJH076QF/F+rT21iw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzkWdR68ZqdW1bYOZCosS3hgr+UspU2ZcFE+V/hoiSyABGPjGiS
+	lO/moWP8uyXdwkyfY0RNDtd+r5nC84gAnhWiu/lndq6ulln5BwID6wRPD71drCQaN1eG1Z01Z9X
+	M7v8Em9vFh7DnfMCWPzO1UoGE/QwlkiuF/70=
+X-Gm-Gg: ASbGncsXHPzFdtGwULgGyTK63daWVWS33kT3/3K/PBPKYl9ymVcXamuoPOYHhx43Tpt
+	rTCBornWPgCgYcTzppiGdOO/poWjwRl8RDSPCdQW173uqiPbIA6WJTzOcAHWl
+X-Google-Smtp-Source: AGHT+IHZfCjhITQ3qERmJbAY1aREzd4BIcVZPSiVSRGk4ymF9wRxc0gWXYA3+kYFBl8DXbtnZqYMib0piYz7PcngqQY=
+X-Received: by 2002:a19:8c4e:0:b0:53d:f177:51d1 with SMTP id
+ 2adb3069b0e04-53df17752b3mr9327407e87.13.1733166755293; Mon, 02 Dec 2024
+ 11:12:35 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <9ae99d14dcd8867333fceacfaaa4430a@manjaro.org>
+References: <20241202115827.50388-1-mripard@kernel.org>
+In-Reply-To: <20241202115827.50388-1-mripard@kernel.org>
+From: John Stultz <jstultz@google.com>
+Date: Mon, 2 Dec 2024 11:12:23 -0800
+Message-ID: <CANDhNCpTnc6=YkjQgQngRCw1_xLWgOFrcjTxrrGX+bRhvGb5DQ@mail.gmail.com>
+Subject: Re: [PATCH v2] Documentation: dma-buf: heaps: Add heap name definitions
+To: Maxime Ripard <mripard@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, 
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, 
+	"T.J. Mercier" <tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, 
+	linux-media@vger.kernel.org, linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 02, 2024 at 04:00:47PM +0100, Dragan Simic wrote:
-> On 2024-11-09 04:10, Dragan Simic wrote:
-> > On 2024-11-08 20:12, Dan Williams wrote:
-> > > Dragan Simic wrote:
-> > > > I'm fully aware that we may be reluctant to supporting
-> > > > additional tags,
-> > > > because we may then end up with a whole bunch of strange tags
-> > > > that might
-> > > > be a bit hard to understand and use properly, but I think that adding
-> > > > Helped-by to the supported tag list may actually be a good thing
-> > > > to do.
-> > > > As described above, Helped-by fits very well between the Suggested-by
-> > > > tag and the Co-developed-by + Signed-off-by pair of tags, and I think
-> > > > that providing the right level of attribution may be beneficial.
-> > > 
-> > > Patch attribution is separate from giving thanks. I would much rather
-> > > someone take the time to say "Thanks" in the changelog with some
-> > > supporting text rather than boil down all the myriad ways to be
-> > > thankful
-> > > into a generic tag. "git log --grep=Thanks" often yields valuable
-> > > details, beyond just attribution, on how people have helped each other
-> > > develop this global project of ours. If the introduction of Helped-by
-> > > would replace even one authentic "Thank you" note with a generic tag
-> > > then it is a net loss for the community.
-> > 
-> > I do agree that writing "Thanks John for helping with..." in a patch
-> > description would be nice, but unfortunately I've seen multiple times
-> > that people don't enjoy writing their patch descriptions at all, and
-> > just want to "get them out the door" as quickly as possible.
-> > 
-> > With that in mind, making Helped-by tags supported would allow such
-> > people to at least quickly mention someone they're thankful to, which
-> > actually wouldn't prevent anyone from saying the same more verbosely
-> > in a patch description.
-> 
-> Just checking, are there any further thoughts on this patch?
+On Mon, Dec 2, 2024 at 3:58=E2=80=AFAM Maxime Ripard <mripard@kernel.org> w=
+rote:
+>
+> Following a recent discussion at last Plumbers, John Stultz, Sumit
+> Sewal, TJ Mercier and I came to an agreement that we should document
+> what the dma-buf heaps names are expected to be, and what the buffers
+> attributes you'll get should be documented.
+>
+> Let's create that doc to make sure those attributes and names are
+> guaranteed going forward.
+>
+> Signed-off-by: Maxime Ripard <mripard@kernel.org>
+>
+> ---
+> Changes from v1:
+>   - Add the mention that the cma / reserved heap is optional.
+>
+> To: Jonathan Corbet <corbet@lwn.net>
+> To: Sumit Semwal <sumit.semwal@linaro.org>
+> Cc: Benjamin Gaignard <benjamin.gaignard@collabora.com>
+> Cc: Brian Starkey <Brian.Starkey@arm.com>
+> Cc: John Stultz <jstultz@google.com>
+> Cc: "T.J. Mercier" <tjmercier@google.com>
+> Cc: "Christian K=C3=B6nig" <christian.koenig@amd.com>
+> Cc: dri-devel@lists.freedesktop.org
+> Cc: linaro-mm-sig@lists.linaro.org
+> Cc: linux-media@vger.kernel.org
+> Cc: linux-doc@vger.kernel.org
+> ---
+>  Documentation/userspace-api/dma-buf-heaps.rst | 76 +++++++++++++++++++
+>  Documentation/userspace-api/index.rst         |  1 +
+>  2 files changed, 77 insertions(+)
+>  create mode 100644 Documentation/userspace-api/dma-buf-heaps.rst
+>
+> diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentatio=
+n/userspace-api/dma-buf-heaps.rst
+> new file mode 100644
+> index 000000000000..68be7ddea150
+> --- /dev/null
+> +++ b/Documentation/userspace-api/dma-buf-heaps.rst
+> @@ -0,0 +1,76 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+> +Allocating dma-buf using heaps
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+> +
+> +Dma-buf Heaps are a way for userspace to allocate dma-buf objects. They =
+are
+> +typically used to allocate buffers from a specific allocation pool, or t=
+o share
+> +buffers across frameworks.
+> +
+> +Heaps
+> +=3D=3D=3D=3D=3D
+> +
+> +A heap represent a specific allocator. The Linux kernel currently suppor=
+ts the
+> +following heaps:
+> +
+> + - The ``system`` heap allocates virtually contiguous, cacheable, buffer=
+s
+> +
+> + - The ``reserved`` heap allocates physically contiguous, cacheable,
 
-I agree with Dan & Jon; we don't need this tag.  And if someone's doing
-a poor job of writing commit messages, they need to be helped to write
-better ones.
+So, I think calling the heap name the "cma" heap might be clearer here?
+On some platforms the chardev is "reserved" because the default cma
+region is setup via dma_contiguous_reserve_area() (which calls it
+"reserved"), but the dma heap is exporting cma.
+
+Additionally, on some downstream devices there can be multiple purpose
+separated CMA heaps. This hasn't made it upstream over objections to
+how downstream devices were enumerating the separate cma regions in
+their devicetrees. It was proposed to export all cma regions as
+separate cma heaps, but there was reasonable concern over kernel
+drivers not expecting userland to be able to allocate from special
+reservations, so that seemed like a bad idea.
+
+Ideally upstream drivers would want to explicitly export their special
+CMA region themselves and we would export something like
+add_cma_heap() to do so.
+
+All to say: this document really only covers the naming of the
+"default" CMA region that is exported via the cma heap.  Eventually
+there may be other CMA heaps as well upstream.
+
+> +   buffers. Only present if a CMA region is present. Such a region is
+> +   usually created either through the kernel commandline through the
+> +   `cma` parameter, a memory region Device-Tree node with the
+> +   `linux,cma-default` property set, or through the `CMA_SIZE_MBYTES` or
+> +   `CMA_SIZE_PERCENTAGE` Kconfig options. Depending on the platform, it
+> +   might be called differently:
+> +
+> +    - Acer Iconia Tab A500: ``linux,cma``
+> +    - Allwinner sun4i, sun5i and sun7i families: ``default-pool``
+> +    - Amlogic A1: ``linux,cma``
+> +    - Amlogic G12A/G12B/SM1: ``linux,cma``
+> +    - Amlogic GXBB/GXL: ``linux,cma``
+> +    - ASUS EeePad Transformer TF101: ``linux,cma``
+> +    - ASUS Google Nexus 7 (Project Bach / ME370TG) E1565: ``linux,cma``
+> +    - ASUS Google Nexus 7 (Project Nakasi / ME370T) E1565: ``linux,cma``
+> +    - ASUS Google Nexus 7 (Project Nakasi / ME370T) PM269: ``linux,cma``
+> +    - Asus Transformer Infinity TF700T: ``linux,cma``
+> +    - Asus Transformer Pad 3G TF300TG: ``linux,cma``
+> +    - Asus Transformer Pad TF300T: ``linux,cma``
+> +    - Asus Transformer Pad TF701T: ``linux,cma``
+> +    - Asus Transformer Prime TF201: ``linux,cma``
+> +    - ASUS Vivobook S 15: ``linux,cma``
+> +    - Cadence KC705: ``linux,cma``
+> +    - Digi International ConnectCore 6UL: ``linux,cma``
+> +    - Freescale i.MX8DXL EVK: ``linux,cma``
+> +    - Freescale TQMa8Xx: ``linux,cma``
+> +    - Hisilicon Hikey: ``linux,cma``
+> +    - Lenovo ThinkPad T14s Gen 6: ``linux,cma``
+> +    - Lenovo ThinkPad X13s: ``linux,cma``
+> +    - Lenovo Yoga Slim 7x: ``linux,cma``
+> +    - LG Optimus 4X HD P880: ``linux,cma``
+> +    - LG Optimus Vu P895: ``linux,cma``
+> +    - Loongson 2k0500, 2k1000 and 2k2000: ``linux,cma``
+> +    - Microsoft Romulus: ``linux,cma``
+> +    - NXP i.MX8ULP EVK: ``linux,cma``
+> +    - NXP i.MX93 9x9 QSB: ``linux,cma``
+> +    - NXP i.MX93 11X11 EVK: ``linux,cma``
+> +    - NXP i.MX93 14X14 EVK: ``linux,cma``
+> +    - NXP i.MX95 19X19 EVK: ``linux,cma``
+> +    - Ouya Game Console: ``linux,cma``
+> +    - Pegatron Chagall: ``linux,cma``
+> +    - PHYTEC phyCORE-AM62A SOM: ``linux,cma``
+> +    - PHYTEC phyCORE-i.MX93 SOM: ``linux,cma``
+> +    - Qualcomm SC8280XP CRD: ``linux,cma``
+> +    - Qualcomm X1E80100 CRD: ``linux,cma``
+> +    - Qualcomm X1E80100 QCP: ``linux,cma``
+> +    - RaspberryPi: ``linux,cma``
+> +    - Texas Instruments AM62x SK board family: ``linux,cma``
+> +    - Texas Instruments AM62A7 SK: ``linux,cma``
+> +    - Toradex Apalis iMX8: ``linux,cma``
+> +    - TQ-Systems i.MX8MM TQMa8MxML: ``linux,cma``
+> +    - TQ-Systems i.MX8MN TQMa8MxNL: ``linux,cma``
+> +    - TQ-Systems i.MX8MPlus TQMa8MPxL: ``linux,cma``
+> +    - TQ-Systems i.MX8MQ TQMa8MQ: ``linux,cma``
+> +    - TQ-Systems i.MX93 TQMa93xxLA/TQMa93xxCA SOM: ``linux,cma``
+> +    - TQ-Systems MBA6ULx Baseboard: ``linux,cma``
+>
+
+Hrm. I'm not sure I see the value in enumerating things in this way,
+it seems like it will be a nuisance to keep current?  Maybe something
+like:
+
+On most systems the default cma region is named "linux, cma" or
+"reserved", with a few exceptions:
+    - Allwinner sun4i, sun5i and sun7i families: ``default-pool``
+
+thanks
+-john
 
