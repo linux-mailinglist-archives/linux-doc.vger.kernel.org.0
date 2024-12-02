@@ -1,108 +1,238 @@
-Return-Path: <linux-doc+bounces-31855-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31850-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31BD99E061F
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 16:01:55 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AC8E9E06FD
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 16:27:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EACC528351D
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 15:01:53 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 6C9F7B34F4B
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 13:56:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC19D20013D;
-	Mon,  2 Dec 2024 15:00:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=manjaro.org header.i=@manjaro.org header.b="BdmelBZj"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2995F2036E2;
+	Mon,  2 Dec 2024 13:56:09 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
-	(using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58F5E210FB;
-	Mon,  2 Dec 2024 15:00:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=116.203.91.91
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECDB9202F89;
+	Mon,  2 Dec 2024 13:56:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.255
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733151651; cv=none; b=lcK0CK8zy5/0J8ThmZjKqEEvuHIp79LAnDxhW8Bees3dFddxjuudDEhpWt5xPgEIRBhmVjO+772lXUt+y3g4sONkCPaxm93H7/CJaflrl8J+czmUb/GRfQ5bb0bAQGuE5eM4TZVGdgWzx68RUYdMuzqDH3/lMf9a6C9pscmf0zM=
+	t=1733147769; cv=none; b=UThHmkDtL7oOi+FcGCq6NJCq8cBWKkDw25X38gqTXzvm3p4sQOC5f4o3ynimMtORH9oCr8RjVQtcQqsvDkcAUYB+5zNSjMro64KejfToqCX5DOWU7rZSJFX426UX5pV06YP9Zj32HQ7uQNgq/G72+dx8gP5vc1mWffV0o8hTa9c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733151651; c=relaxed/simple;
-	bh=mHVrlQwCK5GGIIPaEC5wD4VmNpf8hz3vNgwxVhbJUE8=;
-	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:Content-Type; b=JnyPfr06ogZyHzOcpFgpRtN7AZYbIvg8av1tOiPEhKBVhQ0KdRex4mMICpimvmhabEC5XZcmNevnhQUFvjWfG4InUQXOJvaKdwL3feFIyY09OLowPibAvdo4J34v8qSHUiTmn6Uhnw8Z/YuPXunEa4aPOOLnhT1tZpgASDNn3Lg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org; spf=pass smtp.mailfrom=manjaro.org; dkim=pass (2048-bit key) header.d=manjaro.org header.i=@manjaro.org header.b=BdmelBZj; arc=none smtp.client-ip=116.203.91.91
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=manjaro.org
+	s=arc-20240116; t=1733147769; c=relaxed/simple;
+	bh=7IMXpOoF9UZW9whL9fhcHuUZXNyCFA9w0imB5sIFRpg=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=kDD6JKTUCHHZ6Tg8SRhYdc7q2HsFRlTOrnVcMXwV9yzboMAW49/U+p/9du17ny2kZ4i7f0P8igVyGI5KshzsK0UC23aJ1cx+hpXj1Mcu0lhYBsjlLlnBHWNKhMfgmJAxUsOxXbTfzr8g+vkn8go09J2FwIhWr0pB+hT3xkMBVLM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=45.249.212.255
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.19.88.105])
+	by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4Y24xC5nBsz1V5RR;
+	Mon,  2 Dec 2024 21:53:03 +0800 (CST)
+Received: from kwepemd200014.china.huawei.com (unknown [7.221.188.8])
+	by mail.maildlp.com (Postfix) with ESMTPS id D6CE71403D2;
+	Mon,  2 Dec 2024 21:55:57 +0800 (CST)
+Received: from localhost.localdomain (10.50.165.33) by
+ kwepemd200014.china.huawei.com (7.221.188.8) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.34; Mon, 2 Dec 2024 21:55:56 +0800
+From: Yicong Yang <yangyicong@huawei.com>
+To: <catalin.marinas@arm.com>, <will@kernel.org>, <maz@kernel.org>,
+	<oliver.upton@linux.dev>, <corbet@lwn.net>,
+	<linux-arm-kernel@lists.infradead.org>, <kvmarm@lists.linux.dev>,
+	<linux-kselftest@vger.kernel.org>, <linux-doc@vger.kernel.org>
+CC: <joey.gouly@arm.com>, <suzuki.poulose@arm.com>, <yuzenghui@huawei.com>,
+	<shuah@kernel.org>, <jonathan.cameron@huawei.com>,
+	<shameerali.kolothum.thodi@huawei.com>, <linuxarm@huawei.com>,
+	<prime.zeng@hisilicon.com>, <xuwei5@huawei.com>, <yangyicong@hisilicon.com>
+Subject: [PATCH 3/5] kselftest/arm64: Add HWCAP test for FEAT_{LS64, LS64_V, LS64_ACCDATA}
+Date: Mon, 2 Dec 2024 21:55:02 +0800
+Message-ID: <20241202135504.14252-4-yangyicong@huawei.com>
+X-Mailer: git-send-email 2.31.0
+In-Reply-To: <20241202135504.14252-1-yangyicong@huawei.com>
+References: <20241202135504.14252-1-yangyicong@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
-	t=1733151648;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Ke9HAWyIyVMoy4+WbUMo76Pv7napvRkCfz+Fo70nZbI=;
-	b=BdmelBZjJaF/FJzybOwiZVaUEMz5LH7q6ikTjzxddzayZYFLlwjdx9RkYSiTS2Cb7imZGr
-	Xhm5jxRZO6wnSuQ01XZUiAddXhCvdcDhqpfEyNZjU8UZ77auSBoMdzELvuaFrziQrf3n1P
-	zbX/rR1wcivLdzgzqkuMzZY1jxReQeE0wtnUDePLtmJI/vIWR1RFy3mgZJzhWSRXoAh3K6
-	LH/aWFf6ghmcWPvCe525daReXlhV80A3zxkgmWGHYCFBVBF+KP5yPrmDyr8CpDZEfx/o+M
-	gAD2NIcNPJ1DqLWSMRWDGp0JJlxCwvKq67jkM/U360O11vdC89MXWsshcH8LAw==
-Date: Mon, 02 Dec 2024 16:00:47 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Dan Williams <dan.j.williams@intel.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, apw@canonical.com, joe@perches.com,
- dwaipayanray1@gmail.com, lukas.bulwahn@gmail.com, workflows@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, wens@csie.org
-Subject: Re: [PATCH v2 0/3] Make Helped-by tag supported
-In-Reply-To: <28c0a0ecc2e2880e4cb98449767e2842@manjaro.org>
-References: <cover.1730874296.git.dsimic@manjaro.org>
- <87h68k4esb.fsf@trenco.lwn.net>
- <cabfa180845df30bfb7a541a701a57e9@manjaro.org>
- <672e628111eb0_10bc629436@dwillia2-xfh.jf.intel.com.notmuch>
- <28c0a0ecc2e2880e4cb98449767e2842@manjaro.org>
-Message-ID: <9ae99d14dcd8867333fceacfaaa4430a@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
-	auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ kwepemd200014.china.huawei.com (7.221.188.8)
 
-On 2024-11-09 04:10, Dragan Simic wrote:
-> On 2024-11-08 20:12, Dan Williams wrote:
->> Dragan Simic wrote:
->>> I'm fully aware that we may be reluctant to supporting additional 
->>> tags,
->>> because we may then end up with a whole bunch of strange tags that 
->>> might
->>> be a bit hard to understand and use properly, but I think that adding
->>> Helped-by to the supported tag list may actually be a good thing to 
->>> do.
->>> As described above, Helped-by fits very well between the Suggested-by
->>> tag and the Co-developed-by + Signed-off-by pair of tags, and I think
->>> that providing the right level of attribution may be beneficial.
->> 
->> Patch attribution is separate from giving thanks. I would much rather
->> someone take the time to say "Thanks" in the changelog with some
->> supporting text rather than boil down all the myriad ways to be 
->> thankful
->> into a generic tag. "git log --grep=Thanks" often yields valuable
->> details, beyond just attribution, on how people have helped each other
->> develop this global project of ours. If the introduction of Helped-by
->> would replace even one authentic "Thank you" note with a generic tag
->> then it is a net loss for the community.
-> 
-> I do agree that writing "Thanks John for helping with..." in a patch
-> description would be nice, but unfortunately I've seen multiple times
-> that people don't enjoy writing their patch descriptions at all, and
-> just want to "get them out the door" as quickly as possible.
-> 
-> With that in mind, making Helped-by tags supported would allow such
-> people to at least quickly mention someone they're thankful to, which
-> actually wouldn't prevent anyone from saying the same more verbosely
-> in a patch description.
+From: Yicong Yang <yangyicong@hisilicon.com>
 
-Just checking, are there any further thoughts on this patch?
+Add tests for FEAT_{LS64, LS64_V, LS64_ACCDATA}. Issue related
+instructions if feature presents, no SIGILL should be received.
+Since such instructions can only operate on Device memory or
+non-cacheable memory, we may received a SIGBUS during the test.
+Just ignore it since we only tested whether the instruction itself
+can be issued as expected on platforms declaring the support of
+such features.
+
+Signed-off-by: Yicong Yang <yangyicong@hisilicon.com>
+---
+ tools/testing/selftests/arm64/abi/hwcap.c | 127 ++++++++++++++++++++++
+ 1 file changed, 127 insertions(+)
+
+diff --git a/tools/testing/selftests/arm64/abi/hwcap.c b/tools/testing/selftests/arm64/abi/hwcap.c
+index 0029ed9c5c9a..6c826d4bb056 100644
+--- a/tools/testing/selftests/arm64/abi/hwcap.c
++++ b/tools/testing/selftests/arm64/abi/hwcap.c
+@@ -11,6 +11,8 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <unistd.h>
++#include <linux/auxvec.h>
++#include <linux/compiler.h>
+ #include <sys/auxv.h>
+ #include <sys/prctl.h>
+ #include <asm/hwcap.h>
+@@ -452,6 +454,107 @@ static void lrcpc3_sigill(void)
+ 	              : "=r" (data0), "=r" (data1) : "r" (src) :);
+ }
+ 
++static void ignore_signal(int sig, siginfo_t *info, void *context)
++{
++	ucontext_t *uc = context;
++
++	uc->uc_mcontext.pc += 4;
++}
++
++static void ls64_sigill(void)
++{
++	struct sigaction ign, old;
++	char src[64] __aligned(64) = { 1 };
++
++	/*
++	 * LS64, LS64_V, LS64_ACCDATA require target memory to be
++	 * Device/Non-cacheable and the completer supports these
++	 * instructions, otherwise we'll receive a SIGBUS. Since
++	 * we are only testing the ABI here, so just ignore the
++	 * SIGBUS and see if we can execute the instructions
++	 * without receiving a SIGILL. Restore the handler of
++	 * SIGBUS after this test.
++	 */
++	ign.sa_sigaction = ignore_signal;
++	ign.sa_flags = SA_SIGINFO | SA_RESTART;
++	sigemptyset(&ign.sa_mask);
++	sigaction(SIGBUS, &ign, &old);
++
++	register void *xn asm ("x8") = src;
++	register u64 xt_1 asm ("x0");
++	register u64 __maybe_unused xt_2 asm ("x1");
++	register u64 __maybe_unused xt_3 asm ("x2");
++	register u64 __maybe_unused xt_4 asm ("x3");
++	register u64 __maybe_unused xt_5 asm ("x4");
++	register u64 __maybe_unused xt_6 asm ("x5");
++	register u64 __maybe_unused xt_7 asm ("x6");
++	register u64 __maybe_unused xt_8 asm ("x7");
++
++	/* LD64B x0, [x8] */
++	asm volatile(".inst 0xf83fd100" : "=r" (xt_1) : "r" (xn));
++
++	/* ST64B x0, [x8] */
++	asm volatile(".inst 0xf83f9100" : : "r" (xt_1), "r" (xn));
++
++	sigaction(SIGBUS, &old, NULL);
++}
++
++static void ls64_v_sigill(void)
++{
++	struct sigaction ign, old;
++	char dst[64] __aligned(64);
++
++	/* See comment in ls64_sigill() */
++	ign.sa_sigaction = ignore_signal;
++	ign.sa_flags = SA_SIGINFO | SA_RESTART;
++	sigemptyset(&ign.sa_mask);
++	sigaction(SIGBUS, &ign, &old);
++
++	register void *xn asm ("x8") = dst;
++	register u64 xt_1 asm ("x0") = 1;
++	register u64 __maybe_unused xt_2 asm ("x1") = 2;
++	register u64 __maybe_unused xt_3 asm ("x2") = 3;
++	register u64 __maybe_unused xt_4 asm ("x3") = 4;
++	register u64 __maybe_unused xt_5 asm ("x4") = 5;
++	register u64 __maybe_unused xt_6 asm ("x5") = 6;
++	register u64 __maybe_unused xt_7 asm ("x6") = 7;
++	register u64 __maybe_unused xt_8 asm ("x7") = 8;
++	register u64 st   asm ("x9");
++
++	/* ST64BV x9, x0, [x8] */
++	asm volatile(".inst 0xf829b100" : "=r" (st) : "r" (xt_1), "r" (xn));
++
++	sigaction(SIGBUS, &old, NULL);
++}
++
++static void ls64_accdata_sigill(void)
++{
++	struct sigaction ign, old;
++	char dst[64] __aligned(64);
++
++	/* See comment in ls64_sigill() */
++	ign.sa_sigaction = ignore_signal;
++	ign.sa_flags = SA_SIGINFO | SA_RESTART;
++	sigemptyset(&ign.sa_mask);
++	sigaction(SIGBUS, &ign, &old);
++
++	register void *xn asm ("x8") = dst;
++	register u64 xt_1 asm ("x0") = 1;
++	register u64 __maybe_unused xt_2 asm ("x1") = 2;
++	register u64 __maybe_unused xt_3 asm ("x2") = 3;
++	register u64 __maybe_unused xt_4 asm ("x3") = 4;
++	register u64 __maybe_unused xt_5 asm ("x4") = 5;
++	register u64 __maybe_unused xt_6 asm ("x5") = 6;
++	register u64 __maybe_unused xt_7 asm ("x6") = 7;
++	register u64 __maybe_unused xt_8 asm ("x7") = 8;
++	register u64 st asm ("x9");
++
++	/* ST64BV0 x9, x0, [x8] */
++	asm volatile(".inst 0xf829a100" : "=r" (st) : "r" (xt_1), "r" (xn));
++
++	sigaction(SIGBUS, &old, NULL);
++}
++
+ static const struct hwcap_data {
+ 	const char *name;
+ 	unsigned long at_hwcap;
+@@ -867,6 +970,30 @@ static const struct hwcap_data {
+ 		.sigill_fn = hbc_sigill,
+ 		.sigill_reliable = true,
+ 	},
++	{
++		.name = "LS64",
++		.at_hwcap = AT_HWCAP3,
++		.hwcap_bit = HWCAP3_LS64,
++		.cpuinfo = "ls64",
++		.sigill_fn = ls64_sigill,
++		.sigill_reliable = true,
++	},
++	{
++		.name = "LS64_V",
++		.at_hwcap = AT_HWCAP3,
++		.hwcap_bit = HWCAP3_LS64_V,
++		.cpuinfo = "ls64_v",
++		.sigill_fn = ls64_v_sigill,
++		.sigill_reliable = true,
++	},
++	{
++		.name = "LS64_ACCDATA",
++		.at_hwcap = AT_HWCAP3,
++		.hwcap_bit = HWCAP3_LS64_ACCDATA,
++		.cpuinfo = "ls64_accdata",
++		.sigill_fn = ls64_accdata_sigill,
++		.sigill_reliable = true,
++	},
+ };
+ 
+ typedef void (*sighandler_fn)(int, siginfo_t *, void *);
+-- 
+2.24.0
+
 
