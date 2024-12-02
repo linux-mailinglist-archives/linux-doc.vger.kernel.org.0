@@ -1,111 +1,77 @@
-Return-Path: <linux-doc+bounces-31871-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31873-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05A989E0A09
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 18:34:19 +0100 (CET)
-Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C4349E0AAC
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 19:10:14 +0100 (CET)
+Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1468C16057E
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 18:10:11 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A97CB1DE2A2;
+	Mon,  2 Dec 2024 18:09:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="JK5JL2ls"
+X-Original-To: linux-doc@vger.kernel.org
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B9EC928159A
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 17:34:17 +0000 (UTC)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E89C71D9694;
-	Mon,  2 Dec 2024 17:34:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=fastly.com header.i=@fastly.com header.b="LXxoGrUy"
-X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7152F1B07AE
-	for <linux-doc@vger.kernel.org>; Mon,  2 Dec 2024 17:34:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9877E1DDA3E;
+	Mon,  2 Dec 2024 18:09:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733160854; cv=none; b=oiA2/tFHc86Dv3qNxX4RsZNdlU27IrBPRtVKUCOtg18dPW6lmwHb/s0C3Zar7cYybgIolJ1Am772LjYoU5vKxYxwxr/I7bolGXPeXpcDy97F46URgIVzju/7lss8cioMltB7KVcfiGizQ2YM+92rXIFXAWgRBurYMWeQlUzZgKQ=
+	t=1733162998; cv=none; b=RBYvk2yxkXmexjjZ40DJRvBvF+TJXY32Un7GrSXb398R4+pabnBvG1UaoML5zg18DK1o4FkaY1PL9GCVr2mkvU8CViT9QTvAtbOuEz2a57N4KOypUbSbyv5yfE4w0Wp+GAdagpwN3MSor+aeO6WdoO8cRsEV2UYTFTZ6b0GEilI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733160854; c=relaxed/simple;
-	bh=ZcWhmQeTdhzEQEyezGlnWtKSJ1aRtj36eMfuAb5qXpk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=aUALboRcWC6GBhllYj2Gk9TsbZVUvsvJNxLYye+XRvDxXChbpIRepsfaHgIi5c8RVyhgfK4JZPp0CXmV/nJ+McqB20D7r9ZbjwEEXbRuqoGOGA7fhJvUbgu8yfb/igFadtyzwyP30vzBx9mP7mVSiOjwc2j8L7tC0IIB1yImiTI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fastly.com; spf=pass smtp.mailfrom=fastly.com; dkim=pass (1024-bit key) header.d=fastly.com header.i=@fastly.com header.b=LXxoGrUy; arc=none smtp.client-ip=209.85.210.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fastly.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fastly.com
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-724f1ce1732so3531844b3a.1
-        for <linux-doc@vger.kernel.org>; Mon, 02 Dec 2024 09:34:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fastly.com; s=google; t=1733160853; x=1733765653; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references
-         :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=f/KBVkQ9WDET0JwE7JbXDlQw4ch/b8XOKIUlHGNDkFw=;
-        b=LXxoGrUyVYux4eRfCJPVkd9n9MDdCmUyo/RtxN2bMmr+E2mm70sKBPJ4BHiUMYDiYS
-         d/5+SM9usrJyH/4YWn+rruVhNhvvuMWD5B6pDskt1rxBJ1CRvRXyA6CvTwecI9F5/Mft
-         vBXvwsVYAtlAS02Zv9DkxEfGKEcU7g3iHWB8w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733160853; x=1733765653;
-        h=in-reply-to:content-disposition:mime-version:references
-         :mail-followup-to:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=f/KBVkQ9WDET0JwE7JbXDlQw4ch/b8XOKIUlHGNDkFw=;
-        b=dVOb69cOEvZHR01x2KQ3cLbVNTuMLACmmb3Z2FSTkVUzoBlbDaHAGCnmfUC8j/XAYX
-         APky49eTfUVzCuSuPKK8Tu7rWqSDiEcD/7Jw1kupdtxWErWpA0aYlmhuYLJ3DrYqc+kS
-         eDo6SplLmaET095GtRcUb5913hVDSy27acon2MB2wH8Cp7WImXZwrMVtpkg+A0McA5Pq
-         h7HHp1HwP3QtHFShlaaGpXWGCVXOlXRQM5lOBi/tsW1eHVuQqoOyJO4idjgnP1Qo2p6b
-         5Qvbk5w6C24tHnqKuK/BgAf7FAacuN/RUqyvM0pgj64LQFPlgMW32SVCO6+3+fUEw9QI
-         sQaQ==
-X-Forwarded-Encrypted: i=1; AJvYcCX7llP/zEHoMh2O6ztRLn+fSFwE3JgaTnzPdiTqvSiTS0IjMnE4UKaqyS1OSBUMA6ZgGOqJcfd5dLQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzP+gIzDaAhFqRmcRVrN00vtGrC4DMzvf7L5eUf5rSNASHj2seo
-	cRz8PT8fpUn2iz0s7qdvr8itJrTzrakUDjQ0XNk0lTbcjWPyqeK9juCvupMCb5w=
-X-Gm-Gg: ASbGncvOVg581MK/Ykt7owGGunSjnad8O/jCWcR8e051RIHCAqut5TGQiUCJ6f+u6br
-	izA6e247KNy1yFZVPfGMlYEf1fIMx44/40LMbBD4qxpLltx5ZCMlYJGlOdkLSa1cbPz6T0nHa3M
-	RbOKAXPrc9+BYFkNRlbIeeV1IhnzJlKvdyvMNQrvWzOxkl7rKcdrgKnqWqwPMuFBjsbsNEscLBz
-	TN0izBRqgBmnlSqzq1p3vZob+KR3LGkM++CBkQWgxvL3cZAqp0lS7wa3Cgtq6ao07sUT3rUiDbd
-	9fM8LIrCGWg8caLM
-X-Google-Smtp-Source: AGHT+IGdA7xHbfKmPdaYXg5efPm8iMgRtys8b0yolqaF3S0/bsz6LSFec8vyOdG86Jxh0+jRfA07Mg==
-X-Received: by 2002:a05:6a00:1390:b0:725:1d37:ebff with SMTP id d2e1a72fcca58-72530141196mr32222598b3a.22.1733160852632;
-        Mon, 02 Dec 2024 09:34:12 -0800 (PST)
-Received: from LQ3V64L9R2 (c-24-6-151-244.hsd1.ca.comcast.net. [24.6.151.244])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7fc9c31164asm7042249a12.42.2024.12.02.09.34.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Dec 2024 09:34:12 -0800 (PST)
-Date: Mon, 2 Dec 2024 09:34:08 -0800
-From: Joe Damato <jdamato@fastly.com>
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: Guenter Roeck <linux@roeck-us.net>, netdev@vger.kernel.org,
-	mkarsten@uwaterloo.ca, skhawaja@google.com, sdf@fomichev.me,
-	bjorn@rivosinc.com, amritha.nambiar@intel.com,
-	sridhar.samudrala@intel.com, willemdebruijn.kernel@gmail.com,
-	edumazet@google.com, "David S. Miller" <davem@davemloft.net>,
-	Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
-	Jiri Pirko <jiri@resnulli.us>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Lorenzo Bianconi <lorenzo@kernel.org>,
-	Johannes Berg <johannes.berg@intel.com>,
-	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-	open list <linux-kernel@vger.kernel.org>, pcnet32@frontier.com
-Subject: Re: [net-next v6 5/9] net: napi: Add napi_config
-Message-ID: <Z03vkLXa-wajZZ8T@LQ3V64L9R2>
-Mail-Followup-To: Joe Damato <jdamato@fastly.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Guenter Roeck <linux@roeck-us.net>, netdev@vger.kernel.org,
-	mkarsten@uwaterloo.ca, skhawaja@google.com, sdf@fomichev.me,
-	bjorn@rivosinc.com, amritha.nambiar@intel.com,
-	sridhar.samudrala@intel.com, willemdebruijn.kernel@gmail.com,
-	edumazet@google.com, "David S. Miller" <davem@davemloft.net>,
-	Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
-	Jiri Pirko <jiri@resnulli.us>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Lorenzo Bianconi <lorenzo@kernel.org>,
-	Johannes Berg <johannes.berg@intel.com>,
-	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-	open list <linux-kernel@vger.kernel.org>, pcnet32@frontier.com
-References: <20241011184527.16393-1-jdamato@fastly.com>
- <20241011184527.16393-6-jdamato@fastly.com>
- <85dd4590-ea6b-427d-876a-1d8559c7ad82@roeck-us.net>
- <Z0dqJNnlcIrvLuV6@LQ3V64L9R2>
- <Z0d6QlrRUig5eD_I@LQ3V64L9R2>
- <20241130124501.38b98030@kernel.org>
+	s=arc-20240116; t=1733162998; c=relaxed/simple;
+	bh=nYDjefpF3SzrsKFGQUqg+JR6F6Cz+vcqakgcruJHmbA=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=UQfqjAcPhFHvDuxeAs0Pg10RxzdodPVFo2XKG102hXsWWhspOMV2eXJAN8IHrzI60soINMxfbnTMNfaiFSuy57o1gRhHui2dKlsVhVgQXXAiPZoxRsZVnB8T9IoZnG01gjqUdyomoTM+T1iA6pAVUu+sasiiB0BH/DtRZ0EJLz4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=JK5JL2ls; arc=none smtp.client-ip=192.198.163.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1733162995; x=1764698995;
+  h=date:from:to:cc:subject:message-id:mime-version;
+  bh=nYDjefpF3SzrsKFGQUqg+JR6F6Cz+vcqakgcruJHmbA=;
+  b=JK5JL2lsP5ws6+soOvguyS+HwfTQggl3NXAFzFKltCSY96sgeQZ4qqCq
+   pOUMclj+Z+3uto0bg6hsszhWi/UFa/mZ3Wmdz11yuAvPE5iAoQ+lnFfg4
+   lNfDjgqA8I/mKs/slKRt91QqUvR0u5nDrEFD3WaBCbNxyLDWIvTWk3lcy
+   +pR1akInzlF13+z0UtzUTDBFiDIFdBqgRuoSoh1RgF2j5Hh6NGJOVf6El
+   Ql01Arwvef2EqsGt1LUHb3kCpYXEhWdHydPKI/IXBzp/vuNcsd30CXP4/
+   rUfXLZjT1+GIP3UBvw0aTdsxaxnjn94ZCrbDwBUaqSnAlIv2YcsmyrfjR
+   Q==;
+X-CSE-ConnectionGUID: IHCIRBWrS52WEI4jl5JHnQ==
+X-CSE-MsgGUID: iQYevqQ5RDC1aIFu9QqSSg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11274"; a="44731082"
+X-IronPort-AV: E=Sophos;i="6.12,203,1728975600"; 
+   d="scan'208";a="44731082"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Dec 2024 10:09:54 -0800
+X-CSE-ConnectionGUID: biV1p/54Qgegk6CrVFLakQ==
+X-CSE-MsgGUID: spgtlyGsQAqE/Y+uUqvhuA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,203,1728975600"; 
+   d="scan'208";a="93358378"
+Received: from lkp-server02.sh.intel.com (HELO 36a1563c48ff) ([10.239.97.151])
+  by fmviesa008.fm.intel.com with ESMTP; 02 Dec 2024 10:09:54 -0800
+Received: from kbuild by 36a1563c48ff with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1tIArn-0002hw-0T;
+	Mon, 02 Dec 2024 18:09:51 +0000
+Date: Tue, 3 Dec 2024 02:08:33 +0800
+From: kernel test robot <lkp@intel.com>
+To: Markuss Broks <markuss.broks@gmail.com>
+Cc: oe-kbuild-all@lists.linux.dev, linux-kernel@vger.kernel.org,
+	Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+	linux-doc@vger.kernel.org
+Subject: htmldocs: Warning:
+ Documentation/devicetree/bindings/regulator/siliconmitus,sm5703-regulator.yaml
+ references a file that doesn't exist:
+ Documentation/devicetree/bindings/mfd/siliconmitus,sm5703.yaml
+Message-ID: <202412030201.ikUpdSN3-lkp@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -114,32 +80,33 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20241130124501.38b98030@kernel.org>
 
-On Sat, Nov 30, 2024 at 12:45:01PM -0800, Jakub Kicinski wrote:
-> On Wed, 27 Nov 2024 12:00:02 -0800 Joe Damato wrote:
-> > CPU 0:
-> > pcnet32_open
-> >    lock(lp->lock)
-> >      napi_enable
-> >        napi_hash_add <- before this executes, CPU 1 proceeds
-> >          lock(napi_hash_lock)
-> > CPU 1:
-> >   pcnet32_close
-> >     napi_disable
-> >       napi_hash_del
-> >         lock(napi_hash_lock)
-> >          < INTERRUPT >
-> 
-> How about making napi_hash_lock irq-safe ?
-> It's a control path lock, it should be fine to disable irqs.
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git master
+head:   e70140ba0d2b1a30467d4af6bcfe761327b9ec95
+commit: d496d68d6ba6debcc135794edb5fdc5a5b4531f1 dt-bindings: regulator: Add bindings for Silicon Mitus SM5703 regulators
+date:   2 years, 7 months ago
+reproduce: (https://download.01.org/0day-ci/archive/20241203/202412030201.ikUpdSN3-lkp@intel.com/reproduce)
 
-Ah, right. That should fix it.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202412030201.ikUpdSN3-lkp@intel.com/
 
-I'll write a fixes against net and change the napi_hash_lock to use
-spin_lock_irqsave and spin_lock_irqrestore and send shortly.
+All warnings (new ones prefixed by >>):
 
-> >             pcnet32_interrupt
-> >               lock(lp->lock)
-> 
+   Warning: Documentation/dev-tools/kunit/run_wrapper.rst references a file that doesn't exist: Documentation/dev-tools/kunit/non_uml.rst
+   Warning: Documentation/devicetree/bindings/cpufreq/brcm,stb-avs-cpu-freq.txt references a file that doesn't exist: Documentation/devicetree/bindings/interrupt-controller/brcm,l2-intc.txt
+   Warning: Documentation/devicetree/bindings/gnss/mediatek.txt references a file that doesn't exist: Documentation/devicetree/bindings/gnss/gnss.txt
+   Warning: Documentation/devicetree/bindings/leds/leds-mt6360.yaml references a file that doesn't exist: Documentation/devicetree/bindings/mfd/mt6360.yaml
+   Warning: Documentation/devicetree/bindings/mmc/exynos-dw-mshc.txt references a file that doesn't exist: Documentation/devicetree/bindings/pinctrl/samsung-pinctrl.txt
+>> Warning: Documentation/devicetree/bindings/regulator/siliconmitus,sm5703-regulator.yaml references a file that doesn't exist: Documentation/devicetree/bindings/mfd/siliconmitus,sm5703.yaml
+   Warning: Documentation/translations/it_IT/networking/netdev-FAQ.rst references a file that doesn't exist: Documentation/networking/netdev-FAQ.rst
+   Warning: Documentation/translations/zh_CN/devicetree/index.rst references a file that doesn't exist: Documentation/Devicetree/index.rst
+   Warning: Documentation/translations/zh_CN/devicetree/of_unittest.rst references a file that doesn't exist: Documentation/Devicetree/of_unittest.rst
+   Warning: Documentation/translations/zh_CN/devicetree/usage-model.rst references a file that doesn't exist: Documentation/Devicetree/usage-model.rst
+   Warning: Documentation/translations/zh_CN/doc-guide/kernel-doc.rst references a file that doesn't exist: Documentation/rust/docs.rst
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
