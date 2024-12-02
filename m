@@ -1,82 +1,65 @@
-Return-Path: <linux-doc+bounces-31878-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31869-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3D289E0B26
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 19:36:51 +0100 (CET)
-Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5A4A716402B
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 18:36:48 +0000 (UTC)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A02E1DE2A2;
-	Mon,  2 Dec 2024 18:36:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mDXFsGp6"
-X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DDDC9E0C3F
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 20:37:51 +0100 (CET)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BD2D70805;
-	Mon,  2 Dec 2024 18:36:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EA80BB27373
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 17:11:20 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA03B1D9A41;
+	Mon,  2 Dec 2024 17:11:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="NWzK/hld"
+X-Original-To: linux-doc@vger.kernel.org
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA22E125B9;
+	Mon,  2 Dec 2024 17:11:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733164606; cv=none; b=S2PZSqjnv6Ql4keBSjm6fQyRZJ7uzuK6XPFZe1gDs73GI8DTjYczVxkgaaiYGdZwKXi2AGRMxtfaLRvNjwjYjS/d2Qfd9QVo+19+2Qmy6uEmLx4IOYIrj4IugEWXkfgeTi1Oie4W8FxO9DvEic3bgX5NHXH0P69Plx1iaeZhVOM=
+	t=1733159476; cv=none; b=Fqf0DlyTXrhvrGmNnPixbrPzSYzW6C7DnTq05RkWzJiF+ATcBvqiG69ksXaI4D15v2h5SPOq4qFZeY2CAvHuZpZya5MNkHcAFBUOpB3Okzj8BSce+hG5FqjNOjEO6Hg3s7petxLzdGpXRwaNBXNMF7kYdjrIQbhl1fYo5cHvLQs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733164606; c=relaxed/simple;
-	bh=SV0a41+RDhocvfEPEyv80/bq/ZSJlaeMPldbjOpf4GA=;
+	s=arc-20240116; t=1733159476; c=relaxed/simple;
+	bh=vABmO3a9ptqVa7aijKK3nhvQcpmmGcr5OTsWgzjsOZA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=a9HJhF4+GIFOjAsVV1EJcYU9Ffk7plVU51R6VUy+X1Z17p5U/q+2XGyHxIF0TJwhP5drNuOsccN6SO1nrX3gJNKG5J67m7oEC5mdgkH37HVLY9H2SMvCO+iNa5MjCfZ7UpWP6vlk6dsTB5EDgnAXK8dsmw/DbHef3XelyzH2wM0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mDXFsGp6; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98048C4CED2;
-	Mon,  2 Dec 2024 18:36:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1733164605;
-	bh=SV0a41+RDhocvfEPEyv80/bq/ZSJlaeMPldbjOpf4GA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=mDXFsGp6SVShBJ3Ui0hgJsz5amcbCq/I/bbNbZ2kUyQfWOw2ZS5q9ExO9fJelmJDV
-	 JoTW7+mVoW8JQm4aPfX9GffJUvsXf9CKpTJVs952AAHPXkRtNMzStQxAzUh/Zv0IAM
-	 0fAcJug/ASl+Poqji32qvlgh2ELNQMPdZwK3F2r+xv/iG/DXptEJg9zeHdsn/Jb+Iz
-	 0ftJTTXMZjBNyUB0xZcMDq65RoPvWTKPBxqqHxCCvmsG4BmH9jMW9szDkcIz+t9UOi
-	 mrIcG+VFSZqEP8KKocQ42uPkXDpb8JEBmQ5qSM4KpHB9tjvuVuaI9zpuuXloq4bRbo
-	 YzTBzB4DMLNQw==
-Date: Mon, 2 Dec 2024 10:36:43 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>,
-	Alasdair Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>,
-	Mikulas Patocka <mpatocka@redhat.com>,
-	Adrian Hunter <adrian.hunter@intel.com>,
-	Asutosh Das <quic_asutoshd@quicinc.com>,
-	Ritesh Harjani <ritesh.list@gmail.com>,
-	Ulf Hansson <ulf.hansson@linaro.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Avri Altman <avri.altman@wdc.com>,
-	Bart Van Assche <bvanassche@acm.org>,
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-	Gaurav Kashyap <quic_gaurkash@quicinc.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	"Theodore Y. Ts'o" <tytso@mit.edu>,
-	Jaegeuk Kim <jaegeuk@kernel.org>,
-	Alexander Viro <viro@zeniv.linux.org.uk>,
-	Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
-	linux-block@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, dm-devel@lists.linux.dev,
-	linux-mmc@vger.kernel.org, linux-scsi@vger.kernel.org,
-	linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
-	Om Prakash Singh <quic_omprsing@quicinc.com>
-Subject: Re: [PATCH RESEND v7 00/17] Hardware wrapped key support for QCom
- ICE and UFS core
-Message-ID: <20241202183643.GB2037@sol.localdomain>
-References: <20241202-wrapped-keys-v7-0-67c3ca3f3282@linaro.org>
+	 Content-Type:Content-Disposition:In-Reply-To; b=AyEiG0UIxl7hW2Xql/nonj3KHjKbXJM1+1F1/SJj1bvrgaZuAta0nl7O7HkQV6vaNwh7wtrTtxA8FstZFB3YvzeCJo7uo3mT4NWc7OA+DmarvAEjN2IG+Fa4wg6k5AiPMas+85g9JpRukqiOJ1GzV2Z3gdWxSAr3Chkpdj2m40A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=NWzK/hld; arc=none smtp.client-ip=90.155.50.34
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=Pzu6FHFKvY1fkmm5m6RJBFQICe/d040JPPfejReux0k=; b=NWzK/hldf3qSAHq8nyp0nMG9F7
+	sqlP+bpMbg9PF7hbNfEq0pDtg4Oglxv0DeMv3VDfJmRCFKLYbtkjYY2MvjJB7DNcJfR0G+Dl3G1Sz
+	c8ytxQYeZJg5DRcROmH65fbOgC6TDalF4PBa/7T/U9oLjBIhXVB2OQaqwrH3mgDF/QIXk2qDK/JuC
+	ZGeZRUGYaEA0QIFf+nqodenZpUbaRwuhLDK+eKED/ao+1WeWa1Rtw9ZySwHO37URQk4R42pmxSUjj
+	7XRp6AitcWQtbA0s1foZriTyHEXUsYclIz+gTAyDpTMBft0MhEpdbjuudwuLQiMZJCeMo7ZXiTy66
+	/Th27nBg==;
+Received: from willy by casper.infradead.org with local (Exim 4.98 #2 (Red Hat Linux))
+	id 1tI9wq-00000008MCm-2TtC;
+	Mon, 02 Dec 2024 17:11:00 +0000
+Date: Mon, 2 Dec 2024 17:11:00 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: Dan Williams <dan.j.williams@intel.com>,
+	Jonathan Corbet <corbet@lwn.net>, apw@canonical.com,
+	joe@perches.com, dwaipayanray1@gmail.com, lukas.bulwahn@gmail.com,
+	workflows@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, wens@csie.org
+Subject: Re: [PATCH v2 0/3] Make Helped-by tag supported
+Message-ID: <Z03qJKpjBqJ9vAhY@casper.infradead.org>
+References: <cover.1730874296.git.dsimic@manjaro.org>
+ <87h68k4esb.fsf@trenco.lwn.net>
+ <cabfa180845df30bfb7a541a701a57e9@manjaro.org>
+ <672e628111eb0_10bc629436@dwillia2-xfh.jf.intel.com.notmuch>
+ <28c0a0ecc2e2880e4cb98449767e2842@manjaro.org>
+ <9ae99d14dcd8867333fceacfaaa4430a@manjaro.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -85,59 +68,46 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20241202-wrapped-keys-v7-0-67c3ca3f3282@linaro.org>
+In-Reply-To: <9ae99d14dcd8867333fceacfaaa4430a@manjaro.org>
 
-On Mon, Dec 02, 2024 at 01:02:16PM +0100, Bartosz Golaszewski wrote:
-> The previous iteration[1] has been on the list for many weeks without
-> receiving any comments - neither positive nor negative. If there are no
-> objections - could we start discussing how to make these patches go
-> upstream for v6.14?
+On Mon, Dec 02, 2024 at 04:00:47PM +0100, Dragan Simic wrote:
+> On 2024-11-09 04:10, Dragan Simic wrote:
+> > On 2024-11-08 20:12, Dan Williams wrote:
+> > > Dragan Simic wrote:
+> > > > I'm fully aware that we may be reluctant to supporting
+> > > > additional tags,
+> > > > because we may then end up with a whole bunch of strange tags
+> > > > that might
+> > > > be a bit hard to understand and use properly, but I think that adding
+> > > > Helped-by to the supported tag list may actually be a good thing
+> > > > to do.
+> > > > As described above, Helped-by fits very well between the Suggested-by
+> > > > tag and the Co-developed-by + Signed-off-by pair of tags, and I think
+> > > > that providing the right level of attribution may be beneficial.
+> > > 
+> > > Patch attribution is separate from giving thanks. I would much rather
+> > > someone take the time to say "Thanks" in the changelog with some
+> > > supporting text rather than boil down all the myriad ways to be
+> > > thankful
+> > > into a generic tag. "git log --grep=Thanks" often yields valuable
+> > > details, beyond just attribution, on how people have helped each other
+> > > develop this global project of ours. If the introduction of Helped-by
+> > > would replace even one authentic "Thank you" note with a generic tag
+> > > then it is a net loss for the community.
+> > 
+> > I do agree that writing "Thanks John for helping with..." in a patch
+> > description would be nice, but unfortunately I've seen multiple times
+> > that people don't enjoy writing their patch descriptions at all, and
+> > just want to "get them out the door" as quickly as possible.
+> > 
+> > With that in mind, making Helped-by tags supported would allow such
+> > people to at least quickly mention someone they're thankful to, which
+> > actually wouldn't prevent anyone from saying the same more verbosely
+> > in a patch description.
+> 
+> Just checking, are there any further thoughts on this patch?
 
-The way to do it will be for the block patches to be taken through the block
-tree first.  That will unblock the rest, which can be taken through their
-respective trees in subsequent cycles.
-
-I'm really hoping to be able to test these patches with upstream myself, which
-I'm not able to do yet.  I'll try to leave some review comments on the parts not
-authored by me the mean time.  Anyway, thanks for continuing to work on this.
-
-> Tested on sm8650-qrd.
-> 
-> How to test:
-> 
-> Use the wip-wrapped-keys branch from https://github.com/ebiggers/fscryptctl
-> to build a custom fscryptctl that supports generating wrapped keys.
-> 
-> Enable the following config options:
-> CONFIG_BLK_INLINE_ENCRYPTION=y
-> CONFIG_QCOM_INLINE_CRYPTO_ENGINE=m
-> CONFIG_FS_ENCRYPTION_INLINE_CRYPT=y
-> CONFIG_SCSI_UFS_CRYPTO=y
-> 
-> $ mkfs.ext4 -F -O encrypt,stable_inodes /dev/disk/by-partlabel/userdata
-> $ mount /dev/disk/by-partlabel/userdata -o inlinecrypt /mnt
-> $ fscryptctl generate_hw_wrapped_key /dev/disk/by-partlabel/userdata > /mnt/key.longterm
-> $ fscryptctl prepare_hw_wrapped_key /dev/disk/by-partlabel/userdata < /mnt/key.longterm > /tmp/key.ephemeral
-> $ KEYID=$(fscryptctl add_key --hw-wrapped-key < /tmp/key.ephemeral /mnt)
-> $ rm -rf /mnt/dir
-> $ mkdir /mnt/dir
-> $ fscryptctl set_policy --hw-wrapped-key --iv-ino-lblk-64 "$KEYID" /mnt/dir
-> $ dmesg > /mnt/dir/test.txt
-> $ sync
-> 
-> Reboot the board
-> 
-> $ mount /dev/disk/by-partlabel/userdata -o inlinecrypt /mnt
-> $ ls /mnt/dir
-> $ fscryptctl prepare_hw_wrapped_key /dev/disk/by-partlabel/userdata < /mnt/key.longterm > /tmp/key.ephemeral
-> $ KEYID=$(fscryptctl add_key --hw-wrapped-key < /tmp/key.ephemeral /mnt)
-> $ fscryptctl set_policy --hw-wrapped-key --iv-ino-lblk-64 "$KEYID" /mnt/dir
-> $ cat /mnt/dir/test.txt # File should now be decrypted
-
-That doesn't verify that the encryption is being done correctly, which is the
-most important thing to test.  For that we'll need to resurrect the following
-patchset for xfstests:
-https://lore.kernel.org/fstests/20220228074722.77008-1-ebiggers@kernel.org/
-
-- Eric
+I agree with Dan & Jon; we don't need this tag.  And if someone's doing
+a poor job of writing commit messages, they need to be helped to write
+better ones.
 
