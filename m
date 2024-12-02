@@ -1,209 +1,206 @@
-Return-Path: <linux-doc+bounces-31836-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31844-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FA8B9E03B3
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 14:39:30 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 743CB9E04C4
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 15:25:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 73F44B30D4C
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 12:07:56 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9DC1CB20C0E
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 12:47:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8BD83209F47;
-	Mon,  2 Dec 2024 12:03:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 704001FE468;
+	Mon,  2 Dec 2024 12:47:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b="PLRiCgWx"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OqzQXC9Q"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AAC6209665
-	for <linux-doc@vger.kernel.org>; Mon,  2 Dec 2024 12:03:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC1431FE46A;
+	Mon,  2 Dec 2024 12:47:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733140986; cv=none; b=a2jpzFfFBnXpD+YIqN2SEZGENb9oLhRUfcEJ/fdD9lNoiSmIiFWXNMj+u0bSDSRcsMOcJa4o1u6IFDSWRHCtajNDCe99TzVViOT67jQY9qMAAmE6PLPkp/CHdmzXwH0nKwcfBGnT5f0LIT8vWCpdDpgj8ojTQ9AA6ay4Zog2eAI=
+	t=1733143671; cv=none; b=QkTjLCjc7A/t0fYOlxgJljiuF3m6/Dwd1d05QgniGUDOjpnd7VkpwjBwSswWo6MG2imVYO/jA0ug6hzErz4cXV85Rg/Wq4glfUVM/glwmY+xC52lqf7a6SA+ABeOyLp9bXXck/nasKKmCkrM9jkAhPxxpBPEFHLu0iPszPEEBIQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733140986; c=relaxed/simple;
-	bh=AqF63O/Ib0+mAPITy6g8+BVgv9brQasaHdYYrdxQTrk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=annOs/+PFf1QxI3esnewG+ZYW03jUkaVTzgY62zOSJWFI7MAJd7hXI/QD8kyV4MVIwX+IDDvx6BRkH2fkcageHHKZLXbl60Pu3R3r/dVivsjHU1yZ2rnMayhosVmTwM/7fNUkgqtxG7Zp4uAa67m8aXxhMKlVihul2ftZhMFPZI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl; spf=none smtp.mailfrom=bgdev.pl; dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b=PLRiCgWx; arc=none smtp.client-ip=209.85.128.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bgdev.pl
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-434a766b475so38216355e9.1
-        for <linux-doc@vger.kernel.org>; Mon, 02 Dec 2024 04:03:03 -0800 (PST)
+	s=arc-20240116; t=1733143671; c=relaxed/simple;
+	bh=HrV9/dOauQfeTMRpIiHhEPmlWD1hR9B/XAaKHgGtO00=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=MEu2t52lQRwDzYIdTFZZYAwgnPCp3KsurRhVEnkAbHcDWNhWc2lLJooJFm3X1X42CUl8X2RQ76W2jjgcRopl2Vo0YQzOMmmssv8dzXKPfjvEyMsMtUHJa9/h1BOpopT9za8tyf/MHuAk09k8DxgUSZ0olxPQcKXX1jJjMR7Sv8c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OqzQXC9Q; arc=none smtp.client-ip=209.85.210.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-724f1004c79so2744508b3a.2;
+        Mon, 02 Dec 2024 04:47:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1733140981; x=1733745781; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=gYruTmcB1Bftzc/voPlNnlx7ouCt6Ma+mW6cK8AFUIA=;
-        b=PLRiCgWxV3A/5wH5DLrt14TW0zql/H0j5JM6l/a0UYpIRMD6UHGGxE5YVmZ60QFdSV
-         jEzyLkQMz2Scjp0ESUVB5ev5FUDk5MSJ7lB1RqMSjQRxtTYGQ/CplQzM+FyPTJLZIjIz
-         uqlButwN2ITRlbdke+xpZsO/43UtopL3Hs51ghmUJLWwB3hoV+GMZMMjlQi6UogoptrU
-         4hjjQSc7bpLF8c0IAs/OG5A9cXL4GiscD2R7yzdBIzyk5FgnrLIe60147ESzda6AZ2ht
-         8GpVGl5nuhXUAx8+IhBv+rILRrK5eX8tbiflrgf0y+7fOZMKJZA18x9fDLasgP20xYoM
-         CW8w==
+        d=gmail.com; s=20230601; t=1733143669; x=1733748469; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=qCzMoMCswwZtYXZlSm324faiWhRkG3dwRJTSsFPFn9M=;
+        b=OqzQXC9QPrUl4ToRlrvdV+yHO1T/a71W35WNwu0K3h7rIASiZGDPrRbSl3S6J4P8t4
+         uLKfnW5u0C1sF8OUbYDTtZUtRXpsDTEgLRIi/5Theav8JpDsHMH4+bQXPq119E8x3r//
+         gdzG9/DKbbKwacZHpXYhiPI0Qyivw79hGXcsSgjiM/QI6ZxRJjKjOat733P0ajI5Yni9
+         fYqdcLOPwGKzC6/1j+kWC6VVPKxdki9La8YBwHLVH+STUrmQs64WVmWrETp6YGZUnpeq
+         aKFZuZgz5Pf8qqxDX/EdPec6LXoSxV2NrUI9Vu4N6iaScdnaD9mxZNbNWGBwilbkNk6+
+         VEZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733140981; x=1733745781;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=gYruTmcB1Bftzc/voPlNnlx7ouCt6Ma+mW6cK8AFUIA=;
-        b=qYfN3y2osRH5PCJlqjOO4OR1d7IFA0JFOqWhQd1Yox1T9M2VAWCFWKkJ9new4T1hIi
-         LA1VXNFdlq0/XYEOEWEv+CCFeg32zMYR4hl6F3beHbyEdS2/FRxuGvf2x44KxIzNQHWb
-         jYZTB8+jG1L17tGOXX/8j4CRgeuTISyVxBqLKV9sICfcyPKh7dDJ9Yu6ZE1qFQxH7OeX
-         9wP9qJHRX9Jz4sq+ikKU4uWYURDVcYt//fBgov9aC3rkf1cRucZN9uY/WiGwhsZKffi+
-         GsQrCQLayDMB6wvM+6dgO+FWrPkM8HcMdk35jCoF7MxWA3zOHdEFNPjc31YafM8XNFh5
-         Mu3w==
-X-Forwarded-Encrypted: i=1; AJvYcCWSm70eahTKMU6OBb/cXzeUHbdxCSMRUmufs0t+skuoba4A6ulfUHGZSmMLcgcHScRhpdKQ5Aof8fI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzZQiPuUoBZ3pGcOhevRdNKM1a+bTGACXxYEXcOMmcMXDqedPF1
-	T0Su5w1Jv+51UbrYrYwh7W69EFQwvWX4nzD4MElVBRHWR1flfyfKiJtQAkMQulE=
-X-Gm-Gg: ASbGnctCtwpaSA/gvQXsmBKFUtjrtEJP0iJwIW+1Uw3ew3h8T7lk+akylGvwa8FkTYx
-	JPcPmyUzTbhBYwWg33moQXHYJsWL6O0wfzcF42bdQkqoPfUkYY9p/RMN/7ScPZTPX2WMcRs9Hvp
-	n05bqQMN66MCYCaXFmPWTK99mI2RtRk/a2FCv0bF1/1bIPpCGgpGyHXaLKWh5dAwkW5ttca1Wsj
-	yW6DhSp503JdzcQqeTPC5Sf+IGOikJFFT7dx1qU
-X-Google-Smtp-Source: AGHT+IH2nzvAB3orz8c5uRDN7301DF9ak1WkbxvD6Xg2UwkFlwWmF7C9APA4wxhU1G0XcB5G0CCeWg==
-X-Received: by 2002:a05:600c:1e06:b0:42c:b187:bde9 with SMTP id 5b1f17b1804b1-434a9e0bc3fmr222546695e9.30.1733140981243;
-        Mon, 02 Dec 2024 04:03:01 -0800 (PST)
-Received: from [127.0.1.1] ([193.57.185.11])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-434b0d9bed7sm152396095e9.8.2024.12.02.04.02.59
+        d=1e100.net; s=20230601; t=1733143669; x=1733748469;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=qCzMoMCswwZtYXZlSm324faiWhRkG3dwRJTSsFPFn9M=;
+        b=SrQyceIYpICW1A4aUgSBZ/g//qpYt0Vkx6kVibtU3zUlvIxiOtEXGedarBc3hh5S3J
+         +9O1pTcXWNLxU8pH+2ft9qWRlMg/b2WxbjxJchw+M63L87VU4AxhdbAMAYydUoRhm/B/
+         LpU1d+UtuB0QOh4D//slEjbjzeSBnp9ub0pb8dEji3CE/Irc//N7cEndPm/Aec2Hesqk
+         vBAr8PxMvPdZS4kC867Ax4bMPRQ3xH6ZamgtrN7wDLgVoLM5+1rvNKeh4dXl+An53JgV
+         Px4AEkmQJ23Gcul36qKkPnTQHqxiZzT2aqspBGOjC/O1vOqgwHiXvuWovO1oCiDgomTo
+         Q42A==
+X-Forwarded-Encrypted: i=1; AJvYcCV4nj0Jxl61IWR3+YH2rJ9XEYOjlYNWxUzrsQhO/jccva0uh4z1oVQ8fKvCTq03mUKiD5r01PPXOIo=@vger.kernel.org, AJvYcCWEVJtZLVgWvPQuPqvpExRIMw9+As1m5kZs33M/XGclunSFIA+SfaqPJy6JN7pafLOQJtEE16sJ3EdwPTHi@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz5nV9jCemh6UM1KM8HSd6mtQa+DR69nEv4t+t2+ObECzY8jd7C
+	r+1lIjdxMpm+miSFrn+lpPXmXPmQDpVcQ/5NMMy6JUjm5pffga20
+X-Gm-Gg: ASbGncs1JG0+6BkXiFlOLBJ+AJWwTGslm1XvuXPYdwX/t2sk/vEo0iWwStIEsQA645F
+	lSlrCX/eX6akKg/FnHl5HuHAaP2xzbK0vnVFTabwjb1zx06u3/HNWAvQiW6m8DwyPgxWBEjp5qa
+	cHFw1eT4tpjCIa9KRiCQi3/omuw9vXleveSEeWMs4iJjDk9+YFkiAxRpTeafWLVBOu16W16jMFW
+	W675uVbG4f8x+MH0oJ/2mEILxKhIW84jL2K4qpCihlUdfYpNeqy6kZjnLSHXVE=
+X-Google-Smtp-Source: AGHT+IGhTGeEW3OAHtQJ3zwilcLHoZEoDFMHHB9GCJ19gCSLGgHx3RTLysE7YXX4PPyCOI/CS1zTAA==
+X-Received: by 2002:a17:903:1c3:b0:215:8ca3:3bac with SMTP id d9443c01a7336-2158ca33e29mr68764465ad.16.1733143669041;
+        Mon, 02 Dec 2024 04:47:49 -0800 (PST)
+Received: from ubuntu.mioffice.cn ([43.224.245.227])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-215218f22cdsm76041275ad.36.2024.12.02.04.47.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Dec 2024 04:03:00 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Mon, 02 Dec 2024 13:02:28 +0100
-Subject: [PATCH RESEND v7 12/17] ufs: core: add support for wrapped keys to
- UFS core
+        Mon, 02 Dec 2024 04:47:48 -0800 (PST)
+From: Wenchao Hao <haowenchao22@gmail.com>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@redhat.com>,
+	Barry Song <baohua@kernel.org>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Usama Arif <usamaarif642@gmail.com>,
+	Lance Yang <ioworker0@gmail.com>,
+	Matthew Wilcox <willy@infradead.org>,
+	Peter Xu <peterx@redhat.com>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org
+Cc: Wenchao Hao <haowenchao22@gmail.com>
+Subject: [PATCH v3] mm: add per-order mTHP swap-in fallback/fallback_charge counters
+Date: Mon,  2 Dec 2024 20:47:30 +0800
+Message-ID: <20241202124730.2407037-1-haowenchao22@gmail.com>
+X-Mailer: git-send-email 2.47.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241202-wrapped-keys-v7-12-67c3ca3f3282@linaro.org>
-References: <20241202-wrapped-keys-v7-0-67c3ca3f3282@linaro.org>
-In-Reply-To: <20241202-wrapped-keys-v7-0-67c3ca3f3282@linaro.org>
-To: Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>, 
- Alasdair Kergon <agk@redhat.com>, Mike Snitzer <snitzer@kernel.org>, 
- Mikulas Patocka <mpatocka@redhat.com>, 
- Adrian Hunter <adrian.hunter@intel.com>, 
- Asutosh Das <quic_asutoshd@quicinc.com>, 
- Ritesh Harjani <ritesh.list@gmail.com>, 
- Ulf Hansson <ulf.hansson@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
- Avri Altman <avri.altman@wdc.com>, Bart Van Assche <bvanassche@acm.org>, 
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, 
- Gaurav Kashyap <quic_gaurkash@quicinc.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, 
- "Martin K. Petersen" <martin.petersen@oracle.com>, 
- Eric Biggers <ebiggers@kernel.org>, "Theodore Y. Ts'o" <tytso@mit.edu>, 
- Jaegeuk Kim <jaegeuk@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Cc: linux-block@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, dm-devel@lists.linux.dev, 
- linux-mmc@vger.kernel.org, linux-scsi@vger.kernel.org, 
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, 
- Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2886;
- i=bartosz.golaszewski@linaro.org; h=from:subject:message-id;
- bh=KDRiDKGiOR40fLHLM58rwn0K0j6tx7t9Y60UZCPt2/Y=;
- b=owEBbQKS/ZANAwAKARGnLqAUcddyAcsmYgBnTaHVRwop+WnyjY5L41879Dt/Woqbv2vxlbW7D
- sSLqwx1OkKJAjMEAAEKAB0WIQQWnetsC8PEYBPSx58Rpy6gFHHXcgUCZ02h1QAKCRARpy6gFHHX
- ctOvEACAFUZHNYcJjh/LSB8KSkFcf+ZYvmftdMT8boQLn7AnmN4Ei4Hw0XHry5lTmJ0qMJAtqVb
- cd8ABKa59peuhCt4FgaE5Vkoa0o0dvA6+gUlGoh/77zfb1/o3ysp2LZiYSP5NzRKfasuAGM6pWS
- lENKbBd/ZfT0QV6T8NsmHxgFiwH0GUqw7cgpVOS0f/udj7J416/Km+3rMmmz+2XFP0VwAx1WZJO
- wGyvNhCUCHVJfWyvkrsQoe2fuE+qy1F9Iw9KmSU2LH0jmfFHfVMxrABQZgllsVHEKgkzC8VbLkf
- HJFMqgkGOJRzWwpaSdJV9YjgrfRCBCxbCRTjRUDgvF5hLUl6qe4pDLgVDW3j8ighcfCAjgRJljz
- /2gM+bUOISVp0/xZMaBQChDVxjjjY4IA0jCSGaPwoEXWagvenW2KZVHnzSlxFg9wnb57gp+hx8J
- BFkdZrUmHdSt1WN0cvyWGuw2qOfSlWI+0Uy9npKT5zOqOymbC44Y6wr7MWQ6sHovB4JDTY7EvgX
- cyVV+mi8sKc2+DMLouyOtdqY6Ty7HfKcLjcdn9o5b3r7mBnVc7v40npv16zlDP20Hl6D/IfJpGe
- ojN4SC46+97/DDpRkafl6PZtbHlYMJbr0ojcZQLsJAlJYrEQNxysJgZ7kkXIJ0m3SVjlysufQj0
- ob47mYBh8sQ4FVQ==
-X-Developer-Key: i=bartosz.golaszewski@linaro.org; a=openpgp;
- fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
+Content-Transfer-Encoding: 8bit
 
-From: Gaurav Kashyap <quic_gaurkash@quicinc.com>
+Currently, large folio swap-in is supported, but we lack a method to
+analyze their success ratio. Similar to anon_fault_fallback, we introduce
+per-order mTHP swpin_fallback and swpin_fallback_charge counters for
+calculating their success ratio. The new counters are located at:
 
-Add a new UFS capability flag indicating that the controller supports HW
-wrapped keys and use it to determine which mechanism to use in UFS core.
+/sys/kernel/mm/transparent_hugepage/hugepages-<size>/stats/
+	swpin_fallback
+	swpin_fallback_charge
 
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Gaurav Kashyap <quic_gaurkash@quicinc.com>
-Reviewed-by: Konrad Dybcio <konradybcio@kernel.org>
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Signed-off-by: Wenchao Hao <haowenchao22@gmail.com>
 ---
- drivers/ufs/core/ufshcd-crypto.c | 24 ++++++++++++++++--------
- include/ufs/ufshcd.h             |  5 +++++
- 2 files changed, 21 insertions(+), 8 deletions(-)
+V3:
+ Update description about swpin_fallback and swpin_fallback_charge
 
-diff --git a/drivers/ufs/core/ufshcd-crypto.c b/drivers/ufs/core/ufshcd-crypto.c
-index 33083e0cad6e1..64389e8769108 100644
---- a/drivers/ufs/core/ufshcd-crypto.c
-+++ b/drivers/ufs/core/ufshcd-crypto.c
-@@ -81,13 +81,15 @@ static int ufshcd_crypto_keyslot_program(struct blk_crypto_profile *profile,
- 	cfg.crypto_cap_idx = cap_idx;
- 	cfg.config_enable = UFS_CRYPTO_CONFIGURATION_ENABLE;
+V2:
+ Introduce swapin_fallback_charge, which increments if it fails to
+ charge a huge page to memory despite successful allocation.
+
+ Documentation/admin-guide/mm/transhuge.rst | 10 ++++++++++
+ include/linux/huge_mm.h                    |  2 ++
+ mm/huge_memory.c                           |  6 ++++++
+ mm/memory.c                                |  2 ++
+ 4 files changed, 20 insertions(+)
+
+diff --git a/Documentation/admin-guide/mm/transhuge.rst b/Documentation/admin-guide/mm/transhuge.rst
+index 333958ef0d5f..156a03af0a88 100644
+--- a/Documentation/admin-guide/mm/transhuge.rst
++++ b/Documentation/admin-guide/mm/transhuge.rst
+@@ -591,6 +591,16 @@ swpin
+ 	is incremented every time a huge page is swapped in from a non-zswap
+ 	swap device in one piece.
  
--	if (ccap_array[cap_idx].algorithm_id == UFS_CRYPTO_ALG_AES_XTS) {
--		/* In XTS mode, the blk_crypto_key's size is already doubled */
--		memcpy(cfg.crypto_key, key->raw, key->size/2);
--		memcpy(cfg.crypto_key + UFS_CRYPTO_KEY_MAX_SIZE/2,
--		       key->raw + key->size/2, key->size/2);
--	} else {
--		memcpy(cfg.crypto_key, key->raw, key->size);
-+	if (key->crypto_cfg.key_type != BLK_CRYPTO_KEY_TYPE_HW_WRAPPED) {
-+		if (ccap_array[cap_idx].algorithm_id == UFS_CRYPTO_ALG_AES_XTS) {
-+			/* In XTS mode, the blk_crypto_key's size is already doubled */
-+			memcpy(cfg.crypto_key, key->raw, key->size / 2);
-+			memcpy(cfg.crypto_key + UFS_CRYPTO_KEY_MAX_SIZE / 2,
-+			       key->raw + key->size / 2, key->size / 2);
-+		} else {
-+			memcpy(cfg.crypto_key, key->raw, key->size);
-+		}
++swpin_fallback
++	is incremented if swapin fails to allocate or charge a huge page
++	and instead falls back to using huge pages with lower orders or
++	small pages.
++
++swpin_fallback_charge
++	is incremented if swapin fails to charge a huge page and instead
++	falls back to using  huge pages with lower orders or small pages
++	even though the allocation was successful.
++
+ swpout
+ 	is incremented every time a huge page is swapped out to a non-zswap
+ 	swap device in one piece without splitting.
+diff --git a/include/linux/huge_mm.h b/include/linux/huge_mm.h
+index b94c2e8ee918..93e509b6c00e 100644
+--- a/include/linux/huge_mm.h
++++ b/include/linux/huge_mm.h
+@@ -121,6 +121,8 @@ enum mthp_stat_item {
+ 	MTHP_STAT_ANON_FAULT_FALLBACK_CHARGE,
+ 	MTHP_STAT_ZSWPOUT,
+ 	MTHP_STAT_SWPIN,
++	MTHP_STAT_SWPIN_FALLBACK,
++	MTHP_STAT_SWPIN_FALLBACK_CHARGE,
+ 	MTHP_STAT_SWPOUT,
+ 	MTHP_STAT_SWPOUT_FALLBACK,
+ 	MTHP_STAT_SHMEM_ALLOC,
+diff --git a/mm/huge_memory.c b/mm/huge_memory.c
+index ab46ef718b44..d062b257376d 100644
+--- a/mm/huge_memory.c
++++ b/mm/huge_memory.c
+@@ -617,6 +617,8 @@ DEFINE_MTHP_STAT_ATTR(anon_fault_fallback, MTHP_STAT_ANON_FAULT_FALLBACK);
+ DEFINE_MTHP_STAT_ATTR(anon_fault_fallback_charge, MTHP_STAT_ANON_FAULT_FALLBACK_CHARGE);
+ DEFINE_MTHP_STAT_ATTR(zswpout, MTHP_STAT_ZSWPOUT);
+ DEFINE_MTHP_STAT_ATTR(swpin, MTHP_STAT_SWPIN);
++DEFINE_MTHP_STAT_ATTR(swpin_fallback, MTHP_STAT_SWPIN_FALLBACK);
++DEFINE_MTHP_STAT_ATTR(swpin_fallback_charge, MTHP_STAT_SWPIN_FALLBACK_CHARGE);
+ DEFINE_MTHP_STAT_ATTR(swpout, MTHP_STAT_SWPOUT);
+ DEFINE_MTHP_STAT_ATTR(swpout_fallback, MTHP_STAT_SWPOUT_FALLBACK);
+ #ifdef CONFIG_SHMEM
+@@ -637,6 +639,8 @@ static struct attribute *anon_stats_attrs[] = {
+ #ifndef CONFIG_SHMEM
+ 	&zswpout_attr.attr,
+ 	&swpin_attr.attr,
++	&swpin_fallback_attr.attr,
++	&swpin_fallback_charge_attr.attr,
+ 	&swpout_attr.attr,
+ 	&swpout_fallback_attr.attr,
+ #endif
+@@ -669,6 +673,8 @@ static struct attribute *any_stats_attrs[] = {
+ #ifdef CONFIG_SHMEM
+ 	&zswpout_attr.attr,
+ 	&swpin_attr.attr,
++	&swpin_fallback_attr.attr,
++	&swpin_fallback_charge_attr.attr,
+ 	&swpout_attr.attr,
+ 	&swpout_fallback_attr.attr,
+ #endif
+diff --git a/mm/memory.c b/mm/memory.c
+index d5a1b0a6bf1f..a44547600c02 100644
+--- a/mm/memory.c
++++ b/mm/memory.c
+@@ -4189,8 +4189,10 @@ static struct folio *alloc_swap_folio(struct vm_fault *vmf)
+ 			if (!mem_cgroup_swapin_charge_folio(folio, vma->vm_mm,
+ 							    gfp, entry))
+ 				return folio;
++			count_mthp_stat(order, MTHP_STAT_SWPIN_FALLBACK_CHARGE);
+ 			folio_put(folio);
+ 		}
++		count_mthp_stat(order, MTHP_STAT_SWPIN_FALLBACK);
+ 		order = next_order(&orders, order);
  	}
  
- 	err = ufshcd_program_key(hba, key, &cfg, slot);
-@@ -196,7 +198,13 @@ int ufshcd_hba_init_crypto_capabilities(struct ufs_hba *hba)
- 	hba->crypto_profile.ll_ops = ufshcd_crypto_ops;
- 	/* UFS only supports 8 bytes for any DUN */
- 	hba->crypto_profile.max_dun_bytes_supported = 8;
--	hba->crypto_profile.key_types_supported = BLK_CRYPTO_KEY_TYPE_STANDARD;
-+	if (hba->caps & UFSHCD_CAP_WRAPPED_CRYPTO_KEYS)
-+		hba->crypto_profile.key_types_supported =
-+				BLK_CRYPTO_KEY_TYPE_HW_WRAPPED;
-+	else
-+		hba->crypto_profile.key_types_supported =
-+				BLK_CRYPTO_KEY_TYPE_STANDARD;
-+
- 	hba->crypto_profile.dev = hba->dev;
- 
- 	/*
-diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
-index bc6f08397769c..db2b71f760717 100644
---- a/include/ufs/ufshcd.h
-+++ b/include/ufs/ufshcd.h
-@@ -761,6 +761,11 @@ enum ufshcd_caps {
- 	 * WriteBooster when scaling the clock down.
- 	 */
- 	UFSHCD_CAP_WB_WITH_CLK_SCALING			= 1 << 12,
-+
-+	/*
-+	 * UFS controller supports HW wrapped keys when using inline encryption.
-+	 */
-+	UFSHCD_CAP_WRAPPED_CRYPTO_KEYS			= 1 << 13,
- };
- 
- struct ufs_hba_variant_params {
-
 -- 
-2.45.2
+2.45.0
 
 
