@@ -1,407 +1,157 @@
-Return-Path: <linux-doc+bounces-31868-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31870-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D33DD9E0B33
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 19:39:42 +0100 (CET)
-Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id D67D89E09D0
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 18:26:26 +0100 (CET)
+Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A1E851625A0
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 17:26:23 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F1551D9A6E;
+	Mon,  2 Dec 2024 17:26:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="LjPuhyV3"
+X-Original-To: linux-doc@vger.kernel.org
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 134AEB461F5
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2024 16:31:49 +0000 (UTC)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 980921DD88D;
-	Mon,  2 Dec 2024 16:29:51 +0000 (UTC)
-X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0151199235;
-	Mon,  2 Dec 2024 16:29:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DF1F1662E7;
+	Mon,  2 Dec 2024 17:26:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.9
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733156991; cv=none; b=EBABubaCFH0qtq2RX/g5nbBjkKz5aqF2RCa0BE61yEh/mcZ4dNKaZbtf3utELCkFOag9QEteYPKkeeiyv/OuM1geu+rLAiMo8+jGPN9HV3ecltql7P1xiYdRMDlbWgVl+1ma/KWfTqCPaqNiaYAQ2IpCsBKaBS9695fREuDpIXo=
+	t=1733160382; cv=none; b=qpULl9H19c5m3Q8kRWmmSew4VIuqNns941vQXbHitSxSaOZpscmcGQkMMwGGoxC44CUY+uqx0BexC8xJOwloiB8s6Mqr1QeTcr9rCHke2odDbtrSY0Xu7xWnEwMqK1Mb52tCjiTAHMxOtQpM52YkHYLP54XcCzj8f3vVTMvcBwo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733156991; c=relaxed/simple;
-	bh=NWcoolRJnlIcnRwWuYA3HRq67OUoRL+ks4l5fFcP5zw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Z9EeX8AfDd5qxZE3sbRZHd77m/NknfNI/xP9o8bn38MxA1Jmi7ytRtD9XbkQEyyQCbJmzgw6T+r7DruhBxZajfqSHr79S48nNFpm1vWc40MxL49sUneR+uj+ZFApGrps+d6IR7KugQmuBPpkal4KMxyqcCDMcaqA0V2lZVCc13s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=fomichev.me; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.214.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=fomichev.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-20cf3e36a76so41468935ad.0;
-        Mon, 02 Dec 2024 08:29:49 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733156989; x=1733761789;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=IQa4xlJWlHUcobyR53zonKvvx8enhBXBuxLbjrutfQg=;
-        b=hWywH8KnYJ9NUbzRGpsdtYj22lpbhqJm4GO7T1GvLLUQpdY9ysytZDxom6RhgUwxwz
-         FpSNwvA63vHrWgfpZu6S7hiTudcVU3nO8+QkDS8sI+fnKFH25Dc+bTQKAqlodJymePzt
-         IsDntNmPMrmn44iTqJVHwAbeieByWwoQltwYF8OtH83HAdK++VzFf1xNQe1jw7Omn4+8
-         brDnu03rxv8ZiS3GZ8Ew3m6agM9EgQ+gTeMCMm1QeBuLHbNyhhQ/jkBWH8MmNy2oNrO7
-         6d5M2azs1Euy3xGja+zyeCnbG3Hv+PPb5d+9Doet6sh6bDkTTV4A+Hx3cU2Ea3N5/7Tp
-         rzfA==
-X-Forwarded-Encrypted: i=1; AJvYcCWRR45W5bP1r6ntspg6cb03vAqS80tx1cJC1kBSPbGZgnGXz2jABaBS0NQvyAChXiyUeKDvZ6WGx84=@vger.kernel.org, AJvYcCWuLBdPUUICZ+rj+GQ7QVQDyACZDzRAHjQMds/ALa7F6SwPT/QLHU6b+D2QZ9OOyILHw7PDroyg9O+S9USX@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz1O/bOL9hCjDkkloK/0M0zQfRPOyNwBF9JDghw09LHWy0P1tvh
-	dBgKFd3+Edv+U5lZltSN9sCLs2mJ0tOd+R0Hf3rkvOrg/jfiw8JkgU0pmiQ=
-X-Gm-Gg: ASbGncuGc0RIo5GMlJASgvFwDJrU4QTk/+QatXR+Psc6tpDpoiOPyNEGFflb09vEdfQ
-	lqERqm4KS06MVvuVoo0db8HXo0T0yqtjQ/Cbj3Dhxa7vqDHsdbSq6Ks4Em3FZbV8skaDQ9UN/FL
-	ydhzYHGLhA6On9MjU2Ooi9RizQdnKrwiEvrPr4uumEoZT3ERDUachTM+9OwPrFNBoEautTnXKoT
-	6u1ZrwiP7SoPdNWUJ8GQ4Drm8Rmtyyt1HM+VXg3rbs/IvGb7A==
-X-Google-Smtp-Source: AGHT+IHPCvJpFXyVbhWC4evBauoQ1MyHrC+f6PzMroLmwy0ASnMdCi5VGVDjSP7SZfgfbJpEQ5Bg8g==
-X-Received: by 2002:a17:903:41d2:b0:215:72ca:3c08 with SMTP id d9443c01a7336-21572ca3d62mr116364715ad.13.1733156988678;
-        Mon, 02 Dec 2024 08:29:48 -0800 (PST)
-Received: from localhost ([2601:646:9e00:f56e:123b:cea3:439a:b3e3])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2156e0bf55csm36682965ad.5.2024.12.02.08.29.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Dec 2024 08:29:48 -0800 (PST)
-From: Stanislav Fomichev <sdf@fomichev.me>
-To: netdev@vger.kernel.org
-Cc: davem@davemloft.net,
-	edumazet@google.com,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	horms@kernel.org,
-	donald.hunter@gmail.com,
-	corbet@lwn.net,
-	andrew+netdev@lunn.ch,
-	kory.maincent@bootlin.com,
-	sdf@fomichev.me,
-	nicolas.dichtel@6wind.com
-Subject: [PATCH net-next v3 8/8] ethtool: regenerate uapi header from the spec
-Date: Mon,  2 Dec 2024 08:29:36 -0800
-Message-ID: <20241202162936.3778016-9-sdf@fomichev.me>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241202162936.3778016-1-sdf@fomichev.me>
-References: <20241202162936.3778016-1-sdf@fomichev.me>
+	s=arc-20240116; t=1733160382; c=relaxed/simple;
+	bh=BsEHNjcP0yoRdiQY8UO4KVSJoS6Aba+uZoD/T0TC2EA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=g1qL9BxjOIw79ujo228YOvOZbLT9BNBresJU42RoOuiJDz1v3uha7TIXIM5itOGSkaDjyFUZKDk9zh+JhThHG7HOUOqbnNIgLLrhLB39ZeqQ8ag2v5IC2t38yXKPlINOaiUqLqCEMcCtqLtDRgrgt38u8n4dJ7vKqlp3szQtn5o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=LjPuhyV3; arc=none smtp.client-ip=198.175.65.9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1733160380; x=1764696380;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=BsEHNjcP0yoRdiQY8UO4KVSJoS6Aba+uZoD/T0TC2EA=;
+  b=LjPuhyV3uvetnO/24BAYLzUkfjXPMnlUN0rZAWep89fJsRbDUD+sfJ7B
+   P2nYyHBzwF5VPOZtMCTjV1CC6/wWZX5iHYgp+eI3ni7syP9EfHkw+k0Tg
+   op0TOEhDQ5vsTpeyQ+Aq0p3Gis+GY8eVQQdpWm4UZulc8kDUMGQWqxeSM
+   YxFCR/hs4QAzkvag8yATR1JjfUso7SeTweGHeWFP5aye7exGM+PZVKgre
+   8h4CDaQwWwz8oPUtQvLEs/TwtPXJsOvCPlSNww5fNLuALNsPRQ+kFKkeB
+   wmlTmoYO+b+biEC2ReyhWh5+lgJkgZ+nx2opAMNxJh7u8mlbHNH6aReGH
+   A==;
+X-CSE-ConnectionGUID: icCyv0IkSx+1htiA5cVBNg==
+X-CSE-MsgGUID: IM9glH9dSNWu1e6BvyihxA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11274"; a="55833040"
+X-IronPort-AV: E=Sophos;i="6.12,203,1728975600"; 
+   d="scan'208";a="55833040"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Dec 2024 09:26:19 -0800
+X-CSE-ConnectionGUID: bxI9jJ1zQqeonRA7mmffsA==
+X-CSE-MsgGUID: dRWQFCk7QlGCSxdVrLqoOA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,203,1728975600"; 
+   d="scan'208";a="130638664"
+Received: from sramkris-mobl1.amr.corp.intel.com (HELO [10.124.222.246]) ([10.124.222.246])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Dec 2024 09:26:18 -0800
+Message-ID: <7222b969-30a8-42de-b2ca-601f6d1b03cd@intel.com>
+Date: Mon, 2 Dec 2024 09:26:16 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v3 1/2] x86: cpu/bugs: add AMD ERAPS support; hardware
+ flushes RSB
+To: Amit Shah <amit@kernel.org>, linux-kernel@vger.kernel.org,
+ kvm@vger.kernel.org, x86@kernel.org, linux-doc@vger.kernel.org
+Cc: amit.shah@amd.com, thomas.lendacky@amd.com, bp@alien8.de,
+ tglx@linutronix.de, peterz@infradead.org, jpoimboe@kernel.org,
+ pawan.kumar.gupta@linux.intel.com, corbet@lwn.net, mingo@redhat.com,
+ dave.hansen@linux.intel.com, hpa@zytor.com, seanjc@google.com,
+ pbonzini@redhat.com, daniel.sneddon@linux.intel.com, kai.huang@intel.com,
+ sandipan.das@amd.com, boris.ostrovsky@oracle.com, Babu.Moger@amd.com,
+ david.kaplan@amd.com, dwmw@amazon.co.uk, andrew.cooper3@citrix.com
+References: <cover.1732219175.git.jpoimboe@kernel.org>
+ <20241128132834.15126-1-amit@kernel.org>
+ <20241128132834.15126-2-amit@kernel.org>
+From: Dave Hansen <dave.hansen@intel.com>
+Content-Language: en-US
+Autocrypt: addr=dave.hansen@intel.com; keydata=
+ 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
+In-Reply-To: <20241128132834.15126-2-amit@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-No functional changes. Mostly the following formatting:
-- extra docs
-- extra enums
-- XXX_MAX = __XXX_CNT - 1 -> XXX_MAX = (__XXX_CNT - 1)
-- newlines
+On 11/28/24 05:28, Amit Shah wrote:
+> From: Amit Shah <amit.shah@amd.com>
+> 
+> When Automatic IBRS is disabled, Linux flushed the RSB on every context
+> switch.  This RSB flush is not necessary in software with the ERAPS
+> feature on Zen5+ CPUs that flushes the RSB in hardware on a context
+> switch (triggered by mov-to-CR3).
+> 
+> Additionally, the ERAPS feature also tags host and guest addresses in
+> the RSB - eliminating the need for software flushing of the RSB on
+> VMEXIT.
+> 
+> Disable all RSB flushing by Linux when the CPU has ERAPS.
+> 
+> Feature mentioned in AMD PPR 57238.  Will be resubmitted once APM is
+> public - which I'm told is imminent.
 
-Signed-off-by: Stanislav Fomichev <sdf@fomichev.me>
----
- .../uapi/linux/ethtool_netlink_generated.h    | 89 ++++++++++++-------
- 1 file changed, 56 insertions(+), 33 deletions(-)
+There was a _lot_ of discussion about this. But all of that discussion
+seems to have been trimmed out and it seems like we're basically back
+to: "this is new hardware supposed to mitigate SpectreRSB, thus it
+mitigates SpectreRSB."
 
-diff --git a/include/uapi/linux/ethtool_netlink_generated.h b/include/uapi/linux/ethtool_netlink_generated.h
-index 35a24d490efe..b58f352fe4f2 100644
---- a/include/uapi/linux/ethtool_netlink_generated.h
-+++ b/include/uapi/linux/ethtool_netlink_generated.h
-@@ -1,23 +1,43 @@
- /* SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR BSD-3-Clause) */
-+/* Do not edit directly, auto-generated from: */
-+/*	Documentation/netlink/specs/ethtool.yaml */
-+/* YNL-GEN uapi header */
-+
- #ifndef _UAPI_LINUX_ETHTOOL_NETLINK_GENERATED_H
- #define _UAPI_LINUX_ETHTOOL_NETLINK_GENERATED_H
- 
-+#define ETHTOOL_FAMILY_NAME	"ethtool"
-+#define ETHTOOL_FAMILY_VERSION	1
-+
- enum {
- 	ETHTOOL_UDP_TUNNEL_TYPE_VXLAN,
- 	ETHTOOL_UDP_TUNNEL_TYPE_GENEVE,
- 	ETHTOOL_UDP_TUNNEL_TYPE_VXLAN_GPE,
- 
--	__ETHTOOL_UDP_TUNNEL_TYPE_CNT
-+	/* private: */
-+	__ETHTOOL_UDP_TUNNEL_TYPE_CNT,
-+	ETHTOOL_UDP_TUNNEL_TYPE_MAX = (__ETHTOOL_UDP_TUNNEL_TYPE_CNT - 1)
- };
- 
-+/**
-+ * enum ethtool_header_flags - common ethtool header flags
-+ * @ETHTOOL_FLAG_COMPACT_BITSETS: use compact bitsets in reply
-+ * @ETHTOOL_FLAG_OMIT_REPLY: provide optional reply for SET or ACT requests
-+ * @ETHTOOL_FLAG_STATS: request statistics, if supported by the driver
-+ */
- enum ethtool_header_flags {
--	ETHTOOL_FLAG_COMPACT_BITSETS	= 1 << 0,	/* use compact bitsets in reply */
--	ETHTOOL_FLAG_OMIT_REPLY		= 1 << 1,	/* provide optional reply for SET or ACT requests */
--	ETHTOOL_FLAG_STATS		= 1 << 2,	/* request statistics, if supported by the driver */
-+	ETHTOOL_FLAG_COMPACT_BITSETS = 1,
-+	ETHTOOL_FLAG_OMIT_REPLY = 2,
-+	ETHTOOL_FLAG_STATS = 4,
- };
- 
- enum {
--	ETHTOOL_TCP_DATA_SPLIT_UNKNOWN = 0,
-+	ETHTOOL_PHY_UPSTREAM_TYPE_MAC,
-+	ETHTOOL_PHY_UPSTREAM_TYPE_PHY,
-+};
-+
-+enum ethtool_tcp_data_split {
-+	ETHTOOL_TCP_DATA_SPLIT_UNKNOWN,
- 	ETHTOOL_TCP_DATA_SPLIT_DISABLED,
- 	ETHTOOL_TCP_DATA_SPLIT_ENABLED,
- };
-@@ -30,7 +50,7 @@ enum {
- 	ETHTOOL_A_HEADER_PHY_INDEX,
- 
- 	__ETHTOOL_A_HEADER_CNT,
--	ETHTOOL_A_HEADER_MAX = __ETHTOOL_A_HEADER_CNT - 1
-+	ETHTOOL_A_HEADER_MAX = (__ETHTOOL_A_HEADER_CNT - 1)
- };
- 
- enum {
-@@ -40,7 +60,7 @@ enum {
- 	ETHTOOL_A_BITSET_BIT_VALUE,
- 
- 	__ETHTOOL_A_BITSET_BIT_CNT,
--	ETHTOOL_A_BITSET_BIT_MAX = __ETHTOOL_A_BITSET_BIT_CNT - 1
-+	ETHTOOL_A_BITSET_BIT_MAX = (__ETHTOOL_A_BITSET_BIT_CNT - 1)
- };
- 
- enum {
-@@ -48,7 +68,7 @@ enum {
- 	ETHTOOL_A_BITSET_BITS_BIT,
- 
- 	__ETHTOOL_A_BITSET_BITS_CNT,
--	ETHTOOL_A_BITSET_BITS_MAX = __ETHTOOL_A_BITSET_BITS_CNT - 1
-+	ETHTOOL_A_BITSET_BITS_MAX = (__ETHTOOL_A_BITSET_BITS_CNT - 1)
- };
- 
- enum {
-@@ -60,7 +80,7 @@ enum {
- 	ETHTOOL_A_BITSET_MASK,
- 
- 	__ETHTOOL_A_BITSET_CNT,
--	ETHTOOL_A_BITSET_MAX = __ETHTOOL_A_BITSET_CNT - 1
-+	ETHTOOL_A_BITSET_MAX = (__ETHTOOL_A_BITSET_CNT - 1)
- };
- 
- enum {
-@@ -69,7 +89,7 @@ enum {
- 	ETHTOOL_A_STRING_VALUE,
- 
- 	__ETHTOOL_A_STRING_CNT,
--	ETHTOOL_A_STRING_MAX = __ETHTOOL_A_STRING_CNT - 1
-+	ETHTOOL_A_STRING_MAX = (__ETHTOOL_A_STRING_CNT - 1)
- };
- 
- enum {
-@@ -77,7 +97,7 @@ enum {
- 	ETHTOOL_A_STRINGS_STRING,
- 
- 	__ETHTOOL_A_STRINGS_CNT,
--	ETHTOOL_A_STRINGS_MAX = __ETHTOOL_A_STRINGS_CNT - 1
-+	ETHTOOL_A_STRINGS_MAX = (__ETHTOOL_A_STRINGS_CNT - 1)
- };
- 
- enum {
-@@ -87,7 +107,7 @@ enum {
- 	ETHTOOL_A_STRINGSET_STRINGS,
- 
- 	__ETHTOOL_A_STRINGSET_CNT,
--	ETHTOOL_A_STRINGSET_MAX = __ETHTOOL_A_STRINGSET_CNT - 1
-+	ETHTOOL_A_STRINGSET_MAX = (__ETHTOOL_A_STRINGSET_CNT - 1)
- };
- 
- enum {
-@@ -95,7 +115,7 @@ enum {
- 	ETHTOOL_A_STRINGSETS_STRINGSET,
- 
- 	__ETHTOOL_A_STRINGSETS_CNT,
--	ETHTOOL_A_STRINGSETS_MAX = __ETHTOOL_A_STRINGSETS_CNT - 1
-+	ETHTOOL_A_STRINGSETS_MAX = (__ETHTOOL_A_STRINGSETS_CNT - 1)
- };
- 
- enum {
-@@ -105,7 +125,7 @@ enum {
- 	ETHTOOL_A_STRSET_COUNTS_ONLY,
- 
- 	__ETHTOOL_A_STRSET_CNT,
--	ETHTOOL_A_STRSET_MAX = __ETHTOOL_A_STRSET_CNT - 1
-+	ETHTOOL_A_STRSET_MAX = (__ETHTOOL_A_STRSET_CNT - 1)
- };
- 
- enum {
-@@ -114,7 +134,7 @@ enum {
- 	ETHTOOL_A_PRIVFLAGS_FLAGS,
- 
- 	__ETHTOOL_A_PRIVFLAGS_CNT,
--	ETHTOOL_A_PRIVFLAGS_MAX = __ETHTOOL_A_PRIVFLAGS_CNT - 1
-+	ETHTOOL_A_PRIVFLAGS_MAX = (__ETHTOOL_A_PRIVFLAGS_CNT - 1)
- };
- 
- enum {
-@@ -182,7 +202,7 @@ enum {
- 	ETHTOOL_A_LINKINFO_TRANSCEIVER,
- 
- 	__ETHTOOL_A_LINKINFO_CNT,
--	ETHTOOL_A_LINKINFO_MAX = __ETHTOOL_A_LINKINFO_CNT - 1
-+	ETHTOOL_A_LINKINFO_MAX = (__ETHTOOL_A_LINKINFO_CNT - 1)
- };
- 
- enum {
-@@ -199,7 +219,7 @@ enum {
- 	ETHTOOL_A_LINKMODES_RATE_MATCHING,
- 
- 	__ETHTOOL_A_LINKMODES_CNT,
--	ETHTOOL_A_LINKMODES_MAX = __ETHTOOL_A_LINKMODES_CNT - 1
-+	ETHTOOL_A_LINKMODES_MAX = (__ETHTOOL_A_LINKMODES_CNT - 1)
- };
- 
- enum {
-@@ -213,7 +233,7 @@ enum {
- 	ETHTOOL_A_LINKSTATE_EXT_DOWN_CNT,
- 
- 	__ETHTOOL_A_LINKSTATE_CNT,
--	ETHTOOL_A_LINKSTATE_MAX = __ETHTOOL_A_LINKSTATE_CNT - 1
-+	ETHTOOL_A_LINKSTATE_MAX = (__ETHTOOL_A_LINKSTATE_CNT - 1)
- };
- 
- enum {
-@@ -222,7 +242,7 @@ enum {
- 	ETHTOOL_A_DEBUG_MSGMASK,
- 
- 	__ETHTOOL_A_DEBUG_CNT,
--	ETHTOOL_A_DEBUG_MAX = __ETHTOOL_A_DEBUG_CNT - 1
-+	ETHTOOL_A_DEBUG_MAX = (__ETHTOOL_A_DEBUG_CNT - 1)
- };
- 
- enum {
-@@ -232,7 +252,7 @@ enum {
- 	ETHTOOL_A_WOL_SOPASS,
- 
- 	__ETHTOOL_A_WOL_CNT,
--	ETHTOOL_A_WOL_MAX = __ETHTOOL_A_WOL_CNT - 1
-+	ETHTOOL_A_WOL_MAX = (__ETHTOOL_A_WOL_CNT - 1)
- };
- 
- enum {
-@@ -244,7 +264,7 @@ enum {
- 	ETHTOOL_A_FEATURES_NOCHANGE,
- 
- 	__ETHTOOL_A_FEATURES_CNT,
--	ETHTOOL_A_FEATURES_MAX = __ETHTOOL_A_FEATURES_CNT - 1
-+	ETHTOOL_A_FEATURES_MAX = (__ETHTOOL_A_FEATURES_CNT - 1)
- };
- 
- enum {
-@@ -276,6 +296,7 @@ enum {
- enum {
- 	ETHTOOL_A_PROFILE_UNSPEC,
- 	ETHTOOL_A_PROFILE_IRQ_MODERATION,
-+
- 	__ETHTOOL_A_PROFILE_CNT,
- 	ETHTOOL_A_PROFILE_MAX = (__ETHTOOL_A_PROFILE_CNT - 1)
- };
-@@ -362,7 +383,6 @@ enum {
- 
- 	__ETHTOOL_A_TS_STAT_CNT,
- 	ETHTOOL_A_TS_STAT_MAX = (__ETHTOOL_A_TS_STAT_CNT - 1)
--
- };
- 
- enum {
-@@ -412,7 +432,7 @@ enum {
- 	ETHTOOL_A_CABLE_TEST_HEADER,
- 
- 	__ETHTOOL_A_CABLE_TEST_CNT,
--	ETHTOOL_A_CABLE_TEST_MAX = __ETHTOOL_A_CABLE_TEST_CNT - 1
-+	ETHTOOL_A_CABLE_TEST_MAX = (__ETHTOOL_A_CABLE_TEST_CNT - 1)
- };
- 
- enum {
-@@ -433,7 +453,7 @@ enum {
- 	ETHTOOL_A_CABLE_TEST_TDR_CFG_PAIR,
- 
- 	__ETHTOOL_A_CABLE_TEST_TDR_CFG_CNT,
--	ETHTOOL_A_CABLE_TEST_TDR_CFG_MAX = __ETHTOOL_A_CABLE_TEST_TDR_CFG_CNT - 1
-+	ETHTOOL_A_CABLE_TEST_TDR_CFG_MAX = (__ETHTOOL_A_CABLE_TEST_TDR_CFG_CNT - 1)
- };
- 
- enum {
-@@ -443,7 +463,7 @@ enum {
- 	ETHTOOL_A_CABLE_TEST_TDR_NTF_NEST,
- 
- 	__ETHTOOL_A_CABLE_TEST_TDR_NTF_CNT,
--	ETHTOOL_A_CABLE_TEST_TDR_NTF_MAX = __ETHTOOL_A_CABLE_TEST_TDR_NTF_CNT - 1
-+	ETHTOOL_A_CABLE_TEST_TDR_NTF_MAX = (__ETHTOOL_A_CABLE_TEST_TDR_NTF_CNT - 1)
- };
- 
- enum {
-@@ -452,7 +472,7 @@ enum {
- 	ETHTOOL_A_CABLE_TEST_TDR_CFG,
- 
- 	__ETHTOOL_A_CABLE_TEST_TDR_CNT,
--	ETHTOOL_A_CABLE_TEST_TDR_MAX = __ETHTOOL_A_CABLE_TEST_TDR_CNT - 1
-+	ETHTOOL_A_CABLE_TEST_TDR_MAX = (__ETHTOOL_A_CABLE_TEST_TDR_CNT - 1)
- };
- 
- enum {
-@@ -580,6 +600,9 @@ enum {
- 	ETHTOOL_A_C33_PSE_PW_LIMIT_UNSPEC,
- 	ETHTOOL_A_C33_PSE_PW_LIMIT_MIN,
- 	ETHTOOL_A_C33_PSE_PW_LIMIT_MAX,
-+
-+	__ETHTOOL_A_C33_PSE_PW_LIMIT_CNT,
-+	__ETHTOOL_A_C33_PSE_PW_LIMIT_MAX = (__ETHTOOL_A_C33_PSE_PW_LIMIT_CNT - 1)
- };
- 
- enum {
-@@ -613,7 +636,7 @@ enum {
- 	ETHTOOL_A_RSS_START_CONTEXT,
- 
- 	__ETHTOOL_A_RSS_CNT,
--	ETHTOOL_A_RSS_MAX = (__ETHTOOL_A_RSS_CNT - 1),
-+	ETHTOOL_A_RSS_MAX = (__ETHTOOL_A_RSS_CNT - 1)
- };
- 
- enum {
-@@ -662,8 +685,8 @@ enum {
- };
- 
- enum {
--	ETHTOOL_MSG_USER_NONE,
--	ETHTOOL_MSG_STRSET_GET,
-+	ETHTOOL_MSG_USER_NONE = 0,
-+	ETHTOOL_MSG_STRSET_GET = 1,
- 	ETHTOOL_MSG_LINKINFO_GET,
- 	ETHTOOL_MSG_LINKINFO_SET,
- 	ETHTOOL_MSG_LINKMODES_GET,
-@@ -710,12 +733,12 @@ enum {
- 	ETHTOOL_MSG_PHY_GET,
- 
- 	__ETHTOOL_MSG_USER_CNT,
--	ETHTOOL_MSG_USER_MAX = __ETHTOOL_MSG_USER_CNT - 1
-+	ETHTOOL_MSG_USER_MAX = (__ETHTOOL_MSG_USER_CNT - 1)
- };
- 
- enum {
--	ETHTOOL_MSG_KERNEL_NONE,
--	ETHTOOL_MSG_STRSET_GET_REPLY,
-+	ETHTOOL_MSG_KERNEL_NONE = 0,
-+	ETHTOOL_MSG_STRSET_GET_REPLY = 1,
- 	ETHTOOL_MSG_LINKINFO_GET_REPLY,
- 	ETHTOOL_MSG_LINKINFO_NTF,
- 	ETHTOOL_MSG_LINKMODES_GET_REPLY,
-@@ -763,7 +786,7 @@ enum {
- 	ETHTOOL_MSG_PHY_NTF,
- 
- 	__ETHTOOL_MSG_KERNEL_CNT,
--	ETHTOOL_MSG_KERNEL_MAX = __ETHTOOL_MSG_KERNEL_CNT - 1
-+	ETHTOOL_MSG_KERNEL_MAX = (__ETHTOOL_MSG_KERNEL_CNT - 1)
- };
- 
- #endif /* _UAPI_LINUX_ETHTOOL_NETLINK_GENERATED_H */
--- 
-2.47.0
-
+Could we please summarize the previous discussions in the changelog?
+Otherwise, I fear it will be lost.
 
