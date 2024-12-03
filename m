@@ -1,281 +1,182 @@
-Return-Path: <linux-doc+bounces-31902-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31905-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EA609E1256
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 05:21:12 +0100 (CET)
-Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 328EC16383D
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 04:21:09 +0000 (UTC)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 91F4918CBFB;
-	Tue,  3 Dec 2024 04:20:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="kK2GnW7t"
-X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AD5F9E12B0
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 06:08:47 +0100 (CET)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E301186616;
-	Tue,  3 Dec 2024 04:20:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 06D4BB23DEE
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 05:08:45 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8440E1925BC;
+	Tue,  3 Dec 2024 05:07:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ID0h20OI"
+X-Original-To: linux-doc@vger.kernel.org
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6EC9183CD9;
+	Tue,  3 Dec 2024 05:07:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733199627; cv=none; b=UBCQR0j1Q7atybXBwJF2Nw0rWqS1GfC5dhn+T/TaUYaZSpLoszjlPZc7TqcmzRqsnx6SJ/9xYV19i9DoCgCVMNGpftKSPWztFuY+zNxtLTq4EcVWJnSTV5+b4FKLpBa0dV1SfGotXekTCWdCeu0EGtspRfda/nsjvXwBiMK1YUo=
+	t=1733202462; cv=none; b=WeYkmkVfJKGQTqW1qIMigcqTRoCCIoRl5rvbGM1GUwwpsJf+hpVECaNm3hvrwGJvrzz4i1YHmRLytL4rjRU+oDJ0x4A0WG600ptl5Lu5gpeT0aTRFKtt7P2a56bJLWPov/G9vmDwYinym29JVMotaIKXoOCkGOLbFvEV5Sci05c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733199627; c=relaxed/simple;
-	bh=6ooM/9AY9xoHRBcOk7ycakkouxWVLDV98VBpDCj+F2k=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=tIoqcBR8KOa2tozQNopX4Ld2JVYlDTwVvo/XI00KPpV2kwRv9JTgG8HM6gHw9I4bxYmZKqdtpbsK5dbTxltEIjKs8pa/dy+Sinkhgnezx3q4ePv7aYKwhRgBSpGNQYT/TtlbP+30OhNEm9q9sYHexDOpxivhBuhAgNvhPy/VFRY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=kK2GnW7t; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4B2JjaPl009592;
-	Tue, 3 Dec 2024 04:20:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	nJ8oUk0DjJmQHwnQTgTBlinyuDwrdPECWWpX6XK+l/Q=; b=kK2GnW7t/OUg+a79
-	iQtwfyd1lHO7fGjal+vJ+xGK13rMRVgy3MhP+dqFgwAsEBNkW7v4w4d3EwhrQNyw
-	Njd6j3/0UjFij7sA6jy6k28//criU/LZxvDy+ru/lUjZVgOQN36gLxRH3DHJnkc9
-	p4yfRFsUA5nnZqZd4fzjY1ebeO+Wt6caEKnTQZslIC3F9cUQBhPeIfejeyNydOO1
-	B1yH0mCBhtqbwoOdZbYgDC91/Fhxf1qSTpcGMyPkhZ0nXy+1RPfi/EgOsffDC7Xf
-	mhSQ6coRPE8BvE6d0Di/uOR2BoIM0kCHf/J5YeG7fBaTgpUUptV/zGkkUyiXe0zy
-	B295tg==
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 437rdeeycg-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 03 Dec 2024 04:20:09 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com [10.46.141.250])
-	by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 4B34K8xw024278
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 3 Dec 2024 04:20:08 GMT
-Received: from hu-azarrabi-lv.qualcomm.com (10.49.16.6) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Mon, 2 Dec 2024 20:20:07 -0800
-From: Amirreza Zarrabi <quic_azarrabi@quicinc.com>
-Date: Mon, 2 Dec 2024 20:19:26 -0800
-Subject: [PATCH 10/10] Documentation: tee: Add Qualcomm TEE driver
+	s=arc-20240116; t=1733202462; c=relaxed/simple;
+	bh=olrZUa/l6HYqHwYXrLNl0NTJ3ENoGhzCoDL6AAfCL74=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=QTqBvGR7/2I3PvQVaMSAmctukK+vOQrwmQFMVc8Zazgtj2y8s1m5e5F+C4duk6nANgizAgWLuqjxYH87Wp+OsGt5NQV8aefxROLNjaYcb+x5AkdCHKNFK5FTXRqh/FptYOiKNtjiXM+nZZqDL4U5Vx2YzTLyy/iQV3uW4C7OKOQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ID0h20OI; arc=none smtp.client-ip=209.85.210.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-7250c199602so4224903b3a.1;
+        Mon, 02 Dec 2024 21:07:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1733202460; x=1733807260; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=UuKlkmtsz2rNevWll5uRQcJimPYczbi6gifk4CNJf8A=;
+        b=ID0h20OI2hjTTPLX8XlmDAYN20y0qs924ritBUULZqQ4rCVzHd1PHxyO0W1VnqvcQf
+         L0D+sd8Eo31/omeHEbt7U92e1hX2QElftgViPAwnoZAnH1qj3kXTR4c4zHk7Mzij7Ud+
+         GO785hwoef1ocO1Lzk6AiH1L3cx5+JDeGD4MpTKH7r3sJDhItC/qCmuiWrsX8iPOQ1PB
+         euRcYAUhbCBqzkZL3TUg7urgDYhMhLDWa2116W5v+0LzkHRvw9va6lNLFmLKukhV4GNV
+         THWow7t5qG2zlLNhJDDgBZsEnjhUmm5ARIu7/ouMkOKuGiUWZlvrOHb2AVYGDBK2ibia
+         ntyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1733202460; x=1733807260;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UuKlkmtsz2rNevWll5uRQcJimPYczbi6gifk4CNJf8A=;
+        b=UmGUIVDCps6gD5Zdwg4mmy51CuatLKLCTzpVJzoRevN8bLKmbMEsRv+1hzGuyyCDM/
+         pdFgcGsYF5dEz2ZxAvg8tO6EyHnCKLrkjj47OWnnCvPdwZKRHrvj+efqFuK1bMz8thDx
+         +Jacv9KdS8kt93SnAWdsiI32VMLwUV8TTadkK+w1aRrLwkYUyklA+FA/AZ6h0fCi9LJ1
+         8WmYFVw74QpsTG0Cxq8Gm1i5/MnPW0U1pygJGzh0nZCGPuJWuZ/7etLMa2o//52bGtjn
+         g1sLtAmBdbmz5kTT4PJPQQwf1H4fp6zGKl9PXG66S9hsQf2Q1/QjILZe9/1n0gVyBF5V
+         NCTg==
+X-Forwarded-Encrypted: i=1; AJvYcCWDWYvKGAoAVgPSz1rYB88yKPSZ5KIhBpinasgf9f6WsWYuWB7RbGvn1/marQrpIuYzmz/fK49a@vger.kernel.org, AJvYcCWdwrhSq1yui42d/9/lVYbP8HS4iSGakxZh5y8X3tVjPenGg1Nzqq8C2P7kZ8crSZu9OAVrPbwfx4Q=@vger.kernel.org, AJvYcCXhG/lzLCoDNlDa1enuJ4dhzeo+/F3/Oz6F4efrQ3nZp2ro8V9IOtFp+E3B9WItEBPaN4WaXK6xsq5GiNFQ@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzx6xxGqbTIrivNwquXl9eZCkb+2MsPPDP+CYfOisFf77fmJgYo
+	p5jN5TIMvUMWl5YnMZ2ADs5h9UMK2/3MxlwVbTkdi+dJZ1feRS8=
+X-Gm-Gg: ASbGncutX1IxriID6GVJ0JloTn9iqzfGIHHD4tsNkxzqHL3lzTnYlm39ra9h+LYFaVV
+	Go97fhCCXCU7uHUoKmZdq3lx/6Z+t8AN065/EXN5wyFLVgMhzORRnmu6tBZNm+ZvPxYq3bR1JX2
+	+R1s/n32dNV3dtZelZ77H8BRmCFxirk4b5kWvQNqowmDL88PDXI7TtHPgzq6h02dTusxZqkd8P3
+	qh4jcFQoIQr2hyxgUmRrH/3V8ZEPZCt0rqYoxYa8L+hUPYvQw==
+X-Google-Smtp-Source: AGHT+IHIapbPNpE1JCSPINZu4GYWgbP7xezDiXQpr9UCEuts/wFFmZ3DvuGvpgu6vAW4nqwsIycUmg==
+X-Received: by 2002:a05:6a00:2284:b0:71e:64fe:965f with SMTP id d2e1a72fcca58-7257fcb0b89mr1558197b3a.20.1733202459941;
+        Mon, 02 Dec 2024 21:07:39 -0800 (PST)
+Received: from localhost ([2601:646:9e00:f56e:123b:cea3:439a:b3e3])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7fc9c304fe2sm8779989a12.33.2024.12.02.21.07.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Dec 2024 21:07:39 -0800 (PST)
+Date: Mon, 2 Dec 2024 21:07:38 -0800
+From: Stanislav Fomichev <stfomichev@gmail.com>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Stanislav Fomichev <sdf@fomichev.me>, netdev@vger.kernel.org,
+	davem@davemloft.net, edumazet@google.com, pabeni@redhat.com,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	horms@kernel.org, donald.hunter@gmail.com, corbet@lwn.net,
+	andrew+netdev@lunn.ch, kory.maincent@bootlin.com,
+	nicolas.dichtel@6wind.com
+Subject: Re: [PATCH net-next v3 0/8] ethtool: generate uapi header from the
+ spec
+Message-ID: <Z06SGszVaXopVlhR@mini-arch>
+References: <20241202162936.3778016-1-sdf@fomichev.me>
+ <20241202195228.65c9a49a@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20241202-qcom-tee-using-tee-ss-without-mem-obj-v1-10-f502ef01e016@quicinc.com>
-References: <20241202-qcom-tee-using-tee-ss-without-mem-obj-v1-0-f502ef01e016@quicinc.com>
-In-Reply-To: <20241202-qcom-tee-using-tee-ss-without-mem-obj-v1-0-f502ef01e016@quicinc.com>
-To: Jens Wiklander <jens.wiklander@linaro.org>,
-        Sumit Garg
-	<sumit.garg@linaro.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        "Konrad
- Dybcio" <konradybcio@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        "Bartosz
- Golaszewski" <bartosz.golaszewski@linaro.org>,
-        Srinivas Kandagatla
-	<srinivas.kandagatla@linaro.org>
-CC: <linux-arm-msm@vger.kernel.org>, <op-tee@lists.trustedfirmware.org>,
-        <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>,
-        Amirreza Zarrabi <quic_azarrabi@quicinc.com>
-X-Mailer: b4 0.13.0
-X-ClientProxiedBy: nalasex01c.na.qualcomm.com (10.47.97.35) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: iM7jLcEG1YVF7CY-ICZHAjpc1FI2Vv0o
-X-Proofpoint-GUID: iM7jLcEG1YVF7CY-ICZHAjpc1FI2Vv0o
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 mlxscore=0
- adultscore=0 malwarescore=0 mlxlogscore=999 phishscore=0 suspectscore=0
- impostorscore=0 clxscore=1011 lowpriorityscore=0 bulkscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2411120000 definitions=main-2412030034
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20241202195228.65c9a49a@kernel.org>
 
-Add documentation for the Qualcomm TEE driver.
+On 12/02, Jakub Kicinski wrote:
+> On Mon,  2 Dec 2024 08:29:28 -0800 Stanislav Fomichev wrote:
+> > We keep expanding ethtool netlink api surface and this leads to
+> > constantly playing catchup on the ynl spec side. There are a couple
+> > of things that prevent us from fully converting to generating
+> > the header from the spec (stats and cable tests), but we can
+> > generate 95% of the header which is still better than maintaining
+> > c header and spec separately. The series adds a couple of missing
+> > features on the ynl-gen-c side and separates the parts
+> > that we can generate into new ethtool_netlink_generated.h.
+> > 
+> > v3:
+> > - s/Unsupported enum-model/Unsupported message enum-model/ (Jakub)
+> > - add placeholder doc for header-flags (Jakub)
+> > 
+> > v2:
+> > - attr-cnt-name -> enum-cnt-name (Jakub)
+> > - add enum-cnt-name documentation (Jakub)
+> > - __ETHTOOL_XXX_CNT -> __ethtool-xxx-cnt + c_upper (Jakub)
+> > - keep and refine enum model check (Jakub)
+> > - use 'header' presence as a signal to omit rendering instead of new
+> >   'render' property (Jakub)
+> > - new patch to reverse the order of header dependencies in xxx-user.h
+> > 
+> > Stanislav Fomichev (8):
+> >   ynl: support enum-cnt-name attribute in legacy definitions
+> >   ynl: skip rendering attributes with header property in uapi mode
+> >   ynl: support directional specs in ynl-gen-c.py
+> >   ynl: add missing pieces to ethtool spec to better match uapi header
+> >   ynl: include uapi header after all dependencies
+> >   ethtool: separate definitions that are gonna be generated
+> >   ethtool: remove the comments that are not gonna be generated
+> >   ethtool: regenerate uapi header from the spec
+> 
+> Looks like doc codegen is unhappy about the missing type definitions:
+> 
+> Documentation/networking/netlink_spec/ethtool.rst:1122: WARNING: Bullet list ends without a blank line; unexpected unindent.
+> Documentation/networking/netlink_spec/ethtool.rst:2126: ERROR: Unknown target name: Documentation/networking/netlink_spec/ethtool.rst:2131: ERROR: Unknown target name: "ethtool_a_cable_result_code".
+> Documentation/networking/netlink_spec/ethtool.rst:2136: ERROR: Unknown target name: "ethtool_a_cable_inf_src".
+> 
+> We need to teach it to not link to external types?
 
-Signed-off-by: Amirreza Zarrabi <quic_azarrabi@quicinc.com>
----
- Documentation/tee/index.rst |   1 +
- Documentation/tee/qtee.rst  | 143 ++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 144 insertions(+)
+The following calms it down on my side:
 
-diff --git a/Documentation/tee/index.rst b/Documentation/tee/index.rst
-index 4be6e69d7837..62afb7ee9b52 100644
---- a/Documentation/tee/index.rst
-+++ b/Documentation/tee/index.rst
-@@ -11,6 +11,7 @@ TEE Subsystem
-    op-tee
-    amd-tee
-    ts-tee
-+   qtee
- 
- .. only::  subproject and html
- 
-diff --git a/Documentation/tee/qtee.rst b/Documentation/tee/qtee.rst
-new file mode 100644
-index 000000000000..3185af2c2b2b
---- /dev/null
-+++ b/Documentation/tee/qtee.rst
-@@ -0,0 +1,143 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=============================================
-+QTEE (Qualcomm Trusted Execution Environment)
-+=============================================
-+
-+The QTEE driver handle communication with Qualcomm TEE [1].
-+
-+Lowest level of communication with QTEE builds on ARM SMC Calling Convention
-+(SMCCC) [2], which is the foundation for QTEE's Secure Channel Manager (SCM) [3]
-+used internally by the driver [4].
-+
-+In a QTEE-based system, services are represented as objects with series of
-+operations that can be called to produce results, including other objects. When
-+an object is hosted within QTEE, executing its operations is referred to as direct
-+invocation. QTEE can invoke objects hosted in the kernel or userspace using a
-+method known as callback requests.
-+
-+The SCM provides two functions for object invocation and callback request:
-+
-+- QCOM_SCM_SMCINVOKE_INVOKE for direct invocation. It can return either a result or a callback request.
-+- QCOM_SCM_SMCINVOKE_CB_RSP submits a response for a previous callback request.
-+
-+The QTEE Transport Message [5] is stacked on top of SCM driver functions.
-+
-+A message consists of two buffers shared with QTEE, inbound and outbound buffers.
-+The inbound buffer is used for direct invocation and the outbound buffer is used
-+to make callback request. This picture shows the contents of a QTEE transport message::
-+
-+                                      +---------------------+
-+                                      |                     v
-+    +-----------------+-------+-------+------+--------------------------+
-+    | qcom_tee_msg_   |object | buffer       |                          |
-+    |  object_invoke  |  id   | offset, size |                          | (inbound buffer)
-+    +-----------------+-------+--------------+--------------------------+
-+    <---- header -----><---- arguments ------><- in/out buffer payload ->
-+
-+                                      +-----------+
-+                                      |           v
-+    +-----------------+-------+-------+------+----------------------+
-+    | qcom_tee_msg_   |object | buffer       |                      |
-+    |  callback       |  id   | offset, size |                      | (outbound buffer)
-+    +-----------------+-------+--------------+----------------------+
-+
-+Each buffer is started with a header and array of arguments.
-+
-+QTEE Transport Message supports four types of arguments:
-+
-+- Input object is an object parameter to the current invocation or callback request
-+- Output object is an object parameter from the current invocation or callback request
-+- Input buffer is (offset, size) pair to the inbound or outbound region to store parameter to the current invocation or callback request
-+- Output buffer is (offset, size) pair to the inbound or outbound region to store parameter from the current invocation or callback request
-+
-+The QTEE driver offers the qcom_tee_object, which represents an object within both
-+QTEE and the kernel. To access any service in QTEE, client needs to invoke an
-+instance of this object. Any structure intended to represent a service for export
-+to QTEE should include an instance of qcom_tee_object::
-+
-+	struct driver_service {
-+		struct qcom_tee_object object;
-+		...
-+	};
-+
-+	#define to_driver_service_object(o) container_of((o), struct driver_service, object)
-+
-+	static int driver_service_dispatch(struct qcom_tee_object *object, u32 op,
-+					   struct qcom_tee_arg *args)
-+	{
-+		struct driver_service *so = to_driver_service_object(object);
-+
-+		switch(op) {
-+		case OBJECT_OP1:
-+			...
-+			break;
-+		default:
-+			return -EINVAL;
-+		}
-+	}
-+
-+	static void driver_service_object_release(struct si_object *object)
-+	{
-+		struct driver_service *so = to_driver_service_object(object);
-+		kfree(so);
-+	}
-+
-+	struct si_object_operations driver_service_ops = {
-+		.release = driver_service_object_release;
-+		.dispatch = driver_service_dispatch;
-+	};
-+
-+	void service_init(void)
-+	{
-+		struct driver_service *so = kzalloc(sizeof(*so), GFP_KERNEL);
-+
-+		/* Initialize so->object as a callback object. */
-+		qcom_tee_object_user_init(&so->object, QCOM_TEE_OBJECT_TYPE_CB_OBJECT,
-+					  &driver_service_ops, "driver_service_object");
-+
-+		/* Invoke a QTEE object and pass/register 'so->object' with QTEE. */
-+		...
-+	}
-+	module_init(service_init);
-+
-+The QTEE driver utilizes qcom_tee_object to encapsulate userspace objects. When a
-+callback request is made, it translates into calling the dispatch callback. For
-+userspace objects, this is converted into requests accessible to callback servers
-+and available through generic TEE API IOCTLs.
-+
-+Picture of the relationship between the different components in the QTEE
-+architecture::
-+
-+         User space               Kernel                     Secure world
-+         ~~~~~~~~~~               ~~~~~~                     ~~~~~~~~~~~~
-+   +--------+   +----------+                                +--------------+
-+   | Client |   |callback  |                                | Trusted      |
-+   +--------+   |server    |                                | Application  |
-+      /\        +----------+                                +--------------+
-+      ||  +----------+ /\                                          /\
-+      ||  |callback  | ||                                          ||
-+      ||  |server    | ||                                          \/
-+      ||  +----------+ ||                                   +--------------+
-+      \/       /\      ||                                   | TEE Internal |
-+   +-------+   ||      ||                                   | API          |
-+   | TEE   |   ||      ||   +--------+--------+             +--------------+
-+   | Client|   ||      ||   | TEE    | QTEE   |             | QTEE         |
-+   | API   |   \/      \/   | subsys | driver |             | Trusted OS   |
-+   +-------+----------------+----+-------+----+-------------+--------------+
-+   |      Generic TEE API        |       |   QTEE MSG                      |
-+   |      IOCTL (TEE_IOC_*)      |       |   SMCCC (QCOM_SCM_SMCINVOKE_*)  |
-+   +-----------------------------+       +---------------------------------+
-+
-+References
-+==========
-+
-+[1] https://docs.qualcomm.com/bundle/publicresource/topics/80-70015-11/qualcomm-trusted-execution-environment.html
-+
-+[2] http://infocenter.arm.com/help/topic/com.arm.doc.den0028a/index.html
-+
-+[3] drivers/firmware/qcom/qcom_scm.c
-+
-+[4] /local/mnt/workspace/Linux/drivers/tee/qcomtee/qcom_scm.c
-+
-+[5] drivers/tee/qcomtee/qcomtee_msg.h
-\ No newline at end of file
+diff --git a/Documentation/netlink/specs/ethtool.yaml b/Documentation/netlink/specs/ethtool.yaml
+index efa00665c191..859ae0cb1fd8 100644
+--- a/Documentation/netlink/specs/ethtool.yaml
++++ b/Documentation/netlink/specs/ethtool.yaml
+@@ -60,7 +60,8 @@ uapi-header: linux/ethtool_netlink_generated.h
+     name-prefix: ethtool-c33-pse-ext-state-
+     header: linux/ethtool.h
+     entries:
+-        - none
++        - name: none
++          doc: none
+         -
+           name: error-condition
+           doc: Group of error_condition states
+@@ -875,15 +876,15 @@ uapi-header: linux/ethtool_netlink_generated.h
+         value: 0
+       -
+         name: pair
+-        doc: ETHTOOL_A_CABLE_PAIR_
++        doc: ETHTOOL_A_CABLE_PAIR
+         type: u8
+       -
+         name: code
+-        doc: ETHTOOL_A_CABLE_RESULT_CODE_
++        doc: ETHTOOL_A_CABLE_RESULT_CODE
+         type: u8
+       -
+         name: src
+-        doc: ETHTOOL_A_CABLE_INF_SRC_
++        doc: ETHTOOL_A_CABLE_INF_SRC
+         type: u32
+   -
+     name: cable-fault-length
 
--- 
-2.34.1
+The first one fixes the bullet list (seems like mixing entries with and
+without docs confuses ynl-gen-rst.py). And removing trailing _ fixes the
+rest (don't know why).
 
+Any objections to folding it as is into v4? I can go on and try to
+understand why ynl-gen-rst.py behaves exactly that way, but not sure
+it would buy us anything?
 
