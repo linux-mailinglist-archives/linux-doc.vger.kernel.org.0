@@ -1,299 +1,193 @@
-Return-Path: <linux-doc+bounces-31919-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31923-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0EA39E14C6
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 08:59:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2066D9E14D4
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 09:00:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 70AFD2830A3
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 07:59:14 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D735B283470
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 08:00:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2997E1DFDB7;
-	Tue,  3 Dec 2024 07:56:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A9C71D90B6;
+	Tue,  3 Dec 2024 07:58:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XAActp/a"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 526CE1DD9AD
-	for <linux-doc@vger.kernel.org>; Tue,  3 Dec 2024 07:56:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC3241D7E21;
+	Tue,  3 Dec 2024 07:58:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733212609; cv=none; b=tkYHBKxrXQtreYPqtMvbQG+QH9gDTRkEBM/AIRQoR1E5IhUmMGrLq5ScMqtdKfUVXLUkKMNLWUiHul7aZCP8lU0kf8mAz/GUPZPD7GJKgY5r05qqwD9AuLmb7BZmtvMzOKJwT8oFnR605ri0mN8TNv7NeVSo41uOVIbStHZ67Ro=
+	t=1733212685; cv=none; b=ILm9pFE3oEQ9KTs9qvSRJEmWZumhzdTk3VnhAnQBqzjw3UXU+76Sm2CuUEUvMQWc0F0+ZcUVtIdHBTMsEC2pfpiaqiBaMPmWgRI5PrikUiP/DV5fHw1bWguFTQJzHRmB7IYxs/GH7OTTqBq7JA3bQ8kHQ3t+AdAZ4uD0wY6Uuhs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733212609; c=relaxed/simple;
-	bh=wTzVvBK9ZqqOjjJmDbIv+42orF5YbDmWRRRAy8fF99I=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=qmEDqOo6SXAB/lxYXXp2d3GoLP3yeVCgv5MpFaELbVk6p9UDSghHe1EYENt8xDfxTTS81VtlQyio+EHVjyJA2U0ru+k5lNOP1x/6Qq+EGhb25VRvqo+sZWNymX2la5Wg6hIGmvFDu9wRtbwt3G9/eanjXSyj/zcreOwfo3WKpJQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ore@pengutronix.de>)
-	id 1tINlj-000399-Kl; Tue, 03 Dec 2024 08:56:27 +0100
-Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1tINle-001R96-0t;
-	Tue, 03 Dec 2024 08:56:23 +0100
-Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1tINle-00AHwo-3A;
-	Tue, 03 Dec 2024 08:56:22 +0100
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: "David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
-	kernel@pengutronix.de,
-	linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org,
-	Simon Horman <horms@kernel.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	linux-doc@vger.kernel.org
-Subject: [PATCH net-next v1 7/7] phy: dp83tg720: add statistics support
-Date: Tue,  3 Dec 2024 08:56:21 +0100
-Message-Id: <20241203075622.2452169-8-o.rempel@pengutronix.de>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241203075622.2452169-1-o.rempel@pengutronix.de>
-References: <20241203075622.2452169-1-o.rempel@pengutronix.de>
+	s=arc-20240116; t=1733212685; c=relaxed/simple;
+	bh=oeDwSYbDtumcWtXKju7ig4LuBaFcBdeCDLukpWkhVjk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=iAuUImg3+N0URpwiJBQxknjUSqjIY/ut73EmOCwpZnwZYzoEAc6F1WOIPyjtZZ3AG5tlthfnrIOuQJKt2R7JfwNyhOINNz/ZNavY6dN0Udv78A0Mt+axkMCaVSl1GgRAAPfnJmcMJ1m7zPUrwtYLl/i/VXPPgVYXkrY8FAA4x4A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XAActp/a; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E0BFC4CECF;
+	Tue,  3 Dec 2024 07:57:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1733212684;
+	bh=oeDwSYbDtumcWtXKju7ig4LuBaFcBdeCDLukpWkhVjk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=XAActp/a3d/1FEPPdChndcExrPN5zf5hJJ2JE5jKPbV9k4bbkdWCwYaMzUe63RKT6
+	 f85LqG6uXO4kgScKGdcXz23Y0kwgsH4MZwAchznbe0+rsX6pUPbU18hnzimKDNv6MY
+	 YAbPgosIyC2xaxI2u1wsGZx7Oz6oufjckyXxTTUwbBn4ng50fZa5ieOXMI7DgL14t7
+	 tpeBe/yyfIPncGqeZ5tATagOKfDR4aZuxZVA1KDpQ4gds6Swcu0ZRJVYU/ykddBPeF
+	 8chXBQ9+oC/A8wiKPnqjeu5COJr987FlN7GDfmUebSInifNnb3tKntd5ElG1rDXD1a
+	 2Fdh2NygbvG6Q==
+Message-ID: <00e3bd13-eab8-47b0-b577-dfdb3bd5900e@kernel.org>
+Date: Tue, 3 Dec 2024 08:57:57 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ore@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 08/10] tee: add Qualcomm TEE driver
+To: Amirreza Zarrabi <quic_azarrabi@quicinc.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
+ Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-doc@vger.kernel.org
+References: <20241202-qcom-tee-using-tee-ss-without-mem-obj-v1-0-f502ef01e016@quicinc.com>
+ <20241202-qcom-tee-using-tee-ss-without-mem-obj-v1-8-f502ef01e016@quicinc.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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 fv0=
+In-Reply-To: <20241202-qcom-tee-using-tee-ss-without-mem-obj-v1-8-f502ef01e016@quicinc.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Add support for reporting PHY statistics in the DP83TG720 driver. This includes
-cumulative tracking of link loss events, transmit/receive packet counts, and
-error counts. Implemented functions to update and provide statistics via
-ethtool, with optional polling support enabled through `PHY_POLL_STATS`.
+On 03/12/2024 05:19, Amirreza Zarrabi wrote:
+> +static const struct tee_desc qcom_tee_desc = {
+> +	.name = "qcom_tee",
+> +	.ops = &qcom_tee_ops,
+> +	.owner = THIS_MODULE,
+> +};
+> +
+> +static int qcom_tee_probe(struct platform_device *pdev)
+> +{
+> +	struct tee_device *teedev;
+> +	int err;
+> +
+> +	if (!qcom_scm_is_available())
+> +		return -EPROBE_DEFER;
 
-Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
----
- drivers/net/phy/dp83tg720.c | 147 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 146 insertions(+), 1 deletion(-)
+So this is part of SCM? Instantiate it there instead of creating fake
+DTS nodes.
 
-diff --git a/drivers/net/phy/dp83tg720.c b/drivers/net/phy/dp83tg720.c
-index 0ef4d7dba065..f56659d41b31 100644
---- a/drivers/net/phy/dp83tg720.c
-+++ b/drivers/net/phy/dp83tg720.c
-@@ -51,6 +51,9 @@
- /* Register 0x0405: Unknown Register */
- #define DP83TG720S_UNKNOWN_0405			0x405
- 
-+#define DP83TG720S_LINK_QUAL_3			0x547
-+#define DP83TG720S_LINK_LOSS_CNT_MASK		GENMASK(15, 10)
-+
- /* Register 0x0576: TDR Master Link Down Control */
- #define DP83TG720S_TDR_MASTER_LINK_DOWN		0x576
- 
-@@ -60,6 +63,24 @@
- /* In RGMII mode, Enable or disable the internal delay for TXD */
- #define DP83TG720S_RGMII_TX_CLK_SEL		BIT(0)
- 
-+#define DP83TG720S_PKT_STAT_1			0x639
-+#define DP83TG720S_TX_PKT_CNT_15_0_MASK		GENMASK(15, 0)
-+
-+#define DP83TG720S_PKT_STAT_2			0x63a
-+#define DP83TG720S_TX_PKT_CNT_31_16_MASK	GENMASK(15, 0)
-+
-+#define DP83TG720S_PKT_STAT_3			0x63b
-+#define DP83TG720S_TX_ERR_PKT_CNT_MASK		GENMASK(15, 0)
-+
-+#define DP83TG720S_PKT_STAT_4			0x63c
-+#define DP83TG720S_RX_PKT_CNT_15_0_MASK		GENMASK(15, 0)
-+
-+#define DP83TG720S_PKT_STAT_5			0x63d
-+#define DP83TG720S_RX_PKT_CNT_31_16_MASK	GENMASK(15, 0)
-+
-+#define DP83TG720S_PKT_STAT_6			0x63e
-+#define DP83TG720S_RX_ERR_PKT_CNT_MASK		GENMASK(15, 0)
-+
- /* Register 0x083F: Unknown Register */
- #define DP83TG720S_UNKNOWN_083F			0x83f
- 
-@@ -69,6 +90,102 @@
- 
- #define DP83TG720_SQI_MAX			7
- 
-+struct dp83tg720_stats {
-+	u64 link_loss_cnt;
-+	u64 tx_pkt_cnt;
-+	u64 tx_err_pkt_cnt;
-+	u64 rx_pkt_cnt;
-+	u64 rx_err_pkt_cnt;
-+};
-+
-+struct dp83tg720_priv {
-+	struct dp83tg720_stats stats;
-+};
-+
-+/**
-+ * dp83tg720_update_stats - Update the PHY statistics for the DP83TD510 PHY.
-+ * @phydev: Pointer to the phy_device structure.
-+ *
-+ * The function reads the PHY statistics registers and updates the statistics
-+ * structure.
-+ *
-+ * Returns: 0 on success or a negative error code on failure.
-+ */
-+static int dp83tg720_update_stats(struct phy_device *phydev)
-+{
-+	struct dp83tg720_priv *priv = phydev->priv;
-+	u64 count;
-+	int ret;
-+
-+	/* Read the link loss count */
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_LINK_QUAL_3);
-+	if (ret < 0)
-+		return ret;
-+	count = FIELD_GET(DP83TG720S_LINK_LOSS_CNT_MASK, ret);
-+	ethtool_stat_add(&priv->stats.link_loss_cnt, count);
-+
-+	/* Read frame statistics */
-+	/* DP83TG720S_PKT_STAT_1 to DP83TG720S_PKT_STAT_6 registers are cleared
-+	 * after reading them in a sequence. A reading of this register not in
-+	 * sequence will prevent them from being cleared.
-+	 */
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_1);
-+	if (ret < 0)
-+		return ret;
-+	count = FIELD_GET(DP83TG720S_TX_PKT_CNT_15_0_MASK, ret);
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_2);
-+	if (ret < 0)
-+		return ret;
-+	count |= (u64)FIELD_GET(DP83TG720S_TX_PKT_CNT_31_16_MASK, ret) << 16;
-+	ethtool_stat_add(&priv->stats.tx_pkt_cnt, count);
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_3);
-+	if (ret < 0)
-+		return ret;
-+	count = FIELD_GET(DP83TG720S_TX_ERR_PKT_CNT_MASK, ret);
-+	ethtool_stat_add(&priv->stats.tx_err_pkt_cnt, count);
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_4);
-+	if (ret < 0)
-+		return ret;
-+	count = FIELD_GET(DP83TG720S_RX_PKT_CNT_15_0_MASK, ret);
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_5);
-+	if (ret < 0)
-+		return ret;
-+	count |= (u64)FIELD_GET(DP83TG720S_RX_PKT_CNT_31_16_MASK, ret) << 16;
-+	ethtool_stat_add(&priv->stats.rx_pkt_cnt, count);
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_6);
-+	if (ret < 0)
-+		return ret;
-+	count = FIELD_GET(DP83TG720S_RX_ERR_PKT_CNT_MASK, ret);
-+	ethtool_stat_add(&priv->stats.rx_err_pkt_cnt, count);
-+
-+	return 0;
-+}
-+
-+static void dp83tg720_get_link_stats(struct phy_device *phydev,
-+				     struct ethtool_link_ext_stats *link_stats)
-+{
-+	struct dp83tg720_priv *priv = phydev->priv;
-+
-+	link_stats->link_down_events = priv->stats.link_loss_cnt;
-+}
-+
-+static void dp83tg720_get_phy_stats(struct phy_device *phydev,
-+				    struct ethtool_eth_phy_stats *eth_stats,
-+				    struct ethtool_phy_stats *stats)
-+{
-+	struct dp83tg720_priv *priv = phydev->priv;
-+
-+	stats->tx_packets = priv->stats.tx_pkt_cnt;
-+	stats->tx_errors = priv->stats.tx_err_pkt_cnt;
-+	stats->rx_packets = priv->stats.rx_pkt_cnt;
-+	stats->rx_errors = priv->stats.rx_err_pkt_cnt;
-+}
-+
- /**
-  * dp83tg720_cable_test_start - Start the cable test for the DP83TG720 PHY.
-  * @phydev: Pointer to the phy_device structure.
-@@ -182,6 +299,11 @@ static int dp83tg720_cable_test_get_status(struct phy_device *phydev,
- 
- 	ethnl_cable_test_result(phydev, ETHTOOL_A_CABLE_PAIR_A, stat);
- 
-+	/* save the current stats before resetting the PHY */
-+	ret = dp83tg720_update_stats(phydev);
-+	if (ret)
-+		return ret;
-+
- 	return phy_init_hw(phydev);
- }
- 
-@@ -217,6 +339,11 @@ static int dp83tg720_read_status(struct phy_device *phydev)
- 	phy_sts = phy_read(phydev, DP83TG720S_MII_REG_10);
- 	phydev->link = !!(phy_sts & DP83TG720S_LINK_STATUS);
- 	if (!phydev->link) {
-+		/* save the current stats before resetting the PHY */
-+		ret = dp83tg720_update_stats(phydev);
-+		if (ret)
-+			return ret;
-+
- 		/* According to the "DP83TC81x, DP83TG72x Software
- 		 * Implementation Guide", the PHY needs to be reset after a
- 		 * link loss or if no link is created after at least 100ms.
-@@ -341,12 +468,27 @@ static int dp83tg720_config_init(struct phy_device *phydev)
- 	return genphy_c45_pma_baset1_read_master_slave(phydev);
- }
- 
-+static int dp83tg720_probe(struct phy_device *phydev)
-+{
-+	struct device *dev = &phydev->mdio.dev;
-+	struct dp83tg720_priv *priv;
-+
-+	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
-+	if (!priv)
-+		return -ENOMEM;
-+
-+	phydev->priv = priv;
-+
-+	return 0;
-+}
-+
- static struct phy_driver dp83tg720_driver[] = {
- {
- 	PHY_ID_MATCH_MODEL(DP83TG720S_PHY_ID),
- 	.name		= "TI DP83TG720S",
- 
--	.flags          = PHY_POLL_CABLE_TEST,
-+	.flags          = PHY_POLL_CABLE_TEST | PHY_POLL_STATS,
-+	.probe		= dp83tg720_probe,
- 	.config_aneg	= dp83tg720_config_aneg,
- 	.read_status	= dp83tg720_read_status,
- 	.get_features	= genphy_c45_pma_read_ext_abilities,
-@@ -355,6 +497,9 @@ static struct phy_driver dp83tg720_driver[] = {
- 	.get_sqi_max	= dp83tg720_get_sqi_max,
- 	.cable_test_start = dp83tg720_cable_test_start,
- 	.cable_test_get_status = dp83tg720_cable_test_get_status,
-+	.get_link_stats	= dp83tg720_get_link_stats,
-+	.get_phy_stats	= dp83tg720_get_phy_stats,
-+	.update_stats	= dp83tg720_update_stats,
- 
- 	.suspend	= genphy_suspend,
- 	.resume		= genphy_resume,
--- 
-2.39.5
+> +
+> +	teedev = tee_device_alloc(&qcom_tee_desc, NULL, NULL, NULL);
+> +	if (IS_ERR(teedev))
+> +		return PTR_ERR(teedev);
+> +
+> +	err = tee_device_register(teedev);
+> +	if (err)
+> +		goto err_unreg_teedev;
+> +
+> +	platform_set_drvdata(pdev, teedev);
+> +	return 0;
+> +
+> +err_unreg_teedev:
+> +	tee_device_unregister(teedev);
+> +
+> +	return err;
+> +}
+> +
+> +static void qcom_tee_remove(struct platform_device *pdev)
+> +{
+> +	struct tee_device *teedev = platform_get_drvdata(pdev);
+> +
+> +	/* Keep a copy, tee_device_unregister() sets it to NULL. */
+> +	struct tee_shm_pool *pool = teedev->pool;
+> +
+> +	/* Wait for users to go away. */
+> +	tee_device_unregister(teedev);
+> +	tee_shm_pool_free(pool);
+> +}
+> +
+> +static const struct of_device_id qcom_tee_dt_match[] = {
+> +	{ .compatible = "qcom,tee" },
+> +	{},
+> +};
+> +MODULE_DEVICE_TABLE(of, qcom_tee_dt_match);
+> +
+> +static struct platform_driver qcom_tee_platform_driver = {
+> +	.probe = qcom_tee_probe,
+> +	.remove = qcom_tee_remove,
+> +	.driver = {
+> +		.name = "qcom_tee",
+> +		.of_match_table = qcom_tee_dt_match,
+> +	},
+> +};
+> +
+> +int qcom_tee_driver_register(void)
+> +{
+> +	return platform_driver_register(&qcom_tee_platform_driver);
+> +}
+> +
+> +void qcom_tee_driver_unregister(void)
+> +{
+> +	platform_driver_unregister(&qcom_tee_platform_driver);
+> +}
 
+Why open-coding typical module platform driver macro?
+
+
+Best regards,
+Krzysztof
 
