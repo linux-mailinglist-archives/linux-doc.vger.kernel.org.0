@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-31945-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31947-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 278939E1CAB
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 13:49:20 +0100 (CET)
-Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 877329E1CA3
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 13:48:48 +0100 (CET)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6E8CD1675C0
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 12:48:22 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4CD1C280D66
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 12:48:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0D3CE1F76A7;
-	Tue,  3 Dec 2024 12:44:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9F1B81F76D4;
+	Tue,  3 Dec 2024 12:44:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GpFHHavn"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="doa94yYB"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D52C91F75B0;
-	Tue,  3 Dec 2024 12:44:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7101B1F76CD;
+	Tue,  3 Dec 2024 12:44:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733229840; cv=none; b=WigMy2TvbmtEKe8RIliHjta0rAddwB3Selzf2MAjW3jIdcy8G3+ZtXhguU5oCW7kT7QS6cgfdua5M8IUfA/wzrYnz71o/5meUg8bgTii+q0hKUgRUFS8SFrDOkBB1mKwCKwFbpdbxPHtUy6lxWNJcPtIxKNBECrRyuQ83rA4BmY=
+	t=1733229847; cv=none; b=e4zDfxBCaYlIZT1KJ4TzLxsj06ZDdO71SFPvb8A305cBCIun4fwwQVHOmWVEZ2BvLKegDPakflu6FSp8TifGFQRI9lW3gtZvI7e8Yy17wH+/FtSUd2eiSJOQFCsFj1fQZoHaALQ9BDSZ3nyo0mDrvEX75JjQiIsHuF3BUwameiU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733229840; c=relaxed/simple;
-	bh=EJS6cgRpKX8lhOM9Z2U2OyNni/XrqcdIMqgpN3jOt9Q=;
+	s=arc-20240116; t=1733229847; c=relaxed/simple;
+	bh=cKym5jL1wVVG9G/7MeEDQVRM4fdPvM6wIXw2UfuLn2s=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=rxIAPh84bZGobfF6cXlYMJxAifRL+qe5T34NBhzT+3CIQaL+YzW85IXM1wZo94WkVPiKJor/uZoJjspfGWlyFZMBVuiWJu3brslhnI0bIhldfia+aHG3HPxL0mBGv1lXIdfFqlv2r+dHsGI8aJGncSB9K7vmslNcvzkTuuuynlY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GpFHHavn; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23FF5C4CEDD;
-	Tue,  3 Dec 2024 12:43:57 +0000 (UTC)
+	 In-Reply-To:To:Cc; b=QVeyG01WNN/QLmq2Vx3rNAtmObwGd/0Tkzj2KW8nts4eIqwHbuML4FpNMEeT826ZTtB6l/JIFC36jl25/jm57ku4DEiDJzy0F+Jgmh5RfXIUp2ZavTWAXAHxfW4O74ayyUFnpPK76csn+Su3z2V2HZ45dWEk+2XX2AMSKKfIMtk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=doa94yYB; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60B10C4CEDD;
+	Tue,  3 Dec 2024 12:44:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1733229840;
-	bh=EJS6cgRpKX8lhOM9Z2U2OyNni/XrqcdIMqgpN3jOt9Q=;
+	s=k20201202; t=1733229847;
+	bh=cKym5jL1wVVG9G/7MeEDQVRM4fdPvM6wIXw2UfuLn2s=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=GpFHHavnqh/65aoJp2UGMoEbiC2+a4ajKJxsQoWAUo8ocdkYupQ/zvrrqVtK/87GT
-	 rH5iE5BB8RWMmsFzw42kBWbTRCcQ2I7e7xU/6+0HbfA15IZlJfXHz3RQwbTCiaiPhZ
-	 9LiSBWGlCc6ev8z5L7afxE2DJoLsJkOSs8y6fEAAYUOjomZLaUgMiuI78EcTxjvfiV
-	 Fa/c1xeuPDZYLwZAPe+Zrfy2IduS/zabXq477Pvm5Y3HViRr1KjTQJ/hEPvsnRmNt3
-	 JrucnNpGV2YrJ0w/ekJiEt6mO/CC+O/wZiRXLLrx5e+vBKcldLKDq+WscEH+dh9gvV
-	 WRwF+5Ss7lRbQ==
+	b=doa94yYBy9haMntmlbm8c224q3RdvwGeJTtBfIuunDMuxA/jckdpBeET9N/vCXe3M
+	 P/uZFfWnsV1iRI3k/HVF1BcJ3/I/cMP+Dsw6HpYPcCyDX/qPwO6mKJ+8Liw122qs3b
+	 1wUv1tD9bLYY4Nl7EBPUHMkyAWLElHjBhyEjmZM2+cuPejgcem5Anoy5Erw3jH04S3
+	 BXXL2CbhjwsJ9rGrw9R1FxFgMFBK/J+oCFcfM3r9QqbmOTrc8TJRstbJzqQtQvJdbO
+	 f+KNGpv1/24jPu25x+aLSbVSHFg/JixPYpPPpB04UkcA72SvDlfAD4XPL+PgTk5Auy
+	 2qVax49I3Hmrw==
 From: Mark Brown <broonie@kernel.org>
-Date: Tue, 03 Dec 2024 12:39:25 +0000
-Subject: [PATCH v3 6/9] arm64/sysreg: Update ID_AA64ISAR2_EL1 to DDI0601
- 2024-09
+Date: Tue, 03 Dec 2024 12:39:27 +0000
+Subject: [PATCH v3 8/9] KVM: arm64: Allow control of dpISA extensions in
+ ID_AA64ISAR3_EL1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -53,7 +53,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241203-arm64-2024-dpisa-v3-6-a6c78b1aa297@kernel.org>
+Message-Id: <20241203-arm64-2024-dpisa-v3-8-a6c78b1aa297@kernel.org>
 References: <20241203-arm64-2024-dpisa-v3-0-a6c78b1aa297@kernel.org>
 In-Reply-To: <20241203-arm64-2024-dpisa-v3-0-a6c78b1aa297@kernel.org>
 To: Catalin Marinas <catalin.marinas@arm.com>, 
@@ -65,48 +65,51 @@ Cc: linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
  linux-doc@vger.kernel.org, kvmarm@lists.linux.dev, 
  linux-kselftest@vger.kernel.org, Mark Brown <broonie@kernel.org>
 X-Mailer: b4 0.15-dev-9b746
-X-Developer-Signature: v=1; a=openpgp-sha256; l=827; i=broonie@kernel.org;
- h=from:subject:message-id; bh=EJS6cgRpKX8lhOM9Z2U2OyNni/XrqcdIMqgpN3jOt9Q=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBnTvz4GZPk6EOBZUaoV4zRxu7Rli0wsiye0feNwuA9
- 7WLttSKJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCZ078+AAKCRAk1otyXVSH0JwSB/
- wNUoK5Q2y/2oZkMqGqP4YcOOfJMOTRiEkdFEKe+7gJk7dpGQDlI3/GFZ/0tU7rpgltEDucIwS8fG+Z
- HxengsD/m5dqC7734pajuHEvwgo+HEOc7xSYMP7WsqfLyTXYBr0lR+JpsfrsyULFkCfdNq9f2sOOjT
- otyDCS0IzRMCXBMyIhp4P/3Ld9UYc4tsCI8wsHVTSdMYqod1+d6pjLw6FZiteF2/qOylLZgxsaEcY9
- cBLGmr5BHilHZrP+LNSKUiEJ3DyW5RRe79Dl9M9HIRSOdPtEy1pLtjr5U/2c/GUgWx5ZVCP8xaDuez
- gNT2lqpUWYGunwmUpN58nQeSqSpXsY
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1369; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=cKym5jL1wVVG9G/7MeEDQVRM4fdPvM6wIXw2UfuLn2s=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBnTvz6aOsLhl+VMGWa2eZFsaOppvS4Wo9lfr2bBE7B
+ cuzMesKJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCZ078+gAKCRAk1otyXVSH0DLMB/
+ wM1MdmguAMfWES2WtJrEu9ppWGk1VrwOELT9b4yycTmmf8cCrot4U5+T0rMCUJjKDXNi63T+rWFwYz
+ 6KNVeuiw4ea+juUNnOwWXQ7eqa3DKo0H3tmVFdVCDxNJ7FHEkPTwjBz6j3mIYYrTHaaaPxVHmeAQHv
+ GdNrKyGFVcHTOG6MRUxkjfQ0hl0vnrbmdedoMHP/93jYVp9Yau9VzUgWbxEwn0pEgUnqkv4IMUzyIK
+ O5q/Jxz5jN0aMb94BV1AzLeCk3nXFEWu6JZfCqX8wYjnVL3qntlOsc5KMulVRXPj40KqEitAbJN7+D
+ lbu4yAt6hmPywZJ7M19w7bz2ddCz2x
 X-Developer-Key: i=broonie@kernel.org; a=openpgp;
  fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-DDI0601 2024-09 introduces new features which are enumerated via
-ID_AA64ISAR2_EL1, update the sysreg file to reflect these updates.
+ID_AA64ISAR3_EL1 is currently marked as unallocated in KVM but does have a
+number of bitfields defined in it. Expose FPRCVT and FAMINMAX, two simple
+instruction only extensions to guests.
 
 Signed-off-by: Mark Brown <broonie@kernel.org>
 ---
- arch/arm64/tools/sysreg | 6 +++++-
+ arch/arm64/kvm/sys_regs.c | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm64/tools/sysreg b/arch/arm64/tools/sysreg
-index 0253d3847aeb2294da04b2b0b3f33f81f32c849f..fe55c04624de74a6c1a5e0be45363b9c46ff1340 100644
---- a/arch/arm64/tools/sysreg
-+++ b/arch/arm64/tools/sysreg
-@@ -1556,12 +1556,16 @@ EndEnum
- UnsignedEnum	55:52	CSSC
- 	0b0000	NI
- 	0b0001	IMP
-+	0b0010	CMPBR
- EndEnum
- UnsignedEnum	51:48	RPRFM
- 	0b0000	NI
- 	0b0001	IMP
- EndEnum
--Res0	47:44
-+UnsignedEnum	47:44	PCDPHINT
-+	0b0000	NI
-+	0b0001	IMP
-+EndEnum
- UnsignedEnum	43:40	PRFMSLC
- 	0b0000	NI
- 	0b0001	IMP
+diff --git a/arch/arm64/kvm/sys_regs.c b/arch/arm64/kvm/sys_regs.c
+index 83c6b4a07ef56cf0ed9c8751ec80686f45dca6b2..6efbe3f4a579afd1874c4cf844c1c1249ae8b942 100644
+--- a/arch/arm64/kvm/sys_regs.c
++++ b/arch/arm64/kvm/sys_regs.c
+@@ -1604,6 +1604,9 @@ static u64 __kvm_read_sanitised_id_reg(const struct kvm_vcpu *vcpu,
+ 		if (!cpus_have_final_cap(ARM64_HAS_WFXT))
+ 			val &= ~ARM64_FEATURE_MASK(ID_AA64ISAR2_EL1_WFxT);
+ 		break;
++	case SYS_ID_AA64ISAR3_EL1:
++		val &= ID_AA64ISAR3_EL1_FPRCVT | ID_AA64ISAR3_EL1_FAMINMAX;
++		break;
+ 	case SYS_ID_AA64MMFR2_EL1:
+ 		val &= ~ID_AA64MMFR2_EL1_CCIDX_MASK;
+ 		break;
+@@ -2608,7 +2611,8 @@ static const struct sys_reg_desc sys_reg_descs[] = {
+ 	ID_WRITABLE(ID_AA64ISAR2_EL1, ~(ID_AA64ISAR2_EL1_RES0 |
+ 					ID_AA64ISAR2_EL1_APA3 |
+ 					ID_AA64ISAR2_EL1_GPA3)),
+-	ID_UNALLOCATED(6,3),
++	ID_WRITABLE(ID_AA64ISAR3_EL1, (ID_AA64ISAR3_EL1_FPRCVT |
++				       ID_AA64ISAR3_EL1_FAMINMAX)),
+ 	ID_UNALLOCATED(6,4),
+ 	ID_UNALLOCATED(6,5),
+ 	ID_UNALLOCATED(6,6),
 
 -- 
 2.39.5
