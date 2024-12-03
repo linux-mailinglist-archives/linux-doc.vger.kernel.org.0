@@ -1,125 +1,118 @@
-Return-Path: <linux-doc+bounces-31956-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31954-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1B529E271B
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 17:21:22 +0100 (CET)
-Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B93B0163493
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 16:18:05 +0000 (UTC)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E097B1F893D;
-	Tue,  3 Dec 2024 16:18:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="WDUlO4rH"
-X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D8C49E2B2B
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 19:43:27 +0100 (CET)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDD201F8930;
-	Tue,  3 Dec 2024 16:18:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.19
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 3A901B63E32
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 16:15:37 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6BEC91F8932;
+	Tue,  3 Dec 2024 16:15:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="bg68/SyN"
+X-Original-To: linux-doc@vger.kernel.org
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44BCF1EE00B;
+	Tue,  3 Dec 2024 16:15:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.21
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733242684; cv=fail; b=nAgsytbC3opMtdpcSJQcRqTPWjOgyRWU6wtRggJlr1b25Fst/Aihv0cGSaiKuMi0hYxQgM3ePM2vcx+FC3R41/HDdAJo38IW0G5SvtHXUMc/aSse1zuSM4BMO9FurCke3NqlyGxG8rKhxm7qrGyXklbNvht/I+k7TGdUq1rXwaQ=
+	t=1733242531; cv=fail; b=Nltof6H6zE/MsXC1xxFzvH5GZymCt3GWPqeFSKGDNw65zNmp8jljc+1qvK7j7zwZjUN3ihQs5IXRy4G4k5x4xuOnSX4oxF/M7aCVFWIL1BR6HRHNI1m3DJN3iqI846DnV8JqMKOFjmL3bgWQg4VMYxHijzbzluM1Dugc5KB/Id8=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733242684; c=relaxed/simple;
-	bh=pV8wnFybLjxtsoPTx2QWhvUaFZPLAia0i9DdbeobF38=;
+	s=arc-20240116; t=1733242531; c=relaxed/simple;
+	bh=MFIn+L3oJL28qSxLqUdwontACV+Hra2XJj8s7o8lROI=;
 	h=Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=q+gkaKF9VfXKaPob7hodayfWtCvXIIEvnQaZdLMt/5Meo7m5x8vumz9GElsxDTbrXg0K83TYRcMdfO80P0Pzz9E9UB49EPQSeTsMhLlk+p7VRuzJMBGB+g1aa/ToAH100YK4dwR14H6DizHnLJmVrNoteVaBEXGAuQVrt8B2FqA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=WDUlO4rH; arc=fail smtp.client-ip=198.175.65.19
+	 Content-Type:MIME-Version; b=WM4A8E9CdweyOWn+nvdHUVW0x8KsFWtPyHsF2095YJUKGuYf94Ea6rUTsJwhTz/g0UjhYSlLUVgzrR00pZjowohvvn1lZbrqUjcdEP+hWRADmUM9ZFNpMbZDBd2tsZsI/6vau1RsL8vAOozUeiNnUeQnxGGnpJkJK635n2iIPs8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=bg68/SyN; arc=fail smtp.client-ip=198.175.65.21
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1733242684; x=1764778684;
+  t=1733242529; x=1764778529;
   h=message-id:date:subject:to:cc:references:from:
    in-reply-to:content-transfer-encoding:mime-version;
-  bh=pV8wnFybLjxtsoPTx2QWhvUaFZPLAia0i9DdbeobF38=;
-  b=WDUlO4rHC6yAwSDQE4cA8ZqbN8M+eSxNvGU8nImf2Bzf6UPml13h+vvr
-   3eIaWobHKGm5aoJNX34Gpj6CggukeBWoAi/KH7uVX/vqNW6JDuni/HXom
-   S1NzWeVMwL+T8PEATHl948vULOIc+AGP0Jp45CkL1+HqGvLZ6eAV0NUIm
-   ZDRk5hPlIuaxo28cSi/++Bw7HCpqiAvAJlqtx+PefkI6lytlvSbl5bY8h
-   y773H7yAE1eECYwQOd6a1Bf2zTfCERZnF1ADpjxNxvpyw61iswin7P1Gd
-   VcnH2HpGg1CmK1wJLQt+QEEOzXA1/h+ZzIDdI0goJT9Tbvhq18gwC6K6V
-   w==;
-X-CSE-ConnectionGUID: m6M4ZQzhT2uaMr+LaOzsPQ==
-X-CSE-MsgGUID: lF8zwdTKQGWd+nbQnpe97Q==
-X-IronPort-AV: E=McAfee;i="6700,10204,11275"; a="33344852"
+  bh=MFIn+L3oJL28qSxLqUdwontACV+Hra2XJj8s7o8lROI=;
+  b=bg68/SyNl3oB7BCJe5JcA7Z6xbvHmP1CpsjI5IDBedFB+ez4R5YbQP+R
+   FRge30Aa2ZWMVKmFBdtE6mUAHHX3jui4b+MYHBbsfkHxgb3P+EBrlN5bx
+   hWr6BNPkOI1uofMVB9PohJL0rwLoCF07kpdE4RdXYRoGLqIJU77cxrQl9
+   OkzAAtmPrslSGDZh9uw7MZUdZ2ZSE9gsgiyJ7vKeF6IkF7g+sd6T9kTgO
+   eW1cdADiPWhQ4jJv/ihd9UHM01O8JkW4QEU+nUhX7PHNdlkFsxj1Ck7IJ
+   e+VrMIkIntqABINKmua+eAfhF8l3pT4tQxDF0dPAJKm/YazqnWWlYTyhT
+   Q==;
+X-CSE-ConnectionGUID: iDb/E1qBTpaabkNmSORDdw==
+X-CSE-MsgGUID: FNkIwZiuQsiF68iApwPEIA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11275"; a="33386174"
 X-IronPort-AV: E=Sophos;i="6.12,205,1728975600"; 
-   d="scan'208";a="33344852"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Dec 2024 08:18:03 -0800
-X-CSE-ConnectionGUID: xt0A7vc+T0CjJkMCPdsoyQ==
-X-CSE-MsgGUID: riygdoIWSAuM723RGmSFzg==
+   d="scan'208";a="33386174"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Dec 2024 08:15:25 -0800
+X-CSE-ConnectionGUID: Nhu2cJbNRhOushdMDGAB9w==
+X-CSE-MsgGUID: VDPOZgNJTvWkHXB9qDZeMQ==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.12,205,1728975600"; 
-   d="scan'208";a="93887580"
-Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
-  by orviesa007.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 03 Dec 2024 08:18:02 -0800
+   d="scan'208";a="97920836"
+Received: from orsmsx603.amr.corp.intel.com ([10.22.229.16])
+  by fmviesa005.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 03 Dec 2024 08:15:25 -0800
 Received: from orsmsx601.amr.corp.intel.com (10.22.229.14) by
- ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
+ ORSMSX603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Tue, 3 Dec 2024 08:18:01 -0800
-Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
+ 15.1.2507.39; Tue, 3 Dec 2024 08:15:24 -0800
+Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
  orsmsx601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39 via Frontend Transport; Tue, 3 Dec 2024 08:18:01 -0800
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (104.47.57.42) by
- edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
+ 15.1.2507.39 via Frontend Transport; Tue, 3 Dec 2024 08:15:24 -0800
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (104.47.66.48) by
+ edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.39; Tue, 3 Dec 2024 08:18:01 -0800
+ 15.1.2507.39; Tue, 3 Dec 2024 08:14:39 -0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sAur5mm+K/ApckcYRL6PE/b+lHoXjo+6GNRtiYG1KLzCI+ae21QkLXyyad4WPcOFip1bnKzIwhavhK+PUC4u/HIyVs6PUlLEDqqHwq+5lhPZTrR0RZoVkFA7CjdttIEQYOc2Dm34ezsc326TwqXeqneJPZ6t2hauknKHBbg3WJdnpGCrwGJLjvQ9fG61I4JKZ0J/azsAMfqAItKp9OM2Qf6sB46ONg8SMXyA/RaLY74rf3TQjZjdvINSCoCxguALaTRlIAM7U2lAjCzCue65ILhm8lfSl0lwaMDv0ns5FRD7XHd4vRLB7sr6OMzqcRb7dKnEWR7EJ52fJ3pror5f6A==
+ b=HBs3Z2X5CLLvtTd0eEEbto9L8XiejVxYFGMhJ2M2bqDb06jPvJDqRx8xWGCbM0vpt1c6tmdF5W4yRh/KfpcLx7a3mUCEcJup64y2aKXfWgaR7U45Iul66wdI1SU8yr2p++U6OG/jVQwzgR46PHp8BRrnpuLhICHE7GRZ3HXRujY8DPELkbaJh+3CSKQHllSLmWSn0ruZYkx0BC2WOXWrniPENdMtulJ4fWIWZdZStTPqwqR01cXRzCR4GjTkscGzRcRrcsXgGZL1LRmm1LHZj900GDifAJ0FTZtDbX58os0WVQaGnx/yoz+Xr7SwxXgSKkz5sOBEKVZJuahppW12Eg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W8t4VPdnzJlTimzj3FBtQFScHoB1NHsK/4KAmKnlTdg=;
- b=vMR+FhQFyFrfYbE6wjXP57DuFFRLt6oip8++NyRg+Ge4XCiQEkW9cTyHO2WVhSJKtxPTpLZGEbqUhbut9ZuVZTy4qsM6LCJYhqmuZsW5+loRVX+FWImdx0xpn/VyQdj2VWA7A6UZmVUJUzhV43cQCNlvcuTzyBq3huYhmzg+JFJuoVMx5Wx7Sa6KPgQ2kzA+5m4RD+zgNPvM5dcSSsEYtRXVB3Lkm9wmGNhlRRbnw3JuxoJQTbhvStmvlWqYPnB6orZ3V0NbXYB8gLrV12GUV94VprDPKuBvXdRMLIdyRcL8VASufd9ICOlAYQGEC+ZXANkZ2N1uTMJ7hCZgzaeOQg==
+ bh=mdaOR8VpH+w3IJBPVPBkwH3CEDeM2cm+IWoUpbNcf+k=;
+ b=SR15rdy6PLFDcP1c892sOmlYKBkg+6dLcv6wtXRUcjKZ9eKQ3yooNLh5QHudSAFF04bj1/3w9nKiAXufif/jva2F/qiTrzD5Z/0FhbR/DOhG07dfzq00KlGb4HlkODu4DClPui3WN+ypFulbXj7y2Bsfv584dwBukEzBsJHQrCpBuiC38/BRqOZ+DtcjbkieB4zphMGT/ylOKGBgrmc8dkTL8p3Swwi2PMCruTlvj5iSkOo0m+xqVfD312gT1ySGrDi2UntinQYAqhFrsb9dtYDFMRMucGH63ECrvkD7R8Jc5u4OMsz3Lz0PEKLThZJyKpNaxuw+fZDtNAwEjZYPxA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
  dkim=pass header.d=intel.com; arc=none
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=intel.com;
 Received: from DS0PR11MB6375.namprd11.prod.outlook.com (2603:10b6:8:c9::21) by
- IA1PR11MB7892.namprd11.prod.outlook.com (2603:10b6:208:3fc::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.19; Tue, 3 Dec
- 2024 16:17:56 +0000
+ DM4PR11MB6214.namprd11.prod.outlook.com (2603:10b6:8:ac::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8207.18; Tue, 3 Dec 2024 16:14:37 +0000
 Received: from DS0PR11MB6375.namprd11.prod.outlook.com
  ([fe80::cd01:59f6:b0f8:c832]) by DS0PR11MB6375.namprd11.prod.outlook.com
  ([fe80::cd01:59f6:b0f8:c832%4]) with mapi id 15.20.8207.017; Tue, 3 Dec 2024
- 16:17:56 +0000
-Message-ID: <65273bba-5ec1-44ea-865b-fb815afccc91@intel.com>
-Date: Tue, 3 Dec 2024 17:17:48 +0100
+ 16:14:37 +0000
+Message-ID: <2075e22b-f6ec-4868-8880-cad78a6a35d9@intel.com>
+Date: Tue, 3 Dec 2024 17:14:29 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v30 00/30] Introduce QC USB SND audio offloading support
-To: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, Wesley Cheng
-	<quic_wcheng@quicinc.com>
-CC: Takashi Iwai <tiwai@suse.de>, Greg KH <gregkh@linuxfoundation.org>,
-	<srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
-	<perex@perex.cz>, <conor+dt@kernel.org>, <dmitry.torokhov@gmail.com>,
-	<corbet@lwn.net>, <broonie@kernel.org>, <lgirdwood@gmail.com>,
-	<krzk+dt@kernel.org>, <Thinh.Nguyen@synopsys.com>, <tiwai@suse.com>,
-	<robh@kernel.org>, <linux-kernel@vger.kernel.org>,
-	<devicetree@vger.kernel.org>, <linux-sound@vger.kernel.org>,
-	<linux-usb@vger.kernel.org>, <linux-input@vger.kernel.org>,
-	<linux-arm-msm@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v30 14/30] ASoC: usb: Create SOC USB SND jack kcontrol
+To: Wesley Cheng <quic_wcheng@quicinc.com>
+CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
+	<linux-sound@vger.kernel.org>, <linux-usb@vger.kernel.org>,
+	<linux-input@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <srinivas.kandagatla@linaro.org>,
+	<mathias.nyman@intel.com>, <perex@perex.cz>, <conor+dt@kernel.org>,
+	<dmitry.torokhov@gmail.com>, <corbet@lwn.net>, <broonie@kernel.org>,
+	<lgirdwood@gmail.com>, <krzk+dt@kernel.org>,
+	<pierre-louis.bossart@linux.intel.com>, <Thinh.Nguyen@synopsys.com>,
+	<tiwai@suse.com>, <robh@kernel.org>, <gregkh@linuxfoundation.org>
 References: <20241106193413.1730413-1-quic_wcheng@quicinc.com>
- <edfeb642-297e-42bb-ad09-cbf74f995514@quicinc.com>
- <2024111655-approve-throwback-e7df@gregkh>
- <2f512d8d-e5f3-4bdd-8172-37114a382a69@quicinc.com>
- <875xoi3wqw.wl-tiwai@suse.de>
- <d0da6552-238a-41be-b596-58da6840efbb@quicinc.com>
- <CF49CA0A-4562-40BC-AA98-E550E39B366A@linux.dev>
+ <20241106193413.1730413-15-quic_wcheng@quicinc.com>
 Content-Language: en-US
 From: Cezary Rojewski <cezary.rojewski@intel.com>
-In-Reply-To: <CF49CA0A-4562-40BC-AA98-E550E39B366A@linux.dev>
+In-Reply-To: <20241106193413.1730413-15-quic_wcheng@quicinc.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA2P291CA0027.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1f::18) To DS0PR11MB6375.namprd11.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MI0P293CA0006.ITAP293.PROD.OUTLOOK.COM
+ (2603:10a6:290:44::17) To DS0PR11MB6375.namprd11.prod.outlook.com
  (2603:10b6:8:c9::21)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -128,139 +121,204 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB6375:EE_|IA1PR11MB7892:EE_
-X-MS-Office365-Filtering-Correlation-Id: 77c4c17c-2e04-4b23-bb80-08dd13b60bed
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6375:EE_|DM4PR11MB6214:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e0f6c6d-e13b-40e5-a6f0-08dd13b5953a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MTdZY2pGaC8ycytaRlRsSDZLUE1GaWptVGhhT3IyRjlaQlNEdGx1VVQrN0VR?=
- =?utf-8?B?ODBQUTdrRWt3Q21jeDF4U014LzJvTW1mUWNIbEJLNkNvL254ZU1VaDB0Z1dj?=
- =?utf-8?B?bi9Vd3dJd2V4UURFc0RRTnU0TDFQb3Uxbit5RXBnQlE1RXpqaDc4aThmTGtP?=
- =?utf-8?B?VmFxN0pReUhvTllpNmYyZy9xd3Bjb3FDTitDU0dvL3piTnJNTnN1NE1mYUdM?=
- =?utf-8?B?SER4STJZTVBDbWVHK1NZT240VjlTS2lQVkJVWHdGN05IL3BrTUdTbXRJdWdz?=
- =?utf-8?B?RkpaWEx6R05idkVneUpac2YwaUhlbm5GOXdNYzhWSW40REdwcUo1a2JIOHdC?=
- =?utf-8?B?VzA1NjJLcDFpckcxQ3FncE9lM3RTM25jV0ZaaS9ZOUtLY0xVYkZlcFlIZTJs?=
- =?utf-8?B?VlBQZ1pWM2dQMGg1Y1VNRFlvMFRrQkd0NTZJRWxJb1FkdGY3VW1HTFVxSWNG?=
- =?utf-8?B?aGMzMUIvS1pQTDhXL0hXSDRDakRYTG5hMVJ5Tk1vZTNIYzcrcjBPbWJselBl?=
- =?utf-8?B?UXc5Zk9LeXlQcnlLWHFkT3Rhc1YvamQ1akR6bG53U0lucG1GYU5FSWxkelZi?=
- =?utf-8?B?aTlHdFkvbSs4dWtieUR4dGxRMHV3UWRQQWFyWTRrLzZlam9lTnRjZWE4ZDdL?=
- =?utf-8?B?TFY5dGVmaUxoNElZOExobjZQZEJ2U2ZkSzdIMDJYOTJhZkFmQ3lBc0RMRHRU?=
- =?utf-8?B?V3UweFYxdFQ3NjhZaU1NRnBlb3FCRUYvSDRnaXdtTG55TitmalFZOVJ5TUw5?=
- =?utf-8?B?Tnh3Nld1eHBMT0w2eG1pUEd2ek94TjMyUzZzZmY2T0dFU1I3bHB5MnJuVWhx?=
- =?utf-8?B?T0pSVTlMUHc0YlA3bm5YelZjUGZMazFaQmZBd3NmTFFGMmdvRU85NkZoYVVm?=
- =?utf-8?B?MzVTcFVPTnozWlpXTnVkbHQ1WlkvUzFUMDdwa3E1RXhQdW5ZNkpKcWNLZGUy?=
- =?utf-8?B?Nm8vS3lZSHg1WWp5K0poYlF4aGRRb3hqTXlTNkovMFlJaCt0aEhJcEViZmo5?=
- =?utf-8?B?RGtjQ0NLNTNscG96aHBBaUgwZXRUeTg5SVZLbzIyNmlWbjZBaDluQklnUmRo?=
- =?utf-8?B?ZzFYTU9pSFJsUUpnU21WMzFlQTdXOEhVcVF3dnNJMXNGZ1B5VDdTc0czLzJl?=
- =?utf-8?B?U0ljd2x3TDRFWGtBS3lhLy9ZMjZsY0R1S04xbWpONzd3dDBmc1FyZmJLTWY5?=
- =?utf-8?B?Z3VRTzFaRnpUYUpyTUtPcVBRcE1yamNsbTJUZ09lWXU4aEZiSmhBdkNiQkNB?=
- =?utf-8?B?NWwxODFUYWdkVEI3bXNCYm5YZFFleWdOaTdqODc5NVVRQTRWRno3c2tRY1V5?=
- =?utf-8?B?d1o1RzdIa1YxNHZ0V0RmeVpMeHBkRXl2T2xMNTY2WmRPQXFPU0hoK0g3Vjlq?=
- =?utf-8?B?ZUQvbFk0anJ0YytscElnN0N3VFRqSzdGcldNVXp6bENmT3NqcWw3VnpwVEV3?=
- =?utf-8?B?Ui84dWUrZS9kUXdWdGV0MXVYNmMwOHhGZmFnMEVCRmdCdE5uNWl4Q2dVWGtj?=
- =?utf-8?B?Y0dJRjZYckRyY0dyWHhiaDdWdDRsbnJwS1piRlhZNlJRbkdJVFdVQkd1YVN4?=
- =?utf-8?B?dTlETlB6QVpzVE9mUGJhWVA5eTN5TStDMTA0SGJLdnlWYXR1QjB3cXMrbGpw?=
- =?utf-8?B?dDhzY0Y1YXVlKy9URHdpRjY3aDQ5S3R0SXZoWW5jQWEvbGsydVBzc3FJTWhD?=
- =?utf-8?B?Z3liNVdUZSswT3p1c1NNalpwRGd2bUgwbjNMYWZld1B6NUtsaEVLeVhPckw0?=
- =?utf-8?B?OU5Ra2J4d0hVWXRmcWRTK3RKNVlueWlHYzJZNnN4REFzNXB5MVllV2o5M2tk?=
- =?utf-8?B?Z1NQSFdtQkI5eXlZVHFtdz09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6375.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024);DIR:OUT;SFP:1101;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NzVSQkRRcUNqUnZVbDEyN05VeTBBVFBsWGZXeWFLand2Z0dhQWx1d2Q5Nldn?=
+ =?utf-8?B?S0JPanVnY1hzaEFxQ0twdndDRzJxSThyQjMvK1RCQStya21CN0JXVis1cGUx?=
+ =?utf-8?B?Y0ovN0VtZjNGSEVkOTk4RUtyNDFFMEZpQnBuNWRjSURNUHRkMXB4UVBMck9m?=
+ =?utf-8?B?YXZWQ09DeEtNSG9jVnhkcG5tUmE3b1lCY1VGMWR1YVpUVzNGMmp4a0lVQ0U4?=
+ =?utf-8?B?TlV2QzEvbHQxTFpOT0ZrdGhxZHJ1NitKdGxsckJ1OVU5a2xxcVltMW1BVDBq?=
+ =?utf-8?B?cFVUd2FMYmRNaDZnMFRGcDdXa1p4VnlMc3doU3JNQjdoZTFBenhYL09iNW9O?=
+ =?utf-8?B?eGQ5M3VQdkNRNXpRZmVkS1FKQzdmZTNocktqcUJtbmhRemVyenlNM1R0RDhH?=
+ =?utf-8?B?UkNQOHlBekY5N2tvUVFiUERIU1IrUDlvcXhQQlVMMVNOMFFlb0FRK1BvMWpI?=
+ =?utf-8?B?dllTWHQvNnRHbDE0alJ0c0l1cDJYMDU3WVRNYjJIbm9VNzZkbGhQczFFQ0sx?=
+ =?utf-8?B?OVlmWC85a2VMWWVONnJVNHg4bEwyM0cyUC9TMm9iUFUzZWtPTHdBMXYrajNZ?=
+ =?utf-8?B?RG04S1NDSTRYdlNsblZmWUs2MFNVL2ZDV1VrK3NTSmVpbGpldkl1Y0NTNW04?=
+ =?utf-8?B?NjlyQjZuTUlXRFFqbUN5WmgzdWZTOXJwS29hM0VkaDN0SHIwM2xHZE5NZTMw?=
+ =?utf-8?B?Y2s5cUxVS2VPcVlEZU0zUFIyRFhCNEFKTCtrZ3g2eUFYY2hxYmliaFozaEg1?=
+ =?utf-8?B?Ykp2MlIzYnYxbkxrV2ppOE84eFRJNVdQSTRDV0VqTTdTb3VlS3dwMnB3UXI2?=
+ =?utf-8?B?YzdGQUFhOE85YXBNUjFkbVhaRnNtMURLa1B4U0E4OURiYVV5a3p6V011aHlo?=
+ =?utf-8?B?ZEFnQzF5aWwyaTlabFd4NHQ2RE9NVStldzNqYlczZGtEU1RTR1hGSCtMZU0v?=
+ =?utf-8?B?ZlRLc09wSC93MC9obXY1WmpYdFFaTW1aaDVxZjdFVUhaWHdZWXlaUkhOa042?=
+ =?utf-8?B?SUx0Z0drVDIySHpSN29qZlMwbVZyQWtTcTJLNmUzWFk0U1QwQzRwOTlmaFhs?=
+ =?utf-8?B?eFdxM1pZVnpFaWVUYTdEc0p1dElMMFNlV3F0UXVWWHUraXc4ODB1dzlvaU5r?=
+ =?utf-8?B?alUrR21vQWJWZXBLMHRITndIVzFMYmpDbERDV1dPQ3ZIUHcxYWRpUUpXNnZp?=
+ =?utf-8?B?ZjFNeDVsajJhN0x1MGpsVEtodUhxNldPQ2x6dm9taHNucHk2bkJGY2lpK25S?=
+ =?utf-8?B?YVNXV2JJUXVhQ2lBSll6a0xXVmVwMUMvK3h4TWdoaHpSSFJzalRxbU16R3dF?=
+ =?utf-8?B?VDFBbzZXUFRQUzdtb3FTQlBWZ3kzMnJ3cEVOK0kzQjI0bjhaUTlWMW9tcU9o?=
+ =?utf-8?B?VllJbzVMRXErQ0pHR3VGUXVRSEJJUFdONjRPN0xMcWd2RWtQZXpxWjBvb3Br?=
+ =?utf-8?B?aWVIUnFGZkVUSkdmUGNEUEJaNy9UbHRValdRdzE1YmFORFdDU1YzK2oxREUr?=
+ =?utf-8?B?WWRLUTQ5SHFqY3Zub2pKT2tuWkNYaFdha3NUc0Vkci9oWk8zYXRUODk0ZHVS?=
+ =?utf-8?B?Rk1FQ3NyeUJJOUs0djBwaDZGYXFzY3Z1bDFKQkEzclRzS0JBWEQ3V3NwaEwy?=
+ =?utf-8?B?NUhjYVM2RFV3dDdOMlhqS1d5cTQ5eWFyTkZJQmVqOWNHa29CaFllMXkxeDBr?=
+ =?utf-8?B?aDBDSkJiNldYYjJJaG5FNytvWFFYOEV4b1BVa1lvKzBtcU9Ra2dPTUZGN2Z2?=
+ =?utf-8?B?bXVmNlZsRTZwUEhWNVhDeVB2dEwyY3M5SnVQMGJMTlNSNHJwTHd6aHdiaUkv?=
+ =?utf-8?B?MGRRRlhpd2hFaWMvcHZDUT09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6375.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K1ZQMktveTBuTVV4b3BYU3pYTDRSbldoR0s1Nnk3NWJjTjRVcEppNGptb1pl?=
- =?utf-8?B?WG1rZUFIZStKcTVYejRaMzFJZnRZNk1XOEkrV3hJMW1PQTIxUWlZOHFlcG1j?=
- =?utf-8?B?eGc3ZmZRNnhFZFJwSERQY3JrUzhoWDQ5akx0VDFhR3huT1J2ZXZWLzJ3Q09l?=
- =?utf-8?B?MVl5aGdLQUt5M3RTSjVHUEdLRDNkUzRsMHVNUTR3SDIvNGZoT0swWjFoSVN3?=
- =?utf-8?B?WTcwQ0h5STJNSmdkN2hRb0dXdC9vQS8xRHdsNjk2emUycHlYTHVJSTZjNW9Q?=
- =?utf-8?B?RlpkSzg0dUJWT3RISWF3QVFJc09vSW9CU0FFSHRUK1J1eXBZeTJWa2Zramwy?=
- =?utf-8?B?V1lHdmRFbzdla1FZdlZLcTFzTnJwaVVpZUNlYXh6aTMyMW43YjAzUnRVUmRQ?=
- =?utf-8?B?aGQvcmZyWmJySkhsc2x4Y1FsYkpPUUxwd29ZUnV5YXhFRFhiZzNIMjZidEE1?=
- =?utf-8?B?THB5NmlQa243RkZJMFVtcUFLOXdMMkk0eVNqUUtWZmxJTGR1Qk9OWGJEY2Jv?=
- =?utf-8?B?QSswZWVQVGZ1eWhESEhpdmduNVJIRmtPcW5PaUJWRjFZSTJFb3I4eTlVK3B1?=
- =?utf-8?B?QkpDKzNwTHJveHZtaHBJeGMxaTZocmF3OW5oanFjalVEQWtEelhVNjJCeklQ?=
- =?utf-8?B?VHJhL2dZZ0diYjB4dWZFa2JNalNObTFiMHFoZDBVYlJOdkdIOWx2dGF6WStv?=
- =?utf-8?B?ZStqMlhWYUl5OCtmVyswUmF0ZnVRWEJrTzdKNisycis0dHJpU2RJUWF6T1pL?=
- =?utf-8?B?R1NMUW1KaEJlMFI1TEpwQ0d5THpieUhTWnpmYmx3cVE0cGtkenBGRitHWGE2?=
- =?utf-8?B?S01rZ0w3OEVJMTdOTHFiRE5FWGZMVUxXbW5NQU9JcGhRcUhTdFh3a3RjNVFl?=
- =?utf-8?B?OFlLcUtIQlphRFo4ZnlMa1RQaVVKTnAvY29tcjZyZkNIQ0ZwT1RWTkEwREFK?=
- =?utf-8?B?QVYwWWZ4WjhBWmJ0aXRQdElqSEJpb0RkR3c1d0xEZ3FWTGFLODVjWStVRTNa?=
- =?utf-8?B?N1JnT2tQY0lDY2l3Q3N5aWlrTFpDMGhnblVSa3Vqd0s4andVUDQrV3hQdDgv?=
- =?utf-8?B?Y2tzcTRVa3ZDeUlBMEV4S0g1ZnlRTlkvSW1MMVpJMjd4Y1ljazNxNXd6U0g5?=
- =?utf-8?B?VEQzYlBsTGc0Q0pBa3ZBMkNmZGxNL1JGN2ZwSGgxNDV4dFhnK2o4aGk5RmJ5?=
- =?utf-8?B?dm1RSjZpMko3eDFLZFlXVk9IMzhLSHFZZ1B6cTY4SklzSkVsQTFSTFhTYW5w?=
- =?utf-8?B?S3UwM1k5YmxGelRsWkFVSlZxcjQybnZsdjBldE1tNE5VTjR6Zmw2L1E3dE1V?=
- =?utf-8?B?TUUxRGNJeFIvOStsQlB2QVdpOE1rcnBSTktIcjRreUdoOGFydmVTQWNpNzRV?=
- =?utf-8?B?K0NJeEUvK1hYNFZHbWJtYWo5VysrWFBhRWFGVmZsVlB2b3JpdTViVzYzcjYx?=
- =?utf-8?B?Wis2M3E3RFBBWVUyeTJhK3NkVVEvSHZuM0pYTy9nSTZEV3VVMzJ2RkQ0aUk3?=
- =?utf-8?B?cW5mQWVvSDkwSHVtbGFHWFFtUXp4YkNBL3pJQzRaVVFNVmwvcmtVSjJzZzk3?=
- =?utf-8?B?bXVaUUV2Qlg2S0hsZ1paem00VUNzdVduekoxK041a2RCa1p4dkx5RmNyWTRh?=
- =?utf-8?B?aHhMbWZjejFxaU9QdnRIWVFKamZpdDhOSVYyRmVSYVEvbkdjUnNiYzkzMnpa?=
- =?utf-8?B?dGtlOG8yeTFOajVwdVVsalRHUWhSUlo1UWNMdVNoVHdGUGNvVGVnaG51UFRs?=
- =?utf-8?B?UFJEdVBlaG1laTNPU2Rncm9Xamh4V2NDbTdlZ29iUXFVZ25kais2aVZZL293?=
- =?utf-8?B?YlM4NVBjdXlFTVZJcXdQeEVHc1FPOHMrMER3VlZ0d3ZXVU1NMUJOdHZ3UnJk?=
- =?utf-8?B?cjhrTS93NzNNdVF1WXNFZ2NqZGdRWlJWazNIRXFBcWpVVGZwNmZDek55U1Ar?=
- =?utf-8?B?UjhmNUZkNXZIaXdoWHNsY0ZCQkRDT1JESnV3bXMwclo5ZFdtaExRRjFOdlVr?=
- =?utf-8?B?MU1RWmIxc2JncG96K0o5blF4aHViazl2Yk45SzI5aDVoSUQwdDdiczNSTzZE?=
- =?utf-8?B?K3ZvZ3VZNkttKzB3dS9uWGNQWEtBbkJTWHgvb2w4VU5LSWtVdnFTSFRGdTBL?=
- =?utf-8?B?alJ1aWtiN3MwUWFydUh3Q0xPTDh5Wm5kQUMwVXFBTlZFZk0xOHJoalN1NWx0?=
- =?utf-8?B?eXc9PQ==?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77c4c17c-2e04-4b23-bb80-08dd13b60bed
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MDRVRnNWVmkvWm1QY1RMNlBGTzJISjFtNlkySmpIbEk2NjdUZXB5b0E3Q0o1?=
+ =?utf-8?B?elMzbVorVFJKd3dsQk9FZGdsais5WTl0dGNxQWROTzFYTmVYNnlBOTdNMzN0?=
+ =?utf-8?B?NkpRK3k4Q2k2eVd1UE1WdXo4Wm5DelpBMllPcGZBZHNVRGdpdFVtMU1mVUR0?=
+ =?utf-8?B?VTF3aFdyRndwVlpvSXZYcmRDVmNRMU1oSis2ZTRSMXl4eUxJZWFpb0pVZVdF?=
+ =?utf-8?B?SVByQUI0VHdncm1PYVNaZHluczhrOXpYbC83SHkwSmo1OS9VV0JtMThrYW9j?=
+ =?utf-8?B?NTFSdTVESldwa0dIOGxudWhkUFpOWGk4ellGb2Z0U0tXQzF5S1pDOHMrUUJU?=
+ =?utf-8?B?ajB0UEJ2MjJwdFhOSzE0Um1sYVJHNllSYzFaQ2FBejBnYzFYcmx3cUFVRUNt?=
+ =?utf-8?B?K20yZ1A2VzE0VzlSQytPeGYxbk9xM2NVTzR6ZEN4dUFVZkNUNjlDQ3d0cnJw?=
+ =?utf-8?B?Z3JHUEdwc1JGdGxRaDFjQ3NpSGt6a1VlcTlSV0MwNjdUK2FVS25jVktXMGNM?=
+ =?utf-8?B?M1d4UVJtNms2eURXa1o2RTExSEUrVklVbmpTUE5KTkpxblllOSt0Tkp5dGk0?=
+ =?utf-8?B?cnJKenRndE15OHdUUGtNdHZycGpYUGZEWWE5MjRZdGk2bkRKTldFd0djWG80?=
+ =?utf-8?B?QTZyc3I4RitpNmVQZjVzcHdlL1A3bkprL1VhdXBjZGkrWkY5U2w1azdKTXhn?=
+ =?utf-8?B?dzNXU2w4eXFMYUJpZFdoQ2x0UXNsUDZobkFBdTBZWVJNUUVad0szV2hGNitZ?=
+ =?utf-8?B?OFc1THNhY1NYVE1VK2tTd2V2QkhzLzBFT204eUQ2ZVdQMFZUazVTSWg3VHpk?=
+ =?utf-8?B?MmcyQ2k1RzJRWDdiSHBJc2NZcTR0RmlBQTNzbk9NK3lDUzlXRXF2TTFrbm5o?=
+ =?utf-8?B?dldqNmV4ay94dEdMOEdNMWlac3V6UkhFYkhuZ09EWmdDZHZ3aXJrZENTcjY4?=
+ =?utf-8?B?b1o5SmlWbE1mR0k0aEdiU2NzWmtVUTRjVXRFOU1YKzZ5dWNrbHBvaHUra2p4?=
+ =?utf-8?B?RXZpUGNTWGVSSWpLamFabENIdWZseXB0Tkk2eVBsRnRiRy8zalF2WXQvNWow?=
+ =?utf-8?B?RXMwQmpnMDc2ZXFKclNzUXMxYm82eW1vODJSWlVBOHNrbmZUOFo1bjZrcXhB?=
+ =?utf-8?B?RXZNc3FZS0VzR2pLKytwZXcyVVpPZkZJdXM5VVo0b1RPTEU1bngrMXRvL0lH?=
+ =?utf-8?B?Q2xXYVVsS3Uvb01lUFowanpwSGVXZSs1aWNGRnZKMjhsSGtydEtjbEJUcWJs?=
+ =?utf-8?B?eDNvUWZOSmJOVU1zaEZ2bTRkanovbG9aZVAwRnRMaTNZbERiby9HZ3VkcHVU?=
+ =?utf-8?B?T2t0ZTNpR2d0dTRPdW93MGUwMUFhN3l2RVlJeG9HTnE1ZE5wTmpZQ0JsUXBq?=
+ =?utf-8?B?Tngwc1JTRGZvcDBSL0d3a3MvRTE5MGtCK1VFdDNtQlhvTnlxdW94bEJzZGhl?=
+ =?utf-8?B?QjlxSU93V1FUVFBJR0hGS1ZGcFJYdXFsRTloZEJVYTdKaENqZ25lZ1lDNzVw?=
+ =?utf-8?B?ZjlkcjJYRkVHY1VNNDltY2ZUWGdzeStzUEFNbldrVW15MVQvbW0vQ0g1RjFl?=
+ =?utf-8?B?ZXM0RkZKSkZrN2gyYVRHU1dyaENGOE9SNDRrRXNXL2lBY3Nqb3F0dXc4YW9h?=
+ =?utf-8?B?NjFSOUZlK05YaHJXNk1HSXJjQ3FDUVN1OHdVVlR2VWY5TmZrd2hEeUZ4TVB5?=
+ =?utf-8?B?eUcyRENoaW9MdWRCdEFhdVVxcENlWExMbXdpdENUSHJRNGo1R2t4Q2oyTm02?=
+ =?utf-8?B?b2QvSXFVNGlOZ3NZSDRmbmk3SWpHSkUrOGFoL0VKclBSakdPbzd4a1EyL0hu?=
+ =?utf-8?B?UjNmZUVhUTdZQ3NuSXU3SmhoL3plcEd2cWVkOVZ5RU16dmhWRmhGdjZQeW5P?=
+ =?utf-8?B?Qks3YTJRWkEzTFpzRHloTmJQNUVuUHZsUW9tQytqb1JKTHMrOUZOMjRkVDgy?=
+ =?utf-8?B?N09vbGhaV1VHSDJJclFlZmNwVnQxVXo0MnZVRWlBcElRM05OL2xhUHpjdWt3?=
+ =?utf-8?B?d2dHV2ovUi9uRXpSWEhzYkdxWDNOOXl3c3ZSUjNXNllXOTZkTi8vNXgzbFhL?=
+ =?utf-8?B?QmJDQ3hocFdad09DcTZ6VDB5RXNEaSs5N1I2M2lVT1dIZ1ZCM0ZmQVZwd28y?=
+ =?utf-8?B?NnE5TmM0WmZHRDk0QldVQUhJbnhzUDA1ZU1RdnEzNUtyeERYZ2traFY2MGZS?=
+ =?utf-8?B?bHc9PQ==?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e0f6c6d-e13b-40e5-a6f0-08dd13b5953a
 X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6375.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 16:17:56.6000
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 16:14:37.2918
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EOxsAjPAumgMej79D1jjM6KM0Qv3EKF7l9WpKMvZ6VZX3qxpKbmzogt981x/dZz3oCRHrCiNbw53sxO05yPnCr96DevRCBpImoseB31vnnY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7892
+X-MS-Exchange-CrossTenant-UserPrincipalName: /mYTd1mHlHbehts+PJUkLGaU00mOB/v6XhBUBiltjddwVzPNYnjYVMoiw2S6tMLRST/ZJ5Wb0BJkI90h3WOF/Yzbhzf2htgcCKE25YtaUFQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB6214
 X-OriginatorOrg: intel.com
 
-On 2024-12-01 4:14 AM, Pierre-Louis Bossart wrote:
-> Sorry to chime in late, I only look at email occasionally.
-> 
+On 2024-11-06 8:33 PM, Wesley Cheng wrote:
+> Expose API for creation of a jack control for notifying of available
+> devices that are plugged in/discovered, and that support offloading.  This
+> allows for control names to be standardized across implementations of USB
+> audio offloading.
 
 ...
 
-> My Reviewed-by tags were added in the last updates. I am not sure if anyone else at Intel had the time to review this large patchset.
-> 
->> I believe Amadeusz was still against having the two card design, and wants the routing to automatically happen when playback happens on the sound card created by the USB SND layer.  However, even with that kind of implementation, the major pieces brought in by this series should still be relevant, ie soc-usb and the vendor offload driver.  The only thing that would really change is adding a path from the USB SND PCM ops to interact with the ASoC entities.  Complexity-wise, this would obviously have a good amount of changes to the USB SND/ASoC core drivers.  Some things I can think of that we'd need to introduce:
-> 
-> The notion of two cards was agreed inside Intel as far back as 2018, when Rakesh first looked at USB offload.
+> +/* SOC USB sound kcontrols */
 
+I'd suggest to use 'SoC' over 'SOC'. The former is predominant in the 
+ASoC code.
 
-Well, I believe a lot has changed since then, not sure if USB Audio 
-Offload (UAOL) was even stable on the Windows solution back then. 
-Obviously we want to incorporate what we have learned during all that 
-time into our solution before it lands on upstream.
+> +/**
+> + * snd_soc_usb_setup_offload_jack() - Create USB offloading jack
+> + * @component: USB DPCM backend DAI component
+> + * @jack: jack structure to create
+> + *
+> + * Creates a jack device for notifying userspace of the availability
+> + * of an offload capable device.
+> + *
+> + * Returns 0 on success, negative on error.
+> + *
+> + */
+> +int snd_soc_usb_setup_offload_jack(struct snd_soc_component *component,
+> +				   struct snd_soc_jack *jack)
+> +{
+> +	int ret;
+> +
+> +	ret = snd_soc_card_jack_new(component->card, "USB Offload Jack",
+> +				    SND_JACK_USB, jack);
+> +	if (ret < 0) {
+> +		dev_err(component->card->dev, "Unable to add USB offload jack: %d\n",
+> +			ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = snd_soc_component_set_jack(component, jack, NULL);
+> +	if (ret) {
+> +		dev_err(component->card->dev, "Failed to set jack: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL_GPL(snd_soc_usb_setup_offload_jack);
 
-UAOL is one of our priorities right now and some (e.g.: me) prefer to 
-not pollute their mind with another approaches until what they have in 
-mind is crystalized. In short, I'd vote for a approach where USB device 
-has a ASoC representative in sound/soc/codecs/ just like it is the case 
-for HDAudio. Either that or at least a ASoC-component representative, a 
-dependency for UAOL-capable card to enumerate.
+Do we really need this one? Error reporting/handling for both 
+invocations above is redundant, the log message should be provided by 
+lower-level API. No need to pollute each caller with them. And with that 
+part removed, we end up with basic ASoC calls, hardly a new-API candidate.
 
-Currently struct snd_soc_usb does not represent any component at all. 
-Lack of codec representative, component representative and, given my 
-current understanding, mixed dependency of sound/usb on 
-sound/soc/soc-usb does lead to hard-to-understand ASoC solution.
+> +/**
+> + * snd_soc_usb_disable_offload_jack() - Disables USB offloading jack
+> + * @component: USB DPCM backend DAI component
+> + *
+> + * Disables the offload jack device, so that further connection events
+> + * won't be notified.
+> + *
+> + * Returns 0 on success, negative on error.
+> + *
+> + */
+> +int snd_soc_usb_disable_offload_jack(struct snd_soc_component *component)
+> +{
+> +	int ret;
+> +
+> +	ret = snd_soc_component_set_jack(component, NULL, NULL);
+> +	if (ret) {
+> +		dev_err(component->card->dev, "Failed to disable jack: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL_GPL(snd_soc_usb_disable_offload_jack);
 
+Code duplication. ASoC already provides the API and the logging is 
+redundant here.
+
+> +/**
+> + * snd_soc_usb_enable_offload_jack() - Enables USB offloading jack
+> + * @component: USB DPCM backend DAI component
+> + * @jack: offload jack to enable
+> + *
+> + * Enables the offload jack device, so that further connection events
+> + * will be notified.  This is the complement to
+> + * snd_soc_usb_disable_offload_jack().
+> + *
+> + * Returns 0 on success, negative on error.
+> + *
+> + */
+> +int snd_soc_usb_enable_offload_jack(struct snd_soc_component *component,
+> +				    struct snd_soc_jack *jack)
+> +{
+> +	int ret;
+> +
+> +	ret = snd_soc_component_set_jack(component, jack, NULL);
+> +	if (ret) {
+> +		dev_err(component->card->dev, "Failed to enable jack: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL_GPL(snd_soc_usb_enable_offload_jack);
+
+Ditto.
+
+>   /**
+>    * snd_soc_usb_find_priv_data() - Retrieve private data stored
+>    * @usbdev: device reference
 > 
-> Having a single USB card in IMHO more complicated:  what happens for example if you plug-in two or more USB devices? Which of the USB cards will expose an optimized path? The design with an ASoC-based card which exposes as many PCM devices as the SOC can support is simpler conceptually and scales well. This would allow e.g. to allocate these PCM devices with different policies (last plugged, preferred, etc).
-> 
-> Conceptually for the simple case with a single USB device, it does not really matter if there are two cards or not. What matters is that there is a clear mapping visible to userspace so that application can decide to use the optimized PCM device, when enabled, instead of the legacy one. And in the end, the application is *always* in control in terms of routing. It’s really similar to the compress offload path, some application changes will be required.
-> 
->>
->> 1.  Exposing some of the ASoC PCM (soc-pcm) APIs to be able to be called by soc-usb (to mimic a FE open from ASoC), so we can trigger ASoC DAI ops when USB SND FE is opened.
->>
->> 2.  Proper fallback mechanism in case offload path enablement fails to the legacy USB SND path.
->>
->> 3.  Master kcontrol to disable offload logic for each USB SND device.
->>
->> IMO, both the points you mentioned correspond to the same topic.  If we go with having offload being operated on one FE, then there is no need for the kcontrol of PCM mapping.  If we have two cards, then we will need the control for offload device mapping.  Can't speak for Pierre, but at least with my discussions with him, I don't think he's against the two card design, just as long as we have the proper kcontrol that notifies userspace of how to utilize the offload path.
-> 
-> Even if there’s a single card you need to have a mapping between a ‘legacy’ PCM device and an ‘optimized’ one. This would be a scalar mapping instead of a (card, device) pair, but it’s a minor change.
-> 
-> -Pierre
 
 
