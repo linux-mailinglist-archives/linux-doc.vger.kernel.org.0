@@ -1,154 +1,117 @@
-Return-Path: <linux-doc+bounces-31949-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31951-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E6AC9E1D1A
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 14:08:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46F089E222B
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 16:21:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 48BE2283CBB
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 13:08:25 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0BB1D2848E4
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 15:21:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9BDD61EF087;
-	Tue,  3 Dec 2024 13:07:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8CC391F707A;
+	Tue,  3 Dec 2024 15:21:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="b4GXuiUO"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="SnOT8F7A"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66C391EE03D;
-	Tue,  3 Dec 2024 13:07:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61B741EF0AE;
+	Tue,  3 Dec 2024 15:21:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733231239; cv=none; b=tacwTI5MfgeBypNz0xji1PHr1zv+fQXNGUmAcJgFwGvVi9WaC+Q9GFC55si9t1kRb8gk8xAxuN2z6dlFDGlMiYYHodo10wNThwIQs3XWGO3IyljPVuKGGoZ8O/WgVTirdj6OyFGbG1s8tlSmm7pp0Evj0ek7W+KZVs6ba4gjEBw=
+	t=1733239277; cv=none; b=h2C4kFawvatghOOAti9q6/1rMeorCmrUAJO+8KDN6Ww8/1PiBHeZBWJh+Md2l4o80/FivN1yeS5rsUMAx068hKWH4b7CUGdH7nS+SbHg3V6b8/YDnE+GZatokIKH5SLyVNebY2UOakBChri3emyIuZdGANTSlZae5AGGCqZbRtE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733231239; c=relaxed/simple;
-	bh=nBqtovQP67JSM9MJxax389v7WGawj+GxFUiHn7+fRz8=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=sYAGkdVLuEFPOnEiYX2hPnBj8+VD/Qo6Nj66GL1vzSGk+jbblGMEwWJYb67fAPedy3ypCB5ic0e2/nj9AHvlqKsmB/wdLHGgBb9wejMEzMKToW98A8DYBrFxJ5L9P8uTRBDv5sVeHE5stIsYZnklUfc8wIUSYfCDdlqfhvdUDtI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=b4GXuiUO; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A545C4CECF;
-	Tue,  3 Dec 2024 13:07:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1733231236;
-	bh=nBqtovQP67JSM9MJxax389v7WGawj+GxFUiHn7+fRz8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=b4GXuiUOJP+z2PLHpo1PMILKVjvdmouR0XQzWM4ynguWJF+I301XUKCWoyq1RMch4
-	 yabH9gGtQxZHH1UuC3zkLrZJ0zNrsqEOsqIUlo7vgQWOP2G44d3X+CSMKGG+s9zCeY
-	 I7zYK0d35vzYk+ol7L5wzH5s6UksAzdXLUXFbbSVhBYRmY1RpcVrPR3MNER8ZwK8nh
-	 +/FQrShaIyCngnCSfcwfCBJGSdxsGecEcmtnZ017g+hFH+epPTueSV5Q8UKGPLGx4M
-	 5aVwrWOavxzPk4KzDgf5B/JPCY20T9G0ypjLH2ouvzSjS6jVXEscmJlcp9E0camc8q
-	 zgVHIBgOG5LUA==
-Date: Tue, 3 Dec 2024 14:07:12 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: Hans Verkuil <hverkuil@xs4all.nl>, linux-media@vger.kernel.org, Jonathan
- Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, workflows@vger.kernel.org
-Subject: Re: [PATCH v3 0/3] Document the new media-committer's model
-Message-ID: <20241203140712.57daa65f@foz.lan>
-In-Reply-To: <20241203112209.GR10736@pendragon.ideasonboard.com>
-References: <cover.1733131405.git.mchehab+huawei@kernel.org>
-	<b0843e80-c46c-4344-b9f1-1d3b57dd2bbe@xs4all.nl>
-	<20241203081958.6c186835@foz.lan>
-	<20241203112209.GR10736@pendragon.ideasonboard.com>
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.43; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1733239277; c=relaxed/simple;
+	bh=+Nq4My9g1vdyzSL1StkGEF63W3Q2D94lemKMk22LqOg=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=bzMk+PeIsSxVwy8ESkSXNSMpwDJk0t5dnSCv+/T5zVplNlK69mqOQci2x9tpftfjj7ecNRdXkh5rPJDasjIXYZaeE5RQfNmr5TcO4UXC5YG8jCmhncAs4AE3K29Vv656o547J4LSNXB0nsinaRP0f7EijR5tHaD2qQLi5SfdmEQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=SnOT8F7A; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9696CC4CECF;
+	Tue,  3 Dec 2024 15:21:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1733239277;
+	bh=+Nq4My9g1vdyzSL1StkGEF63W3Q2D94lemKMk22LqOg=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=SnOT8F7Aud95pFIoEo7AS3SlIZzeNN64Nc4L6ktcHtDhKduwiecgpVTHmAaG+Ocvh
+	 t042K0zjSC1u1KrFX0sVQq0Y53Bwcqtv81KVyyOY7WMR8wp8UDjvHjyFn/lSVOezbA
+	 AdvhMeIPMcUIhbE8N/f3eyYEd7xPAdypliegv1wQ=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: stable@vger.kernel.org
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	patches@lists.linux.dev,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Eric Sandeen <sandeen@redhat.com>,
+	David Howells <dhowells@redhat.com>,
+	Al Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>,
+	Jan Kara <jack@suse.cz>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org,
+	Sasha Levin <sashal@kernel.org>
+Subject: [PATCH 6.11 559/817] fs_parser: update mount_api doc to match function signature
+Date: Tue,  3 Dec 2024 15:42:11 +0100
+Message-ID: <20241203144017.730779526@linuxfoundation.org>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20241203143955.605130076@linuxfoundation.org>
+References: <20241203143955.605130076@linuxfoundation.org>
+User-Agent: quilt/0.67
+X-stable: review
+X-Patchwork-Hint: ignore
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Em Tue, 3 Dec 2024 13:22:09 +0200
-Laurent Pinchart <laurent.pinchart@ideasonboard.com> escreveu:
+6.11-stable review patch.  If anyone has any objections, please let me know.
 
-> On Tue, Dec 03, 2024 at 08:19:58AM +0100, Mauro Carvalho Chehab wrote:
-> > Em Mon, 2 Dec 2024 16:03:45 +0100 Hans Verkuil escreveu:  
-> > > On 02/12/2024 10:26, Mauro Carvalho Chehab wrote:  
-> > > > The media subsystem used to have a multi-commiter's model in the
-> > > > past, but things didn't go well on that time, and we had to move to
-> > > > a centralized model.
-> > > > 
-> > > > As the community has evolved, and as there are now new policies in
-> > > > place like CoC, let's experiment with a multi-committers again.
-> > > > 
-> > > > The model we're using was inspired by the DRM multi-committers
-> > > > model. Yet, media subsystem is different on several aspects, so the
-> > > > model is not exactly the same.
-> > > > 
-> > > > The implementation will be in phases. For this phase, the goal is that 
-> > > > all committers will be people listed at MAINTAINERS.
-> > > > 
-> > > > On this series,:
-> > > > 
-> > > > patch 1: updates the  media maintainer's entry profile and adds the
-> > > > workflow that will be used with the new model. While here, it also
-> > > > adds a missing "P:" tag at the MAINTAINERS file, pointing to it;
-> > > > 
-> > > > patch 2: adds a new document focused at the new maintainers
-> > > > process. Its target is for developers that will be granted with
-> > > > commit rights at the new media-maintainers.git tree. It also
-> > > > contains a reference tag addition to kernel.org PGP chain
-> > > > at process/maintainer-pgp-guide.rst.
-> > > > 
-> > > > patch 3: make documents cleared about maintainership duties.    
-> > > 
-> > > At least from my perspective, v3 is close to being ready and I hope
-> > > that v4 will be good enough to be merged.
-> > > 
-> > > That said, what is missing in all this is that there is nothing here
-> > > that explains why you would want to become a media committer. It is all
-> > > very dry stuff, lots of 'shall's, and 'rights' and 'trust' and obligations,
-> > > but nothing about the satisfaction you get when you get the responsibility
-> > > of a part of the kernel and being able to guide the development of that
-> > > area.
-> > > 
-> > > It's good enough to get the multi-committer process off the ground, but
-> > > it definitely needs more work to make it more inviting to become a media
-> > > committer. Because right now it is as dry as dust.  
-> > 
-> > Agreed. We focused on getting a document describing what it is expected
-> > by committers, in order to start with the model. My view is that it works
-> > fine for such purpose. I also feel that we're close to the final document.
-> > 
-> > I'm sending today a v4 addressing the comments since last review.
-> > 
-> > Once we get people that are already interested and ready to be on board,
-> > and we know that the model and infrastructure works properly, we may implement
-> > a phase 2 focusing on allowing more committers. For such purpose, we need to 
-> > document the benefits/satisfaction of becoming a new committer. Depending how
-> > it goes, either on phase 2 or on phase 3, we can change the model from 
-> > invitation-only to volunteer-requests.  
-> 
-> What's phase 3 ?
+------------------
 
-The idea is to gradually open media-committers to more people, as each
-phase succeeds, addressing infra, procedures, etc.
+From: Randy Dunlap <rdunlap@infradead.org>
 
-My rough idea is to do:
+[ Upstream commit c66f759832a83cb273ba5a55c66dcc99384efa74 ]
 
-- Phase 0.99: beta testers;
-- Phase 1 is to invite people that regularly submit PRs;
-- Phase 2 is to invite other active maintainers;
-- Phase 3 (or 2?, TBD) to open for non-maintainers.
+Add the missing 'name' parameter to the mount_api documentation for
+fs_validate_description().
 
-We shouldn't rush it, as there are a lot to be done before opening it
-broadly. So, I would say that:
-- phase 0.99 would start in -rc2 (if things go well during this week); 
-- phase 1 may still happen on this merge window, but as there will be
-  only a few weeks between -rc2 and -rc6, and people usually get
-  holidays in Dec/Jan, it is more likely that it will start for
-  6.14-rc1, again if we didn't notice big issues on phase 0.99.
+Fixes: 96cafb9ccb15 ("fs_parser: remove fs_parameter_description name field")
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Link: https://lore.kernel.org/r/20241125215021.231758-1-rdunlap@infradead.org
+Cc: Eric Sandeen <sandeen@redhat.com>
+Cc: David Howells <dhowells@redhat.com>
+Cc: Al Viro <viro@zeniv.linux.org.uk>
+Cc: Christian Brauner <brauner@kernel.org>
+Cc: Jan Kara <jack@suse.cz>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+Signed-off-by: Christian Brauner <brauner@kernel.org>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ Documentation/filesystems/mount_api.rst | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-  We should wait at least for a couple of releases on phase 1,
-  again to cleanup process and fine-tune infra. If things go well, 
-  we can move to phase 2.
+diff --git a/Documentation/filesystems/mount_api.rst b/Documentation/filesystems/mount_api.rst
+index 317934c9e8fca..d92c276f1575a 100644
+--- a/Documentation/filesystems/mount_api.rst
++++ b/Documentation/filesystems/mount_api.rst
+@@ -770,7 +770,8 @@ process the parameters it is given.
+ 
+    * ::
+ 
+-       bool fs_validate_description(const struct fs_parameter_description *desc);
++       bool fs_validate_description(const char *name,
++                                    const struct fs_parameter_description *desc);
+ 
+      This performs some validation checks on a parameter description.  It
+      returns true if the description is good and false if it is not.  It will
+-- 
+2.43.0
 
-Thanks,
-Mauro
+
+
 
