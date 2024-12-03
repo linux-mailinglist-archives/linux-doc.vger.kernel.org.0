@@ -1,107 +1,200 @@
-Return-Path: <linux-doc+bounces-31893-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-31899-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 162749E1207
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 04:52:36 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1969B9E124A
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 05:20:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 734C72826F7
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 03:52:34 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 80668B235D6
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2024 04:20:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 041FE5A7AA;
-	Tue,  3 Dec 2024 03:52:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AC4A5188926;
+	Tue,  3 Dec 2024 04:20:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XD0Zjqjt"
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="LWiN0Pp0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C55122AE68;
-	Tue,  3 Dec 2024 03:52:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C1A6156C7B;
+	Tue,  3 Dec 2024 04:20:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733197950; cv=none; b=UyjtaltAKpyROd+2kLJzWV4hP5ueyxb7ELMMm29F0ST+7u7vSLhqtylwjhRJVOVYZP68NSrZuDy1YGQv9Luimw6BqPEU+GO7NedNg88TMD2LSUso3eLQCWn6s+kp6xy+OUGaEtBD/v4zeSbgpG1NO6SpCaDMiCRIbQQkGUZ748k=
+	t=1733199626; cv=none; b=ID7tRqRgwsXRa5nCXD47l6WWxq0cb9c7iBZbA6+4hauUPLMVN189q7fN8noACY0zIW6zHUXd4DxcWI1MOWvGgAyBS2/iq/ofrZF742AtN+OJvObp+SsfzxwdsaDCABMbcUHo3KIJ72iMbUbfkS0olciQbAjH8v1wCAjHyAO1eBE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733197950; c=relaxed/simple;
-	bh=551G0uIufXA+lOHOTDV30PQxwDalihvt2D9ST7Uyg5Q=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=F8qAXQOyHcxjfhtlqW7ZAF738gdfUrXmIpWx/cIfg9AVsqfjoTen9dwl7SfDwQ+0z8cBXBdMrHGeHJMSVzL1KTxPcutAlcbEMFDiJRcgG1E41ju9EXsroDhvkaifIk8015235CDaU52qt8lZbS2/qkV8iXlZ4r0YFdQWLM0uYMc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XD0Zjqjt; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E9F1C4CECF;
-	Tue,  3 Dec 2024 03:52:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1733197950;
-	bh=551G0uIufXA+lOHOTDV30PQxwDalihvt2D9ST7Uyg5Q=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=XD0ZjqjtfZQCDvslIhTQyI8UMMNmIN8f8dmZNTYqxnhfRE6rbpHJeka1++9q141Dn
-	 waHHVJQ7LfSXRbvkRBgdouvsVgjVkskox+1AcHXe/foU+3+maOXjUbq5qK4ydFu+6y
-	 eGt7tAjbsYi6XkhKsGyvqhGm22zc62JJYaYAUkfNm7KcIc3UAXgQLiaZJOHCnSCvt7
-	 oRa3Kz86AD4qfwpi88dcu6EE9YaR9ETkvSQwb15Nd5g2HuFeQAEj98Wl5trGeAXnie
-	 4gYaE1CkEsqAAjGGsxxyQWE5+HNaSP91y76zX+y//WI2IC7Nw8tW3oAjRAfCLpChWI
-	 gpLx2VJDJVlpA==
-Date: Mon, 2 Dec 2024 19:52:28 -0800
-From: Jakub Kicinski <kuba@kernel.org>
-To: Stanislav Fomichev <sdf@fomichev.me>
-Cc: netdev@vger.kernel.org, davem@davemloft.net, edumazet@google.com,
- pabeni@redhat.com, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- horms@kernel.org, donald.hunter@gmail.com, corbet@lwn.net,
- andrew+netdev@lunn.ch, kory.maincent@bootlin.com, nicolas.dichtel@6wind.com
-Subject: Re: [PATCH net-next v3 0/8] ethtool: generate uapi header from the
- spec
-Message-ID: <20241202195228.65c9a49a@kernel.org>
-In-Reply-To: <20241202162936.3778016-1-sdf@fomichev.me>
-References: <20241202162936.3778016-1-sdf@fomichev.me>
+	s=arc-20240116; t=1733199626; c=relaxed/simple;
+	bh=FwrlA6HAL3zirBvGit1o+MRHwId1dF2xUMVaNcA/GLI=;
+	h=From:Subject:Date:Message-ID:MIME-Version:Content-Type:To:CC; b=AG15ZJOnVhtfhVxMsgd4Zm1MPZzMe8Jj1kOtKeM4jOKhCcmJid5S5dquPTv3jsw1sqbwO0ph3NSZBZbeOvLaJfZ8jMJMUAhI80VWgXq2BwSGRnJP+vySfaGrMccqGJ5G7UTDxSYXx67SuNSR7T7h+3fpCZ2RDGbuKDagHTYoYrM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=LWiN0Pp0; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4B2LSPjl026608;
+	Tue, 3 Dec 2024 04:20:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=G38OIG68H/J7MRorQm9kkd
+	0RmIMKzVchCat3bVtB6dg=; b=LWiN0Pp0xsE2aFgQy56LCjGZ1tWtfZF96pxTQ+
+	uJYmIxN6Uxd2TFlrd6Tulox2VSLXvITdM5QUBUy0eKyZKP7ZqeH0P40KKI1H3PWr
+	4B7jNL+oJcUre+2J1q19sXErzGFNakF7Ah7WKWG43A8thJTVn3xrTzTOjBGD8cwI
+	rDWLj3RoeQVnhjSOs/U6LAcFb+m6Dm+pYNbeGdDy0zA4Zd9n6Oy9Dz7rZJ1J8kNm
+	f5huQnJHto5ehdAl4iRZ72Sh8hDUG6id1ipJfZHt+piQ+4TWly4Tfd2F6JVZYeP5
+	nDaIoxwXyJ1n1O9q0uTz1kYxc32jmsiNBnEjlD3GJG6NSFpQ==
+Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 437ufe6p2u-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 03 Dec 2024 04:20:05 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com [10.46.141.250])
+	by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 4B34K5ns004308
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 3 Dec 2024 04:20:05 GMT
+Received: from hu-azarrabi-lv.qualcomm.com (10.49.16.6) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Mon, 2 Dec 2024 20:20:04 -0800
+From: Amirreza Zarrabi <quic_azarrabi@quicinc.com>
+Subject: [PATCH 00/10] Trusted Execution Environment (TEE) driver for
+ Qualcomm TEE (QTEE)
+Date: Mon, 2 Dec 2024 20:19:16 -0800
+Message-ID: <20241202-qcom-tee-using-tee-ss-without-mem-obj-v1-0-f502ef01e016@quicinc.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAMWGTmcC/x2NQQqDMBBFryKzdkCjptCrFBc2jskUkrSZWAXx7
+ gY3j/82/x0glJgEntUBif4sHEORtq7AuClYQp6Lg2pU3xbgz0SPmQhX4WDvJYIbZxfXjJ48xvc
+ HO62M1l3fDOoB5eubaOH97rzG87wAgRacnHcAAAA=
+To: Jens Wiklander <jens.wiklander@linaro.org>,
+        Sumit Garg
+	<sumit.garg@linaro.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        "Konrad
+ Dybcio" <konradybcio@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        "Krzysztof
+ Kozlowski" <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        "Bartosz
+ Golaszewski" <bartosz.golaszewski@linaro.org>,
+        Srinivas Kandagatla
+	<srinivas.kandagatla@linaro.org>
+CC: <linux-arm-msm@vger.kernel.org>, <op-tee@lists.trustedfirmware.org>,
+        <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>,
+        Amirreza Zarrabi <quic_azarrabi@quicinc.com>
+X-Mailer: b4 0.13.0
+X-ClientProxiedBy: nalasex01c.na.qualcomm.com (10.47.97.35) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: nws3N-e5_fsF5AVIk-DPXOeSbjxOk-s0
+X-Proofpoint-GUID: nws3N-e5_fsF5AVIk-DPXOeSbjxOk-s0
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 suspectscore=0
+ spamscore=0 impostorscore=0 lowpriorityscore=0 priorityscore=1501
+ mlxlogscore=999 clxscore=1011 adultscore=0 bulkscore=0 mlxscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2411120000 definitions=main-2412030034
 
-On Mon,  2 Dec 2024 08:29:28 -0800 Stanislav Fomichev wrote:
-> We keep expanding ethtool netlink api surface and this leads to
-> constantly playing catchup on the ynl spec side. There are a couple
-> of things that prevent us from fully converting to generating
-> the header from the spec (stats and cable tests), but we can
-> generate 95% of the header which is still better than maintaining
-> c header and spec separately. The series adds a couple of missing
-> features on the ynl-gen-c side and separates the parts
-> that we can generate into new ethtool_netlink_generated.h.
-> 
-> v3:
-> - s/Unsupported enum-model/Unsupported message enum-model/ (Jakub)
-> - add placeholder doc for header-flags (Jakub)
-> 
-> v2:
-> - attr-cnt-name -> enum-cnt-name (Jakub)
-> - add enum-cnt-name documentation (Jakub)
-> - __ETHTOOL_XXX_CNT -> __ethtool-xxx-cnt + c_upper (Jakub)
-> - keep and refine enum model check (Jakub)
-> - use 'header' presence as a signal to omit rendering instead of new
->   'render' property (Jakub)
-> - new patch to reverse the order of header dependencies in xxx-user.h
-> 
-> Stanislav Fomichev (8):
->   ynl: support enum-cnt-name attribute in legacy definitions
->   ynl: skip rendering attributes with header property in uapi mode
->   ynl: support directional specs in ynl-gen-c.py
->   ynl: add missing pieces to ethtool spec to better match uapi header
->   ynl: include uapi header after all dependencies
->   ethtool: separate definitions that are gonna be generated
->   ethtool: remove the comments that are not gonna be generated
->   ethtool: regenerate uapi header from the spec
+This patch series introduces a Trusted Execution Environment (TEE)
+driver for Qualcomm TEE (QTEE). QTEE enables Trusted Applications (TAs)
+and services to run securely. It uses an object-based interface, where
+each service is an object with sets of operations. Clients can invoke
+these operations on objects, which can generate results, including other
+objects. For example, an object can load a TA and return another object
+that represents the loaded TA, allowing access to its services.
 
-Looks like doc codegen is unhappy about the missing type definitions:
+Kernel and userspace services are also available to QTEE through a
+similar approach. QTEE makes callback requests that are converted into
+object invocations. These objects can represent services within the
+kernel or userspace process.
 
-Documentation/networking/netlink_spec/ethtool.rst:1122: WARNING: Bullet list ends without a blank line; unexpected unindent.
-Documentation/networking/netlink_spec/ethtool.rst:2126: ERROR: Unknown target name: Documentation/networking/netlink_spec/ethtool.rst:2131: ERROR: Unknown target name: "ethtool_a_cable_result_code".
-Documentation/networking/netlink_spec/ethtool.rst:2136: ERROR: Unknown target name: "ethtool_a_cable_inf_src".
+Note: This patch series focuses on QTEE objects and userspace services.
 
-We need to teach it to not link to external types?
+Linux already provides a TEE subsystem, which is described in [1]. The
+tee subsystem provides a generic ioctl interface, TEE_IOC_INVOKE, which
+can be used by userspace to talk to a TEE backend driver. We extend the
+Linux TEE subsystem to understand object parameters and an ioctl call so
+client can invoke objects in QTEE:
+
+  - TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_*
+  - TEE_IOC_OBJECT_INVOKE
+
+The existing ioctl calls TEE_IOC_SUPPL_RECV and TEE_IOC_SUPPL_SEND are
+used for invoking services in the userspace process by QTEE.
+
+The TEE backend driver uses the QTEE Transport Message to communicate
+with QTEE. Interactions through the object INVOKE interface are
+translated into QTEE messages. Likewise, object invocations from QTEE
+for userspace objects are converted into SEND/RECV ioctl calls to
+supplicants.
+
+The details of QTEE Transport Message to communicate with QTEE is
+available in [PATCH 10/10] Documentation: tee: Add Qualcomm TEE driver.
+
+This patch series has been tested for basic QTEE object invocations and
+callback requests, including loading a TA and requesting services form
+the TA. However, the test platform is currently being prepared for
+upstream availability and will soon be accessible to the community for
+further validation. I will share updates as the platform become
+available.
+
+[1] https://www.kernel.org/doc/Documentation/tee.txt
+
+Signed-off-by: Amirreza Zarrabi <quic_azarrabi@quicinc.com>
+---
+Amirreza Zarrabi (10):
+      tee: allow a driver to allocate a tee_device without a pool
+      tee: add TEE_IOCTL_PARAM_ATTR_TYPE_MEMBUF
+      tee: add TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF
+      firmware: qcom: scm: add support for object invocation
+      qcomtee: implement object invoke support
+      qcomtee: add primordial object
+      dt-bindings: arm: qcomtee: add QTEE driver devicetree binding for TEE subsystem
+      tee: add Qualcomm TEE driver
+      arm64: dts: qcom: sm8650: add support for QTEE
+      Documentation: tee: Add Qualcomm TEE driver
+
+ .../devicetree/bindings/arm/firmware/qcom,tee.yaml |  34 +
+ Documentation/tee/index.rst                        |   1 +
+ Documentation/tee/qtee.rst                         | 143 ++++
+ arch/arm64/boot/dts/qcom/sm8650.dtsi               |   4 +
+ drivers/firmware/qcom/qcom_scm.c                   |  60 ++
+ drivers/firmware/qcom/qcom_scm.h                   |   7 +
+ drivers/tee/Kconfig                                |   1 +
+ drivers/tee/Makefile                               |   1 +
+ drivers/tee/qcomtee/Kconfig                        |  10 +
+ drivers/tee/qcomtee/Makefile                       |   9 +
+ drivers/tee/qcomtee/async.c                        | 153 ++++
+ drivers/tee/qcomtee/call.c                         | 707 ++++++++++++++++
+ drivers/tee/qcomtee/core.c                         | 942 +++++++++++++++++++++
+ drivers/tee/qcomtee/primordial_obj.c               |  63 ++
+ drivers/tee/qcomtee/qcom_scm.c                     |  36 +
+ drivers/tee/qcomtee/qcomtee_msg.h                  | 217 +++++
+ drivers/tee/qcomtee/qcomtee_private.h              | 218 +++++
+ drivers/tee/qcomtee/release.c                      |  66 ++
+ drivers/tee/qcomtee/user_obj.c                     | 625 ++++++++++++++
+ drivers/tee/tee_core.c                             | 113 ++-
+ include/linux/firmware/qcom/qcom_scm.h             |   9 +
+ include/linux/firmware/qcom/qcom_tee.h             | 284 +++++++
+ include/linux/tee_core.h                           |   4 +
+ include/linux/tee_drv.h                            |  12 +
+ include/uapi/linux/tee.h                           |  54 +-
+ 25 files changed, 3765 insertions(+), 8 deletions(-)
+---
+base-commit: f486c8aa16b8172f63bddc70116a0c897a7f3f02
+change-id: 20241202-qcom-tee-using-tee-ss-without-mem-obj-362c66340527
+
+Best regards,
 -- 
-pw-bot: cr
+Amirreza Zarrabi <quic_azarrabi@quicinc.com>
+
 
