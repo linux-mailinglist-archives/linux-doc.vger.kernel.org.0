@@ -1,262 +1,252 @@
-Return-Path: <linux-doc+bounces-32028-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32042-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F70A9E46B4
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Dec 2024 22:32:57 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DE0B9E465E
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Dec 2024 22:14:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 3F8CFB45534
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Dec 2024 19:14:24 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A437F28574F
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Dec 2024 21:14:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A43581C3C06;
-	Wed,  4 Dec 2024 19:14:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 567D9191494;
+	Wed,  4 Dec 2024 21:14:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="fMTVbn08"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="YqIh8fIe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-vs1-f74.google.com (mail-vs1-f74.google.com [209.85.217.74])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42EAD1C3BE2
-	for <linux-doc@vger.kernel.org>; Wed,  4 Dec 2024 19:14:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.217.74
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733339658; cv=none; b=ICKT4wuCv9L6i0H6EUNkW3vps6hptYIPaZxLJlTm+FNaTWWJ61gEshq10SL+U3iI7wZHqmsO3Z4eyXLalSJF9XuZPge+YtRb2RH3qv21psfj5RbH42exbBdtZk5lsnLxR1iZRFkAJarxysOf2kl6aJhqMyzWTyAhmp350194fbw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733339658; c=relaxed/simple;
-	bh=xW7uoGnTy/4eMBEjOG4u+2rSCh0tjmvM8kudrhHK2JY=;
-	h=Date:Mime-Version:Message-ID:Subject:From:To:Cc:Content-Type; b=To4RGhHLB4Ywiy5qCjhEBERbr0Lcb+wXjMrqD4/4Dr57JvQdC/wGvWGIPStTHf287LeYr41W2xH7UVY6FjbIDO3BYTgh1XqAJT8yH39rrEVD0bsFvH6MU3v//piHtkWAtndLFFCcMaIa45xDekxDMKMxzLRID5NrPqVKXQs4rZg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--jthoughton.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=fMTVbn08; arc=none smtp.client-ip=209.85.217.74
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--jthoughton.bounces.google.com
-Received: by mail-vs1-f74.google.com with SMTP id ada2fe7eead31-4afb0276095so10741137.1
-        for <linux-doc@vger.kernel.org>; Wed, 04 Dec 2024 11:14:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1733339655; x=1733944455; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=GtNJo0QiZibz4F5AJzlr0Gn0CnNz2HNSdOIlXuZpqw4=;
-        b=fMTVbn081jx71lq2JVUn//76hPUHTjVAC8sfjS6UcrduMXgHqtwAmxLqOVKEkBRkLN
-         s1C42pT4fICBIFD+J/Wqnax8weKUh48xKL6VFNvROb/lzctkOw/5lQY7pWAeYrYIcgCK
-         +GykYOynRs3Nnd+3/YwzpYhhy8sngpcGhj0JZx99CIHhPve4WOyCl33aT+3Yo3LaJO/s
-         4vlJhMKSGrKVvVIgQs5CdiQbcjjoVIrIlGF5dxnB5EVmPq4HPgACRHVJRKhdTZkvx19Y
-         G3L79CTLE5zXzy7+PBVLJTZfflTYajHeEebUOL8+khLXASjX102MT9k2hmjtqFoYIjaA
-         NLRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733339655; x=1733944455;
-        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=GtNJo0QiZibz4F5AJzlr0Gn0CnNz2HNSdOIlXuZpqw4=;
-        b=QS25BfZCm29ckIGV4i5AzpwAhMrCXGYiKMiPv751ReWjn07oQDKOwxGgDsXt2/SFRf
-         UpT+YN+3GGfLeSU4vBgkb3upmZiesiZwOQ92SRsTQNXr9PrrWxoo7BiBwSJSbKmvmvgq
-         QBSzJQ0GBi7BRJadSuHs9BHHhSLvL4ekW1R3OO83AH26ZtXAejf+RoQpxJAwkx7IRsTg
-         Eim5FJ+IjhxPUC9n3RhjI0KMbMCR0YjRnNsE748ZYo/ps92GBy9CKK7fX02SGXsnsBEl
-         17gby48B3rRJFLt/Lszsk6QE2NRCoa9+in8tQ7Dt6CL5h0l9M20mSipjTl21vcxdxXXx
-         FFQA==
-X-Forwarded-Encrypted: i=1; AJvYcCUd/lJrn7nKdYHd6+YL87M15NbT+g+sfGNtItHf5kCHcBT+DYdbniA43pUIHGqtl45nAQgLOoqxLF4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyRXbCh41ZWzUop3mxDG4oJy5cCi3FHClco/HBYQcnRW1FT8hem
-	gBZxU2XyDTWkbrQqXbMSbwWfq0KHte1hHMVZbWcun871Tu3Gi7j305teE/K/6CYq7go3iMJSRDt
-	iU/IgjzJippb3+/YR4w==
-X-Google-Smtp-Source: AGHT+IF1BXeXjzm2ynkFwLfcOwwZSEy3kJcGkjF9TH4hluS8IOC1jCo7DbvQ0TVKaPL1457lCJsGhUwjD3KkdK7U
-X-Received: from vsbhy8.prod.google.com ([2002:a67:e7c8:0:b0:4af:497d:2ec1])
- (user=jthoughton job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6102:3ed2:b0:4af:58f7:15ec with SMTP id ada2fe7eead31-4af971fcbddmr10423490137.4.1733339655146;
- Wed, 04 Dec 2024 11:14:15 -0800 (PST)
-Date: Wed,  4 Dec 2024 19:13:35 +0000
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28E2618E368;
+	Wed,  4 Dec 2024 21:14:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=192.198.163.9
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1733346856; cv=fail; b=gakUHVr1976GrTN1P8fH56IOJLsk4t83neg3ZT/L9VHJOyx4UdYlYiT8jkQERP0IwPDzPllRH2ZB1VOD8yz5JdGQ9rNaoTy5bv0BfItsPi1m5w6+QVH7hD0KMTaRnd2il2v1ra/a7FXnz6P2deWlBzvW2Aga070hIx/l4vKRL5k=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1733346856; c=relaxed/simple;
+	bh=TYmlI/wsSGarfLEk+6TL0/RlCxS2RokfmH56Zzcowhc=;
+	h=Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=jC6FkHDbh9s53EIILjQ/G2SOI9E7hsNvbWfTpJP1c1SEzl/oiCW/MUVXe8Xx/s25sOT0hoDEMEG4FFzaxXfpCJy0mNfgf6UMjl/0Zn5EvbtYL0KyDt4pPH/lP9FNCKlGfgLfJsuZxEbA3IVVg4iV7YTqvd7Qo9WeLqC5yHRqeaQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=YqIh8fIe; arc=fail smtp.client-ip=192.198.163.9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1733346854; x=1764882854;
+  h=message-id:date:subject:to:cc:references:from:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=TYmlI/wsSGarfLEk+6TL0/RlCxS2RokfmH56Zzcowhc=;
+  b=YqIh8fIegamJOYB3DuXZTp4wvYwEOGiplEu1Q2lmuNFQ3uWft4DPwPzy
+   iUCJGgignLtKwTWtr7AkQTijjnscCuqmKGrPeHZhQEHFybug9ElngbjyE
+   fua/hwqL/EzevWl9EW9NuHCtKngZGMJV1Gac7WLv9TfqcRMumfg1cs4uf
+   mmoe1bSIVvYOdjK6/bW0QDcduJkjLPaBA8llzH8ryGcvslANkll37RTXN
+   O/uXduiwcwKoG+wOr5CHOHxz+JJxeUsNN42X7YCldr6PMYp13ViEL5cmK
+   ofnFhd4LcRuJLLheGo1qgiiUDQDFv4wjhAUhVSTAO5s6Firi8rQgXv89r
+   Q==;
+X-CSE-ConnectionGUID: pItiDJmRQH2txN2Q5is30w==
+X-CSE-MsgGUID: GJU825YQQgeGtbT6nNwrew==
+X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="44304161"
+X-IronPort-AV: E=Sophos;i="6.12,208,1728975600"; 
+   d="scan'208";a="44304161"
+Received: from orviesa007.jf.intel.com ([10.64.159.147])
+  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Dec 2024 13:14:13 -0800
+X-CSE-ConnectionGUID: tZPVI4qXQIGkRUeBRGXU0g==
+X-CSE-MsgGUID: ZaJirgFwRZyJ1eAOs71IdQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,208,1728975600"; 
+   d="scan'208";a="94315645"
+Received: from fmsmsx603.amr.corp.intel.com ([10.18.126.83])
+  by orviesa007.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 04 Dec 2024 13:14:13 -0800
+Received: from fmsmsx603.amr.corp.intel.com (10.18.126.83) by
+ fmsmsx603.amr.corp.intel.com (10.18.126.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Wed, 4 Dec 2024 13:14:12 -0800
+Received: from fmsedg601.ED.cps.intel.com (10.1.192.135) by
+ fmsmsx603.amr.corp.intel.com (10.18.126.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39 via Frontend Transport; Wed, 4 Dec 2024 13:14:12 -0800
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (104.47.57.171)
+ by edgegateway.intel.com (192.55.55.70) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.39; Wed, 4 Dec 2024 13:14:12 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OksjmAhMczmIhvzGI6h3ScJgvIfAcNw3fnne99ijExqtE5UE5yTRcpgpDUm51kfX79rqnqPMFSer8SwapFEXaybnbUsGc/NB2sIeD66Yyt109Ss1c0ojIvE5Kjk1ik7iccvQ6GD22Y4lYRgJDP1NoSkRqxxMOVa/CX8NenLy/71wWV08QQz14cGs35lecbCupUvTZXPxsfBNTFxoUzQOQUIjEaOqyXG8SUEAidc8IYW1qkniBbO0uuSEKDM/4mH3bq5PbepRDk+Wv0HsuADLsvRv6S8BjjCfwtVZXFJk5jqnhJePhyhHE+1Mj9BEnQThrO5AVFNGUxGvv9gQQm6Ppg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fDwiCQ3QfcREe4/87kbMRllxVTnj662qdr7c2f/c/u0=;
+ b=F55enzdsVv3i/CJAFoNzHF0O8tsJSCqctafrMZVvlfZOye28jxjNcNOtpAj5eB3wTBS5cLCV5bI1Ht1mbFTck/bDC2gITdvVRK+yENdZBvl5WGLX+dvZ5huhYgKmCorZk9NhofdAzD0/wqgtxCJBoP0WJxHWm7dTmR66ex2F/VttsCuTs5gd+j8zuHIiKfQqeXHuBy4B1mmg99OJ7IvIBiOFklQUAhKuZThc9oZWdfVhTCJv/yxRLIOweh7u9k7FtRPngckfLD+oD5zALdAaHegGnnphPMhsMa9IWrKuOzyTLT6z6JM9P3tUoLYHf5bIPvAfPzr9zk4Ee1hmVFHYig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from DS0PR11MB6375.namprd11.prod.outlook.com (2603:10b6:8:c9::21) by
+ DM4PR11MB6019.namprd11.prod.outlook.com (2603:10b6:8:60::5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8207.19; Wed, 4 Dec 2024 21:14:09 +0000
+Received: from DS0PR11MB6375.namprd11.prod.outlook.com
+ ([fe80::cd01:59f6:b0f8:c832]) by DS0PR11MB6375.namprd11.prod.outlook.com
+ ([fe80::cd01:59f6:b0f8:c832%4]) with mapi id 15.20.8207.017; Wed, 4 Dec 2024
+ 21:14:08 +0000
+Message-ID: <58a561d6-dc10-484e-8214-5e03c4aef66d@intel.com>
+Date: Wed, 4 Dec 2024 22:14:00 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v30 00/30] Introduce QC USB SND audio offloading support
+To: Greg KH <gregkh@linuxfoundation.org>
+CC: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, Wesley Cheng
+	<quic_wcheng@quicinc.com>, Takashi Iwai <tiwai@suse.de>,
+	<srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
+	<perex@perex.cz>, <conor+dt@kernel.org>, <dmitry.torokhov@gmail.com>,
+	<corbet@lwn.net>, <broonie@kernel.org>, <lgirdwood@gmail.com>,
+	<krzk+dt@kernel.org>, <Thinh.Nguyen@synopsys.com>, <tiwai@suse.com>,
+	<robh@kernel.org>, <linux-kernel@vger.kernel.org>,
+	<devicetree@vger.kernel.org>, <linux-sound@vger.kernel.org>,
+	<linux-usb@vger.kernel.org>, <linux-input@vger.kernel.org>,
+	<linux-arm-msm@vger.kernel.org>, <linux-doc@vger.kernel.org>
+References: <20241106193413.1730413-1-quic_wcheng@quicinc.com>
+ <edfeb642-297e-42bb-ad09-cbf74f995514@quicinc.com>
+ <2024111655-approve-throwback-e7df@gregkh>
+ <2f512d8d-e5f3-4bdd-8172-37114a382a69@quicinc.com>
+ <875xoi3wqw.wl-tiwai@suse.de>
+ <d0da6552-238a-41be-b596-58da6840efbb@quicinc.com>
+ <CF49CA0A-4562-40BC-AA98-E550E39B366A@linux.dev>
+ <65273bba-5ec1-44ea-865b-fb815afccc91@intel.com>
+ <2024120320-recant-tameness-6c81@gregkh>
+Content-Language: en-US
+From: Cezary Rojewski <cezary.rojewski@intel.com>
+In-Reply-To: <2024120320-recant-tameness-6c81@gregkh>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA0P291CA0010.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::12) To DS0PR11MB6375.namprd11.prod.outlook.com
+ (2603:10b6:8:c9::21)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.47.0.338.g60cca15819-goog
-Message-ID: <20241204191349.1730936-1-jthoughton@google.com>
-Subject: [PATCH v1 00/13] KVM: Introduce KVM Userfault
-From: James Houghton <jthoughton@google.com>
-To: Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson <seanjc@google.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Marc Zyngier <maz@kernel.org>, 
-	Oliver Upton <oliver.upton@linux.dev>, Yan Zhao <yan.y.zhao@intel.com>, 
-	James Houghton <jthoughton@google.com>, Nikita Kalyazin <kalyazin@amazon.com>, 
-	Anish Moorthy <amoorthy@google.com>, Peter Gonda <pgonda@google.com>, Peter Xu <peterx@redhat.com>, 
-	David Matlack <dmatlack@google.com>, Wang@google.com, Wei W <wei.w.wang@intel.com>, 
-	kvm@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6375:EE_|DM4PR11MB6019:EE_
+X-MS-Office365-Filtering-Correlation-Id: 523f13f1-10ab-48b1-2101-08dd14a896f7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?YjRndjVWaDJ0TmVSWHJNOUl6S1BqRUYvNjY5Y3k1K09mYi9pUkRJbENhakRJ?=
+ =?utf-8?B?blhHcmt0MndDRDhmZS9WRVZGSDBNRS9ST0hzWWpqOEcvWlMvUkQxVE1VNTAy?=
+ =?utf-8?B?aUg1KzFOV0VFQnBta0hneGN1RnhNRDgwbmJVbmJibjNKUGNNamVTZmh6R3Mw?=
+ =?utf-8?B?bWlXSkdDNWRUWDlMMytwOHlaOUw2R09hTHhBSmorcDZ2STlJODJjQnd2NFRG?=
+ =?utf-8?B?d1NCbFlEVjRTTWlFbkJWTTNtaU5JK0xnWFQrMW90MmF1MW84L2IrcXJrNzhx?=
+ =?utf-8?B?QmZzRnNpQ3lVRHdIUkozQnRtQzZzc3k0NUllRFExK3pBaWdqcGpwNVBYbjc0?=
+ =?utf-8?B?NW52blN6ZkJ1NmYrTHA3eDZsdDRwWlROQlN1UlFFYlEzWFFvNjlrcnNWNnBy?=
+ =?utf-8?B?MmJxMUtSNUtMTFdEejl6RHRrTm4xS1BkVEpBcUZjRDhZb2tlR21zRUZDNWN2?=
+ =?utf-8?B?cXV2Q0ZweE5ZYXk2VVdTTEVUdytjNWlKNVQ5ODZscmlwVWRtSEJ2Y2lPUUMr?=
+ =?utf-8?B?Y2VsekhCRzFmSWdaNStYUVhWS2Z1Z0duTlU1VUdPd3VOM25BblllQkJSTnVM?=
+ =?utf-8?B?UTlqSnV6akI0UVFacHZObUwrckRvWVRmT2pqOFEwbU5DekoyTWVPQ1lvUUdk?=
+ =?utf-8?B?bE1Da3I4ZUNkQ042TEFMNVRVNk1OUFZLZHZFRkFTaHNrcldiRk85TXFpR0ZV?=
+ =?utf-8?B?eWFtWUpzYURvNU1kTThadnRrREFQZTBvcG52ZFkyQ0hiK0lIdmJLNE9wZEpv?=
+ =?utf-8?B?RGNSVDl2RmdWdUxVcnpzREVQbEpQTk5nLzM2Q2ZrTWdCakQ2TzEwY3pGMC9N?=
+ =?utf-8?B?aVFSZm8wRUpXWmJ5K1ZnaUpJSjVPRVRyZWRmeXlOdElLYU5pT0ZKaTRxcjFy?=
+ =?utf-8?B?UkNRTklHSkVkdjM1MDExMlBjcXpCNHE1NW90akw0WUVrK3pGbjFiWWR6Vm1Y?=
+ =?utf-8?B?dGxLc1FlU2RTSkIvbC9jVkZmNWQzTnd3eCtpa2NlaE4zbDJGN1R0ZE9yMHNt?=
+ =?utf-8?B?L05iTm41Y25GWXZyUFVrWjRXTkpFRFF0dGxVaFVGaXhCSHljN0h2VGk1ZzBF?=
+ =?utf-8?B?MktDOHphMGxobm50SjdRcnZCMmxqUkM3b1V0L2I4M0kzKzFlQ1c0R25aOXA5?=
+ =?utf-8?B?MXQvRDV3UVVkOUtRc0lWZ1dkMG5yU2x6eWxDRkJzQTB5NEdlMlZzQUVTSVVC?=
+ =?utf-8?B?b2k0MnVuSWtBVVMwdXB6ZXQ2YWE4bVo2dFJ3NjE1WTVkaytRV0tiUVRWd1JF?=
+ =?utf-8?B?QWhDYXlZSEV1ckFLdkJnNXZTdHJ5elRaU2wyc3ozeVc4YVJtVkpKZHlLTDg2?=
+ =?utf-8?B?bCtpOTk3VnlHK1A1MnM1YXNheWE4ZERUa3BFbDZsdDdRY2IwdVVmNGNLVWNE?=
+ =?utf-8?B?YkdlMFB4RkdIVTUzMmFuQzYwSW5SZUdqcEIzMTNsaFd1cmxuSXROYmZPeGpv?=
+ =?utf-8?B?Q2RocDRDMEZhVHRnSWJJY0xNSVY5UFVrbnVNZWhrMU1YU2kySGxsL1RKMkhG?=
+ =?utf-8?B?cWhxb2VjUUNRcDZyRVlHdVhmUWJ1T0ZxV0NMcWRnYUNLeVgya090L0dtWWhp?=
+ =?utf-8?B?Z1NhMk5EdkxSWXRIUlVGdVprSTRiUCtVU2lSVTRySS81ZzZCOG5sNUtrV21C?=
+ =?utf-8?B?TkdXQW1pRlcrZmFRV2gvbHIyTUVoQWtISXJvYXRvb0dsdDkzS0kwcFU3TUl4?=
+ =?utf-8?B?RzVWQWJEWXg0SjhzS1VIQUl1MExRTDc1M0VVOTNHU1Z1QUl1NmVMZ0FHTG8r?=
+ =?utf-8?Q?u1OB3tKwxXbrmGgmCI=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6375.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(1800799024)(376014)(366016);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U1VIdWNrZURRWXVUSWpPUEszQjZ4TUQwRXhCbVJINW10anpYRmRZTFRKY2lJ?=
+ =?utf-8?B?emJVZEZiRnNuSXZWcXFCUEk2ZEhXN1NyQXN6djZwMGVwTTBGSTNyRTgwNWx3?=
+ =?utf-8?B?WFh3RnZwVnVJdHV2SDY3QlJHekNCNURZamdnOFE3WTBZQlR1Y3NzaUpGR2tm?=
+ =?utf-8?B?NUpNTnJFdk02Z0F0N2hHMUpzWXVkZFZvZ0JZR0swTlI5amRIWldNNGk5anA0?=
+ =?utf-8?B?NEloWmxMSjNGc2RjdVhaL25CMFhOcXJtYm5PM01EeGVVd2VDa052SElPaHpE?=
+ =?utf-8?B?Y0tYQVhhdFhBdzRWZzhrclFVdjBLcTJwMWdod1dCRDhNVHFmVitrS3ZHU0xo?=
+ =?utf-8?B?L05GLzFCR1craDhTejhNajZabjBpNVNPRDV2YlpkTkEybUpSUE10Q2QzWFFR?=
+ =?utf-8?B?VFRFdFdFZWtNMi9Edll2SHk4TXlpemtWOFJyaUVlbC95eHlmOTBnQTlxVWdI?=
+ =?utf-8?B?dkNreURQLzEwVXN1UHArMjJxdE1ld21ZREtSUkdEVnJLR0piQVA4Umd2cGow?=
+ =?utf-8?B?dGdTM3RTa2hyWitFTkNnNjBxN2JWUUlrWjlYYnFqRVdFV000ZUNTbDYwUXBX?=
+ =?utf-8?B?SWhWR3NDbXZ2cmg2SVg4NTFtaDBnbWQreGZXMi95dXpFMFlPb0w3WFB2dUlo?=
+ =?utf-8?B?dXRaUkRMbFVvMzJlbnRoblU2Mk5TRE1iK3AxVHR1SUU2aG1XRkRvNXc3MVZF?=
+ =?utf-8?B?QU9lOW9EWXh3QnFoc1JQU2loazBUVyt2ZGNwWE5JYkxnME56Ry85am5wUHg2?=
+ =?utf-8?B?bW0ycDUyWmV0Tm9WVWpBampkUzJraitrMUIvSVhIZnFMZVJnaXBsVVNqUWlW?=
+ =?utf-8?B?MXpqVmpTbUpOWG8yR1NyU1hEdUhWTnBid0MxRTJwU0JibFE0U2p2bGVPZHp5?=
+ =?utf-8?B?VnVnd3ltemhxVUpRUTl1SDJZOVRCVkZqOHhLMGJEQm5taUJBWEt2T3N0ZXJN?=
+ =?utf-8?B?aFJLZmlueVU5OEpDUGFPYUV6ZHN5bjd4NGRjWW5ra2szbmZyV3Q0bXN2bVpN?=
+ =?utf-8?B?dHBaa0liSmFLL2xFU0FCelpTQkRqVENESGRURGw2QlVIeUxjR1VieTFVa3Vv?=
+ =?utf-8?B?RmVkY3RtSzhqRFBTUFRvamV1SjdYdk9EMmExN09mTEcvRmRZL2ZKT0pYZHZt?=
+ =?utf-8?B?TTEwRVYyRmM3aWt2eDhKUFpIYytvaElLUnZuV3h3Z1pnZllwdTVpTjJSTnhR?=
+ =?utf-8?B?TlJ3WTlVejdnU1M4dW83YzhpZ0VaZ3VTajBkaU5TSjRmU01nQzJWWWIzejd4?=
+ =?utf-8?B?TEVMMHVBQmxDeXlIaDFQRDczK05oYjZBMzRvejlGamZVK3YvdUtFUHVzdVl5?=
+ =?utf-8?B?SmlFZDFIUUpLZmlkRGdvd0IxUDdNcCtaRlcrS0VwMkx6YmQ5N0FWTDJlK204?=
+ =?utf-8?B?ekoyRGp2NmZRUHhqakhIY2RqR1BWbyt6TWZHNWsrbW5aVkNNQnZaamtOL0py?=
+ =?utf-8?B?dDNpcjIrYk1DWVZJM3p3OWphc29JTE5oVlZXRWpkdFJQclhNTFJGSTNZMEo4?=
+ =?utf-8?B?WjFKeUQ0OTNjUzMrNTRDUHYwRkErSkhxb3hQNzRsdTJ1V3VoSW9QaFI1RHYv?=
+ =?utf-8?B?K0liNVRXL3RlTGxSbTM3WnZxdUJmMTUwNjJKWlF6ZU5LdTVudE4zVEJ3NmN4?=
+ =?utf-8?B?QUl2MUVPaVpHUXl2QmFrOUpsZlNoVkFNcldNeE1vUDQ4MGJwOTJiZW42bC9z?=
+ =?utf-8?B?by9NS3V4TlQ4b0ZLZkVvOFFCbjJUQkdnbkF5K3VvL2lBRk1MY3B3OWF1VHhp?=
+ =?utf-8?B?eE4vVFErOWRGaUxQQ0VmQWc4bTRGWHhCRlpDaXk0UEpJbDlhN2ZiYitCeEJl?=
+ =?utf-8?B?V0pJckM3TDF0ZUxuRlNaczNGMStxdVZoWDZBbEpFVUkvbVNNTlF5TEhKTmt5?=
+ =?utf-8?B?WnV3UTgxRHRURjZ3U3N5VkZyU0xjSHNzZXg4MFhTSTFkZUFsSkJJTU5CbzZX?=
+ =?utf-8?B?RFZFdWYybnU0cXp5azNrZ3VDNXVJbjFXRHEwRVZvK2x4K1NJUDErSGI1SHlV?=
+ =?utf-8?B?QUl6amM2TUppSkRobU0vYnZBUnZNYnROT0hFbHpFTTNDR2krL2g4SWlCZGF3?=
+ =?utf-8?B?eXZxK0pWT3o3ZVlLZndNdkk2QnBRRiswdnV3TG5IWjlPUmdhcllQaG9jQ3E0?=
+ =?utf-8?B?SWVac2ZOMzg2cjNRbjdzRjBBQ0h6engxV2dTdjFmVUlEMnVtVlRleDc2VzdL?=
+ =?utf-8?B?cWc9PQ==?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 523f13f1-10ab-48b1-2101-08dd14a896f7
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6375.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2024 21:14:07.9195
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3/zxRHOl/ecrmXfWX3sdbR4DetJU71+m7kcOlkzTx6bfH193anvgLcGk2jtXAZHHkRsJ8GDMtFRoDXsLGu8+NFCsoZwqwLsnZ2pgMJ/KFRo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB6019
+X-OriginatorOrg: intel.com
 
-This is a continuation of the original KVM Userfault RFC[1] from July.
-It contains the simplifications we talked about at LPC[2].
+On 2024-12-03 5:57 PM, Greg KH wrote:
+> On Tue, Dec 03, 2024 at 05:17:48PM +0100, Cezary Rojewski wrote:
+>> On 2024-12-01 4:14 AM, Pierre-Louis Bossart wrote:
+>>> Sorry to chime in late, I only look at email occasionally.
 
-Please see the RFC[1] for the problem description. In summary,
-guest_memfd VMs have no mechanism for doing post-copy live migration.
-KVM Userfault provides such a mechanism. Today there is no upstream
-mechanism for installing memory into a guest_memfd, but there will
-be one soon (e.g. [3]).
+...
 
-There is a second problem that KVM Userfault solves: userfaultfd-based
-post-copy doesn't scale very well. KVM Userfault when used with
-userfaultfd can scale much better in the common case that most post-copy
-demand fetches are a result of vCPU access violations. This is a
-continuation of the solution Anish was working on[4]. This aspect of
-KVM Userfault is important for userfaultfd-based live migration when
-scaling up to hundreds of vCPUs with ~30us network latency for a
-PAGE_SIZE demand-fetch.
+>>>> I believe Amadeusz was still against having the two card design, and wants the routing to automatically happen when playback happens on the sound card created by the USB SND layer.  However, even with that kind of implementation, the major pieces brought in by this series should still be relevant, ie soc-usb and the vendor offload driver.  The only thing that would really change is adding a path from the USB SND PCM ops to interact with the ASoC entities.  Complexity-wise, this would obviously have a good amount of changes to the USB SND/ASoC core drivers.  Some things I can think of that we'd need to introduce:
+>>>
+>>> The notion of two cards was agreed inside Intel as far back as 2018, when Rakesh first looked at USB offload.
+>>
+>>
+>> Well, I believe a lot has changed since then, not sure if USB Audio Offload
+>> (UAOL) was even stable on the Windows solution back then. Obviously we want
+>> to incorporate what we have learned during all that time into our solution
+>> before it lands on upstream.
+> 
+> Great, can you help review this series please?
 
-The implementation in this series is version than the RFC[1]. It adds...
- 1. a new memslot flag is added: KVM_MEM_USERFAULT,
- 2. a new parameter, userfault_bitmap, into struct kvm_memory_slot,
- 3. a new KVM_RUN exit reason: KVM_MEMORY_EXIT_FLAG_USERFAULT,
- 4. a new KVM capability KVM_CAP_USERFAULT.
+Hi Greg,
 
-KVM Userfault does not attempt to catch KVM's own accesses to guest
-memory. That is left up to userfaultfd.
-
-When enabling KVM_MEM_USERFAULT for a memslot, the second-stage mappings
-are zapped, and new faults will check `userfault_bitmap` to see if the
-fault should exit to userspace.
-
-When KVM_MEM_USERFAULT is enabled, only PAGE_SIZE mappings are
-permitted.
-
-When disabling KVM_MEM_USERFAULT, huge mappings will be reconstructed
-(either eagerly or on-demand; the architecture can decide).
-
-KVM Userfault is not compatible with async page faults. Nikita has
-proposed a new implementation of async page faults that is more
-userspace-driven that *is* compatible with KVM Userfault[5].
-
-Performance
-===========
-
-The takeaways I have are:
-
-1. For cases where lock contention is not a concern, there is a
-   discernable win because KVM Userfault saves the trip through the
-   userfaultfd poll/read/WAKE cycle.
-
-2. Using a single userfaultfd without KVM Userfault gets very slow as
-   the number of vCPUs increases, and it gets even slower when you add
-   more reader threads. This is due to contention on the userfaultfd
-   wait_queue locks. This is the contention that KVM Userfault avoids.
-   Compare this to the multiple-userfaultfd runs; they are much faster
-   because the wait_queue locks are sharded perfectly (1 per vCPU).
-   Perfect sharding is only possible because the vCPUs are configured to
-   touch only their own chunk of memory.
-
-Config:
- - 64M per vcpu
- - vcpus only touch their 64M (`-b 64M -a`)
- - THPs disabled
- - MGLRU disabled
-
-Each run used the following command:
-
-./demand_paging_test -b 64M -a -v <#vcpus>  \
-	-s shmem		     \ # if using shmem
-	-r <#readers> -u <uffd_mode> \ # if using userfaultfd
-	-k \			     \ # if using KVM Userfault
-	-m 3			       # when on arm64
-
-note: I patched demand_paging_test so that, when using shmem, the page
-      cache will always be preallocated, not only in the `-u MINOR`
-      case. Otherwise the comparison would be unfair. I left this patch
-      out in the selftest commits, but I am happy to add it if it would
-      be useful.
-
-== x86 (96 LPUs, 48 cores, TDP MMU enabled) ==
-
--- Anonymous memory, single userfaultfd
-
-	userfault mode
-vcpus				2	8	64
-	no userfault		306845	220402	47720
-	MISSING (single reader)	90724	26059	3029
-	MISSING			86840	37912	1664
-	MISSING + KVM UF	143021	104385	34910
-	KVM UF			160326	128247	39913
-
--- shmem (preallocated), single userfaultfd
-
-vcpus				2	8	64
-	no userfault		375130	214635	54420
-	MINOR (single reader)	102336	31704	3244
-	MINOR 			97981	36982	1673
-	MINOR + KVM UF		161835	113716	33577
-	KVM UF			181972	131204	42914
-
--- shmem (preallocated), multiple userfaultfds
-
-vcpus				2	8	64
-	no userfault		374060	216108	54433
-	MINOR			102661	56978	11300
-	MINOR + KVM UF		167080	123461	48382
-	KVM UF			180439	122310	42539
-
-== arm64 (96 PEs, AmpereOne) ==
-
--- shmem (preallocated), single userfaultfd
-
-vcpus:				2	8	64
-	no userfault		419069	363081	34348
-	MINOR (single reader)	87421	36147	3764
-	MINOR			84953	43444	1323
-	MINOR + KVM UF		164509	139986	12373
-	KVM UF			185706	122153	12153
-
--- shmem (preallocated), multiple userfaultfds
-
-vcpus:				2	8	64
-	no userfault		401931	334142	36117
-	MINOR			83696	75617	15996
-	MINOR + KVM UF		176327	115784	12198
-	KVM UF			190074	126966	12084
-
-This series is based on the latest kvm/next.
-
-[1]: https://lore.kernel.org/kvm/20240710234222.2333120-1-jthoughton@google.com/
-[2]: https://lpc.events/event/18/contributions/1757/
-[3]: https://lore.kernel.org/kvm/20241112073837.22284-1-yan.y.zhao@intel.com/
-[4]: https://lore.kernel.org/all/20240215235405.368539-1-amoorthy@google.com/
-[5]: https://lore.kernel.org/kvm/20241118123948.4796-1-kalyazin@amazon.com/#t
-
-James Houghton (13):
-  KVM: Add KVM_MEM_USERFAULT memslot flag and bitmap
-  KVM: Add KVM_MEMORY_EXIT_FLAG_USERFAULT
-  KVM: Allow late setting of KVM_MEM_USERFAULT on guest_memfd memslot
-  KVM: Advertise KVM_CAP_USERFAULT in KVM_CHECK_EXTENSION
-  KVM: x86/mmu: Add support for KVM_MEM_USERFAULT
-  KVM: arm64: Add support for KVM_MEM_USERFAULT
-  KVM: selftests: Fix vm_mem_region_set_flags docstring
-  KVM: selftests: Fix prefault_mem logic
-  KVM: selftests: Add va_start/end into uffd_desc
-  KVM: selftests: Add KVM Userfault mode to demand_paging_test
-  KVM: selftests: Inform set_memory_region_test of KVM_MEM_USERFAULT
-  KVM: selftests: Add KVM_MEM_USERFAULT + guest_memfd toggle tests
-  KVM: Documentation: Add KVM_CAP_USERFAULT and KVM_MEM_USERFAULT
-    details
-
- Documentation/virt/kvm/api.rst                |  33 +++-
- arch/arm64/kvm/Kconfig                        |   1 +
- arch/arm64/kvm/mmu.c                          |  23 ++-
- arch/x86/kvm/Kconfig                          |   1 +
- arch/x86/kvm/mmu/mmu.c                        |  27 +++-
- arch/x86/kvm/mmu/mmu_internal.h               |  20 ++-
- arch/x86/kvm/x86.c                            |  36 +++--
- include/linux/kvm_host.h                      |  19 ++-
- include/uapi/linux/kvm.h                      |   6 +-
- .../selftests/kvm/demand_paging_test.c        | 145 ++++++++++++++++--
- .../testing/selftests/kvm/include/kvm_util.h  |   5 +
- .../selftests/kvm/include/userfaultfd_util.h  |   2 +
- tools/testing/selftests/kvm/lib/kvm_util.c    |  42 ++++-
- .../selftests/kvm/lib/userfaultfd_util.c      |   2 +
- .../selftests/kvm/set_memory_region_test.c    |  33 ++++
- virt/kvm/Kconfig                              |   3 +
- virt/kvm/kvm_main.c                           |  47 +++++-
- 17 files changed, 409 insertions(+), 36 deletions(-)
+This series is large and I'd suggest to split it up, what I touched on 
+in my recent reply [1]. Please correct me if I'm wrong, but you mostly 
+care about drivers/usb/* part. If so, the existing set could be split 
+into USB-changes series, ALSA/ASoC-framework series and a third, holding 
+bulk of QCOM-specific patches. Me and my team care mostly about the 
+sound/* part and we don't hold much expertise in USB. I believe Mathias 
+covers this part well though.
 
 
-base-commit: 4d911c7abee56771b0219a9fbf0120d06bdc9c14
--- 
-2.47.0.338.g60cca15819-goog
+[1]: 
+https://lore.kernel.org/linux-sound/a8ece816-3d4c-4d60-b7c1-a7f7919325f3@intel.com/
 
+Czarek
 
