@@ -1,116 +1,167 @@
-Return-Path: <linux-doc+bounces-32083-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32085-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id A18CF9E5377
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 12:14:29 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E17839E53C2
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 12:24:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B39A11882435
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 11:14:26 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E831916A6FF
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 11:24:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B8E33BA20;
-	Thu,  5 Dec 2024 11:14:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 92ED11F5401;
+	Thu,  5 Dec 2024 11:22:15 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1084C1DF99A
-	for <linux-doc@vger.kernel.org>; Thu,  5 Dec 2024 11:14:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1C0E2066E7
+	for <linux-doc@vger.kernel.org>; Thu,  5 Dec 2024 11:22:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733397253; cv=none; b=e4p76htrtV3Vwn7Q4Af2zpecsEOeAayr+zFayqamt8IM9zDRddZqck9JK1BjDE67/Q017fDKkPS9nFnv4ZlE6BfVOCXolp5/J6myxuJ7zHN13UjzdN5FPVO1cQ5cAZX1ZsztwfKdi4glfO1oDMgaZfH7zVykjw2xX2ojev7OIBY=
+	t=1733397735; cv=none; b=uVAxKIzYqnZV2s4n1mGEDQs2qGQKmKmPAYkz12zEIxeUQ+rPIitQUQ5yrYIrlB2wubmL6GJqnTSNq463XcsG6IXyvwxTAkmAB9DdIynCSqG/kbJdYzNv1X2WIuyjjKsR7N5+nOlZymb6QPtMUCZx1JNrVWBAMITD+lD0g8QEPsc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733397253; c=relaxed/simple;
-	bh=3+xpRgcjCsuz/2mGkng/3o13JlvFt9F6+oJkb+OFlVI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=gNZo8j/9OBfUcYUrmrZGPecmfS+JaeYGoTAU17FSCj5aherxoxLvXRb/tG3u0pam5CKs/1AxngOzC3LK96O9xhNrQgotvmB6Ogqmm+CswKU5zysy3vzh83BV6n83ZbHT+Y+PPCIj3kmrWrEVXo1vf+avTC7WCazZ7P1d96DtMR4=
+	s=arc-20240116; t=1733397735; c=relaxed/simple;
+	bh=z7QzahvsUpDUq/hh1dmI3rNNlgN7khulvlUbO6WYo3A=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=A7sHMErP7T9rkAwg9kS8oLj3rN62UmThDShn3llNjvb/EXDs3RX0F0t0iKHUEysS66tgYZzzfphN1T88rMouSHqYlXQ5D+DE6LQckvfauh2vPISv1+l2uvsE4yqXMbXEsyM6+vxDMFIAzFq9N3CFdPvZ/Y6HkTDZM0f7uSnczgE=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ore@pengutronix.de>)
-	id 1tJ9nw-0006Ic-Qg; Thu, 05 Dec 2024 12:13:56 +0100
-Received: from pty.whiteo.stw.pengutronix.de ([2a0a:edc0:2:b01:1d::c5])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1tJ9nv-001oZL-1N;
-	Thu, 05 Dec 2024 12:13:56 +0100
-Received: from ore by pty.whiteo.stw.pengutronix.de with local (Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1tJ9nw-00GR6P-0H;
-	Thu, 05 Dec 2024 12:13:56 +0100
-Date: Thu, 5 Dec 2024 12:13:56 +0100
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: David Laight <David.Laight@aculab.com>
-Cc: "David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	"kernel@pengutronix.de" <kernel@pengutronix.de>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	Simon Horman <horms@kernel.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH net-next v1 3/7] phy: replace bitwise flag definitions
- with BIT() macro
-Message-ID: <Z1GK9Aklzs-a2oPQ@pengutronix.de>
-References: <20241203075622.2452169-1-o.rempel@pengutronix.de>
- <20241203075622.2452169-4-o.rempel@pengutronix.de>
- <5fbf293df6bf4bf79f9a8ffd728c6e2c@AcuMS.aculab.com>
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[127.0.0.1])
+	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+	(envelope-from <a.fatoum@pengutronix.de>)
+	id 1tJ9vK-0008Qw-3k; Thu, 05 Dec 2024 12:21:34 +0100
+Message-ID: <5e9a80d6-6c89-478e-99c9-584647661f5e@pengutronix.de>
+Date: Thu, 5 Dec 2024 12:21:24 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <5fbf293df6bf4bf79f9a8ffd728c6e2c@AcuMS.aculab.com>
-X-Sent-From: Pengutronix Hildesheim
-X-URL: http://www.pengutronix.de/
-X-Accept-Language: de,en
-X-Accept-Content-Type: text/plain
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ore@pengutronix.de
+User-Agent: Mozilla Thunderbird
+Subject: Co-existence of GPT and fixed partitions (Was: Re: [PATCH v6 5/6]
+ block: add support for partition table defined in OF)
+To: Christian Marangi <ansuelsmth@gmail.com>, Jens Axboe <axboe@kernel.dk>,
+ Jonathan Corbet <corbet@lwn.net>, Ulf Hansson <ulf.hansson@linaro.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Daniel Golle <daniel@makrotopia.org>,
+ INAGAKI Hiroshi <musashino.open@gmail.com>,
+ Christian Brauner <brauner@kernel.org>, Al Viro <viro@zeniv.linux.org.uk>,
+ Ming Lei <ming.lei@redhat.com>, Li Lingfeng <lilingfeng3@huawei.com>,
+ Christian Heusel <christian@heusel.eu>, Avri Altman <avri.altman@wdc.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Adrian Hunter <adrian.hunter@intel.com>,
+ Riyan Dhiman <riyandhiman14@gmail.com>,
+ Mikko Rapeli <mikko.rapeli@linaro.org>,
+ Jorge Ramirez-Ortiz <jorge@foundries.io>, Li Zhijian
+ <lizhijian@fujitsu.com>,
+ Dominique Martinet <dominique.martinet@atmark-techno.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+ linux-block@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-mmc@vger.kernel.org,
+ devicetree@vger.kernel.org, Lorenzo Bianconi <lorenzo@kernel.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, upstream@airoha.com,
+ Christoph Hellwig <hch@infradead.org>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>
+Cc: Christoph Hellwig <hch@lst.de>
+References: <20241002221306.4403-1-ansuelsmth@gmail.com>
+ <20241002221306.4403-6-ansuelsmth@gmail.com>
+Content-Language: en-US
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <20241002221306.4403-6-ansuelsmth@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
 X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
 X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-On Thu, Dec 05, 2024 at 02:50:32AM +0000, David Laight wrote:
-> From: Oleksij Rempel
-> > Sent: 03 December 2024 07:56
-> > 
-> > Convert the PHY flag definitions to use the BIT() macro instead of
-> > hexadecimal values. This improves readability and maintainability.
-> > 
-> > No functional changes are introduced by this modification.
+Hi,
+
+sorry for not writing sooner. I only noticed this now.
+
+On 03.10.24 00:11, Christian Marangi wrote:
+> Add support for partition table defined in Device Tree. Similar to how
+> it's done with MTD, add support for defining a fixed partition table in
+> device tree.
 > 
-> Are you absolutely sure.
-> You are changing the type of the constants from 'signed int' to
-> 'unsigned long' and that can easily have unexpected consequences.
-> Especially since MDIO_DEVICE_IS_PHY was negative.
+> A common scenario for this is fixed block (eMMC) embedded devices that
+> have no MBR or GPT partition table to save storage space. Bootloader
+> access the block device with absolute address of data.
 
-In current kernel code following flags are assigned to u32 variable: 
+How common are these? I never worked with a system that didn't use MBR
+or GPT for the user partition.
 
-> > -#define PHY_IS_INTERNAL		0x00000001
-> > -#define PHY_RST_AFTER_CLK_EN	0x00000002
-> > -#define PHY_POLL_CABLE_TEST	0x00000004
-> > -#define PHY_ALWAYS_CALL_SUSPEND	0x00000008
+> This is to complete the functionality with an equivalent implementation
+> with providing partition table with bootargs, for case where the booargs
+> can't be modified and tweaking the Device Tree is the only solution to
+> have an usabe partition table.
+> 
+> The implementation follow the fixed-partitions parser used on MTD
+> devices where a "partitions" node is expected to be declared with
+> "fixed-partitions" compatible in the OF node of the disk device
+> (mmc-card for eMMC for example) and each child node declare a label
+> and a reg with offset and size. If label is not declared, the node name
+> is used as fallback. Eventually is also possible to declare the read-only
+> property to flag the partition as read-only.
 
-phydrv->flags (u32)
+barebox has for many years supported defining fixed partitions on SD/MMC
+nodes and it's used heavily to define e.g. the location of the barebox
+environment. Many who do so, do this either before the first partition
+of the MBR/GPT or overlay the fixed partition to be identical to
+an existing MBR/GPT partition.
 
-This one is assigned to an int:
-> > -#define MDIO_DEVICE_IS_PHY	0x80000000
+barebox also by default copies all fixed partitions it is aware of
+into the kernel DT, so if the kernel now stops parsing GPT/MBR when
+a fixed partition node is defined, this would break compatibility of
+existing barebox-booting systems with new kernels.
 
-mdiodrv->flags (int)
+> +config OF_PARTITION
+> +	bool "Device Tree partition support" if PARTITION_ADVANCED
+> +	depends on OF
+> +	help
+> +	  Say Y here if you want to enable support for partition table
+> +	  defined in Device Tree. (mainly for eMMC)
+> +	  The format for the device tree node is just like MTD fixed-partition
+> +	  schema.
+
+Thanks for making this configurable and disabled by default, so users
+won't experience breakage if they just do a make olddefconfig.
+
+> diff --git a/block/partitions/core.c b/block/partitions/core.c
+> index abad6c83db8f..dc21734b00ec 100644
+> --- a/block/partitions/core.c
+> +++ b/block/partitions/core.c
+> @@ -43,6 +43,9 @@ static int (*const check_part[])(struct parsed_partitions *) = {
+>  #ifdef CONFIG_CMDLINE_PARTITION
+>  	cmdline_partition,
+>  #endif
+> +#ifdef CONFIG_OF_PARTITION
+> +	of_partition,		/* cmdline have priority to OF */
+> +#endif
+>  #ifdef CONFIG_EFI_PARTITION
+>  	efi_partition,		/* this must come before msdos */
+>  #endif
+
+If I understand correctly, it's possible to have both partitions-boot1 and
+a GPT on the user area with your patch, right?
+
+So this only leaves the matter of dealing with both fixed-partitions and
+GPT for the same device node.
+
+What are the thoughts on this? An easy way out would be to make of_partition
+come later than efi_partition/mbr_partition, but I think it would be
+nice if the kernel could consume partition info out of both of_partition
+and efi_partition as long they don't collide.
+
+Thanks,
+Ahmad
+
+
 
 -- 
 Pengutronix e.K.                           |                             |
