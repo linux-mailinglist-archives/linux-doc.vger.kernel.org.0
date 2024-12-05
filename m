@@ -1,160 +1,117 @@
-Return-Path: <linux-doc+bounces-32084-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32086-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3F5F9E53C0
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 12:24:18 +0100 (CET)
-Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 10A659E5485
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 12:49:25 +0100 (CET)
+Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9E5BA2865A1
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 11:24:17 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 42B73165895
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 11:49:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2ED921F540B;
-	Thu,  5 Dec 2024 11:21:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA8CE2116FE;
+	Thu,  5 Dec 2024 11:49:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="MwiVd77G"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hIIMSI4k"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98BF81F4722
-	for <linux-doc@vger.kernel.org>; Thu,  5 Dec 2024 11:21:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2171D20D518;
+	Thu,  5 Dec 2024 11:49:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733397692; cv=none; b=lKbseoTCnZt5tSwdu3Fvb7QSEE5h54HKXtSpfJqXL50dlSz80L3qcanwWKBZ0OcAAHYPc5y1eChCM8TXUS0WdegBJnGcu484xxFxGqD9v0K9OOOHuGSWsYn117X2M7OeDcm9mPJFBSOKAjiG4msY7prZUFSYZCQx6cEqBLOU0B4=
+	t=1733399342; cv=none; b=r18kasNuogaI5XmpDWAFQarF324ZrteLPnZRrgrkAmQZ08K6jf/PugWRp3GPm7foMLIoyfMQm60J27KqTWCqCTvuaUmpy8LRYpATYXul/46Bu/ybviUeoq/kbxJAYqJIPMwXqEVvmCcViXszb09123+ZvPBzq/XNgBIIlp9yYt4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733397692; c=relaxed/simple;
-	bh=Z+/WwxxwmyKNPAh7G6a+o6WzcNTfEMn97hi7L10J+bU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DJH2aB577/rPrScSCG+WcY5g3SRncDFkEr8F4qV4PmUFYaBNP2tiw7yaAnJjSaoc3/d1LVeLWGYpXOPb/D98HfC08meeboh18W6CjvLExUvKtEK5WePpv61tH/LBXe71ORrTizCLV0FTJfsoyx/gjB/q9GlWNHoSMH4fWkE2FZE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=MwiVd77G; arc=none smtp.client-ip=209.85.221.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-37ed3bd6114so338440f8f.2
-        for <linux-doc@vger.kernel.org>; Thu, 05 Dec 2024 03:21:29 -0800 (PST)
+	s=arc-20240116; t=1733399342; c=relaxed/simple;
+	bh=ry1Q9lVyvUUKX2WBlH1Bo/LYaeI5/egRWUooe5SRBEM=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=ofYiksYthcGAb7FyeVPRKX0B+VPTPB1RxMqoKaxeWrI3KSQQ8ZEjwBTMZ6pmDKiEpujIjGaKv9ZMyJxhId/ESI6I7JCgxYwvG3pCx8BSmB92yJjFVmxnm1PweFScxVm+hBBUnKb4DJsKMisQdM98aL5JfaXw0MYG4V7G/Qljxog=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hIIMSI4k; arc=none smtp.client-ip=209.85.214.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2155e9dcbe7so6846595ad.3;
+        Thu, 05 Dec 2024 03:49:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1733397688; x=1734002488; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=C7U5yhV/8h616LjmaOHaYn3v4TRRwKNu2+eN/oyCXew=;
-        b=MwiVd77GTpmtr5LBNVDCKHygawdzXJY2qUh6ischD1Y7g9/pvFMjPslbZI1m2PmKuV
-         JlPHiRdVEZHanh8muaoVYg9Los5smRjwi9Jy3pTOWGLJZXRiS+m4ah5U0yUuYPiLdsSB
-         1G+B1KeIkcd1Oo8pBp0JZDhwxY/L4FsJk8UChEf5R3+rvNRE6fn7CNQzLiJ6aybhhFCz
-         PMBn/ghyZ6fxzjE0f7X7xCvsS5jADFGHAOpJuhQBt7DwdHKhfSInmOVbQ+lYcGRTxES9
-         6VrNstwEBYLZNbDmnzqao1P86SbvEawxeDABGEAVEuDkdIERYlJHGk5uL+PpOvJfUH3p
-         v5jg==
+        d=gmail.com; s=20230601; t=1733399340; x=1734004140; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4218+LaUPkk+3Xk7sYgTNuYCra7GTA77M4dYAwFmiyo=;
+        b=hIIMSI4kVrBcGa/SuSATx7rxxgtZjG1yYA9zNkfQHIcUP9gcXgesewrfw6/PFwUIiK
+         QTbAtj7FqqcM0KRea2OQVOEBsHpSc7tn6zwN9LGLGrcE1jlqUu2CAPVmyw2uBW+hh7Gm
+         dHwiZtUhFDzHBRngXMrnBo11Ba0XEIRQMHMVcKZm1+7G8c2kWLD5hHG43WfqtcG1lWgI
+         J/RHQl4Ew/pAsG+XzmWMf3J/gwLBP4K3oicpbZUF2TAHKSyBuwQkUkHw/7wEC/IDu/Rd
+         22Qyjljp1m7a9hgDziYn4jlPHnpLaqskJbkgP/XzK2FfewRCS4yykTJKjfinOFieotXs
+         n4og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733397688; x=1734002488;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=C7U5yhV/8h616LjmaOHaYn3v4TRRwKNu2+eN/oyCXew=;
-        b=mOE960Rl0ssiRYg/AG9rNXba2DiQJfaOishTQChQWV7jw9dStGilg+4OapHA21EPBH
-         YxhCqn1gDZw3QxDfHMmpoPbIpskO1693tAlIxWMLcDcdrcBThx9enB3lMylJDf1tB2Bd
-         WpGjG2HrUKtsNk4kqYrx0xdssPSWhd1zBtlxDGkqpWd6JVTA1hu36uCI/1gqFyDpzahc
-         MyTUkhytng67lMgNZ9ZIzgQQLyuBiYelf6Rir6tkgWXQYlHqPJnmjwrOSoucV0B+uXTY
-         3wtF3OWS0gqxO84OkKPgqiEzroPPX3XCg4YS36RezqARkL7diQ74k04ozzUQQsi8uyy5
-         nmfA==
-X-Forwarded-Encrypted: i=1; AJvYcCWLu0z9MNZlZOx08qN34fsOHiXM1uuTvBf4TFis/7QSm/QCtAZJAkohz+qh1+itLC8ydjytDYjXlJ4=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy76bRbSgWvSDKpSLh60/xDZLmTyqqv8fwAscXod/3AMKzu4WM0
-	IxGOxNBoUPFsEqlEugTXpLgILDtYX3le86957nw2+WRWSoidyaKAj79B7FIz7D0=
-X-Gm-Gg: ASbGncvwmx0Q0DpdOeeVttoqwgMxQhe+fCK3RfwaD7Mby5TOny/l3oBykSskHw2/yex
-	Rdqz15JXECV5JU5EvSrAcxZNiax1+OdACqsrUtl3fmLH9rcnSfTbUhclXsPyJpx9z1alWJgX6o5
-	DkMgZHdQjWUWTg4aIennS7x7b6Wk5LHzBkzK6EvzvqkpwdbT0ynCe1dgy0G6B6oFJ0l97a/fY4L
-	4Lj6VEsDXz/sKv6QWkUSotdksQVkomE7eXZVJagAalpFc4+LHesC+/CVg3OASMDrqBhH3tT9aOZ
-	umBm
-X-Google-Smtp-Source: AGHT+IETMe2PLBKyan12WmIjT9Pp7mgNsqBOWO9c5iKtI+qO4i1i+ps8nfGb0dt//dwm/9gZu57i2A==
-X-Received: by 2002:a05:6000:1ac7:b0:385:df73:2f3a with SMTP id ffacd0b85a97d-385fd3e7b1dmr8860701f8f.14.1733397687912;
-        Thu, 05 Dec 2024 03:21:27 -0800 (PST)
-Received: from localhost (p5dc6838f.dip0.t-ipconnect.de. [93.198.131.143])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38621909639sm1729318f8f.72.2024.12.05.03.21.26
+        d=1e100.net; s=20230601; t=1733399340; x=1734004140;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=4218+LaUPkk+3Xk7sYgTNuYCra7GTA77M4dYAwFmiyo=;
+        b=Yy0V5shrJ6DvKa0fO6Kexvl1wXgx8f42lAqOtrBOr/f9+Qx835ENOSUPkQqzxQ5toU
+         UR3aeiYGDaJPTNj5rK6Kr14GLNAULL5Wyf0pnrgwXyrz75EyvOjQX64V/L2qnJjRylC3
+         YC3gu9IAMf7Fgh5KKSiNfNZ/+eWyDiSto4mM9umH93Uu2z6BqukdBmZ0pk9SgQYVNevx
+         ZpufN7EIb2OoTD8XP2y8ppIYqlsEPgiv3ircVNkvHQra2GvZKO4G1eyEHiRYlrERMsOW
+         HEP71qpfsKSPs5jeY7QgmwVX0rUPpLmEOL33Ro2mdMqTzK+FSy/TMkbI/G0U6X97dh8D
+         w6WQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVz9CMMUT1dIPpJqaGOJgsSk0cqEmv8OTAHHOeTBzgcOfW+PlBaVf5zBB0/v4Dm4tOj0FMXoKbYe9YmH3uJYkU=@vger.kernel.org, AJvYcCWZ32e67Q8MnSoCsuFFpDPqGMCHQmuqBkBZ41IOVC+6TQ63Gwm+TLSf1UXkbR7SDxU9Slbo/YrHyOdq9kujrA==@vger.kernel.org, AJvYcCXqefbFK+clbaUZ2H9FW+Nq2tzT0S/jpA7Z6XxD1CRG5t+PWtBPPdwYdAKVvSXK0J0wH4kIJIHSyG3J@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywo5A9p1vJDG6vybUtNY16ODPdsM7iutV7RVQfQtEhtFmJWXJAk
+	9Oekd1KEPBTaHfgPrMjDZOUHe0IiSUuf/o5y4X32AoSPN+i9c5Ci
+X-Gm-Gg: ASbGnctLsXaTMA5MomHSpscIEKcOuUOK+DtvLrUAwl1nWIkHNoqF5b3SzR1bgU5xQM5
+	erL8bpoyta5ByImN98OA8fR0peOgNnsj3webHEosli+arx6SK176KV/Xs7fLJ3/puU8g7J91u3A
+	bhQGpt0TFMEmKyrnOX+a6nmKVwqF/V8XBHf8evTIZICTN5JYwNqB+p7KPidaugUT8gxgCtelMLm
+	QpTdMXQvv+ONskB4PtuI2a4LdoOJUUR1bWa1lsvxnpvRBAjSDPORYvuZsZr2z9grjq9r4WDKYk=
+X-Google-Smtp-Source: AGHT+IHWN6Tn6tLa6h9VbDwRImkloqTz94E7obvsGuFMsOwcr5HZUuiLpglqYynL3HkgfzpYqNAe8w==
+X-Received: by 2002:a17:903:190:b0:215:89a9:bd0a with SMTP id d9443c01a7336-215bd10d5femr137528305ad.24.1733399340382;
+        Thu, 05 Dec 2024 03:49:00 -0800 (PST)
+Received: from BiscuitBobby.am.students.amrita.edu ([123.63.2.2])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-215f8e41e52sm10965545ad.3.2024.12.05.03.48.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Dec 2024 03:21:27 -0800 (PST)
-Date: Thu, 5 Dec 2024 12:21:26 +0100
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Matthias Maennich <maennich@google.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Masahiro Yamada <masahiroy@kernel.org>, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/2] doc: module: DEFAULT_SYMBOL_NAMESPACE must be
- defined before #includes
-Message-ID: <td6actwt6wzbutyo6ujv5wmpoieyovtbpqqcmq45twfzhwyca3@hpybcti24ndw>
-References: <cover.1733305665.git.ukleinek@kernel.org>
- <3dd7ff6fa0a636de86e091286016be8c90e03631.1733305665.git.ukleinek@kernel.org>
- <Z1Fbrbjx-mNTnV0k@smile.fi.intel.com>
+        Thu, 05 Dec 2024 03:49:00 -0800 (PST)
+From: Siddharth Menon <simeddon@gmail.com>
+To: simeddon@gmail.com,
+	corbet@lwn.net,
+	jikos@kernel.org,
+	jpoimboe@kernel.org,
+	mbenes@suse.cz,
+	pmladek@suse.com,
+	shuah@kernel.org
+Cc: linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	live-patching@vger.kernel.org,
+	workflows@vger.kernel.org
+Subject: [PATCH 0/3] kselftest framework to introduce TEST_CONFIG_DEPS
+Date: Thu,  5 Dec 2024 17:17:54 +0530
+Message-Id: <20241205114757.5916-1-simeddon@gmail.com>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="lnvca2nzg45imhwr"
-Content-Disposition: inline
-In-Reply-To: <Z1Fbrbjx-mNTnV0k@smile.fi.intel.com>
+Content-Transfer-Encoding: 8bit
 
+Currently, kselftests does not have a generalised mechanism to skip compilation
+and run tests when required kernel configuration options are disabled.
 
---lnvca2nzg45imhwr
-Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH 2/2] doc: module: DEFAULT_SYMBOL_NAMESPACE must be
- defined before #includes
-MIME-Version: 1.0
+This patch series addresses this limitation by introducing a new flag, 
+'TEST_CONFIG_DEPS' in lib.mk, along with corresponding updates to the 
+documentation. 
+The selftests/livepatch/Makefile has been updated to utilize TEST_CONFIG_DEPS.
 
-Hello Andy,
+Siddharth Menon (3):
+  docs/kselftests: Explain the usage of TEST_CONFIG_DEPS
+  selftests/lib.mk: Introduce check to validate required configs
+  selftests/livepatch: Check if required config options are enabled
 
-On Thu, Dec 05, 2024 at 09:52:13AM +0200, Andy Shevchenko wrote:
-> On Wed, Dec 04, 2024 at 11:01:11AM +0100, Uwe Kleine-K=F6nig wrote:
-> > The definition of EXPORT_SYMBOL et al depends on
-> > DEFAULT_SYMBOL_NAMESPACE. So DEFAULT_SYMBOL_NAMESPACE must already be
-> > available when <linux/export.h> is parsed.
->=20
-> > -within the corresponding compilation unit before any EXPORT_SYMBOL mac=
-ro is
-> > -used.
-> > +within the corresponding compilation unit before the #include for
-> > +<linux/export.h>.
->=20
-> And how do I know where it is included in the current state of affairs wi=
-th the
-> dependency hell in the kernel?
->=20
-> I suggest to reword it to something like "before any global inclusions", =
-the
-> best probably is to repeat the piece from pr_fmt() / dev_fmt() documentat=
-ion
-> (if any).
+ Documentation/dev-tools/kselftest.rst      |  3 +++
+ tools/testing/selftests/lib.mk             | 18 ++++++++++++++++--
+ tools/testing/selftests/livepatch/Makefile |  1 +
+ 3 files changed, 20 insertions(+), 2 deletions(-)
 
-Well, "before <linux/export.h>" is the accurate thing you have to
-ensure. "before any global inclusion" is the safe and easy thing to do
-to achieve that. Maybe:
+-- 
+2.39.5
 
-	...
-	within the corresponding compilation unit before the #include for
-	<linux/export.h>. Typically it's placed before the first
-	#include.
-
-?
-
-Best regards
-Uwe
-
---lnvca2nzg45imhwr
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmdRjLMACgkQj4D7WH0S
-/k7omQf9GWJS+w/6eUGX8w5lUcFNMd4opPGpRx2I2KIu8nWrZ7dX8jYsyjpt7nlM
-0WGUvgcmhbeN2klAa0Yr1McFAeAwDtgA+JkTx5afHiynNVsO8YZ58Hh6udTIsj0f
-zdYxrPXlGqhU8MFYQZl7r7eNWnfDyNAFWhKRuTu3MaTwvMrG2JpqZK/xyV34YHka
-LFkFG5aukOZSI3SqKj+dFeXZfNKiMQi5znyqiKAC02RFUuZjPgNPgG3XSWUK8Z9B
-sZX75AoA3ij/xXccc/7hlsc9AkeqCcImj64NnLgE3f1aZInOpf1LPDwAQCBnorm6
-d/Ex1FvbjBY9EwzJI8XXItYlqY2yIA==
-=gXBw
------END PGP SIGNATURE-----
-
---lnvca2nzg45imhwr--
 
