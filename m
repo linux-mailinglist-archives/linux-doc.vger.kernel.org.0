@@ -1,263 +1,203 @@
-Return-Path: <linux-doc+bounces-32076-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32078-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D871D9E5058
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 09:54:37 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F9159E522C
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 11:26:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id ED5E8168FB6
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 08:54:33 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 910BF1654C5
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2024 10:26:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76CEA1D5171;
-	Thu,  5 Dec 2024 08:54:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F11B1D95BE;
+	Thu,  5 Dec 2024 09:51:36 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout11.his.huawei.com (frasgout11.his.huawei.com [14.137.139.23])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF5AB16F27E;
-	Thu,  5 Dec 2024 08:54:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.23
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7184A1D90B6
+	for <linux-doc@vger.kernel.org>; Thu,  5 Dec 2024 09:51:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733388870; cv=none; b=Tp2HpPuqU/8/OJ/lzjMvnkSwn6Dk+bgRCN5xDbdNTrIu8yRoiTj1udZyXAUif90BmPw1HbXx32KUxwwxFbd8SXkQRLvKKTtNFNelSworQ0kjYb61WJ8Yk4UIDQq9/ZP5JW6vJz2Gm00W/MQnfixOwGkMI03pwvDxn9jW4VA+B6s=
+	t=1733392296; cv=none; b=g/1GISZ77trYq8ioLEjoiCDBSfV6Md2RYoSVmckOm9ExkFrhs6gwo5n2Rj0nQi4A6yJWNmq/2tkA+la0Vkw++3l3jDHaVn3J43DkcP10HiKqqhZVSY2u0lY9DX0FRJHMH7bUNaeHfqSMX3F9zv2tdzIKO/5yAAcNmBh5xBgg36w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733388870; c=relaxed/simple;
-	bh=g0gydrHl/2oqhtVxsWa7SZilONyoK1LSyfq8FZ/A+/0=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=hpCy5o3WuMg0r11Awj5NtIPVQuYSgP/P2dnMqBsXsdZgZS/sX3nHgXNZ06WfxMKBo8eNzh+LbPjjuUy8wLMF4Oc+fLXry+Cowm7EDFFrXFn9/OwAPkboC1oBgD4x93AFv4AmR8OoELy3nKhR+T7rIx8KEF3qKdrk6q16yi+JCQ0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.23
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.18.186.51])
-	by frasgout11.his.huawei.com (SkyGuard) with ESMTP id 4Y3nhd2ylsz9v7Vj;
-	Thu,  5 Dec 2024 16:33:05 +0800 (CST)
-Received: from mail02.huawei.com (unknown [7.182.16.47])
-	by mail.maildlp.com (Postfix) with ESMTP id 00C2714051A;
-	Thu,  5 Dec 2024 16:54:09 +0800 (CST)
-Received: from [127.0.0.1] (unknown [10.204.63.22])
-	by APP1 (Coremail) with SMTP id LxC2BwBH9CQdalFnenXcAg--.56302S2;
-	Thu, 05 Dec 2024 09:54:08 +0100 (CET)
-Message-ID: <3a759c091ac097be84b882dd992e6e216ec11723.camel@huaweicloud.com>
-Subject: Re: [PATCH v6 00/15] integrity: Introduce the Integrity Digest Cache
-From: Roberto Sassu <roberto.sassu@huaweicloud.com>
-To: Eric Snowberg <eric.snowberg@oracle.com>
-Cc: Mimi Zohar <zohar@linux.ibm.com>, Dmitry Kasatkin
- <dmitry.kasatkin@gmail.com>, "corbet@lwn.net" <corbet@lwn.net>, 
- "mcgrof@kernel.org" <mcgrof@kernel.org>, "petr.pavlu@suse.com"
- <petr.pavlu@suse.com>,  "samitolvanen@google.com"
- <samitolvanen@google.com>, "da.gomez@samsung.com" <da.gomez@samsung.com>, 
- Andrew Morton <akpm@linux-foundation.org>, "paul@paul-moore.com"
- <paul@paul-moore.com>, "jmorris@namei.org" <jmorris@namei.org>,
- "serge@hallyn.com" <serge@hallyn.com>, "shuah@kernel.org"
- <shuah@kernel.org>, "mcoquelin.stm32@gmail.com"
- <mcoquelin.stm32@gmail.com>,  "alexandre.torgue@foss.st.com"
- <alexandre.torgue@foss.st.com>, "linux-integrity@vger.kernel.org"
- <linux-integrity@vger.kernel.org>, "linux-doc@vger.kernel.org"
- <linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>, "linux-api@vger.kernel.org"
- <linux-api@vger.kernel.org>, "linux-modules@vger.kernel.org"
- <linux-modules@vger.kernel.org>, "linux-security-module@vger.kernel.org"
- <linux-security-module@vger.kernel.org>, "linux-kselftest@vger.kernel.org"
- <linux-kselftest@vger.kernel.org>, "wufan@linux.microsoft.com"
- <wufan@linux.microsoft.com>, "pbrobinson@gmail.com" <pbrobinson@gmail.com>,
-  "zbyszek@in.waw.pl" <zbyszek@in.waw.pl>, "hch@lst.de" <hch@lst.de>,
- "mjg59@srcf.ucam.org" <mjg59@srcf.ucam.org>, "pmatilai@redhat.com"
- <pmatilai@redhat.com>,  "jannh@google.com" <jannh@google.com>,
- "dhowells@redhat.com" <dhowells@redhat.com>,  "jikos@kernel.org"
- <jikos@kernel.org>, "mkoutny@suse.com" <mkoutny@suse.com>,
- "ppavlu@suse.com" <ppavlu@suse.com>, "petr.vorel@gmail.com"
- <petr.vorel@gmail.com>,  "mzerqung@0pointer.de" <mzerqung@0pointer.de>,
- "kgold@linux.ibm.com" <kgold@linux.ibm.com>, Roberto Sassu
- <roberto.sassu@huawei.com>
-Date: Thu, 05 Dec 2024 09:53:45 +0100
-In-Reply-To: <B0DC94E7-78A3-4797-B864-31DE0A2C903C@oracle.com>
-References: <20241119104922.2772571-1-roberto.sassu@huaweicloud.com>
-	 <C4BE31F8-1FA3-4AD1-A712-ED2AA7E61E96@oracle.com>
-	 <17ef4f662e594c8431a00fe423507af4f6a82286.camel@huaweicloud.com>
-	 <B135AC90-7CE5-4E51-90B1-9D82031668A8@oracle.com>
-	 <00f3eb72042aedaa4644ff0932d06d4e8d215f6b.camel@huaweicloud.com>
-	 <B0DC94E7-78A3-4797-B864-31DE0A2C903C@oracle.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2 
+	s=arc-20240116; t=1733392296; c=relaxed/simple;
+	bh=kLpngkEs/11Ak9OOYTNMERZLxTu+OUPrakNs9U6Nwlc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=O7KuO36iFyz5DxYazBmMF8b3Qdrz/xfWqvdOUe6IXhTShjkC4M5MMICZVmiei6+dfRPH05yN2Rpijr0Sfecyut5D2Emw7ZA26DQ5yACl/bVsK4EJF+0XlExFu0SmPmeVpuVv4w3S0Us9DxSi/XrN8i6oBJ/gTawTqfERcXjXP4E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <mkl@pengutronix.de>)
+	id 1tJ8Vy-0002HX-Gp; Thu, 05 Dec 2024 10:51:18 +0100
+Received: from moin.white.stw.pengutronix.de ([2a0a:edc0:0:b01:1d::7b] helo=bjornoya.blackshift.org)
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <mkl@pengutronix.de>)
+	id 1tJ8Vv-001nkX-2w;
+	Thu, 05 Dec 2024 10:51:16 +0100
+Received: from pengutronix.de (pd9e59fec.dip0.t-ipconnect.de [217.229.159.236])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	(Authenticated sender: mkl-all@blackshift.org)
+	by smtp.blackshift.org (Postfix) with ESMTPSA id 0C91C3860A2;
+	Thu, 05 Dec 2024 09:01:11 +0000 (UTC)
+Date: Thu, 5 Dec 2024 10:01:10 +0100
+From: Marc Kleine-Budde <mkl@pengutronix.de>
+To: Mateusz Polchlopek <mateusz.polchlopek@intel.com>
+Cc: Oleksij Rempel <o.rempel@pengutronix.de>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Andrew Lunn <andrew+netdev@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, 
+	Jonathan Corbet <corbet@lwn.net>, kernel@pengutronix.de, linux-doc@vger.kernel.org, 
+	netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Maxime Chevallier <maxime.chevallier@bootlin.com>, Simon Horman <horms@kernel.org>, 
+	Russell King <linux@armlinux.org.uk>
+Subject: Re: [PATCH net-next v1 6/7] phy: dp83td510: add statistics support
+Message-ID: <20241205-satisfied-gerbil-of-cookies-471293-mkl@pengutronix.de>
+References: <20241203075622.2452169-1-o.rempel@pengutronix.de>
+ <20241203075622.2452169-7-o.rempel@pengutronix.de>
+ <57a7b3bf-02fa-4b18-bb4b-b11245d3ebfb@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-CM-TRANSID:LxC2BwBH9CQdalFnenXcAg--.56302S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3WrW8tF1DCFykKFWfAF47Jwb_yoW7tw1kpa
-	y5Ka13Kr4kWr10k3Z2ka1UWF1Fk3yftr15Xwn8Xry5CrZ0gr929F1xKa15uFyDGr1kGr12
-	vr1ag347CrWDAaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUv0b4IE77IF4wAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k2
-	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
-	xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxV
-	AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
-	x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
-	0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAaw2AF
-	wI0_Wrv_ZF1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
-	xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4U
-	JwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x
-	0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_
-	Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU0
-	EksDUUUUU==
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAgAIBGdRD-QHxQAAsB
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="huwtbf5ra3bpiqrd"
+Content-Disposition: inline
+In-Reply-To: <57a7b3bf-02fa-4b18-bb4b-b11245d3ebfb@intel.com>
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: mkl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-On Thu, 2024-12-05 at 00:57 +0000, Eric Snowberg wrote:
+
+--huwtbf5ra3bpiqrd
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH net-next v1 6/7] phy: dp83td510: add statistics support
+MIME-Version: 1.0
+
+On 05.12.2024 09:43:34, Mateusz Polchlopek wrote:
 >=20
-> > On Dec 4, 2024, at 3:44=E2=80=AFAM, Roberto Sassu <roberto.sassu@huawei=
-cloud.com> wrote:
-> >=20
-> > On Tue, 2024-12-03 at 20:06 +0000, Eric Snowberg wrote:
-> > >=20
-> > > > On Nov 26, 2024, at 3:41=E2=80=AFAM, Roberto Sassu <roberto.sassu@h=
-uaweicloud.com> wrote:
-> > > >=20
-> > > > On Tue, 2024-11-26 at 00:13 +0000, Eric Snowberg wrote:
-> > > > >=20
-> > > > > > On Nov 19, 2024, at 3:49=E2=80=AFAM, Roberto Sassu <roberto.sas=
-su@huaweicloud.com> wrote:
-> > > > > >=20
-> > > > > > From: Roberto Sassu <roberto.sassu@huawei.com>
-> > > > > >=20
-> > > > > > The Integrity Digest Cache can also help IMA for appraisal. IMA=
- can simply
-> > > > > > lookup the calculated digest of an accessed file in the list of=
- digests
-> > > > > > extracted from package headers, after verifying the header sign=
-ature. It is
-> > > > > > sufficient to verify only one signature for all files in the pa=
-ckage, as
-> > > > > > opposed to verifying a signature for each file.
-> > > > >=20
-> > > > > Is there a way to maintain integrity over time?  Today if a CVE i=
-s discovered=20
-> > > > > in a signed program, the program hash can be added to the blackli=
-st keyring.=20
-> > > > > Later if IMA appraisal is used, the signature validation will fai=
-l just for that=20
-> > > > > program.  With the Integrity Digest Cache, is there a way to do t=
-his? =20
-> > > >=20
-> > > > As far as I can see, the ima_check_blacklist() call is before
-> > > > ima_appraise_measurement(). If it fails, appraisal with the Integri=
-ty
-> > > > Digest Cache will not be done.
-> > >=20
-> > >=20
-> > > It is good the program hash would be checked beforehand and fail if i=
-t is=20
-> > > contained on the list.=20
-> > >=20
-> > > The .ima keyring may contain many keys.  If one of the keys was later=
-=20
-> > > revoked and added to the .blacklist, wouldn't this be missed?  It wou=
-ld=20
-> > > be caught during signature validation when the file is later appraise=
-d, but=20
-> > > now this step isn't taking place.  Correct?
-> >=20
-> > For files included in the digest lists, yes, there won't be detection
-> > of later revocation of a key. However, it will still work at package
-> > level/digest list level, since they are still appraised with a
-> > signature.
-> >=20
-> > We can add a mechanism (if it does not already exist) to invalidate the
-> > integrity status based on key revocation, which can be propagated to
-> > files verified with the affected digest lists.
-> >=20
-> > > With IMA appraisal, it is easy to maintain authenticity but challengi=
-ng to=20
-> > > maintain integrity over time. In user-space there are constantly new =
-CVEs. =20
-> > > To maintain integrity over time, either keys need to be rotated in th=
-e .ima=20
-> > > keyring or program hashes need to be frequently added to the .blackli=
-st.  =20
-> > > If neither is done, for an end-user on a distro, IMA-appraisal basica=
-lly=20
-> > > guarantees authenticity.
-> > >=20
-> > > While I understand the intent of the series is to increase performanc=
-e,=20
-> > > have you considered using this to give the end-user the ability to ma=
-intain=20
-> > > integrity of their system?  What I mean is, instead of trying to impo=
-rt anything=20
-> > > from an RPM, just have the end-user provide this information in some =
-format=20
-> > > to the Digest Cache.  User-space tools could be built to collect and =
-format=20
-> >=20
-> > This is already possible, digest-cache-tools
-> > (https://github.com/linux-integrity/digest-cache-tools) already allow
-> > to create a digest list with the file a user wants.
-> >=20
-> > But in this case, the user is vouching for having taken the correct
-> > measure of the file at the time it was added to the digest list. This
-> > would be instead automatically guaranteed by RPMs or other packages
-> > shipped with Linux distributions.
-> >=20
-> > To mitigate the concerns of CVEs, we can probably implement a rollback
-> > prevention mechanism, which would not allow to load a previous version
-> > of a digest list.
 >=20
-> IMHO, pursuing this with the end-user being in control of what is contain=
-ed=20
-> within the Digest Cache vs what is contained in a distro would provide mo=
-re
-> value. Allowing the end-user to easily update their Digest Cache in some =
-way=20
-> without having to do any type of revocation for both old and vulnerable=
-=20
-> applications with CVEs would be very beneficial.
+> On 12/3/2024 8:56 AM, Oleksij Rempel wrote:
+> > Add support for reporting PHY statistics in the DP83TD510 driver. This
+> > includes cumulative tracking of transmit/receive packet counts, and
+> > error counts. Implemented functions to update and provide statistics via
+> > ethtool, with optional polling support enabled through `PHY_POLL_STATS`.
+> >=20
+> > Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
+> > ---
+> >   drivers/net/phy/dp83td510.c | 98 ++++++++++++++++++++++++++++++++++++-
+> >   1 file changed, 97 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/drivers/net/phy/dp83td510.c b/drivers/net/phy/dp83td510.c
+> > index 92aa3a2b9744..08d61a6a8c61 100644
+> > --- a/drivers/net/phy/dp83td510.c
+> > +++ b/drivers/net/phy/dp83td510.c
+> > @@ -34,6 +34,24 @@
+> >   #define DP83TD510E_CTRL_HW_RESET		BIT(15)
+> >   #define DP83TD510E_CTRL_SW_RESET		BIT(14)
+> > +#define DP83TD510E_PKT_STAT_1			0x12b
+> > +#define DP83TD510E_TX_PKT_CNT_15_0_MASK		GENMASK(15, 0)
+> > +
+> > +#define DP83TD510E_PKT_STAT_2			0x12c
+> > +#define DP83TD510E_TX_PKT_CNT_31_16_MASK	GENMASK(15, 0)
+>=20
+> Shouldn't it be GENMASK(31, 16) ? If not then I think that macro
+> name is a little bit misleading
 
-Yes, deleting the digest list would invalidate any integrity result
-done with that digest list.
+Yes, the name may be a bit misleading...
 
-I developed also an rpm plugin that synchronizes the digest lists with
-installed software. Old vulnerable software cannot be verified anymore
-with the Integrity Digest Cache, since the rpm plugin deletes the old
-software digest lists.
+[...]
 
-https://github.com/linux-integrity/digest-cache-tools/blob/main/rpm-plugin/=
-digest_cache.c
+> > + */
+> > +static int dp83td510_update_stats(struct phy_device *phydev)
+> > +{
+> > +	struct dp83td510_priv *priv =3D phydev->priv;
+> > +	u64 count;
+> > +	int ret;
+> > +
+> > +	/* DP83TD510E_PKT_STAT_1 to DP83TD510E_PKT_STAT_6 registers are clear=
+ed
+> > +	 * after reading them in a sequence. A reading of this register not in
+> > +	 * sequence will prevent them from being cleared.
+> > +	 */
+> > +	ret =3D phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TD510E_PKT_STAT_1);
+> > +	if (ret < 0)
+> > +		return ret;
+> > +	count =3D FIELD_GET(DP83TD510E_TX_PKT_CNT_15_0_MASK, ret);
+> > +
+> > +	ret =3D phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TD510E_PKT_STAT_2);
+> > +	if (ret < 0)
+> > +		return ret;
+> > +	count |=3D (u64)FIELD_GET(DP83TD510E_TX_PKT_CNT_31_16_MASK, ret) << 1=
+6;
+>=20
+> Ah... here you do shift. I think it would be better to just define
+>=20
+> #define DP83TD510E_TX_PKT_CNT_31_16_MASK	GENMASK(31, 16)
 
-The good thing is that the Integrity Digest Cache can be easily
-controlled with filesystem operations (it works similarly to security
-blobs attached to kernel objects, like inodes and file descriptors).
+No. This would not be the same.
 
-As soon as something changes (e.g. digest list written, link to the
-digest lists), this triggers a reset in the Integrity Digest Cache, so
-digest lists and files need to be verified again. Deleting the digest
-list causes the in-kernel digest cache to be wiped away too (when the
-reference count reaches zero).
+The current code takes the lower 16 bit of "ret" and shifts it left 16
+bits.
 
-> Is there a belief the Digest Cache would be used without signed kernel=
-=20
-> modules?  Is the performance gain worth changing how kernel modules=20
-> get loaded at boot?  Couldn't this part just be dropped for easier accept=
-ance? =20
-> Integrity is already maintained with the current model of appended signat=
-ures.=20
+As far as I understand the code DP83TD510E_PKT_STAT_1 contain the lower
+16 bits, while DP83TD510E_PKT_STAT_2 contain the upper 16 bits.
 
-I don't like making exceptions in the design, and I recently realized
-that it should not be task of the users of the Integrity Digest Cache
-to limit themselves.
+DP83TD510E_PKT_STAT_1 gives 0x????aaaa
+DP83TD510E_PKT_STAT_2 gives 0x????bbbb
 
-But the main problem was not the kernel modules themselves, but the
-infrastructure needed in user space to load them, which might not be
-available at the time a digest list parser needs to be loaded.
+count will be 0xbbbbaaaa
 
-I hope ksys_finit_module() does not cause too much resistance (however
-I need to document it better, as others noted). It is just a different
-way to pass the same parameters of the finit_module() system call.
+This raises another question: Are these values latched?
 
-Thanks
+If not you can get funny results if DP83TD510E_PKT_STAT_1 rolls over. On
+unlatched MMIO busses you first read the upper part, then the lower,
+then the upper again and loop if the value of the upper part changed in
+between. Not sure how much overhead this means for the slow busses.
 
-Roberto
+Consult the doc of the chip if you can read both in one go and if the
+chip latches these values for that access mode.
 
+> instead of shifting, what do you think ?
+
+nope - If you don't want to shift, you can use a combination of
+FIELD_GET() (to extract the relevant 16 bits) and FIELD_PREP() to shift.
+
+regards,
+Marc
+
+--=20
+Pengutronix e.K.                 | Marc Kleine-Budde          |
+Embedded Linux                   | https://www.pengutronix.de |
+Vertretung N=C3=BCrnberg              | Phone: +49-5121-206917-129 |
+Amtsgericht Hildesheim, HRA 2686 | Fax:   +49-5121-206917-9   |
+
+--huwtbf5ra3bpiqrd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEUEC6huC2BN0pvD5fKDiiPnotvG8FAmdRa9MACgkQKDiiPnot
+vG9nNgf+JnQGbTtZczGIN42CtNQnPQcq46nWZz/ZEHcN4hOvqiglY29fCAPgZWIP
+9bgCBN+vIMNhpdRGxU5IXUCczQ8ydTLUdTRMZAhe9TCBB4T215IniLEGRo9f2+ip
+49ZhquMAFsA8zVzUQdKNVJZy2KruOTA7bpK1aoPaF7+i5crwnuy36ruKjOR1F7il
+OmiCqH2bkQH556J1wxYh/Dm4CX+jkoA//GMYPTeSDX2Prv5vWUdvumufnK3UnhBo
+bLVvf0mqMGqaATaP79mBKjZ+nLZGljElJGDJEDIJxGLZzrSy35IC6rxYwegN5Plt
+3jw1/Q7V32B7MyfAlsTisokhPQiGsg==
+=K6q3
+-----END PGP SIGNATURE-----
+
+--huwtbf5ra3bpiqrd--
 
