@@ -1,113 +1,153 @@
-Return-Path: <linux-doc+bounces-32294-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32313-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id C16AC9E9EAD
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2024 20:01:26 +0100 (CET)
-Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id DB1AD1881EAF
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2024 19:00:51 +0000 (UTC)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A5E1F19DF6A;
-	Mon,  9 Dec 2024 18:56:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="p519Aw5j"
-X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BFB89E9F03
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2024 20:06:48 +0100 (CET)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78907198A37;
-	Mon,  9 Dec 2024 18:56:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D951B284735
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2024 19:06:46 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 58AEC19E7E2;
+	Mon,  9 Dec 2024 19:03:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=codeweavers.com header.i=@codeweavers.com header.b="XWibcmPP"
+X-Original-To: linux-doc@vger.kernel.org
+Received: from mail.codeweavers.com (mail.codeweavers.com [4.36.192.163])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C45E219CC11;
+	Mon,  9 Dec 2024 19:03:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=4.36.192.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733770590; cv=none; b=oqTxX6N7Hc511zxFay0zalohJr11ioubZ3BhEDUGGAa0Yoafv+QzQVxtKKQq26eMkQmaeKqna65zP2HGp7lB6ByYsXRPJmDPHoqRFqUx3pygfye77nQ6SZvlBvbi+ERl4q9J6HlfAKz3PDrev+smCMqEdDVZStDVTACsKGTAWLI=
+	t=1733770984; cv=none; b=AkyCZO/KK5ebCvrOPMqaa0iTX6DtDOup+JK35paz+sMRbKtC4ivQLugskysCTIIovy4USOSpaZwHrc2YCgPFJwqrUWzTLzbtxFC4AFMKUoAZ/fcNLRLM1Dh3hPNYsswDr33yr+tMZxAWqMt14yN7nbaKpPvcysmCLJXT1im6XZo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733770590; c=relaxed/simple;
-	bh=jWitqbI3BToGLZp+6qWZmYRLd+6j/B93+eI3CbU4/Zc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=RNZR55U71i2IgDewaON44ET2Gq2cKdRfsEqCf1EY8k3qYPHzXRm08ZWMFemVcKADA1bPBTiFW2kpdzw7gznmReEWMuUrqD0+xJUOULWnAQjV8XTHZDw/oVA5npzqdbESVyxN853qStQsrOlg/0yrJZ4IBUpVQDWevyRBx10YrMI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=p519Aw5j; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E6431C4CED1;
-	Mon,  9 Dec 2024 18:56:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1733770590;
-	bh=jWitqbI3BToGLZp+6qWZmYRLd+6j/B93+eI3CbU4/Zc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=p519Aw5jPWzqrzBFSTv91Bmk6wjee690Qpps0g/UQj0hE3dtph47dJtKsHJu+98dP
-	 jCjDpI3BYoG1hMUaaKN3RHQ0NXXJ3qZTnM4TeRBhQy6g25VjNT0oLUScszmLxFltJT
-	 OUhzlgSL4aSJQJLgUebHnoggFhyNsK8/RYe14LdK6F6fLXhg6T56JdTMy5VFSdNIeO
-	 FeWRcfUZ1XcLAJgDgx3ArhqhUzGwLECc8tZtQd1YVxOkgDfloR5vs9DSA5v2D5kdQB
-	 gzLxWWdQ7pi3w6K3MTRJNXGZFjN8NvG02r9Jy59wXvMAKlLoqzeBmNUowRndSdoJHy
-	 MdMjsFTSCEPxA==
-Date: Mon, 9 Dec 2024 18:56:24 +0000
-From: Will Deacon <will@kernel.org>
-To: Rong Xu <xur@google.com>
-Cc: Yabin Cui <yabinc@google.com>, Han Shen <shenhan@google.com>,
+	s=arc-20240116; t=1733770984; c=relaxed/simple;
+	bh=vxXfnHos8ZGQdxrvftHEImXmIlo+QOSkWE3JMqlp5kY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=QzZWWlvTJdFncnOp40bPWmbZN6i4j69KabeXYBDwn0h7JmTM3U7vExFZMEtCsIaj9C+QtGgLAR99+NhAiGs2g2yByNyzQ3fO4dXj3UqtwKw3ifYvzUHzrSyiry7r/R+ik3qbQ6VjDHtha6gA2UwUbzHUVY6WPI9BX2hXNbBx/DM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codeweavers.com; spf=pass smtp.mailfrom=codeweavers.com; dkim=pass (2048-bit key) header.d=codeweavers.com header.i=@codeweavers.com header.b=XWibcmPP; arc=none smtp.client-ip=4.36.192.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codeweavers.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=codeweavers.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=codeweavers.com; s=s1; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=Ra2mZC+0tmcZOlBPX+RrAk3bBDA6gL8zBbxIVdBXqB8=; b=XWibcmPPRA3ss9kwWnB6EWUs0v
+	Mku8Aw270qjphG2Nl2bCDZZ/wiXTuKs4v6fy1eHW7HffcogtXAcvOWixo2JvmUGCXvdg9c9MawPuw
+	SE1TQSbIo8YnCAQIth3xcYI/S191klAIOOMst+9CxlpEtstXbkM5kbYHgRErMFxx2RHp/95skQ1Ca
+	+15Vd74ziw/UJ/JVfv2zbU3vQ74I8JnOV3D4K5WQqTP2evPF2WNkHlVy9m7IzPOEFRGFNpxA9W0Rk
+	FY+FfWdBhmUzsYi5jAe8nhFzlffdSsckFxehx4NawyLWrQQqH9BDFIgGXDIBGRfz+6oOLzq2fv18y
+	7iJiApyQ==;
+Received: from cw137ip160.mn.codeweavers.com ([10.69.137.160] helo=camazotz.mn.codeweavers.com)
+	by mail.codeweavers.com with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <zfigura@codeweavers.com>)
+	id 1tKiya-001Gd5-13;
+	Mon, 09 Dec 2024 12:59:24 -0600
+From: Elizabeth Figura <zfigura@codeweavers.com>
+To: Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Masahiro Yamada <masahiroy@kernel.org>, Kees Cook <kees@kernel.org>,
-	Nick Desaulniers <ndesaulniers@google.com>,
-	workflows@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH v2] arm64: Allow CONFIG_AUTOFDO_CLANG to be selected
-Message-ID: <20241209185623.GA13084@willie-the-truck>
-References: <20241118222540.27495-1-yabinc@google.com>
- <20241209162028.GD12428@willie-the-truck>
- <CAF1bQ=SiHi8oCyo5YnXGpQGofM1zAsnBdqSEet1mS-BYNKVU8A@mail.gmail.com>
+	Shuah Khan <shuah@kernel.org>
+Cc: linux-kernel@vger.kernel.org,
+	linux-api@vger.kernel.org,
+	wine-devel@winehq.org,
+	=?UTF-8?q?Andr=C3=A9=20Almeida?= <andrealmeid@igalia.com>,
+	Wolfram Sang <wsa@kernel.org>,
+	Arkadiusz Hiler <ahiler@codeweavers.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Andy Lutomirski <luto@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Will Deacon <will@kernel.org>,
+	Waiman Long <longman@redhat.com>,
+	Boqun Feng <boqun.feng@gmail.com>,
+	Elizabeth Figura <zfigura@codeweavers.com>
+Subject: [PATCH v6 08/28] ntsync: Introduce NTSYNC_IOC_EVENT_RESET.
+Date: Mon,  9 Dec 2024 12:58:44 -0600
+Message-ID: <20241209185904.507350-9-zfigura@codeweavers.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241209185904.507350-1-zfigura@codeweavers.com>
+References: <20241209185904.507350-1-zfigura@codeweavers.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAF1bQ=SiHi8oCyo5YnXGpQGofM1zAsnBdqSEet1mS-BYNKVU8A@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
 
-(Aside: please try to avoid top-posting on the public lists as it messes up
-the flow of conversation; I'll try to piece this back together.)
+This corresponds to the NT syscall NtResetEvent().
 
-On Mon, Dec 09, 2024 at 09:30:50AM -0800, Rong Xu wrote:
-> On Mon, Dec 9, 2024 at 8:20 AM Will Deacon <will@kernel.org> wrote:
-> > On Mon, Nov 18, 2024 at 02:25:40PM -0800, Yabin Cui wrote:
-> > > diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-> > > index fd9df6dcc593..c3814df5e391 100644
-> > > --- a/arch/arm64/Kconfig
-> > > +++ b/arch/arm64/Kconfig
-> > > @@ -103,6 +103,7 @@ config ARM64
-> > >       select ARCH_SUPPORTS_PER_VMA_LOCK
-> > >       select ARCH_SUPPORTS_HUGE_PFNMAP if TRANSPARENT_HUGEPAGE
-> > >       select ARCH_SUPPORTS_RT
-> > > +     select ARCH_SUPPORTS_AUTOFDO_CLANG
-> > >       select ARCH_WANT_BATCHED_UNMAP_TLB_FLUSH
-> > >       select ARCH_WANT_COMPAT_IPC_PARSE_VERSION if COMPAT
-> > >       select ARCH_WANT_DEFAULT_BPF_JIT
-> >
-> > After this change, both arm64 and x86 select this option unconditionally
-> > and with no apparent support code being added. So what is actually
-> > required in order to select ARCH_SUPPORTS_AUTOFDO_CLANG and why isn't
-> > it just available for all architectures instead?
+This sets the event to the unsignaled state, and returns its previous state.
 
-> Enabling an AutoFDO build requires users to explicitly set CONFIG_AUTOFDO_CLANG.
-> The support code is in Commit 315ad8780a129e82 (kbuild: Add AutoFDO
-> support for Clang build).
+Signed-off-by: Elizabeth Figura <zfigura@codeweavers.com>
+---
+ drivers/misc/ntsync.c       | 24 ++++++++++++++++++++++++
+ include/uapi/linux/ntsync.h |  1 +
+ 2 files changed, 25 insertions(+)
 
-Yes, that is precisely my point. The user has to enable
-CONFIG_AUTOFDO_CLANG anyway, so what is the point in having
-ARCH_SUPPORTS_AUTOFDO_CLANG. Why would an architecture _not_ want to
-select that?
+diff --git a/drivers/misc/ntsync.c b/drivers/misc/ntsync.c
+index e46dd795370a..092133699193 100644
+--- a/drivers/misc/ntsync.c
++++ b/drivers/misc/ntsync.c
+@@ -559,6 +559,28 @@ static int ntsync_event_set(struct ntsync_obj *event, void __user *argp)
+ 	return 0;
+ }
+ 
++static int ntsync_event_reset(struct ntsync_obj *event, void __user *argp)
++{
++	struct ntsync_device *dev = event->dev;
++	__u32 prev_state;
++	bool all;
++
++	if (event->type != NTSYNC_TYPE_EVENT)
++		return -EINVAL;
++
++	all = ntsync_lock_obj(dev, event);
++
++	prev_state = event->u.event.signaled;
++	event->u.event.signaled = false;
++
++	ntsync_unlock_obj(dev, event, all);
++
++	if (put_user(prev_state, (__u32 __user *)argp))
++		return -EFAULT;
++
++	return 0;
++}
++
+ static int ntsync_obj_release(struct inode *inode, struct file *file)
+ {
+ 	struct ntsync_obj *obj = file->private_data;
+@@ -584,6 +606,8 @@ static long ntsync_obj_ioctl(struct file *file, unsigned int cmd,
+ 		return ntsync_mutex_kill(obj, argp);
+ 	case NTSYNC_IOC_EVENT_SET:
+ 		return ntsync_event_set(obj, argp);
++	case NTSYNC_IOC_EVENT_RESET:
++		return ntsync_event_reset(obj, argp);
+ 	default:
+ 		return -ENOIOCTLCMD;
+ 	}
+diff --git a/include/uapi/linux/ntsync.h b/include/uapi/linux/ntsync.h
+index 36d903521bbe..7fdf79729b20 100644
+--- a/include/uapi/linux/ntsync.h
++++ b/include/uapi/linux/ntsync.h
+@@ -52,5 +52,6 @@ struct ntsync_wait_args {
+ #define NTSYNC_IOC_MUTEX_UNLOCK		_IOWR('N', 0x85, struct ntsync_mutex_args)
+ #define NTSYNC_IOC_MUTEX_KILL		_IOW ('N', 0x86, __u32)
+ #define NTSYNC_IOC_EVENT_SET		_IOR ('N', 0x88, __u32)
++#define NTSYNC_IOC_EVENT_RESET		_IOR ('N', 0x89, __u32)
+ 
+ #endif
+-- 
+2.45.2
 
-> We are not enabling this for all architectures because AutoFDO's optimized build
-> relies on Last Branch Records (LBR) which aren't available on all architectures.
-
-So? ETM isn't available on all arm64 machines and I doubt whether LBR is
-available on _all_ x86 machines either. So there's a runtime failure
-mode that needs to be handled anyway and I don't think the arch-specific
-Kconfig option is really doing anything useful.
-
-Will
 
