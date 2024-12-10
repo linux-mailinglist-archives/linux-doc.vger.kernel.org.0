@@ -1,34 +1,34 @@
-Return-Path: <linux-doc+bounces-32377-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32373-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60C9C9EADC3
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 11:15:48 +0100 (CET)
-Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E01F9EADBD
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 11:15:40 +0100 (CET)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1B1BA162C63
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 10:15:42 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D07842874A1
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 10:15:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E285D2080C6;
-	Tue, 10 Dec 2024 10:15:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C0741DC9BB;
+	Tue, 10 Dec 2024 10:15:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="C0Z2tk+e"
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="B+4L3EIM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56C9623DEAC;
-	Tue, 10 Dec 2024 10:15:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E1161DC9A2;
+	Tue, 10 Dec 2024 10:15:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733825729; cv=none; b=QCu36XYSqyM7eV6qPPs0g+j/d5NmUQnyUIBDicy07vega8RlcMSqPM1veukuIRaDXO7wiK3i3+CxMj8J25zS51nYHyGFt7oeaWqJOLyyi8+I4eJDkx+QJk14SIhqaHhX9BCk9xdGkpmZ0BWxqbZ4i4Ps+BpFbPpPtWNzyarmLKs=
+	t=1733825728; cv=none; b=ByrGRdFGbxkVx9ycI4QDsAkdhJ/GFVvUFgvNyrFUGT/nq69qhgw8kIS2XoG/s9vYdCzQdKhOY1Y7hc22rLMThqGRFO7ezoPx2OZC4soRk5ixYQNOmPlRfkGaBNCBWGz6iSTXEvum13oGQh/hzA+8KZEcfjTVVuLYWNU+7EGw3lc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733825729; c=relaxed/simple;
-	bh=roBXrszXjh2S99f6sjaU0YjTX9NYD/tnCV6ZlGoI6hE=;
+	s=arc-20240116; t=1733825728; c=relaxed/simple;
+	bh=LW1aJqCoSJ8m4tmhe3iuXeg4RU4Sa0vyycbay5ZdW8Q=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=gdpgGsBb9BPCdUqkc+0YDJJQ94FhcsH5UrnZsZRstW0A9MuAH7B6wBy8D58hjMtdHdWHN7JNoauDTdOcBrwIq1Hly5ZPgkga3rf5145hHDghdEnksdzB4psKOSNPmZydSj2IVi6G/6oY2yIW0FJIktTjxWJsrxn3xF999e6VaHI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=C0Z2tk+e; arc=none smtp.client-ip=80.237.130.52
+	 MIME-Version; b=QK7/S5M3ph+Z6GTaRTggQijoqSNyU4hwgnSi3kkx+tAa4xh+Ihsq51Nwsl2xyEQfGnPO8tfamoUeLE7aYyiGPipdmQEJuHS6fWmwhW4Y6sS4pp/zaDH7sS+XoXAL5TzzfLFzd+p4MlGvtHp36BkEFidWd0k5gKreNsRPO+sQ6+M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=B+4L3EIM; arc=none smtp.client-ip=80.237.130.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -36,15 +36,15 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:From:Sender:
 	Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
 	Content-Transfer-Encoding:Content-ID:Content-Description:In-Reply-To:
-	References; bh=R7HvXsLtjprjhd51NOldorbZLoyGDwY4IMtpLQ/3spM=; t=1733825727;
-	x=1734257727; b=C0Z2tk+eXQamGo6CdSOHywocg8urcSDrEnpcC8Ln1h43AqaTMc4ymnUDsJYLt
-	BmBsqGl98XQpiqP5GpGzF2qJslgJ0kYzWdOxJieTezIvBv7TUJokQpyaT6+0dBC0uWSXZqnqtUPg6
-	y0cjSnQGNEaUrp0t/c7ezaugA09cUFew7BYJqT5R2x3dsnRIxpjIwscsds4xY6wknVb32gDyxfNBG
-	vBYMI/bBS60Y8jIOWPjAHZAMrsBtX5z55du3rBQCv91S7E8Kjf9sg+S1kIBVtu2km53upb6lgjdw0
-	NA69jgw66nnWZ6rgjcdPhsj/2puG2ju/PDmZmhwm8I7Dc01KDw==;
+	References; bh=DBlAgcC0lAJ93nNprzRDxqqnlzjTKFgzWSH/LtpolGQ=; t=1733825726;
+	x=1734257726; b=B+4L3EIMZ38+Y03z/YLEtAQ/pzObRQZ+lLKq8ubju2Sbdah6TeYmvEgZpeJFc
+	PDoCK1MCxQHC7Rw0IcA57xFFq47lZKnT07G15vSnPgiworJGM6/7+TieEu9NxgH/81CC8wpSaDdCW
+	rjreCYIm/+D1BDXU0cxzt7cGqPPt0Vo5FtIqyDRcVSQNs9NmAVHAYFO1cT+SlDrjFJzvBMtgohaWL
+	iFq1G01NgJ8fmO1Chzj2pgn8LcqV4p1IClzcdmNx1SyF5LGT4cMkbjQ4vlyps86hAnob4mEX/umPM
+	2gEy6GPSfjNO7uAe/4H1Y9PkKataH9Jmh8ILVdYQY/gPGSSymw==;
 Received: from ip4d148da6.dynamic.kabel-deutschland.de ([77.20.141.166] helo=truhe.fritz.box); authenticated
 	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	id 1tKxGv-002jXf-0g;
+	id 1tKxGv-002jXf-1s;
 	Tue, 10 Dec 2024 11:15:17 +0100
 From: Thorsten Leemhuis <linux@leemhuis.info>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -53,9 +53,9 @@ To: Jonathan Corbet <corbet@lwn.net>,
 	linux-doc@vger.kernel.org
 Cc: Linus Torvalds <torvalds@linux-foundation.org>,
 	Greg KH <gregkh@linuxfoundation.org>
-Subject: [PATCH v1 3/6] docs: 6.Followthrough.rst: interaction with stable wrt to regressions
-Date: Tue, 10 Dec 2024 11:15:12 +0100
-Message-ID: <d7793d2e788e7d98a67e90f85a77d42dab1b8da1.1733825632.git.linux@leemhuis.info>
+Subject: [PATCH v1 4/6] docs: 6.Followthrough.rst: tags to use in regressions fixes
+Date: Tue, 10 Dec 2024 11:15:13 +0100
+Message-ID: <5913a87f05a5fe53afb9aae151f60f83bda128e8.1733825632.git.linux@leemhuis.info>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <cover.1733825632.git.linux@leemhuis.info>
 References: <cover.1733825632.git.linux@leemhuis.info>
@@ -66,11 +66,11 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1733825727;175a7289;
-X-HE-SMSGID: 1tKxGv-002jXf-0g
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1733825726;c4973ef4;
+X-HE-SMSGID: 1tKxGv-002jXf-1s
 
-Add a few notes on how the interaction with the stable team works when
-it comes to mainline regressions that also affect stable series.
+Add a few notes on the appropriate tags to be used in changes that fix
+regressions.
 
 This removes equivalent paragraphs from a section in
 Documentation/process/handling-regressions.rst, which will become mostly
@@ -78,74 +78,63 @@ obsolete through this and follow-up changes.
 
 Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
 ---
- Documentation/process/6.Followthrough.rst     | 22 +++++++++++++++++++
- .../process/handling-regressions.rst          | 19 ----------------
- 2 files changed, 22 insertions(+), 19 deletions(-)
+
+Note:
+
+* Not sure if the "add a second Fixes: tag for the change that exposed
+  an earlier problem" is appropriate, but it results in the most
+  reliable solution without much overhead.
+
+* On a brief look it might seem like this changes the "participation in
+  stable is optional for mainline developers" approach. But that is not
+  the case, as the point is just kindly asking developers to take care
+  of stable inclusion.
+---
+ Documentation/process/6.Followthrough.rst      | 16 ++++++++++++++++
+ Documentation/process/handling-regressions.rst |  7 -------
+ 2 files changed, 16 insertions(+), 7 deletions(-)
 
 diff --git a/Documentation/process/6.Followthrough.rst b/Documentation/process/6.Followthrough.rst
-index f9ae3a86ee0c49..763a80d21240f0 100644
+index 763a80d21240f0..2ba16a71aba9b4 100644
 --- a/Documentation/process/6.Followthrough.rst
 +++ b/Documentation/process/6.Followthrough.rst
-@@ -234,6 +234,28 @@ On procedure:
+@@ -234,6 +234,22 @@ On procedure:
     requests again should ideally come directly from maintainers or happen in
     accordance with them.
  
-+Regarding stable and longterm series:
++On tags in the patch description of regressions fixes:
 +
-+ - You are free to leave handling regressions to the stable team if the problem
-+   at no point in time occurred with mainline or was fixed there already.
++ - Include the tags Documentation/process/5.Posting.rst mentions for
++   regressions; this usually means a "Reported-by:" tag followed by "Link:" or
++   "Closes:" tag pointing to the report as well as a "Fixes:" tag; if it's a
++   regression a later change exposed, add a "Fixes:" tag for that one, too.
 +
-+ - When receiving reports about regressions in recent stable or longterm kernel
-+   series, consider evaluating at least briefly if the issue might happen in
-+   current mainline as well -- and if that seems likely, take hold of the
-+   report.  If in doubt, ask the reporter to check mainline.
++ - Did the culprit make it into a proper mainline release during the past
++   twelve months? Or is it a recent mainline commit backported to stable or
++   longterm releases in the past few weeks? Then you are kindly asked to ensure
++   stable inclusion as described by Documentation/process/stable-kernel-rules.rst.
++   Usually you want to realized thos by adding a "Cc: stable@vger.kernel.org" to
++   the patch description.  Note, a "Fixes:" tag alone does not guarantee a
++   backport, as the stable team does not pick up all such changes and might
++   silently drop them in case trouble arises.
 +
-+ - Fix regressions quickly in mainline, whenever you want to swiftly resolve one
-+   that recently made it into a mainline, stable, or longterm release; in urgent
-+   cases hence involve Linus to fast-track fixes (see above).  This route is
-+   required, as the stable team normally does neither revert nor fix any changes
-+   in their trees, as long as they cause the same problem in mainline.
-+
-+ - In case of urgent fixes for regression affecting a recent mainline, stable,
-+   or longterm release, you might want to ensure prompt backporting by dropping
-+   the stable team a note once the fix was mainlined; this is especially
-+   advisable during merge windows and shortly thereafter, as the fix otherwise
-+   might land at the end of a huge patch queue.
-+
+ Regarding stable and longterm series:
  
- Other things that can happen
- -----------------------------
+  - You are free to leave handling regressions to the stable team if the problem
 diff --git a/Documentation/process/handling-regressions.rst b/Documentation/process/handling-regressions.rst
-index c020418499f6a2..cfb44a9928d450 100644
+index cfb44a9928d450..da53e12fc6d96c 100644
 --- a/Documentation/process/handling-regressions.rst
 +++ b/Documentation/process/handling-regressions.rst
-@@ -198,30 +198,11 @@ On procedure:
+@@ -196,13 +196,6 @@ On procedure:
+    regressions to be handled like those from the current cycle, unless fixing
+    bears unusual risks.
  
- Regarding stable and longterm kernels:
- 
-- * You are free to leave regressions to the stable team, if they at no point in
--   time occurred with mainline or were fixed there already.
+-Regarding stable and longterm kernels:
 -
-  * If a regression made it into a proper mainline release during the past
-    twelve months, ensure to tag the fix with "Cc: stable@vger.kernel.org", as a
-    "Fixes:" tag alone does not guarantee a backport. Please add the same tag,
-    in case you know the culprit was backported to stable or longterm kernels.
- 
-- * When receiving reports about regressions in recent stable or longterm kernel
--   series, please evaluate at least briefly if the issue might happen in current
--   mainline as well -- and if that seems likely, take hold of the report. If in
--   doubt, ask the reporter to check mainline.
--
-- * Whenever you want to swiftly resolve a regression that recently also made it
--   into a proper mainline, stable, or longterm release, fix it quickly in
--   mainline; when appropriate thus involve Linus to fast-track the fix (see
--   above). That's because the stable team normally does neither revert nor fix
--   any changes that cause the same problems in mainline.
--
-- * In case of urgent regression fixes you might want to ensure prompt
--   backporting by dropping the stable team a note once the fix was mainlined;
--   this is especially advisable during merge windows and shortly thereafter, as
--   the fix otherwise might land at the end of a huge patch queue.
+- * If a regression made it into a proper mainline release during the past
+-   twelve months, ensure to tag the fix with "Cc: stable@vger.kernel.org", as a
+-   "Fixes:" tag alone does not guarantee a backport. Please add the same tag,
+-   in case you know the culprit was backported to stable or longterm kernels.
 -
  On patch flow:
  
