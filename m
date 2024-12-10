@@ -1,145 +1,117 @@
-Return-Path: <linux-doc+bounces-32370-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32375-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADC979EADB4
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 11:14:30 +0100 (CET)
-Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3D373162F48
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 10:14:25 +0000 (UTC)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8B2C78F4B;
-	Tue, 10 Dec 2024 10:14:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="TKGdfG99"
-X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 916F19EADC1
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 11:15:45 +0100 (CET)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BBF223DEBA;
-	Tue, 10 Dec 2024 10:14:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733825648; cv=none; b=Qo9dOF3dyVARpeKrtsc1Wmzl8vOLU8wR62EOHF1I8ROh7L8zBAJlZczYli3LoEXgUtUS8itK3DeWv6SZPrydjW/OHCTRZ6FCOvY8Iv+snoMrG06Xb38tmz/2fPE1tT/X6Tu5CqC6mYyVRrEtzl3hn0QM/9LzyzyqvF19QG1XDpE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733825648; c=relaxed/simple;
-	bh=lujt3h3CG05++c6e+i+W692dngHXG+tuybMjifRcWR4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=PCUaeILsEKFKIfN2EOXCddHXqJ7h+cg4mDq5OC+lfNd2mSNTHx71RMEXJdlNSNAcgkKC8jA8DFxXf5JPO6vHzvhZJo6EJmeiFToVwGCu9bm2OlzMnVmN2qZU4vhikKfnHOwg/Ve8ipWr4diaH9ghI/4fg5muZrhXzS3inFqsuWg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=TKGdfG99; arc=none smtp.client-ip=65.109.113.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id EF33640E02B9;
-	Tue, 10 Dec 2024 10:14:02 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
-	header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
-	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id Sowt0oMZdali; Tue, 10 Dec 2024 10:13:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-	t=1733825639; bh=yrGa7tpyKCRTPnqr9DVCHERHwkS6nI41a3G5vTxiZOA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=TKGdfG99NQvFzj1PHJgtpk5QguaEOoOqzYZ+H7oUmDkZikMh28uI5CPlmBiqUohXS
-	 Ilzb14h0rxoxxjUbob34sNJ/4ZFVjnM9sDmoFdApmFQMvZqviITcs0A7FclutCiJmB
-	 vilryZ4AeWg7SK5V3mYGmgJoeC9wjtuPWrVUBEVdeefeZ78GFUBsHt7/PnS42idIvP
-	 A2Mww5ncWMq+vRThsnFbCFsRNqqbC7L3miqri5a7cRhE6SSBC2+UU3gOYynpQ/izpg
-	 FIKqKJNv9jrwZ5fM44ovGE4av8t5ZfhA1pj23GNukXlVTAVhveLW10QUsh08DMCLbl
-	 NmaOnJQhkQIZ/geAlGu3mnVLZdEcMagg8vx2uabE498hIaQMcjfUekDMqKUhG3QYOA
-	 0jR7QW4r3VeZSo8WWnX2Mf80BA97TPlIzZZ9zzvpFlVTh0b2JZuCt98dLj0z2chBeK
-	 yh1+cFHZYECg15fH4fCrwszq8yBCy+8wE8fmpZ/uHwJ5I7ELsrLwXGHSZmiV9JYaQC
-	 aS3M9OiE7x9lCdHVcfChKVVtLry8GwH47LJgC+DwDeCfP5sB/mJoH7eK44wmLx7rE0
-	 wmzFPvPEzgiW564DNxSIAiszWWG6pBM/Ti9DgGw1NiihSByksUUJsDsm0hddt7wUgg
-	 pVQnj2RsDd8ECv/LAHE3ZG98=
-Received: from zn.tnic (p200300ea971f9307329c23fffea6a903.dip0.t-ipconnect.de [IPv6:2003:ea:971f:9307:329c:23ff:fea6:a903])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2F67F28784D
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 10:15:41 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4719B136672;
+	Tue, 10 Dec 2024 10:15:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="rGGr7k8G"
+X-Original-To: linux-doc@vger.kernel.org
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id EC24040E0286;
-	Tue, 10 Dec 2024 10:13:44 +0000 (UTC)
-Date: Tue, 10 Dec 2024 11:13:39 +0100
-From: Borislav Petkov <bp@alien8.de>
-To: "Luck, Tony" <tony.luck@intel.com>
-Cc: Reinette Chatre <reinette.chatre@intel.com>,
-	"Yu, Fenghua" <fenghua.yu@intel.com>,
-	Peter Newman <peternewman@google.com>,
-	Jonathan Corbet <corbet@lwn.net>, "x86@kernel.org" <x86@kernel.org>,
-	James Morse <james.morse@arm.com>,
-	Jamie Iles <quic_jiles@quicinc.com>,
-	Babu Moger <babu.moger@amd.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	"Shaopeng Tan (Fujitsu)" <tan.shaopeng@fujitsu.com>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"patches@lists.linux.dev" <patches@lists.linux.dev>
-Subject: Re: [PATCH v11 2/8] x86/resctrl: Prepare for per-CTRL_MON group
- mba_MBps control
-Message-ID: <20241210101339.GBZ1gUU3LiI7wAS3vQ@fat_crate.local>
-References: <20241206163148.83828-1-tony.luck@intel.com>
- <20241206163148.83828-3-tony.luck@intel.com>
- <20241209204519.GAZ1dW3-NjcL4Sewaf@fat_crate.local>
- <SJ1PR11MB6083BA367F2CDFC92D87FDA1FC3C2@SJ1PR11MB6083.namprd11.prod.outlook.com>
- <20241209222047.GKZ1dtPxIu5_Hxs1fp@fat_crate.local>
- <SJ1PR11MB60830B8ED36CCA7E304D9E97FC3C2@SJ1PR11MB6083.namprd11.prod.outlook.com>
- <678cef69-78ef-4951-bd31-10abe646e6d8@intel.com>
- <Z1eEti6Kswtb3HC5@agluck-desk3>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56D061DC9AB;
+	Tue, 10 Dec 2024 10:15:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1733825729; cv=none; b=kUZ2sLEHB6dOe8BuwlIN+mnGriVQNc1WBETNTdn4ObfAAAEu8tyVAPoIp2k4PnOQ/CAb9qXsKCpNswiuuIwssAmn+1P7IPJynjuqgwVNpD6qbLgLGUnxMcLiEXh5UVEXWO5CVhCriulIi0SRFQPSfmIX6LmiZ+xKwIykQHJL5bc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1733825729; c=relaxed/simple;
+	bh=ZltGseGxuALKA9lgjvDB+bTy0Jf+ZCxdTO0exFuu8g8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=IH1/JXKKCT8+lWG5F3dIDHIEoip1vq1Z+tJRtVCWGAPzze6UcjTdqd3SSUNBuUwTS/lG2UqjaA6qemZh9CNtPytn5YmnzDzq9RqsH7x/RNO+nbHLrgcpu9mn5DzxPXD/b/dKeEGEkMAKaccys9hq006iPSTiXGjS8OMEIMz6ZPU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=rGGr7k8G; arc=none smtp.client-ip=80.237.130.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:Content-Type:
+	MIME-Version:Message-ID:Date:Subject:Cc:To:From:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=h23UIyxbntaprmGdDox3nJG9jMNwsQhMEAgLKpnaLtU=; t=1733825727; x=1734257727; 
+	b=rGGr7k8GaXZHVfqKD9HBH1WSfatMDTZGPVcOGmvL3O1xmaC9FgqLO0v6X8qKdPrdZvFqwcRvT7j
+	PUdUlE6tEURvDR4nke7a3wfn34rJDjwlnDK3Ag3VW2P1+0Pa5QIhFdRYW1Mbl2r4Z3EU2LIHgsFZP
+	pnROJrAvNOx00MOQzS06/8wufsKHghkx+Adl0oyMn3K+3UkDfXHDue0wDUNF/+6+Q8L2qBRlgnIc+
+	3eeYH0BLH2NlWbKUASkpeP30uxlXpolIDH5vQoahJaVWlcTkCXCMQenjrjFMYxRK4KnEmIBLl3Zpl
+	IY4Vop65YiU/zWioix7BeSm5Erj907sBmIqw==;
+Received: from ip4d148da6.dynamic.kabel-deutschland.de ([77.20.141.166] helo=truhe.fritz.box); authenticated
+	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	id 1tKxGu-002jXf-0D;
+	Tue, 10 Dec 2024 11:15:16 +0100
+From: Thorsten Leemhuis <linux@leemhuis.info>
+To: Jonathan Corbet <corbet@lwn.net>,
+	workflows@vger.kernel.org,
+	regressions@lists.linux.dev,
+	linux-doc@vger.kernel.org
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+	Greg KH <gregkh@linuxfoundation.org>
+Subject: [PATCH v1 0/6] docs: add instruction about handling regressions to our core texts for contributors
+Date: Tue, 10 Dec 2024 11:15:09 +0100
+Message-ID: <cover.1733825632.git.linux@leemhuis.info>
+X-Mailer: git-send-email 2.45.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <Z1eEti6Kswtb3HC5@agluck-desk3>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1733825727;175a7289;
+X-HE-SMSGID: 1tKxGu-002jXf-0D
 
-On Mon, Dec 09, 2024 at 04:00:54PM -0800, Luck, Tony wrote:
-> Reinette is right. The post-split home of this is not <linux/resctrl.h>
-> but fs/resctrl/internal.h which doesn't exist yet.
-> 
-> So Boris is right, this declaration should be added to arch/x86/kernel/cpu/resctrl/internal.h
-> by this patch to be moved later.
+Add some more detailed instruction on handling regressions to our core
+texts for contributors, e.g. Documentation/process/6.Followthrough.rst
+and Documentation/process/submitting-patches.rst. This was asked for at
+the last Maintainer Summit[1] and is meant to help clarifing what's
+expected.
 
-Done:
+The added instructions are somewhat inspired by existing and sometimes
+similar text in Documentation/process/handling-regressions.rst which is
+semoved during the series.
 
-diff --git a/arch/x86/kernel/cpu/resctrl/internal.h b/arch/x86/kernel/cpu/resctrl/internal.h
-index 485800055a7d..542d01c055aa 100644
---- a/arch/x86/kernel/cpu/resctrl/internal.h
-+++ b/arch/x86/kernel/cpu/resctrl/internal.h
-@@ -510,6 +510,7 @@ extern struct mutex rdtgroup_mutex;
- extern struct rdt_hw_resource rdt_resources_all[];
- extern struct rdtgroup rdtgroup_default;
- extern struct dentry *debugfs_resctrl;
-+extern enum resctrl_event_id mba_mbps_default_event;
- 
- enum resctrl_res_level {
- 	RDT_RESOURCE_L3,
-@@ -653,5 +654,4 @@ void resctrl_file_fflags_init(const char *config, unsigned long fflags);
- void rdt_staged_configs_clear(void);
- bool closid_allocated(unsigned int closid);
- int resctrl_find_cleanest_closid(void);
--
- #endif /* _ASM_X86_RESCTRL_INTERNAL_H */
-diff --git a/include/linux/resctrl.h b/include/linux/resctrl.h
-index fd05b937e2f4..d94abba1c716 100644
---- a/include/linux/resctrl.h
-+++ b/include/linux/resctrl.h
-@@ -49,8 +49,6 @@ enum resctrl_event_id {
- 	QOS_L3_MBM_LOCAL_EVENT_ID	= 0x03,
- };
- 
--extern enum resctrl_event_id mba_mbps_default_event;
--
- /**
-  * struct resctrl_staged_config - parsed configuration to be applied
-  * @new_ctrl:		new ctrl value to be loaded
+The patch-set starts with some basics, which are based on the existing
+text or recent statements from Linus. I tried to stay close to what was
+said, but used my own words here -- if I got something wrong just tell
+me so I can fix this.
 
+The guidelines then are extended in multiple steps to cover more things
+and be more specific in some areas. Some of that is meant to work
+against problems I noticed during my regression tracking work. Most of
+these are my words. These thus need to be discussed properly and in the
+end ideally ACKed by Linus, so we all know what he wants. The parts I
+expect to get more discussion are found near the end of the patchset.
+
+Link: https://lwn.net/Articles/990599/ [1]
+Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
+---
+
+v1:
+- initial version
+
+Thorsten Leemhuis (6):
+  docs: more detailed instructions on handling regressions
+  docs: 6.Followthrough.rst: when to involved Linus in regressions
+  docs: 6.Followthrough.rst: interaction with stable wrt to regressions
+  docs: 6.Followthrough.rst: tags to use in regressions fixes
+  docs: 6.Followthrough.rst: more specific advice on fixing regressions
+  docs: 6.Followthrough.rst: advice on handling regressions fixes
+
+ Documentation/process/6.Followthrough.rst     | 152 ++++++++++++++++--
+ .../process/handling-regressions.rst          | 111 +------------
+ Documentation/process/submitting-patches.rst  |  20 +++
+ 3 files changed, 157 insertions(+), 126 deletions(-)
+
+
+base-commit: 010a08cbf0d63b246c4cd0d385c3f664add2322d
 -- 
-Regards/Gruss,
-    Boris.
+2.45.0
 
-https://people.kernel.org/tglx/notes-about-netiquette
 
