@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-32374-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32376-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id F16149EADBF
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 11:15:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A84E9EADC2
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 11:15:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 387381654C7
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 10:15:38 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 856D91648D3
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Dec 2024 10:15:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6ACBB2080C2;
-	Tue, 10 Dec 2024 10:15:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6B6A22080D2;
+	Tue, 10 Dec 2024 10:15:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="neSwzHNg"
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="Yk2izQoI"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E17F1DC9A3;
-	Tue, 10 Dec 2024 10:15:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56D521DC9AC;
+	Tue, 10 Dec 2024 10:15:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733825728; cv=none; b=XdjVOLjqNEYM/JpV/NlH5Ss703en5RUotNgvgUxSwL8OsVK+UGBwmRyaaz560Ukw4/Xs8Sm9Jj/1QZi17f5g+FJ5TQpZphOkq9AliCKo9lZI/IgRWuJYVRnu91w0wGQaOZadKLG4P4lT9+wxmYlS6IABzVMto/wGe30TjA/Y8Jw=
+	t=1733825729; cv=none; b=lt+DhdipvXXfdHNeo5UTNO/Opew+x2IuxhDmjocDB9TZYmtL53Z0S3oouFcz6cEeUMFUNEqRUiHnjyS0ME6XNXCPOfYgcSAucxC0PRqDcR9V5pK7839VaAW4qZSFV6CYIVUtf3/z2OYctd1mtu4lRBGBEayahkL9pw/fJG3I9BY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733825728; c=relaxed/simple;
-	bh=2PMLC5BN8wVTbaaNelE8ioYs446IHpVxgMmJU4ZGsbM=;
+	s=arc-20240116; t=1733825729; c=relaxed/simple;
+	bh=mHkP2GxOKxLF06Amj/Y5paYmO/pEeFZUTqFb2hJYp7U=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Q4cT4l88hqPw7YV4RChLe/0h8NMjtf26i48KdA2WBuEJGBvb5TP58g3Ay9ns7zI1skSZ5AYeasZL67NZVdSPDN7dw5IIDHojhZoCmw5X0ilOjU53b9SqU0CjOFR1/EIRz1k78zWr9f7iBnEEQG74+N/V/juILy/wHeVOVjPuTvE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=neSwzHNg; arc=none smtp.client-ip=80.237.130.52
+	 MIME-Version; b=iWz6J5J+OpZTqKbYpe02BAR4DYan2HOpqbYWtQ7tFsay59F9mqy39LrD9lCJaHNcy5T+0/SRbJaWZ0dVzC/bt4DriH3WMvS0OXiipqEMDhvmKG22XNDrEa7klXvqj3KgNqacobw44K4rDPrtMKd0qFug+1lbI4v6cljy0jKyZnM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=Yk2izQoI; arc=none smtp.client-ip=80.237.130.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:From:
-	Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:From:Sender:
+	Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
 	Content-Transfer-Encoding:Content-ID:Content-Description:In-Reply-To:
-	References; bh=ahjcsGXw4ZfM2U7SsioqatwWP2oPey5xE3kDciJUL9k=; t=1733825726;
-	x=1734257726; b=neSwzHNgAOSpr/Kz2FAwkqvf7Z6cqxjk/r1NICjZNCf2VruB8Ty84GbN3bPUO
-	KxjLqYrHD3XGDns/TWDl77lm3pEfKGAfAF4UNXAGKwBYxaLZs1CUe+Up+sOBXhAHa+VJWDj27J1y8
-	Uu7tDa8idb4DoeLE5jy+5K0SkYF5fPrcq1YZHrxEbJ7nLzBKiJV6kmw2WZYk2UQFEPwcc+hlAPOJU
-	zXNslZR/HdC4WA0mHvoyFmKcgIR+jxzkaIwge6bGLaHVZKmx69TkXGkaoPYu1RAeHi3lKj5LLylPn
-	YknK4NKhQQa8fGw7WPBpN4XPqKjTFOPjRUfRrBSor72hYnGzYg==;
+	References; bh=nHNWsr9PXBfwQ8xcXooKSWcHEYRD44ZDgDJJEFR7q4o=; t=1733825727;
+	x=1734257727; b=Yk2izQoIamJfD/J8TQL69V1bBuCellpEdY9u71oJch0j4Zxi9vUeQTCfzblad
+	ON9NNMhNFZbDcSUN7QnE29R0pDmsFt3do5xqlcYQq298xYHXL86YlEQRiBObBerRzMQyUG5UC1Z6n
+	ROO43iz4DjnXpKbOSR4wXzhneSARt1Ge8v+xjEVaz2u2261CQyuNRmbCpf4IxINDOZQmYJu25ogEO
+	Zcb+C+pAR+avyVUN5B0hiojjWtVvWz33biwfSdc1BZHPOEKWBLWYWC4PfAk7/trczTGjt0v6KKs/j
+	O7+hViYQzZvFUubupWSCWKsDluHGVJQLWBYmTK/mS7n/9CCUdw==;
 Received: from ip4d148da6.dynamic.kabel-deutschland.de ([77.20.141.166] helo=truhe.fritz.box); authenticated
 	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	id 1tKxGv-002jXf-2s;
-	Tue, 10 Dec 2024 11:15:17 +0100
+	id 1tKxGw-002jXf-0y;
+	Tue, 10 Dec 2024 11:15:18 +0100
 From: Thorsten Leemhuis <linux@leemhuis.info>
 To: Jonathan Corbet <corbet@lwn.net>,
 	workflows@vger.kernel.org,
@@ -53,9 +53,9 @@ To: Jonathan Corbet <corbet@lwn.net>,
 	linux-doc@vger.kernel.org
 Cc: Linus Torvalds <torvalds@linux-foundation.org>,
 	Greg KH <gregkh@linuxfoundation.org>
-Subject: [PATCH v1 5/6] docs: 6.Followthrough.rst: more specific advice on fixing regressions
-Date: Tue, 10 Dec 2024 11:15:14 +0100
-Message-ID: <fb5f1b83786c31cbbf56621b14d595a3091d9a40.1733825632.git.linux@leemhuis.info>
+Subject: [PATCH v1 6/6] docs: 6.Followthrough.rst: advice on handling regressions fixes
+Date: Tue, 10 Dec 2024 11:15:15 +0100
+Message-ID: <e7344ff7a57b61380152defaa5ec13f06ac5d7d0.1733825632.git.linux@leemhuis.info>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <cover.1733825632.git.linux@leemhuis.info>
 References: <cover.1733825632.git.linux@leemhuis.info>
@@ -65,15 +65,13 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1733825726;c4973ef4;
-X-HE-SMSGID: 1tKxGv-002jXf-2s
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1733825727;175a7289;
+X-HE-SMSGID: 1tKxGw-002jXf-0y
 
-Provide something more concrete about fixing regressions in a few
-places, as telling people to "expedite" fixing those that reached a
-release deemed for end users is pretty vague. But every situation is
-different, so use the soft phrases like "aim for" and leave loopholes.
+Add some advice on how to handle regressions as developer, reviewer, and
+maintainer, as resolving regression without unnecessary delays requires
+multiple people working hand in hand.
 
 This removes equivalent paragraphs from a section in
 Documentation/process/handling-regressions.rst, which will become mostly
@@ -81,130 +79,79 @@ obsolete through this and follow-up changes.
 
 Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
 ---
-
-Note, the bits that remain like the "past year" aspect are based on
-statements from Linus. Other parts are made up and need to be discussed,
-especially the "past six weeks" thing followed by "aim to mainline a fix
-before the end of the week after the next" and the "[…] taking one more
-week is fine." shortly after.
-
-Those targets are derived from experiences during regression tracking
-and the text currently in Documentation/process/handling-regressions.rst
-that was ACKed by Greg -- just like an earlier version which had even
-shorter time spans. They came into being from calculating backwards how
-long users would be exposed to regressions, as then you need to include
-"someone with the right set of skills needs to notice, bisect and report
-the problem to the right developer", which often will take at least two
-to four days days; you furthermore need to take into account how long it
-takes for the fix to reach regular users through a new stable release,
-which usually happen three to six days after it made it to a new
-mainline -rc release. That's why users might be exposed to a regression
-for three to four weeks in total, even if it's fixed after a bit more
-than two weeks in mainline. That "after a new mainline-rc release" is
-also one reason why the text uses the phrase "before the end of the
-week", as regression fixes that are mainlined on Monday might just miss
-a stable -rc, which often will delay pickup by a whole week (and this
-mean ~10+ days to reach users).
----
- Documentation/process/6.Followthrough.rst     | 30 ++++++++++----
- .../process/handling-regressions.rst          | 40 -------------------
- 2 files changed, 23 insertions(+), 47 deletions(-)
+ Documentation/process/6.Followthrough.rst     | 24 ++++++++++++++++---
+ .../process/handling-regressions.rst          | 16 -------------
+ 2 files changed, 21 insertions(+), 19 deletions(-)
 
 diff --git a/Documentation/process/6.Followthrough.rst b/Documentation/process/6.Followthrough.rst
-index 2ba16a71aba9b4..587e80578f83a9 100644
+index 587e80578f83a9..8ffa3cd142e8a0 100644
 --- a/Documentation/process/6.Followthrough.rst
 +++ b/Documentation/process/6.Followthrough.rst
-@@ -198,16 +198,32 @@ maintainers and other developers will take note if you fail to handle regression
+@@ -198,6 +198,11 @@ maintainers and other developers will take note if you fail to handle regression
  appropriately, especially if they then have to fix the problem themselves: this
  could well make it harder for you to incorporate future changes.
  
--On timing:
-+On timing once the mainline change causing the regression became known:
- 
-- - Expedite fixing regressions that reached releases deemed for end users
--   through new mainline releases or stable backports during the past year.
-+ - If the regression is severe or reported by many people within a short
-+   timeframe, aim to mainline a fix within two or three days and ideally before
-+   the end of the week.
- 
-- - If the culprit was mainlined during the current development cycle and not
--   backported to stable, fix the regression before -rc6.
-+ - Expedite fixing regressions that recently reached releases deemed for end
-+   users through new mainline releases or stable backports.  If the culprit
-+   reached it in the past six weeks, aim to mainline a fix before the end of the
-+   week after the next; if it landed during the past year, taking one more week
-+   is fine.  Whenever possible, try to resolve the issue faster -- but it's also
-+   okay to take more time if there are strong reasons and a revert no option.
- 
-- - If a proper regression fix is unlikely to become ready in a reasonable
--   timeframe, resolve the regression by reverting the culprit.  This is
-+ - If the culprit was mainlined during the current development cycle and not
-+   backported to stable, fix the regression before -rc6. But try to resolve it
-+   faster whenever possible -- especially if the issue is either reported
-+   multiple times or prevents CI systems or multiple users from testing, as that
-+   might mask other bugs and drive testers away.
++In general:
 +
-+ - Try your best to mainline all regressions fixes before the current
-+   development cycle ends, unless the culprit was committed more than a year
-+   ago: then it is acceptable to queue a fix for the next merge window, which
-+   is even advisable in case the change bears bigger risks.
++ - Prioritize work on providing, reviewing, and mainlining regression fixes over
++   other upstream Linux kernel work.
 +
-+ - If mainlining a proper fix within the timeframes outlined above looks
-+   unlikely, resolve the regression by reverting the culprit.  This is
-    considered an reputable approach, as it allows working out and merging an
-    improved variant of the change calmly.
+ On timing once the mainline change causing the regression became known:
  
+  - If the regression is severe or reported by many people within a short
+@@ -229,9 +234,22 @@ On timing once the mainline change causing the regression became known:
+ 
+ On procedure:
+ 
+- - Regression fixes are not required to spend time in linux-next, but depending
+-   on the fix and the alignment with pull requests it might be beneficial to
+-   have them in there for a day or two.
++ - Developers, when trying to reach the time periods mentioned above, remember
++   to account for the time it will take to test, review, commit, and mainline
++   fixes, ideally with them being in linux-next briefly.  To achieve that, make
++   the appropriate urgency of a fix obvious in the submission and consider
++   opting for a revert to be on the safe side.
++
++ - Reviewers, you are kindly asked to prefer reviewing regression fixes over
++   other changes.
++
++ - Maintainers, you likewise are kindly asked to expedite the handling of
++   regression fixes.  They for example are not required to spend time in
++   linux-next, but depending on the fix and the alignment with pull requests it
++   might be beneficial to have them in there for a day or two.  When appropriate,
++   also consider sending an additional pull request.  Furthermore try to avoid
++   holding onto regression fixes over weekends -- especially when some are
++   marked for backporting to stable series.
+ 
+  - If a regression seems tangly, precarious, or urgent, consider CCing Linus on
+    discussions and patch reviews; do the same if the responsible maintainers
 diff --git a/Documentation/process/handling-regressions.rst b/Documentation/process/handling-regressions.rst
-index da53e12fc6d96c..581f99675a9d52 100644
+index 581f99675a9d52..7b8f0b122c1552 100644
 --- a/Documentation/process/handling-regressions.rst
 +++ b/Documentation/process/handling-regressions.rst
-@@ -156,46 +156,6 @@ only these options:
+@@ -156,22 +156,6 @@ only these options:
  How to realize that in practice depends on various factors. Use the rules of
  thumb outlined in Documentation/process/6.Followthrough.rst as a guide.
  
--In general:
+-On patch flow:
 -
-- * Prioritize work on regressions over all other Linux kernel work, unless the
--   latter concerns a severe issue (e.g. acute security vulnerability, data loss,
--   bricked hardware, ...).
+- * Developers, when trying to reach the time periods mentioned above, remember
+-   to account for the time it takes to get fixes tested, reviewed, and merged by
+-   Linus, ideally with them being in linux-next at least briefly. Hence, if a
+-   fix is urgent, make it obvious to ensure others handle it appropriately.
 -
-- * Do not consider regressions from the current cycle as something that can wait
--   till the end of the cycle, as the issue might discourage or prevent users and
--   CI systems from testing mainline now or generally.
+- * Reviewers, you are kindly asked to assist developers in reaching the time
+-   periods mentioned above by reviewing regression fixes in a timely manner.
 -
-- * Work with the required care to avoid additional or bigger damage, even if
--   resolving an issue then might take longer than outlined below.
+- * Subsystem maintainers, you likewise are encouraged to expedite the handling
+-   of regression fixes. Thus evaluate if skipping linux-next is an option for
+-   the particular fix. Also consider sending git pull requests more often than
+-   usual when needed. And try to avoid holding onto regression fixes over
+-   weekends -- especially when the fix is marked for backporting.
 -
--On timing once the culprit of a regression is known:
--
-- * Aim to mainline a fix within two or three days, if the issue is severe or
--   bothering many users -- either in general or in prevalent conditions like a
--   particular hardware environment, distribution, or stable/longterm series.
--
-- * Aim to mainline a fix by Sunday after the next, if the culprit made it
--   into a recent mainline, stable, or longterm release (either directly or via
--   backport); if the culprit became known early during a week and is simple to
--   resolve, try to mainline the fix within the same week.
--
-- * For other regressions, aim to mainline fixes before the hindmost Sunday
--   within the next three weeks. One or two Sundays later are acceptable, if the
--   regression is something people can live with easily for a while -- like a
--   mild performance regression.
--
-- * It's strongly discouraged to delay mainlining regression fixes till the next
--   merge window, except when the fix is extraordinarily risky or when the
--   culprit was mainlined more than a year ago.
--
--On procedure:
--
-- * Try to resolve any regressions introduced in mainline during the past
--   twelve months before the current development cycle ends: Linus wants such
--   regressions to be handled like those from the current cycle, unless fixing
--   bears unusual risks.
--
- On patch flow:
  
-  * Developers, when trying to reach the time periods mentioned above, remember
+ More aspects regarding regressions developers should be aware of
+ ----------------------------------------------------------------
 -- 
 2.45.0
 
