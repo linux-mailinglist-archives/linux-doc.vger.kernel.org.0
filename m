@@ -1,114 +1,190 @@
-Return-Path: <linux-doc+bounces-32560-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32555-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FEBC9EE635
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 13:05:13 +0100 (CET)
-Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5004918896E5
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 12:04:09 +0000 (UTC)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7582B212B03;
-	Thu, 12 Dec 2024 12:01:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="PgMCsYUe"
-X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF9F69EE577
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 12:51:18 +0100 (CET)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9EBD211A1F;
-	Thu, 12 Dec 2024 12:01:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6524B2831B0
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 11:51:16 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50D951F7544;
+	Thu, 12 Dec 2024 11:51:14 +0000 (UTC)
+X-Original-To: linux-doc@vger.kernel.org
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5E48158DB1;
+	Thu, 12 Dec 2024 11:51:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734004917; cv=none; b=njeiUtjXvLdBRM3ya1U0lIs6dH30NDCpbhLZdfQK9rdj8ZcOwwMM8PyDV71Z679rJtS6JzVRIGvS89b0g76sXv/SBO7Y2zJcIph9I97axWAtGzU0w0wkbB2l0CxB5cwbIFrePJAHAoQ1m0bfOOvbQetWjCzg1pF2L+fqNalbokA=
+	t=1734004274; cv=none; b=NsWGVhJueTZZMUWoTMa7jOwLBJhzs4Ku1Khmu4AxbGo1k89ZMEQ+e1zgFeOd6y3pg0aDTFpONtMRgqRaJFcOWfBKOTfpBwd6jIdjxmbOXPxV7UwwSWNhFYINWx/QOkOjbvFVGHhS545SItbzl+XbvWsH44kPayuxWOazFGyI8yQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734004917; c=relaxed/simple;
-	bh=jSqSzyaLyhjRr8wizUe2Y6VnQwAVcfZKmXHFX8I3JZM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=fkiNF4AoOp7mXOwQPpUutwRfZ6OK/F7tWuqZcIXnWO2euxGSmlU1Av9fA+m4oMmQnMb7Ycdh2DlMbnW+Qpg7Xx3RRHdk6TBc++WZ8lHlaHkv7vsMaw2FxeJWn6eq4W1QCmM7QDpf/ETVEafS4xkPZxwtlzH2tARzxQsu/MvQiFs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=PgMCsYUe; arc=none smtp.client-ip=90.155.92.199
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=chs8kHtge7jhj9hPJhn7V5CNCvA4fKVOBxopyTOr1+Q=; b=PgMCsYUeTR6A5WK2t4P+17j5Z1
-	sluClIdKbSv2dEywec3ZGs6mJB1P405+b3kfjmlChBUrrz85pGhJGpn2/HmbmmRzvI2kYEKA55OUc
-	R4e5Ev00pC8nbwVw/vmy75BfPnJWgf4+Bi2Bv8BvjruvgP1qEVgwb1m/0ruue0kgO6EYseNrn+Jak
-	FqnbRvwgK3uP6qtWpdsuRDe6pPj9vgIfGTEDnzGg0qi1eDU6FzyipWnHGmBTNlpxgH6MhyWuI3E4a
-	B9tSLc6/j582qChR+TovWU8IBcrEfV/fXOhAkN2ZTOYuCeHU53939wuIjjY/1g0CoM4Ewy4c+lEV5
-	dCAmBOWA==;
-Received: from 77-249-17-89.cable.dynamic.v4.ziggo.nl ([77.249.17.89] helo=noisy.programming.kicks-ass.net)
-	by desiato.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
-	id 1tLhsz-000000043Pt-1ohv;
-	Thu, 12 Dec 2024 12:01:41 +0000
-Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
-	id EF1563003FF; Thu, 12 Dec 2024 13:01:40 +0100 (CET)
-Date: Thu, 12 Dec 2024 13:01:40 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Elizabeth Figura <zfigura@codeweavers.com>
-Cc: Arnd Bergmann <arnd@arndb.de>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
-	linux-kernel@vger.kernel.org, linux-api@vger.kernel.org,
-	wine-devel@winehq.org,
-	=?iso-8859-1?Q?Andr=E9?= Almeida <andrealmeid@igalia.com>,
-	Wolfram Sang <wsa@kernel.org>,
-	Arkadiusz Hiler <ahiler@codeweavers.com>,
-	Andy Lutomirski <luto@kernel.org>, linux-doc@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-	Waiman Long <longman@redhat.com>, Boqun Feng <boqun.feng@gmail.com>
-Subject: Re: [PATCH v6 00/28] NT synchronization primitive driver
-Message-ID: <20241212120140.GX21636@noisy.programming.kicks-ass.net>
-References: <20241209185904.507350-1-zfigura@codeweavers.com>
+	s=arc-20240116; t=1734004274; c=relaxed/simple;
+	bh=oubn445uqd0v0CXdIPwBnssEZajwfyX6Dn3lPr8i5DE=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=utmtnu+OeUcluo4SrMgmlNMKcJA9HYTV30wmKsKI1ksIGANtsgQGeyQP20LFE40sbfqHpvpWZI3+2NcI3bcT8eH9/CflxvKWQLXn9xP4Lz+ZW6gveej/xEQe6+rt26mJ1aIxrpWs41cGDJskKEe71isLpvzjaoMmvGCDn/uFEx4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.186.31])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4Y89kl3SYqz6LDfv;
+	Thu, 12 Dec 2024 19:50:07 +0800 (CST)
+Received: from frapeml500005.china.huawei.com (unknown [7.182.85.13])
+	by mail.maildlp.com (Postfix) with ESMTPS id E6EED1403A0;
+	Thu, 12 Dec 2024 19:51:02 +0800 (CST)
+Received: from china (10.200.201.82) by frapeml500005.china.huawei.com
+ (7.182.85.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Thu, 12 Dec
+ 2024 12:50:53 +0100
+From: Gur Stavi <gur.stavi@huawei.com>
+To: Gur Stavi <gur.stavi@huawei.com>, gongfan <gongfan1@huawei.com>
+CC: <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>, "David S.
+ Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub
+ Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
+	<horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
+	<linux-doc@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>, Cai Huoqing
+	<cai.huoqing@linux.dev>, Xin Guo <guoxin09@huawei.com>, Shen Chenyang
+	<shenchenyang1@hisilicon.com>, Zhou Shuai <zhoushuai28@huawei.com>, Wu Like
+	<wulike1@huawei.com>, Shi Jing <shijing34@huawei.com>, Meny Yossefi
+	<meny.yossefi@huawei.com>
+Subject: [RFC net-next v02 0/3] net: hinic3: Add a driver for Huawei 3rd gen NIC
+Date: Thu, 12 Dec 2024 14:04:14 +0200
+Message-ID: <cover.1733990727.git.gur.stavi@huawei.com>
+X-Mailer: git-send-email 2.45.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241209185904.507350-1-zfigura@codeweavers.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ frapeml500005.china.huawei.com (7.182.85.13)
 
-On Mon, Dec 09, 2024 at 12:58:36PM -0600, Elizabeth Figura wrote:
+The patch-set contains driver for Huawei's 3rd generation HiNIC
+Ethernet device that will be available in the future.
 
-> I would like to repeat a question from the last round of review, though. Two
-> changes were suggested related to API design, which I did not make because the
-> APIs in question were already released in upstream Linux. However, the driver is
-> also completely nonfunctional and hidden behind BROKEN, so would this be
-> acceptable anyway? The changes in question are:
-> 
-> * rename NTSYNC_IOC_SEM_POST to NTSYNC_IOC_SEM_RELEASE (matching the NT
->   terminology instead of POSIX),
-> 
-> * change object creation ioctls to return the fds directly in the return value
->   instead of through the args struct. I would also still appreciate a
->   clarification on the advice in [1], which is why I didn't do this in the first
->   place.
+This is an SRIOV device, designed for data centers.
+Initially, the driver only supports VFs.
 
-I see no problem making those changes; esp. since Arnd doesn't seem to
-object to the latter.
+Following the discussion over RFC01, the code will be submitted in
+separate smaller patches where until the last patch the driver is
+non-functional.
+This RFC02 is an overall view of the entire driver but every patch will be
+posted as a standalone submission.
 
-> Elizabeth Figura (28):
->   ntsync: Introduce NTSYNC_IOC_WAIT_ANY.
->   ntsync: Introduce NTSYNC_IOC_WAIT_ALL.
->   ntsync: Introduce NTSYNC_IOC_CREATE_MUTEX.
->   ntsync: Introduce NTSYNC_IOC_MUTEX_UNLOCK.
->   ntsync: Introduce NTSYNC_IOC_MUTEX_KILL.
->   ntsync: Introduce NTSYNC_IOC_CREATE_EVENT.
->   ntsync: Introduce NTSYNC_IOC_EVENT_SET.
->   ntsync: Introduce NTSYNC_IOC_EVENT_RESET.
->   ntsync: Introduce NTSYNC_IOC_EVENT_PULSE.
->   ntsync: Introduce NTSYNC_IOC_SEM_READ.
->   ntsync: Introduce NTSYNC_IOC_MUTEX_READ.
->   ntsync: Introduce NTSYNC_IOC_EVENT_READ.
->   ntsync: Introduce alertable waits.
+Changes:
 
-Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+V01: https://lore.kernel.org/netdev/cover.1730290527.git.gur.stavi@huawei.com
+* Reduce overall line of code by removing optional functionality.
+* Break down into smaller patches.
+
+gongfan (3):
+  net: hinic3: module initialization and tx/rx logic
+  net: hinic3: management interfaces
+  net: hinic3: sw and hw initialization code
+
+ .../device_drivers/ethernet/huawei/hinic3.rst | 136 +++
+ MAINTAINERS                                   |   7 +
+ drivers/net/ethernet/huawei/Kconfig           |   1 +
+ drivers/net/ethernet/huawei/Makefile          |   1 +
+ drivers/net/ethernet/huawei/hinic3/Kconfig    |  16 +
+ drivers/net/ethernet/huawei/hinic3/Makefile   |  25 +
+ .../net/ethernet/huawei/hinic3/hinic3_cmdq.c  | 898 ++++++++++++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_cmdq.h  | 150 +++
+ .../ethernet/huawei/hinic3/hinic3_common.c    |  98 ++
+ .../ethernet/huawei/hinic3/hinic3_common.h    |  54 ++
+ .../net/ethernet/huawei/hinic3/hinic3_csr.h   |  74 ++
+ .../net/ethernet/huawei/hinic3/hinic3_eqs.c   | 786 +++++++++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_eqs.h   | 128 +++
+ .../ethernet/huawei/hinic3/hinic3_hw_cfg.c    | 266 ++++++
+ .../ethernet/huawei/hinic3/hinic3_hw_cfg.h    |  62 ++
+ .../ethernet/huawei/hinic3/hinic3_hw_comm.c   | 412 ++++++++
+ .../ethernet/huawei/hinic3/hinic3_hw_comm.h   |  42 +
+ .../ethernet/huawei/hinic3/hinic3_hw_intf.h   | 248 +++++
+ .../net/ethernet/huawei/hinic3/hinic3_hwdev.c | 569 +++++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_hwdev.h |  82 ++
+ .../net/ethernet/huawei/hinic3/hinic3_hwif.c  | 430 +++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_hwif.h  |  91 ++
+ .../net/ethernet/huawei/hinic3/hinic3_irq.c   | 172 ++++
+ .../net/ethernet/huawei/hinic3/hinic3_lld.c   | 417 ++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_lld.h   |  20 +
+ .../net/ethernet/huawei/hinic3/hinic3_main.c  | 417 ++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_mbox.c  | 844 ++++++++++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_mbox.h  | 147 +++
+ .../net/ethernet/huawei/hinic3/hinic3_mgmt.c  |  21 +
+ .../net/ethernet/huawei/hinic3/hinic3_mgmt.h  |  14 +
+ .../huawei/hinic3/hinic3_mgmt_interface.h     | 212 +++++
+ .../huawei/hinic3/hinic3_netdev_ops.c         | 518 ++++++++++
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.c   | 395 ++++++++
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.h   |  76 ++
+ .../ethernet/huawei/hinic3/hinic3_nic_dev.h   | 107 +++
+ .../ethernet/huawei/hinic3/hinic3_nic_io.c    | 885 +++++++++++++++++
+ .../ethernet/huawei/hinic3/hinic3_nic_io.h    | 142 +++
+ .../huawei/hinic3/hinic3_pci_id_tbl.h         |  10 +
+ .../huawei/hinic3/hinic3_queue_common.c       |  65 ++
+ .../huawei/hinic3/hinic3_queue_common.h       |  51 +
+ .../net/ethernet/huawei/hinic3/hinic3_rss.c   | 378 ++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_rss.h   |  14 +
+ .../net/ethernet/huawei/hinic3/hinic3_rx.c    | 620 ++++++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_rx.h    | 104 ++
+ .../net/ethernet/huawei/hinic3/hinic3_tx.c    | 817 ++++++++++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_tx.h    | 141 +++
+ .../net/ethernet/huawei/hinic3/hinic3_wq.c    | 132 +++
+ .../net/ethernet/huawei/hinic3/hinic3_wq.h    |  87 ++
+ 48 files changed, 11382 insertions(+)
+ create mode 100644 Documentation/networking/device_drivers/ethernet/huawei/hinic3.rst
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/Kconfig
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/Makefile
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_cmdq.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_cmdq.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_common.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_common.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_csr.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_eqs.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_eqs.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hw_cfg.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hw_cfg.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hw_comm.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hw_comm.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hw_intf.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hwdev.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hwdev.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hwif.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hwif.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_lld.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_lld.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_main.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_mbox.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_mbox.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_mgmt.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_mgmt.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_mgmt_interface.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_netdev_ops.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_nic_cfg.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_nic_cfg.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_nic_dev.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_pci_id_tbl.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_queue_common.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_queue_common.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_rss.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_rss.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_rx.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_rx.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_tx.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_tx.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_wq.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_wq.h
+
+
+base-commit: 65fb414c93f486cef5408951350f20552113abd0
+--
+2.45.2
+
 
