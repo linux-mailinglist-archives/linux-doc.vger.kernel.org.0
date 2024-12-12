@@ -1,157 +1,157 @@
-Return-Path: <linux-doc+bounces-32527-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32530-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF6449EDE54
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 05:19:58 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id E7CDD9EDEA5
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 05:53:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 48425167D30
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 04:19:55 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0D3891884D3E
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 04:53:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3506B166308;
-	Thu, 12 Dec 2024 04:18:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2697517CA0B;
+	Thu, 12 Dec 2024 04:53:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="ABbh1Js/"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="VdbFOPDI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 883931632F2;
-	Thu, 12 Dec 2024 04:18:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 682DE1632CA;
+	Thu, 12 Dec 2024 04:53:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733977089; cv=none; b=PZ0uueYZatca6gC6etCvLop1Rbl22FBYzNGatmtO8tI7kHLiy0q3ahc4oWXb2qXUe+kxBJMg1x1ydtNVf3TT2aczuXegmSsGaq1q5wc6vfxXRFaqvqWdT5oHXHhwuYeEuZFYcrE7zegwU55xQ9twUYFjQuS8Ocp3j437vbQyf/A=
+	t=1733979196; cv=none; b=JTc7nTDXSsQzf2wRvCcE3jVjALq8UhnbpgSAVODj4vdUgUFiEIrSEONmXuBiGw+WQK99KCi0/verNdp5oFo3xiB8TjDXigWGsJ8BGw3VjvFjcbahLY2uMm8aFVFrBYKFuktPBVA2ZVyZSeBv7agx7N/KdTOg5YEqa7liWenrgF8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733977089; c=relaxed/simple;
-	bh=4FpesxTI8tOH3zp2gSxBusHmUxtqqSkPfa1kfXduHDo=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=P5GWu1qF7V7DrYPa0BO7urR+153E0nNDYU9G0Smckg4EE2vmvmx/frg6TcyqKZg01TlhnfC098jcUvMJDyW8gcnHyd8rBnOzs6BzRtTXl5brB33wMWKfjtK1EcHYOdJnhb2uTks6ISxvimwdQgNZUdMznYY8u12zwhcUfKAcsps=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=ABbh1Js/; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BBHD3Xg029041;
-	Thu, 12 Dec 2024 04:17:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	pgacSY7WI6i9IX/ZwASO2aCI/5fwyVKaX18gcY/m2Xc=; b=ABbh1Js/QGdh6GGr
-	WX2/yPa3DIn7dTLN8Pe0iRZSZy0TuudoiPUXaPZ1KLjHHiCKoX4W2Ipm9DOceCv8
-	ftpDgP6LAv3K+D/Xl5vq8a07N1E81GF30QGQT3NL3izejK2qD+ba/ue/qk9m7Hr9
-	W3AqakG471Vl4yg0AwauNfhtxyutqrvGCRMbrNUYu9ay8iSCT2glkMLQHlEJvhiH
-	3bbJkPiO4DROLKI9RMrL/Edd/jb9RITpw7kgBYsCSEGyDNXBZO1w75g2OiDJ81fg
-	a5x1y8pgs9bHMHIegZX+Zh/GtNU2swBHH84TnoJ2Z9iLNnjZokSM/gbL7ZCqFOEX
-	LuLyxg==
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 43fd4xspt4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 12 Dec 2024 04:17:59 +0000 (GMT)
-Received: from nasanex01a.na.qualcomm.com (nasanex01a.na.qualcomm.com [10.52.223.231])
-	by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 4BC4HwDA021655
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 12 Dec 2024 04:17:58 GMT
-Received: from hu-mdalam-blr.qualcomm.com (10.80.80.8) by
- nasanex01a.na.qualcomm.com (10.52.223.231) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 11 Dec 2024 20:17:53 -0800
-From: Md Sadre Alam <quic_mdalam@quicinc.com>
-To: <vkoul@kernel.org>, <corbet@lwn.net>, <thara.gopinath@gmail.com>,
-        <herbert@gondor.apana.org.au>, <davem@davemloft.net>,
-        <kees@kernel.org>, <dave.jiang@intel.com>, <dmaengine@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-crypto@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>
-CC: <quic_srichara@quicinc.com>, <quic_varada@quicinc.com>,
-        <quic_mdalam@quicinc.com>, <quic_utiwari@quicinc.com>
-Subject: [PATCH v5 12/12] crypto: qce - Add support for lock/unlock in aead
-Date: Thu, 12 Dec 2024 09:46:39 +0530
-Message-ID: <20241212041639.4109039-13-quic_mdalam@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241212041639.4109039-1-quic_mdalam@quicinc.com>
-References: <20241212041639.4109039-1-quic_mdalam@quicinc.com>
+	s=arc-20240116; t=1733979196; c=relaxed/simple;
+	bh=OThb/28WRH4fPmSctOntMxlFyk4uNJM60KRc4sMrzqg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ZojeSFJA5YF94snFbrn6QZhBVgyBNIOjqBe4yzYoQ13SNFfuq2V2MT8cOqRpfDdbG8/r4rZuZbirUMenFD5+ph+4JoitlR81BZdYr64av+8ID/9EhTeAQQsdxmNdiTxXjuMkZHrt03arCRzADvjzhiLUMCuwGpDSURcgb2r0OJU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=VdbFOPDI; arc=none smtp.client-ip=198.175.65.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1733979193; x=1765515193;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=OThb/28WRH4fPmSctOntMxlFyk4uNJM60KRc4sMrzqg=;
+  b=VdbFOPDIG2GdRTaTHG5y5Gw1wt/IO/YYGuH7n3ER9LTYJGYpDF/5yK5r
+   Wx3MHHUa5ozDzjbU8ZlL9G4VPqKdnBvNfJfNzj7ksnf0WIqqOuhn780DS
+   ZrS9C8EQEoUCUlE6eqI2P4pdvb165+Aw3Uq+JgEQvwCr0vLG4ypArKZR1
+   F+dqZcyyxAI91HO83ome4gkaBz48Ni2U0XTsjcK53W58FD94NmCkLnfoS
+   vjYaThwXB3WrdDOYbNn2tDcnAj2KrruQ8GxfpEt+PYW2brFeeMXBmE6MM
+   qo6cigjpmfTp30vcubkSO637Kh5TxogfTQUzImVTMO115p0SsV+UfzrUb
+   g==;
+X-CSE-ConnectionGUID: Gn3aZrxZScKO0AAlKqyAWA==
+X-CSE-MsgGUID: ABC5keaDRXKSfxcsPUhN6w==
+X-IronPort-AV: E=McAfee;i="6700,10204,11278"; a="45765797"
+X-IronPort-AV: E=Sophos;i="6.12,214,1728975600"; 
+   d="scan'208";a="45765797"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Dec 2024 20:53:12 -0800
+X-CSE-ConnectionGUID: 61UdLCRVSFCV9GxQXcQjQQ==
+X-CSE-MsgGUID: gsE7v/SySSK9YmCGTr+8Ug==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; 
+   d="scan'208";a="95947178"
+Received: from lkp-server01.sh.intel.com (HELO 82a3f569d0cb) ([10.239.97.150])
+  by orviesa010.jf.intel.com with ESMTP; 11 Dec 2024 20:53:09 -0800
+Received: from kbuild by 82a3f569d0cb with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1tLbCD-0007Rz-2h;
+	Thu, 12 Dec 2024 04:53:05 +0000
+Date: Thu, 12 Dec 2024 12:52:54 +0800
+From: kernel test robot <lkp@intel.com>
+To: Elizabeth Figura <zfigura@codeweavers.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Cc: oe-kbuild-all@lists.linux.dev, linux-kernel@vger.kernel.org,
+	linux-api@vger.kernel.org, wine-devel@winehq.org,
+	=?iso-8859-1?Q?Andr=E9?= Almeida <andrealmeid@igalia.com>,
+	Wolfram Sang <wsa-dev@sang-engineering.com>,
+	Arkadiusz Hiler <ahiler@codeweavers.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Andy Lutomirski <luto@kernel.org>, linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
+	Waiman Long <longman@redhat.com>, Boqun Feng <boqun.feng@gmail.com>,
+	Elizabeth Figura <zfigura@codeweavers.com>
+Subject: Re: [PATCH v6 28/28] ntsync: No longer depend on BROKEN.
+Message-ID: <202412121219.EQhUbN0S-lkp@intel.com>
+References: <20241209185904.507350-29-zfigura@codeweavers.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01a.na.qualcomm.com (10.52.223.231)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: tg7I3zflIy5owK1CYaIt_Pglbvszj0p_
-X-Proofpoint-GUID: tg7I3zflIy5owK1CYaIt_Pglbvszj0p_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- priorityscore=1501 bulkscore=0 mlxlogscore=999 phishscore=0 adultscore=0
- suspectscore=0 spamscore=0 mlxscore=0 impostorscore=0 clxscore=1015
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2411120000 definitions=main-2412120028
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241209185904.507350-29-zfigura@codeweavers.com>
 
-Add support for lock/unlock on bam pipe in aead.
-If multiple EE's(Execution Environment) try to access
-the same crypto engine then before accessing the crypto
-engine EE's has to lock the bam pipe and then submit the
-request to crypto engine. Once request done then EE's has
-to unlock the bam pipe so that others EE's can access the
-crypto engine.
+Hi Elizabeth,
 
-Signed-off-by: Md Sadre Alam <quic_mdalam@quicinc.com>
----
+kernel test robot noticed the following build errors:
 
-Change in [v5]
+[auto build test ERROR on cdd30ebb1b9f36159d66f088b61aee264e649d7a]
 
-* No change
+url:    https://github.com/intel-lab-lkp/linux/commits/Elizabeth-Figura/ntsync-Introduce-NTSYNC_IOC_WAIT_ANY/20241210-031155
+base:   cdd30ebb1b9f36159d66f088b61aee264e649d7a
+patch link:    https://lore.kernel.org/r/20241209185904.507350-29-zfigura%40codeweavers.com
+patch subject: [PATCH v6 28/28] ntsync: No longer depend on BROKEN.
+config: i386-randconfig-002-20241212 (https://download.01.org/0day-ci/archive/20241212/202412121219.EQhUbN0S-lkp@intel.com/config)
+compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20241212/202412121219.EQhUbN0S-lkp@intel.com/reproduce)
 
-Change in [v4]
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202412121219.EQhUbN0S-lkp@intel.com/
 
-* No change
- 
-Change in [v3]
+All errors (new ones prefixed by >>):
 
-* Move qce_bam_release_lock() after qca_dma_terminate_all()
-  api
+   In file included from include/linux/spinlock.h:60,
+                    from include/linux/wait.h:9,
+                    from include/linux/wait_bit.h:8,
+                    from include/linux/fs.h:6,
+                    from drivers/misc/ntsync.c:11:
+   In function 'check_copy_size',
+       inlined from 'copy_from_user' at include/linux/uaccess.h:207:7,
+       inlined from 'setup_wait' at drivers/misc/ntsync.c:903:6:
+>> include/linux/thread_info.h:259:25: error: call to '__bad_copy_to' declared with attribute error: copy destination size is too small
+     259 |                         __bad_copy_to();
+         |                         ^~~~~~~~~~~~~~~
 
-Change in [v2]
 
-* Added qce_bam_acquire_lock() and qce_bam_release_lock()
-  api for aead
+vim +/__bad_copy_to +259 include/linux/thread_info.h
 
-Change in [v1]
+b0377fedb652808 Al Viro   2017-06-29  248  
+9dd819a15162f8f Kees Cook 2019-09-25  249  static __always_inline __must_check bool
+b0377fedb652808 Al Viro   2017-06-29  250  check_copy_size(const void *addr, size_t bytes, bool is_source)
+b0377fedb652808 Al Viro   2017-06-29  251  {
+c80d92fbb67b2c8 Kees Cook 2021-06-17  252  	int sz = __builtin_object_size(addr, 0);
+b0377fedb652808 Al Viro   2017-06-29  253  	if (unlikely(sz >= 0 && sz < bytes)) {
+b0377fedb652808 Al Viro   2017-06-29  254  		if (!__builtin_constant_p(bytes))
+b0377fedb652808 Al Viro   2017-06-29  255  			copy_overflow(sz, bytes);
+b0377fedb652808 Al Viro   2017-06-29  256  		else if (is_source)
+b0377fedb652808 Al Viro   2017-06-29  257  			__bad_copy_from();
+b0377fedb652808 Al Viro   2017-06-29  258  		else
+b0377fedb652808 Al Viro   2017-06-29 @259  			__bad_copy_to();
+b0377fedb652808 Al Viro   2017-06-29  260  		return false;
+b0377fedb652808 Al Viro   2017-06-29  261  	}
+6d13de1489b6bf5 Kees Cook 2019-12-04  262  	if (WARN_ON_ONCE(bytes > INT_MAX))
+6d13de1489b6bf5 Kees Cook 2019-12-04  263  		return false;
+b0377fedb652808 Al Viro   2017-06-29  264  	check_object_size(addr, bytes, is_source);
+b0377fedb652808 Al Viro   2017-06-29  265  	return true;
+b0377fedb652808 Al Viro   2017-06-29  266  }
+b0377fedb652808 Al Viro   2017-06-29  267  
 
-* This patch was not included in [v1]
-
- drivers/crypto/qce/aead.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/drivers/crypto/qce/aead.c b/drivers/crypto/qce/aead.c
-index 7d811728f047..13fb7af69f54 100644
---- a/drivers/crypto/qce/aead.c
-+++ b/drivers/crypto/qce/aead.c
-@@ -63,6 +63,8 @@ static void qce_aead_done(void *data)
- 		sg_free_table(&rctx->dst_tbl);
- 	}
- 
-+	qce_bam_release_lock(qce);
-+
- 	error = qce_check_status(qce, &status);
- 	if (error < 0 && (error != -EBADMSG))
- 		dev_err(qce->dev, "aead operation error (%x)\n", status);
-@@ -433,6 +435,8 @@ qce_aead_async_req_handle(struct crypto_async_request *async_req)
- 	else
- 		rctx->assoclen = req->assoclen;
- 
-+	qce_bam_acquire_lock(qce);
-+
- 	diff_dst = (req->src != req->dst) ? true : false;
- 	dir_src = diff_dst ? DMA_TO_DEVICE : DMA_BIDIRECTIONAL;
- 	dir_dst = diff_dst ? DMA_FROM_DEVICE : DMA_BIDIRECTIONAL;
 -- 
-2.34.1
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
