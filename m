@@ -1,43 +1,43 @@
-Return-Path: <linux-doc+bounces-32567-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32569-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66E219EF0B7
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 17:31:11 +0100 (CET)
-Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CCC99EF39C
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 18:01:13 +0100 (CET)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 54BAF1885172
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 16:20:12 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 35B0A28A890
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 17:01:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E399A225407;
-	Thu, 12 Dec 2024 16:09:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50C5222969A;
+	Thu, 12 Dec 2024 16:55:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="biAPHzCF"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="1j9VmlIt"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7783222D66;
-	Thu, 12 Dec 2024 16:09:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25F452288F5;
+	Thu, 12 Dec 2024 16:55:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734019789; cv=none; b=PJDtKlleR2d/yhqq0Kh8TFpvUpbK2JbmROBEFfEtHruYVv2k/ddJf0ocmjoNpZ1qjxM2vJx6uMJ50cwb57AcpT/I34nIDfEL4L0a00vUtE/56URVtVl+Em1fzAqw80Ee3r8wIoiIXtySkxtFW6LYCAlPrZeOd9ykOOEDDI/fP2E=
+	t=1734022553; cv=none; b=IRYlODVZLK9uCpO6yWAxMTB+lmDd7OmCCXv/+D88FI/VGTNCIO+RmwLpDKVID2St0S5DWm5TZBkmHGbJp8tcruXYONct/4oqE2pzzmWi3nomhJYhd4e057LFKxq0+JdD3jBFnizMSSpPb1dTG6ulrjzWhjrTGyMW+9zu9H47jT4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734019789; c=relaxed/simple;
-	bh=fDqRjijaz456aYbVWyHZZ1MmjXa+B8kxqfFtvHyPU5I=;
+	s=arc-20240116; t=1734022553; c=relaxed/simple;
+	bh=i0ARyF5ushn4AXN0OZ4tCGXhN5zWJJ/MxN/k2lVwEKw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=bBKEujqtLyUc6SH0YHjisDIJMW9lcmB0jbkBKYGsINYiWjcNvkbAjYPRtkvN+bzywjuThPJQXe7LrAracS/EGITyCR0RofiVvXSNqN7yrTqiEzOKT1ajrIuWiaaiyzpyC+PvIMjgnB480OnkXZloWIKjZOU0HiHCM7ZOz/b1jto=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=biAPHzCF; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F406C4CECE;
-	Thu, 12 Dec 2024 16:09:48 +0000 (UTC)
+	 MIME-Version; b=ZAeJEjqkdebXXhuPHMNKn167u8qJzf+uMD9s/eth9aSCj2jLzW5ktmNVGhV3qfkHty4RaNpOLmpMQpgCdXMZ9lecc64F+Il4DYwMC1pCsYR/lu6WWrcAqjJxIk8CgZ1kj/KE4lYc36S83f8lK/x8OOgYhlFe1azd4wyFskKa7aw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=1j9VmlIt; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A98AC4CED4;
+	Thu, 12 Dec 2024 16:55:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1734019789;
-	bh=fDqRjijaz456aYbVWyHZZ1MmjXa+B8kxqfFtvHyPU5I=;
+	s=korg; t=1734022553;
+	bh=i0ARyF5ushn4AXN0OZ4tCGXhN5zWJJ/MxN/k2lVwEKw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=biAPHzCF337IdwWWv4IXDCn7vfaG68B4RnyiZU07Kap/QSe9H0wTrmNISGViLxQ1y
-	 kMw7Ot1Xe8hl3FR3xc4ePz4kgwJxy05YqJQSzCnw35xCexhGvWd9VOdb91dPOl+4Xb
-	 p/AtQG7APnFzn/qYaV9uP6smpJT8WViplAkmdPew=
+	b=1j9VmlItcN8UvFMNC2jfGOT7anobyA1I/gDo2+slfELPcdl1QrF9z+SjcouvdE4cY
+	 YC1L0AuAPruwCKXA3NEw1GRU1prFBc/dZYNjYX8NDI4TADetWCxlKSoyIfUIBuJZ/E
+	 dwjqzrS7Z7CTziHBBy/j4N9ZN2FtqO5VblZNnj8M=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -51,12 +51,12 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Jonathan Corbet <corbet@lwn.net>,
 	linux-doc@vger.kernel.org,
 	Sasha Levin <sashal@kernel.org>
-Subject: [PATCH 6.1 299/772] fs_parser: update mount_api doc to match function signature
-Date: Thu, 12 Dec 2024 15:54:04 +0100
-Message-ID: <20241212144402.255957403@linuxfoundation.org>
+Subject: [PATCH 5.15 272/565] fs_parser: update mount_api doc to match function signature
+Date: Thu, 12 Dec 2024 15:57:47 +0100
+Message-ID: <20241212144322.214671679@linuxfoundation.org>
 X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20241212144349.797589255@linuxfoundation.org>
-References: <20241212144349.797589255@linuxfoundation.org>
+In-Reply-To: <20241212144311.432886635@linuxfoundation.org>
+References: <20241212144311.432886635@linuxfoundation.org>
 User-Agent: quilt/0.67
 X-stable: review
 X-Patchwork-Hint: ignore
@@ -68,7 +68,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-6.1-stable review patch.  If anyone has any objections, please let me know.
+5.15-stable review patch.  If anyone has any objections, please let me know.
 
 ------------------
 
@@ -96,7 +96,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/Documentation/filesystems/mount_api.rst b/Documentation/filesystems/mount_api.rst
-index 1d16787a00e95..253078b997990 100644
+index eb358a00be279..12e30da6a511c 100644
 --- a/Documentation/filesystems/mount_api.rst
 +++ b/Documentation/filesystems/mount_api.rst
 @@ -778,7 +778,8 @@ process the parameters it is given.
