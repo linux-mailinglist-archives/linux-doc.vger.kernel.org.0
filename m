@@ -1,209 +1,117 @@
-Return-Path: <linux-doc+bounces-32570-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32577-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC9079EF40A
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 18:05:03 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EF4E9EF64B
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 18:24:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 45E132909C9
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 17:05:02 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E0EDB28BBFE
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 17:24:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00CD7223338;
-	Thu, 12 Dec 2024 17:02:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9F3B217664;
+	Thu, 12 Dec 2024 17:24:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oMefTAdC"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="pOuGuSvC"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B817A2153DD;
-	Thu, 12 Dec 2024 17:02:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E84A21660C;
+	Thu, 12 Dec 2024 17:24:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734022978; cv=none; b=ZOIrse7/GYRVH9EzzuUJzPCcM9wQeGyhYOWOUS87Pd/nGz1ZW/sVK6eXdKP4JZz5ySh/JBnf0QESVidL6Li/Hm6DvAV2rkVHESRslh8SORZErBcSTUVBqz7imRX7PZb+LbuVjNP1Th/BsCrAxvV/Cl62eUcWzHiD2c3VwQsu4ms=
+	t=1734024247; cv=none; b=dOMTnQOAbRRGW6vyuhIKDmD1oL4y0alIpLBUBboIECAuv4jacDfL5VKfv+4IpmnPwZZs0p8bnannQIAmc8HnLIQwc5JZJhVDjvqaWoPYIkKYHo5/KgK7OpN73t75x4acWZ1YkyJJBemBK9D/FE7CthhmiruVp1bzF0wcEpQbqHQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734022978; c=relaxed/simple;
-	bh=watSS0fbqpZzsEyFSLcvfFuZ8P0NH+THumoSLSiJVpE=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=smD3hFrHN7PBotwTGBvJtvBDd3LeXURz+TL9d04TwzsNx0/jLvuRVQosuGcAWXSfbUcCI4+TBbjJV4CkgKaX9D3aO/c+L+slQq/c1ojhxfSfdUZWNZ4DSpfulS/+rUUXTl887MlLga5ar3FMHyYfr86dqVdzy7W+J00MOQClj3A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oMefTAdC; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67389C4CED3;
-	Thu, 12 Dec 2024 17:02:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1734022978;
-	bh=watSS0fbqpZzsEyFSLcvfFuZ8P0NH+THumoSLSiJVpE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:From;
-	b=oMefTAdC1o9FrilMO7zCuxGHjtpkebrdNsL5j3ShSTqRYIAiUgsWAsMFVpiG/Osul
-	 VUgXAUOa2P5X4mN/rdHDKXmLf2DFnMHqFv4ZMIkycfy4l19NtL5+u4ZZE9appWl63B
-	 x0dBOWkYQiFOQ9hnbHT14EVKoGAPJX/Ifwn3HftsEUWSucluT3yUKmCsZodFosKDrZ
-	 NNmTurhUDX8NEiKj/wSXCfYHfKYQh6KDiHiHP/66lQpTRohXeGhpOfYoMYHlWOrc3p
-	 0Rmz4xt5DDIpGgXMgUe5Bmj8BKjsIsTj8Y6UkizdX0WatmxDFBOZkMVNJDFrg30a8M
-	 fLtxOy6CXWH5g==
-Date: Thu, 12 Dec 2024 11:02:56 -0600
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Gur Stavi <gur.stavi@huawei.com>
-Cc: gongfan <gongfan1@huawei.com>, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Andrew Lunn <andrew+netdev@lunn.ch>, linux-doc@vger.kernel.org,
+	s=arc-20240116; t=1734024247; c=relaxed/simple;
+	bh=Q/CCbxaNPCW+72Uxq1Dkc9TlsoxS3EeKa9j7qeFaSqM=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=Idwz2M+e6aZZ6tYI6E97s9KuNZJneRNzUDzGF2MF7RRB5wJD0P2ckEfNyF+oehOCxWCNge7wQEw1fsKaTlDSg5nrhZt5Nhtno5FNztWtgj+GO7+ys8so7iZPmhGfWCoFEkob5UQ9bANVtKG8Ih4PN2RKNpQsgM+EQFT2Qx7ZNxs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=pOuGuSvC; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D91AFC4CECE;
+	Thu, 12 Dec 2024 17:24:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1734024247;
+	bh=Q/CCbxaNPCW+72Uxq1Dkc9TlsoxS3EeKa9j7qeFaSqM=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=pOuGuSvCQmAk9PLJx55/Xl8WDA90nNrNgdePSt5JxNZn8FQcY+qW2z8jzb4/e/UEw
+	 FnqKCdAqJHQEnxmBh6H8FSXFSpcGmvDi9LRNva89XfAejtm2lPtWVcYU+8mKRut+Vx
+	 kBmKvQN/3N+3UVdq1eVrsq2zQ9xhnaJcJdBkB41c=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: stable@vger.kernel.org
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	patches@lists.linux.dev,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Eric Sandeen <sandeen@redhat.com>,
+	David Howells <dhowells@redhat.com>,
+	Al Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>,
+	Jan Kara <jack@suse.cz>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Cai Huoqing <cai.huoqing@linux.dev>, Xin Guo <guoxin09@huawei.com>,
-	Shen Chenyang <shenchenyang1@hisilicon.com>,
-	Zhou Shuai <zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>,
-	Shi Jing <shijing34@huawei.com>,
-	Meny Yossefi <meny.yossefi@huawei.com>
-Subject: Re: [RFC net-next v02 1/3] net: hinic3: module initialization and
- tx/rx logic
-Message-ID: <20241212170256.GA3347301@bhelgaas>
+	linux-doc@vger.kernel.org,
+	Sasha Levin <sashal@kernel.org>
+Subject: [PATCH 5.10 216/459] fs_parser: update mount_api doc to match function signature
+Date: Thu, 12 Dec 2024 15:59:14 +0100
+Message-ID: <20241212144302.100609505@linuxfoundation.org>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20241212144253.511169641@linuxfoundation.org>
+References: <20241212144253.511169641@linuxfoundation.org>
+User-Agent: quilt/0.67
+X-stable: review
+X-Patchwork-Hint: ignore
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <7d62ca11c809ac646c2fd8613fd48729061c22b3.1733990727.git.gur.stavi@huawei.com>
+Content-Transfer-Encoding: 8bit
 
-On Thu, Dec 12, 2024 at 02:04:15PM +0200, Gur Stavi wrote:
-> From: gongfan <gongfan1@huawei.com>
-> 
-> This is [1/3] part of hinic3 Ethernet driver initial submission.
-> With this patch hinic3 is a valid kernel module but non-functional driver.
+5.10-stable review patch.  If anyone has any objections, please let me know.
 
-> +++ b/Documentation/networking/device_drivers/ethernet/huawei/hinic3.rst
-> @@ -0,0 +1,136 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +=====================================================================
-> +Linux kernel driver for Huawei Ethernet Device Driver (hinic3) family
-> +=====================================================================
-> +
-> +Overview
-> +========
-> +
-> +The hinic3 is a network interface card(NIC) for Data Center. It supports
+------------------
 
-Add space before "(".
+From: Randy Dunlap <rdunlap@infradead.org>
 
-> +Prime Physical Function (PPF) is responsible for the management of the
-> +whole NIC card. For example, clock synchronization between the NIC and
-> +the host.
-> +Any PF may serve as a PPF. The PPF is selected dynamically.
+[ Upstream commit c66f759832a83cb273ba5a55c66dcc99384efa74 ]
 
-Add blank line between paragraphs or reflow into a single paragraph.
+Add the missing 'name' parameter to the mount_api documentation for
+fs_validate_description().
 
-Is the PPF selected dynamically by the driver?  By firmware on the
-NIC?
+Fixes: 96cafb9ccb15 ("fs_parser: remove fs_parameter_description name field")
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Link: https://lore.kernel.org/r/20241125215021.231758-1-rdunlap@infradead.org
+Cc: Eric Sandeen <sandeen@redhat.com>
+Cc: David Howells <dhowells@redhat.com>
+Cc: Al Viro <viro@zeniv.linux.org.uk>
+Cc: Christian Brauner <brauner@kernel.org>
+Cc: Jan Kara <jack@suse.cz>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+Signed-off-by: Christian Brauner <brauner@kernel.org>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ Documentation/filesystems/mount_api.rst | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-> +hinic3_pci_id_tbl.h       Supported device IDs.
-> +hinic3_hw_intf.h          Interface between HW and driver.
-> +hinic3_queue_common.[ch]  Common structures and methods for NIC queues.
-> +hinic3_common.[ch]        Encapsulation of memory operations in Linux.
-> +hinic3_csr.h              Register definitions in the BAR.
-> +hinic3_hwif.[ch]          Interface for BAR.
-> +hinic3_eqs.[ch]           Interface for AEQs and CEQs.
-> +hinic3_mbox.[ch]          Interface for mailbox.
-> +hinic3_mgmt.[ch]          Management interface based on mailbox and AEQ.
-> +hinic3_wq.[ch]            Work queue data structures and interface.
-> +hinic3_cmdq.[ch]          Command queue is used to post command to HW.
-> +hinic3_hwdev.[ch]         HW structures and methods abstractions.
-> +hinic3_lld.[ch]           Auxiliary driver adaptation layer.
-> +hinic3_hw_comm.[ch]       Interface for common HW operations.
-> +hinic3_mgmt_interface.h   Interface between firmware and driver.
-> +hinic3_hw_cfg.[ch]        Interface for HW configuration.
-> +hinic3_irq.c              Interrupt request
-> +hinic3_netdev_ops.c       Operations registered to Linux kernel stack.
-> +hinic3_nic_dev.h          NIC structures and methods abstractions.
-> +hinic3_main.c             Main Linux kernel driver.
-> +hinic3_nic_cfg.[ch]       NIC service configuration.
-> +hinic3_nic_io.[ch]        Management plane interface for TX and RX.
-> +hinic3_rss.[ch]           Interface for Receive Side Scaling (RSS).
-> +hinic3_rx.[ch]            Interface for transmit.
-> +hinic3_tx.[ch]            Interface for receive.
-> +hinic3_ethtool.c          Interface for ethtool operations (ops).
-> +hinic3_filter.c           Interface for mac address.
+diff --git a/Documentation/filesystems/mount_api.rst b/Documentation/filesystems/mount_api.rst
+index d7f53d62b5bb2..8fb03f57546d1 100644
+--- a/Documentation/filesystems/mount_api.rst
++++ b/Documentation/filesystems/mount_api.rst
+@@ -778,7 +778,8 @@ process the parameters it is given.
+ 
+    * ::
+ 
+-       bool fs_validate_description(const struct fs_parameter_description *desc);
++       bool fs_validate_description(const char *name,
++                                    const struct fs_parameter_description *desc);
+ 
+      This performs some validation checks on a parameter description.  It
+      returns true if the description is good and false if it is not.  It will
+-- 
+2.43.0
 
-Could drop "." at end (or use it consistently).
 
-s/mac/MAC/
 
-> +2 mailbox related events.
-> +
-> +MailBox
-
-s/MailBox/Mailbox/ since that's how you use it elsewhere.
-
-> +-------
-> +
-> +Mailbox is a communication mechanism between the hinic3 driver and the HW.
-
-> +The implementation of CEQ is the same as AEQ. It receives completion events
-> +form HW over a fixed size descriptor of 32 bits. Every device can have up
-> +to 32 CEQs. Every CEQ has a dedicated IRQ. CEQ only receives solicited
-> +events that are responses to requests from the driver. CEQ can receive
-> +multiple types of events, but in practice the hinic3 driver ignores all
-> +events except for HINIC3_CMDQ that represents completion of previously
-> +posted commands on a cmdq.
-
-s/form HW/from HW/
-
-> +Work queues are logical arrays of fixed size WQEs. The array may be spread
-> +over multiple non-contiguous pages using indirection table.
-
-Add blank line or wrap into single paragraph.
-
-> +Work queues are used by I/O queues and command queues.
-
-> +Every function, PF or VF, has a unique ordinal identification within the device.
-> +Many commands to management (mbox or cmdq) contain this ID so HW can apply the
-> +command effect to the right function.
-
-Add blank line or wrap into single paragraph.
-
-> +PF is allowed to post management commands to a subordinate VF by specifying the
-> +VFs ID. A VF must provide its own ID. Anti-spoofing in the HW will cause
-> +command from a VF to fail if it contains the wrong ID.
-
-> +config HINIC3
-> +	tristate "Huawei Intelligent Network Interface Card 3rd"
-> +	# Fields of HW and management structures are little endian and will not
-> +	# be explicitly converted
-
-I guess this comment is here to explain the !CPU_BIG_ENDIAN below?
-That's quite an unusual dependency.
-
-> +	depends on 64BIT && !CPU_BIG_ENDIAN
-
-> +++ b/drivers/net/ethernet/huawei/hinic3/Makefile
-> @@ -0,0 +1,21 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) Huawei Technologies Co., Ltd. 2024. All rights reserved.
-> +
-> +obj-$(CONFIG_HINIC3) += hinic3.o
-> +
-> +hinic3-objs := hinic3_hwdev.o \
-> +	       hinic3_lld.o \
-> +	       hinic3_common.o \
-> +	       hinic3_hwif.o \
-> +	       hinic3_hw_cfg.o \
-> +	       hinic3_queue_common.o \
-> +	       hinic3_mbox.o \
-> +	       hinic3_hw_comm.o \
-> +	       hinic3_wq.o \
-> +	       hinic3_nic_io.o \
-> +	       hinic3_nic_cfg.o \
-> +	       hinic3_tx.o \
-> +	       hinic3_rx.o \
-> +	       hinic3_netdev_ops.o \
-> +	       hinic3_rss.o \
-> +	       hinic3_main.o
-> \ No newline at end of file
-
-Add newline.
 
