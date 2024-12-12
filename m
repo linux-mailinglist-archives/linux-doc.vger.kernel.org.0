@@ -1,215 +1,311 @@
-Return-Path: <linux-doc+bounces-32625-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32627-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1DE19EFEF4
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 23:06:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A07309EFF60
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 23:30:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id DA521162C72
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 22:06:16 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 63FE8161003
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 22:30:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C80F1D88DB;
-	Thu, 12 Dec 2024 22:06:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 835CA1DDC37;
+	Thu, 12 Dec 2024 22:30:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="B1qNGfAF"
+	dkim=pass (2048-bit key) header.d=amacapital-net.20230601.gappssmtp.com header.i=@amacapital-net.20230601.gappssmtp.com header.b="HfeNFeIg"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5B6E2F2F;
-	Thu, 12 Dec 2024 22:06:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39EE21DE2DF
+	for <linux-doc@vger.kernel.org>; Thu, 12 Dec 2024 22:30:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734041176; cv=none; b=WtGC0WReFORg160UBo57B/JlOJTPxKppQHxtclfas4w+GSYeUvUdUC2KSdUSXb/CjZefsMnUeuT/PWFavXM8+oUOq1GZ+kq9Yf/sCKqquLLnX/YjhhDoHvGJ/VeaPB5Sq+2gV+Gzj02ejWMwjG5rPj8N83eSJmhFTbGm3FDK34E=
+	t=1734042638; cv=none; b=kb48B2aK5Iq8f4q52VFQVJJ/XWgT3Ctl+8rXy753+wQXuL/W5Tz42fLg7sMK6tKv0Oze9eFrd6InWFQ8lCJvwMXNPkcbcdmqEeH5FVVwEdXHM4LUBky8YeYYT6E7lMCUpWmbCxANK99Une23KqJ0QS09Kcr1l9AGGz/ocE/9pLo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734041176; c=relaxed/simple;
-	bh=W3AgQ32tPZsZxwvhUmucHlXiZ9eckahHL26btDnz58U=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=U+sdvoAjzNPCl161HzbCM5qLdJ+GCWQTfLYLRn4wybuNBSAb/yUmdeT/F/Ec4DMtM7xYSYr7KMFeUvQDYsP7Vo1gnvaetviyLweNLK1HJg7VvnHJEoFAm8oRwDBd67oeAYarywrE04+giBGCrTplbLZjyPJvtVFL26BXzdFovyc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=B1qNGfAF; arc=none smtp.client-ip=209.85.215.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-7fd49d85f82so925302a12.3;
-        Thu, 12 Dec 2024 14:06:13 -0800 (PST)
+	s=arc-20240116; t=1734042638; c=relaxed/simple;
+	bh=PeBxRdt9kNG/k6+j3l9HUg4BLn3XzZxkSnQ+Plm8EBQ=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=FhJExkNhEK+4sKmjm5gpPGmrwishKkPQDHWGHJKEqAiMcxSeNdI7271dSb2N3dlAsa6SyIg+vmo29JDWzK8yR4t5ZgAEYQxTiHovos7RYp6i+sm9LpsYkGrEx5dhhwskbM2E5ICF27WedDceEV3yEpgOTV/rDaNg6UrvmzFrR4Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=amacapital.net; spf=pass smtp.mailfrom=amacapital.net; dkim=pass (2048-bit key) header.d=amacapital-net.20230601.gappssmtp.com header.i=@amacapital-net.20230601.gappssmtp.com header.b=HfeNFeIg; arc=none smtp.client-ip=209.85.208.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=amacapital.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amacapital.net
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-5d0ac27b412so1590702a12.1
+        for <linux-doc@vger.kernel.org>; Thu, 12 Dec 2024 14:30:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734041173; x=1734645973; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=Nn7aTGxs0fZIZsteSxxOdiaizy01Z8EgP8KAplxUb/s=;
-        b=B1qNGfAFA/fZV1IkCoEOhtydPk1gD81ov6744Ar29wFiHyVRAPHlriwS/4pja+BNW3
-         LdzD4sMdVX8T9k+Umw22o3fsBnAoZ+3t0WKg+SW87qj+Ss2tUqjFAZdI2WAsZta0fXnR
-         nkVSqTl6GNyJuspthdi7g6MlLV1KGcv2fXoPzPbdSI4j0ImciUzDStGHsa4PJqqha6xg
-         LcBiRmNZHrLWZrzirtDdXfKJBGP73DSU935sMfolUmWUv+eeTxhNLv7ypoM1ETSoKBCj
-         poq7kg+cr9D+s8mfK4qK6R+JJN84KkNn8HEQiBeL6PorbHroSCJDPcdSsaeuxpqVi/49
-         R4ig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734041173; x=1734645973;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:sender:x-gm-message-state:from:to:cc:subject:date
+        d=amacapital-net.20230601.gappssmtp.com; s=20230601; t=1734042634; x=1734647434; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Nn7aTGxs0fZIZsteSxxOdiaizy01Z8EgP8KAplxUb/s=;
-        b=lSJrIJHbk5GJ2d5Z+o4ATBPuOom/9kN0LMvQEeXxQUhPZR6r8pH0iMnhlzq4IyfodJ
-         tcXjnDLZfWk1g2+GWlDX+L8u/JK2rzaxyP4hiM62O12H4VQ0lyyUDXB8MrkWRpxY6dAZ
-         jEHPmxuxigp2bzaIZnNv1j9utvRRBhKwZn+y+SjBJ2ATNe89JfL+1UXIcXYU3z5q1rrR
-         jgRFr/sI2TeSNbiVJmI2If7nVtT5K8NmOupX4CycDD9XBKBa9K7N2dFWA+58qOYQpdw5
-         16KWjYTD8/VN9H0CDGbJ12gaUXeE51hj1abF8fZAjQ4FctqTlZn8He1VgGe04VVjGTDL
-         wN+A==
-X-Forwarded-Encrypted: i=1; AJvYcCU6QUrIcoflmORnW50NKa4ubZNaEnobG7LPMeGkItcQ+M44dczEjeZ18hF8BoiCJzNvGMyvV+TGU9w7@vger.kernel.org, AJvYcCV5nhU/IcNSfPRZW1AVloU9gpAtlJZdRI//H9SPRtIUJrcay9nX0m1XCwjm/CUNXPL3fh+KiPiL83TN@vger.kernel.org, AJvYcCVhG/tpZ2X/qMqB3uwbkcAayvJXPLTTO6GOEgnvWDY4xq3JSaWLX41inzpEFJMfpRkzdhLb2FBbOlKX@vger.kernel.org, AJvYcCViRtIBIqS0r/cbvOHRVYbKZfElh9bNfT7GeTBblSb/RoXaXl1WkEjj0nNculz01d3uBiFOv4NyEANSRac=@vger.kernel.org, AJvYcCXgO5T2RZEprdBQxpByXW+ksTYG5qn5obKqp7KniHOkoQlSObhL+nu+vox+w1Wle06kuN9fXrXrF5bWgFeu@vger.kernel.org
-X-Gm-Message-State: AOJu0YzfWsr3P3KAqEeQ4TxEt5wVHRHmFw1mBUboEmUiSvymjsbR++Um
-	0YlDd9FkCR8fqMe6cUSp/Hjar1kClG0EAlVfXFNBpKppEbNO/fr0
-X-Gm-Gg: ASbGncuMtOIp66ES/9R48OY0O9nGZYFuvnSHlvfoL30yy1S94clOHVXyBHV2i+9kkrR
-	LI+eEJquXQT/GJahDSiBZOZanA/LkM/DPkVtGXvPoqPP8X5qEwG88af0MtH5pk7+uUDS6Vbv6yv
-	JmpvMt/sFF7m0Bg9+pljNcToQahP9UmiJBjrfKD4/7Ppif1yaB4vcppMxfU3RkbBVXyyL5ifO20
-	AAc2nEFe88R3E4Fav+Y6aMuY/KTrCvNkl+AVfLvwtHgUUm+jF3G0j1mYoX8VioTKR4XdNVFfaX+
-	7hkocGM/ScHuvsKAiEY1ge2RxGMagA==
-X-Google-Smtp-Source: AGHT+IEjcDWDcj+xx58FwEzylYzqnHeRBxwumiFyM7ZjcMUkstRS8dJbxY3ZD6142f7rcv8umWohsA==
-X-Received: by 2002:a17:90b:2682:b0:2ea:7cd5:4ad6 with SMTP id 98e67ed59e1d1-2f2901b3181mr476376a91.32.1734041172844;
-        Thu, 12 Dec 2024 14:06:12 -0800 (PST)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2f142de7ddfsm1799771a91.26.2024.12.12.14.06.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 12 Dec 2024 14:06:12 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <f9d881b7-7301-476e-b281-0380dfcf0e10@roeck-us.net>
-Date: Thu, 12 Dec 2024 14:06:09 -0800
+        bh=+DFfich0wCzNZpgo4PXY6tmakvrRskVcHsJ5GFyjyu8=;
+        b=HfeNFeIg1ulZAfAZR1H4ysZNGOdTfBaptP0eA8xp431OtRDBBO++MAk/2xmOWQYgoW
+         UjsZxPMYuHcrdLFsUpRMOrfvSLHOLr+h3wOzfiFlZJ25rST7v3LmitICo9+hUx9xkKeF
+         Zz12TCVFP3m7XaVEmEa3kJDHjZC4aCfEoTpOcdxKCS7/pFIBFuAxPNXj+Bz6iFNR7gaH
+         pTyNbxzcIVRg5yTU98ub6+xwm7zmvFgodCvdr/8TAYCk0sMfh5Is6qA3TyKjMAsrc3wE
+         /P5SZHGC6CI8N6D3SVGaYL8F+PqHXLZlrezlmui96Ctiu9rXDcEoX0mDF7XfNEkgiBdh
+         QcCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1734042634; x=1734647434;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=+DFfich0wCzNZpgo4PXY6tmakvrRskVcHsJ5GFyjyu8=;
+        b=udTBL9hdxDYebTAEi+dWYGZtMdw7K5bi/Td1FmhbYgZt674jbFy7V5E431ySuG7mKC
+         MgNs2YgsktYi0e4oLldw6KWdSDKZ5beRJRebS1xEU4kexNEiZs6W5JS+nGJQOb15bHs+
+         PcVNZBuIw+OYQeGaXnwGEshyujtHvK72F54OL1O0tkrPeTg4MCKN0cwWvC9dWVn78xcl
+         pbgSl+fhYPKwmT6sxku8KTiyrte6PQVGSh1UFsLwYT9CaVk3apM/wwjLvn7KvnUtCNtL
+         Mg+K334GFsu+SIKZe++lQPyB+zG9Yg4yxXvq9URxFEVGjym2OTJZYqwPq7SNOAIcQldC
+         kACw==
+X-Forwarded-Encrypted: i=1; AJvYcCWlsC/L6kau0WZ5ftj/wgHuX5ymp+pPx7DtSfBEO6Po7EwKJFxG1wTaKsHNNPbC6wKwHLANb31G//Q=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz3QU50iUxSRRduqCO26sqn8g03q30Lgpk+0DufTjGFSQw9+hFD
+	hHA4Uo0dmnUqC1MhMs9rCm7q31jhe9eKsbO9taaDTbrvKJa6rzf9P/qovgOzrkJmveBi+4akFCr
+	KCmhm3eg1YbObnRXszxMcIdVevXQRwKPAZswR
+X-Gm-Gg: ASbGncs6Dcl6Ydbf05x9hRszVrUDcSCDbQ3asgcEAyff1tfBr4lnvQk0nKPswPSIwps
+	6bNW/QhlQUajlvXL56/WXTIjCWVaHE0zkUc1f
+X-Google-Smtp-Source: AGHT+IGl1dmIiaH9NI8b8hOYdpWTfrRri9yyfmHuI52Jogvcc1hUauGAXPes+nuLyRdasCl6AgOKkv55XUwt8CfhqfE=
+X-Received: by 2002:a17:906:c14a:b0:aa5:31f5:922a with SMTP id
+ a640c23a62f3a-aab7797eb4emr40990566b.19.1734042634250; Thu, 12 Dec 2024
+ 14:30:34 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/4] hwmon: pmbus-core: Add label for fan and temp
-To: Ninad Palsule <ninad@linux.ibm.com>, robh@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, eajames@linux.ibm.com, jdelvare@suse.com,
- corbet@lwn.net, joel@jms.id.au, andrew@codeconstruct.com.au,
- Delphine_CC_Chiu@Wiwynn.com, broonie@kernel.org, peteryin.openbmc@gmail.com,
- noahwang.wang@outlook.com, naresh.solanki@9elements.com, lukas@wunner.de,
- jbrunet@baylibre.com, patrick.rudolph@9elements.com,
- gregkh@linuxfoundation.org, peterz@infradead.org, pbiel7@gmail.com,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-aspeed@lists.ozlabs.org,
- linux-i2c@vger.kernel.org
-References: <20241212214927.3586509-1-ninad@linux.ibm.com>
- <20241212214927.3586509-2-ninad@linux.ibm.com>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- mDW4+i+XlNFUPUYMrIKi9joBhu18ssf5i5Q=
-In-Reply-To: <20241212214927.3586509-2-ninad@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240531010331.134441-1-ross.philipson@oracle.com>
+ <874jaegk8i.fsf@email.froward.int.ebiederm.org> <5b1ce8d3-516d-4dfd-a976-38e5cee1ef4e@apertussolutions.com>
+ <87ttflli09.ffs@tglx> <CALCETrXQ7rChWLDqTG0+KY7rsfajSPguMnHO1G4VJi_mgwN9Zw@mail.gmail.com>
+ <1a1f0c41-70de-4f46-b91d-6dc7176893ee@apertussolutions.com>
+ <8a0b59a4-a5a2-42ae-bc1c-1ddc8f2aad16@apertussolutions.com>
+ <CALCETrX8caT5qvCUu24hQfxUF_wUC2XdGpS2YFP6SR++7FiM3Q@mail.gmail.com>
+ <c466ed57-35a8-41c0-9647-c70e588ad1d3@apertussolutions.com>
+ <CALCETrW9WNNGh1dEPKfQoeU+m5q6_m97d0_bzRkZsv2LxqB_ew@mail.gmail.com>
+ <ff0c8eed-8981-48c4-81d9-56b040ef1c7b@apertussolutions.com>
+ <446cf9c70184885e4cec6dd4514ae8daf7accdcb.camel@HansenPartnership.com>
+ <5d1e41d6-b467-4013-a0d0-45f9511c15c6@apertussolutions.com>
+ <CALCETrW6vMYZo-b7N9ojVSeZLVxhZjLBjnMHsULMGP6TaVYRHA@mail.gmail.com>
+ <9c80e779b6268fde33c93ed3765ff93b1d6d007b.camel@HansenPartnership.com>
+ <CALCETrX4vHnVorqWjPEOP0XLaA0uUWkKikDcCXWtbs2a7EBuiA@mail.gmail.com> <61a4e812-9514-41a6-a000-e6c026a4ec45@apertussolutions.com>
+In-Reply-To: <61a4e812-9514-41a6-a000-e6c026a4ec45@apertussolutions.com>
+From: Andy Lutomirski <luto@amacapital.net>
+Date: Thu, 12 Dec 2024 14:30:23 -0800
+Message-ID: <CALCETrXQqR6Az7puNXLfhoL37iLHtG1qOyqC_K301TGmMOQvvA@mail.gmail.com>
+Subject: Re: [PATCH v9 06/19] x86: Add early SHA-1 support for Secure Launch
+ early measurements
+To: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Cc: James Bottomley <James.Bottomley@hansenpartnership.com>, 
+	Thomas Gleixner <tglx@linutronix.de>, "Eric W. Biederman" <ebiederm@xmission.com>, 
+	Eric Biggers <ebiggers@kernel.org>, Ross Philipson <ross.philipson@oracle.com>, 
+	linux-kernel@vger.kernel.org, x86@kernel.org, linux-integrity@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-crypto@vger.kernel.org, 
+	kexec@lists.infradead.org, linux-efi@vger.kernel.org, 
+	iommu@lists.linux-foundation.org, mingo@redhat.com, bp@alien8.de, 
+	hpa@zytor.com, dave.hansen@linux.intel.com, ardb@kernel.org, 
+	mjg59@srcf.ucam.org, peterhuewe@gmx.de, jarkko@kernel.org, jgg@ziepe.ca, 
+	nivedita@alum.mit.edu, herbert@gondor.apana.org.au, davem@davemloft.net, 
+	corbet@lwn.net, dwmw2@infradead.org, baolu.lu@linux.intel.com, 
+	kanth.ghatraju@oracle.com, andrew.cooper3@citrix.com, 
+	trenchboot-devel@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 12/12/24 13:49, Ninad Palsule wrote:
-> Adding label files for fan and temperature sensors in the power supply.
-> The openbmc application dbus-sensor(psusensor) requires those files to
-> consfigure those sensors.
-> Note that prefix for temp label is temp[A..C] used instead of temp[1..3]
-> as dbus-sensor(psusensor) application calculate index based on last
-> digit in the name so we do not want to make index double digit after
-> appending page index.
-> 
-> Signed-off-by: Ninad Palsule <ninad@linux.ibm.com>
+On Thu, Dec 12, 2024 at 11:56=E2=80=AFAM Daniel P. Smith
+<dpsmith@apertussolutions.com> wrote:
+>
+> Hey Luto!
+>
+> Let me try to address your concerns below.
+>
+> On 11/18/24 15:02, Andy Lutomirski wrote:
+> > On Mon, Nov 18, 2024 at 11:12=E2=80=AFAM James Bottomley
+> > <James.Bottomley@hansenpartnership.com> wrote:
+> >>
+> >> On Mon, 2024-11-18 at 10:43 -0800, Andy Lutomirski wrote:
+> >>> Linux should not use TPM2_PCR_Extend *at all*.  Instead, Linux should
+> >>> exclusively use TPM2_PCR_Event.  I would expect that passing, say,
+> >>> the entire kernel image to TPM2_PCR_Event would be a big mistake, so
+> >>> instead Linux should hash the relevant data with a reasonable
+> >>> suggestion of hashes (which includes, mandatorily, SHA-384 and *does
+> >>> not* include SHA-1, and may or may not be configurable at build time
+> >>> to include things like SM3), concatenate them, and pass that to
+> >>> TPM2_PCR_Event.  And Linux should make the value that it passed to
+> >>> TPM2_PCR_Event readily accessible to software using it, and should
+> >>> also include some straightforward tooling to calculate it from a
+> >>> given input so that software that wants to figure out what value to
+> >>> expect in a PCR can easily do so.
+> >>
+> >> Just for clarity, this is about how the agile log format works.  Each
+> >> event entry in the log contains a list of bank hashes and the extends
+> >> occur in log event order, so replaying a log should get you to exactly
+> >> the head PCR value of each bank.  If a log doesn't understand a format=
+,
+> >> like SM3, then an entry for it doesn't appear in the log and a replay
+> >> says nothing about the PCR value.
+> >
+> > I have no idea what the "agile log format" is or what all the formats
+> > in existence are.  I found section 4.2.4 here:
+> >
+> > https://trustedcomputinggroup.org/wp-content/uploads/TCG_IWG_CEL_v1_r0p=
+41_pub.pdf
+> >
+> > It says:
+> >
+> > This field contains the list of the digest values Extended. The Extend
+> > method varies with TPM command, so there is
+> > no uniform meaning of TPM Extend in this instance, and separate
+> > descriptions are unavoidable. If using the
+> > TPM2_PCR_Extend command, this field is the data sent to the TPM (i.e.,
+> > not the resulting value of the PCR after the
+> > TPM2_PCR_Extend command completes). If using the TPM2_PCR_Event
+> > command, this field contains the digest
+> > structure returned by the TPM2_PCR_Event command (that contains the
+> > digest(s) submitted to each PCR bank as
+> > the internal Extend operation). This field SHALL contain the
+> > information from the TPML_DIGEST_VALUES used in
+> > the Extend operation.
+>
+>
+> Let me start with providing background on the two measurement policies
+> that is implemented by Intel TXT (from Intel TXT Developers Guide):
+>
+>   - Maximum Agility PCR Extend Policy: ACM can support algorithm agile
+> commands TPM2_PCR_Event; TPM2_HashSequenceStart; TPM2_HashUpdate;
+> TPM2_EventSequenceComplete. When this policy is selected, ACM will use
+> the commands above if not all PCR algorithms are covered by embedded set
+> of algorithms and will extend all existing PCR banks. Side effect of
+> this policy is possible performance loss.
+>
+> =E2=80=92 Maximum Performance PCR Extend Policy: ACM can support several =
+hash
+> algorithms via embedded SW. When this policy is selected, ACM will use
+> embedded SW to compute hashes and then will use TPM2_PCR_Extend commands
+> to extend them into PCRs. If PCRs utilizing hash algorithms not
+> supported by SW are discovered, they will be capped with =E2=80=9C1=E2=80=
+=9D value. This
+> policy, when selected, will ensure maximum possible performance but has
+> side effect of possible capping of some of the PCRs.
+>
 
-We are not going to fix userspace problems in the kernel.
+What is responsible for choosing which of these policies to use?
 
-Guenter
+> Allow me to clarify/expand on the last statement in Maximum Agility.
+> There is almost certainly a performance loss as anything larger than
+> 1024 bytes, for example the Linux kernel, the ACM will bit-banging the
+> bytes to the TPM using the TPM2_Hash* functions.
 
-> ---
->   drivers/hwmon/pmbus/pmbus_core.c | 14 ++++++++++++++
->   1 file changed, 14 insertions(+)
-> 
-> diff --git a/drivers/hwmon/pmbus/pmbus_core.c b/drivers/hwmon/pmbus/pmbus_core.c
-> index a7000314e5ad..149b3c5f3a4c 100644
-> --- a/drivers/hwmon/pmbus/pmbus_core.c
-> +++ b/drivers/hwmon/pmbus/pmbus_core.c
-> @@ -2144,6 +2144,7 @@ static const struct pmbus_sensor_attr temp_attributes[] = {
->   	{
->   		.reg = PMBUS_READ_TEMPERATURE_1,
->   		.class = PSC_TEMPERATURE,
-> +		.label = "tempA",
->   		.paged = true,
->   		.update = true,
->   		.compare = true,
-> @@ -2156,6 +2157,7 @@ static const struct pmbus_sensor_attr temp_attributes[] = {
->   	}, {
->   		.reg = PMBUS_READ_TEMPERATURE_2,
->   		.class = PSC_TEMPERATURE,
-> +		.label = "tempB",
->   		.paged = true,
->   		.update = true,
->   		.compare = true,
-> @@ -2168,6 +2170,7 @@ static const struct pmbus_sensor_attr temp_attributes[] = {
->   	}, {
->   		.reg = PMBUS_READ_TEMPERATURE_3,
->   		.class = PSC_TEMPERATURE,
-> +		.label = "tempC",
->   		.paged = true,
->   		.update = true,
->   		.compare = true,
-> @@ -2282,6 +2285,17 @@ static int pmbus_add_fan_attributes(struct i2c_client *client,
->   					     PSC_FAN, true, true, true) == NULL)
->   				return -ENOMEM;
->   
-> +			/*
-> +			 * Add fan label.
-> +			 * Assuming paged attributes while passing page index
-> +			 */
-> +			ret = pmbus_add_label(data, "fan", index, "fan",
-> +					      page + 1, 0xff);
-> +			if (ret) {
-> +				dev_err(data->dev, "Fan label add failed ret=%d\n", ret);
-> +				return ret;
-> +			}
-> +
->   			/* Fan control */
->   			if (pmbus_check_word_register(client, page,
->   					pmbus_fan_command_registers[f])) {
+Surely, if Linux's stub started using TPM2_PCR_Event, it would first
+hash any large inputs and then send the _hash_ to TPM2_PCR_Event
+instead of, say, bit-banging the entire initramfs to the TPM.  But
+you're talking about the ACM and I'm talking about the Linux stub code
+in this patchset.
 
+But the capping-with-"1" does suggest that maybe one can actually cap
+with "1" without preventing downstream software from consuming the
+event log.
+
+>
+> Before addressing the next point, I would also clarify how the D-CRTM
+> measurement taken by the CPU is done. It uses the _TPM_HASH_* functions,
+> Section 22.9 of TPM2 Commands specification, to store SHA256(SINIT ACM)
+> | EDX into all active PCR banks. For clarity, when this done, EDX holds
+> the 4-byte value of the SENTER parameters for which 0 is the only valid
+> value currently.
+>
+>
+> > So we're logging the values with which we extend the PCRs.  Once upon
+> > a time, someone decided it was okay to skip extending a PCR bank:
+> >
+> > https://google.github.io/security-research/pocs/bios/tpm-carte-blanche/=
+writeup.html
+> >
+> > and it was not a great idea.
+>
+>
+> Let's begin by why/how that attack occurs. The TPM Carte Blanche attack
+> took advantage of the fact that without BootGuard in place, the SRTM
+> measurements are done by the software/firmware, to include the
+> self-referential S-CRTM measurement. In particular, for the target
+> platform, it just so happens that it was possible to construct a
+> configuration where not a single hash would be sent to the SHA256 bank.
+> This allowed the attacker the ability to replay any set of measurements,
+> i.e. carte blanche control, into a completely empty PCR bank for which
+> the attestation service would accept quotes. The key to this attack
+> requires both, access to an empty PCR bank, and an attestation service
+> that will accept a quote with only the exploited bank present.
+>
+> Let us return to my statements above, which will demonstrate why
+> TXT/DRTM completely invalidates the attack. First, as noted above, when
+> the CPU is processing the GETSEC[SENTER] instruction, it (the CPU) will
+> compute the D-CRTM as SHA256(SINIT ACM) | EDX, sending it to the TPM
+> using _TPM_HASH_* functions. The _TPM_HASH_* functions result in all PCR
+> banks to be extended with the D-CRTM value. If Maximum Performance PCR
+> Extend policy is in use, which is the default policy used by TrenchBoot,
+> any algorithm not supported by the ACM is capped by sending the value
+> "1" as the digest value for the extend. Therefore, after the TXT
+> sequence has completed and before control is given to the Linux kernel
+> by the ACM, all PCR banks will consist of either, the D-CRTM + all ACM
+> measurements, or the D-CRTM + TPM2_PCR_Extend(0x1). There will be no PCR
+> banks with empty DRTM PCRs, thus none of the banks would be usable for a
+> TPM Carte Blanche-style attack.
+
+Sure, a "carte blanche" attack in the sense that the PCRs are entirely
+blank won't happen, but if any component in the chain does not extend
+a bank, then an attacker can replace the code _after_ that component
+without being noticed.
+
+> (c) Upon initialization, cap the PCR banks with unsupported algorithms
+> using a well-known value.
+>
+> A problem with (a) is that the result will be an unorthodox event,
+> PCR_EXTEND(H(H'(data))). An attestation verifier will have to be aware
+> of that this is being done, and have a way to determine which method was
+> used for each event. This creates a potentially expensive cost for any
+> existing attestation solutions to incorporate support for the unorthodox
+> event. At least for DRTM solutions, it seeks to solve a problem that TXT
+> does not experience.
+>
+> For Linux Secure Launch, I would like to propose an alternative to what
+> the current logic does in the setup kernel. Specifically, Secure Launch
+> will trigger a TXT reset when an unsupported algorithm is encountered.
+> Instead, I would like to propose the adoption of (c), and have it
+> extends a well-known, fixed value for unsupported algorithms. Secure
+> Launch can leverage the fact that the TPM driver's extend function
+> already expects to be given digests for all active algorithms.
+> Therefore, it will record the well-known value, 0x01 to follow the ACM,
+> into the digest buffers of any algorithms that Secure Launch does not
+> support. This will result in the well-known value being extended each
+> time a measurement is recorded. This will not be a problem as no one
+> should be using those banks for attestation and can ignore those digests
+> in the event log.
+
+This seems to be at least not terrible.
+
+Or I suppose one could use TPM_HASH_ functions? The spec for them is
+somewhat impenetrable to me.
+
+>
+> I would like to note that we made a conscious design decision early on
+> to use the PCR performance policy approach. We weighed a variety of
+> security concerns, hardware availability, and the practicality of
+> integrating the capability into our respective efforts. I do not want
+> you to feel as though we are not taking your comments seriously. Ross
+> reached out to some their contacts, and I reached out to a colleague
+> with domain experience as well. From a cursory review, no one saw an
+> issue from a crypto standpoint, beyond some algorithm recommendations.
+> As we highlighted, they did caution about the resulting unorthodox
+> measurement that would impose a burden on attestation solutions.
+>
+> Hopefully With the background and context presented, you would agree the
+> above is a reasonable approach. If you do have concerns, please let us kn=
+ow.
+>
+> V/r,
+> Daniel P. Smith
+
+
+
+--=20
+Andy Lutomirski
+AMA Capital Management, LLC
 
