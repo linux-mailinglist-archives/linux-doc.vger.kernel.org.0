@@ -1,63 +1,65 @@
-Return-Path: <linux-doc+bounces-32568-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32570-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E6609EF042
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 17:26:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC9079EF40A
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 18:05:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 8D25D28FFA3
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 16:26:07 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 45E132909C9
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Dec 2024 17:05:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51D2C23F9FC;
-	Thu, 12 Dec 2024 16:15:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00CD7223338;
+	Thu, 12 Dec 2024 17:02:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bo3M0O7N"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oMefTAdC"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24F7053365;
-	Thu, 12 Dec 2024 16:15:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B817A2153DD;
+	Thu, 12 Dec 2024 17:02:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734020126; cv=none; b=O1ymiXAkGPwNYiTvIpKyIVhMElNWPN5y3jVXT8JAjSsuKu3/7hkWkQrXNEpL7/iE2Iadnuqaj9h03NFuNrlqSeJiiJsCU08nklBdUngFTXayz3Ae9BGSWUxGfdqiFEomiR29l6EHkaerN6rdgyPlv4KU5vY5dyNJySTKzMOjSWM=
+	t=1734022978; cv=none; b=ZOIrse7/GYRVH9EzzuUJzPCcM9wQeGyhYOWOUS87Pd/nGz1ZW/sVK6eXdKP4JZz5ySh/JBnf0QESVidL6Li/Hm6DvAV2rkVHESRslh8SORZErBcSTUVBqz7imRX7PZb+LbuVjNP1Th/BsCrAxvV/Cl62eUcWzHiD2c3VwQsu4ms=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734020126; c=relaxed/simple;
-	bh=US0sNSA9+vWU77C0dKGx5HEPtf3IqHGi45uXTp6uT90=;
+	s=arc-20240116; t=1734022978; c=relaxed/simple;
+	bh=watSS0fbqpZzsEyFSLcvfFuZ8P0NH+THumoSLSiJVpE=;
 	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=bqvVlwUcPTvCFeERVbICXImnGxOcfvb9MssNRG6j4jjzqc0Jb5DrPWQG27Ek2C0PChz1X3SNvtc+wcwpArYMbHED6TFJv5pZQfDOl/OretOe5roKMyt5unVr/N2UvgS/UiJUcfgPhO9Ew+6yFnqYLWNbyyOiempG6eIOg9eft3Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bo3M0O7N; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C380AC4CECE;
-	Thu, 12 Dec 2024 16:15:25 +0000 (UTC)
+	 Content-Disposition:In-Reply-To; b=smD3hFrHN7PBotwTGBvJtvBDd3LeXURz+TL9d04TwzsNx0/jLvuRVQosuGcAWXSfbUcCI4+TBbjJV4CkgKaX9D3aO/c+L+slQq/c1ojhxfSfdUZWNZ4DSpfulS/+rUUXTl887MlLga5ar3FMHyYfr86dqVdzy7W+J00MOQClj3A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oMefTAdC; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67389C4CED3;
+	Thu, 12 Dec 2024 17:02:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1734020126;
-	bh=US0sNSA9+vWU77C0dKGx5HEPtf3IqHGi45uXTp6uT90=;
+	s=k20201202; t=1734022978;
+	bh=watSS0fbqpZzsEyFSLcvfFuZ8P0NH+THumoSLSiJVpE=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:From;
-	b=bo3M0O7NEW5DrPsa+237O22XtQJZW9dTotn6RtDp6LWegudmtbYElUOb0y9R041UG
-	 643Kb6M1zNYDFRdRKdUfVg65klYDRBVhNHuRQBulAPSSSwnJYZp+8mG6in53Cc7DxX
-	 iVxeLqwMJpXwgHVj/Fu8fne8LxtofEKK/PkuDCMi45i7rvue7UO56qehqi1o0lem2K
-	 RAtPmxHOLbgbqf8kt4YvRl/BDPvCg2P3VO6H/olO99JX7VoBVk272msh9SzXNxDjKA
-	 cgb3anQh+slDUqL1MTZZ32GhUEDqp6mmu+72Sq4lBcuZpetk7sn6O1cnoOYZOEtWop
-	 wVhHYLRvHkxGQ==
-Date: Thu, 12 Dec 2024 10:15:24 -0600
+	b=oMefTAdC1o9FrilMO7zCuxGHjtpkebrdNsL5j3ShSTqRYIAiUgsWAsMFVpiG/Osul
+	 VUgXAUOa2P5X4mN/rdHDKXmLf2DFnMHqFv4ZMIkycfy4l19NtL5+u4ZZE9appWl63B
+	 x0dBOWkYQiFOQ9hnbHT14EVKoGAPJX/Ifwn3HftsEUWSucluT3yUKmCsZodFosKDrZ
+	 NNmTurhUDX8NEiKj/wSXCfYHfKYQh6KDiHiHP/66lQpTRohXeGhpOfYoMYHlWOrc3p
+	 0Rmz4xt5DDIpGgXMgUe5Bmj8BKjsIsTj8Y6UkizdX0WatmxDFBOZkMVNJDFrg30a8M
+	 fLtxOy6CXWH5g==
+Date: Thu, 12 Dec 2024 11:02:56 -0600
 From: Bjorn Helgaas <helgaas@kernel.org>
-To: Jinjian Song <jinjian.song@fibocom.com>
-Cc: chandrashekar.devegowda@intel.com, chiranjeevi.rapolu@linux.intel.com,
-	haijun.liu@mediatek.com, m.chetan.kumar@linux.intel.com,
-	ricardo.martinez@linux.intel.com, loic.poulain@linaro.org,
-	ryazanov.s.a@gmail.com, johannes@sipsolutions.net,
-	davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
-	pabeni@redhat.com, linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-	angelogioacchino.delregno@collabora.com,
-	linux-arm-kernel@lists.infradead.org, matthias.bgg@gmail.com,
-	corbet@lwn.net, linux-mediatek@lists.infradead.org,
-	danielwinkler@google.com, korneld@google.com, andrew+netdev@lunn.ch,
-	horms@kernel.org
-Subject: Re: [net-next v1] net: wwan: t7xx: Fix FSM command timeout issue
-Message-ID: <20241212161524.GA3345429@bhelgaas>
+To: Gur Stavi <gur.stavi@huawei.com>
+Cc: gongfan <gongfan1@huawei.com>, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Andrew Lunn <andrew+netdev@lunn.ch>, linux-doc@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>,
+	Cai Huoqing <cai.huoqing@linux.dev>, Xin Guo <guoxin09@huawei.com>,
+	Shen Chenyang <shenchenyang1@hisilicon.com>,
+	Zhou Shuai <zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>,
+	Shi Jing <shijing34@huawei.com>,
+	Meny Yossefi <meny.yossefi@huawei.com>
+Subject: Re: [RFC net-next v02 1/3] net: hinic3: module initialization and
+ tx/rx logic
+Message-ID: <20241212170256.GA3347301@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -66,16 +68,142 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20241212105555.10364-1-jinjian.song@fibocom.com>
+In-Reply-To: <7d62ca11c809ac646c2fd8613fd48729061c22b3.1733990727.git.gur.stavi@huawei.com>
 
-On Thu, Dec 12, 2024 at 06:55:55PM +0800, Jinjian Song wrote:
-> When driver processes the internal state change command, it use
-> asynchronous thread to process the command operation. If the main
-> thread detects that the task has timed out, the asynchronous thread
-> will panic when executing te completion notification because the
-> main thread completion object is released.
+On Thu, Dec 12, 2024 at 02:04:15PM +0200, Gur Stavi wrote:
+> From: gongfan <gongfan1@huawei.com>
+> 
+> This is [1/3] part of hinic3 Ethernet driver initial submission.
+> With this patch hinic3 is a valid kernel module but non-functional driver.
 
-s/it use/it uses an/
-s/te/the/
-s/is released/has been released/
+> +++ b/Documentation/networking/device_drivers/ethernet/huawei/hinic3.rst
+> @@ -0,0 +1,136 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +=====================================================================
+> +Linux kernel driver for Huawei Ethernet Device Driver (hinic3) family
+> +=====================================================================
+> +
+> +Overview
+> +========
+> +
+> +The hinic3 is a network interface card(NIC) for Data Center. It supports
+
+Add space before "(".
+
+> +Prime Physical Function (PPF) is responsible for the management of the
+> +whole NIC card. For example, clock synchronization between the NIC and
+> +the host.
+> +Any PF may serve as a PPF. The PPF is selected dynamically.
+
+Add blank line between paragraphs or reflow into a single paragraph.
+
+Is the PPF selected dynamically by the driver?  By firmware on the
+NIC?
+
+> +hinic3_pci_id_tbl.h       Supported device IDs.
+> +hinic3_hw_intf.h          Interface between HW and driver.
+> +hinic3_queue_common.[ch]  Common structures and methods for NIC queues.
+> +hinic3_common.[ch]        Encapsulation of memory operations in Linux.
+> +hinic3_csr.h              Register definitions in the BAR.
+> +hinic3_hwif.[ch]          Interface for BAR.
+> +hinic3_eqs.[ch]           Interface for AEQs and CEQs.
+> +hinic3_mbox.[ch]          Interface for mailbox.
+> +hinic3_mgmt.[ch]          Management interface based on mailbox and AEQ.
+> +hinic3_wq.[ch]            Work queue data structures and interface.
+> +hinic3_cmdq.[ch]          Command queue is used to post command to HW.
+> +hinic3_hwdev.[ch]         HW structures and methods abstractions.
+> +hinic3_lld.[ch]           Auxiliary driver adaptation layer.
+> +hinic3_hw_comm.[ch]       Interface for common HW operations.
+> +hinic3_mgmt_interface.h   Interface between firmware and driver.
+> +hinic3_hw_cfg.[ch]        Interface for HW configuration.
+> +hinic3_irq.c              Interrupt request
+> +hinic3_netdev_ops.c       Operations registered to Linux kernel stack.
+> +hinic3_nic_dev.h          NIC structures and methods abstractions.
+> +hinic3_main.c             Main Linux kernel driver.
+> +hinic3_nic_cfg.[ch]       NIC service configuration.
+> +hinic3_nic_io.[ch]        Management plane interface for TX and RX.
+> +hinic3_rss.[ch]           Interface for Receive Side Scaling (RSS).
+> +hinic3_rx.[ch]            Interface for transmit.
+> +hinic3_tx.[ch]            Interface for receive.
+> +hinic3_ethtool.c          Interface for ethtool operations (ops).
+> +hinic3_filter.c           Interface for mac address.
+
+Could drop "." at end (or use it consistently).
+
+s/mac/MAC/
+
+> +2 mailbox related events.
+> +
+> +MailBox
+
+s/MailBox/Mailbox/ since that's how you use it elsewhere.
+
+> +-------
+> +
+> +Mailbox is a communication mechanism between the hinic3 driver and the HW.
+
+> +The implementation of CEQ is the same as AEQ. It receives completion events
+> +form HW over a fixed size descriptor of 32 bits. Every device can have up
+> +to 32 CEQs. Every CEQ has a dedicated IRQ. CEQ only receives solicited
+> +events that are responses to requests from the driver. CEQ can receive
+> +multiple types of events, but in practice the hinic3 driver ignores all
+> +events except for HINIC3_CMDQ that represents completion of previously
+> +posted commands on a cmdq.
+
+s/form HW/from HW/
+
+> +Work queues are logical arrays of fixed size WQEs. The array may be spread
+> +over multiple non-contiguous pages using indirection table.
+
+Add blank line or wrap into single paragraph.
+
+> +Work queues are used by I/O queues and command queues.
+
+> +Every function, PF or VF, has a unique ordinal identification within the device.
+> +Many commands to management (mbox or cmdq) contain this ID so HW can apply the
+> +command effect to the right function.
+
+Add blank line or wrap into single paragraph.
+
+> +PF is allowed to post management commands to a subordinate VF by specifying the
+> +VFs ID. A VF must provide its own ID. Anti-spoofing in the HW will cause
+> +command from a VF to fail if it contains the wrong ID.
+
+> +config HINIC3
+> +	tristate "Huawei Intelligent Network Interface Card 3rd"
+> +	# Fields of HW and management structures are little endian and will not
+> +	# be explicitly converted
+
+I guess this comment is here to explain the !CPU_BIG_ENDIAN below?
+That's quite an unusual dependency.
+
+> +	depends on 64BIT && !CPU_BIG_ENDIAN
+
+> +++ b/drivers/net/ethernet/huawei/hinic3/Makefile
+> @@ -0,0 +1,21 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +# Copyright (c) Huawei Technologies Co., Ltd. 2024. All rights reserved.
+> +
+> +obj-$(CONFIG_HINIC3) += hinic3.o
+> +
+> +hinic3-objs := hinic3_hwdev.o \
+> +	       hinic3_lld.o \
+> +	       hinic3_common.o \
+> +	       hinic3_hwif.o \
+> +	       hinic3_hw_cfg.o \
+> +	       hinic3_queue_common.o \
+> +	       hinic3_mbox.o \
+> +	       hinic3_hw_comm.o \
+> +	       hinic3_wq.o \
+> +	       hinic3_nic_io.o \
+> +	       hinic3_nic_cfg.o \
+> +	       hinic3_tx.o \
+> +	       hinic3_rx.o \
+> +	       hinic3_netdev_ops.o \
+> +	       hinic3_rss.o \
+> +	       hinic3_main.o
+> \ No newline at end of file
+
+Add newline.
 
