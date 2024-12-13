@@ -1,104 +1,87 @@
-Return-Path: <linux-doc+bounces-32655-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32659-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDCB49F02DA
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Dec 2024 04:00:17 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FA169F0543
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Dec 2024 08:13:30 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id AEAFE1699CD
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Dec 2024 03:00:14 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7ED171685C1
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Dec 2024 07:13:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B3561126C1E;
-	Fri, 13 Dec 2024 03:00:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kA+uXg5y"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 006B0187325;
+	Fri, 13 Dec 2024 07:13:27 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from arara2.ipen.br (arara2.ipen.br [200.136.52.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81ED527715;
-	Fri, 13 Dec 2024 03:00:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15A141372
+	for <linux-doc@vger.kernel.org>; Fri, 13 Dec 2024 07:13:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=200.136.52.33
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734058814; cv=none; b=COKXj3jgNeXqEEjPhBYqk43pI0r+v/Gd9M5tbJJAZ6jjD6W0psyN1T77DeFXqUsG9cfOnd01WwDQKlQE7JV4ERZXW0pOhc5DkDkeDIw3l5fqo21KQlc7HYShbW5qstrlPQ1Y8XFKhnoOfXUBY03Mn2FZwvHFQ8pMt3SWsM6tnCA=
+	t=1734074006; cv=none; b=AUMicGEimxAdgMqc1koWDFq06nlQODG8zHsIJl/DVbmuwD9aHygsqaIbM4qwICnfdsd4JkGBlt6GeJ590irytFkoEylEK+/2yrp66tP0WJLL/0H0+v3ow700F/Ldx7tGSOFcbCj3eZjML0o0Omd9bff9UvKEHsc2lPT30wLScAs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734058814; c=relaxed/simple;
-	bh=sUWgms/m2M8cMtkGOkYr4LrmL4/DOIF9JUD9CV216iQ=;
-	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=l7hlU6Pq3oFOEP9PbinG7bwbkR+ufOGSD+gfbzfydiqnmVFoG1e9Un3Elh7GbC0cUnknr7TUkfDEQyloIhdKSTg1Z/KDp01cp27B8SujG0a0zYmLnaxT0/xoF+UQiSaMCNrnLWsw8ZICLwoO1XC46uHpFbRljYVO01XjHoPwmHU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kA+uXg5y; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECC66C4CECE;
-	Fri, 13 Dec 2024 03:00:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1734058814;
-	bh=sUWgms/m2M8cMtkGOkYr4LrmL4/DOIF9JUD9CV216iQ=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=kA+uXg5y3WGv5YF7JDNeGmFQ6H4hlKu5LRJJjgxHdZZB/eXl1QTuMUMwJie0BQzvC
-	 OvDVXpH57SVARZ5GbdThREcWahNBZ31gdY9JMh4Ua/DQz+PqIsq1lL70Jcv2hZ9sUs
-	 KowwyOTBM2CcxCLcfbQgT2HXwc3SF59rg6LNhYhQiA8YLm/jONO/1+Tg8fco+agCw7
-	 DU9iAuorvHxuvB/okBITPsU2Rjbbfdrnvzt0PelL+dBie1BPW+iV5cwEAs3ElBuYyc
-	 Wj9EyBEG6EkNmQgF9CQXhSih/QQe+J4Zh2AiDy6BbADVuBBw4NuLWtyZ5/V+Z7ddGa
-	 44yF8JsxdQDDg==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 70EA5380A959;
-	Fri, 13 Dec 2024 03:00:31 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	s=arc-20240116; t=1734074006; c=relaxed/simple;
+	bh=Cgr97JBiSX1QIcd2ZZZsKVChGTY1ZlWJ/4AhaVFA7Wc=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=h7/xttYlrEgHQm3tQPcoSz5+CttrgWsEFF+b7PKd9kWvHlj9xm2SG7ZiN2VpRxyk8E1fuSmTHS7rFFHgeCgCoTSkx2eYDAdGMzd56NcMN2fOoY/dcpNZA3VgSxtoMaObiQG5Bs8T1IFxhY7GUtxmbRyU89methuG9KtvI7ibpBs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ipen.br; spf=pass smtp.mailfrom=ipen.br; arc=none smtp.client-ip=200.136.52.33
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ipen.br
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ipen.br
+X-ASG-Debug-ID: 1734073998-055fc729eb148fd90002-iQMhSN
+Received: from arara.ipen.br (webmail.ip.ipen.br [10.0.10.11]) by arara2.ipen.br with ESMTP id UFTYWFFRCifZO6P2 for <linux-doc@vger.kernel.org>; Fri, 13 Dec 2024 04:13:19 -0300 (BRT)
+X-Barracuda-Envelope-From: TCWM179075@ipen.br
+X-Barracuda-RBL-Trusted-Forwarder: 10.0.10.11
+Received: from ipen.br (unknown [102.129.145.191])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by arara.ipen.br (Postfix) with ESMTPSA id 3C16CFBE501
+	for <linux-doc@vger.kernel.org>; Fri, 13 Dec 2024 01:25:08 -0300 (-03)
+Reply-To: t.mazowieckie@mazowieckie.org
+X-Barracuda-Effective-Source-IP: UNKNOWN[102.129.145.191]
+X-Barracuda-Apparent-Source-IP: 102.129.145.191
+X-Barracuda-RBL-IP: 102.129.145.191
+From: <TCWM179075@ipen.br>
+To: linux-doc@vger.kernel.org
+Subject:  I urge you to understand my viewpoint accurately.
+Date: 13 Dec 2024 12:25:08 +0800
+X-ASG-Orig-Subj: I urge you to understand my viewpoint accurately.
+Message-ID: <20241213122508.DD717FAC5830CECB@ipen.br>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH net-next v4 0/5] devmem TCP fixes
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <173405883030.2519119.15952110801173674783.git-patchwork-notify@kernel.org>
-Date: Fri, 13 Dec 2024 03:00:30 +0000
-References: <20241211212033.1684197-1-almasrymina@google.com>
-In-Reply-To: <20241211212033.1684197-1-almasrymina@google.com>
-To: Mina Almasry <almasrymina@google.com>
-Cc: netdev@vger.kernel.org, kuba@kernel.org, asml.silence@gmail.com,
- willemb@google.com, kaiyuanz@google.com, skhawaja@google.com,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, davem@davemloft.net,
- edumazet@google.com, pabeni@redhat.com, horms@kernel.org, corbet@lwn.net,
- hawk@kernel.org, ilias.apalodimas@linaro.org
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Barracuda-Connect: webmail.ip.ipen.br[10.0.10.11]
+X-Barracuda-Start-Time: 1734073999
+X-Barracuda-URL: https://10.40.40.18:443/cgi-mod/mark.cgi
+X-Barracuda-Scan-Msg-Size: 512
+X-Barracuda-BRTS-Status: 1
+X-Barracuda-BRTS-Evidence: 34fbb5788938ad5710ad28835fd12206-499-txt
+X-Virus-Scanned: by bsmtpd at ipen.br
+X-Barracuda-Spam-Score: 0.00
+X-Barracuda-Spam-Status: No, SCORE=0.00 using global scores of TAG_LEVEL=1000.0 QUARANTINE_LEVEL=1000.0 KILL_LEVEL=1000.0 tests=NO_REAL_NAME
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.45577
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------------------------
+	0.00 NO_REAL_NAME           From: does not include a real name
 
-Hello:
+I am Tomasz Chmielewski, a Portfolio Manager and Chartered=20
+Financial Analyst affiliated with Iwoca Poland Sp. Z OO in=20
+Poland. I have the privilege of working with distinguished=20
+investors who are eager to support your company's current=20
+initiatives, thereby broadening their investment portfolios. If=20
+this proposal aligns with your interests, I invite you to=20
+respond, and I will gladly share more information to assist you.
 
-This series was applied to netdev/net-next.git (main)
-by Jakub Kicinski <kuba@kernel.org>:
-
-On Wed, 11 Dec 2024 21:20:27 +0000 you wrote:
-> Couple unrelated devmem TCP fixes bundled in a series for some
-> convenience.
-> 
-> - fix naming and provide page_pool_alloc_netmem for fragged
-> netmem.
-> 
-> - fix issues with dma-buf dma addresses being potentially
-> passed to dma_sync_for_* helpers.
-> 
-> [...]
-
-Here is the summary with links:
-  - [net-next,v4,1/5] net: page_pool: rename page_pool_alloc_netmem to *_netmems
-    https://git.kernel.org/netdev/net-next/c/91a152cbb49c
-  - [net-next,v4,2/5] net: page_pool: create page_pool_alloc_netmem
-    https://git.kernel.org/netdev/net-next/c/8156c310499a
-  - [net-next,v4,3/5] page_pool: Set `dma_sync` to false for devmem memory provider
-    https://git.kernel.org/netdev/net-next/c/b400f4b87430
-  - [net-next,v4,4/5] page_pool: disable sync for cpu for dmabuf memory provider
-    https://git.kernel.org/netdev/net-next/c/7dba339faae9
-  - [net-next,v4,5/5] net: Document netmem driver support
-    (no matching commit)
-
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
-
+=20
+Yours sincerely,=20
+Tomasz Chmielewski Warsaw, Mazowieckie,
+=20
+Poland.
 
