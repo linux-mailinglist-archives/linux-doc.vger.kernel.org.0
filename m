@@ -1,310 +1,142 @@
-Return-Path: <linux-doc+bounces-32701-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32703-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D9899F14DB
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Dec 2024 19:21:50 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id C614F9F1529
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Dec 2024 19:44:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 7997E7A053E
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Dec 2024 18:21:44 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E640516807D
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Dec 2024 18:44:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 963441E885C;
-	Fri, 13 Dec 2024 18:21:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D3791E7648;
+	Fri, 13 Dec 2024 18:44:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="jiXHgLc+"
+	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="ceDcUwUH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2DD41E048B;
-	Fri, 13 Dec 2024 18:21:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC8391E47D6;
+	Fri, 13 Dec 2024 18:44:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734114091; cv=none; b=mglVqCTpd6fSjHxjj/hg/RhDfbMCM1JBb/ZR3K+WUa6DCQo5eMD025W7bXANyWBLy7IbPBoTFXkOb73sAdm1Kj1ik9KbACLjwuvCc2NYn6yavCFy1cMMukNdPRe48zi2VC/Q3J9aFvbM5LqKHPHTte8vR1/YmMKape6BManLdp4=
+	t=1734115471; cv=none; b=l9ZaiXdSdj3UG/2GUaCfdVLGYagZB7d46JfwX/T99/yW1H8owYfmDXhkFP2u68bk890eq72xVnhzVsG3q1u8b7ZsuWhkau9GOADfcJyD0PeLOnAM/Ogwx8Jf+WHlnAQ+0v186qiAkDl5xBS7C+YDU7Xwb+RgIDQv2z2tAi75ryI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734114091; c=relaxed/simple;
-	bh=FjPXo6BxFKKLA8ZrbiSiN4Fx69AHdFEAFlcVbFHNz4s=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ZrhopBiKyPtTjVMsJYGoxZAoAoish+D33/nBjsVl3oBGgPf+gFLz+ISA7GE1YXmU0ZwhS2WPYgO5GbjHkVLplUWzg+G9iD975lH/gVF8rDNJtjw/Ed1ZILRJf6NTmpaMZEFHYzAIqLoZXLWHGfw0QrsLFjdmqChf/84diwkMlck=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=jiXHgLc+; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 186E0404EA
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1734114089; bh=F6/aLflciz6wVnpv9AxpaYczVWgHDtrn6Q0EXWxfMWs=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=jiXHgLc+u3SAk5aJiklQ2ednZdNnnbtap9Bdy9B2XWgf9Ec1v3RhricJ3VfVYx4yA
-	 fpA2YiHSihRbtAi+zgBwsFvTCy4/jpc1lZsnDEOOY4t3e7sgmB7+ICo76u+Th3qyZD
-	 QpUNEMlJ2/RqaB+1zqzsGxWQ0Gx7xzSXV+p7F5RAnRSsFep2MAJ7DZ1C/QQs2DqpaE
-	 VfMduuZR00lzVp5r2xc3/C7AB78OmKihv5CCDfo9d1jMBKiP3lbrsAALSd+FrDo0Lj
-	 IR59GBNStrhznFCzpjffA79B/piPOuGz5Hht/CfpifIK5W/oGXbcDZEc1Q4nhV5H6t
-	 bTp88OF3x2puQ==
-Received: from trenco.lwn.net (unknown [IPv6:2601:280:5e00:625::1fe])
-	by ms.lwn.net (Postfix) with ESMTPA id 186E0404EA;
-	Fri, 13 Dec 2024 18:21:29 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH 3/3] docs: admin-guide: bring some order to the "everything else" section
-Date: Fri, 13 Dec 2024 11:20:54 -0700
-Message-ID: <20241213182057.343527-4-corbet@lwn.net>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20241213182057.343527-1-corbet@lwn.net>
-References: <20241213182057.343527-1-corbet@lwn.net>
+	s=arc-20240116; t=1734115471; c=relaxed/simple;
+	bh=BGUhJ7s4wap9Trc0L03YqNCF5PervmrG+ZI0sPhI0Iw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=F+X0eYELlhdyFGb7fLZDc5M0aXIAzalKTjQiA/f8NHaYWz+6mZhBHL/2swnZIzWSYqY+53KC8jBVjl353r9x7jE4U/2GSKdCMzGtWwxwd8a3kCSUzh9XbqY9MfFEIGpCy3ODInRo4Yi3fUBTvzbUxUuVuRoxL+ThHE0H8d9ZHNU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=ceDcUwUH; arc=none smtp.client-ip=198.137.202.136
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
+Received: from [192.168.7.202] ([71.202.166.45])
+	(authenticated bits=0)
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 4BDIhojZ1669908
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+	Fri, 13 Dec 2024 10:43:51 -0800
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 4BDIhojZ1669908
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2024111601; t=1734115432;
+	bh=kBqPmg8+aysNeFRPWlQAPUCgrnX3967ZvJpr+SvfrL8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=ceDcUwUH7CqZWX44iL17eN8nw5RrcS4vDK62vWEYOx4MA2DGTpGbKXJUh5TlTeB+a
+	 aQFSWvCltZZOqLjr4cPPbMpByK3RrMy0phB+cHueogz+2DWCNXidHXmLUFkiMPrDeC
+	 mNnA4D2qexyIfyH5SX+2yXuodvc8D4R0DBxs53a43VjZN52WzOd596ng7UDaSB5Hxi
+	 ESgZjFH4J9n8hz9A7Pze2/DwlX0Wy52BRKPmCfeF12MXVoWxUtGLIQ0dnvMFf/BPje
+	 aNuBH6LBP78BMPK21B+oCL1L3T7KCV9diN9ddD1rFUUZSpPY2tr/KhNpom3uXzMITo
+	 Blawug5XjYX7w==
+Message-ID: <832e87d1-8349-47f8-b1dc-33768b534b10@zytor.com>
+Date: Fri, 13 Dec 2024 10:43:49 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 17/27] KVM: x86: Mark CR4.FRED as not reserved when
+ guest can use FRED
+To: Sean Christopherson <seanjc@google.com>
+Cc: Chao Gao <chao.gao@intel.com>, kvm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        pbonzini@redhat.com, corbet@lwn.net, tglx@linutronix.de,
+        mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
+        x86@kernel.org, hpa@zytor.com, luto@kernel.org, peterz@infradead.org,
+        andrew.cooper3@citrix.com
+References: <20241001050110.3643764-1-xin@zytor.com>
+ <20241001050110.3643764-18-xin@zytor.com> <Zxn0tfA+k4ppu2WL@intel.com>
+ <3ec986fa-2bf0-4c78-b532-343ad19436b2@zytor.com>
+ <Z1sz_oMq8yX--H7U@google.com>
+Content-Language: en-US
+From: Xin Li <xin@zytor.com>
+Autocrypt: addr=xin@zytor.com; keydata=
+ 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
+ l75w1xInsg==
+In-Reply-To: <Z1sz_oMq8yX--H7U@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The bulk of the admin guide had become a big pile of stuff haphazardly
-tossed together, mostly in the catch-all "everything else" section.  Split
-that section into a few broad categories and sort the documents into them
-as appropriate.
+On 12/12/2024 11:05 AM, Sean Christopherson wrote:
+> On Thu, Dec 12, 2024, Xin Li wrote:
+>> On 10/24/2024 12:18 AM, Chao Gao wrote:
+>>>> diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
+>>>> index 03f42b218554..bfdd10773136 100644
+>>>> --- a/arch/x86/kvm/vmx/vmx.c
+>>>> +++ b/arch/x86/kvm/vmx/vmx.c
+>>>> @@ -8009,6 +8009,10 @@ void vmx_vcpu_after_set_cpuid(struct kvm_vcpu *vcpu)
+>>>> 	kvm_governed_feature_check_and_set(vcpu, X86_FEATURE_LAM);
+>>>> 	kvm_governed_feature_check_and_set(vcpu, X86_FEATURE_FRED);
+>>>>
+>>>> +	/* Don't allow CR4.FRED=1 before all of FRED KVM support is in place. */
+>>>> +	if (!guest_can_use(vcpu, X86_FEATURE_FRED))
+>>>> +		vcpu->arch.cr4_guest_rsvd_bits |= X86_CR4_FRED;
+>>>
+>>> is this necessary? __kvm_is_valid_cr4() ensures that guests cannot set any bit
+>>> which isn't supported by the hardware.
+>>>
+>>> To account for hardware/KVM caps, I think the following changes will work. This
+>>> will fix all other bits besides X86_CR4_FRED.
+>>
+>> This seems a generic infra improvement, maybe it's better for you to
+>> send it as an individual patch to Sean and the KVM mailing list?
+> 
+> Already ahead of y'all :-)  (I think, I didn't look closely at this).
+> 
+> https://lore.kernel.org/all/20241128013424.4096668-6-seanjc@google.com
 
-No documents have been added or removed, they are just reordered.  Note
-that many of these documents are severely obsolete and should be considered
-for removal.
-
-Signed-off-by: Jonathan Corbet <corbet@lwn.net>
----
- Documentation/admin-guide/index.rst | 161 +++++++++++++++++-----------
- 1 file changed, 100 insertions(+), 61 deletions(-)
-
-diff --git a/Documentation/admin-guide/index.rst b/Documentation/admin-guide/index.rst
-index 6864b079b391..c8af32a8f800 100644
---- a/Documentation/admin-guide/index.rst
-+++ b/Documentation/admin-guide/index.rst
-@@ -18,18 +18,41 @@ etc.
-    :maxdepth: 1
- 
-    README
--   kernel-parameters
-    devices
--   sysctl/index
- 
-    features
- 
--This section describes CPU vulnerabilities and their mitigations.
-+A big part of the kernel's administrative interface is the /proc and sysfs
-+virtual filesystems; these documents describe how to interact with tem
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   sysfs-rules
-+   sysctl/index
-+   cputopology
-+   abi
-+
-+Security-related documentation:
- 
- .. toctree::
-    :maxdepth: 1
- 
-    hw-vuln/index
-+   LSM/index
-+   perf-security
-+
-+Booting the kernel
-+------------------
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   bootconfig
-+   kernel-parameters
-+   efi-stub
-+   initrd
-+
- 
- Tracking down and identifying problems
- --------------------------------------
-@@ -53,104 +76,120 @@ problems and bugs in particular.
-    kdump/index
-    perf/index
-    pstore-blk
-+   clearing-warn-once
-+   kernel-per-CPU-kthreads
-+   lockup-watchdogs
-+   RAS/index
-+   sysrq
-+
- 
--sysfs
-------
-+Core-kernel subsystems
-+----------------------
- 
--A big part of the kernel's administrative interface is the sysfs virtual
--filesystem; these documents describe how to interact with sysfs.
-+These documents describe core-kernel administration interfaces that are
-+likely to be of interest on almost any system.
- 
- .. toctree::
-    :maxdepth: 1
- 
--   sysfs-rules
--   abi
--
--Workload analysis
-------------------
-+   cgroup-v2
-+   cgroup-v1/index
-+   cpu-load
-+   mm/index
-+   module-signing
-+   namespaces/index
-+   numastat
-+   pm/index
-+   syscall-user-dispatch
- 
--This is the beginning of a section with information of interest to
--application developers and system integrators doing analysis of the
--Linux kernel for safety critical applications. Documents supporting
--analysis of kernel interactions with applications, and key kernel
--subsystems expectations will be found here.
-+Support for non-native binary formats.  Note that some of these
-+documents are ... old ...
- 
- .. toctree::
-    :maxdepth: 1
- 
--   workload-tracing
-+   binfmt-misc
-+   java
-+   mono
- 
--Everything else
-----------------
- 
--The rest of this manual consists of various unordered guides on how to
--configure specific aspects of kernel behavior to your liking.
-+Block-layer and filesystem administration
-+-----------------------------------------
- 
- .. toctree::
-    :maxdepth: 1
- 
--   acpi/index
--   aoe/index
--   auxdisplay/index
-    bcache
-    binderfs
--   binfmt-misc
-    blockdev/index
--   bootconfig
--   braille-console
--   btmrvl
--   cgroup-v1/index
--   cgroup-v2
-    cifs/index
--   clearing-warn-once
--   cpu-load
--   cputopology
--   dell_rbu
-    device-mapper/index
--   edid
--   efi-stub
-    ext4
-    filesystem-monitoring
-    nfs/index
--   gpio/index
--   highuid
--   hw_random
--   initrd
-    iostats
--   java
-    jfs
--   kernel-per-CPU-kthreads
-+   md
-+   ufs
-+   xfs
-+
-+Device-specific guides
-+----------------------
-+
-+How to configure your hardware within your Linux system.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   acpi/index
-+   aoe/index
-+   auxdisplay/index
-+   braille-console
-+   btmrvl
-+   dell_rbu
-+   edid
-+   gpio/index
-+   hw_random
-    laptops/index
-    lcd-panel-cgram
--   ldm
--   lockup-watchdogs
--   LSM/index
--   md
-    media/index
--   mm/index
--   module-signing
--   mono
--   namespaces/index
--   numastat
-+   nvme-multipath
-    parport
--   perf-security
--   pm/index
-    pnp
-    rapidio
--   RAS/index
-    rtc
-    serial-console
-    svga
--   syscall-user-dispatch
--   sysrq
-    thermal/index
-    thunderbolt
--   ufs
--   unicode
-    vga-softcursor
-    video-output
--   xfs
--   nvme-multipath
-+
-+Workload analysis
-+-----------------
-+
-+This is the beginning of a section with information of interest to
-+application developers and system integrators doing analysis of the
-+Linux kernel for safety critical applications. Documents supporting
-+analysis of kernel interactions with applications, and key kernel
-+subsystems expectations will be found here.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   workload-tracing
-+
-+Everything else
-+---------------
-+
-+A few hard-to-categorize and generally obsolete documents.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   highuid
-+   ldm
-+   unicode
- 
- .. only::  subproject and html
- 
--- 
-2.47.1
+Ha, that is nice.  Thank you!
 
 
