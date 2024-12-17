@@ -1,611 +1,226 @@
-Return-Path: <linux-doc+bounces-33025-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33027-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C7369F4BF4
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 14:22:52 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id EA1329F4D98
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 15:24:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id EC7001895CA4
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 13:09:52 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2FBA4168ACF
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 14:24:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E72E1F9F45;
-	Tue, 17 Dec 2024 13:02:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 580821F758B;
+	Tue, 17 Dec 2024 14:23:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="binQUbdu"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="GoHVla35"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC52C1F9F40;
-	Tue, 17 Dec 2024 13:02:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A0F21F666B
+	for <linux-doc@vger.kernel.org>; Tue, 17 Dec 2024 14:23:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734440527; cv=none; b=jI7Z7eDx5N57BN4uUkOqbZvyL0qu3IUVEHZ56TBRfXRy6Upjp/CsO8+Rqpq7XGgYAV4IzfRfCe828b91thWoBDe6FPMSXr9v9v51JXxSzkCHAYG/k+Qj0/3Gno/gGAFoGpf/nmFPN41p8qZMOsfcJyzz7zAAPPNsUvD6PBLD1NY=
+	t=1734445410; cv=none; b=jKudhAQz1dSmKPpAFKoCSA4NBZw8o/N/eC/wqMwP0k+Q2QstoMykHUF7tL/AsmKnq4EaE2THEXri4Todf6iS7MXAx0K4QSKvDF/dMSyT/o9OPKb4GpWJsAqOaBzv/+WsRfqxhghUJecaPrcwPlfmbqTxKHXimpV+nYnmBetPg0o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734440527; c=relaxed/simple;
-	bh=1i4Q22Noom6dP1zwC56KXmf6NLafiu+OCFYVjUdRIJw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ac9uzUYV8R7uPw4C5o/y2hjWtTN11xKHjTwDqaddJBRyT4YlDQuguQBfR3QYqHy5LBZ/jJvuUy2n0pLRgLmJQZuJr5Y67K3T8aap/6gog6jPKMI62XiIDeNGIjRW7hSOQgrZzVGRW5PM8nfFDQjD2mIwbrIWHrslNmqvrAAtb1k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=binQUbdu; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E3453C4CED3;
-	Tue, 17 Dec 2024 13:02:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1734440527;
-	bh=1i4Q22Noom6dP1zwC56KXmf6NLafiu+OCFYVjUdRIJw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=binQUbduqwRJVcrlXtMaGWSODJWKBl2iM2TiId79MZzVA6KgpRJnw9pZ3edaOITRX
-	 yrsdmHUJuzqbBpDYUicae+zPOn5svRwoT2c8y22iyrgrqPlAYy+4pwWFwu5us2v7A6
-	 uYPxFGHSpjKsQvJrm6PpKjuhYkVvkyU0jpus4YVJ8GesDQVAvaYHtV3zUTTGq9dEuz
-	 hisncVsCbc/n7XcPdih/RLT87+YkTiRB+NmULsgj4VQQn45ZyW9fhG5Dt1/Aeo6lq1
-	 lSY2hQz+PTWur8XC0r/9DtvWQcl8EB4gMnG0dj26zr8lXHy10ogltPoc2OxDO1b7rL
-	 z00qkvPLY0kPQ==
-From: Leon Romanovsky <leon@kernel.org>
-To: Jens Axboe <axboe@kernel.dk>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>,
-	Christoph Hellwig <hch@lst.de>,
-	Sagi Grimberg <sagi@grimberg.me>
-Cc: Leon Romanovsky <leonro@nvidia.com>,
-	Keith Busch <kbusch@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Logan Gunthorpe <logang@deltatee.com>,
-	Yishai Hadas <yishaih@nvidia.com>,
-	Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Alex Williamson <alex.williamson@redhat.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	=?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	linux-rdma@vger.kernel.org,
-	iommu@lists.linux.dev,
-	linux-nvme@lists.infradead.org,
-	linux-pci@vger.kernel.org,
-	kvm@vger.kernel.org,
-	linux-mm@kvack.org,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v5 17/17] vfio/mlx5: Enable the DMA link API
-Date: Tue, 17 Dec 2024 15:00:35 +0200
-Message-ID: <b83c323ddd3dff4578fe251d4b517e2e72591ac4.1734436840.git.leon@kernel.org>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <cover.1734436840.git.leon@kernel.org>
-References: <cover.1734436840.git.leon@kernel.org>
+	s=arc-20240116; t=1734445410; c=relaxed/simple;
+	bh=GEHzuAOCJgvRm9cIDs5L/dZJjYXM+Gu7fX5nDRW9toY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=QUBErzdsVaiY8ZGR7AFAabVKW8Arxal/dqWt2uB3sEv4wXHyBTjnI2lgONPM02wH58r9UM0OB4PrCKiMT4kZck1n9qewdyJopw7h+1SQQy5DDxr1cb20bAmH+7f2E1ZGLBP0Sg12udHuqoeZN11mJjvPuJryJYZtly0sRr55K9A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=GoHVla35; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1734445407;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=FSgN4wlXGgdplGkFID7oReLMbww8771UXwgGNzlG4Pg=;
+	b=GoHVla35XXFI68rp1vNFewOro1zymFD5STbYLBxMxNY8cIzGgrIWTt2gl3pPPXrSCmpGTf
+	EKPTcxVFcEGEfshZ21jIfDDI2+Rb7YTbl3IoAF7qLjOqKGERSOokvvdDZYHUtEVxf5nEIA
+	4uSpD45sZXEcmH/4kO9NyZe/jy3VTqg=
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-192-zmRlJBbWM96MxyW4pMQvHw-1; Tue, 17 Dec 2024 09:23:26 -0500
+X-MC-Unique: zmRlJBbWM96MxyW4pMQvHw-1
+X-Mimecast-MFC-AGG-ID: zmRlJBbWM96MxyW4pMQvHw
+Received: by mail-ej1-f71.google.com with SMTP id a640c23a62f3a-aa6a1bf7a82so66619766b.1
+        for <linux-doc@vger.kernel.org>; Tue, 17 Dec 2024 06:23:26 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1734445405; x=1735050205;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=FSgN4wlXGgdplGkFID7oReLMbww8771UXwgGNzlG4Pg=;
+        b=rwshYvrTtqhd2vkXYrGodXEIOy1ykGMKskGzDp8v2pOXEideH6+iLiTDLNKH0w4bfU
+         lXgKxRkrlV10VO2PDTz0Qs3RfN01MiFhAAViMIlfqp0plfCKVInlQfGmF4nH7gryRuul
+         lE44H83VYgHTxjIH2CHLdcdvxrHln5QMZj8lH0Dx4Z8zQmzAXe1Ndb4vqRJms6eHfLXA
+         aMdS9TS2Qh+7aXpTZfO5V43D/rYDzsBlUJ/P6g3X4gcyYcxk0YO5qw3XE9PJ823hDWBw
+         UNt+gW9JIJQDZ3o1E4x1KnaXr8U6RYLDVyxNTNVy8jC+mmwKdBiUA9hwce0ZnrfF8y7o
+         bhrQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWq6thQ5ZgmWlF1TkcaivhRdHhxxkLCCAvImL6qQp+cc5RMQnEKLK7X6EsYIqMHo18rbar+PqcB9Sc=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzE58LrfhRx+9yW1d62K9TwV1iITqOyEnpsFCATjEonRxuFg6Sa
+	LiVtHmggljt7+rvFglaN3EGTApY4kfpclPEI4LxynX1uMI4aPStX2I/Mzmzrn8MGsS6hu9plesa
+	MZGom/NyBa7PYt7pjbZEhrvqQQdqInZSBlEd8Xg+mGEQ2XJZuU6uUiuIgMlpWzKACIg==
+X-Gm-Gg: ASbGnctVzPZlgdl9jqBo2WXtPJeO6Af7lxvwc4Lft/TqJINs+8uUlQhJwDhOZyTSffi
+	YO1eYPIRTDOVBRAMNB032BAgRDjPIr9nRLOYyqDxwuq+cv3OKQK5hvWGDYW/1WuOsJNFOx6xaNG
+	atAZveu7CfvVXfexk7Krx8UGIYvycXr4Y8xLF1ZFF2DzeKnqfqrgHxZNrWnY4FzYbr7X4YN2zN1
+	CjW3T8H3aFMuKxukSRkPwr0ZwyI1jA2OewMAuxrEBd/WSfY3QxyHX2/kVQ=
+X-Received: by 2002:a17:907:7707:b0:aa6:87e8:1d12 with SMTP id a640c23a62f3a-aab77e7fb68mr1268001466b.45.1734445404875;
+        Tue, 17 Dec 2024 06:23:24 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH8DGKreIgpjW49AEyXqJ0Ih9IIz3vMgcLPmJgEDXCPmvjEcUOf41BnTnq2KWFedarryER+QQ==
+X-Received: by 2002:a17:907:7707:b0:aa6:87e8:1d12 with SMTP id a640c23a62f3a-aab77e7fb68mr1267998666b.45.1734445404457;
+        Tue, 17 Dec 2024 06:23:24 -0800 (PST)
+Received: from [10.87.1.157] ([145.15.244.207])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-aab963598c2sm449222966b.96.2024.12.17.06.23.22
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 17 Dec 2024 06:23:24 -0800 (PST)
+Message-ID: <66897a27-5f81-46fc-898d-682456d7f37f@redhat.com>
+Date: Tue, 17 Dec 2024 15:23:22 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] platform/x86: samsung-galaxybook: Add
+ samsung-galaxybook driver
+To: =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>,
+ Joshua Grisham <josh@joshuagrisham.com>
+Cc: ilpo.jarvinen@linux.intel.com, W_Armin@gmx.de,
+ platform-driver-x86@vger.kernel.org, corbet@lwn.net,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20241216103855.18457-1-josh@joshuagrisham.com>
+ <13184052-baf2-4e7d-b8ef-9ba3f34d475a@t-8ch.de>
+Content-Language: en-US
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <13184052-baf2-4e7d-b8ef-9ba3f34d475a@t-8ch.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Leon Romanovsky <leonro@nvidia.com>
+Hi,
 
-Remove intermediate scatter-gather table completely and
-enable new DMA link API.
+On 16-Dec-24 5:46 PM, Thomas Weißschuh wrote:
+> Hi Joshua!
+> 
+> (disclaimer: I didn't read all the previous reviews)
+> 
 
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/vfio/pci/mlx5/cmd.c  | 299 ++++++++++++++++-------------------
- drivers/vfio/pci/mlx5/cmd.h  |  21 ++-
- drivers/vfio/pci/mlx5/main.c |  31 ----
- 3 files changed, 148 insertions(+), 203 deletions(-)
+Disclaimer: I also did not read all of the previous reviews.
 
-diff --git a/drivers/vfio/pci/mlx5/cmd.c b/drivers/vfio/pci/mlx5/cmd.c
-index 48c272ecb04f..fba20abf240a 100644
---- a/drivers/vfio/pci/mlx5/cmd.c
-+++ b/drivers/vfio/pci/mlx5/cmd.c
-@@ -345,26 +345,82 @@ static u32 *alloc_mkey_in(u32 npages, u32 pdn)
- 	return in;
- }
- 
--static int create_mkey(struct mlx5_core_dev *mdev, u32 npages,
--		       struct mlx5_vhca_data_buffer *buf, u32 *mkey_in,
-+static int create_mkey(struct mlx5_core_dev *mdev, u32 npages, u32 *mkey_in,
- 		       u32 *mkey)
- {
-+	int inlen = MLX5_ST_SZ_BYTES(create_mkey_in) +
-+		sizeof(__be64) * round_up(npages, 2);
-+
-+	return mlx5_core_create_mkey(mdev, mkey, mkey_in, inlen);
-+}
-+
-+static void unregister_dma_pages(struct mlx5_core_dev *mdev, u32 npages,
-+				 u32 *mkey_in, struct dma_iova_state *state,
-+				 enum dma_data_direction dir)
-+{
-+	dma_addr_t addr;
- 	__be64 *mtt;
--	int inlen;
-+	int i;
- 
--	mtt = (__be64 *)MLX5_ADDR_OF(create_mkey_in, mkey_in, klm_pas_mtt);
--	if (buf) {
--		struct sg_dma_page_iter dma_iter;
-+	WARN_ON_ONCE(dir == DMA_NONE);
- 
--		for_each_sgtable_dma_page(&buf->table.sgt, &dma_iter, 0)
--			*mtt++ = cpu_to_be64(
--				sg_page_iter_dma_address(&dma_iter));
-+	if (dma_use_iova(state)) {
-+		dma_iova_destroy(mdev->device, state, npages * PAGE_SIZE, dir,
-+				 0);
-+	} else {
-+		mtt = (__be64 *)MLX5_ADDR_OF(create_mkey_in, mkey_in,
-+					     klm_pas_mtt);
-+		for (i = npages - 1; i >= 0; i--) {
-+			addr = be64_to_cpu(mtt[i]);
-+			dma_unmap_page(mdev->device, addr, PAGE_SIZE, dir);
-+		}
- 	}
-+}
- 
--	inlen = MLX5_ST_SZ_BYTES(create_mkey_in) +
--		sizeof(__be64) * round_up(npages, 2);
-+static int register_dma_pages(struct mlx5_core_dev *mdev, u32 npages,
-+			      struct page **page_list, u32 *mkey_in,
-+			      struct dma_iova_state *state,
-+			      enum dma_data_direction dir)
-+{
-+	dma_addr_t addr;
-+	size_t mapped = 0;
-+	__be64 *mtt;
-+	int i, err;
- 
--	return mlx5_core_create_mkey(mdev, mkey, mkey_in, inlen);
-+	WARN_ON_ONCE(dir == DMA_NONE);
-+
-+	mtt = (__be64 *)MLX5_ADDR_OF(create_mkey_in, mkey_in, klm_pas_mtt);
-+
-+	if (dma_iova_try_alloc(mdev->device, state, 0, npages * PAGE_SIZE)) {
-+		addr = state->addr;
-+		for (i = 0; i < npages; i++) {
-+			err = dma_iova_link(mdev->device, state,
-+					    page_to_phys(page_list[i]), mapped,
-+					    PAGE_SIZE, dir, 0);
-+			if (err)
-+				goto error;
-+			*mtt++ = cpu_to_be64(addr);
-+			addr += PAGE_SIZE;
-+			mapped += PAGE_SIZE;
-+		}
-+		err = dma_iova_sync(mdev->device, state, 0, mapped);
-+		if (err)
-+			goto error;
-+	} else {
-+		for (i = 0; i < npages; i++) {
-+			addr = dma_map_page(mdev->device, page_list[i], 0,
-+					    PAGE_SIZE, dir);
-+			err = dma_mapping_error(mdev->device, addr);
-+			if (err)
-+				goto error;
-+			*mtt++ = cpu_to_be64(addr);
-+		}
-+	}
-+	return 0;
-+
-+error:
-+	unregister_dma_pages(mdev, i, mkey_in, state, dir);
-+	return err;
- }
- 
- static int mlx5vf_dma_data_buffer(struct mlx5_vhca_data_buffer *buf)
-@@ -380,98 +436,91 @@ static int mlx5vf_dma_data_buffer(struct mlx5_vhca_data_buffer *buf)
- 	if (buf->mkey_in || !buf->npages)
- 		return -EINVAL;
- 
--	ret = dma_map_sgtable(mdev->device, &buf->table.sgt, buf->dma_dir, 0);
--	if (ret)
--		return ret;
--
- 	buf->mkey_in = alloc_mkey_in(buf->npages, buf->migf->pdn);
--	if (!buf->mkey_in) {
--		ret = -ENOMEM;
--		goto err;
--	}
-+	if (!buf->mkey_in)
-+		return -ENOMEM;
- 
--	ret = create_mkey(mdev, buf->npages, buf, buf->mkey_in, &buf->mkey);
-+	ret = register_dma_pages(mdev, buf->npages, buf->page_list,
-+				 buf->mkey_in, &buf->state, buf->dma_dir);
-+	if (ret)
-+		goto err_register_dma;
-+
-+	ret = create_mkey(mdev, buf->npages, buf->mkey_in, &buf->mkey);
- 	if (ret)
- 		goto err_create_mkey;
- 
- 	return 0;
- 
- err_create_mkey:
-+	unregister_dma_pages(mdev, buf->npages, buf->mkey_in, &buf->state,
-+			     buf->dma_dir);
-+err_register_dma:
- 	kvfree(buf->mkey_in);
- 	buf->mkey_in = NULL;
--err:
--	dma_unmap_sgtable(mdev->device, &buf->table.sgt, buf->dma_dir, 0);
- 	return ret;
- }
- 
-+static void free_page_list(u32 npages, struct page **page_list)
-+{
-+	int i;
-+
-+	/* Undo alloc_pages_bulk_array() */
-+	for (i = npages - 1; i >= 0; i--)
-+		__free_page(page_list[i]);
-+
-+	kvfree(page_list);
-+}
-+
- void mlx5vf_free_data_buffer(struct mlx5_vhca_data_buffer *buf)
- {
--	struct mlx5_vf_migration_file *migf = buf->migf;
--	struct sg_page_iter sg_iter;
-+	struct mlx5vf_pci_core_device *mvdev = buf->migf->mvdev;
-+	struct mlx5_core_dev *mdev = mvdev->mdev;
- 
--	lockdep_assert_held(&migf->mvdev->state_mutex);
--	WARN_ON(migf->mvdev->mdev_detach);
-+	lockdep_assert_held(&mvdev->state_mutex);
-+	WARN_ON(mvdev->mdev_detach);
- 
- 	if (buf->mkey_in) {
--		mlx5_core_destroy_mkey(migf->mvdev->mdev, buf->mkey);
-+		mlx5_core_destroy_mkey(mdev, buf->mkey);
-+		unregister_dma_pages(mdev, buf->npages, buf->mkey_in,
-+				     &buf->state, buf->dma_dir);
- 		kvfree(buf->mkey_in);
--		dma_unmap_sgtable(migf->mvdev->mdev->device, &buf->table.sgt,
--				  buf->dma_dir, 0);
- 	}
- 
--	/* Undo alloc_pages_bulk_array() */
--	for_each_sgtable_page(&buf->table.sgt, &sg_iter, 0)
--		__free_page(sg_page_iter_page(&sg_iter));
--	sg_free_append_table(&buf->table);
-+	free_page_list(buf->npages, buf->page_list);
- 	kfree(buf);
- }
- 
--static int mlx5vf_add_migration_pages(struct mlx5_vhca_data_buffer *buf,
--				      unsigned int npages)
-+static int mlx5vf_add_pages(struct page ***page_list, unsigned int npages)
- {
--	unsigned int to_alloc = npages;
--	struct page **page_list;
--	unsigned long filled;
--	unsigned int to_fill;
--	int ret;
-+	unsigned int filled, done = 0;
- 	int i;
- 
--	to_fill = min_t(unsigned int, npages, PAGE_SIZE / sizeof(*page_list));
--	page_list = kvzalloc(to_fill * sizeof(*page_list), GFP_KERNEL_ACCOUNT);
--	if (!page_list)
-+	*page_list =
-+		kvcalloc(npages, sizeof(struct page *), GFP_KERNEL_ACCOUNT);
-+	if (!*page_list)
- 		return -ENOMEM;
- 
--	do {
--		filled = alloc_pages_bulk_array(GFP_KERNEL_ACCOUNT, to_fill,
--						page_list);
--		if (!filled) {
--			ret = -ENOMEM;
-+	for (;;) {
-+		filled = alloc_pages_bulk_array(GFP_KERNEL_ACCOUNT,
-+						npages - done,
-+						*page_list + done);
-+		if (!filled)
- 			goto err;
--		}
--		to_alloc -= filled;
--		ret = sg_alloc_append_table_from_pages(
--			&buf->table, page_list, filled, 0,
--			filled << PAGE_SHIFT, UINT_MAX, SG_MAX_SINGLE_ALLOC,
--			GFP_KERNEL_ACCOUNT);
- 
--		if (ret)
--			goto err_append;
--		buf->npages += filled;
--		/* clean input for another bulk allocation */
--		memset(page_list, 0, filled * sizeof(*page_list));
--		to_fill = min_t(unsigned int, to_alloc,
--				PAGE_SIZE / sizeof(*page_list));
--	} while (to_alloc > 0);
-+		done += filled;
-+		if (done == npages)
-+			break;
-+	}
- 
--	kvfree(page_list);
- 	return 0;
- 
--err_append:
--	for (i = filled - 1; i >= 0; i--)
--		__free_page(page_list[i]);
- err:
--	kvfree(page_list);
--	return ret;
-+	for (i = 0; i < done; i++)
-+		__free_page(*page_list[i]);
-+
-+	kvfree(*page_list);
-+	*page_list = NULL;
-+	return -ENOMEM;
- }
- 
- struct mlx5_vhca_data_buffer *
-@@ -488,10 +537,12 @@ mlx5vf_alloc_data_buffer(struct mlx5_vf_migration_file *migf, u32 npages,
- 	buf->dma_dir = dma_dir;
- 	buf->migf = migf;
- 	if (npages) {
--		ret = mlx5vf_add_migration_pages(buf, npages);
-+		ret = mlx5vf_add_pages(&buf->page_list, npages);
- 		if (ret)
- 			goto end;
- 
-+		buf->npages = npages;
-+
- 		if (dma_dir != DMA_NONE) {
- 			ret = mlx5vf_dma_data_buffer(buf);
- 			if (ret)
-@@ -1350,101 +1401,16 @@ static void mlx5vf_destroy_qp(struct mlx5_core_dev *mdev,
- 	kfree(qp);
- }
- 
--static void free_recv_pages(struct mlx5_vhca_recv_buf *recv_buf)
--{
--	int i;
--
--	/* Undo alloc_pages_bulk_array() */
--	for (i = 0; i < recv_buf->npages; i++)
--		__free_page(recv_buf->page_list[i]);
--
--	kvfree(recv_buf->page_list);
--}
--
--static int alloc_recv_pages(struct mlx5_vhca_recv_buf *recv_buf,
--			    unsigned int npages)
--{
--	unsigned int filled = 0, done = 0;
--	int i;
--
--	recv_buf->page_list = kvcalloc(npages, sizeof(*recv_buf->page_list),
--				       GFP_KERNEL_ACCOUNT);
--	if (!recv_buf->page_list)
--		return -ENOMEM;
--
--	for (;;) {
--		filled = alloc_pages_bulk_array(GFP_KERNEL_ACCOUNT,
--						npages - done,
--						recv_buf->page_list + done);
--		if (!filled)
--			goto err;
--
--		done += filled;
--		if (done == npages)
--			break;
--	}
--
--	recv_buf->npages = npages;
--	return 0;
--
--err:
--	for (i = 0; i < npages; i++) {
--		if (recv_buf->page_list[i])
--			__free_page(recv_buf->page_list[i]);
--	}
--
--	kvfree(recv_buf->page_list);
--	return -ENOMEM;
--}
--static void unregister_dma_pages(struct mlx5_core_dev *mdev, u32 npages,
--				 u32 *mkey_in)
--{
--	dma_addr_t addr;
--	__be64 *mtt;
--	int i;
--
--	mtt = (__be64 *)MLX5_ADDR_OF(create_mkey_in, mkey_in, klm_pas_mtt);
--	for (i = npages - 1; i >= 0; i--) {
--		addr = be64_to_cpu(mtt[i]);
--		dma_unmap_single(mdev->device, addr, PAGE_SIZE,
--				DMA_FROM_DEVICE);
--	}
--}
--
--static int register_dma_pages(struct mlx5_core_dev *mdev, u32 npages,
--			      struct page **page_list, u32 *mkey_in)
--{
--	dma_addr_t addr;
--	__be64 *mtt;
--	int i;
--
--	mtt = (__be64 *)MLX5_ADDR_OF(create_mkey_in, mkey_in, klm_pas_mtt);
--
--	for (i = 0; i < npages; i++) {
--		addr = dma_map_page(mdev->device, page_list[i], 0, PAGE_SIZE,
--				    DMA_FROM_DEVICE);
--		if (dma_mapping_error(mdev->device, addr))
--			goto error;
--
--		*mtt++ = cpu_to_be64(addr);
--	}
--
--	return 0;
--
--error:
--	unregister_dma_pages(mdev, i, mkey_in);
--	return -ENOMEM;
--}
--
- static void mlx5vf_free_qp_recv_resources(struct mlx5_core_dev *mdev,
- 					  struct mlx5_vhca_qp *qp)
- {
- 	struct mlx5_vhca_recv_buf *recv_buf = &qp->recv_buf;
- 
- 	mlx5_core_destroy_mkey(mdev, recv_buf->mkey);
--	unregister_dma_pages(mdev, recv_buf->npages, recv_buf->mkey_in);
-+	unregister_dma_pages(mdev, recv_buf->npages, recv_buf->mkey_in,
-+			     &recv_buf->state, DMA_FROM_DEVICE);
- 	kvfree(recv_buf->mkey_in);
--	free_recv_pages(&qp->recv_buf);
-+	free_page_list(recv_buf->npages, recv_buf->page_list);
- }
- 
- static int mlx5vf_alloc_qp_recv_resources(struct mlx5_core_dev *mdev,
-@@ -1455,10 +1421,12 @@ static int mlx5vf_alloc_qp_recv_resources(struct mlx5_core_dev *mdev,
- 	struct mlx5_vhca_recv_buf *recv_buf = &qp->recv_buf;
- 	int err;
- 
--	err = alloc_recv_pages(recv_buf, npages);
--	if (err < 0)
-+	err = mlx5vf_add_pages(&recv_buf->page_list, npages);
-+	if (err)
- 		return err;
- 
-+	recv_buf->npages = npages;
-+
- 	recv_buf->mkey_in = alloc_mkey_in(npages, pdn);
- 	if (!recv_buf->mkey_in) {
- 		err = -ENOMEM;
-@@ -1466,24 +1434,25 @@ static int mlx5vf_alloc_qp_recv_resources(struct mlx5_core_dev *mdev,
- 	}
- 
- 	err = register_dma_pages(mdev, npages, recv_buf->page_list,
--				 recv_buf->mkey_in);
-+				 recv_buf->mkey_in, &recv_buf->state,
-+				 DMA_FROM_DEVICE);
- 	if (err)
- 		goto err_register_dma;
- 
--	err = create_mkey(mdev, npages, NULL, recv_buf->mkey_in,
--			  &recv_buf->mkey);
-+	err = create_mkey(mdev, npages, recv_buf->mkey_in, &recv_buf->mkey);
- 	if (err)
- 		goto err_create_mkey;
- 
- 	return 0;
- 
- err_create_mkey:
--	unregister_dma_pages(mdev, npages, recv_buf->mkey_in);
-+	unregister_dma_pages(mdev, npages, recv_buf->mkey_in, &recv_buf->state,
-+			     DMA_FROM_DEVICE);
- err_register_dma:
- 	kvfree(recv_buf->mkey_in);
- 	recv_buf->mkey_in = NULL;
- end:
--	free_recv_pages(recv_buf);
-+	free_page_list(npages, recv_buf->page_list);
- 	return err;
- }
- 
-diff --git a/drivers/vfio/pci/mlx5/cmd.h b/drivers/vfio/pci/mlx5/cmd.h
-index 25dd6ff54591..d7821b5ca772 100644
---- a/drivers/vfio/pci/mlx5/cmd.h
-+++ b/drivers/vfio/pci/mlx5/cmd.h
-@@ -53,7 +53,8 @@ struct mlx5_vf_migration_header {
- };
- 
- struct mlx5_vhca_data_buffer {
--	struct sg_append_table table;
-+	struct page **page_list;
-+	struct dma_iova_state state;
- 	loff_t start_pos;
- 	u64 length;
- 	u32 npages;
-@@ -63,10 +64,6 @@ struct mlx5_vhca_data_buffer {
- 	u8 stop_copy_chunk_num;
- 	struct list_head buf_elm;
- 	struct mlx5_vf_migration_file *migf;
--	/* Optimize mlx5vf_get_migration_page() for sequential access */
--	struct scatterlist *last_offset_sg;
--	unsigned int sg_last_entry;
--	unsigned long last_offset;
- };
- 
- struct mlx5vf_async_data {
-@@ -133,6 +130,7 @@ struct mlx5_vhca_cq {
- struct mlx5_vhca_recv_buf {
- 	u32 npages;
- 	struct page **page_list;
-+	struct dma_iova_state state;
- 	u32 next_rq_offset;
- 	u32 *mkey_in;
- 	u32 mkey;
-@@ -224,8 +222,17 @@ struct mlx5_vhca_data_buffer *
- mlx5vf_get_data_buffer(struct mlx5_vf_migration_file *migf, u32 npages,
- 		       enum dma_data_direction dma_dir);
- void mlx5vf_put_data_buffer(struct mlx5_vhca_data_buffer *buf);
--struct page *mlx5vf_get_migration_page(struct mlx5_vhca_data_buffer *buf,
--				       unsigned long offset);
-+static inline struct page *
-+mlx5vf_get_migration_page(struct mlx5_vhca_data_buffer *buf,
-+			  unsigned long offset)
-+{
-+	int page_entry = offset / PAGE_SIZE;
-+
-+	if (page_entry >= buf->npages)
-+		return NULL;
-+
-+	return buf->page_list[page_entry];
-+}
- void mlx5vf_state_mutex_unlock(struct mlx5vf_pci_core_device *mvdev);
- void mlx5vf_disable_fds(struct mlx5vf_pci_core_device *mvdev,
- 			enum mlx5_vf_migf_state *last_save_state);
-diff --git a/drivers/vfio/pci/mlx5/main.c b/drivers/vfio/pci/mlx5/main.c
-index 83247f016441..c528932e5739 100644
---- a/drivers/vfio/pci/mlx5/main.c
-+++ b/drivers/vfio/pci/mlx5/main.c
-@@ -34,37 +34,6 @@ static struct mlx5vf_pci_core_device *mlx5vf_drvdata(struct pci_dev *pdev)
- 			    core_device);
- }
- 
--struct page *
--mlx5vf_get_migration_page(struct mlx5_vhca_data_buffer *buf,
--			  unsigned long offset)
--{
--	unsigned long cur_offset = 0;
--	struct scatterlist *sg;
--	unsigned int i;
--
--	/* All accesses are sequential */
--	if (offset < buf->last_offset || !buf->last_offset_sg) {
--		buf->last_offset = 0;
--		buf->last_offset_sg = buf->table.sgt.sgl;
--		buf->sg_last_entry = 0;
--	}
--
--	cur_offset = buf->last_offset;
--
--	for_each_sg(buf->last_offset_sg, sg,
--			buf->table.sgt.orig_nents - buf->sg_last_entry, i) {
--		if (offset < sg->length + cur_offset) {
--			buf->last_offset_sg = sg;
--			buf->sg_last_entry += i;
--			buf->last_offset = cur_offset;
--			return nth_page(sg_page(sg),
--					(offset - cur_offset) / PAGE_SIZE);
--		}
--		cur_offset += sg->length;
--	}
--	return NULL;
--}
--
- static void mlx5vf_disable_fd(struct mlx5_vf_migration_file *migf)
- {
- 	mutex_lock(&migf->lock);
--- 
-2.47.0
+<snip>
+
+>> +Parameters
+>> +==========
+>> +
+>> +The driver includes a list of boolean parameters that allow for manually
+>> +enabling or disabling various features:
+> 
+> Can you explain *why* these are configurable? In general the addition of
+> kernel parameters is frowned upon.
+
+Ack, Joshua if posssible just remove the kernel module parameters.
+
+We can always add them back later if there is a good reason for them.
+removing them later OTOH can be more tricky.
+
+<snip>
+
+
+>> +.. _settings-attributes:
+>> +
+>> +Settings Attributes
+>> +===================
+>> +
+>> +Various hardware settings can be controlled by the following sysfs attributes:
+>> +
+>> +- ``allow_recording`` (allows or blocks usage of built-in camera and microphone)
+>> +- ``start_on_lid_open`` (power on automatically when opening the lid)
+>> +- ``usb_charge`` (allows USB ports to provide power even when device is off)
+> 
+> Non-standard sysfs attributes should be avoided where possible.
+> Userspace will need bespoke code to handle them.
+> This looks like it could be handled by the standard firmware_attributes
+> interface.
+> This would standardize discovery and usage.
+
+Ack this really feels like firmware-attributes. I would not be surprised
+if there are matching BIOS settings and if changing those also changes
+the sysfs files and likewise if the sysfs settings persist over reboot.
+
+<snip>
+
+>> +Keyboard hotkey actions (i8042 filter)
+>> +======================================
+>> +
+>> +Controlled by parameter: ``i8042_filter``
+>> +
+>> +The i8042 filter will swallow the keyboard events for the Fn+F9 hotkey (Multi-
+>> +level keyboard backlight toggle) and Fn+F10 hotkey (Allow/block recording
+>> +toggle) and instead execute their actions within the driver itself.
+>> +
+>> +Fn+F9 will cycle through the brightness levels of the keyboard backlight. A
+>> +notification will be sent using ``led_classdev_notify_brightness_hw_changed``
+>> +so that the userspace can be aware of the change. This mimics the behavior of
+>> +other existing devices where the brightness level is cycled internally by the
+>> +embedded controller and then reported via a notification.
+>> +
+>> +Fn+F10 will toggle the value of the "Allow recording" setting.
+> 
+> Personally I'm not a big fan to implement policy this way in the kernel.
+> But others may disagree.
+
+The keyboard backlight cycling ws already discussed and handling this in
+the driver is ok.
+
+The allow-recording setting toggle is new to me. So this is changeable
+at runtime, interesting.
+
+Joshua above you write this toggle both the microphone mute and
+disables the camera?
+
+It would be good to report the camera state to userspace using
+a separate input/evdev device which reports SW_CAMERA_LENS_COVER
+as discussed here:
+
+https://lore.kernel.org/linux-media/CANiDSCtjpPG3XzaEOEeczZWO5gL-V_sj_Fv5=w82D6zKC9hnpw@mail.gmail.com/
+
+the plan is to make that the canonical API to reported "muted"
+cameras.
+
+What happens with the camera when recording is disallowed,
+dus it drop of the USB bus or does it only produce black
+frames ?
+
+It is a bit unexpected that this one button controls both
+microphone and camera mute. But given that unique behavior
+I guess that handling this in the kernel is probably best.
+
+The alsamixer should send some events for the mic mute/unmute
+I hope and we can use SW_CAMERA_LENS_COVER to report the camera
+state.
+
+<snip>
+
+>> +static struct platform_driver galaxybook_platform_driver = {
+> 
+> Could this be a 'struct acpi_driver'?
+
+The use of acpi_driver is deprecated. AFAIK the plan it to
+move the remaining ones to platform-drivers and eventually
+remove the whole ACPI bus concept turning ACPI companion
+nodes into "normal" fwnodes like the current software and
+openfirmware fwnodes.
+
+Regards,
+
+Hans
+
+
+
 
 
