@@ -1,38 +1,39 @@
-Return-Path: <linux-doc+bounces-32989-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32991-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D91EC9F448C
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 07:57:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 659609F44BC
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 08:03:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E199E1638DE
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 06:56:51 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E8D1416F50A
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 07:02:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51139156230;
-	Tue, 17 Dec 2024 06:52:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 77C4515533F;
+	Tue, 17 Dec 2024 07:02:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="RWpe01F/"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="N3EnvHxe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m19731110.qiye.163.com (mail-m19731110.qiye.163.com [220.197.31.110])
+Received: from mail-m15593.qiye.163.com (mail-m15593.qiye.163.com [101.71.155.93])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B78EA653;
-	Tue, 17 Dec 2024 06:52:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.110
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E8BC143C63;
+	Tue, 17 Dec 2024 07:02:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.93
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734418327; cv=none; b=D0fhmD9PRA+e+JSM8fYO445hi51Ken4pdYPogyh6TTIJW/3x3doQB2FMY26k4nf7kMiu2Y2tx/8vf9Kgor/a/V4AaKGsApmF81A5MdcgJzl5RjE2H+AAW0yybt6I3ExqdmkmIgGThEm858DOd6OFdtBDB+zmDcAx5oRW3dLFw/M=
+	t=1734418935; cv=none; b=C2AolaahsU2mwASzyvWtJY+TP6x4KOAB9pKBNMiMXuvMcBfsFUWwf02TNX2sVqq/+L65gN/0Kx1Y3eeYNXZAnZqh3A4/vuzztrvVgaVl98Eh7Xm/u8fiEJjc7YpOZNaEd5pFLrDNUZtQcY0Wbn4r0cfVMI4bskYEA1GDC1/qK4M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734418327; c=relaxed/simple;
-	bh=y+LkwHNr1AqPqcJMcpE9SD+56gxA8YpfdzhCz8jdBq0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=lIdNXyRzshtqUcIP35QwyO0qRXCkgh94kqpykusQ4GrNuDSMzL3io/rwl2OOVlwtrO2OTnmLCSzuQHrZf0J9SV9p28qyES8AFUEn+NYLmVY/KBL6y13ypb7Ycyu/q5A0rEVhb4VtxWPKDTSB+WuM1G4U/Xw9pj7gyKTJaorruKY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=RWpe01F/; arc=none smtp.client-ip=220.197.31.110
+	s=arc-20240116; t=1734418935; c=relaxed/simple;
+	bh=urukd7flTp0fniDsip8fle/4fDrCpBLnlQrNX9MoZZk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=oFJhXlxpJGu8vHt+bQ/obD2KESsOm57/Lg44HrHHvelJ/8Y6N99159FHthkV83dVVXcPLv6J6s3l+HlRdpuVqikrZFntx1M6cLo2nVK1iWwk2jglgxHnVrygxGBpMn0EbiWe6TtYEDDXpBltnc6i76RMhXxn/GNZuO+qT6JIBks=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=N3EnvHxe; arc=none smtp.client-ip=101.71.155.93
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
 Received: from localhost.localdomain (unknown [123.53.36.163])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 5f3aea52;
-	Tue, 17 Dec 2024 14:46:50 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 5f3aea56;
+	Tue, 17 Dec 2024 14:46:52 +0800 (GMT+08:00)
 From: Yuehui Zhao <zhaoyuehui@cqsoftware.com.cn>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev,
@@ -43,44 +44,101 @@ Cc: dzm91@hust.edu.cn,
 	linux-doc@vger.kernel.org,
 	linux-security-module@vger.kernel.org,
 	Yuehui Zhao <zhaoyuehui@cqsoftware.com.cn>
-Subject: [PATCH 0/2] Add security index Chinese translation and add security lsm Chinese translation
-Date: Tue, 17 Dec 2024 14:46:23 +0800
-Message-ID: <cover.1734414723.git.zhaoyuehui@cqsoftware.com.cn>
+Subject: [PATCH 1/2] docs/zh_CN: Add security index Chinese translation
+Date: Tue, 17 Dec 2024 14:46:24 +0800
+Message-ID: <89ad67b4b4e12a52581cfa0f87f194e1aee3e526.1734414723.git.zhaoyuehui@cqsoftware.com.cn>
 X-Mailer: git-send-email 2.43.5
+In-Reply-To: <cover.1734414723.git.zhaoyuehui@cqsoftware.com.cn>
+References: <cover.1734414723.git.zhaoyuehui@cqsoftware.com.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTBkfVk9KQh8dT0IaQxpDGVYVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTRgdVhpMGUwZTUxCThkdHlYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKSUhVTkhVSE1VSk1IWVdZFhoPEhUdFFlBWUtVS1VLVUtZBg++
-X-HM-Tid: 0a93d35e936503a3kunm5f3aea52
+X-HM-Tid: 0a93d35e97db03a3kunm5f3aea56
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NxA6TAw5NzITOh4fCxlNCSpW
-	NygaFBBVSlVKTEhPT0pDS0pJS09KVTMWGhIXVQETGhQCDh4TDhI7GAoIFB0PDBoJHlUYFBZVGBVF
-	WVdZEgtZQVlKSUhVTkhVSE1VSk1IWVdZCAFZQU1JQjcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NjY6Nyo6HTIQLh4OCxlWCSg8
+	PTkwCx9VSlVKTEhPT0pDS0pISkpNVTMWGhIXVQETGhQCDh4TDhI7GAoIFB0PDBoJHlUYFBZVGBVF
+	WVdZEgtZQVlKSUhVTkhVSE1VSk1IWVdZCAFZQUpMSkI3Bg++
 DKIM-Signature:a=rsa-sha256;
-	b=RWpe01F/mX1qXxlqEVQhIECjhanEmvLD7nuG1OjUlA+bfMw5CYRp6BTpzGqzyJK1zJ7GxEOncTB3QFsQTM1W/CgRkrM0sJQfVvzimTPAhaJ9DpkNZyxcNaGflAHSyM0lKqpQ8HRBgb67Uxik4RHQkcr6wii2l4bCTVMVRIN5Efw=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
-	bh=lyA9T13+92+Kc9Qt6dNjlXWBSaVzZXeYMFDzPxTuhok=;
+	b=N3EnvHxe7EhnSX/tOGA239r2RfptViBGCYy8+PtMOipUCCl+HWpAvw0w0f8vI5fJ92vkRscZKyYS//Ro3Hs0ibKzjBgUcvkjeo1BykPBFoDIS6hSl3gUp3L9cWRIKgZsiWt3fQM/SEyI6rTynH9q55uvND+9LReN0m7VXUEHahk=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
+	bh=GxKkNy14PlU3GWJZzbRZFzozsqD17noWMNXC/7rqExo=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../security/index.rst into Chinese and translate 
-.../security/lsm.rst into Chinese.
+Translate .../security/index.rst into Chinese.
 
-Yuehui Zhao (2):
-  docs/zh_CN: Add security index Chinese translation
-  docs/zh_CN: Add security lsm Chinese translation
-
- .../translations/zh_CN/security/index.rst     | 34 +++++++
- .../translations/zh_CN/security/lsm.rst       | 92 +++++++++++++++++++
+Signed-off-by: Yuehui Zhao <zhaoyuehui@cqsoftware.com.cn>
+---
+ .../translations/zh_CN/security/index.rst     | 33 +++++++++++++++++++
  .../translations/zh_CN/subsystem-apis.rst     |  2 +-
- 3 files changed, 127 insertions(+), 1 deletion(-)
+ 2 files changed, 34 insertions(+), 1 deletion(-)
  create mode 100644 Documentation/translations/zh_CN/security/index.rst
- create mode 100644 Documentation/translations/zh_CN/security/lsm.rst
 
+diff --git a/Documentation/translations/zh_CN/security/index.rst b/Documentation/translations/zh_CN/security/index.rst
+new file mode 100644
+index 000000000000..6b56b4f87315
+--- /dev/null
++++ b/Documentation/translations/zh_CN/security/index.rst
+@@ -0,0 +1,33 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/security/index.rst
++
++:翻译:
++
++ 赵岳辉 Yuehui Zhao <zhaoyuehui@cqsoftware.com.cn>
++
++========
++安全文档
++========
++
++.. toctree::
++   :maxdepth: 1
++
++TODOLIST:
++* credentials
++* snp-tdx-threat-model
++* IMA-templates
++* keys/index
++* lsm
++* lsm-development
++* sak
++* SCTP
++* self-protection
++* siphash
++* tpm/index
++* digsig
++* landlock
++* secrets/index
++* ipe
+diff --git a/Documentation/translations/zh_CN/subsystem-apis.rst b/Documentation/translations/zh_CN/subsystem-apis.rst
+index 47780bb0772f..8b646c1010be 100644
+--- a/Documentation/translations/zh_CN/subsystem-apis.rst
++++ b/Documentation/translations/zh_CN/subsystem-apis.rst
+@@ -88,6 +88,7 @@ TODOList:
+    cpu-freq/index
+    iio/index
+    virt/index
++   security/index
+    PCI/index
+    peci/index
+ 
+@@ -102,7 +103,6 @@ TODOList:
+ * watchdog/index
+ * hwmon/index
+ * accel/index
+-* security/index
+ * crypto/index
+ * bpf/index
+ * usb/index
 -- 
 2.43.5
 
