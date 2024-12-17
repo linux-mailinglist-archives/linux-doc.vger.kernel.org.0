@@ -1,123 +1,124 @@
-Return-Path: <linux-doc+bounces-32934-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-32939-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30DB99F4153
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 04:54:02 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 174B49F41BC
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 05:27:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 410397A29F8
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 03:53:56 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0D1B116D705
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 04:27:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 13E4912CD96;
-	Tue, 17 Dec 2024 03:53:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BF5351494A5;
+	Tue, 17 Dec 2024 04:27:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="JfvNvpEd"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="GALa36JQ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64FAB4A23
-	for <linux-doc@vger.kernel.org>; Tue, 17 Dec 2024 03:53:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C0E614659D
+	for <linux-doc@vger.kernel.org>; Tue, 17 Dec 2024 04:27:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734407635; cv=none; b=FSuPHB9o89GyYgV5yd052OIZXXKLZcFsNLqf+EFeK20k10hMgfEjKuoHP6kVQS1GumCKAXFE1T/7/tn+6nt7mrotHfEAznQwCZDJNgTUPNKUNLEOXt5ibZK1nbprvrlOh9jKpx1xpX3O80bVTPjAl5UuHRVIGu/PfO5jPYB5sxI=
+	t=1734409651; cv=none; b=p4RbJpEFJwfh2XR4kPdWKEwn2IjI+xjoQ+x9plBehhpJjFwqhfeVVqFWy60KD9Y+A45CX5mhSusRs416NRf5BRDI00WBC/NVjamOe6i3gtOIylPEV33AaUCK9RmA2SI18/9QjjGLoxVf1pRiokPQ/A/hY01u1n3c3B17Nm3o+ME=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734407635; c=relaxed/simple;
-	bh=JjvSUlb0s668mPGWJCN5daNkwa+E19w4qhP7lmASwqw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=q5K4TXH13iNjI6dSca1hEK/fS7wJpgZFQJfZBS3ruwBDd5UEGXkXKceGQJ6rr8mJYeJmFPL2t1ROJ/G0sKgSrlC9WWYqzjb/tXFEn2/7w1QD7utlAgNHCFs7wuGeY+tgQbGkO4sPDFQDSPtLZT//NWVV65x7o6664gzNtCbtJYU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=JfvNvpEd; arc=none smtp.client-ip=209.85.167.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-54025432becso4867200e87.1
-        for <linux-doc@vger.kernel.org>; Mon, 16 Dec 2024 19:53:53 -0800 (PST)
+	s=arc-20240116; t=1734409651; c=relaxed/simple;
+	bh=KGf3WEZUTgWBNJDe2xew7TkgY4CxKh65T66dzPPcwMk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=L5cZzWmC+HpE1dzslRyQIjlTgB1SXipX0fPILqgCvdW8/n9kNX0HVQNEHhAHkvJRUx5APR1BOZzJo/caic/YMO2NSHwEGKrDSWTkJ+ZNu2qVoRZpdaELk/I+Y5P2nNUZ5235GBCFwTRFX8HxFTokMzMCk8d6y/BQYTq8zskZOgw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=GALa36JQ; arc=none smtp.client-ip=209.85.216.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-2ee67e9287fso4376348a91.0
+        for <linux-doc@vger.kernel.org>; Mon, 16 Dec 2024 20:27:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1734407631; x=1735012431; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JjvSUlb0s668mPGWJCN5daNkwa+E19w4qhP7lmASwqw=;
-        b=JfvNvpEdPpWIdJa3d7+8og9fI37U6k2QsgcOXmXKDzaVq2nA+pxPcYqXqpy0gJkel6
-         ckvHiF7fP9nuXAigThRQpfLUWRnz89oGF/PBBtbfKmZQ7ZT3UWW+fJDOE12h1kTqGyK3
-         M/VLcSu602PDMe8O9ksJpKvpSJwM91kbgPL7m8T6Rh3muyoBxzmxKBGLVeIbEHNwuv4p
-         rO6TiLoVElS6l+soOTPlnq281Ky1W0fBMymrnPAMvqfA7tJAQitn9I84Ib9Lk+wvy3uG
-         T/dspzVI0zvp3aQhj8Huny5CLL/OEDYTyurZGD2v8VGYLU06cjPrCzaDbIKK/wytI4QN
-         QNJw==
+        d=linaro.org; s=google; t=1734409649; x=1735014449; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Fr3GeSntlHloZ4yayQx6BsNSKnwpryezH5Wr5AEdqz8=;
+        b=GALa36JQf9P2udVWsBlKW83PFKRaM1xO+HG3eiFw7WlO1O0Wn4+oq8x6fbQKgDefNv
+         XxQQYZxiuDM0ud9PEIyOF6SBGhx5QA/9M9nliQ5krmXOJnYGwDf34OlbAE6bAjXPbkzc
+         3X9a7sbTgxbzGb40JBMlERxMGW80J9tLlm5b6M5q+cyd5favPWLXEvMwuztljLkaCn1T
+         PSq2ANdZhssa/LoB+3FYIBteMGi/lV7uCeOX/UqnGprCPa7MHnJmDMBcI6vT60Fgftr6
+         lsw6hky/0n3ikwns0s75tFAXnC+BwKbuA1AHHJ6nCWNtjIUM7rL4vGG9Odz+Yi5X/e0I
+         nzdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734407631; x=1735012431;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JjvSUlb0s668mPGWJCN5daNkwa+E19w4qhP7lmASwqw=;
-        b=T8eqN7H0FWX7dieXCe0m+IQ7i0cqlUoJv9yroq680y/qtGYlyIQ4JXJvxfPoabxyoT
-         sDbdIq7DyGIFi6vG2XKTlTfwPCf3C4BT9ngHtxRR6xF7Eo2kI+htS8dOOQ5qPv2yAfYO
-         9Y5g9BOBvk7k0NTXBA43BZM4nez2o6b4buxlLqFX3+aFrwVupKugSIu/CaYlyiaxcISN
-         J/OT1L35d1DKltQGgy1wGOIram8Y3s449xqtVwiAf8wWhiR/IX8VA33ahzGe1IBxJaGj
-         vlA3fXQkLK5cJZZQY+i3b2WohgBNhzqqcAFy9bzgTln01ZGPqc3IV/lQJIKDs6mrM/1E
-         xijw==
-X-Forwarded-Encrypted: i=1; AJvYcCWP/jacrlGCAam9CB0djUUqD2a09ApUvCriFufdTLE4areA19/WzFOVuNi/PvNUNR3PgUxIcwm1edY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzrbtJtSiKaqosDe8c8AlAQgAl2ILwpBFKZGUkY24eT2nBfb+Tg
-	OAvRFLNAxPolUNWJq60XrotHw3tPK7VdZrocQqwK4g58ZyfhZVe50YKN/8pTIgckz0anMT8/TIi
-	LvufcvOcL4DUmxJRENJZ+Xcbrd15LBC1RGoqD
-X-Gm-Gg: ASbGncvc58S78f7iOE+0J1HjsneNd505JvSGYBCLloMjEs4Izh8H2EFWIwFWDK5hm6f
-	4zZhbjQ1XNhdUGTcwZEALpC/FJuZQXSC4hn7nOA==
-X-Google-Smtp-Source: AGHT+IEaU+0Dd9AvGqqW/gw3nElxtLBX5cPHOWjS/rZC4WRXjtt2rbtyzHwmhZDGDsLUxRYrcn3n+1g/30SrxJzWcCw=
-X-Received: by 2002:a05:6512:2255:b0:540:1e17:10d2 with SMTP id
- 2adb3069b0e04-54099b696c9mr4317280e87.49.1734407631461; Mon, 16 Dec 2024
- 19:53:51 -0800 (PST)
+        d=1e100.net; s=20230601; t=1734409649; x=1735014449;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Fr3GeSntlHloZ4yayQx6BsNSKnwpryezH5Wr5AEdqz8=;
+        b=E1Suh1xRZfs6k6kEGi8iZt94xYscJSIn2w9wLusKRyzjGibyyBrkf1YFPuVxzyMrwB
+         ez/noNwbdA7GQTdKlPLajomrJQeFvhA45m9EdrF1v2R6kAD1KsBtqa1i0HLnRnpxptm6
+         GoQUDE1+pP4l4v/WVvOD60sFXwPpiD1BusMCpQO7DrgEkYO24puYta3LRRsGSJGVdLuQ
+         m50VoX8tyj6naqIZAHDlaRo3R7hJttez2U1Uy7e7mStcwn3Tea3PkK8kb5WOzBAtJJLI
+         5cfkI3afCWLtFwOsRfiX/RC9qYv3c1aUodnuPIwpdUD3PFLMcum3oV9DEQkKCeTCD6ls
+         /yrw==
+X-Forwarded-Encrypted: i=1; AJvYcCXO7KzC7CaNgSphYliBgu6GhzPE2AfKLLowm7iViRghEVzzLu7H2TDWZIg80fybNosDxJXPPzVmxtU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyW7RWabFZwIUIjPEkAU4fEM4Vpr5LHvPXWWWsMLOoPAxDsNS2i
+	Wv2zLQSh8F774+Mke1ZWhXiMMLT5QlV9chjkmm7BJ1QIRBCRSdC2nOy0yo4zx3o=
+X-Gm-Gg: ASbGncspcTbrHOuWFw4cV8DiqVwqvycivJ9qQJ+mEA9eTzOIosmzsLQuZbopf1p9qqp
+	f8Kb9Tyoa6L1C5UFpnXqR2hSekTN7tv2Jk6tEpblIGLW9lBb+Jo7i+9cRjZ73Lpu3j96L5yQPDC
+	5iI97R6MeIH4oaRCzwjlqdxJNEzPiLN0mEBBdkcdXie5P90SAttEaLE31lXPI3ldY+zIZPpjw/l
+	RPZG2JAuQJQu+DHhsTpx0/jLqntQUHrVBHiGD1fvXuRXh++ptUt8C7IQB4=
+X-Google-Smtp-Source: AGHT+IE/JeMuR4dBQFhr2ewi062MYvFxM7gFUf/kYOjekW7K8q6et1llylqaVQeIxsiURZEwVjKeIQ==
+X-Received: by 2002:a17:90b:2e48:b0:2ee:6736:8512 with SMTP id 98e67ed59e1d1-2f28fb6f983mr28756658a91.12.1734409649481;
+        Mon, 16 Dec 2024 20:27:29 -0800 (PST)
+Received: from localhost ([122.172.83.132])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2f142d90d45sm9072765a91.11.2024.12.16.20.27.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 16 Dec 2024 20:27:28 -0800 (PST)
+Date: Tue, 17 Dec 2024 09:57:26 +0530
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: Beata Michalska <beata.michalska@arm.com>
+Cc: linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-pm@vger.kernel.org, ionela.voinescu@arm.com,
+	sudeep.holla@arm.com, will@kernel.org, catalin.marinas@arm.com,
+	rafael@kernel.org, sumitg@nvidia.com, yang@os.amperecomputing.com,
+	vanshikonda@os.amperecomputing.com, lihuisong@huawei.com,
+	zhanjie9@hisilicon.com, Jonathan Corbet <corbet@lwn.net>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H . Peter Anvin" <hpa@zytor.com>, Phil Auld <pauld@redhat.com>,
+	x86@kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v8 1/4] cpufreq: Introduce an optional cpuinfo_avg_freq
+ sysfs entry
+Message-ID: <20241217042726.isllh5bulpnwql7i@vireshk-i7>
+References: <20241206135600.4083965-1-beata.michalska@arm.com>
+ <20241206135600.4083965-2-beata.michalska@arm.com>
+ <20241212065100.sjb7lrlmksbm2hdk@vireshk-i7>
+ <Z2CmcelSy89NULtz@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20241212224114.888373-1-dualli@chromium.org> <20241212224114.888373-3-dualli@chromium.org>
- <Z2BtgqkPUZxE8B83@google.com> <CANBPYPhZ-_5=VMRoBxbfVb+AFb_qu49QH_hKOiSjX93E1GQA8A@mail.gmail.com>
- <20241216174111.3fdce872@kernel.org>
-In-Reply-To: <20241216174111.3fdce872@kernel.org>
-From: Li Li <dualli@google.com>
-Date: Mon, 16 Dec 2024 19:53:40 -0800
-Message-ID: <CA+xfxX6-cbTyyyTf1UL_A7DzagfrV+y0367MdO21+JdjW870ZA@mail.gmail.com>
-Subject: Re: [PATCH net-next v10 2/2] binder: report txn errors via generic netlink
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: Carlos Llamas <cmllamas@google.com>, corbet@lwn.net, davem@davemloft.net, 
-	Eric Dumazet <edumazet@google.com>, pabeni@redhat.com, donald.hunter@gmail.com, 
-	Greg KH <gregkh@linuxfoundation.org>, =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>, 
-	tkjos@android.com, maco@android.com, 
-	"Joel Fernandes (Google)" <joel@joelfernandes.org>, brauner@kernel.org, 
-	Suren Baghdasaryan <surenb@google.com>, arnd@arndb.de, masahiroy@kernel.org, 
-	bagasdotme@gmail.com, horms@kernel.org, LKML <linux-kernel@vger.kernel.org>, 
-	linux-doc@vger.kernel.org, netdev@vger.kernel.org, 
-	Hridya Valsaraju <hridya@google.com>, Steven Moreland <smoreland@google.com>, 
-	Android Kernel Team <kernel-team@android.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Z2CmcelSy89NULtz@arm.com>
 
-On Mon, Dec 16, 2024, 5:41=E2=80=AFPM Jakub Kicinski <kuba@kernel.org> wrot=
-e:
->
-> On Mon, 16 Dec 2024 10:58:10 -0800 Li Li wrote:
-> > > not: There are several places where you have "netlink_nl" which seems
-> > > kind of redundant to me. wdyt? IMO you should drop the "nl" in all of
-> > > these cases.
-> > >
-> >
-> > These are automatically generated from the yaml file. So let's just
-> > keep them as is.
-> > But it's a good suggestion to the owner of yaml parser.
->
-> I think the unusual naming comes from fact that you call your netlink
-> family binder_netlink. It's sort of like adding the word sysfs to the
-> name of a sysfs file. I mean the user visible name, not code
-> references...
->
-> s/binder_netlink/binder/ will clean this up..
+On 16-12-24, 23:15, Beata Michalska wrote:
+> My bad as I must have misinterpreted that message. Although I am not entirely
+> sure why this might be unacceptable as it is not such uncommon approach to use
+> signed int space to cover both: expected positive value as well as potential
+> error code case failure.
 
+This part is fine. The problem is with handling frequency here. Signed int can
+capture up to 2 GHz of freq, where as unsigned int can capture up to 4 GHz and
+so we would really like to keep it at 4 GHz..
 
-I did consider that but unfortunately that would result in a
-conflicting binder.h in uapi header.
+Maybe we need to move to 64 bits for frequency at some point of time, but at
+least we should try to not break it for now.
 
-Probably "binder_report" or "bindererr"?
+> Enabling the new attribute for all is an option, tough not entirely compelling
+> one as exposing a feature that is known not to be supported seems bit
+> counterintuitive. On the other hand using cpufreq driver flags won't help much
+> as the support for the new attrib is platform-specific, not driver-specific.
+
+-- 
+viresh
 
