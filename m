@@ -1,180 +1,110 @@
-Return-Path: <linux-doc+bounces-32999-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33001-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34F929F47DF
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 10:46:04 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 80C309F48D2
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 11:26:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 2786E1892C11
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 09:45:23 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C766A16BA6D
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2024 10:26:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 47B511DEFE7;
-	Tue, 17 Dec 2024 09:44:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D24BD1E0DFE;
+	Tue, 17 Dec 2024 10:26:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="AZ6Fs41b"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-il1-f206.google.com (mail-il1-f206.google.com [209.85.166.206])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C5D81DC19F
-	for <linux-doc@vger.kernel.org>; Tue, 17 Dec 2024 09:44:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.206
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F22531DDC3F;
+	Tue, 17 Dec 2024 10:26:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734428667; cv=none; b=S2E0NEDNWH1AzW3UQfm4ak/g+4rYkZxT6Oq9TEPMugwXCNpqELJ5WttzVcURdjZmt0vk1/TWT3DPjCqg/noO31G5RobJqCODmniX4Y5gVlW5qhv9TSs6tSJ8SsUPkgEbmn6XJpp46obYodQEO6uzXjJ+Pg28QNXhZ0Dkw7oKxUQ=
+	t=1734431207; cv=none; b=aVCegFS1EDWe0R0G0f1VDURHovKiculA9KwxpDatT5Elfycha4/Z/J6iGZJugvq4xr8d8M+TLFYhVh2GjCfv0cI4p5pCFrsNpYR2JJa0wwGNXc42grETsaWPd+/dZnvizBTw9r3QyWNmBavnnXKs9pfQZEVfKfvbdU3QB9e7CsA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734428667; c=relaxed/simple;
-	bh=rqiaN2F9c/eaHztCDQp5l2avXEeH7niQR1KGHJpHAQw=;
-	h=MIME-Version:Date:Message-ID:Subject:From:To:Content-Type; b=T3cAT1MNdNAL64NQexOPm+63ZcmDY9DNpzVORuD/nAPqWyeumuEUpzv4ATgvFPdP4EB8MdsKYmVhSYnJaRx3qhH6zoQrO1qRKt+B9YJcEhxU+/FyKOtJn3G6t/etUK/rL6saX00RyIJ6I4G/6kpEiMilNvGI5zoyLOWF8KFDELw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=syzkaller.appspotmail.com; spf=pass smtp.mailfrom=M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com; arc=none smtp.client-ip=209.85.166.206
-Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=syzkaller.appspotmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
-Received: by mail-il1-f206.google.com with SMTP id e9e14a558f8ab-3ac005db65eso51003875ab.3
-        for <linux-doc@vger.kernel.org>; Tue, 17 Dec 2024 01:44:25 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734428664; x=1735033464;
-        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=v3WQwo4vPQJd6wOU5xmJ0k4GDIgKmqRK46QxlMpvp1w=;
-        b=eztfRk+YHxSH7uUMOL3cWtl8XnRszSPWt7qE9lkrD+2YLQ+zz9esfvaYloPqawysnv
-         cKFS/RA9qP4jO73KL9gimKogtx7i+iLQw3TLfUSnm7Ii0bsdRpkOI9NNqJ8s2rsS4nmO
-         FTtF6y8+l9n2qxHk8H9smn66THXCSZ3aIVQfL8Ru1TpugDOWTWotu7iGIflnBSN6mv9v
-         5FWn55GLaetwVD4REMCzCNseMgUdvCEDgw159Pg2pR/A9IFm5oYcuzjTLFlYauZAZVfe
-         CbfEenVZp27nX54DvJ8BJB/gq0zhqORYNUR/cefBEpTyDy5cLw5nLXolhGSL7n6F/Bne
-         rJiQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWKZViMdUUK2NXQIc719WiFchrBjoeYKAGlFI8ypHPwKmm/K6bgD0RMk775uS6kQj8IahRlFn/6+IU=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy5yOzmOmPv7iZLBBLTgWxOheCK+JDBb9ZfS5IYQqGEoS6HhqR6
-	mPG7VchUoTtL2grf20JrPz/CTdBmn/OuJqHQczH1YO8tsQEDJcyEt4Uf3DyaFKAn4SaKpFbAFza
-	hXiJib2B6MfxEFNiJ364LjuopNQdwI4eexI9xGBqaUeKc+YL4yxf0MsI=
-X-Google-Smtp-Source: AGHT+IHQ4sqUrdpVsm0EeJd+/GQRGdlEi6pTpHnTk0w5tBSHkrtmmW+5KhMS1bBFJ7ywzGMogW4nxA/+yfYWfmPT00M2vzWNYUfT
+	s=arc-20240116; t=1734431207; c=relaxed/simple;
+	bh=t6EHpJJ3N22ysj1rCHjTXGLgL91+iSHDgQ2Nw+hd4gs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Lesi+8pECiCUe9jNPKuXZrGcIRnHFs7LhQSCsPfQLu2GQFIK6UGJBCRw8P0++cN6WQVMlR7qlHA5I2d255jhIsPpcakE2UEnTC7BYS9+AUddynX5KNh+o9MMJmrhEgtnx1BsF0KZ9LpEt8KgxHYXrvFo9b3DGnRR7h9ctExQ30E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=AZ6Fs41b; arc=none smtp.client-ip=90.155.50.34
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=1Uh7v+1Ghavjg8PPxZd2WpiQgCj1MEvkiKdyVIWx2Cg=; b=AZ6Fs41bhM6KjsmhgQn44RBBiZ
+	vKmrZ5xFkd8OrbxRS5abw5SJ/1Yf0cV3g8KzbzgnmTMCBwdEcKYDX6CbUPqST/LETJsRMdojNxVE2
+	70oiFrZlNtsdTNwc8EOZ4W5ishBxJrge+/BtytV0c7f0Z94IewLiA1mp1/xMZMfDD2D1TjiFL3ckY
+	5GzGdQZKInGIQnWoVL2P8ico3GUBjOATYS3jPxKvSWPhGuiE53EkE0dd1HmIVa9YGTBFsMe6AK7xt
+	ZsLaaPWMNlSf/kaDqTFBjSwiDp99RTqnD0KRhRrrkFuMTioqr1m/Qi+o8y7lm9fgsJAtkYx4/+91g
+	eCiop3/A==;
+Received: from 77-249-17-89.cable.dynamic.v4.ziggo.nl ([77.249.17.89] helo=noisy.programming.kicks-ass.net)
+	by casper.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
+	id 1tNUmT-00000006Jip-1v5t;
+	Tue, 17 Dec 2024 10:26:22 +0000
+Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
+	id 50D1730015F; Tue, 17 Dec 2024 11:26:20 +0100 (CET)
+Date: Tue, 17 Dec 2024 11:26:20 +0100
+From: Peter Zijlstra <peterz@infradead.org>
+To: Suren Baghdasaryan <surenb@google.com>
+Cc: akpm@linux-foundation.org, willy@infradead.org, liam.howlett@oracle.com,
+	lorenzo.stoakes@oracle.com, mhocko@suse.com, vbabka@suse.cz,
+	hannes@cmpxchg.org, mjguzik@gmail.com, oliver.sang@intel.com,
+	mgorman@techsingularity.net, david@redhat.com, peterx@redhat.com,
+	oleg@redhat.com, dave@stgolabs.net, paulmck@kernel.org,
+	brauner@kernel.org, dhowells@redhat.com, hdanton@sina.com,
+	hughd@google.com, lokeshgidra@google.com, minchan@google.com,
+	jannh@google.com, shakeel.butt@linux.dev, souravpanda@google.com,
+	pasha.tatashin@soleen.com, klarasmodin@gmail.com, corbet@lwn.net,
+	linux-doc@vger.kernel.org, linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org, kernel-team@android.com
+Subject: Re: [PATCH v6 13/16] mm: introduce vma_ensure_detached()
+Message-ID: <20241217102620.GC11133@noisy.programming.kicks-ass.net>
+References: <20241216192419.2970941-1-surenb@google.com>
+ <20241216192419.2970941-14-surenb@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:20e1:b0:3a7:dec1:de55 with SMTP id
- e9e14a558f8ab-3affb7daecfmr139988155ab.22.1734428664671; Tue, 17 Dec 2024
- 01:44:24 -0800 (PST)
-Date: Tue, 17 Dec 2024 01:44:24 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <676147f8.050a0220.37aaf.0154.GAE@google.com>
-Subject: [syzbot] [net?] WARNING: suspicious RCU usage in __ethtool_get_ts_info
-From: syzbot <syzbot+a344326c05c98ba19682@syzkaller.appspotmail.com>
-To: aleksander.lobakin@intel.com, almasrymina@google.com, andrew@lunn.ch, 
-	corbet@lwn.net, danieller@nvidia.com, davem@davemloft.net, 
-	donald.hunter@gmail.com, dtatulea@nvidia.com, ecree.xilinx@gmail.com, 
-	edumazet@google.com, hkallweit1@gmail.com, horms@kernel.org, 
-	kory.maincent@bootlin.com, kuba@kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, maxime.chevallier@bootlin.com, 
-	netdev@vger.kernel.org, pabeni@redhat.com, petrm@nvidia.com, 
-	przemyslaw.kitszel@intel.com, richardcochran@gmail.com, 
-	rrameshbabu@nvidia.com, syzkaller-bugs@googlegroups.com, 
-	vadim.fedorenko@linux.dev, willemb@google.com, wintera@linux.ibm.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241216192419.2970941-14-surenb@google.com>
 
-Hello,
+On Mon, Dec 16, 2024 at 11:24:16AM -0800, Suren Baghdasaryan wrote:
+> vma_start_read() can temporarily raise vm_refcnt of a write-locked and
+> detached vma:
+> 
+> // vm_refcnt==1 (attached)
+> vma_start_write()
+>     vma->vm_lock_seq = mm->mm_lock_seq
+> 
+>                     vma_start_read()
+>                        vm_refcnt++; // vm_refcnt==2
+> 
+> vma_mark_detached()
+>     vm_refcnt--; // vm_refcnt==1
+> 
+> // vma is detached but vm_refcnt!=0 temporarily
+> 
+>                        if (vma->vm_lock_seq == mm->mm_lock_seq)
+>                            vma_refcount_put()
+>                                vm_refcnt--; // vm_refcnt==0
+> 
+> This is currently not a problem when freeing the vma because RCU grace
+> period should pass before kmem_cache_free(vma) gets called and by that
+> time vma_start_read() should be done and vm_refcnt is 0. However once
+> we introduce possibility of vma reuse before RCU grace period is over,
+> this will become a problem (reused vma might be in non-detached state).
+> Introduce vma_ensure_detached() for the writer to wait for readers until
+> they exit vma_start_read().
 
-syzbot found the following issue on:
+So aside from the lockdep problem (which I think is fixable), the normal
+way to fix the above is to make dec_and_test() do the kmem_cache_free().
 
-HEAD commit:    bc6a5efe3dcd Merge branch 'net-timestamp-selectable'
-git tree:       net-next
-console+strace: https://syzkaller.appspot.com/x/log.txt?x=1309c7e8580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=87a291e9e8ffbb16
-dashboard link: https://syzkaller.appspot.com/bug?extid=a344326c05c98ba19682
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=179802df980000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=125b34f8580000
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/0e3bb05cbd15/disk-bc6a5efe.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/68f124e1efd7/vmlinux-bc6a5efe.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/c3e210387375/bzImage-bc6a5efe.xz
-
-The issue was bisected to:
-
-commit b9e3f7dc9ed95daeb83cfa45b821cacaa01aa906
-Author: Kory Maincent <kory.maincent@bootlin.com>
-Date:   Thu Dec 12 17:06:44 2024 +0000
-
-    net: ethtool: tsinfo: Enhance tsinfo to support several hwtstamp by net topology
-
-bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=12885730580000
-final oops:     https://syzkaller.appspot.com/x/report.txt?x=11885730580000
-console output: https://syzkaller.appspot.com/x/log.txt?x=16885730580000
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+a344326c05c98ba19682@syzkaller.appspotmail.com
-Fixes: b9e3f7dc9ed9 ("net: ethtool: tsinfo: Enhance tsinfo to support several hwtstamp by net topology")
-
-=============================
-WARNING: suspicious RCU usage
-6.13.0-rc2-syzkaller-00424-gbc6a5efe3dcd #0 Not tainted
------------------------------
-net/ethtool/common.c:873 suspicious rcu_dereference_protected() usage!
-
-other info that might help us debug this:
-
-
-rcu_scheduler_active = 2, debug_locks = 1
-1 lock held by syz-executor164/5836:
- #0: ffff888035ec8258 (sk_lock-AF_PACKET){+.+.}-{0:0}, at: lock_sock include/net/sock.h:1617 [inline]
- #0: ffff888035ec8258 (sk_lock-AF_PACKET){+.+.}-{0:0}, at: sockopt_lock_sock net/core/sock.c:1126 [inline]
- #0: ffff888035ec8258 (sk_lock-AF_PACKET){+.+.}-{0:0}, at: sk_setsockopt+0xf0f/0x33b0 net/core/sock.c:1285
-
-stack backtrace:
-CPU: 0 UID: 0 PID: 5836 Comm: syz-executor164 Not tainted 6.13.0-rc2-syzkaller-00424-gbc6a5efe3dcd #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 11/25/2024
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:94 [inline]
- dump_stack_lvl+0x241/0x360 lib/dump_stack.c:120
- lockdep_rcu_suspicious+0x226/0x340 kernel/locking/lockdep.c:6845
- __ethtool_get_ts_info+0x97/0x410 net/ethtool/common.c:873
- ethtool_get_phc_vclocks+0xa1/0x160 net/ethtool/common.c:922
- sock_timestamping_bind_phc net/core/sock.c:873 [inline]
- sock_set_timestamping+0x3e2/0xab0 net/core/sock.c:927
- sk_setsockopt+0x2150/0x33b0 net/core/sock.c:1418
- do_sock_setsockopt+0x2fb/0x720 net/socket.c:2309
- __sys_setsockopt net/socket.c:2338 [inline]
- __do_sys_setsockopt net/socket.c:2344 [inline]
- __se_sys_setsockopt net/socket.c:2341 [inline]
- __x64_sys_setsockopt+0x1ee/0x280 net/socket.c:2341
- do_syscall_x64 arch/x86/entry/common.c:52 [inline]
- do_syscall_64+0xf3/0x230 arch/x86/entry/common.c:83
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7f7dd7b8f2e9
-Code: 48 83 c4 28 c3 e8 37 17 00 00 0f 1f 80 00 00 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007ffc67b485b8 EFLAGS: 00000246 ORIG_RAX: 0000000000000036
-RAX: ffffffffffffffda RBX: 00007ffc67b48788 RCX: 00007f7dd7b8f2e9
-RDX: 0000000000000025 RSI: 0000000000000001 RDI: 0000000000000003
-RBP: 00007f7dd7c02610 R08: 0000000000000004 R09: 00007ffc67b48788
-R10: 0000000020000040 R11: 0000000000000246 R12: 0000000000000001
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-For information about bisection process see: https://goo.gl/tpsmEJ#bisection
-
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
+Then the last user does the free and everything just works.
 
