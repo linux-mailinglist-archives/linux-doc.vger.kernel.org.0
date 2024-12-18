@@ -1,127 +1,257 @@
-Return-Path: <linux-doc+bounces-33085-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33087-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id F390C9F5DBD
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Dec 2024 05:11:43 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F4439F5DFB
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Dec 2024 06:01:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 92A53189337B
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Dec 2024 04:11:44 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 370AB188FDA5
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Dec 2024 05:01:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6719814C59C;
-	Wed, 18 Dec 2024 04:11:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D5D6A1552ED;
+	Wed, 18 Dec 2024 05:01:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="nVw2j0pH"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="F6mh6kmm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2046.outbound.protection.outlook.com [40.107.94.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC32A14A084
-	for <linux-doc@vger.kernel.org>; Wed, 18 Dec 2024 04:11:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.175
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734495093; cv=none; b=Wnj/Qp/FhoBL7kblee1i0Yw+hhaM4+IYxqTgwnxPbAZrcOxYzmzbcDFRgNbsW4zE/HJb3olSAGEYH/qwPvQ/LDTaaOm0A3taqEuG6UBtL71XoHn4SDV0rHmyfP92TcEbRZxSguyZEnjz9Esnxk8vyqubl+zwk/FsUkjBBJea000=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734495093; c=relaxed/simple;
-	bh=YYhNaD2Yr+jchoTk8EiKLQl+e7xsWcAkGDWERN9QZc8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nv2nvo/VlyZ4RbHU/0SVuv+6caLssrAoMjBO0uAekXyowNbrrNZgX9iE2VfsxGhBhGoJgR2B0Y6cp9f3PzI56YiQR+f3hv3w/aaZc3V2PBLWCKTV8Wv22gZDXGh4Lf+N4QJ3f5eCnr65EDOD4uqWXKAsspf88l0MOBlXuNTMxls=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=nVw2j0pH; arc=none smtp.client-ip=209.85.210.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-7292a83264eso2622849b3a.0
-        for <linux-doc@vger.kernel.org>; Tue, 17 Dec 2024 20:11:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1734495090; x=1735099890; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=anbuEbZW8yvbXFC35C2SRwfKrlOPlxSRe3Xsz2o+b10=;
-        b=nVw2j0pHUy/oCN6CtZy6qD5plO9b1mbjkV2wGF+GOHEjkEsI9mkOJuE1V52uyi9zIb
-         auCDyuWnVn/nd1YIElq6JbwI5mmJkRmq5rqq0H0yPDhZJRyrdbJUBDf5nWNzyGdgCl8N
-         fCpW3jz6DLfUA1w1oLQ9mb3qAX7/llR3nekx+tDbXHGevKc03Z7i1c/fIVTQvHXv1tzO
-         djtwdA2gtNetHonTBw+FZ8JVRkoHVRT7vNxuYRhy1Xr3TCzbkUGAjI3WbBA1zuO6POe+
-         fhHGo5b9UhbjwK/V70OsvjCaNK8B0PyU4GJXJ2q/vHj/J/am8hjH+HRwr6lV9OKTdt2t
-         i8Gw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734495090; x=1735099890;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=anbuEbZW8yvbXFC35C2SRwfKrlOPlxSRe3Xsz2o+b10=;
-        b=bM7wGgOMO7tKv13yOQLHUK0PGQhouLely6pIv5b7Lgygsv4xbDSojRrgZ/Ok9Ua43Z
-         ppWBDoesIC62RcrHBMRD98N6bFAl6g9zU7PGq+WhwykMC/BGk5rLLxhoFPdyttCE2H6H
-         DnHRcHxQC8lrWgDdq6n7TVx3feFwze/lPWXxE8XLKcSy6K7vEixrPiOX2T9POWe3mat0
-         sheET50wZWYX9zqvdK9CL62shqC1wouH41V8ZvUmxcX1YUO5z/VeWLAAfBD12KkatKsZ
-         GqQVskyz5iFh4KpYoLhfGv2CUE6ql8ST26egqriVSa2DZksIjEcAjviTYmwucAaiIRLT
-         oU7w==
-X-Forwarded-Encrypted: i=1; AJvYcCWxwNpHcgT2qvGMBsRFU9NjGPzXUPone3lE4f5AjjicPYcLpuK7EAQns5pQoyKPiXOCraD6nxpFY3k=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz/DLgo7ltpm/D7GG0MlHfPVSESZwpcxslE6tsan4ckCCa9cjz/
-	xjXW8Ijqvgarw1C35/4op4JYnuAXftiAX2LDghBq+al+ESRbZN/x6ytmZU29rWI=
-X-Gm-Gg: ASbGncuLaAe5HLjP40sDZ2Ibr8HoTFcL4Pc21ZlPZ67g+5cfM2yPcI5Bhj6NakSUIY2
-	+pOtdeejfb7g0votDRpmORjeoUjNulHRp6U1/5fGZUhLNc++I7fhoLpSjA6zQw7VMdBAdgzvtAD
-	TcfKYdTXthnbQUGzhGubrcNUugws8BuVq5WAlsIcCenKpuyawtVZpCnlAh7OmeqlweZpwhdOLfR
-	wZ93y18aWt+H2tP0C05RPvTGrE8ozbLAvCOiBMd9xByfhg2TFKUKZtDnBM=
-X-Google-Smtp-Source: AGHT+IG4sPsc/N7IOp43iXXeKOWo6JJJXd9zgTWOHLq4CFq7GSx+SKJhvF92c9uFAmfB0bNzPUQSSg==
-X-Received: by 2002:a05:6a00:2191:b0:725:e5a7:fdac with SMTP id d2e1a72fcca58-72a8d2eedb6mr2614606b3a.26.1734495090289;
-        Tue, 17 Dec 2024 20:11:30 -0800 (PST)
-Received: from localhost ([122.172.83.132])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72a9d3e94f2sm76959b3a.199.2024.12.17.20.11.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Dec 2024 20:11:29 -0800 (PST)
-Date: Wed, 18 Dec 2024 09:41:27 +0530
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Beata Michalska <beata.michalska@arm.com>
-Cc: linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-pm@vger.kernel.org, ionela.voinescu@arm.com,
-	sudeep.holla@arm.com, will@kernel.org, catalin.marinas@arm.com,
-	rafael@kernel.org, sumitg@nvidia.com, yang@os.amperecomputing.com,
-	vanshikonda@os.amperecomputing.com, lihuisong@huawei.com,
-	zhanjie9@hisilicon.com, Jonathan Corbet <corbet@lwn.net>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H . Peter Anvin" <hpa@zytor.com>, Phil Auld <pauld@redhat.com>,
-	x86@kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v8 1/4] cpufreq: Introduce an optional cpuinfo_avg_freq
- sysfs entry
-Message-ID: <20241218041127.khdwo3hzmywcwuh5@vireshk-i7>
-References: <20241206135600.4083965-1-beata.michalska@arm.com>
- <20241206135600.4083965-2-beata.michalska@arm.com>
- <20241212065100.sjb7lrlmksbm2hdk@vireshk-i7>
- <Z2CmcelSy89NULtz@arm.com>
- <20241217042726.isllh5bulpnwql7i@vireshk-i7>
- <Z2Haw_o8gF-Ce1gx@arm.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 124681547DC;
+	Wed, 18 Dec 2024 05:01:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.94.46
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1734498101; cv=fail; b=ZZCyZMYdN3qDGK6iUx+ARKbLt4TWGtIXEW2EJjXA1f0BuJFAt9O8XTLvGJjflLJddLve3YOpjRglP3W7pJf8hoLhNhkoHJh1VP7MMyaYSGD4uTqoktoXpAAGzxmeMDpUSFBBOub6pRgzFT1xnZR0Z987GC6RplOm6WqRp4nJV6w=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1734498101; c=relaxed/simple;
+	bh=ynah6AewLTm9xMSmY8zbOxmEFS1fl7Fan9nTbYqfxqY=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=emWXGg8t2BhgXdcvdvhucYmXzloRaUH5YKfl1KAjCoeGPsiGGBCF0SToAtZu4CDxw0MrsThkBmdrSTXeDOjbmc4LuA027WWgEJJPQvqW1OcmbnCF4AGmvJs/wLSKpopZPKKn8B2gRPQiYzGJJUeiGEJt+MM4elsLgbsL//FiGFk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=F6mh6kmm; arc=fail smtp.client-ip=40.107.94.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WeVDEqhDrP8rAtkaAxFxkf6saHSzRyh5S+zk8/L4Qm9GX3qoqn+Sj2g/+g4ahLOeJNGzOROJ5CkvbPxLDztaWplEbZAlXJV8H26ZWEUZ6bY8uXGyjhcjphWN/fbp4RxSemprUwrFpv7lo3eKi4M0sIkGBebvSyYq6K+m/8li8AvRmWgSWwHq7DnfOiWmnszKR7NqfH9i67DulvOQWMDka0dU1ZeR4/PFFIEPBiAau5rd8y1bApGBfsA+Pt1Eg7YaB/TZzQGONd56ne5QcTrLLPZPJ3uPGf/m+rab/MJwEkTUARmOcpDteERnbzLnHWuZXaNlpu6gAjBjudTjfdeykw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tKsOVkMNUvLCihOCVwuPVlXwQQcHGCq7GnUo0gQ4YPk=;
+ b=NaGygaD/oF5kxCzTyQrMwoLDfSeldntK15yJMrTB1/PJulMmElK8wHpymTynz27AfWnigRrgjch20fgtz+4k9CHh+n85OIfhtDCANj+PtVNLuNUzezu4g0jby1c9Oe64kYQsrsH5wWx6tLi1s+Ec3/AExZhXk74dWjaoBa8S4xhdJCRUfLr4cPw9AOL3CaEK/mgldeG/dCI0QCZHj5U3h9nsAQ6bBZLZNJrVJSH4FZ+ELE1DHnqwCrd6YH812Uv3QFEhnmv/PKdIg5ShaduhknGc+hGz2O4yLSBNgeTNFNu6/GxHf44LhD2glAiKKZFYSDZ0FMF3yxwaO/nsoekeLQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tKsOVkMNUvLCihOCVwuPVlXwQQcHGCq7GnUo0gQ4YPk=;
+ b=F6mh6kmmMImNOCUgd9K7S5aksNAl6ZF3Kn9jvH3ZdtF+U1pV9v531iX/12SYXg7BCX5scV1kp+LlWdey99XNOt9X08ciXEpEFH1S3BnSeQWHKFeP0be1l8pdnCG2UEyOdgwnVMmAa3xmbRtD8b2SYoGlZ9wwlAueUSKzvrLnznz10QUivNR65A1wIDtfHfWtUK7Ww9HkKpQnFiU6ZNOlFvpbLiCL/i8hSNQV9s2ViliI2JPCDSmeVk1+FpzAfS37GT1Dnv8HT2ItDp/il59pNUsx9WErYP24wETQg941FwYf37RZLSZLwqfcOPNuk3A2vTn6O+Lgrdxtk+uPHajxkw==
+Received: from MW4PR03CA0062.namprd03.prod.outlook.com (2603:10b6:303:b6::7)
+ by CH2PR12MB4072.namprd12.prod.outlook.com (2603:10b6:610:7e::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.12; Wed, 18 Dec
+ 2024 05:01:35 +0000
+Received: from MWH0EPF000A6735.namprd04.prod.outlook.com
+ (2603:10b6:303:b6:cafe::b5) by MW4PR03CA0062.outlook.office365.com
+ (2603:10b6:303:b6::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8251.21 via Frontend Transport; Wed,
+ 18 Dec 2024 05:01:35 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ MWH0EPF000A6735.mail.protection.outlook.com (10.167.249.27) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8251.15 via Frontend Transport; Wed, 18 Dec 2024 05:01:35 +0000
+Received: from rnnvmail205.nvidia.com (10.129.68.10) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Tue, 17 Dec
+ 2024 21:01:20 -0800
+Received: from rnnvmail202.nvidia.com (10.129.68.7) by rnnvmail205.nvidia.com
+ (10.129.68.10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Tue, 17 Dec
+ 2024 21:01:19 -0800
+Received: from Asurada-Nvidia.nvidia.com (10.127.8.11) by mail.nvidia.com
+ (10.129.68.7) with Microsoft SMTP Server id 15.2.1544.4 via Frontend
+ Transport; Tue, 17 Dec 2024 21:01:18 -0800
+From: Nicolin Chen <nicolinc@nvidia.com>
+To: <jgg@nvidia.com>, <kevin.tian@intel.com>, <will@kernel.org>
+CC: <corbet@lwn.net>, <joro@8bytes.org>, <suravee.suthikulpanit@amd.com>,
+	<robin.murphy@arm.com>, <dwmw2@infradead.org>, <baolu.lu@linux.intel.com>,
+	<shuah@kernel.org>, <linux-kernel@vger.kernel.org>, <iommu@lists.linux.dev>,
+	<linux-arm-kernel@lists.infradead.org>, <linux-kselftest@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <eric.auger@redhat.com>,
+	<jean-philippe@linaro.org>, <mdf@kernel.org>, <mshavit@google.com>,
+	<shameerali.kolothum.thodi@huawei.com>, <smostafa@google.com>,
+	<ddutile@redhat.com>, <yi.l.liu@intel.com>, <patches@lists.linux.dev>
+Subject: [PATCH v3 00/14] iommufd: Add vIOMMU infrastructure (Part-3: vIRQ)
+Date: Tue, 17 Dec 2024 21:00:13 -0800
+Message-ID: <cover.1734477608.git.nicolinc@nvidia.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Z2Haw_o8gF-Ce1gx@arm.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: AnonymousSubmission
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A6735:EE_|CH2PR12MB4072:EE_
+X-MS-Office365-Filtering-Correlation-Id: 84f8a877-c5d6-449f-205f-08dd1f210bff
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|7416014|376014|1800799024|36860700013|82310400026;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?6SjJS1S+6KIUEWoQEXACdd40lRyFAWgbRMBImAowj/Qx23RHR5deKfjDgCDb?=
+ =?us-ascii?Q?F07/0itpAerpNdcY2nZurtcnHe0CbAe3EepuGWPuJgNAtXeegtJqBXjqyHl0?=
+ =?us-ascii?Q?IZwe4Ce5bKHKC7kYGs30zetkREHL1kwbsosgjFNnO/63g/SeBKgsI8sh6KED?=
+ =?us-ascii?Q?AK639ZM0hnmHEC1546+MPS0UYMWpzMmoKabmBa5nZ8U8nfB8gc5L6aSp9t4T?=
+ =?us-ascii?Q?WLHvIhWcaXK3MXkKivDxw92XLcWeZ9VpeVUpvaytFZnPbOeENYun9NOrHxAT?=
+ =?us-ascii?Q?ov7/Q/Oqsgh1Fobigzg7pzObrT+imYD9/v1StQFUwJjj0nRLxkdhwqPRMejF?=
+ =?us-ascii?Q?FuZJdunw9BZnglfYjKHyqcOXkTYeExPOVzto80jrR1piPrCSoUvmuQEX/4Ma?=
+ =?us-ascii?Q?LHq46YBEhSCIqjCQJyvBKUwVMSOQEOxVsxu2TJ1FCcUO/PcjxW2opKOrISxf?=
+ =?us-ascii?Q?BLRZsjigyDghI6mPRuEMavp6jUZbZqW9e4vYzbe+yQL3AGUwWr+txeMAvxb7?=
+ =?us-ascii?Q?qyUxOcASMUpcmJgbVvFHg3MidOKIczLAH3btkD/MSGyb6kX8U7ZnF7Be+8h1?=
+ =?us-ascii?Q?T+9rR8vqihTSGj1PUtoXY6m/p93kHBW8+vILhN5CnneQHG2iWnSQJ7k9mY56?=
+ =?us-ascii?Q?knGuIgMVZQi5nEapCM06VW2hDfgc5+o/7ccuwMhZcMxEEVm6lUbWQBtOt8Zi?=
+ =?us-ascii?Q?m6CBOKwI5YWJ+SQuXAEEcicu+O0YQbe/Ayu8nlTYnkkMdQeZUsSlTgPPM04Z?=
+ =?us-ascii?Q?Q2CGYeHBYfVrE/ROKitYwj4HGBnytGy9IjKf7VGBRQ6Jfn2Vx604ECXeW5/M?=
+ =?us-ascii?Q?uDeVyGOUmP8DifNWm0AXsId/SV/DV833SyB8tlypl/YVw78sivSh79dcbML+?=
+ =?us-ascii?Q?cn0WZX0+95chCvcO/x3QvkBmY2z/MaY87dBAUbCTntpnR+zzt5aqjne9G+in?=
+ =?us-ascii?Q?bF7jRTWybFZAZHW/DLXo7tSLc6KvS7u+1Ag3bN5QdBrvDi2RHlAQvzJYCFa8?=
+ =?us-ascii?Q?M1xIviQUBJuZl1DgtNQnB5jq3Rilqc5zKoWKVT/Jxxh5XCup7LsK46OKmEH9?=
+ =?us-ascii?Q?mPBg1QDbheU6SRhzu/x+PZRPSXCqOAUPJDWiHJe8xirZPbfWG6EslSPR2r1c?=
+ =?us-ascii?Q?JuT+gWUiaoOyOI3SonZjj+jSYmhCgQ4onFedrR1X/ZOT4Tnjwe0d5in3/Kbm?=
+ =?us-ascii?Q?/aUUcyQFxc/pwURE+QbLQanUxcHog/2yIfWgAJRZ71FWo6XwyjYyOr+XjgID?=
+ =?us-ascii?Q?copw0aZU8Ta5yvVWXHF1DFKxNvGGMXfMy2rv9nmv4jNt0CW6l8TS9i+CLlF+?=
+ =?us-ascii?Q?TEaq7pbb+S0u4bB0LBg9uYRTbXFvHJkXdDW7JGz5XimJvcKWCcR71b19MwJd?=
+ =?us-ascii?Q?9Wjh+cMg6ONS22bsDzRWIzoPK7W7p7qACOKVqv48kiZ4XHSQsXJNxV+1ymDv?=
+ =?us-ascii?Q?KUQICeqyvL7CnrfcjAKjbtW655Ko7jvGg9FFljFcfVrH+nWvT1nEIxGw6SvG?=
+ =?us-ascii?Q?PIFgFvc65h6UQxo=3D?=
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(36860700013)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2024 05:01:35.0567
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 84f8a877-c5d6-449f-205f-08dd1f210bff
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000A6735.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4072
 
-On 17-12-24, 21:10, Beata Michalska wrote:
-> On Tue, Dec 17, 2024 at 09:57:26AM +0530, Viresh Kumar wrote:
-> > On 16-12-24, 23:15, Beata Michalska wrote:
-> > > My bad as I must have misinterpreted that message. Although I am not entirely
-> > > sure why this might be unacceptable as it is not such uncommon approach to use
-> > > signed int space to cover both: expected positive value as well as potential
-> > > error code case failure.
-> > 
-> > This part is fine. The problem is with handling frequency here. Signed int can
-> > capture up to 2 GHz of freq, where as unsigned int can capture up to 4 GHz and
-> > so we would really like to keep it at 4 GHz..
-> Right, though the arch_freq_get_on_cpu operates on kHz values.
+As the part-3 of the vIOMMU infrastructure, this series introduces a vIRQ
+object. The existing FAULT object provides a nice notification pathway to
+the user space already, so let vIRQ reuse the infrastructure.
 
-Hmm.. Missed that.
+Mimicing the HWPT structure, add a common EVENTQ structure to support its
+derivatives: IOMMUFD_OBJ_FAULT (existing) and IOMMUFD_OBJ_VIRQ (new).
 
-If you still want to keep it, make that change in a separate patch and
-the new sysfs entry in a different one, so related people can easily
-review.
+IOMMUFD_CMD_VIRQ_ALLOC is introduced to allocate vIRQ objects for vIOMMUs.
+One vIOMMU can have multiple vIRQs in different types but can not support
+multiple vIRQs with the same types.
 
+The forwarding part is fairly simple but might need to replace a physical
+device ID with a virtual device ID in a driver-level IRQ data structure.
+So, this comes with some helpers for drivers to use.
+
+As usual, this series comes with the selftest coverage for this new vIRQ,
+and with a real world use case in the ARM SMMUv3 driver.
+
+This is on Github:
+https://github.com/nicolinc/iommufd/commits/iommufd_virq-v3
+
+Testing with RMR patches for MSI:
+https://github.com/nicolinc/iommufd/commits/iommufd_virq-v3-with-rmr
+Paring QEMU branch for testing:
+https://github.com/nicolinc/qemu/commits/wip/for_iommufd_virq-v3
+
+Changelog
+v3
+ * Rebase on Will's for-joerg/arm-smmu/updates for arm_smmu_event series
+ * Add "Reviewed-by" lines from Kevin
+ * Fix typos in comments, kdocs, and jump tags
+ * Add a patch to sort struct iommufd_ioctl_op
+ * Update iommufd's userpsace-api documentation
+ * Update uAPI kdoc to quote SMMUv3 offical spec
+ * Drop the unused workqueue in struct iommufd_virq
+ * Drop might_sleep() in iommufd_viommu_report_irq() helper
+ * Add missing "break" in iommufd_viommu_get_vdev_id() helper
+ * Shrink the scope of the vmaster's read lock in SMMUv3 driver
+ * Pass in two arguments to iommufd_eventq_virq_handler() helper
+ * Move "!ops || !ops->read" validation into iommufd_eventq_init()
+ * Move "fault->ictx = ictx" closer to iommufd_ctx_get(fault->ictx)
+ * Update commit message for arm_smmu_attach_prepare/commit_vmaster()
+ * Keep "iommufd_fault" as-is and rename "iommufd_eventq_virq" to just
+   "iommufd_virq"
+v2
+ https://lore.kernel.org/all/cover.1733263737.git.nicolinc@nvidia.com/
+ * Rebase on v6.13-rc1
+ * Add IOPF and vIRQ in iommufd.rst (userspace-api)
+ * Add a proper locking in iommufd_event_virq_destroy
+ * Add iommufd_event_virq_abort with a lockdep_assert_held
+ * Rename "EVENT_*" to "EVENTQ_*" to describe the objects better
+ * Reorganize flows in iommufd_eventq_virq_alloc for abort() to work
+ * Adde struct arm_smmu_vmaster to store vSID upon attaching to a nested
+   domain, calling a newly added iommufd_viommu_get_vdev_id helper
+ * Adde an arm_vmaster_report_event helper in arm-smmu-v3-iommufd file
+   to simplify the routine in arm_smmu_handle_evt() of the main driver
+v1
+ https://lore.kernel.org/all/cover.1724777091.git.nicolinc@nvidia.com/
+
+Thanks!
+Nicolin
+
+Nicolin Chen (14):
+  iommufd: Keep IOCTL list in an alphabetical order
+  iommufd/fault: Add an iommufd_fault_init() helper
+  iommufd/fault: Move iommufd_fault_iopf_handler() to header
+  iommufd: Abstract an iommufd_eventq from iommufd_fault
+  iommufd: Rename fault.c to eventq.c
+  iommufd: Add IOMMUFD_OBJ_VIRQ and IOMMUFD_CMD_VIRQ_ALLOC
+  iommufd/viommu: Add iommufd_viommu_get_vdev_id helper
+  iommufd/viommu: Add iommufd_viommu_report_irq helper
+  iommufd/selftest: Require vdev_id when attaching to a nested domain
+  iommufd/selftest: Add IOMMU_TEST_OP_TRIGGER_VIRQ for vIRQ coverage
+  iommufd/selftest: Add IOMMU_VIRQ_ALLOC test coverage
+  Documentation: userspace-api: iommufd: Update FAULT and VIRQ
+  iommu/arm-smmu-v3: Introduce struct arm_smmu_vmaster
+  iommu/arm-smmu-v3: Report IRQs that belong to devices attached to
+    vIOMMU
+
+ drivers/iommu/iommufd/Makefile                |   2 +-
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.h   |  30 ++
+ drivers/iommu/iommufd/iommufd_private.h       | 115 ++++++-
+ drivers/iommu/iommufd/iommufd_test.h          |  10 +
+ include/linux/iommufd.h                       |  20 ++
+ include/uapi/linux/iommufd.h                  |  46 +++
+ tools/testing/selftests/iommu/iommufd_utils.h |  63 ++++
+ .../arm/arm-smmu-v3/arm-smmu-v3-iommufd.c     |  65 ++++
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c   |  90 ++++--
+ drivers/iommu/iommufd/driver.c                |  57 ++++
+ drivers/iommu/iommufd/{fault.c => eventq.c}   | 298 ++++++++++++++----
+ drivers/iommu/iommufd/hw_pagetable.c          |   6 +-
+ drivers/iommu/iommufd/main.c                  |  20 +-
+ drivers/iommu/iommufd/selftest.c              |  53 ++++
+ drivers/iommu/iommufd/viommu.c                |   2 +
+ tools/testing/selftests/iommu/iommufd.c       |  27 ++
+ .../selftests/iommu/iommufd_fail_nth.c        |   6 +
+ Documentation/userspace-api/iommufd.rst       |  16 +
+ 18 files changed, 809 insertions(+), 117 deletions(-)
+ rename drivers/iommu/iommufd/{fault.c => eventq.c} (55%)
+
+
+base-commit: 376ce8b35ed15d5deee57bdecd8449f6a4df4c42
 -- 
-viresh
+2.43.0
+
 
