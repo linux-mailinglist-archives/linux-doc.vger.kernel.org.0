@@ -1,110 +1,159 @@
-Return-Path: <linux-doc+bounces-33277-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33274-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 188B59F77BC
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 09:53:43 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 000C89F779C
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 09:41:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6DC4716A943
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 08:53:40 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id DCCF17A2A55
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 08:41:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D638E21D586;
-	Thu, 19 Dec 2024 08:53:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="H7ZsEvMh"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 337CB21D010;
+	Thu, 19 Dec 2024 08:41:50 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47E551FC7DB;
-	Thu, 19 Dec 2024 08:53:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCD6141C79;
+	Thu, 19 Dec 2024 08:41:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734598417; cv=none; b=L9+07uKO8D/WhyZIWZtsl9VinaBWqhhrBCcN1g9VCe4azsyIG7MrWA1iY0OxPqBVIurGXk7lSWsfgMhytEP8+poXX6PNXRbDUEvZg2jAcyEQ4+dt8Y3apz2a2sNh3bGC9AOV6KP0CMax2LzzEYsHOrbnqOKINFa9C9TFmPb33A8=
+	t=1734597710; cv=none; b=fQAdJsPHoVQENWW5Dr3/2h2Fw7TFG3sCUjj1En2Y5OyJzZItdx27zSSiRq0eodhd3xKls5FOihSugFC2lpQXMbhmKyl5Ihi0ZUvZPrjFvQdI3EaZ1KCtoi1E7wxzcCKqLFVVpp6GMWp1Iba2al/ydQioX9HcBYfzVmlymMG4Z84=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734598417; c=relaxed/simple;
-	bh=+E3aAnGgXo/GVv5ABF7ssnxbSsuqBs/q3Zv4+16KBEQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=RXo8CelxeQn2T/losFMkepO39sUW0zeloypBojE8T6aoNZt0ARCaynJJldSSrWtn5d5JFAdiRkMJcjjapxTxIhvT7apvQ7Nomywpw0OuGHX7Wif03no+eF82tOTlA3Rb7tiijv2jaU3ZXCa2onW7yRFdQP9ov9/8X8fjEREkeLY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=H7ZsEvMh; arc=none smtp.client-ip=90.155.92.199
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=y+Qk/0H1J88ExtAGJUeKlKBfrqM5/qWl+ERPzAhjs/k=; b=H7ZsEvMhH7+0jhe7C/Tf4SloAr
-	Jy1WC3G49A4eMdpAyYm8x3GpCZYt6mjP3ZQG0VVu2dxUmjmNlHM9ZXvk6ShP1fAjTcoR3FbLt4X6N
-	1tfoiCcCguzCis+Dl5WifEv1uvds5ixMnulKwjUTpcyKCBH8JXpwIc+oxu7MjxFyQqDVRKjtynQrE
-	NCiRY63JOWzCif4T07+l2Ao/gR/HtoEd6OC9Q0Zaco2UxvJBduvnA4iR7RXea/7z/OR2LewyHjifg
-	TiewiNN8bPt1gkGit3hH05UCtyk1wkBmTrQlSOBgZZwJl5Fq38zAnjD+x0GgO9EM+GCc2N9JOWpSI
-	7d7nomQw==;
-Received: from 77-249-17-89.cable.dynamic.v4.ziggo.nl ([77.249.17.89] helo=noisy.programming.kicks-ass.net)
-	by desiato.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
-	id 1tOCHQ-00000005Pw6-0A3a;
-	Thu, 19 Dec 2024 08:53:12 +0000
-Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
-	id 3F6BA3003FF; Thu, 19 Dec 2024 09:53:11 +0100 (CET)
-Date: Thu, 19 Dec 2024 09:53:11 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Suren Baghdasaryan <surenb@google.com>
-Cc: "Liam R. Howlett" <Liam.Howlett@oracle.com>, akpm@linux-foundation.org,
-	willy@infradead.org, lorenzo.stoakes@oracle.com, mhocko@suse.com,
-	vbabka@suse.cz, hannes@cmpxchg.org, mjguzik@gmail.com,
-	oliver.sang@intel.com, mgorman@techsingularity.net,
-	david@redhat.com, peterx@redhat.com, oleg@redhat.com,
-	dave@stgolabs.net, paulmck@kernel.org, brauner@kernel.org,
-	dhowells@redhat.com, hdanton@sina.com, hughd@google.com,
-	lokeshgidra@google.com, minchan@google.com, jannh@google.com,
-	shakeel.butt@linux.dev, souravpanda@google.com,
-	pasha.tatashin@soleen.com, klarasmodin@gmail.com, corbet@lwn.net,
-	linux-doc@vger.kernel.org, linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org, kernel-team@android.com
-Subject: Re: [PATCH v6 10/16] mm: replace vm_lock and detached flag with a
- reference count
-Message-ID: <20241219085311.GA26551@noisy.programming.kicks-ass.net>
-References: <20241217103035.GD11133@noisy.programming.kicks-ass.net>
- <CAJuCfpHzsQeejdPPbDdA6B3Wa=-KusnYRUyt1U0WnCRr8OKfGw@mail.gmail.com>
- <20241218094104.GC2354@noisy.programming.kicks-ass.net>
- <20241218100601.GI12500@noisy.programming.kicks-ass.net>
- <kfltsrry7qjuycyqpe2wune2ejad6kvusm2zixvfbtprbnw2lv@wcafrui6qaa7>
- <CAJuCfpFYZkc===SXF35s3C0xg3q5RjpCiOQhwK=9_3RnFUye1g@mail.gmail.com>
- <20241218161850.GG2354@noisy.programming.kicks-ass.net>
- <CAJuCfpHDRCoaBfE8y6AppKveSTgayyTNfDyQWH=gMzO-Pkuqpw@mail.gmail.com>
- <20241218174428.GQ2354@noisy.programming.kicks-ass.net>
- <CAJuCfpEKg_h5pw2AxdF1wmFMt4xdOxYqv7U1uVMYcuSCB4kHuA@mail.gmail.com>
+	s=arc-20240116; t=1734597710; c=relaxed/simple;
+	bh=snkC2yhtkrzPCscAJDw/TA1auWphpv+5kqavOBntcO0=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=XVWoG7ZSkHjkz6OR0p5742yHn3rogQmcB3pQtB6FfJXdAlswzjbC20v/7SrKpVIdCOiCQCmDYW37ZsEldyMJpHn2V6l7H1syyflGRbDk2jV6A7XIYxY/2DT7iJAof0o7Uco9aZpLljkEY9FVgtGpKEdX2QGAr26c8HZ8cYr5Zu0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.186.31])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4YDPD04Fsdz6K6RT;
+	Thu, 19 Dec 2024 16:41:36 +0800 (CST)
+Received: from frapeml500005.china.huawei.com (unknown [7.182.85.13])
+	by mail.maildlp.com (Postfix) with ESMTPS id A034C140393;
+	Thu, 19 Dec 2024 16:41:39 +0800 (CST)
+Received: from china (10.200.201.82) by frapeml500005.china.huawei.com
+ (7.182.85.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Thu, 19 Dec
+ 2024 09:41:29 +0100
+From: Gur Stavi <gur.stavi@huawei.com>
+To: <andrew@lunn.ch>
+CC: <andrew+netdev@lunn.ch>, <cai.huoqing@linux.dev>, <corbet@lwn.net>,
+	<davem@davemloft.net>, <edumazet@google.com>, <gongfan1@huawei.com>,
+	<guoxin09@huawei.com>, <gur.stavi@huawei.com>, <horms@kernel.org>,
+	<kuba@kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <meny.yossefi@huawei.com>,
+	<netdev@vger.kernel.org>, <pabeni@redhat.com>, <shenchenyang1@hisilicon.com>,
+	<shijing34@huawei.com>, <wulike1@huawei.com>, <zhoushuai28@huawei.com>
+Subject: Re: [RFC net-next v02 1/3] net: hinic3: module initialization and tx/rx logic
+Date: Thu, 19 Dec 2024 10:55:02 +0200
+Message-ID: <20241219085502.2485372-1-gur.stavi@huawei.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <b794027a-ef3b-4262-a952-db249a840e89@lunn.ch>
+References: <b794027a-ef3b-4262-a952-db249a840e89@lunn.ch>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAJuCfpEKg_h5pw2AxdF1wmFMt4xdOxYqv7U1uVMYcuSCB4kHuA@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ frapeml500005.china.huawei.com (7.182.85.13)
 
-On Wed, Dec 18, 2024 at 09:58:12AM -0800, Suren Baghdasaryan wrote:
-	
-> And remove_vma will be just freeing the vmas. Is that correct?
+> > +static void hinic3_del_one_adev(struct hinic3_hwdev *hwdev,
+> > +				enum hinic3_service_type svc_type)
+> > +{
+> > +	struct hinic3_pcidev *pci_adapter = hwdev->adapter;
+> > +	struct hinic3_adev *hadev;
+> > +	bool timeout = true;
+> > +	unsigned long end;
+> > +
+> > +	end = jiffies + msecs_to_jiffies(HINIC3_EVENT_PROCESS_TIMEOUT);
+> > +	do {
+> > +		if (!test_and_set_bit(svc_type, &pci_adapter->state)) {
+> > +			timeout = false;
+> > +			break;
+> > +		}
+> > +		usleep_range(900, 1000);
+> > +	} while (time_before(jiffies, end));
+> > +
+> > +	if (timeout && !test_and_set_bit(svc_type, &pci_adapter->state))
+> > +		timeout = false;
+>
+> Please look at using iopoll.h
+>
 
-Yep.
+Ack
 
-> I'm a bit confused because the original thinking was that
-> vma_mark_detached() would drop the last refcnt and if it's 0 we would
-> free the vma right there. If that's still what we want to do then I
-> think the above sequence should look like this:
+> > +static int hinic3_sw_init(struct net_device *netdev)
+> > +{
+> > +	struct hinic3_nic_dev *nic_dev = netdev_priv(netdev);
+> > +	struct hinic3_hwdev *hwdev = nic_dev->hwdev;
+> > +	int err;
+> > +
+> > +	nic_dev->q_params.sq_depth = HINIC3_SQ_DEPTH;
+> > +	nic_dev->q_params.rq_depth = HINIC3_RQ_DEPTH;
+> > +
+> > +	hinic3_try_to_enable_rss(netdev);
+> > +
+> > +	eth_hw_addr_random(netdev);
+>
+> Is using a random MAC just a temporary thing until more code is added
+> to access an OTP?
+>
 
-Right; sorry about that. So my initial objection to that extra sync was
-based on the reasons presented -- but having had to look at the unmap
-path again (my mm-foo is somewhat rusty, I've not done much the past few
-years) I realized that keeping a VMA alive beyond unmapping PTEs is just
-plain daft.
+No, using a random MAC is not a temporary solution.
+This device is designed for cloud environments. VFs are expected to be
+used by VMs that may migrate from device to device. Therefore the HW does
+not provide a MAC address to VFs, but rather the VF driver selects a
+random MAC address and configures it into the (current) device.
 
-So yes, back to your original semantics, but cleaned up to not need that
-extra sync point -- instead relying on the natural placement of
-vma_start_write() after unhooking from the mm. And not for reasons of
-the race, but for reasons of integrity -- VMA without PTEs is asking for
-more trouble.
+Once the driver is extended to support PFs, the PF MAC will be obtained
+from the device.
+
+> > +	err = register_netdev(netdev);
+> > +	if (err) {
+> > +		err = -ENOMEM;
+> > +		goto err_netdev;
+> > +	}
+> > +
+> > +	netif_carrier_off(netdev);
+> > +
+> > +	dev_set_drvdata(&adev->dev, nic_dev);
+>
+> Is this used anywhere in the driver? Calling register_netdev() makes
+> the interface live, even before it returns. If you have NFS root for
+> example, it could be sending packets, etc, before drvdata is set.
+>
+
+Ack
+
+> > +int hinic3_set_port_mtu(struct net_device *netdev, u16 new_mtu)
+> > +{
+> > +	struct hinic3_nic_dev *nic_dev = netdev_priv(netdev);
+> > +	struct hinic3_func_tbl_cfg func_tbl_cfg = {};
+> > +	struct hinic3_hwdev *hwdev = nic_dev->hwdev;
+> > +
+> > +	if (new_mtu < HINIC3_MIN_MTU_SIZE) {
+> > +		dev_err(hwdev->dev,
+> > +			"Invalid mtu size: %ubytes, mtu size < %ubytes\n",
+> > +			new_mtu, HINIC3_MIN_MTU_SIZE);
+> > +		return -EINVAL;
+> > +	}
+> > +
+> > +	if (new_mtu > HINIC3_MAX_JUMBO_FRAME_SIZE) {
+> > +		dev_err(hwdev->dev, "Invalid mtu size: %ubytes, mtu size > %ubytes\n",
+> > +			new_mtu, HINIC3_MAX_JUMBO_FRAME_SIZE);
+> > +		return -EINVAL;
+> > +	}
+>
+> The core can do this validation for you, if you set ndev->max_mtu,
+> ndev->min_mtu.
+
+Ack
 
