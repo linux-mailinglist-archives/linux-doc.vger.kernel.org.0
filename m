@@ -1,187 +1,121 @@
-Return-Path: <linux-doc+bounces-33290-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33287-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4000D9F7B25
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 13:21:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EAE409F7AC1
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 12:53:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id BB7EF188F05D
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 12:21:47 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0092E1884C10
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 11:53:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F207E223E73;
-	Thu, 19 Dec 2024 12:21:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="XgZ/DosZ"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 54296223710;
+	Thu, 19 Dec 2024 11:53:28 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C9961EA90;
-	Thu, 19 Dec 2024 12:21:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A101223330;
+	Thu, 19 Dec 2024 11:53:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734610899; cv=none; b=YpSUS0pnuAuHt0N0oXhXl709h88+VE+H2/a5+L7Gr4aPH8q0rbM6TYUWv1HzGAwR4Jr+7SYz+JLP5LvITXENm2LUiZUbRBKkC1puwvwuUECcChDu0WzTX0PoiLAuDBymvhiE5Opxt/yWdcRRNyO6XMNKOt/SVJoAWJJopuV2nT0=
+	t=1734609208; cv=none; b=iXrBucITUBCsE2n5tbT59F/qFquEoluhOd4yqQVfgPm9iptiZ5OzsAcwQvjAu2Csk2pidURsXze9GjzZxNPn45tEjKN1l1h3xzjUjsszFCBUOGRI9Aouja4D2XhTJcdgyI4Es89RFqSyOjyPzYlBFvZsMKJ5uXKt6iCTEmATCXU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734610899; c=relaxed/simple;
-	bh=iNqHc/hFVwreyFwmh8kRENxtTCYK9r5eoM0q1Jsqe5Q=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=CroBEfWkuwlIdqFzMgiVrQ3fF1HAhTCgkQ7N1fTvWVmlhN+D2l7KQylWngTCiQJBxCuWTPv60pdmnZjjavaQgzxCda3Nawe1xP3MZTwGfXSDW7yOm+xAqXOvnL31ZyYHO4+dMi3ElGWbv8pGUYjmd6XDYsZVacQwvUKco8+O76s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=XgZ/DosZ; arc=none smtp.client-ip=80.237.130.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:From:
-	Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:In-Reply-To:
-	References; bh=HyDHpVyGkyiWe5AIbIldTgJU4aH/JavV7tDiinsekbs=; t=1734610897;
-	x=1735042897; b=XgZ/DosZLBROVksgGkJMbN2fqqPaqM+K8wjfH75jIgX2su1RSOp7idyXLaPej
-	cw6SvTQe9tjgZEXCDmtr1Nnuj5q3Q5ULnyJwdjK8CcJohK9jcCBRFoqLaQYtQkfB0IKh/a66NtEWw
-	j4Z/F9COWLnkFw40113pyF0h4u5GVYDMsBNaYi3VFqMQ2RznuEGERLsaJgDK36Ya6mT+o5R88++y9
-	bZ+l+dezXy3NZQKNUUDYN2VGNff+O5k8M+j2ikWHVzirW5ysVEmbc5ov8L8SmGV9DTl/Ot0qyIzMl
-	Xt7BguLyLMysyTHHOU2fBoGyo0nHMqKAK5OSu31qlJsan6KlYg==;
-Received: from [2a02:8108:8980:2478:87e9:6c79:5f84:367d]; authenticated
-	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128)
-	id 1tOEsz-007vOW-12;
-	Thu, 19 Dec 2024 12:40:09 +0100
-Message-ID: <244ed3fd-c989-497a-853b-b8894911df9e@leemhuis.info>
-Date: Thu, 19 Dec 2024 12:40:08 +0100
+	s=arc-20240116; t=1734609208; c=relaxed/simple;
+	bh=7SYHZIs/WrMiFnJV+UNkilY+ZLz4Hxrf5N56/tTsSDA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=s1mMaFYGchudiRdpSATSPBLucSshHkp8+k/jy5+rldeNyLU8/INF+CI0aCyKIyreEFsrunngBdSe2e1pFDcOnbli0R2XOJU3RsSw9Yi960YVMAdhyHUjhkb/atYPtn0R/pBZwjywQ0iSaHNf9N/tiCZRWaryb0TBxXyxgCKHCLY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3C3EC1477;
+	Thu, 19 Dec 2024 03:53:53 -0800 (PST)
+Received: from J2N7QTR9R3 (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A4C173F720;
+	Thu, 19 Dec 2024 03:53:19 -0800 (PST)
+Date: Thu, 19 Dec 2024 11:53:13 +0000
+From: Mark Rutland <mark.rutland@arm.com>
+To: Arnd Bergmann <arnd@arndb.de>
+Cc: Ard Biesheuvel <ardb+git@google.com>, linux-kernel@vger.kernel.org,
+	Ard Biesheuvel <ardb@kernel.org>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>, Andy Lutomirski <luto@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Uros Bizjak <ubizjak@gmail.com>, Dennis Zhou <dennis@kernel.org>,
+	Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@linux.com>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Masahiro Yamada <masahiroy@kernel.org>, Kees Cook <kees@kernel.org>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Keith Packard <keithp@keithp.com>,
+	Justin Stitt <justinstitt@google.com>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
+	Ian Rogers <irogers@google.com>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	Kan Liang <kan.liang@linux.intel.com>, linux-doc@vger.kernel.org,
+	linux-pm@vger.kernel.org, kvm@vger.kernel.org,
+	xen-devel@lists.xenproject.org, linux-efi@vger.kernel.org,
+	Linux-Arch <linux-arch@vger.kernel.org>,
+	linux-sparse@vger.kernel.org, linux-kbuild@vger.kernel.org,
+	linux-perf-users@vger.kernel.org, rust-for-linux@vger.kernel.org,
+	llvm@lists.linux.dev
+Subject: Re: [RFC PATCH 02/28] Documentation: Bump minimum GCC version to 8.1
+Message-ID: <Z2QJKZBsgvPMgRo_@J2N7QTR9R3>
+References: <20240925150059.3955569-30-ardb+git@google.com>
+ <20240925150059.3955569-32-ardb+git@google.com>
+ <c4868f63-b688-4489-a112-05bf04280bde@app.fastmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docs: git SHA prefixes are for humans
-To: Kees Cook <kees@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>,
- Geert Uytterhoeven <geert+renesas@glider.be>, regressions@lists.linux.dev,
- workflows@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
-References: <20241216012743.work.705-kees@kernel.org>
-From: Thorsten Leemhuis <linux@leemhuis.info>
-Content-Language: de-DE, en-US
-Autocrypt: addr=linux@leemhuis.info; keydata=
- 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 n7RI
-In-Reply-To: <20241216012743.work.705-kees@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1734610897;e86d0434;
-X-HE-SMSGID: 1tOEsz-007vOW-12
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <c4868f63-b688-4489-a112-05bf04280bde@app.fastmail.com>
 
-Hi! Thx for picking this up!
+Hi Arnd,
 
-On 16.12.24 02:27, Kees Cook wrote:
-> Clarify that the preferred git SHA abbreviation length for the Fixes
-> tag is 12 characters[1], as the tag is intended for humans (though, yes,
-> it is parsed by machines too). Collision resolution needs to be performed
-> using the parenthetical patch Subject that follows the abbreviated hash.
-> [...] 
-> diff --git a/Documentation/process/handling-regressions.rst b/Documentation/process/handling-regressions.rst
-> index 1f5ab49c48a4..a0e8715c6cd3 100644
-> --- a/Documentation/process/handling-regressions.rst
-> +++ b/Documentation/process/handling-regressions.rst
-> @@ -29,9 +29,9 @@ The important bits (aka "The TL;DR")
->      * For mailed reports, check if the reporter included a line like ``#regzbot
->        introduced: v5.13..v5.14-rc1``. If not, send a reply (with the regressions
->        list in CC) containing a paragraph like the following, which tells regzbot
-> -      when the issue started to happen::
-> +      when the issue started to happen, preferably with a full git SHA::
+On Wed, Sep 25, 2024 at 03:58:38PM +0000, Arnd Bergmann wrote:
+> On Wed, Sep 25, 2024, at 15:01, Ard Biesheuvel wrote:
+> > From: Ard Biesheuvel <ardb@kernel.org>
+> >
+> > Bump the minimum GCC version to 8.1 to gain unconditional support for
+> > referring to the per-task stack cookie using a symbol rather than
+> > relying on the fixed offset of 40 bytes from %GS, which requires
+> > elaborate hacks to support.
+> >
+> > Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+> > ---
+> >  Documentation/admin-guide/README.rst | 2 +-
+> >  Documentation/process/changes.rst    | 2 +-
+> >  2 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> Acked-by: Arnd Bergmann <arnd@arndb.de>
+> 
+> As we discussed during plumbers, I think this is reasonable,
+> both the gcc-8.1 version and the timing after the 6.12-LTS
+> kernel.
+> 
+> We obviously need to go through all the other version checks
+> to see what else can be cleaned up. I would suggest we also
+> raise the binutils version to 2.30+, which is what RHEL8
+> shipped alongside gcc-8. I have not found other distros that
+> use older binutils in combination with gcc-8 or higher,
+> Debian 10 uses binutils-2.31.
+> I don't think we want to combine the additional cleanup with
+> your series, but if we can agree on the version, we can do that
+> in parallel.
 
-How about "when the issue started to happen using an unique identifier
-understood by git like the commit-id::"?
+Were you planning to send patches to that effect, or did you want
+someone else to do that? I think we were largely agreed on making those
+changes, but it wasn't clear to me who was actually going to send
+patches, and I couldn't spot a subsequent thread on LKML.
 
-Regzbot handles tags, too. And I guess the term "commit-id" is more
-common and easier to understand for non-developers than "SHA". And in
-case we ever start using SHA256 sums in the kernel that maybe can just
-stay as it is.
-
-> [...]
-
-> diff --git a/Documentation/process/maintainer-tip.rst b/Documentation/process/maintainer-tip.rst
-> index e374b67b3277..658b489705be 100644
-> --- a/Documentation/process/maintainer-tip.rst
-> +++ b/Documentation/process/maintainer-tip.rst
-> @@ -284,7 +284,7 @@ following tag ordering scheme:
->  
->       Commit
->  
-> -       abcdef012345678 ("x86/xxx: Replace foo with bar")
-> +       ab0123456789 ("x86/xxx: Replace foo with bar")
-
-Ignore the following side note, I just need to get this off my chest:
-
-Why does that file even mention this and a lot of other stuff how to
-create a proper patch description at all? We already have two documents
-that explain this; a third just for one subsystem seems somewhat wrong.
-
-But whatever. :-D
-
-> [...]
-> diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
-> index 1518bd57adab..efd4fb1109e9 100644
-> --- a/Documentation/process/submitting-patches.rst
-> +++ b/Documentation/process/submitting-patches.rst
-> @@ -163,6 +163,12 @@ An example call::
->  	$ git log -1 --pretty=fixes 54a4f0239f2e
->  	Fixes: 54a4f0239f2e ("KVM: MMU: make kvm_mmu_zap_page() return the number of pages it actually freed")
->  
-> +Note that the "Fixes" tag, while it does get parsed by machines, is intended
-> +for humans (hence the Subject portion). It is preferred that hashes remain at
-> +12 characters even in the face of prefix collisions. When encountering hash
-> +prefix collisions, tools (and humans) need to resolve such collisions using
-> +the parenthetical patch Subject.
-> +
-
-submitting-patches.rst to my understanding and the header of that file
-is the shorter of two approaches documenting how to contribute patches.
-So this text should likely go to the longer one, which is
-Documentation/process/5.Posting.rst. Or both, if we consider this
-important enough -- but I'd say it's not.
-
-Ciao, Thorsten
+Mark.
 
