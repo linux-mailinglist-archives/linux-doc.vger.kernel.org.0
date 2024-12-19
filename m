@@ -1,135 +1,157 @@
-Return-Path: <linux-doc+bounces-33269-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33266-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE03B9F7644
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 08:52:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 411449F75F6
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 08:44:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id A9DA11890A71
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 07:52:56 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id D1E731885DD0
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 07:43:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0AA84218E93;
-	Thu, 19 Dec 2024 07:50:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D2505217F24;
+	Thu, 19 Dec 2024 07:41:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=brainfault-org.20230601.gappssmtp.com header.i=@brainfault-org.20230601.gappssmtp.com header.b="FvG3M106"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-il1-f169.google.com (mail-il1-f169.google.com [209.85.166.169])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F325218E82
-	for <linux-doc@vger.kernel.org>; Thu, 19 Dec 2024 07:50:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A350217717
+	for <linux-doc@vger.kernel.org>; Thu, 19 Dec 2024 07:41:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734594641; cv=none; b=O7YVYo72VBZv8rUYNO/cMo9p7snHi7jUG3Te10/ZVwtlTvCeqjwciVZwEtyb/Xgz3xdoSrTvlaCDKChwXlyt5gJW+4v7FRUxZtNA6msu+Hrp03vEK13F4u/l9sTczdOzwh3HLbcMIakdvBxkyaNL8dkT1L7URoP1gf3xEG4W64E=
+	t=1734594108; cv=none; b=g4xLIwqTD4J3QYM3p5vY4wL34yEz8YvGCC+NQEJLhNGdS/14rdavRKJ76+JjC3j0NNRI/TOhMrDfxaocqIzjGnjK8c7rktjhd5JjhRyavd+I0KGNxHsa9kFCu5a9LrUKgvhNGU2upUGAanAyrXxpfNvfBody+EmXE8slWIhEK9M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734594641; c=relaxed/simple;
-	bh=Dwk6bXNu5eZTvBfMa7fJbM+NhBSxfOByQaqOb5V8mPQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=UcKRzlVP93TFIzMqG0fG6raE/E3w9T7MS8G3P//XTDhtVPx1eJH9faQY6a/TfqiqC5/CkOVJ1kdrHrYN2utZgauReg2p95J1SsfekvNASy8KsJxEcVZmLkQJeXoMjGwleqD4hYoIhK+dqRY79Q0fRZtLdWGBbVY93nSQA7RCPI4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <a.fatoum@pengutronix.de>)
-	id 1tOBId-0003kT-Pr; Thu, 19 Dec 2024 08:50:23 +0100
-Received: from dude05.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::54])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <a.fatoum@pengutronix.de>)
-	id 1tOBIc-004AWh-0Q;
-	Thu, 19 Dec 2024 08:50:22 +0100
-Received: from localhost ([::1] helo=dude05.red.stw.pengutronix.de)
-	by dude05.red.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <a.fatoum@pengutronix.de>)
-	id 1tOB0M-00GkbH-0u;
-	Thu, 19 Dec 2024 08:31:30 +0100
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Date: Thu, 19 Dec 2024 08:31:32 +0100
-Subject: [PATCH 11/11] reboot: retire hw_protection_reboot and
- hw_protection_shutdown helpers
+	s=arc-20240116; t=1734594108; c=relaxed/simple;
+	bh=p3APS2WYRSj7CCXXVqgW/wsCliIqS2BoeufRUX/3xng=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=VD2TbHBnLbcwhWna+3Cd5m7vnPAdLtVFouBmKwGpYMBxujpEHfpXIF9lhou5AjxxjTPsnk1vm+HwyNwSmDPiiFo4k3mNLG0TPre/MMbO0KNtAZOPlzlL9tF8EgpYK1oIjasgpMzV+D1yBCD64jcueUoRchOeidCS3gW0pnkJKGA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=brainfault.org; spf=none smtp.mailfrom=brainfault.org; dkim=pass (2048-bit key) header.d=brainfault-org.20230601.gappssmtp.com header.i=@brainfault-org.20230601.gappssmtp.com header.b=FvG3M106; arc=none smtp.client-ip=209.85.166.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=brainfault.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=brainfault.org
+Received: by mail-il1-f169.google.com with SMTP id e9e14a558f8ab-3a9628d20f0so3570525ab.2
+        for <linux-doc@vger.kernel.org>; Wed, 18 Dec 2024 23:41:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=brainfault-org.20230601.gappssmtp.com; s=20230601; t=1734594104; x=1735198904; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=CK6PFnM/cYjzOszuWhFFBsrj9dfFgVZgNhYUrThAqWc=;
+        b=FvG3M106qeNCqqR07mYUAW8zCghgykO4yrntEvdqrAO5zodqJzeFTPmae1Z3QbaYDE
+         DEEolWgmcPTU3LlD3yv5zsqubosgINQnoky1VSDwQr+JiDiAI6fbnRt8ubHECkUiTZDc
+         KtIsEW4jOz2DpKXAWDnNU/aMV1rviYgXMOzzOA6/PakjhanZeFkzApy5bbJ459HSrY5Z
+         En50oPKw9ir+8R8bsk9wmVEJC2jrR8N0wYqg58AnMLsWarbRrG6GDBjCyOS71KYavE6+
+         WU4g7BPAJSKx29ZRajj0g+Ke76AmKrrTA5bbR1DkewfI+0oMvpnymMsf6hOIO6HxuCN5
+         NVzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1734594104; x=1735198904;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=CK6PFnM/cYjzOszuWhFFBsrj9dfFgVZgNhYUrThAqWc=;
+        b=O7L5VqLvRMcwHrS4tUGr36I8TtA7xu0Fz7Q1esNUTmFVbrLm37WC5AJh/D/a5XH07D
+         VX4gyPDBvXAm0VBNkG7YOMxpvn/MaFNX2crZnECdmiuwiDvwKhwEOK1j6a6sN5FeH3+G
+         MCC6FFYpTn8X5P8+CdxShnY2W0OCG/mAHIp4gnAwuUNO0ZeZyupH+ytzxbopM+utekOL
+         zakg8XL9tQcX+F8c3YS5LG/Sf13uJRnrr87N2foWC2AUMpBIKIOkpKM9ymfOud1FD4YT
+         5OAbz7Lijr/Hr/qmyYd6Q5bNCm0m9eggnxW0r0bEHw4CHsIBkEZCKikWHq7Vhyb8p3Sn
+         iM6A==
+X-Forwarded-Encrypted: i=1; AJvYcCXm0FM2aYFikXaRArM4CLUvYp3K0bpN1gEnBjyPNDue+5vqe3P5DUAOIZPFl+fLH2F7bHjmTwjpbAk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyebetRgvlNEUh9P/UQpySwxFnGcWQl58AuR60SBQhDRrqe6OlJ
+	WCv958uq8xpv5cvB9qLY2JNpqLtjTrodm42gFZkjtMBEn5rkuusOqxsOXI1rKdd7b8sccIIpHLK
+	Ty4eiD0J6MaZuvvKcNPIeAfvUM5r97019kdjsLw==
+X-Gm-Gg: ASbGnctR/6sBHw7okDYKiD1hJ7nvOb6SkXIVgWVUFUwkdf6QMeXHw6j5P1z1Ek5xQGN
+	pDW8c003Q2T/biIcn4ZVBiFIddZK6yQjxhAPuuZCT
+X-Google-Smtp-Source: AGHT+IGbPuySSmr1CwdOHQeWubrx1MyyRpnBfYc/XwwbMxEmLghw7Vo34EZotbYZAeerVNV2zRCMld34Fd/Fk/tzQY0=
+X-Received: by 2002:a05:6e02:158b:b0:3a7:e286:a565 with SMTP id
+ e9e14a558f8ab-3c0148947f4mr29393365ab.23.1734594104509; Wed, 18 Dec 2024
+ 23:41:44 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241219-hw_protection-reboot-v1-11-263a0c1df802@pengutronix.de>
-References: <20241219-hw_protection-reboot-v1-0-263a0c1df802@pengutronix.de>
-In-Reply-To: <20241219-hw_protection-reboot-v1-0-263a0c1df802@pengutronix.de>
-To: Daniel Lezcano <daniel.lezcano@linaro.org>, 
- Fabio Estevam <festevam@denx.de>, "Rafael J. Wysocki" <rafael@kernel.org>, 
- Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>, 
- Jonathan Corbet <corbet@lwn.net>, Serge Hallyn <serge@hallyn.com>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Matti Vaittinen <mazziesaccount@gmail.com>, 
- Benson Leung <bleung@chromium.org>, Tzung-Bi Shih <tzungbi@kernel.org>, 
- Guenter Roeck <groeck@chromium.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-security-module@vger.kernel.org, 
- chrome-platform@lists.linux.dev, devicetree@vger.kernel.org, 
- kernel@pengutronix.de, Ahmad Fatoum <a.fatoum@pengutronix.de>
-X-Mailer: b4 0.14.2
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+References: <20240619153913.867263-1-cleger@rivosinc.com> <20240619153913.867263-5-cleger@rivosinc.com>
+In-Reply-To: <20240619153913.867263-5-cleger@rivosinc.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Thu, 19 Dec 2024 13:11:32 +0530
+X-Gm-Features: AbW1kvbl_nOMADXonpsf4A_tmW9qHfMUPG4EJdNLYs-eLb1hX0IfloBaKeSVqO4
+Message-ID: <CAAhSdy09SnHMoX0nanLOv_7TBt3T_xX_e6a5UX_NeZdLN7touQ@mail.gmail.com>
+Subject: Re: [PATCH 4/5] RISC-V: KVM: Allow Zaamo/Zalrsc extensions for Guest/VM
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Paul Walmsley <paul.walmsley@sifive.com>, 
+	Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
+	Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Shuah Khan <shuah@kernel.org>, 
+	Atish Patra <atishp@atishpatra.org>, linux-doc@vger.kernel.org, 
+	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	devicetree@vger.kernel.org, kvm@vger.kernel.org, 
+	kvm-riscv@lists.infradead.org, linux-kselftest@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The hw_protection_reboot and hw_protection_shutdown functions mix
-mechanism with policy: They let the driver requesting an emergency
-action for hardware protection also decide how to deal with it.
+On Wed, Jun 19, 2024 at 9:11=E2=80=AFPM Cl=C3=A9ment L=C3=A9ger <cleger@riv=
+osinc.com> wrote:
+>
+> Extend the KVM ISA extension ONE_REG interface to allow KVM user space
+> to detect and enable Zaamo/Zalrsc extensions for Guest/VM.
+>
+> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
 
-This is inadequate in the general case as a driver reporting e.g. an
-imminent power failure can't know whether a shutdown or a reboot would
-be more appropriate for a given hardware platform.
+LGTM.
 
-With the addition of the hw_protection parameter, it's now possible to
-configure at runtime the default emergency action and drivers are
-expected to use hw_protection_trigger to have this parameter dictate
-policy.
+Reviewed-by: Anup Patel <anup@brainfault.org>
 
-As no current users of either hw_protection_shutdown or
-hw_protection_shutdown helpers remain, remove them, as not to tempt
-driver authors to call them.
+Regards,
+Anup
 
-Existing users now either defer to hw_protection_trigger or call
-__hw_protection_trigger with a suitable argument directly when
-they have inside knowledge on whether a reboot or shutdown would
-be more appropriate.
-
-Signed-off-by: Ahmad Fatoum <a.fatoum@pengutronix.de>
----
- include/linux/reboot.h | 10 ----------
- 1 file changed, 10 deletions(-)
-
-diff --git a/include/linux/reboot.h b/include/linux/reboot.h
-index 281696f509932e444eadd453fb0233aa7a07fbce..5c709463a7f85189e169bbaeb8bb7b115b20c996 100644
---- a/include/linux/reboot.h
-+++ b/include/linux/reboot.h
-@@ -200,16 +200,6 @@ static inline void hw_protection_trigger(const char *reason, int ms_until_forced
- 	__hw_protection_trigger(reason, ms_until_forced, HWPROT_ACT_DEFAULT);
- }
- 
--static inline void hw_protection_reboot(const char *reason, int ms_until_forced)
--{
--	__hw_protection_trigger(reason, ms_until_forced, HWPROT_ACT_REBOOT);
--}
--
--static inline void hw_protection_shutdown(const char *reason, int ms_until_forced)
--{
--	__hw_protection_trigger(reason, ms_until_forced, HWPROT_ACT_SHUTDOWN);
--}
--
- /*
-  * Emergency restart, callable from an interrupt handler.
-  */
-
--- 
-2.39.5
-
+> ---
+>  arch/riscv/include/uapi/asm/kvm.h | 2 ++
+>  arch/riscv/kvm/vcpu_onereg.c      | 4 ++++
+>  2 files changed, 6 insertions(+)
+>
+> diff --git a/arch/riscv/include/uapi/asm/kvm.h b/arch/riscv/include/uapi/=
+asm/kvm.h
+> index a6215634df7c..f10c6e133d4d 100644
+> --- a/arch/riscv/include/uapi/asm/kvm.h
+> +++ b/arch/riscv/include/uapi/asm/kvm.h
+> @@ -174,6 +174,8 @@ enum KVM_RISCV_ISA_EXT_ID {
+>         KVM_RISCV_ISA_EXT_ZCD,
+>         KVM_RISCV_ISA_EXT_ZCF,
+>         KVM_RISCV_ISA_EXT_ZCMOP,
+> +       KVM_RISCV_ISA_EXT_ZAAMO,
+> +       KVM_RISCV_ISA_EXT_ZALRSC,
+>         KVM_RISCV_ISA_EXT_MAX,
+>  };
+>
+> diff --git a/arch/riscv/kvm/vcpu_onereg.c b/arch/riscv/kvm/vcpu_onereg.c
+> index fa5ee544bc69..0972a997beca 100644
+> --- a/arch/riscv/kvm/vcpu_onereg.c
+> +++ b/arch/riscv/kvm/vcpu_onereg.c
+> @@ -41,7 +41,9 @@ static const unsigned long kvm_isa_ext_arr[] =3D {
+>         KVM_ISA_EXT_ARR(SVINVAL),
+>         KVM_ISA_EXT_ARR(SVNAPOT),
+>         KVM_ISA_EXT_ARR(SVPBMT),
+> +       KVM_ISA_EXT_ARR(ZAAMO),
+>         KVM_ISA_EXT_ARR(ZACAS),
+> +       KVM_ISA_EXT_ARR(ZALRSC),
+>         KVM_ISA_EXT_ARR(ZBA),
+>         KVM_ISA_EXT_ARR(ZBB),
+>         KVM_ISA_EXT_ARR(ZBC),
+> @@ -131,7 +133,9 @@ static bool kvm_riscv_vcpu_isa_disable_allowed(unsign=
+ed long ext)
+>         case KVM_RISCV_ISA_EXT_SSTC:
+>         case KVM_RISCV_ISA_EXT_SVINVAL:
+>         case KVM_RISCV_ISA_EXT_SVNAPOT:
+> +       case KVM_RISCV_ISA_EXT_ZAAMO:
+>         case KVM_RISCV_ISA_EXT_ZACAS:
+> +       case KVM_RISCV_ISA_EXT_ZALRSC:
+>         case KVM_RISCV_ISA_EXT_ZBA:
+>         case KVM_RISCV_ISA_EXT_ZBB:
+>         case KVM_RISCV_ISA_EXT_ZBC:
+> --
+> 2.45.2
+>
 
