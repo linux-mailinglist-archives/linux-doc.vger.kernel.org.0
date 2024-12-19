@@ -1,94 +1,115 @@
-Return-Path: <linux-doc+bounces-33366-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33387-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9375B9F84AD
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 20:47:29 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 567249F85CA
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 21:23:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id ED6BE160432
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 19:47:26 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 619BD189767D
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 20:20:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9CC3E1A2554;
-	Thu, 19 Dec 2024 19:47:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF8931BD9E5;
+	Thu, 19 Dec 2024 20:18:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BwcCmXu6"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZkmtfY4C"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 727BE155342;
-	Thu, 19 Dec 2024 19:47:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 890AF1BD9CB;
+	Thu, 19 Dec 2024 20:18:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734637643; cv=none; b=gSrZRuN2wZntx7PnpOZTXXS5PRwTCTk3OYXlc5fo1HPpzagpom3l1O2vozrlOqWqun1iC15XK8/dR1xFcC3LwUiJ5VyfqNMEywHyoab8+KoBTK/gFGAcLC1GEPCLg/9vW5tZiMQ9Y4oT1/V760xAMaFDb7GZGlQGVplE+ts5/oo=
+	t=1734639523; cv=none; b=WDLYpEg41Hh+Aonx1Ai/B3ox6gmLbThssMV29zPkoBZHe61Jgqx9FER1ng7xtT/J5XW5gq6csqgH6jJJqvSKuYawe5Tc6mutuBt6K8m2t4WK2h46z8s2r74lQpTtrZQyN7C8uXvhwORHcKaHJVoBn7DFCWRmyRZWL+6lNh8TloI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734637643; c=relaxed/simple;
-	bh=2jRwjqhkgep1pL0mpEZG3HiVJkFkBo9BC51mkxHjI4c=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=K4zls8EaP6dv2JivKQqcjtCduI1UXDb1Fz6kni8rO7KwKp22dH/LGdWc+YEz0Fu8Xx7x7xCdAjuc2BkpOBygpH5S0+xn8yShTlJAa/4FxKVJl4hKUB4OgyIX0L/S79rdgxcXru1BDKMqJbUbZdOGo9Vy+GaRH9YPlmlLEGZ9rjE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BwcCmXu6; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 53FD5C4CECE;
-	Thu, 19 Dec 2024 19:47:21 +0000 (UTC)
+	s=arc-20240116; t=1734639523; c=relaxed/simple;
+	bh=KoFj7ZTbF8oplY3j57+uvv4cZtVSD6uQ2VvgawtQeZg=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=HiGSjEr9GJmGl4w7402h14tybk11SyoNzh6r5Q0e4Q8ZMcw10hD84CGogUhO2BmjYrwSC5sER53aoDhMFIyA1BXPrS4IWVsKfYfIJYeCwXO/iHTM+l/WxrX91LUI5QEzMutJZJOZsUB/TEml0qUAbdzWDBgHvuMhh5vI+v1Gboo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZkmtfY4C; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DEA2BC4AF0E;
+	Thu, 19 Dec 2024 20:18:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1734637643;
-	bh=2jRwjqhkgep1pL0mpEZG3HiVJkFkBo9BC51mkxHjI4c=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=BwcCmXu6Hl5w+eM6rh1h0JNcORSpRVuhlpPCgdkkgbP4aILL/4F/h5lLh0FoxO8Y3
-	 6fOrSLkRhO4KoTTP+mHjZz0oNpJdCLdItMrD5k25ypwa1coRwEPSAWQlnkYz6h+W4C
-	 gXgVSmhr5Ls8hFySWAHWcNqbjTOMutDhHMUFwSNE/pv45pU5hLUdlt41CqRC2/liVz
-	 auZrZLpcWsqK8Sy5XhzFXN+gk57lrTSBtUE00E2MhBlZDjORDJRqzf04sTZ+oig3mv
-	 Ho0zY8/5plNXojzxlfdwIib02+lziSH8K9xyhGUkuGKYFGB5S5g7j/4udrTvt5WMS1
-	 wUVMgi0YYO70w==
-From: Will Deacon <will@kernel.org>
-To: linux-arm-kernel@lists.infradead.org,
-	Anshuman Khandual <anshuman.khandual@arm.com>
-Cc: catalin.marinas@arm.com,
-	kernel-team@android.com,
-	Will Deacon <will@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/2] docs: arm64: Document MDCR_EL3 boot requirements
-Date: Thu, 19 Dec 2024 19:47:07 +0000
-Message-Id: <173462766799.3925724.13780644464677755383.b4-ty@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20241211065425.1106683-1-anshuman.khandual@arm.com>
-References: <20241211065425.1106683-1-anshuman.khandual@arm.com>
+	s=k20201202; t=1734639523;
+	bh=KoFj7ZTbF8oplY3j57+uvv4cZtVSD6uQ2VvgawtQeZg=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=ZkmtfY4CfyLT3DhJsGJl9L7zxd6scUYBDFYB0zl5EXzmSd3aschRzzGmJDedlpygQ
+	 H9iufJau2UUI+xMD8bzc/Xa6t1mg3sRo9PMKwLESHx8bFaIFjIWch1qpzz3yNOTfNH
+	 Awp6p2+gVQ9/yyZd0vlcJTgLj22YrUm9whgm1BdQWen2UYV+EM1owwnIP7b4JjGvYY
+	 ECTLGuU9Y2EoTDRNqL/UbytzSye3S3oqzYAGdd4+mDsBoV9JMXhjqgmj2JLU9SvBWg
+	 brw+AZjM3dkdBN9W9CjnMi8i+qvzcDgvd+Ov/ZQFs2OZuyrU19HEK2PnpGmK7yOSo9
+	 MobkbzpOP6I/A==
+Date: Thu, 19 Dec 2024 12:18:41 -0800
+From: Jakub Kicinski <kuba@kernel.org>
+To: Andy Gospodarek <andrew.gospodarek@broadcom.com>
+Cc: Taehee Yoo <ap420073@gmail.com>, davem@davemloft.net, pabeni@redhat.com,
+ edumazet@google.com, almasrymina@google.com, donald.hunter@gmail.com,
+ corbet@lwn.net, michael.chan@broadcom.com, andrew+netdev@lunn.ch,
+ hawk@kernel.org, ilias.apalodimas@linaro.org, ast@kernel.org,
+ daniel@iogearbox.net, john.fastabend@gmail.com, dw@davidwei.uk,
+ sdf@fomichev.me, asml.silence@gmail.com, brett.creeley@amd.com,
+ linux-doc@vger.kernel.org, netdev@vger.kernel.org,
+ kory.maincent@bootlin.com, maxime.chevallier@bootlin.com,
+ danieller@nvidia.com, hengqi@linux.alibaba.com, ecree.xilinx@gmail.com,
+ przemyslaw.kitszel@intel.com, hkallweit1@gmail.com, ahmed.zaki@intel.com,
+ rrameshbabu@nvidia.com, idosch@nvidia.com, jiri@resnulli.us,
+ bigeasy@linutronix.de, lorenzo@kernel.org, jdamato@fastly.com,
+ aleksander.lobakin@intel.com, kaiyuanz@google.com, willemb@google.com,
+ daniel.zahka@gmail.com
+Subject: Re: [PATCH net-next v6 3/9] bnxt_en: add support for tcp-data-split
+ ethtool command
+Message-ID: <20241219121841.3ed4de71@kernel.org>
+In-Reply-To: <Z2R1GFOg1hapdfl-@JRM7P7Q02P.dhcp.broadcom.net>
+References: <20241218144530.2963326-1-ap420073@gmail.com>
+	<20241218144530.2963326-4-ap420073@gmail.com>
+	<20241218182547.177d83f8@kernel.org>
+	<CAMArcTXAm9_zMN0g_2pECbz3855xN48wvkwrO0gnPovy92nt8g@mail.gmail.com>
+	<20241219062942.0d84d992@kernel.org>
+	<CAMArcTUToUPUceEFd0Xh_JL8kVZOX=rTarpy1iOAD5KvRWP5Fg@mail.gmail.com>
+	<20241219072519.4f35de6e@kernel.org>
+	<Z2R1GFOg1hapdfl-@JRM7P7Q02P.dhcp.broadcom.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Wed, 11 Dec 2024 12:24:23 +0530, Anshuman Khandual wrote:
-> This series adds missing MDCR_EL3 boot requirements for debug and pmu
-> registers that are currently being accessed in the kernel. Please refer
-> the following link for some earlier discussions on this.
+On Thu, 19 Dec 2024 14:33:44 -0500 Andy Gospodarek wrote:
+> > I see it now in bnxt_set_rx_skb_mode. I guess with high MTU
+> > the device splits in some "dumb" way, at a fixed offset..
+> > You're right, we have to keep the check in the driver, 
+> > at least for now.  
 > 
-> https://lore.kernel.org/all/ZxfOeqyb3RvsdYbU@J2N7QTR9R3/
+> The mutlti-buffer implementation followed what was done at the time in
+> other drivers.  Is the 'dumb way' you mention this check?
 > 
-> This series applies on v6.13-rc1
-> 
-> [...]
+>  4717                 if (dev->mtu > BNXT_MAX_PAGE_MODE_MTU) {
+>  4718                         bp->flags |= BNXT_FLAG_JUMBO;
+>  4719                         bp->rx_skb_func = bnxt_rx_multi_page_skb;
+>  4720                 } else {
+>  4721                         bp->flags |= BNXT_FLAG_NO_AGG_RINGS;
+>  4722                         bp->rx_skb_func = bnxt_rx_page_skb;
+>  4723                 }
 
-Applied to arm64 (for-next/docs), thanks!
+Yes, that and my interpretation of the previous discussion let me to
+believe that the BNXT_FLAG_JUMBO does not enable header-data split.
+And speculating further I thought that perhaps the buffer split with
+jumbo > 4k is to fill first buffer completely, header+however much
+data fits.
 
-[1/2] docs: arm64: Document EL3 requirements for cpu debug architecture
-      https://git.kernel.org/arm64/c/3e5be4e11aac
-[2/2] docs: arm64: Document EL3 requirements for FEAT_PMUv3
-      https://git.kernel.org/arm64/c/1e4a5e3679cc
+I could have misread the previous conversation (perhaps Michael meant
+XDP SB / PAGE_MODE when he was referring to XDP limitations?)
 
-Cheers,
--- 
-Will
+Or maybe the HDS does happen with XDP MB but there is another
+limitation in the code?
 
-https://fixes.arm64.dev
-https://next.arm64.dev
-https://will.arm64.dev
+I'm not sure. At this stage we just need to know if the check in the
+driver is really needed or XDP MB + HDS are fine, and we can remove
+the driver check, as core already prevents XDP SB + HDS. Could you
+clarify?
 
