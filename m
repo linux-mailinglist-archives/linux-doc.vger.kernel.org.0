@@ -1,256 +1,283 @@
-Return-Path: <linux-doc+bounces-33386-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33365-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB68C9F853F
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 21:03:34 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E4439F84A7
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 20:45:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 76C411894F7A
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 20:02:44 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5D2F31889A4B
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 19:46:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DA37F1BEF78;
-	Thu, 19 Dec 2024 19:58:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 481E619F130;
+	Thu, 19 Dec 2024 19:45:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="EDrL977f"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="rlC1V5HP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (mail-mw2nam12on2050.outbound.protection.outlook.com [40.107.244.50])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10D8B1BD9D3;
-	Thu, 19 Dec 2024 19:58:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.177.32
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734638295; cv=none; b=NDMMM4xq0o1Wljr30Rb2E6mfyf4/1rfYOEnn3YSlsWtE8tq99dlh2McN9sDlT89jfBdaUBm6gWBEVbWgwKozbqMIcKBBJw6IqsFwPTlvSAsaDz/8vdhjGHIyXI7IsiX8Gng2ZzcFc1rsJ/MiITSX8mkU66RHhQ39iNgNtYJ93zk=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734638295; c=relaxed/simple;
-	bh=HKup6Twxuzvh9My98TZ9Rm5s01uCW6W1C5fvM8b8NC0=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=GGHUKF4hihZZuH59M0RbP/EHD0ulHo9J+I40s01IY0Lm5dPfJi9y2KbIRFhW1NmPOHelYeGChuhAv77hp+lRJehWStG/x2te607bcP3bFK8azCXOTlWl18l/SawQyCGHHMHpggIwGD3kZTzQYKuC5p4PwSiAMq+4nYjUtEU7hjM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=EDrL977f; arc=none smtp.client-ip=205.220.177.32
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0333520.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BJIMh9G029748;
-	Thu, 19 Dec 2024 19:56:51 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
-	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=corp-2023-11-20; bh=CAR2X
-	DvMpSDNgRI4ba9QodPpLgYuOG3w5cBkcUBDh0g=; b=EDrL977flAIHAN2R2MTGb
-	r0LSdAUHvjZxGmUdu+JcB2XC7CumxXPw6SbNh6/bmnL4HJbdh6UPhItXq3Vn7iTU
-	k4MEpidVnaEMZ6d3Mm7fVVwSBOvjAyuNjwvfYlvry46CHDXq0CtzCSP//JZbFFjE
-	wtbvaJeij0hJux2qbW1uXi1DNjHEsT9aR/FkN9rj2B0d2t1OTzl+jzmbNAeQV3tf
-	6wMiF/lGGhCdfNuuViTPnl391YL6lqd6XppdrocGQem7kdVAMwWdVAZUY43YlVFm
-	W50ZICD7oSudfinCgskpbUo7zcaiGexE4CgCM6zY63dvZZzUtCKWdrTHSR80ecK7
-	w==
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 43h22cuvc9-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 19 Dec 2024 19:56:51 +0000 (GMT)
-Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 4BJJHs6P018324;
-	Thu, 19 Dec 2024 19:56:50 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 43h0fbvwk8-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Thu, 19 Dec 2024 19:56:50 +0000
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 4BJJunsH002858;
-	Thu, 19 Dec 2024 19:56:49 GMT
-Received: from bur-virt-x6-2-100.us.oracle.com (bur-virt-x6-2-100.us.oracle.com [10.153.92.40])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 43h0fbvwgm-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Thu, 19 Dec 2024 19:56:49 +0000
-From: Ross Philipson <ross.philipson@oracle.com>
-To: linux-kernel@vger.kernel.org, x86@kernel.org,
-        linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-crypto@vger.kernel.org, kexec@lists.infradead.org,
-        linux-efi@vger.kernel.org, iommu@lists.linux-foundation.org
-Cc: ross.philipson@oracle.com, dpsmith@apertussolutions.com,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
-        dave.hansen@linux.intel.com, ardb@kernel.org, mjg59@srcf.ucam.org,
-        James.Bottomley@hansenpartnership.com, peterhuewe@gmx.de,
-        jarkko@kernel.org, jgg@ziepe.ca, luto@amacapital.net,
-        nivedita@alum.mit.edu, herbert@gondor.apana.org.au,
-        davem@davemloft.net, corbet@lwn.net, ebiederm@xmission.com,
-        dwmw2@infradead.org, baolu.lu@linux.intel.com,
-        kanth.ghatraju@oracle.com, andrew.cooper3@citrix.com,
-        trenchboot-devel@googlegroups.com
-Subject: [PATCH v12 19/19] x86/efi: EFI stub DRTM launch support for Secure Launch
-Date: Thu, 19 Dec 2024 11:42:16 -0800
-Message-Id: <20241219194216.152839-20-ross.philipson@oracle.com>
-X-Mailer: git-send-email 2.39.3
-In-Reply-To: <20241219194216.152839-1-ross.philipson@oracle.com>
-References: <20241219194216.152839-1-ross.philipson@oracle.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85E4711CBA;
+	Thu, 19 Dec 2024 19:45:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.244.50
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1734637553; cv=fail; b=WkYlKVQmrA6Qv2mZkuYfoqfgY8QJ+8sz0/WN0xxJBBDG6qIHDsztv8saCWOySaPMgDMtES5t1sxDlC/6firoRTQ5zlxg9yQjR0Cndz09a16ZDFahZY9Z3iQmIn732qkucAJKUbwRYAeKNA1Uws6iZCK2XbcPn6zE5rBQPvaMevQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1734637553; c=relaxed/simple;
+	bh=jSHJ3954VRJ/nwD3zA0pCvqFwwJYHiq5dpv0ECkQbcQ=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=tzYAZNGxM1lieLK245fyuNV/E9Ta80wnkTkwt9VrWV8JxYJCfUnlOkwL28qLgPShFQudEQks9cfRGPnywMP6WOrMuy2EvnJNU8THChqDbC6qxmR4/jwBm0Ycb6PZQT1dBlrCXGKnyLodkHsQOlDoPi/OC+zUO15qFuCNUQxGxak=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=rlC1V5HP; arc=fail smtp.client-ip=40.107.244.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dkMNIsU+vhbwcDc6o6PLm7TbkwsUOxGySJELLKjKvGiVUWel2YKk3y8DXsA7NclASSzQNRWLuVHO5UpWsagbqut0mU1xF/vDfunBdcvXgaFmPSiinHtRunWjxu5dqINNlKbYqVCoISXhnqkkoQvlcDGjvTIDQrqjmcCieX+yWR+b2HwUyZVbYVud6yxcUKoeOa3GeDzL561UsgHJoltjhj6nUPismx9foNl/lG99AdGd4zFHUzjkYATtVx4gWDarno2/CUyISyvg7zBdknpF+IX4I8xbSmCTPZSuoHS+ffg2PXwu+GeZujmbHxRgW8/JT0SgYRGmKBJLDc64+o9UKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=znrAvN1UVfrCbCN3pDOTrV2gFOtR5kpP45xOV8TzsNI=;
+ b=o7pn5zaxSkMq9k/go3oxnaf3+JZlIicwpJTGSEAKxQt9uqff/8eQVMBKmp5H/um4TMmF13KnOXO6WbBs6Ed+Q7/KZAEuBzixLtlKY/c7CUAhNitDKQ/a8Uin8yUJjd33t0VJgMaL8P3K2q8gOfvTc5V49bEx3JR7jP2ajt6iIc5FKc9j1SCwebrUH+xySns0OkSnZTAOQfsM4dqgWiXcnlWyxk0ZYbr20LzMGTM7IGBWZVfgWC+U2HzIT4QD2nv2IPu3HxvjnejfO16VhPkMqNt5MQOkeA6fjS+C/j3Fqlil/RB86r6LgyEiTnE4qSIbu4LTV+RY+EBFNMhEAqlBaA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=znrAvN1UVfrCbCN3pDOTrV2gFOtR5kpP45xOV8TzsNI=;
+ b=rlC1V5HPlwnEzv/48DruJzIenD2BJJ8RjH7sqyhVPtx5KNErDa2n0YGENFn7H2zyGoy3NTs4Lc/gzBsO7oYOGInothcSqpndB1mhqMlhMr5LEPo4FiI4h8G1g9RD08PoyY0GAy1/rXwtvqwC5h5pVCBQriXuV2Fb8i84tNgaclk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from MW3PR12MB4553.namprd12.prod.outlook.com (2603:10b6:303:2c::19)
+ by LV2PR12MB5728.namprd12.prod.outlook.com (2603:10b6:408:17c::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.13; Thu, 19 Dec
+ 2024 19:45:49 +0000
+Received: from MW3PR12MB4553.namprd12.prod.outlook.com
+ ([fe80::b0ef:2936:fec1:3a87]) by MW3PR12MB4553.namprd12.prod.outlook.com
+ ([fe80::b0ef:2936:fec1:3a87%5]) with mapi id 15.20.8272.013; Thu, 19 Dec 2024
+ 19:45:49 +0000
+Message-ID: <8e96f411-14ac-4d41-82b4-e3076f1c13f1@amd.com>
+Date: Thu, 19 Dec 2024 13:45:43 -0600
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v10 16/24] x86/resctrl: Add interface to the assign
+ counter
+To: Reinette Chatre <reinette.chatre@intel.com>,
+ "Luck, Tony" <tony.luck@intel.com>, Babu Moger <babu.moger@amd.com>
+Cc: "corbet@lwn.net" <corbet@lwn.net>, "tglx@linutronix.de"
+ <tglx@linutronix.de>, "mingo@redhat.com" <mingo@redhat.com>,
+ "bp@alien8.de" <bp@alien8.de>,
+ "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+ "peternewman@google.com" <peternewman@google.com>,
+ "Yu, Fenghua" <fenghua.yu@intel.com>, "x86@kernel.org" <x86@kernel.org>,
+ "hpa@zytor.com" <hpa@zytor.com>, "paulmck@kernel.org" <paulmck@kernel.org>,
+ "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+ "thuth@redhat.com" <thuth@redhat.com>,
+ "rostedt@goodmis.org" <rostedt@goodmis.org>,
+ "xiongwei.song@windriver.com" <xiongwei.song@windriver.com>,
+ "pawan.kumar.gupta@linux.intel.com" <pawan.kumar.gupta@linux.intel.com>,
+ "daniel.sneddon@linux.intel.com" <daniel.sneddon@linux.intel.com>,
+ "jpoimboe@kernel.org" <jpoimboe@kernel.org>,
+ "perry.yuan@amd.com" <perry.yuan@amd.com>, "Huang, Kai"
+ <kai.huang@intel.com>, "Li, Xiaoyao" <xiaoyao.li@intel.com>,
+ "seanjc@google.com" <seanjc@google.com>, "Li, Xin3" <xin3.li@intel.com>,
+ "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
+ "ebiggers@google.com" <ebiggers@google.com>,
+ "mario.limonciello@amd.com" <mario.limonciello@amd.com>,
+ "james.morse@arm.com" <james.morse@arm.com>,
+ "tan.shaopeng@fujitsu.com" <tan.shaopeng@fujitsu.com>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "Wieczor-Retman, Maciej" <maciej.wieczor-retman@intel.com>,
+ "Eranian, Stephane" <eranian@google.com>
+References: <cover.1734034524.git.babu.moger@amd.com>
+ <a72e23d8fe43038cd319403ed68b657fb36e23df.1734034524.git.babu.moger@amd.com>
+ <Z1tzyrUYTFR_iHuJ@agluck-desk3>
+ <e43b10b7-60b0-412a-b55f-96271764faa1@amd.com>
+ <SJ1PR11MB60831C44DEE7711F93C3C26CFC382@SJ1PR11MB6083.namprd11.prod.outlook.com>
+ <8cffb2ad-6645-45a4-8d05-c967c82eb111@amd.com>
+ <f8073d8c-7dd0-4e8d-a196-183acef13d66@intel.com>
+Content-Language: en-US
+From: "Moger, Babu" <bmoger@amd.com>
+In-Reply-To: <f8073d8c-7dd0-4e8d-a196-183acef13d66@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SA0PR11CA0062.namprd11.prod.outlook.com
+ (2603:10b6:806:d2::7) To MW3PR12MB4553.namprd12.prod.outlook.com
+ (2603:10b6:303:2c::19)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-12-19_09,2024-12-19_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 mlxlogscore=999
- malwarescore=0 spamscore=0 bulkscore=0 suspectscore=0 mlxscore=0
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2411120000 definitions=main-2412190158
-X-Proofpoint-GUID: n26lGIjuWLBeE41cJiA9lwyEURTykH58
-X-Proofpoint-ORIG-GUID: n26lGIjuWLBeE41cJiA9lwyEURTykH58
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MW3PR12MB4553:EE_|LV2PR12MB5728:EE_
+X-MS-Office365-Filtering-Correlation-Id: f8592fb6-3cb9-42a1-5884-08dd2065bce4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?cnZyQkNIZTltMU81VU01Zmh6RUhYc3BIRHJlMElVeEJlalB3VGgxb05Ib0F1?=
+ =?utf-8?B?MTR6UDNjQUlLMEJnanVZT3h1OUxxOGhXUFNyaXRBdDZGNTVUcEFNb0hCajRI?=
+ =?utf-8?B?VXJBamthQnpiUXNMQjJ1WThZVVFBSDNoc3ZrdUNXSGtscFdnc3RhU3hLM3VO?=
+ =?utf-8?B?OVpjVUs4dWhKRVpNR1dsWXFHbXE1ZFpMTEk2REZYRXk0RUdwUGREN0FwaWs1?=
+ =?utf-8?B?cHBDdzdzTWdZS2JhbGV2S0xuSWs1MUM4bWtteGQzYWxRUTMvUVdOdGJQT1lq?=
+ =?utf-8?B?ZDI2dElCMVpyWnkwMXRnM1gyMVhFWlJUMWtQdXBjbHBwbDdXK3B1MGNoRnpI?=
+ =?utf-8?B?elE4TXBCeUxHdU1rdVc2YmdxMjFka0xUYjc2VHZFeXNqY0RYU2dFQzBhOUF0?=
+ =?utf-8?B?UDlzdTBSOWszN2hnUzVUWHVYNnp2ZjBaeTN5cnhwK2RuSGNXV29Kb3hvOGxS?=
+ =?utf-8?B?QWhrZmM4a2NVYU1pbzR1U3Z6ZEVDVENWOXJuMHRrRUl2U1k2WHUvWThnUGZm?=
+ =?utf-8?B?bW1XTXVLdmlsMVBzdHhCbzFRa3pnNmVJM25xcFFYZnJtTlVSSzBRT1ZkdDRk?=
+ =?utf-8?B?VENCMGpqNUZ5WVNmOFl6UzhhaUQweTNFbEkrVVE2VFFMbXo3K0FzbG9UaFBF?=
+ =?utf-8?B?Rm5aQ281dzROVHVnWU93ZDlTUmlpZmk4NTJZazhGVzkybHJVU1R4WTFhUmFD?=
+ =?utf-8?B?a0dHRXdDQmhaMEUxdXQzMlhUVE1DQnErUFJjS2M5V2hiQlVhUGdLZm0wQVJN?=
+ =?utf-8?B?b3BVTFdJWDRGL0orc0Y0SzRCcklMUVRaazR0UWRFSlR4aVpQNlhEMi9vWjVh?=
+ =?utf-8?B?c21nclpHeTJnSzhld29SaXNkLzVJaWI2L29Kd0VxOTVCMGx6Zkk3d1RaS3ZP?=
+ =?utf-8?B?OFNOUmZYZFdaQjV6ZkJEQ3V1YkFlTnFTcFY3bFRMODFmRFNrOFAwYkJ4aUV5?=
+ =?utf-8?B?R2JqY3lyTVlwRTRRTG5iMHhHWmdTWnQ5a3drbVJQa2VIa3psbUY0cUhzRUNX?=
+ =?utf-8?B?YlNWSjgxQTZVRzNSLzNXSG5WQ09paEU1YWF5MEErMzZMa25EeHk5NTBXWHBG?=
+ =?utf-8?B?NXg4eGxhaktHZUZQaHlRN2gxL2d5VlV6bzZkODl6VlRqVlRFc0pCYTJKN1FN?=
+ =?utf-8?B?cUR1QlVORU9TWjJKQkF0bzgxcEJ4K1grWjd5SXRQczRxYjh5VktPUkRaTWlS?=
+ =?utf-8?B?alBBdE83ak1xTHhZMVRIclhnMmNVQlpkb2hRWmNNWGdzdU1nOWxkd2l5dGZh?=
+ =?utf-8?B?bmY0aTJvdnJjb0VzQk1JN292K3ZOUWw3THZ0ZWo1ZHZXQ1BIZG1peFhkL09r?=
+ =?utf-8?B?YUZOTEEvRnc1Rk02NkVGVU5HVTRJc21CTmlrbFh0VGlFV1dWVm5ZUkFsR2Vs?=
+ =?utf-8?B?MnNwdmM3d0R0NlJ5L1BBeUFEWldXQkszQUVuOS9jN2tUQS95Qjd2SmtrRElD?=
+ =?utf-8?B?SHp2Tm0xUW1zTnJTMEVNWXArMU40d3hFSzN6OXJlb2llZ0hkWWJOcVozV3d0?=
+ =?utf-8?B?aS9jWVhsRUVlMTNvbHlUM1RRRUgwbzFHNHY5bkczTWhlVVlUZ1FaK3p3czBq?=
+ =?utf-8?B?R01PTFJrQzVSNWFSV1NldHhyTW83ZmFQeExwVmRWeVFUR2VDSmxiakoyY1B0?=
+ =?utf-8?B?SDdER0pLR2p6Zno5RklCc2FvSWpQSFFCNXZVN3YzdXRuZkI0UnhvY0pkTEdi?=
+ =?utf-8?B?NVVMT2dHUCtrN005R25yRWZFN0dkVm5UaUdlUzVUc2E4ZkUzNFB4dTlkMms2?=
+ =?utf-8?B?WjZaRktmWkFYQWlNZElobTVKSDFiS2hDdjhmZEt3WWRLd0FMSDRLQkUzWENt?=
+ =?utf-8?B?RUlHMEM2aEVUV2szdldSZVZhS0FRRFlNR1MvaVRWSVBvUVNscWJrYnB0UzBJ?=
+ =?utf-8?Q?XxWdHNGtERS2S?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR12MB4553.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?R2phSThMckRKUWtacTdHMlRQS0VsaWU4SWxMdVF2aXo3MWJER2R6VVZWSmJO?=
+ =?utf-8?B?NFVWdkxhTlpNWTgrM0ZzUW1TQzJaTkppZUxtVU1PMkFQQ21RSm5hdDM4bDVF?=
+ =?utf-8?B?NGwrcnlNZzZYYzNibE9oT0dESTdFZTkxdU53b2pQTkx0RDJIdjZ4VDR5cDJZ?=
+ =?utf-8?B?bTIvTGpaMHpONUVBd1FqN2lKVk5Vem5pd1hhd0R1bVFBVUxSZktRZDNwZEFT?=
+ =?utf-8?B?R1NNQlFTK1NTQlltWnZ1UDVSTWF0NlBkYkUxSk9wWjZDdmNWNEtlTVBPTW8y?=
+ =?utf-8?B?TS9Sb3N3eVVWSFZiUVNWQUJmOG1HNTlodUhGMGxGbWlrSmdqQUQxcGoyZTd5?=
+ =?utf-8?B?TDJFRWRSR1h3TU9qQ3dNL1VHQXJTNnNnS3F6YkdDdGEweFRhMlhnUzhZNDNB?=
+ =?utf-8?B?QVVEOWFNaXVXaEhBa05uSW52M3JZTlRYei9JOXZGenRoOVZMbS84cEJGdWR6?=
+ =?utf-8?B?aFpoMjJwTGxyQ1JYMk9mTTcrZWlTSFQyMDdzcVdLeVp2WnZVZjkwdWcwZEVy?=
+ =?utf-8?B?dk43TExPd0ZtNzZwZnhjMlJ4ZXd6R1ZGdm8wMUpMaWwxTmRJbDltT2NiWFI0?=
+ =?utf-8?B?aEV5aUhpMElzSkRGODdsSFFqWXNzelNmUjBwZW1MQ0k4blpLMlluUDBnZ3lw?=
+ =?utf-8?B?VWZabE1mZUlLNjVKNXloV3UyRkl1RU1QbGkxWURkWDBQdDY2S2g0OHhLcG4v?=
+ =?utf-8?B?Z1NnZmFYQkkrblBHMGpJYWFmV3A0NlllMjV4UExTcW1jZHg5Vjl0aGRWeU93?=
+ =?utf-8?B?dytEYVliMjB1MlB4OHNIRWRMOXRHTmtjZkdpYllMTStySVg5clNNNm10bWU0?=
+ =?utf-8?B?NEI5NkFNR25CN2Z5MDY3VFlGdXVXZXZCQlhYRG5BcFdyYUVRa0ZmRkcwbUY5?=
+ =?utf-8?B?QVYrTzltZG9EM0VmSlcrazhCNDQ4UFhiOHV3UFFVS0o0NG5HMzN2Wm1hV3V0?=
+ =?utf-8?B?bTJBRytuR2xJcFdsUkQvRGhVU3piaGVWUzRxRWxjcjJ0SDhyTUxDUFY0Q0lh?=
+ =?utf-8?B?NG9aT0FPNWMzVDIzL0JRNENTTlUzR3lTS3ZBdXdGZGVHNENvWis2Tm5MbTlO?=
+ =?utf-8?B?NFJtTm9oak1OeGJkMGRma2REeENHazBKSzl0em9aVUF2NDdDTmtxRmd5UTFN?=
+ =?utf-8?B?TnVvRjRFZjlmTXEyUzAreHk2ZVg3akludHBSTkhNcW1xN296T1R5WWNmbHpa?=
+ =?utf-8?B?Q0k0eUIvL21UVXd1TDZnclpMVzcyMitjSnJxS3ZHb1YwRFYreHNZczJCUFBG?=
+ =?utf-8?B?SFV0MTlWR1pkMGlnQ0lqRnNWeDZXSUhVcDJCZFdXeHdBcit5V0c1RTZLRDc5?=
+ =?utf-8?B?YkZGdTNKYmR5d2pVKzFtMXZ2VnoxdFBhYkU2SU1NcG1lU3VFUVZMckJONWxB?=
+ =?utf-8?B?eDlZSzNwZWJkSDZzV3FrY3BXVG5PSGRSTWw2dU1Rd0xMMUJMUmlWaVd2S1Yw?=
+ =?utf-8?B?bTVZM3hLL2JTU256aUMwL1hFQ3VLeEY4T081c2NBdVZJY1RRTkZSckE1OHlz?=
+ =?utf-8?B?b2syeUtMZThUbVdTSGt2ZEM3QTRHNStPeE9JeTNJM01iVVZ5WmtGYlFVVlNB?=
+ =?utf-8?B?NlhTK3RJV0FQa1U5Z0VtYXBGQ3RqUXNQSWQ1S3pQR2RnbVVCUnRTblNyZU5D?=
+ =?utf-8?B?MWdlZjFBZWxOWkhtQms1NkZ1OW9IaUVTQU82RG8rRnYwYVhSaWpDbnJwZWE5?=
+ =?utf-8?B?RlZ3V3B2ODkvQW9uQ3hiUnFJbHJZMVlhOU9MS2pPcytrTDhZNlRIQ3F2dC9C?=
+ =?utf-8?B?dVlVOHgxem9xeFVrZElsMzhHd05zaDErckE0bm4vV1dCaHFKT2NlQzMwcFFI?=
+ =?utf-8?B?MEdpZmdZTHpGeHZqS0RpQzFka3NkaDZMbmplTTA0enhKeUgzLytuOWV3L0Fs?=
+ =?utf-8?B?cmJjejNJSlNoTW5uKzJKZ1lpeFhpUEVvb1B5NkpvbHNrN1E2aTIxQWlvakZ1?=
+ =?utf-8?B?cjhTaTZRWGV3c2lLM1lRT21Oa2ppNDg0L1d2dDUzZGdMd1Iwd2JmeUxBRmEv?=
+ =?utf-8?B?djdsVUF1QmZ0UlhYWDhIM1JSR0dXRGQyZHJmVERDV0VZTDlNRTlTUnpiZzlx?=
+ =?utf-8?B?RHV1MUNBcHUyME54clNKY05sWmw5SDhlNkEwNWhVa3pxZ29OdVZiN1NoYlNB?=
+ =?utf-8?Q?6K58=3D?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f8592fb6-3cb9-42a1-5884-08dd2065bce4
+X-MS-Exchange-CrossTenant-AuthSource: MW3PR12MB4553.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2024 19:45:49.2689
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VH+5dWaMowkJKhMHDuaNg3IhjY3l1rjmhX8Y2loSlkyE/3O+6RRPZgBN+hSEu2bS
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5728
 
-This support allows the DRTM launch to be initiated after an EFI stub
-launch of the Linux kernel is done. This is accomplished by providing
-a handler to jump to when a Secure Launch is in progress. This has to be
-called after the EFI stub does Exit Boot Services.
+Hi Reinette,
 
-Signed-off-by: Ross Philipson <ross.philipson@oracle.com>
-Reviewed-by: Ard Biesheuvel <ardb@kernel.org>
----
- drivers/firmware/efi/libstub/efistub.h  |  8 +++
- drivers/firmware/efi/libstub/x86-stub.c | 94 +++++++++++++++++++++++++
- 2 files changed, 102 insertions(+)
+On 12/18/2024 4:01 PM, Reinette Chatre wrote:
+> 
+> 
+> On 12/13/24 8:54 AM, Moger, Babu wrote:
+>> On 12/13/2024 10:24 AM, Luck, Tony wrote:
+>>>> It is right thing to continue assignment if one of the domain is out of
+>>>> counters. In that case how about we save the error(say error_domain) and
+>>>> continue. And finally return success if both ret and error_domain are zeros.
+>>>>
+>>>>      return ret ?  ret : error_domain:
+>>>
+>>> If there are many domains, then you might have 3 succeed and 5 fail.
+>>>
+>>> I think the best you can do is return success if everything succeeded
+>>> and an error if any failed.
+>>
+>> Yes. The above check should take care of this case.
+>>
+> 
+> If I understand correctly "error_domain" can capture the ID of
+> a single failing domain. If there are multiple failing domains like
+> in Tony's example then "error_domain" will not be accurate and thus
+> can never be trusted. Instead of a single check of a failure user
+> space is then forced to parse the more complex "mbm_assign_control"
+> file to learn what succeeded and failed.
+> 
+> Would it not be simpler to process sequentially and then fail on
+> first error encountered with detailed error message? With that
+> user space can determine exactly which portion of request
+> succeeded and which portion failed.
 
-diff --git a/drivers/firmware/efi/libstub/efistub.h b/drivers/firmware/efi/libstub/efistub.h
-index 76e44c185f29..f63e5197ea53 100644
---- a/drivers/firmware/efi/libstub/efistub.h
-+++ b/drivers/firmware/efi/libstub/efistub.h
-@@ -135,6 +135,14 @@ void efi_set_u64_split(u64 data, u32 *lo, u32 *hi)
- 	*hi = upper_32_bits(data);
- }
- 
-+static inline
-+void efi_set_u64_form(u32 lo, u32 hi, u64 *data)
-+{
-+	u64 upper = hi;
-+
-+	*data = lo | upper << 32;
-+}
-+
- /*
-  * Allocation types for calls to boottime->allocate_pages.
-  */
-diff --git a/drivers/firmware/efi/libstub/x86-stub.c b/drivers/firmware/efi/libstub/x86-stub.c
-index 188c8000d245..403a191c31cc 100644
---- a/drivers/firmware/efi/libstub/x86-stub.c
-+++ b/drivers/firmware/efi/libstub/x86-stub.c
-@@ -9,6 +9,8 @@
- #include <linux/efi.h>
- #include <linux/pci.h>
- #include <linux/stddef.h>
-+#include <linux/slr_table.h>
-+#include <linux/slaunch.h>
- 
- #include <asm/efi.h>
- #include <asm/e820/types.h>
-@@ -922,6 +924,93 @@ static efi_status_t efi_decompress_kernel(unsigned long *kernel_entry)
- 	return efi_adjust_memory_range_protection(addr, kernel_text_size);
- }
- 
-+#if (IS_ENABLED(CONFIG_SECURE_LAUNCH))
-+static bool efi_secure_launch_update_boot_params(struct slr_table *slrt,
-+						 struct boot_params *boot_params)
-+{
-+	struct slr_entry_intel_info *txt_info;
-+	struct slr_entry_policy *policy;
-+	bool updated = false;
-+	int i;
-+
-+	txt_info = slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_INTEL_INFO);
-+	if (!txt_info)
-+		return false;
-+
-+	txt_info->boot_params_addr = (u64)boot_params;
-+
-+	policy = slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_ENTRY_POLICY);
-+	if (!policy)
-+		return false;
-+
-+	for (i = 0; i < policy->nr_entries; i++) {
-+		if (policy->policy_entries[i].entity_type == SLR_ET_BOOT_PARAMS) {
-+			policy->policy_entries[i].entity = (u64)boot_params;
-+			updated = true;
-+			break;
-+		}
-+	}
-+
-+	/*
-+	 * If this is a PE entry into EFI stub the mocked up boot params will
-+	 * be missing some of the setup header data needed for the second stage
-+	 * of the Secure Launch boot.
-+	 */
-+	if (image) {
-+		struct setup_header *hdr = (struct setup_header *)((u8 *)image->image_base +
-+					    offsetof(struct boot_params, hdr));
-+		u64 cmdline_ptr;
-+
-+		boot_params->hdr.setup_sects = hdr->setup_sects;
-+		boot_params->hdr.syssize = hdr->syssize;
-+		boot_params->hdr.version = hdr->version;
-+		boot_params->hdr.loadflags = hdr->loadflags;
-+		boot_params->hdr.kernel_alignment = hdr->kernel_alignment;
-+		boot_params->hdr.min_alignment = hdr->min_alignment;
-+		boot_params->hdr.xloadflags = hdr->xloadflags;
-+		boot_params->hdr.init_size = hdr->init_size;
-+		boot_params->hdr.kernel_info_offset = hdr->kernel_info_offset;
-+		efi_set_u64_form(boot_params->hdr.cmd_line_ptr, boot_params->ext_cmd_line_ptr,
-+				 &cmdline_ptr);
-+		boot_params->hdr.cmdline_size = strlen((const char *)cmdline_ptr);
-+	}
-+
-+	return updated;
-+}
-+
-+static void efi_secure_launch(struct boot_params *boot_params)
-+{
-+	struct slr_entry_dl_info *dlinfo;
-+	efi_guid_t guid = SLR_TABLE_GUID;
-+	dl_handler_func handler_callback;
-+	struct slr_table *slrt;
-+
-+	/*
-+	 * The presence of this table indicated a Secure Launch
-+	 * is being requested.
-+	 */
-+	slrt = (struct slr_table *)get_efi_config_table(guid);
-+	if (!slrt || slrt->magic != SLR_TABLE_MAGIC)
-+		return;
-+
-+	/*
-+	 * Since the EFI stub library creates its own boot_params on entry, the
-+	 * SLRT and TXT heap have to be updated with this version.
-+	 */
-+	if (!efi_secure_launch_update_boot_params(slrt, boot_params))
-+		return;
-+
-+	/* Jump through DL stub to initiate Secure Launch */
-+	dlinfo = slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_DL_INFO);
-+
-+	handler_callback = (dl_handler_func)dlinfo->dl_handler;
-+
-+	handler_callback(&dlinfo->bl_context);
-+
-+	unreachable();
-+}
-+#endif
-+
- static void __noreturn enter_kernel(unsigned long kernel_addr,
- 				    struct boot_params *boot_params)
- {
-@@ -1049,6 +1138,11 @@ void __noreturn efi_stub_entry(efi_handle_t handle,
- 		goto fail;
- 	}
- 
-+#if (IS_ENABLED(CONFIG_SECURE_LAUNCH))
-+	/* If a Secure Launch is in progress, this never returns */
-+	efi_secure_launch(boot_params);
-+#endif
-+
- 	/*
- 	 * Call the SEV init code while still running with the firmware's
- 	 * GDT/IDT, so #VC exceptions will be handled by EFI.
--- 
-2.39.3
+One more option is to print the error for each failure and continue. And 
+finally return error.
+
+"Group mon1, domain:1 Out of MBM counters"
+
+We have the error information as well as the convenience of assignment 
+on domains where counters are available when user is working with 
+"*"(all domains).
+
+Note: I will be out of office starting next week Until Jan 10.
+
+> 
+>>>
+>>> You have the same issue if someone tries to update multiple things
+>>> with a single write to mbm_assign_control:
+>>>
+>>> # cat > mbm_assign_control << EOF
+>>> c1/m78/0=t;1=l;
+>>> c1/m79/0=t;1=l
+>>> c1/m80/0=t;1=l;
+>>> c1/m81/0=t;1=l;
+>>> EOF
+>>>
+>>> Those get processed in order, some may succeed, but once a domain
+>>> is out of counters the rest for that domain will fail.
+>>
+>> Yes. I see the similar type of processing for schemata.
+>> It is processed sequentially. If one fails, it returns immediately.
+>>
+>> ret = rdtgroup_parse_resource(resname, tok, rdtgrp);
+>> if (ret)
+>>        goto out;
+>>
+>> I feel it is ok to keep same level of processing.
+>>
+> 
+> resctrl also does sequential processing when, for example, the user requests
+> move of several tasks. resctrl returns with failure right away with error message
+> containing failing PID. This gives clear information to user what
+> portion of request succeeded without requiring user space to
+> do additional queries.
+> 
+> 
+> Reinette
+> 
 
 
