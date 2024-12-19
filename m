@@ -1,169 +1,142 @@
-Return-Path: <linux-doc+bounces-33289-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33291-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5A979F7AE3
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 13:03:29 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B7C59F7B86
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 13:38:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id AC4147A518A
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 12:03:23 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id AE8061894D48
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 12:37:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F310223705;
-	Thu, 19 Dec 2024 12:03:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 01D27223C7D;
+	Thu, 19 Dec 2024 12:37:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=arndb.de header.i=@arndb.de header.b="hXPuViTW";
-	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="Ai01Jq9/"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LFyHH90v"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from flow-a8-smtp.messagingengine.com (flow-a8-smtp.messagingengine.com [103.168.172.143])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A67A22145D;
-	Thu, 19 Dec 2024 12:03:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=103.168.172.143
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7B01221447;
+	Thu, 19 Dec 2024 12:37:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734609799; cv=none; b=RQpmB1JnruusagIg4nawAAqFfkydYaTJqWcdAwJ5YXQ57xYvW3KcFEoSH9M79G0V7dWH9UKuU4Ucr4wXDsuC10+5oMERnlqOf72OEPC32xI+DtEufJ2jIZqlKNXdJvVbi0A6caBU5CHLwCX6rIpmJT7at9ZkH2uuWGNoiudLWIA=
+	t=1734611857; cv=none; b=YUQEtzd1jywiZ5zwyxLm7H3LhCy0EvkOZ1WsIrGH01JiC21dYr2REuQaGSn3d5EhvGkPe36+Cp+chgopGzXx0bZ+ZDEeNVUTZf+M8WFj6xVOywWasisOGb5qL4JD4G3c+nV47NybhB+sFUPyDJF+6aDDYlEqMuusapLn/UCqhcM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734609799; c=relaxed/simple;
-	bh=Qg3sRh/NrBVXvAQf4LtjFbJFl+QuBJMpT2uDuNKPfUs=;
-	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
-	 Subject:Content-Type; b=gGE5l3jyEP6HZwsTlMvI7cGA6lI8h+YzDiKr9jk72vENFZQj4tehu6crx2tojGzLvJbZZgGB2oe1EciY51xXJV8bEah3yKKJtxgMA5qo3sHduSjvRuzNO/u01ECdE0xD6LZ6fbmT8BwBWmcDE+wYnQPlQcksvgjewnR2AnDBWxQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de; spf=pass smtp.mailfrom=arndb.de; dkim=pass (2048-bit key) header.d=arndb.de header.i=@arndb.de header.b=hXPuViTW; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=Ai01Jq9/; arc=none smtp.client-ip=103.168.172.143
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arndb.de
-Received: from phl-compute-10.internal (phl-compute-10.phl.internal [10.202.2.50])
-	by mailflow.phl.internal (Postfix) with ESMTP id 716412004CE;
-	Thu, 19 Dec 2024 07:03:15 -0500 (EST)
-Received: from phl-imap-11 ([10.202.2.101])
-  by phl-compute-10.internal (MEProxy); Thu, 19 Dec 2024 07:03:15 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
-	:cc:content-transfer-encoding:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1734609795;
-	 x=1734616995; bh=HsWGYit1QfbykpeRihgbuA09LwqwIdTOxzn2rND9d44=; b=
-	hXPuViTWoL+d8uTD8HWKH6l9JI3Qeg2+RU0afqJ+27Me3anlO7iAkrJodDU6SDBN
-	Q072WguaY7168vuinaZpdAtQ10DTGk5RYTaX/LadyRHQOzWPD3JbXXKn0mlciYNp
-	/X0ieAaHbhoMwp3jLFOIUY9qD8vUGL6DA6lT6SSUUoc7L2j+JHlZHXtf+NE7YFbT
-	eOs3kJAp5E5/dY87oP0aB928LrOITs5+5CDiuYcjTHYJJciZmW9Z0XBEYdV4CiNk
-	Wx0h3kLrKDDoQBv9F7H04Cd/klAwrIBGOvI957eyJztC01JCmdqrxlQ1BlkaCsQa
-	jWQXaNegO8DxO9+esrj5GA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1734609795; x=
-	1734616995; bh=HsWGYit1QfbykpeRihgbuA09LwqwIdTOxzn2rND9d44=; b=A
-	i01Jq9/TVKRojX7wRVqPg0h5WKcLpoStUlzFB/1DKY70YpqmGkR7fHOcpORUn0um
-	O3veblgy+PhgwTHKsaLsX62avtsXgZfoU3nI7C6pm24TvWQrJZfq+Rh9JerC4NLS
-	ciJ2sAoN9cCbyrQeR85kewBkWKH6IQre7lcblf9ImmbyUTndDKyoIi7iBFB4FLD3
-	0KT6+xxFdEY0omS5lwTLd8ccH+7S9mGeb77Qi1x6f+uVivOh3MspIan1aTLYH7mp
-	jKgm3f81NG86TuM3m3J6GqmunKFMUSCLyYI+YxETM8+cFfzgpaomgMZfCdOwfBTG
-	wCLqOyPW6qgnvCJJQUe3A==
-X-ME-Sender: <xms:ggtkZ9XFnFb5Shp28v0VE5L4v36r3JhISx0lVUCjHpWxkY9h9zUZvA>
-    <xme:ggtkZ9m1zxghtWwVIpwNk_zL1gyrBICU15_y-0Zl2SKXv0fhrUuFhEsigWuxSN5vN
-    yjOkbkuwRFOCJ_P5pY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefuddruddttddgfeegucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
-    rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnh
-    htshculddquddttddmnecujfgurhepofggfffhvfevkfgjfhfutgfgsehtjeertdertddt
-    necuhfhrohhmpedftehrnhguuceuvghrghhmrghnnhdfuceorghrnhgusegrrhhnuggsrd
-    guvgeqnecuggftrfgrthhtvghrnhephfdthfdvtdefhedukeetgefggffhjeeggeetfefg
-    gfevudegudevledvkefhvdeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpe
-    hmrghilhhfrhhomheprghrnhgusegrrhhnuggsrdguvgdpnhgspghrtghpthhtohepgedu
-    pdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehmrghrkhdrrhhuthhlrghnugesrg
-    hrmhdrtghomhdprhgtphhtthhopehmrghthhhivghurdguvghsnhhohigvrhhssegvfhhf
-    ihgtihhoshdrtghomhdprhgtphhtthhopehusghiiihjrghksehgmhgrihhlrdgtohhmpd
-    hrtghpthhtoheprghruggsodhgihhtsehgohhoghhlvgdrtghomhdprhgtphhtthhopehi
-    rhhoghgvrhhssehgohhoghhlvgdrtghomhdprhgtphhtthhopehjuhhsthhinhhsthhith
-    htsehgohhoghhlvgdrtghomhdprhgtphhtthhopehpvghtvghriiesihhnfhhrrgguvggr
-    ugdrohhrghdprhgtphhtthhopegrughrihgrnhdrhhhunhhtvghrsehinhhtvghlrdgtoh
-    hmpdhrtghpthhtohepkhgvihhthhhpsehkvghithhhphdrtghomh
-X-ME-Proxy: <xmx:ggtkZ5a7PffbNu-Ay1FQMOqZTJrFGnnXD5tGmRrSyWO2ytuqef_FkQ>
-    <xmx:ggtkZwUP_QJ3AoR1Af7G1uuLVO1kijbfSFTGznwbJEEi8KUxCINq9Q>
-    <xmx:ggtkZ3mnHQzr0RzOZWTVBet3C-Iqpqn-7c60fklTEsnKTuixPrkLGA>
-    <xmx:ggtkZ9egiZ9brX4PP9vRZHihWLda5MfhHjVBPTo81Ntc2DfeKXzPOA>
-    <xmx:gwtkZ1q8kWVe1DguqO4AMWKc4WtDvHUh-cbDE_TCaSipIJZV6Dnl5eox>
-Feedback-ID: i56a14606:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
-	id 1C9372220072; Thu, 19 Dec 2024 07:03:14 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
+	s=arc-20240116; t=1734611857; c=relaxed/simple;
+	bh=iTa+ur7lm+4z/RqHiWarKbLC9Qqkyo0J2aItQd06+kA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=pF1AgxLtpreUBsA5hMgPGfmQqGpjNTMTKGsdYF0+VghDvG+n1vUZqbQdSCYK3O6yIrkGw9HYQx6Hrj5S2jsK7PLURVrbF3369erXAnLffHxY39MrIYOsrg9XUXPmRefu/nzkhJCy5jcQvHlam8vxp2jvJubon8DuNARzfRZfygA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LFyHH90v; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD090C4CECE;
+	Thu, 19 Dec 2024 12:37:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1734611857;
+	bh=iTa+ur7lm+4z/RqHiWarKbLC9Qqkyo0J2aItQd06+kA=;
+	h=From:To:Cc:Subject:Date:From;
+	b=LFyHH90v7aIIaiYgtuCkgNduif2EcRXx+t1NKd7L1JnKgp9JhZhnEOSlm4mq5hs8Y
+	 6KOUOnY+Ox80NZ6TDiY23JfeIOdNvobIpOdA6QS9ywdFu0dbA3FOY6XfpOIqDbUy8W
+	 1ZINLSJE220I6N3v3/y0cFy5e7hAdIp8CQYlAm8x3XG2o46sRdpYygpXV7ipsBrDNa
+	 mT5pP8APZt4w3AFD60pC2UIolum9bf1RKsZi0ABswVkGRLf8/MO7aXZWHnr+ft87oS
+	 krYLDiy3AcMy44LN7D0yJ6eFAOmGg4MvU8cPpznL+wZzWC13I2wBNGcNOCYHbYVKDM
+	 Mwe/5FBFWzAww==
+From: Leon Romanovsky <leon@kernel.org>
+To: Steffen Klassert <steffen.klassert@secunet.com>
+Cc: Jianbo Liu <jianbol@nvidia.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	Eric Dumazet <edumazet@google.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org,
+	linux-rdma@vger.kernel.org,
+	netdev@vger.kernel.org,
+	Paolo Abeni <pabeni@redhat.com>,
+	Potnuri Bharat Teja <bharat@chelsio.com>,
+	Saeed Mahameed <saeedm@nvidia.com>,
+	Tariq Toukan <tariqt@nvidia.com>
+Subject: [PATCH ipsec-next 1/2] xfrm: Support ESN context update to hardware for TX
+Date: Thu, 19 Dec 2024 14:37:29 +0200
+Message-ID: <874f965d786606b0b4351c976f50271349f68b03.1734611621.git.leon@kernel.org>
+X-Mailer: git-send-email 2.47.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Thu, 19 Dec 2024 13:02:46 +0100
-From: "Arnd Bergmann" <arnd@arndb.de>
-To: "Mark Rutland" <mark.rutland@arm.com>
-Cc: "Ard Biesheuvel" <ardb+git@google.com>, linux-kernel@vger.kernel.org,
- "Ard Biesheuvel" <ardb@kernel.org>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>, "Andy Lutomirski" <luto@kernel.org>,
- "Peter Zijlstra" <peterz@infradead.org>,
- "Uros Bizjak" <ubizjak@gmail.com>, "Dennis Zhou" <dennis@kernel.org>,
- "Tejun Heo" <tj@kernel.org>, "Christoph Lameter" <cl@linux.com>,
- "Mathieu Desnoyers" <mathieu.desnoyers@efficios.com>,
- "Paolo Bonzini" <pbonzini@redhat.com>,
- "Vitaly Kuznetsov" <vkuznets@redhat.com>,
- "Juergen Gross" <jgross@suse.com>,
- "Boris Ostrovsky" <boris.ostrovsky@oracle.com>,
- "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
- "Masahiro Yamada" <masahiroy@kernel.org>, "Kees Cook" <kees@kernel.org>,
- "Nathan Chancellor" <nathan@kernel.org>,
- "Keith Packard" <keithp@keithp.com>,
- "Justin Stitt" <justinstitt@google.com>,
- "Josh Poimboeuf" <jpoimboe@kernel.org>,
- "Arnaldo Carvalho de Melo" <acme@kernel.org>,
- "Namhyung Kim" <namhyung@kernel.org>, "Jiri Olsa" <jolsa@kernel.org>,
- "Ian Rogers" <irogers@google.com>,
- "Adrian Hunter" <adrian.hunter@intel.com>,
- "Kan Liang" <kan.liang@linux.intel.com>, linux-doc@vger.kernel.org,
- linux-pm@vger.kernel.org, kvm@vger.kernel.org,
- xen-devel@lists.xenproject.org, linux-efi@vger.kernel.org,
- Linux-Arch <linux-arch@vger.kernel.org>, linux-sparse@vger.kernel.org,
- linux-kbuild@vger.kernel.org, linux-perf-users@vger.kernel.org,
- rust-for-linux@vger.kernel.org, llvm@lists.linux.dev
-Message-Id: <0afeae21-a663-43c9-91ff-f0357f5ac06b@app.fastmail.com>
-In-Reply-To: <Z2QJKZBsgvPMgRo_@J2N7QTR9R3>
-References: <20240925150059.3955569-30-ardb+git@google.com>
- <20240925150059.3955569-32-ardb+git@google.com>
- <c4868f63-b688-4489-a112-05bf04280bde@app.fastmail.com>
- <Z2QJKZBsgvPMgRo_@J2N7QTR9R3>
-Subject: Re: [RFC PATCH 02/28] Documentation: Bump minimum GCC version to 8.1
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On Thu, Dec 19, 2024, at 12:53, Mark Rutland wrote:
-> On Wed, Sep 25, 2024 at 03:58:38PM +0000, Arnd Bergmann wrote:
->> On Wed, Sep 25, 2024, at 15:01, Ard Biesheuvel wrote:
->> > From: Ard Biesheuvel <ardb@kernel.org>
->> 
->> We obviously need to go through all the other version checks
->> to see what else can be cleaned up. I would suggest we also
->> raise the binutils version to 2.30+, which is what RHEL8
->> shipped alongside gcc-8. I have not found other distros that
->> use older binutils in combination with gcc-8 or higher,
->> Debian 10 uses binutils-2.31.
->> I don't think we want to combine the additional cleanup with
->> your series, but if we can agree on the version, we can do that
->> in parallel.
->
-> Were you planning to send patches to that effect, or did you want
-> someone else to do that? I think we were largely agreed on making those
-> changes, but it wasn't clear to me who was actually going to send
-> patches, and I couldn't spot a subsequent thread on LKML.
+From: Jianbo Liu <jianbol@nvidia.com>
 
-I hadn't planned on doing that, but I could help (after my
-vacation). As Ard already posted the the patch for gcc, I
-was expecting that this one would get merged along with the
-other patches in the series.
+Previously xfrm_dev_state_advance_esn() was added for RX only. But
+it's possible that ESN context also need to be synced to hardware for
+TX, so call it for outbound in this patch.
 
-Ard, what is the status of your series, is this likely to
-make it into 6.14, or should we have a separate patch to
-just raise the minimum gcc and binutils version independent
-of your work?
+Signed-off-by: Jianbo Liu <jianbol@nvidia.com>
+Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+---
+ Documentation/networking/xfrm_device.rst                 | 3 ++-
+ drivers/net/ethernet/chelsio/cxgb4/cxgb4_main.c          | 3 +++
+ drivers/net/ethernet/mellanox/mlx5/core/en_accel/ipsec.c | 3 +++
+ net/xfrm/xfrm_replay.c                                   | 1 +
+ 4 files changed, 9 insertions(+), 1 deletion(-)
 
-      Arnd
+diff --git a/Documentation/networking/xfrm_device.rst b/Documentation/networking/xfrm_device.rst
+index bfea9d8579ed..66f6e9a9b59a 100644
+--- a/Documentation/networking/xfrm_device.rst
++++ b/Documentation/networking/xfrm_device.rst
+@@ -169,7 +169,8 @@ the stack in xfrm_input().
+ 
+ 	hand the packet to napi_gro_receive() as usual
+ 
+-In ESN mode, xdo_dev_state_advance_esn() is called from xfrm_replay_advance_esn().
++In ESN mode, xdo_dev_state_advance_esn() is called from
++xfrm_replay_advance_esn() for RX, and xfrm_replay_overflow_offload_esn for TX.
+ Driver will check packet seq number and update HW ESN state machine if needed.
+ 
+ Packet offload mode:
+diff --git a/drivers/net/ethernet/chelsio/cxgb4/cxgb4_main.c b/drivers/net/ethernet/chelsio/cxgb4/cxgb4_main.c
+index bc3af0054406..e56e4f238795 100644
+--- a/drivers/net/ethernet/chelsio/cxgb4/cxgb4_main.c
++++ b/drivers/net/ethernet/chelsio/cxgb4/cxgb4_main.c
+@@ -6559,6 +6559,9 @@ static void cxgb4_advance_esn_state(struct xfrm_state *x)
+ {
+ 	struct adapter *adap = netdev2adap(x->xso.dev);
+ 
++	if (x->xso.dir != XFRM_DEV_OFFLOAD_IN)
++		return;
++
+ 	if (!mutex_trylock(&uld_mutex)) {
+ 		dev_dbg(adap->pdev_dev,
+ 			"crypto uld critical resource is under use\n");
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/en_accel/ipsec.c b/drivers/net/ethernet/mellanox/mlx5/core/en_accel/ipsec.c
+index ca92e518be76..3dd4f2492090 100644
+--- a/drivers/net/ethernet/mellanox/mlx5/core/en_accel/ipsec.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/en_accel/ipsec.c
+@@ -980,6 +980,9 @@ static void mlx5e_xfrm_advance_esn_state(struct xfrm_state *x)
+ 	struct mlx5e_ipsec_sa_entry *sa_entry_shadow;
+ 	bool need_update;
+ 
++	if (x->xso.dir != XFRM_DEV_OFFLOAD_IN)
++		return;
++
+ 	need_update = mlx5e_ipsec_update_esn_state(sa_entry);
+ 	if (!need_update)
+ 		return;
+diff --git a/net/xfrm/xfrm_replay.c b/net/xfrm/xfrm_replay.c
+index bc56c6305725..e500aebbad22 100644
+--- a/net/xfrm/xfrm_replay.c
++++ b/net/xfrm/xfrm_replay.c
+@@ -729,6 +729,7 @@ static int xfrm_replay_overflow_offload_esn(struct xfrm_state *x, struct sk_buff
+ 		}
+ 
+ 		replay_esn->oseq = oseq;
++		xfrm_dev_state_advance_esn(x);
+ 
+ 		if (xfrm_aevent_is_on(net))
+ 			xfrm_replay_notify(x, XFRM_REPLAY_UPDATE);
+-- 
+2.47.0
+
 
