@@ -1,31 +1,31 @@
-Return-Path: <linux-doc+bounces-33264-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33257-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7D119F75A8
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 08:34:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECA1A9F758F
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 08:32:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1DEC217151B
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 07:34:03 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E286F169786
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 07:31:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50DFC218ACC;
-	Thu, 19 Dec 2024 07:32:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B40982163B8;
+	Thu, 19 Dec 2024 07:31:52 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B83612185B4
-	for <linux-doc@vger.kernel.org>; Thu, 19 Dec 2024 07:32:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E47C78F2D
+	for <linux-doc@vger.kernel.org>; Thu, 19 Dec 2024 07:31:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734593546; cv=none; b=HEQ1nm/4DwYYJvl6Tubn4RTJDTXAUMwGM1p1T424Dk+tBh4XvpBorg2bi4hrmnii0FEhCzULMJgtGW+33vXUwJDRe9wpLX4u6dkwaQO2YhKT7N45fnunmoytQoDbwld1pMDqwBWnCVlgPnlS8bkoPuIVfk9L+ULQwEO9oCvGYyk=
+	t=1734593512; cv=none; b=biDEr+qj460IFGDnC+OIJAju6FEQJB0EpBaajW4rn6zTFdTJOPfQFegtt5nhDWXaltx5QKbQo9NtSXc8RytL2x/BBBVAzENywniveNP6SKPrB8+g+DPKwgfmo28eEjhQC2nmmqrSHttcqYD9NKhj+cOqqnh9y2kvl1nYz9ITHTM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734593546; c=relaxed/simple;
-	bh=e2IbsiOoO3EPFUAOqg25iHCtvCfjnHRVHByLTl6MTlI=;
+	s=arc-20240116; t=1734593512; c=relaxed/simple;
+	bh=kv7H/2Fmdq5NzjHdH9WlL1ylasJJ18efPHXVIQWM2Hk=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=P0Zsa7VTUS8cTQcpktt0OUj95ePz9ypEkeuAFuR3nm2kvjAc6vr4D84Q7jboRI7jeB1pFH8GVL1kfUNvxPJs91k/BTqCaLfCmHHfAzlBDuzcXYsKnDbH1e2VaOHW4KQz2BkkmrRqcLYCo+DWAjTN3rr+E1DeTRE+pm5ppQabuKQ=
+	 In-Reply-To:To:Cc; b=F5MV7g4c0wQtNQbAT+PPfujKXlHi/gYBsDGG5BUlQ45QY+UlxM+O215wEW1Cxw81tPRHZRtgvwBQvlE49DRuIAYkOuMuyhPr7uTFZeLb+bKDTI3n+2+WH2II4xBNM/9kBSsgVFzf4Pg4VhB4RWsbS+kVTR+u+WoJdaM7moO9PVY=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
@@ -33,22 +33,22 @@ Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
 	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <a.fatoum@pengutronix.de>)
-	id 1tOB0O-00088Z-1R; Thu, 19 Dec 2024 08:31:32 +0100
+	id 1tOB0O-00088a-1R; Thu, 19 Dec 2024 08:31:32 +0100
 Received: from dude05.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::54])
 	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 	(Exim 4.96)
 	(envelope-from <a.fatoum@pengutronix.de>)
-	id 1tOB0L-004APu-25;
+	id 1tOB0L-004APv-2A;
 	Thu, 19 Dec 2024 08:31:30 +0100
 Received: from localhost ([::1] helo=dude05.red.stw.pengutronix.de)
 	by dude05.red.stw.pengutronix.de with esmtp (Exim 4.96)
 	(envelope-from <a.fatoum@pengutronix.de>)
-	id 1tOB0M-00GkbH-0q;
+	id 1tOB0M-00GkbH-0r;
 	Thu, 19 Dec 2024 08:31:30 +0100
 From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Date: Thu, 19 Dec 2024 08:31:28 +0100
-Subject: [PATCH 07/11] regulator: allow user configuration of hardware
- protection action
+Date: Thu, 19 Dec 2024 08:31:29 +0100
+Subject: [PATCH 08/11] platform/chrome: cros_ec_lpc: prepare for
+ hw_protection_shutdown removal
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,7 +57,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241219-hw_protection-reboot-v1-7-263a0c1df802@pengutronix.de>
+Message-Id: <20241219-hw_protection-reboot-v1-8-263a0c1df802@pengutronix.de>
 References: <20241219-hw_protection-reboot-v1-0-263a0c1df802@pengutronix.de>
 In-Reply-To: <20241219-hw_protection-reboot-v1-0-263a0c1df802@pengutronix.de>
 To: Daniel Lezcano <daniel.lezcano@linaro.org>, 
@@ -80,92 +80,38 @@ X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
 X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
 X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-When the core detects permanent regulator hardware failure or imminent
-power failure of a critical supply, it will call hw_protection_shutdown
-in an attempt to do a limited orderly shutdown followed by powering off
-the system.
+In the general case, a driver doesn't know which of system shutdown or
+reboot is the better action to take to protect hardware in an emergency
+situation. For this reason, hw_protection_shutdown is going to be
+removed in favor of hw_protection_trigger, which defaults to shutdown,
+but may be configured at kernel runtime to be a reboot instead.
 
-This doesn't work out well for many unattended embedded systems that don't
-have support for shutdown and that power on automatically when power is
-supplied:
+The ChromeOS EC situation is different as we do know that shutdown is
+the correct action as the EC is programmed to force reset after the
+short period, thus replace hw_protection_shutdown with
+__hw_protection_trigger with HWPROT_ACT_SHUTDOWN as argument to
+maintain the same behavior.
 
-  - A brief power cycle gets detected by the driver
-  - The kernel powers down the system and SoC goes into shutdown mode
-  - Power is restored
-  - The system remains oblivious to the restored power
-  - System needs to be manually power cycled for a duration long enough
-    to drain the capacitors
-
-Allow users to fix this by calling the newly introduced
-hw_protection_trigger() instead: This way the hw_protection commandline
-or sysfs parameter is used to dictate the policy of dealing with the
-regulator fault.
+No functional change.
 
 Signed-off-by: Ahmad Fatoum <a.fatoum@pengutronix.de>
 ---
- drivers/regulator/core.c        |  4 ++--
- drivers/regulator/irq_helpers.c | 16 ++++++++--------
- 2 files changed, 10 insertions(+), 10 deletions(-)
+ drivers/platform/chrome/cros_ec_lpc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/regulator/core.c b/drivers/regulator/core.c
-index 8cb948a91e60d958c6b5ec97d736e6e3bf4b47eb..74c8f1262f2cd4e796ba8f4f1bdf17b685a615c1 100644
---- a/drivers/regulator/core.c
-+++ b/drivers/regulator/core.c
-@@ -5137,8 +5137,8 @@ static void regulator_handle_critical(struct regulator_dev *rdev,
- 	if (!reason)
+diff --git a/drivers/platform/chrome/cros_ec_lpc.c b/drivers/platform/chrome/cros_ec_lpc.c
+index 924bf4d3cc77b9f27d415a10c61ae06886fa7f80..068781b75529d80b51b3773845bcf457fa958710 100644
+--- a/drivers/platform/chrome/cros_ec_lpc.c
++++ b/drivers/platform/chrome/cros_ec_lpc.c
+@@ -414,7 +414,7 @@ static void cros_ec_lpc_acpi_notify(acpi_handle device, u32 value, void *data)
+ 		blocking_notifier_call_chain(&ec_dev->panic_notifier, 0, ec_dev);
+ 		kobject_uevent_env(&ec_dev->dev->kobj, KOBJ_CHANGE, (char **)env);
+ 		/* Begin orderly shutdown. EC will force reset after a short period. */
+-		hw_protection_shutdown("CrOS EC Panic", -1);
++		__hw_protection_trigger("CrOS EC Panic", -1, HWPROT_ACT_SHUTDOWN);
+ 		/* Do not query for other events after a panic is reported */
  		return;
- 
--	hw_protection_shutdown(reason,
--			       rdev->constraints->uv_less_critical_window_ms);
-+	hw_protection_trigger(reason,
-+			      rdev->constraints->uv_less_critical_window_ms);
- }
- 
- /**
-diff --git a/drivers/regulator/irq_helpers.c b/drivers/regulator/irq_helpers.c
-index 0aa188b2bbb26797b7907cbfb581459ef41df286..5742faee8071dd8104c094587d66693f48fb0f9b 100644
---- a/drivers/regulator/irq_helpers.c
-+++ b/drivers/regulator/irq_helpers.c
-@@ -64,16 +64,16 @@ static void regulator_notifier_isr_work(struct work_struct *work)
- reread:
- 	if (d->fatal_cnt && h->retry_cnt > d->fatal_cnt) {
- 		if (!d->die)
--			return hw_protection_shutdown("Regulator HW failure? - no IC recovery",
--						      REGULATOR_FORCED_SAFETY_SHUTDOWN_WAIT_MS);
-+			return hw_protection_trigger("Regulator HW failure? - no IC recovery",
-+						     REGULATOR_FORCED_SAFETY_SHUTDOWN_WAIT_MS);
- 		ret = d->die(rid);
- 		/*
- 		 * If the 'last resort' IC recovery failed we will have
- 		 * nothing else left to do...
- 		 */
- 		if (ret)
--			return hw_protection_shutdown("Regulator HW failure. IC recovery failed",
--						      REGULATOR_FORCED_SAFETY_SHUTDOWN_WAIT_MS);
-+			return hw_protection_trigger("Regulator HW failure. IC recovery failed",
-+						     REGULATOR_FORCED_SAFETY_SHUTDOWN_WAIT_MS);
- 
- 		/*
- 		 * If h->die() was implemented we assume recovery has been
-@@ -263,14 +263,14 @@ static irqreturn_t regulator_notifier_isr(int irq, void *data)
- 	if (d->fatal_cnt && h->retry_cnt > d->fatal_cnt) {
- 		/* If we have no recovery, just try shut down straight away */
- 		if (!d->die) {
--			hw_protection_shutdown("Regulator failure. Retry count exceeded",
--					       REGULATOR_FORCED_SAFETY_SHUTDOWN_WAIT_MS);
-+			hw_protection_trigger("Regulator failure. Retry count exceeded",
-+					      REGULATOR_FORCED_SAFETY_SHUTDOWN_WAIT_MS);
- 		} else {
- 			ret = d->die(rid);
- 			/* If die() failed shut down as a last attempt to save the HW */
- 			if (ret)
--				hw_protection_shutdown("Regulator failure. Recovery failed",
--						       REGULATOR_FORCED_SAFETY_SHUTDOWN_WAIT_MS);
-+				hw_protection_trigger("Regulator failure. Recovery failed",
-+						      REGULATOR_FORCED_SAFETY_SHUTDOWN_WAIT_MS);
- 		}
  	}
- 
 
 -- 
 2.39.5
