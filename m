@@ -1,142 +1,182 @@
-Return-Path: <linux-doc+bounces-33281-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33279-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BFDC9F781D
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 10:14:02 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 652C29F77F6
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 10:09:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D26E61647F1
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 09:13:59 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 362A61888D25
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2024 09:09:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 059891FC7D1;
-	Thu, 19 Dec 2024 09:13:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="aZVDbp1X"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 035A4217701;
+	Thu, 19 Dec 2024 09:08:56 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 420EB149DF4;
-	Thu, 19 Dec 2024 09:13:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5222D149DF4;
+	Thu, 19 Dec 2024 09:08:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734599633; cv=none; b=a/ONbBrXoHrQZspzWUqmnI4Y3uc1FgcFMOdSfshx83wQ1X/DkPXLL3WIIVpEiYhafOc7FhYT5Bc9Y17VkvuAqegZMwHlcVtjCojq1X/H4CQChWMhNyCqDo6VnpTKO1ARglZaYjZUMmSqjuFliKgoic66fSMjOBgvs3oSFhNwArc=
+	t=1734599335; cv=none; b=fhy0NoxE4VtJ2ji0T/z89204LhdT6ACQ5oRT4bjjmsriO8q+9P3FgVijPYisPMnfO1YdZOoru9OPq5lNUp2QBdfutDRGshCzdyvv+43eM0vk3Q8OJbka8ZtkDW/+doQMqBkM0PFTnyVGWli7riB9uuTPLb7hdnvNogWPHrrlSSE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734599633; c=relaxed/simple;
-	bh=HL+77FaSWbISKMNuMomFMiSTJ/OqM2oa7Uc5fQtaOv4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Z0xKeG2IFFiFtp3P8MDpEquERcFmkaptvQ5Z8iGhfrYrNdnSgnuUWg7z1X7gezsD9s/KGeQXaUYAXJQDMKMAwkZg7aO+4ARHTcmiWoT6xTGm65qV/eTu1qR+Alr2FNQy5f4BmGPb/8IuQTNZMmb7OXpd7uHzD/zSJwdGhl9ehjc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=aZVDbp1X; arc=none smtp.client-ip=90.155.92.199
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=xFCcOBb9eMvxc6GhECSeXMy/EsYjD7GWOE/6oJ0KceQ=; b=aZVDbp1XznBHq/27DPPV1JJSG8
-	pBTAOiceVhuJuQsZKbQJ8OV3W4pEu7UqSjVRRjF6ZFkVm5d/GAjPNHaxM7wrZLKYWJhngcb2Zrd6q
-	QeqFXdclPgtqYGjPYn+Fz37yE80/ibO5MH5PRld/ivlIu4Thqc/D+Nc8O6Ajb8p8YDd8WmmVGcrZR
-	e5YSZx6Vl/0GtGKDp594inX58sMQMkXZ/3CWFySF65fzR1dLIrNDLsvYBEOnRlcP0ih3dWgEM/9eP
-	AYqxoLXQqaOIhkMW+KVRBW3LPoqaGmy9QwXCI0+EkCg288FPzGEjWQL8zV2U/ihxDmZaB99HAr/mO
-	pC0Ulvrg==;
-Received: from 77-249-17-89.cable.dynamic.v4.ziggo.nl ([77.249.17.89] helo=noisy.programming.kicks-ass.net)
-	by desiato.infradead.org with esmtpsa (Exim 4.98 #2 (Red Hat Linux))
-	id 1tOCb8-00000005Q3z-3i8w;
-	Thu, 19 Dec 2024 09:13:35 +0000
-Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
-	id 6DFE03003FF; Thu, 19 Dec 2024 10:13:34 +0100 (CET)
-Date: Thu, 19 Dec 2024 10:13:34 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Suren Baghdasaryan <surenb@google.com>
-Cc: "Liam R. Howlett" <Liam.Howlett@oracle.com>, akpm@linux-foundation.org,
-	willy@infradead.org, lorenzo.stoakes@oracle.com, mhocko@suse.com,
-	vbabka@suse.cz, hannes@cmpxchg.org, mjguzik@gmail.com,
-	oliver.sang@intel.com, mgorman@techsingularity.net,
-	david@redhat.com, peterx@redhat.com, oleg@redhat.com,
-	dave@stgolabs.net, paulmck@kernel.org, brauner@kernel.org,
-	dhowells@redhat.com, hdanton@sina.com, hughd@google.com,
-	lokeshgidra@google.com, minchan@google.com, jannh@google.com,
-	shakeel.butt@linux.dev, souravpanda@google.com,
-	pasha.tatashin@soleen.com, klarasmodin@gmail.com, corbet@lwn.net,
-	linux-doc@vger.kernel.org, linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org, kernel-team@android.com
-Subject: Re: [PATCH v6 10/16] mm: replace vm_lock and detached flag with a
- reference count
-Message-ID: <20241219091334.GC26551@noisy.programming.kicks-ass.net>
-References: <CAJuCfpHDRCoaBfE8y6AppKveSTgayyTNfDyQWH=gMzO-Pkuqpw@mail.gmail.com>
- <20241218174428.GQ2354@noisy.programming.kicks-ass.net>
- <CAJuCfpEKg_h5pw2AxdF1wmFMt4xdOxYqv7U1uVMYcuSCB4kHuA@mail.gmail.com>
- <r7polqnhdguxrz6npklag5kjy7ipbj5lrnqai2qm3jt7x56hci@cfrcom746iae>
- <CAJuCfpGeRi73E94VCDPDGAGG+5-Sj-_YGf3JNnf6Bh4GH_M6jA@mail.gmail.com>
- <CAJuCfpHJwVXanjG0WGjo0KHHEbg1-T0HWTZqDpssoq3FvfG++A@mail.gmail.com>
- <jes252u5qfhla2bdmg6pdkfpi4a2jfhf7d5b6ra6ol2bmt352x@gunhzaca56df>
- <CAJuCfpFSD98fw=844AJPy+LT5y=zREQGtSEVj3_FCXiZ5cFR_A@mail.gmail.com>
- <ulbspoec633hfm54f3jzvoqs6ilskxou3qykk2u727pbaltvfl@lb53vjcaxnuf>
- <CAJuCfpHXRX=LLa67eWYvrK=UDxKMaOequFXfqOqDHbRrmsT9SQ@mail.gmail.com>
+	s=arc-20240116; t=1734599335; c=relaxed/simple;
+	bh=tVahjEZ2lznrsTQUFKxfyL7PBltag6GvFFpmepnutRk=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=J3XnUCyeLETfY12pWiTWV1SxI/T7J+enkRZAKoh1yzznpLqNuaUKfbSY6EqoARLHQKyb+C/lviZH1JMb0eNTlnzmgHQpZbCeq70fP/WD3h7LigihkaeY/9/wVmvp3dFbIpWO3ZZYucAwWUFzD3bvnhjUpXPDa8GOELAHUVOThcc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.186.31])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4YDPqL5Q9wz6K6h7;
+	Thu, 19 Dec 2024 17:08:46 +0800 (CST)
+Received: from frapeml500005.china.huawei.com (unknown [7.182.85.13])
+	by mail.maildlp.com (Postfix) with ESMTPS id C843E140133;
+	Thu, 19 Dec 2024 17:08:49 +0800 (CST)
+Received: from china (10.200.201.82) by frapeml500005.china.huawei.com
+ (7.182.85.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Thu, 19 Dec
+ 2024 10:08:39 +0100
+From: Gur Stavi <gur.stavi@huawei.com>
+To: Gur Stavi <gur.stavi@huawei.com>, gongfan <gongfan1@huawei.com>
+CC: <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>, "David S.
+ Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub
+ Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
+	<horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
+	<linux-doc@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>, Bjorn Helgaas
+	<helgaas@kernel.org>, Cai Huoqing <cai.huoqing@linux.dev>, Xin Guo
+	<guoxin09@huawei.com>, Shen Chenyang <shenchenyang1@hisilicon.com>, Zhou
+ Shuai <zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
+	<shijing34@huawei.com>, Meny Yossefi <meny.yossefi@huawei.com>
+Subject: [PATCH net-next v01 0/1] net: hinic3: Add a driver for Huawei 3rd gen NIC
+Date: Thu, 19 Dec 2024 11:21:54 +0200
+Message-ID: <cover.1734599672.git.gur.stavi@huawei.com>
+X-Mailer: git-send-email 2.45.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAJuCfpHXRX=LLa67eWYvrK=UDxKMaOequFXfqOqDHbRrmsT9SQ@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ frapeml500005.china.huawei.com (7.182.85.13)
 
-On Wed, Dec 18, 2024 at 01:53:17PM -0800, Suren Baghdasaryan wrote:
+This is the 1/3 patch of the patch-set described below.
 
-> Ah, ok I see now. I completely misunderstood what for_each_vma_range()
-> was doing.
-> 
-> Then I think vma_start_write() should remain inside
-> vms_gather_munmap_vmas() and all vmas in mas_detach should be
+The patch-set contains driver for Huawei's 3rd generation HiNIC
+Ethernet device that will be available in the future.
 
-No, it must not. You really are not modifying anything yet (except the
-split, which we've already noted mark write themselves).
+This is an SRIOV device, designed for data centers.
+Initially, the driver only supports VFs.
 
-> write-locked, even the ones we are not modifying. Otherwise what would
-> prevent the race I mentioned before?
-> 
-> __mmap_region
->     __mmap_prepare
->         vms_gather_munmap_vmas // adds vmas to be unmapped into mas_detach,
->                                                       // some locked
-> by __split_vma(), some not locked
-> 
->                                      lock_vma_under_rcu()
->                                          vma = mas_walk // finds
-> unlocked vma also in mas_detach
->                                          vma_start_read(vma) //
-> succeeds since vma is not locked
->                                          // vma->detached, vm_start,
-> vm_end checks pass
->                                      // vma is successfully read-locked
-> 
->        vms_clean_up_area(mas_detach)
->             vms_clear_ptes
->                                      // steps on a cleared PTE
+Following the discussion over RFC01, the code will be submitted in
+separate smaller patches where until the last patch the driver is
+non-functional. The RFC02 submission contains overall view of the entire
+driver but every patch will be posted as a standalone submission.
 
-So here we have the added complexity that the vma is not unhooked at
-all. Is there anything that would prevent a concurrent gup_fast() from
-doing the same -- touch a cleared PTE?
+Changes:
 
-AFAICT two threads, one doing overlapping mmap() and the other doing
-gup_fast() can result in exactly this scenario.
+RFC V01: https://lore.kernel.org/netdev/cover.1730290527.git.gur.stavi@huawei.com
 
-If we don't care about the GUP case, when I'm thinking we should not
-care about the lockless RCU case either.
+RFC V02: https://lore.kernel.org/netdev/cover.1733990727.git.gur.stavi@huawei.com
+* Reduce overall line of code by removing optional functionality.
+* Break down into smaller patches.
 
->     __mmap_new_vma
->         vma_set_range // installs new vma in the range
->     __mmap_complete
->         vms_complete_munmap_vmas // vmas are write-locked and detached
-> but it's too late
+PATCH 01 V01:
+* Documentation style and consistency fixes (from Bjorn Helgaas)
+* Use ipoll instead of custom code (from Andrew Lunn)
+* Move dev_set_drvdata up in initialization order (from Andrew Lunn)
+* Use netdev's max_mtu, min_mtu (from Andrew Lunn)
+* Fix variable 'xxx' set but not used warnings (from Linux patchwork)
 
-But at this point that old vma really is unhooked, and the
-vma_write_start() here will ensure readers are gone and it will clear
-PTEs *again*.
+gongfan (1):
+  hinic3: module initialization and tx/rx logic
 
+ .../device_drivers/ethernet/huawei/hinic3.rst | 137 ++++
+ MAINTAINERS                                   |   7 +
+ drivers/net/ethernet/huawei/Kconfig           |   1 +
+ drivers/net/ethernet/huawei/Makefile          |   1 +
+ drivers/net/ethernet/huawei/hinic3/Kconfig    |  16 +
+ drivers/net/ethernet/huawei/hinic3/Makefile   |  21 +
+ .../ethernet/huawei/hinic3/hinic3_common.c    |  53 ++
+ .../ethernet/huawei/hinic3/hinic3_common.h    |  27 +
+ .../ethernet/huawei/hinic3/hinic3_hw_cfg.c    |  30 +
+ .../ethernet/huawei/hinic3/hinic3_hw_cfg.h    |  58 ++
+ .../ethernet/huawei/hinic3/hinic3_hw_comm.c   |  37 +
+ .../ethernet/huawei/hinic3/hinic3_hw_comm.h   |  13 +
+ .../ethernet/huawei/hinic3/hinic3_hw_intf.h   |  85 +++
+ .../net/ethernet/huawei/hinic3/hinic3_hwdev.c |  24 +
+ .../net/ethernet/huawei/hinic3/hinic3_hwdev.h |  82 +++
+ .../net/ethernet/huawei/hinic3/hinic3_hwif.c  |  15 +
+ .../net/ethernet/huawei/hinic3/hinic3_hwif.h  |  50 ++
+ .../net/ethernet/huawei/hinic3/hinic3_lld.c   | 410 +++++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_lld.h   |  20 +
+ .../net/ethernet/huawei/hinic3/hinic3_main.c  | 415 +++++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_mbox.c  |  17 +
+ .../net/ethernet/huawei/hinic3/hinic3_mbox.h  |  16 +
+ .../net/ethernet/huawei/hinic3/hinic3_mgmt.h  |  13 +
+ .../huawei/hinic3/hinic3_mgmt_interface.h     | 111 +++
+ .../huawei/hinic3/hinic3_netdev_ops.c         |  77 ++
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.c   | 254 +++++++
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.h   |  45 ++
+ .../ethernet/huawei/hinic3/hinic3_nic_dev.h   | 100 +++
+ .../ethernet/huawei/hinic3/hinic3_nic_io.c    |  21 +
+ .../ethernet/huawei/hinic3/hinic3_nic_io.h    | 117 +++
+ .../huawei/hinic3/hinic3_queue_common.c       |  65 ++
+ .../huawei/hinic3/hinic3_queue_common.h       |  51 ++
+ .../net/ethernet/huawei/hinic3/hinic3_rss.c   |  24 +
+ .../net/ethernet/huawei/hinic3/hinic3_rss.h   |  12 +
+ .../net/ethernet/huawei/hinic3/hinic3_rx.c    | 401 ++++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_rx.h    |  91 +++
+ .../net/ethernet/huawei/hinic3/hinic3_tx.c    | 691 ++++++++++++++++++
+ .../net/ethernet/huawei/hinic3/hinic3_tx.h    | 129 ++++
+ .../net/ethernet/huawei/hinic3/hinic3_wq.c    |  29 +
+ .../net/ethernet/huawei/hinic3/hinic3_wq.h    |  75 ++
+ 40 files changed, 3841 insertions(+)
+ create mode 100644 Documentation/networking/device_drivers/ethernet/huawei/hinic3.rst
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/Kconfig
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/Makefile
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_common.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_common.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hw_cfg.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hw_cfg.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hw_comm.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hw_comm.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hw_intf.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hwdev.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hwdev.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hwif.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_hwif.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_lld.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_lld.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_main.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_mbox.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_mbox.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_mgmt.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_mgmt_interface.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_netdev_ops.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_nic_cfg.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_nic_cfg.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_nic_dev.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_queue_common.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_queue_common.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_rss.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_rss.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_rx.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_rx.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_tx.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_tx.h
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_wq.c
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_wq.h
+
+
+base-commit: 65fb414c93f486cef5408951350f20552113abd0
+-- 
+2.45.2
 
 
