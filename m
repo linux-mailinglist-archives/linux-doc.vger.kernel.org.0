@@ -1,319 +1,176 @@
-Return-Path: <linux-doc+bounces-33458-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33460-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DFC89F92E0
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Dec 2024 14:13:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 837189F92E5
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Dec 2024 14:13:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 90070189923A
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Dec 2024 13:12:21 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 952D2188BF0C
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Dec 2024 13:13:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F6E52153F8;
-	Fri, 20 Dec 2024 13:09:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8E65120FA8F;
+	Fri, 20 Dec 2024 13:13:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="SlgCrKFE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A3F3218AAB
-	for <linux-doc@vger.kernel.org>; Fri, 20 Dec 2024 13:09:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DB121C5F37;
+	Fri, 20 Dec 2024 13:13:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1734700156; cv=none; b=gLlxQVP8OEIQNffjs73kk996T2SpJC8VSIyA+63G/ux1i2BF2OpeSbPWsU9gMtxh7B9x4oZeYxq3v8yzOTbsITd7eQICVgYqvbtDUsFjqjz3w5/YkSWygYtXZf8vqNTkIqiSuz2iNe0mprDQ8Unq1bgunWEdqn6x8WerZUvDLFQ=
+	t=1734700416; cv=none; b=Pa6TKGRQ8Nm2irMgQcFE6dRpkkoyb9zsQbiRpvIWQvpQM5Sc5iiQIv/+E4VwBGi8V7hNhTILn3ENmwNb/npOZIBQQYWEGgfj0w+4fn7xHhFUvRcake0H7mzmK8N26dV9VgxHqnEiUc150KYKll1NHw+u6/RQJsLY2FWlgr2W2Kg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1734700156; c=relaxed/simple;
-	bh=lu0eRQDbBvBGUZpWJ17CDiCpntoRAUtUnZ1r8PnHdhE=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=mlvJMB3rzH5O82+PLcB8mKeh/tVEb4wZbCXzGys8qH/Domx7AThhjzV4H59Zoi5oCVaxX21C32nImmf3AuHFFx5nOl6wlGzhkyeDKz/h0sNRtDDrtYfD5jT3DTr2I4Zdm21JMafw7ZY80yZRpLTU5DQNnBjOyYhGoDMFMDT/Y/g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ore@pengutronix.de>)
-	id 1tOckA-0004E9-4I; Fri, 20 Dec 2024 14:08:38 +0100
-Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1tOck8-004NZv-0f;
-	Fri, 20 Dec 2024 14:08:36 +0100
-Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1tOck8-008Mkj-2n;
-	Fri, 20 Dec 2024 14:08:36 +0100
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: "David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
-	kernel@pengutronix.de,
-	linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org,
-	Simon Horman <horms@kernel.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	linux-doc@vger.kernel.org
-Subject: [PATCH net-next v3 8/8] net: phy: dp83tg720: add statistics support
-Date: Fri, 20 Dec 2024 14:08:35 +0100
-Message-Id: <20241220130836.1993966-9-o.rempel@pengutronix.de>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241220130836.1993966-1-o.rempel@pengutronix.de>
-References: <20241220130836.1993966-1-o.rempel@pengutronix.de>
+	s=arc-20240116; t=1734700416; c=relaxed/simple;
+	bh=nw71UcSITtn+v9KH8wZOwlxUZfijdplRRsef/oVpDVw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=hWKvgpZraNAAuIhtCQofzTo5yoxbnSMwsqIqU7z1qrDR8HxiRqrB7fw2NG6Pza54CLtU54SCyeE1q3U+YqUtBT+xl1Aahv6ij7owSgw5RfheSHH1l51kUmgNlnU4QHzATDBMS8JLVdsnSWfPL7k0flMg1d5NEp7th+uUCw/+wkU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=SlgCrKFE; arc=none smtp.client-ip=80.237.130.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:From:
+	Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+	Content-Transfer-Encoding:Content-ID:Content-Description:In-Reply-To:
+	References; bh=eCyqR2M+g78rWHNsbS2JU6hYufz9nzoWytPFPK9eYn4=; t=1734700414;
+	x=1735132414; b=SlgCrKFEou7HrE7LiSkjh/ElEp0gmgyHcztAe91Ggu+TkMufZBdvJmNiRVcvA
+	wSiBkhy5Ki5ofZEuvmj3mMLL2feTJ/cdAlPMNnlyUE5ISGGxIxEB//pgrd8qEj0Qfn5HP7glDfozQ
+	0Cs4YJOojXChcm/2aZAWkHuVdmL2gACDikPiWznCTJP5al+JVeFYFpPTZlLZftcLYwJ6woqeSAtYM
+	ysgyeX4mHpsQGpdeqHGpPlpoZWPChgTwkc974J1e2Xx61ul//wx8Z0IhYi8QGn8p5EfPdW+S/umlG
+	uldoYW86Jb7ftOax5OemfN5YfvElV1U8Lk4ZGzg7MQ7P0AAiOQ==;
+Received: from [2a02:8108:8980:2478:87e9:6c79:5f84:367d]; authenticated
+	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128)
+	id 1tOcor-00Cwa9-0G;
+	Fri, 20 Dec 2024 14:13:29 +0100
+Message-ID: <38f33891-ce19-4df5-9bab-d53443393305@leemhuis.info>
+Date: Fri, 20 Dec 2024 14:13:28 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ore@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 3/6] docs: 6.Followthrough.rst: interaction with stable
+ wrt to regressions
+To: Jonathan Corbet <corbet@lwn.net>, workflows@vger.kernel.org,
+ regressions@lists.linux.dev, linux-doc@vger.kernel.org
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+ Greg KH <gregkh@linuxfoundation.org>
+References: <cover.1733825632.git.linux@leemhuis.info>
+ <d7793d2e788e7d98a67e90f85a77d42dab1b8da1.1733825632.git.linux@leemhuis.info>
+ <87ed2bwo46.fsf@trenco.lwn.net>
+From: Thorsten Leemhuis <linux@leemhuis.info>
+Content-Language: de-DE, en-US
+Autocrypt: addr=linux@leemhuis.info; keydata=
+ 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 n7RI
+In-Reply-To: <87ed2bwo46.fsf@trenco.lwn.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1734700414;2d5cffaf;
+X-HE-SMSGID: 1tOcor-00Cwa9-0G
 
-Add support for reporting PHY statistics in the DP83TG720 driver. This
-includes cumulative tracking of link loss events, transmit/receive
-packet counts, and error counts. Implemented functions to update and
-provide statistics via ethtool, with optional polling support enabled
-through `PHY_POLL_STATS`.
 
-Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
----
-changes v2:
-- drop use of FIELD_GET
-- add comments
----
- drivers/net/phy/dp83tg720.c | 161 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 161 insertions(+)
 
-diff --git a/drivers/net/phy/dp83tg720.c b/drivers/net/phy/dp83tg720.c
-index 0ef4d7dba065..ea2f0bc27c4c 100644
---- a/drivers/net/phy/dp83tg720.c
-+++ b/drivers/net/phy/dp83tg720.c
-@@ -51,6 +51,9 @@
- /* Register 0x0405: Unknown Register */
- #define DP83TG720S_UNKNOWN_0405			0x405
- 
-+#define DP83TG720S_LINK_QUAL_3			0x547
-+#define DP83TG720S_LINK_LOSS_CNT_MASK		GENMASK(15, 10)
-+
- /* Register 0x0576: TDR Master Link Down Control */
- #define DP83TG720S_TDR_MASTER_LINK_DOWN		0x576
- 
-@@ -60,6 +63,29 @@
- /* In RGMII mode, Enable or disable the internal delay for TXD */
- #define DP83TG720S_RGMII_TX_CLK_SEL		BIT(0)
- 
-+/*
-+ * DP83TG720S_PKT_STAT_x registers correspond to similarly named registers
-+ * in the datasheet (PKT_STAT_1 through PKT_STAT_6). These registers store
-+ * 32-bit or 16-bit counters for TX and RX statistics and must be read in
-+ * sequence to ensure the counters are cleared correctly.
-+ *
-+ * - DP83TG720S_PKT_STAT_1: Contains TX packet count bits [15:0].
-+ * - DP83TG720S_PKT_STAT_2: Contains TX packet count bits [31:16].
-+ * - DP83TG720S_PKT_STAT_3: Contains TX error packet count.
-+ * - DP83TG720S_PKT_STAT_4: Contains RX packet count bits [15:0].
-+ * - DP83TG720S_PKT_STAT_5: Contains RX packet count bits [31:16].
-+ * - DP83TG720S_PKT_STAT_6: Contains RX error packet count.
-+ *
-+ * Keeping the register names as defined in the datasheet helps maintain
-+ * clarity and alignment with the documentation.
-+ */
-+#define DP83TG720S_PKT_STAT_1			0x639
-+#define DP83TG720S_PKT_STAT_2			0x63a
-+#define DP83TG720S_PKT_STAT_3			0x63b
-+#define DP83TG720S_PKT_STAT_4			0x63c
-+#define DP83TG720S_PKT_STAT_5			0x63d
-+#define DP83TG720S_PKT_STAT_6			0x63e
-+
- /* Register 0x083F: Unknown Register */
- #define DP83TG720S_UNKNOWN_083F			0x83f
- 
-@@ -69,6 +95,113 @@
- 
- #define DP83TG720_SQI_MAX			7
- 
-+struct dp83tg720_stats {
-+	u64 link_loss_cnt;
-+	u64 tx_pkt_cnt;
-+	u64 tx_err_pkt_cnt;
-+	u64 rx_pkt_cnt;
-+	u64 rx_err_pkt_cnt;
-+};
-+
-+struct dp83tg720_priv {
-+	struct dp83tg720_stats stats;
-+};
-+
-+/**
-+ * dp83tg720_update_stats - Update the PHY statistics for the DP83TD510 PHY.
-+ * @phydev: Pointer to the phy_device structure.
-+ *
-+ * The function reads the PHY statistics registers and updates the statistics
-+ * structure.
-+ *
-+ * Returns: 0 on success or a negative error code on failure.
-+ */
-+static int dp83tg720_update_stats(struct phy_device *phydev)
-+{
-+	struct dp83tg720_priv *priv = phydev->priv;
-+	u32 count;
-+	int ret;
-+
-+	/* Read the link loss count */
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_LINK_QUAL_3);
-+	if (ret < 0)
-+		return ret;
-+	/* link_loss_cnt */
-+	count = FIELD_GET(DP83TG720S_LINK_LOSS_CNT_MASK, ret);
-+	ethtool_stat_add(&priv->stats.link_loss_cnt, count);
-+
-+	/* The DP83TG720S_PKT_STAT registers are divided into two groups:
-+	 * - Group 1 (TX stats): DP83TG720S_PKT_STAT_1 to DP83TG720S_PKT_STAT_3
-+	 * - Group 2 (RX stats): DP83TG720S_PKT_STAT_4 to DP83TG720S_PKT_STAT_6
-+	 *
-+	 * Registers in each group are cleared only after reading them in a
-+	 * plain sequence (e.g., 1, 2, 3 for Group 1 or 4, 5, 6 for Group 2).
-+	 * Any deviation from the sequence, such as reading 1, 2, 1, 2, 3, will
-+	 * prevent the group from being cleared. Additionally, the counters
-+	 * for a group are frozen as soon as the first register in that group
-+	 * is accessed.
-+	 */
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_1);
-+	if (ret < 0)
-+		return ret;
-+	/* tx_pkt_cnt_15_0 */
-+	count = ret;
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_2);
-+	if (ret < 0)
-+		return ret;
-+	/* tx_pkt_cnt_31_16 */
-+	count |= ret << 16;
-+	ethtool_stat_add(&priv->stats.tx_pkt_cnt, count);
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_3);
-+	if (ret < 0)
-+		return ret;
-+	/* tx_err_pkt_cnt */
-+	ethtool_stat_add(&priv->stats.tx_err_pkt_cnt, ret);
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_4);
-+	if (ret < 0)
-+		return ret;
-+	/* rx_pkt_cnt_15_0 */
-+	count = ret;
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_5);
-+	if (ret < 0)
-+		return ret;
-+	/* rx_pkt_cnt_31_16 */
-+	count |= ret << 16;
-+	ethtool_stat_add(&priv->stats.rx_pkt_cnt, count);
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TG720S_PKT_STAT_6);
-+	if (ret < 0)
-+		return ret;
-+	/* rx_err_pkt_cnt */
-+	ethtool_stat_add(&priv->stats.rx_err_pkt_cnt, ret);
-+
-+	return 0;
-+}
-+
-+static void dp83tg720_get_link_stats(struct phy_device *phydev,
-+				     struct ethtool_link_ext_stats *link_stats)
-+{
-+	struct dp83tg720_priv *priv = phydev->priv;
-+
-+	link_stats->link_down_events = priv->stats.link_loss_cnt;
-+}
-+
-+static void dp83tg720_get_phy_stats(struct phy_device *phydev,
-+				    struct ethtool_eth_phy_stats *eth_stats,
-+				    struct ethtool_phy_stats *stats)
-+{
-+	struct dp83tg720_priv *priv = phydev->priv;
-+
-+	stats->tx_packets = priv->stats.tx_pkt_cnt;
-+	stats->tx_errors = priv->stats.tx_err_pkt_cnt;
-+	stats->rx_packets = priv->stats.rx_pkt_cnt;
-+	stats->rx_errors = priv->stats.rx_err_pkt_cnt;
-+}
-+
- /**
-  * dp83tg720_cable_test_start - Start the cable test for the DP83TG720 PHY.
-  * @phydev: Pointer to the phy_device structure.
-@@ -182,6 +315,11 @@ static int dp83tg720_cable_test_get_status(struct phy_device *phydev,
- 
- 	ethnl_cable_test_result(phydev, ETHTOOL_A_CABLE_PAIR_A, stat);
- 
-+	/* save the current stats before resetting the PHY */
-+	ret = dp83tg720_update_stats(phydev);
-+	if (ret)
-+		return ret;
-+
- 	return phy_init_hw(phydev);
- }
- 
-@@ -217,6 +355,11 @@ static int dp83tg720_read_status(struct phy_device *phydev)
- 	phy_sts = phy_read(phydev, DP83TG720S_MII_REG_10);
- 	phydev->link = !!(phy_sts & DP83TG720S_LINK_STATUS);
- 	if (!phydev->link) {
-+		/* save the current stats before resetting the PHY */
-+		ret = dp83tg720_update_stats(phydev);
-+		if (ret)
-+			return ret;
-+
- 		/* According to the "DP83TC81x, DP83TG72x Software
- 		 * Implementation Guide", the PHY needs to be reset after a
- 		 * link loss or if no link is created after at least 100ms.
-@@ -341,12 +484,27 @@ static int dp83tg720_config_init(struct phy_device *phydev)
- 	return genphy_c45_pma_baset1_read_master_slave(phydev);
- }
- 
-+static int dp83tg720_probe(struct phy_device *phydev)
-+{
-+	struct device *dev = &phydev->mdio.dev;
-+	struct dp83tg720_priv *priv;
-+
-+	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
-+	if (!priv)
-+		return -ENOMEM;
-+
-+	phydev->priv = priv;
-+
-+	return 0;
-+}
-+
- static struct phy_driver dp83tg720_driver[] = {
- {
- 	PHY_ID_MATCH_MODEL(DP83TG720S_PHY_ID),
- 	.name		= "TI DP83TG720S",
- 
- 	.flags          = PHY_POLL_CABLE_TEST,
-+	.probe		= dp83tg720_probe,
- 	.config_aneg	= dp83tg720_config_aneg,
- 	.read_status	= dp83tg720_read_status,
- 	.get_features	= genphy_c45_pma_read_ext_abilities,
-@@ -355,6 +513,9 @@ static struct phy_driver dp83tg720_driver[] = {
- 	.get_sqi_max	= dp83tg720_get_sqi_max,
- 	.cable_test_start = dp83tg720_cable_test_start,
- 	.cable_test_get_status = dp83tg720_cable_test_get_status,
-+	.get_link_stats	= dp83tg720_get_link_stats,
-+	.get_phy_stats	= dp83tg720_get_phy_stats,
-+	.update_stats	= dp83tg720_update_stats,
- 
- 	.suspend	= genphy_suspend,
- 	.resume		= genphy_resume,
--- 
-2.39.5
+On 13.12.24 17:20, Jonathan Corbet wrote:
+> Thorsten Leemhuis <linux@leemhuis.info> writes:
+> 
+>> Add a few notes on how the interaction with the stable team works when
+>> it comes to mainline regressions that also affect stable series.
+>>
+>> This removes equivalent paragraphs from a section in
+>> Documentation/process/handling-regressions.rst, which will become mostly
+>> obsolete through this and follow-up changes.
+>>
+>> Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
+>> ---
+>>  Documentation/process/6.Followthrough.rst     | 22 +++++++++++++++++++
+>>  .../process/handling-regressions.rst          | 19 ----------------
+>>  2 files changed, 22 insertions(+), 19 deletions(-)
+>>
+>> diff --git a/Documentation/process/6.Followthrough.rst b/Documentation/process/6.Followthrough.rst
+>> index f9ae3a86ee0c49..763a80d21240f0 100644
+>> --- a/Documentation/process/6.Followthrough.rst
+>> +++ b/Documentation/process/6.Followthrough.rst
+>> @@ -234,6 +234,28 @@ On procedure:
+>>     requests again should ideally come directly from maintainers or happen in
+>>     accordance with them.
+>>  
+>> +Regarding stable and longterm series:
+>> +
+>> + - You are free to leave handling regressions to the stable team if the problem
+>> +   at no point in time occurred with mainline or was fixed there already.
+>> +
+>> + - When receiving reports about regressions in recent stable or longterm kernel
+>> +   series, consider evaluating at least briefly if the issue might happen in
+>> +   current mainline as well -- and if that seems likely, take hold of the
+>> +   report.  If in doubt, ask the reporter to check mainline.
+>> +
+>> + - Fix regressions quickly in mainline, whenever you want to swiftly resolve one
+>> +   that recently made it into a mainline, stable, or longterm release; in urgent
+>> +   cases hence involve Linus to fast-track fixes (see above).  This route is
+> 
+> I'm not quite sure what that sentence is intended to say.  Might
+> something like s/quickly/first/ better convey the intent?  Maybe also
+> s/want/need/ ?
 
+Hmmm. I went with this:
+
+"""
+ - You must fix any regression in mainline first that also happens in
+mainline, stable, or longterm releases due to the same change.  That's
+because the stable team only addresses such problems once they were
+fixed in mainline. In urgent cases hence involve Linus to fast-track
+fixes (see above).
+"""
+
+I liked the old approach a bit better, but yeah, I guess it overloaded
+the first sentence. :-/
+
+Ciao, Thorsten
 
