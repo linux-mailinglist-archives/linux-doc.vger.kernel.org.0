@@ -1,143 +1,162 @@
-Return-Path: <linux-doc+bounces-33612-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33613-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47A7F9FBA51
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Dec 2024 08:56:17 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B68B9FBB3A
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Dec 2024 10:34:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id A9A7818854B7
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Dec 2024 07:56:18 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id AB8C418830B0
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Dec 2024 09:34:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76E4318E373;
-	Tue, 24 Dec 2024 07:56:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9DC3A1AF0C8;
+	Tue, 24 Dec 2024 09:34:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TD/bUWCL"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="hwXdpX9a"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com [209.85.221.68])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96DFF16DEB3;
-	Tue, 24 Dec 2024 07:56:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1049F8C1F
+	for <linux-doc@vger.kernel.org>; Tue, 24 Dec 2024 09:34:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.68
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1735026970; cv=none; b=TyYWNk/Tr0fDO3FDw8OxJwE7Ih/QgQTmWkultZCx4/TfI4E52XRdFT4Ca7OUb8gCwvMJLGO903F8J8VVWX3wPcrYhR6jNbXY+dQZNJ6bpmO4X2R0Wzl6Ax1T/lZ2ts5mr7U7COa4XBn0FJvuWOpAk349y+5JlAfbGClH46Qc5uE=
+	t=1735032880; cv=none; b=Bv3cyLQirgm2LeGzU4maS4ibXy5irEz7bh7oggS1q8akAhoEdpzTB9U7yARelEWaRPnlTDyhHGWMzs17Ldo57f9iSzrlloDfp2ydLC9pmFwlj/EcGouZ/wLFY5lq/a7JVWrWvOlrn/uNZDh315Y/f+Xkl8wtRUX6ee3eZrZQlLk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1735026970; c=relaxed/simple;
-	bh=DYfPZ39MyRj475906l0HgxSRj//ePs6qi2xtnlendVw=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
-	 MIME-Version:Content-Type; b=o6ugxPzdkJFhAoMG5WRPKnuECq//RuJ6gLjnezTdrZteY4D49D+Gig6LEglDe9Wzr8uXXzTCm5XJo2tCscIlif+0142Nmrah+hx5XzddFGeJjvXZAJ0pILDfAXpOti0rgHMXSv4d4AlxjX+Z/xrZ8IXOvueDg3cu5zXSJjSKIV4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TD/bUWCL; arc=none smtp.client-ip=209.85.208.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-5d84179ef26so3974025a12.3;
-        Mon, 23 Dec 2024 23:56:08 -0800 (PST)
+	s=arc-20240116; t=1735032880; c=relaxed/simple;
+	bh=gTP11STaOambNCrfwCro80qN7oJiUElgow1HkycNbHk=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=sW2XZ70WhnS7edvOMzm4oGy8QkCLzh5wPcOaOtbZGTwPclDCQRLWBpifHckhhzDosLhHR8Ze6Pe2awQ5OwCBdLHwCSayh62FNswd/xE7i1xKCcHgMsTveRomn07poKmROf1MYl1PrD3Ee++0LtYGEdaOF8hnJh4gHVAjjeOPJV0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=hwXdpX9a; arc=none smtp.client-ip=209.85.221.68
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Received: by mail-wr1-f68.google.com with SMTP id ffacd0b85a97d-385e0e224cbso2691649f8f.2
+        for <linux-doc@vger.kernel.org>; Tue, 24 Dec 2024 01:34:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1735026967; x=1735631767; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:references
-         :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=DYfPZ39MyRj475906l0HgxSRj//ePs6qi2xtnlendVw=;
-        b=TD/bUWCLKHO74Hfg9y0e1TcVym8We7HD1LdXLfWRyfzWGCl7J4NUDoeFNidm/ebLjo
-         3vpmKMRGkzei7lnoHUgY2MaTEZJqSZ1yMVnGPEoUXH+jLS22WD8nNLjiaG3KmoTQBhc8
-         qRXlKvXyuTlixuODiz8x1lBPEj+pz6sGdHspR5ZYKTByNyVjaEsMKYl+v4ncViN5/91g
-         xFvS3U/v3AQ0gXMh3ecFrwcKvbS+K+09m9TAoV5S1DeMwFyRnxEUWsvVFVGuh0ei6Jcf
-         nvtT7aUmMaJe8vHd0akDyRClTm4qq2osAFl/2MvZdxcVvmTlGmKavBzq+xpiADOQIRIR
-         /S3A==
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1735032876; x=1735637676; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=N0Ght693j/xuIl81ogZ/rFRsFKJQFysaPVf5fimjLkw=;
+        b=hwXdpX9aJZ5IbBsSfNkslk7hwGc27j9Y1L0Lmy6P6PjD1bfBy7bo5+NFgNQUxnJCSo
+         aixo/jYbuPmFTJ9ptZH5ajKlJOv1SIQp6MWSh8/++ya+neqBRkQtvsMeALJzIR7wX74u
+         zVUrHKsQVedsEAcxJ3mIoSaRpQLfj+MhnENHH2GYejVVsGgqqFSB7Q9Tor9r+X1mf5D5
+         g9Cpy45tjl2nRsRbN2IiR6y/t7DGxZ/AeSKHF2O0tmyVG9bweJkr9CidWtZow6T+bY7B
+         4VquAESpFwiWTgw06lDDoJuhLbca7IYRadf8O46mSE0x40wo2rY+CAeShR8DC6sVm8WX
+         jO1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1735026967; x=1735631767;
-        h=content-transfer-encoding:mime-version:message-id:references
-         :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=DYfPZ39MyRj475906l0HgxSRj//ePs6qi2xtnlendVw=;
-        b=vtj85CvJQgzNnyvHTrZQbEKKXklUeVr5NzXTMboC+YTK1J4wRrf3IIMK0iZ0I4oXW8
-         b3t2qeMoxKZ7URQ294+ekZELkzud/72XOqw1uPGGg5G4E+W7VtFNWzVDu74oWPuff4QD
-         sTqxItJS5ZdG89U14HPByFH3uIMdu+ZA1xEW99MDbJhP8PxT+FVcg/wXX6ClDTguhZIW
-         lEkwH0MYIqJ/ADB+IjZ//CjBYOlq9as2n3Aol4AR1VJW/fFwlDt3JXgP0WMwT6QEXUtP
-         VmViDMbKA/a5MGOvwShgIP5njfxovi1nEBaW5b1z8FUgQA+xOCNEL7cUs88oFMGSmVbM
-         CzDQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVcPpfsEzlbvbQDCEOeHDv7TsxRHAFXVd7eO9oQDgGLtcBbt0WZVKbnfWSwLExDgEZx0C2zszuQ@vger.kernel.org, AJvYcCWkObdZiuvWLIHOvzL2Uyco92yKTszn65HzgMxLjSZYuix5CnqDh09mf20Y/7v8m4Boeg8mtApoN4A=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxAPJjm4x8+f/qZJO7YWS181/hX8P8gt85V8jvAF5pZMGTl8Xq0
-	Rze+ovEtnIs0SLnf9ITiD0r5eaGVBm9cOx4B5xjOdoBradBwcnfE
-X-Gm-Gg: ASbGncsK6aCKVqlknEGzwEoNpdJ5GhU//e+DdK0hK83pWUT7PYYCx4CotwzPqsjL0SJ
-	g/k/3k7a+fQHz/nvu9onkhAawCVbCtsbRULFa8OkAXBz0iKl6o4cWeCG4DGtbxXZ/QHODWf4zz/
-	JOt9pZ17Czs+zSv9Xhzu1w1OsEEZ5Ds607uQurOgMNRtDw83+CbEyz0Pf3jFFuHoj5fe/6+iGyN
-	wfx+phnLptaBS4ljRIiHyctjYGqfPhUcLCFEFVpJ/rJg4TA+fF+l3qnSQ==
-X-Google-Smtp-Source: AGHT+IH3nULCTvzYbryqDPG24PJWH+1wwHyXoPc9vgdNt1AHig0ol6/zEmoM9ghe6monEtsb9DhNhA==
-X-Received: by 2002:a05:6402:50d2:b0:5d3:d917:dd90 with SMTP id 4fb4d7f45d1cf-5d81dd642e4mr13413925a12.6.1735026966591;
-        Mon, 23 Dec 2024 23:56:06 -0800 (PST)
-Received: from [127.0.0.1] ([82.102.65.251])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5d80675a6d0sm5864804a12.14.2024.12.23.23.56.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 23 Dec 2024 23:56:05 -0800 (PST)
-Date: Tue, 24 Dec 2024 09:55:00 +0200
-From: Sergey Ryazanov <ryazanov.s.a@gmail.com>
-To: Jinjian Song <jinjian.song@fibocom.com>, chandrashekar.devegowda@intel.com,
- chiranjeevi.rapolu@linux.intel.com, haijun.liu@mediatek.com,
- m.chetan.kumar@linux.intel.com, ricardo.martinez@linux.intel.com,
- loic.poulain@linaro.org, johannes@sipsolutions.net, davem@davemloft.net,
- edumazet@google.com, kuba@kernel.org, pabeni@redhat.com
-CC: linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
- linux-doc@vger.kernel.org, angelogioacchino.delregno@collabora.com,
- linux-arm-kernel@lists.infradead.org, matthias.bgg@gmail.com, corbet@lwn.net,
- linux-mediatek@lists.infradead.org, helgaas@kernel.org,
- danielwinkler@google.com, korneld@google.com, andrew+netdev@lunn.ch,
- horms@kernel.org
-Subject: Re: [net v3] net: wwan: t7xx: Fix FSM command timeout issue
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20241224041552.8711-1-jinjian.song@fibocom.com>
-References: <20241224041552.8711-1-jinjian.song@fibocom.com>
-Message-ID: <CA4E0537-84FE-4E1A-8BB6-7636D3799E39@gmail.com>
+        d=1e100.net; s=20230601; t=1735032876; x=1735637676;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=N0Ght693j/xuIl81ogZ/rFRsFKJQFysaPVf5fimjLkw=;
+        b=seGKujTLqGKOHC+Uio4oLks6YKqMXteipio/X28jxpsgsp6qoIEGMxbUzoceWFWiPQ
+         V+gmzoXd3uOEgdVwU+UoVCdYe3+vED4qf3tuXVL+WcuuAd/Q2kZwiQl9ANDTUBvIN1de
+         c5W2iY3eHL7IbQF2z2vsH7wbXqIVA4zC1dBmJzCOlc68OFxJgwvo5HnNSf2kQRTcfcpt
+         QF7KpGvE+sa0rq/OdvtAE/L7JvqaSGrs4GrLhyITGfjYiJK2IVhyd8hyzppyNdXWWyAp
+         f+68GxNHgbwJc94Wivs559NLuarRKoEv4dlgvv5LBDiiUG9Va5m1yZG8w7dwfqPTbnPZ
+         jo7Q==
+X-Forwarded-Encrypted: i=1; AJvYcCVlN47HH9bTCdoKT7On/bWwFwQIhltcLfWaPFV09j3VoFgCEWRYBoxOJ/WcSqmBEtE+dd2raWVE9uA=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz+XdStkFbb+XPYsQjEWTbU9YukTG5i2bVNtfKzodhZJnBb6J4o
+	TKcMglBqbGZqz+jod6T7EF88UXtabz3djA71U3zPFoPbxZvAIvBkmJHlUwwiwMT+rejRY8jzG0W
+	RJxqTYjBS
+X-Gm-Gg: ASbGnctHcvd6x/Eh5093HxWWwnZ1XaejYcezozzILbew8OqTk0vUBVJRLDXXfX1FAIn
+	oObAu6JFAGQyVpXCKSyqa1jGuty3S3KK3QNOROXHFIVoUOPrS0e0aiwPjj36LbfsNt9sG5i2pE7
+	H7Jt37P+IZUX9t/QzmTUb4CFve+7+bQR5mzpXcdVsVvqtRkW68y2QJ/5q7Vt+EtTFvsm/Dnm+zP
+	AO1QuzjgFfAVk8MlUdwgh4UyV8nZaNcia/IqwrGRRBu7qWY4wfbQ/SyvNtCsGrN1wSsP/ctRnY0
+	YNVk5nTjiohUm5QVedJAdPRV9i5ErysHml87N+ah4LKrhT9OTQ==
+X-Google-Smtp-Source: AGHT+IEsgDxRPzkbXXtlK3VaH4Q+DJ6FgkizyiG5Fyr+eZyjLexw0tZrYi1npUGFdYkBQ5L2oJLvNA==
+X-Received: by 2002:a05:6000:188d:b0:385:ebea:969d with SMTP id ffacd0b85a97d-38a221fb1a9mr13669120f8f.22.1735032876048;
+        Tue, 24 Dec 2024 01:34:36 -0800 (PST)
+Received: from [192.168.1.62] (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net. [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43661219a7csm160932535e9.24.2024.12.24.01.34.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 Dec 2024 01:34:35 -0800 (PST)
+From: Julien Stephan <jstephan@baylibre.com>
+Subject: [PATCH RFC v2 0/4] iio: adc: ad7380: add alert support
+Date: Tue, 24 Dec 2024 10:34:29 +0100
+Message-Id: <20241224-ad7380-add-alert-support-v2-0-7c89b2bf7cb3@baylibre.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACWAamcC/4VOSw6CMBC9Cpm1NW1BKa5MTDyAW8OidEZpghRbI
+ BLC3a1wAFcv7zdvZgjkLQU4JTN4Gm2wro1E7hIwtW6fxCxGDpLLTHBZMI15qngEZLoh37MwdJ2
+ LmCFHPBrSyiDEeufpYT/r6TvcrhcoN9HTe4gz/eb8xNqG3vlp/WEUa/7/3CiYYMjTQ5FxUeVKn
+ Ss9NbbytDfuBeWyLF88AGCr3QAAAA==
+X-Change-ID: 20241029-ad7380-add-alert-support-4d0dd6cea8cd
+To: Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
+ David Lechner <dlechner@baylibre.com>, Jonathan Cameron <jic23@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.14.2
 
-On December 24, 2024 6:15:52 AM GMT+02:00, Jinjian Song <jinjian=2Esong@fib=
-ocom=2Ecom> wrote:
->When driver processes the internal state change command, it use an
->asynchronous thread to process the command operation=2E If the main
->thread detects that the task has timed out, the asynchronous thread
->will panic when executing the completion notification because the
->main thread completion object has been released=2E
->
->BUG: unable to handle page fault for address: fffffffffffffff8
->PGD 1f283a067 P4D 1f283a067 PUD 1f283c067 PMD 0
->Oops: 0000 [#1] PREEMPT SMP NOPTI
->RIP: 0010:complete_all+0x3e/0xa0
->[=2E=2E=2E]
->Call Trace:
-> <TASK>
-> ? __die_body+0x68/0xb0
-> ? page_fault_oops+0x379/0x3e0
-> ? exc_page_fault+0x69/0xa0
-> ? asm_exc_page_fault+0x22/0x30
-> ? complete_all+0x3e/0xa0
-> fsm_main_thread+0xa3/0x9c0 [mtk_t7xx (HASH:1400 5)]
-> ? __pfx_autoremove_wake_function+0x10/0x10
-> kthread+0xd8/0x110
-> ? __pfx_fsm_main_thread+0x10/0x10 [mtk_t7xx (HASH:1400 5)]
-> ? __pfx_kthread+0x10/0x10
-> ret_from_fork+0x38/0x50
-> ? __pfx_kthread+0x10/0x10
-> ret_from_fork_asm+0x1b/0x30
-> </TASK>
->[=2E=2E=2E]
->CR2: fffffffffffffff8
->---[ end trace 0000000000000000 ]---
->
->Use the reference counter to ensure safe release as Sergey suggests:
->https://lore=2Ekernel=2Eorg/all/da90f64c-260a-4329-87bf-1f9ff20a5951@gmai=
-l=2Ecom/
->
->Fixes: 13e920d93e37 ("net: wwan: t7xx: Add core components")
->Signed-off-by: Jinjian Song <jinjian=2Esong@fibocom=2Ecom>
+Hello,
 
-Acked-by: Sergey Ryazanov <ryazanov=2Es=2Ea@gmail=2Ecom>
+The ad738x family includes a built-in alert mechanism for early
+detection of out-of-bounds conversion results. This series introduces
+this functionality to the ad7380 family.
+
+As a reminder, an RFC was sent [1] with several open questions.
+
+Here is a summary of the changes made:
+
+- I now have a better understanding of the alert high/low registers, and
+  it is much simpler than I initially thought: users can use the same
+scale as the raw value; we just need to extract the 12 MSBs.
+- IRQs are now disabled by default and only enabled before read_raw and
+  buffered_read operations.
+- I implemented the reset timeout mechanism, as suggested in the RFC, to
+  avoid generating too many events during buffered reads (this has no
+effect on read_raw).
+- Reading registers via debugfs no longer triggers events.
+- The reset_timeout attribute is added only if an IRQ is present in the
+  device tree. However, the high/low thresholds and enable attributes
+  are always available. This allows configuration of the thresholds and
+  alert enablement even when no interrupts are defined in the device tree.
+  For example, a user can enable alerts and hardwire the interrupt line,
+  without relying on user events.
+
+- I added an alert section to the documentation.
+
+- Two preliminary commits have been added to this series:
+  - A cleanup patch to remove iio_device_claim_direct_scoped calls.
+  - A patch to implement regcache.
+
+[1]: https://lore.kernel.org/r/20241029-ad7380-add-aleyyrt-support-v1-1-d0359401b788@baylibre.com
+
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+Changes in v2:
+- fix read/write high/low thresholds
+- add reset_timeout mechanism for buffered reads
+- implement regcache
+- add cleanup patch to remove iio_device_claim_direct_scoped calls
+- add alert section in the Documentation page
+- Link to v1: https://lore.kernel.org/r/20241029-ad7380-add-aleyyrt-support-v1-1-d0359401b788@baylibre.com
+
+---
+Julien Stephan (4):
+      iio: adc: ad7380: do not use iio_device_claim_direct_scoped anymore
+      iio: adc: ad7380: enable regmap cache
+      iio: adc: ad7380: add alert support
+      docs: iio: ad7380: add alert support
+
+ Documentation/iio/ad7380.rst |  56 ++++-
+ drivers/iio/adc/ad7380.c     | 531 +++++++++++++++++++++++++++++++++++++++----
+ 2 files changed, 537 insertions(+), 50 deletions(-)
+---
+base-commit: 5ab39233382c621d3271cc274d1534e1b687f4d3
+change-id: 20241029-ad7380-add-alert-support-4d0dd6cea8cd
+
+Best regards,
+-- 
+Julien Stephan <jstephan@baylibre.com>
+
 
