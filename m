@@ -1,130 +1,210 @@
-Return-Path: <linux-doc+bounces-33697-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33699-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F49E9FD0A3
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 07:50:03 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AF6C9FD22C
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 09:44:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BB66F3A0579
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 06:49:58 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 16CAA162AC3
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 08:44:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1FB491369BB;
-	Fri, 27 Dec 2024 06:49:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8E50914B06E;
+	Fri, 27 Dec 2024 08:44:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Pk4tX6D2"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="Hgy9W2uz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail-m12748.qiye.163.com (mail-m12748.qiye.163.com [115.236.127.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB15D7082D;
-	Fri, 27 Dec 2024 06:49:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AACEF154C07
+	for <linux-doc@vger.kernel.org>; Fri, 27 Dec 2024 08:44:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.236.127.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1735282199; cv=none; b=lrlNUTLABUGOLSlo+Af7P9VhLYrFXHD8sO8cPfx89c6FZAv7uukQUuDcUZvc/nOTrd6QMaz9uHGokkD9LQoxk+S2aPz6707v162fFQbB3z8o1zrtUfadKdSj7jAMrZ+f+vLf2+sN11Vkma7h6um5fvad9wPCqdy6tFBqvDO4zbI=
+	t=1735289053; cv=none; b=Fkgubx858EkrxqcH5ZHjffQJdsL4E6u2HNh/qxM82EtMr319gnF2Uep1zBGB0Qj8iwFl/ftCYZYJbRw4HFL1+JJxVwxGVbE3tSJ2Mv+KqQNQhEnAjjL1aO+Ik1XEYi/ZRig1bpOTi83Qvsl1LQs9XpYlXnDUlAdAKXJuZM/pzEs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1735282199; c=relaxed/simple;
-	bh=hoLcZ+iT2dPn/slVVxv5fcZZF+pgka9JveM30viNiMg=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=LcK7p1c4XiWw9Zy58H5pNlEP7rb8OfFOSWzE5HCFWibFQEbRYR2iJKloYNPal0nQ6Hg7OitbloUK7tiFUCiau7qafhL4lMeqCMZEf8llJk6IEMNoN0p6nV/fzX2jTUvAGwpBjAjx3E2I20R++SrBPGBus1E+NrLWWpY1yab0QCw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Pk4tX6D2; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F9F1C4CEDF;
-	Fri, 27 Dec 2024 06:49:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1735282198;
-	bh=hoLcZ+iT2dPn/slVVxv5fcZZF+pgka9JveM30viNiMg=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=Pk4tX6D29jsCMtwnAvNvxrSrih/vzfBSdcvD8vkIgdKLeLk9sATjFybus2OU9E9Sh
-	 T/aNUr8TXUhInanpcfKjUANfyOS2V2WAxtgMiqPfuF/CH4qsiNwuUfYJzPVUuYSoIH
-	 s9jkBwrUWn8yIzTVjvVZGY6TMZ4++SU6hWdQu/bpHcrxAeej4bsi2qZZyq318DSZjm
-	 1yMiS2ZcrjBiCjIgK/FJNZV+tBNzQYXZYLRU+vscFJJub8e0ZVeVJ4XQRJOWwuJMl0
-	 HOvLddb4jAJ3iZWn2VppuRz8yUxkbou4BRoGNUxpoCTGulKsack2zq1gJJrczEsbDp
-	 7EWiYQtqb1KnA==
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5401c52000dso8057190e87.3;
-        Thu, 26 Dec 2024 22:49:58 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCVQwoR6cc3qcjbB97WN500DQsvEMwTiE5VfltZwePHQyoNCKihGd2XQraURt+68MnGYEggG1736srd9LMTK@vger.kernel.org, AJvYcCVu2vYZtwPnMY1lHyMqc1WkDARXLFAvNeYqoc0WkyalKiXIKNxJOoHwEODShXmyKOpbuxWVKfffL2k=@vger.kernel.org, AJvYcCXES1E8IhETp5Q9gG81edEpxtgzWcfuWCmUEneziPnXKdxZ3uEiTxWEYVI9y0+ONrFGMCiQwR0tiT7ZMoUs@vger.kernel.org, AJvYcCXJTWu4QIX8vnetPd8AtDfRI646A3wc/K3RcK6fe/h1SPrMz7Y64yHa6oDcxn6RdLSQJWxeqkNk3+4SOeJp4Nc=@vger.kernel.org, AJvYcCXrixZUEGfNo6aJuTj23yrGPOlMVgpn/hQNPof/7Wmm/akE69Ho9Bnz2ULnxhN5m79sBa6hYMidMlH4Go02fQ==@vger.kernel.org
-X-Gm-Message-State: AOJu0YzI7XQElrfRPr64Kz8/9Ry+RaM7XEEJoNTXlPJduFJKwF0vb19a
-	gzzdXSZ7ZhbYzWBk4ZTPZGBCI3kBiYiESRpfRK5wLANga4AGrp/4Bx/J05Hjp6+y5Sz2pxwVRaj
-	NkjoY261A/xKEfkEblFkgPZY6HSg=
-X-Google-Smtp-Source: AGHT+IEfRIbAUfDGKqjk6EcYuB0PBijqceiyA7AyuHs+mi/poGZ6JbhNivinK0tX7pp0w8VpBEdhwiU4O5CAAZ1FhBA=
-X-Received: by 2002:a05:6512:e98:b0:541:21d7:7056 with SMTP id
- 2adb3069b0e04-542295301b4mr8226939e87.17.1735282196979; Thu, 26 Dec 2024
- 22:49:56 -0800 (PST)
+	s=arc-20240116; t=1735289053; c=relaxed/simple;
+	bh=6sCxE+m9I4hJIg8EyGrMQRtUSzsM/aJ1HrVdoiLHxRM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=iB9NxgY7z84X469iqGlb7mMRMz8fRGrCV08W7RLfgv8fQzRuExF8yDnit/0jbtac1AjkkMZwnAEG3MiopoTOPJD4vgYA+E9sG6yxRxSDa2p41e56u+ZsD+ltAdMlXBkT5qbIcJpFKiN7VmDKvilNVGHJsS5MROn2jiNTwQbAIxw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=Hgy9W2uz; arc=none smtp.client-ip=115.236.127.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
+Received: from fedora.localdomain (unknown [1.198.31.205])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 6fd327f9;
+	Fri, 27 Dec 2024 16:28:42 +0800 (GMT+08:00)
+From: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
+To: alexs@kernel.org,
+	si.yanteng@linux.dev,
+	corbet@lwn.net
+Cc: zhaoyuehui@cqsoftware.com.cn,
+	linux-doc@vger.kernel.org,
+	Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
+Subject: [PATCH] docs/zh_CN: Add security digsig Chinese translation
+Date: Fri, 27 Dec 2024 16:28:18 +0800
+Message-ID: <20241227082836.16078-1-zhaoshuo@cqsoftware.com.cn>
+X-Mailer: git-send-email 2.47.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20241223-extended-modversions-v11-0-221d184ee9a7@google.com> <20241223-extended-modversions-v11-3-221d184ee9a7@google.com>
-In-Reply-To: <20241223-extended-modversions-v11-3-221d184ee9a7@google.com>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Fri, 27 Dec 2024 15:49:20 +0900
-X-Gmail-Original-Message-ID: <CAK7LNARGJ8UMaiGC71f_wfk5ZqwhV2WD_Zf3NsQuS-+u_uT-iA@mail.gmail.com>
-Message-ID: <CAK7LNARGJ8UMaiGC71f_wfk5ZqwhV2WD_Zf3NsQuS-+u_uT-iA@mail.gmail.com>
-Subject: Re: [PATCH v11 3/5] modules: Allow extended modversions without basic MODVERSIONS
-To: Matthew Maurer <mmaurer@google.com>
-Cc: Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
-	Christophe Leroy <christophe.leroy@csgroup.eu>, Naveen N Rao <naveen@kernel.org>, 
-	Madhavan Srinivasan <maddy@linux.ibm.com>, Luis Chamberlain <mcgrof@kernel.org>, 
-	Petr Pavlu <petr.pavlu@suse.com>, Sami Tolvanen <samitolvanen@google.com>, 
-	Daniel Gomez <da.gomez@samsung.com>, Nathan Chancellor <nathan@kernel.org>, 
-	Nicolas Schier <nicolas@fjasle.eu>, Miguel Ojeda <ojeda@kernel.org>, 
-	Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, 
-	Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
-	Benno Lossin <benno.lossin@proton.me>, Andreas Hindborg <a.hindborg@kernel.org>, 
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
-	Jonathan Corbet <corbet@lwn.net>, linuxppc-dev@lists.ozlabs.org, 
-	linux-kernel@vger.kernel.org, linux-modules@vger.kernel.org, 
-	linux-kbuild@vger.kernel.org, rust-for-linux@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaTRpOVkNITUoaQkgfTxlOTVYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUpCQ1VISlVJS05ZV1kWGg8SFR0UWUFZT0tIVUpLSEpPSExVSktLVU
+	pCS0tZBg++
+X-HM-Tid: 0a94073b6bf209d0kunm6fd327f9
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ORw6LAw*KDISFzkJNBITGUs8
+	OA8aCgtVSlVKTEhOSUNDSklITUpPVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
+	WRILWUFZSlVKQkNVSEpVSUtOWVdZCAFZQU9ISkk3Bg++
+DKIM-Signature:a=rsa-sha256;
+	b=Hgy9W2uzByULQwf+74yoj4hm7DujGwnsm8XZpINqulqg5fsOL+8Eo+GQZdtYRsXHDPhWCHUdfi4rcY7qWUngdKe/Y5fE/7cFJKcIJkpJcrcT4yr0RlQkMYXcrGgFpy02DdYCYececSbnkhyGo5DspcFxkc2ENuwP4vCYeUUw49o=; s=default; c=relaxed/relaxed; d=cqsoftware.com.cn; v=1;
+	bh=2MX2+jhGysQkPZ9R3Qy2iiG9T+Vk52b6Hlj3J78y4as=;
+	h=date:mime-version:subject:message-id:from;
 
-On Tue, Dec 24, 2024 at 5:13=E2=80=AFAM Matthew Maurer <mmaurer@google.com>=
- wrote:
->
-> If you know that your kernel modules will only ever be loaded by a newer
-> kernel, you can disable BASIC_MODVERSIONS to save space. This also
-> allows easy creation of test modules to seee how tooling will respond to
+Translate .../security/digsig.rst into Chinese.
 
+Update the translation through commit d56b699d76d1
+("Documentation: Fix typos").
 
-seee -> see
+Signed-off-by: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
+---
+ .../translations/zh_CN/security/digsig.rst    | 100 ++++++++++++++++++
+ .../translations/zh_CN/security/index.rst     |   2 +-
+ 2 files changed, 101 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/security/digsig.rst
 
+diff --git a/Documentation/translations/zh_CN/security/digsig.rst b/Documentation/translations/zh_CN/security/digsig.rst
+new file mode 100644
+index 000000000000..96560d52859e
+--- /dev/null
++++ b/Documentation/translations/zh_CN/security/digsig.rst
+@@ -0,0 +1,100 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/security/digsig.rst
++
++:翻译:
++ 赵硕 Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
++
++===============
++数字签名验证API
++===============
++
++
++.. 内容
++
++   1.介绍
++   2.API
++   3.用户空间工具
++
++
++介绍
++====
++
++数字签名验证API提供了一种验证数字签名的方法。
++目前，数字签名被IMA/EVM完整性保护子系统使用。
++
++数字签名验证是GnuPG多精度整数(MPI)库精简后的内核移植版本来实现的。
++该内核版本提供了内存分配错误处理，已根据内核编码风格进行重构，并修复
++了checkpatch.pl报告的错误和警告。
++
++公钥和签名由头部和MPIs组成::
++
++	struct pubkey_hdr {
++		uint8_t		version;	/* 密钥格式版本 */
++		time_t		timestamp;	/* 密钥时间戳，目前为0 */
++		uint8_t		algo;
++		uint8_t		nmpi;
++		char		mpi[0];
++	} __packed;
++
++	struct signature_hdr {
++		uint8_t		version;	/* 签名格式版本 */
++		time_t		timestamp;	/* 签名时间戳 */
++		uint8_t		algo;
++		uint8_t		hash;
++		uint8_t		keyid[8];
++		uint8_t		nmpi;
++		char		mpi[0];
++	} __packed;
++
++keyid等同对整个密钥的内容进行SHA1哈希运算后的第12到19字节。
++签名头部用于生成签名的输入。这种方法确保了密钥或签名头部无法更改。
++它保护时间戳不被更改，并可以用于回滚保护。
++
++API
++===
++
++目前API仅包含一个函数::
++
++	digsig_verify() - 使用公钥进行数字签名验证
++
++	/**
++	* digsig_verify() - 使用公钥进行数字签名验证
++	* @keyring:   查找密钥的密钥环
++	* @sig:       数字签名
++	* @sigen:     签名的长度
++	* @data:      数据
++	* @datalen:   数据的长度
++	* @return:    成功时返回0，失败时返回 -EINVAL
++	*
++	* 验证数据相对于数字签名的完整性。
++	* 目前仅支持RSA算法。
++	* 通常将内容的哈希值作为此函数的数据。
++	*
++	*/
++	int digsig_verify(struct key *keyring, const char *sig, int siglen,
++				  const char *data, int datalen);
++
++用户空间工具
++============
++
++签名和密钥管理实用工具evm-utils提供了生成签名、加载密钥到内核密钥环中的功能。
++密钥可以是PEM格式，或转换为内核格式。
++当把密钥添加到内核密钥环时，keyid定义该密钥的名称：下面的示例中为5D2B05FC633EE3E8。
++
++以下是keyctl实用工具的示例输出::
++
++	$ keyctl show
++	Session Keyring
++	-3 --alswrv      0     0  keyring: _ses
++	603976250 --alswrv      0    -1   \_ keyring: _uid.0
++	817777377 --alswrv      0     0       \_ user: kmk
++	891974900 --alswrv      0     0       \_ encrypted: evm-key
++	170323636 --alswrv      0     0       \_ keyring: _module
++	548221616 --alswrv      0     0       \_ keyring: _ima
++	128198054 --alswrv      0     0       \_ keyring: _evm
++
++	$ keyctl list 128198054
++	1 key in keyring:
++	620789745: --alswrv     0     0 user: 5D2B05FC633EE3E8
+diff --git a/Documentation/translations/zh_CN/security/index.rst b/Documentation/translations/zh_CN/security/index.rst
+index 92e2d8a7dec8..c73cd289ac3e 100644
+--- a/Documentation/translations/zh_CN/security/index.rst
++++ b/Documentation/translations/zh_CN/security/index.rst
+@@ -16,6 +16,7 @@
+    :maxdepth: 1
+ 
+    lsm
++   digsig
+ 
+ TODOLIST:
+ * credentials
+@@ -28,7 +29,6 @@ TODOLIST:
+ * self-protection
+ * siphash
+ * tpm/index
+-* digsig
+ * landlock
+ * secrets/index
+ * ipe
+-- 
+2.47.1
 
-> modules that only have the new format.
->
-> Signed-off-by: Matthew Maurer <mmaurer@google.com>
-> ---
->  kernel/module/Kconfig    | 15 +++++++++++++++
->  scripts/Makefile.modpost |  1 +
->  scripts/mod/modpost.c    | 19 +++++++++++--------
->  3 files changed, 27 insertions(+), 8 deletions(-)
->
-> diff --git a/kernel/module/Kconfig b/kernel/module/Kconfig
-> index 9568b629a03ce8289d3f3597eefc66fc96445720..5f701391ab12c7d1b3ca496c9=
-b3443c5a76a8745 100644
-> --- a/kernel/module/Kconfig
-> +++ b/kernel/module/Kconfig
-> @@ -217,6 +217,21 @@ config EXTENDED_MODVERSIONS
->           The most likely reason you would enable this is to enable Rust
->           support. If unsure, say N.
->
-> +config BASIC_MODVERSIONS
-> +       bool "Basic Module Versioning Support"
-> +       depends on MODVERSIONS
-> +       default MODVERSIONS
-
-Nit:
-
-            default y
-
-is simpler.
-
-
---
-Best Regards
-
-Masahiro Yamada
 
