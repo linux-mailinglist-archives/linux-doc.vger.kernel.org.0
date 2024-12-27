@@ -1,151 +1,162 @@
-Return-Path: <linux-doc+bounces-33716-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33718-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8B2B9FD7C8
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 22:10:00 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 768BC9FD83D
+	for <lists+linux-doc@lfdr.de>; Sat, 28 Dec 2024 00:20:29 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id BE2C816456D
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 21:09:57 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0BBA418857B1
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 23:20:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 496811F892C;
-	Fri, 27 Dec 2024 21:08:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4FCB9157472;
+	Fri, 27 Dec 2024 23:20:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="o5jlTrkx"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Evy0Xq3V"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E12C1F2C45;
-	Fri, 27 Dec 2024 21:08:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCD1CC8DF;
+	Fri, 27 Dec 2024 23:20:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1735333718; cv=none; b=M6rR9eShTGQzB09rGMJmpawhZbrS1VEmqzzF1v5iCOKCRoelVgYA6EtWfrnk/yaKW5bXJsgD9Na3Wo1hc4FYAzTOHvO+6JNfyjLM5oqPeKOAXhHktKGVaBiOpg8IB8iM7RxTyM0S4lca6sylkhjYxtDqD0rD/FXYo7fCDOwxIN8=
+	t=1735341624; cv=none; b=jUTXK+R/ZJUCiBAo9NlaNIkbHNheKnEjpNeQvYgUOPIzriHrs41CngNCSDsC5CJAm8NWMDwE//AZgTS7RUR8BwCITNKh9bkM7ZwfL1vsjUn9OV/0mJWukRWsl0A4WMhIrZ4RG8uI7wyUmagTGIebykLuXgcZUwPjfI/gyBu77Dw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1735333718; c=relaxed/simple;
-	bh=ZbbHwYTvObdK/b1twjLv8JU3nRNHBdenJ+FrDPH80HA=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=I2TdYhDB2wklZk6253leLwY+MorHyfp6MMJ0qfPqVMfdBKP9hl9LzO8grGchUTilwySHqjNvnVVSiEs5rQh4su6P+Zu3NwH8z/xWHs4apujL1l42Dh0IEGyjFj9o9jeDzBV5AvtLljz3z+DOBK+uKVNIZPh8pihuwlN1ui1mOjc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=o5jlTrkx; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74C85C4CED6;
-	Fri, 27 Dec 2024 21:08:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1735333717;
-	bh=ZbbHwYTvObdK/b1twjLv8JU3nRNHBdenJ+FrDPH80HA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=o5jlTrkx5zTKZTuesqU5n+9f0OdlVA6hmzTbZPvQ5JKsJVX4iiWKvrhvlnTRd7OI1
-	 jMg2scciox/wPAFbbig/SR6u3qijlgCxEEwgwM3B/YUnHK4It0ucwis2zE64g0yKnl
-	 O4Pk/AaoN0liR3uJS5oabbMQA8hX1kHsOca2EXsUNaG05xng6BhB7HbMJfnxS2fkme
-	 swIsyhbsbQT8JA67gSg8xulL9WxUmLaRtujGTryjBLHFdZl7HSd2+JrJi0koki9Y/Q
-	 gX59WWnzh00P4rEsKygPW7X7H0VMXN9ENEovOPWSQWlGqR5Ex+JT/AMUvxB1TUnanB
-	 9kZE6ytcH8XLA==
-From: SeongJae Park <sj@kernel.org>
-To: 
-Cc: SeongJae Park <sj@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	damon@lists.linux.dev,
-	kernel-team@meta.com,
+	s=arc-20240116; t=1735341624; c=relaxed/simple;
+	bh=DtdIjNi5SmZ3ICYjN9r1koy0o2YaEk6RdtyV0k/nmsM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=R/BFvJcL9JEWvvAe40MLT0QdSmt7IwHjM3vAMGelmDLwGPmZOcfAauSCTpjB9k7KB3rac9K0VaGMWCpuqOt665SUb7EfuGsX/YnfsCs24N6rIJA6ENrRCUEtfHtk/P8v8Z8X7CuY/XZoovpWvpl+hiUbMdHFR6IJystPU8AJc3A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Evy0Xq3V; arc=none smtp.client-ip=209.85.214.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-21670dce0a7so29493285ad.1;
+        Fri, 27 Dec 2024 15:20:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1735341622; x=1735946422; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=O+qpERGQ2resnOQkPDO4Vf/ogrIj37On1iFQNWG1F5k=;
+        b=Evy0Xq3VFn24JQsSvu0ZEcKW5VNlnVOMSvXCcGS7nFq7JsJl67BCmLmUrvpoQehsqc
+         G7p9i4QdH3Xs8EUjqEpglcKtsQ07dQLtqfHnJdbAePVHe08Mif6DNZPLBGypHMDIBg5P
+         0BLH23QzPIOqpqTBr8UDydpiAwB7ujVclh0BXN9pQBuRxY5dAWiKm6c3tTarT8sq+Hbl
+         zKqBhOgh7dXvImeS3Kyz9m5IYJXwLi9WD7zqNKYuxWbNWSe9c8sYekzMeh7wGFo00Kg6
+         Vh3Sl3drsxoiqvvOhxZL+5jPx1W3ZxSjwaTbc8oRfo+/C1yOIUGsqdj+AKGlXLoH+RI6
+         GKuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1735341622; x=1735946422;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=O+qpERGQ2resnOQkPDO4Vf/ogrIj37On1iFQNWG1F5k=;
+        b=MrlxnjKN4YAoaF6CX59jQGqZNY4+R2oEB+KGgFs6Fv4uvu9frXUDRP54z26FNp4qfA
+         cSLyGaN5Gxjms8I4FDkjwdh/9QkPk8e1YiBiR9F0BrFgERIyycWqjsI1bFDrpvTQc6Kr
+         HX8chRYFXadiH7BkopUSPtAcWGiBMkG9CW/g23C1/nC1yHgf9vEqzdCz8Ipoue7Eo767
+         73Lf43sstrFA3odylmwl4Ia1gLHv1wxYNIhCrLxUAMvMt1fwMDh9wsWRe9NJy7KIga9N
+         oCHWKIjYZKekNYutkEJ0p0yEDZDRD0pT5oMicefkGImDiOgloi7tHVSVMwnJHal5omMO
+         fE0g==
+X-Forwarded-Encrypted: i=1; AJvYcCUehuu4tQyiF58Og89yQe3PBn8VcsomOSShkqTGde1IWP6V1q6QymZp2rD8cVl1/dEGOVka0HSQwkY=@vger.kernel.org, AJvYcCW+Z9lKQp+0gMBPMB5gfl8Ii131sejY/ZB7Z5fyu0gSZVPnsoT1KSzQ4DBTQL6DOQdKZCd5DokPTeL3KUwW@vger.kernel.org, AJvYcCXkOGrUDjjgK60KJ8K9atIdxl82T+RLWigWdwUBXUVosg17ja0SEsbps3fJ2tIWuxTEMyeJbM1tDxhoGoY5F12oHN3Gvw==@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw4k0U/YvgK5+7HczMl32SVpupW2i13SVcUSc6P1xo1STxyWVxf
+	V7fW+AfJHK89CsK0Dr2QLoNk/tAVht5T3jyDDe5BxndSC6gqHUrD
+X-Gm-Gg: ASbGnctywNGZMBvvb00BSuGi+zvIwneeh/F0PRNLbC9d+sT6XlSl6lNjU0SXtcmxafI
+	vDIb9Gp8EYnuYjl85EeVSvEKoFEKhdHVr7r8hy/jmMF9R/Lvs6Nd2PBfDLHOo6pDFN9pMuwAlPJ
+	EEf2S5xxAeMSNu1CXqBlQ4B68j5uWsh1n5nD4sIrCIUaEi7urzDKMUYKj8W5dRvVzyabjrWKnOn
+	bEyTsc0dWJXIej0BURRETgnEBBgRcG9arkcOsuPWnQHobl+ipxuK6x7L6nT9mBjsEuDhbts3ZZC
+	PHx3dEI=
+X-Google-Smtp-Source: AGHT+IHqb8pNpIbG3PYJ26xeLxhXEpGhEK/8UQmsYi3zTfiTsjJvT6mgB2y7vMQ7rs+UN7aBriLvmw==
+X-Received: by 2002:a17:902:e809:b0:215:603e:2141 with SMTP id d9443c01a7336-219e6ea0218mr429283015ad.19.1735341621902;
+        Fri, 27 Dec 2024 15:20:21 -0800 (PST)
+Received: from m2-ThinkPad-X1-2-in-1-Gen-10.. ([2404:7a80:b9a1:7100:363c:fe:83f1:cbf9])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-219dc9cdddcsm140156935ad.158.2024.12.27.15.20.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Dec 2024 15:20:21 -0800 (PST)
+From: Vishnu Sankar <vishnuocv@gmail.com>
+To: corbet@lwn.net,
+	hmh@hmh.eng.br,
+	hdegoede@redhat.com,
+	ilpo.jarvinen@linux.intel.com,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org
-Subject: [RFC PATCH v2 10/10] Docs/admin-guide/mm/damon/usage: document DAMOS filter 'pass' sysfs file
-Date: Fri, 27 Dec 2024 13:08:19 -0800
-Message-Id: <20241227210819.63776-11-sj@kernel.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241227210819.63776-1-sj@kernel.org>
-References: <20241227210819.63776-1-sj@kernel.org>
+	ibm-acpi-devel@lists.sourceforge.net,
+	platform-driver-x86@vger.kernel.org
+Cc: mpearson-lenovo@squebb.ca,
+	Vishnu Sankar <vishnuocv@gmail.com>
+Subject: [PATCH] platform/x86: thinkpad-acpi: Add support for hotkey 0x1401
+Date: Sat, 28 Dec 2024 08:18:40 +0900
+Message-ID: <20241227231840.21334-1-vishnuocv@gmail.com>
+X-Mailer: git-send-email 2.45.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Update DAMON usage document for the newly added 'pass' sysfs file for
-DAMOS filters.
+F8 mode key on Lenovo 2025 platforms use a different key code.
+Adding support for the new keycode 0x1401.
 
-Signed-off-by: SeongJae Park <sj@kernel.org>
+Tested on X1 Carbon Gen 13 and X1 2-in-1 Gen 10.
+
+Signed-off-by: Vishnu Sankar <vishnuocv@gmail.com>
 ---
- Documentation/admin-guide/mm/damon/usage.rst | 34 ++++++++++++--------
- 1 file changed, 20 insertions(+), 14 deletions(-)
+ Documentation/admin-guide/laptops/thinkpad-acpi.rst | 10 +++++++---
+ drivers/platform/x86/thinkpad_acpi.c                |  4 +++-
+ 2 files changed, 10 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/admin-guide/mm/damon/usage.rst b/Documentation/admin-guide/mm/damon/usage.rst
-index fa8a5e4199b1..ab343d6ac771 100644
---- a/Documentation/admin-guide/mm/damon/usage.rst
-+++ b/Documentation/admin-guide/mm/damon/usage.rst
-@@ -89,7 +89,7 @@ comma (",").
-     │ │ │ │ │ │ │ │ │ 0/target_metric,target_value,current_value
-     │ │ │ │ │ │ │ :ref:`watermarks <sysfs_watermarks>`/metric,interval_us,high,mid,low
-     │ │ │ │ │ │ │ :ref:`filters <sysfs_filters>`/nr_filters
--    │ │ │ │ │ │ │ │ 0/type,matching,memcg_id
-+    │ │ │ │ │ │ │ │ 0/type,matching,memcg_id,pass
-     │ │ │ │ │ │ │ :ref:`stats <sysfs_schemes_stats>`/nr_tried,sz_tried,nr_applied,sz_applied,sz_ops_filter_passed,qt_exceeds
-     │ │ │ │ │ │ │ :ref:`tried_regions <sysfs_schemes_tried_regions>`/total_bytes
-     │ │ │ │ │ │ │ │ 0/start,end,nr_accesses,age,sz_filter_passed
-@@ -412,13 +412,14 @@ number (``N``) to the file creates the number of child directories named ``0``
- to ``N-1``.  Each directory represents each filter.  The filters are evaluated
- in the numeric order.
+diff --git a/Documentation/admin-guide/laptops/thinkpad-acpi.rst b/Documentation/admin-guide/laptops/thinkpad-acpi.rst
+index 7f674a6cfa8a..4ab0fef7d440 100644
+--- a/Documentation/admin-guide/laptops/thinkpad-acpi.rst
++++ b/Documentation/admin-guide/laptops/thinkpad-acpi.rst
+@@ -445,8 +445,10 @@ event	code	Key		Notes
+ 0x1008	0x07	FN+F8		IBM: toggle screen expand
+ 				Lenovo: configure UltraNav,
+ 				or toggle screen expand.
+-				On newer platforms (2024+)
+-				replaced by 0x131f (see below)
++				On 2024 platforms replaced by
++				0x131f (see below) and on newer
++				platforms (2025 +) keycode is
++				replaced by 0x1401 (see below).
  
--Each filter directory contains six files, namely ``type``, ``matcing``,
--``memcg_path``, ``addr_start``, ``addr_end``, and ``target_idx``.  To ``type``
--file, you can write one of five special keywords: ``anon`` for anonymous pages,
--``memcg`` for specific memory cgroup, ``young`` for young pages, ``addr`` for
--specific address range (an open-ended interval), or ``target`` for specific
--DAMON monitoring target filtering.  Meaning of the types are same to the
--description on the :ref:`design doc <damon_design_damos_filters>`.
-+Each filter directory contains seven files, namely ``type``, ``matcing``,
-+``pass``, ``memcg_path``, ``addr_start``, ``addr_end``, and ``target_idx``.  To
-+``type`` file, you can write one of five special keywords: ``anon`` for
-+anonymous pages, ``memcg`` for specific memory cgroup, ``young`` for young
-+pages, ``addr`` for specific address range (an open-ended interval), or
-+``target`` for specific DAMON monitoring target filtering.  Meaning of the
-+types are same to the description on the :ref:`design doc
-+<damon_design_damos_filters>`.
+ 0x1009	0x08	FN+F9		-
  
- In case of the memory cgroup filtering, you can specify the memory cgroup of
- the interest by writing the path of the memory cgroup from the cgroups mount
-@@ -428,25 +429,30 @@ specify the start and end address of the range to ``addr_start`` and
- you can specify the index of the target between the list of the DAMON context's
- monitoring targets list to ``target_idx`` file.
+@@ -506,9 +508,11 @@ event	code	Key		Notes
  
--You can write ``Y`` or ``N`` to ``matching`` file to filter out pages that does
--or does not match to the type, respectively.  Then, the scheme's action will
--not be applied to the pages that specified to be filtered out.
-+You can write ``Y`` or ``N`` to ``matching`` file to specify whether the filter
-+is for memory that matches the ``type``.  You can write ``Y`` or ``N`` to
-+``pass`` file to specify should this filter let the memory that satisfies the
-+``type`` and ``matching`` pass though (allow) or be blocked by (reject) the
-+filter.  Allowing means the scheme's action will be applied to the memory.
+ 0x1019	0x18	unknown
  
- For example, below restricts a DAMOS action to be applied to only non-anonymous
- pages of all memory cgroups except ``/having_care_already``.::
+-0x131f	...	FN+F8	        Platform Mode change.
++0x131f	...	FN+F8		Platform Mode change (2024 systems).
+ 				Implemented in driver.
  
-     # echo 2 > nr_filters
--    # # filter out anonymous pages
-+    # # block anonymous pages
-     echo anon > 0/type
-     echo Y > 0/matching
-+    echo N > 0/pass
-     # # further filter out all cgroups except one at '/having_care_already'
-     echo memcg > 1/type
-     echo /having_care_already > 1/memcg_path
-     echo Y > 1/matching
-+    echo N > 1/pass
++0x1401	...	FN+F8		Platform Mode change (2025 + systems).
++				Implemented in driver.
+ ...	...	...
  
- Refer to the :ref:`DAMOS filters design documentation
--<damon_design_damos_filters>` for more details including when each of the
--filters are supported and differences on stats.
-+<damon_design_damos_filters>` for more details including how multiple filters
-+of different ``pass`` works, when each of the filters are supported, and
-+differences on stats.
+ 0x1020	0x1F	unknown
+diff --git a/drivers/platform/x86/thinkpad_acpi.c b/drivers/platform/x86/thinkpad_acpi.c
+index 6371a9f765c1..2cfb2ac3f465 100644
+--- a/drivers/platform/x86/thinkpad_acpi.c
++++ b/drivers/platform/x86/thinkpad_acpi.c
+@@ -184,7 +184,8 @@ enum tpacpi_hkey_event_t {
+ 						   */
+ 	TP_HKEY_EV_AMT_TOGGLE		= 0x131a, /* Toggle AMT on/off */
+ 	TP_HKEY_EV_DOUBLETAP_TOGGLE	= 0x131c, /* Toggle trackpoint doubletap on/off */
+-	TP_HKEY_EV_PROFILE_TOGGLE	= 0x131f, /* Toggle platform profile */
++	TP_HKEY_EV_PROFILE_TOGGLE	= 0x131f, /* Toggle platform profile in 2024 systems */
++	TP_HKEY_EV_PROFILE_TOGGLE2	= 0x1401, /* Toggle platform profile in 2025 + systems */
  
- .. _sysfs_schemes_stats:
- 
+ 	/* Reasons for waking up from S3/S4 */
+ 	TP_HKEY_EV_WKUP_S3_UNDOCK	= 0x2304, /* undock requested, S3 */
+@@ -11200,6 +11201,7 @@ static bool tpacpi_driver_event(const unsigned int hkey_event)
+ 		tp_features.trackpoint_doubletap = !tp_features.trackpoint_doubletap;
+ 		return true;
+ 	case TP_HKEY_EV_PROFILE_TOGGLE:
++	case TP_HKEY_EV_PROFILE_TOGGLE2:
+ 		platform_profile_cycle();
+ 		return true;
+ 	}
 -- 
-2.39.5
+2.45.2
+
 
