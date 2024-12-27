@@ -1,77 +1,77 @@
-Return-Path: <linux-doc+bounces-33698-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33700-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 221DD9FD228
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 09:43:46 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AEEB9FD23A
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 09:48:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 414E77A16DE
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 08:43:39 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C3C5C163087
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 08:48:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7C45E1547FE;
-	Fri, 27 Dec 2024 08:43:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7CE4E153BEE;
+	Fri, 27 Dec 2024 08:48:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="K+gKAQwx"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="qbFXrYFS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2898C14B06E
-	for <linux-doc@vger.kernel.org>; Fri, 27 Dec 2024 08:43:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 519BA15383E
+	for <linux-doc@vger.kernel.org>; Fri, 27 Dec 2024 08:48:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1735289018; cv=none; b=cfZlkUgHHEaSUEacXRFyaiPb2reO2apT9BC+p1b4XVXIpwgPFtfU9FXzCe290y28r10cnFl3byEUEk2pODPv2+LOrEbg0GgJ//Ci92G7yVT3Xo59KSuA10RZEvOnWzRPUSXiyVvRVx9ol3dg9wjWyzoCrSuXxVhyfQxy1kNxa50=
+	t=1735289320; cv=none; b=bVXgLLuEOQx0O4cufn8oBP9sGQF3wRQuORL/WgXMQBUYrb/Az4idoXDFDGERCacZty/gRH/yOBtnnzRuIwq1baCQPdUfM/leee06JHGINH8RkIXzMZiNWkSMQ6K6OLdZY1r3RQkQfPm7kjzskvGOuFF6MAb8znTsIHKANTSvu8Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1735289018; c=relaxed/simple;
-	bh=THrgYM/I/2PM4lB3S8b8dKft+bfxKHUzcX53Lv5NjF0=;
+	s=arc-20240116; t=1735289320; c=relaxed/simple;
+	bh=NEbeQ3L5dRhQYyPq3yfwEYKyaUXmPWYu8jKxfnZzAzw=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lyXn3xgOUyIlhr36Br1CuIM0maEh+eNQpknxTAQEtgsG7h+QZQdyXW6C+tIgbi8+K2G+fJKCJbDyDg4aGDA0SXWegcBr9uRKG8RAPxDHB/t0MOFkq2nFoJNYfrUESQy5GortrTMGX9uGy/omWyK61VduIqijxLDWjfAtrBD20H4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=K+gKAQwx; arc=none smtp.client-ip=209.85.208.49
+	 Content-Type:Content-Disposition:In-Reply-To; b=T06EXIf3qnILOaXjW0M4jn7Sjfm+101K52PhBjRnrqE+po45rlJzSovNewRMigiuN1pdUCndxkxxXskU9E2SHaaSW8bVthk3RqoPkN8Rn3Jg44EVxjZt6HKdLx2juJZ+HjQlNnu//VQNhc4nrZPAuh5sVCxN96erH1iXbwwFc1o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=qbFXrYFS; arc=none smtp.client-ip=209.85.208.46
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-5d3cf094768so11264586a12.0
-        for <linux-doc@vger.kernel.org>; Fri, 27 Dec 2024 00:43:35 -0800 (PST)
+Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-5d7e527becaso11185031a12.3
+        for <linux-doc@vger.kernel.org>; Fri, 27 Dec 2024 00:48:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1735289014; x=1735893814; darn=vger.kernel.org;
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1735289317; x=1735894117; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=THrgYM/I/2PM4lB3S8b8dKft+bfxKHUzcX53Lv5NjF0=;
-        b=K+gKAQwxGxYrSj5qRyju2TU+O4PL5l0+n59Q3DbJMjBQ9tAAaB59yO45a+f0GGz5qG
-         MGVpaIaWjuEtURw1iN01pg6whJV6NmEpz1boPuoCzqyP/cRROoLQjoyLN2+zr6YEQITj
-         VT9qgK+nZ12c0MqZD9xRV6+eL9IaeWKeH/D4oWEy6j/hRO62sxbITpCM4RXZ2ROaTxR7
-         bqdCmwRnxP/Es0ylzX35X6yt/KIdbVKWvupC9WODtiG4EW+1CRdUnw7iM10DCRrLxRRe
-         pKSopcFaY+oGhynQZQSiMA/iZLUmGKFWciDjopLnNoSb6U81fuBTyAlJoSQcdAJhnzK1
-         QZSQ==
+        bh=NEbeQ3L5dRhQYyPq3yfwEYKyaUXmPWYu8jKxfnZzAzw=;
+        b=qbFXrYFSFEQqMQmA2yAWHDUkUO/W6Xfs3MocgRfau49455ocIogwT2G/lTj5/1eOzo
+         2XZ4Kl+iDK/sMDbFy02gfqPwNvC5Hfh4X1IhG0xU4PDWmCotbGEbvCTZSSvrStAZmmDP
+         kgRphtQdH0kFOFK4UMhNzVMq6LmctzP7YqfNyh69ewL3E87xdlsfVPxR5blFPIgxTFIb
+         T8xbvpgY3wdxU+JGBbin06YFgpJDSFrR6bWFispdpDKIDYSvG6jo/DwxVWP6mwsZc1PV
+         kzKiMlzfx0mwUgXxuHNTFW1eUKNesy2mx6QrTQw6jcdd3s2EhqGoLNXN2i+5RNG7JB+5
+         zQ1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1735289014; x=1735893814;
+        d=1e100.net; s=20230601; t=1735289317; x=1735894117;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=THrgYM/I/2PM4lB3S8b8dKft+bfxKHUzcX53Lv5NjF0=;
-        b=Ywx2MrP6ALCLvKblTaAlRh873ZiccI/C4FC/es9x+uljCTEIIkokWYruxfKAzGmXRV
-         /cpUsnI3ApnOO3OL8LGWerPV+mIDrTfzy9gkY0P648aywAkSaMhQj3Vw4L49R7RK3rUQ
-         2aHHzy41Pts2U26kfanWg7lFljMHivHn6xuuPrBnCaebWpRSU6Odg/PVKAKPmhklVRIx
-         DJHSBzsH6BMInUAyfxhLPAZEn5+Oq3hA4OU50aCFuRY/4RxqMlFEwYU0OkdRUKp0Mgdy
-         mVdp59R2yvScSzku0pVlsTTa8VnFENsNZwazCe8o6s295Rfs+ruGDlsgeZDLsMszgSwc
-         toSg==
-X-Forwarded-Encrypted: i=1; AJvYcCVLsTBpFYjwXvX9X13VxDoDNsF3j2p2T7GxEIhP34IFp48OAC+cFqqG+tcMD2NPOk8jYgki65zbMBk=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzn1rOdSxWeWV9K2J4dvaKH8sRrgixXDLg0uL8fgX+TMTHjRElI
-	RXKWGbcSvS3NPFsCo9GCGgmEfG84QSkwl7qaKAUvrUngdaR5Ocq1+fluWBkFyCk=
-X-Gm-Gg: ASbGncvn84HChu/F4cu8C1jLANXw5S5T2a/ULse5xU1J9gVI0SPXPUn09o/PGrgV4WQ
-	ZbqrVzIvpu/vygdg5eUNaaCa5kbxnz4KoNqM3gKYVM1OdOdY6Ge7a+H2/YTIfxnKz9qQNlssvfM
-	q9jm75NVChVe9hgMIuBMIDSpxGSG0qHJzc3zyYVGrTfjj2WEINvxS6cybOC9gI8+voWHv+0/4Bd
-	sddCdMPWpro2omASF8EXBGPbL5yGFyNk1wrXNOF4l7S8ve6RTBJv1dGOJbI/ZSplid76Ql+MQML
-	wRdpLLKx7w==
-X-Google-Smtp-Source: AGHT+IEzQP44dmWbe1VSp36ZAsJ+DOZkSE6XYi7+YrOQ6d2vRkiz93oSKK0gDB75cG4aLLPyuPlKHA==
-X-Received: by 2002:a05:6402:26d6:b0:5d3:cd5b:64da with SMTP id 4fb4d7f45d1cf-5d81ddfd841mr20516135a12.23.1735289014387;
-        Fri, 27 Dec 2024 00:43:34 -0800 (PST)
+        bh=NEbeQ3L5dRhQYyPq3yfwEYKyaUXmPWYu8jKxfnZzAzw=;
+        b=A4KwKwzFlbAzbN85ROocW/mIOIsyrdFz5hGxrmW6JEmLFpQRr4PPmdZSTlfTLiwWpC
+         osFZ00C1s9NQuD0y8YDvWEaxSxif8WAyHr0rAx5Jt5sunAxhZYFb9Sz93KvuB55LrFtJ
+         IatXjLyVBNomoohsBLBNSjHYwk15kfTmq1Ff8RNyBfTYJzLJiDagHOxL+7wPbniwG/Cc
+         YE9s1kC3J6W9LlZZGkdlKdUChycl113r71KUgTPF0r2VZaap3XimufWsEui1JhtlbDOQ
+         6v/BY1K7MfDikdQUh0VNnOBZUgxmprergVXrOo0qaYTqYt0IGEzwf12Zj7hwR9z66wGW
+         dP5w==
+X-Forwarded-Encrypted: i=1; AJvYcCVQxaX/EntRsHPsQmEljuXEtWaxjoJ0zuQSib4Tml0S7WPVxrOinhLKsLCeo+FITx82OnTlgZE4QCI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzrGDOLGbZHiMk5B2I0Iords6DG85aOcktyc8o2xebo1RViTxFa
+	4PMgaYGqJS5U8n0clt++WVJGUqzP2I+lICezsmJ1JCQTWcIKvGZKs/C3+/UkFxY=
+X-Gm-Gg: ASbGnctlP8/II1NRxJn1YzqkhyzomE44UHJHmh5uh7UqqtfdVkZe6tWyE8WU+yS4BKD
+	D5wq0E8koLSfJ+PDLkRpz9TbcMY1S6qklfv72Oos2Q/+ipC46sNYi5+woIK8CjOTYW2yAmjwIYV
+	bjcwZQMbGgtvz8bkcUswyWpAflFJUojeiwbHq8aLmtHJ4WrKH4xhWF+F9PHSLobHA/ZZEWQds0q
+	5eBwYzV66h+lsMjGT5ebTZ76VVCgbWQ9MTLtCGlngVf0FRw00FAOO4TQaJD4E1ViG1m5LqclsrQ
+	dEmHMG9MXQ==
+X-Google-Smtp-Source: AGHT+IHIGxUh3Hkutva0u4pOYR5aHeRZWySO0vQ1UMb7FPhwNKTrQdcIuNrAOUcZtoJyiQRumysVHQ==
+X-Received: by 2002:a05:6402:4403:b0:5d0:d2ed:ebb with SMTP id 4fb4d7f45d1cf-5d81dd83a72mr63843512a12.3.1735289316608;
+        Fri, 27 Dec 2024 00:48:36 -0800 (PST)
 Received: from localhost (p50915bc6.dip0.t-ipconnect.de. [80.145.91.198])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5d80679eeb1sm10465468a12.48.2024.12.27.00.43.32
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-aac0e89617bsm1073515366b.76.2024.12.27.00.48.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Dec 2024 00:43:33 -0800 (PST)
-Date: Fri, 27 Dec 2024 09:43:31 +0100
+        Fri, 27 Dec 2024 00:48:36 -0800 (PST)
+Date: Fri, 27 Dec 2024 09:48:35 +0100
 From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
 To: Julien Stephan <jstephan@baylibre.com>
 Cc: Lars-Peter Clausen <lars@metafoo.de>, 
@@ -79,11 +79,10 @@ Cc: Lars-Peter Clausen <lars@metafoo.de>,
 	David Lechner <dlechner@baylibre.com>, Jonathan Cameron <jic23@kernel.org>, 
 	Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org, 
 	linux-doc@vger.kernel.org
-Subject: Re: [PATCH RFC v2 1/4] iio: adc: ad7380: do not use
- iio_device_claim_direct_scoped anymore
-Message-ID: <befxu7wle3sq5egcwqhxx3qkvnye6cru4shufngyqvp6uyurkh@6d62xfzzuqss>
+Subject: Re: [PATCH RFC v2 2/4] iio: adc: ad7380: enable regmap cache
+Message-ID: <zkur45la23hyqmqusjdfyzgsofhfli3n54be55dkdrwtxf5g7e@fdpdeliljyz3>
 References: <20241224-ad7380-add-alert-support-v2-0-7c89b2bf7cb3@baylibre.com>
- <20241224-ad7380-add-alert-support-v2-1-7c89b2bf7cb3@baylibre.com>
+ <20241224-ad7380-add-alert-support-v2-2-7c89b2bf7cb3@baylibre.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -91,44 +90,42 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="ladguza3gb4gzncs"
+	protocol="application/pgp-signature"; boundary="rcviaha2xqvtyvbu"
 Content-Disposition: inline
-In-Reply-To: <20241224-ad7380-add-alert-support-v2-1-7c89b2bf7cb3@baylibre.com>
+In-Reply-To: <20241224-ad7380-add-alert-support-v2-2-7c89b2bf7cb3@baylibre.com>
 
 
---ladguza3gb4gzncs
+--rcviaha2xqvtyvbu
 Content-Type: text/plain; protected-headers=v1; charset=us-ascii
 Content-Disposition: inline
-Subject: Re: [PATCH RFC v2 1/4] iio: adc: ad7380: do not use
- iio_device_claim_direct_scoped anymore
+Subject: Re: [PATCH RFC v2 2/4] iio: adc: ad7380: enable regmap cache
 MIME-Version: 1.0
 
-Hello Julien,
+On Tue, Dec 24, 2024 at 10:34:31AM +0100, Julien Stephan wrote:
+> Enable regmap cache, to avoid useless access on spi bus.
+> Don't store anymore the oversampling ratio in private data structure.
 
-On Tue, Dec 24, 2024 at 10:34:30AM +0100, Julien Stephan wrote:
-> Rollback and remove the scoped version of iio_dvice_claim_direct_mode.
-
-Is this a preparation for one of the later patches in this series?
-Mentioning the reasoning for this change in the commit log would be
-good.
+I would split that. There are a few changes in this patch that I don't
+understand, e.g. why does the return type of ad7380_update_xfers()
+change?
 
 Best regards
 Uwe
 
---ladguza3gb4gzncs
+--rcviaha2xqvtyvbu
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmduaLAACgkQj4D7WH0S
-/k4ycAf+L+8MLST1YxuzyDcCM8wCXQdBnINZIVBTwtYe1wqvx/Zt6U43qIL+ECPz
-O1hp7WSek8TCvNBExaUsMgD2bbKKSil9ASqWHuqQB2hHZf1I9SUJXEA3kmVi8xmi
-TyDZ5Mp1T9f+Ra7NOJn453/FytLa9E9LF2apsKTSUO0P4VbDURPmejHkkKS4sNHY
-8xE1wggOyZ90GSiMzhpWPC2g6RuHCCI7N95+HALO/wi85gaNC8DBla26fivc9w1x
-Zf6PG4TgfnZpPyumbJtOtZkULR2w29lVLdfmwX9VMo9+345nhK4s7RPYRaHs6f6F
-ZS/Km9i5VWNiRTUPWNMEJsycPZE6GA==
-=+XKk
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmduad8ACgkQj4D7WH0S
+/k4/wQf/SEZkmkQjsGZNxZ66QsjyPc4EzFclqr1dYik9tYKEi5yDDKy/IavICRsM
+URbHTmQhbciYV1nW5r/0xcZzPtWpW80cPkOVQigXXjPhUdNZzMqxL/2Sy+WMokH/
+5OppjyngVWBehioSjO7ukQ8dd83NWldXZIByK5xNHSNsB8ATdHRQkzf/wCan+B+b
+Nwl3Ol+fxO9F8srU8m2K36JsUQ16bveVEEbS3OeuFyXmorVvNqL9hs+fBpMzIdYm
+vU5rOHub8IzK8v9R6KKZWC3CuL1/Z8AFKb40q+dG+fYIoQ5t2vQ0xbdURwSuJHSi
+nGjPw71jxPHCGag9KE2qwUfYSsj1MA==
+=ZL/6
 -----END PGP SIGNATURE-----
 
---ladguza3gb4gzncs--
+--rcviaha2xqvtyvbu--
 
