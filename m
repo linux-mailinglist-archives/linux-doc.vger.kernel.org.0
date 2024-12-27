@@ -1,211 +1,149 @@
-Return-Path: <linux-doc+bounces-33710-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33712-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBC589FD70E
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 19:48:54 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F8FD9FD76E
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 20:15:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6EC06165008
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 18:48:52 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8E52C7A21EC
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 19:15:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9999C1F869E;
-	Fri, 27 Dec 2024 18:48:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 59B5B1F8ADB;
+	Fri, 27 Dec 2024 19:13:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=antheas.dev header.i=@antheas.dev header.b="5gsljBUk"
+	dkim=pass (2048-bit key) header.d=stgolabs.net header.i=@stgolabs.net header.b="BCtIffAK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from linux1587.grserver.gr (linux1587.grserver.gr [185.138.42.100])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from antelope.elm.relay.mailchannels.net (antelope.elm.relay.mailchannels.net [23.83.212.4])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 061981C2BD;
-	Fri, 27 Dec 2024 18:48:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.138.42.100
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1735325329; cv=none; b=UpVOj2wP6/GQjWRS6SmCb5xZ4EhvLbApEfIQ51h0lbSknQ+hkbu0j9nmoOuM29UKAJVFHuGh0v+u60o8k5l+5Vi/VyUZT8lsJu2jljHjIXAczMIbd3gWOR3OtXO1pEkRL7tGQkItzrv5K+VdJo6wu2T/kx+amH37tVH7QTceJxo=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1735325329; c=relaxed/simple;
-	bh=de9YawzoPkw5LfFG4GZ3/VeW61mm9EPQ5iS35qjq/U4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=i1ygPUj4gc8fnixjB4V5r9rbYci3LRmNLyQ4QYlNJofzUbAzSCwEjKwKNJddDlfnfXn8+YA5XSBmEy7oz8LTf6Akb/l73URZ2/+lTekK7LjglNCTVBzqdqW26ZHqtGgzsax1BdOLIGWSPQc8KwyX0+yZ38FCD3hUM4l4fiIM5aI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev; spf=pass smtp.mailfrom=antheas.dev; dkim=pass (1024-bit key) header.d=antheas.dev header.i=@antheas.dev header.b=5gsljBUk; arc=none smtp.client-ip=185.138.42.100
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=antheas.dev
-Received: from localhost.localdomain (unknown [IPv6:2a02:2149:8b14:7c00:7f68:a54:8871:387f])
-	by linux1587.grserver.gr (Postfix) with ESMTPSA id 939A62E00777;
-	Fri, 27 Dec 2024 20:48:34 +0200 (EET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=antheas.dev;
-	s=default; t=1735325316;
-	bh=KaXqSLciCpR5aZlcxzNkJJ31s1Cmt2fdD+pblQ/1Fnc=; h=From:To:Subject;
-	b=5gsljBUk0uGY4QhNQ8lMp574G5ateaOsKE8YFggEhIw6nYlQguMt93bedcs8wRiKL
-	 LxW83TsKPRIb2jzKO9dFvs+QqaKeYA5LSR5dLvum7rni7NRvYBYi2kXQUova8uvZ36
-	 mNbKdKYuUyyOnJ1xRhGodlea0yUOYcvzYaxUp9wM=
-Authentication-Results: linux1587.grserver.gr;
-	spf=pass (sender IP is 2a02:2149:8b14:7c00:7f68:a54:8871:387f) smtp.mailfrom=lkml@antheas.dev smtp.helo=localhost.localdomain
-Received-SPF: pass (linux1587.grserver.gr: connection is authenticated)
-From: Antheas Kapenekakis <lkml@antheas.dev>
-To: derekjohn.clark@gmail.com
-Cc: corbet@lwn.net,
-	hdegoede@redhat.com,
-	ilpo.jarvinen@linux.intel.com,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	luke@ljones.dev,
-	mpearson-lenovo@squebb.ca,
-	nijs1@lenovo.com,
-	pgriffais@valvesoftware.com,
-	platform-driver-x86@vger.kernel.org,
-	shaohz1@lenovo.com,
-	superm1@kernel.org,
-	zhangzx36@lenovo.com,
-	johnfanv2@gmail.com,
-	codyit@gmail.com,
-	W_Armin@gmx.de
-Subject: Re: [PATCH 0/1] platform/x86: Add Lenovo Legion WMI Drivers
-Date: Fri, 27 Dec 2024 19:48:25 +0100
-Message-ID: <20241227184825.415286-1-lkml@antheas.dev>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20241217230645.15027-2-derekjohn.clark@gmail.com>
-References: <20241217230645.15027-2-derekjohn.clark@gmail.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0F3B1F5435;
+	Fri, 27 Dec 2024 19:13:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=23.83.212.4
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1735326832; cv=pass; b=Vujjuy0WS+vNzYntR1aS95w2INIQV1VPiVFjIdUuXjdpeOPZYFlruDvxIaU3oiTOUm0SZx7g7Q5Ruuz9hvTMcTHhmFSJYmWYQQTGSWZSMLgZ3nEvpXaTg056g4GSuGAQtLtwl9Tn5ZwMN04MECsLP/eTMtBFJyr5mwc6j74NvOk=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1735326832; c=relaxed/simple;
+	bh=rxN/Vx5Wj+ibp9OxsDUHqFeqRz+0mdwQXidywRVne/s=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=kLVUnTZ6ADq2KW3a6m6M22lKnfUXG2cQJORdbNl9JhmbzKVpJ+dVLeZFDvYzdssZWyH9TeBW/ixO+wxprUfvGU3mKmSJdMgbI1AuKDLBOYkUdNR6SMqieB0c4FiEohM9wayEN4smNUsVL7Xy9mPkibg7IGG+4JZFYs8H0SHDKBo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=stgolabs.net; spf=pass smtp.mailfrom=stgolabs.net; dkim=pass (2048-bit key) header.d=stgolabs.net header.i=@stgolabs.net header.b=BCtIffAK; arc=pass smtp.client-ip=23.83.212.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=stgolabs.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=stgolabs.net
+X-Sender-Id: dreamhost|x-authsender|dave@stgolabs.net
+Received: from relay.mailchannels.net (localhost [127.0.0.1])
+	by relay.mailchannels.net (Postfix) with ESMTP id 7D87223C2B;
+	Fri, 27 Dec 2024 18:35:19 +0000 (UTC)
+Received: from pdx1-sub0-mail-a235.dreamhost.com (trex-7.trex.outbound.svc.cluster.local [100.107.64.70])
+	(Authenticated sender: dreamhost)
+	by relay.mailchannels.net (Postfix) with ESMTPA id A965123631;
+	Fri, 27 Dec 2024 18:35:18 +0000 (UTC)
+ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1735324519; a=rsa-sha256;
+	cv=none;
+	b=vRlX9lCpJ28STztifrEhEhoyOf1uz84YzR4VFGRm6AOEB+YTHXLsN5pjWQnPSABD4PRGJV
+	WbIZeF+7Lck0tpeVfOuQjauprxx6q7WbniFZbeMNzTpiVvimCWUTZr7418/7PeWDqHl5GF
+	4u3v7V9RyTJ0AZahtYNnyM4LrQqVoU9eW5txWwkYQsKKmgMEYuWLHUCDdnxTjk113sticf
+	pr72+aGC51iQx15LmDU0MQ63YC4Q/RTlm8nYQZ165lDABMerSOeYO11WBc2im5vGDYXgHq
+	H4cVrWpTy08YV7Qzhj0MwL0Zz9ROJsAYHtK8mn/WgveeW//YMabZ+93EuzSwPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mailchannels.net;
+	s=arc-2022; t=1735324519;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:dkim-signature;
+	bh=rxN/Vx5Wj+ibp9OxsDUHqFeqRz+0mdwQXidywRVne/s=;
+	b=ofqzrSyr2veLxsXFMSce3xp/GTruc++Vbwk2oe8mqW/nh3fbYcAmGfKu0jwLaaPqIwZ9PE
+	r2BdCv4i4fxVcg6UMn578QikY4N9MTLaJBFLKE4srLI3PjS8WzGPKi4J7M6e9s7qrYrnyk
+	cZVmJbGgI3LqJnW0/T9K/NoKb6A3wb0fSL3koiXetFU6U5buSRaTlbUu7Oj3N/9x7p7r1V
+	3OXpxak2lKKO31Ad5G+KBdR+vjbJWcTkT1e/WZEz6PedDnSVA4FvOR10d9PKFjZgft41Wc
+	WIbboDfhmrCJCWA6UIhESc0EMEqEigQLXBwg1ufdtJHtW3ibVu26uPCZ5IUHOA==
+ARC-Authentication-Results: i=1;
+	rspamd-56bf78cbd4-ppwqp;
+	auth=pass smtp.auth=dreamhost smtp.mailfrom=dave@stgolabs.net
+X-Sender-Id: dreamhost|x-authsender|dave@stgolabs.net
+X-MC-Relay: Neutral
+X-MailChannels-SenderId: dreamhost|x-authsender|dave@stgolabs.net
+X-MailChannels-Auth-Id: dreamhost
+X-Attack-Obese: 6cc8b6c47408087d_1735324519285_351277178
+X-MC-Loop-Signature: 1735324519285:2359817915
+X-MC-Ingress-Time: 1735324519285
+Received: from pdx1-sub0-mail-a235.dreamhost.com (pop.dreamhost.com
+ [64.90.62.162])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
+	by 100.107.64.70 (trex/7.0.2);
+	Fri, 27 Dec 2024 18:35:19 +0000
+Received: from offworld (ip72-199-50-187.sd.sd.cox.net [72.199.50.187])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: dave@stgolabs.net)
+	by pdx1-sub0-mail-a235.dreamhost.com (Postfix) with ESMTPSA id 4YKZ1K06GHz9r;
+	Fri, 27 Dec 2024 10:35:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stgolabs.net;
+	s=dreamhost; t=1735324518;
+	bh=rxN/Vx5Wj+ibp9OxsDUHqFeqRz+0mdwQXidywRVne/s=;
+	h=Date:From:To:Cc:Subject:Content-Type;
+	b=BCtIffAK3FdCR0KZ/3Q59IftZsJVrhcvUEgiL9Y3xMhNuqgkZy5tN6RB02+ahkURR
+	 a7M2xzTXj2wTSTw/kCdPNlnwhuZVwk6gxqhZVcfGsHBV4zxc2HHT2IqUeHfJmp78pp
+	 zlHGTMwfBFpr9v8To/1sAMpgR8LIohvhVrwaFSuELn5C0Bo+D61sKKmiWJxX2GLpHn
+	 n3PQ0lVOLIwSMT8YsqhmJh+yr/Nacun7pompeA8oyNGPrapBbDVztv9jetC8HPw0Wd
+	 SldqNaSIzjur58NbsuPXaHzYDAxLUrMQpC0kvDi4qqzL6K5/6N8jc8ns5EJUDxQrp4
+	 IdWB9DMmo7+XA==
+Date: Fri, 27 Dec 2024 10:35:14 -0800
+From: Davidlohr Bueso <dave@stgolabs.net>
+To: Suren Baghdasaryan <surenb@google.com>
+Cc: akpm@linux-foundation.org, peterz@infradead.org, willy@infradead.org,
+	liam.howlett@oracle.com, lorenzo.stoakes@oracle.com,
+	mhocko@suse.com, vbabka@suse.cz, hannes@cmpxchg.org,
+	mjguzik@gmail.com, oliver.sang@intel.com,
+	mgorman@techsingularity.net, david@redhat.com, peterx@redhat.com,
+	oleg@redhat.com, paulmck@kernel.org, brauner@kernel.org,
+	dhowells@redhat.com, hdanton@sina.com, hughd@google.com,
+	lokeshgidra@google.com, minchan@google.com, jannh@google.com,
+	shakeel.butt@linux.dev, souravpanda@google.com,
+	pasha.tatashin@soleen.com, klarasmodin@gmail.com, corbet@lwn.net,
+	linux-doc@vger.kernel.org, linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org, kernel-team@android.com
+Subject: Re: [PATCH v7 07/17] types: move struct rcuwait into types.h
+Message-ID: <20241227183514.v2kgrouymbcvbazw@offworld>
+Mail-Followup-To: Suren Baghdasaryan <surenb@google.com>,
+	akpm@linux-foundation.org, peterz@infradead.org,
+	willy@infradead.org, liam.howlett@oracle.com,
+	lorenzo.stoakes@oracle.com, mhocko@suse.com, vbabka@suse.cz,
+	hannes@cmpxchg.org, mjguzik@gmail.com, oliver.sang@intel.com,
+	mgorman@techsingularity.net, david@redhat.com, peterx@redhat.com,
+	oleg@redhat.com, paulmck@kernel.org, brauner@kernel.org,
+	dhowells@redhat.com, hdanton@sina.com, hughd@google.com,
+	lokeshgidra@google.com, minchan@google.com, jannh@google.com,
+	shakeel.butt@linux.dev, souravpanda@google.com,
+	pasha.tatashin@soleen.com, klarasmodin@gmail.com, corbet@lwn.net,
+	linux-doc@vger.kernel.org, linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org, kernel-team@android.com
+References: <20241226170710.1159679-1-surenb@google.com>
+ <20241226170710.1159679-8-surenb@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-PPP-Message-ID: 
- <173532531561.9273.10613731026644363289@linux1587.grserver.gr>
-X-PPP-Vhost: antheas.dev
-X-Virus-Scanned: clamav-milter 0.103.11 at linux1587.grserver.gr
-X-Virus-Status: Clean
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20241226170710.1159679-8-surenb@google.com>
+User-Agent: NeoMutt/20220429
 
-Hi Derek,
+On Thu, 26 Dec 2024, Suren Baghdasaryan wrote:
 
-Good job on the driver. I spent a bit of time reviewing it today, and I
-have a few thoughts. Hopefully you can go through them fast, and we can
-have a solid base of understanding moving forward so that I can e.g.,
-merge your driver on Bazzite ahead of the kernel, so you can get some
-valuable testing.
+>Move rcuwait struct definition into types.h so that rcuwait can be used
+>without including rcuwait.h which includes other headers. Without this
+>change mm_types.h can't use rcuwait due to a the following circular
+>dependency:
+>
+>mm_types.h -> rcuwait.h -> signal.h -> mm_types.h
+>
+>Suggested-by: Matthew Wilcox <willy@infradead.org>
+>Signed-off-by: Suren Baghdasaryan <surenb@google.com>
 
-// Firmware Attributes
-Right now, I have one major concern I'd like to be addressed before
-moving into the details of the driver. This is mirrored in the Asus
-driver you referenced [1] as well and I do not think I have seen solid
-argumentation for it yet.
-
-Essentially, you are using the firmware attributes interface for the
-ephemeral attributes SPL, SPPT, and FPPT which is also a concern mirrored
-in the thread with Armin (+cc) and John (+cc) [2]. The question here
-becomes, if exposing fan curve attributes via the firmware interface is
-fickle, why is it correct for SPL, SPPT, and FPPT?
-
-For context, when it comes to Asus (see [1]), these tunables reset during
-reboots, after sleep, and when changing the TDP mode. Specifically, TDP
-mode, SPL, SPPT, and FPPT, and the fan curve are not preserved between
-reboots, with only TDP mode being preserved between sleep. Following, 
-setting TDP mode resets SPL, SPP, and FPPT, and setting any one of those
-resets the fan curve.
-
-For Lenovo and the Legion Go (1st Gen) it actually depends on the BIOS
-version. In early BIOSes, the custom tunings used to be preserved until
-you reset the BIOS. However, I suspect that this caused used confusion, as
-if you uninstalled Legion Space, the tunings to custom mode would still be
-applied which would be unintuitive. In new BIOS versions, the tunings reset
-when changing TDP modes, which can be done with the combination Legion
-L + Y. I am unsure if they are still preserved between reboots if you
-remain in custom mode. Fan curve resets as well. But the point is that they
-are not persisted, at least to the extent expected by the firmware
-attributes class and writing to them in other modes is undefined.
-
-Lastly, if another driver were to be developed e.g., for AMD out-of-tree
-to control devices without a vendor interface, we'd have the same
-issue. As this driver or [1] merging would set a precedent for using
-firmware attributes for these tunings, I think it is important to reach
-agreement before moving forward. For AMD w/o vendor, more details can
-be found in [3]. In [3], Mario makes an RFC for an alt interface for SPL,
-SPPT, and FPPT, through amd_pmf which does not have this peculiar issue.
-
-There are settings where it does make sense however, such as VRAM, boot
-sound (Asus), and the suspend light/barrel plug RGB (Legion). These
-settings are typically persisted in BIOS and there is no ambiguity for
-fitness in those.
-
-// Driver Details
-Ok, as for the rest of the driver, I have (i) some stylistic comments and
-(ii) will mirror similar concerns to John in unnecessary accesses.
-
-(i) Stylistic Comments
-I would personally be a fan of adding WMI support to the kernel, such that
-userspace can access WMI attributes without the use of a driver, as it is
-done in Windows. However, as I have discussed with Mario, such a thing is
-not an easy task, as it would require adding a BMOF parser to the kernel
-which is a monumental effort. In any case, the current kernel requires
-us custom write drivers for the WMI interface.
-
-The reason for this preface is that I think that your driver style is a bit
-"too close" to what such a thing would look. E.g., in the driver I can see
-snippets such as `LENOVO_CAPABILITY_DATA_01 WMI data block driver.` and
-`MODULE_IMPORT_NS("CAPDATA_WMI");`. Since you are going through the effort
-of writing a custom driver, I would be more opinionated in how I'd design
-the driver, so that it's more intuitive from a user's perspective. I think
-John's driver (which has its own issues) and the asus-wmi drivers strike a
-bit better balance, where they "translate" the WMI calls into an ABI that
-can be documented and then parsed by a developer.
-
-Such a design process would then also allow to claim the name legion, as
-you could make sure the legion driver only loads on Legion laptops, where
-now it would randomly load in other laptops as well. Sidenote here is
-that this is something I also found confusing, as the Legion Go does not
-have a keyboard so that driver should definitely not load.
-E.g., you could only load when you detect the Gamezone interface and then
-access the other two as well. The Gamezone interface is only used in
-Legion laptops AFAIK. I think Lenovo also kind of implements all three
-as stubs even if some are not used, to allow extending them with BIOS
-updates, so blindly loading drivers based on the interface might not be
-the best idea in any case. When the Legion Go released, I think only one
-of the three interfaces was used, for example, but all three were present.
-
-(ii) Unnecessary Accesses
-Even though you went hands off on your design of the driver, at the same
-time you held back when it comes to userspace accesses by globally forcing
-the Other function hints as limits. This creates two issues.
-
-The first one is that those limits might be wrong for certain devices or
-certain users might want to go a bit above them, which would mean that if
-you enforce them you'd need to provide a way to quirk them and a module
-parameter override (I know they are correct for the Legion Go as I have
-looked through them as well). But if it is not necessary in Windows,
-why would we add additional roadblocks in the kernel? If Lenovo feels the
-need to enforce them, they can do so in their firmware and extend that
-protection to Windows as well. Asus does when it comes to their fan curve
-firmware, for example.
-
-The second is that you are making a lot of necessary calls, which may harm
-performance or potentially cause instability. My workflow for setting TDP
-on the Go is that I first respect the TDP mode the user has set using
-Legion L + Y. If the user wants to change that, then I do the following:
-set TDP mode to custom, set the TDP, set the SPL, SPPT, and FPPT, and then
-set the fan curve. I also add a small delay in-between each of these calls
-as a further precaution. In your current driver, each of these calls would
-make two additional calls to the WMI interface (one for the limits and
-one for the TDP mode), which would more than double the number of calls
-made in a typical scenario (from 5 to 12), where each triplet is made
-back to back.
-
-There is also the issue mentioned by John, where you do cross-interface
-interactions etc. To fix this, you'd have to retrieve the limits from
-firmware on probing and then cache them in the driver after quirking. It
-would be much easier just to skip all of this for now and just use them to
-prepopulate _min and _max values as hints instead, which you already do.
-
-Those were my comments. You mentioned that you are travelling and might not
-have access to your PC so take your time with the replies.
-
-Happy holidays,
-Antheas
-
-[1] https://lore.kernel.org/all/20240930000046.51388-1-luke@ljones.dev/
-[2] https://lore.kernel.org/lkml/eb165321-6a52-4464-bb58-11d8f9ff2008@gmx.de/
-[3] https://lore.kernel.org/lkml/20240926025955.1728766-1-superm1@kernel.org/
+Acked-by: Davidlohr Bueso <dave@stgolabs.net>
 
