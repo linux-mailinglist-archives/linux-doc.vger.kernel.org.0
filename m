@@ -1,130 +1,128 @@
-Return-Path: <linux-doc+bounces-33711-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33713-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C18B39FD73A
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 20:07:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26A849FD7BC
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 22:08:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6F49C16220F
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 19:07:37 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B9C4016461D
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Dec 2024 21:08:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9526B1F8AC0;
-	Fri, 27 Dec 2024 19:07:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BAAB515535B;
+	Fri, 27 Dec 2024 21:08:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tib3X07e"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tStbiETE"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 693005733A;
-	Fri, 27 Dec 2024 19:07:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A2C814AD38;
+	Fri, 27 Dec 2024 21:08:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1735326455; cv=none; b=GysPZWcakjEkM5RotlYjjbEdElkCRsFmyHDTJNtM/x78bcz/bvWt1JG2Sr09/nOXsF+FXW1SXGfLgvU1uFci3fjCZm3ek+fU4szAqayIoSxRXkmU81ukHECiBum6fbd7hAkHTP902/gOWBw3cFIlPzpnIR0Whpa9+8PmuJ2vbfQ=
+	t=1735333708; cv=none; b=FF6PdJogZvF6xnsDNd2qXK9hqjBHrGiJgwCzu0W1HdRX5Nh+1ScwLTUCF6lRN5+SgoTvrsnC18SwUt581nW7W4GKG//w4DOP4/Lb71txbB5u8GNpZB0x+aADQzGzJ9fqC4x2v+TrPiSlthlfzGw5Dgdf5pANPDUkvgowiq5+viU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1735326455; c=relaxed/simple;
-	bh=T4wPkBmJyPTPHQLq/9VVaSy5gMu/3w+J0UtAPBlMdPg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sWZDOkgDEq0HT88qV16hdAABXkBMCYDhOe9Y4+leZ0ZyDfsg+Jyux1nJh7khBSGV/TRwq+P7iZMBxf7OdgTqCKT2gV87dA891Tdec6l6F5Tecv9gJdD/7pHBcQdvrxgwB/Gss/WttUQrDb8WADixOj1XWZxGPUlvTXMO+efsogA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tib3X07e; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0B74C4CED0;
-	Fri, 27 Dec 2024 19:07:34 +0000 (UTC)
+	s=arc-20240116; t=1735333708; c=relaxed/simple;
+	bh=Vt/oT9zECa50K2zX74ziPOY9ZJ8DMDBUW7KU9gy0O8s=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=ekcj6iYu43THGofZ1hnfzsJFBT4mD8m4YTq1hl7IMIBcy+dWdR0phvNWiuppJKi+fZh/6Ae/9Y9vplRaTBJhf79E1hcHdWJd65sxr8JDfHt3SBK2qy9IR28Xj4NB2dzxsxUvvqwZDTgkaDVYkteXFF9HkGwj5R78UCxm4faDGeQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tStbiETE; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D032AC4CED0;
+	Fri, 27 Dec 2024 21:08:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1735326455;
-	bh=T4wPkBmJyPTPHQLq/9VVaSy5gMu/3w+J0UtAPBlMdPg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=tib3X07esJ7wVfGCmnrfB90F8kr+lHX8qTwXwCPk2lEE6x46YlJq4/Tfd+iSLDUqI
-	 62aRcWr7oBLXU/t9HLBZ03sHsgHeSYhqEciHvNpzDzwZMf8g7UZv1oPTc3FvSgzz0X
-	 MFxkGYFrqBJD7L98u98CHZw3P4jGQm9ZW1cMK5KO9ps6j5Q7qZQwHMdzT8+0msgLYn
-	 DZsxB0CYl48iziZzvd2U2dK8DVUZwElkL2ArUSGLOujM91QdoaUYBN+ZtDu4lsc6AA
-	 Uup9OkCEzMi5V/UlCMTdrKFAnDriLkDj/tfqPSkW9u48oINcywjRVt/6ea8xWIjk0y
-	 i7A94zi7BZLhQ==
-Date: Fri, 27 Dec 2024 14:07:33 -0500
-From: Sasha Levin <sashal@kernel.org>
-To: Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>, apw@canonical.com,
-	conor@kernel.org, corbet@lwn.net, dwaipayanray1@gmail.com,
-	gitster@pobox.com, horms@kernel.org, joe@perches.com,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux@leemhuis.info, lukas.bulwahn@gmail.com,
-	miguel.ojeda.sandonis@gmail.com, niklas.soderlund@corigine.com,
-	willy@infradead.org, workflows@vger.kernel.org, kees@kernel.org
-Subject: Re: [PATCH] git-disambiguate: disambiguate shorthand git ids
-Message-ID: <Z2769aUCgYzyuKO4@lappy>
-References: <20241226220555.3540872-1-sashal@kernel.org>
- <Z23ZmVwgS2ErX-dj@lappy>
- <CAHk-=wiPNpQ=zmGvPoZRMFZ7a7mm2pzSoOsuQPdDRaSF7gbw9w@mail.gmail.com>
- <Z237CwC_YKhoZubs@lappy>
- <CAHk-=wiH=HH9CfFFuBwAwDdfZAjCzN=yAhzWehCAR8bg_-2CAA@mail.gmail.com>
- <Z27TkUSmM1sCTslO@lappy>
- <CAMuHMdUT0ZBwVZMPMuJnHy+-DS0zqLV3t4MRhSQVpLjEsNuHgw@mail.gmail.com>
+	s=k20201202; t=1735333707;
+	bh=Vt/oT9zECa50K2zX74ziPOY9ZJ8DMDBUW7KU9gy0O8s=;
+	h=From:To:Cc:Subject:Date:From;
+	b=tStbiETEAit92CAj1kCceZ3RybSVAIiIjsVZOHPi5FKRfSXA62h0dgJKz4NiefJmj
+	 AP5nJ8ZVt7Vk8eJRHuq2o8cNtfteVH8OU+goK6oNo2jY9S+HtZopAZl13qw4bZIqOF
+	 dZv//CAR5qqv2U0wlD2ymFAufAOI/TffUArS8z2gYmgslmPJpA+80CqsDz4ZPWLjby
+	 Lo+Fn1tQezEqIkyNoO4uoPob87hM6SF3PXlbKwEQHQexzumk9JmAuqsb6xAuxwSgHt
+	 qxXsCoCUe6cfAur7GWM0DDZK1XndY92lLssTN/k1aH3B8aWQmZ1B1WerfaaDIytl8D
+	 hoGeanWHvNR2Q==
+From: SeongJae Park <sj@kernel.org>
+To: 
+Cc: SeongJae Park <sj@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	damon@lists.linux.dev,
+	kernel-team@meta.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: [RFC PATCH v2 00/10] mm/damon: extend DAMOS filters for inclusion of target memory
+Date: Fri, 27 Dec 2024 13:08:09 -0800
+Message-Id: <20241227210819.63776-1-sj@kernel.org>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAMuHMdUT0ZBwVZMPMuJnHy+-DS0zqLV3t4MRhSQVpLjEsNuHgw@mail.gmail.com>
 
-On Fri, Dec 27, 2024 at 07:33:30PM +0100, Geert Uytterhoeven wrote:
->Hi Sasha,
->
->On Fri, Dec 27, 2024 at 5:19 PM Sasha Levin <sashal@kernel.org> wrote:
->> No, it's not a problem. In my mind, I figured we could use shorter
->> hashes in mail message to make it easier to communicate.
->>
->> It doesn't have to be formal, but for example if we exchange mails about
->> an issue, and I end up referring to '1d1a ("arm64/sme: ...")' it both
->> makes the mail more readable, but still someone who doesn't have context
->> can still easily get to the commit I was referring to.
->
->Is that 1d1a commit something in your local tree? I don't seem to have it.
+DAMOS fitlers are exclusive filters.  It only excludes memory of
+specific types from the DAMOS action targets.  This has below problems.
 
-Heh, yeah, I wanted to pick a random commit with a longer subject line
-and ended up landing on something local...
+First, the name is not explicitly explaining the behavior.  This
+actually resulted in confusions[1] and works to improve the siaution[2],
+including wordsmithing documentations and adding features to DAMON
+user-space tool, damo.
 
-1d1a ("Merge tag 'mlx5-updates-2018-02-23' ...") works just as well :)
+Secondly, the functionality is restrictive.  This is especially
+problematic when multiple filters need to be used.  For example,
+building a DAMOS scheme that applies the action to memory that belongs
+to cgroup A "or" cgroup B is impossible.  A workaroudn is using two
+schemes, each filtering out memory that not belong to cgroup A and
+cgroup B, respectively.  It is cumbersome, and makes control of
+quota-like additional factors difficult.
 
->A few other comments:
->  1. Please add support for --help. It took me a while to find out I
->     need to call the script without parameters to get the help.
+Extend DAMOS filters to support not only excluding (blocking), but also
+including (pass-through) behavior.  For the extension, add a new
+damos_filter struct field called 'pass' for DAMON kernel API users.
+Using the API, add a DAMON sysfs file of same name under DAMOS filter
+sysfs directory, for DAMON user-space ABI users.  To prevent breaking
+old users with a behavioral change, set the blocking as the default
+behavior.
 
-Ack
+Note that DAMOS' default behavior without DAMOS filters is applying the
+action to any memory.  And DAMOS filters work for only memory that
+satisfies 'type' and 'matching'.  Hence installing pass filter without
+any block filter after them makes no filter-behavioral change.
 
->  2. The passed commit-subject needs to be the full commit subject.
->     It would be nice to support abbreviations, too.
+[1] https://lore.kernel.org/20240320165619.71478-1-sj@kernel.org
+[2] https://git.kernel.org/sj/damo/c/b6a722c85ff91e5abe9dd47135e300df243da056
 
-It does it with ellipsis (I picked it up from sfr).
+Changes from RFC v1
+(https://lore.kernel.org/20241226221445.78433-1-sj@kernel.org)
+- Fix encoding issue on the last patch
 
-$ ./git-disambiguate.sh 1d1ab1ae6970 '("Merge tag 'mlx5-updates-2018-02-23' of git://git.kernel.org/pub/scm/linux/kernel/git/mellanox/linux into k.o/wip/dl-for-next")'
-1d1ab1ae69701d813993af40cf3ee39781ec4d6f
+SeongJae Park (10):
+  mm/damon: fixup damos_filter kernel-doc
+  mm/damon/core: add damos_filter->pass field
+  mm/damon/core: support damos_filter->pass
+  mm/damon/paddr: support damos_filter->pass
+  mm/damon: add pass argument to damos_new_filter()
+  mm/damon/sysfs-schemes: add a file for setting damos_filter->pass
+  Docs/mm/damon/design: document pass/block filters behaviors
+  Docs/ABI/damon: document DAMOS filter pass sysfs file
+  Docs/admin-guide/mm/damon/usage: omit DAMOS filter details in favor of
+    design doc
+  Docs/admin-guide/mm/damon/usage: document DAMOS filter 'pass' sysfs
+    file
 
-$ ./git-disambiguate.sh 1d1a '("Merge tag...")'
-1d1ab1ae69701d813993af40cf3ee39781ec4d6f
-
-Which was what I was trying to show off in the example above :)
-
->BTW, I am a heavy user of looking up commits (recent and old ;-)
->My .vimrc has:
->
->    noremap ;gs "zyiw:exe "new \| setlocal buftype=nofile
->bufhidden=hide noswapfile syntax=git \| 0r ! git show ".@z."" \|
->:0<CR><CR>
->
->So I can move the cursor to a git commit ID, and type ";gs" to open
->the commit in a throw-away split window.
->Adding full support for commit-subjects may be challenging, especially
->if they are split across multiple lines (i.e. not Fixes: tags, but
->mentioned in the description).
-
-Hyperlink git commits, eh? :)
+ .../ABI/testing/sysfs-kernel-mm-damon         | 14 +++--
+ Documentation/admin-guide/mm/damon/usage.rst  | 55 ++++++++++---------
+ Documentation/mm/damon/design.rst             | 29 ++++++++--
+ include/linux/damon.h                         | 15 +++--
+ mm/damon/core.c                               | 12 ++--
+ mm/damon/paddr.c                              |  9 +--
+ mm/damon/reclaim.c                            |  2 +-
+ mm/damon/sysfs-schemes.c                      | 32 ++++++++++-
+ mm/damon/tests/core-kunit.h                   | 14 ++---
+ 9 files changed, 125 insertions(+), 57 deletions(-)
 
 -- 
-Thanks,
-Sasha
+2.39.5
 
