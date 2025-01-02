@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-33825-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33827-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC6879FF914
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jan 2025 13:02:52 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 80D159FF91A
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jan 2025 13:03:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id F13CC1883008
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jan 2025 12:02:54 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 93D2C162919
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jan 2025 12:03:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 541DC1AC43A;
-	Thu,  2 Jan 2025 12:02:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95FE21AF0AE;
+	Thu,  2 Jan 2025 12:02:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="VZMv9sFZ"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="IGfRgwGI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CF9A1A9B42;
-	Thu,  2 Jan 2025 12:02:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.198
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD2591AF0DC;
+	Thu,  2 Jan 2025 12:02:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1735819327; cv=none; b=Y/Kbz/AaQWPn2RLwKK1QA1rrO+mDY7RNnGJxkSlerf8g+x/q1xbh0drfZLmYVH334HBlhB8Twva9uA2XpELlr4IRtO/cQnupfU9CQNEIBQIBcsLSTeURgoFn/XF5KWSSonrpG6qqsU5cCylxjmPcp4qrAEItXhYGVXF5okMV4ro=
+	t=1735819342; cv=none; b=pcCYF482YzlD7qN3gvxPPMNHfGTBvqt4cVxN2w3Aaia3oI8usnWYqmN4MqMJVoD8QnNEe7o/qiGTyQ2jb1XBRdDDVPK9L7goYOc4DYdzez8a/c3es3gnaNlHCPbmdYraHet8zgMkv67k6QG3DIo3a33hSkag9Ca0mkkwjvyu2tk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1735819327; c=relaxed/simple;
-	bh=MijEs1bifQklOQEIUkLl8tX6HgDkhZGGiDoA9jvrXsI=;
+	s=arc-20240116; t=1735819342; c=relaxed/simple;
+	bh=x29SpxNxVadIG1xo/mynTBtG68Rvig/giXVLvJsiKoQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=XqvnnYNj6VHGY9blwJMe7XOWGwhHJM3IA6N2DN7PUQ5TCf5TWX4pWifSfWVi/BcIUKyW6GRNaPvFVSpJ5CB9Nt1gGOnbfOBSm7qWKzAm5/NeNKyPXUstLbHj11D9mSTqKdNj07RUnLYKccm+sVPZRXK58nzbDBpQ5ZvuM3p13gg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=VZMv9sFZ; arc=none smtp.client-ip=217.70.183.198
+	 MIME-Version:Content-Type; b=FzXp9bdAoaWhxJD4nms3LCRKVDWZMXxcoixrZJWLoYyrW8YG1v2eUcgGl1w8g8Um99nAegbsSg5PL8mCLyrqWG3f3dOwP08I449seOnPc+agdqt+yOtJtn+2LoKpZ/D52fDSimfm3u/mRbu5vNDU2JNeEZiCPaiaNJ1M67vMgug=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=IGfRgwGI; arc=none smtp.client-ip=217.70.183.201
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 74A80C0006;
-	Thu,  2 Jan 2025 12:01:50 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 42D4A1BF205;
+	Thu,  2 Jan 2025 12:02:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1735819313;
+	t=1735819329;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=l/nqKhWO7A6S4WQTD61j9G9fNNTD8xcK3+bormyiQts=;
-	b=VZMv9sFZ7XK+7y287BWsSg+kOri8oPNuH7lyoqvT0+2UdJ1uv74qDR3YfD1IlPAkeCLWXs
-	vCYPGFGFeBU94JNn5h0oINZ7IbHv8kWyJHCbvoRQylWjEnSLTBM+x77IKt9R/VAQhXgb33
-	laibHnEl0eyr0nusoqkGFPO5QiSb0xMaKZKCVtHxJ0o7trmeJZLpYO76ImLNkJvTTvVvMg
-	lRA9GUxs+/P0S6Op48MIKLnTB/gy7cJxt7U5M1GIQqIZCBi7ZEvo3IH6whNzVVZP+vSmIa
-	Q11193T/YhDWPWY1gpMcDyLB7M8s5Y5rCHB/me0oNOPEQufrWGWpN1A4oEpAoA==
-Date: Thu, 2 Jan 2025 13:01:49 +0100
+	bh=DCekmWIsBZdXxl0wOI1O35zPVOupxsprKE8B+VAlWJY=;
+	b=IGfRgwGITFxzr4VDxH4IexSFXKQtZygiilm4WSJ733c/0UA1JfTtMlcwQYl3d50lljoQAq
+	DoqEwpx5s9yayhQxgAlWix52wzrdHTZUsol3X8F6nanE/3E7piq3qxB0LXB+yPiHPYzQzR
+	+TZ0ZEBJ1P1eF2DGcqcBbHcOoXuBCzUFNyaP0Vwm0oYkus2FPWjHGVkStJpW6bTaFlklFB
+	QDqv85oobOXNci8KDmaJ0qVSleQyZxIFSYIjVS4/bJjkY0d5k6KUZ6S6DmCr1sBBTnWkfn
+	JL4GiLQJYIMxAECwPK7J8YKxknhVLlAyUCg9w5qr9vcxDuHNYuaN+aX2LHyuSA==
+Date: Thu, 2 Jan 2025 13:02:03 +0100
 From: Luca Ceresoli <luca.ceresoli@bootlin.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+To: Randy Dunlap <rdunlap@infradead.org>
 Cc: Simona Vetter <simona@ffwll.ch>, Inki Dae <inki.dae@samsung.com>, Jagan
  Teki <jagan@amarulasolutions.com>, Marek Szyprowski
  <m.szyprowski@samsung.com>, Catalin Marinas <catalin.marinas@arm.com>, Will
@@ -56,8 +56,9 @@ Cc: Simona Vetter <simona@ffwll.ch>, Inki Dae <inki.dae@samsung.com>, Jagan
  Fabio Estevam <festevam@gmail.com>, Daniel Thompson <danielt@kernel.org>,
  Andrzej Hajda <andrzej.hajda@intel.com>, Jonathan Corbet <corbet@lwn.net>,
  Paul Kocialkowski <contact@paulk.fr>, Maxime Ripard <mripard@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, Laurent
+ Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman
  <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, Maarten
  Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann
  <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, =?UTF-8?Q?Herv?=
@@ -65,13 +66,13 @@ Cc: Simona Vetter <simona@ffwll.ch>, Inki Dae <inki.dae@samsung.com>, Jagan
  <thomas.petazzoni@bootlin.com>, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, Paul
  Kocialkowski <paul.kocialkowski@bootlin.com>
-Subject: Re: [PATCH v5 08/10] drm/bridge: samsung-dsim: use supporting
- variable for out_bridge
-Message-ID: <20250102130149.5784c09b@booty>
-In-Reply-To: <7kpgrgqp2jx6ivkwdc5ax3dfah2qkajaedpcdadldselr4bdlq@jewss2bdl4or>
+Subject: Re: [PATCH v5 04/10] drm/bridge: add documentation of refcounted
+ bridges
+Message-ID: <20250102130203.10389fd5@booty>
+In-Reply-To: <993b1c6d-6614-42b5-a64e-0061117fc1d0@infradead.org>
 References: <20241231-hotplug-drm-bridge-v5-0-173065a1ece1@bootlin.com>
-	<20241231-hotplug-drm-bridge-v5-8-173065a1ece1@bootlin.com>
-	<7kpgrgqp2jx6ivkwdc5ax3dfah2qkajaedpcdadldselr4bdlq@jewss2bdl4or>
+	<20241231-hotplug-drm-bridge-v5-4-173065a1ece1@bootlin.com>
+	<993b1c6d-6614-42b5-a64e-0061117fc1d0@infradead.org>
 Organization: Bootlin
 X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
@@ -84,79 +85,27 @@ Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-GND-Sasl: luca.ceresoli@bootlin.com
 
-Hi Dmitry,
+Hello Randy,
 
-On Tue, 31 Dec 2024 16:57:38 +0200
-Dmitry Baryshkov <dmitry.baryshkov@linaro.org> wrote:
+On Tue, 31 Dec 2024 09:54:41 -0800
+Randy Dunlap <rdunlap@infradead.org> wrote:
 
-> On Tue, Dec 31, 2024 at 11:40:02AM +0100, Luca Ceresoli wrote:
-> > Instead of using dsi->out_bridge during the bridge search process, use a
-> > temporary variable and assign dsi->out_bridge only on successful
-> > completion.
-> > 
-> > The main goal is to be able to drm_bridge_get() the out_bridge before
-> > setting it in dsi->out_bridge, which is done in a later commit. Setting
-> > dsi->out_bridge as in current code would leave a use-after-free window in
-> > case the bridge is deallocated by some other thread between
-> > 'dsi->out_bridge = devm_drm_panel_bridge_add()' and drm_bridge_get().  
+> Hi--
 > 
-> I don't think that's how refcounting should work. Any of the functions
-> that give you the bridge should also increase refcount, requiring manual
-> _put() call afterwards. We might need a separate API for that.
-
-You're perfectly right.
-
-> > This change additionally avoids leaving an ERR_PTR value in dsi->out_bridge
-> > on failure. This is not necessarily a problem but it is not clean.
+> On 12/31/24 2:39 AM, Luca Ceresoli wrote:
+> > Document in detail the new refcounted bridges as well as the "legacy" way.
 > > 
 > > Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
 > > 
 > > ---
-> > 
-> > This patch was added in v5.
-> > ---
-> >  drivers/gpu/drm/bridge/samsung-dsim.c | 15 +++++++++------
-> >  1 file changed, 9 insertions(+), 6 deletions(-)
-> > 
-> > diff --git a/drivers/gpu/drm/bridge/samsung-dsim.c b/drivers/gpu/drm/bridge/samsung-dsim.c
-> > index f8b4fb8357659018ec0db65374ee5d05330639ae..c4d1563fd32019efde523dfc0863be044c05a826 100644
-> > --- a/drivers/gpu/drm/bridge/samsung-dsim.c
-> > +++ b/drivers/gpu/drm/bridge/samsung-dsim.c
-> > @@ -1705,6 +1705,7 @@ static int samsung_dsim_host_attach(struct mipi_dsi_host *host,
-> >  	struct device *dev = dsi->dev;
-> >  	struct device_node *np = dev->of_node;
-> >  	struct device_node *remote;
-> > +	struct drm_bridge *out_bridge;
-> >  	struct drm_panel *panel;
-> >  	int ret;
-> >  
-> > @@ -1740,21 +1741,23 @@ static int samsung_dsim_host_attach(struct mipi_dsi_host *host,
-> >  
-> >  	panel = of_drm_find_panel(remote);
-> >  	if (!IS_ERR(panel)) {
-> > -		dsi->out_bridge = devm_drm_panel_bridge_add(dev, panel);
-> > +		out_bridge = devm_drm_panel_bridge_add(dev, panel);
-> >  	} else {
-> > -		dsi->out_bridge = of_drm_find_bridge(remote);
-> > -		if (!dsi->out_bridge)
-> > -			dsi->out_bridge = ERR_PTR(-EINVAL);
-> > +		out_bridge = of_drm_find_bridge(remote);
-> > +		if (!out_bridge)
-> > +			out_bridge = ERR_PTR(-EINVAL);
-> >  	}  
+
+...
+
+> > + * Allocation, initializion and teardown of a bridge can be implemented in  
 > 
-> While looking at this patch, I think we should migrate the driver to
-> drm_of_find_panel_or_bridge().
+>                   initialization
 
-Indeed, the code here is duplicating drm_of_find_panel_or_bridge(). I'm
-going to convert it.
-
-> Then your patch might add a function
-> close to devm_drm_of_get_bridge() or drmm_of_get_bridge().
-
-...which would return a bridge pointer, with refcount already
-incremented. Sure, except I think it should _not_ be a drmm, as
-the bridge might itself disappear while the card keeps existing.
+Thanks for reviewing! I fixed locally the typos you spotted.
 
 Luca
 
