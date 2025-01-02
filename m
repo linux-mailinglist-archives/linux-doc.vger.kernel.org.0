@@ -1,59 +1,67 @@
-Return-Path: <linux-doc+bounces-33829-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33831-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 899149FF923
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jan 2025 13:07:14 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7970C9FF958
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jan 2025 13:30:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5DC93160F61
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jan 2025 12:07:12 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 740493A2E1C
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jan 2025 12:30:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C6BF2171E49;
-	Thu,  2 Jan 2025 12:07:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D06E71AF0DC;
+	Thu,  2 Jan 2025 12:30:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BT+NulpX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D46AF405F7;
-	Thu,  2 Jan 2025 12:07:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8421E1A23A0;
+	Thu,  2 Jan 2025 12:30:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1735819630; cv=none; b=HYKZOdaMiHfFg8X9usN7EMa0cvy2OH4JybEz610Pt4GXV6omkYUZEPVhkd5//x6bFeTWSqGVDnBCKrTqucTQTm3FtBanBfzZrUnmcaTilkeBgNM4lfa8rFprfyDNa4mDwaauLorh2YChphbhmKK2vvQQrQR7yIpsKCsOtqW3CgU=
+	t=1735821038; cv=none; b=f0qu2C93p++FccuaaSIYdAKoqghBXD7+v4RSNEDs7W8M/UbzLlvM5iyQIB18ptdhI/3aczYLthSCKexH/LouF4Rp/Q71mKx2XM0XWF978xmFvDvNchNdIU+S3ex/lUxqq/P57fX1mh4fizndbgEIpscSC53VyAZ0PM60XqaSsQE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1735819630; c=relaxed/simple;
-	bh=nPqphhQ3v/qlhIdSSar6/dfUS15VV96Jz/Xqxwk+xiQ=;
-	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=pu9csURiINiCmfcAFy/M6QrTW61xf499U7BRxqMMVuVg8Nr5Fxftu5LzYkoAyqfTQT5PJ6Uy+2dJuPw4uP1LcweslSj9LhUeXKPVEzYYwBbp9hWrAwhFD8bjmK+rN+dKhem1NwOl+KQHnfd3rsoaWeoAawpXRCK++fv7JRiaiVY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.18.186.231])
-	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4YP55k1CmQz6K6nF;
-	Thu,  2 Jan 2025 20:06:18 +0800 (CST)
-Received: from frapeml500008.china.huawei.com (unknown [7.182.85.71])
-	by mail.maildlp.com (Postfix) with ESMTPS id BF298140A9C;
-	Thu,  2 Jan 2025 20:07:06 +0800 (CST)
-Received: from localhost (10.203.177.66) by frapeml500008.china.huawei.com
- (7.182.85.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Thu, 2 Jan
- 2025 13:07:05 +0100
-Date: Thu, 2 Jan 2025 12:07:04 +0000
-From: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-To: Will Deacon <will@kernel.org>
-CC: Ryan Roberts <ryan.roberts@arm.com>, Marc Zyngier <maz@kernel.org>,
-	=?UTF-8?Q?Miko=C5=82aj?= Lenczewski <miko.lenczewski@arm.com>,
-	<catalin.marinas@arm.com>, <corbet@lwn.net>, <oliver.upton@linux.dev>,
-	<joey.gouly@arm.com>, <suzuki.poulose@arm.com>, <yuzenghui@huawei.com>,
-	<linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <kvmarm@lists.linux.dev>,
-	<yangyicong@huawei.com>, <guohanjun@huawei.com>,
-	<wangkefeng.wang@huawei.com>, <liaochang1@huawei.com>,
-	<sunnanyong@huawei.com>, <yangyicong@huawei.com>, <linuxarm@huawei.com>
+	s=arc-20240116; t=1735821038; c=relaxed/simple;
+	bh=5Y53HP2kEwTqZJxhsBAZ3UIGAtplC1vps/WlfAM1w9w=;
+	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=JTNbjjTcebYZcCtI07vH/69Gsca9/OfeyO/4J0I7Bdt+WmiwtKTpaM+dXsf7qNFTKoOT8hB3tDN7LmaG4MKigPNOWPgu3liTWyoQQ8ySbnmUGmQGozlTNhwjeu4V70l3kUaQB7H5fa7cm7P8ifZeeuRwk6EnjVsJMprrQn4bKmA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BT+NulpX; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBE4BC4CED7;
+	Thu,  2 Jan 2025 12:30:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1735821037;
+	bh=5Y53HP2kEwTqZJxhsBAZ3UIGAtplC1vps/WlfAM1w9w=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=BT+NulpXbRBMoekFmZhX+SBJ+x9krUVQYwp7v87ECmwZd5FMVyfvJeuQDoBP2zX9z
+	 mRowweN388f0rC+iFNpRiMrvOnKU+gqnZAEcQRED+0HwVI8xRZB8z45buVtDy7f4KF
+	 uRqsN9t56Ak3cTPiTGgSJTa+oj9sxnS/q0zYLwsqiYwFJ6kz4wQbe+wP0Hxk5gy6qZ
+	 SjVRMHOoN+SQ3u/67qqp1LnEl6Tntp85lekpEsZlmWKuZ2o3mvecJrqJ1jIEziN5Li
+	 d5QTZ10B1u/XQDRS7fv7m7QUeHSChGXnVzgWhEHIi694hQ0sMIyulWoT89HZSoLnrn
+	 Ki93Ijyzns/4Q==
+Received: from sofa.misterjones.org ([185.219.108.64] helo=goblin-girl.misterjones.org)
+	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.95)
+	(envelope-from <maz@kernel.org>)
+	id 1tTKLT-008PkE-9O;
+	Thu, 02 Jan 2025 12:30:35 +0000
+Date: Thu, 02 Jan 2025 12:30:34 +0000
+Message-ID: <86ed1lpfdh.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Cc: Will Deacon <will@kernel.org>,	Ryan Roberts <ryan.roberts@arm.com>,
+	=?UTF-8?B?TWlrb8WCYWo=?= Lenczewski
+ <miko.lenczewski@arm.com>,<catalin.marinas@arm.com>,<corbet@lwn.net>,
+ <oliver.upton@linux.dev>,<joey.gouly@arm.com>,<suzuki.poulose@arm.com>,
+ <yuzenghui@huawei.com>,<linux-arm-kernel@lists.infradead.org>,
+ <linux-doc@vger.kernel.org>,<linux-kernel@vger.kernel.org>,
+ <kvmarm@lists.linux.dev>,<yangyicong@huawei.com>,<guohanjun@huawei.com>,
+ <wangkefeng.wang@huawei.com>,<liaochang1@huawei.com>,
+ <sunnanyong@huawei.com>,<linuxarm@huawei.com>
 Subject: Re: [RESEND RFC PATCH v1 2/5] arm64: Add BBM Level 2 cpu feature
-Message-ID: <20250102120704.00002984@huawei.com>
-In-Reply-To: <20241219164528.GH24724@willie-the-truck>
+In-Reply-To: <20250102120704.00002984@huawei.com>
 References: <20241211160218.41404-1-miko.lenczewski@arm.com>
 	<20241211160218.41404-3-miko.lenczewski@arm.com>
 	<87cyhxs3xq.wl-maz@kernel.org>
@@ -63,63 +71,84 @@ References: <20241211160218.41404-1-miko.lenczewski@arm.com>
 	<86h678sy00.wl-maz@kernel.org>
 	<5c551e43-78e9-4336-ab16-b55c0d6c7f92@arm.com>
 	<20241219164528.GH24724@willie-the-truck>
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
+	<20250102120704.00002984@huawei.com>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/29.4
+ (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: lhrpeml500005.china.huawei.com (7.191.163.240) To
- frapeml500008.china.huawei.com (7.182.85.71)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: Jonathan.Cameron@huawei.com, will@kernel.org, ryan.roberts@arm.com, miko.lenczewski@arm.com, catalin.marinas@arm.com, corbet@lwn.net, oliver.upton@linux.dev, joey.gouly@arm.com, suzuki.poulose@arm.com, yuzenghui@huawei.com, linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, kvmarm@lists.linux.dev, yangyicong@huawei.com, guohanjun@huawei.com, wangkefeng.wang@huawei.com, liaochang1@huawei.com, sunnanyong@huawei.com, linuxarm@huawei.com
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
 
-On Thu, 19 Dec 2024 16:45:28 +0000
-Will Deacon <will@kernel.org> wrote:
+Hi Jonathan,
 
-> On Thu, Dec 12, 2024 at 04:03:52PM +0000, Ryan Roberts wrote:
-> > >>> If anything, this should absolutely check for FAR_EL1 and assert that
-> > >>> this is indeed caused by such change.  
-> > >>
-> > >> I'm not really sure how we would check this reliably? Without patch 5, the
-> > >> problem is somewhat constrained; we could have as many changes in flight as
-> > >> there are CPUs so we could keep a list of all the {mm_struct, VA-range} that are
-> > >> being modified. But if patch 5 is confirmed to be architecturally sound, then
-> > >> there is no "terminating tlbi" so there is no bound on the set of {mm_struct,
-> > >> VA-range}'s that could legitimately cause a conflict abort.  
+On Thu, 02 Jan 2025 12:07:04 +0000,
+Jonathan Cameron <Jonathan.Cameron@huawei.com> wrote:
+> 
+> On Thu, 19 Dec 2024 16:45:28 +0000
+> Will Deacon <will@kernel.org> wrote:
+> 
+> > On Thu, Dec 12, 2024 at 04:03:52PM +0000, Ryan Roberts wrote:
+> > > >>> If anything, this should absolutely check for FAR_EL1 and assert that
+> > > >>> this is indeed caused by such change.  
+> > > >>
+> > > >> I'm not really sure how we would check this reliably? Without patch 5, the
+> > > >> problem is somewhat constrained; we could have as many changes in flight as
+> > > >> there are CPUs so we could keep a list of all the {mm_struct, VA-range} that are
+> > > >> being modified. But if patch 5 is confirmed to be architecturally sound, then
+> > > >> there is no "terminating tlbi" so there is no bound on the set of {mm_struct,
+> > > >> VA-range}'s that could legitimately cause a conflict abort.  
+> > > > 
+> > > > I didn't mean to imply that we should identify the exact cause of the
+> > > > abort. I was hoping to simply check that FAR_EL1 reports a userspace
+> > > > VA. Why wouldn't that work?  
 > > > 
-> > > I didn't mean to imply that we should identify the exact cause of the
-> > > abort. I was hoping to simply check that FAR_EL1 reports a userspace
-> > > VA. Why wouldn't that work?  
+> > > Ahh gottya! Yes agreed, this sounds like the right approach.  
 > > 
-> > Ahh gottya! Yes agreed, this sounds like the right approach.  
+> > Please, can we just not bother handling conflict aborts at all outside of
+> > KVM? This is all dead code, it's complicated and it doesn't scale to the
+> > in-kernel use-cases that others want. There's also not been any attempt
+> > to add the pKVM support for handling host-side conflict aborts from what
+> > I can tell.
+> > 
+> > For now, I would suggest limiting this series just to the KVM support
+> > for handling a broken/malicious guest. If the contpte performance
+> > improvements are worthwhile (I've asked for data), then let's add support
+> > for the CPUs that handle the conflict in hardware (I believe this is far
+> > more common than reporting the abort) so that the in-kernel users can
+> > benefit whilst keeping the code manageable at the same time.
+> > 
 > 
-> Please, can we just not bother handling conflict aborts at all outside of
-> KVM? This is all dead code, it's complicated and it doesn't scale to the
-> in-kernel use-cases that others want. There's also not been any attempt
-> to add the pKVM support for handling host-side conflict aborts from what
-> I can tell.
+> Hi All,
 > 
-> For now, I would suggest limiting this series just to the KVM support
-> for handling a broken/malicious guest. If the contpte performance
-> improvements are worthwhile (I've asked for data), then let's add support
-> for the CPUs that handle the conflict in hardware (I believe this is far
-> more common than reporting the abort) so that the in-kernel users can
-> benefit whilst keeping the code manageable at the same time.
+> Given direction the discussion is going in time to raise a hand.
 > 
+> Huawei has implementations that support BBML2, and might report TLB conflict
+> abort after changing block size directly until an appropriate TLB invalidation
+> instruction completes and this Implementation Choice is architecturally compliant.
 
-Hi All,
+Compliant, absolutely. That's the letter of the spec. The usefulness
+aspect is, however, more debatable, and this is what Will is pointing
+out.
 
-Given direction the discussion is going in time to raise a hand.
+Dealing with TLB Conflict aborts is an absolute pain if you need
+to handle it within the same Translation Regime and using the same
+TTBR as the one that has generated the fault. So at least for the time
+being, it might be preferable to only worry about the implementations
+that will promise to never generate such an abort and quietly perform
+an invalidation behind the kernel's back.
 
-Huawei has implementations that support BBML2, and might report TLB conflict
-abort after changing block size directly until an appropriate TLB invalidation
-instruction completes and this Implementation Choice is architecturally compliant.
+Thanks,
 
-Jonathan
+	M.
 
-> Will
-> 
-
+-- 
+Without deviation from the norm, progress is not possible.
 
