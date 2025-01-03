@@ -1,196 +1,187 @@
-Return-Path: <linux-doc+bounces-33869-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-33872-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13A72A0032A
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jan 2025 04:31:00 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 048CEA003DA
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jan 2025 07:00:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D35D21623F8
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jan 2025 03:30:57 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D80973A07D6
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jan 2025 06:00:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 216091AF0CD;
-	Fri,  3 Jan 2025 03:30:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 54D041B21B2;
+	Fri,  3 Jan 2025 06:00:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="m8hn85ia"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="F2Pwl2II"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2052.outbound.protection.outlook.com [40.107.237.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com [209.85.208.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A848A1A841F;
-	Fri,  3 Jan 2025 03:30:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.237.52
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1735875058; cv=fail; b=WcbvJNc2PQMYbpO2tx9a6RxIXnR+uRK4V3UMATe2EmZmtdffWZ4qeufhka7HRFBaxP+a0SWlO+YcwZqwx7/2gviexla8DQBMvxDW0qmiQU0b+rH9ARDr+Kgsepk+Jzt/LrV0IH+tbsitbLYpMDtdrOGPApZ+Vewy0JET/qAjFZ4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1735875058; c=relaxed/simple;
-	bh=Xh30XGBo73Frhq1QDT7A5HXd9SPLn5+PLCefq0QC/r0=;
-	h=Date:From:To:CC:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=M8UoiouvP9xl3Mhzvdo/MkYG4BN+dWrGycp+42Xw5T793oJVdCGIGua+eEFTdHLoM0qRdSEmkZ/KWlKz+sP+gz/+RYSCRUITzD6IfhM+9iSKsH7BkThqD58cFBkoaQVPQRpt21C3jDUVQaBzcxfj+zP011rylIkxFKbsSdhhdGQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=m8hn85ia; arc=fail smtp.client-ip=40.107.237.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LtfptRFuB+Uj7waYyGBj1wQxMW+/dH/iJCH6UL0bSHJX5aBdWQ7AYep27PkrMzQ1djOD9iODglQZeDv3ntWWxO14qKbAJ7dXTC2w2JpajO5jQ/zuF9kFRjvkYPPG1wVCBkTuu8hFK5rAedsmQMQEgX/MyG4t6A57ao0AHw6V3NaGpEU1YC0kpoMgKrMqTh/m2D79pf7ceR+wAXVXoBi4SnsMmvOU3bWyD4rW8s1LQFLdg6SQ0FGuBVz2weyf9faGrt4DFo0ipE8bSygqunbJOePe4ET/Tryi9X/yhD/VucBHIi5ZUCkhrjogOuUe/3Z4LLLoDN27GAwYFR/Zr2LQTA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VClTDqtsVt337smE9JJgA0ELO4R7gmBNJq7pGD0y0jE=;
- b=UjGnMyStCOPY22JbX91Dv7ifWPbKZkqyKT15vkYXyI5M76KE6YWb5xawBCJRsHlRkng+GmcU1p0KSGTIeoIrU7+H3TAUUVTU6s3pAfNYhGhlvPUBX44a8DMCNjS/gZGwmqRshzeYwVEaqEBhPWh7Q1P6Q88eg5vKxiW+SFLtL2J+ogH6tiW6N8NHgA+LsAX5tkCnvp+HaHcTTkC4z7k1UeszoW77adZ2s3R03Z8/oHfDAQl9Px4U99a5f++6iTByyzITacWHPK3CaewJ1yDji+ORRZ0fyOCWTdRjSsXSvF0VBfFDg8xfO35V8jdXVrxI751nhk1eZ8xyXBzNzVntgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VClTDqtsVt337smE9JJgA0ELO4R7gmBNJq7pGD0y0jE=;
- b=m8hn85iaI4UAaf0W6zvWroMF9Kn0pkojPM+zN2S5fLMpP9SrqZGsyLIs+673nC5AOSwjknPSusdKaQviOtAc5rSwhVEydPb70TmFciUPgUi0N1+hzFPJaFqvXzJNcMewh3RXv06ErFmtrc0HCFeKCn00y6U/FYwMPZvMzZHir0jPLv+LExMC3/S/3Mf7rDeC2RCxxIiRvkC6yCC9q3nGpmc86CFUdSvxkDI8sttZx2U4aAC8xEPdsTnxtufLESIADWULKg6XHOxip8udWWDRkoaPfJgkFR6KxmkfiSGUCMMlvc8GRBQglGtVNlKsvgW62Vh1BO8o39oKUm0E8ZqHwg==
-Received: from MN2PR11CA0026.namprd11.prod.outlook.com (2603:10b6:208:23b::31)
- by BL1PR12MB5996.namprd12.prod.outlook.com (2603:10b6:208:39c::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8314.13; Fri, 3 Jan
- 2025 03:30:47 +0000
-Received: from BN1PEPF0000468B.namprd05.prod.outlook.com
- (2603:10b6:208:23b:cafe::bc) by MN2PR11CA0026.outlook.office365.com
- (2603:10b6:208:23b::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8314.13 via Frontend Transport; Fri,
- 3 Jan 2025 03:30:47 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- BN1PEPF0000468B.mail.protection.outlook.com (10.167.243.136) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8314.11 via Frontend Transport; Fri, 3 Jan 2025 03:30:47 +0000
-Received: from rnnvmail205.nvidia.com (10.129.68.10) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Thu, 2 Jan 2025
- 19:30:26 -0800
-Received: from rnnvmail203.nvidia.com (10.129.68.9) by rnnvmail205.nvidia.com
- (10.129.68.10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Thu, 2 Jan 2025
- 19:30:26 -0800
-Received: from Asurada-Nvidia (10.127.8.9) by mail.nvidia.com (10.129.68.9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4 via Frontend
- Transport; Thu, 2 Jan 2025 19:30:23 -0800
-Date: Thu, 2 Jan 2025 19:30:21 -0800
-From: Nicolin Chen <nicolinc@nvidia.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-CC: <kevin.tian@intel.com>, <will@kernel.org>, <corbet@lwn.net>,
-	<joro@8bytes.org>, <suravee.suthikulpanit@amd.com>, <robin.murphy@arm.com>,
-	<dwmw2@infradead.org>, <baolu.lu@linux.intel.com>, <shuah@kernel.org>,
-	<linux-kernel@vger.kernel.org>, <iommu@lists.linux.dev>,
-	<linux-arm-kernel@lists.infradead.org>, <linux-kselftest@vger.kernel.org>,
-	<linux-doc@vger.kernel.org>, <eric.auger@redhat.com>,
-	<jean-philippe@linaro.org>, <mdf@kernel.org>, <mshavit@google.com>,
-	<shameerali.kolothum.thodi@huawei.com>, <smostafa@google.com>,
-	<ddutile@redhat.com>, <yi.l.liu@intel.com>, <patches@lists.linux.dev>
-Subject: Re: [PATCH v3 06/14] iommufd: Add IOMMUFD_OBJ_VIRQ and
- IOMMUFD_CMD_VIRQ_ALLOC
-Message-ID: <Z3dZzXblPIlxXEQ+@Asurada-Nvidia>
-References: <cover.1734477608.git.nicolinc@nvidia.com>
- <dc1252de7ff06c944cb7d91c91b4f61c25182f91.1734477608.git.nicolinc@nvidia.com>
- <20250102205246.GG5556@nvidia.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6019B1B6541
+	for <linux-doc@vger.kernel.org>; Fri,  3 Jan 2025 06:00:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.176
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1735884030; cv=none; b=gc4N6v+VTcRxV2n6qNCKw7KzgMH119+x1TcCjZy7SIlRRlXACayNwQLK2CiTnmyTMYf9VqjbwClOIw14iI1O7PqpxYopuVw1j4bNeKsZ08LrXmCe0CerSJ2IgRd0C46bklyWF67MAM/6rcawGOLul+Dc+3YPpR/t4qkZ2UB5iQY=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1735884030; c=relaxed/simple;
+	bh=SUli/KZdb7oxyfsFAomAiAGF5GY//oxCRvgUklHLl5I=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=gsw9PaOlioaouJcFvovCUmAgtuiCMicR+lVEqOqlphXrUTV0hfdlzNjrG5KQ56Qw5UTsuDrQXZ3xmXVwHPnWlzTn46FAHISrHgVQDgsgyIF+u243LkyNqvBW4Lu1Yk3bS25p2zA0UUCi8YPN29obylAnVI/t6rhzOmMQb39rvQA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=F2Pwl2II; arc=none smtp.client-ip=209.85.208.176
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-lj1-f176.google.com with SMTP id 38308e7fff4ca-3043e84c687so105336791fa.1
+        for <linux-doc@vger.kernel.org>; Thu, 02 Jan 2025 22:00:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1735884024; x=1736488824; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=OqK1XsqQcMf7JAQsvOfW8bTjaqo69FlQkujpR6CdauY=;
+        b=F2Pwl2IIZ96qWT/82sn+LMR0jRDBDYyLjimu6xWgmy+pvu9+SBu0BppceqlWCTXWrO
+         r6I5NtCEMMAUuJe9NtB2EHqrW85Lgdvh2L7/3fg6dv2rihEswdzzE9HHBZdtP6jbYFqe
+         30WEqo/hpwxeX2NM6KptXFngHkExCoLsKolbDMhaAP68/7je7+QQ5QP87yF0dfRvD7Ep
+         CS+sg9SVyu0ewUwWCQELmUD0s41YrTK+LHggxalS5F248qqwMRrJRshUV4tNRCdiS2Ru
+         YklREDNf434c6jiSwFFr4Of6iY8hs4WIWoYmdKnddo8yOCxLo/N8JKBmi3bJA3a0+cce
+         4eFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1735884024; x=1736488824;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OqK1XsqQcMf7JAQsvOfW8bTjaqo69FlQkujpR6CdauY=;
+        b=DD2NPNuzCG4C8VOUo//4aBWcarh1QUE0Jg/Ue+Oml8eW+M4PJDN7sa1Tnu6HEdULH6
+         BSpx6z1WTcQtRb5/+B/oGj9eCwbkzPwzmJhNntsksHYm5N8nkiTKHgOlqvddjPoSPjVp
+         4GRrWOaodGTyo2f3DANFO4ypeBr8AYT7+zMkXkGq/ze82Wg6MtSJrfq8kxfbpltkj2Wn
+         dQxF1GMlOtmmOejCWgjawSPROnvQJXhGTyc28dm3WHmEXX+K4zrGAVWMF9nSM0TSuOb8
+         5N+xFfWi0sajTYSGZkJ3k3w24CPr0BT4sm8tShqmShGS5e8dltTx+D/InEyz2xLnE8WI
+         O3Ag==
+X-Forwarded-Encrypted: i=1; AJvYcCWzn2LzvKmq0neWQsq4JB0aFp7uiRfKa2z4qpg1lq8h8o3Gcpp3jaZuk23nhYqgY6fXAxgBzrlOlsM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxEDRaEw43TPnKeTm/TAsIAINCUGXvAEmE/s0k4/n/xmFBeaEfd
+	yaRYH5D5J1AB8St7O1LHnkEXGBHQXWMn7ddsBpNSz6ScxIAr7OCw8u2TfZqVB/A=
+X-Gm-Gg: ASbGncvbnNCHSiyuio9MvZRea/7mQLHKXorGZCBdcjAtnCOGKUwdNcFHOiPi7PeYPoI
+	wO7JG+g5wZ/HyeUZSRuSU1Qmixpc52J/zyNBAl2oq5/6L/0es/WIY6ThbXQJbotPOJ2cV8ZCdYE
+	9YHEp7/S5RClLZRz37kHOXzgqPGAP1b1lMBpiqW/BRyYNneB6L2liS1IckXauumfZXZXXQzrdnV
+	YDPLamxSEH9OV0NhhQsoEVjijDfQzzeNo7VIk3UqHHx68P1XRwXkYLkzc5xce8WUJclhOmCR//z
+	CtSlqDVVNDGT3tBxwFMzyDftJ32z+sgyQp5Q
+X-Google-Smtp-Source: AGHT+IH3zYz7xZW+csvvf2W9sWK96IbaBnbltSVrtk8mtykDTw+7RfmJJMifDYxJfyLUrNG0Fzxe5Q==
+X-Received: by 2002:a05:6512:239b:b0:540:19d8:148f with SMTP id 2adb3069b0e04-5422954340emr16038660e87.32.1735884024223;
+        Thu, 02 Jan 2025 22:00:24 -0800 (PST)
+Received: from eriador.lumag.spb.ru (2001-14ba-a0c3-3a00--7a1.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::7a1])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-54223821665sm4038439e87.177.2025.01.02.22.00.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Jan 2025 22:00:22 -0800 (PST)
+Date: Fri, 3 Jan 2025 08:00:20 +0200
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+To: Luca Ceresoli <luca.ceresoli@bootlin.com>
+Cc: Simona Vetter <simona@ffwll.ch>, Inki Dae <inki.dae@samsung.com>, 
+	Jagan Teki <jagan@amarulasolutions.com>, Marek Szyprowski <m.szyprowski@samsung.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Shawn Guo <shawnguo@kernel.org>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Daniel Thompson <danielt@kernel.org>, 
+	Andrzej Hajda <andrzej.hajda@intel.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Paul Kocialkowski <contact@paulk.fr>, Maxime Ripard <mripard@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
+	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman <jonas@kwiboo.se>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+	=?utf-8?B?SGVydsOp?= Codina <herve.codina@bootlin.com>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
+	Paul Kocialkowski <paul.kocialkowski@bootlin.com>
+Subject: Re: [PATCH v5 08/10] drm/bridge: samsung-dsim: use supporting
+ variable for out_bridge
+Message-ID: <bfi7nfq5cy3wwc7i4oqqcqmd23g3ukfsqcky24axfumby357on@i2xnhpihyss4>
+References: <20241231-hotplug-drm-bridge-v5-0-173065a1ece1@bootlin.com>
+ <20241231-hotplug-drm-bridge-v5-8-173065a1ece1@bootlin.com>
+ <7kpgrgqp2jx6ivkwdc5ax3dfah2qkajaedpcdadldselr4bdlq@jewss2bdl4or>
+ <20250102130149.5784c09b@booty>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250102205246.GG5556@nvidia.com>
-X-NV-OnPremToCloud: AnonymousSubmission
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF0000468B:EE_|BL1PR12MB5996:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0bd02fda-d8fe-4b3e-edfb-08dd2ba703ad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|36860700013|82310400026|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?AP10rSWv2wCR6rDunCXMhMAtY2hhFImzJrDFtNjIlD+UANJH2QfFTGv/gmMe?=
- =?us-ascii?Q?Vh2k+IH0lAqqeLEJBsXKrn+E8jOif7aiDEH7UyCsAqNXg6KAj6B9RehrSlxv?=
- =?us-ascii?Q?J8jMCGoQaeCpwrXjgxUr0NXbOES4livux+hSen+1XGHzLKl3TyLnO9sY9haP?=
- =?us-ascii?Q?0sQcMVujJqwZd1SYozz3y8M5xYGYarAPSd7l9ZByFseQOd7cb2xSwxp6FUA0?=
- =?us-ascii?Q?gWn2cVQvhJTDgGfvJVGoJaPSlWVJEcFCWpjmg0yYuA/n5VFpMBvlOAlNJQE5?=
- =?us-ascii?Q?dCvk1/Q5RMWR0p+D2CP+anePxA2xTJzgH5+8VAn6IWbTP9mrj5gp1Hh6vlx2?=
- =?us-ascii?Q?BgTR6ByOH8KIGCIvMe9p1yzUpul+j0P3FRWhB/heN7TFRcRh5trhHlDRcQSS?=
- =?us-ascii?Q?nOr+Thg9pSOBS7j4Bk2hUbQ45p7aMMeyLnwvq62orurrUWKM/8iL1tcr5H0K?=
- =?us-ascii?Q?5G0i78ZUhTThMmuQTmuSx2jsS0rFNyV+iU92fqMOsQgOsOcPsz4cBmL12GJP?=
- =?us-ascii?Q?jvNpAYHTu6zBTZlXRnd6ROcwWpUDG/eUbuvj6ptNflFipPPzif6f/2tJudPg?=
- =?us-ascii?Q?OG/ygJin3qiEFE3HL0SduOXjDssGtZEII5AeLfO6T2cGpnyZ2uU6pfKUop0d?=
- =?us-ascii?Q?8/am6YoO8SvQoWgXFzxNNBfHQcD2LbUHHIJ2O+HbtmmdJyyZOoPrWH9XHvMk?=
- =?us-ascii?Q?aicIBV6zB0S1ayLG9TDIQbkRCpfJCGQMtYie5jNFdmeQdiejWjr3hCNcU5Z5?=
- =?us-ascii?Q?9jPIKCq+RFsTRATfJ6mH0aMFwndQJVjYCQlLoLnY5eBvqByBtl92KmslTm7s?=
- =?us-ascii?Q?+gxdNXF0aN6hGMO6kTVVNcqu7mydZTKaqygN0DJISHiqnJg/T/cu/P7eyO2N?=
- =?us-ascii?Q?K1uGrMVBoKUPCDW9Z8cnRB0scAXXDL14XbO1LrFQy9DfzeCJcPbTK+4nyg7z?=
- =?us-ascii?Q?Tt9r8oNI30fdVnElva38bSigzdDxaqbsMaikqYD6c6KgSAAckjLU+EMZEEg1?=
- =?us-ascii?Q?snnLBcRTWf1RvqJNbYAeJ3Dil1EKwr1xzewKBUhX5pyHAwCoGPdBNRgk8A/i?=
- =?us-ascii?Q?kNZp4lHWT1UBWfJqt4H3YFmo57V9AZ322KnB6DDk3vVXGFNblhRtu6WISOV4?=
- =?us-ascii?Q?GNyhxI+FWtTrgwRdNRhlJSze3EqBrhpvzGhZYw4j6c+oLAxjLcIGIHvXmXfy?=
- =?us-ascii?Q?Msozz5x1AG90s6JRxw7XYIFkPSCNc7kmj/wBqPxL3uz9TIVyhj0gfevzWsWS?=
- =?us-ascii?Q?Gi4325N6Q8ncO6iEWmZnowVk0Lz5QeMPSA/fo5eUJhYEWBB8a2ziQ7D6uYZM?=
- =?us-ascii?Q?AqnG8SQKLmQ5g4xR9qpwPKwoICtruKgLQbRY1UtpoKoRfZMWLPFOrkNhhPYA?=
- =?us-ascii?Q?kyJ0yPjyvIoItQpmLFWj1xkybRsMNk7DH4ZvCUbJNsT3sgmvbetKZvoZxDTF?=
- =?us-ascii?Q?KMRpXA3Cs2OTryCyTgHt2ReDMpMGkz0xbcfLPfWXk1c7UqirswCBiHomb3a2?=
- =?us-ascii?Q?16HfmFujEdRp7S0=3D?=
-X-Forefront-Antispam-Report:
-	CIP:216.228.117.160;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge1.nvidia.com;CAT:NONE;SFS:(13230040)(7416014)(376014)(36860700013)(82310400026)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2025 03:30:47.5710
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0bd02fda-d8fe-4b3e-edfb-08dd2ba703ad
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.160];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN1PEPF0000468B.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5996
+In-Reply-To: <20250102130149.5784c09b@booty>
 
-On Thu, Jan 02, 2025 at 04:52:46PM -0400, Jason Gunthorpe wrote:
-> On Tue, Dec 17, 2024 at 09:00:19PM -0800, Nicolin Chen wrote:
-> > +/* An iommufd_virq_header packs a vIOMMU interrupt in an iommufd_virq queue */
-> > +struct iommufd_virq_header {
-> > +	struct list_head node;
-> > +	ssize_t irq_len;
-> > +	void *irq_data;
-> > +};
+On Thu, Jan 02, 2025 at 01:01:49PM +0100, Luca Ceresoli wrote:
+> Hi Dmitry,
 > 
-> Based on how it is used in iommufd_viommu_report_irq()
+> On Tue, 31 Dec 2024 16:57:38 +0200
+> Dmitry Baryshkov <dmitry.baryshkov@linaro.org> wrote:
 > 
-> +       header = kzalloc(sizeof(*header) + irq_len, GFP_KERNEL);
-> +       header->irq_data = (void *)header + sizeof(*header);
-> +       memcpy(header->irq_data, irq_ptr, irq_len);
+> > On Tue, Dec 31, 2024 at 11:40:02AM +0100, Luca Ceresoli wrote:
+> > > Instead of using dsi->out_bridge during the bridge search process, use a
+> > > temporary variable and assign dsi->out_bridge only on successful
+> > > completion.
+> > > 
+> > > The main goal is to be able to drm_bridge_get() the out_bridge before
+> > > setting it in dsi->out_bridge, which is done in a later commit. Setting
+> > > dsi->out_bridge as in current code would leave a use-after-free window in
+> > > case the bridge is deallocated by some other thread between
+> > > 'dsi->out_bridge = devm_drm_panel_bridge_add()' and drm_bridge_get().  
+> > 
+> > I don't think that's how refcounting should work. Any of the functions
+> > that give you the bridge should also increase refcount, requiring manual
+> > _put() call afterwards. We might need a separate API for that.
 > 
-> It should be a flex array and use the various flexarray tools
+> You're perfectly right.
 > 
-> struct iommufd_virq_header {
->        ssize_t irq_len;
->        u64 irq_data[] __counted_by(irq_len);
-> }
+> > > This change additionally avoids leaving an ERR_PTR value in dsi->out_bridge
+> > > on failure. This is not necessarily a problem but it is not clean.
+> > > 
+> > > Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
+> > > 
+> > > ---
+> > > 
+> > > This patch was added in v5.
+> > > ---
+> > >  drivers/gpu/drm/bridge/samsung-dsim.c | 15 +++++++++------
+> > >  1 file changed, 9 insertions(+), 6 deletions(-)
+> > > 
 
-Changed to
--------------------------------------------------------------------------
-/* An iommufd_vevent represents a vIOMMU event in an iommufd_veventq */
-struct iommufd_vevent {
-	struct list_head node;
-	ssize_t data_len;
-	u64 event_data[] __counted_by(data_len);
-};
 [...]
-	vevent = kmalloc(struct_size(vevent, event_data, data_len), GFP_KERNEL);
--	header->irq_data = (void *)header + sizeof(*header);
--------------------------------------------------------------------------
 
-Thanks
-Nicolin
+> > > @@ -1740,21 +1741,23 @@ static int samsung_dsim_host_attach(struct mipi_dsi_host *host,
+> > >  
+> > >  	panel = of_drm_find_panel(remote);
+> > >  	if (!IS_ERR(panel)) {
+> > > -		dsi->out_bridge = devm_drm_panel_bridge_add(dev, panel);
+> > > +		out_bridge = devm_drm_panel_bridge_add(dev, panel);
+> > >  	} else {
+> > > -		dsi->out_bridge = of_drm_find_bridge(remote);
+> > > -		if (!dsi->out_bridge)
+> > > -			dsi->out_bridge = ERR_PTR(-EINVAL);
+> > > +		out_bridge = of_drm_find_bridge(remote);
+> > > +		if (!out_bridge)
+> > > +			out_bridge = ERR_PTR(-EINVAL);
+> > >  	}  
+> > 
+> > While looking at this patch, I think we should migrate the driver to
+> > drm_of_find_panel_or_bridge().
+> 
+> Indeed, the code here is duplicating drm_of_find_panel_or_bridge(). I'm
+> going to convert it.
+> 
+> > Then your patch might add a function
+> > close to devm_drm_of_get_bridge() or drmm_of_get_bridge().
+> 
+> ...which would return a bridge pointer, with refcount already
+> incremented. Sure, except I think it should _not_ be a drmm, as
+> the bridge might itself disappear while the card keeps existing.
+
+Feel free to add new one.
+
+> 
+> Luca
+> 
+> -- 
+> Luca Ceresoli, Bootlin
+> Embedded Linux and Kernel engineering
+> https://bootlin.com
+
+-- 
+With best wishes
+Dmitry
 
