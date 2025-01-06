@@ -1,136 +1,247 @@
-Return-Path: <linux-doc+bounces-34049-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34053-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB2C2A027FF
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 15:29:32 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4228DA02881
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 15:50:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EF26216572C
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 14:29:29 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BEE803A4B37
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 14:49:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 91D831DE3AB;
-	Mon,  6 Jan 2025 14:29:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 31A0773451;
+	Mon,  6 Jan 2025 14:49:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IUEOBRgl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9548B1C69D
-	for <linux-doc@vger.kernel.org>; Mon,  6 Jan 2025 14:29:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07D0760890;
+	Mon,  6 Jan 2025 14:49:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736173751; cv=none; b=jL0HTZ6lQY51w2ugqeCakGJqLaJvFyZAK0EJnx3lst9AFdy+f3s6gQlayH/TS6sJSMvk+7/gYIBF/iTk3+c4C0n//AgqFyX5Ra5/KUNkH3uIAuXGRT3pmhNrKj/Jm5kEA1ilDmOKn7G+lOkbyh2j4FkJaLXJRDc5pu8dRpDSedU=
+	t=1736174991; cv=none; b=UB2ShoyE7O6gT3aeWvC5AuDaPJhODB5Yc0VgaCUMe+R0MGQ0E0xJtPJopVoHFhuaXn4zGtYPYSd0sKanmJJ79wq9hHgS0ycQei8VL9T3p8TgyXfCwPboc4fpVdVetAgEq3TjS6KvvGqmu9SgZXQBabRCF2FxqUE+vrJ6asVIjvo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736173751; c=relaxed/simple;
-	bh=tDpzm4Bj9QcJNosTjFSSPqoZ3zZOgYkdsQMreDEVpwY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Vy+5bHR4AAp5Pe30uIKbgEzrqIPY7PHIYk43OF/XZxDjIibvAC1f8QM9PKykWKCisrqMjdIg8hXtFR1WLuRDQbFNOUY9uyUCzbdrz9f2yrxNqZNapATGHISh8350657tpW6lf3qM3rQVcuFI2saMAegQukniBCR4Id4t4da/87A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[127.0.0.1])
-	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
-	(envelope-from <a.fatoum@pengutronix.de>)
-	id 1tUo5x-0005hl-W8; Mon, 06 Jan 2025 15:28:42 +0100
-Message-ID: <1c0957b2-48cf-49a1-aa5e-666defd7f0fd@pengutronix.de>
-Date: Mon, 6 Jan 2025 15:28:39 +0100
+	s=arc-20240116; t=1736174991; c=relaxed/simple;
+	bh=hv5pZy+7yQLbAjC2su/ajqsFY/ju6Lj3BN23KsHWCHs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=uY617s5BxqhRWvLqVGojEh/JW8mKVsz9kmlrNt8ONVIxYNVfB3VeuYRvHfslzXy0MrHiyiyeFS38WDEASqxxbaW/M0QglUtz67VH6Ct0iDJM8wS0QZzlpWcPSGdVLP/7IOQa4uiEktQrx1UI8bKrRzP/lmwSLuHXrIXByws3JJA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IUEOBRgl; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 14468C4CED6;
+	Mon,  6 Jan 2025 14:49:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1736174990;
+	bh=hv5pZy+7yQLbAjC2su/ajqsFY/ju6Lj3BN23KsHWCHs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=IUEOBRglfyqj3YsygVL1RdULQ/V4Q3vDdAZrUQwPRRRA60RKC+yMbR0dF1loNSdGM
+	 ImDbSs+OGQAz9TrYoSYboG3duGfONjvyvDDHqusfUcJkmb3eqQlDkg/G2gM64dAvS6
+	 k7OcoVDxAZh7ydDCkcIbVeLMe6MDMwzfaf/YkzFspX630WrCBFV43artg7d4uR4R9e
+	 n7hW0DdaibccVPAh5+71TB/7T1qecbPD5zv7BYGJuih8CnKGm7ghkNa1qD0xaTLaRk
+	 b6DKeweUNeCItfTYMOE7A1tivb0vwMcPbV5BAiZbTTul+MM5PH72GHH3pNnfjUg83U
+	 b+pZOq6IcMBxQ==
+Date: Mon, 6 Jan 2025 15:49:48 +0100
+From: Maxime Ripard <mripard@kernel.org>
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: Luca Ceresoli <luca.ceresoli@bootlin.com>, 
+	Simona Vetter <simona@ffwll.ch>, Inki Dae <inki.dae@samsung.com>, 
+	Jagan Teki <jagan@amarulasolutions.com>, Marek Szyprowski <m.szyprowski@samsung.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Shawn Guo <shawnguo@kernel.org>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Daniel Thompson <danielt@kernel.org>, 
+	Andrzej Hajda <andrzej.hajda@intel.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Paul Kocialkowski <contact@paulk.fr>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Robert Foss <rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	David Airlie <airlied@gmail.com>, =?utf-8?B?SGVydsOp?= Codina <herve.codina@bootlin.com>, 
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	linux-doc@vger.kernel.org, Paul Kocialkowski <paul.kocialkowski@bootlin.com>
+Subject: Re: [PATCH v5 04/10] drm/bridge: add documentation of refcounted
+ bridges
+Message-ID: <20250106-quick-exuberant-jellyfish-cddde2@houat>
+References: <20241231-hotplug-drm-bridge-v5-0-173065a1ece1@bootlin.com>
+ <20241231-hotplug-drm-bridge-v5-4-173065a1ece1@bootlin.com>
+ <20250106-vigorous-talented-viper-fa49d9@houat>
+ <CAA8EJprhe4+9HwjW-=4K_LUD5pw51ij_dk0SZABbKH+ExnjdzQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/11] reboot: reboot, not shutdown, on
- hw_protection_reboot timeout
-To: kernel test robot <lkp@intel.com>,
- Daniel Lezcano <daniel.lezcano@linaro.org>, Fabio Estevam
- <festevam@denx.de>, "Rafael J. Wysocki" <rafael@kernel.org>,
- Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
- Jonathan Corbet <corbet@lwn.net>, Serge Hallyn <serge@hallyn.com>,
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
- Matti Vaittinen <mazziesaccount@gmail.com>,
- Benson Leung <bleung@chromium.org>, Tzung-Bi Shih <tzungbi@kernel.org>,
- Guenter Roeck <groeck@chromium.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-Cc: oe-kbuild-all@lists.linux.dev, linux-kernel@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-security-module@vger.kernel.org, chrome-platform@lists.linux.dev,
- devicetree@vger.kernel.org, kernel@pengutronix.de
-References: <20241219-hw_protection-reboot-v1-2-263a0c1df802@pengutronix.de>
- <202412201310.JWkUQ9qf-lkp@intel.com>
-Content-Language: en-US
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-In-Reply-To: <202412201310.JWkUQ9qf-lkp@intel.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
-
-On 20.12.24 07:12, kernel test robot wrote:
-> Hi Ahmad,
-> 
-> kernel test robot noticed the following build warnings:
-> 
-> [auto build test WARNING on 78d4f34e2115b517bcbfe7ec0d018bbbb6f9b0b8]
-> 
-> url:    https://github.com/intel-lab-lkp/linux/commits/Ahmad-Fatoum/reboot-replace-__hw_protection_shutdown-bool-action-parameter-with-an-enum/20241219-155416
-> base:   78d4f34e2115b517bcbfe7ec0d018bbbb6f9b0b8
-> patch link:    https://lore.kernel.org/r/20241219-hw_protection-reboot-v1-2-263a0c1df802%40pengutronix.de
-> patch subject: [PATCH 02/11] reboot: reboot, not shutdown, on hw_protection_reboot timeout
-> config: i386-buildonly-randconfig-003-20241220 (https://download.01.org/0day-ci/archive/20241220/202412201310.JWkUQ9qf-lkp@intel.com/config)
-> compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
-> reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20241220/202412201310.JWkUQ9qf-lkp@intel.com/reproduce)
-> 
-> If you fix the issue in a separate patch/commit (i.e. not just a new version of
-> the same patch/commit), kindly add following tags
-> | Reported-by: kernel test robot <lkp@intel.com>
-> | Closes: https://lore.kernel.org/oe-kbuild-all/202412201310.JWkUQ9qf-lkp@intel.com/
-> 
-> All warnings (new ones prefixed by >>):
-> 
->    kernel/reboot.c:241: warning: Function parameter or struct member 'cmd' not described in 'do_kernel_restart'
->>> kernel/reboot.c:995: warning: Function parameter or struct member 'action' not described in 'hw_failure_emergency_schedule'
->>> kernel/reboot.c:995: warning: Function parameter or struct member 'poweroff_delay_ms' not described in 'hw_failure_emergency_schedule'
-
-Will fix the kernel doc issues for v2.
-
->    kernel/reboot.c:1023: warning: Function parameter or struct member 'action' not described in '__hw_protection_shutdown'
->    kernel/reboot.c:1023: warning: Excess function parameter 'shutdown' description in '__hw_protection_shutdown'
-> 
-> 
-> vim +995 kernel/reboot.c
-> 
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   983  
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   984  static DECLARE_DELAYED_WORK(hw_failure_emergency_poweroff_work,
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   985  			    hw_failure_emergency_poweroff_func);
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   986  
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   987  /**
-> 595ab92650cc28 Ahmad Fatoum    2024-12-19   988   * hw_failure_emergency_schedule - Schedule an emergency system shutdown or reboot
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   989   *
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   990   * This may be called from any critical situation to trigger a system shutdown
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   991   * after a given period of time. If time is negative this is not scheduled.
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   992   */
-> 595ab92650cc28 Ahmad Fatoum    2024-12-19   993  static void hw_failure_emergency_schedule(enum hw_protection_action action,
-> 595ab92650cc28 Ahmad Fatoum    2024-12-19   994  					  int poweroff_delay_ms)
-> dfa19b11385d4c Matti Vaittinen 2021-06-03  @995  {
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   996  	if (poweroff_delay_ms <= 0)
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   997  		return;
-> 595ab92650cc28 Ahmad Fatoum    2024-12-19   998  	hw_failure_emergency_action = action;
-> dfa19b11385d4c Matti Vaittinen 2021-06-03   999  	schedule_delayed_work(&hw_failure_emergency_poweroff_work,
-> dfa19b11385d4c Matti Vaittinen 2021-06-03  1000  			      msecs_to_jiffies(poweroff_delay_ms));
-> dfa19b11385d4c Matti Vaittinen 2021-06-03  1001  }
-> dfa19b11385d4c Matti Vaittinen 2021-06-03  1002  
-> 
+Content-Type: multipart/signed; micalg=pgp-sha384;
+	protocol="application/pgp-signature"; boundary="nomgha4eilw4izvu"
+Content-Disposition: inline
+In-Reply-To: <CAA8EJprhe4+9HwjW-=4K_LUD5pw51ij_dk0SZABbKH+ExnjdzQ@mail.gmail.com>
 
 
--- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+--nomgha4eilw4izvu
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v5 04/10] drm/bridge: add documentation of refcounted
+ bridges
+MIME-Version: 1.0
+
+On Mon, Jan 06, 2025 at 02:24:00PM +0200, Dmitry Baryshkov wrote:
+> On Mon, 6 Jan 2025 at 12:39, Maxime Ripard <mripard@kernel.org> wrote:
+> >
+> > Hi,
+> >
+> > Most of these comments affect your earlier patches, but let's work on
+> > the API-level view.
+> >
+> > On Tue, Dec 31, 2024 at 11:39:58AM +0100, Luca Ceresoli wrote:
+> > > + * When using refcounted mode, the driver should allocate ``struct
+> > > + * my_bridge`` using regular allocation (as opposed to ``devm_`` or
+> > > + * ``drmm_`` allocation), call drm_bridge_init() immediately afterwa=
+rds to
+> > > + * transfer lifecycle management to the DRM bridge core, and impleme=
+nt a
+> > > + * ``.destroy`` function to deallocate the ``struct my_bridge``, as =
+in this
+> > > + * example::
+> > > + *
+> > > + *     static void my_bridge_destroy(struct drm_bridge *bridge)
+> > > + *     {
+> > > + *         kfree(container_of(bridge, struct my_bridge, bridge));
+> > > + *     }
+> > > + *
+> > > + *     static const struct drm_bridge_funcs my_bridge_funcs =3D {
+> > > + *         .destroy =3D my_bridge_destroy,
+> > > + *         ...
+> > > + *     };
+> > > + *
+> > > + *     static int my_bridge_probe(...)
+> > > + *     {
+> > > + *         struct my_bridge *mybr;
+> > > + *         int err;
+> > > + *
+> > > + *         mybr =3D kzalloc(sizeof(*mybr), GFP_KERNEL);
+> > > + *         if (!mybr)
+> > > + *             return -ENOMEM;
+> > > + *
+> > > + *         err =3D drm_bridge_init(dev, &mybr->bridge, &my_bridge_fu=
+ncs);
+> > > + *         if (err)
+> > > + *             return err;
+> > > + *
+> > > + *         ...
+> > > + *         drm_bridge_add();
+> > > + *         ...
+> > > + *     }
+> > > + *
+> > > + *     static void my_bridge_remove()
+> > > + *     {
+> > > + *         struct my_bridge *mybr =3D ...;
+> > > + *         drm_bridge_remove(&mybr->bridge);
+> > > + *         // ... NO kfree here!
+> > > + *     }
+> >
+> > I'm a bit worried there, since that API is pretty difficult to get
+> > right, and we don't have anything to catch bad patterns.
+> >
+> > Let's take a step back. What we're trying to solve here is:
+> >
+> >   1) We want to avoid any dangling pointers to a bridge if the bridge
+> >      device is removed.
+> >
+> >   2) To do so, we need to switch to reference counted allocations and
+> >      pointers.
+> >
+> >   3) Most bridges structures are allocated through devm_kzalloc, and th=
+ey
+> >      one that aren't are freed at remove time anyway, so the allocated
+> >      structure will be gone when the device is removed.
+> >
+> >   4) To properly track users, each user that will use a drm_bridge needs
+> >      to take a reference.
+>=20
+> 5) Handle the disappearing next_bridge problem: probe() function gets
+> a pointer to the next bridge, but then for some reasons (e.g. because
+> of the other device being removed or because of some probe deferral)
+> the next_bridge driver gets unbdound and the next_bridge becomes
+> unusable before a call to drm_bridge_attach().
+
+Oh, right. We need to plumb it in drm_of_find_bridge somehow too.
+
+> > AFAIU, the destroy introduction and the on-purpose omission of kfree in
+> > remove is to solve 3.
+> >
+> > Introducing a function that allocates the drm_bridge container struct
+> > (like drmm_encoder_alloc for example), take a reference, register a devm
+> > kfree action, and return the pointer to the driver structure would solve
+> > that too pretty nicely.
+> >
+> > So, something like:
+> >
+> >
+> > struct driver_priv {
+> >        struct drm_bridge bridge;
+> >
+> >        ...
+> > }
+> >
+> > static int driver_probe(...)
+> > {
+> >         struct driver_priv *priv;
+> >         struct drm_bridge *bridge;
+> >
+> >         ....
+> >
+> >         priv =3D devm_drm_bridge_alloc(dev, struct driver_priv, bridge);
+>=20
+> Ah... And devm-cleanup will just drop a reference to that data,
+> freeing it when all refs are cleaned? Nice idea.
+
+Yup.
+
+> >         if (IS_ERR(priv))
+> >            return ERR_PTR(priv);
+> >         bridge =3D &priv->bridge;
+> >
+> >         ...
+> >
+> >         drm_bridge_add(bridge);
+> > }
+> >
+> > Would work just as well.
+> >
+> > I also don't think we need explicit (at least for the common case)
+> > drm_bridge_get and drm_bridge_put calls for bridge users.
+> > drm_bridge_attach and drm_bridge_detach can get/put the reference
+> > directly.
+>=20
+> As I wrote previously, I think drm_bridge_attach() might be too late for =
+that.
+> It sounds like drm_of_get_panel_or_bridge() and of_drm_find_bridge
+> should increment the refcount, possibly adding a devres action to put
+> the reference.
+
+We probably need both. drm_bridge_attach adds the bridge pointer to the
+encoder bridge_chain list, so if we had something like
+
+bridge =3D drm_of_find_bridge();
+drm_bridge_attach(encoder, bridge);
+drm_bridge_put(bridge);
+
+We could have a dangling pointer.
+
+Maxime
+
+--nomgha4eilw4izvu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCZ3vtiwAKCRAnX84Zoj2+
+dpeUAX4r6EM9phLPf0l4sF/WhbNOJ3qT4YgdUwxgVp2TnPBAMKJJarldFgZ+hdfJ
+cAdoKigBfiGzn8D3vdC0gVNa9ln6gKzupgvZRmFMRk0PQbp3Gw3wQR9TeCO9AduV
+lOcnenoq+Q==
+=2QY/
+-----END PGP SIGNATURE-----
+
+--nomgha4eilw4izvu--
 
