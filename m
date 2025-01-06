@@ -1,596 +1,368 @@
-Return-Path: <linux-doc+bounces-34042-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34040-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 709DFA025EF
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 13:49:38 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id CE639A0248F
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 12:50:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B6A011881AB7
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 12:49:37 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DDAA83A51FF
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 11:50:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BD0C91DEFEE;
-	Mon,  6 Jan 2025 12:47:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9639D1DC05F;
+	Mon,  6 Jan 2025 11:50:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="LzyVOgWb"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="eVl19NdA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m32111.qiye.163.com (mail-m32111.qiye.163.com [220.197.32.111])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B31281DE8B3
-	for <linux-doc@vger.kernel.org>; Mon,  6 Jan 2025 12:47:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.111
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7DA71DC9B4
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jan 2025 11:50:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736167660; cv=none; b=OA0R+Mq0ETAWFVdpRIaI9Meyj12ylUCGd73XBONcEgS1135HWyTzOuh6+txWjjXVCaHe2I4MBF+du2ncPDJQX42LW4RzLsMGY5CXCXO5nIXKmj5uJXWavcpw+OMkuiwfObQ4r2+qkael4vEk1ZG9rjccY/9n3SSBnLSalN2IuVs=
+	t=1736164215; cv=none; b=fL1M7FnK+N2k8FyhvpWNZ2uFfyqYbZw8qTQEPkZ4gdhTPqRGGdfEiSyApTtvyq/73vrVAkdiZ2httrTijPs2rjhCxVc+zZAN/Xmzr1YT69NqTWAq1BrTdTHP8bas3B3zu0QN72kvguMXeEZu/+2BnL/lULmJ/dmqcRJPbPUfE/A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736167660; c=relaxed/simple;
-	bh=zzYXv0TOmN4G/xzTk1MyXitChRLjgn2rwtW02TANVVw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=lJhkWCwhru1keqav3XKOL+7X+1t6tAqo/nWKVKogYp2tFgM8d+xC47AZ25Ok2OIe5+iLEhHZLPX2ra/xlPh6YCQ18DR+C/ZPM+8SHeIAWBWcelx3DXmUrF9Nwi4gnddQjsuY75u4jmrNRoEIv0/cTL20a5kCFdrcoDnQTelA04Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=LzyVOgWb; arc=none smtp.client-ip=220.197.32.111
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
-Received: from fedora.localdomain (unknown [171.8.192.198])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 7cd7d6fb;
-	Mon, 6 Jan 2025 13:57:46 +0800 (GMT+08:00)
-From: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
-To: alexs@kernel.org,
-	si.yanteng@linux.dev,
-	corbet@lwn.net
-Cc: zhaoyuehui@cqsoftware.com.cn,
-	zhaoshuo@cqsoftware.com.cn,
-	zhangwei@cqsoftware.com.cn,
-	maoyuxian@cqsoftware.com.cn,
-	linux-doc@vger.kernel.org
-Subject: [PATCH v2] docs/zh_CN: Add security credentials Chinese translation
-Date: Mon,  6 Jan 2025 13:57:44 +0800
-Message-ID: <20250106055744.20840-1-zhaoshuo@cqsoftware.com.cn>
-X-Mailer: git-send-email 2.47.1
+	s=arc-20240116; t=1736164215; c=relaxed/simple;
+	bh=Irbw3ZOJ/7hvNqrlKM1Lzzx/wcqzc9FmVv78MxdhJyY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=PgmweHlUR38J36nTx1oj9O2W+eLR/yXv2HHctoovnOGYHhiCmPGHfqEEWvEhB6+i6sPaLsiS9iY+68fo250jIkMlBxLVMEv8AWcZOrYXAQZqap2GEeu1slI/qOT1jH+Xbkvc0tVq6oLSqFtChzeN3cDIsT8PL1Fz/JiOlJNswAs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=eVl19NdA; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1736164211;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=cpq33UCeXg21WZu8P3zwO8Ss4G+vMkNm9yeh35pyurE=;
+	b=eVl19NdADlKbjYuH/5ZGfLsqRYDg9TuqBVUNcfICtizryzQEla68hpe21VF7YPxz3lLfL3
+	WNKDw0arekJRgW9x1+vxwpYVwwjSpr6Zo8qvybRfQ6zVhRjViU+CflhCqMjdCeDHmKFvPq
+	Jmc9QrZb8sMp1nPlus+G61gLuicBo8s=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-624-Pd5avzZwMUaYnMmuhLId-w-1; Mon, 06 Jan 2025 06:50:10 -0500
+X-MC-Unique: Pd5avzZwMUaYnMmuhLId-w-1
+X-Mimecast-MFC-AGG-ID: Pd5avzZwMUaYnMmuhLId-w
+Received: by mail-ej1-f72.google.com with SMTP id a640c23a62f3a-aa6732a1af5so207186266b.3
+        for <linux-doc@vger.kernel.org>; Mon, 06 Jan 2025 03:50:10 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736164209; x=1736769009;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=cpq33UCeXg21WZu8P3zwO8Ss4G+vMkNm9yeh35pyurE=;
+        b=pjuUi6PVwU3M8fALS1Zij2fEHy/egUuL4LlXCb/q/fAT25gzo2OdrH1XUZyvUH3CGY
+         mZXAhWQThr5Gd5kFlu2k21MGLK4zvJVFhnJiu8J3f5Ca28HAP7g6i37hZGlmbmCXSC5h
+         ccDBitgaLm4CHf8O2WECCERV+k1flYH5y4Iq8NXSrw8RN29LrrZJwPLmHIanKwbdIpn5
+         Eab1j88QP+HFbM+BkQlJBKK+0ZZhtvdysBr5hgjlMERAeQzfKQxJjDmztF6Xl5QmOrT8
+         S9e4xEadEeej1iasHkDXI719TlAp4pySOFLVUpi8C2RQEcIfZjwK+QaihS+m/+j/kxn+
+         SnGw==
+X-Forwarded-Encrypted: i=1; AJvYcCW10/yuJ5mZjce32HMELMUrl79cJQ7oY9iJCz4E/syfpFucY5GITbGfW5CvtT5QdxXz3Q62eEht/dc=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwhN7MPPGDU+o5QPYDL4KrVCxFnXLLW74Tk6r6cErT6NBmMUBqZ
+	g91HguuREPxRDfEZ4OG8SckOUmcErFXRciStkxCkTk7kh6hqboDYhh+2Wh8TtlCKi35pmjhpUgf
+	8e/QMxuUygoVPuSiHnH+4yaQD4CeVA7Mvuy6Op3niGVIxUPSASMRDAtBN3A==
+X-Gm-Gg: ASbGncvTJJ/N7Y4ZvEG92GFJW6nIDAAThWgJhWmD+cyBEn664L+zJXipvizUGzsMQs+
+	RiefCr4VmUuwLlvD4Rte6PrTmgpSPtP4gwkRFu0Bd8x8ahKdomdfTdT03d2ATTwLsQNez0NXCex
+	YP8RrH3o2sePojeQ23KJyh91mtZIishGlVRJRxQNsFLyS3bNlfC7KZ7U1LUahmu1ULQ6IFfNPE8
+	6FhUBPBathUbIJDG4JWJQUdhOiE8p0XKE1y/uvUoKb+WcPWgqx1I0Bq033T
+X-Received: by 2002:a17:907:3eaa:b0:aa6:6e10:61f6 with SMTP id a640c23a62f3a-aac34217a79mr4101540666b.52.1736164209009;
+        Mon, 06 Jan 2025 03:50:09 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHMp5wSDcCs5L+heJdCQakWpQLJTgR8yN6TypH1xRJO6ECiGXowA4x9M+MnmabS5RTqnj+KNQ==
+X-Received: by 2002:a17:907:3eaa:b0:aa6:6e10:61f6 with SMTP id a640c23a62f3a-aac34217a79mr4101538166b.52.1736164208479;
+        Mon, 06 Jan 2025 03:50:08 -0800 (PST)
+Received: from [10.40.98.157] ([78.108.130.194])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-aac0f0653bbsm2272058266b.184.2025.01.06.03.50.07
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 06 Jan 2025 03:50:08 -0800 (PST)
+Message-ID: <bfd9b7a4-ebef-49ff-8b86-bd61b1a06d38@redhat.com>
+Date: Mon, 6 Jan 2025 12:50:07 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] platform/x86: samsung-galaxybook: Add
+ samsung-galaxybook driver
+To: Joshua Grisham <josh@joshuagrisham.com>
+Cc: =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>,
+ ilpo.jarvinen@linux.intel.com, W_Armin@gmx.de,
+ platform-driver-x86@vger.kernel.org, corbet@lwn.net,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20241216103855.18457-1-josh@joshuagrisham.com>
+ <13184052-baf2-4e7d-b8ef-9ba3f34d475a@t-8ch.de>
+ <66897a27-5f81-46fc-898d-682456d7f37f@redhat.com>
+ <CAMF+KeZ3uAWZuuPJcrrvTJS-TgyxkqXOY_w=wNw7eZQiUkV5YA@mail.gmail.com>
+Content-Language: en-US
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <CAMF+KeZ3uAWZuuPJcrrvTJS-TgyxkqXOY_w=wNw7eZQiUkV5YA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaQ0weVkwYQh1DQkofGhoYTlYVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKTEpVQ1VKQklVSkJDWVdZFhoPEhUdFFlBWU9LSFVKS0hKT0hMVUpLS1
-	VKQktLWQY+
-X-HM-Tid: 0a943a30d59709d0kunm7cd7d6fb
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NQw6Cyo*PjIRNRgqTjgePigV
-	MBpPCi5VSlVKTEhNSk9IS01MTENJVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
-	WRILWUFZSkxKVUNVSkJJVUpCQ1lXWQgBWUFJS0NLTTcG
-DKIM-Signature:a=rsa-sha256;
-	b=LzyVOgWbTYuQB756zB2eDU5uxqEKGdNqXZu4uLRgY72ac8A/BHjo5iaLAG2pGMrdICZ+98Yh6YAWSGFb7XvYHaZI+Bal68ZPJzNerU6X6CYBWNPBiGS0whThSQgD8EtxU5tgKtMcDr0XxeWT6HDh8/LYPyADCD+1S7nyCaNbuoA=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
-	bh=4EBL60DTpH/SkCGwrGdvDZ+SnC4uHU+Fpl78h6vj26k=;
-	h=date:mime-version:subject:message-id:from;
 
-Translate .../security/credentials.rst into Chinese.
+Hi,
 
-Update the translation through commit cf92ec602ac5
-("Documentation: remove current_security() reference")
+Sorry for the very slow reply.
 
-Signed-off-by: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
----
+On 19-Dec-24 6:31 PM, Joshua Grisham wrote:
+> Thank you both Thomas and Hans for your review and comments! I am
+> working on a v4 of the patch but had a few questions which I wanted to
+> clarify (they can also come after in a v5 etc in case I managed to get
+> this ready to go before anyone has the time to confirm and/or clarify
+> some things!).
+> 
+> Den tis 17 dec. 2024 kl 15:23 skrev Hans de Goede <hdegoede@redhat.com>:
+>>
+>> On 16-Dec-24 5:46 PM, Thomas Weißschuh wrote:
+>>>> +Various hardware settings can be controlled by the following sysfs attributes:
+>>>> +
+>>>> +- ``allow_recording`` (allows or blocks usage of built-in camera and microphone)
+>>>> +- ``start_on_lid_open`` (power on automatically when opening the lid)
+>>>> +- ``usb_charge`` (allows USB ports to provide power even when device is off)
+>>>
+>>> Non-standard sysfs attributes should be avoided where possible.
+>>> Userspace will need bespoke code to handle them.
+>>> This looks like it could be handled by the standard firmware_attributes
+>>> interface.
+>>> This would standardize discovery and usage.
+>>
+>> Ack this really feels like firmware-attributes. I would not be surprised
+>> if there are matching BIOS settings and if changing those also changes
+>> the sysfs files and likewise if the sysfs settings persist over reboot.
+>>
+> 
+> Yes 2 of these (not this "allow_recording" I think) are available via
+> BIOS and all 3 of them persist over restarts.
 
-v2:
+Ok, then firmware-attributes definitely is a good match for these
+and I see you have already moved this functionality to
+the firmware-attributes class API for v4, good :)
 
-Modify some formatting and translation.
+> Just so I am 100% clear what you mean here -- these type of attributes
+> should be created using the utilities available in
+> drivers/platform/x86/firmware_attributes_class.h so that they are
+> created under the path /sys/class/firmware-attributes/*/attributes/*/
+> ?
 
- .../zh_CN/security/credentials.rst            | 479 ++++++++++++++++++
- .../translations/zh_CN/security/index.rst     |   2 +-
- 2 files changed, 480 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/security/credentials.rst
+Yes.
 
-diff --git a/Documentation/translations/zh_CN/security/credentials.rst b/Documentation/translations/zh_CN/security/credentials.rst
-new file mode 100644
-index 000000000000..b42b86f96078
---- /dev/null
-+++ b/Documentation/translations/zh_CN/security/credentials.rst
-@@ -0,0 +1,479 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/security/credentials.rst
-+
-+:翻译:
-+ 赵硕 Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
-+
-+=============
-+Linux中的凭据
-+=============
-+
-+作者: David Howells <dhowells@redhat.com>
-+
-+.. contents:: :local:
-+
-+概述
-+====
-+
-+当一个对象对另一个对象进行操作时，Linux执行的安全检查包含几个部分：
-+
-+ 1. 对象
-+
-+     对象是可以直接由用户空间程序操作的系统中的实体。Linux具有多种可操作
-+     的对象，包括：
-+
-+	- 任务
-+	- 文件/索引节点
-+	- 套接字
-+	- 消息队列
-+	- 共享内存段
-+	- 信号量
-+	- 密钥
-+
-+     所有这些对象的描述的一部分是一组凭据。集合中的内容取决于对象的类型。
-+
-+ 2. 对象所有权
-+
-+     大多数对象的凭据中会有一个子集用来表示该对象的所有权。
-+     这用于资源会计和限制（如磁盘配额和任务资源限制）。
-+
-+     例如，在标准的UNIX文件系统中，这将由标记在索引节点上的UID定义。
-+
-+ 3. 客观上下文
-+
-+     此外在这些对象的凭据中，将有一个子集表示对象的“客观上下文”。
-+     这可能与（2）中相同，也可能不同 —— 例如，在标准的UNIX文件中，
-+     这是由标记在索引节点上的UID和GID定义的。
-+
-+     客观上下文是进行安全计算的一部分，当对象被操作时会用到。
-+
-+ 4. 主体
-+
-+     主体是正在对其他对象执行操作的对象。
-+
-+     系统中的大多数对象是不活动的：他们不会对系统中的其他对象起作用。
-+     进程/任务是明显的例外：它们可以访问和操纵其他对象。
-+
-+     任务之外的其他对象在某些情况下也可以是主体。例如，打开的文件可以使用
-+     名为 ``fcntl(F_SETOWN)`` 的任务给它的UID和EUID向一个任务发送SIGIO
-+     信号。在这种情况下，文件结构也会有一个主观上下文。
-+
-+ 5. 主观上下文
-+
-+     主体对其凭据有一个额外的解释。其凭据的一个子集形成了“主观上下文”。主观
-+     上下文在主体执行操作时作为安全计算的一部分使用。
-+
-+     例如，Linux任务在操作文件时会有FSUID、FSGID和附加组列表 —— 这些凭据
-+     与通常构成任务的客观上下文的真实UID和GID是相互独立的。
-+
-+ 6. 操作
-+
-+     Linux提供许多操作，主体可以对对象执行这些操作。可用的操作集取决于主体
-+     和对象的性质。
-+
-+
-+     操作包括读取、写入、创建和删除文件，以及派生（forking）或发送
-+     信号（signalling）和跟踪（tracing）任务等。
-+
-+ 7. 规则，访问控制列表和安全计算
-+
-+     当主体对对象进行操作时，会进行安全计算。这涉及到使用主观上下文、客观
-+     上下文和操作，并搜索一个或多个规则集，以确定在给定这些上下文的情况下，
-+     主体是否被授予或拒绝以所需方式对对象进行操作的权限。
-+
-+     主要有两个规则来源：
-+
-+     a. 自主访问控制（DAC）：
-+
-+	 有时，对象的描述中会包含一组规则。这就是所谓的“访问控制列表”或‘ACL’。
-+	 一个Linux文件可以提供多个ACL。
-+
-+	 例如，传统的UNIX文件包括一个权限掩码，它是一个简化的ACL，具有三个固定的
-+	 主体类别（“用户”、“组”和“其他”），每一个都可以被授予一定的特权（如“读取”、
-+	 “写入”和“执行” —— 无论这些映射对于对象意味着什么）。然而，UNIX文件权限不
-+	 允许任意指定主体，因此用途有限。
-+
-+	 Linux文件还可以支持POSIX ACL。这是一个规则列表，为任意主体授予各种权限。
-+
-+     b. 强制访问控制（MAC）：
-+
-+	 整个系统可能有一个或多个规则集，适用于所有主体和对象，不考虑它们的来源。
-+	 SELinux和Smack就是这种情况的例子。
-+
-+	 在SELinux和Smack的情况下，每个对象在其凭据中都被赋予一个标签。当请求执
-+	 行操作时，它们使用主体标签、对象标签和操作，寻找一个规则，该规则表示此操
-+	 作是授予还是拒绝的。
-+
-+
-+凭据类型
-+========
-+
-+Linux内核支持以下类型的凭据：
-+
-+ 1. 传统的UNIX凭据。
-+
-+	- 真实用户ID
-+	- 真实组ID
-+
-+     UID和GID由大多数（如果不是全部）Linux对象携带，即使有时它们需要被虚构出
-+     来（例如FAT或CIFS文件，这些文件来源于Windows）。这些（通常）定义了该对象
-+     的客观上下文，但任务在某些情况下略有不同。
-+
-+	- 有效用户ID，保存用户ID和FS用户ID
-+	- 有效组ID，保存组ID和FS组ID
-+	- 补充组
-+
-+     这些是仅由任务使用的额外凭据。通常，一个EUID/EGID/GROUPS 被用作主观上下文，
-+     而真实UID/GID 被用作客观上下文。对于任务，这并不总是正确的。
-+
-+ 2. 能力
-+
-+	- 允许的能力集合
-+	- 可继承的能力集合
-+	- 有效的能力集合
-+	- 能力边界集合
-+
-+     这些仅由任务携带，表示授予任务的超出普通任务权限的能力。这些可以通过传统
-+     UNIX凭据的更改进行隐式操作，但也可以通过 ``capset()`` 系统调用直接操作。
-+
-+     允许的能力是指进程可以通过 ``capset()`` 将其添加到其有效或允许集合中的
-+     那些能力。这个可继承的集合也可能受到这样的限制。
-+
-+     有效能力是任务本身实际可以使用的能力。
-+
-+     可继承能力是那些可以通过 ``execve()`` 传递的能力。
-+
-+     边界集限制了通过 ``execve()`` 继承的能力，特别是在以UID 0执行二进制文件时。
-+
-+ 3. 安全管理标记（securebits）
-+
-+     它们用于控制上述凭据在特定操作如execve()中的操作和继承方式。它们并不直接
-+     用作客观或主观凭据使用。
-+
-+ 4. 密钥和密钥环
-+
-+     这些仅由任务携带。它们用于携带和缓存不适合放入其他标准UNIX凭据中的安全令牌。
-+     它们用诸如使网络文件系统密钥在进程执行的文件访问时可用，而无需让普通程序了解
-+     涉及的安全细节。
-+
-+     密钥环是一种特殊类型的密钥。它们携带一组其他密钥，并可以搜索来查找所需的密钥。
-+     每个进程可以订阅多个密钥环：
-+
-+	每线程密钥
-+	每进程密钥环
-+	每会话密钥环
-+
-+     当进程访问一个密钥时，若尚不存在，则通常会将其缓存在一个密钥环中，以便将来的
-+     访问时找到该密钥。
-+
-+     有关密钥的更多信息，请参见 ``Documentation/translations/zh_CN/security/keys/*`` 。
-+
-+ 5. LSM
-+
-+     Linux安全模块允许在任务执行操作时施加额外的控制。目前，Linux支持几种LSM选项。
-+
-+     一些工作通过标记系统中的对象，并应用一组规则（策略）说明某个标签的任务可以对
-+     另一标签的对象执行哪些操作。
-+
-+ 6. AF_KEY
-+
-+     这是一种基于套接字网络协议栈中的凭据管理[RFC 2367]。本文档中没有讨论它,因为不
-+     直接与任务和文件凭据进行交互，而是保留了系统级的凭据。
-+
-+
-+当打开一个文件时，打开任务的主观上下文的一部分会记录在创建的文件结构中。
-+这使得使用该文件结构的操作可以使用这些凭据，而不是发出操作的任务的主观上下文。
-+一个例子是在网络文件系统上打开的文件，打开文件的凭据应该被呈现给服务器，而不管
-+实际进行读取或写入操作的是谁。
-+
-+
-+文件标记
-+========
-+
-+存储在磁盘上或通过网络获取的文件可能具有注释，构成该文件的客观安全上下文。
-+根据文件系统的类型，这些注释可能包括以下一项或多项：
-+
-+ * UNIX UID, GID, mode;
-+ * Windows user ID;
-+ * Access control list;
-+ * LSM security label;
-+ * UNIX exec privilege escalation bits (SUID/SGID);
-+ * File capabilities exec privilege escalation bits.
-+
-+将这些与任务的主观安全上下文进行比较，并根据比较结果允许或禁止执行某些操作。
-+在execve()的情况下，特权提升位起作用，并且可能允许由可执行文件的注释决定的
-+进程获得额外的特权。
-+
-+
-+任务凭据
-+========
-+
-+在Linux中，一个任务的所有凭据都保存在一个引用计数结构体‘struct cred’中，
-+通过(uid, gid)或(groups, keys, LSM security)进行访问。每个任务在其
-+task_struct中通过一个名为‘cred’的指针指向其凭据。
-+
-+一旦一组凭据已经准备好并提交，除非以下几种情况，否则不能更改：
-+
-+ 1. 其引用计数可以更改；
-+
-+ 2. 它所指向的 group_info 结构体的引用计数可以更改；
-+
-+ 3. 它所指向的安全数据的引用计数可以更改；
-+
-+ 4. 它所指向的任何密钥环的引用计数可以更改；
-+
-+ 5. 它所指向的任何密钥环可以被撤销、过期或其安全属性可以更改；
-+
-+ 6. 它所指向的任何密钥环的内容可以更改（密钥环的整个目的就是作为一组共享凭据，
-+    可由具有适当访问权限的任何人修改）。
-+
-+要更改cred结构体中的任何内容，必须遵循复制和替换的原则。首先进行复制，然后修
-+改副本，最后使用RCU（读-复制-更新）将任务指针更改为指向新的副本。有一些封装可
-+用于帮助执行这个过程（见下文）。
-+
-+一个任务只能修改自己的凭据；不再允许一个任务修改另一个任务的凭据。
-+这意味着 ``capset()`` 系统调用不再允许使用除当前进程之外的任何PID。
-+此外， ``keyctl_instantiate()`` 和 ``keyctl_negate()`` 函数也不再
-+允许在请求进程中附加到特定于进程的密钥环，因为实例化进程可能需要创建它们。
-+
-+
-+不可变凭据
-+----------
-+
-+一旦一组凭据已经被公开（例如通过调用 ``commit_creds()`` ），必须将其视为
-+不可变的,除了两个例外情况：
-+
-+ 1. 引用计数可以被修改。
-+
-+ 2. 虽然无法更改一组凭据的密钥环订阅，但订阅的密钥环的内容可以被更改。
-+
-+为了在编译时捕获意外的凭据修改，struct task_struct具有_const_指针指向其凭据集，
-+struct file也是如此。此外，某些函数如 ``get_cred()`` 和 ``put_cred()`` 在
-+const指针上操作，因此不需要进行类型转换，但需要临时放弃const限定，以便能够修改
-+引用计数。
-+
-+
-+访问任务凭据
-+------------
-+
-+任务只能修改自己的凭据，允许当前进程可以读取或替换自己的凭据，无需任何形式锁定的
-+情况下 —— 这极大简化了事情。它可以调用::
-+
-+	const struct cred *current_cred()
-+
-+获取指向其凭据结构的指针，并且之后不必释放它。
-+
-+有一些方便的封装用于检索任务凭据的特定方面（在每种情况下都只返回值）::
-+
-+	uid_t current_uid(void)		Current's real UID
-+	gid_t current_gid(void)		Current's real GID
-+	uid_t current_euid(void)	Current's effective UID
-+	gid_t current_egid(void)	Current's effective GID
-+	uid_t current_fsuid(void)	Current's file access UID
-+	gid_t current_fsgid(void)	Current's file access GID
-+	kernel_cap_t current_cap(void)	Current's effective capabilities
-+	struct user_struct *current_user(void)  Current's user account
-+
-+还有一些方便的封装，用于检索任务凭据的特定关联对::
-+
-+	void current_uid_gid(uid_t *, gid_t *);
-+	void current_euid_egid(uid_t *, gid_t *);
-+	void current_fsuid_fsgid(uid_t *, gid_t *);
-+
-+在从当前任务的凭据中检索后，通过其参数返回这些值对。
-+
-+
-+此外，还有一个函数用于获取当前进程的当前凭据集的引用::
-+
-+	const struct cred *get_current_cred(void);
-+
-+以及用于获取对一个实际上不存在于struct cred中的凭据的引用的函数::
-+
-+	struct user_struct *get_current_user(void);
-+	struct group_info *get_current_groups(void);
-+
-+分别获得对当前进程的 user accounting structure 和补充组列表的引用。
-+
-+一旦获得引用，就必须使用 ``put_cred（）``, ``free_uid（）`` 或
-+``put_group_info（）`` 来适当释放它。
-+
-+
-+访问其他任务的凭据
-+------------------
-+
-+虽然一个任务可以在不需要锁定的情况下访问自己的凭据，但想要访问另一个任务
-+的凭据的任务并非如此。它必须使用RCU读锁和 ``rcu_dereference（）``。
-+
-+``rcu_dereference()`` 是由::
-+
-+	const struct cred *__task_cred(struct task_struct *task);
-+
-+这应该在RCU读锁中使用，如下例所示::
-+
-+	void foo(struct task_struct *t, struct foo_data *f)
-+	{
-+		const struct cred *tcred;
-+		...
-+		rcu_read_lock();
-+		tcred = __task_cred(t);
-+		f->uid = tcred->uid;
-+		f->gid = tcred->gid;
-+		f->groups = get_group_info(tcred->groups);
-+		rcu_read_unlock();
-+		...
-+	}
-+
-+如果需要长时间持有另一个任务的凭据，并且可能在此过程中休眠，则调用方
-+应该使用以下函数来获取对这些凭据的引用::
-+
-+	const struct cred *get_task_cred(struct task_struct *task);
-+
-+这个函数内部完成了所有的RCU操作。当使用完这些凭据时，调用方必须调用put_cred()
-+函数释放它们。
-+
-+.. note::
-+   ``__task_cred()`` 的结果不应直接传递给 ``get_cred()`` ，
-+   因为这可能与 ``commit_cred()`` 发生竞争条件。
-+
-+还有一些方便的函数可以访问另一个任务凭据的特定部分，将RCU操作对调用方隐藏起来::
-+
-+	uid_t task_uid(task)		Task's real UID
-+	uid_t task_euid(task)		Task's effective UID
-+
-+如果调用方在此时已经持有RCU读锁，则应使用::
-+
-+	__task_cred(task)->uid
-+	__task_cred(task)->euid
-+
-+类似地，如果需要访问任务凭据的多个方面，应使用RCU读锁，调用 ``__task_cred()``
-+函数，将结果存储在临时指针中，然后从临时指针中调用凭据的各个方面，最后释放锁。
-+这样可以防止多次调用昂贵的RCU操作。
-+
-+如果需要访问另一个任务凭据的其他单个方面，可以使用::
-+
-+	task_cred_xxx(task, member)
-+
-+这里的‘member’是cred结构体的非指针成员。例如::
-+
-+	uid_t task_cred_xxx(task, suid);
-+
-+将从任务中检索‘struct cred::suid’，并执行适当的RCU操作。对于指针成员，
-+不能使用这种形式，因为它们指向的内容可能在释放RCU读锁的瞬间消失。
-+
-+
-+修改凭据
-+--------
-+
-+如先前提到的，一个任务只能修改自己的凭据，不能修改其他任务的凭据。这意味
-+着它不需要使用任何锁来修改自己的凭据。
-+
-+要修改当前进程的凭据，函数应首先调用::
-+
-+	struct cred *prepare_creds(void);
-+
-+这将锁定current->cred_replace_mutex，然后分配并构建当前进程凭据的副本。
-+如果成功，函数返回时仍然保持互斥锁。如果不成功（内存不足），则返回NULL。
-+
-+互斥锁防止 ``ptrace()`` 在进行凭据构建和更改的安全检查时更改进程的ptrace
-+状态，因为ptrace状态可能会改变结果，特别是在 ``execve()`` 的情况下。
-+
-+新的凭据集应适当地进行修改，并进行任何安全检查和挂钩。在此时，当前和建议的
-+凭据集都可用，因为current_cred()将返回当前的凭据集。
-+
-+在替换组列表时，必须在将其添加到凭据之前对新列表进行排序，因为使用二分查找
-+测试成员资格。实际上，这意味着在set_groups()或set_current_groups()之
-+前应调用groups_sort()。groups_sort()不能在共享的 ``struct group_list``
-+上调用，因为即使数组已经排序，它也可能作为排序过程的一部分对元素进行排列。
-+
-+当凭据集准备好时，应通过调用以下函数将其提交给当前进程::
-+
-+	int commit_creds(struct cred *new);
-+
-+这将修改凭据和进程的各个方面，给LSM提供机会做同样的修改，然后使用
-+``rcu_assign_pointer()`` 将新的凭据实际提交给 ``current->cred`` ，
-+释放 ``current->cred_replace_mutex`` 以允许 ``ptrace()`` 进行操
-+作，并通知调度程序和其他组件有关更改的情况。
-+
-+该函数保证返回0，以便可以在诸如 ``sys_setresuid()`` 函数的末尾进行尾调用。
-+
-+请注意，该函数会消耗调用者对新凭据的引用。调用者在此之后不应调用
-+``put_cred()`` 释放新凭据。
-+
-+此外，一旦新的凭据上调用了该函数，就不能进一步更改这些凭据。
-+
-+
-+如果在调用 ``prepare_creds()`` 之后安全检查失败或发生其他错误，
-+则应调用以下函数::
-+
-+	void abort_creds(struct cred *new);
-+
-+这将释放 ``prepare_creds()`` 获取的 ``current->cred_replace_mutex`` 的锁，
-+并释放新的凭据。
-+
-+一个典型的凭据修改函数看起来像这样::
-+
-+	int alter_suid(uid_t suid)
-+	{
-+		struct cred *new;
-+		int ret;
-+
-+		new = prepare_creds();
-+		if (!new)
-+			return -ENOMEM;
-+
-+		new->suid = suid;
-+		ret = security_alter_suid(new);
-+		if (ret < 0) {
-+			abort_creds(new);
-+			return ret;
-+		}
-+
-+		return commit_creds(new);
-+	}
-+
-+
-+管理凭据
-+--------
-+
-+有一些函数用来辅助凭据管理:
-+
-+ - ``void put_cred(const struct cred *cred);``
-+
-+	 这将释放对给定凭据集的引用。如果引用计数为零，凭据集将由
-+	 RCU系统安排进行销毁。
-+
-+ - ``const struct cred *get_cred(const struct cred *cred);``
-+
-+	 这将获取对活动凭据集的引用。返回指向凭据集的指针。
-+
-+ - ``struct cred *get_new_cred(struct cred *cred);``
-+
-+	 这将获取对当前正在构建且可变的凭据集的引用。返回指向凭据集的指针。
-+
-+打开文件凭据
-+============
-+
-+当打开新文件时，会获取对打开任务凭据的引用，并将其附加到文件结构体的
-+``f_cred`` 字段中，替代原来的 ``f_uid`` 和 ``f_gid`` 。原来访问
-+``file->f_uid`` 和 ``file->f_gid`` 的代码现在应访问 ``file->f_cred->fsuid``
-+和 ``file->f_cred->fsgid`` 。
-+
-+安全访问 ``f_cred`` 的情况下可以不使用RCU或加锁，因为指向凭据的指针
-+以及指向的凭据结构的内容在文件结构的整个生命周期中保持不变，除非是
-+上述列出的例外情况（参阅任务凭据部分）。
-+
-+为了避免“混淆代理”权限提升攻击，在打开的文件后续操作时，访问控制检查
-+应该使用这些凭据，而不是使用“当前”的凭据，因为该文件可能已经被传递给
-+一个更具特权的进程。
-+
-+覆盖VFS对凭据的使用
-+===================
-+
-+在某些情况下，需要覆盖VFS使用的凭据，可以通过使用不同的凭据集调用
-+如 ``vfs_mkdir()`` 来实现。以下是一些进行此操作的位置:
-+
-+ * ``sys_faccessat()``.
-+ * ``do_coredump()``.
-+ * nfs4recover.c.
-diff --git a/Documentation/translations/zh_CN/security/index.rst b/Documentation/translations/zh_CN/security/index.rst
-index 2e81f33889e5..c30d4e0210d1 100644
---- a/Documentation/translations/zh_CN/security/index.rst
-+++ b/Documentation/translations/zh_CN/security/index.rst
-@@ -15,6 +15,7 @@
- .. toctree::
-    :maxdepth: 1
- 
-+   credentials
-    IMA-templates
-    lsm
-    sak
-@@ -23,7 +24,6 @@
-    landlock
- 
- TODOLIST:
--* credentials
- * snp-tdx-threat-model
- * keys/index
- * lsm-development
--- 
-2.47.1
+> What exactly should they be named (any preference?)
+
+No preference for the naming, the firmware-attributes API just
+specifies how userspace can find out if something is
+an int/string/enumand valid values / range. Not naming of
+the attributes.
+
+> and should I also
+> add some documentation for them in
+> Documentation/ABI/testing/sysfs-class-firmware-attributes ?
+
+No unless you add new functionality like a new type to
+the firmware attributes API then these should not be
+documented there. It would be good to document them in
+driver specific documentation.
+
+> I am fairly sure I understand the concept and can agree that it kind
+> of makes a lot of sense to be able to standardize the userspace
+> interface, especially for attributes which do the exact same thing
+> across different vendors/devices (unless it just as easily possible to
+> go based on some pattern matching e.g. like is done in udev and upower
+> with "*kbd_backlight*" etc) but as of now it looks like the only
+> examples implemented are for thinklmi, dell-wmi, and hp-bioscfg that I
+> can see so far?
+
+Right, note the existing examples all actually read a list of
+firmware-attributes directly from the BIOS using a generic interface,
+which is somewhat different from how you plan to use this.
+
+Using the firmware-attributes class to control settings where each
+attribute needs to be manually added to the driver is new, but is
+e.g. also planned for asus-wmi and some other upcoming drivers.
+
+>> The allow-recording setting toggle is new to me. So this is changeable
+>> at runtime, interesting.
+>>
+>> Joshua above you write this toggle both the microphone mute and
+>> disables the camera?
+>>
+>> It would be good to report the camera state to userspace using
+>> a separate input/evdev device which reports SW_CAMERA_LENS_COVER
+>> as discussed here:
+>>
+>> https://lore.kernel.org/linux-media/CANiDSCtjpPG3XzaEOEeczZWO5gL-V_sj_Fv5=w82D6zKC9hnpw@mail.gmail.com/
+>>
+>> the plan is to make that the canonical API to reported "muted"
+>> cameras.
+>>
+>> What happens with the camera when recording is disallowed,
+>> dus it drop of the USB bus or does it only produce black
+>> frames ?
+>>
+>> It is a bit unexpected that this one button controls both
+>> microphone and camera mute. But given that unique behavior
+>> I guess that handling this in the kernel is probably best.
+>>
+>> The alsamixer should send some events for the mic mute/unmute
+>> I hope and we can use SW_CAMERA_LENS_COVER to report the camera
+>> state.
+>>
+> 
+> Yes this is kind of an interesting one, also... In the user manuals
+> for these Samsung devices, they actually call this feature "Block
+> Recording." See the second link here with the same title:
+> 
+> https://www.samsung.com/ca/support/computing/samsung-laptop-disable-the-webcam/
+> 
+> There is this software control in their "Samsung Settings" and/or
+> "Samsung Security" application plus the hotkey, but they both function
+> exactly the same (executing this ACPI method with the right payload).
+> The reason I called it "allow recording" is because I was trying to
+> take a simple approach in the beginning, and let the device value and
+> userspace value have a 1:1 mapping (you send 0x1 if you want the
+> webcam and mic to NOT block recording, i.e. be "allowed" and 0x0 if
+> you them to be blocked). I thought that echo 1 > block_recording to
+> turn OFF "blocking" felt backwards so I just reversed the name instead
+> ;) But in theory it could as easily be called "block_recording" and
+> the kernel driver could handle the flip (0x1 from userspace becomes
+> 0x0 to/from the device and vice-versa).
+> 
+> When you press the hotkey in Windows then there is an OSD popup from
+> their own background software, but nothing actually happens to the
+> devices themselves. Even in Linux via this driver or if you just
+> directly execute the ACPI method with the right values in the buffer,
+> what happens is that the image feed from the camera just becomes solid
+> black and the mic input is just completely silent. The USB camera
+> device is not removed or seemingly touched in anyway, and there does
+> not seem to be any kind of sound device event at all from what I can
+> tell (I tried to check using "amixer events" and a few other methods
+> but never saw anything, and the mixer control in alsa is always
+> un-muted like normal when toggling the feature on and off even though
+> it stops the sound from being able to be recorded).
+> 
+> It is as this switch name SW_CAMERA_LENS_COVER indicates, almost like
+> a physical (virtual?) cover has been drawn over the camera and the
+> microphone but they are still seen as operational and completely
+> unchanged from a device perspective.
+
+Right, so for the camera side of this, intercepting the key making
+the ACPI call and then reporting SW_CAMERA_LENS_COVER definitely
+is the right thing to do.
+
+The microphone also getting muted not at the mixer level but at
+some other hw level as a side-effect is something unique to
+samsung, I guess we can just ignore this wrt reporting it to
+userspace. Once GNOME/KDE get support for showing an OSD on
+SW_CAMERA_LENS_COVER changes (1) we will have a nice notification
+to the user and the mic also getting muted as a side-effect will
+then just be a Samsung peculiarity we will have to live with.
+
+1) now that more drivers are starting to actually report this
+I hope that at least GNOME will get OSD support for this soon.
+
+> What I have started with for now based on this thread, is that as it
+> seems like KE_SW key entries should have a "sw" struct with code and
+> value, that I am assuming I should send .code = SW_CAMERA_LENS_COVER,
+> .value = 0 for "cover is removed/off/not blocking", and .code =
+> SW_CAMERA_LENS_COVER, .value = 1 for "cover is placed/on/blocking",
+
+That is correct.
+
+> also it looks like I should send this event as part of init for the
+> current state at init time (the input device seems to have a "state"
+> associated to this switch) -- is this correct?
+
+That is also correct.
+
+> And then is there any events or functions that should be called to
+> notify of a mic mute switch (not actually to send the event to toggle
+> mic mute to userspace, but to just report to userspace somehow that
+> the mic has been muted by hardware, similar to this
+> SW_CAMERA_LENS_COVER or led_classdev_notify_brightness_hw_changed()
+> etc ?
+
+No, normally the EC controls the hw-mixer in the sound/codec chip
+and that sends an event. But that appears to not be happening here?
+
+We could add a SW_INTERNAL_MIC_MUTED event I guess. Although with this
+being a Samsung only thing I doubt userspace will ever get support
+for that and if it does then we end up with one OSD replacing the
+other quite quickly since typicalluy only 1 OSD will be shown at
+a time. So as I mentioned above, I would just go with only reporting
+SW_CAMERA_LENS_COVER and then consider the mic also getting muted
+a Smasung specific side-effect of this.
+
+Some UVC cameras also have an electronic "cover" switch rather then
+an actual cover, I guess those might also mute the builtin mic
+for UVc cams with a builtin mic, so having this is a side-effect
+is not that far fetched.
+
+> At the same time I am still not convinced what exactly the name of
+> this attribute should be ("allow_recording" vs "block_recording" vs
+> "camera_mic_privacy" etc ??)
+
+camera_mic_privacy or block_recording are both fine I think.
+
+> 
+> Other notifications that I am wondering what the "right" way to handle
+> / using the right interface:
+> 
+> - Are there better events to use for these which these devices are
+> reporting for "ACPI_NOTIFY_DEVICE_ON_TABLE" and
+> "ACPI_NOTIFY_DEVICE_OFF_TABLE" , i.e. some kind of standard
+> "switch"-like notification that the motion sensor in the device has
+> detected that it has been placed or lifted from a flat surface?
+
+The thinkpad_apci driver has /sys/bus/platform/devices/thinkpad_acpi/dytc_lapmode
+which will read 1 when the laptop thinks it is not on a table (and thus will
+limit max temperatures a bit to avoid someone getting a hot lap when
+actually having the laptop on their lap.
+
+I'm not aware of any other drivers having something similar. I do think
+that power-profiles-daemon checks the dytc_lapmode thing, so it might
+be good to have some standard interface for this, but that would need
+to be designed / decided upon .
+
+For v1 of your patch I would just dev_dbg() log these events and
+otherwise do nothing.
+
+> 
+> - When the battery charge control end threshold is reached, there is
+> an ACPI notification on this device as well that is the one I have
+> marked "ACPI_NOTIFY_BATTERY_STATE_CHANGED" -- the Samsung background
+> apps pop up a custom OSD that basically says something to the effect
+> that their "Battery saver is protecting the battery by stopping
+> charging" (can't remember the exact verbiage) and they change the
+> battery icon, but without doing anything else in my driver currently
+> the battery still reports state of "charging" even though it just sits
+> constantly at the percentage (and has the charging icon in GNOME etc).
+> I have seen the event come and go occasionally when I did not expect
+> it, but my working theory is that maybe it is if/when the battery
+> starts charging again if it dips too far below the target "end
+> threshold" and then notifies again when the threshold has been
+> reached. Armin also mentioned this before in a different mail; I guess
+> I would hope/expect there is an event or a function I could call to
+> have the state reflected correctly but I would not want that it
+> negatively impacts the normal behavior of charging the battery itself
+> (just that the state/icon would change would be ideal! as it functions
+> perfectly, it is just that the state and icon are not accurate).
+
+ATM there is no userspace API to communicate e.g. "charging stopped
+due to charge end threshold" and this is the first time I hear about
+us getting events from the hw for this.
+
+So for this one too I would say just dev_dbg() log the event and
+otherwise do nothing.
+
+We can always add an API later if we have an idea how userspace
+could / will use this.
+
+Regard,
+
+Hans
+
 
 
