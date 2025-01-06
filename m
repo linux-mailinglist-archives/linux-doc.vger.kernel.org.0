@@ -1,31 +1,31 @@
-Return-Path: <linux-doc+bounces-34030-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34027-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 441F4A020D2
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 09:36:06 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 268A6A020C9
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 09:35:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 34996163F6A
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 08:36:04 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6D1F71885981
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2025 08:35:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 13DCE1DC99C;
-	Mon,  6 Jan 2025 08:33:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DD53C1DB365;
+	Mon,  6 Jan 2025 08:33:25 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1A901DB377
-	for <linux-doc@vger.kernel.org>; Mon,  6 Jan 2025 08:33:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FED71D9663
+	for <linux-doc@vger.kernel.org>; Mon,  6 Jan 2025 08:33:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736152408; cv=none; b=KyQsvn0LUPTDSrQIglAtYNFXBpkP1Fx3L1muoFkKodx8bPRGw1Fd7jTzboVF5ROZ3v1MnIY8MKi+clIEuXCc3QDVOiBfQmo2AqerXaCIKMWtqG4APGQXHQkY+ed4PLcWJGjn9Kt8gk2OcFt40EBqMeMvmWY0JYefc1QJJ+YkaN4=
+	t=1736152405; cv=none; b=pz34+rgtfonVSC1DL7DSV7/T6fbPhn63SnCLm++HraGijnYo3C1nVQNVRJHPwY+6bMfAGZqW7fQAvXFA4FaZPRse2ybRY37f2KHWEuc87GCiOOMVH/m0dk/Sy1aHYU5+VUFxy6PLDqPnAC3mK0PEHInWSxZVo28AVmQgGU0is0E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736152408; c=relaxed/simple;
-	bh=2wXbYqaWGW9mOPTkLt5y4RaTyBb9rPot160rt9mK8bo=;
+	s=arc-20240116; t=1736152405; c=relaxed/simple;
+	bh=N1ub58lj9lyJyeFNKljMf4FwQWesS63RiYMF3RwDe/0=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=f7ZArNXasOR9de7cC538H0mrF5u+BTDi2WdTJxVNt+8jkcWVlVhXOI/SNfGWCRJdZOe+oaWaEHgpZPqZj6NWnO6EKkrfbAzoU4KyoVB1jrdAmShpyTvMYyQMdkguRS4GDgo2IyQDrT24xeAi78vdPZLFN+nNoWhSp9SWSpsUPFc=
+	 MIME-Version; b=JRVuw+5TziLMHHVuGWywTht4/bj3zTFoQZPd+l6sCadGGUoD84EcIbl2PVnfyohW9RUCtCN2ruZ1d4SQLaXmXE0Vr+KBM6RaD5yxZNKBYQf573aB4KThEVjUsJTMIYV5fAbh2S1eJUFc7RMj79W6Wr/rTqdgyxAR8S0qX3t0PYQ=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
@@ -33,16 +33,16 @@ Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
 	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <ore@pengutronix.de>)
-	id 1tUiXq-0003U0-WF; Mon, 06 Jan 2025 09:33:07 +0100
+	id 1tUiXq-0003U1-WE; Mon, 06 Jan 2025 09:33:07 +0100
 Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
 	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 	(Exim 4.96)
 	(envelope-from <ore@pengutronix.de>)
-	id 1tUiXm-0078Kl-0c;
-	Mon, 06 Jan 2025 09:33:02 +0100
+	id 1tUiXm-0078Km-0m;
+	Mon, 06 Jan 2025 09:33:03 +0100
 Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.96)
 	(envelope-from <ore@pengutronix.de>)
-	id 1tUiXm-004MWz-2s;
+	id 1tUiXm-004MX9-2w;
 	Mon, 06 Jan 2025 09:33:02 +0100
 From: Oleksij Rempel <o.rempel@pengutronix.de>
 To: "David S. Miller" <davem@davemloft.net>,
@@ -60,9 +60,9 @@ Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
 	Russell King <linux@armlinux.org.uk>,
 	Maxime Chevallier <maxime.chevallier@bootlin.com>,
 	linux-doc@vger.kernel.org
-Subject: [PATCH net-next v5 4/8] Documentation: networking: update PHY error counter diagnostics in twisted pair guide
-Date: Mon,  6 Jan 2025 09:32:57 +0100
-Message-Id: <20250106083301.1039850-5-o.rempel@pengutronix.de>
+Subject: [PATCH net-next v5 5/8] net: phy: introduce optional polling interface for PHY statistics
+Date: Mon,  6 Jan 2025 09:32:58 +0100
+Message-Id: <20250106083301.1039850-6-o.rempel@pengutronix.de>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250106083301.1039850-1-o.rempel@pengutronix.de>
 References: <20250106083301.1039850-1-o.rempel@pengutronix.de>
@@ -78,70 +78,97 @@ X-SA-Exim-Mail-From: ore@pengutronix.de
 X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
 X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-Replace generic instructions for monitoring error counters with a
-procedure using the unified PHY statistics interface (`--all-groups`).
+Add an optional polling interface for PHY statistics to simplify driver
+implementation.
 
 Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
 ---
- .../twisted_pair_layer1_diagnostics.rst       | 39 +++++++++++++------
- 1 file changed, 28 insertions(+), 11 deletions(-)
+changes v3:
+- update commit message
+changes v2:
+- drop PHY_POLL_STATS
+- add function comments
+---
+ drivers/net/phy/phy.c | 20 ++++++++++++++++++++
+ include/linux/phy.h   | 21 +++++++++++++++++++++
+ 2 files changed, 41 insertions(+)
 
-diff --git a/Documentation/networking/diagnostic/twisted_pair_layer1_diagnostics.rst b/Documentation/networking/diagnostic/twisted_pair_layer1_diagnostics.rst
-index c9be5cc7e113..079e17effadf 100644
---- a/Documentation/networking/diagnostic/twisted_pair_layer1_diagnostics.rst
-+++ b/Documentation/networking/diagnostic/twisted_pair_layer1_diagnostics.rst
-@@ -713,17 +713,23 @@ driver supports reporting such events.
+diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+index e4b04cdaa995..c8812a115114 100644
+--- a/drivers/net/phy/phy.c
++++ b/drivers/net/phy/phy.c
+@@ -1398,6 +1398,23 @@ static int phy_enable_interrupts(struct phy_device *phydev)
+ 	return phy_config_interrupt(phydev, PHY_INTERRUPT_ENABLED);
+ }
  
- - **Monitor Error Counters**:
++/**
++ * phy_update_stats - Update PHY device statistics if supported.
++ * @phydev: Pointer to the PHY device structure.
++ *
++ * If the PHY driver provides an update_stats callback, this function
++ * invokes it to update the PHY statistics. If not, it returns 0.
++ *
++ * Return: 0 on success, or a negative error code if the callback fails.
++ */
++static int phy_update_stats(struct phy_device *phydev)
++{
++	if (!phydev->drv->update_stats)
++		return 0;
++
++	return phydev->drv->update_stats(phydev);
++}
++
+ /**
+  * phy_request_interrupt - request and enable interrupt for a PHY device
+  * @phydev: target phy_device struct
+@@ -1467,6 +1484,9 @@ static enum phy_state_work _phy_state_machine(struct phy_device *phydev)
+ 	case PHY_RUNNING:
+ 		err = phy_check_link_status(phydev);
+ 		func = &phy_check_link_status;
++
++		if (!err)
++			err = phy_update_stats(phydev);
+ 		break;
+ 	case PHY_CABLETEST:
+ 		err = phydev->drv->cable_test_get_status(phydev, &finished);
+diff --git a/include/linux/phy.h b/include/linux/phy.h
+index 81606d8c6a8b..c8848a963990 100644
+--- a/include/linux/phy.h
++++ b/include/linux/phy.h
+@@ -1177,6 +1177,24 @@ struct phy_driver {
+ 	 */
+ 	void (*get_link_stats)(struct phy_device *dev,
+ 			       struct ethtool_link_ext_stats *link_stats);
++
++	/**
++	 * @update_stats: Trigger periodic statistics updates.
++	 * @dev: The PHY device for which statistics updates are triggered.
++	 *
++	 * Periodically gathers statistics from the PHY device to update locally
++	 * maintained 64-bit counters. This is necessary for PHYs that implement
++	 * reduced-width counters (e.g., 16-bit or 32-bit) which can overflow
++	 * more frequently compared to 64-bit counters. By invoking this
++	 * callback, drivers can fetch the current counter values, handle
++	 * overflow detection, and accumulate the results into local 64-bit
++	 * counters for accurate reporting through the `get_phy_stats` and
++	 * `get_link_stats` interfaces.
++	 *
++	 * Return: 0 on success or a negative error code on failure.
++	 */
++	int (*update_stats)(struct phy_device *dev);
++
+ 	/** @get_sset_count: Number of statistic counters */
+ 	int (*get_sset_count)(struct phy_device *dev);
+ 	/** @get_strings: Names of the statistic counters */
+@@ -1667,6 +1685,9 @@ static inline bool phy_polling_mode(struct phy_device *phydev)
+ 		if (phydev->drv->flags & PHY_POLL_CABLE_TEST)
+ 			return true;
  
--  - While some NIC drivers and PHYs provide error counters, there is no unified
--    set of PHY-specific counters across all hardware. Additionally, not all
--    PHYs provide useful information related to errors like CRC errors, frame
--    drops, or link flaps. Therefore, this step is dependent on the specific
--    hardware and driver support.
--
--  - **Next Steps**: Use `ethtool -S <interface>` to check if your driver
--    provides useful error counters. In some cases, counters may provide
--    information about errors like link flaps or physical layer problems (e.g.,
--    excessive CRC errors), but results can vary significantly depending on the
--    PHY.
-+  - Use `ethtool -S <interface> --all-groups` to retrieve standardized interface
-+    statistics if the driver supports the unified interface:
++	if (phydev->drv->update_stats)
++		return true;
 +
-+  - **Command:** `ethtool -S <interface> --all-groups`
-+
-+  - **Example Output (if supported)**:
-+
-+    .. code-block:: bash
-+
-+      phydev-RxFrames: 100391
-+      phydev-RxErrors: 0
-+      phydev-TxFrames: 9
-+      phydev-TxErrors: 0
-+
-+  - If the unified interface is not supported, use `ethtool -S <interface>` to
-+    retrieve MAC and PHY counters. Note that non-standardized PHY counter names
-+    vary by driver and must be interpreted accordingly:
- 
-   - **Command:** `ethtool -S <interface>`
- 
-@@ -740,6 +746,17 @@ driver supports reporting such events.
-     condition) or kernel log messages (e.g., link up/down events) to further
-     diagnose the issue.
- 
-+  - **Compare Counters**:
-+
-+    - Compare the egress and ingress frame counts reported by the PHY and MAC.
-+
-+    - A small difference may occur due to sampling rate differences between the
-+      MAC and PHY drivers, or if the PHY and MAC are not always fully
-+      synchronized in their UP or DOWN states.
-+
-+    - Significant discrepancies indicate potential issues in the data path
-+      between the MAC and PHY.
-+
- When All Else Fails...
- ~~~~~~~~~~~~~~~~~~~~~~
+ 	return phydev->irq == PHY_POLL;
+ }
  
 -- 
 2.39.5
