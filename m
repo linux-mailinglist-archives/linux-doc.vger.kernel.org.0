@@ -1,277 +1,269 @@
-Return-Path: <linux-doc+bounces-34234-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34236-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id B66FCA0496F
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 19:45:21 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D4B5FA0499A
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 19:51:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id C511F1887961
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 18:45:23 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 15DDC3A682B
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 18:51:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8DCDF1F4E40;
-	Tue,  7 Jan 2025 18:45:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C7F11F4298;
+	Tue,  7 Jan 2025 18:50:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="uQsODK6V"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="ChowLbIQ";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="GQuqiR5N"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-il1-f180.google.com (mail-il1-f180.google.com [209.85.166.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D38ED1F37BE
-	for <linux-doc@vger.kernel.org>; Tue,  7 Jan 2025 18:45:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.180
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736275506; cv=none; b=X9BYolNaZm0+j3VeO2aUtJQImi/myrXXbApHPy2yrSP2UR/BWnr1Y9gs1mMjXfOwX4OPIw8zsdx/3dFXi4kNbNshIsjOeaaRDi42dgtd3y6u3f86hug04t2Ej4vOkkO7mN/MSC+82UfJsSF0aqpVKElU4owqF/VhWVzoR+d1OD4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736275506; c=relaxed/simple;
-	bh=Ix8CwgupWnsJ2NHz+6bGRcZAT6fmMTgIODWckWOqE2I=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=c1eeVX3XLovX9gZp81XuN4ZSb7bkJcV1XW1FsCo/kRzMys9RXvfVjvcXj+bfMDN0a92ksdXVXzEnukik0AlyNvhwZASHKepb+njSNCH/nk0cvRd33WXhWW4KoPMyVlMUSZ09TMO0n0bfQfECE72WoTC5qgDFLX4hg8F+nhBdWVQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=uQsODK6V; arc=none smtp.client-ip=209.85.166.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-il1-f180.google.com with SMTP id e9e14a558f8ab-3a815a5fb60so9205ab.0
-        for <linux-doc@vger.kernel.org>; Tue, 07 Jan 2025 10:45:01 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B94561F3D20;
+	Tue,  7 Jan 2025 18:50:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1736275839; cv=fail; b=Rmjqv4HVo3zXA9oMVoJfSOi/h6tV6/9tzus6aMyX9tqTofUygCBjkla9XUicAYNhupR86+CGnEr6K5w7eOC7A/cg4xwfOyDhldCByrXHv7lr2v/OY3EVQ21Avp8D8mH4sVojGaNK8Zt306tTNQZ2Ssb0lVPb/IAllyg4Rni/lVQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1736275839; c=relaxed/simple;
+	bh=N+maibTTg7m65Scd/VNPI7hbIXg087SfuTzIqZ6LZdc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=p8/18BSxr8y55ukScWI2nwT7drUDnOtJV7ex6tKh8bsn1QH0gCgNv7N2LieL+0N6Y/NRTeic33W0B4H9Q3Rd4LWemFJYuHHHcweFhxYhOsIY9hN9bJaa0dloYXrdtJzR9vnxcB75bTWI+OcvI1/RJKzs5XNmiY4DA4GqT/dzfsE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=ChowLbIQ; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=GQuqiR5N; arc=fail smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0333520.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 507HMpaI004830;
+	Tue, 7 Jan 2025 18:50:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=corp-2023-11-20; bh=5ASgiAHsd1lHi7ZuFu
+	UuBUbPSC5eepg1TvsFw8FOmMU=; b=ChowLbIQFOLJoUm80tOhJCP5HDOGxHAQRo
+	/InlUR1NrZqqBkoxS37yGHOoFVmm03R8u0+lCU7LQx0ggRo5irg9GbpztE10l493
+	Nqo7rf+XUfGbtUxun1/MLnUIsVi+LP9j+9GOW/n51V4kYzkUdFupoXryR0M2Q6x9
+	JbEqOclBBGLFd11X/hKZFa0CH0UZFZahe6vsCR5Hd6zpRTPVtuAuAG65Q9Vnl2td
+	6dt+qbb1HKdhO6mJTGnm8YLBRXDK7pc+UED0CthGWUl9UQ4jf7LQ9jPlrpn1Io9G
+	9RPBrjk+rXwikp8NCbTclpDE43dUG1H6Tch6UrPKDXX16jGVkAHw==
+Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 43xw1bw754-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 07 Jan 2025 18:50:01 +0000 (GMT)
+Received: from pps.filterd (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 507Id6oC011166;
+	Tue, 7 Jan 2025 18:50:00 GMT
+Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2041.outbound.protection.outlook.com [104.47.55.41])
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 43xue8nh7q-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 07 Jan 2025 18:50:00 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TxNPxcODJGX8Ala8EdKGNNgc8ub09UAxRyXjDmZbsuUmDI8zx3rAejoW+XUekAgi9cD0Z3lShJVWYOEHQ/TpvvhwU293pwX+JpvC0x2Fek6knaRS9BdokGq+JmyrhePrsXQCh/wnm1iYayPWk9Co3q7x2BywfqB1tmoo/XoL/w8BLOIcs1u0C52g9cAuPruuzoR+UexEeXqoyjSnMUoRb7ld7EhCiJoC/0vMBtfrpRP8wnHOZ33/Ok4kXRC51izq8dXGacxHZ8K0WzZW5nzPAdWBJwo17IsUAmQN7bMy/l7DTjzmdb7BeWMk7xmkzhWgoEUqSM3jamyl1wCUSrW4xQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5ASgiAHsd1lHi7ZuFuUuBUbPSC5eepg1TvsFw8FOmMU=;
+ b=i1Jlz+22idHa4EmHrvSInP28eapr8EdJ/OcettFh1MLYHCfjnI4MFvy/dKJ/jwqgDo/o+UcbO4GLWPyHEveKFijKAOwZkQjd8nDB/N21dBjeDKP/BG7Yr3fp5J6qVXp86dHH0Ay8JQMUPRczExrO33/Qc42Ar6n+ifVRICwjmYrG7QH2CpbUzqPy2q5mIZ/A9VlcFxQH3vXw2BzOodGyEJ/Pu8lizb4bmms7DxEbd9Jl1vGjIm8Zv0dtkoKPhMltzxZyBK5YcG62EGNMmKNyDrYlLfmBf7B6f0KhLLB6Fdq+fFxw74sDjy7EYNZO6OS1OrdZ0xmigFvqF4eOuPFMxQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1736275501; x=1736880301; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VJJx+P1BM3o2AclN0fARVZxzF2vJee5sNA/yq96x/gk=;
-        b=uQsODK6VCc6/KMLKhOCN21VX7Xt3DTjNxjce7xZVMkkFabDMhAbmKhqW+Yn6yIZkCF
-         OHtM1RHjKRpl5VFNUNkeEiCBOePlhgsM3EXhd737svqH+rMaja3/h3SEyvR53pxOaq+M
-         kd6N5HYFQatuK6C69+Cw2ATPqV5usdGs3YhoXf2ukyVL8zgfoXMuNdStFh+NaGNjqpLP
-         IOhE27O6Fea84b9a0YOr4gINh4FlMnhCHDsXQm1yYImiJymurUCPyMAxfYtxtnSZj83z
-         N/HxTg2K02JAlNw504U6HIoEThXEzSPU/psFpwfKPhmNXz/iJaIolSnFXteIfm0n/Anl
-         O1hw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736275501; x=1736880301;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VJJx+P1BM3o2AclN0fARVZxzF2vJee5sNA/yq96x/gk=;
-        b=bm4yHA9O6trxiXFkva2wTMRbolFb7CVyJGk0fCJ+YpbKJ//QkTvDbA3Vi7JX18yB1R
-         qk1RLJVNt8HEDEkPkDnaItbuPh7yDke2tvKhqaBK4Onj7WjDxwFR735AUs6QxF/twWjg
-         aoKdYvwZPToMDDKeIFlwbbnoYgt3HHnOCyzccCkie3A8WEg+OugYtR6aCGfeiuVxLeKz
-         0od5JXdVXZ3V03qJAxkJv+40GGVD4Pv9liMtuaXC0XIfitCLy+4mDaU6NFQ0OwGokEVT
-         N1Z5gHO8LltmdePbbbrlGiuqsjlLny11nqWN8ytR66ikw0vjAh7dD+l6hqMQf7I+xa6C
-         fTzw==
-X-Forwarded-Encrypted: i=1; AJvYcCWFWyp7TcB8P+3NfExXOqLPfZLQ/oy00civ7lDYXijNFrqAeTqqdAhKXeva8wbymW06whJSYhg4QVM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzOmE9amTWbGvLSrKMDcH4qiInzLr13HkrswAHqW14zr52bqZ3M
-	6XDMNOP2478FSI6UGR9f6U5BDCi9icqxL4uet/7JUD51l4k+mJtobc/bG0IWwXwc+yj3iZBsl8A
-	obnkr984jledxex2DqKCBk2dLFK5obArd/zQM
-X-Gm-Gg: ASbGnctE9/zf8/JqfZehbqYyIipNPfQWIUXKosYf0zhOOD0mP7meFIAoxDvGT13L0uV
-	qlSh+1iN2NyJ+44+p0ZqcNo889TcdBuPW43fcGMUuof8TW3wJJMxSNbCRclvpy9D5NoVolw==
-X-Google-Smtp-Source: AGHT+IEseKvNZN6+1U5xaeEFYg5v0HSjPQ42KLZsijQ/hQCyvb+Yo8x6RDlu2GEmFg6ThF8oNhQEjR4YLtlu8w6G6hY=
-X-Received: by 2002:a92:cd09:0:b0:3a7:dcc1:9936 with SMTP id
- e9e14a558f8ab-3ce333ac737mr3451575ab.23.1736275500747; Tue, 07 Jan 2025
- 10:45:00 -0800 (PST)
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5ASgiAHsd1lHi7ZuFuUuBUbPSC5eepg1TvsFw8FOmMU=;
+ b=GQuqiR5Nyl7bxin88Ioky1ZhA7PqOM3IhaBhwoCazaW6zbHuRbv584dJK2CBmRZ+61RJWzyPdwFibg1pNz4cyojjR4eV/khJ+RIq+dqwaSDXo+ZqAmpx8qPtMByBbiPJ9Q9q5m8mz6r3IhhOM8LV/IG9Nth4LuHKat1VslRjGGE=
+Received: from PH0PR10MB5777.namprd10.prod.outlook.com (2603:10b6:510:128::16)
+ by MN6PR10MB8072.namprd10.prod.outlook.com (2603:10b6:208:4ff::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.10; Tue, 7 Jan
+ 2025 18:49:57 +0000
+Received: from PH0PR10MB5777.namprd10.prod.outlook.com
+ ([fe80::75a8:21cc:f343:f68c]) by PH0PR10MB5777.namprd10.prod.outlook.com
+ ([fe80::75a8:21cc:f343:f68c%6]) with mapi id 15.20.8314.015; Tue, 7 Jan 2025
+ 18:49:57 +0000
+Date: Tue, 7 Jan 2025 13:49:52 -0500
+From: "Liam R. Howlett" <Liam.Howlett@oracle.com>
+To: Suren Baghdasaryan <surenb@google.com>
+Cc: akpm@linux-foundation.org, peterz@infradead.org, willy@infradead.org,
+        lorenzo.stoakes@oracle.com, mhocko@suse.com, vbabka@suse.cz,
+        hannes@cmpxchg.org, mjguzik@gmail.com, oliver.sang@intel.com,
+        mgorman@techsingularity.net, david@redhat.com, peterx@redhat.com,
+        oleg@redhat.com, dave@stgolabs.net, paulmck@kernel.org,
+        brauner@kernel.org, dhowells@redhat.com, hdanton@sina.com,
+        hughd@google.com, lokeshgidra@google.com, minchan@google.com,
+        jannh@google.com, shakeel.butt@linux.dev, souravpanda@google.com,
+        pasha.tatashin@soleen.com, klarasmodin@gmail.com, corbet@lwn.net,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-kernel@vger.kernel.org, kernel-team@android.com,
+        kernel test robot <lkp@intel.com>
+Subject: Re: [PATCH 1/1] fixup for mm/debug: print vm_refcnt state when
+ dumping the vma
+Message-ID: <xzbyr4v4jhxjovjsbsqikapqddkwyh3sudm3dd3rvxjgcoayda@xqyebxeynnya>
+Mail-Followup-To: "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
+	Suren Baghdasaryan <surenb@google.com>, akpm@linux-foundation.org, peterz@infradead.org, 
+	willy@infradead.org, lorenzo.stoakes@oracle.com, mhocko@suse.com, vbabka@suse.cz, 
+	hannes@cmpxchg.org, mjguzik@gmail.com, oliver.sang@intel.com, 
+	mgorman@techsingularity.net, david@redhat.com, peterx@redhat.com, oleg@redhat.com, 
+	dave@stgolabs.net, paulmck@kernel.org, brauner@kernel.org, dhowells@redhat.com, 
+	hdanton@sina.com, hughd@google.com, lokeshgidra@google.com, minchan@google.com, 
+	jannh@google.com, shakeel.butt@linux.dev, souravpanda@google.com, 
+	pasha.tatashin@soleen.com, klarasmodin@gmail.com, corbet@lwn.net, linux-doc@vger.kernel.org, 
+	linux-mm@kvack.org, linux-kernel@vger.kernel.org, kernel-team@android.com, 
+	kernel test robot <lkp@intel.com>
+References: <20241226200335.1250078-1-surenb@google.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241226200335.1250078-1-surenb@google.com>
+User-Agent: NeoMutt/20240425
+X-ClientProxiedBy: YT4PR01CA0204.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:ad::12) To PH0PR10MB5777.namprd10.prod.outlook.com
+ (2603:10b6:510:128::16)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20241218-perf_syscalltbl-v4-0-bc8caef2ca8e@rivosinc.com>
-In-Reply-To: <20241218-perf_syscalltbl-v4-0-bc8caef2ca8e@rivosinc.com>
-From: Ian Rogers <irogers@google.com>
-Date: Tue, 7 Jan 2025 10:44:49 -0800
-X-Gm-Features: AbW1kvZ2ue7zebeJn1ASl6IcPrVI85kIxnXUJ0ZFdYfd60rswaW74SbtuHBtKwI
-Message-ID: <CAP-5=fVoH3_naH_UzwBKy9ayCC=Ee5ck6=iJQ9bVPuVCame6Gg@mail.gmail.com>
-Subject: Re: [PATCH v4 00/16] perf tools: Use generic syscall scripts for all archs
-To: Charlie Jenkins <charlie@rivosinc.com>
-Cc: Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, 
-	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
-	Mark Rutland <mark.rutland@arm.com>, 
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>, 
-	Adrian Hunter <adrian.hunter@intel.com>, Paul Walmsley <paul.walmsley@sifive.com>, 
-	Palmer Dabbelt <palmer@dabbelt.com>, =?UTF-8?B?TWlja2HDq2wgU2FsYcO8bg==?= <mic@digikod.net>, 
-	=?UTF-8?Q?G=C3=BCnther_Noack?= <gnoack@google.com>, 
-	Christian Brauner <brauner@kernel.org>, Guo Ren <guoren@kernel.org>, 
-	John Garry <john.g.garry@oracle.com>, Will Deacon <will@kernel.org>, 
-	James Clark <james.clark@linaro.org>, Mike Leach <mike.leach@linaro.org>, 
-	Leo Yan <leo.yan@linux.dev>, Jonathan Corbet <corbet@lwn.net>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>, 
-	Arnd Bergmann <arnd@arndb.de>, Albert Ou <aou@eecs.berkeley.edu>, linux-kernel@vger.kernel.org, 
-	linux-perf-users@vger.kernel.org, linux-riscv@lists.infradead.org, 
-	linux-security-module@vger.kernel.org, bpf@vger.kernel.org, 
-	linux-csky@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR10MB5777:EE_|MN6PR10MB8072:EE_
+X-MS-Office365-Filtering-Correlation-Id: f59df14b-72ab-4039-c10c-08dd2f4c153e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|376014|7416014|1800799024|7053199007|27256017;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?4poROI8ZTviiE7sb0RegvvtNPhzZ+/7i7q4MUfnEN4yR7APa/0c1rAuCSK81?=
+ =?us-ascii?Q?U4UnggV2FAg7uA7cE0KZZNrdd/8vZZ6YcfIGDDnn0/KGrMogrlVZr8H3sl8w?=
+ =?us-ascii?Q?H97NKTO7nkrjcdASPS+T20GIlyQNZH8d44FV/M4ziDx+sd4Gxv80WsUw1nsU?=
+ =?us-ascii?Q?3rpEHXRVU/PERj/Mt525d3W8DWErGoi/cFZVrN3t7G7bhTUY5w/4Ocqqg7js?=
+ =?us-ascii?Q?ay5x5kO04r7ihP3JNtsfXm/P9LGCKM0s60R3a48/Pmp0BIbjL19DLzpLx0U5?=
+ =?us-ascii?Q?69BuhAAZ9z6AKKsOfBsSNQeK2jH64qb5fjZ/fUdYxjnEnDAjSfY6e7YjnBVA?=
+ =?us-ascii?Q?x6f37jVSX7cB8XORCVOa380Z2zkjR0KvNGsPy46SPZx8wqvBHngwK2iV7oSn?=
+ =?us-ascii?Q?yriPK84vHejpg1acLNQrc5tiMQEU3sFA27HCF8IIUf/+zOl+CbTw/jlGds/P?=
+ =?us-ascii?Q?lmFL7K9BuCve9r/NdmTjG4J4BHTRn9RESSrDaH+eC3qdXM+HjJGlHYeQGJfc?=
+ =?us-ascii?Q?QZBNoG3jKme1Vq6ab4IHbEq0N49LqbvvYOaR0lbEEeWrLQx9OeOqFBXcMLhX?=
+ =?us-ascii?Q?mz0Lbm0Ls9/uZt5ftrFeYjnzgS8BIZL54russdDpOe4EZbQ6HSprhpjFSdN5?=
+ =?us-ascii?Q?Rr4u6MnCSitZ3XQwPlVwYRq9//4/SPJaYzhEbLci0F12Zm5DxFjVRec7ye3H?=
+ =?us-ascii?Q?9Zt5JKKNi1EomOqBH/e5hVcJrJYsyqEn9T0e54efl1ibMzhQJ3RKL4CoUllD?=
+ =?us-ascii?Q?JPNZZYiJ4wJqvxdkNvOgaCaW8jtytG9VHLo3YWLqmQHGrLONhoco1ozDuI+P?=
+ =?us-ascii?Q?PWfSr0BwQeIOSzQPchBSw9VwDs23LuLmXeoHCV4kBaEjm015BIvZhfjGRReD?=
+ =?us-ascii?Q?en/nxTdzzQY3vI+WYdQWa6+uXnRrOTqZM6QKTRwokrZ5pLypYGlxGs8zzFQt?=
+ =?us-ascii?Q?3smkkLN1ryXYszO4aG+Dy5Z3azG6vblidZuneIKxSDbD+Uz0FfX4wxEz/4XT?=
+ =?us-ascii?Q?PawWfE/E/qhZo1YQvKY3WENJO8qVD3DTycLX82UtnXup74XkdJfaTxZnM8HD?=
+ =?us-ascii?Q?yDM4d3tICZ7DjKMvRZgqrqW49GSe+YuM4WFkh6Sm6PX3JM6c+Fw8oXx36x7e?=
+ =?us-ascii?Q?8U2in/4Q8Gqgatmu1J+7Rqvbj0rJQS4kigV+A552uLgEZJUr+csFv2MmEBUI?=
+ =?us-ascii?Q?4Wnp044nTsH5VXKYVIzMWIQvy8i91iqVwplXXSBM4mnpzjmeJojavqQ227uX?=
+ =?us-ascii?Q?NVZLl8YTVbXCXLGtQGa84hBC4Q0VPGAAku+p4hrmybtZiJmXEUB7AmM0DKhR?=
+ =?us-ascii?Q?c0RqRlk47tjBaw+kYm2GIzx54v6gjC6i3ziEjpxmE0GemVqqdqG3Zz/w0X6K?=
+ =?us-ascii?Q?/OFCX1U0V6XOXLmjuyMH69SeRURwGDJppq+MHiAtyWPCCUP+6a+mFJNEsJnk?=
+ =?us-ascii?Q?8UH6c7zjeAA6yWvqX5mzztKETg+6aQrh?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR10MB5777.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(7053199007)(27256017);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?J/mkI08yRDRgSpLiE4eBUkqA1NA1DeBJ9412pmZRYDE2pFeDUu1ijXSDpq+0?=
+ =?us-ascii?Q?X+9+tMfPSBfPZM1UMfX9WO2C94IJayC0t7L5Bi+Ue9yVfYlKvL3zlkV3Xvq9?=
+ =?us-ascii?Q?fQlcHg/DsJOvdPV/dzD+46eyMJwnyrh8A09MgVlTNYkuGz0PTPgMOnM4jzYd?=
+ =?us-ascii?Q?ZQANhVeYq1CwxrMNxmjpZuXfxAnlLr5UpkI7EOg6MDJF1TWNjZ8rJZDlNGjZ?=
+ =?us-ascii?Q?PZj8IXZsBPaRMdim8NUpPGXcUWwWoyAA/e2mdiHt7y7eoYnOM9WoAddDte3x?=
+ =?us-ascii?Q?HVZsmylNaJgtEPvYgja17b4aCGjZuvPr8UhKVEauFMx+1tLReq51u2f1kygp?=
+ =?us-ascii?Q?Zfhg4ulGmV3WBIfADjEPwO7D9T5teGERI2Dkmj8jVvpXIPJrc3JTF7nFW6/n?=
+ =?us-ascii?Q?NK+tr4FA3z6cfXzI9uWtfHBLx+h4liWPKqD/307SpoTUgN4VSyRcLDokwbQb?=
+ =?us-ascii?Q?X34qwmhfhQfBJnPI4iXGvzSARJKKGCx3hrPdumlScLkmAARfYtVdkwe76VRE?=
+ =?us-ascii?Q?avxwT9rp0dz9tRw9L4HJrYgWmAdYadPDo3LnjvcoWkw65+FlXWd/ecbMF39f?=
+ =?us-ascii?Q?hG3OYjjzO+kCdDJnO7biIJ6xjEFLD+MwN8bj/FgJPU4/hwTqm72njajQ42kk?=
+ =?us-ascii?Q?iqkBGmiyAjUpnfwa5U9CNKeQPgRC6YPr9sP2/VWJX76vaiqlpb4voycVV4TO?=
+ =?us-ascii?Q?OIgCahmpVsvE6eO9MfkhpnRirFBejATxtej6lRtv2Fhba5um+pGFww2hAXBl?=
+ =?us-ascii?Q?KEKHJb86qDRKisEhnIH/kCk1F08Gk6zOxXJbXaFyCa2qCTLZmBhaWaNVxF/Y?=
+ =?us-ascii?Q?Bc15DyAdeklGTicMT2eKCLpy5ZfJ2J4zgLIgIRIPItGzdggoPvLM89Pp4JyN?=
+ =?us-ascii?Q?ZhFu2CQWIv6tdyLwpWEAABOcku0qyVa8VWEeT/HlUa0o46tzpev7cCCyZgq+?=
+ =?us-ascii?Q?f0mGwykz2r6NeHldNx8C9L2mhRNQz02xoRdgUg7a+H2BIQfn5S9lp7sA0fq4?=
+ =?us-ascii?Q?hKxg4Bawv5x58Wbwz6J2p5TDpDrhj/Bk2iTNsJyX8CGNwaWtfqZ0IOo+GMWA?=
+ =?us-ascii?Q?I5OLxKEfal6rtYDl+bCHQmmqJF5SIElRBVgVNYqEpSnsj9RIZ38gYJkQa8jL?=
+ =?us-ascii?Q?AH1W+6JgYzE16bLmErFrrsXPEZ49CuUqBU6/RuSGbixFJo6z6EBK1yS62ItB?=
+ =?us-ascii?Q?ucbMEGmQh5zX8mjt6CDv1ldLVsaL1TfemAUsnDeca3CoDEhwgJ8RPBoYPiqy?=
+ =?us-ascii?Q?TciR/LvpxY/X2PBzMCP0DMUoUvgrz1LcGSlgzMZd35sNyQROBRti3kVtQhTs?=
+ =?us-ascii?Q?LXP7jxfiHxsMZzPnhkEdhwadzyQmCTfevl+stfY3SiWFV35Rhwg89RHNdPnG?=
+ =?us-ascii?Q?qvOEe2Z4Z00CufOJiuwqf4PLoz9R6v4UQ0FTYpVNTm0tdGS/sGKa8hVTBBui?=
+ =?us-ascii?Q?6l6euVdWoW3VM4dKdYck5yHddwnTyyu8vdxuv5mRMy7mdOjhN9ict4yg1ETb?=
+ =?us-ascii?Q?AIEZ7mS/Oru65Nl72Ltqodt7Hil1rz18u0atyPvK+avbQw6NiaHO6Jbr4sLU?=
+ =?us-ascii?Q?nbr8BBGz/GgF/4LTCj5qMJlKiMLYroV8BOyeaHEG?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	9cd9obWvnLt8T8JyhMragewadi2gyDUv1wdY0WOvDA2cWuyJRyIMRMtOqLSnDXwGNJBAvKfx8ii+WrALfEqPf5vOoVUV5FuCarDj+qbJcOobbITyvHtRG+n2dQsbYCGJ6n64IsNrRoRZWvqw8nxLXCWoWZRmu3abCA9fOh0UXEFleczpwJIAs9hI9QnQwGsfb74SclPh1ulwjaampPIvH/i51dxqIIxUEPBOqDGxc8Cyqj1Q41OMXWOMOh/oGzDT/fAMoKhX7cyhLjLsn5xszskhgRN6UqtFT7gFeURk6SQDd5eKgGO0Iosn+mor1wVZgxkKcBAgZFGLV/NjeaS2X69/a//ETQunuQAQ3slmw5TdS9rxfz0Zc2IexX/esDn66VxJfkHETgBfmP3OkHNNTwZx6Bv7ds2uKHkV6Yl7+s0lP4EBHRRTDszGb4HXYQaqLZsw5xuxDv416mFm5GIlokIuVoWjHKyDtfZTbk5sFrJFsTnBji2VRNrfk1BzYOfjxZ99pBXLnv3ti2CFI6qfMFfYgeMsJigbvca7dhFNenNZaXmFv+HhaKPri4sSfi/Uxu4KZYmwO5878MP5Rt9J4rGPW9xDsM6UqnHlTvt+KNU=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f59df14b-72ab-4039-c10c-08dd2f4c153e
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR10MB5777.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jan 2025 18:49:57.8326
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WBGVB0c6xiAak/n8GcP049KEgBYf3G4agBX5fBiN/uH7n3W44RquRuW5JhaBSSKSYU18x7R7umv4TWzKiqU3Hw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR10MB8072
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-07_05,2025-01-06_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0 spamscore=0 adultscore=0
+ mlxscore=0 phishscore=0 suspectscore=0 mlxlogscore=999 malwarescore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2411120000
+ definitions=main-2501070154
+X-Proofpoint-ORIG-GUID: qOxpcHaAEICBcyIMQIo7xpajgK7jSUnD
+X-Proofpoint-GUID: qOxpcHaAEICBcyIMQIo7xpajgK7jSUnD
 
-On Wed, Dec 18, 2024 at 1:24=E2=80=AFAM Charlie Jenkins <charlie@rivosinc.c=
-om> wrote:
->
-> Standardize the generation of syscall headers around syscall tables.
-> Previously each architecture independently selected how syscall headers
-> would be generated, or would not define a way and fallback onto
-> libaudit. Convert all architectures to use a standard syscall header
-> generation script and allow each architecture to override the syscall
-> table to use if they do not use the generic table.
->
-> As a result of these changes, no architecture will require libaudit, and
-> so the fallback case of using libaudit is removed by this series.
->
-> Testing:
->
-> I have tested that the syscall mappings of id to name generation works
-> as expected for every architecture, but I have only validated that perf
-> trace compiles and runs as expected on riscv, arm64, and x86_64.
->
-> Signed-off-by: Charlie Jenkins <charlie@rivosinc.com>
-> Reviewed-by: Ian Rogers <irogers@google.com>
->
-> On x86-64:
-> Tested-by: Ian Rogers <irogers@google.com>
+* Suren Baghdasaryan <surenb@google.com> [241226 15:03]:
+> vma->vm_refcnt does not exist when CONFIG_PER_VMA_LOCK=n, therefore
+> when CONFIG_PER_VMA_LOCK=n and CONFIG_DEBUG_VM=y we need to avoid its
+> usage in dump_vma().
 
-I'd like to see this land. The patches apply cleanly on
-perf-tools-next for me and except for a 1 liner on patch 16 everything
-has my:
-Tested-by: Ian Rogers <irogers@google.com>
+It might be worth having a function that decodes the information in the
+vma lock and outputs a string that spells out what is going on, and
+another that just outputs "not supported" or something.
 
-Thanks,
-Ian
+This has the benefit of spelling out the state and only having one place
+to update in future dump_vma() changes.
 
+> 
+> Reported-by: kernel test robot <lkp@intel.com>
+> Closes: https://lore.kernel.org/oe-kbuild-all/202412270328.HiJX1mRt-lkp@intel.com/
+> Signed-off-by: Suren Baghdasaryan <surenb@google.com>
 > ---
-> Changes in v4:
-> - Remove audit_machine member of syscalltbl struct (Ian)
-> - Rebase on perf-tools-next
-> - Link to v3: https://lore.kernel.org/r/20241216-perf_syscalltbl-v3-0-239=
-f032481d5@rivosinc.com
->
-> Changes in v3:
-> - Fix compiliation when OUTPUT is empty
-> - Correct unused headers to be .h instead of .c  (Namhyung)
-> - Make variable definition of supported archs (Namhyung)
-> - Convert +=3D into :=3D for syscalls headers (Namhyung)
-> - Link to v2: https://lore.kernel.org/r/20241212-perf_syscalltbl-v2-0-f8c=
-a984ffe40@rivosinc.com
->
-> Changes in v2:
-> - Rebase onto 6.13-rc2
-> - Fix output path so it generates to /tools/perf/arch properly
-> - Link to v1: https://lore.kernel.org/r/20241104-perf_syscalltbl-v1-0-9ad=
-ae5c761ef@rivosinc.com
->
-> ---
-> Charlie Jenkins (16):
->       perf tools: Create generic syscall table support
->       perf tools: arc: Support generic syscall headers
->       perf tools: csky: Support generic syscall headers
->       perf tools: arm: Support syscall headers
->       perf tools: sh: Support syscall headers
->       perf tools: sparc: Support syscall headers
->       perf tools: xtensa: Support syscall header
->       perf tools: x86: Use generic syscall scripts
->       perf tools: alpha: Support syscall header
->       perf tools: parisc: Support syscall header
->       perf tools: arm64: Use syscall table
->       perf tools: loongarch: Use syscall table
->       perf tools: mips: Use generic syscall scripts
->       perf tools: powerpc: Use generic syscall table scripts
->       perf tools: s390: Use generic syscall table scripts
->       perf tools: Remove dependency on libaudit
->
->  Documentation/admin-guide/workload-tracing.rst     |   2 +-
->  tools/build/feature/Makefile                       |   4 -
->  tools/build/feature/test-libaudit.c                |  11 -
->  tools/perf/Documentation/perf-check.txt            |   1 -
->  tools/perf/Makefile.config                         |  39 +-
->  tools/perf/Makefile.perf                           |  12 +-
->  tools/perf/arch/alpha/entry/syscalls/Kbuild        |   2 +
->  .../arch/alpha/entry/syscalls/Makefile.syscalls    |   5 +
->  tools/perf/arch/alpha/entry/syscalls/syscall.tbl   | 504 +++++++++++++++=
-+++++
->  tools/perf/arch/alpha/include/syscall_table.h      |   2 +
->  tools/perf/arch/arc/entry/syscalls/Kbuild          |   2 +
->  .../perf/arch/arc/entry/syscalls/Makefile.syscalls |   3 +
->  tools/perf/arch/arc/include/syscall_table.h        |   2 +
->  tools/perf/arch/arm/entry/syscalls/Kbuild          |   4 +
->  .../perf/arch/arm/entry/syscalls/Makefile.syscalls |   2 +
->  tools/perf/arch/arm/entry/syscalls/syscall.tbl     | 483 +++++++++++++++=
-++++
->  tools/perf/arch/arm/include/syscall_table.h        |   2 +
->  tools/perf/arch/arm64/Makefile                     |  22 -
->  tools/perf/arch/arm64/entry/syscalls/Kbuild        |   3 +
->  .../arch/arm64/entry/syscalls/Makefile.syscalls    |   6 +
->  tools/perf/arch/arm64/entry/syscalls/mksyscalltbl  |  46 --
->  .../perf/arch/arm64/entry/syscalls/syscall_32.tbl  | 476 +++++++++++++++=
-++++
->  .../perf/arch/arm64/entry/syscalls/syscall_64.tbl  |   1 +
->  tools/perf/arch/arm64/include/syscall_table.h      |   8 +
->  tools/perf/arch/csky/entry/syscalls/Kbuild         |   2 +
->  .../arch/csky/entry/syscalls/Makefile.syscalls     |   3 +
->  tools/perf/arch/csky/include/syscall_table.h       |   2 +
->  tools/perf/arch/loongarch/Makefile                 |  22 -
->  tools/perf/arch/loongarch/entry/syscalls/Kbuild    |   2 +
->  .../loongarch/entry/syscalls/Makefile.syscalls     |   3 +
->  .../arch/loongarch/entry/syscalls/mksyscalltbl     |  45 --
->  tools/perf/arch/loongarch/include/syscall_table.h  |   2 +
->  tools/perf/arch/mips/entry/syscalls/Kbuild         |   2 +
->  .../arch/mips/entry/syscalls/Makefile.syscalls     |   5 +
->  tools/perf/arch/mips/entry/syscalls/mksyscalltbl   |  32 --
->  tools/perf/arch/mips/include/syscall_table.h       |   2 +
->  tools/perf/arch/parisc/entry/syscalls/Kbuild       |   3 +
->  .../arch/parisc/entry/syscalls/Makefile.syscalls   |   6 +
->  tools/perf/arch/parisc/entry/syscalls/syscall.tbl  | 463 +++++++++++++++=
-++++
->  tools/perf/arch/parisc/include/syscall_table.h     |   8 +
->  tools/perf/arch/powerpc/Makefile                   |  25 -
->  tools/perf/arch/powerpc/entry/syscalls/Kbuild      |   3 +
->  .../arch/powerpc/entry/syscalls/Makefile.syscalls  |   6 +
->  .../perf/arch/powerpc/entry/syscalls/mksyscalltbl  |  39 --
->  tools/perf/arch/powerpc/include/syscall_table.h    |   8 +
->  tools/perf/arch/riscv/Makefile                     |  22 -
->  tools/perf/arch/riscv/entry/syscalls/Kbuild        |   2 +
->  .../arch/riscv/entry/syscalls/Makefile.syscalls    |   4 +
->  tools/perf/arch/riscv/entry/syscalls/mksyscalltbl  |  47 --
->  tools/perf/arch/riscv/include/syscall_table.h      |   8 +
->  tools/perf/arch/s390/Makefile                      |  21 -
->  tools/perf/arch/s390/entry/syscalls/Kbuild         |   2 +
->  .../arch/s390/entry/syscalls/Makefile.syscalls     |   5 +
->  tools/perf/arch/s390/entry/syscalls/mksyscalltbl   |  32 --
->  tools/perf/arch/s390/include/syscall_table.h       |   2 +
->  tools/perf/arch/sh/entry/syscalls/Kbuild           |   2 +
->  .../perf/arch/sh/entry/syscalls/Makefile.syscalls  |   4 +
->  tools/perf/arch/sh/entry/syscalls/syscall.tbl      | 472 +++++++++++++++=
-++++
->  tools/perf/arch/sh/include/syscall_table.h         |   2 +
->  tools/perf/arch/sparc/entry/syscalls/Kbuild        |   3 +
->  .../arch/sparc/entry/syscalls/Makefile.syscalls    |   5 +
->  tools/perf/arch/sparc/entry/syscalls/syscall.tbl   | 514 +++++++++++++++=
-++++++
->  tools/perf/arch/sparc/include/syscall_table.h      |   8 +
->  tools/perf/arch/x86/Build                          |   1 -
->  tools/perf/arch/x86/Makefile                       |  25 -
->  tools/perf/arch/x86/entry/syscalls/Kbuild          |   3 +
->  .../perf/arch/x86/entry/syscalls/Makefile.syscalls |   6 +
->  tools/perf/arch/x86/entry/syscalls/syscalltbl.sh   |  42 --
->  tools/perf/arch/x86/include/syscall_table.h        |   8 +
->  tools/perf/arch/xtensa/entry/syscalls/Kbuild       |   2 +
->  .../arch/xtensa/entry/syscalls/Makefile.syscalls   |   4 +
->  tools/perf/arch/xtensa/entry/syscalls/syscall.tbl  | 439 +++++++++++++++=
-+++
->  tools/perf/arch/xtensa/include/syscall_table.h     |   2 +
->  tools/perf/builtin-check.c                         |   1 -
->  tools/perf/builtin-help.c                          |   2 -
->  tools/perf/builtin-trace.c                         |  30 --
->  tools/perf/check-headers.sh                        |   9 +
->  tools/perf/perf.c                                  |   6 +-
->  tools/perf/scripts/Makefile.syscalls               |  61 +++
->  tools/perf/scripts/syscalltbl.sh                   |  86 ++++
->  tools/perf/tests/make                              |   7 +-
->  tools/perf/util/env.c                              |   4 +-
->  tools/perf/util/generate-cmdlist.sh                |   4 +-
->  tools/perf/util/syscalltbl.c                       |  90 +---
->  tools/perf/util/syscalltbl.h                       |   1 -
->  tools/scripts/syscall.tbl                          | 409 +++++++++++++++=
-+
->  86 files changed, 4102 insertions(+), 620 deletions(-)
-> ---
-> base-commit: e8b3012cbd8f2263777347c2e8310b3f00d494f5
-> change-id: 20240913-perf_syscalltbl-6f98defcc6f5
-> --
-> - Charlie
->
+> Fixes https://lore.kernel.org/all/20241226170710.1159679-14-surenb@google.com/
+> posted over mm-unstable.
+> 
+>  mm/debug.c | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+> 
+> diff --git a/mm/debug.c b/mm/debug.c
+> index 68b3ba3cf603..9c4cbc3733b0 100644
+> --- a/mm/debug.c
+> +++ b/mm/debug.c
+> @@ -178,6 +178,7 @@ EXPORT_SYMBOL(dump_page);
+>  
+>  void dump_vma(const struct vm_area_struct *vma)
+>  {
+> +#ifdef CONFIG_PER_VMA_LOCK
+>  	pr_emerg("vma %px start %px end %px mm %px\n"
+>  		"prot %lx anon_vma %px vm_ops %px\n"
+>  		"pgoff %lx file %px private_data %px\n"
+> @@ -187,6 +188,17 @@ void dump_vma(const struct vm_area_struct *vma)
+>  		vma->anon_vma, vma->vm_ops, vma->vm_pgoff,
+>  		vma->vm_file, vma->vm_private_data,
+>  		vma->vm_flags, &vma->vm_flags, refcount_read(&vma->vm_refcnt));
+> +#else
+> +	pr_emerg("vma %px start %px end %px mm %px\n"
+> +		"prot %lx anon_vma %px vm_ops %px\n"
+> +		"pgoff %lx file %px private_data %px\n"
+> +		"flags: %#lx(%pGv)\n",
+> +		vma, (void *)vma->vm_start, (void *)vma->vm_end, vma->vm_mm,
+> +		(unsigned long)pgprot_val(vma->vm_page_prot),
+> +		vma->anon_vma, vma->vm_ops, vma->vm_pgoff,
+> +		vma->vm_file, vma->vm_private_data,
+> +		vma->vm_flags, &vma->vm_flags);
+> +#endif
+>  }
+>  EXPORT_SYMBOL(dump_vma);
+>  
+> -- 
+> 2.47.1.613.gc27f4b7a9f-goog
+> 
 
