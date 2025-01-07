@@ -1,316 +1,323 @@
-Return-Path: <linux-doc+bounces-34214-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34216-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA024A047DC
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 18:14:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06154A047E6
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 18:15:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 10EFB1889069
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 17:13:59 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id EA4D518893F7
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 17:15:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8DDB21F892A;
-	Tue,  7 Jan 2025 17:11:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BD9CA1F4E4C;
+	Tue,  7 Jan 2025 17:13:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jm892v4p"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="Qq8JDnBq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com [209.85.160.182])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4006E1F8904
-	for <linux-doc@vger.kernel.org>; Tue,  7 Jan 2025 17:11:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D77841F4293
+	for <linux-doc@vger.kernel.org>; Tue,  7 Jan 2025 17:13:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736269891; cv=none; b=NbNO97k0Zx08/q+v9uYwTFRPLJsEiLLGv8E0OAPYtGu9a6QH3XsUsr1Xtr2Fh9+FAqyyEupTYZp13dSDOy4QQYuKynKqmjnqQRrQvN+YFGKL2bvOXfmgXqrDg4b8CbH8B0Y7OJSuX9G6C33BC4V/WTyVoiwbXUGJmf6/PehOfSI=
+	t=1736269983; cv=none; b=tEEL8QJgSC+4n8TC1yu+VbztK5Ff0AlECyJ0usycbeDvPGiFkz4w6p9BIcyiqH8uv298h0C+JUz4rsCGHn0w1+PKQARzcbEpluXhjo86JwpJdil5Hd61RHGqmSAfxqMVM4qXHPitWAm0K+9qppvZiJPmwoVTjASEZfZ1EX/wRJE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736269891; c=relaxed/simple;
-	bh=RHcGOwFj6Jj9rNjb5pyQYkYxU2y0c/tWEc9adntSoQE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qH+uYjxO5bWAscPe3AEFy5TcY353tuxW5ve9DJhzNJtWrku5nqBuI6Nzub/WPgigu7kPnc/U0wz/k/xjLsUO3IJvcn3zEtu8j2jWRtIQobX6hbscEJGaEnCOAoVrx6S4/gVpxN5TUL4RdQhOoL0+xKcHtjXrIBKylTSCoeCQUsI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=jm892v4p; arc=none smtp.client-ip=209.85.210.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-721d213e2aeso467431a34.3
-        for <linux-doc@vger.kernel.org>; Tue, 07 Jan 2025 09:11:27 -0800 (PST)
+	s=arc-20240116; t=1736269983; c=relaxed/simple;
+	bh=2DHUcUJ9r4vCwBW7BfEoGn4FWSQ2fJe4LrJMY8rW71U=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Content-Type; b=AUQHUxa4zY3SOSsIjaphLwp1lpSYWzWrKeT8b6wqIx9GhLdJTNNxP2OICxqx6IemMrgZf8Ul0m452RiuQf24VgdUsXwsOE5Rzkb82hWWhZZA0c8pP0cIXcheW25FYwJ2bHi6KtKVxJlS+RY9hi0LOJRCbRJ+wMAPrSkj05qZOzA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Qq8JDnBq; arc=none smtp.client-ip=209.85.160.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-qt1-f182.google.com with SMTP id d75a77b69052e-467abce2ef9so293391cf.0
+        for <linux-doc@vger.kernel.org>; Tue, 07 Jan 2025 09:13:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736269886; x=1736874686; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=xGDpKNIDhwHgkRrd8foDUC41Tml+wnuDNu94VoXOc5M=;
-        b=jm892v4p5CCeyFm+Yp3ki/xQPoH7OX+ZmJ/U516C95xXt1Q1hUgDLda6ZI/ArZ7raQ
-         K807yDxkARZXp9VEC3wy+KXCTxAJmKpASyz0NR0wSVa6MihLs/t7Cg3vMWor5I+OvD+A
-         SizNvGWtsRdD1lMmmgFFoBXS41OwcZibtu3rWJtLuIz7EUy2NnPQYsRwk6ZKSfkGiby4
-         m1AZvWxCkWpEec8tC/CvsbGXbqmqw3P5aojT65eAMPYMRXRnV7+wX+1NZqPWUHP8vpLs
-         5BqgAk8yft1JlBJqb8HOMkvy9Mz+hI7UnutM9H/ijI6M7Fp//URzlzUX9NmLvzLs+xMZ
-         wb4g==
+        d=google.com; s=20230601; t=1736269981; x=1736874781; darn=vger.kernel.org;
+        h=content-transfer-encoding:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=chk6NJISFurQMFJvYF6vgkrsHvt/tFpUC1De8cMxuSQ=;
+        b=Qq8JDnBqLh0fJI19NEv/sKq/dl1MWbHQKQfcw2RQdE7H3avpMhBii7P3oz5aUeMSZq
+         a2jZxeZbQy/NoNqDWPgk+k1x6V/dtztwedl4veFeWBhBnB0zbQxVR2+V6oBKZKcaRw7N
+         C41fbpr7sHIvmHh2pWifYAp5KezyZuy+gq0G4hWEtq27USz+zRE4y8ZC+x10mQww7mL7
+         E/X3ISzgPK1mDKoYl8UxyVVIPDL6gxAjM5eTsv6GmnIQ6A0kaME3qDaUgmD8nr9HKuQb
+         /H03xGN9duhBLgIOKnctRAg54VWOb6et4pUghDX1XhDTB4x7hznF5WbHheOrochsgehe
+         xD4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736269886; x=1736874686;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=xGDpKNIDhwHgkRrd8foDUC41Tml+wnuDNu94VoXOc5M=;
-        b=LolUBbBOQ+JNulbCRkp9hq9+QopaFO4OwAk3NykNRObdqrMQMnrxXWyBvYvTcWUT6s
-         2eorYl7bO3g32ONZ4kEAsQDCzykdc14ubwpMmDzcVn124J/Xms5fBKJPYGDmlw5Px1BM
-         cGvcp1oe4tofYrrZX0r67D8aUUgibu1CjmDd7lvQ0IPbMMysmtizasBd0bVY+Z9kpRuj
-         VlwTtaJM/nj/rOdyB/UFuJaw2lFaxlraLwIxA660iXAZric6KVhDy3lrYyYTB62jHvqM
-         hIyTjzvQO262QbkkEQwmeHHOFw7jJYlEl/AzuywaxFGFwY5qhq3IgY4oJNx6TG/mfHqw
-         Lpxw==
-X-Forwarded-Encrypted: i=1; AJvYcCUHuMwuZ8tj6laAS5B3R0bq5b69kYALmur1DuQjjJ+1pprk4eRdSslzWQhuEuRpYQx+tMU5aLYHhG0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyKb01BPRxPbfveK4gyQcDU8JxI0IN6uj7QvgkKA/GNhyWqrO50
-	FqAepngu7TUrG4WjATqjou6UmIJL0qK/QAylUqFmMmG0X6Jb3rm1TTVhQoB8XwQ=
-X-Gm-Gg: ASbGncva1yaJcK/LZfULMgbZtUnYbEZK1yTNVPq92Iq2Ok763WGnn5Lh+cOFfN/GwSw
-	2gn2rarfJ0pm3wrxV7Eg42wfFeTRBhgSfVsz0JJwvpAGj6TgWzWhGBUXBnqdGocK8/Ej6fBlgLQ
-	dbutAJimHa4wn5VEyl0BwGWxXckFzwVEf1Ub0oD1EtXT7Q4zcT6wZvZ4iE2euC5Qv8E1SFo0/oB
-	9PVnLa82yZhjt44zZz7p3SsS9m4Ivr98fKFmICL2dmiuOEtDxoTW8zMgnXJOYMdae8aYCTxW2y+
-	hd4S8XEAsjn7aoB0YQ==
-X-Google-Smtp-Source: AGHT+IFFAStE0PAvTO+jh6r5YnTPF2eK18OSXOLEzH3xFJcpk63J/EyIwhEYEe5g9NEBcwA5qS73Rw==
-X-Received: by 2002:a05:6830:7306:b0:71d:f068:1ff3 with SMTP id 46e09a7af769-720ff6d4303mr38018237a34.8.1736269886323;
-        Tue, 07 Jan 2025 09:11:26 -0800 (PST)
-Received: from [192.168.0.142] (ip98-183-112-25.ok.ok.cox.net. [98.183.112.25])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-71fc97642f5sm10536657a34.6.2025.01.07.09.11.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 07 Jan 2025 09:11:24 -0800 (PST)
-Message-ID: <283d2478-8788-44fb-bb22-48968250d71f@baylibre.com>
-Date: Tue, 7 Jan 2025 11:11:24 -0600
+        d=1e100.net; s=20230601; t=1736269981; x=1736874781;
+        h=content-transfer-encoding:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=chk6NJISFurQMFJvYF6vgkrsHvt/tFpUC1De8cMxuSQ=;
+        b=TYjphpa/9jFJeuEE+eJ3JcUORLrt2Q7tw4XI/9mWbje7UUZO4VAgkTQpB/FNNUM7Bt
+         8s8ci10xtHLWfJSvjWwpBZmWw0Z85iw0GkB/2NFXLErRILBp2oe7gYff79+dPwGpuIdJ
+         uhJXL/7sHwtNXZ+K7ZD43tEx20RdJ488PozRQe1DtWY9lz1YlDumAcLqbJzhIw+R71be
+         EIRdTNHgJUIYox6daZaeNZY3+0nqaA0GissgWnSNtBZo7DwIzOSbCRHUlQvrSH0glpJ4
+         zW/m3kXRdXxmoGLY/Rjjs258XGAh2BDX9ffHAO1+jNJuC4at6pfHPFodziFZmFnGAW9Q
+         K+cg==
+X-Forwarded-Encrypted: i=1; AJvYcCXjyyNzQLXRldPAjKlxzQegNcqaMUC7AZKGA4ML2MxcJJstkUDGVtS1BHr2gxwgk3Shq42Dd9yIX1A=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwGPDq5F/tXjuaBBDid4Q/lu2Cw7fF3aJY4wIIoFknqKRK7p0NC
+	uokN7wAK84I3+xj26Guh3E355ZJ2Wu2THUE57U3VTwKYf3W86D0JygEL5gOOvqRPFX2ukY8od9n
+	nO1OQ0R5JPz6sfeWueOWf4GF/aMzMLx1jJ46L
+X-Gm-Gg: ASbGncuRxRab0gnr8opMM4FzGUEqEH1L+oPjsLda8Up7meW6HYKMZac0F5lBCGsmfQ/
+	V6JC8y7UZKZo6BVoDTSPfqwg4X7/gGmR36F3sLUpb/PUj/0zPb2SfFlDFcaSvgGRwv4CI
+X-Google-Smtp-Source: AGHT+IFXDdrNkxz81jJXTEGZAe+XA3xHXzR658pMa6NQwReUFhIVlxxq9kXoAVDHTPY5r9ItR2yLPiNNBl+6vlG8Iic=
+X-Received: by 2002:a05:622a:449:b0:466:8906:159a with SMTP id
+ d75a77b69052e-46b3c8280dfmr3628191cf.19.1736269980332; Tue, 07 Jan 2025
+ 09:13:00 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/5] iio: adc: ad7380: add alert support
-To: Julien Stephan <jstephan@baylibre.com>,
- Lars-Peter Clausen <lars@metafoo.de>,
- Michael Hennerich <Michael.Hennerich@analog.com>,
- =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
- Jonathan Cameron <jic23@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-Cc: linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20250107-ad7380-add-alert-support-v3-0-bce10afd656b@baylibre.com>
- <20250107-ad7380-add-alert-support-v3-4-bce10afd656b@baylibre.com>
-From: David Lechner <dlechner@baylibre.com>
-Content-Language: en-US
-In-Reply-To: <20250107-ad7380-add-alert-support-v3-4-bce10afd656b@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20241226170710.1159679-1-surenb@google.com> <20241226170710.1159679-5-surenb@google.com>
+ <luf6pnwp4gazsoquktjkf2nniscds5g5jeeviyd4pmfqdr5ge2@fv5qimjqf4w2>
+In-Reply-To: <luf6pnwp4gazsoquktjkf2nniscds5g5jeeviyd4pmfqdr5ge2@fv5qimjqf4w2>
+From: Suren Baghdasaryan <surenb@google.com>
+Date: Tue, 7 Jan 2025 09:12:49 -0800
+X-Gm-Features: AbW1kvbRLMdMEJMnFl6e19LgaABppU1UudlyyjOt6xw2vKr_iMO3vN3ig_loVss
+Message-ID: <CAJuCfpExUkxgBUiBnH6OjuNBknnwCUH-EhTtmYP_RUamPRBn8w@mail.gmail.com>
+Subject: Re: [PATCH v7 04/17] mm: modify vma_iter_store{_gfp} to indicate if
+ it's storing a new vma
+To: "Liam R. Howlett" <Liam.Howlett@oracle.com>, Suren Baghdasaryan <surenb@google.com>, 
+	akpm@linux-foundation.org, peterz@infradead.org, willy@infradead.org, 
+	lorenzo.stoakes@oracle.com, mhocko@suse.com, vbabka@suse.cz, 
+	hannes@cmpxchg.org, mjguzik@gmail.com, oliver.sang@intel.com, 
+	mgorman@techsingularity.net, david@redhat.com, peterx@redhat.com, 
+	oleg@redhat.com, dave@stgolabs.net, paulmck@kernel.org, brauner@kernel.org, 
+	dhowells@redhat.com, hdanton@sina.com, hughd@google.com, 
+	lokeshgidra@google.com, minchan@google.com, jannh@google.com, 
+	shakeel.butt@linux.dev, souravpanda@google.com, pasha.tatashin@soleen.com, 
+	klarasmodin@gmail.com, corbet@lwn.net, linux-doc@vger.kernel.org, 
+	linux-mm@kvack.org, linux-kernel@vger.kernel.org, kernel-team@android.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 1/7/25 2:48 AM, Julien Stephan wrote:
-> The alert functionality is an out of range indicator and can be used as
-> an early indicator of an out of bounds conversion result.
-> 
-> ALERT_LOW_THRESHOLD and ALERT_HIGH_THRESHOLD registers are common to all
-> channels.
-> 
-> When using 1 SDO line (only mode supported by the driver right now), i.e
-> data outputs only on SDOA, SDOB (or SDOD for 4 channels variants) is
-> used as an alert pin. The alert pin is updated at the end of the
-> conversion (set to low if an alert occurs) and is cleared on a falling
-> edge of CS.
-> 
-> The ALERT register contains information about the exact alert status:
-> channel and direction. ALERT register can be accessed using debugfs if
-> enabled.
-> 
-> User can set high/low thresholds and enable alert detection using the
-> regular iio events attributes:
-> 
->   events/in_thresh_falling_value events/in_thresh_rising_value
->   events/thresh_either_en
-> 
-> In most use cases, user will hardwire the alert pin to trigger a shutdown.
-> 
-> In theory, we could generate userspace IIO events for alerts, but this
-> is not implemented yet for several reasons [1]. This can be implemented
-> later if a real use case actually requires it.
-> 
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> 
-> [1] https://lore.kernel.org/all/4be16272-5197-4fa1-918c-c4cdfcaee02e@baylibre.com/
-> ---
+On Tue, Jan 7, 2025 at 8:50=E2=80=AFAM Liam R. Howlett <Liam.Howlett@oracle=
+.com> wrote:
+>
+> * Suren Baghdasaryan <surenb@google.com> [241226 12:07]:
+> > vma_iter_store() functions can be used both when adding a new vma and
+> > when updating an existing one. However for existing ones we do not need
+> > to mark them attached as they are already marked that way. Add a parame=
+ter
+> > to distinguish the usage and skip vma_mark_attached() when not needed.
+>
+> I really don't like boolean flags - especially to such a small function.
+>
+> The passing of flags complicates things and is not self documenting. Can
+> we make a new vma_iter_store_detach() that just calls vma_iter_store()
+> then does the detach?
 
-...
+Sure, I'll do that. Thanks for the feedback!
 
-> +static int ad7380_read_event_config(struct iio_dev *indio_dev,
-> +				    const struct iio_chan_spec *chan,
-> +				    enum iio_event_type type,
-> +				    enum iio_event_direction dir)
-> +{
-> +	struct ad7380_state *st = iio_priv(indio_dev);
-> +	int alert_en, tmp, ret;
-> +
-> +	ret = iio_device_claim_direct_mode(indio_dev);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = regmap_read(st->regmap, AD7380_REG_ADDR_CONFIG1, &tmp);
-> +
-> +	iio_device_release_direct_mode(indio_dev);
-> +
-> +	if (ret)
-> +		return ret;
-> +
-> +	alert_en = FIELD_GET(AD7380_CONFIG1_ALERTEN, tmp);
-
-nit: return directly and drop alter_en.
-
-> +
-> +	return alert_en;
-> +}
-> +
-> +static int ad7380_write_event_config(struct iio_dev *indio_dev,
-> +				     const struct iio_chan_spec *chan,
-> +				     enum iio_event_type type,
-> +				     enum iio_event_direction dir,
-> +				     bool state)
-> +{
-> +	struct ad7380_state *st = iio_priv(indio_dev);
-> +	int ret;
-> +
-> +	ret = iio_device_claim_direct_mode(indio_dev);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = regmap_update_bits(st->regmap,
-> +				 AD7380_REG_ADDR_CONFIG1,
-> +				 AD7380_CONFIG1_ALERTEN,
-> +				 FIELD_PREP(AD7380_CONFIG1_ALERTEN, state));
-> +
-> +	iio_device_release_direct_mode(indio_dev);
-> +
-> +	if (ret)
-> +		return ret;
-> +
-> +	return 0;
-
-return ret;
-
-> +}
-> +
-> +static int ad7380_read_event_value(struct iio_dev *indio_dev,
-> +				   const struct iio_chan_spec *chan,
-> +				   enum iio_event_type type,
-> +				   enum iio_event_direction dir,
-> +				   enum iio_event_info info,
-> +				   int *val, int *val2)
-> +{
-> +	struct ad7380_state *st = iio_priv(indio_dev);
-> +	int ret, tmp;
-> +
-> +	switch (info) {
-> +	case IIO_EV_INFO_VALUE:
-> +		ret = iio_device_claim_direct_mode(indio_dev);
-> +
-> +		switch (dir) {
-> +		case IIO_EV_DIR_RISING:
-> +			ret = regmap_read(st->regmap,
-> +					  AD7380_REG_ADDR_ALERT_HIGH_TH,
-> +					  &tmp);
-> +			if (ret)
-> +				return ret;
-
-Can't return directly here without releasing direct mode.
-
-Suggest to move everything between claim and release to a helper function to
-simplify things (avoiding goto and break).
-
-> +
-> +			*val = FIELD_GET(AD7380_ALERT_HIGH_TH, tmp);
-> +			ret = IIO_VAL_INT;
-> +			break;
-> +		case IIO_EV_DIR_FALLING:
-> +			ret = regmap_read(st->regmap,
-> +					  AD7380_REG_ADDR_ALERT_LOW_TH,
-> +					  &tmp);
-> +			if (ret)
-> +				return ret;
-> +
-> +			FIELD_GET(AD7380_ALERT_LOW_TH, tmp);
-> +			ret = IIO_VAL_INT;
-> +			break;
-> +		default:
-> +			ret = -EINVAL;
-> +			break;
-> +		}
-> +
-> +		iio_device_release_direct_mode(indio_dev);
-> +		return ret;
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +}
-> +
-> +static int ad7380_write_event_value(struct iio_dev *indio_dev,
-> +				    const struct iio_chan_spec *chan,
-> +				    enum iio_event_type type,
-> +				    enum iio_event_direction dir,
-> +				    enum iio_event_info info,
-> +				    int val, int val2)
-> +{
-> +	struct ad7380_state *st = iio_priv(indio_dev);
-> +	const struct iio_scan_type *scan_type;
-> +	int ret;
-> +	u16 th;
-> +
-> +	switch (info) {
-> +	case IIO_EV_INFO_VALUE:
-> +		ret = iio_device_claim_direct_mode(indio_dev);
-> +		if (ret)
-> +			return ret;
-> +
-> +		/*
-> +		 * According to the datasheet,
-> +		 * AD7380_REG_ADDR_ALERT_HIGH_TH[11:0] are the 12 MSB of the
-> +		 * 16-bits internal alert high register. LSB are set to 0xf.
-> +		 * AD7380_REG_ADDR_ALERT_LOW_TH[11:0] are the 12 MSB of the
-> +		 * 16 bits internal alert low register. LSB are set to 0x0.
-> +		 *
-> +		 * When alert is enabled the conversion from the adc is compared
-> +		 * immediately to the alert high/low thresholds, before any
-> +		 * oversampling. This means that the thresholds are the same for
-> +		 * normal mode and oversampling mode.
-> +		 */
-> +
-> +		/* Extract the 12 MSB of val */
-> +		scan_type = iio_get_current_scan_type(indio_dev, chan);
-> +		if (IS_ERR(scan_type))
-> +			return PTR_ERR(scan_type);
-
-Same with this function, it isn't releasing on error, so we can use a helper
-here too to solve it.
-
-> +
-> +		th = val >> (scan_type->realbits - 12);
-> +
-> +		switch (dir) {
-> +		case IIO_EV_DIR_RISING:
-> +			ret = regmap_write(st->regmap,
-> +					   AD7380_REG_ADDR_ALERT_HIGH_TH,
-> +					   th);
-> +			if (ret)
-> +				return ret;
-> +
-> +			break;
-> +		case IIO_EV_DIR_FALLING:
-> +			ret = regmap_write(st->regmap,
-> +					   AD7380_REG_ADDR_ALERT_LOW_TH,
-> +					   th);
-> +			if (ret)
-> +				return ret;
-> +
-> +			break;
-> +		default:
-> +			ret = -EINVAL;
-> +			break;
-> +		}
-> +
-> +		iio_device_release_direct_mode(indio_dev);
-> +		return ret;
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +}
-> +
+>
+> >
+> > Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+> > ---
+> >  include/linux/mm.h | 12 ++++++++++++
+> >  mm/nommu.c         |  4 ++--
+> >  mm/vma.c           | 16 ++++++++--------
+> >  mm/vma.h           | 13 +++++++++----
+> >  4 files changed, 31 insertions(+), 14 deletions(-)
+> >
+> > diff --git a/include/linux/mm.h b/include/linux/mm.h
+> > index 081178b0eec4..c50edfedd99d 100644
+> > --- a/include/linux/mm.h
+> > +++ b/include/linux/mm.h
+> > @@ -821,6 +821,16 @@ static inline void vma_assert_locked(struct vm_are=
+a_struct *vma)
+> >               vma_assert_write_locked(vma);
+> >  }
+> >
+> > +static inline void vma_assert_attached(struct vm_area_struct *vma)
+> > +{
+> > +     VM_BUG_ON_VMA(vma->detached, vma);
+> > +}
+> > +
+> > +static inline void vma_assert_detached(struct vm_area_struct *vma)
+> > +{
+> > +     VM_BUG_ON_VMA(!vma->detached, vma);
+> > +}
+> > +
+> >  static inline void vma_mark_attached(struct vm_area_struct *vma)
+> >  {
+> >       vma->detached =3D false;
+> > @@ -866,6 +876,8 @@ static inline void vma_end_read(struct vm_area_stru=
+ct *vma) {}
+> >  static inline void vma_start_write(struct vm_area_struct *vma) {}
+> >  static inline void vma_assert_write_locked(struct vm_area_struct *vma)
+> >               { mmap_assert_write_locked(vma->vm_mm); }
+> > +static inline void vma_assert_attached(struct vm_area_struct *vma) {}
+> > +static inline void vma_assert_detached(struct vm_area_struct *vma) {}
+> >  static inline void vma_mark_attached(struct vm_area_struct *vma) {}
+> >  static inline void vma_mark_detached(struct vm_area_struct *vma) {}
+> >
+> > diff --git a/mm/nommu.c b/mm/nommu.c
+> > index 9cb6e99215e2..72c8c505836c 100644
+> > --- a/mm/nommu.c
+> > +++ b/mm/nommu.c
+> > @@ -1191,7 +1191,7 @@ unsigned long do_mmap(struct file *file,
+> >       setup_vma_to_mm(vma, current->mm);
+> >       current->mm->map_count++;
+> >       /* add the VMA to the tree */
+> > -     vma_iter_store(&vmi, vma);
+> > +     vma_iter_store(&vmi, vma, true);
+> >
+> >       /* we flush the region from the icache only when the first execut=
+able
+> >        * mapping of it is made  */
+> > @@ -1356,7 +1356,7 @@ static int split_vma(struct vma_iterator *vmi, st=
+ruct vm_area_struct *vma,
+> >
+> >       setup_vma_to_mm(vma, mm);
+> >       setup_vma_to_mm(new, mm);
+> > -     vma_iter_store(vmi, new);
+> > +     vma_iter_store(vmi, new, true);
+> >       mm->map_count++;
+> >       return 0;
+> >
+> > diff --git a/mm/vma.c b/mm/vma.c
+> > index 476146c25283..ce113dd8c471 100644
+> > --- a/mm/vma.c
+> > +++ b/mm/vma.c
+> > @@ -306,7 +306,7 @@ static void vma_complete(struct vma_prepare *vp, st=
+ruct vma_iterator *vmi,
+> >                * us to insert it before dropping the locks
+> >                * (it may either follow vma or precede it).
+> >                */
+> > -             vma_iter_store(vmi, vp->insert);
+> > +             vma_iter_store(vmi, vp->insert, true);
+> >               mm->map_count++;
+> >       }
+> >
+> > @@ -660,14 +660,14 @@ static int commit_merge(struct vma_merge_struct *=
+vmg,
+> >       vma_set_range(vmg->vma, vmg->start, vmg->end, vmg->pgoff);
+> >
+> >       if (expanded)
+> > -             vma_iter_store(vmg->vmi, vmg->vma);
+> > +             vma_iter_store(vmg->vmi, vmg->vma, false);
+> >
+> >       if (adj_start) {
+> >               adjust->vm_start +=3D adj_start;
+> >               adjust->vm_pgoff +=3D PHYS_PFN(adj_start);
+> >               if (adj_start < 0) {
+> >                       WARN_ON(expanded);
+> > -                     vma_iter_store(vmg->vmi, adjust);
+> > +                     vma_iter_store(vmg->vmi, adjust, false);
+> >               }
+> >       }
+> >
+> > @@ -1689,7 +1689,7 @@ int vma_link(struct mm_struct *mm, struct vm_area=
+_struct *vma)
+> >               return -ENOMEM;
+> >
+> >       vma_start_write(vma);
+> > -     vma_iter_store(&vmi, vma);
+> > +     vma_iter_store(&vmi, vma, true);
+> >       vma_link_file(vma);
+> >       mm->map_count++;
+> >       validate_mm(mm);
+> > @@ -2368,7 +2368,7 @@ static int __mmap_new_vma(struct mmap_state *map,=
+ struct vm_area_struct **vmap)
+> >
+> >       /* Lock the VMA since it is modified after insertion into VMA tre=
+e */
+> >       vma_start_write(vma);
+> > -     vma_iter_store(vmi, vma);
+> > +     vma_iter_store(vmi, vma, true);
+> >       map->mm->map_count++;
+> >       vma_link_file(vma);
+> >
+> > @@ -2542,7 +2542,7 @@ int do_brk_flags(struct vma_iterator *vmi, struct=
+ vm_area_struct *vma,
+> >       vm_flags_init(vma, flags);
+> >       vma->vm_page_prot =3D vm_get_page_prot(flags);
+> >       vma_start_write(vma);
+> > -     if (vma_iter_store_gfp(vmi, vma, GFP_KERNEL))
+> > +     if (vma_iter_store_gfp(vmi, vma, GFP_KERNEL, true))
+> >               goto mas_store_fail;
+> >
+> >       mm->map_count++;
+> > @@ -2785,7 +2785,7 @@ int expand_upwards(struct vm_area_struct *vma, un=
+signed long address)
+> >                               anon_vma_interval_tree_pre_update_vma(vma=
+);
+> >                               vma->vm_end =3D address;
+> >                               /* Overwrite old entry in mtree. */
+> > -                             vma_iter_store(&vmi, vma);
+> > +                             vma_iter_store(&vmi, vma, false);
+> >                               anon_vma_interval_tree_post_update_vma(vm=
+a);
+> >
+> >                               perf_event_mmap(vma);
+> > @@ -2865,7 +2865,7 @@ int expand_downwards(struct vm_area_struct *vma, =
+unsigned long address)
+> >                               vma->vm_start =3D address;
+> >                               vma->vm_pgoff -=3D grow;
+> >                               /* Overwrite old entry in mtree. */
+> > -                             vma_iter_store(&vmi, vma);
+> > +                             vma_iter_store(&vmi, vma, false);
+> >                               anon_vma_interval_tree_post_update_vma(vm=
+a);
+> >
+> >                               perf_event_mmap(vma);
+> > diff --git a/mm/vma.h b/mm/vma.h
+> > index 24636a2b0acf..18c9e49b1eae 100644
+> > --- a/mm/vma.h
+> > +++ b/mm/vma.h
+> > @@ -145,7 +145,7 @@ __must_check int vma_shrink(struct vma_iterator *vm=
+i,
+> >               unsigned long start, unsigned long end, pgoff_t pgoff);
+> >
+> >  static inline int vma_iter_store_gfp(struct vma_iterator *vmi,
+> > -                     struct vm_area_struct *vma, gfp_t gfp)
+> > +                     struct vm_area_struct *vma, gfp_t gfp, bool new_v=
+ma)
+> >
+> >  {
+> >       if (vmi->mas.status !=3D ma_start &&
+> > @@ -157,7 +157,10 @@ static inline int vma_iter_store_gfp(struct vma_it=
+erator *vmi,
+> >       if (unlikely(mas_is_err(&vmi->mas)))
+> >               return -ENOMEM;
+> >
+> > -     vma_mark_attached(vma);
+> > +     if (new_vma)
+> > +             vma_mark_attached(vma);
+> > +     vma_assert_attached(vma);
+> > +
+> >       return 0;
+> >  }
+> >
+> > @@ -366,7 +369,7 @@ static inline struct vm_area_struct *vma_iter_load(=
+struct vma_iterator *vmi)
+> >
+> >  /* Store a VMA with preallocated memory */
+> >  static inline void vma_iter_store(struct vma_iterator *vmi,
+> > -                               struct vm_area_struct *vma)
+> > +                               struct vm_area_struct *vma, bool new_vm=
+a)
+> >  {
+> >
+> >  #if defined(CONFIG_DEBUG_VM_MAPLE_TREE)
+> > @@ -390,7 +393,9 @@ static inline void vma_iter_store(struct vma_iterat=
+or *vmi,
+> >
+> >       __mas_set_range(&vmi->mas, vma->vm_start, vma->vm_end - 1);
+> >       mas_store_prealloc(&vmi->mas, vma);
+> > -     vma_mark_attached(vma);
+> > +     if (new_vma)
+> > +             vma_mark_attached(vma);
+> > +     vma_assert_attached(vma);
+> >  }
+> >
+> >  static inline unsigned long vma_iter_addr(struct vma_iterator *vmi)
+> > --
+> > 2.47.1.613.gc27f4b7a9f-goog
+> >
 
