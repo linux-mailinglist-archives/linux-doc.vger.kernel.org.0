@@ -1,109 +1,146 @@
-Return-Path: <linux-doc+bounces-34162-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34166-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECC39A03C47
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 11:25:18 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0642DA03D5F
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 12:13:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 353F47A2A80
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 10:25:11 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E6973165450
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 11:13:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B61A01E3772;
-	Tue,  7 Jan 2025 10:25:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 97C111E1C02;
+	Tue,  7 Jan 2025 11:13:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="f2jBYZxG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C8BE1E0B75;
-	Tue,  7 Jan 2025 10:25:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57F2F148838;
+	Tue,  7 Jan 2025 11:13:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736245508; cv=none; b=JTEBy4wu34BY+7YU5r0QRmuwStpd2YPYBd9KzdI9QEb2lLpU3rHv/L8dXh+yoyDqVn4LhRbj/1iol4+ve56J7deWJpRv5OYvkBmW6FYPn5ntXpK7pdUGCpQuCGxJyKDAfTEjoaHDfzuKZ1gxDwBU/FQqBtFEvlddc8hwHLJ9slw=
+	t=1736248421; cv=none; b=Tm3SalvoIMUw2zRmGnnoIwenxLHXrZJ+/Qsg9QLkQIlQC7qMbdLjlGHObjNbk3Iu8jDkMvUTDA92WDBpm7jSaPu5WdEIk2LYgIgQO48HGaKhZTSlC4zWjKrrqCNVEOolP0SXLPJNQzK7TC5GaFh/c0IMcoDDFoAuXU9F92bT7CU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736245508; c=relaxed/simple;
-	bh=ZqXullAWF2S1RNd1MTH4kt8y/5h8iwhHoXVIKzff+m0=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=LMDVzV8DUHCiA7zs19hxN+aMH/uQYoZ+aNrpVLjLSZ9+I2Jv1u7IVuPRThje5tP8RyO/QnEZO8BDl3vBrZOL4k8LKx6/2T+qdgIEvrnz0SUYcC53zaRxeCGHs4B7vBBcoa90pKaPTDkQLJi+Vp87BcGG2W/P3F1CnywIJ0yflhM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.18.186.231])
-	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4YS6Zn6DMXz6M4WK;
-	Tue,  7 Jan 2025 18:23:29 +0800 (CST)
-Received: from frapeml500005.china.huawei.com (unknown [7.182.85.13])
-	by mail.maildlp.com (Postfix) with ESMTPS id F35BE1409EA;
-	Tue,  7 Jan 2025 18:25:02 +0800 (CST)
-Received: from china (10.200.201.82) by frapeml500005.china.huawei.com
- (7.182.85.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Tue, 7 Jan
- 2025 11:24:51 +0100
-From: Gur Stavi <gur.stavi@huawei.com>
-To: <sumang@marvell.com>
-CC: <andrew+netdev@lunn.ch>, <cai.huoqing@linux.dev>, <corbet@lwn.net>,
-	<davem@davemloft.net>, <edumazet@google.com>, <gongfan1@huawei.com>,
-	<guoxin09@huawei.com>, <gur.stavi@huawei.com>, <helgaas@kernel.org>,
-	<horms@kernel.org>, <kuba@kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <meny.yossefi@huawei.com>,
-	<netdev@vger.kernel.org>, <pabeni@redhat.com>, <shenchenyang1@hisilicon.com>,
-	<shijing34@huawei.com>, <wulike1@huawei.com>, <zhoushuai28@huawei.com>
-Subject: RE: [EXTERNAL] [PATCH net-next v03 1/1] hinic3: module initialization and tx/rx logic
-Date: Tue, 7 Jan 2025 12:37:49 +0200
-Message-ID: <20250107103749.3552291-1-gur.stavi@huawei.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <SJ0PR18MB5216BED17023369322EE4A6ADB152@SJ0PR18MB5216.namprd18.prod.outlook.com>
-References: <SJ0PR18MB5216BED17023369322EE4A6ADB152@SJ0PR18MB5216.namprd18.prod.outlook.com>
+	s=arc-20240116; t=1736248421; c=relaxed/simple;
+	bh=6XE/aliWGr+W26o2fjUc7Z25p+2CU6ECbOVEjcYQUIo=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=eoPkNf5L5kzc39ULOHt0cB03drBj72CKsfUWD9KHDyWQdJO5uu/v13tC4GInj2Dnqpw0Sb4KWA6uzUebcbO7/8VDFGgvjGwKE4bcAUzWyGDsMvu7IVEsoi4pPukQRN4xJ6tNvp4PStqie9KnyJfP43Q0E5ENiluZ7xAXIyVRxVs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=f2jBYZxG; arc=none smtp.client-ip=209.85.208.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-5d7e3f1fc01so3149572a12.2;
+        Tue, 07 Jan 2025 03:13:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1736248417; x=1736853217; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Mr/GzVDnk1vhkDYSLmfDLR/Vh+afBQJAWF7/ClflUCc=;
+        b=f2jBYZxGwdZA+IyB2BNEEIk6jKkUIc8tOht0pllgCegkrJcHH2phQ0rzI0erGCQ9oA
+         gIkii9X+yqEamrUccoSg+sizpmEVrenGxfBC4rD+PJlvzhEO4VI2GsJaKp5D8wR2sv3H
+         gFdURjtlpxE8IZEin5oXuGGEqwhW9atweqobULzscrJ+c4J2EV7XN9aHhpE3s07YePKD
+         oxj9l7blapODNCuDLPp9iA/Pic7SGnG9SHo53uXFsFk29gAUo+Kis9IFx2bU+VE2VmH8
+         O8Zp014bFudDIcxsKM3B6WaCLfXo4Cb68Hn7X8UmdQ4+nYBZcyNeP9sveJr05sLqwHS5
+         FUHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736248417; x=1736853217;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Mr/GzVDnk1vhkDYSLmfDLR/Vh+afBQJAWF7/ClflUCc=;
+        b=c/k2UTJva6KAK7ai/+M+iB6ld4pIYAm1H17jnxoMn2KH+3m37twEVa1tqUcIzqAz2b
+         +bkTo4VvlCN9Lm4nMuoL3mBlvWwRIsBpVD0HSolqHyHdbN8VK3oNZd9lUV6L+NLa0iBP
+         4QRzfrT1nGsjJGRy3Cq27Iww2Je8HNuNLdAfscXa2AqedVxnR5KkodJ/iDzC02LrMbjb
+         8dkTVKDsdPWkzOC2JK3iWD7PtnB9ia58NdZXmeXejXQvwXyY+PM44q9qJMQ92l7TwkXH
+         Cbl9s6CcUveyJso0UjEtqGp+/+lgflgwaKIAvU3I60MgP+Wwfibz1Bew2pifD2ktEPuu
+         JIjg==
+X-Forwarded-Encrypted: i=1; AJvYcCUC/phCYDZO2CW0ZEWLI89nmB1fy9KXRz3Jsc4zEh7LBqhzmPnjxUWwgxj5Fm+sh0tKf1dTTGXVUjdcCcL9@vger.kernel.org, AJvYcCUQK17cfA5rzAo8mYCw/kS4YTP+wvjmrg0RgGnir4bObV6T8vaLPsEH0wlkJsisjUCEOlV5Rp/IJQOCc6lcyA==@vger.kernel.org, AJvYcCVYZ3FFWKv2PBL/frv3en6oPRNEZsgQHkwxdDhh/Fq/yd/AX+IQAfiylD9n4DAztf9nH226t+w8Zno=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwYJx14wH2MHxT13zJm8O6OHPV9gt1dhRwYVYftaS8aqR9b3uxn
+	bDssxbQFHx/6R0rxgtj36pwXP6t1wJ7WEllBbFyqzRGyqlv3mg0PFq03BRrApyiPH7MF0XfOi8p
+	BV8n5dzdqDbCg0FWFj7QJg83MqSpxMZRi+H0=
+X-Gm-Gg: ASbGncszF77vi+Ta9sUKuLnZujXN0MS81aoTr5Y1O3mncR2+cw6cXr7OA0xWVL573vY
+	q5UU7zmdUQlo9SfI7zZUUl4obUdJzaI1A66ZkWQ==
+X-Google-Smtp-Source: AGHT+IHZOZuGh+Cq1RVbbzN662zcy1YLAMdsH19pgW8fy9okRskaf6pwCzHbHpwNVgGdw916i0lU9B/Y72Gdu/rdaCk=
+X-Received: by 2002:a05:6402:528a:b0:5d3:f141:ccf6 with SMTP id
+ 4fb4d7f45d1cf-5d81de16c82mr57619463a12.32.1736248416238; Tue, 07 Jan 2025
+ 03:13:36 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
- frapeml500005.china.huawei.com (7.182.85.13)
+References: <cf07f705d63f04ebf7ba4ecafdc9ab6f63960e3d.1736239148.git.geert+renesas@glider.be>
+In-Reply-To: <cf07f705d63f04ebf7ba4ecafdc9ab6f63960e3d.1736239148.git.geert+renesas@glider.be>
+From: Amir Goldstein <amir73il@gmail.com>
+Date: Tue, 7 Jan 2025 12:13:25 +0100
+X-Gm-Features: AbW1kvYLrDdrgGevJS4mpM4stjr2b9nsS6FuxuvYsZ9qIZgGsUE-v-JWNUQx-d4
+Message-ID: <CAOQ4uxjESOJsb2GDx-c==_cLtF=wqtDAprcDmjwiq25hyzQFwA@mail.gmail.com>
+Subject: Re: [PATCH] overlayfs.rst: Fix and improve grammar
+To: Geert Uytterhoeven <geert+renesas@glider.be>, Jonathan Corbet <corbet@lwn.net>
+Cc: Miklos Szeredi <miklos@szeredi.hu>, linux-unionfs@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> >+enum hinic3_service_type {
-> >+	SERVICE_T_NIC =3D 0,
-> >+	SERVICE_T_MAX =3D 1,
-> >+	/* Only used for interruption resource management, mark the request
-> >module */
-> >+	SERVICE_T_INTF =3D (1 << 15),
-
-> [Suman] any reason to define a type after _MAX? Does _MAX has some other co=
-> nnotation? Also, one generic comment would be to use symmetrical naming con=
-> vention like HINIC3_SERVICE_T_NIC or something like that.
-
-The HW supports multiple services. E.g. RoCE. We plan to add support
-for some of them them later. The specific service values are used by
-HW (e.g. when reporting events) and therefore need to be defined
-explicitly. MAX is a SW only value that is used to define array that is
-accessed by service index.
-
-We will add a comment for that.
-
-> >+};
+On Tue, Jan 7, 2025 at 9:45=E2=80=AFAM Geert Uytterhoeven
+<geert+renesas@glider.be> wrote:
 >
-> ...
+>   - Correct "in a way the" to "in a way that",
+>   - Add a comma to improve readability.
 >
-> >+static bool hinic3_adev_svc_supported(struct hinic3_hwdev *hwdev,
-> >+				      enum hinic3_service_type svc_type)
-> >+{
-> >+	switch (svc_type) {
-> >+	case SERVICE_T_NIC:
+> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
 
-> [Suman] Are there other SERVICE type which will be introduced later?
+Acked-by: Amir Goldstein <amir73il@gmail.com>
 
-Yes. As explained above.
+John,
 
-> >+		return hinic3_support_nic(hwdev);
-> >+	default:
-> >+		break;
-> >+	}
-> >+
-> >+	return false;
-> >+}
+Please take this patch via the documentation tree,
+as I have no overlayfs patches queued for v6.14.
 
+Thanks,
+Amir.
+
+> ---
+>  Documentation/filesystems/overlayfs.rst | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/Documentation/filesystems/overlayfs.rst b/Documentation/file=
+systems/overlayfs.rst
+> index 4c8387e1c88068fa..a93dddeae199491a 100644
+> --- a/Documentation/filesystems/overlayfs.rst
+> +++ b/Documentation/filesystems/overlayfs.rst
+> @@ -266,7 +266,7 @@ Non-directories
+>  Objects that are not directories (files, symlinks, device-special
+>  files etc.) are presented either from the upper or lower filesystem as
+>  appropriate.  When a file in the lower filesystem is accessed in a way
+> -the requires write-access, such as opening for write access, changing
+> +that requires write-access, such as opening for write access, changing
+>  some metadata etc., the file is first copied from the lower filesystem
+>  to the upper filesystem (copy_up).  Note that creating a hard-link
+>  also requires copy_up, though of course creation of a symlink does
+> @@ -549,8 +549,8 @@ Nesting overlayfs mounts
+>
+>  It is possible to use a lower directory that is stored on an overlayfs
+>  mount. For regular files this does not need any special care. However, f=
+iles
+> -that have overlayfs attributes, such as whiteouts or "overlay.*" xattrs =
+will be
+> -interpreted by the underlying overlayfs mount and stripped out. In order=
+ to
+> +that have overlayfs attributes, such as whiteouts or "overlay.*" xattrs,=
+ will
+> +be interpreted by the underlying overlayfs mount and stripped out. In or=
+der to
+>  allow the second overlayfs mount to see the attributes they must be esca=
+ped.
+>
+>  Overlayfs specific xattrs are escaped by using a special prefix of
+> --
+> 2.43.0
+>
+>
 
