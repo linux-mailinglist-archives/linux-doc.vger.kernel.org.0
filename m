@@ -1,228 +1,147 @@
-Return-Path: <linux-doc+bounces-34197-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34199-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id A114CA047A4
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 18:08:46 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 89D0DA047AA
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 18:10:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 724A31618BC
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 17:08:44 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E456B3A04FE
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 17:10:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DFCD71F4E48;
-	Tue,  7 Jan 2025 17:08:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 49A3B1F2C35;
+	Tue,  7 Jan 2025 17:10:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="mUw+z2eY";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="8d/syuGB";
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="z3ry/Sld";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="BRjmOAGB"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="bPzaJbXT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17EAC1F37B8;
-	Tue,  7 Jan 2025 17:08:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A64D718B463
+	for <linux-doc@vger.kernel.org>; Tue,  7 Jan 2025 17:10:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736269711; cv=none; b=NoaQ4oAZuT+57BorJrxkJR+hTY3XLTm1Ny7sNhr2VfZEzpKGRu+0UZ/bXitq3bGkPbLz3utrMpzgUCHJvjAHymcmS4KlKifO4Ai1LG8YUKa5Mz5GlMkRdSXKJBAPdTBIhgv6G1q3PY5mBv/wZMdYWMCEhUkdKjqF5qOxNgCs+x8=
+	t=1736269812; cv=none; b=SD5tMpl7MZqIiWD3cOuOjvurEKB3lPiSIWOJQMk8swRpSgMby2hmrml90ciOVmF0cd8sv1WeW5XiL/V3FJHsmbLhWc5x+fUalbgrjph8+NoWHQiVMA8AxBmV5GkhKW99MICm7dzEsvvKpb17rqsC3OTVMlYYsllvtFcaSt221vw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736269711; c=relaxed/simple;
-	bh=iAdIxn5EBel1dEtUSLOAYprINwlddDZYdA9OB9qQ5m8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qtt98+7FjZ55bonywJHTGpobWJa5NJEmltj+j+YPQnHRWE3tMx7mkzchku6bq+OQbwXJhcUHYQQjLwW1ZIyV3RVt6zDimEvZAxcdcI19cvcE2dQImHU6R50LNMXWkyniBDNK32KDB1PCunfenf76WxjjI6lEZ4us/cch6hirPgE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=mUw+z2eY; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=8d/syuGB; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=z3ry/Sld; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=BRjmOAGB; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id ED1BC21133;
-	Tue,  7 Jan 2025 17:08:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1736269706; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
+	s=arc-20240116; t=1736269812; c=relaxed/simple;
+	bh=k6MVnlt34ZD0SBO9MSU8T78C7vNtxZTkYcttZnmsriY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=dp0LAZcp8NcFEWJjejoymEAMyk9KJcK0dtcufF6x9gSk7TRd3FRYI7qFG6VP+QmqR9fU3gRHcP7WA/6G30tQMwbYYmp1yviWgd9oNm5FxIeJe1uwMkg924QIcUwqU3Nzxiwe4FVECeDBB2+g/fXVkJXC1mpPHOtVaT3pv0pnmgQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=bPzaJbXT; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1736269809;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Bj9z1L/UJIZabSC12hC9cJt+3G0/50H7bOXKt3S4sQs=;
-	b=mUw+z2eYtm/AQe4vIw5p5TP7WdWWh8PBoeYh7TsthlWo/9eZtBGFjsGi0Uh5/3uaa/oJA8
-	tGzcmqZm3prIVtwVGddTNoig60lYm1V6gVCcCSAyfNbry3i/xFEHfUV9dkK/TZynDBGaoS
-	IqkCkDPtbJo3uVvK0sQWxDiShD4MZ0w=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1736269706;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Bj9z1L/UJIZabSC12hC9cJt+3G0/50H7bOXKt3S4sQs=;
-	b=8d/syuGBc3zH2kwJ/63bW8wCvr4vgknWDqaiS0xrtt6HMQaDGw0AySJqzijKlhtUVvQYvo
-	x9K+BePAHuTpMrDQ==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b="z3ry/Sld";
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=BRjmOAGB
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1736269705; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Bj9z1L/UJIZabSC12hC9cJt+3G0/50H7bOXKt3S4sQs=;
-	b=z3ry/SldQb7XlIztsm1OGMlupC/yuqbTdr1qcM482JDo9YCjN8SnGBS3w+kOcVN66ZHkpk
-	URdQW+bz3Asz/N/p3IHv7Tyyg5q9bHeI5BetF4v5RGXHqX/1G24Xa+7GehXlJ9bG8vfD0c
-	9J9aqwwifSBobSZLfykCK9qF7lHh4d8=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1736269705;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Bj9z1L/UJIZabSC12hC9cJt+3G0/50H7bOXKt3S4sQs=;
-	b=BRjmOAGBrjtxc/f3CyKPXvWq6S5v+hKcMfkgc4RMGvfoLS/kfJ6VQddrJQLYYMTv2uHxYT
-	By1Z8rhRxrcTGXBQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id AECA213763;
-	Tue,  7 Jan 2025 17:08:25 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id 4odGKolffWdNagAAD6G6ig
-	(envelope-from <vbabka@suse.cz>); Tue, 07 Jan 2025 17:08:25 +0000
-Message-ID: <08a0d865-991b-48d1-adcc-f9184d708ff1@suse.cz>
-Date: Tue, 7 Jan 2025 18:08:25 +0100
+	 in-reply-to:in-reply-to:references:references;
+	bh=gwQkyTcOMsZ2EjZrTGgt+ipO0/RY4nS6QVm5/aGbi9U=;
+	b=bPzaJbXTMKIgBehAZAuY3DUQ1y7QjzjeNZkLOr18UulevSdGk9bA0kB56hOmYQrWFKRJtc
+	oWA5fxFMypngeZEW0/OUYJkPTDu3dk3VpTM5FoDZklWQAqF8Z7v5FfM3FN2FP1/sPklOIP
+	4XsznVAH0GRoMKqITN9EA5FoBgp9WLY=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-683-agcZ5HKRN16L2Wqw1at0ww-1; Tue, 07 Jan 2025 12:10:08 -0500
+X-MC-Unique: agcZ5HKRN16L2Wqw1at0ww-1
+X-Mimecast-MFC-AGG-ID: agcZ5HKRN16L2Wqw1at0ww
+Received: by mail-wm1-f69.google.com with SMTP id 5b1f17b1804b1-436248d1240so76772415e9.0
+        for <linux-doc@vger.kernel.org>; Tue, 07 Jan 2025 09:10:07 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736269807; x=1736874607;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=gwQkyTcOMsZ2EjZrTGgt+ipO0/RY4nS6QVm5/aGbi9U=;
+        b=YqhivnHRsQBEdvvBKYRFHfqnIW/NzSYuqaNE3lEW2/L2LGh9D0DcR42onWDjJUj4CK
+         UQ/e9ULNjilN+5/e3tMD0xzXB2FuoKx0EGtMszDi+tKFzEgW0QiM1bBX8wR0vkQNMsEy
+         khp6PwIf6B5OuO/7TcYMoC+vz2GlXtmSSWNVrUbLI/m95tfFdrQmpakQuWw6j7fZXZ1o
+         1ZMLjUWrbcRC4pPIxVNI00pHKD2uwnAqoRClvVkVOnkiUxQD5o1gt0UrfP+5tOReZUqG
+         Ge263bAKTS+5pfh4Dovo66d4qCObYio++8O/Ak8uuk4JBAisx//tGMYYciQT/H9BMo4S
+         KKAg==
+X-Forwarded-Encrypted: i=1; AJvYcCUwD0iieDobEW9RW4b0O38n+CBgbIkQhh210qy878lQgzZAx7FvzEYvsnrjidnJUjUs0j0IqvWfGhk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxVBG+yaPVvA/108CQSGJPbwsknwYZPSzT4FLjA34VQEK9EnURP
+	N5ikgnke7jYBYPmaD7kcv0g7ORbxpqGTfEV/7BxbF5dd8hTpJ5SFv+XO9v88d8RydOquEWQchTs
+	hEMsr8bMl/vvgiu2hKsFbG0L1FbcoZG+h87IY/cnqcvVwt9p8qKLOHOTgxgc90KGoY/ZwHO8pUv
+	L04FLeCcGTORQSnVLs5dABhGfilTI2ccYu
+X-Gm-Gg: ASbGncujoKf4SkhYxHeTqoCpFxhILYlC0aX/Gp8cKfIN2FxYxdad3tfAgwdEB8Ot43/
+	ZkaqySs2q3rtKYRx1uwdHopVoD09qWOtmvpYAxw==
+X-Received: by 2002:a05:600c:1d21:b0:434:a4a6:51f8 with SMTP id 5b1f17b1804b1-4366790e3fdmr593069285e9.0.1736269806970;
+        Tue, 07 Jan 2025 09:10:06 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGSvogatKxKxqA2wBw/+7sDsL67SJLzCtKQockD6aGfvTv8LM12x53+vGigfD/GcR6BSKn5UMxxRiIg0aVgOFw=
+X-Received: by 2002:a05:600c:1d21:b0:434:a4a6:51f8 with SMTP id
+ 5b1f17b1804b1-4366790e3fdmr593068955e9.0.1736269806643; Tue, 07 Jan 2025
+ 09:10:06 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 05/17] mm: mark vmas detached upon exit
-Content-Language: en-US
-To: Suren Baghdasaryan <surenb@google.com>, akpm@linux-foundation.org
-Cc: peterz@infradead.org, willy@infradead.org, liam.howlett@oracle.com,
- lorenzo.stoakes@oracle.com, mhocko@suse.com, hannes@cmpxchg.org,
- mjguzik@gmail.com, oliver.sang@intel.com, mgorman@techsingularity.net,
- david@redhat.com, peterx@redhat.com, oleg@redhat.com, dave@stgolabs.net,
- paulmck@kernel.org, brauner@kernel.org, dhowells@redhat.com,
- hdanton@sina.com, hughd@google.com, lokeshgidra@google.com,
- minchan@google.com, jannh@google.com, shakeel.butt@linux.dev,
- souravpanda@google.com, pasha.tatashin@soleen.com, klarasmodin@gmail.com,
- corbet@lwn.net, linux-doc@vger.kernel.org, linux-mm@kvack.org,
- linux-kernel@vger.kernel.org, kernel-team@android.com
-References: <20241226170710.1159679-1-surenb@google.com>
- <20241226170710.1159679-6-surenb@google.com>
-From: Vlastimil Babka <vbabka@suse.cz>
-Autocrypt: addr=vbabka@suse.cz; keydata=
- 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
- EP+ylKVEKb0Q2A==
-In-Reply-To: <20241226170710.1159679-6-surenb@google.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: ED1BC21133
-X-Spam-Level: 
-X-Spamd-Result: default: False [-4.51 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[32];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com,sina.com];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	R_RATELIMIT(0.00)[to_ip_from(RLk41rrgs15z4i1nmqiwtynpyh)];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[infradead.org,oracle.com,suse.com,cmpxchg.org,gmail.com,intel.com,techsingularity.net,redhat.com,stgolabs.net,kernel.org,sina.com,google.com,linux.dev,soleen.com,lwn.net,vger.kernel.org,kvack.org,android.com];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.cz:email,suse.cz:dkim,suse.cz:mid];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	DKIM_TRACE(0.00)[suse.cz:+]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spam-Score: -4.51
-X-Spam-Flag: NO
+References: <CADH9ctD1uf_yBA3NXNQu7TJa_TPhLRN=0YZ3j2gGhgmaFRdCFg@mail.gmail.com>
+ <c3026876-8061-4ab2-9321-97cc05bad510@redhat.com> <CADH9ctBivnvP1tNcatLKzd8EDz8Oo6X65660j8ccxYzk3aFzCA@mail.gmail.com>
+ <CABgObfZEyCQMiq6CKBOE7pAVzUDkWjqT2cgfbwjW-RseH8VkLw@mail.gmail.com>
+ <CADH9ctA_C1dAOus1K+wOH_SOKTb=-X1sVawt5R=dkH1iGt8QUg@mail.gmail.com>
+ <CABgObfZrTyft-3vqMz5w0ZiAhp-v6c32brgftynZGJO8OafrdA@mail.gmail.com>
+ <CADH9ctBYp-LMbW4hm3+QwNoXvAc5ryVeB0L1jLY0uDWSe3vbag@mail.gmail.com>
+ <b1ddb439-9e28-4a58-ba86-0395bfc081e0@redhat.com> <CADH9ctCFYtNfhn3SSp2jp0fzxu6s_X1A+wBNnzvHZVb8qXPk=g@mail.gmail.com>
+ <CADH9ctB0YSYqC_Vj2nP20vMO_gN--KsqOBOu8sfHDrkZJV6pmw@mail.gmail.com> <Z2IXvsM0olS5GvbR@google.com>
+In-Reply-To: <Z2IXvsM0olS5GvbR@google.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Date: Tue, 7 Jan 2025 18:09:54 +0100
+X-Gm-Features: AbW1kvYbICc679MeQNzE1ow2NFvGxOmTuZ13zzWBDAwtldHBRVtXoFV8OfA0EJs
+Message-ID: <CABgObfadZZ5sXYB0xR5OcLDw_eVUmXTOTFSWkVpkgiCJmNnFRQ@mail.gmail.com>
+Subject: Re: [PATCH 2/3] KVM: x86: Add support for VMware guest specific hypercalls
+To: Sean Christopherson <seanjc@google.com>
+Cc: Doug Covelli <doug.covelli@broadcom.com>, Zack Rusin <zack.rusin@broadcom.com>, 
+	kvm <kvm@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, "the arch/x86 maintainers" <x86@kernel.org>, 
+	"H. Peter Anvin" <hpa@zytor.com>, Shuah Khan <shuah@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
+	Arnaldo Carvalho de Melo <acme@redhat.com>, Isaku Yamahata <isaku.yamahata@intel.com>, 
+	Joel Stanley <joel@jms.id.au>, Linux Doc Mailing List <linux-doc@vger.kernel.org>, linux-kernel@vger.kernel.org, 
+	linux-kselftest <linux-kselftest@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 12/26/24 18:06, Suren Baghdasaryan wrote:
-> When exit_mmap() removes vmas belonging to an exiting task, it does not
-> mark them as detached since they can't be reached by other tasks and they
-> will be freed shortly. Once we introduce vma reuse, all vmas will have to
-> be in detached state before they are freed to ensure vma when reused is
-> in a consistent state. Add missing vma_mark_detached() before freeing the
-> vma.
-> 
-> Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+On Wed, Dec 18, 2024 at 4:44=E2=80=AFAM Sean Christopherson <seanjc@google.=
+com> wrote:
+> > Changing our legacy BIOS is not an option so in order to support Window=
+s VMs
+> > with the legacy BIOS with decent performance we would either need to ad=
+d support
+> > for remote reads of the APIC ID register to KVM or support CR8 accesses=
+ w/o
+> > exiting w/o the in-kernel APIC in order.  Do you have a preference?
+>
+> I didn't quite follow the CR8 access thing.  If the choice is between emu=
+lating
+> Remote Read IPIs and using a userspace local APIC, then I vote with both =
+hands
+> for emulating Remote Reads, especially if we can do a half-assed version =
+that
+> provides only what your crazy BIOS needs :-)
 
-Reviewed-by: Vlastimil Babka <vbabka@suse.cz>
+Absolutely.  Not quite userspace local APIC - VMware only needs
+userspace traps on CR8 access but yeah, it would not be great to have
+that. Remote read support is totally acceptable and hopefully win-win
+for VMware too.
 
-> ---
->  mm/vma.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/mm/vma.c b/mm/vma.c
-> index ce113dd8c471..4a3deb6f9662 100644
-> --- a/mm/vma.c
-> +++ b/mm/vma.c
-> @@ -413,9 +413,10 @@ void remove_vma(struct vm_area_struct *vma, bool unreachable)
->  	if (vma->vm_file)
->  		fput(vma->vm_file);
->  	mpol_put(vma_policy(vma));
-> -	if (unreachable)
-> +	if (unreachable) {
-> +		vma_mark_detached(vma);
->  		__vm_area_free(vma);
-> -	else
-> +	} else
->  		vm_area_free(vma);
+> The biggest wrinkle I can think of is that KVM uses the Remote Read IPI e=
+ncoding
+> for a paravirt vCPU kick feature, but I doubt that's used by Windows gues=
+ts and
+> so can be sacrificed on the Altar of Ancient BIOS.
 
-Nit: per style this should be { } too now.
+That's easy, the existing code can be wrapped with
 
->  }
->  
+                if (guest_pv_has(vcpu, KVM_FEATURE_PV_UNHALT))
+
+The remote-read hack is not even supposed to be used by the guest
+(it's used internally by kvm_pv_kick_cpu_op).
+
+Paolo
 
 
