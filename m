@@ -1,108 +1,86 @@
-Return-Path: <linux-doc+bounces-34142-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34138-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 885CDA037DC
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 07:28:55 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 075BFA0377F
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 06:53:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 244CE1885EAD
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 06:28:58 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 92CA31886442
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 05:53:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 417AD15854F;
-	Tue,  7 Jan 2025 06:28:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E02E1198E78;
+	Tue,  7 Jan 2025 05:53:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="BuT7pEfi"
+	dkim=pass (2048-bit key) header.d=codeconstruct.com.au header.i=@codeconstruct.com.au header.b="ZAd0MKTq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m3276.qiye.163.com (mail-m3276.qiye.163.com [220.197.32.76])
+Received: from codeconstruct.com.au (pi.codeconstruct.com.au [203.29.241.158])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 463E82594B2
-	for <linux-doc@vger.kernel.org>; Tue,  7 Jan 2025 06:28:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B181817C9E8;
+	Tue,  7 Jan 2025 05:53:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=203.29.241.158
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736231331; cv=none; b=i4xLHRbX+Q+YeI+Z23ZiBuZdZ9k6GOxutvET/jckmgVZVn7L1f5bkt+ci7n//VoEMqro7vnymve9beY5Qv0ECH3X/QmaOMTHFM7zT82SjxfvCb8ys+fsCFq2w13of6W9kWnLO6KDklAxc1I5zV+Ha3W4hdYI2EnSC1zDFQcmusE=
+	t=1736229218; cv=none; b=bPnNn9YgaNx46rvtE6oCYyXfUzhX9GcRvdPEb0gI14aYLQKo3/vG6bOgJeQLxXqP/WCaJekI6+PvMTap2UqL0l1q6z+6HxlP5V+RKUYwKVrCnvyVDFJz4vWpRuvpTb1eW6Yz25DzorN4UxzOZqW7JVEOpHtVZo19aziUSig6crg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736231331; c=relaxed/simple;
-	bh=KAHPBtnlRV6WbCQhdv0iyLRuIYJXnWxhXqaMqOQmJTY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=LGWwYbt5GIPV6rrtdA3WmzJGDFnmXJthQf6F0woySVIjN4BUcHLleyxSaK7H/YJGwCbgYlnrCTUpIm9HDWNsGo2hT+3m9WUu2EaR4DAqHEZVEsTOXyPVdcm7ddBhO6D13CqspcYWcPqyuwQ6TWsUWKZwpdqqdACYRNt/ArUaTIk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=BuT7pEfi; arc=none smtp.client-ip=220.197.32.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
-Received: from [192.168.6.2] (unknown [171.8.192.198])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 7ef4fbce;
-	Tue, 7 Jan 2025 13:53:13 +0800 (GMT+08:00)
-Message-ID: <551c040d-4331-4f05-a690-ed1cd2e28490@cqsoftware.com.cn>
-Date: Tue, 7 Jan 2025 13:53:12 +0800
+	s=arc-20240116; t=1736229218; c=relaxed/simple;
+	bh=LtjlwhG9B9G5MFbc8lneU17K4uoWCTM5laZrvJwRNyY=;
+	h=From:To:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=SFUvLygaZBdf2D3UrOAXstHetQB1e2ouyWozCER0SSAbv8VUOs9iyULooqK1NgICKOz3KTU81nssDY14mSjE6PRsSCLGAHf/CgalgKG+0KMaqdvbD1/KDI0uAjtEWNGwmx8gaLXZyfeeFs8Fc+AwH8cQLpImh15xHTQ2lUbZtsw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codeconstruct.com.au; spf=pass smtp.mailfrom=codeconstruct.com.au; dkim=pass (2048-bit key) header.d=codeconstruct.com.au header.i=@codeconstruct.com.au header.b=ZAd0MKTq; arc=none smtp.client-ip=203.29.241.158
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codeconstruct.com.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=codeconstruct.com.au
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=codeconstruct.com.au; s=2022a; t=1736229213;
+	bh=d7GzDGEIhCY1GK+byjPJdhkSL4A03CBJlx1sryt4hPo=;
+	h=From:To:In-Reply-To:References:Subject:Date;
+	b=ZAd0MKTqX//BY/sdq4QR1aa6bCpL2f+2d1H7bdthMjEiGRjDZKYXAAaxkbDYkjyIt
+	 t/7hbnDF1fryFVB0E0T0Oh3RYRoMdhhul9LVfkOfsuKJLJMqLWkSxGOXtjyPZX6Krs
+	 QhsxZ20PtOEB9K3bgkuyWdtOtWdkReA6alRnUwCL2RzQt0NiIxsPTOdVrNC81CZ7Gh
+	 cJibHg/zrrw3h+eOs+2mxqYaOe0mjzJQiLJLk4K5p7hTJONu5F6jri3yhJHag8OEPx
+	 hHq74gvuPRgJaXlRFSN38Rq6j5qEdvtSvPTpdQHjlbvucGFmFjaVcB9Ymw3FyQAHfR
+	 gmbsuyE3ozbMg==
+Received: from [127.0.1.1] (203-173-1-122.dyn.iinet.net.au [203.173.1.122])
+	by mail.codeconstruct.com.au (Postfix) with ESMTPSA id 33B74706BE;
+	Tue,  7 Jan 2025 13:53:31 +0800 (AWST)
+From: Andrew Jeffery <andrew@codeconstruct.com.au>
+To: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
+ eajames@linux.ibm.com, jdelvare@suse.com, linux@roeck-us.net, 
+ corbet@lwn.net, joel@jms.id.au, Delphine_CC_Chiu@Wiwynn.com, 
+ broonie@kernel.org, peteryin.openbmc@gmail.com, noahwang.wang@outlook.com, 
+ naresh.solanki@9elements.com, lukas@wunner.de, jbrunet@baylibre.com, 
+ patrick.rudolph@9elements.com, gregkh@linuxfoundation.org, 
+ peterz@infradead.org, pbiel7@gmail.com, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-aspeed@lists.ozlabs.org, linux-i2c@vger.kernel.org, 
+ Ninad Palsule <ninad@linux.ibm.com>
+In-Reply-To: <20241217173537.192331-5-ninad@linux.ibm.com>
+References: <20241217173537.192331-1-ninad@linux.ibm.com>
+ <20241217173537.192331-5-ninad@linux.ibm.com>
+Subject: Re: [PATCH v4 4/4] ARM: dts: aspeed: system1: Use crps PSU driver
+Message-Id: <173622921112.97504.9310903819331925081.b4-ty@codeconstruct.com.au>
+Date: Tue, 07 Jan 2025 16:23:31 +1030
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docs/zh_CN: Add security credentials Chinese translation
-To: Alex Shi <seakeel@gmail.com>
-Cc: alexs@kernel.org, si.yanteng@linux.dev, corbet@lwn.net,
- zhaoyuehui@cqsoftware.com.cn, zhangwei@cqsoftware.com.cn,
- maoyuxian@cqsoftware.com.cn, linux-doc@vger.kernel.org
-References: <20250103061547.20947-1-zhaoshuo@cqsoftware.com.cn>
- <CAJy-AmmhXThUa3yU4Rc_o8abP06E8MypKTdrcZv6U8Z6A9co-g@mail.gmail.com>
-From: zhaoshuo <zhaoshuo@cqsoftware.com.cn>
-In-Reply-To: <CAJy-AmmhXThUa3yU4Rc_o8abP06E8MypKTdrcZv6U8Z6A9co-g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDH04dVh1OTkxCSk1PH0pIQ1YVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKTEpVQ1VKQklVSkJDWVdZFhoPEhUdFFlBWU9LSFVKS0hKT0hMVUpLS1
-	VKQktLWQY+
-X-HM-Tid: 0a943f53077e09d0kunm7ef4fbce
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NAw6NAw5IzILExxCQx8vCTAi
-	KkhPCRFVSlVKTEhNSUlCSkJPTk5PVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
-	WRILWUFZSkxKVUNVSkJJVUpCQ1lXWQgBWUFKSUxPNwY+
-DKIM-Signature:a=rsa-sha256;
-	b=BuT7pEfiYVZY3XTLaXRdTmCo7kUppZco3APkvkgCorxME44pI08K9P96KfQnfK/T+rCNBv4drQn0hdsJ8fIu0xtrjQYw0RDoFWRVFPuBDoH8q5h0aVBN9JD/yg2bF7LifPWTQKmpjZbs0ofaVVyDjfSyBwsqUVkPNn5ZBgnHPj0=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
-	bh=+dX1erblQlPdTOWArhRquFOLCjsmVJwDkHM91Q7Geww=;
-	h=date:mime-version:subject:message-id:from;
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 
+On Tue, 17 Dec 2024 11:35:35 -0600, Ninad Palsule wrote:
+> The system1 uses Intel common redundant (crps185) power supplies so move
+> to correct new crps driver.
+> 
+> 
 
-在 2025/1/7 13:22, Alex Shi 写道:
-> Shuo Zhao <zhaoshuo@cqsoftware.com.cn> 于2025年1月3日周五 14:15写道：
-> ...
->
->> +
->> + 3. 客观上下文
->> +
->> +        此外在这些对象的凭据中，将有一个子集表示对象的“客观上下文”。
->> +        这可能与（2）中相同，也可能不同 —— 例如，在标准的UNIX文件中，
->> +        这是由标记在索引节点上的UID和GID定义的。
->> +
->> +        客观上下文是进行安全计算的一部分，当对象被操作时会用到。
->> +
-> ...
->
->> +
->> + 5. 主观上下文
->> +
->> +        主体对其凭据有一个额外的解释。其凭据的一个子集形成了“主观上下文”。主观
->> +        上下文在主体执行操作时作为安全计算的一部分使用。
->> +
->> +        例如，Linux任务在操作文件时会有FSUID、FSGID和附加组列表 —— 这些凭据
->> +        与通常构成任务的客观上下文的真实UID和GID是相互独立的。
->> +
-> Anyway, I'm still confused on the 客观 and 主观 context, translation. Is
-> it better to use
-> 对象上下文， 主体上下文？
-> No idea.
+Thanks, I've applied this to be picked up through the BMC tree.
 
-Yes, this seems to correspond better with the previous text.
-
-
-Thanks,
-
-ZhaoShuo
+--
+Andrew Jeffery <andrew@codeconstruct.com.au>
 
 
