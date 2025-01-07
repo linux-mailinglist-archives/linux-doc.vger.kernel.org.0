@@ -1,93 +1,149 @@
-Return-Path: <linux-doc+bounces-34137-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34139-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44EF9A03762
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 06:37:04 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EF13A03783
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 06:53:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3722A162DBA
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 05:37:02 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 917FA1635FF
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jan 2025 05:53:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C0F086338;
-	Tue,  7 Jan 2025 05:37:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B132C199EB2;
+	Tue,  7 Jan 2025 05:53:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=codeconstruct.com.au header.i=@codeconstruct.com.au header.b="PoNvvGRb"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="F9f7UfYc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from codeconstruct.com.au (pi.codeconstruct.com.au [203.29.241.158])
+Received: from mail-m118102.qiye.163.com (mail-m118102.qiye.163.com [115.236.118.102])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B23F2647;
-	Tue,  7 Jan 2025 05:36:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=203.29.241.158
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14BA017C9E8
+	for <linux-doc@vger.kernel.org>; Tue,  7 Jan 2025 05:53:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.236.118.102
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736228220; cv=none; b=cNtYJfSUt4dcN+CNJulbvJCxMd5VTExQjxkbb2a3y7q44SkcIgWrJgOOEYaF1HGWARA3k44/geG3hIDl0lZM33hdywlTmSDHNaBcR3jfSFZ/tB5YBxQ4VUthyuuj/lFlHWa4nfMv41JM30Z1VdGo+jW82LC1V3smkr9PDJStd2E=
+	t=1736229229; cv=none; b=Y3Oq6udb6P307g1B47O7cEn94em9NxHbvr7sGXbHejCy1QnoSC7tFNgImu3udWV4IH44/gVkg7AFdR8XdCPavrJtiIXoOCwlqU9aGtYUNMBcXVC3acoVT1bfKsYnpameRXkG2RLlGworYPhlWLio4kzbWN69eFl6zZDk7r42LYc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736228220; c=relaxed/simple;
-	bh=LS6g789aLB8ApLS1q1d05BR3y23KGQ689leRV5Vb9so=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=MHB4j2DGsrTP9JeiculLP+EeLY5PG7dbmn6qWn8VhmMbLc1NdjsOUrRE66f1aC2Cvyz+IbdEVm6qL64WopmsLk9KTwmrhV2kaY1iCe1ZVXFeswrJrOzk2LaBB7q1UQL4bp6IIfTzqsPbJ09CwCtoyHQQudixP/E5DBDCclYiFjI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codeconstruct.com.au; spf=pass smtp.mailfrom=codeconstruct.com.au; dkim=pass (2048-bit key) header.d=codeconstruct.com.au header.i=@codeconstruct.com.au header.b=PoNvvGRb; arc=none smtp.client-ip=203.29.241.158
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=codeconstruct.com.au
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=codeconstruct.com.au
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=codeconstruct.com.au; s=2022a; t=1736228214;
-	bh=LS6g789aLB8ApLS1q1d05BR3y23KGQ689leRV5Vb9so=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=PoNvvGRbsBte9//EfiRckwJTLJc5iTLakSR0TjCowl4xcFJx+B2MlUYLh8DgWVtA9
-	 +nWw/DQDe7EtDtE37FLAiPSeI4fa0SATvGfh1Ps5BsWQAyWsOJJU+S/mVz3V9hI60x
-	 TMmHI1HPeR9WKrjsvxg/82JHRUuDjhPeZG+HK/MF2CN/8NwPL4wqXsb9mkVTYcdcHl
-	 kjzRDP1rwSXXWy7NFuXmRh/drKGVuefB27i8I8UwFr6GByaa9NNbqWQYe+jk0wFVdG
-	 3lcu7WHBcxbgtzX5jnClTJRf6HRivENtNqB13pbkst5RcvHKTldRrOddKmrRIXUhFQ
-	 2JpeLCpYBQBFw==
-Received: from [10.200.97.88] (203-173-1-122.dyn.iinet.net.au [203.173.1.122])
-	by mail.codeconstruct.com.au (Postfix) with ESMTPSA id C87FE706BE;
-	Tue,  7 Jan 2025 13:36:47 +0800 (AWST)
-Message-ID: <0b592466305793dfa788daced6368dc4c9e3852c.camel@codeconstruct.com.au>
-Subject: Re: [PATCH v4 4/4] ARM: dts: aspeed: system1: Use crps PSU driver
-From: Andrew Jeffery <andrew@codeconstruct.com.au>
-To: Guenter Roeck <linux@roeck-us.net>, Ninad Palsule <ninad@linux.ibm.com>
-Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
- eajames@linux.ibm.com, jdelvare@suse.com, corbet@lwn.net, joel@jms.id.au, 
- Delphine_CC_Chiu@wiwynn.com, broonie@kernel.org,
- peteryin.openbmc@gmail.com,  noahwang.wang@outlook.com,
- naresh.solanki@9elements.com, lukas@wunner.de,  jbrunet@baylibre.com,
- patrick.rudolph@9elements.com, gregkh@linuxfoundation.org, 
- peterz@infradead.org, pbiel7@gmail.com, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-aspeed@lists.ozlabs.org, linux-i2c@vger.kernel.org
-Date: Tue, 07 Jan 2025 16:06:46 +1030
-In-Reply-To: <d3de9f99-1cc2-491e-8dac-1a5d243e17f0@roeck-us.net>
-References: <20241217173537.192331-1-ninad@linux.ibm.com>
-	 <20241217173537.192331-5-ninad@linux.ibm.com>
-	 <d3de9f99-1cc2-491e-8dac-1a5d243e17f0@roeck-us.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4-2 
+	s=arc-20240116; t=1736229229; c=relaxed/simple;
+	bh=pDxs6wjrDU+scUbICqk657TuxnYGAKpYR5av3xFJjRY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=YitrOJIRXYxszv03Iz9RjUigCKiSrzbMOtbqE4kyddY0DiSLfk39ZF2d4lHhaXMpbBnIrnGnvyqQGpowtI+ZpctAowVabnqz0zigosqfnz8HqBdpg4Frwd8zxYu5ek4z/FuDlEC+HrSufsqRO2MfJ/zXospe2wK+jdcJpvFu7uU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=F9f7UfYc; arc=none smtp.client-ip=115.236.118.102
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
+Received: from [192.168.6.2] (unknown [171.8.192.198])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 7eed27b7;
+	Tue, 7 Jan 2025 13:38:21 +0800 (GMT+08:00)
+Message-ID: <44461a7f-e3bd-4010-a014-07bd134c3e6a@cqsoftware.com.cn>
+Date: Tue, 7 Jan 2025 13:38:19 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] docs/zh_CN: Add security credentials Chinese
+ translation
+To: Alex Shi <seakeel@gmail.com>
+Cc: alexs@kernel.org, si.yanteng@linux.dev, corbet@lwn.net,
+ zhaoyuehui@cqsoftware.com.cn, zhangwei@cqsoftware.com.cn,
+ maoyuxian@cqsoftware.com.cn, linux-doc@vger.kernel.org
+References: <20250106055744.20840-1-zhaoshuo@cqsoftware.com.cn>
+ <CAJy-Am=D_vJ4C4jQmU3g8j4xD2=vHXPOEwLLtzn+FgfWwipzag@mail.gmail.com>
+From: zhaoshuo <zhaoshuo@cqsoftware.com.cn>
+In-Reply-To: <CAJy-Am=D_vJ4C4jQmU3g8j4xD2=vHXPOEwLLtzn+FgfWwipzag@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaTEwYVkhMHh8YSk8dGR8fTFYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKTEpVQ1VKQklVSkJDWVdZFhoPEhUdFFlBWU9LSFVKS0hKTkxJVUpLS1
+	VKQktLWQY+
+X-HM-Tid: 0a943f4569ea09d0kunm7eed27b7
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MTY6Syo4CzIWKRwqDyI6DCsh
+	VhVPFCpVSlVKTEhNSUlDSEtJSk5JVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
+	WRILWUFZSkxKVUNVSkJJVUpCQ1lXWQgBWUFJSEJKNwY+
+DKIM-Signature:a=rsa-sha256;
+	b=F9f7UfYcklHogM5QDcBiClRqZN6nrDM/oxoLVUsL22sIe6nAHzGMKqk+v/k6Z4ljEhQ8o9RmqcyGWvIgoVwaj0Vq+bLqjqaz+w22s6slbjZ5cGPxoxdq45Zof6+rIj7GaNuG2XYE233rkoceACDS8NB3HACW35UEv2cewyrr3i8=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
+	bh=J3/wT1oCKn5WbSz6jWFWnMWZK3PS4T2eGPPZmRNOECI=;
+	h=date:mime-version:subject:message-id:from;
 
-On Wed, 2024-12-18 at 07:16 -0800, Guenter Roeck wrote:
-> On Tue, Dec 17, 2024 at 11:35:35AM -0600, Ninad Palsule wrote:
-> > The system1 uses Intel common redundant (crps185) power supplies so
-> > move
-> > to correct new crps driver.
-> >=20
-> > Signed-off-by: Ninad Palsule <ninad@linux.ibm.com>
->=20
-> Acked-by: Guenter Roeck <linux@roeck-us.net>
->=20
-> This patch will need to be applied through an arm tree.
 
-I'll take it through the BMC tree.
+在 2025/1/7 13:09, Alex Shi 写道:
+> Shuo Zhao <zhaoshuo@cqsoftware.com.cn> 于2025年1月6日周一 14:33写道：
+>> Translate .../security/credentials.rst into Chinese.
+>>
+>> Update the translation through commit cf92ec602ac5
+>> ("Documentation: remove current_security() reference")
+>>
+>> Signed-off-by: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
+>> ---
+>>
+>> v2:
+>>
+>> Modify some formatting and translation.
+>>
+>>   .../zh_CN/security/credentials.rst            | 479 ++++++++++++++++++
+>>   .../translations/zh_CN/security/index.rst     |   2 +-
+>>   2 files changed, 480 insertions(+), 1 deletion(-)
+>>   create mode 100644 Documentation/translations/zh_CN/security/credentials.rst
+>>
+>> diff --git a/Documentation/translations/zh_CN/security/credentials.rst b/Documentation/translations/zh_CN/security/credentials.rst
+>> new file mode 100644
+>> index 000000000000..b42b86f96078
+>> --- /dev/null
+>> +++ b/Documentation/translations/zh_CN/security/credentials.rst
+>> @@ -0,0 +1,479 @@
+>> +.. SPDX-License-Identifier: GPL-2.0
+>> +.. include:: ../disclaimer-zh_CN.rst
+>> +
+>> +:Original: Documentation/security/credentials.rst
+>> +
+>> +:翻译:
+>> + 赵硕 Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
+>> +
+>> +=============
+>> +Linux中的凭据
+>> +=============
+>> +
+>> +作者: David Howells <dhowells@redhat.com>
+>> +
+>> +.. contents:: :local:
+>> +
+>> +概述
+>> +====
+>> +
+>> +当一个对象对另一个对象进行操作时，Linux执行的安全检查包含几个部分：
+>> +
+>> + 1. 对象
+>> +
+>> +     对象是可以直接由用户空间程序操作的系统中的实体。Linux具有多种可操作
+>> +     的对象，包括：
+>> +
+>> +       - 任务
+>> +       - 文件/索引节点
+>> +       - 套接字
+>> +       - 消息队列
+>> +       - 共享内存段
+>> +       - 信号量
+>> +       - 密钥
+>> +
+>> +     所有这些对象的描述的一部分是一组凭据。集合中的内容取决于对象的类型。
+>> +
+>> + 2. 对象所有权
+>> +
+>> +     大多数对象的凭据中会有一个子集用来表示该对象的所有权。
+>> +     这用于资源会计和限制（如磁盘配额和任务资源限制）。
+> accounting may use 核算 for better?
+> others looks good for me.
+
+Indeed,it's a good suggestion.
+
 
 Thanks,
 
-Andrew
+ZhaoShuo
+
+> Reviewed-by: Alex Shi <alexs@kernel.org>
 
