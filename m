@@ -1,146 +1,141 @@
-Return-Path: <linux-doc+bounces-34358-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34354-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 482D9A05A36
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 12:43:01 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 19BD1A05A20
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 12:41:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6F8E516639B
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 11:42:48 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 349841888063
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 11:41:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F0FD1F3D54;
-	Wed,  8 Jan 2025 11:42:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B436F1F8EFE;
+	Wed,  8 Jan 2025 11:41:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lichtman.org header.i=@lichtman.org header.b="BuKfb0Lk"
+	dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b="0O8o2Rg3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from lichtman.org (lichtman.org [149.28.33.109])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACA2719D8A9;
-	Wed,  8 Jan 2025 11:42:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=149.28.33.109
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01E441DE895
+	for <linux-doc@vger.kernel.org>; Wed,  8 Jan 2025 11:40:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736336556; cv=none; b=TDakm4BVuYQgRd2/Qdz/z+dwcfJtXtaqqoObToBJErh++XVe7KDu4hLhq1pvUsaGuwZSOpMfIRO1HXaBC18qIyiCtYxoWSt2vZfUSxEWeuxFFvWbzDBHtmhE9iTe08SdtmE+3PZZUJNyMzDhEjAk74pFc7RUNSZ69Sr0otKKtXc=
+	t=1736336461; cv=none; b=nteOqTEJgEalwoN+gALjSU1i47Unby/13gd//WxrdlMyg9G14/6JwJAiNPR2OVhtc7I2jAnsU71FSai7ieH9aa7oRWHcf0jz1tAlvhQkUr6DkdmLcYXJ241uD326EvxB2sh5bGUtWAk1dK72LgUG0hLnCHI16OvHF7qKkUq6y3c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736336556; c=relaxed/simple;
-	bh=5y4MEftMijF/5b+Wou+mz5/zFh4LhqCK1ZL7woXu6i8=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition; b=B24MGctE60cQSyIlDsSfN8kiM0p2wW5DYR1T3vR1XpOmRCUU8NbnKP8GbwwIk0eAt/cuARAAX4xRZo7DUJgwe7vwrm27YnhZh6uk6WrnZ9t+K5oTpPliPEzoz9FD+m9d2n7IKQiGpviAXnOKlxjzXZZyEr7dcp8XwUGvPrVu6EA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lichtman.org; spf=pass smtp.mailfrom=lichtman.org; dkim=pass (2048-bit key) header.d=lichtman.org header.i=@lichtman.org header.b=BuKfb0Lk; arc=none smtp.client-ip=149.28.33.109
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lichtman.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lichtman.org
-Received: by lichtman.org (Postfix, from userid 1000)
-	id 20D781771DF; Wed,  8 Jan 2025 11:35:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=lichtman.org; s=mail;
-	t=1736336122; bh=5y4MEftMijF/5b+Wou+mz5/zFh4LhqCK1ZL7woXu6i8=;
-	h=Date:From:To:Cc:Subject:From;
-	b=BuKfb0LkdU3LIar6Sk8TGQMtbF4fTC2Wni/y4JCGY5mmyMRc+Xsp1sqtsrN+k5k0R
-	 P0LMnDq6E8e31o8ApXxj9N95sZLiL6ZhlpA3+ITt3g3O+orbgQhmtUei5AtKTyhFnJ
-	 2zDErr97/eI9bsdokQzhYr8fZ+W2L0EF3Gydy1AJ2ofhmbhW2aIuON6rdj21/+AF2F
-	 CheXp+qAv9zcOIIl/p7kirA5B0yjvLBMmxyQVOqPaiky1A4itmlYtbKycy3uaPrGO5
-	 9Znpf2lVGJnTicWGIf34WXx2WKKvOJPEkCSTVjHZPzVulybGmcxlfDjhvwtHe6ybDV
-	 7/bpQinr3j+dA==
-Date: Wed, 8 Jan 2025 11:35:22 +0000
-From: Nir Lichtman <nir@lichtman.org>
-To: corbet@lwn.net, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com
-Cc: bagasdotme@gmail.com
-Subject: [PATCH v2] Documentation: Fix x86_64 UEFI outdated references to
- elilo
-Message-ID: <20250108113522.GA897677@lichtman.org>
+	s=arc-20240116; t=1736336461; c=relaxed/simple;
+	bh=lWV/O/UttiTJkLULUBKYE0bPmgRlaCXXqj66Zi3wY7Q=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To; b=ENvpXy9ano4SuVYRDnmj3gVcPhd6SNtQY+QdiHttJHpHvrXeZBxASvGrHy6Q4K4KleHTC1RoP6lMsbI4x4Ly8lcBS+k32p0gtqY4baGQRd6gh12O004G1cHNhzoTQAzbOD+tWqjg+VCW+gC7AK41GFr0gA/WCGeBY2Bre1TVPiM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com; spf=pass smtp.mailfrom=daynix.com; dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b=0O8o2Rg3; arc=none smtp.client-ip=209.85.214.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=daynix.com
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2161eb95317so252653415ad.1
+        for <linux-doc@vger.kernel.org>; Wed, 08 Jan 2025 03:40:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1736336458; x=1736941258; darn=vger.kernel.org;
+        h=to:content-transfer-encoding:mime-version:message-id:date:subject
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=fjDlOhfFjHDP1GFg1z841jK8M5cnJcOZe4IzLR2+JLQ=;
+        b=0O8o2Rg3kvaLwTV7ygIfM0gm+EEqBR9VCbQbVmRBWTBvDkUbau3obtsHEq1PZ3l1hp
+         kvTaA2nWRnRzyhPXWxj3Awjwv8AWEe4o7WUWbyxFQOmgDgnQJAjVo8MGxYEJfVlX53EO
+         spVp8qV768U6zs1ljdYdfNwcDGIVdFXlnm27ZvU4if347G3mFP5Z5vnoc8OAI7xYDEjH
+         GbXq6SEzpFnT6XOy7UIHyrLm+CT2StEp+MIZQIIaLESlHA/ZoRIIJ0QuEL88EIEZDTIF
+         pY9eMQBFbAh41Heay52j4jueCBlTsvk5XMF0Kwpjccu+xU1uMM4ITsIAi1CYSQOk65Io
+         HDXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736336458; x=1736941258;
+        h=to:content-transfer-encoding:mime-version:message-id:date:subject
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=fjDlOhfFjHDP1GFg1z841jK8M5cnJcOZe4IzLR2+JLQ=;
+        b=D555ePo0S2MOpRsFwe5LR8P+rvKalSLcqP879w4k2jR6uM3kMPi57duRh0VCoWH1NY
+         IV7mShyTsIc2XKlNwi4vb7uf148ydbikeH4Xm08p8oQTZM+vQm6118NVIa4Hhq+2hUGt
+         NLVelrhsKt2NDCPvP/gMgC4JlQKS7O1PFIbqP9ftFnbvsFMY60erCcic9AQLsGDMg7+D
+         bBCcFrotiU9CLuXczwDNgaZApF3cIDn+BiGGaSbtPupZB2BrtjJ2JIoAJkQpKykv4UAr
+         AXJIAroF2IOqnmBO7zyW4pRCqt2DDLK1+qEEEFEtZaUm8ILJk26rsH3v9iYxQj1//f9y
+         refw==
+X-Forwarded-Encrypted: i=1; AJvYcCVgRzmhPc1MG1rk+U7gPGM1JmrAww/ICbG/lY1siI6QrCQAG80hmYNC+nKODP0jZC16QdjwaEP9uzQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywt3qL5po+VpgGzPgmju9RRu46Q8HMFd5F/oH8AlU7PqAnVB796
+	3nkcPUUBI3+6Igf7G8YmOg0nVPVgiKi1g7wTkaEAPSTfVkbo6gYsfDD8RhUusF4=
+X-Gm-Gg: ASbGnctWpHBvXG2+YpNnik+16j47ThMSNCpThxmP99ce0m/B5D579W3wI7B5sKS6Fm7
+	hBhNdUXw1SmHOs5obD/PsF6EOBW30ybrhJQv3gcfmeFvjGWu7FQRvJC6LAn6TCYr9zPHju+KH5j
+	Rh2mkR27vxXCCK41w7gN8jqgjV76BhO9JQA45beV8i+2xK2bRgBI2Ug85QmwnWSVbUXQcXePBJh
+	PA5T4NCtp+qiRiISLLm5jv05pqe22zDgJiv9MElUx3VrXBxOoq92CivT/Q=
+X-Google-Smtp-Source: AGHT+IHFRNXARPASashVpP22bZbsPAi6fmuWW4IEFR4NWYNiuFbqTXoYAUP1T7En6RP96xLPSNA5Pg==
+X-Received: by 2002:a17:902:e750:b0:216:5268:9aab with SMTP id d9443c01a7336-21a83fe4ba3mr38646875ad.46.1736336458432;
+        Wed, 08 Jan 2025 03:40:58 -0800 (PST)
+Received: from localhost ([157.82.203.37])
+        by smtp.gmail.com with UTF8SMTPSA id d9443c01a7336-219dc964b84sm325595705ad.50.2025.01.08.03.40.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 08 Jan 2025 03:40:57 -0800 (PST)
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH 0/3] tun: Unify vnet implementation and fill full vnet
+ header
+Date: Wed, 08 Jan 2025 20:40:10 +0900
+Message-Id: <20250108-tun-v1-0-67d784b34374@daynix.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABpkfmcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxNDI2MD3ZLSPF0zs1RDg0QTyySDZHMloMqCotS0zAqwKdGxtbUAGJ7vjVU
+ AAAA=
+To: Jonathan Corbet <corbet@lwn.net>, 
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
+ Jason Wang <jasowang@redhat.com>, "David S. Miller" <davem@davemloft.net>, 
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
+ Paolo Abeni <pabeni@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Shuah Khan <shuah@kernel.org>, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ netdev@vger.kernel.org, kvm@vger.kernel.org, 
+ virtualization@lists.linux-foundation.org, linux-kselftest@vger.kernel.org, 
+ Yuri Benditovich <yuri.benditovich@daynix.com>, 
+ Andrew Melnychenko <andrew@daynix.com>, 
+ Stephen Hemminger <stephen@networkplumber.org>, gur.stavi@huawei.com, 
+ devel@daynix.com, Akihiko Odaki <akihiko.odaki@daynix.com>
+X-Mailer: b4 0.14-dev-fd6e3
 
-Problem: The x86_64 UEFI doc references Elilo which is an
-unmaintained/orphaned bootloader project. Also, on x86_64 a bootloader
-is technically not actually required since there is support for the
-Linux EFI stub.
+When I implemented virtio's hash-related features to tun/tap [1],
+I found tun/tap does not fill the entire region reserved for the virtio
+header, leaving some uninitialized hole in the middle of the buffer
+after read()/recvmesg().
 
-Solution: Remove the references to Elilo from the doc and refer to the
-EFI stub doc page, update steps accordingly, and add more details about
-creation of the EFI partition to improve clarity.
+This series fills the uninitialized hole. More concretely, the
+num_buffers field will be initialized with 1, and the other fields will
+be inialized with 0. Setting the num_buffers field to 1 is mandated by
+virtio 1.0 [2].
 
-Signed-off-by: Nir Lichtman <nir@lichtman.org>
+The change to virtio header is preceded by another change that refactors
+tun and tap to unify their virtio-related code.
+
+[1]: https://lore.kernel.org/r/20241008-rss-v5-0-f3cf68df005d@daynix.com
+[2]: https://lore.kernel.org/r/20241227084256-mutt-send-email-mst@kernel.org/
+
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
+Akihiko Odaki (3):
+      tun: Unify vnet implementation
+      tun: Pad virtio header with zero
+      tun: Set num_buffers for virtio 1.0
 
-v2: Fix list not rendered properly and minor wording fixes (thanks for the CR Bagas)
-Also fix to use shorter lines
+ MAINTAINERS            |   1 +
+ drivers/net/Kconfig    |   5 ++
+ drivers/net/Makefile   |   1 +
+ drivers/net/tap.c      | 174 ++++++----------------------------------
+ drivers/net/tun.c      | 212 ++++++++-----------------------------------------
+ drivers/net/tun_vnet.c | 191 ++++++++++++++++++++++++++++++++++++++++++++
+ drivers/net/tun_vnet.h |  24 ++++++
+ 7 files changed, 281 insertions(+), 327 deletions(-)
+---
+base-commit: a32e14f8aef69b42826cf0998b068a43d486a9e9
+change-id: 20241230-tun-66e10a49b0c7
 
- Documentation/arch/x86/x86_64/uefi.rst | 36 +++++++++++++++++++-------
- 1 file changed, 26 insertions(+), 10 deletions(-)
-
-diff --git a/Documentation/arch/x86/x86_64/uefi.rst b/Documentation/arch/x86/x86_64/uefi.rst
-index fbc30c9a071d..3949d83a9915 100644
---- a/Documentation/arch/x86/x86_64/uefi.rst
-+++ b/Documentation/arch/x86/x86_64/uefi.rst
-@@ -12,14 +12,19 @@ with EFI firmware and specifications are listed below.
- 
- 1. UEFI specification:  http://www.uefi.org
- 
--2. Booting Linux kernel on UEFI x86_64 platform requires bootloader
--   support. Elilo with x86_64 support can be used.
-+2. Booting Linux kernel on UEFI x86_64 platform can either be
-+   done using the <Documentation/admin-guide/efi-stub.rst> or using a separate bootloader.
- 
- 3. x86_64 platform with EFI/UEFI firmware.
- 
- Mechanics
- ---------
- 
-+Refer to <Documentation/admin-guide/efi-stub.rst> to learn how to use the EFI stub.
-+
-+Below are general EFI setup guidelines on the x86_64 platform,
-+regardless of whether you use the EFI stub or a separate bootloader.
-+
- - Build the kernel with the following configuration::
- 
- 	CONFIG_FB_EFI=y
-@@ -31,16 +36,27 @@ Mechanics
- 	CONFIG_EFI=y
- 	CONFIG_EFIVAR_FS=y or m		# optional
- 
--- Create a VFAT partition on the disk
--- Copy the following to the VFAT partition:
-+- Create a VFAT partition on the disk with the EFI System flag
-+    You can do this with fdisk with the following commands:
-+
-+        1. g - initialize a GPT partition table
-+        2. n - create a new partition
-+        3. t - change the partition type to "EFI System" (number 1)
-+        4. w - write and save the changes
-+
-+    Afterwards, initialize the VFAT filesystem by running mkfs::
-+
-+        mkfs.fat /dev/<your-partition>
-+
-+- Copy the boot files to the VFAT partition:
-+    If you use the EFI stub method, the kernel acts also as an EFI executable.
-+
-+    You can just copy the bzImage to the EFI/boot/bootx64.efi path on the partition
-+    so that it will automatically get booted, see the <Documentation/admin-guide/efi-stub.rst> page
-+    for additional instructions regarding passage of kernel parameters and initramfs.
- 
--	elilo bootloader with x86_64 support, elilo configuration file,
--	kernel image built in first step and corresponding
--	initrd. Instructions on building elilo and its dependencies
--	can be found in the elilo sourceforge project.
-+    If you use a custom bootloader, refer to the relevant documentation for help on this part.
- 
--- Boot to EFI shell and invoke elilo choosing the kernel image built
--  in first step.
- - If some or all EFI runtime services don't work, you can try following
-   kernel command line parameters to turn off some or all EFI runtime
-   services.
+Best regards,
 -- 
-2.39.5
+Akihiko Odaki <akihiko.odaki@daynix.com>
 
 
