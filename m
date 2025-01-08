@@ -1,136 +1,110 @@
-Return-Path: <linux-doc+bounces-34432-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34434-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10D8CA06641
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 21:39:44 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BF6EA066D2
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 22:03:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 085B316714D
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 20:39:42 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 147181883477
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 21:03:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4254420126A;
-	Wed,  8 Jan 2025 20:39:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 69084204080;
+	Wed,  8 Jan 2025 21:03:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="xKeaFKIh"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=adrian.larumbe@collabora.com header.b="FAUc4oeB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5B771A841B
-	for <linux-doc@vger.kernel.org>; Wed,  8 Jan 2025 20:39:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.43
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736368777; cv=none; b=P9GHqlnuyXU0HIj5rhhgtDvaHxAyWuge7Ox3IdaC9uyf+wNNOe5lmpbu+PddNgoMT0S8Y7aE2SQLGG/tm2K98BR/1lvkFWh5TadIGtSGJC0XJ/r6aSdOJ+/s01P3wh+Y4bh3InYF0uDaJLC1Ra/7VqBvG1MGTfw+nX3LEEMhK/w=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736368777; c=relaxed/simple;
-	bh=JgAq3JixBWG48k/aLvCZHXsMCRGsbDoFPi2orYtAJnI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=LBDRO0J32D09JSoJDexthP0omOyDhehsiRI3BUAX/PUxhxQ5dglwjRzCQbzSYymow2/w1Ljtai8YJdp8y/elOdscNlAk+M+ZV0s8wqYGBrvNedVbm2Rf2SB5bMlrNJ0afmagcNifkjwzpgTeVNQkzgv42oim1G/V0vOOcMY61rk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=xKeaFKIh; arc=none smtp.client-ip=209.85.160.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-29fe83208a4so112252fac.0
-        for <linux-doc@vger.kernel.org>; Wed, 08 Jan 2025 12:39:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736368774; x=1736973574; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=c5kJCuL2LiIWeYp6c4bKXZWNKmnx7bK73d0vYdjPIDE=;
-        b=xKeaFKIhR3rMtacL4Fjr5nniT4QRA73uYNVt2OmZcH52BQ17MmUbdLBDviQQW45RlC
-         LZXz/oPSfhA8CFl+ihr1RQ+vgNer59RLVmV9zQUwfxtn1zoZIYXm3Jfmj4j8raVP4fT2
-         RcbF7Z3jneB97rKauiErua08iW00Gw9CgD8bvTLBHUowXUwaWY8Q+CrUcRGtyeDD2+PK
-         dSqNVo9g/GPzUO8Wq2IbbqeF88GniTl5FjYfdDaJh+fz30XYmC477aAuXt7jfJMIWTSY
-         bqVauwvE526s1WHpQCEkB3yO9D8tzKi6jJRD9CsWHh0nWmiY68HBo5qK11HgpkyZxRgL
-         //2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736368774; x=1736973574;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=c5kJCuL2LiIWeYp6c4bKXZWNKmnx7bK73d0vYdjPIDE=;
-        b=A6vLcINtPxL4u8DX1lI/R/L8UxwUdLeeUjcXCDH9BINdj6H9s8E+jLnHSQQTuPaGUY
-         wjuin4ke/qp2jdxbBLJrJzh3iiwZy9rH+zmhtU256wZwmZmsKejb3O4FTw2wVRboH5uk
-         IA7ZEKALdZWlyD63dX1S4x4P4uOsi6ckRHJ6rL1YoFCVs/j4aBvZ7lZoAvipFKiW5lG1
-         aI0ZQsni1ciyaJPs7fNoQ4GshnRACIep3p21qnIg77nY7uKC+tvllHB2Is+KYZktTFWh
-         p/mCc5KjWppXqZE4OxXMbc0MeOcRpa4NtR6+UXHKPFcQFLXNRuLMgmBDO8hDv2DuTTcT
-         Pegg==
-X-Forwarded-Encrypted: i=1; AJvYcCXsvvVNFhHgtddjnSJeuLni9Juey3i2bX6hC6/k33t6lDeK6CVxw1D8FFzc15i0P3ArZyZv93avoOk=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz/BWSXV77w118YoTZWpLt+jtPxwVF8hQvWRG/t8mJMxlHmp0Ku
-	5v2a5mo5k3SUiXlgofds+XzhfUOJ8MxZxmlPLH8P8Y9vviU3ZSgks1NBqbRajV0=
-X-Gm-Gg: ASbGncvqQmb8K4kdyVrLVnmXXXix6Q8q9ZgpwOQnl4XCSDe5pwSf1TSJHvoBUNtJmWw
-	VCB5aXaqapW0v8kdd/RhKfLTNGE5w/SwG0goiITKDh/E/dvnid47e8aeY5Y883gel+5vwbKtDPt
-	uZzvCQ2mIAWUgU2RNJF/rJd40Pw1HQQ1xktdRkxh5+zAuC41yvxlxi8zoKeTZ+C80pS9w1dhr6m
-	YFXlbDKRA24BGhJdFnEcBpVUmT+h2/OerIyNRqGDJKv+LKszb7Dsxfw4aZ/1CL+AHrejGVfRTHQ
-	GKNOspJdUZd51EaTsw==
-X-Google-Smtp-Source: AGHT+IGU2x5/SgPKl5h0HBPhA+Fy/zJ++bE/ivbJHbel3cNgbAnZwZWJz8chvZlCN+Y+nVtbfHIoPQ==
-X-Received: by 2002:a05:6870:9c8d:b0:29e:7629:1466 with SMTP id 586e51a60fabf-2aacdbc936amr440794fac.7.1736368773860;
-        Wed, 08 Jan 2025 12:39:33 -0800 (PST)
-Received: from [192.168.0.142] (ip98-183-112-25.ok.ok.cox.net. [98.183.112.25])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-2a7d77b4157sm13700377fac.40.2025.01.08.12.39.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 08 Jan 2025 12:39:32 -0800 (PST)
-Message-ID: <ec8bf32b-2414-4538-9fe4-2b32d890bc66@baylibre.com>
-Date: Wed, 8 Jan 2025 14:39:30 -0600
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D32581DE895;
+	Wed,  8 Jan 2025 21:03:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1736370225; cv=pass; b=s+0lobeuDfOy5Q0J8de2mRTLaF8WtpwnJ7BnjxbY673lwcVlW3reWep7Z6hBma6ZM2p2UO6loDmPNMwPz3XvLqygirrg07076Do4MoHH3R35UIBj0nLyVF+A4QFrIRW3dnSKFe9VwgwcIF8y4GQ5Vkcr7ZRV3b7WpLjkb780mwk=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1736370225; c=relaxed/simple;
+	bh=zXnH9XBdRUOFnQdkDwSmHtIQYGmYZVv2cAFrc8S0RRY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=nSZK1DmCt6cSZuUuPCAv0sNucVH7oNNHaBCKckt/YuwTjYpNuLmMZ6iOned68l7EWXm2fbkHG4pYTFh78HqQOkgvxm2g7UqsC+lEkDQk7QsDPqN+a3oQUjvsvpFYWpkEWCnK+O/crooMWdBiuOenqqEpOaLEzJajj0wbWvGQ0tI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=adrian.larumbe@collabora.com header.b=FAUc4oeB; arc=pass smtp.client-ip=136.143.188.112
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1736370207; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=H8Jb2K4zs+88UpB5qz00vGVfFUbzy45RkhhnXTZjrXOuRmlDxBFqMcjnPhw/64stUUnqoL0strMRAOhKcA6/kTWgJOQqqqQmm8ILu5388pYFzT5Li18gnwSdmWVU4P4a3cU0TfiysYl14g3By+ealgt8w3mCR6nZz5INHIwfEVY=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1736370207; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=j02AXCvuCHibfUnBxBkuO49rQkRYm6/Ti75LjkepN2U=; 
+	b=PcbLB+W4T40G4tIFW3FXIlXpBvRR/RkYlW1C1GuwO+IwkKdPPhDajgT6XmSFoYaZy0DWbxw2jhcsfb0fURAttL5D+kuOAtc4P3WJktFHCtYH8QceYRnnsU4eINShPa/pilD+o3dXDc+rs99Y5/SXWtmM3kSWRCb8oOn1BHRLqsg=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=adrian.larumbe@collabora.com;
+	dmarc=pass header.from=<adrian.larumbe@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1736370207;
+	s=zohomail; d=collabora.com; i=adrian.larumbe@collabora.com;
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=j02AXCvuCHibfUnBxBkuO49rQkRYm6/Ti75LjkepN2U=;
+	b=FAUc4oeBHp8DPo7bLj2RB423IhAgkROH3gUL8hPeJvR4fSLvaBgvDONXDJr46SlQ
+	92QDrzCGOwb7L3RSmkOSyOKtJsjeVKsiXQtBVI0bSkHSQFOmVM8dECxEn1fPIgtZ2rF
+	/8aL+Pl2UqR8u1TsJR+gejmJwR8SUaG67pEEN+vo=
+Received: by mx.zohomail.com with SMTPS id 1736370206747493.3339975056514;
+	Wed, 8 Jan 2025 13:03:26 -0800 (PST)
+From: =?UTF-8?q?Adri=C3=A1n=20Larumbe?= <adrian.larumbe@collabora.com>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: kernel@collabora.com,
+	=?UTF-8?q?Adri=C3=A1n=20Larumbe?= <adrian.larumbe@collabora.com>,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	dri-devel@lists.freedesktop.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v7 1/4] Documentation/gpu: Clarify format of driver-specific fidnfo keys
+Date: Wed,  8 Jan 2025 21:02:38 +0000
+Message-ID: <20250108210259.647030-2-adrian.larumbe@collabora.com>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250108210259.647030-1-adrian.larumbe@collabora.com>
+References: <20250108210259.647030-1-adrian.larumbe@collabora.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] iio: adc: ad4695: add offload-based oversampling
- support
-To: Trevor Gamblin <tgamblin@baylibre.com>,
- Jonathan Cameron <jic23@kernel.org>
-Cc: Michael Hennerich <michael.hennerich@analog.com>,
- =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
- Lars-Peter Clausen <lars@metafoo.de>, Jonathan Corbet <corbet@lwn.net>,
- linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20241217-ad4695-oversampling-v1-0-0b045d835dac@baylibre.com>
- <20241217-ad4695-oversampling-v1-1-0b045d835dac@baylibre.com>
- <20241219161301.3f708302@jic23-huawei>
- <1c641b37-475a-4153-bcfc-e0e72d79fa76@baylibre.com>
- <20250104123029.12a4e19e@jic23-huawei>
- <9128ecae-73e9-4a66-8cd0-4d98c14ff05f@baylibre.com>
- <f801aecd-be1c-45f5-9ea0-081162dd74e2@baylibre.com>
- <dbf6dc15-ec2e-4779-9a0a-4038aaa59624@baylibre.com>
-From: David Lechner <dlechner@baylibre.com>
-Content-Language: en-US
-In-Reply-To: <dbf6dc15-ec2e-4779-9a0a-4038aaa59624@baylibre.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 1/8/25 1:54 PM, Trevor Gamblin wrote:
-> 
-> On 2025-01-07 16:02, David Lechner wrote:
->> On 1/7/25 2:21 PM, Trevor Gamblin wrote:
->>> On 2025-01-04 07:30, Jonathan Cameron wrote:
->>>> On Thu, 2 Jan 2025 13:19:19 -0500
->>>> Trevor Gamblin <tgamblin@baylibre.com> wrote:
->>>>
->>>>> On 2024-12-19 11:13, Jonathan Cameron wrote:
->>>>>> On Tue, 17 Dec 2024 16:47:28 -0500
->>>>>> Trevor Gamblin <tgamblin@baylibre.com> wrote:
->>>>>>  
-...
+This change reflects de facto usage by amdgpu, as exemplified by commit
+d6530c33a978 ("drm/amdgpu: expose more memory stats in fdinfo").
 
->>>          else
->>>                  val_calc = val * scale + val2 * scale / MICRO;
->>>
->>>          val_calc /= 2;
->>>
->>>          return clamp_t(int, val_calc, S16_MIN, S16_MAX);
->>> }
->>>
->>> This seems to match all of the expected outputs for the pre-simplification version in this patch series when I test it. If there are no issues with it, I'll send a v2.
->> Probably not a big deal, but there is unhanded overflow when val is near S32_MAX
->> or S32_MIN.
-> Should I handle that with an extra call to clamp_t()?
+Signed-off-by: Adrián Larumbe <adrian.larumbe@collabora.com>
+Cc: Tvrtko Ursulin <tursulin@ursulin.net>
+---
+ Documentation/gpu/drm-usage-stats.rst | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-It wouldn't hurt. val = clamp_t(int, val, S32_MIN / 8, S32_MAX / 8); before
-the rest of the math should do the trick since the max scale is 8.
+diff --git a/Documentation/gpu/drm-usage-stats.rst b/Documentation/gpu/drm-usage-stats.rst
+index 2717cb2a597e..2b5393ed7692 100644
+--- a/Documentation/gpu/drm-usage-stats.rst
++++ b/Documentation/gpu/drm-usage-stats.rst
+@@ -21,7 +21,10 @@ File format specification
+ 
+ - File shall contain one key value pair per one line of text.
+ - Colon character (`:`) must be used to delimit keys and values.
+-- All keys shall be prefixed with `drm-`.
++- All standardised keys shall be prefixed with `drm-`.
++- Driver-specific keys shall be prefixed with `driver_name-`, where
++  driver_name should ideally be the same as the `name` field in
++  `struct drm_driver`, although this is not mandatory.
+ - Whitespace between the delimiter and first non-whitespace character shall be
+   ignored when parsing.
+ - Keys are not allowed to contain whitespace characters.
+-- 
+2.47.1
+
 
