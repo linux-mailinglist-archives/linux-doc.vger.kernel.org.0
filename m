@@ -1,182 +1,346 @@
-Return-Path: <linux-doc+bounces-34367-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34377-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 648B1A05D42
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 14:47:55 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F43CA05D7C
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 14:52:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0E9BE16093C
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 13:47:31 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C580D167A3E
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 13:51:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 08E508635A;
-	Wed,  8 Jan 2025 13:47:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 254731FF7CD;
+	Wed,  8 Jan 2025 13:48:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OCwQJlGs"
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="oDylqJAp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D50D013AD38;
-	Wed,  8 Jan 2025 13:47:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 488DE1FF7C5;
+	Wed,  8 Jan 2025 13:48:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736344048; cv=none; b=ealalzBhpVEUL8zlT+TR/eA+2CVdClkwJ9uDb20st5BcUXRsW5i7NWuORMQhWiA2F4kaRCjn+q3HxDv50RVnLQM9XHNXo86/c3PlRe03Iuq7a6u13lwQORO6Ko1BQtsgZRUD2ZH8Uc9zAzxRIFD4qr24x0wEfPiZxGYOPg7hSzw=
+	t=1736344137; cv=none; b=J81KBYT0orcrJx9mw8R/0R2vwuW0sMfyO81A4r/pANggEt6fNOEI7SP9uQlbfwEDlBQmN52sJyNXwiURWySGXYgtZJp69LNaTua97ObZoyUKEATrj66zqGEKrsW+Mgy6LJB0q04F+NmufUfcIS+m3A+TvHVa8HPn+d3H0u3mFuI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736344048; c=relaxed/simple;
-	bh=iDNamHCAwQl0X+MRiiBGDfWJxaI3lHejxXJi8++osIA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=sLLauioObFw57XGSznYsqcz1Ip3lMvNulcvyk1+6HOZRmRHRR4ilc7B3uakxTy5qLKo1lfswx6A8ZT3mtRJ1jbifOg9feFoSrzs3EqdZZ5V1pjou6z3ZYkC9UDAiDjX96jP+wpxMV2XK5gsLLJWsyZc0bSHqU3tX/b5lINu/ciA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OCwQJlGs; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75455C4CEE0;
-	Wed,  8 Jan 2025 13:47:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1736344048;
-	bh=iDNamHCAwQl0X+MRiiBGDfWJxaI3lHejxXJi8++osIA=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=OCwQJlGsMGp9LcA/LF7DLK1lfm+rdDs7VdZ1pJr1MpirW3CkKJ4a+NItJt9DzgUda
-	 Q1BwEfpQZofO2cpyHcjG9ajGXHbSvZO2+LW9CLBK66bjitBKNtqEd1BbfRlsCeHVdU
-	 TnXP8rT61pTKOeyKeGQJX9IY2gcu33jLf64CsU2qKHnk5pMTiSmsxXVRPGLUWvpfZ5
-	 8oN3pPUVpocnG1q4jd13Ggt6kbdgoQyQJnnPfjhnulhqfSK7XNwOEDVhkHz6L42hwg
-	 9i5GqJ1nqvPDP4bXYCGm01x8tUVjy9zSXjvOGJZ8SRw7iZhtmWTDEICQ7scvo6LbL5
-	 ISum1Txih8oOg==
-Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-e3fd6cd9ef7so1523511276.1;
-        Wed, 08 Jan 2025 05:47:28 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCU0f0gF7/BXFTU8/zSHZoGjqSbQQOXoFvdDCxYM7KXLjJtK1uHZk77GQrYw9xFgCQIevwol75fUZU0=@vger.kernel.org, AJvYcCXFhVoIO2+3rv/LQoW7OW+74katfeTu3Jjb+Fe0CxbTANaJNmQX83Vid3RkfwUEW3N17PiJS7InEWVMEoLa@vger.kernel.org
-X-Gm-Message-State: AOJu0YyaD3pT4n5S09RKB7c7rGe3axJYDNOquiCqa2T6Tigm9wqjd0O1
-	urAiV3m+0SrxkW6+ZjD40qVX0BhlWt48Zc0DLzjMf13q/EEaUP7LgwOsw+br+mWSAlrUwMjhwqG
-	Ar2kclmuqBf1nhiEzvfm1G5bdyg==
-X-Google-Smtp-Source: AGHT+IH/HoCh7iApFExTgK70tS8gnK3byIgatKuJQ9XWlZYeeyUhDND3HhzQhh9e5u+mAfK0LC8FIfVT1PMhc8aUJAE=
-X-Received: by 2002:a05:690c:7343:b0:6ee:6a2a:a517 with SMTP id
- 00721157ae682-6f5204a0aeamr50431497b3.18.1736344047646; Wed, 08 Jan 2025
- 05:47:27 -0800 (PST)
+	s=arc-20240116; t=1736344137; c=relaxed/simple;
+	bh=YLqYbkmkm120bpBliK46hd2TtA1ALlL1JjmHdBtbaZo=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
+	 In-Reply-To:To:CC; b=LQARUct//btXJ9hAiobPVOIoxW6HQfgdLByrDz5nayASrDd27bmVD7YbhdBCugaIK7zl0GWPv8B48tvzjKIjqS7WRCa6Cwtg2ODOqNyF59iyoy4lwmxYLAMtHPFLt+c0nA5l/bO4zzq3v+iC6URcXUpK7YqYxjdbUy+4KVAI+ZE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=oDylqJAp; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 508BkpXg018635;
+	Wed, 8 Jan 2025 13:48:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	RMO69rrN0yCeK9w3s/FppFLL80wKuFHLpOwzA51t6SA=; b=oDylqJApYFsLuiG7
+	GoooLOmNsJp+YDMPlIqdRqHc4qhF+vWHLfosOkd2FEK9a5lfkDDYP/c8iE1rv82p
+	ngmIQFiOhlRxIbmEckp6jvjUvPDo1pvlvO2elZnCGGhxvqVpDXrFyjlHrYOtb2d7
+	oOXs0kRTMFoaqDYG5lCFviVzjkPzbjgwBe0vFtipYhBTkzV9tbBYUu/18ux100C9
+	F3sKXOhEdwOl7iUUjHjLRKt5O3OlNe7gOqPZYYB8QvvXzGJa0tyfMj4wGuddqF8K
+	1ucUWOCyEqzkRrNPHurc7Oqa54OR5cYKzbUZPwZ5Ru0B3svZikucnCZdrilu33My
+	Myn0iA==
+Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 441nm18u1j-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 08 Jan 2025 13:48:41 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com [10.46.141.250])
+	by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 508DmeEq027717
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 8 Jan 2025 13:48:40 GMT
+Received: from nsssdc-sh01-lnx.ap.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Wed, 8 Jan 2025 05:48:34 -0800
+From: Luo Jie <quic_luoj@quicinc.com>
+Date: Wed, 8 Jan 2025 21:47:16 +0800
+Subject: [PATCH net-next v2 09/14] net: ethernet: qualcomm: Initialize PPE
+ port control settings
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20241220072240.1003352-1-anshuman.khandual@arm.com>
- <20250102160402.GB3990035-robh@kernel.org> <Z30adHnQ7ZFaU9UR@arm.com>
- <CAL_JsqLLnh1o4L1=PpNt5brBwZZCgp7mOygByOYakchrzc29Ow@mail.gmail.com> <86wmf5wo8u.wl-maz@kernel.org>
-In-Reply-To: <86wmf5wo8u.wl-maz@kernel.org>
-From: Rob Herring <robh@kernel.org>
-Date: Wed, 8 Jan 2025 07:47:16 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqKKiEOj=a1k6U-bB0F6-ht7QokDnh3bspHupp-QG=haSg@mail.gmail.com>
-X-Gm-Features: AbW1kvawNH_g5vPEtQdvfsRHRiawZ8B5iayR8ahv4DqoIAoRSC9AWkLlkP0eoFA
-Message-ID: <CAL_JsqKKiEOj=a1k6U-bB0F6-ht7QokDnh3bspHupp-QG=haSg@mail.gmail.com>
-Subject: Re: [PATCH 0/7] arm64/boot: Enable EL2 requirements for FEAT_PMUv3p9
-To: Marc Zyngier <maz@kernel.org>
-Cc: Catalin Marinas <catalin.marinas@arm.com>, Anshuman Khandual <anshuman.khandual@arm.com>, 
-	linux-arm-kernel@lists.infradead.org, Will Deacon <will@kernel.org>, 
-	Ryan Roberts <ryan.roberts@arm.com>, Mark Rutland <mark.rutland@arm.com>, 
-	Oliver Upton <oliver.upton@linux.dev>, Jonathan Corbet <corbet@lwn.net>, 
-	Eric Auger <eric.auger@redhat.com>, kvmarm@lists.linux.dev, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20250108-qcom_ipq_ppe-v2-9-7394dbda7199@quicinc.com>
+References: <20250108-qcom_ipq_ppe-v2-0-7394dbda7199@quicinc.com>
+In-Reply-To: <20250108-qcom_ipq_ppe-v2-0-7394dbda7199@quicinc.com>
+To: Andrew Lunn <andrew+netdev@lunn.ch>,
+        "David S. Miller"
+	<davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski
+	<kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>, Rob Herring
+	<robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+	<conor+dt@kernel.org>, Lei Wei <quic_leiwei@quicinc.com>,
+        Suruchi Agarwal
+	<quic_suruchia@quicinc.com>,
+        Pavithra R <quic_pavir@quicinc.com>,
+        "Simon
+ Horman" <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook
+	<kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        "Philipp
+ Zabel" <p.zabel@pengutronix.de>
+CC: <linux-arm-msm@vger.kernel.org>, <netdev@vger.kernel.org>,
+        <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <linux-hardening@vger.kernel.org>,
+        <quic_kkumarcs@quicinc.com>, <quic_linchen@quicinc.com>,
+        <srinivas.kandagatla@linaro.org>, <bartosz.golaszewski@linaro.org>,
+        <john@phrozen.org>, Luo Jie <quic_luoj@quicinc.com>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1736344057; l=8669;
+ i=quic_luoj@quicinc.com; s=20240808; h=from:subject:message-id;
+ bh=YLqYbkmkm120bpBliK46hd2TtA1ALlL1JjmHdBtbaZo=;
+ b=haG+xxqVBxnOmRnyEqPyTTT8UnJcVJ43w7qQyQE6lE0kB8BMMg3qE9t2oy0ZoK4Akbp/lsIQN
+ zYEy1CUgqT2A+NXD7gYuUu2OyEGfLu2ljnmFVXlBE7ohkfhbkxhAm9Y
+X-Developer-Key: i=quic_luoj@quicinc.com; a=ed25519;
+ pk=P81jeEL23FcOkZtXZXeDDiPwIwgAHVZFASJV12w3U6w=
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: a3sHLqK-zSshFWjR50972WBubwEGZYap
+X-Proofpoint-GUID: a3sHLqK-zSshFWjR50972WBubwEGZYap
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ impostorscore=0 suspectscore=0 adultscore=0 malwarescore=0 phishscore=0
+ bulkscore=0 lowpriorityscore=0 clxscore=1015 mlxlogscore=999 mlxscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2411120000 definitions=main-2501080115
 
-On Wed, Jan 8, 2025 at 5:15=E2=80=AFAM Marc Zyngier <maz@kernel.org> wrote:
->
-> On Tue, 07 Jan 2025 22:13:47 +0000,
-> Rob Herring <robh@kernel.org> wrote:
-> >
-> > On Tue, Jan 7, 2025 at 6:13=E2=80=AFAM Catalin Marinas <catalin.marinas=
-@arm.com> wrote:
-> > >
-> > > On Thu, Jan 02, 2025 at 10:04:02AM -0600, Rob Herring wrote:
-> > > > On Fri, Dec 20, 2024 at 12:52:33PM +0530, Anshuman Khandual wrote:
-> > > > > This series adds fine grained trap control in EL2 required for FE=
-AT_PMUv3p9
-> > > > > registers like PMICNTR_EL0, PMICFILTR_EL0, and PMUACR_EL1 which a=
-re already
-> > > > > being used in the kernel. This is required to prevent their EL1 a=
-ccess trap
-> > > > > into EL2.
-> > > > >
-> > > > > PMZR_EL0 register trap control i.e HDFGWTR2_EL2.nPMZR_EL0 remains=
- unchanged
-> > > > > for now as it does not get accessed in the kernel, and there is n=
-o plan for
-> > > > > its access from user space.
-> > > > >
-> > > > > I have taken the liberty to pick up all the review tags for patch=
-es related
-> > > > > to tools sysreg update from the KVM FGT2 V2 patch series posted e=
-arlier.
-> > > > >
-> > > > > https://lore.kernel.org/all/20241210055311.780688-1-anshuman.khan=
-dual@arm.com/
-> > > > >
-> > > > > Rob had earler mentioned about FEAT_FGT2 based trap control requi=
-rement for
-> > > > > FEAT_PMUv3p9 registers that are currently being used in kernel. T=
-he context
-> > > > > can be found here.
-> > > > >
-> > > > > https://lore.kernel.org/all/20241216234251.GA629562-robh@kernel.o=
-rg/
-> > > > >
-> > > > > This series is based on v6.13-rc3
-> > > > >
-> > > > > Cc: Catalin Marinas <catalin.marinas@arm.com>
-> > > > > Cc: Will Deacon <will@kernel.org>
-> > > > > Cc: Marc Zyngier <maz@kernel.org>
-> > > > > Cc: Ryan Roberts <ryan.roberts@arm.com>
-> > > > > Cc: Mark Rutland <mark.rutland@arm.com>
-> > > > > Cc: Mark Brown <robh@kernel.org>
-> > > > > Cc: Rob Herring <robh@kernel.org>
-> > > > > Cc: Oliver Upton <oliver.upton@linux.dev>
-> > > > > Cc: Jonathan Corbet <corbet@lwn.net>
-> > > > > Cc: Eric Auger <eric.auger@redhat.com>
-> > > > > Cc: kvmarm@lists.linux.dev
-> > > > > Cc: linux-doc@vger.kernel.org
-> > > > > Cc: linux-kernel@vger.kernel.org
-> > > > > Cc: linux-arm-kernel@lists.infradead.org
-> > > > >
-> > > > > Anshuman Khandual (7):
-> > > > >   arm64/sysreg: Update register fields for ID_AA64MMFR0_EL1
-> > > > >   arm64/sysreg: Add register fields for HDFGRTR2_EL2
-> > > > >   arm64/sysreg: Add register fields for HDFGWTR2_EL2
-> > > > >   arm64/sysreg: Add register fields for HFGITR2_EL2
-> > > > >   arm64/sysreg: Add register fields for HFGRTR2_EL2
-> > > > >   arm64/sysreg: Add register fields for HFGWTR2_EL2
-> > > > >   arm64/boot: Enable EL2 requirements for FEAT_PMUv3p9
-> > > >
-> > > > In case it is not clear, this series should be applied to 6.13 as t=
-he 2
-> > > > PMUv3p9 features already landed in 6.13 (per counter EL0 control) a=
-nd
-> > > > 6.12 (ICNTR).
-> > >
-> > > So is this a fix that needs backporting to 6.12 or 6.13, e.g. fix for
-> > > d8226d8cfbaf ("perf: arm_pmuv3: Add support for Armv9.4 PMU instructi=
-on
-> > > counter")? It's pretty late in the cycle to take the series for 6.13.
-> >
-> > Ideally, yes. But given the state of h/w implementations, backporting
-> > it later is probably fine if that is your preference.
-> >
-> > > But does KVM actually expose the feature to EL1 in ID_AA64DFR1_EL1 an=
-d
-> > > than traps it at EL2?
-> >
-> > As Marc pointed out KVM only advertises PMUv3.8. Regardless, guest
-> > accesses to these registers are trapped with or without this series.
->
-> And most probably generates a nice splat in the kernel log, as nobody
-> updated KVM to handle *correctly* PMICNTR_EL0 traps, let alone deal
-> with the FGT2 registers.
+1. Enable port specific counters in PPE.
+2. Configure the default action as drop when the packet size
+   is more than the configured MTU of physical port.
 
-Isn't that this series[1]? Should that have come first, I guess I know
-that *now*.
+Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
+---
+ drivers/net/ethernet/qualcomm/ppe/ppe_config.c | 93 +++++++++++++++++++++++++-
+ drivers/net/ethernet/qualcomm/ppe/ppe_config.h | 11 +++
+ drivers/net/ethernet/qualcomm/ppe/ppe_regs.h   | 47 +++++++++++++
+ 3 files changed, 150 insertions(+), 1 deletion(-)
 
-Out of curiosity, why do we care if there's a splat or not for a not
-well behaved guest?
+diff --git a/drivers/net/ethernet/qualcomm/ppe/ppe_config.c b/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
+index c337b4deddc8..d3633cf12f81 100644
+--- a/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
++++ b/drivers/net/ethernet/qualcomm/ppe/ppe_config.c
+@@ -1150,6 +1150,51 @@ int ppe_sc_config_set(struct ppe_device *ppe_dev, int sc, struct ppe_sc_cfg cfg)
+ 	return regmap_write(ppe_dev->regmap, reg, val);
+ }
+ 
++/**
++ * ppe_counter_enable_set - Set PPE port counter enabled or not
++ * @ppe_dev: PPE device
++ * @port: PPE port ID
++ * @enable: Counter enabled or not
++ *
++ * Enable PPE counters on the given port for the unicast packet, multicast
++ * packet and VLAN packet received and transmitted by PPE.
++ *
++ * Return 0 on success, negative error code on failure.
++ */
++int ppe_counter_enable_set(struct ppe_device *ppe_dev, int port, bool enable)
++{
++	u32 reg, val, mru_mtu_val[3];
++	int ret;
++
++	reg = PPE_MRU_MTU_CTRL_TBL_ADDR + PPE_MRU_MTU_CTRL_TBL_INC * port;
++	ret = regmap_bulk_read(ppe_dev->regmap, reg,
++			       mru_mtu_val, ARRAY_SIZE(mru_mtu_val));
++	if (ret)
++		return ret;
++
++	PPE_MRU_MTU_CTRL_SET_RX_CNT_EN(mru_mtu_val, enable);
++	PPE_MRU_MTU_CTRL_SET_TX_CNT_EN(mru_mtu_val, enable);
++	ret = regmap_bulk_write(ppe_dev->regmap, reg,
++				mru_mtu_val, ARRAY_SIZE(mru_mtu_val));
++	if (ret)
++		return ret;
++
++	reg = PPE_MC_MTU_CTRL_TBL_ADDR + PPE_MC_MTU_CTRL_TBL_INC * port;
++	val = FIELD_PREP(PPE_MC_MTU_CTRL_TBL_TX_CNT_EN, enable);
++	ret = regmap_update_bits(ppe_dev->regmap, reg,
++				 PPE_MC_MTU_CTRL_TBL_TX_CNT_EN,
++				 val);
++	if (ret)
++		return ret;
++
++	reg = PPE_PORT_EG_VLAN_TBL_ADDR + PPE_PORT_EG_VLAN_TBL_INC * port;
++	val = FIELD_PREP(PPE_PORT_EG_VLAN_TBL_TX_COUNTING_EN, enable);
++
++	return regmap_update_bits(ppe_dev->regmap, reg,
++				  PPE_PORT_EG_VLAN_TBL_TX_COUNTING_EN,
++				  val);
++}
++
+ static int ppe_config_bm_threshold(struct ppe_device *ppe_dev, int bm_port_id,
+ 				   struct ppe_bm_port_config port_cfg)
+ {
+@@ -1579,6 +1624,48 @@ static int ppe_servcode_init(struct ppe_device *ppe_dev)
+ 	return ppe_sc_config_set(ppe_dev, PPE_EDMA_SC_BYPASS_ID, sc_cfg);
+ }
+ 
++/* Initialize PPE port configurations. */
++static int ppe_port_config_init(struct ppe_device *ppe_dev)
++{
++	u32 reg, val, mru_mtu_val[3];
++	int i, ret;
++
++	/* MTU and MRU settings are not required for CPU port 0. */
++	for (i = 1; i < ppe_dev->num_ports; i++) {
++		/* Enable PPE port counter */
++		ret = ppe_counter_enable_set(ppe_dev, i, true);
++		if (ret)
++			return ret;
++
++		reg = PPE_MRU_MTU_CTRL_TBL_ADDR + PPE_MRU_MTU_CTRL_TBL_INC * i;
++		ret = regmap_bulk_read(ppe_dev->regmap, reg,
++				       mru_mtu_val, ARRAY_SIZE(mru_mtu_val));
++		if (ret)
++			return ret;
++
++		/* Drop the packet when the packet size is more than
++		 * the MTU or MRU of the physical interface.
++		 */
++		PPE_MRU_MTU_CTRL_SET_MRU_CMD(mru_mtu_val, PPE_ACTION_DROP);
++		PPE_MRU_MTU_CTRL_SET_MTU_CMD(mru_mtu_val, PPE_ACTION_DROP);
++		ret = regmap_bulk_write(ppe_dev->regmap, reg,
++					mru_mtu_val, ARRAY_SIZE(mru_mtu_val));
++		if (ret)
++			return ret;
++
++		reg = PPE_MC_MTU_CTRL_TBL_ADDR + PPE_MC_MTU_CTRL_TBL_INC * i;
++		val = FIELD_PREP(PPE_MC_MTU_CTRL_TBL_MTU_CMD, PPE_ACTION_DROP);
++		ret = regmap_update_bits(ppe_dev->regmap, reg,
++					 PPE_MC_MTU_CTRL_TBL_MTU_CMD,
++					 val);
++		if (ret)
++			return ret;
++	}
++
++	/* Enable CPU port counters. */
++	return ppe_counter_enable_set(ppe_dev, 0, true);
++}
++
+ int ppe_hw_config(struct ppe_device *ppe_dev)
+ {
+ 	int ret;
+@@ -1599,5 +1686,9 @@ int ppe_hw_config(struct ppe_device *ppe_dev)
+ 	if (ret)
+ 		return ret;
+ 
+-	return ppe_servcode_init(ppe_dev);
++	ret = ppe_servcode_init(ppe_dev);
++	if (ret)
++		return ret;
++
++	return ppe_port_config_init(ppe_dev);
+ }
+diff --git a/drivers/net/ethernet/qualcomm/ppe/ppe_config.h b/drivers/net/ethernet/qualcomm/ppe/ppe_config.h
+index db5b033229d9..d5ffc48460df 100644
+--- a/drivers/net/ethernet/qualcomm/ppe/ppe_config.h
++++ b/drivers/net/ethernet/qualcomm/ppe/ppe_config.h
+@@ -233,6 +233,16 @@ struct ppe_sc_cfg {
+ 	int eip_offset_sel;
+ };
+ 
++/* The action of packet received by PPE can be forwarded, dropped, copied
++ * to CPU (enter multicast queue), redirected to CPU (enter unicast queue).
++ */
++enum ppe_action_type {
++	PPE_ACTION_FORWARD = 0,
++	PPE_ACTION_DROP = 1,
++	PPE_ACTION_COPY_TO_CPU = 2,
++	PPE_ACTION_REDIRECT_TO_CPU = 3,
++};
++
+ int ppe_hw_config(struct ppe_device *ppe_dev);
+ int ppe_queue_scheduler_set(struct ppe_device *ppe_dev,
+ 			    int node_id, bool flow_level, int port,
+@@ -254,4 +264,5 @@ int ppe_port_resource_get(struct ppe_device *ppe_dev, int port,
+ 			  int *res_start, int *res_end);
+ int ppe_sc_config_set(struct ppe_device *ppe_dev, int sc,
+ 		      struct ppe_sc_cfg cfg);
++int ppe_counter_enable_set(struct ppe_device *ppe_dev, int port, bool enable);
+ #endif
+diff --git a/drivers/net/ethernet/qualcomm/ppe/ppe_regs.h b/drivers/net/ethernet/qualcomm/ppe/ppe_regs.h
+index 80f003afad78..e4596ffe04f6 100644
+--- a/drivers/net/ethernet/qualcomm/ppe/ppe_regs.h
++++ b/drivers/net/ethernet/qualcomm/ppe/ppe_regs.h
+@@ -40,6 +40,18 @@
+ #define PPE_SERVICE_SET_RX_CNT_EN(tbl_cfg, value)	\
+ 	u32p_replace_bits((u32 *)(tbl_cfg) + 0x1, value, PPE_SERVICE_W1_RX_CNT_EN)
+ 
++/* PPE port egress VLAN configurations. */
++#define PPE_PORT_EG_VLAN_TBL_ADDR		0x20020
++#define PPE_PORT_EG_VLAN_TBL_ENTRIES		8
++#define PPE_PORT_EG_VLAN_TBL_INC		4
++#define PPE_PORT_EG_VLAN_TBL_VLAN_TYPE		BIT(0)
++#define PPE_PORT_EG_VLAN_TBL_CTAG_MODE		GENMASK(2, 1)
++#define PPE_PORT_EG_VLAN_TBL_STAG_MODE		GENMASK(4, 3)
++#define PPE_PORT_EG_VLAN_TBL_VSI_TAG_MODE_EN	BIT(5)
++#define PPE_PORT_EG_VLAN_TBL_PCP_PROP_CMD	BIT(6)
++#define PPE_PORT_EG_VLAN_TBL_DEI_PROP_CMD	BIT(7)
++#define PPE_PORT_EG_VLAN_TBL_TX_COUNTING_EN	BIT(8)
++
+ /* PPE queue counters enable/disable control. */
+ #define PPE_EG_BRIDGE_CONFIG_ADDR		0x20044
+ #define PPE_EG_BRIDGE_CONFIG_QUEUE_CNT_EN	BIT(2)
+@@ -65,6 +77,41 @@
+ #define PPE_EG_SERVICE_SET_TX_CNT_EN(tbl_cfg, value)	\
+ 	u32p_replace_bits((u32 *)(tbl_cfg) + 0x1, value, PPE_EG_SERVICE_W1_TX_CNT_EN)
+ 
++/* PPE port control configurations for the traffic to the multicast queues. */
++#define PPE_MC_MTU_CTRL_TBL_ADDR		0x60a00
++#define PPE_MC_MTU_CTRL_TBL_ENTRIES		8
++#define PPE_MC_MTU_CTRL_TBL_INC			4
++#define PPE_MC_MTU_CTRL_TBL_MTU			GENMASK(13, 0)
++#define PPE_MC_MTU_CTRL_TBL_MTU_CMD		GENMASK(15, 14)
++#define PPE_MC_MTU_CTRL_TBL_TX_CNT_EN		BIT(16)
++
++/* PPE port control configurations for the traffic to the unicast queues. */
++#define PPE_MRU_MTU_CTRL_TBL_ADDR		0x65000
++#define PPE_MRU_MTU_CTRL_TBL_ENTRIES		256
++#define PPE_MRU_MTU_CTRL_TBL_INC		0x10
++#define PPE_MRU_MTU_CTRL_W0_MRU			GENMASK(13, 0)
++#define PPE_MRU_MTU_CTRL_W0_MRU_CMD		GENMASK(15, 14)
++#define PPE_MRU_MTU_CTRL_W0_MTU			GENMASK(29, 16)
++#define PPE_MRU_MTU_CTRL_W0_MTU_CMD		GENMASK(31, 30)
++#define PPE_MRU_MTU_CTRL_W1_RX_CNT_EN		BIT(0)
++#define PPE_MRU_MTU_CTRL_W1_TX_CNT_EN		BIT(1)
++#define PPE_MRU_MTU_CTRL_W1_SRC_PROFILE		GENMASK(3, 2)
++#define PPE_MRU_MTU_CTRL_W1_INNER_PREC_LOW	BIT(31)
++#define PPE_MRU_MTU_CTRL_W2_INNER_PREC_HIGH	GENMASK(1, 0)
++
++#define PPE_MRU_MTU_CTRL_SET_MRU(tbl_cfg, value)	\
++	u32p_replace_bits((u32 *)tbl_cfg, value, PPE_MRU_MTU_CTRL_W0_MRU)
++#define PPE_MRU_MTU_CTRL_SET_MRU_CMD(tbl_cfg, value)	\
++	u32p_replace_bits((u32 *)tbl_cfg, value, PPE_MRU_MTU_CTRL_W0_MRU_CMD)
++#define PPE_MRU_MTU_CTRL_SET_MTU(tbl_cfg, value)	\
++	u32p_replace_bits((u32 *)tbl_cfg, value, PPE_MRU_MTU_CTRL_W0_MTU)
++#define PPE_MRU_MTU_CTRL_SET_MTU_CMD(tbl_cfg, value)	\
++	u32p_replace_bits((u32 *)tbl_cfg, value, PPE_MRU_MTU_CTRL_W0_MTU_CMD)
++#define PPE_MRU_MTU_CTRL_SET_RX_CNT_EN(tbl_cfg, value)	\
++	u32p_replace_bits((u32 *)(tbl_cfg) + 0x1, value, PPE_MRU_MTU_CTRL_W1_RX_CNT_EN)
++#define PPE_MRU_MTU_CTRL_SET_TX_CNT_EN(tbl_cfg, value)	\
++	u32p_replace_bits((u32 *)(tbl_cfg) + 0x1, value, PPE_MRU_MTU_CTRL_W1_TX_CNT_EN)
++
+ /* PPE service code configuration for destination port and counter. */
+ #define PPE_IN_L2_SERVICE_TBL_ADDR		0x66000
+ #define PPE_IN_L2_SERVICE_TBL_ENTRIES		256
 
-Rob
+-- 
+2.34.1
 
-[1] https://lore.kernel.org/all/20241210055311.780688-1-anshuman.khandual@a=
-rm.com/
 
