@@ -1,154 +1,168 @@
-Return-Path: <linux-doc+bounces-34381-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34383-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81F19A05D9D
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 14:55:39 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 73D3DA05DC0
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 14:59:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1FF903A78D4
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 13:52:25 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 280F91882553
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 13:58:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 94421201001;
-	Wed,  8 Jan 2025 13:49:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8084D1FA8D1;
+	Wed,  8 Jan 2025 13:57:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="emoFXJKJ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ryLpxZKF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04ED81FCFE3;
-	Wed,  8 Jan 2025 13:49:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 582801F9F7F;
+	Wed,  8 Jan 2025 13:57:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736344166; cv=none; b=aeZATRVSYn2c8DJZrblWWts88l96LvClLzDVNEYVxwZ43hd55Kxu4QV2JE2evqd9KssHKouvslwHzzllfazeKdzEBGhVDzNX9pTa0wxE1aKErsMhJwktgU+g5+k28j7ikA9bzvArAI30fZdp39asbrEaOjbwTzvJw62unn30FSY=
+	t=1736344674; cv=none; b=jSx1E7cWLQW9q13ADWITsXUzousSZaqzaY6Ganx9ameJia7SHW3NtEJcpb70uYxlX+nOeTQPxcJUS6rtk60ErWcn+AcQYgZAp2cG4bvrlXIFdTOduF8X1XNB8ISpo5soRP51/sTi1/ytslmBgYzMT4m4dn8pa9DNHEqWnPlqt6Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736344166; c=relaxed/simple;
-	bh=cCDHkZ2wAP8SDo4sypkCGeXeEPaAJKzTWColCfCmvrA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=XyAKiTo2twFnWPyqGQknxEu6xRJZDs1Pjk7Cmw2LpmDSGpGlWC23S22b45LfJaOSpmTTkJrxZsSOHca5HNFgToCiSVCjFTzyCbQGytcdZ9ED+LIH4nVpxSua/HIaVB9hdcBzbxQ7Nzqi1xZkSICtMxnjCWEQCpt36BZJj/FZm2c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=emoFXJKJ; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 508BkW5m018497;
-	Wed, 8 Jan 2025 13:49:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	d6dnygIWzmFi6NM6NfPTN73MAK3Nn4bsbCyhnRVmPLw=; b=emoFXJKJGxT1skTS
-	pAhk7iQB8B+2KfsEpeyYm68Sytv5jb67Rv/qtT9TxktjPUyKGVJAtR5C0qPGxnWg
-	TWbxU3TJUXPCmTtN2/IWymnu5qm0KxZ8vJg6Fv+x6irJiFvTDlWN/OKz4JOXdtyZ
-	m2ocYPgwAJEzWardJKdbVIxeK9kTDAnQI+3DIPlWDKBJAwJVbSAMNhVnBTuZitcN
-	P0uB5omRPdA5rMsnuD5+AWCcvIrwwF7Em2JDP418cRZ5tDK6hoxdPiI/j8ZRSdQQ
-	7NpwSjM7zrsWQW0DyLdkEO36bQFmKyUgFM3Uijf/Zs3Qs3EcqApBjWPh5nVBx1RT
-	5iaoPg==
-Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 441nm18u37-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 08 Jan 2025 13:49:13 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com [10.46.141.250])
-	by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 508DnCs7027787
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 8 Jan 2025 13:49:12 GMT
-Received: from nsssdc-sh01-lnx.ap.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 8 Jan 2025 05:49:06 -0800
-From: Luo Jie <quic_luoj@quicinc.com>
-Date: Wed, 8 Jan 2025 21:47:21 +0800
-Subject: [PATCH net-next v2 14/14] MAINTAINERS: Add maintainer for Qualcomm
- PPE driver
+	s=arc-20240116; t=1736344674; c=relaxed/simple;
+	bh=wmOD3/ePyiIrov1ZtCkwH0y9xDdaiutIW9EoEfDt2NE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=OcF/NiebH4CbDsVAzbqE0tbmCumGF2l2KaQqT0lxeLISQLI6i9VnTOV+1tfVETusGty7EOxmQCat0gVwz/DW0azoWy9hcVBs0IocB0efqLIY5utUIa49753NTxgndXaTcGxJIZwzfmZ9P6DitgWnunK3cLoWL9ko/CHj2m4RIuo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ryLpxZKF; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78464C4CED3;
+	Wed,  8 Jan 2025 13:57:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1736344673;
+	bh=wmOD3/ePyiIrov1ZtCkwH0y9xDdaiutIW9EoEfDt2NE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ryLpxZKF8Jk7BLihK2lHrg8eyeZUw8eo4NomOqHOcvmSWEZa8fRfDAVZjPp/KYbEV
+	 8GG/DhSmPzBet4Hybnv+TCVHu8SU1GEALYhaT5lokvah/MYWxwjBURh9LtYqU/H+lM
+	 w7ttyT88XkN1QK1837+vCIO7qIpChjnv9UHvJbMCfpQCpSfc0VsvTHBujcU6/GSyR6
+	 b/ZaLoEX23rTgqrEKRzmnMTWIgzGYkVrm0jDVN8cvTJxDJNL6Dm34gW4XlwTtUtFGV
+	 dd3NZTKyiQs7++zRi0G4keF00Pk8OH8yV2DyUcAo1VRUxrpRz6+cHZgVR2GesOfVQN
+	 J/HSCts+EUE9w==
+Date: Wed, 8 Jan 2025 13:57:48 +0000
+From: Will Deacon <will@kernel.org>
+To: Sangmoon Kim <sangmoon.kim@samsung.com>
+Cc: Catalin Marinas <catalin.marinas@arm.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, ardb@kernel.org
+Subject: Re: [PATCH] docs: arm64: update memory layout for vmemmap region
+Message-ID: <20250108135748.GA9367@willie-the-truck>
+References: <CGME20250102065607epcas1p296c550a7ba26884e1c2810f872e537f4@epcas1p2.samsung.com>
+ <20250102065554.1533781-1-sangmoon.kim@samsung.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20250108-qcom_ipq_ppe-v2-14-7394dbda7199@quicinc.com>
-References: <20250108-qcom_ipq_ppe-v2-0-7394dbda7199@quicinc.com>
-In-Reply-To: <20250108-qcom_ipq_ppe-v2-0-7394dbda7199@quicinc.com>
-To: Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller"
-	<davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski
-	<kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Rob Herring
-	<robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
-	<conor+dt@kernel.org>, Lei Wei <quic_leiwei@quicinc.com>,
-        Suruchi Agarwal
-	<quic_suruchia@quicinc.com>,
-        Pavithra R <quic_pavir@quicinc.com>,
-        "Simon
- Horman" <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook
-	<kees@kernel.org>,
-        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
-        "Philipp
- Zabel" <p.zabel@pengutronix.de>
-CC: <linux-arm-msm@vger.kernel.org>, <netdev@vger.kernel.org>,
-        <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <linux-hardening@vger.kernel.org>,
-        <quic_kkumarcs@quicinc.com>, <quic_linchen@quicinc.com>,
-        <srinivas.kandagatla@linaro.org>, <bartosz.golaszewski@linaro.org>,
-        <john@phrozen.org>, Luo Jie <quic_luoj@quicinc.com>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1736344057; l=880;
- i=quic_luoj@quicinc.com; s=20240808; h=from:subject:message-id;
- bh=cCDHkZ2wAP8SDo4sypkCGeXeEPaAJKzTWColCfCmvrA=;
- b=n7z2zrFo6S5QFEGO+/BQluzqyjUC/MWkTYjMpIUIO3qISyk6bs95yIjccFFoz3oWry92EK+rf
- Dlv3hCMQe6zCAbqMseDJE0C8Nye055of4NTUQzuE6PcAZZYu+Ml2UAx
-X-Developer-Key: i=quic_luoj@quicinc.com; a=ed25519;
- pk=P81jeEL23FcOkZtXZXeDDiPwIwgAHVZFASJV12w3U6w=
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: 49k_9S3gabn4TChp83q7PXInVM-ny4np
-X-Proofpoint-GUID: 49k_9S3gabn4TChp83q7PXInVM-ny4np
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- impostorscore=0 suspectscore=0 adultscore=0 malwarescore=0 phishscore=0
- bulkscore=0 lowpriorityscore=0 clxscore=1015 mlxlogscore=656 mlxscore=0
- spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2411120000 definitions=main-2501080115
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250102065554.1533781-1-sangmoon.kim@samsung.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-Add maintainer entry for PPE (Packet Process Engine) driver
-supported for Qualcomm IPQ SoCs.
+On Thu, Jan 02, 2025 at 03:52:37PM +0900, Sangmoon Kim wrote:
+> Commit 031e011d8b22 ("arm64: mm: Move PCI I/O emulation region above
+> the vmemmap region") and commit b730b0f2b1fc ("arm64: mm: Move fixmap
+> region above vmemmap region") have placed PCI I/O and fixmap region
+> above vmemmap region.
+> 
+> And commit 32697ff38287 ("arm64: vmemmap: Avoid base2 order of struct
+> page size to dimension region") has moved vmemmap region to higher
+> address.
+> 
+> Update document as the memory layout modified by the previous patches.
+> 
+> Signed-off-by: Sangmoon Kim <sangmoon.kim@samsung.com>
+> ---
+>  Documentation/arch/arm64/memory.rst | 28 ++++++++++++++--------------
+>  1 file changed, 14 insertions(+), 14 deletions(-)
 
-Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
----
- MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
+To be honest with you, this document is pretty stale (it doesn't even
+mention 16k pages) and almost impossible to keep in-sync with the code.
+I'd be inclined to remove these tables; we have ptdump support if people
+really want to see where things are.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1e930c7a58b1..ad7d56775f63 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -19359,6 +19359,14 @@ S:	Maintained
- F:	Documentation/devicetree/bindings/mtd/qcom,nandc.yaml
- F:	drivers/mtd/nand/raw/qcom_nandc.c
+Will
+
+--->8
+
+diff --git a/Documentation/arch/arm64/memory.rst b/Documentation/arch/arm64/memory.rst
+index 8a658984b8bb..678fbb418c3a 100644
+--- a/Documentation/arch/arm64/memory.rst
++++ b/Documentation/arch/arm64/memory.rst
+@@ -23,71 +23,6 @@ swapper_pg_dir contains only kernel (global) mappings while the user pgd
+ contains only user (non-global) mappings.  The swapper_pg_dir address is
+ written to TTBR1 and never written to TTBR0.
  
-+QUALCOMM PPE DRIVER
-+M:	Luo Jie <quic_luoj@quicinc.com>
-+L:	netdev@vger.kernel.org
-+S:	Supported
-+F:	Documentation/devicetree/bindings/net/qcom,ipq9574-ppe.yaml
-+F:	Documentation/networking/device_drivers/ethernet/qualcomm/ppe/ppe.rst
-+F:	drivers/net/ethernet/qualcomm/ppe/
-+
- QUALCOMM QSEECOM DRIVER
- M:	Maximilian Luz <luzmaximilian@gmail.com>
- L:	linux-arm-msm@vger.kernel.org
-
--- 
-2.34.1
-
+-
+-AArch64 Linux memory layout with 4KB pages + 4 levels (48-bit)::
+-
+-  Start			End			Size		Use
+-  -----------------------------------------------------------------------
+-  0000000000000000	0000ffffffffffff	 256TB		user
+-  ffff000000000000	ffff7fffffffffff	 128TB		kernel logical memory map
+- [ffff600000000000	ffff7fffffffffff]	  32TB		[kasan shadow region]
+-  ffff800000000000	ffff80007fffffff	   2GB		modules
+-  ffff800080000000	fffffbffefffffff	 124TB		vmalloc
+-  fffffbfff0000000	fffffbfffdffffff	 224MB		fixed mappings (top down)
+-  fffffbfffe000000	fffffbfffe7fffff	   8MB		[guard region]
+-  fffffbfffe800000	fffffbffff7fffff	  16MB		PCI I/O space
+-  fffffbffff800000	fffffbffffffffff	   8MB		[guard region]
+-  fffffc0000000000	fffffdffffffffff	   2TB		vmemmap
+-  fffffe0000000000	ffffffffffffffff	   2TB		[guard region]
+-
+-
+-AArch64 Linux memory layout with 64KB pages + 3 levels (52-bit with HW support)::
+-
+-  Start			End			Size		Use
+-  -----------------------------------------------------------------------
+-  0000000000000000	000fffffffffffff	   4PB		user
+-  fff0000000000000	ffff7fffffffffff	  ~4PB		kernel logical memory map
+- [fffd800000000000	ffff7fffffffffff]	 512TB		[kasan shadow region]
+-  ffff800000000000	ffff80007fffffff	   2GB		modules
+-  ffff800080000000	fffffbffefffffff	 124TB		vmalloc
+-  fffffbfff0000000	fffffbfffdffffff	 224MB		fixed mappings (top down)
+-  fffffbfffe000000	fffffbfffe7fffff	   8MB		[guard region]
+-  fffffbfffe800000	fffffbffff7fffff	  16MB		PCI I/O space
+-  fffffbffff800000	fffffbffffffffff	   8MB		[guard region]
+-  fffffc0000000000	ffffffdfffffffff	  ~4TB		vmemmap
+-  ffffffe000000000	ffffffffffffffff	 128GB		[guard region]
+-
+-
+-Translation table lookup with 4KB pages::
+-
+-  +--------+--------+--------+--------+--------+--------+--------+--------+
+-  |63    56|55    48|47    40|39    32|31    24|23    16|15     8|7      0|
+-  +--------+--------+--------+--------+--------+--------+--------+--------+
+-            |        |         |         |         |         |
+-            |        |         |         |         |         v
+-            |        |         |         |         |   [11:0]  in-page offset
+-            |        |         |         |         +-> [20:12] L3 index
+-            |        |         |         +-----------> [29:21] L2 index
+-            |        |         +---------------------> [38:30] L1 index
+-            |        +-------------------------------> [47:39] L0 index
+-            +----------------------------------------> [55] TTBR0/1
+-
+-
+-Translation table lookup with 64KB pages::
+-
+-  +--------+--------+--------+--------+--------+--------+--------+--------+
+-  |63    56|55    48|47    40|39    32|31    24|23    16|15     8|7      0|
+-  +--------+--------+--------+--------+--------+--------+--------+--------+
+-            |        |    |               |              |
+-            |        |    |               |              v
+-            |        |    |               |            [15:0]  in-page offset
+-            |        |    |               +----------> [28:16] L3 index
+-            |        |    +--------------------------> [41:29] L2 index
+-            |        +-------------------------------> [47:42] L1 index (48-bit)
+-            |                                          [51:42] L1 index (52-bit)
+-            +----------------------------------------> [55] TTBR0/1
+-
+-
+ When using KVM without the Virtualization Host Extensions, the
+ hypervisor maps kernel pages in EL2 at a fixed (and potentially
+ random) offset from the linear mapping. See the kern_hyp_va macro and
 
