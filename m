@@ -1,122 +1,136 @@
-Return-Path: <linux-doc+bounces-34283-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34298-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1ECEA04F2B
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 02:25:30 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 37787A04FD8
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 02:46:37 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0AA953A43D1
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 01:25:25 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 23AEB164EC1
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 01:46:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F09F1A2643;
-	Wed,  8 Jan 2025 01:22:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 149D827713;
+	Wed,  8 Jan 2025 01:46:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="Yuq8R46H"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KonVrlTi"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D211199E88;
-	Wed,  8 Jan 2025 01:22:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A08D28F4A;
+	Wed,  8 Jan 2025 01:46:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736299370; cv=none; b=rDH26YfuEAyRnNF5tNpwEdP+v0AzVtXx0313DpMZcnJMZAdYTTy5GkZr9EAF6XPzd6dUiEeuUs+QF36NMwPWzDLeARRkzRQWMf5I2qnB/Zukj4PoyONBHYuKsUB7nuz2+7F75j6IyfSQHFcnHZcrBKU4PA5EDgrMi2MPZ9sUEgU=
+	t=1736300791; cv=none; b=p9ZDYmOrMIoCfxRwWwFgbtZY+HgAvhNoH1qFr+zfv/BZJw/eyP19zvRrp9VLZyg9wbM4aRSQx2kDMCDMFOMAOkByuKCygeUJrU+zzTnifBLGeoJc32Kzeo54O7hsOdmETvYYg+YrQCe2uiXwWDkr70Kl9NCvC8+h8ZnsSrQaHYo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736299370; c=relaxed/simple;
-	bh=0OBobLi7ExKS88UXVDqp57BgOzSWIY6pBcXtLyP8eXw=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Xw26c2K5SaM0uBbM9tOMw8QH8ykK7aZkOGmb71oNYfl4iojZNvBi547cux+RoubDrq/wCJ4wNcq28CNtcVXieYVlfr6XggGiFZPVbXXS9ZqmOmjoDYzsgiCeVFu6WWWUPVJ4mseOEx4IIOkKjMU8ydyjWpl+YsWmQttq++W9gws=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=Yuq8R46H; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 507K6W4c027970;
-	Wed, 8 Jan 2025 01:22:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	wcD3BPbhWVoPjRNWO38IFE1Iyo7XgqPy9NMwnNA2krs=; b=Yuq8R46HcVqTh7PO
-	NUt/kpE67QfSmMqZUux04rII6Ae6KHa8Y9X3SMfkdGeWBl5+b5j8Q7aVmd9AXa0X
-	JnwF7dORnP1bSrYfN05Nny23RTm8kIUdU7BJvKusBU5cM5KyjIYmPzPZm2719pMS
-	vJr3XWNDzKTFuHrYAZVjDj4PQCmuq/7+n1HDs7h8j+OAkyRWLbCNEwAIQ5IUIGw8
-	IIhVW/Rn0Pfx+I8PLj41DEl6Dr8CYOpnn2wR4TdIsFJ8AhRFbcuoMy/7UQj5nCqL
-	RNVB//zYnOxGwnS7WdfoEIsjOXFG3bgEGoZkShUYc7xnxlC8etHxi1n+Iyo6mtm7
-	JMOLgA==
-Received: from nalasppmta05.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 441b0k8hnk-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 08 Jan 2025 01:22:34 +0000 (GMT)
-Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
-	by NALASPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 5081MXdC028021
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 8 Jan 2025 01:22:33 GMT
-Received: from hu-wcheng-lv.qualcomm.com (10.49.16.6) by
- nalasex01b.na.qualcomm.com (10.47.209.197) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Tue, 7 Jan 2025 17:22:33 -0800
-From: Wesley Cheng <quic_wcheng@quicinc.com>
-To: <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
-        <perex@perex.cz>, <conor+dt@kernel.org>, <dmitry.torokhov@gmail.com>,
-        <corbet@lwn.net>, <broonie@kernel.org>, <lgirdwood@gmail.com>,
-        <krzk+dt@kernel.org>, <pierre-louis.bossart@linux.intel.com>,
-        <Thinh.Nguyen@synopsys.com>, <tiwai@suse.com>, <robh@kernel.org>,
-        <gregkh@linuxfoundation.org>
-CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-sound@vger.kernel.org>, <linux-input@vger.kernel.org>,
-        <linux-usb@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>
-Subject: [PATCH v32 32/32] ALSA: usb-audio: qcom: Notify USB audio devices on USB offload probing
-Date: Tue, 7 Jan 2025 17:22:13 -0800
-Message-ID: <20250108012213.1659364-33-quic_wcheng@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250108012213.1659364-1-quic_wcheng@quicinc.com>
-References: <20250108012213.1659364-1-quic_wcheng@quicinc.com>
+	s=arc-20240116; t=1736300791; c=relaxed/simple;
+	bh=Yurbj2PMhy1yO88Pa/Xtx6KwuDgRNVk+kLVhXlTBlHw=;
+	h=Date:From:To:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=DKQAHkNLUgPM9sO5xMxfqIu0B1h1wMn43+c3ul5RtZqqPCCcFf+MV6JZARKMKEj+DSZJfJWaze9CkT5aVIPZZpAenTTkL+1MZBlSYz8KUlu9Lq+wNWH+W4EQCzHVMveACtbDBYPSQyZZSun7Oqo4bqvQEsYaexlyHrKORvzikdg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KonVrlTi; arc=none smtp.client-ip=209.85.216.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-2f441904a42so24208458a91.1;
+        Tue, 07 Jan 2025 17:46:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1736300789; x=1736905589; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=wV6pE1Ynq78r3cD78eI3n1UoXdOB2tUqu2Vyy6FlyRU=;
+        b=KonVrlTi76kdW5rLi1sNd04NWYVaGAZMsiqTtuJo/9WeBw9sAbcK9Nn7pCvsMqkrov
+         cQuhDU2ttphyCT7X73thllSzG4cA8kK7YfxZfxYx/m4boElRSlJinClEb11mPacFRssh
+         sC66Knwxr7B10fEcTdqPQhGStWgmB4lfHXAm8tcqXxCmd+XDxuQsoa/BF6Xii3S3gKiQ
+         E0pD3Bx0mTx1CdrPDd3KMHTORoE48tVwYF6z4joe5veMxZLb6i21XbnYIYCcpq7prnSX
+         19q+IPPhJE7jRPwQiwLj5CRq0QxqaM+UeTMxB05TPq9fIUuPtOrUJyLoi/EiJ44Zf0qQ
+         Iq2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736300789; x=1736905589;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=wV6pE1Ynq78r3cD78eI3n1UoXdOB2tUqu2Vyy6FlyRU=;
+        b=KylRl7YaXSVxSkGF4xu5+CMC/O1mqB0kQDdB23OLfH5FXzC5FFqTf4ZLBInK+3PiD7
+         XALCVA1NV8D2EqgMlzg/E8KjDwwDw3xg2h1CKra5vKsUtKkJvsgxqMEYRR5nl1cvXuuU
+         MRRRThjgSOLjFTWP0ObcpyTpBAu3V0iXaI3H9qRNBXlOUETUIlTiNTXS8n8b3/w9Y79K
+         VGH2aInPD6aXJncUenpTTs/CT+QXMPxqtrvG2gllX9oVCcsRixQ2xwInaAb3ElKsK9gn
+         OVM57sIQrtOR+pFJGHDMXPtGz7FqBNmnLI8g0rJBK/6a0+JrA7VbXXj13S2UEhhrTkGC
+         Pd2Q==
+X-Forwarded-Encrypted: i=1; AJvYcCU2kC8oLWQ9uk7HMaox8i2bV2KT68Q2ZGIeIi0WE+K7agbocNN4qvQ/aW3i/AfHHcg4GLFLkWOfQGw=@vger.kernel.org, AJvYcCVuqUYpjbG5t4cnDUlvBF10NzZNU+cBkcojrtnycO62xmvuOJYZq9rOtu8++HGF/Wn2hnWl0mqAfCNW0m0j@vger.kernel.org
+X-Gm-Message-State: AOJu0YyIT1RyJ783zdWoWgqDiYHBzSs0IEuVph+6W8pXOMZvZba3GHis
+	mf931rgInZaKEAFI1ITzW0WmnDKJe9tp3nCpezBVXKdTU6syZ3WFhCYcOA==
+X-Gm-Gg: ASbGncsqNEnklujFz1G2fe7cWylWCm3euLhktPmjc93puJ1ZvfH3dk9PqTdUJvlDbNa
+	RPdxKPe3zuKBsC2X0KxVdiDEjGtbvdpAjYr2Ohc5TE2cmjAz6KNigJs16Rii5Eep19IYMI99zUi
+	4JdnP8of8D/xOqdlRCHDg5LsgXw8uwojsZP9EhQLHtSAZR6kw7KMtvZ14bCl6t90T/+mzYfE0fB
+	9z1+Hrww8p78ACHDRdv5S3nyTiZM7mzX/sV61MDicZlqFZUzRvnTP/f
+X-Google-Smtp-Source: AGHT+IE2BpBDpyFaNHsHulzrrt83PaJ38m1kQGCHnklrVknDAVFqGg8P1Fiiz3RRlDyKASWB31y0CQ==
+X-Received: by 2002:a17:90b:4d10:b0:2ee:b0f1:ba17 with SMTP id 98e67ed59e1d1-2f5490f4ba8mr1512258a91.37.1736300788650;
+        Tue, 07 Jan 2025 17:46:28 -0800 (PST)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2f54a2c506csm243138a91.30.2025.01.07.17.46.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 07 Jan 2025 17:46:27 -0800 (PST)
+Received: by archie.me (Postfix, from userid 1000)
+	id EC623420B892; Wed, 08 Jan 2025 08:46:24 +0700 (WIB)
+Date: Wed, 8 Jan 2025 08:46:24 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Nir Lichtman <nir@lichtman.org>, corbet@lwn.net,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: Fix x86_64 UEFI outdated references to
+ elilo
+Message-ID: <Z33Y8FRqVvPycCgB@archie.me>
+References: <20250106223526.GA877278@lichtman.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: nalasex01c.na.qualcomm.com (10.47.97.35) To
- nalasex01b.na.qualcomm.com (10.47.209.197)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: os3n6aM1Tov9vTtXxZIYeUe3jNhBEelb
-X-Proofpoint-ORIG-GUID: os3n6aM1Tov9vTtXxZIYeUe3jNhBEelb
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 phishscore=0
- bulkscore=0 mlxscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0
- priorityscore=1501 suspectscore=0 spamscore=0 malwarescore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2411120000 definitions=main-2501080007
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="ebxt8B7R8t2H4k9V"
+Content-Disposition: inline
+In-Reply-To: <20250106223526.GA877278@lichtman.org>
 
-If the vendor USB offload class driver is not ready/initialized before USB
-SND discovers attached devices, utilize snd_usb_rediscover_devices() to
-find all currently attached devices, so that the ASoC entities are notified
-on available USB audio devices.
 
-Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
----
- sound/usb/qcom/qc_audio_offload.c | 2 ++
- 1 file changed, 2 insertions(+)
+--ebxt8B7R8t2H4k9V
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/sound/usb/qcom/qc_audio_offload.c b/sound/usb/qcom/qc_audio_offload.c
-index 81f75ca34e4d..6e1b43cb869e 100644
---- a/sound/usb/qcom/qc_audio_offload.c
-+++ b/sound/usb/qcom/qc_audio_offload.c
-@@ -1972,6 +1972,8 @@ static int __init qc_usb_audio_offload_init(void)
- 	if (ret < 0)
- 		goto release_qmi;
- 
-+	snd_usb_rediscover_devices();
-+
- 	return 0;
- 
- release_qmi:
+On Mon, Jan 06, 2025 at 10:35:26PM +0000, Nir Lichtman wrote:
+> +Refer to <Documentation/admin-guide/efi-stub.rst> for general setup guid=
+elines on usage of the EFI stub, the following are setup specifics for EFI =
+in general on the x86_64 platform.
+
+"... for how to use EFI stub. Below is general EFI setup on x86_64 platform,
+regardless of whether using EFI stub or separate bootloader."
+
+> -- Create a VFAT partition on the disk
+> -- Copy the following to the VFAT partition:
+> +- Create a VFAT partition on the disk with the EFI System flag
+> +    You can do this with fdisk with the following commands:
+> +    1. g - initialize a GPT partition table
+> +    2. n - create a new partition
+> +    3. t - change the partition type to "EFI System" (number 1)
+> +    4. w - write and save the changes
+
+I see running paragraph instead of numbered list in htmldocs output.
+
+Thanks.
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--ebxt8B7R8t2H4k9V
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCZ33Y5QAKCRD2uYlJVVFO
+o507AP9edvNPwE8pEoHJIFqJ1/23zJUucm7EGzwiH5KCkjtC0wEAzWDD0m5rMtgv
+uOp8D+0q4bTb/UPQPysraWNQQ/Fuwgg=
+=Mvrd
+-----END PGP SIGNATURE-----
+
+--ebxt8B7R8t2H4k9V--
 
