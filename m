@@ -1,221 +1,305 @@
-Return-Path: <linux-doc+bounces-34357-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34359-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id BECDAA05A34
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 12:42:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0234AA05A85
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 12:53:32 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B42B718883E0
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 11:42:38 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7ED74188852D
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2025 11:53:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7C24D1FBEAC;
-	Wed,  8 Jan 2025 11:41:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B793A1F8EFA;
+	Wed,  8 Jan 2025 11:52:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b="QEvNFzbk"
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="Ptg8/Mcd";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="pt12ht0K";
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="xK9F51Dq";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="KGxjW8Ut"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A043A1F8F17
-	for <linux-doc@vger.kernel.org>; Wed,  8 Jan 2025 11:41:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1C431F5422;
+	Wed,  8 Jan 2025 11:52:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736336485; cv=none; b=s0E6qEu2C9p93/wBSXQbut9DG5aNZz6hribQWyTLhXkWO4yLCW8CswVrbU5qhbfDO7WJtWs1eevPqiqwo94G9LmJNoKhC/rCjh/6UoP5olyDUJYDqeyM+ET141fHX4i3ET73HL6UeIai0C3PhEQEC++y08GIKcw0bjIfRay94kU=
+	t=1736337174; cv=none; b=lqP+kSle98szQiCzgdr2aegeXkI5mDGLP87jB1wSO36B29TsDQnVGIig8bOSsmeyL304KHiZsfL9KoKG8D3KGV2fcYw8//ltlp0C0DqolAAiLs652u3L5he4/BVOzYWCCHi0qMfOIdc9+GTPJeq0fNavYRcW2SvHSVXUjZqcDZY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736336485; c=relaxed/simple;
-	bh=tHg7EPO4d3vZqqXSE/ljdfB56DasxRR2R5V/3PeBYA8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To; b=UK8U+bGVw+uThT87lRi2pyRSW9jTj5apJ75LMTlHO3uJutDv3FmBi5dc8Dz9d14mXTYT+cGec/2HrhiWRp5muWgPnEOww3Ez5A8fpPxQShKnvc3LnoCmSiP19Pkl2PzaIx9o2rV9X7mMjbjRlAprlFDzC5Z/SvDiMeCXZBHiPaY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com; spf=pass smtp.mailfrom=daynix.com; dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b=QEvNFzbk; arc=none smtp.client-ip=209.85.214.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=daynix.com
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2166022c5caso219114965ad.2
-        for <linux-doc@vger.kernel.org>; Wed, 08 Jan 2025 03:41:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1736336482; x=1736941282; darn=vger.kernel.org;
-        h=to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uJZDjcdc8pRQt88Qkq7qezR/3EGVIB2MIrkBFIywvoM=;
-        b=QEvNFzbkxUh6GXNYjhp4RBCXkxuPwTZO894Fo4dyv/JkBvASDufuL9PhudcluGxKly
-         ooN7uZVpOrhEuzP+aqd5vEg7PtA3X6sDRQDTC5JHnzcbMdpqiyl9mgfFmEAqome5rsQS
-         Fxub58XCwfjzBVe9hZC9tmyNUruwjEN5de+Dn5utLmx9fP3ClzAhBmE9dCGS6vNSgbis
-         B4vxArO7kd6NwnJ8m6u4Rn38KzC0hn5cDqkxQ9OKDwwMRnswwNQSddPwU4Q6YH4ahVG7
-         b44cp2qZ4QVepcXvt8gyT5vkkVVuljK/w3BXhWUt1d/n7BEveLVA3GZst+ZzpWgjYPdO
-         o6Pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736336482; x=1736941282;
-        h=to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uJZDjcdc8pRQt88Qkq7qezR/3EGVIB2MIrkBFIywvoM=;
-        b=XHKSSTUGymETL5Xt1pM+iQtdjtVBvadjKP/078HB6h2QwTFlTBD5fo+k1ySetVD1vK
-         9YlRKZgbxK5oK6qx3YSDVDiQdq8o17ScebcapuMJWfBLnQP5X/axAao6RxhBZA+tPpv/
-         eGj9vznGHUrAU4juorHEIhNbFnKA5qlaUWh0yFTa9Wh7kq6cbF46XOom53OdDKz1pN3d
-         kUg/TfzT+zMDxin0MtojC3vIK4KPPvrJY2DpbMHj4aE6bficrZqc4spMvOugdPOxPeJQ
-         TgbZ1ixX3cq7IgJSVdWkI0wW2WStV9IQfUidKPO5fGd+EzJPgoQVP5v0KFEIIdSKxlcW
-         kMTg==
-X-Forwarded-Encrypted: i=1; AJvYcCXmnyB5/PRYUfMZn/OJQtW1Hp656cTpHvZDsxZSDipv1wGPcDy1OvxCCWCx8wYqjVb5PM2XYqSc7wg=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxau5xwzDM8mGR6N9Akz/dGjncuhIJHOW+0XBcybty4PBKaRxHb
-	JG/5Znx8BOyvykx/4Jg2ztMmtDqBpZUiduyXPNZ6fuHH/y5cOBXjaTVWK1Xomo0=
-X-Gm-Gg: ASbGncuNucnFfQ3AlWE9uz80U6bkY9OfB6R6Tr3GIeO15BqceG893KAEbiGfjPL2uvR
-	lzj8JbxV8Ww3bQVE6APe+uoVwmPQUhc70dtcnLIgWSQhBbgKKLJ6OzYV/E90eZW//EHdO0EJUc1
-	QPkVOAvWpwp9Sq9N+Eq1hCngOq3wrxmvK5BS1Y1LNwzHTOq0bE6e23C1wy1gHPuKnM/N6gT1jXr
-	+knnngMaaruRwzTa+9cOF/6BLc1OFDEqP2eG6Z9dafIhMpwYeSkJ3wLQuA=
-X-Google-Smtp-Source: AGHT+IGZASTQqlbIXu/5lZbeo0etu1KHnAZzoaUJLTqYhE6bCTImvJlbR5ZtQox21lD/Cy5M8tQ6Cw==
-X-Received: by 2002:a17:903:2308:b0:216:779a:d5f3 with SMTP id d9443c01a7336-21a83f546c3mr40688775ad.14.1736336482042;
-        Wed, 08 Jan 2025 03:41:22 -0800 (PST)
-Received: from localhost ([157.82.203.37])
-        by smtp.gmail.com with UTF8SMTPSA id d9443c01a7336-219dc970c8fsm326235045ad.60.2025.01.08.03.41.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 08 Jan 2025 03:41:21 -0800 (PST)
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-Date: Wed, 08 Jan 2025 20:40:13 +0900
-Subject: [PATCH 3/3] tun: Set num_buffers for virtio 1.0
+	s=arc-20240116; t=1736337174; c=relaxed/simple;
+	bh=SatAUvehyeYNc5i6rENpoR4aC9V3uHqeyL8tdslk3fM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=lP6dnw6P+LeHbkbC6+qVAf3aSZqzU1PZWN1Lxgb2j1xT3FFYWgNFVc2SW8k2DTWRJLJZS/MTUCJglYlCt2om6nTOm6OEs6CPe+5ujn46ra8ce1bSE7W1LTii//b50/9Goz1SnniYf3E3cd+AGAIuINsnzOL0Z+zhg68LDDwPPuk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=Ptg8/Mcd; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=pt12ht0K; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=xK9F51Dq; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=KGxjW8Ut; arc=none smtp.client-ip=195.135.223.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id EBDA71F385;
+	Wed,  8 Jan 2025 11:52:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1736337171; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=TvEtdaxaJySSjoiJaPPRkpXjE4vtepMmsLxZ6ErrqXk=;
+	b=Ptg8/McdN2feG8uPWgV8k5k5stL8TZ+tcPGtN8pVpOVQ1ItQGkPKp2FfNvCFnz/pMapkg1
+	wsgtjveVKN2o8imjNpgJH8NxPR03ZzQMhuc1RO40I4+9xK9d+pA6wg26GRx9oBrXOIX3VN
+	ffZAFkd3TkFLxCO6TE0/gslbnSr0zBE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1736337171;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=TvEtdaxaJySSjoiJaPPRkpXjE4vtepMmsLxZ6ErrqXk=;
+	b=pt12ht0KASdEmIuY1SPsolrXZCczFjeLjkaCohQgjnZVXx5AcHlraO2qySPHnmZfPhwX2Q
+	nRRnc990a0mWkxCw==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1736337170; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=TvEtdaxaJySSjoiJaPPRkpXjE4vtepMmsLxZ6ErrqXk=;
+	b=xK9F51DqYQKrIh9cy08N+CmATZCNSy/IjWRgXJX5M24wSSS/uxxcIW0tYtctS1Rq+1qsc8
+	4kPcvHmL8VZPNmF8SKiGlWPFGpuWRIjD4mUjBu/TtrLUIE7aybrGSISd5T/DCvpJzbFQFI
+	ntiPBkgRJmt1UZxM0HLq8g6F9QQCAmU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1736337170;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=TvEtdaxaJySSjoiJaPPRkpXjE4vtepMmsLxZ6ErrqXk=;
+	b=KGxjW8UtPnrM1/jZL8tkzrtgauhbdGv9mmpNE570OpdqcmMp7oDtLN/6O6klQmiTIktGAb
+	ezNXVwvSMB3d/NAg==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id AB5CE1351A;
+	Wed,  8 Jan 2025 11:52:50 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id 3RiFKRJnfmebFQAAD6G6ig
+	(envelope-from <vbabka@suse.cz>); Wed, 08 Jan 2025 11:52:50 +0000
+Message-ID: <ec71eaa7-a5e5-4d83-a405-782d63cf5c53@suse.cz>
+Date: Wed, 8 Jan 2025 12:52:50 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 12/17] mm: replace vm_lock and detached flag with a
+ reference count
+Content-Language: en-US
+To: Suren Baghdasaryan <surenb@google.com>, akpm@linux-foundation.org
+Cc: peterz@infradead.org, willy@infradead.org, liam.howlett@oracle.com,
+ lorenzo.stoakes@oracle.com, mhocko@suse.com, hannes@cmpxchg.org,
+ mjguzik@gmail.com, oliver.sang@intel.com, mgorman@techsingularity.net,
+ david@redhat.com, peterx@redhat.com, oleg@redhat.com, dave@stgolabs.net,
+ paulmck@kernel.org, brauner@kernel.org, dhowells@redhat.com,
+ hdanton@sina.com, hughd@google.com, lokeshgidra@google.com,
+ minchan@google.com, jannh@google.com, shakeel.butt@linux.dev,
+ souravpanda@google.com, pasha.tatashin@soleen.com, klarasmodin@gmail.com,
+ corbet@lwn.net, linux-doc@vger.kernel.org, linux-mm@kvack.org,
+ linux-kernel@vger.kernel.org, kernel-team@android.com
+References: <20241226170710.1159679-1-surenb@google.com>
+ <20241226170710.1159679-13-surenb@google.com>
+From: Vlastimil Babka <vbabka@suse.cz>
+Autocrypt: addr=vbabka@suse.cz; keydata=
+ xsFNBFZdmxYBEADsw/SiUSjB0dM+vSh95UkgcHjzEVBlby/Fg+g42O7LAEkCYXi/vvq31JTB
+ KxRWDHX0R2tgpFDXHnzZcQywawu8eSq0LxzxFNYMvtB7sV1pxYwej2qx9B75qW2plBs+7+YB
+ 87tMFA+u+L4Z5xAzIimfLD5EKC56kJ1CsXlM8S/LHcmdD9Ctkn3trYDNnat0eoAcfPIP2OZ+
+ 9oe9IF/R28zmh0ifLXyJQQz5ofdj4bPf8ecEW0rhcqHfTD8k4yK0xxt3xW+6Exqp9n9bydiy
+ tcSAw/TahjW6yrA+6JhSBv1v2tIm+itQc073zjSX8OFL51qQVzRFr7H2UQG33lw2QrvHRXqD
+ Ot7ViKam7v0Ho9wEWiQOOZlHItOOXFphWb2yq3nzrKe45oWoSgkxKb97MVsQ+q2SYjJRBBH4
+ 8qKhphADYxkIP6yut/eaj9ImvRUZZRi0DTc8xfnvHGTjKbJzC2xpFcY0DQbZzuwsIZ8OPJCc
+ LM4S7mT25NE5kUTG/TKQCk922vRdGVMoLA7dIQrgXnRXtyT61sg8PG4wcfOnuWf8577aXP1x
+ 6mzw3/jh3F+oSBHb/GcLC7mvWreJifUL2gEdssGfXhGWBo6zLS3qhgtwjay0Jl+kza1lo+Cv
+ BB2T79D4WGdDuVa4eOrQ02TxqGN7G0Biz5ZLRSFzQSQwLn8fbwARAQABzSBWbGFzdGltaWwg
+ QmFia2EgPHZiYWJrYUBzdXNlLmN6PsLBlAQTAQoAPgIbAwULCQgHAwUVCgkICwUWAgMBAAIe
+ AQIXgBYhBKlA1DSZLC6OmRA9UCJPp+fMgqZkBQJkBREIBQkRadznAAoJECJPp+fMgqZkNxIQ
+ ALZRqwdUGzqL2aeSavbum/VF/+td+nZfuH0xeWiO2w8mG0+nPd5j9ujYeHcUP1edE7uQrjOC
+ Gs9sm8+W1xYnbClMJTsXiAV88D2btFUdU1mCXURAL9wWZ8Jsmz5ZH2V6AUszvNezsS/VIT87
+ AmTtj31TLDGwdxaZTSYLwAOOOtyqafOEq+gJB30RxTRE3h3G1zpO7OM9K6ysLdAlwAGYWgJJ
+ V4JqGsQ/lyEtxxFpUCjb5Pztp7cQxhlkil0oBYHkudiG8j1U3DG8iC6rnB4yJaLphKx57NuQ
+ PIY0Bccg+r9gIQ4XeSK2PQhdXdy3UWBr913ZQ9AI2usid3s5vabo4iBvpJNFLgUmxFnr73SJ
+ KsRh/2OBsg1XXF/wRQGBO9vRuJUAbnaIVcmGOUogdBVS9Sun/Sy4GNA++KtFZK95U7J417/J
+ Hub2xV6Ehc7UGW6fIvIQmzJ3zaTEfuriU1P8ayfddrAgZb25JnOW7L1zdYL8rXiezOyYZ8Fm
+ ZyXjzWdO0RpxcUEp6GsJr11Bc4F3aae9OZtwtLL/jxc7y6pUugB00PodgnQ6CMcfR/HjXlae
+ h2VS3zl9+tQWHu6s1R58t5BuMS2FNA58wU/IazImc/ZQA+slDBfhRDGYlExjg19UXWe/gMcl
+ De3P1kxYPgZdGE2eZpRLIbt+rYnqQKy8UxlszsBNBFsZNTUBCACfQfpSsWJZyi+SHoRdVyX5
+ J6rI7okc4+b571a7RXD5UhS9dlVRVVAtrU9ANSLqPTQKGVxHrqD39XSw8hxK61pw8p90pg4G
+ /N3iuWEvyt+t0SxDDkClnGsDyRhlUyEWYFEoBrrCizbmahOUwqkJbNMfzj5Y7n7OIJOxNRkB
+ IBOjPdF26dMP69BwePQao1M8Acrrex9sAHYjQGyVmReRjVEtv9iG4DoTsnIR3amKVk6si4Ea
+ X/mrapJqSCcBUVYUFH8M7bsm4CSxier5ofy8jTEa/CfvkqpKThTMCQPNZKY7hke5qEq1CBk2
+ wxhX48ZrJEFf1v3NuV3OimgsF2odzieNABEBAAHCwXwEGAEKACYCGwwWIQSpQNQ0mSwujpkQ
+ PVAiT6fnzIKmZAUCZAUSmwUJDK5EZgAKCRAiT6fnzIKmZOJGEACOKABgo9wJXsbWhGWYO7mD
+ 8R8mUyJHqbvaz+yTLnvRwfe/VwafFfDMx5GYVYzMY9TWpA8psFTKTUIIQmx2scYsRBUwm5VI
+ EurRWKqENcDRjyo+ol59j0FViYysjQQeobXBDDE31t5SBg++veI6tXfpco/UiKEsDswL1WAr
+ tEAZaruo7254TyH+gydURl2wJuzo/aZ7Y7PpqaODbYv727Dvm5eX64HCyyAH0s6sOCyGF5/p
+ eIhrOn24oBf67KtdAN3H9JoFNUVTYJc1VJU3R1JtVdgwEdr+NEciEfYl0O19VpLE/PZxP4wX
+ PWnhf5WjdoNI1Xec+RcJ5p/pSel0jnvBX8L2cmniYnmI883NhtGZsEWj++wyKiS4NranDFlA
+ HdDM3b4lUth1pTtABKQ1YuTvehj7EfoWD3bv9kuGZGPrAeFNiHPdOT7DaXKeHpW9homgtBxj
+ 8aX/UkSvEGJKUEbFL9cVa5tzyialGkSiZJNkWgeHe+jEcfRT6pJZOJidSCdzvJpbdJmm+eED
+ w9XOLH1IIWh7RURU7G1iOfEfmImFeC3cbbS73LQEFGe1urxvIH5K/7vX+FkNcr9ujwWuPE9b
+ 1C2o4i/yZPLXIVy387EjA6GZMqvQUFuSTs/GeBcv0NjIQi8867H3uLjz+mQy63fAitsDwLmR
+ EP+ylKVEKb0Q2A==
+In-Reply-To: <20241226170710.1159679-13-surenb@google.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250108-tun-v1-3-67d784b34374@daynix.com>
-References: <20250108-tun-v1-0-67d784b34374@daynix.com>
-In-Reply-To: <20250108-tun-v1-0-67d784b34374@daynix.com>
-To: Jonathan Corbet <corbet@lwn.net>, 
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
- Jason Wang <jasowang@redhat.com>, "David S. Miller" <davem@davemloft.net>, 
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
- Paolo Abeni <pabeni@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Shuah Khan <shuah@kernel.org>, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- netdev@vger.kernel.org, kvm@vger.kernel.org, 
- virtualization@lists.linux-foundation.org, linux-kselftest@vger.kernel.org, 
- Yuri Benditovich <yuri.benditovich@daynix.com>, 
- Andrew Melnychenko <andrew@daynix.com>, 
- Stephen Hemminger <stephen@networkplumber.org>, gur.stavi@huawei.com, 
- devel@daynix.com, Akihiko Odaki <akihiko.odaki@daynix.com>
-X-Mailer: b4 0.14-dev-fd6e3
+X-Spam-Score: -4.30
+X-Spamd-Result: default: False [-4.30 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[32];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com,sina.com];
+	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[infradead.org,oracle.com,suse.com,cmpxchg.org,gmail.com,intel.com,techsingularity.net,redhat.com,stgolabs.net,kernel.org,sina.com,google.com,linux.dev,soleen.com,lwn.net,vger.kernel.org,kvack.org,android.com];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	R_RATELIMIT(0.00)[to_ip_from(RLumbhs4xhzuuihrchnpuyb6qu)]
+X-Spam-Flag: NO
+X-Spam-Level: 
 
-The specification says the device MUST set num_buffers to 1 if
-VIRTIO_NET_F_MRG_RXBUF has not been negotiated.
+On 12/26/24 18:07, Suren Baghdasaryan wrote:
+> rw_semaphore is a sizable structure of 40 bytes and consumes
+> considerable space for each vm_area_struct. However vma_lock has
+> two important specifics which can be used to replace rw_semaphore
+> with a simpler structure:
+> 1. Readers never wait. They try to take the vma_lock and fall back to
+> mmap_lock if that fails.
+> 2. Only one writer at a time will ever try to write-lock a vma_lock
+> because writers first take mmap_lock in write mode.
+> Because of these requirements, full rw_semaphore functionality is not
+> needed and we can replace rw_semaphore and the vma->detached flag with
+> a refcount (vm_refcnt).
+> When vma is in detached state, vm_refcnt is 0 and only a call to
+> vma_mark_attached() can take it out of this state. Note that unlike
+> before, now we enforce both vma_mark_attached() and vma_mark_detached()
+> to be done only after vma has been write-locked. vma_mark_attached()
+> changes vm_refcnt to 1 to indicate that it has been attached to the vma
+> tree. When a reader takes read lock, it increments vm_refcnt, unless the
+> top usable bit of vm_refcnt (0x40000000) is set, indicating presence of
+> a writer. When writer takes write lock, it both increments vm_refcnt and
+> sets the top usable bit to indicate its presence. If there are readers,
+> writer will wait using newly introduced mm->vma_writer_wait. Since all
+> writers take mmap_lock in write mode first, there can be only one writer
+> at a time. The last reader to release the lock will signal the writer
+> to wake up.
+> refcount might overflow if there are many competing readers, in which case
+> read-locking will fail. Readers are expected to handle such failures.
+> 
+> Suggested-by: Peter Zijlstra <peterz@infradead.org>
+> Suggested-by: Matthew Wilcox <willy@infradead.org>
+> Signed-off-by: Suren Baghdasaryan <surenb@google.com>
 
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
----
- drivers/net/tap.c      |  2 +-
- drivers/net/tun.c      |  4 ++--
- drivers/net/tun_vnet.c | 14 +++++++++-----
- drivers/net/tun_vnet.h |  4 ++--
- 4 files changed, 14 insertions(+), 10 deletions(-)
+>   */
+>  static inline bool vma_start_read(struct vm_area_struct *vma)
+>  {
+> +	int oldcnt;
+> +
+>  	/*
+>  	 * Check before locking. A race might cause false locked result.
+>  	 * We can use READ_ONCE() for the mm_lock_seq here, and don't need
+> @@ -720,13 +745,20 @@ static inline bool vma_start_read(struct vm_area_struct *vma)
+>  	if (READ_ONCE(vma->vm_lock_seq) == READ_ONCE(vma->vm_mm->mm_lock_seq.sequence))
+>  		return false;
+>  
+> -	if (unlikely(down_read_trylock(&vma->vm_lock.lock) == 0))
+> +
+> +	rwsem_acquire_read(&vma->vmlock_dep_map, 0, 0, _RET_IP_);
 
-diff --git a/drivers/net/tap.c b/drivers/net/tap.c
-index 60804855510b..fe9554ee5b8b 100644
---- a/drivers/net/tap.c
-+++ b/drivers/net/tap.c
-@@ -713,7 +713,7 @@ static ssize_t tap_put_user(struct tap_queue *q,
- 	int total;
- 
- 	if (q->flags & IFF_VNET_HDR) {
--		struct virtio_net_hdr vnet_hdr;
-+		struct virtio_net_hdr_v1 vnet_hdr;
- 
- 		vnet_hdr_len = READ_ONCE(q->vnet_hdr_sz);
- 
-diff --git a/drivers/net/tun.c b/drivers/net/tun.c
-index dbf0dee92e93..ec6f4ae655fb 100644
---- a/drivers/net/tun.c
-+++ b/drivers/net/tun.c
-@@ -1991,7 +1991,7 @@ static ssize_t tun_put_user_xdp(struct tun_struct *tun,
- 	size_t total;
- 
- 	if (tun->flags & IFF_VNET_HDR) {
--		struct virtio_net_hdr gso = { 0 };
-+		struct virtio_net_hdr_v1 gso = { .num_buffers = 1 };
- 
- 		vnet_hdr_sz = READ_ONCE(tun->vnet_hdr_sz);
- 		ret = tun_vnet_hdr_put(vnet_hdr_sz, iter, &gso);
-@@ -2044,7 +2044,7 @@ static ssize_t tun_put_user(struct tun_struct *tun,
- 	}
- 
- 	if (vnet_hdr_sz) {
--		struct virtio_net_hdr gso;
-+		struct virtio_net_hdr_v1 gso;
- 
- 		ret = tun_vnet_hdr_from_skb(tun->flags, tun->dev, skb, &gso);
- 		if (ret < 0)
-diff --git a/drivers/net/tun_vnet.c b/drivers/net/tun_vnet.c
-index ffb2186facd3..a7a7989fae56 100644
---- a/drivers/net/tun_vnet.c
-+++ b/drivers/net/tun_vnet.c
-@@ -130,15 +130,17 @@ int tun_vnet_hdr_get(int sz, unsigned int flags, struct iov_iter *from,
- EXPORT_SYMBOL_GPL(tun_vnet_hdr_get);
- 
- int tun_vnet_hdr_put(int sz, struct iov_iter *iter,
--		     const struct virtio_net_hdr *hdr)
-+		     const struct virtio_net_hdr_v1 *hdr)
- {
-+	int content_sz = MIN(sizeof(*hdr), sz);
-+
- 	if (iov_iter_count(iter) < sz)
- 		return -EINVAL;
- 
--	if (copy_to_iter(hdr, sizeof(*hdr), iter) != sizeof(*hdr))
-+	if (copy_to_iter(hdr, content_sz, iter) != content_sz)
- 		return -EFAULT;
- 
--	if (iov_iter_zero(sz - sizeof(*hdr), iter) != sz - sizeof(*hdr))
-+	if (iov_iter_zero(sz - content_sz, iter) != sz - content_sz)
- 		return -EFAULT;
- 
- 	return 0;
-@@ -154,11 +156,11 @@ EXPORT_SYMBOL_GPL(tun_vnet_hdr_to_skb);
- 
- int tun_vnet_hdr_from_skb(unsigned int flags, const struct net_device *dev,
- 			  const struct sk_buff *skb,
--			  struct virtio_net_hdr *hdr)
-+			  struct virtio_net_hdr_v1 *hdr)
- {
- 	int vlan_hlen = skb_vlan_tag_present(skb) ? VLAN_HLEN : 0;
- 
--	if (virtio_net_hdr_from_skb(skb, hdr,
-+	if (virtio_net_hdr_from_skb(skb, (struct virtio_net_hdr *)hdr,
- 				    tun_vnet_is_little_endian(flags), true,
- 				    vlan_hlen)) {
- 		struct skb_shared_info *sinfo = skb_shinfo(skb);
-@@ -176,6 +178,8 @@ int tun_vnet_hdr_from_skb(unsigned int flags, const struct net_device *dev,
- 		return -EINVAL;
- 	}
- 
-+	hdr->num_buffers = 1;
-+
- 	return 0;
- }
- EXPORT_SYMBOL_GPL(tun_vnet_hdr_from_skb);
-diff --git a/drivers/net/tun_vnet.h b/drivers/net/tun_vnet.h
-index 2dfdbe92bb24..d8fd94094227 100644
---- a/drivers/net/tun_vnet.h
-+++ b/drivers/net/tun_vnet.h
-@@ -12,13 +12,13 @@ int tun_vnet_hdr_get(int sz, unsigned int flags, struct iov_iter *from,
- 		     struct virtio_net_hdr *hdr);
- 
- int tun_vnet_hdr_put(int sz, struct iov_iter *iter,
--		     const struct virtio_net_hdr *hdr);
-+		     const struct virtio_net_hdr_v1 *hdr);
- 
- int tun_vnet_hdr_to_skb(unsigned int flags, struct sk_buff *skb,
- 			const struct virtio_net_hdr *hdr);
- 
- int tun_vnet_hdr_from_skb(unsigned int flags, const struct net_device *dev,
- 			  const struct sk_buff *skb,
--			  struct virtio_net_hdr *hdr);
-+			  struct virtio_net_hdr_v1 *hdr);
- 
- #endif /* TUN_VNET_H */
+I don't know much about lockdep, but I see that down_read() does
 
--- 
-2.47.1
+rwsem_acquire_read(&sem->dep_map, 0, 0, _RET_IP_);
 
+down_read_trylock() does
+
+rwsem_acquire_read(&sem->dep_map, 0, 1, _RET_IP_);
+
+This is passing the down_read()-like variant but it behaves like a trylock, no?
+
+> +	/* Limit at VMA_REF_LIMIT to leave one count for a writer */
+
+It's mainly to not increase as much as VMA_LOCK_OFFSET bit could become
+false positively set set by readers, right? The "leave one count" sounds
+like an implementation detail of VMA_REF_LIMIT and will change if Liam's
+suggestion is proven feasible?
+
+> +	if (unlikely(!__refcount_inc_not_zero_limited(&vma->vm_refcnt, &oldcnt,
+> +						      VMA_REF_LIMIT))) {
+> +		rwsem_release(&vma->vmlock_dep_map, _RET_IP_);
+>  		return false;
+> +	}
+> +	lock_acquired(&vma->vmlock_dep_map, _RET_IP_);
+>  
+>  	/*
+> -	 * Overflow might produce false locked result.
+> +	 * Overflow of vm_lock_seq/mm_lock_seq might produce false locked result.
+>  	 * False unlocked result is impossible because we modify and check
+> -	 * vma->vm_lock_seq under vma->vm_lock protection and mm->mm_lock_seq
+> +	 * vma->vm_lock_seq under vma->vm_refcnt protection and mm->mm_lock_seq
+>  	 * modification invalidates all existing locks.
+>  	 *
+>  	 * We must use ACQUIRE semantics for the mm_lock_seq so that if we are
+> @@ -734,10 +766,12 @@ static inline bool vma_start_read(struct vm_area_struct *vma)
+>  	 * after it has been unlocked.
+>  	 * This pairs with RELEASE semantics in vma_end_write_all().
+>  	 */
+> -	if (unlikely(vma->vm_lock_seq == raw_read_seqcount(&vma->vm_mm->mm_lock_seq))) {
+> -		up_read(&vma->vm_lock.lock);
+> +	if (unlikely(oldcnt & VMA_LOCK_OFFSET ||
+> +		     vma->vm_lock_seq == raw_read_seqcount(&vma->vm_mm->mm_lock_seq))) {
+> +		vma_refcount_put(vma);
+>  		return false;
+>  	}
+> +
+>  	return true;
+>  }
+>  
+> @@ -749,8 +783,17 @@ static inline bool vma_start_read(struct vm_area_struct *vma)
+>   */
+>  static inline bool vma_start_read_locked_nested(struct vm_area_struct *vma, int subclass)
+>  {
+> +	int oldcnt;
+> +
+>  	mmap_assert_locked(vma->vm_mm);
+> -	down_read_nested(&vma->vm_lock.lock, subclass);
+> +	rwsem_acquire_read(&vma->vmlock_dep_map, subclass, 0, _RET_IP_);
+
+Same as above?
+
+> +	/* Limit at VMA_REF_LIMIT to leave one count for a writer */
+
+Also
+
+> +	if (unlikely(!__refcount_inc_not_zero_limited(&vma->vm_refcnt, &oldcnt,
+> +						      VMA_REF_LIMIT))) {
+> +		rwsem_release(&vma->vmlock_dep_map, _RET_IP_);
+> +		return false;
+> +	}
+> +	lock_acquired(&vma->vmlock_dep_map, _RET_IP_);
+>  	return true;
+>  }
+>  
 
