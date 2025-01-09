@@ -1,72 +1,72 @@
-Return-Path: <linux-doc+bounces-34592-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34594-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60211A07CA0
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jan 2025 16:57:41 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id CEB89A07CAD
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jan 2025 16:59:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 24D447A2C9A
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jan 2025 15:57:33 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0BD5B188B033
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jan 2025 15:59:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E7DBB21D595;
-	Thu,  9 Jan 2025 15:57:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1598E21E08B;
+	Thu,  9 Jan 2025 15:59:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="IlSNM1xL"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="qMSyJHF6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DD762185B3
-	for <linux-doc@vger.kernel.org>; Thu,  9 Jan 2025 15:57:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2509621E085
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jan 2025 15:59:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736438254; cv=none; b=Dr8cE8AUGONH0uti+P3nivoFhm8dK3OMPxNogm4meovTPiJBQ3tJJROdwvYDKthCB3KM7uNu5XoeYwR+mBPhAlMMm3qXHTIJ4TtB5EoSAZy3f5vskBqP+Snvq3ZAqSXz+wcgGCd2kAgoh0b/4f5zkVN+IFZ2zQMIO2UeuhMDzbA=
+	t=1736438379; cv=none; b=KFUO5hGLf2KmdCC/hkuJ+I3L1Xlr3KwOtWzlf1rIZkcXSgIb8jPiyCbu73uMjGAE2tqPuIvnz/swDeai6dMLOiZ74ABgKFAoK87OKoxF08REVdpNjulJQ83xVVc5DF9pVG+QTParhoweiHba2upbfXUT1yxhWueFZd11oUMlAYk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736438254; c=relaxed/simple;
-	bh=4EnMUYPTo1lnwRUhqWDHnhdFl6tYQZK8qtVdHYEJ+Ww=;
+	s=arc-20240116; t=1736438379; c=relaxed/simple;
+	bh=GTLFxJmXyojM3A11h900/oWbIhozo0ka84US+DRfxTk=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=iYwdkFfXYw12vJd4V4p+AOGww1EQcgNp3mspc4yxRY6JTKFeaIKPat5c5w9KIkZhK9IMCxHPyuOQIPf0mfl14yGffPIR3Ey+92nHDXaH3v0kEn6oTacpE667pJ476z1qxIit/U3yYdDNq641I2oDbY7U2sBZNbikSDptPAqo0co=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=IlSNM1xL; arc=none smtp.client-ip=209.85.160.173
+	 To:Cc:Content-Type; b=hwv81A7GQvUhESOuCjjKWiN50X0cIyWhbTo36Tc9+3uRcJZ0Ds9h15DIIGvrzdqGIrSeXTvhdyfgp2fU6AKonfMfLZ1mVPWO7XmdhyfiTYOZA28QfBuwZ6HiVLIwEhYTTufosAN9nVFOWy17DIw3HBsY6HGYltQEUa7vOacHtV0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=qMSyJHF6; arc=none smtp.client-ip=209.85.160.180
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-4678c9310afso237041cf.1
-        for <linux-doc@vger.kernel.org>; Thu, 09 Jan 2025 07:57:32 -0800 (PST)
+Received: by mail-qt1-f180.google.com with SMTP id d75a77b69052e-4679b5c66d0so244151cf.1
+        for <linux-doc@vger.kernel.org>; Thu, 09 Jan 2025 07:59:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1736438252; x=1737043052; darn=vger.kernel.org;
+        d=google.com; s=20230601; t=1736438376; x=1737043176; darn=vger.kernel.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vxsA2fU3Mebd5bx+yUYVB1UrKQkWFBSKD/X5lpnSQjQ=;
-        b=IlSNM1xLm1PPRbBuphoVg3qoL1R3lEJbDrSvc6vt4yemFzdvwMR33BiUId/SPZuVgL
-         tE9LuNe00Rc11tkk5rN+qT/y/6KwLYAQFofnk0eaMr9AWUT2kpLjaScFB/Rh1LJFtZUJ
-         HUYPzX5r3OWqUt4lr5C1CH6kv7DnDjCXs9ExxgssUqfHb2gKEzcpS5DxwuFtjx1aTD5G
-         pPXZehu0NfvlvNBEHG6aqyZ2K49zlrNU2593SdBtNXFzBKGpTyL/t27T8PjwyKWpqIWH
-         s+Ur8OHUvaz/bOtxSU4JxDYlRaVpKyPDBBdn1xs4zmVOUKM5In7gjeHYjMnUT/ieLfIo
-         b5/g==
+        bh=oQ5Jfa6yJs7jfMnlDSg6VPUcr4hCBZuDyKrxBZGiXXc=;
+        b=qMSyJHF6rwbnyJhOSwnZTz6r98MqcxtaxxI+s1inUyPbXF9bqAnEqwjt0bRw7XykE+
+         jFILkhQNx5CzJq6mTeKunoSB0+mgWdIPXBBZeHWzSs+0Fb1oeS6EN7ORyF+VbQ8pOD+C
+         0cKsYXupL/TjDawpEfAvPdNF/nwxaSp1Vxjlx5c9vRaW+Mtxdeer8/PxU5KZGulEFKBN
+         foFGkWrdNDT0u1lY2Z5GH7/SyLt2dTuag0Y3RIKfqIRlh0oQoR2p6ZxgE3JOjVgEODpS
+         ycyH78AseqgbTTLL4/LWw6u1n2YBf0snrzTKT5qFwrA7OeL3NHYXerjMwx5wzwAplHCk
+         mTjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736438252; x=1737043052;
+        d=1e100.net; s=20230601; t=1736438376; x=1737043176;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vxsA2fU3Mebd5bx+yUYVB1UrKQkWFBSKD/X5lpnSQjQ=;
-        b=XU4vF/9k6pQRZupdAFSXrtUuxePrN03Bc1ZzXqWh1sNchJR1p/YShdgE4FN0MDksEd
-         GOqlFe6ogK3F1WXRW9kqxSfOHTunZ6KkdZf/mLm2WPriS11JP6KoabPiRndlcJreEzyn
-         F1A57G41xGOmNgTwZEAfOSDitF66FvEoFagn9/56BssGO5ghGxoONmuBnTkd8eH3ZwYJ
-         ZIduIwlqzQ5zHyCfKfzqOIK3mQcpHYxZStSj6K1SSaH1/1PX8Q15jfyvffseRYIma03E
-         BohkNBF9Gnd3UiTMRi027YkmnxR8FJiezssD0Ux9PSrP+xAvN6a3SzV5gCrSNhwQUxAs
-         GOpg==
-X-Forwarded-Encrypted: i=1; AJvYcCVayqegMvA7bxqVdPJa7/Oehl4bLo4k9IKoVDHPQSu49hzFSRPo5no+4QKAjQdHg4OoOoo3cFOgfu8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzETiP75U0oLYiuK6heT4b3JeJ5F1w8h0CzyUdJuqil1mS3+ImU
-	mNZhwcb9rk/K+pFgYfaQgY9tayUMHaoScDOkF+jhosx5z/wkwWGdocVvIx95LMA1ujfV7Amc3Ym
-	zNxrCl0gJ5RXvQl1CvJAV3kwokxnZVI0DvZCJ
-X-Gm-Gg: ASbGncseEYZoFzrgLDVUi2KbZ2an2p5Ko36Vtj/i0x5gt6TsXtkwN2TrueS0SpDTBBS
-	d9b6Tmpbrrh5u11JqQVAnRi+yCJQ/xQoIqTdr0Q==
-X-Google-Smtp-Source: AGHT+IFJyR0dDcxC/f6LHenxgewwrYv9Jx5mlAu1JXM0BBqE5F89/4BDPtKaTIDbqvtpXSYPm4Rn1RKJUXSvZp9ckNw=
-X-Received: by 2002:ac8:5ac5:0:b0:465:18f3:79cc with SMTP id
- d75a77b69052e-46c7cf3a0b0mr3738181cf.11.1736438251561; Thu, 09 Jan 2025
- 07:57:31 -0800 (PST)
+        bh=oQ5Jfa6yJs7jfMnlDSg6VPUcr4hCBZuDyKrxBZGiXXc=;
+        b=qWeSv82W2Vi0nEE8fQtjflrIaWVGejUweo4Bc8am4vhdrBOwc/3SsqMU5UVsIyJvTb
+         je1rlqopMF1yE9WJMIk279Y1TG0L/B45WioM3JgYvR3QCwH/ay53/LOnN7E14JpxxP7G
+         o8egC33zJ6L9oVOaZ3di9/ng5E2d8I0sc+Pj48cWD9npNhZPSh6qEJ0CTCbbO1s7RHXX
+         U2Y2CorTzwLgMwtP5z7vSuDgxNDCY7wZxWbVcG6cAosiOAE/YQzLB11dx2TFCp3eZ2gq
+         cFFfd/UiK8cVi0zT6YnQiuZnrulfDk9pBw8rZC32F0JTe2AisFmPYr+Bhv77s1OZOFyo
+         kJww==
+X-Forwarded-Encrypted: i=1; AJvYcCXhQ9WVpbbIk1nCuABp9qhNTgl9hTWiIPyh9fOb+0jbl/V4lRolghADxWeD3Dr/jCQpkPSA00e102c=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyvEVNlOWSizJJmOqyVYEI7QzKc8hbvHpTwXOrl5gniXwb5eS1a
+	+mXCoJyRAQujZ+i/k7ac5axpoaYON1009BamI0rG53xVeG8/G/nBwRoZUe8yAsaZxegfQscnOAU
+	FQ7ckYJS7H6bIYaU/yen0Gf3gu06560v8sqhF
+X-Gm-Gg: ASbGnctG6mBy6SvPev587SGhgtOEmTnzhx6wih9nnGKViJ4wy3KpNMZPlhavqwTikbA
+	ePx3YlVmg6J9M3WqzetZynMP2xyKHyP+UgI/vdw==
+X-Google-Smtp-Source: AGHT+IFbE3SeEccWxfnXtdn6KqtzTi123gdRUj3JwdZsdTJwW/j6DVioWu5BS4mPtH+WOOf2BoEr0pxuAA/hjT+Q+JU=
+X-Received: by 2002:ac8:7c4c:0:b0:46c:726a:14dc with SMTP id
+ d75a77b69052e-46c7bda7657mr4888951cf.28.1736438375624; Thu, 09 Jan 2025
+ 07:59:35 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -76,9 +76,9 @@ MIME-Version: 1.0
 References: <20250109023025.2242447-1-surenb@google.com> <52ecd3fa-5978-4f4b-b969-c42b00a5b885@suse.cz>
 In-Reply-To: <52ecd3fa-5978-4f4b-b969-c42b00a5b885@suse.cz>
 From: Suren Baghdasaryan <surenb@google.com>
-Date: Thu, 9 Jan 2025 07:57:20 -0800
-X-Gm-Features: AbW1kvbZjINIYtb-WWp6pBAMqVSVltPTuNSh_0Yi2yz7niCtjZY4iye3-jfL8Fw
-Message-ID: <CAJuCfpGwL1rnLRNG=CTfvfi75rsAn-f0mupnZUhm5nDi19Nk-A@mail.gmail.com>
+Date: Thu, 9 Jan 2025 07:59:24 -0800
+X-Gm-Features: AbW1kvalvhfQuAc0MXMuPaqroEtXL5qkz1EwFB3F7sJl51UcD4m-zeoB0z5Fluc
+Message-ID: <CAJuCfpExmxZFh_RB9t0+KmiJMiPOQ9priEx1xz63SCMTL=b8uw@mail.gmail.com>
 Subject: Re: [PATCH v8 00/16] move per-vma lock into vm_area_struct
 To: Vlastimil Babka <vbabka@suse.cz>
 Cc: akpm@linux-foundation.org, peterz@infradead.org, willy@infradead.org, 
@@ -99,6 +99,12 @@ On Thu, Jan 9, 2025 at 5:40=E2=80=AFAM Vlastimil Babka <vbabka@suse.cz> wro=
 te:
 >
 > Btw the subject became rather incomplete given all the series does :)
+
+Missed this one. What do you think is worth mentioning here? It's
+true, the patchset does many small things but I wanted to outline the
+main conceptual changes. Please LMK if you think there are more
+changes big enough to be mentioned here.
+
 >
 > On 1/9/25 3:30 AM, Suren Baghdasaryan wrote:
 > > Back when per-vma locks were introduces, vm_lock was moved out of
@@ -163,26 +169,10 @@ eir
 > Given how patch 2 discusses memory growth due to moving the lock, should
 > also patch 11 discuss how the replacement with refcount reduces the
 > memory footprint? And/or the cover letter could summarize the impact of
-> the whole series in that aspect?
-
-That's a good idea. I can amend the cover letter and the description
-of patch 11 to include size information.
-
-> Perhaps the refcount doesn't reduce
+> the whole series in that aspect? Perhaps the refcount doesn't reduce
 > anything as it's smaller but sits alone in the cacheline? Could it be
 > grouped with some non-hot fields instead as a followup, so could we get
 > to <=3D192 (non-debug) size without impacting performance?
-
-Yes, absolutely. Before this series, vm_area_struct was roughly 168
-bytes and vm_lock was 40 bytes. After the changes vm_area_struct
-becomes 256 bytes. I was planning to pack the fields as a follow-up
-patch similar to an earlier one [1] and bring the size of
-vm_area_struct to < 192. I felt this patchset already does many things
-and did not include it here but I can add it at the end of this
-patchset if you think it's essential.
-
-[1] https://lore.kernel.org/all/20241111205506.3404479-5-surenb@google.com/
-
 >
 > > Changes since v7 [4]:
 > > - Removed additional parameter for vma_iter_store() and introduced
