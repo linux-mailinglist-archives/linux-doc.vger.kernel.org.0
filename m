@@ -1,70 +1,70 @@
-Return-Path: <linux-doc+bounces-34654-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34656-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 613CEA081B9
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jan 2025 21:52:44 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DD5BA081C2
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jan 2025 21:53:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 32812188CAA2
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jan 2025 20:52:47 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C46F43A737B
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jan 2025 20:53:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC981206F19;
-	Thu,  9 Jan 2025 20:50:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9A672207A03;
+	Thu,  9 Jan 2025 20:50:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="lnGb2amd"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="VnaZAejF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ua1-f74.google.com (mail-ua1-f74.google.com [209.85.222.74])
+Received: from mail-qk1-f202.google.com (mail-qk1-f202.google.com [209.85.222.202])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B54742063F1
-	for <linux-doc@vger.kernel.org>; Thu,  9 Jan 2025 20:50:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.74
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFC482066E8
+	for <linux-doc@vger.kernel.org>; Thu,  9 Jan 2025 20:50:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.202
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736455807; cv=none; b=Pe9w3A4D7ChddtkDtYxxAa7jfgtK8vxPp1Lctd07JQVFQGbbK1qLqvTiveagcI1PxjS4WJ8gRX3xqOXNjWYQ2p1Q5j7uMQuWy3/u1peDvQkij3pm7UN60GXOumyHeKjc+ZcSpWG8LijvWacGz9buRrqN1Fbqa4t4n6Um9HLAKBU=
+	t=1736455809; cv=none; b=O1ZU6wpFQiivXo6cESHvm0inQAoCV/IQSpDxKJNE2Ue4435KFyvRsPlA662HJO51uRSKm1NMW7SPOt0YKb3hdFBJxmxeUiMQV70EhZx8j4G3h8kpEhDYXg2HpfJuIerQDcTylxLvFCrDthPe9pgWs4hrHqf45AJt4EQ2fE0nJ9Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736455807; c=relaxed/simple;
-	bh=0eyMEtCsJeYENXDg27iZXcBn86i7IQLtffZKe3KbKs0=;
+	s=arc-20240116; t=1736455809; c=relaxed/simple;
+	bh=CDB0cv1aSXnhbWgtnZoFSntC80Trm0mVRdwCoCUf0ZQ=;
 	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=J2BFpKtMGz7ONVK1U3lR35HBG0b9IfWKozQIp66K98ceBsUdTDkK7u4iceSjqpM6Ecay6cF0rbzk1aDgpSweoM7IOU7GNF5EmVBWH7gI1DuM3BEm7N8wtWZLQlVB/2CqER7uhLIYVj7pTwXvx0/DrhUKzRSyDMlRbuJOO6SSybg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--jthoughton.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=lnGb2amd; arc=none smtp.client-ip=209.85.222.74
+	 To:Cc:Content-Type; b=JCyLo4U/laZcZ9pz7bxo2K3MV8FxzWiusl/t2XTD6JI3gqMV7sZxKQjQTnMQqyUvSFc5c4K5slpNd9jA8g9Wpmhd92n90kpFi+JV6Vjqpyxcka4bmEq027vbOC1sAsYWGyW8fsWK5GAK1S5JSEH9ypwp9emPeget8bsxYm/oyoc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--jthoughton.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=VnaZAejF; arc=none smtp.client-ip=209.85.222.202
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--jthoughton.bounces.google.com
-Received: by mail-ua1-f74.google.com with SMTP id a1e0cc1a2514c-85b89d07a8bso174712241.0
-        for <linux-doc@vger.kernel.org>; Thu, 09 Jan 2025 12:50:05 -0800 (PST)
+Received: by mail-qk1-f202.google.com with SMTP id af79cd13be357-7b6f943f59dso227575785a.2
+        for <linux-doc@vger.kernel.org>; Thu, 09 Jan 2025 12:50:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1736455804; x=1737060604; darn=vger.kernel.org;
+        d=google.com; s=20230601; t=1736455805; x=1737060605; darn=vger.kernel.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=A4uSddURoLEbUkGuIhSA7RvXzffvl1Ath1WbpEvQHEc=;
-        b=lnGb2amdeluEUvZZa4tCCapSYrU6KfvKXqKec37vD1kloezlACy77FPdOyOSvkOxdL
-         veSdrNAq/+EM+UTg8KzEzaf5in0+l+yHrfmPU0gwcX0UpwS3oJ/C334ZF3pGaKitBKTp
-         J6n/+gCSEcWaDAKbEsKF/EJMKOYfZ1DMT6RW2WY2njJHZiJZ6rBdZk35tcc47FV1j86B
-         yDC+7jVhyjF9/yHpzR4zr3X/1fS9s9y+BPqef+i8zf5UP4WkIvrpNDu6jADWrYLOXB+g
-         N0KyitO+Utw/RVEbGGnA+4oeDymKX1hwi/JJ/8KwB5nMzMoQqb/N1CMdS4F4LSecJLkk
-         1SSA==
+        bh=A6d9SLIy3ba7m9amfCG873jUIu7Rw+T0rUlSTA7+tzA=;
+        b=VnaZAejF2+Jqkh4bYYgT9N+jpl0rhrHwVG1gBNsipuFLNVLqWmkcJa9ewOH2gj+eAq
+         7JAyN7it5uFj5hCSjnzS0ANZ6bq7/WPeBC0peVCsUD18n25ESD+sGuCqiwdOIRQpGWJ3
+         0n1MCnUoBSxUoZSce8fWefMXXnk1zG19BDPeMEknS1gXe+9iU5Ibs4+EUxPG50Kf2Nr8
+         jhnWA5Dj+qSWU5HgMtW/CmP6+60/GHnnCQ7NROquJKtG6NbP9QSitloRjORonS6X7/rW
+         P5wL0NBAaUQgJWysHg/HyIDJvkEFbbSBzP6VBc4bVr2mBtFZYoOpxd0FZGJTC9F8iFpQ
+         sxlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736455804; x=1737060604;
+        d=1e100.net; s=20230601; t=1736455805; x=1737060605;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=A4uSddURoLEbUkGuIhSA7RvXzffvl1Ath1WbpEvQHEc=;
-        b=rpdpJ5C9FxQeO1WS099IZVjLp6R04T6JBfwRQNBA/HTUMp/brBT08V2zeVfhD2FGo7
-         r2npGYy+5ZikL90/vQkB5Y7iLTCmKHpIyTa04yGEd1WZmfWKoatcus8g7+0H6W1dlxZC
-         C1MwWvag9CvXPSoF23MOHv70EruLxajWPsfX/XyXSVLBcP8bLFwdECiQSYujk9W72tkD
-         WlXt+8uUFbO0Npbfo2kwH+Zp0Rq9X33Sej2AgcaFH0BlTeHJNRGFaCPzmkHSV4faaTJP
-         JJkJtG+kCMJmDZ2NCA0VHOKD044tUdHJix6ipyNl+WCkPU3iN/pq37UqSvAKJ1N2CAHD
-         8Oug==
-X-Forwarded-Encrypted: i=1; AJvYcCWMUyLy/zYXs8k6RKDkzEWswwrYWNV42hYcXRe+K5QNsS69Al4EaF4ftLUjiqWxDiBgRdU2spxpmlo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzgqGpci5JkFJyqLJLXxRlsgUZk0Pl6UL83rL0Wy1a63XtS5Nyj
-	rAKmSRAotxUc6U3u0LhNesWslaZfZMBVPmPs2Wa7UgMGhk7XbtUdA2CNmgvUHiNKAforUHGqpXp
-	AZ1fMyav4cTTIjBcWbQ==
-X-Google-Smtp-Source: AGHT+IHUcz3SJhDUBT3AFAphG25I/PCLrMSFE5oskoAYquhM4FPeQ8hRbnzHYl6jdbwhQgIl3dB0klJ9OTTcUSfO
-X-Received: from vsbic11.prod.google.com ([2002:a05:6102:4b8b:b0:4af:dad1:fc51])
+        bh=A6d9SLIy3ba7m9amfCG873jUIu7Rw+T0rUlSTA7+tzA=;
+        b=VsBYRCkaI9spCgBnH8ZHF3K76cldh0/XXPxcY0FMpdUiT3/0afYzA9l2BduurVz0rj
+         CeUbP2r+SbX4F0YOCgRQOjUzUU0NDzmAj88J2DGdD5gzvCXRZhXD68IAhinXr90HNWRE
+         P8sFuh5OqFgXnZvBeH/8IyD2vbOEk/77x/RA5oP/4Suj78dbnguBWe+miAKHrK+SAXKA
+         jSPwGsk/h31DsF3KYDgOMFzfB6nmWGf91+S5AyvNm89hNzlKBl3o0lG000/MaXVpf39t
+         yyJ45CFXjaVF0+lqeOAKxvdcRNa6+WGooPBaiDwV9PhYgdTEqjgzJ9hF+D+b3yuDDuaA
+         g/tQ==
+X-Forwarded-Encrypted: i=1; AJvYcCV15htaEAwBQCV8jYC/DTgmEhfz/z5KOQ2ObO/sN8vrmSoGckBFRR7+3dvKAPWsO4To6pPIjdjsU0c=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxVbv6GzvuvizVRu5NpMpvyFbC4hAPQkoDm8yNnAqEIXsj22Tue
+	BLuoXJcR724iWZ+UE3HtvsXgYVa07/Dab1DoKj3mKvNwYIQqDnlQEaPBVWN6aynorJUIbJ6KMsH
+	H2WAAEHCJXelx7vdIFQ==
+X-Google-Smtp-Source: AGHT+IGuiGH+ZZwCsi1PGFRN10vipIun+GV8y4B9awYjMBGGjqu8CtE272hh3gh4o7UZqaJM/jxBCOqhOtlKtS/V
+X-Received: from qkpr8.prod.google.com ([2002:a05:620a:2988:b0:7b6:e6cf:180e])
  (user=jthoughton job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6102:3e20:b0:4af:e5fd:77fc with SMTP id ada2fe7eead31-4b3d0d75fcfmr8791219137.3.1736455804705;
- Thu, 09 Jan 2025 12:50:04 -0800 (PST)
-Date: Thu,  9 Jan 2025 20:49:27 +0000
+ 2002:a05:620a:240d:b0:7b1:e0f:bf9b with SMTP id af79cd13be357-7bcd97afd59mr1217697485a.45.1736455805434;
+ Thu, 09 Jan 2025 12:50:05 -0800 (PST)
+Date: Thu,  9 Jan 2025 20:49:28 +0000
 In-Reply-To: <20250109204929.1106563-1-jthoughton@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -74,8 +74,9 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 References: <20250109204929.1106563-1-jthoughton@google.com>
 X-Mailer: git-send-email 2.47.1.613.gc27f4b7a9f-goog
-Message-ID: <20250109204929.1106563-12-jthoughton@google.com>
-Subject: [PATCH v2 11/13] KVM: selftests: Inform set_memory_region_test of KVM_MEM_USERFAULT
+Message-ID: <20250109204929.1106563-13-jthoughton@google.com>
+Subject: [PATCH v2 12/13] KVM: selftests: Add KVM_MEM_USERFAULT + guest_memfd
+ toggle tests
 From: James Houghton <jthoughton@google.com>
 To: Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson <seanjc@google.com>
 Cc: Jonathan Corbet <corbet@lwn.net>, Marc Zyngier <maz@kernel.org>, 
@@ -87,28 +88,62 @@ Cc: Jonathan Corbet <corbet@lwn.net>, Marc Zyngier <maz@kernel.org>,
 	linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev
 Content-Type: text/plain; charset="UTF-8"
 
-The KVM_MEM_USERFAULT flag is supported iff KVM_CAP_USERFAULT is
-available.
+Make sure KVM_MEM_USERFAULT can be toggled on and off for
+KVM_MEM_GUEST_MEMFD memslots.
 
 Signed-off-by: James Houghton <jthoughton@google.com>
 ---
- tools/testing/selftests/kvm/set_memory_region_test.c | 3 +++
- 1 file changed, 3 insertions(+)
+ .../selftests/kvm/set_memory_region_test.c    | 30 +++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
 diff --git a/tools/testing/selftests/kvm/set_memory_region_test.c b/tools/testing/selftests/kvm/set_memory_region_test.c
-index 86ee3385e860..adce75720cc1 100644
+index adce75720cc1..1fea8ff0fe74 100644
 --- a/tools/testing/selftests/kvm/set_memory_region_test.c
 +++ b/tools/testing/selftests/kvm/set_memory_region_test.c
-@@ -364,6 +364,9 @@ static void test_invalid_memory_region_flags(void)
- 	if (kvm_check_cap(KVM_CAP_MEMORY_ATTRIBUTES) & KVM_MEMORY_ATTRIBUTE_PRIVATE)
- 		supported_flags |= KVM_MEM_GUEST_MEMFD;
- 
-+	if (kvm_check_cap(KVM_CAP_USERFAULT))
-+		supported_flags |= KVM_MEM_USERFAULT;
+@@ -556,6 +556,35 @@ static void test_add_overlapping_private_memory_regions(void)
+ 	close(memfd);
+ 	kvm_vm_free(vm);
+ }
 +
- 	for (i = 0; i < 32; i++) {
- 		if ((supported_flags & BIT(i)) && !(v2_only_flags & BIT(i)))
- 			continue;
++static void test_private_memory_region_userfault(void)
++{
++	struct kvm_vm *vm;
++	int memfd;
++
++	pr_info("Testing toggling KVM_MEM_USERFAULT on KVM_MEM_GUEST_MEMFD memory regions\n");
++
++	vm = vm_create_barebones_type(KVM_X86_SW_PROTECTED_VM);
++
++	test_invalid_guest_memfd(vm, vm->kvm_fd, 0, "KVM fd should fail");
++	test_invalid_guest_memfd(vm, vm->fd, 0, "VM's fd should fail");
++
++	memfd = vm_create_guest_memfd(vm, MEM_REGION_SIZE, 0);
++
++	vm_set_user_memory_region2(vm, MEM_REGION_SLOT, KVM_MEM_GUEST_MEMFD,
++				   MEM_REGION_GPA, MEM_REGION_SIZE, 0, memfd, 0);
++
++	vm_set_user_memory_region2(vm, MEM_REGION_SLOT,
++				   KVM_MEM_GUEST_MEMFD | KVM_MEM_USERFAULT,
++				   MEM_REGION_GPA, MEM_REGION_SIZE, 0, memfd, 0);
++
++	vm_set_user_memory_region2(vm, MEM_REGION_SLOT, KVM_MEM_GUEST_MEMFD,
++				   MEM_REGION_GPA, MEM_REGION_SIZE, 0, memfd, 0);
++
++	close(memfd);
++
++	kvm_vm_free(vm);
++}
+ #endif
+ 
+ int main(int argc, char *argv[])
+@@ -582,6 +611,7 @@ int main(int argc, char *argv[])
+ 	    (kvm_check_cap(KVM_CAP_VM_TYPES) & BIT(KVM_X86_SW_PROTECTED_VM))) {
+ 		test_add_private_memory_region();
+ 		test_add_overlapping_private_memory_regions();
++		test_private_memory_region_userfault();
+ 	} else {
+ 		pr_info("Skipping tests for KVM_MEM_GUEST_MEMFD memory regions\n");
+ 	}
 -- 
 2.47.1.613.gc27f4b7a9f-goog
 
