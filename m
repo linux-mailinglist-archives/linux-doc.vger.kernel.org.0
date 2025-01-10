@@ -1,131 +1,131 @@
-Return-Path: <linux-doc+bounces-34764-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34766-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id A27E8A08D4A
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 11:04:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FC74A08DCC
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 11:24:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CAAB13A3535
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 10:04:18 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A8EE53A60DA
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 10:24:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 264BB209F33;
-	Fri, 10 Jan 2025 10:04:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F71620B205;
+	Fri, 10 Jan 2025 10:23:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b="T430dLon"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="OIgWTgOn"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D93A20ADCA
-	for <linux-doc@vger.kernel.org>; Fri, 10 Jan 2025 10:04:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FF5420ADFE
+	for <linux-doc@vger.kernel.org>; Fri, 10 Jan 2025 10:23:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736503457; cv=none; b=omU+0xZGkvxMhFJT5Mmj+e7XQba1fZ4+riNPT3SnkRkFY8A2PavCReggJ6RDThA5cev0aKoWhTeKhvVY7JR6ID/JKLS60fH2sqwiayDgwMZ4x8h81Ue4dnnyKyoNKDf4bsKE/0pfQoLQ01nH+jxdCga1E4muGKtAjhvflja2CjQ=
+	t=1736504631; cv=none; b=PoGT47+yC0N7jKYB8UPskKfOPyhLR0XDrmmduptv0keXjx90ZhVRKw9eFoTaq7YU59rwE8RCsfi6V5BDazB1pyR1Bg2HHdjsXNTVwqIwZkBNxdfwHEALu7Y8K++6fW0BQWK2Pw00TbiCL7Ao71aJKfSslSpEhuA1lgun4R6wLyY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736503457; c=relaxed/simple;
-	bh=qNaQzpehQQCjP6U1Smo/Nd38XDFDvWBgAvAJl4KW8uA=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=bCM12V1MGqNAWjuzU2Y27fGYqD/nrvZtMpS2mFKhtTpRdLwZCDrvb8WjXaK0B5CL8lijmFYAWEECIP4BCDNd1uG8rjy8vPgk2C4HCLTyaPy1k0VXqR+rJaK5YoFEosqGwzUIZ4YksG6Rd8IhhAgSAEZAasmsGTol8fjxGQmqEyg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com; spf=pass smtp.mailfrom=daynix.com; dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b=T430dLon; arc=none smtp.client-ip=209.85.214.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=daynix.com
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2166651f752so39076045ad.3
-        for <linux-doc@vger.kernel.org>; Fri, 10 Jan 2025 02:04:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1736503453; x=1737108253; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=SbCDbM8KQIXhK7Foj8Bp5mpZOBTNVuVCawxI33XikWY=;
-        b=T430dLonjsSAlmOPpq7K62Twr27dL4/lXuDT+WU9UJck6NoShVeGAWEMj3/qYGuPUH
-         8mFqeyWqrs3KumgimS1EVzKIAbfut7Q6WFp3lbwPxwNIlQW+OXhm2kvjOrHKOSu6iqPI
-         sz/FqNdIYJA4ikICrLBHVmtTbdwxQopPQElXiVYW7dAqXkWuZoKMx6Zw89YIS/Th91ce
-         Ns0K96mE2Zn4xFfW4n87qUJX3hCp1Gib74kwWQA+fZkHc86483l3Pjv4ZrGuT8cAcCyA
-         BBkYOpeD6sTng1k2vf1MDl18Lz3AF5XyU9d57Jr5VnFpopMkpnaVZ8zaYlzJEQ7HL9kX
-         0Lpw==
+	s=arc-20240116; t=1736504631; c=relaxed/simple;
+	bh=xjzJiHVG1rcoDk2fTADzQ9apBt/E2B/VHNJo4JUJl8g=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=bjse7eSiSfwIsr0mZz+YAttrOOkqOuwfT68AGv3Yx4fJS4I6baL95OBfNOvF4kh5dfF4CwGr8R775ybA7UymA6Z6npAn70KAxZS9vJEFCoYu5z6yNGe+XX6sojcHVYp0N+x6QwKctol+DxMVsxB/wPE6p4Jp3tCAGXhYQ6Qp8dg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=OIgWTgOn; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1736504628;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=jp3bnJiwix2Gu1b46TgPaNYsSc3q3ZVFUH5fpD6tH7A=;
+	b=OIgWTgOncQYJ76cz7i+EwYWMSXfiGGie255eEfaLbw44SQqmfuL0fRdOeBlYTtNxlt9B2l
+	Y/msrtl1oW+l/h6dCiznGspbUNRERmJEYo4pbQuC2avJbe4bkjxWvL2K8mj492Mh84aSTx
+	prR/e7BABVnk2xfoY5viNt/HxNDxNfs=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-440-0Cy_YG9mOc2B1Ff3MNJ2zg-1; Fri, 10 Jan 2025 05:23:46 -0500
+X-MC-Unique: 0Cy_YG9mOc2B1Ff3MNJ2zg-1
+X-Mimecast-MFC-AGG-ID: 0Cy_YG9mOc2B1Ff3MNJ2zg
+Received: by mail-wm1-f69.google.com with SMTP id 5b1f17b1804b1-436328fcfeeso16757915e9.1
+        for <linux-doc@vger.kernel.org>; Fri, 10 Jan 2025 02:23:46 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736503453; x=1737108253;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :cc:to:subject:from:user-agent:mime-version:date:message-id
+        d=1e100.net; s=20230601; t=1736504625; x=1737109425;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=SbCDbM8KQIXhK7Foj8Bp5mpZOBTNVuVCawxI33XikWY=;
-        b=cKqPMbj4B+Lk0D5dufUQ1yLX27o8aotuCLwsyYjEUGhfitae2Yz6eCvlJG+BmTkv7j
-         zDPLJqe+M5dzE/b9HgOskZc+eIRg9cE8RoYrOEQUkfj9TvMMo3RmtaDfxQUd2vwokRDo
-         EAiYIlE3bTS42Fz2duisaExbu7YESP+JrzKTyspWixzTWCAQOrIX2+v0wmzINnBXtkTR
-         IhyVq1wUXEsPR+yMW5VLbXpk+FJofsFeHy44ihxjM8+zKIAucZO2LZEhYeo/hmOgx1sn
-         ELnl6NibP9th+JOp9QxyTcq3JTgxRG7w/8LluTmx1r/B1ToDuffWSjIi/YLABRa+FoNy
-         Ptow==
-X-Forwarded-Encrypted: i=1; AJvYcCWSQI4wnYAJCFjpkilGvsvzS4EyaZaYlyzkd5aWKn70nWl62zhfYYbUS3PT6DobZBMi1tAWcH7DlHI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwoyRoblTUiVW7wXYoFd4pZ3Sg0vM+NZRCo7JX+eLaxM7960zPT
-	XMCqxXo0KR/ZxLyZx5UDhaOFOWESmRH2T+WC/SZ7XZ3E6CSrUGgdrugl3TArbJE=
-X-Gm-Gg: ASbGncswIRG4Y7Y40jw8Xtvnwb2LEYu2USq2OkTJCY+xDBw37HFWB00weKd5cE1FI3K
-	vJ7QsCTW6Zaj0orIg7Y57tNs9ADcJ+1kL4+pPrqgLTtR+Ad3vuhO7zAK2F6Al7JX1a/1xMPQPZo
-	DmEJUP0Eq5wfGj0rGWssPyrGb7fadC6AfN4kTetMSjL1MM0l2i5Me1nHiAX590p/ZV/7T1Eb7bh
-	iZfdtUYzcrFf4THIKUEFwYgszgwmPE/XulueAHsLiMX5uXc4WPW3Jkw1ou2Mvki0t4=
-X-Google-Smtp-Source: AGHT+IGwGJ74ps/x/Eb/FXDjZwvLuJmQUxKHNbskjBfpmMO+fHvECFMcSxYPTjF3D4hGyGv0Hh3cVw==
-X-Received: by 2002:a05:6a00:179f:b0:72a:bc54:84f7 with SMTP id d2e1a72fcca58-72d21f4f2e5mr15271389b3a.12.1736503453610;
-        Fri, 10 Jan 2025 02:04:13 -0800 (PST)
-Received: from [157.82.203.37] ([157.82.203.37])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72d4067e9e1sm1247468b3a.131.2025.01.10.02.04.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 10 Jan 2025 02:04:13 -0800 (PST)
-Message-ID: <1f2908ed-e938-4365-8f1e-9f1c7753fb9b@daynix.com>
-Date: Fri, 10 Jan 2025 19:04:07 +0900
+        bh=jp3bnJiwix2Gu1b46TgPaNYsSc3q3ZVFUH5fpD6tH7A=;
+        b=nET9Xip+VUq9ExG/Bc8JVDfEEr4i4UDHkZaFc3IC9D6ZkrVEgDVOhBlTxrnSi3Nr9N
+         4i3OvauEPFJfg1hb/YvqM9tCmUNoSPAY5m3UXToSyQaFhlhu25BR+Tfh0VdBTUyGDz6Z
+         gopj977Legsu0645NGT/s9LRUwbiI2fs6JE7u/YqHanXjaZ1bivHXMsbfympR+ln+jPH
+         LFOsBkCaNwxtOXTQ9Frxm0pX49HS2r6bidKuLN/6j0jbBzcvnNS+QIInAtcFY45dLLly
+         9lEP5/mAV1StFUZWjdLZCPZp2Yyztflx6i2X6EKcUtxWIuQYkrLAiaz2zMyUl6/aAOlQ
+         aBiA==
+X-Forwarded-Encrypted: i=1; AJvYcCW+gAZkLcKYaRbWKG9vnJKl4grMDUdVOp4kGYeF87+47D1BREmdMQHtO79TTgPj9pSeNUP7a59eMz4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyJ+umK/Tsr3liPp3RW5Mds6BvAQNdGY2FjIyoVzl3hYTKspQjw
+	d7H5Cyx9XRPpBZt6rgzVP/e7AOlX+G8fvZmLo90y3FDtrs1Jqjlqrq1VpJdgsAWG11SBLqr9CVn
+	NsWldQUolpmYzh3WaX0tfiqinakNrB0KFovbK2gOAj4My6G1OWKyCTD1R+w==
+X-Gm-Gg: ASbGncsaKFeQr1otP+J1vWluTZZrFcgiFtMZ0NxgPHooLbW+bB6V7R8IQp3xUk0tj6L
+	TaHN3bPpr4tL+GIEEV2WqyyRnRgXWaOgkqqccmAZQUO1vV3eT/95Uu+zS5RMamQXgWUQhy5Tm8V
+	+mO3+zNlvlK4iSie3bcs5dVdiec2M9WoNIpJ+ghzfiIErUKnfXGlfS9mdlxksEG6bVY3DXN4cdd
+	BPGlEUyn3eaU2REiYmvCH4YUkwnuIStPU0TEnOMaz0tEvDuSJDC
+X-Received: by 2002:a05:600c:1e09:b0:436:e751:e445 with SMTP id 5b1f17b1804b1-436e751e61fmr82747495e9.5.1736504625690;
+        Fri, 10 Jan 2025 02:23:45 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGCfvXG8JypksNxAK+IHkKlFtMebcL1LMAzRXVW08Nh57eky+TRviObBgV58/zlzJhK4cMqJA==
+X-Received: by 2002:a05:600c:1e09:b0:436:e751:e445 with SMTP id 5b1f17b1804b1-436e751e61fmr82747375e9.5.1736504625358;
+        Fri, 10 Jan 2025 02:23:45 -0800 (PST)
+Received: from redhat.com ([2a06:c701:740d:3500:7f3a:4e66:9c0d:1416])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-436e9e03e5fsm47436835e9.18.2025.01.10.02.23.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 10 Jan 2025 02:23:44 -0800 (PST)
+Date: Fri, 10 Jan 2025 05:23:40 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
+Cc: Akihiko Odaki <akihiko.odaki@daynix.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Shuah Khan <shuah@kernel.org>, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+	kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
+	linux-kselftest@vger.kernel.org,
+	Yuri Benditovich <yuri.benditovich@daynix.com>,
+	Andrew Melnychenko <andrew@daynix.com>,
+	Stephen Hemminger <stephen@networkplumber.org>,
+	gur.stavi@huawei.com, devel@daynix.com
+Subject: Re: [PATCH v2 3/3] tun: Set num_buffers for virtio 1.0
+Message-ID: <20250110052246-mutt-send-email-mst@kernel.org>
+References: <20250109-tun-v2-0-388d7d5a287a@daynix.com>
+ <20250109-tun-v2-3-388d7d5a287a@daynix.com>
+ <CACGkMEsm5DCb+n3NYeRjmq3rAANztZz5QmV8rbPNo+cH-=VzDQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: Re: [PATCH v2 3/3] tun: Set num_buffers for virtio 1.0
-To: Jason Wang <jasowang@redhat.com>
-Cc: Jonathan Corbet <corbet@lwn.net>,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Xuan Zhuo
- <xuanzhuo@linux.alibaba.com>, Shuah Khan <shuah@kernel.org>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-kselftest@vger.kernel.org,
- Yuri Benditovich <yuri.benditovich@daynix.com>,
- Andrew Melnychenko <andrew@daynix.com>,
- Stephen Hemminger <stephen@networkplumber.org>, gur.stavi@huawei.com,
- devel@daynix.com
-References: <20250109-tun-v2-0-388d7d5a287a@daynix.com>
- <20250109-tun-v2-3-388d7d5a287a@daynix.com>
- <CACGkMEsm5DCb+n3NYeRjmq3rAANztZz5QmV8rbPNo+cH-=VzDQ@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CACGkMEsm5DCb+n3NYeRjmq3rAANztZz5QmV8rbPNo+cH-=VzDQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <CACGkMEsm5DCb+n3NYeRjmq3rAANztZz5QmV8rbPNo+cH-=VzDQ@mail.gmail.com>
 
-On 2025/01/10 12:27, Jason Wang wrote:
+On Fri, Jan 10, 2025 at 11:27:13AM +0800, Jason Wang wrote:
 > On Thu, Jan 9, 2025 at 2:59 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
->>
->> The specification says the device MUST set num_buffers to 1 if
->> VIRTIO_NET_F_MRG_RXBUF has not been negotiated.
+> >
+> > The specification says the device MUST set num_buffers to 1 if
+> > VIRTIO_NET_F_MRG_RXBUF has not been negotiated.
 > 
 > Have we agreed on how to fix the spec or not?
 > 
 > As I replied in the spec patch, if we just remove this "MUST", it
 > looks like we are all fine?
+> 
+> Thanks
 
-My understanding is that we should fix the kernel and QEMU instead. 
-There may be some driver implementations that assumes num_buffers is 1 
-so the kernel and QEMU should be fixed to be compatible with such 
-potential implementations.
+We should replace MUST with SHOULD but it is not all fine,
+ignoring SHOULD is a quality of implementation issue.
 
-It is also possible to make future drivers with existing kernels and 
-QEMU by ensuring they will not read num_buffers when 
-VIRTIO_NET_F_MRG_RXBUF has not negotiated, and that's what "[PATCH v3] 
-virtio-net: Ignore num_buffers when unused" does.
-https://lore.kernel.org/r/20250110-reserved-v3-1-2ade0a5d2090@daynix.com
-
-Regards,
-Akihiko Odaki
 
