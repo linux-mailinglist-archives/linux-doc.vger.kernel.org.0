@@ -1,196 +1,436 @@
-Return-Path: <linux-doc+bounces-34820-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34822-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 515A0A09B30
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 19:59:12 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id A3F55A09B22
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 19:58:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0B29E169BBD
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 18:59:10 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A24D7161B43
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 18:58:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 97B44225786;
-	Fri, 10 Jan 2025 18:41:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 398F722ACFD;
+	Fri, 10 Jan 2025 18:42:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="CkYnmQFK"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="J/OindhY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2089.outbound.protection.outlook.com [40.107.92.89])
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B187A21D5A6;
-	Fri, 10 Jan 2025 18:41:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.92.89
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736534494; cv=fail; b=VEOD4qdcsU4p1iCZ9lHhsch7JLQZ8kWUxwyJTfQ+EJLBkOGsdwW83G2niy8Mfq9LlMLAonYAUwSu7w5R6/FOZzB41fTUwqxbKJ3TSRDagA2Zm+hwisCYzLiiaumUId+69K/wAiyFhxlD7jNQZH/yYrHtjL2Nk8s9lJN8FWQR99Q=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736534494; c=relaxed/simple;
-	bh=+vuIxCA+BEpJEC7H3Ep4JkgssuEk5bGx4KtVKdaOva8=;
-	h=Date:From:To:CC:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=t/OXDH7JfzC+TYtlqzczfWDxU8uYrj0EfcuM+hVn/7O8f5gINpBFqa4JHlCaP+BUBNIkg8u5ZHCt/iSmImZ+cu9TevjwOp29aaC7u+eekyjSm2OIbE98cY32P+PELT3zeZOyn8rzoKzbEO9IXM7WR5sNevgQoYctNclevwTh0qE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=CkYnmQFK; arc=fail smtp.client-ip=40.107.92.89
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=L6BnY3PQHcMHtXkPLXUepUy8/wmFmQom6UESrQgsfZ488I4U0FmdKjfuup1yq6CAHLFaGCXh3s1/CbCrKViUO/pm6EI+wsG/cIKex++nJTVoDYnn86363SFEaBpNfip5d+yZcDzHYmhftKsw/AnpgKS6hbiuT67OBVecDQcXo2CuvRzQrEcJmLqSI5yhmnxxI5BP0S1kgqPD/vV8yRe2sqVDRrglhpi/kkT+cOOYbBdnbD7mP4IczF2e7+7dvlC+OPBMaZBT3RQvJz6mQ0t9qDoL5+6GSBsaNO5ufeTcwefgqO85S0jTntZ5P7kjj/Jh3f4zFtldMf+IUR0fdOPRmw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Y0B/g7fr/RTSmqjO4ZGpjBsNc5NsVi3crxLrQ07qLkg=;
- b=PlCseDRjN2ShlbKvG3YyISPFQImp0bda0tMVoZHxOidiEkA5qgjjWIxXpfsOXaAX8kAGGQgT5IlsRUA/cLZb1ZcPw5ZAvMrv9w+jYSedIQB1R2Mh7A7q+mhlbsyjOl6WpmBKwCML9VVZpFS4mxyD3NELu8vaqBVyI5iXzMyzOAjyGDhpPxkcWc+qwWQez1iVgTcy39zrGN4UFMteSqp6OPIUoZyCVs60iruGuQWj+Lvin3DY98jDJaQ3GLcc0LvmaUl+FYFjdZQ4JV20RyZLWN82ksyeTwgy7rDN80AiVoOCDcGHOGwA+slsuGg1r0edmhaxoGdfYnWl+1RJHothPQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.118.232) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Y0B/g7fr/RTSmqjO4ZGpjBsNc5NsVi3crxLrQ07qLkg=;
- b=CkYnmQFK4Kig3s6B+HV7puTCjKAcImVLkfiaT27Q7BFKNiZ7OgZ4mPaR/1BHO+xoQNIBMahO3zsDYCmreB7jRkM9FLyGpCGBgPAdvVn1tKlTXLoMJY+3Fd2PmD7wF2mE52D7w9YkbvQpdQoq0LNWL7EstRPPPUDjRABSCtNNfUFI0Iju1quiLzDJlNAx1ESB2HIwCO9EZw1Rwjvjgp34zuk93A+fw5tEtUxcXf7ld0y73X9pYFLjmLcQ+Vv4w3kCAGsczunHgWoIEhBZHMORjukByjjfTzWQsFvkOstIj8iPXkICn7kKq1gckX9kB8n7u906eDloiFniDu17auyKBg==
-Received: from SN7PR04CA0159.namprd04.prod.outlook.com (2603:10b6:806:125::14)
- by SA0PR12MB4416.namprd12.prod.outlook.com (2603:10b6:806:99::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.11; Fri, 10 Jan
- 2025 18:41:22 +0000
-Received: from SN1PEPF0002BA50.namprd03.prod.outlook.com
- (2603:10b6:806:125:cafe::f4) by SN7PR04CA0159.outlook.office365.com
- (2603:10b6:806:125::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8335.13 via Frontend Transport; Fri,
- 10 Jan 2025 18:41:22 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.118.232)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.118.232 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.118.232; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.118.232) by
- SN1PEPF0002BA50.mail.protection.outlook.com (10.167.242.73) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8335.7 via Frontend Transport; Fri, 10 Jan 2025 18:41:22 +0000
-Received: from drhqmail201.nvidia.com (10.126.190.180) by mail.nvidia.com
- (10.127.129.5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Fri, 10 Jan
- 2025 10:40:59 -0800
-Received: from drhqmail202.nvidia.com (10.126.190.181) by
- drhqmail201.nvidia.com (10.126.190.180) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.4; Fri, 10 Jan 2025 10:40:58 -0800
-Received: from Asurada-Nvidia (10.127.8.9) by mail.nvidia.com (10.126.190.181)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4 via Frontend
- Transport; Fri, 10 Jan 2025 10:40:57 -0800
-Date: Fri, 10 Jan 2025 10:40:55 -0800
-From: Nicolin Chen <nicolinc@nvidia.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-CC: "Tian, Kevin" <kevin.tian@intel.com>, "corbet@lwn.net" <corbet@lwn.net>,
-	"will@kernel.org" <will@kernel.org>, "joro@8bytes.org" <joro@8bytes.org>,
-	"suravee.suthikulpanit@amd.com" <suravee.suthikulpanit@amd.com>,
-	"robin.murphy@arm.com" <robin.murphy@arm.com>, "dwmw2@infradead.org"
-	<dwmw2@infradead.org>, "baolu.lu@linux.intel.com" <baolu.lu@linux.intel.com>,
-	"shuah@kernel.org" <shuah@kernel.org>, "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>, "iommu@lists.linux.dev"
-	<iommu@lists.linux.dev>, "linux-arm-kernel@lists.infradead.org"
-	<linux-arm-kernel@lists.infradead.org>, "linux-kselftest@vger.kernel.org"
-	<linux-kselftest@vger.kernel.org>, "linux-doc@vger.kernel.org"
-	<linux-doc@vger.kernel.org>, "eric.auger@redhat.com" <eric.auger@redhat.com>,
-	"jean-philippe@linaro.org" <jean-philippe@linaro.org>, "mdf@kernel.org"
-	<mdf@kernel.org>, "mshavit@google.com" <mshavit@google.com>,
-	"shameerali.kolothum.thodi@huawei.com"
-	<shameerali.kolothum.thodi@huawei.com>, "smostafa@google.com"
-	<smostafa@google.com>, "ddutile@redhat.com" <ddutile@redhat.com>, "Liu, Yi L"
-	<yi.l.liu@intel.com>, "patches@lists.linux.dev" <patches@lists.linux.dev>
-Subject: Re: [PATCH v5 08/14] iommufd/viommu: Add iommufd_viommu_report_event
- helper
-Message-ID: <Z4Fpt9ftiZByVEpO@Asurada-Nvidia>
-References: <cover.1736237481.git.nicolinc@nvidia.com>
- <b9b4f3df990934cb80b2f5e1e49e555e50c1c857.1736237481.git.nicolinc@nvidia.com>
- <BN9PR11MB527634DAD9FE43A6DD50A2348C1C2@BN9PR11MB5276.namprd11.prod.outlook.com>
- <20250110145149.GH5556@nvidia.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E47F8228CB2;
+	Fri, 10 Jan 2025 18:42:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.197
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1736534552; cv=none; b=oTpgr08SiBDwsIHilNQSbS5JhRhf/crWBpFkCTVBEjZMssEyDRgy7zrVrHnirNygZAZFzIwAqxCobdpRbq4V2n7ncracF7RruSl+PW8FnZhNlpUc7WUCkzh9QZNDek/ScC+1pLol8KwJGKmOc4flO/ZFXpxLDfLHrfdYJTlBfXs=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1736534552; c=relaxed/simple;
+	bh=SdFQiP4d+QszeFpRrRoCrs964GB089GLpVTQ/LOPWmI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=R1TJyggN3+EFFaNYGq5GW8ITWVRbnir7Wk94vnueHXSJoJZ3NrUaDeY5gLJ9Wc3GfPQ2e5V/y2YUYODVf2Jbb4Yta97P44Yb/i/cQL2NRPhX9FnOfmqGAeZSFJlgmUl09H20lnUQ5dl7axrxABpkqbfz/UKvsV0LHAZVS9FMpJQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=J/OindhY; arc=none smtp.client-ip=217.70.183.197
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 0815E1C0002;
+	Fri, 10 Jan 2025 18:42:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1736534532;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=Qe+z4JpLJI/XG4+PN4oYdf6UrrKyXrpjTJ0h8CG+Zsw=;
+	b=J/OindhYZyBexf+vYGoKlLAoRltKe4F3W6nHP2Pcbj6MpYxI4xjGtN/8Xan4kS6Od72srG
+	ArWNJOyAsNqMgGSBwF/O29AcITc8geL2HpZ3kH+bUNJb408xa1l5eu1OrsjMdr+/7MHa9w
+	bLG1XInga3SWPgHlWpiC4lqLcGBO3Vakiu5es+vBkendILcYrTofnTqjvfbtqFK+nq4DF0
+	fJ+2WIXDqVvhsFEEqQNT4Z7jGJ7o97HEIc1CqvM1C6R0sn3YeEeCT+UvtbKjTj9RN0H7RB
+	EflrDBcHIbqmkiGd0dUN+krRsIeu6VzMZe6nPtsSEvknLhfmjEiu/X4jozyFkg==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: [PATCH v2 0/2] hexdump: Allow skipping identical lines
+Date: Fri, 10 Jan 2025 19:42:03 +0100
+Message-Id: <20250110-perso-hexdump-v2-0-7f9a6a799170@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250110145149.GH5556@nvidia.com>
-X-NV-OnPremToCloud: AnonymousSubmission
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA50:EE_|SA0PR12MB4416:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8f92311c-cb4d-4fb2-7eab-08dd31a66139
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700013|376014|7416014|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?DDFlpr/yyOxNRBEZ7P3XQF4y684qmSLdnWFflcolL6fJcBCR9xdnyV3qIf1Q?=
- =?us-ascii?Q?OOn5/oRJcLrKitWwLd4KgC/J6GRkhu27e/MnRrUIdAzxUo5qp7uE9zNdqFQb?=
- =?us-ascii?Q?t4kZltkwoZBQsMH8R0bXRDXNzklqoFhn6evO6kj72XBSObvtjZ5+ZLAz3OFz?=
- =?us-ascii?Q?S4clYmBw7j5He2Jm0KC8OyVN7lb9h9N+PkWHkGrKG0w+5FbvMVevIOhkKBVn?=
- =?us-ascii?Q?V0A65yDUOE+ClP52WTYtYstm71HkjPyxWeq8Wf2KUa3zvk1PBHZg7YVRDADP?=
- =?us-ascii?Q?PF599RzrB/DVuJRgxWMy+NK3k0M6LR4aL4oSX7sQoMwZjRmYhaRKv7fBwr02?=
- =?us-ascii?Q?jYvWDZ918Xy5Je6tXmlP39H7LbgBQGQZpcVX8cxBFwgEWJSN4m6kR9S13JIf?=
- =?us-ascii?Q?hOz7ahzD+jxbZ8CrFqSN0+a+BrLYB2i/+hqe8W+NNfufYQFoV8kMJkqF5Qw7?=
- =?us-ascii?Q?a4qVcOldtLDHw+UsdSslnLTtQCRHo948f3maF5leprg3wHwh3OsEmhsaCBvu?=
- =?us-ascii?Q?Mif+kY72P5RvImK1kC/T8KUp/u7AZ0BUwq9wW0Umm884foEBg9gDfqIYfmFy?=
- =?us-ascii?Q?VXWsJzaxuGzAdCuqEaKmTPOEEscGi8HrLeD5fwFBHFPH2WcUbdnPbp50roYE?=
- =?us-ascii?Q?+c4Zy0jur2M1qGdCdXkMgp6BjvgKUTzDbN84opxcQkpXKhW3S2bhDQGZnV11?=
- =?us-ascii?Q?BVtl4WUtqSg0Katk12yI2Qyalvt1tVI9cyfT4LI8t1VCQ+NU+ma5uNsgQ1K5?=
- =?us-ascii?Q?883CHeYvCarCGfsAhbYIOYT9H4qNQ/yXbKKeLArGO+Ixa31Od9wUpq5rgmAL?=
- =?us-ascii?Q?x5ErIdeilPymSvD3ltRNy5VEPfoZxYuyvQHPa2tzJ3YwPuGGaiyrEucuPAng?=
- =?us-ascii?Q?GpkC8BvtJ5pcDZ7NAvE8maYYP9xi34XH+HB+2Esgm2bhrpunxqDV8AGdZwV0?=
- =?us-ascii?Q?d02F4zn5ivF415paHDS6yI5WTCNP6s7lnRm9lndi52y4X/ncE55ej9hQ3MBp?=
- =?us-ascii?Q?638abs/djIBLGBEG4oLktbI1FyCYw26lBixleYy+ywh7NWQPj64k136KK9Zy?=
- =?us-ascii?Q?HphfC6Ltinv5w5jArglgUKsR+GjeSd9ebd2W+JFVX5zCKB67Rw9Z1SO8eAts?=
- =?us-ascii?Q?bb8yaRR2X8amE+oVQ1ktP8vGnMGDUYC5lumsEZp4GbxyxfEyClbUAt5wprRn?=
- =?us-ascii?Q?zlcs6eGoZbKUwFPl9/lWM8LkuzbMFBIYSCzPFTD6rYuM0m7QJ7UcqtGU9x8r?=
- =?us-ascii?Q?aNiOyEC8lXY4bnzB7Yp+BbTzzdYaU1oN7Xh9hzESJJxpTX1DsfZBTTaHkhts?=
- =?us-ascii?Q?Mmy12LnttOnOO2m7hpVLbGam3KHExP0q2+HSKHLcRELy/PPYEnlURPdx182b?=
- =?us-ascii?Q?Rd3IYO1a5OThXv5aFPnxCh7X1glpHkB4FtLMJK3mqTaCT2WLNkN/BNNlEdes?=
- =?us-ascii?Q?SmzKOMyfU+aBYyuS5Ft/ZwmptSykZmSQIZJ9D0XH7OEmxTJ00da2rTz6YYVo?=
- =?us-ascii?Q?1sLGhrbz/zpynRo=3D?=
-X-Forefront-Antispam-Report:
-	CIP:216.228.118.232;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc7edge1.nvidia.com;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(7416014)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2025 18:41:22.0562
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8f92311c-cb4d-4fb2-7eab-08dd31a66139
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.118.232];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SN1PEPF0002BA50.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4416
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPxpgWcC/x3Myw6DIBCF4Vcxsy4Ept7SVd+jcYE6rZMoWFCjM
+ b57Kcv/JOc7IZBnCvDITvC0cWBnY+Atg24w9kOC+9iACnONmIuZfHBioL1fp1lURqm6LVRxNwj
+ xM3t68568VxN74LA4fyR+0/81SarGUpdRLGWVF0oLLSb+rjRKbw5rxmfr3DKylZ2boLmu6wcC2
+ eHrqAAAAA==
+X-Change-ID: 20241224-perso-hexdump-7a008b5053a2
+To: Petr Mladek <pmladek@suse.com>, Steven Rostedt <rostedt@goodmis.org>, 
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
+ Sergey Senozhatsky <senozhatsky@chromium.org>, 
+ Jonathan Corbet <corbet@lwn.net>, John Ogness <john.ogness@linutronix.de>, 
+ Andrew Morton <akpm@linux-foundation.org>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Miquel Raynal <miquel.raynal@bootlin.com>
+X-Mailer: b4 0.15-dev
+X-GND-Sasl: miquel.raynal@bootlin.com
 
-On Fri, Jan 10, 2025 at 10:51:49AM -0400, Jason Gunthorpe wrote:
-> On Fri, Jan 10, 2025 at 07:12:46AM +0000, Tian, Kevin wrote:
-> 
-> > > +	if (!viommu)
-> > > +		return -ENODEV;
-> > > +	if (WARN_ON_ONCE(!viommu->ops || !viommu->ops-
-> > > >supports_veventq ||
-> > > +			 !viommu->ops->supports_veventq(type)))
-> > > +		return -EOPNOTSUPP;
-> > 
-> > Hmm the driver knows which type is supported by itself before
-> > calling this helper. Why bother having the helper calling into
-> > the driver again to verify?
-> 
-> Indeed, it might make sense to protect this with
-> 
->         if (IS_ENABLED(CONFIG_IOMMUFD_TEST))
-> 
-> As a compiled out assertion
-> 
-> Or drop it
-> 
-> We shouldn't have unnecessary argument validation on fast paths,
-> !viommu should go too.
+While working on NAND issues, I used print_hex_dump() a lot to compare
+data. But I am mostly working on embedded systems where the kernel
+messages go through a serial console. Sometimes network support is an
+option, sometimes not. Anyway, I often print buffers both in kernel
+space and user space to compare them, and they may be full of 0's or
+1's, which means lines are repeated a lot in the output and this is slow
+*and* hard to compare.
 
-Ack. I will drop those two if-statments.
+I initially hacked into lib/hexdump.c for my own purpose and just
+discarded all the other users, but it felt like this might be a useful
+feature for others and decided to make it a public patch.
 
-Nicolin
+* First patch changes the "ascii" parameter into a "flags" variable now
+  accepting the value: DUMP_FLAG_ASCII.
+* Second patch adds a new flag to skip the identical lines, because this
+  must be an opt-in parameter, I guess.
+
+The patch series has successfully gone through a round of
+kernel-test-robot.
+
+The Cc-list, as provided by get_maintainers.pl, was returning 330
+e-mail addresses which felt to much, so I ran the script only on the
+second patch (the printk/includes/debug/Doc changes). It gave this
+Cc-list which sounds more reasonable. Hopefully this is a smart move,
+otherwise let me know what you think would be best.
+
+---
+Changes in v2:
+- Rebased on v6.13-rc1.
+- Manually fixed the diff in many places to fit Andy's requests.
+- Added a real life example (code diff and output diff) with the
+  modification of the API as well as the use of the new flag introduced
+  by this series in the cover letter (at the bottom) as requested by
+  Andy.
+- Link to v1: https://lore.kernel.org/r/20240826162416.74501-1-miquel.raynal@bootlin.com
+---
+
+Here is a typical diff showing the code change with a perfectly equivalent
+output:
+
+ print_hex_dump_debug("", DUMP_PREFIX_OFFSET, 32, 1, spinand->databuf, mtd->writesize,
+-                     false);
++                     0);
+
+Here is a typical output of a NAND buffer without the new 'skip' flag,
+ie. with the above code snippet:
+
+00000000: 55 42 49 23 01 00 00 00 00 00 00 00 00 00 00 01 00 00 08 00 00 00 10 00 2b 10 f1 92 00 00 00 00
+00000020: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 db 93 e9 fc
+00000040: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000060: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000080: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000000a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000000c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000000e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000100: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000120: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000140: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000160: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000180: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000001a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000001c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000001e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000220: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000240: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000260: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000002a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000002c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000002e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000320: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000340: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000360: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000003a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000003c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000003e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000420: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000440: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000460: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000004a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000004c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000004e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000520: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000540: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000560: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000005a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000005c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000005e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000600: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000620: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000640: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000660: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000006a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000006c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000006e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000720: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000740: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000760: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00000780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000007a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000007c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+000007e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+And with the new flag added the code looks like this:
+
+ print_hex_dump_debug("", DUMP_PREFIX_OFFSET, 32, 1, spinand->databuf, mtd->writesize,
+-                     0);
++                     DUMP_FLAG_SKIP_IDENTICAL_LINES);
+
+And the output is easier to parse and also faster to show on a serial
+console:
+
+00000000: 55 42 49 23 01 00 00 00 00 00 00 00 00 00 00 01 00 00 08 00 00 00 10 00 2b 10 f1 92 00 00 00 00
+00000020: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 db 93 e9 fc
+00000040: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+*
+
+---
+Miquel Raynal (2):
+      hexdump: Convert the ascii boolean into a flag variable
+      hexdump: Allow skipping identical lines
+
+ Documentation/core-api/printk-formats.rst          |   4 +-
+ arch/um/include/shared/user.h                      |   4 +-
+ arch/x86/kernel/mpparse.c                          |   4 +-
+ arch/x86/kvm/svm/sev.c                             |   2 +-
+ arch/xtensa/kernel/traps.c                         |   4 +-
+ crypto/ansi_cprng.c                                |   2 +-
+ crypto/testmgr.c                                   |   2 +-
+ drivers/acpi/nfit/core.c                           |   8 +-
+ drivers/ata/libata-core.c                          |   4 +-
+ drivers/ata/pata_parport/bpck.c                    |   2 +-
+ drivers/block/floppy.c                             |   4 +-
+ drivers/cdx/controller/mcdi.c                      |   8 +-
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c  |   6 +-
+ drivers/crypto/axis/artpec6_crypto.c               |   4 +-
+ drivers/crypto/bcm/util.c                          |   2 +-
+ drivers/crypto/bcm/util.h                          |   4 +-
+ drivers/crypto/caam/blob_gen.c                     |   6 +-
+ drivers/crypto/caam/caamalg.c                      |  59 +++++-----
+ drivers/crypto/caam/caamalg_desc.c                 |  32 ++---
+ drivers/crypto/caam/caamalg_qi.c                   |  30 +++--
+ drivers/crypto/caam/caamalg_qi2.c                  | 104 +++++++----------
+ drivers/crypto/caam/caamhash.c                     | 129 ++++++++-------------
+ drivers/crypto/caam/caampkc.c                      |   2 +-
+ drivers/crypto/caam/caamprng.c                     |   4 +-
+ drivers/crypto/caam/caamrng.c                      |   4 +-
+ drivers/crypto/caam/error.c                        |   4 +-
+ drivers/crypto/caam/key_gen.c                      |  14 +--
+ drivers/crypto/caam/sg_sw_sec4.h                   |   4 +-
+ drivers/crypto/ccp/platform-access.c               |   4 +-
+ drivers/crypto/ccp/psp-dev.c                       |   4 +-
+ drivers/crypto/ccp/sev-dev.c                       |   4 +-
+ drivers/crypto/ccree/cc_driver.c                   |   2 +-
+ .../crypto/intel/qat/qat_common/adf_mstate_mgr.c   |   4 +-
+ drivers/crypto/marvell/octeontx/otx_cptvf_reqmgr.c |   8 +-
+ .../crypto/marvell/octeontx2/otx2_cptvf_reqmgr.c   |   8 +-
+ drivers/crypto/sa2ul.c                             |   2 +-
+ drivers/dma/loongson1-apb-dma.c                    |   2 +-
+ drivers/firmware/efi/apple-properties.c            |  10 +-
+ drivers/firmware/efi/cper-arm.c                    |   2 +-
+ drivers/firmware/efi/cper.c                        |   4 +-
+ drivers/gpu/drm/amd/amdgpu/smu_v11_0_i2c.c         |   4 +-
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c  |   2 +-
+ drivers/gpu/drm/bridge/lontium-lt9611uxc.c         |   3 +-
+ drivers/gpu/drm/display/drm_dp_mst_topology.c      |   4 +-
+ drivers/gpu/drm/drm_edid.c                         |   2 +-
+ .../gpu/drm/i915/display/intel_crtc_state_dump.c   |   2 +-
+ drivers/gpu/drm/i915/display/intel_display.c       |   4 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c     |   4 +-
+ drivers/gpu/drm/omapdrm/dss/hdmi4_core.c           |   2 +-
+ drivers/gpu/drm/omapdrm/dss/hdmi5_core.c           |   2 +-
+ drivers/hv/channel_mgmt.c                          |  11 +-
+ drivers/infiniband/hw/hns/hns_roce_hw_v2.c         |   3 +-
+ drivers/infiniband/hw/irdma/cm.c                   |   6 +-
+ drivers/infiniband/hw/irdma/ctrl.c                 | 104 ++++++++---------
+ drivers/infiniband/hw/irdma/puda.c                 |  28 ++---
+ drivers/infiniband/hw/irdma/uda.c                  |   6 +-
+ drivers/infiniband/hw/mlx5/cq.c                    |   2 +-
+ drivers/infiniband/ulp/srp/ib_srp.c                |   2 +-
+ drivers/input/touchscreen/melfas_mip4.c            |  17 ++-
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-test.c   |  21 ++--
+ drivers/macintosh/via-cuda.c                       |   2 +-
+ drivers/macintosh/windfarm_smu_sat.c               |   4 +-
+ drivers/mailbox/imx-mailbox.c                      |   4 +-
+ drivers/media/common/tveeprom.c                    |   2 +-
+ drivers/media/dvb-core/dvb_net.c                   |   2 +-
+ drivers/media/firewire/firedtv-avc.c               |   4 +-
+ drivers/media/pci/saa7164/saa7164-api.c            |   8 +-
+ drivers/media/pci/saa7164/saa7164-core.c           |   4 +-
+ drivers/media/platform/nxp/imx-jpeg/mxc-jpeg.c     |   2 +-
+ drivers/media/platform/qcom/venus/hfi_venus.c      |   2 +-
+ drivers/media/platform/ti/cal/cal.c                |   5 +-
+ drivers/media/usb/em28xx/em28xx-i2c.c              |   2 +-
+ drivers/mfd/rave-sp.c                              |   4 +-
+ drivers/misc/genwqe/genwqe_driver.h                |   2 +-
+ drivers/mtd/tests/mtd_nandecctest.c                |   8 +-
+ drivers/mtd/ubi/debug.c                            |   6 +-
+ drivers/mtd/ubi/debug.h                            |   2 +-
+ drivers/mtd/ubi/io.c                               |   6 +-
+ drivers/net/arcnet/arcnet.c                        |   4 +-
+ drivers/net/can/usb/etas_es58x/es58x_core.c        |   4 +-
+ drivers/net/can/usb/peak_usb/pcan_usb_core.c       |   2 +-
+ drivers/net/can/usb/ucan.c                         |  10 +-
+ drivers/net/ethernet/aeroflex/greth.c              |   7 +-
+ drivers/net/ethernet/altera/altera_tse_main.c      |   2 +-
+ drivers/net/ethernet/amd/a2065.c                   |   2 +-
+ drivers/net/ethernet/amd/ariadne.c                 |   2 +-
+ drivers/net/ethernet/amd/pds_core/adminq.c         |   4 +-
+ drivers/net/ethernet/cadence/macb_main.c           |   6 +-
+ drivers/net/ethernet/cavium/thunder/nicvf_main.c   |   2 +-
+ drivers/net/ethernet/hisilicon/hns3/hns3_ethtool.c |   2 +-
+ drivers/net/ethernet/intel/e1000e/netdev.c         |   6 +-
+ drivers/net/ethernet/intel/i40e/i40e_common.c      |   2 +-
+ drivers/net/ethernet/intel/i40e/i40e_debugfs.c     |  25 ++--
+ drivers/net/ethernet/intel/iavf/iavf_common.c      |   2 +-
+ drivers/net/ethernet/intel/ice/ice_osdep.h         |   4 +-
+ drivers/net/ethernet/intel/igb/igb_main.c          |  18 ++-
+ drivers/net/ethernet/intel/igc/igc_dump.c          |  10 +-
+ drivers/net/ethernet/intel/ixgbe/ixgbe_main.c      |   5 +-
+ drivers/net/ethernet/mellanox/mlx4/en_tx.c         |   5 +-
+ drivers/net/ethernet/mellanox/mlx5/core/en_tc.c    |   2 +-
+ drivers/net/ethernet/mellanox/mlx5/core/lib/aso.c  |   2 +-
+ .../mellanox/mlx5/core/steering/hws/send.c         |   2 +-
+ drivers/net/ethernet/mellanox/mlx5/core/wq.c       |   2 +-
+ drivers/net/ethernet/mellanox/mlxfw/mlxfw_mfa2.c   |   2 +-
+ drivers/net/ethernet/meta/fbnic/fbnic_fw.c         |   2 +-
+ drivers/net/ethernet/microchip/enc28j60.c          |   2 +-
+ drivers/net/ethernet/pensando/ionic/ionic_main.c   |   6 +-
+ .../net/ethernet/pensando/ionic/ionic_rx_filter.c  |   2 +-
+ drivers/net/ethernet/qlogic/qed/qed_ll2.c          |   2 +-
+ drivers/net/ethernet/qlogic/qlcnic/qlcnic_io.c     |   2 +-
+ drivers/net/ethernet/qlogic/qlcnic/qlcnic_main.c   |   2 +-
+ drivers/net/ethernet/realtek/8139too.c             |   2 +-
+ drivers/net/ethernet/smsc/smc9194.c                |   2 +-
+ drivers/net/ethernet/vertexcom/mse102x.c           |   2 +-
+ drivers/net/fddi/skfp/skfddi.c                     |   2 +-
+ drivers/net/phy/sfp.c                              |   8 +-
+ drivers/net/tun.c                                  |   3 +-
+ drivers/net/wireless/ath/wcn36xx/wcn36xx.h         |   2 +-
+ drivers/net/wireless/ath/wil6210/cfg80211.c        |   2 +-
+ drivers/net/wireless/ath/wil6210/ethtool.c         |   2 +-
+ drivers/net/wireless/ath/wil6210/fw_inc.c          |   3 +-
+ drivers/net/wireless/ath/wil6210/txrx_edma.c       |   4 +-
+ drivers/net/wireless/ath/wil6210/wil6210.h         |   9 +-
+ drivers/net/wireless/ath/wil6210/wmi.c             |   2 +-
+ drivers/net/wireless/broadcom/b43/main.c           |   2 +-
+ drivers/net/wireless/intel/iwlegacy/common.h       |   6 +-
+ drivers/net/wireless/intel/iwlwifi/iwl-debug.h     |   6 +-
+ drivers/net/wireless/marvell/mwifiex/main.h        |   2 +-
+ drivers/net/wireless/realtek/rtl8xxxu/core.c       |   4 +-
+ drivers/net/wireless/realtek/rtw88/rtw8723x.c      |   2 +-
+ drivers/net/wireless/realtek/rtw88/rtw88xxa.c      |   2 +-
+ drivers/net/wireless/silabs/wfx/bh.c               |   2 +-
+ drivers/net/wireless/silabs/wfx/hif_rx.c           |   4 +-
+ drivers/net/wireless/ti/wl1251/wl1251.h            |   2 +-
+ drivers/net/wireless/ti/wlcore/debug.h             |   2 +-
+ drivers/net/wireless/ti/wlcore/sdio.c              |   4 +-
+ drivers/nfc/mei_phy.c                              |   4 +-
+ drivers/nfc/pn533/i2c.c                            |   2 +-
+ drivers/nfc/pn533/pn533.c                          |   2 +-
+ drivers/nfc/pn533/uart.c                           |   2 +-
+ drivers/nfc/pn533/usb.c                            |   9 +-
+ drivers/nfc/pn544/i2c.c                            |   2 +-
+ drivers/nfc/pn544/pn544.c                          |   4 +-
+ drivers/nfc/port100.c                              |   4 +-
+ drivers/nfc/st21nfca/core.c                        |   2 +-
+ drivers/nfc/st21nfca/i2c.c                         |   2 +-
+ drivers/nfc/trf7970a.c                             |   8 +-
+ drivers/pci/probe.c                                |   2 +-
+ .../platform/surface/aggregator/ssh_packet_layer.c |   5 +-
+ drivers/platform/x86/amd/pmf/tee-if.c              |   2 +-
+ drivers/ras/amd/fmpm.c                             |   2 +-
+ drivers/rpmsg/rpmsg_ns.c                           |   2 +-
+ drivers/rpmsg/virtio_rpmsg_bus.c                   |   4 +-
+ drivers/s390/crypto/ap_queue.c                     |   4 +-
+ drivers/s390/crypto/zcrypt_api.c                   |   8 +-
+ drivers/s390/net/qeth_core_main.c                  |   8 +-
+ drivers/scsi/esas2r/esas2r_log.c                   |   2 +-
+ drivers/scsi/qedf/qedf_fip.c                       |   4 +-
+ drivers/scsi/qedf/qedf_io.c                        |   2 +-
+ drivers/scsi/qedf/qedf_main.c                      |   4 +-
+ drivers/scsi/qla2xxx/qla_dbg.c                     |   2 +-
+ drivers/soc/ti/k3-ringacc.c                        |   2 +-
+ drivers/spi/spi-pl022.c                            |  18 +--
+ .../staging/gpib/agilent_82357a/agilent_82357a.c   |   2 +-
+ drivers/staging/gpib/ni_usb/ni_usb_gpib.c          |   2 +-
+ drivers/staging/nvec/nvec.c                        |   4 +-
+ drivers/staging/nvec/nvec_ps2.c                    |   2 +-
+ .../staging/vc04_services/vchiq-mmal/mmal-vchiq.c  |   4 +-
+ drivers/tty/n_gsm.c                                |   6 +-
+ drivers/ufs/core/ufshcd.c                          |   2 +-
+ drivers/usb/class/usbtmc.c                         |  12 +-
+ drivers/usb/core/devio.c                           |   6 +-
+ drivers/usb/gadget/function/f_ncm.c                |   2 +-
+ drivers/usb/gadget/udc/gr_udc.c                    |   2 +-
+ drivers/usb/usbip/usbip_common.c                   |   2 +-
+ drivers/video/fbdev/omap2/omapfb/dss/hdmi4_core.c  |   2 +-
+ drivers/video/fbdev/omap2/omapfb/dss/hdmi5_core.c  |   2 +-
+ drivers/watchdog/wdrtas.c                          |   2 +-
+ fs/ceph/mdsmap.c                                   |   2 +-
+ fs/ecryptfs/debug.c                                |   2 +-
+ fs/ext4/super.c                                    |   3 +-
+ fs/jfs/xattr.c                                     |   2 +-
+ fs/seq_file.c                                      |   2 +-
+ fs/smb/client/cifs_debug.c                         |   2 +-
+ fs/smb/client/misc.c                               |   2 +-
+ fs/ubifs/debug.c                                   |   2 +-
+ fs/ubifs/scan.c                                    |   2 +-
+ fs/xfs/xfs_message.c                               |   2 +-
+ include/linux/dma/ti-cppi5.h                       |   2 +-
+ include/linux/dynamic_debug.h                      |   8 +-
+ include/linux/filter.h                             |   2 +-
+ include/linux/mlx5/cq.h                            |   2 +-
+ include/linux/printk.h                             |  23 ++--
+ include/net/6lowpan.h                              |   4 +-
+ lib/hexdump.c                                      |  29 ++++-
+ lib/test_bitmap.c                                  |   4 +-
+ mm/debug.c                                         |   4 +-
+ mm/dmapool.c                                       |   2 +-
+ mm/kmemleak.c                                      |   2 +-
+ mm/page_poison.c                                   |   2 +-
+ mm/slub.c                                          |   2 +-
+ net/atm/br2684.c                                   |   2 +-
+ net/atm/lec.c                                      |   4 +-
+ net/ceph/crypto.c                                  |   6 +-
+ net/ceph/messenger.c                               |  22 ++--
+ net/ceph/osdmap.c                                  |   4 +-
+ net/core/skbuff.c                                  |   8 +-
+ net/ipv4/route.c                                   |   2 +-
+ net/nfc/digital_core.c                             |   4 +-
+ net/nfc/llcp_core.c                                |   4 +-
+ samples/rpmsg/rpmsg_client_sample.c                |   3 +-
+ security/integrity/ima/ima_kexec.c                 |   3 +-
+ sound/soc/codecs/hdac_hdmi.c                       |   2 +-
+ sound/soc/intel/atom/sst/sst_ipc.c                 |   2 +-
+ sound/soc/intel/catpt/loader.c                     |  14 +--
+ sound/soc/sof/ipc3.c                               |   2 +-
+ sound/soc/sof/ipc4.c                               |   2 +-
+ sound/usb/bcd2000/bcd2000.c                        |   2 +-
+ sound/usb/quirks.c                                 |   4 +-
+ sound/usb/validate.c                               |   4 +-
+ tools/testing/crypto/chacha20-s390/test-cipher.c   |  33 +++---
+ tools/testing/nvdimm/test/nfit.c                   |   2 +-
+ 222 files changed, 680 insertions(+), 761 deletions(-)
+---
+base-commit: 895c43eb1fd8424a06812d56722ed7c340394e27
+change-id: 20241224-perso-hexdump-7a008b5053a2
+
+Best regards,
+-- 
+Miquel Raynal <miquel.raynal@bootlin.com>
+
 
