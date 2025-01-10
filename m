@@ -1,170 +1,209 @@
-Return-Path: <linux-doc+bounces-34763-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34765-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA820A08CCA
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 10:49:42 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 38D07A08DBB
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 11:19:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9E7181688CC
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 09:49:05 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 515A03A13B0
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2025 10:19:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 29E7E20B7F9;
-	Fri, 10 Jan 2025 09:48:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 44A942080E1;
+	Fri, 10 Jan 2025 10:19:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b="KhKUUmvS"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="e8aAF7wv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail-m12766.qiye.163.com (mail-m12766.qiye.163.com [115.236.127.66])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BE2920ADD9
-	for <linux-doc@vger.kernel.org>; Fri, 10 Jan 2025 09:48:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51FCD1CDFD4
+	for <linux-doc@vger.kernel.org>; Fri, 10 Jan 2025 10:19:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.236.127.66
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736502485; cv=none; b=uI/2HM4fYzmfHoxFdczGnGPVOS1gdCZc5TInBZNekHICNiYEd/FviTYADL+ZmxG/b4F15E3FDK948i0N5pWm10pCl3OuH2AFor45NlY/1uaqo8794Bdk6IhQE+ikHHOOLDF3UQkDXbKPGLAmXV4XZBC/6q8Jwcifl7FtCOcDC/I=
+	t=1736504381; cv=none; b=ifUQFWZlZ9Z37hmenBumSVo0eeTbDzFuOlwPYq5mGdlA06mOxanJe2jj1ev96Sf2iB6/u5d3y8E81IqFBZeDs8idFKnFC/kRFus7Bof5KYdTUCJes4qFmZ74d5sUjwaTa99I8BjZS82/yAZ6CWird2p4VGqVe6EelWQUWueBlJQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736502485; c=relaxed/simple;
-	bh=kVRbfJjqPGz8mIX7HYr5rAjUJTIc7wg/ASHsghAXszw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=oeDAJ/ttiqOMm4x/atR907Y8xzcMzFr6x1waOqmqhEIk1r/nCcasZPM8dKnUTy4wC5dkQGIXc9c93cJ88hYStCNhOPrOHBQySwwqv4fimE/SeSLRepzNEnDyHGltkyG311wcNgXzyZObI7NIzaT8SDpxk8P93brQD2f8ttsdLik=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com; spf=pass smtp.mailfrom=daynix.com; dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b=KhKUUmvS; arc=none smtp.client-ip=209.85.214.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=daynix.com
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2162c0f6a39so51845325ad.0
-        for <linux-doc@vger.kernel.org>; Fri, 10 Jan 2025 01:48:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1736502483; x=1737107283; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=32Vr4Gt1G1myfrpAERq6AqxVOpF64+scMP61EbgQiWY=;
-        b=KhKUUmvSNnIsRuykpmg5oIG3LsDRZYWxhZlb8W5Y/NscKj6mBRqDvVezPr0kZs2hEk
-         SfgNrsDdakX8JelJlPc2k1axQb33aiz2I5rqfH9DwjbeJIsY0Y0KdOKuIdwLv7bFyXDI
-         xA2Jier5VQgpTBaIeWTrGjgFTJGqCASVNCmseO9gehJzAa7rA+93QUUbNwSTfSa66KTY
-         DwtpqFCBlrO/MBDlZ8TfKY7jYIXUy57fD1WpjPOjRsjT55QZxazx0chlxzTKLVy+Lh1W
-         Jt9Or55j4pbduwenjytpVbKZsHApqCH/5GLCeZEjL9KGtZ4vCpps1r0RVkHX+P12sh0N
-         DIiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736502483; x=1737107283;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=32Vr4Gt1G1myfrpAERq6AqxVOpF64+scMP61EbgQiWY=;
-        b=HQXdyd4S5Lnin1ZC+unwAyIE7qwGTO+iPvgZc296UDfw2vEuqvsaenJz12SXog4ZEI
-         nnuYiE+s/QSr2hjFjaCFB8eY0vGo2n2vyT4BY5NF/+cWZNYXPMJajKXkzayXwHqfXPTD
-         UjSU7GZ7K2AkHEi+wMw6H6Eg9+PS5CdejmjPmGx1ViaBVYcelLV3Mi9TDL4ZMGzUfO7e
-         m2Kpw/V9AZORAoHeP2fBEEQJXrbsiBZfyZOyCeQDvjzMqKEK6XFkKV8SF6WoDhAQYA98
-         l3i1w//NQMN7N+VnyJiMebEHFUAqnLjBz9H0/VDAvLBiFe6XpPwYLdSLWB07yeXpr81W
-         CNnQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVqBLcJEZQOKNDXuaCggykN1YPeUT44PbYHDLkCEykkItZzlXTjM4HprlydvlchMAk4tV66vy7OMk8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YztPAv80qifI7junw80fw0vMsGa+jALVjdQgMTDx5JjmnUFgtGU
-	fSh0am3pN8xAXOvO9OOYMIhVhmBoNAOsqZmJdquRd2LzyDwjoqpMc2zG9qKsR38=
-X-Gm-Gg: ASbGncsTDkkDlPs6GqOVvogDH7iLGUh7vO/vTYqTj71ZA40UcyRBwqbzv57d6ObxCI+
-	SPwa3lJiz7oPxeF7i7aKNXAZvdtDFxIEZulKGJzZQSkTSrUzqkqcYtZWCZ/vuH0okq1KGbAZIL7
-	AW0hJWAnXA0dbs5fkl9gfC3xLChjqinRO+QVZKRZrUVPhERy+T/nz8M6LEZHVeGOdk4WCRQN6Il
-	rDUYAeYFHDYqVNZQEjM5JcvWxUMyhgPgBD/gyWdPsv9CFBS//dMmSGhvMfDCYQQA1w=
-X-Google-Smtp-Source: AGHT+IG4bZICCGUJL8IFrqqswdhSk8TqvGQUJNKkxBrtJDASy/wZzUeIl0i4xzyDL1lhN+MfLWTweA==
-X-Received: by 2002:a17:90a:d448:b0:2ee:c30f:33c9 with SMTP id 98e67ed59e1d1-2f55838d0eamr8537569a91.14.1736502482736;
-        Fri, 10 Jan 2025 01:48:02 -0800 (PST)
-Received: from [157.82.203.37] ([157.82.203.37])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-21a9f12f94asm10822555ad.72.2025.01.10.01.47.57
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 10 Jan 2025 01:48:02 -0800 (PST)
-Message-ID: <b645e3e3-b42a-4d7a-b5f1-8f8fd9eff0ee@daynix.com>
-Date: Fri, 10 Jan 2025 18:47:56 +0900
+	s=arc-20240116; t=1736504381; c=relaxed/simple;
+	bh=PwK0B82S3Vx9obnn6mMt3+kKVOTI+4S5aPD+XuYp/68=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=pSmrvoFEAyJnoRKmCMjX+f+mxQ0GIfDFMdfqCh+1wGRnBPbUbMbDg8iDIml1khlyzAIg9am2sXbJm1Msf+4YjGSBamTfC/1toPcc179tTvqnJ2o2/oMc5HcX3hMb5NDEPGugkZCuF3Ta/WdbtXnBWwo6XLPb3ELYN/plRHO4oqU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=e8aAF7wv; arc=none smtp.client-ip=115.236.127.66
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
+Received: from localhost.localdomain (unknown [171.8.192.198])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 85635e52;
+	Fri, 10 Jan 2025 18:04:11 +0800 (GMT+08:00)
+From: zhangwei <zhangwei@cqsoftware.com.cn>
+To: alexs@kernel.org,
+	si.yanteng@linux.dev,
+	corbet@lwn.net
+Cc: zhaoyuehui@cqsoftware.com.cn,
+	zhaoshuo@cqsoftware.com.cn,
+	maoyuxian@cqsoftware.com.cn,
+	linux-doc@vger.kernel.org,
+	zhangwei <zhangwei@cqsoftware.com.cn>
+Subject: [PATCH v3] docs/zh_CN: Add sak index Chinese translation
+Date: Fri, 10 Jan 2025 18:04:04 +0800
+Message-ID: <20250110100405.2225-1-zhangwei@cqsoftware.com.cn>
+X-Mailer: git-send-email 2.47.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 5/6] selftest: tun: Add tests for virtio-net hashing
-To: Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- Jonathan Corbet <corbet@lwn.net>, Jason Wang <jasowang@redhat.com>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Xuan Zhuo
- <xuanzhuo@linux.alibaba.com>, Shuah Khan <shuah@kernel.org>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-kselftest@vger.kernel.org,
- Yuri Benditovich <yuri.benditovich@daynix.com>,
- Andrew Melnychenko <andrew@daynix.com>,
- Stephen Hemminger <stephen@networkplumber.org>, gur.stavi@huawei.com
-References: <20250109-rss-v6-0-b1c90ad708f6@daynix.com>
- <20250109-rss-v6-5-b1c90ad708f6@daynix.com>
- <677fdee2b56d_362bc129446@willemb.c.googlers.com.notmuch>
-Content-Language: en-US
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <677fdee2b56d_362bc129446@willemb.c.googlers.com.notmuch>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDHhkZVk0eGB1LHhkfTB5DSFYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKTEpVQ1VKQklVSkJDWVdZFhoPEhUdFFlBWU9LSFVKS0hKT0hMVUpLS1
+	VKQktLWQY+
+X-HM-Tid: 0a944fabe05f03abkunm85635e52
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MBw6Oio*CDIXCw4oPxYONjEO
+	GDwKFA9VSlVKTEhNTktIT05JTUJJVTMWGhIXVQETGhUcDB4SOxgKCBQdDwwaCR5VGBQWVRgVRVlX
+	WRILWUFZSkxKVUNVSkJJVUpCQ1lXWQgBWUFPQ0pMNwY+
+DKIM-Signature:a=rsa-sha256;
+	b=e8aAF7wv4ucfRl57fYKZLuTNjG0BAaacop3p9Jv9LPFgHAqfA/GaFHBSeEDZQhJV3UDkuBwhLemU+41FwZISs7eXAObzraIRxIL3VmDCCDcDDmb2DFxguHYAHaq9U7dsc7eIC3zhnZaRpEsAhOUCJ1urV4RmDsDwKKNqk/KPS2U=; s=default; c=relaxed/relaxed; d=cqsoftware.com.cn; v=1;
+	bh=wVr7y6xzG72FZ6TbKMJkyFLw1E7hzFLFcfkI+jh7sX4=;
+	h=date:mime-version:subject:message-id:from;
 
-On 2025/01/09 23:36, Willem de Bruijn wrote:
-> Akihiko Odaki wrote:
->> The added tests confirm tun can perform RSS and hash reporting, and
->> reject invalid configurations for them.
->>
->> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
->> ---
->>   tools/testing/selftests/net/Makefile |   2 +-
->>   tools/testing/selftests/net/tun.c    | 558 ++++++++++++++++++++++++++++++++++-
->>   2 files changed, 551 insertions(+), 9 deletions(-)
->>
->> diff --git a/tools/testing/selftests/net/Makefile b/tools/testing/selftests/net/Makefile
->> index cb2fc601de66..92762ce3ebd4 100644
->> --- a/tools/testing/selftests/net/Makefile
->> +++ b/tools/testing/selftests/net/Makefile
->> @@ -121,6 +121,6 @@ $(OUTPUT)/reuseport_bpf_numa: LDLIBS += -lnuma
->>   $(OUTPUT)/tcp_mmap: LDLIBS += -lpthread -lcrypto
->>   $(OUTPUT)/tcp_inq: LDLIBS += -lpthread
->>   $(OUTPUT)/bind_bhash: LDLIBS += -lpthread
->> -$(OUTPUT)/io_uring_zerocopy_tx: CFLAGS += -I../../../include/
->> +$(OUTPUT)/io_uring_zerocopy_tx $(OUTPUT)/tun: CFLAGS += -I../../../include/
->>   
->>   include bpf.mk
->> diff --git a/tools/testing/selftests/net/tun.c b/tools/testing/selftests/net/tun.c
->> index 463dd98f2b80..9424d897e341 100644
->> --- a/tools/testing/selftests/net/tun.c
->> +++ b/tools/testing/selftests/net/tun.c
->> @@ -2,21 +2,37 @@
->>   
->>   #define _GNU_SOURCE
->>   
->> +#include <endian.h>
->>   #include <errno.h>
->>   #include <fcntl.h>
->> +#include <stddef.h>
->>   #include <stdio.h>
->>   #include <stdlib.h>
->>   #include <string.h>
->>   #include <unistd.h>
->> -#include <linux/if.h>
->> +#include <net/if.h>
->> +#include <netinet/ip.h>
->> +#include <sys/ioctl.h>
->> +#include <sys/socket.h>
->> +#include <linux/compiler.h>
->> +#include <linux/icmp.h>
->> +#include <linux/if_arp.h>
->>   #include <linux/if_tun.h>
->> +#include <linux/ipv6.h>
->>   #include <linux/netlink.h>
->>   #include <linux/rtnetlink.h>
->> -#include <sys/ioctl.h>
->> -#include <sys/socket.h>
->> +#include <linux/sockios.h>
->> +#include <linux/tcp.h>
->> +#include <linux/udp.h>
->> +#include <linux/virtio_net.h>
-> 
-> Are all these include changes strictly needed? Iff so, might as well
-> fix ordering to be alphabetical (lexicographic).
->    
+Translate lwn/Documentation/security/sak.rst into Chinese
 
-Yes. I placed header files in linux/ after the other header files 
-because include/uapi/linux/libc-compat.h requires libc header files to 
-be placed before linux/ ones.
+Update the translation through commit 4d3beaa06d35
+("docs: security: move some books to it and update")
+
+Reviewed-by: Yanteng Si <si.yanteng@linux.dev>
+Reviewed-by: Alex Shi <alexs@kernel.org>
+Signed-off-by: zhangwei <zhangwei@cqsoftware.com.cn>
+---
+v2: 
+
+Change the email address of Yanteng Si
+Complete the commit tag
+
+v3:
+
+fix security index 
+
+ .../translations/zh_CN/security/index.rst     |  2 +-
+ .../translations/zh_CN/security/sak.rst       | 86 +++++++++++++++++++
+ 2 files changed, 87 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/security/sak.rst
+
+diff --git a/Documentation/translations/zh_CN/security/index.rst b/Documentation/translations/zh_CN/security/index.rst
+index 3f68e3145322..d8aacd1930d9 100644
+--- a/Documentation/translations/zh_CN/security/index.rst
++++ b/Documentation/translations/zh_CN/security/index.rst
+@@ -16,6 +16,7 @@
+    :maxdepth: 1
+ 
+    lsm
++   sak
+    siphash
+    digsig
+    landlock
+@@ -26,7 +27,6 @@ TODOLIST:
+ * IMA-templates
+ * keys/index
+ * lsm-development
+-* sak
+ * SCTP
+ * self-protection
+ * tpm/index
+diff --git a/Documentation/translations/zh_CN/security/sak.rst b/Documentation/translations/zh_CN/security/sak.rst
+new file mode 100644
+index 000000000000..574fe076201b
+--- /dev/null
++++ b/Documentation/translations/zh_CN/security/sak.rst
+@@ -0,0 +1,86 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/security/sak.rst
++
++:翻译:
++
++ 张巍 zhangwei <zhangwei@cqsoftware.com.cn>
++
++===========================
++Linux 安全注意键（SAK）处理
++===========================
++
++:日期: 2001年3月18日
++:作者: Andrew Morton
++
++操作系统的安全注意键是一种安全工具，用于防止系统上存在特洛伊
++木马密码捕获程序。它提供了一种无法规避的方式，用于终止所有可
++能伪装成登录应用程序的程序。用户需要在登录系统之前输入这个安
++全键。
++
++从键盘输入的方式生成安全注意键，Linux提供了两种相似但不同的
++方式。一种是按下ALT-SYSRQ-K组合键，但你不应该使用这种方式，
++因为它只有在内核启用了SYSRQ支持的情况下才能使用。
++
++正确生成SAK的方式是使用``loadkeys``来定义键序列。无论内核是否
++编译了sysrq支持，这种方式都能够正常工作。
++
++当键盘处于原始模式时，SAK 能够正常工作。这意味着，一旦定义，
++SAK 将终止正在运行的 X 服务器。如果系统处于运行级别 5，X 服
++务器将重新启动，这正是你希望发生的情况。
++
++你应该使用什么键序列？ CTRL-ALT-DEL用于重启机器，CTRL-ALT-
++BACKSPACE对X服务器有特殊作用。我们将选择CTRL-ALT-PAUSE。
++
++在你的rc.sysinit（或rc.local）文件中，添加以下命令::
++
++    echo "Control Alt keycode 101 = SAK" | /bin/loadkeys
++
++就这样！只有超级用户才能重新编程SAK键。
++
++.. note::
++
++  1. Linux SAK据说并不是C2级安全性的系统所要求的"真正的SAK"。
++     该原因作者也不知道
++
++  2. 在键盘输入的模式下，SAK会终止所有打开了/dev/console的应用
++     程序。
++
++     但是不幸的是，这也包括一些你实际上不希望被终止的程序。原因是
++     这些程序错误的保持了/dev/console的打开状态。务必确保向你的
++     Linux发行版提供商投诉这个问题。
++
++     你可以用以下的命令来识别将被SAK终止的程序::
++
++        # ls -l /proc/[0-9]*/fd/* | grep console
++        l-wx------    1 root     root           64 Mar 18 00:46 /proc/579/fd/0 -> /dev/console
++
++     然后::
++
++        # ps aux|grep 579
++        root       579  0.0  0.1  1088  436 ?        S    00:43   0:00 gpm -t ps/2
++
++     所以``gpm``会被SAK杀死。这应该gpm中的bug。它应该正在关闭标准输入，
++     你可以通过查找initscript来启动gpm并更改它：
++
++     老的::
++
++        daemon gpm
++
++     新的::
++
++        daemon gpm < /dev/null
++
++     Vixie cron似乎也有这个问题，并且需要采取相同的处理方式。
++
++     此外，某个著名的Linux发行版在它的rc.sysinit和rc scripts的脚本中
++     包含了以下三行代码::
++
++        exec 3<&0
++        exec 4>&1
++        exec 5>&2
++
++     这些代码会导致所有的守护进程将文件描述符3、4和5关联到/dev/console。
++     所以SAK会将他们所有都终止。一个简单的解决办法就是删掉这些代码，但是
++     这样做会导致系统管理应用程序出现异常 - 要对所有的情况进行充分测试。
+-- 
+2.47.1
+
 
