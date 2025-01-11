@@ -1,108 +1,83 @@
-Return-Path: <linux-doc+bounces-34923-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-34925-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D354A0A495
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jan 2025 17:11:20 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8143BA0A4F1
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jan 2025 18:08:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 23E303AA68E
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jan 2025 16:11:14 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 942C9167408
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jan 2025 17:08:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 33CFC1922D4;
-	Sat, 11 Jan 2025 16:11:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BCCB7155C8C;
+	Sat, 11 Jan 2025 17:08:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dAwb4hX9"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Hv4+ITLO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07EF282899;
-	Sat, 11 Jan 2025 16:11:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 858A6155A52;
+	Sat, 11 Jan 2025 17:08:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736611876; cv=none; b=nMxNo/MPNK46Iac6Brxd4C44a6LXN3ZVDYst3tk47YounMN/EOcKS1SoXjmcU1z/RXUj4xmIhqrQkg4pyCLRA4sRRwto0qZii+bRJ/B5JR+d9LWUh+PxmyGcrdulnVk1CJGJ4Vkcv0XwEf6Nfo4sWuwMKXxh4qiFhzOi+UT651E=
+	t=1736615310; cv=none; b=s4OBhnnEZmnxliUpEZGJRODppZzzBQWus2XlJE15Nyfoma8L1l50mxSgtacsCLE9Jhxi9x8cyxLgAhFbAAbaa70wb4ifxUMYQrMTmwMFAeYwV2fGBfXpAXgvpGdg7dumDuOewghFoRXp+ZLzZGe34gP/gSObjrfGWAszJRzFoQs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736611876; c=relaxed/simple;
-	bh=VCaVMaDJXywQsj6GMlzr7aUlMmv7pmEVlJbeNUR5OKY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=oXD5AytPYEt2Z9de+AQyUtWsz7bpOAxznr9xdIXuyDL3ai+SubwG8KIVIuI8Dv2yn5skfWnuVtKUFuewH1AklxuS7k8f9tqNpl2uerV7Kh9Uw7BP+KeG9hjbNtEni/oXjxSNDLmQdDsXU+tJo4G6CWJhKdwxAyhvpE0Bmdxi32U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dAwb4hX9; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B812DC4CED2;
-	Sat, 11 Jan 2025 16:11:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1736611875;
-	bh=VCaVMaDJXywQsj6GMlzr7aUlMmv7pmEVlJbeNUR5OKY=;
-	h=From:To:Cc:Subject:Date:From;
-	b=dAwb4hX9rnXZh7IUFTskMNKeaELTEdu8w/NxZvFKm6+y6dwH0nDjSRKt/XkxypgtT
-	 lpza6gO8qQxGNopNopkIR0DnhsLtdeonfK+ouNqlt0AhF4yfRWrVgYTrKmtPoh8FD3
-	 DCG59zsR3GahGeckcbvx46hXR//0JyhA9rxpQjoYuQU/GuAXu0f5P3Fo8msNYwkwGW
-	 VnOTXMdpvLzcWNpEM1Wb8TQ1FyLV+JRdkCRaWDwSVLXSLPMdbm7aZ5A/j98TcwlZtF
-	 wgWkDv285iXNQDHIW8/DFQ9y+EbDItdrqnxtjWsuXHinYbolY/u8L9r9ZS3fZygRkO
-	 FOwjejKrtLfCw==
-From: carlos.bilbao@kernel.org
-To: corbet@lwn.net
-Cc: avadhut.naik@amd.com,
-	akpm@linux-foundation.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Carlos Bilbao <carlos.bilbao.osdev@gmail.com>,
-	Carlos Bilbao <carlos.bilbao@kernel.org>
-Subject: [PATCH] mailmap, docs: Update email to carlos.bilbao@kernel.org
-Date: Sat, 11 Jan 2025 10:11:06 -0600
-Message-ID: <20250111161110.862131-1-carlos.bilbao@kernel.org>
-X-Mailer: git-send-email 2.43.5
+	s=arc-20240116; t=1736615310; c=relaxed/simple;
+	bh=U82e5TyeCalBxBgMVYZ/hV58MDwGygQUQSCUHU7CoEc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=P4cBssX7TzB9frg9+PPIXBjZ9yxnMwO8ITYu3LoVUbI62zZpPlYiFhHIBb2mfgRi8Rej8LpxyQToNsKQjFEh9hsODyLwACFk8LZW8w9Q5t7KnL45QzcijWchuF/5+Vga29rY6N3i/wbV+8FIeca6OsdJvigXth6fSZCzEJm29WY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=Hv4+ITLO; arc=none smtp.client-ip=90.155.50.34
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=U82e5TyeCalBxBgMVYZ/hV58MDwGygQUQSCUHU7CoEc=; b=Hv4+ITLO26gTJvd8n7gUOZE34I
+	xpGWc2fDGcd+/bF1xKeQdCBnRzaPP99qUApzOzWELQbGuVCGmi+529/mKU/oEQHdRsTM2rPO4leef
+	pLUwYpb5Cdtf6dqpukwJxyLZz0h9hakNAStAy+afTkTjLvke7oEi/W2ZfYJkMHHAN0Uwp+CfgMW+C
+	JKATnonMtEZ9UYcKqHA4H8YvE8e4xkBCA3Rt8iYJ/pbb1rAiRU9OVimWcm+yTCYwVTBYeiB+aamj/
+	+9vOkRSmMi+i9914NuYbG2eJDNBczLIoIHoe2uTeQPFgbehMCJSUVGBOBFyZy7/tMROcx5xf9ImSG
+	o9Ku0VWw==;
+Received: from willy by casper.infradead.org with local (Exim 4.98 #2 (Red Hat Linux))
+	id 1tWexo-0000000FYR0-0Dm2;
+	Sat, 11 Jan 2025 17:07:56 +0000
+Date: Sat, 11 Jan 2025 17:07:55 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: David Laight <david.laight.linux@gmail.com>
+Cc: Suren Baghdasaryan <surenb@google.com>, akpm@linux-foundation.org,
+	peterz@infradead.org, liam.howlett@oracle.com,
+	lorenzo.stoakes@oracle.com, mhocko@suse.com, vbabka@suse.cz,
+	hannes@cmpxchg.org, mjguzik@gmail.com, oliver.sang@intel.com,
+	mgorman@techsingularity.net, david@redhat.com, peterx@redhat.com,
+	oleg@redhat.com, dave@stgolabs.net, paulmck@kernel.org,
+	brauner@kernel.org, dhowells@redhat.com, hdanton@sina.com,
+	hughd@google.com, lokeshgidra@google.com, minchan@google.com,
+	jannh@google.com, shakeel.butt@linux.dev, souravpanda@google.com,
+	pasha.tatashin@soleen.com, klarasmodin@gmail.com,
+	richard.weiyang@gmail.com, corbet@lwn.net,
+	linux-doc@vger.kernel.org, linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org, kernel-team@android.com
+Subject: Re: [PATCH v9 10/17] refcount: introduce
+ __refcount_{add|inc}_not_zero_limited
+Message-ID: <Z4Kla2HSvJ8mI0Dz@casper.infradead.org>
+References: <20250111042604.3230628-1-surenb@google.com>
+ <20250111042604.3230628-11-surenb@google.com>
+ <20250111123900.643e4b49@pumpkin>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250111123900.643e4b49@pumpkin>
 
-From: Carlos Bilbao <carlos.bilbao.osdev@gmail.com>
+On Sat, Jan 11, 2025 at 12:39:00PM +0000, David Laight wrote:
+> I don't think the kernel compiles disable this optimisation.
 
-Update .mailmap to reflect my new (and final) primary email address,
-carlos.bilbao@kernel.org. This ensures consistent attribution in Git
-history. Also update my contact information in file
-Documentation/translations/sp_SP/index.rst to help contributors reach out
-for Spanish translations.
-
-Signed-off-by: Carlos Bilbao <carlos.bilbao@kernel.org>
----
- .mailmap                                   | 3 +++
- Documentation/translations/sp_SP/index.rst | 2 +-
- 2 files changed, 4 insertions(+), 1 deletion(-)
-
-diff --git a/.mailmap b/.mailmap
-index 5ff0e5d681e7..83837191affb 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -140,6 +140,9 @@ Cai Huoqing <cai.huoqing@linux.dev> <caihuoqing@baidu.com>
- Can Guo <quic_cang@quicinc.com> <cang@codeaurora.org>
- Carl Huang <quic_cjhuang@quicinc.com> <cjhuang@codeaurora.org>
- Carlos Bilbao <carlos.bilbao.osdev@gmail.com> <carlos.bilbao@amd.com>
-+Carlos Bilbao <carlos.bilbao@kernel.org> <carlos.bilbao.osdev@gmail.com>
-+Carlos Bilbao <carlos.bilbao@kernel.org> <carlos.bilbao@amd.com>
-+Carlos Bilbao <carlos.bilbao@kernel.org> <bilbao@vt.edu>
- Changbin Du <changbin.du@intel.com> <changbin.du@gmail.com>
- Changbin Du <changbin.du@intel.com> <changbin.du@intel.com>
- Chao Yu <chao@kernel.org> <chao2.yu@samsung.com>
-diff --git a/Documentation/translations/sp_SP/index.rst b/Documentation/translations/sp_SP/index.rst
-index aae7018b0d1a..2b50283e1608 100644
---- a/Documentation/translations/sp_SP/index.rst
-+++ b/Documentation/translations/sp_SP/index.rst
-@@ -7,7 +7,7 @@ Traducción al español
- 
- 	\kerneldocCJKoff
- 
--:maintainer: Carlos Bilbao <carlos.bilbao.osdev@gmail.com>
-+:maintainer: Carlos Bilbao <carlos.bilbao@kernel.org>
- 
- .. _sp_disclaimer:
- 
--- 
-2.43.5
-
+You're wrong.
 
