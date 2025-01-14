@@ -1,132 +1,94 @@
-Return-Path: <linux-doc+bounces-35198-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35202-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46C31A107B0
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jan 2025 14:25:40 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D89EA107E2
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jan 2025 14:34:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 703EA1888261
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jan 2025 13:25:43 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 35DE63A7B71
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jan 2025 13:34:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 22A00236ED1;
-	Tue, 14 Jan 2025 13:25:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 99D34232454;
+	Tue, 14 Jan 2025 13:34:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="jxOejWNy"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="eXfFNVAd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A53FE234D0B;
-	Tue, 14 Jan 2025 13:25:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BCD9232428;
+	Tue, 14 Jan 2025 13:34:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736861136; cv=none; b=g+Va4qCFDbd0EvfDx5UPFuNzCgRLy8OrqoftbfsWh6XVX+JX+MU4QF8JuUON439TbEkCKyyslcnUUsFm6J5fPCbVlFkiiex+jf6dny2Iq9TGZLqH5RrOnhatfsKUy4kZ5gSGrBQ9ccJY4F+nTt09Zttz+x93DkSOsRbmgJs7Hbw=
+	t=1736861643; cv=none; b=cTkAPzsE4nJqGeZZDvSSra+0rIrq26SUlhlfoZI4RbYhNCEBs5ija+JJ/C+T+O1oeoDNvKyOLZQ2VuAWT4vHyFRCLoJQ83g4DkPox58K5VjZhWeUv4J2645ccrXqk4wynppGWXdmWEgE7z8A9qbFLcsI9cIFVKOnZmHHd5F52Ls=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736861136; c=relaxed/simple;
-	bh=RJmrHncmAiYfQZgHBbGZ9N6pX/NJqX1TU++10eqVLQ4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ukBUYIuvDRbwHYLiPY5pU93H4pHi37rXWCaTJF6q/7QauzvqViTjU0VgVoa8zCVyC4R8OuRcVL+ABsUMMpoxtbHOC7fZjXKcFnF5Co1FELK4M5zSOKhE4mr0gejC1rkkxtWD3VDcj2advT23AAw+W3tO3ldg6tolEobFC61+SBI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=jxOejWNy; arc=none smtp.client-ip=117.135.210.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:Subject:Date:Message-ID:MIME-Version; bh=W1HRi
-	UHKkNK4KFvLch5WDTwcRDvo+NOPbJJW0YrzMOo=; b=jxOejWNyRUUQNiDaTtAGO
-	Ek5cxsEvB6UG1cF9+OQgqPX/W/A18Ad1puBOeT9Vn5JN6EezsXfI011poKU9PmuX
-	4DqqzC88n+oXWS93RlqwYa1ZuHftTGkgIkjO8qtyDBHrUEdmKiV9vBu23YRdtiSK
-	8VikMwRjCNSZg9BI3ZGkIQ=
-Received: from localhost.localdomain (unknown [])
-	by gzsmtp1 (Coremail) with SMTP id PCgvCgCn_E1RZYZnl71AAw--.33013S5;
-	Tue, 14 Jan 2025 21:24:15 +0800 (CST)
-From: Jiayuan Chen <mrpre@163.com>
-To: bpf@vger.kernel.org,
-	jakub@cloudflare.com,
-	john.fastabend@gmail.com
-Cc: netdev@vger.kernel.org,
-	martin.lau@linux.dev,
-	ast@kernel.org,
-	edumazet@google.com,
-	davem@davemloft.net,
-	dsahern@kernel.org,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	linux-kernel@vger.kernel.org,
-	song@kernel.org,
-	andrii@kernel.org,
-	mhal@rbox.co,
-	yonghong.song@linux.dev,
-	daniel@iogearbox.net,
-	xiyou.wangcong@gmail.com,
-	horms@kernel.org,
-	corbet@lwn.net,
-	eddyz87@gmail.com,
-	cong.wang@bytedance.com,
-	shuah@kernel.org,
-	mykolal@fb.com,
-	jolsa@kernel.org,
-	haoluo@google.com,
-	sdf@fomichev.me,
-	kpsingh@kernel.org,
-	linux-doc@vger.kernel.org,
-	Jiayuan Chen <mrpre@163.com>
-Subject: [PATCH bpf v6 3/3] strparser, docs: Add new callback
-Date: Tue, 14 Jan 2025 21:23:11 +0800
-Message-ID: <20250114132312.49407-4-mrpre@163.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20250114132312.49407-1-mrpre@163.com>
-References: <20250114132312.49407-1-mrpre@163.com>
+	s=arc-20240116; t=1736861643; c=relaxed/simple;
+	bh=p8xOQbT32szN6rTjjAXJTGWWqJummLcXEMxazfBMDF4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=mFYam/Pg6RTmSKaP+aGr7ada0M7RwXCFhzmVBNj+NSNm9Jbo8qRZIhMsMtu1tsguOKCpzNg4kFb6h2JOmnwuCbBOCegC4SsGnXrjwUx12sppY45mNwFKXz3UNq5NGfpjLpo34t9EQ2k3sKP4vBoMTwNdPBNjR208GoBvWUuxsOo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=eXfFNVAd; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CEC31C4CEDD;
+	Tue, 14 Jan 2025 13:34:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1736861642;
+	bh=p8xOQbT32szN6rTjjAXJTGWWqJummLcXEMxazfBMDF4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=eXfFNVAdTLJC/ljlk3utlbs7/5csWvsodDEothJicq1sdCxwAkIwk4eu6l1kt9/kv
+	 0z7SIGHnejfpiZkzEOJgRzbaa2xm12Iq0AuCHVJ2bFV9pFZq3DhC1fmKxzxhsxd0Ma
+	 C2FigfxKzQQQeu2N1H0cPlhUTI+KOOXf4iEX11k4=
+Date: Tue, 14 Jan 2025 08:34:01 -0500
+From: Konstantin Ryabitsev <konstantin@linuxfoundation.org>
+To: Brendan Jackman <jackmanb@google.com>
+Cc: Andy Whitcroft <apw@canonical.com>, Joe Perches <joe@perches.com>, 
+	Dwaipayan Ray <dwaipayanray1@gmail.com>, Lukas Bulwahn <lukas.bulwahn@gmail.com>, 
+	Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org, workflows@vger.kernel.org, 
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH 1/2] checkpatch: Add support for Checkpatch-ignore patch
+ footer
+Message-ID: <5abiddu5zgxdmotauxnohnk25zyzd3cbjlfgskejk5ta7arzk2@pjpofoy7pcce>
+References: <20250113-checkpatch-ignore-v1-0-63a7a740f568@google.com>
+ <20250113-checkpatch-ignore-v1-1-63a7a740f568@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:PCgvCgCn_E1RZYZnl71AAw--.33013S5
-X-Coremail-Antispam: 1Uf129KBjvdXoWrKryDXFyruFy5GF4rAw17trb_yoWkCrcEka
-	yS9Fs5GFykZF43KayUua1kWr93GrWI9r18ZF4rtFZxC348XrykXF95Jrn5Zr18WrW3ury3
-	K3s5JFyfJr129jkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7xRNsjj7UUUUU==
-X-CM-SenderInfo: xpus2vi6rwjhhfrp/1tbiDxfUp2eGWhbp4gABsM
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20250113-checkpatch-ignore-v1-1-63a7a740f568@google.com>
 
-sockmap with strparser need customized read operations to fix copied_seq
-error.
+On Mon, Jan 13, 2025 at 04:04:22PM +0000, Brendan Jackman wrote:
+> Checkpatch sometimes has false positives. This makes it less useful for
+> automatic usage: tools like b4 [0] can run checkpatch on all of your
+> patches and give you a quick overview. When iterating on a branch, it's
+> tiresome to manually re-check that any errors are known false positives.
+> 
+> This patch adds a feature to record in the commit message that a patch
+> might produce a certain checkpatch error, and that this is an expected
+> false positive. Recording this information in the patch itself can also
+> highlight it to reviewers, so they can make a judgment as to whether
+> it's appropriate to ignore.
+> 
+> To avoid significant reworks to the Perl code, this is implemented by
+> mutating a global variable while processing each patch. (The variable
+> name refers to a patch as a "file" for consistency with other code).
+> 
+> This feature is immediately adopted for this commit itself, which
+> falls afoul of EMAIL_SUBJECT due to the word "checkpatch" appearing in
+> the "Checkpatch-ignore" reference in the title - a good example of a
+> false positive.
+> 
+> [0] b4 - see "--check" arg
+>     https://b4.docs.kernel.org/en/latest/contributor/prep.html
+> 
+> Checkpatch-ignore: EMAIL_SUBJECT
+> Signed-off-by: Brendan Jackman <jackmanb@google.com>
 
-Signed-off-by: Jiayuan Chen <mrpre@163.com>
----
- Documentation/networking/strparser.rst | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+Do we really want this to become part of the permanent commit message? I'm
+pretty sure this won't go over well with many.
 
-diff --git a/Documentation/networking/strparser.rst b/Documentation/networking/strparser.rst
-index 6cab1f74ae05..e41c18eee2f4 100644
---- a/Documentation/networking/strparser.rst
-+++ b/Documentation/networking/strparser.rst
-@@ -112,7 +112,7 @@ Functions
- Callbacks
- =========
- 
--There are six callbacks:
-+There are seven callbacks:
- 
-     ::
- 
-@@ -182,6 +182,15 @@ There are six callbacks:
-     the length of the message. skb->len - offset may be greater
-     then full_len since strparser does not trim the skb.
- 
-+    ::
-+
-+	int (*read_sock)(struct strparser *strp, read_descriptor_t *desc,
-+                     sk_read_actor_t recv_actor);
-+
-+    read_sock is called when the user specify it, allowing for customized
-+    read operations. If the callback is not set (NULL in strp_init) native
-+    read_sock operation of the socket is used.
-+
-     ::
- 
- 	int (*read_sock_done)(struct strparser *strp, int err);
--- 
-2.43.5
-
+-K
 
