@@ -1,177 +1,186 @@
-Return-Path: <linux-doc+bounces-35365-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35368-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DA7BA124DE
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jan 2025 14:36:36 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BCE1A124EA
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jan 2025 14:37:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D38883A64F9
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Jan 2025 13:36:29 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8299F188C9D5
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Jan 2025 13:37:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E5378243851;
-	Wed, 15 Jan 2025 13:35:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="l0FzLp5D"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D4ED244F9F;
+	Wed, 15 Jan 2025 13:35:47 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28AB0242264;
-	Wed, 15 Jan 2025 13:35:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 093F02442C9;
+	Wed, 15 Jan 2025 13:35:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736948141; cv=none; b=nXQYiaWnXU3ke69VsbObn0cvhDn3cdTgpoK5TpPfRhMSBKJlZxEpdxU5uhwoJy5BBEzsznZvltjHkwgT1rbhZkgR4GqW0m2AOLJL8hMJIA8F358ZsGXAHE6KW9EaTVBDHfSdkkG6GolbeWGcavn8wf6TUXqNd9j6th/LJmKQyzU=
+	t=1736948147; cv=none; b=L3OdYjtYXBtvbJyd6pyycWsTGMwp0HCEbG1gzcl/3KYKBSEeh6+odsxBH3Cx9r64HOjSnTJ9wsmLq8QSdQi1UKwDn12RmCeoz4OISpkJgpSjx5qzhxJ3lST23M0xllSvqXdhJGamYQAylYz+fcnU5WaHLdAHIhXLBUBezTcsD6E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736948141; c=relaxed/simple;
-	bh=CKb3gP3I6xyWDSCtbWc0xKBFHwP9Wt1604HljACdQUs=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=FqiwnpJomRfGKsXPV5m6E8Yx9sPrzTOH+Qzh8Y0FIaNg+CrzGgJ/sHkb7VxojVwSZ/I++zL652Kgky8/u0EydXAUGg7cfxEVST+WqPr9zylkh43FL693aJHAozt/WA1syAQDKyUihZr2QTnYeeK6AER+LO7q6lpisvJG/iJ//QE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=l0FzLp5D; arc=none smtp.client-ip=148.163.135.77
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
-Received: from pps.filterd (m0167088.ppops.net [127.0.0.1])
-	by mx0a-00128a01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50FBCjpU023909;
-	Wed, 15 Jan 2025 08:35:24 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=DKIM; bh=CKb3g
-	P3I6xyWDSCtbWc0xKBFHwP9Wt1604HljACdQUs=; b=l0FzLp5DiuR4pbfJ4Hx5K
-	GTIbQXJi9gbhFDieowTIqLL8asBV3jOxZqDm3B/mZweM0z4s1CvPI3khRA1ZTLP8
-	ke09h0ObFjVumfv0yAjHAHsoaJHCSOUqeisHPw3uA8KLs2D385ywc1z83QrHgi8G
-	K2AREPEA2UbaLSUtrjLv7Bgj1g9KOVTtw34y1uu/vvq4Ij8LMK0Lw0xxSMD9j5Ez
-	TCPxUILL2yBZ4A26d8EWdP9Xo1FYtKxSp+nqcRvh9Z+RrU9mlty41Ky+SzLVJ/8t
-	Lz9OIl9XQ/hg+Oo5YMdhxGUQ6qbvv0jBfDkgl2iTAK2y0XUFoQFls7TCCfbrhPos
-	w==
-Received: from nwd2mta3.analog.com ([137.71.173.56])
-	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 446bxq0jk7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 15 Jan 2025 08:35:24 -0500 (EST)
-Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
-	by nwd2mta3.analog.com (8.14.7/8.14.7) with ESMTP id 50FDZMfY046718
-	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 15 Jan 2025 08:35:22 -0500
-Received: from ASHBMBX9.ad.analog.com (10.64.17.10) by ASHBMBX8.ad.analog.com
- (10.64.17.5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.14; Wed, 15 Jan
- 2025 08:35:22 -0500
-Received: from ASHBMBX9.ad.analog.com ([fe80::47f5:af96:747a:164e]) by
- ASHBMBX9.ad.analog.com ([fe80::47f5:af96:747a:164e%20]) with mapi id
- 15.02.0986.014; Wed, 15 Jan 2025 08:35:22 -0500
-From: "Budai, Robert" <Robert.Budai@analog.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-CC: "Sa, Nuno" <Nuno.Sa@analog.com>,
-        "Gradinariu, Ramona"
-	<Ramona.Gradinariu@analog.com>,
-        "Miclaus, Antoniu"
-	<Antoniu.Miclaus@analog.com>,
-        Lars-Peter Clausen <lars@metafoo.de>,
-        "Hennerich, Michael" <Michael.Hennerich@analog.com>,
-        Jonathan Cameron
-	<jic23@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski
-	<krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet
-	<corbet@lwn.net>,
-        Alex Lanzano <lanzano.alex@gmail.com>,
-        "linux-iio@vger.kernel.org" <linux-iio@vger.kernel.org>,
-        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-Subject: RE: [PATCH v4 4/6] dt-bindings: iio: Add adis16550 bindings
-Thread-Topic: [PATCH v4 4/6] dt-bindings: iio: Add adis16550 bindings
-Thread-Index: AQHbYzNREcgyV+0AFUmPycm4yeoemLMUu+AAgAL/8lA=
-Date: Wed, 15 Jan 2025 13:35:22 +0000
-Message-ID: <6ba74e1ea2a44c7f9a4ea74b2dce1118@analog.com>
-References: <20250110074254.38966-1-robert.budai@analog.com>
- <20250110074254.38966-5-robert.budai@analog.com>
- <y54kfnkbuugvsgfzufhk3mmwmmzbko47fg3jxw36sefzxaxcz6@znigvgdcljeq>
-In-Reply-To: <y54kfnkbuugvsgfzufhk3mmwmmzbko47fg3jxw36sefzxaxcz6@znigvgdcljeq>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-dg-ref: =?utf-8?B?UEcxbGRHRStQR0YwSUdGcFBTSXdJaUJ1YlQwaVltOWtlUzUwZUhRaUlIQTlJ?=
- =?utf-8?B?bU02WEhWelpYSnpYSEppZFdSaGFWeGhjSEJrWVhSaFhISnZZVzFwYm1kY01E?=
- =?utf-8?B?bGtPRFE1WWpZdE16SmtNeTAwWVRRd0xUZzFaV1V0Tm1JNE5HSmhNamxsTXpW?=
- =?utf-8?B?aVhHMXpaM05jYlhObkxXTmpPVEJqTldKakxXUXpNelF0TVRGbFppMWlZakF5?=
- =?utf-8?B?TFdSak1XSmhNVGd4TVROalpWeGhiV1V0ZEdWemRGeGpZemt3WXpWaVpTMWtN?=
- =?utf-8?B?ek0wTFRFeFpXWXRZbUl3TWkxa1l6RmlZVEU0TVRFelkyVmliMlI1TG5SNGRD?=
- =?utf-8?B?SWdjM285SWpJNU56UWlJSFE5SWpFek16Z3hOREUwTlRJd05qRTROVEl4TVNJ?=
- =?utf-8?B?Z2FEMGlVWEJqUWtsU2VrWm1kamRLWm0xR0t6aFdVSGxEVUZaRFlXUmpQU0ln?=
- =?utf-8?B?YVdROUlpSWdZbXc5SWpBaUlHSnZQU0l4SWlCamFUMGlZMEZCUVVGRlVraFZN?=
- =?utf-8?B?VkpUVWxWR1RrTm5WVUZCUkdkRVFVRkVOemRQSzA5UlYyWmlRVlJOVVd4UlRp?=
- =?utf-8?B?dHBlR2RXVFhoRFZrRXpOa3hIUWxWRVFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVoQlFVRkJSR0ZCVVVGQlUyZEpRVUZQTkVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVVZCUVZGQlFrRkJRVUZtY0hsalYyZEJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGS05FRkJRVUpvUVVkUlFXRlJRbVpCU0UxQldsRkNha0ZJVlVGalow?=
- =?utf-8?B?SnNRVVk0UVdOQlFubEJSemhCWVdkQ2JFRkhUVUZrUVVKNlFVWTRRVnBuUW1o?=
- =?utf-8?B?QlIzZEJZM2RDYkVGR09FRmFaMEoyUVVoTlFXRlJRakJCUjJ0QlpHZENiRUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJSVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZuUVVGQlFVRkJibWRCUVVGSFJVRmFRVUp3UVVZNFFXTjNRbXhC?=
- =?utf-8?B?UjAxQlpGRkNlVUZIVlVGWWQwSjNRVWhKUVdKM1FuRkJSMVZCV1hkQ01FRklU?=
- =?utf-8?B?VUZZZDBJd1FVZHJRVnBSUW5sQlJFVkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVZGQlFVRkJRVUZCUVVGRFFVRkJRVUZCUTJWQlFVRkJXVkZDYTBGSGEw?=
- =?utf-8?B?RllkMEo2UVVkVlFWbDNRakZCU0VsQldsRkNaa0ZJUVVGalowSjJRVWR2UVZw?=
- =?utf-8?B?UlFtcEJTRkZCWTNkQ1prRklVVUZoVVVKc1FVaEpRVTFuUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVSkJRVUZCUVVGQlFVRkJTVUZCUVVGQlFVODBRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRMEZCUVVGQlFVRkJRVUZKUVVGQlFVRkJRVUZCUVdkQlFVRkJR?=
- =?utf-8?B?VUZCUVVGNlowRkJRVUZOUVVGQlFrOUJRVUZCUVVGQlFVRkhSVUZhUVVKd1FV?=
- =?utf-8?Q?Y4QWN3?=
-x-dg-rorf: true
-x-dg-refone: QmxBR01BZFFCeUFHVUFYd0J3QUhJQWJ3QnFBR1VBWXdCMEFITUFYd0JtQUdFQWJBQnpBR1VBWHdCbUFHOEFjd0JwQUhRQWFRQjJBR1VBQUFBOEFBQUFBQUFBQUdFQVpBQnBBRjhBY3dCbEFHTUFkUUJ5QUdVQVh3QndBSElBYndCcUFHVUFZd0IwQUhNQVh3QjBBR2tBWlFCeUFERUFBQUE4QUFBQUFBQUFBR0VBWkFCcEFGOEFjd0JsQUdNQWRRQnlBR1VBWHdCd0FISUFid0JxQUdVQVl3QjBBSE1BWHdCMEFHa0FaUUJ5QURJQUFBQT0iLz48L21ldGE+
-x-adiruleop-newscl: Rule Triggered
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+	s=arc-20240116; t=1736948147; c=relaxed/simple;
+	bh=0oHhKbeC5HsGd9axRgZ+a+1v3+X8oAJistl2Zqr0Tnw=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=Q0hzLzwzQZ1kxAC2/bXEKTvOV7M2IwEoSwCUjRiTyiTupLudUk9xFR+IqlURaT5NmsTYdTNCKBCmpxmymxk5xP4jxMqaHJEOVzajQp7SNPh0lBXDMAvnakeBlHDU6ku5yxm0rnOIA9Rsy/o5w4MSRftffER+RPecGjGI9vL4PVk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.208.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-5d4e2aa7ea9so13357353a12.2;
+        Wed, 15 Jan 2025 05:35:43 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736948142; x=1737552942;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=hxJoZ54lWmY7y03qGdohZy+9vBhB4XRFoa82rjM9rKk=;
+        b=ebdrYflHbzu+ZScAYAs0y/tXwH+WHjpz3Pxp00Hy2mr2CCZctE8rw1O7aqnTTwpjU0
+         e8Ykda+iE1vpRPyIQJgmDSWbC2tpzo+ZwBdnwAOWOw1q9TAW6PVM0A3CUulnhgNT1ohE
+         89WIpTFbLqWNI5eRhjPahzlVRSy5b5xWAKbCxj7wcZRzJuO9B7dRxq+VfeoUnmHo/p2d
+         ZK/pU/+cHkHYheNMe5DlsCGLYU5j7nQiN+COVVh2BTahjy+fI1T/F5fQ5DWvgE2Vn/lg
+         /3diNFpzkkM2K3FARw05ixKYVWsUBCCEJ/esyh7ynuOH96iQoZRHDf99zwdDQx7dKc1P
+         da0Q==
+X-Forwarded-Encrypted: i=1; AJvYcCVV3FBzlShXTb9I//HNFe0oRQ+tPJbLUOYe0u/uHK0/KVgyo4txsPlXJ5oFEtoc8OWBb2DSGhZgKBM5mWk3ApU9@vger.kernel.org, AJvYcCW4QOJ0UIlLBqZwPyHeFfwSRTuzah8C9wxT19WDPToXX8E6I0rMpAHNHK+kMQ26/cHHciD9YHrLQgmug7va@vger.kernel.org, AJvYcCWvLC0CSJcbg0ZjwU7VjhZLTuTzdY8b2ChTh+GUZRWn524KjiDfrM8YVRhGbUTYFhZ4XhEduIo4lBw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyFzthCOsOIOW5hH+vG5F7J0q7UfmfJ3qCFjZVaLUQshc4gITf3
+	UZIV3B3Vk0inbGpARhqbRiAf8wtv3hdpUWim5JHClQE3kUeGfUVT
+X-Gm-Gg: ASbGncuY2Vggy1iCRTf9KwOyC0JF8HIPUB9oLvPDNWqty1yDxUU8jl0adh4kgOkHjrb
+	QxsSoN8nuztTDugVI6OH5RoXfljcUZElqB3ixlNBHkpZdEp8FLHLbXskA8pLtwephfikXDzR7bZ
+	bTXk1LjWSnCZ0HPxKMzrK32sBFSyNPY6K/jWl1nk38MEKR1slOTFtB9uY0mBaGRBll5Xx4fucr5
+	MzEM28gmwxPEZa7SxbjuUk6OSRpO2/wRym0wbof2p7/osTc
+X-Google-Smtp-Source: AGHT+IHkbMdfObs31g/uxBDWJkg3DCJ8vK/UdUPgmYZzzc/BSJGQRpU0xtCIkd0BMW5M3kic6vM1VA==
+X-Received: by 2002:a17:907:3f9b:b0:aac:1e96:e7cf with SMTP id a640c23a62f3a-ab2ab6c6720mr2639494066b.20.1736948142064;
+        Wed, 15 Jan 2025 05:35:42 -0800 (PST)
+Received: from localhost ([2a03:2880:30ff:73::])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab33d6254ffsm194073066b.6.2025.01.15.05.35.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 15 Jan 2025 05:35:41 -0800 (PST)
+From: Breno Leitao <leitao@debian.org>
+Date: Wed, 15 Jan 2025 05:35:22 -0800
+Subject: [PATCH net-next v2 5/5] netconsole: docs: Add documentation for
+ CPU number auto-population
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Proofpoint-GUID: FouZGSm6xAwBM4kPB8fY67oudxkgXGZb
-X-Proofpoint-ORIG-GUID: FouZGSm6xAwBM4kPB8fY67oudxkgXGZb
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-15_05,2025-01-15_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011 suspectscore=0
- phishscore=0 mlxlogscore=999 priorityscore=1501 impostorscore=0
- lowpriorityscore=0 malwarescore=0 spamscore=0 bulkscore=0 adultscore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2411120000 definitions=main-2501150103
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250115-netcon_cpu-v2-5-95971b44dc56@debian.org>
+References: <20250115-netcon_cpu-v2-0-95971b44dc56@debian.org>
+In-Reply-To: <20250115-netcon_cpu-v2-0-95971b44dc56@debian.org>
+To: Andrew Lunn <andrew+netdev@lunn.ch>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <shuah@kernel.org>
+Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+ Breno Leitao <leitao@debian.org>, kernel-team@meta.com, max@kutsevol.com, 
+ thepacketgeek@gmail.com
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3163; i=leitao@debian.org;
+ h=from:subject:message-id; bh=0oHhKbeC5HsGd9axRgZ+a+1v3+X8oAJistl2Zqr0Tnw=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBnh7mjnDag4eJcR1nVn8Jbgr8LMjboW0P5wsfwy
+ aSp+YMMyCuJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCZ4e5owAKCRA1o5Of/Hh3
+ bczFD/0QNg2h1j+sLpHXLQ4IvAtAtrNtBi612SGfuWrHIHVGzFejxKTwJghwqGDUg2VjqNypy8a
+ nBHMPr3olE7nzhdTWcdUGxdsXi3nyjOPkK5f7k5XoUPK3LGdQPppgGb6/OhE1+nyzVcktSuFNSE
+ vbKeGIAfJOEQObqtXvShf7f4H7Ry2Jzljq5fOG1WCibK+NfnGu0zPdE9qXG5Hr4ulneBOxR0nQY
+ 4mWbfWlafW5qKtcgI2LxJMpduLabYOPWrTrsAOYQUo4chcxj5Q1/u9kTKjfMzUZ/AjKkGeikZgH
+ Mlqg/w/s75M4iTrNg72IRk4WLSay6PSzHeiWBiwGQ8WYxd+SNKHaA+sn2C9D0JXBYa/Z56ovOrM
+ tv5m19brudoy2npvbV/lOnzVvXsxocst5TVqrn8+6oybRivekRuMB6y/B7Ydzrenbae6FG3CX0g
+ HITfZIsfXYxtf7N8BOFr2AyrY5aknnlfviIJpFajV9emQRzxGSCdhgDGj3LYuciii8ung4AHlB4
+ jTQts/+BcS6o7ikQeVv5PldMxL41Njod4yp9RDF5KKORx000vyLTiFpcIqYIJwoGRJxnpyeX6WM
+ 1J8MmbVZSIUBj1aEp0P/OIg7ecg/ezOtYpnfNcZe4dYh7pouHrl1De4RgTAOoznQedXcOSv1yRW
+ a/diSrNDPrmytSQ==
+X-Developer-Key: i=leitao@debian.org; a=openpgp;
+ fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS3J6eXN6dG9mIEtvemxv
-d3NraSA8a3J6a0BrZXJuZWwub3JnPg0KPiBTZW50OiBNb25kYXksIEphbnVhcnkgMTMsIDIwMjUg
-MTA6NDQgQU0NCj4gVG86IEJ1ZGFpLCBSb2JlcnQgPFJvYmVydC5CdWRhaUBhbmFsb2cuY29tPg0K
-PiBDYzogU2EsIE51bm8gPE51bm8uU2FAYW5hbG9nLmNvbT47IEdyYWRpbmFyaXUsIFJhbW9uYQ0K
-PiA8UmFtb25hLkdyYWRpbmFyaXVAYW5hbG9nLmNvbT47IE1pY2xhdXMsIEFudG9uaXUNCj4gPEFu
-dG9uaXUuTWljbGF1c0BhbmFsb2cuY29tPjsgTGFycy1QZXRlciBDbGF1c2VuIDxsYXJzQG1ldGFm
-b28uZGU+Ow0KPiBIZW5uZXJpY2gsIE1pY2hhZWwgPE1pY2hhZWwuSGVubmVyaWNoQGFuYWxvZy5j
-b20+OyBKb25hdGhhbiBDYW1lcm9uDQo+IDxqaWMyM0BrZXJuZWwub3JnPjsgUm9iIEhlcnJpbmcg
-PHJvYmhAa2VybmVsLm9yZz47IEtyenlzenRvZiBLb3psb3dza2kNCj4gPGtyemsrZHRAa2VybmVs
-Lm9yZz47IENvbm9yIERvb2xleSA8Y29ub3IrZHRAa2VybmVsLm9yZz47IEpvbmF0aGFuDQo+IENv
-cmJldCA8Y29yYmV0QGx3bi5uZXQ+OyBBbGV4IExhbnphbm8gPGxhbnphbm8uYWxleEBnbWFpbC5j
-b20+OyBsaW51eC0NCj4gaWlvQHZnZXIua2VybmVsLm9yZzsgZGV2aWNldHJlZUB2Z2VyLmtlcm5l
-bC5vcmc7IGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5vcmc7DQo+IGxpbnV4LWRvY0B2Z2VyLmtl
-cm5lbC5vcmcNCj4gU3ViamVjdDogUmU6IFtQQVRDSCB2NCA0LzZdIGR0LWJpbmRpbmdzOiBpaW86
-IEFkZCBhZGlzMTY1NTAgYmluZGluZ3MNCj4gDQo+IFtFeHRlcm5hbF0NCj4gDQo+IE9uIEZyaSwg
-SmFuIDEwLCAyMDI1IGF0IDA5OjQyOjUyQU0gKzAyMDAsIFJvYmVydCBCdWRhaSB3cm90ZToNCj4g
-PiArbWFpbnRhaW5lcnM6DQo+ID4gKyAgLSBOdW5vIFNhIDxudW5vLnNhQGFuYWxvZy5jb20+DQo+
-ID4gKyAgLSBSYW1vbmEgR3JhZGluYXJpdSA8cmFtb25hLmdyYWRpbmFyaXVAYW5hbG9nLmNvbT4N
-Cj4gPiArICAtIEFudG9uaXUgTWljbGF1cyA8YW50b25pdS5taWNsYXVzQGFuYWxvZy5jb20+DQo+
-ID4gKw0KPiA+ICtwcm9wZXJ0aWVzOg0KPiA+ICsgIGNvbXBhdGlibGU6DQo+ID4gKyAgICBlbnVt
-Og0KPiA+ICsgICAgICAtIGFkaSxhZGlzMTY1NTANCj4gPiArICAgICAgLSBhZGksYWRpczE2NTUw
-dw0KPiANCj4gV2hlcmUgaXMgdGhlIGFuc3dlciBmb3IgbXkgcXVlc3Rpb25zIGF0IHYxPyBObyBy
-ZXNwb25zZXMgb24gZW1haWwsDQo+IG5vdGhpbmcgaW1wcm92ZWQgaW4gdGhlIHBhdGNoc2V0LiBH
-byBiYWNrIHRvIG15IGNvbW1lbnRzIGFuZCByZXNwb25kIHRvDQo+IHRoZW0gb3IgaW1wbGVtZW50
-IHRoZW0uDQo+IA0KW1JvYmVydCBCdWRhaQ==
+Update the netconsole documentation to explain the new feature that
+allows automatic population of the CPU number.
+
+The key changes include introducing a new section titled "CPU number
+auto population in userdata", explaining how to enable the CPU number
+auto-population feature by writing to the "populate_cpu_nr" file in the
+netconsole configfs hierarchy.
+
+This documentation update ensures users are aware of the new CPU number
+auto-population functionality and how to leverage it for better
+demultiplexing and visibility of parallel netconsole output.
+
+Signed-off-by: Breno Leitao <leitao@debian.org>
+---
+ Documentation/networking/netconsole.rst | 45 +++++++++++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
+
+diff --git a/Documentation/networking/netconsole.rst b/Documentation/networking/netconsole.rst
+index 94c4680fdf3e7e1a0020d11b44547acfd68072a5..bc9ccebdae7adadd7c57aef20a726536d7ab3173 100644
+--- a/Documentation/networking/netconsole.rst
++++ b/Documentation/networking/netconsole.rst
+@@ -17,6 +17,8 @@ Release prepend support by Breno Leitao <leitao@debian.org>, Jul 7 2023
+ 
+ Userdata append support by Matthew Wood <thepacketgeek@gmail.com>, Jan 22 2024
+ 
++Sysdata append support by Breno Leitao <leitao@debian.org>, Jan 15 2025
++
+ Please send bug reports to Matt Mackall <mpm@selenic.com>
+ Satyam Sharma <satyam.sharma@gmail.com>, and Cong Wang <xiyou.wangcong@gmail.com>
+ 
+@@ -238,6 +240,49 @@ Delete `userdata` entries with `rmdir`::
+ 
+    It is recommended to not write user data values with newlines.
+ 
++CPU number auto population in userdata
++--------------------------------------
++
++Inside the netconsole configfs hierarchy, there is a file called
++`cpu_nr` under the `userdata` directory. This file is used to enable or disable
++the automatic CPU number population feature. This feature automatically
++populate the CPU number that is sending the message.
++
++To enable the CPU number auto-population::
++
++  echo 1 > /sys/kernel/config/netconsole/target1/userdata/cpu_nr
++
++When this option is enabled, the netconsole messages will include an additional
++line in the userdata field with the format `cpu=<cpu_number>`. This allows the
++receiver of the netconsole messages to easily differentiate and demultiplex
++messages originating from different CPUs, which is particularly useful when
++dealing with parallel log output.
++
++Example::
++
++  echo "This is a message" > /dev/kmsg
++  12,607,22085407756,-;This is a message
++   cpu=42
++
++In this example, the message was sent by CPU 42.
++
++.. note::
++
++   If the user has set a conflicting `cpu` key in the userdata dictionary,
++   both keys will be reported, with the kernel-populated entry appearing after
++   the user one. For example::
++
++     # User-defined CPU entry
++     mkdir -p /sys/kernel/config/netconsole/target1/userdata/cpu
++     echo "1" > /sys/kernel/config/netconsole/target1/userdata/cpu/value
++
++   Output might look like::
++
++     12,607,22085407756,-;This is a message
++      cpu=1
++      cpu=42    # kernel-populated value
++
++
+ Extended console:
+ =================
+ 
+
+-- 
+2.43.5
+
 
