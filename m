@@ -1,139 +1,159 @@
-Return-Path: <linux-doc+bounces-35455-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35457-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB346A13B3E
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2025 14:52:55 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7149AA13BB0
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2025 15:08:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id E3F08188C446
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2025 13:52:47 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F03563A9436
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2025 14:07:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1757D22A807;
-	Thu, 16 Jan 2025 13:52:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61A1722B594;
+	Thu, 16 Jan 2025 14:07:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Nj0mcexA"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="IhR5O/2s"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7123C1DED53;
-	Thu, 16 Jan 2025 13:52:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.51
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 881FF3BBC5;
+	Thu, 16 Jan 2025 14:07:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737035542; cv=none; b=OjBKiCfFQoRNySVPLqv8Ys3qyz1RylKC3JTV4JwdeeX2qpsx4O9F1BIGdfSqNsortD28TNRo70vDhkDIfxxoTuGKzO7xKiEExVE9JqL2r9mo3Xsl+y6gRG6+EAdw4Jh2f9LQkGKhkdikrD4cg9WEiPZNKUBpEOzkorPTtioN7ZY=
+	t=1737036473; cv=none; b=hlZ6wWimzptHD2cUA5ThLhzdoqDVmJOGv/Z2SMzjaqymC4CCpt2BgyziDqUKSNuJYs3rzHF9iBjiWUBV3kL1gh9Jumu7JBOgQ1QvDnsoXQK5BhBRRozasHLmi+Y47BhK78ARjBP7KQA1CGh4wlIe+KcmyFAw5J79vmIFi0ED8WA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737035542; c=relaxed/simple;
-	bh=oFsxddu5kZO0xWK2yWmbMbJVxyC9VH5e8OAEgQt8uxo=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=T2zWYocUhMJu6/yOK9bnPe0CK2/cxdnbAaqUR92GaZ5ea0/sNxJ/P6z1EJjnB6YOKvELwgTGuKaut1dWVUW7Y3T/uZNIj5tw78s+OiNNgYDD23Y7GaaJRFsMPF73tyfXsCoJo5pNkp8DTaS1/c3+LJ5c/ixCr116HNgTyMaSUlc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Nj0mcexA; arc=none smtp.client-ip=209.85.160.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-29e5c0c46c3so593699fac.3;
-        Thu, 16 Jan 2025 05:52:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737035538; x=1737640338; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JuO96IWempVkNU1KLyvro2vFbhpa/9E+R+coBfMKMxU=;
-        b=Nj0mcexAXKPE5nlIpfy1Ke4a1IBaqmH1QH9ikfRsIMfe0XLtacIk4ASR1cnbfnii3O
-         Ae73qsToFq6wKlDphX5eVdFk5QE5Tpx4tREhV4GLCNHQmijPDHgAWe6CnXP+NQksf6cR
-         Iat/+ruSPQejP3P+BoXNfiYvkHM7BHUvII+eLzv0pdqVMOwr1cMTJSfFLDBg6gsOVE6A
-         i2ckhxsv3ZeClcUvdfasz+Up1Bdve/SqwXRo8ca8dR5fJQ/33PiUxJKQMs6Jfo8YcPtJ
-         G/htRrYerto/YR65PNazgzlGGFXWAJMxEmWY8I3ch9cKGf4GFKZUgn6uzBtwyshYCkfw
-         cjkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737035538; x=1737640338;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JuO96IWempVkNU1KLyvro2vFbhpa/9E+R+coBfMKMxU=;
-        b=kGPyqDeWLBBMgPou//Dc5MAzmsVALtnb2RC9oxB5TVAkWjWHGgprLfXIl0juRbB5iY
-         USv+EvjuggqC2VWdzdiL54NG80uVBIcM73MWm9vzqTpYo7Qco8B0LVZ1DbRtA7gg9Lk+
-         5kaEEfzlznqMhatPIuG3ex7XcBNi11xjmC+k8e8oXTKFdD78bov5Qt8D0PEuc8diMK7J
-         zCtdfxnQCoVY/TanHvIYXPQHMpriNDEgcpY220cjup8XVgsH60dehBewhEM+Cfm8Jwds
-         KJyK9+7SNH882y2cK1XllyKP270cOgMkE/z5DZWMe+6ubIsqyElufZkBn3GeIG1itNBn
-         9d9w==
-X-Forwarded-Encrypted: i=1; AJvYcCU+/RTgrAEA8ws1y4MbcfPE1U702GfoHYzaaZnbvKbe1Ng3kgRe+H10anPgjnLmG1UA1VKnaDIt17Ef@vger.kernel.org, AJvYcCU/DYTYi1webJKKUYDLTHEqIDayO0Yk8ts756I2Xadtj5OPXWfMkeqvyFZpEWiqi+Oh7tnXWA/2y9xX1HSG@vger.kernel.org, AJvYcCWN+ym36Xawx1DCeCyKhLE9YagR0eEhIhG85hl4iOjknifudxpARxZ71hBufb+jEL6zB50wkPmVg5W1@vger.kernel.org, AJvYcCXjFipQpU8SmVJmq3OpXpLZpV03K0zf1L47/A2yLNmUWyMsGNVYIw7+KRQflynoUSd/e4m0TKu0UqA5iN0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzuVB0/tqXQhyE7sQh4V4paGbvRigNnU+ZV335JadS4ulOn+VCZ
-	oqIf52ryc1iMtfSOnqMb1jybUqAGHwo3VheuyLsyDPSe6nBigURPVDVpwgUqVgei8xYxG8Fzzid
-	T68Us+eDADiQ7M6k9Th/SD+72+vM=
-X-Gm-Gg: ASbGncu+Uc3EEChmwi7VpbHpAca5pfXvMZ5UuflUyCp0Fk36dtKKb4FD4vBKxgp6lu0
-	s/zRwUxdVMQhztJb18o7O32Z0KNgkpMF9Yfa2/gY=
-X-Google-Smtp-Source: AGHT+IE5l0Ts1eqkJ/aNEag10ptSbJFKWLRlqm0WMeaZdvqjpd3aVLCDtoKkCuHKAniNC7LyGAPudsEo0Km9VO/GfpA=
-X-Received: by 2002:a05:6870:fe92:b0:29e:6814:19d with SMTP id
- 586e51a60fabf-2aa065226a5mr20148132fac.9.1737035538404; Thu, 16 Jan 2025
- 05:52:18 -0800 (PST)
+	s=arc-20240116; t=1737036473; c=relaxed/simple;
+	bh=qDDszGLFZbkocWudTbx04OroDq+KUvoNCTQGknbvHvo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=MD22rRfkk84uJtUBvUO1jxkpBMJS8i6z/kO8pjeI1ABlJYEGqc+tUyw/I/pyX9FpfRIPsCPQs82J8vbdbgmz7tZGzbrD+c7swEwtWl/kfeMnLyrQjcH5OrX+2bRHyhem+HrIIdt1fE0gHbNm/hnLDDinyLHmapKI5MtsCFx9TMI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=IhR5O/2s; arc=none smtp.client-ip=220.197.31.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:Subject:Date:Message-ID:MIME-Version; bh=NBocW
+	ZCLvopgnMePJRakkB0MKYnFNzqXan9lXnHlZjE=; b=IhR5O/2s51aftDVwCswFF
+	xp1Ec4Fw2HLFUcLa7olpjt6np144C/8mYwGbWN0BPjW0eS0N+WvPRmFRP/jYjkDq
+	EstF/5C9KAoex+f6ChSLvmNZwTecN/VUV1Pll8ws97EiDhsbsAejJ1RhlR/0U8QA
+	BuK/HsOgGP2IfmPtB9OayI=
+Received: from localhost.localdomain (unknown [])
+	by gzga-smtp-mtada-g1-2 (Coremail) with SMTP id _____wD3d5IwEolnR5IwGg--.20972S2;
+	Thu, 16 Jan 2025 22:05:46 +0800 (CST)
+From: Jiayuan Chen <mrpre@163.com>
+To: bpf@vger.kernel.org,
+	jakub@cloudflare.com,
+	john.fastabend@gmail.com
+Cc: netdev@vger.kernel.org,
+	martin.lau@linux.dev,
+	ast@kernel.org,
+	edumazet@google.com,
+	davem@davemloft.net,
+	dsahern@kernel.org,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	linux-kernel@vger.kernel.org,
+	song@kernel.org,
+	andrii@kernel.org,
+	mhal@rbox.co,
+	yonghong.song@linux.dev,
+	daniel@iogearbox.net,
+	xiyou.wangcong@gmail.com,
+	horms@kernel.org,
+	corbet@lwn.net,
+	eddyz87@gmail.com,
+	cong.wang@bytedance.com,
+	shuah@kernel.org,
+	mykolal@fb.com,
+	jolsa@kernel.org,
+	haoluo@google.com,
+	sdf@fomichev.me,
+	kpsingh@kernel.org,
+	linux-doc@vger.kernel.org,
+	Jiayuan Chen <mrpre@163.com>
+Subject: [PATCH bpf v7 0/5] bpf: fix wrong copied_seq calculation and add tests
+Date: Thu, 16 Jan 2025 22:05:26 +0800
+Message-ID: <20250116140531.108636-1-mrpre@163.com>
+X-Mailer: git-send-email 2.43.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250116085939.1235598-1-leo.yang.sy0@gmail.com>
- <20250116085939.1235598-2-leo.yang.sy0@gmail.com> <20250116-athletic-prehistoric-worm-36ffcb@krzk-bin>
-In-Reply-To: <20250116-athletic-prehistoric-worm-36ffcb@krzk-bin>
-From: Leo Yang <leo.yang.sy0@gmail.com>
-Date: Thu, 16 Jan 2025 21:52:08 +0800
-X-Gm-Features: AbW1kvYLa7FVsJI-15KZaQE92R4PJe7iEmWZjwDAeLiN4TVHLU8-1qiulGKEdwE
-Message-ID: <CAAfUjZGSgdQYwC24S__EO13-q1HQWVkUP7oDgJm-=AeeXgr1DQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/2] dt-bindings: hwmon: ti,ina2xx: Add INA233 device
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: jdelvare@suse.com, linux@roeck-us.net, robh@kernel.org, krzk+dt@kernel.org, 
-	conor+dt@kernel.org, Leo-Yang@quantatw.com, corbet@lwn.net, 
-	Delphine_CC_Chiu@wiwynn.com, linux-hwmon@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wD3d5IwEolnR5IwGg--.20972S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxWFyrGFyfXw4kuryDAFyxKrg_yoW5Ar4UpF
+	WkC34rGr47tFyIvw4DA392gF4rKw4rCayUKF1Fq3yfAw4jkryYyrs2ka4aqr98GrWrZF1U
+	ur15Wr4Y934DAFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0z_pnQ7UUUUU=
+X-CM-SenderInfo: xpus2vi6rwjhhfrp/xtbBDwvWp2eJDhZJNQAAs-
 
-Hi Krzysztof,
+A previous commit described in this topic
+http://lore.kernel.org/bpf/20230523025618.113937-9-john.fastabend@gmail.com
+directly updated 'sk->copied_seq' in the tcp_eat_skb() function when the
+action of a BPF program was SK_REDIRECT. For other actions, like SK_PASS,
+the update logic for 'sk->copied_seq' was moved to
+tcp_bpf_recvmsg_parser() to ensure the accuracy of the 'fionread' feature.
 
-On Thu, Jan 16, 2025 at 6:47=E2=80=AFPM Krzysztof Kozlowski <krzk@kernel.or=
-g> wrote:
->
-> > +      This value will be used to calculate the Current_LSB and current=
-/power
-> > +      coefficient for the pmbus and to calibrate the IC.
-> > +    minimum: 32768
-> > +    maximum: 4294967295
->
-> Uh, are these real values measurable by the device? The last one looks
-> like UINT_MAX.
+That commit works for a single stream_verdict scenario, as it also
+modified 'sk_data_ready->sk_psock_verdict_data_ready->tcp_read_skb'
+to remove updating 'sk->copied_seq'.
 
-According to the spec I don't see a definition of the upper limit of the
-current measurement, it all depends on how low the shunt resistance can
-be, so I'll use the upper limit of the u32 as the maximum for now, even
-though it's unlikely that this number will be present in the actual circuit=
-.
+However, for programs where both stream_parser and stream_verdict are
+active(strparser purpose), tcp_read_sock() was used instead of
+tcp_read_skb() (sk_data_ready->strp_data_ready->tcp_read_sock)
+tcp_read_sock() now still update 'sk->copied_seq', leading to duplicated
+updates.
 
->
-> > +    default: 32768000
->
-> Default is 32 A? For what applications is this sensor used?
->
+In summary, for strparser + SK_PASS, copied_seq is redundantly calculated
+in both tcp_read_sock() and tcp_bpf_recvmsg_parser().
 
-According to spec 8.2.2.1 Programming the Calibration Register example,
-a Current_LSB with a maximum expected current of 15A is approximately
-457.7uA.
-The example shows that a Current_LSB of 500 or 1000uA/bit can be used.
-So I choose 1000uA as the default value here, this value corresponds to
-the expected maximum current which is 32A (with some loss of accuracy to
- have a larger measurement range), and yes maybe the user doesn't
-need such a large current, so the accuracy-sensitive use of the scene
-can be adjusted according to the actual measurement range of the
-expected maximum current, I'm trying to retain some flexibility for the
-user.
+The issue causes incorrect copied_seq calculations, which prevent
+correct data reads from the recv() interface in user-land.
 
+Also we added test cases for bpf + strparser and separated them from
+sockmap_basic, as strparser has more encapsulation and parsing
+capabilities compared to sockmap.
 
-Thank you for all your suggestions, they are very useful and
-I have gained a lot from them.
+Fixes: e5c6de5fa025 ("bpf, sockmap: Incorrectly handling copied_seq")
 
+---
+V3 -> V7:
+https://lore.kernel.org/bpf/20250109094402.50838-1-mrpre@163.com/
+https://lore.kernel.org/bpf/20241218053408.437295-1-mrpre@163.com/
+Avoid introducing new proto_ops. (Jakub Sitnicki).
+Add more edge test cases for strparser + bpf.
+Fix patchwork fail of test cases code.
+Fix psock fetch without rcu lock.
+Move code of modifying to tcp_bpf.c.
 
-Best Regards,
+V1 -> V3:
+https://lore.kernel.org/bpf/20241209152740.281125-1-mrpre@163.com/
+Fix patchwork fail by adding Fixes tag.
+Save skb data offset for ENOMEM. (John Fastabend)
 
-Leo Yang
+Jiayuan Chen (5):
+  strparser: add read_sock callback
+  bpf: fix wrong copied_seq calculation
+  bpf: disable non stream socket for strparser
+  selftests/bpf: fix invalid flag of recv()
+  selftests/bpf: add strparser test for bpf
+
+ Documentation/networking/strparser.rst        |  11 +-
+ include/linux/skmsg.h                         |   4 +
+ include/net/strparser.h                       |   2 +
+ include/net/tcp.h                             |   3 +
+ net/core/skmsg.c                              |  23 +
+ net/core/sock_map.c                           |  13 +-
+ net/ipv4/tcp.c                                |  29 +-
+ net/ipv4/tcp_bpf.c                            |  47 ++
+ net/strparser/strparser.c                     |  11 +-
+ .../selftests/bpf/prog_tests/sockmap_basic.c  |  59 +--
+ .../selftests/bpf/prog_tests/sockmap_strp.c   | 452 ++++++++++++++++++
+ .../selftests/bpf/progs/test_sockmap_strp.c   |  53 ++
+ 12 files changed, 642 insertions(+), 65 deletions(-)
+ create mode 100644 tools/testing/selftests/bpf/prog_tests/sockmap_strp.c
+ create mode 100644 tools/testing/selftests/bpf/progs/test_sockmap_strp.c
+
+-- 
+2.43.5
+
 
