@@ -1,122 +1,157 @@
-Return-Path: <linux-doc+bounces-35498-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35524-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id D47FCA145B9
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Jan 2025 00:29:41 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 11D61A1467F
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Jan 2025 00:41:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id BFFA4188A924
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2025 23:29:44 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 46FEC18862D4
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2025 23:41:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F4D2244FA6;
-	Thu, 16 Jan 2025 23:29:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F403D24817A;
+	Thu, 16 Jan 2025 23:31:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="HkzDf0Cv"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="g9/vuNgT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3994C23F263;
-	Thu, 16 Jan 2025 23:29:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCF552419F3
+	for <linux-doc@vger.kernel.org>; Thu, 16 Jan 2025 23:31:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737070144; cv=none; b=oSwRXE68n2JSOWiu+n3uGCrbgSjtUE29Ergu9b2NKIMnU655pbiqKPzws8lWZAJiKFUv5HRk6rhDZt7bz3c58L1EpdL8PkP7IJDyIEofr9g9EjEjgchPjOT7V7jq8VCYQSNnEz5WyShivVhP4rQ0tvsYbGmFsFpyxb3+ZLxq2Ro=
+	t=1737070284; cv=none; b=PTgvZdY0XmD8NImyRih9z84sFHe6l2YDtaSNvC3fJvHMvnUA4iOQ/cz7y9pTJdAf8+hUNHLNd6fIz4V6W3iZuXaBUKZ0Pn9ZzWFhD7RSdKIWz460aaFz4hqttgoMVI4MHZe7KRg9AR65P7FfcGZue6fTeT6YlvoJXrhMNxvgP4I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737070144; c=relaxed/simple;
-	bh=0OBobLi7ExKS88UXVDqp57BgOzSWIY6pBcXtLyP8eXw=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=HJDgvA+jNYTNayQ/8bb/5eNgJ2IesekudQVU9YkPBqa2Kn7ysmDnOsJelPVFNRYAqfM5AHgRhtguOZmi/M8Y32fzGctUUnMM+5ib7ZQKEfLSHoQErn+QF7B6iXTkgveEQLhWTWmBdC5Oy7ev1TCeYoS+lFEG5hHOBfvPxLR5eSw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=HkzDf0Cv; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50GEJkvG005439;
-	Thu, 16 Jan 2025 23:28:51 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	wcD3BPbhWVoPjRNWO38IFE1Iyo7XgqPy9NMwnNA2krs=; b=HkzDf0Cvm03bC8RM
-	by+U5NIlu7Kq9UHMKKlnzZCZFVwIXByIN806/aZs65Gey6rWp6EZR294kLS2lT4X
-	yGncU84N+C+ihzzPXXtYEgDXw3P0CYISRJfZ1QSK61F2igPJisKmrcVsyuXBOXTq
-	3qJVg7R7GVTjGarrahX2eBMLAcuCHHJcA7RpsmH7GRYAVhbwnDGVD1dq+QITZeUo
-	yD1go3PGSWTamkRQhurMKlAuD1oqKko6XTKshu7PnFubNc1uhZ+IN4g4aTOXZKyx
-	WA/M2jQxNVdWalr9LEb7aWrSfP75YmBuugZJFt7c2PNgjPlHeQB46qzFeEJiL83d
-	K+mqFw==
-Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4473sfs6n5-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 16 Jan 2025 23:28:51 +0000 (GMT)
-Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
-	by NALASPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 50GNSoSD019758
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 16 Jan 2025 23:28:50 GMT
-Received: from hu-wcheng-lv.qualcomm.com (10.49.16.6) by
- nalasex01b.na.qualcomm.com (10.47.209.197) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Thu, 16 Jan 2025 15:28:49 -0800
-From: Wesley Cheng <quic_wcheng@quicinc.com>
-To: <srinivas.kandagatla@linaro.org>, <mathias.nyman@intel.com>,
-        <perex@perex.cz>, <conor+dt@kernel.org>, <dmitry.torokhov@gmail.com>,
-        <corbet@lwn.net>, <broonie@kernel.org>, <lgirdwood@gmail.com>,
-        <tiwai@suse.com>, <krzk+dt@kernel.org>,
-        <pierre-louis.bossart@linux.intel.com>, <Thinh.Nguyen@synopsys.com>,
-        <robh@kernel.org>, <gregkh@linuxfoundation.org>
-CC: <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-sound@vger.kernel.org>, <linux-input@vger.kernel.org>,
-        <linux-usb@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>
-Subject: [PATCH v33 31/31] ALSA: usb-audio: qcom: Notify USB audio devices on USB offload probing
-Date: Thu, 16 Jan 2025 15:28:24 -0800
-Message-ID: <20250116232824.3748438-32-quic_wcheng@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250116232824.3748438-1-quic_wcheng@quicinc.com>
-References: <20250116232824.3748438-1-quic_wcheng@quicinc.com>
+	s=arc-20240116; t=1737070284; c=relaxed/simple;
+	bh=hEX2DsNI7E8IBqdPG0miIQfwwOlcMkiPPsnqKDxhtIE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=YDs2Y6RlPU0Cu8fLqjOBlgDRc4am874h/OseR8Hq6lbNsZ02k9+P/6Y1MZLVDR6U2UDh5EtJDSPwft2hrCDjTHHp+fLyPqBESF5jZHy0xLUOMUh+Mwt77l2nDZXXyA3LSmYADHuzeZyi9LePIz/6n0u4iyf1Cjnbu07qsn53Cuo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=g9/vuNgT; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1737070281;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=2+aljsYXNR3zz+hPgKhn1NefTJFgn2NwxVBvLmGXKHY=;
+	b=g9/vuNgTgIc4ZfVYRhzW8JSZUWRi/ipIcSeKnoLISsFpty2+1bMmrzVnkzJ6vrNJpIQxPM
+	a3W/CcWtCtEkGKhollTpCuv7qa2qi1Akl5CGOCYI0KaGF5E+3VecRP8kkliR2AP9iERZ4O
+	pDQ595LY20lr0Wr91bNxf+FNGwf6u+8=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-588-uTzLY2FCNmyPeKUTYgKkvg-1; Thu, 16 Jan 2025 18:31:20 -0500
+X-MC-Unique: uTzLY2FCNmyPeKUTYgKkvg-1
+X-Mimecast-MFC-AGG-ID: uTzLY2FCNmyPeKUTYgKkvg
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-46dd46d759eso27633401cf.2
+        for <linux-doc@vger.kernel.org>; Thu, 16 Jan 2025 15:31:20 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1737070280; x=1737675080;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2+aljsYXNR3zz+hPgKhn1NefTJFgn2NwxVBvLmGXKHY=;
+        b=EA5YQuVIU9reb3dFxK1oTErrgUHTCCgTlF7plC3fst4ZxafJ0W9BE+AysR+zm5vrRs
+         ycjp0vBNfO/f8DdQevZHnqo4B3nO+4uEYFwIMDcQmNyY1neNqluJs+ZSf/0YjqJqsoz0
+         EXb+qkkb4K6arq0LrI7iSSEzXY+14IM3CNdrQHabwwbm+J2JZ42YJkGB+jF0LSx1Fxgj
+         ZrOFFqdPwCD46r+ph2w56T6MQobPCH3OjRkpruKA1dqRj8dLptjw/6WKOLEGhfRlg6YM
+         kUqoaonlLBl0jQjnsYjhc0rbJTr7zUAU6vF3UubvrBlXyuJfkKZ4owN4lEx58oY7XVaz
+         o+oQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXg7tUXHOTvvz1wsE69k4KfQgzhJjKFDqaQWLGI6/59wCfnVNVEdEkxRtQ7H1iixatw0AXcGal4kQQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyZx8fjGJs7739Flmwh5dS6JE12EA+o7sZUrv3jGzjDWfBnM8CY
+	lqcyK3fb3/Erb06jgrVrjmURS+rBvNCTHsYMXPu20txRGfy34vWN0MG3dMDGV9M7u6kvpxvytUe
+	eZVNE5VzCaYs3PRM05xRPabASF5OL0lqR2o97DKGxZC/MCFMcUS99mkO5Pw==
+X-Gm-Gg: ASbGncvQqY5fvPytTfNDFNIyHEpbQyWm6j8BeUlBrkCmgVsf+cTs7xGR2XsJqix3hVz
+	bvokpR8NF7cKyYGqtoldIQBB0ZeqT320jC0U91i/oZ1MMCqhAVJSk6Rq8MZnp5V55RKEoDsWjBs
+	Lwvk976hYt1H8xzdYktTysvpdKWeIXcUmlHPh9AHszw2lhM16uAsG5f/moIzIaPOUs63TI6Wb8e
+	4AXePciqxb1lmrSKZO6ZX8grJwUFfsn+fu04np4kuVqzvJzavR8nAvZiIw2WAtZQIIKei8gaIyc
+	U/8/EZ+EX7tcq6jlIQ==
+X-Received: by 2002:ac8:5914:0:b0:467:7270:bc35 with SMTP id d75a77b69052e-46e12a3fadamr10765351cf.14.1737070280058;
+        Thu, 16 Jan 2025 15:31:20 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFDbPH5giaBGe/SQwST9bz+Qh0GVUALDsJUk5gRXMEShRz7wGoChR/Lc1daUotDAD4y7F9d0A==
+X-Received: by 2002:ac8:5914:0:b0:467:7270:bc35 with SMTP id d75a77b69052e-46e12a3fadamr10765061cf.14.1737070279738;
+        Thu, 16 Jan 2025 15:31:19 -0800 (PST)
+Received: from x1n (pool-99-254-114-190.cpe.net.cable.rogers.com. [99.254.114.190])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-46e104027d5sm5078961cf.58.2025.01.16.15.31.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Jan 2025 15:31:19 -0800 (PST)
+Date: Thu, 16 Jan 2025 18:31:15 -0500
+From: Peter Xu <peterx@redhat.com>
+To: James Houghton <jthoughton@google.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Jonathan Corbet <corbet@lwn.net>, Marc Zyngier <maz@kernel.org>,
+	Oliver Upton <oliver.upton@linux.dev>,
+	Yan Zhao <yan.y.zhao@intel.com>,
+	Nikita Kalyazin <kalyazin@amazon.com>,
+	Anish Moorthy <amoorthy@google.com>,
+	Peter Gonda <pgonda@google.com>,
+	David Matlack <dmatlack@google.com>, Wei W <wei.w.wang@intel.com>,
+	kvm@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	kvmarm@lists.linux.dev
+Subject: Re: [PATCH v1 00/13] KVM: Introduce KVM Userfault
+Message-ID: <Z4mWw8NXCoV-pONI@x1n>
+References: <20241204191349.1730936-1-jthoughton@google.com>
+ <Z2simHWeYbww90OZ@x1n>
+ <CADrL8HUkP2ti1yWwp=1LwTX2Koit5Pk6LFcOyTpN2b+B3MfKuw@mail.gmail.com>
+ <Z4lp5QzdOX0oYGOk@x1n>
+ <Z4lsxgFSdiqpNtdG@x1n>
+ <CADrL8HWRavCoZ_NtXJvcLOvjOiGDCor6ucWeEqkecA3VDY-adg@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: nalasex01b.na.qualcomm.com (10.47.209.197) To
- nalasex01b.na.qualcomm.com (10.47.209.197)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: 5mZNvDDBAzGTQa7cLIZfW0dkoxfri0pW
-X-Proofpoint-ORIG-GUID: 5mZNvDDBAzGTQa7cLIZfW0dkoxfri0pW
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-16_10,2025-01-16_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 phishscore=0
- impostorscore=0 malwarescore=0 priorityscore=1501 suspectscore=0
- mlxscore=0 lowpriorityscore=0 clxscore=1015 mlxlogscore=999 adultscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2411120000 definitions=main-2501160174
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CADrL8HWRavCoZ_NtXJvcLOvjOiGDCor6ucWeEqkecA3VDY-adg@mail.gmail.com>
 
-If the vendor USB offload class driver is not ready/initialized before USB
-SND discovers attached devices, utilize snd_usb_rediscover_devices() to
-find all currently attached devices, so that the ASoC entities are notified
-on available USB audio devices.
+On Thu, Jan 16, 2025 at 02:51:11PM -0800, James Houghton wrote:
+> I guess this might not work if QEMU *needs* to use HugeTLB for
+> whatever reason, but Google's hypervisor just needs 1G pages; it
+> doesn't matter where they come from really.
 
-Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
----
- sound/usb/qcom/qc_audio_offload.c | 2 ++
- 1 file changed, 2 insertions(+)
+I see now.  Yes I suppose it works for QEMU too.
 
-diff --git a/sound/usb/qcom/qc_audio_offload.c b/sound/usb/qcom/qc_audio_offload.c
-index 81f75ca34e4d..6e1b43cb869e 100644
---- a/sound/usb/qcom/qc_audio_offload.c
-+++ b/sound/usb/qcom/qc_audio_offload.c
-@@ -1972,6 +1972,8 @@ static int __init qc_usb_audio_offload_init(void)
- 	if (ret < 0)
- 		goto release_qmi;
- 
-+	snd_usb_rediscover_devices();
-+
- 	return 0;
- 
- release_qmi:
+[...]
+
+> > In that case, looks like userfaultfd can support CoCo on device emulations
+> > by sticking with virtual-address traps like before, at least from that
+> > specific POV.
+> 
+> Yeah, I don't think the userfaultfd API needs to change to support
+> gmem, because it's going to be using the VMAs / user mappings of gmem.
+
+There's other things I am still thinking on how the notification could
+happen when CoCo is enabled, that especially when there's no vcpu context.
+
+The first thing is any PV interfaces, and what's currently in my mind is
+kvmclock.  I suppose that could work like untrusted dmas, so that when the
+hypervisor wants to read/update the clock struct, it'll access a shared
+page and then the guest can move it from/to to a private page.  Or I'm not
+sure whether such information is proven to be not sensitive data, so the
+guest can directly use a permanent shared page for such purpose (in which
+case should still be part of guest memory, hence access to it can be
+trapped just like other shared pages via userfaultfd).
+
+The other thing is after I read the SEV-TIO then I found it could be easy
+to implement page faults for trusted devices now.  For example, the white
+paper said the host IOMMU will be responsible to translating trusted
+devices' DMA into GPA/GVA, I think it means KVM would somehow share the
+secondary pgtable to the IOMMU, and probably when DMA sees a missing page
+it can now easily generate a page fault to the secondary page table.
+However the question is this is a DMA op and it definitely also doesn't
+have a vcpu context.  So the question is how to trap it.
+
+So.. maybe (fd, offset) support might still be needed at some point, which
+can be more future proof.  But I don't think I have a solid mind yet.
+
+-- 
+Peter Xu
+
 
