@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-35595-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35591-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3218FA15626
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Jan 2025 19:00:24 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC636A15621
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Jan 2025 18:59:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 127AB188CCD8
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Jan 2025 18:00:12 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D9016168A76
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Jan 2025 17:59:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A6A361A7046;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6F1D41A3056;
 	Fri, 17 Jan 2025 17:59:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LQ0CPjeR"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IqB8S6nb"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7AE801A3AB1;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 473DB1A2630;
 	Fri, 17 Jan 2025 17:59:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737136795; cv=none; b=JP9zlgp7gDzoHRm36I6g4+/0HcMlbVKnwFUepruD0fFnlzvQH8xhUhT23GKRay9XUbAuA/DGj4T7cjGItRnoPO8eTTRUH+nHtsIUW1GNdX1mN6eO66s65H/P1uAaGaAh41T+rKKoKk2uvmngivbXyO9qx2T2R3gGRMlzFoeS4YM=
+	t=1737136795; cv=none; b=UmAwpLVN/lzi9qY/HtxoXx1cBRo6MvdnyeyPKZUfHYD0D9LeRdGeZQy+oz7PgIfLWWu3nXXPq4H8yEeHlLyxPuMiWyMK1PLNjRNQKbbg1dl74OzfiAPlayxnVwwJ1nqy7p6isMOXsfBdcmrLFm0B13KRP7WnnMOoLGJys9EvbsY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1737136795; c=relaxed/simple;
-	bh=eIZnybLSi/SLtggShPreZtgXkXe68+zdK87zK1E6aBk=;
+	bh=RS/ElkUzCP7P0hES8gHUtJQMDcscyac74hLr/hRb6wI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=gGF4yq/YKUnkDaGT45A2X0xhU7mjUITuGEDK32bJ2dJXkdd98feydpc9FeHmfRqVDRXZ7FN1v3A+qsgC8qhDFWa1IJAW+f1HYRyWyT06a3gBjwbFd36ymRKROZ1f4AhTfsnaXPSlI2nxw02PhV1zdCYsBLWBRBecMytZjpMcUxE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LQ0CPjeR; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3653C4CEE5;
+	 MIME-Version; b=o7ytIX0qO+imXRUdZpc/HqL2fNPswE+NruVmxeMIT/7PoRQe4ikQM510MopW3fwUJ7Ngo0k7813ODISW5HzepUB3mkpSTMKX1XJvC2hl6isL40vwXmyEPAMjsaEocDI7ry5AFiTfgZ68x2rxycfgWvI/hbYX7eQmGl9SEEI5BOc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IqB8S6nb; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFC38C4CEDD;
 	Fri, 17 Jan 2025 17:59:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1737136795;
-	bh=eIZnybLSi/SLtggShPreZtgXkXe68+zdK87zK1E6aBk=;
+	s=k20201202; t=1737136794;
+	bh=RS/ElkUzCP7P0hES8gHUtJQMDcscyac74hLr/hRb6wI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=LQ0CPjeRomhFFivBHEMXxVMtQP6ArQOenqkH5GJGLVKNAkyrc5VWIyMJ4PFiHjKbY
-	 /cU0sdHLypqD0i+Gm/PeKDFE6R4Ocpc9ZK4VTGruCGmCgFbLyHM2PgOBGY8TDyZBjZ
-	 B4429v/xUGcKDIBwHmLHEHaopdkYhMQ7QMa6jWCV9MdLMzvoxqsBmoxhIUb5HGiZyK
-	 2kQvCVZvRKucD9CorqAuOqx3CbbbMHjELlwigycTLby17ZdBdjNrduZI0qJUJf5nQP
-	 vIjxV7i1+H9Nkfsrn06XjmH1iGGXS+0gVRMya9bNTDj15BDW4So+9q228ziSreuL2Y
-	 x1ZVds80tZYSw==
+	b=IqB8S6nbi6MZcszQ5NcOdniXvDlQsxOxlaZbnFK9KjeQ3ksqrfxyq1EK7wZqXlWl/
+	 1EC+97OihBdPM9ZJb4US4UT5h1MZ7MJsKGyYB1hjDNxAFq/zAEgA55SwXowqbyeS1I
+	 jhWqiYEqbs+dASZ1Oc0zVh5fr69d7bkuv+d0Tg9xpa1nITeyYJ5TAevt9UDDbPbvDv
+	 phJC7c7JdcSm2gzWcbWrWVkWc21m4mPzTB41EOX2+6Mm6l/Gxl2LXMcjZFrB7f8o+B
+	 pnTs5LYiqUX3nQpyJY8IYpnDU9FpbHZCdSm6Ao/o6yh0if3tKdRZJdsHW1t3JSAQSL
+	 9LH0WUU4cZjtg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tYqdM-00000006Ajn-210m;
+	id 1tYqdM-00000006Ajr-27kb;
 	Fri, 17 Jan 2025 18:59:52 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
@@ -51,13 +51,10 @@ To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	Chao Yu <mchehab+huawei@kernel.org>,
-	Jaegeuk Kim <mchehab+huawei@kernel.org>,
-	linux-f2fs-devel@lists.sourceforge.net,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH RFC 05/10] ABI: sysfs-fs-f2fs: fix date tags
-Date: Fri, 17 Jan 2025 18:59:34 +0100
-Message-ID: <c8bfa2da4e705aa036f773947a99f2cc8d37ca1b.1737135484.git.mchehab+huawei@kernel.org>
+Subject: [PATCH RFC 06/10] ABI: sysfs-power: fix a what tag
+Date: Fri, 17 Jan 2025 18:59:35 +0100
+Message-ID: <e402648593ad90502b35a20f472dfba9a6c86721.1737135484.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1737135484.git.mchehab+huawei@kernel.org>
 References: <cover.1737135484.git.mchehab+huawei@kernel.org>
@@ -70,36 +67,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Some date tags are missing colons. Add them to comply with
-ABI description and produce right results when converted to html/pdf.
+There is one What tag that it is using semicolon instead of colon.
+
+Fix it to comply with ABI description and produce right results when
+converted to html/pdf.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ Documentation/ABI/testing/sysfs-power | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 3e1630c70d8a..e44bb614964b 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -347,7 +347,7 @@ Description:	Used to control configure extension list:
- 		- [c] means add/del cold file extension
+diff --git a/Documentation/ABI/testing/sysfs-power b/Documentation/ABI/testing/sysfs-power
+index a3942b1036e2..2192478e83cf 100644
+--- a/Documentation/ABI/testing/sysfs-power
++++ b/Documentation/ABI/testing/sysfs-power
+@@ -131,7 +131,7 @@ Description:
+ 		CAUTION: Using it will cause your machine's real-time (CMOS)
+ 		clock to be set to a random invalid time after a resume.
  
- What:		/sys/fs/f2fs/<disk>/unusable
--Date		April 2019
-+Date:		April 2019
- Contact:	"Daniel Rosenberg" <drosen@google.com>
- Description:	If checkpoint=disable, it displays the number of blocks that
- 		are unusable.
-@@ -355,7 +355,7 @@ Description:	If checkpoint=disable, it displays the number of blocks that
- 		would be unusable if checkpoint=disable were to be set.
- 
- What:		/sys/fs/f2fs/<disk>/encoding
--Date		July 2019
-+Date:		July 2019
- Contact:	"Daniel Rosenberg" <drosen@google.com>
- Description:	Displays name and version of the encoding set for the filesystem.
- 		If no encoding is set, displays (none)
+-What;		/sys/power/pm_trace_dev_match
++What:		/sys/power/pm_trace_dev_match
+ Date:		October 2010
+ Contact:	James Hogan <jhogan@kernel.org>
+ Description:
 -- 
 2.47.1
 
