@@ -1,39 +1,39 @@
-Return-Path: <linux-doc+bounces-35650-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35648-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00FEAA1663E
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 05:58:54 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id CA885A165EB
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 04:58:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 23C7F168E62
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 04:58:52 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A1AF87A04E3
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 03:58:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5D0FA155316;
-	Mon, 20 Jan 2025 04:58:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 911BC3A1DB;
+	Mon, 20 Jan 2025 03:58:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="N/+1W/hQ"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="Fd/vE3hv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m15586.qiye.163.com (mail-m15586.qiye.163.com [101.71.155.86])
+Received: from mail-m49202.qiye.163.com (mail-m49202.qiye.163.com [45.254.49.202])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70C7A1487D5
-	for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2025 04:58:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.86
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EE4EC2E0
+	for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2025 03:58:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.202
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737349130; cv=none; b=YWtp2MVYBGitq5Gu766MpQoSirGq0dVmS7BN+i5ZEWKQDrKLyyaRzJeM7PjMicxyruzY/KG7zmMUdOYUfg2/jn7l3esOVw9+I9npl4+rKpfeKSkLcY53S9L7u1JzuNRRBBGBTLpG2u524xknQcBA3wkpQd35PJcAH70uLZBo4M8=
+	t=1737345505; cv=none; b=R90HbYykpRdgLzTb1x6cyeiAebjJCBjJUevciAp43KIexQWezc5DtEYJi3lqS/CABbf+Ze87E4KI2pLPWSUmXuq3kPsnqzGw/+VrxQ1QTM773iw/u8LK6ogDRn2daQBs7f9sR1Hzq5iukrvLOvQMOFPImC487neon5NaLYvpQYY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737349130; c=relaxed/simple;
-	bh=5JBxiffdqr/l5pxRvdMhwamGW/jQzD1ve4oQGnYrs8w=;
+	s=arc-20240116; t=1737345505; c=relaxed/simple;
+	bh=aboAVwrd/czU3y1EUUInGzPRF/rbUyAUgzzfZf9hiQg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=mybdLrr40jRKr+T9avSP5+G3xR+soQBmCYjjMFOw8ZC4/Af3+vjMnEIl7xIqODNHrF0w9X7ozZDPLXbzborl2D8naf6xXit3xXqpdeEWt3rqE35n1qh1iMEb+xPB0dhxiYoYrz0+rPF2OVVHcdpCRGZRlUiT8JXuF/to3N1vN/8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=N/+1W/hQ; arc=none smtp.client-ip=101.71.155.86
+	 MIME-Version:Content-Type; b=r1ZIG37UInewg05e7R8PEqDt9sDU37x3qbgoq8gUkq4bGJnsJ+eTG1raOMeTfHBjQ3PDaZSGlXGWWyiSFEuMSmU7iSkEuPul9ElZxrAl9H4U2M2Z8m++KgncBOns2U6fsvjWUujKC96ENY3cG3pBcvh/c7eqKoqGrgeEIEP/JKc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=Fd/vE3hv; arc=none smtp.client-ip=45.254.49.202
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
 Received: from fedora.localdomain (unknown [123.53.38.48])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 924e2b86;
-	Mon, 20 Jan 2025 11:43:03 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 924e2b92;
+	Mon, 20 Jan 2025 11:43:04 +0800 (GMT+08:00)
 From: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev,
@@ -43,9 +43,9 @@ Cc: zhaoyuehui@cqsoftware.com.cn,
 	zhangwei@cqsoftware.com.cn,
 	maoyuxian@cqsoftware.com.cn,
 	linux-doc@vger.kernel.org
-Subject: [PATCH 5/7] docs/zh_CN: Add tpm tpm_vtpm_proxy Chinese translation
-Date: Mon, 20 Jan 2025 11:42:50 +0800
-Message-ID: <1b9c166f0144020b7c6a781c93b8d1fcd8d049be.1737344074.git.zhaoshuo@cqsoftware.com.cn>
+Subject: [PATCH 6/7] docs/zh_CN: Add tpm xen-tpmfront Chinese translation
+Date: Mon, 20 Jan 2025 11:42:51 +0800
+Message-ID: <11d7bfe0efa0294ab82595dbcb50496bcbafd8d7.1737344074.git.zhaoshuo@cqsoftware.com.cn>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1737344074.git.zhaoshuo@cqsoftware.com.cn>
 References: <cover.1737344074.git.zhaoshuo@cqsoftware.com.cn>
@@ -58,102 +58,164 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaQ00YVk5IGE1OSExKSxpDS1YVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZSExLVk5CHklOSUIYTE1KTFYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKSUhVTkhVSENVT0NZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0hVSktLVU
 	pCS0tZBg++
-X-HM-Tid: 0a9481ce884009d0kunm924e2b86
+X-HM-Tid: 0a9481ce8c3209d0kunm924e2b92
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6M0k6Cio4HzIQGjAMEQgLS0kT
-	AgwaCzRVSlVKTEhMSE9PTkNPTU9KVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
-	WRILWUFZSklIVU5IVUhDVU9DWVdZCAFZQUhIQk83Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MFE6Eyo*OjIITzA3EQ8NS0oN
+	MhBPCklVSlVKTEhMSE9PTkNOTkxCVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
+	WRILWUFZSklIVU5IVUhDVU9DWVdZCAFZQU5MQ0M3Bg++
 DKIM-Signature:a=rsa-sha256;
-	b=N/+1W/hQWmR2e3KOiw5PA6d5MLXV/sBCtxhTWKtMMQorv9N3EyU/mCfxbt0Nb8NLF1ZN9Cytue0lPcTKe6J8y9eNkYswUjYAfN1TWi9Bwv6RtR6YF88iB4eN6kWzuQKHy9hmOx2HSG1W94CQmDj1Wodf3qS/Cjm9waGEgCk5D78=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
-	bh=ROUA3HZ0gKwY68GfkCq71zZWOz8m2Ok9wBXRd+C32jg=;
+	b=Fd/vE3hv6R+aUPKBzduJD08QbOWza60h4m+2zqgIJu4w2qCkG/O01NT0EqhqBSVOD/9/Qfp/UIfA8hdgVBJK5t9Ih6raO/2DmsgQka7UeO0r6cl5Idc10peYTXBtGqhczuhhpuliDKha5W2EdoRLkYJnrrG0/l0RNeGTKT9rQEM=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
+	bh=s7IdLINMnqoZcwKUnSntgONJEpjbvLM0+5ly4FjIgvo=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../security/tpm/tpm_vtpm_proxy.rst into Chinese.
+Translate .../security/tpm/xen-tpmfront.rst into Chinese.
 
-Update the translation through commit 799a545bb938
-("tpm: move documentation under Documentation/security")
+Update the translation through commit 9e255e2b9afe
+("Documentation: drop optional BOMs")
 
 Signed-off-by: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
 ---
- .../translations/zh_CN/security/tpm/index.rst |  2 +-
- .../zh_CN/security/tpm/tpm_vtpm_proxy.rst     | 51 +++++++++++++++++++
- 2 files changed, 52 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/security/tpm/tpm_vtpm_proxy.rst
+ .../translations/zh_CN/security/tpm/index.rst |   2 +-
+ .../zh_CN/security/tpm/xen-tpmfront.rst       | 114 ++++++++++++++++++
+ 2 files changed, 115 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/security/tpm/xen-tpmfront.rst
 
 diff --git a/Documentation/translations/zh_CN/security/tpm/index.rst b/Documentation/translations/zh_CN/security/tpm/index.rst
-index dd5ab7f295e1..3dd3eaeb8a61 100644
+index 3dd3eaeb8a61..cace08aafd16 100644
 --- a/Documentation/translations/zh_CN/security/tpm/index.rst
 +++ b/Documentation/translations/zh_CN/security/tpm/index.rst
-@@ -16,8 +16,8 @@
-    tpm_event_log
+@@ -17,7 +17,7 @@
     tpm-security
     tpm_tis
-+   tpm_vtpm_proxy
+    tpm_vtpm_proxy
++   xen-tpmfront
  
  TODOLIST:
--*   tpm_vtpm_proxy
- *   xen-tpmfront
+-*   xen-tpmfront
  *   tpm_ftpm_tee
-diff --git a/Documentation/translations/zh_CN/security/tpm/tpm_vtpm_proxy.rst b/Documentation/translations/zh_CN/security/tpm/tpm_vtpm_proxy.rst
+diff --git a/Documentation/translations/zh_CN/security/tpm/xen-tpmfront.rst b/Documentation/translations/zh_CN/security/tpm/xen-tpmfront.rst
 new file mode 100644
-index 000000000000..9f3f3d07d1cd
+index 000000000000..434e7e957f6b
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/security/tpm/tpm_vtpm_proxy.rst
-@@ -0,0 +1,51 @@
++++ b/Documentation/translations/zh_CN/security/tpm/xen-tpmfront.rst
+@@ -0,0 +1,114 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/security/tpm/tpm_vtpm_proxy.rst
++:Original: Documentation/security/tpm/xen-tpmfront.rst
 +
 +:翻译:
 + 赵硕 Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
 +
-+==========================
-+Linux容器的虚拟TPM代理驱动
-+==========================
++================
++Xen的虚拟TPM接口
++================
 +
-+| 作者：
-+| Stefan Berger <stefanb@linux.vnet.ibm.com>
++作者：Matthew Fioravante (JHUAPL), Daniel De Graaf (NSA)
 +
-+本文档描述了用于Linux容器的虚拟可信平台模块（vTPM）代理设备驱动。
++本文档描述了用于Xen的虚拟可信平台模块（vTPM）子系统。假定读者熟悉
++Xen和Linux的构建和安装，并对TPM和vTPM概念有基本的理解。
 +
 +介绍
-+====
++----
 +
-+这项工作的目标是为每个Linux容器提供TPM功能。这使得程序能够像与物理系统
-+上的TPM交互一样，与容器中的TPM进行交互。每个容器都会获得一个唯一的、模
-+拟的软件TPM。
++这项工作的目标是为虚拟客户操作系统（在Xen中称为DomU）提供TPM功能。这使得
++程序能够像与物理系统上的TPM交互一样，与虚拟系统中的TPM进行交互。每个客户
++操作系统都会获得一个唯一的、模拟的软件TPM。然而，vTPM的所有秘密（如密钥、
++NVRAM 等）由vTPM管理域进行管理，该域将这些秘密封存到物理TPM中。如果创建这
++些域（管理域、vTPM域和客户域）的过程是可信的，vTPM子系统就能将根植于硬件
++TPM的信任链扩展到Xen中的虚拟机。vTPM的每个主要组件都作为一个独立的域实现，
++从而通过虚拟机监控程序（hypervisor）提供安全隔离。
 +
-+设计
-+====
++这个mini-os vTPM 子系统是建立在IBM和Intel公司之前的vTPM工作基础上的。
 +
-+为了使每个容器都能使用模拟的软件TPM，容器管理堆栈需要创建一对设备，其中
-+包括一个客户端TPM字符设备 ``/dev/tpmX`` （X=0,1,2...）和一个‘服务器端’
-+文件描述符。前者通过创建具有适当主次设备号的字符设备被移入容器，而文件
-+描述符则传递给TPM模拟器。容器内的软件可以使用字符设备发送TPM命令，模拟器
-+将通过文件描述符接收这些命令，并用它来发送响应。
 +
-+为了支持这一点，虚拟TPM代理驱动程序提供了一个设备 ``/dev/vtpmx`` ，该设备
-+用于通过ioctl创建设备对。ioctl需要输入标志来配置设备，这些标志例如指示TPM
-+模拟器是否支持TPM1.2或TPM2功能。ioctl的结果是返回‘服务器端’的文件描述符以
-+及创建的字符设备的主次设备号。此外，还会返回TPM字符设备的编号。例如，如果
-+创建了 ``/dev/tpm10`` ，则返回的编号（ ``dev_num`` ）10。
++设计概述
++--------
 +
-+一旦设备创建完成，驱动程序将立即尝试与TPM进行通信。来自驱动程序的所有命令
-+都可以从ioctl返回的文件描述符中读取。这些命令应该立即得到响应。
++vTPM的架构描述如下::
 +
-+UAPI
-+====
++  +------------------+
++  |    Linux DomU    | ...
++  |       |  ^       |
++  |       v  |       |
++  |   xen-tpmfront   |
++  +------------------+
++          |  ^
++          v  |
++  +------------------+
++  | mini-os/tpmback  |
++  |       |  ^       |
++  |       v  |       |
++  |  vtpm-stubdom    | ...
++  |       |  ^       |
++  |       v  |       |
++  | mini-os/tpmfront |
++  +------------------+
++          |  ^
++          v  |
++  +------------------+
++  | mini-os/tpmback  |
++  |       |  ^       |
++  |       v  |       |
++  | vtpmmgr-stubdom  |
++  |       |  ^       |
++  |       v  |       |
++  | mini-os/tpm_tis  |
++  +------------------+
++          |  ^
++          v  |
++  +------------------+
++  |   Hardware TPM   |
++  +------------------+
 +
-+该API在以下内核代码中：
++* Linux DomU:
++               希望使用vTPM的基于Linux的客户机。可能有多个这样的实例。
 +
-+include/uapi/linux/vtpm_proxy.h
-+drivers/char/tpm/tpm_vtpm_proxy.c
++* xen-tpmfront.ko:
++                    Linux内核虚拟TPM前端驱动程序。该驱动程序为基于Linux的DomU提供
++                    vTPM访问。
 +
-+函数：vtpmx_ioc_new_dev
++* mini-os/tpmback:
++                    Mini-os TPM后端驱动程序。Linux前端驱动程序通过该后端驱动程序连
++                    接，以便在Linux DomU和其vTPM之间进行通信。该驱动程序还被
++                    vtpmmgr-stubdom用于与vtpm-stubdom通信。
++
++* vtpm-stubdom:
++                 一个实现vTPM的mini-os存根域。每个正在运行的vtpm-stubdom实例与系统
++                 上的逻辑vTPM之间有一一对应的关系。vTPM平台配置寄存器（PCRs）通常都
++                 初始化为零。
++
++* mini-os/tpmfront:
++                     Mini-os TPM前端驱动程序。vTPM mini-os域vtpm-stubdom使用该驱动程序
++                     与vtpmmgr-stubdom通信。此驱动程序还用于与vTPM域通信的mini-os域，例
++                     如 pv-grub。
++
++* vtpmmgr-stubdom:
++                    一个实现vTPM管理器的mini-os域。系统中只有一个vTPM管理器，并且在整个
++                    机器生命周期内应一直运行。此域调节对系统中物理TPM的访问，并确保每个
++                    vTPM的持久状态。
++
++* mini-os/tpm_tis:
++                    Mini-osTPM1.2版本TPM 接口规范（TIS）驱动程序。该驱动程序由vtpmmgr-stubdom
++                    用于直接与硬件TPM通信。通信通过将硬件内存页映射到vtpmmgr-stubdom来实现。
++
++* 硬件TPM:
++            固定在主板上的物理 TPM。
++
++与Xen的集成
++-----------
++
++vTPM驱动程序的支持已在Xen4.3中通过libxl工具堆栈添加。有关设置vTPM和vTPM
++管理器存根域的详细信息，请参见Xen文档（docs/misc/vtpm.txt）。一旦存根域
++运行，与磁盘或网络设备相同，vTPM设备将在域的配置文件中进行设置
++
++为了使用诸如IMA（内核度量架构）等需要在initrd之前加载TPM的功能，必须将
++xen-tpmfront驱动程序编译到内核中。如果不使用这些功能，驱动程序可以作为
++模块编译，并像往常一样加载。
 -- 
 2.47.1
 
