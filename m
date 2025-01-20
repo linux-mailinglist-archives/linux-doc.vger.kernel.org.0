@@ -1,79 +1,65 @@
-Return-Path: <linux-doc+bounces-35649-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35651-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78BF5A16639
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 05:58:14 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C7A4A166A3
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 07:26:30 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 953B53AA852
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 04:58:07 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id F34E718846BC
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 06:26:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 22CE715666D;
-	Mon, 20 Jan 2025 04:58:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E7A7187325;
+	Mon, 20 Jan 2025 06:26:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b="1whu3BnK"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="gsI8qbEj"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8374015534D
-	for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2025 04:58:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C325383;
+	Mon, 20 Jan 2025 06:26:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737349088; cv=none; b=jwjlY8DOa6h0GqHPkUSK4jYDMbAJ+ask6oU8qHa+EaL5RlfSJPQEppTlT21SELUfmlOIWhtzsdv8QSdT/cKmDu8RtSV3tbVvZyTWbh1Jjx4T1jUlaE05FJFZ2zkqG8mI2cXSGpp8cFBMvSKAp04iqy+atV8qNPqyNIUwyCzj6m8=
+	t=1737354385; cv=none; b=Qu92wBZ1/Rqs0LDozU/ywQQEucVW3q8AsyON+MXifLpjNzapg9Caqfhb9mELJzkWAftb6pJap0TNQxeD9Rq6s/hGg3p+4LUplobMqUcIXAdStvlpolEBmvdbeCMO8MgZqWqSTnfAyRXoeb2gPrWt8I+U8ZVBZhZIccfZ5qx84xQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737349088; c=relaxed/simple;
-	bh=JBhx4FBRzKbzrz2Al5pNMHO5F3JgbgRL5B/gVFGVg/0=;
+	s=arc-20240116; t=1737354385; c=relaxed/simple;
+	bh=tnsWXzYfmvn62Lbs810i3rTWmbN0EXhNDxrDhCk8CD8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Q3oTJlykwVy0GiOJZAlbM8A6YPM5Dv8s5lvp7R3T/YqWAH/LxiXxufpe2dKkS9DficW1VxM7oLxA9rLZqxBUnI0Gkb4PdS/Nb44xdViMzgEu5O6raQhhFseeUmuAQxAnZ+3lJL5zhz09b0Vk7+nsanR9zo0wFdk8xTWWtB6rfHY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com; spf=pass smtp.mailfrom=daynix.com; dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b=1whu3BnK; arc=none smtp.client-ip=209.85.214.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=daynix.com
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2165cb60719so68077465ad.0
-        for <linux-doc@vger.kernel.org>; Sun, 19 Jan 2025 20:58:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1737349085; x=1737953885; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=q4oIihNr6GZKGbnqtazZfNL+Wdu+eK7TRKf6H4jFUt4=;
-        b=1whu3BnKNwtvtqezELWKQt0hPy+FN+eYxFnvphEYfi8qsgYC7W5bmfPPeQAFhfje9v
-         CbaxUnTt6ZJUMsN9QS2shX24wJG64A76ZVHipVlxgXyEAgvl2W/LCo8UaIbMIpcWZ0X5
-         Ht6uaEyQYqQOsJy/RhVomU6JHqfZ9tvSSRWxgAfHN7lvUluRmH0VrqL7ULtJ/cg3AKhm
-         jweriYhaI57MWQQL1HLbdLdrvzjT1mJJE3knFLDLbBqku7AWN5eVh22I363rpyLfcFWm
-         yJcgtQoFIZXlMUwvua1s94+1pI0FzQy1IXT0XLOlcY4cXT0mISggZP6IZFZ1k01USb2L
-         TWVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737349085; x=1737953885;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=q4oIihNr6GZKGbnqtazZfNL+Wdu+eK7TRKf6H4jFUt4=;
-        b=A3a/DGkXnv+mnBYul/dOliPm0lR824axmfCs8FHcTB+Lju7snZfjEkLc4lgBQWgv/p
-         E2lUsGNVq+ipC1kwhvSUd5sUwUS8QMcgvllrE+X5D87xhsPKKyRSzRd5gVIPKJ38JpQO
-         vrdQhGhNAdQsFsrDc/RBFjVr4uEw1yqs/TRXQGly6uHDtju/RDnkFsxxEwGbkYOEXXXI
-         pIsQb3qcRq7XAOBROo/SrMqkxv2ExW0QjDPrS+unCXo0rr/xCqlz8FB3Y4NjbWDK/aAa
-         fU2nyOi7D8poWp9EFEMQ9h/9hHDojnWqxz5A1R0LjNLDfPDwfOAmUnTu5OzmsvB8vEo2
-         VfLA==
-X-Forwarded-Encrypted: i=1; AJvYcCVdw/y+ve7vQ+iUPu8iB2UnAfTzVHYYByOYGedec7lAo7iPSC+vf4lYz0aNBK6N8/veyNb2FmkLlAI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwJhyJBs0CIFf3d/ZIvGb65b/4i0UYoXDivoVQ848Ourkpo8E78
-	H2QMK6XP6sfagbGDcCekVF2gVzcSI6OfZbAVsBVNaP8E/EIpsr3pGN7Zfvil6QM=
-X-Gm-Gg: ASbGncutzOQKR8N5+khMxWzJ1WgubA/4r+AZ9t/pAOtqwrYcTf6ZszjoCmjsVveynkK
-	u5+Sq+VfmFG5TPQESEIpSFQQ2dg8EpEs2ry2liQLRFj9m33ctiJz5wgCsx6rP20L+0kS5rwmzOQ
-	0k1o2YZnt43slPKB+NDilW4aR1h8ag+m+XB0RWTTRRvZXr5f7DqAMXZh71mjTl6u28duD7FX/AZ
-	MwFH8q0F13h86EJWsBn/wp/KfVf06gJSBrUfpgAWKRsjuL1V6DJtIYWGMhx/5poyQjd3xlFxfhc
-	Y7AS
-X-Google-Smtp-Source: AGHT+IE8MzXrgaBKBfP61PbTUvr8PgxgGWYeOWK4EEWyIPyWkez8gj6KrIAnQzmUFU9EFnwQTPVCzw==
-X-Received: by 2002:a05:6a20:914e:b0:1e1:70ab:b369 with SMTP id adf61e73a8af0-1eb214983dfmr16605568637.13.1737349085531;
-        Sun, 19 Jan 2025 20:58:05 -0800 (PST)
-Received: from [157.82.203.37] ([157.82.203.37])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72dab817529sm6251103b3a.67.2025.01.19.20.58.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 19 Jan 2025 20:58:05 -0800 (PST)
-Message-ID: <8052733d-3e79-4fd5-9bea-9d3724820bb8@daynix.com>
-Date: Mon, 20 Jan 2025 13:57:59 +0900
+	 In-Reply-To:Content-Type; b=G7B0wRIT3T0OYAw6HeF0oFydEgCtFWhx2/GnUPlvEzG8h1SEL0FIoD6c/4HVRjXJaqwXmRPln0SKBy2kjYpIERQcxDOv9uNfC7++w9WonNej9itGDo70PVF4c9+szl8JPHQASNW9e0fIqvPgA9TKoAn5z4fIJGwYhRwy/afEBNk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=gsI8qbEj; arc=none smtp.client-ip=192.198.163.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1737354384; x=1768890384;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=tnsWXzYfmvn62Lbs810i3rTWmbN0EXhNDxrDhCk8CD8=;
+  b=gsI8qbEjoLH2YfFIFL5USV/VmJlo6fYr1VpQ6dWImJJyzOnnxknHu57t
+   xbtijikuJ6lN+R0mSlBYF6Jn/qCBvxUCMtC/3u4A3/5BWlsnHN1ysa5UT
+   ICHMMEXh0hkhxJtQQ2wwlFadd/mrJj+vh985wPccLawqx356IXy8zzkfv
+   6/S8XrQY3RVVgWv7R8V/UaXcrBI1Gyj0zJuo6Vl+LV95u5Qq3DK9rvNNK
+   yQKJNFHX2XNHCRV0CpapQF/EGgFJC5n13wdMNc11WiQ2gXlJBH6IyTzL8
+   Ttpg84BoVUa/WUXX7VkrU+cqb0v9sTbimDgdBS2DLv8aDdF/jTkMM2kR6
+   Q==;
+X-CSE-ConnectionGUID: 32tkYXHESoCIyNNDKXjxTQ==
+X-CSE-MsgGUID: y9NCaxrOQiKk4j+wIU0ehQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11320"; a="37622989"
+X-IronPort-AV: E=Sophos;i="6.13,218,1732608000"; 
+   d="scan'208";a="37622989"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jan 2025 22:26:15 -0800
+X-CSE-ConnectionGUID: 2o19Sr1rR0+02sq9LFLQ2g==
+X-CSE-MsgGUID: X0kZiFOHTdmNQOkx3eVPsg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; 
+   d="scan'208";a="106227294"
+Received: from mohdfai2-mobl.gar.corp.intel.com (HELO [10.247.64.131]) ([10.247.64.131])
+  by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jan 2025 22:26:01 -0800
+Message-ID: <84770113-2546-4035-8bd4-bf9cedcfb00f@linux.intel.com>
+Date: Mon, 20 Jan 2025 14:25:45 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -81,156 +67,200 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] tun: Set num_buffers for virtio 1.0
-To: Jason Wang <jasowang@redhat.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Shuah Khan <shuah@kernel.org>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-kselftest@vger.kernel.org,
- Yuri Benditovich <yuri.benditovich@daynix.com>,
- Andrew Melnychenko <andrew@daynix.com>,
- Stephen Hemminger <stephen@networkplumber.org>, gur.stavi@huawei.com,
- devel@daynix.com
-References: <20250109-tun-v2-0-388d7d5a287a@daynix.com>
- <20250109-tun-v2-3-388d7d5a287a@daynix.com>
- <CACGkMEsm5DCb+n3NYeRjmq3rAANztZz5QmV8rbPNo+cH-=VzDQ@mail.gmail.com>
- <20250110052246-mutt-send-email-mst@kernel.org>
- <2e015ee6-8a3b-43fb-b119-e1921139c74b@daynix.com>
- <CACGkMEuiyfH-QitiiKJ__-8NiTjoOfc8Nx5BwLM-GOfPpVEitA@mail.gmail.com>
- <fcb301e8-c808-4e20-92dd-2e3b83998d18@daynix.com>
- <CACGkMEvBU3mLbW+-nOscriR-SeDvPSm1mtwwgznYFOocuao5MQ@mail.gmail.com>
- <cc79bef1-c24e-448d-bc20-f8302e341b2c@daynix.com>
- <CACGkMEsJUb3ZLm3rLuaayDAS4kf-vbY03wL4M9j1K+Z=a4BDig@mail.gmail.com>
+Subject: Re: [PATCH bpf-next v6 4/4] igc: Add launch time support to XDP ZC
+To: Song Yoong Siang <yoong.siang.song@intel.com>,
+ "David S . Miller" <davem@davemloft.net>, Eric Dumazet
+ <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
+ Willem de Bruijn <willemb@google.com>,
+ Florian Bezdeka <florian.bezdeka@siemens.com>,
+ Donald Hunter <donald.hunter@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+ Bjorn Topel <bjorn@kernel.org>, Magnus Karlsson <magnus.karlsson@intel.com>,
+ Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
+ Jonathan Lemon <jonathan.lemon@gmail.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, Alexei Starovoitov <ast@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>,
+ Jesper Dangaard Brouer <hawk@kernel.org>,
+ John Fastabend <john.fastabend@gmail.com>, Joe Damato <jdamato@fastly.com>,
+ Stanislav Fomichev <sdf@fomichev.me>, Xuan Zhuo
+ <xuanzhuo@linux.alibaba.com>, Mina Almasry <almasrymina@google.com>,
+ Daniel Jurgens <danielj@nvidia.com>, Andrii Nakryiko <andrii@kernel.org>,
+ Eduard Zingerman <eddyz87@gmail.com>, Mykola Lysenko <mykolal@fb.com>,
+ Martin KaFai Lau <martin.lau@linux.dev>, Song Liu <song@kernel.org>,
+ Yonghong Song <yonghong.song@linux.dev>, KP Singh <kpsingh@kernel.org>,
+ Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
+ Shuah Khan <shuah@kernel.org>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Jose Abreu <joabreu@synopsys.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Tony Nguyen <anthony.l.nguyen@intel.com>,
+ Przemek Kitszel <przemyslaw.kitszel@intel.com>
+Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, bpf@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org, intel-wired-lan@lists.osuosl.org,
+ xdp-hints@xdp-project.net
+References: <20250116155350.555374-1-yoong.siang.song@intel.com>
+ <20250116155350.555374-5-yoong.siang.song@intel.com>
 Content-Language: en-US
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <CACGkMEsJUb3ZLm3rLuaayDAS4kf-vbY03wL4M9j1K+Z=a4BDig@mail.gmail.com>
+From: "Abdul Rahim, Faizal" <faizal.abdul.rahim@linux.intel.com>
+In-Reply-To: <20250116155350.555374-5-yoong.siang.song@intel.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 2025/01/20 9:40, Jason Wang wrote:
-> On Thu, Jan 16, 2025 at 1:30 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
->>
->> On 2025/01/16 10:06, Jason Wang wrote:
->>> On Wed, Jan 15, 2025 at 1:07 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
->>>>
->>>> On 2025/01/13 12:04, Jason Wang wrote:
->>>>> On Fri, Jan 10, 2025 at 7:12 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
->>>>>>
->>>>>> On 2025/01/10 19:23, Michael S. Tsirkin wrote:
->>>>>>> On Fri, Jan 10, 2025 at 11:27:13AM +0800, Jason Wang wrote:
->>>>>>>> On Thu, Jan 9, 2025 at 2:59 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
->>>>>>>>>
->>>>>>>>> The specification says the device MUST set num_buffers to 1 if
->>>>>>>>> VIRTIO_NET_F_MRG_RXBUF has not been negotiated.
->>>>>>>>
->>>>>>>> Have we agreed on how to fix the spec or not?
->>>>>>>>
->>>>>>>> As I replied in the spec patch, if we just remove this "MUST", it
->>>>>>>> looks like we are all fine?
->>>>>>>>
->>>>>>>> Thanks
->>>>>>>
->>>>>>> We should replace MUST with SHOULD but it is not all fine,
->>>>>>> ignoring SHOULD is a quality of implementation issue.
->>>>>>>
->>>>>
->>>>> So is this something that the driver should notice?
->>>>>
->>>>>>
->>>>>> Should we really replace it? It would mean that a driver conformant with
->>>>>> the current specification may not be compatible with a device conformant
->>>>>> with the future specification.
->>>>>
->>>>> I don't get this. We are talking about devices and we want to relax so
->>>>> it should compatibile.
->>>>
->>>>
->>>> The problem is:
->>>> 1) On the device side, the num_buffers can be left uninitialized due to bugs
->>>> 2) On the driver side, the specification allows assuming the num_buffers
->>>> is set to one.
->>>>
->>>> Relaxing the device requirement will replace "due to bugs" with
->>>> "according to the specification" in 1). It still contradicts with 2) so
->>>> does not fix compatibility.
->>>
->>> Just to clarify I meant we can simply remove the following:
->>>
->>> """
->>> The device MUST use only a single descriptor if VIRTIO_NET_F_MRG_RXBUF
->>> was not negotiated. Note: This means that num_buffers will always be 1
->>> if VIRTIO_NET_F_MRG_RXBUF is not negotiated.
->>> """
->>>
->>> And
->>>
->>> """
->>> If VIRTIO_NET_F_MRG_RXBUF has not been negotiated, the device MUST set
->>> num_buffers to 1.
->>> """
->>>
->>> This seems easier as it reflects the fact where some devices don't set
->>> it. And it eases the transitional device as it doesn't need to have
->>> any special care.
->>
->> That can potentially break existing drivers that are compliant with the
->> current and assumes the num_buffers is set to 1.
-> 
-> Those drivers are already 'broken'. Aren't they?
 
-The drivers are not broken, but vhost_net is. The driver works fine as 
-long as it's used with a device compliant with the specification. If we 
-relax the device requirement in the future specification, the drivers 
-may not work with devices compliant with the revised specification.
+Hi Siang.
 
-Regards,
-Akihiko Odaki
+On 16/1/2025 11:53 pm, Song Yoong Siang wrote:
+> Enable Launch Time Control (LTC) support to XDP zero copy via XDP Tx
+> metadata framework.
+> 
+> This patch is tested with tools/testing/selftests/bpf/xdp_hw_metadata on
+> Intel I225-LM Ethernet controller. Below are the test steps and result.
+> 
+> Test Steps:
+> 1. At DUT, start xdp_hw_metadata selftest application:
+>     $ sudo ./xdp_hw_metadata enp2s0 -l 1000000000 -L 1
+> 
+> 2. At Link Partner, send an UDP packet with VLAN priority 1 to port 9091 of
+>     DUT.
+> 
+> When launch time is set to 1s in the future, the delta between launch time
+> and transmit hardware timestamp is equal to 0.016us, as shown in result
+> below:
+>    0x562ff5dc8880: rx_desc[4]->addr=84110 addr=84110 comp_addr=84110 EoP
+>    rx_hash: 0xE343384 with RSS type:0x1
+>    HW RX-time:   1734578015467548904 (sec:1734578015.4675) delta to User RX-time sec:0.0002 (183.103 usec)
+>    XDP RX-time:   1734578015467651698 (sec:1734578015.4677) delta to User RX-time sec:0.0001 (80.309 usec)
+>    No rx_vlan_tci or rx_vlan_proto, err=-95
+>    0x562ff5dc8880: ping-pong with csum=561c (want c7dd) csum_start=34 csum_offset=6
+>    HW RX-time:   1734578015467548904 (sec:1734578015.4675) delta to HW Launch-time sec:1.0000 (1000000.000 usec)
+>    0x562ff5dc8880: complete tx idx=4 addr=4018
+>    HW Launch-time:   1734578016467548904 (sec:1734578016.4675) delta to HW TX-complete-time sec:0.0000 (0.016 usec)
+>    HW TX-complete-time:   1734578016467548920 (sec:1734578016.4675) delta to User TX-complete-time sec:0.0000 (32.546 usec)
+>    XDP RX-time:   1734578015467651698 (sec:1734578015.4677) delta to User TX-complete-time sec:0.9999 (999929.768 usec)
+>    HW RX-time:   1734578015467548904 (sec:1734578015.4675) delta to HW TX-complete-time sec:1.0000 (1000000.016 usec)
+>    0x562ff5dc8880: complete rx idx=132 addr=84110
 
+To be cautious, could we perform a stress test by sending a higher number 
+of packets with launch time? For example, we could send 200 packets, each 
+configured with a launch time, and verify that the driver continues to 
+function correctly afterward.
+
+> Signed-off-by: Song Yoong Siang <yoong.siang.song@intel.com>
+> ---
+>   drivers/net/ethernet/intel/igc/igc_main.c | 78 ++++++++++++++++-------
+>   1 file changed, 56 insertions(+), 22 deletions(-)
 > 
-> Thanks
-> 
->>
->> Regards,
->> Akihiko Odaki
->>
->>>
->>> Then we don't need any driver normative so I don't see any conflict.
->>>
->>> Michael suggests we use "SHOULD", but if this is something that the
->>> driver needs to be aware of I don't know how "SHOULD" can help a lot
->>> or not.
->>>
->>>>
->>>> Instead, we should make the driver requirement stricter to change 2).
->>>> That is what "[PATCH v3] virtio-net: Ignore num_buffers when unused" does:
->>>> https://lore.kernel.org/r/20250110-reserved-v3-1-2ade0a5d2090@daynix.com
->>>>
->>>>>
->>>>>>
->>>>>> We are going to fix all implementations known to buggy (QEMU and Linux)
->>>>>> anyway so I think it's just fine to leave that part of specification as is.
->>>>>
->>>>> I don't think we can fix it all.
->>>>
->>>> It essentially only requires storing 16 bits. There are details we need
->>>> to work out, but it should be possible to fix.
->>>
->>> I meant it's not realistic to fix all the hypervisors. Note that
->>> modern devices have been implemented for about a decade so we may have
->>> too many versions of various hypervisors. (E.g DPDK seems to stick
->>> with the same behaviour of the current kernel).
->>   > >>
->>>> Regards,
->>>> Akihiko Odaki
->>>>
->>>
->>> Thanks
->>>
->>
-> 
+> diff --git a/drivers/net/ethernet/intel/igc/igc_main.c b/drivers/net/ethernet/intel/igc/igc_main.c
+> index 27872bdea9bd..6857f5f5b4b2 100644
+> --- a/drivers/net/ethernet/intel/igc/igc_main.c
+> +++ b/drivers/net/ethernet/intel/igc/igc_main.c
+> @@ -1566,6 +1566,26 @@ static bool igc_request_tx_tstamp(struct igc_adapter *adapter, struct sk_buff *s
+>   	return false;
+>   }
+>   
+> +static void igc_insert_empty_packet(struct igc_ring *tx_ring)
+> +{
+> +	struct igc_tx_buffer *empty_info;
+> +	struct sk_buff *empty;
+> +	void *data;
+> +
+> +	empty_info = &tx_ring->tx_buffer_info[tx_ring->next_to_use];
+> +	empty = alloc_skb(IGC_EMPTY_FRAME_SIZE, GFP_ATOMIC);
+> +	if (!empty)
+> +		return;
+> +
+> +	data = skb_put(empty, IGC_EMPTY_FRAME_SIZE);
+> +	memset(data, 0, IGC_EMPTY_FRAME_SIZE);
+> +
+> +	igc_tx_ctxtdesc(tx_ring, 0, false, 0, 0, 0);
+> +
+> +	if (igc_init_tx_empty_descriptor(tx_ring, empty, empty_info) < 0)
+> +		dev_kfree_skb_any(empty);
+> +}
+> +
+
+The function igc_insert_empty_packet() appears to wrap existing code to 
+enhance reusability, with no new changes related to enabling launch-time 
+XDP ZC functionality. If so, could we split this into a separate commit? 
+This would make it clearer for the reader to distinguish between the 
+refactoring changes and the new changes related to enabling launch-time XDP 
+ZC support.
+
+>   static netdev_tx_t igc_xmit_frame_ring(struct sk_buff *skb,
+>   				       struct igc_ring *tx_ring)
+>   {
+> @@ -1603,26 +1623,8 @@ static netdev_tx_t igc_xmit_frame_ring(struct sk_buff *skb,
+>   	skb->tstamp = ktime_set(0, 0);
+>   	launch_time = igc_tx_launchtime(tx_ring, txtime, &first_flag, &insert_empty);
+>   
+> -	if (insert_empty) {
+> -		struct igc_tx_buffer *empty_info;
+> -		struct sk_buff *empty;
+> -		void *data;
+> -
+> -		empty_info = &tx_ring->tx_buffer_info[tx_ring->next_to_use];
+> -		empty = alloc_skb(IGC_EMPTY_FRAME_SIZE, GFP_ATOMIC);
+> -		if (!empty)
+> -			goto done;
+> -
+> -		data = skb_put(empty, IGC_EMPTY_FRAME_SIZE);
+> -		memset(data, 0, IGC_EMPTY_FRAME_SIZE);
+> -
+> -		igc_tx_ctxtdesc(tx_ring, 0, false, 0, 0, 0);
+> -
+> -		if (igc_init_tx_empty_descriptor(tx_ring,
+> -						 empty,
+> -						 empty_info) < 0)
+> -			dev_kfree_skb_any(empty);
+> -	}
+> +	if (insert_empty)
+> +		igc_insert_empty_packet(tx_ring);
+>   
+>   done:
+>   	/* record the location of the first descriptor for this packet */
+> @@ -2955,9 +2957,33 @@ static u64 igc_xsk_fill_timestamp(void *_priv)
+>   	return *(u64 *)_priv;
+>   }
+>   
+> +static void igc_xsk_request_launch_time(u64 launch_time, void *_priv)
+> +{
+> +	struct igc_metadata_request *meta_req = _priv;
+> +	struct igc_ring *tx_ring = meta_req->tx_ring;
+> +	__le32 launch_time_offset;
+> +	bool insert_empty = false;
+> +	bool first_flag = false;
+> +
+> +	if (!tx_ring->launchtime_enable)
+> +		return;
+> +
+> +	launch_time_offset = igc_tx_launchtime(tx_ring,
+> +					       ns_to_ktime(launch_time),
+> +					       &first_flag, &insert_empty);
+> +	if (insert_empty) {
+> +		igc_insert_empty_packet(tx_ring);
+> +		meta_req->tx_buffer =
+> +			&tx_ring->tx_buffer_info[tx_ring->next_to_use];
+> +	}
+> +
+> +	igc_tx_ctxtdesc(tx_ring, launch_time_offset, first_flag, 0, 0, 0);
+> +}
+> +
+>   const struct xsk_tx_metadata_ops igc_xsk_tx_metadata_ops = {
+>   	.tmo_request_timestamp		= igc_xsk_request_timestamp,
+>   	.tmo_fill_timestamp		= igc_xsk_fill_timestamp,
+> +	.tmo_request_launch_time	= igc_xsk_request_launch_time,
+>   };
+>   
+>   static void igc_xdp_xmit_zc(struct igc_ring *ring)
+> @@ -2980,7 +3006,7 @@ static void igc_xdp_xmit_zc(struct igc_ring *ring)
+>   	ntu = ring->next_to_use;
+>   	budget = igc_desc_unused(ring);
+>   
+> -	while (xsk_tx_peek_desc(pool, &xdp_desc) && budget--) {
+> +	while (xsk_tx_peek_desc(pool, &xdp_desc) && budget >= 4) {
+
+Could we add some explanation on what & why the value "4" is used ?
 
 
