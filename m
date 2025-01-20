@@ -1,38 +1,39 @@
-Return-Path: <linux-doc+bounces-35671-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35656-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53C3DA16752
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 08:26:39 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 08933A166E3
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 08:06:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 4B8AD7A3E5B
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 07:26:30 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4261516446C
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 07:06:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D56CB18FC79;
-	Mon, 20 Jan 2025 07:26:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7775214EC7E;
+	Mon, 20 Jan 2025 07:06:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="F3rVdnUk"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="FbUiWvKR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m15590.qiye.163.com (mail-m15590.qiye.163.com [101.71.155.90])
+Received: from mail-m49207.qiye.163.com (mail-m49207.qiye.163.com [45.254.49.207])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 883D835968
-	for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2025 07:26:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.90
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B0B935968
+	for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2025 07:06:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.207
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737357992; cv=none; b=rtdsiXNGpUGvvsny1kICKQcth1N5oupkQoOalO0dStjIODSJoAIhzkoXCjHljT6sqMTxe899qGXwap3m1zJFgJnUc6oArJw4U1gw54ZREgyJsGo12cVyET6KnoodNjns0SwAzKcFmCoQxH6rnxEB2RuW9vJorekchx8MvnUNCQ0=
+	t=1737356781; cv=none; b=grzh9KdIOTyfv+rnwe1MrVOlfwr0l7uNcKXlZxhfNUQOCA+Q19RxnZrToKXdE3yPRSiGfVpGuR+EqzeY1rloEibKEDU7irxnX0Zi/dyo8LRcxVWQP8vffE6l8RsEqG/gAn3XtgUuLJM3YbTx/V9nUjMmu/mDVFJlwx+6GTptvMo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737357992; c=relaxed/simple;
-	bh=qziJo4QS+ISV2b2lNicMHsAdawU2OiJ0TXqWdtlWAvw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=cgyzeSNcrjbxP0hDzss9myAfaA3hHVxz8L+gtq3fXiSYEhRShYmQyX6+fGKDd5WrLNQTOnd/vB37Q2T+gyE0Mj7nJcr8C2fearlQKeTDLvDvAwzrOstBC5cYECO7/60quTs96p57d7p4TI+SzFU2OdCNvFW1A3hGHsyGJjafnlk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=F3rVdnUk; arc=none smtp.client-ip=101.71.155.90
+	s=arc-20240116; t=1737356781; c=relaxed/simple;
+	bh=q+FVBnpw4XyZ6eqzDSHJSo8ubsGYzUaE/f4kyGN8K70=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=MQ4lkFPsdaWR8Iq7wv56NOInVP65s00LlsHlL3+xnPmr+CthMs/mhEPWB4DlnRIjxTs85KWOZZbWARwRzgt85CNT6yrgbsFmiBYMzwamUK2Lake1hlxsalcS9bgecRdsZdLwPUS9AXDufyfQLXuzMxCPIgPgrtFgDADmw2UBfkA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=FbUiWvKR; arc=none smtp.client-ip=45.254.49.207
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
 Received: from fedora.localdomain (unknown [123.53.38.48])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 92a3cc5f;
-	Mon, 20 Jan 2025 14:50:55 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 92a3cc6f;
+	Mon, 20 Jan 2025 14:50:58 +0800 (GMT+08:00)
 From: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev,
@@ -42,65 +43,92 @@ Cc: zhaoyuehui@cqsoftware.com.cn,
 	zhangwei@cqsoftware.com.cn,
 	maoyuxian@cqsoftware.com.cn,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v2 0/7] Add all Chinese translations in the tpm directory
-Date: Mon, 20 Jan 2025 14:50:45 +0800
-Message-ID: <cover.1737354981.git.zhaoshuo@cqsoftware.com.cn>
+Subject: [PATCH v2 1/7] docs/zh_CN: Add tpm index Chinese translation
+Date: Mon, 20 Jan 2025 14:50:46 +0800
+Message-ID: <ff15a31080a2671da3e114fe95f2a19e294367bc.1737354981.git.zhaoshuo@cqsoftware.com.cn>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <cover.1737354981.git.zhaoshuo@cqsoftware.com.cn>
+References: <cover.1737354981.git.zhaoshuo@cqsoftware.com.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCSU1CVktPTR1NQkxOGUpLSVYVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDHRgdVhgfTh5PTx1CGkkZT1YVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKSUhVTkhVSENVT0NZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0hVSktLVU
 	pCS0tZBg++
-X-HM-Tid: 0a94827a87da09d0kunm92a3cc5f
+X-HM-Tid: 0a94827a909e09d0kunm92a3cc6f
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NDo6Pzo6KjISHjcSOjgqHz4y
-	LBQwFDJVSlVKTEhMSE5OQ05NQktNVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
-	WRILWUFZSklIVU5IVUhDVU9DWVdZCAFZQUpNTUw3Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nwg6SSo4HjIPFjcWHD8PHzdN
+	ASMaFENVSlVKTEhMSE5OQ05DQkNJVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
+	WRILWUFZSklIVU5IVUhDVU9DWVdZCAFZQUpNQ0k3Bg++
 DKIM-Signature:a=rsa-sha256;
-	b=F3rVdnUki2bhCoq3SsgLKmL74pBfQB0C1NUY2IFIHAfVy/TpZ4BDdEk5taib22+zQGqEll4abQPhPqH1r+FwCUDA/jwLZ75kYUwU8CMQ0mtNf3EU6v2ejV+WTke2OhpbHRnXT6Eqfsz7KijUMYtsG5raj7DYZHrhgA5ewGRFNp8=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
-	bh=mgXiC37Yjj035FVsxx3um8IWE7Py5YGG/AxghMq+Vaw=;
+	b=FbUiWvKRVfrGISzOMpLLfdLtQU+75AWqWO37T6zRpm7unlI0AFkJTukJ9LkAzH0DVwSbPkdHu/WH6JD6Yd1fXZWgxRXa04Ok+zQJAjidZJwUJhDGK7IrNH9+NYbnLwKZUj/Tphkqh9mmTUACd7WgHg3TGG9bLeHap/ALohh51zM=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
+	bh=SvNdNnRNNi9vOjLia4weCWPh8BltjDVjdGk66iKx1Eo=;
 	h=date:mime-version:subject:message-id:from;
 
-v2:
+Translate .../security/tpm/index.rst into Chinese
 
-modify .../translations/zh_CN/security/index.rst.
+Update the translation through commit 1d479e3cd652
+("Documentation: tpm: Add TPM security docs toctree entry")
 
-v1:
-
-Add all Chinese translations in the tpm directory.
-
-Shuo Zhao (7):
-  docs/zh_CN: Add tpm index Chinese translation
-  docs/zh_CN: Add tpm tpm_event_log Chinese translation
-  docs/zh_CN: Add tpm tpm-security Chinese translation
-  docs/zh_CN: Add tpm tpm_tis Chinese translation
-  docs/zh_CN: Add tpm tpm_vtpm_proxy Chinese translation
-  docs/zh_CN: Add tpm xen-tpmfront Chinese translation
-  docs/zh_CN: Add tpm tpm_ftpm_tee Chinese translation
-
- .../translations/zh_CN/security/index.rst     |   2 +-
- .../translations/zh_CN/security/tpm/index.rst |  20 +++
- .../zh_CN/security/tpm/tpm-security.rst       | 151 ++++++++++++++++++
- .../zh_CN/security/tpm/tpm_event_log.rst      |  49 ++++++
- .../zh_CN/security/tpm/tpm_ftpm_tee.rst       |  31 ++++
- .../zh_CN/security/tpm/tpm_tis.rst            |  43 +++++
- .../zh_CN/security/tpm/tpm_vtpm_proxy.rst     |  51 ++++++
- .../zh_CN/security/tpm/xen-tpmfront.rst       | 114 +++++++++++++
- 8 files changed, 460 insertions(+), 1 deletion(-)
+Signed-off-by: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
+---
+ .../translations/zh_CN/security/index.rst     |  2 +-
+ .../translations/zh_CN/security/tpm/index.rst | 21 +++++++++++++++++++
+ 2 files changed, 22 insertions(+), 1 deletion(-)
  create mode 100644 Documentation/translations/zh_CN/security/tpm/index.rst
- create mode 100644 Documentation/translations/zh_CN/security/tpm/tpm-security.rst
- create mode 100644 Documentation/translations/zh_CN/security/tpm/tpm_event_log.rst
- create mode 100644 Documentation/translations/zh_CN/security/tpm/tpm_ftpm_tee.rst
- create mode 100644 Documentation/translations/zh_CN/security/tpm/tpm_tis.rst
- create mode 100644 Documentation/translations/zh_CN/security/tpm/tpm_vtpm_proxy.rst
- create mode 100644 Documentation/translations/zh_CN/security/tpm/xen-tpmfront.rst
 
+diff --git a/Documentation/translations/zh_CN/security/index.rst b/Documentation/translations/zh_CN/security/index.rst
+index 38e9ce7cf471..0aacecabf0c0 100644
+--- a/Documentation/translations/zh_CN/security/index.rst
++++ b/Documentation/translations/zh_CN/security/index.rst
+@@ -19,6 +19,7 @@
+    lsm
+    sak
+    siphash
++   tpm/index
+    digsig
+    landlock
+ 
+@@ -29,6 +30,5 @@ TODOLIST:
+ * lsm-development
+ * SCTP
+ * self-protection
+-* tpm/index
+ * secrets/index
+ * ipe
+diff --git a/Documentation/translations/zh_CN/security/tpm/index.rst b/Documentation/translations/zh_CN/security/tpm/index.rst
+new file mode 100644
+index 000000000000..a3cfb2d11c86
+--- /dev/null
++++ b/Documentation/translations/zh_CN/security/tpm/index.rst
+@@ -0,0 +1,21 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. include:: ../../disclaimer-zh_CN.rst
++
++:Original: Documentation/security/tpm/index.rst
++
++:翻译:
++ 赵硕 Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
++
++================
++可信平台模块文档
++================
++
++.. toctree::
++
++TODOLIST:
++*   tpm_event_log
++*   tpm-security
++*   tpm_tis
++*   tpm_vtpm_proxy
++*   xen-tpmfront
++*   tpm_ftpm_tee
 -- 
 2.47.1
 
