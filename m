@@ -1,266 +1,159 @@
-Return-Path: <linux-doc+bounces-35651-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35654-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C7A4A166A3
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 07:26:30 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id EF18EA166D0
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 07:56:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id F34E718846BC
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 06:26:33 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 82A5D3A072E
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 06:56:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E7A7187325;
-	Mon, 20 Jan 2025 06:26:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 789F2176FB0;
+	Mon, 20 Jan 2025 06:56:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="gsI8qbEj"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="D92FhvzP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+Received: from mail-m15588.qiye.163.com (mail-m15588.qiye.163.com [101.71.155.88])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C325383;
-	Mon, 20 Jan 2025 06:26:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68AB01632FE
+	for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2025 06:56:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.88
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737354385; cv=none; b=Qu92wBZ1/Rqs0LDozU/ywQQEucVW3q8AsyON+MXifLpjNzapg9Caqfhb9mELJzkWAftb6pJap0TNQxeD9Rq6s/hGg3p+4LUplobMqUcIXAdStvlpolEBmvdbeCMO8MgZqWqSTnfAyRXoeb2gPrWt8I+U8ZVBZhZIccfZ5qx84xQ=
+	t=1737356180; cv=none; b=uyBzJWgm8/wHM3d8cyijPl4U9R/R5ipCLrlBGLc8rkhH/u3EfbQZEPgP1yf14IuFOJBng3h+3GanhXdo9rCGY2T/J9w23RCMUzk0Uiz8HHrEscPavOVc5ev8ScFzqeJ7vDrDwXhuWNHzZ+KBHP/FZounljttkIcclHCaQ4v3CCE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737354385; c=relaxed/simple;
-	bh=tnsWXzYfmvn62Lbs810i3rTWmbN0EXhNDxrDhCk8CD8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=G7B0wRIT3T0OYAw6HeF0oFydEgCtFWhx2/GnUPlvEzG8h1SEL0FIoD6c/4HVRjXJaqwXmRPln0SKBy2kjYpIERQcxDOv9uNfC7++w9WonNej9itGDo70PVF4c9+szl8JPHQASNW9e0fIqvPgA9TKoAn5z4fIJGwYhRwy/afEBNk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=gsI8qbEj; arc=none smtp.client-ip=192.198.163.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1737354384; x=1768890384;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=tnsWXzYfmvn62Lbs810i3rTWmbN0EXhNDxrDhCk8CD8=;
-  b=gsI8qbEjoLH2YfFIFL5USV/VmJlo6fYr1VpQ6dWImJJyzOnnxknHu57t
-   xbtijikuJ6lN+R0mSlBYF6Jn/qCBvxUCMtC/3u4A3/5BWlsnHN1ysa5UT
-   ICHMMEXh0hkhxJtQQ2wwlFadd/mrJj+vh985wPccLawqx356IXy8zzkfv
-   6/S8XrQY3RVVgWv7R8V/UaXcrBI1Gyj0zJuo6Vl+LV95u5Qq3DK9rvNNK
-   yQKJNFHX2XNHCRV0CpapQF/EGgFJC5n13wdMNc11WiQ2gXlJBH6IyTzL8
-   Ttpg84BoVUa/WUXX7VkrU+cqb0v9sTbimDgdBS2DLv8aDdF/jTkMM2kR6
-   Q==;
-X-CSE-ConnectionGUID: 32tkYXHESoCIyNNDKXjxTQ==
-X-CSE-MsgGUID: y9NCaxrOQiKk4j+wIU0ehQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11320"; a="37622989"
-X-IronPort-AV: E=Sophos;i="6.13,218,1732608000"; 
-   d="scan'208";a="37622989"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jan 2025 22:26:15 -0800
-X-CSE-ConnectionGUID: 2o19Sr1rR0+02sq9LFLQ2g==
-X-CSE-MsgGUID: X0kZiFOHTdmNQOkx3eVPsg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; 
-   d="scan'208";a="106227294"
-Received: from mohdfai2-mobl.gar.corp.intel.com (HELO [10.247.64.131]) ([10.247.64.131])
-  by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jan 2025 22:26:01 -0800
-Message-ID: <84770113-2546-4035-8bd4-bf9cedcfb00f@linux.intel.com>
-Date: Mon, 20 Jan 2025 14:25:45 +0800
+	s=arc-20240116; t=1737356180; c=relaxed/simple;
+	bh=JQBgEodTUm8CaenmxrYQI6aabeGTj0Cqt63Ng91TFrY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=fmql09P4e0ynawMy/w5TGJX3kwyKgY9+zoINmNyuZRxbudUhdr3bGv7R+Hb7ZOW0jZzLd+6Xfnv47hfpRFr1fRr78kwsLqj8Sm4bPwhF2+Qw5ixlzwn2Cdp51SVTQ79Kpuw4R+JO0D8kNH0GWOzMgqAJVAvSrSj8p6GtgEd5zWM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=D92FhvzP; arc=none smtp.client-ip=101.71.155.88
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
+Received: from fedora.localdomain (unknown [123.53.38.48])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 92a3cc7d;
+	Mon, 20 Jan 2025 14:50:59 +0800 (GMT+08:00)
+From: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
+To: alexs@kernel.org,
+	si.yanteng@linux.dev,
+	corbet@lwn.net
+Cc: zhaoyuehui@cqsoftware.com.cn,
+	zhaoshuo@cqsoftware.com.cn,
+	zhangwei@cqsoftware.com.cn,
+	maoyuxian@cqsoftware.com.cn,
+	linux-doc@vger.kernel.org
+Subject: [PATCH v2 2/7] docs/zh_CN: Add tpm tpm_event_log Chinese translation
+Date: Mon, 20 Jan 2025 14:50:47 +0800
+Message-ID: <0287c7309ecb1bf0ffd40d363f43f148beea0a18.1737354981.git.zhaoshuo@cqsoftware.com.cn>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <cover.1737354981.git.zhaoshuo@cqsoftware.com.cn>
+References: <cover.1737354981.git.zhaoshuo@cqsoftware.com.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH bpf-next v6 4/4] igc: Add launch time support to XDP ZC
-To: Song Yoong Siang <yoong.siang.song@intel.com>,
- "David S . Miller" <davem@davemloft.net>, Eric Dumazet
- <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
- Willem de Bruijn <willemb@google.com>,
- Florian Bezdeka <florian.bezdeka@siemens.com>,
- Donald Hunter <donald.hunter@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
- Bjorn Topel <bjorn@kernel.org>, Magnus Karlsson <magnus.karlsson@intel.com>,
- Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
- Jonathan Lemon <jonathan.lemon@gmail.com>,
- Andrew Lunn <andrew+netdev@lunn.ch>, Alexei Starovoitov <ast@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>,
- Jesper Dangaard Brouer <hawk@kernel.org>,
- John Fastabend <john.fastabend@gmail.com>, Joe Damato <jdamato@fastly.com>,
- Stanislav Fomichev <sdf@fomichev.me>, Xuan Zhuo
- <xuanzhuo@linux.alibaba.com>, Mina Almasry <almasrymina@google.com>,
- Daniel Jurgens <danielj@nvidia.com>, Andrii Nakryiko <andrii@kernel.org>,
- Eduard Zingerman <eddyz87@gmail.com>, Mykola Lysenko <mykolal@fb.com>,
- Martin KaFai Lau <martin.lau@linux.dev>, Song Liu <song@kernel.org>,
- Yonghong Song <yonghong.song@linux.dev>, KP Singh <kpsingh@kernel.org>,
- Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
- Shuah Khan <shuah@kernel.org>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Jose Abreu <joabreu@synopsys.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Tony Nguyen <anthony.l.nguyen@intel.com>,
- Przemek Kitszel <przemyslaw.kitszel@intel.com>
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, bpf@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, intel-wired-lan@lists.osuosl.org,
- xdp-hints@xdp-project.net
-References: <20250116155350.555374-1-yoong.siang.song@intel.com>
- <20250116155350.555374-5-yoong.siang.song@intel.com>
-Content-Language: en-US
-From: "Abdul Rahim, Faizal" <faizal.abdul.rahim@linux.intel.com>
-In-Reply-To: <20250116155350.555374-5-yoong.siang.song@intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDSU4YVhhISE5OHkhJGkNMTFYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKSUhVTkhVSENVT0NZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0hVSktLVU
+	pCS0tZBg++
+X-HM-Tid: 0a94827a96c209d0kunm92a3cc7d
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OQw6Iyo*TzISQzcVHDpIHzA5
+	NChPCQ1VSlVKTEhMSE5OQ01LTkJLVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
+	WRILWUFZSklIVU5IVUhDVU9DWVdZCAFZQUhPTkI3Bg++
+DKIM-Signature:a=rsa-sha256;
+	b=D92FhvzPTzDI/FvavcVN1m00Bdkt9Gw7WwKYyEyN4dTxH7i1zOSH8y1vlM0d6u67Ercc/PdMsHW/IVLRdkEQDgrecFoep4+3ps1+FYuPtKZgnvv7fPnR4ZsC9eAICHQfWyeP48NEeNSsh0DS57M4uQn93niwoRDjr5YvOL4Qva8=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
+	bh=0tOtWpDW0/pd0oHawIurF3Ik71dkfWiM/vT6g9h1QM0=;
+	h=date:mime-version:subject:message-id:from;
 
+Translate .../security/tpm/tpm_event_log.rst into Chinese.
 
-Hi Siang.
+Update the translation through commit 2ef5a7f1482c
+("tpm: Document UEFI event log quirks")
 
-On 16/1/2025 11:53 pm, Song Yoong Siang wrote:
-> Enable Launch Time Control (LTC) support to XDP zero copy via XDP Tx
-> metadata framework.
-> 
-> This patch is tested with tools/testing/selftests/bpf/xdp_hw_metadata on
-> Intel I225-LM Ethernet controller. Below are the test steps and result.
-> 
-> Test Steps:
-> 1. At DUT, start xdp_hw_metadata selftest application:
->     $ sudo ./xdp_hw_metadata enp2s0 -l 1000000000 -L 1
-> 
-> 2. At Link Partner, send an UDP packet with VLAN priority 1 to port 9091 of
->     DUT.
-> 
-> When launch time is set to 1s in the future, the delta between launch time
-> and transmit hardware timestamp is equal to 0.016us, as shown in result
-> below:
->    0x562ff5dc8880: rx_desc[4]->addr=84110 addr=84110 comp_addr=84110 EoP
->    rx_hash: 0xE343384 with RSS type:0x1
->    HW RX-time:   1734578015467548904 (sec:1734578015.4675) delta to User RX-time sec:0.0002 (183.103 usec)
->    XDP RX-time:   1734578015467651698 (sec:1734578015.4677) delta to User RX-time sec:0.0001 (80.309 usec)
->    No rx_vlan_tci or rx_vlan_proto, err=-95
->    0x562ff5dc8880: ping-pong with csum=561c (want c7dd) csum_start=34 csum_offset=6
->    HW RX-time:   1734578015467548904 (sec:1734578015.4675) delta to HW Launch-time sec:1.0000 (1000000.000 usec)
->    0x562ff5dc8880: complete tx idx=4 addr=4018
->    HW Launch-time:   1734578016467548904 (sec:1734578016.4675) delta to HW TX-complete-time sec:0.0000 (0.016 usec)
->    HW TX-complete-time:   1734578016467548920 (sec:1734578016.4675) delta to User TX-complete-time sec:0.0000 (32.546 usec)
->    XDP RX-time:   1734578015467651698 (sec:1734578015.4677) delta to User TX-complete-time sec:0.9999 (999929.768 usec)
->    HW RX-time:   1734578015467548904 (sec:1734578015.4675) delta to HW TX-complete-time sec:1.0000 (1000000.016 usec)
->    0x562ff5dc8880: complete rx idx=132 addr=84110
+Signed-off-by: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
+---
+ .../translations/zh_CN/security/tpm/index.rst |  3 +-
+ .../zh_CN/security/tpm/tpm_event_log.rst      | 49 +++++++++++++++++++
+ 2 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/security/tpm/tpm_event_log.rst
 
-To be cautious, could we perform a stress test by sending a higher number 
-of packets with launch time? For example, we could send 200 packets, each 
-configured with a launch time, and verify that the driver continues to 
-function correctly afterward.
-
-> Signed-off-by: Song Yoong Siang <yoong.siang.song@intel.com>
-> ---
->   drivers/net/ethernet/intel/igc/igc_main.c | 78 ++++++++++++++++-------
->   1 file changed, 56 insertions(+), 22 deletions(-)
-> 
-> diff --git a/drivers/net/ethernet/intel/igc/igc_main.c b/drivers/net/ethernet/intel/igc/igc_main.c
-> index 27872bdea9bd..6857f5f5b4b2 100644
-> --- a/drivers/net/ethernet/intel/igc/igc_main.c
-> +++ b/drivers/net/ethernet/intel/igc/igc_main.c
-> @@ -1566,6 +1566,26 @@ static bool igc_request_tx_tstamp(struct igc_adapter *adapter, struct sk_buff *s
->   	return false;
->   }
->   
-> +static void igc_insert_empty_packet(struct igc_ring *tx_ring)
-> +{
-> +	struct igc_tx_buffer *empty_info;
-> +	struct sk_buff *empty;
-> +	void *data;
-> +
-> +	empty_info = &tx_ring->tx_buffer_info[tx_ring->next_to_use];
-> +	empty = alloc_skb(IGC_EMPTY_FRAME_SIZE, GFP_ATOMIC);
-> +	if (!empty)
-> +		return;
-> +
-> +	data = skb_put(empty, IGC_EMPTY_FRAME_SIZE);
-> +	memset(data, 0, IGC_EMPTY_FRAME_SIZE);
-> +
-> +	igc_tx_ctxtdesc(tx_ring, 0, false, 0, 0, 0);
-> +
-> +	if (igc_init_tx_empty_descriptor(tx_ring, empty, empty_info) < 0)
-> +		dev_kfree_skb_any(empty);
-> +}
-> +
-
-The function igc_insert_empty_packet() appears to wrap existing code to 
-enhance reusability, with no new changes related to enabling launch-time 
-XDP ZC functionality. If so, could we split this into a separate commit? 
-This would make it clearer for the reader to distinguish between the 
-refactoring changes and the new changes related to enabling launch-time XDP 
-ZC support.
-
->   static netdev_tx_t igc_xmit_frame_ring(struct sk_buff *skb,
->   				       struct igc_ring *tx_ring)
->   {
-> @@ -1603,26 +1623,8 @@ static netdev_tx_t igc_xmit_frame_ring(struct sk_buff *skb,
->   	skb->tstamp = ktime_set(0, 0);
->   	launch_time = igc_tx_launchtime(tx_ring, txtime, &first_flag, &insert_empty);
->   
-> -	if (insert_empty) {
-> -		struct igc_tx_buffer *empty_info;
-> -		struct sk_buff *empty;
-> -		void *data;
-> -
-> -		empty_info = &tx_ring->tx_buffer_info[tx_ring->next_to_use];
-> -		empty = alloc_skb(IGC_EMPTY_FRAME_SIZE, GFP_ATOMIC);
-> -		if (!empty)
-> -			goto done;
-> -
-> -		data = skb_put(empty, IGC_EMPTY_FRAME_SIZE);
-> -		memset(data, 0, IGC_EMPTY_FRAME_SIZE);
-> -
-> -		igc_tx_ctxtdesc(tx_ring, 0, false, 0, 0, 0);
-> -
-> -		if (igc_init_tx_empty_descriptor(tx_ring,
-> -						 empty,
-> -						 empty_info) < 0)
-> -			dev_kfree_skb_any(empty);
-> -	}
-> +	if (insert_empty)
-> +		igc_insert_empty_packet(tx_ring);
->   
->   done:
->   	/* record the location of the first descriptor for this packet */
-> @@ -2955,9 +2957,33 @@ static u64 igc_xsk_fill_timestamp(void *_priv)
->   	return *(u64 *)_priv;
->   }
->   
-> +static void igc_xsk_request_launch_time(u64 launch_time, void *_priv)
-> +{
-> +	struct igc_metadata_request *meta_req = _priv;
-> +	struct igc_ring *tx_ring = meta_req->tx_ring;
-> +	__le32 launch_time_offset;
-> +	bool insert_empty = false;
-> +	bool first_flag = false;
-> +
-> +	if (!tx_ring->launchtime_enable)
-> +		return;
-> +
-> +	launch_time_offset = igc_tx_launchtime(tx_ring,
-> +					       ns_to_ktime(launch_time),
-> +					       &first_flag, &insert_empty);
-> +	if (insert_empty) {
-> +		igc_insert_empty_packet(tx_ring);
-> +		meta_req->tx_buffer =
-> +			&tx_ring->tx_buffer_info[tx_ring->next_to_use];
-> +	}
-> +
-> +	igc_tx_ctxtdesc(tx_ring, launch_time_offset, first_flag, 0, 0, 0);
-> +}
-> +
->   const struct xsk_tx_metadata_ops igc_xsk_tx_metadata_ops = {
->   	.tmo_request_timestamp		= igc_xsk_request_timestamp,
->   	.tmo_fill_timestamp		= igc_xsk_fill_timestamp,
-> +	.tmo_request_launch_time	= igc_xsk_request_launch_time,
->   };
->   
->   static void igc_xdp_xmit_zc(struct igc_ring *ring)
-> @@ -2980,7 +3006,7 @@ static void igc_xdp_xmit_zc(struct igc_ring *ring)
->   	ntu = ring->next_to_use;
->   	budget = igc_desc_unused(ring);
->   
-> -	while (xsk_tx_peek_desc(pool, &xdp_desc) && budget--) {
-> +	while (xsk_tx_peek_desc(pool, &xdp_desc) && budget >= 4) {
-
-Could we add some explanation on what & why the value "4" is used ?
+diff --git a/Documentation/translations/zh_CN/security/tpm/index.rst b/Documentation/translations/zh_CN/security/tpm/index.rst
+index a3cfb2d11c86..f324bd4dd093 100644
+--- a/Documentation/translations/zh_CN/security/tpm/index.rst
++++ b/Documentation/translations/zh_CN/security/tpm/index.rst
+@@ -12,8 +12,9 @@
+ 
+ .. toctree::
+ 
++   tpm_event_log
++
+ TODOLIST:
+-*   tpm_event_log
+ *   tpm-security
+ *   tpm_tis
+ *   tpm_vtpm_proxy
+diff --git a/Documentation/translations/zh_CN/security/tpm/tpm_event_log.rst b/Documentation/translations/zh_CN/security/tpm/tpm_event_log.rst
+new file mode 100644
+index 000000000000..9c173291ac3e
+--- /dev/null
++++ b/Documentation/translations/zh_CN/security/tpm/tpm_event_log.rst
+@@ -0,0 +1,49 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. include:: ../../disclaimer-zh_CN.rst
++
++:Original: Documentation/security/tpm/tpm_event_log.rst
++
++:翻译:
++ 赵硕 Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
++
++===========
++TPM事件日志
++===========
++
++本文档简要介绍了什么是TPM日志，以及它是如何从预启动固件移交到操作系统的。
++
++介绍
++====
++
++预启动固件维护一个事件日志，每当它将某些内容哈希到任何一个PCR寄存器时，该
++日志会添加新条目。这些事件按类型分类，并包含哈希后的PCR寄存器值。通常，预
++启动固件会哈希那些即将移交执行权或与启动过程相关的组件。
++
++其主要应用是远程认证，而它之所以有用的原因在[1]中第一部分很好地阐述了：
++
++认证用于向挑战者提供有关平台状态的信息。然而，PCR的内容难以解读；因此，当
++PCR内容附有测量日志时，认证通常会更有用。尽管测量日志本身并不可信，但它们
++包含比PCR内容更为丰富的信息集。PCR内容用于对测量日志进行验证。
++
++UEFI事件日志
++============
++
++UEFI提供的事件日志有一些比较奇怪的特性。
++
++在调用ExitBootServices()之前，Linux EFI引导加载程序会将事件日志复制到由
++引导加载程序自定义的配置表中。不幸的是，通过ExitBootServices()生成的事件
++并不会出现在这个表里。
++
++固件提供了一个所谓的最终事件配置表排序来解决这个问题。事件会在第一次调用
++EFI_TCG2_PROTOCOL.GetEventLog()后被镜像到这个表中。
++
++这引出了另一个问题：无法保证它不会在 Linux EFI stub 开始运行之前被调用。
++因此，在 stub 运行时，它需要计算并将最终事件表的大小保存到自定义配置表中，
++以便TPM驱动程序可以在稍后连接来自自定义配置表和最终事件表的两个事件日志时
++跳过这些事件。
++
++参考文献
++========
++
++- [1] https://trustedcomputinggroup.org/resource/pc-client-specific-platform-firmware-profile-specification/
++- [2] The final concatenation is done in drivers/char/tpm/eventlog/efi.c
+-- 
+2.47.1
 
 
