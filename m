@@ -1,193 +1,187 @@
-Return-Path: <linux-doc+bounces-35717-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35719-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57751A16AAF
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 11:25:50 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id D73BAA16B38
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 12:07:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id DC4EF1885EFD
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 10:25:53 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5B8F81884F0B
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2025 11:07:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E24C1B218A;
-	Mon, 20 Jan 2025 10:25:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9F1F41BD03F;
+	Mon, 20 Jan 2025 11:07:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="YpvcVHqe"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DIKprOX1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF890197A67
-	for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2025 10:25:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0394433981;
+	Mon, 20 Jan 2025 11:07:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737368744; cv=none; b=XbEGBPZQyMmz1zhmFym8yLYKAcfGmhEsVSDUet13L2vrK1If+EvuyfM/s3xbNdMNIhBpbhM7eHZaW44YpR6tNhGoueUNHsVhk3s9+l6oU1ScuHQrDpuQpeS6ne4ofItwziebPqV8Wc6gYqX5OTUoTXAnMnDxYvU9PpOTwacy7aE=
+	t=1737371259; cv=none; b=U+PRax0tax7DNXZXnbWLZX+lJyKi2/kOkfMbxH2PTyBSZrAVLO/OBB5msZ+4s3kxfmZUYeaTfF+hUmaRuGGo2VvjQlNtHQrsCdcVQmlpDiBVYwoj+OtJFgvq23FrIVFmApQYELkJlTq0D0UsV2+irKAiZbQC7Pws93wsppQrmgA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737368744; c=relaxed/simple;
-	bh=LD8OuVw8n3F+UjqdO0zdMsAuE9OqG7caHsIEKdL9ptU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bGHBJTS0G2xq0tcTtaxwK6esVGsEMBN1byydTqddjPBw/IpBD+StPAcI7TTqpY++1zTB2KLeeV0gp7F2MJeLlWjNQzPys7H1RYl7tasPkutAiBrtoHMeOay/oTSiH7o1ZkNVT3ATkJqHCq1/RabchryCGlDsklw8MlVu6hzUdbc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=YpvcVHqe; arc=none smtp.client-ip=209.85.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4362f61757fso43940245e9.2
-        for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2025 02:25:42 -0800 (PST)
+	s=arc-20240116; t=1737371259; c=relaxed/simple;
+	bh=NY8xOSTb5H82+FIEW3G7ByzU+dpqafjZ58KpUcTCBIM=;
+	h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:
+	 Mime-Version:Content-Type; b=fPbKqgsA5Qp3auWXi1hSgQj1ywWkjb3l0jaloZvu8Uqkp/7bVlR/5y0WE92vBbMVmtsCNyDjbkqW2DX2XKm0XcTd+6ikNO2tv9W5bfHjGbwiCHfG2GsstgRISz6xMaYvmHEnL1w/Mrv4zCeDQbjXvealaPXKV0xvhFIohqMrHUk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DIKprOX1; arc=none smtp.client-ip=209.85.160.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qt1-f169.google.com with SMTP id d75a77b69052e-467a1ee7ff2so37797951cf.0;
+        Mon, 20 Jan 2025 03:07:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1737368741; x=1737973541; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=/plAlONRzFatYjUDsmYEo6CR3UeB2Jc5rLAfXDiJdtk=;
-        b=YpvcVHqegktJxV4UHAHBIF5jDE0UA2mPIOI6a63q5OgN5gXz8ilwzncOp3w/+0Ziup
-         KYbBoojJXW9i5R3ATcUtmDDxwq0MN7rgROtmBBb2bWNgK7R9fN+dUjHity0pg07Lf7pe
-         LkEmYqW6iMZr4URw50Udj53PMaW60NaQ27+wJlE418k6uInmiz9AA6P1vIB81u70Cg01
-         RV8pNmngzTfXyABf4NtOjnNWSVJHDUZTyl74f2omyxNRF1f/ZHsQAE2w/y2/oIJPQ9yP
-         IeT6khiuzZNYlQGP+gSDm1dWOIcsQro57Sqqhq9JH94JPo3ON3V93gIDe9x22i41b/TA
-         Y1BQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737368741; x=1737973541;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1737371257; x=1737976057; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:subject:references
+         :in-reply-to:message-id:cc:to:from:date:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/plAlONRzFatYjUDsmYEo6CR3UeB2Jc5rLAfXDiJdtk=;
-        b=ts3SDfVUNX2/rbaLg9d1c8ikGcX6MVGejUSz3WJLnCBQtZfWrKxX8lZufM7jAhaoz5
-         d0MBk57mPwJ7piboZR81/WKGdnFDZ6NutjW/lmY0JuP6TMoELvqe2bWDrYM/8BF4gYQi
-         jDNxve6leS9Zv7Knx5/DGOjmvHhSzqUcE707OMOcP82jBgjKkE0F/Rj2DDI4yLSv74V1
-         r8xMSlHrskdqtqT52h/h5TrSU2kJ7WEeCcNZbKhGwtoiPYSufdzr9mulcvpZLR+vhhLj
-         s3uWbW6dAYwOLrLLvD46/NoI61hih9caXs25cDdSn7U4iDE+ppf5wG+O5DApCfq4BJKh
-         RkwQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWf209QhdcHgveskndHB3WlO19lwZAxrl9DKPt1qZoKWm0nX+tSYlCa57sEfxV2FWWwKNpJP35PNgM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YySck11HSpHRltlX4B7tptTMZiDSwL0z5isIi2/38rsmHIxIzg9
-	CaQSn0PWC2Amj8GTjwZ64eNKuSL6uqwxll3KlKdxMyfK7SVRBeeaWzn8uPD2O1I=
-X-Gm-Gg: ASbGncsJ9ieLUW+sIfbbUWwx+Z/jmpC9bv+AdvIdBAAErQ8SzK9oboick5n9WVqO1V/
-	/sjiaAHTFq+RRVNuCWygVoLQUx4zDrMYnZiZhJNwKhRzAh2gRTaKcn91DYM3sRq1YzYYCwaRiXM
-	5ZqL6VIXHIucXPZ79AX3F/ep32HjS+52Sd8uu1yS2ftd43haxdyE4Cf0UfRPsyGZDRQp6kZw2ip
-	O23Dh2uCDNl799ajkWHZxU8uyoxz+0YfYYbcZKLafBr29wId35KYi0zv30WvsyIIohc3kY=
-X-Google-Smtp-Source: AGHT+IGuenfcVRf8Q07QNfEdMYeTuOKNmKjxeSjYso288tHkR+4lZp1kulMIxxTWOTGhuEhOwe35wQ==
-X-Received: by 2002:a05:6000:b10:b0:382:5141:f631 with SMTP id ffacd0b85a97d-38bf56740b4mr8607242f8f.29.1737368741058;
-        Mon, 20 Jan 2025 02:25:41 -0800 (PST)
-Received: from pathway.suse.cz ([176.114.240.50])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38bf3221be1sm10086350f8f.31.2025.01.20.02.25.40
+        bh=DJ6K6nvdOyUKshD5noQZW6cAKo0Nx9BnvWyFQDdbnYI=;
+        b=DIKprOX1TSVhLve+MrzKRiIxbXudZrMDML1z2QSdh6QoIbumyDFeO8GXM/fSHkE0Ia
+         nKRr5hjULJdzVfHDj8Xyezzuafy8cL9+depjsE8Y1XQGClIrN+ei7GfLN12m2mOC7yxO
+         l2bddC7hcAUoMImBU7ip+AK0jEjCVbW0c/bcpQIqE+AjLUWl97Q5Yqp59puCX3Zds2tG
+         4PJ84A31idBN6BzwuOTBCIo8MvUQHz7YfL5Y4z6EUVAtO5cYsfUUIH2ZvIL1i7Hgk2kk
+         LEBU+knAHrCMtfwQ7MJFtjSpTTXUkzpHaGJA/F/Kt/p9YpPDLT04kDZDaeFcYMbG3biw
+         TNzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1737371257; x=1737976057;
+        h=content-transfer-encoding:mime-version:subject:references
+         :in-reply-to:message-id:cc:to:from:date:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=DJ6K6nvdOyUKshD5noQZW6cAKo0Nx9BnvWyFQDdbnYI=;
+        b=QucVmq4mLz4heQW89EQjRBx/+o96SDiUxGNTZdQoukZd0Z1QsO8KUwHZothV82lTAI
+         YCqzrXFmibt6YiawxptLFZSbDuMmXNuZDYj6XIysJU54fVxgOvFLF3Z2HDC/UDG2qWrF
+         r9P5/G1zj7Bwza2WOEbqrhQTYaKWNd5Dzr3tVtoLT83ae/5XWWxKopibWP+tkn9cQ2VW
+         53IfjqzXjaYOTvPKealk+5SXlebywAkjMrVeIguRdTS+7EZw8tmefQhqw1Pwt4oR99vJ
+         /0OxvEHp5NqbK41eQ6gEX7vAVypIWIu6Izpl4pN8Qz4G6UNtwWyPk97k7MoYxMKrz/t6
+         DmBQ==
+X-Forwarded-Encrypted: i=1; AJvYcCULmBmKBkk51/0lnbCxR83QPrC+pou68GokdcTfeI9yFBj+8TzDzaAGXw4dtMtkPLchrqk=@vger.kernel.org, AJvYcCUmjO4NF1OK9zCIpyT7G9QSNqeGZXG5B6El8nDIQxXyUniHptjPNj8Ne18tm8sg9sQ1gcgmg5D4mbBbramE5PsI@vger.kernel.org, AJvYcCW6LL4Rjc68VASwy1Zu2oyZji2s+n+pt1e6XwOCQimxLG2hjxmubyUpBwj7KpweU3erYxZnSSLI+69N@vger.kernel.org, AJvYcCWMUnnrDKUCgtRnVj29DacbltYe7nNSpzjdT9PTWV19x4ertsd9rk+CcoEHn4Vbxh2F3+4R/Tai1ggxpFHr@vger.kernel.org, AJvYcCX3nrZ5V3mA8sHJkK/sTWxnRergGIl6x/B1cBi6FBbAm6A6dr8b0WfS7njIso3QpjBc+7lzv0Np@vger.kernel.org
+X-Gm-Message-State: AOJu0YzSj6gswJVJVDYLS+LwMLH/b/L62rnFvaE884EM38cE4ETtKl0d
+	khlZHTDjnKvjrMJW5zZxAsVMoZWFNaHsd4YfBRe9Ox4Poht4ikYQ
+X-Gm-Gg: ASbGncv6xIuNLJ9B0OoBMHowRwhVIkeye+hFMJWYTnW6321DC6tvZZ2ki8z/gQpc+I7
+	SXzKgiVF8PCW7Gi0Njj4A0sj+KbE318epbIQeyNRf8onX6vq1edXxjPnK/Sd/d7FEwnREOTap/E
+	RB464PhvWmdZJ4hF9YtIeegwHuk56qHkMvSLXsSeFpEkkCZB0tczy7Pf3TX0bi8/K4eDRVuF+Ok
+	D3H/OMLxrvtqkHpFBV/rszkF62bWREOPO44WYgi/9Q857qoaOpI7tyKD6qOR3jN10iHcr77fEdF
+	npMZaupi/zmjuDZhnZxBh7R8HsGUvS9qsaOjJRWcsg==
+X-Google-Smtp-Source: AGHT+IEm2VfaURgMKTWVUkW8metfum5VkiD89JCWy5iWkkfOq8QOhBxbNhbeIAP1Xgz3v7nvNAsr3w==
+X-Received: by 2002:ac8:7fd6:0:b0:46c:78cc:e48 with SMTP id d75a77b69052e-46e12a0c2e0mr144720311cf.9.1737371256783;
+        Mon, 20 Jan 2025 03:07:36 -0800 (PST)
+Received: from localhost (15.60.86.34.bc.googleusercontent.com. [34.86.60.15])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-46e1042efa5sm41216411cf.66.2025.01.20.03.07.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jan 2025 02:25:40 -0800 (PST)
-Date: Mon, 20 Jan 2025 11:25:38 +0100
-From: Petr Mladek <pmladek@suse.com>
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: David Laight <david.laight.linux@gmail.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	John Ogness <john.ogness@linutronix.de>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] hexdump: Allow skipping identical lines
-Message-ID: <Z44kojleQta1bfoe@pathway.suse.cz>
-References: <20250110-perso-hexdump-v2-0-7f9a6a799170@bootlin.com>
- <20250110-perso-hexdump-v2-2-7f9a6a799170@bootlin.com>
- <Z4UInSRCSXzNN5Ug@smile.fi.intel.com>
- <Z4qE7tsTOvggdUET@pathway.suse.cz>
- <20250117192522.0b2e7c65@pumpkin>
- <87wmepvnns.fsf@bootlin.com>
+        Mon, 20 Jan 2025 03:07:35 -0800 (PST)
+Date: Mon, 20 Jan 2025 06:07:35 -0500
+From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+To: Akihiko Odaki <akihiko.odaki@daynix.com>, 
+ Jonathan Corbet <corbet@lwn.net>, 
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
+ Jason Wang <jasowang@redhat.com>, 
+ "David S. Miller" <davem@davemloft.net>, 
+ Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, 
+ Paolo Abeni <pabeni@redhat.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, 
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>, 
+ Shuah Khan <shuah@kernel.org>, 
+ linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ netdev@vger.kernel.org, 
+ kvm@vger.kernel.org, 
+ virtualization@lists.linux-foundation.org, 
+ linux-kselftest@vger.kernel.org, 
+ Yuri Benditovich <yuri.benditovich@daynix.com>, 
+ Andrew Melnychenko <andrew@daynix.com>, 
+ Stephen Hemminger <stephen@networkplumber.org>, 
+ gur.stavi@huawei.com, 
+ devel@daynix.com, 
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: Willem de Bruijn <willemb@google.com>
+Message-ID: <678e2e779985a_19c7372947c@willemb.c.googlers.com.notmuch>
+In-Reply-To: <20250120-tun-v4-0-ee81dda03d7f@daynix.com>
+References: <20250120-tun-v4-0-ee81dda03d7f@daynix.com>
+Subject: Re: [PATCH net-next v4 0/9] tun: Unify vnet implementation
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87wmepvnns.fsf@bootlin.com>
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-On Mon 2025-01-20 10:29:27, Miquel Raynal wrote:
-> Hello David & Petr,
+Akihiko Odaki wrote:
+> When I implemented virtio's hash-related features to tun/tap [1],
+> I found tun/tap does not fill the entire region reserved for the virtio
+> header, leaving some uninitialized hole in the middle of the buffer
+> after read()/recvmesg().
 > 
-> On 17/01/2025 at 19:25:22 GMT, David Laight <david.laight.linux@gmail.com> wrote:
+> This series fills the uninitialized hole. More concretely, the
+> num_buffers field will be initialized with 1, and the other fields will
+> be inialized with 0. Setting the num_buffers field to 1 is mandated by
+> virtio 1.0 [2].
 > 
-> > On Fri, 17 Jan 2025 17:27:26 +0100
-> > Petr Mladek <pmladek@suse.com> wrote:
-> >
-> > ...
-> >> IMHO, it is perfectly fine to add support for skipping identical lines
-> >> only to print_hex_dump(). And I would go even further and replace
-> >> 
-> >> void print_hex_dump(const char *level, const char *prefix_str, int prefix_type,
-> >> 		    int rowsize, int groupsize,
-> >> 		    const void *buf, size_t len, bool ascii)
-> >> 
-> >> with
-> >> 
-> >> void print_hex_dump(const char *level, const char *prefix_str,
-> >> 		    enum hex_dump_type,
-> >> 		    int rowsize, int groupsize,
-> >> 		    const void *buf, size_t len)
-> >> 
-> >> and combine all the flags into the one enum:
-> >> 
-> >> enum hex_dump_type {
-> >> 	DUMP_HEX_ONLY = 0,
-> >> 	DUMP_HEX_AND_ASCII = BIT(1),
-> >> 	DUMP_PREFIX_ADDRESS = BIT(2),
-> >> 	DUMP_PREFIX_OFFSET = BIT(3),
-> >> 	DUMP_SKIP_IDENTICAL_LINES = BIT(4),
-> >> };
+> The change to virtio header is preceded by another change that refactors
+> tun and tap to unify their virtio-related code.
 > 
-> Would a single enum (in the prototype of the function) work? I like the
-> idea but we need some kind of OR combination to be supported, typically:
->
-> DUMP_HEX_AND_ASCII | DUMP_PREFIX_OFFSET | DUMP_SKIP_IDENTICAL_LINES
+> [1]: https://lore.kernel.org/r/20241008-rss-v5-0-f3cf68df005d@daynix.com
+> [2]: https://lore.kernel.org/r/20241227084256-mutt-send-email-mst@kernel.org/
 > 
-> Maybe something like:
+> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+
+net-next is closed. But I'll review for when you resend.
+
+> ---
+> Changes in v4:
+> - s/sz/vnet_hdr_len_sz/ for patch "tun: Decouple vnet handling"
+>   (Willem de Bruijn)
+
+Minor, and sorry my bad: len_sz is duplicative, vnet_hdr_sz is common.
+
+> - Reverted to add CONFIG_TUN_VNET.
+> - Link to v3: https://lore.kernel.org/r/20250116-tun-v3-0-c6b2871e97f7@daynix.com
 > 
-> void print_hex(const char *level, const char *prefix_str,
-> 	       int rowsize, int groupsize,
-> 	       const void *buf, size_t len,
->                unsigned int dump_flags) // flags instead of enum?
-
-Yes, the parameter would need to be an unsigned int or unsigned long
-type so that we could use the logical OR operation.
-
-We could also define the bits without the enum type because the enum
-type won't be used anywhere.
-
-I just thought that you wanted to have it "enum". AFAIK, workqueues
-code uses enum because it allows to use the names of the bits in
-crash/gdb. The enum will cause that the names of the values will
-appear in the debug info...
-
-> enum hex_dump_flags {
->         // I'm not sure what to do with the default value?
-
-I would define
-
-	DUMP_HEX_ONLY = 0,
-or
-	DUMP_HEX_DATA = 0,
-
-It would be used only when the caller wants only the plain hex data.
-
-> 	DUMP_ASCII = BIT(0), // renamed?
-
-You are right that DUMP_ASCII might be enough. The names of the flags
-would mean what the caller wants on top of the plain hex data.
-
-> 	DUMP_PREFIX_ADDRESS = BIT(1),
-> 	DUMP_PREFIX_OFFSET = BIT(2),
-> 	DUMP_SKIP_IDENTICAL_LINES = BIT(3),
-> };
-
-
-> >> How does that sound, please?
-> >
-> > Rename it as (say) print_hex() and add wrappers for the existing callers?
+> Changes in v3:
+> - Dropped changes to fill the vnet header.
+> - Splitted patch "tun: Unify vnet implementation".
+> - Reverted spurious changes in patch "tun: Unify vnet implementation".
+> - Merged tun_vnet.c into TAP.
+> - Link to v2: https://lore.kernel.org/r/20250109-tun-v2-0-388d7d5a287a@daynix.com
 > 
-> That would avoid the treewide changes, so yes I can try that, definitely.
+> Changes in v2:
+> - Fixed num_buffers endian.
+> - Link to v1: https://lore.kernel.org/r/20250108-tun-v1-0-67d784b34374@daynix.com
+> 
+> ---
+> Akihiko Odaki (9):
+>       tun: Refactor CONFIG_TUN_VNET_CROSS_LE
+>       tun: Avoid double-tracking iov_iter length changes
+>       tun: Keep hdr_len in tun_get_user()
+>       tun: Decouple vnet from tun_struct
+>       tun: Decouple vnet handling
+>       tun: Extract the vnet handling code
+>       tap: Avoid double-tracking iov_iter length changes
+>       tap: Keep hdr_len in tap_get_user()
+>       tap: Use tun's vnet-related code
+> 
+>  MAINTAINERS            |   2 +-
+>  drivers/net/Kconfig    |   5 ++
+>  drivers/net/Makefile   |   1 +
+>  drivers/net/tap.c      | 172 ++++++------------------------------------
+>  drivers/net/tun.c      | 200 +++++++------------------------------------------
+>  drivers/net/tun_vnet.c | 184 +++++++++++++++++++++++++++++++++++++++++++++
+>  drivers/net/tun_vnet.h |  25 +++++++
+>  7 files changed, 267 insertions(+), 322 deletions(-)
+> ---
+> base-commit: a32e14f8aef69b42826cf0998b068a43d486a9e9
+> change-id: 20241230-tun-66e10a49b0c7
+> 
+> Best regards,
+> -- 
+> Akihiko Odaki <akihiko.odaki@daynix.com>
+> 
 
-I am fine with it. But a treewide clean up (2 parameters -> one flags)
-would be better from my POV.
 
-Best Regards,
-Petr
 
