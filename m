@@ -1,88 +1,78 @@
-Return-Path: <linux-doc+bounces-35760-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35762-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6147A17692
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 05:36:37 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F1F8A176D1
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 06:09:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 462CB169852
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 04:36:32 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8C181188A672
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 05:09:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E64ED199924;
-	Tue, 21 Jan 2025 04:36:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2453B1AAA00;
+	Tue, 21 Jan 2025 05:09:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="JUE5ZZNj"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="Rz/DqcEg"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2080.outbound.protection.outlook.com [40.107.237.80])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B6B918872A;
-	Tue, 21 Jan 2025 04:36:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.237.80
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737434164; cv=fail; b=eDWp6nXBbr0OuXcFWA5si1XTgrHhI9ei78Rm7Np2P8jl4EZWNdLYE+Q1Emvw7cHSQXh54U/uiLRCpLsLDarCP6BHHUQYek8yFg7zCIohjJQFU+81uHYqIQ0A74BCevWZRu5soQ19Hr65DZ9RY8QDqKXPbuwkvKM6ZLkyBx204CU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737434164; c=relaxed/simple;
-	bh=kqwY+cxKa96ZybZAOQXJZ76N9QSwBkFk0MRJesShpmI=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=pJJwaOmMVneds3C8wZQqwU4GLs1UDYKcL60GsGrnxzrS9dbUJjNvlEmpJRLgNZpxGEKMRRHr+IRyPRW7357vztctTKRFIBDsMxdnv6FknGVRo0nVVAOda3KVr2Dq5j/SxASa7z2UdpF25wzFVk83xrtyT2Yxy4EdwW5sOpddjxA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=JUE5ZZNj; arc=fail smtp.client-ip=40.107.237.80
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Na9ddimGPYa3P9Azjdrsz7PuyY//gIj58l2VUN8350Rs69TQ4f4hXaL7ZDCCzCL45ibvM1GIylqZ5Cp5qLze+KwA2sp08wPinp1kBGCv/Gy5dc3YiNYju69sMl36gEytz83woabMMcWMBStON+h6Jot8RnpWE62w4iiOOlh2/zdPzB/U2XWAQ8nb1/aFg58pbtw0jTwKoFlA4r6ovxkHrbfZ1q3iMevZIyHUi/vbXoMh5YjvYGJCHXc4cgnLsLsMhKy8MZ3LHhdbJmdF1kwqE1Zo+U38va40VtYMnBCj+aZWPcu6h0tDe8IdI4s3mafcusQzdw5myuCPr/yiItOFcA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9zvt8P/s6c5RL6tM9XyWKFuYW0Sw/6k0aw8zXoRLIrM=;
- b=dx/s9E64L63wKPkS6Kn11O5yLQdyihA+D5AKLODiDxzCHuFVhB5q74JZG+h+QmmjIQxuOO3aUWjcfNoPSEkIZE6cxoJukUS1uzs4rEu8KFMnlmOlNMJiPb8jQhw9cfLOKkxuUZRq5hXG+RowOeSflPa/eYW9kNkN6AyGxLWR9CZF6+0ymNtpraPXyPJ9NkAVwo7lkaxY+kmzFseGaE9AoXcXlSBZO2aauQ0zYUPSSV+/llaAZLf+EvbH0cApBA1zZu4kGv/lxQYfRVfcV1J7A+7Br1MMlcRx3e6t0LK2ur7NQDB3L7H7Z59i0rWXT59Ci5UEG0Vwx2bZ9+royfJGWQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gourry.net smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9zvt8P/s6c5RL6tM9XyWKFuYW0Sw/6k0aw8zXoRLIrM=;
- b=JUE5ZZNjmlfmKVMjT0LR4By3Wi7b0FIge1Bprs8ijYVkX7uLktkIAwL4rUBZuplTFrQUdMOOuidbbrMLObQO7s1Ho4BrX2WDQfq3TcYpT21AnXrFdM8VPzBbmCCV5Q6E48yNByYXUhbnOZoV28pltsSnXuStQthTm1Pd8eLIINI=
-Received: from CH0P220CA0011.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:ef::13)
- by SA3PR12MB8801.namprd12.prod.outlook.com (2603:10b6:806:312::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.22; Tue, 21 Jan
- 2025 04:35:58 +0000
-Received: from CH1PEPF0000A347.namprd04.prod.outlook.com
- (2603:10b6:610:ef:cafe::f2) by CH0P220CA0011.outlook.office365.com
- (2603:10b6:610:ef::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8356.22 via Frontend Transport; Tue,
- 21 Jan 2025 04:35:58 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CH1PEPF0000A347.mail.protection.outlook.com (10.167.244.7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8377.8 via Frontend Transport; Tue, 21 Jan 2025 04:35:57 +0000
-Received: from BLR-L-BHARARAO.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 20 Jan
- 2025 22:34:54 -0600
-From: Bharata B Rao <bharata@amd.com>
-To: <gourry@gourry.net>
-CC: <abhishekd@meta.com>, <akpm@linux-foundation.org>, <david@redhat.com>,
-	<donettom@linux.ibm.com>, <feng.tang@intel.com>, <hannes@cmpxchg.org>,
-	<kbusch@meta.com>, <kernel-team@meta.com>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-mm@kvack.org>, <nehagholkar@meta.com>,
-	<nphamcs@gmail.com>, <ying.huang@linux.alibaba.com>
-Subject: Re: [PATCH v3 2/6] memory: move conditionally defined enums use inside ifdef tags
-Date: Tue, 21 Jan 2025 10:03:55 +0530
-Message-ID: <20250121043355.177611-1-bharata@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250107000346.1338481-3-gourry@gourry.net>
-References: <20250107000346.1338481-3-gourry@gourry.net>
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 78F1D1A724C;
+	Tue, 21 Jan 2025 05:09:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1737436176; cv=none; b=If60nVgwlnZtmi8EhqHgM97oMgeGF9Xxg781xtclSJLcNOI8Y/7I15P5O8Xhfu6Oi7HLuN7lIY4V1dYd7N7AS2CjfHRZK/KvT6uuyF/Byv3tV73cuIpU37eqB8oL9cpeQoDBNtMgx6VnEvTll2SBYckHHB316b1iOsObkVRzjFo=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1737436176; c=relaxed/simple;
+	bh=MRbFXBRyZ6VO80r/tbLavWPYGstR7hTNcSTo0dkY3NQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=mwaPS8r6FheMMIcJACT37XHEJd0zumHeaFpax7SOfAItDVSPBejMZjgzAGLK5C3z/JX/NJN/v5RvM/BigzbUWLNRL5bYXorIkbOYYRS3e4v7r0gDiKAYJwU+v1yPLj7aHC1Ytg9BPnvTFYuFvksUvKZYQsL1qyYFL3FSaNL/Mlg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=Rz/DqcEg; arc=none smtp.client-ip=117.135.210.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:Subject:Date:Message-ID:MIME-Version; bh=bTS2v
+	udIGnYCF5+bPeCAZ9C/WoAScG4XWVTYcSjmUXw=; b=Rz/DqcEghOON4BUZsxO6S
+	scO9I2lh9KWFFudRqRIF9/jeJGLZ71jNQstWO8c+U2hdvlDN009kjaexrYSW5Zwx
+	PhLWvloeWx+e9o1DR3ww/Lzbfd68P741yVio4xCgyNiSlGLrVgQLo+FEZy/L5B8E
+	Cg/7h3A054zu8Pff8zy1dk=
+Received: from localhost.localdomain (unknown [])
+	by gzga-smtp-mtada-g0-3 (Coremail) with SMTP id _____wBHwYeaK49nTErMHA--.41409S2;
+	Tue, 21 Jan 2025 13:07:49 +0800 (CST)
+From: Jiayuan Chen <mrpre@163.com>
+To: bpf@vger.kernel.org,
+	jakub@cloudflare.com,
+	john.fastabend@gmail.com
+Cc: netdev@vger.kernel.org,
+	martin.lau@linux.dev,
+	ast@kernel.org,
+	edumazet@google.com,
+	davem@davemloft.net,
+	dsahern@kernel.org,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	linux-kernel@vger.kernel.org,
+	song@kernel.org,
+	andrii@kernel.org,
+	mhal@rbox.co,
+	yonghong.song@linux.dev,
+	daniel@iogearbox.net,
+	xiyou.wangcong@gmail.com,
+	horms@kernel.org,
+	corbet@lwn.net,
+	eddyz87@gmail.com,
+	cong.wang@bytedance.com,
+	shuah@kernel.org,
+	mykolal@fb.com,
+	jolsa@kernel.org,
+	haoluo@google.com,
+	sdf@fomichev.me,
+	kpsingh@kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	Jiayuan Chen <mrpre@163.com>
+Subject: [PATCH bpf v8 0/5] bpf: fix wrong copied_seq calculation and add tests
+Date: Tue, 21 Jan 2025 13:07:02 +0800
+Message-ID: <20250121050707.55523-1-mrpre@163.com>
+X-Mailer: git-send-email 2.43.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -90,99 +80,87 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000A347:EE_|SA3PR12MB8801:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2ea96d06-036d-4875-6fba-08dd39d519cb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700013|1800799024|376014|7416014|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?15ABvpKe+4v6j81k5Yfa0puWdo/0G+vTS+ntyBYFUdaedL8EYg6/EXawsbxS?=
- =?us-ascii?Q?NtpMXoPB0CqLVxOazO7euiA3WbLktkblG8SX9UZktEjqVdWQKaTqn0zjzSgg?=
- =?us-ascii?Q?aLhetYCPgLf4L/jopWNCO+McLhUbgYjpjLFtNyYU6qQfcmLKWDss8KQO3RFX?=
- =?us-ascii?Q?Ux4g5mjPHfgyU22Eaf169Wf3GtvvJ+IUAjoq/FvdCd23g1MLAGNSK1kAArYL?=
- =?us-ascii?Q?Y2mGtKazNiY13eKuNbGzOL57hViwStZkMGiGI5l2NNDoz46Ql9c1IuApsTrt?=
- =?us-ascii?Q?I/aRSz0rqq2hiiDg+yPkHGXqAlJfFZ3/8jS7ZM/H62ObtOt7/d8PnAJAHxL7?=
- =?us-ascii?Q?t8s5xDt1cGwb3K0QTgmkSrTE1DUkceEvd9XjRba0BaqhQFH/bG9LE5BfPoYT?=
- =?us-ascii?Q?EMkML/ax8gKExZAOSLzcPIQAz6iMkYc9xbCYwJIoCUdd5BG9g4z0EtBj/wRG?=
- =?us-ascii?Q?4QuUT1p81w+JSOnNZ3vc9GXlIQECL2XrNbff/26B1XVeBDFMCr7BXp7edL0w?=
- =?us-ascii?Q?Vf1q2HOcBLmSKWEt6AzFus04sFR4fTsgNmpoGeVXfHu053X0NpPsBQyzkCkE?=
- =?us-ascii?Q?K8x0w2rh3/TP2nz6djPRcP8jaBAl2jFH+KEziWvurvDL1dnnAMJKdGYefEIZ?=
- =?us-ascii?Q?SBm+YWkbHo2ded+tPgf+WTHqqrE1fhCgfqMBKlKNelY1WX57B0G5CFgw3z95?=
- =?us-ascii?Q?5DbLGV3FxfupcJZM9u6EYkODSN/3RXrpvFwYdlrE5ru6oJFbD4AEntxPLKsO?=
- =?us-ascii?Q?2vc4fyPXWnVb2uWXfmwlVNosQJJX+qqReb7uTpxO0xY7uEJrn35d11kuuN3T?=
- =?us-ascii?Q?jJgPU659jlYRFqfv4lx6VwmTRuzEP9Fx3EjpNiJtaqr82lom6yKseXv5ItJ4?=
- =?us-ascii?Q?TDGjghExgSHIQvOp+2c+sNJIbvKIv11CIGykl3XehGKIgOlPFrBhYbtRH2Jk?=
- =?us-ascii?Q?a8mazeOe9+I2oelFgng4LvmHQoDA+h7ZlT4XmVtgbrgQFv+pqEtEgCEj0vJ+?=
- =?us-ascii?Q?UHqikCblv4Dc2ykL4vu++BlfBvjoX8FqEstXLatXKnqwBjkje99yuUnBiQcM?=
- =?us-ascii?Q?ZMnVz8nfdR0xx5tRX4MU6NkxE/XZLhiVQBXivsdS4VoXbYL9dXIDjw2nAXVE?=
- =?us-ascii?Q?jlfbbIJOdHn/NU2X1uio5ekhsmM2dTHgCuijkevIKZ9tddppW675eB4Lc7xH?=
- =?us-ascii?Q?reA+ROjXUr6UZ9D5diBeBIxOpQGawsr9qP6Yxujy8OkWC4KkMaEbmHrRg5wZ?=
- =?us-ascii?Q?oKiL8A7ZN0RkwYrGNXWGSBYkdxPCzKr58UTqgkXMh3+vg7CzVNF6EL8Ytkzt?=
- =?us-ascii?Q?ktEjjSpdNQo/rJ1NfbsmwvfabhCGEptFvwlTgRQOk0ycbLISa163zY9xCAct?=
- =?us-ascii?Q?eCqylkH7xOtO5VHwAen93HSC5fQNkXcOw2hF2MNkcBxTlM13bQyfT7HYvEGq?=
- =?us-ascii?Q?zwDBQjBB+RNcYgIx5hZDcAoJxYdoj5+GiTbX0L4ooOwMqebztX/H9ba+3H02?=
- =?us-ascii?Q?kkrSmex9oHV0zOw=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014)(7416014)(7053199007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2025 04:35:57.9121
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ea96d06-036d-4875-6fba-08dd39d519cb
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000A347.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB8801
+X-CM-TRANSID:_____wBHwYeaK49nTErMHA--.41409S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxWFyrGFyfXw4kuryDAFyxKrg_yoW5Cw1DpF
+	WkC34rGr47tFyIva1DA3yIgF4Fgw4rGay5KF1Fq3yfZr4jkryYyrs293Waqrn8GrWYvF1j
+	9r13Wr4Y934DAFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0z_pnQ7UUUUU=
+X-CM-SenderInfo: xpus2vi6rwjhhfrp/1tbiDxPbp2ePHI2amQACsY
 
-> NUMA_HINT_FAULTS and NUMA_HINT_FAULTS_LOCAL are only defined if
-> CONFIG_NUMA_BALANCING is defined, but are used outside the tags in
-> numa_migrate_check().  Fix this.
-> 
-> TNF_SHARED is only used if CONFIG_NUMA_BALANCING is enabled, so
-> moving this line inside the ifdef is also safe - despite use of TNF_*
-> elsewhere in the function.  TNF_* are not conditionally defined.
-> 
-> Signed-off-by: Gregory Price <gourry@gourry.net>
-> ---
->  mm/memory.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/mm/memory.c b/mm/memory.c
-> index 9cc93c2f79f3..8d254e97840d 100644
-> --- a/mm/memory.c
-> +++ b/mm/memory.c
-> @@ -5571,14 +5571,14 @@ int numa_migrate_check(struct folio *folio, struct vm_fault *vmf,
->  	/* Record the current PID acceesing VMA */
->  	vma_set_access_pid_bit(vma);
->  
-> -	count_vm_numa_event(NUMA_HINT_FAULTS);
->  #ifdef CONFIG_NUMA_BALANCING
-> +	count_vm_numa_event(NUMA_HINT_FAULTS);
->  	count_memcg_folio_events(folio, NUMA_HINT_FAULTS, 1);
-> -#endif
->  	if (folio_nid(folio) == numa_node_id()) {
->  		count_vm_numa_event(NUMA_HINT_FAULTS_LOCAL);
->  		*flags |= TNF_FAULT_LOCAL;
->  	}
-> +#endif
+A previous commit described in this topic
+http://lore.kernel.org/bpf/20230523025618.113937-9-john.fastabend@gmail.com
+directly updated 'sk->copied_seq' in the tcp_eat_skb() function when the
+action of a BPF program was SK_REDIRECT. For other actions, like SK_PASS,
+the update logic for 'sk->copied_seq' was moved to
+tcp_bpf_recvmsg_parser() to ensure the accuracy of the 'fionread' feature.
 
-I don't think moving count_vm_numa_event() to within
-CONFIG_NUMA_BALANCING is necessary as it is defined separately as NOP
-for !CONFIG_NUMA_BALANCING.
+That commit works for a single stream_verdict scenario, as it also
+modified 'sk_data_ready->sk_psock_verdict_data_ready->tcp_read_skb'
+to remove updating 'sk->copied_seq'.
 
-In fact numa_migrate_check() should be within CONFIG_NUMA_BALANCING as
-it should ideally be  called only if NUMA balancing is enabled. The same
-could be said for the callers of numa_migrate_check() which are
-do_numa_page() and do_huge_pmd_numa_page().
+However, for programs where both stream_parser and stream_verdict are
+active(strparser purpose), tcp_read_sock() was used instead of
+tcp_read_skb() (sk_data_ready->strp_data_ready->tcp_read_sock)
+tcp_read_sock() now still update 'sk->copied_seq', leading to duplicated
+updates.
 
-Regards,
-Bharata.
+In summary, for strparser + SK_PASS, copied_seq is redundantly calculated
+in both tcp_read_sock() and tcp_bpf_recvmsg_parser().
+
+The issue causes incorrect copied_seq calculations, which prevent
+correct data reads from the recv() interface in user-land.
+
+Also we added test cases for bpf + strparser and separated them from
+sockmap_basic, as strparser has more encapsulation and parsing
+capabilities compared to sockmap.
+
+Fixes: e5c6de5fa025 ("bpf, sockmap: Incorrectly handling copied_seq")
+
+---
+V8 -> V7:
+https://lore.kernel.org/bpf/20250116140531.108636-1-mrpre@163.com/
+Avoid using add read_sock to psock. (Jakub Sitnicki)
+Avoid using warpper function to check whether strparser is supported.
+
+V3 -> V7:
+https://lore.kernel.org/bpf/20250109094402.50838-1-mrpre@163.com/
+https://lore.kernel.org/bpf/20241218053408.437295-1-mrpre@163.com/
+Avoid introducing new proto_ops. (Jakub Sitnicki).
+Add more edge test cases for strparser + bpf.
+Fix patchwork fail of test cases code.
+Fix psock fetch without rcu lock.
+Move code of modifying to tcp_bpf.c.
+
+V1 -> V3:
+https://lore.kernel.org/bpf/20241209152740.281125-1-mrpre@163.com/
+Fix patchwork fail by adding Fixes tag.
+Save skb data offset for ENOMEM. (John Fastabend)
+---
+
+Jiayuan Chen (5):
+  strparser: add read_sock callback
+  bpf: fix wrong copied_seq calculation
+  bpf: disable non stream socket for strparser
+  selftests/bpf: fix invalid flag of recv()
+  selftests/bpf: add strparser test for bpf
+
+ Documentation/networking/strparser.rst        |   9 +-
+ include/linux/skmsg.h                         |   2 +
+ include/net/strparser.h                       |   2 +
+ include/net/tcp.h                             |   8 +
+ net/core/skmsg.c                              |   7 +
+ net/core/sock_map.c                           |   5 +-
+ net/ipv4/tcp.c                                |  29 +-
+ net/ipv4/tcp_bpf.c                            |  42 ++
+ net/strparser/strparser.c                     |  11 +-
+ .../selftests/bpf/prog_tests/sockmap_basic.c  |  59 +--
+ .../selftests/bpf/prog_tests/sockmap_strp.c   | 452 ++++++++++++++++++
+ .../selftests/bpf/progs/test_sockmap_strp.c   |  53 ++
+ 12 files changed, 614 insertions(+), 65 deletions(-)
+ create mode 100644 tools/testing/selftests/bpf/prog_tests/sockmap_strp.c
+ create mode 100644 tools/testing/selftests/bpf/progs/test_sockmap_strp.c
+
+-- 
+2.43.5
+
 
