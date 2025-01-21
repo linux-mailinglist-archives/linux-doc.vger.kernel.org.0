@@ -1,385 +1,202 @@
-Return-Path: <linux-doc+bounces-35766-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35768-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA812A176E4
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 06:12:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04C09A176FC
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 06:27:26 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CB79516A577
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 05:12:57 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3A4B11629AF
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 05:27:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F2FA9193425;
-	Tue, 21 Jan 2025 05:12:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 966011A2658;
+	Tue, 21 Jan 2025 05:27:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="G6hcD234"
+	dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b="CjFGBInK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m3280.qiye.163.com (mail-m3280.qiye.163.com [220.197.32.80])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0798E18FC67
-	for <linux-doc@vger.kernel.org>; Tue, 21 Jan 2025 05:12:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.80
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6C5519F424
+	for <linux-doc@vger.kernel.org>; Tue, 21 Jan 2025 05:27:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737436375; cv=none; b=gFdPsvebglO0fqEoWn5XdiPbq+B3iPI/13CxiOKICkC56wU6HvGAIHOHKcCh99vjzamyD6coXGtfeuxRI795mk4A1luW+1Rw+UmsIRsCh5acMPLz9D1Y+RgYwHby8+vxdkOfBoW+aH2JxsUFlAwx2pi8SA3O+GdyHkdcEAUF4Yw=
+	t=1737437241; cv=none; b=d+uOD94tm/z39XYIpPcZuI8IwGyljiYC4aGJ2AT9QWwnw9yy6SDeOO6KbMtbOTK2tt+XB0pH7I7rNr/vk1utKeOHPwrc3vMDudK7VARh77PUWHldEjHu9majIkkMKYInos3XGWetx7+tcznxJEftHTFUoh1Dbs+LsAs8wCXesjQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737436375; c=relaxed/simple;
-	bh=O+QoXhHtZ6BNcRv+V638bFiCPi8AXYnkXL5CENcpR44=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=uBRCLztnkzsuU3sbTa2hZuOzjcVL2q8IrhP/oa9ZJ99S4wg8MLha+D8ea1fJYJIEcX+PHoDd2/noBByYF/VHchKAf6Gs2xjMWK2dzn0ZDs4PRHhEPh/mKZbYZK+GuKP3BZFl3XB87xinhOFFB6apIeu3j4v1/RCWheMjTr+sm5E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=G6hcD234; arc=none smtp.client-ip=220.197.32.80
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
-Received: from localhost.localdomain (unknown [123.53.38.48])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 9435e78e;
-	Tue, 21 Jan 2025 13:12:41 +0800 (GMT+08:00)
-From: zhangwei <zhangwei@cqsoftware.com.cn>
-To: alexs@kernel.org,
-	si.yanteng@linux.dev,
-	corbet@lwn.net
-Cc: zhaoshuo@cqsoftware.com.cn,
-	zhaoyuehui@cqsoftware.com.cn,
-	maoyuxian@cqsoftware.com.cn,
-	linux-doc@vger.kernel.org,
-	zhangwei <zhangwei@cqsoftware.com.cn>
-Subject: [PATCH v2] docs/zh_CN: Add self-protection index Chinese translation
-Date: Tue, 21 Jan 2025 13:12:32 +0800
-Message-ID: <20250121051234.79066-1-zhangwei@cqsoftware.com.cn>
-X-Mailer: git-send-email 2.47.1
+	s=arc-20240116; t=1737437241; c=relaxed/simple;
+	bh=17jdquf1O8HrGT7YX1JbIULVdHRHHmmF5bL1fyAoM9k=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=KLcoY00tqHFTtwKP0AburwHceN7ho0dtXVodJ0pQRsezUQY1T8atKOQPDeTHihPi9JBY6gbLVhlpZ3r8yWAE1gim7edsPPbW4XCFBVDI0FkDYeg5DJL63s75P/oI5nepfUN7NJEx1UZd5BO31nDsoW+JWNnv9Bne4s+mU1mPR2g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com; spf=pass smtp.mailfrom=daynix.com; dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b=CjFGBInK; arc=none smtp.client-ip=209.85.214.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=daynix.com
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-21644aca3a0so115653085ad.3
+        for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2025 21:27:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1737437239; x=1738042039; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=KuNe0V4SlZE9V8OcN/E4qhh/fBRX/xaiMcicz54Ypbc=;
+        b=CjFGBInKFSGtYLOCcEjqY8Bn27ymGEWz+08u6G22zDw2Yn46EzpuW8ioqpYyPZvdeS
+         PL+f0F6rwFmgOXeE9ks7WFaFgX4+4jqLcP+1tXkSMwOk6FpTjJAKFo92DNqefY3itE9+
+         qbnj3cTHBa9mkhch49YxEGenvFajWjpC9wKhOMRN3mg/GEgEzHW1NMt6WQtygK1yl0jT
+         KjHFTzfudxO69pYWMqpeW11YwD/40z4r8JDENBd7cuW9R3f36CPPLMIkEr4ygsBwUqlR
+         phRItPEggnf264dj8xCT/GRiNq1mVtuFb0Mb53x9B/h1AiTanITyn+rEfGqJ8n2DFfkY
+         P4jQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1737437239; x=1738042039;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=KuNe0V4SlZE9V8OcN/E4qhh/fBRX/xaiMcicz54Ypbc=;
+        b=SgAK2ZCDAEWBMQIhVsDwaf+nrqaz0MMyuH+svYG4+y4Oegsdth/ArG2p5niRrtXEDj
+         SJu4bEsZZoAieeAUu9s4KYKC19SAe5zOX+waFnwFHsvCC/fySPYE1YSL6vtErtoV9Xgl
+         uDPJUtketTlo6lycTerPOSWgL9xVcfJG8pThFl59SOr7H40IUMbU/Os1ODkCYYvsY+Mk
+         wzU5id41DX1D/rS8EMf7P8kj+QbMAXRkdYiL4OO969cp7WNrYUezfpllSSP4tO6eJkP3
+         bqgTUwpY8mYIn8mxB36kWiuNQ3kBtLQ3JUHuHxSzc8qWhy5Wk8A3yZQCxHuCK3foZbwU
+         lUuw==
+X-Forwarded-Encrypted: i=1; AJvYcCWdrSgzFfAlu71grrg4mpYRszs8qer/QMJvFnvsgUuRcJsU3ZgcUVuJDPA1zF3q6XzBt+3cqKqbrRw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwY8N4azAfXnMa1nYwtNOiKCZdtMGz3tVel3MM9VEckGKuUwZ7j
+	wRD1e4JmlnqoX3ibdlfwvdfhID3nKfNfkVSaI2NMsGKOrQAsE1/x17ETt8RCk5M=
+X-Gm-Gg: ASbGncuOnXNfIr1G9w0dmPCFPvX0Xb4HH2dsinONhaTkiu1q91TP23Tn6E0P1x/PWUL
+	gB/wlVxOcje34F0nzz7elm/hns1se2t/vxNE1XDBHXijkAvsrvIli1Aky9InMn6WJXsW/2pcenI
+	XLznA53X28yiXBAJenA67hFxX4Z8UZmfqvpd+MlEcdQIhH+lonPHgmd2BWIKQWUQVbqWm8IIR8R
+	gR1O37K/1c/otPPWhqnvwxIFssoO+yYcL74ixUbklkGfXsOenuCnJUdTRnOMhRluWku5uTjOPC8
+	32tI
+X-Google-Smtp-Source: AGHT+IF8AscE6lKE6K9gAMAkVavPAuy5ImBZTIR2UjEzttP05cs28ECPVkex5+WoyQz221rWXZqSKQ==
+X-Received: by 2002:a17:902:f7ce:b0:215:773a:c168 with SMTP id d9443c01a7336-21c352de425mr241247485ad.1.1737437239066;
+        Mon, 20 Jan 2025 21:27:19 -0800 (PST)
+Received: from [157.82.203.37] ([157.82.203.37])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-a9bdf0b4503sm6710167a12.67.2025.01.20.21.27.13
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 20 Jan 2025 21:27:18 -0800 (PST)
+Message-ID: <92675e51-cbaf-4905-8cf8-dff741a26db9@daynix.com>
+Date: Tue, 21 Jan 2025 14:27:12 +0900
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net v3 9/9] tap: Use tun's vnet-related code
+To: Willem de Bruijn <willemb@google.com>, Jason Wang <jasowang@redhat.com>
+Cc: Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+ Jonathan Corbet <corbet@lwn.net>, "David S. Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Shuah Khan <shuah@kernel.org>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ netdev@vger.kernel.org, kvm@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-kselftest@vger.kernel.org,
+ Yuri Benditovich <yuri.benditovich@daynix.com>,
+ Andrew Melnychenko <andrew@daynix.com>,
+ Stephen Hemminger <stephen@networkplumber.org>, gur.stavi@huawei.com,
+ devel@daynix.com
+References: <20250116-tun-v3-0-c6b2871e97f7@daynix.com>
+ <20250116-tun-v3-9-c6b2871e97f7@daynix.com>
+ <678a21a9388ae_3e503c294f4@willemb.c.googlers.com.notmuch>
+ <51f0c6ba-21bc-4fef-a906-5d83ab29b7ff@daynix.com>
+ <CACGkMEuPXDWHErCCdEUB7+Q0NxsAjpSH9uTvOxzuBvNeyw7_Hg@mail.gmail.com>
+ <CA+FuTSec1z7-8nNNc1ZXkzekDrFHPnvYKFf8PNZg89VuwhoWSw@mail.gmail.com>
+Content-Language: en-US
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <CA+FuTSec1z7-8nNNc1ZXkzekDrFHPnvYKFf8PNZg89VuwhoWSw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaQ0hDVh4ZQxlNH0xOSE8dQ1YVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKSUhVTkhVSENVT0NZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0hVSktLVU
-	pCS0tZBg++
-X-HM-Tid: 0a948746f2ac03abkunm9435e78e
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NyI6AQw5CzIQMDQNPA0XPBUo
-	ARcKFD1VSlVKTEhMT0hNSE1JT05LVTMWGhIXVQETGhUcDB4SOxgKCBQdDwwaCR5VGBQWVRgVRVlX
-	WRILWUFZSklIVU5IVUhDVU9DWVdZCAFZQUpPSE9KNwY+
-DKIM-Signature:a=rsa-sha256;
-	b=G6hcD234VO9YPdumUY9w1gVyVo5vzyn1ek7ySBWNriS42kIKmvce6RjLZyFqt40ZzUrEiOD5WNFDe8AlCV9cEcXlqGQuUHEtNkMixaMyhe16H+zaBaRVUafV/2vFO/v83/DrrhL6HrqDSBimBqTdw3YpWsWaIurf+8bRtEHB6Jo=; s=default; c=relaxed/relaxed; d=cqsoftware.com.cn; v=1;
-	bh=h5jhQT64HvVm5+2Q3Q8EvKzm9ObRj8yu6i6I18ZCUao=;
-	h=date:mime-version:subject:message-id:from;
 
-Translate .../security/self-protection.rst into Chinese.
+On 2025/01/20 20:19, Willem de Bruijn wrote:
+> On Mon, Jan 20, 2025 at 1:37 AM Jason Wang <jasowang@redhat.com> wrote:
+>>
+>> On Fri, Jan 17, 2025 at 6:35 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
+>>>
+>>> On 2025/01/17 18:23, Willem de Bruijn wrote:
+>>>> Akihiko Odaki wrote:
+>>>>> tun and tap implements the same vnet-related features so reuse the code.
+>>>>>
+>>>>> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+>>>>> ---
+>>>>>    drivers/net/Kconfig    |   1 +
+>>>>>    drivers/net/Makefile   |   6 +-
+>>>>>    drivers/net/tap.c      | 152 +++++--------------------------------------------
+>>>>>    drivers/net/tun_vnet.c |   5 ++
+>>>>>    4 files changed, 24 insertions(+), 140 deletions(-)
+>>>>>
+>>>>> diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+>>>>> index 1fd5acdc73c6..c420418473fc 100644
+>>>>> --- a/drivers/net/Kconfig
+>>>>> +++ b/drivers/net/Kconfig
+>>>>> @@ -395,6 +395,7 @@ config TUN
+>>>>>       tristate "Universal TUN/TAP device driver support"
+>>>>>       depends on INET
+>>>>>       select CRC32
+>>>>> +    select TAP
+>>>>>       help
+>>>>>         TUN/TAP provides packet reception and transmission for user space
+>>>>>         programs.  It can be viewed as a simple Point-to-Point or Ethernet
+>>>>> diff --git a/drivers/net/Makefile b/drivers/net/Makefile
+>>>>> index bb8eb3053772..2275309a97ee 100644
+>>>>> --- a/drivers/net/Makefile
+>>>>> +++ b/drivers/net/Makefile
+>>>>> @@ -29,9 +29,9 @@ obj-y += mdio/
+>>>>>    obj-y += pcs/
+>>>>>    obj-$(CONFIG_RIONET) += rionet.o
+>>>>>    obj-$(CONFIG_NET_TEAM) += team/
+>>>>> -obj-$(CONFIG_TUN) += tun-drv.o
+>>>>> -tun-drv-y := tun.o tun_vnet.o
+>>>>> -obj-$(CONFIG_TAP) += tap.o
+>>>>> +obj-$(CONFIG_TUN) += tun.o
+>>>>
+>>>> Is reversing the previous changes to tun.ko intentional?
+>>>>
+>>>> Perhaps the previous approach with a new CONFIG_TUN_VNET is preferable
+>>>> over this. In particular over making TUN select TAP, a new dependency.
+>>>
+>>> Jason, you also commented about CONFIG_TUN_VNET for the previous
+>>> version. Do you prefer the old approach, or the new one? (Or if you have
+>>> another idea, please tell me.)
+>>
+>> Ideally, if we can make TUN select TAP that would be better. But there
+>> are some subtle differences in the multi queue implementation. We will
+>> end up with some useless code for TUN unless we can unify the multi
+>> queue logic. It might not be worth it to change the TUN's multi queue
+>> logic so having a new file seems to be better.
+> 
+> +1 on deduplicating further. But this series is complex enough. Let's not
+> expand that.
+> 
+> The latest approach with a separate .o file may have some performance
+> cost by converting likely inlined code into real function calls.
+> Another option is to move it all into tun_vnet.h. That also resolves
+> the Makefile issues.
 
-Update the translation through commit b080e52110ea
-("docs: update self-protection __ro_after_init status")
+I measured the size difference between the latest inlining approaches. 
+The numbers may vary depending on the system configuration of course, 
+but they should be useful for reference.
 
-Signed-off-by: zhangwei <zhangwei@cqsoftware.com.cn>
----
+The below shows sizes when having a separate module: 106496 bytes in total
 
-v2: fix remove the unnecessary blank lines 
+# lsmod
+Module                  Size  Used by
+tap                    28672  0
+tun                    61440  0
+tun_vnet               16384  2 tun,tap
 
- .../translations/zh_CN/security/index.rst     |   2 +-
- .../zh_CN/security/self-protection.rst        | 271 ++++++++++++++++++
- 2 files changed, 272 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/security/self-protection.rst
+The below shows sizes when inlining: 102400 bytes in total
 
-diff --git a/Documentation/translations/zh_CN/security/index.rst b/Documentation/translations/zh_CN/security/index.rst
-index 0aacecabf0c0..9a6345dd90b8 100644
---- a/Documentation/translations/zh_CN/security/index.rst
-+++ b/Documentation/translations/zh_CN/security/index.rst
-@@ -18,6 +18,7 @@
-    credentials
-    lsm
-    sak
-+   self-protection
-    siphash
-    tpm/index
-    digsig
-@@ -29,6 +30,5 @@ TODOLIST:
- * keys/index
- * lsm-development
- * SCTP
--* self-protection
- * secrets/index
- * ipe
-diff --git a/Documentation/translations/zh_CN/security/self-protection.rst b/Documentation/translations/zh_CN/security/self-protection.rst
-new file mode 100644
-index 000000000000..3c8a68b1e1be
---- /dev/null
-+++ b/Documentation/translations/zh_CN/security/self-protection.rst
-@@ -0,0 +1,271 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+:Original: Documentation/security/self-protection.rst
-+
-+:翻译:
-+
-+ 张巍 zhangwei <zhangwei@cqsoftware.com.cn>
-+
-+============
-+内核自我保护
-+============
-+
-+内核自我保护是指在Linux内核中设计与实现的各种系统与结构
-+以防止内核本身的安全漏洞问题。它涵盖了广泛问题，包括去除
-+整个类的漏洞，阻止安全漏洞利用方法，以及主动检测攻击尝
-+试。并非所有的话题都在本文中涉及，但它应该为了解内核自我
-+保护提供一个合理的起点，并解答常见的问题。（当然，欢迎提
-+交补丁！）
-+
-+在最坏的情况下，我们假设一个非特权的本地攻击者对内核内存
-+有任意读写访问权限。虽然在许多情况下，漏洞被利用时并不会
-+提供此级别的访问权限，但如果我们能防御最坏情况，也能应对
-+权限较低的攻击。一个更高的标准，且需要牢记的是保护内核免
-+受具有特权的本地攻击者的攻击，因为root用户可以有更多权限。
-+（尤其是当他们能够加载任意内核模块时）
-+
-+成功的自我保护的目标是：有效、默认开启、不需要开发者主动
-+选择、没有性能影响、不妨碍内核调试、并且没有测试。虽然很
-+难满足所有的这些目标，但明确提到这些目标非常重要，因为这
-+些方面需要被探索、解决或接受。
-+
-+==========
-+攻击面缩减
-+==========
-+
-+防止安全漏洞最基本的防御方式是减少可以被用来重定向执行的
-+内核区域。这包括限制用户公开使用的API、使内核API更难被错
-+误使用、最小化可写内核内存区域等。
-+
-+严格的内核内存权限
-+-------------------
-+
-+当所有内核内存都是可写的，攻击者可以轻松地重定向执行流。
-+为了减少这种攻击目标的可用性，内核需要更严格的权限集来
-+保护其内存。
-+
-+可执行代码和只读数据必须不可写
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+任何具有可执行内存的区域必须不可写，显然这也包括内核文本
-+本身。我们还必须考虑其他地方：内核模块、JIT内存等，（在
-+某些情况下，为了支持像指令替代、断点、kprobes等功能，这些
-+区域会暂时被设置为可写。如果这些功能必须存在于内核中，它
-+们的实现方式是：在更新期间将内存临时设置可写，然后再恢复
-+为原始权限。）
-+
-+为了支持这一点，CONFIG_STRICT_KERNEL_RWX 和
-+CONFIG_STRICT_MODULE_RWX 的设计旨在确保代码不可写，数据不
-+可执行，以及只读数据既不可写也不可执行。
-+
-+大多数架构默认支持这些选项，且用户无法选择。对于一些像arm
-+这种希望能够选择这些选项的架构，可以在架构Kconfig中选择
-+ARCH_OPTIONAL_KERNEL_RWX以启用Kconfig提示。
-+CONFIG_ARCH_OPTIONAL_KERNEL_RWX_DEFAULT决定在启用
-+ARCH_OPTIONAL_KERNEL_RWX时的默认设置。
-+
-+函数指针和敏感变量必须不可写
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+内核内存中有大量的函数指针，这些指针被内核查找并用于继续执行
-+（例如，描述符/向量表、文件/网络等操作结构等）。这些变量的数
-+量必须减少到最低限度
-+
-+许多像这样的变量可以通过设置为"const"来实现只读，从而使它们
-+存放在内核的.rodata段而非.data段，从而获得内核严格内存权限的
-+保护。
-+
-+对于在_init是仅初始化一次的变量，可以使用_ro_after_init属性
-+进行标记。
-+
-+剩下的变量通常是那些更新频率较低的（例如GDT）。这些变量需要另
-+一个机制（类似于上述提到的对内核代码所做的临时例外），以便在
-+其余生命周期内保持只读状态。（例如，在进行更新时，只有执行
-+更新的CPU线程会被授予对内存的不可中断写入访问权限。）
-+
-+将内核内存与用户空间内存分隔开
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+内核绝对不可以执行用户空间内存，同时，内核也不得在没有明确预
-+期的情况下访问用户内存空间。这些规则可以通过一些硬件限制来支
-+持（如x86的SMEP/SMAP，ARM的PXN/PAN）或通过仿真（如ARM的内存
-+域）来强制执行。通过这种方式阻止用户空间内存的访问，攻击者就
-+无法将执行和数据解析转移到易于控制的用户空间内存，从而迫使攻
-+击完全在内核中进行。
-+
-+减少对系统调用的访问
-+--------------------
-+
-+对于64位系统，一种消除许多系统调用最简单的方法是构建时不启用
-+CONFIG_CONPAT。然而，这种情况通常不可行。
-+
-+“seccomp”系统为用户空间提供了一种可选功能，提供了一种减少可供
-+运行中进程使用内核入口点数量的方法。这限制了可以访问内核代码
-+的范围，可能降低了某个特定漏洞被攻击者利用的可能性。
-+
-+一个改进的方向是创建有效的方法，仅允许受信任的进程访问例如兼
-+容模式、用户命名空间、BPF创建和性能分析等功能。这将把内核入口
-+点范围限制在通常可以被非特权用户空间进程访问的较常见集合中
-+
-+限制对内核模块的访问
-+--------------------
-+
-+内核绝不应允许非特权用户加载特定的内核模块，因为这可能为攻击者
-+提供一个意外扩展的可用攻击面的方法。（通过已预定义子系统按需加
-+载模块，如MODULE_ALIAS_*，被认为是“预期的”，但即便如此，也应对
-+这些情况给予更多的关注。）例如，通过非特权的套接字API加载文件
-+系统模块是没有意义的：只有root用户或物理本地用户应该触发文件系
-+统模块的加载。（在某些情况下，这甚至可能存在争议。）
-+
-+为了防止特权用户的攻击，系统可能需要完全禁止模块加载（例如，通
-+过单体内核构建或modules_disabled sysctl），或者使用签名模块（例
-+如，CONFIG_MODULE_SIG_FORCE或通过LoadPin保护的dm-crypt），以防
-+止root用户通过模块加载器加载任意内核代码。
-+
-+内存完整性
-+----------
-+
-+内核中有许多内存结构在攻击过程中被定期泛滥用以获取执行控制，迄今
-+为止，最常见的是堆栈缓冲区溢出，在这种攻击中，堆栈上存储的返回地
-+址被覆盖。除此之外，还有许多其他类型的攻击，防护措施也应运而生。
-+
-+堆栈缓冲区溢出
-+--------------
-+
-+经典的堆栈缓冲区溢出攻击是指超出栈上分配的变量预期大小，从而将一
-+个受控值写入栈帧的返回地址。最常见的防御措施是堆栈保护
-+（CONFIG_STACKPROTECTOR），它在函数返回前会验证栈上的“stack canary”。
-+其他防御措施还包括影子堆栈等。
-+
-+堆栈深度溢出
-+------------
-+
-+一个不太容易被理解的攻击方式是利用bug触发内核通过深度函数调用或
-+大的堆栈分配来消耗堆栈内存。通过这种攻击，攻击者可以将数据写入内
-+核预分配堆栈空间之外的敏感结构。为了更好的防护这种攻击，必须进行
-+两项重要的更改：将敏感的线程信息结构转移到其他地方，并在堆栈底部
-+添加一个故障内存洞，以捕获这些溢出
-+
-+栈内存完整性
-+------------
-+
-+用于跟踪堆空闲列表的结构可以在分配和释放时进行完整性检查，以确保它
-+们不会被用来操作其它内存区域。
-+
-+计算器完整性
-+------------
-+
-+内核中的许多地方使用原子计数器来跟踪对象引用或执行类似的生命周期管
-+理。当这些计数器可能发生溢出时（无论是上溢还是下溢），这通常会暴露
-+出使用后释放（use-after-free）漏洞。通过捕捉原子计数器溢出，这类漏
-+洞就可以消失。
-+
-+大小计算溢出检测
-+----------------
-+
-+与计算器溢出类似，整数溢出（通常是大小计算）需要在运行时进行检测，
-+以防止这类在传统上会导致能够写入内核缓冲区末尾之外的漏洞。
-+
-+概率性防御
-+----------
-+
-+尽管许多防御措施可以被认定是确定的（例如，只读内存不能写入），但
-+有些确保措施仅提供统计防御，即攻击者必须收集足够的关于运行系统的
-+信息才能突破防御。尽管这些防御并不完美，但它们确实提供了有意义的
-+保护。
-+
-+栈保护、迷惑技术和其他秘密
-+--------------------------
-+
-+值得注意的是，像之前讨论的栈保护这样的技术，从技术上来说是统计性防
-+御，因为它们依赖于一个秘密值，而这样的值可能会通过信息泄露漏洞而被
-+发现。
-+
-+对于想JIT（及时翻译器）这样的情况，其中可执行内容可能部分由用户空间
-+控制，也需要类似的秘密之来迷惑。
-+
-+至关重要的是，所使用的秘密值必须是独立的（例如，每个栈使用不同的栈
-+保护值），并且具有高熵（例如，随机数生成器（RNG）是否正常工作？），
-+以最大限度地提高其成功率。
-+
-+内核地址空间布局随机化（KASLR）
-+-------------------------------
-+
-+由于内核内存的位置几乎总是攻击成功的关键因素，因此使内核内存位置变
-+得非确定性会增加攻击的难度。（请注意，这反过来提高了信息泄露的价
-+值，因为泄露的信息可以用来发现目标内存位置。）
-+
-+文本和模块基址
-+--------------
-+
-+通过在启动时重新设定内核的物理基地址和虚拟基地址
-+（CONFIG_RANDOMIZE_BASE）,那些需要利用内核代码的攻击将会受阻。此外
-+通过偏移模块加载基地址，意味着即使系统每次启动时按相同顺序加载同一
-+组模块，这些模块也不会与内核文本的其余部分公用一个基地址。
-+
-+堆栈基地址
-+----------
-+
-+如果进程之间内核堆栈的基地址不相同，甚至在不同系统调用之间也不相同，
-+那么栈上或超出栈的目标位置就会变得更加难以确定。
-+
-+动态内存基址
-+------------
-+
-+很多内核的动态内存（例如kmalloc，vmalloc等）由于早期启动初始化的顺
-+序，最终布局是相对确定的。如果这些区域的基地址在启动之间不相同，攻
-+击者就无法轻易定位它们，必须依赖于针对该区域的信息泄露才能成功。
-+
-+结构布局
-+--------
-+
-+通过在每次构建时对敏感结构的布局进行随机化处理，攻击这必须将攻击调
-+节到已知的内核版本，或者泄露足够的内核内存来确定结构布局，然后才能
-+对其进行操作。
-+
-+防止信息泄露
-+------------
-+
-+由于敏感结构的位置是攻击的主要目标，因此防止内核内存地址和内核内存
-+内容泄露非常重要（因为它们可能包含内核地址或者其他敏感数据，例如
-+栈保护值）。
-+
-+内核地址
-+--------
-+
-+将内核地址打印到用户空间会泄露有关内核内存布局的敏感信息。在使用任
-+何打印符号打印原始地址时，目前%px,%p[ad]（和在某些情况下的%p[sSb]）
-+时。使用这些格式符写入的文件需要限制为只有特权进程可读。
-+
-+在4.14及以前的内核版本中，使用%p格式符打印的是原始地址。从4.15-rcl
-+版本开始，使用%p格式符打印的地址会在打印前进行哈希处理。
-+
-+[*]如果启用KALLSYMS并且符号查找失败，则打印原始地址；如果没有启用
-+KALLSYSM，则会直接打印原始地址。
-+
-+唯一标识符
-+----------
-+
-+内核内存地址绝不可能用作向用户空间公开的标识符。相反，应该使用原子
-+计数器，IDR（ID映射表）或类似的唯一标识符。
-+
-+内存初始化
-+----------
-+
-+复制到用户空间的内存必须始终被完全初始化，如果没有显式地使用memset()
-+函数进行初始化，那就需要修改编译器，确保清除结构中的空洞。
-+
-+内存清除
-+--------
-+
-+在释放内存时，最好对内存内容进行清除处理，以防止攻击者重用内存中以前
-+的内容。例如，在系统调用返回时清除堆栈（CONFIG_GCC_PLUGIN_STACKLEAK）,
-+在释放堆内容是清除其内容。这有助于防止许多未初始化变量攻击、堆栈内容
-+泄露、堆内容泄露以及使用后释放攻击（user-after-free）。
-+
-+目标追踪
-+--------
-+
-+为了帮助消除导致内核地址被写入用户空间的各种错误，需要跟踪写入的目标。
-+如果缓冲区的目标是用户空间（例如，基于seq_file的/proc文件），则应该自
-+动审查敏感值。
--- 
-2.47.1
+# lsmod
+Module                  Size  Used by
+tap                    32768  0
+tun                    69632  0
 
+So having a separate module costs 4096 bytes more.
+
+These two approaches should have similar tendency for run-time and 
+compile-time performance; the code is so trivial that the overhead of 
+having one additional module is dominant.
+
+The only downside of having all in tun_vnet.h is that it will expose its 
+internal macros and functions, which I think tolerable.
 
