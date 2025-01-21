@@ -1,192 +1,193 @@
-Return-Path: <linux-doc+bounces-35784-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35786-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20844A17B97
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 11:27:51 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A204A17BED
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 11:36:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id D5B147A25B5
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 10:27:41 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4B8011687E4
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 10:36:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CAFD31F1501;
-	Tue, 21 Jan 2025 10:27:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 249851F130B;
+	Tue, 21 Jan 2025 10:34:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="Di+lOclO";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="jILGfGZG";
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="zj5OWOy9";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="zg9qQ1+1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout13.his.huawei.com (frasgout13.his.huawei.com [14.137.139.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E50861F0E44;
-	Tue, 21 Jan 2025 10:27:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D5341F1501;
+	Tue, 21 Jan 2025 10:34:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737455231; cv=none; b=HMKXiDa+jPCdTE0jz+Yjy4qbu585TajAMKh+dW/QwqVM62Ufh1+3CKmqFCRjAfzoi09tZHpditlo+9NHbvTz2QoyBWRaeUd41GTIZ4NU0SPkuuyHi/H+uVRWMzFFLm7Hun5zxxhQcPBLxErOaMlqJ51yzTSVNme/vnGd2MLul7k=
+	t=1737455664; cv=none; b=Z6sq9woVOcR657LhB6yQjDPP/LS8yUijqDLArdbBeLI0rc8ctvoIMJeAMKEr77Upf4fyek1e+6UIw01uZodsZIlUvpu/f8pTMKDDt9XHvBFRkgw/w8uHjlAOc97f+STnA4F2/A9pIZjfBDnGLn9iXa55c85HsO8u7jMqwzSRTD8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737455231; c=relaxed/simple;
-	bh=Itx1KidBw4QpxecgKrKibHzjX+XhiOBYVd+0EdKjtZ8=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=JTRkQDuqQciMjB3oS2ttAlYwH/QCao9mw7PxHy0y5XY7TI76DbgBI3x3Uofp0cS8qZUJiVRkKpFnj2wbKLWuZW782u+0OtU63p5VX7NfctRjnfWTRgRXU3lDLMEDqQSNWaqSKTNFgrnHVDVWY1biRNbKJzKpxsknF47MpI6Cm9o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.18.186.51])
-	by frasgout13.his.huawei.com (SkyGuard) with ESMTP id 4YcjVp0C54z9v7NR;
-	Tue, 21 Jan 2025 18:04:50 +0800 (CST)
-Received: from mail02.huawei.com (unknown [7.182.16.47])
-	by mail.maildlp.com (Postfix) with ESMTP id 8A663140EB3;
-	Tue, 21 Jan 2025 18:26:52 +0800 (CST)
-Received: from [127.0.0.1] (unknown [10.204.63.22])
-	by APP1 (Coremail) with SMTP id LxC2BwDHmklZdo9nRW0IAQ--.11999S2;
-	Tue, 21 Jan 2025 11:26:51 +0100 (CET)
-Message-ID: <69b38f6a6fb53e7b8f8250e1d37641c6abbb6d07.camel@huaweicloud.com>
-Subject: Re: [PATCH v2 0/6] module: Introduce hash-based integrity checking
-From: Roberto Sassu <roberto.sassu@huaweicloud.com>
-To: Thomas =?ISO-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>, Masahiro
- Yamada <masahiroy@kernel.org>, Nathan Chancellor <nathan@kernel.org>,
- Nicolas Schier <nicolas@fjasle.eu>, Arnd Bergmann <arnd@arndb.de>, Luis
- Chamberlain <mcgrof@kernel.org>, Petr Pavlu <petr.pavlu@suse.com>, Sami
- Tolvanen <samitolvanen@google.com>, Daniel Gomez <da.gomez@samsung.com>,
- Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, "Serge
- E. Hallyn" <serge@hallyn.com>, Jonathan Corbet <corbet@lwn.net>
-Cc: Fabian =?ISO-8859-1?Q?Gr=FCnbichler?= <f.gruenbichler@proxmox.com>, 
- Arnout Engelen <arnout@bzzt.net>, Mattia Rizzolo <mattia@mapreri.org>,
- kpcyrd <kpcyrd@archlinux.org>, linux-kbuild@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org, 
- linux-modules@vger.kernel.org, linux-security-module@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-integrity@vger.kernel.org,
- zohar@linux.ibm.com
-Date: Tue, 21 Jan 2025 11:26:29 +0100
-In-Reply-To: <20250120-module-hashes-v2-0-ba1184e27b7f@weissschuh.net>
-References: <20250120-module-hashes-v2-0-ba1184e27b7f@weissschuh.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2 
+	s=arc-20240116; t=1737455664; c=relaxed/simple;
+	bh=zteXaq01dCKXl3zPEDG4xQa2VkuTaEUWdHw1Vh/XmZQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Si296cBrV4U829kIAsgbQW/DEVUf0x0Thx1POBbRXe6MtQm1C1sFbIP187h2D6VTN0wq9USdWJo5d8vjaMRAzBVHv/Pw3lCgnwdm9U5a2IB4JdiOeRfLSjxaZPBzO1FaBAkDrs9hWvNrwfqLxFiS1NWMNvH++0n1n6MwoZIhf8c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=Di+lOclO; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=jILGfGZG; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=zj5OWOy9; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=zg9qQ1+1; arc=none smtp.client-ip=195.135.223.130
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 02CAF21188;
+	Tue, 21 Jan 2025 10:27:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1737455241; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=rUmPw+tsP8Hn2JdtmVJvzpT6x1j65OtgawzbwfWp6FY=;
+	b=Di+lOclOvMRn05YrToA5WQdS2gEYVq39E3YyF6mDmu9ekAtO5EIA2gcZRFNdht6a+tK4T6
+	q1oN0rr20xA1JeK7oP4BSM+02E8kVZmn3neEJBH8xjQIOZ9Obk63OQ8G5MtuXYGo+qB3z1
+	BI39vQj30nqdEQeKLJ0WnN+h8ookjY4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1737455241;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=rUmPw+tsP8Hn2JdtmVJvzpT6x1j65OtgawzbwfWp6FY=;
+	b=jILGfGZG0HhP5NIwSmZ7uGD4/+/j2f5QbVcoGFvQnhF/PG8goDsq0BPQZ1CQ08vwMUUatS
+	GGnA+3HEHqn0HJBg==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1737455240; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=rUmPw+tsP8Hn2JdtmVJvzpT6x1j65OtgawzbwfWp6FY=;
+	b=zj5OWOy9HBhnHgvi2SMzCQFxA0QGegKkW8eMytfLKeTKpvSR8pVHD34g0OEGGPSvk39oep
+	1Kf8d88H+MySDg3GQASU/pEvymCM222wv0KW/SWez/M1PUaV383z6gedeOQZwdsaaBH4C5
+	XMnb2CQzKA1LBkO3L7JWqbbK43uQGfQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1737455240;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=rUmPw+tsP8Hn2JdtmVJvzpT6x1j65OtgawzbwfWp6FY=;
+	b=zg9qQ1+15vF3Xmt8v63VrGe5DudClLiyxs9dSvKm0kAMI8hb6KdPJCICOq798TRC6Px4p8
+	SmTKJNi9P++cOGAg==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id E1AE713963;
+	Tue, 21 Jan 2025 10:27:19 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id 7GvWNod2j2d3cgAAD6G6ig
+	(envelope-from <vbabka@suse.cz>); Tue, 21 Jan 2025 10:27:19 +0000
+Message-ID: <3661f67f-8c52-4e7b-80b6-9b3cc63b41bd@suse.cz>
+Date: Tue, 21 Jan 2025 11:27:19 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-CM-TRANSID:LxC2BwDHmklZdo9nRW0IAQ--.11999S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxGF1fur4ktF1xXw43WF1xZrb_yoWrGF4Upa
-	yDKr45tr4kJryxAFs3Ar109r15K3ykGw4agFsxGw42y34j9r12vFnFg34fZFy29r4IkFyU
-	Gr4aqF1jkryDJ3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvjb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k2
-	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
-	xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxV
-	AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
-	x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
-	0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAaw2AF
-	wI0_GFv_Wryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
-	xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5
-	MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
-	0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWU
-	JVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUIa
-	0PDUUUU
-X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAQAPBGePR1QCGgABso
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mm: slub: Panic if the object corruption is checked.
+To: Hyesoo Yu <hyesoo.yu@samsung.com>, Matthew Wilcox <willy@infradead.org>
+Cc: janghyuck.kim@samsung.com, Andrew Morton <akpm@linux-foundation.org>,
+ Jonathan Corbet <corbet@lwn.net>, Christoph Lameter <cl@linux.com>,
+ Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>,
+ Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+ Roman Gushchin <roman.gushchin@linux.dev>,
+ Hyeonggon Yoo <42.hyeyoo@gmail.com>, linux-mm@kvack.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <CGME20250120083041epcas2p30d61ee801c1db5a7ebdf26fdc642883f@epcas2p3.samsung.com>
+ <20250120082908.4162780-1-hyesoo.yu@samsung.com>
+ <Z45taJAEqdcyIXX-@casper.infradead.org> <20250121003959.GA610565@tiffany>
+Content-Language: en-US
+From: Vlastimil Babka <vbabka@suse.cz>
+In-Reply-To: <20250121003959.GA610565@tiffany>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spam-Level: 
+X-Spamd-Result: default: False [-2.80 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	RCVD_TLS_ALL(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[samsung.com,linux-foundation.org,lwn.net,linux.com,kernel.org,google.com,lge.com,linux.dev,gmail.com,kvack.org,vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.cz:mid,samsung.com:email]
+X-Spam-Score: -2.80
+X-Spam-Flag: NO
 
-On Mon, 2025-01-20 at 18:44 +0100, Thomas Wei=C3=9Fschuh wrote:
-> The current signature-based module integrity checking has some drawbacks
-> in combination with reproducible builds:
-> Either the module signing key is generated at build time, which makes
-> the build unreproducible, or a static key is used, which precludes
-> rebuilds by third parties and makes the whole build and packaging
-> process much more complicated.
-> Introduce a new mechanism to ensure only well-known modules are loaded
-> by embedding a list of hashes of all modules built as part of the full
-> kernel build into vmlinux.
->=20
-> Interest has been proclaimed by NixOS, Arch Linux, Proxmox, SUSE and the
-> general reproducible builds community.
->=20
-> To properly test the reproducibility in combination with CONFIG_INFO_BTF
-> another patch is needed:
-> "[PATCH bpf-next] kbuild, bpf: Enable reproducible BTF generation" [0]
-> (If you happen to test that one, please give some feedback)
->=20
-> Questions for current patch:
-> * Naming
-> * Can the number of built-in modules be retrieved while building
->   kernel/module/hashes.o? This would remove the need for the
->   preallocation step in link-vmlinux.sh.
->=20
-> Further improvements:
-> * Use a LSM/IMA/Keyring to store and validate hashes
+On 1/21/25 1:40 AM, Hyesoo Yu wrote:
+> On Mon, Jan 20, 2025 at 03:36:08PM +0000, Matthew Wilcox wrote:
+>> On Mon, Jan 20, 2025 at 05:28:21PM +0900, Hyesoo Yu wrote:
+>>> If a slab object is corrupted or an error occurs in its internal
+>>> value, continuing after restoration may cause other side effects.
+>>> At this point, it is difficult to debug because the problem occurred
+>>> in the past. A flag has been added that can cause a panic when there
+>>> is a problem with the object.
+>>>
+>>> Signed-off-by: Hyesoo Yu <hyesoo.yu@samsung.com>
+>>> Change-Id: I4e7e5e0ec3421a7f6c84d591db052f79d3775493
+>>
+>> Linux does not use Change IDs.  Please omit these from future patches.
+>>
+>> Panicing is a very unfriendly approach.  I think a better approach would
+>> be to freeze the slab where corruption is detected.  That is, no future
+>> objects are allocated from that slab, and attempts to free objects from
+>> that slab become no-ops.  I don't think that should be hard to implement.
 
-+ linux-integrity, Mimi
+Freezing of slab is already done in some cases when corruption is
+detected - all objects are marked as used, and further freeing attempts
+on the slab are discarded. Perhaps not all cases, which could be improved.
 
-Hi Thomas
+> Thanks you for your responce. That is my mistake. I will remove the change ID.
+> 
+> I agree that freezing is better than recovery or panic for the system's stability.
+> However what I want from the patch is not just to make the system run stably.
+> I need to immediately trigger a panic to investigate the slub.
 
-I developed something related to it, it is called Integrity Digest
-Cache [1].
+IMHO it's a valid goal to panic more quickly when debugging, and
+enabling slub_debug means debugging is in progress (as opposed to normal
+production when we try to avoid panic).
+But making it possible to reuse the general panic_on_warn mechanism
+(which can be also expected to be enabled when debugging) is indeed
+preferable to introducing a new slab-specific flag.
 
-It has the ability to store in the kernel memory a cache of digests
-extracted from a file (or if desired in the future, from a reserved
-area in the kernel image).
-
-It exposes an API to query a digest (get/lookup/put) from a digest
-cache and to verify whether or not the integrity of the file digests
-were extracted from was verified by IMA or another LSM
-(verif_set/verif_get).=20
-
-Roberto
-
-
-[1]: https://lore.kernel.org/linux-integrity/20241119104922.2772571-1-rober=
-to.sassu@huaweicloud.com/
-
-> * Use MODULE_SIG_HASH for configuration
-> * UAPI for discovery?
->=20
-> [0] https://lore.kernel.org/lkml/20241211-pahole-reproducible-v1-1-22feae=
-19bad9@weissschuh.net/
->=20
-> Signed-off-by: Thomas Wei=C3=9Fschuh <linux@weissschuh.net>
-> ---
-> Changes in v2:
-> - Drop RFC state
-> - Mention interested parties in cover letter
-> - Expand Kconfig description
-> - Add compatibility with CONFIG_MODULE_SIG
-> - Parallelize module-hashes.sh
-> - Update Documentation/kbuild/reproducible-builds.rst
-> - Link to v1: https://lore.kernel.org/r/20241225-module-hashes-v1-0-d710c=
-e7a3fd1@weissschuh.net
->=20
-> ---
-> Thomas Wei=C3=9Fschuh (6):
->       kbuild: add stamp file for vmlinux BTF data
->       module: Make module loading policy usable without MODULE_SIG
->       module: Move integrity checks into dedicated function
->       module: Move lockdown check into generic module loader
->       lockdown: Make the relationship to MODULE_SIG a dependency
->       module: Introduce hash-based integrity checking
->=20
->  .gitignore                                   |  1 +
->  Documentation/kbuild/reproducible-builds.rst |  5 ++-
->  Makefile                                     |  8 ++++-
->  include/asm-generic/vmlinux.lds.h            | 11 ++++++
->  include/linux/module.h                       |  8 ++---
->  include/linux/module_hashes.h                | 17 +++++++++
->  kernel/module/Kconfig                        | 21 ++++++++++-
->  kernel/module/Makefile                       |  1 +
->  kernel/module/hashes.c                       | 52 ++++++++++++++++++++++=
-+++++
->  kernel/module/internal.h                     |  8 +----
->  kernel/module/main.c                         | 54 ++++++++++++++++++++++=
-+++---
->  kernel/module/signing.c                      | 24 +------------
->  scripts/Makefile.modfinal                    | 10 ++++--
->  scripts/Makefile.vmlinux                     |  5 +++
->  scripts/link-vmlinux.sh                      | 31 +++++++++++++++-
->  scripts/module-hashes.sh                     | 26 ++++++++++++++
->  security/lockdown/Kconfig                    |  2 +-
->  17 files changed, 238 insertions(+), 46 deletions(-)
-> ---
-> base-commit: 2cd5917560a84d69dd6128b640d7a68406ff019b
-> change-id: 20241225-module-hashes-7a50a7cc2a30
->=20
-> Best regards,
+> I would like to analyze the corrupted data at that moment to check issues
+> like cache problem, user errors, system clock frequency and similar problems,
+> not just passing by without any issues.
+> 
+> However I agree that panic is not a friendly approach.
+> I will modify it to notify the problem using warn() and then use
+> panic_on_warn to trigger panic.
+> 
+> Thanks,
+> Regards.
+> 
+> 
 
 
