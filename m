@@ -1,121 +1,129 @@
-Return-Path: <linux-doc+bounces-35776-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35778-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D64B1A17A0B
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 10:19:44 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id A7E3BA17A27
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 10:28:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2385C3A70E8
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 09:19:37 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E75E0169EA9
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Jan 2025 09:28:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 39A401BEF6E;
-	Tue, 21 Jan 2025 09:19:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VaXAtnJs"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEFE51C1F1D;
+	Tue, 21 Jan 2025 09:28:21 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2C421B6CE9;
-	Tue, 21 Jan 2025 09:19:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29A1C1C1735
+	for <linux-doc@vger.kernel.org>; Tue, 21 Jan 2025 09:28:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737451171; cv=none; b=bw7lj5s3g2XJJziBc47zTCKkrrYuoiua1AHzj43fyJTWOdBbA5mzzVL9/JOrZbenlX6BacGePdfGv/Dqy6/AFho5++Gwgn7zN16B1HbQ6/IDUHNJE7l/hTKer7AxmsQJkz7c4XjuUqhorfh7Nj7E56TRosUH6Fb6hv97AOmZ96I=
+	t=1737451701; cv=none; b=dFo2ATWUHaaeSsG7SPOITmpqKusLc6ws+4u8wjJ4lQKDC0TSqZ1vRC+gAsXNehQuOdys7Uno9mYwlRBcUhB9DZrhKnqccSehEl+jMR6GZzjHbEbEqWOell5yK4terxl58UcaVX1NGm3ZRpgyY1+fzYfoaLhDJHvbG+slR6KniTA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737451171; c=relaxed/simple;
-	bh=4or9mCMAkvG98AWZ9qL6deZsW30v4tXFZXm8ywfU/WA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=DeBa0DEWrRDCU7sg+u2jdn058S7DEBOFU/S9rTBccCH5YS9gdVPv6lY/VBSSYzo1iN5NmvvcsJ9leZX4VWHRm1u2lOO96AICT2R2gbt1IxwYMkvtdqCTylcagzF7MVrnXdgSX+nmbAFHbvFNZ/MBCX6Uq+TawhCDHXNY614ugRo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VaXAtnJs; arc=none smtp.client-ip=209.85.216.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-2ef87d24c2dso6959632a91.1;
-        Tue, 21 Jan 2025 01:19:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737451169; x=1738055969; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=1cmLKgAbd0s4H/WjP4JEXIpMzxpQ6pfh6XVvXVJ8p1M=;
-        b=VaXAtnJs0x51MQkGGil7+WOewlovsOFWpGZpkoRf45dhgP3T+abcLWT0RnL9p/fMd7
-         MdR9hdvf6RKlaYIXXrx4SkNQ9cR0+KAXkbsZdibgTMtK3luAB5b3RYwmX5j6iYgZlDgw
-         ScSqiKCjNT8qxnTjF++1AvsES/NDfxYJ176uT8WdMC45PJGQFBy4lv1S+Ak/pCyzUlHe
-         /m8oCvuBFio+OMuw01V+X8+F5aHrz2A+VvYUrNOPoW+jjgBZjsWhhEiEAZESganLoZKa
-         IT+hsejiDFZTXcjiVDPn6PUNCUDyjW0j/x4NfWzG/3ssRHiKdqX6rhhdqRi9QNijn6p5
-         oeQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737451169; x=1738055969;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=1cmLKgAbd0s4H/WjP4JEXIpMzxpQ6pfh6XVvXVJ8p1M=;
-        b=f/sQIHwwitIw3rre1QgAnBWVqUCxyrK3pbqrJDWZ0L1hkzg/7ki1miyayunecHMo+F
-         ZHTRz9GKV1WWQhZUxK+5uQjLh2mWYe4UNiDEiOmyIL6B9REi8naz/4QFU2N2L5y3gLTT
-         +PQnbInBhiAiPoXcWfR7VcLMm+4eva0MXdl+4jLhlN1cGOGPWw8YeBuNCOUDMiYY4HQ8
-         kRojdKqc9peizR3xZWyPaLHrC0oe5LYg6jke2gEKrO5HP4l9YGKMhQheVLalwvfwVEni
-         KHXdXeD31wbDmjjNOioXTkSS77DadXaWnVP4kQhWuIIOVKhCxX/aibzL9wCtVPe68Cr/
-         nqDg==
-X-Forwarded-Encrypted: i=1; AJvYcCUKbzLxqyMooVAgyWPF2+vlzBXcSx9rRh3D2mDdi/LgQ+C96sWr2zG09q8mO816J3StedEp+cuiJMhntpes@vger.kernel.org, AJvYcCVK5PmQVfCdYXcWDq5hUb2jyJ4zL89t7MBJWNXuObksqu1xGxpLDfW6ZojbBzIaW6q9Tto+jAgYHkyv@vger.kernel.org, AJvYcCWon6bRljlvvHsKpICMdWJ5+GqbRW74eddXraDOusRWlBiIkzatDk34z1pNr4ZFP0mZlguZuuPYOHeG@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx2VNCZQFhHx2rnVgwVH/CtGOWGVFXQ4OEcdou3u0Mg6ItZ/dIy
-	HByXKMr33FWcCk4ejfLmYC8JMRLAuyZTIlAx9TCxMrkEtbcYcNuRPqV82rIAIuXkZN3NAxHY4r0
-	GPbK/Hm0txmNg9kyt6OtEURJ+jPI=
-X-Gm-Gg: ASbGncuKyY3ZGh6+WW0lXb/AtjfzflQv/54BLrGAkfLIFixVFaFlOIdsCCd6swBJEJn
-	cA8r0b7+KoU5Q9An+8bbf/FtFN+19YiemMFbydQP7dFH6jjPoa1rJrjcrz5ScHrrxcg==
-X-Google-Smtp-Source: AGHT+IHGWqxvT9gpiCi2M50sC7hANpRZHJI/Fb/4ZsNlfTW4QBH+d6oGf9mhsqDy2J8HXKVAlymqclIkcRr0VJ3gbc8=
-X-Received: by 2002:a17:90b:258b:b0:2ee:f80c:688d with SMTP id
- 98e67ed59e1d1-2f782d4f168mr22914331a91.25.1737451168941; Tue, 21 Jan 2025
- 01:19:28 -0800 (PST)
+	s=arc-20240116; t=1737451701; c=relaxed/simple;
+	bh=o1kL8kt+AXGjJ2DSrH3rG7DQ3wNaZkClXMiy69KbBTg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=dksVodyY1oYAtjD798aE14LR5Pb/ZA6tyGkfS5ZdoooRl1pH4Jcmk4/g8epIh3+0saBGQI1px6rMRcz44wfc+dmh4hGWxRyLGMZFsJ9Sfg25HAU4DUK1cEre12SoAfNoWLhu7MoNZPthgoG8VK//eiPjFJr4BVSHbxqjr6iAB84=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[127.0.0.1])
+	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+	(envelope-from <a.fatoum@pengutronix.de>)
+	id 1taAY6-0003oE-84; Tue, 21 Jan 2025 10:27:54 +0100
+Message-ID: <981e62da-00a4-415b-b53a-617992babaca@pengutronix.de>
+Date: Tue, 21 Jan 2025 10:27:52 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <AM9PR04MB86041F11E6744FB41C40CECA95E72@AM9PR04MB8604.eurprd04.prod.outlook.com>
- <1f7289e7-8e5f-448c-a443-2f27a43e640e@pengutronix.de>
-In-Reply-To: <1f7289e7-8e5f-448c-a443-2f27a43e640e@pengutronix.de>
-From: Luna Jernberg <droidbittin@gmail.com>
-Date: Tue, 21 Jan 2025 10:19:15 +0100
-X-Gm-Features: AbW1kvYMf3N-mBfPacW0Bl83nBf5PXk-cPJ5NgOebdXSbVXyMxjWfW3gWa_3_g4
-Message-ID: <CADo9pHhNbq-i9r8QwkCCdzmMf6L8QNiiKmzP=sr=M8=YfsJcBA@mail.gmail.com>
-Subject: Re: Recall: [PATCH v11 0/7] v12: firmware: imx: driver for NXP secure-enclave
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>, Luna Jernberg <droidbittin@gmail.com>
-Cc: Pankaj Gupta <pankaj.gupta@nxp.com>, Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Shawn Guo <shawnguo@kernel.org>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, 
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
-	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "imx@lists.linux.dev" <imx@lists.linux.dev>, 
-	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, Conor Dooley <conor@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/12] reboot: replace __hw_protection_shutdown bool
+ action parameter with an enum
+To: Tzung-Bi Shih <tzungbi@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+ Daniel Lezcano <daniel.lezcano@linaro.org>, Fabio Estevam
+ <festevam@denx.de>, "Rafael J. Wysocki" <rafael@kernel.org>,
+ Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+ Jonathan Corbet <corbet@lwn.net>, Serge Hallyn <serge@hallyn.com>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Matti Vaittinen <mazziesaccount@gmail.com>,
+ Benson Leung <bleung@chromium.org>, Guenter Roeck <groeck@chromium.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-pm@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-security-module@vger.kernel.org, chrome-platform@lists.linux.dev,
+ devicetree@vger.kernel.org, kernel@pengutronix.de
+References: <20250113-hw_protection-reboot-v2-0-161d3fc734f0@pengutronix.de>
+ <20250113-hw_protection-reboot-v2-1-161d3fc734f0@pengutronix.de>
+ <Z4325IopvxTN_34R@google.com>
+Content-Language: en-US
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <Z4325IopvxTN_34R@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-That was what happened to me on Gmail, was wondering what this was
-about, thanks for the explanation
+Hello,
 
-Den tis 21 jan. 2025 kl 10:17 skrev Ahmad Fatoum <a.fatoum@pengutronix.de>:
->
-> Hello Pankaj,
->
-> On 20.01.25 10:26, Pankaj Gupta wrote:
-> > Pankaj Gupta would like to recall the message, "[PATCH v11 0/7] v12: firmware: imx: driver for NXP secure-enclave".
->
-> AFAIK, recall is an outlook-specific feature and most readers on LKMLs
-> will just get an email like quoted and thus recalling the message only
-> adds noise.
->
-> A single reply to the cover letter that this was sent out by mistake
-> is enough.
->
-> Cheers,
-> Ahmad
->
->
-> --
-> Pengutronix e.K.                           |                             |
-> Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-> 31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-> Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
->
+On 20.01.25 08:10, Tzung-Bi Shih wrote:
+> On Mon, Jan 13, 2025 at 05:25:26PM +0100, Ahmad Fatoum wrote:
+>> Currently __hw_protection_shutdown() either reboots or shuts down the
+>> system according to its shutdown argument.
+>>
+>> To make the logic easier to follow, both inside __hw_protection_shutdown
+>> and at caller sites, lets replace the bool parameter with an enum.
+>>
+>> This will be extra useful, when in a later commit, a third action is
+>> added to the enumeration.
+>>
+>> No functional change.
+>>
+>> Signed-off-by: Ahmad Fatoum <a.fatoum@pengutronix.de>
+> 
+> With a minor question,
+> Reviewed-by: Tzung-Bi Shih <tzungbi@kernel.org>
+
+Thanks for your review.
+
+>> @@ -1009,10 +1007,10 @@ void __hw_protection_shutdown(const char *reason, int ms_until_forced, bool shut
+>>  	 * orderly_poweroff failure
+>>  	 */
+>>  	hw_failure_emergency_poweroff(ms_until_forced);
+>> -	if (shutdown)
+>> -		orderly_poweroff(true);
+>> -	else
+>> +	if (action == HWPROT_ACT_REBOOT)
+>>  		orderly_reboot();
+>> +	else
+>> +		orderly_poweroff(true);
+> 
+> It probably doesn't really matter.  Does it intend to change the branch
+> order?  As s/shutdown/action == HWPROT_ACT_SHUTDOWN/ should be more
+> intuitive for the hunk to me.
+
+My thinking was that having poweroff in the else branch underlines that
+it's the default, i.e. either reboot was explicitly asked for or we fall
+back to the poweroff default.
+
+I see that this is subjective. I can change it for v3 if that's preferred.
+
+Cheers,
+Ahmad
+
+> 
+
+
+-- 
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
