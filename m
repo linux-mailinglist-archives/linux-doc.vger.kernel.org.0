@@ -1,41 +1,41 @@
-Return-Path: <linux-doc+bounces-35875-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35878-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 446C7A189F6
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Jan 2025 03:35:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F111AA18A22
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Jan 2025 03:43:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1BA981884984
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Jan 2025 02:35:15 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id C9CDF188C2D3
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Jan 2025 02:43:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 20D561C3BF9;
-	Wed, 22 Jan 2025 02:32:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DEB44174A;
+	Wed, 22 Jan 2025 02:42:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="eWJKCnqt"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="GcWfbDbM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m15590.qiye.163.com (mail-m15590.qiye.163.com [101.71.155.90])
+Received: from mail-m49208.qiye.163.com (mail-m49208.qiye.163.com [45.254.49.208])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7910E1BCA11
-	for <linux-doc@vger.kernel.org>; Wed, 22 Jan 2025 02:32:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.90
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50FA3249F9
+	for <linux-doc@vger.kernel.org>; Wed, 22 Jan 2025 02:42:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.208
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737513128; cv=none; b=Bltcx4ANzIvG7RjBEM48JMwiBumMKROYQC8qQB0uJ+I2pUS1V0HtN45oNLN2Ic1js+7kc6ShnwyoIFmTA/cn8NlNrvUD02Fqi+x/YzC4AHaVXHvHYiJW8upd3wK/5vz0QfW22eufFq/r8OmD2b+OHa72n8o88JbAt/kzbdtRA1I=
+	t=1737513778; cv=none; b=gO6VKg/7gF1sXC/SzjvoAm4EiLdE0ys6FVKIBvjDxnMreLJbBEQPklCSa8F6t7/E8Ii9us2nvOiT3myIXJqOq1kLfEv6ycufPhjCwUgnQos2Ry7aFUJJmn06t9ntqxlXuw54Rj1z+67PoEWPyCiN829YxuEfmr8WFIAJLsmISdw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737513128; c=relaxed/simple;
-	bh=lLXVoVngOFx+N1DZ3QCTA5wWXYmzZgvGM5MxQ8C3qAo=;
+	s=arc-20240116; t=1737513778; c=relaxed/simple;
+	bh=lL0M5aOSPLr9mELRwHPYvVyjP4x63K6B7alpSYnkkFs=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=j1bayngBMzpXPJCXzjlcTytwqT4fxkkV7a1eI3xqWgtopqpqXoFdcl9RKEwkAgBXENF9fawDyyX51YDjuvHcUn+mMZo2KOeLLPzcYoKGwbAw53BUuA9Qqb5Mwz8kg9svZwQGEhWuGyhhie4nWm3OK9cmkiLQmJRYJeYUvH3IiM4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=eWJKCnqt; arc=none smtp.client-ip=101.71.155.90
+	 In-Reply-To:Content-Type; b=r8bV0MJ/QOlt//pnZlUO3VlRPvnL5KcMzCRge1kSuO9vyhw99wO5wXVwDRvTtDW89RtBC10V14lPEfKhPT9mePt3jX05DM8GfaO0R3eBO9rqmDAdo6075+xeRpLQCi51fyqdSYCMSugRF8oDIB5eq6lE3GMcPx9sJI27MF1e9Go=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=GcWfbDbM; arc=none smtp.client-ip=45.254.49.208
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
 Received: from [192.168.6.2] (unknown [123.53.38.48])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 95aac018;
-	Wed, 22 Jan 2025 10:26:46 +0800 (GMT+08:00)
-Message-ID: <d47e6345-c4ad-4637-87a0-fc7493f2f338@cqsoftware.com.cn>
-Date: Wed, 22 Jan 2025 10:26:47 +0800
+	by smtp.qiye.163.com (Hmail) with ESMTP id 95aac17f;
+	Wed, 22 Jan 2025 10:27:34 +0800 (GMT+08:00)
+Message-ID: <ec66ba02-bc4e-4c73-b907-8b4e135cccea@cqsoftware.com.cn>
+Date: Wed, 22 Jan 2025 10:27:34 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -43,39 +43,41 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/7] docs/zh_CN: Add tpm index Chinese translation
+Subject: Re: [PATCH v2 2/7] docs/zh_CN: Add tpm tpm_event_log Chinese
+ translation
 To: Alex Shi <seakeel@gmail.com>
 Cc: alexs@kernel.org, si.yanteng@linux.dev, corbet@lwn.net,
  zhaoyuehui@cqsoftware.com.cn, zhangwei@cqsoftware.com.cn,
  maoyuxian@cqsoftware.com.cn, linux-doc@vger.kernel.org
 References: <cover.1737354981.git.zhaoshuo@cqsoftware.com.cn>
- <ff15a31080a2671da3e114fe95f2a19e294367bc.1737354981.git.zhaoshuo@cqsoftware.com.cn>
- <CAJy-AmmkXKX70peEf-bK_V0FHm8q8dtqHL-kUPx+wngEfv_Dsw@mail.gmail.com>
+ <0287c7309ecb1bf0ffd40d363f43f148beea0a18.1737354981.git.zhaoshuo@cqsoftware.com.cn>
+ <CAJy-AmknZopyMndMpruBYGdeEZNLyQ6kqwneKmoVS2wU-BVLaQ@mail.gmail.com>
 From: zhaoshuo <zhaoshuo@cqsoftware.com.cn>
-In-Reply-To: <CAJy-AmmkXKX70peEf-bK_V0FHm8q8dtqHL-kUPx+wngEfv_Dsw@mail.gmail.com>
+In-Reply-To: <CAJy-AmknZopyMndMpruBYGdeEZNLyQ6kqwneKmoVS2wU-BVLaQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZSxkeVh5ITU5MTk9CGEJITlYVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaSUxPVhlKSk1CHhgaQx1CS1YVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKSUhVTkhVSENVT0NZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0hVSktLVU
 	pCS0tZBg++
-X-HM-Tid: 0a948bd56a5509d0kunm95aac018
+X-HM-Tid: 0a948bd6249309d0kunm95aac17f
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PCI6Lgw6EzIOTykuIxk#Hx9I
-	NR8aClFVSlVKTEhMTkpJQ0tMQkxJVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
-	WRILWUFZSklIVU5IVUhDVU9DWVdZCAFZQUlKSkg3Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MQw6Hgw5NTIPSykKIx43HlEi
+	OT4KChNVSlVKTEhMTkpJQ05OTUJKVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
+	WRILWUFZSklIVU5IVUhDVU9DWVdZCAFZQUhCTkw3Bg++
 DKIM-Signature:a=rsa-sha256;
-	b=eWJKCnqtgAEiOoW+T8+jumin7QjUP5Q438DqUSSTMx9yP9npus99LEzosfBiGTHqcQrk/vFjYhpcWbiOcKHKYyRF8cvd2MZLml8/PdsYz8hfI5icHha71fTufZ/sTBGLwXGlia4aZ8u5giWGn2U5gORhxQv3aM6ue0zPA5fN/JE=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
-	bh=zfU59EdTXUJCI92F3Z6piD4qPIPXdszsV3h93g9Oeeo=;
+	b=GcWfbDbMA6s5ohHiKbV1kHw4O6q5uhhw0DtaTTp7bX9afnECHCzsFG9hJOrRtlbhPhIAfMaSQlrjB4xt1IG5N4Muw9YnHXSTQ3GN9RaEbn1jkzmLjvJ/inNvDch1nur27Tat+nxqJns8RGSSvajg36OIghSaKr+r2wEge5FuTFs=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
+	bh=8NkarS5C+gc3vnuKlpOi648wFMrPSbt/rxCsFkSksBU=;
 	h=date:mime-version:subject:message-id:from;
 
 
-在 2025/1/22 9:43, Alex Shi 写道:
-> Translation is fine for me.
+在 2025/1/22 9:48, Alex Shi 写道:
+> Translation looks good for me.
 >
 > Reviewed-by: Alex Shi <alexs@kernel.org>
 
 Ok.
+
 
 
 Thanks,
@@ -83,67 +85,90 @@ Thanks,
 ZhaoShuo
 
 >
-> Shuo Zhao <zhaoshuo@cqsoftware.com.cn> 于2025年1月20日周一 14:51写道：
->> Translate .../security/tpm/index.rst into Chinese
+> Shuo Zhao <zhaoshuo@cqsoftware.com.cn> 于2025年1月20日周一 15:26写道：
+>> Translate .../security/tpm/tpm_event_log.rst into Chinese.
 >>
->> Update the translation through commit 1d479e3cd652
->> ("Documentation: tpm: Add TPM security docs toctree entry")
+>> Update the translation through commit 2ef5a7f1482c
+>> ("tpm: Document UEFI event log quirks")
 >>
 >> Signed-off-by: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
 >> ---
->>   .../translations/zh_CN/security/index.rst     |  2 +-
->>   .../translations/zh_CN/security/tpm/index.rst | 21 +++++++++++++++++++
->>   2 files changed, 22 insertions(+), 1 deletion(-)
->>   create mode 100644 Documentation/translations/zh_CN/security/tpm/index.rst
+>>   .../translations/zh_CN/security/tpm/index.rst |  3 +-
+>>   .../zh_CN/security/tpm/tpm_event_log.rst      | 49 +++++++++++++++++++
+>>   2 files changed, 51 insertions(+), 1 deletion(-)
+>>   create mode 100644 Documentation/translations/zh_CN/security/tpm/tpm_event_log.rst
 >>
->> diff --git a/Documentation/translations/zh_CN/security/index.rst b/Documentation/translations/zh_CN/security/index.rst
->> index 38e9ce7cf471..0aacecabf0c0 100644
->> --- a/Documentation/translations/zh_CN/security/index.rst
->> +++ b/Documentation/translations/zh_CN/security/index.rst
->> @@ -19,6 +19,7 @@
->>      lsm
->>      sak
->>      siphash
->> +   tpm/index
->>      digsig
->>      landlock
->>
->> @@ -29,6 +30,5 @@ TODOLIST:
->>   * lsm-development
->>   * SCTP
->>   * self-protection
->> -* tpm/index
->>   * secrets/index
->>   * ipe
 >> diff --git a/Documentation/translations/zh_CN/security/tpm/index.rst b/Documentation/translations/zh_CN/security/tpm/index.rst
->> new file mode 100644
->> index 000000000000..a3cfb2d11c86
->> --- /dev/null
+>> index a3cfb2d11c86..f324bd4dd093 100644
+>> --- a/Documentation/translations/zh_CN/security/tpm/index.rst
 >> +++ b/Documentation/translations/zh_CN/security/tpm/index.rst
->> @@ -0,0 +1,21 @@
+>> @@ -12,8 +12,9 @@
+>>
+>>   .. toctree::
+>>
+>> +   tpm_event_log
+>> +
+>>   TODOLIST:
+>> -*   tpm_event_log
+>>   *   tpm-security
+>>   *   tpm_tis
+>>   *   tpm_vtpm_proxy
+>> diff --git a/Documentation/translations/zh_CN/security/tpm/tpm_event_log.rst b/Documentation/translations/zh_CN/security/tpm/tpm_event_log.rst
+>> new file mode 100644
+>> index 000000000000..9c173291ac3e
+>> --- /dev/null
+>> +++ b/Documentation/translations/zh_CN/security/tpm/tpm_event_log.rst
+>> @@ -0,0 +1,49 @@
 >> +.. SPDX-License-Identifier: GPL-2.0
 >> +.. include:: ../../disclaimer-zh_CN.rst
 >> +
->> +:Original: Documentation/security/tpm/index.rst
+>> +:Original: Documentation/security/tpm/tpm_event_log.rst
 >> +
 >> +:翻译:
 >> + 赵硕 Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
 >> +
->> +================
->> +可信平台模块文档
->> +================
+>> +===========
+>> +TPM事件日志
+>> +===========
 >> +
->> +.. toctree::
+>> +本文档简要介绍了什么是TPM日志，以及它是如何从预启动固件移交到操作系统的。
 >> +
->> +TODOLIST:
->> +*   tpm_event_log
->> +*   tpm-security
->> +*   tpm_tis
->> +*   tpm_vtpm_proxy
->> +*   xen-tpmfront
->> +*   tpm_ftpm_tee
+>> +介绍
+>> +====
+>> +
+>> +预启动固件维护一个事件日志，每当它将某些内容哈希到任何一个PCR寄存器时，该
+>> +日志会添加新条目。这些事件按类型分类，并包含哈希后的PCR寄存器值。通常，预
+>> +启动固件会哈希那些即将移交执行权或与启动过程相关的组件。
+>> +
+>> +其主要应用是远程认证，而它之所以有用的原因在[1]中第一部分很好地阐述了：
+>> +
+>> +认证用于向挑战者提供有关平台状态的信息。然而，PCR的内容难以解读；因此，当
+>> +PCR内容附有测量日志时，认证通常会更有用。尽管测量日志本身并不可信，但它们
+>> +包含比PCR内容更为丰富的信息集。PCR内容用于对测量日志进行验证。
+>> +
+>> +UEFI事件日志
+>> +============
+>> +
+>> +UEFI提供的事件日志有一些比较奇怪的特性。
+>> +
+>> +在调用ExitBootServices()之前，Linux EFI引导加载程序会将事件日志复制到由
+>> +引导加载程序自定义的配置表中。不幸的是，通过ExitBootServices()生成的事件
+>> +并不会出现在这个表里。
+>> +
+>> +固件提供了一个所谓的最终事件配置表排序来解决这个问题。事件会在第一次调用
+>> +EFI_TCG2_PROTOCOL.GetEventLog()后被镜像到这个表中。
+>> +
+>> +这引出了另一个问题：无法保证它不会在 Linux EFI stub 开始运行之前被调用。
+>> +因此，在 stub 运行时，它需要计算并将最终事件表的大小保存到自定义配置表中，
+>> +以便TPM驱动程序可以在稍后连接来自自定义配置表和最终事件表的两个事件日志时
+>> +跳过这些事件。
+>> +
+>> +参考文献
+>> +========
+>> +
+>> +- [1] https://trustedcomputinggroup.org/resource/pc-client-specific-platform-firmware-profile-specification/
+>> +- [2] The final concatenation is done in drivers/char/tpm/eventlog/efi.c
 >> --
 >> 2.47.1
 >>
->
 
