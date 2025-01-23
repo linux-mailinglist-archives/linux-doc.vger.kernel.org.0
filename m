@@ -1,39 +1,39 @@
-Return-Path: <linux-doc+bounces-35975-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-35979-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41C1CA19DED
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Jan 2025 06:18:41 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id ADDDAA19E44
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Jan 2025 06:54:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 132201888EFB
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Jan 2025 05:18:45 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 78ADD3A7C83
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Jan 2025 05:53:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6FB5513CA8A;
-	Thu, 23 Jan 2025 05:18:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D5531428F3;
+	Thu, 23 Jan 2025 05:54:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="TQWyzHvl"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="hNMqLwvJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m21472.qiye.163.com (mail-m21472.qiye.163.com [117.135.214.72])
+Received: from mail-m1973179.qiye.163.com (mail-m1973179.qiye.163.com [220.197.31.79])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BE7343AA8
-	for <linux-doc@vger.kernel.org>; Thu, 23 Jan 2025 05:18:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.214.72
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3646A136E3B
+	for <linux-doc@vger.kernel.org>; Thu, 23 Jan 2025 05:53:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.79
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737609519; cv=none; b=dz9qak93NHeU8b/364UV30ABZrQKKTqdTnE8Xyl7Nu5+Hjtl3pY6FTw2+wzs0K40BGn8xPmEbh2tGO45K5mFW6RQVh6I5sVt68dPHq3rxZ6uFGZFE4ZMTx24E2iIL1ErUwl1qDEvouyV7Lb9Izj/KLFTza9t7OkZzqTbtwu9uaQ=
+	t=1737611642; cv=none; b=sA1teUfL7nMI7jOtiLijzEvJyYiu7A5eJst9QQpReXP9YxNgJPJAdtJTcdMrdQ3kE41oUIcUtQ2AWFXnTfuGjRRiNy6a5esgOKl9zKy702OUetf11jsIdnRLB465Rv4hCgb4EJcMsSloHla0fKegQC9xjBxnApoogOC3gXlFlXc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737609519; c=relaxed/simple;
-	bh=b33tb3U9/MjEvc5K5GPE/uMAWSPqSTFcLKUR1VtBEJM=;
+	s=arc-20240116; t=1737611642; c=relaxed/simple;
+	bh=9Q7FF9CnJ8EmVeQ2B2wyefgqt9hngsjWg4bIHjB9bwA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=W2eBBTqv6GR/kt9iPIlggSxhVbfDfuftSuuJXaSpx76wCdtuMNfVe0A5/1tTfQg5ZwMzcvIqo+8QMcX2/DK6irl+itipkaQX2a05faS8iWFLS2zZnPQm/Tv2T6c8UBCUEpzogY1N01mWsCLzdDcveFC9643jbyZ3Yfs+etYxZdo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=TQWyzHvl; arc=none smtp.client-ip=117.135.214.72
+	 MIME-Version:Content-Type; b=ZE3ILfxBLLStGDlqymRJESCwMVb7BDNdLKdAiCjGaexTN+oUIyO46GliufFgFI4rvbHMdVJ8U5002gQZdOaItysFLhG1Aipz0xKw8GTGC5fGuzgZPUGGR7WzSwps+nXpaPCWFkcHMpq+6JM1vDD3lxs7TuDx5nIMB4xw1CvelCM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=hNMqLwvJ; arc=none smtp.client-ip=220.197.31.79
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
 Received: from fedora.localdomain (unknown [123.53.38.48])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 979244ea;
-	Thu, 23 Jan 2025 13:18:28 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 979244f6;
+	Thu, 23 Jan 2025 13:18:30 +0800 (GMT+08:00)
 From: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev,
@@ -43,9 +43,9 @@ Cc: zhaoyuehui@cqsoftware.com.cn,
 	zhangwei@cqsoftware.com.cn,
 	maoyuxian@cqsoftware.com.cn,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v3 4/7] docs/zh_CN: Add tpm tpm_tis Chinese translation
-Date: Thu, 23 Jan 2025 13:17:42 +0800
-Message-ID: <ac55092bc3f1b3ec51f3e2dd596616ade1a32076.1737603330.git.zhaoshuo@cqsoftware.com.cn>
+Subject: [PATCH v3 5/7] docs/zh_CN: Add tpm tpm_vtpm_proxy Chinese translation
+Date: Thu, 23 Jan 2025 13:17:43 +0800
+Message-ID: <f9798eaec76b27cc02fa47970bf623879377d422.1737603330.git.zhaoshuo@cqsoftware.com.cn>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1737603330.git.zhaoshuo@cqsoftware.com.cn>
 References: <cover.1737603330.git.zhaoshuo@cqsoftware.com.cn>
@@ -58,96 +58,102 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCHUlPVk9MHk5DHh1PQ0NCT1YVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCT09DVh1OGh1DHxgZSkNNSlYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKSUhVTkhVSENVT0NZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0hVSktLVU
 	pCS0tZBg++
-X-HM-Tid: 0a949198f70d09d0kunm979244ea
+X-HM-Tid: 0a949198fe5b09d0kunm979244f6
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ORQ6ORw6DTISGi0iMBg0Sysd
-	TxgaCQpVSlVKTEhMTUtCTktCTkJNVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
-	WRILWUFZSklIVU5IVUhDVU9DWVdZCAFZQUhKQ0s3Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pkk6EDo6FjIQHi0pMBhKSxgc
+	I0owFA9VSlVKTEhMTUtCTkpKT01MVTMWGhIXVQETGhQIEw4UOxgKCBQdDwwaCR5VGBQWVRgVRVlX
+	WRILWUFZSklIVU5IVUhDVU9DWVdZCAFZQUhPS0g3Bg++
 DKIM-Signature:a=rsa-sha256;
-	b=TQWyzHvlG1ZjG/49rQ7RqpGJv0no7CT4c7TNe4NeN4yIDYJVT7k4WtrlGuYWzuymo65s90KRifU/V6vcbYthlZ9oylijTgXhbh6dPBryzqTUs6LBwvRYwKR1qRoMnL0d9B4leLXaW5o8RYnKRYiGlc9BJRTE+XicXu0l64O40h0=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
-	bh=wdh27J0hVrJELFpMFwGEe2mkFGXuVBx5wNTMgr8yPow=;
+	b=hNMqLwvJcaCk7T6ltO2ycTlThXg3No9JzcS3gOHYf4dJiJHUUqvrqxi+t5LTKz3nmdsrv+NgPF0Chz1uNj4loL6s6cSX5MTpwjZDIV1mi2Fdx+tkgoTPGTdIIG9IWBJThymJLqZE5r8GBaO7Fcv8hGOvVbf5f+O7/WfOeJPBN1E=; c=relaxed/relaxed; s=default; d=cqsoftware.com.cn; v=1;
+	bh=bBR9gV1n0H6Bv+46rqxXTjFURNjwYRky+PIaNzKKsd4=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../security/tpm/tpm_tis.rst into Chinese.
+Translate .../security/tpm/tpm_vtpm_proxy.rst into Chinese.
 
-Update the translation through commit 8a55256a8462
-("Documentation: tpm_tis")
+Update the translation through commit 799a545bb938
+("tpm: move documentation under Documentation/security")
 
-Reviewed-by: Alex Shi <alexs@kernel.org>
 Signed-off-by: Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
 ---
  .../translations/zh_CN/security/tpm/index.rst |  2 +-
- .../zh_CN/security/tpm/tpm_tis.rst            | 43 +++++++++++++++++++
- 2 files changed, 44 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/security/tpm/tpm_tis.rst
+ .../zh_CN/security/tpm/tpm_vtpm_proxy.rst     | 51 +++++++++++++++++++
+ 2 files changed, 52 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/security/tpm/tpm_vtpm_proxy.rst
 
 diff --git a/Documentation/translations/zh_CN/security/tpm/index.rst b/Documentation/translations/zh_CN/security/tpm/index.rst
-index 46cdf7c1a1c1..4ee8881a41a4 100644
+index 4ee8881a41a4..dd80816f8af8 100644
 --- a/Documentation/translations/zh_CN/security/tpm/index.rst
 +++ b/Documentation/translations/zh_CN/security/tpm/index.rst
-@@ -14,9 +14,9 @@
- 
+@@ -15,8 +15,8 @@
     tpm_event_log
     tpm-security
-+   tpm_tis
+    tpm_tis
++   tpm_vtpm_proxy
  
  TODOLIST:
--*   tpm_tis
- *   tpm_vtpm_proxy
+-*   tpm_vtpm_proxy
  *   xen-tpmfront
  *   tpm_ftpm_tee
-diff --git a/Documentation/translations/zh_CN/security/tpm/tpm_tis.rst b/Documentation/translations/zh_CN/security/tpm/tpm_tis.rst
+diff --git a/Documentation/translations/zh_CN/security/tpm/tpm_vtpm_proxy.rst b/Documentation/translations/zh_CN/security/tpm/tpm_vtpm_proxy.rst
 new file mode 100644
-index 000000000000..0fb009f93e10
+index 000000000000..bc92cfb684c3
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/security/tpm/tpm_tis.rst
-@@ -0,0 +1,43 @@
++++ b/Documentation/translations/zh_CN/security/tpm/tpm_vtpm_proxy.rst
+@@ -0,0 +1,51 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/security/tpm/tpm_tis.rst
++:Original: Documentation/security/tpm/tpm_vtpm_proxy.rst
 +
 +:翻译:
 + 赵硕 Shuo Zhao <zhaoshuo@cqsoftware.com.cn>
 +
-+TPM FIFO接口驱动
-+================
++==========================
++Linux容器的虚拟TPM代理驱动
++==========================
 +
-+TCG PTP规范定义了两种接口类型：FIFO和CRB。前者基于顺序的读写操作，
-+后者基于包含完整命令或响应的缓冲区。
++| 作者：
++| Stefan Berger <stefanb@linux.vnet.ibm.com>
 +
-+FIFO（先进先出）接口被tpm_tis_core依赖的驱动程序使用。最初，Linux只
-+有一个名为tpm_tis的驱动，覆盖了内存映射（即 MMIO）接口，但后来它被
-+扩展以支持TCG标准所支持的其他物理接口。
++本文档描述了用于Linux容器的虚拟可信平台模块（vTPM）代理设备驱动。
 +
-+由于历史原因，最初的MMIO驱动被称为tpm_tis，而FIFO驱动的框架被命名为
-+tpm_tis_core。在tpm_tis中的“tis”后缀来自TPM接口规范，这是针对TPM1.x
-+芯片的硬件接口规范。
++介绍
++====
 +
-+通信基于一个由TPM芯片通过硬件总线或内存映射共享的20KiB 缓冲区，具体
-+取决于物理接线。该缓冲区进一步分为五个相等大小的4KiB缓冲区，为CPU和
-+TPM之间的通信提供等效的寄存器集。这些通信端点在TCG术语中称为localities。
++这项工作的目标是为每个Linux容器提供TPM功能。这使得程序能够像与物理系统
++上的TPM交互一样，与容器中的TPM进行交互。每个容器都会获得一个唯一的、模
++拟的软件TPM。
 +
-+当内核想要向TPM芯片发送命令时，它首先通过在TPM_ACCESS寄存器中设置
-+requestUse位来保留locality0。当访问被授予时，该位由芯片清除。一旦完成
-+通信，内核会写入TPM_ACCESS.activeLocality位。这告诉芯片该本地性已被
-+释放。
++设计
++====
 +
-+待处理的本地性由芯片按优先级降序逐个服务，一次一个：
++为了使每个容器都能使用模拟的软件TPM，容器管理栈需要创建一对设备，其中
++包括一个客户端TPM字符设备 ``/dev/tpmX`` （X=0,1,2...）和一个‘服务器端’
++文件描述符。当文件描述符传被递给TPM模拟器时，前者通过创建具有适当主次
++设备号的字符设备被移入容器，然后，容器内的软件可以使用字符设备发送TPM
++命令，模拟器将通过文件描述符接收这些命令，并用它来发送响应。
 +
-+- Locality0优先级最低。
-+- Locality5优先级最高。
++为了支持这一点，虚拟TPM代理驱动程序提供了一个设备 ``/dev/vtpmx`` ，该设备
++用于通过ioctl创建设备对。ioctl将其作为配置设备的输入标志，例如这些标志指示
++TPM模拟器是否支持TPM1.2或TPM2功能。ioctl的结果是返回‘服务器端’的文件描述符
++以及创建的字符设备的主次设备号。此外，还会返回TPM字符设备的编号。例如，如果
++创建了 ``/dev/tpm10`` ，则返回编号（ ``dev_num`` ）10。
 +
-+关于localities的更多信息和含义，请参阅TCG PC客户端平台TPM 配置文件规范的第3.2节。
++一旦设备被创建，驱动程序将立即尝试与TPM进行通信。来自驱动程序的所有命令
++都可以从ioctl返回的文件描述符中读取。这些命令应该立即得到响应。
 +
-+参考文献
-+========
++UAPI
++====
 +
-+TCG PC客户端平台TPM配置文件（PTP）规范
-+https://trustedcomputinggroup.org/resource/pc-client-platform-tpm-profile-ptp-specification/
++该API在以下内核代码中：
++
++include/uapi/linux/vtpm_proxy.h
++drivers/char/tpm/tpm_vtpm_proxy.c
++
++函数：vtpmx_ioc_new_dev
 -- 
 2.47.1
 
