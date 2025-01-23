@@ -1,157 +1,147 @@
-Return-Path: <linux-doc+bounces-36008-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36010-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EA31A1ACC9
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Jan 2025 23:44:45 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D5C8A1ACE8
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Jan 2025 23:54:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A6626167678
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Jan 2025 22:44:43 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8F0417A526B
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Jan 2025 22:54:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0CC7F1D416E;
-	Thu, 23 Jan 2025 22:44:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A13671D5AA9;
+	Thu, 23 Jan 2025 22:54:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JVysbSma"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=adrian.larumbe@collabora.com header.b="bH7KcuMk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF7D13C463;
-	Thu, 23 Jan 2025 22:44:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1737672280; cv=none; b=NdbCXvft/JBjyuNZQg46GOQse2jiOKmQhqviq8cHfXzRb63+5aSeKqSxCIaVHqqU5FvkJV9g3vsuafbvLL7P5S+HF0U3FToqm4fxvfzpYY/bsSu1EokgA1+42z9sH4xyzIXJzLtdR7KPZJq7UNLtdlCUDEzxXgrJXDVb9gTomVM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1737672280; c=relaxed/simple;
-	bh=00q08OgSaOaKeNWcotKnSlTpifKZRRRFN73bDlf+iX0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=rCJaXFF+9E7lIY5osPswFFfrGcBU/K6ibpKs6Owj1BnScVj9cI34ZFUXX5wnvSCaEwu7tHIkpnyx9SQHIgXXQjCl9dhKxk4kGQhQmQg4CSdKnERTqltd6PnQ0gXTWAbdtDOEEwS7WXhr4/4c+Les+lQTtZMEEv4HxqaA8LPBvKk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JVysbSma; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4BE82C4CED3;
-	Thu, 23 Jan 2025 22:44:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1737672280;
-	bh=00q08OgSaOaKeNWcotKnSlTpifKZRRRFN73bDlf+iX0=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=JVysbSma7w0N96yfWCXqwal7a7xsj+1LcyVHhwhAJU47AwSQNzzAQq92B7k0VuzpW
-	 FgXqGsFbWW/iRoFiPkziWlFq6BAv7OsAKU2sHaThDBccTQ0zRNqUnimGQ8pCrfmyjG
-	 2eWetapfsoJ+V7XM7jcLcW7tLRc0CCf+h16RF+OD0GZgf3II1ObBHVfh6qwdiFl7vA
-	 3HYv4u25DGDMT0Px6A/jB8lI6wp/P/lIn4OPwtpry2o55ctqaPtR9J14AQdUnvBTDI
-	 DumtJRMTiloPjqqvS5g5IzjOBEfn5fFUengrqS1aOtgSjUfh4YI9PE7Z0fVwGi8KY/
-	 qq0dgjTnqESpA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33F87C02182;
-	Thu, 23 Jan 2025 22:44:40 +0000 (UTC)
-From: Christoph Lameter via B4 Relay <devnull+cl.gentwo.org@kernel.org>
-Date: Thu, 23 Jan 2025 14:44:22 -0800
-Subject: [PATCH] KFENCE: Clarify that sample allocations are not following
- NUMA or memory policies
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEA421D4612;
+	Thu, 23 Jan 2025 22:54:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1737672866; cv=pass; b=Q0vUiEFTi/fR04N6EEVqh7YjqBz0vVUXwPbsoa4kxuCJhg9zR7d2U4bouMS+eMOAW1ODyJzCYMllIp+NHD+hK69R306+AK+cXh/vrV7sF7a6OmIeXhkDp8G50zISwYEErJ4A5wzr//njEeVuDZ9tBynA01ozJEVbh6cbgrtgpgA=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1737672866; c=relaxed/simple;
+	bh=jrNlNCNHf1yP+tuV6rZSTCmEmYs5GkrtVc44fbJPApM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=YWmVlUeQvcGrGlJMhZRgW8/o0lHtZ5vQ19hf54BlvEsNaQaI+0pW3z+uOd5m964b9MyNljmXZ7qG8Ta9NenNB4PnQJa93dMcJV0H6Zytecg8KzZ1dgI6iKU9HBmx7UhCqxQGZ5/9kuFgRvoQVzhkL3pxBMV3k9CbpFeuPi9g+AQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=adrian.larumbe@collabora.com header.b=bH7KcuMk; arc=pass smtp.client-ip=136.143.188.112
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1737672836; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=Mok435x0/bUrcJkNUc6ferk6pHOVxPx112XT1tnHl6SuqBl9lIik6/U3+RyCCymtp0HHyr9fJX/Nv5/zNfAyXrUFSzIFsDuCvKLTytb36CocqnvjJCyDqcCIKM//WCG+CL+CM/JDuuaIfXCxxlZAr+6QpVWM2ddq7Sl3MD1xzhA=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1737672836; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=/+Wx9HugEM3I27ttx6oMb0CTHpO3RziETvHDF5Mr8n8=; 
+	b=l+TgtUIAvcKctgHWveOg544jGYWgHzBL+YgIcYny31hD9uNbSCvgRfQassZN3TgF6u6/IRKhMOWj8JSk8XY6GMI9J+0tnEMF3cCFRxvq6WanvpveSrTb2MbCwbRJncl/iNQDxCRLylPjkp77ktzdd/pG6Em1FR7t7XIdcxJMmgc=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=adrian.larumbe@collabora.com;
+	dmarc=pass header.from=<adrian.larumbe@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1737672836;
+	s=zohomail; d=collabora.com; i=adrian.larumbe@collabora.com;
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=/+Wx9HugEM3I27ttx6oMb0CTHpO3RziETvHDF5Mr8n8=;
+	b=bH7KcuMkFq3KLSJiCUAB+SYjWyi8d7QkVviMJMK+OO/euwPbOVdKHo7/SvROQoOh
+	nBlmLNrbauNl9/uz11HPS/CMLrLUZgz5rweOrfKqDOft6Gof403DQX8vBbP3xVGhGEI
+	v+LMsNLUn7B30I5WxjePZuieaSdqboLTlRV0fG7M=
+Received: by mx.zohomail.com with SMTPS id 1737672825138648.4539861650047;
+	Thu, 23 Jan 2025 14:53:45 -0800 (PST)
+From: =?UTF-8?q?Adri=C3=A1n=20Larumbe?= <adrian.larumbe@collabora.com>
+To: David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Boris Brezillon <boris.brezillon@collabora.com>,
+	Steven Price <steven.price@arm.com>,
+	Liviu Dudau <liviu.dudau@arm.com>
+Cc: kernel@collabora.com,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
+	dri-devel@lists.freedesktop.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	=?UTF-8?q?Adri=C3=A1n=20Larumbe?= <adrian.larumbe@collabora.com>
+Subject: [PATCH v9 0/5] drm/panthor: Display size of internal kernel BOs through fdinfo
+Date: Thu, 23 Jan 2025 22:52:57 +0000
+Message-ID: <20250123225325.3271764-1-adrian.larumbe@collabora.com>
+X-Mailer: git-send-email 2.47.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250123-kfence_doc_update-v1-1-9aa8e94b3d0b@gentwo.org>
-X-B4-Tracking: v=1; b=H4sIAEXGkmcC/x3MQQqAIBBA0avIrBNKs6irREjqVEOgoRVBdPek5
- Vv8/0DCSJigZw9EvChR8BlVwcCuk1+Qk8sGUQpVVkLybUZvUbtg9bm76UDeSVOrtrFCGQO52yP
- OdP/PYXzfD8JKsIVjAAAA
-To: Alexander Potapenko <glider@google.com>, Marco Elver <elver@google.com>, 
- Dmitry Vyukov <dvyukov@google.com>, Jonathan Corbet <corbet@lwn.net>, 
- Andrew Morton <akpm@linux-foundation.org>, Yang Shi <shy828301@gmail.com>, 
- Huang Shijie <shijie@os.amperecomputing.com>
-Cc: kasan-dev@googlegroups.com, workflows@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Christoph Lameter <cl@linux.com>
-X-Mailer: b4 0.15-dev-37811
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1737672279; l=3054;
- i=cl@gentwo.org; s=20240811; h=from:subject:message-id;
- bh=eIxS3YCsT4+4g6upmIgCuuU4kgmE4EN1FGtWLpy+DEk=;
- b=byG2v1ccXcVddMP4S2pWoNTqusVg0lM7PldpPyYmxe+NZFCRj2oqkKiZZAv6hjBhftZDnio93
- yi+D93q9QRVB0LvrZiXBylDWb052rPSMv87mqekQxhCVEDNQicsg/VF
-X-Developer-Key: i=cl@gentwo.org; a=ed25519;
- pk=I7gqGwDi9drzCReFIuf2k9de1FI1BGibsshXI0DIvq8=
-X-Endpoint-Received: by B4 Relay for cl@gentwo.org/20240811 with
- auth_id=194
-X-Original-From: Christoph Lameter <cl@gentwo.org>
-Reply-To: cl@gentwo.org
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Christoph Lameter <cl@linux.com>
+This patch series enables display of the size of driver-owned shmem BO's that aren't
+exposed to userspace through a DRM handle. Also fixes a use-after-free bug in the
+existing fdinfo implementation for Panthor.
 
-KFENCE manages its own pools and redirects regular memory allocations
-to those pools in a sporadic way. The usual memory allocator features
-like NUMA, memory policies and pfmemalloc are not supported.
-This means that one gets surprising object placement with KFENCE that
-may impact performance on some NUMA systems.
+Discussion of previous revision can be found here [1].
 
-Update the description and make KFENCE depend on VM debugging
-having been enabled.
+Changelog:
+v9:
+ - Added proper locking around group pool xarray to prevent UAF errors.
+ - Added proper locking around vms pool xarray loop for the same reason
+ - Added new patch that fixes UAF error because no locking when accessing 
+   fdinfo group stats.
+ - Some minor cosmetic and naming changes.
+v8:
+ - Made print_size public and added prefix argument for drm_print_memory_stats
+ - Updated documentation commit to reflect new name tags
+ - Some minor polishing
+v7:
+ - Added new commit: mentions the formation rules for driver-specific fdinfo keys
+ - Added new commit: adds a helper that lets driver print memory size key:value
+   pairs with their driver name as a prefix.
+ - Modified later commits to make use of the previous ones.
+ - Deleted mentions of now unnecessary memory keys in the old revision.
+v6:
+ - Replace up_write witnh up_read, which was left out in the previous version
+ - Fixed some minor comment and documentation issues reported by the kernel test robot
+v5:
+ - Replaced down_write semaphore with the read flavour
+ - Fixed typo and added explicit description for drm-shared-internal in
+ the fdinfo documentation file for Panthor.
+v4:
+ - Remove unrelated formating fix
+ - Moved calculating overall size of a group's kernel BO's into
+ its own static helper.
+ - Renamed group kernel BO's size aggregation function to better
+ reflect its actual responsibility.
 
-Signed-off-by: Christoph Lameter <cl@linux.com>
----
- Documentation/dev-tools/kfence.rst |  4 +++-
- lib/Kconfig.kfence                 | 10 ++++++----
- 2 files changed, 9 insertions(+), 5 deletions(-)
+[1] https://lore.kernel.org/dri-devel/20250114173406.3060248-1-adrian.larumbe@collabora.com/
 
-diff --git a/Documentation/dev-tools/kfence.rst b/Documentation/dev-tools/kfence.rst
-index 541899353865..27150780d6f5 100644
---- a/Documentation/dev-tools/kfence.rst
-+++ b/Documentation/dev-tools/kfence.rst
-@@ -8,7 +8,9 @@ Kernel Electric-Fence (KFENCE) is a low-overhead sampling-based memory safety
- error detector. KFENCE detects heap out-of-bounds access, use-after-free, and
- invalid-free errors.
- 
--KFENCE is designed to be enabled in production kernels, and has near zero
-+KFENCE is designed to be low overhead but does not implememnt the typical
-+memory allocation features for its samples like memory policies, NUMA and
-+management of emergency memory pools. It has near zero
- performance overhead. Compared to KASAN, KFENCE trades performance for
- precision. The main motivation behind KFENCE's design, is that with enough
- total uptime KFENCE will detect bugs in code paths not typically exercised by
-diff --git a/lib/Kconfig.kfence b/lib/Kconfig.kfence
-index 6fbbebec683a..48d2a6a1be08 100644
---- a/lib/Kconfig.kfence
-+++ b/lib/Kconfig.kfence
-@@ -5,14 +5,14 @@ config HAVE_ARCH_KFENCE
- 
- menuconfig KFENCE
- 	bool "KFENCE: low-overhead sampling-based memory safety error detector"
--	depends on HAVE_ARCH_KFENCE
-+	depends on HAVE_ARCH_KFENCE && DEBUG_VM
- 	select STACKTRACE
- 	select IRQ_WORK
- 	help
- 	  KFENCE is a low-overhead sampling-based detector of heap out-of-bounds
- 	  access, use-after-free, and invalid-free errors. KFENCE is designed
--	  to have negligible cost to permit enabling it in production
--	  environments.
-+	  to have negligible cost. KFENCE does not support NUMA features
-+	  and other memory allocator features for it sample allocations.
- 
- 	  See <file:Documentation/dev-tools/kfence.rst> for more details.
- 
-@@ -21,7 +21,9 @@ menuconfig KFENCE
- 	  detect, albeit at very different performance profiles. If you can
- 	  afford to use KASAN, continue using KASAN, for example in test
- 	  environments. If your kernel targets production use, and cannot
--	  enable KASAN due to its cost, consider using KFENCE.
-+	  enable KASAN due to its cost and you are not using NUMA and have
-+	  no use of the memory reserve logic of the memory allocators,
-+	  consider using KFENCE.
- 
- if KFENCE
- 
+Adrián Larumbe (5):
+  Documentation/gpu: Clarify format of driver-specific fidnfo keys
+  drm/file: Add fdinfo helper for printing regions with prefix
+  drm/panthor: Expose size of driver internal BO's over fdinfo
+  Documentation/gpu: Add fdinfo meanings of panthor-*-memory tags
+  drm/panthor: Fix race condition when gathering fdinfo group samples
 
----
-base-commit: d0d106a2bd21499901299160744e5fe9f4c83ddb
-change-id: 20250123-kfence_doc_update-93b4576c25bb
+ Documentation/gpu/drm-usage-stats.rst   |  5 ++-
+ Documentation/gpu/panthor.rst           | 10 +++++
+ drivers/gpu/drm/drm_file.c              | 27 ++++++++----
+ drivers/gpu/drm/panthor/panthor_drv.c   | 14 ++++++
+ drivers/gpu/drm/panthor/panthor_heap.c  | 26 +++++++++++
+ drivers/gpu/drm/panthor/panthor_heap.h  |  2 +
+ drivers/gpu/drm/panthor/panthor_mmu.c   | 36 +++++++++++++++
+ drivers/gpu/drm/panthor/panthor_mmu.h   |  3 ++
+ drivers/gpu/drm/panthor/panthor_sched.c | 58 ++++++++++++++++++++++++-
+ drivers/gpu/drm/panthor/panthor_sched.h |  3 ++
+ include/drm/drm_file.h                  |  5 +++
+ 11 files changed, 179 insertions(+), 10 deletions(-)
 
-Best regards,
+
+base-commit: c6eabbab359c156669e10d5dec3e71e80ff09bd2
 -- 
-Christoph Lameter <cl@gentwo.org>
-
+2.47.1
 
 
