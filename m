@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-36191-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36201-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A94EA20215
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:06:54 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 78293A20230
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C83721659B6
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:06:52 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 5DDD47A3F8D
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 07A31F4ED;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5ED102A8D0;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oCw3ncnM"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ticind3S"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE8198462;
-	Tue, 28 Jan 2025 00:06:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A2FE1773A;
+	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738022796; cv=none; b=WPy56bmiSV7/Og4KWOEqt3EXldzZFgdCfGzx3jXYj9xCLKs4Uuf1WA2K42nFYtwvDLZNjeYRWHKzdQkzqS8ID59rpeRCRIcC2Gyz6uT9pnOEtdf052OKo0CxmCZLdPUUT6V1aBRfteJIqcHVq5LTBrKjUAvfqyC/ubjttKX9LdQ=
+	t=1738022797; cv=none; b=mYtTQX8yuaM4LXoCKAqoVQv9OBJkGmKeSkpCtthLqLpJhRiJPkD3Abf4TDKP7vvCqFJoLoNRL/OxVm6H7IUHwGVddi/d/W+Sogi2x2gGvkJjrvMudcqRiJWaAM0bSLUYNYxZI2Tp2svZNFP0zdZZmgaGriTmAUoBbU0fOolTUYk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738022796; c=relaxed/simple;
-	bh=Qfw83Lsvw9YW81iRX0U1pEJiGDlKBK7ODRwFNFgYaqQ=;
+	s=arc-20240116; t=1738022797; c=relaxed/simple;
+	bh=OOogPGxX0Vy45ilzrAOiFUxIeadBVZaAODgzfVd0odE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=K/sTcyiIrU6RuPkAwA48I7z0HZ1QykoMExa9IUD7SnmwBF4vMFaOaf2W7q2NKmUhIUbU2KY0RsxiQ4UfgtUQkFmUHdxlWloMrgWfoDcYbkujHuLfeXg37sY6+mdnfRhXPo95tDfCnvtGpqZNfUsHWTzrhCv2JGRS3FIvTsnL0O8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oCw3ncnM; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2CD2C4CEEB;
+	 MIME-Version; b=tfbYkYV0FwP8wgzJbPcmEVDSlKMSekIhCiUx3XERl6JxgxgTCLiMMzoiBe6SaxpoTvWa2apkpbS9wxnIH9OAnAiPPwHdlfi91QOHkT65QFjhN40WfyfR9YrIuTPjpMJx3/SodobCiX4DHtuePi1UUoENXy38Z9uVWoNYmRvOHCI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ticind3S; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FCDEC4CEE2;
 	Tue, 28 Jan 2025 00:06:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1738022795;
-	bh=Qfw83Lsvw9YW81iRX0U1pEJiGDlKBK7ODRwFNFgYaqQ=;
+	s=k20201202; t=1738022796;
+	bh=OOogPGxX0Vy45ilzrAOiFUxIeadBVZaAODgzfVd0odE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=oCw3ncnMSwJFVXYin7ecw9sGmuVVEgSoun/Ci8tV7AZDndK0sk/ezkYQeuOL8Bybh
-	 /benV6dn1rTZMgO5OcAncJ1Xr+5/ShybogpSaSirks9Ff7qNGQaUBefuNsqP4WRF06
-	 pFGswKs51hT6T/iJvTsYUiv4AcUNg87OiQ+Hcor/64tVrg1SdWirZTWwtHqZdmdmQL
-	 GX+v2TOwPZ+4hSVnqYZrjmtEMARaw46ajpon2hcouDom+G9ztQrE74oB9K0XEbdHGe
-	 ksI2n7HFQKKWv5nySzAsHQUpcoCHDWjmpj4WgxYiZHSTYFXFwUxEiupH2PdFn/Gbi2
-	 1FTpMUkv/teog==
+	b=ticind3ShbVvYuMJe5rf4O+ul6j5PgQ2w16ywEV0VOXoGUDRnU2WDV0W40g73EK9m
+	 Ds51LfoOlb4FXF+28W8CGFMTwLHLlxHsok0mFhsnDDygim5u6hGt4SN8UExLXHP805
+	 ogkDDVoPfhweOtEgjUg6JU5vGk44iJxIy5CAaBBWB7LolxZ5B8c2qhXc7zQaCbjgTp
+	 Sk4alcYgCTCwZoM5L0ri3PWdQ1dSF9ZiJ/Nm62DMlQDeUavYvWtF6Wh2BqTm6KjAjd
+	 lDE2YOLyR1c1CyB0MELhu8f5VqHcjcPX0Nv3GSyaYEQWhdioQYvxgX0fbJx1oItTs6
+	 9RUYQBNWcZlWw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tcZ7h-0000000DRKZ-2hj3;
+	id 1tcZ7h-0000000DRKd-2ozq;
 	Tue, 28 Jan 2025 01:06:33 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
@@ -51,13 +51,12 @@ To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	Jens Axboe <axboe@kernel.dk>,
-	Ming Lei <ming.lei@redhat.com>,
-	linux-block@vger.kernel.org,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Vegard Nossum <vegard.nossum@oracle.com>,
 	linux-kernel@vger.kernel.org
-Subject: [RFC v2 03/38] docs: block: ublk.rst: remove a reference from a dropped text
-Date: Tue, 28 Jan 2025 01:05:52 +0100
-Message-ID: <f892c3774c1f6f50a74b8e5f5d6c830a86c743ce.1738020236.git.mchehab+huawei@kernel.org>
+Subject: [RFC v2 04/38] docs: sphinx: remove kernellog.py file
+Date: Tue, 28 Jan 2025 01:05:53 +0100
+Message-ID: <5a84d6e5fa5d56170024b244e8e374c9dccbf299.1738020236.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1738020236.git.mchehab+huawei@kernel.org>
 References: <cover.1738020236.git.mchehab+huawei@kernel.org>
@@ -70,30 +69,346 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Commit  4093cb5a0634 ("ublk_drv: add mechanism for supporting unprivileged ublk device")
-implemented support for unprivileged ublk devices. With that, the
-text mentioning such issue was removed. However, the footnote
-is still there.
+In the past, there was a need for a wrapper due to different
+Sphinx versions support (before Sphinx 1.6). This is long gone,
+and now it is just a wrapper. Get rig of it to simplify
+the code.
 
-Drop the footnote to remove a documentation build warning.
-
-Fixes: 4093cb5a0634 ("ublk_drv: add mechanism for supporting unprivileged ublk device")
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/block/ublk.rst | 2 --
- 1 file changed, 2 deletions(-)
+ Documentation/sphinx/kernel_abi.py |  5 +-
+ Documentation/sphinx/kerneldoc.py  | 14 +++---
+ Documentation/sphinx/kernellog.py  | 22 --------
+ Documentation/sphinx/kfigure.py    | 81 ++++++++++++++++--------------
+ 4 files changed, 53 insertions(+), 69 deletions(-)
+ delete mode 100644 Documentation/sphinx/kernellog.py
 
-diff --git a/Documentation/block/ublk.rst b/Documentation/block/ublk.rst
-index 51665a3e6a50..1e0e7358e14a 100644
---- a/Documentation/block/ublk.rst
-+++ b/Documentation/block/ublk.rst
-@@ -333,6 +333,4 @@ References
+diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
+index 5911bd0d7965..8401562cb5d9 100644
+--- a/Documentation/sphinx/kernel_abi.py
++++ b/Documentation/sphinx/kernel_abi.py
+@@ -37,13 +37,13 @@ import os
+ import subprocess
+ import sys
+ import re
+-import kernellog
  
- .. [#userspace_readme] https://github.com/ming1/ubdsrv/blob/master/README
+ from docutils import nodes, statemachine
+ from docutils.statemachine import ViewList
+ from docutils.parsers.rst import directives, Directive
+ from docutils.utils.error_reporting import ErrorString
+ from sphinx.util.docutils import switch_source_input
++from sphinx.util import logging
  
--.. [#stefan] https://lore.kernel.org/linux-block/YoOr6jBfgVm8GvWg@stefanha-x1.localdomain/
+ __version__  = '1.0'
+ 
+@@ -64,6 +64,7 @@ class KernelCmd(Directive):
+     optional_arguments = 2
+     has_content = False
+     final_argument_whitespace = True
++    logger = logging.getLogger('kernel_abi')
+ 
+     option_spec = {
+         "debug"     : directives.flag,
+@@ -129,7 +130,7 @@ class KernelCmd(Directive):
+             else:
+                 content.append(line, f, ln)
+ 
+-        kernellog.info(self.state.document.settings.env.app, "%s: parsed %i lines" % (fname, n))
++        self.logger.info("%s: parsed %i lines" % (fname, n))
+ 
+         if content:
+             self.do_parse(content, node)
+diff --git a/Documentation/sphinx/kerneldoc.py b/Documentation/sphinx/kerneldoc.py
+index ec1ddfff1863..be5b8fbf373f 100644
+--- a/Documentation/sphinx/kerneldoc.py
++++ b/Documentation/sphinx/kerneldoc.py
+@@ -39,7 +39,7 @@ from docutils.statemachine import ViewList
+ from docutils.parsers.rst import directives, Directive
+ import sphinx
+ from sphinx.util.docutils import switch_source_input
+-import kernellog
++from sphinx.util import logging
+ 
+ __version__  = '1.0'
+ 
+@@ -56,6 +56,7 @@ class KernelDocDirective(Directive):
+         'functions': directives.unchanged,
+     }
+     has_content = False
++    logger = logging.getLogger('kerneldoc')
+ 
+     def run(self):
+         env = self.state.document.settings.env
+@@ -109,8 +110,7 @@ class KernelDocDirective(Directive):
+         cmd += [filename]
+ 
+         try:
+-            kernellog.verbose(env.app,
+-                              'calling kernel-doc \'%s\'' % (" ".join(cmd)))
++            self.logger.verbose("calling kernel-doc '%s'" % (" ".join(cmd)))
+ 
+             p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+             out, err = p.communicate()
+@@ -120,8 +120,8 @@ class KernelDocDirective(Directive):
+             if p.returncode != 0:
+                 sys.stderr.write(err)
+ 
+-                kernellog.warn(env.app,
+-                               'kernel-doc \'%s\' failed with return code %d' % (" ".join(cmd), p.returncode))
++                self.logger.warning("kernel-doc '%s' failed with return code %d"
++                                    % (" ".join(cmd), p.returncode))
+                 return [nodes.error(None, nodes.paragraph(text = "kernel-doc missing"))]
+             elif env.config.kerneldoc_verbosity > 0:
+                 sys.stderr.write(err)
+@@ -148,8 +148,8 @@ class KernelDocDirective(Directive):
+             return node.children
+ 
+         except Exception as e:  # pylint: disable=W0703
+-            kernellog.warn(env.app, 'kernel-doc \'%s\' processing failed with: %s' %
+-                           (" ".join(cmd), str(e)))
++            self.logger.warning("kernel-doc '%s' processing failed with: %s" %
++                                (" ".join(cmd), str(e)))
+             return [nodes.error(None, nodes.paragraph(text = "kernel-doc missing"))]
+ 
+     def do_parse(self, result, node):
+diff --git a/Documentation/sphinx/kernellog.py b/Documentation/sphinx/kernellog.py
+deleted file mode 100644
+index 0bc00c138cad..000000000000
+--- a/Documentation/sphinx/kernellog.py
++++ /dev/null
+@@ -1,22 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0
+-#
+-# Sphinx has deprecated its older logging interface, but the replacement
+-# only goes back to 1.6.  So here's a wrapper layer to keep around for
+-# as long as we support 1.4.
+-#
+-# We don't support 1.4 anymore, but we'll keep the wrappers around until
+-# we change all the code to not use them anymore :)
+-#
+-import sphinx
+-from sphinx.util import logging
 -
- .. [#xiaoguang] https://lore.kernel.org/linux-block/YoOr6jBfgVm8GvWg@stefanha-x1.localdomain/
+-logger = logging.getLogger('kerneldoc')
+-
+-def warn(app, message):
+-    logger.warning(message)
+-
+-def verbose(app, message):
+-    logger.verbose(message)
+-
+-def info(app, message):
+-    logger.info(message)
+diff --git a/Documentation/sphinx/kfigure.py b/Documentation/sphinx/kfigure.py
+index 97166333b727..383f9a695b08 100644
+--- a/Documentation/sphinx/kfigure.py
++++ b/Documentation/sphinx/kfigure.py
+@@ -59,12 +59,14 @@ from docutils.parsers.rst import directives
+ from docutils.parsers.rst.directives import images
+ import sphinx
+ from sphinx.util.nodes import clean_astext
+-import kernellog
++from sphinx.util import logging
+ 
+ Figure = images.Figure
+ 
+ __version__  = '1.0.0'
+ 
++logger = logging.getLogger('kfigure')
++
+ # simple helper
+ # -------------
+ 
+@@ -170,7 +172,7 @@ def setupTools(app):
+     """
+     global dot_cmd, dot_Tpdf, convert_cmd, rsvg_convert_cmd   # pylint: disable=W0603
+     global inkscape_cmd, inkscape_ver_one  # pylint: disable=W0603
+-    kernellog.verbose(app, "kfigure: check installed tools ...")
++    logger.verbose("kfigure: check installed tools ...")
+ 
+     dot_cmd = which('dot')
+     convert_cmd = which('convert')
+@@ -178,7 +180,7 @@ def setupTools(app):
+     inkscape_cmd = which('inkscape')
+ 
+     if dot_cmd:
+-        kernellog.verbose(app, "use dot(1) from: " + dot_cmd)
++        logger.verbose("use dot(1) from: " + dot_cmd)
+ 
+         try:
+             dot_Thelp_list = subprocess.check_output([dot_cmd, '-Thelp'],
+@@ -190,10 +192,11 @@ def setupTools(app):
+         dot_Tpdf_ptn = b'pdf'
+         dot_Tpdf = re.search(dot_Tpdf_ptn, dot_Thelp_list)
+     else:
+-        kernellog.warn(app, "dot(1) not found, for better output quality install "
+-                       "graphviz from https://www.graphviz.org")
++        logger.warning(
++            "dot(1) not found, for better output quality install graphviz from https://www.graphviz.org"
++        )
+     if inkscape_cmd:
+-        kernellog.verbose(app, "use inkscape(1) from: " + inkscape_cmd)
++        logger.verbose("use inkscape(1) from: " + inkscape_cmd)
+         inkscape_ver = subprocess.check_output([inkscape_cmd, '--version'],
+                                                stderr=subprocess.DEVNULL)
+         ver_one_ptn = b'Inkscape 1'
+@@ -204,26 +207,27 @@ def setupTools(app):
+ 
+     else:
+         if convert_cmd:
+-            kernellog.verbose(app, "use convert(1) from: " + convert_cmd)
++            logger.verbose("use convert(1) from: " + convert_cmd)
+         else:
+-            kernellog.verbose(app,
++            logger.verbose(
+                 "Neither inkscape(1) nor convert(1) found.\n"
+-                "For SVG to PDF conversion, "
+-                "install either Inkscape (https://inkscape.org/) (preferred) or\n"
+-                "ImageMagick (https://www.imagemagick.org)")
++                "For SVG to PDF conversion, install either Inkscape (https://inkscape.org/) (preferred) or\n"
++                "ImageMagick (https://www.imagemagick.org)"
++            )
+ 
+         if rsvg_convert_cmd:
+-            kernellog.verbose(app, "use rsvg-convert(1) from: " + rsvg_convert_cmd)
+-            kernellog.verbose(app, "use 'dot -Tsvg' and rsvg-convert(1) for DOT -> PDF conversion")
++            logger.verbose("use rsvg-convert(1) from: " + rsvg_convert_cmd)
++            logger.verbose("use 'dot -Tsvg' and rsvg-convert(1) for DOT -> PDF conversion")
+             dot_Tpdf = False
+         else:
+-            kernellog.verbose(app,
++            logger.verbose(
+                 "rsvg-convert(1) not found.\n"
+-                "  SVG rendering of convert(1) is done by ImageMagick-native renderer.")
++                "  SVG rendering of convert(1) is done by ImageMagick-native renderer."
++            )
+             if dot_Tpdf:
+-                kernellog.verbose(app, "use 'dot -Tpdf' for DOT -> PDF conversion")
++                logger.verbose("use 'dot -Tpdf' for DOT -> PDF conversion")
+             else:
+-                kernellog.verbose(app, "use 'dot -Tsvg' and convert(1) for DOT -> PDF conversion")
++                logger.verbose("use 'dot -Tsvg' and convert(1) for DOT -> PDF conversion")
+ 
+ 
+ # integrate conversion tools
+@@ -257,13 +261,12 @@ def convert_image(img_node, translator, src_fname=None):
+ 
+     # in kernel builds, use 'make SPHINXOPTS=-v' to see verbose messages
+ 
+-    kernellog.verbose(app, 'assert best format for: ' + img_node['uri'])
++    logger.verbose('assert best format for: ' + img_node['uri'])
+ 
+     if in_ext == '.dot':
+ 
+         if not dot_cmd:
+-            kernellog.verbose(app,
+-                              "dot from graphviz not available / include DOT raw.")
++            logger.verbose("dot from graphviz not available / include DOT raw.")
+             img_node.replace_self(file2literal(src_fname))
+ 
+         elif translator.builder.format == 'latex':
+@@ -290,10 +293,11 @@ def convert_image(img_node, translator, src_fname=None):
+ 
+         if translator.builder.format == 'latex':
+             if not inkscape_cmd and convert_cmd is None:
+-                kernellog.warn(app,
+-                                  "no SVG to PDF conversion available / include SVG raw."
+-                                  "\nIncluding large raw SVGs can cause xelatex error."
+-                                  "\nInstall Inkscape (preferred) or ImageMagick.")
++                logger.warning(
++                    "no SVG to PDF conversion available / include SVG raw.\n"
++                    "Including large raw SVGs can cause xelatex error.\n"
++                    "Install Inkscape (preferred) or ImageMagick."
++                )
+                 img_node.replace_self(file2literal(src_fname))
+             else:
+                 dst_fname = path.join(translator.builder.outdir, fname + '.pdf')
+@@ -306,15 +310,14 @@ def convert_image(img_node, translator, src_fname=None):
+         _name = dst_fname[len(str(translator.builder.outdir)) + 1:]
+ 
+         if isNewer(dst_fname, src_fname):
+-            kernellog.verbose(app,
+-                              "convert: {out}/%s already exists and is newer" % _name)
++            logger.verbose("convert: {out}/%s already exists and is newer" % _name)
+ 
+         else:
+             ok = False
+             mkdir(path.dirname(dst_fname))
+ 
+             if in_ext == '.dot':
+-                kernellog.verbose(app, 'convert DOT to: {out}/' + _name)
++                logger.verbose('convert DOT to: {out}/' + _name)
+                 if translator.builder.format == 'latex' and not dot_Tpdf:
+                     svg_fname = path.join(translator.builder.outdir, fname + '.svg')
+                     ok1 = dot2format(app, src_fname, svg_fname)
+@@ -325,7 +328,7 @@ def convert_image(img_node, translator, src_fname=None):
+                     ok = dot2format(app, src_fname, dst_fname)
+ 
+             elif in_ext == '.svg':
+-                kernellog.verbose(app, 'convert SVG to: {out}/' + _name)
++                logger.verbose('convert SVG to: {out}/' + _name)
+                 ok = svg2pdf(app, src_fname, dst_fname)
+ 
+             if not ok:
+@@ -354,7 +357,7 @@ def dot2format(app, dot_fname, out_fname):
+     with open(out_fname, "w") as out:
+         exit_code = subprocess.call(cmd, stdout = out)
+         if exit_code != 0:
+-            kernellog.warn(app,
++            logger.warning(
+                           "Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
+     return bool(exit_code == 0)
+ 
+@@ -388,13 +391,14 @@ def svg2pdf(app, svg_fname, pdf_fname):
+         pass
+ 
+     if exit_code != 0:
+-        kernellog.warn(app, "Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
++        logger.warning("Error #%d when calling: %s" %
++                            (exit_code, " ".join(cmd)))
+         if warning_msg:
+-            kernellog.warn(app, "Warning msg from %s: %s"
+-                           % (cmd_name, str(warning_msg, 'utf-8')))
++            logger.warning( "Warning msg from %s: %s" %
++                                (cmd_name, str(warning_msg, 'utf-8')))
+     elif warning_msg:
+-        kernellog.verbose(app, "Warning msg from %s (likely harmless):\n%s"
+-                          % (cmd_name, str(warning_msg, 'utf-8')))
++        logger.verbose("Warning msg from %s (likely harmless):\n%s" %
++                            (cmd_name, str(warning_msg, 'utf-8')))
+ 
+     return bool(exit_code == 0)
+ 
+@@ -418,7 +422,8 @@ def svg2pdf_by_rsvg(app, svg_fname, pdf_fname):
+         # use stdout and stderr from parent
+         exit_code = subprocess.call(cmd)
+         if exit_code != 0:
+-            kernellog.warn(app, "Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
++            logger.warning("Error #%d when calling: %s" %
++                                (exit_code, " ".join(cmd)))
+         ok = bool(exit_code == 0)
+ 
+     return ok
+@@ -513,15 +518,15 @@ def visit_kernel_render(self, node):
+     app = self.builder.app
+     srclang = node.get('srclang')
+ 
+-    kernellog.verbose(app, 'visit kernel-render node lang: "%s"' % (srclang))
++    logger.verbose('visit kernel-render node lang: "%s"' % srclang)
+ 
+     tmp_ext = RENDER_MARKUP_EXT.get(srclang, None)
+     if tmp_ext is None:
+-        kernellog.warn(app, 'kernel-render: "%s" unknown / include raw.' % (srclang))
++        logger.warning( 'kernel-render: "%s" unknown / include raw.' % srclang)
+         return
+ 
+     if not dot_cmd and tmp_ext == '.dot':
+-        kernellog.verbose(app, "dot from graphviz not available / include raw.")
++        logger.verbose("dot from graphviz not available / include raw.")
+         return
+ 
+     literal_block = node[0]
 -- 
 2.48.1
 
