@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-36213-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36216-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BCB7A20240
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:43 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id A4FD9A20239
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id AB9341885248
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:47 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5642A3A3F36
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C4B2513CA93;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CCF0014658B;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PUuYd/js"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jZQ9ElEe"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 871E53BBF0;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88F473F9D2;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738022797; cv=none; b=tBVGvWeTIzLEZ3YUceDp4JM00xRnNzAszPrONSf9xlQc4SIStzxvjap7H6lfbDZ6CQCwvSptGBWml7Pp10gHDNVmGtE8oLGgvvtOcQLBEkcsaJdOd/+sVb9/yjkHRIDmJEr5o7A4r3VCOqW2HERSoTpcGbTIIOFNJvKhQ+Dsta8=
+	t=1738022797; cv=none; b=Vptj5izVXhE7R8Wt2lcjk7t0PemL6Kj5fns7sxvFCeeDKd6OegGBxkICaLhjgA/6erFNacnK1kOhrfJfDmak/16EGV1K79YRfUYhB/J4qcYTADZfqquwTkKCu3VvIUK3PiUC6bUCNR8OoyEE0JHnPcn7M930VRcz1lbLJZuMcrI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1738022797; c=relaxed/simple;
-	bh=lhhjW4xvN5/JBeiDA+D11vVkCEKozoutHtedahprF+M=;
+	bh=xJJNTHLm28pOieLtRLXBCsjINp9HkQQLtgWkMVSB5X4=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=IfGAt4ARqVLO0WUbOzsOkL2SAJ4JsYPNspgEOIo6Q9m4vrF/zh6V781eJ4tQ8PYeT74iSBBz05FOAqhm7XAYnscDuwsrRjFQR36YIn+t4rgEbZFv8mGNmsWSo9nuN4hb3PYa8GtvM9svNNpfqkYhzKZXmrb9ThDxS7H1JFz8/Vw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PUuYd/js; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C65DC4AF19;
+	 MIME-Version:Content-Type; b=I5kNETZOx5EVGaAD5b7jRzOrQeoPwpYmN2277RTpie6q06fR3W7OYK6XrQDjJBew28Qo//o7YaqRlXWlnp/FXpbnuT76O4UD3s9xjJoT5W7ZpExhFkc8UTf6agsWpuj+hWBegE3sYhcskbdtpuutUY6txTKdKkkXa8+SSTDOjeE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jZQ9ElEe; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C351C2BCC9;
 	Tue, 28 Jan 2025 00:06:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1738022796;
-	bh=lhhjW4xvN5/JBeiDA+D11vVkCEKozoutHtedahprF+M=;
+	bh=xJJNTHLm28pOieLtRLXBCsjINp9HkQQLtgWkMVSB5X4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=PUuYd/jsQG21oCXIUvWXaM+i5S/AFRRfYcDM0Nmtf5pd9XH6kCIyHxASgZ2NQXi8o
-	 ocDDJp0o4069shKBMazBjRbQZc5Y5ZYWcM/rrfjMFXWAGwmLlPJz/Jr++1i1ThIBDY
-	 aCKSau/eb18BgycvmhRDFWry5YwVetB2P/ymyXXLD0+zOfvN7yOfHFJ+4nlPH0Qcgu
-	 VEgDljYtUb7AC1D3jgik17gKbN/VY2OxoXM2L2ykE3xzrEKNzxHcNQI+F/Q74UeK8O
-	 XEgozCpHJz0TvJHOnWzWeWhqB/mvwqP9Z+kW7q2k7AnWYHSwKkRf78Fbytufmb6p1r
-	 xE0e6r6vCAA8A==
+	b=jZQ9ElEe+UoE3g3WSMWUU1bwfgG6y/RTF9cicxaYybx4nRoWeP4NVh+HgpYQ7tkw2
+	 +2iMuquNOku20W1CadQA/Np5pNpqoOhFrMyJ9G6UlaQuLyltTs2PWNPKnmrvTgHhTa
+	 sDl/PUJWhMjzh3OSbZy9VxKzqxaay8gdAQnDeUS1Ziaz+T1CAZdbR2/16yeIMJZiRm
+	 3/o0L4T/bvvKm99q/YaOA8aCTLnBpGN4xFcBz2gNqXTrPtStbQ36pQtr2dwtrzq6AB
+	 PuHlURRqO3U0yCSvs90vewtVSwgIBrmfQLWzXXXqa/vDBI3hyZEGbn/941S3p6qa3u
+	 41uOZKM3Enskg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tcZ7i-0000000DRMb-21eU;
+	id 1tcZ7i-0000000DRMg-28Vv;
 	Tue, 28 Jan 2025 01:06:34 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
@@ -51,11 +51,18 @@ To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	workflows@vger.kernel.org
-Subject: [RFC v2 34/38] docs: submit-checklist: Allow creating cross-references for ABI README
-Date: Tue, 28 Jan 2025 01:06:23 +0100
-Message-ID: <94b906a3806c667e69b41879fe77e100aaedc917.1738020236.git.mchehab+huawei@kernel.org>
+	Alex Shi <mchehab+huawei@kernel.org>,
+	Avadhut Naik <avadhut.naik@amd.com>,
+	Carlos Bilbao <carlos.bilbao.osdev@gmail.com>,
+	Federico Vaga <federico.vaga@vaga.pv.it>,
+	Hu Haowen <2023002089@link.tyut.edu.cn>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Remington Brasga <rbrasga@uci.edu>,
+	Yanteng Si <si.yanteng@linux.dev>,
+	linux-kernel@vger.kernel.org
+Subject: [RFC v2 35/38] docs: translations: Allow creating cross-references for ABI README
+Date: Tue, 28 Jan 2025 01:06:24 +0100
+Message-ID: <2699a7eeb90f0a3c419928fbf696339637b02463.1738020236.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1738020236.git.mchehab+huawei@kernel.org>
 References: <cover.1738020236.git.mchehab+huawei@kernel.org>
@@ -65,30 +72,73 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Now that Documentation/ABI is processed by automarkup, let it
-generate cross-references for the ABI README file.
+Update translations to also generate cross references for the ABI
+readme file.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/process/submit-checklist.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Documentation/translations/it_IT/process/submit-checklist.rst | 2 +-
+ Documentation/translations/sp_SP/process/submit-checklist.rst | 2 +-
+ Documentation/translations/zh_CN/process/submit-checklist.rst | 2 +-
+ Documentation/translations/zh_TW/process/submit-checklist.rst | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/process/submit-checklist.rst b/Documentation/process/submit-checklist.rst
-index e531dd504b6c..827566872567 100644
---- a/Documentation/process/submit-checklist.rst
-+++ b/Documentation/process/submit-checklist.rst
-@@ -52,7 +52,7 @@ Provide documentation
- 4) All new module parameters are documented with ``MODULE_PARM_DESC()``
+diff --git a/Documentation/translations/it_IT/process/submit-checklist.rst b/Documentation/translations/it_IT/process/submit-checklist.rst
+index 692be4af9c9b..3308c3084c60 100644
+--- a/Documentation/translations/it_IT/process/submit-checklist.rst
++++ b/Documentation/translations/it_IT/process/submit-checklist.rst
+@@ -58,7 +58,7 @@ Fornite documentazione
+ 4) Tutti i nuovi parametri dei moduli sono documentati con ``MODULE_PARM_DESC()``.
  
- 5) All new userspace interfaces are documented in ``Documentation/ABI/``.
--   See ``Documentation/ABI/README`` for more information.
-+   See Documentation/ABI/README for more information.
-    Patches that change userspace interfaces should be CCed to
-    linux-api@vger.kernel.org.
+ 5) Tutte le nuove interfacce verso lo spazio utente sono documentate in
+-    ``Documentation/ABI/``.  Leggete ``Documentation/ABI/README`` per maggiori
++    ``Documentation/ABI/``.  Leggete Documentation/ABI/README per maggiori
+     informazioni.  Le patch che modificano le interfacce utente dovrebbero
+     essere inviate in copia anche a linux-api@vger.kernel.org.
  
+diff --git a/Documentation/translations/sp_SP/process/submit-checklist.rst b/Documentation/translations/sp_SP/process/submit-checklist.rst
+index 0d6651f9d871..3087ba80e818 100644
+--- a/Documentation/translations/sp_SP/process/submit-checklist.rst
++++ b/Documentation/translations/sp_SP/process/submit-checklist.rst
+@@ -97,7 +97,7 @@ y en otros lugares con respecto al envío de parches del kernel de Linux.
+     ``MODULE_PARM_DESC()``.
+ 
+ 18) Todas las nuevas interfaces de espacio de usuario están documentadas
+-    en ``Documentation/ABI/``. Consulte ``Documentation/ABI/README`` para
++    en ``Documentation/ABI/``. Consulte Documentation/ABI/README para
+     obtener más información. Los parches que cambian las interfaces del
+     espacio de usuario deben ser CCed a linux-api@vger.kernel.org.
+ 
+diff --git a/Documentation/translations/zh_CN/process/submit-checklist.rst b/Documentation/translations/zh_CN/process/submit-checklist.rst
+index 10536b74aeec..5c20a7f0936b 100644
+--- a/Documentation/translations/zh_CN/process/submit-checklist.rst
++++ b/Documentation/translations/zh_CN/process/submit-checklist.rst
+@@ -82,7 +82,7 @@ Linux内核补丁提交检查单
+ 17) 所有新的模块参数都记录在 ``MODULE_PARM_DESC()``
+ 
+ 18) 所有新的用户空间接口都记录在 ``Documentation/ABI/`` 中。有关详细信息，
+-    请参阅 ``Documentation/ABI/README`` 。更改用户空间接口的补丁应该抄送
++    请参阅 Documentation/ABI/README 。更改用户空间接口的补丁应该抄送
+     linux-api@vger.kernel.org。
+ 
+ 19) 已通过至少注入slab和page分配失败进行检查。请参阅 ``Documentation/fault-injection/`` 。
+diff --git a/Documentation/translations/zh_TW/process/submit-checklist.rst b/Documentation/translations/zh_TW/process/submit-checklist.rst
+index 0ecb187753e4..b09d29b0cc1b 100644
+--- a/Documentation/translations/zh_TW/process/submit-checklist.rst
++++ b/Documentation/translations/zh_TW/process/submit-checklist.rst
+@@ -85,7 +85,7 @@ Linux內核補丁提交檢查單
+ 17) 所有新的模塊參數都記錄在 ``MODULE_PARM_DESC()``
+ 
+ 18) 所有新的用戶空間接口都記錄在 ``Documentation/ABI/`` 中。有關詳細信息，
+-    請參閱 ``Documentation/ABI/README`` 。更改用戶空間接口的補丁應該抄送
++    請參閱 Documentation/ABI/README 。更改用戶空間接口的補丁應該抄送
+     linux-api@vger.kernel.org。
+ 
+ 19) 已通過至少注入slab和page分配失敗進行檢查。請參閱 ``Documentation/fault-injection/`` 。
 -- 
 2.48.1
 
