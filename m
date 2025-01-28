@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-36206-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36209-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 957F1A2022B
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:18 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4293CA20236
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 82552165BA3
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:16 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 0704F7A238B
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8DF1641AAC;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95E57433AB;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fKV1aLLa"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uizMTlw3"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55FD82942A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F7252745E;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738022797; cv=none; b=pY0EWBp7B1iMPkmLarvRaBkUs52b5EyE6mJGZ4jNQM8VHUFnq3nQwEsmHL3atW2AkRenbiBszSVwemXzBciR+fbfkGuxO1N+vf3o2vaC1wZnLvn7FKbhKXxjxeKH3nV3GQzmCqpP32jALPAUimplYFuiFE/yaynriA7T0L1+9ws=
+	t=1738022797; cv=none; b=r74HxhSC+kaRan1F59t1e8eVhLc1ePPg56LR5+kTLqOAc3sbX1ci0sb3vsHXVjaSgsxS7ss/TsTj3JF3vkIt+zFjd6dCW1IziD254CW6LIk0xDh0f2RHLSfQtA3b2hUkfd37D4ngbl7SMGbxkD3Lf+Av1UMPijEZLj1RPyYvAJk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1738022797; c=relaxed/simple;
-	bh=vE+9+3UxmiGLqZ+P2f3eoFwC3xI72QmwbpGYU9Ci2HU=;
+	bh=t4nvCsVaeq/JWg5HRJsbxqzjIAI8bXe8VWVi54lXQhI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=a4NPeMMYBf7FcZTd3ymyqCbPedcMpXJ1hSWSCGOMGQjMglW17iso8Sjg1uOXZ8WvmtYfbIaOJvIUQ+5KJeiLs4flVGM+rVph6R19fbsZxrUTxQBP/uRP2t9iou3vBCVActlOaO6xnpxpyZfITDx1WbrEktQN//KnHxJo2WFl3Ow=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fKV1aLLa; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A9AAC4AF15;
+	 MIME-Version; b=Y7XnOIBEfUx7pKp8haxDzZcYs818qYUL+onThIvJ6zcZuskvvQjmROGm9BxjHZrONE3uzGGEkd+ImoLojCtC3qdYO06xPjapqyfocI43KY3VWbczf1I5l/wxxhlaho+RFOFfxaqoKXbxwxywMqApfB+WXeIkYmANF69SpRgMfl8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=uizMTlw3; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2259CC116D0;
 	Tue, 28 Jan 2025 00:06:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1738022796;
-	bh=vE+9+3UxmiGLqZ+P2f3eoFwC3xI72QmwbpGYU9Ci2HU=;
+	bh=t4nvCsVaeq/JWg5HRJsbxqzjIAI8bXe8VWVi54lXQhI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=fKV1aLLakdCDqs2C3AO7AtssbF3hr6M/W6Rnux5ziktu24JGgbX8j1MqdH7x3cg1U
-	 yGrXGfW0BVr/VTXQqhL8iyTP7zUX1jgUPZBFYSZA+jq7pVVKSF43+SYFimkw8wAwXR
-	 KYTRmNDbtlpn5Mp8W1pkG5+9lw9bsmgvghWK5JWjSKAyUaF9rt08kYdEWBX2piJgT0
-	 sb2qSJndvq3c20LmH2ON4gvPSaY6IYpfN4DHWA+HY1GZxgaSx/POR1t77h80N31PF1
-	 AlB5FCB4UQrXMFBdGQkEn68KW5/pYHyuxuae/Q8CNZ6nthFWSVxGksviJsCJ8qOZdL
-	 P5ME4IiTW/AxQ==
+	b=uizMTlw3vIR+hYPDDHbpcKJXb+uPJb04sZkTThJ2qVb7GR87ceZ3Fq7wXw2eUk+qF
+	 il94sZbuVVZqcCGjYN28HuRPGm3191iCsj53fJxBdn+M2TvCPndbb5LzHElzUYKSF6
+	 NKa5YyxvBf9X6aOTPdnE8k1GiOpMwA9IwLlI2gS5dQ+ALydS6bnvV8AKXQSGeAymS2
+	 +9mtWlGIU4oYsPjwzeLGsPdXzBMyEIpmbI4ocNGksjyVOTv24afaIerLyF0vHf+JkV
+	 Pu+QBwNkdZWtoUKSRQi2pONMn4u/fgbeyT0V5QahIYqnVFd2jOc/k0nkhYetWXNJuh
+	 ivFW6P3Ffypjg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tcZ7i-0000000DRM7-1DRX;
+	id 1tcZ7i-0000000DRMB-1KOc;
 	Tue, 28 Jan 2025 01:06:34 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
@@ -51,10 +51,12 @@ To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org
-Subject: [RFC v2 27/38] scripts/get_abi.py: Rename title name for ABI files
-Date: Tue, 28 Jan 2025 01:06:16 +0100
-Message-ID: <a20f66b7f040cfbb7dc8d4448991ea757e581cad.1738020236.git.mchehab+huawei@kernel.org>
+	Sean Young <sean@mess.org>,
+	linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org
+Subject: [RFC v2 28/38] docs: media: Allow creating cross-references for RC ABI
+Date: Tue, 28 Jan 2025 01:06:17 +0100
+Message-ID: <fc6f086c8653a0c580ec5533fd1cd61292d03fc2.1738020236.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1738020236.git.mchehab+huawei@kernel.org>
 References: <cover.1738020236.git.mchehab+huawei@kernel.org>
@@ -67,26 +69,84 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-This makes them look better when generating cross-references.
+Now that Documentation/ABI is processed by automarkup, let it
+generate cross-references for RC sysfs devnodes.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- scripts/get_abi.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Documentation/sphinx/automarkup.py              | 17 +++++++++++++----
+ .../userspace-api/media/rc/rc-sysfs-nodes.rst   |  2 +-
+ 2 files changed, 14 insertions(+), 5 deletions(-)
 
-diff --git a/scripts/get_abi.py b/scripts/get_abi.py
-index faae51201504..1c9c6b23a6fb 100755
---- a/scripts/get_abi.py
-+++ b/scripts/get_abi.py
-@@ -327,7 +327,7 @@ class AbiParser:
-         fdata.ftype = path.split("/")[0]
+diff --git a/Documentation/sphinx/automarkup.py b/Documentation/sphinx/automarkup.py
+index 22defc18d6d2..03bb7020f5cb 100644
+--- a/Documentation/sphinx/automarkup.py
++++ b/Documentation/sphinx/automarkup.py
+@@ -88,13 +88,13 @@ def markup_refs(docname, app, node):
+     # Associate each regex with the function that will markup its matches
+     #
+     markup_func_sphinx2 = {RE_doc: markup_doc_ref,
+-                           RE_abi_file: markup_abi_ref,
++                           RE_abi_file: markup_abi_file_ref,
+                            RE_abi_symbol: markup_abi_ref,
+                            RE_function: markup_c_ref,
+                            RE_generic_type: markup_c_ref}
  
-         fdata.nametag = {}
--        fdata.nametag["what"] = [f"File {path}/{basename}"]
-+        fdata.nametag["what"] = [f"ABI file {path}/{basename}"]
-         fdata.nametag["type"] = "File"
-         fdata.nametag["path"] = fdata.ftype
-         fdata.nametag["file"] = [fdata.file_ref]
+     markup_func_sphinx3 = {RE_doc: markup_doc_ref,
+-                           RE_abi_file: markup_abi_ref,
++                           RE_abi_file: markup_abi_file_ref,
+                            RE_abi_symbol: markup_abi_ref,
+                            RE_function: markup_func_ref_sphinx3,
+                            RE_struct: markup_c_ref,
+@@ -279,10 +279,10 @@ def markup_doc_ref(docname, app, match):
+         return nodes.Text(match.group(0))
+ 
+ #
+-# Try to replace a documentation reference of the form Documentation/ABI/...
++# Try to replace a documentation reference for ABI symbols and files
+ # with a cross reference to that page
+ #
+-def markup_abi_ref(docname, app, match):
++def markup_abi_ref(docname, app, match, warning=False):
+     stddom = app.env.domains['std']
+     #
+     # Go through the dance of getting an xref out of the std domain
+@@ -294,6 +294,8 @@ def markup_abi_ref(docname, app, match):
+ 
+     # Kernel ABI doesn't describe such file or symbol
+     if not target:
++        if warning:
++            kernel_abi.log.warning("%s not found", fname)
+         return nodes.Text(match.group(0))
+ 
+     pxref = addnodes.pending_xref('', refdomain = 'std', reftype = 'ref',
+@@ -317,6 +319,13 @@ def markup_abi_ref(docname, app, match):
+     else:
+         return nodes.Text(match.group(0))
+ 
++#
++# Variant of markup_abi_ref() that warns whan a reference is not found
++#
++def markup_abi_file_ref(docname, app, match):
++    return markup_abi_ref(docname, app, match, warning=True)
++
++
+ def get_c_namespace(app, docname):
+     source = app.env.doc2path(docname)
+     with open(source) as f:
+diff --git a/Documentation/userspace-api/media/rc/rc-sysfs-nodes.rst b/Documentation/userspace-api/media/rc/rc-sysfs-nodes.rst
+index 34d6a0a1f4d3..70b5966aaff8 100644
+--- a/Documentation/userspace-api/media/rc/rc-sysfs-nodes.rst
++++ b/Documentation/userspace-api/media/rc/rc-sysfs-nodes.rst
+@@ -6,7 +6,7 @@
+ Remote Controller's sysfs nodes
+ *******************************
+ 
+-As defined at ``Documentation/ABI/testing/sysfs-class-rc``, those are
++As defined at Documentation/ABI/testing/sysfs-class-rc, those are
+ the sysfs nodes that control the Remote Controllers:
+ 
+ 
 -- 
 2.48.1
 
