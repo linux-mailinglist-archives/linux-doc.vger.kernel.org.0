@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-36197-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36193-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 481C7A2021E
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:03 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E3509A2021C
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A0AC2165AA7
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:01 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4CD02165976
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3AEF91F5FA;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2B2C27489;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Q37w48HH"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FWvyw1QE"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F402BEAF6;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE3E5DDA8;
 	Tue, 28 Jan 2025 00:06:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738022797; cv=none; b=du6LSgEVOVeTBnLNW0zrBKmKbUJCMqFMw1UVM3ASJKzpeu51RqoZCCee3xcOMEfr1h1OITWdQvPZmQOjlB6wxe25HtZTLmOPnJOywdxaiuNdfMtO3i/Cj5bTzdzqLNT27PlWHVEjqSGb1b87xG1jKfKD07Ho04IpR5Lx29lFyv8=
+	t=1738022797; cv=none; b=hFWmzNeqEOzsiYurI6TqmqAwGV3DseUlzJc4bQq/y+0HhV8ii+NpIZOUWeLVtefbtevZuM8IA6FxDRiFnKEQ/41ugNYoBwACz6BBBqG9Saiv3Bk1gg2q0zVM20InW4pP46gFei5k9jejwBuToiE41K0hctn8lRVMPhk1ZJTFLzQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1738022797; c=relaxed/simple;
-	bh=Kz1uLR2W8G1KJ3PcmTy6dzY11GbizJ0wg4lGv6G2Aa0=;
+	bh=c1DRAW1eND16SBK5p186Mw0Kk3C4nvJXQzIl/jp91wc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=X9EGA8+5BaPLgSXcc2LuVAsVaIZom+vi9vht9WY8/cUMb6zvN0dQFj8Oq32POcy6Y/7CWA+lc1ACraeoc2yIbasBFA1eO6OgZ5NBMxnPQmF1eWMc0GvQxb0KQp9F8EiHHmKcf5Id3Z7D803wmkfUq+zjyrN6j1Ij8pkZgQXOwJU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Q37w48HH; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB192C4CEF3;
+	 MIME-Version; b=QNqJxd7mXnRTI7yutWIRA841G182lkNbE+MeMMsR5EU97k9oEp8hfOr6uC3jliSGuMLLN1XNrS1lJ2I0ZWY3R4jNitWO4I+8/9XVcxiPNYTbi8hPhgb1ir55zLNKuwShDxQo7x+S43W5/sw/dpDZbxpTlBzJunvQBWxedhekxE4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FWvyw1QE; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D14E2C4AF0C;
 	Tue, 28 Jan 2025 00:06:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1738022795;
-	bh=Kz1uLR2W8G1KJ3PcmTy6dzY11GbizJ0wg4lGv6G2Aa0=;
+	bh=c1DRAW1eND16SBK5p186Mw0Kk3C4nvJXQzIl/jp91wc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Q37w48HH8J8UhYsLOIflAod5F6g8oZbCRRoGS3TMca6/9L+Fc3u9+T/P5xL4DGhRY
-	 JJqImBsK4hxEeha3G3MmEIt4To/DdfN4wS6Pu/NXqsBbtzrdpRARp+Eu1Sx2TwBSF2
-	 8jpzAc9IB2MiPG2TKTnb3GDl1YGQy68wUB850/OILqwNNZx1jnSm4vpI33DoYcYHKo
-	 8S4Ncj4b9dPn0kRL6+zlEjG9luu1nROyx4Mvh46mWJiQVT05lpokoJ5Qbzk83dO0LP
-	 gg0wmIze/oXY6UPvqAZycy925XR9pNhA1gERnW+7oWQABkx0iBtEaMjDuJN0XzIcRU
-	 gMG8GUb9ucNZA==
+	b=FWvyw1QEUjJvKR133VqP9QTbXl08KOZbqSnoPyuoLkb4F5NBcf6uQBtgjHqr4bPK6
+	 ap7zyqUTMbSrykdP9d8evu34MVMiQAcsg6xuS/FWffOpZ1NKr3mbS/bp7/Qx4yzYvT
+	 BwuxcTXqlUQUd69rOsEVy03eZSuD/Eo7+8+SztD8l6fYtwTlyTE8p2mvTbaS+btgTA
+	 Qhfz7u210Jv3L00g7Hg5po6aoWGQVGqf+AMa+82K922VaWa1xShj5B1s6OtQZUrvvo
+	 SqsZJkdkPpA0fGeZohDWQMUmRd4pMFFvY9A9DBORz2NxGtzDgev7xlq75SsLPRrdS6
+	 M8OKds+XeFAxg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tcZ7h-0000000DRLL-45hO;
-	Tue, 28 Jan 2025 01:06:33 +0100
+	id 1tcZ7i-0000000DRLP-00cQ;
+	Tue, 28 Jan 2025 01:06:34 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	Jonathan Corbet <corbet@lwn.net>,
@@ -52,9 +52,9 @@ To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org
-Subject: [RFC v2 15/38] docs: use get_abi.py for ABI generation
-Date: Tue, 28 Jan 2025 01:06:04 +0100
-Message-ID: <54e28a202be41992fa74ffac8c4ee12bb9e9adf5.1738020236.git.mchehab+huawei@kernel.org>
+Subject: [RFC v2 16/38] scripts/get_abi.py: optimize parse_abi() function
+Date: Tue, 28 Jan 2025 01:06:05 +0100
+Message-ID: <238cbe14607880e99d7e6cbaa3f046dfaf96dcd2.1738020236.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1738020236.git.mchehab+huawei@kernel.org>
 References: <cover.1738020236.git.mchehab+huawei@kernel.org>
@@ -67,95 +67,100 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Use the new script instead of the old one when generating ABI docs.
+Instead of using glob, use a recursive function to parse all files.
 
-For now, execute it via exec. Future changes will better integrate it
-by using the class defined there directly.
+Such change reduces the total excecution time by 15% with my SSD disks.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/admin-guide/abi-obsolete.rst |  1 -
- Documentation/admin-guide/abi-removed.rst  |  1 -
- Documentation/admin-guide/abi-stable.rst   |  1 -
- Documentation/admin-guide/abi-testing.rst  |  1 -
- Documentation/sphinx/kernel_abi.py         | 10 +++-------
- 5 files changed, 3 insertions(+), 11 deletions(-)
+ scripts/get_abi.py | 57 ++++++++++++++++++++++++++++++----------------
+ 1 file changed, 38 insertions(+), 19 deletions(-)
 
-diff --git a/Documentation/admin-guide/abi-obsolete.rst b/Documentation/admin-guide/abi-obsolete.rst
-index b655615917f1..6d4d9ab7b8c3 100644
---- a/Documentation/admin-guide/abi-obsolete.rst
-+++ b/Documentation/admin-guide/abi-obsolete.rst
-@@ -10,4 +10,3 @@ The description of the interface will document the reason why it is
- obsolete and when it can be expected to be removed.
+diff --git a/scripts/get_abi.py b/scripts/get_abi.py
+index 93a23cf30ea1..73613fb29c1c 100755
+--- a/scripts/get_abi.py
++++ b/scripts/get_abi.py
+@@ -13,7 +13,6 @@ import os
+ import re
+ import sys
  
- .. kernel-abi:: ABI/obsolete
--   :rst:
-diff --git a/Documentation/admin-guide/abi-removed.rst b/Documentation/admin-guide/abi-removed.rst
-index ba941c1af178..9fc78af6f077 100644
---- a/Documentation/admin-guide/abi-removed.rst
-+++ b/Documentation/admin-guide/abi-removed.rst
-@@ -4,4 +4,3 @@ ABI removed symbols
- ===================
+-from glob import glob
+ from pprint import pformat
+ from random import randrange, seed
  
- .. kernel-abi:: ABI/removed
--   :rst:
-diff --git a/Documentation/admin-guide/abi-stable.rst b/Documentation/admin-guide/abi-stable.rst
-index 5d738f345333..c47c2a295865 100644
---- a/Documentation/admin-guide/abi-stable.rst
-+++ b/Documentation/admin-guide/abi-stable.rst
-@@ -13,4 +13,3 @@ Most interfaces (like syscalls) are expected to never change and always
- be available.
+@@ -59,7 +58,11 @@ class AbiParser:
+         self.file_refs = {}
+         self.what_refs = {}
  
- .. kernel-abi:: ABI/stable
--   :rst:
-diff --git a/Documentation/admin-guide/abi-testing.rst b/Documentation/admin-guide/abi-testing.rst
-index a867e6578bf7..40b31985e587 100644
---- a/Documentation/admin-guide/abi-testing.rst
-+++ b/Documentation/admin-guide/abi-testing.rst
-@@ -19,4 +19,3 @@ name to the description of these interfaces, so that the kernel
- developers can easily notify them if any changes occur.
++        # Ignore files that contain such suffixes
++        self.ignore_suffixes = (".rej", ".org", ".orig", ".bak", "~")
++
+         # Regular expressions used on parser
++        self.re_abi_dir = re.compile(r"(.*)" + ABI_DIR)
+         self.re_tag = re.compile(r"(\S+)(:\s*)(.*)", re.I)
+         self.re_valid = re.compile(self.TAGS)
+         self.re_start_spc = re.compile(r"(\s*)(\S.*)")
+@@ -335,26 +338,42 @@ class AbiParser:
+                 for w in fdata.what:
+                     self.add_symbol(what=w, fname=fname, xref=fdata.key)
  
- .. kernel-abi:: ABI/testing
--   :rst:
-diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
-index a1887b50a900..fc7500fad119 100644
---- a/Documentation/sphinx/kernel_abi.py
-+++ b/Documentation/sphinx/kernel_abi.py
-@@ -14,7 +14,7 @@ u"""
-     :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+-    def parse_abi(self):
++    def _parse_abi(self, root=None):
++        """Internal function to parse documentation ABI recursively"""
++
++        if not root:
++            root = self.directory
++
++        with os.scandir(root) as obj:
++            for entry in obj:
++                name = os.path.join(root, entry.name)
++
++                if entry.is_dir():
++                    self.parse_abi(name)
++                    continue
++
++                if not entry.is_file():
++                    continue
++
++                basename = os.path.basename(name)
++
++                if basename == "README":
++                    continue
++
++                if basename.startswith("."):
++                    continue
++
++                if basename.endswith(self.ignore_suffixes):
++                    continue
++
++                path = self.re_abi_dir.sub("", os.path.dirname(name))
++
++                self.parse_file(name, path, basename)
++
++    def parse_abi(self, root=None):
+         """Parse documentation ABI"""
  
-     The ``kernel-abi`` (:py:class:`KernelCmd`) directive calls the
--    scripts/get_abi.pl script to parse the Kernel ABI files.
-+    scripts/get_abi.py script to parse the Kernel ABI files.
- 
-     Overview of directive's argument and options.
- 
-@@ -66,7 +66,6 @@ class KernelCmd(Directive):
- 
-     option_spec = {
-         "debug"     : directives.flag,
--        "rst"       : directives.unchanged
-     }
- 
-     def run(self):
-@@ -77,15 +76,12 @@ class KernelCmd(Directive):
-         srctree = os.path.abspath(os.environ["srctree"])
- 
-         args = [
--            os.path.join(srctree, 'scripts/get_abi.pl'),
-+            os.path.join(srctree, 'scripts/get_abi.py'),
-+            '-D', os.path.join(srctree, 'Documentation', self.arguments[0]),
-             'rest',
-             '--enable-lineno',
--            '--dir', os.path.join(srctree, 'Documentation', self.arguments[0]),
-         ]
- 
--        if 'rst' in self.options:
--            args.append('--rst-source')
+-        ignore_suffixes = ("rej", "org", "orig", "bak", "~")
+-        re_abi = re.compile(r".*" + ABI_DIR)
 -
-         lines = subprocess.check_output(args, cwd=os.path.dirname(doc.current_source)).decode('utf-8')
-         nodeList = self.nestedParse(lines, self.arguments[0])
-         return nodeList
+-        for fname in glob(os.path.join(self.directory, "**"), recursive=True):
+-            if os.path.isdir(fname):
+-                continue
+-
+-            basename = os.path.basename(fname)
+-
+-            if basename == "README":
+-                continue
+-            if basename.startswith(".") or basename.endswith(ignore_suffixes):
+-                continue
+-
+-            path = re_abi.sub("", os.path.dirname(fname))
+-
+-            self.parse_file(fname, path, basename)
++        self._parse_abi(root)
+ 
+         if self.debug & DEBUG_DUMP_ABI_STRUCTS:
+             self.log.debug(pformat(self.data))
 -- 
 2.48.1
 
