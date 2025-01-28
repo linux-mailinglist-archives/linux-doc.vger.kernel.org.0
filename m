@@ -1,64 +1,66 @@
-Return-Path: <linux-doc+bounces-36211-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36217-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 162CBA2022E
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:22 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2113DA20234
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1B9BB165A31
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:20 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E34A71656F7
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF6037DA8C;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D06351487CD;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="E6QdLOBG"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i/GkfumJ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EA962E62B;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7005B2EAE4;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738022797; cv=none; b=uZXgMN4P3zsFvk8PmuDi0Yu76XvVkJsvFCjiuwUuTWqgV50r5Tw/aOwS/JoNmXvQV6MoEeONdJsPHGtxgJfq2FYp7qlC766J+wu6bB5VPXJSXccZAXf16WzIRbV/vtmV+q/F0SwjN7tVFvTJfYHpulOCK5r2uGcZmggsRsbMxfE=
+	t=1738022797; cv=none; b=ADdvoWSiP5hoEZKqZJ7FdjwBlEWGMtWHKvY1R0dtCdH0N9CUz+8GQ536lBBiLwStvSVPiFdVSjugCnvy++HkSqAKCbHdFeAzjQjjYd+ADzsq2aAwNWbrj9Og+bMB7fyy3Yrxh60CKkkN5KBLma2jYAeCfSm8hS1tLlHMHZ2x1CY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1738022797; c=relaxed/simple;
-	bh=aJ8SN/KmweREPu+e3BrG68E3yExC74uiWb70lROkL7Q=;
+	bh=mcoeXqisQ9cCp+d9XJhL6+xR7Bjlo3DbBhHTGHu6E1M=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=e23IdOE+7O6L3I/ihk6ZqdIsOcrpWNNVEzlxOueBaXfhMiFsbS+6kMBGKM37ECNgmGd4ZgVSk9qv8YTuTYo+sQNoMC5Eoan6qeLZ3yN+5IR0nm19np1X0Iize4w2r6bpvWkJ0/QZpGc47LJYMKB31F7e9kwq0kP6AnQEzvqXqnU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E6QdLOBG; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36367C2BCAF;
+	 MIME-Version; b=mb/fBHiIn11oNChQoP4ONXrzQiIIdYy9kgXojCXa/+fkHGXpdCqfv+KaonmTv4ajvYZ7mZbtFEVrSKj/XdqJpifzCjmJi9DTYlCMDfEJxEv+lDFfyU9mmBlc7ZAogryI6LjZAmFe70LoaVzEWgM1cyf0KHNSSaHFs92t/MFeqbs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i/GkfumJ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34C85C2BC87;
 	Tue, 28 Jan 2025 00:06:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1738022796;
-	bh=aJ8SN/KmweREPu+e3BrG68E3yExC74uiWb70lROkL7Q=;
+	bh=mcoeXqisQ9cCp+d9XJhL6+xR7Bjlo3DbBhHTGHu6E1M=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=E6QdLOBGGkLHrxzXL7xRWh8sA571ucTDZ13JHOz81/gCmvSBA/K+cG6iGGzB+P32e
-	 ezTwKuU7l+Hu1Ob8YZKIaPTZy2ltOtHdEQKosTNlh+Hc9uuKJ0v2gJCkPP57sK41Bo
-	 jleDMqW6uyNIR59ZzzhA13UzeMTRyBMig+GYofvNJ6ge+CEPqTVbSvGOpAE6TB/MMG
-	 Xkd/1P9pn9yf4qMrHQf60K7pfgDjfaJxIpCeIt51B1LUAsxA1SnkOaxWpobqY4MGmy
-	 rzLogHiF2rpRKV/+zPYCYUFj/Vj3ERsDfJ5EZQ0EzAEcOjVcqyZgChcbF3Dt62HJ/D
-	 5GHdv4pY5UfFA==
+	b=i/GkfumJbBhJUTjl4JTzh/iy8mfn9/It3WkKIu3zIlKWvHu0EAtF6V0KNiHIp6yH+
+	 Nl7g3XMYh8T3nAZDYNTH4IsWgzt3chE87YqXd9u+uF18FfHV35y8NvD8p6a4RbE+sy
+	 3P+PnnEql66gkIKL5eGyr2s8R9MZenErrYRqiDBFrVt/BTZQiZPQlq4f7gUAQGt9Su
+	 6QQlsVsVL+nWBVxAkWsloMmi14Efc7VQYDoPiq7r9NTXDpiMLlS+9mIG48m1OcT5tc
+	 ERR8Y/O25a9SGMYM29Wzs5i9jD1k9509j8EMqpHiyXffA3pUqaF/8xbgsh/68tUDkc
+	 FZas3WZRc/ePw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tcZ7i-0000000DRMR-1nNr;
+	id 1tcZ7i-0000000DRMW-1ubB;
 	Tue, 28 Jan 2025 01:06:34 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	Jonathan Cameron <mchehab+huawei@kernel.org>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Thorsten Scherer <t.scherer@eckelmann.de>,
-	linux-iio@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [RFC v2 32/38] docs: iio: Allow creating cross-references ABI
-Date: Tue, 28 Jan 2025 01:06:21 +0100
-Message-ID: <71e13fab5e63de2f16d6953cc6ebf3b51f1f9f6e.1738020236.git.mchehab+huawei@kernel.org>
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <mchehab+huawei@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org
+Subject: [RFC v2 33/38] docs: networking: Allow creating cross-references statistics ABI
+Date: Tue, 28 Jan 2025 01:06:22 +0100
+Message-ID: <cf7ac7aea937893d05874e2381e59274bf2e3fbf.1738020236.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1738020236.git.mchehab+huawei@kernel.org>
 References: <cover.1738020236.git.mchehab+huawei@kernel.org>
@@ -76,34 +78,22 @@ generate cross-references for the corresponding ABI file.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/driver-api/iio/core.rst | 2 +-
- Documentation/iio/iio_devbuf.rst      | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ Documentation/networking/statistics.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/driver-api/iio/core.rst b/Documentation/driver-api/iio/core.rst
-index dfe438dc91a7..42b580fb2989 100644
---- a/Documentation/driver-api/iio/core.rst
-+++ b/Documentation/driver-api/iio/core.rst
-@@ -60,7 +60,7 @@ directory.  Common attributes are:
- * :file:`sampling_frequency_available`, available discrete set of sampling
-   frequency values for device.
- * Available standard attributes for IIO devices are described in the
--  :file:`Documentation/ABI/testing/sysfs-bus-iio` file in the Linux kernel
-+  :file:Documentation/ABI/testing/sysfs-bus-iio file in the Linux kernel
-   sources.
+diff --git a/Documentation/networking/statistics.rst b/Documentation/networking/statistics.rst
+index 75e017dfa825..518284e287b0 100644
+--- a/Documentation/networking/statistics.rst
++++ b/Documentation/networking/statistics.rst
+@@ -143,7 +143,7 @@ reading multiple stats as it internally performs a full dump of
+ and reports only the stat corresponding to the accessed file.
  
- IIO device channels
-diff --git a/Documentation/iio/iio_devbuf.rst b/Documentation/iio/iio_devbuf.rst
-index 9919e4792d0e..dca1f0200b0d 100644
---- a/Documentation/iio/iio_devbuf.rst
-+++ b/Documentation/iio/iio_devbuf.rst
-@@ -148,5 +148,5 @@ applied), however there are corner cases in which the buffered data may be found
- in a processed form. Please note that these corner cases are not addressed by
- this documentation.
+ Sysfs files are documented in
+-`Documentation/ABI/testing/sysfs-class-net-statistics`.
++Documentation/ABI/testing/sysfs-class-net-statistics.
  
--Please see ``Documentation/ABI/testing/sysfs-bus-iio`` for a complete
-+Please see Documentation/ABI/testing/sysfs-bus-iio for a complete
- description of the attributes.
+ 
+ netlink
 -- 
 2.48.1
 
