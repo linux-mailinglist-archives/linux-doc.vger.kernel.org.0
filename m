@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-36184-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36191-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id D15CDA2020D
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:06:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A94EA20215
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:06:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 420A21658AC
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:06:41 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C83721659B6
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:06:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9D2241373;
-	Tue, 28 Jan 2025 00:06:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 07A31F4ED;
+	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iLGdotL+"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oCw3ncnM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6563D3C14;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE8198462;
 	Tue, 28 Jan 2025 00:06:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738022796; cv=none; b=QtOHjc34sgrrH0xYAkqZ73tJy0S8vLib8ZaB73Czl8/5YWQCd5Ag8fvDZv1Yv9+jlVb+qhtkqhH5OubvIaXf0Nb8U7NfK6IQ/rzhQ+wtYeISf+jQAmtz33x9PW3knFejPvttdHcVtBDdnJCy0uX70b67zmudgUZuvFQneuxSFjM=
+	t=1738022796; cv=none; b=WPy56bmiSV7/Og4KWOEqt3EXldzZFgdCfGzx3jXYj9xCLKs4Uuf1WA2K42nFYtwvDLZNjeYRWHKzdQkzqS8ID59rpeRCRIcC2Gyz6uT9pnOEtdf052OKo0CxmCZLdPUUT6V1aBRfteJIqcHVq5LTBrKjUAvfqyC/ubjttKX9LdQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1738022796; c=relaxed/simple;
-	bh=Tm8FYhaC26HmjBWtbEkupMtvOAviwlbF24h5AUzFGQs=;
+	bh=Qfw83Lsvw9YW81iRX0U1pEJiGDlKBK7ODRwFNFgYaqQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=SQjZ1J8pgb2t5KQ4tPu5Jf3ZVti0DlaInI8eYB6yJ84hRxEjkvy+QIxAIw2G4cV4sKhiA/jxpSGF2V+SamXoIabu9NelLCvOjnSZr0bCinGwbGgCEGh/ssX9Da0omP1acJgwKG4Pwx6GQBvxYDflEAqqYp7oM1sJolgn+oKz0CQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iLGdotL+; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 942C5C4CED2;
+	 MIME-Version; b=K/sTcyiIrU6RuPkAwA48I7z0HZ1QykoMExa9IUD7SnmwBF4vMFaOaf2W7q2NKmUhIUbU2KY0RsxiQ4UfgtUQkFmUHdxlWloMrgWfoDcYbkujHuLfeXg37sY6+mdnfRhXPo95tDfCnvtGpqZNfUsHWTzrhCv2JGRS3FIvTsnL0O8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oCw3ncnM; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2CD2C4CEEB;
 	Tue, 28 Jan 2025 00:06:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1738022795;
-	bh=Tm8FYhaC26HmjBWtbEkupMtvOAviwlbF24h5AUzFGQs=;
+	bh=Qfw83Lsvw9YW81iRX0U1pEJiGDlKBK7ODRwFNFgYaqQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=iLGdotL+XCu9jL2FPU4TWspY5DIYMPMF64MLQyxkAbdh/dY/drz0LqySm5L1BgFgp
-	 F0b2VITGBA+K9a78K/SSXC381bnoJesEl+SfA525A8jw8277woBvicYzIaVc7X3wiS
-	 RYuaBWQDGiE0IF2JXCm+9n0ZXpZCmIafLp1eYIuQYiYCtLFEUDD7N7Tb6Lrp4VZl99
-	 gnaEZ0kGMIz+qdO0jlBpSDTVRQqATzD0tB2c7Ro+9Kd2ADQyQdDNUfpx08RdgMW5kR
-	 acsiVkh6t7i9XeXfyP+zDzh8b6JkDtziQRrPda3JbVBRLpNKrvKsxlls9NUI6KRQfe
-	 x45whh4RyNbqQ==
+	b=oCw3ncnMSwJFVXYin7ecw9sGmuVVEgSoun/Ci8tV7AZDndK0sk/ezkYQeuOL8Bybh
+	 /benV6dn1rTZMgO5OcAncJ1Xr+5/ShybogpSaSirks9Ff7qNGQaUBefuNsqP4WRF06
+	 pFGswKs51hT6T/iJvTsYUiv4AcUNg87OiQ+Hcor/64tVrg1SdWirZTWwtHqZdmdmQL
+	 GX+v2TOwPZ+4hSVnqYZrjmtEMARaw46ajpon2hcouDom+G9ztQrE74oB9K0XEbdHGe
+	 ksI2n7HFQKKWv5nySzAsHQUpcoCHDWjmpj4WgxYiZHSTYFXFwUxEiupH2PdFn/Gbi2
+	 1FTpMUkv/teog==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tcZ7h-0000000DRKV-2ac5;
+	id 1tcZ7h-0000000DRKZ-2hj3;
 	Tue, 28 Jan 2025 01:06:33 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
@@ -51,14 +51,13 @@ To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	Bingbu Cao <bingbu.cao@intel.com>,
-	Sakari Ailus <sakari.ailus@linux.intel.com>,
-	Tianshu Qiu <tian.shu.qiu@intel.com>,
-	linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org
-Subject: [RFC v2 02/38] docs: media: ipu3: fix two footnote references
-Date: Tue, 28 Jan 2025 01:05:51 +0100
-Message-ID: <bed775ecc34a9261bdf672acd51073c4f2115550.1738020236.git.mchehab+huawei@kernel.org>
+	Jens Axboe <axboe@kernel.dk>,
+	Ming Lei <ming.lei@redhat.com>,
+	linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [RFC v2 03/38] docs: block: ublk.rst: remove a reference from a dropped text
+Date: Tue, 28 Jan 2025 01:05:52 +0100
+Message-ID: <f892c3774c1f6f50a74b8e5f5d6c830a86c743ce.1738020236.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1738020236.git.mchehab+huawei@kernel.org>
 References: <cover.1738020236.git.mchehab+huawei@kernel.org>
@@ -71,53 +70,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Sphinx doesn't process references inside a code block. They need
-to be before that.
+Commit  4093cb5a0634 ("ublk_drv: add mechanism for supporting unprivileged ublk device")
+implemented support for unprivileged ublk devices. With that, the
+text mentioning such issue was removed. However, the footnote
+is still there.
 
-Also, one of the refrences is missing a footnote origin. Add it.
+Drop the footnote to remove a documentation build warning.
 
+Fixes: 4093cb5a0634 ("ublk_drv: add mechanism for supporting unprivileged ublk device")
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/admin-guide/media/ipu3.rst | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ Documentation/block/ublk.rst | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/Documentation/admin-guide/media/ipu3.rst b/Documentation/admin-guide/media/ipu3.rst
-index 83b3cd03b35c..b0d42cea5391 100644
---- a/Documentation/admin-guide/media/ipu3.rst
-+++ b/Documentation/admin-guide/media/ipu3.rst
-@@ -87,8 +87,8 @@ raw Bayer format that is specific to IPU3.
- Let us take the example of ov5670 sensor connected to CSI2 port 0, for a
- 2592x1944 image capture.
+diff --git a/Documentation/block/ublk.rst b/Documentation/block/ublk.rst
+index 51665a3e6a50..1e0e7358e14a 100644
+--- a/Documentation/block/ublk.rst
++++ b/Documentation/block/ublk.rst
+@@ -333,6 +333,4 @@ References
  
--Using the media controller APIs, the ov5670 sensor is configured to send
--frames in packed raw Bayer format to IPU3 CSI2 receiver.
-+Using the media controller APIs\ [#f3]_, the ov5670 sensor is configured to
-+send frames in packed raw Bayer format to IPU3 CSI2 receiver.
+ .. [#userspace_readme] https://github.com/ming1/ubdsrv/blob/master/README
  
- .. code-block:: none
- 
-@@ -98,7 +98,7 @@ frames in packed raw Bayer format to IPU3 CSI2 receiver.
-     # and that ov5670 sensor is connected to i2c bus 10 with address 0x36
-     export SDEV=$(media-ctl -d $MDEV -e "ov5670 10-0036")
- 
--    # Establish the link for the media devices using media-ctl [#f3]_
-+    # Establish the link for the media devices using media-ctl
-     media-ctl -d $MDEV -l "ov5670:0 -> ipu3-csi2 0:0[1]"
- 
-     # Set the format for the media devices
-@@ -248,9 +248,9 @@ hence "STILL" mode will need more power and memory bandwidth than "VIDEO" mode.
- TNR will be enabled in "VIDEO" mode and bypassed by "STILL" mode. ImgU is
- running at "VIDEO" mode by default, the user can use v4l2 control
- V4L2_CID_INTEL_IPU3_MODE (currently defined in
--drivers/staging/media/ipu3/include/uapi/intel-ipu3.h) to query and set the
--running mode. For user, there is no difference for buffer queueing between the
--"VIDEO" and "STILL" mode, mandatory input and main output node should be
-+drivers/staging/media/ipu3/include/uapi/intel-ipu3.h\ [#f5]_) to query and set
-+the running mode. For user, there is no difference for buffer queueing between
-+the "VIDEO" and "STILL" mode, mandatory input and main output node should be
- enabled and buffers need be queued, the statistics and the view-finder queues
- are optional.
- 
+-.. [#stefan] https://lore.kernel.org/linux-block/YoOr6jBfgVm8GvWg@stefanha-x1.localdomain/
+-
+ .. [#xiaoguang] https://lore.kernel.org/linux-block/YoOr6jBfgVm8GvWg@stefanha-x1.localdomain/
 -- 
 2.48.1
 
