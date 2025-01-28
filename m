@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-36203-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36208-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD7DCA20226
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:13 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 960F3A2022C
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 85318165B23
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:11 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id CC5E01884F36
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 779FB381C4;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 918E242AB4;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="upgUv5WF"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sZY9ADmT"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F2301F95C;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 353A81E531;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738022797; cv=none; b=XmNrtIoB3QZDzsXgfxXXqLVqQGqDsG9l29yCxYyvWAygAr2SFW0CBu9VPK/IHVzxqAztPraxJt5wqsSQkLSpiWEM/wxL8c/ppaxrbyySsYDUNG0hiDzBEzRfZKFLwctPH1er2yGolZC9FKGbd6HmsfRPQD0QNburLZcl5h2ES6c=
+	t=1738022797; cv=none; b=hTlYKrE+sAN+zm+ZCi++ifIT7sdXDTa2JuUnpKbq/o3OFbpBi1TFrcoKl34Q80ToJfp9KYYLsoiznqR7ZwtEE+rc3ktyn7XmYitM99t6JMWxqC2zB0qiu6/q+EkaUcFrv6vr7Qwta/1u8SOEZMyR0YcQsXckEAvdpKr2PpblF2c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1738022797; c=relaxed/simple;
-	bh=5Ehk+UnXsY+f4nC8KlN3P04pRtl7e+QgRfiunel5DWg=;
+	bh=lDLPH7kUn/3QJcu8UsvVEA9i6yHiVOXJJkOvW7zCEkY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=jpQAGAemB/pHXKYrholfBd+6nGmqb1mRoeadAWKcL1zcG6QAXZ0wYsb2xE4xdF5JRNkRAcndC+OPFn/V3fFwKlx7/KyvfkKRRjVVhrCnNUYpdPOG0Om1Z38O+M43LQDzoPxXGia0Rbrn0/o/qJdxzqPfrA8J29sjxnR6X+jzPBw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=upgUv5WF; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C58CC116C6;
+	 MIME-Version; b=heSZvPdZRVtVjojvgTQtMWFj/bi/2GEX3AdyJ2vVdlf//arSxmmiP8q12PkfakOMrIyHkuC2c7rZR0iIK7A2dvW9gz3lCWzHTLwbD87nka8TkKCdUqliESRdeQJpGiVUXYM1P0QebUQUFE7ulcxUUl3H0NJe/q76RcIGTgd4LXQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sZY9ADmT; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BE40C116B1;
 	Tue, 28 Jan 2025 00:06:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1738022796;
-	bh=5Ehk+UnXsY+f4nC8KlN3P04pRtl7e+QgRfiunel5DWg=;
+	bh=lDLPH7kUn/3QJcu8UsvVEA9i6yHiVOXJJkOvW7zCEkY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=upgUv5WFiK5kZdSUAY+aTYNfiyi34unoqVc5MdsArfguMyK90exrrQW+zNT2g9qoQ
-	 H4sjAKtXOXDJ6XhqV5gqIoWvjSUpIw9vwmHq3ld07PjLn32EZn7nZt8+muZx2mXYQp
-	 7pcTPLK7N27Gd8vp0Rx3KrDc4mHbu/5cdtf4gMVKu1Ef1zUjUjOIlPwMUFOgzl07TF
-	 0E68M2m7HRSJljr/IDkakzJ1st/ZWNP9dsQcA/8lHm+sUkAZQgqUsAH8NQMl/71Qse
-	 d2zsZDIdTNMJ6pSROpgIrbqgU0EeYLikkdP9cP2Zs2jTha1HaGxW50FZyybthG2gou
-	 m23NgsI1CCHRQ==
+	b=sZY9ADmTIv/spHSMKkyM5ei5mSJQPp/xJtOD9WIt+iWQgOfyGJj3j9twECJZ+71/8
+	 Y1DgeKvmgeRF8TDPZNA3FEZC6W4StqFxQFWszBLZnDwISWhOqD5f+g/Bj7duvJckbF
+	 DCvye64iC0PiK6fxNg7BdIhy8ioAXwqjUDeNomjtRdw5Zy15huWmdLLoWTrZq1Chi9
+	 Wc5AvctqrEGMv/BRs7M6xdP6JLQDrzj2iNkY5AU0dInhhp6GfV6yAs6kyeQI0eWF5/
+	 tBn4oCIur5kR81tJ/XgIxF8SeE/6+otZKUY1TKIuN1K1Hb3CL6ykyKSx5QKRMIHzAV
+	 YDnmEpljVnJaQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tcZ7i-0000000DRLv-0swn;
+	id 1tcZ7i-0000000DRLz-0zdR;
 	Tue, 28 Jan 2025 01:06:34 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
@@ -52,9 +52,9 @@ To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org
-Subject: [RFC v2 24/38] docs: admin-guide/abi: split files from symbols
-Date: Tue, 28 Jan 2025 01:06:13 +0100
-Message-ID: <0fb924b00797d0966d824224762b11595d44cacb.1738020236.git.mchehab+huawei@kernel.org>
+Subject: [RFC v2 25/38] docs: sphinx/automarkup: add cross-references for ABI
+Date: Tue, 28 Jan 2025 01:06:14 +0100
+Message-ID: <27d09dbf5e3020b4f4fb17db9f8b7c76690b24be.1738020236.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1738020236.git.mchehab+huawei@kernel.org>
 References: <cover.1738020236.git.mchehab+huawei@kernel.org>
@@ -67,163 +67,127 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Now that get_abi has gained support for filtering its output,
-split ABI symbols from files at the html output.
+Now that all ABI files are handled together, we can add a feature
+at automarkup for it to generate cross-references for ABI symbols.
 
-That makes pages smaller and easier to navigate.
+The cross-reference logic can produce references for all existing
+files, except for README (as this is not parsed).
 
-As an additional bonus, as it will paralelize files handling,
-it gives an additional performance improvement.
+For symbols, they need to be an exact match of what it is
+described at the docs, which is not always true due to wildcards.
+
+If symbols at /sys /proc and /config are identical, a cross-reference
+will be used.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/admin-guide/abi-obsolete-files.rst |  7 +++++++
- Documentation/admin-guide/abi-obsolete.rst       |  1 +
- Documentation/admin-guide/abi-readme-file.rst    |  6 ++++++
- Documentation/admin-guide/abi-removed-files.rst  |  7 +++++++
- Documentation/admin-guide/abi-removed.rst        |  1 +
- Documentation/admin-guide/abi-stable-files.rst   |  7 +++++++
- Documentation/admin-guide/abi-stable.rst         |  1 +
- Documentation/admin-guide/abi-testing-files.rst  |  7 +++++++
- Documentation/admin-guide/abi-testing.rst        |  1 +
- Documentation/admin-guide/abi.rst                | 15 +++++++++++++++
- 10 files changed, 53 insertions(+)
- create mode 100644 Documentation/admin-guide/abi-obsolete-files.rst
- create mode 100644 Documentation/admin-guide/abi-readme-file.rst
- create mode 100644 Documentation/admin-guide/abi-removed-files.rst
- create mode 100644 Documentation/admin-guide/abi-stable-files.rst
- create mode 100644 Documentation/admin-guide/abi-testing-files.rst
+ Documentation/sphinx/automarkup.py | 45 ++++++++++++++++++++++++++++++
+ scripts/get_abi.py                 | 11 ++++++++
+ 2 files changed, 56 insertions(+)
 
-diff --git a/Documentation/admin-guide/abi-obsolete-files.rst b/Documentation/admin-guide/abi-obsolete-files.rst
-new file mode 100644
-index 000000000000..3061a916b4b5
---- /dev/null
-+++ b/Documentation/admin-guide/abi-obsolete-files.rst
-@@ -0,0 +1,7 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Obsolete ABI Files
-+==================
-+
-+.. kernel-abi:: obsolete
-+   :no-symbols:
-diff --git a/Documentation/admin-guide/abi-obsolete.rst b/Documentation/admin-guide/abi-obsolete.rst
-index bdef91d2cea4..640f3903e847 100644
---- a/Documentation/admin-guide/abi-obsolete.rst
-+++ b/Documentation/admin-guide/abi-obsolete.rst
-@@ -10,3 +10,4 @@ The description of the interface will document the reason why it is
- obsolete and when it can be expected to be removed.
+diff --git a/Documentation/sphinx/automarkup.py b/Documentation/sphinx/automarkup.py
+index a413f8dd5115..7d91c39b4ca6 100644
+--- a/Documentation/sphinx/automarkup.py
++++ b/Documentation/sphinx/automarkup.py
+@@ -11,6 +11,8 @@ from sphinx.errors import NoUri
+ import re
+ from itertools import chain
  
- .. kernel-abi:: obsolete
-+   :no-files:
-diff --git a/Documentation/admin-guide/abi-readme-file.rst b/Documentation/admin-guide/abi-readme-file.rst
-new file mode 100644
-index 000000000000..6172e4ccbda2
---- /dev/null
-+++ b/Documentation/admin-guide/abi-readme-file.rst
-@@ -0,0 +1,6 @@
-+.. SPDX-License-Identifier: GPL-2.0
++from kernel_abi import kernel_abi
 +
-+ABI README
-+==========
-+
-+.. kernel-abi:: README
-diff --git a/Documentation/admin-guide/abi-removed-files.rst b/Documentation/admin-guide/abi-removed-files.rst
-new file mode 100644
-index 000000000000..f1bdfadd2ec4
---- /dev/null
-+++ b/Documentation/admin-guide/abi-removed-files.rst
-@@ -0,0 +1,7 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Removed ABI Files
-+=================
-+
-+.. kernel-abi:: removed
-+   :no-symbols:
-diff --git a/Documentation/admin-guide/abi-removed.rst b/Documentation/admin-guide/abi-removed.rst
-index bea0608b8442..88832d3eacd6 100644
---- a/Documentation/admin-guide/abi-removed.rst
-+++ b/Documentation/admin-guide/abi-removed.rst
-@@ -4,3 +4,4 @@ ABI removed symbols
- ===================
+ #
+ # Python 2 lacks re.ASCII...
+ #
+@@ -48,6 +50,8 @@ RE_typedef = re.compile(r'\b(typedef)\s+([a-zA-Z_]\w+)', flags=ascii_p3)
+ # an optional extension
+ #
+ RE_doc = re.compile(r'(\bDocumentation/)?((\.\./)*[\w\-/]+)\.(rst|txt)')
++RE_abi_file = re.compile(r'(\bDocumentation/ABI/[\w\-/]+)')
++RE_abi_symbol = re.compile(r'(\b/(sys|config|proc)/[\w\-/]+)')
  
- .. kernel-abi:: removed
-+   :no-files:
-diff --git a/Documentation/admin-guide/abi-stable-files.rst b/Documentation/admin-guide/abi-stable-files.rst
-new file mode 100644
-index 000000000000..f867738fc178
---- /dev/null
-+++ b/Documentation/admin-guide/abi-stable-files.rst
-@@ -0,0 +1,7 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Stable ABI Files
-+================
-+
-+.. kernel-abi:: stable
-+   :no-symbols:
-diff --git a/Documentation/admin-guide/abi-stable.rst b/Documentation/admin-guide/abi-stable.rst
-index 33637c0d4fd5..528c68401f4b 100644
---- a/Documentation/admin-guide/abi-stable.rst
-+++ b/Documentation/admin-guide/abi-stable.rst
-@@ -13,3 +13,4 @@ Most interfaces (like syscalls) are expected to never change and always
- be available.
+ RE_namespace = re.compile(r'^\s*..\s*c:namespace::\s*(\S+)\s*$')
  
- .. kernel-abi:: stable
-+   :no-files:
-diff --git a/Documentation/admin-guide/abi-testing-files.rst b/Documentation/admin-guide/abi-testing-files.rst
-new file mode 100644
-index 000000000000..1da868e42fdb
---- /dev/null
-+++ b/Documentation/admin-guide/abi-testing-files.rst
-@@ -0,0 +1,7 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Testing ABI Files
-+=================
-+
-+.. kernel-abi:: testing
-+   :no-symbols:
-diff --git a/Documentation/admin-guide/abi-testing.rst b/Documentation/admin-guide/abi-testing.rst
-index 55054985a8ff..6153ebd38e2d 100644
---- a/Documentation/admin-guide/abi-testing.rst
-+++ b/Documentation/admin-guide/abi-testing.rst
-@@ -19,3 +19,4 @@ name to the description of these interfaces, so that the kernel
- developers can easily notify them if any changes occur.
+@@ -84,10 +88,14 @@ def markup_refs(docname, app, node):
+     # Associate each regex with the function that will markup its matches
+     #
+     markup_func_sphinx2 = {RE_doc: markup_doc_ref,
++                           RE_abi_file: markup_abi_ref,
++                           RE_abi_symbol: markup_abi_ref,
+                            RE_function: markup_c_ref,
+                            RE_generic_type: markup_c_ref}
  
- .. kernel-abi:: testing
-+   :no-files:
-diff --git a/Documentation/admin-guide/abi.rst b/Documentation/admin-guide/abi.rst
-index 64e772bde943..15a2dcb1388c 100644
---- a/Documentation/admin-guide/abi.rst
-+++ b/Documentation/admin-guide/abi.rst
-@@ -4,6 +4,9 @@
- Linux ABI description
- =====================
+     markup_func_sphinx3 = {RE_doc: markup_doc_ref,
++                           RE_abi_file: markup_abi_ref,
++                           RE_abi_symbol: markup_abi_ref,
+                            RE_function: markup_func_ref_sphinx3,
+                            RE_struct: markup_c_ref,
+                            RE_union: markup_c_ref,
+@@ -270,6 +278,43 @@ def markup_doc_ref(docname, app, match):
+     else:
+         return nodes.Text(match.group(0))
  
-+ABI symbols
-+-----------
++#
++# Try to replace a documentation reference of the form Documentation/ABI/...
++# with a cross reference to that page
++#
++def markup_abi_ref(docname, app, match):
++    stddom = app.env.domains['std']
++    #
++    # Go through the dance of getting an xref out of the std domain
++    #
++    fname = match.group(1)
++    target = kernel_abi.xref(fname)
 +
- .. toctree::
-    :maxdepth: 2
++    # Kernel ABI doesn't describe such file or symbol
++    if not target:
++        return nodes.Text(match.group(0))
++
++    pxref = addnodes.pending_xref('', refdomain = 'std', reftype = 'ref',
++                                  reftarget = target, modname = None,
++                                  classname = None, refexplicit = False)
++
++    #
++    # XXX The Latex builder will throw NoUri exceptions here,
++    # work around that by ignoring them.
++    #
++    try:
++        xref = stddom.resolve_xref(app.env, docname, app.builder, 'ref',
++                                   target, pxref, None)
++    except NoUri:
++        xref = None
++    #
++    # Return the xref if we got it; otherwise just return the plain text.
++    #
++    if xref:
++        return xref
++    else:
++        return nodes.Text(match.group(0))
++
+ def get_c_namespace(app, docname):
+     source = app.env.doc2path(docname)
+     with open(source) as f:
+diff --git a/scripts/get_abi.py b/scripts/get_abi.py
+index 7435ed1071b8..faae51201504 100755
+--- a/scripts/get_abi.py
++++ b/scripts/get_abi.py
+@@ -404,6 +404,17 @@ class AbiParser:
  
-@@ -11,3 +14,15 @@ Linux ABI description
-    abi-testing
-    abi-obsolete
-    abi-removed
+         return desc + "\n\n"
+ 
++    def xref(self, fname):
++        """
++        Converts a Documentation/ABI + basename into a ReST cross-reference
++        """
 +
-+ABI files
-+---------
++        xref = self.file_refs.get(fname)
++        if not xref:
++            return None
++        else:
++            return xref
 +
-+.. toctree::
-+   :maxdepth: 2
-+
-+   abi-readme-file
-+   abi-stable-files
-+   abi-testing-files
-+   abi-obsolete-files
-+   abi-removed-files
+     def desc_rst(self, desc):
+         """Enrich ReST output by creating cross-references"""
+ 
 -- 
 2.48.1
 
