@@ -1,66 +1,61 @@
-Return-Path: <linux-doc+bounces-36217-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36213-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2113DA20234
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:33 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BCB7A20240
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 01:07:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E34A71656F7
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:28 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id AB9341885248
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2025 00:07:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D06351487CD;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C4B2513CA93;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i/GkfumJ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PUuYd/js"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7005B2EAE4;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 871E53BBF0;
 	Tue, 28 Jan 2025 00:06:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738022797; cv=none; b=ADdvoWSiP5hoEZKqZJ7FdjwBlEWGMtWHKvY1R0dtCdH0N9CUz+8GQ536lBBiLwStvSVPiFdVSjugCnvy++HkSqAKCbHdFeAzjQjjYd+ADzsq2aAwNWbrj9Og+bMB7fyy3Yrxh60CKkkN5KBLma2jYAeCfSm8hS1tLlHMHZ2x1CY=
+	t=1738022797; cv=none; b=tBVGvWeTIzLEZ3YUceDp4JM00xRnNzAszPrONSf9xlQc4SIStzxvjap7H6lfbDZ6CQCwvSptGBWml7Pp10gHDNVmGtE8oLGgvvtOcQLBEkcsaJdOd/+sVb9/yjkHRIDmJEr5o7A4r3VCOqW2HERSoTpcGbTIIOFNJvKhQ+Dsta8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1738022797; c=relaxed/simple;
-	bh=mcoeXqisQ9cCp+d9XJhL6+xR7Bjlo3DbBhHTGHu6E1M=;
+	bh=lhhjW4xvN5/JBeiDA+D11vVkCEKozoutHtedahprF+M=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=mb/fBHiIn11oNChQoP4ONXrzQiIIdYy9kgXojCXa/+fkHGXpdCqfv+KaonmTv4ajvYZ7mZbtFEVrSKj/XdqJpifzCjmJi9DTYlCMDfEJxEv+lDFfyU9mmBlc7ZAogryI6LjZAmFe70LoaVzEWgM1cyf0KHNSSaHFs92t/MFeqbs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i/GkfumJ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34C85C2BC87;
+	 MIME-Version; b=IfGAt4ARqVLO0WUbOzsOkL2SAJ4JsYPNspgEOIo6Q9m4vrF/zh6V781eJ4tQ8PYeT74iSBBz05FOAqhm7XAYnscDuwsrRjFQR36YIn+t4rgEbZFv8mGNmsWSo9nuN4hb3PYa8GtvM9svNNpfqkYhzKZXmrb9ThDxS7H1JFz8/Vw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PUuYd/js; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C65DC4AF19;
 	Tue, 28 Jan 2025 00:06:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1738022796;
-	bh=mcoeXqisQ9cCp+d9XJhL6+xR7Bjlo3DbBhHTGHu6E1M=;
+	bh=lhhjW4xvN5/JBeiDA+D11vVkCEKozoutHtedahprF+M=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=i/GkfumJbBhJUTjl4JTzh/iy8mfn9/It3WkKIu3zIlKWvHu0EAtF6V0KNiHIp6yH+
-	 Nl7g3XMYh8T3nAZDYNTH4IsWgzt3chE87YqXd9u+uF18FfHV35y8NvD8p6a4RbE+sy
-	 3P+PnnEql66gkIKL5eGyr2s8R9MZenErrYRqiDBFrVt/BTZQiZPQlq4f7gUAQGt9Su
-	 6QQlsVsVL+nWBVxAkWsloMmi14Efc7VQYDoPiq7r9NTXDpiMLlS+9mIG48m1OcT5tc
-	 ERR8Y/O25a9SGMYM29Wzs5i9jD1k9509j8EMqpHiyXffA3pUqaF/8xbgsh/68tUDkc
-	 FZas3WZRc/ePw==
+	b=PUuYd/jsQG21oCXIUvWXaM+i5S/AFRRfYcDM0Nmtf5pd9XH6kCIyHxASgZ2NQXi8o
+	 ocDDJp0o4069shKBMazBjRbQZc5Y5ZYWcM/rrfjMFXWAGwmLlPJz/Jr++1i1ThIBDY
+	 aCKSau/eb18BgycvmhRDFWry5YwVetB2P/ymyXXLD0+zOfvN7yOfHFJ+4nlPH0Qcgu
+	 VEgDljYtUb7AC1D3jgik17gKbN/VY2OxoXM2L2ykE3xzrEKNzxHcNQI+F/Q74UeK8O
+	 XEgozCpHJz0TvJHOnWzWeWhqB/mvwqP9Z+kW7q2k7AnWYHSwKkRf78Fbytufmb6p1r
+	 xE0e6r6vCAA8A==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tcZ7i-0000000DRMW-1ubB;
+	id 1tcZ7i-0000000DRMb-21eU;
 	Tue, 28 Jan 2025 01:06:34 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <mchehab+huawei@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org
-Subject: [RFC v2 33/38] docs: networking: Allow creating cross-references statistics ABI
-Date: Tue, 28 Jan 2025 01:06:22 +0100
-Message-ID: <cf7ac7aea937893d05874e2381e59274bf2e3fbf.1738020236.git.mchehab+huawei@kernel.org>
+	workflows@vger.kernel.org
+Subject: [RFC v2 34/38] docs: submit-checklist: Allow creating cross-references for ABI README
+Date: Tue, 28 Jan 2025 01:06:23 +0100
+Message-ID: <94b906a3806c667e69b41879fe77e100aaedc917.1738020236.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1738020236.git.mchehab+huawei@kernel.org>
 References: <cover.1738020236.git.mchehab+huawei@kernel.org>
@@ -74,26 +69,26 @@ Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
 Now that Documentation/ABI is processed by automarkup, let it
-generate cross-references for the corresponding ABI file.
+generate cross-references for the ABI README file.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/networking/statistics.rst | 2 +-
+ Documentation/process/submit-checklist.rst | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/networking/statistics.rst b/Documentation/networking/statistics.rst
-index 75e017dfa825..518284e287b0 100644
---- a/Documentation/networking/statistics.rst
-+++ b/Documentation/networking/statistics.rst
-@@ -143,7 +143,7 @@ reading multiple stats as it internally performs a full dump of
- and reports only the stat corresponding to the accessed file.
+diff --git a/Documentation/process/submit-checklist.rst b/Documentation/process/submit-checklist.rst
+index e531dd504b6c..827566872567 100644
+--- a/Documentation/process/submit-checklist.rst
++++ b/Documentation/process/submit-checklist.rst
+@@ -52,7 +52,7 @@ Provide documentation
+ 4) All new module parameters are documented with ``MODULE_PARM_DESC()``
  
- Sysfs files are documented in
--`Documentation/ABI/testing/sysfs-class-net-statistics`.
-+Documentation/ABI/testing/sysfs-class-net-statistics.
+ 5) All new userspace interfaces are documented in ``Documentation/ABI/``.
+-   See ``Documentation/ABI/README`` for more information.
++   See Documentation/ABI/README for more information.
+    Patches that change userspace interfaces should be CCed to
+    linux-api@vger.kernel.org.
  
- 
- netlink
 -- 
 2.48.1
 
