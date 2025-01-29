@@ -1,99 +1,107 @@
-Return-Path: <linux-doc+bounces-36370-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36376-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 763AAA22324
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 18:39:42 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 95FD0A2238A
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 19:03:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 951583A4991
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 17:39:34 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id F0B1918837B2
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 18:03:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE2431E130F;
-	Wed, 29 Jan 2025 17:39:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ikzlJ2rs"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 686D6190696;
+	Wed, 29 Jan 2025 18:03:10 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B63661E0DBB;
-	Wed, 29 Jan 2025 17:39:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4704418F2DD;
+	Wed, 29 Jan 2025 18:03:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738172365; cv=none; b=LteXLKJpZ/d9tCFGQ+Omk6t+eug/bKM0JIGhcd4BTjCvpslI5Hys61Je83CKcjvVSVStd/r1IxYDLIpmU2XIfcX+q1xMNaWfQlMocI0Xnyypcy/cisK7FgK7vt127OQa1AC8Gn6q4hZJNHUsqeMzW51kpeGW+jzdBlO3HT1b45g=
+	t=1738173790; cv=none; b=QaiDOPW24WJTnGrMgxVzrb4WFNlExc98ddknoZLCbSSX6xzu23A6nnuuMiU8NeBM29yyxyqbXVUbbdLZ1gJMLcrPz+RfHcckRSektMNr4aVdiBqroM3sy1m/HIyWZRcjnt3hFynYJHz2nfQwTznqqSgUIvGc5xPl0t33pasCle8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738172365; c=relaxed/simple;
-	bh=Bf+Ggk8s+xK2k5MzAXCalrt+2SfIZ618nd+Uv3woYI4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=R9k6A3SDqN+nHySKjSoMtQfHWCAu+8Iim8rySHF/JcFUJe0fe60QcAj9yq1xjMhs+oVbrgatF6AL6IRI0wD5a3CIEm9NlZE9lX1ZrF0rRwF//uXMj0wLid1vIMFeghYymg10ZhzqEyuczb5/5wW/OrF2sSnJNis0MFv0xIS5pek=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ikzlJ2rs; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34B46C4CED3;
-	Wed, 29 Jan 2025 17:39:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1738172365;
-	bh=Bf+Ggk8s+xK2k5MzAXCalrt+2SfIZ618nd+Uv3woYI4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ikzlJ2rsHjfSBYSlm2K8x+TfqqtEA/XQnvpAAB5h8weSFtcNW8pc77Zl/IG+G4LVG
-	 RqqDfQ8kVI83/BUFlOZ5UjK4ejFLsALKUIn35Ylx0oAAy+34U/BuRr/pPNwz9OMUTF
-	 e+EqnDHbLOuuZb0HNqRZZ7ve+uGVpJb1b8BHCAEip51OHEhrRP7RUD0NUtt3TTo7oB
-	 75orjCQP+Xq0V0xrDXjiDo0fdjN2WAYpkZ9nEB3MHq1SmRaDbmYhUoQDTXoVNs0rMb
-	 7lTu48eRyCc9lpD4nJg4xJhf0NH/M3QNgwZStvSyGO+zn979INdM04UUHIIulHTNIY
-	 kWFTArdEforHw==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tdC26-00000004SdY-3lej;
-	Wed, 29 Jan 2025 18:39:22 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	H Hartley Sweeten <hsweeten@visionengravers.com>,
-	Ian Abbott <abbotti@mev.co.uk>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 6/6] comedi: convert_csv_to_c.py: use r-string for a regex expression
-Date: Wed, 29 Jan 2025 18:39:08 +0100
-Message-ID: <522019263c16fbee2df8ddbcad2f4d5294ce0122.1738171937.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.1738171937.git.mchehab+huawei@kernel.org>
-References: <cover.1738171937.git.mchehab+huawei@kernel.org>
+	s=arc-20240116; t=1738173790; c=relaxed/simple;
+	bh=Qe/SoOU9qTRy3XGlqsp4aCT1VN6ykWQ0c1bYiG7F840=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fBsZ0JkWHLEct5MBUaw2mqrkqB96MAO2/KDfCCR/PKqnHzaZLRy0g8ZdEOEsfLrUL5XMxfHnhEnlrden8i5N6wSFLeoOAqXwFuFdJVXdcNLvSJ/xAnTRfUaIa8d1CvcAd1sclfv1LNFGjuqwdqEmwdm/yLfzKo5HaTDzZHe4IiU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88272C4CED1;
+	Wed, 29 Jan 2025 18:03:07 +0000 (UTC)
+Date: Wed, 29 Jan 2025 18:03:05 +0000
+From: Catalin Marinas <catalin.marinas@arm.com>
+To: Anshuman Khandual <anshuman.khandual@arm.com>
+Cc: Rob Herring <robh@kernel.org>, Marc Zyngier <maz@kernel.org>,
+	linux-arm-kernel@lists.infradead.org, Will Deacon <will@kernel.org>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Oliver Upton <oliver.upton@linux.dev>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Eric Auger <eric.auger@redhat.com>, kvmarm@lists.linux.dev,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/7] arm64/boot: Enable EL2 requirements for FEAT_PMUv3p9
+Message-ID: <Z5ptWRqZVI8grz6e@arm.com>
+References: <20241220072240.1003352-1-anshuman.khandual@arm.com>
+ <20250102160402.GB3990035-robh@kernel.org>
+ <Z30adHnQ7ZFaU9UR@arm.com>
+ <CAL_JsqLLnh1o4L1=PpNt5brBwZZCgp7mOygByOYakchrzc29Ow@mail.gmail.com>
+ <86wmf5wo8u.wl-maz@kernel.org>
+ <CAL_JsqKKiEOj=a1k6U-bB0F6-ht7QokDnh3bspHupp-QG=haSg@mail.gmail.com>
+ <Z4kmlhnlpKjS_MII@arm.com>
+ <CAL_JsqK1k7fG=yDZSbTbV63yRP5U9=GpuAiv=NWZJWdppUtRwA@mail.gmail.com>
+ <7f5c68c7-8036-4d18-950f-80e55ac8ea11@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+In-Reply-To: <7f5c68c7-8036-4d18-950f-80e55ac8ea11@arm.com>
 
-Modern Python versions complain about usage of "\" inside normal
-strings, as they should use r-string notation.
+On Tue, Jan 28, 2025 at 02:41:17PM +0530, Anshuman Khandual wrote:
+> On 1/18/25 03:37, Rob Herring wrote:
+> > On Thu, Jan 16, 2025 at 9:32 AM Catalin Marinas <catalin.marinas@arm.com> wrote:
+> >>
+> >> On Wed, Jan 08, 2025 at 07:47:16AM -0600, Rob Herring wrote:
+> >>> On Wed, Jan 8, 2025 at 5:15 AM Marc Zyngier <maz@kernel.org> wrote:
+> >>>> On Tue, 07 Jan 2025 22:13:47 +0000,
+> >>>> Rob Herring <robh@kernel.org> wrote:
+> >>>>> On Tue, Jan 7, 2025 at 6:13 AM Catalin Marinas <catalin.marinas@arm.com> wrote:
+> >>>>>> But does KVM actually expose the feature to EL1 in ID_AA64DFR1_EL1 and
+> >>>>>> than traps it at EL2?
+> >>>>>
+> >>>>> As Marc pointed out KVM only advertises PMUv3.8. Regardless, guest
+> >>>>> accesses to these registers are trapped with or without this series.
+> >>>>
+> >>>> And most probably generates a nice splat in the kernel log, as nobody
+> >>>> updated KVM to handle *correctly* PMICNTR_EL0 traps, let alone deal
+> >>>> with the FGT2 registers.
+> >>>
+> >>> Isn't that this series[1]? Should that have come first, I guess I know
+> >>> that *now*.
+> >> [...]
+> >>> [1] https://lore.kernel.org/all/20241210055311.780688-1-anshuman.khandual@arm.com/
+> >>
+> >> It's not any clearer to me. Does this series depend on the 46-patch one?
+> >> Or, if we had the other, is this no longer needed? Or none of these,
+> >> they are independent.
+> > 
+> > They are independent. I think ideally we'd want everything landing at
+> > the same time, but we're past ideal at this point. Without this
+> > series, if someone uses PMU on v8.9 and firmware enabled FGT2, then
+> > the kernel will crash. Without the above series, KVM will have
+> > warnings in the kernel log, but otherwise function.
+> 
+> Right, they are independent. Just that Rob had observed this PMU v3.8 boot
+> requirement while reviewing the HW breakpoint series earlier. I should just
+> respin this series after the upcoming v6.14-rc1 release is out ?
 
-Change the annotations there to avoid such warnings:
+They may apply cleanly but please do rebase and repost at -rc1. Thanks.
 
-	drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py:47: SyntaxWarning: invalid escape sequence '\('
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py b/drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py
-index 90378fb50580..d19101fc2a94 100755
---- a/drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py
-+++ b/drivers/comedi/drivers/ni_routing/tools/convert_csv_to_c.py
-@@ -44,7 +44,7 @@ def routedict_to_structinit_single(name, D, return_name=False):
- 
-     lines.append('\t\t[B({})] = {{'.format(D0_sig))
-     for D1_sig, value in D1:
--      if not re.match('[VIU]\([^)]*\)', value):
-+      if not re.match(r'[VIU]\([^)]*\)', value):
-         sys.stderr.write('Invalid register format: {}\n'.format(repr(value)))
-         sys.stderr.write(
-           'Register values should be formatted with V(),I(),or U()\n')
 -- 
-2.48.1
-
+Catalin
 
