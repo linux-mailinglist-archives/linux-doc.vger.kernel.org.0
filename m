@@ -1,85 +1,64 @@
-Return-Path: <linux-doc+bounces-36353-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36358-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39C3CA2213B
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 17:07:03 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E060A22148
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 17:10:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2F9273A5683
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 16:06:55 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id BBCDC167AC0
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 16:10:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B84F19D886;
-	Wed, 29 Jan 2025 16:06:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26F5F1DF268;
+	Wed, 29 Jan 2025 16:10:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ho3vG5xo"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NCc7PtcT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14A0928EB;
-	Wed, 29 Jan 2025 16:06:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFB0F1DEFDD;
+	Wed, 29 Jan 2025 16:09:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738166818; cv=none; b=omTbE+HU0+sXM4SW8fxUzZ1HwvBr8CLl77dRyyHUEoC5ZScqdUCH+YMejeb5f+vibFAnsqwKQsZYqx8Xs2eDdM1nlsmjpHd/14nAPgKiGZbZGCSAYIA2wmswL9N8CzqEm/zf/2bT6Pu7IOfco+t2snKj2XBU3kNCiZFo2Ngu23g=
+	t=1738167000; cv=none; b=BVwyomfgfs0Kkv3Qsyk/sKFexy6pJNLdfk49ZmLvqlpYvfOTYXFtD70249xkrfxwxAqZbjw63ZPlZMdXkjU0HZkH5/LJNKK6ie5mLuOKN363QSWuBO4sZMxYlj+T3asmvBm4cjmDfzokWUOdhPAebbUwxz3b9MoCc3EytNs5k1s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738166818; c=relaxed/simple;
-	bh=Ecivcz2EpmTYtj0aLmMLV4QXgigozns71zMzNZMsAOw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=K3z3ac51pTaGHUxhf3iRrcoivByKdQAOUmoBiGqET+fxPBgM3wLGBWgIQIx2JvuAKbYmIcSxuCGBD41GOr7mWhCj8s/xQXDcTLq0oPTN0fbXLtc9NHVx2mHK8zqClbUVRDX4H6G4fnhbN4PcvZwmh2AgMpivMtPVHJNzJ1ww5Bw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ho3vG5xo; arc=none smtp.client-ip=209.85.219.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qv1-f45.google.com with SMTP id 6a1803df08f44-6d89a727a19so9097906d6.0;
-        Wed, 29 Jan 2025 08:06:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738166814; x=1738771614; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AgHT85OlqmMPdqV+gRIR6NwYAZDBMUnVc2fvUkRzod8=;
-        b=ho3vG5xoYm0VdRXfLSV406S9mu/K54P9Hmtj3/pRGccS7pcb4q8QuIGFlc2uVW0N2g
-         OPhQtKaDrWpSgIhJ9l4Y0d5Lqry2HxtxkZ773ucE0+B8a4fPAynBsSMM/dxAq34LlW5M
-         3xfG9PtMbFFI4UU7yHUSurf/tu84IZh6InFz3NlG+R6vHMwu1vLjgwrhcMRVWzislE6P
-         uThdjoCWo/k56HP3ptT804l0/V800pLS5dkFwGiG9WMdh9uM7w+6RxlBhy1tdrrlWbCi
-         +VYCJaeIBrIB0TaA5tT7x7Yajz8qC8xk+wob/eI8RFKTTQXlSYlcz3arA3GQOdJmswMk
-         kwVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738166814; x=1738771614;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=AgHT85OlqmMPdqV+gRIR6NwYAZDBMUnVc2fvUkRzod8=;
-        b=to9+EokPrIdraLBwNxRGCOl3Fdr80ZhXAXuzhi499kt43bTaLug8Hz+LlLMZs1QH45
-         XPv/7Y4ywNAehzIROhxcs2LZqgsj6n3KJZeXKLb0+yj6NnyPHyUJJmcjluxGK98O4cm8
-         Z6lUbqetxwx9JTsciJcAewJyj1yIAnzkW7n7CWzohkwrA+l1608Ujfgtlp+gpgG6qVMc
-         Rfzkq3g631P8dq5bqFM1kH3T56vqYN9HwM+3ToiVSmc5FjydpWhz5tbC1LWWjYDT2klU
-         Q5MT8Vhhdsy5/yN/f6WeZKsvguh2XCN25h5xS1qAnZiWhFGlW3gOFA/4jrmNYw2Xt8Wp
-         Zlbw==
-X-Forwarded-Encrypted: i=1; AJvYcCUD6c7iiZnSL1P7VCg0UWyCswehDxdrHT3flgtYKV5juoJBt+kaAYQ8Jkym3HYEhLc2hds+DlAAHRoIMik=@vger.kernel.org, AJvYcCVTtN4d1cjeJ+GupnTsQmlVzi1nunvNLlOuIBxf0L1fM6NcLwesz9S+fQqea60vd9IcS8RcwpNd@vger.kernel.org
-X-Gm-Message-State: AOJu0YwnrrymFS5jxKGHaqFR+2IIwpCjx+txp1oX3yPMMnSpF2sTav1K
-	k2Ht89pklgBQE2dT5SHll1aZHU5GH6zqZh1vem0ylkLn2VmkyLGm+wocgZSH
-X-Gm-Gg: ASbGncuw30R/7peqJFH0Q2CCrj6o3zdDaj5SjYYf46/8nciJ2G6pH+5O26702M8cwHe
-	pr1gC42wjFY82ObWX9JffYpGerInN1zFcSFTSHluLk46rWs/NE9aFxiyVeH03uucF7r1xP0F6rF
-	ZG9q2YdvCJw0VZ6LEXpv0aI+yRoVrgS+mshsI3/ULFuZTZyf5vpDF19gBwgYgFy3XdsEif/vGtm
-	T9isVbYV6s8ptLnUROwGWJQFhr/nqZle4+8b8gW52ax7AfSoA98rzcLYcb0dOyV7lm9UwgRCU64
-	6YzhMCgTp/KfHV/tmP/TUolr++4=
-X-Google-Smtp-Source: AGHT+IGueeSh0TNlqU5a5NaxxtENZTa+bqdb2MKkY2+cx5MGE39WXQJ1wuXSKGsj7szUhmimdiQThA==
-X-Received: by 2002:a05:620a:258a:b0:7b6:dd11:5e5f with SMTP id af79cd13be357-7bff3f81dbcmr1216204885a.13.1738166814430;
-        Wed, 29 Jan 2025 08:06:54 -0800 (PST)
-Received: from workstation.redhat.com ([90.168.92.125])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-7be9ae992e7sm635748085a.61.2025.01.29.08.06.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jan 2025 08:06:53 -0800 (PST)
-From: Andreas Karis <ak.karis@gmail.com>
-To: linux-doc@vger.kernel.org
-Cc: ak.karis@gmail.com,
+	s=arc-20240116; t=1738167000; c=relaxed/simple;
+	bh=wrF7qMccEyKNan3FB8Tt10O3BrSPD0Q4GiM29XidLhM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ssLyoRJzI6n8rVBm8T6YxkhXMQQHqru5qM1VoIbk1YzEMzYMU2unowA9eKU6q3sA+H0X/JiM9kimuZEuBzz/Os1GqklE1C0Z0jWjasVK611oDx9VEE/7ndT0EK2xByyY1sBNgHipAxiP5xyy/GzMlNOoL0QYnkRmif8ePcS4qdk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NCc7PtcT; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77D64C4CEDF;
+	Wed, 29 Jan 2025 16:09:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1738166999;
+	bh=wrF7qMccEyKNan3FB8Tt10O3BrSPD0Q4GiM29XidLhM=;
+	h=From:To:Cc:Subject:Date:From;
+	b=NCc7PtcTasnn+/Ta9YKRefURozpAQ4hFxrEPwv4ko4vmtQBT6SEP/sOVk4mELGsRv
+	 xm2LN1dltCLvSrTHkE8BzKDFcYYTjMZjS5x4xivc4foKeM58dIkgi6a8aFbq+FOHw2
+	 SjWh7e1T/gxlqFEd/+T2U2POwsTpESGh2LmTKYAKwoFVNzfj2u7v2ZL7IB9agF/hv8
+	 wBKYE0cgXb8eIcylKUcPSQBnTOgTQIbln9tSAkZ604PgaZS8JASqgNxjsSKOIOOirb
+	 PBKgeKgUNkjG8yKlo50UXP9tY1dTetqVDm+ZWlHesMlwvv7CrvGXjRxFSYqX/meNLC
+	 5+lHInqObjqNA==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1tdAdZ-00000004PEH-1WJn;
+	Wed, 29 Jan 2025 17:09:57 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+	"Jonathan Corbet" <corbet@lwn.net>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	davem@davemloft.net,
-	netdev@vger.kernel.org,
-	corbet@lwn.net
-Subject: [PATCH] docs: networking: Remove VLAN_TAG_PRESENT from openvswitch doc
-Date: Wed, 29 Jan 2025 17:06:25 +0100
-Message-ID: <20250129160625.97979-1-ak.karis@gmail.com>
+	Bill Wendling <morbo@google.com>,
+	Justin Stitt <justinstitt@google.com>,
+	Nick Desaulniers <ndesaulniers@google.com>,
+	bpf@vger.kernel.org,
+	llvm@lists.linux.dev,
+	workflows@vger.kernel.org
+Subject: [RFC 0/6] Raise the bar with regards to Python and Sphinx requirements
+Date: Wed, 29 Jan 2025 17:09:31 +0100
+Message-ID: <cover.1738166451.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -88,38 +67,71 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Since commit 0c4b2d370514cb4f3454dd3b18f031d2651fab73
-("net: remove VLAN_TAG_PRESENT"), the kernel no longer sets the DEI/CFI
-bit in __vlan_hwaccel_put_tag to indicate the presence of a VLAN tag.
-Update the openvswitch documentation which still contained an outdated
-reference to this mechanism.
+This series comes after https://lore.kernel.org/linux-doc/87a5b96296.fsf@trenco.lwn.net/T/#t
+It  increases the minimal requirements for Sphinx and Python.
 
-Signed-off-by: Andreas Karis <ak.karis@gmail.com>
----
- Documentation/networking/openvswitch.rst | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+Sphinx release dates:
 
-diff --git a/Documentation/networking/openvswitch.rst b/Documentation/networking/openvswitch.rst
-index 1a8353dbf1b6..5699bbadea47 100644
---- a/Documentation/networking/openvswitch.rst
-+++ b/Documentation/networking/openvswitch.rst
-@@ -230,11 +230,9 @@ an all-zero-bits vlan and an empty encap attribute, like this::
-     eth(...), eth_type(0x8100), vlan(0), encap()
- 
- Unlike a TCP packet with source and destination ports 0, an
--all-zero-bits VLAN TCI is not that rare, so the CFI bit (aka
--VLAN_TAG_PRESENT inside the kernel) is ordinarily set in a vlan
--attribute expressly to allow this situation to be distinguished.
--Thus, the flow key in this second example unambiguously indicates a
--missing or malformed VLAN TCI.
-+all-zero-bits VLAN TCI is not that rare and the flow key in
-+this second example cannot indicate a missing or malformed
-+VLAN TCI.
- 
- Other rules
- -----------
+	Release 2.4.0 (released Feb 09, 2020)
+	Release 2.4.4 (released Mar 05, 2020) (current minimal requirement)
+	Release 3.4.0 (released Dec 20, 2020)
+	Release 3.4.3 (released Jan 08, 2021)
+
+	(https://www.sphinx-doc.org/en/master/changes/index.html)
+
+In terms of Python, we're currently at 3.5:
+
+	Python	Release date 
+	3.5	2015-09-13    (current minimal requirement)
+	3.6	2016-12-23
+	3.7 	2018-06-27
+	3.8 	2019-10-14
+	3.9 	2020-10-05
+	3.10	2021-10-04
+
+	(according with https://en.wikipedia.org/w/index.php?title=History_of_Python)
+
+The new minimal requirements are now:
+	- Sphinx 3.4.3;
+	- Python 3.9
+
+The new Sphinx minimal requirement allows dropping all backward-compatible code
+we have at kernel-doc and at Sphinx extensions.
+
+The new Python minimal requirement matches the current required level for
+all scripts but one (*). The one that doesn't match is at tools/net/sunrpc/xdrgen.
+
+Those matches a 4-years old toolchain, which sounds a reasonable period
+of time, as Python/Sphinx aren't required for the Kernel build.
+
+Mauro Carvalho Chehab (6):
+  scripts/get_abi.py: make it backward-compatible with Python 3.6
+  docs: extensions: don't use utf-8 syntax for descriptions
+  docs: automarkup: drop legacy support
+  scripts/kernel-doc: drop Sphinx version check
+  docs: changes: update Sphinx minimal version to 3.4.3
+  doc: changes: update Python minimal version
+
+ Documentation/conf.py                       |   2 +-
+ Documentation/process/changes.rst           |   4 +-
+ Documentation/sphinx/automarkup.py          |  32 ++---
+ Documentation/sphinx/cdomain.py             |   7 +-
+ Documentation/sphinx/kernel_abi.py          |   6 +-
+ Documentation/sphinx/kernel_feat.py         |   4 +-
+ Documentation/sphinx/kernel_include.py      |   4 +-
+ Documentation/sphinx/kerneldoc.py           |   5 -
+ Documentation/sphinx/kfigure.py             |  10 +-
+ Documentation/sphinx/load_config.py         |   2 +-
+ Documentation/sphinx/maintainers_include.py |   4 +-
+ Documentation/sphinx/rstFlatTable.py        |  10 +-
+ scripts/get_abi.py                          |  16 ++-
+ scripts/kernel-doc                          | 129 +++-----------------
+ 14 files changed, 58 insertions(+), 177 deletions(-)
+
 -- 
 2.48.1
+
 
 
