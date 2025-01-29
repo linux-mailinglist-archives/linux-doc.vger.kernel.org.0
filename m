@@ -1,59 +1,61 @@
-Return-Path: <linux-doc+bounces-36354-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36359-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB1F9A22144
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 17:10:10 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id A6C1BA2214C
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 17:10:29 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3A8BC16565B
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 16:10:09 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0AEF63A361F
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 16:10:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 144AB1DF24A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 94F921DF96B;
 	Wed, 29 Jan 2025 16:10:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mjA+ZtGu"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l9cZqgMj"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFA811DEFD6;
-	Wed, 29 Jan 2025 16:09:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BDF01DF749;
+	Wed, 29 Jan 2025 16:10:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738167000; cv=none; b=DEH9GVp2sQGNjoVaOPYpqpyqorcEXfx9LN2sEPEei9IwxiWiVNE8EIRiHqqmEy6U1mDdu3haMSqq7bAmM1sP8m5Tw36Xslab6du+m/VgQW0uBnl/KlHVwnmMWrOARewl4yfsEAiyHAs1TVR9/Xpn6G6TZiFCRaDFB2UYsqx5jwE=
+	t=1738167000; cv=none; b=gMnj1QTeO/K/rXWP2oJEUDNlveggC7ODZWddipSzHz1hZx4IiL1kMRgq7M5M2vvFTeWyiSH7uEDHhITIVTI+qogBYUY2rlHkDWQgcjFgcPb72xaudATTVwYSWpgvT6XmV7NxERR4D5EVSbd8U/IEg9S6546DMWN5TOeJ4eOJbcM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1738167000; c=relaxed/simple;
-	bh=GrjMjuoBldG0YBxJhhKh6xKhPGHktjhoxv5+WyCxFXo=;
+	bh=JR+LoyWBONX0t+AvCP4BfO6EcwJt+jCG4HP5PgBpHDE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=qUPYHwJDTItBqgmV90vDbQ17XuOl032F2S2pGxPlu0iI3bpzDqfgqV58ssNA/WZVOSFJhQGLH4SMukxvtvAmWbwf6JBPy7HKmYBfZNReO8TU6umdYDSdIaYj2qAQDvW2TlFF4I4EADncoYjpc/iMRq3irg8kbE/7FKzY5H+xwhQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mjA+ZtGu; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F304C4CED3;
+	 MIME-Version; b=CTdy/ROZykJ3+bTgpe2r+hfcj7VgSutbVnksszMkMWGvQ8qXo/ZZbiFGhUkojYxhvCZYGRfGnPTkYzGWhLhltFlx8YkSQHFztxtkQwUpcqMcjLCxSGNGbxA5f0VaObiOaCPs+tVfKaLPDEzdxV8skfATUOmb10ckPr4qg/dUgS8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l9cZqgMj; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F4E1C4AF09;
 	Wed, 29 Jan 2025 16:09:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1738166999;
-	bh=GrjMjuoBldG0YBxJhhKh6xKhPGHktjhoxv5+WyCxFXo=;
+	bh=JR+LoyWBONX0t+AvCP4BfO6EcwJt+jCG4HP5PgBpHDE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=mjA+ZtGuPSLlwIHm4vTZ+NmhNhpJczu8vHLjr81KsC6KbUTkU2MufBJSbj7UnTNra
-	 vnh2EPuqWhrNW0EK/RR2vd0Wr/QulxBN7slt5FQ7PvnfZ1dXluSpW2cf1thwRp6eg6
-	 JrjX9no43DYnznHQXiOAQ6tkegAYQ608a3oj1OwWc6GoqbIuhFLZADtaXP52EeS2WT
-	 D5IEwIGMZa7TYT53PsfKt8sjr9I2OdPSLVhHZfMN+pnsHmBaLK8wyIQ40KEm41r6q1
-	 aYUmHCzYRn5awHfXt5PcyDXXF98YaB/ROSKr9ZUCf7dAex0sdOpzWAf4lf10Lo9bvV
-	 22ARUVsehJrrg==
+	b=l9cZqgMjUvaZpPlH8lTzAZvTP+z9CAciq4DnspSLcwW2QEUz0DekMpmPrIAXbtW5d
+	 O6HtYqtnuXlmLMOnpdGgTHqkRiVEkdXVS4vNmdkrOr7m+DUx2IY/Xpe5gjn1CvTjod
+	 hC3yj3LJSvVb/eQs84eXbPGDSxYXsm2lphv6CeLT+1R51wMKHQttfDr5ymPiVfR7VI
+	 IDF3jrs0pNGUQa0F42GJ65BoyIUpxASqDDZ7W3f/o0cjokqD3btp9ADYxEcTQKkOvD
+	 mcD/fF8GwLFCMwfab5sY0u47/8W7U1jc9Mf9RFGL33Kui8bSgP8aw2gwgGemF4jB+P
+	 EDZ8lcUzJvckg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tdAdZ-00000004PES-1sJO;
+	id 1tdAdZ-00000004PEW-1zNR;
 	Wed, 29 Jan 2025 17:09:57 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	"Jonathan Corbet" <corbet@lwn.net>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Vegard Nossum <vegard.nossum@oracle.com>,
 	linux-kernel@vger.kernel.org
-Subject: [RFC 3/6] docs: automarkup: drop legacy support
-Date: Wed, 29 Jan 2025 17:09:34 +0100
-Message-ID: <748e0f011eb9be114737851094ad3a3406412244.1738166451.git.mchehab+huawei@kernel.org>
+Subject: [RFC 4/6] scripts/kernel-doc: drop Sphinx version check
+Date: Wed, 29 Jan 2025 17:09:35 +0100
+Message-ID: <622e92a09daa6b4ecfa124c6c4232c1d970c3abe.1738166451.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1738166451.git.mchehab+huawei@kernel.org>
 References: <cover.1738166451.git.mchehab+huawei@kernel.org>
@@ -66,92 +68,268 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Python 2 is already EOL for quite some time. Drop support for
-it.
-
-Also, the minimal Sphinx version is now 3.4.3. So, we can drop
-support for Sphinx < 3.
+As the current minimal supported Sphinx version is 3.4.3, drop
+support for older versions.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/sphinx/automarkup.py | 32 +++++++-----------------------
- 1 file changed, 7 insertions(+), 25 deletions(-)
+ Documentation/sphinx/cdomain.py   |   3 -
+ Documentation/sphinx/kerneldoc.py |   5 --
+ scripts/kernel-doc                | 129 ++++--------------------------
+ 3 files changed, 16 insertions(+), 121 deletions(-)
 
-diff --git a/Documentation/sphinx/automarkup.py b/Documentation/sphinx/automarkup.py
-index 03bb7020f5cb..ecf54d22e9dc 100644
---- a/Documentation/sphinx/automarkup.py
-+++ b/Documentation/sphinx/automarkup.py
-@@ -13,14 +13,6 @@ from itertools import chain
+diff --git a/Documentation/sphinx/cdomain.py b/Documentation/sphinx/cdomain.py
+index 6596fd00663f..e8ea80d4324c 100644
+--- a/Documentation/sphinx/cdomain.py
++++ b/Documentation/sphinx/cdomain.py
+@@ -45,9 +45,6 @@ import re
  
- from kernel_abi import get_kernel_abi
+ __version__  = '1.1'
  
--#
--# Python 2 lacks re.ASCII...
--#
--try:
--    ascii_p3 = re.ASCII
--except AttributeError:
--    ascii_p3 = 0
+-# Get Sphinx version
+-major, minor, patch = sphinx.version_info[:3]
 -
- #
- # Regex nastiness.  Of course.
- # Try to identify "function()" that's not already marked up some
-@@ -28,22 +20,22 @@ except AttributeError:
- # :c:func: block (i.e. ":c:func:`mmap()`s" flakes out), so the last
- # bit tries to restrict matches to things that won't create trouble.
- #
--RE_function = re.compile(r'\b(([a-zA-Z_]\w+)\(\))', flags=ascii_p3)
-+RE_function = re.compile(r'\b(([a-zA-Z_]\w+)\(\))', flags=re.ASCII)
+ # Namespace to be prepended to the full name
+ namespace = None
  
- #
- # Sphinx 2 uses the same :c:type role for struct, union, enum and typedef
- #
- RE_generic_type = re.compile(r'\b(struct|union|enum|typedef)\s+([a-zA-Z_]\w+)',
--                             flags=ascii_p3)
-+                             flags=re.ASCII)
+diff --git a/Documentation/sphinx/kerneldoc.py b/Documentation/sphinx/kerneldoc.py
+index be5b8fbf373f..39ddae6ae7dd 100644
+--- a/Documentation/sphinx/kerneldoc.py
++++ b/Documentation/sphinx/kerneldoc.py
+@@ -62,11 +62,6 @@ class KernelDocDirective(Directive):
+         env = self.state.document.settings.env
+         cmd = [env.config.kerneldoc_bin, '-rst', '-enable-lineno']
  
- #
- # Sphinx 3 uses a different C role for each one of struct, union, enum and
- # typedef
- #
--RE_struct = re.compile(r'\b(struct)\s+([a-zA-Z_]\w+)', flags=ascii_p3)
--RE_union = re.compile(r'\b(union)\s+([a-zA-Z_]\w+)', flags=ascii_p3)
--RE_enum = re.compile(r'\b(enum)\s+([a-zA-Z_]\w+)', flags=ascii_p3)
--RE_typedef = re.compile(r'\b(typedef)\s+([a-zA-Z_]\w+)', flags=ascii_p3)
-+RE_struct = re.compile(r'\b(struct)\s+([a-zA-Z_]\w+)', flags=re.ASCII)
-+RE_union = re.compile(r'\b(union)\s+([a-zA-Z_]\w+)', flags=re.ASCII)
-+RE_enum = re.compile(r'\b(enum)\s+([a-zA-Z_]\w+)', flags=re.ASCII)
-+RE_typedef = re.compile(r'\b(typedef)\s+([a-zA-Z_]\w+)', flags=re.ASCII)
- 
- #
- # Detects a reference to a documentation page of the form Documentation/... with
-@@ -87,13 +79,8 @@ def markup_refs(docname, app, node):
-     #
-     # Associate each regex with the function that will markup its matches
-     #
--    markup_func_sphinx2 = {RE_doc: markup_doc_ref,
--                           RE_abi_file: markup_abi_file_ref,
--                           RE_abi_symbol: markup_abi_ref,
--                           RE_function: markup_c_ref,
--                           RE_generic_type: markup_c_ref}
- 
--    markup_func_sphinx3 = {RE_doc: markup_doc_ref,
-+    markup_func = {RE_doc: markup_doc_ref,
-                            RE_abi_file: markup_abi_file_ref,
-                            RE_abi_symbol: markup_abi_ref,
-                            RE_function: markup_func_ref_sphinx3,
-@@ -103,11 +90,6 @@ def markup_refs(docname, app, node):
-                            RE_typedef: markup_c_ref,
-                            RE_git: markup_git}
- 
--    if sphinx.version_info[0] >= 3:
--        markup_func = markup_func_sphinx3
--    else:
--        markup_func = markup_func_sphinx2
+-        # Pass the version string to kernel-doc, as it needs to use a different
+-        # dialect, depending what the C domain supports for each specific
+-        # Sphinx versions
+-        cmd += ['-sphinx-version', sphinx.__version__]
 -
-     match_iterators = [regex.finditer(t) for regex in markup_func]
-     #
-     # Sort all references by the starting position in text
+         filename = env.config.kerneldoc_srctree + '/' + self.arguments[0]
+         export_file_patterns = []
+ 
+diff --git a/scripts/kernel-doc b/scripts/kernel-doc
+index 4ee843d3600e..84242c117ab9 100755
+--- a/scripts/kernel-doc
++++ b/scripts/kernel-doc
+@@ -26,7 +26,7 @@ kernel-doc - Print formatted kernel documentation to stdout
+ 
+  kernel-doc [-h] [-v] [-Werror] [-Wall] [-Wreturn] [-Wshort-desc[ription]] [-Wcontents-before-sections]
+    [ -man |
+-     -rst [-sphinx-version VERSION] [-enable-lineno] |
++     -rst [-enable-lineno] |
+      -none
+    ]
+    [
+@@ -130,7 +130,6 @@ if ($#ARGV == -1) {
+ }
+ 
+ my $kernelversion;
+-my ($sphinx_major, $sphinx_minor, $sphinx_patch);
+ 
+ my $dohighlight = "";
+ 
+@@ -347,23 +346,6 @@ while ($ARGV[0] =~ m/^--?(.*)/) {
+         $enable_lineno = 1;
+     } elsif ($cmd eq 'show-not-found') {
+         $show_not_found = 1;  # A no-op but don't fail
+-    } elsif ($cmd eq "sphinx-version") {
+-        my $ver_string = shift @ARGV;
+-        if ($ver_string =~ m/^(\d+)(\.\d+)?(\.\d+)?/) {
+-            $sphinx_major = $1;
+-            if (defined($2)) {
+-                $sphinx_minor = substr($2,1);
+-            } else {
+-                $sphinx_minor = 0;
+-            }
+-            if (defined($3)) {
+-                $sphinx_patch = substr($3,1)
+-            } else {
+-                $sphinx_patch = 0;
+-            }
+-        } else {
+-            die "Sphinx version should either major.minor or major.minor.patch format\n";
+-        }
+     } else {
+         # Unknown argument
+         pod2usage(
+@@ -387,8 +369,6 @@ while ($ARGV[0] =~ m/^--?(.*)/) {
+ 
+ # continue execution near EOF;
+ 
+-# The C domain dialect changed on Sphinx 3. So, we need to check the
+-# version in order to produce the right tags.
+ sub findprog($)
+ {
+     foreach(split(/:/, $ENV{PATH})) {
+@@ -396,42 +376,6 @@ sub findprog($)
+     }
+ }
+ 
+-sub get_sphinx_version()
+-{
+-    my $ver;
+-
+-    my $cmd = "sphinx-build";
+-    if (!findprog($cmd)) {
+-        my $cmd = "sphinx-build3";
+-        if (!findprog($cmd)) {
+-            $sphinx_major = 1;
+-            $sphinx_minor = 2;
+-            $sphinx_patch = 0;
+-            printf STDERR "Warning: Sphinx version not found. Using default (Sphinx version %d.%d.%d)\n",
+-                   $sphinx_major, $sphinx_minor, $sphinx_patch;
+-            return;
+-        }
+-    }
+-
+-    open IN, "$cmd --version 2>&1 |";
+-    while (<IN>) {
+-        if (m/^\s*sphinx-build\s+([\d]+)\.([\d\.]+)(\+\/[\da-f]+)?$/) {
+-            $sphinx_major = $1;
+-            $sphinx_minor = $2;
+-            $sphinx_patch = $3;
+-            last;
+-        }
+-        # Sphinx 1.2.x uses a different format
+-        if (m/^\s*Sphinx.*\s+([\d]+)\.([\d\.]+)$/) {
+-            $sphinx_major = $1;
+-            $sphinx_minor = $2;
+-            $sphinx_patch = $3;
+-            last;
+-        }
+-    }
+-    close IN;
+-}
+-
+ # get kernel version from env
+ sub get_kernel_version() {
+     my $version = 'unknown kernel version';
+@@ -859,9 +803,10 @@ sub output_function_rst(%) {
+     	$signature .= ")";
+     }
+ 
+-    if ($sphinx_major < 3) {
++    if ($args{'typedef'} || $args{'functiontype'} eq "") {
++        print ".. c:macro:: ". $args{'function'} . "\n\n";
++
+         if ($args{'typedef'}) {
+-            print ".. c:type:: ". $args{'function'} . "\n\n";
+             print_lineno($declaration_start_line);
+             print "   **Typedef**: ";
+             $lineprefix = "";
+@@ -869,25 +814,10 @@ sub output_function_rst(%) {
+             print "\n\n**Syntax**\n\n";
+             print "  ``$signature``\n\n";
+         } else {
+-            print ".. c:function:: $signature\n\n";
++            print "``$signature``\n\n";
+         }
+     } else {
+-        if ($args{'typedef'} || $args{'functiontype'} eq "") {
+-            print ".. c:macro:: ". $args{'function'} . "\n\n";
+-
+-            if ($args{'typedef'}) {
+-                print_lineno($declaration_start_line);
+-                print "   **Typedef**: ";
+-                $lineprefix = "";
+-                output_highlight_rst($args{'purpose'});
+-                print "\n\n**Syntax**\n\n";
+-                print "  ``$signature``\n\n";
+-            } else {
+-                print "``$signature``\n\n";
+-            }
+-        } else {
+-            print ".. c:function:: $signature\n\n";
+-        }
++        print ".. c:function:: $signature\n\n";
+     }
+ 
+     if (!$args{'typedef'}) {
+@@ -955,13 +885,9 @@ sub output_enum_rst(%) {
+     my $count;
+     my $outer;
+ 
+-    if ($sphinx_major < 3) {
+-        my $name = "enum " . $args{'enum'};
+-        print "\n\n.. c:type:: " . $name . "\n\n";
+-    } else {
+-        my $name = $args{'enum'};
+-        print "\n\n.. c:enum:: " . $name . "\n\n";
+-    }
++    my $name = $args{'enum'};
++    print "\n\n.. c:enum:: " . $name . "\n\n";
++
+     print_lineno($declaration_start_line);
+     $lineprefix = "  ";
+     output_highlight_rst($args{'purpose'});
+@@ -992,11 +918,8 @@ sub output_typedef_rst(%) {
+     my $oldprefix = $lineprefix;
+     my $name;
+ 
+-    if ($sphinx_major < 3) {
+-        $name = "typedef " . $args{'typedef'};
+-    } else {
+-        $name = $args{'typedef'};
+-    }
++    $name = $args{'typedef'};
++
+     print "\n\n.. c:type:: " . $name . "\n\n";
+     print_lineno($declaration_start_line);
+     $lineprefix = "   ";
+@@ -1012,17 +935,13 @@ sub output_struct_rst(%) {
+     my ($parameter);
+     my $oldprefix = $lineprefix;
+ 
+-    if ($sphinx_major < 3) {
+-        my $name = $args{'type'} . " " . $args{'struct'};
+-        print "\n\n.. c:type:: " . $name . "\n\n";
++    my $name = $args{'struct'};
++    if ($args{'type'} eq 'union') {
++        print "\n\n.. c:union:: " . $name . "\n\n";
+     } else {
+-        my $name = $args{'struct'};
+-        if ($args{'type'} eq 'union') {
+-            print "\n\n.. c:union:: " . $name . "\n\n";
+-        } else {
+-            print "\n\n.. c:struct:: " . $name . "\n\n";
+-        }
++        print "\n\n.. c:struct:: " . $name . "\n\n";
+     }
++
+     print_lineno($declaration_start_line);
+     $lineprefix = "  ";
+     output_highlight_rst($args{'purpose'});
+@@ -2387,11 +2306,6 @@ sub process_file($) {
+     close IN_FILE;
+ }
+ 
+-
+-if ($output_mode eq "rst") {
+-    get_sphinx_version() if (!$sphinx_major);
+-}
+-
+ $kernelversion = get_kernel_version();
+ 
+ # generate a sequence of code that will splice in highlighting information
+@@ -2471,17 +2385,6 @@ Do not output documentation, only warnings.
+ 
+ =head3 reStructuredText only
+ 
+-=over 8
+-
+-=item -sphinx-version VERSION
+-
+-Use the ReST C domain dialect compatible with a specific Sphinx Version.
+-
+-If not specified, kernel-doc will auto-detect using the sphinx-build version
+-found on PATH.
+-
+-=back
+-
+ =head2 Output selection (mutually exclusive):
+ 
+ =over 8
 -- 
 2.48.1
 
