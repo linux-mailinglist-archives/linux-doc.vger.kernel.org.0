@@ -1,70 +1,75 @@
-Return-Path: <linux-doc+bounces-36371-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36373-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74B86A22325
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 18:39:43 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id C6886A22328
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 18:39:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 80CB9188672A
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 17:39:47 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2A91A167F5E
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 17:39:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E140A1E131B;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EFE841E1C29;
 	Wed, 29 Jan 2025 17:39:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GWhkxoai"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cN8X7ixM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B61AC372;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B63011E04BE;
 	Wed, 29 Jan 2025 17:39:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738172365; cv=none; b=dglAVygtnMeEBi5FY4gwTD1NS3juVflz5vkpVpbiTLJizCvwef2AvVPZWgcqMvN9aunjRJuHZQoKl/XNjwN3m7WrqGiSldapEkvJe34ouWbL53hzluOZNFH55MHQuMpKGvqayLX6m0mqN4W61l66txQ2B4SIUq8pPKTWZBjK8gM=
+	t=1738172365; cv=none; b=mls5JlNtTbo+QNGORbl+3mDIlZf+lAEfCB9RAHU7nucjyxZCnXblWOnxxjO6HnZxk31/MzSI+Sdqv/Mkl23V9aThHSgNIcViKxQP1kSxIOZc0uh5j/oCF4WEVxF/bolHMnzoNMKKKeJ3mK9/3dP++i8YjXyZ0Xq/w6jNWtIQOa8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1738172365; c=relaxed/simple;
-	bh=OUcKoKwz4+cAo4QoML8nMwUAwHEHYbpyL2eh7nmMeWQ=;
+	bh=tm9z92Tyd3NRl4GzuFEN85tCt2NQbLxHfOBfSXqmLqg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=fm+JPRL3ORJAw5xrEXec1j5zg9YqEHhdIEAz6nDrU/BYQ4oGPRflHqKyE2HwNue9PJMm6wfSIiNaWqH5SjHHABq4gcJMPt8v+p8YdGGkd90fQZoEo1KAmSar7ulU1EC5lVn/CJT5wvDebLje/RBQqw0qzLG7obyHKPzePSYL3Ps=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GWhkxoai; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32AC3C4CED1;
+	 MIME-Version; b=ZVCzvzkzA/cYXAbqGKPJbwXg0ny2DRj091TqHYcw3s9Jzr9L8JqAzdkswSS3qLXylloSBjRgFxjoDq+7l8fb64tRcYIbpdCyHhR5T6uJLnLC7ZzDB660uFIwgx6ihlkc66MjOTFt/DZFHCVKFFf3Oi9kMNiVe7S/qODKrRwY8TA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cN8X7ixM; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CAA6C4CEE4;
 	Wed, 29 Jan 2025 17:39:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1738172365;
-	bh=OUcKoKwz4+cAo4QoML8nMwUAwHEHYbpyL2eh7nmMeWQ=;
+	bh=tm9z92Tyd3NRl4GzuFEN85tCt2NQbLxHfOBfSXqmLqg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=GWhkxoai5EqMLW3Yn2lUP5BpxpJWHYI0/xKobTOfVZ3WehsodI1hjQwCpedZZ6G2E
-	 XZ3pv8ZuTSIhBImADAIOMjK5QAk6MC6dlJSNKyQNEj7fg6EIlM7z/N5/X6x/Bg+uof
-	 lRVXB8c4qXRxZjbA2gvNxIk2l20aRKMjdoxEd0ITAibLFMXjLafT4/NVp4txvZwW/J
-	 KMG2lpcCWHazUSRf1m+uir1iIW/pZkIqAjRWb+7qW1gsD1Mq0TDMafQDQl3ctVC3Xr
-	 JTwy4jlWdEl9Ncvzd9VOgw4g3X0ZOyCR3NZ/AkzTwHl1Ec3KBzr+BrmOARn/HRsQgx
-	 WqnncJpsLQbJQ==
+	b=cN8X7ixMMDSVpTaeIMp29MOxLREgALMK2u9F4VlYyFaobmQu5QdG/L0XuG1tEr40p
+	 YoPVkZiOo4cjemjzj1JoyGHTPf+uf5XqJZdiDz5+rYvwP9uF36oIZgQI8hp/YADmbx
+	 UN2OqCDhvtU+QQG0pJ+l+07jLLzCSUpRuuJyHk+27N0kGd4MEhOkp1Fq0zIpxQ3w3J
+	 tHMlIO7AjOvol/Wer+MeSiKYyir89/hVoNggaP/tgRwz+tQBrOOAVAEGBxVCl49PY9
+	 dijr4MgzmzxItduwnvhwCKfQtWsVt2EGWMEerIRAJik8PlZXCdULZov9OZCdkIJO2B
+	 9Z/WX3XqPSvcw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tdC26-00000004SdQ-3X9a;
+	id 1tdC26-00000004SdU-3ekY;
 	Wed, 29 Jan 2025 18:39:22 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Liang, Kan" <kan.liang@linux.intel.com>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	Adrian Hunter <adrian.hunter@intel.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Arnaldo Carvalho de Melo <mchehab+huawei@kernel.org>,
-	Ian Rogers <irogers@google.com>,
-	Ingo Molnar <mingo@redhat.com>,
+	Alexei Starovoitov <mchehab+huawei@kernel.org>,
+	Andrii Nakryiko <mchehab+huawei@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Eduard Zingerman <eddyz87@gmail.com>,
+	Hao Luo <haoluo@google.com>,
 	Jiri Olsa <mchehab+huawei@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Namhyung Kim <mchehab+huawei@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
+	John Fastabend <john.fastabend@gmail.com>,
+	KP Singh <mchehab+huawei@kernel.org>,
+	Martin KaFai Lau <martin.lau@linux.dev>,
+	Mykola Lysenko <mykolal@fb.com>,
+	Shuah Khan <mchehab+huawei@kernel.org>,
+	Song Liu <mchehab+huawei@kernel.org>,
+	Stanislav Fomichev <sdf@fomichev.me>,
+	Yonghong Song <yonghong.song@linux.dev>,
+	bpf@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	linux-perf-users@vger.kernel.org
-Subject: [PATCH 4/6] tools: perf: task-analyzer: drop support for Python 2
-Date: Wed, 29 Jan 2025 18:39:06 +0100
-Message-ID: <54d6cc84b9b8408b7857fb2a5d72994cd5acf196.1738171937.git.mchehab+huawei@kernel.org>
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH 5/6] tools: selftests/bpf: test_bpftool_synctypes: escape raw symbols
+Date: Wed, 29 Jan 2025 18:39:07 +0100
+Message-ID: <12d8c07cc7bcea017f67774741f9a59d04c2f20d.1738171937.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1738171937.git.mchehab+huawei@kernel.org>
 References: <cover.1738171937.git.mchehab+huawei@kernel.org>
@@ -77,49 +82,115 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-As stated at process/changes.rsy doc, the current minimal Python
-version is 3.x, so drop support for EOL python 2.x.
+Modern Python versions complain about usage of "\" inside normal
+strings, as they should use r-string notation.
+
+Change the annotations there to avoid such warnings:
+
+	tools/testing/selftests/bpf/test_bpftool_synctypes.py:319: SyntaxWarning: invalid escape sequence '\w' pattern = re.compile('([\w-]+) ?(?:\||}[ }\]"])')
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/perf/scripts/python/task-analyzer.py | 23 +++++-----------------
- 1 file changed, 5 insertions(+), 18 deletions(-)
+ .../selftests/bpf/test_bpftool_synctypes.py   | 30 +++++++++----------
+ 1 file changed, 15 insertions(+), 15 deletions(-)
 
-diff --git a/tools/perf/scripts/python/task-analyzer.py b/tools/perf/scripts/python/task-analyzer.py
-index 3f1df9894246..9dc18875630c 100755
---- a/tools/perf/scripts/python/task-analyzer.py
-+++ b/tools/perf/scripts/python/task-analyzer.py
-@@ -50,25 +50,12 @@ LEN_IN_IN = len("99999999999.999")  # 15
- LEN_IN_OUT = len("99999999999.999")  # 15
+diff --git a/tools/testing/selftests/bpf/test_bpftool_synctypes.py b/tools/testing/selftests/bpf/test_bpftool_synctypes.py
+index 0ed67b6b31dd..81f286991012 100755
+--- a/tools/testing/selftests/bpf/test_bpftool_synctypes.py
++++ b/tools/testing/selftests/bpf/test_bpftool_synctypes.py
+@@ -66,7 +66,7 @@ class ArrayParser(BlockParser):
  
+     def __init__(self, reader, array_name):
+         self.array_name = array_name
+-        self.start_marker = re.compile(f'(static )?const bool {self.array_name}\[.*\] = {{\n')
++        self.start_marker = re.compile(fr'(static )?const bool {self.array_name}\[.*\] = {{\n')
+         super().__init__(reader)
  
--# py2/py3 compatibility layer, see PEP469
--try:
--    dict.iteritems
--except AttributeError:
--    # py3
--    def itervalues(d):
--        return iter(d.values())
--
--    def iteritems(d):
--        return iter(d.items())
--
--else:
--    # py2
--    def itervalues(d):
--        return d.itervalues()
--
--    def iteritems(d):
--        return d.iteritems()
-+# py3
-+def itervalues(d):
-+    return iter(d.values())
+     def search_block(self):
+@@ -80,7 +80,7 @@ class ArrayParser(BlockParser):
+         Parse a block and return data as a dictionary. Items to extract must be
+         on separate lines in the file.
+         """
+-        pattern = re.compile('\[(BPF_\w*)\]\s*= (true|false),?$')
++        pattern = re.compile(r'\[(BPF_\w*)\]\s*= (true|false),?$')
+         entries = set()
+         while True:
+             line = self.reader.readline()
+@@ -177,9 +177,9 @@ class FileExtractor(object):
  
-+def iteritems(d):
-+    return iter(d.items())
+         @enum_name: name of the enum to parse
+         """
+-        start_marker = re.compile(f'enum {enum_name} {{\n')
+-        pattern = re.compile('^\s*(BPF_\w+),?(\s+/\*.*\*/)?$')
+-        end_marker = re.compile('^};')
++        start_marker = re.compile(fr'enum {enum_name} {{\n')
++        pattern = re.compile(r'^\s*(BPF_\w+),?(\s+/\*.*\*/)?$')
++        end_marker = re.compile(r'^};')
+         parser = BlockParser(self.reader)
+         parser.search_block(start_marker)
+         return parser.parse(pattern, end_marker)
+@@ -226,8 +226,8 @@ class FileExtractor(object):
  
- def _check_color():
-     global _COLORS
+         @block_name: name of the blog to parse, 'TYPE' in the example
+         """
+-        start_marker = re.compile(f'\*{block_name}\* := {{')
+-        pattern = re.compile('\*\*([\w/-]+)\*\*')
++        start_marker = re.compile(fr'\*{block_name}\* := {{')
++        pattern = re.compile(r'\*\*([\w/-]+)\*\*')
+         end_marker = re.compile('}\n')
+         return self.__get_description_list(start_marker, pattern, end_marker)
+ 
+@@ -245,8 +245,8 @@ class FileExtractor(object):
+ 
+         @block_name: name of the blog to parse, 'TYPE' in the example
+         """
+-        start_marker = re.compile(f'"\s*{block_name} := {{')
+-        pattern = re.compile('([\w/]+) [|}]')
++        start_marker = re.compile(fr'"\s*{block_name} := {{')
++        pattern = re.compile(r'([\w/]+) [|}]')
+         end_marker = re.compile('}')
+         return self.__get_description_list(start_marker, pattern, end_marker)
+ 
+@@ -264,8 +264,8 @@ class FileExtractor(object):
+ 
+         @macro: macro starting the block, 'HELP_SPEC_OPTIONS' in the example
+         """
+-        start_marker = re.compile(f'"\s*{macro}\s*" [|}}]')
+-        pattern = re.compile('([\w-]+) ?(?:\||}[ }\]])')
++        start_marker = re.compile(fr'"\s*{macro}\s*" [|}}]')
++        pattern = re.compile(r'([\w-]+) ?(?:\||}[ }\]])')
+         end_marker = re.compile('}\\\\n')
+         return self.__get_description_list(start_marker, pattern, end_marker)
+ 
+@@ -284,7 +284,7 @@ class FileExtractor(object):
+         @block_name: name of the blog to parse, 'TYPE' in the example
+         """
+         start_marker = re.compile(f'local {block_name}=\'')
+-        pattern = re.compile('(?:.*=\')?([\w/]+)')
++        pattern = re.compile(r'(?:.*=\')?([\w/]+)')
+         end_marker = re.compile('\'$')
+         return self.__get_description_list(start_marker, pattern, end_marker)
+ 
+@@ -316,7 +316,7 @@ class MainHeaderFileExtractor(SourceFileExtractor):
+             {'-p', '-d', '--pretty', '--debug', '--json', '-j'}
+         """
+         start_marker = re.compile(f'"OPTIONS :=')
+-        pattern = re.compile('([\w-]+) ?(?:\||}[ }\]"])')
++        pattern = re.compile(r'([\w-]+) ?(?:\||}[ }\]"])')
+         end_marker = re.compile('#define')
+ 
+         parser = InlineListParser(self.reader)
+@@ -338,8 +338,8 @@ class ManSubstitutionsExtractor(SourceFileExtractor):
+ 
+             {'-p', '-d', '--pretty', '--debug', '--json', '-j'}
+         """
+-        start_marker = re.compile('\|COMMON_OPTIONS\| replace:: {')
+-        pattern = re.compile('\*\*([\w/-]+)\*\*')
++        start_marker = re.compile(r'\|COMMON_OPTIONS\| replace:: {')
++        pattern = re.compile(r'\*\*([\w/-]+)\*\*')
+         end_marker = re.compile('}$')
+ 
+         parser = InlineListParser(self.reader)
 -- 
 2.48.1
 
