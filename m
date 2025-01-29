@@ -1,65 +1,63 @@
-Return-Path: <linux-doc+bounces-36358-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36356-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E060A22148
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 17:10:14 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E8E6A22147
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 17:10:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id BBCDC167AC0
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 16:10:12 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3E2993A1885
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2025 16:10:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26F5F1DF268;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 16D211DF254;
 	Wed, 29 Jan 2025 16:10:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NCc7PtcT"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="t/BH31fY"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFB0F1DEFDD;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFBD21DEFEA;
 	Wed, 29 Jan 2025 16:09:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738167000; cv=none; b=BVwyomfgfs0Kkv3Qsyk/sKFexy6pJNLdfk49ZmLvqlpYvfOTYXFtD70249xkrfxwxAqZbjw63ZPlZMdXkjU0HZkH5/LJNKK6ie5mLuOKN363QSWuBO4sZMxYlj+T3asmvBm4cjmDfzokWUOdhPAebbUwxz3b9MoCc3EytNs5k1s=
+	t=1738167000; cv=none; b=fH6l47qs8qhfeOLTK5QGcpZRjwb4uKDWUWMx2trtinLvx8zlqIOm2WVaT/xOYt3v00HtumI+LsnOWptogxFa4R8+PUyK/DPenRFZwojlzA7xQ92r4dWOGX2G6/+XtQ0x/efKC8sAy1oCjzfEkq0E8QROu4Ai4ue3eoYt++szMEI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1738167000; c=relaxed/simple;
-	bh=wrF7qMccEyKNan3FB8Tt10O3BrSPD0Q4GiM29XidLhM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ssLyoRJzI6n8rVBm8T6YxkhXMQQHqru5qM1VoIbk1YzEMzYMU2unowA9eKU6q3sA+H0X/JiM9kimuZEuBzz/Os1GqklE1C0Z0jWjasVK611oDx9VEE/7ndT0EK2xByyY1sBNgHipAxiP5xyy/GzMlNOoL0QYnkRmif8ePcS4qdk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NCc7PtcT; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77D64C4CEDF;
+	bh=5OUVA+DifT9fiAR1a4XwZcggsOOvHcxKgnNy11VXdK4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=iKervcdhoMx4Ob5l8E1FGNvsCcABgxk0+6acREZyHwEQ7VqSGm+DdRkzBgHaucmJH5XISb2nOTXpv/bJ5EQyBCts0MRlihXIl83FgQ/RS09ZFMcy7StN/tlG9EUzxI45EwqENjxYtTucqseN3c/wyQlnMsZdAvNsmd+Y7WVT1fw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=t/BH31fY; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A013C4CEE5;
 	Wed, 29 Jan 2025 16:09:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1738166999;
-	bh=wrF7qMccEyKNan3FB8Tt10O3BrSPD0Q4GiM29XidLhM=;
-	h=From:To:Cc:Subject:Date:From;
-	b=NCc7PtcTasnn+/Ta9YKRefURozpAQ4hFxrEPwv4ko4vmtQBT6SEP/sOVk4mELGsRv
-	 xm2LN1dltCLvSrTHkE8BzKDFcYYTjMZjS5x4xivc4foKeM58dIkgi6a8aFbq+FOHw2
-	 SjWh7e1T/gxlqFEd/+T2U2POwsTpESGh2LmTKYAKwoFVNzfj2u7v2ZL7IB9agF/hv8
-	 wBKYE0cgXb8eIcylKUcPSQBnTOgTQIbln9tSAkZ604PgaZS8JASqgNxjsSKOIOOirb
-	 PBKgeKgUNkjG8yKlo50UXP9tY1dTetqVDm+ZWlHesMlwvv7CrvGXjRxFSYqX/meNLC
-	 5+lHInqObjqNA==
+	bh=5OUVA+DifT9fiAR1a4XwZcggsOOvHcxKgnNy11VXdK4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=t/BH31fY6T3i68shjEYcsDRGT6Q9RY0aMsPVsDG83pYDdQ57/spyDPw7F26YLrLHk
+	 NeJeaMlou4ZJPc0d/EMio/iDvqnM5mkwU7MJVWK14vRM8rOyF7LKS0aK1APQnlNLbu
+	 Dg1NZlB081L/mz9kjXYaPZvf94Kx3boS0r5dIh8xaEhxtNA92hd7E5qM1h8R85oE3M
+	 9q3ABVFQQ+939NxrAVoN5EegaOkvIm60jaW44fAe6Hp8E9hGd3w957hXQGfUCY12z8
+	 LO0MDoh7Jw5Z2GWxm8yCM68bISxcKvHrulHHqFUbkffFuZKkeupm+3qWXhvgtyfc0O
+	 S5RePaysWQPyQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tdAdZ-00000004PEH-1WJn;
+	id 1tdAdZ-00000004PEK-1eS9;
 	Wed, 29 Jan 2025 17:09:57 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	"Jonathan Corbet" <corbet@lwn.net>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Bill Wendling <morbo@google.com>,
-	Justin Stitt <justinstitt@google.com>,
-	Nick Desaulniers <ndesaulniers@google.com>,
-	bpf@vger.kernel.org,
-	llvm@lists.linux.dev,
-	workflows@vger.kernel.org
-Subject: [RFC 0/6] Raise the bar with regards to Python and Sphinx requirements
-Date: Wed, 29 Jan 2025 17:09:31 +0100
-Message-ID: <cover.1738166451.git.mchehab+huawei@kernel.org>
+	Akira Yokosawa <akiyks@gmail.com>
+Subject: [RFC 1/6] scripts/get_abi.py: make it backward-compatible with Python 3.6
+Date: Wed, 29 Jan 2025 17:09:32 +0100
+Message-ID: <6d74360f8cdabeb0bf628a6e870d10e134f396f0.1738166451.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <cover.1738166451.git.mchehab+huawei@kernel.org>
+References: <cover.1738166451.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,69 +67,87 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-This series comes after https://lore.kernel.org/linux-doc/87a5b96296.fsf@trenco.lwn.net/T/#t
-It  increases the minimal requirements for Sphinx and Python.
+Despite being introduced on Python 3.6, the original implementation
+was too limited: it doesn't accept anything but the argument.
 
-Sphinx release dates:
+Even on python 3.10.12, support was still limited, as more complex
+operations cause SyntaxError:
 
-	Release 2.4.0 (released Feb 09, 2020)
-	Release 2.4.4 (released Mar 05, 2020) (current minimal requirement)
-	Release 3.4.0 (released Dec 20, 2020)
-	Release 3.4.3 (released Jan 08, 2021)
+	Exception occurred:
+	  File ".../linux/Documentation/sphinx/kernel_abi.py", line 48, in <module>
+	    from get_abi import AbiParser
+	  File ".../linux/scripts/get_abi.py", line 525
+	    msg += f"{part}\n{"-" * len(part)}\n\n"
+                       ^
+	SyntaxError: f-string: expecting '}'
 
-	(https://www.sphinx-doc.org/en/master/changes/index.html)
+Replace f-strings by normal string concatenation when it doesn't
+work on Python 3.6.
 
-In terms of Python, we're currently at 3.5:
+Reported-by: Akira Yokosawa <akiyks@gmail.com>
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ scripts/get_abi.py | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
 
-	Python	Release date 
-	3.5	2015-09-13    (current minimal requirement)
-	3.6	2016-12-23
-	3.7 	2018-06-27
-	3.8 	2019-10-14
-	3.9 	2020-10-05
-	3.10	2021-10-04
-
-	(according with https://en.wikipedia.org/w/index.php?title=History_of_Python)
-
-The new minimal requirements are now:
-	- Sphinx 3.4.3;
-	- Python 3.9
-
-The new Sphinx minimal requirement allows dropping all backward-compatible code
-we have at kernel-doc and at Sphinx extensions.
-
-The new Python minimal requirement matches the current required level for
-all scripts but one (*). The one that doesn't match is at tools/net/sunrpc/xdrgen.
-
-Those matches a 4-years old toolchain, which sounds a reasonable period
-of time, as Python/Sphinx aren't required for the Kernel build.
-
-Mauro Carvalho Chehab (6):
-  scripts/get_abi.py: make it backward-compatible with Python 3.6
-  docs: extensions: don't use utf-8 syntax for descriptions
-  docs: automarkup: drop legacy support
-  scripts/kernel-doc: drop Sphinx version check
-  docs: changes: update Sphinx minimal version to 3.4.3
-  doc: changes: update Python minimal version
-
- Documentation/conf.py                       |   2 +-
- Documentation/process/changes.rst           |   4 +-
- Documentation/sphinx/automarkup.py          |  32 ++---
- Documentation/sphinx/cdomain.py             |   7 +-
- Documentation/sphinx/kernel_abi.py          |   6 +-
- Documentation/sphinx/kernel_feat.py         |   4 +-
- Documentation/sphinx/kernel_include.py      |   4 +-
- Documentation/sphinx/kerneldoc.py           |   5 -
- Documentation/sphinx/kfigure.py             |  10 +-
- Documentation/sphinx/load_config.py         |   2 +-
- Documentation/sphinx/maintainers_include.py |   4 +-
- Documentation/sphinx/rstFlatTable.py        |  10 +-
- scripts/get_abi.py                          |  16 ++-
- scripts/kernel-doc                          | 129 +++-----------------
- 14 files changed, 58 insertions(+), 177 deletions(-)
-
+diff --git a/scripts/get_abi.py b/scripts/get_abi.py
+index 543bed397c8c..e6e94f721fff 100755
+--- a/scripts/get_abi.py
++++ b/scripts/get_abi.py
+@@ -522,7 +522,7 @@ class AbiParser:
+ 
+                 if cur_part and cur_part != part:
+                     part = cur_part
+-                    msg += f"{part}\n{"-" * len(part)}\n\n"
++                    msg += part + "\n"+ "-" * len(part) +"\n\n"
+ 
+                 msg += f".. _{key}:\n\n"
+ 
+@@ -546,7 +546,7 @@ class AbiParser:
+                     msg += f"Defined on file :ref:`{base} <{ref[1]}>`\n\n"
+ 
+             if wtype == "File":
+-                msg += f"{names[0]}\n{"-" * len(names[0])}\n\n"
++                msg += names[0] +"\n" + "-" * len(names[0]) +"\n\n"
+ 
+             desc = v.get("description")
+             if not desc and wtype != "File":
+@@ -570,7 +570,8 @@ class AbiParser:
+ 
+             users = v.get("users")
+             if users and users.strip(" \t\n"):
+-                msg += f"Users:\n\t{users.strip("\n").replace('\n', '\n\t')}\n\n"
++                users = users.strip("\n").replace('\n', '\n\t')
++                msg += f"Users:\n\t{users}\n\n"
+ 
+             ln = v.get("line_no", 1)
+ 
+@@ -596,7 +597,9 @@ class AbiParser:
+                 elif len(lines) == 1:
+                     f.append(f"{fname}:{lines[0]}")
+                 else:
+-                    f.append(f"{fname} lines {", ".join(str(x) for x in lines)}")
++                    m = fname + "lines "
++                    m += ", ".join(str(x) for x in lines)
++                    f.append(m)
+ 
+             self.log.warning("%s is defined %d times: %s", what, len(f), "; ".join(f))
+ 
+@@ -644,10 +647,11 @@ class AbiParser:
+                     if users:
+                         print(f"Users:\t\t\t{users}")
+ 
+-                    print(f"Defined on file{'s'[:len(files) ^ 1]}:\t{", ".join(files)}")
++                    print("Defined on file(s):\t" + ", ".join(files))
+ 
+                     if desc:
+-                        print(f"\n{desc.strip("\n")}\n")
++                        desc = desc.strip("\n")
++                        print(f"\n{desc}\n")
+ 
+         if not found_keys:
+             print(f"Regular expression /{expr}/ not found.")
 -- 
 2.48.1
-
 
 
