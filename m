@@ -1,88 +1,88 @@
-Return-Path: <linux-doc+bounces-36431-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36440-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B3E3A22C2B
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Jan 2025 12:08:56 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id CA656A22CAB
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Jan 2025 12:42:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 020CE1645BF
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Jan 2025 11:08:55 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C52167A2D29
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Jan 2025 11:41:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 062291C1AD4;
-	Thu, 30 Jan 2025 11:08:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DB1F1DED6A;
+	Thu, 30 Jan 2025 11:42:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="eQzTry+b"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="AhZIKnG7"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F9E11C07C8
-	for <linux-doc@vger.kernel.org>; Thu, 30 Jan 2025 11:08:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD4EF7482
+	for <linux-doc@vger.kernel.org>; Thu, 30 Jan 2025 11:42:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738235330; cv=none; b=DCOvJYPK4WdkOgv0Tg7/63g/Vjl+AZAq1nTGDxEJ50C9JxwKrBOZMkcWL13EPpketXpDDZCPmgdw4EQj2BgW3oe12OfiW5cPIBRg7s786uD1D2aWHkM6P4yYkUJHRFajSLGWJhheMeqPvZoMMTmsbSAyUek1HsJjdFyM2g2Spto=
+	t=1738237356; cv=none; b=TzpafyKnxMOF/9ykFbfFXFhnERKclH7YuNmyPO09VTBRLihPO4ROTDQ+QEMsPwqxEfOFDsazU4E5L4XBojgvSBnq045VueHEgZOOEkzeNjEOG6TV7zf4GxOVMDZUHSXb2OArduiAs9PoZPg9pmJuVatxsa/Ln1PwAKLtYuDFoIQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738235330; c=relaxed/simple;
-	bh=K6zEAAHdcRd5aXBHLUc8rvdjTC4Mf4GsNQqWvC8pRJA=;
+	s=arc-20240116; t=1738237356; c=relaxed/simple;
+	bh=xChPNf21gZ9hvw87pO10XU88QiztckLeG6j2EvC1S28=;
 	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=nvUUiZsW6eoDlUD90LRiGnBRGGNaFQbZNJ/NnNAcYMK5ceJ2Db31tKoFdLWxFNRri1sZsetdFBdP87VKh/DNh23i1j/IgH+VmiICkeKHQEofqXtj4VA2M+07L59FZ+cVlkPPWy6X2vBaeq/C1nYAQaNgV0YBoJJOQBIjQomHeOk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=eQzTry+b; arc=none smtp.client-ip=170.10.133.124
+	 In-Reply-To:Content-Type; b=CV8213i09xJ1EBD4TCuPulOD6IaNZvDFDZpuHDJ5ZfUQdNlVbUeG723J15o++b+GLj/kN5s1oA4r+g/yp6FKdcQFU9KgmNpaCchd/yXD9GaIbKOka8cfeSLmEvjPAaIX82t5i/gvt5NoZiPfLTpu15USB4j0lRXP6OsNKsNJwFg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=AhZIKnG7; arc=none smtp.client-ip=170.10.133.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1738235328;
+	s=mimecast20190719; t=1738237351;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=hRyAgd3cBvQHsVuEfrhD/VealxKoGbpl8JEiOYT4zok=;
-	b=eQzTry+b4BobxCUYAxT0ABuENvukq7gPFLdXkh0/F2ebPc0hX8Kxcbrfj4G+MwBTOc7pY/
-	4V2sma3Y1voO6x8VRtvGAlNWuiLFF8BgsCObLA9B4n1DsiapH/R9mQ9VZm0NOWvZ/0ewkt
-	BNHl56RocYz2uT0PFFN6W3gLcUlsgvY=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=OvJKFUs/4w46Q4QG1QX7ObxGqlReY0noE2BTZvNWIjA=;
+	b=AhZIKnG7L989UX7EV7EgfHHGj4MU/81EjFeZ8KPz0apbtngn7KpxSKlSl9oS0Xu3CZRHLx
+	EF0a1sLvR25eQtAMivO0pPSNaiV8BUC+/Wuh9AY7LcSSUMkygXIEqjyYhjl/mJqrb4Cwge
+	6WQbH3Vw+ahL1KO6P5OIlByPO+2hkcE=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-462-T5gi6W9FM7GSFSyN_M3eBg-1; Thu, 30 Jan 2025 06:08:46 -0500
-X-MC-Unique: T5gi6W9FM7GSFSyN_M3eBg-1
-X-Mimecast-MFC-AGG-ID: T5gi6W9FM7GSFSyN_M3eBg
-Received: by mail-wm1-f70.google.com with SMTP id 5b1f17b1804b1-4362f893bfaso3169415e9.1
-        for <linux-doc@vger.kernel.org>; Thu, 30 Jan 2025 03:08:46 -0800 (PST)
+ us-mta-490-fQEsj_ZSN1C3TUPL83sY7A-1; Thu, 30 Jan 2025 06:42:30 -0500
+X-MC-Unique: fQEsj_ZSN1C3TUPL83sY7A-1
+X-Mimecast-MFC-AGG-ID: fQEsj_ZSN1C3TUPL83sY7A
+Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-43582d49dacso4509165e9.2
+        for <linux-doc@vger.kernel.org>; Thu, 30 Jan 2025 03:42:30 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738235325; x=1738840125;
+        d=1e100.net; s=20230601; t=1738237349; x=1738842149;
         h=content-transfer-encoding:in-reply-to:organization:autocrypt
          :content-language:from:references:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hRyAgd3cBvQHsVuEfrhD/VealxKoGbpl8JEiOYT4zok=;
-        b=RHlSyq6/1Vb0k3Tv1sqDBvxPfonWsfnvNNr7SI2u+zIb2TQEGcPSyX3eTsz1TtV8Tc
-         Ptr3eQl+ROqd7UBJ81ZPw0xze/z1sBTVL+XcUww42fJAQRzAzPJZpvfxGK32YcM5VfhK
-         jLmahOr9J1YMAXCc45wVKUWm+CP6xrgi2lywffhDpf5LOx4664c8fQbmhmrchIpi+zJx
-         m5YJS5L+6ZckjAABqcBJ2Xrhqb2Bwgi7d08xRs7ukWxNJ3UbBHtjswnahKDfXM7qgnYO
-         Iirrs7ZcOOkxpFflNFM+QSgSvYdJ5iAnwGmIaTwE+/lqaqgQ3Pd6mMQF9YS91RCpVqo5
-         gz9w==
-X-Forwarded-Encrypted: i=1; AJvYcCXqQI+2ElSFt9VCR45wibJhzk/f91Tzg7UzdJJF1folz9aye4MaOs4iEzVyG66DD167UC1B31VMt1k=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyQCrNTUMZII5dbNuzkHkNc33rQJOBVP2wHCNyj1Yuz6lUzsbLl
-	V6DOqFy3xy9Bh9OY8JBi6MjmXlJNygAlqxDmHQfmgxu8gAHmLBS2sURQRrIEPPOcQhYqv+X5Wmq
-	fRwsEFRHrnb0qlW3ocfnBGVWXRfUtUm2AeAls5KKKzOaM4xwa/5DPKywQ8Q==
-X-Gm-Gg: ASbGncuLCBqhiZz0nuW5zrDqXMlX7mwiZPIpzZrPSkFnla1EfvslEqvSpGj2DXt+Ppz
-	BOkmQ3LdzXsRnANB+fCmyQe6fGN43XxhCbNu+lR+uJBcoVUrtNTXzeNIO6j0rSGsPc1XYbnpGAn
-	8z9Ke57PpR6ta81vEi/ueU9+gxxQWec+fJ19J6TAtgpcnv/1W0/8gdS77HB0oP5QVQPtZj2/rgB
-	GYkxiwVGugN9iCig5D/4vIH+CTU7/L06GlclQmwoVBdwTdSn/i1giDyqpa0clYzqhK2cbzym4VE
-	qdhNxXWhH7MiPQx/Mvl8NJGvoxxUa3MdrrxIuAHizCkSIriDD8Fv6EsEQvBLVdV1EltxvrF2xpq
-	ssmg4ZFIX6BbS+s8wxUxnmxTpZCTxoKo=
-X-Received: by 2002:a5d:6d86:0:b0:38b:ef22:d8c3 with SMTP id ffacd0b85a97d-38c5209395cmr7569842f8f.35.1738235325425;
-        Thu, 30 Jan 2025 03:08:45 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF8Jaj7pR0+ZuRLv9i3VWlgl8F3HqPDaZn5mScaXDv//sxwlV18Dtu62XjbQ4yrxQNHvUAKBA==
-X-Received: by 2002:a5d:6d86:0:b0:38b:ef22:d8c3 with SMTP id ffacd0b85a97d-38c5209395cmr7569801f8f.35.1738235325088;
-        Thu, 30 Jan 2025 03:08:45 -0800 (PST)
+        bh=OvJKFUs/4w46Q4QG1QX7ObxGqlReY0noE2BTZvNWIjA=;
+        b=YnUO9pG4Uk4JaTgjDlZJfcqEXe26yv84OdqWR34sLd4YQHQVKkOhaK2LqM6Q/I4FH4
+         ggQwzZ7mgoJy7v1qnGNCNnyizZk8Oc+vymTddLT497F/rDOmi7gjrL1FwI+ljM+5Ee/8
+         gqprAL0hoBJwUeZMW8C4COZeny0olAIhuSJ+taOgCfqTNQGPhulzbCpoilhxsJiPgJzu
+         JE3cElpdqQXiQFQ0sl+qa98nD8LjEqxbyheKF3dKbHZvhcUy7DxZSJsj/10/cTospWci
+         N08h0owXfFCc/pnvjmkb8LUnXGROInPLXF6fgWwRviyUT0kAFSlR8Kn8B1IFTki8HoCx
+         tCNg==
+X-Forwarded-Encrypted: i=1; AJvYcCWCgo8Wl5cC6fKbGTmyYvvWKk0rlxfprefGAupjkj0z+opqmMkpu75ZolKA4QflLfCaMN+1BNqksNA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyhsU6wDFx6qcTl5vG2g4QN0u4bI8/HRSdAEoDuArh1SYA37YNL
+	gZLV3q15gjtPxZtkUgxqukKoq7U7dhBOIO/S82fRPqzbhhcz+UZ+xf9jblpR1Un5Rws0sgSrDKG
+	Q/9sxC1wjtjIcGT1X9aCj6/8IojPUIQrDDI/DpRGvaGEj5VSYwJRiQTsqgQ==
+X-Gm-Gg: ASbGncvapvx3YI0bESYi8VxF/FznPRaU6B/8KeWJm1mzOKdRKVCbQMSt1hcM3kc5Gfs
+	cYbeVEGmgHmPfjN5+bPHxKTqegOqzsKq9TpvEhkP4Qjtf3uzEQYIK1RfFCfpITJm3jjiLjx2hPB
+	YQwdauXbY1JK+GfFDzujKtGVvNeTjvhgfpoi9BcX59S0yTtKogpwHSW2cxIs3FIwpqYHzBrDzSu
+	VR7TTx/KFpB7Gu0duAeTZM7DuK+qR/IPRJY8Ha7sw5v0pEn6sPvVy6RWd7fDwQxEAqVk35wj30M
+	DamFFWIqA4sejhdISjP9u9tBq5Z4ybtyXKI0g48dqS7aEzcmFlel009vGMexyCWGm4rCJ2non6+
+	8lQsPM+ouuBmZNz0N9P5eHdLJIqVzZsrc
+X-Received: by 2002:a05:600c:b89:b0:432:cbe5:4f09 with SMTP id 5b1f17b1804b1-438dc3bb62fmr58826965e9.4.1738237349107;
+        Thu, 30 Jan 2025 03:42:29 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGY9Z+9uBiFOagJR/rgrq8LfD84ufQR1bgPvqm2p4jGDLTMjXvAkn0iuB45i+xIkXC9mFPx6g==
+X-Received: by 2002:a05:600c:b89:b0:432:cbe5:4f09 with SMTP id 5b1f17b1804b1-438dc3bb62fmr58826765e9.4.1738237348745;
+        Thu, 30 Jan 2025 03:42:28 -0800 (PST)
 Received: from ?IPV6:2003:cb:c713:3b00:16ce:8f1c:dd50:90fb? (p200300cbc7133b0016ce8f1cdd5090fb.dip0.t-ipconnect.de. [2003:cb:c713:3b00:16ce:8f1c:dd50:90fb])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c5c1b4e99sm1645539f8f.74.2025.01.30.03.08.42
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438e23de772sm20187955e9.13.2025.01.30.03.42.26
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jan 2025 03:08:44 -0800 (PST)
-Message-ID: <59feb709-dadc-4d19-857e-49320cca3d98@redhat.com>
-Date: Thu, 30 Jan 2025 12:08:42 +0100
+        Thu, 30 Jan 2025 03:42:28 -0800 (PST)
+Message-ID: <887df26d-b8bb-48df-af2f-21b220ef22e6@redhat.com>
+Date: Thu, 30 Jan 2025 12:42:26 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -90,8 +90,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 08/12] mm/rmap: handle device-exclusive entries
- correctly in try_to_unmap_one()
+Subject: Re: [PATCH v1 12/12] mm/rmap: keep mapcount untouched for
+ device-exclusive entries
 To: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
  nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
@@ -106,8 +106,8 @@ To: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Peter Xu <peterx@redhat.com>,
  Alistair Popple <apopple@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>
 References: <20250129115411.2077152-1-david@redhat.com>
- <20250129115411.2077152-9-david@redhat.com>
- <Z5tQL60SNNGCkfQR@phenom.ffwll.local>
+ <20250129115411.2077152-13-david@redhat.com>
+ <Z5tWYpwpUfgEmeKj@phenom.ffwll.local>
 From: David Hildenbrand <david@redhat.com>
 Content-Language: en-US
 Autocrypt: addr=david@redhat.com; keydata=
@@ -155,33 +155,111 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <Z5tQL60SNNGCkfQR@phenom.ffwll.local>
+In-Reply-To: <Z5tWYpwpUfgEmeKj@phenom.ffwll.local>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 30.01.25 11:10, Simona Vetter wrote:
-> On Wed, Jan 29, 2025 at 12:54:06PM +0100, David Hildenbrand wrote:
->> Ever since commit b756a3b5e7ea ("mm: device exclusive memory access")
->> we can return with a device-exclusive entry from page_vma_mapped_walk().
->>
->> try_to_unmap_one() is not prepared for that, so teach it about these
->> non-present nonswap PTEs.
->>
->> Before that, could we also have triggered this case with device-private
->> entries? Unlikely.
+On 30.01.25 11:37, Simona Vetter wrote:
+> On Wed, Jan 29, 2025 at 12:54:10PM +0100, David Hildenbrand wrote:
+>> Now that conversion to device-exclusive does no longer perform an
+>> rmap walk and the main page_vma_mapped_walk() users were taught to
+>> properly handle nonswap entries, let's treat device-exclusive entries just
+>> as if they would be present, similar to how we handle device-private
+>> entries already.
 > 
-> Just quick comment on this, I'm still pondering all the other aspects.
-> 
-> device-private memory is entirely owned by the driver, the core mm isn't
-> supposed to touch these beyond migrating it back to system memory in
-> do_swap_page. Plus using rmap when the driver asks for invalidating
-> mappings as needed.
-> 
-> So no lru, thp, migration or anything initiated by core mm should ever
-> happen on these device private pages. If it does, it'd be a bug.
+> So the reason for handling device-private entries in rmap is so that
+> drivers can rely on try_to_migrate and related code to invalidate all the
+> various ptes even for device private memory. Otherwise no one should hit
+> this path, at least if my understanding is correct.
 
-I was not 100% sure about HWPoison handling, that's why I added that 
-comment. In other regards I agree: reclaim etc. does not apply.
+Right, device-private probably only happen to be seen on the migration 
+path so far.
+
+> 
+> So I'm very much worried about opening a can of worms here because I think
+> this adds a genuine new case to all the various callers.
+
+To be clear: it can all already happen.
+
+Assume you have a THP (or any mTHP today). You can easily trigger the 
+scenario that folio_mapcount() != 0 with active device-exclusive 
+entries, and you start doing rmap walks and stumble over these 
+device-exclusive entries and *not* handle them properly. Note that more 
+and more systems are configured to just give you THP unless you 
+explicitly opted-out using MADV_NOHUGEPAGE early.
+
+Note that b756a3b5e7ea added that hunk that still walks these 
+device-exclusive entries in rmap code, but didn't actually update the 
+rmap walkers:
+
+@@ -102,7 +104,8 @@ static bool check_pte(struct page_vma_mapped_walk *pvmw)
+
+                 /* Handle un-addressable ZONE_DEVICE memory */
+                 entry = pte_to_swp_entry(*pvmw->pte);
+-               if (!is_device_private_entry(entry))
++               if (!is_device_private_entry(entry) &&
++                   !is_device_exclusive_entry(entry))
+                         return false;
+
+                 pfn = swp_offset(entry);
+
+That was the right thing to do, because they resemble PROT_NONE entries 
+and not migration entries or anything else that doesn't hold a folio 
+reference).
+
+Fortunately, it's only the page_vma_mapped_walk() callers that need care.
+
+mm/rmap.c is handled with this series.
+
+mm/page_vma_mapped.c should work already.
+
+mm/migrate.c: does not apply
+
+mm/page_idle.c: likely should just skip !pte_present().
+
+mm/ksm.c might be fine, but likely we should just reject !pte_present().
+
+kernel/events/uprobes.c likely should reject !pte_present().
+
+mm/damon/paddr.c likely should reject !pte_present().
+
+
+I briefly though about a flag to indicate if a page_vma_mapped_walk() 
+supports these non-present entries, but likely just fixing them up is 
+easier+cleaner.
+
+Now that I looked at all, I might just write patches for them.
+
+> 
+>> This fixes swapout/migration of folios with device-exclusive entries.
+>>
+>> Likely there are still some page_vma_mapped_walk() callers that are not
+>> fully prepared for these entries, and where we simply want to refuse
+>> !pte_present() entries. They have to be fixed independently; the ones in
+>> mm/rmap.c are prepared.
+> 
+> The other worry is that maybe breaking migration is a feature, at least in
+> parts. 
+
+Maybe breaking swap and migration is a feature in some reality, in this 
+reality it's a BUG :)
+
+If thp constantly reassembles a pmd entry because hey all the
+> memory is contig and userspace allocated a chunk of memory to place
+> atomics that alternate between cpu and gpu nicely separated by 4k pages,
+> then we'll thrash around invalidating ptes to no end. So might be more
+> fallout here.
+
+khugepaged will back off once it sees an exclusive entry, so collapsing 
+could only happen once everything is non-exclusive. See 
+__collapse_huge_page_isolate() as an example.
+
+It's really only page_vma_mapped_walk() callers that are affected by 
+this change, not any other page table walkers.
+
+
+It's unfortunate that we now have to fix it all up, that original series 
+should have never been merged that way.
 
 -- 
 Cheers,
