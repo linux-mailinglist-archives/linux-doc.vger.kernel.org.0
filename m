@@ -1,387 +1,175 @@
-Return-Path: <linux-doc+bounces-36660-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36662-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC2EDA25B03
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 14:34:46 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B74ABA25B2B
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 14:41:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5597C164782
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 13:33:58 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 58D9B3A2D00
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 13:41:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CA75C205E15;
-	Mon,  3 Feb 2025 13:33:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gqbpWd0o"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1829205503;
+	Mon,  3 Feb 2025 13:41:15 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com [209.85.208.68])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F211205E0B;
-	Mon,  3 Feb 2025 13:33:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BC4F1E87B;
+	Mon,  3 Feb 2025 13:41:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.68
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738589610; cv=none; b=UK7JBoEu5QSk/3dZSAvuSdvDgf+HeQZpLIKXjjED2UKMxW/s/c5UlWg0/xvsE3Y90PhZkvdgJqW6FQdAeAzEePTFPm9GspImEXq+kPz2bmfiJuTge3GpbopYnLagAt5BVIBsQjOBq1farEa3kGR92aFK+fTVKMV9kGfZXa45x64=
+	t=1738590075; cv=none; b=Pt5/7svYtLr6Pyck2gahdNt3Ju1ePAZvnzqmSDRwdP2h7WnnplVdSGaEnFhxOweqC8xBkrbxxTx51XXoKseIBuYv1Mu/9dIZuN43FVVwwiTOZ4WwRbuLnhd0/gheVwyoQ1yV6x1UEjx1ySP1qM08grd9T5AUK2D0Z1IyN88jGq8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738589610; c=relaxed/simple;
-	bh=kna1IzPp9+FFg8snV8OIddg5ZTgElsgJNQUgna/ReGs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=dYE91s7xBO4GqRX/kRhvXF4DXcHX/XaQVjdPPZnFWhi5RgdDqFulIE50mEyhyBhHmoVouMp3UabAQ2G7mMMBYG/cx4Jms5aQsE96P9I38Xck7NCDgbryKcz2HDZpnBZjtaP/zPY6Nt7L2unHlmL8tZGj2i1e47cRWGVJouRe2mI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gqbpWd0o; arc=none smtp.client-ip=209.85.221.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+	s=arc-20240116; t=1738590075; c=relaxed/simple;
+	bh=h6bhzCdC/XdIKc0wfYHxRITaB+fnzQlZwKg/cU21AUM=;
+	h=Message-ID:Date:MIME-Version:Cc:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=dVt13OryiOYhllDjiBWStTqj1Xin0DpQzoxtC9W1cbEAINgkbC/QlGuYiXx6fP4ukfbfxkY3FnKctwTzmWrBtkj+w99orrt25ccygtM8vOdbb7sfgJJ+Uas+ZZmWDFhl0xGGGO7Stme+n29byQR51BXBWU3rzERlDGwRy1wHQws=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ovn.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.208.68
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ovn.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-3862d16b4f5so2690555f8f.0;
-        Mon, 03 Feb 2025 05:33:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738589607; x=1739194407; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=wkGtKnQR8FMDN7zTR8dWAWu6oB7iPHR5T7d4Y8iu/9k=;
-        b=gqbpWd0oVOEAk8RM3EOaGPCn/KXtWZYRZdgXiIUN5OSRCv1F9uvH9LNbJ5RoXD+0TU
-         XkUbYgL0Icj+rg5uB3qNLbdVPuzSifsFOaDzhr/JEeqd+lAIjHRXhjnxNF3WxScIlRSD
-         nAd8GGPprLUaJGFJdIzInWPgj5wqqLPkjnbtmiDFovcHs6HvLpi2EtUPGzgbnTRZ7sZ5
-         HcKnW8RZaD7QEmFJvqI/ariqFKGcdYPmukO8fkYK0w2cgZQD5THTNR7IM1lDGvrssHDg
-         rgtOK+qbb6p1U+ph/nebcwl4GxfEm+4dvartX9IqosdpdLt5p2/EoDl4RnzrZ1vI56TY
-         qZug==
+Received: by mail-ed1-f68.google.com with SMTP id 4fb4d7f45d1cf-5db689a87cbso8722727a12.3;
+        Mon, 03 Feb 2025 05:41:13 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738589607; x=1739194407;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=wkGtKnQR8FMDN7zTR8dWAWu6oB7iPHR5T7d4Y8iu/9k=;
-        b=hXG7zVpRhhZoigfqABegsWathRrjmhH8+oG36BuKEoN7cu9OYzlC/y0xa6kPNhrdBW
-         ah2gTnmrFXX6PSK8mvtYmrjlkqys64AZSSIxPaCN3UHDvC5CIP5Doqu5vc64HkFUQ1m0
-         DzbRLlgQUK3sKz0rVKJzkY9O7IZtNDxfm1M7Ab7o3je7OKcDNCa1OWL78m/YWdriiap5
-         rRfQFklJHLDzh1rPeGBJB1WEe/Ahl/N6Ih9M4DsEw/xTVSXOZe6LGOt8rT6hPEK10xH+
-         +iyFxrheu9dO4vIhYGx66HioV32HmRti6yk2wiWYG9FO6v+AtqUj7E4LumOQrfTWja9W
-         C1PA==
-X-Forwarded-Encrypted: i=1; AJvYcCUNEXovOreo72pOqSJmxE6BXiCjSjroQLEccN8mthO75hkdE4BFo20fJ51hstmzAlAKCQmCaA9MEOAT@vger.kernel.org, AJvYcCVCmFRwjw/4VYWrOml/tXaeKsmVIXxoFKDF2LPx+gJ+L3c7H8t9lN9hzhqxDOfV8WQLJJYaZSpDzpeUEDtz@vger.kernel.org, AJvYcCWnZTt3Sbq9oDPsOJmbL7hxRkMtGuGYOUwZp4T5bZB6xy2GztyGOOZiH8RDaCsihQmnTASPuwge9zko@vger.kernel.org, AJvYcCXxeEYgrTbEXxdB4caNLLfUHZDSt6N0kV+JiBtU3QVoC4vZEV0qHLGxJAKUWayA6de3WdX+HXxi7JTw@vger.kernel.org
-X-Gm-Message-State: AOJu0YybXrO2fYHJY6/BlqX99yK4nxVyAxJ+7Yi8E4EqTGvAS4NrbPit
-	k9EOyASf4yzNLEjEOnw2g2iLGO3AgZFAWpYaq65Fz7nupUP19ELm
-X-Gm-Gg: ASbGncu2/xx8pdcuGgc13cdSIzFwRhbjOErVKQGySvmvBC8pwShpLK7VYm7vK+Lefta
-	PMCHsRTQA0/E5Z4k/LpufCa3llSxpz893gGHIuMt51LhQ6USpgETEgirdUvcVSnCJTTX22r8GyK
-	jolTaNJqj13O5V/Tjljlaw44w4bOt/3z1MSbsblZ/7/Yo6I468NCZBlvxRXNH7r5cuEx07eJvgM
-	sEQbLkZq8UW58P9Abelg2l3IenpZAzlq6ks19nnXBEPIVGR/l2uHp0PL6leOLG+nEQzqjoaZ3Ke
-	a+QQvsRvIMQ=
-X-Google-Smtp-Source: AGHT+IGKsHXACuy7Y8v51UIMNF83vpxGB05NzXnzVy9RrFcVrn4Fz+D3uCpDbP/t20yLCWjvtlfs7g==
-X-Received: by 2002:a5d:64cc:0:b0:38a:906e:16c3 with SMTP id ffacd0b85a97d-38c5a98d5c3mr14268847f8f.13.1738589606724;
-        Mon, 03 Feb 2025 05:33:26 -0800 (PST)
-Received: from spiri.. ([82.77.155.91])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c5c1d1d03sm12970190f8f.99.2025.02.03.05.33.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Feb 2025 05:33:26 -0800 (PST)
-From: Alisa-Dariana Roman <alisadariana@gmail.com>
-X-Google-Original-From: Alisa-Dariana Roman <alisa.roman@analog.com>
-To: "Rob Herring (Arm)" <robh@kernel.org>,
-	Alisa-Dariana Roman <alisa.roman@analog.com>,
-	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-	Ramona Gradinariu <ramona.bolboaca13@gmail.com>,
-	David Lechner <dlechner@baylibre.com>,
-	linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Cc: Lars-Peter Clausen <lars@metafoo.de>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH v4 3/3] docs: iio: add AD7191
-Date: Mon,  3 Feb 2025 15:31:28 +0200
-Message-ID: <20250203133254.313106-4-alisa.roman@analog.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250203133254.313106-1-alisa.roman@analog.com>
-References: <20250203133254.313106-1-alisa.roman@analog.com>
+        d=1e100.net; s=20230601; t=1738590072; x=1739194872;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:cc:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=o+F1lnnIcSDRLy4MPQwaPFGWlzQAk8gGAL+Me/U3S2U=;
+        b=GLRUd9xEv1S4ht6XYabu085YF/HQEmfOF3qGwoC7B5HEHwYQLycbcghosXnDrFWO1U
+         5AmjedMkgeQTzBc/kg5bK4fZhRGdM4xeiO4l0zERRr2JPSBG1zx1hP6K33+HaanmU1UG
+         r0cKRbv9Ps7T1KE5T1bpus0u15znUG40+np+5nsM9JZ37KV7XCroa9i7iVJCb40mXRfu
+         20y2NOchDoElho0x2JSiY1zP5LlUM1nR39hxc5tE2eZl/7iMyZ+5O3WPxqvmSXTxs408
+         9xqAlY//6RgmkNgVBqERXP9RkVHPh5UAJXFt9+OJrJ2KJerbS5Ph31Kq5PQuvnQt7xNf
+         g90w==
+X-Forwarded-Encrypted: i=1; AJvYcCU9+9nvzEd+3eKMgo7WXvtb0dy/4c3uyEH36ZZg7Sbbk1bnaCLnoR2583gWhZeeA4b4L3tR/plUo9EZ8JjX@vger.kernel.org, AJvYcCVEIMUbhNuWzZnu26hIAPt2gfV8zCLlckMR8C/C4gmqxBVvXYdYm3TX5AI6knxuM9imsI0ica+PUUQ=@vger.kernel.org, AJvYcCXFv+WACB1pDvq0hWpfXtrHVHBU/cJPuQ0aMYHsz+k0/CRcRp/SJgWgZpwf+lc2RJzwPoauowzJ@vger.kernel.org
+X-Gm-Message-State: AOJu0YyinEeG8DPSGcaAIIQX/hxvdOfYrukAJpKCyy2etZ+fCRSVjd93
+	PuPhoC0sUlqDszFsS9BXR4eP8KE1NXNv1dckbfq/LLftbl9h8PtO
+X-Gm-Gg: ASbGncu/ImnShRkpV0Gu2ysSVXeOcP+0xryQUZIvInL16KaYdaWnuiJVbDa3x52Uy49
+	uFhlmky7ZY5+O3ESJkJfFaBP09O2sIQlLH6UvuCMivYNwqI6EcUy1hJIkhFbr7kmCBHG57zTWUT
+	9Rn7BJeHydGHT6FPsw8m17IYtz8cKUi6jXlXYKfaRQOqzFL4oNoxDtfGFVrOBaQeBaK5oZrJxAR
+	YRBqVEUlFYJp2kBti/UKF3bF56ge9b1M9arzjmFtLn0eCj6M2ySeOdeQ1EO8ykRdVdUPKspXBaZ
+	Tab++jUnDC5b6HA=
+X-Google-Smtp-Source: AGHT+IGZKOwmRbDWVJVGLjoQ8O43uA8bmKjfSJS3gCgM6DUqrNV0SxAkWB83R2J3g+1QoDXtUVfHlw==
+X-Received: by 2002:a05:6402:e0a:b0:5dc:8f03:bb5c with SMTP id 4fb4d7f45d1cf-5dc8f03bff0mr13033465a12.11.1738590071967;
+        Mon, 03 Feb 2025 05:41:11 -0800 (PST)
+Received: from [192.168.0.13] ([86.49.44.151])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5dc724a9c5fsm7718184a12.54.2025.02.03.05.41.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 03 Feb 2025 05:41:11 -0800 (PST)
+Message-ID: <c455ea03-de72-4eb6-99c2-0769e159f0a4@ovn.org>
+Date: Mon, 3 Feb 2025 14:41:10 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Cc: i.maximets@ovn.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, davem@davemloft.net, netdev@vger.kernel.org,
+ corbet@lwn.net, pshelar@ovn.org, dev@openvswitch.org, edumazet@google.com,
+ ovs-dev@openvswitch.org, pabeni@redhat.com, kuba@kernel.org
+Subject: Re: [PATCH REPOST] docs: networking: Remove VLAN_TAG_PRESENT from
+ openvswitch doc
+To: =?UTF-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>,
+ Andreas Karis <ak.karis@gmail.com>
+References: <20250203113012.14943-1-ak.karis@gmail.com>
+ <Z6DEpDT2cFn3pMKR@qmqm.qmqm.pl>
+Content-Language: en-US
+From: Ilya Maximets <i.maximets@ovn.org>
+Autocrypt: addr=i.maximets@ovn.org; keydata=
+ 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
+In-Reply-To: <Z6DEpDT2cFn3pMKR@qmqm.qmqm.pl>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add documentation for AD7191 driver.
+On 2/3/25 14:29, Michał Mirosław wrote:
+> On Mon, Feb 03, 2025 at 12:30:12PM +0100, Andreas Karis wrote:
+>> Since commit 0c4b2d370514 ("net: remove VLAN_TAG_PRESENT"), the kernel
+>> no longer uses VLAN_TAG_PRESENT.
+>> Update the openvswitch documentation which still contained an outdated
+>> reference to VLAN_TAG_PRESENT.
+> 
+> Hi, it would be best to extend this doc saying that the CFI bit is not
+> usable in openvswitch (unlike in other parts of kernel).
 
-Signed-off-by: Alisa-Dariana Roman <alisa.roman@analog.com>
----
- Documentation/iio/ad7191.rst | 250 +++++++++++++++++++++++++++++++++++
- Documentation/iio/index.rst  |   1 +
- 2 files changed, 251 insertions(+)
- create mode 100644 Documentation/iio/ad7191.rst
+FWIW, sch_frag does the same thing.  So, it's not only openvswitch.
+Though, yes, sch_frag is probably doing that because TC mimics what
+OVS does.
 
-diff --git a/Documentation/iio/ad7191.rst b/Documentation/iio/ad7191.rst
-new file mode 100644
-index 000000000000..b55f3c13e45a
---- /dev/null
-+++ b/Documentation/iio/ad7191.rst
-@@ -0,0 +1,250 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+
-+==============
-+AD7191 driver
-+==============
-+
-+Device driver for Analog Devices AD7191 ADC.
-+
-+==================
-+Supported devices
-+==================
-+
-+* `AD7191 <https://www.analog.com/AD7191>`_
-+
-+The AD7191 is a high precision, low noise, 24-bit Σ-Δ ADC with integrated PGA.
-+It features two differential input channels, an internal temperature sensor, and
-+configurable sampling rates.
-+
-+=====================
-+Device Configuration
-+=====================
-+
-+--------------------
-+Pin Configuration
-+--------------------
-+
-+The driver supports both pin-strapped and GPIO-controlled configurations for ODR
-+(Output Data Rate) and PGA (Programmable Gain Amplifier) settings. These
-+configurations are mutually exclusive - you must use either pin-strapped or GPIO
-+control for each setting, not both.
-+
-+^^^^^^^^^^^^^^^^^^^^
-+ODR Configuration
-+^^^^^^^^^^^^^^^^^^^^
-+
-+The ODR can be configured either through GPIO control or pin-strapping:
-+
-+- When using GPIO control, specify the "odr-gpios" property in the device tree
-+- For pin-strapped configuration, specify the "adi,odr-value" property in the
-+  device tree
-+
-+Available ODR settings:
-+
-+  - 120 Hz (ODR1=0, ODR2=0)
-+  - 60 Hz (ODR1=0, ODR2=1)
-+  - 50 Hz (ODR1=1, ODR2=0)
-+  - 10 Hz (ODR1=1, ODR2=1)
-+
-+^^^^^^^^^^^^^^^^^^^
-+PGA Configuration
-+^^^^^^^^^^^^^^^^^^^
-+
-+The PGA can be configured either through GPIO control or pin-strapping:
-+
-+- When using GPIO control, specify the "pga-gpios" property in the device tree
-+- For pin-strapped configuration, specify the "adi,pga-value" property in the
-+  device tree
-+
-+Available PGA gain settings:
-+
-+  - 1x (PGA1=0, PGA2=0)
-+  - 8x (PGA1=0, PGA2=1)
-+  - 64x (PGA1=1, PGA2=0)
-+  - 128x (PGA1=1, PGA2=1)
-+
-+--------------------
-+Clock Configuration
-+--------------------
-+
-+The AD7191 supports both internal and external clock sources:
-+
-+- When CLKSEL pin is tied LOW: Uses internal 4.92MHz clock (no clock property
-+  needed)
-+- When CLKSEL pin is tied HIGH: Requires external clock source
-+  - Can be a crystal between MCLK1 and MCLK2 pins
-+  - Or a CMOS-compatible clock driving MCLK2 pin
-+  - Must specify the "clocks" property in device tree when using external clock
-+
-+--------------------------
-+SPI Interface Requirements
-+--------------------------
-+
-+The AD7191 has specific SPI interface requirements:
-+
-+- The DOUT/RDY output is dual-purpose and requires SPI bus locking
-+- DOUT/RDY must be connected to an interrupt-capable GPIO
-+- The SPI controller's chip select must be connected to the PDOWN pin of the ADC
-+- When CS (PDOWN) is high, the device powers down and resets internal circuitry
-+- SPI mode 3 operation (CPOL=1, CPHA=1) is required
-+
-+-------------------------
-+Power Supply Requirements
-+-------------------------
-+
-+The device requires the following power supplies:
-+
-+- AVdd: Analog power supply
-+- DVdd: Digital power supply
-+- Vref: Reference voltage supply (external)
-+
-+All power supplies must be specified in the device tree.
-+
-+===================
-+Device Attributes
-+===================
-+
-+The AD7191 provides several attributes through the IIO sysfs interface:
-+
-+-----------------------------------
-+Voltage Input Differential Channels
-+-----------------------------------
-+
-++-------------------+----------------------------------------------------------+
-+| Attribute         | Description                                              |
-++===================+==========================================================+
-+| raw               | Raw ADC output value                                     |
-++-------------------+----------------------------------------------------------+
-+| scale             | Scale factor to convert raw value to voltage             |
-++-------------------+----------------------------------------------------------+
-+| offset            | Voltage offset                                           |
-++-------------------+----------------------------------------------------------+
-+| sampling_frequency| Current sampling frequency setting                       |
-++-------------------+----------------------------------------------------------+
-+
-+--------------------
-+Temperature Sensor
-+--------------------
-+
-++-------------------+----------------------------------------------------------+
-+| Attribute         | Description                                              |
-++===================+==========================================================+
-+| raw               | Raw temperature sensor output value                      |
-++-------------------+----------------------------------------------------------+
-+| scale             | Scale factor to convert raw value to temperature         |
-++-------------------+----------------------------------------------------------+
-+| offset            | Temperature calibration offset                           |
-++-------------------+----------------------------------------------------------+
-+
-+--------------------
-+Available Attributes
-+--------------------
-+
-+The following attributes show available configuration options:
-+
-+- sampling_frequency_available: List of supported sampling frequencies
-+- scale_available: List of supported scale factors (based on PGA settings)
-+
-+=====================
-+Channel Configuration
-+=====================
-+
-+The device provides three channels:
-+
-+1. Temperature Sensor
-+   - 24-bit unsigned
-+   - Internal temperature measurement
-+   - Temperature in millidegrees Celsius
-+
-+2. Differential Input (AIN1-AIN2)
-+   - 24-bit unsigned
-+   - Differential voltage measurement
-+   - Configurable gain via PGA
-+
-+3. Differential Input (AIN3-AIN4)
-+   - 24-bit unsigned
-+   - Differential voltage measurement
-+   - Configurable gain via PGA
-+
-+=====================
-+Device Tree Bindings
-+=====================
-+
-+-------------------
-+Required Properties
-+-------------------
-+
-+- compatible: Should be "adi,ad7191"
-+- reg: SPI chip select number
-+- spi-max-frequency: Maximum SPI clock frequency
-+- spi-cpol: Must be present (set to 1)
-+- spi-cpha: Must be present (set to 1)
-+- interrupts: Interrupt mapping for DOUT/RDY pin
-+- avdd-supply: Analog power supply
-+- dvdd-supply: Digital power supply
-+- vref-supply: Reference voltage supply
-+- temp-gpios: GPIO for temperature channel selection
-+- chan-gpios: GPIO for input channel selection
-+
-+-------------------
-+Optional Properties
-+-------------------
-+
-+- clocks: Required when using external clock (CLKSEL=1), must be absent for
-+  internal clock
-+- adi,odr-value: Pin-strapped ODR configuration (120, 60, 50, or 10)
-+- adi,pga-value: Pin-strapped PGA configuration (1, 8, 64, or 128)
-+- odr-gpios: GPIOs for ODR control (mutually exclusive with adi,odr-value)
-+- pga-gpios: GPIOs for PGA control (mutually exclusive with adi,pga-value)
-+
-+-------------------
-+Example Device Tree
-+-------------------
-+
-+.. code-block:: dts
-+
-+    #include <dt-bindings/gpio/gpio.h>
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+
-+    spi {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        ad7191@0 {
-+            compatible = "adi,ad7191";
-+            reg = <0>;
-+            spi-max-frequency = <1000000>;
-+
-+            /* Required SPI mode 3 */
-+            spi-cpol;
-+            spi-cpha;
-+
-+            /* Interrupt for DOUT/RDY pin */
-+            interrupts = <25 IRQ_TYPE_EDGE_FALLING>;
-+            interrupt-parent = <&gpio>;
-+
-+            /* Power supplies */
-+            avdd-supply = <&avdd>;
-+            dvdd-supply = <&dvdd>;
-+            vref-supply = <&vref>;
-+
-+            /* Optional external clock */
-+            clocks = <&ad7191_mclk>;
-+
-+            /* Configuration - either use GPIO control or pin-strapped values */
-+            adi,pga-value = <1>;
-+            odr-gpios = <&gpio 23 GPIO_ACTIVE_HIGH>,
-+                       <&gpio 24 GPIO_ACTIVE_HIGH>;
-+
-+            /* Required GPIO controls */
-+            temp-gpios = <&gpio 22 GPIO_ACTIVE_HIGH>;
-+            chan-gpios = <&gpio 27 GPIO_ACTIVE_HIGH>;
-+        };
-+    };
-+
-+================
-+Buffer Support
-+================
-+
-+This driver supports IIO triggered buffers. See Documentation/iio/iio_devbuf.rst
-+for more information about IIO triggered buffers.
-diff --git a/Documentation/iio/index.rst b/Documentation/iio/index.rst
-index 5710f5b9e958..9235f38f47a1 100644
---- a/Documentation/iio/index.rst
-+++ b/Documentation/iio/index.rst
-@@ -20,6 +20,7 @@ Industrial I/O Kernel Drivers
- 
-    ad4000
-    ad4695
-+   ad7191
-    ad7380
-    ad7606
-    ad7625
--- 
-2.43.0
+> 
+> Nevertheless,
+> Acked-by: Michał Mirosław <mirq-linux@rere.qmqm.pl>
+> 
+>>
+>> Signed-off-by: Andreas Karis <ak.karis@gmail.com>
+>> ---
+>>  Documentation/networking/openvswitch.rst | 5 ++---
+>>  1 file changed, 2 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/Documentation/networking/openvswitch.rst b/Documentation/networking/openvswitch.rst
+>> index 1a8353dbf1b6..8d2bbcb92286 100644
+>> --- a/Documentation/networking/openvswitch.rst
+>> +++ b/Documentation/networking/openvswitch.rst
+>> @@ -230,9 +230,8 @@ an all-zero-bits vlan and an empty encap attribute, like this::
+>>      eth(...), eth_type(0x8100), vlan(0), encap()
+>>  
+>>  Unlike a TCP packet with source and destination ports 0, an
+>> -all-zero-bits VLAN TCI is not that rare, so the CFI bit (aka
+>> -VLAN_TAG_PRESENT inside the kernel) is ordinarily set in a vlan
+>> -attribute expressly to allow this situation to be distinguished.
+>> +all-zero-bits VLAN TCI is not that rare, so the CFI bit is ordinarily set
+>> +in a vlan attribute expressly to allow this situation to be distinguished.
+>>  Thus, the flow key in this second example unambiguously indicates a
+>>  missing or malformed VLAN TCI.
+>>  
+>> -- 
+>> 2.48.1
+>>
+> 
 
 
