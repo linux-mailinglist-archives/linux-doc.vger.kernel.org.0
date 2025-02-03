@@ -1,256 +1,111 @@
-Return-Path: <linux-doc+bounces-36656-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36661-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A0F6A25AD8
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 14:27:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CC4BA25B15
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 14:37:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0A9DB1881B74
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 13:27:26 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 293441885377
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 13:37:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4959D204F97;
-	Mon,  3 Feb 2025 13:27:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 04E9A205517;
+	Mon,  3 Feb 2025 13:37:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="qXKlb1oS"
+	dkim=pass (2048-bit key) header.d=rere.qmqm.pl header.i=@rere.qmqm.pl header.b="B/QOxKdR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f74.google.com (mail-wm1-f74.google.com [209.85.128.74])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from rere.qmqm.pl (rere.qmqm.pl [91.227.64.183])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64474204F6B
-	for <linux-doc@vger.kernel.org>; Mon,  3 Feb 2025 13:27:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.74
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21E1A1FC118;
+	Mon,  3 Feb 2025 13:37:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.227.64.183
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738589237; cv=none; b=ROjnQSgi1AGI6NttiAIYgT7u9aEQcYHSdrHEkX7QlHDVNiTtk5Fs6Y4xiXOzMWVXBe4UNi8F6+akyIIXOIrDQ9LeyzzbZ0cGFJNUqVvaeYlYfWnEwwek8BpRghzksMzKOijmhbazuJHK565p2j/SsDffSO1InPqe2lREzwK0zD8=
+	t=1738589867; cv=none; b=XC//actGse8UFmVQU+ef6/0qGnkRZBEOeBQ7BAgtM1fuVXaaEcWqWh5WUVxW5acnW8DaRSmpAm87J31q4B8sM0OER5VNBV7abXqCEk0hJ8Yf+6JqeIlXZ2UtP0cLhDFZv6ig3lmmQWTi95pZbJi/HO0HY5KP7jIk+Yjm96jKbIo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738589237; c=relaxed/simple;
-	bh=iT4nOmTo0qs93A/ByVuAvKNO0ZVQLL9OYxCEOF4exlw=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=jSwgX2TroPsUhftiHSXzLHWSgGMdA2tkFflJ1NbPYaBF0WhB7k3UOjVrG21uXnnGqH58O+R2Tn5ncxUaVjmqnKGzIdWQKAH3ERzXuQyb9g/u7szcnY/ElaA2vQyL+sFA27oKwnElD5FtotMbEMCrOsqEVctnH3BeXlLfSZ3M7wY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--peternewman.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=qXKlb1oS; arc=none smtp.client-ip=209.85.128.74
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--peternewman.bounces.google.com
-Received: by mail-wm1-f74.google.com with SMTP id 5b1f17b1804b1-436723db6c4so31725825e9.3
-        for <linux-doc@vger.kernel.org>; Mon, 03 Feb 2025 05:27:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1738589233; x=1739194033; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=3+vRf77xml4mHTu6O1aUiY50kmdC/JGj1qSPGz7v6MU=;
-        b=qXKlb1oSM/n2FOeIpqxTUzGXCnzSPTjNSI6mKwfD+/gbrNk3LnmtD1LS1sv7Mmky7L
-         JiPYX539FG2QGvq8B5Fy+2SSAeTD8C+jWA8iYehcZrmcxEODFkwZVHupkNy2sEJpGIN+
-         7waYSujI26kSYfM3hkxF7tI4a9szEztX0hjDCc1HlH+8y1K4YVB3UZ/mkjbWL91MagRM
-         BtXeLx+043zbK/1gA1DZidPiqDO51K7EziQd0YFR58yJzUY1U8ISRZ36q6KlkzINz1MD
-         JHsW3EMU3ujfrVB85E0J5IJWLOjfCDBvn70rzKy4ukiV6H9EGBcmGRi8kA2fH8GQ46SR
-         +KyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738589233; x=1739194033;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=3+vRf77xml4mHTu6O1aUiY50kmdC/JGj1qSPGz7v6MU=;
-        b=r+LPfgUOm/OQOtH2GdAydBMdwH5qq0iEagC53qL9znxJ4Cd/CWKWq4dsiDYTtvNCji
-         XncjHCNZ5+dyErz5WmWhcKGR+5gqWIA0v36ob3vXbVYy614e6SWiszJuWnRAvP5m4KHB
-         YzW/obwPQM56nRBl7EqyZikylReTamqt5iD960tz+C9Rz/c7SyrD6X4LOPXqHJUQNkP4
-         73OVHOu7XH33fci5tYRMAjk1M0goyG2paxy/We2hnn650pC8V5a5v4iTo5bzD4LEO+iV
-         x+rj5itRo/yZttE6/5/LkPcL/je9DBanBE4DbCqSAwTGrxFzF5KZAX0VS/eaVxjFTt31
-         JflQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWYRAv3MHokrUbhi2NykXWVAwS8g6l2kGbWtlurFsn5qn1TX/wKjUsvzLovank55HcMoakWaV4zZ/k=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywq8iU05g7esZ7LIt9irIgr7xzewje4zp9JejD59B3P1ik/VykR
-	UWaJBly0mQMDtgcIxHSo6FyIqNjMI07IMMV9D11NP9iPbBKAHggz9+VxOLeLI3ZZA6LFYDF2NFG
-	6CYhI5KWP/0TUwuFyOMjS8w==
-X-Google-Smtp-Source: AGHT+IHwjwHvkkW+jcg/+Aa1C5HQN+uqueTyLSRP/rLwlvjOSfvDXy7ajCdgb0kho3srjN4gD1XAZXP+gvZYaeXjjQ==
-X-Received: from wmqb19.prod.google.com ([2002:a05:600c:4e13:b0:436:1a60:654e])
- (user=peternewman job=prod-delivery.src-stubby-dispatcher) by
- 2002:a7b:c356:0:b0:434:f218:e1a8 with SMTP id 5b1f17b1804b1-438dd1a5b55mr168374875e9.19.1738589233723;
- Mon, 03 Feb 2025 05:27:13 -0800 (PST)
-Date: Mon,  3 Feb 2025 14:26:42 +0100
-In-Reply-To: <35fc70fd-0281-4ac8-b32b-efa2f4516901@amd.com>
+	s=arc-20240116; t=1738589867; c=relaxed/simple;
+	bh=3LIrkUdgYIoDB6lJmGD+AQagBFms03gV3QNsqrM1pCk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=swxvSWguY+AwZZhnVRYIBzKUSOMznjx8LnXjr3O9D7teEKbxgkNGgoVaANqXNpTfazs7ZIq37gvGDUbSYtcBe1E8gcS+CpGWekat5XdxzVpjRiLpZIr6TmwJ+PsMnPX83TyAK+l7MyMh/6VClmc25kywfA5dLbaeRrUsKUbpGeM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=rere.qmqm.pl; spf=pass smtp.mailfrom=rere.qmqm.pl; dkim=pass (2048-bit key) header.d=rere.qmqm.pl header.i=@rere.qmqm.pl header.b=B/QOxKdR; arc=none smtp.client-ip=91.227.64.183
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=rere.qmqm.pl
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rere.qmqm.pl
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=rere.qmqm.pl; s=1;
+	t=1738589350; bh=3LIrkUdgYIoDB6lJmGD+AQagBFms03gV3QNsqrM1pCk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=B/QOxKdR8TDxjFpYyrzIjE5MMzNoOQ8mZwxfABIUonwmh27B7AagH/V8BMr0sNv2A
+	 1uvkDGos//bP/NP6NIrt8YD3I5J7KSJwK9SqzePgiKrfixHwvQUp/Jsm6E4TzOEbyI
+	 rcVY6NocM6EgzUdpC7QFnGYhy+qhkcP9XkDMyVFVL+6h72TJazKTSdIxYiMA4hCQfx
+	 r4apiISapEtBWIZudgt10dGZhdUTdtGAUa3SyJE4kBMaVo9Lw6jRpfZtYY8E2Uipfo
+	 VIc+7wAQFqNMuKkrvrM7TavzeL/ayduqxkSlhcFuZGubmQPhj6fI59NsKrHRipN4HN
+	 AjBwA+vdOksOg==
+Received: from remote.user (localhost [127.0.0.1])
+	by rere.qmqm.pl (Postfix) with ESMTPSA id 4YmnQY6XSLz1L;
+	Mon,  3 Feb 2025 14:29:09 +0100 (CET)
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 1.0.7 at mail
+Date: Mon, 3 Feb 2025 14:29:08 +0100
+From: =?iso-8859-2?Q?Micha=B3_Miros=B3aw?= <mirq-linux@rere.qmqm.pl>
+To: Andreas Karis <ak.karis@gmail.com>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	davem@davemloft.net, netdev@vger.kernel.org, corbet@lwn.net,
+	pshelar@ovn.org, dev@openvswitch.org, i.maximets@ovn.org,
+	edumazet@google.com, ovs-dev@openvswitch.org, pabeni@redhat.com,
+	kuba@kernel.org
+Subject: Re: [PATCH REPOST] docs: networking: Remove VLAN_TAG_PRESENT from
+ openvswitch doc
+Message-ID: <Z6DEpDT2cFn3pMKR@qmqm.qmqm.pl>
+References: <20250203113012.14943-1-ak.karis@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <35fc70fd-0281-4ac8-b32b-efa2f4516901@amd.com>
-X-Mailer: git-send-email 2.48.1.362.g079036d154-goog
-Message-ID: <20250203132642.2746754-1-peternewman@google.com>
-Subject: Re: [PATCH v9 09/26] x86/resctrl: Introduce interface to display
- number of monitoring counters
-From: Peter Newman <peternewman@google.com>
-To: babu.moger@amd.com
-Cc: akpm@linux-foundation.org, andrew.cooper3@citrix.com, bp@alien8.de, 
-	brijesh.singh@amd.com, corbet@lwn.net, daniel.sneddon@linux.intel.com, 
-	dave.hansen@linux.intel.com, ebiggers@google.com, eranian@google.com, 
-	fenghua.yu@intel.com, hpa@zytor.com, james.morse@arm.com, 
-	jithu.joseph@intel.com, jpoimboe@kernel.org, kai.huang@intel.com, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	maciej.wieczor-retman@intel.com, mario.limonciello@amd.com, mingo@redhat.com, 
-	paulmck@kernel.org, pawan.kumar.gupta@linux.intel.com, perry.yuan@amd.com, 
-	peternewman@google.com, reinette.chatre@intel.com, rostedt@goodmis.org, 
-	sandipan.das@amd.com, seanjc@google.com, tan.shaopeng@fujitsu.com, 
-	tglx@linutronix.de, thomas.lendacky@amd.com, thuth@redhat.com, 
-	tony.luck@intel.com, x86@kernel.org, xiaoyao.li@intel.com, xin3.li@intel.com, 
-	xiongwei.song@windriver.com
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-2
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250203113012.14943-1-ak.karis@gmail.com>
 
-Hi Babu,
+On Mon, Feb 03, 2025 at 12:30:12PM +0100, Andreas Karis wrote:
+> Since commit 0c4b2d370514 ("net: remove VLAN_TAG_PRESENT"), the kernel
+> no longer uses VLAN_TAG_PRESENT.
+> Update the openvswitch documentation which still contained an outdated
+> reference to VLAN_TAG_PRESENT.
 
-On Mon, Nov 18, 2024 at 03:31:28PM -0600, Moger, Babu wrote:
-> Hi Reinette,
+Hi, it would be best to extend this doc saying that the CFI bit is not
+usable in openvswitch (unlike in other parts of kernel).
+
+Nevertheless,
+Acked-by: Micha³ Miros³aw <mirq-linux@rere.qmqm.pl>
+
 > 
-> On 11/15/24 18:06, Reinette Chatre wrote:
-> > Hi Babu,
-> > 
-> > On 10/29/24 4:21 PM, Babu Moger wrote:
-> >> The mbm_cntr_assign mode provides an option to the user to assign a
-> >> counter to an RMID, event pair and monitor the bandwidth as long as
-> >> the counter is assigned. Number of assignments depend on number of
-> >> monitoring counters available.
-> >>
-> >> Provide the interface to display the number of monitoring counters
-> >> supported. The interface file 'num_mbm_cntrs' is available when an
-> >> architecture supports mbm_cntr_assign mode.
-> >>
-> > 
-> > As mentioned in previous patch, do you think it may be possible to
-> > have a value for num_mbm_cntrs for non-ABMC AMD systems? If that is
-> > available and always exposed to user space (irrespective of
-> > mbm_cntr_assign mode) then it would be clear to user space on
-> > benefits/risks of running a "default" mode.
+> Signed-off-by: Andreas Karis <ak.karis@gmail.com>
+> ---
+>  Documentation/networking/openvswitch.rst | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
 > 
-> I am trying the work-around to get the number of max active RMIDs in
-> default mode. The method is to loop through all of the recently assigned
-> RMID's to see if any of their QM_CTR.U bits transition from 0->1.
+> diff --git a/Documentation/networking/openvswitch.rst b/Documentation/networking/openvswitch.rst
+> index 1a8353dbf1b6..8d2bbcb92286 100644
+> --- a/Documentation/networking/openvswitch.rst
+> +++ b/Documentation/networking/openvswitch.rst
+> @@ -230,9 +230,8 @@ an all-zero-bits vlan and an empty encap attribute, like this::
+>      eth(...), eth_type(0x8100), vlan(0), encap()
+>  
+>  Unlike a TCP packet with source and destination ports 0, an
+> -all-zero-bits VLAN TCI is not that rare, so the CFI bit (aka
+> -VLAN_TAG_PRESENT inside the kernel) is ordinarily set in a vlan
+> -attribute expressly to allow this situation to be distinguished.
+> +all-zero-bits VLAN TCI is not that rare, so the CFI bit is ordinarily set
+> +in a vlan attribute expressly to allow this situation to be distinguished.
+>  Thus, the flow key in this second example unambiguously indicates a
+>  missing or malformed VLAN TCI.
+>  
+> -- 
+> 2.48.1
 > 
-> I am not successful in getting it to work so far. I remember Peter was
-> trying this before in soft-ABMC. Peter, Any success with that?
 
-Sorry I missed this question before. By now maybe you've already debugged your
-own implementation...
-
-Here's what I've been using:
-
--- >8 --
-Subject: [PATCH] x86/resctrl: Detect MBM counters on pre-ABMC AMD
- implementations
-
-This procedure is based on information provided directly by AMD
-which cannot currently be corroborated by any public documentation.
-
-In particular, it assumes that deallocation of MBM counters for RMIDs
-is driven directly by writing a new RMID value into PQR_ASSOC.
-
-Signed-off-by: Peter Newman <peternewman@google.com>
----
- arch/x86/kernel/cpu/resctrl/internal.h |  1 +
- arch/x86/kernel/cpu/resctrl/monitor.c  | 83 ++++++++++++++++++++++++++
- 2 files changed, 84 insertions(+)
-
-diff --git a/arch/x86/kernel/cpu/resctrl/internal.h b/arch/x86/kernel/cpu/resctrl/internal.h
-index 377b5db667930..4a13eab110510 100644
---- a/arch/x86/kernel/cpu/resctrl/internal.h
-+++ b/arch/x86/kernel/cpu/resctrl/internal.h
-@@ -705,6 +705,7 @@ int closids_supported(void);
- void closid_free(int closid);
- int alloc_rmid(u32 closid);
- void free_rmid(u32 closid, u32 rmid);
-+int amd_detect_mbm_counters(void);
- int __init rdt_get_mon_l3_config(struct rdt_resource *r);
- void __exit rdt_put_mon_l3_config(void);
- bool __init rdt_cpu_has(int flag);
-diff --git a/arch/x86/kernel/cpu/resctrl/monitor.c b/arch/x86/kernel/cpu/resctrl/monitor.c
-index 2dd6c47c9276a..f4a59251134d3 100644
---- a/arch/x86/kernel/cpu/resctrl/monitor.c
-+++ b/arch/x86/kernel/cpu/resctrl/monitor.c
-@@ -1172,6 +1172,89 @@ static __init int snc_get_config(void)
- 	return ret;
- }
- 
-+static void zero_rmid(void *unused)
-+{
-+	wrmsr(MSR_IA32_PQR_ASSOC, 0, 0);
-+}
-+
-+int amd_detect_mbm_counters(void)
-+{
-+	struct cpu_cacheinfo *ci;
-+	u32 rmid, test_rmid;
-+	int llc_index;
-+	u64 ctr;
-+
-+	/*
-+	 * The following detection mechanism below provided by AMD. It applies
-+	 * only to pre-ABMC models (Rome, Milan, Genoa).
-+	 */
-+	if (WARN_ON(boot_cpu_data.x86_vendor != X86_VENDOR_AMD))
-+		return -1;
-+	if (WARN_ON(rdt_cpu_has(X86_FEATURE_ABMC)))
-+		return -1;
-+
-+	/*
-+	 * Must not migrate to another CCX during this test. Assume no IRQ
-+	 * handler would access the MSRs used below before resctrl is
-+	 * initialized.
-+	 */
-+	ci = get_cpu_cacheinfo(get_cpu());
-+	llc_index = ci->num_leaves - 1;
-+
-+	/* Ensure PQR_ASSOC.RMID = 0 in this CCX. */
-+	if (ci->cpu_map_populated)
-+		on_each_cpu_mask(&ci->info_list[llc_index].shared_cpu_map,
-+				 zero_rmid, NULL, true);
-+
-+	rmid = 0;
-+	while (true) {
-+		wrmsr(MSR_IA32_PQR_ASSOC, rmid, 0);
-+		wrmsr(MSR_IA32_QM_EVTSEL, QOS_L3_MBM_TOTAL_EVENT_ID, rmid);
-+
-+		/*
-+		 * Ensure that a counter has been allocated on this RMID. The
-+		 * loop below is expected to complete in two iterations.
-+		 */
-+		do {
-+			rdmsrl(MSR_IA32_QM_CTR, ctr);
-+
-+			if (WARN_ON(ctr & RMID_VAL_ERROR)) {
-+				pr_err("failed to read total event on rmid %u\n",
-+				       rmid);
-+				put_cpu();
-+				return 0;
-+			}
-+		} while (ctr & RMID_VAL_UNAVAIL);
-+
-+		/*
-+		 * The order in which counters are reused is not predictable, so
-+		 * check all previously-assigned counters. If any loses its
-+		 * value, then too many are in use as a result of the last
-+		 * PQR_ASSOC write.
-+		 */
-+		for (test_rmid = 0; test_rmid < rmid; test_rmid++) {
-+			wrmsr(MSR_IA32_QM_EVTSEL, QOS_L3_MBM_TOTAL_EVENT_ID,
-+			      test_rmid);
-+			rdmsrl(MSR_IA32_QM_CTR, ctr);
-+
-+			/*
-+			 * As soon as a previous counter loses a value, we have
-+			 * determined the number of RMIDs which can hold a value
-+			 * simultaneously in this CCX.
-+			 */
-+			if (ctr & RMID_VAL_UNAVAIL) {
-+				put_cpu();
-+				return rmid;
-+			}
-+		}
-+		rmid++;
-+	}
-+
-+	put_cpu();
-+
-+	return 0;
-+}
-+
- int __init rdt_get_mon_l3_config(struct rdt_resource *r)
- {
- 	unsigned int mbm_offset = boot_cpu_data.x86_cache_mbm_width_offset;
+-- 
+Micha³ Miros³aw
 
