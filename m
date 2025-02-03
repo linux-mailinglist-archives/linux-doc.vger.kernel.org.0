@@ -1,184 +1,185 @@
-Return-Path: <linux-doc+bounces-36665-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36667-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13A29A25DC3
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 16:02:07 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 797CAA25DDC
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 16:05:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 28081188A73F
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 14:55:46 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 32BB81883444
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Feb 2025 15:02:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9605C200BB9;
-	Mon,  3 Feb 2025 14:55:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BFD772080F2;
+	Mon,  3 Feb 2025 15:01:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="cL76iXY+"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="pwaf+oq8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2061.outbound.protection.outlook.com [40.107.93.61])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1A2C1E493
-	for <linux-doc@vger.kernel.org>; Mon,  3 Feb 2025 14:55:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.51
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738594508; cv=none; b=kSeyNjsZexlLGx9thILiF2oaJujOieJbnFLDSj1I48G8sCU3g1MTCsbtE7jJsYLhVDiHL5oj6qvNiejKT1McL7+0qbHestA5wR37ki4U3gZWPIpJ+FoWITOgXsGgBktPac1YgM2tZjW28VKVn015R3Y4loKlhQUS48e68yYBed8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738594508; c=relaxed/simple;
-	bh=gHsMCkJs2riOdbZqFloAv69IQ1+bLd02YtAO/lKKkyE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=rgJTezDrZ6d06alQ4AMIiOKHFvdmbrzaDrEhpmCDz/bl1+7rrHP7QJVJizW8HUFeLGxK+vM77frxnNw5NXo8ldV2ZXFOfhuOctz3YfYXMxuYRENP9ILgn8uklkxcXOKJ6T8+jmtY5jPFK/FwPhcqF6ESiX255xNKzXNDRga+QC4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=cL76iXY+; arc=none smtp.client-ip=209.85.208.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-5dc7eba78e6so8210832a12.3
-        for <linux-doc@vger.kernel.org>; Mon, 03 Feb 2025 06:55:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1738594505; x=1739199305; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CPLbYVOavTEUypWZqa8GromqJrdVJu+j93QkHV16eYo=;
-        b=cL76iXY+ZzPKAR5vlscxs+EkVleeWJMDCPx/rC0xD4sp8Sg9U1I4Hs8M/PjLG7waLx
-         Eam9dpam7NfNqHqS3luBiL/Eko8BrAosK0IWVMRmlXqM49otV3LAaFEdTvtOUEY9qfdH
-         q9Uypoe5I2VUJjTddGh0beSZYyLlUzFa4QeTYE3izdO01OfEOABcJgjdoByE6CUdrUqZ
-         upGN3ejz+2UvtjnlQoYMeeZF5ZLmLz3iM58qJjFAO/BkZGGzqsl6qEviRu8Up62egvsj
-         QIpuHsEw3wyNYEz38fvN2uv3AgxI9VBSgrC+i6A9bwBedMIs35MExfXgkaz8u7mXuFAY
-         kcXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738594505; x=1739199305;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=CPLbYVOavTEUypWZqa8GromqJrdVJu+j93QkHV16eYo=;
-        b=DA3ZMYC8Xzt+bbg2w0QFMSKfrf4NmH+SNYxC3Wl+3ExuMMw+qmjHlwgL4AwHKM6FD5
-         3S/S45WREcHhlksiDkAEscrP8JRjpgPMfElx1R6sFaf9vJEq67DKkiejBF4tS3yZigOL
-         yvPAQp+GsUG+VdsLWxpRZ3+fWhFINdVNGVW8gn9ENTlB28bXZVlhJuZKUsHl9pzl9RKk
-         qV4x4kinxvHcqh9jKlFi5wg5VeouOi/qvt+XecfNgBZFxmHro17SA/2JVsxI9HX5ifkJ
-         QOx0YgeKTN5ZtXLOOJkWsPKMa5xkgwMCJa4H00zRDoHsYQkF0pfBPAvbF6/6J0H6Hliz
-         N0lA==
-X-Forwarded-Encrypted: i=1; AJvYcCWy4lKGHNzc/Ltp8b6ySqCyrtWMb7w66URzWnEkeuuxUwRZBRljzspJXnhlvzeS7AU3x7kUoIhja9k=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxyDQWMs54njTRyEqyNkEuwNMy0tDDe0LDvzwwE0fDJG4gSvWL5
-	7uEUdqGX2wdJjGMKbVTy7PaSGynjEGyZzzo2wMj6eytKyYIBINbreefMz6vukdSZgQ1z9a4dM/2
-	nO6Cy97AKt1ZctJM8nF/22lc9fcXfblkwLY4m
-X-Gm-Gg: ASbGnctZHFUwkShxiNu4Zr8W6Zc6ZzpaGoTshkGNmmD6cg9Wt0JIczS1I8bD4GPKvqi
-	8johKh/MvXBii7KpqZb2rZB/TslxSc8mG2sYKHnzZ54wudXlLg8fARhbVOIwwpyA9Z8B+zpIDZ0
-	7Zt9J3DwBZCqen6RFePkpIMsUqZac=
-X-Google-Smtp-Source: AGHT+IGcpwf5EdKTyXQE6gz/RvkY8eJ9LO3a0HUryA2bwhyjtOJ8CO05/pbFPzpgmPE6/ergR0yorR08N7WUkycDAak=
-X-Received: by 2002:a17:907:9413:b0:ab6:f68c:746e with SMTP id
- a640c23a62f3a-ab6f68c7570mr2013871466b.41.1738594504724; Mon, 03 Feb 2025
- 06:55:04 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E99A25A656;
+	Mon,  3 Feb 2025 15:01:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.93.61
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1738594914; cv=fail; b=cZhQlG8Suydtx3MH0imh/oZ0DXJHpwQyanYs9aVSAnvYL5GsZlYHewoWGmTolHWwTOvH++Xx+A5Ps0b4y+xDgFdcEJoxb+zy6FbDsazqaVzpEpkY0n5hpTeGajI9ysnxeuQveuKCMg6Lkynz9yy85zs26aEtc+qa1qwQAU9XZ8I=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1738594914; c=relaxed/simple;
+	bh=DisK/ccaqcft3O80p5dDC8SiPcTa0K0NTk6c+IMpNGs=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Gzz3NbRgRHcB19hk8yoipXyy4KPrXA3ShY/dtxOLq/CCJN8WWXMM9nfocSr/lqDy8v+FfvC+pl6ofB+urDUgRk5d4o61EAjioudl37Fq2o+Bz+s28CSQizcYybaiLgEwLzH5haAhzhzoLaCZKRajbbNbUz1y/heZ/g1cLXAhXvE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=pwaf+oq8; arc=fail smtp.client-ip=40.107.93.61
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=nTzhCfRmfPpOtg9oqLW6TfeuKBNeMO1vnWUmycPv3/KR18TZAuGig75+ibmeciOqANr1rKKxjuei3pOIHDncGK8d+808hhkhRkyDm4YeZUfmHfGxaV3DmbjE4r0NeNDTVtMKSATQ8BL87deTdR6PmF917BmfbHMW2OLhpTfr3R9JYEdBRMMOlslS1Pk2XHrCf+XapBX3aqzI3N2A95PkiOTOoboCaprekRjvQVz0HZiA0SjvI50b3GZY9ROcnqO+JesJOKFsIZG92083eYeEMu+KsDEwOgUBZssDtQ16ImNA/tUInkzDEBqJ1NKjq/cupORXKEnjhJEWAHlv6JjUOQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=LvHTLNpKbbXJhKiRJMGkhrYNKPdheLnzbD6UTgxe1kU=;
+ b=hvJcxwKqPYx2sb/Vxdnre9r1A3Fg2qSGXulCf71d5KR39WMENL0+qTENenVguKIxyH6eDhgzZGiBNcvPztp7vpt9iS04c5ctZvSZtx32qf91EGXiiPzpns8LBBsA/862+dN3OOOysRsmKDzW/ghgSAVie5tEzNjdXmE+WdAsHlnvJ+TRLCJkzfcjwJMGNzkxp0BrtXGT59VhNBPrTQTtKWstokOsB1bWoNpzsfGYCTEuIDvs176Iwv8FPEYJdO8jh9qSySh3MP9GAemmCOx5pp3qAcN5zbMXQF4Ll/X8Vc5mShsVsEU+aZ51Ld5QVfUMgfmleNOKNXtpKmodNfswng==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=davemloft.net smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LvHTLNpKbbXJhKiRJMGkhrYNKPdheLnzbD6UTgxe1kU=;
+ b=pwaf+oq8Wu5LVQjtRlCaiXU6s2kkRE4rWkbghxvFY7EILnY05RFcEcSA6sPi8rBVLiFwGe3WSxKCIkE7LO9rYrzniC1MiVcp9Q3jLHjFG7cs3C7hJpJFqHOWVeOoWPu2YuJjyoSLyF07icFbIJ2ScOtwJbd8WKOXuU1lQeTEurq91yt25Y5Hub1x8kXRCzk1VdLkjakaJjJU0BguB5xjHzE6EPRim2zDNV6NBabfxfOc+FPJAs8bfR0QCpjPVNguRuz7VgapmIIzZf8rqm467PlOAEjFF/jYhoqSsJELyxLHntieXtk+CK3T4DD2enzdK/hn+TpdCB2G8KHwqnGhpQ==
+Received: from SA0PR11CA0162.namprd11.prod.outlook.com (2603:10b6:806:1bb::17)
+ by SJ1PR12MB6363.namprd12.prod.outlook.com (2603:10b6:a03:453::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.20; Mon, 3 Feb
+ 2025 15:01:46 +0000
+Received: from SN1PEPF00026368.namprd02.prod.outlook.com
+ (2603:10b6:806:1bb:cafe::cd) by SA0PR11CA0162.outlook.office365.com
+ (2603:10b6:806:1bb::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.24 via Frontend Transport; Mon,
+ 3 Feb 2025 15:01:46 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ SN1PEPF00026368.mail.protection.outlook.com (10.167.241.133) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8398.14 via Frontend Transport; Mon, 3 Feb 2025 15:01:45 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 3 Feb 2025
+ 07:01:24 -0800
+Received: from rnnvmail203.nvidia.com (10.129.68.9) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Mon, 3 Feb
+ 2025 07:01:24 -0800
+Received: from vdi.nvidia.com (10.127.8.12) by mail.nvidia.com (10.129.68.9)
+ with Microsoft SMTP Server id 15.2.1544.14 via Frontend Transport; Mon, 3 Feb
+ 2025 07:01:21 -0800
+From: Gal Pressman <gal@nvidia.com>
+To: "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>
+CC: <netdev@vger.kernel.org>, Eric Dumazet <edumazet@google.com>, Paolo Abeni
+	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Jonathan Corbet
+	<corbet@lwn.net>, Tony Nguyen <anthony.l.nguyen@intel.com>, Przemek Kitszel
+	<przemyslaw.kitszel@intel.com>, Andrew Lunn <andrew+netdev@lunn.ch>, "Tariq
+ Toukan" <tariqt@nvidia.com>, Edward Cree <ecree.xilinx@gmail.com>, Ahmed Zaki
+	<ahmed.zaki@intel.com>, <linux-doc@vger.kernel.org>, Gal Pressman
+	<gal@nvidia.com>
+Subject: [PATCH net-next 0/2] Symmetric OR-XOR RSS hash
+Date: Mon, 3 Feb 2025 17:00:37 +0200
+Message-ID: <20250203150039.519301-1-gal@nvidia.com>
+X-Mailer: git-send-email 2.40.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <cover.1737577229.git.babu.moger@amd.com>
-In-Reply-To: <cover.1737577229.git.babu.moger@amd.com>
-From: Peter Newman <peternewman@google.com>
-Date: Mon, 3 Feb 2025 15:54:53 +0100
-X-Gm-Features: AWEUYZnsxLCyQ3OS5U7o9ezateKgGmcWHuzP2hO3Yllsafh7G56R-7FYrvqlTV0
-Message-ID: <CALPaoCgiZ=tZE_BF2XzeYMRG84x4+kGKfhHWj2Uo=Cre_B_6Vg@mail.gmail.com>
-Subject: Re: [PATCH v11 00/23] x86/resctrl : Support AMD Assignable Bandwidth
- Monitoring Counters (ABMC)
-To: Babu Moger <babu.moger@amd.com>
-Cc: corbet@lwn.net, reinette.chatre@intel.com, tglx@linutronix.de, 
-	mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com, 
-	tony.luck@intel.com, fenghua.yu@intel.com, x86@kernel.org, hpa@zytor.com, 
-	paulmck@kernel.org, akpm@linux-foundation.org, thuth@redhat.com, 
-	rostedt@goodmis.org, xiongwei.song@windriver.com, 
-	pawan.kumar.gupta@linux.intel.com, daniel.sneddon@linux.intel.com, 
-	jpoimboe@kernel.org, perry.yuan@amd.com, sandipan.das@amd.com, 
-	kai.huang@intel.com, xiaoyao.li@intel.com, seanjc@google.com, 
-	xin3.li@intel.com, andrew.cooper3@citrix.com, ebiggers@google.com, 
-	mario.limonciello@amd.com, james.morse@arm.com, tan.shaopeng@fujitsu.com, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	maciej.wieczor-retman@intel.com, eranian@google.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: AnonymousSubmission
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF00026368:EE_|SJ1PR12MB6363:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1b313469-4dd8-4d05-7550-08dd4463ad1e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|7416014|376014|36860700013;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?LiqQ1Og+OuAzovBrUEnk+J3IXylTA0UwRgXlzmqvqLp0kc/8RqwPLzxfv14B?=
+ =?us-ascii?Q?NP/FA2Kimv1npYkwM1vPZP960FDh9AC2wSl7XCrnhbGhlzSrqtSsxhvKpxI5?=
+ =?us-ascii?Q?S2sXs4cP0mtSFqNGt8Jv3L2jOeznydtod07Qp0q09gi7M+NzLhjf10mK8hXB?=
+ =?us-ascii?Q?tIYoZ4tiNUwo95uZVqQoENdh7VEhjMRBhu2poq1oSfMheE75LG+ExNATuDV0?=
+ =?us-ascii?Q?2wVs9RnAeqpsSWpafBqLd8633RQzTUUFCuStwc02RGi4IztlCmLfbVI00svh?=
+ =?us-ascii?Q?8EHu5tiK+aZCr0sumQ6DmfeReE/BWTkuMrDXJ6CVpZ9qpPNagIfQXIhzCF3x?=
+ =?us-ascii?Q?mCWOJTuyoFV+gIb7Oue3MWSjtqMe+/C+cgzPqesuGgDTCvrV0zEd7CjoJvgJ?=
+ =?us-ascii?Q?IltyBb6j/10U2YzhELvO3Hgt8QNfgGPj8f0+1sjFX9Q/BksyJJlMjg1puXTH?=
+ =?us-ascii?Q?4Xn0dHbpMzDpmpjY9k05eGJrl+jzAfdXgcyGFZ1PvWRX5T1wSyWq9R8Bj4n/?=
+ =?us-ascii?Q?bCZC5qElLFxEuX1oBEQCgEyypoFOtoOAr1Q9a0KsuW9qHfiesIx5InM2rFRA?=
+ =?us-ascii?Q?z8XfxM/Ya+hJ+ARgG4SAc9MNouhTgj73j/LBK52gEmIAI7B2UIpyTmCmtevl?=
+ =?us-ascii?Q?Ye7t1SOVRTq27fOKiLngJRay9GSGyZbK5I5deDB1/k/cocGIQ9HFv4pnCx8C?=
+ =?us-ascii?Q?3O9aWuBQ5H0Wd8xwVwOrjTppLEtmpI6kSiVvSpvjdcqIqRM0U5HHJ1gEd0YO?=
+ =?us-ascii?Q?b3310/I35xyu4sItVvb9+GbayFm4+QC6yhmFWEJ3HYYJA9nQGg2WKempjN1G?=
+ =?us-ascii?Q?mh511MZzuxpGj8cym+QbWONtVhBspjs5GLuk1sDRGHeh4oGHw84vLWvbWdCm?=
+ =?us-ascii?Q?hQwH1RfNstiMXeVdo7W0ZIIal9Qd/SxDQigVE2NTP7qHxCmPCwWHGIIJ2ZrZ?=
+ =?us-ascii?Q?glk9Lxld6S5yCm6CQfwEOZkMIkjGa3t1h/BsygHsydrShMZ5tY7NpLgcVifP?=
+ =?us-ascii?Q?zBEwIzvC606QzssRXFFZ8/hyP1yXdYQoEbDet4bhGpVoDywsioeFqfxN9gVo?=
+ =?us-ascii?Q?NeXgN/WvUyB1De7ka5ozRL8PPBOd+CrvSuo8SfYaeTFwWvamau/vEeG8FewH?=
+ =?us-ascii?Q?3EoWtOFlXzJ63ZxJcdPpgF0YRRCEx73lqwa7t42s2/5D46+V73R/WfYQX4kG?=
+ =?us-ascii?Q?35SszsuviRWgOuLUKlUwPC2oGAnCT3pT57W51aa/od0sB+1FXBH1r497sVcD?=
+ =?us-ascii?Q?5dxbTms8XKh3OXMNLtayRrbnb0fx/81ZSPpBiKkdr5cZjlEO/oZw+5guHbj1?=
+ =?us-ascii?Q?lVS8/yyJC/l2Zncu1aTi1x0No8q3+Vtn1FsW/aG3exwzAihfUx5rZQwi7jGy?=
+ =?us-ascii?Q?V7+GUUeIryl2YiGJnVr9hsIsKW2DQXbiG9IA0Zk9m+9JKqlaL1uRv36hD0Ae?=
+ =?us-ascii?Q?6Otc0lcVddTh8VnhXbln8732WCeBO8n0LRFrbTO/BmvNopiQ+vkaaeR8Se8E?=
+ =?us-ascii?Q?P7px3g5maB44/H0=3D?=
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(7416014)(376014)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2025 15:01:45.1040
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b313469-4dd8-4d05-7550-08dd4463ad1e
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SN1PEPF00026368.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6363
 
-Hi Babu,
+Add support for a new type of input_xfrm: Symmetric OR-XOR.
+Symmetric OR-XOR performs hash as follows:
+(SRC_IP | DST_IP, SRC_IP ^ DST_IP, SRC_PORT | DST_PORT, SRC_PORT ^ DST_PORT)
 
-On Wed, Jan 22, 2025 at 9:20=E2=80=AFPM Babu Moger <babu.moger@amd.com> wro=
-te:
->
->
-> This series adds the support for Assignable Bandwidth Monitoring Counters
-> (ABMC). It is also called QoS RMID Pinning feature
->
-> Series is written such that it is easier to support other assignable
-> features supported from different vendors.
->
-> The feature details are documented in the  APM listed below [1].
-> [1] AMD64 Architecture Programmer's Manual Volume 2: System Programming
-> Publication # 24593 Revision 3.41 section 19.3.3.3 Assignable Bandwidth
-> Monitoring (ABMC). The documentation is available at
-> Link: https://bugzilla.kernel.org/show_bug.cgi?id=3D206537
->
-> The patches are based on top of commit
-> d361b84d51bfe (tip/master) Merge branch into tip/master: 'x86/tdx'
->
-> # Introduction
->
-> Users can create as many monitor groups as RMIDs supported by the hardwar=
-e.
-> However, bandwidth monitoring feature on AMD system only guarantees that
-> RMIDs currently assigned to a processor will be tracked by hardware.
-> The counters of any other RMIDs which are no longer being tracked will be
-> reset to zero. The MBM event counters return "Unavailable" for the RMIDs
-> that are not tracked by hardware. So, there can be only limited number of
-> groups that can give guaranteed monitoring numbers. With ever changing
-> configurations there is no way to definitely know which of these groups
-> are being tracked for certain point of time. Users do not have the option
-> to monitor a group or set of groups for certain period of time without
-> worrying about counter being reset in between.
->
-> The ABMC feature provides an option to the user to assign a hardware
-> counter to an RMID, event pair and monitor the bandwidth as long as it is
-> assigned.  The assigned RMID will be tracked by the hardware until the us=
-er
-> unassigns it manually. There is no need to worry about counters being res=
-et
-> during this period. Additionally, the user can specify a bitmask identify=
-ing
-> the specific bandwidth types from the given source to track with the coun=
-ter.
->
-> Without ABMC enabled, monitoring will work in current 'default' mode with=
-out
-> assignment option.
->
-> # Linux Implementation
->
-> Create a generic interface aimed to support user space assignment
-> of scarce counters used for monitoring. First usage of interface
-> is by ABMC with option to expand usage to "soft-ABMC" and MPAM
-> counters in future.
-
-As a reminder of the work related to this, please take a look at the
-thread where Reinette proposed a "shared counters" mode in
-mbm_assign_control[1]. I am currently working to demonstrate that this
-combined with the mbm_*_bytes_per_second events discussed earlier in
-the same thread will address my users' concerns about the overhead of
-reading a large number of MBM counters, resulting from a maximal
-number of monitoring groups whose jobs are not isolated to any L3
-monitoring domain.
-
-ABMC will add to the number of registers which need to be programmed
-in each domain, so I will need to demonstrate that ABMC combined with
-these additional features addresses their performance concerns and
-that the resulting interface is user-friendly enough that they will
-not need a detailed understanding of the implementation to avoid an
-unacceptable performance degradation (i.e., needing to understand what
-conditions will increase the number of IPIs required).
-
-If all goes well, soft-ABMC will try to extend this usage model to the
-existing, pre-ABMC, AMD platforms I support.
+Configuration is done through ethtool -x/X command.
+For mlx5, the default is already symmetric hash, this patch now exposes
+this to userspace and allows enabling/disabling of the feature.
 
 Thanks,
--Peter
+Gal
 
-[1] https://lore.kernel.org/lkml/7ee63634-3b55-4427-8283-8e3d38105f41@intel=
-.com/
+Gal Pressman (2):
+  ethtool: Symmetric OR-XOR RSS hash
+  net/mlx5e: Symmetric OR-XOR RSS hash control
+
+ Documentation/networking/ethtool-netlink.rst    |  2 +-
+ Documentation/networking/scaling.rst            | 14 ++++++++++----
+ drivers/net/ethernet/intel/iavf/iavf_ethtool.c  |  2 +-
+ drivers/net/ethernet/intel/ice/ice_ethtool.c    |  2 +-
+ .../net/ethernet/mellanox/mlx5/core/en/rss.c    | 13 +++++++++++--
+ .../net/ethernet/mellanox/mlx5/core/en/rss.h    |  4 ++--
+ .../net/ethernet/mellanox/mlx5/core/en/rx_res.c | 11 ++++++-----
+ .../net/ethernet/mellanox/mlx5/core/en/rx_res.h |  5 +++--
+ .../net/ethernet/mellanox/mlx5/core/en/tir.c    |  2 +-
+ .../net/ethernet/mellanox/mlx5/core/en/tir.h    |  1 +
+ .../ethernet/mellanox/mlx5/core/en_ethtool.c    | 17 ++++++++++++++---
+ include/linux/ethtool.h                         |  5 ++---
+ include/uapi/linux/ethtool.h                    |  7 ++++---
+ net/ethtool/ioctl.c                             |  8 ++++----
+ 14 files changed, 61 insertions(+), 32 deletions(-)
+
+-- 
+2.40.1
+
 
