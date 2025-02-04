@@ -1,127 +1,88 @@
-Return-Path: <linux-doc+bounces-36879-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36884-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF2C0A27D10
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 22:09:35 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id A6D43A27DF0
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 23:01:26 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 77C51165CAD
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 21:09:34 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1AA403A16EB
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 22:01:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C213C21A453;
-	Tue,  4 Feb 2025 21:09:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3AC8815854A;
+	Tue,  4 Feb 2025 22:01:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=joelfernandes.org header.i=@joelfernandes.org header.b="h27OHlHW"
+	dkim=pass (1024-bit key) header.d=gentwo.org header.i=@gentwo.org header.b="jyGtOg/i"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from gentwo.org (gentwo.org [62.72.0.81])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB12B21A449
-	for <linux-doc@vger.kernel.org>; Tue,  4 Feb 2025 21:09:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77A0A25A623;
+	Tue,  4 Feb 2025 22:01:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.72.0.81
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738703367; cv=none; b=FPDjiNxbkL1kwtNzHckeaCfNLsNkkRUR6ezM+QuiBRseOWz9Q6NK+xnqABvF1nIPCDAzCf7U3+gZg7fk94zpkse/Ko/75KVeG36JdRfLlpIA3oO460sFLKWHMYmw7+jDzQHXYLRXL5+evaCn6Qvj+/28Pjq5pAePT/ddp+a7paA=
+	t=1738706481; cv=none; b=Vwj4CXK1J5HisT0+nGRFfOUvwJuLVdGE/BzfPj28kvqqD4Shm2ZCe7gwmLkP/eX+FmYoRowNyKKSci/c3frL/6eEGLh948rx9n88jTREc5F+f4Bb4JVPUlt3fXQkuqd2YLfQcjMNSh6JqTg7tKAprJK7ezHCt25Ox8DcBpUceq0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738703367; c=relaxed/simple;
-	bh=8JkrkZVOFCHaDqjin9PXTeQJWqvM07LcTV+TIYQ+Qi4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=QBKj+7qCWBuzX2QWFslGJ41hC1oOycOc3IWvWV+khhyesOI9bTcMFPMF8irSY2KdVVuWKZzV+yE2K98ped9NprUrk8sXXnCTVVdXH4vXM9ICG26TzGtUcYaOBU299aAtz4dRJ6n0nvsyvBijEyKjz92A7sQvuSalia4D5ktimp0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=joelfernandes.org; spf=pass smtp.mailfrom=joelfernandes.org; dkim=pass (1024-bit key) header.d=joelfernandes.org header.i=@joelfernandes.org header.b=h27OHlHW; arc=none smtp.client-ip=209.85.128.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=joelfernandes.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=joelfernandes.org
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4361f664af5so69990395e9.1
-        for <linux-doc@vger.kernel.org>; Tue, 04 Feb 2025 13:09:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=joelfernandes.org; s=google; t=1738703364; x=1739308164; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hU4QrAbDQR1o2bnoBznVmRjsUjgFoPERHNCe0D3R9dg=;
-        b=h27OHlHW5fNN3Od2Zrb//yjj0qxlJtqZyfW8O0wgJ949DhuNA2d72vsouaqlLTTHrS
-         K1GRk2awzoYzbc18t8v6xpyGusQ8c0z9WCVMOp9kIkwPphzD0og9klmyPGe/BQWw4VoE
-         KRvVGVVZj9iOSQobUwwG7yJUuIHktYQK25nxw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738703364; x=1739308164;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=hU4QrAbDQR1o2bnoBznVmRjsUjgFoPERHNCe0D3R9dg=;
-        b=oEoMBO9cUtZW+NzBKdPoiYHEJtlVhv79Ei1yA72ERD0iNb+o+U2fQpb+yFzYgBQQIb
-         K96wvBM0Z8PEts5lIgZMq8IXpw5mZAdJdINQIhfwnnogbUMnlSbhVEzvOncHMFuEtBVz
-         BjVBB8wwknc7B/0jc4jxwptPhBy8/BYOHtq4UT/2IQaUqBtHjBMLGyRysRTrozW0iWrY
-         gBWZTdKYQJIF6ngwC0hKgzPXV1yzamXnmG6yYO8z2E0rUh+r0vtz5RwrThtONQCAAY2q
-         9dyupdZ18cl3lCCiMmFm3MejLBKuTLJcokGSH/7wrmrPMQBMC3/tkKb5I+MH+zgR1bTT
-         JY+Q==
-X-Forwarded-Encrypted: i=1; AJvYcCWVRWWOZjk+gF4wsdwUtUoCdj+W69KGwoeiOfA1Av7xvaRuqo7t2YKzNiGQVIju81C9pGdbEg+MeWM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzO63ox7shi3Hutlf2t7uRaYIGnbHULQ/0nQTFHQxWvDGfiWJ1+
-	03bDk4v+JQnIZdIDIoC0jtziefUng+OTFDpglVwMzwZmQFI2kOspD/YkqASCHIhOjbTPRlOlDKR
-	Ap45KxmTpbgATP6zmzadAdH+2gMzDQhqga/BBBg==
-X-Gm-Gg: ASbGncvXqi8X460qLKwy3TKIFEHsIi2st+2rKcZmD4ozQlbJVJKMaBwZPeH3Dn3gSP3
-	7zRpCBGKTXiCBZlWa4uYdK/GAhfHD6dowlt9CjeC4JFcuOboJ2FWzzRVvNkQgYJRBWwmxzbxy
-X-Google-Smtp-Source: AGHT+IG1wU/phrvdmWOZ6gg4Qkaj9tiLGHlTlII39K2KsIGA/7PJCQGdfM9Y7R/VJVyH/LBFDX1pLGfA1F+6yTJrKno=
-X-Received: by 2002:a05:600c:5492:b0:434:ff25:19a0 with SMTP id
- 5b1f17b1804b1-4390d5697b4mr753735e9.21.1738703363904; Tue, 04 Feb 2025
- 13:09:23 -0800 (PST)
+	s=arc-20240116; t=1738706481; c=relaxed/simple;
+	bh=L7hZ7sYPCCjt4cWuKdRqkFzNU2NINe/kZtlYF3GX+To=;
+	h=Date:From:To:cc:Subject:In-Reply-To:Message-ID:References:
+	 MIME-Version:Content-Type; b=kjBVleSD8un0TIx2geUCX6Sjt5+dI4f7F4VINQPUiYl+FFr8uYSCHUO/m6fQasLCu7wNwcCDGJlutUurPpKH03hdibeUdQi8A8cZJ2MMu1xlWj10gFaeSKoOxKmRhiQFrGXXIEWdrvfLgB6QxyJhg6RkmiafkDwMPKz8bxkcsWI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=gentwo.org; spf=pass smtp.mailfrom=gentwo.org; dkim=pass (1024-bit key) header.d=gentwo.org header.i=@gentwo.org header.b=jyGtOg/i; arc=none smtp.client-ip=62.72.0.81
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=gentwo.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gentwo.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gentwo.org;
+	s=default; t=1738695503;
+	bh=L7hZ7sYPCCjt4cWuKdRqkFzNU2NINe/kZtlYF3GX+To=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=jyGtOg/iCyiwjp/g1mTcKme1MwefVaOX7wySyrZcham7FrqcugOECEhMIB5bHuVxw
+	 jxBiJ9xi5y9Ou8aDKij09mJEeZ7EVO+B4CuJIYNSPaLeZ0McyYcgp8ncn+IliZWl8N
+	 HZraV3iO1ZSruE8vDNlj7sXOI+AYMSwijILKB/nU=
+Received: by gentwo.org (Postfix, from userid 1003)
+	id EC29D401EB; Tue,  4 Feb 2025 10:58:23 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by gentwo.org (Postfix) with ESMTP id E915A401E9;
+	Tue,  4 Feb 2025 10:58:23 -0800 (PST)
+Date: Tue, 4 Feb 2025 10:58:23 -0800 (PST)
+From: "Christoph Lameter (Ampere)" <cl@gentwo.org>
+To: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
+cc: luto@kernel.org, xin@zytor.com, kirill.shutemov@linux.intel.com, 
+    palmer@dabbelt.com, tj@kernel.org, andreyknvl@gmail.com, brgerst@gmail.com, 
+    ardb@kernel.org, dave.hansen@linux.intel.com, jgross@suse.com, 
+    will@kernel.org, akpm@linux-foundation.org, arnd@arndb.de, corbet@lwn.net, 
+    dvyukov@google.com, richard.weiyang@gmail.com, ytcoode@gmail.com, 
+    tglx@linutronix.de, hpa@zytor.com, seanjc@google.com, 
+    paul.walmsley@sifive.com, aou@eecs.berkeley.edu, justinstitt@google.com, 
+    jason.andryuk@amd.com, glider@google.com, ubizjak@gmail.com, 
+    jannh@google.com, bhe@redhat.com, vincenzo.frascino@arm.com, 
+    rafael.j.wysocki@intel.com, ndesaulniers@google.com, mingo@redhat.com, 
+    catalin.marinas@arm.com, junichi.nomura@nec.com, nathan@kernel.org, 
+    ryabinin.a.a@gmail.com, dennis@kernel.org, bp@alien8.de, 
+    kevinloughlin@google.com, morbo@google.com, dan.j.williams@intel.com, 
+    julian.stecklina@cyberus-technology.de, peterz@infradead.org, 
+    kees@kernel.org, kasan-dev@googlegroups.com, x86@kernel.org, 
+    linux-arm-kernel@lists.infradead.org, linux-riscv@lists.infradead.org, 
+    linux-kernel@vger.kernel.org, linux-mm@kvack.org, llvm@lists.linux.dev, 
+    linux-doc@vger.kernel.org
+Subject: Re: [PATCH 00/15] kasan: x86: arm64: risc-v: KASAN tag-based mode
+ for x86
+In-Reply-To: <cover.1738686764.git.maciej.wieczor-retman@intel.com>
+Message-ID: <8bd9c793-aac6-a330-ea8f-3bde0230a20b@gentwo.org>
+References: <cover.1738686764.git.maciej.wieczor-retman@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250131220432.17717-1-dakr@kernel.org> <20250203202410.GA3936980@joelbox2>
- <Z6Jgf-cVt_AlM6Qd@cassiopeiae>
-In-Reply-To: <Z6Jgf-cVt_AlM6Qd@cassiopeiae>
-From: Joel Fernandes <joel@joelfernandes.org>
-Date: Tue, 4 Feb 2025 16:09:13 -0500
-X-Gm-Features: AWEUYZmCOUkLm9MpjL2MDd5EZQ1gMNJEykz-KDiUu51t6tTmXr73ZDfIU09FM3Q
-Message-ID: <CAEXW_YQQey_QweH+favrXPhrEkVwyqCXRG+UBn-oG6wb+n4+gA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] gpu: nova-core: add initial driver stub
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net, 
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, 
-	ajanulgu@redhat.com, lyude@redhat.com, pstanner@redhat.com, zhiw@nvidia.com, 
-	cjia@nvidia.com, jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com, 
-	ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com, 
-	gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me, 
-	a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, 
-	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org, 
-	rust-for-linux@vger.kernel.org, joelagnelf@nvidia.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
 
-On Tue, Feb 4, 2025 at 1:46=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> w=
-rote:
->
-> On Mon, Feb 03, 2025 at 03:24:10PM -0500, Joel Fernandes wrote:
-> > Hi Danilo,
-> >
-> > On Fri, Jan 31, 2025 at 11:04:24PM +0100, Danilo Krummrich wrote:
-> > > +#[pin_data]
-> > > +pub(crate) struct NovaCore {
-> > > +    #[pin]
-> > > +    pub(crate) gpu: Gpu,
-> > > +}
-> >
-> > I am curious what is the need for pinning here in the patch in its curr=
-ent
-> > form, is it for future-proofing?
->
-> Yes, it is.
->
-> It's not always needed, but since I know that further down the road we'll=
- need
-> at least a few mutexes, it seemed reasonable to already consider it.
+ARM64 supports MTE which is hardware support for tagging 16 byte granules
+and verification of tags in pointers all in hardware and on some platforms
+with *no* performance penalty since the tag is stored in the ECC areas of
+DRAM and verified at the same time as the ECC.
 
-It seems reasonable to me as well, I would probably also add a code
-comment there about what is expected to be unmovable in the future
-(Just in case any code readers don't raise the same question I was
-raising).
+Could we get support for that? This would allow us to enable tag checking
+in production systems without performance penalty and no memory overhead.
 
-The source of the confusion for a reader could be the documentation
-expecting a #[pin].
-
- - Joel
 
