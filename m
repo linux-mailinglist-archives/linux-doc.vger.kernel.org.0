@@ -1,108 +1,108 @@
-Return-Path: <linux-doc+bounces-36786-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36788-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97D02A27591
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 16:18:09 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 57344A2759D
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 16:18:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2E008164758
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 15:18:08 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 67E2A18837D4
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 15:18:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5810F213E8B;
-	Tue,  4 Feb 2025 15:18:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95A8C21422A;
+	Tue,  4 Feb 2025 15:18:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="M0xwYc4A"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hovBtUJt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D6B8433DE;
-	Tue,  4 Feb 2025 15:17:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66AAA213E69;
+	Tue,  4 Feb 2025 15:18:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738682284; cv=none; b=B1nU/GXQjdFPgGMEKBIXWBZVYTPs/1a5o4HDUV5eemPsnE4uc9XrHfZFGsUDYH+CoM05YgifE/hmuonSNs8sYh+AXb0Ps4SHhdXWh+0wKKKeqZherOLuSd41AMFJXPzyCXEZ0jywCoR/OW4PfMaowyTy9V4gs5GwqP6w7UHIsDg=
+	t=1738682316; cv=none; b=I+mfhuXWOB83gLqsSopmVMGhok45I/YOafwJaoCI+56o9Fy658xhTq3IGLe13RRHpbOUxAJRDvCBb50GjjJaiaasFGc45vslPIWidq/TnFkpapOZu51P8FEXtvNWYr5El9AwN5KRGz7Fp9h8FaOwr8JBgNJDLk7bV+exl/rQcmk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738682284; c=relaxed/simple;
-	bh=F19h605MFAvaGFZKRxZNpLpKV3oES6t/2bBqSUwaF60=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=eBlb+0MzXfVs7UrN26hvBlDbbP9ODSMNHP1iRKs8SSixpVBBW8NbNurmwjXHFXgG4YtFFVmriQrUAp4v5HNQ1nsX5RTcBvf7WMlahMOBijSVypkXM1fU+9JhiBF0fKz51pgVCL/vKSjzFfGeS4uBKluGXQYkiu0Vy3oYwO/CjRY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=M0xwYc4A; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 96381404FA
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1738682270; bh=wVW8lBMIEEpdr0xbjPu2zI/effX4O8LeVMC5veSkfi8=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=M0xwYc4AzH2N7+A+jv59tJS/lYaX4CncIBjdLa0vTEMgmmcSo40Pq4yzemaZ6IkUg
-	 GHfAkMgC0ExjTkFHjHwgh1S17aJ14V/MAdze0q4JhzzQ2TlgWvbsEaa47bVQ9l20lz
-	 PVy0jxTMuLb87dfi6GGc+ONahkP2zTuigCfx88XY6KQ5H4iUfC2AezbhrDZoTz7vys
-	 gfRTMuK4EBgeBlfoKgGDbtz67ypWm+0yKaddHwnQSr5WrrEY4tjWt/hlTJuG4BbI7Z
-	 T5D8g354eJdRwasTzRt0U0J9TQ/WAUjwhZi7ZM2tvCF54/BmegYCYILobXmNkyIVGh
-	 40VhpYcuHrLvg==
-Received: from localhost (unknown [IPv6:2601:280:5e00:625::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 96381404FA;
-	Tue,  4 Feb 2025 15:17:50 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Guenter Roeck <linux@roeck-us.net>, Purva Yeshi
- <purvayeshi550@gmail.com>, jikos@kernel.org, bentiss@kernel.org,
- jdelvare@suse.com
-Cc: skhan@linuxfoundation.org, linux-usb@vger.kernel.org,
- linux-input@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org
-Subject: Re: [PATCH] docs: Fix spelling and grammatical issues
-In-Reply-To: <1b32dfcb-5966-495a-ad48-903650888ee9@roeck-us.net>
-References: <20250204134806.28218-1-purvayeshi550@gmail.com>
- <1b32dfcb-5966-495a-ad48-903650888ee9@roeck-us.net>
-Date: Tue, 04 Feb 2025 08:17:49 -0700
-Message-ID: <87jza5hh7m.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1738682316; c=relaxed/simple;
+	bh=C1wEET4W9frq7tAraVpaRPTGZ0k+8q0D2i/BA4JIUWA=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=KPTaIyFrUE6dIETnEeIdei4UibjO4QXq+sTNEc0LNUsbIyVE0MgfRqsNPg6IZmvDAoPF1o8tNxpEeGRWAwFA4cEJgHdbaHJCnL37ncT8tPtna+ztlnCTIm2I7gGU8Wm7xpy/RVbKDCipFqJHf/NaKY6vQBl/YGx+2QaUb2Mw7SI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hovBtUJt; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B082C4CEDF;
+	Tue,  4 Feb 2025 15:18:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1738682315;
+	bh=C1wEET4W9frq7tAraVpaRPTGZ0k+8q0D2i/BA4JIUWA=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=hovBtUJtLWbzicHrNYJ832PORnwq0cMg+47bhL4H+enycneJgBy5XQOjnAblPZW0D
+	 s7q3TIhxtijkGDqi7HNPK+RCVi0/OxyPso8zRWn4K4I1wbx/V9G5V6aRGbL8Mf2LoG
+	 7aBd/37QQFBP/rqrgSBbTi8UnYeBFR7lNS38pxHKcKcsI0ZviTInZrFM5FaOYIBAiN
+	 o5JQ8Ac4kLxB9mRTc4WUjtL/Gi9MiLr0L6wIZf+P6Cjy65ZIlviMEzm4HNvXvNWyDl
+	 WOcnuzd9abHPu7KEBoometEb1kSgLOJQHtIBfVRGbB56YGZYeKwIkTnR1uohfMLTNX
+	 BiJCIzaE7ZAgw==
+Date: Tue, 4 Feb 2025 07:18:34 -0800
+From: Jakub Kicinski <kuba@kernel.org>
+To: Geert Uytterhoeven <geert@linux-m68k.org>
+Cc: corbet@lwn.net, workflows@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH] docs: submitting-patches: document the format for
+ affiliation
+Message-ID: <20250204071834.78e0ffb1@kernel.org>
+In-Reply-To: <CAMuHMdXXNkpWjkKvMLd-MF=npzqJXMtnXkaba60JY7hCzyjz7g@mail.gmail.com>
+References: <20250203174626.1131225-1-kuba@kernel.org>
+	<CAMuHMdXXNkpWjkKvMLd-MF=npzqJXMtnXkaba60JY7hCzyjz7g@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Guenter Roeck <linux@roeck-us.net> writes:
+On Tue, 4 Feb 2025 08:59:28 +0100 Geert Uytterhoeven wrote:
+> You probably also want to document the other popular[*] solution:
+>=20
+>     From: Patch Author <author+company@example.com>
+>=20
+> [*] Statistics for v6.0..v6.14-rc1:
+>       - "(Company): 3430
+>       - "+company": 2871
 
-> On 2/4/25 05:48, Purva Yeshi wrote:
->> Fix several spelling and grammatical errors across multiple
->> documentation files.
->> 
->> Signed-off-by: Purva Yeshi <purvayeshi550@gmail.com>
->> ---
->>   Documentation/hid/hiddev.rst                | 4 ++--
->>   Documentation/hid/intel-ish-hid.rst         | 2 +-
->>   Documentation/hid/uhid.rst                  | 2 +-
->>   Documentation/hwmon/abituguru-datasheet.rst | 8 ++++----
->>   Documentation/hwmon/abituguru.rst           | 2 +-
->>   5 files changed, 9 insertions(+), 9 deletions(-)
->> 
->> diff --git a/Documentation/hid/hiddev.rst b/Documentation/hid/hiddev.rst
->> index 9b82c7f896aa..073485f84793 100644
->> --- a/Documentation/hid/hiddev.rst
->> +++ b/Documentation/hid/hiddev.rst
->> @@ -15,10 +15,10 @@ To support these disparate requirements, the Linux USB system provides
->>   HID events to two separate interfaces:
->>   * the input subsystem, which converts HID events into normal input
->>   device interfaces (such as keyboard, mouse and joystick) and a
->> -normalised event interface - see Documentation/input/input.rst
->> +normalized event interface - see Documentation/input/input.rst
->
-> Is US spelling now mandated in the Linux kernel ?
+Hm, I mostly associate that format with MAINTAINERS entries where
+people want email classification. But you're right there are some=20
+uses, only 3 of them look like companies, tho.
 
-No, from Documentation/doc-guide/contributing.rst:
+$ git log --format=3D'%ae' v6.0..v6.14-rc1 | grep '+' | sed -e 's/.*+\(.*\)=
+@.*/\1/' | sort | uniq -c | awk '{if ($1 > 5) print;}'
+     18 huawei
+    464 kernel
+     46 lin
+    742 linaro
+      8 publicgit
+   1646 renesas
 
-> Both American and British English spellings are allowed within the
-> kernel documentation.  There is no need to fix one by replacing it with
-> the other.
+$ git log --format=3D'%an' v6.0..v6.14-rc1 | sed -n 's/.*(\(.*\))/\1/p' | s=
+ort | uniq -c | awk '{if ($1 > 5) print;}'
+    177 AMD
+    210 Arm
+     29 Dent Project
+     37 eBPF Foundation
+    547 Google
+     13 Hanghong Ma
+    132 IBM
+     46 Intel
+     38 Microsoft
+     18 Ming Qiang Wu
+    155 NGI0
+     26 NXP OSS
+   1487 Oracle
+     19 OSS
+      7 Som
+     70 Sony
+    353 SUSE
+      9 tencent
+     24 VMware
+      8 =E8=BE=9B=E5=AE=89=E6=96=87
 
-Thanks,
-
-jon
 
