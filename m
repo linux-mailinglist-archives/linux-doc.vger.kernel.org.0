@@ -1,219 +1,143 @@
-Return-Path: <linux-doc+bounces-36842-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36830-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48AD8A278BD
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 18:39:35 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id C539CA2788D
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 18:35:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 87BD07A4664
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 17:38:39 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 21A2E1655BE
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Feb 2025 17:35:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9A57217670;
-	Tue,  4 Feb 2025 17:37:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6035F216616;
+	Tue,  4 Feb 2025 17:35:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="F7XPcWxS"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="d4+rhr9N"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3F5E2185A8;
-	Tue,  4 Feb 2025 17:37:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.20
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86FD2216384
+	for <linux-doc@vger.kernel.org>; Tue,  4 Feb 2025 17:35:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738690663; cv=none; b=fyU8+EKmpaGg4X7iD7tTnstD1fL/TV/wvZ6AWT59xuwJdzczcyE8ZrrbVyW50tmsRHkM9CyelmB6bJHL8pVXJAUgwF+ZegmS70lE77hczYef/3N7474MVKWVESkG4MZ/OpluG5/KWVxve5GioabyicStJMyoimu4Pdepk9FmZMY=
+	t=1738690527; cv=none; b=bzEtcfzWDhBBeoW7zGIDSmN4zaHJfsPfG66O9rvOTqvoW6/bbtsrGg1/3jiBHkROS1Kd8cIK/ZtK5y+XdRrx7yyN3MXXyfhe9H/99+YJDDBhW+Zt+PZLdkpR/AnRmFbymxkUREo9sujwQ1w0YjtwB8WOz1ag+2Rq3zIrk6IWsqw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738690663; c=relaxed/simple;
-	bh=Ht7/TOmkT+iwiNKb8KTAnbXFoYcUy6oM0kb2gCQ20Wc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=JsUOUR4nqPYmfku8p69iEh51606tztEWGm6OPp1YRBVM4mLEZwrD3nq9H7O4n5JeqvaoY2zpH/0X46RfINwWTQhNmGQeNd6eNueZdY54GKeFRQ1bFSE3Xl0Mcp/MM6oN25DuohWT2BrM0wpnnO0bN0ZSYaygdy0jFELth8+nlVk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=F7XPcWxS; arc=none smtp.client-ip=198.175.65.20
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1738690662; x=1770226662;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Ht7/TOmkT+iwiNKb8KTAnbXFoYcUy6oM0kb2gCQ20Wc=;
-  b=F7XPcWxSQup1ygaEE4vV/PWueMPDhbOr0FzR6ddIpOXvVpoZSVPg1nE/
-   kcG1v8fwsa+EsIZRi0rP4HHzE1wXY+tHjxZHWq+nRwAE/oSQRCCYpDqBQ
-   yijZXa1EbEH+U5IFB4twvX2G5i6atp0HhpKOlXXXTkOnVFh/DOerx5R1F
-   kccGlRtx0y8D6qB9vcEAKUcdYGlcHpipjgdDkBiDQ3CpHHtopKJZKABzo
-   4JSJ5HgXSZ+iO5rwG0DmxYGlVNK/7O9FT5/ZFJCa5KJll48xBpoV+tarO
-   tyVf4cv8Lm7byHgk7l/qd+uz9xXXSm+3A6rvFasEDSM1DZ3vQOy+h/v6G
-   w==;
-X-CSE-ConnectionGUID: w+VdoRepR26y1WNGgzMUGA==
-X-CSE-MsgGUID: ZXlxW/+1Q0q1VA++y681uw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11336"; a="38931217"
-X-IronPort-AV: E=Sophos;i="6.13,259,1732608000"; 
-   d="scan'208";a="38931217"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Feb 2025 09:37:41 -0800
-X-CSE-ConnectionGUID: UAr5/zW7Rha56MjtNiYK0Q==
-X-CSE-MsgGUID: 2nPTC7p0TeC/cQLyC4Ywqw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; 
-   d="scan'208";a="147867266"
-Received: from mjarzebo-mobl1.ger.corp.intel.com (HELO wieczorr-mobl1.intel.com) ([10.245.244.61])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Feb 2025 09:37:29 -0800
-From: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
-To: luto@kernel.org,
-	xin@zytor.com,
-	kirill.shutemov@linux.intel.com,
-	palmer@dabbelt.com,
-	tj@kernel.org,
-	andreyknvl@gmail.com,
-	brgerst@gmail.com,
-	ardb@kernel.org,
-	dave.hansen@linux.intel.com,
-	jgross@suse.com,
-	will@kernel.org,
-	akpm@linux-foundation.org,
-	arnd@arndb.de,
-	corbet@lwn.net,
-	maciej.wieczor-retman@intel.com,
-	dvyukov@google.com,
-	richard.weiyang@gmail.com,
-	ytcoode@gmail.com,
-	tglx@linutronix.de,
-	hpa@zytor.com,
-	seanjc@google.com,
-	paul.walmsley@sifive.com,
-	aou@eecs.berkeley.edu,
-	justinstitt@google.com,
-	jason.andryuk@amd.com,
-	glider@google.com,
-	ubizjak@gmail.com,
-	jannh@google.com,
-	bhe@redhat.com,
-	vincenzo.frascino@arm.com,
-	rafael.j.wysocki@intel.com,
-	ndesaulniers@google.com,
-	mingo@redhat.com,
-	catalin.marinas@arm.com,
-	junichi.nomura@nec.com,
-	nathan@kernel.org,
-	ryabinin.a.a@gmail.com,
-	dennis@kernel.org,
-	bp@alien8.de,
-	kevinloughlin@google.com,
-	morbo@google.com,
-	dan.j.williams@intel.com,
-	julian.stecklina@cyberus-technology.de,
-	peterz@infradead.org,
-	cl@linux.com,
-	kees@kernel.org
-Cc: kasan-dev@googlegroups.com,
-	x86@kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-riscv@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org,
-	llvm@lists.linux.dev,
-	linux-doc@vger.kernel.org
-Subject: [PATCH 15/15] kasan: Add mititgation and debug modes
-Date: Tue,  4 Feb 2025 18:33:56 +0100
-Message-ID: <450a1fe078b0e07bf2e4f3098c9110c9959c6524.1738686764.git.maciej.wieczor-retman@intel.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <cover.1738686764.git.maciej.wieczor-retman@intel.com>
-References: <cover.1738686764.git.maciej.wieczor-retman@intel.com>
+	s=arc-20240116; t=1738690527; c=relaxed/simple;
+	bh=zCHNKGA6MIC6IBXzZGco0x6H0vkuSlEA7G+5gjB5WwU=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=QkggQFklhHxue/v02sI0xj0Bhm3F7qkZlpCS+xpUlSZklRZbLgrwFCo2LUPyssfTXZ79otZgbdwtky9672wTLAKxhUC1Epai4VbHBVxfnS9Zp4ZAOtRDz5XNgIe4Giw8n94l6I16zyzxst3QRKc5808U5KAulPwFeszvkM9HPlI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=d4+rhr9N; arc=none smtp.client-ip=209.85.214.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-219f6ca9a81so128715ad.1
+        for <linux-doc@vger.kernel.org>; Tue, 04 Feb 2025 09:35:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1738690525; x=1739295325; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=84XRGI+7lwmGL6GUPwbtH7AhjEYYUVi2GeiyJJ7VXBw=;
+        b=d4+rhr9N7zikIW+KEMZg+mcQTPWn3C3oVbh7IFjp/+E3N9ZO0Vz+GYDjAEb5GoVIDe
+         MzagfKV8ddXD5kBdfbj6vBRUbchPhacBWeKxTQL5c9FamSDkBny5X9kPdpOwBzVsvpNS
+         wvOzTCnf3rKtYIMtnZbmEbKcZMM7/x6kcTtBWXUbFPSV0zS1pjqmaDthXOzCpqfwp0kT
+         3fSZzjsGH1j+XMtop7Q9oBvGHDEv3xBzkZJSLiYAXylwl+UCktgVt/UcHaPDP6AmId3d
+         RaXsirVOZLD96J21TOH5q6jPlGIhOPCwhr04nxwfou3hBJKUgJ+PkZjv3MPSv45GRiT9
+         6WSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1738690525; x=1739295325;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=84XRGI+7lwmGL6GUPwbtH7AhjEYYUVi2GeiyJJ7VXBw=;
+        b=aj0qo6PxCnKsFuiv+Zts8YggIprFCdlOdDn8u4MBkxGe1aFIAagfPu9XYX1y7f4VHD
+         XUeED9g+XYKT76GBIo44KBbjO9REn5ltCP7bBsytSTf6FivAeIuntF6yUjhvP3nhb7do
+         1EGiFU0ia+LWUoa8FSiiA3ocVAG8FqMZm706aw5nOvhXrHG094B7uYVrOXVtRccI8EI6
+         sHyxR+a6Yc5aNYb9wUM828fN3bM+D+AeWhzXUq3vuo+hi0PkfXqZ+zmR6cDgEXSZDtPf
+         Uqfw/AkOB7RaUhnrkb/gyv5+WCvy29irPyYiv/uGVYeRWXiZeUtBmp1I1S4/Y2Tb95yI
+         Ynow==
+X-Forwarded-Encrypted: i=1; AJvYcCUZkd3xFhWlTzZVq0qeS/7xa5OGAEx/UcOq3tzpKruLYvXsKUb6KiosTN7KoPjPnln2zmwNviAAPc4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YykroE0+mY0kfeyKJ5xQ6T1JWZtd79M2JYPxgvxdxVPZItm2Qob
+	fs8WCpIMoa0EPtc/5yRHKZGMxbgjYQLWXZYMwVO8n12DPJbjcGPn6dp3OSke8A+eNqSrSWBal2B
+	xbEq2D5DCZ6/lsDMDhGQQrTaOyxZ8Rt1n51UX
+X-Gm-Gg: ASbGncvsu/HpIRkbmhFFDn4fD2NQ3JOIsoXPI9sGmbGHq2zzERp/rLtsnBzi5489Vqt
+	weR5fvzriTNgsjO1b/fUdR5SSIvtZMqCoVVtPObCmj+alFZABsDeDrtbjEIFURL1G6ckYwxi7
+X-Google-Smtp-Source: AGHT+IHg8SF867Yy+z2GXbKry2r0iDmWlZunHewA79883dWtyyKDj6PGknuUr+EeJwHqGa1SQwzcF0gj8w2TziRSjaE=
+X-Received: by 2002:a17:902:d9ce:b0:215:7ced:9d67 with SMTP id
+ d9443c01a7336-21f005bbe36mr3250755ad.24.1738690524517; Tue, 04 Feb 2025
+ 09:35:24 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250203223916.1064540-1-almasrymina@google.com>
+ <20250203223916.1064540-3-almasrymina@google.com> <c8dd0458-b0a9-4342-a022-487e73542381@redhat.com>
+In-Reply-To: <c8dd0458-b0a9-4342-a022-487e73542381@redhat.com>
+From: Mina Almasry <almasrymina@google.com>
+Date: Tue, 4 Feb 2025 09:35:11 -0800
+X-Gm-Features: AWEUYZn1moYHmrXoVYPPn5psMSRlqxODAnsNkR2q6mSq4IS5EB-8iProLqujYec
+Message-ID: <CAHS8izOnrWdPPhVaCFT4f3Vz=YkHyJ5KgnAbuxfR5u-ffkbUxA@mail.gmail.com>
+Subject: Re: [PATCH net-next v3 2/6] selftests: ncdevmem: Implement devmem TCP TX
+To: Paolo Abeni <pabeni@redhat.com>
+Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, kvm@vger.kernel.org, 
+	virtualization@lists.linux.dev, linux-kselftest@vger.kernel.org, 
+	Donald Hunter <donald.hunter@gmail.com>, Jakub Kicinski <kuba@kernel.org>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	Neal Cardwell <ncardwell@google.com>, David Ahern <dsahern@kernel.org>, 
+	"Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>, 
+	Stefan Hajnoczi <stefanha@redhat.com>, Stefano Garzarella <sgarzare@redhat.com>, Shuah Khan <shuah@kernel.org>, 
+	sdf@fomichev.me, asml.silence@gmail.com, dw@davidwei.uk, 
+	Jamal Hadi Salim <jhs@mojatatu.com>, Victor Nogueira <victor@mojatatu.com>, 
+	Pedro Tammela <pctammela@mojatatu.com>, Samiullah Khawaja <skhawaja@google.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-With smaller memory footprint KASAN could be used in production systems.
-One problem is that saving stacktraces slowes memory allocation
-substantially - with KASAN enabled up to 90% of time spent on kmalloc()
-is spent on saving the stacktrace.
+On Tue, Feb 4, 2025 at 4:29=E2=80=AFAM Paolo Abeni <pabeni@redhat.com> wrot=
+e:
+>
+> On 2/3/25 11:39 PM, Mina Almasry wrote:
+> > Add support for devmem TX in ncdevmem.
+> >
+> > This is a combination of the ncdevmem from the devmem TCP series RFCv1
+> > which included the TX path, and work by Stan to include the netlink API
+> > and refactored on top of his generic memory_provider support.
+> >
+> > Signed-off-by: Mina Almasry <almasrymina@google.com>
+> > Signed-off-by: Stanislav Fomichev <sdf@fomichev.me>
+>
+> Usually the self-tests are included towards the end of the series, to
+> help reviewers building-up on previous patches knowledge.
+>
 
-Add mitigation mode to allow the option for running KASAN focused on
-performance and security. In mitigation mode disable saving stacktraces
-and set fault mode to always panic on KASAN error as a security
-mechanism.
+I noticed reviewers like to go over docs + selftests in my previous
+series so I thought I'd put them in the beginning. Looks like the
+gambit was not welcome. I'll move the selftests to the end. May also
+move the docs to the end as is customary as well.
 
-Signed-off-by: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
----
- lib/Kconfig.kasan | 28 ++++++++++++++++++++++++++++
- mm/kasan/report.c |  4 ++++
- mm/kasan/tags.c   |  5 +++++
- 3 files changed, 37 insertions(+)
+> >  .../selftests/drivers/net/hw/ncdevmem.c       | 300 +++++++++++++++++-
+> >  1 file changed, 289 insertions(+), 11 deletions(-)
+>
+> Why devmem.py is not touched? AFAICS the test currently run ncdevmem
+> only in server (rx) mode, so the tx path is not actually exercised ?!?
+>
 
-diff --git a/lib/Kconfig.kasan b/lib/Kconfig.kasan
-index d08b4e9bf477..6daa62b40dea 100644
---- a/lib/Kconfig.kasan
-+++ b/lib/Kconfig.kasan
-@@ -244,4 +244,32 @@ config KASAN_SW_TAGS_DENSE
- 	  ARCH_HAS_KASAN_SW_TAGS_DENSE is needed for this option since the
- 	  special tag macros need to be properly set for 4-bit wide tags.
- 
-+choice
-+	prompt "KASAN operation mode"
-+	default KASAN_OPERATION_DEBUG
-+	help
-+	  Choose between the mitigation or debug operation modes.
-+
-+	  The first one disables stacktrace saving and enables panic on error.
-+	  Faster memory allocation but less information. The second one is the
-+	  default where KASAN operates with full functionality.
-+
-+config KASAN_OPERATION_DEBUG
-+	bool "Debug operation mode"
-+	depends on KASAN
-+	help
-+	  The default mode. Full functionality and all boot parameters
-+	  available.
-+
-+config KASAN_OPERATION_MITIGATION
-+	bool "Mitigation operation mode"
-+	depends on KASAN
-+	help
-+	  Operation mode dedicated at faster operation at the cost of less
-+	  information collection. Disables stacktrace saving for faster
-+	  allocations and forces panic on KASAN error to mitigate malicious
-+	  attacks.
-+
-+endchoice
-+
- endif # KASAN
-diff --git a/mm/kasan/report.c b/mm/kasan/report.c
-index ee9e406b0cdb..ae989d3bd919 100644
---- a/mm/kasan/report.c
-+++ b/mm/kasan/report.c
-@@ -47,7 +47,11 @@ enum kasan_arg_fault {
- 	KASAN_ARG_FAULT_PANIC_ON_WRITE,
- };
- 
-+#ifdef CONFIG_KASAN_OPERATION_MITIGATION
-+static enum kasan_arg_fault kasan_arg_fault __ro_after_init = KASAN_ARG_FAULT_PANIC;
-+#else
- static enum kasan_arg_fault kasan_arg_fault __ro_after_init = KASAN_ARG_FAULT_DEFAULT;
-+#endif
- 
- /* kasan.fault=report/panic */
- static int __init early_kasan_fault(char *arg)
-diff --git a/mm/kasan/tags.c b/mm/kasan/tags.c
-index c111d98961ed..2414cddeaaf3 100644
---- a/mm/kasan/tags.c
-+++ b/mm/kasan/tags.c
-@@ -78,6 +78,11 @@ early_param("kasan.stack_ring_size", early_kasan_flag_stack_ring_size);
- 
- void __init kasan_init_tags(void)
- {
-+	if (IS_ENABLED(CONFIG_KASAN_OPERATION_MITIGATION)) {
-+		static_branch_disable(&kasan_flag_stacktrace);
-+		return;
-+	}
-+
- 	switch (kasan_arg_stacktrace) {
- 	case KASAN_ARG_STACKTRACE_DEFAULT:
- 		/* Default is specified by kasan_flag_stacktrace definition. */
--- 
-2.47.1
+Yeah, to be honest I have a collection of local bash scripts that
+invoke ncdevmem in different ways for my testing, and I have docs on
+top of ncdevmem.c of how to test; I don't use devmem.py. I was going
+to look at adding test cases to devmem.py as a follow up, if it's OK
+with you, and Stan offered as well on an earlier revision. If not no
+problem, I can address in this series. The only issue is that I have
+some legwork to enable devmem.py on my test setup/distro, but the meat
+of the tests is already included and passing in this series (when
+invoked manually).
 
+--
+Thanks,
+Mina
 
