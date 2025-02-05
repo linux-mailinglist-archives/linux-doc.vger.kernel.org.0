@@ -1,124 +1,146 @@
-Return-Path: <linux-doc+bounces-36948-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-36950-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70F82A28217
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 03:43:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D373A28247
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 04:03:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 582721883693
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 02:43:48 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id EBD831887313
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 03:03:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4830B213E96;
-	Wed,  5 Feb 2025 02:42:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0FB1D211A3D;
+	Wed,  5 Feb 2025 03:03:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b="NERR+Cu0"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nxEBMQ1O"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DEB921171F
-	for <linux-doc@vger.kernel.org>; Wed,  5 Feb 2025 02:42:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3EDE2F46;
+	Wed,  5 Feb 2025 03:03:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738723342; cv=none; b=i7UqbMcHpXKv6NUkbZU8dIGriV3i1HoCBe7HOqOyGR7ZyccC1uqQMYcWhzWbSJ3llmMd46SqUamahzFoHDO+ePFkyAM8vyctD+n9XbVo1X/g8YNoAKeV8dpc8z4o8MrOpS+V+NhxrqLxxHJ/5jrkU8DCw9HMWntrisXlueGrrdU=
+	t=1738724593; cv=none; b=NoRbxnZI3lTzXDgl/72WXFqi1zt6dz1ZNarNG4yT5J9m9zbuqb9jtEAG/HUJijNsDjve4yN3fIMtjSnLwhElwlhuRE9KEZ52t+6e7ZvDH6y0UcJjvfCM1k9n7FvCfMKBhUniJGUFAvaMpiur8KRGDIrwkwYqtHUTpaGn+nJ4H7M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738723342; c=relaxed/simple;
-	bh=7YCuggeYk7vbWeyi6etgcTp8qXU+Swwh5GPai7VljGk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fePag4iMdW1amVrd6776rOwYnJ1zWdja9nBIAXuArtlQc99a9L3fr+IcpYYUddjNzdoM5mvzFnQh6A7Dy3xmw7DEi5AsnibI+AATMiNi5M/D8YybLV7EiV6QX+3AtC4UP4YZSgaurB1SEb91bbVHyjDOT61oU8xW/Hf+N3l0si0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com; spf=pass smtp.mailfrom=bytedance.com; dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b=NERR+Cu0; arc=none smtp.client-ip=209.85.216.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bytedance.com
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-2f45526dea0so1347091a91.1
-        for <linux-doc@vger.kernel.org>; Tue, 04 Feb 2025 18:42:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1738723340; x=1739328140; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Q9P6bfbaO1ayzZ+Zop/bs7QRHHtDwQNcmTGhPOOug4o=;
-        b=NERR+Cu0kEu1grx7lP7mu99mUcIUxGzTrECG56jyT75fqGZbLsrNKt8dFLLeWc/bA9
-         4FfFaRbWTwGKk/pDn7Roy/95ZDBjhHpN9FJkHwUbb3vT3eOcuxDM7WB2U6TAdO9g5hi0
-         NPfCuWgHRDd8eZoYl2hoTzqW6CREFp8/IJ8rLAUZZME1QMj1v9/0pBRmwS5GkzD36zw5
-         sakP/u/DchsuoJoNZoAqnup5a3u1QymP8nSOj7eRv3fIFFcPXYGVwChx/JIWNCfXGcwG
-         rsgshtfIMf0rKzWtwMwVnZHmle5IVXe7vi5o+2DJfLUnGVZ1iNg67gSJaC5r5JNVeqbu
-         5NSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738723340; x=1739328140;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Q9P6bfbaO1ayzZ+Zop/bs7QRHHtDwQNcmTGhPOOug4o=;
-        b=m7w32Tq0i3itlo1MRIz6TpE/hYdBMhPQb8GIq6vKCWscefl0bI25rnS8QT+bmqIMNa
-         bjYtiuNrXXbZt4CHYqx0WdCocF0UY3ogMFysZaovFCDP2w0RGkF74EcE0WnygGaH9RYR
-         9+FIzG4OZxHXg0vOci/t1UCGI61piA2I8MLv61rRl16uNu1drD+ifhFn8XHCEGQV6RbD
-         5Dk6b5i+gRljvw8oucrKJM1uiWSmj+c9FHjxTqepcygRWd5Sd7eQ3zYCSLHActSu8OAs
-         6KpoMRy+z9TC68C/ZtrULLTvvDIebrsFisSFVZ3D8ri288ptndrrPLiG8xhIsSrLb2Pb
-         3k6Q==
-X-Forwarded-Encrypted: i=1; AJvYcCUODuThFcVsLkAxFIwEIWWnCdTuK85SGzq8rxf+dRB9d74z+EFrory+XHONLoWNsZTh3ZYg2pOPNvc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwLWtGF9ZARva/5soCXf9Y9dO2SsK3rUMRJocFCExdN7HrrHGxL
-	vRssBQp42UE4c7GUs2JPXz7DoABGBaatzSeUHLF2knsaEXA785vM+ampHngZAWE=
-X-Gm-Gg: ASbGncuNr3qmZt1DXQt7dmYOCUrJJQL1thYCEEJlanW0lRctLNY2zfNyLd2fQSloMO2
-	QYq6p+JoymLMUJDBO8xZ62cymz4ZbJ6Cya5b5cH/9ZsZlvDQpx7mzWlyjPHOPQ630DrBIXekwD5
-	VfLhe+ty9qa2YZE/Bu/0KpvUBo7hppeVH2YSej1xTJ2EaveUMYpPKIXpYcZXo5XG66FarhESEBU
-	y5MTnUic4qYGTxN9X1r+F3JPZqYz5JxDY8ipLSdb4/pi92E+aGBfeTG2hObBQVwjSRZumJulwXG
-	Ozq5VS6e4AWzaIWpfBvjtJamqLsupAAW2TF2
-X-Google-Smtp-Source: AGHT+IGxSXQuqSMk3bcYIZIkz63AGFvTGZucd9e/zkZKrSE5SKZNOcFEvlo7YbkBJWZQn51OYfPUZg==
-X-Received: by 2002:a17:90b:1e41:b0:2ee:713d:f536 with SMTP id 98e67ed59e1d1-2f9e0868686mr606696a91.7.1738723339652;
-        Tue, 04 Feb 2025 18:42:19 -0800 (PST)
-Received: from [10.4.234.23] ([139.177.225.244])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2f9e1dab45csm305094a91.40.2025.02.04.18.42.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 04 Feb 2025 18:42:19 -0800 (PST)
-Message-ID: <db1391a1-2f25-4976-866f-d48ea6b16e11@bytedance.com>
-Date: Wed, 5 Feb 2025 10:42:09 +0800
+	s=arc-20240116; t=1738724593; c=relaxed/simple;
+	bh=g6XqJi+3efzE8zFPlaanW3f9Ug9ugh+JBc0KjXvtBU4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Xvc8yIFggLxjqJboAI/pFQTqLi7dSLZmymtXwSECCRqoEl8wYOaG1DUrLjDOPW0vEogSsVHI24mkzIpSItEEksXAhIa+S2/XUaFNrpRDv7J4zjl+1zlLVE1H/CBlWOvhuWysMPxz5OZBkztd240yEeBOa2iY3Sw7GHBgU1Ba/wQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nxEBMQ1O; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 3F6F3C4CEDF;
+	Wed,  5 Feb 2025 03:03:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1738724592;
+	bh=g6XqJi+3efzE8zFPlaanW3f9Ug9ugh+JBc0KjXvtBU4=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=nxEBMQ1Otzbfr8Miy8itzaRuIqZcBtTIS5iDE1E6wSKs74Ttx1ATEpl+6dRt+0R8X
+	 sm99GN4lVBq3IU7w1Ddn7eNxrshzpZQ1ATHV440zSF2s9ep4NhSzHe39I4MFZEBKm1
+	 mEk51fn1ExWrTDE1WbH6RSnopx1/R1/KBf3WHBw0S4lQnhCR8NDLM4LnmQlwMX7L+X
+	 gmoQNW5knlpPqZejpRPb8n1sMYs01FfTutAG4nvf+QX41FzgDCx8GdXZ6JhD1DAslB
+	 vRD4fadAIjuww39fJ3QFUVRERbo1yUCG3g2UkHi6QtLNoYZn0N8dnLR5259/EH54Fm
+	 6oVozAZYZp19g==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30CDFC02193;
+	Wed,  5 Feb 2025 03:03:12 +0000 (UTC)
+From: Krishanth Jagaduri via B4 Relay <devnull+Krishanth.Jagaduri.sony.com@kernel.org>
+Date: Wed, 05 Feb 2025 08:32:14 +0530
+Subject: [PATCH] Documentation/no_hz: Remove description that states boot
+ CPU cannot be nohz_full
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Re: [PATCH v2 0/3] Fix and cleanup and extend cpu.stat
-Content-Language: en-US
-To: Tejun Heo <tj@kernel.org>
-Cc: Johannes Weiner <hannes@cmpxchg.org>, =?UTF-8?Q?Michal_Koutn=C3=BD?=
- <mkoutny@suse.com>, Jonathan Corbet <corbet@lwn.net>,
- Ingo Molnar <mingo@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
- Juri Lelli <juri.lelli@redhat.com>,
- Vincent Guittot <vincent.guittot@linaro.org>,
- Dietmar Eggemann <dietmar.eggemann@arm.com>,
- Steven Rostedt <rostedt@goodmis.org>, Ben Segall <bsegall@google.com>,
- Mel Gorman <mgorman@suse.de>, Valentin Schneider <vschneid@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>, Yury Norov
- <yury.norov@gmail.com>, Thomas Gleixner <tglx@linutronix.de>,
- Bitao Hu <yaoma@linux.alibaba.com>, Chen Ridong <chenridong@huawei.com>,
- "open list:CONTROL GROUP (CGROUP)" <cgroups@vger.kernel.org>,
- "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
- open list <linux-kernel@vger.kernel.org>
-References: <20250125052521.19487-1-wuyun.abel@bytedance.com>
- <bb16ae49-f591-4ab3-8d27-f649619b266b@bytedance.com>
- <Z6J8wbuXgiz_ly-q@slm.duckdns.org>
-From: Abel Wu <wuyun.abel@bytedance.com>
-In-Reply-To: <Z6J8wbuXgiz_ly-q@slm.duckdns.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20250205-send-oss-20250129-v1-1-d404921e6d7e@sony.com>
+X-B4-Tracking: v=1; b=H4sIALXUomcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDQyNL3eLUvBTd/OJiXbiIcbKJUUpymomZcWqSElBfQVFqWmYF2Mzo2Np
+ aANx8/qJjAAAA
+X-Change-ID: 20250129-send-oss-20250129-3c42dcf463eb
+To: Thomas Gleixner <tglx@linutronix.de>, Jonathan Corbet <corbet@lwn.net>
+Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Atsushi Ochiai <Atsushi.Ochiai@sony.com>, 
+ Daniel Palmer <Daniel.Palmer@sony.com>, Oleg Nesterov <oleg@redhat.com>, 
+ stable@vger.kernel.org, Krishanth Jagaduri <Krishanth.Jagaduri@sony.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1738724552; l=2701;
+ i=Krishanth.Jagaduri@sony.com; s=20250122; h=from:subject:message-id;
+ bh=E835T3tqOhFIcn/Jm6X5qlETpMAWcMeplxvdOyEAeTk=;
+ b=arldPplnu5QfSI/nuErJEq7UekxDqNZEtHWhOuNB63444+4wrmK/5cLfNDHZOvmrYyCnN/vOn
+ GO55gjfsmhvDDyu1ZDrKcb7qOBtL1+NorXtzZGYZXpdTPdiNYzmlqQ0
+X-Developer-Key: i=Krishanth.Jagaduri@sony.com; a=ed25519;
+ pk=lx2tvWPqsnFN2XCeuuKdm7G2bXm/Grq1a1KTsSpFZSk=
+X-Endpoint-Received: by B4 Relay for Krishanth.Jagaduri@sony.com/20250122
+ with auth_id=326
+X-Original-From: Krishanth Jagaduri <Krishanth.Jagaduri@sony.com>
+Reply-To: Krishanth.Jagaduri@sony.com
 
-On 2/5/25 4:46 AM, Tejun Heo Wrote:
-> On Mon, Feb 03, 2025 at 04:11:27PM +0800, Abel Wu wrote:
->> Ping :)
->>
->> On 1/25/25 1:25 PM, Abel Wu Wrote:
->>> Patch 1: fixes an issue that forceidle time can be inconsistant with
->>> other cputimes.
->>>
->>> Patch 2: cleans up the #ifdef mess in cpu.stat.
-> 
-> I wasn't sure whether the new code was materially better than the existing.
-> Can we try without this patch?
+From: Oleg Nesterov <oleg@redhat.com>
 
-Sure, will drop this one.
+[ Upstream commit 5097cbcb38e6e0d2627c9dde1985e91d2c9f880e ]
+
+Documentation/timers/no_hz.rst states that the "nohz_full=" mask must not
+include the boot CPU, which is no longer true after:
+
+  commit 08ae95f4fd3b ("nohz_full: Allow the boot CPU to be nohz_full").
+
+Apply changes only to Documentation/timers/no_hz.rst in stable kernels.
+
+Signed-off-by: Oleg Nesterov <oleg@redhat.com>
+Cc: stable@vger.kernel.org # 5.4+
+Signed-off-by: Krishanth Jagaduri <Krishanth.Jagaduri@sony.com>
+---
+Hi,
+
+Before kernel 6.9, Documentation/timers/no_hz.rst states that
+"nohz_full=" mask must not include the boot CPU, which is no longer
+true after commit 08ae95f4fd3b ("nohz_full: Allow the boot CPU to be
+nohz_full").
+
+This was fixed upstream by commit 5097cbcb38e6 ("sched/isolation: Prevent
+boot crash when the boot CPU is nohz_full").
+
+While it fixes the document description, it also fixes issue introduced
+by another commit aae17ebb53cd ("workqueue: Avoid using isolated cpus'
+timers on queue_delayed_work").
+
+It is unlikely that it will be backported to stable kernels which does
+not contain the commit that introduced the issue.
+
+Could Documentation/timers/no_hz.rst be fixed in stable kernels 5.4+?
+---
+ Documentation/timers/no_hz.rst | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/Documentation/timers/no_hz.rst b/Documentation/timers/no_hz.rst
+index 065db217cb04fc252bbf6a05991296e7f1d3a4c5..16bda468423e88090c0dc467ca7a5c7f3fd2bf02 100644
+--- a/Documentation/timers/no_hz.rst
++++ b/Documentation/timers/no_hz.rst
+@@ -129,11 +129,8 @@ adaptive-tick CPUs:  At least one non-adaptive-tick CPU must remain
+ online to handle timekeeping tasks in order to ensure that system
+ calls like gettimeofday() returns accurate values on adaptive-tick CPUs.
+ (This is not an issue for CONFIG_NO_HZ_IDLE=y because there are no running
+-user processes to observe slight drifts in clock rate.)  Therefore, the
+-boot CPU is prohibited from entering adaptive-ticks mode.  Specifying a
+-"nohz_full=" mask that includes the boot CPU will result in a boot-time
+-error message, and the boot CPU will be removed from the mask.  Note that
+-this means that your system must have at least two CPUs in order for
++user processes to observe slight drifts in clock rate.) Note that this
++means that your system must have at least two CPUs in order for
+ CONFIG_NO_HZ_FULL=y to do anything for you.
+ 
+ Finally, adaptive-ticks CPUs must have their RCU callbacks offloaded.
+
+---
+base-commit: 219d54332a09e8d8741c1e1982f5eae56099de85
+change-id: 20250129-send-oss-20250129-3c42dcf463eb
+
+Best regards,
+-- 
+Krishanth Jagaduri <Krishanth.Jagaduri@sony.com>
+
 
 
