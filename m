@@ -1,177 +1,151 @@
-Return-Path: <linux-doc+bounces-37067-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37069-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B07BA29B64
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 21:46:29 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id BE3DDA29B9C
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 22:07:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A9FFD164A22
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 20:46:27 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id B6B771884600
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 21:07:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2DE78214216;
-	Wed,  5 Feb 2025 20:46:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0041B214A79;
+	Wed,  5 Feb 2025 21:07:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b="PdM4Sv9M"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Jpy14qga"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lj1-f231.google.com (mail-lj1-f231.google.com [209.85.208.231])
+Received: from mail-ua1-f42.google.com (mail-ua1-f42.google.com [209.85.222.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 073D12135C6
-	for <linux-doc@vger.kernel.org>; Wed,  5 Feb 2025 20:46:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.231
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CB80214809;
+	Wed,  5 Feb 2025 21:06:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738788385; cv=none; b=oAfgwiQVWqBj4p/WZad740mB5bRDWB9rlYUfAEIt2xiQnbOtVCEMJ6m4VxNINSBBiPuj+WMOUQs/ebHdWwf1ncW7zWu9AwnN18BjwVt1g5cQghzuD9iPTu9XuSgcJR1h7Rvu1qqFZ+ARMT8ycLAFbF6R8gH7PmFWJ1DJgmGyqJo=
+	t=1738789619; cv=none; b=RBdPXn2eHwf05V2HtHSTCygVpGz93xpEIXIY8mlbkN6BdIMVfU2WBR2lJIem1zF9h8+QrpZGj6XHHA9QIu1ZfIwPdy1hj7YU0QokJVhabYlO62TPuD5wy5xZ9wWoAhqbRVeurQ8vS0Z2raJYkUG5Qgz80rlXcr0hksl2r6GmDWk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738788385; c=relaxed/simple;
-	bh=eJJq5QNRi14jFadz/bxG36Zo3CHW1uI2JqLwh8zP4ow=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NtjPkh/LiM3vlzWrcmKxCSwFyyICFHUNiFILIqvoVUYB49aUCJN1goNMIFTt2LLl7zKVT1KO0s24tT3QCkXHiImGbKn0f81IM12eUnBOT1ERkx5usbXEeOidiyGHtJttskuSiFcJVQtsh6VYUOw1J/in1snKIOBzJmTHGvQIt0M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com; spf=fail smtp.mailfrom=purestorage.com; dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b=PdM4Sv9M; arc=none smtp.client-ip=209.85.208.231
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=purestorage.com
-Received: by mail-lj1-f231.google.com with SMTP id 38308e7fff4ca-304e4562516so1636081fa.1
-        for <linux-doc@vger.kernel.org>; Wed, 05 Feb 2025 12:46:22 -0800 (PST)
+	s=arc-20240116; t=1738789619; c=relaxed/simple;
+	bh=ROIwAIDYmaJQqhLYCi+LKXx1tCg3tkrGe92qJKALfGY=;
+	h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:
+	 Mime-Version:Content-Type; b=HVgCEKdHHMm6rGGyfKImwEqXJTdJXEZgPqxZ9jP+bWjIx9mInn/jd6FfLp4uDMQjfOyUMfYPvRN21ixAJyHLbJyZfulAxibyiiLqVZFq3UyuljwVwRlb+Dw0om5Q3MIDDFkAFArAu4Qadc+cXeOn7UrHJ/Vol0DfhzXTu902ELQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Jpy14qga; arc=none smtp.client-ip=209.85.222.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ua1-f42.google.com with SMTP id a1e0cc1a2514c-866f414ccedso94215241.1;
+        Wed, 05 Feb 2025 13:06:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=purestorage.com; s=google2022; t=1738788381; x=1739393181; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=YZgLBFelzHCvaOXDScSFVXg2HFnlFG4aCVoHAFEQ/jY=;
-        b=PdM4Sv9M6stuMyPtdaLpFpp472IHI9AgjtrIzt0TeOU9NSHNmKpXWoULvACCm2bcj5
-         GDef7Po0mJ6DkQCgZJ+eaEoJImfknWK42DVBoo5CEVpyOG7LanGFVBhtlnv0IUUg04Zn
-         v/kBlHTOA6kRDqfkNN7nwaxbG2tDUj3AGwT9AQgmv56rmWp9fe57fCL1/5uCwg+sGsbt
-         IP8wHXkkvGGiOuszZuR2Cshp8f5EMmmED+awWIdHWByhCME/xTEZIO9TNs6jXoH95/zS
-         ZQJgPlojwFNo3ZBtVyibERgLNsPsJ+FxxH6GuhzlCLt62bw+Cr/h9aSUPFAIZW+MbUIF
-         ilug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738788381; x=1739393181;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1738789617; x=1739394417; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:subject:references
+         :in-reply-to:message-id:cc:to:from:date:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YZgLBFelzHCvaOXDScSFVXg2HFnlFG4aCVoHAFEQ/jY=;
-        b=fRQWeMTZlfogpwVN9EhuL211VMKjtEm+IKWuUFQYNqIshS5FJqCtmvWhImjFCE36Wa
-         Nlfm17al9G2YSrLuH/Dicd3UOeHqLWLWwZs4T7j7m/BmJER7h82SyJnEzYjwi/HqnykP
-         MMPuDyq99jvQsaIK5GB5KeHUNZmFIjc6gNsWgfonfHfzSnaD4K7MUp6sBFp5/5kkTtie
-         ayBiNr9eIx9E6orTSdGO46IcAt/sq0wNdYXCF3w0j8w6RNMvh6QDUv0Q4jgchCEBYEjL
-         y0nBzzm6cD/J4mQwflBZoRoRFCjIKoW8p6mqu9XoQI3I7SW4B8heB+FFxjRbAtW4yX4K
-         U6Cg==
-X-Forwarded-Encrypted: i=1; AJvYcCU/ROPkvbHTED9vKPoGo2skEMWLDqaL1uB0KF2ZLFSUU2WsbVjLtjkoSAdl8UgojqqZwppfbTWRbUk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyXqwY4VXqpea8brjQfudA1IV2RgzedJ2tVxPklCCj1n5htJtu+
-	3pRIszjUSkRZARug7rjqfHqJ2NbWWYaj0dk9zlEmtI70C5G7ciCp4/bTkhQ9FthqcbpmT8JAMC5
-	4jXvnq5ecC1v8Y5WkhpPfdTG5lZ51itzQYzURoFUWKo0JptjR
-X-Gm-Gg: ASbGncv7NUwyiF9t4olp9gwM3Sb31Mr6byjjLjZilzFl+aZmik7gkewDN6ICSONjYst
-	Oe1WFk0VGoYSdrlN+dPX97/wZrtJ0q1S9LHRaTHUi1O/g53ZYW8fjKgPMRWg5pak+tnTlb7n52F
-	1paLCcA6cG+mx1Ij5RJRZRpXqVNuOpvbEIhxjBLk6kTOrgsx9sRFtwHBiRyrQK55fPBngWAxV4j
-	ol98xX8e68sEpwZeypx4M1M4G8kluA60tjUDlrlZPL0gkp+qxqmmuUbK2GpniJ2M9QKXtTyH79J
-	XvchDzRFqC3dVFsSQ9Iemyog
-X-Google-Smtp-Source: AGHT+IHGwIKRNNFxj2aI2pB1MRsUTu9sF3y4BpuFpcUwXFlSdrpcxN6BtNkK74LQkEMWM1Ky2ABB1PoPqWjB
-X-Received: by 2002:a2e:874d:0:b0:2ff:c167:a965 with SMTP id 38308e7fff4ca-307da514932mr2475291fa.8.1738788380245;
-        Wed, 05 Feb 2025 12:46:20 -0800 (PST)
-Received: from c7-smtp-2023.dev.purestorage.com ([2620:125:9017:12:36:3:5:0])
-        by smtp-relay.gmail.com with ESMTPS id 38308e7fff4ca-307a3069cc3sm4133931fa.4.2025.02.05.12.46.19
+        bh=321Yzdb9C7R/V5A/ZTrGrsUuNiJo9jCyp/WhHvYvkN8=;
+        b=Jpy14qgaDV7qRHhQDLomF658Ap5AZS/r6TPS58+mwlf8fyNJeH+Z5eQ82tt++Rn0Vy
+         6VpTrkx3ccMB7qP0TG8sbDAd6dV879yqRilYmtR+dA9eLY6BKPLdeNAo85Z1VZ3Av+HJ
+         HuwXOQHSlJw0YB09YE2Q5uMEGXqyJHPu/92FrFARcUl49EYHgDqw4zU1rMs5FP+9ZKL5
+         LRw8Dm3wtlrmEmxf+5qN5z76/GkvGLqrSn1ouMmJONLzJtISIUlQMtsxh5Q8+kCVf+Im
+         GvBvfy0kMAMKjX9WUZKEPttLPyWx/dqM1NTT/pM1EOD4NJA+XPczeZo3Gq5hDNIb3u9E
+         OPsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1738789617; x=1739394417;
+        h=content-transfer-encoding:mime-version:subject:references
+         :in-reply-to:message-id:cc:to:from:date:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=321Yzdb9C7R/V5A/ZTrGrsUuNiJo9jCyp/WhHvYvkN8=;
+        b=vVkSGaSaU/0j22Mi5bw/Zj6LLR+BLSRdh80gkzhg2/BJGrDCxoi1T+K4DC0lNjVetO
+         CZo4IoX08l16b/rI+KgcnGOAZhuwMJkW1BiAX8ICzSnNdjSSZ/vXAUmMKHQ9WJC+fXHc
+         3d7s6o1/reGTIgSUYCGAgfu5uMIVtt/zAgltOCiIasTdEb8MrBc+rufiUmhA9R+jaFuL
+         vn7S1cOB0mNpYCD6Kmhx0lhV7FuBg1hnIBSK7a55yBO+ehoEhruxlZy6w15dxwxbArOP
+         Erzl4jqxZzJx9nM4wl8+UscPpSZtpTbUWkF4kkembX+muhwxC8XRNLIKuf+YNHAQqihg
+         sFCg==
+X-Forwarded-Encrypted: i=1; AJvYcCVAhBeQWz5otW0D2nvs8OGmJam0y1Am23rrwET8vXuVTadTgUWPFUdPSt6XrOxBHNzt276oxJq/aDYoxA2vF5d8@vger.kernel.org, AJvYcCVhTuEEQARKy0XpLy2Pofo/EtT5RshZ4cXnCMYw3njcTDPqefx2NPD+wTsgxUtEi7QGIQhaRuxy@vger.kernel.org, AJvYcCVq9agcVp1DPF1mAbmhqPm9K6lL37NnaDD/86BFNVFSK1i59m5ZQQlGZvc+lEXD+J+ih/A=@vger.kernel.org, AJvYcCVuCc6kRhU9H75XLjiJnTRsDJORSNk22/a0kA9cEos4vZVzMy8+NrG6C25angVvY7JhKcwCLr90m3aI@vger.kernel.org, AJvYcCWf1xU4pH9SvILCLkxs2N52UWXkkUd818nL9xt7dl4jPkude0rbSXUv7T2i9kLZrhGkPbF4vzumdgKzMO64@vger.kernel.org
+X-Gm-Message-State: AOJu0YwARW3viAcBKZIVboRWyryoPRq/ivlzt0szjoZvDsiAOdhCP7+s
+	9Nn8KthB63brU1Vni4Wjzqjm1hhicWu/rdh65BfXqc3PN+RQOwud
+X-Gm-Gg: ASbGncuxd8h9x05WbFs6nMoGDUOKqVlnqeQDqMKnV69Z8gWTEVXwpQdDrLrMx9KW6mc
+	7abgpgFyZp12QrbxrmCFJog6/FUVACRe9tGk00PKdmUoomtbVP58nJ9c6szoUbeJNRkFK7+A/+S
+	iXE7+5cnZA6sXOGoJLvO+gEaIX8h496mGB8yqnJeUwpiXlUYOBI7d23+NAX4k7Z5foUzhorcCWn
+	GBewvDwbC6AFPoNdYmK0+jytylrzdPdOHctqSw7hiFk6ERi/DLqZzVT9hpL9/a3R6S69Lj4RELZ
+	gvOZdybgMfFjdWDCGgz2Jo2Y0daVmXhAu7kq1WR74yGbfPPGRePyVeJCDnuKRS0=
+X-Google-Smtp-Source: AGHT+IGjmsT1CX6GHvVc7jQLN8frmEsrqlIM1ufKny6kJV9XpmTxVc/Kie419ULGnj052Qaq3kcQhw==
+X-Received: by 2002:a05:6102:5e86:b0:4b2:cc94:1d6a with SMTP id ada2fe7eead31-4ba47abaa0cmr3554439137.19.1738789617063;
+        Wed, 05 Feb 2025 13:06:57 -0800 (PST)
+Received: from localhost (15.60.86.34.bc.googleusercontent.com. [34.86.60.15])
+        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-4b9baa8e4cfsm2451368137.11.2025.02.05.13.06.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Feb 2025 12:46:20 -0800 (PST)
-X-Relaying-Domain: purestorage.com
-Received: from dev-ushankar.dev.purestorage.com (dev-ushankar.dev.purestorage.com [IPv6:2620:125:9007:640:7:70:36:0])
-	by c7-smtp-2023.dev.purestorage.com (Postfix) with ESMTP id 6981F3401BB;
-	Wed,  5 Feb 2025 13:46:18 -0700 (MST)
-Received: by dev-ushankar.dev.purestorage.com (Postfix, from userid 1557716368)
-	id 5B895E41340; Wed,  5 Feb 2025 13:46:18 -0700 (MST)
-Date: Wed, 5 Feb 2025 13:46:18 -0700
-From: Uday Shankar <ushankar@purestorage.com>
-To: Breno Leitao <leitao@debian.org>
-Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-	=?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
-	Simon Horman <horms@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Johannes Berg <johannes@sipsolutions.net>,
-	Jonathan Corbet <corbet@lwn.net>, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] netconsole: allow selection of egress interface
- via MAC address
-Message-ID: <Z6POGmAEEixKV5/O@dev-ushankar.dev.purestorage.com>
-References: <20250204-netconsole-v2-0-5ef5eb5f6056@purestorage.com>
- <20250204-netconsole-v2-2-5ef5eb5f6056@purestorage.com>
- <20250205-flying-coucal-of-influence-0dcbc3@leitao>
+        Wed, 05 Feb 2025 13:06:56 -0800 (PST)
+Date: Wed, 05 Feb 2025 16:06:55 -0500
+From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+To: Akihiko Odaki <akihiko.odaki@daynix.com>, 
+ Jonathan Corbet <corbet@lwn.net>, 
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
+ Jason Wang <jasowang@redhat.com>, 
+ "David S. Miller" <davem@davemloft.net>, 
+ Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, 
+ Paolo Abeni <pabeni@redhat.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, 
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>, 
+ Shuah Khan <shuah@kernel.org>, 
+ linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ netdev@vger.kernel.org, 
+ kvm@vger.kernel.org, 
+ virtualization@lists.linux-foundation.org, 
+ linux-kselftest@vger.kernel.org, 
+ Yuri Benditovich <yuri.benditovich@daynix.com>, 
+ Andrew Melnychenko <andrew@daynix.com>, 
+ Stephen Hemminger <stephen@networkplumber.org>, 
+ gur.stavi@huawei.com, 
+ devel@daynix.com, 
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: Willem de Bruijn <willemb@google.com>
+Message-ID: <67a3d2efbba32_170d392944d@willemb.c.googlers.com.notmuch>
+In-Reply-To: <20250205-tun-v5-1-15d0b32e87fa@daynix.com>
+References: <20250205-tun-v5-0-15d0b32e87fa@daynix.com>
+ <20250205-tun-v5-1-15d0b32e87fa@daynix.com>
+Subject: Re: [PATCH net-next v5 1/7] tun: Refactor CONFIG_TUN_VNET_CROSS_LE
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250205-flying-coucal-of-influence-0dcbc3@leitao>
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 05, 2025 at 11:07:45AM -0800, Breno Leitao wrote:
-> > +	else if (is_valid_ether_addr(np->dev_mac))
-> > +		ndev = dev_getbyhwaddr_rcu(net, ARPHRD_ETHER, np->dev_mac);
+Akihiko Odaki wrote:
+> Check IS_ENABLED(CONFIG_TUN_VNET_CROSS_LE) to save some lines and make
+> future changes easier.
 > 
-> You do not have the RCU read lock here. You have the rtnl(), which is
-> sufficient, but, CONFIG_PROVE_RCU_LIST will show something as:
+> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> Reviewed-by: Willem de Bruijn <willemb@google.com>
+> ---
+>  drivers/net/tun.c | 26 ++++++++------------------
+>  1 file changed, 8 insertions(+), 18 deletions(-)
 > 
-> 	WARNING: suspicious RCU usage
-> 	6.13.0-09701-g6610c7be45bb-dirty #18 Not tainted
-> 	-----------------------------
-> 	net/core/dev.c:1143 RCU-list traversed in non-reader section!!
-> 	other info that might help us debug this:
-> 	rcu_scheduler_active = 2, debug_locks = 1
-> 	1 lock held by swapper/0/1:
-> 	 #0: ffffffff832795b8 (rtnl_mutex){+.+.}-{4:4}, at: netpoll_setup+0x48/0x540
-> 	stack backtrace:
-> 	CPU: 1 UID: 0 PID: 1 Comm: swapper/0 Not tainted 6.13.0-virtme-09701-g6610c7be45bb-dirty #18
-> 	Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
-> 	Call Trace:
-> 	 <TASK>
-> 	 dump_stack_lvl+0x9f/0xf0
-> 	 lockdep_rcu_suspicious+0x11a/0x150
-> 	 dev_getbyhwaddr_rcu+0xb6/0xc0
-> 	 netpoll_setup+0x8a/0x540
-> 	 ? netpoll_parse_options+0x2bd/0x310
-> 
-> This is not a problem per-se, since you have RTNL. We probably need to
-> tell for_each_netdev_rcu() to not comply about "RCU-list traversed in
-> non-reader section" if RTNL is held. Not sure why we didn't hit in the
-> test infrastructure, tho:
-> 
-> 	https://patchwork.kernel.org/project/netdevbpf/patch/20250204-netconsole-v2-2-5ef5eb5f6056@purestorage.com/
+> diff --git a/drivers/net/tun.c b/drivers/net/tun.c
+> index e816aaba8e5f2ed06f8832f79553b6c976e75bb8..452fc5104260fe7ff5fdd5cedc5d2647cbe35c79 100644
+> --- a/drivers/net/tun.c
+> +++ b/drivers/net/tun.c
+> @@ -298,10 +298,10 @@ static bool tun_napi_frags_enabled(const struct tun_file *tfile)
+>  	return tfile->napi_frags_enabled;
+>  }
+>  
+> -#ifdef CONFIG_TUN_VNET_CROSS_LE
+>  static inline bool tun_legacy_is_little_endian(struct tun_struct *tun)
+>  {
+> -	return tun->flags & TUN_VNET_BE ? false :
+> +	return !(IS_ENABLED(CONFIG_TUN_VNET_CROSS_LE) &&
+> +		 (tun->flags & TUN_VNET_BE)) &&
+>  		virtio_legacy_is_little_endian();
 
-I don't think there is an automated test that will hit this path yet. I
-guess you got this trace from your manual testing?
+Since I have other comments to the series:
 
-> 
-> Anyway, no action item for you here. I am talking to Jakub on a way to
-> solve it, and I should send a fix soon.
+Can we make this a bit simpler to the reader, by splitting the test:
 
-/**
- * list_for_each_entry_rcu	-	iterate over rcu list of given type
- * @pos:	the type * to use as a loop cursor.
- * @head:	the head for your list.
- * @member:	the name of the list_head within the struct.
- * @cond:	optional lockdep expression if called from non-RCU protection.
- *
- * This list-traversal primitive may safely run concurrently with
- * the _rcu list-mutation primitives such as list_add_rcu()
- * as long as the traversal is guarded by rcu_read_lock().
- */
-#define list_for_each_entry_rcu(pos, head, member, cond...)		\
-	for (__list_check_rcu(dummy, ## cond, 0),			\
-	     pos = list_entry_rcu((head)->next, typeof(*pos), member);	\
-		&pos->member != (head);					\
-		pos = list_entry_rcu(pos->member.next, typeof(*pos), member))
+    if (IS_ENABLED(CONFIG_TUN_VNET_CROSS_LE) && tun->flags & TUN_VNET_BE)
+            return false;
 
-If we do something like
-
-list_for_each_entry_rcu(..., lockdep_rtnl_is_held())
-	...
-
-I think that code will be okay with being called with either rcu or rtnl
-held. Of course, we need to plumb it through the net-specific helpers.
+    return virtio_legacy_is_little_endian();
 
 
