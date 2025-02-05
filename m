@@ -1,610 +1,409 @@
-Return-Path: <linux-doc+bounces-37018-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37022-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFA64A2916D
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 15:51:02 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id CB28BA291AB
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 15:54:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B762016AEB1
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 14:49:16 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 76E9C16BE32
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2025 14:51:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B858E220682;
-	Wed,  5 Feb 2025 14:42:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF46D198E77;
+	Wed,  5 Feb 2025 14:43:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JWJQTe9q"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="BSDviL40"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8261921E0B7;
-	Wed,  5 Feb 2025 14:42:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738766521; cv=none; b=fsxr9J8KIAq7bIva76IUlVgP64bJGCgCBsJ1Lt0e11hOHggxrP0ryvgF9uYmKNcXQGuXFc+ullurZ3uk7CdIT8CKNmdgbcRc6LW+B6Yzhrag+6gq4OY3b5K1FXaz2gu26ylM64dUgZdbctUpKmlm3AxiAj9qFjiViHifC87OgI8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738766521; c=relaxed/simple;
-	bh=8QSTooCeiZmn5JcSnvBQX/pgjSrH/ExrcOOnIDjAG9c=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=grA0Vomiz83OjisZqnIB782Uy7QP8jELcDUJb3BbaKxc3DH9XSiv185xlioPJjzTDO1NxuA98837F5/pnba0awXG9MS783m8kvq1ZxtrtupoPhfMjWv9nLE9mut0I1QlCFv5OFbTNyQGRRA3IaI8R6iiFCZrGaNwtwSN0fmqMmo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JWJQTe9q; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7597FC4CEDD;
-	Wed,  5 Feb 2025 14:42:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1738766521;
-	bh=8QSTooCeiZmn5JcSnvBQX/pgjSrH/ExrcOOnIDjAG9c=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=JWJQTe9q4hVOHPDcn4ApGAo0VfLZUoGvklTpYjTa/ut4i4CU7q8P/QHh3rrOOKhMl
-	 keMWSkdjYZ2oDqKJqpMoLtfHfwKOQ6+2oGNtvx/gSYc6OcBi8KDklnkW4jV/K/+ymk
-	 H2amzmMp7cD4Ve/X5xCoS5fy6BonI2Lx4ZrfthSoALBAgTv5p8rwKAwtvfYV29aJej
-	 i7CEQd+Zqbsr1RK45dl8XaQDNFcmP5VaVQ3IrNaOJ7jH6oNXvxYYgili7ZuHoNC2NA
-	 0mYoNeSMtcblFV8FBa0P6JUMwFtW/2Alwz4C7xYVXMnoVXTNsgOgwFGDUIox+nR2vU
-	 f+o9IBE5g5TQQ==
-From: Leon Romanovsky <leon@kernel.org>
-To: Christoph Hellwig <hch@lst.de>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	Robin Murphy <robin.murphy@arm.com>
-Cc: Leon Romanovsky <leonro@nvidia.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>,
-	Sagi Grimberg <sagi@grimberg.me>,
-	Keith Busch <kbusch@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Logan Gunthorpe <logang@deltatee.com>,
-	Yishai Hadas <yishaih@nvidia.com>,
-	Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Alex Williamson <alex.williamson@redhat.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	=?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	linux-rdma@vger.kernel.org,
-	iommu@lists.linux.dev,
-	linux-nvme@lists.infradead.org,
-	linux-pci@vger.kernel.org,
-	kvm@vger.kernel.org,
-	linux-mm@kvack.org,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v7 17/17] vfio/mlx5: Enable the DMA link API
-Date: Wed,  5 Feb 2025 16:40:37 +0200
-Message-ID: <1a7fd81aed2468c0e950fbcc85655cf3b2c0470b.1738765879.git.leonro@nvidia.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.1738765879.git.leonro@nvidia.com>
-References: <cover.1738765879.git.leonro@nvidia.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F35B198851;
+	Wed,  5 Feb 2025 14:43:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.19
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1738766611; cv=fail; b=TI+1MkIpqYuk+benoKo8o6AawyqD+pJHMzz+PYvsNkwyS+ZFxS21Bcs35bHOPIbMaJsES69ZmGwiFMXMhUBc2ZeUTD2XKVRoJnMxeYZXBIDEJ+J5LWlUIAc2B4RBang5AKUdPCNKZZCJ0YBiXgkKa/Eu2pdN0fLKFBxvCZmheC4=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1738766611; c=relaxed/simple;
+	bh=fOPY/eIIDJKanCVuUYDYYPXQfoc57nEExN2jXBi8JpI=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=Yna0IM//aytOswC6CFOOv20uN8zqXFqjIbeD7qc0eSlu/f7zK/JxpthbaFNIXdyYRDDb8tovz/6gXtNaaahx2NqkgyFy/PUCiYlPMS1V7mjXosvmPuLLY7bbhilH9zXPJ1doPh6lOKX3hwngFGvITuc93SFCxOC4PVZ6ciswojo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=BSDviL40; arc=fail smtp.client-ip=198.175.65.19
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1738766610; x=1770302610;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=fOPY/eIIDJKanCVuUYDYYPXQfoc57nEExN2jXBi8JpI=;
+  b=BSDviL40E5EwVFgpLaeZmZBpRLuiQU1xy8tVfoAwKLnl1AwKMyJA6z3N
+   NaenowULowCY8c/5Aflh8L3qsJYtYFd4sPqPfY29ihFnvwKZkEfCH1we4
+   WFHtgv0f1OPrrPdApn4pSfuqYrcg4MRRWSfrFIztlVt4z0NAA58fd/5m6
+   oxKibcn8NSxP2xolGkqRnVPquVgwKUm8cDv3iNipGh068VqmoQwKivgbA
+   1mVItOSn6v2SlrP348ngKJKtjAMpohLNPe08tRDjABU6gftoA3ZNDlpMj
+   PgPJMUuORTJ7BhwWNToupJumCTVht6n7gsLGFTu/DfJFu71Is5cOgjLWN
+   w==;
+X-CSE-ConnectionGUID: AVpOABBTR+OSKytqZPf/pg==
+X-CSE-MsgGUID: yQRAP/ZZSLGkbxDHZJRnjg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11336"; a="39217722"
+X-IronPort-AV: E=Sophos;i="6.13,261,1732608000"; 
+   d="scan'208";a="39217722"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Feb 2025 06:43:28 -0800
+X-CSE-ConnectionGUID: dE7GoqvgQ/ivIGkcCcVWpg==
+X-CSE-MsgGUID: UNYCVEQuSyiZDzKnqrp4Ng==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; 
+   d="scan'208";a="141817164"
+Received: from orsmsx603.amr.corp.intel.com ([10.22.229.16])
+  by fmviesa001.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 05 Feb 2025 06:43:26 -0800
+Received: from orsmsx601.amr.corp.intel.com (10.22.229.14) by
+ ORSMSX603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.44; Wed, 5 Feb 2025 06:43:25 -0800
+Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
+ orsmsx601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.44 via Frontend Transport; Wed, 5 Feb 2025 06:43:25 -0800
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (104.47.55.172)
+ by edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.44; Wed, 5 Feb 2025 06:43:25 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bkMbbYbqwBhJEzqgQeKAMSE1N0OdLcocoe8aMwKeBRAdo9MwfkHDjqGtc8g/ebx0sE2G2MzvAc0gjijIjBZMoZEhZGmmv3Z3puJt9YQFk4CUJEHgfsp/QPzvZ3B4PYT2wPgb+O6HGGn3ITixhl+d+PD9e1arYzPFT+PVdOnfaWL4hFxJmurbXFbzDy1ILPe4ToZiSfJzvUy4PGED9yqVCworTFAJsEImAJcJPvpu5RG6dJVUcRVUz+goz1FoA26Ml0UZs5WzwZBp6wGskIKLgo5Plwq3UHVk219/tIHxqcTXxwt9EodfcQ+DD1WtacEFXY+HOdHH8vfuEv9KNHUDKg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jh+QDkFp+wkiDcnSdl4k914DhY1+t3s9r+mgwoUDjss=;
+ b=Fc7TEDzL9CBaR69O1Kasvd/rYrYQrhHwkH5mxQv/iIvUWH3jsPJqQfoc2pOFxrUh9OTrgzfyjME80bqpNrv4+sD891afyTs2XJl5h443XrtdOswSzyOp1Cb48WhUS7gzuXREhc5eXFxXfFW/yvVQzWRlEtltXpxlOzlVOp6BrWW5vtjZcnFVYs7jBrC1Mb3/pzC+ctZ8v/xCvrMtZTPuVJEME3wCNM6MbU6PJ+u702afnqQ34Wy7Dsnlyx34hnjY7bbAA8SRr8QTG1xYFV/kjR6pxvZLP9NmWwOcatRLzH4gnv52rPQbquKezd2W4FyCEmN4fbH/ZDEqAZNoW37TLg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from PH0PR11MB5830.namprd11.prod.outlook.com (2603:10b6:510:129::20)
+ by PH7PR11MB6426.namprd11.prod.outlook.com (2603:10b6:510:1f6::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.24; Wed, 5 Feb
+ 2025 14:43:20 +0000
+Received: from PH0PR11MB5830.namprd11.prod.outlook.com
+ ([fe80::c80d:3b17:3f40:10d6]) by PH0PR11MB5830.namprd11.prod.outlook.com
+ ([fe80::c80d:3b17:3f40:10d6%4]) with mapi id 15.20.8422.009; Wed, 5 Feb 2025
+ 14:43:19 +0000
+From: "Song, Yoong Siang" <yoong.siang.song@intel.com>
+To: "Fijalkowski, Maciej" <maciej.fijalkowski@intel.com>
+CC: "David S . Miller" <davem@davemloft.net>, Eric Dumazet
+	<edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Willem de Bruijn
+	<willemb@google.com>, "Bezdeka, Florian" <florian.bezdeka@siemens.com>,
+	Donald Hunter <donald.hunter@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+	Bjorn Topel <bjorn@kernel.org>, "Karlsson, Magnus"
+	<magnus.karlsson@intel.com>, Jonathan Lemon <jonathan.lemon@gmail.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>, Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>, Jesper Dangaard Brouer
+	<hawk@kernel.org>, John Fastabend <john.fastabend@gmail.com>, "Damato, Joe"
+	<jdamato@fastly.com>, Stanislav Fomichev <sdf@fomichev.me>, Xuan Zhuo
+	<xuanzhuo@linux.alibaba.com>, Mina Almasry <almasrymina@google.com>, "Daniel
+ Jurgens" <danielj@nvidia.com>, Andrii Nakryiko <andrii@kernel.org>, "Eduard
+ Zingerman" <eddyz87@gmail.com>, Mykola Lysenko <mykolal@fb.com>, "Martin
+ KaFai Lau" <martin.lau@linux.dev>, Song Liu <song@kernel.org>, Yonghong Song
+	<yonghong.song@linux.dev>, KP Singh <kpsingh@kernel.org>, Hao Luo
+	<haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>, Shuah Khan
+	<shuah@kernel.org>, Alexandre Torgue <alexandre.torgue@foss.st.com>, "Jose
+ Abreu" <joabreu@synopsys.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	"Nguyen, Anthony L" <anthony.l.nguyen@intel.com>, "Kitszel, Przemyslaw"
+	<przemyslaw.kitszel@intel.com>, Faizal Rahim
+	<faizal.abdul.rahim@linux.intel.com>, Choong Yong Liang
+	<yong.liang.choong@linux.intel.com>, "Bouska, Zdenek"
+	<zdenek.bouska@siemens.com>, "netdev@vger.kernel.org"
+	<netdev@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+	<linux-kernel@vger.kernel.org>, "linux-doc@vger.kernel.org"
+	<linux-doc@vger.kernel.org>, "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
+	"linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
+	"linux-stm32@st-md-mailman.stormreply.com"
+	<linux-stm32@st-md-mailman.stormreply.com>,
+	"linux-arm-kernel@lists.infradead.org"
+	<linux-arm-kernel@lists.infradead.org>, "intel-wired-lan@lists.osuosl.org"
+	<intel-wired-lan@lists.osuosl.org>, "xdp-hints@xdp-project.net"
+	<xdp-hints@xdp-project.net>
+Subject: RE: [PATCH bpf-next v8 4/5] igc: Refactor empty packet insertion into
+ a reusable function
+Thread-Topic: [PATCH bpf-next v8 4/5] igc: Refactor empty packet insertion
+ into a reusable function
+Thread-Index: AQHbd3eRdwLqM9RAOUG+CEwq4T8dPbM4pMYAgAAd5GA=
+Date: Wed, 5 Feb 2025 14:43:19 +0000
+Message-ID: <PH0PR11MB58305176708A48DD8EA60B96D8F72@PH0PR11MB5830.namprd11.prod.outlook.com>
+References: <20250205024116.798862-1-yoong.siang.song@intel.com>
+ <20250205024116.798862-5-yoong.siang.song@intel.com> <Z6NaFkPBZA18oILE@boxer>
+In-Reply-To: <Z6NaFkPBZA18oILE@boxer>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PH0PR11MB5830:EE_|PH7PR11MB6426:EE_
+x-ms-office365-filtering-correlation-id: f7c3997d-c5bc-46b2-218b-08dd45f36f0a
+x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|7416014|376014|366016|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?XpH3xUTxaPcTA3IPS9J/WaW2iN6TNAlb/iZT1PZkhcy+Gs+wGKqLrTJmtWb/?=
+ =?us-ascii?Q?vrgOMwccq9YG1V7oN83SnZWGTfUHTMBvIHKP+ypdIg+Pq1pgjsDx/JNdP1Ni?=
+ =?us-ascii?Q?v8qQg8SqmQA/1A9Arvea4jNFjhaGPN/FSisko6rA9A+8Xxi8AppcxpgSp4nl?=
+ =?us-ascii?Q?O1mmstalstlI8MdFo5otg2fVdHtK41kovejtjZbCbK/REKRgsnGGCMil3iIw?=
+ =?us-ascii?Q?F4Laa2nPSvRMT9cuN5nvL66f2NYQiYhTrX95ODHzKUvwKum0Ko/lqWmapxws?=
+ =?us-ascii?Q?Pn7NFGWTPxqThgxWkPMCSP24hKWroAx0DVIpu8hDnzu/YrwmDSzzvuOUprbG?=
+ =?us-ascii?Q?+VuBOkE4LrevGkKLfpPWTCQpZlFrYAoasEkGjPpAvfQN0EV/JvrrE3C26phW?=
+ =?us-ascii?Q?EuOyXqNqH9CuGglCCTY/SVJEXzPjcYVxSI9tGN9MPXwpcR/nzvii1Omwwvro?=
+ =?us-ascii?Q?e+DvFoNBf1zZ6s79mMciqwoEed6F/PeN02CcM2WdNsm+9WYCq/KSM2u7KBcp?=
+ =?us-ascii?Q?pGB6w66/N+XaKU2bbd5d6D2TTutvFgeZ4e/p7+RTeDX7HUMRifN4ycnJq49i?=
+ =?us-ascii?Q?X/giKDJihm0eYlLRJKpstUOXgABO83804tHM9dRVq9LX6E/88HMKkek/cTyy?=
+ =?us-ascii?Q?pmclkLO5WTFD19CY80eLT/1RgzWDBdX78wdIk2/xPasRiaIvQx31B5rr+Qu1?=
+ =?us-ascii?Q?fvZTY5S4/Bah3IC7MNluylRU5bAGL7EWSeYhyASiI0rJK1e9KncB9/SrhOVl?=
+ =?us-ascii?Q?JvsI1AyKqOrFsKItGpWqiO2l+EppbXH88uHqCvfB4BpLYINokerrVCXj2uG4?=
+ =?us-ascii?Q?tHblIrnZZd59VdikqgDqVaZXq62Y8HQL4aOX8Ee+RfaNEqjfQkNQ8p0Km2uV?=
+ =?us-ascii?Q?EV/KYJlVZ2X2uHald5aGtzdwu9cplO8xJ6h2SVN/LGNoEZuAcVtmwNf+yRTB?=
+ =?us-ascii?Q?+F0FvJEDGSauc01awdM4R9BO8VQeEMXAAJiXVB9TJOn/m6UJ7cUe+4Kks7k9?=
+ =?us-ascii?Q?1yepUyLTRFJkXScl8XcUBF+tZCxyfzVU608pwnOzwkTAZrGLjT4oMAFHUdog?=
+ =?us-ascii?Q?pP+XLxw/VhclEn/hmg24n0yWGknZdaxdfjFqpJ+TByIQJjQER2LFzQDXmDnf?=
+ =?us-ascii?Q?qs764FlKXPDVxM49pKpJXhnOOyselmLANYnygbbm1ySckR1urCfaNJnJMN7J?=
+ =?us-ascii?Q?MnlikxhgfDfb3qscGuRdiYTrpar4tQ7p8gnCmZbBOJiP2Kr8g//uB0fzCasr?=
+ =?us-ascii?Q?UCGq7peSllN553DmZ8W7Blv/FFYBa7YCU8P/bjhb8WK0EeFrjt936+6gvLp4?=
+ =?us-ascii?Q?+zbh0C4LZCOr6jL846gZDlZAC18vjPSfChG+W72brldAjEnbtD5LYZVjaJ9a?=
+ =?us-ascii?Q?LxUu0f/H9BZQdxSPY2WWPhWCWWSQwvGQjmZgv+g/eBzZIFtXMfHNKsEqiX/V?=
+ =?us-ascii?Q?VQ+rSfomifcsOI+sn5vgCRkmCB95LUnl?=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR11MB5830.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?TI2wPjav51R92NxStUWzBz+/SoMWRrccmV0FFkUD1p3QjlTIBY+4QVmV7W91?=
+ =?us-ascii?Q?NgZzn8DBozaBhN9l2OduvbZDOwz0e6lOgmVUrBroFOjCOWs4upkU/oyxfdPy?=
+ =?us-ascii?Q?0CyJJXFi30P5NlFdckULg5RqyLkQVOYmWTFT+rmTG6WWgWSGU3LFInc4fXkX?=
+ =?us-ascii?Q?Rjln4rnYODZzvdBvVwRy9WBtlLx4UvzF7fjbphlvMVmafaqheDid1ETzTNZC?=
+ =?us-ascii?Q?PQlKOGwBA+iHvy8mFeCJ2rVw1yt2MaRhxans+EGRoUOUekwx4qWfH0XVLuhK?=
+ =?us-ascii?Q?j3PlAdWIWPXTx3k1mKu5zsPpzemfkey6pzMvyd/QC/JIgLM1BZ2aA6ehsYOT?=
+ =?us-ascii?Q?lfqVN3eIF2gQr1h3/yPkIYNXfXDVzD+WoUaALI6OoKQbGv3ZCkIYSaJVsGE0?=
+ =?us-ascii?Q?yOjAGMETlZ76DFBPXntH50XEEORcxF12eIAbWAMokeqZQjQq4AVmqHeaeqRq?=
+ =?us-ascii?Q?wCnQSmce6ZLdLNONAhJKZQZ8vjGHmELD/OAb3aVXNblqNV0jszKhtXzOwU8t?=
+ =?us-ascii?Q?8D5obi2IdpngthtFu1U+YvbzcUvYC5TksaN2gKvQ79HYspCSWWvT4Z1gXR6F?=
+ =?us-ascii?Q?uUVZ8lvjQmfspTaRckVL2pb1GipRsD58Xdc//+jwl4M8qR+l5nV/KgKVPRlN?=
+ =?us-ascii?Q?NCVG2fZ3Hpj8kgCXLFZ9egez8K5d4W/4bmLfye0JGkHtXqnhnrbavLHFVf+m?=
+ =?us-ascii?Q?XEs6lJhFG6Jsr8bnSz1vw3dBJDjSyLkHxyzu4JrSKJDR3147TEmbSg4kGip5?=
+ =?us-ascii?Q?+dpKQ7/082VH1Bdd+OAPQrCPwu66Ce3BzjQWjD6rJvRF00/vN9HuYIjBDP1+?=
+ =?us-ascii?Q?1l9Wjt0Gd/LU0dOA6ZDnv9GQ1EHi4FAXJcOkCACUy2GmBXt26I5VQ+RE3MUR?=
+ =?us-ascii?Q?msx4LnibLsyG53nC2RuEezEZ5Iu7JTcNBUx6ufL9UvqYrOAP/GocDyQRRYqH?=
+ =?us-ascii?Q?BtkgqAY4+OVqglVli+LGhWGxmFOpCtY64ZUKD9B7HCp+T3Qav4+Rfqg9ycM3?=
+ =?us-ascii?Q?oPf9LCWOwNWVtQUVP3kB1+WtdpJzbJeccuFc06dcifq+c8tnUhpS5SvfV3jq?=
+ =?us-ascii?Q?8xkeT5g2tXbuGTicza3C5cPE1Nr873B1kO5FfQey9SyJ6WQmKIMGUjS8mAEF?=
+ =?us-ascii?Q?NdxoCPZjaK0ZTrr89xAZQd6oiUJ+LDtQK7a5sVQy3wYbUiEE5658H6eEV/cu?=
+ =?us-ascii?Q?X8CQ7Hf1SstFD/SCj3xd3N4Va3f5Yeb0zdMhUohbi3DaOaYcShqrH9InVVEQ?=
+ =?us-ascii?Q?Gq/XuaxrmH+cZJ2DvMDHcu47TqrQqAuRLGPGk6kt2aLCE7DsP+/r6kbSYU2W?=
+ =?us-ascii?Q?ZkaixajbIkw3UlNakzyVjiFwpR/vxqQxd49Wkm6GoZJdfFastwpDIRovcoa2?=
+ =?us-ascii?Q?I2Vr43zHxEPlZYAv/LF74Xb/dQ9aTcAlDXivnUM5ZbvJCTLiKYoLrATY/cXY?=
+ =?us-ascii?Q?TE2c6jmnGPG/g4dfm5C9QRsFcNc8NL8KVfG2b3EzLFIdfVYEls0nW4EtN1mr?=
+ =?us-ascii?Q?LnHajHZXiUt8MX1TuN17PpF27BD0ysLkyAfiR1j9j3avS/wfrM82QIViCWBI?=
+ =?us-ascii?Q?dPx70fQ2t2LX7BsRMTOJ7TVbTgEgKRhmCB5IgUG69QgQgoeDIGf82UjiLRf3?=
+ =?us-ascii?Q?7w=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR11MB5830.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f7c3997d-c5bc-46b2-218b-08dd45f36f0a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 14:43:19.8253
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 4BTPea1kT4fR7vES1gLrA+vja/VMGuxCIPbLqkiAncd6Jq0hM9hjdpGLEh64T7fG5Q3qnyKNYGp6dP2g5zdyDExQZyntdL7X6Zc1uXQ98T8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6426
+X-OriginatorOrg: intel.com
 
-From: Leon Romanovsky <leonro@nvidia.com>
+On Wednesday, February 5, 2025 8:31 PM, Fijalkowski, Maciej <maciej.fijalko=
+wski@intel.com> wrote:
+>On Wed, Feb 05, 2025 at 10:41:15AM +0800, Song Yoong Siang wrote:
+>> Refactor the code for inserting an empty packet into a new function
+>> igc_insert_empty_packet(). This change extracts the logic for inserting
+>> an empty packet from igc_xmit_frame_ring() into a separate function,
+>> allowing it to be reused in future implementations, such as the XDP
+>> zero copy transmit function.
+>>
+>> This patch introduces no functional changes.
+>>
+>> Signed-off-by: Song Yoong Siang <yoong.siang.song@intel.com>
+>
+>Your SoB should be last in the set of tags.
+>
 
-Remove intermediate scatter-gather table completely and
-enable new DMA link API.
+Noted. Thanks for the tips.
 
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/vfio/pci/mlx5/cmd.c  | 298 ++++++++++++++++-------------------
- drivers/vfio/pci/mlx5/cmd.h  |  21 ++-
- drivers/vfio/pci/mlx5/main.c |  31 ----
- 3 files changed, 147 insertions(+), 203 deletions(-)
+>> Reviewed-by: Faizal Rahim <faizal.abdul.rahim@linux.intel.com>
+>> ---
+>>  drivers/net/ethernet/intel/igc/igc_main.c | 42 ++++++++++++-----------
+>>  1 file changed, 22 insertions(+), 20 deletions(-)
+>>
+>> diff --git a/drivers/net/ethernet/intel/igc/igc_main.c
+>b/drivers/net/ethernet/intel/igc/igc_main.c
+>> index 21f318f12a8d..553d6d82af0d 100644
+>> --- a/drivers/net/ethernet/intel/igc/igc_main.c
+>> +++ b/drivers/net/ethernet/intel/igc/igc_main.c
+>> @@ -1566,6 +1566,26 @@ static bool igc_request_tx_tstamp(struct igc_adap=
+ter
+>*adapter, struct sk_buff *s
+>>  	return false;
+>>  }
+>>
+>> +static void igc_insert_empty_packet(struct igc_ring *tx_ring)
+>> +{
+>> +	struct igc_tx_buffer *empty_info;
+>> +	struct sk_buff *empty;
+>> +	void *data;
+>> +
+>> +	empty_info =3D &tx_ring->tx_buffer_info[tx_ring->next_to_use];
+>> +	empty =3D alloc_skb(IGC_EMPTY_FRAME_SIZE, GFP_ATOMIC);
+>> +	if (!empty)
+>> +		return;
+>> +
+>> +	data =3D skb_put(empty, IGC_EMPTY_FRAME_SIZE);
+>> +	memset(data, 0, IGC_EMPTY_FRAME_SIZE);
+>> +
+>> +	igc_tx_ctxtdesc(tx_ring, 0, false, 0, 0, 0);
+>> +
+>> +	if (igc_init_tx_empty_descriptor(tx_ring, empty, empty_info) < 0)
+>> +		dev_kfree_skb_any(empty);
+>
+>I still don't like the fact igc_insert_empty_packet() doesn't communicate
+>to caller whether it successfully produced descriptors or not.
+>
+>Look at this from igc_xmit_frame_ring() POV:
+>- at the beginning you peek at Tx ring whether there is required amount of
+>  descriptors free to be used
+>- but then here's your additional routine which might consume two more
+>  descs and you are not aware of the status
+>- then you continue to further produce descriptors assuming there is
+>  enough space in Tx ring
+>
+>Right now igc_init_tx_empty_descriptor() returns -EBUSY when ring is full.
+>How can that happen in the first place + what if it would *really* happen
+>though? You just continue with your Tx flow.
+>
+>What I'm trying to say here is, at least from correctness POV, you should
+>take into the account two potential descriptors for launchtime feature
+>when calling igc_maybe_stop_tx(). And igc_init_tx_empty_descriptor()
+>should not really care about space in ring, it should be a caller's job to
+>call it only when it will be sure it's safe to do so.
+>
 
-diff --git a/drivers/vfio/pci/mlx5/cmd.c b/drivers/vfio/pci/mlx5/cmd.c
-index 84dc3bc128c6..b162e44112fb 100644
---- a/drivers/vfio/pci/mlx5/cmd.c
-+++ b/drivers/vfio/pci/mlx5/cmd.c
-@@ -345,26 +345,82 @@ static u32 *alloc_mkey_in(u32 npages, u32 pdn)
- 	return in;
+Agree with you.
+
+In db0b124f02ba ("igc: Enhance Qbv scheduling by using first flag bit"),
+the 2 descriptors needed by empty packet is already taken into
+consideration by changing igc_maybe_stop_tx(tx_ring, count + 3) to
+igc_maybe_stop_tx(tx_ring, count + 5), so not enough ring space issue will =
+not
+happened. However, the comment session is not updated, maybe i can update
+it in next version of this patch as below:
+
+@@ -1586,6 +1608,7 @@ static netdev_tx_t igc_xmit_frame_ring(struct sk_buff=
+ *skb,
+         *      + 1 desc for skb_headlen/IGC_MAX_DATA_PER_TXD,
+         *      + 2 desc gap to keep tail from touching head,
+         *      + 1 desc for context descriptor,
++        *      + 2 desc for inserting an empty packet for launch time,
+         * otherwise try next time
+         */
+        for (f =3D 0; f < skb_shinfo(skb)->nr_frags; f++)
+
+Since number of descriptor needed is guaranteed. I will take out the
+igc_desc_unused() checking in igc_init_tx_empty_descriptor().
+However, empty packet insertion might fail due to skb allocation failure
+and DMA mapping error. How about i make sure skb allocation and DMA
+mapping working, before proceed to fill in igc_tx_buffer, context desc,
+and data desc?
+IMHO, because these two errors are unlikely to happen, print a kernel
+warning msg should be enough.
+
+@@ -1108,20 +1108,12 @@ static int igc_init_empty_frame(struct igc_ring *ri=
+ng,
+        return 0;
  }
- 
--static int create_mkey(struct mlx5_core_dev *mdev, u32 npages,
--		       struct mlx5_vhca_data_buffer *buf, u32 *mkey_in,
-+static int create_mkey(struct mlx5_core_dev *mdev, u32 npages, u32 *mkey_in,
- 		       u32 *mkey)
+
+-static int igc_init_tx_empty_descriptor(struct igc_ring *ring,
++static void igc_init_tx_empty_descriptor(struct igc_ring *ring,
+                                        struct sk_buff *skb,
+                                        struct igc_tx_buffer *first)
  {
-+	int inlen = MLX5_ST_SZ_BYTES(create_mkey_in) +
-+		sizeof(__be64) * round_up(npages, 2);
+        union igc_adv_tx_desc *desc;
+        u32 cmd_type, olinfo_status;
+-       int err;
+-
+-       if (!igc_desc_unused(ring))
+-               return -EBUSY;
+-
+-       err =3D igc_init_empty_frame(ring, first, skb);
+-       if (err)
+-               return err;
+
+        cmd_type =3D IGC_ADVTXD_DTYP_DATA | IGC_ADVTXD_DCMD_DEXT |
+                   IGC_ADVTXD_DCMD_IFCS | IGC_TXD_DCMD |
+@@ -1140,8 +1132,6 @@ static int igc_init_tx_empty_descriptor(struct igc_ri=
+ng *ring,
+        ring->next_to_use++;
+        if (ring->next_to_use =3D=3D ring->count)
+                ring->next_to_use =3D 0;
+-
+-       return 0;
+ }
+
+ #define IGC_EMPTY_FRAME_SIZE 60
+@@ -1567,6 +1557,38 @@ static bool igc_request_tx_tstamp(struct igc_adapter=
+ *adapter, struct sk_buff *s
+        return false;
+ }
+
++static void igc_insert_empty_packet(struct igc_ring *tx_ring)
++{
++       struct igc_tx_buffer *empty_info;
++       struct sk_buff *empty;
++       void *data;
 +
-+	return mlx5_core_create_mkey(mdev, mkey, mkey_in, inlen);
++       empty_info =3D &tx_ring->tx_buffer_info[tx_ring->next_to_use];
++       empty =3D alloc_skb(IGC_EMPTY_FRAME_SIZE, GFP_ATOMIC);
++       if (unlikely(!empty)) {
++               netdev_warn(tx_ring->netdev,
++                           "Fail to alloc skb for empty packet\n");
++               return;
++       }
++
++       data =3D skb_put(empty, IGC_EMPTY_FRAME_SIZE);
++       memset(data, 0, IGC_EMPTY_FRAME_SIZE);
++
++       /* Prepare DMA mapping and Tx buffer information */
++       if (unlikely(igc_init_empty_frame(tx_ring, empty_info, empty))) {
++               dev_kfree_skb_any(empty);
++               netdev_warn(tx_ring->netdev,
++                           "Fail to map DMA for empty packet\n");
++               return;
++       }
++
++       /* Prepare context descriptor for empty packet */
++       igc_tx_ctxtdesc(tx_ring, 0, false, 0, 0, 0);
++
++       /* Prepare data descriptor for empty packet */
++       igc_init_tx_empty_descriptor(tx_ring, empty, empty_info);
 +}
 +
-+static void unregister_dma_pages(struct mlx5_core_dev *mdev, u32 npages,
-+				 u32 *mkey_in, struct dma_iova_state *state,
-+				 enum dma_data_direction dir)
-+{
-+	dma_addr_t addr;
- 	__be64 *mtt;
--	int inlen;
-+	int i;
- 
--	mtt = (__be64 *)MLX5_ADDR_OF(create_mkey_in, mkey_in, klm_pas_mtt);
--	if (buf) {
--		struct sg_dma_page_iter dma_iter;
-+	WARN_ON_ONCE(dir == DMA_NONE);
- 
--		for_each_sgtable_dma_page(&buf->table.sgt, &dma_iter, 0)
--			*mtt++ = cpu_to_be64(
--				sg_page_iter_dma_address(&dma_iter));
-+	if (dma_use_iova(state)) {
-+		dma_iova_destroy(mdev->device, state, npages * PAGE_SIZE, dir,
-+				 0);
-+	} else {
-+		mtt = (__be64 *)MLX5_ADDR_OF(create_mkey_in, mkey_in,
-+					     klm_pas_mtt);
-+		for (i = npages - 1; i >= 0; i--) {
-+			addr = be64_to_cpu(mtt[i]);
-+			dma_unmap_page(mdev->device, addr, PAGE_SIZE, dir);
-+		}
- 	}
-+}
- 
--	inlen = MLX5_ST_SZ_BYTES(create_mkey_in) +
--		sizeof(__be64) * round_up(npages, 2);
-+static int register_dma_pages(struct mlx5_core_dev *mdev, u32 npages,
-+			      struct page **page_list, u32 *mkey_in,
-+			      struct dma_iova_state *state,
-+			      enum dma_data_direction dir)
-+{
-+	dma_addr_t addr;
-+	size_t mapped = 0;
-+	__be64 *mtt;
-+	int i, err;
- 
--	return mlx5_core_create_mkey(mdev, mkey, mkey_in, inlen);
-+	WARN_ON_ONCE(dir == DMA_NONE);
-+
-+	mtt = (__be64 *)MLX5_ADDR_OF(create_mkey_in, mkey_in, klm_pas_mtt);
-+
-+	if (dma_iova_try_alloc(mdev->device, state, 0, npages * PAGE_SIZE)) {
-+		addr = state->addr;
-+		for (i = 0; i < npages; i++) {
-+			err = dma_iova_link(mdev->device, state,
-+					    page_to_phys(page_list[i]), mapped,
-+					    PAGE_SIZE, dir, 0);
-+			if (err)
-+				goto error;
-+			*mtt++ = cpu_to_be64(addr);
-+			addr += PAGE_SIZE;
-+			mapped += PAGE_SIZE;
-+		}
-+		err = dma_iova_sync(mdev->device, state, 0, mapped);
-+		if (err)
-+			goto error;
-+	} else {
-+		for (i = 0; i < npages; i++) {
-+			addr = dma_map_page(mdev->device, page_list[i], 0,
-+					    PAGE_SIZE, dir);
-+			err = dma_mapping_error(mdev->device, addr);
-+			if (err)
-+				goto error;
-+			*mtt++ = cpu_to_be64(addr);
-+		}
-+	}
-+	return 0;
-+
-+error:
-+	unregister_dma_pages(mdev, i, mkey_in, state, dir);
-+	return err;
- }
- 
- static int mlx5vf_dma_data_buffer(struct mlx5_vhca_data_buffer *buf)
-@@ -380,98 +436,90 @@ static int mlx5vf_dma_data_buffer(struct mlx5_vhca_data_buffer *buf)
- 	if (buf->mkey_in || !buf->npages)
- 		return -EINVAL;
- 
--	ret = dma_map_sgtable(mdev->device, &buf->table.sgt, buf->dma_dir, 0);
--	if (ret)
--		return ret;
--
- 	buf->mkey_in = alloc_mkey_in(buf->npages, buf->migf->pdn);
--	if (!buf->mkey_in) {
--		ret = -ENOMEM;
--		goto err;
--	}
-+	if (!buf->mkey_in)
-+		return -ENOMEM;
- 
--	ret = create_mkey(mdev, buf->npages, buf, buf->mkey_in, &buf->mkey);
-+	ret = register_dma_pages(mdev, buf->npages, buf->page_list,
-+				 buf->mkey_in, &buf->state, buf->dma_dir);
-+	if (ret)
-+		goto err_register_dma;
-+
-+	ret = create_mkey(mdev, buf->npages, buf->mkey_in, &buf->mkey);
- 	if (ret)
- 		goto err_create_mkey;
- 
- 	return 0;
- 
- err_create_mkey:
-+	unregister_dma_pages(mdev, buf->npages, buf->mkey_in, &buf->state,
-+			     buf->dma_dir);
-+err_register_dma:
- 	kvfree(buf->mkey_in);
- 	buf->mkey_in = NULL;
--err:
--	dma_unmap_sgtable(mdev->device, &buf->table.sgt, buf->dma_dir, 0);
- 	return ret;
- }
- 
-+static void free_page_list(u32 npages, struct page **page_list)
-+{
-+	int i;
-+
-+	/* Undo alloc_pages_bulk() */
-+	for (i = npages - 1; i >= 0; i--)
-+		__free_page(page_list[i]);
-+
-+	kvfree(page_list);
-+}
-+
- void mlx5vf_free_data_buffer(struct mlx5_vhca_data_buffer *buf)
+ static netdev_tx_t igc_xmit_frame_ring(struct sk_buff *skb,
+                                       struct igc_ring *tx_ring)
  {
--	struct mlx5_vf_migration_file *migf = buf->migf;
--	struct sg_page_iter sg_iter;
-+	struct mlx5vf_pci_core_device *mvdev = buf->migf->mvdev;
-+	struct mlx5_core_dev *mdev = mvdev->mdev;
- 
--	lockdep_assert_held(&migf->mvdev->state_mutex);
--	WARN_ON(migf->mvdev->mdev_detach);
-+	lockdep_assert_held(&mvdev->state_mutex);
-+	WARN_ON(mvdev->mdev_detach);
- 
- 	if (buf->mkey_in) {
--		mlx5_core_destroy_mkey(migf->mvdev->mdev, buf->mkey);
-+		mlx5_core_destroy_mkey(mdev, buf->mkey);
-+		unregister_dma_pages(mdev, buf->npages, buf->mkey_in,
-+				     &buf->state, buf->dma_dir);
- 		kvfree(buf->mkey_in);
--		dma_unmap_sgtable(migf->mvdev->mdev->device, &buf->table.sgt,
--				  buf->dma_dir, 0);
- 	}
- 
--	/* Undo alloc_pages_bulk() */
--	for_each_sgtable_page(&buf->table.sgt, &sg_iter, 0)
--		__free_page(sg_page_iter_page(&sg_iter));
--	sg_free_append_table(&buf->table);
-+	free_page_list(buf->npages, buf->page_list);
- 	kfree(buf);
- }
- 
--static int mlx5vf_add_migration_pages(struct mlx5_vhca_data_buffer *buf,
--				      unsigned int npages)
-+static int mlx5vf_add_pages(struct page ***page_list, unsigned int npages)
- {
--	unsigned int to_alloc = npages;
--	struct page **page_list;
--	unsigned long filled;
--	unsigned int to_fill;
--	int ret;
-+	unsigned int filled, done = 0;
- 	int i;
- 
--	to_fill = min_t(unsigned int, npages, PAGE_SIZE / sizeof(*page_list));
--	page_list = kvzalloc(to_fill * sizeof(*page_list), GFP_KERNEL_ACCOUNT);
--	if (!page_list)
-+	*page_list =
-+		kvcalloc(npages, sizeof(struct page *), GFP_KERNEL_ACCOUNT);
-+	if (!*page_list)
- 		return -ENOMEM;
- 
--	do {
--		filled = alloc_pages_bulk(GFP_KERNEL_ACCOUNT, to_fill,
--					  page_list);
--		if (!filled) {
--			ret = -ENOMEM;
-+	for (;;) {
-+		filled = alloc_pages_bulk(GFP_KERNEL_ACCOUNT, npages - done,
-+					  *page_list + done);
-+		if (!filled)
- 			goto err;
--		}
--		to_alloc -= filled;
--		ret = sg_alloc_append_table_from_pages(
--			&buf->table, page_list, filled, 0,
--			filled << PAGE_SHIFT, UINT_MAX, SG_MAX_SINGLE_ALLOC,
--			GFP_KERNEL_ACCOUNT);
- 
--		if (ret)
--			goto err_append;
--		buf->npages += filled;
--		/* clean input for another bulk allocation */
--		memset(page_list, 0, filled * sizeof(*page_list));
--		to_fill = min_t(unsigned int, to_alloc,
--				PAGE_SIZE / sizeof(*page_list));
--	} while (to_alloc > 0);
-+		done += filled;
-+		if (done == npages)
-+			break;
-+	}
- 
--	kvfree(page_list);
- 	return 0;
- 
--err_append:
--	for (i = filled - 1; i >= 0; i--)
--		__free_page(page_list[i]);
- err:
--	kvfree(page_list);
--	return ret;
-+	for (i = 0; i < done; i++)
-+		__free_page(*page_list[i]);
-+
-+	kvfree(*page_list);
-+	*page_list = NULL;
-+	return -ENOMEM;
- }
- 
- struct mlx5_vhca_data_buffer *
-@@ -488,10 +536,12 @@ mlx5vf_alloc_data_buffer(struct mlx5_vf_migration_file *migf, u32 npages,
- 	buf->dma_dir = dma_dir;
- 	buf->migf = migf;
- 	if (npages) {
--		ret = mlx5vf_add_migration_pages(buf, npages);
-+		ret = mlx5vf_add_pages(&buf->page_list, npages);
- 		if (ret)
- 			goto end;
- 
-+		buf->npages = npages;
-+
- 		if (dma_dir != DMA_NONE) {
- 			ret = mlx5vf_dma_data_buffer(buf);
- 			if (ret)
-@@ -1350,101 +1400,16 @@ static void mlx5vf_destroy_qp(struct mlx5_core_dev *mdev,
- 	kfree(qp);
- }
- 
--static void free_recv_pages(struct mlx5_vhca_recv_buf *recv_buf)
--{
--	int i;
--
--	/* Undo alloc_pages_bulk() */
--	for (i = 0; i < recv_buf->npages; i++)
--		__free_page(recv_buf->page_list[i]);
--
--	kvfree(recv_buf->page_list);
--}
--
--static int alloc_recv_pages(struct mlx5_vhca_recv_buf *recv_buf,
--			    unsigned int npages)
--{
--	unsigned int filled = 0, done = 0;
--	int i;
--
--	recv_buf->page_list = kvcalloc(npages, sizeof(*recv_buf->page_list),
--				       GFP_KERNEL_ACCOUNT);
--	if (!recv_buf->page_list)
--		return -ENOMEM;
--
--	for (;;) {
--		filled = alloc_pages_bulk(GFP_KERNEL_ACCOUNT,
--					  npages - done,
--					  recv_buf->page_list + done);
--		if (!filled)
--			goto err;
--
--		done += filled;
--		if (done == npages)
--			break;
--	}
--
--	recv_buf->npages = npages;
--	return 0;
--
--err:
--	for (i = 0; i < npages; i++) {
--		if (recv_buf->page_list[i])
--			__free_page(recv_buf->page_list[i]);
--	}
--
--	kvfree(recv_buf->page_list);
--	return -ENOMEM;
--}
--static void unregister_dma_pages(struct mlx5_core_dev *mdev, u32 npages,
--				 u32 *mkey_in)
--{
--	dma_addr_t addr;
--	__be64 *mtt;
--	int i;
--
--	mtt = (__be64 *)MLX5_ADDR_OF(create_mkey_in, mkey_in, klm_pas_mtt);
--	for (i = npages - 1; i >= 0; i--) {
--		addr = be64_to_cpu(mtt[i]);
--		dma_unmap_single(mdev->device, addr, PAGE_SIZE,
--				DMA_FROM_DEVICE);
--	}
--}
--
--static int register_dma_pages(struct mlx5_core_dev *mdev, u32 npages,
--			      struct page **page_list, u32 *mkey_in)
--{
--	dma_addr_t addr;
--	__be64 *mtt;
--	int i;
--
--	mtt = (__be64 *)MLX5_ADDR_OF(create_mkey_in, mkey_in, klm_pas_mtt);
--
--	for (i = 0; i < npages; i++) {
--		addr = dma_map_page(mdev->device, page_list[i], 0, PAGE_SIZE,
--				    DMA_FROM_DEVICE);
--		if (dma_mapping_error(mdev->device, addr))
--			goto error;
--
--		*mtt++ = cpu_to_be64(addr);
--	}
--
--	return 0;
--
--error:
--	unregister_dma_pages(mdev, i, mkey_in);
--	return -ENOMEM;
--}
--
- static void mlx5vf_free_qp_recv_resources(struct mlx5_core_dev *mdev,
- 					  struct mlx5_vhca_qp *qp)
- {
- 	struct mlx5_vhca_recv_buf *recv_buf = &qp->recv_buf;
- 
- 	mlx5_core_destroy_mkey(mdev, recv_buf->mkey);
--	unregister_dma_pages(mdev, recv_buf->npages, recv_buf->mkey_in);
-+	unregister_dma_pages(mdev, recv_buf->npages, recv_buf->mkey_in,
-+			     &recv_buf->state, DMA_FROM_DEVICE);
- 	kvfree(recv_buf->mkey_in);
--	free_recv_pages(&qp->recv_buf);
-+	free_page_list(recv_buf->npages, recv_buf->page_list);
- }
- 
- static int mlx5vf_alloc_qp_recv_resources(struct mlx5_core_dev *mdev,
-@@ -1455,10 +1420,12 @@ static int mlx5vf_alloc_qp_recv_resources(struct mlx5_core_dev *mdev,
- 	struct mlx5_vhca_recv_buf *recv_buf = &qp->recv_buf;
- 	int err;
- 
--	err = alloc_recv_pages(recv_buf, npages);
--	if (err < 0)
-+	err = mlx5vf_add_pages(&recv_buf->page_list, npages);
-+	if (err)
- 		return err;
- 
-+	recv_buf->npages = npages;
-+
- 	recv_buf->mkey_in = alloc_mkey_in(npages, pdn);
- 	if (!recv_buf->mkey_in) {
- 		err = -ENOMEM;
-@@ -1466,24 +1433,25 @@ static int mlx5vf_alloc_qp_recv_resources(struct mlx5_core_dev *mdev,
- 	}
- 
- 	err = register_dma_pages(mdev, npages, recv_buf->page_list,
--				 recv_buf->mkey_in);
-+				 recv_buf->mkey_in, &recv_buf->state,
-+				 DMA_FROM_DEVICE);
- 	if (err)
- 		goto err_register_dma;
- 
--	err = create_mkey(mdev, npages, NULL, recv_buf->mkey_in,
--			  &recv_buf->mkey);
-+	err = create_mkey(mdev, npages, recv_buf->mkey_in, &recv_buf->mkey);
- 	if (err)
- 		goto err_create_mkey;
- 
- 	return 0;
- 
- err_create_mkey:
--	unregister_dma_pages(mdev, npages, recv_buf->mkey_in);
-+	unregister_dma_pages(mdev, npages, recv_buf->mkey_in, &recv_buf->state,
-+			     DMA_FROM_DEVICE);
- err_register_dma:
- 	kvfree(recv_buf->mkey_in);
- 	recv_buf->mkey_in = NULL;
- end:
--	free_recv_pages(recv_buf);
-+	free_page_list(npages, recv_buf->page_list);
- 	return err;
- }
- 
-diff --git a/drivers/vfio/pci/mlx5/cmd.h b/drivers/vfio/pci/mlx5/cmd.h
-index 25dd6ff54591..d7821b5ca772 100644
---- a/drivers/vfio/pci/mlx5/cmd.h
-+++ b/drivers/vfio/pci/mlx5/cmd.h
-@@ -53,7 +53,8 @@ struct mlx5_vf_migration_header {
- };
- 
- struct mlx5_vhca_data_buffer {
--	struct sg_append_table table;
-+	struct page **page_list;
-+	struct dma_iova_state state;
- 	loff_t start_pos;
- 	u64 length;
- 	u32 npages;
-@@ -63,10 +64,6 @@ struct mlx5_vhca_data_buffer {
- 	u8 stop_copy_chunk_num;
- 	struct list_head buf_elm;
- 	struct mlx5_vf_migration_file *migf;
--	/* Optimize mlx5vf_get_migration_page() for sequential access */
--	struct scatterlist *last_offset_sg;
--	unsigned int sg_last_entry;
--	unsigned long last_offset;
- };
- 
- struct mlx5vf_async_data {
-@@ -133,6 +130,7 @@ struct mlx5_vhca_cq {
- struct mlx5_vhca_recv_buf {
- 	u32 npages;
- 	struct page **page_list;
-+	struct dma_iova_state state;
- 	u32 next_rq_offset;
- 	u32 *mkey_in;
- 	u32 mkey;
-@@ -224,8 +222,17 @@ struct mlx5_vhca_data_buffer *
- mlx5vf_get_data_buffer(struct mlx5_vf_migration_file *migf, u32 npages,
- 		       enum dma_data_direction dma_dir);
- void mlx5vf_put_data_buffer(struct mlx5_vhca_data_buffer *buf);
--struct page *mlx5vf_get_migration_page(struct mlx5_vhca_data_buffer *buf,
--				       unsigned long offset);
-+static inline struct page *
-+mlx5vf_get_migration_page(struct mlx5_vhca_data_buffer *buf,
-+			  unsigned long offset)
-+{
-+	int page_entry = offset / PAGE_SIZE;
-+
-+	if (page_entry >= buf->npages)
-+		return NULL;
-+
-+	return buf->page_list[page_entry];
-+}
- void mlx5vf_state_mutex_unlock(struct mlx5vf_pci_core_device *mvdev);
- void mlx5vf_disable_fds(struct mlx5vf_pci_core_device *mvdev,
- 			enum mlx5_vf_migf_state *last_save_state);
-diff --git a/drivers/vfio/pci/mlx5/main.c b/drivers/vfio/pci/mlx5/main.c
-index bc0f468f741b..93f894fe60d2 100644
---- a/drivers/vfio/pci/mlx5/main.c
-+++ b/drivers/vfio/pci/mlx5/main.c
-@@ -34,37 +34,6 @@ static struct mlx5vf_pci_core_device *mlx5vf_drvdata(struct pci_dev *pdev)
- 			    core_device);
- }
- 
--struct page *
--mlx5vf_get_migration_page(struct mlx5_vhca_data_buffer *buf,
--			  unsigned long offset)
--{
--	unsigned long cur_offset = 0;
--	struct scatterlist *sg;
--	unsigned int i;
--
--	/* All accesses are sequential */
--	if (offset < buf->last_offset || !buf->last_offset_sg) {
--		buf->last_offset = 0;
--		buf->last_offset_sg = buf->table.sgt.sgl;
--		buf->sg_last_entry = 0;
--	}
--
--	cur_offset = buf->last_offset;
--
--	for_each_sg(buf->last_offset_sg, sg,
--			buf->table.sgt.orig_nents - buf->sg_last_entry, i) {
--		if (offset < sg->length + cur_offset) {
--			buf->last_offset_sg = sg;
--			buf->sg_last_entry += i;
--			buf->last_offset = cur_offset;
--			return nth_page(sg_page(sg),
--					(offset - cur_offset) / PAGE_SIZE);
--		}
--		cur_offset += sg->length;
--	}
--	return NULL;
--}
--
- static void mlx5vf_disable_fd(struct mlx5_vf_migration_file *migf)
- {
- 	mutex_lock(&migf->lock);
--- 
-2.48.1
 
+Are above codes resolve your concern? If yes, i can test and add
+them into this patch in next version submission.
+
+Thanks & Regards
+Siang
 
