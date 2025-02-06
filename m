@@ -1,94 +1,94 @@
-Return-Path: <linux-doc+bounces-37266-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37270-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7577DA2B421
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 22:26:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C10D4A2B459
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 22:46:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0CFE6169335
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 21:26:19 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4F77E167906
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 21:46:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 923281DFE22;
-	Thu,  6 Feb 2025 21:26:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 003FB223334;
+	Thu,  6 Feb 2025 21:46:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="key not found in DNS" (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b="UdaOjjry"
+	dkim=fail reason="key not found in DNS" (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b="bVvxAaAD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from black.elm.relay.mailchannels.net (black.elm.relay.mailchannels.net [23.83.212.19])
+Received: from bisque.elm.relay.mailchannels.net (bisque.elm.relay.mailchannels.net [23.83.212.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFA771E1035;
-	Thu,  6 Feb 2025 21:26:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=23.83.212.19
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB64019E7E2;
+	Thu,  6 Feb 2025 21:46:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=23.83.212.18
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738877170; cv=pass; b=q66puGk6LQtCs9iwgr3nOCSVlK+WBkJx3asjXhI2uuuId6NldvhqM2rLVa3o9fpsaLgt1fp1+czI8EkoqdwtQW1NZ0pPVACkLXbVA2f6jtW+KVPC0znyOpmJuzn9Q2lQpWUOkIXwM9rB0tKDJGHjEd4oLzzKMsRSjpoCmiv+WiA=
+	t=1738878367; cv=pass; b=EYUjv1otNV8K3FwPHief36OrnmXIMBzM1I8GKnjGHhAdnUbhhF4suP7CNJubNTtt/7uj+WQITdnWAzu2XfqaJ1tPSZDxM3Fp13mixHDqBndklfxMwdpEBYnkMREgFLrb1GZTM9PHS0fBgtJSyItQCMlo53eGRy/aoFz94fLH8Mk=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738877170; c=relaxed/simple;
-	bh=Aoq8DR0tmBwK/2qmp6nHnMm7CfMGYf5gDRatYYdmJS4=;
+	s=arc-20240116; t=1738878367; c=relaxed/simple;
+	bh=1lB3R1po6WZgdxaHmY/1OrqiJzK67pHd7MlXm4BGTbs=;
 	h=From:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc:Date; b=uRZLVF70lCLOqiObr74SwW8pq1j+9qQMp9NW6Z3feEVFgZHnlQzgUanM+YOl5cWyGGj1HGhFANLKsNSAIlMN4oxtcyVsPOBpZYtb7x9uEryWdOk6OGcoJGj5VB8zOFPJEWisqkY0SoyzUH8Dsl+njetYx2cuDwiLk5iCf3ocfKU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai; spf=pass smtp.mailfrom=invicto.ai; dkim=fail (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b=UdaOjjry reason="key not found in DNS"; arc=pass smtp.client-ip=23.83.212.19
+	 In-Reply-To:To:Cc:Date; b=PJyDmtrvs4Gta988JGAzSuPy059Ngy6F3CMG4e0Siy7T0Yys94Yyid96RFs+0WKW+1Qk2QdtXdU66BUslOdDqR0RaQ7tyW5pa8bEAtwBS6jxaNRPDuax7Tn358yNp5QXj0YKAFpRKxSVXUeUlmgdy7eV9aHEzIDRVTvbK0Fuv7c=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai; spf=pass smtp.mailfrom=invicto.ai; dkim=fail (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b=bVvxAaAD reason="key not found in DNS"; arc=pass smtp.client-ip=23.83.212.18
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=invicto.ai
 X-Sender-Id: hostingeremail|x-authuser|kurti@invicto.ai
 Received: from relay.mailchannels.net (localhost [127.0.0.1])
-	by relay.mailchannels.net (Postfix) with ESMTP id 5B209161EA9;
-	Thu,  6 Feb 2025 21:07:59 +0000 (UTC)
-Received: from fr-int-smtpout8.hostinger.io (trex-3.trex.outbound.svc.cluster.local [100.125.12.218])
+	by relay.mailchannels.net (Postfix) with ESMTP id 358F523E23;
+	Thu,  6 Feb 2025 21:08:03 +0000 (UTC)
+Received: from fr-int-smtpout8.hostinger.io (trex-0.trex.outbound.svc.cluster.local [100.127.46.110])
 	(Authenticated sender: hostingeremail)
-	by relay.mailchannels.net (Postfix) with ESMTPA id 169D9161B25;
-	Thu,  6 Feb 2025 21:07:54 +0000 (UTC)
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1738876079; a=rsa-sha256;
+	by relay.mailchannels.net (Postfix) with ESMTPA id 972352365D;
+	Thu,  6 Feb 2025 21:07:58 +0000 (UTC)
+ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1738876082; a=rsa-sha256;
 	cv=none;
-	b=SS2OZOpxhGLSWS4WYX3g8CdxQUp/uNdJD6w3hcSK3mf2L3zOlZEUWP4nB7d0DQHz97+iHd
-	SbbFLC2/iuehUNzVG5W8qphOeJifufNH/9nEEUkdg8YePQIs5vQoxaKW+n8aJrrb/iku7J
-	GFqRLUaLV62F5EoY6bmAxyQXmHPfHOWN7epPNkFWGbgKr2EfGxTqDOaw3g81ZAF5pvV0AQ
-	saEnNoZesEizafATZYObRGaA7hUIKakk6uXCvWD+oORiWE12zeTtJkW64yP0R8BT7GGSEq
-	4E7I9G2ANrYN+wKIbZ5h78mUhFTRd7cgynGY/hQfyFJxfVYMVjumx2I4YzLkRQ==
+	b=1Ro95qpUCKFjFPLJNu8SqmKrowz8ebWLBK0ke4hxfPF7go44Bgl8i1EC+3KuECSPtyVOAm
+	Q7MaNFWG8DAJpsHxFK678m7tL76MlHbhD5aV3PVJSOfc1QfAuE3HyNpBNKPF/fpxvvdmgL
+	1kBuX1D4eFwY7E3BHy0xJW09EgDH9hYKoLHtVVrRFk/jZZyrCR6S3ZFimNZIIwaUhnqgDu
+	8GwHQTq8RznFaNzrmBIWLzoc8iwDacIq4nqYZ2juVsndjpWWdSWydLypR3lSqJEQB8jOZG
+	syltYKifmR28IuR34GxD+HN73RqWXJfnxZ4BnJpYDc1vRpbOi2UgyRskOvZStA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailchannels.net;
-	s=arc-2022; t=1738876079;
+	s=arc-2022; t=1738876082;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:dkim-signature;
-	bh=QiXyubdeOKIcHLGUBolab2yRgrtdSgwKfCo8KFHBIQ0=;
-	b=W535iN4cjuht4mFgWuEjluFesNq+1YAgpndQrsd5cnJegSOLFU9s8E9KGbf0i5PjRzBayi
-	SKDMz0HTXalG6aUxRlRCX+2tYkO1se+S/uzZURgg6HCSwwKSr8MfqwFMBuWjIjEwscIIxa
-	aNbzXF31wM1j2q/bQBEviZPsRQDwjtJZUT1w7M76DxJ8mCwKUSntEFqe7w6ysil/Jtq1nK
-	jsckRKXHHaAGd9MZ3O/PkHzqsK4vQjOpJfm6sj1h+1emHV5MDdrtO9psTsKSdY2gKiT7ku
-	1K/NhkS5pA854yfP1MzRuowIjcVUf9J6lz7NjKHeOAJvFosutIZlN3IKhpRYXg==
+	bh=ao/6CpQGIug2s3g4qNBT7wztDldQnzKpiipkzTE6D5o=;
+	b=5IC4YPNGJIo8Kydl+twjBmAJRqqTcmKAbOJbs1voRM45xPEH+XB+nWW2CBuvF2XIRNM5cL
+	tsmrRDjFw01Dr6eeCDwk8ikdRFeG8Noor1f3qDlM2snYDsSLIrRW/ypvSDoq53siy4LaPS
+	2VPaB8ARQ97I/BurZW3JZF1rkh9SlfaEatgo/Wa4hzmfWxfWtUPoSkAMSi9W5LGN5pVxXE
+	u1T9gsPNggSjf0yr4rJigyz1uyJKyusMmC6OsodPzD4jaaiyaWkFRAjfUcN28o79UCQZFI
+	Rd5q18ovfYGJGIGN+qA/XWHeomZqvUYzzHTXNvNWyW3XLQG1voemmPJJWQmqew==
 ARC-Authentication-Results: i=1;
-	rspamd-8586946c78-zkzf8;
+	rspamd-8586946c78-qtn6w;
 	auth=pass smtp.auth=hostingeremail smtp.mailfrom=kurti@invicto.ai
 X-Sender-Id: hostingeremail|x-authuser|kurti@invicto.ai
 X-MC-Relay: Neutral
 X-MailChannels-SenderId: hostingeremail|x-authuser|kurti@invicto.ai
 X-MailChannels-Auth-Id: hostingeremail
-X-Keen-Thread: 40f4450b18a3cc77_1738876079201_511394290
-X-MC-Loop-Signature: 1738876079201:1092380178
-X-MC-Ingress-Time: 1738876079200
+X-Abaft-Thoughtful: 2d3304e215659c98_1738876082965_3725378742
+X-MC-Loop-Signature: 1738876082965:1669363260
+X-MC-Ingress-Time: 1738876082965
 Received: from fr-int-smtpout8.hostinger.io (fr-int-smtpout8.hostinger.io
  [89.116.146.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
-	by 100.125.12.218 (trex/7.0.2);
-	Thu, 06 Feb 2025 21:07:59 +0000
+	by 100.127.46.110 (trex/7.0.2);
+	Thu, 06 Feb 2025 21:08:02 +0000
 From: Alban Kurti <kurti@invicto.ai>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=invicto.ai;
-	s=hostingermail-a; t=1738876073;
+	s=hostingermail-a; t=1738876076;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=QiXyubdeOKIcHLGUBolab2yRgrtdSgwKfCo8KFHBIQ0=;
-	b=UdaOjjrygfJ26g/NDouNl3plGw34C+tlqJfFZScsyxIUXmv8sg88ygyK/Okdg33br2P4VX
-	LQ6NqGbA55PZdviqc7cWl/ScE62QiXoErvufGRJ0KK79/22aNoQROBKF6xOFl6Nr3rjVe2
-	mHvVwT3sN1gV+qCnuPBZ8guI8e3q+aXwQ+ZKcZZeRJ5OotVlb9R1+24rtvQ3DHaA8i9nVO
-	b5BmaHz7x/TVH6/Xtq1Rtmdt+di7nDjHZvrcnPA2alEpVzZxe5JxT/DgnNZefVrzOIRWAJ
-	JEm9VIt2dHh5CDXO6dvT/vObC+3PcDbrHFKUXqu07LAZDxPm7QXDVDZNBGDFrA==
-Subject: [PATCH v3 1/6] rust: docs: add missing newline to printing macro
- examples
+	bh=ao/6CpQGIug2s3g4qNBT7wztDldQnzKpiipkzTE6D5o=;
+	b=bVvxAaADvjx5XLZNsFSnJWB7Q5KkJg0iuA88QTQ/4UDAlzQyo9dCwTL07g0XUI727AxmqF
+	zF1RPn+3/utlITDKEQlxqb8dZo6+gg4qK4/qbGZT7T8InS3BnC1olO3WzLl0JQNPCFYBAa
+	0UMmVPuiMJbNU8lc9tw8wa53kr47Bpt9I8Rqf7BDD6WScFb2v5tBEZVYciNhIJ8zvwNc8H
+	KmOeICzsGOvkaLLmJR7TVSN8I7yojm92tvgkWM+lvk1Gh2awrHv8OkPD4CowSiMul88buq
+	isNsIMcxVNk72Lc2/vi4K6LVbE8w+EFOtx15QmQkbQtXnEXbnzjL6u2OTuXuqw==
+Subject: [PATCH v3 4/6] rust: sync: add missing newline in locked_by log
+ example
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -97,7 +97,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250206-printing_fix-v3-1-a85273b501ae@invicto.ai>
+Message-Id: <20250206-printing_fix-v3-4-a85273b501ae@invicto.ai>
 References: <20250206-printing_fix-v3-0-a85273b501ae@invicto.ai>
 In-Reply-To: <20250206-printing_fix-v3-0-a85273b501ae@invicto.ai>
 To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
@@ -118,43 +118,44 @@ Cc: rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
  Martin Rodriguez Reboredo <yakoyoku@gmail.com>, 
  Fox Chen <foxhlchen@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1738876070; l=994;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1738876070; l=1151;
  i=kurti@invicto.ai; s=20250206; h=from:subject:message-id;
- bh=Aoq8DR0tmBwK/2qmp6nHnMm7CfMGYf5gDRatYYdmJS4=;
- b=Eg90l4a/6yjDvdcx9mylSKH9TwrCcYGbL5wRllwirwpydxVlF+6oOrh2toKrQYqOCfGeYTNDK
- fD5qHTYXdEUDDzYLf/rmLm8HcoHKuAODuKe1m9eJifdWRY0ibabQ93N
+ bh=1lB3R1po6WZgdxaHmY/1OrqiJzK67pHd7MlXm4BGTbs=;
+ b=T2Q3yA6xogxLqNEE7t5drQ/TCrHRborZiGAai2Ql3KXdyLGKyixlfgH1IPiFUFaAQdR4bEWyB
+ BqAoG05NfyrBrI/phI06pVPYyK9VqR6ZMg7WxcRoyolWYcC70lLeki1
 X-Developer-Key: i=kurti@invicto.ai; a=ed25519;
  pk=D1lKs+JFapuEVI9zJ2QUTLSf5u4aT12tG0ny6vMMuOc=
-Date: Thu, 06 Feb 2025 21:07:52 +0000 (UTC)
-X-CM-Analysis: v=2.4 cv=PMNd+uqC c=1 sm=1 tr=0 ts=67a524a9 a=9/DLicljd4JGVkZ5BRdAJQ==:117 a=9/DLicljd4JGVkZ5BRdAJQ==:17 a=IkcTkHD0fZMA:10 a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=c9EISN1oOV-dU950GokA:9 a=QEXdDO2ut3YA:10
-X-CM-Envelope: MS4xfBif+Uu3UMiyyU3J2G4rL9XjRNFgaliUqVvWA+0J0KfByC89iygW/TK7LxcvGtEhR64jjQ/kng2PNfuzzvTZ+KhmSJPXwteMLawGlY0DD1xK005kV+EB aZ+qU8iIURNZz4ohIbaxz/MFrOg/jOdXp0P+zYSBQ6lRRHurwExpxOw3x7h2SicBM18ttiGdmUJRQi+V7zU3l/omDZODpYOxXfDj+OMFwP7brUVUFYDFaXb7 u5dEJ+Wl9/yfGmzhn4/hBeVh/FzpFqq1haYEwI6JvDbVoj5S6R088jYTUpohRw5GQmx3anfX0/yGCz0PKEnUNnNnf3q9944GzVOEpKAJwZz8STjM7qmDWQIj myO/17u+UXeYiFJLwXcIkAELeiYUfOhotSnQVrUCw3VvL9iHWsVWJzPNH3Fk7W2SNiCETWTbL6G6iwiz1FajCu31k/HUxPLhQZ5OlX1cDq1eiQVb0GEtmg7L i2xnGowZkvNgIOAtnzzADarhKZA2XTpMz8VVGJxg0ph83Mp/95vjiIVDkgyDeypCrog7bitWXbU6t45Up9+5Cd0A9+D6e7ZdaV/KdTerNaJNJtRBZJhbRmbE RuDTn8fdxinrdRtVS8VQI1MOh/HwHFTz1qaEqI+YXmyg5RqbredGI1TnV1coW8l5lxdivod0GE1z7nMZPzpRL1qugCN8Le6JTfte1GKsjxHFgIqog+KOIkSk 9sUSqFv6mUKQ0O3CzL2PXQ3kbP46eEMDdjpcgG4q0tT0/qQZMbDTkHVTth2W/UZXwWrGPFGMJ/JpfeTUdS4N6uNyPFjHewO9YLjRQ0FGUOYbhM/11hQPVXMh GfBH6b6pn5GlJuYsxE2rOdFE6U2+tj89REyxi1nHdHOh465Mddf4IcDEMtLCFX6/ZnwpBEo9Ay+5WmiWojoaTNkxNH3hRWB8xUevfH7HS9Xm2VUkmfgqZSGU y96MvbgA8ONk5vq
- 3Q48kLNBtX5h5GXJywJXSI+/k/xgsFtGz
+Date: Thu, 06 Feb 2025 21:07:55 +0000 (UTC)
+X-CM-Envelope: MS4xfNJAmCzuHi2orbdWWk7lB74rjaapN9N8+53MQ/FHyFECiF7kuvBHA5DfX6TCj3cLKJnUaQhp6fGDmlFoc8aEqqBS8RlwS8Ri+WCX02TcGWCXOgwTyQV/ y5/UaSF75T7oo/FG59DEjnX0++CbmR1c2DebI2VcCjMIYbEwd/TzC012ilfGe4MNso4oaO42VgB7wiuLXuOgm9JOTDWnaLKhanzjzca5Wuxrvd1ZeyvAxUBq DT3U6iKrpY1LVtRg+DQNCx1D2YYb7Gat07FUbZgR78MxZqFCZj3ADVs30yolixQ497I2KaS2YDoJCMjPrcqKWxlvO3FomlUvqUQsxp21qD+PYK+yZowri7Xr sRSeMhM8ptzPDqw/TgzoAQZSauS9td6mP8NZOm0k+SWrhkpLwh367IljKaRI+ZToNDwZ9+G+3RqZxD77YRWsp+Tr4ygwlCVD0Tj9KtRaLAbz8JZMDrhniWmx j4PyPGdke0tbKiUQ5KClZ8zCqRf+YANGBnRh6PFqqBv9mF4nt+czyztiGRWcmZJ0jXk6nP2HTMvI8y7mpOW+F/+uw7Gr4tXDEwFZgzvIsPgskx0dinZiusuy GopnleOgR1jVZbs7ekpSXY7ivmL+gEojPF+k2DdFaVNqTcgUFqZ3MVXcQSEz/26H24AdeqSIO4pQAp6WRI0UDVLhhYoqBbLlobtpTaFT05ZGT+K8l3e1ee47 aIgi3xzatQoUdBRTBtV+xh8+6J7kceEhZo5hhVsO4kby/XDtlHP3fGFMNtgiy8NMLvVbSeT1TEO9k/rKeNdCsPR5C51ffFPxItW5rfO04NcQjoeqvri4wNhv QB0SO7sShKHyijxDCGtmPClTw7OKyaEaQI2Z9Jsg/1kq3FDjpyx16F1dT6oH1uuylG7eppiy+LBjVHLBb/3OHLwdMlFhL39SCmS+9MuXClr3Qy9bUGZZfyZR BNUrKZW5a7BXvi/
+ P/ll+xr5V2zC5/Jr1DK3feMCs9P1eRpxS
+X-CM-Analysis: v=2.4 cv=PMNd+uqC c=1 sm=1 tr=0 ts=67a524ac a=9/DLicljd4JGVkZ5BRdAJQ==:117 a=9/DLicljd4JGVkZ5BRdAJQ==:17 a=IkcTkHD0fZMA:10 a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=HeOr5W89t27ReWMoupIA:9 a=QEXdDO2ut3YA:10
 X-AuthUser: kurti@invicto.ai
 
-Fix adding a newline at the end of the usage of pr_info! in the
-documentation
+The pr_info! example in rust/kernel/sync/locked_by.rs was missing
+a newline. This patch appends the missing newline to ensure
+that log messages for locked resources display correctly.
 
-Fixes: e3c3d34507c7 ("docs: rust: Add description of Rust documentation test as KUnit ones")
+Fixes: 7b1f55e3a984 ("rust: sync: introduce `LockedBy`")
 Reported-by: Miguel Ojeda <ojeda@kernel.org>
 Closes: https://github.com/Rust-for-Linux/linux/issues/1139
 Signed-off-by: Alban Kurti <kurti@invicto.ai>
 ---
- Documentation/rust/testing.rst | 2 +-
+ rust/kernel/sync/locked_by.rs | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/rust/testing.rst b/Documentation/rust/testing.rst
-index 568b71b415a4525772cb77ce76c7f9da32fac1c4..180b886e0f1ee997779f04ce85eba858e64946c0 100644
---- a/Documentation/rust/testing.rst
-+++ b/Documentation/rust/testing.rst
-@@ -97,7 +97,7 @@ operator are also supported as usual, e.g.:
- 
- 	/// ```
- 	/// # use kernel::{spawn_work_item, workqueue};
--	/// spawn_work_item!(workqueue::system(), || pr_info!("x"))?;
-+	/// spawn_work_item!(workqueue::system(), || pr_info!("x\n"))?;
- 	/// # Ok::<(), Error>(())
- 	/// ```
- 
+diff --git a/rust/kernel/sync/locked_by.rs b/rust/kernel/sync/locked_by.rs
+index a7b244675c2b96a36a6fe2e3ddd9a68e6ea01cb7..61f100a45b3507c750c1e3c405f9a8f67ced5346 100644
+--- a/rust/kernel/sync/locked_by.rs
++++ b/rust/kernel/sync/locked_by.rs
+@@ -55,7 +55,7 @@
+ /// fn print_bytes_used(dir: &Directory, file: &File) {
+ ///     let guard = dir.inner.lock();
+ ///     let inner_file = file.inner.access(&guard);
+-///     pr_info!("{} {}", guard.bytes_used, inner_file.bytes_used);
++///     pr_info!("{} {}\n", guard.bytes_used, inner_file.bytes_used);
+ /// }
+ ///
+ /// /// Increments `bytes_used` for both the directory and file.
 
 -- 
 2.48.1
