@@ -1,139 +1,295 @@
-Return-Path: <linux-doc+bounces-37189-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37191-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 438AEA2AB70
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 15:33:49 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48EB5A2ABD3
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 15:49:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5D5083A9FE5
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 14:32:17 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 3563F7A140F
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 14:48:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 54D2C1A5B84;
-	Thu,  6 Feb 2025 14:30:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E0E9432C85;
+	Thu,  6 Feb 2025 14:49:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="CDkjfouy"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Dil55C2w"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D441E1304BA
-	for <linux-doc@vger.kernel.org>; Thu,  6 Feb 2025 14:30:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1BD123644D;
+	Thu,  6 Feb 2025 14:49:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738852250; cv=none; b=BJx8VNzhu+UTa/yAQqFQzK14z/nCSgO4jN9srjaIRxxkbY2fdCsXIB7UHvh8LJryPke9gKmLAr0M30HhsyOyGIuPKXxuKCgzmkUShS9nYPMBRtxoSe1rh3ieHK/FEcjFtInuWio/hfE2XXy6h7S8Xo+kupNyGvXmtu89Lfs+41s=
+	t=1738853358; cv=none; b=I7lceZ3y8fFw6OcHoUEJPD6jRaEVlEPyVABkNL3lPgH1b+NNR4AOzP/TBbqypeQwuioAXCycAzWJ1iY66qB+KxAov12DvLaRvK2MfQjzyBpKpyBuPFUXZmOxah5XgdPqW2d5YsVvv0bhabEcEmPD4fb7Of0DCuio4WJQpV9pSn8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738852250; c=relaxed/simple;
-	bh=WdipNZI3y5wwEW1WPJkKmfPilkJ7iVaBxEPNzdzmX4E=;
+	s=arc-20240116; t=1738853358; c=relaxed/simple;
+	bh=cO9xv/pgkriWpvpU7X8se6LkKHWu8m6H7ZLMTtebHOw=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OK994UcfiBOktxu+JRMcKK/MxNE4qtcIE9qJ3BFvMY2JScuUY4N74+mt3HkcZIdg7K9RiGhoyIzhHyKpbitn0ueQXWpg1TwuB9S7gImBCG2RzugX4EPFB9INIYFoMnfrznOp1WXLPbeSmcAvUESixwU/mm9u1eVRRZKAEKLgYYQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=CDkjfouy; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1738852246;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=WdipNZI3y5wwEW1WPJkKmfPilkJ7iVaBxEPNzdzmX4E=;
-	b=CDkjfouyt5dauUvfIC7ViNGjW3fTIMDVyTCX3dsHs8Z5w4RfUfCxD+D5wQsK8l1cmH2SXN
-	0PHJPqTyne8Bmrr7LAmkIQccLhQ6aZwBgP3jzT8lmE3eTqGUXUJSD7kSh575dlDvoxt275
-	Bt6yi//cS5ogLeqN+q+v78ujJUn5+so=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-669-jpp1Wx5AN3GqEECzTVdKQg-1; Thu,
- 06 Feb 2025 09:30:43 -0500
-X-MC-Unique: jpp1Wx5AN3GqEECzTVdKQg-1
-X-Mimecast-MFC-AGG-ID: jpp1Wx5AN3GqEECzTVdKQg
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id AAACC1956086;
-	Thu,  6 Feb 2025 14:30:36 +0000 (UTC)
-Received: from localhost (unknown [10.2.16.145])
-	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 6D97B1800878;
-	Thu,  6 Feb 2025 14:30:33 +0000 (UTC)
-Date: Thu, 6 Feb 2025 09:30:32 -0500
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Vivek Goyal <vgoyal@redhat.com>
-Cc: Dan Williams <dan.j.williams@intel.com>,
-	Alistair Popple <apopple@nvidia.com>, akpm@linux-foundation.org,
-	linux-mm@kvack.org, alison.schofield@intel.com, lina@asahilina.net,
-	zhang.lyra@gmail.com, gerald.schaefer@linux.ibm.com,
-	vishal.l.verma@intel.com, dave.jiang@intel.com, logang@deltatee.com,
-	bhelgaas@google.com, jack@suse.cz, jgg@ziepe.ca,
-	catalin.marinas@arm.com, will@kernel.org, mpe@ellerman.id.au,
-	npiggin@gmail.com, dave.hansen@linux.intel.com, ira.weiny@intel.com,
-	willy@infradead.org, djwong@kernel.org, tytso@mit.edu,
-	linmiaohe@huawei.com, david@redhat.com, peterx@redhat.com,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
-	nvdimm@lists.linux.dev, linux-cxl@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
-	linux-xfs@vger.kernel.org, jhubbard@nvidia.com, hch@lst.de,
-	david@fromorbit.com, chenhuacai@kernel.org, kernel@xen0n.name,
-	loongarch@lists.linux.dev, Hanna Czenczek <hreitz@redhat.com>,
-	German Maglione <gmaglione@redhat.com>,
-	Albert Esteve <aesteve@redhat.com>
-Subject: Re: [PATCH v6 01/26] fuse: Fix dax truncate/punch_hole fault path
-Message-ID: <20250206143032.GA400591@fedora>
-References: <cover.11189864684e31260d1408779fac9db80122047b.1736488799.git-series.apopple@nvidia.com>
- <bfae590045c7fc37b7ccef10b9cec318012979fd.1736488799.git-series.apopple@nvidia.com>
- <Z6NhkR8ZEso4F-Wx@redhat.com>
- <67a3fde7da328_2d2c2942b@dwillia2-xfh.jf.intel.com.notmuch>
- <Z6S7A-51SdPco_3Z@redhat.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=T7WpoeaGis1MWEE/x8fQcMtz+h9lpqKLfhUhSxofxIXibqK34uw1ojbulnq/0bFimsX9VGSP0WmR48+EtJ2XfZUjoqCmlea2vJxBQQrwIxiQapjy9jfUR7H/b45hRd6SSTEFOseA7XU9bo8V+Hs//0g6bpbCahxXm86gIpWQjYM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Dil55C2w; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B64EAC4CEE2;
+	Thu,  6 Feb 2025 14:49:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1738853357;
+	bh=cO9xv/pgkriWpvpU7X8se6LkKHWu8m6H7ZLMTtebHOw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Dil55C2wPV6WwA5bRmSX6PDp1N2edfxKwYV1n42K/UoFdcBNA4nPrhMaadior8tu3
+	 tdq+m5zvIJ4BYU5kFKlFfs2zQSlzjZHNME6xCEXsAWuoD6oUYFsJ8LRV4+Vo1JGWjI
+	 rXyD1IcWnu8QdfAib3+OM315k7cUtfC3YdVFc1TOPNYaKlUExZPKhAEYyNIqs39mRA
+	 BAUTw7VzppECtPNUfxnLGvfhJNUfdgFHxyuknoOey7RKQJjMTYsVynuBvOIx22eBeN
+	 Td9SBYYEKvVGX1sRBfCcIEKnrh7UNHuMDU7gHbqNvJNejvvPtc0AdYnBXkTagl1hiZ
+	 51iHWqVTbhJUg==
+Date: Thu, 6 Feb 2025 15:49:09 +0100
+From: Danilo Krummrich <dakr@kernel.org>
+To: Alexandre Courbot <acourbot@nvidia.com>
+Cc: airlied@gmail.com, simona@ffwll.ch, corbet@lwn.net,
+	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+	tzimmermann@suse.de, ajanulgu@redhat.com, lyude@redhat.com,
+	pstanner@redhat.com, zhiw@nvidia.com, cjia@nvidia.com,
+	jhubbard@nvidia.com, bskeggs@nvidia.com, acurrid@nvidia.com,
+	ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
+	gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
+	a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu,
+	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
+	rust-for-linux@vger.kernel.org,
+	Nouveau <nouveau-bounces@lists.freedesktop.org>
+Subject: Re: [PATCH v2 1/2] gpu: nova-core: add initial driver stub
+Message-ID: <Z6TL5a5SCZoVq8Zt@cassiopeiae>
+References: <20250204190400.2550-1-dakr@kernel.org>
+ <D7LF554L2J0N.JRPHDUCHVKP3@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="dVdFjdbROmPA0Gp+"
-Content-Disposition: inline
-In-Reply-To: <Z6S7A-51SdPco_3Z@redhat.com>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-
-
---dVdFjdbROmPA0Gp+
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <D7LF554L2J0N.JRPHDUCHVKP3@nvidia.com>
 
-On Thu, Feb 06, 2025 at 08:37:07AM -0500, Vivek Goyal wrote:
-> And then there are challenges at QEMU level. virtiofsd needs additional
-> vhost-user commands to implement DAX and these never went upstream in
-> QEMU. I hope these challenges are sorted at some point of time.
+Hi Alexandre,
 
-Albert Esteve has been working on QEMU support:
-https://lore.kernel.org/qemu-devel/20240912145335.129447-1-aesteve@redhat.com/
+On Thu, Feb 06, 2025 at 11:05:37PM +0900, Alexandre Courbot wrote:
+> > +
+> > +/// Enum representation of the GPU chipset.
+> > +#[derive(fmt::Debug)]
+> 
+> I suspect you will eventually want to also derive Copy and Clone, as
+> well as PartialEq and Eq (so the assigned values can be used), but it's
+> of course fine to postpone this until we actually need them.
 
-He has a viable solution. I think the remaining issue is how to best
-structure the memory regions. The reason for slow progress is not
-because it can't be done, it's probably just because this is a
-background task.
+Indeed, the idea is to add it as needed.
 
-Please discuss with Albert if QEMU support is urgent.
+> 
+> Note that the usage made of Debug suggests that you actually want
+> Display - but I understand that implementing Display would be more
+> cumbersome.
+> 
+> > +
+> > +// TODO replace with something like derive(FromPrimitive)
+> > +impl Chipset {
+> > +    fn from_u32(value: u32) -> Option<Chipset> {
+> > +        match value {
+> > +            0x162 => Some(Chipset::TU102),
+> > +            0x164 => Some(Chipset::TU104),
+> > +            0x166 => Some(Chipset::TU106),
+> > +            0x167 => Some(Chipset::TU117),
+> > +            0x168 => Some(Chipset::TU116),
+> > +            0x172 => Some(Chipset::GA102),
+> > +            0x173 => Some(Chipset::GA103),
+> > +            0x174 => Some(Chipset::GA104),
+> > +            0x176 => Some(Chipset::GA106),
+> > +            0x177 => Some(Chipset::GA107),
+> > +            0x192 => Some(Chipset::AD102),
+> > +            0x193 => Some(Chipset::AD103),
+> > +            0x194 => Some(Chipset::AD104),
+> > +            0x196 => Some(Chipset::AD106),
+> > +            0x197 => Some(Chipset::AD107),
+> > +            _ => None,
+> > +        }
+> > +    }
+> > +}
+> 
+> Shouldn't this be an implementation of TryFrom<u32>? By doing so you can
+> return ENODEV as the error and simplify the caller code below.
 
-Stefan
+Yes, it should be. I wanted to change that, but forgot about it. Thanks for the
+reminder.
 
---dVdFjdbROmPA0Gp+
-Content-Type: application/pgp-signature; name="signature.asc"
+But ultimately, as the comment says, I'd like to have some kind of FromPrimitive
+implementation for that.
 
------BEGIN PGP SIGNATURE-----
+> 
+> > +
+> > +// TODO:
+> > +// - replace with something like derive(FromPrimitive)
+> > +// - consider to store within Chipset, if arbitrary_enum_discriminant becomes stable
+> > +impl Architecture {
+> > +    fn from_u32(value: u32) -> Option<Architecture> {
+> > +        match value {
+> > +            0x16 => Some(Architecture::Turing),
+> > +            0x17 => Some(Architecture::Ampere),
+> > +            0x19 => Some(Architecture::Ada),
+> > +            _ => None,
+> > +        }
+> > +    }
+> > +}
+> > +
+> > +impl Revision {
+> > +    fn new(major: u8, minor: u8) -> Self {
+> > +        Self { major, minor }
+> > +    }
+> 
+> Suggestion: add a version that takes a Boot0 as argument and call the
+> right methods directly in the method instead of relying on the caller to
+> do that for us, e.g:
+> 
+>     fn from_boot0(boot0: &regs::Boot0) -> Self {
+>         Self::new(boot0.major_rev(), boot0.minor_rev())
+>     }
+> 
+> 
+> Then new() can also be removed if Boot0 is the only sensible source of
+> Revision.
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmekx4gACgkQnKSrs4Gr
-c8jOKwf/ZukZTp1v1Bj1iqbpAm6HBWN90Y4JWmyzZGuKRqLAwN8AyiIJ6Ms1fx+v
-WJLR47NztCQ3sDtsTQT1814wwXSpJlPguLu6isoWbCGpUwAZZk3JTpHNBofs7IKj
-04NWFZ9B2tOVgirm8OMtsVVJwzQhvQc7YtMhdB9naCzqcdC7ynKp6mLH9bd7Q+Ze
-K9CwEFtKcTm9Ge+t3U0E3Q7MI2D55far3KPi84MpfI9oEu6l0MOzzmKjaOBq9+wy
-XXZCisxWbGLZtfbY2BAQxTUhKq9TTXgeQm/Ti/SzsVLf/Qd7nrEkG1v51xs5HCnR
-FMQhDw7oBmFsGs5S/Qywvta1pcaYwg==
-=JZcT
------END PGP SIGNATURE-----
+That's a good suggestion, I'll pick that up.
 
---dVdFjdbROmPA0Gp+--
+> 
+> (I'd argue that Boot0 should also implement Copy, that way this method
+> can take it by value directly)
+> 
+> > +}
+> > +
+> > +impl fmt::Display for Revision {
+> > +    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+> > +        write!(f, "{:x}.{:x}", self.major, self.minor)
+> > +    }
+> > +}
+> > +
+> > +impl Spec {
+> > +    fn new(bar: &Devres<Bar0>) -> Result<Spec> {
+> > +        let bar = bar.try_access().ok_or(ENXIO)?;
+> > +        let boot0 = regs::Boot0::read(&bar);
+> > +
+> > +        let Some(chipset) = Chipset::from_u32(boot0.chipset()) else {
+> > +            return Err(ENODEV);
+> > +        };
+> > +
+> > +        let Some(arch) = Architecture::from_u32(boot0.arch()) else {
+> > +            return Err(ENODEV);
+> > +        };
+> 
+> Technically the Architecture is already known if the Chipset has been
+> built successfully, so there should be no need to build it again (and
+> test for a failure that cannot happen at this point).
+> 
+> Since the architecture information is already embedded in Chipset, maybe
+> we can have an arch() method there?
+> 
+> Something like:
+> 
+>     impl Chipset {
+>         pub(crate) fn arch(self) -> Architecture {
+>             match self as u32 & !0xf {
+>                 0x160 => Architecture::Turing,
+>                 0x170 => Architecture::Ampere,
+>                 0x190 => Architecture::Ada,
+>                 _ => unreachable!(),
+>             }
+>         }
+>     }
 
+I thought about this, which is also why the comment above says: "consider to
+store within Chipset, if arbitrary_enum_discriminant becomes stable".
+
+I did not go with what you suggest because it leaves us with either
+Chipset::arch() returning a Result, which is annoying, or with Chipset::arch()
+being able to panic the kernel, which I'd dislike even more.
+
+There's also a third option, which would be to have some kind of unknown
+architecture, which we could catch later on, but that's just a worse variation
+of returning a Result.
+
+Another reason was that I did not want to encode register specific masks into
+the Chipset type.
+
+> 
+> 
+> This would also enable us to remove Architecture::from_u32() and
+> Spec::arch, which is redundant with Spec::chipset anyway.
+> 
+> A better (but more verbose) implementation of Chipset::arch() might be
+> to match every possible variant, so we get a build error if we forget to
+> handle a new chipset instead of hitting the unreachable!() at runtime...
+
+I think that would indeed be a reasonable option.
+
+> 
+> > +
+> > +        let revision = Revision::new(boot0.major_rev(), boot0.minor_rev());
+> > +
+> > +        Ok(Self {
+> > +            arch,
+> > +            chipset,
+> > +            revision,
+> > +        })
+> > +    }
+> > +}
+> > +
+> > +impl Firmware {
+> > +    fn new(dev: &device::Device, spec: &Spec, ver: &str) -> Result<Firmware> {
+> > +        let mut chip_name = CString::try_from_fmt(fmt!("{:?}", spec.chipset))?;
+> > +        chip_name.make_ascii_lowercase();
+> > +
+> > +        let fw_booter_load_path =
+> > +            CString::try_from_fmt(fmt!("nvidia/{}/gsp/booter_load-{}.bin", &*chip_name, ver))?;
+> > +        let fw_booter_unload_path =
+> > +            CString::try_from_fmt(fmt!("nvidia/{}/gsp/booter_unload-{}.bin", &*chip_name, ver))?;
+> > +        let fw_bootloader_path =
+> > +            CString::try_from_fmt(fmt!("nvidia/{}/gsp/bootloader-{}.bin", &*chip_name, ver))?;
+> > +        let fw_gsp_path =
+> > +            CString::try_from_fmt(fmt!("nvidia/{}/gsp/gsp-{}.bin", &*chip_name, ver))?;
+> > +
+> > +        let booter_load = firmware::Firmware::request(&fw_booter_load_path, dev)?;
+> > +        let booter_unload = firmware::Firmware::request(&fw_booter_unload_path, dev)?;
+> > +        let bootloader = firmware::Firmware::request(&fw_bootloader_path, dev)?;
+> > +        let gsp = firmware::Firmware::request(&fw_gsp_path, dev)?;
+> > +
+> > +        Ok(Firmware {
+> > +            booter_load,
+> > +            booter_unload,
+> > +            bootloader,
+> > +            gsp,
+> > +        })
+> 
+> This looks like a good opportunity to use a closure and avoid
+> repeating the code:
+> 
+>     let request_fw = |type_| {
+>         CString::try_from_fmt(fmt!("nvidia/{}/gsp/{}-{}.bin", type_, &*chip_name, ver))
+>             .and_then(|path| firmware::Firmware::request(&path, dev))
+>     };
+> 
+> It is also short enough that you can directly invoke it when building
+> the Firmware object, without using temporary variables:
+> 
+>     Ok(Firmware {
+>         booter_load: request_fw("booter_load")?,
+>         booter_unload: request_fw("booter_unload")?,
+>         bootloader: request_fw("bootloader")?,
+>         gsp: request_fw("gsp")?,
+>     })
+> 
+> IMHO this has the benefit of being more concise and keeping related
+> operations closer.
+
+I agree, that's pretty clean.
+
+> 
+> Thanks!
+> Alex.
+> 
 
