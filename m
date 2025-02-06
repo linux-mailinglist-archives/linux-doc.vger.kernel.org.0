@@ -1,39 +1,39 @@
-Return-Path: <linux-doc+bounces-37142-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37138-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE816A2A534
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 10:53:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB682A2A4DF
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 10:43:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 610821679BF
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 09:53:50 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 61CCE163029
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 09:43:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6C0BD2248A1;
-	Thu,  6 Feb 2025 09:53:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 47CC3226167;
+	Thu,  6 Feb 2025 09:43:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="CqDC276V"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="Oc8qg4pP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m49202.qiye.163.com (mail-m49202.qiye.163.com [45.254.49.202])
+Received: from mail-m49232.qiye.163.com (mail-m49232.qiye.163.com [45.254.49.232])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87E112144BE
-	for <linux-doc@vger.kernel.org>; Thu,  6 Feb 2025 09:53:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.202
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FF21376
+	for <linux-doc@vger.kernel.org>; Thu,  6 Feb 2025 09:43:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.232
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738835628; cv=none; b=rVaxfxgp76sMx7qdJiVGCsd7DX4vcA2z2VVZagW7GbS19E1s57OTtMT5XWS+lDfCpzMcL+sY7L1om/WiClOgCw3dIolWA9yhhvEG0vZOP/q2hDrVEVerPC/008zka19zuCVnehKcg01em4QVynE/dtriHoUEiTntiiMuuDFjHnY=
+	t=1738835029; cv=none; b=pcMVxOkEtYnBV6hRCV6KaJIFsBccj3oLxyO7xoLCBErY2ezf9ywjMbNTwJzpVjirtrjLtqAl5KU+VdH08tYT/H05puLh54lVpf2QAzFdegGVZ9ofy67bxiNDglRCkEOy/CcfrXLMrzjOXHX0Nd2wr/QciproDkWrLfj5VPTzDgc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738835628; c=relaxed/simple;
-	bh=bd1Il8YhNCdOT6718Q/PR3th7wvdnj0ntGqZigJvrLc=;
+	s=arc-20240116; t=1738835029; c=relaxed/simple;
+	bh=3FS7a7B4CGvxIl1bxQXd2Sj9A1R0zNw0wSdXnN8KDQg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Ways6/AaeOZTYLLUCcf4tD1Kig6Zcxb5gNYV2CnsKs53AuqPRUwENLtRpWxQbBaVxmonVueSyrrvOWmYVhycUOHsnOr0oIdokWGQ0FphO0RY9eYF/axq6fUqqX69WgoebRl7vwris13Nkk5U6005jJBpWRZnzmhezb9GpJMymrw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=CqDC276V; arc=none smtp.client-ip=45.254.49.202
+	 MIME-Version:Content-Type; b=eQYfCWpUNf2em5EZRds6qRUpaKcIHZHcXs1xgQezxAu+XEx/Z8ABwiVgf44BGKQVKdIvXoat02qUeWqCDRsQgK3guj3E4Lc7LsKiCIvADzOrychPbnMp5uwiSXvqnkLHLM3yNU5DC7339iDtuKC7Zo+xS1jVAwXHavBxT5ZtmOk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=Oc8qg4pP; arc=none smtp.client-ip=45.254.49.232
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
 Received: from localhost.localdomain (unknown [1.193.57.36])
-	by smtp.qiye.163.com (Hmail) with ESMTP id a51dddc6;
-	Thu, 6 Feb 2025 17:38:25 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id a51dddce;
+	Thu, 6 Feb 2025 17:38:27 +0800 (GMT+08:00)
 From: zhangwei <zhangwei@cqsoftware.com.cn>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev,
@@ -43,9 +43,9 @@ Cc: zhaoshuo@cqsoftware.com.cn,
 	maoyuxian@cqsoftware.com.cn,
 	linux-doc@vger.kernel.org,
 	zhangwei <zhangwei@cqsoftware.com.cn>
-Subject: [PATCH v3 2/3] Translate .../security/keys/index.rst into Chinese
-Date: Thu,  6 Feb 2025 17:38:05 +0800
-Message-ID: <6ec3aa295a0215bf9115267b865e4cbf19c4556d.1738833099.git.zhangwei@cqsoftware.com.cn>
+Subject: [PATCH v3 3/3] Translate .../security/secrets/index.rst into Chinese
+Date: Thu,  6 Feb 2025 17:38:06 +0800
+Message-ID: <3e62158115e2e2bae2a14ab92f8334331b201434.1738833100.git.zhangwei@cqsoftware.com.cn>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <cover.1738833098.git.zhangwei@cqsoftware.com.cn>
 References: <cover.1738833098.git.zhangwei@cqsoftware.com.cn>
@@ -58,58 +58,52 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDQkgZVkgYSk1CHk5CTUweSFYVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCT0xNVhpMSkxMGE1KGUtLGlYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKVUpCSFVOTFVITVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
 	JLS1kG
-X-HM-Tid: 0a94da9ffb6e03abkunma51dddc6
+X-HM-Tid: 0a94daa0050f03abkunma51dddce
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ok06Fjo*LTIWEghIKzYzHxFJ
-	FjZPCRFVSlVKTEhDQ0hPTEtNSUNCVTMWGhIXVQETGhUcDB4SOxgKCBQdDwwaCR5VGBQWVRgVRVlX
-	WRILWUFZSlVKQkhVTkxVSE1ZV1kIAVlBSktLTjcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NSI6Nio6MDIOHgg*KzYRHw02
+	ShcwCShVSlVKTEhDQ0hPTEtDTk1LVTMWGhIXVQETGhUcDB4SOxgKCBQdDwwaCR5VGBQWVRgVRVlX
+	WRILWUFZSlVKQkhVTkxVSE1ZV1kIAVlBQkxMNwY+
 DKIM-Signature:a=rsa-sha256;
-	b=CqDC276VqpHlqfHdto/8koe/teOb77ebj+jYNn5Lw177oiwuc63ulYJ6YgW0BhIeVxjt5E4L8mFubcDu73lVKOdkfLwiZcCpqngNcgFUhZg02dDZi59m+Sh0WoCzb/RUlOqbKar/EpFCypz8I5ci4Oll0ExDO3WWLMg3CyBT7+8=; s=default; c=relaxed/relaxed; d=cqsoftware.com.cn; v=1;
-	bh=dpehSJBsa8IU0NdyN1OhvXROjRdVBmBYZBrUpA/9ECo=;
+	b=Oc8qg4pPX1waTBnonPfK7oyIOhhUxXH6Ylg0LewdMN+mY5WtMx7XSK7Qx8GWdKBy041E4XDR+tqlff4WfnHoc6MRjNapsGSs/PTW/dhezsRIXZaa4mb81NZfDPioSFAUq/NB5Vl75psZVDyCMuRVdja+DNC7GTvNOCvuVwlomzQ=; s=default; c=relaxed/relaxed; d=cqsoftware.com.cn; v=1;
+	bh=ZE8oydAjAa283gxpQGc+8YS5Zu14A1NjqWhrZEosJbQ=;
 	h=date:mime-version:subject:message-id:from;
 
-Update the translation through commit 5395d312dff0
-("doc: ReSTify keys-trusted-encrypted.txt")
+Update the translation through commit 7419995a331c
+("docs: security: Add secrets/coco documentation")
 
 Signed-off-by: zhangwei <zhangwei@cqsoftware.com.cn>
 ---
- .../zh_CN/security/keys/index.rst             | 24 +++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/security/keys/index.rst
+ .../zh_CN/security/secrets/index.rst           | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/security/secrets/index.rst
 
-diff --git a/Documentation/translations/zh_CN/security/keys/index.rst b/Documentation/translations/zh_CN/security/keys/index.rst
+diff --git a/Documentation/translations/zh_CN/security/secrets/index.rst b/Documentation/translations/zh_CN/security/secrets/index.rst
 new file mode 100644
-index 000000000000..0bec149efc7d
+index 000000000000..bc360522135e
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/security/keys/index.rst
-@@ -0,0 +1,24 @@
++++ b/Documentation/translations/zh_CN/security/secrets/index.rst
+@@ -0,0 +1,18 @@
 +.. SPDX-License-Identifier: GPL-2.0
-+
 +.. include:: ../../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/security/keys/index.rst
++:Original: Documentation/security/secrets/index.rst
 +
 +:翻译:
++ 张巍 Wei Zhang <zhangwei@cqsoftware.com.cn>
 +
-+  张巍 Wei Zhang <zhangwei@cqsoftware.com.cn>
-+
-+========
-+内核密钥
-+========
++=====================
++密钥文档
++=====================
 +
 +.. toctree::
-+   :maxdepth: 1
 +
 +
 +TODOLIST:
-+* core
-+* ecryptfs
-+* request-key
-+* trusted-encrypted
 +
++* coco
 -- 
 2.47.1
 
