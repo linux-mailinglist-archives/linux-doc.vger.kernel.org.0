@@ -1,34 +1,34 @@
-Return-Path: <linux-doc+bounces-37265-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37264-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B1A0A2B41F
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 22:26:07 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 01778A2B3FB
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 22:16:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B67E9162BB3
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 21:26:05 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id DA85B188A047
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 21:16:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C5B21DFDBE;
-	Thu,  6 Feb 2025 21:26:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D12C71DD0D6;
+	Thu,  6 Feb 2025 21:16:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
 	dkim=fail reason="key not found in DNS" (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b="bVvxAaAD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from seahorse.cherry.relay.mailchannels.net (seahorse.cherry.relay.mailchannels.net [23.83.223.161])
+Received: from slategray.cherry.relay.mailchannels.net (slategray.cherry.relay.mailchannels.net [23.83.223.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C60FE19994F;
-	Thu,  6 Feb 2025 21:25:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=23.83.223.161
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAB9E15B54A;
+	Thu,  6 Feb 2025 21:15:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=23.83.223.169
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738877161; cv=pass; b=nC02nhjcBrKCEC4Rr/JSi0AQksktNZl0y2T99aIcOHqlCLyDX5KNml6r5HUTJ3triMEbawbX9WqVqQeM8ZUQbYJyhx3Smvbia0eaJ4/SY6lT8g6hOQtu82eV0zNJFrOPdPjwRSD3FHvlBzmL9BCP0BqTCEWX0uQloiUbIUluCe8=
+	t=1738876561; cv=pass; b=ihTZEuzpfN6eBzTLuoZXBE/7VR+oGSBzKe84twk8cmzhCvMZpzacOsmYcyT+qnEzwTSfx30xglefms80ZDbFCX02Z15WPjtrA1LaCQqNG7OXrpnP/x0fDBmsh8K4xMYqynk3YrE0yVLzXdwYqs7WSbubwg3d8dNz94izR8p37hE=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738877161; c=relaxed/simple;
+	s=arc-20240116; t=1738876561; c=relaxed/simple;
 	bh=1lB3R1po6WZgdxaHmY/1OrqiJzK67pHd7MlXm4BGTbs=;
 	h=From:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc:Date; b=OsPISoz78n5jv59BOqrlzT7WT/MrSLLwnh3xcj6M2cuM7Tnt5S6kAgjc3wcSw13/F/v/+N4S82bTjxolxxLJQC8e5sdri6E7/3X8m0QUEf3rmJvPNJELvb/9BFNG6EZnEiDj3QnhxFVnvsxAztAKVwO42VWn9+LOpvV3fL891j8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai; spf=pass smtp.mailfrom=invicto.ai; dkim=fail (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b=bVvxAaAD reason="key not found in DNS"; arc=pass smtp.client-ip=23.83.223.161
+	 In-Reply-To:To:Cc:Date; b=hkrQL5kxT36jxTFWxBd7g2/bf8AQ1w4abFW7wMkRMidCevfumMeZnYqMVTiHca3rGiPrnSMZEv7tKvOlLHUiojThlyEqba8zUuUMsBzjeLtMD53ITIvWB6xCwm7JOC6q5dLG22aqHsIILpwal8glNxIWrc5kDkQCyAqyjYEEnNE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai; spf=pass smtp.mailfrom=invicto.ai; dkim=fail (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b=bVvxAaAD reason="key not found in DNS"; arc=pass smtp.client-ip=23.83.223.169
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=invicto.ai
 X-Sender-Id: hostingeremail|x-authuser|kurti@invicto.ai
